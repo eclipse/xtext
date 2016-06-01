@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.function.Consumer;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.ide.codebuilder.AbstractCodeBuilder;
 import org.eclipse.xtend.ide.codebuilder.AbstractParameterBuilder;
@@ -91,13 +92,10 @@ public abstract class AbstractExecutableBuilder extends AbstractCodeBuilder {
   @Override
   public void setContext(final EObject ctx) {
     super.setContext(ctx);
-    final Procedure1<AbstractParameterBuilder> _function = new Procedure1<AbstractParameterBuilder>() {
-      @Override
-      public void apply(final AbstractParameterBuilder it) {
-        it.setContext(ctx);
-      }
+    final Consumer<AbstractParameterBuilder> _function = (AbstractParameterBuilder it) -> {
+      it.setContext(ctx);
     };
-    IterableExtensions.<AbstractParameterBuilder>forEach(this.parameterBuilders, _function);
+    this.parameterBuilders.forEach(_function);
   }
   
   public AbstractParameterBuilder newParameterBuilder() {
@@ -213,12 +211,9 @@ public abstract class AbstractExecutableBuilder extends AbstractCodeBuilder {
   
   @Override
   public boolean isValid() {
-    return (((IterableExtensions.<AbstractParameterBuilder>forall(this.parameterBuilders, new Function1<AbstractParameterBuilder, Boolean>() {
-      @Override
-      public Boolean apply(final AbstractParameterBuilder it) {
-        return Boolean.valueOf(it.isValid());
-      }
-    }) && (!this.exceptions.contains(null))) && (!this.typeParameters.contains(null))) && super.isValid());
+    return (((IterableExtensions.<AbstractParameterBuilder>forall(this.parameterBuilders, ((Function1<AbstractParameterBuilder, Boolean>) (AbstractParameterBuilder it) -> {
+      return Boolean.valueOf(it.isValid());
+    })) && (!this.exceptions.contains(null))) && (!this.typeParameters.contains(null))) && super.isValid());
   }
   
   @Pure

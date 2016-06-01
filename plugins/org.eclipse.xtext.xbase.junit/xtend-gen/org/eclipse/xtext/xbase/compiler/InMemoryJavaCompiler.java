@@ -64,11 +64,8 @@ public class InMemoryJavaCompiler {
     @Override
     public NameEnvironmentAnswer findType(final char[][] compoundTypeName) {
       try {
-        final Function1<char[], String> _function = new Function1<char[], String>() {
-          @Override
-          public String apply(final char[] it) {
-            return String.valueOf(it);
-          }
+        final Function1<char[], String> _function = (char[] it) -> {
+          return String.valueOf(it);
         };
         List<String> _map = ListExtensions.<char[], String>map(((List<char[]>)Conversions.doWrapArray(compoundTypeName)), _function);
         String _join = IterableExtensions.join(_map, "/");
@@ -96,11 +93,8 @@ public class InMemoryJavaCompiler {
     @Override
     public NameEnvironmentAnswer findType(final char[] typeName, final char[][] packageName) {
       try {
-        final Function1<char[], String> _function = new Function1<char[], String>() {
-          @Override
-          public String apply(final char[] it) {
-            return String.valueOf(it);
-          }
+        final Function1<char[], String> _function = (char[] it) -> {
+          return String.valueOf(it);
         };
         List<String> _map = ListExtensions.<char[], String>map(((List<char[]>)Conversions.doWrapArray(packageName)), _function);
         String _join = IterableExtensions.join(_map, "/");
@@ -312,23 +306,17 @@ public class InMemoryJavaCompiler {
   public InMemoryJavaCompiler.Result compile(final JavaSource... sources) {
     final InMemoryJavaCompiler.Result result = new InMemoryJavaCompiler.Result(this.parentClassLoader);
     IErrorHandlingPolicy _proceedWithAllProblems = DefaultErrorHandlingPolicies.proceedWithAllProblems();
-    final ICompilerRequestor _function = new ICompilerRequestor() {
-      @Override
-      public void acceptResult(final CompilationResult it) {
-        ClassFile[] _classFiles = it.getClassFiles();
-        for (final ClassFile cf : _classFiles) {
-          char[][] _compoundName = cf.getCompoundName();
-          final Function1<char[], String> _function = new Function1<char[], String>() {
-            @Override
-            public String apply(final char[] it) {
-              return String.valueOf(it);
-            }
-          };
-          List<String> _map = ListExtensions.<char[], String>map(((List<char[]>)Conversions.doWrapArray(_compoundName)), _function);
-          String _join = IterableExtensions.join(_map, ".");
-          byte[] _bytes = cf.getBytes();
-          result.classMap.put(_join, _bytes);
-        }
+    final ICompilerRequestor _function = (CompilationResult it) -> {
+      ClassFile[] _classFiles = it.getClassFiles();
+      for (final ClassFile cf : _classFiles) {
+        char[][] _compoundName = cf.getCompoundName();
+        final Function1<char[], String> _function_1 = (char[] it_1) -> {
+          return String.valueOf(it_1);
+        };
+        List<String> _map = ListExtensions.<char[], String>map(((List<char[]>)Conversions.doWrapArray(_compoundName)), _function_1);
+        String _join = IterableExtensions.join(_map, ".");
+        byte[] _bytes = cf.getBytes();
+        result.classMap.put(_join, _bytes);
       }
     };
     org.eclipse.jdt.internal.compiler.Compiler compiler = new org.eclipse.jdt.internal.compiler.Compiler(this.nameEnv, _proceedWithAllProblems, 
@@ -347,14 +335,11 @@ public class InMemoryJavaCompiler {
         return problem;
       }
     });
-    final Function1<JavaSource, CompilationUnit> _function_1 = new Function1<JavaSource, CompilationUnit>() {
-      @Override
-      public CompilationUnit apply(final JavaSource it) {
-        String _code = it.getCode();
-        char[] _charArray = _code.toCharArray();
-        String _fileName = it.getFileName();
-        return new CompilationUnit(_charArray, _fileName, null);
-      }
+    final Function1<JavaSource, CompilationUnit> _function_1 = (JavaSource it) -> {
+      String _code = it.getCode();
+      char[] _charArray = _code.toCharArray();
+      String _fileName = it.getFileName();
+      return new CompilationUnit(_charArray, _fileName, null);
     };
     ICompilationUnit[] units = ((ICompilationUnit[])Conversions.unwrapArray(ListExtensions.<JavaSource, CompilationUnit>map(((List<JavaSource>)Conversions.doWrapArray(sources)), _function_1), ICompilationUnit.class));
     compiler.compile(units);

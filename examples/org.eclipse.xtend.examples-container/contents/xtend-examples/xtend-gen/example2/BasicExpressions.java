@@ -64,21 +64,15 @@ public class BasicExpressions {
   @Test
   public void collections() {
     final List<String> list = Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("Hello", "World"));
-    final Function1<String, String> _function = new Function1<String, String>() {
-      @Override
-      public String apply(final String it) {
-        return it.toUpperCase();
-      }
+    final Function1<String, String> _function = (String it) -> {
+      return it.toUpperCase();
     };
     List<String> _map = ListExtensions.<String, String>map(list, _function);
     String _head = IterableExtensions.<String>head(_map);
     Assert.assertEquals("HELLO", _head);
     final Set<Integer> set = Collections.<Integer>unmodifiableSet(CollectionLiterals.<Integer>newHashSet(Integer.valueOf(1), Integer.valueOf(3), Integer.valueOf(5)));
-    final Function1<Integer, Boolean> _function_1 = new Function1<Integer, Boolean>() {
-      @Override
-      public Boolean apply(final Integer it) {
-        return Boolean.valueOf(((it).intValue() >= 3));
-      }
+    final Function1<Integer, Boolean> _function_1 = (Integer it) -> {
+      return Boolean.valueOf(((it).intValue() >= 3));
     };
     Iterable<Integer> _filter = IterableExtensions.<Integer>filter(set, _function_1);
     int _size = IterableExtensions.size(_filter);

@@ -17,7 +17,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: «this»
 Bundle-SymbolicName: «symbolicName»; singleton:=true
 Bundle-Version: «version»
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 «IF !exportedPackages.isEmpty»Export-Package: «exportedPackages.toString(",\n ")»
 «ENDIF-»

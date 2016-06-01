@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.function.Consumer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.eclipse.emf.mwe2.runtime.Mandatory;
@@ -35,7 +36,6 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment;
@@ -265,11 +265,8 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
     if (_not) {
       issues.addError("The property \'framework\' is required.");
     }
-    final Function1<String, Boolean> _function = new Function1<String, Boolean>() {
-      @Override
-      public Boolean apply(final String it) {
-        return Boolean.valueOf(WebIntegrationFragment.this.suppressedPatterns.contains(it));
-      }
+    final Function1<String, Boolean> _function = (String it) -> {
+      return Boolean.valueOf(this.suppressedPatterns.contains(it));
     };
     Iterable<String> _filter = IterableExtensions.<String>filter(this.enabledPatterns, _function);
     for (final String pattern : _filter) {
@@ -347,27 +344,21 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
     final ArrayList<String> nonWordKeywords = CollectionLiterals.<String>newArrayList();
     final Pattern keywordsFilterPattern = Pattern.compile(this.keywordsFilter);
     final Pattern wordKeywordPattern = Pattern.compile("\\w(.*\\w)?");
-    final Function1<String, Boolean> _function = new Function1<String, Boolean>() {
-      @Override
-      public Boolean apply(final String it) {
-        Matcher _matcher = keywordsFilterPattern.matcher(it);
-        return Boolean.valueOf(_matcher.matches());
-      }
+    final Function1<String, Boolean> _function = (String it) -> {
+      Matcher _matcher = keywordsFilterPattern.matcher(it);
+      return Boolean.valueOf(_matcher.matches());
     };
     Iterable<String> _filter = IterableExtensions.<String>filter(allKeywords, _function);
-    final Procedure1<String> _function_1 = new Procedure1<String>() {
-      @Override
-      public void apply(final String it) {
-        Matcher _matcher = wordKeywordPattern.matcher(it);
-        boolean _matches = _matcher.matches();
-        if (_matches) {
-          wordKeywords.add(it);
-        } else {
-          nonWordKeywords.add(it);
-        }
+    final Consumer<String> _function_1 = (String it) -> {
+      Matcher _matcher = wordKeywordPattern.matcher(it);
+      boolean _matches = _matcher.matches();
+      if (_matches) {
+        wordKeywords.add(it);
+      } else {
+        nonWordKeywords.add(it);
       }
     };
-    IterableExtensions.<String>forEach(_filter, _function_1);
+    _filter.forEach(_function_1);
     Collections.<String>sort(wordKeywords);
     Collections.<String>sort(nonWordKeywords);
     final TextFileAccess jsFile = this.fileAccessFactory.createTextFile();

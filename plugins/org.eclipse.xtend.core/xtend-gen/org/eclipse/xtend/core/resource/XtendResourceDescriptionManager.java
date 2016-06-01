@@ -41,12 +41,9 @@ public class XtendResourceDescriptionManager extends DerivedStateAwareResourceDe
   
   private boolean containsActiveAnnotation(final IResourceDescription description) {
     Iterable<IEObjectDescription> _exportedObjects = description.getExportedObjects();
-    final Function1<IEObjectDescription, Boolean> _function = new Function1<IEObjectDescription, Boolean>() {
-      @Override
-      public Boolean apply(final IEObjectDescription it) {
-        String[] _userDataKeys = it.getUserDataKeys();
-        return Boolean.valueOf(((List<String>)Conversions.doWrapArray(_userDataKeys)).contains(XtendResourceDescriptionStrategy.ACTIVE_ANNOTATION_TIMESTAMP));
-      }
+    final Function1<IEObjectDescription, Boolean> _function = (IEObjectDescription it) -> {
+      String[] _userDataKeys = it.getUserDataKeys();
+      return Boolean.valueOf(((List<String>)Conversions.doWrapArray(_userDataKeys)).contains(XtendResourceDescriptionStrategy.ACTIVE_ANNOTATION_TIMESTAMP));
     };
     return IterableExtensions.<IEObjectDescription>exists(_exportedObjects, _function);
   }

@@ -182,11 +182,8 @@ public class FormatterTester {
     {
       int lastOffset = 0;
       final StringBuilder newDocument = new StringBuilder();
-      final Function1<TextReplacement, Integer> _function = new Function1<TextReplacement, Integer>() {
-        @Override
-        public Integer apply(final TextReplacement it) {
-          return Integer.valueOf(it.getOffset());
-        }
+      final Function1<TextReplacement, Integer> _function = (TextReplacement it) -> {
+        return Integer.valueOf(it.getOffset());
       };
       List<TextReplacement> _sortBy = IterableExtensions.<TextReplacement, Integer>sortBy(edits, _function);
       for (final TextReplacement edit : _sortBy) {
@@ -215,11 +212,8 @@ public class FormatterTester {
     {
       int lastOffset = 0;
       final StringBuilder debugTrace = new StringBuilder();
-      final Function1<TextReplacement, Integer> _function = new Function1<TextReplacement, Integer>() {
-        @Override
-        public Integer apply(final TextReplacement it) {
-          return Integer.valueOf(it.getOffset());
-        }
+      final Function1<TextReplacement, Integer> _function = (TextReplacement it) -> {
+        return Integer.valueOf(it.getOffset());
       };
       List<TextReplacement> _sortBy = IterableExtensions.<TextReplacement, Integer>sortBy(edits, _function);
       for (final TextReplacement edit : _sortBy) {
@@ -257,11 +251,8 @@ public class FormatterTester {
   protected ArrayList<TextReplacement> createMissingEditReplacements(final XtextResource res, final Collection<TextReplacement> edits, final int offset, final int length) {
     ArrayList<TextReplacement> _xblockexpression = null;
     {
-      final Function1<TextReplacement, Integer> _function = new Function1<TextReplacement, Integer>() {
-        @Override
-        public Integer apply(final TextReplacement it) {
-          return Integer.valueOf(it.getOffset());
-        }
+      final Function1<TextReplacement, Integer> _function = (TextReplacement it) -> {
+        return Integer.valueOf(it.getOffset());
       };
       Iterable<Integer> _map = IterableExtensions.<TextReplacement, Integer>map(edits, _function);
       final Set<Integer> offsets = IterableExtensions.<Integer>toSet(_map);

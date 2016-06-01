@@ -93,11 +93,8 @@ public class AntlrContentAssistGrammarGenerator extends AbstractAntlrGrammarWith
         {
           Set<String> _allKeywords = GrammarUtil.getAllKeywords(it);
           List<String> _sort = IterableExtensions.<String>sort(_allKeywords);
-          final Function1<String, Integer> _function = new Function1<String, Integer>() {
-            @Override
-            public Integer apply(final String it) {
-              return Integer.valueOf(it.length());
-            }
+          final Function1<String, Integer> _function = (String it_1) -> {
+            return Integer.valueOf(it_1.length());
           };
           List<String> _sortBy = IterableExtensions.<String, Integer>sortBy(_sort, _function);
           for(final String kw : _sortBy) {
@@ -247,12 +244,9 @@ public class AntlrContentAssistGrammarGenerator extends AbstractAntlrGrammarWith
       Iterable<EObject> _plus_3 = Iterables.<EObject>concat(_plus_2, _allUnorderedGroups);
       Collection<? extends AbstractElement> _allAssignments = GrammarUtil.getAllAssignments(g);
       Iterable<EObject> _plus_4 = Iterables.<EObject>concat(_plus_3, _allAssignments);
-      final Function1<EObject, Boolean> _function = new Function1<EObject, Boolean>() {
-        @Override
-        public Boolean apply(final EObject it) {
-          AbstractRule _containingRule = GrammarUtil.containingRule(it);
-          return Boolean.valueOf(AntlrContentAssistGrammarGenerator.this._grammarAccessExtensions.isCalled(_containingRule, g));
-        }
+      final Function1<EObject, Boolean> _function = (EObject it) -> {
+        AbstractRule _containingRule = GrammarUtil.containingRule(it);
+        return Boolean.valueOf(this._grammarAccessExtensions.isCalled(_containingRule, g));
       };
       Iterable<EObject> _filter = IterableExtensions.<EObject>filter(_plus_4, _function);
       for(final EObject rule : _filter) {
@@ -513,12 +507,9 @@ public class AntlrContentAssistGrammarGenerator extends AbstractAntlrGrammarWith
     CharSequence _xblockexpression = null;
     {
       EList<AbstractElement> _elements = it.getElements();
-      final Function1<AbstractElement, Boolean> _function = new Function1<AbstractElement, Boolean>() {
-        @Override
-        public Boolean apply(final AbstractElement it) {
-          boolean _isOptionalCardinality = GrammarUtil.isOptionalCardinality(it);
-          return Boolean.valueOf((!_isOptionalCardinality));
-        }
+      final Function1<AbstractElement, Boolean> _function = (AbstractElement it_1) -> {
+        boolean _isOptionalCardinality = GrammarUtil.isOptionalCardinality(it_1);
+        return Boolean.valueOf((!_isOptionalCardinality));
       };
       final boolean hasMandatoryContent = IterableExtensions.<AbstractElement>exists(_elements, _function);
       StringConcatenation _builder = new StringConcatenation();

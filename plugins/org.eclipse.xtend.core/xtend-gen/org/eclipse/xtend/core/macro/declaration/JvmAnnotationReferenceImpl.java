@@ -48,11 +48,8 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
     final JvmOperation op = this.findOperation(property);
     JvmAnnotationReference _delegate = this.getDelegate();
     EList<JvmAnnotationValue> _values = _delegate.getValues();
-    final Function1<JvmAnnotationValue, Boolean> _function = new Function1<JvmAnnotationValue, Boolean>() {
-      @Override
-      public Boolean apply(final JvmAnnotationValue it) {
-        return Boolean.valueOf((Objects.equal(it.getOperation(), op) || (Objects.equal(it.getOperation(), null) && Objects.equal(op.getSimpleName(), "value"))));
-      }
+    final Function1<JvmAnnotationValue, Boolean> _function = (JvmAnnotationValue it) -> {
+      return Boolean.valueOf((Objects.equal(it.getOperation(), op) || (Objects.equal(it.getOperation(), null) && Objects.equal(op.getSimpleName(), "value"))));
     };
     final JvmAnnotationValue annotationValue = IterableExtensions.<JvmAnnotationValue>findFirst(_values, _function);
     boolean _matched = false;
@@ -75,11 +72,8 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
       final JvmOperation op = this.findOperation(property);
       JvmAnnotationReference _delegate = this.getDelegate();
       EList<JvmAnnotationValue> _values = _delegate.getValues();
-      final Function1<JvmAnnotationValue, Boolean> _function = new Function1<JvmAnnotationValue, Boolean>() {
-        @Override
-        public Boolean apply(final JvmAnnotationValue it) {
-          return Boolean.valueOf((Objects.equal(it.getOperation(), op) || (Objects.equal(it.getOperation(), null) && Objects.equal(op.getSimpleName(), "value"))));
-        }
+      final Function1<JvmAnnotationValue, Boolean> _function = (JvmAnnotationValue it) -> {
+        return Boolean.valueOf((Objects.equal(it.getOperation(), op) || (Objects.equal(it.getOperation(), null) && Objects.equal(op.getSimpleName(), "value"))));
       };
       final JvmAnnotationValue annotationValue = IterableExtensions.<JvmAnnotationValue>findFirst(_values, _function);
       final boolean isArrayType = ((!Objects.equal(op, null)) && this.getCompilationUnit().getTypeReferences().isArray(op.getReturnType()));
@@ -107,12 +101,9 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
     AnnotationTypeDeclaration _annotationTypeDeclaration = this.getAnnotationTypeDeclaration();
     final JvmAnnotationType jvmAnnoType = ((JvmAnnotationTypeDeclarationImpl) _annotationTypeDeclaration).getDelegate();
     Iterable<JvmOperation> _declaredOperations = jvmAnnoType.getDeclaredOperations();
-    final Function1<JvmOperation, Boolean> _function = new Function1<JvmOperation, Boolean>() {
-      @Override
-      public Boolean apply(final JvmOperation it) {
-        String _simpleName = it.getSimpleName();
-        return Boolean.valueOf(Objects.equal(_simpleName, name));
-      }
+    final Function1<JvmOperation, Boolean> _function = (JvmOperation it) -> {
+      String _simpleName = it.getSimpleName();
+      return Boolean.valueOf(Objects.equal(_simpleName, name));
     };
     final JvmOperation jvmOperation = IterableExtensions.<JvmOperation>findFirst(_declaredOperations, _function);
     boolean _equals = Objects.equal(jvmOperation, null);

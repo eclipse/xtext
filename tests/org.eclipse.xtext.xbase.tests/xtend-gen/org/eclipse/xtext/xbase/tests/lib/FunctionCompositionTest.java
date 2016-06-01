@@ -20,26 +20,17 @@ import org.junit.Test;
  */
 @SuppressWarnings("all")
 public class FunctionCompositionTest {
-  private final Function2<Integer, Integer, Integer> binaryFun = new Function2<Integer, Integer, Integer>() {
-    @Override
-    public Integer apply(final Integer e, final Integer e2) {
-      return Integer.valueOf((e * e2));
-    }
-  };
+  private final Function2<Integer, Integer, Integer> binaryFun = ((Function2<Integer, Integer, Integer>) (Integer e, Integer e2) -> {
+    return Integer.valueOf((e * e2));
+  });
   
-  private final Function1<Integer, Integer> times2 = new Function1<Integer, Integer>() {
-    @Override
-    public Integer apply(final Integer e) {
-      return Integer.valueOf((e * 2));
-    }
-  };
+  private final Function1<Integer, Integer> times2 = ((Function1<Integer, Integer>) (Integer e) -> {
+    return Integer.valueOf((e * 2));
+  });
   
-  private final Function1<Integer, Integer> squared = new Function1<Integer, Integer>() {
-    @Override
-    public Integer apply(final Integer e) {
-      return Integer.valueOf((e * e));
-    }
-  };
+  private final Function1<Integer, Integer> squared = ((Function1<Integer, Integer>) (Integer e) -> {
+    return Integer.valueOf((e * e));
+  });
   
   @Test
   public void testCompose() {
@@ -64,20 +55,14 @@ public class FunctionCompositionTest {
   
   @Test
   public void testAndThenProcedure() {
-    final Procedure1<AtomicInteger> _function = new Procedure1<AtomicInteger>() {
-      @Override
-      public void apply(final AtomicInteger it) {
-        it.incrementAndGet();
-      }
+    final Procedure1<AtomicInteger> _function = (AtomicInteger it) -> {
+      it.incrementAndGet();
     };
     final Procedure1<? super AtomicInteger> incrementer = _function;
     final AtomicInteger counter = new AtomicInteger();
-    final Procedure1<AtomicInteger> _function_1 = new Procedure1<AtomicInteger>() {
-      @Override
-      public void apply(final AtomicInteger it) {
-        int _incrementAndGet = it.incrementAndGet();
-        Assert.assertEquals(2, _incrementAndGet);
-      }
+    final Procedure1<AtomicInteger> _function_1 = (AtomicInteger it) -> {
+      int _incrementAndGet = it.incrementAndGet();
+      Assert.assertEquals(2, _incrementAndGet);
     };
     Procedure1<AtomicInteger> _andThen = FunctionExtensions.<AtomicInteger>andThen(incrementer, _function_1);
     _andThen.apply(counter);

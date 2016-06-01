@@ -78,71 +78,59 @@ public class EqualsHashCodeCompilerTest extends AbstractXtendCompilerTest {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
-        @Override
-        public void accept(final CompilationTestHelper.Result it) {
-          try {
-            Class<?> _compiledClass = it.getCompiledClass();
-            final Object first = _compiledClass.newInstance();
-            Class<?> _compiledClass_1 = it.getCompiledClass();
-            final Object second = _compiledClass_1.newInstance();
-            Class<?> _compiledClass_2 = it.getCompiledClass();
-            Field _declaredField = _compiledClass_2.getDeclaredField("ignoreMe");
-            final Procedure1<Field> _function = new Procedure1<Field>() {
-              @Override
-              public void apply(final Field it) {
-                try {
-                  it.setAccessible(true);
-                  it.set(null, "Bar");
-                } catch (Throwable _e) {
-                  throw Exceptions.sneakyThrow(_e);
-                }
-              }
-            };
-            ObjectExtensions.<Field>operator_doubleArrow(_declaredField, _function);
-            Class<?> _compiledClass_3 = it.getCompiledClass();
-            Field _declaredField_1 = _compiledClass_3.getDeclaredField("ignoreMe2");
-            final Procedure1<Field> _function_1 = new Procedure1<Field>() {
-              @Override
-              public void apply(final Field it) {
-                try {
-                  it.setAccessible(true);
-                  it.set(second, "Bar");
-                } catch (Throwable _e) {
-                  throw Exceptions.sneakyThrow(_e);
-                }
-              }
-            };
-            ObjectExtensions.<Field>operator_doubleArrow(_declaredField_1, _function_1);
-            Class<?> _compiledClass_4 = it.getCompiledClass();
-            final Object third = _compiledClass_4.newInstance();
-            Class<?> _compiledClass_5 = it.getCompiledClass();
-            Field _declaredField_2 = _compiledClass_5.getDeclaredField("i");
-            final Procedure1<Field> _function_2 = new Procedure1<Field>() {
-              @Override
-              public void apply(final Field it) {
-                try {
-                  it.setAccessible(true);
-                  it.set(third, "Bar");
-                } catch (Throwable _e) {
-                  throw Exceptions.sneakyThrow(_e);
-                }
-              }
-            };
-            ObjectExtensions.<Field>operator_doubleArrow(_declaredField_2, _function_2);
-            Assert.assertEquals(first, second);
-            boolean _equals = first.equals(third);
-            Assert.assertFalse(_equals);
-            int _hashCode = first.hashCode();
-            int _hashCode_1 = second.hashCode();
-            Assert.assertEquals(_hashCode, _hashCode_1);
-            int _hashCode_2 = first.hashCode();
-            int _hashCode_3 = third.hashCode();
-            boolean _equals_1 = (_hashCode_2 == _hashCode_3);
-            Assert.assertFalse(_equals_1);
-          } catch (Throwable _e) {
-            throw Exceptions.sneakyThrow(_e);
-          }
+      final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
+        try {
+          Class<?> _compiledClass = it.getCompiledClass();
+          final Object first = _compiledClass.newInstance();
+          Class<?> _compiledClass_1 = it.getCompiledClass();
+          final Object second = _compiledClass_1.newInstance();
+          Class<?> _compiledClass_2 = it.getCompiledClass();
+          Field _declaredField = _compiledClass_2.getDeclaredField("ignoreMe");
+          final Procedure1<Field> _function_1 = (Field it_1) -> {
+            try {
+              it_1.setAccessible(true);
+              it_1.set(null, "Bar");
+            } catch (Throwable _e) {
+              throw Exceptions.sneakyThrow(_e);
+            }
+          };
+          ObjectExtensions.<Field>operator_doubleArrow(_declaredField, _function_1);
+          Class<?> _compiledClass_3 = it.getCompiledClass();
+          Field _declaredField_1 = _compiledClass_3.getDeclaredField("ignoreMe2");
+          final Procedure1<Field> _function_2 = (Field it_1) -> {
+            try {
+              it_1.setAccessible(true);
+              it_1.set(second, "Bar");
+            } catch (Throwable _e) {
+              throw Exceptions.sneakyThrow(_e);
+            }
+          };
+          ObjectExtensions.<Field>operator_doubleArrow(_declaredField_1, _function_2);
+          Class<?> _compiledClass_4 = it.getCompiledClass();
+          final Object third = _compiledClass_4.newInstance();
+          Class<?> _compiledClass_5 = it.getCompiledClass();
+          Field _declaredField_2 = _compiledClass_5.getDeclaredField("i");
+          final Procedure1<Field> _function_3 = (Field it_1) -> {
+            try {
+              it_1.setAccessible(true);
+              it_1.set(third, "Bar");
+            } catch (Throwable _e) {
+              throw Exceptions.sneakyThrow(_e);
+            }
+          };
+          ObjectExtensions.<Field>operator_doubleArrow(_declaredField_2, _function_3);
+          Assert.assertEquals(first, second);
+          boolean _equals = first.equals(third);
+          Assert.assertFalse(_equals);
+          int _hashCode = first.hashCode();
+          int _hashCode_1 = second.hashCode();
+          Assert.assertEquals(_hashCode, _hashCode_1);
+          int _hashCode_2 = first.hashCode();
+          int _hashCode_3 = third.hashCode();
+          boolean _equals_1 = (_hashCode_2 == _hashCode_3);
+          Assert.assertFalse(_equals_1);
+        } catch (Throwable _e) {
+          throw Exceptions.sneakyThrow(_e);
         }
       };
       this.compilationTestHelper.compile(_builder, _function);
@@ -171,39 +159,33 @@ public class EqualsHashCodeCompilerTest extends AbstractXtendCompilerTest {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
-        @Override
-        public void accept(final CompilationTestHelper.Result it) {
-          try {
-            final Class<?> foo = it.getCompiledClass("Foo");
-            final Class<?> bar = it.getCompiledClass("Bar");
-            final Object first = bar.newInstance();
-            final Object second = bar.newInstance();
-            final Object third = bar.newInstance();
-            Field _declaredField = bar.getDeclaredField("bar");
-            final Procedure1<Field> _function = new Procedure1<Field>() {
-              @Override
-              public void apply(final Field it) {
-                try {
-                  it.setAccessible(true);
-                  it.set(third, "Bar");
-                } catch (Throwable _e) {
-                  throw Exceptions.sneakyThrow(_e);
-                }
-              }
-            };
-            ObjectExtensions.<Field>operator_doubleArrow(_declaredField, _function);
-            final Object fourth = foo.newInstance();
-            Assert.assertEquals(first, second);
-            boolean _equals = first.equals(third);
-            Assert.assertFalse(_equals);
-            boolean _equals_1 = first.equals(fourth);
-            Assert.assertFalse(_equals_1);
-            boolean _equals_2 = fourth.equals(first);
-            Assert.assertFalse(_equals_2);
-          } catch (Throwable _e) {
-            throw Exceptions.sneakyThrow(_e);
-          }
+      final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
+        try {
+          final Class<?> foo = it.getCompiledClass("Foo");
+          final Class<?> bar = it.getCompiledClass("Bar");
+          final Object first = bar.newInstance();
+          final Object second = bar.newInstance();
+          final Object third = bar.newInstance();
+          Field _declaredField = bar.getDeclaredField("bar");
+          final Procedure1<Field> _function_1 = (Field it_1) -> {
+            try {
+              it_1.setAccessible(true);
+              it_1.set(third, "Bar");
+            } catch (Throwable _e) {
+              throw Exceptions.sneakyThrow(_e);
+            }
+          };
+          ObjectExtensions.<Field>operator_doubleArrow(_declaredField, _function_1);
+          final Object fourth = foo.newInstance();
+          Assert.assertEquals(first, second);
+          boolean _equals = first.equals(third);
+          Assert.assertFalse(_equals);
+          boolean _equals_1 = first.equals(fourth);
+          Assert.assertFalse(_equals_1);
+          boolean _equals_2 = fourth.equals(first);
+          Assert.assertFalse(_equals_2);
+        } catch (Throwable _e) {
+          throw Exceptions.sneakyThrow(_e);
         }
       };
       this.compilationTestHelper.compile(_builder, _function);
@@ -229,17 +211,14 @@ public class EqualsHashCodeCompilerTest extends AbstractXtendCompilerTest {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
-        @Override
-        public void accept(final CompilationTestHelper.Result it) {
-          String _generatedCode = it.getGeneratedCode("Bar");
-          String _generatedCode_1 = it.getGeneratedCode("Bar");
-          boolean _contains = _generatedCode_1.contains("super.equals");
-          Assert.assertFalse(_generatedCode, _contains);
-          String _generatedCode_2 = it.getGeneratedCode("Bar");
-          boolean _contains_1 = _generatedCode_2.contains("super.hashCode");
-          Assert.assertFalse(_contains_1);
-        }
+      final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
+        String _generatedCode = it.getGeneratedCode("Bar");
+        String _generatedCode_1 = it.getGeneratedCode("Bar");
+        boolean _contains = _generatedCode_1.contains("super.equals");
+        Assert.assertFalse(_generatedCode, _contains);
+        String _generatedCode_2 = it.getGeneratedCode("Bar");
+        boolean _contains_1 = _generatedCode_2.contains("super.hashCode");
+        Assert.assertFalse(_contains_1);
       };
       this.compilationTestHelper.compile(_builder, _function);
     } catch (Throwable _e) {
@@ -272,16 +251,13 @@ public class EqualsHashCodeCompilerTest extends AbstractXtendCompilerTest {
       final String text = _builder.toString();
       XtendClass _clazz = this.clazz(text);
       this._validationTestHelper.assertWarning(_clazz, XAnnotationsPackage.Literals.XANNOTATION, "user.issue", "no effect");
-      final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
-        @Override
-        public void accept(final CompilationTestHelper.Result it) {
-          try {
-            Class<?> _compiledClass = it.getCompiledClass();
-            final Object instance = _compiledClass.newInstance();
-            Assert.assertEquals(instance, "foo");
-          } catch (Throwable _e) {
-            throw Exceptions.sneakyThrow(_e);
-          }
+      final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
+        try {
+          Class<?> _compiledClass = it.getCompiledClass();
+          final Object instance = _compiledClass.newInstance();
+          Assert.assertEquals(instance, "foo");
+        } catch (Throwable _e) {
+          throw Exceptions.sneakyThrow(_e);
         }
       };
       this.compilationTestHelper.compile(text, _function);
@@ -315,17 +291,14 @@ public class EqualsHashCodeCompilerTest extends AbstractXtendCompilerTest {
       final String text = _builder.toString();
       XtendClass _clazz = this.clazz(text);
       this._validationTestHelper.assertWarning(_clazz, XtendPackage.Literals.XTEND_CLASS, "user.issue", "no effect");
-      final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
-        @Override
-        public void accept(final CompilationTestHelper.Result it) {
-          try {
-            Class<?> _compiledClass = it.getCompiledClass();
-            final Object instance = _compiledClass.newInstance();
-            int _hashCode = instance.hashCode();
-            Assert.assertEquals(0, _hashCode);
-          } catch (Throwable _e) {
-            throw Exceptions.sneakyThrow(_e);
-          }
+      final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
+        try {
+          Class<?> _compiledClass = it.getCompiledClass();
+          final Object instance = _compiledClass.newInstance();
+          int _hashCode = instance.hashCode();
+          Assert.assertEquals(0, _hashCode);
+        } catch (Throwable _e) {
+          throw Exceptions.sneakyThrow(_e);
         }
       };
       this.compilationTestHelper.compile(text, _function);
@@ -348,13 +321,10 @@ public class EqualsHashCodeCompilerTest extends AbstractXtendCompilerTest {
       _builder.append("}");
       _builder.newLine();
       final String text = _builder.toString();
-      final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
-        @Override
-        public void accept(final CompilationTestHelper.Result it) {
-          String _singleGeneratedCode = it.getSingleGeneratedCode();
-          boolean _contains = _singleGeneratedCode.contains("Foo<?> other = (Foo<?>) obj");
-          Assert.assertTrue(_contains);
-        }
+      final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
+        String _singleGeneratedCode = it.getSingleGeneratedCode();
+        boolean _contains = _singleGeneratedCode.contains("Foo<?> other = (Foo<?>) obj");
+        Assert.assertTrue(_contains);
       };
       this.compilationTestHelper.compile(text, _function);
     } catch (Throwable _e) {
@@ -376,21 +346,18 @@ public class EqualsHashCodeCompilerTest extends AbstractXtendCompilerTest {
       _builder.append("}");
       _builder.newLine();
       final String text = _builder.toString();
-      final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
-        @Override
-        public void accept(final CompilationTestHelper.Result it) {
-          try {
-            Class<?> _compiledClass = it.getCompiledClass();
-            final Object instance = _compiledClass.newInstance();
-            Class<?> _compiledClass_1 = it.getCompiledClass();
-            final Object instance2 = _compiledClass_1.newInstance();
-            Assert.assertEquals(instance, instance2);
-            int _hashCode = instance.hashCode();
-            int _hashCode_1 = instance2.hashCode();
-            Assert.assertEquals(_hashCode, _hashCode_1);
-          } catch (Throwable _e) {
-            throw Exceptions.sneakyThrow(_e);
-          }
+      final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
+        try {
+          Class<?> _compiledClass = it.getCompiledClass();
+          final Object instance = _compiledClass.newInstance();
+          Class<?> _compiledClass_1 = it.getCompiledClass();
+          final Object instance2 = _compiledClass_1.newInstance();
+          Assert.assertEquals(instance, instance2);
+          int _hashCode = instance.hashCode();
+          int _hashCode_1 = instance2.hashCode();
+          Assert.assertEquals(_hashCode, _hashCode_1);
+        } catch (Throwable _e) {
+          throw Exceptions.sneakyThrow(_e);
         }
       };
       this.compilationTestHelper.compile(text, _function);

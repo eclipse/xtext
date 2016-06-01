@@ -69,50 +69,47 @@ public class TypeReferenceAssignabilityTest extends AssignabilityTest {
       final JvmOperation operation = this._iXtendJvmAssociations.getDirectlyInferredOperation(function);
       EObject _rootContainer = EcoreUtil.getRootContainer(function);
       final XtendFile xtendFile = ((XtendFile) _rootContainer);
-      final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
-        @Override
-        public void apply(final CompilationUnitImpl it) {
-          TypeReference _xifexpression = null;
-          String _key = lhsAndParams.getKey();
-          boolean _notEquals = (!Objects.equal(_key, null));
-          if (_notEquals) {
-            EList<JvmFormalParameter> _parameters = operation.getParameters();
-            JvmFormalParameter _head = IterableExtensions.<JvmFormalParameter>head(_parameters);
-            JvmTypeReference _parameterType = _head.getParameterType();
-            _xifexpression = it.toTypeReference(_parameterType);
-          } else {
-            ITypeReferenceOwner _owner = TypeReferenceAssignabilityTest.this.getOwner();
-            AnyTypeReference _newAnyTypeReference = _owner.newAnyTypeReference();
-            _xifexpression = it.toTypeReference(_newAnyTypeReference);
-          }
-          final TypeReference lhsType = _xifexpression;
-          TypeReference _xifexpression_1 = null;
-          boolean _notEquals_1 = (!Objects.equal(rhs, null));
-          if (_notEquals_1) {
-            EList<JvmFormalParameter> _parameters_1 = operation.getParameters();
-            JvmFormalParameter _last = IterableExtensions.<JvmFormalParameter>last(_parameters_1);
-            JvmTypeReference _parameterType_1 = _last.getParameterType();
-            _xifexpression_1 = it.toTypeReference(_parameterType_1);
-          } else {
-            ITypeReferenceOwner _owner_1 = TypeReferenceAssignabilityTest.this.getOwner();
-            AnyTypeReference _newAnyTypeReference_1 = _owner_1.newAnyTypeReference();
-            _xifexpression_1 = it.toTypeReference(_newAnyTypeReference_1);
-          }
-          final TypeReference rhsType = _xifexpression_1;
-          String _simpleName = lhsType.getSimpleName();
-          String _plus = (_simpleName + " := ");
-          String _simpleName_1 = rhsType.getSimpleName();
-          String _plus_1 = (_plus + _simpleName_1);
-          boolean _testIsAssignable = TypeReferenceAssignabilityTest.this.testIsAssignable(it, lhsType, rhsType);
-          Assert.assertEquals(_plus_1, Boolean.valueOf(expectation), Boolean.valueOf(_testIsAssignable));
-          if (expectation) {
-            Iterable<? extends TypeReference> _declaredSuperTypes = lhsType.getDeclaredSuperTypes();
-            for (final TypeReference superType : _declaredSuperTypes) {
-              if (((superType.isArray() == lhsType.isArray()) || (lhsType.isArray() == rhsType.isArray()))) {
-                String _string = superType.toString();
-                boolean _testIsAssignable_1 = TypeReferenceAssignabilityTest.this.testIsAssignable(it, superType, rhsType);
-                Assert.assertEquals(_string, Boolean.valueOf(expectation), Boolean.valueOf(_testIsAssignable_1));
-              }
+      final Procedure1<CompilationUnitImpl> _function = (CompilationUnitImpl it) -> {
+        TypeReference _xifexpression = null;
+        String _key_1 = lhsAndParams.getKey();
+        boolean _notEquals = (!Objects.equal(_key_1, null));
+        if (_notEquals) {
+          EList<JvmFormalParameter> _parameters = operation.getParameters();
+          JvmFormalParameter _head = IterableExtensions.<JvmFormalParameter>head(_parameters);
+          JvmTypeReference _parameterType = _head.getParameterType();
+          _xifexpression = it.toTypeReference(_parameterType);
+        } else {
+          ITypeReferenceOwner _owner = this.getOwner();
+          AnyTypeReference _newAnyTypeReference = _owner.newAnyTypeReference();
+          _xifexpression = it.toTypeReference(_newAnyTypeReference);
+        }
+        final TypeReference lhsType = _xifexpression;
+        TypeReference _xifexpression_1 = null;
+        boolean _notEquals_1 = (!Objects.equal(rhs, null));
+        if (_notEquals_1) {
+          EList<JvmFormalParameter> _parameters_1 = operation.getParameters();
+          JvmFormalParameter _last = IterableExtensions.<JvmFormalParameter>last(_parameters_1);
+          JvmTypeReference _parameterType_1 = _last.getParameterType();
+          _xifexpression_1 = it.toTypeReference(_parameterType_1);
+        } else {
+          ITypeReferenceOwner _owner_1 = this.getOwner();
+          AnyTypeReference _newAnyTypeReference_1 = _owner_1.newAnyTypeReference();
+          _xifexpression_1 = it.toTypeReference(_newAnyTypeReference_1);
+        }
+        final TypeReference rhsType = _xifexpression_1;
+        String _simpleName = lhsType.getSimpleName();
+        String _plus = (_simpleName + " := ");
+        String _simpleName_1 = rhsType.getSimpleName();
+        String _plus_1 = (_plus + _simpleName_1);
+        boolean _testIsAssignable = this.testIsAssignable(it, lhsType, rhsType);
+        Assert.assertEquals(_plus_1, Boolean.valueOf(expectation), Boolean.valueOf(_testIsAssignable));
+        if (expectation) {
+          Iterable<? extends TypeReference> _declaredSuperTypes = lhsType.getDeclaredSuperTypes();
+          for (final TypeReference superType : _declaredSuperTypes) {
+            if (((superType.isArray() == lhsType.isArray()) || (lhsType.isArray() == rhsType.isArray()))) {
+              String _string_1 = superType.toString();
+              boolean _testIsAssignable_1 = this.testIsAssignable(it, superType, rhsType);
+              Assert.assertEquals(_string_1, Boolean.valueOf(expectation), Boolean.valueOf(_testIsAssignable_1));
             }
           }
         }

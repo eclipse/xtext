@@ -5,6 +5,7 @@ import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
@@ -29,7 +30,6 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -79,22 +79,16 @@ public class DependentElementsCalculatorTests extends AbstractXtendUITestCase {
       JvmGenericType _inferredType = this.associations.getInferredType(fooClass);
       JvmConstructor _inferredConstructor = this.associations.getInferredConstructor(fooClass);
       ArrayList<EObject> _newArrayList = CollectionLiterals.<EObject>newArrayList(fooFunction, _inferredType, _inferredConstructor);
-      final Procedure1<EObject> _function = new Procedure1<EObject>() {
-        @Override
-        public void apply(final EObject it) {
-          String _string = it.toString();
-          final Function1<URI, Boolean> _function = new Function1<URI, Boolean>() {
-            @Override
-            public Boolean apply(final URI element) {
-              URI _uRI = EcoreUtil.getURI(it);
-              return Boolean.valueOf(Objects.equal(element, _uRI));
-            }
-          };
-          boolean _exists = IterableExtensions.<URI>exists(dependentElementURIs, _function);
-          Assert.assertTrue(_string, _exists);
-        }
+      final Consumer<EObject> _function = (EObject it) -> {
+        String _string = it.toString();
+        final Function1<URI, Boolean> _function_1 = (URI element) -> {
+          URI _uRI = EcoreUtil.getURI(it);
+          return Boolean.valueOf(Objects.equal(element, _uRI));
+        };
+        boolean _exists = IterableExtensions.<URI>exists(dependentElementURIs, _function_1);
+        Assert.assertTrue(_string, _exists);
       };
-      IterableExtensions.<EObject>forEach(_newArrayList, _function);
+      _newArrayList.forEach(_function);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -135,30 +129,21 @@ public class DependentElementsCalculatorTests extends AbstractXtendUITestCase {
       JvmGenericType _inferredType = this.associations.getInferredType(fooClass);
       EList<JvmMember> _members_2 = _inferredType.getMembers();
       Iterable<EObject> _plus = Iterables.<EObject>concat(_members_1, _members_2);
-      final Function1<EObject, Boolean> _function = new Function1<EObject, Boolean>() {
-        @Override
-        public Boolean apply(final EObject it) {
-          return Boolean.valueOf((!(it instanceof JvmConstructor)));
-        }
+      final Function1<EObject, Boolean> _function = (EObject it) -> {
+        return Boolean.valueOf((!(it instanceof JvmConstructor)));
       };
       Iterable<EObject> _filter = IterableExtensions.<EObject>filter(_plus, _function);
       List<EObject> _list = IterableExtensions.<EObject>toList(_filter);
-      final Procedure1<EObject> _function_1 = new Procedure1<EObject>() {
-        @Override
-        public void apply(final EObject it) {
-          String _string = it.toString();
-          final Function1<URI, Boolean> _function = new Function1<URI, Boolean>() {
-            @Override
-            public Boolean apply(final URI element) {
-              URI _uRI = EcoreUtil.getURI(it);
-              return Boolean.valueOf(Objects.equal(element, _uRI));
-            }
-          };
-          boolean _exists = IterableExtensions.<URI>exists(dependentElementURIs, _function);
-          Assert.assertTrue(_string, _exists);
-        }
+      final Consumer<EObject> _function_1 = (EObject it) -> {
+        String _string = it.toString();
+        final Function1<URI, Boolean> _function_2 = (URI element) -> {
+          URI _uRI = EcoreUtil.getURI(it);
+          return Boolean.valueOf(Objects.equal(element, _uRI));
+        };
+        boolean _exists = IterableExtensions.<URI>exists(dependentElementURIs, _function_2);
+        Assert.assertTrue(_string, _exists);
       };
-      IterableExtensions.<EObject>forEach(_list, _function_1);
+      _list.forEach(_function_1);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

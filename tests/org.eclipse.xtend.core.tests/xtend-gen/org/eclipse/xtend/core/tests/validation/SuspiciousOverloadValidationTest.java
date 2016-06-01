@@ -12,6 +12,7 @@ import com.google.common.collect.Iterators;
 import com.google.inject.Inject;
 import java.util.Iterator;
 import java.util.List;
+import java.util.function.Consumer;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
@@ -40,7 +41,6 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
@@ -78,25 +78,19 @@ public class SuspiciousOverloadValidationTest extends AbstractXtendTestCase {
     String _message = singleError.getMessage();
     String _code = singleError.getCode();
     Assert.assertEquals(_message, IssueCodes.SUSPICIOUSLY_OVERLOADED_FEATURE, _code);
-    final Function1<String, String> _function = new Function1<String, String>() {
-      @Override
-      public String apply(final String it) {
-        return LineDelimiters.toUnix(it);
-      }
+    final Function1<String, String> _function = (String it) -> {
+      return LineDelimiters.toUnix(it);
     };
     List<String> _map = ListExtensions.<String, String>map(((List<String>)Conversions.doWrapArray(messageParts)), _function);
-    final Procedure1<String> _function_1 = new Procedure1<String>() {
-      @Override
-      public void apply(final String it) {
-        final String message = singleError.getMessage();
-        boolean _contains = message.contains(it);
-        boolean _not = (!_contains);
-        if (_not) {
-          Assert.assertEquals(it, message);
-        }
+    final Consumer<String> _function_1 = (String it) -> {
+      final String message = singleError.getMessage();
+      boolean _contains = message.contains(it);
+      boolean _not = (!_contains);
+      if (_not) {
+        Assert.assertEquals(it, message);
       }
     };
-    IterableExtensions.<String>forEach(_map, _function_1);
+    _map.forEach(_function_1);
     EList<XtendTypeDeclaration> _xtendTypes = file.getXtendTypes();
     final XtendTypeDeclaration firstType = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
     EList<XtendMember> _members = firstType.getMembers();
@@ -106,11 +100,8 @@ public class SuspiciousOverloadValidationTest extends AbstractXtendTestCase {
     final XBlockExpression block = ((XBlockExpression) _expression);
     TreeIterator<EObject> _eAllContents = block.eAllContents();
     Iterator<XAbstractFeatureCall> _filter = Iterators.<XAbstractFeatureCall>filter(_eAllContents, XAbstractFeatureCall.class);
-    final Function1<XAbstractFeatureCall, Boolean> _function_2 = new Function1<XAbstractFeatureCall, Boolean>() {
-      @Override
-      public Boolean apply(final XAbstractFeatureCall it) {
-        return Boolean.valueOf(((!Objects.equal(it.eContainingFeature(), XbasePackage.Literals.XABSTRACT_FEATURE_CALL__IMPLICIT_RECEIVER)) && (it.getFeature() instanceof JvmOperation)));
-      }
+    final Function1<XAbstractFeatureCall, Boolean> _function_2 = (XAbstractFeatureCall it) -> {
+      return Boolean.valueOf(((!Objects.equal(it.eContainingFeature(), XbasePackage.Literals.XABSTRACT_FEATURE_CALL__IMPLICIT_RECEIVER)) && (it.getFeature() instanceof JvmOperation)));
     };
     final XAbstractFeatureCall featureCall = IteratorExtensions.<XAbstractFeatureCall>findLast(_filter, _function_2);
     IResolvedTypes _resolveTypes = this._iBatchTypeResolver.resolveTypes(file);
@@ -130,25 +121,19 @@ public class SuspiciousOverloadValidationTest extends AbstractXtendTestCase {
     String _message = singleError.getMessage();
     String _code = singleError.getCode();
     Assert.assertEquals(_message, IssueCodes.SUSPICIOUSLY_OVERLOADED_FEATURE, _code);
-    final Function1<String, String> _function = new Function1<String, String>() {
-      @Override
-      public String apply(final String it) {
-        return LineDelimiters.toUnix(it);
-      }
+    final Function1<String, String> _function = (String it) -> {
+      return LineDelimiters.toUnix(it);
     };
     List<String> _map = ListExtensions.<String, String>map(((List<String>)Conversions.doWrapArray(messageParts)), _function);
-    final Procedure1<String> _function_1 = new Procedure1<String>() {
-      @Override
-      public void apply(final String it) {
-        final String message = singleError.getMessage();
-        boolean _contains = message.contains(it);
-        boolean _not = (!_contains);
-        if (_not) {
-          Assert.assertEquals(it, message);
-        }
+    final Consumer<String> _function_1 = (String it) -> {
+      final String message = singleError.getMessage();
+      boolean _contains = message.contains(it);
+      boolean _not = (!_contains);
+      if (_not) {
+        Assert.assertEquals(it, message);
       }
     };
-    IterableExtensions.<String>forEach(_map, _function_1);
+    _map.forEach(_function_1);
     EList<XtendTypeDeclaration> _xtendTypes = file.getXtendTypes();
     final XtendTypeDeclaration firstType = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
     EList<XtendMember> _members = firstType.getMembers();
@@ -161,11 +146,8 @@ public class SuspiciousOverloadValidationTest extends AbstractXtendTestCase {
     final XBlockExpression block = ((XBlockExpression) _expression);
     TreeIterator<EObject> _eAllContents = block.eAllContents();
     Iterator<XAbstractFeatureCall> _filter = Iterators.<XAbstractFeatureCall>filter(_eAllContents, XAbstractFeatureCall.class);
-    final Function1<XAbstractFeatureCall, Boolean> _function_2 = new Function1<XAbstractFeatureCall, Boolean>() {
-      @Override
-      public Boolean apply(final XAbstractFeatureCall it) {
-        return Boolean.valueOf(((!Objects.equal(it.eContainingFeature(), XbasePackage.Literals.XABSTRACT_FEATURE_CALL__IMPLICIT_RECEIVER)) && (it.getFeature() instanceof JvmOperation)));
-      }
+    final Function1<XAbstractFeatureCall, Boolean> _function_2 = (XAbstractFeatureCall it) -> {
+      return Boolean.valueOf(((!Objects.equal(it.eContainingFeature(), XbasePackage.Literals.XABSTRACT_FEATURE_CALL__IMPLICIT_RECEIVER)) && (it.getFeature() instanceof JvmOperation)));
     };
     final XAbstractFeatureCall featureCall = IteratorExtensions.<XAbstractFeatureCall>findLast(_filter, _function_2);
     IResolvedTypes _resolveTypes = this._iBatchTypeResolver.resolveTypes(file);

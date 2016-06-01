@@ -11,11 +11,8 @@ import org.junit.Test;
 public class AnonymousClassFormatterTest extends AbstractXtendFormatterTest {
   @Test
   public void formatSingleMember() {
-    final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
-      @Override
-      public void apply(final MapBasedPreferenceValues it) {
-        it.<Boolean>put(XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(false));
-      }
+    final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
+      it.<Boolean>put(XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(false));
     };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Foo {");
@@ -39,11 +36,8 @@ public class AnonymousClassFormatterTest extends AbstractXtendFormatterTest {
   
   @Test
   public void formatMultiMember() {
-    final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
-      @Override
-      public void apply(final MapBasedPreferenceValues it) {
-        it.<Boolean>put(XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(false));
-      }
+    final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
+      it.<Boolean>put(XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(false));
     };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Foo {");
@@ -78,11 +72,8 @@ public class AnonymousClassFormatterTest extends AbstractXtendFormatterTest {
   
   @Test
   public void formatTypeParam() {
-    final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
-      @Override
-      public void apply(final MapBasedPreferenceValues it) {
-        it.<Boolean>put(XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(false));
-      }
+    final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
+      it.<Boolean>put(XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(false));
     };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Foo {");
@@ -109,11 +100,8 @@ public class AnonymousClassFormatterTest extends AbstractXtendFormatterTest {
   
   @Test
   public void formatNested() {
-    final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
-      @Override
-      public void apply(final MapBasedPreferenceValues it) {
-        it.<Boolean>put(XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(false));
-      }
+    final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
+      it.<Boolean>put(XbaseFormatterPreferenceKeys.bracesInNewLine, Boolean.valueOf(false));
     };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.util.Iterator");

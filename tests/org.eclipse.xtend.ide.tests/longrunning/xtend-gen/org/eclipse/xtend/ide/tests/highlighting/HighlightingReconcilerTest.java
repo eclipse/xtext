@@ -80,43 +80,31 @@ public class HighlightingReconcilerTest extends AbstractXtendUITestCase {
       int _indexOf = model.indexOf("  ");
       ReplaceEdit _replaceEdit = new ReplaceEdit(_indexOf, 2, "  static val foo = 3");
       _replaceEdit.apply(document);
-      final IUnitOfWork<Object, XtextResource> _function = new IUnitOfWork<Object, XtextResource>() {
-        @Override
-        public Object exec(final XtextResource it) throws Exception {
-          return null;
-        }
+      final IUnitOfWork<Object, XtextResource> _function = (XtextResource it) -> {
+        return null;
       };
       document.<Object>readOnly(_function);
       int _indexOf_1 = model.indexOf("  ");
       ReplaceEdit _replaceEdit_1 = new ReplaceEdit(_indexOf_1, 0, "  ");
       _replaceEdit_1.apply(document);
-      final IUnitOfWork<Object, XtextResource> _function_1 = new IUnitOfWork<Object, XtextResource>() {
-        @Override
-        public Object exec(final XtextResource it) throws Exception {
-          return null;
-        }
+      final IUnitOfWork<Object, XtextResource> _function_1 = (XtextResource it) -> {
+        return null;
       };
       document.<Object>readOnly(_function_1);
       while (Display.getDefault().readAndDispatch()) {
       }
       String[] _positionCategories = document.getPositionCategories();
-      final Function1<String, Boolean> _function_2 = new Function1<String, Boolean>() {
-        @Override
-        public Boolean apply(final String it) {
-          String _canonicalName = HighlightingPresenter.class.getCanonicalName();
-          return Boolean.valueOf(it.startsWith(_canonicalName));
-        }
+      final Function1<String, Boolean> _function_2 = (String it) -> {
+        String _canonicalName = HighlightingPresenter.class.getCanonicalName();
+        return Boolean.valueOf(it.startsWith(_canonicalName));
       };
       final String highlighterCategory = IterableExtensions.<String>findFirst(((Iterable<String>)Conversions.doWrapArray(_positionCategories)), _function_2);
       Position[] _positions = document.getPositions(highlighterCategory);
-      final Function1<Position, String> _function_3 = new Function1<Position, String>() {
-        @Override
-        public String apply(final Position it) {
-          try {
-            return document.get(it.offset, it.length);
-          } catch (Throwable _e) {
-            throw Exceptions.sneakyThrow(_e);
-          }
+      final Function1<Position, String> _function_3 = (Position it) -> {
+        try {
+          return document.get(it.offset, it.length);
+        } catch (Throwable _e) {
+          throw Exceptions.sneakyThrow(_e);
         }
       };
       final List<String> semanticSnippets = ListExtensions.<Position, String>map(((List<Position>)Conversions.doWrapArray(_positions)), _function_3);
@@ -148,61 +136,46 @@ public class HighlightingReconcilerTest extends AbstractXtendUITestCase {
       final String model = _builder.toString();
       final XtextEditor editor = this.helper.openEditor("Foo.xtend", model);
       final IXtextDocument document = editor.getDocument();
-      final Function0<Boolean> _function = new Function0<Boolean>() {
-        @Override
-        public Boolean apply() {
-          try {
-            boolean _xblockexpression = false;
-            {
-              String[] _positionCategories = document.getPositionCategories();
-              final Function1<String, Boolean> _function = new Function1<String, Boolean>() {
-                @Override
-                public Boolean apply(final String it) {
-                  String _canonicalName = HighlightingPresenter.class.getCanonicalName();
-                  return Boolean.valueOf(it.startsWith(_canonicalName));
-                }
-              };
-              final String highlighterCategory = IterableExtensions.<String>findFirst(((Iterable<String>)Conversions.doWrapArray(_positionCategories)), _function);
-              Position[] _positions = document.getPositions(highlighterCategory);
-              final Function1<Position, String> _function_1 = new Function1<Position, String>() {
-                @Override
-                public String apply(final Position it) {
-                  try {
-                    return document.get(it.offset, it.length);
-                  } catch (Throwable _e) {
-                    throw Exceptions.sneakyThrow(_e);
-                  }
-                }
-              };
-              final List<String> semanticSnippets = ListExtensions.<Position, String>map(((List<Position>)Conversions.doWrapArray(_positions)), _function_1);
-              int _size = semanticSnippets.size();
-              _xblockexpression = (_size > 0);
-            }
-            return Boolean.valueOf(_xblockexpression);
-          } catch (Throwable _e) {
-            throw Exceptions.sneakyThrow(_e);
+      final Function0<Boolean> _function = () -> {
+        try {
+          boolean _xblockexpression = false;
+          {
+            String[] _positionCategories = document.getPositionCategories();
+            final Function1<String, Boolean> _function_1 = (String it) -> {
+              String _canonicalName = HighlightingPresenter.class.getCanonicalName();
+              return Boolean.valueOf(it.startsWith(_canonicalName));
+            };
+            final String highlighterCategory = IterableExtensions.<String>findFirst(((Iterable<String>)Conversions.doWrapArray(_positionCategories)), _function_1);
+            Position[] _positions = document.getPositions(highlighterCategory);
+            final Function1<Position, String> _function_2 = (Position it) -> {
+              try {
+                return document.get(it.offset, it.length);
+              } catch (Throwable _e) {
+                throw Exceptions.sneakyThrow(_e);
+              }
+            };
+            final List<String> semanticSnippets = ListExtensions.<Position, String>map(((List<Position>)Conversions.doWrapArray(_positions)), _function_2);
+            int _size = semanticSnippets.size();
+            _xblockexpression = (_size > 0);
           }
+          return Boolean.valueOf(_xblockexpression);
+        } catch (Throwable _e) {
+          throw Exceptions.sneakyThrow(_e);
         }
       };
       this.helper.awaitUIUpdate(_function, HighlightingReconcilerTest.VALIDATION_TIMEOUT);
       String[] _positionCategories = document.getPositionCategories();
-      final Function1<String, Boolean> _function_1 = new Function1<String, Boolean>() {
-        @Override
-        public Boolean apply(final String it) {
-          String _canonicalName = HighlightingPresenter.class.getCanonicalName();
-          return Boolean.valueOf(it.startsWith(_canonicalName));
-        }
+      final Function1<String, Boolean> _function_1 = (String it) -> {
+        String _canonicalName = HighlightingPresenter.class.getCanonicalName();
+        return Boolean.valueOf(it.startsWith(_canonicalName));
       };
       final String highlighterCategory = IterableExtensions.<String>findFirst(((Iterable<String>)Conversions.doWrapArray(_positionCategories)), _function_1);
       Position[] _positions = document.getPositions(highlighterCategory);
-      final Function1<Position, String> _function_2 = new Function1<Position, String>() {
-        @Override
-        public String apply(final Position it) {
-          try {
-            return document.get(it.offset, it.length);
-          } catch (Throwable _e) {
-            throw Exceptions.sneakyThrow(_e);
-          }
+      final Function1<Position, String> _function_2 = (Position it) -> {
+        try {
+          return document.get(it.offset, it.length);
+        } catch (Throwable _e) {
+          throw Exceptions.sneakyThrow(_e);
         }
       };
       final List<String> semanticSnippets = ListExtensions.<Position, String>map(((List<Position>)Conversions.doWrapArray(_positions)), _function_2);

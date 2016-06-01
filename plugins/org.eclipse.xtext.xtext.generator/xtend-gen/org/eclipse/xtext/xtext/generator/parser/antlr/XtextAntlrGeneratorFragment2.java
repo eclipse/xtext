@@ -141,12 +141,9 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
     if (_isSet) {
       _xifexpression = this.combinedGrammar.get();
     } else {
-      _xifexpression = (((!this.getOptions().isBacktrackLexer()) && (!this.getOptions().isIgnoreCase())) && (!IterableExtensions.<TerminalRule>exists(GrammarUtil.allTerminalRules(this.getGrammar()), new Function1<TerminalRule, Boolean>() {
-        @Override
-        public Boolean apply(final TerminalRule it) {
-          return Boolean.valueOf(XtextAntlrGeneratorFragment2.this._syntheticTerminalDetector.isSyntheticTerminalRule(it));
-        }
-      })));
+      _xifexpression = (((!this.getOptions().isBacktrackLexer()) && (!this.getOptions().isIgnoreCase())) && (!IterableExtensions.<TerminalRule>exists(GrammarUtil.allTerminalRules(this.getGrammar()), ((Function1<TerminalRule, Boolean>) (TerminalRule it) -> {
+        return Boolean.valueOf(this._syntheticTerminalDetector.isSyntheticTerminalRule(it));
+      }))));
     }
     return _xifexpression;
   }
@@ -189,11 +186,8 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
     _generateContentAssistParser.writeTo(_srcGen_3);
     Grammar _grammar_2 = this.getGrammar();
     List<TerminalRule> _allTerminalRules = GrammarUtil.allTerminalRules(_grammar_2);
-    final Function1<TerminalRule, Boolean> _function = new Function1<TerminalRule, Boolean>() {
-      @Override
-      public Boolean apply(final TerminalRule it) {
-        return Boolean.valueOf(XtextAntlrGeneratorFragment2.this._syntheticTerminalDetector.isSyntheticTerminalRule(it));
-      }
+    final Function1<TerminalRule, Boolean> _function = (TerminalRule it) -> {
+      return Boolean.valueOf(this._syntheticTerminalDetector.isSyntheticTerminalRule(it));
     };
     boolean _exists = IterableExtensions.<TerminalRule>exists(_allTerminalRules, _function);
     if (_exists) {
@@ -433,11 +427,8 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
           {
             Grammar _grammar_3 = XtextAntlrGeneratorFragment2.this.getGrammar();
             List<TerminalRule> _allTerminalRules = GrammarUtil.allTerminalRules(_grammar_3);
-            final Function1<TerminalRule, Boolean> _function = new Function1<TerminalRule, Boolean>() {
-              @Override
-              public Boolean apply(final TerminalRule it) {
-                return Boolean.valueOf(XtextAntlrGeneratorFragment2.this._syntheticTerminalDetector.isSyntheticTerminalRule(it));
-              }
+            final Function1<TerminalRule, Boolean> _function = (TerminalRule it) -> {
+              return Boolean.valueOf(XtextAntlrGeneratorFragment2.this._syntheticTerminalDetector.isSyntheticTerminalRule(it));
             };
             boolean _exists = IterableExtensions.<TerminalRule>exists(_allTerminalRules, _function);
             if (_exists) {
@@ -639,24 +630,18 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
       final JavaFileAccess file = this.fileFactory.createJavaFile(_tokenSourceClass);
       Grammar _grammar_1 = this.getGrammar();
       List<TerminalRule> _allTerminalRules = GrammarUtil.allTerminalRules(_grammar_1);
-      final Function1<TerminalRule, Boolean> _function = new Function1<TerminalRule, Boolean>() {
-        @Override
-        public Boolean apply(final TerminalRule it) {
-          String _name = it.getName();
-          String _upperCase = _name.toUpperCase();
-          return Boolean.valueOf(Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet("BEGIN", "INDENT", "OPEN")).contains(_upperCase));
-        }
+      final Function1<TerminalRule, Boolean> _function = (TerminalRule it) -> {
+        String _name = it.getName();
+        String _upperCase = _name.toUpperCase();
+        return Boolean.valueOf(Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet("BEGIN", "INDENT", "OPEN")).contains(_upperCase));
       };
       final Iterable<TerminalRule> open = IterableExtensions.<TerminalRule>filter(_allTerminalRules, _function);
       Grammar _grammar_2 = this.getGrammar();
       List<TerminalRule> _allTerminalRules_1 = GrammarUtil.allTerminalRules(_grammar_2);
-      final Function1<TerminalRule, Boolean> _function_1 = new Function1<TerminalRule, Boolean>() {
-        @Override
-        public Boolean apply(final TerminalRule it) {
-          String _name = it.getName();
-          String _upperCase = _name.toUpperCase();
-          return Boolean.valueOf(Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet("END", "DEDENT", "CLOSE")).contains(_upperCase));
-        }
+      final Function1<TerminalRule, Boolean> _function_1 = (TerminalRule it) -> {
+        String _name = it.getName();
+        String _upperCase = _name.toUpperCase();
+        return Boolean.valueOf(Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet("END", "DEDENT", "CLOSE")).contains(_upperCase));
       };
       final Iterable<TerminalRule> close = IterableExtensions.<TerminalRule>filter(_allTerminalRules_1, _function_1);
       StringConcatenationClient _client = new StringConcatenationClient() {
@@ -700,20 +685,14 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
           {
             Grammar _grammar_2 = XtextAntlrGeneratorFragment2.this.getGrammar();
             List<TerminalRule> _allTerminalRules = GrammarUtil.allTerminalRules(_grammar_2);
-            final Function1<TerminalRule, TerminalRule> _function = new Function1<TerminalRule, TerminalRule>() {
-              @Override
-              public TerminalRule apply(final TerminalRule it) {
-                return AntlrGrammarGenUtil.<TerminalRule>getOriginalElement(it);
-              }
+            final Function1<TerminalRule, TerminalRule> _function = (TerminalRule it) -> {
+              return AntlrGrammarGenUtil.<TerminalRule>getOriginalElement(it);
             };
             List<TerminalRule> _map = ListExtensions.<TerminalRule, TerminalRule>map(_allTerminalRules, _function);
-            final Function1<TerminalRule, Boolean> _function_1 = new Function1<TerminalRule, Boolean>() {
-              @Override
-              public Boolean apply(final TerminalRule it) {
-                String _name = it.getName();
-                String _upperCase = _name.toUpperCase();
-                return Boolean.valueOf(Objects.equal(_upperCase, "WS"));
-              }
+            final Function1<TerminalRule, Boolean> _function_1 = (TerminalRule it) -> {
+              String _name = it.getName();
+              String _upperCase = _name.toUpperCase();
+              return Boolean.valueOf(Objects.equal(_upperCase, "WS"));
             };
             boolean _exists = IterableExtensions.<TerminalRule>exists(_map, _function_1);
             if (_exists) {
@@ -900,11 +879,8 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
           {
             Grammar _grammar_6 = XtextAntlrGeneratorFragment2.this.getGrammar();
             List<TerminalRule> _allTerminalRules = GrammarUtil.allTerminalRules(_grammar_6);
-            final Function1<TerminalRule, Boolean> _function = new Function1<TerminalRule, Boolean>() {
-              @Override
-              public Boolean apply(final TerminalRule it) {
-                return Boolean.valueOf(XtextAntlrGeneratorFragment2.this._syntheticTerminalDetector.isSyntheticTerminalRule(it));
-              }
+            final Function1<TerminalRule, Boolean> _function = (TerminalRule it) -> {
+              return Boolean.valueOf(XtextAntlrGeneratorFragment2.this._syntheticTerminalDetector.isSyntheticTerminalRule(it));
             };
             boolean _exists = IterableExtensions.<TerminalRule>exists(_allTerminalRules, _function);
             if (_exists) {
@@ -1139,24 +1115,18 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
       final JavaFileAccess file = this.fileFactory.createJavaFile(_tokenSourceClass);
       Grammar _grammar_1 = this.getGrammar();
       List<TerminalRule> _allTerminalRules = GrammarUtil.allTerminalRules(_grammar_1);
-      final Function1<TerminalRule, Boolean> _function = new Function1<TerminalRule, Boolean>() {
-        @Override
-        public Boolean apply(final TerminalRule it) {
-          String _name = it.getName();
-          String _upperCase = _name.toUpperCase();
-          return Boolean.valueOf(Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet("BEGIN", "INDENT", "OPEN")).contains(_upperCase));
-        }
+      final Function1<TerminalRule, Boolean> _function = (TerminalRule it) -> {
+        String _name = it.getName();
+        String _upperCase = _name.toUpperCase();
+        return Boolean.valueOf(Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet("BEGIN", "INDENT", "OPEN")).contains(_upperCase));
       };
       final Iterable<TerminalRule> open = IterableExtensions.<TerminalRule>filter(_allTerminalRules, _function);
       Grammar _grammar_2 = this.getGrammar();
       List<TerminalRule> _allTerminalRules_1 = GrammarUtil.allTerminalRules(_grammar_2);
-      final Function1<TerminalRule, Boolean> _function_1 = new Function1<TerminalRule, Boolean>() {
-        @Override
-        public Boolean apply(final TerminalRule it) {
-          String _name = it.getName();
-          String _upperCase = _name.toUpperCase();
-          return Boolean.valueOf(Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet("END", "DEDENT", "CLOSE")).contains(_upperCase));
-        }
+      final Function1<TerminalRule, Boolean> _function_1 = (TerminalRule it) -> {
+        String _name = it.getName();
+        String _upperCase = _name.toUpperCase();
+        return Boolean.valueOf(Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet("END", "DEDENT", "CLOSE")).contains(_upperCase));
       };
       final Iterable<TerminalRule> close = IterableExtensions.<TerminalRule>filter(_allTerminalRules_1, _function_1);
       StringConcatenationClient _client = new StringConcatenationClient() {
@@ -1200,20 +1170,14 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
           {
             Grammar _grammar_2 = XtextAntlrGeneratorFragment2.this.getGrammar();
             List<TerminalRule> _allTerminalRules = GrammarUtil.allTerminalRules(_grammar_2);
-            final Function1<TerminalRule, TerminalRule> _function = new Function1<TerminalRule, TerminalRule>() {
-              @Override
-              public TerminalRule apply(final TerminalRule it) {
-                return AntlrGrammarGenUtil.<TerminalRule>getOriginalElement(it);
-              }
+            final Function1<TerminalRule, TerminalRule> _function = (TerminalRule it) -> {
+              return AntlrGrammarGenUtil.<TerminalRule>getOriginalElement(it);
             };
             List<TerminalRule> _map = ListExtensions.<TerminalRule, TerminalRule>map(_allTerminalRules, _function);
-            final Function1<TerminalRule, Boolean> _function_1 = new Function1<TerminalRule, Boolean>() {
-              @Override
-              public Boolean apply(final TerminalRule it) {
-                String _name = it.getName();
-                String _upperCase = _name.toUpperCase();
-                return Boolean.valueOf(Objects.equal(_upperCase, "WS"));
-              }
+            final Function1<TerminalRule, Boolean> _function_1 = (TerminalRule it) -> {
+              String _name = it.getName();
+              String _upperCase = _name.toUpperCase();
+              return Boolean.valueOf(Objects.equal(_upperCase, "WS"));
             };
             boolean _exists = IterableExtensions.<TerminalRule>exists(_map, _function_1);
             if (_exists) {
@@ -1361,23 +1325,20 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
       IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
       IRuntimeProjectConfig _runtime_1 = _projectConfig_1.getRuntime();
       ManifestAccess _manifest_1 = _runtime_1.getManifest();
-      final Procedure1<ManifestAccess> _function = new Procedure1<ManifestAccess>() {
-        @Override
-        public void apply(final ManifestAccess it) {
-          Set<String> _exportedPackages = it.getExportedPackages();
-          Grammar _grammar = XtextAntlrGeneratorFragment2.this.getGrammar();
-          TypeReference _lexerClass = naming.getLexerClass(_grammar);
-          String _packageName = _lexerClass.getPackageName();
-          Grammar _grammar_1 = XtextAntlrGeneratorFragment2.this.getGrammar();
-          TypeReference _parserClass = naming.getParserClass(_grammar_1);
-          String _packageName_1 = _parserClass.getPackageName();
-          Grammar _grammar_2 = XtextAntlrGeneratorFragment2.this.getGrammar();
-          TypeReference _internalParserClass = naming.getInternalParserClass(_grammar_2);
-          String _packageName_2 = _internalParserClass.getPackageName();
-          Iterables.<String>addAll(_exportedPackages, Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList(_packageName, _packageName_1, _packageName_2)));
-          Set<String> _requiredBundles = it.getRequiredBundles();
-          _requiredBundles.add("org.antlr.runtime");
-        }
+      final Procedure1<ManifestAccess> _function = (ManifestAccess it) -> {
+        Set<String> _exportedPackages = it.getExportedPackages();
+        Grammar _grammar = this.getGrammar();
+        TypeReference _lexerClass = naming.getLexerClass(_grammar);
+        String _packageName = _lexerClass.getPackageName();
+        Grammar _grammar_1 = this.getGrammar();
+        TypeReference _parserClass = naming.getParserClass(_grammar_1);
+        String _packageName_1 = _parserClass.getPackageName();
+        Grammar _grammar_2 = this.getGrammar();
+        TypeReference _internalParserClass = naming.getInternalParserClass(_grammar_2);
+        String _packageName_2 = _internalParserClass.getPackageName();
+        Iterables.<String>addAll(_exportedPackages, Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList(_packageName, _packageName_1, _packageName_2)));
+        Set<String> _requiredBundles = it.getRequiredBundles();
+        _requiredBundles.add("org.antlr.runtime");
       };
       ObjectExtensions.<ManifestAccess>operator_doubleArrow(_manifest_1, _function);
     }
@@ -1477,19 +1438,16 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
       IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
       IBundleProjectConfig _genericIde_1 = _projectConfig_1.getGenericIde();
       ManifestAccess _manifest_1 = _genericIde_1.getManifest();
-      final Procedure1<ManifestAccess> _function = new Procedure1<ManifestAccess>() {
-        @Override
-        public void apply(final ManifestAccess it) {
-          Set<String> _exportedPackages = it.getExportedPackages();
-          String _packageName = caLexerClass.getPackageName();
-          Grammar _grammar = XtextAntlrGeneratorFragment2.this.getGrammar();
-          TypeReference _parserClass = naming.getParserClass(_grammar);
-          String _packageName_1 = _parserClass.getPackageName();
-          Grammar _grammar_1 = XtextAntlrGeneratorFragment2.this.getGrammar();
-          TypeReference _internalParserClass = naming.getInternalParserClass(_grammar_1);
-          String _packageName_2 = _internalParserClass.getPackageName();
-          Iterables.<String>addAll(_exportedPackages, Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList(_packageName, _packageName_1, _packageName_2)));
-        }
+      final Procedure1<ManifestAccess> _function = (ManifestAccess it) -> {
+        Set<String> _exportedPackages = it.getExportedPackages();
+        String _packageName = caLexerClass.getPackageName();
+        Grammar _grammar_1 = this.getGrammar();
+        TypeReference _parserClass = naming.getParserClass(_grammar_1);
+        String _packageName_1 = _parserClass.getPackageName();
+        Grammar _grammar_2 = this.getGrammar();
+        TypeReference _internalParserClass = naming.getInternalParserClass(_grammar_2);
+        String _packageName_2 = _internalParserClass.getPackageName();
+        Iterables.<String>addAll(_exportedPackages, Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList(_packageName, _packageName_1, _packageName_2)));
       };
       ObjectExtensions.<ManifestAccess>operator_doubleArrow(_manifest_1, _function);
     }

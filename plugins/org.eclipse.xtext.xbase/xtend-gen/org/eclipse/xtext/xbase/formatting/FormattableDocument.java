@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.SortedMap;
 import java.util.TreeMap;
+import java.util.function.Consumer;
 import org.apache.log4j.Logger;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -226,32 +227,26 @@ public class FormattableDocument {
     {
       IntegerRange _upTo = new IntegerRange(0, 5);
       int _offset = data1.getOffset();
-      final Function2<Integer, Integer, Integer> _function = new Function2<Integer, Integer, Integer>() {
-        @Override
-        public Integer apply(final Integer last, final Integer i) {
-          int _xifexpression = (int) 0;
-          if (((last).intValue() > 0)) {
-            _xifexpression = FormattableDocument.this.document.lastIndexOf("\n", ((last).intValue() - 1));
-          } else {
-            _xifexpression = (-1);
-          }
-          return Integer.valueOf(_xifexpression);
+      final Function2<Integer, Integer, Integer> _function = (Integer last, Integer i) -> {
+        int _xifexpression = (int) 0;
+        if (((last).intValue() > 0)) {
+          _xifexpression = this.document.lastIndexOf("\n", ((last).intValue() - 1));
+        } else {
+          _xifexpression = (-1);
         }
+        return Integer.valueOf(_xifexpression);
       };
       final Integer back = IterableExtensions.<Integer, Integer>fold(_upTo, Integer.valueOf(_offset), _function);
       IntegerRange _upTo_1 = new IntegerRange(0, 5);
       int _offset_1 = data1.getOffset();
-      final Function2<Integer, Integer, Integer> _function_1 = new Function2<Integer, Integer, Integer>() {
-        @Override
-        public Integer apply(final Integer last, final Integer i) {
-          int _xifexpression = (int) 0;
-          if (((last).intValue() > 0)) {
-            _xifexpression = FormattableDocument.this.document.indexOf("\n", ((last).intValue() + 1));
-          } else {
-            _xifexpression = (-1);
-          }
-          return Integer.valueOf(_xifexpression);
+      final Function2<Integer, Integer, Integer> _function_1 = (Integer last, Integer i) -> {
+        int _xifexpression = (int) 0;
+        if (((last).intValue() > 0)) {
+          _xifexpression = this.document.indexOf("\n", ((last).intValue() + 1));
+        } else {
+          _xifexpression = (-1);
         }
+        return Integer.valueOf(_xifexpression);
       };
       final Integer forward = IterableExtensions.<Integer, Integer>fold(_upTo_1, Integer.valueOf(_offset_1), _function_1);
       Integer _xifexpression = null;
@@ -339,13 +334,10 @@ public class FormattableDocument {
   public void operator_add(final Iterable<FormattingData> data) {
     boolean _notEquals = (!Objects.equal(data, null));
     if (_notEquals) {
-      final Procedure1<FormattingData> _function = new Procedure1<FormattingData>() {
-        @Override
-        public void apply(final FormattingData it) {
-          FormattableDocument.this.addFormatting(it);
-        }
+      final Consumer<FormattingData> _function = (FormattingData it) -> {
+        this.addFormatting(it);
       };
-      IterableExtensions.<FormattingData>forEach(data, _function);
+      data.forEach(_function);
     }
   }
   
@@ -437,11 +429,8 @@ public class FormattableDocument {
       final List<TextReplacement> edits = this.renderToEdits(offset, length);
       int lastOffset = offset;
       final StringBuilder newDocument = new StringBuilder();
-      final Function1<TextReplacement, Integer> _function = new Function1<TextReplacement, Integer>() {
-        @Override
-        public Integer apply(final TextReplacement it) {
-          return Integer.valueOf(offset);
-        }
+      final Function1<TextReplacement, Integer> _function = (TextReplacement it) -> {
+        return Integer.valueOf(offset);
       };
       List<TextReplacement> _sortBy = IterableExtensions.<TextReplacement, Integer>sortBy(edits, _function);
       for (final TextReplacement edit : _sortBy) {
@@ -468,12 +457,9 @@ public class FormattableDocument {
     int _length = doc.length();
     int _minus = (_length - 1);
     IntegerRange _upTo = new IntegerRange(0, _minus);
-    final Function1<Integer, Boolean> _function = new Function1<Integer, Boolean>() {
-      @Override
-      public Boolean apply(final Integer it) {
-        char _charAt = doc.charAt((it).intValue());
-        return Boolean.valueOf(Character.isWhitespace(_charAt));
-      }
+    final Function1<Integer, Boolean> _function = (Integer it) -> {
+      char _charAt = doc.charAt((it).intValue());
+      return Boolean.valueOf(Character.isWhitespace(_charAt));
     };
     return IterableExtensions.<Integer>forall(_upTo, _function);
   }
@@ -619,11 +605,8 @@ public class FormattableDocument {
       {
         final String indent = this.cfg.get(BasicFormatterPreferenceKeys.indentation);
         IntegerRange _upTo = new IntegerRange(0, (levels - 1));
-        final Function1<Integer, String> _function = new Function1<Integer, String>() {
-          @Override
-          public String apply(final Integer it) {
-            return indent;
-          }
+        final Function1<Integer, String> _function = (Integer it) -> {
+          return indent;
         };
         Iterable<String> _map = IterableExtensions.<Integer, String>map(_upTo, _function);
         _xblockexpression = IterableExtensions.join(_map);
@@ -647,11 +630,8 @@ public class FormattableDocument {
       {
         final String sep = this.cfg.get(BasicFormatterPreferenceKeys.lineSeparator);
         IntegerRange _upTo = new IntegerRange(0, (levels - 1));
-        final Function1<Integer, String> _function = new Function1<Integer, String>() {
-          @Override
-          public String apply(final Integer it) {
-            return sep;
-          }
+        final Function1<Integer, String> _function = (Integer it) -> {
+          return sep;
         };
         Iterable<String> _map = IterableExtensions.<Integer, String>map(_upTo, _function);
         _xblockexpression = IterableExtensions.join(_map);

@@ -131,11 +131,8 @@ public class DeferredHierarchyBuilder implements IHierarchyBuilder {
   @Override
   public Collection<IHierarchyNode> buildRoots(final URI rootURI, final IProgressMonitor monitor) {
     Collection<IHierarchyNode> _buildRoots = this.hierarchyBuilder.buildRoots(rootURI, monitor);
-    final Function1<IHierarchyNode, IHierarchyNode> _function = new Function1<IHierarchyNode, IHierarchyNode>() {
-      @Override
-      public IHierarchyNode apply(final IHierarchyNode it) {
-        return DeferredHierarchyBuilder.this.defer(it);
-      }
+    final Function1<IHierarchyNode, IHierarchyNode> _function = (IHierarchyNode it) -> {
+      return this.defer(it);
     };
     Iterable<IHierarchyNode> _map = IterableExtensions.<IHierarchyNode, IHierarchyNode>map(_buildRoots, _function);
     Iterable<IHierarchyNode> _filterNull = IterableExtensions.<IHierarchyNode>filterNull(_map);
@@ -145,11 +142,8 @@ public class DeferredHierarchyBuilder implements IHierarchyBuilder {
   @Override
   public Collection<IHierarchyNode> buildChildren(final IHierarchyNode node, final IProgressMonitor monitor) {
     Collection<IHierarchyNode> _buildChildren = this.hierarchyBuilder.buildChildren(node, monitor);
-    final Function1<IHierarchyNode, IHierarchyNode> _function = new Function1<IHierarchyNode, IHierarchyNode>() {
-      @Override
-      public IHierarchyNode apply(final IHierarchyNode it) {
-        return DeferredHierarchyBuilder.this.defer(it);
-      }
+    final Function1<IHierarchyNode, IHierarchyNode> _function = (IHierarchyNode it) -> {
+      return this.defer(it);
     };
     Iterable<IHierarchyNode> _map = IterableExtensions.<IHierarchyNode, IHierarchyNode>map(_buildChildren, _function);
     Iterable<IHierarchyNode> _filterNull = IterableExtensions.<IHierarchyNode>filterNull(_map);

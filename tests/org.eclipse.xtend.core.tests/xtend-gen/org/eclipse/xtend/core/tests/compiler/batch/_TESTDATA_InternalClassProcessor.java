@@ -36,18 +36,12 @@ public class _TESTDATA_InternalClassProcessor extends AbstractClassProcessor {
     String _qualifiedName = annotatedClass.getQualifiedName();
     String _plus = (_qualifiedName + ".InternalClass");
     MutableClassDeclaration _findClass = context.findClass(_plus);
-    final Procedure1<MutableClassDeclaration> _function = new Procedure1<MutableClassDeclaration>() {
-      @Override
-      public void apply(final MutableClassDeclaration it) {
-        final Procedure1<MutableFieldDeclaration> _function = new Procedure1<MutableFieldDeclaration>() {
-          @Override
-          public void apply(final MutableFieldDeclaration it) {
-            TypeReference _string = context.getString();
-            it.setType(_string);
-          }
-        };
-        it.addField("myField", _function);
-      }
+    final Procedure1<MutableClassDeclaration> _function = (MutableClassDeclaration it) -> {
+      final Procedure1<MutableFieldDeclaration> _function_1 = (MutableFieldDeclaration it_1) -> {
+        TypeReference _string = context.getString();
+        it_1.setType(_string);
+      };
+      it.addField("myField", _function_1);
     };
     ObjectExtensions.<MutableClassDeclaration>operator_doubleArrow(_findClass, _function);
   }

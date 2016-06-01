@@ -11,6 +11,7 @@ import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.function.Consumer;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.jdt.core.ElementChangedEvent;
 import org.eclipse.jdt.core.JavaCore;
@@ -35,7 +36,6 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure0;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Assert;
 
 /**
@@ -108,11 +108,8 @@ public abstract class AbstractQueuedBuildDataTest extends AbstractXtendUITestCas
         HashSet<String> _exportedNames = this.getExportedNames(deltas);
         for (final String exportedName : _exportedNames) {
           {
-            final Function1<String, Boolean> _function = new Function1<String, Boolean>() {
-              @Override
-              public Boolean apply(final String it) {
-                return Boolean.valueOf(Objects.equal(exportedName, it));
-              }
+            final Function1<String, Boolean> _function = (String it) -> {
+              return Boolean.valueOf(Objects.equal(exportedName, it));
             };
             final String qualifiedName = IterableExtensions.<String>findFirst(((Iterable<String>)Conversions.doWrapArray(expectedExportedNames)), _function);
             boolean _equals = Objects.equal(qualifiedName, null);
@@ -161,65 +158,53 @@ public abstract class AbstractQueuedBuildDataTest extends AbstractXtendUITestCas
   }
   
   public HashSet<String> getExportedNames(final Collection<? extends IResourceDescription.Delta> deltas) {
-    final Function1<IResourceDescription.Delta, HashSet<String>> _function = new Function1<IResourceDescription.Delta, HashSet<String>>() {
-      @Override
-      public HashSet<String> apply(final IResourceDescription.Delta it) {
-        HashSet<String> _xblockexpression = null;
-        {
-          final HashSet<String> names = CollectionLiterals.<String>newHashSet();
-          boolean _haveEObjectDescriptionsChanged = it.haveEObjectDescriptionsChanged();
-          boolean _not = (!_haveEObjectDescriptionsChanged);
-          if (_not) {
-            return names;
-          }
-          IResourceDescription _new = it.getNew();
-          Iterable<IEObjectDescription> _exportedObjects = null;
-          if (_new!=null) {
-            _exportedObjects=_new.getExportedObjects();
-          }
-          if (_exportedObjects!=null) {
-            final Procedure1<IEObjectDescription> _function = new Procedure1<IEObjectDescription>() {
-              @Override
-              public void apply(final IEObjectDescription it) {
-                QualifiedName _name = it.getName();
-                String _string = _name.toString();
-                names.add(_string);
-              }
-            };
-            IterableExtensions.<IEObjectDescription>forEach(_exportedObjects, _function);
-          }
-          IResourceDescription _old = it.getOld();
-          Iterable<IEObjectDescription> _exportedObjects_1 = null;
-          if (_old!=null) {
-            _exportedObjects_1=_old.getExportedObjects();
-          }
-          if (_exportedObjects_1!=null) {
-            final Procedure1<IEObjectDescription> _function_1 = new Procedure1<IEObjectDescription>() {
-              @Override
-              public void apply(final IEObjectDescription it) {
-                QualifiedName _name = it.getName();
-                String _string = _name.toString();
-                names.add(_string);
-              }
-            };
-            IterableExtensions.<IEObjectDescription>forEach(_exportedObjects_1, _function_1);
-          }
-          _xblockexpression = names;
+    final Function1<IResourceDescription.Delta, HashSet<String>> _function = (IResourceDescription.Delta it) -> {
+      HashSet<String> _xblockexpression = null;
+      {
+        final HashSet<String> names = CollectionLiterals.<String>newHashSet();
+        boolean _haveEObjectDescriptionsChanged = it.haveEObjectDescriptionsChanged();
+        boolean _not = (!_haveEObjectDescriptionsChanged);
+        if (_not) {
+          return names;
         }
-        return _xblockexpression;
+        IResourceDescription _new = it.getNew();
+        Iterable<IEObjectDescription> _exportedObjects = null;
+        if (_new!=null) {
+          _exportedObjects=_new.getExportedObjects();
+        }
+        if (_exportedObjects!=null) {
+          final Consumer<IEObjectDescription> _function_1 = (IEObjectDescription it_1) -> {
+            QualifiedName _name = it_1.getName();
+            String _string = _name.toString();
+            names.add(_string);
+          };
+          _exportedObjects.forEach(_function_1);
+        }
+        IResourceDescription _old = it.getOld();
+        Iterable<IEObjectDescription> _exportedObjects_1 = null;
+        if (_old!=null) {
+          _exportedObjects_1=_old.getExportedObjects();
+        }
+        if (_exportedObjects_1!=null) {
+          final Consumer<IEObjectDescription> _function_2 = (IEObjectDescription it_1) -> {
+            QualifiedName _name = it_1.getName();
+            String _string = _name.toString();
+            names.add(_string);
+          };
+          _exportedObjects_1.forEach(_function_2);
+        }
+        _xblockexpression = names;
       }
+      return _xblockexpression;
     };
     Iterable<HashSet<String>> _map = IterableExtensions.map(deltas, _function);
-    final Function2<HashSet<String>, HashSet<String>, HashSet<String>> _function_1 = new Function2<HashSet<String>, HashSet<String>, HashSet<String>>() {
-      @Override
-      public HashSet<String> apply(final HashSet<String> t, final HashSet<String> t2) {
-        HashSet<String> _xblockexpression = null;
-        {
-          t.addAll(t2);
-          _xblockexpression = t;
-        }
-        return _xblockexpression;
+    final Function2<HashSet<String>, HashSet<String>, HashSet<String>> _function_1 = (HashSet<String> t, HashSet<String> t2) -> {
+      HashSet<String> _xblockexpression = null;
+      {
+        t.addAll(t2);
+        _xblockexpression = t;
       }
+      return _xblockexpression;
     };
     return IterableExtensions.<HashSet<String>>reduce(_map, _function_1);
   }

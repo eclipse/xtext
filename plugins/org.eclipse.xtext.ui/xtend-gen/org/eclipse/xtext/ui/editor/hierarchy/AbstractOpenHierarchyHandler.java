@@ -60,18 +60,15 @@ public abstract class AbstractOpenHierarchyHandler extends AbstractHandler {
               IWorkbenchPartSite _site = editor.getSite();
               final IWorkbenchWindow workbenchWindow = _site.getWorkbenchWindow();
               IXtextDocument _document = editor.getDocument();
-              final IUnitOfWork<Object, XtextResource> _function = new IUnitOfWork<Object, XtextResource>() {
-                @Override
-                public Object exec(final XtextResource it) throws Exception {
-                  Object _xblockexpression = null;
-                  {
-                    int _offset = ((ITextSelection)selection).getOffset();
-                    EObject _resolveElementAt = AbstractOpenHierarchyHandler.this._eObjectAtOffsetHelper.resolveElementAt(it, _offset);
-                    AbstractOpenHierarchyHandler.this.openHierarchy(_resolveElementAt, workbenchWindow);
-                    _xblockexpression = null;
-                  }
-                  return _xblockexpression;
+              final IUnitOfWork<Object, XtextResource> _function = (XtextResource it) -> {
+                Object _xblockexpression_3 = null;
+                {
+                  int _offset = ((ITextSelection)selection).getOffset();
+                  EObject _resolveElementAt = this._eObjectAtOffsetHelper.resolveElementAt(it, _offset);
+                  this.openHierarchy(_resolveElementAt, workbenchWindow);
+                  _xblockexpression_3 = null;
                 }
+                return _xblockexpression_3;
               };
               _xblockexpression_2 = _document.<Object>priorityReadOnly(_function);
             }

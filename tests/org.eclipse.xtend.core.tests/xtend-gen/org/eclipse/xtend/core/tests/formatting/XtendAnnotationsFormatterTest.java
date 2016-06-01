@@ -37,12 +37,9 @@ public class XtendAnnotationsFormatterTest extends AbstractXtendFormatterTest {
   
   @Test
   public void formatClassSingleAnnotationSL() {
-    final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
-      @Override
-      public void apply(final MapBasedPreferenceValues it) {
-        it.<Boolean>put(XbaseFormatterPreferenceKeys.newLineAfterClassAnnotations, Boolean.valueOf(false));
-        it.<Boolean>put(XbaseFormatterPreferenceKeys.preserveNewLines, Boolean.valueOf(true));
-      }
+    final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
+      it.<Boolean>put(XbaseFormatterPreferenceKeys.newLineAfterClassAnnotations, Boolean.valueOf(false));
+      it.<Boolean>put(XbaseFormatterPreferenceKeys.preserveNewLines, Boolean.valueOf(true));
     };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");
@@ -60,12 +57,9 @@ public class XtendAnnotationsFormatterTest extends AbstractXtendFormatterTest {
   
   @Test
   public void formatClassSingleAnnotationML1() {
-    final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
-      @Override
-      public void apply(final MapBasedPreferenceValues it) {
-        it.<Boolean>put(XbaseFormatterPreferenceKeys.newLineAfterClassAnnotations, Boolean.valueOf(false));
-        it.<Boolean>put(XbaseFormatterPreferenceKeys.preserveNewLines, Boolean.valueOf(true));
-      }
+    final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
+      it.<Boolean>put(XbaseFormatterPreferenceKeys.newLineAfterClassAnnotations, Boolean.valueOf(false));
+      it.<Boolean>put(XbaseFormatterPreferenceKeys.preserveNewLines, Boolean.valueOf(true));
     };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");
@@ -97,12 +91,9 @@ public class XtendAnnotationsFormatterTest extends AbstractXtendFormatterTest {
   
   @Test
   public void formatClassSingleAnnotationML2() {
-    final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
-      @Override
-      public void apply(final MapBasedPreferenceValues it) {
-        it.<Boolean>put(XbaseFormatterPreferenceKeys.newLineAfterClassAnnotations, Boolean.valueOf(true));
-        it.<Boolean>put(XbaseFormatterPreferenceKeys.preserveNewLines, Boolean.valueOf(true));
-      }
+    final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
+      it.<Boolean>put(XbaseFormatterPreferenceKeys.newLineAfterClassAnnotations, Boolean.valueOf(true));
+      it.<Boolean>put(XbaseFormatterPreferenceKeys.preserveNewLines, Boolean.valueOf(true));
     };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");
@@ -167,12 +158,9 @@ public class XtendAnnotationsFormatterTest extends AbstractXtendFormatterTest {
   
   @Test
   public void formatConstructorTwoAnnotations1() {
-    final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
-      @Override
-      public void apply(final MapBasedPreferenceValues it) {
-        it.<Boolean>put(XbaseFormatterPreferenceKeys.newLineAfterConstructorAnnotations, Boolean.valueOf(false));
-        it.<Boolean>put(XbaseFormatterPreferenceKeys.preserveNewLines, Boolean.valueOf(true));
-      }
+    final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
+      it.<Boolean>put(XbaseFormatterPreferenceKeys.newLineAfterConstructorAnnotations, Boolean.valueOf(false));
+      it.<Boolean>put(XbaseFormatterPreferenceKeys.preserveNewLines, Boolean.valueOf(true));
     };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("@Override");
@@ -188,12 +176,9 @@ public class XtendAnnotationsFormatterTest extends AbstractXtendFormatterTest {
   
   @Test
   public void formatConstructorTwoAnnotations2() {
-    final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
-      @Override
-      public void apply(final MapBasedPreferenceValues it) {
-        it.<Boolean>put(XbaseFormatterPreferenceKeys.newLineAfterConstructorAnnotations, Boolean.valueOf(true));
-        it.<Boolean>put(XbaseFormatterPreferenceKeys.preserveNewLines, Boolean.valueOf(true));
-      }
+    final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
+      it.<Boolean>put(XbaseFormatterPreferenceKeys.newLineAfterConstructorAnnotations, Boolean.valueOf(true));
+      it.<Boolean>put(XbaseFormatterPreferenceKeys.preserveNewLines, Boolean.valueOf(true));
     };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("@Override");
@@ -209,12 +194,9 @@ public class XtendAnnotationsFormatterTest extends AbstractXtendFormatterTest {
   
   @Test
   public void formatConstructorTwoAnnotationsSL1() {
-    final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
-      @Override
-      public void apply(final MapBasedPreferenceValues it) {
-        it.<Boolean>put(XbaseFormatterPreferenceKeys.newLineAfterConstructorAnnotations, Boolean.valueOf(false));
-        it.<Boolean>put(XbaseFormatterPreferenceKeys.preserveNewLines, Boolean.valueOf(false));
-      }
+    final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
+      it.<Boolean>put(XbaseFormatterPreferenceKeys.newLineAfterConstructorAnnotations, Boolean.valueOf(false));
+      it.<Boolean>put(XbaseFormatterPreferenceKeys.preserveNewLines, Boolean.valueOf(false));
     };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("@Override @Deprecated new() {");
@@ -235,12 +217,9 @@ public class XtendAnnotationsFormatterTest extends AbstractXtendFormatterTest {
   
   @Test
   public void formatConstructorTwoAnnotationsSL2() {
-    final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
-      @Override
-      public void apply(final MapBasedPreferenceValues it) {
-        it.<Boolean>put(XbaseFormatterPreferenceKeys.newLineAfterConstructorAnnotations, Boolean.valueOf(false));
-        it.<Boolean>put(XbaseFormatterPreferenceKeys.preserveNewLines, Boolean.valueOf(true));
-      }
+    final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
+      it.<Boolean>put(XbaseFormatterPreferenceKeys.newLineAfterConstructorAnnotations, Boolean.valueOf(false));
+      it.<Boolean>put(XbaseFormatterPreferenceKeys.preserveNewLines, Boolean.valueOf(true));
     };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("@Override @Deprecated new() {");
@@ -290,12 +269,9 @@ public class XtendAnnotationsFormatterTest extends AbstractXtendFormatterTest {
   
   @Test
   public void formatFieldTwoAnnotations1() {
-    final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
-      @Override
-      public void apply(final MapBasedPreferenceValues it) {
-        it.<Boolean>put(XbaseFormatterPreferenceKeys.newLineAfterFieldAnnotations, Boolean.valueOf(true));
-        it.<Boolean>put(XbaseFormatterPreferenceKeys.preserveNewLines, Boolean.valueOf(true));
-      }
+    final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
+      it.<Boolean>put(XbaseFormatterPreferenceKeys.newLineAfterFieldAnnotations, Boolean.valueOf(true));
+      it.<Boolean>put(XbaseFormatterPreferenceKeys.preserveNewLines, Boolean.valueOf(true));
     };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("@Override");
@@ -309,12 +285,9 @@ public class XtendAnnotationsFormatterTest extends AbstractXtendFormatterTest {
   
   @Test
   public void formatFieldTwoAnnotations2() {
-    final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
-      @Override
-      public void apply(final MapBasedPreferenceValues it) {
-        it.<Boolean>put(XbaseFormatterPreferenceKeys.newLineAfterFieldAnnotations, Boolean.valueOf(false));
-        it.<Boolean>put(XbaseFormatterPreferenceKeys.preserveNewLines, Boolean.valueOf(false));
-      }
+    final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
+      it.<Boolean>put(XbaseFormatterPreferenceKeys.newLineAfterFieldAnnotations, Boolean.valueOf(false));
+      it.<Boolean>put(XbaseFormatterPreferenceKeys.preserveNewLines, Boolean.valueOf(false));
     };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("@Override @Deprecated int value");
@@ -324,12 +297,9 @@ public class XtendAnnotationsFormatterTest extends AbstractXtendFormatterTest {
   
   @Test
   public void formatFieldSingleAnnotations1() {
-    final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
-      @Override
-      public void apply(final MapBasedPreferenceValues it) {
-        it.<Boolean>put(XbaseFormatterPreferenceKeys.newLineAfterFieldAnnotations, Boolean.valueOf(true));
-        it.<Boolean>put(XbaseFormatterPreferenceKeys.preserveNewLines, Boolean.valueOf(true));
-      }
+    final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
+      it.<Boolean>put(XbaseFormatterPreferenceKeys.newLineAfterFieldAnnotations, Boolean.valueOf(true));
+      it.<Boolean>put(XbaseFormatterPreferenceKeys.preserveNewLines, Boolean.valueOf(true));
     };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("@Override");
@@ -341,12 +311,9 @@ public class XtendAnnotationsFormatterTest extends AbstractXtendFormatterTest {
   
   @Test
   public void formatFieldSingleAnnotations2() {
-    final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
-      @Override
-      public void apply(final MapBasedPreferenceValues it) {
-        it.<Boolean>put(XbaseFormatterPreferenceKeys.newLineAfterFieldAnnotations, Boolean.valueOf(false));
-        it.<Boolean>put(XbaseFormatterPreferenceKeys.preserveNewLines, Boolean.valueOf(false));
-      }
+    final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
+      it.<Boolean>put(XbaseFormatterPreferenceKeys.newLineAfterFieldAnnotations, Boolean.valueOf(false));
+      it.<Boolean>put(XbaseFormatterPreferenceKeys.preserveNewLines, Boolean.valueOf(false));
     };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("@Override int value");
@@ -356,12 +323,9 @@ public class XtendAnnotationsFormatterTest extends AbstractXtendFormatterTest {
   
   @Test
   public void formatMethodTwoAnnotations1() {
-    final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
-      @Override
-      public void apply(final MapBasedPreferenceValues it) {
-        it.<Boolean>put(XbaseFormatterPreferenceKeys.newLineAfterMethodAnnotations, Boolean.valueOf(true));
-        it.<Boolean>put(XbaseFormatterPreferenceKeys.preserveNewLines, Boolean.valueOf(true));
-      }
+    final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
+      it.<Boolean>put(XbaseFormatterPreferenceKeys.newLineAfterMethodAnnotations, Boolean.valueOf(true));
+      it.<Boolean>put(XbaseFormatterPreferenceKeys.preserveNewLines, Boolean.valueOf(true));
     };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("@Override");
@@ -377,12 +341,9 @@ public class XtendAnnotationsFormatterTest extends AbstractXtendFormatterTest {
   
   @Test
   public void formatMethodTwoAnnotations2() {
-    final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
-      @Override
-      public void apply(final MapBasedPreferenceValues it) {
-        it.<Boolean>put(XbaseFormatterPreferenceKeys.newLineAfterMethodAnnotations, Boolean.valueOf(true));
-        it.<Boolean>put(XbaseFormatterPreferenceKeys.preserveNewLines, Boolean.valueOf(false));
-      }
+    final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
+      it.<Boolean>put(XbaseFormatterPreferenceKeys.newLineAfterMethodAnnotations, Boolean.valueOf(true));
+      it.<Boolean>put(XbaseFormatterPreferenceKeys.preserveNewLines, Boolean.valueOf(false));
     };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("@Override");
@@ -398,12 +359,9 @@ public class XtendAnnotationsFormatterTest extends AbstractXtendFormatterTest {
   
   @Test
   public void formatMethodTwoAnnotations3() {
-    final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
-      @Override
-      public void apply(final MapBasedPreferenceValues it) {
-        it.<Boolean>put(XbaseFormatterPreferenceKeys.newLineAfterMethodAnnotations, Boolean.valueOf(false));
-        it.<Boolean>put(XbaseFormatterPreferenceKeys.preserveNewLines, Boolean.valueOf(true));
-      }
+    final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
+      it.<Boolean>put(XbaseFormatterPreferenceKeys.newLineAfterMethodAnnotations, Boolean.valueOf(false));
+      it.<Boolean>put(XbaseFormatterPreferenceKeys.preserveNewLines, Boolean.valueOf(true));
     };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("@Override");
@@ -419,12 +377,9 @@ public class XtendAnnotationsFormatterTest extends AbstractXtendFormatterTest {
   
   @Test
   public void formatMethodTwoAnnotations4() {
-    final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
-      @Override
-      public void apply(final MapBasedPreferenceValues it) {
-        it.<Boolean>put(XbaseFormatterPreferenceKeys.newLineAfterMethodAnnotations, Boolean.valueOf(false));
-        it.<Boolean>put(XbaseFormatterPreferenceKeys.preserveNewLines, Boolean.valueOf(false));
-      }
+    final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
+      it.<Boolean>put(XbaseFormatterPreferenceKeys.newLineAfterMethodAnnotations, Boolean.valueOf(false));
+      it.<Boolean>put(XbaseFormatterPreferenceKeys.preserveNewLines, Boolean.valueOf(false));
     };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("@Override @Deprecated def foo() {");
@@ -460,12 +415,9 @@ public class XtendAnnotationsFormatterTest extends AbstractXtendFormatterTest {
   
   @Test
   public void formatMethodParameterTwoAnnotations1() {
-    final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
-      @Override
-      public void apply(final MapBasedPreferenceValues it) {
-        it.<Boolean>put(XbaseFormatterPreferenceKeys.newLineAfterParameterAnnotations, Boolean.valueOf(false));
-        it.<Boolean>put(XbaseFormatterPreferenceKeys.preserveNewLines, Boolean.valueOf(true));
-      }
+    final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
+      it.<Boolean>put(XbaseFormatterPreferenceKeys.newLineAfterParameterAnnotations, Boolean.valueOf(false));
+      it.<Boolean>put(XbaseFormatterPreferenceKeys.preserveNewLines, Boolean.valueOf(true));
     };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("def foo(@Override @Deprecated String p) {");
@@ -481,12 +433,9 @@ public class XtendAnnotationsFormatterTest extends AbstractXtendFormatterTest {
   @Ignore
   @Test
   public void formatMethodParameterTwoAnnotations2() {
-    final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
-      @Override
-      public void apply(final MapBasedPreferenceValues it) {
-        it.<Boolean>put(XbaseFormatterPreferenceKeys.newLineAfterParameterAnnotations, Boolean.valueOf(true));
-        it.<Boolean>put(XbaseFormatterPreferenceKeys.preserveNewLines, Boolean.valueOf(true));
-      }
+    final Procedure1<MapBasedPreferenceValues> _function = (MapBasedPreferenceValues it) -> {
+      it.<Boolean>put(XbaseFormatterPreferenceKeys.newLineAfterParameterAnnotations, Boolean.valueOf(true));
+      it.<Boolean>put(XbaseFormatterPreferenceKeys.preserveNewLines, Boolean.valueOf(true));
     };
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("def foo(");

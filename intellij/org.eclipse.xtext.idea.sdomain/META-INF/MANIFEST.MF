@@ -12,7 +12,7 @@ Require-Bundle: org.eclipse.xtext;visibility:=reexport,
  org.eclipse.xtext.xbase.lib,
  org.antlr.runtime
 Import-Package: org.apache.log4j
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.eclipse.xtext.idea.sdomain,
  org.eclipse.xtext.idea.sdomain.formatting,
  org.eclipse.xtext.idea.sdomain.generator,

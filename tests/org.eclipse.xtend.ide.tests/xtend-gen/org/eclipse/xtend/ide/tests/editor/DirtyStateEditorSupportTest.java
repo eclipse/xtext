@@ -102,17 +102,14 @@ public class DirtyStateEditorSupportTest extends AbstractXtendUITestCase {
       this.assertHasNoErrors(c1Editor);
       this.assertHasNoErrors(c2Editor);
       final int staticOffset = model.indexOf("static");
-      final Runnable _function = new Runnable() {
-        @Override
-        public void run() {
-          try {
-            IXtextDocument _document = c1Editor.getDocument();
-            _document.replace(staticOffset, 0, "// ");
-            DirtyStateEditorSupportTest.this._syncUtil.waitForReconciler(c1Editor);
-            DirtyStateEditorSupportTest.this.assertHasErrors(c2Editor, "A.B cannot be resolved to a type.");
-          } catch (Throwable _e) {
-            throw Exceptions.sneakyThrow(_e);
-          }
+      final Runnable _function = () -> {
+        try {
+          IXtextDocument _document = c1Editor.getDocument();
+          _document.replace(staticOffset, 0, "// ");
+          this._syncUtil.waitForReconciler(c1Editor);
+          this.assertHasErrors(c2Editor, "A.B cannot be resolved to a type.");
+        } catch (Throwable _e) {
+          throw Exceptions.sneakyThrow(_e);
         }
       };
       LoggingTester.LogCapture _captureLogging = LoggingTester.captureLogging(Level.ERROR, XtextDocument.class, _function);
@@ -230,25 +227,19 @@ public class DirtyStateEditorSupportTest extends AbstractXtendUITestCase {
   }
   
   private void assertHasErrors(final XtextEditor editor, final String... messages) {
-    final Function0<Boolean> _function = new Function0<Boolean>() {
-      @Override
-      public Boolean apply() {
-        List<Annotation> _errorAnnotations = DirtyStateEditorSupportTest.this.getErrorAnnotations(editor);
-        int _size = _errorAnnotations.size();
-        return Boolean.valueOf((_size > 0));
-      }
+    final Function0<Boolean> _function = () -> {
+      List<Annotation> _errorAnnotations = this.getErrorAnnotations(editor);
+      int _size = _errorAnnotations.size();
+      return Boolean.valueOf((_size > 0));
     };
     this._workbenchTestHelper.awaitUIUpdate(_function, DirtyStateEditorSupportTest.VALIDATION_TIMEOUT);
     final List<Annotation> errors = this.getErrorAnnotations(editor);
-    final Function1<Annotation, String> _function_1 = new Function1<Annotation, String>() {
-      @Override
-      public String apply(final Annotation it) {
-        String _text = it.getText();
-        String _plus = (_text + "(");
-        boolean _isPersistent = it.isPersistent();
-        String _plus_1 = (_plus + Boolean.valueOf(_isPersistent));
-        return (_plus_1 + ")");
-      }
+    final Function1<Annotation, String> _function_1 = (Annotation it) -> {
+      String _text = it.getText();
+      String _plus = (_text + "(");
+      boolean _isPersistent = it.isPersistent();
+      String _plus_1 = (_plus + Boolean.valueOf(_isPersistent));
+      return (_plus_1 + ")");
     };
     List<String> _map = ListExtensions.<Annotation, String>map(errors, _function_1);
     String _join = IterableExtensions.join(_map, ", ");
@@ -256,11 +247,8 @@ public class DirtyStateEditorSupportTest extends AbstractXtendUITestCase {
     boolean _greaterThan = (_size > 0);
     Assert.assertTrue(_join, _greaterThan);
     if ((messages != null)) {
-      final Function1<Annotation, String> _function_2 = new Function1<Annotation, String>() {
-        @Override
-        public String apply(final Annotation it) {
-          return it.getText();
-        }
+      final Function1<Annotation, String> _function_2 = (Annotation it) -> {
+        return it.getText();
       };
       List<String> _map_1 = ListExtensions.<Annotation, String>map(errors, _function_2);
       final Set<String> actualErrors = IterableExtensions.<String>toSet(_map_1);
@@ -270,25 +258,19 @@ public class DirtyStateEditorSupportTest extends AbstractXtendUITestCase {
   }
   
   private void assertHasNoErrors(final XtextEditor editor) {
-    final Function0<Boolean> _function = new Function0<Boolean>() {
-      @Override
-      public Boolean apply() {
-        List<Annotation> _errorAnnotations = DirtyStateEditorSupportTest.this.getErrorAnnotations(editor);
-        int _size = _errorAnnotations.size();
-        return Boolean.valueOf((_size == 0));
-      }
+    final Function0<Boolean> _function = () -> {
+      List<Annotation> _errorAnnotations = this.getErrorAnnotations(editor);
+      int _size = _errorAnnotations.size();
+      return Boolean.valueOf((_size == 0));
     };
     this._workbenchTestHelper.awaitUIUpdate(_function, DirtyStateEditorSupportTest.VALIDATION_TIMEOUT);
     final List<Annotation> errors = this.getErrorAnnotations(editor);
-    final Function1<Annotation, String> _function_1 = new Function1<Annotation, String>() {
-      @Override
-      public String apply(final Annotation it) {
-        String _text = it.getText();
-        String _plus = (_text + "(");
-        boolean _isPersistent = it.isPersistent();
-        String _plus_1 = (_plus + Boolean.valueOf(_isPersistent));
-        return (_plus_1 + ")");
-      }
+    final Function1<Annotation, String> _function_1 = (Annotation it) -> {
+      String _text = it.getText();
+      String _plus = (_text + "(");
+      boolean _isPersistent = it.isPersistent();
+      String _plus_1 = (_plus + Boolean.valueOf(_isPersistent));
+      return (_plus_1 + ")");
     };
     List<String> _map = ListExtensions.<Annotation, String>map(errors, _function_1);
     String _join = IterableExtensions.join(_map, ", ");
@@ -303,12 +285,9 @@ public class DirtyStateEditorSupportTest extends AbstractXtendUITestCase {
     IAnnotationModel _annotationModel = _documentProvider.getAnnotationModel(_editorInput);
     Iterator _annotationIterator = _annotationModel.getAnnotationIterator();
     Iterator<Annotation> _filter = Iterators.<Annotation>filter(_annotationIterator, Annotation.class);
-    final Function1<Annotation, Boolean> _function = new Function1<Annotation, Boolean>() {
-      @Override
-      public Boolean apply(final Annotation it) {
-        String _type = it.getType();
-        return Boolean.valueOf(Objects.equal(_type, "org.eclipse.xtext.ui.editor.error"));
-      }
+    final Function1<Annotation, Boolean> _function = (Annotation it) -> {
+      String _type = it.getType();
+      return Boolean.valueOf(Objects.equal(_type, "org.eclipse.xtext.ui.editor.error"));
     };
     Iterator<Annotation> _filter_1 = IteratorExtensions.<Annotation>filter(_filter, _function);
     return IteratorExtensions.<Annotation>toList(_filter_1);

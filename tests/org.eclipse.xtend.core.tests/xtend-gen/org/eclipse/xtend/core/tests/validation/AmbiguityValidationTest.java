@@ -9,6 +9,7 @@ package org.eclipse.xtend.core.tests.validation;
 
 import com.google.inject.Inject;
 import java.util.List;
+import java.util.function.Consumer;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -30,7 +31,6 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.computation.IAmbiguousLinkingCandidate;
@@ -67,25 +67,19 @@ public abstract class AmbiguityValidationTest extends AbstractXtendTestCase {
     String _message = singleError.getMessage();
     String _code = singleError.getCode();
     Assert.assertEquals(_message, IssueCodes.AMBIGUOUS_FEATURE_CALL, _code);
-    final Function1<String, String> _function = new Function1<String, String>() {
-      @Override
-      public String apply(final String it) {
-        return LineDelimiters.toUnix(it);
-      }
+    final Function1<String, String> _function = (String it) -> {
+      return LineDelimiters.toUnix(it);
     };
     List<String> _map = ListExtensions.<String, String>map(((List<String>)Conversions.doWrapArray(messageParts)), _function);
-    final Procedure1<String> _function_1 = new Procedure1<String>() {
-      @Override
-      public void apply(final String it) {
-        final String message = singleError.getMessage();
-        boolean _contains = message.contains(it);
-        boolean _not = (!_contains);
-        if (_not) {
-          Assert.assertEquals(it, message);
-        }
+    final Consumer<String> _function_1 = (String it) -> {
+      final String message = singleError.getMessage();
+      boolean _contains = message.contains(it);
+      boolean _not = (!_contains);
+      if (_not) {
+        Assert.assertEquals(it, message);
       }
     };
-    IterableExtensions.<String>forEach(_map, _function_1);
+    _map.forEach(_function_1);
     EList<XtendTypeDeclaration> _xtendTypes = file.getXtendTypes();
     final XtendTypeDeclaration firstType = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
     EList<XtendMember> _members = firstType.getMembers();

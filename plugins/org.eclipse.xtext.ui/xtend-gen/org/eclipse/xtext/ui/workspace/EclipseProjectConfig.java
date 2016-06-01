@@ -52,12 +52,9 @@ public class EclipseProjectConfig implements IProjectConfig {
   @Override
   public ISourceFolder findSourceFolderContaining(final URI member) {
     Set<? extends ISourceFolder> _sourceFolders = this.getSourceFolders();
-    final Function1<ISourceFolder, Boolean> _function = new Function1<ISourceFolder, Boolean>() {
-      @Override
-      public Boolean apply(final ISourceFolder folder) {
-        URI _path = folder.getPath();
-        return Boolean.valueOf(UriUtil.isPrefixOf(_path, member));
-      }
+    final Function1<ISourceFolder, Boolean> _function = (ISourceFolder folder) -> {
+      URI _path = folder.getPath();
+      return Boolean.valueOf(UriUtil.isPrefixOf(_path, member));
     };
     return IterableExtensions.findFirst(_sourceFolders, _function);
   }

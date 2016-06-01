@@ -17,6 +17,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 import java.util.jar.Attributes;
 import java.util.jar.JarFile;
 import java.util.jar.Manifest;
@@ -66,10 +68,8 @@ import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.MapExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 @SuppressWarnings("all")
@@ -152,11 +152,8 @@ public class StandaloneBuilder {
    */
   public boolean launch() {
     Collection<LanguageAccess> _values = this.languages.values();
-    final Function1<LanguageAccess, Boolean> _function = new Function1<LanguageAccess, Boolean>() {
-      @Override
-      public Boolean apply(final LanguageAccess it) {
-        return Boolean.valueOf(it.isLinksAgainstJava());
-      }
+    final Function1<LanguageAccess, Boolean> _function = (LanguageAccess it) -> {
+      return Boolean.valueOf(it.isLinksAgainstJava());
     };
     final boolean needsJava = IterableExtensions.<LanguageAccess>exists(_values, _function);
     boolean _equals = Objects.equal(this.baseDir, null);
@@ -182,12 +179,9 @@ public class StandaloneBuilder {
     if (_notEquals_1) {
       StandaloneBuilder.LOG.info("Class path look up filter is active.");
       final Pattern cpLookUpFilter = Pattern.compile(this.classPathLookUpFilter);
-      final Function1<String, Boolean> _function_1 = new Function1<String, Boolean>() {
-        @Override
-        public Boolean apply(final String root) {
-          Matcher _matcher = cpLookUpFilter.matcher(root);
-          return Boolean.valueOf(_matcher.matches());
-        }
+      final Function1<String, Boolean> _function_1 = (String root) -> {
+        Matcher _matcher = cpLookUpFilter.matcher(root);
+        return Boolean.valueOf(_matcher.matches());
       };
       Iterable<String> _filter = IterableExtensions.<String>filter(this.classPathEntries, _function_1);
       rootsToTravers = _filter;
@@ -220,18 +214,15 @@ public class StandaloneBuilder {
       {
         StandaloneBuilder.LOG.info("Clustering configured.");
         DynamicResourceClusteringPolicy _dynamicResourceClusteringPolicy = new DynamicResourceClusteringPolicy();
-        final Procedure1<DynamicResourceClusteringPolicy> _function_2 = new Procedure1<DynamicResourceClusteringPolicy>() {
-          @Override
-          public void apply(final DynamicResourceClusteringPolicy it) {
-            long _minimumFreeMemory = StandaloneBuilder.this.clusteringConfig.getMinimumFreeMemory();
-            long _multiply = (_minimumFreeMemory * 1024);
-            long _multiply_1 = (_multiply * 1024);
-            it.setMinimumFreeMemory(_multiply_1);
-            int _minimumClusterSize = StandaloneBuilder.this.clusteringConfig.getMinimumClusterSize();
-            it.setMinimumClusterSize(_minimumClusterSize);
-            long _minimumPercentFreeMemory = StandaloneBuilder.this.clusteringConfig.getMinimumPercentFreeMemory();
-            it.setMinimumPercentFreeMemory(_minimumPercentFreeMemory);
-          }
+        final Procedure1<DynamicResourceClusteringPolicy> _function_2 = (DynamicResourceClusteringPolicy it) -> {
+          long _minimumFreeMemory = this.clusteringConfig.getMinimumFreeMemory();
+          long _multiply = (_minimumFreeMemory * 1024);
+          long _multiply_1 = (_multiply * 1024);
+          it.setMinimumFreeMemory(_multiply_1);
+          int _minimumClusterSize = this.clusteringConfig.getMinimumClusterSize();
+          it.setMinimumClusterSize(_minimumClusterSize);
+          long _minimumPercentFreeMemory = this.clusteringConfig.getMinimumPercentFreeMemory();
+          it.setMinimumPercentFreeMemory(_minimumPercentFreeMemory);
         };
         _xblockexpression = ObjectExtensions.<DynamicResourceClusteringPolicy>operator_doubleArrow(_dynamicResourceClusteringPolicy, _function_2);
       }
@@ -373,12 +364,9 @@ public class StandaloneBuilder {
   }
   
   protected Set<String> uniqueEntries(final Iterable<String> pathes) {
-    final Function1<String, String> _function = new Function1<String, String>() {
-      @Override
-      public String apply(final String it) {
-        File _file = new File(it);
-        return _file.getAbsolutePath();
-      }
+    final Function1<String, String> _function = (String it) -> {
+      File _file = new File(it);
+      return _file.getAbsolutePath();
     };
     Iterable<String> _map = IterableExtensions.<String, String>map(pathes, _function);
     return IterableExtensions.<String>toSet(_map);
@@ -395,24 +383,18 @@ public class StandaloneBuilder {
     }
     String _absolutePath_1 = stubsDir.getAbsolutePath();
     this.commonFileAccess.setOutputPath(IFileSystemAccess.DEFAULT_OUTPUT, _absolutePath_1);
-    final Function1<URI, Boolean> _function = new Function1<URI, Boolean>() {
-      @Override
-      public Boolean apply(final URI it) {
-        LanguageAccess _languageAccess = StandaloneBuilder.this.languageAccess(it);
-        return Boolean.valueOf(_languageAccess.isLinksAgainstJava());
-      }
+    final Function1<URI, Boolean> _function = (URI it) -> {
+      LanguageAccess _languageAccess = this.languageAccess(it);
+      return Boolean.valueOf(_languageAccess.isLinksAgainstJava());
     };
     final Iterable<URI> generateStubs = IterableExtensions.<URI>filter(sourceResourceURIs, _function);
-    final Procedure1<URI> _function_1 = new Procedure1<URI>() {
-      @Override
-      public void apply(final URI it) {
-        LanguageAccess _languageAccess = StandaloneBuilder.this.languageAccess(it);
-        IStubGenerator _stubGenerator = _languageAccess.getStubGenerator();
-        IResourceDescription _resourceDescription = data.getResourceDescription(it);
-        _stubGenerator.doGenerateStubs(StandaloneBuilder.this.commonFileAccess, _resourceDescription);
-      }
+    final Consumer<URI> _function_1 = (URI it) -> {
+      LanguageAccess _languageAccess = this.languageAccess(it);
+      IStubGenerator _stubGenerator = _languageAccess.getStubGenerator();
+      IResourceDescription _resourceDescription = data.getResourceDescription(it);
+      _stubGenerator.doGenerateStubs(this.commonFileAccess, _resourceDescription);
     };
-    IterableExtensions.<URI>forEach(generateStubs, _function_1);
+    generateStubs.forEach(_function_1);
     return stubsDir;
   }
   
@@ -466,19 +448,13 @@ public class StandaloneBuilder {
   protected void registerCurrentSource(final URI uri) {
     LanguageAccess _languageAccess = this.languageAccess(uri);
     final JavaIoFileSystemAccess fsa = this.getFileSystemAccess(_languageAccess);
-    final Function1<String, URI> _function = new Function1<String, URI>() {
-      @Override
-      public URI apply(final String it) {
-        File _file = new File(it);
-        return UriUtil.createFolderURI(_file);
-      }
+    final Function1<String, URI> _function = (String it) -> {
+      File _file = new File(it);
+      return UriUtil.createFolderURI(_file);
     };
     Iterable<URI> _map = IterableExtensions.<String, URI>map(this.sourceDirs, _function);
-    final Function1<URI, Boolean> _function_1 = new Function1<URI, Boolean>() {
-      @Override
-      public Boolean apply(final URI it) {
-        return Boolean.valueOf(UriUtil.isPrefixOf(it, uri));
-      }
+    final Function1<URI, Boolean> _function_1 = (URI it) -> {
+      return Boolean.valueOf(UriUtil.isPrefixOf(it, uri));
     };
     final URI absoluteSource = IterableExtensions.<URI>findFirst(_map, _function_1);
     boolean _equals = Objects.equal(absoluteSource, null);
@@ -561,16 +537,13 @@ public class StandaloneBuilder {
   }
   
   private URLClassLoader createURLClassLoader(final Iterable<String> classPathEntries) {
-    final Function1<String, URL> _function = new Function1<String, URL>() {
-      @Override
-      public URL apply(final String str) {
-        try {
-          File _file = new File(str);
-          java.net.URI _uRI = _file.toURI();
-          return _uRI.toURL();
-        } catch (Throwable _e) {
-          throw Exceptions.sneakyThrow(_e);
-        }
+    final Function1<String, URL> _function = (String str) -> {
+      try {
+        File _file = new File(str);
+        java.net.URI _uRI = _file.toURI();
+        return _uRI.toURL();
+      } catch (Throwable _e) {
+        throw Exceptions.sneakyThrow(_e);
       }
     };
     final Iterable<URL> classPathUrls = IterableExtensions.<String, URL>map(classPathEntries, _function);
@@ -585,29 +558,23 @@ public class StandaloneBuilder {
     final List<URI> resources = CollectionLiterals.<URI>newArrayList();
     PathTraverser _pathTraverser = new PathTraverser();
     List<String> _list = IterableExtensions.<String>toList(roots);
-    final Predicate<URI> _function = new Predicate<URI>() {
-      @Override
-      public boolean apply(final URI input) {
-        final boolean matches = nameBasedFilter.matches(input);
-        if (matches) {
-          StandaloneBuilder.this.forceDebugLog((("Adding file \'" + input) + "\'"));
-          resources.add(input);
-        }
-        return matches;
+    final Predicate<URI> _function = (URI input) -> {
+      final boolean matches = nameBasedFilter.matches(input);
+      if (matches) {
+        this.forceDebugLog((("Adding file \'" + input) + "\'"));
+        resources.add(input);
       }
+      return matches;
     };
     final Multimap<String, URI> modelsFound = _pathTraverser.resolvePathes(_list, _function);
     Map<String, Collection<URI>> _asMap = modelsFound.asMap();
-    final Procedure2<String, Collection<URI>> _function_1 = new Procedure2<String, Collection<URI>>() {
-      @Override
-      public void apply(final String uri, final Collection<URI> resource) {
-        final File file = new File(uri);
-        if ((((!Objects.equal(resource, null)) && (!file.isDirectory())) && file.getName().endsWith(".jar"))) {
-          StandaloneBuilder.this.registerBundle(file);
-        }
+    final BiConsumer<String, Collection<URI>> _function_1 = (String uri, Collection<URI> resource) -> {
+      final File file = new File(uri);
+      if ((((!Objects.equal(resource, null)) && (!file.isDirectory())) && file.getName().endsWith(".jar"))) {
+        this.registerBundle(file);
       }
     };
-    MapExtensions.<String, Collection<URI>>forEach(_asMap, _function_1);
+    _asMap.forEach(_function_1);
     return resources;
   }
   

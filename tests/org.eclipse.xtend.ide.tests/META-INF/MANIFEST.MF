@@ -4,7 +4,7 @@ Bundle-Name: Xtend UI Tests
 Bundle-SymbolicName: org.eclipse.xtend.ide.tests
 Bundle-Version: 2.11.0.qualifier
 Bundle-Vendor: Eclipse Modeling
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Require-Bundle: org.eclipse.xtend.core,
  org.eclipse.xtext.junit4,
  org.eclipse.xtext,

@@ -162,12 +162,9 @@ public class TypeReference {
       int _length = ((Object[])Conversions.unwrapArray(segments, Object.class)).length;
       int _minus = (_length - 1);
       final List<String> packageSegments = segments.subList(0, _minus);
-      final Function1<String, Boolean> _function = new Function1<String, Boolean>() {
-        @Override
-        public Boolean apply(final String it) {
-          char _charAt = it.charAt(0);
-          return Boolean.valueOf(Character.isUpperCase(_charAt));
-        }
+      final Function1<String, Boolean> _function = (String it) -> {
+        char _charAt = it.charAt(0);
+        return Boolean.valueOf(Character.isUpperCase(_charAt));
       };
       Iterable<String> _filter = IterableExtensions.<String>filter(packageSegments, _function);
       boolean _isEmpty = IterableExtensions.isEmpty(_filter);
@@ -250,11 +247,8 @@ public class TypeReference {
   @Override
   public String toString() {
     String _name = this.getName();
-    final Function1<TypeReference, CharSequence> _function = new Function1<TypeReference, CharSequence>() {
-      @Override
-      public CharSequence apply(final TypeReference it) {
-        return it.toString();
-      }
+    final Function1<TypeReference, CharSequence> _function = (TypeReference it) -> {
+      return it.toString();
     };
     String _join = IterableExtensions.<TypeReference>join(this.typeArguments, "<", ", ", ">", _function);
     return (_name + _join);

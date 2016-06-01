@@ -365,14 +365,11 @@ public class UIResourceChangeRegistry implements IResourceChangeListener, IResou
   private void forgetBuildState() {
     IWorkspaceRoot _root = this.workspace.getRoot();
     IProject[] _projects = _root.getProjects();
-    final Function1<IProject, Boolean> _function = new Function1<IProject, Boolean>() {
-      @Override
-      public Boolean apply(final IProject it) {
-        try {
-          return Boolean.valueOf(((it.isAccessible() && it.hasNature(XtextProjectHelper.NATURE_ID)) && it.hasNature(JavaCore.NATURE_ID)));
-        } catch (Throwable _e) {
-          throw Exceptions.sneakyThrow(_e);
-        }
+    final Function1<IProject, Boolean> _function = (IProject it) -> {
+      try {
+        return Boolean.valueOf(((it.isAccessible() && it.hasNature(XtextProjectHelper.NATURE_ID)) && it.hasNature(JavaCore.NATURE_ID)));
+      } catch (Throwable _e) {
+        throw Exceptions.sneakyThrow(_e);
       }
     };
     final Iterable<IProject> projects = IterableExtensions.<IProject>filter(((Iterable<IProject>)Conversions.doWrapArray(_projects)), _function);

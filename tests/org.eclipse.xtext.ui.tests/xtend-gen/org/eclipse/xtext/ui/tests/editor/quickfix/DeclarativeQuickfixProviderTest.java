@@ -11,7 +11,6 @@ import com.google.common.base.Objects;
 import com.google.inject.Provider;
 import java.util.List;
 import org.eclipse.xtext.ui.editor.model.edit.IModification;
-import org.eclipse.xtext.ui.editor.model.edit.IModificationContext;
 import org.eclipse.xtext.ui.editor.model.edit.IssueModificationContext;
 import org.eclipse.xtext.ui.editor.quickfix.AbstractDeclarativeQuickfixProvider;
 import org.eclipse.xtext.ui.editor.quickfix.Fix;
@@ -68,17 +67,11 @@ public class DeclarativeQuickfixProviderTest extends Assert {
         acceptor.accept(i, "fixError2", "", "", IModification.NULL);
       }
     };
-    final Provider<IssueResolutionAcceptor> _function = new Provider<IssueResolutionAcceptor>() {
-      @Override
-      public IssueResolutionAcceptor get() {
-        final IssueModificationContext.Factory _function = new IssueModificationContext.Factory() {
-          @Override
-          public IModificationContext createModificationContext(final Issue it) {
-            return null;
-          }
-        };
-        return new IssueResolutionAcceptor(_function);
-      }
+    final Provider<IssueResolutionAcceptor> _function = () -> {
+      final IssueModificationContext.Factory _function_1 = (Issue it) -> {
+        return null;
+      };
+      return new IssueResolutionAcceptor(_function_1);
     };
     provider.setIssueResolutionAcceptorProvider(_function);
     Issue _createIssue = this.createIssue((DeclarativeQuickfixProviderTest.DUMMY_CODE + Integer.valueOf(1)));
@@ -89,21 +82,15 @@ public class DeclarativeQuickfixProviderTest extends Assert {
     List<IssueResolution> resolutions = provider.getResolutions(_createIssue_1);
     int _size = resolutions.size();
     Assert.assertEquals(2, _size);
-    final Function1<IssueResolution, Boolean> _function_1 = new Function1<IssueResolution, Boolean>() {
-      @Override
-      public Boolean apply(final IssueResolution it) {
-        String _label = it.getLabel();
-        return Boolean.valueOf(Objects.equal(_label, "fixError1"));
-      }
+    final Function1<IssueResolution, Boolean> _function_1 = (IssueResolution it) -> {
+      String _label = it.getLabel();
+      return Boolean.valueOf(Objects.equal(_label, "fixError1"));
     };
     boolean _exists = IterableExtensions.<IssueResolution>exists(resolutions, _function_1);
     Assert.assertTrue(_exists);
-    final Function1<IssueResolution, Boolean> _function_2 = new Function1<IssueResolution, Boolean>() {
-      @Override
-      public Boolean apply(final IssueResolution it) {
-        String _label = it.getLabel();
-        return Boolean.valueOf(Objects.equal(_label, "fixError2"));
-      }
+    final Function1<IssueResolution, Boolean> _function_2 = (IssueResolution it) -> {
+      String _label = it.getLabel();
+      return Boolean.valueOf(Objects.equal(_label, "fixError2"));
     };
     boolean _exists_1 = IterableExtensions.<IssueResolution>exists(resolutions, _function_2);
     Assert.assertTrue(_exists_1);
@@ -111,11 +98,8 @@ public class DeclarativeQuickfixProviderTest extends Assert {
   
   protected Issue createIssue(final String code) {
     Issue.IssueImpl _issueImpl = new Issue.IssueImpl();
-    final Procedure1<Issue.IssueImpl> _function = new Procedure1<Issue.IssueImpl>() {
-      @Override
-      public void apply(final Issue.IssueImpl it) {
-        it.setCode(code);
-      }
+    final Procedure1<Issue.IssueImpl> _function = (Issue.IssueImpl it) -> {
+      it.setCode(code);
     };
     return ObjectExtensions.<Issue.IssueImpl>operator_doubleArrow(_issueImpl, _function);
   }

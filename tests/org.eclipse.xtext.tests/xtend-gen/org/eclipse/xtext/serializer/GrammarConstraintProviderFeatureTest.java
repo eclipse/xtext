@@ -172,23 +172,17 @@ public class GrammarConstraintProviderFeatureTest {
       this.validator.assertNoErrors(grammar);
       Map<ISerializationContext, IGrammarConstraintProvider.IConstraint> _constraints = this.constraintProvider.getConstraints(grammar);
       final Collection<IGrammarConstraintProvider.IConstraint> constraints = _constraints.values();
-      final Function1<IGrammarConstraintProvider.IConstraint, String> _function = new Function1<IGrammarConstraintProvider.IConstraint, String>() {
-        @Override
-        public String apply(final IGrammarConstraintProvider.IConstraint it) {
-          String _name = it.getName();
-          String _plus = (_name + "{\n  ");
-          IGrammarConstraintProvider.IFeatureInfo[] _features = it.getFeatures();
-          final Function1<IGrammarConstraintProvider.IFeatureInfo, String> _function = new Function1<IGrammarConstraintProvider.IFeatureInfo, String>() {
-            @Override
-            public String apply(final IGrammarConstraintProvider.IFeatureInfo it) {
-              return GrammarConstraintProviderFeatureTest.this.asString(it);
-            }
-          };
-          List<String> _map = ListExtensions.<IGrammarConstraintProvider.IFeatureInfo, String>map(((List<IGrammarConstraintProvider.IFeatureInfo>)Conversions.doWrapArray(_features)), _function);
-          String _join = IterableExtensions.join(_map, "\n  ");
-          String _plus_1 = (_plus + _join);
-          return (_plus_1 + "\n}");
-        }
+      final Function1<IGrammarConstraintProvider.IConstraint, String> _function = (IGrammarConstraintProvider.IConstraint it) -> {
+        String _name = it.getName();
+        String _plus = (_name + "{\n  ");
+        IGrammarConstraintProvider.IFeatureInfo[] _features = it.getFeatures();
+        final Function1<IGrammarConstraintProvider.IFeatureInfo, String> _function_1 = (IGrammarConstraintProvider.IFeatureInfo it_1) -> {
+          return this.asString(it_1);
+        };
+        List<String> _map = ListExtensions.<IGrammarConstraintProvider.IFeatureInfo, String>map(((List<IGrammarConstraintProvider.IFeatureInfo>)Conversions.doWrapArray(_features)), _function_1);
+        String _join = IterableExtensions.join(_map, "\n  ");
+        String _plus_1 = (_plus + _join);
+        return (_plus_1 + "\n}");
       };
       Iterable<String> _map = IterableExtensions.<IGrammarConstraintProvider.IConstraint, String>map(constraints, _function);
       String _join = IterableExtensions.join(_map, "\n");

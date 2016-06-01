@@ -82,12 +82,9 @@ public class Java8TypeProviderTest {
   protected void doTestMethods(final JvmGenericType intf) {
     EList<JvmMember> _members = intf.getMembers();
     Iterable<JvmOperation> _filter = Iterables.<JvmOperation>filter(_members, JvmOperation.class);
-    final Function1<JvmOperation, Boolean> _function = new Function1<JvmOperation, Boolean>() {
-      @Override
-      public Boolean apply(final JvmOperation it) {
-        String _simpleName = it.getSimpleName();
-        return Boolean.valueOf(Objects.equal(_simpleName, "staticMethod"));
-      }
+    final Function1<JvmOperation, Boolean> _function = (JvmOperation it) -> {
+      String _simpleName = it.getSimpleName();
+      return Boolean.valueOf(Objects.equal(_simpleName, "staticMethod"));
     };
     Iterable<JvmOperation> _filter_1 = IterableExtensions.<JvmOperation>filter(_filter, _function);
     final JvmOperation staticMethod = IterableExtensions.<JvmOperation>head(_filter_1);
@@ -100,12 +97,9 @@ public class Java8TypeProviderTest {
     Assert.assertFalse(_isDefault);
     EList<JvmMember> _members_1 = intf.getMembers();
     Iterable<JvmOperation> _filter_2 = Iterables.<JvmOperation>filter(_members_1, JvmOperation.class);
-    final Function1<JvmOperation, Boolean> _function_1 = new Function1<JvmOperation, Boolean>() {
-      @Override
-      public Boolean apply(final JvmOperation it) {
-        String _simpleName = it.getSimpleName();
-        return Boolean.valueOf(Objects.equal(_simpleName, "defaultMethod"));
-      }
+    final Function1<JvmOperation, Boolean> _function_1 = (JvmOperation it) -> {
+      String _simpleName = it.getSimpleName();
+      return Boolean.valueOf(Objects.equal(_simpleName, "defaultMethod"));
     };
     Iterable<JvmOperation> _filter_3 = IterableExtensions.<JvmOperation>filter(_filter_2, _function_1);
     final JvmOperation defaultMethod = IterableExtensions.<JvmOperation>head(_filter_3);

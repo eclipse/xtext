@@ -29,12 +29,9 @@ public abstract class XtendAnnotationTargetImpl<T extends XtendAnnotationTarget>
   public Iterable<? extends AnnotationReference> getAnnotations() {
     T _delegate = this.getDelegate();
     EList<XAnnotation> _annotations = _delegate.getAnnotations();
-    final Function1<XAnnotation, AnnotationReference> _function = new Function1<XAnnotation, AnnotationReference>() {
-      @Override
-      public AnnotationReference apply(final XAnnotation it) {
-        CompilationUnitImpl _compilationUnit = XtendAnnotationTargetImpl.this.getCompilationUnit();
-        return _compilationUnit.toAnnotationReference(it);
-      }
+    final Function1<XAnnotation, AnnotationReference> _function = (XAnnotation it) -> {
+      CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+      return _compilationUnit.toAnnotationReference(it);
     };
     List<AnnotationReference> _map = ListExtensions.<XAnnotation, AnnotationReference>map(_annotations, _function);
     return ImmutableList.<AnnotationReference>copyOf(_map);
@@ -43,12 +40,9 @@ public abstract class XtendAnnotationTargetImpl<T extends XtendAnnotationTarget>
   @Override
   public AnnotationReference findAnnotation(final Type annotationType) {
     Iterable<? extends AnnotationReference> _annotations = this.getAnnotations();
-    final Function1<AnnotationReference, Boolean> _function = new Function1<AnnotationReference, Boolean>() {
-      @Override
-      public Boolean apply(final AnnotationReference it) {
-        AnnotationTypeDeclaration _annotationTypeDeclaration = it.getAnnotationTypeDeclaration();
-        return Boolean.valueOf(Objects.equal(_annotationTypeDeclaration, annotationType));
-      }
+    final Function1<AnnotationReference, Boolean> _function = (AnnotationReference it) -> {
+      AnnotationTypeDeclaration _annotationTypeDeclaration = it.getAnnotationTypeDeclaration();
+      return Boolean.valueOf(Objects.equal(_annotationTypeDeclaration, annotationType));
     };
     return IterableExtensions.findFirst(_annotations, _function);
   }

@@ -99,11 +99,8 @@ public class NavigationService {
   }
   
   public OpenAndLinkWithEditorHelper installNavigationSupport(final StructuredViewer viewer, final boolean select) {
-    final Procedure1<OpenEvent> _function = new Procedure1<OpenEvent>() {
-      @Override
-      public void apply(final OpenEvent it) {
-        NavigationService.this.open(it, select);
-      }
+    final Procedure1<OpenEvent> _function = (OpenEvent it) -> {
+      this.open(it, select);
     };
     return this.installNavigationSupport(viewer, _function);
   }

@@ -73,15 +73,12 @@ public class DefaultCallHierarchyBuilder extends AbstractHierarchyBuilder implem
       return CollectionLiterals.<IHierarchyNode>emptyList();
     }
     final LinkedHashMap<URI, IHierarchyNode> children = CollectionLiterals.<URI, IHierarchyNode>newLinkedHashMap();
-    final Procedure2<IEObjectDescription, IReferenceDescription> _function = new Procedure2<IEObjectDescription, IReferenceDescription>() {
-      @Override
-      public void apply(final IEObjectDescription declaration, final IReferenceDescription reference) {
-        final IHierarchyNode childNode = DefaultCallHierarchyBuilder.this.createChild(children, declaration, parent);
-        if ((childNode != null)) {
-          Collection<IHierarchyNodeReference> _references = childNode.getReferences();
-          IHierarchyNodeReference _createNodeReference = DefaultCallHierarchyBuilder.this.createNodeReference(reference);
-          _references.add(_createNodeReference);
-        }
+    final Procedure2<IEObjectDescription, IReferenceDescription> _function = (IEObjectDescription declaration, IReferenceDescription reference) -> {
+      final IHierarchyNode childNode = this.createChild(children, declaration, parent);
+      if ((childNode != null)) {
+        Collection<IHierarchyNodeReference> _references = childNode.getReferences();
+        IHierarchyNodeReference _createNodeReference = this.createNodeReference(reference);
+        _references.add(_createNodeReference);
       }
     };
     this.findDeclarations(parent, monitor, _function);
@@ -111,33 +108,27 @@ public class DefaultCallHierarchyBuilder extends AbstractHierarchyBuilder implem
   }
   
   protected void findTargetDeclarations(final URI sourceDeclarationURI, final IProgressMonitor monitor, final Procedure2<? super IEObjectDescription, ? super IReferenceDescription> acceptor) {
-    final IUnitOfWork<Object, EObject> _function = new IUnitOfWork<Object, EObject>() {
-      @Override
-      public Object exec(final EObject sourceDeclaration) throws Exception {
-        Object _xblockexpression = null;
-        {
-          IReferenceFinder _referenceFinder = DefaultCallHierarchyBuilder.this.getReferenceFinder();
-          IResourceServiceProvider.Registry _resourceServiceProviderRegistry = DefaultCallHierarchyBuilder.this.getResourceServiceProviderRegistry();
-          final IAcceptor<IReferenceDescription> _function = new IAcceptor<IReferenceDescription>() {
-            @Override
-            public void accept(final IReferenceDescription reference) {
-              boolean _filterReference = DefaultCallHierarchyBuilder.this.filterReference(reference);
-              if (_filterReference) {
-                IEObjectDescription _findTargetDeclaration = null;
-                if (reference!=null) {
-                  _findTargetDeclaration=DefaultCallHierarchyBuilder.this.findTargetDeclaration(reference);
-                }
-                final IEObjectDescription targetDeclaration = _findTargetDeclaration;
-                acceptor.apply(targetDeclaration, reference);
-              }
+    final IUnitOfWork<Object, EObject> _function = (EObject sourceDeclaration) -> {
+      Object _xblockexpression = null;
+      {
+        IReferenceFinder _referenceFinder = this.getReferenceFinder();
+        IResourceServiceProvider.Registry _resourceServiceProviderRegistry = this.getResourceServiceProviderRegistry();
+        final IAcceptor<IReferenceDescription> _function_1 = (IReferenceDescription reference) -> {
+          boolean _filterReference = this.filterReference(reference);
+          if (_filterReference) {
+            IEObjectDescription _findTargetDeclaration = null;
+            if (reference!=null) {
+              _findTargetDeclaration=this.findTargetDeclaration(reference);
             }
-          };
-          ReferenceAcceptor _referenceAcceptor = new ReferenceAcceptor(_resourceServiceProviderRegistry, _function);
-          _referenceFinder.findAllReferences(sourceDeclaration, _referenceAcceptor, monitor);
-          _xblockexpression = null;
-        }
-        return _xblockexpression;
+            final IEObjectDescription targetDeclaration = _findTargetDeclaration;
+            acceptor.apply(targetDeclaration, reference);
+          }
+        };
+        ReferenceAcceptor _referenceAcceptor = new ReferenceAcceptor(_resourceServiceProviderRegistry, _function_1);
+        _referenceFinder.findAllReferences(sourceDeclaration, _referenceAcceptor, monitor);
+        _xblockexpression = null;
       }
+      return _xblockexpression;
     };
     this.<Object>readOnly(sourceDeclarationURI, _function);
   }
@@ -148,18 +139,15 @@ public class DefaultCallHierarchyBuilder extends AbstractHierarchyBuilder implem
     IReferenceFinder.IResourceAccess _resourceAccess = this.getResourceAccess();
     IResourceDescriptions _indexData = this.getIndexData();
     IResourceServiceProvider.Registry _resourceServiceProviderRegistry = this.getResourceServiceProviderRegistry();
-    final IAcceptor<IReferenceDescription> _function = new IAcceptor<IReferenceDescription>() {
-      @Override
-      public void accept(final IReferenceDescription reference) {
-        boolean _filterReference = DefaultCallHierarchyBuilder.this.filterReference(reference);
-        if (_filterReference) {
-          IEObjectDescription _findSourceDeclaration = null;
-          if (reference!=null) {
-            _findSourceDeclaration=DefaultCallHierarchyBuilder.this.findSourceDeclaration(reference);
-          }
-          final IEObjectDescription sourceDeclaration = _findSourceDeclaration;
-          acceptor.apply(sourceDeclaration, reference);
+    final IAcceptor<IReferenceDescription> _function = (IReferenceDescription reference) -> {
+      boolean _filterReference = this.filterReference(reference);
+      if (_filterReference) {
+        IEObjectDescription _findSourceDeclaration = null;
+        if (reference!=null) {
+          _findSourceDeclaration=this.findSourceDeclaration(reference);
         }
+        final IEObjectDescription sourceDeclaration = _findSourceDeclaration;
+        acceptor.apply(sourceDeclaration, reference);
       }
     };
     ReferenceAcceptor _referenceAcceptor = new ReferenceAcceptor(_resourceServiceProviderRegistry, _function);
@@ -172,16 +160,13 @@ public class DefaultCallHierarchyBuilder extends AbstractHierarchyBuilder implem
     if ((targetURI == null)) {
       return targetURIs;
     }
-    final IUnitOfWork<TargetURIs, EObject> _function = new IUnitOfWork<TargetURIs, EObject>() {
-      @Override
-      public TargetURIs exec(final EObject targetObject) throws Exception {
-        if ((targetObject == null)) {
-          return targetURIs;
-        }
-        TargetURICollector _targetURICollector = DefaultCallHierarchyBuilder.this.getTargetURICollector();
-        _targetURICollector.add(targetObject, targetURIs);
+    final IUnitOfWork<TargetURIs, EObject> _function = (EObject targetObject) -> {
+      if ((targetObject == null)) {
         return targetURIs;
       }
+      TargetURICollector _targetURICollector = this.getTargetURICollector();
+      _targetURICollector.add(targetObject, targetURIs);
+      return targetURIs;
     };
     return this.<TargetURIs>readOnly(targetURI, _function);
   }
@@ -247,15 +232,12 @@ public class DefaultCallHierarchyBuilder extends AbstractHierarchyBuilder implem
    */
   protected IHierarchyNodeReference createNodeReference(final IReferenceDescription reference) {
     URI _sourceEObjectUri = reference.getSourceEObjectUri();
-    final IUnitOfWork<DefaultHierarchyNodeReference, EObject> _function = new IUnitOfWork<DefaultHierarchyNodeReference, EObject>() {
-      @Override
-      public DefaultHierarchyNodeReference exec(final EObject sourceObject) throws Exception {
-        EReference _eReference = reference.getEReference();
-        int _indexInList = reference.getIndexInList();
-        final ITextRegionWithLineInformation textRegion = DefaultCallHierarchyBuilder.this.getTextRegion(sourceObject, _eReference, _indexInList);
-        final String text = DefaultCallHierarchyBuilder.this.getText(sourceObject, textRegion);
-        return new DefaultHierarchyNodeReference(text, textRegion, reference);
-      }
+    final IUnitOfWork<DefaultHierarchyNodeReference, EObject> _function = (EObject sourceObject) -> {
+      EReference _eReference = reference.getEReference();
+      int _indexInList = reference.getIndexInList();
+      final ITextRegionWithLineInformation textRegion = this.getTextRegion(sourceObject, _eReference, _indexInList);
+      final String text = this.getText(sourceObject, textRegion);
+      return new DefaultHierarchyNodeReference(text, textRegion, reference);
     };
     return this.<DefaultHierarchyNodeReference>readOnly(_sourceEObjectUri, _function);
   }

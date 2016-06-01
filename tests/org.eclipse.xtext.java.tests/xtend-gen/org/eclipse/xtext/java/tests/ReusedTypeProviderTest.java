@@ -75,55 +75,43 @@ public class ReusedTypeProviderTest extends AbstractTypeProviderTest {
       Set<IResourceDescription> _emptySet = CollectionLiterals.<IResourceDescription>emptySet();
       final ResourceDescriptionsData part = new ResourceDescriptionsData(_emptySet);
       XtextResourceSet _get = this.resourceSetProvider.get();
-      final Procedure1<XtextResourceSet> _function = new Procedure1<XtextResourceSet>() {
-        @Override
-        public void apply(final XtextResourceSet it) {
-          ProjectDescription _projectDescription = new ProjectDescription();
-          final Procedure1<ProjectDescription> _function = new Procedure1<ProjectDescription>() {
-            @Override
-            public void apply(final ProjectDescription it) {
-              it.setName("my-test-project");
-            }
-          };
-          final ProjectDescription projectDesc = ObjectExtensions.<ProjectDescription>operator_doubleArrow(_projectDescription, _function);
-          projectDesc.attachToEmfObject(it);
-          Map<String, ResourceDescriptionsData> _emptyMap = CollectionLiterals.<String, ResourceDescriptionsData>emptyMap();
-          final ChunkedResourceDescriptions index = new ChunkedResourceDescriptions(_emptyMap, it);
-          String _name = projectDesc.getName();
-          index.setContainer(_name, part);
-          ClassLoader _classLoader = ReusedTypeProviderTest.class.getClassLoader();
-          it.setClasspathURIContext(_classLoader);
-        }
+      final Procedure1<XtextResourceSet> _function = (XtextResourceSet it) -> {
+        ProjectDescription _projectDescription = new ProjectDescription();
+        final Procedure1<ProjectDescription> _function_1 = (ProjectDescription it_1) -> {
+          it_1.setName("my-test-project");
+        };
+        final ProjectDescription projectDesc = ObjectExtensions.<ProjectDescription>operator_doubleArrow(_projectDescription, _function_1);
+        projectDesc.attachToEmfObject(it);
+        Map<String, ResourceDescriptionsData> _emptyMap = CollectionLiterals.<String, ResourceDescriptionsData>emptyMap();
+        final ChunkedResourceDescriptions index = new ChunkedResourceDescriptions(_emptyMap, it);
+        String _name = projectDesc.getName();
+        index.setContainer(_name, part);
+        ClassLoader _classLoader = ReusedTypeProviderTest.class.getClassLoader();
+        it.setClasspathURIContext(_classLoader);
       };
       final XtextResourceSet resourceSet = ObjectExtensions.<XtextResourceSet>operator_doubleArrow(_get, _function);
       this.typeProviderFactory.createTypeProvider(resourceSet);
       BuildRequest _buildRequest = new BuildRequest();
-      final Procedure1<BuildRequest> _function_1 = new Procedure1<BuildRequest>() {
-        @Override
-        public void apply(final BuildRequest it) {
-          Iterable<String> _filterNull = IterableExtensions.<String>filterNull(files);
-          for (final String file : _filterNull) {
-            {
-              final String fullPath = ((pathToSources + "/") + file);
-              final URL url = MockJavaProjectProvider.class.getResource(fullPath);
-              List<URI> _dirtyFiles = it.getDirtyFiles();
-              String _externalForm = url.toExternalForm();
-              URI _createURI = URI.createURI(_externalForm);
-              _dirtyFiles.add(_createURI);
-            }
+      final Procedure1<BuildRequest> _function_1 = (BuildRequest it) -> {
+        Iterable<String> _filterNull = IterableExtensions.<String>filterNull(files);
+        for (final String file : _filterNull) {
+          {
+            final String fullPath = ((pathToSources + "/") + file);
+            final URL url = MockJavaProjectProvider.class.getResource(fullPath);
+            List<URI> _dirtyFiles = it.getDirtyFiles();
+            String _externalForm = url.toExternalForm();
+            URI _createURI = URI.createURI(_externalForm);
+            _dirtyFiles.add(_createURI);
           }
-          it.setResourceSet(resourceSet);
-          Source2GeneratedMapping _source2GeneratedMapping = new Source2GeneratedMapping();
-          IndexState _indexState = new IndexState(part, _source2GeneratedMapping);
-          it.setState(_indexState);
         }
+        it.setResourceSet(resourceSet);
+        Source2GeneratedMapping _source2GeneratedMapping = new Source2GeneratedMapping();
+        IndexState _indexState = new IndexState(part, _source2GeneratedMapping);
+        it.setState(_indexState);
       };
       final BuildRequest buildRequest = ObjectExtensions.<BuildRequest>operator_doubleArrow(_buildRequest, _function_1);
-      final Function1<URI, IResourceServiceProvider> _function_2 = new Function1<URI, IResourceServiceProvider>() {
-        @Override
-        public IResourceServiceProvider apply(final URI it) {
-          return ReusedTypeProviderTest.this.resourceServiceProviderRegistry.getResourceServiceProvider(it);
-        }
+      final Function1<URI, IResourceServiceProvider> _function_2 = (URI it) -> {
+        return this.resourceServiceProviderRegistry.getResourceServiceProvider(it);
       };
       this.builder.build(buildRequest, _function_2);
       IJvmTypeProvider _findTypeProvider = this.typeProviderFactory.findTypeProvider(resourceSet);

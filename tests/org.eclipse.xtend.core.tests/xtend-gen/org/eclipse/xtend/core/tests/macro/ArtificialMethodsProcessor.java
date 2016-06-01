@@ -17,121 +17,82 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 public class ArtificialMethodsProcessor extends AbstractClassProcessor {
   @Override
   public void doTransform(final MutableClassDeclaration annotatedClass, @Extension final TransformationContext context) {
-    final Procedure1<MutableMethodDeclaration> _function = new Procedure1<MutableMethodDeclaration>() {
-      @Override
-      public void apply(final MutableMethodDeclaration it) {
-        final CompilationStrategy _function = new CompilationStrategy() {
-          @Override
-          public CharSequence compile(final CompilationStrategy.CompilationContext it) {
-            StringConcatenation _builder = new StringConcatenation();
-            return _builder;
-          }
-        };
-        it.setBody(_function);
-      }
+    final Procedure1<MutableMethodDeclaration> _function = (MutableMethodDeclaration it) -> {
+      final CompilationStrategy _function_1 = (CompilationStrategy.CompilationContext it_1) -> {
+        StringConcatenation _builder = new StringConcatenation();
+        return _builder;
+      };
+      it.setBody(_function_1);
     };
     annotatedClass.addMethod("blank", _function);
-    final Procedure1<MutableMethodDeclaration> _function_1 = new Procedure1<MutableMethodDeclaration>() {
-      @Override
-      public void apply(final MutableMethodDeclaration it) {
-        final CompilationStrategy _function = new CompilationStrategy() {
-          @Override
-          public CharSequence compile(final CompilationStrategy.CompilationContext it) {
-            StringConcatenation _builder = new StringConcatenation();
-            _builder.append("\t\t\t\t");
-            _builder.newLine();
-            return _builder;
-          }
-        };
-        it.setBody(_function);
-      }
+    final Procedure1<MutableMethodDeclaration> _function_1 = (MutableMethodDeclaration it) -> {
+      final CompilationStrategy _function_2 = (CompilationStrategy.CompilationContext it_1) -> {
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("\t\t\t\t");
+        _builder.newLine();
+        return _builder;
+      };
+      it.setBody(_function_2);
     };
     annotatedClass.addMethod("blank_1", _function_1);
-    final Procedure1<MutableMethodDeclaration> _function_2 = new Procedure1<MutableMethodDeclaration>() {
-      @Override
-      public void apply(final MutableMethodDeclaration it) {
-        final CompilationStrategy _function = new CompilationStrategy() {
-          @Override
-          public CharSequence compile(final CompilationStrategy.CompilationContext it) {
-            return "";
-          }
-        };
-        it.setBody(_function);
-      }
+    final Procedure1<MutableMethodDeclaration> _function_2 = (MutableMethodDeclaration it) -> {
+      final CompilationStrategy _function_3 = (CompilationStrategy.CompilationContext it_1) -> {
+        return "";
+      };
+      it.setBody(_function_3);
     };
     annotatedClass.addMethod("blank_2", _function_2);
-    final Procedure1<MutableMethodDeclaration> _function_3 = new Procedure1<MutableMethodDeclaration>() {
-      @Override
-      public void apply(final MutableMethodDeclaration it) {
-        final CompilationStrategy _function = new CompilationStrategy() {
-          @Override
-          public CharSequence compile(final CompilationStrategy.CompilationContext it) {
-            return "\n";
-          }
-        };
-        it.setBody(_function);
-      }
+    final Procedure1<MutableMethodDeclaration> _function_3 = (MutableMethodDeclaration it) -> {
+      final CompilationStrategy _function_4 = (CompilationStrategy.CompilationContext it_1) -> {
+        return "\n";
+      };
+      it.setBody(_function_4);
     };
     annotatedClass.addMethod("blank_3", _function_3);
-    final Procedure1<MutableMethodDeclaration> _function_4 = new Procedure1<MutableMethodDeclaration>() {
-      @Override
-      public void apply(final MutableMethodDeclaration it) {
-        final CompilationStrategy _function = new CompilationStrategy() {
-          @Override
-          public CharSequence compile(final CompilationStrategy.CompilationContext it) {
-            StringConcatenation _builder = new StringConcatenation();
-            _builder.append("int foo = 42;");
-            _builder.newLine();
-            return _builder;
-          }
-        };
-        it.setBody(_function);
-      }
+    final Procedure1<MutableMethodDeclaration> _function_4 = (MutableMethodDeclaration it) -> {
+      final CompilationStrategy _function_5 = (CompilationStrategy.CompilationContext it_1) -> {
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("int foo = 42;");
+        _builder.newLine();
+        return _builder;
+      };
+      it.setBody(_function_5);
     };
     annotatedClass.addMethod("blank_4", _function_4);
-    final Procedure1<MutableMethodDeclaration> _function_5 = new Procedure1<MutableMethodDeclaration>() {
-      @Override
-      public void apply(final MutableMethodDeclaration it) {
-        StringConcatenationClient _client = new StringConcatenationClient() {
-          @Override
-          protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-            _builder.append("int foo = 42;");
-            _builder.newLine();
-          }
-        };
-        it.setBody(_client);
-      }
+    final Procedure1<MutableMethodDeclaration> _function_5 = (MutableMethodDeclaration it) -> {
+      StringConcatenationClient _client = new StringConcatenationClient() {
+        @Override
+        protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+          _builder.append("int foo = 42;");
+          _builder.newLine();
+        }
+      };
+      it.setBody(_client);
     };
     annotatedClass.addMethod("blank_5", _function_5);
-    final Procedure1<MutableMethodDeclaration> _function_6 = new Procedure1<MutableMethodDeclaration>() {
-      @Override
-      public void apply(final MutableMethodDeclaration it) {
-        StringConcatenationClient _client = new StringConcatenationClient() {
-          @Override
-          protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-            _builder.append("int foo = 42;");
-          }
-        };
-        it.setBody(_client);
-      }
+    final Procedure1<MutableMethodDeclaration> _function_6 = (MutableMethodDeclaration it) -> {
+      StringConcatenationClient _client = new StringConcatenationClient() {
+        @Override
+        protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+          _builder.append("int foo = 42;");
+        }
+      };
+      it.setBody(_client);
     };
     annotatedClass.addMethod("blank_6", _function_6);
-    final Procedure1<MutableMethodDeclaration> _function_7 = new Procedure1<MutableMethodDeclaration>() {
-      @Override
-      public void apply(final MutableMethodDeclaration it) {
-        StringConcatenationClient _client = new StringConcatenationClient() {
-          @Override
-          protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-            _builder.append(List.class, "");
-            _builder.append("<? extends Object> list = new ");
-            _builder.append(ArrayList.class, "");
-            _builder.append("<");
-            _builder.append(BigDecimal.class, "");
-            _builder.append(">();");
-          }
-        };
-        it.setBody(_client);
-      }
+    final Procedure1<MutableMethodDeclaration> _function_7 = (MutableMethodDeclaration it) -> {
+      StringConcatenationClient _client = new StringConcatenationClient() {
+        @Override
+        protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+          _builder.append(List.class, "");
+          _builder.append("<? extends Object> list = new ");
+          _builder.append(ArrayList.class, "");
+          _builder.append("<");
+          _builder.append(BigDecimal.class, "");
+          _builder.append(">();");
+        }
+      };
+      it.setBody(_client);
     };
     annotatedClass.addMethod("blank_7", _function_7);
   }

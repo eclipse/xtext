@@ -115,11 +115,8 @@ public class XtendMethodDeclarationImpl extends XtendMemberDeclarationImpl<Xtend
   public boolean isVarArgs() {
     XtendFunction _delegate = this.getDelegate();
     EList<XtendParameter> _parameters = _delegate.getParameters();
-    final Function1<XtendParameter, Boolean> _function = new Function1<XtendParameter, Boolean>() {
-      @Override
-      public Boolean apply(final XtendParameter it) {
-        return Boolean.valueOf(XtendMethodDeclarationImpl.this.isVarArgs());
-      }
+    final Function1<XtendParameter, Boolean> _function = (XtendParameter it) -> {
+      return Boolean.valueOf(this.isVarArgs());
     };
     return IterableExtensions.<XtendParameter>exists(_parameters, _function);
   }
@@ -128,12 +125,9 @@ public class XtendMethodDeclarationImpl extends XtendMemberDeclarationImpl<Xtend
   public Iterable<? extends TypeParameterDeclaration> getTypeParameters() {
     XtendFunction _delegate = this.getDelegate();
     EList<JvmTypeParameter> _typeParameters = _delegate.getTypeParameters();
-    final Function1<JvmTypeParameter, XtendTypeParameterDeclarationImpl> _function = new Function1<JvmTypeParameter, XtendTypeParameterDeclarationImpl>() {
-      @Override
-      public XtendTypeParameterDeclarationImpl apply(final JvmTypeParameter it) {
-        CompilationUnitImpl _compilationUnit = XtendMethodDeclarationImpl.this.getCompilationUnit();
-        return _compilationUnit.toXtendTypeParameterDeclaration(it);
-      }
+    final Function1<JvmTypeParameter, XtendTypeParameterDeclarationImpl> _function = (JvmTypeParameter it) -> {
+      CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+      return _compilationUnit.toXtendTypeParameterDeclaration(it);
     };
     return ListExtensions.<JvmTypeParameter, XtendTypeParameterDeclarationImpl>map(_typeParameters, _function);
   }
@@ -142,12 +136,9 @@ public class XtendMethodDeclarationImpl extends XtendMemberDeclarationImpl<Xtend
   public Iterable<? extends TypeReference> getExceptions() {
     XtendFunction _delegate = this.getDelegate();
     EList<JvmTypeReference> _exceptions = _delegate.getExceptions();
-    final Function1<JvmTypeReference, TypeReference> _function = new Function1<JvmTypeReference, TypeReference>() {
-      @Override
-      public TypeReference apply(final JvmTypeReference it) {
-        CompilationUnitImpl _compilationUnit = XtendMethodDeclarationImpl.this.getCompilationUnit();
-        return _compilationUnit.toTypeReference(it);
-      }
+    final Function1<JvmTypeReference, TypeReference> _function = (JvmTypeReference it) -> {
+      CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+      return _compilationUnit.toTypeReference(it);
     };
     return ListExtensions.<JvmTypeReference, TypeReference>map(_exceptions, _function);
   }
@@ -156,12 +147,9 @@ public class XtendMethodDeclarationImpl extends XtendMemberDeclarationImpl<Xtend
   public Iterable<? extends ParameterDeclaration> getParameters() {
     XtendFunction _delegate = this.getDelegate();
     EList<XtendParameter> _parameters = _delegate.getParameters();
-    final Function1<XtendParameter, XtendParameterDeclarationImpl> _function = new Function1<XtendParameter, XtendParameterDeclarationImpl>() {
-      @Override
-      public XtendParameterDeclarationImpl apply(final XtendParameter it) {
-        CompilationUnitImpl _compilationUnit = XtendMethodDeclarationImpl.this.getCompilationUnit();
-        return _compilationUnit.toXtendParameterDeclaration(it);
-      }
+    final Function1<XtendParameter, XtendParameterDeclarationImpl> _function = (XtendParameter it) -> {
+      CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+      return _compilationUnit.toXtendParameterDeclaration(it);
     };
     return ListExtensions.<XtendParameter, XtendParameterDeclarationImpl>map(_parameters, _function);
   }

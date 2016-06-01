@@ -63,15 +63,12 @@ public class ArithmeticsScopeProvider extends AbstractGlobalScopeDelegatingScope
     EList<Statement> _statements = module.getStatements();
     final Iterable<Definition> allDefinitions = Iterables.<Definition>filter(_statements, Definition.class);
     if ((context instanceof FunctionCall)) {
-      final Function1<Definition, Boolean> _function = new Function1<Definition, Boolean>() {
-        @Override
-        public Boolean apply(final Definition it) {
-          EList<Expression> _args = ((FunctionCall)context).getArgs();
-          int _size = _args.size();
-          EList<DeclaredParameter> _args_1 = it.getArgs();
-          int _size_1 = _args_1.size();
-          return Boolean.valueOf((_size == _size_1));
-        }
+      final Function1<Definition, Boolean> _function = (Definition it) -> {
+        EList<Expression> _args = ((FunctionCall)context).getArgs();
+        int _size = _args.size();
+        EList<DeclaredParameter> _args_1 = it.getArgs();
+        int _size_1 = _args_1.size();
+        return Boolean.valueOf((_size == _size_1));
       };
       Iterable<Definition> _filter = IterableExtensions.<Definition>filter(allDefinitions, _function);
       return Scopes.scopeFor(_filter, parent);

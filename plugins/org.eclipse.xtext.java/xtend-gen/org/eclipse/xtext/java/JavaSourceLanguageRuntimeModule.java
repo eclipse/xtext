@@ -20,7 +20,6 @@ import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader;
 import org.eclipse.xtext.resource.IContainer;
 import org.eclipse.xtext.resource.IResourceDescription;
-import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceDescriptionsProvider;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.impl.ChunkedResourceDescriptions;
@@ -63,11 +62,8 @@ public class JavaSourceLanguageRuntimeModule extends AbstractModule {
     AnnotatedBindingBuilder<IReferableElementsUnloader> _bind_12 = this.<IReferableElementsUnloader>bind(IReferableElementsUnloader.class);
     _bind_12.to(IReferableElementsUnloader.GenericUnloader.class);
     AnnotatedBindingBuilder<IResourceDescriptionsProvider> _bind_13 = this.<IResourceDescriptionsProvider>bind(IResourceDescriptionsProvider.class);
-    final IResourceDescriptionsProvider _function = new IResourceDescriptionsProvider() {
-      @Override
-      public IResourceDescriptions getResourceDescriptions(final ResourceSet it) {
-        return ChunkedResourceDescriptions.findInEmfObject(it);
-      }
+    final IResourceDescriptionsProvider _function = (ResourceSet it) -> {
+      return ChunkedResourceDescriptions.findInEmfObject(it);
     };
     _bind_13.toInstance(_function);
   }

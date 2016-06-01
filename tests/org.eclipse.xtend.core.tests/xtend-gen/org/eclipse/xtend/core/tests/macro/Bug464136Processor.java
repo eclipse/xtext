@@ -17,11 +17,8 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure0;
 public class Bug464136Processor extends AbstractClassProcessor {
   @Override
   public void doTransform(final MutableClassDeclaration annotatedClass, @Extension final TransformationContext context) {
-    final Procedure0 _function = new Procedure0() {
-      @Override
-      public void apply() {
-        throw new LinkageError("Just a test :-/");
-      }
+    final Procedure0 _function = () -> {
+      throw new LinkageError("Just a test :-/");
     };
     context.validateLater(_function);
   }

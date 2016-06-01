@@ -52,12 +52,9 @@ public class XtextCallHierarchyBuilder extends DefaultCallHierarchyBuilder {
     if (_isRule) {
       return description;
     }
-    final IUnitOfWork<IEObjectDescription, EObject> _function = new IUnitOfWork<IEObjectDescription, EObject>() {
-      @Override
-      public IEObjectDescription exec(final EObject object) throws Exception {
-        AbstractRule _containerOfType = EcoreUtil2.<AbstractRule>getContainerOfType(object, AbstractRule.class);
-        return XtextCallHierarchyBuilder.this.getDescription(_containerOfType);
-      }
+    final IUnitOfWork<IEObjectDescription, EObject> _function = (EObject object) -> {
+      AbstractRule _containerOfType = EcoreUtil2.<AbstractRule>getContainerOfType(object, AbstractRule.class);
+      return this.getDescription(_containerOfType);
     };
     return this.<IEObjectDescription>readOnly(objectURI, _function);
   }

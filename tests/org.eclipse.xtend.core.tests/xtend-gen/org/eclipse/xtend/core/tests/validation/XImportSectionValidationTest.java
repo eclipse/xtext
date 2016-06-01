@@ -648,17 +648,14 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
   public void assertFeatureCallError(final XtendFile file, final EClass objectType) {
     final Resource resource = file.eResource();
     final List<Issue> allIssues = this._validationTestHelper.validate(resource);
-    final Function1<Issue, Boolean> _function = new Function1<Issue, Boolean>() {
-      @Override
-      public Boolean apply(final Issue it) {
-        ResourceSet _resourceSet = resource.getResourceSet();
-        URI _uriToProblem = it.getUriToProblem();
-        EObject object = _resourceSet.getEObject(_uriToProblem, true);
-        String[] _data = it.getData();
-        final boolean featureCall = ((List<String>)Conversions.doWrapArray(_data)).contains(UnresolvedFeatureCallTypeAwareMessageProvider.FEATURE_CALL);
-        return Boolean.valueOf((((Objects.equal(it.getCode(), Diagnostic.LINKING_DIAGNOSTIC) && (it.getSeverity() == Severity.ERROR)) && 
-          objectType.isInstance(object)) && featureCall));
-      }
+    final Function1<Issue, Boolean> _function = (Issue it) -> {
+      ResourceSet _resourceSet = resource.getResourceSet();
+      URI _uriToProblem = it.getUriToProblem();
+      EObject object = _resourceSet.getEObject(_uriToProblem, true);
+      String[] _data = it.getData();
+      final boolean featureCall = ((List<String>)Conversions.doWrapArray(_data)).contains(UnresolvedFeatureCallTypeAwareMessageProvider.FEATURE_CALL);
+      return Boolean.valueOf((((Objects.equal(it.getCode(), Diagnostic.LINKING_DIAGNOSTIC) && (it.getSeverity() == Severity.ERROR)) && 
+        objectType.isInstance(object)) && featureCall));
     };
     final Iterable<Issue> match = IterableExtensions.<Issue>filter(allIssues, _function);
     boolean _isEmpty = IterableExtensions.isEmpty(match);

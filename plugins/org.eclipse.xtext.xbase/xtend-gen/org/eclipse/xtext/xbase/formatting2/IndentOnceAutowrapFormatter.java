@@ -44,11 +44,8 @@ public class IndentOnceAutowrapFormatter implements IAutowrapFormatter {
         }
       }
       final IHiddenRegion hiddenRegion = _switchResult;
-      final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
-        @Override
-        public void apply(final IHiddenRegionFormatter it) {
-          it.indent();
-        }
+      final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+        it.indent();
       };
       document.set(hiddenRegion, this.last, _function);
       this.hasWrapped = true;

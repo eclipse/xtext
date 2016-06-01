@@ -146,11 +146,8 @@ public class TypeReferenceProviderImpl implements TypeReferenceProvider {
       if ((type == null)) {
         return null;
       }
-      final Function1<TypeReference, JvmTypeReference> _function = new Function1<TypeReference, JvmTypeReference>() {
-        @Override
-        public JvmTypeReference apply(final TypeReference it) {
-          return TypeReferenceProviderImpl.this.compilationUnit.toJvmTypeReference(it);
-        }
+      final Function1<TypeReference, JvmTypeReference> _function = (TypeReference it) -> {
+        return this.compilationUnit.toJvmTypeReference(it);
       };
       List<JvmTypeReference> _map = ListExtensions.<TypeReference, JvmTypeReference>map(((List<TypeReference>)Conversions.doWrapArray(typeArguments)), _function);
       JvmParameterizedTypeReference _createTypeRef = this.createTypeRef(type, ((JvmTypeReference[]) ((JvmTypeReference[])Conversions.unwrapArray(_map, JvmTypeReference.class))));
@@ -265,11 +262,8 @@ public class TypeReferenceProviderImpl implements TypeReferenceProvider {
       if ((type == null)) {
         return null;
       }
-      final Function1<TypeReference, JvmTypeReference> _function = new Function1<TypeReference, JvmTypeReference>() {
-        @Override
-        public JvmTypeReference apply(final TypeReference it) {
-          return TypeReferenceProviderImpl.this.compilationUnit.toJvmTypeReference(it);
-        }
+      final Function1<TypeReference, JvmTypeReference> _function = (TypeReference it) -> {
+        return this.compilationUnit.toJvmTypeReference(it);
       };
       List<JvmTypeReference> _map = ListExtensions.<TypeReference, JvmTypeReference>map(((List<TypeReference>)Conversions.doWrapArray(typeArguments)), _function);
       JvmParameterizedTypeReference _createTypeRef = this.createTypeRef(type, ((JvmTypeReference[]) ((JvmTypeReference[])Conversions.unwrapArray(_map, JvmTypeReference.class))));
@@ -326,11 +320,8 @@ public class TypeReferenceProviderImpl implements TypeReferenceProvider {
     TypeReference _xifexpression = null;
     if ((typeDeclaration instanceof TypeParameterDeclarator)) {
       Iterable<? extends TypeParameterDeclaration> _typeParameters = ((TypeParameterDeclarator)typeDeclaration).getTypeParameters();
-      final Function1<TypeParameterDeclaration, TypeReference> _function = new Function1<TypeParameterDeclaration, TypeReference>() {
-        @Override
-        public TypeReference apply(final TypeParameterDeclaration it) {
-          return TypeReferenceProviderImpl.this.newTypeReference(it);
-        }
+      final Function1<TypeParameterDeclaration, TypeReference> _function = (TypeParameterDeclaration it) -> {
+        return this.newTypeReference(it);
       };
       Iterable<TypeReference> _map = IterableExtensions.map(_typeParameters, _function);
       _xifexpression = this.newTypeReference(typeDeclaration, ((TypeReference[])Conversions.unwrapArray(_map, TypeReference.class)));

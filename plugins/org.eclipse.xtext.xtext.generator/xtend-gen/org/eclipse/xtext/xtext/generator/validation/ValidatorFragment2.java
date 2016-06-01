@@ -402,11 +402,8 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
     Grammar _grammar = this.getGrammar();
     EList<AbstractMetamodelDeclaration> _metamodelDeclarations = _grammar.getMetamodelDeclarations();
     Iterable<GeneratedMetamodel> _filter = Iterables.<GeneratedMetamodel>filter(_metamodelDeclarations, GeneratedMetamodel.class);
-    final Function1<GeneratedMetamodel, EPackage> _function = new Function1<GeneratedMetamodel, EPackage>() {
-      @Override
-      public EPackage apply(final GeneratedMetamodel it) {
-        return it.getEPackage();
-      }
+    final Function1<GeneratedMetamodel, EPackage> _function = (GeneratedMetamodel it) -> {
+      return it.getEPackage();
     };
     return IterableExtensions.<GeneratedMetamodel, EPackage>map(_filter, _function);
   }
@@ -417,11 +414,8 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
     Grammar _grammar_1 = this.getGrammar();
     List<AbstractMetamodelDeclaration> _allMetamodelDeclarations = GrammarUtil.allMetamodelDeclarations(_grammar_1);
     Iterable<GeneratedMetamodel> _filter = Iterables.<GeneratedMetamodel>filter(_allMetamodelDeclarations, GeneratedMetamodel.class);
-    final Function1<GeneratedMetamodel, EPackage> _function = new Function1<GeneratedMetamodel, EPackage>() {
-      @Override
-      public EPackage apply(final GeneratedMetamodel it) {
-        return it.getEPackage();
-      }
+    final Function1<GeneratedMetamodel, EPackage> _function = (GeneratedMetamodel it) -> {
+      return it.getEPackage();
     };
     Iterable<EPackage> _map = IterableExtensions.<GeneratedMetamodel, EPackage>map(_filter, _function);
     List<EPackage> _list = IterableExtensions.<EPackage>toList(_map);

@@ -57,12 +57,9 @@ public class ClasspathTypeDescriptor implements ITypeDescriptor {
     try {
       ClasspathTypeDescriptor _xblockexpression = null;
       {
-        if (((!packagePrefixes.isEmpty()) && (!IterableExtensions.<String>exists(packagePrefixes, new Function1<String, Boolean>() {
-          @Override
-          public Boolean apply(final String it) {
-            return Boolean.valueOf(packageName.startsWith(it));
-          }
-        })))) {
+        if (((!packagePrefixes.isEmpty()) && (!IterableExtensions.<String>exists(packagePrefixes, ((Function1<String, Boolean>) (String it) -> {
+          return Boolean.valueOf(packageName.startsWith(it));
+        }))))) {
           return null;
         }
         final String fileName = file.getName();
@@ -139,12 +136,9 @@ public class ClasspathTypeDescriptor implements ITypeDescriptor {
               int _minus = (_length - 6);
               String _substring = filePath.substring(0, _minus);
               final String name = _substring.replace("/", ".");
-              if (((!packagePrefixes.isEmpty()) && (!IterableExtensions.<String>exists(packagePrefixes, new Function1<String, Boolean>() {
-                @Override
-                public Boolean apply(final String it) {
-                  return Boolean.valueOf(name.startsWith(it));
-                }
-              })))) {
+              if (((!packagePrefixes.isEmpty()) && (!IterableExtensions.<String>exists(packagePrefixes, ((Function1<String, Boolean>) (String it) -> {
+                return Boolean.valueOf(name.startsWith(it));
+              }))))) {
                 return null;
               }
               int _lastIndexOf = name.lastIndexOf(".");

@@ -24,5 +24,5 @@ Require-Bundle: org.eclipse.xtext,
  org.antlr.runtime,
  org.eclipse.xtext.common.types.tests,
  org.objectweb.asm;bundle-version="[5.0.1,6.0.0)";resolution:=optional
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Import-Package: org.apache.log4j

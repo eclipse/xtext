@@ -53,11 +53,8 @@ public class ClusteringStorageAwareResourceLoader {
           boolean _continueProcessing = _clusteringPolicy.continueProcessing(_resourceSet, uri, _size);
           boolean _not = (!_continueProcessing);
           if (_not) {
-            final Function1<Resource, T> _function = new Function1<Resource, T>() {
-              @Override
-              public T apply(final Resource it) {
-                return operation.apply(it);
-              }
+            final Function1<Resource, T> _function = (Resource it) -> {
+              return operation.apply(it);
             };
             List<T> _map = ListExtensions.<Resource, T>map(resources, _function);
             Iterables.<T>addAll(result, _map);
@@ -85,11 +82,8 @@ public class ClusteringStorageAwareResourceLoader {
           resources.add(_resource);
         }
       }
-      final Function1<Resource, T> _function = new Function1<Resource, T>() {
-        @Override
-        public T apply(final Resource it) {
-          return operation.apply(it);
-        }
+      final Function1<Resource, T> _function = (Resource it) -> {
+        return operation.apply(it);
       };
       List<T> _map = ListExtensions.<Resource, T>map(resources, _function);
       Iterables.<T>addAll(result, _map);

@@ -64,17 +64,11 @@ public abstract class AbstractFSSynchronizationTest extends AbstractBuilderParti
   
   @Test
   public void testUpdateFileContentWithProjectAsOutput() {
-    final Procedure1<OutputConfiguration> _function = new Procedure1<OutputConfiguration>() {
-      @Override
-      public void apply(final OutputConfiguration it) {
-        it.setOutputDirectory("./");
-      }
+    final Procedure1<OutputConfiguration> _function = (OutputConfiguration it) -> {
+      it.setOutputDirectory("./");
     };
-    final Procedure0 _function_1 = new Procedure0() {
-      @Override
-      public void apply() {
-        AbstractFSSynchronizationTest.this.testUpdateFileContent(AbstractFSSynchronizationTest.this.project);
-      }
+    final Procedure0 _function_1 = () -> {
+      this.testUpdateFileContent(this.project);
     };
     this.withOutputConfiguration(_function, _function_1);
   }
@@ -106,17 +100,11 @@ public abstract class AbstractFSSynchronizationTest extends AbstractBuilderParti
   
   @Test
   public void testTouchFileWithProjectAsOutput() {
-    final Procedure1<OutputConfiguration> _function = new Procedure1<OutputConfiguration>() {
-      @Override
-      public void apply(final OutputConfiguration it) {
-        it.setOutputDirectory("./");
-      }
+    final Procedure1<OutputConfiguration> _function = (OutputConfiguration it) -> {
+      it.setOutputDirectory("./");
     };
-    final Procedure0 _function_1 = new Procedure0() {
-      @Override
-      public void apply() {
-        AbstractFSSynchronizationTest.this.testTouchFile(AbstractFSSynchronizationTest.this.project);
-      }
+    final Procedure0 _function_1 = () -> {
+      this.testTouchFile(this.project);
     };
     this.withOutputConfiguration(_function, _function_1);
   }
@@ -148,17 +136,11 @@ public abstract class AbstractFSSynchronizationTest extends AbstractBuilderParti
   
   @Test
   public void testCreateFileWithProjectAsOutput() {
-    final Procedure1<OutputConfiguration> _function = new Procedure1<OutputConfiguration>() {
-      @Override
-      public void apply(final OutputConfiguration it) {
-        it.setOutputDirectory("./");
-      }
+    final Procedure1<OutputConfiguration> _function = (OutputConfiguration it) -> {
+      it.setOutputDirectory("./");
     };
-    final Procedure0 _function_1 = new Procedure0() {
-      @Override
-      public void apply() {
-        AbstractFSSynchronizationTest.this.testCreateFile(AbstractFSSynchronizationTest.this.project);
-      }
+    final Procedure0 _function_1 = () -> {
+      this.testCreateFile(this.project);
     };
     this.withOutputConfiguration(_function, _function_1);
   }
@@ -200,17 +182,11 @@ public abstract class AbstractFSSynchronizationTest extends AbstractBuilderParti
   
   @Test
   public void testDeleteTraceFileWithProjectAsOutput() {
-    final Procedure1<OutputConfiguration> _function = new Procedure1<OutputConfiguration>() {
-      @Override
-      public void apply(final OutputConfiguration it) {
-        it.setOutputDirectory("./");
-      }
+    final Procedure1<OutputConfiguration> _function = (OutputConfiguration it) -> {
+      it.setOutputDirectory("./");
     };
-    final Procedure0 _function_1 = new Procedure0() {
-      @Override
-      public void apply() {
-        AbstractFSSynchronizationTest.this.testDeleteTraceFile(AbstractFSSynchronizationTest.this.project);
-      }
+    final Procedure0 _function_1 = () -> {
+      this.testDeleteTraceFile(this.project);
     };
     this.withOutputConfiguration(_function, _function_1);
   }
@@ -238,38 +214,32 @@ public abstract class AbstractFSSynchronizationTest extends AbstractBuilderParti
   
   @Test
   public void testCleanOutput_01() {
-    final Procedure1<OutputConfiguration> _function = new Procedure1<OutputConfiguration>() {
-      @Override
-      public void apply(final OutputConfiguration it) {
-        it.setCanClearOutputDirectory(true);
-        it.setCleanUpDerivedResources(false);
-      }
+    final Procedure1<OutputConfiguration> _function = (OutputConfiguration it) -> {
+      it.setCanClearOutputDirectory(true);
+      it.setCleanUpDerivedResources(false);
     };
-    final Procedure0 _function_1 = new Procedure0() {
-      @Override
-      public void apply() {
-        try {
-          IFile _file = AbstractFSSynchronizationTest.this.project.getFile("src-gen/Lalala.txt");
-          IPath _location = _file.getLocation();
-          File _createJavaIoFile = AbstractFSSynchronizationTest.this.createJavaIoFile(_location);
-          final File srcGenDirectory = _createJavaIoFile.getParentFile();
-          File[] _listFiles = srcGenDirectory.listFiles();
-          boolean _isEmpty = ((List<File>)Conversions.doWrapArray(_listFiles)).isEmpty();
-          Assert.assertFalse(_isEmpty);
-          IFile _file_1 = AbstractFSSynchronizationTest.this.project.getFile(("src/Foo" + AbstractFSSynchronizationTest.this.F_EXT));
-          IPath _fullPath = _file_1.getFullPath();
-          IResourcesSetupUtil.createFile(_fullPath, "object Foo");
-          IResourcesSetupUtil.reallyWaitForAutoBuild();
-          File[] _listFiles_1 = srcGenDirectory.listFiles();
-          boolean _isEmpty_1 = ((List<File>)Conversions.doWrapArray(_listFiles_1)).isEmpty();
-          Assert.assertFalse(_isEmpty_1);
-          IResourcesSetupUtil.cleanBuild();
-          File[] _listFiles_2 = srcGenDirectory.listFiles();
-          boolean _isEmpty_2 = ((List<File>)Conversions.doWrapArray(_listFiles_2)).isEmpty();
-          Assert.assertTrue(_isEmpty_2);
-        } catch (Throwable _e) {
-          throw Exceptions.sneakyThrow(_e);
-        }
+    final Procedure0 _function_1 = () -> {
+      try {
+        IFile _file = this.project.getFile("src-gen/Lalala.txt");
+        IPath _location = _file.getLocation();
+        File _createJavaIoFile = this.createJavaIoFile(_location);
+        final File srcGenDirectory = _createJavaIoFile.getParentFile();
+        File[] _listFiles = srcGenDirectory.listFiles();
+        boolean _isEmpty = ((List<File>)Conversions.doWrapArray(_listFiles)).isEmpty();
+        Assert.assertFalse(_isEmpty);
+        IFile _file_1 = this.project.getFile(("src/Foo" + this.F_EXT));
+        IPath _fullPath = _file_1.getFullPath();
+        IResourcesSetupUtil.createFile(_fullPath, "object Foo");
+        IResourcesSetupUtil.reallyWaitForAutoBuild();
+        File[] _listFiles_1 = srcGenDirectory.listFiles();
+        boolean _isEmpty_1 = ((List<File>)Conversions.doWrapArray(_listFiles_1)).isEmpty();
+        Assert.assertFalse(_isEmpty_1);
+        IResourcesSetupUtil.cleanBuild();
+        File[] _listFiles_2 = srcGenDirectory.listFiles();
+        boolean _isEmpty_2 = ((List<File>)Conversions.doWrapArray(_listFiles_2)).isEmpty();
+        Assert.assertTrue(_isEmpty_2);
+      } catch (Throwable _e) {
+        throw Exceptions.sneakyThrow(_e);
       }
     };
     this.withOutputConfiguration(_function, _function_1);
@@ -277,43 +247,37 @@ public abstract class AbstractFSSynchronizationTest extends AbstractBuilderParti
   
   @Test
   public void testCleanOutput_02() {
-    final Procedure1<OutputConfiguration> _function = new Procedure1<OutputConfiguration>() {
-      @Override
-      public void apply(final OutputConfiguration it) {
-        it.setCanClearOutputDirectory(true);
-        it.setCleanUpDerivedResources(false);
-      }
+    final Procedure1<OutputConfiguration> _function = (OutputConfiguration it) -> {
+      it.setCanClearOutputDirectory(true);
+      it.setCleanUpDerivedResources(false);
     };
-    final Procedure0 _function_1 = new Procedure0() {
-      @Override
-      public void apply() {
-        try {
-          IFolder _folder = AbstractFSSynchronizationTest.this.project.getFolder("src-gen");
-          IPath _location = _folder.getLocation();
-          final File srcGenDirectory = _location.toFile();
-          boolean _exists = srcGenDirectory.exists();
-          Assert.assertFalse(_exists);
-          IFile _file = AbstractFSSynchronizationTest.this.project.getFile(("src/Foo" + AbstractFSSynchronizationTest.this.F_EXT));
-          IPath _fullPath = _file.getFullPath();
-          IResourcesSetupUtil.createFile(_fullPath, "object Foo");
-          IResourcesSetupUtil.reallyWaitForAutoBuild();
-          boolean _exists_1 = srcGenDirectory.exists();
-          Assert.assertTrue(_exists_1);
-          File[] _listFiles = srcGenDirectory.listFiles();
-          boolean _isEmpty = ((List<File>)Conversions.doWrapArray(_listFiles)).isEmpty();
-          Assert.assertFalse(_isEmpty);
-          IFile _file_1 = AbstractFSSynchronizationTest.this.project.getFile("src-gen/Lalala.txt");
-          IPath _location_1 = _file_1.getLocation();
-          AbstractFSSynchronizationTest.this.createJavaIoFile(_location_1);
-          IResourcesSetupUtil.cleanBuild();
-          boolean _exists_2 = srcGenDirectory.exists();
-          Assert.assertTrue(_exists_2);
-          File[] _listFiles_1 = srcGenDirectory.listFiles();
-          boolean _isEmpty_1 = ((List<File>)Conversions.doWrapArray(_listFiles_1)).isEmpty();
-          Assert.assertTrue(_isEmpty_1);
-        } catch (Throwable _e) {
-          throw Exceptions.sneakyThrow(_e);
-        }
+    final Procedure0 _function_1 = () -> {
+      try {
+        IFolder _folder = this.project.getFolder("src-gen");
+        IPath _location = _folder.getLocation();
+        final File srcGenDirectory = _location.toFile();
+        boolean _exists = srcGenDirectory.exists();
+        Assert.assertFalse(_exists);
+        IFile _file = this.project.getFile(("src/Foo" + this.F_EXT));
+        IPath _fullPath = _file.getFullPath();
+        IResourcesSetupUtil.createFile(_fullPath, "object Foo");
+        IResourcesSetupUtil.reallyWaitForAutoBuild();
+        boolean _exists_1 = srcGenDirectory.exists();
+        Assert.assertTrue(_exists_1);
+        File[] _listFiles = srcGenDirectory.listFiles();
+        boolean _isEmpty = ((List<File>)Conversions.doWrapArray(_listFiles)).isEmpty();
+        Assert.assertFalse(_isEmpty);
+        IFile _file_1 = this.project.getFile("src-gen/Lalala.txt");
+        IPath _location_1 = _file_1.getLocation();
+        this.createJavaIoFile(_location_1);
+        IResourcesSetupUtil.cleanBuild();
+        boolean _exists_2 = srcGenDirectory.exists();
+        Assert.assertTrue(_exists_2);
+        File[] _listFiles_1 = srcGenDirectory.listFiles();
+        boolean _isEmpty_1 = ((List<File>)Conversions.doWrapArray(_listFiles_1)).isEmpty();
+        Assert.assertTrue(_isEmpty_1);
+      } catch (Throwable _e) {
+        throw Exceptions.sneakyThrow(_e);
       }
     };
     this.withOutputConfiguration(_function, _function_1);
@@ -321,37 +285,31 @@ public abstract class AbstractFSSynchronizationTest extends AbstractBuilderParti
   
   @Test
   public void testCleanProjectAsOutput() {
-    final Procedure1<OutputConfiguration> _function = new Procedure1<OutputConfiguration>() {
-      @Override
-      public void apply(final OutputConfiguration it) {
-        it.setOutputDirectory("./");
-        it.setCanClearOutputDirectory(true);
-        it.setCleanUpDerivedResources(false);
-      }
+    final Procedure1<OutputConfiguration> _function = (OutputConfiguration it) -> {
+      it.setOutputDirectory("./");
+      it.setCanClearOutputDirectory(true);
+      it.setCleanUpDerivedResources(false);
     };
-    final Procedure0 _function_1 = new Procedure0() {
-      @Override
-      public void apply() {
-        try {
-          IPath _location = AbstractFSSynchronizationTest.this.project.getLocation();
-          final File projectDirectory = _location.toFile();
-          File[] _listFiles = projectDirectory.listFiles();
-          final int initialSize = ((List<File>)Conversions.doWrapArray(_listFiles)).size();
-          Assert.assertNotEquals(0, initialSize);
-          IFile _file = AbstractFSSynchronizationTest.this.project.getFile(("src/Foo" + AbstractFSSynchronizationTest.this.F_EXT));
-          IPath _fullPath = _file.getFullPath();
-          IResourcesSetupUtil.createFile(_fullPath, "object Foo");
-          IResourcesSetupUtil.reallyWaitForAutoBuild();
-          File[] _listFiles_1 = projectDirectory.listFiles();
-          final int expectedSize = ((List<File>)Conversions.doWrapArray(_listFiles_1)).size();
-          Assert.assertNotEquals(initialSize, expectedSize);
-          IResourcesSetupUtil.cleanBuild();
-          File[] _listFiles_2 = projectDirectory.listFiles();
-          int _size = ((List<File>)Conversions.doWrapArray(_listFiles_2)).size();
-          Assert.assertEquals(expectedSize, _size);
-        } catch (Throwable _e) {
-          throw Exceptions.sneakyThrow(_e);
-        }
+    final Procedure0 _function_1 = () -> {
+      try {
+        IPath _location = this.project.getLocation();
+        final File projectDirectory = _location.toFile();
+        File[] _listFiles = projectDirectory.listFiles();
+        final int initialSize = ((List<File>)Conversions.doWrapArray(_listFiles)).size();
+        Assert.assertNotEquals(0, initialSize);
+        IFile _file = this.project.getFile(("src/Foo" + this.F_EXT));
+        IPath _fullPath = _file.getFullPath();
+        IResourcesSetupUtil.createFile(_fullPath, "object Foo");
+        IResourcesSetupUtil.reallyWaitForAutoBuild();
+        File[] _listFiles_1 = projectDirectory.listFiles();
+        final int expectedSize = ((List<File>)Conversions.doWrapArray(_listFiles_1)).size();
+        Assert.assertNotEquals(initialSize, expectedSize);
+        IResourcesSetupUtil.cleanBuild();
+        File[] _listFiles_2 = projectDirectory.listFiles();
+        int _size = ((List<File>)Conversions.doWrapArray(_listFiles_2)).size();
+        Assert.assertEquals(expectedSize, _size);
+      } catch (Throwable _e) {
+        throw Exceptions.sneakyThrow(_e);
       }
     };
     this.withOutputConfiguration(_function, _function_1);
@@ -383,68 +341,44 @@ public abstract class AbstractFSSynchronizationTest extends AbstractBuilderParti
   
   @Test
   public void testCleanUpProjectDerivedResourcesWithCreateBefore() {
-    final Procedure1<OutputConfiguration> _function = new Procedure1<OutputConfiguration>() {
-      @Override
-      public void apply(final OutputConfiguration it) {
-        it.setOutputDirectory("./");
-      }
+    final Procedure1<OutputConfiguration> _function = (OutputConfiguration it) -> {
+      it.setOutputDirectory("./");
     };
-    final Procedure0 _function_1 = new Procedure0() {
-      @Override
-      public void apply() {
-        AbstractFSSynchronizationTest.this.testCleanUpDerivedResourcesWithCreateBefore(AbstractFSSynchronizationTest.this.project);
-      }
+    final Procedure0 _function_1 = () -> {
+      this.testCleanUpDerivedResourcesWithCreateBefore(this.project);
     };
     this.withOutputConfiguration(_function, _function_1);
   }
   
   @Test
   public void testCleanUpProjectDerivedResourcesWithCreateBetween() {
-    final Procedure1<OutputConfiguration> _function = new Procedure1<OutputConfiguration>() {
-      @Override
-      public void apply(final OutputConfiguration it) {
-        it.setOutputDirectory("./");
-      }
+    final Procedure1<OutputConfiguration> _function = (OutputConfiguration it) -> {
+      it.setOutputDirectory("./");
     };
-    final Procedure0 _function_1 = new Procedure0() {
-      @Override
-      public void apply() {
-        AbstractFSSynchronizationTest.this.testCleanUpDerivedResourcesWithCreateBetween(AbstractFSSynchronizationTest.this.project);
-      }
+    final Procedure0 _function_1 = () -> {
+      this.testCleanUpDerivedResourcesWithCreateBetween(this.project);
     };
     this.withOutputConfiguration(_function, _function_1);
   }
   
   @Test
   public void testCleanUpProjectDerivedResourcesWithUpdateDerived() {
-    final Procedure1<OutputConfiguration> _function = new Procedure1<OutputConfiguration>() {
-      @Override
-      public void apply(final OutputConfiguration it) {
-        it.setOutputDirectory("./");
-      }
+    final Procedure1<OutputConfiguration> _function = (OutputConfiguration it) -> {
+      it.setOutputDirectory("./");
     };
-    final Procedure0 _function_1 = new Procedure0() {
-      @Override
-      public void apply() {
-        AbstractFSSynchronizationTest.this.testCleanUpDerivedResourcesWithUpdateDerived(AbstractFSSynchronizationTest.this.project);
-      }
+    final Procedure0 _function_1 = () -> {
+      this.testCleanUpDerivedResourcesWithUpdateDerived(this.project);
     };
     this.withOutputConfiguration(_function, _function_1);
   }
   
   @Test
   public void testCleanUpProjectDerivedResourcesWithDeleteDerived() {
-    final Procedure1<OutputConfiguration> _function = new Procedure1<OutputConfiguration>() {
-      @Override
-      public void apply(final OutputConfiguration it) {
-        it.setOutputDirectory("./");
-      }
+    final Procedure1<OutputConfiguration> _function = (OutputConfiguration it) -> {
+      it.setOutputDirectory("./");
     };
-    final Procedure0 _function_1 = new Procedure0() {
-      @Override
-      public void apply() {
-        AbstractFSSynchronizationTest.this.testCleanUpDerivedResourcesWithDeleteDerived(AbstractFSSynchronizationTest.this.project);
-      }
+    final Procedure0 _function_1 = () -> {
+      this.testCleanUpDerivedResourcesWithDeleteDerived(this.project);
     };
     this.withOutputConfiguration(_function, _function_1);
   }
@@ -597,17 +531,11 @@ public abstract class AbstractFSSynchronizationTest extends AbstractBuilderParti
   
   @Test
   public void testDeleteUpdatedDerivedResourceWithProjectAsOutput() {
-    final Procedure1<OutputConfiguration> _function = new Procedure1<OutputConfiguration>() {
-      @Override
-      public void apply(final OutputConfiguration it) {
-        it.setOutputDirectory("./");
-      }
+    final Procedure1<OutputConfiguration> _function = (OutputConfiguration it) -> {
+      it.setOutputDirectory("./");
     };
-    final Procedure0 _function_1 = new Procedure0() {
-      @Override
-      public void apply() {
-        AbstractFSSynchronizationTest.this.testDeleteUpdatedDerivedResource(AbstractFSSynchronizationTest.this.project);
-      }
+    final Procedure0 _function_1 = () -> {
+      this.testDeleteUpdatedDerivedResource(this.project);
     };
     this.withOutputConfiguration(_function, _function_1);
   }
@@ -659,17 +587,11 @@ public abstract class AbstractFSSynchronizationTest extends AbstractBuilderParti
   
   @Test
   public void testDeleteDeletedDerivedResourceWithProjectAsOutput() {
-    final Procedure1<OutputConfiguration> _function = new Procedure1<OutputConfiguration>() {
-      @Override
-      public void apply(final OutputConfiguration it) {
-        it.setOutputDirectory("./");
-      }
+    final Procedure1<OutputConfiguration> _function = (OutputConfiguration it) -> {
+      it.setOutputDirectory("./");
     };
-    final Procedure0 _function_1 = new Procedure0() {
-      @Override
-      public void apply() {
-        AbstractFSSynchronizationTest.this.testDeleteDeletedDerivedResource(AbstractFSSynchronizationTest.this.project);
-      }
+    final Procedure0 _function_1 = () -> {
+      this.testDeleteDeletedDerivedResource(this.project);
     };
     this.withOutputConfiguration(_function, _function_1);
   }

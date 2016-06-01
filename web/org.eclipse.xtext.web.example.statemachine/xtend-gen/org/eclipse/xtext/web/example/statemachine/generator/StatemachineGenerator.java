@@ -106,11 +106,8 @@ public class StatemachineGenerator extends AbstractGenerator {
     _builder.newLine();
     {
       EList<Signal> _signals = statemachine.getSignals();
-      final Function1<Signal, String> _function = new Function1<Signal, String>() {
-        @Override
-        public String apply(final Signal it) {
-          return it.getName();
-        }
+      final Function1<Signal, String> _function = (Signal it) -> {
+        return it.getName();
       };
       List<Signal> _sortBy = IterableExtensions.<Signal, String>sortBy(_signals, _function);
       for(final Signal signal : _sortBy) {
@@ -135,11 +132,8 @@ public class StatemachineGenerator extends AbstractGenerator {
     _builder.newLine();
     {
       EList<State> _states = statemachine.getStates();
-      final Function1<State, String> _function_1 = new Function1<State, String>() {
-        @Override
-        public String apply(final State it) {
-          return it.getName();
-        }
+      final Function1<State, String> _function_1 = (State it) -> {
+        return it.getName();
       };
       List<State> _sortBy_1 = IterableExtensions.<State, String>sortBy(_states, _function_1);
       for(final State state : _sortBy_1) {

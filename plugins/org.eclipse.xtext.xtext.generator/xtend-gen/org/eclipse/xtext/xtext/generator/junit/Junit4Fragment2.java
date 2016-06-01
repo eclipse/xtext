@@ -5,6 +5,7 @@ import com.google.inject.Inject;
 import com.google.inject.Injector;
 import java.util.Collections;
 import java.util.Set;
+import java.util.function.Consumer;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -50,18 +51,15 @@ public class Junit4Fragment2 extends AbstractStubGeneratingFragment {
       IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
       IBundleProjectConfig _runtimeTest_1 = _projectConfig_1.getRuntimeTest();
       ManifestAccess _manifest_1 = _runtimeTest_1.getManifest();
-      final Procedure1<ManifestAccess> _function = new Procedure1<ManifestAccess>() {
-        @Override
-        public void apply(final ManifestAccess it) {
-          Set<String> _requiredBundles = it.getRequiredBundles();
-          CollectionExtensions.<String>addAll(_requiredBundles, 
-            "org.eclipse.xtext.junit4", 
-            "org.eclipse.xtext.xbase.lib");
-          Set<String> _exportedPackages = it.getExportedPackages();
-          Grammar _grammar = Junit4Fragment2.this.getGrammar();
-          String _runtimeTestBasePackage = Junit4Fragment2.this._xtextGeneratorNaming.getRuntimeTestBasePackage(_grammar);
-          _exportedPackages.add(_runtimeTestBasePackage);
-        }
+      final Procedure1<ManifestAccess> _function = (ManifestAccess it) -> {
+        Set<String> _requiredBundles = it.getRequiredBundles();
+        CollectionExtensions.<String>addAll(_requiredBundles, 
+          "org.eclipse.xtext.junit4", 
+          "org.eclipse.xtext.xbase.lib");
+        Set<String> _exportedPackages = it.getExportedPackages();
+        Grammar _grammar = this.getGrammar();
+        String _runtimeTestBasePackage = this._xtextGeneratorNaming.getRuntimeTestBasePackage(_grammar);
+        _exportedPackages.add(_runtimeTestBasePackage);
       };
       ObjectExtensions.<ManifestAccess>operator_doubleArrow(_manifest_1, _function);
     }
@@ -73,18 +71,15 @@ public class Junit4Fragment2 extends AbstractStubGeneratingFragment {
       IXtextProjectConfig _projectConfig_3 = this.getProjectConfig();
       IBundleProjectConfig _eclipsePluginTest_1 = _projectConfig_3.getEclipsePluginTest();
       ManifestAccess _manifest_3 = _eclipsePluginTest_1.getManifest();
-      final Procedure1<ManifestAccess> _function_1 = new Procedure1<ManifestAccess>() {
-        @Override
-        public void apply(final ManifestAccess it) {
-          Set<String> _requiredBundles = it.getRequiredBundles();
-          CollectionExtensions.<String>addAll(_requiredBundles, 
-            "org.eclipse.core.runtime", 
-            "org.eclipse.ui.workbench;resolution:=optional");
-          Set<String> _exportedPackages = it.getExportedPackages();
-          Grammar _grammar = Junit4Fragment2.this.getGrammar();
-          String _eclipsePluginTestBasePackage = Junit4Fragment2.this._xtextGeneratorNaming.getEclipsePluginTestBasePackage(_grammar);
-          _exportedPackages.add(_eclipsePluginTestBasePackage);
-        }
+      final Procedure1<ManifestAccess> _function_1 = (ManifestAccess it) -> {
+        Set<String> _requiredBundles = it.getRequiredBundles();
+        CollectionExtensions.<String>addAll(_requiredBundles, 
+          "org.eclipse.core.runtime", 
+          "org.eclipse.ui.workbench;resolution:=optional");
+        Set<String> _exportedPackages = it.getExportedPackages();
+        Grammar _grammar = this.getGrammar();
+        String _eclipsePluginTestBasePackage = this._xtextGeneratorNaming.getEclipsePluginTestBasePackage(_grammar);
+        _exportedPackages.add(_eclipsePluginTestBasePackage);
       };
       ObjectExtensions.<ManifestAccess>operator_doubleArrow(_manifest_3, _function_1);
     }
@@ -108,21 +103,18 @@ public class Junit4Fragment2 extends AbstractStubGeneratingFragment {
     IBundleProjectConfig _eclipsePluginTest_2 = _projectConfig_7.getEclipsePluginTest();
     ManifestAccess _manifest_7 = _eclipsePluginTest_2.getManifest();
     Iterable<ManifestAccess> _filterNull = IterableExtensions.<ManifestAccess>filterNull(Collections.<ManifestAccess>unmodifiableList(CollectionLiterals.<ManifestAccess>newArrayList(_manifest_6, _manifest_7)));
-    final Procedure1<ManifestAccess> _function_2 = new Procedure1<ManifestAccess>() {
-      @Override
-      public void apply(final ManifestAccess it) {
-        Set<String> _importedPackages = it.getImportedPackages();
-        CollectionExtensions.<String>addAll(_importedPackages, 
-          "org.junit;version=\"4.5.0\"", 
-          "org.junit.runner;version=\"4.5.0\"", 
-          "org.junit.runner.manipulation;version=\"4.5.0\"", 
-          "org.junit.runner.notification;version=\"4.5.0\"", 
-          "org.junit.runners;version=\"4.5.0\"", 
-          "org.junit.runners.model;version=\"4.5.0\"", 
-          "org.hamcrest.core");
-      }
+    final Consumer<ManifestAccess> _function_2 = (ManifestAccess it) -> {
+      Set<String> _importedPackages = it.getImportedPackages();
+      CollectionExtensions.<String>addAll(_importedPackages, 
+        "org.junit;version=\"4.5.0\"", 
+        "org.junit.runner;version=\"4.5.0\"", 
+        "org.junit.runner.manipulation;version=\"4.5.0\"", 
+        "org.junit.runner.notification;version=\"4.5.0\"", 
+        "org.junit.runners;version=\"4.5.0\"", 
+        "org.junit.runners.model;version=\"4.5.0\"", 
+        "org.hamcrest.core");
     };
-    IterableExtensions.<ManifestAccess>forEach(_filterNull, _function_2);
+    _filterNull.forEach(_function_2);
     JavaFileAccess _generateInjectorProvider = this.generateInjectorProvider();
     IXtextProjectConfig _projectConfig_8 = this.getProjectConfig();
     IBundleProjectConfig _runtimeTest_3 = _projectConfig_8.getRuntimeTest();

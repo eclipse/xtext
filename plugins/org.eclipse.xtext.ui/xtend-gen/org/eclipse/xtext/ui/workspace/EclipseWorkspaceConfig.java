@@ -32,20 +32,14 @@ public class EclipseWorkspaceConfig implements IWorkspaceConfig {
   @Override
   public Set<? extends EclipseProjectConfig> getProjects() {
     IProject[] _projects = this.workspaceRoot.getProjects();
-    final Function1<IProject, Boolean> _function = new Function1<IProject, Boolean>() {
-      @Override
-      public Boolean apply(final IProject it) {
-        IProject _project = it.getProject();
-        return Boolean.valueOf(_project.isAccessible());
-      }
+    final Function1<IProject, Boolean> _function = (IProject it) -> {
+      IProject _project = it.getProject();
+      return Boolean.valueOf(_project.isAccessible());
     };
     Iterable<IProject> _filter = IterableExtensions.<IProject>filter(((Iterable<IProject>)Conversions.doWrapArray(_projects)), _function);
-    final Function1<IProject, EclipseProjectConfig> _function_1 = new Function1<IProject, EclipseProjectConfig>() {
-      @Override
-      public EclipseProjectConfig apply(final IProject it) {
-        IProject _project = it.getProject();
-        return EclipseWorkspaceConfig.this.projectConfigProvider.createProjectConfig(_project);
-      }
+    final Function1<IProject, EclipseProjectConfig> _function_1 = (IProject it) -> {
+      IProject _project = it.getProject();
+      return this.projectConfigProvider.createProjectConfig(_project);
     };
     Iterable<EclipseProjectConfig> _map = IterableExtensions.<IProject, EclipseProjectConfig>map(_filter, _function_1);
     return IterableExtensions.<EclipseProjectConfig>toSet(_map);

@@ -35,13 +35,10 @@ public class TypeParameterDeclarationImpl extends AbstractElementImpl<JvmTypePar
     JvmTypeParameter _delegate = this.getDelegate();
     EList<JvmTypeConstraint> _constraints = _delegate.getConstraints();
     Iterable<JvmUpperBound> _filter = Iterables.<JvmUpperBound>filter(_constraints, JvmUpperBound.class);
-    final Function1<JvmUpperBound, TypeReference> _function = new Function1<JvmUpperBound, TypeReference>() {
-      @Override
-      public TypeReference apply(final JvmUpperBound it) {
-        CompilationUnitImpl _compilationUnit = TypeParameterDeclarationImpl.this.getCompilationUnit();
-        JvmTypeReference _typeReference = it.getTypeReference();
-        return _compilationUnit.toTypeReference(_typeReference);
-      }
+    final Function1<JvmUpperBound, TypeReference> _function = (JvmUpperBound it) -> {
+      CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+      JvmTypeReference _typeReference = it.getTypeReference();
+      return _compilationUnit.toTypeReference(_typeReference);
     };
     Iterable<TypeReference> _map = IterableExtensions.<JvmUpperBound, TypeReference>map(_filter, _function);
     return IterableExtensions.<TypeReference>toList(_map);

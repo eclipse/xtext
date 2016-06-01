@@ -47,13 +47,10 @@ public class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
     if ((resource instanceof IContainer)) {
       try {
         IResource[] _members = ((IContainer)resource).members();
-        final Function1<IResource, Path> _function = new Function1<IResource, Path>() {
-          @Override
-          public Path apply(final IResource it) {
-            IPath _fullPath = it.getFullPath();
-            String _string = _fullPath.toString();
-            return new Path(_string);
-          }
+        final Function1<IResource, Path> _function = (IResource it) -> {
+          IPath _fullPath = it.getFullPath();
+          String _string = _fullPath.toString();
+          return new Path(_string);
         };
         return ListExtensions.<IResource, Path>map(((List<IResource>)Conversions.doWrapArray(_members)), _function);
       } catch (final Throwable _t) {
@@ -88,11 +85,8 @@ public class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
       }
       List<String> _reverse = ListExtensions.<String>reverse(trailingSegments);
       IPath _location = resource.getLocation();
-      final Function2<IPath, String, IPath> _function = new Function2<IPath, String, IPath>() {
-        @Override
-        public IPath apply(final IPath $0, final String $1) {
-          return $0.append($1);
-        }
+      final Function2<IPath, String, IPath> _function = (IPath $0, String $1) -> {
+        return $0.append($1);
       };
       IPath _fold = IterableExtensions.<String, IPath>fold(_reverse, _location, _function);
       _xblockexpression = URIUtil.toURI(_fold);

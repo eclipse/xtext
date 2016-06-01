@@ -11,6 +11,7 @@ import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import java.util.Set;
+import java.util.function.Consumer;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
@@ -38,7 +39,6 @@ import org.eclipse.xtext.validation.EValidatorRegistrar;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
 
 /**
@@ -84,13 +84,10 @@ public class UniqueClassNameValidator extends AbstractDeclarativeValidator {
       if (_equals_1) {
         EList<EObject> _contents_1 = resource.getContents();
         Iterable<JvmDeclaredType> _filter = Iterables.<JvmDeclaredType>filter(_contents_1, JvmDeclaredType.class);
-        final Procedure1<JvmDeclaredType> _function = new Procedure1<JvmDeclaredType>() {
-          @Override
-          public void apply(final JvmDeclaredType it) {
-            UniqueClassNameValidator.this.doCheckUniqueName(it);
-          }
+        final Consumer<JvmDeclaredType> _function = (JvmDeclaredType it) -> {
+          this.doCheckUniqueName(it);
         };
-        IterableExtensions.<JvmDeclaredType>forEach(_filter, _function);
+        _filter.forEach(_function);
       }
     }
   }
@@ -115,25 +112,19 @@ public class UniqueClassNameValidator extends AbstractDeclarativeValidator {
   }
   
   protected boolean checkUniqueInIndex(final JvmDeclaredType type, final Iterable<IEObjectDescription> descriptions) {
-    final Function1<IEObjectDescription, URI> _function = new Function1<IEObjectDescription, URI>() {
-      @Override
-      public URI apply(final IEObjectDescription it) {
-        URI _eObjectURI = it.getEObjectURI();
-        return _eObjectURI.trimFragment();
-      }
+    final Function1<IEObjectDescription, URI> _function = (IEObjectDescription it) -> {
+      URI _eObjectURI = it.getEObjectURI();
+      return _eObjectURI.trimFragment();
     };
     Iterable<URI> _map = IterableExtensions.<IEObjectDescription, URI>map(descriptions, _function);
     final Set<URI> resourceURIs = IterableExtensions.<URI>toSet(_map);
     int _size = resourceURIs.size();
     boolean _greaterThan = (_size > 1);
     if (_greaterThan) {
-      final Function1<URI, Boolean> _function_1 = new Function1<URI, Boolean>() {
-        @Override
-        public Boolean apply(final URI it) {
-          Resource _eResource = type.eResource();
-          URI _uRI = _eResource.getURI();
-          return Boolean.valueOf((!Objects.equal(it, _uRI)));
-        }
+      final Function1<URI, Boolean> _function_1 = (URI it) -> {
+        Resource _eResource = type.eResource();
+        URI _uRI = _eResource.getURI();
+        return Boolean.valueOf((!Objects.equal(it, _uRI)));
       };
       Iterable<URI> _filter = IterableExtensions.<URI>filter(resourceURIs, _function_1);
       URI _head = IterableExtensions.<URI>head(_filter);

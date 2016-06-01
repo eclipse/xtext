@@ -71,12 +71,9 @@ public class CachingResourceValidatorImpl extends DerivedStateAwareResourceValid
   
   @Override
   public List<Issue> validate(final Resource resource, final CheckMode mode, final CancelIndicator mon) throws OperationCanceledError {
-    final Provider<List<Issue>> _function = new Provider<List<Issue>>() {
-      @Override
-      public List<Issue> get() {
-        CachingResourceValidatorImpl.this.operationCanceledManager.checkCanceled(mon);
-        return CachingResourceValidatorImpl.super.validate(resource, mode, mon);
-      }
+    final Provider<List<Issue>> _function = () -> {
+      this.operationCanceledManager.checkCanceled(mon);
+      return super.validate(resource, mode, mon);
     };
     return this.cache.<List<Issue>>get(mode, resource, _function);
   }
@@ -131,12 +128,9 @@ public class CachingResourceValidatorImpl extends DerivedStateAwareResourceValid
     for (final JvmDeclaredType jvmType : _filter) {
       TreeIterator<EObject> _eAllContents = jvmType.eAllContents();
       Iterator<JvmMember> _filter_1 = Iterators.<JvmMember>filter(_eAllContents, JvmMember.class);
-      final Function1<JvmMember, Boolean> _function = new Function1<JvmMember, Boolean>() {
-        @Override
-        public Boolean apply(final JvmMember it) {
-          boolean _isSynthetic = CachingResourceValidatorImpl.this._jvmTypeExtensions.isSynthetic(it);
-          return Boolean.valueOf((!_isSynthetic));
-        }
+      final Function1<JvmMember, Boolean> _function = (JvmMember it) -> {
+        boolean _isSynthetic = this._jvmTypeExtensions.isSynthetic(it);
+        return Boolean.valueOf((!_isSynthetic));
       };
       Iterator<JvmMember> _filter_2 = IteratorExtensions.<JvmMember>filter(_filter_1, _function);
       Iterable<JvmMember> _iterable = IteratorExtensions.<JvmMember>toIterable(_filter_2);
@@ -201,12 +195,9 @@ public class CachingResourceValidatorImpl extends DerivedStateAwareResourceValid
       _append_1.append(_qualifiedName);
       if ((member instanceof JvmExecutable)) {
         EList<JvmFormalParameter> _parameters = ((JvmExecutable)member).getParameters();
-        final Function1<JvmFormalParameter, CharSequence> _function = new Function1<JvmFormalParameter, CharSequence>() {
-          @Override
-          public CharSequence apply(final JvmFormalParameter it) {
-            JvmTypeReference _parameterType = it.getParameterType();
-            return _parameterType.getSimpleName();
-          }
+        final Function1<JvmFormalParameter, CharSequence> _function = (JvmFormalParameter it) -> {
+          JvmTypeReference _parameterType = it.getParameterType();
+          return _parameterType.getSimpleName();
         };
         final String parameterTypes = IterableExtensions.<JvmFormalParameter>join(_parameters, ", ", _function);
         StringBuilder _append_2 = uiString.append("(");

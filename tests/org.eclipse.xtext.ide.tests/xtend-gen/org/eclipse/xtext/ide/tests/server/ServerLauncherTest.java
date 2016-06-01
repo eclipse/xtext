@@ -59,13 +59,10 @@ public class ServerLauncherTest {
     try {
       final JsonBasedLanguageServer client = new JsonBasedLanguageServer();
       LanguageServerProtocol _protocol = client.getProtocol();
-      final Procedure2<String, Throwable> _function = new Procedure2<String, Throwable>() {
-        @Override
-        public void apply(final String p1, final Throwable p2) {
-          System.err.println(p1);
-          if (p2!=null) {
-            p2.printStackTrace();
-          }
+      final Procedure2<String, Throwable> _function = (String p1, Throwable p2) -> {
+        System.err.println(p1);
+        if (p2!=null) {
+          p2.printStackTrace();
         }
       };
       _protocol.addErrorListener(_function);
@@ -73,11 +70,8 @@ public class ServerLauncherTest {
       OutputStream _outputStream = this.process.getOutputStream();
       client.connect(_inputStream, _outputStream);
       InitializeParamsImpl _initializeParamsImpl = new InitializeParamsImpl();
-      final Procedure1<InitializeParamsImpl> _function_1 = new Procedure1<InitializeParamsImpl>() {
-        @Override
-        public void apply(final InitializeParamsImpl it) {
-          it.setRootPath(".");
-        }
+      final Procedure1<InitializeParamsImpl> _function_1 = (InitializeParamsImpl it) -> {
+        it.setRootPath(".");
       };
       InitializeParamsImpl _doubleArrow = ObjectExtensions.<InitializeParamsImpl>operator_doubleArrow(_initializeParamsImpl, _function_1);
       CompletableFuture<InitializeResult> _initialize = client.initialize(_doubleArrow);

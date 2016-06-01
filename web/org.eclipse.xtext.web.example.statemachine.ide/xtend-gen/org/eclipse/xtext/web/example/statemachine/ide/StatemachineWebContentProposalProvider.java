@@ -96,12 +96,9 @@ public class StatemachineWebContentProposalProvider extends IdeContentProposalPr
       EObject _currentModel = context.getCurrentModel();
       final IScope scope = _scopeProvider.getScope(_currentModel, StatemachinePackage.Literals.EVENT__SIGNAL);
       Iterable<IEObjectDescription> _allElements = scope.getAllElements();
-      final Function1<IEObjectDescription, Boolean> _function = new Function1<IEObjectDescription, Boolean>() {
-        @Override
-        public Boolean apply(final IEObjectDescription it) {
-          EClass _eClass = it.getEClass();
-          return Boolean.valueOf(Objects.equal(_eClass, StatemachinePackage.Literals.INPUT_SIGNAL));
-        }
+      final Function1<IEObjectDescription, Boolean> _function = (IEObjectDescription it) -> {
+        EClass _eClass = it.getEClass();
+        return Boolean.valueOf(Objects.equal(_eClass, StatemachinePackage.Literals.INPUT_SIGNAL));
       };
       Iterable<IEObjectDescription> _filter = IterableExtensions.<IEObjectDescription>filter(_allElements, _function);
       for (final IEObjectDescription description : _filter) {
@@ -109,12 +106,9 @@ public class StatemachineWebContentProposalProvider extends IdeContentProposalPr
           IdeContentProposalCreator _proposalCreator = this.getProposalCreator();
           QualifiedName _name = description.getName();
           String _string = _name.toString();
-          final Procedure1<ContentAssistEntry> _function_1 = new Procedure1<ContentAssistEntry>() {
-            @Override
-            public void apply(final ContentAssistEntry it) {
-              it.setSource(description);
-              it.setDescription("input signal");
-            }
+          final Procedure1<ContentAssistEntry> _function_1 = (ContentAssistEntry it) -> {
+            it.setSource(description);
+            it.setDescription("input signal");
           };
           final ContentAssistEntry entry = _proposalCreator.createProposal(_string, context, _function_1);
           IdeContentProposalPriorities _proposalPriorities = this.getProposalPriorities();
@@ -132,12 +126,9 @@ public class StatemachineWebContentProposalProvider extends IdeContentProposalPr
         EObject _currentModel_1 = context.getCurrentModel();
         final IScope scope_1 = _scopeProvider_1.getScope(_currentModel_1, StatemachinePackage.Literals.COMMAND__SIGNAL);
         Iterable<IEObjectDescription> _allElements_1 = scope_1.getAllElements();
-        final Function1<IEObjectDescription, Boolean> _function_1 = new Function1<IEObjectDescription, Boolean>() {
-          @Override
-          public Boolean apply(final IEObjectDescription it) {
-            EClass _eClass = it.getEClass();
-            return Boolean.valueOf(Objects.equal(_eClass, StatemachinePackage.Literals.OUTPUT_SIGNAL));
-          }
+        final Function1<IEObjectDescription, Boolean> _function_1 = (IEObjectDescription it) -> {
+          EClass _eClass = it.getEClass();
+          return Boolean.valueOf(Objects.equal(_eClass, StatemachinePackage.Literals.OUTPUT_SIGNAL));
         };
         Iterable<IEObjectDescription> _filter_1 = IterableExtensions.<IEObjectDescription>filter(_allElements_1, _function_1);
         for (final IEObjectDescription description_1 : _filter_1) {
@@ -145,12 +136,9 @@ public class StatemachineWebContentProposalProvider extends IdeContentProposalPr
             IdeContentProposalCreator _proposalCreator = this.getProposalCreator();
             QualifiedName _name = description_1.getName();
             String _string = _name.toString();
-            final Procedure1<ContentAssistEntry> _function_2 = new Procedure1<ContentAssistEntry>() {
-              @Override
-              public void apply(final ContentAssistEntry it) {
-                it.setSource(description_1);
-                it.setDescription("output signal");
-              }
+            final Procedure1<ContentAssistEntry> _function_2 = (ContentAssistEntry it) -> {
+              it.setSource(description_1);
+              it.setDescription("output signal");
             };
             final ContentAssistEntry entry = _proposalCreator.createProposal(_string, context, _function_2);
             IdeContentProposalPriorities _proposalPriorities = this.getProposalPriorities();

@@ -265,13 +265,10 @@ public class SyntacticSequencerExtensions {
             StringConcatenationClient _elementAliasToConstructor_1 = this.elementAliasToConstructor(child_1);
             children_1.add(_elementAliasToConstructor_1);
           }
-          final Function1<StringConcatenationClient, String> _function = new Function1<StringConcatenationClient, String>() {
-            @Override
-            public String apply(final StringConcatenationClient it) {
-              StringConcatenation _builder = new StringConcatenation();
-              _builder.append(it, "");
-              return _builder.toString();
-            }
+          final Function1<StringConcatenationClient, String> _function = (StringConcatenationClient it) -> {
+            StringConcatenation _builder = new StringConcatenation();
+            _builder.append(it, "");
+            return _builder.toString();
           };
           ListExtensions.<StringConcatenationClient, String>sortInplaceBy(children_1, _function);
           StringConcatenationClient _client_2 = new StringConcatenationClient() {

@@ -94,12 +94,9 @@ public class DocumentSymbolService {
     for (final URI targetURI : targetURIs) {
       {
         this.operationCanceledManager.checkCanceled(cancelIndicator);
-        final Procedure1<EObject> _function = new Procedure1<EObject>() {
-          @Override
-          public void apply(final EObject obj) {
-            LocationImpl _newLocation = DocumentSymbolService.this._documentExtensions.newLocation(obj);
-            locations.add(_newLocation);
-          }
+        final Procedure1<EObject> _function = (EObject obj) -> {
+          LocationImpl _newLocation = this._documentExtensions.newLocation(obj);
+          locations.add(_newLocation);
         };
         this.doRead(resourceAccess, targetURI, _function);
       }
@@ -114,21 +111,15 @@ public class DocumentSymbolService {
     }
     final ArrayList<LocationImpl> locations = CollectionLiterals.<LocationImpl>newArrayList();
     final TargetURIs targetURIs = this.collectTargetURIs(element);
-    final IAcceptor<IReferenceDescription> _function = new IAcceptor<IReferenceDescription>() {
-      @Override
-      public void accept(final IReferenceDescription reference) {
-        URI _sourceEObjectUri = reference.getSourceEObjectUri();
-        final Procedure1<EObject> _function = new Procedure1<EObject>() {
-          @Override
-          public void apply(final EObject obj) {
-            EReference _eReference = reference.getEReference();
-            int _indexInList = reference.getIndexInList();
-            LocationImpl _newLocation = DocumentSymbolService.this._documentExtensions.newLocation(obj, _eReference, _indexInList);
-            locations.add(_newLocation);
-          }
-        };
-        DocumentSymbolService.this.doRead(resourceAccess, _sourceEObjectUri, _function);
-      }
+    final IAcceptor<IReferenceDescription> _function = (IReferenceDescription reference) -> {
+      URI _sourceEObjectUri = reference.getSourceEObjectUri();
+      final Procedure1<EObject> _function_1 = (EObject obj) -> {
+        EReference _eReference = reference.getEReference();
+        int _indexInList = reference.getIndexInList();
+        LocationImpl _newLocation = this._documentExtensions.newLocation(obj, _eReference, _indexInList);
+        locations.add(_newLocation);
+      };
+      this.doRead(resourceAccess, _sourceEObjectUri, _function_1);
     };
     ReferenceAcceptor _referenceAcceptor = new ReferenceAcceptor(this.resourceServiceProviderRegistry, _function);
     CancelIndicatorProgressMonitor _cancelIndicatorProgressMonitor = new CancelIndicatorProgressMonitor(cancelIndicator);
@@ -207,12 +198,9 @@ public class DocumentSymbolService {
           if ((symbol != null)) {
             symbols.add(symbol);
             URI _eObjectURI = description.getEObjectURI();
-            final Procedure1<EObject> _function = new Procedure1<EObject>() {
-              @Override
-              public void apply(final EObject obj) {
-                LocationImpl _newLocation = DocumentSymbolService.this._documentExtensions.newLocation(obj);
-                symbol.setLocation(_newLocation);
-              }
+            final Procedure1<EObject> _function = (EObject obj) -> {
+              LocationImpl _newLocation = this._documentExtensions.newLocation(obj);
+              symbol.setLocation(_newLocation);
             };
             this.doRead(resourceAccess, _eObjectURI, _function);
           }
@@ -265,15 +253,12 @@ public class DocumentSymbolService {
   }
   
   protected void doRead(final IReferenceFinder.IResourceAccess resourceAccess, final URI objectURI, final Procedure1<? super EObject> acceptor) {
-    final IUnitOfWork<Object, ResourceSet> _function = new IUnitOfWork<Object, ResourceSet>() {
-      @Override
-      public Object exec(final ResourceSet resourceSet) throws Exception {
-        final EObject object = resourceSet.getEObject(objectURI, true);
-        if ((object != null)) {
-          acceptor.apply(object);
-        }
-        return null;
+    final IUnitOfWork<Object, ResourceSet> _function = (ResourceSet resourceSet) -> {
+      final EObject object = resourceSet.getEObject(objectURI, true);
+      if ((object != null)) {
+        acceptor.apply(object);
       }
+      return null;
     };
     resourceAccess.<Object>readOnly(objectURI, _function);
   }

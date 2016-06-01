@@ -400,35 +400,29 @@ public class XtendFormatterBugTests extends AbstractXtendFormatterTest {
   
   @Test
   public void bug462628() {
-    final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
-      @Override
-      public void apply(final FormatterTestRequest it) {
-        final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
-          @Override
-          public void apply(final MapBasedPreferenceValues it) {
-            it.<Integer>put(FormatterPreferenceKeys.maxLineWidth, Integer.valueOf(120));
-          }
-        };
-        it.preferences(_function);
-        StringConcatenation _builder = new StringConcatenation();
-        _builder.append("class Foo {");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("def void format() {");
-        _builder.newLine();
-        _builder.append("\t\t");
-        _builder.append("mmmmmmmmmmmmmmmcontainsBlockExprmmmmmmmexprcasesemptymmmmexprmmdefaultmmmmmmmm &&");
-        _builder.newLine();
-        _builder.append("\t\t\t");
-        _builder.append("mexprmcasesmexists[multiline] && mexprmmdefaultmmultilineOrInNewLine");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("}");
-        _builder.newLine();
-        _builder.append("}");
-        _builder.newLine();
-        it.setToBeFormatted(_builder);
-      }
+    final Procedure1<FormatterTestRequest> _function = (FormatterTestRequest it) -> {
+      final Procedure1<MapBasedPreferenceValues> _function_1 = (MapBasedPreferenceValues it_1) -> {
+        it_1.<Integer>put(FormatterPreferenceKeys.maxLineWidth, Integer.valueOf(120));
+      };
+      it.preferences(_function_1);
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("class Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def void format() {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("mmmmmmmmmmmmmmmcontainsBlockExprmmmmmmmexprcasesemptymmmmexprmmdefaultmmmmmmmm &&");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("mexprmcasesmexists[multiline] && mexprmmdefaultmmultilineOrInNewLine");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      it.setToBeFormatted(_builder);
     };
     this.tester.assertFormatted(_function);
   }

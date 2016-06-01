@@ -491,19 +491,16 @@ public class PropertyCompilerTest extends AbstractXtendCompilerTest {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
-        @Override
-        public void accept(final CompilationTestHelper.Result it) {
-          try {
-            Class<?> _compiledClass = it.getCompiledClass();
-            final Object instance = _compiledClass.newInstance();
-            Class<?> _compiledClass_1 = it.getCompiledClass();
-            final Method getFoo = _compiledClass_1.getDeclaredMethod("getFoo");
-            Object _invoke = getFoo.invoke(instance);
-            Assert.assertEquals(Integer.valueOf(5), _invoke);
-          } catch (Throwable _e) {
-            throw Exceptions.sneakyThrow(_e);
-          }
+      final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
+        try {
+          Class<?> _compiledClass = it.getCompiledClass();
+          final Object instance = _compiledClass.newInstance();
+          Class<?> _compiledClass_1 = it.getCompiledClass();
+          final Method getFoo = _compiledClass_1.getDeclaredMethod("getFoo");
+          Object _invoke = getFoo.invoke(instance);
+          Assert.assertEquals(Integer.valueOf(5), _invoke);
+        } catch (Throwable _e) {
+          throw Exceptions.sneakyThrow(_e);
         }
       };
       this.compilationTestHelper.compile(_builder, _function);
@@ -532,22 +529,19 @@ public class PropertyCompilerTest extends AbstractXtendCompilerTest {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
-        @Override
-        public void accept(final CompilationTestHelper.Result it) {
-          try {
-            Class<?> _compiledClass = it.getCompiledClass();
-            final Object instance = _compiledClass.newInstance();
-            Class<?> _compiledClass_1 = it.getCompiledClass();
-            final Method setFoo = _compiledClass_1.getDeclaredMethod("setFoo", int.class);
-            setFoo.invoke(instance, Integer.valueOf(1));
-            Class<?> _compiledClass_2 = it.getCompiledClass();
-            final Method getFoo = _compiledClass_2.getDeclaredMethod("getFoo");
-            Object _invoke = getFoo.invoke(instance);
-            Assert.assertEquals(Integer.valueOf(5), _invoke);
-          } catch (Throwable _e) {
-            throw Exceptions.sneakyThrow(_e);
-          }
+      final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
+        try {
+          Class<?> _compiledClass = it.getCompiledClass();
+          final Object instance = _compiledClass.newInstance();
+          Class<?> _compiledClass_1 = it.getCompiledClass();
+          final Method setFoo = _compiledClass_1.getDeclaredMethod("setFoo", int.class);
+          setFoo.invoke(instance, Integer.valueOf(1));
+          Class<?> _compiledClass_2 = it.getCompiledClass();
+          final Method getFoo = _compiledClass_2.getDeclaredMethod("getFoo");
+          Object _invoke = getFoo.invoke(instance);
+          Assert.assertEquals(Integer.valueOf(5), _invoke);
+        } catch (Throwable _e) {
+          throw Exceptions.sneakyThrow(_e);
         }
       };
       this.compilationTestHelper.compile(_builder, _function);
@@ -567,20 +561,17 @@ public class PropertyCompilerTest extends AbstractXtendCompilerTest {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
-        @Override
-        public void accept(final CompilationTestHelper.Result it) {
-          try {
-            Class<?> _compiledClass = it.getCompiledClass();
-            final Method setFoo = _compiledClass.getDeclaredMethod("setFoo", int.class);
-            setFoo.invoke(null, Integer.valueOf(1));
-            Class<?> _compiledClass_1 = it.getCompiledClass();
-            final Method getFoo = _compiledClass_1.getDeclaredMethod("getFoo");
-            Object _invoke = getFoo.invoke(null);
-            Assert.assertEquals(Integer.valueOf(1), _invoke);
-          } catch (Throwable _e) {
-            throw Exceptions.sneakyThrow(_e);
-          }
+      final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
+        try {
+          Class<?> _compiledClass = it.getCompiledClass();
+          final Method setFoo = _compiledClass.getDeclaredMethod("setFoo", int.class);
+          setFoo.invoke(null, Integer.valueOf(1));
+          Class<?> _compiledClass_1 = it.getCompiledClass();
+          final Method getFoo = _compiledClass_1.getDeclaredMethod("getFoo");
+          Object _invoke = getFoo.invoke(null);
+          Assert.assertEquals(Integer.valueOf(1), _invoke);
+        } catch (Throwable _e) {
+          throw Exceptions.sneakyThrow(_e);
         }
       };
       this.compilationTestHelper.compile(_builder, _function);

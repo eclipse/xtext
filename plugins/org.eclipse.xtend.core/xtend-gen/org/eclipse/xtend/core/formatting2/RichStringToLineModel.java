@@ -290,12 +290,9 @@ public class RichStringToLineModel extends AbstractRichStringPartAcceptor.ForLoo
   public void acceptSemanticText(final CharSequence text, final RichStringLiteral origin) {
     super.acceptSemanticText(text, origin);
     if ((!this.content)) {
-      if (((text.length() > 0) && (IterableExtensions.<Integer, Boolean>fold(new IntegerRange(0, (text.length() - 1)), Boolean.valueOf(false), new Function2<Boolean, Integer, Boolean>() {
-        @Override
-        public Boolean apply(final Boolean v, final Integer i) {
-          return Boolean.valueOf(((v).booleanValue() || (!Character.isWhitespace(text.charAt((i).intValue())))));
-        }
-      })).booleanValue())) {
+      if (((text.length() > 0) && (IterableExtensions.<Integer, Boolean>fold(new IntegerRange(0, (text.length() - 1)), Boolean.valueOf(false), ((Function2<Boolean, Integer, Boolean>) (Boolean v, Integer i) -> {
+        return Boolean.valueOf(((v).booleanValue() || (!Character.isWhitespace(text.charAt((i).intValue())))));
+      }))).booleanValue())) {
         this.startContent();
       }
     }

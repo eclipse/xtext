@@ -36,32 +36,29 @@ public class ExternalizedTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    final IAcceptor<XtendCompilerTester.CompilationResult> _function = new IAcceptor<XtendCompilerTester.CompilationResult>() {
-      @Override
-      public void accept(final XtendCompilerTester.CompilationResult it) {
-        @Extension
-        final TransformationContext ctx = it.getTransformationContext();
-        final MutableClassDeclaration clazz = ctx.findClass("i18n.MyMessages");
-        Iterable<? extends MutableMethodDeclaration> _declaredMethods = clazz.getDeclaredMethods();
-        int _size = IterableExtensions.size(_declaredMethods);
-        Assert.assertEquals(2, _size);
-        CompilationUnit _compilationUnit = it.getCompilationUnit();
-        final Path path = _compilationUnit.getFilePath();
-        Path _targetFolder = ctx.getTargetFolder(path);
-        String _qualifiedName = clazz.getQualifiedName();
-        String _replace = _qualifiedName.replace(".", "/");
-        String _plus = (_replace + ".properties");
-        final Path properties = _targetFolder.append(_plus);
-        StringConcatenation _builder = new StringConcatenation();
-        _builder.append("GREETING = Hello {0}");
-        _builder.newLine();
-        _builder.append("DATE_MESSAGE = Today, is ${0,date}.");
-        _builder.newLine();
-        String _string = _builder.toString();
-        CharSequence _contents = ctx.getContents(properties);
-        String _string_1 = _contents.toString();
-        Assert.assertEquals(_string, _string_1);
-      }
+    final IAcceptor<XtendCompilerTester.CompilationResult> _function = (XtendCompilerTester.CompilationResult it) -> {
+      @Extension
+      final TransformationContext ctx = it.getTransformationContext();
+      final MutableClassDeclaration clazz = ctx.findClass("i18n.MyMessages");
+      Iterable<? extends MutableMethodDeclaration> _declaredMethods = clazz.getDeclaredMethods();
+      int _size = IterableExtensions.size(_declaredMethods);
+      Assert.assertEquals(2, _size);
+      CompilationUnit _compilationUnit = it.getCompilationUnit();
+      final Path path = _compilationUnit.getFilePath();
+      Path _targetFolder = ctx.getTargetFolder(path);
+      String _qualifiedName = clazz.getQualifiedName();
+      String _replace = _qualifiedName.replace(".", "/");
+      String _plus = (_replace + ".properties");
+      final Path properties = _targetFolder.append(_plus);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("GREETING = Hello {0}");
+      _builder_1.newLine();
+      _builder_1.append("DATE_MESSAGE = Today, is ${0,date}.");
+      _builder_1.newLine();
+      String _string = _builder_1.toString();
+      CharSequence _contents = ctx.getContents(properties);
+      String _string_1 = _contents.toString();
+      Assert.assertEquals(_string, _string_1);
     };
     this.compilerTester.compile(_builder, _function);
   }

@@ -80,43 +80,31 @@ public class DefaultTaskFinderTest extends AbstractXtextTests {
       String _unix = LineDelimiters.toUnix(_builder.toString());
       XtextResource _resourceFromString = this.getResourceFromString(_unix);
       Task _task = new Task();
-      final Procedure1<Task> _function = new Procedure1<Task>() {
-        @Override
-        public void apply(final Task it) {
-          TaskTag _taskTag = new TaskTag();
-          final Procedure1<TaskTag> _function = new Procedure1<TaskTag>() {
-            @Override
-            public void apply(final TaskTag it) {
-              it.setName("TODO");
-              it.setPriority(Priority.NORMAL);
-            }
-          };
-          TaskTag _doubleArrow = ObjectExtensions.<TaskTag>operator_doubleArrow(_taskTag, _function);
-          it.setTag(_doubleArrow);
-          it.setDescription(" foo");
-          it.setOffset(2);
-          it.setLineNumber(1);
-        }
+      final Procedure1<Task> _function = (Task it) -> {
+        TaskTag _taskTag = new TaskTag();
+        final Procedure1<TaskTag> _function_1 = (TaskTag it_1) -> {
+          it_1.setName("TODO");
+          it_1.setPriority(Priority.NORMAL);
+        };
+        TaskTag _doubleArrow = ObjectExtensions.<TaskTag>operator_doubleArrow(_taskTag, _function_1);
+        it.setTag(_doubleArrow);
+        it.setDescription(" foo");
+        it.setOffset(2);
+        it.setLineNumber(1);
       };
       Task _doubleArrow = ObjectExtensions.<Task>operator_doubleArrow(_task, _function);
       Task _task_1 = new Task();
-      final Procedure1<Task> _function_1 = new Procedure1<Task>() {
-        @Override
-        public void apply(final Task it) {
-          TaskTag _taskTag = new TaskTag();
-          final Procedure1<TaskTag> _function = new Procedure1<TaskTag>() {
-            @Override
-            public void apply(final TaskTag it) {
-              it.setName("FIXME");
-              it.setPriority(Priority.HIGH);
-            }
-          };
-          TaskTag _doubleArrow = ObjectExtensions.<TaskTag>operator_doubleArrow(_taskTag, _function);
-          it.setTag(_doubleArrow);
-          it.setDescription(" bar");
-          it.setOffset(17);
-          it.setLineNumber(3);
-        }
+      final Procedure1<Task> _function_1 = (Task it) -> {
+        TaskTag _taskTag = new TaskTag();
+        final Procedure1<TaskTag> _function_2 = (TaskTag it_1) -> {
+          it_1.setName("FIXME");
+          it_1.setPriority(Priority.HIGH);
+        };
+        TaskTag _doubleArrow_1 = ObjectExtensions.<TaskTag>operator_doubleArrow(_taskTag, _function_2);
+        it.setTag(_doubleArrow_1);
+        it.setDescription(" bar");
+        it.setOffset(17);
+        it.setLineNumber(3);
       };
       Task _doubleArrow_1 = ObjectExtensions.<Task>operator_doubleArrow(_task_1, _function_1);
       this.assertContainsTasks(_resourceFromString, 

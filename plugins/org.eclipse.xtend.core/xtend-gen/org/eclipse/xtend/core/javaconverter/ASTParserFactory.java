@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.core.javaconverter;
 
-import com.google.common.base.Objects;
 import java.io.File;
 import java.net.URL;
 import java.net.URLClassLoader;
@@ -142,19 +141,16 @@ public class ASTParserFactory {
   
   public static int asJLS(final String javaVersion) {
     int _switchResult = (int) 0;
-    boolean _matched = false;
-    if (Objects.equal(javaVersion, "1.7")) {
-      _matched=true;
-      _switchResult = 4;
-    }
-    if (!_matched) {
-      if (Objects.equal(javaVersion, "1.8")) {
-        _matched=true;
+    switch (javaVersion) {
+      case "1.7":
+        _switchResult = 4;
+        break;
+      case "1.8":
         _switchResult = 8;
-      }
-    }
-    if (!_matched) {
-      _switchResult = 3;
+        break;
+      default:
+        _switchResult = 3;
+        break;
     }
     return _switchResult;
   }
@@ -179,19 +175,13 @@ public class ASTParserFactory {
   protected void provideCustomEnvironment(final ASTParser parser) {
     final ClassLoader sysClassLoader = ClassLoader.getSystemClassLoader();
     URL[] _uRLs = ((URLClassLoader) sysClassLoader).getURLs();
-    final Function1<URL, String> _function = new Function1<URL, String>() {
-      @Override
-      public String apply(final URL it) {
-        return it.getFile();
-      }
+    final Function1<URL, String> _function = (URL it) -> {
+      return it.getFile();
     };
     List<String> _map = ListExtensions.<URL, String>map(((List<URL>)Conversions.doWrapArray(_uRLs)), _function);
-    final Function1<String, Boolean> _function_1 = new Function1<String, Boolean>() {
-      @Override
-      public Boolean apply(final String it) {
-        File _file = new File(it);
-        return Boolean.valueOf(_file.exists());
-      }
+    final Function1<String, Boolean> _function_1 = (String it) -> {
+      File _file = new File(it);
+      return Boolean.valueOf(_file.exists());
     };
     final Iterable<String> cpEntries = IterableExtensions.<String>filter(_map, _function_1);
     parser.setEnvironment(((String[])Conversions.unwrapArray(cpEntries, String.class)), null, null, true);

@@ -156,33 +156,27 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
     _builder_1.append("}");
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("usercode/UserCode.xtend", _builder_1.toString());
-    final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
-      @Override
-      public void apply(final CompilationUnitImpl it) {
-        XtendFile _xtendFile = it.getXtendFile();
-        EList<XtendTypeDeclaration> _xtendTypes = _xtendFile.getXtendTypes();
-        Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
-        final XtendClass xtendClass = IterableExtensions.<XtendClass>head(_filter);
-        StringConcatenation _builder = new StringConcatenation();
-        _builder.append("@<a href=\"eclipse-xtext-doc:platform:/resource/macroProject/src/myannotation/ChangeDoc.xtend%23/1\">ChangeDoc</a><br>Comment");
-        ActiveAnnotationsProcessingInIDETest.this.assertDocumentation(_builder, xtendClass);
-        StringConcatenation _builder_1 = new StringConcatenation();
-        _builder_1.append("@<a href=\"eclipse-xtext-doc:platform:/resource/macroProject/src/myannotation/ChangeDoc.xtend%23/1\">ChangeDoc</a><br>Hello World!");
-        EList<XtendMember> _members = xtendClass.getMembers();
-        Iterable<XtendField> _filter_1 = Iterables.<XtendField>filter(_members, XtendField.class);
-        final Function1<XtendField, Boolean> _function = new Function1<XtendField, Boolean>() {
-          @Override
-          public Boolean apply(final XtendField it) {
-            String _name = it.getName();
-            return Boolean.valueOf(_name.equals("object"));
-          }
-        };
-        Iterable<XtendField> _filter_2 = IterableExtensions.<XtendField>filter(_filter_1, _function);
-        XtendField _head = IterableExtensions.<XtendField>head(_filter_2);
-        JvmTypeReference _type = _head.getType();
-        JvmType _type_1 = _type.getType();
-        ActiveAnnotationsProcessingInIDETest.this.assertDocumentation(_builder_1, _type_1);
-      }
+    final Procedure1<CompilationUnitImpl> _function = (CompilationUnitImpl it) -> {
+      XtendFile _xtendFile = it.getXtendFile();
+      EList<XtendTypeDeclaration> _xtendTypes = _xtendFile.getXtendTypes();
+      Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
+      final XtendClass xtendClass = IterableExtensions.<XtendClass>head(_filter);
+      StringConcatenation _builder_2 = new StringConcatenation();
+      _builder_2.append("@<a href=\"eclipse-xtext-doc:platform:/resource/macroProject/src/myannotation/ChangeDoc.xtend%23/1\">ChangeDoc</a><br>Comment");
+      this.assertDocumentation(_builder_2, xtendClass);
+      StringConcatenation _builder_3 = new StringConcatenation();
+      _builder_3.append("@<a href=\"eclipse-xtext-doc:platform:/resource/macroProject/src/myannotation/ChangeDoc.xtend%23/1\">ChangeDoc</a><br>Hello World!");
+      EList<XtendMember> _members = xtendClass.getMembers();
+      Iterable<XtendField> _filter_1 = Iterables.<XtendField>filter(_members, XtendField.class);
+      final Function1<XtendField, Boolean> _function_1 = (XtendField it_1) -> {
+        String _name = it_1.getName();
+        return Boolean.valueOf(_name.equals("object"));
+      };
+      Iterable<XtendField> _filter_2 = IterableExtensions.<XtendField>filter(_filter_1, _function_1);
+      XtendField _head = IterableExtensions.<XtendField>head(_filter_2);
+      JvmTypeReference _type = _head.getType();
+      JvmType _type_1 = _type.getType();
+      this.assertDocumentation(_builder_3, _type_1);
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }

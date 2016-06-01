@@ -23,20 +23,14 @@ public class RichStringPartionIndentationStrategy extends DefaultIndentLineAutoE
       try {
         final String lineIndentation = this.getLineIndentation(d, c.offset);
         String[] _legalLineDelimiters = d.getLegalLineDelimiters();
-        final Function1<String, Integer> _function = new Function1<String, Integer>() {
-          @Override
-          public Integer apply(final String s) {
-            return Integer.valueOf(s.length());
-          }
+        final Function1<String, Integer> _function = (String s) -> {
+          return Integer.valueOf(s.length());
         };
         List<String> _sortBy = IterableExtensions.<String, Integer>sortBy(((Iterable<String>)Conversions.doWrapArray(_legalLineDelimiters)), _function);
         final List<String> legalLineDelimiters = ListExtensions.<String>reverseView(_sortBy);
         final String defaultLineDelimiter = TextUtilities.getDefaultLineDelimiter(d);
-        final Function1<String, CharSequence> _function_1 = new Function1<String, CharSequence>() {
-          @Override
-          public CharSequence apply(final String delimiter) {
-            return Pattern.quote(delimiter);
-          }
+        final Function1<String, CharSequence> _function_1 = (String delimiter) -> {
+          return Pattern.quote(delimiter);
         };
         final String regex = IterableExtensions.<String>join(legalLineDelimiters, "(", ")|(", ")", _function_1);
         final Pattern pattern = Pattern.compile(regex);

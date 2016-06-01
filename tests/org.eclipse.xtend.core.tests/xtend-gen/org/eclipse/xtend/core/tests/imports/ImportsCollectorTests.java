@@ -592,11 +592,8 @@ public class ImportsCollectorTests extends AbstractXtendTestCase {
   }
   
   private ImportsAcceptor.DefaultImportsAcceptor assertTypeImport(final ImportsAcceptor.DefaultImportsAcceptor acceptor, final String... typeNames) {
-    final Function1<ImportsAcceptor.DefaultImportsAcceptor, Set<String>> _function = new Function1<ImportsAcceptor.DefaultImportsAcceptor, Set<String>>() {
-      @Override
-      public Set<String> apply(final ImportsAcceptor.DefaultImportsAcceptor it) {
-        return acceptor.getTypes();
-      }
+    final Function1<ImportsAcceptor.DefaultImportsAcceptor, Set<String>> _function = (ImportsAcceptor.DefaultImportsAcceptor it) -> {
+      return acceptor.getTypes();
     };
     return this.has(acceptor, _function, typeNames);
   }
@@ -607,11 +604,8 @@ public class ImportsCollectorTests extends AbstractXtendTestCase {
   }
   
   private ImportsAcceptor.DefaultImportsAcceptor assertExtensionImport(final ImportsAcceptor.DefaultImportsAcceptor acceptor, final String... typeNames) {
-    final Function1<ImportsAcceptor.DefaultImportsAcceptor, Set<String>> _function = new Function1<ImportsAcceptor.DefaultImportsAcceptor, Set<String>>() {
-      @Override
-      public Set<String> apply(final ImportsAcceptor.DefaultImportsAcceptor it) {
-        return acceptor.getExtensions();
-      }
+    final Function1<ImportsAcceptor.DefaultImportsAcceptor, Set<String>> _function = (ImportsAcceptor.DefaultImportsAcceptor it) -> {
+      return acceptor.getExtensions();
     };
     return this.has(acceptor, _function, typeNames);
   }
@@ -622,11 +616,8 @@ public class ImportsCollectorTests extends AbstractXtendTestCase {
   }
   
   private ImportsAcceptor.DefaultImportsAcceptor assertStaticImport(final ImportsAcceptor.DefaultImportsAcceptor acceptor, final String... typeNames) {
-    final Function1<ImportsAcceptor.DefaultImportsAcceptor, Set<String>> _function = new Function1<ImportsAcceptor.DefaultImportsAcceptor, Set<String>>() {
-      @Override
-      public Set<String> apply(final ImportsAcceptor.DefaultImportsAcceptor it) {
-        return acceptor.getStaticImport();
-      }
+    final Function1<ImportsAcceptor.DefaultImportsAcceptor, Set<String>> _function = (ImportsAcceptor.DefaultImportsAcceptor it) -> {
+      return acceptor.getStaticImport();
     };
     return this.has(acceptor, _function, typeNames);
   }

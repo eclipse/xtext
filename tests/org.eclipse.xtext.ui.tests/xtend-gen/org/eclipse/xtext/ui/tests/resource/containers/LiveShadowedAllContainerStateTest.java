@@ -252,19 +252,13 @@ public class LiveShadowedAllContainerStateTest {
       final IResourceDescriptions resourceDescriptions = this.resourceDescriptionProvider.getResourceDescriptions(rs);
       final IAllContainersState containerState = this.containerStateProvider.get(resourceDescriptions);
       EList<Resource> _resources = rs.getResources();
-      final Function1<Resource, URI> _function = new Function1<Resource, URI>() {
-        @Override
-        public URI apply(final Resource it) {
-          return it.getURI();
-        }
+      final Function1<Resource, URI> _function = (Resource it) -> {
+        return it.getURI();
       };
       List<URI> _map = ListExtensions.<Resource, URI>map(_resources, _function);
       final Set<URI> allURIs = IterableExtensions.<URI>toSet(_map);
-      final Function1<URI, String> _function_1 = new Function1<URI, String>() {
-        @Override
-        public String apply(final URI it) {
-          return containerState.getContainerHandle(it);
-        }
+      final Function1<URI, String> _function_1 = (URI it) -> {
+        return containerState.getContainerHandle(it);
       };
       Iterable<String> _map_1 = IterableExtensions.<URI, String>map(allURIs, _function_1);
       Iterable<String> _filterNull = IterableExtensions.<String>filterNull(_map_1);
@@ -272,11 +266,8 @@ public class LiveShadowedAllContainerStateTest {
       IWorkspace _workspace = ResourcesPlugin.getWorkspace();
       IWorkspaceRoot _root = _workspace.getRoot();
       IProject[] _projects = _root.getProjects();
-      final Function1<IProject, String> _function_2 = new Function1<IProject, String>() {
-        @Override
-        public String apply(final IProject it) {
-          return it.getName();
-        }
+      final Function1<IProject, String> _function_2 = (IProject it) -> {
+        return it.getName();
       };
       List<String> _map_2 = ListExtensions.<IProject, String>map(((List<IProject>)Conversions.doWrapArray(_projects)), _function_2);
       Iterables.<String>addAll(allContainers, _map_2);
@@ -292,11 +283,8 @@ public class LiveShadowedAllContainerStateTest {
           _builder.newLineIfNotEmpty();
           {
             Collection<URI> _containedURIs = containerState.getContainedURIs(container);
-            final Function1<URI, String> _function_3 = new Function1<URI, String>() {
-              @Override
-              public String apply(final URI it) {
-                return it.toString();
-              }
+            final Function1<URI, String> _function_3 = (URI it) -> {
+              return it.toString();
             };
             List<URI> _sortBy = IterableExtensions.<URI, String>sortBy(_containedURIs, _function_3);
             for(final URI uri : _sortBy) {
@@ -306,11 +294,8 @@ public class LiveShadowedAllContainerStateTest {
               _builder.append(" exported=[");
               IResourceDescription _resourceDescription = resourceDescriptions.getResourceDescription(uri);
               Iterable<IEObjectDescription> _exportedObjects = _resourceDescription.getExportedObjects();
-              final Function1<IEObjectDescription, QualifiedName> _function_4 = new Function1<IEObjectDescription, QualifiedName>() {
-                @Override
-                public QualifiedName apply(final IEObjectDescription it) {
-                  return it.getName();
-                }
+              final Function1<IEObjectDescription, QualifiedName> _function_4 = (IEObjectDescription it) -> {
+                return it.getName();
               };
               Iterable<QualifiedName> _map_3 = IterableExtensions.<IEObjectDescription, QualifiedName>map(_exportedObjects, _function_4);
               String _join = IterableExtensions.join(_map_3, ", ");

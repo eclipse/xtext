@@ -29,10 +29,7 @@ public class TestProperSourceFolderMapping extends AbstractActiveAnnotationTest 
     _builder.newLine();
     _builder.append("class MyClass {}");
     _builder.newLine();
-    final IAcceptor<XtendCompilerTester.CompilationResult> _function = new IAcceptor<XtendCompilerTester.CompilationResult>() {
-      @Override
-      public void accept(final XtendCompilerTester.CompilationResult it) {
-      }
+    final IAcceptor<XtendCompilerTester.CompilationResult> _function = (XtendCompilerTester.CompilationResult it) -> {
     };
     this._xtendCompilerTester.compile(_builder, _function);
   }

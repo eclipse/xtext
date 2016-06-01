@@ -141,12 +141,9 @@ public class SerializerFragment extends Xtend2GeneratorFragment implements IStub
     Naming _naming = this.getNaming();
     Generator2AdapterSetup _generator2AdapterSetup = new Generator2AdapterSetup(config, ctx, _naming);
     this.adapterSetup = _generator2AdapterSetup;
-    final Module _function = new Module() {
-      @Override
-      public void configure(final Binder it) {
-        AnnotatedBindingBuilder<org.eclipse.xtext.xtext.generator.util.SyntheticTerminalDetector> _bind = it.<org.eclipse.xtext.xtext.generator.util.SyntheticTerminalDetector>bind(org.eclipse.xtext.xtext.generator.util.SyntheticTerminalDetector.class);
-        _bind.toInstance(SerializerFragment.this.syntheticTerminalDetector);
-      }
+    final Module _function = (Binder it) -> {
+      AnnotatedBindingBuilder<org.eclipse.xtext.xtext.generator.util.SyntheticTerminalDetector> _bind = it.<org.eclipse.xtext.xtext.generator.util.SyntheticTerminalDetector>bind(org.eclipse.xtext.xtext.generator.util.SyntheticTerminalDetector.class);
+      _bind.toInstance(this.syntheticTerminalDetector);
     };
     this.adapterSetup.setAdditionalLanguageBindings(_function);
     super.generate(config, ctx);

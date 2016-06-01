@@ -156,13 +156,10 @@ public abstract class AbstractCodeBuilder implements ICodeBuilder {
             appendable.append(_name);
             EList<JvmTypeConstraint> _constraints = typeParameter.getConstraints();
             Iterable<JvmUpperBound> _filter = Iterables.<JvmUpperBound>filter(_constraints, JvmUpperBound.class);
-            final Function1<JvmUpperBound, Boolean> _function = new Function1<JvmUpperBound, Boolean>() {
-              @Override
-              public Boolean apply(final JvmUpperBound it) {
-                JvmTypeReference _typeReference = it.getTypeReference();
-                String _identifier = _typeReference.getIdentifier();
-                return Boolean.valueOf((!Objects.equal(_identifier, "java.lang.Object")));
-              }
+            final Function1<JvmUpperBound, Boolean> _function = (JvmUpperBound it) -> {
+              JvmTypeReference _typeReference = it.getTypeReference();
+              String _identifier = _typeReference.getIdentifier();
+              return Boolean.valueOf((!Objects.equal(_identifier, "java.lang.Object")));
             };
             final Iterable<JvmUpperBound> upperBounds = IterableExtensions.<JvmUpperBound>filter(_filter, _function);
             boolean _isEmpty = IterableExtensions.isEmpty(upperBounds);

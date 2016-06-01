@@ -128,13 +128,10 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
       }
       XAnnotation _delegate_1 = this.getDelegate();
       EList<XAnnotationElementValuePair> _elementValuePairs = _delegate_1.getElementValuePairs();
-      final Function1<XAnnotationElementValuePair, Boolean> _function = new Function1<XAnnotationElementValuePair, Boolean>() {
-        @Override
-        public Boolean apply(final XAnnotationElementValuePair it) {
-          JvmOperation _element = it.getElement();
-          String _simpleName = _element.getSimpleName();
-          return Boolean.valueOf(Objects.equal(_simpleName, property));
-        }
+      final Function1<XAnnotationElementValuePair, Boolean> _function = (XAnnotationElementValuePair it) -> {
+        JvmOperation _element = it.getElement();
+        String _simpleName = _element.getSimpleName();
+        return Boolean.valueOf(Objects.equal(_simpleName, property));
       };
       XAnnotationElementValuePair _findFirst = IterableExtensions.<XAnnotationElementValuePair>findFirst(_elementValuePairs, _function);
       XExpression _value = null;
@@ -152,12 +149,9 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
     if ((annotationType instanceof JvmAnnotationType)) {
       EList<JvmMember> _members = ((JvmAnnotationType)annotationType).getMembers();
       Iterable<JvmOperation> _filter = Iterables.<JvmOperation>filter(_members, JvmOperation.class);
-      final Function1<JvmOperation, Boolean> _function = new Function1<JvmOperation, Boolean>() {
-        @Override
-        public Boolean apply(final JvmOperation it) {
-          String _simpleName = it.getSimpleName();
-          return Boolean.valueOf(Objects.equal(_simpleName, property));
-        }
+      final Function1<JvmOperation, Boolean> _function = (JvmOperation it) -> {
+        String _simpleName = it.getSimpleName();
+        return Boolean.valueOf(Objects.equal(_simpleName, property));
       };
       final JvmOperation operation = IterableExtensions.<JvmOperation>findFirst(_filter, _function);
       boolean _notEquals = (!Objects.equal(operation, null));

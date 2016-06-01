@@ -90,11 +90,8 @@ public class WorkspaceManager {
   public void initialize(final URI baseDir, final Procedure2<? super URI, ? super Iterable<Issue>> acceptor, final CancelIndicator cancelIndicator) {
     this.baseDir = baseDir;
     final ProjectManager projectManager = this.projectManagerProvider.get();
-    final Provider<Map<String, ResourceDescriptionsData>> _function = new Provider<Map<String, ResourceDescriptionsData>>() {
-      @Override
-      public Map<String, ResourceDescriptionsData> get() {
-        return WorkspaceManager.this.fullIndex;
-      }
+    final Provider<Map<String, ResourceDescriptionsData>> _function = () -> {
+      return this.fullIndex;
     };
     final IncrementalBuilder.Result indexResult = projectManager.initialize(baseDir, acceptor, this.openedDocumentsContentProvider, _function, cancelIndicator);
     this.baseDir2ProjectManager.put(baseDir, projectManager);
@@ -114,32 +111,23 @@ public class WorkspaceManager {
     Set<Map.Entry<URI, ProjectManager>> _entrySet = this.baseDir2ProjectManager.entrySet();
     for (final Map.Entry<URI, ProjectManager> entry : _entrySet) {
       {
-        final Function1<URI, Boolean> _function = new Function1<URI, Boolean>() {
-          @Override
-          public Boolean apply(final URI it) {
-            URI _key = entry.getKey();
-            return Boolean.valueOf(WorkspaceManager.this.isPrefix(it, _key));
-          }
+        final Function1<URI, Boolean> _function = (URI it) -> {
+          URI _key = entry.getKey();
+          return Boolean.valueOf(this.isPrefix(it, _key));
         };
         Iterable<URI> _filter = IterableExtensions.<URI>filter(allDirty, _function);
         final List<URI> projectDirtyFiles = IterableExtensions.<URI>toList(_filter);
-        final Function1<URI, Boolean> _function_1 = new Function1<URI, Boolean>() {
-          @Override
-          public Boolean apply(final URI it) {
-            URI _key = entry.getKey();
-            return Boolean.valueOf(WorkspaceManager.this.isPrefix(it, _key));
-          }
+        final Function1<URI, Boolean> _function_1 = (URI it) -> {
+          URI _key = entry.getKey();
+          return Boolean.valueOf(this.isPrefix(it, _key));
         };
         Iterable<URI> _filter_1 = IterableExtensions.<URI>filter(this.deletedFiles, _function_1);
         final List<URI> projectDeletedFiles = IterableExtensions.<URI>toList(_filter_1);
         ProjectManager _value = entry.getValue();
         final IncrementalBuilder.Result result = _value.doBuild(projectDirtyFiles, projectDeletedFiles, cancelIndicator);
         List<IResourceDescription.Delta> _affectedResources = result.getAffectedResources();
-        final Function1<IResourceDescription.Delta, URI> _function_2 = new Function1<IResourceDescription.Delta, URI>() {
-          @Override
-          public URI apply(final IResourceDescription.Delta it) {
-            return it.getUri();
-          }
+        final Function1<IResourceDescription.Delta, URI> _function_2 = (IResourceDescription.Delta it) -> {
+          return it.getUri();
         };
         List<URI> _map = ListExtensions.<IResourceDescription.Delta, URI>map(_affectedResources, _function_2);
         allDirty.addAll(_map);
@@ -155,13 +143,10 @@ public class WorkspaceManager {
   
   public URI getProjectBaseDir(final URI candidate) {
     Set<URI> _keySet = this.baseDir2ProjectManager.keySet();
-    final Function1<URI, Integer> _function = new Function1<URI, Integer>() {
-      @Override
-      public Integer apply(final URI it) {
-        String _string = it.toString();
-        int _length = _string.length();
-        return Integer.valueOf((-_length));
-      }
+    final Function1<URI, Integer> _function = (URI it) -> {
+      String _string = it.toString();
+      int _length = _string.length();
+      return Integer.valueOf((-_length));
     };
     List<URI> _sortBy = IterableExtensions.<URI, Integer>sortBy(_keySet, _function);
     for (final URI projectBaseDir : _sortBy) {

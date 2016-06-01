@@ -93,22 +93,16 @@ public class DirtyEditorFilteringContentAssistTests extends AbstractXtendUITestC
       final ICompletionProposal[] proposals = this.computeCompletionProposals(clientEditor, fooEditor, _indexOf);
       int _size = ((List<ICompletionProposal>)Conversions.doWrapArray(proposals)).size();
       Assert.assertEquals(1, _size);
-      final Function1<ICompletionProposal, Boolean> _function = new Function1<ICompletionProposal, Boolean>() {
-        @Override
-        public Boolean apply(final ICompletionProposal e) {
-          String _string = e.toString();
-          return Boolean.valueOf(_string.startsWith("Proposal: MyDirtyType - "));
-        }
+      final Function1<ICompletionProposal, Boolean> _function = (ICompletionProposal e) -> {
+        String _string = e.toString();
+        return Boolean.valueOf(_string.startsWith("Proposal: MyDirtyType - "));
       };
       boolean _exists = IterableExtensions.<ICompletionProposal>exists(((Iterable<ICompletionProposal>)Conversions.doWrapArray(proposals)), _function);
       boolean _not = (!_exists);
       Assert.assertTrue(_not);
-      final Function1<ICompletionProposal, Boolean> _function_1 = new Function1<ICompletionProposal, Boolean>() {
-        @Override
-        public Boolean apply(final ICompletionProposal e) {
-          String _string = e.toString();
-          return Boolean.valueOf(_string.startsWith("Proposal: MyDirtyType2 - "));
-        }
+      final Function1<ICompletionProposal, Boolean> _function_1 = (ICompletionProposal e) -> {
+        String _string = e.toString();
+        return Boolean.valueOf(_string.startsWith("Proposal: MyDirtyType2 - "));
       };
       boolean _exists_1 = IterableExtensions.<ICompletionProposal>exists(((Iterable<ICompletionProposal>)Conversions.doWrapArray(proposals)), _function_1);
       Assert.assertTrue(_exists_1);
@@ -154,22 +148,16 @@ public class DirtyEditorFilteringContentAssistTests extends AbstractXtendUITestC
       _document.set(_builder_2.toString());
       int _indexOf = clientModel.indexOf("|");
       final ICompletionProposal[] proposals = this.computeCompletionProposals(clientEditor, fooEditor, _indexOf);
-      final Function1<ICompletionProposal, Boolean> _function = new Function1<ICompletionProposal, Boolean>() {
-        @Override
-        public Boolean apply(final ICompletionProposal e) {
-          String _string = e.toString();
-          return Boolean.valueOf(_string.startsWith("Proposal: MyDirtyType - "));
-        }
+      final Function1<ICompletionProposal, Boolean> _function = (ICompletionProposal e) -> {
+        String _string = e.toString();
+        return Boolean.valueOf(_string.startsWith("Proposal: MyDirtyType - "));
       };
       boolean _exists = IterableExtensions.<ICompletionProposal>exists(((Iterable<ICompletionProposal>)Conversions.doWrapArray(proposals)), _function);
       boolean _not = (!_exists);
       Assert.assertTrue(_not);
-      final Function1<ICompletionProposal, Boolean> _function_1 = new Function1<ICompletionProposal, Boolean>() {
-        @Override
-        public Boolean apply(final ICompletionProposal e) {
-          String _string = e.toString();
-          return Boolean.valueOf(_string.startsWith("Proposal: MyDirtyType2 - "));
-        }
+      final Function1<ICompletionProposal, Boolean> _function_1 = (ICompletionProposal e) -> {
+        String _string = e.toString();
+        return Boolean.valueOf(_string.startsWith("Proposal: MyDirtyType2 - "));
       };
       boolean _exists_1 = IterableExtensions.<ICompletionProposal>exists(((Iterable<ICompletionProposal>)Conversions.doWrapArray(proposals)), _function_1);
       Assert.assertTrue(_exists_1);

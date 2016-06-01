@@ -26,12 +26,12 @@ public class Units {
   public void distances() {
     Distance _km = Distance.km(15);
     Distance _km_1 = Distance.km(13);
-    Distance _m = Distance.m(2000);
+    Distance _m = Distance.m(2_000);
     Distance _plus = _km_1.operator_plus(_m);
     Assert.assertEquals(_km, _plus);
     Distance _km_2 = Distance.km(30);
     Distance _km_3 = Distance.km(13);
-    Distance _m_1 = Distance.m(2000);
+    Distance _m_1 = Distance.m(2_000);
     Distance _plus_1 = _km_3.operator_plus(_m_1);
     Distance _multiply = _plus_1.operator_multiply(2);
     Assert.assertEquals(_km_2, _multiply);
@@ -52,7 +52,7 @@ public class Units {
     Time _sec = Time.sec(65);
     Time _min = Time.min(59);
     Time _plus = _sec.operator_plus(_min);
-    Time _msec = Time.msec(5000);
+    Time _msec = Time.msec(5_000);
     Time _minus = _plus.operator_minus(_msec);
     Assert.assertEquals(_h, _minus);
   }
@@ -62,7 +62,7 @@ public class Units {
     Distance _km = Distance.km(42);
     Time _h = Time.h();
     Speed _divide = Speed.operator_divide(_km, _h);
-    Distance _m = Distance.m(40000);
+    Distance _m = Distance.m(40_000);
     Distance _km_1 = Distance.km(2);
     Distance _plus = _m.operator_plus(_km_1);
     Time _min = Time.min(60);

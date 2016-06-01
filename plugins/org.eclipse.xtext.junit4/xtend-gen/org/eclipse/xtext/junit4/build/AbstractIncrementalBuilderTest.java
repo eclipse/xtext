@@ -108,12 +108,9 @@ public abstract class AbstractIncrementalBuilderTest {
   
   protected IndexState build(final BuildRequest buildRequest) {
     this.clean();
-    final Function1<URI, IResourceServiceProvider> _function = new Function1<URI, IResourceServiceProvider>() {
-      @Override
-      public IResourceServiceProvider apply(final URI it) {
-        IResourceServiceProvider.Registry _languages = AbstractIncrementalBuilderTest.this.getLanguages();
-        return _languages.getResourceServiceProvider(it);
-      }
+    final Function1<URI, IResourceServiceProvider> _function = (URI it) -> {
+      IResourceServiceProvider.Registry _languages = this.getLanguages();
+      return _languages.getResourceServiceProvider(it);
     };
     IncrementalBuilder.Result _build = this.incrementalBuilder.build(buildRequest, _function);
     IndexState _indexState = _build.getIndexState();
@@ -136,71 +133,53 @@ public abstract class AbstractIncrementalBuilderTest {
   
   protected BuildRequest newBuildRequest(final Procedure1<? super BuildRequest> init) {
     BuildRequest _buildRequest = new BuildRequest();
-    final Procedure1<BuildRequest> _function = new Procedure1<BuildRequest>() {
-      @Override
-      public void apply(final BuildRequest it) {
-        ResourceDescriptionsData _resourceDescriptions = AbstractIncrementalBuilderTest.this.indexState.getResourceDescriptions();
-        final ResourceDescriptionsData newIndex = _resourceDescriptions.copy();
-        URI _uri = AbstractIncrementalBuilderTest.this.uri("");
-        it.setBaseDir(_uri);
-        XtextResourceSet _get = AbstractIncrementalBuilderTest.this.resourceSetProvider.get();
-        final Procedure1<XtextResourceSet> _function = new Procedure1<XtextResourceSet>() {
-          @Override
-          public void apply(final XtextResourceSet it) {
-            URIConverter _uRIConverter = it.getURIConverter();
-            EList<URIHandler> _uRIHandlers = _uRIConverter.getURIHandlers();
-            _uRIHandlers.clear();
-            URIConverter _uRIConverter_1 = it.getURIConverter();
-            EList<URIHandler> _uRIHandlers_1 = _uRIConverter_1.getURIHandlers();
-            _uRIHandlers_1.add(AbstractIncrementalBuilderTest.this.inMemoryURIHandler);
-            ClassLoader _classLoader = AbstractIncrementalBuilderTest.class.getClassLoader();
-            it.setClasspathURIContext(_classLoader);
-            ProjectDescription _projectDescription = new ProjectDescription();
-            final Procedure1<ProjectDescription> _function = new Procedure1<ProjectDescription>() {
-              @Override
-              public void apply(final ProjectDescription it) {
-                it.setName("test-project");
-              }
-            };
-            final ProjectDescription projectDescription = ObjectExtensions.<ProjectDescription>operator_doubleArrow(_projectDescription, _function);
-            projectDescription.attachToEmfObject(it);
-            Map<String, ResourceDescriptionsData> _emptyMap = CollectionLiterals.<String, ResourceDescriptionsData>emptyMap();
-            final ChunkedResourceDescriptions index = new ChunkedResourceDescriptions(_emptyMap, it);
-            String _name = projectDescription.getName();
-            index.setContainer(_name, newIndex);
-          }
+    final Procedure1<BuildRequest> _function = (BuildRequest it) -> {
+      ResourceDescriptionsData _resourceDescriptions = this.indexState.getResourceDescriptions();
+      final ResourceDescriptionsData newIndex = _resourceDescriptions.copy();
+      URI _uri = this.uri("");
+      it.setBaseDir(_uri);
+      XtextResourceSet _get = this.resourceSetProvider.get();
+      final Procedure1<XtextResourceSet> _function_1 = (XtextResourceSet it_1) -> {
+        URIConverter _uRIConverter = it_1.getURIConverter();
+        EList<URIHandler> _uRIHandlers = _uRIConverter.getURIHandlers();
+        _uRIHandlers.clear();
+        URIConverter _uRIConverter_1 = it_1.getURIConverter();
+        EList<URIHandler> _uRIHandlers_1 = _uRIConverter_1.getURIHandlers();
+        _uRIHandlers_1.add(this.inMemoryURIHandler);
+        ClassLoader _classLoader = AbstractIncrementalBuilderTest.class.getClassLoader();
+        it_1.setClasspathURIContext(_classLoader);
+        ProjectDescription _projectDescription = new ProjectDescription();
+        final Procedure1<ProjectDescription> _function_2 = (ProjectDescription it_2) -> {
+          it_2.setName("test-project");
         };
-        XtextResourceSet _doubleArrow = ObjectExtensions.<XtextResourceSet>operator_doubleArrow(_get, _function);
-        it.setResourceSet(_doubleArrow);
-        it.setDirtyFiles(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList()));
-        it.setDeletedFiles(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList()));
-        final BuildRequest.IPostValidationCallback _function_1 = new BuildRequest.IPostValidationCallback() {
-          @Override
-          public boolean afterValidate(final URI uri, final Iterable<Issue> issues) {
-            Iterables.<Issue>addAll(AbstractIncrementalBuilderTest.this.issues, issues);
-            return IterableExtensions.isEmpty(issues);
-          }
-        };
-        it.setAfterValidate(_function_1);
-        final Procedure1<URI> _function_2 = new Procedure1<URI>() {
-          @Override
-          public void apply(final URI it) {
-            AbstractIncrementalBuilderTest.this.deleted.add(it);
-          }
-        };
-        it.setAfterDeleteFile(_function_2);
-        final Procedure2<URI, URI> _function_3 = new Procedure2<URI, URI>() {
-          @Override
-          public void apply(final URI source, final URI target) {
-            AbstractIncrementalBuilderTest.this.generated.put(source, target);
-          }
-        };
-        it.setAfterGenerateFile(_function_3);
-        Source2GeneratedMapping _fileMappings = AbstractIncrementalBuilderTest.this.indexState.getFileMappings();
-        Source2GeneratedMapping _copy = _fileMappings.copy();
-        IndexState _indexState = new IndexState(newIndex, _copy);
-        it.setState(_indexState);
-      }
+        final ProjectDescription projectDescription = ObjectExtensions.<ProjectDescription>operator_doubleArrow(_projectDescription, _function_2);
+        projectDescription.attachToEmfObject(it_1);
+        Map<String, ResourceDescriptionsData> _emptyMap = CollectionLiterals.<String, ResourceDescriptionsData>emptyMap();
+        final ChunkedResourceDescriptions index = new ChunkedResourceDescriptions(_emptyMap, it_1);
+        String _name = projectDescription.getName();
+        index.setContainer(_name, newIndex);
+      };
+      XtextResourceSet _doubleArrow = ObjectExtensions.<XtextResourceSet>operator_doubleArrow(_get, _function_1);
+      it.setResourceSet(_doubleArrow);
+      it.setDirtyFiles(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList()));
+      it.setDeletedFiles(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList()));
+      final BuildRequest.IPostValidationCallback _function_2 = (URI uri, Iterable<Issue> issues) -> {
+        Iterables.<Issue>addAll(this.issues, issues);
+        return IterableExtensions.isEmpty(issues);
+      };
+      it.setAfterValidate(_function_2);
+      final Procedure1<URI> _function_3 = (URI it_1) -> {
+        this.deleted.add(it_1);
+      };
+      it.setAfterDeleteFile(_function_3);
+      final Procedure2<URI, URI> _function_4 = (URI source, URI target) -> {
+        this.generated.put(source, target);
+      };
+      it.setAfterGenerateFile(_function_4);
+      Source2GeneratedMapping _fileMappings = this.indexState.getFileMappings();
+      Source2GeneratedMapping _copy = _fileMappings.copy();
+      IndexState _indexState = new IndexState(newIndex, _copy);
+      it.setState(_indexState);
     };
     final BuildRequest result = ObjectExtensions.<BuildRequest>operator_doubleArrow(_buildRequest, _function);
     init.apply(result);
@@ -226,16 +205,13 @@ public abstract class AbstractIncrementalBuilderTest {
       final URI uri = this.uri(path);
       Map<Object, Object> _emptyMap = CollectionLiterals.<Object, Object>emptyMap();
       OutputStream _createOutputStream = this.inMemoryURIHandler.createOutputStream(uri, _emptyMap);
-      final Procedure1<OutputStream> _function = new Procedure1<OutputStream>() {
-        @Override
-        public void apply(final OutputStream it) {
-          try {
-            byte[] _bytes = content.getBytes();
-            it.write(_bytes);
-            it.close();
-          } catch (Throwable _e) {
-            throw Exceptions.sneakyThrow(_e);
-          }
+      final Procedure1<OutputStream> _function = (OutputStream it) -> {
+        try {
+          byte[] _bytes = content.getBytes();
+          it.write(_bytes);
+          it.close();
+        } catch (Throwable _e) {
+          throw Exceptions.sneakyThrow(_e);
         }
       };
       ObjectExtensions.<OutputStream>operator_doubleArrow(_createOutputStream, _function);
@@ -246,18 +222,12 @@ public abstract class AbstractIncrementalBuilderTest {
   }
   
   protected boolean containsSuffix(final Iterable<? extends URI> uris, final String... suffixes) {
-    final Function1<String, Boolean> _function = new Function1<String, Boolean>() {
-      @Override
-      public Boolean apply(final String suffix) {
-        final Function1<URI, Boolean> _function = new Function1<URI, Boolean>() {
-          @Override
-          public Boolean apply(final URI uri) {
-            String _string = uri.toString();
-            return Boolean.valueOf(_string.endsWith(suffix));
-          }
-        };
-        return Boolean.valueOf(IterableExtensions.exists(uris, _function));
-      }
+    final Function1<String, Boolean> _function = (String suffix) -> {
+      final Function1<URI, Boolean> _function_1 = (URI uri) -> {
+        String _string = uri.toString();
+        return Boolean.valueOf(_string.endsWith(suffix));
+      };
+      return Boolean.valueOf(IterableExtensions.exists(uris, _function_1));
     };
     return IterableExtensions.<String>forall(((Iterable<String>)Conversions.doWrapArray(suffixes)), _function);
   }

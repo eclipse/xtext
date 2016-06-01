@@ -1,14 +1,14 @@
 package org.eclipse.xtend.ide.tests.refactoring;
 
 import com.google.inject.Inject;
+import java.util.List;
+import java.util.function.Consumer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Assert;
 
 @SuppressWarnings("all")
@@ -39,16 +39,13 @@ public class FileAsserts {
   public void assertFileContains(final IFile file, final String... expectedContents) throws Exception {
     file.refreshLocal(IResource.DEPTH_ZERO, null);
     final String fileContents = WorkbenchTestHelper.getContentsAsString(file);
-    final Procedure1<String> _function = new Procedure1<String>() {
-      @Override
-      public void apply(final String expectation) {
-        boolean _contains = fileContents.contains(expectation);
-        boolean _not = (!_contains);
-        if (_not) {
-          Assert.assertEquals(expectation, fileContents);
-        }
+    final Consumer<String> _function = (String expectation) -> {
+      boolean _contains = fileContents.contains(expectation);
+      boolean _not = (!_contains);
+      if (_not) {
+        Assert.assertEquals(expectation, fileContents);
       }
     };
-    IterableExtensions.<String>forEach(((Iterable<String>)Conversions.doWrapArray(expectedContents)), _function);
+    ((List<String>)Conversions.doWrapArray(expectedContents)).forEach(_function);
   }
 }

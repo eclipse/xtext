@@ -334,12 +334,9 @@ public class SuperCallScopeTest extends AbstractXtextTests {
   
   public void assertElementNames(final Iterable<IEObjectDescription> descriptions, final String... expectedNames) {
     String _join = IterableExtensions.join(((Iterable<?>)Conversions.doWrapArray(expectedNames)), "\n");
-    final Function1<IEObjectDescription, String> _function = new Function1<IEObjectDescription, String>() {
-      @Override
-      public String apply(final IEObjectDescription it) {
-        QualifiedName _name = it.getName();
-        return _name.toString();
-      }
+    final Function1<IEObjectDescription, String> _function = (IEObjectDescription it) -> {
+      QualifiedName _name = it.getName();
+      return _name.toString();
     };
     Iterable<String> _map = IterableExtensions.<IEObjectDescription, String>map(descriptions, _function);
     String _join_1 = IterableExtensions.join(_map, "\n");
@@ -347,38 +344,32 @@ public class SuperCallScopeTest extends AbstractXtextTests {
   }
   
   public void assertElements(final Iterable<IEObjectDescription> descriptions, final Pair<String, AbstractRule>... expected) {
-    final Function1<Pair<String, AbstractRule>, String> _function = new Function1<Pair<String, AbstractRule>, String>() {
-      @Override
-      public String apply(final Pair<String, AbstractRule> it) {
-        String _key = it.getKey();
-        String _plus = (_key + "->");
-        AbstractRule _value = it.getValue();
-        Grammar _grammar = GrammarUtil.getGrammar(_value);
-        String _name = _grammar.getName();
-        String _plus_1 = (_plus + _name);
-        String _plus_2 = (_plus_1 + ".");
-        AbstractRule _value_1 = it.getValue();
-        String _name_1 = _value_1.getName();
-        return (_plus_2 + _name_1);
-      }
+    final Function1<Pair<String, AbstractRule>, String> _function = (Pair<String, AbstractRule> it) -> {
+      String _key = it.getKey();
+      String _plus = (_key + "->");
+      AbstractRule _value = it.getValue();
+      Grammar _grammar = GrammarUtil.getGrammar(_value);
+      String _name = _grammar.getName();
+      String _plus_1 = (_plus + _name);
+      String _plus_2 = (_plus_1 + ".");
+      AbstractRule _value_1 = it.getValue();
+      String _name_1 = _value_1.getName();
+      return (_plus_2 + _name_1);
     };
     List<String> _map = ListExtensions.<Pair<String, AbstractRule>, String>map(((List<Pair<String, AbstractRule>>)Conversions.doWrapArray(expected)), _function);
     String _join = IterableExtensions.join(_map, "\n");
-    final Function1<IEObjectDescription, String> _function_1 = new Function1<IEObjectDescription, String>() {
-      @Override
-      public String apply(final IEObjectDescription it) {
-        QualifiedName _name = it.getName();
-        String _string = _name.toString();
-        String _plus = (_string + "->");
-        EObject _eObjectOrProxy = it.getEObjectOrProxy();
-        Grammar _grammar = GrammarUtil.getGrammar(_eObjectOrProxy);
-        String _name_1 = _grammar.getName();
-        String _plus_1 = (_plus + _name_1);
-        String _plus_2 = (_plus_1 + ".");
-        EObject _eObjectOrProxy_1 = it.getEObjectOrProxy();
-        String _name_2 = ((AbstractRule) _eObjectOrProxy_1).getName();
-        return (_plus_2 + _name_2);
-      }
+    final Function1<IEObjectDescription, String> _function_1 = (IEObjectDescription it) -> {
+      QualifiedName _name = it.getName();
+      String _string = _name.toString();
+      String _plus = (_string + "->");
+      EObject _eObjectOrProxy = it.getEObjectOrProxy();
+      Grammar _grammar = GrammarUtil.getGrammar(_eObjectOrProxy);
+      String _name_1 = _grammar.getName();
+      String _plus_1 = (_plus + _name_1);
+      String _plus_2 = (_plus_1 + ".");
+      EObject _eObjectOrProxy_1 = it.getEObjectOrProxy();
+      String _name_2 = ((AbstractRule) _eObjectOrProxy_1).getName();
+      return (_plus_2 + _name_2);
     };
     Iterable<String> _map_1 = IterableExtensions.<IEObjectDescription, String>map(descriptions, _function_1);
     String _join_1 = IterableExtensions.join(_map_1, "\n");

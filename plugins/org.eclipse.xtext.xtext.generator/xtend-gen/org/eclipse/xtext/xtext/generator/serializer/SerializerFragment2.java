@@ -19,6 +19,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Consumer;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.codegen.ecore.genmodel.GenClass;
 import org.eclipse.emf.common.util.EList;
@@ -72,7 +73,6 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.generator.AbstractStubGeneratingFragment;
 import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
@@ -352,11 +352,8 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
               {
                 Grammar _grammar_2 = SerializerFragment2.this.getGrammar();
                 List<TerminalRule> _allTerminalRules = GrammarUtil.allTerminalRules(_grammar_2);
-                final Function1<TerminalRule, Boolean> _function = new Function1<TerminalRule, Boolean>() {
-                  @Override
-                  public Boolean apply(final TerminalRule it) {
-                    return Boolean.valueOf(SerializerFragment2.this.syntheticTerminalDetector.isSyntheticTerminalRule(it));
-                  }
+                final Function1<TerminalRule, Boolean> _function = (TerminalRule it) -> {
+                  return Boolean.valueOf(SerializerFragment2.this.syntheticTerminalDetector.isSyntheticTerminalRule(it));
                 };
                 Iterable<TerminalRule> _filter = IterableExtensions.<TerminalRule>filter(_allTerminalRules, _function);
                 for(final TerminalRule rule : _filter) {
@@ -430,11 +427,8 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
               {
                 Grammar _grammar_2 = SerializerFragment2.this.getGrammar();
                 List<TerminalRule> _allTerminalRules = GrammarUtil.allTerminalRules(_grammar_2);
-                final Function1<TerminalRule, Boolean> _function = new Function1<TerminalRule, Boolean>() {
-                  @Override
-                  public Boolean apply(final TerminalRule it) {
-                    return Boolean.valueOf(SerializerFragment2.this.syntheticTerminalDetector.isSyntheticTerminalRule(it));
-                  }
+                final Function1<TerminalRule, Boolean> _function = (TerminalRule it) -> {
+                  return Boolean.valueOf(SerializerFragment2.this.syntheticTerminalDetector.isSyntheticTerminalRule(it));
                 };
                 Iterable<TerminalRule> _filter = IterableExtensions.<TerminalRule>filter(_allTerminalRules, _function);
                 for(final TerminalRule rule : _filter) {
@@ -498,11 +492,8 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
     Grammar _grammar_1 = this.getGrammar();
     Grammar _superGrammar = this._semanticSequencerExtensions.getSuperGrammar(_grammar_1);
     final Collection<IGrammarConstraintProvider.IConstraint> superConstraints = this._semanticSequencerExtensions.getGrammarConstraints(_superGrammar);
-    final Function1<IGrammarConstraintProvider.IConstraint, Boolean> _function = new Function1<IGrammarConstraintProvider.IConstraint, Boolean>() {
-      @Override
-      public Boolean apply(final IGrammarConstraintProvider.IConstraint it) {
-        return Boolean.valueOf(((it.getType() != null) && (!superConstraints.contains(it))));
-      }
+    final Function1<IGrammarConstraintProvider.IConstraint, Boolean> _function = (IGrammarConstraintProvider.IConstraint it) -> {
+      return Boolean.valueOf(((it.getType() != null) && (!superConstraints.contains(it))));
     };
     Iterable<IGrammarConstraintProvider.IConstraint> _filter = IterableExtensions.<IGrammarConstraintProvider.IConstraint>filter(localConstraints, _function);
     final Set<IGrammarConstraintProvider.IConstraint> newLocalConstraints = IterableExtensions.<IGrammarConstraintProvider.IConstraint>toSet(_filter);
@@ -517,11 +508,8 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
     }
     final TypeReference clazz = _xifexpression;
     TypeReference _xifexpression_1 = null;
-    final Function1<IGrammarConstraintProvider.IConstraint, Boolean> _function_1 = new Function1<IGrammarConstraintProvider.IConstraint, Boolean>() {
-      @Override
-      public Boolean apply(final IGrammarConstraintProvider.IConstraint it) {
-        return Boolean.valueOf(superConstraints.contains(it));
-      }
+    final Function1<IGrammarConstraintProvider.IConstraint, Boolean> _function_1 = (IGrammarConstraintProvider.IConstraint it) -> {
+      return Boolean.valueOf(superConstraints.contains(it));
     };
     boolean _exists = IterableExtensions.<IGrammarConstraintProvider.IConstraint>exists(localConstraints, _function_1);
     if (_exists) {
@@ -621,28 +609,19 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
   private Iterable<EPackage> getAccessedPackages() {
     Grammar _grammar = this.getGrammar();
     Collection<IGrammarConstraintProvider.IConstraint> _grammarConstraints = this._semanticSequencerExtensions.getGrammarConstraints(_grammar);
-    final Function1<IGrammarConstraintProvider.IConstraint, Boolean> _function = new Function1<IGrammarConstraintProvider.IConstraint, Boolean>() {
-      @Override
-      public Boolean apply(final IGrammarConstraintProvider.IConstraint it) {
-        EClass _type = it.getType();
-        return Boolean.valueOf((_type != null));
-      }
+    final Function1<IGrammarConstraintProvider.IConstraint, Boolean> _function = (IGrammarConstraintProvider.IConstraint it) -> {
+      EClass _type = it.getType();
+      return Boolean.valueOf((_type != null));
     };
     Iterable<IGrammarConstraintProvider.IConstraint> _filter = IterableExtensions.<IGrammarConstraintProvider.IConstraint>filter(_grammarConstraints, _function);
-    final Function1<IGrammarConstraintProvider.IConstraint, EPackage> _function_1 = new Function1<IGrammarConstraintProvider.IConstraint, EPackage>() {
-      @Override
-      public EPackage apply(final IGrammarConstraintProvider.IConstraint it) {
-        EClass _type = it.getType();
-        return _type.getEPackage();
-      }
+    final Function1<IGrammarConstraintProvider.IConstraint, EPackage> _function_1 = (IGrammarConstraintProvider.IConstraint it) -> {
+      EClass _type = it.getType();
+      return _type.getEPackage();
     };
     Iterable<EPackage> _map = IterableExtensions.<IGrammarConstraintProvider.IConstraint, EPackage>map(_filter, _function_1);
     Set<EPackage> _set = IterableExtensions.<EPackage>toSet(_map);
-    final Function1<EPackage, String> _function_2 = new Function1<EPackage, String>() {
-      @Override
-      public String apply(final EPackage it) {
-        return it.getName();
-      }
+    final Function1<EPackage, String> _function_2 = (EPackage it) -> {
+      return it.getName();
     };
     return IterableExtensions.<EPackage, String>sortBy(_set, _function_2);
   }
@@ -650,26 +629,17 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
   private Iterable<EClass> getAccessedClasses(final EPackage pkg) {
     Grammar _grammar = this.getGrammar();
     Collection<IGrammarConstraintProvider.IConstraint> _grammarConstraints = this._semanticSequencerExtensions.getGrammarConstraints(_grammar);
-    final Function1<IGrammarConstraintProvider.IConstraint, EClass> _function = new Function1<IGrammarConstraintProvider.IConstraint, EClass>() {
-      @Override
-      public EClass apply(final IGrammarConstraintProvider.IConstraint it) {
-        return it.getType();
-      }
+    final Function1<IGrammarConstraintProvider.IConstraint, EClass> _function = (IGrammarConstraintProvider.IConstraint it) -> {
+      return it.getType();
     };
     Iterable<EClass> _map = IterableExtensions.<IGrammarConstraintProvider.IConstraint, EClass>map(_grammarConstraints, _function);
-    final Function1<EClass, Boolean> _function_1 = new Function1<EClass, Boolean>() {
-      @Override
-      public Boolean apply(final EClass it) {
-        return Boolean.valueOf(((it != null) && Objects.equal(it.getEPackage(), pkg)));
-      }
+    final Function1<EClass, Boolean> _function_1 = (EClass it) -> {
+      return Boolean.valueOf(((it != null) && Objects.equal(it.getEPackage(), pkg)));
     };
     Iterable<EClass> _filter = IterableExtensions.<EClass>filter(_map, _function_1);
     Set<EClass> _set = IterableExtensions.<EClass>toSet(_filter);
-    final Function1<EClass, String> _function_2 = new Function1<EClass, String>() {
-      @Override
-      public String apply(final EClass it) {
-        return it.getName();
-      }
+    final Function1<EClass, String> _function_2 = (EClass it) -> {
+      return it.getName();
     };
     return IterableExtensions.<EClass, String>sortBy(_set, _function_2);
   }
@@ -680,11 +650,8 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
       Grammar _grammar = this.getGrammar();
       Grammar _superGrammar = this._semanticSequencerExtensions.getSuperGrammar(_grammar);
       Collection<IGrammarConstraintProvider.IConstraint> _grammarConstraints = this._semanticSequencerExtensions.getGrammarConstraints(_superGrammar);
-      final Function1<IGrammarConstraintProvider.IConstraint, Pair<IGrammarConstraintProvider.IConstraint, IGrammarConstraintProvider.IConstraint>> _function = new Function1<IGrammarConstraintProvider.IConstraint, Pair<IGrammarConstraintProvider.IConstraint, IGrammarConstraintProvider.IConstraint>>() {
-        @Override
-        public Pair<IGrammarConstraintProvider.IConstraint, IGrammarConstraintProvider.IConstraint> apply(final IGrammarConstraintProvider.IConstraint it) {
-          return Pair.<IGrammarConstraintProvider.IConstraint, IGrammarConstraintProvider.IConstraint>of(it, it);
-        }
+      final Function1<IGrammarConstraintProvider.IConstraint, Pair<IGrammarConstraintProvider.IConstraint, IGrammarConstraintProvider.IConstraint>> _function = (IGrammarConstraintProvider.IConstraint it) -> {
+        return Pair.<IGrammarConstraintProvider.IConstraint, IGrammarConstraintProvider.IConstraint>of(it, it);
       };
       Iterable<Pair<IGrammarConstraintProvider.IConstraint, IGrammarConstraintProvider.IConstraint>> _map = IterableExtensions.<IGrammarConstraintProvider.IConstraint, Pair<IGrammarConstraintProvider.IConstraint, IGrammarConstraintProvider.IConstraint>>map(_grammarConstraints, _function);
       final Map<IGrammarConstraintProvider.IConstraint, IGrammarConstraintProvider.IConstraint> superConstraints = SerializerFragment2.<IGrammarConstraintProvider.IConstraint, IGrammarConstraintProvider.IConstraint>toMap(_map);
@@ -799,12 +766,9 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
           protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
             _builder.append(ImmutableSet.class, "");
             _builder.append(".of(");
-            final Function1<Parameter, String> _function = new Function1<Parameter, String>() {
-              @Override
-              public String apply(final Parameter it) {
-                String _gaAccessor = SerializerFragment2.this._grammarAccessExtensions.gaAccessor(it);
-                return ("grammarAccess." + _gaAccessor);
-              }
+            final Function1<Parameter, String> _function = (Parameter it) -> {
+              String _gaAccessor = SerializerFragment2.this._grammarAccessExtensions.gaAccessor(it);
+              return ("grammarAccess." + _gaAccessor);
             };
             Iterable<String> _map = IterableExtensions.<Parameter, String>map(values, _function);
             String _join = IterableExtensions.join(_map, ", ");
@@ -816,13 +780,10 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
       } else {
         StringConcatenationClient _xifexpression_1 = null;
         List<ISerializationContext> _contexts = constraint.getContexts();
-        final Function1<ISerializationContext, Boolean> _function = new Function1<ISerializationContext, Boolean>() {
-          @Override
-          public Boolean apply(final ISerializationContext it) {
-            List<Parameter> _declaredParameters = ((SerializationContext) it).getDeclaredParameters();
-            boolean _isEmpty = _declaredParameters.isEmpty();
-            return Boolean.valueOf((!_isEmpty));
-          }
+        final Function1<ISerializationContext, Boolean> _function = (ISerializationContext it) -> {
+          List<Parameter> _declaredParameters = ((SerializationContext) it).getDeclaredParameters();
+          boolean _isEmpty_1 = _declaredParameters.isEmpty();
+          return Boolean.valueOf((!_isEmpty_1));
         };
         boolean _exists = IterableExtensions.<ISerializationContext>exists(_contexts, _function);
         if (_exists) {
@@ -854,12 +815,9 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
       Grammar _grammar = this.getGrammar();
       Map<IGrammarConstraintProvider.IConstraint, List<ISerializationContext>> _grammarConstraints = this._semanticSequencerExtensions.getGrammarConstraints(_grammar, type);
       Set<Map.Entry<IGrammarConstraintProvider.IConstraint, List<ISerializationContext>>> _entrySet = _grammarConstraints.entrySet();
-      final Function1<Map.Entry<IGrammarConstraintProvider.IConstraint, List<ISerializationContext>>, String> _function = new Function1<Map.Entry<IGrammarConstraintProvider.IConstraint, List<ISerializationContext>>, String>() {
-        @Override
-        public String apply(final Map.Entry<IGrammarConstraintProvider.IConstraint, List<ISerializationContext>> it) {
-          IGrammarConstraintProvider.IConstraint _key = it.getKey();
-          return _key.getName();
-        }
+      final Function1<Map.Entry<IGrammarConstraintProvider.IConstraint, List<ISerializationContext>>, String> _function = (Map.Entry<IGrammarConstraintProvider.IConstraint, List<ISerializationContext>> it) -> {
+        IGrammarConstraintProvider.IConstraint _key = it.getKey();
+        return _key.getName();
       };
       final List<Map.Entry<IGrammarConstraintProvider.IConstraint, List<ISerializationContext>>> contexts = IterableExtensions.<Map.Entry<IGrammarConstraintProvider.IConstraint, List<ISerializationContext>>, String>sortBy(_entrySet, _function);
       final LinkedHashMultimap<EObject, IGrammarConstraintProvider.IConstraint> context2constraint = LinkedHashMultimap.<EObject, IGrammarConstraintProvider.IConstraint>create();
@@ -936,14 +894,11 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
     {
       final List<ISerializationContext> sorted = IterableExtensions.<ISerializationContext>sort(contexts);
       final LinkedHashMultimap<EObject, ISerializationContext> index = LinkedHashMultimap.<EObject, ISerializationContext>create();
-      final Procedure1<ISerializationContext> _function = new Procedure1<ISerializationContext>() {
-        @Override
-        public void apply(final ISerializationContext it) {
-          EObject _contextObject = SerializerFragment2.this.getContextObject(it);
-          index.put(_contextObject, it);
-        }
+      final Consumer<ISerializationContext> _function = (ISerializationContext it) -> {
+        EObject _contextObject = this.getContextObject(it);
+        index.put(_contextObject, it);
       };
-      IterableExtensions.<ISerializationContext>forEach(sorted, _function);
+      sorted.forEach(_function);
       StringConcatenationClient _client = new StringConcatenationClient() {
         @Override
         protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -1477,12 +1432,9 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
             _builder.newLine();
             {
               List<ISyntacticSequencerPDAProvider.ISynTransition> _transitions = group_2.getTransitions();
-              final Function1<ISyntacticSequencerPDAProvider.ISynTransition, String> _function = new Function1<ISyntacticSequencerPDAProvider.ISynTransition, String>() {
-                @Override
-                public String apply(final ISyntacticSequencerPDAProvider.ISynTransition it) {
-                  String _ambiguityInsideTransition = group_2.ambiguityInsideTransition(it);
-                  return _ambiguityInsideTransition.trim();
-                }
+              final Function1<ISyntacticSequencerPDAProvider.ISynTransition, String> _function = (ISyntacticSequencerPDAProvider.ISynTransition it) -> {
+                String _ambiguityInsideTransition = group_2.ambiguityInsideTransition(it);
+                return _ambiguityInsideTransition.trim();
               };
               List<String> _map = ListExtensions.<ISyntacticSequencerPDAProvider.ISynTransition, String>map(_transitions, _function);
               Set<String> _set = IterableExtensions.<String>toSet(_map);
@@ -1543,41 +1495,26 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
   private List<AbstractRule> unassignedCalledTokenRules() {
     Grammar _grammar = this.getGrammar();
     List<AbstractRule> _allRules = GrammarUtil.allRules(_grammar);
-    final Function1<AbstractRule, Boolean> _function = new Function1<AbstractRule, Boolean>() {
-      @Override
-      public Boolean apply(final AbstractRule it) {
-        return Boolean.valueOf(GrammarUtil.isEObjectRule(it));
-      }
+    final Function1<AbstractRule, Boolean> _function = (AbstractRule it) -> {
+      return Boolean.valueOf(GrammarUtil.isEObjectRule(it));
     };
     final Iterable<AbstractRule> rules = IterableExtensions.<AbstractRule>filter(_allRules, _function);
-    final Function1<AbstractRule, Iterable<RuleCall>> _function_1 = new Function1<AbstractRule, Iterable<RuleCall>>() {
-      @Override
-      public Iterable<RuleCall> apply(final AbstractRule it) {
-        List<RuleCall> _containedRuleCalls = GrammarUtil.containedRuleCalls(it);
-        final Function1<RuleCall, Boolean> _function = new Function1<RuleCall, Boolean>() {
-          @Override
-          public Boolean apply(final RuleCall it) {
-            return Boolean.valueOf(SerializerFragment2.this.isUnassignedRuleCall(it));
-          }
-        };
-        return IterableExtensions.<RuleCall>filter(_containedRuleCalls, _function);
-      }
+    final Function1<AbstractRule, Iterable<RuleCall>> _function_1 = (AbstractRule it) -> {
+      List<RuleCall> _containedRuleCalls = GrammarUtil.containedRuleCalls(it);
+      final Function1<RuleCall, Boolean> _function_2 = (RuleCall it_1) -> {
+        return Boolean.valueOf(this.isUnassignedRuleCall(it_1));
+      };
+      return IterableExtensions.<RuleCall>filter(_containedRuleCalls, _function_2);
     };
     Iterable<Iterable<RuleCall>> _map = IterableExtensions.<AbstractRule, Iterable<RuleCall>>map(rules, _function_1);
     final Iterable<RuleCall> calls = Iterables.<RuleCall>concat(_map);
-    final Function1<RuleCall, AbstractRule> _function_2 = new Function1<RuleCall, AbstractRule>() {
-      @Override
-      public AbstractRule apply(final RuleCall it) {
-        return it.getRule();
-      }
+    final Function1<RuleCall, AbstractRule> _function_2 = (RuleCall it) -> {
+      return it.getRule();
     };
     Iterable<AbstractRule> _map_1 = IterableExtensions.<RuleCall, AbstractRule>map(calls, _function_2);
     Set<AbstractRule> _set = IterableExtensions.<AbstractRule>toSet(_map_1);
-    final Function1<AbstractRule, String> _function_3 = new Function1<AbstractRule, String>() {
-      @Override
-      public String apply(final AbstractRule it) {
-        return it.getName();
-      }
+    final Function1<AbstractRule, String> _function_3 = (AbstractRule it) -> {
+      return it.getName();
     };
     return IterableExtensions.<AbstractRule, String>sortBy(_set, _function_3);
   }
@@ -1619,11 +1556,8 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
       if (ele instanceof Group) {
         _matched=true;
         EList<AbstractElement> _elements = ((Group)ele).getElements();
-        final Function1<AbstractElement, String> _function = new Function1<AbstractElement, String>() {
-          @Override
-          public String apply(final AbstractElement it) {
-            return SerializerFragment2.this.defaultValue(it, visited);
-          }
+        final Function1<AbstractElement, String> _function = (AbstractElement it) -> {
+          return this.defaultValue(it, visited);
         };
         List<String> _map = ListExtensions.<AbstractElement, String>map(_elements, _function);
         _switchResult = IterableExtensions.join(_map);
@@ -1714,11 +1648,8 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
       if (node instanceof ICompositeNode) {
         _matched=true;
         BidiIterable<INode> _children = ((ICompositeNode)node).getChildren();
-        final Function1<INode, String> _function = new Function1<INode, String>() {
-          @Override
-          public String apply(final INode it) {
-            return SerializerFragment2.this.textWithoutComments(it);
-          }
+        final Function1<INode, String> _function = (INode it) -> {
+          return this.textWithoutComments(it);
         };
         Iterable<String> _map = IterableExtensions.<INode, String>map(_children, _function);
         _switchResult = IterableExtensions.join(_map);

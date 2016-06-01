@@ -7,10 +7,10 @@
  */
 package org.eclipse.xtext.xtext.generator;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.lang.reflect.Method;
 import java.util.List;
+import java.util.function.Consumer;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage;
@@ -27,7 +27,6 @@ import org.eclipse.emf.mwe.utils.StandaloneSetup;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.util.internal.Log;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 /**
@@ -42,13 +41,10 @@ public class XtextGeneratorResourceSetInitializer {
     delegate.setResourceSet(resourceSet);
     EPackage.Registry _packageRegistry = resourceSet.getPackageRegistry();
     _packageRegistry.put(EcorePackage.eNS_URI, EcorePackage.eINSTANCE);
-    final Procedure1<String> _function = new Procedure1<String>() {
-      @Override
-      public void apply(final String it) {
-        XtextGeneratorResourceSetInitializer.this.loadResource(it, resourceSet);
-      }
+    final Consumer<String> _function = (String it) -> {
+      this.loadResource(it, resourceSet);
     };
-    IterableExtensions.<String>forEach(referencedResources, _function);
+    referencedResources.forEach(_function);
     this.registerGenModels(resourceSet);
     this.registerEPackages(resourceSet);
   }
@@ -61,33 +57,30 @@ public class XtextGeneratorResourceSetInitializer {
   
   private void ensureResourceCanBeLoaded(final URI loadedResource, final ResourceSet resourceSet) {
     String _fileExtension = loadedResource.fileExtension();
-    boolean _matched = false;
-    if (Objects.equal(_fileExtension, "genmodel")) {
-      _matched=true;
-      GenModelPackage.eINSTANCE.getEFactoryInstance();
-      final IResourceServiceProvider resourceServiceProvider = IResourceServiceProvider.Registry.INSTANCE.getResourceServiceProvider(loadedResource);
-      if ((resourceServiceProvider == null)) {
-        try {
-          final Class<?> genModelSupport = Class.forName("org.eclipse.emf.codegen.ecore.xtext.GenModelSupport");
-          final Object instance = genModelSupport.newInstance();
-          Method _declaredMethod = genModelSupport.getDeclaredMethod("createInjectorAndDoEMFRegistration");
-          _declaredMethod.invoke(instance);
-        } catch (final Throwable _t) {
-          if (_t instanceof ClassNotFoundException) {
-            final ClassNotFoundException e = (ClassNotFoundException)_t;
-            XtextGeneratorResourceSetInitializer.LOG.debug("org.eclipse.emf.codegen.ecore.xtext.GenModelSupport not found, GenModels will not be indexed");
-          } else if (_t instanceof Exception) {
-            final Exception e_1 = (Exception)_t;
-            XtextGeneratorResourceSetInitializer.LOG.error("Couldn\'t initialize GenModel support.", e_1);
-          } else {
-            throw Exceptions.sneakyThrow(_t);
+    switch (_fileExtension) {
+      case "genmodel":
+        GenModelPackage.eINSTANCE.getEFactoryInstance();
+        final IResourceServiceProvider resourceServiceProvider = IResourceServiceProvider.Registry.INSTANCE.getResourceServiceProvider(loadedResource);
+        if ((resourceServiceProvider == null)) {
+          try {
+            final Class<?> genModelSupport = Class.forName("org.eclipse.emf.codegen.ecore.xtext.GenModelSupport");
+            final Object instance = genModelSupport.newInstance();
+            Method _declaredMethod = genModelSupport.getDeclaredMethod("createInjectorAndDoEMFRegistration");
+            _declaredMethod.invoke(instance);
+          } catch (final Throwable _t) {
+            if (_t instanceof ClassNotFoundException) {
+              final ClassNotFoundException e = (ClassNotFoundException)_t;
+              XtextGeneratorResourceSetInitializer.LOG.debug("org.eclipse.emf.codegen.ecore.xtext.GenModelSupport not found, GenModels will not be indexed");
+            } else if (_t instanceof Exception) {
+              final Exception e_1 = (Exception)_t;
+              XtextGeneratorResourceSetInitializer.LOG.error("Couldn\'t initialize GenModel support.", e_1);
+            } else {
+              throw Exceptions.sneakyThrow(_t);
+            }
           }
         }
-      }
-    }
-    if (!_matched) {
-      if (Objects.equal(_fileExtension, "ecore")) {
-        _matched=true;
+        break;
+      case "ecore":
         final IResourceServiceProvider resourceServiceProvider_1 = IResourceServiceProvider.Registry.INSTANCE.getResourceServiceProvider(loadedResource);
         if ((resourceServiceProvider_1 == null)) {
           try {
@@ -108,11 +101,8 @@ public class XtextGeneratorResourceSetInitializer {
             }
           }
         }
-      }
-    }
-    if (!_matched) {
-      if (Objects.equal(_fileExtension, "xcore")) {
-        _matched=true;
+        break;
+      case "xcore":
         final IResourceServiceProvider resourceServiceProvider_2 = IResourceServiceProvider.Registry.INSTANCE.getResourceServiceProvider(loadedResource);
         if ((resourceServiceProvider_2 == null)) {
           try {
@@ -147,16 +137,13 @@ public class XtextGeneratorResourceSetInitializer {
             throw Exceptions.sneakyThrow(_t_3);
           }
         }
-      }
+        break;
     }
   }
   
   private void registerEPackages(final ResourceSet resourceSet) {
-    final Procedure1<EPackage> _function = new Procedure1<EPackage>() {
-      @Override
-      public void apply(final EPackage it) {
-        XtextGeneratorResourceSetInitializer.this.register(it);
-      }
+    final Procedure1<EPackage> _function = (EPackage it) -> {
+      this.register(it);
     };
     this.<EPackage>each(resourceSet, EPackage.class, _function);
   }
@@ -175,11 +162,8 @@ public class XtextGeneratorResourceSetInitializer {
   }
   
   private void registerGenModels(final ResourceSet resourceSet) {
-    final Procedure1<GenModel> _function = new Procedure1<GenModel>() {
-      @Override
-      public void apply(final GenModel it) {
-        XtextGeneratorResourceSetInitializer.this.register(it);
-      }
+    final Procedure1<GenModel> _function = (GenModel it) -> {
+      this.register(it);
     };
     this.<GenModel>each(resourceSet, GenModel.class, _function);
   }
@@ -196,13 +180,10 @@ public class XtextGeneratorResourceSetInitializer {
         final Resource resource = _resources.get(i);
         EList<EObject> _contents = resource.getContents();
         Iterable<Type> _filter = Iterables.<Type>filter(_contents, type);
-        final Procedure1<Type> _function = new Procedure1<Type>() {
-          @Override
-          public void apply(final Type it) {
-            strategy.apply(it);
-          }
+        final Consumer<Type> _function = (Type it) -> {
+          strategy.apply(it);
         };
-        IterableExtensions.<Type>forEach(_filter, _function);
+        _filter.forEach(_function);
       }
     }
   }

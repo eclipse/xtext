@@ -181,11 +181,8 @@ public class SdkFeatureProject extends ProjectDescriptor {
   @Override
   public PomFile pom() {
     PomFile _pom = super.pom();
-    final Procedure1<PomFile> _function = new Procedure1<PomFile>() {
-      @Override
-      public void apply(final PomFile it) {
-        it.setPackaging("eclipse-feature");
-      }
+    final Procedure1<PomFile> _function = (PomFile it) -> {
+      it.setPackaging("eclipse-feature");
     };
     return ObjectExtensions.<PomFile>operator_doubleArrow(_pom, _function);
   }

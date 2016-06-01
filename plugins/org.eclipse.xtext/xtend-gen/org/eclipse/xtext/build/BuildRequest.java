@@ -101,17 +101,11 @@ public class BuildRequest {
    */
   private BuildRequest.IPostValidationCallback afterValidate = new BuildRequest.DefaultValidationCallback();
   
-  private Procedure2<? super URI, ? super URI> afterGenerateFile = new Procedure2<URI, URI>() {
-    @Override
-    public void apply(final URI $0, final URI $1) {
-    }
-  };
+  private Procedure2<? super URI, ? super URI> afterGenerateFile = ((Procedure2<URI, URI>) (URI $0, URI $1) -> {
+  });
   
-  private Procedure1<? super URI> afterDeleteFile = new Procedure1<URI>() {
-    @Override
-    public void apply(final URI it) {
-    }
-  };
+  private Procedure1<? super URI> afterDeleteFile = ((Procedure1<URI>) (URI it) -> {
+  });
   
   private IndexState state = new IndexState();
   

@@ -31,31 +31,22 @@ public class LoopParams {
   }
   
   public Function1<? super ITreeAppendable, ? extends ITreeAppendable> setPrefix(final String prefix) {
-    final Function1<ITreeAppendable, ITreeAppendable> _function = new Function1<ITreeAppendable, ITreeAppendable>() {
-      @Override
-      public ITreeAppendable apply(final ITreeAppendable it) {
-        return it.append(prefix);
-      }
+    final Function1<ITreeAppendable, ITreeAppendable> _function = (ITreeAppendable it) -> {
+      return it.append(prefix);
     };
     return this.prefix = _function;
   }
   
   public Function1<? super ITreeAppendable, ? extends ITreeAppendable> setSeparator(final String separator) {
-    final Function1<ITreeAppendable, ITreeAppendable> _function = new Function1<ITreeAppendable, ITreeAppendable>() {
-      @Override
-      public ITreeAppendable apply(final ITreeAppendable it) {
-        return it.append(separator);
-      }
+    final Function1<ITreeAppendable, ITreeAppendable> _function = (ITreeAppendable it) -> {
+      return it.append(separator);
     };
     return this.separator = _function;
   }
   
   public Function1<? super ITreeAppendable, ? extends ITreeAppendable> setSuffix(final String suffix) {
-    final Function1<ITreeAppendable, ITreeAppendable> _function = new Function1<ITreeAppendable, ITreeAppendable>() {
-      @Override
-      public ITreeAppendable apply(final ITreeAppendable it) {
-        return it.append(suffix);
-      }
+    final Function1<ITreeAppendable, ITreeAppendable> _function = (ITreeAppendable it) -> {
+      return it.append(suffix);
     };
     return this.suffix = _function;
   }

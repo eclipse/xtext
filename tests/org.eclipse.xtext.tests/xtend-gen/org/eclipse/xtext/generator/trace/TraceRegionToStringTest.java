@@ -65,12 +65,9 @@ public class TraceRegionToStringTest {
     SourceRelativeURI _uri1 = tester.getUri1();
     TraceRegionToStringTester.Location _location = new TraceRegionToStringTester.Location(1, 6, _uri1);
     TraceRegionToStringTester.Region _region = new TraceRegionToStringTester.Region(0, 7, Collections.<ILocationData>unmodifiableList(CollectionLiterals.<ILocationData>newArrayList(_location)));
-    final Procedure1<TraceRegionToStringTester.Region> _function = new Procedure1<TraceRegionToStringTester.Region>() {
-      @Override
-      public void apply(final TraceRegionToStringTester.Region it) {
-        TraceRegionToStringTester.Location _location = new TraceRegionToStringTester.Location(2, 4);
-        it.addChild(1, 6, Collections.<ILocationData>unmodifiableList(CollectionLiterals.<ILocationData>newArrayList(_location)));
-      }
+    final Procedure1<TraceRegionToStringTester.Region> _function = (TraceRegionToStringTester.Region it) -> {
+      TraceRegionToStringTester.Location _location_1 = new TraceRegionToStringTester.Location(2, 4);
+      it.addChild(1, 6, Collections.<ILocationData>unmodifiableList(CollectionLiterals.<ILocationData>newArrayList(_location_1)));
     };
     TraceRegionToStringTester.Region _doubleArrow = ObjectExtensions.<TraceRegionToStringTester.Region>operator_doubleArrow(_region, _function);
     tester.setTrace(_doubleArrow);
@@ -104,12 +101,9 @@ public class TraceRegionToStringTest {
     SourceRelativeURI _uri1 = tester.getUri1();
     TraceRegionToStringTester.Location _location = new TraceRegionToStringTester.Location(1, 5, _uri1);
     TraceRegionToStringTester.Region _region = new TraceRegionToStringTester.Region(0, 7, Collections.<ILocationData>unmodifiableList(CollectionLiterals.<ILocationData>newArrayList(_location)));
-    final Procedure1<TraceRegionToStringTester.Region> _function = new Procedure1<TraceRegionToStringTester.Region>() {
-      @Override
-      public void apply(final TraceRegionToStringTester.Region it) {
-        TraceRegionToStringTester.Location _location = new TraceRegionToStringTester.Location(1, 5);
-        it.addChild(0, 7, Collections.<ILocationData>unmodifiableList(CollectionLiterals.<ILocationData>newArrayList(_location)));
-      }
+    final Procedure1<TraceRegionToStringTester.Region> _function = (TraceRegionToStringTester.Region it) -> {
+      TraceRegionToStringTester.Location _location_1 = new TraceRegionToStringTester.Location(1, 5);
+      it.addChild(0, 7, Collections.<ILocationData>unmodifiableList(CollectionLiterals.<ILocationData>newArrayList(_location_1)));
     };
     TraceRegionToStringTester.Region _doubleArrow = ObjectExtensions.<TraceRegionToStringTester.Region>operator_doubleArrow(_region, _function);
     tester.setTrace(_doubleArrow);
@@ -143,14 +137,11 @@ public class TraceRegionToStringTest {
     SourceRelativeURI _uri1 = tester.getUri1();
     TraceRegionToStringTester.Location _location = new TraceRegionToStringTester.Location(0, 6, _uri1);
     TraceRegionToStringTester.Region _region = new TraceRegionToStringTester.Region(0, 6, Collections.<ILocationData>unmodifiableList(CollectionLiterals.<ILocationData>newArrayList(_location)));
-    final Procedure1<TraceRegionToStringTester.Region> _function = new Procedure1<TraceRegionToStringTester.Region>() {
-      @Override
-      public void apply(final TraceRegionToStringTester.Region it) {
-        TraceRegionToStringTester.Location _location = new TraceRegionToStringTester.Location(0, 3);
-        it.addChild(0, 3, Collections.<ILocationData>unmodifiableList(CollectionLiterals.<ILocationData>newArrayList(_location)));
-        TraceRegionToStringTester.Location _location_1 = new TraceRegionToStringTester.Location(3, 3);
-        it.addChild(3, 3, Collections.<ILocationData>unmodifiableList(CollectionLiterals.<ILocationData>newArrayList(_location_1)));
-      }
+    final Procedure1<TraceRegionToStringTester.Region> _function = (TraceRegionToStringTester.Region it) -> {
+      TraceRegionToStringTester.Location _location_1 = new TraceRegionToStringTester.Location(0, 3);
+      it.addChild(0, 3, Collections.<ILocationData>unmodifiableList(CollectionLiterals.<ILocationData>newArrayList(_location_1)));
+      TraceRegionToStringTester.Location _location_2 = new TraceRegionToStringTester.Location(3, 3);
+      it.addChild(3, 3, Collections.<ILocationData>unmodifiableList(CollectionLiterals.<ILocationData>newArrayList(_location_2)));
     };
     TraceRegionToStringTester.Region _doubleArrow = ObjectExtensions.<TraceRegionToStringTester.Region>operator_doubleArrow(_region, _function);
     tester.setTrace(_doubleArrow);
@@ -188,14 +179,11 @@ public class TraceRegionToStringTest {
     SourceRelativeURI _uri1 = tester.getUri1();
     TraceRegionToStringTester.Location _location = new TraceRegionToStringTester.Location(1, 5, _uri1);
     TraceRegionToStringTester.Region _region = new TraceRegionToStringTester.Region(0, 7, Collections.<ILocationData>unmodifiableList(CollectionLiterals.<ILocationData>newArrayList(_location)));
-    final Procedure1<TraceRegionToStringTester.Region> _function = new Procedure1<TraceRegionToStringTester.Region>() {
-      @Override
-      public void apply(final TraceRegionToStringTester.Region it) {
-        TraceRegionToStringTester.Location _location = new TraceRegionToStringTester.Location(1, 5);
-        it.addChild(2, 1, Collections.<ILocationData>unmodifiableList(CollectionLiterals.<ILocationData>newArrayList(_location)));
-        TraceRegionToStringTester.Location _location_1 = new TraceRegionToStringTester.Location(1, 5);
-        it.addChild(5, 1, Collections.<ILocationData>unmodifiableList(CollectionLiterals.<ILocationData>newArrayList(_location_1)));
-      }
+    final Procedure1<TraceRegionToStringTester.Region> _function = (TraceRegionToStringTester.Region it) -> {
+      TraceRegionToStringTester.Location _location_1 = new TraceRegionToStringTester.Location(1, 5);
+      it.addChild(2, 1, Collections.<ILocationData>unmodifiableList(CollectionLiterals.<ILocationData>newArrayList(_location_1)));
+      TraceRegionToStringTester.Location _location_2 = new TraceRegionToStringTester.Location(1, 5);
+      it.addChild(5, 1, Collections.<ILocationData>unmodifiableList(CollectionLiterals.<ILocationData>newArrayList(_location_2)));
     };
     TraceRegionToStringTester.Region _doubleArrow = ObjectExtensions.<TraceRegionToStringTester.Region>operator_doubleArrow(_region, _function);
     tester.setTrace(_doubleArrow);
@@ -229,14 +217,11 @@ public class TraceRegionToStringTest {
     SourceRelativeURI _uri1 = tester.getUri1();
     TraceRegionToStringTester.Location _location = new TraceRegionToStringTester.Location(1, 5, _uri1);
     TraceRegionToStringTester.Region _region = new TraceRegionToStringTester.Region(0, 7, Collections.<ILocationData>unmodifiableList(CollectionLiterals.<ILocationData>newArrayList(_location)));
-    final Procedure1<TraceRegionToStringTester.Region> _function = new Procedure1<TraceRegionToStringTester.Region>() {
-      @Override
-      public void apply(final TraceRegionToStringTester.Region it) {
-        TraceRegionToStringTester.Location _location = new TraceRegionToStringTester.Location(1, 5);
-        it.addChild(2, 1, Collections.<ILocationData>unmodifiableList(CollectionLiterals.<ILocationData>newArrayList(_location)));
-        TraceRegionToStringTester.Location _location_1 = new TraceRegionToStringTester.Location(1, 5);
-        it.addChild(5, 1, Collections.<ILocationData>unmodifiableList(CollectionLiterals.<ILocationData>newArrayList(_location_1)));
-      }
+    final Procedure1<TraceRegionToStringTester.Region> _function = (TraceRegionToStringTester.Region it) -> {
+      TraceRegionToStringTester.Location _location_1 = new TraceRegionToStringTester.Location(1, 5);
+      it.addChild(2, 1, Collections.<ILocationData>unmodifiableList(CollectionLiterals.<ILocationData>newArrayList(_location_1)));
+      TraceRegionToStringTester.Location _location_2 = new TraceRegionToStringTester.Location(1, 5);
+      it.addChild(5, 1, Collections.<ILocationData>unmodifiableList(CollectionLiterals.<ILocationData>newArrayList(_location_2)));
     };
     TraceRegionToStringTester.Region _doubleArrow = ObjectExtensions.<TraceRegionToStringTester.Region>operator_doubleArrow(_region, _function);
     tester.setTrace(_doubleArrow);
@@ -272,15 +257,12 @@ public class TraceRegionToStringTest {
     SourceRelativeURI _uri1 = tester.getUri1();
     TraceRegionToStringTester.Location _location = new TraceRegionToStringTester.Location(0, 7, _uri1);
     TraceRegionToStringTester.Region _region = new TraceRegionToStringTester.Region(0, 7, Collections.<ILocationData>unmodifiableList(CollectionLiterals.<ILocationData>newArrayList(_location)));
-    final Procedure1<TraceRegionToStringTester.Region> _function = new Procedure1<TraceRegionToStringTester.Region>() {
-      @Override
-      public void apply(final TraceRegionToStringTester.Region it) {
-        TraceRegionToStringTester.Location _location = new TraceRegionToStringTester.Location(0, 3);
-        it.addChild(0, 3, Collections.<ILocationData>unmodifiableList(CollectionLiterals.<ILocationData>newArrayList(_location)));
-        SourceRelativeURI _uri2 = tester.getUri2();
-        TraceRegionToStringTester.Location _location_1 = new TraceRegionToStringTester.Location(0, 3, _uri2);
-        it.addChild(4, 3, Collections.<ILocationData>unmodifiableList(CollectionLiterals.<ILocationData>newArrayList(_location_1)));
-      }
+    final Procedure1<TraceRegionToStringTester.Region> _function = (TraceRegionToStringTester.Region it) -> {
+      TraceRegionToStringTester.Location _location_1 = new TraceRegionToStringTester.Location(0, 3);
+      it.addChild(0, 3, Collections.<ILocationData>unmodifiableList(CollectionLiterals.<ILocationData>newArrayList(_location_1)));
+      SourceRelativeURI _uri2 = tester.getUri2();
+      TraceRegionToStringTester.Location _location_2 = new TraceRegionToStringTester.Location(0, 3, _uri2);
+      it.addChild(4, 3, Collections.<ILocationData>unmodifiableList(CollectionLiterals.<ILocationData>newArrayList(_location_2)));
     };
     TraceRegionToStringTester.Region _doubleArrow = ObjectExtensions.<TraceRegionToStringTester.Region>operator_doubleArrow(_region, _function);
     tester.setTrace(_doubleArrow);

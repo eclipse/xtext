@@ -21,6 +21,7 @@ import org.eclipse.xtext.resource.impl.ResourceServiceProviderRegistryImpl;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * @since 2.11
  */
 @Singleton
 @SuppressWarnings("all")

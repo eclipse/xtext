@@ -289,11 +289,8 @@ public class XtendRuntimeModule extends AbstractXtendRuntimeModule {
   
   @Override
   public Provider<InternalXtendLexer> provideInternalXtendLexer() {
-    final Provider<InternalXtendLexer> _function = new Provider<InternalXtendLexer>() {
-      @Override
-      public InternalXtendLexer get() {
-        return new DisabledAntlrLexer(null);
-      }
+    final Provider<InternalXtendLexer> _function = () -> {
+      return new DisabledAntlrLexer(null);
     };
     return _function;
   }
@@ -305,11 +302,8 @@ public class XtendRuntimeModule extends AbstractXtendRuntimeModule {
     LinkedBindingBuilder<Lexer> _annotatedWith = _bind.annotatedWith(_named);
     _annotatedWith.to(DisabledAntlrLexer.class);
     AnnotatedBindingBuilder<DisabledAntlrLexer> _bind_1 = binder.<DisabledAntlrLexer>bind(DisabledAntlrLexer.class);
-    final Provider<DisabledAntlrLexer> _function = new Provider<DisabledAntlrLexer>() {
-      @Override
-      public DisabledAntlrLexer get() {
-        return new DisabledAntlrLexer(null);
-      }
+    final Provider<DisabledAntlrLexer> _function = () -> {
+      return new DisabledAntlrLexer(null);
     };
     _bind_1.toProvider(_function);
   }

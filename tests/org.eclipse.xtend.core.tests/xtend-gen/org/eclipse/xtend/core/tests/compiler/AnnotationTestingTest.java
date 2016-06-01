@@ -46,56 +46,44 @@ public class AnnotationTestingTest extends AbstractXtendCompilerTest {
       final URI sourceFileUri = this.compilationTestHelper.copyToWorkspace((CompilationTestHelper.PROJECT_NAME + "/res/template.txt"), _builder);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("@org.eclipse.xtend.core.tests.compiler.MyAnnotation class Foo {}");
-      final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
-        @Override
-        public void accept(final CompilationTestHelper.Result it) {
-          try {
-            final Class<?> compiledClass = it.getCompiledClass();
-            Field[] _declaredFields = compiledClass.getDeclaredFields();
-            int _size = ((List<Field>)Conversions.doWrapArray(_declaredFields)).size();
-            Assert.assertEquals(3, _size);
-            Field[] _declaredFields_1 = compiledClass.getDeclaredFields();
-            final Function1<Field, Boolean> _function = new Function1<Field, Boolean>() {
-              @Override
-              public Boolean apply(final Field it) {
-                String _name = it.getName();
-                return Boolean.valueOf(Objects.equal(_name, "foo"));
-              }
-            };
-            boolean _exists = IterableExtensions.<Field>exists(((Iterable<Field>)Conversions.doWrapArray(_declaredFields_1)), _function);
-            Assert.assertTrue(_exists);
-            Field[] _declaredFields_2 = compiledClass.getDeclaredFields();
-            final Function1<Field, Boolean> _function_1 = new Function1<Field, Boolean>() {
-              @Override
-              public Boolean apply(final Field it) {
-                String _name = it.getName();
-                return Boolean.valueOf(Objects.equal(_name, "bar"));
-              }
-            };
-            boolean _exists_1 = IterableExtensions.<Field>exists(((Iterable<Field>)Conversions.doWrapArray(_declaredFields_2)), _function_1);
-            Assert.assertTrue(_exists_1);
-            Field[] _declaredFields_3 = compiledClass.getDeclaredFields();
-            final Function1<Field, Boolean> _function_2 = new Function1<Field, Boolean>() {
-              @Override
-              public Boolean apply(final Field it) {
-                String _name = it.getName();
-                return Boolean.valueOf(Objects.equal(_name, "baz"));
-              }
-            };
-            boolean _exists_2 = IterableExtensions.<Field>exists(((Iterable<Field>)Conversions.doWrapArray(_declaredFields_3)), _function_2);
-            Assert.assertTrue(_exists_2);
-            URI _trimSegments = sourceFileUri.trimSegments(2);
-            URI _appendSegment = _trimSegments.appendSegment("xtend-gen");
-            final URI targetFileUri = _appendSegment.appendSegment("out.txt");
-            String _fileString = targetFileUri.toFileString();
-            final File targetFile = new File(_fileString);
-            Charset _defaultCharset = Charset.defaultCharset();
-            final String result = Files.toString(targetFile, _defaultCharset);
-            String _trim = result.trim();
-            Assert.assertEquals("foo|bar|baz", _trim);
-          } catch (Throwable _e) {
-            throw Exceptions.sneakyThrow(_e);
-          }
+      final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
+        try {
+          final Class<?> compiledClass = it.getCompiledClass();
+          Field[] _declaredFields = compiledClass.getDeclaredFields();
+          int _size = ((List<Field>)Conversions.doWrapArray(_declaredFields)).size();
+          Assert.assertEquals(3, _size);
+          Field[] _declaredFields_1 = compiledClass.getDeclaredFields();
+          final Function1<Field, Boolean> _function_1 = (Field it_1) -> {
+            String _name = it_1.getName();
+            return Boolean.valueOf(Objects.equal(_name, "foo"));
+          };
+          boolean _exists = IterableExtensions.<Field>exists(((Iterable<Field>)Conversions.doWrapArray(_declaredFields_1)), _function_1);
+          Assert.assertTrue(_exists);
+          Field[] _declaredFields_2 = compiledClass.getDeclaredFields();
+          final Function1<Field, Boolean> _function_2 = (Field it_1) -> {
+            String _name = it_1.getName();
+            return Boolean.valueOf(Objects.equal(_name, "bar"));
+          };
+          boolean _exists_1 = IterableExtensions.<Field>exists(((Iterable<Field>)Conversions.doWrapArray(_declaredFields_2)), _function_2);
+          Assert.assertTrue(_exists_1);
+          Field[] _declaredFields_3 = compiledClass.getDeclaredFields();
+          final Function1<Field, Boolean> _function_3 = (Field it_1) -> {
+            String _name = it_1.getName();
+            return Boolean.valueOf(Objects.equal(_name, "baz"));
+          };
+          boolean _exists_2 = IterableExtensions.<Field>exists(((Iterable<Field>)Conversions.doWrapArray(_declaredFields_3)), _function_3);
+          Assert.assertTrue(_exists_2);
+          URI _trimSegments = sourceFileUri.trimSegments(2);
+          URI _appendSegment = _trimSegments.appendSegment("xtend-gen");
+          final URI targetFileUri = _appendSegment.appendSegment("out.txt");
+          String _fileString = targetFileUri.toFileString();
+          final File targetFile = new File(_fileString);
+          Charset _defaultCharset = Charset.defaultCharset();
+          final String result = Files.toString(targetFile, _defaultCharset);
+          String _trim = result.trim();
+          Assert.assertEquals("foo|bar|baz", _trim);
+        } catch (Throwable _e) {
+          throw Exceptions.sneakyThrow(_e);
         }
       };
       this.compilationTestHelper.compile(_builder_1, _function);

@@ -28,19 +28,16 @@ import org.eclipse.xtext.generator.parser.antlr.AbstractAntlrGeneratorFragment;
 @SuppressWarnings("all")
 public abstract class AbstractAntlrXtendGeneratorFragment extends AbstractAntlrGeneratorFragment {
   protected Module createModule(final Grammar grammar) {
-    final Module _function = new Module() {
-      @Override
-      public void configure(final Binder binder) {
-        AnnotatedBindingBuilder<Grammar> _bind = binder.<Grammar>bind(Grammar.class);
-        _bind.toInstance(grammar);
-        AnnotatedBindingBuilder<Naming> _bind_1 = binder.<Naming>bind(Naming.class);
-        Naming _naming = AbstractAntlrXtendGeneratorFragment.this.getNaming();
-        _bind_1.toInstance(_naming);
-        AnnotatedBindingBuilder<IGrammarAccess> _bind_2 = binder.<IGrammarAccess>bind(IGrammarAccess.class);
-        Xtend2GeneratorFragment.GenericGrammarAccess _genericGrammarAccess = new Xtend2GeneratorFragment.GenericGrammarAccess(grammar);
-        _bind_2.toInstance(_genericGrammarAccess);
-        AbstractAntlrXtendGeneratorFragment.this.addLocalBindings(binder);
-      }
+    final Module _function = (Binder binder) -> {
+      AnnotatedBindingBuilder<Grammar> _bind = binder.<Grammar>bind(Grammar.class);
+      _bind.toInstance(grammar);
+      AnnotatedBindingBuilder<Naming> _bind_1 = binder.<Naming>bind(Naming.class);
+      Naming _naming = this.getNaming();
+      _bind_1.toInstance(_naming);
+      AnnotatedBindingBuilder<IGrammarAccess> _bind_2 = binder.<IGrammarAccess>bind(IGrammarAccess.class);
+      Xtend2GeneratorFragment.GenericGrammarAccess _genericGrammarAccess = new Xtend2GeneratorFragment.GenericGrammarAccess(grammar);
+      _bind_2.toInstance(_genericGrammarAccess);
+      this.addLocalBindings(binder);
     };
     return _function;
   }

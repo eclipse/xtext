@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.ide.highlighting;
 
-import com.google.common.base.Objects;
 import org.eclipse.xtend.ide.common.highlighting.XtendHighlightingStyles;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.HighlightingStyles;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.SyntaxColoringPreferencePage;
@@ -24,92 +23,41 @@ public class XtendSyntaxColoringPreferencePage extends SyntaxColoringPreferenceP
    */
   @Override
   public void acceptDefaultHighlighting(final String id, final String name, final TextStyle style) {
-    boolean _matched = false;
-    if (Objects.equal(id, XtendHighlightingStyles.INVALID_TOKEN_ID)) {
-      _matched=true;
-    }
-    if (!_matched) {
-      if (Objects.equal(id, XtendHighlightingStyles.SEMANTIC_LINE_BREAK)) {
-        _matched=true;
-      }
-    }
-    if (!_matched) {
-      if (Objects.equal(id, XtendHighlightingStyles.POTENTIAL_LINE_BREAK)) {
-        _matched=true;
-      }
-    }
-    if (!_matched) {
-      if (Objects.equal(id, HighlightingStyles.COMMENT_ID)) {
-        _matched=true;
-      }
-    }
-    if (_matched) {
-      return;
-    }
-    if (!_matched) {
-      if (Objects.equal(id, HighlightingStyles.KEYWORD_ID)) {
-        _matched=true;
+    switch (id) {
+      case XtendHighlightingStyles.INVALID_TOKEN_ID:
+      case XtendHighlightingStyles.SEMANTIC_LINE_BREAK:
+      case XtendHighlightingStyles.POTENTIAL_LINE_BREAK:
+      case HighlightingStyles.COMMENT_ID:
+        return;
+      case HighlightingStyles.KEYWORD_ID:
         super.acceptDefaultHighlighting(id, "Keywords", style);
-      }
-    }
-    if (!_matched) {
-      if (Objects.equal(id, HighlightingStyles.NUMBER_ID)) {
-        _matched=true;
+        break;
+      case HighlightingStyles.NUMBER_ID:
         super.acceptDefaultHighlighting(id, "Numbers", style);
-      }
-    }
-    if (!_matched) {
-      if (Objects.equal(id, HighlightingStyles.STRING_ID)) {
-        _matched=true;
+        break;
+      case HighlightingStyles.STRING_ID:
         super.acceptDefaultHighlighting(id, "Strings", style);
-      }
-    }
-    if (!_matched) {
-      if (Objects.equal(id, HighlightingStyles.PUNCTUATION_ID)) {
-        _matched=true;
+        break;
+      case HighlightingStyles.PUNCTUATION_ID:
         super.acceptDefaultHighlighting(id, "Punctuation Characters", style);
-      }
-    }
-    if (!_matched) {
-      if (Objects.equal(id, HighlightingStyles.TASK_ID)) {
-        _matched=true;
+        break;
+      case HighlightingStyles.TASK_ID:
         super.acceptDefaultHighlighting(id, "Task Tags", style);
-      }
-    }
-    if (!_matched) {
-      if (Objects.equal(id, HighlightingStyles.DEFAULT_ID)) {
-        _matched=true;
+        break;
+      case HighlightingStyles.DEFAULT_ID:
         super.acceptDefaultHighlighting(id, "Others", style);
-      }
-    }
-    if (!_matched) {
-      if (Objects.equal(id, XbaseHighlightingStyles.LOCAL_VARIABLE)) {
-        _matched=true;
-      }
-      if (!_matched) {
-        if (Objects.equal(id, XbaseHighlightingStyles.LOCAL_VARIABLE_DECLARATION)) {
-          _matched=true;
-        }
-      }
-      if (_matched) {
+        break;
+      case XbaseHighlightingStyles.LOCAL_VARIABLE:
+      case XbaseHighlightingStyles.LOCAL_VARIABLE_DECLARATION:
         super.acceptDefaultHighlighting(id, (name + " (var)"), style);
-      }
-    }
-    if (!_matched) {
-      if (Objects.equal(id, XbaseHighlightingStyles.LOCAL_FINAL_VARIABLE)) {
-        _matched=true;
-      }
-      if (!_matched) {
-        if (Objects.equal(id, XbaseHighlightingStyles.LOCAL_FINAL_VARIABLE_DECLARATION)) {
-          _matched=true;
-        }
-      }
-      if (_matched) {
+        break;
+      case XbaseHighlightingStyles.LOCAL_FINAL_VARIABLE:
+      case XbaseHighlightingStyles.LOCAL_FINAL_VARIABLE_DECLARATION:
         super.acceptDefaultHighlighting(id, (name + " (val)"), style);
-      }
-    }
-    if (!_matched) {
-      super.acceptDefaultHighlighting(id, name, style);
+        break;
+      default:
+        super.acceptDefaultHighlighting(id, name, style);
+        break;
     }
   }
 }

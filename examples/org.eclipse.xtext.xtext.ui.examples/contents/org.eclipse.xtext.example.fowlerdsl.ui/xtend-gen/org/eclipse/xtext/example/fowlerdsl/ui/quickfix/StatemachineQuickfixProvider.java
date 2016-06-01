@@ -34,17 +34,14 @@ public class StatemachineQuickfixProvider extends DefaultQuickfixProvider {
     String _firstLower_1 = StringExtensions.toFirstLower(_head_1);
     String _plus_2 = ("Change to \'" + _firstLower_1);
     String _plus_3 = (_plus_2 + "\'.");
-    final IModification _function = new IModification() {
-      @Override
-      public void apply(final IModificationContext it) throws Exception {
-        IXtextDocument _xtextDocument = it.getXtextDocument();
-        Integer _offset = issue.getOffset();
-        final String firstLetter = _xtextDocument.get((_offset).intValue(), 1);
-        IXtextDocument _xtextDocument_1 = it.getXtextDocument();
-        Integer _offset_1 = issue.getOffset();
-        String _lowerCase = firstLetter.toLowerCase();
-        _xtextDocument_1.replace((_offset_1).intValue(), 1, _lowerCase);
-      }
+    final IModification _function = (IModificationContext it) -> {
+      IXtextDocument _xtextDocument = it.getXtextDocument();
+      Integer _offset = issue.getOffset();
+      final String firstLetter = _xtextDocument.get((_offset).intValue(), 1);
+      IXtextDocument _xtextDocument_1 = it.getXtextDocument();
+      Integer _offset_1 = issue.getOffset();
+      String _lowerCase = firstLetter.toLowerCase();
+      _xtextDocument_1.replace((_offset_1).intValue(), 1, _lowerCase);
     };
     acceptor.accept(issue, _plus_1, _plus_3, "upcase.png", _function);
   }

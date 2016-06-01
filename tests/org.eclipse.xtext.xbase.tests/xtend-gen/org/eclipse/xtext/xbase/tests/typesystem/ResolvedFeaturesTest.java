@@ -15,6 +15,7 @@ import java.lang.ref.SoftReference;
 import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmConstructor;
@@ -29,7 +30,6 @@ import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedConstructor;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedField;
@@ -167,15 +167,12 @@ public class ResolvedFeaturesTest extends AbstractXbaseTestCase {
     final List<IResolvedOperation> all = resolvedOperations.getAllOperations();
     boolean _isEmpty = all.isEmpty();
     Assert.assertFalse(_isEmpty);
-    final Procedure1<IResolvedOperation> _function = new Procedure1<IResolvedOperation>() {
-      @Override
-      public void apply(final IResolvedOperation it) {
-        JvmOperation _declaration = it.getDeclaration();
-        boolean _isAbstract = _declaration.isAbstract();
-        Assert.assertFalse(_isAbstract);
-      }
+    final Consumer<IResolvedOperation> _function = (IResolvedOperation it) -> {
+      JvmOperation _declaration = it.getDeclaration();
+      boolean _isAbstract = _declaration.isAbstract();
+      Assert.assertFalse(_isAbstract);
     };
-    IterableExtensions.<IResolvedOperation>forEach(all, _function);
+    all.forEach(_function);
   }
   
   @Test
@@ -184,12 +181,9 @@ public class ResolvedFeaturesTest extends AbstractXbaseTestCase {
     final List<IResolvedOperation> all = resolvedOperations.getAllOperations();
     boolean _isEmpty = all.isEmpty();
     Assert.assertFalse(_isEmpty);
-    final Function1<IResolvedOperation, Boolean> _function = new Function1<IResolvedOperation, Boolean>() {
-      @Override
-      public Boolean apply(final IResolvedOperation it) {
-        JvmOperation _declaration = it.getDeclaration();
-        return Boolean.valueOf(_declaration.isAbstract());
-      }
+    final Function1<IResolvedOperation, Boolean> _function = (IResolvedOperation it) -> {
+      JvmOperation _declaration = it.getDeclaration();
+      return Boolean.valueOf(_declaration.isAbstract());
     };
     Iterable<IResolvedOperation> _filter = IterableExtensions.<IResolvedOperation>filter(all, _function);
     final IResolvedOperation iterator = Iterables.<IResolvedOperation>getOnlyElement(_filter);
@@ -205,23 +199,17 @@ public class ResolvedFeaturesTest extends AbstractXbaseTestCase {
     boolean _isEmpty = all.isEmpty();
     Assert.assertFalse(_isEmpty);
     String _string = all.toString();
-    final Function1<IResolvedOperation, Boolean> _function = new Function1<IResolvedOperation, Boolean>() {
-      @Override
-      public Boolean apply(final IResolvedOperation it) {
-        JvmOperation _declaration = it.getDeclaration();
-        return Boolean.valueOf(_declaration.isAbstract());
-      }
+    final Function1<IResolvedOperation, Boolean> _function = (IResolvedOperation it) -> {
+      JvmOperation _declaration = it.getDeclaration();
+      return Boolean.valueOf(_declaration.isAbstract());
     };
     Iterable<IResolvedOperation> _filter = IterableExtensions.<IResolvedOperation>filter(all, _function);
     int _size = IterableExtensions.size(_filter);
     Assert.assertEquals(_string, 2, _size);
     String _string_1 = all.toString();
-    final Function1<IResolvedOperation, Boolean> _function_1 = new Function1<IResolvedOperation, Boolean>() {
-      @Override
-      public Boolean apply(final IResolvedOperation it) {
-        JvmOperation _declaration = it.getDeclaration();
-        return Boolean.valueOf(_declaration.isFinal());
-      }
+    final Function1<IResolvedOperation, Boolean> _function_1 = (IResolvedOperation it) -> {
+      JvmOperation _declaration = it.getDeclaration();
+      return Boolean.valueOf(_declaration.isFinal());
     };
     Iterable<IResolvedOperation> _filter_1 = IterableExtensions.<IResolvedOperation>filter(all, _function_1);
     int _size_1 = IterableExtensions.size(_filter_1);
@@ -238,23 +226,17 @@ public class ResolvedFeaturesTest extends AbstractXbaseTestCase {
     boolean _isEmpty = all.isEmpty();
     Assert.assertFalse(_isEmpty);
     String _string = all.toString();
-    final Function1<IResolvedOperation, Boolean> _function = new Function1<IResolvedOperation, Boolean>() {
-      @Override
-      public Boolean apply(final IResolvedOperation it) {
-        JvmOperation _declaration = it.getDeclaration();
-        return Boolean.valueOf(_declaration.isAbstract());
-      }
+    final Function1<IResolvedOperation, Boolean> _function = (IResolvedOperation it) -> {
+      JvmOperation _declaration = it.getDeclaration();
+      return Boolean.valueOf(_declaration.isAbstract());
     };
     Iterable<IResolvedOperation> _filter = IterableExtensions.<IResolvedOperation>filter(all, _function);
     int _size = IterableExtensions.size(_filter);
     Assert.assertEquals(_string, (1 + 1), _size);
     final List<IResolvedOperation> declared = resolvedOperations.getDeclaredOperations();
-    final Function1<IResolvedOperation, Boolean> _function_1 = new Function1<IResolvedOperation, Boolean>() {
-      @Override
-      public Boolean apply(final IResolvedOperation it) {
-        JvmOperation _declaration = it.getDeclaration();
-        return Boolean.valueOf(_declaration.isAbstract());
-      }
+    final Function1<IResolvedOperation, Boolean> _function_1 = (IResolvedOperation it) -> {
+      JvmOperation _declaration = it.getDeclaration();
+      return Boolean.valueOf(_declaration.isAbstract());
     };
     Iterable<IResolvedOperation> _filter_1 = IterableExtensions.<IResolvedOperation>filter(declared, _function_1);
     int _size_1 = IterableExtensions.size(_filter_1);
@@ -271,32 +253,29 @@ public class ResolvedFeaturesTest extends AbstractXbaseTestCase {
     int _size_1 = _declaredConstructors.size();
     Assert.assertEquals(2, _size_1);
     List<IResolvedConstructor> _declaredConstructors_1 = resolvedOperations.getDeclaredConstructors();
-    final Procedure1<IResolvedConstructor> _function = new Procedure1<IResolvedConstructor>() {
-      @Override
-      public void apply(final IResolvedConstructor it) {
-        JvmConstructor _declaration = it.getDeclaration();
-        EList<JvmFormalParameter> _parameters = _declaration.getParameters();
-        int _size = _parameters.size();
-        switch (_size) {
-          case 1:
-            String _resolvedSignature = it.getResolvedSignature();
-            Assert.assertEquals("SoftReference(T)", _resolvedSignature);
-            String _resolvedErasureSignature = it.getResolvedErasureSignature();
-            Assert.assertEquals("SoftReference(java.lang.Object)", _resolvedErasureSignature);
-            break;
-          case 2:
-            String _resolvedSignature_1 = it.getResolvedSignature();
-            Assert.assertEquals("SoftReference(T,java.lang.ref.ReferenceQueue<? super T>)", _resolvedSignature_1);
-            String _resolvedErasureSignature_1 = it.getResolvedErasureSignature();
-            Assert.assertEquals("SoftReference(java.lang.Object,java.lang.ref.ReferenceQueue)", _resolvedErasureSignature_1);
-            break;
-          default:
-            Assert.fail(("Unexpected constructor: " + it));
-            break;
-        }
+    final Consumer<IResolvedConstructor> _function = (IResolvedConstructor it) -> {
+      JvmConstructor _declaration = it.getDeclaration();
+      EList<JvmFormalParameter> _parameters = _declaration.getParameters();
+      int _size_2 = _parameters.size();
+      switch (_size_2) {
+        case 1:
+          String _resolvedSignature = it.getResolvedSignature();
+          Assert.assertEquals("SoftReference(T)", _resolvedSignature);
+          String _resolvedErasureSignature = it.getResolvedErasureSignature();
+          Assert.assertEquals("SoftReference(java.lang.Object)", _resolvedErasureSignature);
+          break;
+        case 2:
+          String _resolvedSignature_1 = it.getResolvedSignature();
+          Assert.assertEquals("SoftReference(T,java.lang.ref.ReferenceQueue<? super T>)", _resolvedSignature_1);
+          String _resolvedErasureSignature_1 = it.getResolvedErasureSignature();
+          Assert.assertEquals("SoftReference(java.lang.Object,java.lang.ref.ReferenceQueue)", _resolvedErasureSignature_1);
+          break;
+        default:
+          Assert.fail(("Unexpected constructor: " + it));
+          break;
       }
     };
-    IterableExtensions.<IResolvedConstructor>forEach(_declaredConstructors_1, _function);
+    _declaredConstructors_1.forEach(_function);
   }
   
   @Test
@@ -309,32 +288,29 @@ public class ResolvedFeaturesTest extends AbstractXbaseTestCase {
     int _size_1 = _declaredConstructors.size();
     Assert.assertEquals(2, _size_1);
     List<IResolvedConstructor> _declaredConstructors_1 = resolvedOperations.getDeclaredConstructors();
-    final Procedure1<IResolvedConstructor> _function = new Procedure1<IResolvedConstructor>() {
-      @Override
-      public void apply(final IResolvedConstructor it) {
-        JvmConstructor _declaration = it.getDeclaration();
-        EList<JvmFormalParameter> _parameters = _declaration.getParameters();
-        int _size = _parameters.size();
-        switch (_size) {
-          case 1:
-            String _resolvedSignature = it.getResolvedSignature();
-            Assert.assertEquals("SoftReference(java.lang.String)", _resolvedSignature);
-            String _resolvedErasureSignature = it.getResolvedErasureSignature();
-            Assert.assertEquals("SoftReference(java.lang.String)", _resolvedErasureSignature);
-            break;
-          case 2:
-            String _resolvedSignature_1 = it.getResolvedSignature();
-            Assert.assertEquals("SoftReference(java.lang.String,java.lang.ref.ReferenceQueue<? super java.lang.String>)", _resolvedSignature_1);
-            String _resolvedErasureSignature_1 = it.getResolvedErasureSignature();
-            Assert.assertEquals("SoftReference(java.lang.String,java.lang.ref.ReferenceQueue)", _resolvedErasureSignature_1);
-            break;
-          default:
-            Assert.fail(("Unexpected constructor: " + it));
-            break;
-        }
+    final Consumer<IResolvedConstructor> _function = (IResolvedConstructor it) -> {
+      JvmConstructor _declaration = it.getDeclaration();
+      EList<JvmFormalParameter> _parameters = _declaration.getParameters();
+      int _size_2 = _parameters.size();
+      switch (_size_2) {
+        case 1:
+          String _resolvedSignature = it.getResolvedSignature();
+          Assert.assertEquals("SoftReference(java.lang.String)", _resolvedSignature);
+          String _resolvedErasureSignature = it.getResolvedErasureSignature();
+          Assert.assertEquals("SoftReference(java.lang.String)", _resolvedErasureSignature);
+          break;
+        case 2:
+          String _resolvedSignature_1 = it.getResolvedSignature();
+          Assert.assertEquals("SoftReference(java.lang.String,java.lang.ref.ReferenceQueue<? super java.lang.String>)", _resolvedSignature_1);
+          String _resolvedErasureSignature_1 = it.getResolvedErasureSignature();
+          Assert.assertEquals("SoftReference(java.lang.String,java.lang.ref.ReferenceQueue)", _resolvedErasureSignature_1);
+          break;
+        default:
+          Assert.fail(("Unexpected constructor: " + it));
+          break;
       }
     };
-    IterableExtensions.<IResolvedConstructor>forEach(_declaredConstructors_1, _function);
+    _declaredConstructors_1.forEach(_function);
   }
   
   @Test
@@ -342,23 +318,17 @@ public class ResolvedFeaturesTest extends AbstractXbaseTestCase {
     final ResolvedFeatures resolvedFeatures = this.toResolvedOperations("null as java.lang.ref.Reference<String>");
     List<IResolvedField> _declaredFields = resolvedFeatures.getDeclaredFields();
     final List<IResolvedField> fields = IterableExtensions.<IResolvedField>toList(_declaredFields);
-    final Function1<IResolvedField, Boolean> _function = new Function1<IResolvedField, Boolean>() {
-      @Override
-      public Boolean apply(final IResolvedField it) {
-        String _simpleSignature = it.getSimpleSignature();
-        return Boolean.valueOf(Objects.equal(_simpleSignature, "referent"));
-      }
+    final Function1<IResolvedField, Boolean> _function = (IResolvedField it) -> {
+      String _simpleSignature = it.getSimpleSignature();
+      return Boolean.valueOf(Objects.equal(_simpleSignature, "referent"));
     };
     IResolvedField _findFirst = IterableExtensions.<IResolvedField>findFirst(fields, _function);
     LightweightTypeReference _resolvedType = _findFirst.getResolvedType();
     String _humanReadableName = _resolvedType.getHumanReadableName();
     Assert.assertEquals("String", _humanReadableName);
-    final Function1<IResolvedField, Boolean> _function_1 = new Function1<IResolvedField, Boolean>() {
-      @Override
-      public Boolean apply(final IResolvedField it) {
-        String _simpleSignature = it.getSimpleSignature();
-        return Boolean.valueOf(Objects.equal(_simpleSignature, "queue"));
-      }
+    final Function1<IResolvedField, Boolean> _function_1 = (IResolvedField it) -> {
+      String _simpleSignature = it.getSimpleSignature();
+      return Boolean.valueOf(Objects.equal(_simpleSignature, "queue"));
     };
     IResolvedField _findFirst_1 = IterableExtensions.<IResolvedField>findFirst(fields, _function_1);
     LightweightTypeReference _resolvedType_1 = _findFirst_1.getResolvedType();

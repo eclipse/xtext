@@ -25,6 +25,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Consumer;
 import org.antlr.runtime.Token;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
@@ -59,7 +60,6 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtext.generator.AbstractStubGeneratingFragment;
@@ -267,16 +267,13 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
     JavaFileAccess _compileFileType = this.compileFileType(grammar);
     JavaFileAccess _compileFacetConfiguration = this.compileFacetConfiguration(grammar);
     JavaFileAccess _compileColorSettingsPage = this.compileColorSettingsPage(grammar);
-    final Procedure1<JavaFileAccess> _function = new Procedure1<JavaFileAccess>() {
-      @Override
-      public void apply(final JavaFileAccess it) {
-        IXtextProjectConfig _projectConfig = IdeaPluginGenerator.this.getProjectConfig();
-        ISubProjectConfig _ideaPlugin = _projectConfig.getIdeaPlugin();
-        IXtextGeneratorFileSystemAccess _src = _ideaPlugin.getSrc();
-        it.writeTo(_src);
-      }
+    final Consumer<JavaFileAccess> _function = (JavaFileAccess it) -> {
+      IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
+      ISubProjectConfig _ideaPlugin_1 = _projectConfig_1.getIdeaPlugin();
+      IXtextGeneratorFileSystemAccess _src = _ideaPlugin_1.getSrc();
+      it.writeTo(_src);
     };
-    IterableExtensions.<JavaFileAccess>forEach(Collections.<JavaFileAccess>unmodifiableList(CollectionLiterals.<JavaFileAccess>newArrayList(_compileStandaloneSetup, _compileIdeaSetup, _compileCompletionContributor, _compileFileType, _compileFacetConfiguration, _compileColorSettingsPage)), _function);
+    Collections.<JavaFileAccess>unmodifiableList(CollectionLiterals.<JavaFileAccess>newArrayList(_compileStandaloneSetup, _compileIdeaSetup, _compileCompletionContributor, _compileFileType, _compileFacetConfiguration, _compileColorSettingsPage)).forEach(_function);
     TextFileAccess _compileServicesISetup = this.compileServicesISetup(grammar);
     JavaFileAccess _compileAbstractCompletionContributor = this.compileAbstractCompletionContributor(grammar);
     JavaFileAccess _compileLanguage = this.compileLanguage(grammar);
@@ -295,16 +292,13 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
     JavaFileAccess _compilePomDeclarationSearcher = this.compilePomDeclarationSearcher(grammar);
     JavaFileAccess _compileFacetType = this.compileFacetType(grammar);
     JavaFileAccess _compileBaseColorSettingsPage = this.compileBaseColorSettingsPage(grammar);
-    final Procedure1<TextFileAccess> _function_1 = new Procedure1<TextFileAccess>() {
-      @Override
-      public void apply(final TextFileAccess it) {
-        IXtextProjectConfig _projectConfig = IdeaPluginGenerator.this.getProjectConfig();
-        ISubProjectConfig _ideaPlugin = _projectConfig.getIdeaPlugin();
-        IXtextGeneratorFileSystemAccess _srcGen = _ideaPlugin.getSrcGen();
-        it.writeTo(_srcGen);
-      }
+    final Consumer<TextFileAccess> _function_1 = (TextFileAccess it) -> {
+      IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
+      ISubProjectConfig _ideaPlugin_1 = _projectConfig_1.getIdeaPlugin();
+      IXtextGeneratorFileSystemAccess _srcGen = _ideaPlugin_1.getSrcGen();
+      it.writeTo(_srcGen);
     };
-    IterableExtensions.forEach(Collections.<TextFileAccess>unmodifiableList(CollectionLiterals.<TextFileAccess>newArrayList(_compileServicesISetup, _compileAbstractCompletionContributor, _compileLanguage, _compileAbstractFileType, _compileFileTypeFactory, _compileFileImpl, _compileTokenTypeProvider, _compileElementTypeProvider, _compileParserDefinition, _compileSyntaxHighlighterFactory, _compileSemanticHighlightVisitor, _compileExtensionFactory, _compileCodeBlockModificationListener, _compilePsiParser, _compileAntlrTokenFileProvider, _compilePomDeclarationSearcher, _compileFacetType, _compileBaseColorSettingsPage)), _function_1);
+    Collections.<TextFileAccess>unmodifiableList(CollectionLiterals.<TextFileAccess>newArrayList(_compileServicesISetup, _compileAbstractCompletionContributor, _compileLanguage, _compileAbstractFileType, _compileFileTypeFactory, _compileFileImpl, _compileTokenTypeProvider, _compileElementTypeProvider, _compileParserDefinition, _compileSyntaxHighlighterFactory, _compileSemanticHighlightVisitor, _compileExtensionFactory, _compileCodeBlockModificationListener, _compilePsiParser, _compileAntlrTokenFileProvider, _compilePomDeclarationSearcher, _compileFacetType, _compileBaseColorSettingsPage)).forEach(_function_1);
     if (this.deployable) {
       final TextFileAccess pluginXml = this.compilePluginXml(grammar);
       IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
@@ -1888,12 +1882,9 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
         _builder.newLine();
         {
           List<TerminalRule> _allTerminalRules = GrammarUtil.allTerminalRules(grammar);
-          final Function1<TerminalRule, Boolean> _function = new Function1<TerminalRule, Boolean>() {
-            @Override
-            public Boolean apply(final TerminalRule it) {
-              String _name = it.getName();
-              return Boolean.valueOf(Objects.equal(_name, "WS"));
-            }
+          final Function1<TerminalRule, Boolean> _function = (TerminalRule it) -> {
+            String _name = it.getName();
+            return Boolean.valueOf(Objects.equal(_name, "WS"));
           };
           boolean _exists = IterableExtensions.<TerminalRule>exists(_allTerminalRules, _function);
           if (_exists) {
@@ -1918,19 +1909,13 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
           }
         }
         {
-          if ((IterableExtensions.<TerminalRule>exists(GrammarUtil.allTerminalRules(grammar), new Function1<TerminalRule, Boolean>() {
-            @Override
-            public Boolean apply(final TerminalRule it) {
-              String _name = it.getName();
-              return Boolean.valueOf(Objects.equal(_name, "SL_COMMENT"));
-            }
-          }) && IterableExtensions.<TerminalRule>exists(GrammarUtil.allTerminalRules(grammar), new Function1<TerminalRule, Boolean>() {
-            @Override
-            public Boolean apply(final TerminalRule it) {
-              String _name = it.getName();
-              return Boolean.valueOf(Objects.equal(_name, "ML_COMMENT"));
-            }
-          }))) {
+          if ((IterableExtensions.<TerminalRule>exists(GrammarUtil.allTerminalRules(grammar), ((Function1<TerminalRule, Boolean>) (TerminalRule it) -> {
+            String _name = it.getName();
+            return Boolean.valueOf(Objects.equal(_name, "SL_COMMENT"));
+          })) && IterableExtensions.<TerminalRule>exists(GrammarUtil.allTerminalRules(grammar), ((Function1<TerminalRule, Boolean>) (TerminalRule it) -> {
+            String _name = it.getName();
+            return Boolean.valueOf(Objects.equal(_name, "ML_COMMENT"));
+          })))) {
             _builder.append("\t");
             _builder.append("private static final ");
             _builder.append(tokenSet, "\t");
@@ -1946,12 +1931,9 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
             _builder.newLineIfNotEmpty();
           } else {
             List<TerminalRule> _allTerminalRules_1 = GrammarUtil.allTerminalRules(grammar);
-            final Function1<TerminalRule, Boolean> _function_1 = new Function1<TerminalRule, Boolean>() {
-              @Override
-              public Boolean apply(final TerminalRule it) {
-                String _name = it.getName();
-                return Boolean.valueOf(Objects.equal(_name, "SL_COMMENT"));
-              }
+            final Function1<TerminalRule, Boolean> _function_1 = (TerminalRule it) -> {
+              String _name = it.getName();
+              return Boolean.valueOf(Objects.equal(_name, "SL_COMMENT"));
             };
             boolean _exists_1 = IterableExtensions.<TerminalRule>exists(_allTerminalRules_1, _function_1);
             if (_exists_1) {
@@ -1967,12 +1949,9 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
               _builder.newLineIfNotEmpty();
             } else {
               List<TerminalRule> _allTerminalRules_2 = GrammarUtil.allTerminalRules(grammar);
-              final Function1<TerminalRule, Boolean> _function_2 = new Function1<TerminalRule, Boolean>() {
-                @Override
-                public Boolean apply(final TerminalRule it) {
-                  String _name = it.getName();
-                  return Boolean.valueOf(Objects.equal(_name, "ML_COMMENT"));
-                }
+              final Function1<TerminalRule, Boolean> _function_2 = (TerminalRule it) -> {
+                String _name = it.getName();
+                return Boolean.valueOf(Objects.equal(_name, "ML_COMMENT"));
               };
               boolean _exists_2 = IterableExtensions.<TerminalRule>exists(_allTerminalRules_2, _function_2);
               if (_exists_2) {
@@ -2000,12 +1979,9 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
         }
         {
           List<TerminalRule> _allTerminalRules_3 = GrammarUtil.allTerminalRules(grammar);
-          final Function1<TerminalRule, Boolean> _function_3 = new Function1<TerminalRule, Boolean>() {
-            @Override
-            public Boolean apply(final TerminalRule it) {
-              String _name = it.getName();
-              return Boolean.valueOf(Objects.equal(_name, "STRING"));
-            }
+          final Function1<TerminalRule, Boolean> _function_3 = (TerminalRule it) -> {
+            String _name = it.getName();
+            return Boolean.valueOf(Objects.equal(_name, "STRING"));
           };
           boolean _exists_3 = IterableExtensions.<TerminalRule>exists(_allTerminalRules_3, _function_3);
           if (_exists_3) {
@@ -2204,11 +2180,8 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
   
   public JavaFileAccess compileParserDefinition(final Grammar grammar) {
     List<AbstractRule> _allRules = GrammarUtil.allRules(grammar);
-    final Function1<AbstractRule, Boolean> _function = new Function1<AbstractRule, Boolean>() {
-      @Override
-      public Boolean apply(final AbstractRule it) {
-        return Boolean.valueOf(GrammarUtil.isEObjectRule(it));
-      }
+    final Function1<AbstractRule, Boolean> _function = (AbstractRule it) -> {
+      return Boolean.valueOf(GrammarUtil.isEObjectRule(it));
     };
     final Iterable<AbstractRule> EObjectRules = IterableExtensions.<AbstractRule>filter(_allRules, _function);
     TypeReference _parserDefinition = this._ideaPluginClassNames.getParserDefinition(grammar);
@@ -2407,30 +2380,27 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
   
   protected Iterable<AbstractElement> getEObjectElements(final AbstractRule rule) {
     List<AbstractElement> _eAllOfType = EcoreUtil2.<AbstractElement>eAllOfType(rule, AbstractElement.class);
-    final Function1<AbstractElement, Boolean> _function = new Function1<AbstractElement, Boolean>() {
-      @Override
-      public Boolean apply(final AbstractElement element) {
-        boolean _switchResult = false;
-        boolean _matched = false;
-        if (element instanceof Action) {
-          _matched=true;
-        }
-        if (!_matched) {
-          if (element instanceof RuleCall) {
-            boolean _isEObjectRuleCall = GrammarUtil.isEObjectRuleCall(element);
-            if (_isEObjectRuleCall) {
-              _matched=true;
-            }
+    final Function1<AbstractElement, Boolean> _function = (AbstractElement element) -> {
+      boolean _switchResult = false;
+      boolean _matched = false;
+      if (element instanceof Action) {
+        _matched=true;
+      }
+      if (!_matched) {
+        if (element instanceof RuleCall) {
+          boolean _isEObjectRuleCall = GrammarUtil.isEObjectRuleCall(element);
+          if (_isEObjectRuleCall) {
+            _matched=true;
           }
         }
-        if (_matched) {
-          _switchResult = true;
-        }
-        if (!_matched) {
-          _switchResult = false;
-        }
-        return Boolean.valueOf(_switchResult);
       }
+      if (_matched) {
+        _switchResult = true;
+      }
+      if (!_matched) {
+        _switchResult = false;
+      }
+      return Boolean.valueOf(_switchResult);
     };
     return IterableExtensions.<AbstractElement>filter(_eAllOfType, _function);
   }

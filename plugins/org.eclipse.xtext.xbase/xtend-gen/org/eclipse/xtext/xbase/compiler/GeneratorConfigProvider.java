@@ -103,11 +103,8 @@ public class GeneratorConfigProvider implements IGeneratorConfigProvider {
       GeneratorConfigProvider.GeneratorConfigAdapter _generatorConfigAdapter = new GeneratorConfigProvider.GeneratorConfigAdapter();
       _elvis = _generatorConfigAdapter;
     }
-    final Procedure1<GeneratorConfigProvider.GeneratorConfigAdapter> _function = new Procedure1<GeneratorConfigProvider.GeneratorConfigAdapter>() {
-      @Override
-      public void apply(final GeneratorConfigProvider.GeneratorConfigAdapter it) {
-        it.attachToEmfObject(resourceSet);
-      }
+    final Procedure1<GeneratorConfigProvider.GeneratorConfigAdapter> _function = (GeneratorConfigProvider.GeneratorConfigAdapter it) -> {
+      it.attachToEmfObject(resourceSet);
     };
     final GeneratorConfigProvider.GeneratorConfigAdapter adapter = ObjectExtensions.<GeneratorConfigProvider.GeneratorConfigAdapter>operator_doubleArrow(_elvis, _function);
     return adapter.language2GeneratorConfig.put(this.languageId, config);

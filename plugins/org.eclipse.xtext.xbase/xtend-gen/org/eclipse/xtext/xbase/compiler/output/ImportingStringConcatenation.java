@@ -86,10 +86,10 @@ public class ImportingStringConcatenation extends StringConcatenation {
   protected String getStringRepresentation(final Object object) {
     if (object instanceof JvmType) {
       return _getStringRepresentation((JvmType)object);
-    } else if (object instanceof JvmTypeReference) {
-      return _getStringRepresentation((JvmTypeReference)object);
     } else if (object instanceof Class) {
       return _getStringRepresentation((Class<?>)object);
+    } else if (object instanceof JvmTypeReference) {
+      return _getStringRepresentation((JvmTypeReference)object);
     } else if (object instanceof LightweightTypeReference) {
       return _getStringRepresentation((LightweightTypeReference)object);
     } else if (object != null) {

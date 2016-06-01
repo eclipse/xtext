@@ -86,11 +86,8 @@ public class DirtyStateEditorSupportIntegrationTest extends AbstractEditorTest {
       this.events = _newArrayList;
       DirtyStateEditorSupport _dirtyStateEditorSupport = this.editor.getDirtyStateEditorSupport();
       IDirtyStateManager _dirtyStateManager = _dirtyStateEditorSupport.getDirtyStateManager();
-      final IResourceDescription.Event.Listener _function = new IResourceDescription.Event.Listener() {
-        @Override
-        public void descriptionsChanged(final IResourceDescription.Event it) {
-          DirtyStateEditorSupportIntegrationTest.this.events.add(it);
-        }
+      final IResourceDescription.Event.Listener _function = (IResourceDescription.Event it) -> {
+        this.events.add(it);
       };
       _dirtyStateManager.addListener(_function);
       IWorkbenchPartSite _site_1 = this.editor.getSite();
@@ -219,13 +216,10 @@ public class DirtyStateEditorSupportIntegrationTest extends AbstractEditorTest {
       IXtextDocument _document = this.editor.getDocument();
       final String textBefore = _document.get();
       Event _event = new Event();
-      final Procedure1<Event> _function = new Procedure1<Event>() {
-        @Override
-        public void apply(final Event it) {
-          it.type = SWT.KeyDown;
-          it.character = c;
-          it.keyCode = k;
-        }
+      final Procedure1<Event> _function = (Event it) -> {
+        it.type = SWT.KeyDown;
+        it.character = c;
+        it.keyCode = k;
       };
       final Event event = ObjectExtensions.<Event>operator_doubleArrow(_event, _function);
       this.myDisplay.post(event);

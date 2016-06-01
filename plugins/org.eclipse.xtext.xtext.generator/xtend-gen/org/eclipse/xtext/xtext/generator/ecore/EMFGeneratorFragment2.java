@@ -439,11 +439,8 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
       final ResourceSet workingResourceSet = _eResource.getResourceSet();
       EList<AbstractMetamodelDeclaration> _metamodelDeclarations_1 = clonedGrammar.getMetamodelDeclarations();
       Iterable<GeneratedMetamodel> _filter_1 = Iterables.<GeneratedMetamodel>filter(_metamodelDeclarations_1, GeneratedMetamodel.class);
-      final Function1<GeneratedMetamodel, EPackage> _function = new Function1<GeneratedMetamodel, EPackage>() {
-        @Override
-        public EPackage apply(final GeneratedMetamodel it) {
-          return it.getEPackage();
-        }
+      final Function1<GeneratedMetamodel, EPackage> _function = (GeneratedMetamodel it) -> {
+        return it.getEPackage();
       };
       Iterable<EPackage> _map = IterableExtensions.<GeneratedMetamodel, EPackage>map(_filter_1, _function);
       final List<EPackage> generatedPackages = IterableExtensions.<EPackage>toList(_map);
@@ -747,13 +744,10 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
       for (final EPackage usedNestedPackage : _eSubpackages) {
         {
           EList<EPackage> _eSubpackages_1 = loadedEPackage.getESubpackages();
-          final Function1<EPackage, Boolean> _function = new Function1<EPackage, Boolean>() {
-            @Override
-            public Boolean apply(final EPackage it) {
-              String _name = it.getName();
-              String _name_1 = usedNestedPackage.getName();
-              return Boolean.valueOf(Objects.equal(_name, _name_1));
-            }
+          final Function1<EPackage, Boolean> _function = (EPackage it) -> {
+            String _name = it.getName();
+            String _name_1 = usedNestedPackage.getName();
+            return Boolean.valueOf(Objects.equal(_name, _name_1));
           };
           final EPackage loadedNestedPackage = IterableExtensions.<EPackage>findFirst(_eSubpackages_1, _function);
           if ((loadedNestedPackage != null)) {
@@ -993,17 +987,14 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
     final ArrayList<GenPackage> result = CollectionLiterals.<GenPackage>newArrayList();
     for (final EPackage pkg : packs) {
       EList<GenPackage> _genPackages = existingGenModel.getGenPackages();
-      final Function1<GenPackage, Boolean> _function = new Function1<GenPackage, Boolean>() {
-        @Override
-        public Boolean apply(final GenPackage it) {
-          EPackage _ecorePackage = it.getEcorePackage();
-          String _nsURI = null;
-          if (_ecorePackage!=null) {
-            _nsURI=_ecorePackage.getNsURI();
-          }
-          String _nsURI_1 = pkg.getNsURI();
-          return Boolean.valueOf(Objects.equal(_nsURI, _nsURI_1));
+      final Function1<GenPackage, Boolean> _function = (GenPackage it) -> {
+        EPackage _ecorePackage = it.getEcorePackage();
+        String _nsURI = null;
+        if (_ecorePackage!=null) {
+          _nsURI=_ecorePackage.getNsURI();
         }
+        String _nsURI_1 = pkg.getNsURI();
+        return Boolean.valueOf(Objects.equal(_nsURI, _nsURI_1));
       };
       boolean _exists = IterableExtensions.<GenPackage>exists(_genPackages, _function);
       boolean _not = (!_exists);
@@ -1014,15 +1005,12 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
         result.add(_genPackage);
       }
     }
-    final Comparator<GenPackage> _function_1 = new Comparator<GenPackage>() {
-      @Override
-      public int compare(final GenPackage o1, final GenPackage o2) {
-        URI _uRI = EcoreUtil.getURI(o1);
-        String _string = _uRI.toString();
-        URI _uRI_1 = EcoreUtil.getURI(o2);
-        String _string_1 = _uRI_1.toString();
-        return _string.compareTo(_string_1);
-      }
+    final Comparator<GenPackage> _function_1 = (GenPackage o1, GenPackage o2) -> {
+      URI _uRI = EcoreUtil.getURI(o1);
+      String _string = _uRI.toString();
+      URI _uRI_1 = EcoreUtil.getURI(o2);
+      String _string_1 = _uRI_1.toString();
+      return _string.compareTo(_string_1);
     };
     Collections.<GenPackage>sort(result, _function_1);
     return result;

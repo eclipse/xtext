@@ -199,11 +199,8 @@ public class Formatter2Fragment2 extends AbstractStubGeneratingFragment {
           _builder.append("\t");
           _builder.append("// TODO: implement for ");
           Iterable<EClass> _drop = IterableExtensions.<EClass>drop(types, 2);
-          final Function1<EClass, String> _function = new Function1<EClass, String>() {
-            @Override
-            public String apply(final EClass it) {
-              return it.getName();
-            }
+          final Function1<EClass, String> _function = (EClass it) -> {
+            return it.getName();
           };
           Iterable<String> _map = IterableExtensions.<EClass, String>map(_drop, _function);
           String _join = IterableExtensions.join(_map, ", ");

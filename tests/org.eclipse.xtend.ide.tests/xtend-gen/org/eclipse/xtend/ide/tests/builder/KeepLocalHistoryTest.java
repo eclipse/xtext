@@ -73,30 +73,24 @@ public class KeepLocalHistoryTest extends AbstractXtendUITestCase {
   public void testTurnOffLocalHistoryKeeping() {
     this.setKeepLocalHistory(false);
     IFile _assertCreateFile = this.assertCreateFile(0);
-    final Procedure1<IFile> _function = new Procedure1<IFile>() {
-      @Override
-      public void apply(final IFile it) {
-        KeepLocalHistoryTest.this.assertChangeContentByAnotherContent(it, 0);
-        KeepLocalHistoryTest.this.assertChangeContentByTheSameContent(it, 0);
-        KeepLocalHistoryTest.this.setCleanupDerived(false);
-        KeepLocalHistoryTest.this.setOverride(false);
-        KeepLocalHistoryTest.this.assertChangeContentByAnotherContent(it, 0);
-        KeepLocalHistoryTest.this.assertChangeContentByTheSameContent(it, 0);
-        KeepLocalHistoryTest.this.setOverride(true);
-        KeepLocalHistoryTest.this.setCleanupDerived(true);
-        KeepLocalHistoryTest.this.assertDelete(it, 0);
-      }
+    final Procedure1<IFile> _function = (IFile it) -> {
+      this.assertChangeContentByAnotherContent(it, 0);
+      this.assertChangeContentByTheSameContent(it, 0);
+      this.setCleanupDerived(false);
+      this.setOverride(false);
+      this.assertChangeContentByAnotherContent(it, 0);
+      this.assertChangeContentByTheSameContent(it, 0);
+      this.setOverride(true);
+      this.setCleanupDerived(true);
+      this.assertDelete(it, 0);
     };
     ObjectExtensions.<IFile>operator_doubleArrow(_assertCreateFile, _function);
     IFile _assertCreateFile_1 = this.assertCreateFile(0);
-    final Procedure1<IFile> _function_1 = new Procedure1<IFile>() {
-      @Override
-      public void apply(final IFile it) {
-        KeepLocalHistoryTest.this.setCleanupDerived(true);
-        KeepLocalHistoryTest.this.assertCleanBuild(0);
-        KeepLocalHistoryTest.this.setCleanDirectory(true);
-        KeepLocalHistoryTest.this.assertCleanBuild(0);
-      }
+    final Procedure1<IFile> _function_1 = (IFile it) -> {
+      this.setCleanupDerived(true);
+      this.assertCleanBuild(0);
+      this.setCleanDirectory(true);
+      this.assertCleanBuild(0);
     };
     ObjectExtensions.<IFile>operator_doubleArrow(_assertCreateFile_1, _function_1);
   }
@@ -105,30 +99,24 @@ public class KeepLocalHistoryTest extends AbstractXtendUITestCase {
   public void testTurnOnLocalHistoryKeeping() {
     this.setKeepLocalHistory(true);
     IFile _assertCreateFile = this.assertCreateFile(0);
-    final Procedure1<IFile> _function = new Procedure1<IFile>() {
-      @Override
-      public void apply(final IFile it) {
-        KeepLocalHistoryTest.this.assertChangeContentByAnotherContent(it, 1);
-        KeepLocalHistoryTest.this.assertChangeContentByTheSameContent(it, 1);
-        KeepLocalHistoryTest.this.setCleanupDerived(false);
-        KeepLocalHistoryTest.this.setOverride(false);
-        KeepLocalHistoryTest.this.assertChangeContentByAnotherContent(it, 1);
-        KeepLocalHistoryTest.this.assertChangeContentByTheSameContent(it, 1);
-        KeepLocalHistoryTest.this.setOverride(true);
-        KeepLocalHistoryTest.this.setCleanupDerived(true);
-        KeepLocalHistoryTest.this.assertDelete(it, 2);
-      }
+    final Procedure1<IFile> _function = (IFile it) -> {
+      this.assertChangeContentByAnotherContent(it, 1);
+      this.assertChangeContentByTheSameContent(it, 1);
+      this.setCleanupDerived(false);
+      this.setOverride(false);
+      this.assertChangeContentByAnotherContent(it, 1);
+      this.assertChangeContentByTheSameContent(it, 1);
+      this.setOverride(true);
+      this.setCleanupDerived(true);
+      this.assertDelete(it, 2);
     };
     ObjectExtensions.<IFile>operator_doubleArrow(_assertCreateFile, _function);
     IFile _assertCreateFile_1 = this.assertCreateFile(2);
-    final Procedure1<IFile> _function_1 = new Procedure1<IFile>() {
-      @Override
-      public void apply(final IFile it) {
-        KeepLocalHistoryTest.this.setCleanupDerived(true);
-        KeepLocalHistoryTest.this.assertCleanBuild(3);
-        KeepLocalHistoryTest.this.setCleanDirectory(true);
-        KeepLocalHistoryTest.this.assertCleanBuild(4);
-      }
+    final Procedure1<IFile> _function_1 = (IFile it) -> {
+      this.setCleanupDerived(true);
+      this.assertCleanBuild(3);
+      this.setCleanDirectory(true);
+      this.assertCleanBuild(4);
     };
     ObjectExtensions.<IFile>operator_doubleArrow(_assertCreateFile_1, _function_1);
   }
@@ -136,11 +124,8 @@ public class KeepLocalHistoryTest extends AbstractXtendUITestCase {
   public IFile assertCreateFile(final int expectedLocalHistorySize) {
     try {
       IFile _createFile = this.workbenchTestHelper.createFile(KeepLocalHistoryTest.FILE_NAME, KeepLocalHistoryTest.CONTENT_WITHOUT_BODY);
-      final Procedure1<IFile> _function = new Procedure1<IFile>() {
-        @Override
-        public void apply(final IFile it) {
-          KeepLocalHistoryTest.this.assertGeneratedFiles(expectedLocalHistorySize);
-        }
+      final Procedure1<IFile> _function = (IFile it) -> {
+        this.assertGeneratedFiles(expectedLocalHistorySize);
       };
       return ObjectExtensions.<IFile>operator_doubleArrow(_createFile, _function);
     } catch (Throwable _e) {
@@ -151,21 +136,18 @@ public class KeepLocalHistoryTest extends AbstractXtendUITestCase {
   public void assertChangeContentByAnotherContent(final IFile it, final int expectedLocalHistorySize) {
     try {
       XtextEditor _openEditor = this.workbenchTestHelper.openEditor(it);
-      final Procedure1<XtextEditor> _function = new Procedure1<XtextEditor>() {
-        @Override
-        public void apply(final XtextEditor it) {
-          IXtextDocument _document = it.getDocument();
-          final String currentContent = _document.get();
-          boolean _equals = currentContent.equals(KeepLocalHistoryTest.CONTENT_WITHOUT_BODY);
-          if (_equals) {
-            IXtextDocument _document_1 = it.getDocument();
-            _document_1.set(KeepLocalHistoryTest.CONTENT_WITH_BODY);
-          } else {
-            IXtextDocument _document_2 = it.getDocument();
-            _document_2.set(KeepLocalHistoryTest.CONTENT_WITHOUT_BODY);
-          }
-          KeepLocalHistoryTest.this.workbenchTestHelper.saveEditor(it, false);
+      final Procedure1<XtextEditor> _function = (XtextEditor it_1) -> {
+        IXtextDocument _document = it_1.getDocument();
+        final String currentContent = _document.get();
+        boolean _equals = currentContent.equals(KeepLocalHistoryTest.CONTENT_WITHOUT_BODY);
+        if (_equals) {
+          IXtextDocument _document_1 = it_1.getDocument();
+          _document_1.set(KeepLocalHistoryTest.CONTENT_WITH_BODY);
+        } else {
+          IXtextDocument _document_2 = it_1.getDocument();
+          _document_2.set(KeepLocalHistoryTest.CONTENT_WITHOUT_BODY);
         }
+        this.workbenchTestHelper.saveEditor(it_1, false);
       };
       ObjectExtensions.<XtextEditor>operator_doubleArrow(_openEditor, _function);
       this.assertGeneratedFiles(expectedLocalHistorySize);
@@ -177,15 +159,12 @@ public class KeepLocalHistoryTest extends AbstractXtendUITestCase {
   public void assertChangeContentByTheSameContent(final IFile it, final int expectedLocalHistorySize) {
     try {
       XtextEditor _openEditor = this.workbenchTestHelper.openEditor(it);
-      final Procedure1<XtextEditor> _function = new Procedure1<XtextEditor>() {
-        @Override
-        public void apply(final XtextEditor it) {
-          IXtextDocument _document = it.getDocument();
-          IXtextDocument _document_1 = it.getDocument();
-          String _get = _document_1.get();
-          _document.set(_get);
-          KeepLocalHistoryTest.this.workbenchTestHelper.saveEditor(it, false);
-        }
+      final Procedure1<XtextEditor> _function = (XtextEditor it_1) -> {
+        IXtextDocument _document = it_1.getDocument();
+        IXtextDocument _document_1 = it_1.getDocument();
+        String _get = _document_1.get();
+        _document.set(_get);
+        this.workbenchTestHelper.saveEditor(it_1, false);
       };
       ObjectExtensions.<XtextEditor>operator_doubleArrow(_openEditor, _function);
       this.assertGeneratedFiles(expectedLocalHistorySize);

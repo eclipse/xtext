@@ -11,6 +11,7 @@ import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import java.util.ArrayList;
+import java.util.function.Consumer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
@@ -155,52 +156,37 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
       ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList();
       final IMethod constructor = type.getMethod("Xtend", ((String[])Conversions.unwrapArray(_newArrayList, String.class)));
       ArrayList<Object> _findReferences = this.findReferences(type, constructor);
-      final Procedure1<ArrayList<Object>> _function = new Procedure1<ArrayList<Object>>() {
-        @Override
-        public void apply(final ArrayList<Object> it) {
-          int _size = it.size();
-          Assert.assertEquals(4, _size);
-          Iterable<IField> _filter = Iterables.<IField>filter(it, IField.class);
-          final Function1<IField, Boolean> _function = new Function1<IField, Boolean>() {
-            @Override
-            public Boolean apply(final IField it) {
-              String _elementName = it.getElementName();
-              return Boolean.valueOf(Objects.equal(_elementName, "x"));
-            }
-          };
-          boolean _exists = IterableExtensions.<IField>exists(_filter, _function);
-          Assert.assertTrue(_exists);
-          Iterable<IMethod> _filter_1 = Iterables.<IMethod>filter(it, IMethod.class);
-          final Function1<IMethod, Boolean> _function_1 = new Function1<IMethod, Boolean>() {
-            @Override
-            public Boolean apply(final IMethod it) {
-              String _elementName = it.getElementName();
-              return Boolean.valueOf(Objects.equal(_elementName, "foo"));
-            }
-          };
-          boolean _exists_1 = IterableExtensions.<IMethod>exists(_filter_1, _function_1);
-          Assert.assertTrue(_exists_1);
-          Iterable<IMethod> _filter_2 = Iterables.<IMethod>filter(it, IMethod.class);
-          final Function1<IMethod, Boolean> _function_2 = new Function1<IMethod, Boolean>() {
-            @Override
-            public Boolean apply(final IMethod it) {
-              String _elementName = it.getElementName();
-              return Boolean.valueOf(Objects.equal(_elementName, "bar"));
-            }
-          };
-          boolean _exists_2 = IterableExtensions.<IMethod>exists(_filter_2, _function_2);
-          Assert.assertTrue(_exists_2);
-          Iterable<IMethod> _filter_3 = Iterables.<IMethod>filter(it, IMethod.class);
-          final Function1<IMethod, Boolean> _function_3 = new Function1<IMethod, Boolean>() {
-            @Override
-            public Boolean apply(final IMethod it) {
-              String _elementName = it.getElementName();
-              return Boolean.valueOf(Objects.equal(_elementName, "baz"));
-            }
-          };
-          boolean _exists_3 = IterableExtensions.<IMethod>exists(_filter_3, _function_3);
-          Assert.assertTrue(_exists_3);
-        }
+      final Procedure1<ArrayList<Object>> _function = (ArrayList<Object> it) -> {
+        int _size = it.size();
+        Assert.assertEquals(4, _size);
+        Iterable<IField> _filter = Iterables.<IField>filter(it, IField.class);
+        final Function1<IField, Boolean> _function_1 = (IField it_1) -> {
+          String _elementName = it_1.getElementName();
+          return Boolean.valueOf(Objects.equal(_elementName, "x"));
+        };
+        boolean _exists_2 = IterableExtensions.<IField>exists(_filter, _function_1);
+        Assert.assertTrue(_exists_2);
+        Iterable<IMethod> _filter_1 = Iterables.<IMethod>filter(it, IMethod.class);
+        final Function1<IMethod, Boolean> _function_2 = (IMethod it_1) -> {
+          String _elementName = it_1.getElementName();
+          return Boolean.valueOf(Objects.equal(_elementName, "foo"));
+        };
+        boolean _exists_3 = IterableExtensions.<IMethod>exists(_filter_1, _function_2);
+        Assert.assertTrue(_exists_3);
+        Iterable<IMethod> _filter_2 = Iterables.<IMethod>filter(it, IMethod.class);
+        final Function1<IMethod, Boolean> _function_3 = (IMethod it_1) -> {
+          String _elementName = it_1.getElementName();
+          return Boolean.valueOf(Objects.equal(_elementName, "bar"));
+        };
+        boolean _exists_4 = IterableExtensions.<IMethod>exists(_filter_2, _function_3);
+        Assert.assertTrue(_exists_4);
+        Iterable<IMethod> _filter_3 = Iterables.<IMethod>filter(it, IMethod.class);
+        final Function1<IMethod, Boolean> _function_4 = (IMethod it_1) -> {
+          String _elementName = it_1.getElementName();
+          return Boolean.valueOf(Objects.equal(_elementName, "baz"));
+        };
+        boolean _exists_5 = IterableExtensions.<IMethod>exists(_filter_3, _function_4);
+        Assert.assertTrue(_exists_5);
       };
       ObjectExtensions.<ArrayList<Object>>operator_doubleArrow(_findReferences, _function);
     } catch (Throwable _e) {
@@ -245,28 +231,19 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
       ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList();
       final IMethod method = type.getMethod("foo", ((String[])Conversions.unwrapArray(_newArrayList, String.class)));
       ArrayList<Object> _findReferences = this.findReferences(method);
-      final Procedure1<ArrayList<Object>> _function = new Procedure1<ArrayList<Object>>() {
-        @Override
-        public void apply(final ArrayList<Object> it) {
-          int _size = it.size();
-          Assert.assertEquals(2, _size);
-          final Function1<Object, Boolean> _function = new Function1<Object, Boolean>() {
-            @Override
-            public Boolean apply(final Object it) {
-              return Boolean.valueOf(((it instanceof IField) && Objects.equal(((IField) it).getElementName(), "y")));
-            }
-          };
-          boolean _exists = IterableExtensions.<Object>exists(it, _function);
-          Assert.assertTrue(_exists);
-          final Function1<Object, Boolean> _function_1 = new Function1<Object, Boolean>() {
-            @Override
-            public Boolean apply(final Object it) {
-              return Boolean.valueOf(((it instanceof IMethod) && Objects.equal(((IMethod) it).getElementName(), "bar")));
-            }
-          };
-          boolean _exists_1 = IterableExtensions.<Object>exists(it, _function_1);
-          Assert.assertTrue(_exists_1);
-        }
+      final Procedure1<ArrayList<Object>> _function = (ArrayList<Object> it) -> {
+        int _size = it.size();
+        Assert.assertEquals(2, _size);
+        final Function1<Object, Boolean> _function_1 = (Object it_1) -> {
+          return Boolean.valueOf(((it_1 instanceof IField) && Objects.equal(((IField) it_1).getElementName(), "y")));
+        };
+        boolean _exists = IterableExtensions.<Object>exists(it, _function_1);
+        Assert.assertTrue(_exists);
+        final Function1<Object, Boolean> _function_2 = (Object it_1) -> {
+          return Boolean.valueOf(((it_1 instanceof IMethod) && Objects.equal(((IMethod) it_1).getElementName(), "bar")));
+        };
+        boolean _exists_1 = IterableExtensions.<Object>exists(it, _function_2);
+        Assert.assertTrue(_exists_1);
       };
       ObjectExtensions.<ArrayList<Object>>operator_doubleArrow(_findReferences, _function);
     } catch (Throwable _e) {
@@ -329,44 +306,29 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
       final IType type = _create.findType("Xtend");
       final IField field = type.getField("foo");
       ArrayList<Object> _findReferences = this.findReferences(field);
-      final Procedure1<ArrayList<Object>> _function = new Procedure1<ArrayList<Object>>() {
-        @Override
-        public void apply(final ArrayList<Object> it) {
-          int _size = it.size();
-          Assert.assertEquals(4, _size);
-          final Function1<Object, Boolean> _function = new Function1<Object, Boolean>() {
-            @Override
-            public Boolean apply(final Object it) {
-              return Boolean.valueOf(((it instanceof IField) && Objects.equal(((IField) it).getElementName(), "bar")));
-            }
-          };
-          boolean _exists = IterableExtensions.<Object>exists(it, _function);
-          Assert.assertTrue(_exists);
-          final Function1<Object, Boolean> _function_1 = new Function1<Object, Boolean>() {
-            @Override
-            public Boolean apply(final Object it) {
-              return Boolean.valueOf(((it instanceof IMethod) && Objects.equal(((IMethod) it).getElementName(), "baz")));
-            }
-          };
-          boolean _exists_1 = IterableExtensions.<Object>exists(it, _function_1);
-          Assert.assertTrue(_exists_1);
-          final Function1<Object, Boolean> _function_2 = new Function1<Object, Boolean>() {
-            @Override
-            public Boolean apply(final Object it) {
-              return Boolean.valueOf(((it instanceof IMethod) && Objects.equal(((IMethod) it).getElementName(), "fooBar_0")));
-            }
-          };
-          boolean _exists_2 = IterableExtensions.<Object>exists(it, _function_2);
-          Assert.assertTrue(_exists_2);
-          final Function1<Object, Boolean> _function_3 = new Function1<Object, Boolean>() {
-            @Override
-            public Boolean apply(final Object it) {
-              return Boolean.valueOf(((it instanceof IMethod) && Objects.equal(((IMethod) it).getElementName(), "fooBar_1")));
-            }
-          };
-          boolean _exists_3 = IterableExtensions.<Object>exists(it, _function_3);
-          Assert.assertTrue(_exists_3);
-        }
+      final Procedure1<ArrayList<Object>> _function = (ArrayList<Object> it) -> {
+        int _size = it.size();
+        Assert.assertEquals(4, _size);
+        final Function1<Object, Boolean> _function_1 = (Object it_1) -> {
+          return Boolean.valueOf(((it_1 instanceof IField) && Objects.equal(((IField) it_1).getElementName(), "bar")));
+        };
+        boolean _exists = IterableExtensions.<Object>exists(it, _function_1);
+        Assert.assertTrue(_exists);
+        final Function1<Object, Boolean> _function_2 = (Object it_1) -> {
+          return Boolean.valueOf(((it_1 instanceof IMethod) && Objects.equal(((IMethod) it_1).getElementName(), "baz")));
+        };
+        boolean _exists_1 = IterableExtensions.<Object>exists(it, _function_2);
+        Assert.assertTrue(_exists_1);
+        final Function1<Object, Boolean> _function_3 = (Object it_1) -> {
+          return Boolean.valueOf(((it_1 instanceof IMethod) && Objects.equal(((IMethod) it_1).getElementName(), "fooBar_0")));
+        };
+        boolean _exists_2 = IterableExtensions.<Object>exists(it, _function_3);
+        Assert.assertTrue(_exists_2);
+        final Function1<Object, Boolean> _function_4 = (Object it_1) -> {
+          return Boolean.valueOf(((it_1 instanceof IMethod) && Objects.equal(((IMethod) it_1).getElementName(), "fooBar_1")));
+        };
+        boolean _exists_3 = IterableExtensions.<Object>exists(it, _function_4);
+        Assert.assertTrue(_exists_3);
       };
       ObjectExtensions.<ArrayList<Object>>operator_doubleArrow(_findReferences, _function);
     } catch (Throwable _e) {
@@ -427,52 +389,34 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
       ArrayList<String> _newArrayList_1 = CollectionLiterals.<String>newArrayList("I");
       final IMethod setter = type.getMethod("setFoo", ((String[])Conversions.unwrapArray(_newArrayList_1, String.class)));
       ArrayList<Object> _findReferences = this.findReferences(field, getter, setter);
-      final Procedure1<ArrayList<Object>> _function = new Procedure1<ArrayList<Object>>() {
-        @Override
-        public void apply(final ArrayList<Object> it) {
-          int _size = it.size();
-          Assert.assertEquals(5, _size);
-          final Function1<Object, Boolean> _function = new Function1<Object, Boolean>() {
-            @Override
-            public Boolean apply(final Object it) {
-              return Boolean.valueOf(((it instanceof IField) && Objects.equal(((IField) it).getElementName(), "bar")));
-            }
-          };
-          boolean _exists = IterableExtensions.<Object>exists(it, _function);
-          Assert.assertTrue(_exists);
-          final Function1<Object, Boolean> _function_1 = new Function1<Object, Boolean>() {
-            @Override
-            public Boolean apply(final Object it) {
-              return Boolean.valueOf(((it instanceof IMethod) && Objects.equal(((IMethod) it).getElementName(), "baz")));
-            }
-          };
-          boolean _exists_1 = IterableExtensions.<Object>exists(it, _function_1);
-          Assert.assertTrue(_exists_1);
-          final Function1<Object, Boolean> _function_2 = new Function1<Object, Boolean>() {
-            @Override
-            public Boolean apply(final Object it) {
-              return Boolean.valueOf(((it instanceof IMethod) && Objects.equal(((IMethod) it).getElementName(), "fooBar")));
-            }
-          };
-          boolean _exists_2 = IterableExtensions.<Object>exists(it, _function_2);
-          Assert.assertTrue(_exists_2);
-          final Function1<Object, Boolean> _function_3 = new Function1<Object, Boolean>() {
-            @Override
-            public Boolean apply(final Object it) {
-              return Boolean.valueOf(((it instanceof IMethod) && Objects.equal(((IMethod) it).getElementName(), "getFoo")));
-            }
-          };
-          boolean _exists_3 = IterableExtensions.<Object>exists(it, _function_3);
-          Assert.assertTrue(_exists_3);
-          final Function1<Object, Boolean> _function_4 = new Function1<Object, Boolean>() {
-            @Override
-            public Boolean apply(final Object it) {
-              return Boolean.valueOf(((it instanceof IMethod) && Objects.equal(((IMethod) it).getElementName(), "setFoo")));
-            }
-          };
-          boolean _exists_4 = IterableExtensions.<Object>exists(it, _function_4);
-          Assert.assertTrue(_exists_4);
-        }
+      final Procedure1<ArrayList<Object>> _function = (ArrayList<Object> it) -> {
+        int _size = it.size();
+        Assert.assertEquals(5, _size);
+        final Function1<Object, Boolean> _function_1 = (Object it_1) -> {
+          return Boolean.valueOf(((it_1 instanceof IField) && Objects.equal(((IField) it_1).getElementName(), "bar")));
+        };
+        boolean _exists = IterableExtensions.<Object>exists(it, _function_1);
+        Assert.assertTrue(_exists);
+        final Function1<Object, Boolean> _function_2 = (Object it_1) -> {
+          return Boolean.valueOf(((it_1 instanceof IMethod) && Objects.equal(((IMethod) it_1).getElementName(), "baz")));
+        };
+        boolean _exists_1 = IterableExtensions.<Object>exists(it, _function_2);
+        Assert.assertTrue(_exists_1);
+        final Function1<Object, Boolean> _function_3 = (Object it_1) -> {
+          return Boolean.valueOf(((it_1 instanceof IMethod) && Objects.equal(((IMethod) it_1).getElementName(), "fooBar")));
+        };
+        boolean _exists_2 = IterableExtensions.<Object>exists(it, _function_3);
+        Assert.assertTrue(_exists_2);
+        final Function1<Object, Boolean> _function_4 = (Object it_1) -> {
+          return Boolean.valueOf(((it_1 instanceof IMethod) && Objects.equal(((IMethod) it_1).getElementName(), "getFoo")));
+        };
+        boolean _exists_3 = IterableExtensions.<Object>exists(it, _function_4);
+        Assert.assertTrue(_exists_3);
+        final Function1<Object, Boolean> _function_5 = (Object it_1) -> {
+          return Boolean.valueOf(((it_1 instanceof IMethod) && Objects.equal(((IMethod) it_1).getElementName(), "setFoo")));
+        };
+        boolean _exists_4 = IterableExtensions.<Object>exists(it, _function_5);
+        Assert.assertTrue(_exists_4);
       };
       ObjectExtensions.<ArrayList<Object>>operator_doubleArrow(_findReferences, _function);
     } catch (Throwable _e) {
@@ -554,36 +498,24 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
       boolean _exists_1 = caseMethod.exists();
       Assert.assertTrue(_exists_1);
       ArrayList<Object> _findReferences = this.findReferences(dispatcher, caseMethod);
-      final Procedure1<ArrayList<Object>> _function = new Procedure1<ArrayList<Object>>() {
-        @Override
-        public void apply(final ArrayList<Object> it) {
-          int _size = it.size();
-          Assert.assertEquals(3, _size);
-          final Function1<Object, Boolean> _function = new Function1<Object, Boolean>() {
-            @Override
-            public Boolean apply(final Object it) {
-              return Boolean.valueOf(((it instanceof IMethod) && Objects.equal(((IMethod) it).getElementName(), "foo_1")));
-            }
-          };
-          boolean _exists = IterableExtensions.<Object>exists(it, _function);
-          Assert.assertTrue(_exists);
-          final Function1<Object, Boolean> _function_1 = new Function1<Object, Boolean>() {
-            @Override
-            public Boolean apply(final Object it) {
-              return Boolean.valueOf(((it instanceof IMethod) && Objects.equal(((IMethod) it).getElementName(), "baz")));
-            }
-          };
-          boolean _exists_1 = IterableExtensions.<Object>exists(it, _function_1);
-          Assert.assertTrue(_exists_1);
-          final Function1<Object, Boolean> _function_2 = new Function1<Object, Boolean>() {
-            @Override
-            public Boolean apply(final Object it) {
-              return Boolean.valueOf(((it instanceof IMethod) && Objects.equal(((IMethod) it).getElementName(), "foo")));
-            }
-          };
-          boolean _exists_2 = IterableExtensions.<Object>exists(it, _function_2);
-          Assert.assertTrue(_exists_2);
-        }
+      final Procedure1<ArrayList<Object>> _function = (ArrayList<Object> it) -> {
+        int _size = it.size();
+        Assert.assertEquals(3, _size);
+        final Function1<Object, Boolean> _function_1 = (Object it_1) -> {
+          return Boolean.valueOf(((it_1 instanceof IMethod) && Objects.equal(((IMethod) it_1).getElementName(), "foo_1")));
+        };
+        boolean _exists_2 = IterableExtensions.<Object>exists(it, _function_1);
+        Assert.assertTrue(_exists_2);
+        final Function1<Object, Boolean> _function_2 = (Object it_1) -> {
+          return Boolean.valueOf(((it_1 instanceof IMethod) && Objects.equal(((IMethod) it_1).getElementName(), "baz")));
+        };
+        boolean _exists_3 = IterableExtensions.<Object>exists(it, _function_2);
+        Assert.assertTrue(_exists_3);
+        final Function1<Object, Boolean> _function_3 = (Object it_1) -> {
+          return Boolean.valueOf(((it_1 instanceof IMethod) && Objects.equal(((IMethod) it_1).getElementName(), "foo")));
+        };
+        boolean _exists_4 = IterableExtensions.<Object>exists(it, _function_3);
+        Assert.assertTrue(_exists_4);
       };
       ObjectExtensions.<ArrayList<Object>>operator_doubleArrow(_findReferences, _function);
     } catch (Throwable _e) {
@@ -637,36 +569,24 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
       IJavaProject _create = JavaCore.create(_project);
       final IType javaType = _create.findType("Java");
       ArrayList<Object> _findReferences = this.findReferences(javaType);
-      final Procedure1<ArrayList<Object>> _function = new Procedure1<ArrayList<Object>>() {
-        @Override
-        public void apply(final ArrayList<Object> it) {
-          int _size = it.size();
-          Assert.assertEquals(3, _size);
-          final Function1<Object, Boolean> _function = new Function1<Object, Boolean>() {
-            @Override
-            public Boolean apply(final Object it) {
-              return Boolean.valueOf(((it instanceof IField) && Objects.equal(((IField) it).getElementName(), "foo")));
-            }
-          };
-          boolean _exists = IterableExtensions.<Object>exists(it, _function);
-          Assert.assertTrue(_exists);
-          final Function1<Object, Boolean> _function_1 = new Function1<Object, Boolean>() {
-            @Override
-            public Boolean apply(final Object it) {
-              return Boolean.valueOf(((it instanceof IMethod) && Objects.equal(((IMethod) it).getElementName(), "bar")));
-            }
-          };
-          boolean _exists_1 = IterableExtensions.<Object>exists(it, _function_1);
-          Assert.assertTrue(_exists_1);
-          final Function1<Object, Boolean> _function_2 = new Function1<Object, Boolean>() {
-            @Override
-            public Boolean apply(final Object it) {
-              return Boolean.valueOf(((it instanceof IMethod) && Objects.equal(((IMethod) it).getElementName(), "baz")));
-            }
-          };
-          boolean _exists_2 = IterableExtensions.<Object>exists(it, _function_2);
-          Assert.assertTrue(_exists_2);
-        }
+      final Procedure1<ArrayList<Object>> _function = (ArrayList<Object> it) -> {
+        int _size = it.size();
+        Assert.assertEquals(3, _size);
+        final Function1<Object, Boolean> _function_1 = (Object it_1) -> {
+          return Boolean.valueOf(((it_1 instanceof IField) && Objects.equal(((IField) it_1).getElementName(), "foo")));
+        };
+        boolean _exists = IterableExtensions.<Object>exists(it, _function_1);
+        Assert.assertTrue(_exists);
+        final Function1<Object, Boolean> _function_2 = (Object it_1) -> {
+          return Boolean.valueOf(((it_1 instanceof IMethod) && Objects.equal(((IMethod) it_1).getElementName(), "bar")));
+        };
+        boolean _exists_1 = IterableExtensions.<Object>exists(it, _function_2);
+        Assert.assertTrue(_exists_1);
+        final Function1<Object, Boolean> _function_3 = (Object it_1) -> {
+          return Boolean.valueOf(((it_1 instanceof IMethod) && Objects.equal(((IMethod) it_1).getElementName(), "baz")));
+        };
+        boolean _exists_2 = IterableExtensions.<Object>exists(it, _function_3);
+        Assert.assertTrue(_exists_2);
       };
       ObjectExtensions.<ArrayList<Object>>operator_doubleArrow(_findReferences, _function);
     } catch (Throwable _e) {
@@ -688,20 +608,14 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
       final XtendTypeDeclaration clazz = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
       IResourcesSetupUtil.waitForBuild();
       Iterable<IJavaElement> _javaElements = this._jvmModelFindReferenceHandler.getJavaElements(clazz);
-      final Procedure1<Iterable<IJavaElement>> _function = new Procedure1<Iterable<IJavaElement>>() {
-        @Override
-        public void apply(final Iterable<IJavaElement> it) {
-          int _size = IterableExtensions.size(it);
-          Assert.assertEquals(1, _size);
-          final Function1<IJavaElement, Boolean> _function = new Function1<IJavaElement, Boolean>() {
-            @Override
-            public Boolean apply(final IJavaElement it) {
-              return Boolean.valueOf(((it instanceof IType) && Objects.equal(((IType) it).getElementName(), "Xtend")));
-            }
-          };
-          boolean _exists = IterableExtensions.<IJavaElement>exists(it, _function);
-          Assert.assertTrue(_exists);
-        }
+      final Procedure1<Iterable<IJavaElement>> _function = (Iterable<IJavaElement> it) -> {
+        int _size = IterableExtensions.size(it);
+        Assert.assertEquals(1, _size);
+        final Function1<IJavaElement, Boolean> _function_1 = (IJavaElement it_1) -> {
+          return Boolean.valueOf(((it_1 instanceof IType) && Objects.equal(((IType) it_1).getElementName(), "Xtend")));
+        };
+        boolean _exists = IterableExtensions.<IJavaElement>exists(it, _function_1);
+        Assert.assertTrue(_exists);
       };
       ObjectExtensions.<Iterable<IJavaElement>>operator_doubleArrow(_javaElements, _function);
     } catch (Throwable _e) {
@@ -732,20 +646,14 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
       final XtendMember method = IterableExtensions.<XtendMember>head(_members);
       IResourcesSetupUtil.waitForBuild();
       Iterable<IJavaElement> _javaElements = this._jvmModelFindReferenceHandler.getJavaElements(method);
-      final Procedure1<Iterable<IJavaElement>> _function = new Procedure1<Iterable<IJavaElement>>() {
-        @Override
-        public void apply(final Iterable<IJavaElement> it) {
-          int _size = IterableExtensions.size(it);
-          Assert.assertEquals(1, _size);
-          final Function1<IJavaElement, Boolean> _function = new Function1<IJavaElement, Boolean>() {
-            @Override
-            public Boolean apply(final IJavaElement it) {
-              return Boolean.valueOf(((it instanceof IMethod) && Objects.equal(((IMethod) it).getElementName(), "foo")));
-            }
-          };
-          boolean _exists = IterableExtensions.<IJavaElement>exists(it, _function);
-          Assert.assertTrue(_exists);
-        }
+      final Procedure1<Iterable<IJavaElement>> _function = (Iterable<IJavaElement> it) -> {
+        int _size = IterableExtensions.size(it);
+        Assert.assertEquals(1, _size);
+        final Function1<IJavaElement, Boolean> _function_1 = (IJavaElement it_1) -> {
+          return Boolean.valueOf(((it_1 instanceof IMethod) && Objects.equal(((IMethod) it_1).getElementName(), "foo")));
+        };
+        boolean _exists = IterableExtensions.<IJavaElement>exists(it, _function_1);
+        Assert.assertTrue(_exists);
       };
       ObjectExtensions.<Iterable<IJavaElement>>operator_doubleArrow(_javaElements, _function);
     } catch (Throwable _e) {
@@ -773,20 +681,14 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
       final XtendMember field = IterableExtensions.<XtendMember>head(_members);
       IResourcesSetupUtil.waitForBuild();
       Iterable<IJavaElement> _javaElements = this._jvmModelFindReferenceHandler.getJavaElements(field);
-      final Procedure1<Iterable<IJavaElement>> _function = new Procedure1<Iterable<IJavaElement>>() {
-        @Override
-        public void apply(final Iterable<IJavaElement> it) {
-          int _size = IterableExtensions.size(it);
-          Assert.assertEquals(1, _size);
-          final Function1<IJavaElement, Boolean> _function = new Function1<IJavaElement, Boolean>() {
-            @Override
-            public Boolean apply(final IJavaElement it) {
-              return Boolean.valueOf(((it instanceof IField) && Objects.equal(((IField) it).getElementName(), "foo")));
-            }
-          };
-          boolean _exists = IterableExtensions.<IJavaElement>exists(it, _function);
-          Assert.assertTrue(_exists);
-        }
+      final Procedure1<Iterable<IJavaElement>> _function = (Iterable<IJavaElement> it) -> {
+        int _size = IterableExtensions.size(it);
+        Assert.assertEquals(1, _size);
+        final Function1<IJavaElement, Boolean> _function_1 = (IJavaElement it_1) -> {
+          return Boolean.valueOf(((it_1 instanceof IField) && Objects.equal(((IField) it_1).getElementName(), "foo")));
+        };
+        boolean _exists = IterableExtensions.<IJavaElement>exists(it, _function_1);
+        Assert.assertTrue(_exists);
       };
       ObjectExtensions.<Iterable<IJavaElement>>operator_doubleArrow(_javaElements, _function);
     } catch (Throwable _e) {
@@ -814,36 +716,24 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
       final XtendMember field = IterableExtensions.<XtendMember>head(_members);
       IResourcesSetupUtil.waitForBuild();
       Iterable<IJavaElement> _javaElements = this._jvmModelFindReferenceHandler.getJavaElements(field);
-      final Procedure1<Iterable<IJavaElement>> _function = new Procedure1<Iterable<IJavaElement>>() {
-        @Override
-        public void apply(final Iterable<IJavaElement> it) {
-          int _size = IterableExtensions.size(it);
-          Assert.assertEquals(3, _size);
-          final Function1<IJavaElement, Boolean> _function = new Function1<IJavaElement, Boolean>() {
-            @Override
-            public Boolean apply(final IJavaElement it) {
-              return Boolean.valueOf(((it instanceof IMethod) && Objects.equal(((IMethod) it).getElementName(), "getFoo")));
-            }
-          };
-          boolean _exists = IterableExtensions.<IJavaElement>exists(it, _function);
-          Assert.assertTrue(_exists);
-          final Function1<IJavaElement, Boolean> _function_1 = new Function1<IJavaElement, Boolean>() {
-            @Override
-            public Boolean apply(final IJavaElement it) {
-              return Boolean.valueOf(((it instanceof IMethod) && Objects.equal(((IMethod) it).getElementName(), "setFoo")));
-            }
-          };
-          boolean _exists_1 = IterableExtensions.<IJavaElement>exists(it, _function_1);
-          Assert.assertTrue(_exists_1);
-          final Function1<IJavaElement, Boolean> _function_2 = new Function1<IJavaElement, Boolean>() {
-            @Override
-            public Boolean apply(final IJavaElement it) {
-              return Boolean.valueOf(((it instanceof IField) && Objects.equal(((IField) it).getElementName(), "_foo")));
-            }
-          };
-          boolean _exists_2 = IterableExtensions.<IJavaElement>exists(it, _function_2);
-          Assert.assertTrue(_exists_2);
-        }
+      final Procedure1<Iterable<IJavaElement>> _function = (Iterable<IJavaElement> it) -> {
+        int _size = IterableExtensions.size(it);
+        Assert.assertEquals(3, _size);
+        final Function1<IJavaElement, Boolean> _function_1 = (IJavaElement it_1) -> {
+          return Boolean.valueOf(((it_1 instanceof IMethod) && Objects.equal(((IMethod) it_1).getElementName(), "getFoo")));
+        };
+        boolean _exists = IterableExtensions.<IJavaElement>exists(it, _function_1);
+        Assert.assertTrue(_exists);
+        final Function1<IJavaElement, Boolean> _function_2 = (IJavaElement it_1) -> {
+          return Boolean.valueOf(((it_1 instanceof IMethod) && Objects.equal(((IMethod) it_1).getElementName(), "setFoo")));
+        };
+        boolean _exists_1 = IterableExtensions.<IJavaElement>exists(it, _function_2);
+        Assert.assertTrue(_exists_1);
+        final Function1<IJavaElement, Boolean> _function_3 = (IJavaElement it_1) -> {
+          return Boolean.valueOf(((it_1 instanceof IField) && Objects.equal(((IField) it_1).getElementName(), "_foo")));
+        };
+        boolean _exists_2 = IterableExtensions.<IJavaElement>exists(it, _function_3);
+        Assert.assertTrue(_exists_2);
       };
       ObjectExtensions.<Iterable<IJavaElement>>operator_doubleArrow(_javaElements, _function);
     } catch (Throwable _e) {
@@ -881,28 +771,19 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
       final XtendMember method = IterableExtensions.<XtendMember>head(_members);
       IResourcesSetupUtil.waitForBuild();
       Iterable<IJavaElement> _javaElements = this._jvmModelFindReferenceHandler.getJavaElements(method);
-      final Procedure1<Iterable<IJavaElement>> _function = new Procedure1<Iterable<IJavaElement>>() {
-        @Override
-        public void apply(final Iterable<IJavaElement> it) {
-          int _size = IterableExtensions.size(it);
-          Assert.assertEquals(2, _size);
-          final Function1<IJavaElement, Boolean> _function = new Function1<IJavaElement, Boolean>() {
-            @Override
-            public Boolean apply(final IJavaElement it) {
-              return Boolean.valueOf(((it instanceof IMethod) && Objects.equal(((IMethod) it).getElementName(), "_foo")));
-            }
-          };
-          boolean _exists = IterableExtensions.<IJavaElement>exists(it, _function);
-          Assert.assertTrue(_exists);
-          final Function1<IJavaElement, Boolean> _function_1 = new Function1<IJavaElement, Boolean>() {
-            @Override
-            public Boolean apply(final IJavaElement it) {
-              return Boolean.valueOf(((it instanceof IMethod) && Objects.equal(((IMethod) it).getElementName(), "foo")));
-            }
-          };
-          boolean _exists_1 = IterableExtensions.<IJavaElement>exists(it, _function_1);
-          Assert.assertTrue(_exists_1);
-        }
+      final Procedure1<Iterable<IJavaElement>> _function = (Iterable<IJavaElement> it) -> {
+        int _size = IterableExtensions.size(it);
+        Assert.assertEquals(2, _size);
+        final Function1<IJavaElement, Boolean> _function_1 = (IJavaElement it_1) -> {
+          return Boolean.valueOf(((it_1 instanceof IMethod) && Objects.equal(((IMethod) it_1).getElementName(), "_foo")));
+        };
+        boolean _exists = IterableExtensions.<IJavaElement>exists(it, _function_1);
+        Assert.assertTrue(_exists);
+        final Function1<IJavaElement, Boolean> _function_2 = (IJavaElement it_1) -> {
+          return Boolean.valueOf(((it_1 instanceof IMethod) && Objects.equal(((IMethod) it_1).getElementName(), "foo")));
+        };
+        boolean _exists_1 = IterableExtensions.<IJavaElement>exists(it, _function_2);
+        Assert.assertTrue(_exists_1);
       };
       ObjectExtensions.<Iterable<IJavaElement>>operator_doubleArrow(_javaElements, _function);
     } catch (Throwable _e) {
@@ -920,47 +801,32 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
         final ArrayList<Object> elements = CollectionLiterals.<Object>newArrayList();
         final ISearchResult searchResult = query.getSearchResult();
         final MatchFilter[] filters = ((AbstractTextSearchResult) searchResult).getActiveMatchFilters();
-        final ISearchResultListener _function = new ISearchResultListener() {
-          @Override
-          public void searchResultChanged(final SearchResultEvent it) {
-            events.add(it);
-            if ((it instanceof MatchEvent)) {
-              Match[] _matches = ((MatchEvent)it).getMatches();
-              final Function1<Match, Boolean> _function = new Function1<Match, Boolean>() {
-                @Override
-                public Boolean apply(final Match m) {
-                  final Function1<MatchFilter, Boolean> _function = new Function1<MatchFilter, Boolean>() {
-                    @Override
-                    public Boolean apply(final MatchFilter it) {
-                      boolean _filters = it.filters(m);
-                      return Boolean.valueOf((!_filters));
-                    }
-                  };
-                  return Boolean.valueOf(IterableExtensions.<MatchFilter>forall(((Iterable<MatchFilter>)Conversions.doWrapArray(filters)), _function));
-                }
+        final ISearchResultListener _function = (SearchResultEvent it) -> {
+          events.add(it);
+          if ((it instanceof MatchEvent)) {
+            Match[] _matches = ((MatchEvent)it).getMatches();
+            final Function1<Match, Boolean> _function_1 = (Match m) -> {
+              final Function1<MatchFilter, Boolean> _function_2 = (MatchFilter it_1) -> {
+                boolean _filters = it_1.filters(m);
+                return Boolean.valueOf((!_filters));
               };
-              final Iterable<Match> matches = IterableExtensions.<Match>filter(((Iterable<Match>)Conversions.doWrapArray(_matches)), _function);
-              int _kind = ((MatchEvent)it).getKind();
-              boolean _equals = (_kind == MatchEvent.ADDED);
-              if (_equals) {
-                final Procedure1<Match> _function_1 = new Procedure1<Match>() {
-                  @Override
-                  public void apply(final Match it) {
-                    Object _element = it.getElement();
-                    elements.add(_element);
-                  }
-                };
-                IterableExtensions.<Match>forEach(matches, _function_1);
-              } else {
-                final Procedure1<Match> _function_2 = new Procedure1<Match>() {
-                  @Override
-                  public void apply(final Match it) {
-                    Object _element = it.getElement();
-                    elements.remove(_element);
-                  }
-                };
-                IterableExtensions.<Match>forEach(matches, _function_2);
-              }
+              return Boolean.valueOf(IterableExtensions.<MatchFilter>forall(((Iterable<MatchFilter>)Conversions.doWrapArray(filters)), _function_2));
+            };
+            final Iterable<Match> matches = IterableExtensions.<Match>filter(((Iterable<Match>)Conversions.doWrapArray(_matches)), _function_1);
+            int _kind = ((MatchEvent)it).getKind();
+            boolean _equals = (_kind == MatchEvent.ADDED);
+            if (_equals) {
+              final Consumer<Match> _function_2 = (Match it_1) -> {
+                Object _element = it_1.getElement();
+                elements.add(_element);
+              };
+              matches.forEach(_function_2);
+            } else {
+              final Consumer<Match> _function_3 = (Match it_1) -> {
+                Object _element = it_1.getElement();
+                elements.remove(_element);
+              };
+              matches.forEach(_function_3);
             }
           }
         };
@@ -990,28 +856,19 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
       final XtendClass cls = IterableExtensions.<XtendClass>head(_filter);
       IResourcesSetupUtil.waitForBuild();
       Iterable<IJavaElement> _javaElements = this._jvmModelFindReferenceHandler.getJavaElements(cls);
-      final Procedure1<Iterable<IJavaElement>> _function = new Procedure1<Iterable<IJavaElement>>() {
-        @Override
-        public void apply(final Iterable<IJavaElement> it) {
-          int _size = IterableExtensions.size(it);
-          Assert.assertEquals(2, _size);
-          final Function1<IJavaElement, Boolean> _function = new Function1<IJavaElement, Boolean>() {
-            @Override
-            public Boolean apply(final IJavaElement it) {
-              return Boolean.valueOf(((it instanceof IType) && Objects.equal(((IType) it).getElementName(), "Xtend")));
-            }
-          };
-          boolean _exists = IterableExtensions.<IJavaElement>exists(it, _function);
-          Assert.assertTrue(_exists);
-          final Function1<IJavaElement, Boolean> _function_1 = new Function1<IJavaElement, Boolean>() {
-            @Override
-            public Boolean apply(final IJavaElement it) {
-              return Boolean.valueOf(((it instanceof IMethod) && Objects.equal(((IMethod) it).getElementName(), "Xtend")));
-            }
-          };
-          boolean _exists_1 = IterableExtensions.<IJavaElement>exists(it, _function_1);
-          Assert.assertTrue(_exists_1);
-        }
+      final Procedure1<Iterable<IJavaElement>> _function = (Iterable<IJavaElement> it) -> {
+        int _size = IterableExtensions.size(it);
+        Assert.assertEquals(2, _size);
+        final Function1<IJavaElement, Boolean> _function_1 = (IJavaElement it_1) -> {
+          return Boolean.valueOf(((it_1 instanceof IType) && Objects.equal(((IType) it_1).getElementName(), "Xtend")));
+        };
+        boolean _exists = IterableExtensions.<IJavaElement>exists(it, _function_1);
+        Assert.assertTrue(_exists);
+        final Function1<IJavaElement, Boolean> _function_2 = (IJavaElement it_1) -> {
+          return Boolean.valueOf(((it_1 instanceof IMethod) && Objects.equal(((IMethod) it_1).getElementName(), "Xtend")));
+        };
+        boolean _exists_1 = IterableExtensions.<IJavaElement>exists(it, _function_2);
+        Assert.assertTrue(_exists_1);
       };
       ObjectExtensions.<Iterable<IJavaElement>>operator_doubleArrow(_javaElements, _function);
     } catch (Throwable _e) {

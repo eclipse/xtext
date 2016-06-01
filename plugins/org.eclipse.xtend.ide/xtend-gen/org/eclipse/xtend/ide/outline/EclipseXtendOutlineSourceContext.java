@@ -56,19 +56,13 @@ public class EclipseXtendOutlineSourceContext extends EclipseXtendOutlineContext
       if (_notEquals) {
         Set<EObject> _jvmElements = this._iXtendJvmAssociations.getJvmElements(function);
         Iterable<JvmFeature> _filter = Iterables.<JvmFeature>filter(_jvmElements, JvmFeature.class);
-        final Function1<JvmFeature, Boolean> _function = new Function1<JvmFeature, Boolean>() {
-          @Override
-          public Boolean apply(final JvmFeature it) {
-            return Boolean.valueOf((!Objects.equal(it, member)));
-          }
+        final Function1<JvmFeature, Boolean> _function = (JvmFeature it) -> {
+          return Boolean.valueOf((!Objects.equal(it, member)));
         };
         Iterable<JvmFeature> _filter_1 = IterableExtensions.<JvmFeature>filter(_filter, _function);
-        final Function1<JvmFeature, Boolean> _function_1 = new Function1<JvmFeature, Boolean>() {
-          @Override
-          public Boolean apply(final JvmFeature it) {
-            return Boolean.valueOf((it.getSimpleName().startsWith(XtendJvmModelInferrer.CREATE_CHACHE_VARIABLE_PREFIX) || 
-              it.getSimpleName().startsWith(XtendJvmModelInferrer.CREATE_INITIALIZER_PREFIX)));
-          }
+        final Function1<JvmFeature, Boolean> _function_1 = (JvmFeature it) -> {
+          return Boolean.valueOf((it.getSimpleName().startsWith(XtendJvmModelInferrer.CREATE_CHACHE_VARIABLE_PREFIX) || 
+            it.getSimpleName().startsWith(XtendJvmModelInferrer.CREATE_INITIALIZER_PREFIX)));
         };
         Iterable<JvmFeature> _filter_2 = IterableExtensions.<JvmFeature>filter(_filter_1, _function_1);
         for (final JvmFeature jvmFeature : _filter_2) {

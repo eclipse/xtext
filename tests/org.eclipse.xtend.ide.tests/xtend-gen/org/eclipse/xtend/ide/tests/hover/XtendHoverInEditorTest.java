@@ -142,22 +142,19 @@ public class XtendHoverInEditorTest extends AbstractXtendUITestCase {
       final IFile fileBar = this.helper.createFile("Bar.xtend", contentBar);
       this._syncUtil.waitForBuild(null);
       final XtextEditor editor = this.helper.openEditor(fileBar);
-      final Runnable _function = new Runnable() {
-        @Override
-        public void run() {
-          ISourceViewer _internalSourceViewer = editor.getInternalSourceViewer();
-          Region _region = new Region(19, 1);
-          Object _hoverInfo2 = ((ITextHoverExtension2) XtendHoverInEditorTest.this.hoverer).getHoverInfo2(((ITextViewer) _internalSourceViewer), _region);
-          final XtextBrowserInformationControlInput info = ((XtextBrowserInformationControlInput) _hoverInfo2);
-          String _html = info.getHtml();
-          String _html_1 = info.getHtml();
-          boolean _contains = _html_1.contains("Hello Foo");
-          Assert.assertTrue(_html, _contains);
-          String _html_2 = info.getHtml();
-          String _html_3 = info.getHtml();
-          boolean _contains_1 = _html_3.contains("SuppressWarnings</a>(\"foo\")");
-          Assert.assertTrue(_html_2, _contains_1);
-        }
+      final Runnable _function = () -> {
+        ISourceViewer _internalSourceViewer = editor.getInternalSourceViewer();
+        Region _region = new Region(19, 1);
+        Object _hoverInfo2 = ((ITextHoverExtension2) this.hoverer).getHoverInfo2(((ITextViewer) _internalSourceViewer), _region);
+        final XtextBrowserInformationControlInput info = ((XtextBrowserInformationControlInput) _hoverInfo2);
+        String _html = info.getHtml();
+        String _html_1 = info.getHtml();
+        boolean _contains = _html_1.contains("Hello Foo");
+        Assert.assertTrue(_html, _contains);
+        String _html_2 = info.getHtml();
+        String _html_3 = info.getHtml();
+        boolean _contains_1 = _html_3.contains("SuppressWarnings</a>(\"foo\")");
+        Assert.assertTrue(_html_2, _contains_1);
       };
       final LoggingTester.LogCapture loggings = LoggingTester.captureLogging(Level.ERROR, AbstractBatchTypeResolver.class, _function);
       loggings.assertNoLogEntries();
@@ -179,24 +176,21 @@ public class XtendHoverInEditorTest extends AbstractXtendUITestCase {
       _document.set(_builder_2.toString());
       this._syncUtil.waitForReconciler(fooEditor);
       this._syncUtil.waitForReconciler(editor);
-      final Runnable _function_1 = new Runnable() {
-        @Override
-        public void run() {
-          ISourceViewer _internalSourceViewer = editor.getInternalSourceViewer();
-          Region _region = new Region(19, 1);
-          Object _hoverInfo2 = ((ITextHoverExtension2) XtendHoverInEditorTest.this.hoverer).getHoverInfo2(((ITextViewer) _internalSourceViewer), _region);
-          final XtextBrowserInformationControlInput info2 = ((XtextBrowserInformationControlInput) _hoverInfo2);
-          String _html = info2.getHtml();
-          boolean _contains = _html.contains("Hello Foo");
-          Assert.assertFalse(_contains);
-          String _html_1 = info2.getHtml();
-          boolean _contains_1 = _html_1.contains("Hello BAZ");
-          Assert.assertTrue(_contains_1);
-          String _html_2 = info2.getHtml();
-          String _html_3 = info2.getHtml();
-          boolean _contains_2 = _html_3.contains("SuppressWarnings</a>(\"bar\")");
-          Assert.assertTrue(_html_2, _contains_2);
-        }
+      final Runnable _function_1 = () -> {
+        ISourceViewer _internalSourceViewer = editor.getInternalSourceViewer();
+        Region _region = new Region(19, 1);
+        Object _hoverInfo2 = ((ITextHoverExtension2) this.hoverer).getHoverInfo2(((ITextViewer) _internalSourceViewer), _region);
+        final XtextBrowserInformationControlInput info2 = ((XtextBrowserInformationControlInput) _hoverInfo2);
+        String _html = info2.getHtml();
+        boolean _contains = _html.contains("Hello Foo");
+        Assert.assertFalse(_contains);
+        String _html_1 = info2.getHtml();
+        boolean _contains_1 = _html_1.contains("Hello BAZ");
+        Assert.assertTrue(_contains_1);
+        String _html_2 = info2.getHtml();
+        String _html_3 = info2.getHtml();
+        boolean _contains_2 = _html_3.contains("SuppressWarnings</a>(\"bar\")");
+        Assert.assertTrue(_html_2, _contains_2);
       };
       final LoggingTester.LogCapture moreLoggings = LoggingTester.captureLogging(Level.ERROR, AbstractBatchTypeResolver.class, _function_1);
       moreLoggings.assertNoLogEntries();

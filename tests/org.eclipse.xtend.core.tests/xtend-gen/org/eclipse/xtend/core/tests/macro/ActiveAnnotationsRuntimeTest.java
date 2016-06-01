@@ -120,17 +120,14 @@ public class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotati
       final Resource singleResource = IterableExtensions.<Resource>head(_resources);
       Map<Object, Object> _emptyMap = CollectionLiterals.<Object, Object>emptyMap();
       singleResource.load(_emptyMap);
-      final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
-        @Override
-        public void accept(final CompilationTestHelper.Result it) {
-          it.getGeneratedCode();
-          final CompilationUnitImpl unit = ActiveAnnotationsRuntimeTest.this.compilationUnitProvider.get();
-          EList<EObject> _contents = singleResource.getContents();
-          Iterable<XtendFile> _filter = Iterables.<XtendFile>filter(_contents, XtendFile.class);
-          final XtendFile xtendFile = IterableExtensions.<XtendFile>head(_filter);
-          unit.setXtendFile(xtendFile);
-          expectations.apply(unit);
-        }
+      final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
+        it.getGeneratedCode();
+        final CompilationUnitImpl unit = this.compilationUnitProvider.get();
+        EList<EObject> _contents = singleResource.getContents();
+        Iterable<XtendFile> _filter = Iterables.<XtendFile>filter(_contents, XtendFile.class);
+        final XtendFile xtendFile = IterableExtensions.<XtendFile>head(_filter);
+        unit.setXtendFile(xtendFile);
+        expectations.apply(unit);
       };
       this.compiler.compile(resourceSet, _function);
     } catch (Throwable _e) {
@@ -164,20 +161,14 @@ public class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotati
     final URI clientURI = this.copyToDisk(this.clientProject, clientFile);
     File _file = new File(this.workspaceRoot, this.macroProject);
     FileProjectConfig _fileProjectConfig = new FileProjectConfig(_file);
-    final Procedure1<FileProjectConfig> _function = new Procedure1<FileProjectConfig>() {
-      @Override
-      public void apply(final FileProjectConfig it) {
-        it.addSourceFolder("src");
-      }
+    final Procedure1<FileProjectConfig> _function = (FileProjectConfig it) -> {
+      it.addSourceFolder("src");
     };
     final FileProjectConfig macroProjectConfig = ObjectExtensions.<FileProjectConfig>operator_doubleArrow(_fileProjectConfig, _function);
     File _file_1 = new File(this.workspaceRoot, this.clientProject);
     FileProjectConfig _fileProjectConfig_1 = new FileProjectConfig(_file_1);
-    final Procedure1<FileProjectConfig> _function_1 = new Procedure1<FileProjectConfig>() {
-      @Override
-      public void apply(final FileProjectConfig it) {
-        it.addSourceFolder("src");
-      }
+    final Procedure1<FileProjectConfig> _function_1 = (FileProjectConfig it) -> {
+      it.addSourceFolder("src");
     };
     final FileProjectConfig clientProjectConfig = ObjectExtensions.<FileProjectConfig>operator_doubleArrow(_fileProjectConfig_1, _function_1);
     final XtextResourceSet macroResourceSet = this.resourceSetProvider.get();
@@ -189,15 +180,12 @@ public class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotati
     final XtextResourceSet resourceSet = this.resourceSetProvider.get();
     ProjectConfigAdapter.install(resourceSet, clientProjectConfig);
     resourceSet.createResource(clientURI);
-    final IAcceptor<CompilationTestHelper.Result> _function_2 = new IAcceptor<CompilationTestHelper.Result>() {
-      @Override
-      public void accept(final CompilationTestHelper.Result result) {
-        Class<? extends ActiveAnnotationsRuntimeTest> _class = ActiveAnnotationsRuntimeTest.this.getClass();
-        ClassLoader _classLoader = _class.getClassLoader();
-        final DelegatingClassloader classLoader = new DelegatingClassloader(_classLoader, result);
-        resourceSet.setClasspathURIContext(classLoader);
-        ActiveAnnotationsRuntimeTest.this.compiler.setJavaCompilerClassPath(classLoader);
-      }
+    final IAcceptor<CompilationTestHelper.Result> _function_2 = (CompilationTestHelper.Result result) -> {
+      Class<? extends ActiveAnnotationsRuntimeTest> _class_1 = this.getClass();
+      ClassLoader _classLoader_1 = _class_1.getClassLoader();
+      final DelegatingClassloader classLoader = new DelegatingClassloader(_classLoader_1, result);
+      resourceSet.setClasspathURIContext(classLoader);
+      this.compiler.setJavaCompilerClassPath(classLoader);
     };
     this.compiler.compile(macroResourceSet, _function_2);
     return resourceSet;
@@ -253,24 +241,21 @@ public class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotati
     _builder_1.append("}");
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
-    final Procedure1<List<Issue>> _function = new Procedure1<List<Issue>>() {
-      @Override
-      public void apply(final List<Issue> it) {
-        int _size = it.size();
-        Assert.assertEquals(1, _size);
-        final Issue error = IterableExtensions.<Issue>head(it);
-        Assert.assertNotNull(error);
-        String _code = error.getCode();
-        Assert.assertEquals(IssueCodes.PROCESSING_ERROR, _code);
-        String _message = error.getMessage();
-        String _name = IllegalStateException.class.getName();
-        boolean _contains = _message.contains(_name);
-        Assert.assertTrue(_contains);
-        String _message_1 = error.getMessage();
-        String _name_1 = AnnotationProcessor.class.getName();
-        boolean _contains_1 = _message_1.contains(_name_1);
-        Assert.assertFalse(_contains_1);
-      }
+    final Procedure1<List<Issue>> _function = (List<Issue> it) -> {
+      int _size = it.size();
+      Assert.assertEquals(1, _size);
+      final Issue error = IterableExtensions.<Issue>head(it);
+      Assert.assertNotNull(error);
+      String _code = error.getCode();
+      Assert.assertEquals(IssueCodes.PROCESSING_ERROR, _code);
+      String _message = error.getMessage();
+      String _name = IllegalStateException.class.getName();
+      boolean _contains = _message.contains(_name);
+      Assert.assertTrue(_contains);
+      String _message_1 = error.getMessage();
+      String _name_1 = AnnotationProcessor.class.getName();
+      boolean _contains_1 = _message_1.contains(_name_1);
+      Assert.assertFalse(_contains_1);
     };
     this.assertIssues(_mappedTo, _mappedTo_1, _function);
   }
@@ -382,19 +367,16 @@ public class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotati
     _builder_1.append("}");
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
-    final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
-      @Override
-      public void apply(final CompilationUnitImpl it) {
-        XtendFile _xtendFile = it.getXtendFile();
-        ActiveAnnotationsRuntimeTest.this.validator.assertIssue(_xtendFile, XtendPackage.Literals.XTEND_FILE, IssueCodes.ORPHAN_ELMENT, Severity.WARNING, 
-          "The generated field \'myusercode.Foo.foo\' is not associated with a source element.");
-        XtendFile _xtendFile_1 = it.getXtendFile();
-        ActiveAnnotationsRuntimeTest.this.validator.assertIssue(_xtendFile_1, XtendPackage.Literals.XTEND_FILE, IssueCodes.ORPHAN_ELMENT, Severity.WARNING, 
-          "The generated method \'myusercode.Foo.foo(Integer)\' is not associated with a source element.");
-        XtendFile _xtendFile_2 = it.getXtendFile();
-        ActiveAnnotationsRuntimeTest.this.validator.assertIssue(_xtendFile_2, XtendPackage.Literals.XTEND_FILE, IssueCodes.ORPHAN_ELMENT, Severity.WARNING, 
-          "The generated type \'myusercode.Foo.Inner\' is not associated with a source element.");
-      }
+    final Procedure1<CompilationUnitImpl> _function = (CompilationUnitImpl it) -> {
+      XtendFile _xtendFile = it.getXtendFile();
+      this.validator.assertIssue(_xtendFile, XtendPackage.Literals.XTEND_FILE, IssueCodes.ORPHAN_ELMENT, Severity.WARNING, 
+        "The generated field \'myusercode.Foo.foo\' is not associated with a source element.");
+      XtendFile _xtendFile_1 = it.getXtendFile();
+      this.validator.assertIssue(_xtendFile_1, XtendPackage.Literals.XTEND_FILE, IssueCodes.ORPHAN_ELMENT, Severity.WARNING, 
+        "The generated method \'myusercode.Foo.foo(Integer)\' is not associated with a source element.");
+      XtendFile _xtendFile_2 = it.getXtendFile();
+      this.validator.assertIssue(_xtendFile_2, XtendPackage.Literals.XTEND_FILE, IssueCodes.ORPHAN_ELMENT, Severity.WARNING, 
+        "The generated type \'myusercode.Foo.Inner\' is not associated with a source element.");
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
@@ -475,12 +457,9 @@ public class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotati
     _builder_1.append("}");
     _builder_1.newLine();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
-    final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
-      @Override
-      public void apply(final CompilationUnitImpl it) {
-        XtendFile _xtendFile = it.getXtendFile();
-        ActiveAnnotationsRuntimeTest.this.validator.assertNoWarnings(_xtendFile, XtendPackage.Literals.XTEND_FILE, IssueCodes.ORPHAN_ELMENT);
-      }
+    final Procedure1<CompilationUnitImpl> _function = (CompilationUnitImpl it) -> {
+      XtendFile _xtendFile = it.getXtendFile();
+      this.validator.assertNoWarnings(_xtendFile, XtendPackage.Literals.XTEND_FILE, IssueCodes.ORPHAN_ELMENT);
     };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }

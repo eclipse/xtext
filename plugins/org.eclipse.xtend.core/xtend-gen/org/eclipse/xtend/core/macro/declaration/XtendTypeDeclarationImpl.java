@@ -97,12 +97,9 @@ public abstract class XtendTypeDeclarationImpl<T extends XtendTypeDeclaration> e
   public Iterable<? extends MemberDeclaration> getDeclaredMembers() {
     T _delegate = this.getDelegate();
     EList<XtendMember> _members = _delegate.getMembers();
-    final Function1<XtendMember, MemberDeclaration> _function = new Function1<XtendMember, MemberDeclaration>() {
-      @Override
-      public MemberDeclaration apply(final XtendMember it) {
-        CompilationUnitImpl _compilationUnit = XtendTypeDeclarationImpl.this.getCompilationUnit();
-        return _compilationUnit.toXtendMemberDeclaration(it);
-      }
+    final Function1<XtendMember, MemberDeclaration> _function = (XtendMember it) -> {
+      CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+      return _compilationUnit.toXtendMemberDeclaration(it);
     };
     return ListExtensions.<XtendMember, MemberDeclaration>map(_members, _function);
   }
@@ -125,21 +122,15 @@ public abstract class XtendTypeDeclarationImpl<T extends XtendTypeDeclaration> e
   @Override
   public ConstructorDeclaration findDeclaredConstructor(final TypeReference... parameterTypes) {
     Iterable<? extends ConstructorDeclaration> _declaredConstructors = this.getDeclaredConstructors();
-    final Function1<ConstructorDeclaration, Boolean> _function = new Function1<ConstructorDeclaration, Boolean>() {
-      @Override
-      public Boolean apply(final ConstructorDeclaration constructor) {
-        Iterable<? extends ParameterDeclaration> _parameters = constructor.getParameters();
-        final Function1<ParameterDeclaration, TypeReference> _function = new Function1<ParameterDeclaration, TypeReference>() {
-          @Override
-          public TypeReference apply(final ParameterDeclaration it) {
-            return it.getType();
-          }
-        };
-        Iterable<TypeReference> _map = IterableExtensions.map(_parameters, _function);
-        List<TypeReference> _list = IterableExtensions.<TypeReference>toList(_map);
-        List<TypeReference> _list_1 = IterableExtensions.<TypeReference>toList(((Iterable<TypeReference>)Conversions.doWrapArray(parameterTypes)));
-        return Boolean.valueOf(Objects.equal(_list, _list_1));
-      }
+    final Function1<ConstructorDeclaration, Boolean> _function = (ConstructorDeclaration constructor) -> {
+      Iterable<? extends ParameterDeclaration> _parameters = constructor.getParameters();
+      final Function1<ParameterDeclaration, TypeReference> _function_1 = (ParameterDeclaration it) -> {
+        return it.getType();
+      };
+      Iterable<TypeReference> _map = IterableExtensions.map(_parameters, _function_1);
+      List<TypeReference> _list = IterableExtensions.<TypeReference>toList(_map);
+      List<TypeReference> _list_1 = IterableExtensions.<TypeReference>toList(((Iterable<TypeReference>)Conversions.doWrapArray(parameterTypes)));
+      return Boolean.valueOf(Objects.equal(_list, _list_1));
     };
     return IterableExtensions.findFirst(_declaredConstructors, _function);
   }
@@ -147,12 +138,9 @@ public abstract class XtendTypeDeclarationImpl<T extends XtendTypeDeclaration> e
   @Override
   public FieldDeclaration findDeclaredField(final String name) {
     Iterable<? extends FieldDeclaration> _declaredFields = this.getDeclaredFields();
-    final Function1<FieldDeclaration, Boolean> _function = new Function1<FieldDeclaration, Boolean>() {
-      @Override
-      public Boolean apply(final FieldDeclaration field) {
-        String _simpleName = field.getSimpleName();
-        return Boolean.valueOf(Objects.equal(_simpleName, name));
-      }
+    final Function1<FieldDeclaration, Boolean> _function = (FieldDeclaration field) -> {
+      String _simpleName = field.getSimpleName();
+      return Boolean.valueOf(Objects.equal(_simpleName, name));
     };
     return IterableExtensions.findFirst(_declaredFields, _function);
   }
@@ -160,12 +148,9 @@ public abstract class XtendTypeDeclarationImpl<T extends XtendTypeDeclaration> e
   @Override
   public TypeDeclaration findDeclaredType(final String name) {
     Iterable<? extends TypeDeclaration> _declaredTypes = this.getDeclaredTypes();
-    final Function1<TypeDeclaration, Boolean> _function = new Function1<TypeDeclaration, Boolean>() {
-      @Override
-      public Boolean apply(final TypeDeclaration type) {
-        String _simpleName = type.getSimpleName();
-        return Boolean.valueOf(Objects.equal(_simpleName, name));
-      }
+    final Function1<TypeDeclaration, Boolean> _function = (TypeDeclaration type) -> {
+      String _simpleName = type.getSimpleName();
+      return Boolean.valueOf(Objects.equal(_simpleName, name));
     };
     return IterableExtensions.findFirst(_declaredTypes, _function);
   }
@@ -173,16 +158,10 @@ public abstract class XtendTypeDeclarationImpl<T extends XtendTypeDeclaration> e
   @Override
   public MethodDeclaration findDeclaredMethod(final String name, final TypeReference... parameterTypes) {
     Iterable<? extends MethodDeclaration> _declaredMethods = this.getDeclaredMethods();
-    final Function1<MethodDeclaration, Boolean> _function = new Function1<MethodDeclaration, Boolean>() {
-      @Override
-      public Boolean apply(final MethodDeclaration method) {
-        return Boolean.valueOf((Objects.equal(method.getSimpleName(), name) && Objects.equal(IterableExtensions.<TypeReference>toList(IterableExtensions.map(method.getParameters(), new Function1<ParameterDeclaration, TypeReference>() {
-          @Override
-          public TypeReference apply(final ParameterDeclaration it) {
-            return it.getType();
-          }
-        })), IterableExtensions.<TypeReference>toList(((Iterable<TypeReference>)Conversions.doWrapArray(parameterTypes))))));
-      }
+    final Function1<MethodDeclaration, Boolean> _function = (MethodDeclaration method) -> {
+      return Boolean.valueOf((Objects.equal(method.getSimpleName(), name) && Objects.equal(IterableExtensions.<TypeReference>toList(IterableExtensions.map(method.getParameters(), ((Function1<ParameterDeclaration, TypeReference>) (ParameterDeclaration it) -> {
+        return it.getType();
+      }))), IterableExtensions.<TypeReference>toList(((Iterable<TypeReference>)Conversions.doWrapArray(parameterTypes))))));
     };
     return IterableExtensions.findFirst(_declaredMethods, _function);
   }

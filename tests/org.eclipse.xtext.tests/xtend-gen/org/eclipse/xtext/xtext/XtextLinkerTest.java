@@ -352,12 +352,9 @@ public class XtextLinkerTest extends AbstractXtextTests {
     Grammar _head = IterableExtensions.<Grammar>head(_usedGrammars);
     final AbstractRule idRule = GrammarUtil.findRuleForName(_head, "ID");
     List<RuleCall> _containedRuleCalls = GrammarUtil.containedRuleCalls(firstRule);
-    final Function1<RuleCall, Boolean> _function = new Function1<RuleCall, Boolean>() {
-      @Override
-      public Boolean apply(final RuleCall it) {
-        AbstractRule _rule = it.getRule();
-        return Boolean.valueOf(Objects.equal(_rule, idRule));
-      }
+    final Function1<RuleCall, Boolean> _function = (RuleCall it) -> {
+      AbstractRule _rule = it.getRule();
+      return Boolean.valueOf(Objects.equal(_rule, idRule));
     };
     boolean _forall = IterableExtensions.<RuleCall>forall(_containedRuleCalls, _function);
     Assert.assertTrue(_forall);
@@ -367,12 +364,9 @@ public class XtextLinkerTest extends AbstractXtextTests {
     EList<AbstractRule> _rules_2 = grammar.getRules();
     final AbstractRule stringRule = IterableExtensions.<AbstractRule>last(_rules_2);
     List<RuleCall> _containedRuleCalls_1 = GrammarUtil.containedRuleCalls(secondRule);
-    final Function1<RuleCall, Boolean> _function_1 = new Function1<RuleCall, Boolean>() {
-      @Override
-      public Boolean apply(final RuleCall it) {
-        AbstractRule _rule = it.getRule();
-        return Boolean.valueOf(Objects.equal(_rule, stringRule));
-      }
+    final Function1<RuleCall, Boolean> _function_1 = (RuleCall it) -> {
+      AbstractRule _rule = it.getRule();
+      return Boolean.valueOf(Objects.equal(_rule, stringRule));
     };
     boolean _forall_1 = IterableExtensions.<RuleCall>forall(_containedRuleCalls_1, _function_1);
     Assert.assertTrue(_forall_1);
@@ -383,12 +377,9 @@ public class XtextLinkerTest extends AbstractXtextTests {
     Grammar _head_1 = IterableExtensions.<Grammar>head(_usedGrammars_1);
     final AbstractRule inheritedString = GrammarUtil.findRuleForName(_head_1, "STRING");
     List<RuleCall> _containedRuleCalls_2 = GrammarUtil.containedRuleCalls(thirdRule);
-    final Function1<RuleCall, Boolean> _function_2 = new Function1<RuleCall, Boolean>() {
-      @Override
-      public Boolean apply(final RuleCall it) {
-        AbstractRule _rule = it.getRule();
-        return Boolean.valueOf(Objects.equal(_rule, inheritedString));
-      }
+    final Function1<RuleCall, Boolean> _function_2 = (RuleCall it) -> {
+      AbstractRule _rule = it.getRule();
+      return Boolean.valueOf(Objects.equal(_rule, inheritedString));
     };
     boolean _forall_2 = IterableExtensions.<RuleCall>forall(_containedRuleCalls_2, _function_2);
     Assert.assertTrue(_forall_2);

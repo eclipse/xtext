@@ -36,33 +36,24 @@ public class BrokenTypeRefDetector extends AbstractTypeReferenceVisitor.Inherita
   
   @Override
   public Boolean doVisitCompoundTypeReference(final JvmCompoundTypeReference it) {
-    return Boolean.valueOf(((this.doVisitTypeReference(it)).booleanValue() || IterableExtensions.<JvmTypeReference>exists(it.getReferences(), new Function1<JvmTypeReference, Boolean>() {
-      @Override
-      public Boolean apply(final JvmTypeReference it) {
-        return BrokenTypeRefDetector.this.visit(it);
-      }
-    })));
+    return Boolean.valueOf(((this.doVisitTypeReference(it)).booleanValue() || IterableExtensions.<JvmTypeReference>exists(it.getReferences(), ((Function1<JvmTypeReference, Boolean>) (JvmTypeReference it_1) -> {
+      return this.visit(it_1);
+    }))));
   }
   
   @Override
   public Boolean doVisitParameterizedTypeReference(final JvmParameterizedTypeReference it) {
-    return Boolean.valueOf(((this.doVisitTypeReference(it)).booleanValue() || IterableExtensions.<JvmTypeReference>exists(it.getArguments(), new Function1<JvmTypeReference, Boolean>() {
-      @Override
-      public Boolean apply(final JvmTypeReference it) {
-        return BrokenTypeRefDetector.this.visit(it);
-      }
-    })));
+    return Boolean.valueOf(((this.doVisitTypeReference(it)).booleanValue() || IterableExtensions.<JvmTypeReference>exists(it.getArguments(), ((Function1<JvmTypeReference, Boolean>) (JvmTypeReference it_1) -> {
+      return this.visit(it_1);
+    }))));
   }
   
   @Override
   public Boolean doVisitWildcardTypeReference(final JvmWildcardTypeReference it) {
     EList<JvmTypeConstraint> _constraints = it.getConstraints();
-    final Function1<JvmTypeConstraint, Boolean> _function = new Function1<JvmTypeConstraint, Boolean>() {
-      @Override
-      public Boolean apply(final JvmTypeConstraint it) {
-        JvmTypeReference _typeReference = it.getTypeReference();
-        return BrokenTypeRefDetector.this.visit(_typeReference);
-      }
+    final Function1<JvmTypeConstraint, Boolean> _function = (JvmTypeConstraint it_1) -> {
+      JvmTypeReference _typeReference = it_1.getTypeReference();
+      return this.visit(_typeReference);
     };
     return Boolean.valueOf(IterableExtensions.<JvmTypeConstraint>exists(_constraints, _function));
   }

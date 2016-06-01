@@ -22,14 +22,11 @@ public class InterfaceBuilderTest extends AbstractBuilderTest {
   public void testXtendInterface() {
     JvmDeclaredType _xtendClass = this.getXtendClass();
     AbstractInterfaceBuilder _createInterfaceBuilder = this._codeBuilderFactory.createInterfaceBuilder(_xtendClass);
-    final Procedure1<AbstractInterfaceBuilder> _function = new Procedure1<AbstractInterfaceBuilder>() {
-      @Override
-      public void apply(final AbstractInterfaceBuilder it) {
-        JvmDeclaredType _xtendClass = InterfaceBuilderTest.this.getXtendClass();
-        it.setContext(_xtendClass);
-        it.setInterfaceName("Bar");
-        it.setVisibility(JvmVisibility.PUBLIC);
-      }
+    final Procedure1<AbstractInterfaceBuilder> _function = (AbstractInterfaceBuilder it) -> {
+      JvmDeclaredType _xtendClass_1 = this.getXtendClass();
+      it.setContext(_xtendClass_1);
+      it.setInterfaceName("Bar");
+      it.setVisibility(JvmVisibility.PUBLIC);
     };
     AbstractInterfaceBuilder _doubleArrow = ObjectExtensions.<AbstractInterfaceBuilder>operator_doubleArrow(_createInterfaceBuilder, _function);
     StringConcatenation _builder = new StringConcatenation();
@@ -43,14 +40,11 @@ public class InterfaceBuilderTest extends AbstractBuilderTest {
   public void testJavaClass() {
     JvmDeclaredType _javaClass = this.getJavaClass();
     AbstractInterfaceBuilder _createInterfaceBuilder = this._codeBuilderFactory.createInterfaceBuilder(_javaClass);
-    final Procedure1<AbstractInterfaceBuilder> _function = new Procedure1<AbstractInterfaceBuilder>() {
-      @Override
-      public void apply(final AbstractInterfaceBuilder it) {
-        JvmDeclaredType _javaClass = InterfaceBuilderTest.this.getJavaClass();
-        it.setContext(_javaClass);
-        it.setInterfaceName("Bar");
-        it.setVisibility(JvmVisibility.PUBLIC);
-      }
+    final Procedure1<AbstractInterfaceBuilder> _function = (AbstractInterfaceBuilder it) -> {
+      JvmDeclaredType _javaClass_1 = this.getJavaClass();
+      it.setContext(_javaClass_1);
+      it.setInterfaceName("Bar");
+      it.setVisibility(JvmVisibility.PUBLIC);
     };
     AbstractInterfaceBuilder _doubleArrow = ObjectExtensions.<AbstractInterfaceBuilder>operator_doubleArrow(_createInterfaceBuilder, _function);
     StringConcatenation _builder = new StringConcatenation();

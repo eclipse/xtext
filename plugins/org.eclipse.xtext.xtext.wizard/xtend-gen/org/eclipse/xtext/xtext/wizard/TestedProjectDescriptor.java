@@ -77,20 +77,14 @@ public abstract class TestedProjectDescriptor extends ProjectDescriptor {
       if (_isInlined) {
         TestProjectDescriptor _testProject_1 = this.getTestProject();
         Iterable<? extends AbstractFile> _files_1 = _testProject_1.getFiles();
-        final Function1<AbstractFile, Boolean> _function = new Function1<AbstractFile, Boolean>() {
-          @Override
-          public Boolean apply(final AbstractFile fileFromTestProject) {
-            final Function1<AbstractFile, Boolean> _function = new Function1<AbstractFile, Boolean>() {
-              @Override
-              public Boolean apply(final AbstractFile it) {
-                String _relativePath = it.getRelativePath();
-                String _relativePath_1 = fileFromTestProject.getRelativePath();
-                return Boolean.valueOf(Objects.equal(_relativePath, _relativePath_1));
-              }
-            };
-            boolean _exists = IterableExtensions.<AbstractFile>exists(files, _function);
-            return Boolean.valueOf((!_exists));
-          }
+        final Function1<AbstractFile, Boolean> _function = (AbstractFile fileFromTestProject) -> {
+          final Function1<AbstractFile, Boolean> _function_1 = (AbstractFile it) -> {
+            String _relativePath = it.getRelativePath();
+            String _relativePath_1 = fileFromTestProject.getRelativePath();
+            return Boolean.valueOf(Objects.equal(_relativePath, _relativePath_1));
+          };
+          boolean _exists = IterableExtensions.<AbstractFile>exists(files, _function_1);
+          return Boolean.valueOf((!_exists));
         };
         Iterable<? extends AbstractFile> _filter = IterableExtensions.filter(_files_1, _function);
         Iterables.<AbstractFile>addAll(files, _filter);

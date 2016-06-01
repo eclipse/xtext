@@ -48,12 +48,9 @@ public class ResolvedMethodImpl extends ResolvedExecutableImpl<IResolvedOperatio
         TypeParameterDeclaration _typeParameterDeclaration = _compilationUnit.toTypeParameterDeclaration(_get);
         IResolvedOperation _delegate_1 = this.getDelegate();
         List<LightweightTypeReference> _resolvedTypeParameterConstraints = _delegate_1.getResolvedTypeParameterConstraints(i);
-        final Function1<LightweightTypeReference, TypeReference> _function = new Function1<LightweightTypeReference, TypeReference>() {
-          @Override
-          public TypeReference apply(final LightweightTypeReference it) {
-            CompilationUnitImpl _compilationUnit = ResolvedMethodImpl.this.getCompilationUnit();
-            return _compilationUnit.toTypeReference(it);
-          }
+        final Function1<LightweightTypeReference, TypeReference> _function = (LightweightTypeReference it) -> {
+          CompilationUnitImpl _compilationUnit_1 = this.getCompilationUnit();
+          return _compilationUnit_1.toTypeReference(it);
         };
         List<TypeReference> _map = ListExtensions.<LightweightTypeReference, TypeReference>map(_resolvedTypeParameterConstraints, _function);
         List<TypeReference> _list = IterableExtensions.<TypeReference>toList(_map);

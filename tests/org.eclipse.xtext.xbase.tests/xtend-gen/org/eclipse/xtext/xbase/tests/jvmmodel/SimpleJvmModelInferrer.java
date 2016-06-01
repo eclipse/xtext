@@ -28,24 +28,18 @@ public class SimpleJvmModelInferrer implements IJvmModelInferrer {
   @Override
   public void infer(final EObject e, final IJvmDeclaredTypeAcceptor acceptor, final boolean prelinkingPhase) {
     JvmGenericType _class = this._jvmTypesBuilder.toClass(((XExpression) e), "Test");
-    final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
-      @Override
-      public void apply(final JvmGenericType it) {
-        EList<JvmMember> _members = it.getMembers();
-        JvmTypeReference _typeForName = SimpleJvmModelInferrer.this.references.getTypeForName(String.class, e);
-        final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
-          @Override
-          public void apply(final JvmOperation it) {
-            EList<JvmFormalParameter> _parameters = it.getParameters();
-            JvmTypeReference _typeForName = SimpleJvmModelInferrer.this.references.getTypeForName(String.class, e);
-            JvmFormalParameter _parameter = SimpleJvmModelInferrer.this._jvmTypesBuilder.toParameter(e, "s", _typeForName);
-            SimpleJvmModelInferrer.this._jvmTypesBuilder.<JvmFormalParameter>operator_add(_parameters, _parameter);
-            SimpleJvmModelInferrer.this._jvmTypesBuilder.setBody(it, ((XExpression) e));
-          }
-        };
-        JvmOperation _method = SimpleJvmModelInferrer.this._jvmTypesBuilder.toMethod(e, "doStuff", _typeForName, _function);
-        SimpleJvmModelInferrer.this._jvmTypesBuilder.<JvmOperation>operator_add(_members, _method);
-      }
+    final Procedure1<JvmGenericType> _function = (JvmGenericType it) -> {
+      EList<JvmMember> _members = it.getMembers();
+      JvmTypeReference _typeForName = this.references.getTypeForName(String.class, e);
+      final Procedure1<JvmOperation> _function_1 = (JvmOperation it_1) -> {
+        EList<JvmFormalParameter> _parameters = it_1.getParameters();
+        JvmTypeReference _typeForName_1 = this.references.getTypeForName(String.class, e);
+        JvmFormalParameter _parameter = this._jvmTypesBuilder.toParameter(e, "s", _typeForName_1);
+        this._jvmTypesBuilder.<JvmFormalParameter>operator_add(_parameters, _parameter);
+        this._jvmTypesBuilder.setBody(it_1, ((XExpression) e));
+      };
+      JvmOperation _method = this._jvmTypesBuilder.toMethod(e, "doStuff", _typeForName, _function_1);
+      this._jvmTypesBuilder.<JvmOperation>operator_add(_members, _method);
     };
     acceptor.<JvmGenericType>accept(_class, _function);
   }

@@ -49,25 +49,22 @@ public class ToStringCompilerTest extends AbstractXtendCompilerTest {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
-        @Override
-        public void accept(final CompilationTestHelper.Result it) {
-          try {
-            Class<?> _compiledClass = it.getCompiledClass();
-            final Object instance = _compiledClass.newInstance();
-            StringConcatenation _builder = new StringConcatenation();
-            _builder.append("Foo [");
-            _builder.newLine();
-            _builder.append("  ");
-            _builder.append("a = 1");
-            _builder.newLine();
-            _builder.append("]");
-            String _unix = LineDelimiters.toUnix(_builder.toString());
-            String _string = instance.toString();
-            Assert.assertEquals(_unix, _string);
-          } catch (Throwable _e) {
-            throw Exceptions.sneakyThrow(_e);
-          }
+      final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
+        try {
+          Class<?> _compiledClass = it.getCompiledClass();
+          final Object instance = _compiledClass.newInstance();
+          StringConcatenation _builder_1 = new StringConcatenation();
+          _builder_1.append("Foo [");
+          _builder_1.newLine();
+          _builder_1.append("  ");
+          _builder_1.append("a = 1");
+          _builder_1.newLine();
+          _builder_1.append("]");
+          String _unix = LineDelimiters.toUnix(_builder_1.toString());
+          String _string = instance.toString();
+          Assert.assertEquals(_unix, _string);
+        } catch (Throwable _e) {
+          throw Exceptions.sneakyThrow(_e);
         }
       };
       this.compilationTestHelper.compile(_builder, _function);
@@ -98,20 +95,17 @@ public class ToStringCompilerTest extends AbstractXtendCompilerTest {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
-        @Override
-        public void accept(final CompilationTestHelper.Result it) {
-          try {
-            Class<?> _compiledClass = it.getCompiledClass();
-            final Object instance = _compiledClass.newInstance();
-            StringConcatenation _builder = new StringConcatenation();
-            _builder.append("Foo [a = 1]");
-            String _unix = LineDelimiters.toUnix(_builder.toString());
-            String _string = instance.toString();
-            Assert.assertEquals(_unix, _string);
-          } catch (Throwable _e) {
-            throw Exceptions.sneakyThrow(_e);
-          }
+      final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
+        try {
+          Class<?> _compiledClass = it.getCompiledClass();
+          final Object instance = _compiledClass.newInstance();
+          StringConcatenation _builder_1 = new StringConcatenation();
+          _builder_1.append("Foo [a = 1]");
+          String _unix = LineDelimiters.toUnix(_builder_1.toString());
+          String _string = instance.toString();
+          Assert.assertEquals(_unix, _string);
+        } catch (Throwable _e) {
+          throw Exceptions.sneakyThrow(_e);
         }
       };
       this.compilationTestHelper.compile(_builder, _function);
@@ -142,20 +136,17 @@ public class ToStringCompilerTest extends AbstractXtendCompilerTest {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
-        @Override
-        public void accept(final CompilationTestHelper.Result it) {
-          try {
-            Class<?> _compiledClass = it.getCompiledClass();
-            final Object instance = _compiledClass.newInstance();
-            StringConcatenation _builder = new StringConcatenation();
-            _builder.append("Foo [1]");
-            String _unix = LineDelimiters.toUnix(_builder.toString());
-            String _string = instance.toString();
-            Assert.assertEquals(_unix, _string);
-          } catch (Throwable _e) {
-            throw Exceptions.sneakyThrow(_e);
-          }
+      final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
+        try {
+          Class<?> _compiledClass = it.getCompiledClass();
+          final Object instance = _compiledClass.newInstance();
+          StringConcatenation _builder_1 = new StringConcatenation();
+          _builder_1.append("Foo [1]");
+          String _unix = LineDelimiters.toUnix(_builder_1.toString());
+          String _string = instance.toString();
+          Assert.assertEquals(_unix, _string);
+        } catch (Throwable _e) {
+          throw Exceptions.sneakyThrow(_e);
         }
       };
       this.compilationTestHelper.compile(_builder, _function);
@@ -177,18 +168,15 @@ public class ToStringCompilerTest extends AbstractXtendCompilerTest {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
-        @Override
-        public void accept(final CompilationTestHelper.Result it) {
-          try {
-            Class<?> _compiledClass = it.getCompiledClass();
-            final Object instance = _compiledClass.newInstance();
-            String _string = instance.toString();
-            boolean _contains = _string.contains("[I@");
-            Assert.assertTrue(_contains);
-          } catch (Throwable _e) {
-            throw Exceptions.sneakyThrow(_e);
-          }
+      final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
+        try {
+          Class<?> _compiledClass = it.getCompiledClass();
+          final Object instance = _compiledClass.newInstance();
+          String _string = instance.toString();
+          boolean _contains = _string.contains("[I@");
+          Assert.assertTrue(_contains);
+        } catch (Throwable _e) {
+          throw Exceptions.sneakyThrow(_e);
         }
       };
       this.compilationTestHelper.compile(_builder, _function);
@@ -219,22 +207,19 @@ public class ToStringCompilerTest extends AbstractXtendCompilerTest {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
-        @Override
-        public void accept(final CompilationTestHelper.Result it) {
-          try {
-            Class<?> _compiledClass = it.getCompiledClass();
-            final Object instance = _compiledClass.newInstance();
-            StringConcatenation _builder = new StringConcatenation();
-            _builder.append("Foo [");
-            _builder.newLine();
-            _builder.append("]");
-            String _unix = LineDelimiters.toUnix(_builder.toString());
-            String _string = instance.toString();
-            Assert.assertEquals(_unix, _string);
-          } catch (Throwable _e) {
-            throw Exceptions.sneakyThrow(_e);
-          }
+      final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
+        try {
+          Class<?> _compiledClass = it.getCompiledClass();
+          final Object instance = _compiledClass.newInstance();
+          StringConcatenation _builder_1 = new StringConcatenation();
+          _builder_1.append("Foo [");
+          _builder_1.newLine();
+          _builder_1.append("]");
+          String _unix = LineDelimiters.toUnix(_builder_1.toString());
+          String _string = instance.toString();
+          Assert.assertEquals(_unix, _string);
+        } catch (Throwable _e) {
+          throw Exceptions.sneakyThrow(_e);
         }
       };
       this.compilationTestHelper.compile(_builder, _function);
@@ -263,17 +248,14 @@ public class ToStringCompilerTest extends AbstractXtendCompilerTest {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
-        @Override
-        public void accept(final CompilationTestHelper.Result it) {
-          try {
-            Class<?> _compiledClass = it.getCompiledClass("Bar");
-            final Object instance = _compiledClass.newInstance();
-            String _string = instance.toString();
-            Assert.assertEquals(((("Bar [\n" + "  b = \"Bar\"\n") + "  a = 1\n") + "]"), _string);
-          } catch (Throwable _e) {
-            throw Exceptions.sneakyThrow(_e);
-          }
+      final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
+        try {
+          Class<?> _compiledClass = it.getCompiledClass("Bar");
+          final Object instance = _compiledClass.newInstance();
+          String _string = instance.toString();
+          Assert.assertEquals(((("Bar [\n" + "  b = \"Bar\"\n") + "  a = 1\n") + "]"), _string);
+        } catch (Throwable _e) {
+          throw Exceptions.sneakyThrow(_e);
         }
       };
       this.compilationTestHelper.compile(_builder, _function);
@@ -307,17 +289,14 @@ public class ToStringCompilerTest extends AbstractXtendCompilerTest {
       final String text = _builder.toString();
       XtendClass _clazz = this.clazz(text);
       this._validationTestHelper.assertWarning(_clazz, XAnnotationsPackage.Literals.XANNOTATION, "user.issue", "no effect");
-      final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
-        @Override
-        public void accept(final CompilationTestHelper.Result it) {
-          try {
-            Class<?> _compiledClass = it.getCompiledClass();
-            final Object instance = _compiledClass.newInstance();
-            String _string = instance.toString();
-            Assert.assertEquals("foo", _string);
-          } catch (Throwable _e) {
-            throw Exceptions.sneakyThrow(_e);
-          }
+      final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
+        try {
+          Class<?> _compiledClass = it.getCompiledClass();
+          final Object instance = _compiledClass.newInstance();
+          String _string = instance.toString();
+          Assert.assertEquals("foo", _string);
+        } catch (Throwable _e) {
+          throw Exceptions.sneakyThrow(_e);
         }
       };
       this.compilationTestHelper.compile(text, _function);
@@ -341,17 +320,14 @@ public class ToStringCompilerTest extends AbstractXtendCompilerTest {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
-        @Override
-        public void accept(final CompilationTestHelper.Result it) {
-          try {
-            Class<?> _compiledClass = it.getCompiledClass();
-            final Object instance = _compiledClass.newInstance();
-            String _string = instance.toString();
-            Assert.assertEquals((("Foo [\n" + "  \"Bar\"\n") + "]"), _string);
-          } catch (Throwable _e) {
-            throw Exceptions.sneakyThrow(_e);
-          }
+      final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
+        try {
+          Class<?> _compiledClass = it.getCompiledClass();
+          final Object instance = _compiledClass.newInstance();
+          String _string = instance.toString();
+          Assert.assertEquals((("Foo [\n" + "  \"Bar\"\n") + "]"), _string);
+        } catch (Throwable _e) {
+          throw Exceptions.sneakyThrow(_e);
         }
       };
       this.compilationTestHelper.compile(_builder, _function);

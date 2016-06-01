@@ -121,11 +121,8 @@ public class BatchLinkableResourceStorageWritable extends ResourceStorageWritabl
     if ((adapter == null)) {
       EList<EObject> _contents = resource.getContents();
       Iterable<EObject> _tail = IterableExtensions.<EObject>tail(_contents);
-      final Function1<EObject, Boolean> _function = new Function1<EObject, Boolean>() {
-        @Override
-        public Boolean apply(final EObject it) {
-          return Boolean.valueOf((it instanceof JvmType));
-        }
+      final Function1<EObject, Boolean> _function = (EObject it) -> {
+        return Boolean.valueOf((it instanceof JvmType));
       };
       boolean _exists = IterableExtensions.<EObject>exists(_tail, _function);
       if (_exists) {
@@ -187,11 +184,8 @@ public class BatchLinkableResourceStorageWritable extends ResourceStorageWritabl
           EObject _key_5 = entry_1.getKey();
           String _fragment_2 = this.getFragment(_key_5);
           Set<EObject> _value_1 = entry_1.getValue();
-          final Function1<EObject, String> _function_1 = new Function1<EObject, String>() {
-            @Override
-            public String apply(final EObject it) {
-              return BatchLinkableResourceStorageWritable.this.getFragment(it);
-            }
+          final Function1<EObject, String> _function_1 = (EObject it) -> {
+            return this.getFragment(it);
           };
           Iterable<String> _map = IterableExtensions.<EObject, String>map(_value_1, _function_1);
           HashSet<String> _newHashSet = Sets.<String>newHashSet(_map);
@@ -221,11 +215,8 @@ public class BatchLinkableResourceStorageWritable extends ResourceStorageWritabl
           EObject _key_8 = entry_2.getKey();
           String _fragment_3 = this.getFragment(_key_8);
           Set<EObject> _value_2 = entry_2.getValue();
-          final Function1<EObject, String> _function_2 = new Function1<EObject, String>() {
-            @Override
-            public String apply(final EObject it) {
-              return BatchLinkableResourceStorageWritable.this.getFragment(it);
-            }
+          final Function1<EObject, String> _function_2 = (EObject it) -> {
+            return this.getFragment(it);
           };
           Iterable<String> _map_1 = IterableExtensions.<EObject, String>map(_value_2, _function_2);
           HashSet<String> _newHashSet_1 = Sets.<String>newHashSet(_map_1);

@@ -14,6 +14,7 @@ import com.google.inject.Provider;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Consumer;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -37,7 +38,6 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.typesystem.internal.DefaultReentrantTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
@@ -120,14 +120,11 @@ public class DeferredTypeParameterHintCollectorTest extends AbstractTestingTypeR
         LightweightTypeReference _typeReference = _get.getTypeReference();
         final UnboundTypeReference unbound = ((UnboundTypeReference) _typeReference);
         List<LightweightBoundTypeArgument> _allHints = unbound.getAllHints();
-        final Procedure1<LightweightBoundTypeArgument> _function = new Procedure1<LightweightBoundTypeArgument>() {
-          @Override
-          public void apply(final LightweightBoundTypeArgument it) {
-            BoundTypeArgumentSource _source = it.getSource();
-            Assert.assertEquals(BoundTypeArgumentSource.INFERRED_LATER, _source);
-          }
+        final Consumer<LightweightBoundTypeArgument> _function = (LightweightBoundTypeArgument it) -> {
+          BoundTypeArgumentSource _source = it.getSource();
+          Assert.assertEquals(BoundTypeArgumentSource.INFERRED_LATER, _source);
         };
-        IterableExtensions.<LightweightBoundTypeArgument>forEach(_allHints, _function);
+        _allHints.forEach(_function);
         return unbound.getAllHints();
       }
     }
@@ -136,11 +133,8 @@ public class DeferredTypeParameterHintCollectorTest extends AbstractTestingTypeR
     _builder.append(typeParamName, "");
     _builder.append(" in ");
     Set<JvmTypeParameter> _keySet = mapping.keySet();
-    final Function1<JvmTypeParameter, String> _function_1 = new Function1<JvmTypeParameter, String>() {
-      @Override
-      public String apply(final JvmTypeParameter it) {
-        return it.getSimpleName();
-      }
+    final Function1<JvmTypeParameter, String> _function_1 = (JvmTypeParameter it) -> {
+      return it.getSimpleName();
     };
     Iterable<String> _map = IterableExtensions.<JvmTypeParameter, String>map(_keySet, _function_1);
     _builder.append(_map, "");
@@ -167,11 +161,8 @@ public class DeferredTypeParameterHintCollectorTest extends AbstractTestingTypeR
           _builder.append(typeParamName, "");
           _builder.append(" in ");
           Set<JvmTypeParameter> _keySet = mapping.keySet();
-          final Function1<JvmTypeParameter, String> _function = new Function1<JvmTypeParameter, String>() {
-            @Override
-            public String apply(final JvmTypeParameter it) {
-              return it.getSimpleName();
-            }
+          final Function1<JvmTypeParameter, String> _function = (JvmTypeParameter it) -> {
+            return it.getSimpleName();
           };
           Iterable<String> _map = IterableExtensions.<JvmTypeParameter, String>map(_keySet, _function);
           _builder.append(_map, "");
@@ -183,22 +174,19 @@ public class DeferredTypeParameterHintCollectorTest extends AbstractTestingTypeR
   }
   
   public List<LightweightBoundTypeArgument> like(final List<LightweightBoundTypeArgument> mappingData, final Triple<String, VarianceInfo, VarianceInfo>... mappedTypes) {
-    final Function1<LightweightBoundTypeArgument, String> _function = new Function1<LightweightBoundTypeArgument, String>() {
-      @Override
-      public String apply(final LightweightBoundTypeArgument it) {
-        StringConcatenation _builder = new StringConcatenation();
-        LightweightTypeReference _typeReference = it.getTypeReference();
-        String _string = _typeReference.toString();
-        _builder.append(_string, "");
-        _builder.append("(");
-        VarianceInfo _declaredVariance = it.getDeclaredVariance();
-        _builder.append(_declaredVariance, "");
-        _builder.append("/");
-        VarianceInfo _actualVariance = it.getActualVariance();
-        _builder.append(_actualVariance, "");
-        _builder.append(")");
-        return _builder.toString();
-      }
+    final Function1<LightweightBoundTypeArgument, String> _function = (LightweightBoundTypeArgument it) -> {
+      StringConcatenation _builder = new StringConcatenation();
+      LightweightTypeReference _typeReference = it.getTypeReference();
+      String _string = _typeReference.toString();
+      _builder.append(_string, "");
+      _builder.append("(");
+      VarianceInfo _declaredVariance = it.getDeclaredVariance();
+      _builder.append(_declaredVariance, "");
+      _builder.append("/");
+      VarianceInfo _actualVariance = it.getActualVariance();
+      _builder.append(_actualVariance, "");
+      _builder.append(")");
+      return _builder.toString();
     };
     List<String> _map = ListExtensions.<LightweightBoundTypeArgument, String>map(mappingData, _function);
     String _string = _map.toString();
@@ -206,15 +194,12 @@ public class DeferredTypeParameterHintCollectorTest extends AbstractTestingTypeR
     int _size_1 = mappingData.size();
     Assert.assertEquals(_string, _size, _size_1);
     List<Triple<String, VarianceInfo, VarianceInfo>> _list = IterableExtensions.<Triple<String, VarianceInfo, VarianceInfo>>toList(((Iterable<Triple<String, VarianceInfo, VarianceInfo>>)Conversions.doWrapArray(mappedTypes)));
-    final Function1<LightweightBoundTypeArgument, Triple<String, VarianceInfo, VarianceInfo>> _function_1 = new Function1<LightweightBoundTypeArgument, Triple<String, VarianceInfo, VarianceInfo>>() {
-      @Override
-      public Triple<String, VarianceInfo, VarianceInfo> apply(final LightweightBoundTypeArgument it) {
-        LightweightTypeReference _typeReference = it.getTypeReference();
-        String _string = _typeReference.toString();
-        VarianceInfo _declaredVariance = it.getDeclaredVariance();
-        VarianceInfo _actualVariance = it.getActualVariance();
-        return Tuples.<String, VarianceInfo, VarianceInfo>create(_string, _declaredVariance, _actualVariance);
-      }
+    final Function1<LightweightBoundTypeArgument, Triple<String, VarianceInfo, VarianceInfo>> _function_1 = (LightweightBoundTypeArgument it) -> {
+      LightweightTypeReference _typeReference = it.getTypeReference();
+      String _string_1 = _typeReference.toString();
+      VarianceInfo _declaredVariance = it.getDeclaredVariance();
+      VarianceInfo _actualVariance = it.getActualVariance();
+      return Tuples.<String, VarianceInfo, VarianceInfo>create(_string_1, _declaredVariance, _actualVariance);
     };
     List<Triple<String, VarianceInfo, VarianceInfo>> _map_1 = ListExtensions.<LightweightBoundTypeArgument, Triple<String, VarianceInfo, VarianceInfo>>map(mappingData, _function_1);
     List<Triple<String, VarianceInfo, VarianceInfo>> _list_1 = IterableExtensions.<Triple<String, VarianceInfo, VarianceInfo>>toList(_map_1);

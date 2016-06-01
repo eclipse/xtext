@@ -42,12 +42,9 @@ public abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> exte
   public Iterable<? extends TypeParameterDeclaration> getTypeParameters() {
     T _delegate = this.getDelegate();
     EList<JvmTypeParameter> _typeParameters = _delegate.getTypeParameters();
-    final Function1<JvmTypeParameter, TypeParameterDeclaration> _function = new Function1<JvmTypeParameter, TypeParameterDeclaration>() {
-      @Override
-      public TypeParameterDeclaration apply(final JvmTypeParameter it) {
-        CompilationUnitImpl _compilationUnit = JvmExecutableDeclarationImpl.this.getCompilationUnit();
-        return _compilationUnit.toTypeParameterDeclaration(it);
-      }
+    final Function1<JvmTypeParameter, TypeParameterDeclaration> _function = (JvmTypeParameter it) -> {
+      CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+      return _compilationUnit.toTypeParameterDeclaration(it);
     };
     return ListExtensions.<JvmTypeParameter, TypeParameterDeclaration>map(_typeParameters, _function);
   }
@@ -60,12 +57,9 @@ public abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> exte
   public Iterable<? extends ParameterDeclaration> getParameters() {
     T _delegate = this.getDelegate();
     EList<JvmFormalParameter> _parameters = _delegate.getParameters();
-    final Function1<JvmFormalParameter, ParameterDeclaration> _function = new Function1<JvmFormalParameter, ParameterDeclaration>() {
-      @Override
-      public ParameterDeclaration apply(final JvmFormalParameter it) {
-        CompilationUnitImpl _compilationUnit = JvmExecutableDeclarationImpl.this.getCompilationUnit();
-        return _compilationUnit.toParameterDeclaration(it);
-      }
+    final Function1<JvmFormalParameter, ParameterDeclaration> _function = (JvmFormalParameter it) -> {
+      CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+      return _compilationUnit.toParameterDeclaration(it);
     };
     return ListExtensions.<JvmFormalParameter, ParameterDeclaration>map(_parameters, _function);
   }
@@ -73,12 +67,9 @@ public abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> exte
   public List<TypeReference> getExceptions() {
     T _delegate = this.getDelegate();
     EList<JvmTypeReference> _exceptions = _delegate.getExceptions();
-    final Function1<JvmTypeReference, TypeReference> _function = new Function1<JvmTypeReference, TypeReference>() {
-      @Override
-      public TypeReference apply(final JvmTypeReference it) {
-        CompilationUnitImpl _compilationUnit = JvmExecutableDeclarationImpl.this.getCompilationUnit();
-        return _compilationUnit.toTypeReference(it);
-      }
+    final Function1<JvmTypeReference, TypeReference> _function = (JvmTypeReference it) -> {
+      CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+      return _compilationUnit.toTypeReference(it);
     };
     return ListExtensions.<JvmTypeReference, TypeReference>map(_exceptions, _function);
   }

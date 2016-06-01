@@ -99,18 +99,12 @@ public class TypeLookupImpl implements TypeLookup, SourceTypeLookup, UpstreamTyp
     Resource _eResource = _xtendFile.eResource();
     EList<EObject> _contents = _eResource.getContents();
     Iterable<JvmDeclaredType> _filter = Iterables.<JvmDeclaredType>filter(_contents, JvmDeclaredType.class);
-    final Function1<JvmDeclaredType, String> _function = new Function1<JvmDeclaredType, String>() {
-      @Override
-      public String apply(final JvmDeclaredType type) {
-        return type.getQualifiedName('.');
-      }
+    final Function1<JvmDeclaredType, String> _function = (JvmDeclaredType type) -> {
+      return type.getQualifiedName('.');
     };
-    final Function1<JvmDeclaredType, Iterable<? extends JvmDeclaredType>> _function_1 = new Function1<JvmDeclaredType, Iterable<? extends JvmDeclaredType>>() {
-      @Override
-      public Iterable<? extends JvmDeclaredType> apply(final JvmDeclaredType type) {
-        EList<JvmMember> _members = type.getMembers();
-        return Iterables.<JvmDeclaredType>filter(_members, JvmDeclaredType.class);
-      }
+    final Function1<JvmDeclaredType, Iterable<? extends JvmDeclaredType>> _function_1 = (JvmDeclaredType type) -> {
+      EList<JvmMember> _members = type.getMembers();
+      return Iterables.<JvmDeclaredType>filter(_members, JvmDeclaredType.class);
     };
     final JvmDeclaredType result = this.<JvmDeclaredType>recursiveFindType(qualifiedName, _filter, _function, _function_1);
     Type _xifexpression = null;
@@ -175,21 +169,15 @@ public class TypeLookupImpl implements TypeLookup, SourceTypeLookup, UpstreamTyp
     EList<EObject> _contents = _eResource.getContents();
     EObject _head = IterableExtensions.<EObject>head(_contents);
     EList<XtendTypeDeclaration> _xtendTypes = ((XtendFile) _head).getXtendTypes();
-    final Function1<XtendTypeDeclaration, String> _function = new Function1<XtendTypeDeclaration, String>() {
-      @Override
-      public String apply(final XtendTypeDeclaration type) {
-        IQualifiedNameConverter _qualifiedNameConverter = TypeLookupImpl.this.compilationUnit.getQualifiedNameConverter();
-        IQualifiedNameProvider _qualifiedNameProvider = TypeLookupImpl.this.compilationUnit.getQualifiedNameProvider();
-        QualifiedName _fullyQualifiedName = _qualifiedNameProvider.getFullyQualifiedName(type);
-        return _qualifiedNameConverter.toString(_fullyQualifiedName);
-      }
+    final Function1<XtendTypeDeclaration, String> _function = (XtendTypeDeclaration type) -> {
+      IQualifiedNameConverter _qualifiedNameConverter = this.compilationUnit.getQualifiedNameConverter();
+      IQualifiedNameProvider _qualifiedNameProvider = this.compilationUnit.getQualifiedNameProvider();
+      QualifiedName _fullyQualifiedName = _qualifiedNameProvider.getFullyQualifiedName(type);
+      return _qualifiedNameConverter.toString(_fullyQualifiedName);
     };
-    final Function1<XtendTypeDeclaration, Iterable<? extends XtendTypeDeclaration>> _function_1 = new Function1<XtendTypeDeclaration, Iterable<? extends XtendTypeDeclaration>>() {
-      @Override
-      public Iterable<? extends XtendTypeDeclaration> apply(final XtendTypeDeclaration type) {
-        EList<XtendMember> _members = type.getMembers();
-        return Iterables.<XtendTypeDeclaration>filter(_members, XtendTypeDeclaration.class);
-      }
+    final Function1<XtendTypeDeclaration, Iterable<? extends XtendTypeDeclaration>> _function_1 = (XtendTypeDeclaration type) -> {
+      EList<XtendMember> _members = type.getMembers();
+      return Iterables.<XtendTypeDeclaration>filter(_members, XtendTypeDeclaration.class);
     };
     final XtendTypeDeclaration result = this.<XtendTypeDeclaration>recursiveFindType(qualifiedName, _xtendTypes, _function, _function_1);
     XtendTypeDeclarationImpl<? extends XtendTypeDeclaration> _xifexpression = null;
@@ -231,11 +219,8 @@ public class TypeLookupImpl implements TypeLookup, SourceTypeLookup, UpstreamTyp
     if (_findType != null) {
       _elvis = _findType;
     } else {
-      final Function1<IEObjectDescription, Boolean> _function = new Function1<IEObjectDescription, Boolean>() {
-        @Override
-        public Boolean apply(final IEObjectDescription it) {
-          return Boolean.valueOf(true);
-        }
+      final Function1<IEObjectDescription, Boolean> _function = (IEObjectDescription it) -> {
+        return Boolean.valueOf(true);
       };
       Type _findTypeOnScope = this.findTypeOnScope(typeName, _function);
       _elvis = _findTypeOnScope;
@@ -251,15 +236,12 @@ public class TypeLookupImpl implements TypeLookup, SourceTypeLookup, UpstreamTyp
   
   @Override
   public Type findUpstreamType(final String typeName) {
-    final Function1<IEObjectDescription, Boolean> _function = new Function1<IEObjectDescription, Boolean>() {
-      @Override
-      public Boolean apply(final IEObjectDescription it) {
-        EObject _eObjectOrProxy = it.getEObjectOrProxy();
-        Resource _eResource = _eObjectOrProxy.eResource();
-        XtendFile _xtendFile = TypeLookupImpl.this.compilationUnit.getXtendFile();
-        Resource _eResource_1 = _xtendFile.eResource();
-        return Boolean.valueOf((!Objects.equal(_eResource, _eResource_1)));
-      }
+    final Function1<IEObjectDescription, Boolean> _function = (IEObjectDescription it) -> {
+      EObject _eObjectOrProxy = it.getEObjectOrProxy();
+      Resource _eResource = _eObjectOrProxy.eResource();
+      XtendFile _xtendFile = this.compilationUnit.getXtendFile();
+      Resource _eResource_1 = _xtendFile.eResource();
+      return Boolean.valueOf((!Objects.equal(_eResource, _eResource_1)));
     };
     return this.findTypeOnScope(typeName, _function);
   }

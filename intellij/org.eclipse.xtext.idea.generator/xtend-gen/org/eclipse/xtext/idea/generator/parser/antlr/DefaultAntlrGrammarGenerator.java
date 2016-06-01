@@ -198,11 +198,8 @@ public class DefaultAntlrGrammarGenerator {
     StringConcatenation _builder = new StringConcatenation();
     {
       List<ParserRule> _allParserRules = GrammarUtil.allParserRules(it);
-      final Function1<ParserRule, Boolean> _function = new Function1<ParserRule, Boolean>() {
-        @Override
-        public Boolean apply(final ParserRule rule) {
-          return Boolean.valueOf(DefaultAntlrGrammarGenerator.this._grammarAccessExtensions.isCalled(rule, it));
-        }
+      final Function1<ParserRule, Boolean> _function = (ParserRule rule) -> {
+        return Boolean.valueOf(this._grammarAccessExtensions.isCalled(rule, it));
       };
       Iterable<ParserRule> _filter = IterableExtensions.<ParserRule>filter(_allParserRules, _function);
       for(final ParserRule rule : _filter) {
@@ -214,11 +211,8 @@ public class DefaultAntlrGrammarGenerator {
     }
     {
       List<EnumRule> _allEnumRules = GrammarUtil.allEnumRules(it);
-      final Function1<EnumRule, Boolean> _function_1 = new Function1<EnumRule, Boolean>() {
-        @Override
-        public Boolean apply(final EnumRule rule) {
-          return Boolean.valueOf(DefaultAntlrGrammarGenerator.this._grammarAccessExtensions.isCalled(rule, it));
-        }
+      final Function1<EnumRule, Boolean> _function_1 = (EnumRule rule_1) -> {
+        return Boolean.valueOf(this._grammarAccessExtensions.isCalled(rule_1, it));
       };
       Iterable<EnumRule> _filter_1 = IterableExtensions.<EnumRule>filter(_allEnumRules, _function_1);
       for(final EnumRule rule_1 : _filter_1) {

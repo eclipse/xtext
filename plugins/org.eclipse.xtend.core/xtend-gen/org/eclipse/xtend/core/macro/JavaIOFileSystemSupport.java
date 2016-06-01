@@ -26,11 +26,8 @@ public class JavaIOFileSystemSupport extends AbstractFileSystemSupport {
     java.net.URI _uRI = this.toURI(uri);
     File _file = new File(_uRI);
     String[] _list = _file.list();
-    final Function1<String, Path> _function = new Function1<String, Path>() {
-      @Override
-      public Path apply(final String it) {
-        return path.getAbsolutePath(it);
-      }
+    final Function1<String, Path> _function = (String it) -> {
+      return path.getAbsolutePath(it);
     };
     return ListExtensions.<String, Path>map(((List<String>)Conversions.doWrapArray(_list)), _function);
   }

@@ -33,11 +33,8 @@ public class SDomainGenerator implements IGenerator {
     _builder.append("Entities : ");
     TreeIterator<EObject> _allContents = resource.getAllContents();
     Iterator<Entity> _filter = Iterators.<Entity>filter(_allContents, Entity.class);
-    final Function1<Entity, String> _function = new Function1<Entity, String>() {
-      @Override
-      public String apply(final Entity it) {
-        return it.getName();
-      }
+    final Function1<Entity, String> _function = (Entity it) -> {
+      return it.getName();
     };
     Iterator<String> _map = IteratorExtensions.<Entity, String>map(_filter, _function);
     String _join = IteratorExtensions.join(_map, ", ");

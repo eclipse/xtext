@@ -126,16 +126,13 @@ public class CodetemplatesGeneratorFragment2 extends AbstractXtextGeneratorFragm
       Grammar _grammar_1 = this.getGrammar();
       TypeReference _partialContentAssistParserClass_1 = this.getPartialContentAssistParserClass(_grammar_1);
       GeneratedJavaFileAccess _createGeneratedJavaFile = this.fileAccessFactory.createGeneratedJavaFile(_partialContentAssistParserClass_1);
-      final Procedure1<GeneratedJavaFileAccess> _function = new Procedure1<GeneratedJavaFileAccess>() {
-        @Override
-        public void apply(final GeneratedJavaFileAccess it) {
-          StringConcatenationClient _genPartialContentAssistParser = CodetemplatesGeneratorFragment2.this.getGenPartialContentAssistParser();
-          it.setContent(_genPartialContentAssistParser);
-          IXtextProjectConfig _projectConfig = CodetemplatesGeneratorFragment2.this.getProjectConfig();
-          IBundleProjectConfig _genericIde = _projectConfig.getGenericIde();
-          IXtextGeneratorFileSystemAccess _srcGen = _genericIde.getSrcGen();
-          it.writeTo(_srcGen);
-        }
+      final Procedure1<GeneratedJavaFileAccess> _function = (GeneratedJavaFileAccess it) -> {
+        StringConcatenationClient _genPartialContentAssistParser = this.getGenPartialContentAssistParser();
+        it.setContent(_genPartialContentAssistParser);
+        IXtextProjectConfig _projectConfig_2 = this.getProjectConfig();
+        IBundleProjectConfig _genericIde_1 = _projectConfig_2.getGenericIde();
+        IXtextGeneratorFileSystemAccess _srcGen_1 = _genericIde_1.getSrcGen();
+        it.writeTo(_srcGen_1);
       };
       ObjectExtensions.<GeneratedJavaFileAccess>operator_doubleArrow(_createGeneratedJavaFile, _function);
     }

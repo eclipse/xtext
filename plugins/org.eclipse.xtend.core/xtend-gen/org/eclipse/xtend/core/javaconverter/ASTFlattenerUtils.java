@@ -73,13 +73,10 @@ public class ASTFlattenerUtils {
   public boolean isOverrideMethod(final MethodDeclaration declaration) {
     List _modifiers = declaration.modifiers();
     Iterable<Annotation> _filter = Iterables.<Annotation>filter(_modifiers, Annotation.class);
-    final Function1<Annotation, Boolean> _function = new Function1<Annotation, Boolean>() {
-      @Override
-      public Boolean apply(final Annotation it) {
-        Name _typeName = it.getTypeName();
-        String _string = _typeName.toString();
-        return Boolean.valueOf(Objects.equal("Override", _string));
-      }
+    final Function1<Annotation, Boolean> _function = (Annotation it) -> {
+      Name _typeName = it.getTypeName();
+      String _string = _typeName.toString();
+      return Boolean.valueOf(Objects.equal("Override", _string));
     };
     boolean _exists = IterableExtensions.<Annotation>exists(_filter, _function);
     if (_exists) {
@@ -126,11 +123,8 @@ public class ASTFlattenerUtils {
   
   private IMethodBinding internalFindOverride(final IMethodBinding method, final ITypeBinding superType, final boolean onlyPrimarylevel) {
     IMethodBinding[] _declaredMethods = superType.getDeclaredMethods();
-    final Function1<IMethodBinding, Boolean> _function = new Function1<IMethodBinding, Boolean>() {
-      @Override
-      public Boolean apply(final IMethodBinding it) {
-        return Boolean.valueOf(method.overrides(it));
-      }
+    final Function1<IMethodBinding, Boolean> _function = (IMethodBinding it) -> {
+      return Boolean.valueOf(method.overrides(it));
     };
     final Iterable<IMethodBinding> superClassOverride = IterableExtensions.<IMethodBinding>filter(((Iterable<IMethodBinding>)Conversions.doWrapArray(_declaredMethods)), _function);
     int _size = IterableExtensions.size(superClassOverride);
@@ -158,12 +152,9 @@ public class ASTFlattenerUtils {
   
   public boolean isNotSupportedInnerType(final TypeDeclaration it) {
     return (((!it.isInterface()) && ((it.getParent() instanceof TypeDeclaration) || (it.getParent() instanceof Block))) && 
-      (!IterableExtensions.<Modifier>exists(Iterables.<Modifier>filter(it.modifiers(), Modifier.class), new Function1<Modifier, Boolean>() {
-        @Override
-        public Boolean apply(final Modifier it) {
-          return Boolean.valueOf(it.isStatic());
-        }
-      })));
+      (!IterableExtensions.<Modifier>exists(Iterables.<Modifier>filter(it.modifiers(), Modifier.class), ((Function1<Modifier, Boolean>) (Modifier it_1) -> {
+        return Boolean.valueOf(it_1.isStatic());
+      }))));
   }
   
   public boolean isNotSupportedInnerType(final TypeDeclarationStatement it) {
@@ -173,22 +164,16 @@ public class ASTFlattenerUtils {
   
   public boolean isFinal(final Iterable<Modifier> modifiers) {
     Iterable<Modifier> _filter = Iterables.<Modifier>filter(modifiers, Modifier.class);
-    final Function1<Modifier, Boolean> _function = new Function1<Modifier, Boolean>() {
-      @Override
-      public Boolean apply(final Modifier it) {
-        return Boolean.valueOf(it.isFinal());
-      }
+    final Function1<Modifier, Boolean> _function = (Modifier it) -> {
+      return Boolean.valueOf(it.isFinal());
     };
     return IterableExtensions.<Modifier>exists(_filter, _function);
   }
   
   public boolean isStatic(final Iterable<IExtendedModifier> modifiers) {
     Iterable<Modifier> _filter = Iterables.<Modifier>filter(modifiers, Modifier.class);
-    final Function1<Modifier, Boolean> _function = new Function1<Modifier, Boolean>() {
-      @Override
-      public Boolean apply(final Modifier it) {
-        return Boolean.valueOf(it.isStatic());
-      }
+    final Function1<Modifier, Boolean> _function = (Modifier it) -> {
+      return Boolean.valueOf(it.isStatic());
     };
     return IterableExtensions.<Modifier>exists(_filter, _function);
   }
@@ -218,11 +203,8 @@ public class ASTFlattenerUtils {
   }
   
   public boolean isPackageVisibility(final Iterable<Modifier> modifier) {
-    final Function1<Modifier, Boolean> _function = new Function1<Modifier, Boolean>() {
-      @Override
-      public Boolean apply(final Modifier it) {
-        return Boolean.valueOf(((it.isPublic() || it.isPrivate()) || it.isProtected()));
-      }
+    final Function1<Modifier, Boolean> _function = (Modifier it) -> {
+      return Boolean.valueOf(((it.isPublic() || it.isPrivate()) || it.isProtected()));
     };
     Iterable<Modifier> _filter = IterableExtensions.<Modifier>filter(modifier, _function);
     return IterableExtensions.isEmpty(_filter);
@@ -275,12 +257,9 @@ public class ASTFlattenerUtils {
       }
     }
     final Iterable<StringLiteral> nodes = this.collectCompatibleNodes(node);
-    return ((!IterableExtensions.isEmpty(nodes)) && IterableExtensions.<StringLiteral>forall(nodes, new Function1<StringLiteral, Boolean>() {
-      @Override
-      public Boolean apply(final StringLiteral it) {
-        return Boolean.valueOf(ASTFlattenerUtils.this.canTranslate(it));
-      }
-    }));
+    return ((!IterableExtensions.isEmpty(nodes)) && IterableExtensions.<StringLiteral>forall(nodes, ((Function1<StringLiteral, Boolean>) (StringLiteral it) -> {
+      return Boolean.valueOf(this.canTranslate(it));
+    })));
   }
   
   public <T extends ASTNode> T findParentOfType(final ASTNode someNode, final Class<T> parentType) {
@@ -465,73 +444,67 @@ public class ASTFlattenerUtils {
   }
   
   public Iterable<Expression> findAssignmentsInBlock(final Block scope, final VariableDeclaration varDecl) {
-    final Function1<Expression, Boolean> _function = new Function1<Expression, Boolean>() {
-      @Override
-      public Boolean apply(final Expression it) {
-        Expression name = null;
-        boolean _matched = false;
-        if (it instanceof Assignment) {
-          _matched=true;
-          Expression _leftHandSide = ((Assignment)it).getLeftHandSide();
-          name = _leftHandSide;
-        }
-        if (!_matched) {
-          if (it instanceof PrefixExpression) {
-            _matched=true;
-            Expression _operand = ((PrefixExpression)it).getOperand();
-            name = _operand;
-          }
-        }
-        if (!_matched) {
-          if (it instanceof PostfixExpression) {
-            _matched=true;
-            Expression _operand = ((PostfixExpression)it).getOperand();
-            name = _operand;
-          }
-        }
-        if ((name instanceof Name)) {
-          final IBinding binding = ((Name)name).resolveBinding();
-          if ((binding instanceof IVariableBinding)) {
-            final IVariableBinding declBinding = varDecl.resolveBinding();
-            return Boolean.valueOf((varDecl.getName().getIdentifier().equals(ASTFlattenerUtils.this.toSimpleName(((Name)name))) && ((IVariableBinding)binding).equals(declBinding)));
-          }
-        }
-        return Boolean.valueOf(false);
+    final Function1<Expression, Boolean> _function = (Expression it) -> {
+      Expression name = null;
+      boolean _matched = false;
+      if (it instanceof Assignment) {
+        _matched=true;
+        Expression _leftHandSide = ((Assignment)it).getLeftHandSide();
+        name = _leftHandSide;
       }
+      if (!_matched) {
+        if (it instanceof PrefixExpression) {
+          _matched=true;
+          Expression _operand = ((PrefixExpression)it).getOperand();
+          name = _operand;
+        }
+      }
+      if (!_matched) {
+        if (it instanceof PostfixExpression) {
+          _matched=true;
+          Expression _operand = ((PostfixExpression)it).getOperand();
+          name = _operand;
+        }
+      }
+      if ((name instanceof Name)) {
+        final IBinding binding = ((Name)name).resolveBinding();
+        if ((binding instanceof IVariableBinding)) {
+          final IVariableBinding declBinding = varDecl.resolveBinding();
+          return Boolean.valueOf((varDecl.getName().getIdentifier().equals(this.toSimpleName(((Name)name))) && ((IVariableBinding)binding).equals(declBinding)));
+        }
+      }
+      return Boolean.valueOf(false);
     };
     return this.findAssignmentsInBlock(scope, _function);
   }
   
   public Boolean isAssignedInBody(final Block scope, final SimpleName nameToLookFor) {
-    final Function1<Expression, Boolean> _function = new Function1<Expression, Boolean>() {
-      @Override
-      public Boolean apply(final Expression it) {
-        Expression simpleName = null;
-        boolean _matched = false;
-        if (it instanceof Assignment) {
-          _matched=true;
-          Expression _leftHandSide = ((Assignment)it).getLeftHandSide();
-          simpleName = _leftHandSide;
-        }
-        if (!_matched) {
-          if (it instanceof PrefixExpression) {
-            _matched=true;
-            Expression _operand = ((PrefixExpression)it).getOperand();
-            simpleName = _operand;
-          }
-        }
-        if (!_matched) {
-          if (it instanceof PostfixExpression) {
-            _matched=true;
-            Expression _operand = ((PostfixExpression)it).getOperand();
-            simpleName = _operand;
-          }
-        }
-        if ((simpleName instanceof SimpleName)) {
-          return Boolean.valueOf(((!Objects.equal(simpleName, null)) && nameToLookFor.getIdentifier().equals(((SimpleName)simpleName).getIdentifier())));
-        }
-        return Boolean.valueOf(false);
+    final Function1<Expression, Boolean> _function = (Expression it) -> {
+      Expression simpleName = null;
+      boolean _matched = false;
+      if (it instanceof Assignment) {
+        _matched=true;
+        Expression _leftHandSide = ((Assignment)it).getLeftHandSide();
+        simpleName = _leftHandSide;
       }
+      if (!_matched) {
+        if (it instanceof PrefixExpression) {
+          _matched=true;
+          Expression _operand = ((PrefixExpression)it).getOperand();
+          simpleName = _operand;
+        }
+      }
+      if (!_matched) {
+        if (it instanceof PostfixExpression) {
+          _matched=true;
+          Expression _operand = ((PostfixExpression)it).getOperand();
+          simpleName = _operand;
+        }
+      }
+      if ((simpleName instanceof SimpleName)) {
+        return Boolean.valueOf(((!Objects.equal(simpleName, null)) && nameToLookFor.getIdentifier().equals(((SimpleName)simpleName).getIdentifier())));
+      }
+      return Boolean.valueOf(false);
     };
     Iterable<Expression> _findAssignmentsInBlock = this.findAssignmentsInBlock(scope, _function);
     boolean _isEmpty = IterableExtensions.isEmpty(_findAssignmentsInBlock);
@@ -550,12 +523,9 @@ public class ASTFlattenerUtils {
   public List<ASTNode> genericChildListProperty(final ASTNode node, final String propertyName) {
     List _structuralPropertiesForType = node.structuralPropertiesForType();
     Iterable<ChildListPropertyDescriptor> _filter = Iterables.<ChildListPropertyDescriptor>filter(_structuralPropertiesForType, ChildListPropertyDescriptor.class);
-    final Function1<ChildListPropertyDescriptor, Boolean> _function = new Function1<ChildListPropertyDescriptor, Boolean>() {
-      @Override
-      public Boolean apply(final ChildListPropertyDescriptor it) {
-        String _id = it.getId();
-        return Boolean.valueOf(Objects.equal(propertyName, _id));
-      }
+    final Function1<ChildListPropertyDescriptor, Boolean> _function = (ChildListPropertyDescriptor it) -> {
+      String _id = it.getId();
+      return Boolean.valueOf(Objects.equal(propertyName, _id));
     };
     Iterable<ChildListPropertyDescriptor> _filter_1 = IterableExtensions.<ChildListPropertyDescriptor>filter(_filter, _function);
     final ChildListPropertyDescriptor property = IterableExtensions.<ChildListPropertyDescriptor>head(_filter_1);
@@ -578,12 +548,9 @@ public class ASTFlattenerUtils {
   public ASTNode genericChildProperty(final ASTNode node, final String propertyName) {
     List _structuralPropertiesForType = node.structuralPropertiesForType();
     Iterable<ChildPropertyDescriptor> _filter = Iterables.<ChildPropertyDescriptor>filter(_structuralPropertiesForType, ChildPropertyDescriptor.class);
-    final Function1<ChildPropertyDescriptor, Boolean> _function = new Function1<ChildPropertyDescriptor, Boolean>() {
-      @Override
-      public Boolean apply(final ChildPropertyDescriptor it) {
-        String _id = it.getId();
-        return Boolean.valueOf(Objects.equal(propertyName, _id));
-      }
+    final Function1<ChildPropertyDescriptor, Boolean> _function = (ChildPropertyDescriptor it) -> {
+      String _id = it.getId();
+      return Boolean.valueOf(Objects.equal(propertyName, _id));
     };
     Iterable<ChildPropertyDescriptor> _filter_1 = IterableExtensions.<ChildPropertyDescriptor>filter(_filter, _function);
     final ChildPropertyDescriptor property = IterableExtensions.<ChildPropertyDescriptor>head(_filter_1);

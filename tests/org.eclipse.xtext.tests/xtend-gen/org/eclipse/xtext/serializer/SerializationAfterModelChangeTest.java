@@ -92,12 +92,9 @@ public class SerializationAfterModelChangeTest {
       _builder.newLine();
       final Model model = this._parseHelper.parse(_builder);
       Entity _createEntity = HiddentokensequencertestFactory.eINSTANCE.createEntity();
-      final Procedure1<Entity> _function = new Procedure1<Entity>() {
-        @Override
-        public void apply(final Entity it) {
-          it.setName("AAA");
-          it.setDescription("BBB");
-        }
+      final Procedure1<Entity> _function = (Entity it) -> {
+        it.setName("AAA");
+        it.setDescription("BBB");
       };
       final Entity event = ObjectExtensions.<Entity>operator_doubleArrow(_createEntity, _function);
       DomainModel _domainModel = model.getDomainModel();
@@ -217,12 +214,9 @@ public class SerializationAfterModelChangeTest {
       _builder.newLine();
       final Model model = this._parseHelper.parse(_builder);
       Entity _createEntity = HiddentokensequencertestFactory.eINSTANCE.createEntity();
-      final Procedure1<Entity> _function = new Procedure1<Entity>() {
-        @Override
-        public void apply(final Entity it) {
-          it.setName("Baz");
-          it.setDescription("Fizzle");
-        }
+      final Procedure1<Entity> _function = (Entity it) -> {
+        it.setName("Baz");
+        it.setDescription("Fizzle");
       };
       final Entity event = ObjectExtensions.<Entity>operator_doubleArrow(_createEntity, _function);
       DomainModel _domainModel = model.getDomainModel();
@@ -259,12 +253,9 @@ public class SerializationAfterModelChangeTest {
       _builder.newLine();
       final Model model = this._parseHelper.parse(_builder);
       Entity _createEntity = HiddentokensequencertestFactory.eINSTANCE.createEntity();
-      final Procedure1<Entity> _function = new Procedure1<Entity>() {
-        @Override
-        public void apply(final Entity it) {
-          it.setName("Baz");
-          it.setDescription("Fizzle");
-        }
+      final Procedure1<Entity> _function = (Entity it) -> {
+        it.setName("Baz");
+        it.setDescription("Fizzle");
       };
       final Entity event = ObjectExtensions.<Entity>operator_doubleArrow(_createEntity, _function);
       DomainModel _domainModel = model.getDomainModel();
@@ -301,12 +292,9 @@ public class SerializationAfterModelChangeTest {
       _builder.newLine();
       final Model model = this._parseHelper.parse(_builder);
       Entity _createEntity = HiddentokensequencertestFactory.eINSTANCE.createEntity();
-      final Procedure1<Entity> _function = new Procedure1<Entity>() {
-        @Override
-        public void apply(final Entity it) {
-          it.setName("Baz");
-          it.setDescription("Fizzle");
-        }
+      final Procedure1<Entity> _function = (Entity it) -> {
+        it.setName("Baz");
+        it.setDescription("Fizzle");
       };
       final Entity event = ObjectExtensions.<Entity>operator_doubleArrow(_createEntity, _function);
       DomainModel _domainModel = model.getDomainModel();
@@ -533,12 +521,9 @@ public class SerializationAfterModelChangeTest {
       _builder.newLine();
       final Model model = this._parseHelper.parse(_builder);
       Entity _createEntity = HiddentokensequencertestFactory.eINSTANCE.createEntity();
-      final Procedure1<Entity> _function = new Procedure1<Entity>() {
-        @Override
-        public void apply(final Entity it) {
-          it.setName("Baz");
-          it.setDescription("Fizzle");
-        }
+      final Procedure1<Entity> _function = (Entity it) -> {
+        it.setName("Baz");
+        it.setDescription("Fizzle");
       };
       final Entity event = ObjectExtensions.<Entity>operator_doubleArrow(_createEntity, _function);
       DomainModel _domainModel = model.getDomainModel();

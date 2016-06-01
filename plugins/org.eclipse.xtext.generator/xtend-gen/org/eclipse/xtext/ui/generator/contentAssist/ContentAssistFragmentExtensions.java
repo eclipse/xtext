@@ -73,11 +73,8 @@ public class ContentAssistFragmentExtensions {
     {
       final HashSet<Grammar> superGrammars = CollectionLiterals.<Grammar>newHashSet();
       ContentAssistFragmentExtensions.computeAllSuperGrammars(grammar, superGrammars);
-      final Function1<Grammar, Iterable<String>> _function = new Function1<Grammar, Iterable<String>>() {
-        @Override
-        public Iterable<String> apply(final Grammar it) {
-          return ContentAssistFragmentExtensions.computeFqFeatureNames(it);
-        }
+      final Function1<Grammar, Iterable<String>> _function = (Grammar it) -> {
+        return ContentAssistFragmentExtensions.computeFqFeatureNames(it);
       };
       Iterable<Iterable<String>> _map = IterableExtensions.<Grammar, Iterable<String>>map(superGrammars, _function);
       Iterable<String> _flatten = Iterables.<String>concat(_map);
@@ -88,19 +85,13 @@ public class ContentAssistFragmentExtensions {
   
   private static Iterable<String> computeFqFeatureNames(final Grammar grammar) {
     List<Assignment> _containedAssignments = GrammarUtil.containedAssignments(grammar);
-    final Function1<Assignment, String> _function = new Function1<Assignment, String>() {
-      @Override
-      public String apply(final Assignment it) {
-        return ContentAssistFragmentExtensions.getFqFeatureName(it);
-      }
+    final Function1<Assignment, String> _function = (Assignment it) -> {
+      return ContentAssistFragmentExtensions.getFqFeatureName(it);
     };
     List<String> _map = ListExtensions.<Assignment, String>map(_containedAssignments, _function);
     EList<AbstractRule> _rules = grammar.getRules();
-    final Function1<AbstractRule, String> _function_1 = new Function1<AbstractRule, String>() {
-      @Override
-      public String apply(final AbstractRule it) {
-        return ContentAssistFragmentExtensions.getFqFeatureName(it);
-      }
+    final Function1<AbstractRule, String> _function_1 = (AbstractRule it) -> {
+      return ContentAssistFragmentExtensions.getFqFeatureName(it);
     };
     List<String> _map_1 = ListExtensions.<AbstractRule, String>map(_rules, _function_1);
     return Iterables.<String>concat(_map, _map_1);

@@ -165,7 +165,7 @@ public class ManifestAccess extends TextFileAccess implements IGuiceAwareGenerat
         _builder.newLineIfNotEmpty();
       }
     }
-    _builder.append("Bundle-RequiredExecutionEnvironment: JavaSE-1.6");
+    _builder.append("Bundle-RequiredExecutionEnvironment: JavaSE-1.8");
     _builder.newLine();
     _builder.append("Bundle-ActivationPolicy: lazy");
     _builder.newLine();
@@ -196,12 +196,9 @@ public class ManifestAccess extends TextFileAccess implements IGuiceAwareGenerat
         _builder.append("Require-Bundle: ");
         {
           List<String> _sort_1 = IterableExtensions.<String>sort(this.requiredBundles);
-          final Function1<String, Boolean> _function = new Function1<String, Boolean>() {
-            @Override
-            public Boolean apply(final String it) {
-              String _effectiveSymbolicName = ManifestAccess.this.getEffectiveSymbolicName();
-              return Boolean.valueOf((!Objects.equal(it, _effectiveSymbolicName)));
-            }
+          final Function1<String, Boolean> _function = (String it) -> {
+            String _effectiveSymbolicName = this.getEffectiveSymbolicName();
+            return Boolean.valueOf((!Objects.equal(it, _effectiveSymbolicName)));
           };
           Iterable<String> _filter = IterableExtensions.<String>filter(_sort_1, _function);
           boolean _hasElements_1 = false;

@@ -135,19 +135,13 @@ public class Ecore2XtextGrammarCreator {
       ArrayList<EClass> _newArrayList = CollectionLiterals.<EClass>newArrayList(eClazz);
       Iterable<EClass> _subClasses = Ecore2XtextExtensions.subClasses(eClazz);
       Iterable<EClass> list = Iterables.<EClass>concat(_newArrayList, _subClasses);
-      final Function1<EClass, Boolean> _function = new Function1<EClass, Boolean>() {
-        @Override
-        public Boolean apply(final EClass c) {
-          return Boolean.valueOf(Ecore2XtextExtensions.needsConcreteRule(c));
-        }
+      final Function1<EClass, Boolean> _function = (EClass c) -> {
+        return Boolean.valueOf(Ecore2XtextExtensions.needsConcreteRule(c));
       };
       Iterable<EClass> _filter = IterableExtensions.<EClass>filter(list, _function);
       list = _filter;
-      final Function1<EClass, String> _function_1 = new Function1<EClass, String>() {
-        @Override
-        public String apply(final EClass it) {
-          return Ecore2XtextExtensions.concreteRuleName(it);
-        }
+      final Function1<EClass, String> _function_1 = (EClass it) -> {
+        return Ecore2XtextExtensions.concreteRuleName(it);
       };
       Iterable<String> _map = IterableExtensions.<EClass, String>map(list, _function_1);
       _xblockexpression = IterableExtensions.join(_map, " | ");
@@ -402,15 +396,12 @@ public class Ecore2XtextGrammarCreator {
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t\t\t");
         EList<EEnumLiteral> _eLiterals = ((EEnum)it).getELiterals();
-        final Function1<EEnumLiteral, String> _function = new Function1<EEnumLiteral, String>() {
-          @Override
-          public String apply(final EEnumLiteral it) {
-            String _name = it.getName();
-            String _plus = (_name + " = \'");
-            String _name_1 = it.getName();
-            String _plus_1 = (_plus + _name_1);
-            return (_plus_1 + "\'");
-          }
+        final Function1<EEnumLiteral, String> _function = (EEnumLiteral it_1) -> {
+          String _name_1 = it_1.getName();
+          String _plus = (_name_1 + " = \'");
+          String _name_2 = it_1.getName();
+          String _plus_1 = (_plus + _name_2);
+          return (_plus_1 + "\'");
         };
         List<String> _map = ListExtensions.<EEnumLiteral, String>map(_eLiterals, _function);
         String _join = IterableExtensions.join(_map, " | ");

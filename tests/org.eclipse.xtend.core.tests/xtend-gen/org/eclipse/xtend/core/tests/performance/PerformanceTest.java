@@ -506,11 +506,8 @@ public class PerformanceTest extends AbstractXtendTestCase {
       final Map<String, ? extends CharSequence> map = this.fileGenerator.getDependencies();
       final List<String> files = CollectionLiterals.<String>newArrayList();
       Collection<? extends CharSequence> _values = map.values();
-      final Function1<CharSequence, String> _function = new Function1<CharSequence, String>() {
-        @Override
-        public String apply(final CharSequence it) {
-          return it.toString();
-        }
+      final Function1<CharSequence, String> _function = (CharSequence it) -> {
+        return it.toString();
       };
       Iterable<String> _map = IterableExtensions.map(_values, _function);
       Iterables.<String>addAll(files, _map);

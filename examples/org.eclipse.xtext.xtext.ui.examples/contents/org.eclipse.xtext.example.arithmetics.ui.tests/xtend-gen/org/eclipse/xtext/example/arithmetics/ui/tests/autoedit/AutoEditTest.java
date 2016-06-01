@@ -46,25 +46,22 @@ public class AutoEditTest extends AbstractAutoEditTest {
       _builder.append("1 + 2;|");
       _builder.newLine();
       XtextEditor _openEditor = this.openEditor(_builder.toString());
-      final Procedure1<XtextEditor> _function = new Procedure1<XtextEditor>() {
-        @Override
-        public void apply(final XtextEditor it) {
-          try {
-            AutoEditTest.this.pressKey(it, '\n');
-            StringConcatenation _builder = new StringConcatenation();
-            _builder.append("module MyModule");
-            _builder.newLine();
-            _builder.newLine();
-            _builder.append("1 + 2;");
-            _builder.newLine();
-            _builder.append("// = 3");
-            _builder.newLine();
-            _builder.append("|");
-            _builder.newLine();
-            AutoEditTest.this.assertState(it, _builder.toString());
-          } catch (Throwable _e) {
-            throw Exceptions.sneakyThrow(_e);
-          }
+      final Procedure1<XtextEditor> _function = (XtextEditor it) -> {
+        try {
+          this.pressKey(it, '\n');
+          StringConcatenation _builder_1 = new StringConcatenation();
+          _builder_1.append("module MyModule");
+          _builder_1.newLine();
+          _builder_1.newLine();
+          _builder_1.append("1 + 2;");
+          _builder_1.newLine();
+          _builder_1.append("// = 3");
+          _builder_1.newLine();
+          _builder_1.append("|");
+          _builder_1.newLine();
+          this.assertState(it, _builder_1.toString());
+        } catch (Throwable _e) {
+          throw Exceptions.sneakyThrow(_e);
         }
       };
       ObjectExtensions.<XtextEditor>operator_doubleArrow(_openEditor, _function);

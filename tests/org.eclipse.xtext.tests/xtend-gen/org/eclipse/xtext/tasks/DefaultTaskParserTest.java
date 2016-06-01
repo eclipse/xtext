@@ -59,23 +59,17 @@ public class DefaultTaskParserTest {
     _builder.append("*/");
     _builder.newLine();
     Task _task = new Task();
-    final Procedure1<Task> _function = new Procedure1<Task>() {
-      @Override
-      public void apply(final Task it) {
-        TaskTag _taskTag = new TaskTag();
-        final Procedure1<TaskTag> _function = new Procedure1<TaskTag>() {
-          @Override
-          public void apply(final TaskTag it) {
-            it.setName("FIXME");
-            it.setPriority(Priority.HIGH);
-          }
-        };
-        TaskTag _doubleArrow = ObjectExtensions.<TaskTag>operator_doubleArrow(_taskTag, _function);
-        it.setTag(_doubleArrow);
-        it.setDescription(" case insensitve match");
-        it.setLineNumber(2);
-        it.setOffset(6);
-      }
+    final Procedure1<Task> _function = (Task it) -> {
+      TaskTag _taskTag = new TaskTag();
+      final Procedure1<TaskTag> _function_1 = (TaskTag it_1) -> {
+        it_1.setName("FIXME");
+        it_1.setPriority(Priority.HIGH);
+      };
+      TaskTag _doubleArrow = ObjectExtensions.<TaskTag>operator_doubleArrow(_taskTag, _function_1);
+      it.setTag(_doubleArrow);
+      it.setDescription(" case insensitve match");
+      it.setLineNumber(2);
+      it.setOffset(6);
     };
     Task _doubleArrow = ObjectExtensions.<Task>operator_doubleArrow(_task, _function);
     this.assertContainsTasks(_builder, 
@@ -103,83 +97,59 @@ public class DefaultTaskParserTest {
     _builder.append("*/");
     _builder.newLine();
     Task _task = new Task();
-    final Procedure1<Task> _function = new Procedure1<Task>() {
-      @Override
-      public void apply(final Task it) {
-        TaskTag _taskTag = new TaskTag();
-        final Procedure1<TaskTag> _function = new Procedure1<TaskTag>() {
-          @Override
-          public void apply(final TaskTag it) {
-            it.setName("TODO");
-            it.setPriority(Priority.NORMAL);
-          }
-        };
-        TaskTag _doubleArrow = ObjectExtensions.<TaskTag>operator_doubleArrow(_taskTag, _function);
-        it.setTag(_doubleArrow);
-        it.setDescription(" this is a task");
-        it.setLineNumber(1);
-        it.setOffset(3);
-      }
+    final Procedure1<Task> _function = (Task it) -> {
+      TaskTag _taskTag = new TaskTag();
+      final Procedure1<TaskTag> _function_1 = (TaskTag it_1) -> {
+        it_1.setName("TODO");
+        it_1.setPriority(Priority.NORMAL);
+      };
+      TaskTag _doubleArrow = ObjectExtensions.<TaskTag>operator_doubleArrow(_taskTag, _function_1);
+      it.setTag(_doubleArrow);
+      it.setDescription(" this is a task");
+      it.setLineNumber(1);
+      it.setOffset(3);
     };
     Task _doubleArrow = ObjectExtensions.<Task>operator_doubleArrow(_task, _function);
     Task _task_1 = new Task();
-    final Procedure1<Task> _function_1 = new Procedure1<Task>() {
-      @Override
-      public void apply(final Task it) {
-        TaskTag _taskTag = new TaskTag();
-        final Procedure1<TaskTag> _function = new Procedure1<TaskTag>() {
-          @Override
-          public void apply(final TaskTag it) {
-            it.setName("FIXME");
-            it.setPriority(Priority.HIGH);
-          }
-        };
-        TaskTag _doubleArrow = ObjectExtensions.<TaskTag>operator_doubleArrow(_taskTag, _function);
-        it.setTag(_doubleArrow);
-        it.setDescription(" this cannot work");
-        it.setLineNumber(2);
-        it.setOffset(26);
-      }
+    final Procedure1<Task> _function_1 = (Task it) -> {
+      TaskTag _taskTag = new TaskTag();
+      final Procedure1<TaskTag> _function_2 = (TaskTag it_1) -> {
+        it_1.setName("FIXME");
+        it_1.setPriority(Priority.HIGH);
+      };
+      TaskTag _doubleArrow_1 = ObjectExtensions.<TaskTag>operator_doubleArrow(_taskTag, _function_2);
+      it.setTag(_doubleArrow_1);
+      it.setDescription(" this cannot work");
+      it.setLineNumber(2);
+      it.setOffset(26);
     };
     Task _doubleArrow_1 = ObjectExtensions.<Task>operator_doubleArrow(_task_1, _function_1);
     Task _task_2 = new Task();
-    final Procedure1<Task> _function_2 = new Procedure1<Task>() {
-      @Override
-      public void apply(final Task it) {
-        TaskTag _taskTag = new TaskTag();
-        final Procedure1<TaskTag> _function = new Procedure1<TaskTag>() {
-          @Override
-          public void apply(final TaskTag it) {
-            it.setName("XXX");
-            it.setPriority(Priority.NORMAL);
-          }
-        };
-        TaskTag _doubleArrow = ObjectExtensions.<TaskTag>operator_doubleArrow(_taskTag, _function);
-        it.setTag(_doubleArrow);
-        it.setDescription(": god, this is bad");
-        it.setLineNumber(3);
-        it.setOffset(52);
-      }
+    final Procedure1<Task> _function_2 = (Task it) -> {
+      TaskTag _taskTag = new TaskTag();
+      final Procedure1<TaskTag> _function_3 = (TaskTag it_1) -> {
+        it_1.setName("XXX");
+        it_1.setPriority(Priority.NORMAL);
+      };
+      TaskTag _doubleArrow_2 = ObjectExtensions.<TaskTag>operator_doubleArrow(_taskTag, _function_3);
+      it.setTag(_doubleArrow_2);
+      it.setDescription(": god, this is bad");
+      it.setLineNumber(3);
+      it.setOffset(52);
     };
     Task _doubleArrow_2 = ObjectExtensions.<Task>operator_doubleArrow(_task_2, _function_2);
     Task _task_3 = new Task();
-    final Procedure1<Task> _function_3 = new Procedure1<Task>() {
-      @Override
-      public void apply(final Task it) {
-        TaskTag _taskTag = new TaskTag();
-        final Procedure1<TaskTag> _function = new Procedure1<TaskTag>() {
-          @Override
-          public void apply(final TaskTag it) {
-            it.setName("TODO");
-            it.setPriority(Priority.NORMAL);
-          }
-        };
-        TaskTag _doubleArrow = ObjectExtensions.<TaskTag>operator_doubleArrow(_taskTag, _function);
-        it.setTag(_doubleArrow);
-        it.setDescription("");
-        it.setLineNumber(4);
-        it.setOffset(77);
-      }
+    final Procedure1<Task> _function_3 = (Task it) -> {
+      TaskTag _taskTag = new TaskTag();
+      final Procedure1<TaskTag> _function_4 = (TaskTag it_1) -> {
+        it_1.setName("TODO");
+        it_1.setPriority(Priority.NORMAL);
+      };
+      TaskTag _doubleArrow_3 = ObjectExtensions.<TaskTag>operator_doubleArrow(_taskTag, _function_4);
+      it.setTag(_doubleArrow_3);
+      it.setDescription("");
+      it.setLineNumber(4);
+      it.setOffset(77);
     };
     Task _doubleArrow_3 = ObjectExtensions.<Task>operator_doubleArrow(_task_3, _function_3);
     this.assertContainsTasks(_builder, 

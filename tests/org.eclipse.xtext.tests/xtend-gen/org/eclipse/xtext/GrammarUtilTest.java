@@ -254,11 +254,8 @@ public class GrammarUtilTest extends AbstractXtextTests {
     final Grammar grammar = ((Grammar) _get);
     final List<AbstractRule> allRules = GrammarUtil.allRules(grammar);
     String _string = Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("Rule", "STRING", "ID", "INT", "STRING", "ML_COMMENT", "SL_COMMENT", "WS", "ANY_OTHER")).toString();
-    final Function1<AbstractRule, String> _function = new Function1<AbstractRule, String>() {
-      @Override
-      public String apply(final AbstractRule it) {
-        return it.getName();
-      }
+    final Function1<AbstractRule, String> _function = (AbstractRule it) -> {
+      return it.getName();
     };
     List<String> _map = ListExtensions.<AbstractRule, String>map(allRules, _function);
     String _string_1 = _map.toString();

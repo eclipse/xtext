@@ -79,11 +79,8 @@ public class ProjectManager {
     this.issueAcceptor = acceptor;
     this.openedDocumentsContentProvider = openedDocumentsContentProvider;
     this.indexProvider = indexProvider;
-    final IAcceptor<URI> _function = new IAcceptor<URI>() {
-      @Override
-      public void accept(final URI it) {
-        uris.add(it);
-      }
+    final IAcceptor<URI> _function = (URI it) -> {
+      uris.add(it);
     };
     this.fileSystemScanner.scan(baseDir, _function);
     List<URI> _emptyList = CollectionLiterals.<URI>emptyList();
@@ -92,11 +89,8 @@ public class ProjectManager {
   
   public IncrementalBuilder.Result doBuild(final List<URI> dirtyFiles, final List<URI> deletedFiles, final CancelIndicator cancelIndicator) {
     final BuildRequest request = this.newBuildRequest(dirtyFiles, deletedFiles, cancelIndicator);
-    final Function1<URI, IResourceServiceProvider> _function = new Function1<URI, IResourceServiceProvider>() {
-      @Override
-      public IResourceServiceProvider apply(final URI it) {
-        return ProjectManager.this.languagesRegistry.getResourceServiceProvider(it);
-      }
+    final Function1<URI, IResourceServiceProvider> _function = (URI it) -> {
+      return this.languagesRegistry.getResourceServiceProvider(it);
     };
     final IncrementalBuilder.Result result = this.incrementalBuilder.build(request, _function);
     IndexState _indexState = result.getIndexState();
@@ -108,60 +102,48 @@ public class ProjectManager {
   
   protected BuildRequest newBuildRequest(final List<URI> changedFiles, final List<URI> deletedFiles, final CancelIndicator cancelIndicator) {
     BuildRequest _buildRequest = new BuildRequest();
-    final Procedure1<BuildRequest> _function = new Procedure1<BuildRequest>() {
-      @Override
-      public void apply(final BuildRequest it) {
-        it.setBaseDir(ProjectManager.this.baseDir);
-        List<IResourceDescription> _emptyList = CollectionLiterals.<IResourceDescription>emptyList();
-        ResourceDescriptionsData _resourceDescriptionsData = new ResourceDescriptionsData(_emptyList);
-        XtextResourceSet _createFreshResourceSet = ProjectManager.this.createFreshResourceSet(_resourceDescriptionsData);
-        it.setResourceSet(_createFreshResourceSet);
-        ResourceDescriptionsData _resourceDescriptions = ProjectManager.this.indexState.getResourceDescriptions();
-        ResourceDescriptionsData _copy = _resourceDescriptions.copy();
-        Source2GeneratedMapping _fileMappings = ProjectManager.this.indexState.getFileMappings();
-        Source2GeneratedMapping _copy_1 = _fileMappings.copy();
-        IndexState _indexState = new IndexState(_copy, _copy_1);
-        it.setState(_indexState);
-        IndexState _state = it.getState();
-        ResourceDescriptionsData _resourceDescriptions_1 = _state.getResourceDescriptions();
-        XtextResourceSet _createFreshResourceSet_1 = ProjectManager.this.createFreshResourceSet(_resourceDescriptions_1);
-        it.setResourceSet(_createFreshResourceSet_1);
-        it.setDirtyFiles(changedFiles);
-        it.setDeletedFiles(deletedFiles);
-        final BuildRequest.IPostValidationCallback _function = new BuildRequest.IPostValidationCallback() {
-          @Override
-          public boolean afterValidate(final URI uri, final Iterable<Issue> issues) {
-            ProjectManager.this.issueAcceptor.apply(uri, issues);
-            return true;
-          }
-        };
-        it.setAfterValidate(_function);
-        it.setCancelIndicator(cancelIndicator);
-      }
+    final Procedure1<BuildRequest> _function = (BuildRequest it) -> {
+      it.setBaseDir(this.baseDir);
+      List<IResourceDescription> _emptyList = CollectionLiterals.<IResourceDescription>emptyList();
+      ResourceDescriptionsData _resourceDescriptionsData = new ResourceDescriptionsData(_emptyList);
+      XtextResourceSet _createFreshResourceSet = this.createFreshResourceSet(_resourceDescriptionsData);
+      it.setResourceSet(_createFreshResourceSet);
+      ResourceDescriptionsData _resourceDescriptions = this.indexState.getResourceDescriptions();
+      ResourceDescriptionsData _copy = _resourceDescriptions.copy();
+      Source2GeneratedMapping _fileMappings = this.indexState.getFileMappings();
+      Source2GeneratedMapping _copy_1 = _fileMappings.copy();
+      IndexState _indexState = new IndexState(_copy, _copy_1);
+      it.setState(_indexState);
+      IndexState _state = it.getState();
+      ResourceDescriptionsData _resourceDescriptions_1 = _state.getResourceDescriptions();
+      XtextResourceSet _createFreshResourceSet_1 = this.createFreshResourceSet(_resourceDescriptions_1);
+      it.setResourceSet(_createFreshResourceSet_1);
+      it.setDirtyFiles(changedFiles);
+      it.setDeletedFiles(deletedFiles);
+      final BuildRequest.IPostValidationCallback _function_1 = (URI uri, Iterable<Issue> issues) -> {
+        this.issueAcceptor.apply(uri, issues);
+        return true;
+      };
+      it.setAfterValidate(_function_1);
+      it.setCancelIndicator(cancelIndicator);
     };
     return ObjectExtensions.<BuildRequest>operator_doubleArrow(_buildRequest, _function);
   }
   
   protected XtextResourceSet createFreshResourceSet(final ResourceDescriptionsData newIndex) {
     XtextResourceSet _get = this.resourceSetProvider.get();
-    final Procedure1<XtextResourceSet> _function = new Procedure1<XtextResourceSet>() {
-      @Override
-      public void apply(final XtextResourceSet it) {
-        ProjectDescription _projectDescription = new ProjectDescription();
-        final Procedure1<ProjectDescription> _function = new Procedure1<ProjectDescription>() {
-          @Override
-          public void apply(final ProjectDescription it) {
-            it.setName("test-project");
-          }
-        };
-        final ProjectDescription projectDescription = ObjectExtensions.<ProjectDescription>operator_doubleArrow(_projectDescription, _function);
-        projectDescription.attachToEmfObject(it);
-        Map<String, ResourceDescriptionsData> _get = ProjectManager.this.indexProvider.get();
-        final ChunkedResourceDescriptions index = new ChunkedResourceDescriptions(_get, it);
-        String _name = projectDescription.getName();
-        index.setContainer(_name, newIndex);
-        ProjectManager.this.externalContentSupport.configureResourceSet(it, ProjectManager.this.openedDocumentsContentProvider);
-      }
+    final Procedure1<XtextResourceSet> _function = (XtextResourceSet it) -> {
+      ProjectDescription _projectDescription = new ProjectDescription();
+      final Procedure1<ProjectDescription> _function_1 = (ProjectDescription it_1) -> {
+        it_1.setName("test-project");
+      };
+      final ProjectDescription projectDescription = ObjectExtensions.<ProjectDescription>operator_doubleArrow(_projectDescription, _function_1);
+      projectDescription.attachToEmfObject(it);
+      Map<String, ResourceDescriptionsData> _get_1 = this.indexProvider.get();
+      final ChunkedResourceDescriptions index = new ChunkedResourceDescriptions(_get_1, it);
+      String _name = projectDescription.getName();
+      index.setContainer(_name, newIndex);
+      this.externalContentSupport.configureResourceSet(it, this.openedDocumentsContentProvider);
     };
     return ObjectExtensions.<XtextResourceSet>operator_doubleArrow(_get, _function);
   }

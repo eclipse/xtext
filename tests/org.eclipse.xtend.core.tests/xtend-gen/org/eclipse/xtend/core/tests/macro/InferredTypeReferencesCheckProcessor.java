@@ -33,133 +33,82 @@ public class InferredTypeReferencesCheckProcessor extends AbstractClassProcessor
     final TypeReference type = _findDeclaredField.getType();
     boolean _isInferred = type.isInferred();
     Assert.assertTrue(_isInferred);
-    final Procedure0 _function = new Procedure0() {
-      @Override
-      public void apply() {
-        it.setExtendedClass(type);
-      }
+    final Procedure0 _function = () -> {
+      it.setExtendedClass(type);
     };
     MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, "Cannot use inferred type as extended class.", _function);
-    final Procedure0 _function_1 = new Procedure0() {
-      @Override
-      public void apply() {
-        Iterable<? extends TypeReference> _implementedInterfaces = it.getImplementedInterfaces();
-        Iterable<TypeReference> _plus = Iterables.<TypeReference>concat(_implementedInterfaces, Collections.<TypeReference>unmodifiableList(CollectionLiterals.<TypeReference>newArrayList(type)));
-        it.setImplementedInterfaces(_plus);
-      }
+    final Procedure0 _function_1 = () -> {
+      Iterable<? extends TypeReference> _implementedInterfaces = it.getImplementedInterfaces();
+      Iterable<TypeReference> _plus = Iterables.<TypeReference>concat(_implementedInterfaces, Collections.<TypeReference>unmodifiableList(CollectionLiterals.<TypeReference>newArrayList(type)));
+      it.setImplementedInterfaces(_plus);
     };
     MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, "Cannot use inferred type as implemented interface.", _function_1);
-    final Procedure1<MutableMethodDeclaration> _function_2 = new Procedure1<MutableMethodDeclaration>() {
-      @Override
-      public void apply(final MutableMethodDeclaration it) {
-        it.setReturnType(type);
-        final Procedure0 _function = new Procedure0() {
-          @Override
-          public void apply() {
-            it.addParameter("bar", type);
-          }
+    final Procedure1<MutableMethodDeclaration> _function_2 = (MutableMethodDeclaration it_1) -> {
+      it_1.setReturnType(type);
+      final Procedure0 _function_3 = () -> {
+        it_1.addParameter("bar", type);
+      };
+      MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, "Cannot use inferred type as parameter type.", _function_3);
+      final Procedure0 _function_4 = () -> {
+        it_1.setExceptions(type);
+      };
+      MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, "Cannot use inferred type as exception type.", _function_4);
+      final Procedure0 _function_5 = () -> {
+        it_1.addTypeParameter("T", type);
+      };
+      MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, "Cannot use inferred type as parameter type.", _function_5);
+      MutableTypeParameterDeclaration _addTypeParameter = it_1.addTypeParameter("T");
+      final Procedure1<MutableTypeParameterDeclaration> _function_6 = (MutableTypeParameterDeclaration it_2) -> {
+        final Procedure0 _function_7 = () -> {
+          Iterable<? extends TypeReference> _upperBounds = it_2.getUpperBounds();
+          Iterable<TypeReference> _plus = Iterables.<TypeReference>concat(_upperBounds, Collections.<TypeReference>unmodifiableList(CollectionLiterals.<TypeReference>newArrayList(type)));
+          it_2.setUpperBounds(_plus);
         };
-        MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, "Cannot use inferred type as parameter type.", _function);
-        final Procedure0 _function_1 = new Procedure0() {
-          @Override
-          public void apply() {
-            it.setExceptions(type);
-          }
-        };
-        MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, "Cannot use inferred type as exception type.", _function_1);
-        final Procedure0 _function_2 = new Procedure0() {
-          @Override
-          public void apply() {
-            it.addTypeParameter("T", type);
-          }
-        };
-        MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, "Cannot use inferred type as parameter type.", _function_2);
-        MutableTypeParameterDeclaration _addTypeParameter = it.addTypeParameter("T");
-        final Procedure1<MutableTypeParameterDeclaration> _function_3 = new Procedure1<MutableTypeParameterDeclaration>() {
-          @Override
-          public void apply(final MutableTypeParameterDeclaration it) {
-            final Procedure0 _function = new Procedure0() {
-              @Override
-              public void apply() {
-                Iterable<? extends TypeReference> _upperBounds = it.getUpperBounds();
-                Iterable<TypeReference> _plus = Iterables.<TypeReference>concat(_upperBounds, Collections.<TypeReference>unmodifiableList(CollectionLiterals.<TypeReference>newArrayList(type)));
-                it.setUpperBounds(_plus);
-              }
-            };
-            MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, "Cannot use inferred type as parameter type.", _function);
-          }
-        };
-        ObjectExtensions.<MutableTypeParameterDeclaration>operator_doubleArrow(_addTypeParameter, _function_3);
-      }
+        MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, "Cannot use inferred type as parameter type.", _function_7);
+      };
+      ObjectExtensions.<MutableTypeParameterDeclaration>operator_doubleArrow(_addTypeParameter, _function_6);
     };
     it.addMethod("bar", _function_2);
-    final Procedure1<MutableFieldDeclaration> _function_3 = new Procedure1<MutableFieldDeclaration>() {
-      @Override
-      public void apply(final MutableFieldDeclaration field) {
-        field.setType(type);
-      }
+    final Procedure1<MutableFieldDeclaration> _function_3 = (MutableFieldDeclaration field) -> {
+      field.setType(type);
     };
     it.addField("bar2", _function_3);
     MutableInterfaceDeclaration _findInterface = context.findInterface("Bar");
-    final Procedure1<MutableInterfaceDeclaration> _function_4 = new Procedure1<MutableInterfaceDeclaration>() {
-      @Override
-      public void apply(final MutableInterfaceDeclaration it) {
-        final Procedure0 _function = new Procedure0() {
-          @Override
-          public void apply() {
-            Iterable<? extends TypeReference> _extendedInterfaces = it.getExtendedInterfaces();
-            Iterable<TypeReference> _plus = Iterables.<TypeReference>concat(_extendedInterfaces, Collections.<TypeReference>unmodifiableList(CollectionLiterals.<TypeReference>newArrayList(type)));
-            it.setExtendedInterfaces(_plus);
-          }
+    final Procedure1<MutableInterfaceDeclaration> _function_4 = (MutableInterfaceDeclaration it_1) -> {
+      final Procedure0 _function_5 = () -> {
+        Iterable<? extends TypeReference> _extendedInterfaces = it_1.getExtendedInterfaces();
+        Iterable<TypeReference> _plus = Iterables.<TypeReference>concat(_extendedInterfaces, Collections.<TypeReference>unmodifiableList(CollectionLiterals.<TypeReference>newArrayList(type)));
+        it_1.setExtendedInterfaces(_plus);
+      };
+      MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, "Cannot use inferred type as extended interface.", _function_5);
+      final Procedure0 _function_6 = () -> {
+        it_1.addTypeParameter("T", type);
+      };
+      MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, "Cannot use inferred type as parameter type.", _function_6);
+      MutableTypeParameterDeclaration _addTypeParameter = it_1.addTypeParameter("T");
+      final Procedure1<MutableTypeParameterDeclaration> _function_7 = (MutableTypeParameterDeclaration it_2) -> {
+        final Procedure0 _function_8 = () -> {
+          Iterable<? extends TypeReference> _upperBounds = it_2.getUpperBounds();
+          Iterable<TypeReference> _plus = Iterables.<TypeReference>concat(_upperBounds, Collections.<TypeReference>unmodifiableList(CollectionLiterals.<TypeReference>newArrayList(type)));
+          it_2.setUpperBounds(_plus);
         };
-        MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, "Cannot use inferred type as extended interface.", _function);
-        final Procedure0 _function_1 = new Procedure0() {
-          @Override
-          public void apply() {
-            it.addTypeParameter("T", type);
-          }
-        };
-        MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, "Cannot use inferred type as parameter type.", _function_1);
-        MutableTypeParameterDeclaration _addTypeParameter = it.addTypeParameter("T");
-        final Procedure1<MutableTypeParameterDeclaration> _function_2 = new Procedure1<MutableTypeParameterDeclaration>() {
-          @Override
-          public void apply(final MutableTypeParameterDeclaration it) {
-            final Procedure0 _function = new Procedure0() {
-              @Override
-              public void apply() {
-                Iterable<? extends TypeReference> _upperBounds = it.getUpperBounds();
-                Iterable<TypeReference> _plus = Iterables.<TypeReference>concat(_upperBounds, Collections.<TypeReference>unmodifiableList(CollectionLiterals.<TypeReference>newArrayList(type)));
-                it.setUpperBounds(_plus);
-              }
-            };
-            MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, "Cannot use inferred type as parameter type.", _function);
-          }
-        };
-        ObjectExtensions.<MutableTypeParameterDeclaration>operator_doubleArrow(_addTypeParameter, _function_2);
-      }
+        MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, "Cannot use inferred type as parameter type.", _function_8);
+      };
+      ObjectExtensions.<MutableTypeParameterDeclaration>operator_doubleArrow(_addTypeParameter, _function_7);
     };
     ObjectExtensions.<MutableInterfaceDeclaration>operator_doubleArrow(_findInterface, _function_4);
-    final Procedure0 _function_5 = new Procedure0() {
-      @Override
-      public void apply() {
-        it.addTypeParameter("T", type);
-      }
+    final Procedure0 _function_5 = () -> {
+      it.addTypeParameter("T", type);
     };
     MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, "Cannot use inferred type as parameter type.", _function_5);
     MutableTypeParameterDeclaration _addTypeParameter = it.addTypeParameter("T");
-    final Procedure1<MutableTypeParameterDeclaration> _function_6 = new Procedure1<MutableTypeParameterDeclaration>() {
-      @Override
-      public void apply(final MutableTypeParameterDeclaration it) {
-        final Procedure0 _function = new Procedure0() {
-          @Override
-          public void apply() {
-            Iterable<? extends TypeReference> _upperBounds = it.getUpperBounds();
-            Iterable<TypeReference> _plus = Iterables.<TypeReference>concat(_upperBounds, Collections.<TypeReference>unmodifiableList(CollectionLiterals.<TypeReference>newArrayList(type)));
-            it.setUpperBounds(_plus);
-          }
-        };
-        MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, "Cannot use inferred type as parameter type.", _function);
-      }
+    final Procedure1<MutableTypeParameterDeclaration> _function_6 = (MutableTypeParameterDeclaration it_1) -> {
+      final Procedure0 _function_7 = () -> {
+        Iterable<? extends TypeReference> _upperBounds = it_1.getUpperBounds();
+        Iterable<TypeReference> _plus = Iterables.<TypeReference>concat(_upperBounds, Collections.<TypeReference>unmodifiableList(CollectionLiterals.<TypeReference>newArrayList(type)));
+        it_1.setUpperBounds(_plus);
+      };
+      MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, "Cannot use inferred type as parameter type.", _function_7);
     };
     ObjectExtensions.<MutableTypeParameterDeclaration>operator_doubleArrow(_addTypeParameter, _function_6);
   }

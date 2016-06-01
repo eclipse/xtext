@@ -69,12 +69,9 @@ public abstract class XtendMemberDeclarationImpl<T extends XtendMember> extends 
   public Set<Modifier> getModifiers() {
     T _delegate = this.getDelegate();
     EList<String> _modifiers = _delegate.getModifiers();
-    final Function1<String, Modifier> _function = new Function1<String, Modifier>() {
-      @Override
-      public Modifier apply(final String it) {
-        String _upperCase = it.toUpperCase();
-        return Modifier.valueOf(_upperCase);
-      }
+    final Function1<String, Modifier> _function = (String it) -> {
+      String _upperCase = it.toUpperCase();
+      return Modifier.valueOf(_upperCase);
     };
     List<Modifier> _map = ListExtensions.<String, Modifier>map(_modifiers, _function);
     return IterableExtensions.<Modifier>toSet(_map);
@@ -84,17 +81,14 @@ public abstract class XtendMemberDeclarationImpl<T extends XtendMember> extends 
   public boolean isDeprecated() {
     T _delegate = this.getDelegate();
     EList<XAnnotation> _annotations = _delegate.getAnnotations();
-    final Function1<XAnnotation, Boolean> _function = new Function1<XAnnotation, Boolean>() {
-      @Override
-      public Boolean apply(final XAnnotation it) {
-        String _name = Deprecated.class.getName();
-        JvmType _annotationType = it.getAnnotationType();
-        String _identifier = null;
-        if (_annotationType!=null) {
-          _identifier=_annotationType.getIdentifier();
-        }
-        return Boolean.valueOf(Objects.equal(_name, _identifier));
+    final Function1<XAnnotation, Boolean> _function = (XAnnotation it) -> {
+      String _name = Deprecated.class.getName();
+      JvmType _annotationType = it.getAnnotationType();
+      String _identifier = null;
+      if (_annotationType!=null) {
+        _identifier=_annotationType.getIdentifier();
       }
+      return Boolean.valueOf(Objects.equal(_name, _identifier));
     };
     return IterableExtensions.<XAnnotation>exists(_annotations, _function);
   }

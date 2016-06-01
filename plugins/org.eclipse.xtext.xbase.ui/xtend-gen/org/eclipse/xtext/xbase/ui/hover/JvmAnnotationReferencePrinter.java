@@ -119,39 +119,33 @@ public class JvmAnnotationReferencePrinter {
     if (_greaterThan_1) {
       buffer.append("(");
       EList<JvmAnnotationValue> _explicitValues_4 = reference.getExplicitValues();
-      final Function1<JvmAnnotationValue, String> _function = new Function1<JvmAnnotationValue, String>() {
-        @Override
-        public String apply(final JvmAnnotationValue it) {
-          final StringBuilder builder = new StringBuilder();
-          if (needsExplicitProperties) {
-            JvmOperation _elvis = null;
-            JvmOperation _operation = it.getOperation();
-            if (_operation != null) {
-              _elvis = _operation;
-            } else {
-              JvmAnnotationType _annotation = reference.getAnnotation();
-              Iterable<JvmOperation> _declaredOperations = _annotation.getDeclaredOperations();
-              final Function1<JvmOperation, Boolean> _function = new Function1<JvmOperation, Boolean>() {
-                @Override
-                public Boolean apply(final JvmOperation it) {
-                  String _simpleName = it.getSimpleName();
-                  return Boolean.valueOf(Objects.equal(_simpleName, "value"));
-                }
-              };
-              JvmOperation _findFirst = IterableExtensions.<JvmOperation>findFirst(_declaredOperations, _function);
-              _elvis = _findFirst;
-            }
-            final JvmOperation operation = _elvis;
-            final URI operationUri = EcoreUtil.getURI(operation);
-            String _simpleName = operation.getSimpleName();
-            String _createLinkWithLabel = JvmAnnotationReferencePrinter.this.createLinkWithLabel(XtextElementLinks.XTEXTDOC_SCHEME, operationUri, _simpleName);
-            builder.append(_createLinkWithLabel);
-            builder.append("=");
+      final Function1<JvmAnnotationValue, String> _function = (JvmAnnotationValue it) -> {
+        final StringBuilder builder = new StringBuilder();
+        if (needsExplicitProperties) {
+          JvmOperation _elvis = null;
+          JvmOperation _operation_2 = it.getOperation();
+          if (_operation_2 != null) {
+            _elvis = _operation_2;
+          } else {
+            JvmAnnotationType _annotation_2 = reference.getAnnotation();
+            Iterable<JvmOperation> _declaredOperations = _annotation_2.getDeclaredOperations();
+            final Function1<JvmOperation, Boolean> _function_1 = (JvmOperation it_1) -> {
+              String _simpleName_2 = it_1.getSimpleName();
+              return Boolean.valueOf(Objects.equal(_simpleName_2, "value"));
+            };
+            JvmOperation _findFirst = IterableExtensions.<JvmOperation>findFirst(_declaredOperations, _function_1);
+            _elvis = _findFirst;
           }
-          String _internalToString = JvmAnnotationReferencePrinter.this.internalToString(it);
-          builder.append(_internalToString);
-          return builder.toString();
+          final JvmOperation operation = _elvis;
+          final URI operationUri = EcoreUtil.getURI(operation);
+          String _simpleName_2 = operation.getSimpleName();
+          String _createLinkWithLabel_1 = this.createLinkWithLabel(XtextElementLinks.XTEXTDOC_SCHEME, operationUri, _simpleName_2);
+          builder.append(_createLinkWithLabel_1);
+          builder.append("=");
         }
+        String _internalToString = this.internalToString(it);
+        builder.append(_internalToString);
+        return builder.toString();
       };
       List<String> _map = ListExtensions.<JvmAnnotationValue, String>map(_explicitValues_4, _function);
       String _join = IterableExtensions.join(_map, ", ");
@@ -184,38 +178,32 @@ public class JvmAnnotationReferencePrinter {
       if (_not) {
         buffer.append("(");
         EList<XAnnotationElementValuePair> _elementValuePairs_1 = reference.getElementValuePairs();
-        final Function1<XAnnotationElementValuePair, String> _function = new Function1<XAnnotationElementValuePair, String>() {
-          @Override
-          public String apply(final XAnnotationElementValuePair it) {
-            final StringBuilder builder = new StringBuilder();
-            JvmOperation _elvis = null;
-            JvmOperation _element = it.getElement();
-            if (_element != null) {
-              _elvis = _element;
-            } else {
-              JvmType _annotationType = reference.getAnnotationType();
-              Iterable<JvmOperation> _declaredOperations = ((JvmAnnotationType) _annotationType).getDeclaredOperations();
-              final Function1<JvmOperation, Boolean> _function = new Function1<JvmOperation, Boolean>() {
-                @Override
-                public Boolean apply(final JvmOperation it) {
-                  String _simpleName = it.getSimpleName();
-                  return Boolean.valueOf(Objects.equal(_simpleName, "value"));
-                }
-              };
-              JvmOperation _findFirst = IterableExtensions.<JvmOperation>findFirst(_declaredOperations, _function);
-              _elvis = _findFirst;
-            }
-            final JvmOperation operation = _elvis;
-            final URI operationUri = EcoreUtil.getURI(operation);
-            String _simpleName = operation.getSimpleName();
-            String _createLinkWithLabel = JvmAnnotationReferencePrinter.this.createLinkWithLabel(XtextElementLinks.XTEXTDOC_SCHEME, operationUri, _simpleName);
-            builder.append(_createLinkWithLabel);
-            builder.append("=");
-            XExpression _value = it.getValue();
-            String _internalToString = JvmAnnotationReferencePrinter.this.internalToString(_value);
-            builder.append(_internalToString);
-            return builder.toString();
+        final Function1<XAnnotationElementValuePair, String> _function = (XAnnotationElementValuePair it) -> {
+          final StringBuilder builder = new StringBuilder();
+          JvmOperation _elvis = null;
+          JvmOperation _element = it.getElement();
+          if (_element != null) {
+            _elvis = _element;
+          } else {
+            JvmType _annotationType_2 = reference.getAnnotationType();
+            Iterable<JvmOperation> _declaredOperations = ((JvmAnnotationType) _annotationType_2).getDeclaredOperations();
+            final Function1<JvmOperation, Boolean> _function_1 = (JvmOperation it_1) -> {
+              String _simpleName_1 = it_1.getSimpleName();
+              return Boolean.valueOf(Objects.equal(_simpleName_1, "value"));
+            };
+            JvmOperation _findFirst = IterableExtensions.<JvmOperation>findFirst(_declaredOperations, _function_1);
+            _elvis = _findFirst;
           }
+          final JvmOperation operation = _elvis;
+          final URI operationUri = EcoreUtil.getURI(operation);
+          String _simpleName_1 = operation.getSimpleName();
+          String _createLinkWithLabel_1 = this.createLinkWithLabel(XtextElementLinks.XTEXTDOC_SCHEME, operationUri, _simpleName_1);
+          builder.append(_createLinkWithLabel_1);
+          builder.append("=");
+          XExpression _value_2 = it.getValue();
+          String _internalToString = this.internalToString(_value_2);
+          builder.append(_internalToString);
+          return builder.toString();
         };
         List<String> _map = ListExtensions.<XAnnotationElementValuePair, String>map(_elementValuePairs_1, _function);
         String _join = IterableExtensions.join(_map, ", ");
@@ -240,11 +228,8 @@ public class JvmAnnotationReferencePrinter {
     if (_greaterThan) {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("#[");
-      final Function1<Object, String> _function = new Function1<Object, String>() {
-        @Override
-        public String apply(final Object it) {
-          return JvmAnnotationReferencePrinter.this.internalToString(it);
-        }
+      final Function1<Object, String> _function = (Object it_1) -> {
+        return this.internalToString(it_1);
       };
       List<String> _map = ListExtensions.map(values, _function);
       String _join = IterableExtensions.join(_map, ", ");
@@ -274,11 +259,8 @@ public class JvmAnnotationReferencePrinter {
   
   protected String _internalToString(final XListLiteral o) {
     EList<XExpression> _elements = o.getElements();
-    final Function1<XExpression, String> _function = new Function1<XExpression, String>() {
-      @Override
-      public String apply(final XExpression it) {
-        return JvmAnnotationReferencePrinter.this.internalToString(it);
-      }
+    final Function1<XExpression, String> _function = (XExpression it) -> {
+      return this.internalToString(it);
     };
     List<String> _map = ListExtensions.<XExpression, String>map(_elements, _function);
     String _join = IterableExtensions.join(_map, ", ");

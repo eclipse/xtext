@@ -40,22 +40,16 @@ public class XtendOutlineWithEditorLinker extends OutlineWithEditorLinker {
         boolean _isEmpty = matchingNodes.isEmpty();
         boolean _not = (!_isEmpty);
         if (_not) {
-          final Function1<IOutlineNode, Integer> _function = new Function1<IOutlineNode, Integer>() {
-            @Override
-            public Integer apply(final IOutlineNode it) {
-              ITextRegion _fullTextRegion = it.getFullTextRegion();
-              return Integer.valueOf(_fullTextRegion.getLength());
-            }
+          final Function1<IOutlineNode, Integer> _function = (IOutlineNode it) -> {
+            ITextRegion _fullTextRegion = it.getFullTextRegion();
+            return Integer.valueOf(_fullTextRegion.getLength());
           };
           List<Integer> _map = ListExtensions.<IOutlineNode, Integer>map(matchingNodes, _function);
           final Integer smallestMatch = IterableExtensions.<Integer>min(_map);
-          final Function1<IOutlineNode, Boolean> _function_1 = new Function1<IOutlineNode, Boolean>() {
-            @Override
-            public Boolean apply(final IOutlineNode it) {
-              ITextRegion _fullTextRegion = it.getFullTextRegion();
-              int _length = _fullTextRegion.getLength();
-              return Boolean.valueOf((_length == (smallestMatch).intValue()));
-            }
+          final Function1<IOutlineNode, Boolean> _function_1 = (IOutlineNode it) -> {
+            ITextRegion _fullTextRegion = it.getFullTextRegion();
+            int _length_1 = _fullTextRegion.getLength();
+            return Boolean.valueOf((_length_1 == (smallestMatch).intValue()));
           };
           final Iterable<IOutlineNode> nodesToBeSelected = IterableExtensions.<IOutlineNode>filter(matchingNodes, _function_1);
           boolean _isEmpty_1 = IterableExtensions.isEmpty(nodesToBeSelected);

@@ -26,56 +26,44 @@ public class AccessorsProcessor implements TransformationParticipant<MutableFiel
         String _firstUpper_1 = StringExtensions.toFirstUpper(_simpleName_1);
         final String setterName = ("set" + _firstUpper_1);
         MutableTypeDeclaration _declaringType = f.getDeclaringType();
-        final Procedure1<MutableMethodDeclaration> _function = new Procedure1<MutableMethodDeclaration>() {
-          @Override
-          public void apply(final MutableMethodDeclaration it) {
-            TypeReference _type = f.getType();
-            it.setReturnType(_type);
-            final CompilationStrategy _function = new CompilationStrategy() {
-              @Override
-              public CharSequence compile(final CompilationStrategy.CompilationContext it) {
-                StringConcatenation _builder = new StringConcatenation();
-                _builder.append("return ");
-                String _simpleName = f.getSimpleName();
-                _builder.append(_simpleName, "");
-                _builder.append(";");
-                _builder.newLineIfNotEmpty();
-                return _builder;
-              }
-            };
-            it.setBody(_function);
-          }
+        final Procedure1<MutableMethodDeclaration> _function = (MutableMethodDeclaration it) -> {
+          TypeReference _type = f.getType();
+          it.setReturnType(_type);
+          final CompilationStrategy _function_1 = (CompilationStrategy.CompilationContext it_1) -> {
+            StringConcatenation _builder = new StringConcatenation();
+            _builder.append("return ");
+            String _simpleName_2 = f.getSimpleName();
+            _builder.append(_simpleName_2, "");
+            _builder.append(";");
+            _builder.newLineIfNotEmpty();
+            return _builder;
+          };
+          it.setBody(_function_1);
         };
         this.tryAddMethod(_declaringType, getterName, _function);
         boolean _isFinal = f.isFinal();
         boolean _not = (!_isFinal);
         if (_not) {
           MutableTypeDeclaration _declaringType_1 = f.getDeclaringType();
-          final Procedure1<MutableMethodDeclaration> _function_1 = new Procedure1<MutableMethodDeclaration>() {
-            @Override
-            public void apply(final MutableMethodDeclaration it) {
-              TypeReference _primitiveVoid = context.getPrimitiveVoid();
-              it.setReturnType(_primitiveVoid);
-              String _simpleName = f.getSimpleName();
-              TypeReference _type = f.getType();
-              it.addParameter(_simpleName, _type);
-              final CompilationStrategy _function = new CompilationStrategy() {
-                @Override
-                public CharSequence compile(final CompilationStrategy.CompilationContext it) {
-                  StringConcatenation _builder = new StringConcatenation();
-                  _builder.append("this.");
-                  String _simpleName = f.getSimpleName();
-                  _builder.append(_simpleName, "");
-                  _builder.append(" = ");
-                  String _simpleName_1 = f.getSimpleName();
-                  _builder.append(_simpleName_1, "");
-                  _builder.append(";");
-                  _builder.newLineIfNotEmpty();
-                  return _builder;
-                }
-              };
-              it.setBody(_function);
-            }
+          final Procedure1<MutableMethodDeclaration> _function_1 = (MutableMethodDeclaration it) -> {
+            TypeReference _primitiveVoid = context.getPrimitiveVoid();
+            it.setReturnType(_primitiveVoid);
+            String _simpleName_2 = f.getSimpleName();
+            TypeReference _type = f.getType();
+            it.addParameter(_simpleName_2, _type);
+            final CompilationStrategy _function_2 = (CompilationStrategy.CompilationContext it_1) -> {
+              StringConcatenation _builder = new StringConcatenation();
+              _builder.append("this.");
+              String _simpleName_3 = f.getSimpleName();
+              _builder.append(_simpleName_3, "");
+              _builder.append(" = ");
+              String _simpleName_4 = f.getSimpleName();
+              _builder.append(_simpleName_4, "");
+              _builder.append(";");
+              _builder.newLineIfNotEmpty();
+              return _builder;
+            };
+            it.setBody(_function_2);
           };
           this.tryAddMethod(_declaringType_1, setterName, _function_1);
         }

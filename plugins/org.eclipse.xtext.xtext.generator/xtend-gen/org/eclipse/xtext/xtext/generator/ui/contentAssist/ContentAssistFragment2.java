@@ -265,39 +265,33 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
       Grammar _grammar_1 = this.getGrammar();
       List<Assignment> _containedAssignments = GrammarUtil.containedAssignments(_grammar_1);
       ArrayList<Assignment> _newArrayList = CollectionLiterals.<Assignment>newArrayList();
-      final Function2<ArrayList<Assignment>, Assignment, ArrayList<Assignment>> _function = new Function2<ArrayList<Assignment>, Assignment, ArrayList<Assignment>>() {
-        @Override
-        public ArrayList<Assignment> apply(final ArrayList<Assignment> candidates, final Assignment assignment) {
-          ArrayList<Assignment> _xblockexpression = null;
-          {
-            final String fqFeatureName = ContentAssistFragment2.this.getFQFeatureName(assignment);
-            if (((!processedNames.contains(fqFeatureName)) && (!excludedFqnFeatureNames.contains(fqFeatureName)))) {
-              processedNames.add(fqFeatureName);
-              candidates.add(assignment);
-            }
-            _xblockexpression = candidates;
+      final Function2<ArrayList<Assignment>, Assignment, ArrayList<Assignment>> _function = (ArrayList<Assignment> candidates, Assignment assignment) -> {
+        ArrayList<Assignment> _xblockexpression_1 = null;
+        {
+          final String fqFeatureName = this.getFQFeatureName(assignment);
+          if (((!processedNames.contains(fqFeatureName)) && (!excludedFqnFeatureNames.contains(fqFeatureName)))) {
+            processedNames.add(fqFeatureName);
+            candidates.add(assignment);
           }
-          return _xblockexpression;
+          _xblockexpression_1 = candidates;
         }
+        return _xblockexpression_1;
       };
       final ArrayList<Assignment> assignments = IterableExtensions.<Assignment, ArrayList<Assignment>>fold(_containedAssignments, _newArrayList, _function);
       Grammar _grammar_2 = this.getGrammar();
       EList<AbstractRule> _rules = _grammar_2.getRules();
       ArrayList<AbstractRule> _newArrayList_1 = CollectionLiterals.<AbstractRule>newArrayList();
-      final Function2<ArrayList<AbstractRule>, AbstractRule, ArrayList<AbstractRule>> _function_1 = new Function2<ArrayList<AbstractRule>, AbstractRule, ArrayList<AbstractRule>>() {
-        @Override
-        public ArrayList<AbstractRule> apply(final ArrayList<AbstractRule> candidates, final AbstractRule rule) {
-          ArrayList<AbstractRule> _xblockexpression = null;
-          {
-            final String fqnFeatureName = ContentAssistFragment2.this.getFQFeatureName(rule);
-            if (((!processedNames.contains(fqnFeatureName)) && (!excludedFqnFeatureNames.contains(fqnFeatureName)))) {
-              processedNames.add(fqnFeatureName);
-              candidates.add(rule);
-            }
-            _xblockexpression = candidates;
+      final Function2<ArrayList<AbstractRule>, AbstractRule, ArrayList<AbstractRule>> _function_1 = (ArrayList<AbstractRule> candidates, AbstractRule rule) -> {
+        ArrayList<AbstractRule> _xblockexpression_1 = null;
+        {
+          final String fqnFeatureName = this.getFQFeatureName(rule);
+          if (((!processedNames.contains(fqnFeatureName)) && (!excludedFqnFeatureNames.contains(fqnFeatureName)))) {
+            processedNames.add(fqnFeatureName);
+            candidates.add(rule);
           }
-          return _xblockexpression;
+          _xblockexpression_1 = candidates;
         }
+        return _xblockexpression_1;
       };
       final ArrayList<AbstractRule> remainingRules = IterableExtensions.<AbstractRule, ArrayList<AbstractRule>>fold(_rules, _newArrayList_1, _function_1);
       TypeReference _xifexpression = null;
@@ -311,103 +305,100 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
       }
       final TypeReference genClass = _xifexpression;
       GeneratedJavaFileAccess _createGeneratedJavaFile = this.fileAccessFactory.createGeneratedJavaFile(genClass);
-      final Procedure1<GeneratedJavaFileAccess> _function_2 = new Procedure1<GeneratedJavaFileAccess>() {
-        @Override
-        public void apply(final GeneratedJavaFileAccess it) {
-          Grammar _grammar = ContentAssistFragment2.this.getGrammar();
-          final TypeReference superClass = ContentAssistFragment2.this.getGenProposalProviderSuperClass(_grammar);
-          StringConcatenationClient _client = new StringConcatenationClient() {
-            @Override
-            protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-              _builder.append("/**");
-              _builder.newLine();
-              _builder.append(" ");
-              _builder.append("* Represents a generated, default implementation of superclass {@link ");
-              _builder.append(superClass, " ");
-              _builder.append("}.");
-              _builder.newLineIfNotEmpty();
-              _builder.append(" ");
-              _builder.append("* Methods are dynamically dispatched on the first parameter, i.e., you can override them ");
-              _builder.newLine();
-              _builder.append(" ");
-              _builder.append("* with a more concrete subtype. ");
-              _builder.newLine();
-              _builder.append(" ");
-              _builder.append("*/");
-              _builder.newLine();
-            }
-          };
-          it.setTypeComment(_client);
-          StringConcatenationClient _client_1 = new StringConcatenationClient() {
-            @Override
-            protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-              _builder.append("public ");
-              {
-                boolean _isGenerateStub = ContentAssistFragment2.this.isGenerateStub();
-                if (_isGenerateStub) {
-                  _builder.append("abstract ");
-                }
+      final Procedure1<GeneratedJavaFileAccess> _function_2 = (GeneratedJavaFileAccess it) -> {
+        Grammar _grammar_5 = this.getGrammar();
+        final TypeReference superClass = this.getGenProposalProviderSuperClass(_grammar_5);
+        StringConcatenationClient _client = new StringConcatenationClient() {
+          @Override
+          protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+            _builder.append("/**");
+            _builder.newLine();
+            _builder.append(" ");
+            _builder.append("* Represents a generated, default implementation of superclass {@link ");
+            _builder.append(superClass, " ");
+            _builder.append("}.");
+            _builder.newLineIfNotEmpty();
+            _builder.append(" ");
+            _builder.append("* Methods are dynamically dispatched on the first parameter, i.e., you can override them ");
+            _builder.newLine();
+            _builder.append(" ");
+            _builder.append("* with a more concrete subtype. ");
+            _builder.newLine();
+            _builder.append(" ");
+            _builder.append("*/");
+            _builder.newLine();
+          }
+        };
+        it.setTypeComment(_client);
+        StringConcatenationClient _client_1 = new StringConcatenationClient() {
+          @Override
+          protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+            _builder.append("public ");
+            {
+              boolean _isGenerateStub = ContentAssistFragment2.this.isGenerateStub();
+              if (_isGenerateStub) {
+                _builder.append("abstract ");
               }
-              _builder.append("class ");
-              String _simpleName = genClass.getSimpleName();
-              _builder.append(_simpleName, "");
-              _builder.append(" extends ");
-              _builder.append(superClass, "");
-              _builder.append(" {");
-              _builder.newLineIfNotEmpty();
-              _builder.newLine();
-              {
-                boolean _isEmpty = assignments.isEmpty();
-                boolean _not = (!_isEmpty);
-                if (_not) {
-                  {
-                    for(final Assignment assignment : assignments) {
-                      _builder.append("\t");
-                      StringConcatenationClient _handleAssignment = ContentAssistFragment2.this.handleAssignment(assignment);
-                      _builder.append(_handleAssignment, "\t");
-                      _builder.newLineIfNotEmpty();
-                    }
+            }
+            _builder.append("class ");
+            String _simpleName = genClass.getSimpleName();
+            _builder.append(_simpleName, "");
+            _builder.append(" extends ");
+            _builder.append(superClass, "");
+            _builder.append(" {");
+            _builder.newLineIfNotEmpty();
+            _builder.newLine();
+            {
+              boolean _isEmpty = assignments.isEmpty();
+              boolean _not = (!_isEmpty);
+              if (_not) {
+                {
+                  for(final Assignment assignment : assignments) {
+                    _builder.append("\t");
+                    StringConcatenationClient _handleAssignment = ContentAssistFragment2.this.handleAssignment(assignment);
+                    _builder.append(_handleAssignment, "\t");
+                    _builder.newLineIfNotEmpty();
                   }
-                  _builder.newLine();
                 }
+                _builder.newLine();
               }
-              {
-                for(final AbstractRule rule : remainingRules) {
-                  _builder.append("\t");
-                  _builder.append("public void complete");
-                  String _fQFeatureName = ContentAssistFragment2.this.getFQFeatureName(rule);
-                  _builder.append(_fQFeatureName, "\t");
-                  _builder.append("(");
-                  _builder.append(EObject.class, "\t");
-                  _builder.append(" model, ");
-                  _builder.append(RuleCall.class, "\t");
-                  _builder.append(" ruleCall, ");
-                  TypeReference _contentAssistContextClass = ContentAssistFragment2.this.getContentAssistContextClass();
-                  _builder.append(_contentAssistContextClass, "\t");
-                  _builder.append(" context, ");
-                  TypeReference _iCompletionProposalAcceptorClass = ContentAssistFragment2.this.getICompletionProposalAcceptorClass();
-                  _builder.append(_iCompletionProposalAcceptorClass, "\t");
-                  _builder.append(" acceptor) {");
-                  _builder.newLineIfNotEmpty();
-                  _builder.append("\t");
-                  _builder.append("\t");
-                  _builder.append("// subclasses may override");
-                  _builder.newLine();
-                  _builder.append("\t");
-                  _builder.append("}");
-                  _builder.newLine();
-                }
-              }
-              _builder.append("}");
-              _builder.newLine();
             }
-          };
-          it.setContent(_client_1);
-          IXtextProjectConfig _projectConfig = ContentAssistFragment2.this.getProjectConfig();
-          IBundleProjectConfig _eclipsePlugin = _projectConfig.getEclipsePlugin();
-          IXtextGeneratorFileSystemAccess _srcGen = _eclipsePlugin.getSrcGen();
-          it.writeTo(_srcGen);
-        }
+            {
+              for(final AbstractRule rule : remainingRules) {
+                _builder.append("\t");
+                _builder.append("public void complete");
+                String _fQFeatureName = ContentAssistFragment2.this.getFQFeatureName(rule);
+                _builder.append(_fQFeatureName, "\t");
+                _builder.append("(");
+                _builder.append(EObject.class, "\t");
+                _builder.append(" model, ");
+                _builder.append(RuleCall.class, "\t");
+                _builder.append(" ruleCall, ");
+                TypeReference _contentAssistContextClass = ContentAssistFragment2.this.getContentAssistContextClass();
+                _builder.append(_contentAssistContextClass, "\t");
+                _builder.append(" context, ");
+                TypeReference _iCompletionProposalAcceptorClass = ContentAssistFragment2.this.getICompletionProposalAcceptorClass();
+                _builder.append(_iCompletionProposalAcceptorClass, "\t");
+                _builder.append(" acceptor) {");
+                _builder.newLineIfNotEmpty();
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append("// subclasses may override");
+                _builder.newLine();
+                _builder.append("\t");
+                _builder.append("}");
+                _builder.newLine();
+              }
+            }
+            _builder.append("}");
+            _builder.newLine();
+          }
+        };
+        it.setContent(_client_1);
+        IXtextProjectConfig _projectConfig = this.getProjectConfig();
+        IBundleProjectConfig _eclipsePlugin = _projectConfig.getEclipsePlugin();
+        IXtextGeneratorFileSystemAccess _srcGen = _eclipsePlugin.getSrcGen();
+        it.writeTo(_srcGen);
       };
       _xblockexpression = ObjectExtensions.<GeneratedJavaFileAccess>operator_doubleArrow(_createGeneratedJavaFile, _function_2);
     }
@@ -419,28 +410,19 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
     {
       ParserRule _containingParserRule = GrammarUtil.containingParserRule(assignment);
       List<Assignment> _containedAssignments = GrammarUtil.containedAssignments(_containingParserRule);
-      final Function1<Assignment, Boolean> _function = new Function1<Assignment, Boolean>() {
-        @Override
-        public Boolean apply(final Assignment it) {
-          String _feature = it.getFeature();
-          String _feature_1 = assignment.getFeature();
-          return Boolean.valueOf(Objects.equal(_feature, _feature_1));
-        }
+      final Function1<Assignment, Boolean> _function = (Assignment it) -> {
+        String _feature = it.getFeature();
+        String _feature_1 = assignment.getFeature();
+        return Boolean.valueOf(Objects.equal(_feature, _feature_1));
       };
       Iterable<Assignment> _filter = IterableExtensions.<Assignment>filter(_containedAssignments, _function);
-      final Function1<Assignment, AbstractElement> _function_1 = new Function1<Assignment, AbstractElement>() {
-        @Override
-        public AbstractElement apply(final Assignment it) {
-          return it.getTerminal();
-        }
+      final Function1<Assignment, AbstractElement> _function_1 = (Assignment it) -> {
+        return it.getTerminal();
       };
       Iterable<AbstractElement> _map = IterableExtensions.<Assignment, AbstractElement>map(_filter, _function_1);
       final List<AbstractElement> terminals = IterableExtensions.<AbstractElement>toList(_map);
-      final Function1<AbstractElement, EClass> _function_2 = new Function1<AbstractElement, EClass>() {
-        @Override
-        public EClass apply(final AbstractElement it) {
-          return it.eClass();
-        }
+      final Function1<AbstractElement, EClass> _function_2 = (AbstractElement it) -> {
+        return it.eClass();
       };
       List<EClass> _map_1 = ListExtensions.<AbstractElement, EClass>map(terminals, _function_2);
       final Set<EClass> terminalTypes = IterableExtensions.<EClass>toSet(_map_1);
@@ -498,23 +480,20 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
     {
       final HashSet<EClass> processedTerminals = CollectionLiterals.<EClass>newHashSet();
       ArrayList<AbstractElement> _newArrayList = CollectionLiterals.<AbstractElement>newArrayList();
-      final Function2<ArrayList<AbstractElement>, AbstractElement, ArrayList<AbstractElement>> _function = new Function2<ArrayList<AbstractElement>, AbstractElement, ArrayList<AbstractElement>>() {
-        @Override
-        public ArrayList<AbstractElement> apply(final ArrayList<AbstractElement> candidates, final AbstractElement terminal) {
-          ArrayList<AbstractElement> _xblockexpression = null;
-          {
-            EClass _eClass = terminal.eClass();
-            boolean _contains = processedTerminals.contains(_eClass);
-            boolean _not = (!_contains);
-            if (_not) {
-              EClass _eClass_1 = terminal.eClass();
-              processedTerminals.add(_eClass_1);
-              candidates.add(terminal);
-            }
-            _xblockexpression = candidates;
+      final Function2<ArrayList<AbstractElement>, AbstractElement, ArrayList<AbstractElement>> _function = (ArrayList<AbstractElement> candidates, AbstractElement terminal) -> {
+        ArrayList<AbstractElement> _xblockexpression_1 = null;
+        {
+          EClass _eClass = terminal.eClass();
+          boolean _contains = processedTerminals.contains(_eClass);
+          boolean _not = (!_contains);
+          if (_not) {
+            EClass _eClass_1 = terminal.eClass();
+            processedTerminals.add(_eClass_1);
+            candidates.add(terminal);
           }
-          return _xblockexpression;
+          _xblockexpression_1 = candidates;
         }
+        return _xblockexpression_1;
       };
       final ArrayList<AbstractElement> candidates = IterableExtensions.<AbstractElement, ArrayList<AbstractElement>>fold(terminals, _newArrayList, _function);
       StringConcatenationClient _client = new StringConcatenationClient() {
@@ -647,19 +626,13 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
   
   private Iterable<String> computeFQFeatureNames(final Grammar g) {
     List<Assignment> _containedAssignments = GrammarUtil.containedAssignments(g);
-    final Function1<Assignment, String> _function = new Function1<Assignment, String>() {
-      @Override
-      public String apply(final Assignment it) {
-        return ContentAssistFragment2.this.getFQFeatureName(it);
-      }
+    final Function1<Assignment, String> _function = (Assignment it) -> {
+      return this.getFQFeatureName(it);
     };
     List<String> _map = ListExtensions.<Assignment, String>map(_containedAssignments, _function);
     EList<AbstractRule> _rules = g.getRules();
-    final Function1<AbstractRule, String> _function_1 = new Function1<AbstractRule, String>() {
-      @Override
-      public String apply(final AbstractRule it) {
-        return ContentAssistFragment2.this.getFQFeatureName(it);
-      }
+    final Function1<AbstractRule, String> _function_1 = (AbstractRule it) -> {
+      return this.getFQFeatureName(it);
     };
     List<String> _map_1 = ListExtensions.<AbstractRule, String>map(_rules, _function_1);
     return Iterables.<String>concat(_map, _map_1);
@@ -675,11 +648,8 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
         Iterable<String> _computeFQFeatureNames = this.computeFQFeatureNames(g);
         final Set<String> thisGrammarFqFeatureNames = IterableExtensions.<String>toSet(_computeFQFeatureNames);
         List<Grammar> _allUsedGrammars = GrammarUtil.allUsedGrammars(g);
-        final Function1<Grammar, Iterable<String>> _function = new Function1<Grammar, Iterable<String>>() {
-          @Override
-          public Iterable<String> apply(final Grammar it) {
-            return ContentAssistFragment2.this.computeFQFeatureNames(it);
-          }
+        final Function1<Grammar, Iterable<String>> _function = (Grammar it) -> {
+          return this.computeFQFeatureNames(it);
         };
         List<Iterable<String>> _map = ListExtensions.<Grammar, Iterable<String>>map(_allUsedGrammars, _function);
         Iterable<String> _flatten = Iterables.<String>concat(_map);

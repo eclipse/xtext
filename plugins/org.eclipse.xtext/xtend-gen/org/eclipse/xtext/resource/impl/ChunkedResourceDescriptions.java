@@ -139,11 +139,8 @@ public class ChunkedResourceDescriptions extends AbstractCompoundSelectable impl
   @Override
   public Iterable<IResourceDescription> getAllResourceDescriptions() {
     Collection<ResourceDescriptionsData> _values = this.chunk2resourceDescriptions.values();
-    final Function1<ResourceDescriptionsData, Iterable<IResourceDescription>> _function = new Function1<ResourceDescriptionsData, Iterable<IResourceDescription>>() {
-      @Override
-      public Iterable<IResourceDescription> apply(final ResourceDescriptionsData it) {
-        return it.getAllResourceDescriptions();
-      }
+    final Function1<ResourceDescriptionsData, Iterable<IResourceDescription>> _function = (ResourceDescriptionsData it) -> {
+      return it.getAllResourceDescriptions();
     };
     Iterable<Iterable<IResourceDescription>> _map = IterableExtensions.<ResourceDescriptionsData, Iterable<IResourceDescription>>map(_values, _function);
     return Iterables.<IResourceDescription>concat(_map);
@@ -209,43 +206,34 @@ public class ChunkedResourceDescriptions extends AbstractCompoundSelectable impl
     int _size = _entrySet.size();
     out.writeInt(_size);
     Set<Map.Entry<String, ResourceDescriptionsData>> _entrySet_1 = copy.entrySet();
-    final Consumer<Map.Entry<String, ResourceDescriptionsData>> _function = new Consumer<Map.Entry<String, ResourceDescriptionsData>>() {
-      @Override
-      public void accept(final Map.Entry<String, ResourceDescriptionsData> it) {
-        try {
-          String _key = it.getKey();
-          out.writeUTF(_key);
-          ResourceDescriptionsData _value = it.getValue();
-          Iterable<IResourceDescription> _allResourceDescriptions = _value.getAllResourceDescriptions();
-          final Function1<IResourceDescription, Object> _function = new Function1<IResourceDescription, Object>() {
-            @Override
-            public Object apply(final IResourceDescription it) {
-              Object _xifexpression = null;
-              if ((it instanceof Serializable)) {
-                _xifexpression = ((Object)it);
-              } else {
-                _xifexpression = SerializableResourceDescription.createCopy(it);
-              }
-              return ((Object)_xifexpression);
-            }
-          };
-          final Iterable<Object> descriptions = IterableExtensions.<IResourceDescription, Object>map(_allResourceDescriptions, _function);
-          int _size = IterableExtensions.size(descriptions);
-          out.writeInt(_size);
-          final Consumer<Object> _function_1 = new Consumer<Object>() {
-            @Override
-            public void accept(final Object it) {
-              try {
-                out.writeObject(it);
-              } catch (Throwable _e) {
-                throw Exceptions.sneakyThrow(_e);
-              }
-            }
-          };
-          descriptions.forEach(_function_1);
-        } catch (Throwable _e) {
-          throw Exceptions.sneakyThrow(_e);
-        }
+    final Consumer<Map.Entry<String, ResourceDescriptionsData>> _function = (Map.Entry<String, ResourceDescriptionsData> it) -> {
+      try {
+        String _key = it.getKey();
+        out.writeUTF(_key);
+        ResourceDescriptionsData _value = it.getValue();
+        Iterable<IResourceDescription> _allResourceDescriptions = _value.getAllResourceDescriptions();
+        final Function1<IResourceDescription, Object> _function_1 = (IResourceDescription it_1) -> {
+          Object _xifexpression = null;
+          if ((it_1 instanceof Serializable)) {
+            _xifexpression = ((Object)it_1);
+          } else {
+            _xifexpression = SerializableResourceDescription.createCopy(it_1);
+          }
+          return ((Object)_xifexpression);
+        };
+        final Iterable<Object> descriptions = IterableExtensions.<IResourceDescription, Object>map(_allResourceDescriptions, _function_1);
+        int _size_1 = IterableExtensions.size(descriptions);
+        out.writeInt(_size_1);
+        final Consumer<Object> _function_2 = (Object it_1) -> {
+          try {
+            out.writeObject(it_1);
+          } catch (Throwable _e) {
+            throw Exceptions.sneakyThrow(_e);
+          }
+        };
+        descriptions.forEach(_function_2);
+      } catch (Throwable _e) {
+        throw Exceptions.sneakyThrow(_e);
       }
     };
     _entrySet_1.forEach(_function);

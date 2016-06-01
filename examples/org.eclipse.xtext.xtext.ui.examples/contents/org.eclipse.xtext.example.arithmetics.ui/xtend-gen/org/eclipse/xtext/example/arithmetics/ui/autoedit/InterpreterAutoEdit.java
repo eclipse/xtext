@@ -63,15 +63,12 @@ public class InterpreterAutoEdit implements IAutoEditStrategy {
   }
   
   private BigDecimal computeResult(final IDocument document, final DocumentCommand command) {
-    final IUnitOfWork<BigDecimal, XtextResource> _function = new IUnitOfWork<BigDecimal, XtextResource>() {
-      @Override
-      public BigDecimal exec(final XtextResource resource) throws Exception {
-        Evaluation stmt = InterpreterAutoEdit.this.findEvaluation(command, resource);
-        if ((stmt == null)) {
-          return null;
-        }
-        return InterpreterAutoEdit.this.evaluate(stmt);
+    final IUnitOfWork<BigDecimal, XtextResource> _function = (XtextResource resource) -> {
+      Evaluation stmt = this.findEvaluation(command, resource);
+      if ((stmt == null)) {
+        return null;
       }
+      return this.evaluate(stmt);
     };
     return ((IXtextDocument) document).<BigDecimal>readOnly(_function);
   }

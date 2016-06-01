@@ -149,18 +149,15 @@ public class ClasspathBasedIdeTypesProposalProvider implements IIdeTypesProposal
         _xifexpression = typeDesc.getSimpleName();
       }
       final String proposal = _xifexpression;
-      final Procedure1<ContentAssistEntry> _function = new Procedure1<ContentAssistEntry>() {
-        @Override
-        public void apply(final ContentAssistEntry it) {
-          if (importDecl) {
-            String _simpleName = typeDesc.getSimpleName();
-            it.setLabel(_simpleName);
-            it.setDescription(proposal);
-          } else {
-            it.setDescription(qualifiedName);
-            if (((importSectionRegion != null) && ClasspathBasedIdeTypesProposalProvider.this.isImportDeclarationRequired(typeDesc, qualifiedName, context, importSection))) {
-              ClasspathBasedIdeTypesProposalProvider.this.addImportDeclaration(it, importSectionRegion, typeDesc, qualifiedName, context);
-            }
+      final Procedure1<ContentAssistEntry> _function = (ContentAssistEntry it) -> {
+        if (importDecl) {
+          String _simpleName = typeDesc.getSimpleName();
+          it.setLabel(_simpleName);
+          it.setDescription(proposal);
+        } else {
+          it.setDescription(qualifiedName);
+          if (((importSectionRegion != null) && this.isImportDeclarationRequired(typeDesc, qualifiedName, context, importSection))) {
+            this.addImportDeclaration(it, importSectionRegion, typeDesc, qualifiedName, context);
           }
         }
       };
@@ -174,17 +171,14 @@ public class ClasspathBasedIdeTypesProposalProvider implements IIdeTypesProposal
   }
   
   protected boolean isImportDeclarationRequired(final ITypeDescriptor typeDesc, final String qualifiedName, final ContentAssistContext context, final XImportSection importSection) {
-    return ((!(typeDesc.getName().startsWith("java.lang") && (typeDesc.getName().lastIndexOf(".") == 9))) && ((importSection == null) || (!IterableExtensions.<XImportDeclaration>exists(importSection.getImportDeclarations(), new Function1<XImportDeclaration, Boolean>() {
-      @Override
-      public Boolean apply(final XImportDeclaration it) {
-        JvmDeclaredType _importedType = it.getImportedType();
-        String _qualifiedName = null;
-        if (_importedType!=null) {
-          _qualifiedName=_importedType.getQualifiedName();
-        }
-        return Boolean.valueOf(Objects.equal(_qualifiedName, qualifiedName));
+    return ((!(typeDesc.getName().startsWith("java.lang") && (typeDesc.getName().lastIndexOf(".") == 9))) && ((importSection == null) || (!IterableExtensions.<XImportDeclaration>exists(importSection.getImportDeclarations(), ((Function1<XImportDeclaration, Boolean>) (XImportDeclaration it) -> {
+      JvmDeclaredType _importedType = it.getImportedType();
+      String _qualifiedName = null;
+      if (_importedType!=null) {
+        _qualifiedName=_importedType.getQualifiedName();
       }
-    }))));
+      return Boolean.valueOf(Objects.equal(_qualifiedName, qualifiedName));
+    })))));
   }
   
   protected boolean addImportDeclaration(final ContentAssistEntry entry, final ITextRegion importSectionRegion, final ITypeDescriptor typeDesc, final String qualifiedName, final ContentAssistContext context) {

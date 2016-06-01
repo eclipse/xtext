@@ -125,11 +125,8 @@ public class ConstantExpressionValidator {
         }
         EList<JvmAnnotationValue> _values = annotationReference.getValues();
         Iterable<JvmBooleanAnnotationValue> _filter = Iterables.<JvmBooleanAnnotationValue>filter(_values, JvmBooleanAnnotationValue.class);
-        final Function1<JvmBooleanAnnotationValue, Boolean> _function = new Function1<JvmBooleanAnnotationValue, Boolean>() {
-          @Override
-          public Boolean apply(final JvmBooleanAnnotationValue it) {
-            return Boolean.valueOf((Objects.equal(it.getValueName(), "constantExpression") && IterableExtensions.<Boolean>head(it.getValues()).booleanValue()));
-          }
+        final Function1<JvmBooleanAnnotationValue, Boolean> _function = (JvmBooleanAnnotationValue it) -> {
+          return Boolean.valueOf((Objects.equal(it.getValueName(), "constantExpression") && IterableExtensions.<Boolean>head(it.getValues()).booleanValue()));
         };
         boolean _exists = IterableExtensions.<JvmBooleanAnnotationValue>exists(_filter, _function);
         if (_exists) {
@@ -143,12 +140,9 @@ public class ConstantExpressionValidator {
             _xifexpression = this.isConstant(_actualReceiver_1);
           }
           final boolean receiverConstant = _xifexpression;
-          return (receiverConstant && IterableExtensions.<XExpression>forall(expression.getActualArguments(), new Function1<XExpression, Boolean>() {
-            @Override
-            public Boolean apply(final XExpression it) {
-              return Boolean.valueOf(ConstantExpressionValidator.this.isConstant(it));
-            }
-          }));
+          return (receiverConstant && IterableExtensions.<XExpression>forall(expression.getActualArguments(), ((Function1<XExpression, Boolean>) (XExpression it) -> {
+            return Boolean.valueOf(this.isConstant(it));
+          })));
         }
       }
     }

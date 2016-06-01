@@ -38,23 +38,17 @@ public class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
     Resource _eResource = e.eResource();
     String _name = this.name(_eResource);
     JvmGenericType _class = this._jvmTypesBuilder.toClass(e, _name);
-    final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
-      @Override
-      public void apply(final JvmGenericType it) {
-        EList<JvmMember> _members = it.getMembers();
-        JvmTypeReference _inferredType = PureXbaseJvmModelInferrer.this._jvmTypesBuilder.inferredType();
-        final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
-          @Override
-          public void apply(final JvmOperation it) {
-            EList<JvmTypeReference> _exceptions = it.getExceptions();
-            JvmTypeReference _typeRef = PureXbaseJvmModelInferrer.this._typeReferenceBuilder.typeRef(Throwable.class);
-            PureXbaseJvmModelInferrer.this._jvmTypesBuilder.<JvmTypeReference>operator_add(_exceptions, _typeRef);
-            PureXbaseJvmModelInferrer.this._jvmTypesBuilder.setBody(it, e);
-          }
-        };
-        JvmOperation _method = PureXbaseJvmModelInferrer.this._jvmTypesBuilder.toMethod(e, "myMethod", _inferredType, _function);
-        PureXbaseJvmModelInferrer.this._jvmTypesBuilder.<JvmOperation>operator_add(_members, _method);
-      }
+    final Procedure1<JvmGenericType> _function = (JvmGenericType it) -> {
+      EList<JvmMember> _members = it.getMembers();
+      JvmTypeReference _inferredType = this._jvmTypesBuilder.inferredType();
+      final Procedure1<JvmOperation> _function_1 = (JvmOperation it_1) -> {
+        EList<JvmTypeReference> _exceptions = it_1.getExceptions();
+        JvmTypeReference _typeRef = this._typeReferenceBuilder.typeRef(Throwable.class);
+        this._jvmTypesBuilder.<JvmTypeReference>operator_add(_exceptions, _typeRef);
+        this._jvmTypesBuilder.setBody(it_1, e);
+      };
+      JvmOperation _method = this._jvmTypesBuilder.toMethod(e, "myMethod", _inferredType, _function_1);
+      this._jvmTypesBuilder.<JvmOperation>operator_add(_members, _method);
     };
     acceptor.<JvmGenericType>accept(_class, _function);
   }

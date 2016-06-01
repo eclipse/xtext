@@ -34,7 +34,7 @@ Require-Bundle: org.eclipse.xtext.ui,
  org.eclipse.jdt.launching;bundle-version="3.5.0"
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: %providerName
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.eclipse.xtext.ui.contentassist;x-internal:=true,
  org.eclipse.xtext.ui.contentassist.antlr;x-internal:=true,
  org.eclipse.xtext.ui.contentassist.antlr.internal;x-internal:=true,

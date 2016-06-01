@@ -47,11 +47,8 @@ public class JavaResource extends ResourceImpl implements IJavaSchemeUriResolver
     @Override
     public Resource createResource(final URI uri) {
       JavaResource _get = this.resourceProvider.get();
-      final Procedure1<JavaResource> _function = new Procedure1<JavaResource>() {
-        @Override
-        public void apply(final JavaResource it) {
-          it.setURI(uri);
-        }
+      final Procedure1<JavaResource> _function = (JavaResource it) -> {
+        it.setURI(uri);
       };
       return ObjectExtensions.<JavaResource>operator_doubleArrow(_get, _function);
     }
@@ -123,23 +120,17 @@ public class JavaResource extends ResourceImpl implements IJavaSchemeUriResolver
   }
   
   public void installStubs() {
-    final Procedure0 _function = new Procedure0() {
-      @Override
-      public void apply() {
-        JavaResource.this.derivedStateComputer.installStubs(JavaResource.this);
-        JavaResource.this.initialized = true;
-      }
+    final Procedure0 _function = () -> {
+      this.derivedStateComputer.installStubs(this);
+      this.initialized = true;
     };
     this.initializing(_function);
   }
   
   public void installFull() {
-    final Procedure0 _function = new Procedure0() {
-      @Override
-      public void apply() {
-        JavaResource.this.derivedStateComputer.installFull(JavaResource.this);
-        JavaResource.this.initialized = true;
-      }
+    final Procedure0 _function = () -> {
+      this.derivedStateComputer.installFull(this);
+      this.initialized = true;
     };
     this.initializing(_function);
   }
@@ -154,12 +145,9 @@ public class JavaResource extends ResourceImpl implements IJavaSchemeUriResolver
   }
   
   public void discardDerivedState() {
-    final Procedure0 _function = new Procedure0() {
-      @Override
-      public void apply() {
-        JavaResource.this.derivedStateComputer.discardDerivedState(JavaResource.this);
-        JavaResource.this.initialized = false;
-      }
+    final Procedure0 _function = () -> {
+      this.derivedStateComputer.discardDerivedState(this);
+      this.initialized = false;
     };
     this.initializing(_function);
   }

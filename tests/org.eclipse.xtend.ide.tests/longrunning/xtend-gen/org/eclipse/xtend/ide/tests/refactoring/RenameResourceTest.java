@@ -6,7 +6,6 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceRunnable;
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
@@ -93,11 +92,8 @@ public class RenameResourceTest extends AbstractXtendUITestCase {
         renameRefactoring.checkAllConditions(_nullProgressMonitor);
         NullProgressMonitor _nullProgressMonitor_1 = new NullProgressMonitor();
         final Change change = renameRefactoring.createChange(_nullProgressMonitor_1);
-        final IWorkspaceRunnable _function = new IWorkspaceRunnable() {
-          @Override
-          public void run(final IProgressMonitor it) throws CoreException {
-            change.perform(it);
-          }
+        final IWorkspaceRunnable _function = (IProgressMonitor it) -> {
+          change.perform(it);
         };
         NullProgressMonitor _nullProgressMonitor_2 = new NullProgressMonitor();
         this.workspace.run(_function, _nullProgressMonitor_2);

@@ -699,11 +699,8 @@ public class GrammarAccessExtensions {
       boolean _isDefinesHiddenTokens = it.isDefinesHiddenTokens();
       if (_isDefinesHiddenTokens) {
         EList<AbstractRule> _hiddenTokens = it.getHiddenTokens();
-        final Function1<AbstractRule, String> _function = new Function1<AbstractRule, String>() {
-          @Override
-          public String apply(final AbstractRule it) {
-            return GrammarAccessExtensions.this.ruleName(it);
-          }
+        final Function1<AbstractRule, String> _function = (AbstractRule it_1) -> {
+          return this.ruleName(it_1);
         };
         List<String> _map = ListExtensions.<AbstractRule, String>map(_hiddenTokens, _function);
         return IterableExtensions.<String>toList(_map);
@@ -745,18 +742,12 @@ public class GrammarAccessExtensions {
     boolean _xblockexpression = false;
     {
       final List<AbstractRule> allRules = GrammarUtil.allRules(grammar);
-      _xblockexpression = ((allRules.indexOf(rule) == 0) || IterableExtensions.<RuleCall>exists(Iterables.<RuleCall>concat(ListExtensions.<AbstractRule, List<RuleCall>>map(allRules, new Function1<AbstractRule, List<RuleCall>>() {
-        @Override
-        public List<RuleCall> apply(final AbstractRule it) {
-          return GrammarUtil.containedRuleCalls(it);
-        }
-      })), new Function1<RuleCall, Boolean>() {
-        @Override
-        public Boolean apply(final RuleCall ruleCall) {
-          AbstractRule _rule = ruleCall.getRule();
-          return Boolean.valueOf(Objects.equal(_rule, rule));
-        }
-      }));
+      _xblockexpression = ((allRules.indexOf(rule) == 0) || IterableExtensions.<RuleCall>exists(Iterables.<RuleCall>concat(ListExtensions.<AbstractRule, List<RuleCall>>map(allRules, ((Function1<AbstractRule, List<RuleCall>>) (AbstractRule it) -> {
+        return GrammarUtil.containedRuleCalls(it);
+      }))), ((Function1<RuleCall, Boolean>) (RuleCall ruleCall) -> {
+        AbstractRule _rule = ruleCall.getRule();
+        return Boolean.valueOf(Objects.equal(_rule, rule));
+      })));
     }
     return _xblockexpression;
   }
@@ -858,11 +849,8 @@ public class GrammarAccessExtensions {
   
   protected List<AbstractElement> _contentsAsList(final CompoundElement it) {
     EList<AbstractElement> _elements = it.getElements();
-    final Function1<AbstractElement, List<AbstractElement>> _function = new Function1<AbstractElement, List<AbstractElement>>() {
-      @Override
-      public List<AbstractElement> apply(final AbstractElement it) {
-        return GrammarAccessExtensions.this.contentsAsList(it);
-      }
+    final Function1<AbstractElement, List<AbstractElement>> _function = (AbstractElement it_1) -> {
+      return this.contentsAsList(it_1);
     };
     List<List<AbstractElement>> _map = ListExtensions.<AbstractElement, List<AbstractElement>>map(_elements, _function);
     Iterable<AbstractElement> _flatten = Iterables.<AbstractElement>concat(_map);
@@ -874,11 +862,8 @@ public class GrammarAccessExtensions {
     {
       final ArrayList<AbstractElement> result = CollectionLiterals.<AbstractElement>newArrayList(it);
       EList<AbstractElement> _elements = it.getElements();
-      final Function1<AbstractElement, List<AbstractElement>> _function = new Function1<AbstractElement, List<AbstractElement>>() {
-        @Override
-        public List<AbstractElement> apply(final AbstractElement it) {
-          return GrammarAccessExtensions.this.contentsAsList(it);
-        }
+      final Function1<AbstractElement, List<AbstractElement>> _function = (AbstractElement it_1) -> {
+        return this.contentsAsList(it_1);
       };
       List<List<AbstractElement>> _map = ListExtensions.<AbstractElement, List<AbstractElement>>map(_elements, _function);
       Iterable<AbstractElement> _flatten = Iterables.<AbstractElement>concat(_map);
@@ -949,11 +934,8 @@ public class GrammarAccessExtensions {
     if (_notEquals) {
       return result;
     }
-    final ILineSeparatorInformation _function = new ILineSeparatorInformation() {
-      @Override
-      public String getLineSeparator() {
-        return delimiter;
-      }
+    final ILineSeparatorInformation _function = () -> {
+      return delimiter;
     };
     GrammarAccessExtensions.LineSeparatorModule _lineSeparatorModule = new GrammarAccessExtensions.LineSeparatorModule(_function);
     final Injector injector = Guice.createInjector(_lineSeparatorModule);

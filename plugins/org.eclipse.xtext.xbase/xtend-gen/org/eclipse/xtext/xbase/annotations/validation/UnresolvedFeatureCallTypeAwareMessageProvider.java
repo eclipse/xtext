@@ -121,24 +121,18 @@ public class UnresolvedFeatureCallTypeAwareMessageProvider extends LinkingDiagno
         recieverType = _actualType;
       }
       List<XExpression> _syntacticArguments = this._featureLinkHelper.getSyntacticArguments(featureCall);
-      final Function1<XExpression, LightweightTypeReference> _function = new Function1<XExpression, LightweightTypeReference>() {
-        @Override
-        public LightweightTypeReference apply(final XExpression it) {
-          return types.getActualType(it);
-        }
+      final Function1<XExpression, LightweightTypeReference> _function = (XExpression it) -> {
+        return types.getActualType(it);
       };
       List<LightweightTypeReference> _map = ListExtensions.<XExpression, LightweightTypeReference>map(_syntacticArguments, _function);
-      final Function1<LightweightTypeReference, CharSequence> _function_1 = new Function1<LightweightTypeReference, CharSequence>() {
-        @Override
-        public CharSequence apply(final LightweightTypeReference it) {
-          String _xifexpression = null;
-          if (((it == null) || it.isAny())) {
-            _xifexpression = "Object";
-          } else {
-            _xifexpression = it.getHumanReadableName();
-          }
-          return _xifexpression;
+      final Function1<LightweightTypeReference, CharSequence> _function_1 = (LightweightTypeReference it) -> {
+        String _xifexpression = null;
+        if (((it == null) || it.isAny())) {
+          _xifexpression = "Object";
+        } else {
+          _xifexpression = it.getHumanReadableName();
         }
+        return _xifexpression;
       };
       String _join = IterableExtensions.<LightweightTypeReference>join(_map, ", ", _function_1);
       args = _join;

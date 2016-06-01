@@ -128,42 +128,30 @@ public class ExternalDependency {
   
   public static ExternalDependency createXtextDependency(final String xtextBundle) {
     ExternalDependency _externalDependency = new ExternalDependency();
-    final Procedure1<ExternalDependency> _function = new Procedure1<ExternalDependency>() {
-      @Override
-      public void apply(final ExternalDependency it) {
-        it.p2.bundleId = xtextBundle;
-        final Procedure1<ExternalDependency.MavenCoordinates> _function = new Procedure1<ExternalDependency.MavenCoordinates>() {
-          @Override
-          public void apply(final ExternalDependency.MavenCoordinates it) {
-            it.groupId = "org.eclipse.xtext";
-            it.artifactId = xtextBundle;
-            it.version = "${xtextVersion}";
-          }
-        };
-        it.maven(_function);
-      }
+    final Procedure1<ExternalDependency> _function = (ExternalDependency it) -> {
+      it.p2.bundleId = xtextBundle;
+      final Procedure1<ExternalDependency.MavenCoordinates> _function_1 = (ExternalDependency.MavenCoordinates it_1) -> {
+        it_1.groupId = "org.eclipse.xtext";
+        it_1.artifactId = xtextBundle;
+        it_1.version = "${xtextVersion}";
+      };
+      it.maven(_function_1);
     };
     return ObjectExtensions.<ExternalDependency>operator_doubleArrow(_externalDependency, _function);
   }
   
   public static ExternalDependency createMavenDependency(final String shortNotation) {
     ExternalDependency _externalDependency = new ExternalDependency();
-    final Procedure1<ExternalDependency> _function = new Procedure1<ExternalDependency>() {
-      @Override
-      public void apply(final ExternalDependency it) {
-        it.maven.setShortNotation(shortNotation);
-      }
+    final Procedure1<ExternalDependency> _function = (ExternalDependency it) -> {
+      it.maven.setShortNotation(shortNotation);
     };
     return ObjectExtensions.<ExternalDependency>operator_doubleArrow(_externalDependency, _function);
   }
   
   public static ExternalDependency createBundleDependency(final String bundleId) {
     ExternalDependency _externalDependency = new ExternalDependency();
-    final Procedure1<ExternalDependency> _function = new Procedure1<ExternalDependency>() {
-      @Override
-      public void apply(final ExternalDependency it) {
-        it.p2.bundleId = bundleId;
-      }
+    final Procedure1<ExternalDependency> _function = (ExternalDependency it) -> {
+      it.p2.bundleId = bundleId;
     };
     return ObjectExtensions.<ExternalDependency>operator_doubleArrow(_externalDependency, _function);
   }

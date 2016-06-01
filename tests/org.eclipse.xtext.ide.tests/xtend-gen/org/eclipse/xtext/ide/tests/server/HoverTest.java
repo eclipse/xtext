@@ -94,94 +94,85 @@ public class HoverTest extends AbstractLanguageServerTest {
   
   @Test
   public void testHover_01() {
-    final Procedure1<HoverTest.HoverTestConfiguration> _function = new Procedure1<HoverTest.HoverTestConfiguration>() {
-      @Override
-      public void apply(final HoverTest.HoverTestConfiguration it) {
-        StringConcatenation _builder = new StringConcatenation();
-        _builder.append("/**");
-        _builder.newLine();
-        _builder.append(" ");
-        _builder.append("* Some documentation.");
-        _builder.newLine();
-        _builder.append(" ");
-        _builder.append("*/");
-        _builder.newLine();
-        _builder.append("type Foo {");
-        _builder.newLine();
-        _builder.append("}");
-        _builder.newLine();
-        it.model = _builder.toString();
-        it.line = 3;
-        int _length = "type F".length();
-        it.column = _length;
-        StringConcatenation _builder_1 = new StringConcatenation();
-        _builder_1.append("[[3, 5] .. [3, 8]]");
-        _builder_1.newLine();
-        _builder_1.append("Some documentation.");
-        _builder_1.newLine();
-        it.expectedHover = _builder_1.toString();
-      }
+    final Procedure1<HoverTest.HoverTestConfiguration> _function = (HoverTest.HoverTestConfiguration it) -> {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("/**");
+      _builder.newLine();
+      _builder.append(" ");
+      _builder.append("* Some documentation.");
+      _builder.newLine();
+      _builder.append(" ");
+      _builder.append("*/");
+      _builder.newLine();
+      _builder.append("type Foo {");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      it.model = _builder.toString();
+      it.line = 3;
+      int _length = "type F".length();
+      it.column = _length;
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("[[3, 5] .. [3, 8]]");
+      _builder_1.newLine();
+      _builder_1.append("Some documentation.");
+      _builder_1.newLine();
+      it.expectedHover = _builder_1.toString();
     };
     this.testHover(_function);
   }
   
   @Test
   public void testHover_02() {
-    final Procedure1<HoverTest.HoverTestConfiguration> _function = new Procedure1<HoverTest.HoverTestConfiguration>() {
-      @Override
-      public void apply(final HoverTest.HoverTestConfiguration it) {
-        StringConcatenation _builder = new StringConcatenation();
-        _builder.append("/**");
-        _builder.newLine();
-        _builder.append(" ");
-        _builder.append("* Some documentation.");
-        _builder.newLine();
-        _builder.append(" ");
-        _builder.append("*/");
-        _builder.newLine();
-        _builder.append("type Foo {}");
-        _builder.newLine();
-        it.model = _builder.toString();
-        it.line = 3;
-        int _length = "{".length();
-        it.column = _length;
-      }
+    final Procedure1<HoverTest.HoverTestConfiguration> _function = (HoverTest.HoverTestConfiguration it) -> {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("/**");
+      _builder.newLine();
+      _builder.append(" ");
+      _builder.append("* Some documentation.");
+      _builder.newLine();
+      _builder.append(" ");
+      _builder.append("*/");
+      _builder.newLine();
+      _builder.append("type Foo {}");
+      _builder.newLine();
+      it.model = _builder.toString();
+      it.line = 3;
+      int _length = "{".length();
+      it.column = _length;
     };
     this.testHover(_function);
   }
   
   @Test
   public void testHover_03() {
-    final Procedure1<HoverTest.HoverTestConfiguration> _function = new Procedure1<HoverTest.HoverTestConfiguration>() {
-      @Override
-      public void apply(final HoverTest.HoverTestConfiguration it) {
-        StringConcatenation _builder = new StringConcatenation();
-        _builder.append("/**");
-        _builder.newLine();
-        _builder.append(" ");
-        _builder.append("* Some documentation.");
-        _builder.newLine();
-        _builder.append(" ");
-        _builder.append("*/");
-        _builder.newLine();
-        _builder.append("type Foo {");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("Foo foo");
-        _builder.newLine();
-        _builder.append("}");
-        _builder.newLine();
-        it.model = _builder.toString();
-        it.line = 4;
-        int _length = "\tF".length();
-        it.column = _length;
-        StringConcatenation _builder_1 = new StringConcatenation();
-        _builder_1.append("[[4, 1] .. [4, 4]]");
-        _builder_1.newLine();
-        _builder_1.append("Some documentation.");
-        _builder_1.newLine();
-        it.expectedHover = _builder_1.toString();
-      }
+    final Procedure1<HoverTest.HoverTestConfiguration> _function = (HoverTest.HoverTestConfiguration it) -> {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("/**");
+      _builder.newLine();
+      _builder.append(" ");
+      _builder.append("* Some documentation.");
+      _builder.newLine();
+      _builder.append(" ");
+      _builder.append("*/");
+      _builder.newLine();
+      _builder.append("type Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("Foo foo");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      it.model = _builder.toString();
+      it.line = 4;
+      int _length = "\tF".length();
+      it.column = _length;
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("[[4, 1] .. [4, 4]]");
+      _builder_1.newLine();
+      _builder_1.append("Some documentation.");
+      _builder_1.newLine();
+      it.expectedHover = _builder_1.toString();
     };
     this.testHover(_function);
   }

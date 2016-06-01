@@ -33,22 +33,16 @@ public class RuntimeTestProjectDescriptor extends TestProjectDescriptor {
       Set<ExternalDependency> _externalDependencies = super.getExternalDependencies();
       Iterables.<ExternalDependency>addAll(deps, _externalDependencies);
       ExternalDependency _createXtextDependency = ExternalDependency.createXtextDependency("org.eclipse.xtext.junit4");
-      final Procedure1<ExternalDependency> _function = new Procedure1<ExternalDependency>() {
-        @Override
-        public void apply(final ExternalDependency it) {
-          ExternalDependency.MavenCoordinates _maven = it.getMaven();
-          _maven.setScope(Scope.TESTCOMPILE);
-        }
+      final Procedure1<ExternalDependency> _function = (ExternalDependency it) -> {
+        ExternalDependency.MavenCoordinates _maven = it.getMaven();
+        _maven.setScope(Scope.TESTCOMPILE);
       };
       ExternalDependency _doubleArrow = ObjectExtensions.<ExternalDependency>operator_doubleArrow(_createXtextDependency, _function);
       deps.add(_doubleArrow);
       ExternalDependency _createXtextDependency_1 = ExternalDependency.createXtextDependency("org.eclipse.xtext.xbase.junit");
-      final Procedure1<ExternalDependency> _function_1 = new Procedure1<ExternalDependency>() {
-        @Override
-        public void apply(final ExternalDependency it) {
-          ExternalDependency.MavenCoordinates _maven = it.getMaven();
-          _maven.setScope(Scope.TESTCOMPILE);
-        }
+      final Procedure1<ExternalDependency> _function_1 = (ExternalDependency it) -> {
+        ExternalDependency.MavenCoordinates _maven = it.getMaven();
+        _maven.setScope(Scope.TESTCOMPILE);
       };
       ExternalDependency _doubleArrow_1 = ObjectExtensions.<ExternalDependency>operator_doubleArrow(_createXtextDependency_1, _function_1);
       deps.add(_doubleArrow_1);

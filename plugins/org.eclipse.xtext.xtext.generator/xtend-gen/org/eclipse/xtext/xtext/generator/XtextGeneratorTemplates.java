@@ -381,11 +381,8 @@ public class XtextGeneratorTemplates {
     List<String> _simpleNames = type.getSimpleNames();
     String _join = IterableExtensions.join(_simpleNames, "$");
     List<TypeReference> _typeArguments = type.getTypeArguments();
-    final Function1<TypeReference, CharSequence> _function = new Function1<TypeReference, CharSequence>() {
-      @Override
-      public CharSequence apply(final TypeReference it) {
-        return XtextGeneratorTemplates.this.getSimpleMethodName(it);
-      }
+    final Function1<TypeReference, CharSequence> _function = (TypeReference it) -> {
+      return this.getSimpleMethodName(it);
     };
     String _join_1 = IterableExtensions.<TypeReference>join(_typeArguments, "$", "$", "", _function);
     return (_join + _join_1);

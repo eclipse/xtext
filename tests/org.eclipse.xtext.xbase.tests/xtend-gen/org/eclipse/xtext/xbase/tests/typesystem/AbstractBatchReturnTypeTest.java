@@ -117,20 +117,17 @@ public abstract class AbstractBatchReturnTypeTest extends AbstractReturnTypeTest
     }
     if (!_matched) {
       EList<EObject> _eContents = expression.eContents();
-      final Function1<EObject, Boolean> _function = new Function1<EObject, Boolean>() {
-        @Override
-        public Boolean apply(final EObject content) {
-          boolean _switchResult = false;
-          boolean _matched = false;
-          if (content instanceof XExpression) {
-            _matched=true;
-            _switchResult = AbstractBatchReturnTypeTest.this.hasReturnExpression(((XExpression)content));
-          }
-          if (!_matched) {
-            _switchResult = false;
-          }
-          return Boolean.valueOf(_switchResult);
+      final Function1<EObject, Boolean> _function = (EObject content) -> {
+        boolean _switchResult_1 = false;
+        boolean _matched_1 = false;
+        if (content instanceof XExpression) {
+          _matched_1=true;
+          _switchResult_1 = this.hasReturnExpression(((XExpression)content));
         }
+        if (!_matched_1) {
+          _switchResult_1 = false;
+        }
+        return Boolean.valueOf(_switchResult_1);
       };
       _switchResult = IterableExtensions.<EObject>exists(_eContents, _function);
     }
@@ -150,11 +147,8 @@ public abstract class AbstractBatchReturnTypeTest extends AbstractReturnTypeTest
     String _simpleName = _type.getSimpleName();
     _builder.append(_simpleName, "");
     List<LightweightTypeReference> _typeArguments = type.getTypeArguments();
-    final Function1<LightweightTypeReference, CharSequence> _function = new Function1<LightweightTypeReference, CharSequence>() {
-      @Override
-      public CharSequence apply(final LightweightTypeReference it) {
-        return it.getSimpleName();
-      }
+    final Function1<LightweightTypeReference, CharSequence> _function = (LightweightTypeReference it) -> {
+      return it.getSimpleName();
     };
     String _join = IterableExtensions.<LightweightTypeReference>join(_typeArguments, "<", ", ", ">", _function);
     _builder.append(_join, "");

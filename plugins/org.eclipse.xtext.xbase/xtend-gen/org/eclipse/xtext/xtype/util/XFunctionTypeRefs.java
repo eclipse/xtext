@@ -80,11 +80,8 @@ public class XFunctionTypeRefs {
           _xifexpression = reference;
         } else {
           JvmParameterizedTypeReference _createJvmParameterizedTypeReference = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
-          final Procedure1<JvmParameterizedTypeReference> _function = new Procedure1<JvmParameterizedTypeReference>() {
-            @Override
-            public void apply(final JvmParameterizedTypeReference it) {
-              it.setType(wrappedType);
-            }
+          final Procedure1<JvmParameterizedTypeReference> _function = (JvmParameterizedTypeReference it) -> {
+            it.setType(wrappedType);
           };
           _xifexpression = ObjectExtensions.<JvmParameterizedTypeReference>operator_doubleArrow(_createJvmParameterizedTypeReference, _function);
         }
@@ -99,12 +96,9 @@ public class XFunctionTypeRefs {
         if (_not) {
           _matched=true;
           JvmParameterizedTypeReference _createJvmParameterizedTypeReference = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
-          final Procedure1<JvmParameterizedTypeReference> _function = new Procedure1<JvmParameterizedTypeReference>() {
-            @Override
-            public void apply(final JvmParameterizedTypeReference it) {
-              JvmType _type = XFunctionTypeRefs.getType(Void.class, type);
-              it.setType(_type);
-            }
+          final Procedure1<JvmParameterizedTypeReference> _function = (JvmParameterizedTypeReference it) -> {
+            JvmType _type = XFunctionTypeRefs.getType(Void.class, type);
+            it.setType(_type);
           };
           _switchResult = ObjectExtensions.<JvmParameterizedTypeReference>operator_doubleArrow(_createJvmParameterizedTypeReference, _function);
         }

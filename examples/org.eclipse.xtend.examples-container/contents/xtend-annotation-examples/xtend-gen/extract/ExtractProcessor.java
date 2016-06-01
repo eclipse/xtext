@@ -53,23 +53,20 @@ public class ExtractProcessor extends AbstractClassProcessor {
       boolean _equals = Objects.equal(_visibility, Visibility.PUBLIC);
       if (_equals) {
         String _simpleName = method.getSimpleName();
-        final Procedure1<MutableMethodDeclaration> _function = new Procedure1<MutableMethodDeclaration>() {
-          @Override
-          public void apply(final MutableMethodDeclaration it) {
-            String _docComment = method.getDocComment();
-            it.setDocComment(_docComment);
-            TypeReference _returnType = method.getReturnType();
-            it.setReturnType(_returnType);
-            Iterable<? extends MutableParameterDeclaration> _parameters = method.getParameters();
-            for (final MutableParameterDeclaration p : _parameters) {
-              String _simpleName = p.getSimpleName();
-              TypeReference _type = p.getType();
-              it.addParameter(_simpleName, _type);
-            }
-            Iterable<? extends TypeReference> _exceptions = method.getExceptions();
-            it.setExceptions(((TypeReference[])Conversions.unwrapArray(_exceptions, TypeReference.class)));
-            context.setPrimarySourceElement(it, method);
+        final Procedure1<MutableMethodDeclaration> _function = (MutableMethodDeclaration it) -> {
+          String _docComment = method.getDocComment();
+          it.setDocComment(_docComment);
+          TypeReference _returnType = method.getReturnType();
+          it.setReturnType(_returnType);
+          Iterable<? extends MutableParameterDeclaration> _parameters = method.getParameters();
+          for (final MutableParameterDeclaration p : _parameters) {
+            String _simpleName_1 = p.getSimpleName();
+            TypeReference _type = p.getType();
+            it.addParameter(_simpleName_1, _type);
           }
+          Iterable<? extends TypeReference> _exceptions = method.getExceptions();
+          it.setExceptions(((TypeReference[])Conversions.unwrapArray(_exceptions, TypeReference.class)));
+          context.setPrimarySourceElement(it, method);
         };
         interfaceType.addMethod(_simpleName, _function);
       }

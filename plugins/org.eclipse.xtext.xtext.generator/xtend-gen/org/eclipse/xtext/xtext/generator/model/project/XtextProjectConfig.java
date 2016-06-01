@@ -12,11 +12,11 @@ import com.google.inject.Injector;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Consumer;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.generator.Issues;
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
@@ -50,13 +50,10 @@ public class XtextProjectConfig implements IXtextProjectConfig {
   
   public void checkConfiguration(final Issues issues) {
     List<? extends SubProjectConfig> _enabledProjects = this.getEnabledProjects();
-    final Procedure1<SubProjectConfig> _function = new Procedure1<SubProjectConfig>() {
-      @Override
-      public void apply(final SubProjectConfig it) {
-        it.checkConfiguration(issues);
-      }
+    final Consumer<SubProjectConfig> _function = (SubProjectConfig it) -> {
+      it.checkConfiguration(issues);
     };
-    IterableExtensions.forEach(_enabledProjects, _function);
+    _enabledProjects.forEach(_function);
   }
   
   public List<? extends SubProjectConfig> getAllProjects() {
@@ -86,11 +83,8 @@ public class XtextProjectConfig implements IXtextProjectConfig {
     {
       final ArrayList<SubProjectConfig> enabledProjects = CollectionLiterals.<SubProjectConfig>newArrayList();
       List<? extends SubProjectConfig> _allProjects = this.getAllProjects();
-      final Function1<SubProjectConfig, Boolean> _function = new Function1<SubProjectConfig, Boolean>() {
-        @Override
-        public Boolean apply(final SubProjectConfig it) {
-          return Boolean.valueOf(it.isEnabled());
-        }
+      final Function1<SubProjectConfig, Boolean> _function = (SubProjectConfig it) -> {
+        return Boolean.valueOf(it.isEnabled());
       };
       Iterable<? extends SubProjectConfig> _filter = IterableExtensions.filter(_allProjects, _function);
       Iterables.<SubProjectConfig>addAll(enabledProjects, _filter);
@@ -104,22 +98,16 @@ public class XtextProjectConfig implements IXtextProjectConfig {
     this.setDefaults();
     injector.injectMembers(this);
     List<? extends SubProjectConfig> _enabledProjects = this.getEnabledProjects();
-    final Procedure1<SubProjectConfig> _function = new Procedure1<SubProjectConfig>() {
-      @Override
-      public void apply(final SubProjectConfig it) {
-        it.initialize(injector);
-      }
+    final Consumer<SubProjectConfig> _function = (SubProjectConfig it) -> {
+      it.initialize(injector);
     };
-    IterableExtensions.forEach(_enabledProjects, _function);
+    _enabledProjects.forEach(_function);
   }
   
   public void setDefaults() {
     this.runtime.setEnabled(true);
-    final Function1<SubProjectConfig, Boolean> _function = new Function1<SubProjectConfig, Boolean>() {
-      @Override
-      public Boolean apply(final SubProjectConfig it) {
-        return Boolean.valueOf(it.isEnabled());
-      }
+    final Function1<SubProjectConfig, Boolean> _function = (SubProjectConfig it) -> {
+      return Boolean.valueOf(it.isEnabled());
     };
     boolean _exists = IterableExtensions.exists(Collections.<SubProjectConfig>unmodifiableList(CollectionLiterals.<SubProjectConfig>newArrayList(this.eclipsePlugin, this.ideaPlugin, this.web)), _function);
     if (_exists) {

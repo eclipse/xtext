@@ -31,22 +31,16 @@ class LanguageModule extends AbstractGenericModule {
   
   public ScopedBindingBuilder configureGrammar(final Binder binder) {
     AnnotatedBindingBuilder<Grammar> _bind = binder.<Grammar>bind(Grammar.class);
-    final Provider<Grammar> _function = new Provider<Grammar>() {
-      @Override
-      public Grammar get() {
-        return LanguageModule.this.language.getGrammar();
-      }
+    final Provider<Grammar> _function = () -> {
+      return this.language.getGrammar();
     };
     return _bind.toProvider(_function);
   }
   
   public ScopedBindingBuilder configureRuleNames(final Binder binder) {
     AnnotatedBindingBuilder<RuleNames> _bind = binder.<RuleNames>bind(RuleNames.class);
-    final Provider<RuleNames> _function = new Provider<RuleNames>() {
-      @Override
-      public RuleNames get() {
-        return LanguageModule.this.language.getRuleNames();
-      }
+    final Provider<RuleNames> _function = () -> {
+      return this.language.getRuleNames();
     };
     return _bind.toProvider(_function);
   }

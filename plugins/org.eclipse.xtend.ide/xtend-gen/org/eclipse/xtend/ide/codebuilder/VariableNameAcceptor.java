@@ -35,13 +35,10 @@ public class VariableNameAcceptor implements JdtVariableCompletions.CompletionDa
   
   public String getVariableName() {
     final ArrayList<String> candidates = Lists.<String>newArrayList(this.variableNames);
-    final Comparator<String> _function = new Comparator<String>() {
-      @Override
-      public int compare(final String left, final String right) {
-        int _length = left.length();
-        int _length_1 = right.length();
-        return (_length - _length_1);
-      }
+    final Comparator<String> _function = (String left, String right) -> {
+      int _length = left.length();
+      int _length_1 = right.length();
+      return (_length - _length_1);
     };
     Collections.<String>sort(candidates, _function);
     int _size = candidates.size();

@@ -50,19 +50,16 @@ public class TestableTextSegmentSet {
     _builder.append(_join, "");
     _builder.newLineIfNotEmpty();
     _builder.append("set=");
-    final Function1<ITextSegment, String> _function = new Function1<ITextSegment, String>() {
-      @Override
-      public String apply(final ITextSegment it) {
-        StringConcatenation _builder = new StringConcatenation();
-        _builder.append("[");
-        int _offset = it.getOffset();
-        _builder.append(_offset, "");
-        _builder.append(",");
-        int _length = it.getLength();
-        _builder.append(_length, "");
-        _builder.append("]");
-        return _builder.toString();
-      }
+    final Function1<ITextSegment, String> _function = (ITextSegment it) -> {
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("[");
+      int _offset = it.getOffset();
+      _builder_1.append(_offset, "");
+      _builder_1.append(",");
+      int _length = it.getLength();
+      _builder_1.append(_length, "");
+      _builder_1.append("]");
+      return _builder_1.toString();
     };
     Iterable<String> _map = IterableExtensions.<ITextSegment, String>map(this.set, _function);
     String _string = _map.toString();
@@ -79,20 +76,14 @@ public class TestableTextSegmentSet {
       if (_t instanceof ConflictingRegionsException) {
         final ConflictingRegionsException e = (ConflictingRegionsException)_t;
         Collection<RegionTrace> _traces = e.getTraces();
-        final Function1<RegionTrace, ITextSegment> _function = new Function1<RegionTrace, ITextSegment>() {
-          @Override
-          public ITextSegment apply(final RegionTrace it) {
-            return it.getRegion();
-          }
+        final Function1<RegionTrace, ITextSegment> _function = (RegionTrace it) -> {
+          return it.getRegion();
         };
         final Iterable<ITextSegment> conflicting = IterableExtensions.<RegionTrace, ITextSegment>map(_traces, _function);
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("mergeConflict:");
-        final Function1<ITextSegment, String> _function_1 = new Function1<ITextSegment, String>() {
-          @Override
-          public String apply(final ITextSegment it) {
-            return TestableTextSegmentSet.this.fmt(it);
-          }
+        final Function1<ITextSegment, String> _function_1 = (ITextSegment it) -> {
+          return this.fmt(it);
         };
         Iterable<String> _map = IterableExtensions.<ITextSegment, String>map(conflicting, _function_1);
         String _join = IterableExtensions.join(_map, "<>");

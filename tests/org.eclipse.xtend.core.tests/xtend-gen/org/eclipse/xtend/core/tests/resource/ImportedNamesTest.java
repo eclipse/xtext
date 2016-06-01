@@ -93,12 +93,9 @@ public class ImportedNamesTest extends AbstractXtendTestCase {
       Resource _eResource = file.eResource();
       final IResourceDescription description = this.resourceDescriptionManager.getResourceDescription(_eResource);
       Iterable<QualifiedName> _importedNames = description.getImportedNames();
-      final Function1<QualifiedName, Boolean> _function = new Function1<QualifiedName, Boolean>() {
-        @Override
-        public Boolean apply(final QualifiedName it) {
-          String _lastSegment = it.getLastSegment();
-          return Boolean.valueOf(ImportedNamesTest.this.primitives.contains(_lastSegment));
-        }
+      final Function1<QualifiedName, Boolean> _function = (QualifiedName it) -> {
+        String _lastSegment = it.getLastSegment();
+        return Boolean.valueOf(this.primitives.contains(_lastSegment));
       };
       boolean _exists = IterableExtensions.<QualifiedName>exists(_importedNames, _function);
       Assert.assertFalse(_exists);
@@ -126,12 +123,9 @@ public class ImportedNamesTest extends AbstractXtendTestCase {
       Resource _eResource = file.eResource();
       final IResourceDescription description = this.resourceDescriptionManager.getResourceDescription(_eResource);
       final Iterable<QualifiedName> importedNames = description.getImportedNames();
-      final Function1<QualifiedName, Boolean> _function = new Function1<QualifiedName, Boolean>() {
-        @Override
-        public Boolean apply(final QualifiedName it) {
-          String _lastSegment = it.getLastSegment();
-          return Boolean.valueOf(_lastSegment.equals("collection"));
-        }
+      final Function1<QualifiedName, Boolean> _function = (QualifiedName it) -> {
+        String _lastSegment = it.getLastSegment();
+        return Boolean.valueOf(_lastSegment.equals("collection"));
       };
       boolean _exists = IterableExtensions.<QualifiedName>exists(importedNames, _function);
       Assert.assertTrue(("" + importedNames), _exists);
@@ -164,12 +158,9 @@ public class ImportedNamesTest extends AbstractXtendTestCase {
       Resource _eResource = file.eResource();
       final IResourceDescription description = this.resourceDescriptionManager.getResourceDescription(_eResource);
       final Iterable<QualifiedName> importedNames = description.getImportedNames();
-      final Function1<QualifiedName, Boolean> _function = new Function1<QualifiedName, Boolean>() {
-        @Override
-        public Boolean apply(final QualifiedName it) {
-          String _lastSegment = it.getLastSegment();
-          return Boolean.valueOf(_lastSegment.equals("runnable"));
-        }
+      final Function1<QualifiedName, Boolean> _function = (QualifiedName it) -> {
+        String _lastSegment = it.getLastSegment();
+        return Boolean.valueOf(_lastSegment.equals("runnable"));
       };
       boolean _exists = IterableExtensions.<QualifiedName>exists(importedNames, _function);
       Assert.assertTrue(("" + importedNames), _exists);
@@ -196,13 +187,10 @@ public class ImportedNamesTest extends AbstractXtendTestCase {
       Resource _eResource = file.eResource();
       final IResourceDescription description = this.resourceDescriptionManager.getResourceDescription(_eResource);
       final Iterable<QualifiedName> importedNames = description.getImportedNames();
-      final Function1<QualifiedName, Boolean> _function = new Function1<QualifiedName, Boolean>() {
-        @Override
-        public Boolean apply(final QualifiedName it) {
-          String _string = it.toString();
-          String _lowerCase = "types.StaticOuterClass$StaticMiddleClass$StaticInnerClass".toLowerCase();
-          return Boolean.valueOf(Objects.equal(_string, _lowerCase));
-        }
+      final Function1<QualifiedName, Boolean> _function = (QualifiedName it) -> {
+        String _string = it.toString();
+        String _lowerCase = "types.StaticOuterClass$StaticMiddleClass$StaticInnerClass".toLowerCase();
+        return Boolean.valueOf(Objects.equal(_string, _lowerCase));
       };
       boolean _exists = IterableExtensions.<QualifiedName>exists(importedNames, _function);
       Assert.assertTrue(("" + importedNames), _exists);
@@ -229,13 +217,10 @@ public class ImportedNamesTest extends AbstractXtendTestCase {
       Resource _eResource = file.eResource();
       final IResourceDescription description = this.resourceDescriptionManager.getResourceDescription(_eResource);
       final Iterable<QualifiedName> importedNames = description.getImportedNames();
-      final Function1<QualifiedName, Boolean> _function = new Function1<QualifiedName, Boolean>() {
-        @Override
-        public Boolean apply(final QualifiedName it) {
-          String _string = it.toString();
-          String _lowerCase = "types.StaticOuterClass$Unknown".toLowerCase();
-          return Boolean.valueOf(Objects.equal(_string, _lowerCase));
-        }
+      final Function1<QualifiedName, Boolean> _function = (QualifiedName it) -> {
+        String _string = it.toString();
+        String _lowerCase = "types.StaticOuterClass$Unknown".toLowerCase();
+        return Boolean.valueOf(Objects.equal(_string, _lowerCase));
       };
       boolean _exists = IterableExtensions.<QualifiedName>exists(importedNames, _function);
       Assert.assertTrue(("" + importedNames), _exists);
@@ -262,13 +247,10 @@ public class ImportedNamesTest extends AbstractXtendTestCase {
       Resource _eResource = file.eResource();
       final IResourceDescription description = this.resourceDescriptionManager.getResourceDescription(_eResource);
       final Iterable<QualifiedName> importedNames = description.getImportedNames();
-      final Function1<QualifiedName, Boolean> _function = new Function1<QualifiedName, Boolean>() {
-        @Override
-        public Boolean apply(final QualifiedName it) {
-          String _string = it.toString();
-          String _lowerCase = "types.StaticOuterClass$StaticMiddleClass$Unknown".toLowerCase();
-          return Boolean.valueOf(Objects.equal(_string, _lowerCase));
-        }
+      final Function1<QualifiedName, Boolean> _function = (QualifiedName it) -> {
+        String _string = it.toString();
+        String _lowerCase = "types.StaticOuterClass$StaticMiddleClass$Unknown".toLowerCase();
+        return Boolean.valueOf(Objects.equal(_string, _lowerCase));
       };
       boolean _exists = IterableExtensions.<QualifiedName>exists(importedNames, _function);
       Assert.assertTrue(("" + importedNames), _exists);

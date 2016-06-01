@@ -30,11 +30,8 @@ public class TypeResolutionCancelTest extends AbstractXbaseTestCase {
     try {
       final XExpression exp = this.expression("true");
       try {
-        final CancelIndicator _function = new CancelIndicator() {
-          @Override
-          public boolean isCanceled() {
-            return true;
-          }
+        final CancelIndicator _function = () -> {
+          return true;
         };
         this.resolver.resolveTypes(exp, _function);
         Assert.fail("Type resolution should have been canceled");
@@ -55,11 +52,8 @@ public class TypeResolutionCancelTest extends AbstractXbaseTestCase {
     try {
       final XExpression exp = this.expression("true");
       try {
-        final CancelIndicator _function = new CancelIndicator() {
-          @Override
-          public boolean isCanceled() {
-            return false;
-          }
+        final CancelIndicator _function = () -> {
+          return false;
         };
         this.resolver.resolveTypes(exp, _function);
       } catch (final Throwable _t) {

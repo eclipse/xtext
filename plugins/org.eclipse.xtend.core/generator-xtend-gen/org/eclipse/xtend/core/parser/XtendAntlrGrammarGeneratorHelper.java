@@ -13,6 +13,7 @@ import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Consumer;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -25,8 +26,6 @@ import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessExtensions;
 import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrGrammarGenUtil;
 import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrOptions;
@@ -92,13 +91,10 @@ public class XtendAntlrGrammarGeneratorHelper {
   
   protected void _collectTokens(final EObject it, final Set<String> tokens) {
     EList<EObject> _eContents = it.eContents();
-    final Procedure1<EObject> _function = new Procedure1<EObject>() {
-      @Override
-      public void apply(final EObject it) {
-        XtendAntlrGrammarGeneratorHelper.this.collectTokens(it, tokens);
-      }
+    final Consumer<EObject> _function = (EObject it_1) -> {
+      this.collectTokens(it_1, tokens);
     };
-    IterableExtensions.<EObject>forEach(_eContents, _function);
+    _eContents.forEach(_function);
   }
   
   public void collectTokens(final EObject it, final Set<String> tokens) {

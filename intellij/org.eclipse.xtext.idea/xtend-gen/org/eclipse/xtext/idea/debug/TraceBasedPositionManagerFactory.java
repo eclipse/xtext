@@ -16,19 +16,8 @@ import com.intellij.debugger.SourcePosition;
 import com.intellij.debugger.engine.DebugProcess;
 import com.intellij.debugger.engine.PositionManagerImpl;
 import com.intellij.debugger.requests.ClassPrepareRequestor;
-import com.intellij.debugger.requests.RequestManager;
 import com.intellij.lang.Language;
-import com.intellij.openapi.application.Application;
-import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.editor.Document;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.Computable;
-import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.PsiDocumentManager;
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
-import com.intellij.util.DocumentUtil;
-import com.sun.jdi.AbsentInformationException;
 import com.sun.jdi.Location;
 import com.sun.jdi.ReferenceType;
 import com.sun.jdi.request.ClassPrepareRequest;
@@ -40,17 +29,10 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
 import org.eclipse.xtext.generator.trace.ILocationData;
-import org.eclipse.xtext.generator.trace.SourceRelativeURI;
 import org.eclipse.xtext.idea.debug.DebugProcessExtensions;
 import org.eclipse.xtext.idea.lang.IXtextLanguage;
-import org.eclipse.xtext.idea.trace.IIdeaTrace;
-import org.eclipse.xtext.idea.trace.ILocationInVirtualFile;
 import org.eclipse.xtext.idea.trace.ITraceForVirtualFileProvider;
-import org.eclipse.xtext.idea.trace.VirtualFileInProject;
-import org.eclipse.xtext.util.ITextRegionWithLineInformation;
-import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -83,67 +65,8 @@ public class TraceBasedPositionManagerFactory extends PositionManagerFactory {
      */
     @Override
     public ClassPrepareRequest createPrepareRequest(final ClassPrepareRequestor requestor, final SourcePosition source) throws NoDataException {
-      PsiFile _file = source.getFile();
-      Language _language = _file.getLanguage();
-      boolean _notEquals = (!Objects.equal(_language, this.language));
-      if (_notEquals) {
-        throw NoDataException.INSTANCE;
-      }
-      Application _application = ApplicationManager.getApplication();
-      final Computable<Set<String>> _function = new Computable<Set<String>>() {
-        @Override
-        public Set<String> compute() {
-          try {
-            PsiElement _elementAt = source.getElementAt();
-            final VirtualFileInProject sourceResource = VirtualFileInProject.forPsiElement(_elementAt);
-            if ((sourceResource == null)) {
-              throw NoDataException.INSTANCE;
-            }
-            final IIdeaTrace trace = TraceBasedPositionManager.this.traceForVirtualFileProvider.getTraceToTarget(sourceResource);
-            if ((trace == null)) {
-              throw NoDataException.INSTANCE;
-            }
-            Iterable<? extends ILocationInVirtualFile> _allAssociatedLocations = trace.getAllAssociatedLocations();
-            final Function1<ILocationInVirtualFile, String> _function = new Function1<ILocationInVirtualFile, String>() {
-              @Override
-              public String apply(final ILocationInVirtualFile it) {
-                SourceRelativeURI _srcRelativeResourceURI = it.getSrcRelativeResourceURI();
-                URI _uRI = _srcRelativeResourceURI.getURI();
-                return _uRI.lastSegment();
-              }
-            };
-            Iterable<String> _map = IterableExtensions.map(_allAssociatedLocations, _function);
-            return IterableExtensions.<String>toSet(_map);
-          } catch (Throwable _e) {
-            throw Exceptions.sneakyThrow(_e);
-          }
-        }
-      };
-      final Set<String> names = _application.<Set<String>>runReadAction(_function);
-      boolean _isEmpty = names.isEmpty();
-      if (_isEmpty) {
-        throw NoDataException.INSTANCE;
-      }
-      RequestManager _requestsManager = this.process.getRequestsManager();
-      final ClassPrepareRequestor _function_1 = new ClassPrepareRequestor() {
-        @Override
-        public void processClassPrepare(final DebugProcess process, final ReferenceType refType) {
-          try {
-            String _sourceName = refType.sourceName();
-            boolean _contains = names.contains(_sourceName);
-            if (_contains) {
-              requestor.processClassPrepare(process, refType);
-            }
-          } catch (final Throwable _t) {
-            if (_t instanceof AbsentInformationException) {
-              final AbsentInformationException ignore = (AbsentInformationException)_t;
-            } else {
-              throw Exceptions.sneakyThrow(_t);
-            }
-          }
-        }
-      };
-      return _requestsManager.createClassPrepareRequest(_function_1, "*");
+      throw new Error("Unresolved compilation problems:"
+        + "\nAccess restriction: The type AbsentInformationException is not accessible due to restriction on required project org.eclipse.xtext.idea");
     }
     
     @Override
@@ -250,66 +173,8 @@ public class TraceBasedPositionManagerFactory extends PositionManagerFactory {
     
     @Override
     public List<Location> locationsOfLine(final ReferenceType type, final SourcePosition position) throws NoDataException {
-      PsiFile _file = position.getFile();
-      Language _language = _file.getLanguage();
-      boolean _notEquals = (!Objects.equal(_language, this.language));
-      if (_notEquals) {
-        throw NoDataException.INSTANCE;
-      }
-      Application _application = ApplicationManager.getApplication();
-      final Computable<List<Location>> _function = new Computable<List<Location>>() {
-        @Override
-        public List<Location> compute() {
-          try {
-            final PsiElement psi = position.getElementAt();
-            Project _project = psi.getProject();
-            PsiDocumentManager _instance = PsiDocumentManager.getInstance(_project);
-            PsiFile _containingFile = psi.getContainingFile();
-            final Document document = _instance.getDocument(_containingFile);
-            int _line = position.getLine();
-            final TextRange range = DocumentUtil.getLineTextRange(document, _line);
-            final VirtualFileInProject sourceResource = VirtualFileInProject.forPsiElement(psi);
-            if ((sourceResource == null)) {
-              throw NoDataException.INSTANCE;
-            }
-            final IIdeaTrace traceToTarget = TraceBasedPositionManager.this.traceForVirtualFileProvider.getTraceToTarget(sourceResource);
-            if ((traceToTarget == null)) {
-              throw NoDataException.INSTANCE;
-            }
-            final ArrayList<Location> result = CollectionLiterals.<Location>newArrayList();
-            int _startOffset = range.getStartOffset();
-            int _length = range.getLength();
-            TextRegion _textRegion = new TextRegion(_startOffset, _length);
-            Iterable<? extends ILocationInVirtualFile> _allAssociatedLocations = traceToTarget.getAllAssociatedLocations(_textRegion);
-            final Function1<ILocationInVirtualFile, Integer> _function = new Function1<ILocationInVirtualFile, Integer>() {
-              @Override
-              public Integer apply(final ILocationInVirtualFile it) {
-                ITextRegionWithLineInformation _textRegion = it.getTextRegion();
-                return Integer.valueOf(_textRegion.getLineNumber());
-              }
-            };
-            List<? extends ILocationInVirtualFile> _sortBy = IterableExtensions.sortBy(_allAssociatedLocations, _function);
-            for (final ILocationInVirtualFile location : _sortBy) {
-              if ((Objects.equal(type.sourceName(), location.getSrcRelativeResourceURI().getURI().lastSegment().toString()) && (location.getTextRegion().getLineNumber() == location.getTextRegion().getEndLineNumber()))) {
-                ITextRegionWithLineInformation _textRegion_1 = location.getTextRegion();
-                int _lineNumber = _textRegion_1.getLineNumber();
-                int _plus = (_lineNumber + 1);
-                final List<Location> locationsOfLine = type.locationsOfLine(_plus);
-                boolean _isEmpty = locationsOfLine.isEmpty();
-                boolean _not = (!_isEmpty);
-                if (_not) {
-                  result.addAll(locationsOfLine);
-                  return result;
-                }
-              }
-            }
-            throw NoDataException.INSTANCE;
-          } catch (Throwable _e) {
-            throw Exceptions.sneakyThrow(_e);
-          }
-        }
-      };
-      return _application.<List<Location>>runReadAction(_function);
+      throw new Error("Unresolved compilation problems:"
+        + "\nAccess restriction: The type Location is not accessible due to restriction on required project org.eclipse.xtext.idea");
     }
   }
   

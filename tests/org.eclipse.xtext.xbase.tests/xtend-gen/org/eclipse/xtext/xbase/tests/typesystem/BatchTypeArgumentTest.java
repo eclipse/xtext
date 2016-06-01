@@ -57,26 +57,20 @@ public class BatchTypeArgumentTest extends AbstractTypeArgumentTest {
     int _size = ((List<String>)Conversions.doWrapArray(typeArguments)).size();
     int _size_1 = actualTypeArguments.size();
     Assert.assertEquals(_size, _size_1);
-    final Procedure2<String, Integer> _function = new Procedure2<String, Integer>() {
-      @Override
-      public void apply(final String typeArgument, final Integer i) {
-        StringConcatenation _builder = new StringConcatenation();
-        String _join = IterableExtensions.join(((Iterable<?>)Conversions.doWrapArray(typeArguments)), ", ");
-        _builder.append(_join, "");
-        _builder.append(" vs ");
-        final Function1<LightweightTypeReference, String> _function = new Function1<LightweightTypeReference, String>() {
-          @Override
-          public String apply(final LightweightTypeReference it) {
-            return it.getSimpleName();
-          }
-        };
-        List<String> _map = ListExtensions.<LightweightTypeReference, String>map(actualTypeArguments, _function);
-        String _join_1 = IterableExtensions.join(_map, ", ");
-        _builder.append(_join_1, "");
-        LightweightTypeReference _get = actualTypeArguments.get((i).intValue());
-        String _simpleName = _get.getSimpleName();
-        Assert.assertEquals(_builder.toString(), typeArgument, _simpleName);
-      }
+    final Procedure2<String, Integer> _function = (String typeArgument, Integer i) -> {
+      StringConcatenation _builder = new StringConcatenation();
+      String _join = IterableExtensions.join(((Iterable<?>)Conversions.doWrapArray(typeArguments)), ", ");
+      _builder.append(_join, "");
+      _builder.append(" vs ");
+      final Function1<LightweightTypeReference, String> _function_1 = (LightweightTypeReference it) -> {
+        return it.getSimpleName();
+      };
+      List<String> _map = ListExtensions.<LightweightTypeReference, String>map(actualTypeArguments, _function_1);
+      String _join_1 = IterableExtensions.join(_map, ", ");
+      _builder.append(_join_1, "");
+      LightweightTypeReference _get = actualTypeArguments.get((i).intValue());
+      String _simpleName = _get.getSimpleName();
+      Assert.assertEquals(_builder.toString(), typeArgument, _simpleName);
     };
     IterableExtensions.<String>forEach(((Iterable<String>)Conversions.doWrapArray(typeArguments)), _function);
   }

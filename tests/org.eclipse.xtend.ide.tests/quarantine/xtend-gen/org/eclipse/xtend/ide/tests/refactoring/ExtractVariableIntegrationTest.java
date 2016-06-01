@@ -763,32 +763,29 @@ public class ExtractVariableIntegrationTest extends AbstractXtendUITestCase {
       final XtextEditor editor = this.workbenchTestHelper.openEditor(file);
       try {
         IXtextDocument _document = editor.getDocument();
-        final IUnitOfWork<Change, XtextResource> _function = new IUnitOfWork<Change, XtextResource>() {
-          @Override
-          public Change exec(final XtextResource it) throws Exception {
-            Change _xblockexpression = null;
-            {
-              final int offset = inputString.indexOf("$");
-              int _lastIndexOf = inputString.lastIndexOf("$");
-              int _minus = (_lastIndexOf - 1);
-              final int length = (_minus - offset);
-              final TextSelection textSelection = new TextSelection(offset, length);
-              final XExpression selection = ExtractVariableIntegrationTest.this.util.findSelectedExpression(it, textSelection);
-              final ExtractVariableRefactoring refactoring = ExtractVariableIntegrationTest.this.refactoringProvider.get();
-              refactoring.setFinal(isFinal);
-              refactoring.initialize(editor, selection);
-              NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-              final RefactoringStatus status = refactoring.checkAllConditions(_nullProgressMonitor);
-              String _string = status.toString();
-              boolean _isOK = status.isOK();
-              Assert.assertTrue(_string, _isOK);
-              NullProgressMonitor _nullProgressMonitor_1 = new NullProgressMonitor();
-              Change _createChange = refactoring.createChange(_nullProgressMonitor_1);
-              NullProgressMonitor _nullProgressMonitor_2 = new NullProgressMonitor();
-              _xblockexpression = _createChange.perform(_nullProgressMonitor_2);
-            }
-            return _xblockexpression;
+        final IUnitOfWork<Change, XtextResource> _function = (XtextResource it) -> {
+          Change _xblockexpression = null;
+          {
+            final int offset = inputString.indexOf("$");
+            int _lastIndexOf = inputString.lastIndexOf("$");
+            int _minus = (_lastIndexOf - 1);
+            final int length = (_minus - offset);
+            final TextSelection textSelection = new TextSelection(offset, length);
+            final XExpression selection = this.util.findSelectedExpression(it, textSelection);
+            final ExtractVariableRefactoring refactoring = this.refactoringProvider.get();
+            refactoring.setFinal(isFinal);
+            refactoring.initialize(editor, selection);
+            NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
+            final RefactoringStatus status = refactoring.checkAllConditions(_nullProgressMonitor);
+            String _string = status.toString();
+            boolean _isOK = status.isOK();
+            Assert.assertTrue(_string, _isOK);
+            NullProgressMonitor _nullProgressMonitor_1 = new NullProgressMonitor();
+            Change _createChange = refactoring.createChange(_nullProgressMonitor_1);
+            NullProgressMonitor _nullProgressMonitor_2 = new NullProgressMonitor();
+            _xblockexpression = _createChange.perform(_nullProgressMonitor_2);
           }
+          return _xblockexpression;
         };
         _document.<Change>readOnly(_function);
         String _string = expected.toString();

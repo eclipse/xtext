@@ -47,11 +47,8 @@ public class OnTheFlyJavaCompiler2 {
     final InMemoryJavaCompiler.Result result = this.inMemoryCompiler.compile(_javaSource);
     try {
       Set<CategorizedProblem> _compilationProblems = result.getCompilationProblems();
-      final Function1<CategorizedProblem, Boolean> _function = new Function1<CategorizedProblem, Boolean>() {
-        @Override
-        public Boolean apply(final CategorizedProblem it) {
-          return Boolean.valueOf(it.isError());
-        }
+      final Function1<CategorizedProblem, Boolean> _function = (CategorizedProblem it) -> {
+        return Boolean.valueOf(it.isError());
       };
       boolean _exists = IterableExtensions.<CategorizedProblem>exists(_compilationProblems, _function);
       if (_exists) {
@@ -59,11 +56,8 @@ public class OnTheFlyJavaCompiler2 {
         _builder.append("Java code compiled with errors:");
         _builder.newLine();
         Set<CategorizedProblem> _compilationProblems_1 = result.getCompilationProblems();
-        final Function1<CategorizedProblem, Boolean> _function_1 = new Function1<CategorizedProblem, Boolean>() {
-          @Override
-          public Boolean apply(final CategorizedProblem it) {
-            return Boolean.valueOf(it.isError());
-          }
+        final Function1<CategorizedProblem, Boolean> _function_1 = (CategorizedProblem it) -> {
+          return Boolean.valueOf(it.isError());
         };
         Iterable<CategorizedProblem> _filter = IterableExtensions.<CategorizedProblem>filter(_compilationProblems_1, _function_1);
         String _join = IterableExtensions.join(_filter, "\n");
@@ -113,24 +107,18 @@ public class OnTheFlyJavaCompiler2 {
   
   public Map<String, Class<?>> compileToClasses(final Map<String, String> sources) {
     Set<Map.Entry<String, String>> _entrySet = sources.entrySet();
-    final Function1<Map.Entry<String, String>, JavaSource> _function = new Function1<Map.Entry<String, String>, JavaSource>() {
-      @Override
-      public JavaSource apply(final Map.Entry<String, String> it) {
-        String _key = it.getKey();
-        String _javaFile = OnTheFlyJavaCompiler2.this.toJavaFile(_key);
-        String _value = it.getValue();
-        return new JavaSource(_javaFile, _value);
-      }
+    final Function1<Map.Entry<String, String>, JavaSource> _function = (Map.Entry<String, String> it) -> {
+      String _key = it.getKey();
+      String _javaFile = this.toJavaFile(_key);
+      String _value = it.getValue();
+      return new JavaSource(_javaFile, _value);
     };
     Iterable<JavaSource> _map = IterableExtensions.<Map.Entry<String, String>, JavaSource>map(_entrySet, _function);
     final InMemoryJavaCompiler.Result result = this.inMemoryCompiler.compile(((JavaSource[])Conversions.unwrapArray(_map, JavaSource.class)));
     try {
       Set<CategorizedProblem> _compilationProblems = result.getCompilationProblems();
-      final Function1<CategorizedProblem, Boolean> _function_1 = new Function1<CategorizedProblem, Boolean>() {
-        @Override
-        public Boolean apply(final CategorizedProblem it) {
-          return Boolean.valueOf(it.isError());
-        }
+      final Function1<CategorizedProblem, Boolean> _function_1 = (CategorizedProblem it) -> {
+        return Boolean.valueOf(it.isError());
       };
       boolean _exists = IterableExtensions.<CategorizedProblem>exists(_compilationProblems, _function_1);
       if (_exists) {
@@ -138,11 +126,8 @@ public class OnTheFlyJavaCompiler2 {
         _builder.append("Java code compiled with errors:");
         _builder.newLine();
         Set<CategorizedProblem> _compilationProblems_1 = result.getCompilationProblems();
-        final Function1<CategorizedProblem, Boolean> _function_2 = new Function1<CategorizedProblem, Boolean>() {
-          @Override
-          public Boolean apply(final CategorizedProblem it) {
-            return Boolean.valueOf(it.isError());
-          }
+        final Function1<CategorizedProblem, Boolean> _function_2 = (CategorizedProblem it) -> {
+          return Boolean.valueOf(it.isError());
         };
         Iterable<CategorizedProblem> _filter = IterableExtensions.<CategorizedProblem>filter(_compilationProblems_1, _function_2);
         String _join = IterableExtensions.join(_filter, "\n");
@@ -163,22 +148,16 @@ public class OnTheFlyJavaCompiler2 {
       }
       final ClassLoader classLoader = result.getClassLoader();
       Set<String> _keySet = sources.keySet();
-      final Function1<String, Class<?>> _function_3 = new Function1<String, Class<?>>() {
-        @Override
-        public Class<?> apply(final String it) {
-          try {
-            return classLoader.loadClass(it);
-          } catch (Throwable _e) {
-            throw Exceptions.sneakyThrow(_e);
-          }
+      final Function1<String, Class<?>> _function_3 = (String it) -> {
+        try {
+          return classLoader.loadClass(it);
+        } catch (Throwable _e) {
+          throw Exceptions.sneakyThrow(_e);
         }
       };
       Iterable<Class<?>> _map_1 = IterableExtensions.<String, Class<?>>map(_keySet, _function_3);
-      final Function1<Class<?>, String> _function_4 = new Function1<Class<?>, String>() {
-        @Override
-        public String apply(final Class<?> it) {
-          return it.getName();
-        }
+      final Function1<Class<?>, String> _function_4 = (Class<?> it) -> {
+        return it.getName();
       };
       return IterableExtensions.<String, Class<?>>toMap(_map_1, _function_4);
     } catch (final Throwable _t) {

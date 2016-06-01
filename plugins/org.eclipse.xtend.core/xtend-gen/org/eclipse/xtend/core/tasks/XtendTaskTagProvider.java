@@ -43,14 +43,11 @@ public class XtendTaskTagProvider implements ITaskTagProvider {
       final String caseSensitivePref = prefs.getPreference(_preferenceKey_2);
       final List<TaskTag> tags = PreferenceTaskTagProvider.parseTags(namePref, prioritiesPref);
       TaskTags _taskTags = new TaskTags();
-      final Procedure1<TaskTags> _function = new Procedure1<TaskTags>() {
-        @Override
-        public void apply(final TaskTags it) {
-          List<TaskTag> _taskTags = it.getTaskTags();
-          Iterables.<TaskTag>addAll(_taskTags, tags);
-          boolean _equals = caseSensitivePref.equals(JavaCore.ENABLED);
-          it.setCaseSensitive(_equals);
-        }
+      final Procedure1<TaskTags> _function = (TaskTags it) -> {
+        List<TaskTag> _taskTags_1 = it.getTaskTags();
+        Iterables.<TaskTag>addAll(_taskTags_1, tags);
+        boolean _equals = caseSensitivePref.equals(JavaCore.ENABLED);
+        it.setCaseSensitive(_equals);
       };
       _xblockexpression = ObjectExtensions.<TaskTags>operator_doubleArrow(_taskTags, _function);
     }

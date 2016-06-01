@@ -595,16 +595,13 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
         _builder.append("}");
         _builder.newLine();
         XtendFile _xtendFile = this.testHelper.xtendFile("TestConfigurableIssueCode.xtend", _builder.toString());
-        final Procedure1<XtendFile> _function = new Procedure1<XtendFile>() {
-          @Override
-          public void apply(final XtendFile it) {
-            EList<XtendTypeDeclaration> _xtendTypes = it.getXtendTypes();
-            Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
-            XtendClass _head = IterableExtensions.<XtendClass>head(_filter);
-            EList<XtendMember> _members = _head.getMembers();
-            final XtendMember unusedField = IterableExtensions.<XtendMember>head(_members);
-            XtendUIValidationTests.this.helper.assertWarning(unusedField, XtendPackage.Literals.XTEND_FIELD, IssueCodes.UNUSED_PRIVATE_MEMBER);
-          }
+        final Procedure1<XtendFile> _function = (XtendFile it) -> {
+          EList<XtendTypeDeclaration> _xtendTypes = it.getXtendTypes();
+          Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
+          XtendClass _head = IterableExtensions.<XtendClass>head(_filter);
+          EList<XtendMember> _members = _head.getMembers();
+          final XtendMember unusedField = IterableExtensions.<XtendMember>head(_members);
+          this.helper.assertWarning(unusedField, XtendPackage.Literals.XTEND_FIELD, IssueCodes.UNUSED_PRIVATE_MEMBER);
         };
         ObjectExtensions.<XtendFile>operator_doubleArrow(_xtendFile, _function);
         xtendPrefStore.setValue(IssueCodes.UNUSED_PRIVATE_MEMBER, "error");
@@ -617,16 +614,13 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
         _builder_1.append("}");
         _builder_1.newLine();
         XtendFile _xtendFile_1 = this.testHelper.xtendFile("TestConfigurableIssueCode.xtend", _builder_1.toString());
-        final Procedure1<XtendFile> _function_1 = new Procedure1<XtendFile>() {
-          @Override
-          public void apply(final XtendFile it) {
-            EList<XtendTypeDeclaration> _xtendTypes = it.getXtendTypes();
-            Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
-            XtendClass _head = IterableExtensions.<XtendClass>head(_filter);
-            EList<XtendMember> _members = _head.getMembers();
-            final XtendMember unusedField = IterableExtensions.<XtendMember>head(_members);
-            XtendUIValidationTests.this.helper.assertError(unusedField, XtendPackage.Literals.XTEND_FIELD, IssueCodes.UNUSED_PRIVATE_MEMBER);
-          }
+        final Procedure1<XtendFile> _function_1 = (XtendFile it) -> {
+          EList<XtendTypeDeclaration> _xtendTypes = it.getXtendTypes();
+          Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
+          XtendClass _head = IterableExtensions.<XtendClass>head(_filter);
+          EList<XtendMember> _members = _head.getMembers();
+          final XtendMember unusedField = IterableExtensions.<XtendMember>head(_members);
+          this.helper.assertError(unusedField, XtendPackage.Literals.XTEND_FIELD, IssueCodes.UNUSED_PRIVATE_MEMBER);
         };
         ObjectExtensions.<XtendFile>operator_doubleArrow(_xtendFile_1, _function_1);
       } finally {

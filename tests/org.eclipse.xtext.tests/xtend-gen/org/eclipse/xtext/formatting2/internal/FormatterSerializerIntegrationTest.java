@@ -75,11 +75,8 @@ public class FormatterSerializerIntegrationTest {
     protected void _format(final IDList model, @Extension final IFormattableDocument document) {
       ISemanticRegionsFinder _regionFor = this.textRegionExtensions.regionFor(model);
       ISemanticRegion _keyword = _regionFor.keyword("idlist");
-      final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
-        @Override
-        public void apply(final IHiddenRegionFormatter it) {
-          it.setSpace("  ");
-        }
+      final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+        it.setSpace("  ");
       };
       document.append(_keyword, _function);
     }

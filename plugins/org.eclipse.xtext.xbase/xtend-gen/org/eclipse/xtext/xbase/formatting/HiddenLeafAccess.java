@@ -35,12 +35,9 @@ public class HiddenLeafAccess {
   public HiddenLeafs getHiddenLeafsBefore(final INode node) {
     HiddenLeafs _xblockexpression = null;
     {
-      final Function1<ILeafNode, Boolean> _function = new Function1<ILeafNode, Boolean>() {
-        @Override
-        public Boolean apply(final ILeafNode it) {
-          boolean _isHidden = it.isHidden();
-          return Boolean.valueOf((!_isHidden));
-        }
+      final Function1<ILeafNode, Boolean> _function = (ILeafNode it) -> {
+        boolean _isHidden = it.isHidden();
+        return Boolean.valueOf((!_isHidden));
       };
       final ILeafNode start = this._nodeModelAccess.findNextLeaf(node, _function);
       final List<ILeafNode> nodes = this.findPreviousHiddenLeafs(start);
@@ -154,12 +151,9 @@ public class HiddenLeafAccess {
   public HiddenLeafs getHiddenLeafsAfter(final INode node) {
     HiddenLeafs _xblockexpression = null;
     {
-      final Function1<ILeafNode, Boolean> _function = new Function1<ILeafNode, Boolean>() {
-        @Override
-        public Boolean apply(final ILeafNode it) {
-          boolean _isHidden = it.isHidden();
-          return Boolean.valueOf((!_isHidden));
-        }
+      final Function1<ILeafNode, Boolean> _function = (ILeafNode it) -> {
+        boolean _isHidden = it.isHidden();
+        return Boolean.valueOf((!_isHidden));
       };
       final ILeafNode start = this.findPreviousLeaf(node, _function);
       HiddenLeafs _xifexpression = null;

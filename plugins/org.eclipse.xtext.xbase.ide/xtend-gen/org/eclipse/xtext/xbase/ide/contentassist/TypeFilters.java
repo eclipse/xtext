@@ -13,12 +13,9 @@ import org.objectweb.asm.Opcodes;
 
 @SuppressWarnings("all")
 final class TypeFilters {
-  public final static Predicate<ITypeDescriptor> NON_ABSTRACT = new Predicate<ITypeDescriptor>() {
-    @Override
-    public boolean apply(final ITypeDescriptor typeDesc) {
-      return ((!TypeFilters.contains(typeDesc.getAccessFlags(), Opcodes.ACC_ABSTRACT)) && (!TypeFilters.contains(typeDesc.getAccessFlags(), Opcodes.ACC_INTERFACE)));
-    }
-  };
+  public final static Predicate<ITypeDescriptor> NON_ABSTRACT = ((Predicate<ITypeDescriptor>) (ITypeDescriptor typeDesc) -> {
+    return ((!TypeFilters.contains(typeDesc.getAccessFlags(), Opcodes.ACC_ABSTRACT)) && (!TypeFilters.contains(typeDesc.getAccessFlags(), Opcodes.ACC_INTERFACE)));
+  });
   
   private static boolean contains(final int flags, final int code) {
     return ((flags & code) != 0);

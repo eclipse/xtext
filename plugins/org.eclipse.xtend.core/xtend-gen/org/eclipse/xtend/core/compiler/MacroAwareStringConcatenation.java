@@ -41,12 +41,12 @@ public class MacroAwareStringConcatenation extends ImportingStringConcatenation 
       return _getStringRepresentation((JvmTypeDeclarationImpl<?>)object);
     } else if (object instanceof JvmType) {
       return _getStringRepresentation((JvmType)object);
+    } else if (object instanceof Class) {
+      return _getStringRepresentation((Class<?>)object);
     } else if (object instanceof TypeReferenceImpl) {
       return _getStringRepresentation((TypeReferenceImpl)object);
     } else if (object instanceof JvmTypeReference) {
       return _getStringRepresentation((JvmTypeReference)object);
-    } else if (object instanceof Class) {
-      return _getStringRepresentation((Class<?>)object);
     } else if (object instanceof LightweightTypeReference) {
       return _getStringRepresentation((LightweightTypeReference)object);
     } else if (object != null) {

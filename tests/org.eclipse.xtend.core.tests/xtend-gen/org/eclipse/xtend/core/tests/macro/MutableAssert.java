@@ -20,39 +20,24 @@ public class MutableAssert extends Assert {
     _builder.append(name, "");
     _builder.append(" has to be a valid qualified name");
     final String message = _builder.toString();
-    final Procedure0 _function = new Procedure0() {
-      @Override
-      public void apply() {
-        codeToTest.apply(null);
-      }
+    final Procedure0 _function = () -> {
+      codeToTest.apply(null);
     };
     MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, message, _function);
-    final Procedure0 _function_1 = new Procedure0() {
-      @Override
-      public void apply() {
-        codeToTest.apply("  ");
-      }
+    final Procedure0 _function_1 = () -> {
+      codeToTest.apply("  ");
     };
     MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, message, _function_1);
-    final Procedure0 _function_2 = new Procedure0() {
-      @Override
-      public void apply() {
-        codeToTest.apply("456");
-      }
+    final Procedure0 _function_2 = () -> {
+      codeToTest.apply("456");
     };
     MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, message, _function_2);
-    final Procedure0 _function_3 = new Procedure0() {
-      @Override
-      public void apply() {
-        codeToTest.apply("foo. Bar ");
-      }
+    final Procedure0 _function_3 = () -> {
+      codeToTest.apply("foo. Bar ");
     };
     MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, message, _function_3);
-    final Procedure0 _function_4 = new Procedure0() {
-      @Override
-      public void apply() {
-        codeToTest.apply("foo.456.Bar");
-      }
+    final Procedure0 _function_4 = () -> {
+      codeToTest.apply("foo.456.Bar");
     };
     MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, message, _function_4);
     codeToTest.apply(expectedQualifiedName);
@@ -63,25 +48,16 @@ public class MutableAssert extends Assert {
     _builder.append(name, "");
     _builder.append(" has to be a valid java identifier");
     final String message = _builder.toString();
-    final Procedure0 _function = new Procedure0() {
-      @Override
-      public void apply() {
-        codeToTest.apply(null);
-      }
+    final Procedure0 _function = () -> {
+      codeToTest.apply(null);
     };
     MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, message, _function);
-    final Procedure0 _function_1 = new Procedure0() {
-      @Override
-      public void apply() {
-        codeToTest.apply("  ");
-      }
+    final Procedure0 _function_1 = () -> {
+      codeToTest.apply("  ");
     };
     MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, message, _function_1);
-    final Procedure0 _function_2 = new Procedure0() {
-      @Override
-      public void apply() {
-        codeToTest.apply("456");
-      }
+    final Procedure0 _function_2 = () -> {
+      codeToTest.apply("456");
     };
     MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, message, _function_2);
     codeToTest.apply("foo");

@@ -47,18 +47,15 @@ public class BatchIdentifiableTypeTest extends AbstractIdentifiableTypeTest {
       int _size = ((List<String>)Conversions.doWrapArray(types)).size();
       int _size_1 = identifiables.size();
       Assert.assertEquals(_size, _size_1);
-      final Procedure2<JvmIdentifiableElement, Integer> _function = new Procedure2<JvmIdentifiableElement, Integer>() {
-        @Override
-        public void apply(final JvmIdentifiableElement identifiable, final Integer index) {
-          final LightweightTypeReference type = resolvedTypes.getActualType(identifiable);
-          Assert.assertNotNull(type);
-          StringConcatenation _builder = new StringConcatenation();
-          _builder.append("failed for identifiable at ");
-          _builder.append(index, "");
-          Object _get = types[(index).intValue()];
-          String _simpleName = type.getSimpleName();
-          Assert.assertEquals(_builder.toString(), _get, _simpleName);
-        }
+      final Procedure2<JvmIdentifiableElement, Integer> _function = (JvmIdentifiableElement identifiable, Integer index) -> {
+        final LightweightTypeReference type = resolvedTypes.getActualType(identifiable);
+        Assert.assertNotNull(type);
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("failed for identifiable at ");
+        _builder.append(index, "");
+        Object _get = types[(index).intValue()];
+        String _simpleName = type.getSimpleName();
+        Assert.assertEquals(_builder.toString(), _get, _simpleName);
       };
       IterableExtensions.<JvmIdentifiableElement>forEach(identifiables, _function);
     } catch (Throwable _e) {

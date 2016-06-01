@@ -11,6 +11,7 @@ import com.google.common.base.Objects;
 import com.google.common.base.Predicate;
 import com.google.inject.Inject;
 import java.util.Set;
+import java.util.function.Consumer;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.emf.common.util.URI;
@@ -43,7 +44,6 @@ import org.eclipse.xtext.xbase.imports.StaticallyImportedMemberProvider;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xtype.XImportDeclaration;
 import org.eclipse.xtext.xtype.XtypePackage;
 
@@ -76,23 +76,17 @@ public class XtendReferenceFinder extends ReferenceFinder {
     }
     Iterable<QualifiedName> _importedNames = resourceDescription.getImportedNames();
     final Set<QualifiedName> importedNames = IterableExtensions.<QualifiedName>toSet(_importedNames);
-    final Function1<QualifiedName, Boolean> _function = new Function1<QualifiedName, Boolean>() {
-      @Override
-      public Boolean apply(final QualifiedName it) {
-        return Boolean.valueOf(importedNames.contains(it));
-      }
+    final Function1<QualifiedName, Boolean> _function = (QualifiedName it) -> {
+      return Boolean.valueOf(importedNames.contains(it));
     };
     boolean _exists = IterableExtensions.<QualifiedName>exists(names, _function);
     if (_exists) {
       URI _uRI = resourceDescription.getURI();
-      final IUnitOfWork<Object, ResourceSet> _function_1 = new IUnitOfWork<Object, ResourceSet>() {
-        @Override
-        public Object exec(final ResourceSet it) throws Exception {
-          URI _uRI = resourceDescription.getURI();
-          Resource _resource = it.getResource(_uRI, true);
-          XtendReferenceFinder.this.findReferences(targetURIs, _resource, acceptor, monitor);
-          return null;
-        }
+      final IUnitOfWork<Object, ResourceSet> _function_1 = (ResourceSet it) -> {
+        URI _uRI_1 = resourceDescription.getURI();
+        Resource _resource = it.getResource(_uRI_1, true);
+        this.findReferences(targetURIs, _resource, acceptor, monitor);
+        return null;
       };
       resourceAccess.<Object>readOnly(_uRI, _function_1);
     }
@@ -154,13 +148,10 @@ public class XtendReferenceFinder extends ReferenceFinder {
   
   protected void addReferenceToFeatureFromStaticImport(final XImportDeclaration importDeclaration, final Predicate<URI> targetURISet, final IReferenceFinder.Acceptor acceptor) {
     Iterable<JvmFeature> _allFeatures = this._staticallyImportedMemberProvider.getAllFeatures(importDeclaration);
-    final Procedure1<JvmFeature> _function = new Procedure1<JvmFeature>() {
-      @Override
-      public void apply(final JvmFeature it) {
-        XtendReferenceFinder.this.addReferenceIfTarget(it, targetURISet, importDeclaration, XtypePackage.Literals.XIMPORT_DECLARATION__IMPORTED_TYPE, acceptor);
-      }
+    final Consumer<JvmFeature> _function = (JvmFeature it) -> {
+      this.addReferenceIfTarget(it, targetURISet, importDeclaration, XtypePackage.Literals.XIMPORT_DECLARATION__IMPORTED_TYPE, acceptor);
     };
-    IterableExtensions.<JvmFeature>forEach(_allFeatures, _function);
+    _allFeatures.forEach(_function);
   }
   
   protected void addReferenceToTypeFromStaticImport(final XAbstractFeatureCall sourceCandidate, final Predicate<URI> targetURISet, final IReferenceFinder.Acceptor acceptor) {

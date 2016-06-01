@@ -70,11 +70,8 @@ public class XtendEditorChangingClasspathTest extends AbstractXtendUITestCase {
       final IFile file = IResourcesSetupUtil.createFile("testProject/src/Foo.xtend", "class Foo {}");
       IResourcesSetupUtil.waitForBuild();
       final XtextEditor editor = this.workbenchTestHelper.openEditor(file);
-      final Procedure0 _function = new Procedure0() {
-        @Override
-        public void apply() {
-          XtendEditorChangingClasspathTest.this.changeContent(editor, "{}", "{ def foo () {} }");
-        }
+      final Procedure0 _function = () -> {
+        this.changeContent(editor, "{}", "{ def foo () {} }");
       };
       this.waitForChangeEvent(_function);
       this.assertAddLibsToClasspath(project);
@@ -84,11 +81,8 @@ public class XtendEditorChangingClasspathTest extends AbstractXtendUITestCase {
   }
   
   public void assertAddLibsToClasspath(final IJavaProject project) {
-    final Procedure0 _function = new Procedure0() {
-      @Override
-      public void apply() {
-        XtendEditorChangingClasspathTest.this._xtendLibClasspathAdder.addLibsToClasspath(project, null);
-      }
+    final Procedure0 _function = () -> {
+      this._xtendLibClasspathAdder.addLibsToClasspath(project, null);
     };
     IResourceDescription.Event _waitForCoarseGrainedEvent = this.waitForCoarseGrainedEvent(_function);
     Assert.assertNotNull(_waitForCoarseGrainedEvent);

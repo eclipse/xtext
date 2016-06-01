@@ -55,11 +55,8 @@ public class FileLocationsImpl implements FileLocations {
   @Override
   public Path getSourceFolder(final Path path) {
     Set<Path> _projectSourceFolders = this.getProjectSourceFolders(path);
-    final Function1<Path, Boolean> _function = new Function1<Path, Boolean>() {
-      @Override
-      public Boolean apply(final Path sourceFolder) {
-        return Boolean.valueOf(path.startsWith(sourceFolder));
-      }
+    final Function1<Path, Boolean> _function = (Path sourceFolder) -> {
+      return Boolean.valueOf(path.startsWith(sourceFolder));
     };
     return IterableExtensions.<Path>findFirst(_projectSourceFolders, _function);
   }
@@ -107,13 +104,10 @@ public class FileLocationsImpl implements FileLocations {
   public Set<Path> getProjectSourceFolders(final Path path) {
     IProjectConfig _projectConfig = this.getProjectConfig(path);
     Set<? extends ISourceFolder> _sourceFolders = _projectConfig.getSourceFolders();
-    final Function1<ISourceFolder, Path> _function = new Function1<ISourceFolder, Path>() {
-      @Override
-      public Path apply(final ISourceFolder it) {
-        Path _projectFolder = FileLocationsImpl.this.getProjectFolder(path);
-        String _name = it.getName();
-        return _projectFolder.append(_name);
-      }
+    final Function1<ISourceFolder, Path> _function = (ISourceFolder it) -> {
+      Path _projectFolder = this.getProjectFolder(path);
+      String _name = it.getName();
+      return _projectFolder.append(_name);
     };
     Iterable<Path> _map = IterableExtensions.map(_sourceFolders, _function);
     return IterableExtensions.<Path>toSet(_map);

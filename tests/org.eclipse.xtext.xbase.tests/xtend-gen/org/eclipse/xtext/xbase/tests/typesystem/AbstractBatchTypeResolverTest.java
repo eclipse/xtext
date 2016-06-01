@@ -164,11 +164,8 @@ public abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolver
     String _simpleName = _type.getSimpleName();
     _builder.append(_simpleName, "");
     List<LightweightTypeReference> _typeArguments = type.getTypeArguments();
-    final Function1<LightweightTypeReference, CharSequence> _function = new Function1<LightweightTypeReference, CharSequence>() {
-      @Override
-      public CharSequence apply(final LightweightTypeReference it) {
-        return it.getSimpleName();
-      }
+    final Function1<LightweightTypeReference, CharSequence> _function = (LightweightTypeReference it) -> {
+      return it.getSimpleName();
     };
     String _join = IterableExtensions.<LightweightTypeReference>join(_typeArguments, "<", ", ", ">", _function);
     _builder.append(_join, "");

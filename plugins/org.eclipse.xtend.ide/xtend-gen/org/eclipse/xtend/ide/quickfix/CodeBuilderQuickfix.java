@@ -10,6 +10,7 @@ package org.eclipse.xtend.ide.quickfix;
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.List;
+import java.util.function.Consumer;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -38,7 +39,6 @@ import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.ui.contentassist.ReplacingAppendable;
@@ -110,114 +110,96 @@ public class CodeBuilderQuickfix {
   }
   
   protected IModification getXtendModification(final ICodeBuilder.Xtend builder) {
-    final IModification _function = new IModification() {
-      @Override
-      public void apply(final IModificationContext it) throws Exception {
-        final XtendTypeDeclaration xtendClass = builder.getXtendType();
-        URI _uRI = EcoreUtil.getURI(xtendClass);
-        final IEditorPart editor = CodeBuilderQuickfix.this.editorOpener.open(_uRI, false);
-        if ((!(editor instanceof XtextEditor))) {
-          return;
-        }
-        final XtextEditor xtextEditor = ((XtextEditor) editor);
-        final IXtextDocument document = xtextEditor.getDocument();
-        final Wrapper<Integer> wrapper = Wrapper.<Integer>forType(Integer.class);
-        final IUnitOfWork<ReplacingAppendable, XtextResource> _function = new IUnitOfWork<ReplacingAppendable, XtextResource>() {
-          @Override
-          public ReplacingAppendable exec(final XtextResource resource) throws Exception {
-            ReplacingAppendable _xblockexpression = null;
-            {
-              int offset = builder.getInsertOffset(resource);
-              wrapper.set(Integer.valueOf(offset));
-              DocumentSourceAppender.Factory.OptionalParameters _optionalParameters = new DocumentSourceAppender.Factory.OptionalParameters();
-              final Procedure1<DocumentSourceAppender.Factory.OptionalParameters> _function = new Procedure1<DocumentSourceAppender.Factory.OptionalParameters>() {
-                @Override
-                public void apply(final DocumentSourceAppender.Factory.OptionalParameters it) {
-                  int _indentationLevel = builder.getIndentationLevel();
-                  it.baseIndentationLevel = _indentationLevel;
-                  it.ensureEmptyLinesAround = true;
-                }
-              };
-              DocumentSourceAppender.Factory.OptionalParameters _doubleArrow = ObjectExtensions.<DocumentSourceAppender.Factory.OptionalParameters>operator_doubleArrow(_optionalParameters, _function);
-              _xblockexpression = CodeBuilderQuickfix.this.appendableFactory.create(document, resource, offset, 0, _doubleArrow);
-            }
-            return _xblockexpression;
-          }
-        };
-        final ReplacingAppendable appendable = document.<ReplacingAppendable>readOnly(_function);
-        Integer offset = wrapper.get();
-        builder.build(appendable);
-        appendable.commitChanges();
-        int _length = appendable.length();
-        xtextEditor.setHighlightRange(((offset).intValue() + 1), _length, true);
+    final IModification _function = (IModificationContext it) -> {
+      final XtendTypeDeclaration xtendClass = builder.getXtendType();
+      URI _uRI = EcoreUtil.getURI(xtendClass);
+      final IEditorPart editor = this.editorOpener.open(_uRI, false);
+      if ((!(editor instanceof XtextEditor))) {
+        return;
       }
+      final XtextEditor xtextEditor = ((XtextEditor) editor);
+      final IXtextDocument document = xtextEditor.getDocument();
+      final Wrapper<Integer> wrapper = Wrapper.<Integer>forType(Integer.class);
+      final IUnitOfWork<ReplacingAppendable, XtextResource> _function_1 = (XtextResource resource) -> {
+        ReplacingAppendable _xblockexpression = null;
+        {
+          int offset = builder.getInsertOffset(resource);
+          wrapper.set(Integer.valueOf(offset));
+          DocumentSourceAppender.Factory.OptionalParameters _optionalParameters = new DocumentSourceAppender.Factory.OptionalParameters();
+          final Procedure1<DocumentSourceAppender.Factory.OptionalParameters> _function_2 = (DocumentSourceAppender.Factory.OptionalParameters it_1) -> {
+            int _indentationLevel = builder.getIndentationLevel();
+            it_1.baseIndentationLevel = _indentationLevel;
+            it_1.ensureEmptyLinesAround = true;
+          };
+          DocumentSourceAppender.Factory.OptionalParameters _doubleArrow = ObjectExtensions.<DocumentSourceAppender.Factory.OptionalParameters>operator_doubleArrow(_optionalParameters, _function_2);
+          _xblockexpression = this.appendableFactory.create(document, resource, offset, 0, _doubleArrow);
+        }
+        return _xblockexpression;
+      };
+      final ReplacingAppendable appendable = document.<ReplacingAppendable>readOnly(_function_1);
+      Integer offset = wrapper.get();
+      builder.build(appendable);
+      appendable.commitChanges();
+      int _length = appendable.length();
+      xtextEditor.setHighlightRange(((offset).intValue() + 1), _length, true);
     };
     return _function;
   }
   
   protected IModification getJavaModification(final ICodeBuilder.Java builder) {
-    final IModification _function = new IModification() {
-      @Override
-      public void apply(final IModificationContext it) throws Exception {
-        final IType type = builder.getIType();
-        char _charAt = ".".charAt(0);
-        final ImportManager importManager = new ImportManager(true, _charAt);
-        final StringBuilderBasedAppendable content = new StringBuilderBasedAppendable(importManager);
-        builder.build(content);
-        List<String> _imports = importManager.getImports();
-        final Procedure1<String> _function = new Procedure1<String>() {
-          @Override
-          public void apply(final String it) {
-            try {
-              ICompilationUnit _compilationUnit = type.getCompilationUnit();
-              NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-              _compilationUnit.createImport(it, null, _nullProgressMonitor);
-            } catch (Throwable _e) {
-              throw Exceptions.sneakyThrow(_e);
-            }
-          }
-        };
-        IterableExtensions.<String>forEach(_imports, _function);
-        Object _switchResult = null;
-        boolean _matched = false;
-        if (builder instanceof JavaFieldBuilder) {
+    final IModification _function = (IModificationContext it) -> {
+      final IType type = builder.getIType();
+      char _charAt = ".".charAt(0);
+      final ImportManager importManager = new ImportManager(true, _charAt);
+      final StringBuilderBasedAppendable content = new StringBuilderBasedAppendable(importManager);
+      builder.build(content);
+      List<String> _imports = importManager.getImports();
+      final Consumer<String> _function_1 = (String it_1) -> {
+        try {
+          ICompilationUnit _compilationUnit = type.getCompilationUnit();
+          NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
+          _compilationUnit.createImport(it_1, null, _nullProgressMonitor);
+        } catch (Throwable _e) {
+          throw Exceptions.sneakyThrow(_e);
+        }
+      };
+      _imports.forEach(_function_1);
+      Object _switchResult = null;
+      boolean _matched = false;
+      if (builder instanceof JavaFieldBuilder) {
+        _matched=true;
+        String _string = content.toString();
+        NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
+        _switchResult = type.createField(_string, null, true, _nullProgressMonitor);
+      }
+      if (!_matched) {
+        if (builder instanceof JavaConstructorBuilder) {
           _matched=true;
           String _string = content.toString();
           NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-          _switchResult = type.createField(_string, null, true, _nullProgressMonitor);
+          _switchResult = type.createMethod(_string, null, true, _nullProgressMonitor);
         }
-        if (!_matched) {
-          if (builder instanceof JavaConstructorBuilder) {
-            _matched=true;
-            String _string = content.toString();
-            NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-            _switchResult = type.createMethod(_string, null, true, _nullProgressMonitor);
-          }
+      }
+      if (!_matched) {
+        if (builder instanceof JavaMethodBuilder) {
+          _matched=true;
+          String _string = content.toString();
+          NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
+          _switchResult = type.createMethod(_string, null, true, _nullProgressMonitor);
         }
-        if (!_matched) {
-          if (builder instanceof JavaMethodBuilder) {
-            _matched=true;
-            String _string = content.toString();
-            NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-            _switchResult = type.createMethod(_string, null, true, _nullProgressMonitor);
-          }
-        }
-        if (!_matched) {
-          _switchResult = null;
-        }
-        final Object element = ((Object)_switchResult);
-        boolean _notEquals = (!Objects.equal(element, null));
-        if (_notEquals) {
-          JdtHyperlink _jdtHyperlink = new JdtHyperlink();
-          final Procedure1<JdtHyperlink> _function_1 = new Procedure1<JdtHyperlink>() {
-            @Override
-            public void apply(final JdtHyperlink it) {
-              it.setJavaElement(((IMember)element));
-              it.open();
-            }
-          };
-          ObjectExtensions.<JdtHyperlink>operator_doubleArrow(_jdtHyperlink, _function_1);
-        }
+      }
+      if (!_matched) {
+        _switchResult = null;
+      }
+      final Object element = ((Object)_switchResult);
+      boolean _notEquals = (!Objects.equal(element, null));
+      if (_notEquals) {
+        JdtHyperlink _jdtHyperlink = new JdtHyperlink();
+        final Procedure1<JdtHyperlink> _function_2 = (JdtHyperlink it_1) -> {
+          it_1.setJavaElement(((IMember)element));
+          it_1.open();
+        };
+        ObjectExtensions.<JdtHyperlink>operator_doubleArrow(_jdtHyperlink, _function_2);
       }
     };
     return _function;

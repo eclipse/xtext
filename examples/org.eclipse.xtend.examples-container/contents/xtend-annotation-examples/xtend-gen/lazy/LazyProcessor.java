@@ -38,54 +38,48 @@ public class LazyProcessor extends AbstractFieldProcessor {
     MutableTypeDeclaration _declaringType = field.getDeclaringType();
     String _simpleName = field.getSimpleName();
     String _plus = ("_init" + _simpleName);
-    final Procedure1<MutableMethodDeclaration> _function = new Procedure1<MutableMethodDeclaration>() {
-      @Override
-      public void apply(final MutableMethodDeclaration it) {
-        it.setVisibility(Visibility.PRIVATE);
-        TypeReference _type = field.getType();
-        it.setReturnType(_type);
-        Expression _initializer = field.getInitializer();
-        it.setBody(_initializer);
-        context.setPrimarySourceElement(it, field);
-      }
+    final Procedure1<MutableMethodDeclaration> _function = (MutableMethodDeclaration it) -> {
+      it.setVisibility(Visibility.PRIVATE);
+      TypeReference _type_1 = field.getType();
+      it.setReturnType(_type_1);
+      Expression _initializer_1 = field.getInitializer();
+      it.setBody(_initializer_1);
+      context.setPrimarySourceElement(it, field);
     };
     _declaringType.addMethod(_plus, _function);
     MutableTypeDeclaration _declaringType_1 = field.getDeclaringType();
     String _simpleName_1 = field.getSimpleName();
     String _firstUpper = StringExtensions.toFirstUpper(_simpleName_1);
     String _plus_1 = ("get" + _firstUpper);
-    final Procedure1<MutableMethodDeclaration> _function_1 = new Procedure1<MutableMethodDeclaration>() {
-      @Override
-      public void apply(final MutableMethodDeclaration it) {
-        field.markAsRead();
-        TypeReference _type = field.getType();
-        it.setReturnType(_type);
-        StringConcatenationClient _client = new StringConcatenationClient() {
-          @Override
-          protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-            _builder.append("if (");
-            String _simpleName = field.getSimpleName();
-            _builder.append(_simpleName, "");
-            _builder.append("==null)");
-            _builder.newLineIfNotEmpty();
-            _builder.append("  ");
-            String _simpleName_1 = field.getSimpleName();
-            _builder.append(_simpleName_1, "  ");
-            _builder.append(" = _init");
-            String _simpleName_2 = field.getSimpleName();
-            _builder.append(_simpleName_2, "  ");
-            _builder.append("();");
-            _builder.newLineIfNotEmpty();
-            _builder.append("return ");
-            String _simpleName_3 = field.getSimpleName();
-            _builder.append(_simpleName_3, "");
-            _builder.append(";");
-            _builder.newLineIfNotEmpty();
-          }
-        };
-        it.setBody(_client);
-        context.setPrimarySourceElement(it, field);
-      }
+    final Procedure1<MutableMethodDeclaration> _function_1 = (MutableMethodDeclaration it) -> {
+      field.markAsRead();
+      TypeReference _type_1 = field.getType();
+      it.setReturnType(_type_1);
+      StringConcatenationClient _client = new StringConcatenationClient() {
+        @Override
+        protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+          _builder.append("if (");
+          String _simpleName = field.getSimpleName();
+          _builder.append(_simpleName, "");
+          _builder.append("==null)");
+          _builder.newLineIfNotEmpty();
+          _builder.append("  ");
+          String _simpleName_1 = field.getSimpleName();
+          _builder.append(_simpleName_1, "  ");
+          _builder.append(" = _init");
+          String _simpleName_2 = field.getSimpleName();
+          _builder.append(_simpleName_2, "  ");
+          _builder.append("();");
+          _builder.newLineIfNotEmpty();
+          _builder.append("return ");
+          String _simpleName_3 = field.getSimpleName();
+          _builder.append(_simpleName_3, "");
+          _builder.append(";");
+          _builder.newLineIfNotEmpty();
+        }
+      };
+      it.setBody(_client);
+      context.setPrimarySourceElement(it, field);
     };
     _declaringType_1.addMethod(_plus_1, _function_1);
   }

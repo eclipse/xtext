@@ -12,6 +12,7 @@ import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Consumer;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -33,8 +34,6 @@ import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedConstructor;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedField;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedOperation;
@@ -68,13 +67,10 @@ public abstract class AbstractXtendOutlineTreeBuilder implements IXtendOutlineTr
   
   protected void _build(final EObject modelElement, final IXtendOutlineContext context) {
     EList<EObject> _eContents = modelElement.eContents();
-    final Procedure1<EObject> _function = new Procedure1<EObject>() {
-      @Override
-      public void apply(final EObject it) {
-        AbstractXtendOutlineTreeBuilder.this.xtendOutlineNodeBuilder.buildEObjectNode(it, context);
-      }
+    final Consumer<EObject> _function = (EObject it) -> {
+      this.xtendOutlineNodeBuilder.buildEObjectNode(it, context);
     };
-    IterableExtensions.<EObject>forEach(_eContents, _function);
+    _eContents.forEach(_function);
   }
   
   protected void buildPackageAndImportSection(final XtendFile xtendFile, final IXtendOutlineContext context) {
@@ -129,13 +125,10 @@ public abstract class AbstractXtendOutlineTreeBuilder implements IXtendOutlineTr
           final IXtendOutlineContext nestedTypeContext = superTypeContext.hideInherited();
           EList<JvmMember> _members = ((JvmDeclaredType)declaredType).getMembers();
           Iterable<JvmDeclaredType> _filter = Iterables.<JvmDeclaredType>filter(_members, JvmDeclaredType.class);
-          final Procedure1<JvmDeclaredType> _function = new Procedure1<JvmDeclaredType>() {
-            @Override
-            public void apply(final JvmDeclaredType it) {
-              AbstractXtendOutlineTreeBuilder.this.buildJvmType(it, nestedTypeContext);
-            }
+          final Consumer<JvmDeclaredType> _function = (JvmDeclaredType it) -> {
+            this.buildJvmType(it, nestedTypeContext);
           };
-          IterableExtensions.<JvmDeclaredType>forEach(_filter, _function);
+          _filter.forEach(_function);
         }
       }
     }
@@ -185,14 +178,11 @@ public abstract class AbstractXtendOutlineTreeBuilder implements IXtendOutlineTr
             if (_not_1) {
               final IXtendOutlineContext featureContext = this.buildFeature(baseType, ((JvmFeature)member), member, context);
               EList<JvmGenericType> _localClasses = ((JvmFeature)member).getLocalClasses();
-              final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
-                @Override
-                public void apply(final JvmGenericType it) {
-                  IXtendOutlineContext _newContext = featureContext.newContext();
-                  AbstractXtendOutlineTreeBuilder.this.buildJvmType(it, _newContext);
-                }
+              final Consumer<JvmGenericType> _function = (JvmGenericType it) -> {
+                IXtendOutlineContext _newContext = featureContext.newContext();
+                this.buildJvmType(it, _newContext);
               };
-              IterableExtensions.<JvmGenericType>forEach(_localClasses, _function);
+              _localClasses.forEach(_function);
             }
           }
         }

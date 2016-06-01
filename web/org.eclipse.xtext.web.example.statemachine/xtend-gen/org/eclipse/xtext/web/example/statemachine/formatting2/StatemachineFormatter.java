@@ -10,6 +10,7 @@ package org.eclipse.xtext.web.example.statemachine.formatting2;
 import com.google.inject.Inject;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Consumer;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.Assignment;
@@ -29,7 +30,6 @@ import org.eclipse.xtext.web.example.statemachine.statemachine.State;
 import org.eclipse.xtext.web.example.statemachine.statemachine.Statemachine;
 import org.eclipse.xtext.web.example.statemachine.statemachine.Transition;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
@@ -43,11 +43,8 @@ public class StatemachineFormatter extends AbstractFormatter2 {
     for (final Signal signal : _signals) {
       {
         this.format(signal, document);
-        final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
-          @Override
-          public void apply(final IHiddenRegionFormatter it) {
-            it.setNewLines(1, 1, 2);
-          }
+        final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+          it.setNewLines(1, 1, 2);
         };
         document.<Signal>append(signal, _function);
       }
@@ -56,11 +53,8 @@ public class StatemachineFormatter extends AbstractFormatter2 {
     for (final State state : _states) {
       {
         this.format(state, document);
-        final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
-          @Override
-          public void apply(final IHiddenRegionFormatter it) {
-            it.setNewLines(1, 1, 2);
-          }
+        final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+          it.setNewLines(1, 1, 2);
         };
         document.<State>append(state, _function);
       }
@@ -72,18 +66,12 @@ public class StatemachineFormatter extends AbstractFormatter2 {
     StatemachineGrammarAccess.SignalElements _signalAccess = this._statemachineGrammarAccess.getSignalAccess();
     Keyword _signalKeyword_1 = _signalAccess.getSignalKeyword_1();
     ISemanticRegion _keyword = _regionFor.keyword(_signalKeyword_1);
-    final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
-      @Override
-      public void apply(final IHiddenRegionFormatter it) {
-        it.oneSpace();
-      }
+    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+      it.oneSpace();
     };
     ISemanticRegion _prepend = document.prepend(_keyword, _function);
-    final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
-      @Override
-      public void apply(final IHiddenRegionFormatter it) {
-        it.oneSpace();
-      }
+    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
+      it.oneSpace();
     };
     document.append(_prepend, _function_1);
   }
@@ -93,44 +81,32 @@ public class StatemachineFormatter extends AbstractFormatter2 {
     StatemachineGrammarAccess.StateElements _stateAccess = this._statemachineGrammarAccess.getStateAccess();
     Keyword _stateKeyword_0 = _stateAccess.getStateKeyword_0();
     ISemanticRegion _keyword = _regionFor.keyword(_stateKeyword_0);
-    final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
-      @Override
-      public void apply(final IHiddenRegionFormatter it) {
-        it.oneSpace();
-      }
+    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+      it.oneSpace();
     };
     document.append(_keyword, _function);
     ISemanticRegionsFinder _regionFor_1 = this.textRegionExtensions.regionFor(state);
     StatemachineGrammarAccess.StateElements _stateAccess_1 = this._statemachineGrammarAccess.getStateAccess();
     Assignment _nameAssignment_1 = _stateAccess_1.getNameAssignment_1();
     ISemanticRegion _assignment = _regionFor_1.assignment(_nameAssignment_1);
-    final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
-      @Override
-      public void apply(final IHiddenRegionFormatter it) {
-        it.newLine();
-      }
+    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
+      it.newLine();
     };
     ISemanticRegion _append = document.append(_assignment, _function_1);
     ISemanticRegionsFinder _regionFor_2 = this.textRegionExtensions.regionFor(state);
     StatemachineGrammarAccess.StateElements _stateAccess_2 = this._statemachineGrammarAccess.getStateAccess();
     Keyword _endKeyword_5 = _stateAccess_2.getEndKeyword_5();
     ISemanticRegion _keyword_1 = _regionFor_2.keyword(_endKeyword_5);
-    final Procedure1<IHiddenRegionFormatter> _function_2 = new Procedure1<IHiddenRegionFormatter>() {
-      @Override
-      public void apply(final IHiddenRegionFormatter it) {
-        it.indent();
-      }
+    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
+      it.indent();
     };
     document.<ISemanticRegion, ISemanticRegion>interior(_append, _keyword_1, _function_2);
     EList<Command> _commands = state.getCommands();
     for (final Command command : _commands) {
       {
         this.format(command, document);
-        final Procedure1<IHiddenRegionFormatter> _function_3 = new Procedure1<IHiddenRegionFormatter>() {
-          @Override
-          public void apply(final IHiddenRegionFormatter it) {
-            it.newLine();
-          }
+        final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
+          it.newLine();
         };
         document.<Command>append(command, _function_3);
       }
@@ -139,11 +115,8 @@ public class StatemachineFormatter extends AbstractFormatter2 {
     for (final Transition transition : _transitions) {
       {
         this.format(transition, document);
-        final Procedure1<IHiddenRegionFormatter> _function_3 = new Procedure1<IHiddenRegionFormatter>() {
-          @Override
-          public void apply(final IHiddenRegionFormatter it) {
-            it.newLine();
-          }
+        final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
+          it.newLine();
         };
         document.<Transition>append(transition, _function_3);
       }
@@ -152,11 +125,8 @@ public class StatemachineFormatter extends AbstractFormatter2 {
     for (final State nestedState : _nestedStates) {
       {
         this.format(nestedState, document);
-        final Procedure1<IHiddenRegionFormatter> _function_3 = new Procedure1<IHiddenRegionFormatter>() {
-          @Override
-          public void apply(final IHiddenRegionFormatter it) {
-            it.newLine();
-          }
+        final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
+          it.newLine();
         };
         document.<State>append(nestedState, _function_3);
       }
@@ -168,29 +138,20 @@ public class StatemachineFormatter extends AbstractFormatter2 {
     StatemachineGrammarAccess.CommandElements _commandAccess = this._statemachineGrammarAccess.getCommandAccess();
     Keyword _setKeyword_0 = _commandAccess.getSetKeyword_0();
     ISemanticRegion _keyword = _regionFor.keyword(_setKeyword_0);
-    final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
-      @Override
-      public void apply(final IHiddenRegionFormatter it) {
-        it.oneSpace();
-      }
+    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+      it.oneSpace();
     };
     document.append(_keyword, _function);
     ISemanticRegionsFinder _regionFor_1 = this.textRegionExtensions.regionFor(command);
     StatemachineGrammarAccess.CommandElements _commandAccess_1 = this._statemachineGrammarAccess.getCommandAccess();
     Keyword _equalsSignKeyword_2 = _commandAccess_1.getEqualsSignKeyword_2();
     ISemanticRegion _keyword_1 = _regionFor_1.keyword(_equalsSignKeyword_2);
-    final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
-      @Override
-      public void apply(final IHiddenRegionFormatter it) {
-        it.oneSpace();
-      }
+    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
+      it.oneSpace();
     };
     ISemanticRegion _prepend = document.prepend(_keyword_1, _function_1);
-    final Procedure1<IHiddenRegionFormatter> _function_2 = new Procedure1<IHiddenRegionFormatter>() {
-      @Override
-      public void apply(final IHiddenRegionFormatter it) {
-        it.oneSpace();
-      }
+    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
+      it.oneSpace();
     };
     document.append(_prepend, _function_2);
   }
@@ -200,29 +161,20 @@ public class StatemachineFormatter extends AbstractFormatter2 {
     StatemachineGrammarAccess.TransitionElements _transitionAccess = this._statemachineGrammarAccess.getTransitionAccess();
     Keyword _ifKeyword_0 = _transitionAccess.getIfKeyword_0();
     ISemanticRegion _keyword = _regionFor.keyword(_ifKeyword_0);
-    final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
-      @Override
-      public void apply(final IHiddenRegionFormatter it) {
-        it.oneSpace();
-      }
+    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+      it.oneSpace();
     };
     document.append(_keyword, _function);
     ISemanticRegionsFinder _regionFor_1 = this.textRegionExtensions.regionFor(transition);
     StatemachineGrammarAccess.TransitionElements _transitionAccess_1 = this._statemachineGrammarAccess.getTransitionAccess();
     Keyword _gotoKeyword_2 = _transitionAccess_1.getGotoKeyword_2();
     ISemanticRegion _keyword_1 = _regionFor_1.keyword(_gotoKeyword_2);
-    final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
-      @Override
-      public void apply(final IHiddenRegionFormatter it) {
-        it.oneSpace();
-      }
+    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
+      it.oneSpace();
     };
     ISemanticRegion _prepend = document.prepend(_keyword_1, _function_1);
-    final Procedure1<IHiddenRegionFormatter> _function_2 = new Procedure1<IHiddenRegionFormatter>() {
-      @Override
-      public void apply(final IHiddenRegionFormatter it) {
-        it.oneSpace();
-      }
+    final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
+      it.oneSpace();
     };
     document.append(_prepend, _function_2);
     Condition _condition = transition.getCondition();
@@ -238,26 +190,17 @@ public class StatemachineFormatter extends AbstractFormatter2 {
     StatemachineGrammarAccess.ConditionElements _conditionAccess = this._statemachineGrammarAccess.getConditionAccess();
     Keyword _andKeyword_1_0 = _conditionAccess.getAndKeyword_1_0();
     List<ISemanticRegion> _keywords = _regionFor.keywords(_andKeyword_1_0);
-    final Procedure1<ISemanticRegion> _function = new Procedure1<ISemanticRegion>() {
-      @Override
-      public void apply(final ISemanticRegion it) {
-        final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
-          @Override
-          public void apply(final IHiddenRegionFormatter it) {
-            it.oneSpace();
-          }
-        };
-        ISemanticRegion _prepend = document.prepend(it, _function);
-        final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
-          @Override
-          public void apply(final IHiddenRegionFormatter it) {
-            it.oneSpace();
-          }
-        };
-        document.append(_prepend, _function_1);
-      }
+    final Consumer<ISemanticRegion> _function = (ISemanticRegion it) -> {
+      final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it_1) -> {
+        it_1.oneSpace();
+      };
+      ISemanticRegion _prepend = document.prepend(it, _function_1);
+      final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it_1) -> {
+        it_1.oneSpace();
+      };
+      document.append(_prepend, _function_2);
     };
-    IterableExtensions.<ISemanticRegion>forEach(_keywords, _function);
+    _keywords.forEach(_function);
     EList<Event> _events = condition.getEvents();
     for (final Event event : _events) {
       this.format(event, document);
@@ -269,18 +212,12 @@ public class StatemachineFormatter extends AbstractFormatter2 {
     StatemachineGrammarAccess.EventElements _eventAccess = this._statemachineGrammarAccess.getEventAccess();
     Keyword _equalsSignEqualsSignKeyword_1 = _eventAccess.getEqualsSignEqualsSignKeyword_1();
     ISemanticRegion _keyword = _regionFor.keyword(_equalsSignEqualsSignKeyword_1);
-    final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
-      @Override
-      public void apply(final IHiddenRegionFormatter it) {
-        it.oneSpace();
-      }
+    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+      it.oneSpace();
     };
     ISemanticRegion _prepend = document.prepend(_keyword, _function);
-    final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
-      @Override
-      public void apply(final IHiddenRegionFormatter it) {
-        it.oneSpace();
-      }
+    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
+      it.oneSpace();
     };
     document.append(_prepend, _function_1);
   }

@@ -17,6 +17,7 @@ import java.util.Enumeration;
 import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.function.Consumer;
 import org.apache.log4j.Appender;
 import org.apache.log4j.AppenderSkeleton;
 import org.apache.log4j.Category;
@@ -32,7 +33,6 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 import org.junit.Assert;
@@ -65,16 +65,10 @@ public class LoggingTester {
     }
     
     public void assertNumberOfLogEntries(final int number, final Level level, final String... messageParts) {
-      final Function1<LoggingTester.LogEntry, Boolean> _function = new Function1<LoggingTester.LogEntry, Boolean>() {
-        @Override
-        public Boolean apply(final LoggingTester.LogEntry log) {
-          return Boolean.valueOf(((Objects.equal(level, null) || Objects.equal(log.level, level)) && IterableExtensions.<String>forall(((Iterable<String>)Conversions.doWrapArray(messageParts)), new Function1<String, Boolean>() {
-            @Override
-            public Boolean apply(final String it) {
-              return Boolean.valueOf(log.message.contains(it));
-            }
-          })));
-        }
+      final Function1<LoggingTester.LogEntry, Boolean> _function = (LoggingTester.LogEntry log) -> {
+        return Boolean.valueOf(((Objects.equal(level, null) || Objects.equal(log.level, level)) && IterableExtensions.<String>forall(((Iterable<String>)Conversions.doWrapArray(messageParts)), ((Function1<String, Boolean>) (String it) -> {
+          return Boolean.valueOf(log.message.contains(it));
+        }))));
       };
       final Iterable<LoggingTester.LogEntry> passed = IterableExtensions.<LoggingTester.LogEntry>filter(this.logEntries, _function);
       int _size = IterableExtensions.size(passed);
@@ -107,11 +101,8 @@ public class LoggingTester {
           }
         }
         _builder.append("containing the phrases ");
-        final Function1<String, CharSequence> _function_1 = new Function1<String, CharSequence>() {
-          @Override
-          public CharSequence apply(final String it) {
-            return (("\"" + it) + "\"");
-          }
+        final Function1<String, CharSequence> _function_1 = (String it) -> {
+          return (("\"" + it) + "\"");
         };
         String _join = IterableExtensions.<String>join(((Iterable<String>)Conversions.doWrapArray(messageParts)), ", ", _function_1);
         _builder.append(_join, "");
@@ -363,13 +354,10 @@ public class LoggingTester {
     final ArrayList<Appender> allAppenders = LoggingTester.appenderHierarchy(logger);
     final LoggingTester.SourceFilter filter = new LoggingTester.SourceFilter(logger);
     try {
-      final Procedure1<Appender> _function = new Procedure1<Appender>() {
-        @Override
-        public void apply(final Appender it) {
-          it.addFilter(filter);
-        }
+      final Consumer<Appender> _function = (Appender it) -> {
+        it.addFilter(filter);
       };
-      IterableExtensions.<Appender>forEach(allAppenders, _function);
+      allAppenders.forEach(_function);
       logger.addAppender(appender);
       logger.setLevel(level);
       action.run();
@@ -378,13 +366,10 @@ public class LoggingTester {
       return new LoggingTester.LogCapture(events);
     } finally {
       logger.removeAppender(appender);
-      final Procedure1<Appender> _function_1 = new Procedure1<Appender>() {
-        @Override
-        public void apply(final Appender it) {
-          LoggingTester.removeFilter(it, filter);
-        }
+      final Consumer<Appender> _function_1 = (Appender it) -> {
+        LoggingTester.removeFilter(it, filter);
       };
-      IterableExtensions.<Appender>forEach(allAppenders, _function_1);
+      allAppenders.forEach(_function_1);
       logger.setLevel(oldLevel);
     }
   }
@@ -423,10 +408,7 @@ public class LoggingTester {
     }
   }
   
-  private final static Comparator<LoggingTester.LogEntry> TEMPORAL_ORDER = new Comparator<LoggingTester.LogEntry>() {
-    @Override
-    public int compare(final LoggingTester.LogEntry $0, final LoggingTester.LogEntry $1) {
-      return Longs.compare($0.timeStamp, $1.timeStamp);
-    }
-  };
+  private final static Comparator<LoggingTester.LogEntry> TEMPORAL_ORDER = ((Comparator<LoggingTester.LogEntry>) (LoggingTester.LogEntry $0, LoggingTester.LogEntry $1) -> {
+    return Longs.compare($0.timeStamp, $1.timeStamp);
+  });
 }

@@ -10,13 +10,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Consumer;
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceVisitor;
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.jdt.core.IClasspathEntry;
@@ -42,7 +42,6 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -442,18 +441,15 @@ public class XbaseEditorOpenClassFileTest extends AbstractXtendUITestCase {
           IResourcesSetupUtil.createFile(_append, _value);
         }
         IResourcesSetupUtil.waitForBuild();
-        final IResourceVisitor _function = new IResourceVisitor() {
-          @Override
-          public boolean visit(final IResource it) throws CoreException {
-            if ((it instanceof IFile)) {
-              IPath _projectRelativePath = ((IFile)it).getProjectRelativePath();
-              IPath _removeFirstSegments = _projectRelativePath.removeFirstSegments(1);
-              final String path = _removeFirstSegments.toString();
-              InputStream _contents = ((IFile)it).getContents();
-              listOfContents.put(path, _contents);
-            }
-            return true;
+        final IResourceVisitor _function = (IResource it) -> {
+          if ((it instanceof IFile)) {
+            IPath _projectRelativePath = ((IFile)it).getProjectRelativePath();
+            IPath _removeFirstSegments = _projectRelativePath.removeFirstSegments(1);
+            final String path = _removeFirstSegments.toString();
+            InputStream _contents = ((IFile)it).getContents();
+            listOfContents.put(path, _contents);
           }
+          return true;
         };
         final IResourceVisitor visitor = _function;
         IFolder _folder = project.getFolder("src");
@@ -463,13 +459,10 @@ public class XbaseEditorOpenClassFileTest extends AbstractXtendUITestCase {
         IFolder _folder_2 = project.getFolder("bin");
         _folder_2.accept(visitor);
         Set<Map.Entry<String, InputStream>> _entrySet = listOfContents.entrySet();
-        final Function1<Map.Entry<String, InputStream>, Pair<String, InputStream>> _function_1 = new Function1<Map.Entry<String, InputStream>, Pair<String, InputStream>>() {
-          @Override
-          public Pair<String, InputStream> apply(final Map.Entry<String, InputStream> it) {
-            String _key = it.getKey();
-            InputStream _value = it.getValue();
-            return Pair.<String, InputStream>of(_key, _value);
-          }
+        final Function1<Map.Entry<String, InputStream>, Pair<String, InputStream>> _function_1 = (Map.Entry<String, InputStream> it) -> {
+          String _key_1 = it.getKey();
+          InputStream _value_1 = it.getValue();
+          return Pair.<String, InputStream>of(_key_1, _value_1);
         };
         Iterable<Pair<String, InputStream>> _map = IterableExtensions.<Map.Entry<String, InputStream>, Pair<String, InputStream>>map(_entrySet, _function_1);
         List<Pair<String, InputStream>> _list = IterableExtensions.<Pair<String, InputStream>>toList(_map);
@@ -477,17 +470,14 @@ public class XbaseEditorOpenClassFileTest extends AbstractXtendUITestCase {
         return ByteStreams.toByteArray(jarin);
       } finally {
         Collection<InputStream> _values = listOfContents.values();
-        final Procedure1<InputStream> _function_2 = new Procedure1<InputStream>() {
-          @Override
-          public void apply(final InputStream it) {
-            try {
-              it.close();
-            } catch (Throwable _e) {
-              throw Exceptions.sneakyThrow(_e);
-            }
+        final Consumer<InputStream> _function_2 = (InputStream it) -> {
+          try {
+            it.close();
+          } catch (Throwable _e) {
+            throw Exceptions.sneakyThrow(_e);
           }
         };
-        IterableExtensions.<InputStream>forEach(_values, _function_2);
+        _values.forEach(_function_2);
         project.delete(true, true, null);
       }
     } catch (Throwable _e) {

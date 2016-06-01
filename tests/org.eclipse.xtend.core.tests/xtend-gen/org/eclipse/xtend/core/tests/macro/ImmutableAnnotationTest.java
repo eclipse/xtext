@@ -25,18 +25,15 @@ public class ImmutableAnnotationTest extends AbstractActiveAnnotationTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    final IAcceptor<XtendCompilerTester.CompilationResult> _function = new IAcceptor<XtendCompilerTester.CompilationResult>() {
-      @Override
-      public void accept(final XtendCompilerTester.CompilationResult it) {
-        final Class<?> clazz = it.getCompiledClass();
-        final Constructor<?>[] constr = clazz.getDeclaredConstructors();
-        int _length = constr.length;
-        Assert.assertEquals(1, _length);
-        Constructor<?> _head = IterableExtensions.<Constructor<?>>head(((Iterable<Constructor<?>>)Conversions.doWrapArray(constr)));
-        Class<?>[] _parameterTypes = _head.getParameterTypes();
-        int _length_1 = _parameterTypes.length;
-        Assert.assertEquals(1, _length_1);
-      }
+    final IAcceptor<XtendCompilerTester.CompilationResult> _function = (XtendCompilerTester.CompilationResult it) -> {
+      final Class<?> clazz = it.getCompiledClass();
+      final Constructor<?>[] constr = clazz.getDeclaredConstructors();
+      int _length = constr.length;
+      Assert.assertEquals(1, _length);
+      Constructor<?> _head = IterableExtensions.<Constructor<?>>head(((Iterable<Constructor<?>>)Conversions.doWrapArray(constr)));
+      Class<?>[] _parameterTypes = _head.getParameterTypes();
+      int _length_1 = _parameterTypes.length;
+      Assert.assertEquals(1, _length_1);
     };
     this._xtendCompilerTester.compile(_builder, _function);
   }

@@ -11,7 +11,9 @@ import com.google.common.base.Objects;
 import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.function.Consumer;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
@@ -33,7 +35,6 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
@@ -260,23 +261,17 @@ public class JavaBuilderState {
       boolean _equals = Objects.equal(typeNames, null);
       if (_equals) {
         TypeNames _typeNames = new TypeNames(project);
-        final Procedure1<TypeNames> _function = new Procedure1<TypeNames>() {
-          @Override
-          public void apply(final TypeNames it) {
-            it.addTypeName(primaryTypeFqn, primaryTypeFqn);
-          }
+        final Procedure1<TypeNames> _function = (TypeNames it) -> {
+          it.addTypeName(primaryTypeFqn, primaryTypeFqn);
         };
         return ObjectExtensions.<TypeNames>operator_doubleArrow(_typeNames, _function);
       }
-      final Procedure1<char[]> _function_1 = new Procedure1<char[]>() {
-        @Override
-        public void apply(final char[] it) {
-          String _string = new String(it);
-          final String typeName = JavaBuilderState.this.getQualifedTypeName(packageName, _string);
-          qualifiedTypeNames.addTypeName(typeName, primaryTypeFqn);
-        }
+      final Consumer<char[]> _function_1 = (char[] it) -> {
+        String _string = new String(it);
+        final String typeName = this.getQualifedTypeName(packageName, _string);
+        qualifiedTypeNames.addTypeName(typeName, primaryTypeFqn);
       };
-      IterableExtensions.<char[]>forEach(((Iterable<char[]>)Conversions.doWrapArray(typeNames)), _function_1);
+      ((List<char[]>)Conversions.doWrapArray(typeNames)).forEach(_function_1);
       _xblockexpression = qualifiedTypeNames;
     }
     return _xblockexpression;

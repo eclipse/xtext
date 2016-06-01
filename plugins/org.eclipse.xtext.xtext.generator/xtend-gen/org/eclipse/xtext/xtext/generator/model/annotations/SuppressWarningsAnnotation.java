@@ -33,11 +33,8 @@ public class SuppressWarningsAnnotation implements IClassAnnotation {
     if (_notEquals) {
       stringBuilder.append("{");
     }
-    final Function1<String, CharSequence> _function = new Function1<String, CharSequence>() {
-      @Override
-      public CharSequence apply(final String it) {
-        return it;
-      }
+    final Function1<String, CharSequence> _function = (String it) -> {
+      return it;
     };
     String _join = IterableExtensions.<String>join(((Iterable<String>)Conversions.doWrapArray(suppressedWarnings)), "\"", "\", \"", "\"", _function);
     stringBuilder.append(_join);

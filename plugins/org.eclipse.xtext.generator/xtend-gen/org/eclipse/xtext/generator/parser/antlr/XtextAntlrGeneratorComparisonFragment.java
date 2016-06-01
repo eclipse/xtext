@@ -15,6 +15,7 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.function.Consumer;
 import org.apache.log4j.Logger;
 import org.eclipse.xpand2.XpandExecutionContext;
 import org.eclipse.xpand2.XpandExecutionContextImpl;
@@ -40,8 +41,6 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.FlattenedGrammarAccess;
 import org.eclipse.xtext.xtext.RuleFilter;
@@ -424,13 +423,10 @@ public class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
     final Grammar flattened = _flattenedGrammarAccess.getFlattenedGrammar();
     XpandExecutionContext _createExecutionContext = this.createExecutionContext();
     final XpandExecutionContextImpl context = ((XpandExecutionContextImpl) _createExecutionContext);
-    final Procedure1<String> _function = new Procedure1<String>() {
-      @Override
-      public void apply(final String it) {
-        context.registerAdvices(it);
-      }
+    final Consumer<String> _function = (String it) -> {
+      context.registerAdvices(it);
     };
-    IterableExtensions.<String>forEach(this.advices, _function);
+    this.advices.forEach(_function);
     Grammar _grammar_1 = this.getGrammar();
     final boolean combined = this.productionNaming.isCombinedGrammar(_grammar_1);
     XtextAntlrGeneratorComparisonFragment.AntlrFragmentHelperEx _xifexpression = null;

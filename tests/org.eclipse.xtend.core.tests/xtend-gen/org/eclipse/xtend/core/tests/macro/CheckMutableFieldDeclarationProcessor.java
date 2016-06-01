@@ -19,18 +19,12 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure0;
 public class CheckMutableFieldDeclarationProcessor extends AbstractFieldProcessor {
   @Override
   public void doTransform(final MutableFieldDeclaration annotatedField, @Extension final TransformationContext context) {
-    final Procedure0 _function = new Procedure0() {
-      @Override
-      public void apply() {
-        annotatedField.setInitializer(((CompilationStrategy) null));
-      }
+    final Procedure0 _function = () -> {
+      annotatedField.setInitializer(((CompilationStrategy) null));
     };
     MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, "initializer cannot be null", _function);
-    final Procedure0 _function_1 = new Procedure0() {
-      @Override
-      public void apply() {
-        annotatedField.setType(null);
-      }
+    final Procedure0 _function_1 = () -> {
+      annotatedField.setType(null);
     };
     MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, "type cannot be null", _function_1);
   }

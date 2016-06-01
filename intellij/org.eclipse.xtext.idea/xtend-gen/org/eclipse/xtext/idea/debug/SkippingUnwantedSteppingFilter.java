@@ -16,7 +16,6 @@ import com.intellij.debugger.engine.ExtraSteppingFilter;
 import com.intellij.debugger.engine.SuspendContext;
 import com.intellij.debugger.engine.jdi.StackFrameProxy;
 import com.sun.jdi.Location;
-import com.sun.jdi.Method;
 import com.sun.jdi.request.StepRequest;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.idea.debug.DebugProcessExtensions;
@@ -84,19 +83,8 @@ public class SkippingUnwantedSteppingFilter implements ExtraSteppingFilter {
   }
   
   public boolean isEmptyAnonymousClassConstructor(final SuspendContext context) {
-    try {
-      StackFrameProxy _frameProxy = context.getFrameProxy();
-      final Location location = _frameProxy.location();
-      boolean _notEquals = (!Objects.equal(location, null));
-      if (_notEquals) {
-        final Method method = location.method();
-        if (((((!Objects.equal(method, null)) && method.isConstructor()) && method.argumentTypes().isEmpty()) && (method.declaringType().name().indexOf("$") > 0))) {
-          return true;
-        }
-      }
-      return false;
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+    throw new Error("Unresolved compilation problems:"
+      + "\nAccess restriction: The type Location is not accessible due to restriction on required project org.eclipse.xtext.idea"
+      + "\nAccess restriction: The type Method is not accessible due to restriction on required project org.eclipse.xtext.idea");
   }
 }

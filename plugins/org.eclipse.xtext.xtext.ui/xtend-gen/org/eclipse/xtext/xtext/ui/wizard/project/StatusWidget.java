@@ -33,11 +33,8 @@ public class StatusWidget extends Composite {
   
   private Label imageLabel;
   
-  private Procedure0 quickFix = new Procedure0() {
-    @Override
-    public void apply() {
-    }
-  };
+  private Procedure0 quickFix = ((Procedure0) () -> {
+  });
   
   private int severity = IMessageProvider.NONE;
   
@@ -71,15 +68,9 @@ public class StatusWidget extends Composite {
   }
   
   public Procedure0 clearStatus() {
-    final Procedure0 _function = new Procedure0() {
-      @Override
-      public void apply() {
-      }
+    final Procedure0 _function = () -> {
     };
-    final Procedure0 _function_1 = new Procedure0() {
-      @Override
-      public void apply() {
-      }
+    final Procedure0 _function_1 = () -> {
     };
     return this.setStatus(IMessageProvider.NONE, "\n\n\n", _function, _function_1);
   }
@@ -97,12 +88,9 @@ public class StatusWidget extends Composite {
       final Matcher matcher = _compile.matcher(_trim);
       String _replaceAll = matcher.replaceAll("$1");
       this.link.setToolTipText(_replaceAll);
-      final Procedure0 _function = new Procedure0() {
-        @Override
-        public void apply() {
-          quickFix.apply();
-          callback.apply();
-        }
+      final Procedure0 _function = () -> {
+        quickFix.apply();
+        callback.apply();
       };
       _xblockexpression = this.quickFix = _function;
     }
@@ -115,15 +103,9 @@ public class StatusWidget extends Composite {
     String _trim = _text.trim();
     boolean _isEmpty = _trim.isEmpty();
     if (_isEmpty) {
-      final Procedure0 _function = new Procedure0() {
-        @Override
-        public void apply() {
-        }
+      final Procedure0 _function = () -> {
       };
-      final Procedure0 _function_1 = new Procedure0() {
-        @Override
-        public void apply() {
-        }
+      final Procedure0 _function_1 = () -> {
       };
       _xifexpression = this.setStatus(severity, text, _function, _function_1);
     } else {

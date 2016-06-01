@@ -27,21 +27,18 @@ public class ConstructorBuilderTest extends AbstractBuilderTest {
   public void testXtendConstructor() {
     JvmDeclaredType _xtendClass = this.getXtendClass();
     AbstractConstructorBuilder _createConstructorBuilder = this._codeBuilderFactory.createConstructorBuilder(_xtendClass);
-    final Procedure1<AbstractConstructorBuilder> _function = new Procedure1<AbstractConstructorBuilder>() {
-      @Override
-      public void apply(final AbstractConstructorBuilder it) {
-        JvmDeclaredType _xtendClass = ConstructorBuilderTest.this.getXtendClass();
-        it.setContext(_xtendClass);
-        it.setVisibility(JvmVisibility.PROTECTED);
-        AbstractParameterBuilder _newParameterBuilder = it.newParameterBuilder();
-        JvmDeclaredType _xtendClass_1 = ConstructorBuilderTest.this.getXtendClass();
-        LightweightTypeReference _createTypeRef = ConstructorBuilderTest.this.createTypeRef(_xtendClass_1);
-        _newParameterBuilder.setType(_createTypeRef);
-        AbstractParameterBuilder _newParameterBuilder_1 = it.newParameterBuilder();
-        JvmDeclaredType _xtendClass_2 = ConstructorBuilderTest.this.getXtendClass();
-        LightweightTypeReference _createTypeRef_1 = ConstructorBuilderTest.this.createTypeRef(_xtendClass_2);
-        _newParameterBuilder_1.setType(_createTypeRef_1);
-      }
+    final Procedure1<AbstractConstructorBuilder> _function = (AbstractConstructorBuilder it) -> {
+      JvmDeclaredType _xtendClass_1 = this.getXtendClass();
+      it.setContext(_xtendClass_1);
+      it.setVisibility(JvmVisibility.PROTECTED);
+      AbstractParameterBuilder _newParameterBuilder = it.newParameterBuilder();
+      JvmDeclaredType _xtendClass_2 = this.getXtendClass();
+      LightweightTypeReference _createTypeRef = this.createTypeRef(_xtendClass_2);
+      _newParameterBuilder.setType(_createTypeRef);
+      AbstractParameterBuilder _newParameterBuilder_1 = it.newParameterBuilder();
+      JvmDeclaredType _xtendClass_3 = this.getXtendClass();
+      LightweightTypeReference _createTypeRef_1 = this.createTypeRef(_xtendClass_3);
+      _newParameterBuilder_1.setType(_createTypeRef_1);
     };
     AbstractConstructorBuilder _doubleArrow = ObjectExtensions.<AbstractConstructorBuilder>operator_doubleArrow(_createConstructorBuilder, _function);
     StringConcatenation _builder = new StringConcatenation();
@@ -58,21 +55,18 @@ public class ConstructorBuilderTest extends AbstractBuilderTest {
   public void testJavaConstructor() {
     JvmDeclaredType _javaClass = this.getJavaClass();
     AbstractConstructorBuilder _createConstructorBuilder = this._codeBuilderFactory.createConstructorBuilder(_javaClass);
-    final Procedure1<AbstractConstructorBuilder> _function = new Procedure1<AbstractConstructorBuilder>() {
-      @Override
-      public void apply(final AbstractConstructorBuilder it) {
-        JvmDeclaredType _javaClass = ConstructorBuilderTest.this.getJavaClass();
-        it.setContext(_javaClass);
-        it.setVisibility(JvmVisibility.PRIVATE);
-        AbstractParameterBuilder _newParameterBuilder = it.newParameterBuilder();
-        JvmDeclaredType _javaClass_1 = ConstructorBuilderTest.this.getJavaClass();
-        LightweightTypeReference _createTypeRef = ConstructorBuilderTest.this.createTypeRef(_javaClass_1);
-        _newParameterBuilder.setType(_createTypeRef);
-        AbstractParameterBuilder _newParameterBuilder_1 = it.newParameterBuilder();
-        JvmDeclaredType _javaClass_2 = ConstructorBuilderTest.this.getJavaClass();
-        LightweightTypeReference _createTypeRef_1 = ConstructorBuilderTest.this.createTypeRef(_javaClass_2);
-        _newParameterBuilder_1.setType(_createTypeRef_1);
-      }
+    final Procedure1<AbstractConstructorBuilder> _function = (AbstractConstructorBuilder it) -> {
+      JvmDeclaredType _javaClass_1 = this.getJavaClass();
+      it.setContext(_javaClass_1);
+      it.setVisibility(JvmVisibility.PRIVATE);
+      AbstractParameterBuilder _newParameterBuilder = it.newParameterBuilder();
+      JvmDeclaredType _javaClass_2 = this.getJavaClass();
+      LightweightTypeReference _createTypeRef = this.createTypeRef(_javaClass_2);
+      _newParameterBuilder.setType(_createTypeRef);
+      AbstractParameterBuilder _newParameterBuilder_1 = it.newParameterBuilder();
+      JvmDeclaredType _javaClass_3 = this.getJavaClass();
+      LightweightTypeReference _createTypeRef_1 = this.createTypeRef(_javaClass_3);
+      _newParameterBuilder_1.setType(_createTypeRef_1);
     };
     AbstractConstructorBuilder _doubleArrow = ObjectExtensions.<AbstractConstructorBuilder>operator_doubleArrow(_createConstructorBuilder, _function);
     StringConcatenation _builder = new StringConcatenation();
@@ -90,35 +84,26 @@ public class ConstructorBuilderTest extends AbstractBuilderTest {
   public void testXtendParameterNames() {
     JvmDeclaredType _xtendClass = this.getXtendClass();
     AbstractConstructorBuilder _createConstructorBuilder = this._codeBuilderFactory.createConstructorBuilder(_xtendClass);
-    final Procedure1<AbstractConstructorBuilder> _function = new Procedure1<AbstractConstructorBuilder>() {
-      @Override
-      public void apply(final AbstractConstructorBuilder it) {
-        JvmDeclaredType _xtendClass = ConstructorBuilderTest.this.getXtendClass();
-        it.setContext(_xtendClass);
-        it.setVisibility(JvmVisibility.PROTECTED);
-        AbstractParameterBuilder _newParameterBuilder = it.newParameterBuilder();
-        final Procedure1<AbstractParameterBuilder> _function = new Procedure1<AbstractParameterBuilder>() {
-          @Override
-          public void apply(final AbstractParameterBuilder it) {
-            JvmDeclaredType _xtendClass = ConstructorBuilderTest.this.getXtendClass();
-            LightweightTypeReference _createTypeRef = ConstructorBuilderTest.this.createTypeRef(_xtendClass);
-            it.setType(_createTypeRef);
-            it.setName("bar");
-          }
-        };
-        ObjectExtensions.<AbstractParameterBuilder>operator_doubleArrow(_newParameterBuilder, _function);
-        AbstractParameterBuilder _newParameterBuilder_1 = it.newParameterBuilder();
-        final Procedure1<AbstractParameterBuilder> _function_1 = new Procedure1<AbstractParameterBuilder>() {
-          @Override
-          public void apply(final AbstractParameterBuilder it) {
-            JvmDeclaredType _javaClass = ConstructorBuilderTest.this.getJavaClass();
-            LightweightTypeReference _createTypeRef = ConstructorBuilderTest.this.createTypeRef(_javaClass);
-            it.setType(_createTypeRef);
-            it.setName("foo");
-          }
-        };
-        ObjectExtensions.<AbstractParameterBuilder>operator_doubleArrow(_newParameterBuilder_1, _function_1);
-      }
+    final Procedure1<AbstractConstructorBuilder> _function = (AbstractConstructorBuilder it) -> {
+      JvmDeclaredType _xtendClass_1 = this.getXtendClass();
+      it.setContext(_xtendClass_1);
+      it.setVisibility(JvmVisibility.PROTECTED);
+      AbstractParameterBuilder _newParameterBuilder = it.newParameterBuilder();
+      final Procedure1<AbstractParameterBuilder> _function_1 = (AbstractParameterBuilder it_1) -> {
+        JvmDeclaredType _xtendClass_2 = this.getXtendClass();
+        LightweightTypeReference _createTypeRef = this.createTypeRef(_xtendClass_2);
+        it_1.setType(_createTypeRef);
+        it_1.setName("bar");
+      };
+      ObjectExtensions.<AbstractParameterBuilder>operator_doubleArrow(_newParameterBuilder, _function_1);
+      AbstractParameterBuilder _newParameterBuilder_1 = it.newParameterBuilder();
+      final Procedure1<AbstractParameterBuilder> _function_2 = (AbstractParameterBuilder it_1) -> {
+        JvmDeclaredType _javaClass = this.getJavaClass();
+        LightweightTypeReference _createTypeRef = this.createTypeRef(_javaClass);
+        it_1.setType(_createTypeRef);
+        it_1.setName("foo");
+      };
+      ObjectExtensions.<AbstractParameterBuilder>operator_doubleArrow(_newParameterBuilder_1, _function_2);
     };
     AbstractConstructorBuilder _doubleArrow = ObjectExtensions.<AbstractConstructorBuilder>operator_doubleArrow(_createConstructorBuilder, _function);
     StringConcatenation _builder = new StringConcatenation();
@@ -135,35 +120,26 @@ public class ConstructorBuilderTest extends AbstractBuilderTest {
   public void testJavaParameterNames() {
     JvmDeclaredType _javaClass = this.getJavaClass();
     AbstractConstructorBuilder _createConstructorBuilder = this._codeBuilderFactory.createConstructorBuilder(_javaClass);
-    final Procedure1<AbstractConstructorBuilder> _function = new Procedure1<AbstractConstructorBuilder>() {
-      @Override
-      public void apply(final AbstractConstructorBuilder it) {
-        JvmDeclaredType _javaClass = ConstructorBuilderTest.this.getJavaClass();
-        it.setContext(_javaClass);
-        it.setVisibility(JvmVisibility.PRIVATE);
-        AbstractParameterBuilder _newParameterBuilder = it.newParameterBuilder();
-        final Procedure1<AbstractParameterBuilder> _function = new Procedure1<AbstractParameterBuilder>() {
-          @Override
-          public void apply(final AbstractParameterBuilder it) {
-            JvmDeclaredType _xtendClass = ConstructorBuilderTest.this.getXtendClass();
-            LightweightTypeReference _createTypeRef = ConstructorBuilderTest.this.createTypeRef(_xtendClass);
-            it.setType(_createTypeRef);
-            it.setName("bar");
-          }
-        };
-        ObjectExtensions.<AbstractParameterBuilder>operator_doubleArrow(_newParameterBuilder, _function);
-        AbstractParameterBuilder _newParameterBuilder_1 = it.newParameterBuilder();
-        final Procedure1<AbstractParameterBuilder> _function_1 = new Procedure1<AbstractParameterBuilder>() {
-          @Override
-          public void apply(final AbstractParameterBuilder it) {
-            JvmDeclaredType _javaClass = ConstructorBuilderTest.this.getJavaClass();
-            LightweightTypeReference _createTypeRef = ConstructorBuilderTest.this.createTypeRef(_javaClass);
-            it.setType(_createTypeRef);
-            it.setName("foo");
-          }
-        };
-        ObjectExtensions.<AbstractParameterBuilder>operator_doubleArrow(_newParameterBuilder_1, _function_1);
-      }
+    final Procedure1<AbstractConstructorBuilder> _function = (AbstractConstructorBuilder it) -> {
+      JvmDeclaredType _javaClass_1 = this.getJavaClass();
+      it.setContext(_javaClass_1);
+      it.setVisibility(JvmVisibility.PRIVATE);
+      AbstractParameterBuilder _newParameterBuilder = it.newParameterBuilder();
+      final Procedure1<AbstractParameterBuilder> _function_1 = (AbstractParameterBuilder it_1) -> {
+        JvmDeclaredType _xtendClass = this.getXtendClass();
+        LightweightTypeReference _createTypeRef = this.createTypeRef(_xtendClass);
+        it_1.setType(_createTypeRef);
+        it_1.setName("bar");
+      };
+      ObjectExtensions.<AbstractParameterBuilder>operator_doubleArrow(_newParameterBuilder, _function_1);
+      AbstractParameterBuilder _newParameterBuilder_1 = it.newParameterBuilder();
+      final Procedure1<AbstractParameterBuilder> _function_2 = (AbstractParameterBuilder it_1) -> {
+        JvmDeclaredType _javaClass_2 = this.getJavaClass();
+        LightweightTypeReference _createTypeRef = this.createTypeRef(_javaClass_2);
+        it_1.setType(_createTypeRef);
+        it_1.setName("foo");
+      };
+      ObjectExtensions.<AbstractParameterBuilder>operator_doubleArrow(_newParameterBuilder_1, _function_2);
     };
     AbstractConstructorBuilder _doubleArrow = ObjectExtensions.<AbstractConstructorBuilder>operator_doubleArrow(_createConstructorBuilder, _function);
     StringConcatenation _builder = new StringConcatenation();
@@ -181,17 +157,14 @@ public class ConstructorBuilderTest extends AbstractBuilderTest {
   public void testXtendExceptions() {
     JvmDeclaredType _xtendClass = this.getXtendClass();
     AbstractConstructorBuilder _createConstructorBuilder = this._codeBuilderFactory.createConstructorBuilder(_xtendClass);
-    final Procedure1<AbstractConstructorBuilder> _function = new Procedure1<AbstractConstructorBuilder>() {
-      @Override
-      public void apply(final AbstractConstructorBuilder it) {
-        JvmDeclaredType _xtendClass = ConstructorBuilderTest.this.getXtendClass();
-        it.setContext(_xtendClass);
-        JvmDeclaredType _xtendClass_1 = ConstructorBuilderTest.this.getXtendClass();
-        LightweightTypeReference _createTypeRef = ConstructorBuilderTest.this.createTypeRef(Exception.class, _xtendClass_1);
-        JvmDeclaredType _xtendClass_2 = ConstructorBuilderTest.this.getXtendClass();
-        LightweightTypeReference _createTypeRef_1 = ConstructorBuilderTest.this.createTypeRef(RuntimeException.class, _xtendClass_2);
-        it.setExceptions(Collections.<LightweightTypeReference>unmodifiableList(CollectionLiterals.<LightweightTypeReference>newArrayList(_createTypeRef, _createTypeRef_1)));
-      }
+    final Procedure1<AbstractConstructorBuilder> _function = (AbstractConstructorBuilder it) -> {
+      JvmDeclaredType _xtendClass_1 = this.getXtendClass();
+      it.setContext(_xtendClass_1);
+      JvmDeclaredType _xtendClass_2 = this.getXtendClass();
+      LightweightTypeReference _createTypeRef = this.createTypeRef(Exception.class, _xtendClass_2);
+      JvmDeclaredType _xtendClass_3 = this.getXtendClass();
+      LightweightTypeReference _createTypeRef_1 = this.createTypeRef(RuntimeException.class, _xtendClass_3);
+      it.setExceptions(Collections.<LightweightTypeReference>unmodifiableList(CollectionLiterals.<LightweightTypeReference>newArrayList(_createTypeRef, _createTypeRef_1)));
     };
     AbstractConstructorBuilder _doubleArrow = ObjectExtensions.<AbstractConstructorBuilder>operator_doubleArrow(_createConstructorBuilder, _function);
     StringConcatenation _builder = new StringConcatenation();
@@ -208,17 +181,14 @@ public class ConstructorBuilderTest extends AbstractBuilderTest {
   public void testJavaException() {
     JvmDeclaredType _javaClass = this.getJavaClass();
     AbstractConstructorBuilder _createConstructorBuilder = this._codeBuilderFactory.createConstructorBuilder(_javaClass);
-    final Procedure1<AbstractConstructorBuilder> _function = new Procedure1<AbstractConstructorBuilder>() {
-      @Override
-      public void apply(final AbstractConstructorBuilder it) {
-        JvmDeclaredType _javaClass = ConstructorBuilderTest.this.getJavaClass();
-        it.setContext(_javaClass);
-        JvmDeclaredType _javaClass_1 = ConstructorBuilderTest.this.getJavaClass();
-        LightweightTypeReference _createTypeRef = ConstructorBuilderTest.this.createTypeRef(Exception.class, _javaClass_1);
-        JvmDeclaredType _javaClass_2 = ConstructorBuilderTest.this.getJavaClass();
-        LightweightTypeReference _createTypeRef_1 = ConstructorBuilderTest.this.createTypeRef(RuntimeException.class, _javaClass_2);
-        it.setExceptions(Collections.<LightweightTypeReference>unmodifiableList(CollectionLiterals.<LightweightTypeReference>newArrayList(_createTypeRef, _createTypeRef_1)));
-      }
+    final Procedure1<AbstractConstructorBuilder> _function = (AbstractConstructorBuilder it) -> {
+      JvmDeclaredType _javaClass_1 = this.getJavaClass();
+      it.setContext(_javaClass_1);
+      JvmDeclaredType _javaClass_2 = this.getJavaClass();
+      LightweightTypeReference _createTypeRef = this.createTypeRef(Exception.class, _javaClass_2);
+      JvmDeclaredType _javaClass_3 = this.getJavaClass();
+      LightweightTypeReference _createTypeRef_1 = this.createTypeRef(RuntimeException.class, _javaClass_3);
+      it.setExceptions(Collections.<LightweightTypeReference>unmodifiableList(CollectionLiterals.<LightweightTypeReference>newArrayList(_createTypeRef, _createTypeRef_1)));
     };
     AbstractConstructorBuilder _doubleArrow = ObjectExtensions.<AbstractConstructorBuilder>operator_doubleArrow(_createConstructorBuilder, _function);
     StringConcatenation _builder = new StringConcatenation();
@@ -236,19 +206,13 @@ public class ConstructorBuilderTest extends AbstractBuilderTest {
   public void testXtendCustomBody() {
     JvmDeclaredType _xtendClass = this.getXtendClass();
     AbstractConstructorBuilder _createConstructorBuilder = this._codeBuilderFactory.createConstructorBuilder(_xtendClass);
-    final Procedure1<AbstractConstructorBuilder> _function = new Procedure1<AbstractConstructorBuilder>() {
-      @Override
-      public void apply(final AbstractConstructorBuilder it) {
-        JvmDeclaredType _xtendClass = ConstructorBuilderTest.this.getXtendClass();
-        it.setContext(_xtendClass);
-        final Procedure1<ISourceAppender> _function = new Procedure1<ISourceAppender>() {
-          @Override
-          public void apply(final ISourceAppender it) {
-            it.append("return");
-          }
-        };
-        it.setBodyGenerator(_function);
-      }
+    final Procedure1<AbstractConstructorBuilder> _function = (AbstractConstructorBuilder it) -> {
+      JvmDeclaredType _xtendClass_1 = this.getXtendClass();
+      it.setContext(_xtendClass_1);
+      final Procedure1<ISourceAppender> _function_1 = (ISourceAppender it_1) -> {
+        it_1.append("return");
+      };
+      it.setBodyGenerator(_function_1);
     };
     AbstractConstructorBuilder _doubleArrow = ObjectExtensions.<AbstractConstructorBuilder>operator_doubleArrow(_createConstructorBuilder, _function);
     StringConcatenation _builder = new StringConcatenation();
@@ -265,19 +229,13 @@ public class ConstructorBuilderTest extends AbstractBuilderTest {
   public void testJavaCustomBody() {
     JvmDeclaredType _javaClass = this.getJavaClass();
     AbstractConstructorBuilder _createConstructorBuilder = this._codeBuilderFactory.createConstructorBuilder(_javaClass);
-    final Procedure1<AbstractConstructorBuilder> _function = new Procedure1<AbstractConstructorBuilder>() {
-      @Override
-      public void apply(final AbstractConstructorBuilder it) {
-        JvmDeclaredType _javaClass = ConstructorBuilderTest.this.getJavaClass();
-        it.setContext(_javaClass);
-        final Procedure1<ISourceAppender> _function = new Procedure1<ISourceAppender>() {
-          @Override
-          public void apply(final ISourceAppender it) {
-            it.append("return");
-          }
-        };
-        it.setBodyGenerator(_function);
-      }
+    final Procedure1<AbstractConstructorBuilder> _function = (AbstractConstructorBuilder it) -> {
+      JvmDeclaredType _javaClass_1 = this.getJavaClass();
+      it.setContext(_javaClass_1);
+      final Procedure1<ISourceAppender> _function_1 = (ISourceAppender it_1) -> {
+        it_1.append("return");
+      };
+      it.setBodyGenerator(_function_1);
     };
     AbstractConstructorBuilder _doubleArrow = ObjectExtensions.<AbstractConstructorBuilder>operator_doubleArrow(_createConstructorBuilder, _function);
     StringConcatenation _builder = new StringConcatenation();

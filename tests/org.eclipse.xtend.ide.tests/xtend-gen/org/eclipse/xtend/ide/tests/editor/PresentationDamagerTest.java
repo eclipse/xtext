@@ -178,28 +178,19 @@ public class PresentationDamagerTest extends AbstractDamagerRepairerTest {
     XtextDocument _xblockexpression = null;
     {
       XtendDocumentTokenSource _xtendDocumentTokenSource = new XtendDocumentTokenSource();
-      final Procedure1<XtendDocumentTokenSource> _function = new Procedure1<XtendDocumentTokenSource>() {
-        @Override
-        public void apply(final XtendDocumentTokenSource it) {
-          AntlrTokenDefProvider _antlrTokenDefProvider = new AntlrTokenDefProvider();
-          final Procedure1<AntlrTokenDefProvider> _function = new Procedure1<AntlrTokenDefProvider>() {
-            @Override
-            public void apply(final AntlrTokenDefProvider it) {
-              XtendAntlrTokenFileProvider _xtendAntlrTokenFileProvider = new XtendAntlrTokenFileProvider();
-              it.setAntlrTokenFileProvider(_xtendAntlrTokenFileProvider);
-            }
-          };
-          AntlrTokenDefProvider _doubleArrow = ObjectExtensions.<AntlrTokenDefProvider>operator_doubleArrow(_antlrTokenDefProvider, _function);
-          it.setTokenDefProvider(_doubleArrow);
-          final Provider<Lexer> _function_1 = new Provider<Lexer>() {
-            @Override
-            public Lexer get() {
-              return PresentationDamagerTest.this.createLexer();
-            }
-          };
-          it.setLexer(_function_1);
-          it.setFlexerFactory(PresentationDamagerTest.this.flexerFactory);
-        }
+      final Procedure1<XtendDocumentTokenSource> _function = (XtendDocumentTokenSource it) -> {
+        AntlrTokenDefProvider _antlrTokenDefProvider = new AntlrTokenDefProvider();
+        final Procedure1<AntlrTokenDefProvider> _function_1 = (AntlrTokenDefProvider it_1) -> {
+          XtendAntlrTokenFileProvider _xtendAntlrTokenFileProvider = new XtendAntlrTokenFileProvider();
+          it_1.setAntlrTokenFileProvider(_xtendAntlrTokenFileProvider);
+        };
+        AntlrTokenDefProvider _doubleArrow = ObjectExtensions.<AntlrTokenDefProvider>operator_doubleArrow(_antlrTokenDefProvider, _function_1);
+        it.setTokenDefProvider(_doubleArrow);
+        final Provider<Lexer> _function_2 = () -> {
+          return this.createLexer();
+        };
+        it.setLexer(_function_2);
+        it.setFlexerFactory(this.flexerFactory);
       };
       final XtendDocumentTokenSource source = ObjectExtensions.<XtendDocumentTokenSource>operator_doubleArrow(_xtendDocumentTokenSource, _function);
       final XtextDocument document = new XtextDocument(source, null, this.outdatedStateManager, this.operationCanceledManager);

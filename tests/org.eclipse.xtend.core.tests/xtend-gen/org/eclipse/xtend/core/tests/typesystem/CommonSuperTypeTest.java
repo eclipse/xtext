@@ -13,6 +13,7 @@ import com.google.inject.Inject;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Consumer;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.tests.typesystem.AbstractTestingTypeReferenceOwner;
@@ -91,12 +92,9 @@ public class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
       final XtendFunction function = this.function(_string);
       final JvmOperation operation = this._iXtendJvmAssociations.getDirectlyInferredOperation(function);
       EList<JvmFormalParameter> _parameters = operation.getParameters();
-      final Function1<JvmFormalParameter, LightweightTypeReference> _function = new Function1<JvmFormalParameter, LightweightTypeReference>() {
-        @Override
-        public LightweightTypeReference apply(final JvmFormalParameter it) {
-          JvmTypeReference _parameterType = it.getParameterType();
-          return CommonSuperTypeTest.this.toLightweightTypeReference(_parameterType);
-        }
+      final Function1<JvmFormalParameter, LightweightTypeReference> _function = (JvmFormalParameter it) -> {
+        JvmTypeReference _parameterType = it.getParameterType();
+        return this.toLightweightTypeReference(_parameterType);
       };
       List<LightweightTypeReference> _map = ListExtensions.<JvmFormalParameter, LightweightTypeReference>map(_parameters, _function);
       final ArrayList<LightweightTypeReference> typeReferences = new ArrayList<LightweightTypeReference>(_map);
@@ -159,24 +157,18 @@ public class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
       }
       boolean _notEquals = (!Objects.equal(computedSuperType, null));
       if (_notEquals) {
-        final Procedure1<LightweightTypeReference> _function_1 = new Procedure1<LightweightTypeReference>() {
-          @Override
-          public void apply(final LightweightTypeReference superType) {
-            final Procedure1<LightweightTypeReference> _function = new Procedure1<LightweightTypeReference>() {
-              @Override
-              public void apply(final LightweightTypeReference it) {
-                String _key = superTypeAndParam.getKey();
-                ITypeReferenceOwner _owner = superType.getOwner();
-                LightweightTypeReference _commonSuperType = conformanceComputer.getCommonSuperType(Collections.<LightweightTypeReference>unmodifiableList(CollectionLiterals.<LightweightTypeReference>newArrayList(it, superType)), _owner);
-                String _simpleName = null;
-                if (_commonSuperType!=null) {
-                  _simpleName=_commonSuperType.getSimpleName();
-                }
-                Assert.assertEquals(_key, _simpleName);
-              }
-            };
-            IterableExtensions.<LightweightTypeReference>forEach(typeReferences, _function);
-          }
+        final Procedure1<LightweightTypeReference> _function_1 = (LightweightTypeReference superType) -> {
+          final Consumer<LightweightTypeReference> _function_2 = (LightweightTypeReference it) -> {
+            String _key_4 = superTypeAndParam.getKey();
+            ITypeReferenceOwner _owner_6 = superType.getOwner();
+            LightweightTypeReference _commonSuperType_3 = conformanceComputer.getCommonSuperType(Collections.<LightweightTypeReference>unmodifiableList(CollectionLiterals.<LightweightTypeReference>newArrayList(it, superType)), _owner_6);
+            String _simpleName_4 = null;
+            if (_commonSuperType_3!=null) {
+              _simpleName_4=_commonSuperType_3.getSimpleName();
+            }
+            Assert.assertEquals(_key_4, _simpleName_4);
+          };
+          typeReferences.forEach(_function_2);
         };
         ObjectExtensions.<LightweightTypeReference>operator_doubleArrow(computedSuperType, _function_1);
       }
@@ -223,11 +215,8 @@ public class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
     _builder.append(_simpleName, "");
     _builder.append("<");
     List<LightweightTypeReference> _typeArguments_1 = type.getTypeArguments();
-    final Function1<LightweightTypeReference, CharSequence> _function = new Function1<LightweightTypeReference, CharSequence>() {
-      @Override
-      public CharSequence apply(final LightweightTypeReference it) {
-        return it.getSimpleName();
-      }
+    final Function1<LightweightTypeReference, CharSequence> _function = (LightweightTypeReference it) -> {
+      return it.getSimpleName();
     };
     String _join = IterableExtensions.<LightweightTypeReference>join(_typeArguments_1, ", ", _function);
     _builder.append(_join, "");

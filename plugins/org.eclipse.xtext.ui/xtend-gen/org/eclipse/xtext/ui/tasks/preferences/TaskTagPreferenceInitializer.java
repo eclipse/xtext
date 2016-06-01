@@ -7,13 +7,12 @@
  */
 package org.eclipse.xtext.ui.tasks.preferences;
 
+import java.util.function.Consumer;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.xtext.preferences.PreferenceKey;
 import org.eclipse.xtext.tasks.PreferenceTaskTagProvider;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreInitializer;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 /**
  * @author Stefan Oehme - Initial contribution and API
@@ -23,14 +22,11 @@ public class TaskTagPreferenceInitializer implements IPreferenceStoreInitializer
   @Override
   public void initialize(final IPreferenceStoreAccess access) {
     final IPreferenceStore store = access.getWritablePreferenceStore();
-    final Procedure1<PreferenceKey> _function = new Procedure1<PreferenceKey>() {
-      @Override
-      public void apply(final PreferenceKey it) {
-        String _id = it.getId();
-        String _defaultValue = it.getDefaultValue();
-        store.setDefault(_id, _defaultValue);
-      }
+    final Consumer<PreferenceKey> _function = (PreferenceKey it) -> {
+      String _id = it.getId();
+      String _defaultValue = it.getDefaultValue();
+      store.setDefault(_id, _defaultValue);
     };
-    IterableExtensions.<PreferenceKey>forEach(PreferenceTaskTagProvider.KEYS, _function);
+    PreferenceTaskTagProvider.KEYS.forEach(_function);
   }
 }

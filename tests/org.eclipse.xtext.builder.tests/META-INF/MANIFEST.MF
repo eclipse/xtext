@@ -4,7 +4,7 @@ Bundle-Name: Xtext Builder Tests
 Bundle-SymbolicName: org.eclipse.xtext.builder.tests;singleton:=true
 Bundle-Version: 2.11.0.qualifier
 Bundle-Vendor: Eclipse Modeling
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Require-Bundle: org.eclipse.xtext,
  org.eclipse.xtext.generator;resolution:=optional;x-installation:=greedy,
  org.eclipse.xtext.builder,

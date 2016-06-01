@@ -1062,14 +1062,11 @@ public class BuildAffectionTest {
   
   private void assertBuildLogs(final CharSequence expected) {
     final StringBuilder logs = new StringBuilder();
-    final IBuildLogger _function = new IBuildLogger() {
-      @Override
-      public void log(final Object it) {
-        String _string = it.toString();
-        String _trim = _string.trim();
-        String _plus = (_trim + "\n");
-        logs.append(_plus);
-      }
+    final IBuildLogger _function = (Object it) -> {
+      String _string = it.toString();
+      String _trim = _string.trim();
+      String _plus = (_trim + "\n");
+      logs.append(_plus);
     };
     ((XtextBuildConsole.Logger) this.logger).registerDelegate(_function);
     this.autoBuild();

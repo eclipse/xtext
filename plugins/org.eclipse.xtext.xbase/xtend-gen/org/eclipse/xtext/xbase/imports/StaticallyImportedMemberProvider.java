@@ -51,11 +51,8 @@ public class StaticallyImportedMemberProvider {
       final IVisibilityHelper visibilityHelper = this.getVisibilityHelper(_eResource);
       final IResolvedFeatures resolvedFeatures = this._provider.getResolvedFeatures(importedType);
       List<JvmFeature> _allFeatures = resolvedFeatures.getAllFeatures();
-      final Function1<JvmFeature, Boolean> _function = new Function1<JvmFeature, Boolean>() {
-        @Override
-        public Boolean apply(final JvmFeature feature) {
-          return Boolean.valueOf(((feature.isStatic() && visibilityHelper.isVisible(feature)) && (Objects.equal(it.getMemberName(), null) || feature.getSimpleName().startsWith(it.getMemberName()))));
-        }
+      final Function1<JvmFeature, Boolean> _function = (JvmFeature feature) -> {
+        return Boolean.valueOf(((feature.isStatic() && visibilityHelper.isVisible(feature)) && (Objects.equal(it.getMemberName(), null) || feature.getSimpleName().startsWith(it.getMemberName()))));
       };
       _xblockexpression = IterableExtensions.<JvmFeature>filter(_allFeatures, _function);
     }
@@ -80,11 +77,8 @@ public class StaticallyImportedMemberProvider {
       final IVisibilityHelper visibilityHelper = this.getVisibilityHelper(resource);
       final IResolvedFeatures resolvedFeatures = this._provider.getResolvedFeatures(importedType);
       List<JvmFeature> _allFeatures = resolvedFeatures.getAllFeatures(memberName);
-      final Function1<JvmFeature, Boolean> _function = new Function1<JvmFeature, Boolean>() {
-        @Override
-        public Boolean apply(final JvmFeature feature) {
-          return Boolean.valueOf((feature.isStatic() && visibilityHelper.isVisible(feature)));
-        }
+      final Function1<JvmFeature, Boolean> _function = (JvmFeature feature) -> {
+        return Boolean.valueOf((feature.isStatic() && visibilityHelper.isVisible(feature)));
       };
       _xblockexpression = IterableExtensions.<JvmFeature>filter(_allFeatures, _function);
     }

@@ -99,11 +99,8 @@ public class JavaDerivedStateComputer {
           }
           List<String> _map = null;
           if (((List<char[]>)Conversions.doWrapArray(_importName))!=null) {
-            final Function1<char[], String> _function = new Function1<char[], String>() {
-              @Override
-              public String apply(final char[] it) {
-                return String.valueOf(it);
-              }
+            final Function1<char[], String> _function = (char[] it) -> {
+              return String.valueOf(it);
             };
             _map=ListExtensions.<char[], String>map(((List<char[]>)Conversions.doWrapArray(_importName)), _function);
           }
@@ -129,11 +126,8 @@ public class JavaDerivedStateComputer {
         break;
       case TypeDeclaration.INTERFACE_DECL:
         JvmGenericType _createJvmGenericType = TypesFactory.eINSTANCE.createJvmGenericType();
-        final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
-          @Override
-          public void apply(final JvmGenericType it) {
-            it.setInterface(true);
-          }
+        final Procedure1<JvmGenericType> _function = (JvmGenericType it) -> {
+          it.setInterface(true);
         };
         _switchResult = ObjectExtensions.<JvmGenericType>operator_doubleArrow(_createJvmGenericType, _function);
         break;
@@ -199,42 +193,36 @@ public class JavaDerivedStateComputer {
     final IndexAwareNameEnvironment nameEnv = new IndexAwareNameEnvironment(classLoader, data, this.stubGenerator);
     IErrorHandlingPolicy _proceedWithAllProblems = DefaultErrorHandlingPolicies.proceedWithAllProblems();
     CompilerOptions _compilerOptions = this.getCompilerOptions();
-    final ICompilerRequestor _function = new ICompilerRequestor() {
-      @Override
-      public void acceptResult(final CompilationResult it) {
-        boolean _equals = Arrays.equals(it.fileName, compilationUnit.fileName);
-        if (_equals) {
-          final HashMap<String, byte[]> map = CollectionLiterals.<String, byte[]>newHashMap();
-          List<String> topLevelTypes = CollectionLiterals.<String>newArrayList();
-          ClassFile[] _classFiles = it.getClassFiles();
-          for (final ClassFile cf : _classFiles) {
-            {
-              char[][] _compoundName = cf.getCompoundName();
-              final Function1<char[], String> _function = new Function1<char[], String>() {
-                @Override
-                public String apply(final char[] it) {
-                  return String.valueOf(it);
-                }
-              };
-              List<String> _map = ListExtensions.<char[], String>map(((List<char[]>)Conversions.doWrapArray(_compoundName)), _function);
-              final String className = IterableExtensions.join(_map, ".");
-              byte[] _bytes = cf.getBytes();
-              map.put(className, _bytes);
-              if ((!cf.isNestedType)) {
-                topLevelTypes.add(className);
-              }
+    final ICompilerRequestor _function = (CompilationResult it) -> {
+      boolean _equals_1 = Arrays.equals(it.fileName, compilationUnit.fileName);
+      if (_equals_1) {
+        final HashMap<String, byte[]> map = CollectionLiterals.<String, byte[]>newHashMap();
+        List<String> topLevelTypes = CollectionLiterals.<String>newArrayList();
+        ClassFile[] _classFiles = it.getClassFiles();
+        for (final ClassFile cf : _classFiles) {
+          {
+            char[][] _compoundName = cf.getCompoundName();
+            final Function1<char[], String> _function_1 = (char[] it_1) -> {
+              return String.valueOf(it_1);
+            };
+            List<String> _map = ListExtensions.<char[], String>map(((List<char[]>)Conversions.doWrapArray(_compoundName)), _function_1);
+            final String className = IterableExtensions.join(_map, ".");
+            byte[] _bytes = cf.getBytes();
+            map.put(className, _bytes);
+            if ((!cf.isNestedType)) {
+              topLevelTypes.add(className);
             }
           }
-          final InMemoryClassLoader inMemClassLoader = new InMemoryClassLoader(map, classLoader);
-          for (final String topLevel : topLevelTypes) {
-            {
-              BinaryClass _binaryClass = new BinaryClass(topLevel, inMemClassLoader);
-              ClassFileBytesAccess _classFileBytesAccess = new ClassFileBytesAccess();
-              final JvmDeclaredTypeBuilder builder = new JvmDeclaredTypeBuilder(_binaryClass, _classFileBytesAccess, inMemClassLoader);
-              EList<EObject> _contents = resource.getContents();
-              JvmDeclaredType _buildType = builder.buildType();
-              _contents.add(_buildType);
-            }
+        }
+        final InMemoryClassLoader inMemClassLoader = new InMemoryClassLoader(map, classLoader);
+        for (final String topLevel : topLevelTypes) {
+          {
+            BinaryClass _binaryClass = new BinaryClass(topLevel, inMemClassLoader);
+            ClassFileBytesAccess _classFileBytesAccess = new ClassFileBytesAccess();
+            final JvmDeclaredTypeBuilder builder = new JvmDeclaredTypeBuilder(_binaryClass, _classFileBytesAccess, inMemClassLoader);
+            EList<EObject> _contents = resource.getContents();
+            JvmDeclaredType _buildType = builder.buildType();
+            _contents.add(_buildType);
           }
         }
       }
@@ -258,37 +246,34 @@ public class JavaDerivedStateComputer {
   protected CompilerOptions getCompilerOptions() {
     final long jdkVersion = ClassFileConstants.JDK1_7;
     CompilerOptions _compilerOptions = new CompilerOptions();
-    final Procedure1<CompilerOptions> _function = new Procedure1<CompilerOptions>() {
-      @Override
-      public void apply(final CompilerOptions compilerOptions) {
+    final Procedure1<CompilerOptions> _function = (CompilerOptions compilerOptions) -> {
+      try {
+        compilerOptions.targetJDK = jdkVersion;
+        compilerOptions.inlineJsrBytecode = true;
+        compilerOptions.sourceLevel = jdkVersion;
         try {
-          compilerOptions.targetJDK = jdkVersion;
-          compilerOptions.inlineJsrBytecode = true;
-          compilerOptions.sourceLevel = jdkVersion;
-          try {
-            Field _field = CompilerOptions.class.getField("originalSourceLevel");
-            _field.setLong(compilerOptions, jdkVersion);
-          } catch (final Throwable _t) {
-            if (_t instanceof NoSuchFieldException) {
-              final NoSuchFieldException e = (NoSuchFieldException)_t;
-            } else {
-              throw Exceptions.sneakyThrow(_t);
-            }
+          Field _field = CompilerOptions.class.getField("originalSourceLevel");
+          _field.setLong(compilerOptions, jdkVersion);
+        } catch (final Throwable _t) {
+          if (_t instanceof NoSuchFieldException) {
+            final NoSuchFieldException e = (NoSuchFieldException)_t;
+          } else {
+            throw Exceptions.sneakyThrow(_t);
           }
-          compilerOptions.complianceLevel = jdkVersion;
-          try {
-            Field _field_1 = CompilerOptions.class.getField("originalComplianceLevel");
-            _field_1.setLong(compilerOptions, jdkVersion);
-          } catch (final Throwable _t_1) {
-            if (_t_1 instanceof NoSuchFieldException) {
-              final NoSuchFieldException e_1 = (NoSuchFieldException)_t_1;
-            } else {
-              throw Exceptions.sneakyThrow(_t_1);
-            }
-          }
-        } catch (Throwable _e) {
-          throw Exceptions.sneakyThrow(_e);
         }
+        compilerOptions.complianceLevel = jdkVersion;
+        try {
+          Field _field_1 = CompilerOptions.class.getField("originalComplianceLevel");
+          _field_1.setLong(compilerOptions, jdkVersion);
+        } catch (final Throwable _t_1) {
+          if (_t_1 instanceof NoSuchFieldException) {
+            final NoSuchFieldException e_1 = (NoSuchFieldException)_t_1;
+          } else {
+            throw Exceptions.sneakyThrow(_t_1);
+          }
+        }
+      } catch (Throwable _e) {
+        throw Exceptions.sneakyThrow(_e);
       }
     };
     return ObjectExtensions.<CompilerOptions>operator_doubleArrow(_compilerOptions, _function);

@@ -79,12 +79,9 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.append("}");
       _builder.newLine();
       XExpression _expression = this.expression(_builder);
-      final Procedure1<XExpression> _function = new Procedure1<XExpression>() {
-        @Override
-        public void apply(final XExpression it) {
-          XbaseValidationTest.this._validationTestHelper.assertError(it, XbasePackage.Literals.XTYPE_LITERAL, IssueCodes.DUPLICATE_CASE);
-          XbaseValidationTest.this._validationTestHelper.assertError(it, XbasePackage.Literals.XFEATURE_CALL, IssueCodes.DUPLICATE_CASE);
-        }
+      final Procedure1<XExpression> _function = (XExpression it) -> {
+        this._validationTestHelper.assertError(it, XbasePackage.Literals.XTYPE_LITERAL, IssueCodes.DUPLICATE_CASE);
+        this._validationTestHelper.assertError(it, XbasePackage.Literals.XFEATURE_CALL, IssueCodes.DUPLICATE_CASE);
       };
       ObjectExtensions.<XExpression>operator_doubleArrow(_expression, _function);
     } catch (Throwable _e) {

@@ -59,11 +59,8 @@ public class BoundTypeArgumentMergerTest extends AbstractTestingTypeReferenceOwn
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("def void method(");
-      final Function1<Triple<String, VarianceInfo, VarianceInfo>, CharSequence> _function = new Function1<Triple<String, VarianceInfo, VarianceInfo>, CharSequence>() {
-        @Override
-        public CharSequence apply(final Triple<String, VarianceInfo, VarianceInfo> it) {
-          return it.getFirst();
-        }
+      final Function1<Triple<String, VarianceInfo, VarianceInfo>, CharSequence> _function = (Triple<String, VarianceInfo, VarianceInfo> it) -> {
+        return it.getFirst();
       };
       String _join = IterableExtensions.<Triple<String, VarianceInfo, VarianceInfo>>join(((Iterable<Triple<String, VarianceInfo, VarianceInfo>>)Conversions.doWrapArray(mergeUs)), null, " p, ", " p", _function);
       _builder.append(_join, "");
@@ -74,24 +71,21 @@ public class BoundTypeArgumentMergerTest extends AbstractTestingTypeReferenceOwn
       final JvmOperation operation = this._iXtendJvmAssociations.getDirectlyInferredOperation(function);
       final ArrayList<LightweightBoundTypeArgument> mergable = CollectionLiterals.<LightweightBoundTypeArgument>newArrayList();
       EList<JvmFormalParameter> _parameters = operation.getParameters();
-      final Procedure2<JvmFormalParameter, Integer> _function_1 = new Procedure2<JvmFormalParameter, Integer>() {
-        @Override
-        public void apply(final JvmFormalParameter p, final Integer i) {
-          final Triple<String, VarianceInfo, VarianceInfo> input = mergeUs[(i).intValue()];
-          JvmTypeReference _parameterType = p.getParameterType();
-          LightweightTypeReference _lightweightTypeReference = BoundTypeArgumentMergerTest.this.toLightweightTypeReference(_parameterType);
-          Object _elvis = null;
-          if (source != null) {
-            _elvis = source;
-          } else {
-            Object _object = new Object();
-            _elvis = _object;
-          }
-          VarianceInfo _second = input.getSecond();
-          VarianceInfo _third = input.getThird();
-          LightweightBoundTypeArgument _lightweightBoundTypeArgument = new LightweightBoundTypeArgument(_lightweightTypeReference, null, _elvis, _second, _third);
-          mergable.add(_lightweightBoundTypeArgument);
+      final Procedure2<JvmFormalParameter, Integer> _function_1 = (JvmFormalParameter p, Integer i) -> {
+        final Triple<String, VarianceInfo, VarianceInfo> input = mergeUs[(i).intValue()];
+        JvmTypeReference _parameterType = p.getParameterType();
+        LightweightTypeReference _lightweightTypeReference = this.toLightweightTypeReference(_parameterType);
+        Object _elvis = null;
+        if (source != null) {
+          _elvis = source;
+        } else {
+          Object _object = new Object();
+          _elvis = _object;
         }
+        VarianceInfo _second = input.getSecond();
+        VarianceInfo _third = input.getThird();
+        LightweightBoundTypeArgument _lightweightBoundTypeArgument = new LightweightBoundTypeArgument(_lightweightTypeReference, null, _elvis, _second, _third);
+        mergable.add(_lightweightBoundTypeArgument);
       };
       IterableExtensions.<JvmFormalParameter>forEach(_parameters, _function_1);
       ITypeReferenceOwner _owner = this.getOwner();
@@ -108,11 +102,8 @@ public class BoundTypeArgumentMergerTest extends AbstractTestingTypeReferenceOwn
       Assert.assertTrue(_greaterThan);
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("def void method(");
-      final Function1<Triple<String, VarianceInfo, VarianceInfo>, CharSequence> _function = new Function1<Triple<String, VarianceInfo, VarianceInfo>, CharSequence>() {
-        @Override
-        public CharSequence apply(final Triple<String, VarianceInfo, VarianceInfo> it) {
-          return it.getFirst();
-        }
+      final Function1<Triple<String, VarianceInfo, VarianceInfo>, CharSequence> _function = (Triple<String, VarianceInfo, VarianceInfo> it) -> {
+        return it.getFirst();
       };
       String _join = IterableExtensions.<Triple<String, VarianceInfo, VarianceInfo>>join(((Iterable<Triple<String, VarianceInfo, VarianceInfo>>)Conversions.doWrapArray(mergeUs)), null, " p, ", " p", _function);
       _builder.append(_join, "");
@@ -123,18 +114,15 @@ public class BoundTypeArgumentMergerTest extends AbstractTestingTypeReferenceOwn
       final JvmOperation operation = this._iXtendJvmAssociations.getDirectlyInferredOperation(function);
       final ArrayList<LightweightBoundTypeArgument> mergable = CollectionLiterals.<LightweightBoundTypeArgument>newArrayList();
       EList<JvmFormalParameter> _parameters = operation.getParameters();
-      final Procedure2<JvmFormalParameter, Integer> _function_1 = new Procedure2<JvmFormalParameter, Integer>() {
-        @Override
-        public void apply(final JvmFormalParameter p, final Integer i) {
-          final Triple<String, VarianceInfo, VarianceInfo> input = mergeUs[(i).intValue()];
-          JvmTypeReference _parameterType = p.getParameterType();
-          LightweightTypeReference _lightweightTypeReference = BoundTypeArgumentMergerTest.this.toLightweightTypeReference(_parameterType);
-          Object _object = new Object();
-          VarianceInfo _second = input.getSecond();
-          VarianceInfo _third = input.getThird();
-          LightweightBoundTypeArgument _lightweightBoundTypeArgument = new LightweightBoundTypeArgument(_lightweightTypeReference, null, _object, _second, _third);
-          mergable.add(_lightweightBoundTypeArgument);
-        }
+      final Procedure2<JvmFormalParameter, Integer> _function_1 = (JvmFormalParameter p, Integer i) -> {
+        final Triple<String, VarianceInfo, VarianceInfo> input = mergeUs[(i).intValue()];
+        JvmTypeReference _parameterType = p.getParameterType();
+        LightweightTypeReference _lightweightTypeReference = this.toLightweightTypeReference(_parameterType);
+        Object _object = new Object();
+        VarianceInfo _second = input.getSecond();
+        VarianceInfo _third = input.getThird();
+        LightweightBoundTypeArgument _lightweightBoundTypeArgument = new LightweightBoundTypeArgument(_lightweightTypeReference, null, _object, _second, _third);
+        mergable.add(_lightweightBoundTypeArgument);
       };
       IterableExtensions.<JvmFormalParameter>forEach(_parameters, _function_1);
       final Iterator<LightweightBoundTypeArgument> iterator = mergable.iterator();

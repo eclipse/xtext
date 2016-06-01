@@ -101,13 +101,10 @@ public class JdtQueuedBuildData implements IQueuedBuildDataContribution {
       final JavaBuilderState newState = JavaBuilderState.getLastBuiltState(it);
       Procedure1<UnconfirmedStructuralChangesDelta> _xifexpression = null;
       if ((Objects.equal(oldState, null) || (!Objects.equal(oldState.getLastStructuralBuildTime(), newState.getLastStructuralBuildTime())))) {
-        final Procedure1<UnconfirmedStructuralChangesDelta> _function = new Procedure1<UnconfirmedStructuralChangesDelta>() {
-          @Override
-          public void apply(final UnconfirmedStructuralChangesDelta it) {
-            final Set<QualifiedName> structurallyChangedTypes = newState.getStructurallyChangedTypes();
-            if ((JdtQueuedBuildData.this.namesIntersect(it.getNew(), structurallyChangedTypes) || JdtQueuedBuildData.this.namesIntersect(it.getOld(), structurallyChangedTypes))) {
-              deltas.add(it);
-            }
+        final Procedure1<UnconfirmedStructuralChangesDelta> _function = (UnconfirmedStructuralChangesDelta it_1) -> {
+          final Set<QualifiedName> structurallyChangedTypes = newState.getStructurallyChangedTypes();
+          if ((this.namesIntersect(it_1.getNew(), structurallyChangedTypes) || this.namesIntersect(it_1.getOld(), structurallyChangedTypes))) {
+            deltas.add(it_1);
           }
         };
         _xifexpression = _function;

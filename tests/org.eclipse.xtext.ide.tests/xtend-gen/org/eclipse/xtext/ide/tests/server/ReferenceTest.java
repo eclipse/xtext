@@ -99,57 +99,51 @@ public class ReferenceTest extends AbstractLanguageServerTest {
   
   @Test
   public void testReferences_01() {
-    final Procedure1<ReferenceTest.ReferenceTestConfiguration> _function = new Procedure1<ReferenceTest.ReferenceTestConfiguration>() {
-      @Override
-      public void apply(final ReferenceTest.ReferenceTestConfiguration it) {
-        StringConcatenation _builder = new StringConcatenation();
-        _builder.append("type Foo {}");
-        _builder.newLine();
-        _builder.append("type Bar {");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("Foo foo");
-        _builder.newLine();
-        _builder.append("}");
-        _builder.newLine();
-        it.model = _builder.toString();
-        int _length = "type F".length();
-        it.column = _length;
-        StringConcatenation _builder_1 = new StringConcatenation();
-        _builder_1.append("MyModel.testlang [[2, 1] .. [2, 4]]");
-        _builder_1.newLine();
-        it.expectedReferences = _builder_1.toString();
-      }
+    final Procedure1<ReferenceTest.ReferenceTestConfiguration> _function = (ReferenceTest.ReferenceTestConfiguration it) -> {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("type Foo {}");
+      _builder.newLine();
+      _builder.append("type Bar {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("Foo foo");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      it.model = _builder.toString();
+      int _length = "type F".length();
+      it.column = _length;
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("MyModel.testlang [[2, 1] .. [2, 4]]");
+      _builder_1.newLine();
+      it.expectedReferences = _builder_1.toString();
     };
     this.testReferences(_function);
   }
   
   @Test
   public void testReferences_02() {
-    final Procedure1<ReferenceTest.ReferenceTestConfiguration> _function = new Procedure1<ReferenceTest.ReferenceTestConfiguration>() {
-      @Override
-      public void apply(final ReferenceTest.ReferenceTestConfiguration it) {
-        StringConcatenation _builder = new StringConcatenation();
-        _builder.append("type Foo {}");
-        _builder.newLine();
-        _builder.append("type Bar {");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("Foo foo");
-        _builder.newLine();
-        _builder.append("}");
-        _builder.newLine();
-        it.model = _builder.toString();
-        int _length = "type F".length();
-        it.column = _length;
-        it.includeDeclaration = true;
-        StringConcatenation _builder_1 = new StringConcatenation();
-        _builder_1.append("MyModel.testlang [[0, 5] .. [0, 8]]");
-        _builder_1.newLine();
-        _builder_1.append("MyModel.testlang [[2, 1] .. [2, 4]]");
-        _builder_1.newLine();
-        it.expectedReferences = _builder_1.toString();
-      }
+    final Procedure1<ReferenceTest.ReferenceTestConfiguration> _function = (ReferenceTest.ReferenceTestConfiguration it) -> {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("type Foo {}");
+      _builder.newLine();
+      _builder.append("type Bar {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("Foo foo");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      it.model = _builder.toString();
+      int _length = "type F".length();
+      it.column = _length;
+      it.includeDeclaration = true;
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("MyModel.testlang [[0, 5] .. [0, 8]]");
+      _builder_1.newLine();
+      _builder_1.append("MyModel.testlang [[2, 1] .. [2, 4]]");
+      _builder_1.newLine();
+      it.expectedReferences = _builder_1.toString();
     };
     this.testReferences(_function);
   }

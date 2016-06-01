@@ -9,6 +9,7 @@ package org.eclipse.xtend.ide.common.outline;
 
 import com.google.common.collect.Iterables;
 import java.util.Arrays;
+import java.util.function.Consumer;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -17,8 +18,6 @@ import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.ide.common.outline.AbstractXtendOutlineTreeBuilder;
 import org.eclipse.xtend.ide.common.outline.IXtendOutlineContext;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -30,13 +29,10 @@ public class XtendOutlineJvmTreeBuilder extends AbstractXtendOutlineTreeBuilder 
     Resource _eResource = xtendFile.eResource();
     EList<EObject> _contents = _eResource.getContents();
     Iterable<JvmDeclaredType> _filter = Iterables.<JvmDeclaredType>filter(_contents, JvmDeclaredType.class);
-    final Procedure1<JvmDeclaredType> _function = new Procedure1<JvmDeclaredType>() {
-      @Override
-      public void apply(final JvmDeclaredType it) {
-        XtendOutlineJvmTreeBuilder.this.buildType(it, context);
-      }
+    final Consumer<JvmDeclaredType> _function = (JvmDeclaredType it) -> {
+      this.buildType(it, context);
     };
-    IterableExtensions.<JvmDeclaredType>forEach(_filter, _function);
+    _filter.forEach(_function);
   }
   
   protected void _build(final JvmDeclaredType jvmDeclaredType, final IXtendOutlineContext context) {

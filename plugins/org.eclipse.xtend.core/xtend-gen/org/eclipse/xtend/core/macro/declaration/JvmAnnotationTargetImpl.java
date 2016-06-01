@@ -31,12 +31,9 @@ public abstract class JvmAnnotationTargetImpl<T extends JvmAnnotationTarget> ext
   public Iterable<? extends AnnotationReference> getAnnotations() {
     T _delegate = this.getDelegate();
     EList<JvmAnnotationReference> _annotations = _delegate.getAnnotations();
-    final Function1<JvmAnnotationReference, AnnotationReference> _function = new Function1<JvmAnnotationReference, AnnotationReference>() {
-      @Override
-      public AnnotationReference apply(final JvmAnnotationReference it) {
-        CompilationUnitImpl _compilationUnit = JvmAnnotationTargetImpl.this.getCompilationUnit();
-        return _compilationUnit.toAnnotationReference(it);
-      }
+    final Function1<JvmAnnotationReference, AnnotationReference> _function = (JvmAnnotationReference it) -> {
+      CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+      return _compilationUnit.toAnnotationReference(it);
     };
     List<AnnotationReference> _map = ListExtensions.<JvmAnnotationReference, AnnotationReference>map(_annotations, _function);
     return ImmutableList.<AnnotationReference>copyOf(_map);
@@ -85,12 +82,9 @@ public abstract class JvmAnnotationTargetImpl<T extends JvmAnnotationTarget> ext
   
   public AnnotationReference findAnnotation(final Type annotationType) {
     Iterable<? extends AnnotationReference> _annotations = this.getAnnotations();
-    final Function1<AnnotationReference, Boolean> _function = new Function1<AnnotationReference, Boolean>() {
-      @Override
-      public Boolean apply(final AnnotationReference it) {
-        AnnotationTypeDeclaration _annotationTypeDeclaration = it.getAnnotationTypeDeclaration();
-        return Boolean.valueOf(Objects.equal(_annotationTypeDeclaration, annotationType));
-      }
+    final Function1<AnnotationReference, Boolean> _function = (AnnotationReference it) -> {
+      AnnotationTypeDeclaration _annotationTypeDeclaration = it.getAnnotationTypeDeclaration();
+      return Boolean.valueOf(Objects.equal(_annotationTypeDeclaration, annotationType));
     };
     return IterableExtensions.findFirst(_annotations, _function);
   }

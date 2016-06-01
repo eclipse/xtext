@@ -57,14 +57,11 @@ public class XtendNatureAddingEditorCallbackTest extends AbstractXtendUITestCase
   public void testOpenXtendFileFromFilteredBuildPath() {
     try {
       IJavaProject _createJavaProject = JavaProjectSetupUtil.createJavaProject("testProject");
-      final Procedure1<IJavaProject> _function = new Procedure1<IJavaProject>() {
-        @Override
-        public void apply(final IJavaProject it) {
-          try {
-            JavaProjectSetupUtil.addSourceFolder(it, "filtered-src", null, new String[] { "**.xtend" });
-          } catch (Throwable _e) {
-            throw Exceptions.sneakyThrow(_e);
-          }
+      final Procedure1<IJavaProject> _function = (IJavaProject it) -> {
+        try {
+          JavaProjectSetupUtil.addSourceFolder(it, "filtered-src", null, new String[] { "**.xtend" });
+        } catch (Throwable _e) {
+          throw Exceptions.sneakyThrow(_e);
         }
       };
       IJavaProject _doubleArrow = ObjectExtensions.<IJavaProject>operator_doubleArrow(_createJavaProject, _function);

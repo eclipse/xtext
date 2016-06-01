@@ -58,21 +58,15 @@ public class ContentAssistFragmentTestLangJvmModelInferrer extends AbstractModel
    */
   protected void _infer(final ContentAssistFragmentTestLanguageRoot element, final IJvmDeclaredTypeAcceptor acceptor, final boolean isPreIndexingPhase) {
     JvmGenericType _class = this._jvmTypesBuilder.toClass(element, "my.test.MyClass");
-    final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
-      @Override
-      public void apply(final JvmGenericType it) {
-        EList<JvmMember> _members = it.getMembers();
-        JvmTypeReference _typeRef = ContentAssistFragmentTestLangJvmModelInferrer.this._typeReferenceBuilder.typeRef(Void.class);
-        final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
-          @Override
-          public void apply(final JvmOperation it) {
-            XExpression _expression = element.getExpression();
-            ContentAssistFragmentTestLangJvmModelInferrer.this._jvmTypesBuilder.setBody(it, _expression);
-          }
-        };
-        JvmOperation _method = ContentAssistFragmentTestLangJvmModelInferrer.this._jvmTypesBuilder.toMethod(element, "hello", _typeRef, _function);
-        ContentAssistFragmentTestLangJvmModelInferrer.this._jvmTypesBuilder.<JvmOperation>operator_add(_members, _method);
-      }
+    final Procedure1<JvmGenericType> _function = (JvmGenericType it) -> {
+      EList<JvmMember> _members = it.getMembers();
+      JvmTypeReference _typeRef = this._typeReferenceBuilder.typeRef(Void.class);
+      final Procedure1<JvmOperation> _function_1 = (JvmOperation it_1) -> {
+        XExpression _expression = element.getExpression();
+        this._jvmTypesBuilder.setBody(it_1, _expression);
+      };
+      JvmOperation _method = this._jvmTypesBuilder.toMethod(element, "hello", _typeRef, _function_1);
+      this._jvmTypesBuilder.<JvmOperation>operator_add(_members, _method);
     };
     acceptor.<JvmGenericType>accept(_class, _function);
   }

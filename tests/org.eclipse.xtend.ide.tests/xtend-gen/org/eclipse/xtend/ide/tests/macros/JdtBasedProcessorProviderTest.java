@@ -7,6 +7,8 @@
  */
 package org.eclipse.xtend.ide.tests.macros;
 
+import java.util.List;
+import java.util.function.Consumer;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
@@ -25,8 +27,6 @@ import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
@@ -240,19 +240,16 @@ public class JdtBasedProcessorProviderTest {
       IProject _project = result.getProject();
       IResourcesSetupUtil.addNature(_project, XtextProjectHelper.NATURE_ID);
       this.xtendLibs.addLibsToClasspath(result, null);
-      final Procedure1<IJavaProject> _function = new Procedure1<IJavaProject>() {
-        @Override
-        public void apply(final IJavaProject it) {
-          try {
-            IPath _path = it.getPath();
-            IClasspathEntry _newProjectEntry = JavaCore.newProjectEntry(_path, true);
-            JavaProjectSetupUtil.addToClasspath(result, _newProjectEntry);
-          } catch (Throwable _e) {
-            throw Exceptions.sneakyThrow(_e);
-          }
+      final Consumer<IJavaProject> _function = (IJavaProject it) -> {
+        try {
+          IPath _path = it.getPath();
+          IClasspathEntry _newProjectEntry = JavaCore.newProjectEntry(_path, true);
+          JavaProjectSetupUtil.addToClasspath(result, _newProjectEntry);
+        } catch (Throwable _e) {
+          throw Exceptions.sneakyThrow(_e);
         }
       };
-      IterableExtensions.<IJavaProject>forEach(((Iterable<IJavaProject>)Conversions.doWrapArray(upstreamProjects)), _function);
+      ((List<IJavaProject>)Conversions.doWrapArray(upstreamProjects)).forEach(_function);
       return result;
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);

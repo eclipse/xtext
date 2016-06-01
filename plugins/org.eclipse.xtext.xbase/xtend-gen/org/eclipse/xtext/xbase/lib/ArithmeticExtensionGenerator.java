@@ -1,7 +1,6 @@
 package org.eclipse.xtext.xbase.lib;
 
 import com.google.common.base.Charsets;
-import com.google.common.base.Objects;
 import com.google.common.io.Files;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
@@ -762,54 +761,33 @@ public class ArithmeticExtensionGenerator {
     String _switchResult = null;
     String _lowerCase = it.toLowerCase();
     String _substring = _lowerCase.substring(0, 1);
-    boolean _matched = false;
-    if (Objects.equal(_substring, "a")) {
-      _matched=true;
-    }
-    if (!_matched) {
-      if (Objects.equal(_substring, "e")) {
-        _matched=true;
-      }
-    }
-    if (!_matched) {
-      if (Objects.equal(_substring, "i")) {
-        _matched=true;
-      }
-    }
-    if (!_matched) {
-      if (Objects.equal(_substring, "o")) {
-        _matched=true;
-      }
-    }
-    if (!_matched) {
-      if (Objects.equal(_substring, "u")) {
-        _matched=true;
-      }
-    }
-    if (_matched) {
-      _switchResult = "an";
-    }
-    if (!_matched) {
-      _switchResult = "a";
+    switch (_substring) {
+      case "a":
+      case "e":
+      case "i":
+      case "o":
+      case "u":
+        _switchResult = "an";
+        break;
+      default:
+        _switchResult = "a";
+        break;
     }
     return _switchResult;
   }
   
   public String wrapperType(final String it) {
     String _switchResult = null;
-    boolean _matched = false;
-    if (Objects.equal(it, "int")) {
-      _matched=true;
-      _switchResult = "Integer";
-    }
-    if (!_matched) {
-      if (Objects.equal(it, "char")) {
-        _matched=true;
+    switch (it) {
+      case "int":
+        _switchResult = "Integer";
+        break;
+      case "char":
         _switchResult = "Character";
-      }
-    }
-    if (!_matched) {
-      _switchResult = StringExtensions.toFirstUpper(it);
+        break;
+      default:
+        _switchResult = StringExtensions.toFirstUpper(it);
+        break;
     }
     return _switchResult;
   }

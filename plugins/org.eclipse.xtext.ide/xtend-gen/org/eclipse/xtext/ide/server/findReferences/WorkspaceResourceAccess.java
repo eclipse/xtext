@@ -29,15 +29,12 @@ public class WorkspaceResourceAccess implements IReferenceFinder.IResourceAccess
   
   @Override
   public <R extends Object> R readOnly(final URI targetURI, final IUnitOfWork<R, ResourceSet> work) {
-    final Function2<Document, XtextResource, R> _function = new Function2<Document, XtextResource, R>() {
-      @Override
-      public R apply(final Document document, final XtextResource resource) {
-        try {
-          ResourceSet _resourceSet = resource.getResourceSet();
-          return work.exec(_resourceSet);
-        } catch (Throwable _e) {
-          throw Exceptions.sneakyThrow(_e);
-        }
+    final Function2<Document, XtextResource, R> _function = (Document document, XtextResource resource) -> {
+      try {
+        ResourceSet _resourceSet = resource.getResourceSet();
+        return work.exec(_resourceSet);
+      } catch (Throwable _e) {
+        throw Exceptions.sneakyThrow(_e);
       }
     };
     return this.workspaceManager.<R>doRead(targetURI, _function);

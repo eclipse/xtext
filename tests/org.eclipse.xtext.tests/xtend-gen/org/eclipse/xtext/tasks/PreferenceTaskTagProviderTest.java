@@ -33,30 +33,21 @@ public class PreferenceTaskTagProviderTest {
   @Test
   public void test() {
     TaskTag _taskTag = new TaskTag();
-    final Procedure1<TaskTag> _function = new Procedure1<TaskTag>() {
-      @Override
-      public void apply(final TaskTag it) {
-        it.setName("Foo");
-        it.setPriority(Priority.LOW);
-      }
+    final Procedure1<TaskTag> _function = (TaskTag it) -> {
+      it.setName("Foo");
+      it.setPriority(Priority.LOW);
     };
     TaskTag _doubleArrow = ObjectExtensions.<TaskTag>operator_doubleArrow(_taskTag, _function);
     TaskTag _taskTag_1 = new TaskTag();
-    final Procedure1<TaskTag> _function_1 = new Procedure1<TaskTag>() {
-      @Override
-      public void apply(final TaskTag it) {
-        it.setName("BAR");
-        it.setPriority(Priority.NORMAL);
-      }
+    final Procedure1<TaskTag> _function_1 = (TaskTag it) -> {
+      it.setName("BAR");
+      it.setPriority(Priority.NORMAL);
     };
     TaskTag _doubleArrow_1 = ObjectExtensions.<TaskTag>operator_doubleArrow(_taskTag_1, _function_1);
     TaskTag _taskTag_2 = new TaskTag();
-    final Procedure1<TaskTag> _function_2 = new Procedure1<TaskTag>() {
-      @Override
-      public void apply(final TaskTag it) {
-        it.setName("baZ");
-        it.setPriority(Priority.HIGH);
-      }
+    final Procedure1<TaskTag> _function_2 = (TaskTag it) -> {
+      it.setName("baZ");
+      it.setPriority(Priority.HIGH);
     };
     TaskTag _doubleArrow_2 = ObjectExtensions.<TaskTag>operator_doubleArrow(_taskTag_2, _function_2);
     final List<TaskTag> tags = Collections.<TaskTag>unmodifiableList(CollectionLiterals.<TaskTag>newArrayList(_doubleArrow, _doubleArrow_1, _doubleArrow_2));

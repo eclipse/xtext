@@ -58,17 +58,14 @@ public abstract class AbstractFormatter implements IBasicFormatter {
       if (this.allowIdentityEdits) {
         _xifexpression = edits;
       } else {
-        final Function1<TextReplacement, Boolean> _function = new Function1<TextReplacement, Boolean>() {
-          @Override
-          public Boolean apply(final TextReplacement it) {
-            int _offset = it.getOffset();
-            int _offset_1 = it.getOffset();
-            int _length = it.getLength();
-            int _plus = (_offset_1 + _length);
-            String _substring = doc.substring(_offset, _plus);
-            String _text = it.getText();
-            return Boolean.valueOf((!Objects.equal(_substring, _text)));
-          }
+        final Function1<TextReplacement, Boolean> _function = (TextReplacement it) -> {
+          int _offset = it.getOffset();
+          int _offset_1 = it.getOffset();
+          int _length = it.getLength();
+          int _plus = (_offset_1 + _length);
+          String _substring = doc.substring(_offset, _plus);
+          String _text = it.getText();
+          return Boolean.valueOf((!Objects.equal(_substring, _text)));
         };
         Iterable<TextReplacement> _filter = IterableExtensions.<TextReplacement>filter(edits, _function);
         _xifexpression = IterableExtensions.<TextReplacement>toList(_filter);

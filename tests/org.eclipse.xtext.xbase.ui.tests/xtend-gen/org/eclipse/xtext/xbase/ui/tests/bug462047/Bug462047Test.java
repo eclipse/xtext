@@ -80,27 +80,21 @@ public class Bug462047Test extends AbstractEditorTest {
       IResourcesSetupUtil.createFile("bug462047/src/c.bug462047lang", "element c");
       IResourcesSetupUtil.waitForBuild();
       IResourcesSetupUtil.assertNoErrorsInWorkspace();
-      final Runnable _function = new Runnable() {
-        @Override
-        public void run() {
-          try {
-            final XtextEditor editor = Bug462047Test.this.openEditor(file);
-            final IXtextDocument document = XtextDocumentUtil.get(editor);
-            final IUnitOfWork<Object, XtextResource> _function = new IUnitOfWork<Object, XtextResource>() {
-              @Override
-              public Object exec(final XtextResource res) throws Exception {
-                EcoreUtil.resolveAll(res);
-                final ResourceSet resourceSet = res.getResourceSet();
-                URI _createURI = URI.createURI("java:/Objects/CORE.CORE");
-                Resource _resource = resourceSet.getResource(_createURI, false);
-                Assert.assertNull(_resource);
-                return null;
-              }
-            };
-            document.<Object>readOnly(_function);
-          } catch (Throwable _e) {
-            throw Exceptions.sneakyThrow(_e);
-          }
+      final Runnable _function = () -> {
+        try {
+          final XtextEditor editor = this.openEditor(file);
+          final IXtextDocument document = XtextDocumentUtil.get(editor);
+          final IUnitOfWork<Object, XtextResource> _function_1 = (XtextResource res) -> {
+            EcoreUtil.resolveAll(res);
+            final ResourceSet resourceSet = res.getResourceSet();
+            URI _createURI = URI.createURI("java:/Objects/CORE.CORE");
+            Resource _resource = resourceSet.getResource(_createURI, false);
+            Assert.assertNull(_resource);
+            return null;
+          };
+          document.<Object>readOnly(_function_1);
+        } catch (Throwable _e) {
+          throw Exceptions.sneakyThrow(_e);
         }
       };
       LoggingTester.LogCapture _captureLogging = LoggingTester.captureLogging(Level.ERROR, BatchLinkableResource.class, _function);

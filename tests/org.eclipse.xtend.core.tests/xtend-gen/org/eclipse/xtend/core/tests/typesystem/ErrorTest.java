@@ -3812,20 +3812,14 @@ public class ErrorTest extends AbstractXtendTestCase {
     final XtendFile file = this.processWithoutException(_builder);
     Resource _eResource = file.eResource();
     EList<Resource.Diagnostic> _errors = _eResource.getErrors();
-    final Procedure1<EList<Resource.Diagnostic>> _function = new Procedure1<EList<Resource.Diagnostic>>() {
-      @Override
-      public void apply(final EList<Resource.Diagnostic> it) {
-        String _string = it.toString();
-        final Function1<Resource.Diagnostic, Boolean> _function = new Function1<Resource.Diagnostic, Boolean>() {
-          @Override
-          public Boolean apply(final Resource.Diagnostic it) {
-            String _message = it.getMessage();
-            return Boolean.valueOf(_message.startsWith("Cyclic "));
-          }
-        };
-        boolean _exists = IterableExtensions.<Resource.Diagnostic>exists(it, _function);
-        Assert.assertFalse(_string, _exists);
-      }
+    final Procedure1<EList<Resource.Diagnostic>> _function = (EList<Resource.Diagnostic> it) -> {
+      String _string = it.toString();
+      final Function1<Resource.Diagnostic, Boolean> _function_1 = (Resource.Diagnostic it_1) -> {
+        String _message = it_1.getMessage();
+        return Boolean.valueOf(_message.startsWith("Cyclic "));
+      };
+      boolean _exists = IterableExtensions.<Resource.Diagnostic>exists(it, _function_1);
+      Assert.assertFalse(_string, _exists);
     };
     ObjectExtensions.<EList<Resource.Diagnostic>>operator_doubleArrow(_errors, _function);
   }

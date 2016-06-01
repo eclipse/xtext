@@ -10,6 +10,7 @@ package org.eclipse.xtend.core.tests.typesystem;
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.List;
+import java.util.function.Consumer;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
@@ -29,7 +30,6 @@ import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.typesystem.arguments.IFeatureCallArgumentSlot;
 import org.eclipse.xtext.xbase.typesystem.arguments.IFeatureCallArguments;
 import org.eclipse.xtext.xbase.typesystem.arguments.ReorderedVarArgFeatureCallArguments;
@@ -287,45 +287,39 @@ public class ReorderedVarArgFeatureCallArgumentsTest extends AbstractTestingType
   }
   
   protected void withIndizes(final IFeatureCallArguments arguments, final int... indexes) {
-    final Procedure1<Integer> _function = new Procedure1<Integer>() {
-      @Override
-      public void apply(final Integer it) {
-        boolean _hasUnprocessedArguments = arguments.hasUnprocessedArguments();
-        Assert.assertTrue(_hasUnprocessedArguments);
-        final IFeatureCallArgumentSlot slot = arguments.getNextUnprocessedArgumentSlot();
-        List<XExpression> _argumentExpressions = slot.getArgumentExpressions();
-        final XExpression expression = IterableExtensions.<XExpression>head(_argumentExpressions);
-        EObject _eContainer = expression.eContainer();
-        final XFeatureCall featureCall = ((XFeatureCall) _eContainer);
-        EList<XExpression> _featureCallArguments = featureCall.getFeatureCallArguments();
-        int _indexOf = _featureCallArguments.indexOf(expression);
-        Assert.assertEquals((it).intValue(), _indexOf);
-        slot.markProcessed();
-      }
+    final Consumer<Integer> _function = (Integer it) -> {
+      boolean _hasUnprocessedArguments = arguments.hasUnprocessedArguments();
+      Assert.assertTrue(_hasUnprocessedArguments);
+      final IFeatureCallArgumentSlot slot = arguments.getNextUnprocessedArgumentSlot();
+      List<XExpression> _argumentExpressions = slot.getArgumentExpressions();
+      final XExpression expression = IterableExtensions.<XExpression>head(_argumentExpressions);
+      EObject _eContainer = expression.eContainer();
+      final XFeatureCall featureCall = ((XFeatureCall) _eContainer);
+      EList<XExpression> _featureCallArguments = featureCall.getFeatureCallArguments();
+      int _indexOf = _featureCallArguments.indexOf(expression);
+      Assert.assertEquals((it).intValue(), _indexOf);
+      slot.markProcessed();
     };
-    IterableExtensions.<Integer>forEach(((Iterable<Integer>)Conversions.doWrapArray(indexes)), _function);
+    ((List<Integer>)Conversions.doWrapArray(indexes)).forEach(_function);
     boolean _hasUnprocessedArguments = arguments.hasUnprocessedArguments();
     Assert.assertFalse(_hasUnprocessedArguments);
   }
   
   protected void withTypes(final IFeatureCallArguments arguments, final String... types) {
-    final Procedure1<String> _function = new Procedure1<String>() {
-      @Override
-      public void apply(final String it) {
-        boolean _hasUnprocessedArguments = arguments.hasUnprocessedArguments();
-        Assert.assertTrue(_hasUnprocessedArguments);
-        final IFeatureCallArgumentSlot slot = arguments.getNextUnprocessedArgumentSlot();
-        boolean _isSuperfluous = slot.isSuperfluous();
-        Assert.assertEquals(Boolean.valueOf((it == null)), Boolean.valueOf(_isSuperfluous));
-        if ((it != null)) {
-          LightweightTypeReference _declaredType = slot.getDeclaredType();
-          String _simpleName = _declaredType.getSimpleName();
-          Assert.assertEquals(it, _simpleName);
-        }
-        slot.markProcessed();
+    final Consumer<String> _function = (String it) -> {
+      boolean _hasUnprocessedArguments = arguments.hasUnprocessedArguments();
+      Assert.assertTrue(_hasUnprocessedArguments);
+      final IFeatureCallArgumentSlot slot = arguments.getNextUnprocessedArgumentSlot();
+      boolean _isSuperfluous = slot.isSuperfluous();
+      Assert.assertEquals(Boolean.valueOf((it == null)), Boolean.valueOf(_isSuperfluous));
+      if ((it != null)) {
+        LightweightTypeReference _declaredType = slot.getDeclaredType();
+        String _simpleName = _declaredType.getSimpleName();
+        Assert.assertEquals(it, _simpleName);
       }
+      slot.markProcessed();
     };
-    IterableExtensions.<String>forEach(((Iterable<String>)Conversions.doWrapArray(types)), _function);
+    ((List<String>)Conversions.doWrapArray(types)).forEach(_function);
     boolean _hasUnprocessedArguments = arguments.hasUnprocessedArguments();
     Assert.assertFalse(_hasUnprocessedArguments);
   }

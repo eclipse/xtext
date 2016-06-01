@@ -30,32 +30,26 @@ public class XbaseFormatterTester extends FormatterTester {
     final String prefix = ("{" + _newLine);
     String _newLine_1 = Strings.newLine();
     final String postfix = (_newLine_1 + "}");
-    final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
-      @Override
-      public void apply(final FormatterTestRequest it) {
-        test.apply(it);
-        final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
-          @Override
-          public void apply(final MapBasedPreferenceValues it) {
-            it.<Integer>put(FormatterPreferenceKeys.maxLineWidth, Integer.valueOf(80));
-          }
-        };
-        it.preferences(_function);
-        CharSequence _expectationOrToBeFormatted = it.getExpectationOrToBeFormatted();
-        String _string = _expectationOrToBeFormatted.toString();
-        String _trim = _string.trim();
-        String _indent = XbaseFormatterTester.this.indent(_trim, "\t");
-        String _plus = (prefix + _indent);
-        String _plus_1 = (_plus + postfix);
-        it.setExpectation(_plus_1);
-        CharSequence _toBeFormatted = it.getToBeFormatted();
-        String _string_1 = _toBeFormatted.toString();
-        String _trim_1 = _string_1.trim();
-        String _indent_1 = XbaseFormatterTester.this.indent(_trim_1, "\t");
-        String _plus_2 = (prefix + _indent_1);
-        String _plus_3 = (_plus_2 + postfix);
-        it.setToBeFormatted(_plus_3);
-      }
+    final Procedure1<FormatterTestRequest> _function = (FormatterTestRequest it) -> {
+      test.apply(it);
+      final Procedure1<MapBasedPreferenceValues> _function_1 = (MapBasedPreferenceValues it_1) -> {
+        it_1.<Integer>put(FormatterPreferenceKeys.maxLineWidth, Integer.valueOf(80));
+      };
+      it.preferences(_function_1);
+      CharSequence _expectationOrToBeFormatted = it.getExpectationOrToBeFormatted();
+      String _string = _expectationOrToBeFormatted.toString();
+      String _trim = _string.trim();
+      String _indent = this.indent(_trim, "\t");
+      String _plus = (prefix + _indent);
+      String _plus_1 = (_plus + postfix);
+      it.setExpectation(_plus_1);
+      CharSequence _toBeFormatted = it.getToBeFormatted();
+      String _string_1 = _toBeFormatted.toString();
+      String _trim_1 = _string_1.trim();
+      String _indent_1 = this.indent(_trim_1, "\t");
+      String _plus_2 = (prefix + _indent_1);
+      String _plus_3 = (_plus_2 + postfix);
+      it.setToBeFormatted(_plus_3);
     };
     final Procedure1<? super FormatterTestRequest> setup = _function;
     this.assertFormatted(((Procedure1<FormatterTestRequest>)setup));
@@ -63,18 +57,15 @@ public class XbaseFormatterTester extends FormatterTester {
   
   protected String indent(final String string, final String indent) {
     String[] _split = string.split("\\r?\\n");
-    final Function1<String, String> _function = new Function1<String, String>() {
-      @Override
-      public String apply(final String it) {
-        String _xifexpression = null;
-        boolean _equals = Objects.equal(it, "");
-        if (_equals) {
-          _xifexpression = it;
-        } else {
-          _xifexpression = (indent + it);
-        }
-        return _xifexpression;
+    final Function1<String, String> _function = (String it) -> {
+      String _xifexpression = null;
+      boolean _equals = Objects.equal(it, "");
+      if (_equals) {
+        _xifexpression = it;
+      } else {
+        _xifexpression = (indent + it);
       }
+      return _xifexpression;
     };
     List<String> _map = ListExtensions.<String, String>map(((List<String>)Conversions.doWrapArray(_split)), _function);
     String _newLine = Strings.newLine();

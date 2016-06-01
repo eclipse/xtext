@@ -34,44 +34,32 @@ public class ParallelFileSystemSupport implements MutableFileSystemSupport {
   
   @Override
   public void delete(final Path path) {
-    final Runnable _function = new Runnable() {
-      @Override
-      public void run() {
-        ParallelFileSystemSupport.this.delegate.delete(path);
-      }
+    final Runnable _function = () -> {
+      this.delegate.delete(path);
     };
     this.queue.sendAsync(this.uri, _function);
   }
   
   @Override
   public void mkdir(final Path path) {
-    final Runnable _function = new Runnable() {
-      @Override
-      public void run() {
-        ParallelFileSystemSupport.this.delegate.mkdir(path);
-      }
+    final Runnable _function = () -> {
+      this.delegate.mkdir(path);
     };
     this.queue.sendAsync(this.uri, _function);
   }
   
   @Override
   public void setContents(final Path path, final CharSequence contents) {
-    final Runnable _function = new Runnable() {
-      @Override
-      public void run() {
-        ParallelFileSystemSupport.this.delegate.setContents(path, contents);
-      }
+    final Runnable _function = () -> {
+      this.delegate.setContents(path, contents);
     };
     this.queue.sendAsync(this.uri, _function);
   }
   
   @Override
   public void setContentsAsStream(final Path path, final InputStream source) {
-    final Runnable _function = new Runnable() {
-      @Override
-      public void run() {
-        ParallelFileSystemSupport.this.delegate.setContentsAsStream(path, source);
-      }
+    final Runnable _function = () -> {
+      this.delegate.setContentsAsStream(path, source);
     };
     this.queue.sendAsync(this.uri, _function);
   }

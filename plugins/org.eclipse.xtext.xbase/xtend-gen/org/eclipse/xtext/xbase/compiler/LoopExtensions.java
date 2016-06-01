@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtext.xbase.compiler;
 
+import java.util.function.Consumer;
 import org.eclipse.xtext.xbase.compiler.LoopParams;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -33,14 +34,11 @@ public class LoopExtensions {
     T _head = IterableExtensions.<T>head(elements);
     ObjectExtensions.<T>operator_doubleArrow(_head, procedure);
     Iterable<T> _tail = IterableExtensions.<T>tail(elements);
-    final Procedure1<T> _function = new Procedure1<T>() {
-      @Override
-      public void apply(final T it) {
-        params.appendSeparator(appendable);
-        ObjectExtensions.<T>operator_doubleArrow(it, procedure);
-      }
+    final Consumer<T> _function = (T it) -> {
+      params.appendSeparator(appendable);
+      ObjectExtensions.<T>operator_doubleArrow(it, procedure);
     };
-    IterableExtensions.<T>forEach(_tail, _function);
+    _tail.forEach(_function);
     params.appendSuffix(appendable);
   }
   
@@ -55,13 +53,10 @@ public class LoopExtensions {
       ObjectExtensions.<T>operator_doubleArrow(_head, procedure);
     } else {
       appendable.append("{");
-      final Procedure1<LoopParams> _function = new Procedure1<LoopParams>() {
-        @Override
-        public void apply(final LoopParams it) {
-          it.setPrefix(" ");
-          it.setSeparator(", ");
-          it.setSuffix(" ");
-        }
+      final Procedure1<LoopParams> _function = (LoopParams it) -> {
+        it.setPrefix(" ");
+        it.setSeparator(", ");
+        it.setSuffix(" ");
       };
       this.<T>forEach(appendable, elements, _function, procedure);
       appendable.append("}");

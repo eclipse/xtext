@@ -214,7 +214,7 @@ public class PerformanceTestProjectSetup {
 		mainContent.append("Bundle-Version: 1.0.0\n");
 		mainContent.append("Bundle-SymbolicName: " + projectName.toLowerCase() + "; singleton:=true\n");
 		mainContent.append("Bundle-ActivationPolicy: lazy\n");
-		mainContent.append("Bundle-RequiredExecutionEnvironment: JavaSE-1.6\n");
+		mainContent.append("Bundle-RequiredExecutionEnvironment: JavaSE-1.8\n");
 		mainContent.append("Require-Bundle: com.google.guava,\n");
 		mainContent.append("  org.apache.log4j,\n");
 		mainContent.append("  org.eclipse.xtend.lib,\n");

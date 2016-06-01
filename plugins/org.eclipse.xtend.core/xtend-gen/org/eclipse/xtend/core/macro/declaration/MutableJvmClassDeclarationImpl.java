@@ -196,11 +196,8 @@ public class MutableJvmClassDeclarationImpl extends JvmClassDeclarationImpl impl
     final JvmTypeReference newTypeRef = _xifexpression;
     JvmGenericType _delegate = this.getDelegate();
     EList<JvmTypeReference> _superTypes = _delegate.getSuperTypes();
-    final Function1<JvmTypeReference, Boolean> _function = new Function1<JvmTypeReference, Boolean>() {
-      @Override
-      public Boolean apply(final JvmTypeReference it) {
-        return Boolean.valueOf(((it.getType() instanceof JvmGenericType) && (!((JvmGenericType) it.getType()).isInterface())));
-      }
+    final Function1<JvmTypeReference, Boolean> _function = (JvmTypeReference it) -> {
+      return Boolean.valueOf(((it.getType() instanceof JvmGenericType) && (!((JvmGenericType) it.getType()).isInterface())));
     };
     final JvmTypeReference oldType = IterableExtensions.<JvmTypeReference>findFirst(_superTypes, _function);
     boolean _notEquals_1 = (!Objects.equal(oldType, null));
@@ -221,11 +218,8 @@ public class MutableJvmClassDeclarationImpl extends JvmClassDeclarationImpl impl
     ConditionUtils.checkInferredTypeReferences("implemented interface", ((TypeReference[])Conversions.unwrapArray(superInterfaces, TypeReference.class)));
     JvmGenericType _delegate = this.getDelegate();
     EList<JvmTypeReference> _superTypes = _delegate.getSuperTypes();
-    final Function1<JvmTypeReference, Boolean> _function = new Function1<JvmTypeReference, Boolean>() {
-      @Override
-      public Boolean apply(final JvmTypeReference it) {
-        return Boolean.valueOf(((it.getType() instanceof JvmGenericType) && ((JvmGenericType) it.getType()).isInterface()));
-      }
+    final Function1<JvmTypeReference, Boolean> _function = (JvmTypeReference it) -> {
+      return Boolean.valueOf(((it.getType() instanceof JvmGenericType) && ((JvmGenericType) it.getType()).isInterface()));
     };
     final Iterable<JvmTypeReference> oldInterfaces = IterableExtensions.<JvmTypeReference>filter(_superTypes, _function);
     JvmGenericType _delegate_1 = this.getDelegate();
@@ -233,12 +227,9 @@ public class MutableJvmClassDeclarationImpl extends JvmClassDeclarationImpl impl
     CollectionExtensions.<JvmTypeReference>removeAll(_superTypes_1, oldInterfaces);
     JvmGenericType _delegate_2 = this.getDelegate();
     EList<JvmTypeReference> _superTypes_2 = _delegate_2.getSuperTypes();
-    final Function1<TypeReference, JvmTypeReference> _function_1 = new Function1<TypeReference, JvmTypeReference>() {
-      @Override
-      public JvmTypeReference apply(final TypeReference it) {
-        CompilationUnitImpl _compilationUnit = MutableJvmClassDeclarationImpl.this.getCompilationUnit();
-        return _compilationUnit.toJvmTypeReference(it);
-      }
+    final Function1<TypeReference, JvmTypeReference> _function_1 = (TypeReference it) -> {
+      CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+      return _compilationUnit.toJvmTypeReference(it);
     };
     Iterable<JvmTypeReference> _map = IterableExtensions.map(superInterfaces, _function_1);
     Iterables.<JvmTypeReference>addAll(_superTypes_2, _map);

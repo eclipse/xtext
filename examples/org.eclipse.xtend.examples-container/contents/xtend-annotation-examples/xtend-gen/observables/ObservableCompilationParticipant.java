@@ -31,106 +31,91 @@ public class ObservableCompilationParticipant extends AbstractClassProcessor {
         final TypeReference fieldType = f.getType();
         String _firstUpper = StringExtensions.toFirstUpper(fieldName);
         String _plus = ("get" + _firstUpper);
-        final Procedure1<MutableMethodDeclaration> _function = new Procedure1<MutableMethodDeclaration>() {
-          @Override
-          public void apply(final MutableMethodDeclaration it) {
-            it.setReturnType(fieldType);
-            StringConcatenationClient _client = new StringConcatenationClient() {
-              @Override
-              protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-                _builder.append("return this.");
-                _builder.append(fieldName, "");
-                _builder.append(";");
-              }
-            };
-            it.setBody(_client);
-            context.setPrimarySourceElement(it, f);
-          }
+        final Procedure1<MutableMethodDeclaration> _function = (MutableMethodDeclaration it) -> {
+          it.setReturnType(fieldType);
+          StringConcatenationClient _client = new StringConcatenationClient() {
+            @Override
+            protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+              _builder.append("return this.");
+              _builder.append(fieldName, "");
+              _builder.append(";");
+            }
+          };
+          it.setBody(_client);
+          context.setPrimarySourceElement(it, f);
         };
         clazz.addMethod(_plus, _function);
         String _firstUpper_1 = StringExtensions.toFirstUpper(fieldName);
         String _plus_1 = ("set" + _firstUpper_1);
-        final Procedure1<MutableMethodDeclaration> _function_1 = new Procedure1<MutableMethodDeclaration>() {
-          @Override
-          public void apply(final MutableMethodDeclaration it) {
-            it.addParameter(fieldName, fieldType);
-            StringConcatenationClient _client = new StringConcatenationClient() {
-              @Override
-              protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-                _builder.append(fieldType, "");
-                _builder.append(" _oldValue = this.");
-                _builder.append(fieldName, "");
-                _builder.append(";");
-                _builder.newLineIfNotEmpty();
-                _builder.append("this.");
-                _builder.append(fieldName, "");
-                _builder.append(" = ");
-                _builder.append(fieldName, "");
-                _builder.append(";");
-                _builder.newLineIfNotEmpty();
-                _builder.append("_propertyChangeSupport.firePropertyChange(\"");
-                _builder.append(fieldName, "");
-                _builder.append("\", _oldValue, ");
-                _builder.append(fieldName, "");
-                _builder.append(");");
-                _builder.newLineIfNotEmpty();
-              }
-            };
-            it.setBody(_client);
-            context.setPrimarySourceElement(it, f);
-          }
+        final Procedure1<MutableMethodDeclaration> _function_1 = (MutableMethodDeclaration it) -> {
+          it.addParameter(fieldName, fieldType);
+          StringConcatenationClient _client = new StringConcatenationClient() {
+            @Override
+            protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+              _builder.append(fieldType, "");
+              _builder.append(" _oldValue = this.");
+              _builder.append(fieldName, "");
+              _builder.append(";");
+              _builder.newLineIfNotEmpty();
+              _builder.append("this.");
+              _builder.append(fieldName, "");
+              _builder.append(" = ");
+              _builder.append(fieldName, "");
+              _builder.append(";");
+              _builder.newLineIfNotEmpty();
+              _builder.append("_propertyChangeSupport.firePropertyChange(\"");
+              _builder.append(fieldName, "");
+              _builder.append("\", _oldValue, ");
+              _builder.append(fieldName, "");
+              _builder.append(");");
+              _builder.newLineIfNotEmpty();
+            }
+          };
+          it.setBody(_client);
+          context.setPrimarySourceElement(it, f);
         };
         clazz.addMethod(_plus_1, _function_1);
         f.markAsRead();
       }
     }
     final TypeReference changeSupportType = context.newTypeReference(PropertyChangeSupport.class);
-    final Procedure1<MutableFieldDeclaration> _function = new Procedure1<MutableFieldDeclaration>() {
-      @Override
-      public void apply(final MutableFieldDeclaration it) {
-        it.setType(changeSupportType);
-        StringConcatenationClient _client = new StringConcatenationClient() {
-          @Override
-          protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-            _builder.append("new ");
-            _builder.append(changeSupportType, "");
-            _builder.append("(this)");
-          }
-        };
-        it.setInitializer(_client);
-        context.setPrimarySourceElement(it, clazz);
-      }
+    final Procedure1<MutableFieldDeclaration> _function = (MutableFieldDeclaration it) -> {
+      it.setType(changeSupportType);
+      StringConcatenationClient _client = new StringConcatenationClient() {
+        @Override
+        protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+          _builder.append("new ");
+          _builder.append(changeSupportType, "");
+          _builder.append("(this)");
+        }
+      };
+      it.setInitializer(_client);
+      context.setPrimarySourceElement(it, clazz);
     };
     clazz.addField("_propertyChangeSupport", _function);
     final TypeReference propertyChangeListener = context.newTypeReference(PropertyChangeListener.class);
-    final Procedure1<MutableMethodDeclaration> _function_1 = new Procedure1<MutableMethodDeclaration>() {
-      @Override
-      public void apply(final MutableMethodDeclaration it) {
-        it.addParameter("listener", propertyChangeListener);
-        StringConcatenationClient _client = new StringConcatenationClient() {
-          @Override
-          protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-            _builder.append("this._propertyChangeSupport.addPropertyChangeListener(listener);");
-          }
-        };
-        it.setBody(_client);
-        context.setPrimarySourceElement(it, clazz);
-      }
+    final Procedure1<MutableMethodDeclaration> _function_1 = (MutableMethodDeclaration it) -> {
+      it.addParameter("listener", propertyChangeListener);
+      StringConcatenationClient _client = new StringConcatenationClient() {
+        @Override
+        protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+          _builder.append("this._propertyChangeSupport.addPropertyChangeListener(listener);");
+        }
+      };
+      it.setBody(_client);
+      context.setPrimarySourceElement(it, clazz);
     };
     clazz.addMethod("addPropertyChangeListener", _function_1);
-    final Procedure1<MutableMethodDeclaration> _function_2 = new Procedure1<MutableMethodDeclaration>() {
-      @Override
-      public void apply(final MutableMethodDeclaration it) {
-        it.addParameter("listener", propertyChangeListener);
-        StringConcatenationClient _client = new StringConcatenationClient() {
-          @Override
-          protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-            _builder.append("this._propertyChangeSupport.removePropertyChangeListener(listener);");
-          }
-        };
-        it.setBody(_client);
-        context.setPrimarySourceElement(it, clazz);
-      }
+    final Procedure1<MutableMethodDeclaration> _function_2 = (MutableMethodDeclaration it) -> {
+      it.addParameter("listener", propertyChangeListener);
+      StringConcatenationClient _client = new StringConcatenationClient() {
+        @Override
+        protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+          _builder.append("this._propertyChangeSupport.removePropertyChangeListener(listener);");
+        }
+      };
+      it.setBody(_client);
+      context.setPrimarySourceElement(it, clazz);
     };
     clazz.addMethod("removePropertyChangeListener", _function_2);
   }

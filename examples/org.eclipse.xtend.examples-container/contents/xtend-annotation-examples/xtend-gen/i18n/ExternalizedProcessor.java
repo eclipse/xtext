@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
+import java.util.function.Consumer;
 import org.eclipse.xtend.lib.macro.AbstractClassProcessor;
 import org.eclipse.xtend.lib.macro.CodeGenerationContext;
 import org.eclipse.xtend.lib.macro.CodeGenerationParticipant;
@@ -71,121 +72,106 @@ public class ExternalizedProcessor extends AbstractClassProcessor implements Cod
           context.addWarning(_initializer, "Unused placeholders. They should start at index 0.");
         }
         String _simpleName = field.getSimpleName();
-        final Procedure1<MutableMethodDeclaration> _function = new Procedure1<MutableMethodDeclaration>() {
-          @Override
-          public void apply(final MutableMethodDeclaration it) {
-            final Procedure2<Format, Integer> _function = new Procedure2<Format, Integer>() {
-              @Override
-              public void apply(final Format format, final Integer idx) {
-                TypeReference _switchResult = null;
-                boolean _matched = false;
-                if (format instanceof NumberFormat) {
-                  _matched=true;
-                  _switchResult = context.getPrimitiveInt();
-                }
-                if (!_matched) {
-                  if (format instanceof DateFormat) {
-                    _matched=true;
-                    _switchResult = context.newTypeReference(Date.class);
-                  }
-                }
-                if (!_matched) {
-                  _switchResult = context.getString();
-                }
-                it.addParameter(("arg" + idx), _switchResult);
+        final Procedure1<MutableMethodDeclaration> _function = (MutableMethodDeclaration it) -> {
+          final Procedure2<Format, Integer> _function_1 = (Format format, Integer idx) -> {
+            TypeReference _switchResult = null;
+            boolean _matched = false;
+            if (format instanceof NumberFormat) {
+              _matched=true;
+              _switchResult = context.getPrimitiveInt();
+            }
+            if (!_matched) {
+              if (format instanceof DateFormat) {
+                _matched=true;
+                _switchResult = context.newTypeReference(Date.class);
               }
-            };
-            IterableExtensions.<Format>forEach(((Iterable<Format>)Conversions.doWrapArray(formats)), _function);
-            TypeReference _string = context.getString();
-            it.setReturnType(_string);
-            it.setDocComment(initializer);
-            it.setStatic(true);
-            final Iterable<? extends MutableParameterDeclaration> params = it.getParameters();
-            StringConcatenationClient _client = new StringConcatenationClient() {
-              @Override
-              protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-                _builder.append("try {");
-                _builder.newLine();
-                _builder.append("\t");
-                _builder.append("String msg = RESOURCE_BUNDLE.getString(\"");
-                String _simpleName = field.getSimpleName();
-                _builder.append(_simpleName, "\t");
-                _builder.append("\");");
-                _builder.newLineIfNotEmpty();
-                {
-                  int _length = formats.length;
-                  boolean _greaterThan = (_length > 0);
-                  if (_greaterThan) {
-                    _builder.append("\t");
-                    _builder.append("msg = ");
-                    _builder.append(MessageFormat.class, "\t");
-                    _builder.append(".format(msg,");
-                    final Function1<MutableParameterDeclaration, String> _function = new Function1<MutableParameterDeclaration, String>() {
-                      @Override
-                      public String apply(final MutableParameterDeclaration it) {
-                        return it.getSimpleName();
-                      }
-                    };
-                    Iterable<String> _map = IterableExtensions.map(params, _function);
-                    String _join = IterableExtensions.join(_map, ",");
-                    _builder.append(_join, "\t");
-                    _builder.append(");");
-                    _builder.newLineIfNotEmpty();
-                  }
+            }
+            if (!_matched) {
+              _switchResult = context.getString();
+            }
+            it.addParameter(("arg" + idx), _switchResult);
+          };
+          IterableExtensions.<Format>forEach(((Iterable<Format>)Conversions.doWrapArray(formats)), _function_1);
+          TypeReference _string = context.getString();
+          it.setReturnType(_string);
+          it.setDocComment(initializer);
+          it.setStatic(true);
+          final Iterable<? extends MutableParameterDeclaration> params = it.getParameters();
+          StringConcatenationClient _client = new StringConcatenationClient() {
+            @Override
+            protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+              _builder.append("try {");
+              _builder.newLine();
+              _builder.append("\t");
+              _builder.append("String msg = RESOURCE_BUNDLE.getString(\"");
+              String _simpleName = field.getSimpleName();
+              _builder.append(_simpleName, "\t");
+              _builder.append("\");");
+              _builder.newLineIfNotEmpty();
+              {
+                int _length = formats.length;
+                boolean _greaterThan = (_length > 0);
+                if (_greaterThan) {
+                  _builder.append("\t");
+                  _builder.append("msg = ");
+                  _builder.append(MessageFormat.class, "\t");
+                  _builder.append(".format(msg,");
+                  final Function1<MutableParameterDeclaration, String> _function = (MutableParameterDeclaration it_1) -> {
+                    return it_1.getSimpleName();
+                  };
+                  Iterable<String> _map = IterableExtensions.map(params, _function);
+                  String _join = IterableExtensions.join(_map, ",");
+                  _builder.append(_join, "\t");
+                  _builder.append(");");
+                  _builder.newLineIfNotEmpty();
                 }
-                _builder.append("\t");
-                _builder.append("return msg;");
-                _builder.newLine();
-                _builder.append("} catch (");
-                _builder.append(MissingResourceException.class, "");
-                _builder.append(" e) {");
-                _builder.newLineIfNotEmpty();
-                _builder.append("\t");
-                _builder.append("// TODO error logging");
-                _builder.newLine();
-                _builder.append("\t");
-                _builder.append("return \"");
-                _builder.append(initializer, "\t");
-                _builder.append("\";");
-                _builder.newLineIfNotEmpty();
-                _builder.append("}");
-                _builder.newLine();
               }
-            };
-            it.setBody(_client);
-            context.setPrimarySourceElement(it, field);
-          }
+              _builder.append("\t");
+              _builder.append("return msg;");
+              _builder.newLine();
+              _builder.append("} catch (");
+              _builder.append(MissingResourceException.class, "");
+              _builder.append(" e) {");
+              _builder.newLineIfNotEmpty();
+              _builder.append("\t");
+              _builder.append("// TODO error logging");
+              _builder.newLine();
+              _builder.append("\t");
+              _builder.append("return \"");
+              _builder.append(initializer, "\t");
+              _builder.append("\";");
+              _builder.newLineIfNotEmpty();
+              _builder.append("}");
+              _builder.newLine();
+            }
+          };
+          it.setBody(_client);
+          context.setPrimarySourceElement(it, field);
         };
         annotatedClass.addMethod(_simpleName, _function);
       }
     }
     Iterable<? extends MutableFieldDeclaration> _declaredFields_1 = annotatedClass.getDeclaredFields();
-    final Procedure1<MutableFieldDeclaration> _function = new Procedure1<MutableFieldDeclaration>() {
-      @Override
-      public void apply(final MutableFieldDeclaration it) {
-        it.remove();
-      }
+    final Consumer<MutableFieldDeclaration> _function = (MutableFieldDeclaration it) -> {
+      it.remove();
     };
-    IterableExtensions.forEach(_declaredFields_1, _function);
-    final Procedure1<MutableFieldDeclaration> _function_1 = new Procedure1<MutableFieldDeclaration>() {
-      @Override
-      public void apply(final MutableFieldDeclaration it) {
-        it.setStatic(true);
-        it.setFinal(true);
-        TypeReference _newTypeReference = context.newTypeReference(ResourceBundle.class);
-        it.setType(_newTypeReference);
-        StringConcatenationClient _client = new StringConcatenationClient() {
-          @Override
-          protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-            _builder.append("ResourceBundle.getBundle(\"");
-            String _qualifiedName = annotatedClass.getQualifiedName();
-            _builder.append(_qualifiedName, "");
-            _builder.append("\")");
-          }
-        };
-        it.setInitializer(_client);
-        context.setPrimarySourceElement(it, annotatedClass);
-      }
+    _declaredFields_1.forEach(_function);
+    final Procedure1<MutableFieldDeclaration> _function_1 = (MutableFieldDeclaration it) -> {
+      it.setStatic(true);
+      it.setFinal(true);
+      TypeReference _newTypeReference = context.newTypeReference(ResourceBundle.class);
+      it.setType(_newTypeReference);
+      StringConcatenationClient _client = new StringConcatenationClient() {
+        @Override
+        protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+          _builder.append("ResourceBundle.getBundle(\"");
+          String _qualifiedName = annotatedClass.getQualifiedName();
+          _builder.append(_qualifiedName, "");
+          _builder.append("\")");
+        }
+      };
+      it.setInitializer(_client);
+      context.setPrimarySourceElement(it, annotatedClass);
     };
     annotatedClass.addField("RESOURCE_BUNDLE", _function_1);
   }

@@ -18,6 +18,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.BiConsumer;
 import java.util.jar.Attributes;
 import java.util.jar.JarFile;
 import java.util.jar.Manifest;
@@ -31,8 +32,6 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.MapExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -63,33 +62,24 @@ public class ResourceURICollector {
     Iterable<String> _plus = Iterables.<String>concat(fileExtensions, Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("java")));
     final Set<String> extensions = IterableExtensions.<String>toSet(_plus);
     PathTraverser _pathTraverser = new PathTraverser();
-    final Function1<URI, String> _function = new Function1<URI, String>() {
-      @Override
-      public String apply(final URI it) {
-        return it.toFileString();
-      }
+    final Function1<URI, String> _function = (URI it) -> {
+      return it.toFileString();
     };
     Iterable<String> _map = IterableExtensions.<URI, String>map(roots, _function);
     List<String> _list = IterableExtensions.<String>toList(_map);
-    final Predicate<URI> _function_1 = new Predicate<URI>() {
-      @Override
-      public boolean apply(final URI it) {
-        String _fileExtension = it.fileExtension();
-        return extensions.contains(_fileExtension);
-      }
+    final Predicate<URI> _function_1 = (URI it) -> {
+      String _fileExtension = it.fileExtension();
+      return extensions.contains(_fileExtension);
     };
     final Multimap<String, URI> modelsFound = _pathTraverser.resolvePathes(_list, _function_1);
     Map<String, Collection<URI>> _asMap = modelsFound.asMap();
-    final Procedure2<String, Collection<URI>> _function_2 = new Procedure2<String, Collection<URI>>() {
-      @Override
-      public void apply(final String path, final Collection<URI> resource) {
-        final File file = new File(path);
-        if ((((!Objects.equal(resource, null)) && (!file.isDirectory())) && file.getName().endsWith(".jar"))) {
-          ResourceURICollector.this.registerBundle(file);
-        }
+    final BiConsumer<String, Collection<URI>> _function_2 = (String path, Collection<URI> resource) -> {
+      final File file = new File(path);
+      if ((((!Objects.equal(resource, null)) && (!file.isDirectory())) && file.getName().endsWith(".jar"))) {
+        this.registerBundle(file);
       }
     };
-    MapExtensions.<String, Collection<URI>>forEach(_asMap, _function_2);
+    _asMap.forEach(_function_2);
     Collection<URI> _values = modelsFound.values();
     return IterableExtensions.<URI>toSet(_values);
   }

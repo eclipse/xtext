@@ -26,33 +26,27 @@ public class Bug464136Test extends AbstractActiveAnnotationTest {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("@org.eclipse.xtend.core.tests.macro.Bug464136 class C {}");
     _builder.newLine();
-    final IAcceptor<XtendCompilerTester.CompilationResult> _function = new IAcceptor<XtendCompilerTester.CompilationResult>() {
-      @Override
-      public void accept(final XtendCompilerTester.CompilationResult it) {
-        final List<? extends Problem> problems = it.getAllProblems();
-        final Function1<Problem, String> _function = new Function1<Problem, String>() {
-          @Override
-          public String apply(final Problem it) {
-            return it.getMessage();
-          }
-        };
-        List<String> _map = ListExtensions.map(problems, _function);
-        String _string = _map.toString();
-        int _size = problems.size();
-        Assert.assertEquals(_string, 1, _size);
-        StringConcatenation _builder = new StringConcatenation();
-        _builder.append("Error during annotation processing:");
-        _builder.newLine();
-        _builder.append("java.lang.LinkageError: Just a test :-/");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("at org.eclipse.xtend.core.tests.macro.Bug464136Processor$1.apply(Bug464136Processor.java:23)");
-        _builder.newLine();
-        String _string_1 = _builder.toString();
-        Problem _head = IterableExtensions.head(problems);
-        String _message = _head.getMessage();
-        Assert.assertEquals(_string_1, _message);
-      }
+    final IAcceptor<XtendCompilerTester.CompilationResult> _function = (XtendCompilerTester.CompilationResult it) -> {
+      final List<? extends Problem> problems = it.getAllProblems();
+      final Function1<Problem, String> _function_1 = (Problem it_1) -> {
+        return it_1.getMessage();
+      };
+      List<String> _map = ListExtensions.map(problems, _function_1);
+      String _string = _map.toString();
+      int _size = problems.size();
+      Assert.assertEquals(_string, 1, _size);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("Error during annotation processing:");
+      _builder_1.newLine();
+      _builder_1.append("java.lang.LinkageError: Just a test :-/");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.append("at org.eclipse.xtend.core.tests.macro.Bug464136Processor$1.apply(Bug464136Processor.java:23)");
+      _builder_1.newLine();
+      String _string_1 = _builder_1.toString();
+      Problem _head = IterableExtensions.head(problems);
+      String _message = _head.getMessage();
+      Assert.assertEquals(_string_1, _message);
     };
     this._xtendCompilerTester.compile(_builder, _function);
   }

@@ -140,12 +140,9 @@ public class ResourceStorageTest extends AbstractXtendUITestCase {
       EcoreUtil.resolveAll(resource2);
       IResourceDescription _resourceDescription = resource2.getResourceDescription();
       Iterable<IEObjectDescription> _exportedObjects = _resourceDescription.getExportedObjects();
-      final Function1<IEObjectDescription, String> _function = new Function1<IEObjectDescription, String>() {
-        @Override
-        public String apply(final IEObjectDescription it) {
-          QualifiedName _name = it.getName();
-          return _name.toString();
-        }
+      final Function1<IEObjectDescription, String> _function = (IEObjectDescription it) -> {
+        QualifiedName _name = it.getName();
+        return _name.toString();
       };
       Iterable<String> _map = IterableExtensions.<IEObjectDescription, String>map(_exportedObjects, _function);
       String _join = IterableExtensions.join(_map, ",");
@@ -156,12 +153,9 @@ public class ResourceStorageTest extends AbstractXtendUITestCase {
       Assert.assertTrue(_isLoadedFromStorage_1);
       IResourceDescription _resourceDescription_1 = resource.getResourceDescription();
       Iterable<IEObjectDescription> _exportedObjects_1 = _resourceDescription_1.getExportedObjects();
-      final Function1<IEObjectDescription, String> _function_1 = new Function1<IEObjectDescription, String>() {
-        @Override
-        public String apply(final IEObjectDescription it) {
-          QualifiedName _name = it.getName();
-          return _name.toString();
-        }
+      final Function1<IEObjectDescription, String> _function_1 = (IEObjectDescription it) -> {
+        QualifiedName _name = it.getName();
+        return _name.toString();
       };
       Iterable<String> _map_1 = IterableExtensions.<IEObjectDescription, String>map(_exportedObjects_1, _function_1);
       String _join_1 = IterableExtensions.join(_map_1, ",");
@@ -196,25 +190,19 @@ public class ResourceStorageTest extends AbstractXtendUITestCase {
       SourceLevelURIsAdapter.setSourceLevelUris(resourceSet, Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList()));
       Resource _createResource = resourceSet.createResource(uri);
       final StorageAwareResource resource = ((StorageAwareResource) _createResource);
-      final Procedure0 _function = new Procedure0() {
-        @Override
-        public void apply() {
-          IResourceStorageFacade _resourceStorageFacade = resource.getResourceStorageFacade();
-          boolean _shouldLoadFromStorage = _resourceStorageFacade.shouldLoadFromStorage(resource);
-          Assert.assertTrue(_shouldLoadFromStorage);
-        }
+      final Procedure0 _function = () -> {
+        IResourceStorageFacade _resourceStorageFacade = resource.getResourceStorageFacade();
+        boolean _shouldLoadFromStorage = _resourceStorageFacade.shouldLoadFromStorage(resource);
+        Assert.assertTrue(_shouldLoadFromStorage);
       };
       this.doWorkInJob(_function);
       NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
       file.delete(true, _nullProgressMonitor);
       IResourcesSetupUtil.waitForBuild();
-      final Procedure0 _function_1 = new Procedure0() {
-        @Override
-        public void apply() {
-          IResourceStorageFacade _resourceStorageFacade = resource.getResourceStorageFacade();
-          boolean _shouldLoadFromStorage = _resourceStorageFacade.shouldLoadFromStorage(resource);
-          Assert.assertFalse(_shouldLoadFromStorage);
-        }
+      final Procedure0 _function_1 = () -> {
+        IResourceStorageFacade _resourceStorageFacade = resource.getResourceStorageFacade();
+        boolean _shouldLoadFromStorage = _resourceStorageFacade.shouldLoadFromStorage(resource);
+        Assert.assertFalse(_shouldLoadFromStorage);
       };
       this.doWorkInJob(_function_1);
     } catch (Throwable _e) {
@@ -287,12 +275,9 @@ public class ResourceStorageTest extends AbstractXtendUITestCase {
       String _name = _class.getName();
       _builder.append(_name, "");
       _builder.append(".TestJob");
-      final Procedure1<Job> _function = new Procedure1<Job>() {
-        @Override
-        public void apply(final Job it) {
-          ISchedulingRule _newSequence = SchedulingRuleFactory.INSTANCE.newSequence();
-          it.setRule(_newSequence);
-        }
+      final Procedure1<Job> _function = (Job it) -> {
+        ISchedulingRule _newSequence = SchedulingRuleFactory.INSTANCE.newSequence();
+        it.setRule(_newSequence);
       };
       final Job testShouldLoadFromStorageJob = ObjectExtensions.<Job>operator_doubleArrow(new Job(_builder.toString()) {
         @Override

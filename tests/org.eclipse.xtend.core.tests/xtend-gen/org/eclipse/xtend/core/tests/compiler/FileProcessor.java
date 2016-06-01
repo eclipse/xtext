@@ -33,12 +33,9 @@ public class FileProcessor extends AbstractClassProcessor {
     String _trim = contents.trim();
     final String[] segments = _trim.split(",");
     for (final String segment : segments) {
-      final Procedure1<MutableFieldDeclaration> _function = new Procedure1<MutableFieldDeclaration>() {
-        @Override
-        public void apply(final MutableFieldDeclaration it) {
-          TypeReference _string = context.getString();
-          it.setType(_string);
-        }
+      final Procedure1<MutableFieldDeclaration> _function = (MutableFieldDeclaration it) -> {
+        TypeReference _string = context.getString();
+        it.setType(_string);
       };
       annotatedClass.addField(segment, _function);
     }

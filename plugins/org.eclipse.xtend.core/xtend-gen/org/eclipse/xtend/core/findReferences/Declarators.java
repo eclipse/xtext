@@ -12,6 +12,7 @@ import com.google.inject.Inject;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.function.Consumer;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -24,8 +25,6 @@ import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
@@ -97,46 +96,37 @@ public class Declarators {
     }
     final HashSet<QualifiedName> declaratorNames = CollectionLiterals.<QualifiedName>newHashSet();
     Collection<URI> _targetResourceURIs = targetURIs.getTargetResourceURIs();
-    final Procedure1<URI> _function = new Procedure1<URI>() {
-      @Override
-      public void apply(final URI uri) {
-        final IUnitOfWork<Object, ResourceSet> _function = new IUnitOfWork<Object, ResourceSet>() {
-          @Override
-          public Object exec(final ResourceSet it) throws Exception {
-            Object _xblockexpression = null;
-            {
-              Collection<URI> _eObjectURIs = targetURIs.getEObjectURIs(uri);
-              final Procedure1<URI> _function = new Procedure1<URI>() {
-                @Override
-                public void apply(final URI objectURI) {
-                  final EObject object = it.getEObject(objectURI, true);
-                  boolean _notEquals = (!Objects.equal(object, null));
-                  if (_notEquals) {
-                    final JvmType type = EcoreUtil2.<JvmType>getContainerOfType(object, JvmType.class);
-                    boolean _notEquals_1 = (!Objects.equal(type, null));
-                    if (_notEquals_1) {
-                      String _identifier = type.getIdentifier();
-                      QualifiedName _qualifiedName = Declarators.this.nameConverter.toQualifiedName(_identifier);
-                      QualifiedName _lowerCase = _qualifiedName.toLowerCase();
-                      declaratorNames.add(_lowerCase);
-                      String _qualifiedName_1 = type.getQualifiedName('.');
-                      QualifiedName _qualifiedName_2 = Declarators.this.nameConverter.toQualifiedName(_qualifiedName_1);
-                      QualifiedName _lowerCase_1 = _qualifiedName_2.toLowerCase();
-                      declaratorNames.add(_lowerCase_1);
-                    }
-                  }
-                }
-              };
-              IterableExtensions.<URI>forEach(_eObjectURIs, _function);
-              _xblockexpression = null;
+    final Consumer<URI> _function = (URI uri) -> {
+      final IUnitOfWork<Object, ResourceSet> _function_1 = (ResourceSet it) -> {
+        Object _xblockexpression = null;
+        {
+          Collection<URI> _eObjectURIs = targetURIs.getEObjectURIs(uri);
+          final Consumer<URI> _function_2 = (URI objectURI) -> {
+            final EObject object = it.getEObject(objectURI, true);
+            boolean _notEquals_1 = (!Objects.equal(object, null));
+            if (_notEquals_1) {
+              final JvmType type = EcoreUtil2.<JvmType>getContainerOfType(object, JvmType.class);
+              boolean _notEquals_2 = (!Objects.equal(type, null));
+              if (_notEquals_2) {
+                String _identifier = type.getIdentifier();
+                QualifiedName _qualifiedName = this.nameConverter.toQualifiedName(_identifier);
+                QualifiedName _lowerCase = _qualifiedName.toLowerCase();
+                declaratorNames.add(_lowerCase);
+                String _qualifiedName_1 = type.getQualifiedName('.');
+                QualifiedName _qualifiedName_2 = this.nameConverter.toQualifiedName(_qualifiedName_1);
+                QualifiedName _lowerCase_1 = _qualifiedName_2.toLowerCase();
+                declaratorNames.add(_lowerCase_1);
+              }
             }
-            return _xblockexpression;
-          }
-        };
-        resourceAccess.<Object>readOnly(uri, _function);
-      }
+          };
+          _eObjectURIs.forEach(_function_2);
+          _xblockexpression = null;
+        }
+        return _xblockexpression;
+      };
+      resourceAccess.<Object>readOnly(uri, _function_1);
     };
-    IterableExtensions.<URI>forEach(_targetResourceURIs, _function);
+    _targetResourceURIs.forEach(_function);
     Declarators.DeclaratorsData _declaratorsData = new Declarators.DeclaratorsData(declaratorNames);
     result = _declaratorsData;
     targetURIs.<Declarators.DeclaratorsData>putUserData(Declarators.KEY, result);

@@ -11,6 +11,7 @@ import com.google.common.base.Objects;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
+import java.util.function.Consumer;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
@@ -32,8 +33,6 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -71,15 +70,12 @@ public class EmfModelsTest {
     String _plus_1 = (_plus + "\'");
     EmfModelsTest.LOGGER.info(_plus_1);
     EList<EClassifier> _eClassifiers = ePack.getEClassifiers();
-    final Procedure1<EClassifier> _function = new Procedure1<EClassifier>() {
-      @Override
-      public void apply(final EClassifier it) {
-        if ((it instanceof EClass)) {
-          EmfModelsTest.this.check(((EClass)it));
-        }
+    final Consumer<EClassifier> _function = (EClassifier it) -> {
+      if ((it instanceof EClass)) {
+        this.check(((EClass)it));
       }
     };
-    IterableExtensions.<EClassifier>forEach(_eClassifiers, _function);
+    _eClassifiers.forEach(_function);
     String _name_1 = ePack.getName();
     String _plus_2 = ("EPackage \'" + _name_1);
     String _plus_3 = (_plus_2 + "\' passed.");

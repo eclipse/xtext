@@ -53,12 +53,9 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
   public Iterable<? extends MemberDeclaration> getDeclaredMembers() {
     T _delegate = this.getDelegate();
     EList<JvmMember> _members = _delegate.getMembers();
-    final Function1<JvmMember, MemberDeclaration> _function = new Function1<JvmMember, MemberDeclaration>() {
-      @Override
-      public MemberDeclaration apply(final JvmMember it) {
-        CompilationUnitImpl _compilationUnit = JvmTypeDeclarationImpl.this.getCompilationUnit();
-        return _compilationUnit.toMemberDeclaration(it);
-      }
+    final Function1<JvmMember, MemberDeclaration> _function = (JvmMember it) -> {
+      CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+      return _compilationUnit.toMemberDeclaration(it);
     };
     List<MemberDeclaration> _map = ListExtensions.<JvmMember, MemberDeclaration>map(_members, _function);
     return ImmutableList.<MemberDeclaration>copyOf(_map);
@@ -96,13 +93,10 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
     T _delegate = this.getDelegate();
     EList<JvmMember> _members = _delegate.getMembers();
     Iterable<JvmConstructor> _filter = Iterables.<JvmConstructor>filter(_members, JvmConstructor.class);
-    final Function1<JvmConstructor, Boolean> _function = new Function1<JvmConstructor, Boolean>() {
-      @Override
-      public Boolean apply(final JvmConstructor it) {
-        CompilationUnitImpl _compilationUnit = JvmTypeDeclarationImpl.this.getCompilationUnit();
-        JvmTypeExtensions _typeExtensions = _compilationUnit.getTypeExtensions();
-        return Boolean.valueOf(_typeExtensions.isSingleSyntheticDefaultConstructor(it));
-      }
+    final Function1<JvmConstructor, Boolean> _function = (JvmConstructor it) -> {
+      CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+      JvmTypeExtensions _typeExtensions = _compilationUnit.getTypeExtensions();
+      return Boolean.valueOf(_typeExtensions.isSingleSyntheticDefaultConstructor(it));
     };
     final JvmConstructor constructor = IterableExtensions.<JvmConstructor>findFirst(_filter, _function);
     boolean _notEquals_1 = (!Objects.equal(constructor, null));
@@ -170,21 +164,15 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
     {
       ConditionUtils.checkIterable(((Iterable<?>)Conversions.doWrapArray(parameterTypes)), "parameterTypes");
       Iterable<? extends ConstructorDeclaration> _declaredConstructors = this.getDeclaredConstructors();
-      final Function1<ConstructorDeclaration, Boolean> _function = new Function1<ConstructorDeclaration, Boolean>() {
-        @Override
-        public Boolean apply(final ConstructorDeclaration constructor) {
-          Iterable<? extends ParameterDeclaration> _parameters = constructor.getParameters();
-          final Function1<ParameterDeclaration, TypeReference> _function = new Function1<ParameterDeclaration, TypeReference>() {
-            @Override
-            public TypeReference apply(final ParameterDeclaration it) {
-              return it.getType();
-            }
-          };
-          Iterable<TypeReference> _map = IterableExtensions.map(_parameters, _function);
-          List<TypeReference> _list = IterableExtensions.<TypeReference>toList(_map);
-          List<TypeReference> _list_1 = IterableExtensions.<TypeReference>toList(((Iterable<TypeReference>)Conversions.doWrapArray(parameterTypes)));
-          return Boolean.valueOf(Objects.equal(_list, _list_1));
-        }
+      final Function1<ConstructorDeclaration, Boolean> _function = (ConstructorDeclaration constructor) -> {
+        Iterable<? extends ParameterDeclaration> _parameters = constructor.getParameters();
+        final Function1<ParameterDeclaration, TypeReference> _function_1 = (ParameterDeclaration it) -> {
+          return it.getType();
+        };
+        Iterable<TypeReference> _map = IterableExtensions.map(_parameters, _function_1);
+        List<TypeReference> _list = IterableExtensions.<TypeReference>toList(_map);
+        List<TypeReference> _list_1 = IterableExtensions.<TypeReference>toList(((Iterable<TypeReference>)Conversions.doWrapArray(parameterTypes)));
+        return Boolean.valueOf(Objects.equal(_list, _list_1));
       };
       _xblockexpression = IterableExtensions.findFirst(_declaredConstructors, _function);
     }
@@ -193,24 +181,18 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
   
   public FieldDeclaration findDeclaredField(final String name) {
     Iterable<? extends FieldDeclaration> _declaredFields = this.getDeclaredFields();
-    final Function1<FieldDeclaration, Boolean> _function = new Function1<FieldDeclaration, Boolean>() {
-      @Override
-      public Boolean apply(final FieldDeclaration field) {
-        String _simpleName = field.getSimpleName();
-        return Boolean.valueOf(Objects.equal(_simpleName, name));
-      }
+    final Function1<FieldDeclaration, Boolean> _function = (FieldDeclaration field) -> {
+      String _simpleName = field.getSimpleName();
+      return Boolean.valueOf(Objects.equal(_simpleName, name));
     };
     return IterableExtensions.findFirst(_declaredFields, _function);
   }
   
   public TypeDeclaration findDeclaredType(final String name) {
     Iterable<? extends TypeDeclaration> _declaredTypes = this.getDeclaredTypes();
-    final Function1<TypeDeclaration, Boolean> _function = new Function1<TypeDeclaration, Boolean>() {
-      @Override
-      public Boolean apply(final TypeDeclaration type) {
-        String _simpleName = type.getSimpleName();
-        return Boolean.valueOf(Objects.equal(_simpleName, name));
-      }
+    final Function1<TypeDeclaration, Boolean> _function = (TypeDeclaration type) -> {
+      String _simpleName = type.getSimpleName();
+      return Boolean.valueOf(Objects.equal(_simpleName, name));
     };
     return IterableExtensions.findFirst(_declaredTypes, _function);
   }
@@ -220,16 +202,10 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
     {
       ConditionUtils.checkIterable(((Iterable<?>)Conversions.doWrapArray(parameterTypes)), "parameterTypes");
       Iterable<? extends MethodDeclaration> _declaredMethods = this.getDeclaredMethods();
-      final Function1<MethodDeclaration, Boolean> _function = new Function1<MethodDeclaration, Boolean>() {
-        @Override
-        public Boolean apply(final MethodDeclaration method) {
-          return Boolean.valueOf((Objects.equal(method.getSimpleName(), name) && Objects.equal(IterableExtensions.<TypeReference>toList(IterableExtensions.map(method.getParameters(), new Function1<ParameterDeclaration, TypeReference>() {
-            @Override
-            public TypeReference apply(final ParameterDeclaration it) {
-              return it.getType();
-            }
-          })), IterableExtensions.<TypeReference>toList(((Iterable<TypeReference>)Conversions.doWrapArray(parameterTypes))))));
-        }
+      final Function1<MethodDeclaration, Boolean> _function = (MethodDeclaration method) -> {
+        return Boolean.valueOf((Objects.equal(method.getSimpleName(), name) && Objects.equal(IterableExtensions.<TypeReference>toList(IterableExtensions.map(method.getParameters(), ((Function1<ParameterDeclaration, TypeReference>) (ParameterDeclaration it) -> {
+          return it.getType();
+        }))), IterableExtensions.<TypeReference>toList(((Iterable<TypeReference>)Conversions.doWrapArray(parameterTypes))))));
       };
       _xblockexpression = IterableExtensions.findFirst(_declaredMethods, _function);
     }

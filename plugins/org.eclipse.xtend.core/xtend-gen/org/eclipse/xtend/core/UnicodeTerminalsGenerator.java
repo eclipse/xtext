@@ -29,11 +29,8 @@ class UnicodeTerminalsGenerator {
     _builder.append("terminal fragment IDENTIFIER_START:");
     _builder.newLine();
     _builder.append("\t");
-    final Function1<Integer, Boolean> _function = new Function1<Integer, Boolean>() {
-      @Override
-      public Boolean apply(final Integer it) {
-        return Boolean.valueOf(Character.isJavaIdentifierStart((it).intValue()));
-      }
+    final Function1<Integer, Boolean> _function = (Integer it) -> {
+      return Boolean.valueOf(Character.isJavaIdentifierStart((it).intValue()));
     };
     StringWriter _generateUnicodeRules = UnicodeTerminalsGenerator.generateUnicodeRules(_function);
     _builder.append(_generateUnicodeRules, "\t");
@@ -52,11 +49,8 @@ class UnicodeTerminalsGenerator {
     _builder.append("terminal fragment IDENTIFIER_PART_IMPL:");
     _builder.newLine();
     _builder.append("\t");
-    final Function1<Integer, Boolean> _function_1 = new Function1<Integer, Boolean>() {
-      @Override
-      public Boolean apply(final Integer it) {
-        return Boolean.valueOf((Character.isJavaIdentifierPart((it).intValue()) && (!Character.isJavaIdentifierStart((it).intValue()))));
-      }
+    final Function1<Integer, Boolean> _function_1 = (Integer it) -> {
+      return Boolean.valueOf((Character.isJavaIdentifierPart((it).intValue()) && (!Character.isJavaIdentifierStart((it).intValue()))));
     };
     StringWriter _generateUnicodeRules_1 = UnicodeTerminalsGenerator.generateUnicodeRules(_function_1);
     _builder.append(_generateUnicodeRules_1, "\t");

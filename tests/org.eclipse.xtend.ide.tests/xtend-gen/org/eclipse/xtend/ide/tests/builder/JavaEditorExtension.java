@@ -46,11 +46,8 @@ public class JavaEditorExtension {
   }
   
   public ITextEditor reconcile(final ITextEditor editor, final String oldText, final String newText) {
-    final Function1<ITextEditor, ITextEditor> _function = new Function1<ITextEditor, ITextEditor>() {
-      @Override
-      public ITextEditor apply(final ITextEditor it) {
-        return JavaEditorExtension.this.changeContent(it, oldText, newText);
-      }
+    final Function1<ITextEditor, ITextEditor> _function = (ITextEditor it) -> {
+      return this.changeContent(it, oldText, newText);
     };
     return this.reconcile(editor, _function);
   }
@@ -62,11 +59,8 @@ public class JavaEditorExtension {
       if (_equals) {
         return editor;
       }
-      final Procedure0 _function = new Procedure0() {
-        @Override
-        public void apply() {
-          consumer.apply(editor);
-        }
+      final Procedure0 _function = () -> {
+        consumer.apply(editor);
       };
       this.waitForPostReconcileEvent(_function);
       _xblockexpression = editor;
@@ -81,16 +75,13 @@ public class JavaEditorExtension {
   public ITextEditor save(final ITextEditor editor, final Function1<? super ITextEditor, ? extends ITextEditor> consumer) {
     ITextEditor _xblockexpression = null;
     {
-      final Procedure0 _function = new Procedure0() {
-        @Override
-        public void apply() {
-          boolean _notEquals = (!Objects.equal(consumer, null));
-          if (_notEquals) {
-            consumer.apply(editor);
-          }
-          boolean _saveEditor = JavaEditorExtension.this._workbenchTestHelper.saveEditor(editor, false);
-          Assert.assertTrue(_saveEditor);
+      final Procedure0 _function = () -> {
+        boolean _notEquals = (!Objects.equal(consumer, null));
+        if (_notEquals) {
+          consumer.apply(editor);
         }
+        boolean _saveEditor = this._workbenchTestHelper.saveEditor(editor, false);
+        Assert.assertTrue(_saveEditor);
       };
       this.waitForPostChangeEvent(_function);
       _xblockexpression = editor;
@@ -105,16 +96,13 @@ public class JavaEditorExtension {
   public ITextEditor close(final ITextEditor editor, final Function1<? super ITextEditor, ? extends ITextEditor> consumer) {
     ITextEditor _xblockexpression = null;
     {
-      final Procedure0 _function = new Procedure0() {
-        @Override
-        public void apply() {
-          boolean _notEquals = (!Objects.equal(consumer, null));
-          if (_notEquals) {
-            consumer.apply(editor);
-          }
-          boolean _closeEditor = JavaEditorExtension.this._workbenchTestHelper.closeEditor(editor, false);
-          Assert.assertTrue(_closeEditor);
+      final Procedure0 _function = () -> {
+        boolean _notEquals = (!Objects.equal(consumer, null));
+        if (_notEquals) {
+          consumer.apply(editor);
         }
+        boolean _closeEditor = this._workbenchTestHelper.closeEditor(editor, false);
+        Assert.assertTrue(_closeEditor);
       };
       this.waitForPostChangeEvent(_function);
       _xblockexpression = editor;

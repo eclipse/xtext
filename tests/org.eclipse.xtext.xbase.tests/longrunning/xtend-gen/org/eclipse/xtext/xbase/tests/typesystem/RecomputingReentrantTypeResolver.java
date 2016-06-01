@@ -14,6 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.BiConsumer;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmConstructor;
@@ -33,7 +34,6 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.eclipse.xtext.xbase.lib.MapExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 import org.eclipse.xtext.xbase.lib.util.ReflectExtensions;
 import org.eclipse.xtext.xbase.tests.typesystem.RecordingRootResolvedTypes;
@@ -114,17 +114,14 @@ public class RecomputingReentrantTypeResolver extends PublicReentrantTypeResolve
     Set<XExpression> _keySet_2 = firstRun.keySet();
     Set<XExpression> _keySet_3 = secondRun.keySet();
     Assert.assertEquals(_builder_1.toString(), _keySet_2, _keySet_3);
-    final Procedure2<XExpression, IApplicableCandidate> _function = new Procedure2<XExpression, IApplicableCandidate>() {
-      @Override
-      public void apply(final XExpression expression, final IApplicableCandidate firstLinkingData) {
-        final IApplicableCandidate secondLinkingData = secondRun.get(expression);
-        RecomputingReentrantTypeResolver.this.assertEqualLinkingData(firstLinkingData, secondLinkingData);
-        boolean _isRefinedType = firstResult.isRefinedType(expression);
-        boolean _isRefinedType_1 = result.isRefinedType(expression);
-        Assert.assertEquals(Boolean.valueOf(_isRefinedType), Boolean.valueOf(_isRefinedType_1));
-      }
+    final BiConsumer<XExpression, IApplicableCandidate> _function = (XExpression expression, IApplicableCandidate firstLinkingData) -> {
+      final IApplicableCandidate secondLinkingData = secondRun.get(expression);
+      this.assertEqualLinkingData(firstLinkingData, secondLinkingData);
+      boolean _isRefinedType = firstResult.isRefinedType(expression);
+      boolean _isRefinedType_1 = result.isRefinedType(expression);
+      Assert.assertEquals(Boolean.valueOf(_isRefinedType), Boolean.valueOf(_isRefinedType_1));
     };
-    MapExtensions.<XExpression, IApplicableCandidate>forEach(firstRun, _function);
+    firstRun.forEach(_function);
     return result;
   }
   
@@ -143,23 +140,20 @@ public class RecomputingReentrantTypeResolver extends PublicReentrantTypeResolve
     int _size_1 = _parameters_1.size();
     Assert.assertEquals("type", _size, _size_1);
     List<JvmFormalParameter> _parameters_2 = left.getParameters();
-    final Procedure2<JvmFormalParameter, Integer> _function = new Procedure2<JvmFormalParameter, Integer>() {
-      @Override
-      public void apply(final JvmFormalParameter leftParam, final Integer idx) {
-        List<JvmFormalParameter> _parameters = right.getParameters();
-        final JvmFormalParameter rightParam = _parameters.get((idx).intValue());
-        String _name = leftParam.getName();
-        String _name_1 = rightParam.getName();
-        Assert.assertEquals(_name, _name_1);
-        EStructuralFeature _eContainingFeature = leftParam.eContainingFeature();
-        boolean _notEquals = (!Objects.equal(_eContainingFeature, XbasePackage.Literals.XCLOSURE__DECLARED_FORMAL_PARAMETERS));
-        if (_notEquals) {
-          JvmTypeReference _parameterType = leftParam.getParameterType();
-          String _identifier = _parameterType.getIdentifier();
-          JvmTypeReference _parameterType_1 = rightParam.getParameterType();
-          String _identifier_1 = _parameterType_1.getIdentifier();
-          Assert.assertEquals(_identifier, _identifier_1);
-        }
+    final Procedure2<JvmFormalParameter, Integer> _function = (JvmFormalParameter leftParam, Integer idx) -> {
+      List<JvmFormalParameter> _parameters_3 = right.getParameters();
+      final JvmFormalParameter rightParam = _parameters_3.get((idx).intValue());
+      String _name = leftParam.getName();
+      String _name_1 = rightParam.getName();
+      Assert.assertEquals(_name, _name_1);
+      EStructuralFeature _eContainingFeature = leftParam.eContainingFeature();
+      boolean _notEquals = (!Objects.equal(_eContainingFeature, XbasePackage.Literals.XCLOSURE__DECLARED_FORMAL_PARAMETERS));
+      if (_notEquals) {
+        JvmTypeReference _parameterType = leftParam.getParameterType();
+        String _identifier = _parameterType.getIdentifier();
+        JvmTypeReference _parameterType_1 = rightParam.getParameterType();
+        String _identifier_1 = _parameterType_1.getIdentifier();
+        Assert.assertEquals(_identifier, _identifier_1);
       }
     };
     IterableExtensions.<JvmFormalParameter>forEach(_parameters_2, _function);
@@ -379,18 +373,12 @@ public class RecomputingReentrantTypeResolver extends PublicReentrantTypeResolve
   }
   
   public void assertEqualReferences(final String message, final List<LightweightTypeReference> left, final List<LightweightTypeReference> right) {
-    final Function1<LightweightTypeReference, String> _function = new Function1<LightweightTypeReference, String>() {
-      @Override
-      public String apply(final LightweightTypeReference it) {
-        return it.toString();
-      }
+    final Function1<LightweightTypeReference, String> _function = (LightweightTypeReference it) -> {
+      return it.toString();
     };
     List<String> _map = ListExtensions.<LightweightTypeReference, String>map(left, _function);
-    final Function1<LightweightTypeReference, String> _function_1 = new Function1<LightweightTypeReference, String>() {
-      @Override
-      public String apply(final LightweightTypeReference it) {
-        return it.toString();
-      }
+    final Function1<LightweightTypeReference, String> _function_1 = (LightweightTypeReference it) -> {
+      return it.toString();
     };
     List<String> _map_1 = ListExtensions.<LightweightTypeReference, String>map(right, _function_1);
     Assert.assertEquals(message, _map, _map_1);
@@ -437,21 +425,18 @@ public class RecomputingReentrantTypeResolver extends PublicReentrantTypeResolve
     Set<JvmTypeParameter> _keySet = left.keySet();
     Set<JvmTypeParameter> _keySet_1 = right.keySet();
     Assert.assertEquals(_builder_1.toString(), ((Object) _keySet), _keySet_1);
-    final Procedure2<JvmTypeParameter, LightweightMergedBoundTypeArgument> _function = new Procedure2<JvmTypeParameter, LightweightMergedBoundTypeArgument>() {
-      @Override
-      public void apply(final JvmTypeParameter typeParam, final LightweightMergedBoundTypeArgument leftData) {
-        final LightweightMergedBoundTypeArgument rightData = right.get(typeParam);
-        VarianceInfo _variance = leftData.getVariance();
-        VarianceInfo _variance_1 = rightData.getVariance();
-        Assert.assertEquals(_variance, _variance_1);
-        LightweightTypeReference _typeReference = leftData.getTypeReference();
-        String _simpleName = _typeReference.getSimpleName();
-        LightweightTypeReference _typeReference_1 = rightData.getTypeReference();
-        String _simpleName_1 = _typeReference_1.getSimpleName();
-        Assert.assertEquals(_simpleName, _simpleName_1);
-      }
+    final BiConsumer<JvmTypeParameter, LightweightMergedBoundTypeArgument> _function = (JvmTypeParameter typeParam, LightweightMergedBoundTypeArgument leftData) -> {
+      final LightweightMergedBoundTypeArgument rightData = right.get(typeParam);
+      VarianceInfo _variance = leftData.getVariance();
+      VarianceInfo _variance_1 = rightData.getVariance();
+      Assert.assertEquals(_variance, _variance_1);
+      LightweightTypeReference _typeReference = leftData.getTypeReference();
+      String _simpleName = _typeReference.getSimpleName();
+      LightweightTypeReference _typeReference_1 = rightData.getTypeReference();
+      String _simpleName_1 = _typeReference_1.getSimpleName();
+      Assert.assertEquals(_simpleName, _simpleName_1);
     };
-    MapExtensions.<JvmTypeParameter, LightweightMergedBoundTypeArgument>forEach(left, _function);
+    left.forEach(_function);
   }
   
   public <T extends Object> T invokeAndCast(final ILinkingCandidate receiver, final String getter) {

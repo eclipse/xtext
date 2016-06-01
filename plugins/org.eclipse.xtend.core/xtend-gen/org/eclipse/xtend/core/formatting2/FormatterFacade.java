@@ -67,15 +67,12 @@ public class FormatterFacade {
       TextRegionAccessBuilder _forNodeModel = _get.forNodeModel(resource);
       final ITextRegionAccess regionAccess = _forNodeModel.create();
       FormatterRequest _formatterRequest = new FormatterRequest();
-      final Procedure1<FormatterRequest> _function = new Procedure1<FormatterRequest>() {
-        @Override
-        public void apply(final FormatterRequest it) {
-          it.setAllowIdentityEdits(false);
-          it.setTextRegionAccess(regionAccess);
-          IPreferenceValues _preferenceValues = FormatterFacade.this.cfgProvider.getPreferenceValues(resource);
-          ITypedPreferenceValues _castOrWrap = TypedPreferenceValues.castOrWrap(_preferenceValues);
-          it.setPreferences(_castOrWrap);
-        }
+      final Procedure1<FormatterRequest> _function = (FormatterRequest it) -> {
+        it.setAllowIdentityEdits(false);
+        it.setTextRegionAccess(regionAccess);
+        IPreferenceValues _preferenceValues = this.cfgProvider.getPreferenceValues(resource);
+        ITypedPreferenceValues _castOrWrap = TypedPreferenceValues.castOrWrap(_preferenceValues);
+        it.setPreferences(_castOrWrap);
       };
       FormatterRequest request = ObjectExtensions.<FormatterRequest>operator_doubleArrow(_formatterRequest, _function);
       List<ITextReplacement> replacements = this.formatter.format(request);

@@ -48,11 +48,8 @@ public class TypeUsageCollectorTest extends AbstractXtendTestCase {
   private void hasUnresolvedType(final Resource resource, final String... typeNames) {
     final TypeUsages typeUsages = this.typeUsageCollector.collectTypeUsages(((XtextResource) resource));
     List<TypeUsage> _unresolvedTypeUsages = typeUsages.getUnresolvedTypeUsages();
-    final Function1<TypeUsage, String> _function = new Function1<TypeUsage, String>() {
-      @Override
-      public String apply(final TypeUsage it) {
-        return it.getUsedTypeName();
-      }
+    final Function1<TypeUsage, String> _function = (TypeUsage it) -> {
+      return it.getUsedTypeName();
     };
     List<String> _map = ListExtensions.<TypeUsage, String>map(_unresolvedTypeUsages, _function);
     final Set<String> usedNames = IterableExtensions.<String>toSet(_map);
@@ -78,11 +75,8 @@ public class TypeUsageCollectorTest extends AbstractXtendTestCase {
       final Resource resource = _file.eResource();
       final TypeUsages typeUsages = this.typeUsageCollector.collectTypeUsages(((XtextResource) resource));
       List<TypeUsage> _unresolvedTypeUsages = typeUsages.getUnresolvedTypeUsages();
-      final Function1<TypeUsage, String> _function = new Function1<TypeUsage, String>() {
-        @Override
-        public String apply(final TypeUsage it) {
-          return it.getSuffix();
-        }
+      final Function1<TypeUsage, String> _function = (TypeUsage it) -> {
+        return it.getSuffix();
       };
       List<String> _map = ListExtensions.<TypeUsage, String>map(_unresolvedTypeUsages, _function);
       final Set<String> foundSuffix = IterableExtensions.<String>toSet(_map);

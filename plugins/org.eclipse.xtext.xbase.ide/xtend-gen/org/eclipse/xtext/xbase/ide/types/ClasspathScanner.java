@@ -75,11 +75,8 @@ public class ClasspathScanner {
         }
       }
       Pair<ClassLoader, Collection<String>> _mappedTo = Pair.<ClassLoader, Collection<String>>of(classLoader, packagePrefixes);
-      final Callable<Iterable<ITypeDescriptor>> _function = new Callable<Iterable<ITypeDescriptor>>() {
-        @Override
-        public Iterable<ITypeDescriptor> call() throws Exception {
-          return ClasspathScanner.this.loadDescriptors(classLoader, packagePrefixes);
-        }
+      final Callable<Iterable<ITypeDescriptor>> _function = () -> {
+        return this.loadDescriptors(classLoader, packagePrefixes);
       };
       return this.classLoaderDescriptors.get(_mappedTo, _function);
     } catch (Throwable _e) {
@@ -96,11 +93,8 @@ public class ClasspathScanner {
         }
       }
       Pair<URI, Collection<String>> _mappedTo = Pair.<URI, Collection<String>>of(uri, packagePrefixes);
-      final Callable<Iterable<ITypeDescriptor>> _function = new Callable<Iterable<ITypeDescriptor>>() {
-        @Override
-        public Iterable<ITypeDescriptor> call() throws Exception {
-          return ClasspathScanner.this.loadDescriptors(uri, packagePrefixes);
-        }
+      final Callable<Iterable<ITypeDescriptor>> _function = () -> {
+        return this.loadDescriptors(uri, packagePrefixes);
       };
       return this.uriDescriptors.get(_mappedTo, _function);
     } catch (Throwable _e) {
@@ -116,13 +110,10 @@ public class ClasspathScanner {
         return Collections.<ITypeDescriptor>emptyList();
       }
       Iterable<String> _split = ClasspathScanner.PROPERTY_CLASSPATH_SPLITTER.split(classpath);
-      final Function1<String, Iterable<ITypeDescriptor>> _function = new Function1<String, Iterable<ITypeDescriptor>>() {
-        @Override
-        public Iterable<ITypeDescriptor> apply(final String path) {
-          File _file = new File(path);
-          URI _uRI = _file.toURI();
-          return ClasspathScanner.this.getDescriptors(_uRI, packagePrefixes);
-        }
+      final Function1<String, Iterable<ITypeDescriptor>> _function = (String path) -> {
+        File _file = new File(path);
+        URI _uRI = _file.toURI();
+        return this.getDescriptors(_uRI, packagePrefixes);
       };
       Iterable<Iterable<ITypeDescriptor>> _map = IterableExtensions.<String, Iterable<ITypeDescriptor>>map(_split, _function);
       _xblockexpression = Iterables.<ITypeDescriptor>concat(_map);
@@ -157,11 +148,8 @@ public class ClasspathScanner {
             }
           }
         }
-        final Function1<URI, Iterable<ITypeDescriptor>> _function = new Function1<URI, Iterable<ITypeDescriptor>>() {
-          @Override
-          public Iterable<ITypeDescriptor> apply(final URI it) {
-            return ClasspathScanner.this.getDescriptors(it, packagePrefixes);
-          }
+        final Function1<URI, Iterable<ITypeDescriptor>> _function = (URI it) -> {
+          return this.getDescriptors(it, packagePrefixes);
         };
         Iterable<Iterable<ITypeDescriptor>> _map = IterableExtensions.<URI, Iterable<ITypeDescriptor>>map(uris, _function);
         _xblockexpression = Iterables.<ITypeDescriptor>concat(_map);

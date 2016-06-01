@@ -20,13 +20,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Consumer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceVisitor;
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
@@ -48,7 +48,6 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -67,11 +66,8 @@ public class WorkspaceScenariosTest {
   @Test
   public void testJarWithEverything() {
     try {
-      final Function1<String, Boolean> _function = new Function1<String, Boolean>() {
-        @Override
-        public Boolean apply(final String it) {
-          return Boolean.valueOf(false);
-        }
+      final Function1<String, Boolean> _function = (String it) -> {
+        return Boolean.valueOf(false);
       };
       final IProject project = this.createProjectWithJarDependency(_function);
       try {
@@ -91,31 +87,25 @@ public class WorkspaceScenariosTest {
   @Test
   public void testJarWithoutJava() {
     try {
-      final Function1<String, Boolean> _function = new Function1<String, Boolean>() {
-        @Override
-        public Boolean apply(final String it) {
-          return Boolean.valueOf((it.endsWith("java") || it.endsWith("class")));
-        }
+      final Function1<String, Boolean> _function = (String it) -> {
+        return Boolean.valueOf((it.endsWith("java") || it.endsWith("class")));
       };
       final IProject project = this.createProjectWithJarDependency(_function);
       try {
         final ArrayList<IMarker> allXtendMarkers = CollectionLiterals.<IMarker>newArrayList();
-        final IResourceVisitor _function_1 = new IResourceVisitor() {
-          @Override
-          public boolean visit(final IResource it) throws CoreException {
-            if ((it instanceof IFile)) {
-              IPath _fullPath = ((IFile)it).getFullPath();
-              String _lastSegment = _fullPath.lastSegment();
-              boolean _endsWith = _lastSegment.endsWith(".xtend");
-              if (_endsWith) {
-                final IMarker[] markers = ((IFile)it).findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);
-                for (final IMarker m : markers) {
-                  allXtendMarkers.add(m);
-                }
+        final IResourceVisitor _function_1 = (IResource it) -> {
+          if ((it instanceof IFile)) {
+            IPath _fullPath = ((IFile)it).getFullPath();
+            String _lastSegment = _fullPath.lastSegment();
+            boolean _endsWith = _lastSegment.endsWith(".xtend");
+            if (_endsWith) {
+              final IMarker[] markers = ((IFile)it).findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);
+              for (final IMarker m : markers) {
+                allXtendMarkers.add(m);
               }
             }
-            return true;
           }
+          return true;
         };
         project.accept(_function_1);
         int _size = allXtendMarkers.size();
@@ -308,22 +298,19 @@ public class WorkspaceScenariosTest {
           IResourcesSetupUtil.createFile(_plus, _value);
         }
         IResourcesSetupUtil.waitForBuild();
-        final IResourceVisitor _function = new IResourceVisitor() {
-          @Override
-          public boolean visit(final IResource it) throws CoreException {
-            if ((it instanceof IFile)) {
-              IPath _projectRelativePath = ((IFile)it).getProjectRelativePath();
-              IPath _removeFirstSegments = _projectRelativePath.removeFirstSegments(1);
-              final String path = _removeFirstSegments.toString();
-              Boolean _apply = filter.apply(path);
-              boolean _not = (!(_apply).booleanValue());
-              if (_not) {
-                InputStream _contents = ((IFile)it).getContents();
-                listOfContents.put(path, _contents);
-              }
+        final IResourceVisitor _function = (IResource it) -> {
+          if ((it instanceof IFile)) {
+            IPath _projectRelativePath = ((IFile)it).getProjectRelativePath();
+            IPath _removeFirstSegments = _projectRelativePath.removeFirstSegments(1);
+            final String path = _removeFirstSegments.toString();
+            Boolean _apply = filter.apply(path);
+            boolean _not = (!(_apply).booleanValue());
+            if (_not) {
+              InputStream _contents = ((IFile)it).getContents();
+              listOfContents.put(path, _contents);
             }
-            return true;
           }
+          return true;
         };
         final IResourceVisitor visitor = _function;
         IFolder _folder = project.getFolder("src");
@@ -333,13 +320,10 @@ public class WorkspaceScenariosTest {
         IFolder _folder_2 = project.getFolder("bin");
         _folder_2.accept(visitor);
         Set<Map.Entry<String, InputStream>> _entrySet = listOfContents.entrySet();
-        final Function1<Map.Entry<String, InputStream>, Pair<String, InputStream>> _function_1 = new Function1<Map.Entry<String, InputStream>, Pair<String, InputStream>>() {
-          @Override
-          public Pair<String, InputStream> apply(final Map.Entry<String, InputStream> it) {
-            String _key = it.getKey();
-            InputStream _value = it.getValue();
-            return Pair.<String, InputStream>of(_key, _value);
-          }
+        final Function1<Map.Entry<String, InputStream>, Pair<String, InputStream>> _function_1 = (Map.Entry<String, InputStream> it) -> {
+          String _key_1 = it.getKey();
+          InputStream _value_1 = it.getValue();
+          return Pair.<String, InputStream>of(_key_1, _value_1);
         };
         Iterable<Pair<String, InputStream>> _map = IterableExtensions.<Map.Entry<String, InputStream>, Pair<String, InputStream>>map(_entrySet, _function_1);
         List<Pair<String, InputStream>> _list = IterableExtensions.<Pair<String, InputStream>>toList(_map);
@@ -347,17 +331,14 @@ public class WorkspaceScenariosTest {
         return ByteStreams.toByteArray(jarin);
       } finally {
         Collection<InputStream> _values = listOfContents.values();
-        final Procedure1<InputStream> _function_2 = new Procedure1<InputStream>() {
-          @Override
-          public void apply(final InputStream it) {
-            try {
-              it.close();
-            } catch (Throwable _e) {
-              throw Exceptions.sneakyThrow(_e);
-            }
+        final Consumer<InputStream> _function_2 = (InputStream it) -> {
+          try {
+            it.close();
+          } catch (Throwable _e) {
+            throw Exceptions.sneakyThrow(_e);
           }
         };
-        IterableExtensions.<InputStream>forEach(_values, _function_2);
+        _values.forEach(_function_2);
         project.delete(true, true, null);
       }
     } catch (Throwable _e) {

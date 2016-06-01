@@ -159,11 +159,8 @@ public class JavaFileAccess extends TextFileAccess {
       }
     }
     List<TypeReference> _typeArguments = typeRef.getTypeArguments();
-    final Function1<TypeReference, CharSequence> _function = new Function1<TypeReference, CharSequence>() {
-      @Override
-      public CharSequence apply(final TypeReference it) {
-        return JavaFileAccess.this.importType(it);
-      }
+    final Function1<TypeReference, CharSequence> _function = (TypeReference it) -> {
+      return this.importType(it);
     };
     String _join_1 = IterableExtensions.<TypeReference>join(_typeArguments, "<", ", ", ">", _function);
     return (usableName + _join_1);

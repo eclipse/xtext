@@ -4,5 +4,5 @@ Bundle-Name: Xbase Tutorial
 Bundle-SymbolicName: xbase.tutorial
 Bundle-Version: 2.11.0.qualifier
 Bundle-Vendor: Eclipse Xtext
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Require-Bundle: org.eclipse.xtext.xbase.lib

@@ -160,15 +160,12 @@ public class ProjectAwareUniqueClassNameValidator extends UniqueClassNameValidat
     final String packageName = type.getPackageName();
     final String typeName = type.getSimpleName();
     IPackageFragmentRoot[] _packageFragmentRoots = javaProject.getPackageFragmentRoots();
-    final Function1<IPackageFragmentRoot, Boolean> _function = new Function1<IPackageFragmentRoot, Boolean>() {
-      @Override
-      public Boolean apply(final IPackageFragmentRoot it) {
-        try {
-          int _kind = it.getKind();
-          return Boolean.valueOf((_kind == IPackageFragmentRoot.K_SOURCE));
-        } catch (Throwable _e) {
-          throw Exceptions.sneakyThrow(_e);
-        }
+    final Function1<IPackageFragmentRoot, Boolean> _function = (IPackageFragmentRoot it) -> {
+      try {
+        int _kind = it.getKind();
+        return Boolean.valueOf((_kind == IPackageFragmentRoot.K_SOURCE));
+      } catch (Throwable _e) {
+        throw Exceptions.sneakyThrow(_e);
       }
     };
     final Iterable<IPackageFragmentRoot> sourceFolders = IterableExtensions.<IPackageFragmentRoot>filter(((Iterable<IPackageFragmentRoot>)Conversions.doWrapArray(_packageFragmentRoots)), _function);
@@ -320,12 +317,9 @@ public class ProjectAwareUniqueClassNameValidator extends UniqueClassNameValidat
     boolean _isPlatformResource = objectURI.isPlatformResource();
     if (_isPlatformResource) {
       final String project = objectURI.segment(1);
-      final Function1<IEObjectDescription, Boolean> _function = new Function1<IEObjectDescription, Boolean>() {
-        @Override
-        public Boolean apply(final IEObjectDescription it) {
-          final URI candidate = it.getEObjectURI();
-          return Boolean.valueOf((candidate.isPlatformResource() && Objects.equal(candidate.segment(1), project)));
-        }
+      final Function1<IEObjectDescription, Boolean> _function = (IEObjectDescription it) -> {
+        final URI candidate = it.getEObjectURI();
+        return Boolean.valueOf((candidate.isPlatformResource() && Objects.equal(candidate.segment(1), project)));
       };
       Iterable<IEObjectDescription> _filter = IterableExtensions.<IEObjectDescription>filter(descriptions, _function);
       return super.checkUniqueInIndex(type, _filter);

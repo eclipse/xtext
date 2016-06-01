@@ -18,13 +18,14 @@ import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.List;
+import java.util.function.Consumer;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.util.ToStringContext;
 
 /**
@@ -168,13 +169,10 @@ public final class ToStringBuilder {
   public ToStringBuilder addDeclaredFields() {
     Class<?> _class = this.instance.getClass();
     Field[] _declaredFields = _class.getDeclaredFields();
-    final Procedure1<Field> _function = new Procedure1<Field>() {
-      @Override
-      public void apply(final Field it) {
-        ToStringBuilder.this.addField(it);
-      }
+    final Consumer<Field> _function = (Field it) -> {
+      this.addField(it);
     };
-    IterableExtensions.<Field>forEach(((Iterable<Field>)Conversions.doWrapArray(_declaredFields)), _function);
+    ((List<Field>)Conversions.doWrapArray(_declaredFields)).forEach(_function);
     return this;
   }
   
@@ -186,13 +184,10 @@ public final class ToStringBuilder {
   public ToStringBuilder addAllFields() {
     Class<?> _class = this.instance.getClass();
     ArrayList<Field> _allDeclaredFields = this.getAllDeclaredFields(_class);
-    final Procedure1<Field> _function = new Procedure1<Field>() {
-      @Override
-      public void apply(final Field it) {
-        ToStringBuilder.this.addField(it);
-      }
+    final Consumer<Field> _function = (Field it) -> {
+      this.addField(it);
     };
-    IterableExtensions.<Field>forEach(_allDeclaredFields, _function);
+    _allDeclaredFields.forEach(_function);
     return this;
   }
   
@@ -204,12 +199,9 @@ public final class ToStringBuilder {
   public ToStringBuilder addField(final String fieldName) {
     Class<?> _class = this.instance.getClass();
     ArrayList<Field> _allDeclaredFields = this.getAllDeclaredFields(_class);
-    final Function1<Field, Boolean> _function = new Function1<Field, Boolean>() {
-      @Override
-      public Boolean apply(final Field it) {
-        String _name = it.getName();
-        return Boolean.valueOf(Objects.equal(_name, fieldName));
-      }
+    final Function1<Field, Boolean> _function = (Field it) -> {
+      String _name = it.getName();
+      return Boolean.valueOf(Objects.equal(_name, fieldName));
     };
     Field _findFirst = IterableExtensions.<Field>findFirst(_allDeclaredFields, _function);
     return this.addField(_findFirst);

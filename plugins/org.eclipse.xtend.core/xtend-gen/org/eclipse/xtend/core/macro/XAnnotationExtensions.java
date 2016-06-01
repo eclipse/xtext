@@ -183,25 +183,19 @@ public class XAnnotationExtensions {
   
   public JvmType getProcessorType(final JvmAnnotationType it) {
     EList<JvmAnnotationReference> _annotations = it.getAnnotations();
-    final Function1<JvmAnnotationReference, Boolean> _function = new Function1<JvmAnnotationReference, Boolean>() {
-      @Override
-      public Boolean apply(final JvmAnnotationReference it) {
-        JvmAnnotationType _annotation = it.getAnnotation();
-        String _identifier = null;
-        if (_annotation!=null) {
-          _identifier=_annotation.getIdentifier();
-        }
-        String _name = Active.class.getName();
-        return Boolean.valueOf(Objects.equal(_identifier, _name));
+    final Function1<JvmAnnotationReference, Boolean> _function = (JvmAnnotationReference it_1) -> {
+      JvmAnnotationType _annotation = it_1.getAnnotation();
+      String _identifier = null;
+      if (_annotation!=null) {
+        _identifier=_annotation.getIdentifier();
       }
+      String _name = Active.class.getName();
+      return Boolean.valueOf(Objects.equal(_identifier, _name));
     };
     final JvmAnnotationReference activeAnnotation = IterableExtensions.<JvmAnnotationReference>findFirst(_annotations, _function);
     EList<JvmAnnotationValue> _values = activeAnnotation.getValues();
-    final Function1<JvmAnnotationValue, Boolean> _function_1 = new Function1<JvmAnnotationValue, Boolean>() {
-      @Override
-      public Boolean apply(final JvmAnnotationValue it) {
-        return Boolean.valueOf((Objects.equal(it.getOperation(), null) || Objects.equal(it.getOperation().getSimpleName(), "value")));
-      }
+    final Function1<JvmAnnotationValue, Boolean> _function_1 = (JvmAnnotationValue it_1) -> {
+      return Boolean.valueOf((Objects.equal(it_1.getOperation(), null) || Objects.equal(it_1.getOperation().getSimpleName(), "value")));
     };
     final JvmAnnotationValue annoVal = IterableExtensions.<JvmAnnotationValue>findFirst(_values, _function_1);
     boolean _matched = false;

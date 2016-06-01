@@ -123,29 +123,26 @@ public class IdeContentProposalProvider {
             _xifexpression = assignment.getFeature();
           }
           final String proposal = _xifexpression;
-          final Procedure1<ContentAssistEntry> _function = new Procedure1<ContentAssistEntry>() {
-            @Override
-            public void apply(final ContentAssistEntry it) {
-              String _name = rule.getName();
-              boolean _equals = Objects.equal(_name, "STRING");
-              if (_equals) {
-                ArrayList<TextRegion> _editPositions = it.getEditPositions();
-                int _offset = context.getOffset();
-                int _plus = (_offset + 1);
-                int _length = proposal.length();
-                int _minus = (_length - 2);
-                TextRegion _textRegion = new TextRegion(_plus, _minus);
-                _editPositions.add(_textRegion);
-              } else {
-                ArrayList<TextRegion> _editPositions_1 = it.getEditPositions();
-                int _offset_1 = context.getOffset();
-                int _length_1 = proposal.length();
-                TextRegion _textRegion_1 = new TextRegion(_offset_1, _length_1);
-                _editPositions_1.add(_textRegion_1);
-              }
-              String _name_1 = rule.getName();
-              it.setDescription(_name_1);
+          final Procedure1<ContentAssistEntry> _function = (ContentAssistEntry it) -> {
+            String _name_1 = rule.getName();
+            boolean _equals_1 = Objects.equal(_name_1, "STRING");
+            if (_equals_1) {
+              ArrayList<TextRegion> _editPositions = it.getEditPositions();
+              int _offset = context.getOffset();
+              int _plus_1 = (_offset + 1);
+              int _length = proposal.length();
+              int _minus = (_length - 2);
+              TextRegion _textRegion = new TextRegion(_plus_1, _minus);
+              _editPositions.add(_textRegion);
+            } else {
+              ArrayList<TextRegion> _editPositions_1 = it.getEditPositions();
+              int _offset_1 = context.getOffset();
+              int _length_1 = proposal.length();
+              TextRegion _textRegion_1 = new TextRegion(_offset_1, _length_1);
+              _editPositions_1.add(_textRegion_1);
             }
+            String _name_2 = rule.getName();
+            it.setDescription(_name_2);
           };
           final ContentAssistEntry entry = this.proposalCreator.createProposal(proposal, context, _function);
           int _defaultPriority = this.proposalPriorities.getDefaultPriority(entry);

@@ -4,7 +4,7 @@ Bundle-Localization: plugin
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.xtext.bootstrap
 Bundle-Version: 2.11.0.qualifier
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ClassPath: lastversion.jar,
  .
 Require-Bundle: org.eclipse.xpand;bundle-version="1.1.0",

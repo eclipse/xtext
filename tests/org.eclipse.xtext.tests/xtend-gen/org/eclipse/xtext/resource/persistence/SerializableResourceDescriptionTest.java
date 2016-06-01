@@ -41,64 +41,52 @@ public class SerializableResourceDescriptionTest {
     try {
       final URI uri = URI.createURI("file:/foo/bar.baz.foo");
       SerializableResourceDescription _serializableResourceDescription = new SerializableResourceDescription();
-      final Procedure1<SerializableResourceDescription> _function = new Procedure1<SerializableResourceDescription>() {
-        @Override
-        public void apply(final SerializableResourceDescription it) {
-          it.setURI(uri);
-          SerializableReferenceDescription _serializableReferenceDescription = new SerializableReferenceDescription();
-          final Procedure1<SerializableReferenceDescription> _function = new Procedure1<SerializableReferenceDescription>() {
-            @Override
-            public void apply(final SerializableReferenceDescription it) {
-              URI _appendFragment = uri.appendFragment("foo");
-              it.setSourceEObjectUri(_appendFragment);
-              URI _appendFragment_1 = uri.appendFragment("hubble");
-              it.setTargetEObjectUri(_appendFragment_1);
-              URI _appendFragment_2 = uri.appendFragment("baz");
-              it.setContainerEObjectURI(_appendFragment_2);
-              EReference _eAnnotation_Contents = EcorePackage.eINSTANCE.getEAnnotation_Contents();
-              it.setEReference(_eAnnotation_Contents);
-              it.setIndexInList(1);
-            }
-          };
-          SerializableReferenceDescription _doubleArrow = ObjectExtensions.<SerializableReferenceDescription>operator_doubleArrow(_serializableReferenceDescription, _function);
-          SerializableReferenceDescription _serializableReferenceDescription_1 = new SerializableReferenceDescription();
-          final Procedure1<SerializableReferenceDescription> _function_1 = new Procedure1<SerializableReferenceDescription>() {
-            @Override
-            public void apply(final SerializableReferenceDescription it) {
-              URI _appendFragment = uri.appendFragment("foo2");
-              it.setSourceEObjectUri(_appendFragment);
-              URI _appendFragment_1 = uri.appendFragment("hubble2");
-              it.setTargetEObjectUri(_appendFragment_1);
-              URI _appendFragment_2 = uri.appendFragment("baz2");
-              it.setContainerEObjectURI(_appendFragment_2);
-              EReference _eAnnotation_Contents = EcorePackage.eINSTANCE.getEAnnotation_Contents();
-              it.setEReference(_eAnnotation_Contents);
-              it.setIndexInList(2);
-            }
-          };
-          SerializableReferenceDescription _doubleArrow_1 = ObjectExtensions.<SerializableReferenceDescription>operator_doubleArrow(_serializableReferenceDescription_1, _function_1);
-          it.setReferences(Collections.<SerializableReferenceDescription>unmodifiableList(CollectionLiterals.<SerializableReferenceDescription>newArrayList(_doubleArrow, _doubleArrow_1)));
-          SerializableEObjectDescription _serializableEObjectDescription = new SerializableEObjectDescription();
-          final Procedure1<SerializableEObjectDescription> _function_2 = new Procedure1<SerializableEObjectDescription>() {
-            @Override
-            public void apply(final SerializableEObjectDescription it) {
-              URI _appendFragment = uri.appendFragment("baz");
-              it.setEObjectURI(_appendFragment);
-              QualifiedName _create = QualifiedName.create("foo", "baz");
-              it.setQualifiedName(_create);
-              EClass _eAttribute = EcorePackage.eINSTANCE.getEAttribute();
-              it.setEClass(_eAttribute);
-              Pair<String, String> _mappedTo = Pair.<String, String>of("myKey", "myValue");
-              HashMap<String, String> _newHashMap = CollectionLiterals.<String, String>newHashMap(_mappedTo);
-              it.setUserData(_newHashMap);
-            }
-          };
-          SerializableEObjectDescription _doubleArrow_2 = ObjectExtensions.<SerializableEObjectDescription>operator_doubleArrow(_serializableEObjectDescription, _function_2);
-          it.setDescriptions(Collections.<SerializableEObjectDescription>unmodifiableList(CollectionLiterals.<SerializableEObjectDescription>newArrayList(_doubleArrow_2)));
-          QualifiedName _create = QualifiedName.create("foo");
-          QualifiedName _create_1 = QualifiedName.create("foo", "bar");
-          it.setImportedNames(Collections.<QualifiedName>unmodifiableList(CollectionLiterals.<QualifiedName>newArrayList(_create, _create_1)));
-        }
+      final Procedure1<SerializableResourceDescription> _function = (SerializableResourceDescription it) -> {
+        it.setURI(uri);
+        SerializableReferenceDescription _serializableReferenceDescription = new SerializableReferenceDescription();
+        final Procedure1<SerializableReferenceDescription> _function_1 = (SerializableReferenceDescription it_1) -> {
+          URI _appendFragment = uri.appendFragment("foo");
+          it_1.setSourceEObjectUri(_appendFragment);
+          URI _appendFragment_1 = uri.appendFragment("hubble");
+          it_1.setTargetEObjectUri(_appendFragment_1);
+          URI _appendFragment_2 = uri.appendFragment("baz");
+          it_1.setContainerEObjectURI(_appendFragment_2);
+          EReference _eAnnotation_Contents = EcorePackage.eINSTANCE.getEAnnotation_Contents();
+          it_1.setEReference(_eAnnotation_Contents);
+          it_1.setIndexInList(1);
+        };
+        SerializableReferenceDescription _doubleArrow = ObjectExtensions.<SerializableReferenceDescription>operator_doubleArrow(_serializableReferenceDescription, _function_1);
+        SerializableReferenceDescription _serializableReferenceDescription_1 = new SerializableReferenceDescription();
+        final Procedure1<SerializableReferenceDescription> _function_2 = (SerializableReferenceDescription it_1) -> {
+          URI _appendFragment = uri.appendFragment("foo2");
+          it_1.setSourceEObjectUri(_appendFragment);
+          URI _appendFragment_1 = uri.appendFragment("hubble2");
+          it_1.setTargetEObjectUri(_appendFragment_1);
+          URI _appendFragment_2 = uri.appendFragment("baz2");
+          it_1.setContainerEObjectURI(_appendFragment_2);
+          EReference _eAnnotation_Contents = EcorePackage.eINSTANCE.getEAnnotation_Contents();
+          it_1.setEReference(_eAnnotation_Contents);
+          it_1.setIndexInList(2);
+        };
+        SerializableReferenceDescription _doubleArrow_1 = ObjectExtensions.<SerializableReferenceDescription>operator_doubleArrow(_serializableReferenceDescription_1, _function_2);
+        it.setReferences(Collections.<SerializableReferenceDescription>unmodifiableList(CollectionLiterals.<SerializableReferenceDescription>newArrayList(_doubleArrow, _doubleArrow_1)));
+        SerializableEObjectDescription _serializableEObjectDescription = new SerializableEObjectDescription();
+        final Procedure1<SerializableEObjectDescription> _function_3 = (SerializableEObjectDescription it_1) -> {
+          URI _appendFragment = uri.appendFragment("baz");
+          it_1.setEObjectURI(_appendFragment);
+          QualifiedName _create = QualifiedName.create("foo", "baz");
+          it_1.setQualifiedName(_create);
+          EClass _eAttribute = EcorePackage.eINSTANCE.getEAttribute();
+          it_1.setEClass(_eAttribute);
+          Pair<String, String> _mappedTo = Pair.<String, String>of("myKey", "myValue");
+          HashMap<String, String> _newHashMap = CollectionLiterals.<String, String>newHashMap(_mappedTo);
+          it_1.setUserData(_newHashMap);
+        };
+        SerializableEObjectDescription _doubleArrow_2 = ObjectExtensions.<SerializableEObjectDescription>operator_doubleArrow(_serializableEObjectDescription, _function_3);
+        it.setDescriptions(Collections.<SerializableEObjectDescription>unmodifiableList(CollectionLiterals.<SerializableEObjectDescription>newArrayList(_doubleArrow_2)));
+        QualifiedName _create = QualifiedName.create("foo");
+        QualifiedName _create_1 = QualifiedName.create("foo", "bar");
+        it.setImportedNames(Collections.<QualifiedName>unmodifiableList(CollectionLiterals.<QualifiedName>newArrayList(_create, _create_1)));
       };
       final SerializableResourceDescription before = ObjectExtensions.<SerializableResourceDescription>operator_doubleArrow(_serializableResourceDescription, _function);
       final ByteArrayOutputStream bout = new ByteArrayOutputStream();
@@ -191,104 +179,83 @@ public class SerializableResourceDescriptionTest {
     try {
       final URI uri = URI.createURI("file:/foo/bar.baz.foo");
       SerializableResourceDescription _serializableResourceDescription = new SerializableResourceDescription();
-      final Procedure1<SerializableResourceDescription> _function = new Procedure1<SerializableResourceDescription>() {
-        @Override
-        public void apply(final SerializableResourceDescription it) {
-          it.setURI(uri);
-          SerializableReferenceDescription _serializableReferenceDescription = new SerializableReferenceDescription();
-          final Procedure1<SerializableReferenceDescription> _function = new Procedure1<SerializableReferenceDescription>() {
-            @Override
-            public void apply(final SerializableReferenceDescription it) {
-              URI _appendFragment = uri.appendFragment("foo");
-              it.setSourceEObjectUri(_appendFragment);
-              it.setTargetEObjectUri(null);
-              URI _appendFragment_1 = uri.appendFragment("baz");
-              it.setContainerEObjectURI(_appendFragment_1);
-              EReference _eAnnotation_Contents = EcorePackage.eINSTANCE.getEAnnotation_Contents();
-              it.setEReference(_eAnnotation_Contents);
-              it.setIndexInList(1);
-            }
-          };
-          SerializableReferenceDescription _doubleArrow = ObjectExtensions.<SerializableReferenceDescription>operator_doubleArrow(_serializableReferenceDescription, _function);
-          SerializableReferenceDescription _serializableReferenceDescription_1 = new SerializableReferenceDescription();
-          final Procedure1<SerializableReferenceDescription> _function_1 = new Procedure1<SerializableReferenceDescription>() {
-            @Override
-            public void apply(final SerializableReferenceDescription it) {
-              it.setSourceEObjectUri(null);
-              URI _appendFragment = uri.appendFragment("hubble2");
-              it.setTargetEObjectUri(_appendFragment);
-              URI _appendFragment_1 = uri.appendFragment("baz2");
-              it.setContainerEObjectURI(_appendFragment_1);
-              EReference _eAnnotation_Contents = EcorePackage.eINSTANCE.getEAnnotation_Contents();
-              it.setEReference(_eAnnotation_Contents);
-              it.setIndexInList(2);
-            }
-          };
-          SerializableReferenceDescription _doubleArrow_1 = ObjectExtensions.<SerializableReferenceDescription>operator_doubleArrow(_serializableReferenceDescription_1, _function_1);
-          SerializableReferenceDescription _serializableReferenceDescription_2 = new SerializableReferenceDescription();
-          final Procedure1<SerializableReferenceDescription> _function_2 = new Procedure1<SerializableReferenceDescription>() {
-            @Override
-            public void apply(final SerializableReferenceDescription it) {
-              URI _appendFragment = uri.appendFragment("foo");
-              it.setSourceEObjectUri(_appendFragment);
-              URI _appendFragment_1 = uri.appendFragment("hubble2");
-              it.setTargetEObjectUri(_appendFragment_1);
-              it.setContainerEObjectURI(null);
-              EReference _eAnnotation_Contents = EcorePackage.eINSTANCE.getEAnnotation_Contents();
-              it.setEReference(_eAnnotation_Contents);
-              it.setIndexInList(2);
-            }
-          };
-          SerializableReferenceDescription _doubleArrow_2 = ObjectExtensions.<SerializableReferenceDescription>operator_doubleArrow(_serializableReferenceDescription_2, _function_2);
-          SerializableReferenceDescription _serializableReferenceDescription_3 = new SerializableReferenceDescription();
-          final Procedure1<SerializableReferenceDescription> _function_3 = new Procedure1<SerializableReferenceDescription>() {
-            @Override
-            public void apply(final SerializableReferenceDescription it) {
-              URI _appendFragment = uri.appendFragment("foo");
-              it.setSourceEObjectUri(_appendFragment);
-              it.setTargetEObjectUri(null);
-              it.setContainerEObjectURI(null);
-              EReference _eAnnotation_Contents = EcorePackage.eINSTANCE.getEAnnotation_Contents();
-              it.setEReference(_eAnnotation_Contents);
-              it.setIndexInList(2);
-            }
-          };
-          SerializableReferenceDescription _doubleArrow_3 = ObjectExtensions.<SerializableReferenceDescription>operator_doubleArrow(_serializableReferenceDescription_3, _function_3);
-          SerializableReferenceDescription _serializableReferenceDescription_4 = new SerializableReferenceDescription();
-          final Procedure1<SerializableReferenceDescription> _function_4 = new Procedure1<SerializableReferenceDescription>() {
-            @Override
-            public void apply(final SerializableReferenceDescription it) {
-              it.setSourceEObjectUri(null);
-              it.setTargetEObjectUri(null);
-              it.setContainerEObjectURI(null);
-              EReference _eAnnotation_Contents = EcorePackage.eINSTANCE.getEAnnotation_Contents();
-              it.setEReference(_eAnnotation_Contents);
-              it.setIndexInList(2);
-            }
-          };
-          SerializableReferenceDescription _doubleArrow_4 = ObjectExtensions.<SerializableReferenceDescription>operator_doubleArrow(_serializableReferenceDescription_4, _function_4);
-          it.setReferences(Collections.<SerializableReferenceDescription>unmodifiableList(CollectionLiterals.<SerializableReferenceDescription>newArrayList(_doubleArrow, _doubleArrow_1, _doubleArrow_2, _doubleArrow_3, _doubleArrow_4)));
-          SerializableEObjectDescription _serializableEObjectDescription = new SerializableEObjectDescription();
-          final Procedure1<SerializableEObjectDescription> _function_5 = new Procedure1<SerializableEObjectDescription>() {
-            @Override
-            public void apply(final SerializableEObjectDescription it) {
-              URI _appendFragment = uri.appendFragment("baz");
-              it.setEObjectURI(_appendFragment);
-              QualifiedName _create = QualifiedName.create("foo", "baz");
-              it.setQualifiedName(_create);
-              EClass _eAttribute = EcorePackage.eINSTANCE.getEAttribute();
-              it.setEClass(_eAttribute);
-              Pair<String, String> _mappedTo = Pair.<String, String>of("myKey", "myValue");
-              HashMap<String, String> _newHashMap = CollectionLiterals.<String, String>newHashMap(_mappedTo);
-              it.setUserData(_newHashMap);
-            }
-          };
-          SerializableEObjectDescription _doubleArrow_5 = ObjectExtensions.<SerializableEObjectDescription>operator_doubleArrow(_serializableEObjectDescription, _function_5);
-          it.setDescriptions(Collections.<SerializableEObjectDescription>unmodifiableList(CollectionLiterals.<SerializableEObjectDescription>newArrayList(_doubleArrow_5)));
-          QualifiedName _create = QualifiedName.create("foo");
-          QualifiedName _create_1 = QualifiedName.create("foo", "bar");
-          it.setImportedNames(Collections.<QualifiedName>unmodifiableList(CollectionLiterals.<QualifiedName>newArrayList(_create, _create_1)));
-        }
+      final Procedure1<SerializableResourceDescription> _function = (SerializableResourceDescription it) -> {
+        it.setURI(uri);
+        SerializableReferenceDescription _serializableReferenceDescription = new SerializableReferenceDescription();
+        final Procedure1<SerializableReferenceDescription> _function_1 = (SerializableReferenceDescription it_1) -> {
+          URI _appendFragment = uri.appendFragment("foo");
+          it_1.setSourceEObjectUri(_appendFragment);
+          it_1.setTargetEObjectUri(null);
+          URI _appendFragment_1 = uri.appendFragment("baz");
+          it_1.setContainerEObjectURI(_appendFragment_1);
+          EReference _eAnnotation_Contents = EcorePackage.eINSTANCE.getEAnnotation_Contents();
+          it_1.setEReference(_eAnnotation_Contents);
+          it_1.setIndexInList(1);
+        };
+        SerializableReferenceDescription _doubleArrow = ObjectExtensions.<SerializableReferenceDescription>operator_doubleArrow(_serializableReferenceDescription, _function_1);
+        SerializableReferenceDescription _serializableReferenceDescription_1 = new SerializableReferenceDescription();
+        final Procedure1<SerializableReferenceDescription> _function_2 = (SerializableReferenceDescription it_1) -> {
+          it_1.setSourceEObjectUri(null);
+          URI _appendFragment = uri.appendFragment("hubble2");
+          it_1.setTargetEObjectUri(_appendFragment);
+          URI _appendFragment_1 = uri.appendFragment("baz2");
+          it_1.setContainerEObjectURI(_appendFragment_1);
+          EReference _eAnnotation_Contents = EcorePackage.eINSTANCE.getEAnnotation_Contents();
+          it_1.setEReference(_eAnnotation_Contents);
+          it_1.setIndexInList(2);
+        };
+        SerializableReferenceDescription _doubleArrow_1 = ObjectExtensions.<SerializableReferenceDescription>operator_doubleArrow(_serializableReferenceDescription_1, _function_2);
+        SerializableReferenceDescription _serializableReferenceDescription_2 = new SerializableReferenceDescription();
+        final Procedure1<SerializableReferenceDescription> _function_3 = (SerializableReferenceDescription it_1) -> {
+          URI _appendFragment = uri.appendFragment("foo");
+          it_1.setSourceEObjectUri(_appendFragment);
+          URI _appendFragment_1 = uri.appendFragment("hubble2");
+          it_1.setTargetEObjectUri(_appendFragment_1);
+          it_1.setContainerEObjectURI(null);
+          EReference _eAnnotation_Contents = EcorePackage.eINSTANCE.getEAnnotation_Contents();
+          it_1.setEReference(_eAnnotation_Contents);
+          it_1.setIndexInList(2);
+        };
+        SerializableReferenceDescription _doubleArrow_2 = ObjectExtensions.<SerializableReferenceDescription>operator_doubleArrow(_serializableReferenceDescription_2, _function_3);
+        SerializableReferenceDescription _serializableReferenceDescription_3 = new SerializableReferenceDescription();
+        final Procedure1<SerializableReferenceDescription> _function_4 = (SerializableReferenceDescription it_1) -> {
+          URI _appendFragment = uri.appendFragment("foo");
+          it_1.setSourceEObjectUri(_appendFragment);
+          it_1.setTargetEObjectUri(null);
+          it_1.setContainerEObjectURI(null);
+          EReference _eAnnotation_Contents = EcorePackage.eINSTANCE.getEAnnotation_Contents();
+          it_1.setEReference(_eAnnotation_Contents);
+          it_1.setIndexInList(2);
+        };
+        SerializableReferenceDescription _doubleArrow_3 = ObjectExtensions.<SerializableReferenceDescription>operator_doubleArrow(_serializableReferenceDescription_3, _function_4);
+        SerializableReferenceDescription _serializableReferenceDescription_4 = new SerializableReferenceDescription();
+        final Procedure1<SerializableReferenceDescription> _function_5 = (SerializableReferenceDescription it_1) -> {
+          it_1.setSourceEObjectUri(null);
+          it_1.setTargetEObjectUri(null);
+          it_1.setContainerEObjectURI(null);
+          EReference _eAnnotation_Contents = EcorePackage.eINSTANCE.getEAnnotation_Contents();
+          it_1.setEReference(_eAnnotation_Contents);
+          it_1.setIndexInList(2);
+        };
+        SerializableReferenceDescription _doubleArrow_4 = ObjectExtensions.<SerializableReferenceDescription>operator_doubleArrow(_serializableReferenceDescription_4, _function_5);
+        it.setReferences(Collections.<SerializableReferenceDescription>unmodifiableList(CollectionLiterals.<SerializableReferenceDescription>newArrayList(_doubleArrow, _doubleArrow_1, _doubleArrow_2, _doubleArrow_3, _doubleArrow_4)));
+        SerializableEObjectDescription _serializableEObjectDescription = new SerializableEObjectDescription();
+        final Procedure1<SerializableEObjectDescription> _function_6 = (SerializableEObjectDescription it_1) -> {
+          URI _appendFragment = uri.appendFragment("baz");
+          it_1.setEObjectURI(_appendFragment);
+          QualifiedName _create = QualifiedName.create("foo", "baz");
+          it_1.setQualifiedName(_create);
+          EClass _eAttribute = EcorePackage.eINSTANCE.getEAttribute();
+          it_1.setEClass(_eAttribute);
+          Pair<String, String> _mappedTo = Pair.<String, String>of("myKey", "myValue");
+          HashMap<String, String> _newHashMap = CollectionLiterals.<String, String>newHashMap(_mappedTo);
+          it_1.setUserData(_newHashMap);
+        };
+        SerializableEObjectDescription _doubleArrow_5 = ObjectExtensions.<SerializableEObjectDescription>operator_doubleArrow(_serializableEObjectDescription, _function_6);
+        it.setDescriptions(Collections.<SerializableEObjectDescription>unmodifiableList(CollectionLiterals.<SerializableEObjectDescription>newArrayList(_doubleArrow_5)));
+        QualifiedName _create = QualifiedName.create("foo");
+        QualifiedName _create_1 = QualifiedName.create("foo", "bar");
+        it.setImportedNames(Collections.<QualifiedName>unmodifiableList(CollectionLiterals.<QualifiedName>newArrayList(_create, _create_1)));
       };
       final SerializableResourceDescription before = ObjectExtensions.<SerializableResourceDescription>operator_doubleArrow(_serializableResourceDescription, _function);
       final ByteArrayOutputStream bout = new ByteArrayOutputStream();

@@ -29,11 +29,8 @@ public class XbaseUsageDetector {
     final Set<AbstractRule> usedRules = CollectionLiterals.<AbstractRule>newHashSet();
     UsedRulesFinder _usedRulesFinder = new UsedRulesFinder(usedRules);
     _usedRulesFinder.compute(grammar);
-    final Function1<AbstractRule, Boolean> _function = new Function1<AbstractRule, Boolean>() {
-      @Override
-      public Boolean apply(final AbstractRule it) {
-        return Boolean.valueOf((Objects.equal(it.getName(), "XImportSection") && Objects.equal(GrammarUtil.getGrammar(it).getName(), "org.eclipse.xtext.xbase.Xtype")));
-      }
+    final Function1<AbstractRule, Boolean> _function = (AbstractRule it) -> {
+      return Boolean.valueOf((Objects.equal(it.getName(), "XImportSection") && Objects.equal(GrammarUtil.getGrammar(it).getName(), "org.eclipse.xtext.xbase.Xtype")));
     };
     return IterableExtensions.<AbstractRule>exists(usedRules, _function);
   }

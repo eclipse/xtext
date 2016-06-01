@@ -51,11 +51,8 @@ public class RequestManagerTest {
   @Test
   public void testRunRead() {
     try {
-      final Function1<CancelIndicator, String> _function = new Function1<CancelIndicator, String>() {
-        @Override
-        public String apply(final CancelIndicator it) {
-          return "Foo";
-        }
+      final Function1<CancelIndicator, String> _function = (CancelIndicator it) -> {
+        return "Foo";
       };
       final CompletableFuture<String> future = this.requestManager.<String>runRead(_function);
       String _get = future.get();
@@ -67,24 +64,18 @@ public class RequestManagerTest {
   
   @Test
   public void testRunReadConcurrent() {
-    final Function1<CancelIndicator, Integer> _function = new Function1<CancelIndicator, Integer>() {
-      @Override
-      public Integer apply(final CancelIndicator it) {
-        int _xblockexpression = (int) 0;
-        {
-          while ((RequestManagerTest.this.sharedState.get() == 0)) {
-          }
-          _xblockexpression = RequestManagerTest.this.sharedState.incrementAndGet();
+    final Function1<CancelIndicator, Integer> _function = (CancelIndicator it) -> {
+      int _xblockexpression = (int) 0;
+      {
+        while ((this.sharedState.get() == 0)) {
         }
-        return Integer.valueOf(_xblockexpression);
+        _xblockexpression = this.sharedState.incrementAndGet();
       }
+      return Integer.valueOf(_xblockexpression);
     };
     final CompletableFuture<Integer> future = this.requestManager.<Integer>runRead(_function);
-    final Function1<CancelIndicator, Integer> _function_1 = new Function1<CancelIndicator, Integer>() {
-      @Override
-      public Integer apply(final CancelIndicator it) {
-        return Integer.valueOf(RequestManagerTest.this.sharedState.incrementAndGet());
-      }
+    final Function1<CancelIndicator, Integer> _function_1 = (CancelIndicator it) -> {
+      return Integer.valueOf(this.sharedState.incrementAndGet());
     };
     this.requestManager.<Integer>runRead(_function_1);
     future.join();
@@ -95,20 +86,14 @@ public class RequestManagerTest {
   @Test
   public void testRunReadAfterWrite() {
     try {
-      final Procedure1<CancelIndicator> _function = new Procedure1<CancelIndicator>() {
-        @Override
-        public void apply(final CancelIndicator it) {
-          while ((RequestManagerTest.this.sharedState.get() == 0)) {
-          }
-          RequestManagerTest.this.sharedState.incrementAndGet();
+      final Procedure1<CancelIndicator> _function = (CancelIndicator it) -> {
+        while ((this.sharedState.get() == 0)) {
         }
+        this.sharedState.incrementAndGet();
       };
       this.requestManager.runWrite(_function);
-      final Function1<CancelIndicator, Integer> _function_1 = new Function1<CancelIndicator, Integer>() {
-        @Override
-        public Integer apply(final CancelIndicator it) {
-          return Integer.valueOf(RequestManagerTest.this.sharedState.get());
-        }
+      final Function1<CancelIndicator, Integer> _function_1 = (CancelIndicator it) -> {
+        return Integer.valueOf(this.sharedState.get());
       };
       final CompletableFuture<Integer> future = this.requestManager.<Integer>runRead(_function_1);
       this.sharedState.incrementAndGet();
@@ -121,11 +106,8 @@ public class RequestManagerTest {
   
   @Test
   public void testRunWrite() {
-    final Procedure1<CancelIndicator> _function = new Procedure1<CancelIndicator>() {
-      @Override
-      public void apply(final CancelIndicator it) {
-        RequestManagerTest.this.sharedState.incrementAndGet();
-      }
+    final Procedure1<CancelIndicator> _function = (CancelIndicator it) -> {
+      this.sharedState.incrementAndGet();
     };
     CompletableFuture<Void> _runWrite = this.requestManager.runWrite(_function);
     _runWrite.join();
@@ -135,21 +117,15 @@ public class RequestManagerTest {
   
   @Test
   public void testRunWriteAfterWrite() {
-    final Procedure1<CancelIndicator> _function = new Procedure1<CancelIndicator>() {
-      @Override
-      public void apply(final CancelIndicator it) {
-        RequestManagerTest.this.sharedState.incrementAndGet();
-      }
+    final Procedure1<CancelIndicator> _function = (CancelIndicator it) -> {
+      this.sharedState.incrementAndGet();
     };
     this.requestManager.runWrite(_function);
-    final Procedure1<CancelIndicator> _function_1 = new Procedure1<CancelIndicator>() {
-      @Override
-      public void apply(final CancelIndicator it) {
-        int _get = RequestManagerTest.this.sharedState.get();
-        boolean _notEquals = (_get != 0);
-        if (_notEquals) {
-          RequestManagerTest.this.sharedState.incrementAndGet();
-        }
+    final Procedure1<CancelIndicator> _function_1 = (CancelIndicator it) -> {
+      int _get = this.sharedState.get();
+      boolean _notEquals = (_get != 0);
+      if (_notEquals) {
+        this.sharedState.incrementAndGet();
       }
     };
     CompletableFuture<Void> _runWrite = this.requestManager.runWrite(_function_1);
@@ -160,20 +136,14 @@ public class RequestManagerTest {
   
   @Test
   public void testRunWriteAfterRead() {
-    final Function1<CancelIndicator, Integer> _function = new Function1<CancelIndicator, Integer>() {
-      @Override
-      public Integer apply(final CancelIndicator it) {
-        return Integer.valueOf(RequestManagerTest.this.sharedState.incrementAndGet());
-      }
+    final Function1<CancelIndicator, Integer> _function = (CancelIndicator it) -> {
+      return Integer.valueOf(this.sharedState.incrementAndGet());
     };
     this.requestManager.<Integer>runRead(_function);
-    final Procedure1<CancelIndicator> _function_1 = new Procedure1<CancelIndicator>() {
-      @Override
-      public void apply(final CancelIndicator it) {
-        while ((RequestManagerTest.this.sharedState.get() == 0)) {
-        }
-        RequestManagerTest.this.sharedState.incrementAndGet();
+    final Procedure1<CancelIndicator> _function_1 = (CancelIndicator it) -> {
+      while ((this.sharedState.get() == 0)) {
       }
+      this.sharedState.incrementAndGet();
     };
     CompletableFuture<Void> _runWrite = this.requestManager.runWrite(_function_1);
     _runWrite.join();
@@ -183,20 +153,14 @@ public class RequestManagerTest {
   
   @Test
   public void testCancelWrite() {
-    final Procedure1<CancelIndicator> _function = new Procedure1<CancelIndicator>() {
-      @Override
-      public void apply(final CancelIndicator cancelIndicator) {
-        while ((!cancelIndicator.isCanceled())) {
-        }
-        RequestManagerTest.this.sharedState.incrementAndGet();
+    final Procedure1<CancelIndicator> _function = (CancelIndicator cancelIndicator) -> {
+      while ((!cancelIndicator.isCanceled())) {
       }
+      this.sharedState.incrementAndGet();
     };
     this.requestManager.runWrite(_function);
-    final Procedure1<CancelIndicator> _function_1 = new Procedure1<CancelIndicator>() {
-      @Override
-      public void apply(final CancelIndicator it) {
-        RequestManagerTest.this.sharedState.incrementAndGet();
-      }
+    final Procedure1<CancelIndicator> _function_1 = (CancelIndicator it) -> {
+      this.sharedState.incrementAndGet();
     };
     CompletableFuture<Void> _runWrite = this.requestManager.runWrite(_function_1);
     _runWrite.join();
@@ -208,24 +172,18 @@ public class RequestManagerTest {
   public void testCancelRead() {
     try {
       this.sharedState.incrementAndGet();
-      final Function1<CancelIndicator, Integer> _function = new Function1<CancelIndicator, Integer>() {
-        @Override
-        public Integer apply(final CancelIndicator cancelIndicator) {
-          int _xblockexpression = (int) 0;
-          {
-            while ((!cancelIndicator.isCanceled())) {
-            }
-            _xblockexpression = RequestManagerTest.this.sharedState.get();
+      final Function1<CancelIndicator, Integer> _function = (CancelIndicator cancelIndicator) -> {
+        int _xblockexpression = (int) 0;
+        {
+          while ((!cancelIndicator.isCanceled())) {
           }
-          return Integer.valueOf(_xblockexpression);
+          _xblockexpression = this.sharedState.get();
         }
+        return Integer.valueOf(_xblockexpression);
       };
       final CompletableFuture<Integer> future = this.requestManager.<Integer>runRead(_function);
-      final Procedure1<CancelIndicator> _function_1 = new Procedure1<CancelIndicator>() {
-        @Override
-        public void apply(final CancelIndicator it) {
-          RequestManagerTest.this.sharedState.set(0);
-        }
+      final Procedure1<CancelIndicator> _function_1 = (CancelIndicator it) -> {
+        this.sharedState.set(0);
       };
       CompletableFuture<Void> _runWrite = this.requestManager.runWrite(_function_1);
       _runWrite.join();

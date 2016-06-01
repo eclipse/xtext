@@ -74,31 +74,25 @@ public class IncrementalBuilderTest extends AbstractIncrementalBuilderTest {
   
   @Test
   public void testNoCleanupBuild() {
-    final Procedure1<BuildRequest> _function = new Procedure1<BuildRequest>() {
-      @Override
-      public void apply(final BuildRequest it) {
-        final Procedure1<OutputConfiguration> _function = new Procedure1<OutputConfiguration>() {
-          @Override
-          public void apply(final OutputConfiguration it) {
-            it.setCleanUpDerivedResources(false);
-          }
-        };
-        IncrementalBuilderTest.this.withOutputConfig(it, _function);
-        StringConcatenation _builder = new StringConcatenation();
-        _builder.append("foo {");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("entity B {}");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("entity A { foo.B myReference }");
-        _builder.newLine();
-        _builder.append("}");
-        _builder.newLine();
-        URI _minus = IncrementalBuilderTest.this.operator_minus(
-          "src/MyFile.indextestlanguage", _builder.toString());
-        it.setDirtyFiles(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(_minus)));
-      }
+    final Procedure1<BuildRequest> _function = (BuildRequest it) -> {
+      final Procedure1<OutputConfiguration> _function_1 = (OutputConfiguration it_1) -> {
+        it_1.setCleanUpDerivedResources(false);
+      };
+      this.withOutputConfig(it, _function_1);
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("entity B {}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("entity A { foo.B myReference }");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      URI _minus = this.operator_minus(
+        "src/MyFile.indextestlanguage", _builder.toString());
+      it.setDirtyFiles(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(_minus)));
     };
     final BuildRequest buildRequest = this.newBuildRequest(_function);
     this.build(buildRequest);
@@ -113,20 +107,14 @@ public class IncrementalBuilderTest extends AbstractIncrementalBuilderTest {
     Collection<URI> _values_1 = this.generated.values();
     boolean _containsSuffix_1 = this.containsSuffix(_values_1, "src-gen/A.txt");
     Assert.assertTrue(_containsSuffix_1);
-    final Procedure1<BuildRequest> _function_1 = new Procedure1<BuildRequest>() {
-      @Override
-      public void apply(final BuildRequest it) {
-        final Procedure1<OutputConfiguration> _function = new Procedure1<OutputConfiguration>() {
-          @Override
-          public void apply(final OutputConfiguration it) {
-            it.setCleanUpDerivedResources(false);
-          }
-        };
-        IncrementalBuilderTest.this.withOutputConfig(it, _function);
-        URI _uri = IncrementalBuilderTest.this.uri("src/A.indextestlanguage");
-        URI _delete = IncrementalBuilderTest.this.delete(_uri);
-        it.setDeletedFiles(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(_delete)));
-      }
+    final Procedure1<BuildRequest> _function_1 = (BuildRequest it) -> {
+      final Procedure1<OutputConfiguration> _function_2 = (OutputConfiguration it_1) -> {
+        it_1.setCleanUpDerivedResources(false);
+      };
+      this.withOutputConfig(it, _function_2);
+      URI _uri = this.uri("src/A.indextestlanguage");
+      URI _delete = this.delete(_uri);
+      it.setDeletedFiles(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(_delete)));
     };
     this.newBuildRequest(_function_1);
     String _string_1 = this.issues.toString();
@@ -144,31 +132,25 @@ public class IncrementalBuilderTest extends AbstractIncrementalBuilderTest {
   
   @Test
   public void testGeneratedOnceBuild() {
-    final Procedure1<BuildRequest> _function = new Procedure1<BuildRequest>() {
-      @Override
-      public void apply(final BuildRequest it) {
-        final Procedure1<OutputConfiguration> _function = new Procedure1<OutputConfiguration>() {
-          @Override
-          public void apply(final OutputConfiguration it) {
-            it.setOverrideExistingResources(false);
-          }
-        };
-        IncrementalBuilderTest.this.withOutputConfig(it, _function);
-        StringConcatenation _builder = new StringConcatenation();
-        _builder.append("foo {");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("entity B {}");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("entity A { foo.B myReference }");
-        _builder.newLine();
-        _builder.append("}");
-        _builder.newLine();
-        URI _minus = IncrementalBuilderTest.this.operator_minus(
-          "src/MyFile.indextestlanguage", _builder.toString());
-        it.setDirtyFiles(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(_minus)));
-      }
+    final Procedure1<BuildRequest> _function = (BuildRequest it) -> {
+      final Procedure1<OutputConfiguration> _function_1 = (OutputConfiguration it_1) -> {
+        it_1.setOverrideExistingResources(false);
+      };
+      this.withOutputConfig(it, _function_1);
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("entity B {}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("entity A { foo.B myReference }");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      URI _minus = this.operator_minus(
+        "src/MyFile.indextestlanguage", _builder.toString());
+      it.setDirtyFiles(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(_minus)));
     };
     final BuildRequest buildRequest = this.newBuildRequest(_function);
     this.build(buildRequest);
@@ -183,62 +165,50 @@ public class IncrementalBuilderTest extends AbstractIncrementalBuilderTest {
     Collection<URI> _values_1 = this.generated.values();
     boolean _containsSuffix_1 = this.containsSuffix(_values_1, "src-gen/A.txt");
     Assert.assertTrue(_containsSuffix_1);
-    final Procedure1<BuildRequest> _function_1 = new Procedure1<BuildRequest>() {
-      @Override
-      public void apply(final BuildRequest it) {
-        final Procedure1<OutputConfiguration> _function = new Procedure1<OutputConfiguration>() {
-          @Override
-          public void apply(final OutputConfiguration it) {
-            it.setOverrideExistingResources(false);
-          }
-        };
-        IncrementalBuilderTest.this.withOutputConfig(it, _function);
-        StringConcatenation _builder = new StringConcatenation();
-        _builder.append("foo {");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("entity B {}");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("entity A { foo.B someReference }");
-        _builder.newLine();
-        _builder.append("}");
-        _builder.newLine();
-        URI _minus = IncrementalBuilderTest.this.operator_minus(
-          "src/MyFile.indextestlanguage", _builder.toString());
-        it.setDirtyFiles(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(_minus)));
-        final Procedure2<URI, URI> _function_1 = new Procedure2<URI, URI>() {
-          @Override
-          public void apply(final URI $0, final URI $1) {
-            Assert.fail();
-          }
-        };
-        it.setAfterGenerateFile(_function_1);
-      }
+    final Procedure1<BuildRequest> _function_1 = (BuildRequest it) -> {
+      final Procedure1<OutputConfiguration> _function_2 = (OutputConfiguration it_1) -> {
+        it_1.setOverrideExistingResources(false);
+      };
+      this.withOutputConfig(it, _function_2);
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("entity B {}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("entity A { foo.B someReference }");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      URI _minus = this.operator_minus(
+        "src/MyFile.indextestlanguage", _builder.toString());
+      it.setDirtyFiles(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(_minus)));
+      final Procedure2<URI, URI> _function_3 = (URI $0, URI $1) -> {
+        Assert.fail();
+      };
+      it.setAfterGenerateFile(_function_3);
     };
     this.newBuildRequest(_function_1);
   }
   
   @Test
   public void testSimpleFullBuild() {
-    final Procedure1<BuildRequest> _function = new Procedure1<BuildRequest>() {
-      @Override
-      public void apply(final BuildRequest it) {
-        StringConcatenation _builder = new StringConcatenation();
-        _builder.append("foo {");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("entity B {}");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("entity A { foo.B myReference }");
-        _builder.newLine();
-        _builder.append("}");
-        _builder.newLine();
-        URI _minus = IncrementalBuilderTest.this.operator_minus(
-          "src/MyFile.indextestlanguage", _builder.toString());
-        it.setDirtyFiles(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(_minus)));
-      }
+    final Procedure1<BuildRequest> _function = (BuildRequest it) -> {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("entity B {}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("entity A { foo.B myReference }");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      URI _minus = this.operator_minus(
+        "src/MyFile.indextestlanguage", _builder.toString());
+      it.setDirtyFiles(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(_minus)));
     };
     final BuildRequest buildRequest = this.newBuildRequest(_function);
     this.build(buildRequest);
@@ -258,33 +228,30 @@ public class IncrementalBuilderTest extends AbstractIncrementalBuilderTest {
   @Test(expected = OperationCanceledException.class)
   public void testCancellation() {
     final IncrementalBuilderTest.CancelOnFirstModel cancelOnFirstModel = new IncrementalBuilderTest.CancelOnFirstModel();
-    final Procedure1<BuildRequest> _function = new Procedure1<BuildRequest>() {
-      @Override
-      public void apply(final BuildRequest it) {
-        StringConcatenation _builder = new StringConcatenation();
-        _builder.append("foo {");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("entity A { foo.B myReference }");
-        _builder.newLine();
-        _builder.append("}");
-        _builder.newLine();
-        URI _minus = IncrementalBuilderTest.this.operator_minus(
-          "src/MyFile.indextestlanguage", _builder.toString());
-        StringConcatenation _builder_1 = new StringConcatenation();
-        _builder_1.append("foo {");
-        _builder_1.newLine();
-        _builder_1.append("\t");
-        _builder_1.append("entity B {}");
-        _builder_1.newLine();
-        _builder_1.append("}");
-        _builder_1.newLine();
-        URI _minus_1 = IncrementalBuilderTest.this.operator_minus(
-          "src/MyFile2.indextestlanguage", _builder_1.toString());
-        it.setDirtyFiles(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(_minus, _minus_1)));
-        it.setCancelIndicator(cancelOnFirstModel);
-        it.setAfterValidate(cancelOnFirstModel);
-      }
+    final Procedure1<BuildRequest> _function = (BuildRequest it) -> {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("entity A { foo.B myReference }");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      URI _minus = this.operator_minus(
+        "src/MyFile.indextestlanguage", _builder.toString());
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("foo {");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.append("entity B {}");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      URI _minus_1 = this.operator_minus(
+        "src/MyFile2.indextestlanguage", _builder_1.toString());
+      it.setDirtyFiles(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(_minus, _minus_1)));
+      it.setCancelIndicator(cancelOnFirstModel);
+      it.setAfterValidate(cancelOnFirstModel);
     };
     final BuildRequest buildRequest = this.newBuildRequest(_function);
     this.build(buildRequest);
@@ -292,36 +259,27 @@ public class IncrementalBuilderTest extends AbstractIncrementalBuilderTest {
   
   @Test
   public void testIndexOnly() {
-    final Procedure1<BuildRequest> _function = new Procedure1<BuildRequest>() {
-      @Override
-      public void apply(final BuildRequest it) {
-        it.setIndexOnly(true);
-        StringConcatenation _builder = new StringConcatenation();
-        _builder.append("foo {");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("entity A {}");
-        _builder.newLine();
-        _builder.append("}");
-        _builder.newLine();
-        URI _minus = IncrementalBuilderTest.this.operator_minus(
-          "src/MyFile.indextestlanguage", _builder.toString());
-        it.setDirtyFiles(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(_minus)));
-        final BuildRequest.IPostValidationCallback _function = new BuildRequest.IPostValidationCallback() {
-          @Override
-          public boolean afterValidate(final URI $0, final Iterable<Issue> $1) {
-            throw new IllegalStateException();
-          }
-        };
-        it.setAfterValidate(_function);
-        final Procedure2<URI, URI> _function_1 = new Procedure2<URI, URI>() {
-          @Override
-          public void apply(final URI $0, final URI $1) {
-            throw new IllegalStateException();
-          }
-        };
-        it.setAfterGenerateFile(_function_1);
-      }
+    final Procedure1<BuildRequest> _function = (BuildRequest it) -> {
+      it.setIndexOnly(true);
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("entity A {}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      URI _minus = this.operator_minus(
+        "src/MyFile.indextestlanguage", _builder.toString());
+      it.setDirtyFiles(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(_minus)));
+      final BuildRequest.IPostValidationCallback _function_1 = (URI $0, Iterable<Issue> $1) -> {
+        throw new IllegalStateException();
+      };
+      it.setAfterValidate(_function_1);
+      final Procedure2<URI, URI> _function_2 = (URI $0, URI $1) -> {
+        throw new IllegalStateException();
+      };
+      it.setAfterGenerateFile(_function_2);
     };
     final BuildRequest buildRequest = this.newBuildRequest(_function);
     final IndexState result = this.build(buildRequest);
@@ -333,56 +291,47 @@ public class IncrementalBuilderTest extends AbstractIncrementalBuilderTest {
   
   @Test
   public void testDelete_01() {
-    final Procedure1<BuildRequest> _function = new Procedure1<BuildRequest>() {
-      @Override
-      public void apply(final BuildRequest it) {
-        StringConcatenation _builder = new StringConcatenation();
-        _builder.append("foo {");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("entity A {foo.B references}");
-        _builder.newLine();
-        _builder.append("}");
-        _builder.newLine();
-        URI _minus = IncrementalBuilderTest.this.operator_minus(
-          "src/A.indextestlanguage", _builder.toString());
-        StringConcatenation _builder_1 = new StringConcatenation();
-        _builder_1.append("foo {");
-        _builder_1.newLine();
-        _builder_1.append("\t");
-        _builder_1.append("entity B");
-        _builder_1.newLine();
-        _builder_1.append("}");
-        _builder_1.newLine();
-        URI _minus_1 = IncrementalBuilderTest.this.operator_minus(
-          "src/B.indextestlanguage", _builder_1.toString());
-        it.setDirtyFiles(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(_minus, _minus_1)));
-      }
+    final Procedure1<BuildRequest> _function = (BuildRequest it) -> {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("entity A {foo.B references}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      URI _minus = this.operator_minus(
+        "src/A.indextestlanguage", _builder.toString());
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("foo {");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.append("entity B");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      URI _minus_1 = this.operator_minus(
+        "src/B.indextestlanguage", _builder_1.toString());
+      it.setDirtyFiles(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(_minus, _minus_1)));
     };
     BuildRequest _newBuildRequest = this.newBuildRequest(_function);
     this.build(_newBuildRequest);
     final AtomicBoolean validateCalled = new AtomicBoolean(false);
-    final Procedure1<BuildRequest> _function_1 = new Procedure1<BuildRequest>() {
-      @Override
-      public void apply(final BuildRequest it) {
-        URI _uri = IncrementalBuilderTest.this.uri("src/B.indextestlanguage");
-        it.setDeletedFiles(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(_uri)));
-        final BuildRequest.IPostValidationCallback _function = new BuildRequest.IPostValidationCallback() {
-          @Override
-          public boolean afterValidate(final URI uri, final Iterable<Issue> issues) {
-            URI _uri = IncrementalBuilderTest.this.uri("src/A.indextestlanguage");
-            Assert.assertEquals(_uri, uri);
-            String _string = issues.toString();
-            Issue _head = IterableExtensions.<Issue>head(issues);
-            String _message = _head.getMessage();
-            boolean _contains = _message.contains("Couldn\'t resolve reference to Type \'foo.B\'");
-            Assert.assertTrue(_string, _contains);
-            validateCalled.set(true);
-            return false;
-          }
-        };
-        it.setAfterValidate(_function);
-      }
+    final Procedure1<BuildRequest> _function_1 = (BuildRequest it) -> {
+      URI _uri = this.uri("src/B.indextestlanguage");
+      it.setDeletedFiles(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(_uri)));
+      final BuildRequest.IPostValidationCallback _function_2 = (URI uri, Iterable<Issue> issues) -> {
+        URI _uri_1 = this.uri("src/A.indextestlanguage");
+        Assert.assertEquals(_uri_1, uri);
+        String _string = issues.toString();
+        Issue _head = IterableExtensions.<Issue>head(issues);
+        String _message = _head.getMessage();
+        boolean _contains = _message.contains("Couldn\'t resolve reference to Type \'foo.B\'");
+        Assert.assertTrue(_string, _contains);
+        validateCalled.set(true);
+        return false;
+      };
+      it.setAfterValidate(_function_2);
     };
     BuildRequest _newBuildRequest_1 = this.newBuildRequest(_function_1);
     this.build(_newBuildRequest_1);
@@ -392,31 +341,28 @@ public class IncrementalBuilderTest extends AbstractIncrementalBuilderTest {
   
   @Test
   public void testIncrementalBuild() {
-    final Procedure1<BuildRequest> _function = new Procedure1<BuildRequest>() {
-      @Override
-      public void apply(final BuildRequest it) {
-        StringConcatenation _builder = new StringConcatenation();
-        _builder.append("foo {");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("entity A {foo.B reference}");
-        _builder.newLine();
-        _builder.append("}");
-        _builder.newLine();
-        URI _minus = IncrementalBuilderTest.this.operator_minus(
-          "src/A.indextestlanguage", _builder.toString());
-        StringConcatenation _builder_1 = new StringConcatenation();
-        _builder_1.append("foo {");
-        _builder_1.newLine();
-        _builder_1.append("\t");
-        _builder_1.append("entity B {foo.A reference}");
-        _builder_1.newLine();
-        _builder_1.append("}");
-        _builder_1.newLine();
-        URI _minus_1 = IncrementalBuilderTest.this.operator_minus(
-          "src/B.indextestlanguage", _builder_1.toString());
-        it.setDirtyFiles(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(_minus, _minus_1)));
-      }
+    final Procedure1<BuildRequest> _function = (BuildRequest it) -> {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("entity A {foo.B reference}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      URI _minus = this.operator_minus(
+        "src/A.indextestlanguage", _builder.toString());
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("foo {");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.append("entity B {foo.A reference}");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      URI _minus_1 = this.operator_minus(
+        "src/B.indextestlanguage", _builder_1.toString());
+      it.setDirtyFiles(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(_minus, _minus_1)));
     };
     BuildRequest _newBuildRequest = this.newBuildRequest(_function);
     this.build(_newBuildRequest);
@@ -431,21 +377,18 @@ public class IncrementalBuilderTest extends AbstractIncrementalBuilderTest {
     Collection<URI> _values_1 = this.generated.values();
     boolean _containsSuffix_1 = this.containsSuffix(_values_1, "src-gen/A.txt");
     Assert.assertTrue(_containsSuffix_1);
-    final Procedure1<BuildRequest> _function_1 = new Procedure1<BuildRequest>() {
-      @Override
-      public void apply(final BuildRequest it) {
-        StringConcatenation _builder = new StringConcatenation();
-        _builder.append("foo {");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("entity A {foo.B reference}");
-        _builder.newLine();
-        _builder.append("}");
-        _builder.newLine();
-        URI _minus = IncrementalBuilderTest.this.operator_minus(
-          "src/A.indextestlanguage", _builder.toString());
-        it.setDirtyFiles(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(_minus)));
-      }
+    final Procedure1<BuildRequest> _function_1 = (BuildRequest it) -> {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("entity A {foo.B reference}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      URI _minus = this.operator_minus(
+        "src/A.indextestlanguage", _builder.toString());
+      it.setDirtyFiles(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(_minus)));
     };
     BuildRequest _newBuildRequest_1 = this.newBuildRequest(_function_1);
     this.build(_newBuildRequest_1);
@@ -460,21 +403,18 @@ public class IncrementalBuilderTest extends AbstractIncrementalBuilderTest {
     Collection<URI> _values_3 = this.generated.values();
     boolean _containsSuffix_3 = this.containsSuffix(_values_3, "src-gen/A.txt");
     Assert.assertTrue(_containsSuffix_3);
-    final Procedure1<BuildRequest> _function_2 = new Procedure1<BuildRequest>() {
-      @Override
-      public void apply(final BuildRequest it) {
-        StringConcatenation _builder = new StringConcatenation();
-        _builder.append("foo {");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("entity X { foo.B reference }");
-        _builder.newLine();
-        _builder.append("}");
-        _builder.newLine();
-        URI _minus = IncrementalBuilderTest.this.operator_minus(
-          "src/A.indextestlanguage", _builder.toString());
-        it.setDirtyFiles(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(_minus)));
-      }
+    final Procedure1<BuildRequest> _function_2 = (BuildRequest it) -> {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("entity X { foo.B reference }");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      URI _minus = this.operator_minus(
+        "src/A.indextestlanguage", _builder.toString());
+      it.setDirtyFiles(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(_minus)));
     };
     BuildRequest _newBuildRequest_2 = this.newBuildRequest(_function_2);
     this.build(_newBuildRequest_2);
@@ -498,21 +438,18 @@ public class IncrementalBuilderTest extends AbstractIncrementalBuilderTest {
     Assert.assertEquals(1, _size_5);
     boolean _containsSuffix_6 = this.containsSuffix(this.deleted, "src-gen/A.txt");
     Assert.assertTrue(_containsSuffix_6);
-    final Procedure1<BuildRequest> _function_3 = new Procedure1<BuildRequest>() {
-      @Override
-      public void apply(final BuildRequest it) {
-        StringConcatenation _builder = new StringConcatenation();
-        _builder.append("foo {");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("entity A { foo.B reference }");
-        _builder.newLine();
-        _builder.append("}");
-        _builder.newLine();
-        URI _minus = IncrementalBuilderTest.this.operator_minus(
-          "src/A.indextestlanguage", _builder.toString());
-        it.setDirtyFiles(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(_minus)));
-      }
+    final Procedure1<BuildRequest> _function_3 = (BuildRequest it) -> {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("entity A { foo.B reference }");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      URI _minus = this.operator_minus(
+        "src/A.indextestlanguage", _builder.toString());
+      it.setDirtyFiles(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(_minus)));
     };
     BuildRequest _newBuildRequest_3 = this.newBuildRequest(_function_3);
     this.build(_newBuildRequest_3);
@@ -529,13 +466,10 @@ public class IncrementalBuilderTest extends AbstractIncrementalBuilderTest {
     Assert.assertTrue(_containsSuffix_8);
     boolean _containsSuffix_9 = this.containsSuffix(this.deleted, "src-gen/X.txt");
     Assert.assertTrue(_containsSuffix_9);
-    final Procedure1<BuildRequest> _function_4 = new Procedure1<BuildRequest>() {
-      @Override
-      public void apply(final BuildRequest it) {
-        URI _uri = IncrementalBuilderTest.this.uri("src/A.indextestlanguage");
-        URI _delete = IncrementalBuilderTest.this.delete(_uri);
-        it.setDeletedFiles(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(_delete)));
-      }
+    final Procedure1<BuildRequest> _function_4 = (BuildRequest it) -> {
+      URI _uri_1 = this.uri("src/A.indextestlanguage");
+      URI _delete = this.delete(_uri_1);
+      it.setDeletedFiles(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(_delete)));
     };
     BuildRequest _newBuildRequest_4 = this.newBuildRequest(_function_4);
     this.build(_newBuildRequest_4);

@@ -77,11 +77,8 @@ public class Bug464760Test {
       EList<XtendParameter> _parameters = ((XtendFunction) _get).getParameters();
       XtendParameter _head_1 = IterableExtensions.<XtendParameter>head(_parameters);
       _head_1.setParameterType(null);
-      final Runnable _function = new Runnable() {
-        @Override
-        public void run() {
-          EcoreUtil.resolveAll(resource);
-        }
+      final Runnable _function = () -> {
+        EcoreUtil.resolveAll(resource);
       };
       final LoggingTester.LogCapture loggings = LoggingTester.captureLogging(Level.ERROR, BatchLinkableResource.class, _function);
       loggings.assertNoLogEntries();

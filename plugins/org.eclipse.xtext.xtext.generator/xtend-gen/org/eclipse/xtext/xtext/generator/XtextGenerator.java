@@ -21,6 +21,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Set;
+import java.util.function.Consumer;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
@@ -160,11 +161,8 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
       this.injector = _createInjector;
       this.injector.injectMembers(this);
       CodeConfig _instance = this.injector.<CodeConfig>getInstance(CodeConfig.class);
-      final Procedure1<CodeConfig> _function = new Procedure1<CodeConfig>() {
-        @Override
-        public void apply(final CodeConfig it) {
-          it.initialize(XtextGenerator.this.injector);
-        }
+      final Procedure1<CodeConfig> _function = (CodeConfig it) -> {
+        it.initialize(this.injector);
       };
       ObjectExtensions.<CodeConfig>operator_doubleArrow(_instance, _function);
       this.projectConfig.initialize(this.injector);
@@ -229,13 +227,10 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
   private void handleException(final Exception ex, final Issues issues) {
     if ((ex instanceof CompositeGeneratorException)) {
       List<Exception> _exceptions = ((CompositeGeneratorException)ex).getExceptions();
-      final Procedure1<Exception> _function = new Procedure1<Exception>() {
-        @Override
-        public void apply(final Exception it) {
-          XtextGenerator.this.handleException(it, issues);
-        }
+      final Consumer<Exception> _function = (Exception it) -> {
+        this.handleException(it, issues);
       };
-      IterableExtensions.<Exception>forEach(_exceptions, _function);
+      _exceptions.forEach(_function);
     } else {
       issues.addError(this, "GeneratorException: ", null, ex, null);
     }
@@ -308,14 +303,11 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
     try {
       List<? extends ISubProjectConfig> _enabledProjects = this.projectConfig.getEnabledProjects();
       Iterable<BundleProjectConfig> _filter = Iterables.<BundleProjectConfig>filter(_enabledProjects, BundleProjectConfig.class);
-      final Function1<BundleProjectConfig, Triple<ManifestAccess, IXtextGeneratorFileSystemAccess, String>> _function = new Function1<BundleProjectConfig, Triple<ManifestAccess, IXtextGeneratorFileSystemAccess, String>>() {
-        @Override
-        public Triple<ManifestAccess, IXtextGeneratorFileSystemAccess, String> apply(final BundleProjectConfig it) {
-          ManifestAccess _manifest = it.getManifest();
-          IXtextGeneratorFileSystemAccess _metaInf = it.getMetaInf();
-          String _name = it.getName();
-          return Tuples.<ManifestAccess, IXtextGeneratorFileSystemAccess, String>create(_manifest, _metaInf, _name);
-        }
+      final Function1<BundleProjectConfig, Triple<ManifestAccess, IXtextGeneratorFileSystemAccess, String>> _function = (BundleProjectConfig it) -> {
+        ManifestAccess _manifest = it.getManifest();
+        IXtextGeneratorFileSystemAccess _metaInf = it.getMetaInf();
+        String _name = it.getName();
+        return Tuples.<ManifestAccess, IXtextGeneratorFileSystemAccess, String>create(_manifest, _metaInf, _name);
       };
       Iterable<Triple<ManifestAccess, IXtextGeneratorFileSystemAccess, String>> _map = IterableExtensions.<BundleProjectConfig, Triple<ManifestAccess, IXtextGeneratorFileSystemAccess, String>>map(_filter, _function);
       final List<Triple<ManifestAccess, IXtextGeneratorFileSystemAccess, String>> manifests = IterableExtensions.<Triple<ManifestAccess, IXtextGeneratorFileSystemAccess, String>>toList(_map);
@@ -430,13 +422,10 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
   protected void generatePluginXmls() {
     List<? extends ISubProjectConfig> _enabledProjects = this.projectConfig.getEnabledProjects();
     Iterable<BundleProjectConfig> _filter = Iterables.<BundleProjectConfig>filter(_enabledProjects, BundleProjectConfig.class);
-    final Function1<BundleProjectConfig, Pair<PluginXmlAccess, IXtextGeneratorFileSystemAccess>> _function = new Function1<BundleProjectConfig, Pair<PluginXmlAccess, IXtextGeneratorFileSystemAccess>>() {
-      @Override
-      public Pair<PluginXmlAccess, IXtextGeneratorFileSystemAccess> apply(final BundleProjectConfig it) {
-        PluginXmlAccess _pluginXml = it.getPluginXml();
-        IXtextGeneratorFileSystemAccess _root = it.getRoot();
-        return Pair.<PluginXmlAccess, IXtextGeneratorFileSystemAccess>of(_pluginXml, _root);
-      }
+    final Function1<BundleProjectConfig, Pair<PluginXmlAccess, IXtextGeneratorFileSystemAccess>> _function = (BundleProjectConfig it) -> {
+      PluginXmlAccess _pluginXml = it.getPluginXml();
+      IXtextGeneratorFileSystemAccess _root = it.getRoot();
+      return Pair.<PluginXmlAccess, IXtextGeneratorFileSystemAccess>of(_pluginXml, _root);
     };
     Iterable<Pair<PluginXmlAccess, IXtextGeneratorFileSystemAccess>> _map = IterableExtensions.<BundleProjectConfig, Pair<PluginXmlAccess, IXtextGeneratorFileSystemAccess>>map(_filter, _function);
     final List<Pair<PluginXmlAccess, IXtextGeneratorFileSystemAccess>> pluginXmls = IterableExtensions.<Pair<PluginXmlAccess, IXtextGeneratorFileSystemAccess>>toList(_map);

@@ -92,11 +92,8 @@ public class XtextGeneratorLanguage extends CompositeGeneratorFragment2 implemen
   private ResourceSet resourceSet;
   
   @Accessors
-  private Module guiceModule = new Module() {
-    @Override
-    public void configure(final Binder it) {
-    }
-  };
+  private Module guiceModule = ((Module) (Binder it) -> {
+  });
   
   @Accessors
   private final StandaloneSetupAccess runtimeGenSetup = new StandaloneSetupAccess();

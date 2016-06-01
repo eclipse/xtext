@@ -58,13 +58,10 @@ public abstract class AbstractFeatureCallTypeTest extends AbstractXbaseTestCase 
       TreeIterator<EObject> _eAll = EcoreUtil2.eAll(xExpression);
       Iterator<XAbstractFeatureCall> _filter = Iterators.<XAbstractFeatureCall>filter(_eAll, XAbstractFeatureCall.class);
       final List<XAbstractFeatureCall> featureCalls = IteratorExtensions.<XAbstractFeatureCall>toList(_filter);
-      final Function1<XAbstractFeatureCall, Integer> _function = new Function1<XAbstractFeatureCall, Integer>() {
-        @Override
-        public Integer apply(final XAbstractFeatureCall it) {
-          List<INode> _findNodesForFeature = NodeModelUtils.findNodesForFeature(it, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE);
-          INode _head = IterableExtensions.<INode>head(_findNodesForFeature);
-          return Integer.valueOf(_head.getOffset());
-        }
+      final Function1<XAbstractFeatureCall, Integer> _function = (XAbstractFeatureCall it) -> {
+        List<INode> _findNodesForFeature = NodeModelUtils.findNodesForFeature(it, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE);
+        INode _head = IterableExtensions.<INode>head(_findNodesForFeature);
+        return Integer.valueOf(_head.getOffset());
       };
       return IterableExtensions.<XAbstractFeatureCall, Integer>sortBy(featureCalls, _function);
     } catch (Throwable _e) {
@@ -73,11 +70,8 @@ public abstract class AbstractFeatureCallTypeTest extends AbstractXbaseTestCase 
   }
   
   protected Iterable<XAbstractFeatureCall> filterTypeLiteralsAndPackageFragments(final Iterable<XAbstractFeatureCall> featureCalls) {
-    final Function1<XAbstractFeatureCall, Boolean> _function = new Function1<XAbstractFeatureCall, Boolean>() {
-      @Override
-      public Boolean apply(final XAbstractFeatureCall it) {
-        return Boolean.valueOf(((!it.isPackageFragment()) && (!it.isTypeLiteral())));
-      }
+    final Function1<XAbstractFeatureCall, Boolean> _function = (XAbstractFeatureCall it) -> {
+      return Boolean.valueOf(((!it.isPackageFragment()) && (!it.isTypeLiteral())));
     };
     return IterableExtensions.<XAbstractFeatureCall>filter(featureCalls, _function);
   }

@@ -233,15 +233,12 @@ public class UniqueClassNameValidatorUITest extends AbstractXtendUITestCase {
   }
   
   public Iterable<IMarker> onlyErrors(final Iterable<IMarker> markers) {
-    final Function1<IMarker, Boolean> _function = new Function1<IMarker, Boolean>() {
-      @Override
-      public Boolean apply(final IMarker it) {
-        try {
-          Object _attribute = it.getAttribute(IMarker.SEVERITY);
-          return Boolean.valueOf(Objects.equal(Integer.valueOf(IMarker.SEVERITY_ERROR), _attribute));
-        } catch (Throwable _e) {
-          throw Exceptions.sneakyThrow(_e);
-        }
+    final Function1<IMarker, Boolean> _function = (IMarker it) -> {
+      try {
+        Object _attribute = it.getAttribute(IMarker.SEVERITY);
+        return Boolean.valueOf(Objects.equal(Integer.valueOf(IMarker.SEVERITY_ERROR), _attribute));
+      } catch (Throwable _e) {
+        throw Exceptions.sneakyThrow(_e);
       }
     };
     return IterableExtensions.<IMarker>filter(markers, _function);

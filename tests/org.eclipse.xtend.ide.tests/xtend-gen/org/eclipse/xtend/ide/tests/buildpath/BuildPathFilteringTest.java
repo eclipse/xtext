@@ -37,15 +37,12 @@ public class BuildPathFilteringTest extends AbstractXtendUITestCase {
   public void testExcludeNoneAndIncludeAll() {
     try {
       IProject _createPluginProject = WorkbenchTestHelper.createPluginProject("testProject");
-      final Procedure1<IProject> _function = new Procedure1<IProject>() {
-        @Override
-        public void apply(final IProject it) {
-          try {
-            IJavaProject _create = JavaCore.create(it);
-            JavaProjectSetupUtil.addSourceFolder(_create, "filtered-src", null, null);
-          } catch (Throwable _e) {
-            throw Exceptions.sneakyThrow(_e);
-          }
+      final Procedure1<IProject> _function = (IProject it) -> {
+        try {
+          IJavaProject _create = JavaCore.create(it);
+          JavaProjectSetupUtil.addSourceFolder(_create, "filtered-src", null, null);
+        } catch (Throwable _e) {
+          throw Exceptions.sneakyThrow(_e);
         }
       };
       ObjectExtensions.<IProject>operator_doubleArrow(_createPluginProject, _function);
@@ -62,15 +59,12 @@ public class BuildPathFilteringTest extends AbstractXtendUITestCase {
   public void testExcludeAllXtendFiles() {
     try {
       IProject _createPluginProject = WorkbenchTestHelper.createPluginProject("testProject");
-      final Procedure1<IProject> _function = new Procedure1<IProject>() {
-        @Override
-        public void apply(final IProject it) {
-          try {
-            IJavaProject _create = JavaCore.create(it);
-            JavaProjectSetupUtil.addSourceFolder(_create, "filtered-src", null, new String[] { "**.xtend" });
-          } catch (Throwable _e) {
-            throw Exceptions.sneakyThrow(_e);
-          }
+      final Procedure1<IProject> _function = (IProject it) -> {
+        try {
+          IJavaProject _create = JavaCore.create(it);
+          JavaProjectSetupUtil.addSourceFolder(_create, "filtered-src", null, new String[] { "**.xtend" });
+        } catch (Throwable _e) {
+          throw Exceptions.sneakyThrow(_e);
         }
       };
       ObjectExtensions.<IProject>operator_doubleArrow(_createPluginProject, _function);
@@ -92,15 +86,12 @@ public class BuildPathFilteringTest extends AbstractXtendUITestCase {
   public void testIncludeOnlyFooXtendFile() {
     try {
       IProject _createPluginProject = WorkbenchTestHelper.createPluginProject("testProject");
-      final Procedure1<IProject> _function = new Procedure1<IProject>() {
-        @Override
-        public void apply(final IProject it) {
-          try {
-            IJavaProject _create = JavaCore.create(it);
-            JavaProjectSetupUtil.addSourceFolder(_create, "filtered-src", new String[] { "Foo.xtend" }, null);
-          } catch (Throwable _e) {
-            throw Exceptions.sneakyThrow(_e);
-          }
+      final Procedure1<IProject> _function = (IProject it) -> {
+        try {
+          IJavaProject _create = JavaCore.create(it);
+          JavaProjectSetupUtil.addSourceFolder(_create, "filtered-src", new String[] { "Foo.xtend" }, null);
+        } catch (Throwable _e) {
+          throw Exceptions.sneakyThrow(_e);
         }
       };
       ObjectExtensions.<IProject>operator_doubleArrow(_createPluginProject, _function);
@@ -123,15 +114,12 @@ public class BuildPathFilteringTest extends AbstractXtendUITestCase {
   public void testExcludeAllFooXtendFiles() {
     try {
       IProject _createPluginProject = WorkbenchTestHelper.createPluginProject("testProject");
-      final Procedure1<IProject> _function = new Procedure1<IProject>() {
-        @Override
-        public void apply(final IProject it) {
-          try {
-            IJavaProject _create = JavaCore.create(it);
-            JavaProjectSetupUtil.addSourceFolder(_create, "filtered-src", null, new String[] { "**/Foo.xtend" });
-          } catch (Throwable _e) {
-            throw Exceptions.sneakyThrow(_e);
-          }
+      final Procedure1<IProject> _function = (IProject it) -> {
+        try {
+          IJavaProject _create = JavaCore.create(it);
+          JavaProjectSetupUtil.addSourceFolder(_create, "filtered-src", null, new String[] { "**/Foo.xtend" });
+        } catch (Throwable _e) {
+          throw Exceptions.sneakyThrow(_e);
         }
       };
       ObjectExtensions.<IProject>operator_doubleArrow(_createPluginProject, _function);

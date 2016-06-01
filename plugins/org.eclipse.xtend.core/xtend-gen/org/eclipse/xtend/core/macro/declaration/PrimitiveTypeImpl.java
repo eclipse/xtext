@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.core.macro.declaration;
 
-import com.google.common.base.Objects;
 import org.eclipse.xtend.core.macro.declaration.AbstractElementImpl;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.lib.macro.declaration.PrimitiveType;
@@ -22,52 +21,31 @@ public class PrimitiveTypeImpl extends AbstractElementImpl<JvmPrimitiveType> imp
   public PrimitiveType.Kind getKind() {
     PrimitiveType.Kind _switchResult = null;
     String _simpleName = this.getSimpleName();
-    boolean _matched = false;
-    if (Objects.equal(_simpleName, "boolean")) {
-      _matched=true;
-      _switchResult = PrimitiveType.Kind.BOOLEAN;
-    }
-    if (!_matched) {
-      if (Objects.equal(_simpleName, "int")) {
-        _matched=true;
+    switch (_simpleName) {
+      case "boolean":
+        _switchResult = PrimitiveType.Kind.BOOLEAN;
+        break;
+      case "int":
         _switchResult = PrimitiveType.Kind.INT;
-      }
-    }
-    if (!_matched) {
-      if (Objects.equal(_simpleName, "char")) {
-        _matched=true;
+        break;
+      case "char":
         _switchResult = PrimitiveType.Kind.CHAR;
-      }
-    }
-    if (!_matched) {
-      if (Objects.equal(_simpleName, "double")) {
-        _matched=true;
+        break;
+      case "double":
         _switchResult = PrimitiveType.Kind.DOUBLE;
-      }
-    }
-    if (!_matched) {
-      if (Objects.equal(_simpleName, "long")) {
-        _matched=true;
+        break;
+      case "long":
         _switchResult = PrimitiveType.Kind.LONG;
-      }
-    }
-    if (!_matched) {
-      if (Objects.equal(_simpleName, "short")) {
-        _matched=true;
+        break;
+      case "short":
         _switchResult = PrimitiveType.Kind.SHORT;
-      }
-    }
-    if (!_matched) {
-      if (Objects.equal(_simpleName, "float")) {
-        _matched=true;
+        break;
+      case "float":
         _switchResult = PrimitiveType.Kind.FLOAT;
-      }
-    }
-    if (!_matched) {
-      if (Objects.equal(_simpleName, "byte")) {
-        _matched=true;
+        break;
+      case "byte":
         _switchResult = PrimitiveType.Kind.BYTE;
-      }
+        break;
     }
     return _switchResult;
   }

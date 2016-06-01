@@ -382,11 +382,8 @@ public class ImplicitReturnFinderTest extends AbstractXbaseTestCase {
   
   public void hasNoImplicitReturns(final XExpression expression) {
     final ArrayList<XExpression> returns = CollectionLiterals.<XExpression>newArrayList();
-    final ImplicitReturnFinder.Acceptor _function = new ImplicitReturnFinder.Acceptor() {
-      @Override
-      public void accept(final XExpression it) {
-        returns.add(it);
-      }
+    final ImplicitReturnFinder.Acceptor _function = (XExpression it) -> {
+      returns.add(it);
     };
     this.finder.findImplicitReturns(expression, _function);
     StringConcatenation _builder = new StringConcatenation();
@@ -400,11 +397,8 @@ public class ImplicitReturnFinderTest extends AbstractXbaseTestCase {
   
   public void hasImplicitReturns(final XExpression expression, final XExpression... expectedReturns) {
     final ArrayList<Object> returns = CollectionLiterals.<Object>newArrayList();
-    final ImplicitReturnFinder.Acceptor _function = new ImplicitReturnFinder.Acceptor() {
-      @Override
-      public void accept(final XExpression it) {
-        returns.add(it);
-      }
+    final ImplicitReturnFinder.Acceptor _function = (XExpression it) -> {
+      returns.add(it);
     };
     this.finder.findImplicitReturns(expression, _function);
     Assert.assertArrayEquals(expectedReturns, ((Object[])Conversions.unwrapArray(returns, Object.class)));

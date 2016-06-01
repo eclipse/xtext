@@ -79,11 +79,8 @@ public abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
           javaCode = _postProcess;
           results.add(javaCode);
           if (this.useJavaCompiler) {
-            final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
-              @Override
-              public void accept(final CompilationTestHelper.Result it) {
-                it.getCompiledClass();
-              }
+            final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
+              it.getCompiledClass();
             };
             this.compilationTestHelper.compile(input, _function);
           }

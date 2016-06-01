@@ -144,22 +144,16 @@ public class PredicatedElementTest extends AbstractXtextTests {
     boolean _tripleEquals = (_cardinality == null);
     if (_tripleEquals) {
       EList<AbstractElement> _elements = group.getElements();
-      final Function1<AbstractElement, CharSequence> _function = new Function1<AbstractElement, CharSequence>() {
-        @Override
-        public CharSequence apply(final AbstractElement it) {
-          return PredicatedElementTest.this.toXtext(it);
-        }
+      final Function1<AbstractElement, CharSequence> _function = (AbstractElement it) -> {
+        return this.toXtext(it);
       };
       _xifexpression = IterableExtensions.<AbstractElement>join(_elements, " ", _function);
     } else {
       EList<AbstractElement> _elements_1 = group.getElements();
       String _cardinality_1 = group.getCardinality();
       String _plus = (")" + _cardinality_1);
-      final Function1<AbstractElement, CharSequence> _function_1 = new Function1<AbstractElement, CharSequence>() {
-        @Override
-        public CharSequence apply(final AbstractElement it) {
-          return PredicatedElementTest.this.toXtext(it);
-        }
+      final Function1<AbstractElement, CharSequence> _function_1 = (AbstractElement it) -> {
+        return this.toXtext(it);
       };
       _xifexpression = IterableExtensions.<AbstractElement>join(_elements_1, "(", " ", _plus, _function_1);
     }
@@ -176,11 +170,8 @@ public class PredicatedElementTest extends AbstractXtextTests {
       _elvis = "";
     }
     String _plus = (")" + _elvis);
-    final Function1<AbstractElement, CharSequence> _function = new Function1<AbstractElement, CharSequence>() {
-      @Override
-      public CharSequence apply(final AbstractElement it) {
-        return PredicatedElementTest.this.toXtext(it);
-      }
+    final Function1<AbstractElement, CharSequence> _function = (AbstractElement it) -> {
+      return this.toXtext(it);
     };
     return IterableExtensions.<AbstractElement>join(_elements, "(", " | ", _plus, _function);
   }

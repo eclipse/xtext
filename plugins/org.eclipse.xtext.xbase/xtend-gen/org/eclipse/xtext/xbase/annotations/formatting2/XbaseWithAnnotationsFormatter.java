@@ -64,20 +64,14 @@ public class XbaseWithAnnotationsFormatter extends XbaseFormatter {
   protected void _format(final XAnnotation ann, @Extension final IFormattableDocument document) {
     ISemanticRegionsFinder _regionFor = this.textRegionExtensions.regionFor(ann);
     ISemanticRegion _keyword = _regionFor.keyword("@");
-    final Procedure1<IHiddenRegionFormatter> _function = new Procedure1<IHiddenRegionFormatter>() {
-      @Override
-      public void apply(final IHiddenRegionFormatter it) {
-        it.noSpace();
-      }
+    final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
+      it.noSpace();
     };
     document.append(_keyword, _function);
     ISemanticRegionsFinder _regionFor_1 = this.textRegionExtensions.regionFor(ann);
     ISemanticRegion _keyword_1 = _regionFor_1.keyword("(");
-    final Procedure1<IHiddenRegionFormatter> _function_1 = new Procedure1<IHiddenRegionFormatter>() {
-      @Override
-      public void apply(final IHiddenRegionFormatter it) {
-        it.noSpace();
-      }
+    final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
+      it.noSpace();
     };
     document.surround(_keyword_1, _function_1);
     XExpression _value = ann.getValue();
@@ -87,11 +81,8 @@ public class XbaseWithAnnotationsFormatter extends XbaseFormatter {
       document.<XExpression>format(_value_1);
       ISemanticRegionsFinder _regionFor_2 = this.textRegionExtensions.regionFor(ann);
       ISemanticRegion _keyword_2 = _regionFor_2.keyword(")");
-      final Procedure1<IHiddenRegionFormatter> _function_2 = new Procedure1<IHiddenRegionFormatter>() {
-        @Override
-        public void apply(final IHiddenRegionFormatter it) {
-          it.noSpace();
-        }
+      final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
+        it.noSpace();
       };
       document.prepend(_keyword_2, _function_2);
     } else {
@@ -104,40 +95,28 @@ public class XbaseWithAnnotationsFormatter extends XbaseFormatter {
           {
             ISemanticRegionsFinder _regionFor_3 = this.textRegionExtensions.regionFor(pair);
             ISemanticRegion _keyword_3 = _regionFor_3.keyword("=");
-            final Procedure1<IHiddenRegionFormatter> _function_3 = new Procedure1<IHiddenRegionFormatter>() {
-              @Override
-              public void apply(final IHiddenRegionFormatter it) {
-                it.noSpace();
-              }
+            final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
+              it.noSpace();
             };
             document.surround(_keyword_3, _function_3);
             XExpression _value_2 = pair.getValue();
             document.<XExpression>format(_value_2);
             ISemanticRegionFinder _immediatelyFollowing = this.textRegionExtensions.immediatelyFollowing(pair);
             ISemanticRegion _keyword_4 = _immediatelyFollowing.keyword(",");
-            final Procedure1<IHiddenRegionFormatter> _function_4 = new Procedure1<IHiddenRegionFormatter>() {
-              @Override
-              public void apply(final IHiddenRegionFormatter it) {
-                it.noSpace();
-              }
+            final Procedure1<IHiddenRegionFormatter> _function_4 = (IHiddenRegionFormatter it) -> {
+              it.noSpace();
             };
             ISemanticRegion _prepend = document.prepend(_keyword_4, _function_4);
-            final Procedure1<IHiddenRegionFormatter> _function_5 = new Procedure1<IHiddenRegionFormatter>() {
-              @Override
-              public void apply(final IHiddenRegionFormatter it) {
-                it.oneSpace();
-              }
+            final Procedure1<IHiddenRegionFormatter> _function_5 = (IHiddenRegionFormatter it) -> {
+              it.oneSpace();
             };
             document.append(_prepend, _function_5);
           }
         }
         ISemanticRegionsFinder _regionFor_3 = this.textRegionExtensions.regionFor(ann);
         ISemanticRegion _keyword_3 = _regionFor_3.keyword(")");
-        final Procedure1<IHiddenRegionFormatter> _function_3 = new Procedure1<IHiddenRegionFormatter>() {
-          @Override
-          public void apply(final IHiddenRegionFormatter it) {
-            it.noSpace();
-          }
+        final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
+          it.noSpace();
         };
         document.prepend(_keyword_3, _function_3);
       }

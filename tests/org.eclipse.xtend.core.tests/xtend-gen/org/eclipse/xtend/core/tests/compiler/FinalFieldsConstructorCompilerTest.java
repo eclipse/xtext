@@ -57,22 +57,16 @@ public class FinalFieldsConstructorCompilerTest extends AbstractXtendCompilerTes
       final String source = _builder.toString();
       XtendClass _clazz = this.clazz(source);
       this._validationTestHelper.assertNoErrors(_clazz);
-      final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
-        @Override
-        public void accept(final CompilationTestHelper.Result it) {
-          Class<?> _compiledClass = it.getCompiledClass();
-          Constructor<?>[] _declaredConstructors = _compiledClass.getDeclaredConstructors();
-          final Function1<Constructor<?>, Boolean> _function = new Function1<Constructor<?>, Boolean>() {
-            @Override
-            public Boolean apply(final Constructor<?> it) {
-              Class<?>[] _parameterTypes = it.getParameterTypes();
-              List<Class<?>> _list = IterableExtensions.<Class<?>>toList(((Iterable<Class<?>>)Conversions.doWrapArray(_parameterTypes)));
-              return Boolean.valueOf(Objects.equal(_list, Collections.<Class<? extends Object>>unmodifiableList(CollectionLiterals.<Class<? extends Object>>newArrayList(int.class, String.class))));
-            }
-          };
-          boolean _exists = IterableExtensions.<Constructor<?>>exists(((Iterable<Constructor<?>>)Conversions.doWrapArray(_declaredConstructors)), _function);
-          Assert.assertTrue(_exists);
-        }
+      final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
+        Class<?> _compiledClass = it.getCompiledClass();
+        Constructor<?>[] _declaredConstructors = _compiledClass.getDeclaredConstructors();
+        final Function1<Constructor<?>, Boolean> _function_1 = (Constructor<?> it_1) -> {
+          Class<?>[] _parameterTypes = it_1.getParameterTypes();
+          List<Class<?>> _list = IterableExtensions.<Class<?>>toList(((Iterable<Class<?>>)Conversions.doWrapArray(_parameterTypes)));
+          return Boolean.valueOf(Objects.equal(_list, Collections.<Class<? extends Object>>unmodifiableList(CollectionLiterals.<Class<? extends Object>>newArrayList(int.class, String.class))));
+        };
+        boolean _exists = IterableExtensions.<Constructor<?>>exists(((Iterable<Constructor<?>>)Conversions.doWrapArray(_declaredConstructors)), _function_1);
+        Assert.assertTrue(_exists);
       };
       this.compilationTestHelper.compile(source, _function);
     } catch (Throwable _e) {
@@ -104,33 +98,24 @@ public class FinalFieldsConstructorCompilerTest extends AbstractXtendCompilerTes
       final String source = _builder.toString();
       XtendClass _clazz = this.clazz(source);
       this._validationTestHelper.assertNoErrors(_clazz);
-      final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
-        @Override
-        public void accept(final CompilationTestHelper.Result it) {
-          Class<?> _compiledClass = it.getCompiledClass();
-          Constructor<?>[] _declaredConstructors = _compiledClass.getDeclaredConstructors();
-          final Function1<Constructor<?>, Boolean> _function = new Function1<Constructor<?>, Boolean>() {
-            @Override
-            public Boolean apply(final Constructor<?> it) {
-              Class<?>[] _parameterTypes = it.getParameterTypes();
-              List<Class<?>> _list = IterableExtensions.<Class<?>>toList(((Iterable<Class<?>>)Conversions.doWrapArray(_parameterTypes)));
-              return Boolean.valueOf(Objects.equal(_list, Collections.<Class<? extends Object>>unmodifiableList(CollectionLiterals.<Class<? extends Object>>newArrayList(int.class, String.class))));
-            }
-          };
-          boolean _exists = IterableExtensions.<Constructor<?>>exists(((Iterable<Constructor<?>>)Conversions.doWrapArray(_declaredConstructors)), _function);
-          Assert.assertTrue(_exists);
-          Class<?> _compiledClass_1 = it.getCompiledClass();
-          Constructor<?>[] _declaredConstructors_1 = _compiledClass_1.getDeclaredConstructors();
-          final Function1<Constructor<?>, Boolean> _function_1 = new Function1<Constructor<?>, Boolean>() {
-            @Override
-            public Boolean apply(final Constructor<?> it) {
-              Class<?>[] _parameterTypes = it.getParameterTypes();
-              return Boolean.valueOf(((List<Class<?>>)Conversions.doWrapArray(_parameterTypes)).isEmpty());
-            }
-          };
-          boolean _exists_1 = IterableExtensions.<Constructor<?>>exists(((Iterable<Constructor<?>>)Conversions.doWrapArray(_declaredConstructors_1)), _function_1);
-          Assert.assertFalse(_exists_1);
-        }
+      final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
+        Class<?> _compiledClass = it.getCompiledClass();
+        Constructor<?>[] _declaredConstructors = _compiledClass.getDeclaredConstructors();
+        final Function1<Constructor<?>, Boolean> _function_1 = (Constructor<?> it_1) -> {
+          Class<?>[] _parameterTypes = it_1.getParameterTypes();
+          List<Class<?>> _list = IterableExtensions.<Class<?>>toList(((Iterable<Class<?>>)Conversions.doWrapArray(_parameterTypes)));
+          return Boolean.valueOf(Objects.equal(_list, Collections.<Class<? extends Object>>unmodifiableList(CollectionLiterals.<Class<? extends Object>>newArrayList(int.class, String.class))));
+        };
+        boolean _exists = IterableExtensions.<Constructor<?>>exists(((Iterable<Constructor<?>>)Conversions.doWrapArray(_declaredConstructors)), _function_1);
+        Assert.assertTrue(_exists);
+        Class<?> _compiledClass_1 = it.getCompiledClass();
+        Constructor<?>[] _declaredConstructors_1 = _compiledClass_1.getDeclaredConstructors();
+        final Function1<Constructor<?>, Boolean> _function_2 = (Constructor<?> it_1) -> {
+          Class<?>[] _parameterTypes = it_1.getParameterTypes();
+          return Boolean.valueOf(((List<Class<?>>)Conversions.doWrapArray(_parameterTypes)).isEmpty());
+        };
+        boolean _exists_1 = IterableExtensions.<Constructor<?>>exists(((Iterable<Constructor<?>>)Conversions.doWrapArray(_declaredConstructors_1)), _function_2);
+        Assert.assertFalse(_exists_1);
       };
       this.compilationTestHelper.compile(source, _function);
     } catch (Throwable _e) {
@@ -154,13 +139,10 @@ public class FinalFieldsConstructorCompilerTest extends AbstractXtendCompilerTes
       final String source = _builder.toString();
       XtendClass _clazz = this.clazz(source);
       this._validationTestHelper.assertNoErrors(_clazz);
-      final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
-        @Override
-        public void accept(final CompilationTestHelper.Result it) {
-          String _singleGeneratedCode = it.getSingleGeneratedCode();
-          boolean _contains = _singleGeneratedCode.contains("C(final T a)");
-          Assert.assertTrue(_contains);
-        }
+      final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
+        String _singleGeneratedCode = it.getSingleGeneratedCode();
+        boolean _contains = _singleGeneratedCode.contains("C(final T a)");
+        Assert.assertTrue(_contains);
       };
       this.compilationTestHelper.compile(source, _function);
     } catch (Throwable _e) {
@@ -296,22 +278,16 @@ public class FinalFieldsConstructorCompilerTest extends AbstractXtendCompilerTes
       final String source = _builder.toString();
       XtendClass _clazz = this.clazz(source);
       this._validationTestHelper.assertNoErrors(_clazz);
-      final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
-        @Override
-        public void accept(final CompilationTestHelper.Result it) {
-          Class<?> _compiledClass = it.getCompiledClass();
-          Constructor<?>[] _declaredConstructors = _compiledClass.getDeclaredConstructors();
-          final Function1<Constructor<?>, Boolean> _function = new Function1<Constructor<?>, Boolean>() {
-            @Override
-            public Boolean apply(final Constructor<?> it) {
-              Class<?>[] _parameterTypes = it.getParameterTypes();
-              List<Class<?>> _list = IterableExtensions.<Class<?>>toList(((Iterable<Class<?>>)Conversions.doWrapArray(_parameterTypes)));
-              return Boolean.valueOf(Objects.equal(_list, Collections.<Class<? extends Object>>unmodifiableList(CollectionLiterals.<Class<? extends Object>>newArrayList(int.class, String.class))));
-            }
-          };
-          boolean _exists = IterableExtensions.<Constructor<?>>exists(((Iterable<Constructor<?>>)Conversions.doWrapArray(_declaredConstructors)), _function);
-          Assert.assertTrue(_exists);
-        }
+      final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
+        Class<?> _compiledClass = it.getCompiledClass();
+        Constructor<?>[] _declaredConstructors = _compiledClass.getDeclaredConstructors();
+        final Function1<Constructor<?>, Boolean> _function_1 = (Constructor<?> it_1) -> {
+          Class<?>[] _parameterTypes = it_1.getParameterTypes();
+          List<Class<?>> _list = IterableExtensions.<Class<?>>toList(((Iterable<Class<?>>)Conversions.doWrapArray(_parameterTypes)));
+          return Boolean.valueOf(Objects.equal(_list, Collections.<Class<? extends Object>>unmodifiableList(CollectionLiterals.<Class<? extends Object>>newArrayList(int.class, String.class))));
+        };
+        boolean _exists = IterableExtensions.<Constructor<?>>exists(((Iterable<Constructor<?>>)Conversions.doWrapArray(_declaredConstructors)), _function_1);
+        Assert.assertTrue(_exists);
       };
       this.compilationTestHelper.compile(source, _function);
     } catch (Throwable _e) {
@@ -352,22 +328,16 @@ public class FinalFieldsConstructorCompilerTest extends AbstractXtendCompilerTes
       final String source = _builder.toString();
       XtendClass _clazz = this.clazz(source);
       this._validationTestHelper.assertNoErrors(_clazz);
-      final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
-        @Override
-        public void accept(final CompilationTestHelper.Result it) {
-          Class<?> _compiledClass = it.getCompiledClass();
-          Constructor<?>[] _declaredConstructors = _compiledClass.getDeclaredConstructors();
-          final Function1<Constructor<?>, Boolean> _function = new Function1<Constructor<?>, Boolean>() {
-            @Override
-            public Boolean apply(final Constructor<?> it) {
-              Class<?>[] _parameterTypes = it.getParameterTypes();
-              List<Class<?>> _list = IterableExtensions.<Class<?>>toList(((Iterable<Class<?>>)Conversions.doWrapArray(_parameterTypes)));
-              return Boolean.valueOf(Objects.equal(_list, Collections.<Class<? extends Object>>unmodifiableList(CollectionLiterals.<Class<? extends Object>>newArrayList(int.class, String.class))));
-            }
-          };
-          boolean _exists = IterableExtensions.<Constructor<?>>exists(((Iterable<Constructor<?>>)Conversions.doWrapArray(_declaredConstructors)), _function);
-          Assert.assertTrue(_exists);
-        }
+      final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
+        Class<?> _compiledClass = it.getCompiledClass();
+        Constructor<?>[] _declaredConstructors = _compiledClass.getDeclaredConstructors();
+        final Function1<Constructor<?>, Boolean> _function_1 = (Constructor<?> it_1) -> {
+          Class<?>[] _parameterTypes = it_1.getParameterTypes();
+          List<Class<?>> _list = IterableExtensions.<Class<?>>toList(((Iterable<Class<?>>)Conversions.doWrapArray(_parameterTypes)));
+          return Boolean.valueOf(Objects.equal(_list, Collections.<Class<? extends Object>>unmodifiableList(CollectionLiterals.<Class<? extends Object>>newArrayList(int.class, String.class))));
+        };
+        boolean _exists = IterableExtensions.<Constructor<?>>exists(((Iterable<Constructor<?>>)Conversions.doWrapArray(_declaredConstructors)), _function_1);
+        Assert.assertTrue(_exists);
       };
       this.compilationTestHelper.compile(source, _function);
     } catch (Throwable _e) {
@@ -396,22 +366,16 @@ public class FinalFieldsConstructorCompilerTest extends AbstractXtendCompilerTes
       final String source = _builder.toString();
       XtendClass _clazz = this.clazz(source);
       this._validationTestHelper.assertNoErrors(_clazz);
-      final IAcceptor<CompilationTestHelper.Result> _function = new IAcceptor<CompilationTestHelper.Result>() {
-        @Override
-        public void accept(final CompilationTestHelper.Result it) {
-          Class<?> _compiledClass = it.getCompiledClass();
-          Constructor<?>[] _declaredConstructors = _compiledClass.getDeclaredConstructors();
-          final Function1<Constructor<?>, Boolean> _function = new Function1<Constructor<?>, Boolean>() {
-            @Override
-            public Boolean apply(final Constructor<?> it) {
-              Class<?>[] _parameterTypes = it.getParameterTypes();
-              List<Class<?>> _list = IterableExtensions.<Class<?>>toList(((Iterable<Class<?>>)Conversions.doWrapArray(_parameterTypes)));
-              return Boolean.valueOf(Objects.equal(_list, Collections.<Class<? extends Object>>unmodifiableList(CollectionLiterals.<Class<? extends Object>>newArrayList(int.class, String.class))));
-            }
-          };
-          boolean _exists = IterableExtensions.<Constructor<?>>exists(((Iterable<Constructor<?>>)Conversions.doWrapArray(_declaredConstructors)), _function);
-          Assert.assertTrue(_exists);
-        }
+      final IAcceptor<CompilationTestHelper.Result> _function = (CompilationTestHelper.Result it) -> {
+        Class<?> _compiledClass = it.getCompiledClass();
+        Constructor<?>[] _declaredConstructors = _compiledClass.getDeclaredConstructors();
+        final Function1<Constructor<?>, Boolean> _function_1 = (Constructor<?> it_1) -> {
+          Class<?>[] _parameterTypes = it_1.getParameterTypes();
+          List<Class<?>> _list = IterableExtensions.<Class<?>>toList(((Iterable<Class<?>>)Conversions.doWrapArray(_parameterTypes)));
+          return Boolean.valueOf(Objects.equal(_list, Collections.<Class<? extends Object>>unmodifiableList(CollectionLiterals.<Class<? extends Object>>newArrayList(int.class, String.class))));
+        };
+        boolean _exists = IterableExtensions.<Constructor<?>>exists(((Iterable<Constructor<?>>)Conversions.doWrapArray(_declaredConstructors)), _function_1);
+        Assert.assertTrue(_exists);
       };
       this.compilationTestHelper.compile(source, _function);
     } catch (Throwable _e) {

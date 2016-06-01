@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.validation;
 
 import java.util.Arrays;
+import java.util.function.Consumer;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XBlockExpression;
@@ -29,7 +30,6 @@ import org.eclipse.xtext.xbase.XSynchronizedExpression;
 import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
 import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.validation.ImplicitReturnFinder;
 
 /**
@@ -109,26 +109,20 @@ public class XbaseImplicitReturnFinder implements ImplicitReturnFinder {
     XExpression _expression = expression.getExpression();
     this.findImplicitReturns(_expression, acceptor);
     EList<XCatchClause> _catchClauses = expression.getCatchClauses();
-    final Procedure1<XCatchClause> _function = new Procedure1<XCatchClause>() {
-      @Override
-      public void apply(final XCatchClause it) {
-        XExpression _expression = it.getExpression();
-        XbaseImplicitReturnFinder.this.findImplicitReturns(_expression, acceptor);
-      }
+    final Consumer<XCatchClause> _function = (XCatchClause it) -> {
+      XExpression _expression_1 = it.getExpression();
+      this.findImplicitReturns(_expression_1, acceptor);
     };
-    IterableExtensions.<XCatchClause>forEach(_catchClauses, _function);
+    _catchClauses.forEach(_function);
   }
   
   protected void _findImplicitReturns(final XSwitchExpression expression, final ImplicitReturnFinder.Acceptor acceptor) {
     EList<XCasePart> _cases = expression.getCases();
-    final Procedure1<XCasePart> _function = new Procedure1<XCasePart>() {
-      @Override
-      public void apply(final XCasePart it) {
-        XExpression _then = it.getThen();
-        XbaseImplicitReturnFinder.this.findImplicitReturns(_then, acceptor);
-      }
+    final Consumer<XCasePart> _function = (XCasePart it) -> {
+      XExpression _then = it.getThen();
+      this.findImplicitReturns(_then, acceptor);
     };
-    IterableExtensions.<XCasePart>forEach(_cases, _function);
+    _cases.forEach(_function);
     XExpression _default = expression.getDefault();
     this.findImplicitReturns(_default, acceptor);
   }

@@ -122,11 +122,8 @@ public class AbstractConstantExpressionsInterpreter {
       return null;
     }
     JvmParameterizedTypeReference _createJvmParameterizedTypeReference = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
-    final Procedure1<JvmParameterizedTypeReference> _function = new Procedure1<JvmParameterizedTypeReference>() {
-      @Override
-      public void apply(final JvmParameterizedTypeReference it) {
-        it.setType(type);
-      }
+    final Procedure1<JvmParameterizedTypeReference> _function = (JvmParameterizedTypeReference it) -> {
+      it.setType(type);
     };
     JvmTypeReference resultTypeRef = ObjectExtensions.<JvmParameterizedTypeReference>operator_doubleArrow(_createJvmParameterizedTypeReference, _function);
     ExclusiveRange _doubleDotLessThan = new ExclusiveRange(0, arrayDimensions, true);
@@ -158,117 +155,59 @@ public class AbstractConstantExpressionsInterpreter {
     {
       final String op = this.getOperator(binaryOperation);
       Object _switchResult = null;
-      boolean _matched = false;
-      if (Objects.equal(op, "+")) {
-        _matched=true;
-        _switchResult = this.constantOperators.plus(left, right);
-      }
-      if (!_matched) {
-        if (Objects.equal(op, "-")) {
-          _matched=true;
+      switch (op) {
+        case "+":
+          _switchResult = this.constantOperators.plus(left, right);
+          break;
+        case "-":
           _switchResult = this.constantOperators.minus(left, right);
-        }
-      }
-      if (!_matched) {
-        if (Objects.equal(op, "*")) {
-          _matched=true;
+          break;
+        case "*":
           _switchResult = this.constantOperators.multiply(left, right);
-        }
-      }
-      if (!_matched) {
-        if (Objects.equal(op, "/")) {
-          _matched=true;
+          break;
+        case "/":
           _switchResult = this.constantOperators.divide(left, right);
-        }
-      }
-      if (!_matched) {
-        if (Objects.equal(op, "%")) {
-          _matched=true;
+          break;
+        case "%":
           _switchResult = this.constantOperators.modulo(left, right);
-        }
-      }
-      if (!_matched) {
-        if (Objects.equal(op, "&&")) {
-          _matched=true;
+          break;
+        case "&&":
           _switchResult = Boolean.valueOf(this.constantOperators.and(left, right));
-        }
-      }
-      if (!_matched) {
-        if (Objects.equal(op, "||")) {
-          _matched=true;
+          break;
+        case "||":
           _switchResult = Boolean.valueOf(this.constantOperators.or(left, right));
-        }
-      }
-      if (!_matched) {
-        if (Objects.equal(op, "<<")) {
-          _matched=true;
+          break;
+        case "<<":
           _switchResult = this.constantOperators.shiftLeft(left, right);
-        }
-      }
-      if (!_matched) {
-        if (Objects.equal(op, ">>")) {
-          _matched=true;
+          break;
+        case ">>":
           _switchResult = this.constantOperators.shiftRight(left, right);
-        }
-      }
-      if (!_matched) {
-        if (Objects.equal(op, ">>>")) {
-          _matched=true;
+          break;
+        case ">>>":
           _switchResult = this.constantOperators.shiftRightUnsigned(left, right);
-        }
-      }
-      if (!_matched) {
-        if (Objects.equal(op, "<")) {
-          _matched=true;
+          break;
+        case "<":
           _switchResult = Boolean.valueOf(this.constantOperators.lessThan(left, right));
-        }
-      }
-      if (!_matched) {
-        if (Objects.equal(op, ">")) {
-          _matched=true;
+          break;
+        case ">":
           _switchResult = Boolean.valueOf(this.constantOperators.greaterThan(left, right));
-        }
-      }
-      if (!_matched) {
-        if (Objects.equal(op, "<=")) {
-          _matched=true;
+          break;
+        case "<=":
           _switchResult = Boolean.valueOf(this.constantOperators.lessEquals(left, right));
-        }
-      }
-      if (!_matched) {
-        if (Objects.equal(op, ">=")) {
-          _matched=true;
+          break;
+        case ">=":
           _switchResult = Boolean.valueOf(this.constantOperators.greaterEquals(left, right));
-        }
-      }
-      if (!_matched) {
-        if (Objects.equal(op, "==")) {
-          _matched=true;
-        }
-        if (!_matched) {
-          if (Objects.equal(op, "===")) {
-            _matched=true;
-          }
-        }
-        if (_matched) {
+          break;
+        case "==":
+        case "===":
           _switchResult = Boolean.valueOf(this.constantOperators.same(left, right));
-        }
-      }
-      if (!_matched) {
-        if (Objects.equal(op, "!=")) {
-          _matched=true;
-        }
-        if (!_matched) {
-          if (Objects.equal(op, "!==")) {
-            _matched=true;
-          }
-        }
-        if (_matched) {
+          break;
+        case "!=":
+        case "!==":
           _switchResult = Boolean.valueOf(this.constantOperators.notSame(left, right));
-        }
-      }
-      if (!_matched) {
-        throw new ConstantExpressionEvaluationException(((((("Couldn\'t evaluate binary operator \'" + op) + "\' on values ") + left) + " and ") + right));
+          break;
+        default:
+          throw new ConstantExpressionEvaluationException(((((("Couldn\'t evaluate binary operator \'" + op) + "\' on values ") + left) + " and ") + right));
       }
       _xblockexpression = _switchResult;
     }

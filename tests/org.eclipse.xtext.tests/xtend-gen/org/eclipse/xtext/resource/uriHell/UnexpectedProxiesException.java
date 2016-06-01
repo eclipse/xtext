@@ -26,12 +26,9 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 @SuppressWarnings("all")
 public class UnexpectedProxiesException extends RuntimeException {
   public UnexpectedProxiesException(final Map<EObject, Collection<EStructuralFeature.Setting>> unresolved) {
-    super(IterableExtensions.<URI>toSet(Iterables.<URI>concat(IterableExtensions.<EStructuralFeature.Setting, List<URI>>map(Iterables.<EStructuralFeature.Setting>concat(unresolved.values()), new Function1<EStructuralFeature.Setting, List<URI>>() {
-      @Override
-      public List<URI> apply(final EStructuralFeature.Setting it) {
-        return UnexpectedProxiesException.getURIs(it);
-      }
-    }))).toString());
+    super(IterableExtensions.<URI>toSet(Iterables.<URI>concat(IterableExtensions.<EStructuralFeature.Setting, List<URI>>map(Iterables.<EStructuralFeature.Setting>concat(unresolved.values()), ((Function1<EStructuralFeature.Setting, List<URI>>) (EStructuralFeature.Setting it) -> {
+      return UnexpectedProxiesException.getURIs(it);
+    })))).toString());
   }
   
   public static List<URI> getURIs(final EStructuralFeature.Setting setting) {
@@ -47,11 +44,8 @@ public class UnexpectedProxiesException extends RuntimeException {
     if (!_matched) {
       if (it instanceof List) {
         _matched=true;
-        final Function1<EObject, URI> _function = new Function1<EObject, URI>() {
-          @Override
-          public URI apply(final EObject it) {
-            return EcoreUtil.getURI(it);
-          }
+        final Function1<EObject, URI> _function = (EObject it_1) -> {
+          return EcoreUtil.getURI(it_1);
         };
         _switchResult = ListExtensions.<EObject, URI>map(((List<EObject>)it), _function);
       }

@@ -26,39 +26,30 @@ public class HiddenLeafs {
   }
   
   public int getLenght() {
-    final Function2<Integer, LeafInfo, Integer> _function = new Function2<Integer, LeafInfo, Integer>() {
-      @Override
-      public Integer apply(final Integer x, final LeafInfo i) {
-        ILeafNode _node = i.getNode();
-        int _length = 0;
-        if (_node!=null) {
-          _length=_node.getLength();
-        }
-        return Integer.valueOf(((x).intValue() + _length));
+    final Function2<Integer, LeafInfo, Integer> _function = (Integer x, LeafInfo i) -> {
+      ILeafNode _node = i.getNode();
+      int _length = 0;
+      if (_node!=null) {
+        _length=_node.getLength();
       }
+      return Integer.valueOf(((x).intValue() + _length));
     };
     return (int) IterableExtensions.<LeafInfo, Integer>fold(this.leafs, Integer.valueOf(0), _function);
   }
   
   public int getNewLines() {
-    final Function2<Integer, LeafInfo, Integer> _function = new Function2<Integer, LeafInfo, Integer>() {
-      @Override
-      public Integer apply(final Integer x, final LeafInfo i) {
-        int _newLines = i.getNewLines();
-        return Integer.valueOf(((x).intValue() + _newLines));
-      }
+    final Function2<Integer, LeafInfo, Integer> _function = (Integer x, LeafInfo i) -> {
+      int _newLines = i.getNewLines();
+      return Integer.valueOf(((x).intValue() + _newLines));
     };
     return (int) IterableExtensions.<LeafInfo, Integer>fold(this.leafs, Integer.valueOf(0), _function);
   }
   
   public int getNewLinesInComments() {
     Iterable<CommentInfo> _filter = Iterables.<CommentInfo>filter(this.leafs, CommentInfo.class);
-    final Function2<Integer, CommentInfo, Integer> _function = new Function2<Integer, CommentInfo, Integer>() {
-      @Override
-      public Integer apply(final Integer x, final CommentInfo i) {
-        int _newLines = i.getNewLines();
-        return Integer.valueOf(((x).intValue() + _newLines));
-      }
+    final Function2<Integer, CommentInfo, Integer> _function = (Integer x, CommentInfo i) -> {
+      int _newLines = i.getNewLines();
+      return Integer.valueOf(((x).intValue() + _newLines));
     };
     return (int) IterableExtensions.<CommentInfo, Integer>fold(_filter, Integer.valueOf(0), _function);
   }

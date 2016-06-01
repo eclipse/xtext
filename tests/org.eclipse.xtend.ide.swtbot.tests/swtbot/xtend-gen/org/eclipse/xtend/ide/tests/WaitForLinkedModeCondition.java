@@ -8,12 +8,11 @@
 package org.eclipse.xtend.ide.tests;
 
 import com.google.common.base.Objects;
-import org.eclipse.swtbot.swt.finder.waits.DefaultCondition;
 import org.eclipse.xtext.ui.refactoring.ui.RenameLinkedMode;
 import org.eclipse.xtext.ui.refactoring.ui.RenameRefactoringController;
 
 @SuppressWarnings("all")
-public class WaitForLinkedModeCondition extends DefaultCondition {
+public class WaitForLinkedModeCondition /* implements DefaultCondition  */{
   private RenameRefactoringController controller;
   
   public WaitForLinkedModeCondition(final RenameRefactoringController controller) {

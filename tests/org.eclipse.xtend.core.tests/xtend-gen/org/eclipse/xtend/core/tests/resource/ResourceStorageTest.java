@@ -221,11 +221,8 @@ public class ResourceStorageTest extends AbstractXtendTestCase {
       @Override
       protected void writeAssociationsAdapter(final BatchLinkableResource resource, final OutputStream zipOut) throws IOException {
         EList<Adapter> _eAdapters = resource.eAdapters();
-        final Function1<Adapter, Boolean> _function = new Function1<Adapter, Boolean>() {
-          @Override
-          public Boolean apply(final Adapter it) {
-            return Boolean.valueOf((it instanceof JvmModelAssociator.Adapter));
-          }
+        final Function1<Adapter, Boolean> _function = (Adapter it) -> {
+          return Boolean.valueOf((it instanceof JvmModelAssociator.Adapter));
         };
         final Adapter removeMe = IterableExtensions.<Adapter>findFirst(_eAdapters, _function);
         EList<Adapter> _eAdapters_1 = resource.eAdapters();

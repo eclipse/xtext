@@ -58,33 +58,30 @@ public class PreferenceTaskTagProvider implements ITaskTagProvider {
     ExclusiveRange _doubleDotLessThan = new ExclusiveRange(0, _size, true);
     for (final Integer i : _doubleDotLessThan) {
       TaskTag _taskTag = new TaskTag();
-      final Procedure1<TaskTag> _function = new Procedure1<TaskTag>() {
-        @Override
-        public void apply(final TaskTag it) {
-          String _get = tags.get((i).intValue());
-          it.setName(_get);
-          Priority _xifexpression = null;
-          int _size = prios.size();
-          boolean _greaterEqualsThan = (_size >= (i).intValue());
-          if (_greaterEqualsThan) {
-            Priority _xtrycatchfinallyexpression = null;
-            try {
-              String _get_1 = prios.get((i).intValue());
-              _xtrycatchfinallyexpression = Priority.valueOf(_get_1);
-            } catch (final Throwable _t) {
-              if (_t instanceof IllegalArgumentException) {
-                final IllegalArgumentException e = (IllegalArgumentException)_t;
-                _xtrycatchfinallyexpression = Priority.NORMAL;
-              } else {
-                throw Exceptions.sneakyThrow(_t);
-              }
+      final Procedure1<TaskTag> _function = (TaskTag it) -> {
+        String _get = tags.get((i).intValue());
+        it.setName(_get);
+        Priority _xifexpression = null;
+        int _size_1 = prios.size();
+        boolean _greaterEqualsThan = (_size_1 >= (i).intValue());
+        if (_greaterEqualsThan) {
+          Priority _xtrycatchfinallyexpression = null;
+          try {
+            String _get_1 = prios.get((i).intValue());
+            _xtrycatchfinallyexpression = Priority.valueOf(_get_1);
+          } catch (final Throwable _t) {
+            if (_t instanceof IllegalArgumentException) {
+              final IllegalArgumentException e = (IllegalArgumentException)_t;
+              _xtrycatchfinallyexpression = Priority.NORMAL;
+            } else {
+              throw Exceptions.sneakyThrow(_t);
             }
-            _xifexpression = _xtrycatchfinallyexpression;
-          } else {
-            _xifexpression = Priority.NORMAL;
           }
-          it.setPriority(_xifexpression);
+          _xifexpression = _xtrycatchfinallyexpression;
+        } else {
+          _xifexpression = Priority.NORMAL;
         }
+        it.setPriority(_xifexpression);
       };
       TaskTag _doubleArrow = ObjectExtensions.<TaskTag>operator_doubleArrow(_taskTag, _function);
       elements.add(_doubleArrow);
@@ -94,11 +91,8 @@ public class PreferenceTaskTagProvider implements ITaskTagProvider {
   
   public static String serializeTags(final List<TaskTag> tags) {
     Joiner _on = Joiner.on(",");
-    final Function1<TaskTag, String> _function = new Function1<TaskTag, String>() {
-      @Override
-      public String apply(final TaskTag it) {
-        return it.getName();
-      }
+    final Function1<TaskTag, String> _function = (TaskTag it) -> {
+      return it.getName();
     };
     List<String> _map = ListExtensions.<TaskTag, String>map(tags, _function);
     return _on.join(_map);
@@ -106,11 +100,8 @@ public class PreferenceTaskTagProvider implements ITaskTagProvider {
   
   public static String serializePriorities(final List<TaskTag> tags) {
     Joiner _on = Joiner.on(",");
-    final Function1<TaskTag, Priority> _function = new Function1<TaskTag, Priority>() {
-      @Override
-      public Priority apply(final TaskTag it) {
-        return it.getPriority();
-      }
+    final Function1<TaskTag, Priority> _function = (TaskTag it) -> {
+      return it.getPriority();
     };
     List<Priority> _map = ListExtensions.<TaskTag, Priority>map(tags, _function);
     return _on.join(_map);
@@ -126,16 +117,13 @@ public class PreferenceTaskTagProvider implements ITaskTagProvider {
       final String names = prefs.getPreference(PreferenceTaskTagProvider.TAGS_KEY);
       final String priorities = prefs.getPreference(PreferenceTaskTagProvider.PRIORITIES_KEY);
       TaskTags _taskTags = new TaskTags();
-      final Procedure1<TaskTags> _function = new Procedure1<TaskTags>() {
-        @Override
-        public void apply(final TaskTags it) {
-          String _preference = prefs.getPreference(PreferenceTaskTagProvider.CASE_SENSITIVE_KEY);
-          Boolean _valueOf = Boolean.valueOf(_preference);
-          it.setCaseSensitive((_valueOf).booleanValue());
-          List<TaskTag> _taskTags = it.getTaskTags();
-          List<TaskTag> _parseTags = PreferenceTaskTagProvider.parseTags(names, priorities);
-          Iterables.<TaskTag>addAll(_taskTags, _parseTags);
-        }
+      final Procedure1<TaskTags> _function = (TaskTags it) -> {
+        String _preference = prefs.getPreference(PreferenceTaskTagProvider.CASE_SENSITIVE_KEY);
+        Boolean _valueOf = Boolean.valueOf(_preference);
+        it.setCaseSensitive((_valueOf).booleanValue());
+        List<TaskTag> _taskTags_1 = it.getTaskTags();
+        List<TaskTag> _parseTags = PreferenceTaskTagProvider.parseTags(names, priorities);
+        Iterables.<TaskTag>addAll(_taskTags_1, _parseTags);
       };
       _xblockexpression = ObjectExtensions.<TaskTags>operator_doubleArrow(_taskTags, _function);
     }

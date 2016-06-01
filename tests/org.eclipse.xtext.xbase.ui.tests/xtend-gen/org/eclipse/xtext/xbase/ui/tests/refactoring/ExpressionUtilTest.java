@@ -215,18 +215,12 @@ public class ExpressionUtilTest extends AbstractXbaseTestCase {
     Resource _eResource = expression.eResource();
     TextSelection _textSelection = new TextSelection(selectionOffset, selectionLength);
     final List<XExpression> selectedExpressions = this.util.findSelectedSiblingExpressions(((XtextResource) _eResource), _textSelection);
-    final Function1<XExpression, ITextRegion> _function = new Function1<XExpression, ITextRegion>() {
-      @Override
-      public ITextRegion apply(final XExpression it) {
-        return ExpressionUtilTest.this.locationInFileProvider.getFullTextRegion(it);
-      }
+    final Function1<XExpression, ITextRegion> _function = (XExpression it) -> {
+      return this.locationInFileProvider.getFullTextRegion(it);
     };
     List<ITextRegion> _map = ListExtensions.<XExpression, ITextRegion>map(selectedExpressions, _function);
-    final Function2<ITextRegion, ITextRegion, ITextRegion> _function_1 = new Function2<ITextRegion, ITextRegion, ITextRegion>() {
-      @Override
-      public ITextRegion apply(final ITextRegion a, final ITextRegion b) {
-        return a.merge(b);
-      }
+    final Function2<ITextRegion, ITextRegion, ITextRegion> _function_1 = (ITextRegion a, ITextRegion b) -> {
+      return a.merge(b);
     };
     final ITextRegion selectedRegion = IterableExtensions.<ITextRegion>reduce(_map, _function_1);
     int _offset = selectedRegion.getOffset();

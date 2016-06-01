@@ -55,12 +55,9 @@ public class JvmAnnotationTypeDeclarationImpl extends JvmTypeDeclarationImpl<Jvm
   @Override
   public AnnotationTypeElementDeclaration findDeclaredAnnotationTypeElement(final String name) {
     Iterable<? extends AnnotationTypeElementDeclaration> _declaredAnnotationTypeElements = this.getDeclaredAnnotationTypeElements();
-    final Function1<AnnotationTypeElementDeclaration, Boolean> _function = new Function1<AnnotationTypeElementDeclaration, Boolean>() {
-      @Override
-      public Boolean apply(final AnnotationTypeElementDeclaration it) {
-        String _simpleName = it.getSimpleName();
-        return Boolean.valueOf(Objects.equal(_simpleName, name));
-      }
+    final Function1<AnnotationTypeElementDeclaration, Boolean> _function = (AnnotationTypeElementDeclaration it) -> {
+      String _simpleName = it.getSimpleName();
+      return Boolean.valueOf(Objects.equal(_simpleName, name));
     };
     return IterableExtensions.findFirst(_declaredAnnotationTypeElements, _function);
   }
@@ -69,12 +66,9 @@ public class JvmAnnotationTypeDeclarationImpl extends JvmTypeDeclarationImpl<Jvm
   public Iterable<? extends AnnotationTypeElementDeclaration> getDeclaredAnnotationTypeElements() {
     JvmAnnotationType _delegate = this.getDelegate();
     EList<JvmMember> _members = _delegate.getMembers();
-    final Function1<JvmMember, MemberDeclaration> _function = new Function1<JvmMember, MemberDeclaration>() {
-      @Override
-      public MemberDeclaration apply(final JvmMember it) {
-        CompilationUnitImpl _compilationUnit = JvmAnnotationTypeDeclarationImpl.this.getCompilationUnit();
-        return _compilationUnit.toMemberDeclaration(it);
-      }
+    final Function1<JvmMember, MemberDeclaration> _function = (JvmMember it) -> {
+      CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+      return _compilationUnit.toMemberDeclaration(it);
     };
     List<MemberDeclaration> _map = ListExtensions.<JvmMember, MemberDeclaration>map(_members, _function);
     return Iterables.<AnnotationTypeElementDeclaration>filter(_map, AnnotationTypeElementDeclaration.class);

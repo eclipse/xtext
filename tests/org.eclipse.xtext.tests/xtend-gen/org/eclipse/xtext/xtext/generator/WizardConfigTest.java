@@ -35,18 +35,15 @@ public class WizardConfigTest {
   @Test
   public void testMavenProjectNames() {
     StandardProjectConfig _standardProjectConfig = new StandardProjectConfig();
-    final Procedure1<StandardProjectConfig> _function = new Procedure1<StandardProjectConfig>() {
-      @Override
-      public void apply(final StandardProjectConfig it) {
-        it.setBaseName("com.acme");
-        it.setMavenLayout(true);
-        BundleProjectConfig _runtimeTest = it.getRuntimeTest();
-        _runtimeTest.setEnabled(true);
-        BundleProjectConfig _eclipsePlugin = it.getEclipsePlugin();
-        _eclipsePlugin.setEnabled(true);
-        BundleProjectConfig _eclipsePluginTest = it.getEclipsePluginTest();
-        _eclipsePluginTest.setEnabled(true);
-      }
+    final Procedure1<StandardProjectConfig> _function = (StandardProjectConfig it) -> {
+      it.setBaseName("com.acme");
+      it.setMavenLayout(true);
+      BundleProjectConfig _runtimeTest = it.getRuntimeTest();
+      _runtimeTest.setEnabled(true);
+      BundleProjectConfig _eclipsePlugin = it.getEclipsePlugin();
+      _eclipsePlugin.setEnabled(true);
+      BundleProjectConfig _eclipsePluginTest = it.getEclipsePluginTest();
+      _eclipsePluginTest.setEnabled(true);
     };
     final StandardProjectConfig cfg = ObjectExtensions.<StandardProjectConfig>operator_doubleArrow(_standardProjectConfig, _function);
     cfg.initialize(this.injector);
@@ -61,17 +58,14 @@ public class WizardConfigTest {
   @Test
   public void testPlainProjectNames() {
     StandardProjectConfig _standardProjectConfig = new StandardProjectConfig();
-    final Procedure1<StandardProjectConfig> _function = new Procedure1<StandardProjectConfig>() {
-      @Override
-      public void apply(final StandardProjectConfig it) {
-        it.setBaseName("com.acme");
-        BundleProjectConfig _runtimeTest = it.getRuntimeTest();
-        _runtimeTest.setEnabled(true);
-        BundleProjectConfig _eclipsePlugin = it.getEclipsePlugin();
-        _eclipsePlugin.setEnabled(true);
-        BundleProjectConfig _eclipsePluginTest = it.getEclipsePluginTest();
-        _eclipsePluginTest.setEnabled(true);
-      }
+    final Procedure1<StandardProjectConfig> _function = (StandardProjectConfig it) -> {
+      it.setBaseName("com.acme");
+      BundleProjectConfig _runtimeTest = it.getRuntimeTest();
+      _runtimeTest.setEnabled(true);
+      BundleProjectConfig _eclipsePlugin = it.getEclipsePlugin();
+      _eclipsePlugin.setEnabled(true);
+      BundleProjectConfig _eclipsePluginTest = it.getEclipsePluginTest();
+      _eclipsePluginTest.setEnabled(true);
     };
     final StandardProjectConfig cfg = ObjectExtensions.<StandardProjectConfig>operator_doubleArrow(_standardProjectConfig, _function);
     cfg.initialize(this.injector);

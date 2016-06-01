@@ -43,11 +43,8 @@ public class IndexAwareNameEnvironment implements INameEnvironment {
   
   @Override
   public NameEnvironmentAnswer findType(final char[][] compoundTypeName) {
-    final Function1<char[], String> _function = new Function1<char[], String>() {
-      @Override
-      public String apply(final char[] it) {
-        return String.valueOf(it);
-      }
+    final Function1<char[], String> _function = (char[] it) -> {
+      return String.valueOf(it);
     };
     List<String> _map = ListExtensions.<char[], String>map(((List<char[]>)Conversions.doWrapArray(compoundTypeName)), _function);
     final QualifiedName className = QualifiedName.create(_map);
@@ -98,11 +95,8 @@ public class IndexAwareNameEnvironment implements INameEnvironment {
   
   @Override
   public NameEnvironmentAnswer findType(final char[] typeName, final char[][] packageName) {
-    final Function1<char[], String> _function = new Function1<char[], String>() {
-      @Override
-      public String apply(final char[] it) {
-        return String.valueOf(it);
-      }
+    final Function1<char[], String> _function = (char[] it) -> {
+      return String.valueOf(it);
     };
     List<String> _map = ListExtensions.<char[], String>map(((List<char[]>)Conversions.doWrapArray(packageName)), _function);
     final ArrayList<String> list = new ArrayList<String>(_map);

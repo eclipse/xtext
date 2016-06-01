@@ -163,12 +163,9 @@ public class MutableJvmAnnotationTypeDeclarationImpl extends JvmAnnotationTypeDe
   @Override
   public MutableAnnotationTypeElementDeclaration findDeclaredAnnotationTypeElement(final String name) {
     Iterable<? extends MutableAnnotationTypeElementDeclaration> _declaredAnnotationTypeElements = this.getDeclaredAnnotationTypeElements();
-    final Function1<MutableAnnotationTypeElementDeclaration, Boolean> _function = new Function1<MutableAnnotationTypeElementDeclaration, Boolean>() {
-      @Override
-      public Boolean apply(final MutableAnnotationTypeElementDeclaration it) {
-        String _simpleName = it.getSimpleName();
-        return Boolean.valueOf(Objects.equal(_simpleName, name));
-      }
+    final Function1<MutableAnnotationTypeElementDeclaration, Boolean> _function = (MutableAnnotationTypeElementDeclaration it) -> {
+      String _simpleName = it.getSimpleName();
+      return Boolean.valueOf(Objects.equal(_simpleName, name));
     };
     return IterableExtensions.findFirst(_declaredAnnotationTypeElements, _function);
   }
@@ -177,12 +174,9 @@ public class MutableJvmAnnotationTypeDeclarationImpl extends JvmAnnotationTypeDe
   public Iterable<? extends MutableAnnotationTypeElementDeclaration> getDeclaredAnnotationTypeElements() {
     JvmAnnotationType _delegate = this.getDelegate();
     EList<JvmMember> _members = _delegate.getMembers();
-    final Function1<JvmMember, MemberDeclaration> _function = new Function1<JvmMember, MemberDeclaration>() {
-      @Override
-      public MemberDeclaration apply(final JvmMember it) {
-        CompilationUnitImpl _compilationUnit = MutableJvmAnnotationTypeDeclarationImpl.this.getCompilationUnit();
-        return _compilationUnit.toMemberDeclaration(it);
-      }
+    final Function1<JvmMember, MemberDeclaration> _function = (JvmMember it) -> {
+      CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+      return _compilationUnit.toMemberDeclaration(it);
     };
     List<MemberDeclaration> _map = ListExtensions.<JvmMember, MemberDeclaration>map(_members, _function);
     return Iterables.<MutableAnnotationTypeElementDeclaration>filter(_map, MutableAnnotationTypeElementDeclaration.class);

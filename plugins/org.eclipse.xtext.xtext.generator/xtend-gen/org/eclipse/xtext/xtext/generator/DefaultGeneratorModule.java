@@ -56,11 +56,8 @@ public class DefaultGeneratorModule extends AbstractGenericModule {
   
   public void configureLineSeparatorInformation(final Binder binder) {
     AnnotatedBindingBuilder<ILineSeparatorInformation> _bind = binder.<ILineSeparatorInformation>bind(ILineSeparatorInformation.class);
-    final ILineSeparatorInformation _function = new ILineSeparatorInformation() {
-      @Override
-      public String getLineSeparator() {
-        return DefaultGeneratorModule.this.code.getLineDelimiter();
-      }
+    final ILineSeparatorInformation _function = () -> {
+      return this.code.getLineDelimiter();
     };
     _bind.toInstance(_function);
   }
@@ -68,12 +65,9 @@ public class DefaultGeneratorModule extends AbstractGenericModule {
   public void configureIEncodingProvider(final Binder binder) {
     AnnotatedBindingBuilder<IEncodingProvider> _bind = binder.<IEncodingProvider>bind(IEncodingProvider.class);
     IEncodingProvider.Runtime _runtime = new IEncodingProvider.Runtime();
-    final Procedure1<IEncodingProvider.Runtime> _function = new Procedure1<IEncodingProvider.Runtime>() {
-      @Override
-      public void apply(final IEncodingProvider.Runtime it) {
-        String _encoding = DefaultGeneratorModule.this.code.getEncoding();
-        it.setDefaultEncoding(_encoding);
-      }
+    final Procedure1<IEncodingProvider.Runtime> _function = (IEncodingProvider.Runtime it) -> {
+      String _encoding = this.code.getEncoding();
+      it.setDefaultEncoding(_encoding);
     };
     IEncodingProvider.Runtime _doubleArrow = ObjectExtensions.<IEncodingProvider.Runtime>operator_doubleArrow(_runtime, _function);
     _bind.toInstance(_doubleArrow);

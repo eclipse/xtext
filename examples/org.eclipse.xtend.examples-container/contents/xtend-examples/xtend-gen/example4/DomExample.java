@@ -46,80 +46,47 @@ public class DomExample {
   
   public Html buildDom() {
     Html _html = new Html();
-    final Procedure1<Html> _function = new Procedure1<Html>() {
-      @Override
-      public void apply(final Html it) {
-        final Procedure1<Head> _function = new Procedure1<Head>() {
-          @Override
-          public void apply(final Head it) {
-            final Procedure1<Title> _function = new Procedure1<Title>() {
-              @Override
-              public void apply(final Title it) {
-                DomExample.this.db.$(it, "HTML with Xtend");
-              }
-            };
-            DomExample.this.db.title(it, _function);
-          }
+    final Procedure1<Html> _function = (Html it) -> {
+      final Procedure1<Head> _function_1 = (Head it_1) -> {
+        final Procedure1<Title> _function_2 = (Title it_2) -> {
+          this.db.$(it_2, "HTML with Xtend");
         };
-        DomExample.this.db.head(it, _function);
-        final Procedure1<Body> _function_1 = new Procedure1<Body>() {
-          @Override
-          public void apply(final Body it) {
-            final Procedure1<H1> _function = new Procedure1<H1>() {
-              @Override
-              public void apply(final H1 it) {
-                DomExample.this.db.$(it, "HTML with Xtend");
-              }
-            };
-            DomExample.this.db.h1(it, _function);
-            final Procedure1<P> _function_1 = new Procedure1<P>() {
-              @Override
-              public void apply(final P it) {
-                DomExample.this.db.$(it, "this format can be used as an alternative to templates.");
-              }
-            };
-            DomExample.this.db.p(it, _function_1);
-            final Procedure1<A> _function_2 = new Procedure1<A>() {
-              @Override
-              public void apply(final A it) {
-                DomExample.this.db.$(it, "Xtend");
-              }
-            };
-            DomExample.this.db.a(it, "http://www.xtend-lang.org", _function_2);
-            final Procedure1<P> _function_3 = new Procedure1<P>() {
-              @Override
-              public void apply(final P it) {
-                DomExample.this.db.$(it, "This is some ");
-                final Procedure1<B> _function = new Procedure1<B>() {
-                  @Override
-                  public void apply(final B it) {
-                    DomExample.this.db.$(it, "mixed");
-                  }
-                };
-                DomExample.this.db.b(it, _function);
-                DomExample.this.db.$(it, " text. For more see the ");
-                final Procedure1<A> _function_1 = new Procedure1<A>() {
-                  @Override
-                  public void apply(final A it) {
-                    DomExample.this.db.$(it, "Xtend");
-                  }
-                };
-                DomExample.this.db.a(it, "http://www.xtend-lang.org", _function_1);
-                DomExample.this.db.$(it, " project");
-              }
-            };
-            DomExample.this.db.p(it, _function_3);
-            final Procedure1<P> _function_4 = new Procedure1<P>() {
-              @Override
-              public void apply(final P it) {
-                DomExample.this.db.$(it, "More text.");
-              }
-            };
-            DomExample.this.db.p(it, _function_4);
-          }
+        this.db.title(it_1, _function_2);
+      };
+      this.db.head(it, _function_1);
+      final Procedure1<Body> _function_2 = (Body it_1) -> {
+        final Procedure1<H1> _function_3 = (H1 it_2) -> {
+          this.db.$(it_2, "HTML with Xtend");
         };
-        DomExample.this.db.body(it, _function_1);
-      }
+        this.db.h1(it_1, _function_3);
+        final Procedure1<P> _function_4 = (P it_2) -> {
+          this.db.$(it_2, "this format can be used as an alternative to templates.");
+        };
+        this.db.p(it_1, _function_4);
+        final Procedure1<A> _function_5 = (A it_2) -> {
+          this.db.$(it_2, "Xtend");
+        };
+        this.db.a(it_1, "http://www.xtend-lang.org", _function_5);
+        final Procedure1<P> _function_6 = (P it_2) -> {
+          this.db.$(it_2, "This is some ");
+          final Procedure1<B> _function_7 = (B it_3) -> {
+            this.db.$(it_3, "mixed");
+          };
+          this.db.b(it_2, _function_7);
+          this.db.$(it_2, " text. For more see the ");
+          final Procedure1<A> _function_8 = (A it_3) -> {
+            this.db.$(it_3, "Xtend");
+          };
+          this.db.a(it_2, "http://www.xtend-lang.org", _function_8);
+          this.db.$(it_2, " project");
+        };
+        this.db.p(it_1, _function_6);
+        final Procedure1<P> _function_7 = (P it_2) -> {
+          this.db.$(it_2, "More text.");
+        };
+        this.db.p(it_1, _function_7);
+      };
+      this.db.body(it, _function_2);
     };
     return ObjectExtensions.<Html>operator_doubleArrow(_html, _function);
   }

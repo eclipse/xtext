@@ -28,18 +28,15 @@ public class Bug462047LangJvmModelInferrer extends AbstractModelInferrer {
     String _name = element.getName();
     String _plus = ("CORE." + _name);
     JvmGenericType _class = this._jvmTypesBuilder.toClass(element, _plus);
-    final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
-      @Override
-      public void apply(final JvmGenericType it) {
-        StringConcatenation _builder = new StringConcatenation();
-        JvmGenericType _ref = element.getRef();
-        String _qualifiedName = null;
-        if (_ref!=null) {
-          _qualifiedName=_ref.getQualifiedName();
-        }
-        _builder.append(_qualifiedName, "");
-        Bug462047LangJvmModelInferrer.this._jvmTypesBuilder.setDocumentation(it, _builder.toString());
+    final Procedure1<JvmGenericType> _function = (JvmGenericType it) -> {
+      StringConcatenation _builder = new StringConcatenation();
+      JvmGenericType _ref = element.getRef();
+      String _qualifiedName = null;
+      if (_ref!=null) {
+        _qualifiedName=_ref.getQualifiedName();
       }
+      _builder.append(_qualifiedName, "");
+      this._jvmTypesBuilder.setDocumentation(it, _builder.toString());
     };
     acceptor.<JvmGenericType>accept(_class, _function);
   }

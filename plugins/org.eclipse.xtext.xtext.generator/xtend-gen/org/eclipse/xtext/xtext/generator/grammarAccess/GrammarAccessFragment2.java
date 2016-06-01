@@ -1120,18 +1120,12 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
    */
   protected List<Grammar> getEffectivelyUsedGrammars(final Grammar grammar) {
     List<AbstractRule> _allRules = GrammarUtil.allRules(grammar);
-    final Function1<AbstractRule, Grammar> _function = new Function1<AbstractRule, Grammar>() {
-      @Override
-      public Grammar apply(final AbstractRule it) {
-        return GrammarUtil.getGrammar(it);
-      }
+    final Function1<AbstractRule, Grammar> _function = (AbstractRule it) -> {
+      return GrammarUtil.getGrammar(it);
     };
     List<Grammar> _map = ListExtensions.<AbstractRule, Grammar>map(_allRules, _function);
-    final Function1<Grammar, Boolean> _function_1 = new Function1<Grammar, Boolean>() {
-      @Override
-      public Boolean apply(final Grammar it) {
-        return Boolean.valueOf((it != grammar));
-      }
+    final Function1<Grammar, Boolean> _function_1 = (Grammar it) -> {
+      return Boolean.valueOf((it != grammar));
     };
     Iterable<Grammar> _filter = IterableExtensions.<Grammar>filter(_map, _function_1);
     Set<Grammar> _set = IterableExtensions.<Grammar>toSet(_filter);

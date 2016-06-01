@@ -53,20 +53,17 @@ public class AssociationHierarchyBuilder extends DefaultCallHierarchyBuilder {
     boolean _isJvmType = this.isJvmType(_eClass);
     if (_isJvmType) {
       URI _eObjectURI = description.getEObjectURI();
-      final IUnitOfWork<IEObjectDescription, EObject> _function = new IUnitOfWork<IEObjectDescription, EObject>() {
-        @Override
-        public IEObjectDescription exec(final EObject targetElement) throws Exception {
-          final EObject sourceElement = AssociationHierarchyBuilder.this._iJvmModelAssociations.getPrimarySourceElement(targetElement);
-          EClass _eClass = null;
-          if (sourceElement!=null) {
-            _eClass=sourceElement.eClass();
-          }
-          boolean _isEntity = AssociationHierarchyBuilder.this.isEntity(_eClass);
-          if (_isEntity) {
-            return AssociationHierarchyBuilder.this.getDescription(sourceElement);
-          }
-          return null;
+      final IUnitOfWork<IEObjectDescription, EObject> _function = (EObject targetElement) -> {
+        final EObject sourceElement = this._iJvmModelAssociations.getPrimarySourceElement(targetElement);
+        EClass _eClass_1 = null;
+        if (sourceElement!=null) {
+          _eClass_1=sourceElement.eClass();
         }
+        boolean _isEntity = this.isEntity(_eClass_1);
+        if (_isEntity) {
+          return this.getDescription(sourceElement);
+        }
+        return null;
       };
       return this.<IEObjectDescription>readOnly(_eObjectURI, _function);
     }
@@ -78,12 +75,9 @@ public class AssociationHierarchyBuilder extends DefaultCallHierarchyBuilder {
     if (_isEntity) {
       return description;
     }
-    final IUnitOfWork<IEObjectDescription, EObject> _function_1 = new IUnitOfWork<IEObjectDescription, EObject>() {
-      @Override
-      public IEObjectDescription exec(final EObject object) throws Exception {
-        Entity _containerOfType = EcoreUtil2.<Entity>getContainerOfType(object, Entity.class);
-        return AssociationHierarchyBuilder.this.getDescription(_containerOfType);
-      }
+    final IUnitOfWork<IEObjectDescription, EObject> _function_1 = (EObject object) -> {
+      Entity _containerOfType = EcoreUtil2.<Entity>getContainerOfType(object, Entity.class);
+      return this.getDescription(_containerOfType);
     };
     return this.<IEObjectDescription>readOnly(objectURI, _function_1);
   }
@@ -94,19 +88,16 @@ public class AssociationHierarchyBuilder extends DefaultCallHierarchyBuilder {
       return false;
     }
     URI _sourceEObjectUri = reference.getSourceEObjectUri();
-    final IUnitOfWork<Boolean, EObject> _function = new IUnitOfWork<Boolean, EObject>() {
-      @Override
-      public Boolean exec(final EObject referenceOwner) throws Exception {
-        Property _containerOfType = null;
-        if (referenceOwner!=null) {
-          _containerOfType=EcoreUtil2.<Property>getContainerOfType(referenceOwner, Property.class);
-        }
-        Entity _containerOfType_1 = null;
-        if (_containerOfType!=null) {
-          _containerOfType_1=EcoreUtil2.<Entity>getContainerOfType(_containerOfType, Entity.class);
-        }
-        return Boolean.valueOf((_containerOfType_1 != null));
+    final IUnitOfWork<Boolean, EObject> _function = (EObject referenceOwner) -> {
+      Property _containerOfType = null;
+      if (referenceOwner!=null) {
+        _containerOfType=EcoreUtil2.<Property>getContainerOfType(referenceOwner, Property.class);
       }
+      Entity _containerOfType_1 = null;
+      if (_containerOfType!=null) {
+        _containerOfType_1=EcoreUtil2.<Entity>getContainerOfType(_containerOfType, Entity.class);
+      }
+      return Boolean.valueOf((_containerOfType_1 != null));
     };
     return (this.<Boolean>readOnly(_sourceEObjectUri, _function)).booleanValue();
   }

@@ -17,11 +17,8 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 public class Case_6 {
   protected Object _transform(final EPackage packageDecl) {
     EList<EObject> _eContents = packageDecl.eContents();
-    final Function1<EObject, Object> _function = new Function1<EObject, Object>() {
-      @Override
-      public Object apply(final EObject e) {
-        return Case_6.this.transform(((EStructuralFeature) e));
-      }
+    final Function1<EObject, Object> _function = (EObject e) -> {
+      return this.transform(((EStructuralFeature) e));
     };
     return ListExtensions.<EObject, Object>map(_eContents, _function);
   }
@@ -37,11 +34,8 @@ public class Case_6 {
   
   protected Object _transform(final EClass model) {
     EList<ETypeParameter> _eTypeParameters = model.getETypeParameters();
-    final Function1<ETypeParameter, Object> _function = new Function1<ETypeParameter, Object>() {
-      @Override
-      public Object apply(final ETypeParameter e) {
-        return Case_6.this.transform(e);
-      }
+    final Function1<ETypeParameter, Object> _function = (ETypeParameter e) -> {
+      return this.transform(e);
     };
     return ListExtensions.<ETypeParameter, Object>map(_eTypeParameters, _function);
   }

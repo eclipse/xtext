@@ -33,37 +33,22 @@ public class CheckMutableEnumerationTypeDeclarationProcessor implements Register
   public void doTransform(final List<? extends MutableEnumerationTypeDeclaration> annotatedTargetElements, @Extension final TransformationContext context) {
     for (final MutableEnumerationTypeDeclaration enumeration : annotatedTargetElements) {
       {
-        final Procedure1<String> _function = new Procedure1<String>() {
-          @Override
-          public void apply(final String identifier) {
-            final Procedure1<MutableEnumerationValueDeclaration> _function = new Procedure1<MutableEnumerationValueDeclaration>() {
-              @Override
-              public void apply(final MutableEnumerationValueDeclaration it) {
-              }
-            };
-            MutableEnumerationValueDeclaration _addValue = enumeration.addValue(identifier, _function);
-            _addValue.remove();
-          }
+        final Procedure1<String> _function = (String identifier) -> {
+          final Procedure1<MutableEnumerationValueDeclaration> _function_1 = (MutableEnumerationValueDeclaration it) -> {
+          };
+          MutableEnumerationValueDeclaration _addValue = enumeration.addValue(identifier, _function_1);
+          _addValue.remove();
         };
         MutableAssert.assertValidJavaIdentifier("name", _function);
-        final Procedure0 _function_1 = new Procedure0() {
-          @Override
-          public void apply() {
-            enumeration.addValue("foo", null);
-          }
+        final Procedure0 _function_1 = () -> {
+          enumeration.addValue("foo", null);
         };
         MutableAssert.<IllegalArgumentException>assertThrowable(IllegalArgumentException.class, "initializer cannot be null", _function_1);
-        final Procedure0 _function_2 = new Procedure0() {
-          @Override
-          public void apply() {
-            final Procedure1<MutableEnumerationValueDeclaration> _function = new Procedure1<MutableEnumerationValueDeclaration>() {
-              @Override
-              public void apply(final MutableEnumerationValueDeclaration it) {
-              }
-            };
-            MutableEnumerationValueDeclaration _addValue = enumeration.addValue("A", _function);
-            _addValue.setVisibility(Visibility.PRIVATE);
-          }
+        final Procedure0 _function_2 = () -> {
+          final Procedure1<MutableEnumerationValueDeclaration> _function_3 = (MutableEnumerationValueDeclaration it) -> {
+          };
+          MutableEnumerationValueDeclaration _addValue = enumeration.addValue("A", _function_3);
+          _addValue.setVisibility(Visibility.PRIVATE);
         };
         MutableAssert.<UnsupportedOperationException>assertThrowable(UnsupportedOperationException.class, "It is not possible to change visibility of enumeration value.", _function_2);
       }

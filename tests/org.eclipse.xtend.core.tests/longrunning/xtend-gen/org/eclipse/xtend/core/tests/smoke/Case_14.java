@@ -46,40 +46,28 @@ public class Case_14 extends AbstractXtendTestCase {
   
   @Test
   public void testInference() {
-    final Provider<IJvmModelInferrer> _function = new Provider<IJvmModelInferrer>() {
-      @Override
-      public IJvmModelInferrer get() {
-        final IJvmModelInferrer _function = new IJvmModelInferrer() {
-          @Override
-          public void infer(final EObject obj, final IJvmDeclaredTypeAcceptor acceptor, final boolean preIndexing) {
-            final JvmGenericType firstType = Case_14.this._jvmTypesBuilder.toClass(obj, "foo.Bar");
-            final JvmGenericType secondType = Case_14.this._jvmTypesBuilder.toClass(obj, "foo.Baz");
-            Resource _eResource = secondType.eResource();
-            Assert.assertNull(_eResource);
-            final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
-              @Override
-              public void apply(final JvmGenericType it) {
-                it.setAbstract(true);
-                Resource _eResource = firstType.eResource();
-                Assert.assertNotNull(_eResource);
-                Resource _eResource_1 = secondType.eResource();
-                Assert.assertNotNull(_eResource_1);
-              }
-            };
-            acceptor.<JvmGenericType>accept(firstType, _function);
-            final Procedure1<JvmGenericType> _function_1 = new Procedure1<JvmGenericType>() {
-              @Override
-              public void apply(final JvmGenericType it) {
-                it.setAbstract(true);
-                Resource _eResource = firstType.eResource();
-                Assert.assertNotNull(_eResource);
-              }
-            };
-            acceptor.<JvmGenericType>accept(secondType, _function_1);
-          }
+    final Provider<IJvmModelInferrer> _function = () -> {
+      final IJvmModelInferrer _function_1 = (EObject obj, IJvmDeclaredTypeAcceptor acceptor, boolean preIndexing) -> {
+        final JvmGenericType firstType = this._jvmTypesBuilder.toClass(obj, "foo.Bar");
+        final JvmGenericType secondType = this._jvmTypesBuilder.toClass(obj, "foo.Baz");
+        Resource _eResource = secondType.eResource();
+        Assert.assertNull(_eResource);
+        final Procedure1<JvmGenericType> _function_2 = (JvmGenericType it) -> {
+          it.setAbstract(true);
+          Resource _eResource_1 = firstType.eResource();
+          Assert.assertNotNull(_eResource_1);
+          Resource _eResource_2 = secondType.eResource();
+          Assert.assertNotNull(_eResource_2);
         };
-        return _function;
-      }
+        acceptor.<JvmGenericType>accept(firstType, _function_2);
+        final Procedure1<JvmGenericType> _function_3 = (JvmGenericType it) -> {
+          it.setAbstract(true);
+          Resource _eResource_1 = firstType.eResource();
+          Assert.assertNotNull(_eResource_1);
+        };
+        acceptor.<JvmGenericType>accept(secondType, _function_3);
+      };
+      return _function_1;
     };
     this.assoc.setInferrerProvider(_function);
     this.resource.setDerivedStateComputer(null);

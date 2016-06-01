@@ -118,78 +118,72 @@ public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
       this.resolveTypes(xExpression);
       TreeIterator<EObject> _eAll = EcoreUtil2.eAll(xExpression);
       Iterator<XExpression> _filter = Iterators.<XExpression>filter(_eAll, XExpression.class);
-      final Function1<XExpression, Boolean> _function = new Function1<XExpression, Boolean>() {
-        @Override
-        public Boolean apply(final XExpression it) {
-          boolean _switchResult = false;
-          boolean _matched = false;
-          if (it instanceof XAbstractFeatureCall) {
-            _matched=true;
-            boolean _and = false;
-            if (!((!((XAbstractFeatureCall)it).isTypeLiteral()) && (!((XAbstractFeatureCall)it).isPackageFragment()))) {
-              _and = false;
+      final Function1<XExpression, Boolean> _function = (XExpression it) -> {
+        boolean _switchResult = false;
+        boolean _matched = false;
+        if (it instanceof XAbstractFeatureCall) {
+          _matched=true;
+          boolean _and = false;
+          if (!((!((XAbstractFeatureCall)it).isTypeLiteral()) && (!((XAbstractFeatureCall)it).isPackageFragment()))) {
+            _and = false;
+          } else {
+            boolean _or = false;
+            EList<JvmTypeReference> _typeArguments = ((XAbstractFeatureCall)it).getTypeArguments();
+            boolean _isEmpty = _typeArguments.isEmpty();
+            boolean _not = (!_isEmpty);
+            if (_not) {
+              _or = true;
             } else {
-              boolean _or = false;
-              EList<JvmTypeReference> _typeArguments = ((XAbstractFeatureCall)it).getTypeArguments();
-              boolean _isEmpty = _typeArguments.isEmpty();
-              boolean _not = (!_isEmpty);
-              if (_not) {
-                _or = true;
-              } else {
-                boolean _switchResult_1 = false;
-                JvmIdentifiableElement _feature = ((XAbstractFeatureCall)it).getFeature();
-                final JvmIdentifiableElement feature = _feature;
-                boolean _matched_1 = false;
-                if (feature instanceof JvmTypeParameterDeclarator) {
-                  _matched_1=true;
-                  EList<JvmTypeParameter> _typeParameters = ((JvmTypeParameterDeclarator)feature).getTypeParameters();
-                  boolean _isEmpty_1 = _typeParameters.isEmpty();
-                  _switchResult_1 = (!_isEmpty_1);
-                }
-                if (!_matched_1) {
-                  _switchResult_1 = false;
-                }
-                _or = _switchResult_1;
+              boolean _switchResult_1 = false;
+              JvmIdentifiableElement _feature = ((XAbstractFeatureCall)it).getFeature();
+              final JvmIdentifiableElement feature = _feature;
+              boolean _matched_1 = false;
+              if (feature instanceof JvmTypeParameterDeclarator) {
+                _matched_1=true;
+                EList<JvmTypeParameter> _typeParameters = ((JvmTypeParameterDeclarator)feature).getTypeParameters();
+                boolean _isEmpty_1 = _typeParameters.isEmpty();
+                _switchResult_1 = (!_isEmpty_1);
               }
-              _and = _or;
+              if (!_matched_1) {
+                _switchResult_1 = false;
+              }
+              _or = _switchResult_1;
             }
-            _switchResult = _and;
+            _and = _or;
           }
-          if (!_matched) {
-            if (it instanceof XConstructorCall) {
-              _matched=true;
-              _switchResult = ((!((XConstructorCall)it).getTypeArguments().isEmpty()) || 
-                (!((JvmGenericType) ((XConstructorCall)it).getConstructor().getDeclaringType()).getTypeParameters().isEmpty()));
-            }
-          }
-          if (!_matched) {
-            _switchResult = false;
-          }
-          return Boolean.valueOf(_switchResult);
+          _switchResult = _and;
         }
+        if (!_matched) {
+          if (it instanceof XConstructorCall) {
+            _matched=true;
+            _switchResult = ((!((XConstructorCall)it).getTypeArguments().isEmpty()) || 
+              (!((JvmGenericType) ((XConstructorCall)it).getConstructor().getDeclaringType()).getTypeParameters().isEmpty()));
+          }
+        }
+        if (!_matched) {
+          _switchResult = false;
+        }
+        return Boolean.valueOf(_switchResult);
       };
       Iterator<XExpression> _filter_1 = IteratorExtensions.<XExpression>filter(_filter, _function);
       final List<XExpression> result = IteratorExtensions.<XExpression>toList(_filter_1);
-      final Function1<XExpression, Integer> _function_1 = new Function1<XExpression, Integer>() {
-        @Override
-        public Integer apply(final XExpression it) {
-          EReference _switchResult = null;
-          boolean _matched = false;
-          if (it instanceof XAbstractFeatureCall) {
-            _matched=true;
-            _switchResult = XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE;
-          }
-          if (!_matched) {
-            if (it instanceof XConstructorCall) {
-              _matched=true;
-              _switchResult = XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR;
-            }
-          }
-          final EReference structuralFeature = _switchResult;
-          List<INode> _findNodesForFeature = NodeModelUtils.findNodesForFeature(it, structuralFeature);
-          INode _head = IterableExtensions.<INode>head(_findNodesForFeature);
-          return Integer.valueOf(_head.getOffset());
+      final Function1<XExpression, Integer> _function_1 = (XExpression it) -> {
+        EReference _switchResult = null;
+        boolean _matched = false;
+        if (it instanceof XAbstractFeatureCall) {
+          _matched=true;
+          _switchResult = XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE;
         }
+        if (!_matched) {
+          if (it instanceof XConstructorCall) {
+            _matched=true;
+            _switchResult = XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR;
+          }
+        }
+        final EReference structuralFeature = _switchResult;
+        List<INode> _findNodesForFeature = NodeModelUtils.findNodesForFeature(it, structuralFeature);
+        INode _head = IterableExtensions.<INode>head(_findNodesForFeature);
+        return Integer.valueOf(_head.getOffset());
       };
       return IterableExtensions.<XExpression, Integer>sortBy(result, _function_1);
     } catch (Throwable _e) {

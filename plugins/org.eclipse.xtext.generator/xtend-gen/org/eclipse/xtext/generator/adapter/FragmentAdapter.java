@@ -188,11 +188,8 @@ public class FragmentAdapter extends AbstractXtextGeneratorFragment {
     final Set<Binding> bindings = this.fragment.getGuiceBindingsRt(_grammar);
     if ((bindings != null)) {
       GuiceModuleAccess _runtimeGenModule = config2.getRuntimeGenModule();
-      final Function1<Binding, GuiceModuleAccess.Binding> _function = new Function1<Binding, GuiceModuleAccess.Binding>() {
-        @Override
-        public GuiceModuleAccess.Binding apply(final Binding it) {
-          return FragmentAdapter.this.translateBinding(it);
-        }
+      final Function1<Binding, GuiceModuleAccess.Binding> _function = (Binding it) -> {
+        return this.translateBinding(it);
       };
       Iterable<GuiceModuleAccess.Binding> _map = IterableExtensions.<Binding, GuiceModuleAccess.Binding>map(bindings, _function);
       _runtimeGenModule.addAll(_map);
@@ -214,11 +211,8 @@ public class FragmentAdapter extends AbstractXtextGeneratorFragment {
     final Set<Binding> bindings = this.fragment.getGuiceBindingsUi(_grammar);
     if ((bindings != null)) {
       GuiceModuleAccess _eclipsePluginGenModule = config2.getEclipsePluginGenModule();
-      final Function1<Binding, GuiceModuleAccess.Binding> _function = new Function1<Binding, GuiceModuleAccess.Binding>() {
-        @Override
-        public GuiceModuleAccess.Binding apply(final Binding it) {
-          return FragmentAdapter.this.translateBinding(it);
-        }
+      final Function1<Binding, GuiceModuleAccess.Binding> _function = (Binding it) -> {
+        return this.translateBinding(it);
       };
       Iterable<GuiceModuleAccess.Binding> _map = IterableExtensions.<Binding, GuiceModuleAccess.Binding>map(bindings, _function);
       _eclipsePluginGenModule.addAll(_map);
@@ -273,18 +267,15 @@ public class FragmentAdapter extends AbstractXtextGeneratorFragment {
       boolean _isProvider = _value_2.isProvider();
       BindValue _value_3 = it.getValue();
       String[] _statements = _value_3.getStatements();
-      final Function1<String, Object> _function = new Function1<String, Object>() {
-        @Override
-        public Object apply(final String s) {
-          String _xifexpression = null;
-          boolean _endsWith = s.endsWith(";");
-          if (_endsWith) {
-            _xifexpression = s;
-          } else {
-            _xifexpression = (s + ";");
-          }
-          return _xifexpression;
+      final Function1<String, Object> _function = (String s) -> {
+        String _xifexpression_1 = null;
+        boolean _endsWith = s.endsWith(";");
+        if (_endsWith) {
+          _xifexpression_1 = s;
+        } else {
+          _xifexpression_1 = (s + ";");
         }
+        return _xifexpression_1;
       };
       List<Object> _map = ListExtensions.<String, Object>map(((List<String>)Conversions.doWrapArray(_statements)), _function);
       final GuiceModuleAccess.BindValue newValue = new GuiceModuleAccess.BindValue(_expression, _guessTypeRef_1, _isProvider, _map);
@@ -528,74 +519,71 @@ public class FragmentAdapter extends AbstractXtextGeneratorFragment {
   protected Naming createNaming() {
     final IXtextGeneratorLanguage config2 = this.getLanguage();
     Naming _naming = new Naming();
-    final Procedure1<Naming> _function = new Procedure1<Naming>() {
-      @Override
-      public void apply(final Naming it) {
-        IXtextProjectConfig _projectConfig = FragmentAdapter.this.getProjectConfig();
-        IRuntimeProjectConfig _runtime = _projectConfig.getRuntime();
-        IXtextGeneratorFileSystemAccess _root = _runtime.getRoot();
-        String _path = null;
-        if (_root!=null) {
-          _path=_root.getPath();
-        }
-        String _lastSegment = FragmentAdapter.this.getLastSegment(_path);
-        it.setProjectNameRt(_lastSegment);
-        IXtextProjectConfig _projectConfig_1 = FragmentAdapter.this.getProjectConfig();
-        IBundleProjectConfig _genericIde = _projectConfig_1.getGenericIde();
-        IXtextGeneratorFileSystemAccess _root_1 = _genericIde.getRoot();
-        String _path_1 = null;
-        if (_root_1!=null) {
-          _path_1=_root_1.getPath();
-        }
-        String _lastSegment_1 = FragmentAdapter.this.getLastSegment(_path_1);
-        it.setProjectNameIde(_lastSegment_1);
-        IXtextProjectConfig _projectConfig_2 = FragmentAdapter.this.getProjectConfig();
-        IBundleProjectConfig _eclipsePlugin = _projectConfig_2.getEclipsePlugin();
-        IXtextGeneratorFileSystemAccess _root_2 = _eclipsePlugin.getRoot();
-        String _path_2 = null;
-        if (_root_2!=null) {
-          _path_2=_root_2.getPath();
-        }
-        String _lastSegment_2 = FragmentAdapter.this.getLastSegment(_path_2);
-        it.setProjectNameUi(_lastSegment_2);
-        Grammar _grammar = config2.getGrammar();
-        String _genericIdeBasePackage = FragmentAdapter.this._xtextGeneratorNaming.getGenericIdeBasePackage(_grammar);
-        it.setIdeBasePackage(_genericIdeBasePackage);
-        Grammar _grammar_1 = config2.getGrammar();
-        String _eclipsePluginBasePackage = FragmentAdapter.this._xtextGeneratorNaming.getEclipsePluginBasePackage(_grammar_1);
-        it.setUiBasePackage(_eclipsePluginBasePackage);
-        TypeReference _eclipsePluginActivator = FragmentAdapter.this._xtextGeneratorNaming.getEclipsePluginActivator();
-        String _name = null;
-        if (_eclipsePluginActivator!=null) {
-          _name=_eclipsePluginActivator.getName();
-        }
-        it.setActivatorName(_name);
-        IXtextProjectConfig _projectConfig_3 = FragmentAdapter.this.getProjectConfig();
-        IBundleProjectConfig _runtimeTest = _projectConfig_3.getRuntimeTest();
-        IXtextGeneratorFileSystemAccess _root_3 = _runtimeTest.getRoot();
-        String _path_3 = null;
-        if (_root_3!=null) {
-          _path_3=_root_3.getPath();
-        }
-        it.setPathTestProject(_path_3);
-        String _lineDelimiter = FragmentAdapter.this.codeConfig.getLineDelimiter();
-        it.setLineDelimiter(_lineDelimiter);
-        String _fileHeader = FragmentAdapter.this.codeConfig.getFileHeader();
-        it.setFileHeader(_fileHeader);
-        String _classAnnotationsAsString = FragmentAdapter.this.codeConfig.getClassAnnotationsAsString();
-        it.setClassAnnotations(_classAnnotationsAsString);
-        String _annotationImportsAsString = FragmentAdapter.this.codeConfig.getAnnotationImportsAsString();
-        it.setAnnotationImports(_annotationImportsAsString);
-        String _projectNameUi = it.getProjectNameUi();
-        boolean _tripleNotEquals = (_projectNameUi != null);
-        it.setHasUI(_tripleNotEquals);
-        String _projectNameIde = it.getProjectNameIde();
-        boolean _tripleNotEquals_1 = (_projectNameIde != null);
-        it.setHasIde(_tripleNotEquals_1);
-        Grammar _grammar_2 = config2.getGrammar();
-        String _name_1 = _grammar_2.getName();
-        it.setGrammarId(_name_1);
+    final Procedure1<Naming> _function = (Naming it) -> {
+      IXtextProjectConfig _projectConfig = this.getProjectConfig();
+      IRuntimeProjectConfig _runtime = _projectConfig.getRuntime();
+      IXtextGeneratorFileSystemAccess _root = _runtime.getRoot();
+      String _path = null;
+      if (_root!=null) {
+        _path=_root.getPath();
       }
+      String _lastSegment = this.getLastSegment(_path);
+      it.setProjectNameRt(_lastSegment);
+      IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
+      IBundleProjectConfig _genericIde = _projectConfig_1.getGenericIde();
+      IXtextGeneratorFileSystemAccess _root_1 = _genericIde.getRoot();
+      String _path_1 = null;
+      if (_root_1!=null) {
+        _path_1=_root_1.getPath();
+      }
+      String _lastSegment_1 = this.getLastSegment(_path_1);
+      it.setProjectNameIde(_lastSegment_1);
+      IXtextProjectConfig _projectConfig_2 = this.getProjectConfig();
+      IBundleProjectConfig _eclipsePlugin = _projectConfig_2.getEclipsePlugin();
+      IXtextGeneratorFileSystemAccess _root_2 = _eclipsePlugin.getRoot();
+      String _path_2 = null;
+      if (_root_2!=null) {
+        _path_2=_root_2.getPath();
+      }
+      String _lastSegment_2 = this.getLastSegment(_path_2);
+      it.setProjectNameUi(_lastSegment_2);
+      Grammar _grammar = config2.getGrammar();
+      String _genericIdeBasePackage = this._xtextGeneratorNaming.getGenericIdeBasePackage(_grammar);
+      it.setIdeBasePackage(_genericIdeBasePackage);
+      Grammar _grammar_1 = config2.getGrammar();
+      String _eclipsePluginBasePackage = this._xtextGeneratorNaming.getEclipsePluginBasePackage(_grammar_1);
+      it.setUiBasePackage(_eclipsePluginBasePackage);
+      TypeReference _eclipsePluginActivator = this._xtextGeneratorNaming.getEclipsePluginActivator();
+      String _name = null;
+      if (_eclipsePluginActivator!=null) {
+        _name=_eclipsePluginActivator.getName();
+      }
+      it.setActivatorName(_name);
+      IXtextProjectConfig _projectConfig_3 = this.getProjectConfig();
+      IBundleProjectConfig _runtimeTest = _projectConfig_3.getRuntimeTest();
+      IXtextGeneratorFileSystemAccess _root_3 = _runtimeTest.getRoot();
+      String _path_3 = null;
+      if (_root_3!=null) {
+        _path_3=_root_3.getPath();
+      }
+      it.setPathTestProject(_path_3);
+      String _lineDelimiter = this.codeConfig.getLineDelimiter();
+      it.setLineDelimiter(_lineDelimiter);
+      String _fileHeader = this.codeConfig.getFileHeader();
+      it.setFileHeader(_fileHeader);
+      String _classAnnotationsAsString = this.codeConfig.getClassAnnotationsAsString();
+      it.setClassAnnotations(_classAnnotationsAsString);
+      String _annotationImportsAsString = this.codeConfig.getAnnotationImportsAsString();
+      it.setAnnotationImports(_annotationImportsAsString);
+      String _projectNameUi = it.getProjectNameUi();
+      boolean _tripleNotEquals = (_projectNameUi != null);
+      it.setHasUI(_tripleNotEquals);
+      String _projectNameIde = it.getProjectNameIde();
+      boolean _tripleNotEquals_1 = (_projectNameIde != null);
+      it.setHasIde(_tripleNotEquals_1);
+      Grammar _grammar_2 = config2.getGrammar();
+      String _name_1 = _grammar_2.getName();
+      it.setGrammarId(_name_1);
     };
     final Naming result = ObjectExtensions.<Naming>operator_doubleArrow(_naming, _function);
     if ((this.fragment instanceof NamingAware)) {

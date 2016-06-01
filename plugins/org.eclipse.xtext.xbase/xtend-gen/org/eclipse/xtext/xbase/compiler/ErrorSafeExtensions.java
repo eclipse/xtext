@@ -50,12 +50,9 @@ public class ErrorSafeExtensions {
       Resource _eResource = element.eResource();
       final IElementIssueProvider issueProvider = this.issueProviderFactory.get(_eResource);
       Iterable<Issue> _issues = issueProvider.getIssues(element);
-      final Function1<Issue, Boolean> _function = new Function1<Issue, Boolean>() {
-        @Override
-        public Boolean apply(final Issue it) {
-          Severity _severity = it.getSeverity();
-          return Boolean.valueOf(Objects.equal(_severity, Severity.ERROR));
-        }
+      final Function1<Issue, Boolean> _function = (Issue it) -> {
+        Severity _severity = it.getSeverity();
+        return Boolean.valueOf(Objects.equal(_severity, Severity.ERROR));
       };
       _xblockexpression = IterableExtensions.<Issue>filter(_issues, _function);
     }
@@ -68,12 +65,9 @@ public class ErrorSafeExtensions {
       Resource _eResource = element.eResource();
       final IElementIssueProvider issueProvider = this.issueProviderFactory.get(_eResource);
       Iterable<Issue> _issues = issueProvider.getIssues(element);
-      final Function1<Issue, Boolean> _function = new Function1<Issue, Boolean>() {
-        @Override
-        public Boolean apply(final Issue it) {
-          Severity _severity = it.getSeverity();
-          return Boolean.valueOf(Objects.equal(_severity, Severity.ERROR));
-        }
+      final Function1<Issue, Boolean> _function = (Issue it) -> {
+        Severity _severity = it.getSeverity();
+        return Boolean.valueOf(Objects.equal(_severity, Severity.ERROR));
       };
       _xblockexpression = IterableExtensions.<Issue>exists(_issues, _function);
     }
@@ -87,11 +81,8 @@ public class ErrorSafeExtensions {
     }
     LoopParams _loopParams = new LoopParams();
     final LoopParams loopParams = ObjectExtensions.<LoopParams>operator_doubleArrow(_loopParams, loopInitializer);
-    final Function1<T, Boolean> _function = new Function1<T, Boolean>() {
-      @Override
-      public Boolean apply(final T it) {
-        return Boolean.valueOf(ErrorSafeExtensions.this.hasErrors(it));
-      }
+    final Function1<T, Boolean> _function = (T it) -> {
+      return Boolean.valueOf(this.hasErrors(it));
     };
     Iterable<T> _filter = IterableExtensions.<T>filter(elements, _function);
     int _size = IterableExtensions.size(_filter);

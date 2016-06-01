@@ -29,12 +29,9 @@ public class ClasspathScannerTest {
   @Test
   public void testBootClasspathScanning() {
     final Iterable<ITypeDescriptor> javaUtil = this.scanner.getBootClasspathDescriptors(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("java.util")));
-    final Function1<ITypeDescriptor, Boolean> _function = new Function1<ITypeDescriptor, Boolean>() {
-      @Override
-      public Boolean apply(final ITypeDescriptor it) {
-        String _simpleName = it.getSimpleName();
-        return Boolean.valueOf(Objects.equal(_simpleName, "BitSet"));
-      }
+    final Function1<ITypeDescriptor, Boolean> _function = (ITypeDescriptor it) -> {
+      String _simpleName = it.getSimpleName();
+      return Boolean.valueOf(Objects.equal(_simpleName, "BitSet"));
     };
     boolean _exists = IterableExtensions.<ITypeDescriptor>exists(javaUtil, _function);
     Assert.assertTrue(_exists);
@@ -48,12 +45,9 @@ public class ClasspathScannerTest {
       URL _uRL = _uRI.toURL();
       final URLClassLoader classloader = new URLClassLoader(new URL[] { _uRL });
       final Iterable<ITypeDescriptor> utilPackage = this.scanner.getDescriptors(classloader, Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("org.eclipse.xtext.util")));
-      final Function1<ITypeDescriptor, Boolean> _function = new Function1<ITypeDescriptor, Boolean>() {
-        @Override
-        public Boolean apply(final ITypeDescriptor it) {
-          String _name = it.getName();
-          return Boolean.valueOf(Objects.equal(_name, "org.eclipse.xtext.util.Arrays"));
-        }
+      final Function1<ITypeDescriptor, Boolean> _function = (ITypeDescriptor it) -> {
+        String _name = it.getName();
+        return Boolean.valueOf(Objects.equal(_name, "org.eclipse.xtext.util.Arrays"));
       };
       boolean _exists = IterableExtensions.<ITypeDescriptor>exists(utilPackage, _function);
       Assert.assertTrue(_exists);

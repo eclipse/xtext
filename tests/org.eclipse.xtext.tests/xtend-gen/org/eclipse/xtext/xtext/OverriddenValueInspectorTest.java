@@ -104,11 +104,8 @@ public class OverriddenValueInspectorTest extends AbstractXtextRuleInspectorTest
     AbstractRule _findRuleForName = GrammarUtil.findRuleForName(grammar, "First");
     final ParserRule rule = ((ParserRule) _findRuleForName);
     this.validateRule(rule);
-    final Function1<Triple<String, EObject, EStructuralFeature>, String> _function = new Function1<Triple<String, EObject, EStructuralFeature>, String>() {
-      @Override
-      public String apply(final Triple<String, EObject, EStructuralFeature> it) {
-        return it.getFirst();
-      }
+    final Function1<Triple<String, EObject, EStructuralFeature>, String> _function = (Triple<String, EObject, EStructuralFeature> it) -> {
+      return it.getFirst();
     };
     List<String> _map = ListExtensions.<Triple<String, EObject, EStructuralFeature>, String>map(this.warnings, _function);
     String _string = _map.toString();
@@ -117,11 +114,8 @@ public class OverriddenValueInspectorTest extends AbstractXtextRuleInspectorTest
     AbstractRule _findRuleForName_1 = GrammarUtil.findRuleForName(grammar, "Named");
     final ParserRule fragment = ((ParserRule) _findRuleForName_1);
     this.validateRule(fragment);
-    final Function1<Triple<String, EObject, EStructuralFeature>, String> _function_1 = new Function1<Triple<String, EObject, EStructuralFeature>, String>() {
-      @Override
-      public String apply(final Triple<String, EObject, EStructuralFeature> it) {
-        return it.getFirst();
-      }
+    final Function1<Triple<String, EObject, EStructuralFeature>, String> _function_1 = (Triple<String, EObject, EStructuralFeature> it) -> {
+      return it.getFirst();
     };
     List<String> _map_1 = ListExtensions.<Triple<String, EObject, EStructuralFeature>, String>map(this.warnings, _function_1);
     String _string_1 = _map_1.toString();
@@ -147,11 +141,8 @@ public class OverriddenValueInspectorTest extends AbstractXtextRuleInspectorTest
     AbstractRule _findRuleForName = GrammarUtil.findRuleForName(grammar, "First");
     final ParserRule rule = ((ParserRule) _findRuleForName);
     this.validateRule(rule);
-    final Function1<Triple<String, EObject, EStructuralFeature>, String> _function = new Function1<Triple<String, EObject, EStructuralFeature>, String>() {
-      @Override
-      public String apply(final Triple<String, EObject, EStructuralFeature> it) {
-        return it.getFirst();
-      }
+    final Function1<Triple<String, EObject, EStructuralFeature>, String> _function = (Triple<String, EObject, EStructuralFeature> it) -> {
+      return it.getFirst();
     };
     List<String> _map = ListExtensions.<Triple<String, EObject, EStructuralFeature>, String>map(this.warnings, _function);
     String _string = _map.toString();
@@ -160,11 +151,8 @@ public class OverriddenValueInspectorTest extends AbstractXtextRuleInspectorTest
     AbstractRule _findRuleForName_1 = GrammarUtil.findRuleForName(grammar, "Named");
     final ParserRule fragment = ((ParserRule) _findRuleForName_1);
     this.validateRule(fragment);
-    final Function1<Triple<String, EObject, EStructuralFeature>, String> _function_1 = new Function1<Triple<String, EObject, EStructuralFeature>, String>() {
-      @Override
-      public String apply(final Triple<String, EObject, EStructuralFeature> it) {
-        return it.getFirst();
-      }
+    final Function1<Triple<String, EObject, EStructuralFeature>, String> _function_1 = (Triple<String, EObject, EStructuralFeature> it) -> {
+      return it.getFirst();
     };
     List<String> _map_1 = ListExtensions.<Triple<String, EObject, EStructuralFeature>, String>map(this.warnings, _function_1);
     String _string_1 = _map_1.toString();
@@ -173,11 +161,8 @@ public class OverriddenValueInspectorTest extends AbstractXtextRuleInspectorTest
     AbstractRule _findRuleForName_2 = GrammarUtil.findRuleForName(grammar, "NamedAgain");
     final ParserRule otherFragment = ((ParserRule) _findRuleForName_2);
     this.validateRule(otherFragment);
-    final Function1<Triple<String, EObject, EStructuralFeature>, String> _function_2 = new Function1<Triple<String, EObject, EStructuralFeature>, String>() {
-      @Override
-      public String apply(final Triple<String, EObject, EStructuralFeature> it) {
-        return it.getFirst();
-      }
+    final Function1<Triple<String, EObject, EStructuralFeature>, String> _function_2 = (Triple<String, EObject, EStructuralFeature> it) -> {
+      return it.getFirst();
     };
     List<String> _map_2 = ListExtensions.<Triple<String, EObject, EStructuralFeature>, String>map(this.warnings, _function_2);
     String _string_2 = _map_2.toString();

@@ -464,14 +464,11 @@ public class SemanticRegionFinderTest {
   }
   
   private String pairsToString(final Iterable<Pair<ISemanticRegion, ISemanticRegion>> pairs) {
-    final Function1<Pair<ISemanticRegion, ISemanticRegion>, String> _function = new Function1<Pair<ISemanticRegion, ISemanticRegion>, String>() {
-      @Override
-      public String apply(final Pair<ISemanticRegion, ISemanticRegion> it) {
-        ISemanticRegion _key = it.getKey();
-        ISemanticRegion _value = it.getValue();
-        ITextSegment _merge = _key.merge(_value);
-        return _merge.getText();
-      }
+    final Function1<Pair<ISemanticRegion, ISemanticRegion>, String> _function = (Pair<ISemanticRegion, ISemanticRegion> it) -> {
+      ISemanticRegion _key = it.getKey();
+      ISemanticRegion _value = it.getValue();
+      ITextSegment _merge = _key.merge(_value);
+      return _merge.getText();
     };
     Iterable<String> _map = IterableExtensions.<Pair<ISemanticRegion, ISemanticRegion>, String>map(pairs, _function);
     return IterableExtensions.join(_map, "; ");

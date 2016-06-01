@@ -14,6 +14,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Consumer;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -28,7 +29,6 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -44,17 +44,14 @@ public class SynchronizedXtextResourceSetTest extends AbstractXtextResourceSetTe
     try {
       XtextResourceSet _createEmptyResourceSet = this.createEmptyResourceSet();
       final SynchronizedXtextResourceSet resourceSet = ((SynchronizedXtextResourceSet) _createEmptyResourceSet);
-      final Resource.Factory _function = new Resource.Factory() {
-        @Override
-        public Resource createResource(final URI uri) {
-          NullResource _xblockexpression = null;
-          {
-            final NullResource result = new NullResource();
-            result.setURI(uri);
-            _xblockexpression = result;
-          }
-          return _xblockexpression;
+      final Resource.Factory _function = (URI uri) -> {
+        NullResource _xblockexpression = null;
+        {
+          final NullResource result = new NullResource();
+          result.setURI(uri);
+          _xblockexpression = result;
         }
+        return _xblockexpression;
       };
       final Resource.Factory nullFactory = _function;
       Resource.Factory.Registry _resourceFactoryRegistry = resourceSet.getResourceFactoryRegistry();
@@ -62,35 +59,29 @@ public class SynchronizedXtextResourceSetTest extends AbstractXtextResourceSetTe
       _extensionToFactoryMap.put("xmi", nullFactory);
       final ArrayList<Thread> threads = CollectionLiterals.<Thread>newArrayList();
       IntegerRange _upTo = new IntegerRange(1, 10);
-      final Procedure1<Integer> _function_1 = new Procedure1<Integer>() {
-        @Override
-        public void apply(final Integer i) {
-          final Runnable _function = new Runnable() {
-            @Override
-            public void run() {
-              final ArrayList<Resource> resources = CollectionLiterals.<Resource>newArrayList();
-              for (int j = 0; (j < 5000); j++) {
-                {
-                  String _plus = (i + " ");
-                  String _plus_1 = (_plus + Integer.valueOf(j));
-                  String _plus_2 = (_plus_1 + ".xmi");
-                  URI _createURI = URI.createURI(_plus_2);
-                  final Resource resource = resourceSet.createResource(_createURI);
-                  Assert.assertNotNull(resource);
-                  resources.add(resource);
-                  URI _uRI = resource.getURI();
-                  String _plus_3 = (_uRI + "b");
-                  URI _createURI_1 = URI.createURI(_plus_3);
-                  resource.setURI(_createURI_1);
-                }
-              }
+      final Consumer<Integer> _function_1 = (Integer i) -> {
+        final Runnable _function_2 = () -> {
+          final ArrayList<Resource> resources = CollectionLiterals.<Resource>newArrayList();
+          for (int j = 0; (j < 5000); j++) {
+            {
+              String _plus = (i + " ");
+              String _plus_1 = (_plus + Integer.valueOf(j));
+              String _plus_2 = (_plus_1 + ".xmi");
+              URI _createURI = URI.createURI(_plus_2);
+              final Resource resource = resourceSet.createResource(_createURI);
+              Assert.assertNotNull(resource);
+              resources.add(resource);
+              URI _uRI = resource.getURI();
+              String _plus_3 = (_uRI + "b");
+              URI _createURI_1 = URI.createURI(_plus_3);
+              resource.setURI(_createURI_1);
             }
-          };
-          Thread _thread = new Thread(_function);
-          threads.add(_thread);
-        }
+          }
+        };
+        Thread _thread = new Thread(_function_2);
+        threads.add(_thread);
       };
-      IterableExtensions.<Integer>forEach(_upTo, _function_1);
+      _upTo.forEach(_function_1);
       for (final Thread thread : threads) {
         thread.start();
       }
@@ -109,15 +100,12 @@ public class SynchronizedXtextResourceSetTest extends AbstractXtextResourceSetTe
       int _size_2 = _set_1.size();
       Assert.assertEquals(_size_1, _size_2);
       EList<Resource> _resources_2 = resourceSet.getResources();
-      final Function1<Resource, List<URI>> _function_2 = new Function1<Resource, List<URI>>() {
-        @Override
-        public List<URI> apply(final Resource it) {
-          URI _uRI = it.getURI();
-          URIConverter _uRIConverter = resourceSet.getURIConverter();
-          URI _uRI_1 = it.getURI();
-          URI _normalize = _uRIConverter.normalize(_uRI_1);
-          return Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(_uRI, _normalize));
-        }
+      final Function1<Resource, List<URI>> _function_2 = (Resource it) -> {
+        URI _uRI = it.getURI();
+        URIConverter _uRIConverter = resourceSet.getURIConverter();
+        URI _uRI_1 = it.getURI();
+        URI _normalize = _uRIConverter.normalize(_uRI_1);
+        return Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(_uRI, _normalize));
       };
       List<List<URI>> _map = ListExtensions.<Resource, List<URI>>map(_resources_2, _function_2);
       Iterable<URI> _flatten = Iterables.<URI>concat(_map);
@@ -126,12 +114,9 @@ public class SynchronizedXtextResourceSetTest extends AbstractXtextResourceSetTe
       Set<URI> _keySet = _uRIResourceMap_1.keySet();
       Assert.assertEquals(_set_2, _keySet);
       EList<Resource> _resources_3 = resourceSet.getResources();
-      final Function1<Resource, String> _function_3 = new Function1<Resource, String>() {
-        @Override
-        public String apply(final Resource it) {
-          URI _uRI = it.getURI();
-          return _uRI.toString();
-        }
+      final Function1<Resource, String> _function_3 = (Resource it) -> {
+        URI _uRI = it.getURI();
+        return _uRI.toString();
       };
       List<String> _map_1 = ListExtensions.<Resource, String>map(_resources_3, _function_3);
       List<String> _list = IterableExtensions.<String>toList(_map_1);
@@ -139,11 +124,8 @@ public class SynchronizedXtextResourceSetTest extends AbstractXtextResourceSetTe
       String _join = IterableExtensions.join(_sort, "\n");
       Map<URI, URI> _normalizationMap = resourceSet.getNormalizationMap();
       Set<URI> _keySet_1 = _normalizationMap.keySet();
-      final Function1<URI, String> _function_4 = new Function1<URI, String>() {
-        @Override
-        public String apply(final URI it) {
-          return it.toString();
-        }
+      final Function1<URI, String> _function_4 = (URI it) -> {
+        return it.toString();
       };
       Iterable<String> _map_2 = IterableExtensions.<URI, String>map(_keySet_1, _function_4);
       List<String> _list_1 = IterableExtensions.<String>toList(_map_2);

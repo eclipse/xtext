@@ -11,6 +11,7 @@ import com.google.inject.Inject;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Consumer;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jface.action.IToolBarManager;
@@ -48,7 +49,6 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -162,19 +162,16 @@ public abstract class AbstractCallHierarchyViewPart extends AbstractHierarchyVie
     _table_1.setHeaderVisible(true);
     Pair<String, ColumnLayoutData>[] _locationColumnDescriptions = this.getLocationColumnDescriptions();
     Iterable<Pair<Integer, Pair<String, ColumnLayoutData>>> _indexed = IterableExtensions.<Pair<String, ColumnLayoutData>>indexed(((Iterable<? extends Pair<String, ColumnLayoutData>>)Conversions.doWrapArray(_locationColumnDescriptions)));
-    final Procedure1<Pair<Integer, Pair<String, ColumnLayoutData>>> _function = new Procedure1<Pair<Integer, Pair<String, ColumnLayoutData>>>() {
-      @Override
-      public void apply(final Pair<Integer, Pair<String, ColumnLayoutData>> it) {
-        Pair<String, ColumnLayoutData> _value = it.getValue();
-        ColumnLayoutData _value_1 = _value.getValue();
-        layout.addColumnData(_value_1);
-        Table _table = locationViewer.getTable();
-        Pair<String, ColumnLayoutData> _value_2 = it.getValue();
-        Integer _key = it.getKey();
-        AbstractCallHierarchyViewPart.this.createColumn(_table, _value_2, (_key).intValue());
-      }
+    final Consumer<Pair<Integer, Pair<String, ColumnLayoutData>>> _function = (Pair<Integer, Pair<String, ColumnLayoutData>> it) -> {
+      Pair<String, ColumnLayoutData> _value = it.getValue();
+      ColumnLayoutData _value_1 = _value.getValue();
+      layout.addColumnData(_value_1);
+      Table _table_2 = locationViewer.getTable();
+      Pair<String, ColumnLayoutData> _value_2 = it.getValue();
+      Integer _key = it.getKey();
+      this.createColumn(_table_2, _value_2, (_key).intValue());
     };
-    IterableExtensions.<Pair<Integer, Pair<String, ColumnLayoutData>>>forEach(_indexed, _function);
+    _indexed.forEach(_function);
     return locationViewer;
   }
   

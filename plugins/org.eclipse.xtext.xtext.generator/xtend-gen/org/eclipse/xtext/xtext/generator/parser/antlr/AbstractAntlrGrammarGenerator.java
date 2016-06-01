@@ -299,12 +299,9 @@ public abstract class AbstractAntlrGrammarGenerator {
         {
           Set<String> _allKeywords = GrammarUtil.getAllKeywords(it);
           List<String> _sort = IterableExtensions.<String>sort(_allKeywords);
-          final Function1<String, Integer> _function = new Function1<String, Integer>() {
-            @Override
-            public Integer apply(final String it) {
-              int _length = it.length();
-              return Integer.valueOf((-_length));
-            }
+          final Function1<String, Integer> _function = (String it_1) -> {
+            int _length = it_1.length();
+            return Integer.valueOf((-_length));
           };
           List<String> _sortBy = IterableExtensions.<String, Integer>sortBy(_sort, _function);
           for(final String kw : _sortBy) {
@@ -420,11 +417,8 @@ public abstract class AbstractAntlrGrammarGenerator {
       List<ParserRule> _allParserRules = GrammarUtil.allParserRules(it);
       List<EnumRule> _allEnumRules = GrammarUtil.allEnumRules(it);
       Iterable<AbstractRule> _plus = Iterables.<AbstractRule>concat(_allParserRules, _allEnumRules);
-      final Function1<AbstractRule, Boolean> _function = new Function1<AbstractRule, Boolean>() {
-        @Override
-        public Boolean apply(final AbstractRule rule) {
-          return Boolean.valueOf(AbstractAntlrGrammarGenerator.this._grammarAccessExtensions.isCalled(rule, it));
-        }
+      final Function1<AbstractRule, Boolean> _function = (AbstractRule rule) -> {
+        return Boolean.valueOf(this._grammarAccessExtensions.isCalled(rule, it));
       };
       Iterable<AbstractRule> _filter = IterableExtensions.<AbstractRule>filter(_plus, _function);
       for(final AbstractRule rule : _filter) {
@@ -450,58 +444,49 @@ public abstract class AbstractAntlrGrammarGenerator {
     {
       Set<String> _allKeywords = GrammarUtil.getAllKeywords(it);
       List<String> _sort = IterableExtensions.<String>sort(_allKeywords);
-      final Function1<String, Integer> _function = new Function1<String, Integer>() {
-        @Override
-        public Integer apply(final String it) {
-          int _length = it.length();
-          return Integer.valueOf((-_length));
-        }
+      final Function1<String, Integer> _function = (String it_1) -> {
+        int _length = it_1.length();
+        return Integer.valueOf((-_length));
       };
       final List<String> allKeywords = IterableExtensions.<String, Integer>sortBy(_sort, _function);
       final List<TerminalRule> allTerminalRules = GrammarUtil.allTerminalRules(it);
       final ArrayList<String> synthetic_kw_alternatives = CollectionLiterals.<String>newArrayList();
       Iterable<Pair<Integer, String>> _indexed = IterableExtensions.<String>indexed(allKeywords);
-      final Function1<Pair<Integer, String>, String> _function_1 = new Function1<Pair<Integer, String>, String>() {
-        @Override
-        public String apply(final Pair<Integer, String> it) {
-          String _value = it.getValue();
-          final String ruleName = AbstractAntlrGrammarGenerator.this.keywordHelper.getRuleName(_value);
-          StringConcatenation _builder = new StringConcatenation();
-          _builder.append("(FRAGMENT_");
-          _builder.append(ruleName, "");
-          _builder.append(")=> FRAGMENT_");
-          _builder.append(ruleName, "");
-          _builder.append(" {$type = ");
-          _builder.append(ruleName, "");
-          _builder.append("; }");
-          return _builder.toString();
-        }
+      final Function1<Pair<Integer, String>, String> _function_1 = (Pair<Integer, String> it_1) -> {
+        String _value = it_1.getValue();
+        final String ruleName = this.keywordHelper.getRuleName(_value);
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("(FRAGMENT_");
+        _builder.append(ruleName, "");
+        _builder.append(")=> FRAGMENT_");
+        _builder.append(ruleName, "");
+        _builder.append(" {$type = ");
+        _builder.append(ruleName, "");
+        _builder.append("; }");
+        return _builder.toString();
       };
       Iterable<String> _map = IterableExtensions.<Pair<Integer, String>, String>map(_indexed, _function_1);
       Iterables.<String>addAll(synthetic_kw_alternatives, _map);
       Iterable<Pair<Integer, TerminalRule>> _indexed_1 = IterableExtensions.<TerminalRule>indexed(allTerminalRules);
-      final Function1<Pair<Integer, TerminalRule>, String> _function_2 = new Function1<Pair<Integer, TerminalRule>, String>() {
-        @Override
-        public String apply(final Pair<Integer, TerminalRule> it) {
-          if (((!AbstractAntlrGrammarGenerator.this._syntheticTerminalDetector.isSyntheticTerminalRule(it.getValue())) && (!it.getValue().isFragment()))) {
-            StringConcatenation _builder = new StringConcatenation();
-            _builder.append("(FRAGMENT_");
-            TerminalRule _value = it.getValue();
-            String _ruleName = AbstractAntlrGrammarGenerator.this._grammarAccessExtensions.ruleName(_value);
-            _builder.append(_ruleName, "");
-            _builder.append(")=> FRAGMENT_");
-            TerminalRule _value_1 = it.getValue();
-            String _ruleName_1 = AbstractAntlrGrammarGenerator.this._grammarAccessExtensions.ruleName(_value_1);
-            _builder.append(_ruleName_1, "");
-            _builder.append(" {$type = ");
-            TerminalRule _value_2 = it.getValue();
-            String _ruleName_2 = AbstractAntlrGrammarGenerator.this._grammarAccessExtensions.ruleName(_value_2);
-            _builder.append(_ruleName_2, "");
-            _builder.append("; }");
-            return _builder.toString();
-          }
-          return null;
+      final Function1<Pair<Integer, TerminalRule>, String> _function_2 = (Pair<Integer, TerminalRule> it_1) -> {
+        if (((!this._syntheticTerminalDetector.isSyntheticTerminalRule(it_1.getValue())) && (!it_1.getValue().isFragment()))) {
+          StringConcatenation _builder = new StringConcatenation();
+          _builder.append("(FRAGMENT_");
+          TerminalRule _value = it_1.getValue();
+          String _ruleName = this._grammarAccessExtensions.ruleName(_value);
+          _builder.append(_ruleName, "");
+          _builder.append(")=> FRAGMENT_");
+          TerminalRule _value_1 = it_1.getValue();
+          String _ruleName_1 = this._grammarAccessExtensions.ruleName(_value_1);
+          _builder.append(_ruleName_1, "");
+          _builder.append(" {$type = ");
+          TerminalRule _value_2 = it_1.getValue();
+          String _ruleName_2 = this._grammarAccessExtensions.ruleName(_value_2);
+          _builder.append(_ruleName_2, "");
+          _builder.append("; }");
+          return _builder.toString();
         }
+        return null;
       };
       Iterable<String> _map_1 = IterableExtensions.<Pair<Integer, TerminalRule>, String>map(_indexed_1, _function_2);
       Iterable<String> _filterNull = IterableExtensions.<String>filterNull(_map_1);

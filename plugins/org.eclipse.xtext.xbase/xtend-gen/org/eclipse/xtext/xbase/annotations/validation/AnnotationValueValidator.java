@@ -51,12 +51,9 @@ public class AnnotationValueValidator extends ConstantExpressionValidator {
   }
   
   protected boolean _isValidAnnotationValue(final XListLiteral expression) {
-    return (expression.getElements().isEmpty() || IterableExtensions.<XExpression>forall(expression.getElements(), new Function1<XExpression, Boolean>() {
-      @Override
-      public Boolean apply(final XExpression it) {
-        return Boolean.valueOf(AnnotationValueValidator.this.isValidAnnotationValue(it));
-      }
-    }));
+    return (expression.getElements().isEmpty() || IterableExtensions.<XExpression>forall(expression.getElements(), ((Function1<XExpression, Boolean>) (XExpression it) -> {
+      return Boolean.valueOf(this.isValidAnnotationValue(it));
+    })));
   }
   
   protected boolean _isValidAnnotationValue(final XAnnotation expression) {

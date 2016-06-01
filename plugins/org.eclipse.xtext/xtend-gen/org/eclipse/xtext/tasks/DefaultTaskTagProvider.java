@@ -28,40 +28,28 @@ public class DefaultTaskTagProvider implements ITaskTagProvider {
   @Override
   public TaskTags getTaskTags(final Resource resouce) {
     TaskTags _taskTags = new TaskTags();
-    final Procedure1<TaskTags> _function = new Procedure1<TaskTags>() {
-      @Override
-      public void apply(final TaskTags it) {
-        it.setCaseSensitive(true);
-        List<TaskTag> _taskTags = it.getTaskTags();
-        TaskTag _taskTag = new TaskTag();
-        final Procedure1<TaskTag> _function = new Procedure1<TaskTag>() {
-          @Override
-          public void apply(final TaskTag it) {
-            it.setName("TODO");
-            it.setPriority(Priority.NORMAL);
-          }
-        };
-        TaskTag _doubleArrow = ObjectExtensions.<TaskTag>operator_doubleArrow(_taskTag, _function);
-        TaskTag _taskTag_1 = new TaskTag();
-        final Procedure1<TaskTag> _function_1 = new Procedure1<TaskTag>() {
-          @Override
-          public void apply(final TaskTag it) {
-            it.setName("FIXME");
-            it.setPriority(Priority.HIGH);
-          }
-        };
-        TaskTag _doubleArrow_1 = ObjectExtensions.<TaskTag>operator_doubleArrow(_taskTag_1, _function_1);
-        TaskTag _taskTag_2 = new TaskTag();
-        final Procedure1<TaskTag> _function_2 = new Procedure1<TaskTag>() {
-          @Override
-          public void apply(final TaskTag it) {
-            it.setName("XXX");
-            it.setPriority(Priority.NORMAL);
-          }
-        };
-        TaskTag _doubleArrow_2 = ObjectExtensions.<TaskTag>operator_doubleArrow(_taskTag_2, _function_2);
-        Iterables.<TaskTag>addAll(_taskTags, Collections.<TaskTag>unmodifiableList(CollectionLiterals.<TaskTag>newArrayList(_doubleArrow, _doubleArrow_1, _doubleArrow_2)));
-      }
+    final Procedure1<TaskTags> _function = (TaskTags it) -> {
+      it.setCaseSensitive(true);
+      List<TaskTag> _taskTags_1 = it.getTaskTags();
+      TaskTag _taskTag = new TaskTag();
+      final Procedure1<TaskTag> _function_1 = (TaskTag it_1) -> {
+        it_1.setName("TODO");
+        it_1.setPriority(Priority.NORMAL);
+      };
+      TaskTag _doubleArrow = ObjectExtensions.<TaskTag>operator_doubleArrow(_taskTag, _function_1);
+      TaskTag _taskTag_1 = new TaskTag();
+      final Procedure1<TaskTag> _function_2 = (TaskTag it_1) -> {
+        it_1.setName("FIXME");
+        it_1.setPriority(Priority.HIGH);
+      };
+      TaskTag _doubleArrow_1 = ObjectExtensions.<TaskTag>operator_doubleArrow(_taskTag_1, _function_2);
+      TaskTag _taskTag_2 = new TaskTag();
+      final Procedure1<TaskTag> _function_3 = (TaskTag it_1) -> {
+        it_1.setName("XXX");
+        it_1.setPriority(Priority.NORMAL);
+      };
+      TaskTag _doubleArrow_2 = ObjectExtensions.<TaskTag>operator_doubleArrow(_taskTag_2, _function_3);
+      Iterables.<TaskTag>addAll(_taskTags_1, Collections.<TaskTag>unmodifiableList(CollectionLiterals.<TaskTag>newArrayList(_doubleArrow, _doubleArrow_1, _doubleArrow_2)));
     };
     return ObjectExtensions.<TaskTags>operator_doubleArrow(_taskTags, _function);
   }

@@ -19,11 +19,8 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 public class IdeaPluginExtension {
   public Iterable<AbstractRule> getAllNonTerminalRules(final Grammar grammar) {
     List<AbstractRule> _allRules = GrammarUtil.allRules(grammar);
-    final Function1<AbstractRule, Boolean> _function = new Function1<AbstractRule, Boolean>() {
-      @Override
-      public Boolean apply(final AbstractRule it) {
-        return Boolean.valueOf((!(it instanceof TerminalRule)));
-      }
+    final Function1<AbstractRule, Boolean> _function = (AbstractRule it) -> {
+      return Boolean.valueOf((!(it instanceof TerminalRule)));
     };
     return IterableExtensions.<AbstractRule>filter(_allRules, _function);
   }

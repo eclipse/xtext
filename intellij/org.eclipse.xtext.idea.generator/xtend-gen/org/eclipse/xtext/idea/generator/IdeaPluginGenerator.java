@@ -553,11 +553,8 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     String _replaceAll = qn.replaceAll("<", "\\.");
     String _replaceAll_1 = _replaceAll.replaceAll(">", "\\.");
     String[] _split = _replaceAll_1.split("\\.");
-    final Function1<String, Boolean> _function = new Function1<String, Boolean>() {
-      @Override
-      public Boolean apply(final String e) {
-        return Boolean.valueOf(e.matches("[A-Z].*"));
-      }
+    final Function1<String, Boolean> _function = (String e) -> {
+      return Boolean.valueOf(e.matches("[A-Z].*"));
     };
     Iterable<String> _filter = IterableExtensions.<String>filter(((Iterable<String>)Conversions.doWrapArray(_split)), _function);
     return IterableExtensions.join(_filter, "$");
@@ -2077,12 +2074,9 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.newLine();
     {
       List<TerminalRule> _allTerminalRules = GrammarUtil.allTerminalRules(grammar);
-      final Function1<TerminalRule, Boolean> _function = new Function1<TerminalRule, Boolean>() {
-        @Override
-        public Boolean apply(final TerminalRule it) {
-          String _name = it.getName();
-          return Boolean.valueOf(Objects.equal(_name, "WS"));
-        }
+      final Function1<TerminalRule, Boolean> _function = (TerminalRule it) -> {
+        String _name = it.getName();
+        return Boolean.valueOf(Objects.equal(_name, "WS"));
       };
       boolean _exists = IterableExtensions.<TerminalRule>exists(_allTerminalRules, _function);
       if (_exists) {
@@ -2096,30 +2090,21 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
       }
     }
     {
-      if ((IterableExtensions.<TerminalRule>exists(GrammarUtil.allTerminalRules(grammar), new Function1<TerminalRule, Boolean>() {
-        @Override
-        public Boolean apply(final TerminalRule it) {
-          String _name = it.getName();
-          return Boolean.valueOf(Objects.equal(_name, "SL_COMMENT"));
-        }
-      }) && IterableExtensions.<TerminalRule>exists(GrammarUtil.allTerminalRules(grammar), new Function1<TerminalRule, Boolean>() {
-        @Override
-        public Boolean apply(final TerminalRule it) {
-          String _name = it.getName();
-          return Boolean.valueOf(Objects.equal(_name, "ML_COMMENT"));
-        }
-      }))) {
+      if ((IterableExtensions.<TerminalRule>exists(GrammarUtil.allTerminalRules(grammar), ((Function1<TerminalRule, Boolean>) (TerminalRule it) -> {
+        String _name = it.getName();
+        return Boolean.valueOf(Objects.equal(_name, "SL_COMMENT"));
+      })) && IterableExtensions.<TerminalRule>exists(GrammarUtil.allTerminalRules(grammar), ((Function1<TerminalRule, Boolean>) (TerminalRule it) -> {
+        String _name = it.getName();
+        return Boolean.valueOf(Objects.equal(_name, "ML_COMMENT"));
+      })))) {
         _builder.append("\t");
         _builder.append("private static final TokenSet COMMENT_TOKENS = TokenSet.create(tokenTypes[RULE_SL_COMMENT], tokenTypes[RULE_ML_COMMENT]);");
         _builder.newLine();
       } else {
         List<TerminalRule> _allTerminalRules_1 = GrammarUtil.allTerminalRules(grammar);
-        final Function1<TerminalRule, Boolean> _function_1 = new Function1<TerminalRule, Boolean>() {
-          @Override
-          public Boolean apply(final TerminalRule it) {
-            String _name = it.getName();
-            return Boolean.valueOf(Objects.equal(_name, "SL_COMMENT"));
-          }
+        final Function1<TerminalRule, Boolean> _function_1 = (TerminalRule it) -> {
+          String _name = it.getName();
+          return Boolean.valueOf(Objects.equal(_name, "SL_COMMENT"));
         };
         boolean _exists_1 = IterableExtensions.<TerminalRule>exists(_allTerminalRules_1, _function_1);
         if (_exists_1) {
@@ -2128,12 +2113,9 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
           _builder.newLine();
         } else {
           List<TerminalRule> _allTerminalRules_2 = GrammarUtil.allTerminalRules(grammar);
-          final Function1<TerminalRule, Boolean> _function_2 = new Function1<TerminalRule, Boolean>() {
-            @Override
-            public Boolean apply(final TerminalRule it) {
-              String _name = it.getName();
-              return Boolean.valueOf(Objects.equal(_name, "ML_COMMENT"));
-            }
+          final Function1<TerminalRule, Boolean> _function_2 = (TerminalRule it) -> {
+            String _name = it.getName();
+            return Boolean.valueOf(Objects.equal(_name, "ML_COMMENT"));
           };
           boolean _exists_2 = IterableExtensions.<TerminalRule>exists(_allTerminalRules_2, _function_2);
           if (_exists_2) {
@@ -2150,12 +2132,9 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     }
     {
       List<TerminalRule> _allTerminalRules_3 = GrammarUtil.allTerminalRules(grammar);
-      final Function1<TerminalRule, Boolean> _function_3 = new Function1<TerminalRule, Boolean>() {
-        @Override
-        public Boolean apply(final TerminalRule it) {
-          String _name = it.getName();
-          return Boolean.valueOf(Objects.equal(_name, "STRING"));
-        }
+      final Function1<TerminalRule, Boolean> _function_3 = (TerminalRule it) -> {
+        String _name = it.getName();
+        return Boolean.valueOf(Objects.equal(_name, "STRING"));
       };
       boolean _exists_3 = IterableExtensions.<TerminalRule>exists(_allTerminalRules_3, _function_3);
       if (_exists_3) {
@@ -2346,36 +2325,21 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     CharSequence _xblockexpression = null;
     {
       List<AbstractRule> _allRules = GrammarUtil.allRules(grammar);
-      final Function1<AbstractRule, Boolean> _function = new Function1<AbstractRule, Boolean>() {
-        @Override
-        public Boolean apply(final AbstractRule it) {
-          return Boolean.valueOf(GrammarUtil.isEObjectRule(it));
-        }
+      final Function1<AbstractRule, Boolean> _function = (AbstractRule it) -> {
+        return Boolean.valueOf(GrammarUtil.isEObjectRule(it));
       };
       final Iterable<AbstractRule> EObjectRules = IterableExtensions.<AbstractRule>filter(_allRules, _function);
-      final Function1<AbstractRule, Boolean> _function_1 = new Function1<AbstractRule, Boolean>() {
-        @Override
-        public Boolean apply(final AbstractRule it) {
-          return Boolean.valueOf((IdeaPluginGenerator.this.isNamed(it) || IterableExtensions.<AbstractElement>exists(IdeaPluginGenerator.this.getEObjectElements(it), new Function1<AbstractElement, Boolean>() {
-            @Override
-            public Boolean apply(final AbstractElement it) {
-              return Boolean.valueOf(IdeaPluginGenerator.this.isNamed(it));
-            }
-          })));
-        }
+      final Function1<AbstractRule, Boolean> _function_1 = (AbstractRule it) -> {
+        return Boolean.valueOf((this.isNamed(it) || IterableExtensions.<AbstractElement>exists(this.getEObjectElements(it), ((Function1<AbstractElement, Boolean>) (AbstractElement it_1) -> {
+          return Boolean.valueOf(this.isNamed(it_1));
+        }))));
       };
       final boolean hasNamed = IterableExtensions.<AbstractRule>exists(EObjectRules, _function_1);
-      final Function1<AbstractRule, Boolean> _function_2 = new Function1<AbstractRule, Boolean>() {
-        @Override
-        public Boolean apply(final AbstractRule it) {
-          return Boolean.valueOf(((!IdeaPluginGenerator.this.isNamed(it)) || IterableExtensions.<AbstractElement>exists(IdeaPluginGenerator.this.getEObjectElements(it), new Function1<AbstractElement, Boolean>() {
-            @Override
-            public Boolean apply(final AbstractElement it) {
-              boolean _isNamed = IdeaPluginGenerator.this.isNamed(it);
-              return Boolean.valueOf((!_isNamed));
-            }
-          })));
-        }
+      final Function1<AbstractRule, Boolean> _function_2 = (AbstractRule it) -> {
+        return Boolean.valueOf(((!this.isNamed(it)) || IterableExtensions.<AbstractElement>exists(this.getEObjectElements(it), ((Function1<AbstractElement, Boolean>) (AbstractElement it_1) -> {
+          boolean _isNamed = this.isNamed(it_1);
+          return Boolean.valueOf((!_isNamed));
+        }))));
       };
       final boolean hasNotNamed = IterableExtensions.<AbstractRule>exists(EObjectRules, _function_2);
       StringConcatenation _builder = new StringConcatenation();
@@ -2598,30 +2562,27 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
   
   protected Iterable<AbstractElement> getEObjectElements(final AbstractRule rule) {
     List<AbstractElement> _eAllOfType = EcoreUtil2.<AbstractElement>eAllOfType(rule, AbstractElement.class);
-    final Function1<AbstractElement, Boolean> _function = new Function1<AbstractElement, Boolean>() {
-      @Override
-      public Boolean apply(final AbstractElement element) {
-        boolean _switchResult = false;
-        boolean _matched = false;
-        if (element instanceof Action) {
-          _matched=true;
-        }
-        if (!_matched) {
-          if (element instanceof RuleCall) {
-            boolean _isEObjectRuleCall = GrammarUtil.isEObjectRuleCall(element);
-            if (_isEObjectRuleCall) {
-              _matched=true;
-            }
+    final Function1<AbstractElement, Boolean> _function = (AbstractElement element) -> {
+      boolean _switchResult = false;
+      boolean _matched = false;
+      if (element instanceof Action) {
+        _matched=true;
+      }
+      if (!_matched) {
+        if (element instanceof RuleCall) {
+          boolean _isEObjectRuleCall = GrammarUtil.isEObjectRuleCall(element);
+          if (_isEObjectRuleCall) {
+            _matched=true;
           }
         }
-        if (_matched) {
-          _switchResult = true;
-        }
-        if (!_matched) {
-          _switchResult = false;
-        }
-        return Boolean.valueOf(_switchResult);
       }
+      if (_matched) {
+        _switchResult = true;
+      }
+      if (!_matched) {
+        _switchResult = false;
+      }
+      return Boolean.valueOf(_switchResult);
     };
     return IterableExtensions.<AbstractElement>filter(_eAllOfType, _function);
   }

@@ -2,6 +2,7 @@ package org.eclipse.xtext.java.resource;
 
 import com.google.inject.Inject;
 import java.util.Collection;
+import java.util.function.Consumer;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.common.types.descriptions.JvmTypesResourceDescriptionStrategy;
 import org.eclipse.xtext.java.resource.JavaResource;
@@ -14,7 +15,6 @@ import org.eclipse.xtext.resource.impl.DefaultResourceDescription;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionDelta;
 import org.eclipse.xtext.util.IResourceScopeCache;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
 public class JavaResourceDescriptionManager implements IResourceDescription.Manager {
@@ -41,13 +41,10 @@ public class JavaResourceDescriptionManager implements IResourceDescription.Mana
         final DefaultResourceDescription result = new DefaultResourceDescription(resource, this.descriptionStrategy, this.cache);
         if ((!initialized)) {
           Iterable<IEObjectDescription> _exportedObjects = result.getExportedObjects();
-          final Procedure1<IEObjectDescription> _function = new Procedure1<IEObjectDescription>() {
-            @Override
-            public void apply(final IEObjectDescription it) {
-              it.getEObjectURI();
-            }
+          final Consumer<IEObjectDescription> _function = (IEObjectDescription it) -> {
+            it.getEObjectURI();
           };
-          IterableExtensions.<IEObjectDescription>forEach(_exportedObjects, _function);
+          _exportedObjects.forEach(_function);
         }
         return result;
       } finally {

@@ -177,19 +177,13 @@ public class PomFile extends TextFile {
         {
           ProjectDescriptor _project_10 = this.getProject();
           Set<ExternalDependency> _externalDependencies = _project_10.getExternalDependencies();
-          final Function1<ExternalDependency, ExternalDependency.MavenCoordinates> _function = new Function1<ExternalDependency, ExternalDependency.MavenCoordinates>() {
-            @Override
-            public ExternalDependency.MavenCoordinates apply(final ExternalDependency it) {
-              return it.getMaven();
-            }
+          final Function1<ExternalDependency, ExternalDependency.MavenCoordinates> _function = (ExternalDependency it) -> {
+            return it.getMaven();
           };
           Iterable<ExternalDependency.MavenCoordinates> _map = IterableExtensions.<ExternalDependency, ExternalDependency.MavenCoordinates>map(_externalDependencies, _function);
-          final Function1<ExternalDependency.MavenCoordinates, Boolean> _function_1 = new Function1<ExternalDependency.MavenCoordinates, Boolean>() {
-            @Override
-            public Boolean apply(final ExternalDependency.MavenCoordinates it) {
-              String _artifactId = it.getArtifactId();
-              return Boolean.valueOf((!Objects.equal(_artifactId, null)));
-            }
+          final Function1<ExternalDependency.MavenCoordinates, Boolean> _function_1 = (ExternalDependency.MavenCoordinates it) -> {
+            String _artifactId = it.getArtifactId();
+            return Boolean.valueOf((!Objects.equal(_artifactId, null)));
           };
           Iterable<ExternalDependency.MavenCoordinates> _filter = IterableExtensions.<ExternalDependency.MavenCoordinates>filter(_map, _function_1);
           for(final ExternalDependency.MavenCoordinates dep : _filter) {

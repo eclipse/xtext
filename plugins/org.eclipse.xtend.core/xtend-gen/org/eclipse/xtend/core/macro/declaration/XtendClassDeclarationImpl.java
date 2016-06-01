@@ -26,12 +26,9 @@ public class XtendClassDeclarationImpl extends XtendTypeDeclarationImpl<XtendCla
   public Iterable<? extends TypeReference> getImplementedInterfaces() {
     XtendClass _delegate = this.getDelegate();
     EList<JvmTypeReference> _implements = _delegate.getImplements();
-    final Function1<JvmTypeReference, TypeReference> _function = new Function1<JvmTypeReference, TypeReference>() {
-      @Override
-      public TypeReference apply(final JvmTypeReference it) {
-        CompilationUnitImpl _compilationUnit = XtendClassDeclarationImpl.this.getCompilationUnit();
-        return _compilationUnit.toTypeReference(it);
-      }
+    final Function1<JvmTypeReference, TypeReference> _function = (JvmTypeReference it) -> {
+      CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+      return _compilationUnit.toTypeReference(it);
     };
     return ListExtensions.<JvmTypeReference, TypeReference>map(_implements, _function);
   }
@@ -70,12 +67,9 @@ public class XtendClassDeclarationImpl extends XtendTypeDeclarationImpl<XtendCla
   public Iterable<? extends TypeParameterDeclaration> getTypeParameters() {
     XtendClass _delegate = this.getDelegate();
     EList<JvmTypeParameter> _typeParameters = _delegate.getTypeParameters();
-    final Function1<JvmTypeParameter, XtendTypeParameterDeclarationImpl> _function = new Function1<JvmTypeParameter, XtendTypeParameterDeclarationImpl>() {
-      @Override
-      public XtendTypeParameterDeclarationImpl apply(final JvmTypeParameter it) {
-        CompilationUnitImpl _compilationUnit = XtendClassDeclarationImpl.this.getCompilationUnit();
-        return _compilationUnit.toXtendTypeParameterDeclaration(it);
-      }
+    final Function1<JvmTypeParameter, XtendTypeParameterDeclarationImpl> _function = (JvmTypeParameter it) -> {
+      CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+      return _compilationUnit.toXtendTypeParameterDeclaration(it);
     };
     return ListExtensions.<JvmTypeParameter, XtendTypeParameterDeclarationImpl>map(_typeParameters, _function);
   }

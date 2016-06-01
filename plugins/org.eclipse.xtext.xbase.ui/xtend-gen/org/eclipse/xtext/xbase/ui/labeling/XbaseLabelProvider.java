@@ -134,11 +134,8 @@ public class XbaseLabelProvider extends DefaultEObjectLabelProvider {
     String _simpleName = _declaration.getSimpleName();
     String _plus_3 = (_simpleName + "(");
     List<LightweightTypeReference> _resolvedParameterTypes = element.getResolvedParameterTypes();
-    final Function1<LightweightTypeReference, String> _function = new Function1<LightweightTypeReference, String>() {
-      @Override
-      public String apply(final LightweightTypeReference it) {
-        return it.getHumanReadableName();
-      }
+    final Function1<LightweightTypeReference, String> _function = (LightweightTypeReference it) -> {
+      return it.getHumanReadableName();
     };
     List<String> _map = ListExtensions.<LightweightTypeReference, String>map(_resolvedParameterTypes, _function);
     String _join = IterableExtensions.join(_map, ", ");
@@ -167,11 +164,8 @@ public class XbaseLabelProvider extends DefaultEObjectLabelProvider {
   
   protected Object text(final IResolvedConstructor constructor) {
     List<LightweightTypeReference> _resolvedParameterTypes = constructor.getResolvedParameterTypes();
-    final Function1<LightweightTypeReference, String> _function = new Function1<LightweightTypeReference, String>() {
-      @Override
-      public String apply(final LightweightTypeReference it) {
-        return it.getHumanReadableName();
-      }
+    final Function1<LightweightTypeReference, String> _function = (LightweightTypeReference it) -> {
+      return it.getHumanReadableName();
     };
     List<String> _map = ListExtensions.<LightweightTypeReference, String>map(_resolvedParameterTypes, _function);
     String _join = IterableExtensions.join(_map, ", ");

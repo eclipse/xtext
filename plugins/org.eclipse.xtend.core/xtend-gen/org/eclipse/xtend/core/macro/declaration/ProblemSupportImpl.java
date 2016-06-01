@@ -12,6 +12,7 @@ import com.google.common.collect.Iterables;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Consumer;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -41,7 +42,6 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure0;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
 public class ProblemSupportImpl implements ProblemSupport {
@@ -106,13 +106,10 @@ public class ProblemSupportImpl implements ProblemSupport {
   
   public void validationPhaseStarted() {
     try {
-      final Procedure1<Procedure0> _function = new Procedure1<Procedure0>() {
-        @Override
-        public void apply(final Procedure0 it) {
-          it.apply();
-        }
+      final Consumer<Procedure0> _function = (Procedure0 it) -> {
+        it.apply();
       };
-      IterableExtensions.<Procedure0>forEach(this.delayedTasks, _function);
+      this.delayedTasks.forEach(_function);
     } catch (final Throwable _t) {
       if (_t instanceof Throwable) {
         final Throwable t = (Throwable)_t;
@@ -138,25 +135,19 @@ public class ProblemSupportImpl implements ProblemSupport {
     EList<Resource.Diagnostic> _warnings = resource.getWarnings();
     Iterable<Resource.Diagnostic> _plus = Iterables.<Resource.Diagnostic>concat(_errors, _warnings);
     final Iterable<EObjectDiagnosticImpl> issues = Iterables.<EObjectDiagnosticImpl>filter(_plus, EObjectDiagnosticImpl.class);
-    final Function1<EObjectDiagnosticImpl, Boolean> _function = new Function1<EObjectDiagnosticImpl, Boolean>() {
-      @Override
-      public Boolean apply(final EObjectDiagnosticImpl diag) {
-        EObject _problematicObject = diag.getProblematicObject();
-        EObject _value = resAndObj.getValue();
-        return Boolean.valueOf(Objects.equal(_problematicObject, _value));
-      }
+    final Function1<EObjectDiagnosticImpl, Boolean> _function = (EObjectDiagnosticImpl diag) -> {
+      EObject _problematicObject = diag.getProblematicObject();
+      EObject _value = resAndObj.getValue();
+      return Boolean.valueOf(Objects.equal(_problematicObject, _value));
     };
     Iterable<EObjectDiagnosticImpl> _filter = IterableExtensions.<EObjectDiagnosticImpl>filter(issues, _function);
-    final Function1<EObjectDiagnosticImpl, Problem> _function_1 = new Function1<EObjectDiagnosticImpl, Problem>() {
-      @Override
-      public Problem apply(final EObjectDiagnosticImpl diag) {
-        String _code = diag.getCode();
-        String _message = diag.getMessage();
-        Severity _severity = diag.getSeverity();
-        Problem.Severity _translateSeverity = ProblemSupportImpl.this.translateSeverity(_severity);
-        ProblemImpl _problemImpl = new ProblemImpl(_code, _message, _translateSeverity);
-        return ((Problem) _problemImpl);
-      }
+    final Function1<EObjectDiagnosticImpl, Problem> _function_1 = (EObjectDiagnosticImpl diag) -> {
+      String _code = diag.getCode();
+      String _message = diag.getMessage();
+      Severity _severity = diag.getSeverity();
+      Problem.Severity _translateSeverity = this.translateSeverity(_severity);
+      ProblemImpl _problemImpl = new ProblemImpl(_code, _message, _translateSeverity);
+      return ((Problem) _problemImpl);
     };
     final Iterable<Problem> result = IterableExtensions.<EObjectDiagnosticImpl, Problem>map(_filter, _function_1);
     return IterableExtensions.<Problem>toList(result);

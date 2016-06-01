@@ -29,11 +29,8 @@ public class CheckMutableParameterDeclarationProcessor implements RegisterGlobal
   @Override
   public void doTransform(final List<? extends MutableParameterDeclaration> annotatedTargetElements, @Extension final TransformationContext context) {
     for (final MutableParameterDeclaration annotatedTargetElement : annotatedTargetElements) {
-      final Procedure1<String> _function = new Procedure1<String>() {
-        @Override
-        public void apply(final String identifier) {
-          annotatedTargetElement.setSimpleName(identifier);
-        }
+      final Procedure1<String> _function = (String identifier) -> {
+        annotatedTargetElement.setSimpleName(identifier);
       };
       MutableAssert.assertValidJavaIdentifier("name", _function);
     }

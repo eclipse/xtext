@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Consumer;
 import org.apache.log4j.Level;
 import org.eclipse.xtend.core.compiler.batch.XtendBatchCompiler;
 import org.eclipse.xtend.core.tests.RuntimeInjectorProvider;
@@ -130,16 +131,13 @@ public class TestBatchCompiler {
   @AfterClass
   public static void afterClass() {
     try {
-      final Procedure1<File> _function = new Procedure1<File>() {
-        @Override
-        public void apply(final File it) {
-          boolean _exists = it.exists();
-          if (_exists) {
-            it.delete();
-          }
+      final Consumer<File> _function = (File it) -> {
+        boolean _exists = it.exists();
+        if (_exists) {
+          it.delete();
         }
       };
-      IterableExtensions.<File>forEach(TestBatchCompiler.abfalleimer, _function);
+      TestBatchCompiler.abfalleimer.forEach(_function);
     } catch (final Throwable _t) {
       if (_t instanceof Exception) {
         final Exception e = (Exception)_t;
@@ -153,13 +151,10 @@ public class TestBatchCompiler {
   
   @Test
   public void testInvalidConfiguration() {
-    final Runnable _function = new Runnable() {
-      @Override
-      public void run() {
-        TestBatchCompiler.this.batchCompiler.setSourcePath(TestBatchCompiler.XTEND_SRC_DIRECTORY);
-        TestBatchCompiler.this.batchCompiler.setOutputPath((TestBatchCompiler.XTEND_SRC_DIRECTORY + "/xtend-gen"));
-        TestBatchCompiler.this.batchCompiler.compile();
-      }
+    final Runnable _function = () -> {
+      this.batchCompiler.setSourcePath(TestBatchCompiler.XTEND_SRC_DIRECTORY);
+      this.batchCompiler.setOutputPath((TestBatchCompiler.XTEND_SRC_DIRECTORY + "/xtend-gen"));
+      this.batchCompiler.compile();
     };
     final LoggingTester.LogCapture log = LoggingTester.captureLogging(Level.ERROR, XtendBatchCompiler.class, _function);
     log.assertLogEntry("xtend", "cannot be a child");
@@ -170,15 +165,12 @@ public class TestBatchCompiler {
     String _property = System.getProperty("os.name");
     boolean _startsWith = _property.startsWith("Windows");
     if (_startsWith) {
-      final Runnable _function = new Runnable() {
-        @Override
-        public void run() {
-          TestBatchCompiler.this.batchCompiler.setSourcePath(TestBatchCompiler.XTEND_SRC_DIRECTORY);
-          String _upperCase = TestBatchCompiler.XTEND_SRC_DIRECTORY.toUpperCase();
-          String _plus = (_upperCase + "/xtend-gen");
-          TestBatchCompiler.this.batchCompiler.setOutputPath(_plus);
-          TestBatchCompiler.this.batchCompiler.compile();
-        }
+      final Runnable _function = () -> {
+        this.batchCompiler.setSourcePath(TestBatchCompiler.XTEND_SRC_DIRECTORY);
+        String _upperCase = TestBatchCompiler.XTEND_SRC_DIRECTORY.toUpperCase();
+        String _plus = (_upperCase + "/xtend-gen");
+        this.batchCompiler.setOutputPath(_plus);
+        this.batchCompiler.compile();
       };
       final LoggingTester.LogCapture log = LoggingTester.captureLogging(Level.ERROR, XtendBatchCompiler.class, _function);
       log.assertLogEntry("xtend", "cannot be a child");
@@ -236,34 +228,25 @@ public class TestBatchCompiler {
     int _size = _sourceFolders.size();
     Assert.assertEquals(2, _size);
     Set<FileSourceFolder> _sourceFolders_1 = project.getSourceFolders();
-    final Function1<FileSourceFolder, String> _function = new Function1<FileSourceFolder, String>() {
-      @Override
-      public String apply(final FileSourceFolder it) {
-        return it.getName();
-      }
+    final Function1<FileSourceFolder, String> _function = (FileSourceFolder it) -> {
+      return it.getName();
     };
     Iterable<String> _map = IterableExtensions.<FileSourceFolder, String>map(_sourceFolders_1, _function);
     final List<String> keyPaths = IterableExtensions.<String>sort(_map);
     String _get = keyPaths.get(0);
-    final Procedure1<String> _function_1 = new Procedure1<String>() {
-      @Override
-      public void apply(final String it) {
-        Assert.assertEquals("src", it);
-        String _outputDirectory = output.getOutputDirectory(it);
-        String _string = _outputDirectory.toString();
-        Assert.assertEquals("bin", _string);
-      }
+    final Procedure1<String> _function_1 = (String it) -> {
+      Assert.assertEquals("src", it);
+      String _outputDirectory = output.getOutputDirectory(it);
+      String _string = _outputDirectory.toString();
+      Assert.assertEquals("bin", _string);
     };
     ObjectExtensions.<String>operator_doubleArrow(_get, _function_1);
     String _get_1 = keyPaths.get(1);
-    final Procedure1<String> _function_2 = new Procedure1<String>() {
-      @Override
-      public void apply(final String it) {
-        Assert.assertEquals("src-gen", it);
-        String _outputDirectory = output.getOutputDirectory(it);
-        String _string = _outputDirectory.toString();
-        Assert.assertEquals("bin", _string);
-      }
+    final Procedure1<String> _function_2 = (String it) -> {
+      Assert.assertEquals("src-gen", it);
+      String _outputDirectory = output.getOutputDirectory(it);
+      String _string = _outputDirectory.toString();
+      Assert.assertEquals("bin", _string);
     };
     ObjectExtensions.<String>operator_doubleArrow(_get_1, _function_2);
   }
@@ -287,32 +270,23 @@ public class TestBatchCompiler {
     int _size = _sourceFolders.size();
     Assert.assertEquals(2, _size);
     Set<FileSourceFolder> _sourceFolders_1 = project.getSourceFolders();
-    final Function1<FileSourceFolder, String> _function = new Function1<FileSourceFolder, String>() {
-      @Override
-      public String apply(final FileSourceFolder it) {
-        return it.getName();
-      }
+    final Function1<FileSourceFolder, String> _function = (FileSourceFolder it) -> {
+      return it.getName();
     };
     Iterable<String> _map = IterableExtensions.<FileSourceFolder, String>map(_sourceFolders_1, _function);
     final List<String> keyPaths = IterableExtensions.<String>sort(_map);
     String _get = keyPaths.get(0);
-    final Procedure1<String> _function_1 = new Procedure1<String>() {
-      @Override
-      public void apply(final String it) {
-        Assert.assertEquals("src", it);
-        String _outputDirectory = output.getOutputDirectory(it);
-        Assert.assertEquals("bin", _outputDirectory);
-      }
+    final Procedure1<String> _function_1 = (String it) -> {
+      Assert.assertEquals("src", it);
+      String _outputDirectory = output.getOutputDirectory(it);
+      Assert.assertEquals("bin", _outputDirectory);
     };
     ObjectExtensions.<String>operator_doubleArrow(_get, _function_1);
     String _get_1 = keyPaths.get(1);
-    final Procedure1<String> _function_2 = new Procedure1<String>() {
-      @Override
-      public void apply(final String it) {
-        Assert.assertEquals("src-gen", it);
-        String _outputDirectory = output.getOutputDirectory(it);
-        Assert.assertEquals("bin", _outputDirectory);
-      }
+    final Procedure1<String> _function_2 = (String it) -> {
+      Assert.assertEquals("src-gen", it);
+      String _outputDirectory = output.getOutputDirectory(it);
+      Assert.assertEquals("bin", _outputDirectory);
     };
     ObjectExtensions.<String>operator_doubleArrow(_get_1, _function_2);
   }
@@ -336,32 +310,23 @@ public class TestBatchCompiler {
     int _size = _sourceFolders.size();
     Assert.assertEquals(2, _size);
     Set<FileSourceFolder> _sourceFolders_1 = project.getSourceFolders();
-    final Function1<FileSourceFolder, String> _function = new Function1<FileSourceFolder, String>() {
-      @Override
-      public String apply(final FileSourceFolder it) {
-        return it.getName();
-      }
+    final Function1<FileSourceFolder, String> _function = (FileSourceFolder it) -> {
+      return it.getName();
     };
     Iterable<String> _map = IterableExtensions.<FileSourceFolder, String>map(_sourceFolders_1, _function);
     final List<String> keyPaths = IterableExtensions.<String>sort(_map);
     String _get = keyPaths.get(0);
-    final Procedure1<String> _function_1 = new Procedure1<String>() {
-      @Override
-      public void apply(final String it) {
-        Assert.assertEquals("dir1/src", it);
-        String _outputDirectory = output.getOutputDirectory(it);
-        Assert.assertEquals("dir2/bin", _outputDirectory);
-      }
+    final Procedure1<String> _function_1 = (String it) -> {
+      Assert.assertEquals("dir1/src", it);
+      String _outputDirectory = output.getOutputDirectory(it);
+      Assert.assertEquals("dir2/bin", _outputDirectory);
     };
     ObjectExtensions.<String>operator_doubleArrow(_get, _function_1);
     String _get_1 = keyPaths.get(1);
-    final Procedure1<String> _function_2 = new Procedure1<String>() {
-      @Override
-      public void apply(final String it) {
-        Assert.assertEquals("src-gen", it);
-        String _outputDirectory = output.getOutputDirectory(it);
-        Assert.assertEquals("dir2/bin", _outputDirectory);
-      }
+    final Procedure1<String> _function_2 = (String it) -> {
+      Assert.assertEquals("src-gen", it);
+      String _outputDirectory = output.getOutputDirectory(it);
+      Assert.assertEquals("dir2/bin", _outputDirectory);
     };
     ObjectExtensions.<String>operator_doubleArrow(_get_1, _function_2);
   }
@@ -385,32 +350,23 @@ public class TestBatchCompiler {
     int _size = _sourceFolders.size();
     Assert.assertEquals(2, _size);
     Set<FileSourceFolder> _sourceFolders_1 = project.getSourceFolders();
-    final Function1<FileSourceFolder, String> _function = new Function1<FileSourceFolder, String>() {
-      @Override
-      public String apply(final FileSourceFolder it) {
-        return it.getName();
-      }
+    final Function1<FileSourceFolder, String> _function = (FileSourceFolder it) -> {
+      return it.getName();
     };
     Iterable<String> _map = IterableExtensions.<FileSourceFolder, String>map(_sourceFolders_1, _function);
     final List<String> keyPaths = IterableExtensions.<String>sort(_map);
     String _get = keyPaths.get(0);
-    final Procedure1<String> _function_1 = new Procedure1<String>() {
-      @Override
-      public void apply(final String it) {
-        Assert.assertEquals("dir1/src-gen", it);
-        String _outputDirectory = output.getOutputDirectory(it);
-        Assert.assertEquals("bin", _outputDirectory);
-      }
+    final Procedure1<String> _function_1 = (String it) -> {
+      Assert.assertEquals("dir1/src-gen", it);
+      String _outputDirectory = output.getOutputDirectory(it);
+      Assert.assertEquals("bin", _outputDirectory);
     };
     ObjectExtensions.<String>operator_doubleArrow(_get, _function_1);
     String _get_1 = keyPaths.get(1);
-    final Procedure1<String> _function_2 = new Procedure1<String>() {
-      @Override
-      public void apply(final String it) {
-        Assert.assertEquals("src", it);
-        String _outputDirectory = output.getOutputDirectory(it);
-        Assert.assertEquals("bin", _outputDirectory);
-      }
+    final Procedure1<String> _function_2 = (String it) -> {
+      Assert.assertEquals("src", it);
+      String _outputDirectory = output.getOutputDirectory(it);
+      Assert.assertEquals("bin", _outputDirectory);
     };
     ObjectExtensions.<String>operator_doubleArrow(_get_1, _function_2);
   }
@@ -434,32 +390,23 @@ public class TestBatchCompiler {
     int _size = _sourceFolders.size();
     Assert.assertEquals(2, _size);
     Set<FileSourceFolder> _sourceFolders_1 = project.getSourceFolders();
-    final Function1<FileSourceFolder, String> _function = new Function1<FileSourceFolder, String>() {
-      @Override
-      public String apply(final FileSourceFolder it) {
-        return it.getName();
-      }
+    final Function1<FileSourceFolder, String> _function = (FileSourceFolder it) -> {
+      return it.getName();
     };
     Iterable<String> _map = IterableExtensions.<FileSourceFolder, String>map(_sourceFolders_1, _function);
     final List<String> keyPaths = IterableExtensions.<String>sort(_map);
     String _get = keyPaths.get(0);
-    final Procedure1<String> _function_1 = new Procedure1<String>() {
-      @Override
-      public void apply(final String it) {
-        Assert.assertEquals("dir1/dir1a/src", it);
-        String _outputDirectory = output.getOutputDirectory(it);
-        Assert.assertEquals("dir2/dir2a/bin", _outputDirectory);
-      }
+    final Procedure1<String> _function_1 = (String it) -> {
+      Assert.assertEquals("dir1/dir1a/src", it);
+      String _outputDirectory = output.getOutputDirectory(it);
+      Assert.assertEquals("dir2/dir2a/bin", _outputDirectory);
     };
     ObjectExtensions.<String>operator_doubleArrow(_get, _function_1);
     String _get_1 = keyPaths.get(1);
-    final Procedure1<String> _function_2 = new Procedure1<String>() {
-      @Override
-      public void apply(final String it) {
-        Assert.assertEquals("dir3/dir3a/src-gen", it);
-        String _outputDirectory = output.getOutputDirectory(it);
-        Assert.assertEquals("dir2/dir2a/bin", _outputDirectory);
-      }
+    final Procedure1<String> _function_2 = (String it) -> {
+      Assert.assertEquals("dir3/dir3a/src-gen", it);
+      String _outputDirectory = output.getOutputDirectory(it);
+      Assert.assertEquals("dir2/dir2a/bin", _outputDirectory);
     };
     ObjectExtensions.<String>operator_doubleArrow(_get_1, _function_2);
   }
@@ -487,52 +434,37 @@ public class TestBatchCompiler {
     int _size = _sourceFolders.size();
     Assert.assertEquals(4, _size);
     Set<FileSourceFolder> _sourceFolders_1 = project.getSourceFolders();
-    final Function1<FileSourceFolder, String> _function = new Function1<FileSourceFolder, String>() {
-      @Override
-      public String apply(final FileSourceFolder it) {
-        return it.getName();
-      }
+    final Function1<FileSourceFolder, String> _function = (FileSourceFolder it) -> {
+      return it.getName();
     };
     Iterable<String> _map = IterableExtensions.<FileSourceFolder, String>map(_sourceFolders_1, _function);
     final List<String> keyPaths = IterableExtensions.<String>sort(_map);
     String _get = keyPaths.get(0);
-    final Procedure1<String> _function_1 = new Procedure1<String>() {
-      @Override
-      public void apply(final String it) {
-        Assert.assertEquals("dir2/dir3/dir4/src1", it);
-        String _outputDirectory = output.getOutputDirectory(it);
-        Assert.assertEquals("dir2/dir3/dir4/dir5/bin", _outputDirectory);
-      }
+    final Procedure1<String> _function_1 = (String it) -> {
+      Assert.assertEquals("dir2/dir3/dir4/src1", it);
+      String _outputDirectory = output.getOutputDirectory(it);
+      Assert.assertEquals("dir2/dir3/dir4/dir5/bin", _outputDirectory);
     };
     ObjectExtensions.<String>operator_doubleArrow(_get, _function_1);
     String _get_1 = keyPaths.get(1);
-    final Procedure1<String> _function_2 = new Procedure1<String>() {
-      @Override
-      public void apply(final String it) {
-        Assert.assertEquals("dir2/dir3/src2", it);
-        String _outputDirectory = output.getOutputDirectory(it);
-        Assert.assertEquals("dir2/dir3/dir4/dir5/bin", _outputDirectory);
-      }
+    final Procedure1<String> _function_2 = (String it) -> {
+      Assert.assertEquals("dir2/dir3/src2", it);
+      String _outputDirectory = output.getOutputDirectory(it);
+      Assert.assertEquals("dir2/dir3/dir4/dir5/bin", _outputDirectory);
     };
     ObjectExtensions.<String>operator_doubleArrow(_get_1, _function_2);
     String _get_2 = keyPaths.get(2);
-    final Procedure1<String> _function_3 = new Procedure1<String>() {
-      @Override
-      public void apply(final String it) {
-        Assert.assertEquals("dir2/src3", it);
-        String _outputDirectory = output.getOutputDirectory(it);
-        Assert.assertEquals("dir2/dir3/dir4/dir5/bin", _outputDirectory);
-      }
+    final Procedure1<String> _function_3 = (String it) -> {
+      Assert.assertEquals("dir2/src3", it);
+      String _outputDirectory = output.getOutputDirectory(it);
+      Assert.assertEquals("dir2/dir3/dir4/dir5/bin", _outputDirectory);
     };
     ObjectExtensions.<String>operator_doubleArrow(_get_2, _function_3);
     String _get_3 = keyPaths.get(3);
-    final Procedure1<String> _function_4 = new Procedure1<String>() {
-      @Override
-      public void apply(final String it) {
-        Assert.assertEquals("src4", it);
-        String _outputDirectory = output.getOutputDirectory(it);
-        Assert.assertEquals("dir2/dir3/dir4/dir5/bin", _outputDirectory);
-      }
+    final Procedure1<String> _function_4 = (String it) -> {
+      Assert.assertEquals("src4", it);
+      String _outputDirectory = output.getOutputDirectory(it);
+      Assert.assertEquals("dir2/dir3/dir4/dir5/bin", _outputDirectory);
     };
     ObjectExtensions.<String>operator_doubleArrow(_get_3, _function_4);
   }
@@ -668,12 +600,9 @@ public class TestBatchCompiler {
   @Test
   public void testActiveAnnotatons1() {
     this.batchCompiler.setSourcePath("./batch-compiler-data/activeAnnotations1");
-    final Runnable _function = new Runnable() {
-      @Override
-      public void run() {
-        boolean _compile = TestBatchCompiler.this.batchCompiler.compile();
-        Assert.assertFalse(_compile);
-      }
+    final Runnable _function = () -> {
+      boolean _compile = this.batchCompiler.compile();
+      Assert.assertFalse(_compile);
     };
     final LoggingTester.LogCapture logs = LoggingTester.captureLogging(Level.ERROR, XtendBatchCompiler.class, _function);
     logs.assertNumberOfLogEntries(1);
@@ -685,11 +614,8 @@ public class TestBatchCompiler {
     boolean _compile = this.batchCompiler.compile();
     Assert.assertTrue(_compile);
     File _file = new File((TestBatchCompiler.OUTPUT_DIRECTORY + "/mypackage"));
-    final FilenameFilter _function = new FilenameFilter() {
-      @Override
-      public boolean accept(final File dir, final String name) {
-        return name.endsWith(".java");
-      }
+    final FilenameFilter _function = (File dir, String name) -> {
+      return name.endsWith(".java");
     };
     String[] _list = _file.list(_function);
     final String javaFiles = IterableExtensions.join(((Iterable<?>)Conversions.doWrapArray(_list)), ",");
@@ -705,11 +631,8 @@ public class TestBatchCompiler {
     boolean _compile = this.batchCompiler.compile();
     Assert.assertTrue(_compile);
     File _file = new File((TestBatchCompiler.OUTPUT_DIRECTORY + "/"));
-    final FilenameFilter _function = new FilenameFilter() {
-      @Override
-      public boolean accept(final File dir, final String name) {
-        return name.endsWith(".java");
-      }
+    final FilenameFilter _function = (File dir, String name) -> {
+      return name.endsWith(".java");
     };
     String[] _list = _file.list(_function);
     final String javaFiles = IterableExtensions.join(((Iterable<?>)Conversions.doWrapArray(_list)), ",");
@@ -729,21 +652,15 @@ public class TestBatchCompiler {
     this.batchCompiler.setWriteTraceFiles(true);
     this.batchCompiler.compile();
     File _file = new File((TestBatchCompiler.OUTPUT_DIRECTORY + "/test"));
-    final FilenameFilter _function = new FilenameFilter() {
-      @Override
-      public boolean accept(final File dir, final String name) {
-        return name.endsWith(".java");
-      }
+    final FilenameFilter _function = (File dir, String name) -> {
+      return name.endsWith(".java");
     };
     String[] _list = _file.list(_function);
     int _size = ((List<String>)Conversions.doWrapArray(_list)).size();
     Assert.assertEquals(7, _size);
     File _file_1 = new File((TestBatchCompiler.OUTPUT_DIRECTORY + "/test"));
-    final FilenameFilter _function_1 = new FilenameFilter() {
-      @Override
-      public boolean accept(final File dir, final String name) {
-        return name.endsWith("._trace");
-      }
+    final FilenameFilter _function_1 = (File dir, String name) -> {
+      return name.endsWith("._trace");
     };
     String[] _list_1 = _file_1.list(_function_1);
     int _size_1 = ((List<String>)Conversions.doWrapArray(_list_1)).size();
@@ -755,21 +672,15 @@ public class TestBatchCompiler {
     this.batchCompiler.setWriteTraceFiles(false);
     this.batchCompiler.compile();
     File _file = new File((TestBatchCompiler.OUTPUT_DIRECTORY + "/test"));
-    final FilenameFilter _function = new FilenameFilter() {
-      @Override
-      public boolean accept(final File dir, final String name) {
-        return name.endsWith(".java");
-      }
+    final FilenameFilter _function = (File dir, String name) -> {
+      return name.endsWith(".java");
     };
     String[] _list = _file.list(_function);
     int _size = ((List<String>)Conversions.doWrapArray(_list)).size();
     Assert.assertEquals(7, _size);
     File _file_1 = new File((TestBatchCompiler.OUTPUT_DIRECTORY + "/test"));
-    final FilenameFilter _function_1 = new FilenameFilter() {
-      @Override
-      public boolean accept(final File dir, final String name) {
-        return name.endsWith("._trace");
-      }
+    final FilenameFilter _function_1 = (File dir, String name) -> {
+      return name.endsWith("._trace");
     };
     String[] _list_1 = _file_1.list(_function_1);
     int _size_1 = ((List<String>)Conversions.doWrapArray(_list_1)).size();
@@ -781,21 +692,15 @@ public class TestBatchCompiler {
     this.batchCompiler.setWriteStorageFiles(true);
     this.batchCompiler.compile();
     File _file = new File((TestBatchCompiler.OUTPUT_DIRECTORY + "/test"));
-    final FilenameFilter _function = new FilenameFilter() {
-      @Override
-      public boolean accept(final File dir, final String name) {
-        return name.endsWith(".java");
-      }
+    final FilenameFilter _function = (File dir, String name) -> {
+      return name.endsWith(".java");
     };
     String[] _list = _file.list(_function);
     int _size = ((List<String>)Conversions.doWrapArray(_list)).size();
     Assert.assertEquals(7, _size);
     File _file_1 = new File((TestBatchCompiler.OUTPUT_DIRECTORY + "/test"));
-    final FilenameFilter _function_1 = new FilenameFilter() {
-      @Override
-      public boolean accept(final File dir, final String name) {
-        return name.endsWith(".xtendbin");
-      }
+    final FilenameFilter _function_1 = (File dir, String name) -> {
+      return name.endsWith(".xtendbin");
     };
     String[] _list_1 = _file_1.list(_function_1);
     int _size_1 = ((List<String>)Conversions.doWrapArray(_list_1)).size();
@@ -807,21 +712,15 @@ public class TestBatchCompiler {
     this.batchCompiler.setWriteStorageFiles(false);
     this.batchCompiler.compile();
     File _file = new File((TestBatchCompiler.OUTPUT_DIRECTORY + "/test"));
-    final FilenameFilter _function = new FilenameFilter() {
-      @Override
-      public boolean accept(final File dir, final String name) {
-        return name.endsWith(".java");
-      }
+    final FilenameFilter _function = (File dir, String name) -> {
+      return name.endsWith(".java");
     };
     String[] _list = _file.list(_function);
     int _size = ((List<String>)Conversions.doWrapArray(_list)).size();
     Assert.assertEquals(7, _size);
     File _file_1 = new File((TestBatchCompiler.OUTPUT_DIRECTORY + "/test"));
-    final FilenameFilter _function_1 = new FilenameFilter() {
-      @Override
-      public boolean accept(final File dir, final String name) {
-        return name.endsWith(".xtendbin");
-      }
+    final FilenameFilter _function_1 = (File dir, String name) -> {
+      return name.endsWith(".xtendbin");
     };
     String[] _list_1 = _file_1.list(_function_1);
     int _size_1 = ((List<String>)Conversions.doWrapArray(_list_1)).size();
@@ -862,21 +761,15 @@ public class TestBatchCompiler {
     boolean _exists = _file_3.exists();
     Assert.assertTrue(_exists);
     File _file_4 = new File(customOutput);
-    final FilenameFilter _function = new FilenameFilter() {
-      @Override
-      public boolean accept(final File dir, final String name) {
-        return name.endsWith(".java");
-      }
+    final FilenameFilter _function = (File dir, String name) -> {
+      return name.endsWith(".java");
     };
     String[] _list = _file_4.list(_function);
     int _size = ((List<String>)Conversions.doWrapArray(_list)).size();
     Assert.assertEquals(2, _size);
     File _file_5 = new File(customOutput);
-    final FilenameFilter _function_1 = new FilenameFilter() {
-      @Override
-      public boolean accept(final File dir, final String name) {
-        return name.endsWith("._trace");
-      }
+    final FilenameFilter _function_1 = (File dir, String name) -> {
+      return name.endsWith("._trace");
     };
     String[] _list_1 = _file_5.list(_function_1);
     int _size_1 = ((List<String>)Conversions.doWrapArray(_list_1)).size();

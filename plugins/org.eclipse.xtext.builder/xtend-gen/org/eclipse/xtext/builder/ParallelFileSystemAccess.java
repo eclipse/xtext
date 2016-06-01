@@ -44,64 +44,49 @@ public class ParallelFileSystemAccess implements IFileSystemAccess2 {
   
   protected void sendAsync(final Procedure1<? super IFileSystemAccess2> procedure) {
     URI _uri = this.delta.getUri();
-    final Runnable _function = new Runnable() {
-      @Override
-      public void run() {
-        if ((ParallelFileSystemAccess.this.delegate instanceof EclipseResourceFileSystemAccess2)) {
-          ((EclipseResourceFileSystemAccess2)ParallelFileSystemAccess.this.delegate).setPostProcessor(ParallelFileSystemAccess.this.fileCallback);
-        }
-        boolean _notEquals = (!Objects.equal(ParallelFileSystemAccess.this.sourceFolder, null));
-        if (_notEquals) {
-          if ((ParallelFileSystemAccess.this.delegate instanceof AbstractFileSystemAccess)) {
-            ((AbstractFileSystemAccess)ParallelFileSystemAccess.this.delegate).setCurrentSource(ParallelFileSystemAccess.this.sourceFolder);
-          }
-        }
-        procedure.apply(ParallelFileSystemAccess.this.delegate);
+    final Runnable _function = () -> {
+      if ((this.delegate instanceof EclipseResourceFileSystemAccess2)) {
+        ((EclipseResourceFileSystemAccess2)this.delegate).setPostProcessor(this.fileCallback);
       }
+      boolean _notEquals = (!Objects.equal(this.sourceFolder, null));
+      if (_notEquals) {
+        if ((this.delegate instanceof AbstractFileSystemAccess)) {
+          ((AbstractFileSystemAccess)this.delegate).setCurrentSource(this.sourceFolder);
+        }
+      }
+      procedure.apply(this.delegate);
     };
     this.fileSystemAccessQueue.sendAsync(_uri, _function);
   }
   
   @Override
   public void deleteFile(final String fileName) {
-    final Procedure1<IFileSystemAccess2> _function = new Procedure1<IFileSystemAccess2>() {
-      @Override
-      public void apply(final IFileSystemAccess2 it) {
-        it.deleteFile(fileName);
-      }
+    final Procedure1<IFileSystemAccess2> _function = (IFileSystemAccess2 it) -> {
+      it.deleteFile(fileName);
     };
     this.sendAsync(_function);
   }
   
   @Override
   public void generateFile(final String fileName, final CharSequence contents) {
-    final Procedure1<IFileSystemAccess2> _function = new Procedure1<IFileSystemAccess2>() {
-      @Override
-      public void apply(final IFileSystemAccess2 it) {
-        it.generateFile(fileName, contents);
-      }
+    final Procedure1<IFileSystemAccess2> _function = (IFileSystemAccess2 it) -> {
+      it.generateFile(fileName, contents);
     };
     this.sendAsync(_function);
   }
   
   @Override
   public void generateFile(final String fileName, final String outputConfigurationName, final CharSequence contents) {
-    final Procedure1<IFileSystemAccess2> _function = new Procedure1<IFileSystemAccess2>() {
-      @Override
-      public void apply(final IFileSystemAccess2 it) {
-        it.generateFile(fileName, outputConfigurationName, contents);
-      }
+    final Procedure1<IFileSystemAccess2> _function = (IFileSystemAccess2 it) -> {
+      it.generateFile(fileName, outputConfigurationName, contents);
     };
     this.sendAsync(_function);
   }
   
   @Override
   public void deleteFile(final String fileName, final String outputConfigurationName) {
-    final Procedure1<IFileSystemAccess2> _function = new Procedure1<IFileSystemAccess2>() {
-      @Override
-      public void apply(final IFileSystemAccess2 it) {
-        it.deleteFile(fileName, outputConfigurationName);
-      }
+    final Procedure1<IFileSystemAccess2> _function = (IFileSystemAccess2 it) -> {
+      it.deleteFile(fileName, outputConfigurationName);
     };
     this.sendAsync(_function);
   }
@@ -126,22 +111,16 @@ public class ParallelFileSystemAccess implements IFileSystemAccess2 {
   
   @Override
   public void generateFile(final String fileName, final String outputCfgName, final InputStream content) throws RuntimeIOException {
-    final Procedure1<IFileSystemAccess2> _function = new Procedure1<IFileSystemAccess2>() {
-      @Override
-      public void apply(final IFileSystemAccess2 it) {
-        it.generateFile(fileName, outputCfgName, content);
-      }
+    final Procedure1<IFileSystemAccess2> _function = (IFileSystemAccess2 it) -> {
+      it.generateFile(fileName, outputCfgName, content);
     };
     this.sendAsync(_function);
   }
   
   @Override
   public void generateFile(final String fileName, final InputStream content) throws RuntimeIOException {
-    final Procedure1<IFileSystemAccess2> _function = new Procedure1<IFileSystemAccess2>() {
-      @Override
-      public void apply(final IFileSystemAccess2 it) {
-        it.generateFile(fileName, content);
-      }
+    final Procedure1<IFileSystemAccess2> _function = (IFileSystemAccess2 it) -> {
+      it.generateFile(fileName, content);
     };
     this.sendAsync(_function);
   }

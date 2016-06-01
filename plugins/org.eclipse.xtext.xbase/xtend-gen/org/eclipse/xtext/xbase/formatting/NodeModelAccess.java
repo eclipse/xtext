@@ -31,11 +31,8 @@ public class NodeModelAccess {
     {
       final ICompositeNode node = NodeModelUtils.findActualNodeFor(obj);
       BidiTreeIterable<INode> _asTreeIterable = node.getAsTreeIterable();
-      final Function1<INode, Boolean> _function = new Function1<INode, Boolean>() {
-        @Override
-        public Boolean apply(final INode it) {
-          return Boolean.valueOf(((Objects.equal(it.getSemanticElement(), obj) && (it.getGrammarElement() instanceof Keyword)) && Objects.equal(it.getText(), kw)));
-        }
+      final Function1<INode, Boolean> _function = (INode it) -> {
+        return Boolean.valueOf(((Objects.equal(it.getSemanticElement(), obj) && (it.getGrammarElement() instanceof Keyword)) && Objects.equal(it.getText(), kw)));
       };
       INode _findFirst = IterableExtensions.<INode>findFirst(_asTreeIterable, _function);
       _xblockexpression = ((ILeafNode) _findFirst);
@@ -49,11 +46,8 @@ public class NodeModelAccess {
       final ICompositeNode node = NodeModelUtils.findActualNodeFor(obj);
       BidiTreeIterable<INode> _asTreeIterable = node.getAsTreeIterable();
       Iterable<ILeafNode> _filter = Iterables.<ILeafNode>filter(_asTreeIterable, ILeafNode.class);
-      final Function1<ILeafNode, Boolean> _function = new Function1<ILeafNode, Boolean>() {
-        @Override
-        public Boolean apply(final ILeafNode it) {
-          return Boolean.valueOf(((Objects.equal(it.getSemanticElement(), obj) && (it.getGrammarElement() instanceof Keyword)) && Objects.equal(it.getText(), kw)));
-        }
+      final Function1<ILeafNode, Boolean> _function = (ILeafNode it) -> {
+        return Boolean.valueOf(((Objects.equal(it.getSemanticElement(), obj) && (it.getGrammarElement() instanceof Keyword)) && Objects.equal(it.getText(), kw)));
       };
       _xblockexpression = IterableExtensions.<ILeafNode>filter(_filter, _function);
     }
@@ -83,11 +77,8 @@ public class NodeModelAccess {
         current = _lastChild;
       }
       final INode current1 = current;
-      final Function1<ILeafNode, Boolean> _function = new Function1<ILeafNode, Boolean>() {
-        @Override
-        public Boolean apply(final ILeafNode it) {
-          return Boolean.valueOf(((!Objects.equal(current1, it)) && (it.getGrammarElement() instanceof Keyword)));
-        }
+      final Function1<ILeafNode, Boolean> _function = (ILeafNode it) -> {
+        return Boolean.valueOf(((!Objects.equal(current1, it)) && (it.getGrammarElement() instanceof Keyword)));
       };
       final ILeafNode result = this.findNextLeaf(current1, _function);
       ILeafNode _xifexpression = null;

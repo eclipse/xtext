@@ -48,11 +48,8 @@ public class UiProjectDescriptor extends TestedProjectDescriptor {
     RuntimeProjectDescriptor _runtimeProject = _config.getRuntimeProject();
     WizardConfiguration _config_1 = this.getConfig();
     IdeProjectDescriptor _ideProject = _config_1.getIdeProject();
-    final Function1<ProjectDescriptor, Boolean> _function = new Function1<ProjectDescriptor, Boolean>() {
-      @Override
-      public Boolean apply(final ProjectDescriptor it) {
-        return Boolean.valueOf(it.isEnabled());
-      }
+    final Function1<ProjectDescriptor, Boolean> _function = (ProjectDescriptor it) -> {
+      return Boolean.valueOf(it.isEnabled());
     };
     Iterable<? extends ProjectDescriptor> _filter = IterableExtensions.filter(Collections.<ProjectDescriptor>unmodifiableList(CollectionLiterals.<ProjectDescriptor>newArrayList(_runtimeProject, _ideProject)), _function);
     return IterableExtensions.toSet(_filter);
@@ -92,34 +89,22 @@ public class UiProjectDescriptor extends TestedProjectDescriptor {
       ExternalDependency _createXtextDependency_2 = ExternalDependency.createXtextDependency("org.eclipse.xtext.ui.codetemplates.ui");
       deps.add(_createXtextDependency_2);
       ExternalDependency _externalDependency = new ExternalDependency();
-      final Procedure1<ExternalDependency> _function = new Procedure1<ExternalDependency>() {
-        @Override
-        public void apply(final ExternalDependency it) {
-          final Procedure1<ExternalDependency.P2Coordinates> _function = new Procedure1<ExternalDependency.P2Coordinates>() {
-            @Override
-            public void apply(final ExternalDependency.P2Coordinates it) {
-              it.setBundleId("org.eclipse.ui.editors");
-              it.setVersion("3.5.0");
-            }
-          };
-          it.p2(_function);
-        }
+      final Procedure1<ExternalDependency> _function = (ExternalDependency it) -> {
+        final Procedure1<ExternalDependency.P2Coordinates> _function_1 = (ExternalDependency.P2Coordinates it_1) -> {
+          it_1.setBundleId("org.eclipse.ui.editors");
+          it_1.setVersion("3.5.0");
+        };
+        it.p2(_function_1);
       };
       ExternalDependency _doubleArrow = ObjectExtensions.<ExternalDependency>operator_doubleArrow(_externalDependency, _function);
       deps.add(_doubleArrow);
       ExternalDependency _externalDependency_1 = new ExternalDependency();
-      final Procedure1<ExternalDependency> _function_1 = new Procedure1<ExternalDependency>() {
-        @Override
-        public void apply(final ExternalDependency it) {
-          final Procedure1<ExternalDependency.P2Coordinates> _function = new Procedure1<ExternalDependency.P2Coordinates>() {
-            @Override
-            public void apply(final ExternalDependency.P2Coordinates it) {
-              it.setBundleId("org.eclipse.ui.ide");
-              it.setVersion("3.5.0");
-            }
-          };
-          it.p2(_function);
-        }
+      final Procedure1<ExternalDependency> _function_1 = (ExternalDependency it) -> {
+        final Procedure1<ExternalDependency.P2Coordinates> _function_2 = (ExternalDependency.P2Coordinates it_1) -> {
+          it_1.setBundleId("org.eclipse.ui.ide");
+          it_1.setVersion("3.5.0");
+        };
+        it.p2(_function_2);
       };
       ExternalDependency _doubleArrow_1 = ObjectExtensions.<ExternalDependency>operator_doubleArrow(_externalDependency_1, _function_1);
       deps.add(_doubleArrow_1);
@@ -161,35 +146,32 @@ public class UiProjectDescriptor extends TestedProjectDescriptor {
   @Override
   public PomFile pom() {
     PomFile _pom = super.pom();
-    final Procedure1<PomFile> _function = new Procedure1<PomFile>() {
-      @Override
-      public void apply(final PomFile it) {
-        StringConcatenation _builder = new StringConcatenation();
-        _builder.append("<build>");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("<plugins>");
-        _builder.newLine();
-        _builder.append("\t\t");
-        _builder.append("<plugin>");
-        _builder.newLine();
-        _builder.append("\t\t\t");
-        _builder.append("<groupId>org.eclipse.xtend</groupId>");
-        _builder.newLine();
-        _builder.append("\t\t\t");
-        _builder.append("<artifactId>xtend-maven-plugin</artifactId>");
-        _builder.newLine();
-        _builder.append("\t\t");
-        _builder.append("</plugin>");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("</plugins>");
-        _builder.newLine();
-        _builder.append("</build>");
-        _builder.newLine();
-        it.setBuildSection(_builder.toString());
-        it.setPackaging("eclipse-plugin");
-      }
+    final Procedure1<PomFile> _function = (PomFile it) -> {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("<build>");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("<plugins>");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("<plugin>");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("<groupId>org.eclipse.xtend</groupId>");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("<artifactId>xtend-maven-plugin</artifactId>");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("</plugin>");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("</plugins>");
+      _builder.newLine();
+      _builder.append("</build>");
+      _builder.newLine();
+      it.setBuildSection(_builder.toString());
+      it.setPackaging("eclipse-plugin");
     };
     return ObjectExtensions.<PomFile>operator_doubleArrow(_pom, _function);
   }

@@ -643,11 +643,8 @@ public class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
       IPath _fullPath = file.getFullPath();
       String _plus = ((("Expected an error marker containing \'" + msgPart) + "\' on ") + _fullPath);
       String _plus_1 = (_plus + " but found ");
-      final Function1<IMarker, String> _function = new Function1<IMarker, String>() {
-        @Override
-        public String apply(final IMarker it) {
-          return MarkerUtilities.getMessage(it);
-        }
+      final Function1<IMarker, String> _function = (IMarker it) -> {
+        return MarkerUtilities.getMessage(it);
       };
       List<String> _map = ListExtensions.<IMarker, String>map(((List<IMarker>)Conversions.doWrapArray(findMarkers)), _function);
       String _join = IterableExtensions.join(_map, ",");

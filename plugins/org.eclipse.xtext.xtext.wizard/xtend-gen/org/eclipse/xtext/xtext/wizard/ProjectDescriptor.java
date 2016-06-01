@@ -79,11 +79,8 @@ public abstract class ProjectDescriptor {
   }
   
   public Set<String> getSourceFolders() {
-    final Function1<Outlet, String> _function = new Function1<Outlet, String>() {
-      @Override
-      public String apply(final Outlet it) {
-        return ProjectDescriptor.this.sourceFolder(it);
-      }
+    final Function1<Outlet, String> _function = (Outlet it) -> {
+      return this.sourceFolder(it);
     };
     List<String> _map = ListExtensions.<Outlet, String>map(Collections.<Outlet>unmodifiableList(CollectionLiterals.<Outlet>newArrayList(Outlet.MAIN_JAVA, Outlet.MAIN_RESOURCES, Outlet.MAIN_SRC_GEN, Outlet.MAIN_XTEND_GEN)), _function);
     return IterableExtensions.<String>toSet(_map);
@@ -130,11 +127,8 @@ public abstract class ProjectDescriptor {
   public CharSequence buildProperties() {
     StringConcatenation _builder = new StringConcatenation();
     Set<String> _sourceFolders = this.getSourceFolders();
-    final Function1<String, String> _function = new Function1<String, String>() {
-      @Override
-      public String apply(final String it) {
-        return (it + "/");
-      }
+    final Function1<String, String> _function = (String it) -> {
+      return (it + "/");
     };
     Iterable<String> _map = IterableExtensions.<String, String>map(_sourceFolders, _function);
     String _buildPropertiesEntry = this.buildPropertiesEntry("source..", _map);
@@ -248,46 +242,34 @@ public abstract class ProjectDescriptor {
     {
       final LinkedHashSet<String> bundles = CollectionLiterals.<String>newLinkedHashSet();
       Set<? extends ProjectDescriptor> _upstreamProjects = this.getUpstreamProjects();
-      final Function1<ProjectDescriptor, String> _function = new Function1<ProjectDescriptor, String>() {
-        @Override
-        public String apply(final ProjectDescriptor it) {
-          return it.getName();
-        }
+      final Function1<ProjectDescriptor, String> _function = (ProjectDescriptor it) -> {
+        return it.getName();
       };
       Iterable<String> _map = IterableExtensions.map(_upstreamProjects, _function);
       Iterables.<String>addAll(bundles, _map);
       Set<ExternalDependency> _externalDependencies = this.getExternalDependencies();
-      final Function1<ExternalDependency, ExternalDependency.P2Coordinates> _function_1 = new Function1<ExternalDependency, ExternalDependency.P2Coordinates>() {
-        @Override
-        public ExternalDependency.P2Coordinates apply(final ExternalDependency it) {
-          return it.getP2();
-        }
+      final Function1<ExternalDependency, ExternalDependency.P2Coordinates> _function_1 = (ExternalDependency it) -> {
+        return it.getP2();
       };
       Iterable<ExternalDependency.P2Coordinates> _map_1 = IterableExtensions.<ExternalDependency, ExternalDependency.P2Coordinates>map(_externalDependencies, _function_1);
-      final Function1<ExternalDependency.P2Coordinates, Boolean> _function_2 = new Function1<ExternalDependency.P2Coordinates, Boolean>() {
-        @Override
-        public Boolean apply(final ExternalDependency.P2Coordinates it) {
-          String _bundleId = it.getBundleId();
-          return Boolean.valueOf((!Objects.equal(_bundleId, null)));
-        }
+      final Function1<ExternalDependency.P2Coordinates, Boolean> _function_2 = (ExternalDependency.P2Coordinates it) -> {
+        String _bundleId = it.getBundleId();
+        return Boolean.valueOf((!Objects.equal(_bundleId, null)));
       };
       Iterable<ExternalDependency.P2Coordinates> _filter = IterableExtensions.<ExternalDependency.P2Coordinates>filter(_map_1, _function_2);
-      final Function1<ExternalDependency.P2Coordinates, String> _function_3 = new Function1<ExternalDependency.P2Coordinates, String>() {
-        @Override
-        public String apply(final ExternalDependency.P2Coordinates it) {
-          String _bundleId = it.getBundleId();
-          String _xifexpression = null;
-          String _version = it.getVersion();
-          boolean _equals = Objects.equal(_version, null);
-          if (_equals) {
-            _xifexpression = "";
-          } else {
-            String _version_1 = it.getVersion();
-            String _plus = (";bundle-version=\"" + _version_1);
-            _xifexpression = (_plus + "\"");
-          }
-          return (_bundleId + _xifexpression);
+      final Function1<ExternalDependency.P2Coordinates, String> _function_3 = (ExternalDependency.P2Coordinates it) -> {
+        String _bundleId = it.getBundleId();
+        String _xifexpression = null;
+        String _version = it.getVersion();
+        boolean _equals = Objects.equal(_version, null);
+        if (_equals) {
+          _xifexpression = "";
+        } else {
+          String _version_1 = it.getVersion();
+          String _plus = (";bundle-version=\"" + _version_1);
+          _xifexpression = (_plus + "\"");
         }
+        return (_bundleId + _xifexpression);
       };
       Iterable<String> _map_2 = IterableExtensions.<ExternalDependency.P2Coordinates, String>map(_filter, _function_3);
       Iterables.<String>addAll(bundles, _map_2);
@@ -298,12 +280,9 @@ public abstract class ProjectDescriptor {
   
   public Set<String> getImportedPackages() {
     Set<ExternalDependency> _externalDependencies = this.getExternalDependencies();
-    final Function1<ExternalDependency, Set<String>> _function = new Function1<ExternalDependency, Set<String>>() {
-      @Override
-      public Set<String> apply(final ExternalDependency it) {
-        ExternalDependency.P2Coordinates _p2 = it.getP2();
-        return _p2.getPackages();
-      }
+    final Function1<ExternalDependency, Set<String>> _function = (ExternalDependency it) -> {
+      ExternalDependency.P2Coordinates _p2 = it.getP2();
+      return _p2.getPackages();
     };
     Iterable<Set<String>> _map = IterableExtensions.<ExternalDependency, Set<String>>map(_externalDependencies, _function);
     Iterable<String> _flatten = Iterables.<String>concat(_map);

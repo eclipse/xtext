@@ -13,6 +13,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Consumer;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.jvmmodel.DispatchHelper;
@@ -31,7 +32,6 @@ import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -45,13 +45,10 @@ public class XtendOutlineSourceTreeBuilder extends AbstractXtendOutlineTreeBuild
   protected void _build(final XtendFile xtendFile, final IXtendOutlineContext context) {
     this.buildPackageAndImportSection(xtendFile, context);
     EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
-    final Procedure1<XtendTypeDeclaration> _function = new Procedure1<XtendTypeDeclaration>() {
-      @Override
-      public void apply(final XtendTypeDeclaration it) {
-        XtendOutlineSourceTreeBuilder.this.buildXtendType(it, context);
-      }
+    final Consumer<XtendTypeDeclaration> _function = (XtendTypeDeclaration it) -> {
+      this.buildXtendType(it, context);
     };
-    IterableExtensions.<XtendTypeDeclaration>forEach(_xtendTypes, _function);
+    _xtendTypes.forEach(_function);
   }
   
   protected void _build(final XtendTypeDeclaration xtendType, final IXtendOutlineContext context) {
@@ -73,13 +70,10 @@ public class XtendOutlineSourceTreeBuilder extends AbstractXtendOutlineTreeBuild
       this.buildMembers(xtendType, inferredType, inferredType, membersContext);
     } else {
       EList<XtendMember> _members = xtendType.getMembers();
-      final Procedure1<XtendMember> _function = new Procedure1<XtendMember>() {
-        @Override
-        public void apply(final XtendMember it) {
-          XtendOutlineSourceTreeBuilder.this.xtendOutlineNodeBuilder.buildEObjectNode(it, context);
-        }
+      final Consumer<XtendMember> _function = (XtendMember it) -> {
+        this.xtendOutlineNodeBuilder.buildEObjectNode(it, context);
       };
-      IterableExtensions.<XtendMember>forEach(_members, _function);
+      _members.forEach(_function);
     }
   }
   
@@ -150,11 +144,8 @@ public class XtendOutlineSourceTreeBuilder extends AbstractXtendOutlineTreeBuild
   
   protected void buildDispatchers(final JvmDeclaredType inferredType, final JvmDeclaredType baseType, final IXtendOutlineContext context) {
     Iterable<JvmOperation> _declaredOperations = inferredType.getDeclaredOperations();
-    final Function1<JvmOperation, Boolean> _function = new Function1<JvmOperation, Boolean>() {
-      @Override
-      public Boolean apply(final JvmOperation it) {
-        return Boolean.valueOf(XtendOutlineSourceTreeBuilder.this.dispatchHelper.isDispatcherFunction(it));
-      }
+    final Function1<JvmOperation, Boolean> _function = (JvmOperation it) -> {
+      return Boolean.valueOf(this.dispatchHelper.isDispatcherFunction(it));
     };
     Iterable<JvmOperation> _filter = IterableExtensions.<JvmOperation>filter(_declaredOperations, _function);
     for (final JvmOperation dispatcher : _filter) {
@@ -184,15 +175,12 @@ public class XtendOutlineSourceTreeBuilder extends AbstractXtendOutlineTreeBuild
       _xifexpression = this.dispatchHelper.getAllDispatchCases(dispatcher);
     } else {
       List<JvmOperation> _localDispatchCases = this.dispatchHelper.getLocalDispatchCases(dispatcher);
-      final Comparator<JvmOperation> _function = new Comparator<JvmOperation>() {
-        @Override
-        public int compare(final JvmOperation o1, final JvmOperation o2) {
-          EList<JvmMember> _members = baseType.getMembers();
-          int _indexOf = _members.indexOf(o1);
-          EList<JvmMember> _members_1 = baseType.getMembers();
-          int _indexOf_1 = _members_1.indexOf(o2);
-          return (_indexOf - _indexOf_1);
-        }
+      final Comparator<JvmOperation> _function = (JvmOperation o1, JvmOperation o2) -> {
+        EList<JvmMember> _members = baseType.getMembers();
+        int _indexOf = _members.indexOf(o1);
+        EList<JvmMember> _members_1 = baseType.getMembers();
+        int _indexOf_1 = _members_1.indexOf(o2);
+        return (_indexOf - _indexOf_1);
       };
       _xifexpression = IterableExtensions.<JvmOperation>sortWith(_localDispatchCases, _function);
     }

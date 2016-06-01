@@ -228,12 +228,9 @@ public abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractA
       String _xblockexpression = null;
       {
         EList<AbstractElement> _elements = it.getElements();
-        final Function1<AbstractElement, Boolean> _function = new Function1<AbstractElement, Boolean>() {
-          @Override
-          public Boolean apply(final AbstractElement it) {
-            boolean _isOptionalCardinality = GrammarUtil.isOptionalCardinality(it);
-            return Boolean.valueOf((!_isOptionalCardinality));
-          }
+        final Function1<AbstractElement, Boolean> _function = (AbstractElement it_1) -> {
+          boolean _isOptionalCardinality = GrammarUtil.isOptionalCardinality(it_1);
+          return Boolean.valueOf((!_isOptionalCardinality));
         };
         Iterable<AbstractElement> _filter = IterableExtensions.<AbstractElement>filter(_elements, _function);
         final int mandatoryContent = IterableExtensions.size(_filter);
@@ -399,12 +396,9 @@ public abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractA
       String _xblockexpression = null;
       {
         EList<AbstractElement> _elements = it.getElements();
-        final Function1<AbstractElement, Boolean> _function = new Function1<AbstractElement, Boolean>() {
-          @Override
-          public Boolean apply(final AbstractElement it) {
-            boolean _isOptionalCardinality = GrammarUtil.isOptionalCardinality(it);
-            return Boolean.valueOf((!_isOptionalCardinality));
-          }
+        final Function1<AbstractElement, Boolean> _function = (AbstractElement it_1) -> {
+          boolean _isOptionalCardinality = GrammarUtil.isOptionalCardinality(it_1);
+          return Boolean.valueOf((!_isOptionalCardinality));
         };
         Iterable<AbstractElement> _filter = IterableExtensions.<AbstractElement>filter(_elements, _function);
         final int mandatoryContent = IterableExtensions.size(_filter);

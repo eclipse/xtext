@@ -75,19 +75,13 @@ public class ReferencedInvalidTypeFinder extends TypeReferenceVisitorWithResult<
   
   protected LightweightTypeReference _internalFindReferencedInvalidType(final JvmExecutable executable) {
     EList<JvmTypeParameter> _typeParameters = executable.getTypeParameters();
-    final Function1<JvmTypeParameter, EList<JvmTypeConstraint>> _function = new Function1<JvmTypeParameter, EList<JvmTypeConstraint>>() {
-      @Override
-      public EList<JvmTypeConstraint> apply(final JvmTypeParameter it) {
-        return it.getConstraints();
-      }
+    final Function1<JvmTypeParameter, EList<JvmTypeConstraint>> _function = (JvmTypeParameter it) -> {
+      return it.getConstraints();
     };
     List<EList<JvmTypeConstraint>> _map = ListExtensions.<JvmTypeParameter, EList<JvmTypeConstraint>>map(_typeParameters, _function);
     Iterable<JvmTypeConstraint> _flatten = Iterables.<JvmTypeConstraint>concat(_map);
-    final Function1<JvmTypeConstraint, JvmTypeReference> _function_1 = new Function1<JvmTypeConstraint, JvmTypeReference>() {
-      @Override
-      public JvmTypeReference apply(final JvmTypeConstraint it) {
-        return it.getTypeReference();
-      }
+    final Function1<JvmTypeConstraint, JvmTypeReference> _function_1 = (JvmTypeConstraint it) -> {
+      return it.getTypeReference();
     };
     Iterable<JvmTypeReference> _map_1 = IterableExtensions.<JvmTypeConstraint, JvmTypeReference>map(_flatten, _function_1);
     for (final JvmTypeReference typeReference : _map_1) {
@@ -99,12 +93,9 @@ public class ReferencedInvalidTypeFinder extends TypeReferenceVisitorWithResult<
       }
     }
     EList<JvmFormalParameter> _parameters = executable.getParameters();
-    final Function1<JvmFormalParameter, LightweightTypeReference> _function_2 = new Function1<JvmFormalParameter, LightweightTypeReference>() {
-      @Override
-      public LightweightTypeReference apply(final JvmFormalParameter it) {
-        JvmTypeReference _parameterType = it.getParameterType();
-        return ReferencedInvalidTypeFinder.this.toLightweightTypeReference(_parameterType);
-      }
+    final Function1<JvmFormalParameter, LightweightTypeReference> _function_2 = (JvmFormalParameter it) -> {
+      JvmTypeReference _parameterType = it.getParameterType();
+      return this.toLightweightTypeReference(_parameterType);
     };
     List<LightweightTypeReference> _map_2 = ListExtensions.<JvmFormalParameter, LightweightTypeReference>map(_parameters, _function_2);
     for (final LightweightTypeReference parameterType : _map_2) {
@@ -182,11 +173,8 @@ public class ReferencedInvalidTypeFinder extends TypeReferenceVisitorWithResult<
   }
   
   protected LightweightTypeReference visit(final List<LightweightTypeReference> references) {
-    final Function1<LightweightTypeReference, LightweightTypeReference> _function = new Function1<LightweightTypeReference, LightweightTypeReference>() {
-      @Override
-      public LightweightTypeReference apply(final LightweightTypeReference it) {
-        return it.<LightweightTypeReference>accept(ReferencedInvalidTypeFinder.this);
-      }
+    final Function1<LightweightTypeReference, LightweightTypeReference> _function = (LightweightTypeReference it) -> {
+      return it.<LightweightTypeReference>accept(this);
     };
     List<LightweightTypeReference> _map = ListExtensions.<LightweightTypeReference, LightweightTypeReference>map(references, _function);
     Iterable<LightweightTypeReference> _filterNull = IterableExtensions.<LightweightTypeReference>filterNull(_map);

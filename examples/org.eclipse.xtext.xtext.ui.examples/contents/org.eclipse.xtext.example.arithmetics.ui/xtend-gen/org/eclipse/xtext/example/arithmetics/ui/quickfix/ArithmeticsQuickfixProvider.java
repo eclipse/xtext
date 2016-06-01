@@ -27,14 +27,11 @@ public class ArithmeticsQuickfixProvider extends DefaultQuickfixProvider {
   public void normalize(final Issue issue, final IssueResolutionAcceptor acceptor) {
     String[] _data = issue.getData();
     final String string = _data[0];
-    final IModification _function = new IModification() {
-      @Override
-      public void apply(final IModificationContext it) throws Exception {
-        IXtextDocument _xtextDocument = it.getXtextDocument();
-        Integer _offset = issue.getOffset();
-        Integer _length = issue.getLength();
-        _xtextDocument.replace((_offset).intValue(), (_length).intValue(), string);
-      }
+    final IModification _function = (IModificationContext it) -> {
+      IXtextDocument _xtextDocument = it.getXtextDocument();
+      Integer _offset = issue.getOffset();
+      Integer _length = issue.getLength();
+      _xtextDocument.replace((_offset).intValue(), (_length).intValue(), string);
     };
     acceptor.accept(issue, ("Replace with " + string), (("Replace expression with \'" + string) + "\'"), "upcase.png", _function);
   }

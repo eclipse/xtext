@@ -25,11 +25,8 @@ public class TextFileAccess {
   
   public void setContent(final StringConcatenationClient content) {
     StringConcatenation _stringConcatenation = new StringConcatenation();
-    final Procedure1<StringConcatenation> _function = new Procedure1<StringConcatenation>() {
-      @Override
-      public void apply(final StringConcatenation it) {
-        it.append(content);
-      }
+    final Procedure1<StringConcatenation> _function = (StringConcatenation it) -> {
+      it.append(content);
     };
     StringConcatenation _doubleArrow = ObjectExtensions.<StringConcatenation>operator_doubleArrow(_stringConcatenation, _function);
     this.internalContents = _doubleArrow;
