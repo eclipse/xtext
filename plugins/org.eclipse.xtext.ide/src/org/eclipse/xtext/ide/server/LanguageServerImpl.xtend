@@ -33,6 +33,7 @@ import io.typefox.lsapi.FileEvent
 import io.typefox.lsapi.InitializeParams
 import io.typefox.lsapi.InitializeResult
 import io.typefox.lsapi.InitializeResultImpl
+import io.typefox.lsapi.LanguageDescriptionImpl
 import io.typefox.lsapi.Location
 import io.typefox.lsapi.MessageParams
 import io.typefox.lsapi.PublishDiagnosticsParams
@@ -55,21 +56,21 @@ import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtext.LanguageInfo
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistEntry
+import org.eclipse.xtext.ide.editor.syntaxcoloring.IEditorHighlightingConfigurationProvider
 import org.eclipse.xtext.ide.server.concurrent.CancellableIndicator
 import org.eclipse.xtext.ide.server.concurrent.RequestManager
 import org.eclipse.xtext.ide.server.contentassist.ContentAssistService
 import org.eclipse.xtext.ide.server.findReferences.WorkspaceResourceAccess
+import org.eclipse.xtext.ide.server.hover.HoverService
 import org.eclipse.xtext.ide.server.symbol.DocumentSymbolService
 import org.eclipse.xtext.ide.server.symbol.WorkspaceSymbolService
+import org.eclipse.xtext.resource.FileExtensionProvider
 import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.eclipse.xtext.validation.Issue
 
 import static io.typefox.lsapi.util.LsapiFactories.*
-import io.typefox.lsapi.LanguageDescriptionImpl
-import org.eclipse.xtext.resource.FileExtensionProvider
-import org.eclipse.xtext.LanguageInfo
-import org.eclipse.xtext.ide.editor.syntaxcoloring.IEditorHighlightingConfigurationProvider
 
 /**
  * 
@@ -99,6 +100,7 @@ import org.eclipse.xtext.ide.editor.syntaxcoloring.IEditorHighlightingConfigurat
 
 		val result = new InitializeResultImpl
 		result.capabilities = new ServerCapabilitiesImpl => [
+			hoverProvider = true
 			definitionProvider = true
 			referencesProvider = true
 			documentSymbolProvider = true
@@ -335,16 +337,31 @@ import org.eclipse.xtext.ide.editor.syntaxcoloring.IEditorHighlightingConfigurat
 
 	// end symbols
 
+	// hover
+	
+	override hover(TextDocumentPositionParams params) {
+		return requestManager.runRead[ cancelIndicator |
+			val uri = params.textDocument.uri.toUri
+			val resourceServiceProvider = uri.resourceServiceProvider
+			val hoverService = resourceServiceProvider?.get(HoverService)
+			if (hoverService === null)
+				return emptyHover
+
+			return workspaceManager.doRead(uri) [ document, resource |
+				val offset = document.getOffSet(params.position)
+				return hoverService.hover(resource, offset)
+			]  
+		]
+	}
+	
+	// end hover
+	
 	override didChangeConfiguraton(DidChangeConfigurationParams params) {
 		throw new UnsupportedOperationException("TODO: auto-generated method stub")
 	}
 
 	override resolveCompletionItem(CompletionItem unresolved) {
 		return CompletableFuture.completedFuture(unresolved)
-	}
-
-	override hover(TextDocumentPositionParams position) {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
 	}
 
 	override signatureHelp(TextDocumentPositionParams position) {

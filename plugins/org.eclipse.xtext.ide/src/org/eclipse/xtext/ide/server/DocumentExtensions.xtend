@@ -51,6 +51,7 @@ class DocumentExtensions {
 	}
 
 	def RangeImpl newRange(Resource resource, ITextRegion region) {
+		if (region === null) return null
 		return resource.newRange(region.offset, region.offset + region.length)
 	}
 

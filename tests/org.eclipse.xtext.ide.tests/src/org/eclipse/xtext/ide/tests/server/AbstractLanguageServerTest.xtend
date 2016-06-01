@@ -131,6 +131,8 @@ class AbstractLanguageServerTest implements Consumer<PublishDiagnosticsParams> {
 			«element.toExpectation»
 		«ENDFOR»
 	'''
+	
+	protected def dispatch String toExpectation(Void it) { '' }
 
 	protected def dispatch String toExpectation(Location it) '''«uri.relativize» «range.toExpectation»'''
 
