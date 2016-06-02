@@ -12,7 +12,7 @@
 	<rm:property key="gef.p2.repository" value="${eclipse.download}/tools/gef/updates/releases" />
 	<rm:property key="maven.p2.repository" value="${eclipse.download}/technology/m2e/releases/1.4/1.4.1.20140328-1905/" />
 	<rm:property key="maven.repository.uri" value="http://repo.maven.apache.org/maven2" />
-	<rm:property key="maven.snapshots.repository.uri" value="https://oss.sonatype.org/content/repositories/snapshots/" />
+	<rm:property key="maven.snapshots.repository.uri" value="http://oss.sonatype.org/content/repositories/snapshots" />
 	<rm:property key="xtext.p2.repository" value="${eclipse.download}/modeling/tmf/xtext/updates/milestones/" />
 
 	<rm:property key="orbit.p2.repository" value="${eclipse.download}/modeling/tmf/xtext/updates/orbit" />
@@ -72,7 +72,7 @@
 	<rm:locator searchPathRef="platform" failOnError="false" />
 
 	<rm:searchPath name="google-maven">
-		<rm:provider xsi:type="maven:MavenProvider" componentTypes="maven,osgi.bundle" source="false"
+		<rm:provider xsi:type="maven:MavenProvider" componentTypes="maven,osgi.bundle" transitive="false" source="false"
 			readerType="maven2">
 			<rm:uri format="{0}">
 				<bc:propertyRef key="maven.repository.uri" />

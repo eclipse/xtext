@@ -15,11 +15,11 @@ ext.branches = [
 		platforms: [
 			oldest: [
 				target: 'Helios',
-				jdk: jdks['1.6']
+				jdk: jdks['1.8']
 			],
 			latest: [
 				target: 'Mars',
-				jdk: jdks['1.7']
+				jdk: jdks['1.8']
 			],
 		]
 	],

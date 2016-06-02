@@ -1,9 +1,8 @@
 def runtimeSuites = ['xtext', 'xtend'].collect{it + '-runtime-tests'}
 def ideSuites = ['xtext', 'xtend'].collect{it + '-ide-tests'}
-def java8Suites= ['xtend-runtime-tests-java8']
 def intellijSuites = ['intellij-tests','intellij-eap-tests']
 // TODO for smaller server: def intellijSuites = ['intellij-tests']
-def onPushSuites = runtimeSuites + ideSuites + intellijSuites + java8Suites
+def onPushSuites = runtimeSuites + ideSuites + intellijSuites
 
 def slowSuites = ['xtext', 'xtend'].collect{it + '-slow-tests'}
 def smokeSuites = ['smoke-tests']
@@ -23,13 +22,10 @@ branches.each { branch ->
 			new TestJob(branch: branch.name, branchDisplayName: branch.displayName, suite: suite, platformName: platformName, target: platform.target, jdk: platform.jdk, buildSystem: 'buckminster')
 		}
 		.findAll {
-			(!(smokeSuites + java8Suites).contains(it.suite) || it.platformName == 'latest') &&
+			(!(smokeSuites).contains(it.suite) || it.platformName == 'latest') &&
 			(!intellijSuites.contains(it.suite) || (it.branch == 'master' && it.platformName == 'latest'))
 		}
 		.each {
-			if(java8Suites.contains(it.suite)) {
-				it.jdk = jdks['1.8']
-			}
 			if(intellijSuites.contains(it.suite)) {
 				it.buildSystem = 'gradle'
 			}
