@@ -18,6 +18,7 @@ import java.io.InputStream
 import java.io.OutputStream
 import java.io.PrintStream
 import java.io.PrintWriter
+import java.sql.Timestamp
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -62,7 +63,7 @@ class ServerLauncher {
 
 	def static redirectStandardStreams() {
 		System.setIn(new ByteArrayInputStream(newByteArrayOfSize(0)))
-		val id = ServerLauncher.name + "-" + System.currentTimeMillis
+		val id = ServerLauncher.name + "-" + new Timestamp(System.currentTimeMillis)
 		if (IS_DEBUG) {
 			val stdFileOut = new FileOutputStream("out-" + id + ".log")
 			System.setOut(new PrintStream(stdFileOut))

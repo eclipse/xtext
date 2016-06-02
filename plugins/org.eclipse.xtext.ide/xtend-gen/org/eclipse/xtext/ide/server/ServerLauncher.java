@@ -21,6 +21,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.io.PrintWriter;
+import java.sql.Timestamp;
 import org.eclipse.xtext.ide.server.LanguageServerImpl;
 import org.eclipse.xtext.ide.server.ServerModule;
 import org.eclipse.xtext.xbase.lib.Conversions;
@@ -112,7 +113,8 @@ public class ServerLauncher {
       String _name = ServerLauncher.class.getName();
       String _plus = (_name + "-");
       long _currentTimeMillis = System.currentTimeMillis();
-      final String id = (_plus + Long.valueOf(_currentTimeMillis));
+      Timestamp _timestamp = new Timestamp(_currentTimeMillis);
+      final String id = (_plus + _timestamp);
       if (ServerLauncher.IS_DEBUG) {
         final FileOutputStream stdFileOut = new FileOutputStream((("out-" + id) + ".log"));
         PrintStream _printStream = new PrintStream(stdFileOut);
