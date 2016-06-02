@@ -41,6 +41,7 @@ import org.eclipse.xtext.generator.trace.ILocationData;
 import org.eclipse.xtext.generator.trace.ITraceRegionProvider;
 import org.eclipse.xtext.generator.trace.SourceRelativeURI;
 import org.eclipse.xtext.generator.trace.TraceRegionSerializer;
+import org.eclipse.xtext.ui.generator.trace.ITraceForStorageProvider;
 import org.eclipse.xtext.ui.generator.trace.TraceForStorageProvider;
 import org.eclipse.xtext.ui.generator.trace.TraceMarkers;
 import org.eclipse.xtext.ui.resource.ProjectByResourceProvider;
@@ -88,7 +89,7 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 	private TraceMarkers traceMarkers;
 
 	@Inject
-	private TraceForStorageProvider fileBasedTraceInformation;
+	private ITraceForStorageProvider fileBasedTraceInformation;
 
 	@Inject
 	private IWorkspace workspace;
@@ -495,7 +496,11 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 	 * @since 2.5
 	 */
 	protected boolean isTraceFile(IFile file) {
-		return fileBasedTraceInformation.isTraceFile(file);
+		if (fileBasedTraceInformation instanceof TraceForStorageProvider) {
+			return ((TraceForStorageProvider)fileBasedTraceInformation).isTraceFile(file);
+		} else {
+			return false;
+		}
 	}
 
 	/**
@@ -503,11 +508,13 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 	 */
 	/* @Nullable */
 	protected IFile getTraceFile(IFile file) {
-		IStorage traceFile = fileBasedTraceInformation.getTraceFile(file);
-		if (traceFile instanceof IFile) {
-			IFile result = (IFile) traceFile;
-			syncIfNecessary(result);
-			return result;
+		if (fileBasedTraceInformation instanceof TraceForStorageProvider) {
+			IStorage traceFile = ((TraceForStorageProvider)fileBasedTraceInformation).getTraceFile(file);
+			if (traceFile instanceof IFile) {
+				IFile result = (IFile) traceFile;
+				syncIfNecessary(result);
+				return result;
+			}
 		}
 		return null;
 	}
