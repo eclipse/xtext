@@ -41,6 +41,9 @@ public class DerivedStateAwareResource extends StorageAwareResource {
 	public void setDerivedStateComputer(IDerivedStateComputer lateInitialization) {
 		this.derivedStateComputer = lateInitialization;
 	}
+
+	@Inject(optional=true)
+	private DeliverNotificationAdapter.Provider notificationAdapterProvider;
 	
 	/**
 	 * If <code>true</code>, the contents list of the resource is complete.
@@ -93,7 +96,11 @@ public class DerivedStateAwareResource extends StorageAwareResource {
 	public synchronized EList<EObject> getContents() {
 		if (isLoaded && !isLoading && !isInitializing && !isUpdating && !fullyInitialized && !isLoadedFromStorage()) {
 			try {
-				eSetDeliver(false);
+				if (notificationAdapterProvider!=null) {
+					notificationAdapterProvider.get(this).setDeliver(this); // is null in Unit Test
+				} else {
+					eSetDeliver(false);
+				}
 				installDerivedState(false);
 			} finally {
 				eSetDeliver(true);
@@ -113,6 +120,7 @@ public class DerivedStateAwareResource extends StorageAwareResource {
 	/**
 	 * @since 2.8
 	 */
+	@Override
 	/*@Override only for emf 2.11. We build with 2.10.2 add Override for 2.9*/
 	@SuppressWarnings("all")
 	protected List<EObject> getUnloadingContents() {

@@ -40,6 +40,7 @@ import org.eclipse.xtext.linking.impl.IllegalNodeException;
 import org.eclipse.xtext.linking.impl.LinkingHelper;
 import org.eclipse.xtext.linking.impl.XtextLinkingDiagnostic;
 import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.resource.DeliverNotificationAdapter;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.Triple;
@@ -92,6 +93,9 @@ public class LazyLinkingResource extends XtextResource {
 
 	@Inject
 	private LinkingHelper linkingHelper;
+
+	@Inject
+	private DeliverNotificationAdapter.Provider notificationAdapterProvider;
 
 	private boolean eagerLinking = false;
 
@@ -169,7 +173,7 @@ public class LazyLinkingResource extends XtextResource {
 							EObject target = getEObject(fragment);
 							if (target != null) {
 								try {
-									source.eSetDeliver(false);
+									notificationAdapterProvider.get(this).setDeliver(source);
 									list.setUnique(i, target);
 								} finally {
 									source.eSetDeliver(true);
@@ -189,10 +193,10 @@ public class LazyLinkingResource extends XtextResource {
 						EObject target = getEObject(fragment);
 						if (target != null) {
 							try {
-								source.eSetDeliver(false);
+								notificationAdapterProvider.get(this).setDeliver(source);
 								source.eSet(crossRef, target);
 							} finally {
-								source.eSetDeliver(true);
+								notificationAdapterProvider.get(this).resetDeliver(source);
 							}
 						}
 					}

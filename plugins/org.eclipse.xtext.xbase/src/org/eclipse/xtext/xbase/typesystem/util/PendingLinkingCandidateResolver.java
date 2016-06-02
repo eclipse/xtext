@@ -13,13 +13,19 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.resource.DeliverNotificationAdapter;
 import org.eclipse.xtext.xbase.XExpression;
+
+import com.google.inject.Inject;
 
 /**
  * @author Anton Kosyakov - Initial contribution and API
  */
 public class PendingLinkingCandidateResolver<Expression extends XExpression> {
 	
+	@Inject
+	private DeliverNotificationAdapter.Provider notificationAdapterProvider;
+
 	private final Expression expression;
 	
 	public PendingLinkingCandidateResolver(Expression expression) {
@@ -36,10 +42,12 @@ public class PendingLinkingCandidateResolver<Expression extends XExpression> {
 			throw new IllegalStateException("Feature was already resolved to " + oldFeature);
 		}
 		if (owner.eNotificationRequired()) {
-			boolean wasDeliver = owner.eDeliver();
-			owner.eSetDeliver(false);
-			internalSetValue(owner, structuralFeature, newValue);
-			owner.eSetDeliver(wasDeliver);
+			try {
+				notificationAdapterProvider.get(owner.eResource()).setDeliver(owner);
+				internalSetValue(owner, structuralFeature, newValue);
+			} finally {
+				notificationAdapterProvider.get(owner.eResource()).resetDeliver(owner);
+			}
 			if (newValue != oldFeature) {
 				owner.eNotify(new ENotificationImpl(owner, Notification.RESOLVE, featureId, oldFeature, newValue));
 			}

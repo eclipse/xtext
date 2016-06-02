@@ -44,6 +44,7 @@ import org.eclipse.xtext.generator.IGenerator2;
 import org.eclipse.xtext.generator.IShouldGenerate;
 import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.generator.OutputConfiguration.SourceMapping;
+import org.eclipse.xtext.resource.DeliverNotificationAdapter;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
@@ -99,6 +100,9 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 	
 	@Inject
 	private IShouldGenerate shouldGenerate;
+	
+	@Inject
+	private DeliverNotificationAdapter.Provider notificationAdapterProvider;
 
 	private EclipseOutputConfigurationProvider outputConfigurationProvider;
 	private BuilderPreferenceAccess builderPreferenceAccess;
@@ -292,12 +296,11 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 	 * @since 2.7
 	 */
 	protected void clearResourceSet(ResourceSet resourceSet) {
-		boolean wasDeliver = resourceSet.eDeliver();
 		try {
-			resourceSet.eSetDeliver(false);
+			notificationAdapterProvider.get(resourceSet).setDeliver(resourceSet);
 			resourceSet.getResources().clear();
 		} finally {
-			resourceSet.eSetDeliver(wasDeliver);
+			notificationAdapterProvider.get(resourceSet).resetDeliver(resourceSet);
 		}
 	}
 	

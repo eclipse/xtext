@@ -36,6 +36,7 @@ import org.eclipse.jface.text.DocumentEvent;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.Position;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.xtext.resource.DeliverNotificationAdapter;
 import org.eclipse.xtext.resource.ISynchronizable;
 import org.eclipse.xtext.resource.OutdatedStateManager;
 import org.eclipse.xtext.resource.XtextResource;
@@ -73,6 +74,9 @@ public class XtextDocument extends Document implements IXtextDocument {
 	@Inject(optional=true)
 	private ReconcilingUnitOfWorkProvider reconcilingUnitOfWorkProvider = new ReconcilingUnitOfWorkProvider();
 	
+	@Inject
+	private DeliverNotificationAdapter.Provider notificationAdapterProvider;
+
 	/**
 	 * @since 2.8
 	 * @noreference This constructor is not intended to be referenced by clients. Only for testing
@@ -112,9 +116,10 @@ public class XtextDocument extends Document implements IXtextDocument {
 				// storage / stream - NPE guard here
 				if (state != null) {
 					// clean up resource set and resource to release resources
-					state.getResourceSet().eSetDeliver(false);
+					DeliverNotificationAdapter adapter = notificationAdapterProvider.get(state);
+					adapter.setDeliver(state.getResourceSet());
 					state.getResourceSet().eAdapters().clear();
-					state.eSetDeliver(false);
+					adapter.setDeliver(state);
 					state.eAdapters().clear();
 				}
 				resource = null;
