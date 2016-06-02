@@ -48,7 +48,11 @@
         <cs:dependency name="org.junit4" componentType="osgi.bundle" versionDesignator="4.8.0"/>
         <cs:dependency name="org.objectweb.asm" componentType="osgi.bundle" versionDesignator="5.0.1"/>
         <cs:dependency name="org.objectweb.asm.source" componentType="osgi.bundle" versionDesignator="5.0.1"/>
+        
+        <cs:dependency name="io.typefox.lsapi" componentType="osgi.bundle"/>
+        <cs:dependency name="io.typefox.lsapi.services" componentType="osgi.bundle"/>
     </cs:dependencies>
+    
     <cs:actions>
         <cs:public name="create.javadoc" actor="ant">
             <cs:actorProperties>
