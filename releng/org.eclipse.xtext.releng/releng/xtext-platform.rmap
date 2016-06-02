@@ -12,6 +12,7 @@
 	<rm:property key="gef.p2.repository" value="${eclipse.download}/tools/gef/updates/releases" />
 	<rm:property key="maven.p2.repository" value="${eclipse.download}/technology/m2e/releases/1.4/1.4.1.20140328-1905/" />
 	<rm:property key="maven.repository.uri" value="http://repo.maven.apache.org/maven2" />
+	<rm:property key="maven.snapshots.repository.uri" value="https://oss.sonatype.org/content/repositories/snapshots/" />
 	<rm:property key="xtext.p2.repository" value="${eclipse.download}/modeling/tmf/xtext/updates/milestones/" />
 
 	<rm:property key="orbit.p2.repository" value="${eclipse.download}/modeling/tmf/xtext/updates/orbit" />
@@ -45,6 +46,7 @@
 	<rm:locator pattern="^org\.apache(?:\..+)?$" searchPathRef="orbit" failOnError="false" />
 	<rm:locator pattern="^com\.google\.guava(?:\..+)?$" resolutionFilter="(ECLIPSE.TARGET.ALIAS=Latest)"
 		searchPathRef="google-maven" />
+	
 	<rm:locator pattern="^com\.google\.guava(?:\..+)?$" resolutionFilter="(!(ECLIPSE.TARGET.ALIAS=Latest))"
 		searchPathRef="orbit" />
 	<rm:locator pattern="^com\.google\.inject(?:\..+)?$" searchPathRef="orbit" />
@@ -64,6 +66,8 @@
 	<rm:locator pattern="^org\.kohsuke\.args4j(?:\..+)?$" searchPathRef="egit" />
 	<rm:locator pattern="^com\.ning(?:\..+)?$" searchPathRef="maven" />
 	<rm:locator pattern="^org.eclipse.jdt.annotation$" searchPathRef="jdt.annotation" />
+
+	<rm:locator pattern="^io\.typefox\.lsapi(?:\..+)?$" searchPathRef="ls.api" failOnError="true"/>
 
 	<rm:locator searchPathRef="platform" failOnError="false" />
 
@@ -214,6 +218,18 @@
 			<rm:uri format="{0}">
 				<bc:propertyRef key="jdt_annotation.p2.repository" />
 			</rm:uri>
+		</rm:provider>
+	</rm:searchPath>
+	
+	<rm:searchPath name="ls.api">
+		<rm:provider  componentTypes="maven,osgi.bundle" readerType="maven2" source="false" mutable="false" xsi:type="maven:MavenProvider">
+			<rm:uri format="{0}">
+				<bc:propertyRef key="maven.snapshots.repository.uri" />
+			</rm:uri>
+			<maven:mappings>
+				<maven:entry artifactId="io.typefox.lsapi" groupId="io.typefox.lsapi" name="io.typefox.lsapi" />
+				<maven:entry artifactId="io.typefox.lsapi.services" groupId="io.typefox.lsapi" name="io.typefox.lsapi.services" />
+			</maven:mappings>
 		</rm:provider>
 	</rm:searchPath>
 
