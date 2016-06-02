@@ -11,22 +11,24 @@ import com.google.common.base.Objects;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
-import io.typefox.lsapi.NotificationMessage;
 import io.typefox.lsapi.services.json.LanguageServerProtocol;
 import io.typefox.lsapi.services.json.LanguageServerToJsonAdapter;
+import io.typefox.lsapi.services.json.LoggingJsonAdapter;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
+import java.io.PrintWriter;
 import org.eclipse.xtext.ide.server.LanguageServerImpl;
 import org.eclipse.xtext.ide.server.ServerModule;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 
 /**
@@ -60,55 +62,37 @@ public class ServerLauncher {
   public void start(final InputStream in, final OutputStream out) {
     try {
       System.err.println("Starting Xtext Language Server.");
-      final LanguageServerToJsonAdapter messageAcceptor = new LanguageServerToJsonAdapter(this.languageServer) {
-        @Override
-        protected void _doAccept(final NotificationMessage message) {
-          if (ServerLauncher.IS_DEBUG) {
-            InputOutput.<NotificationMessage>println(message);
+      LanguageServerToJsonAdapter _xifexpression = null;
+      if (ServerLauncher.IS_DEBUG) {
+        LoggingJsonAdapter _loggingJsonAdapter = new LoggingJsonAdapter(this.languageServer);
+        final Procedure1<LoggingJsonAdapter> _function = new Procedure1<LoggingJsonAdapter>() {
+          @Override
+          public void apply(final LoggingJsonAdapter it) {
+            PrintWriter _printWriter = new PrintWriter(System.err);
+            it.setErrorLog(_printWriter);
+            PrintWriter _printWriter_1 = new PrintWriter(System.out);
+            it.setMessageLog(_printWriter_1);
           }
-          super._doAccept(message);
-        }
-        
-        @Override
-        protected void sendResponse(final String responseId, final Object resultValue) {
-          if (ServerLauncher.IS_DEBUG) {
-            InputOutput.<String>println(("response : " + resultValue));
+        };
+        _xifexpression = ObjectExtensions.<LoggingJsonAdapter>operator_doubleArrow(_loggingJsonAdapter, _function);
+      } else {
+        LanguageServerToJsonAdapter _languageServerToJsonAdapter = new LanguageServerToJsonAdapter(this.languageServer);
+        final Procedure1<LanguageServerToJsonAdapter> _function_1 = new Procedure1<LanguageServerToJsonAdapter>() {
+          @Override
+          public void apply(final LanguageServerToJsonAdapter it) {
+            LanguageServerProtocol _protocol = it.getProtocol();
+            final Procedure2<String, Throwable> _function = new Procedure2<String, Throwable>() {
+              @Override
+              public void apply(final String p1, final Throwable p2) {
+                p2.printStackTrace(System.err);
+              }
+            };
+            _protocol.addErrorListener(_function);
           }
-          super.sendResponse(responseId, resultValue);
-        }
-        
-        @Override
-        protected void sendNotification(final String methodId, final Object parameter) {
-          if (ServerLauncher.IS_DEBUG) {
-            InputOutput.<String>println(("id" + methodId));
-            InputOutput.<String>println(("notification : " + parameter));
-          }
-          super.sendNotification(methodId, parameter);
-        }
-        
-        @Override
-        protected void sendResponseError(final String responseId, final String errorMessage, final int errorCode, final Object errorData) {
-          if (ServerLauncher.IS_DEBUG) {
-            InputOutput.<String>println(("id" + responseId));
-            InputOutput.<String>println(("error : " + errorMessage));
-          }
-          super.sendResponseError(responseId, errorMessage, errorCode, errorData);
-        }
-        
-        @Override
-        public void exit() {
-          System.err.println("Exit notification received. Good Bye!");
-          super.exit();
-        }
-      };
-      LanguageServerProtocol _protocol = messageAcceptor.getProtocol();
-      final Procedure2<String, Throwable> _function = new Procedure2<String, Throwable>() {
-        @Override
-        public void apply(final String p1, final Throwable p2) {
-          p2.printStackTrace(System.err);
-        }
-      };
-      _protocol.addErrorListener(_function);
+        };
+        _xifexpression = ObjectExtensions.<LanguageServerToJsonAdapter>operator_doubleArrow(_languageServerToJsonAdapter, _function_1);
+      }
+      final LanguageServerToJsonAdapter messageAcceptor = _xifexpression;
       messageAcceptor.connect(in, out);
       System.err.println("started.");
       messageAcceptor.join();
