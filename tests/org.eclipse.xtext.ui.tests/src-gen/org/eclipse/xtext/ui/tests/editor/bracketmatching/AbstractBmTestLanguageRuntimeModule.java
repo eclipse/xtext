@@ -33,6 +33,16 @@ public abstract class AbstractBmTestLanguageRuntimeModule extends org.eclipse.xt
 			binder.bind(String.class).annotatedWith(Names.named(Constants.FILE_EXTENSIONS)).toInstance("bmtestlanguage");
 	}
 	
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.ui.tests.editor.bracketmatching.bracketmatching.BracketmatchingPackage bindBracketmatchingPackageToInstance() {
+		return org.eclipse.xtext.ui.tests.editor.bracketmatching.bracketmatching.BracketmatchingPackage.eINSTANCE;
+	}
+
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.ui.tests.editor.bracketmatching.bracketmatching.BracketmatchingFactory bindBracketmatchingFactoryToInstance() {
+		return org.eclipse.xtext.ui.tests.editor.bracketmatching.bracketmatching.BracketmatchingFactory.eINSTANCE;
+	}
+
 	// contributed by org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment
 	public java.lang.ClassLoader bindClassLoaderToInstance() {
 		return getClass().getClassLoader();

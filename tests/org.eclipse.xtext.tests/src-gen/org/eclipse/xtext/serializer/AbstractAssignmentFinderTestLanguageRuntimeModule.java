@@ -78,6 +78,16 @@ public abstract class AbstractAssignmentFinderTestLanguageRuntimeModule extends 
 		return org.eclipse.xtext.serializer.services.AssignmentFinderTestLanguageGrammarAccess.class;
 	}
 
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.serializer.assignmentFinderTest.AssignmentFinderTestPackage bindAssignmentFinderTestPackageToInstance() {
+		return org.eclipse.xtext.serializer.assignmentFinderTest.AssignmentFinderTestPackage.eINSTANCE;
+	}
+
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.serializer.assignmentFinderTest.AssignmentFinderTestFactory bindAssignmentFinderTestFactoryToInstance() {
+		return org.eclipse.xtext.serializer.assignmentFinderTest.AssignmentFinderTestFactory.eINSTANCE;
+	}
+
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
 		return org.eclipse.xtext.serializer.serializer.AssignmentFinderTestLanguageSemanticSequencer.class;

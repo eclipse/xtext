@@ -33,6 +33,16 @@ public abstract class AbstractReferenceGrammarUiTestLanguageRuntimeModule extend
 			binder.bind(String.class).annotatedWith(Names.named(Constants.FILE_EXTENSIONS)).toInstance("referencegrammaruitestlanguage");
 	}
 	
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.ui.tests.testlanguages.referenceGrammarUi.ReferenceGrammarUiPackage bindReferenceGrammarUiPackageToInstance() {
+		return org.eclipse.xtext.ui.tests.testlanguages.referenceGrammarUi.ReferenceGrammarUiPackage.eINSTANCE;
+	}
+
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.ui.tests.testlanguages.referenceGrammarUi.ReferenceGrammarUiFactory bindReferenceGrammarUiFactoryToInstance() {
+		return org.eclipse.xtext.ui.tests.testlanguages.referenceGrammarUi.ReferenceGrammarUiFactory.eINSTANCE;
+	}
+
 	// contributed by org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment
 	public java.lang.ClassLoader bindClassLoaderToInstance() {
 		return getClass().getClassLoader();

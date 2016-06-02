@@ -78,6 +78,16 @@ public abstract class AbstractTreeTestLanguageRuntimeModule extends org.eclipse.
 		return org.eclipse.xtext.testlanguages.services.TreeTestLanguageGrammarAccess.class;
 	}
 
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.testlanguages.treeTestLanguage.TreeTestLanguagePackage bindTreeTestLanguagePackageToInstance() {
+		return org.eclipse.xtext.testlanguages.treeTestLanguage.TreeTestLanguagePackage.eINSTANCE;
+	}
+
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.testlanguages.treeTestLanguage.TreeTestLanguageFactory bindTreeTestLanguageFactoryToInstance() {
+		return org.eclipse.xtext.testlanguages.treeTestLanguage.TreeTestLanguageFactory.eINSTANCE;
+	}
+
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
 		return org.eclipse.xtext.testlanguages.serializer.TreeTestLanguageSemanticSequencer.class;

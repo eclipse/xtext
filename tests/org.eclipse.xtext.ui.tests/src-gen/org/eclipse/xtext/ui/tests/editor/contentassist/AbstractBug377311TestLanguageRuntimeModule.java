@@ -33,6 +33,16 @@ public abstract class AbstractBug377311TestLanguageRuntimeModule extends org.ecl
 			binder.bind(String.class).annotatedWith(Names.named(Constants.FILE_EXTENSIONS)).toInstance("bug377311testlanguage");
 	}
 	
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.ui.tests.editor.contentassist.bug377311.Bug377311Package bindBug377311PackageToInstance() {
+		return org.eclipse.xtext.ui.tests.editor.contentassist.bug377311.Bug377311Package.eINSTANCE;
+	}
+
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.ui.tests.editor.contentassist.bug377311.Bug377311Factory bindBug377311FactoryToInstance() {
+		return org.eclipse.xtext.ui.tests.editor.contentassist.bug377311.Bug377311Factory.eINSTANCE;
+	}
+
 	// contributed by org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment
 	public java.lang.ClassLoader bindClassLoaderToInstance() {
 		return getClass().getClassLoader();

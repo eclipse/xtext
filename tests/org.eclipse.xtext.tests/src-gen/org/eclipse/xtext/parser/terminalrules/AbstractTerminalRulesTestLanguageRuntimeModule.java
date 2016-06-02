@@ -78,6 +78,16 @@ public abstract class AbstractTerminalRulesTestLanguageRuntimeModule extends org
 		return org.eclipse.xtext.parser.terminalrules.services.TerminalRulesTestLanguageGrammarAccess.class;
 	}
 
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.parser.terminalrules.terminalRulesTestLanguage.TerminalRulesTestLanguagePackage bindTerminalRulesTestLanguagePackageToInstance() {
+		return org.eclipse.xtext.parser.terminalrules.terminalRulesTestLanguage.TerminalRulesTestLanguagePackage.eINSTANCE;
+	}
+
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.parser.terminalrules.terminalRulesTestLanguage.TerminalRulesTestLanguageFactory bindTerminalRulesTestLanguageFactoryToInstance() {
+		return org.eclipse.xtext.parser.terminalrules.terminalRulesTestLanguage.TerminalRulesTestLanguageFactory.eINSTANCE;
+	}
+
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
 		return org.eclipse.xtext.parser.terminalrules.serializer.TerminalRulesTestLanguageSemanticSequencer.class;

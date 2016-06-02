@@ -78,6 +78,16 @@ public abstract class AbstractIgnoreCaseNamespacesTestLanguageRuntimeModule exte
 		return org.eclipse.xtext.linking.services.IgnoreCaseNamespacesTestLanguageGrammarAccess.class;
 	}
 
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.linking.ignoreCaseNamespacesTest.IgnoreCaseNamespacesTestPackage bindIgnoreCaseNamespacesTestPackageToInstance() {
+		return org.eclipse.xtext.linking.ignoreCaseNamespacesTest.IgnoreCaseNamespacesTestPackage.eINSTANCE;
+	}
+
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.linking.ignoreCaseNamespacesTest.IgnoreCaseNamespacesTestFactory bindIgnoreCaseNamespacesTestFactoryToInstance() {
+		return org.eclipse.xtext.linking.ignoreCaseNamespacesTest.IgnoreCaseNamespacesTestFactory.eINSTANCE;
+	}
+
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
 		return org.eclipse.xtext.linking.serializer.IgnoreCaseNamespacesTestLanguageSemanticSequencer.class;

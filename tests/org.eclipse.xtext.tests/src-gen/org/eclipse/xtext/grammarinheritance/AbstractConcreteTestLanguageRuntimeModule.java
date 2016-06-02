@@ -78,6 +78,16 @@ public abstract class AbstractConcreteTestLanguageRuntimeModule extends org.ecli
 		return org.eclipse.xtext.grammarinheritance.services.ConcreteTestLanguageGrammarAccess.class;
 	}
 
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.grammarinheritance.foo.FooPackage bindFooPackageToInstance() {
+		return org.eclipse.xtext.grammarinheritance.foo.FooPackage.eINSTANCE;
+	}
+
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.grammarinheritance.foo.FooFactory bindFooFactoryToInstance() {
+		return org.eclipse.xtext.grammarinheritance.foo.FooFactory.eINSTANCE;
+	}
+
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
 		return org.eclipse.xtext.grammarinheritance.serializer.ConcreteTestLanguageSemanticSequencer.class;

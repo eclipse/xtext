@@ -83,6 +83,16 @@ public abstract class AbstractUnorderedGroupsTestLanguageRuntimeModule extends o
 		return org.eclipse.xtext.parser.unorderedGroups.services.UnorderedGroupsTestLanguageGrammarAccess.class;
 	}
 
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.UnorderedGroupsTestLanguagePackage bindUnorderedGroupsTestLanguagePackageToInstance() {
+		return org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.UnorderedGroupsTestLanguagePackage.eINSTANCE;
+	}
+
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.UnorderedGroupsTestLanguageFactory bindUnorderedGroupsTestLanguageFactoryToInstance() {
+		return org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.UnorderedGroupsTestLanguageFactory.eINSTANCE;
+	}
+
 	// contributed by org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment
 	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
 		return org.eclipse.xtext.parser.unorderedGroups.parseTreeConstruction.UnorderedGroupsTestLanguageParsetreeConstructor.class;

@@ -78,6 +78,16 @@ public abstract class AbstractLocationProviderTestLanguageRuntimeModule extends 
 		return org.eclipse.xtext.resource.services.LocationProviderTestLanguageGrammarAccess.class;
 	}
 
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.resource.locationprovidertest.LocationprovidertestPackage bindLocationprovidertestPackageToInstance() {
+		return org.eclipse.xtext.resource.locationprovidertest.LocationprovidertestPackage.eINSTANCE;
+	}
+
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.resource.locationprovidertest.LocationprovidertestFactory bindLocationprovidertestFactoryToInstance() {
+		return org.eclipse.xtext.resource.locationprovidertest.LocationprovidertestFactory.eINSTANCE;
+	}
+
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
 		return org.eclipse.xtext.resource.serializer.LocationProviderTestLanguageSemanticSequencer.class;

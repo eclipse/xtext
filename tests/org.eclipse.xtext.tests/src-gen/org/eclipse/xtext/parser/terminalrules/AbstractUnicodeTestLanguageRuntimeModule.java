@@ -78,6 +78,16 @@ public abstract class AbstractUnicodeTestLanguageRuntimeModule extends org.eclip
 		return org.eclipse.xtext.parser.terminalrules.services.UnicodeTestLanguageGrammarAccess.class;
 	}
 
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.parser.terminalrules.unicode.UnicodePackage bindUnicodePackageToInstance() {
+		return org.eclipse.xtext.parser.terminalrules.unicode.UnicodePackage.eINSTANCE;
+	}
+
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.parser.terminalrules.unicode.UnicodeFactory bindUnicodeFactoryToInstance() {
+		return org.eclipse.xtext.parser.terminalrules.unicode.UnicodeFactory.eINSTANCE;
+	}
+
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
 		return org.eclipse.xtext.parser.terminalrules.serializer.UnicodeTestLanguageSemanticSequencer.class;

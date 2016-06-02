@@ -33,6 +33,16 @@ public abstract class AbstractReferringTestLanguageRuntimeModule extends org.ecl
 			binder.bind(String.class).annotatedWith(Names.named(Constants.FILE_EXTENSIONS)).toInstance("referringtestlanguage");
 	}
 	
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.ui.tests.refactoring.referring.ReferringPackage bindReferringPackageToInstance() {
+		return org.eclipse.xtext.ui.tests.refactoring.referring.ReferringPackage.eINSTANCE;
+	}
+
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.ui.tests.refactoring.referring.ReferringFactory bindReferringFactoryToInstance() {
+		return org.eclipse.xtext.ui.tests.refactoring.referring.ReferringFactory.eINSTANCE;
+	}
+
 	// contributed by org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment
 	public java.lang.ClassLoader bindClassLoaderToInstance() {
 		return getClass().getClassLoader();

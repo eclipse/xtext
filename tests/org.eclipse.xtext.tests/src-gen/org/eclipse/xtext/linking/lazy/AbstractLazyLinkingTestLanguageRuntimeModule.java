@@ -78,6 +78,16 @@ public abstract class AbstractLazyLinkingTestLanguageRuntimeModule extends org.e
 		return org.eclipse.xtext.linking.lazy.services.LazyLinkingTestLanguageGrammarAccess.class;
 	}
 
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.linking.lazy.lazyLinking.LazyLinkingPackage bindLazyLinkingPackageToInstance() {
+		return org.eclipse.xtext.linking.lazy.lazyLinking.LazyLinkingPackage.eINSTANCE;
+	}
+
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.linking.lazy.lazyLinking.LazyLinkingFactory bindLazyLinkingFactoryToInstance() {
+		return org.eclipse.xtext.linking.lazy.lazyLinking.LazyLinkingFactory.eINSTANCE;
+	}
+
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
 		return org.eclipse.xtext.linking.lazy.serializer.LazyLinkingTestLanguageSemanticSequencer.class;

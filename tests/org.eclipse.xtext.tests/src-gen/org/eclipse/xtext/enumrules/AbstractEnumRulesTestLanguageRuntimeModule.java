@@ -78,6 +78,16 @@ public abstract class AbstractEnumRulesTestLanguageRuntimeModule extends org.ecl
 		return org.eclipse.xtext.enumrules.services.EnumRulesTestLanguageGrammarAccess.class;
 	}
 
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.enumrules.enumRulesTestLanguage.EnumRulesTestLanguagePackage bindEnumRulesTestLanguagePackageToInstance() {
+		return org.eclipse.xtext.enumrules.enumRulesTestLanguage.EnumRulesTestLanguagePackage.eINSTANCE;
+	}
+
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.enumrules.enumRulesTestLanguage.EnumRulesTestLanguageFactory bindEnumRulesTestLanguageFactoryToInstance() {
+		return org.eclipse.xtext.enumrules.enumRulesTestLanguage.EnumRulesTestLanguageFactory.eINSTANCE;
+	}
+
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
 		return org.eclipse.xtext.enumrules.serializer.EnumRulesTestLanguageSemanticSequencer.class;

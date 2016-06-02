@@ -78,6 +78,26 @@ public abstract class AbstractMultiGenMMTestLanguageRuntimeModule extends org.ec
 		return org.eclipse.xtext.metamodelreferencing.tests.services.MultiGenMMTestLanguageGrammarAccess.class;
 	}
 
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.metamodelreferencing.tests.simpleTest.SimpleTestPackage bindSimpleTestPackageToInstance() {
+		return org.eclipse.xtext.metamodelreferencing.tests.simpleTest.SimpleTestPackage.eINSTANCE;
+	}
+
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.metamodelreferencing.tests.simpleTest.SimpleTestFactory bindSimpleTestFactoryToInstance() {
+		return org.eclipse.xtext.metamodelreferencing.tests.simpleTest.SimpleTestFactory.eINSTANCE;
+	}
+
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.metamodelreferencing.tests.otherTest.OtherTestPackage bindOtherTestPackageToInstance() {
+		return org.eclipse.xtext.metamodelreferencing.tests.otherTest.OtherTestPackage.eINSTANCE;
+	}
+
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.metamodelreferencing.tests.otherTest.OtherTestFactory bindOtherTestFactoryToInstance() {
+		return org.eclipse.xtext.metamodelreferencing.tests.otherTest.OtherTestFactory.eINSTANCE;
+	}
+
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
 		return org.eclipse.xtext.metamodelreferencing.tests.serializer.MultiGenMMTestLanguageSemanticSequencer.class;

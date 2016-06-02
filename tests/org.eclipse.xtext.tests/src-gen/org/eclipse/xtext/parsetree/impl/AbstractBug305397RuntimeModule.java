@@ -78,6 +78,16 @@ public abstract class AbstractBug305397RuntimeModule extends org.eclipse.xtext.s
 		return org.eclipse.xtext.parsetree.impl.services.Bug305397GrammarAccess.class;
 	}
 
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.parsetree.impl.bug305397.Bug305397Package bindBug305397PackageToInstance() {
+		return org.eclipse.xtext.parsetree.impl.bug305397.Bug305397Package.eINSTANCE;
+	}
+
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.parsetree.impl.bug305397.Bug305397Factory bindBug305397FactoryToInstance() {
+		return org.eclipse.xtext.parsetree.impl.bug305397.Bug305397Factory.eINSTANCE;
+	}
+
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
 		return org.eclipse.xtext.parsetree.impl.serializer.Bug305397SemanticSequencer.class;

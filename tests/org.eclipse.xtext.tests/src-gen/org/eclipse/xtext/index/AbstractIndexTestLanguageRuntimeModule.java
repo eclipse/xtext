@@ -78,6 +78,16 @@ public abstract class AbstractIndexTestLanguageRuntimeModule extends org.eclipse
 		return org.eclipse.xtext.index.services.IndexTestLanguageGrammarAccess.class;
 	}
 
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.index.indexTestLanguage.IndexTestLanguagePackage bindIndexTestLanguagePackageToInstance() {
+		return org.eclipse.xtext.index.indexTestLanguage.IndexTestLanguagePackage.eINSTANCE;
+	}
+
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.index.indexTestLanguage.IndexTestLanguageFactory bindIndexTestLanguageFactoryToInstance() {
+		return org.eclipse.xtext.index.indexTestLanguage.IndexTestLanguageFactory.eINSTANCE;
+	}
+
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
 		return org.eclipse.xtext.index.serializer.IndexTestLanguageSemanticSequencer.class;

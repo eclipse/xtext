@@ -78,6 +78,16 @@ public abstract class AbstractParametersTestLanguageRuntimeModule extends org.ec
 		return org.eclipse.xtext.parser.parameters.services.ParametersTestLanguageGrammarAccess.class;
 	}
 
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.parser.parameters.parametersTestLanguage.ParametersTestLanguagePackage bindParametersTestLanguagePackageToInstance() {
+		return org.eclipse.xtext.parser.parameters.parametersTestLanguage.ParametersTestLanguagePackage.eINSTANCE;
+	}
+
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.parser.parameters.parametersTestLanguage.ParametersTestLanguageFactory bindParametersTestLanguageFactoryToInstance() {
+		return org.eclipse.xtext.parser.parameters.parametersTestLanguage.ParametersTestLanguageFactory.eINSTANCE;
+	}
+
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
 		return org.eclipse.xtext.parser.parameters.serializer.ParametersTestLanguageSemanticSequencer.class;

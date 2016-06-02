@@ -78,6 +78,16 @@ public abstract class AbstractEnumAndReferenceTestLanguageRuntimeModule extends 
 		return org.eclipse.xtext.enumrules.services.EnumAndReferenceTestLanguageGrammarAccess.class;
 	}
 
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.enumrules.enumAndReferenceTestLanguage.EnumAndReferenceTestLanguagePackage bindEnumAndReferenceTestLanguagePackageToInstance() {
+		return org.eclipse.xtext.enumrules.enumAndReferenceTestLanguage.EnumAndReferenceTestLanguagePackage.eINSTANCE;
+	}
+
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.enumrules.enumAndReferenceTestLanguage.EnumAndReferenceTestLanguageFactory bindEnumAndReferenceTestLanguageFactoryToInstance() {
+		return org.eclipse.xtext.enumrules.enumAndReferenceTestLanguage.EnumAndReferenceTestLanguageFactory.eINSTANCE;
+	}
+
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
 		return org.eclipse.xtext.enumrules.serializer.EnumAndReferenceTestLanguageSemanticSequencer.class;

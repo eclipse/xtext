@@ -78,6 +78,16 @@ public abstract class AbstractCommentAssociationTestLanguageRuntimeModule extend
 		return org.eclipse.xtext.parsetree.impl.services.CommentAssociationTestLanguageGrammarAccess.class;
 	}
 
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.parsetree.impl.commentAssociation.CommentAssociationPackage bindCommentAssociationPackageToInstance() {
+		return org.eclipse.xtext.parsetree.impl.commentAssociation.CommentAssociationPackage.eINSTANCE;
+	}
+
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.parsetree.impl.commentAssociation.CommentAssociationFactory bindCommentAssociationFactoryToInstance() {
+		return org.eclipse.xtext.parsetree.impl.commentAssociation.CommentAssociationFactory.eINSTANCE;
+	}
+
 	// contributed by org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment
 	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
 		return org.eclipse.xtext.parsetree.impl.parseTreeConstruction.CommentAssociationTestLanguageParsetreeConstructor.class;

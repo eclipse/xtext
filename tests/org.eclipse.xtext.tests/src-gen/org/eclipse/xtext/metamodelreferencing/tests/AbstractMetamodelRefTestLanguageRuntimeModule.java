@@ -78,6 +78,16 @@ public abstract class AbstractMetamodelRefTestLanguageRuntimeModule extends org.
 		return org.eclipse.xtext.metamodelreferencing.tests.services.MetamodelRefTestLanguageGrammarAccess.class;
 	}
 
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.metamodelreferencing.tests.anotherSimpleTest.AnotherSimpleTestPackage bindAnotherSimpleTestPackageToInstance() {
+		return org.eclipse.xtext.metamodelreferencing.tests.anotherSimpleTest.AnotherSimpleTestPackage.eINSTANCE;
+	}
+
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.metamodelreferencing.tests.anotherSimpleTest.AnotherSimpleTestFactory bindAnotherSimpleTestFactoryToInstance() {
+		return org.eclipse.xtext.metamodelreferencing.tests.anotherSimpleTest.AnotherSimpleTestFactory.eINSTANCE;
+	}
+
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
 		return org.eclipse.xtext.metamodelreferencing.tests.serializer.MetamodelRefTestLanguageSemanticSequencer.class;

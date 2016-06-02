@@ -33,6 +33,16 @@ public abstract class AbstractRefactoringTestLanguageRuntimeModule extends org.e
 			binder.bind(String.class).annotatedWith(Names.named(Constants.FILE_EXTENSIONS)).toInstance("refactoringtestlanguage");
 	}
 	
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.ui.tests.refactoring.refactoring.RefactoringPackage bindRefactoringPackageToInstance() {
+		return org.eclipse.xtext.ui.tests.refactoring.refactoring.RefactoringPackage.eINSTANCE;
+	}
+
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.ui.tests.refactoring.refactoring.RefactoringFactory bindRefactoringFactoryToInstance() {
+		return org.eclipse.xtext.ui.tests.refactoring.refactoring.RefactoringFactory.eINSTANCE;
+	}
+
 	// contributed by org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment
 	public java.lang.ClassLoader bindClassLoaderToInstance() {
 		return getClass().getClassLoader();

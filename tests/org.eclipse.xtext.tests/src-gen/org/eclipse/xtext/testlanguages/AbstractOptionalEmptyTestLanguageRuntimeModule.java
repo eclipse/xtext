@@ -78,6 +78,16 @@ public abstract class AbstractOptionalEmptyTestLanguageRuntimeModule extends org
 		return org.eclipse.xtext.testlanguages.services.OptionalEmptyTestLanguageGrammarAccess.class;
 	}
 
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.testlanguages.optionalEmpty.OptionalEmptyPackage bindOptionalEmptyPackageToInstance() {
+		return org.eclipse.xtext.testlanguages.optionalEmpty.OptionalEmptyPackage.eINSTANCE;
+	}
+
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.testlanguages.optionalEmpty.OptionalEmptyFactory bindOptionalEmptyFactoryToInstance() {
+		return org.eclipse.xtext.testlanguages.optionalEmpty.OptionalEmptyFactory.eINSTANCE;
+	}
+
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
 		return org.eclipse.xtext.testlanguages.serializer.OptionalEmptyTestLanguageSemanticSequencer.class;

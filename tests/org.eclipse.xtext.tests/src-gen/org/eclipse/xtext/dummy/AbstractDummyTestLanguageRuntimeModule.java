@@ -78,6 +78,16 @@ public abstract class AbstractDummyTestLanguageRuntimeModule extends org.eclipse
 		return org.eclipse.xtext.dummy.services.DummyTestLanguageGrammarAccess.class;
 	}
 
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.dummy.dummyLang.DummyLangPackage bindDummyLangPackageToInstance() {
+		return org.eclipse.xtext.dummy.dummyLang.DummyLangPackage.eINSTANCE;
+	}
+
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.dummy.dummyLang.DummyLangFactory bindDummyLangFactoryToInstance() {
+		return org.eclipse.xtext.dummy.dummyLang.DummyLangFactory.eINSTANCE;
+	}
+
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
 		return org.eclipse.xtext.dummy.serializer.DummyTestLanguageSemanticSequencer.class;

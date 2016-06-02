@@ -76,11 +76,14 @@ import org.eclipse.xtext.GeneratedMetamodel;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.generator.AbstractGeneratorFragment;
+import org.eclipse.xtext.generator.BindFactory;
+import org.eclipse.xtext.generator.Binding;
 import org.eclipse.xtext.generator.GenModelAccess;
 import org.eclipse.xtext.generator.IGeneratorFragment;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.util.Strings;
+import org.eclipse.xtext.xtext.generator.util.GenModelUtil2;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -248,6 +251,7 @@ public class EMFGeneratorFragment extends AbstractGeneratorFragment {
 					if (basePackage == null)
 						basePackage = genModel.getGenPackages().get(0).getBasePackage();
 					super.generate(clonedGrammar, ctx);
+					
 				}
 				// finally save the ecore packages to the file system
 				saveResource(ePackageResource);
@@ -1015,6 +1019,22 @@ public class EMFGeneratorFragment extends AbstractGeneratorFragment {
 	 */
 	public String getJdkLevel() {
 		return jdkLevel.getName();
+	}
+	
+	/**
+	 * @since 2.10
+	 */
+	@Override
+	public Set<Binding> getGuiceBindingsRt(Grammar grammar) {
+		BindFactory bindFactory = new BindFactory();
+		// Register generated EPackage and EFactory instances in the runtime module
+		for (EPackage pkg: getGeneratedEPackages(grammar)) {
+			GenPackage genPkg = GenModelUtil2.getGenPackage(pkg, grammar.eResource().getResourceSet());
+			bindFactory
+				.addTypeToInstance(genPkg.getQualifiedPackageInterfaceName(), genPkg.getQualifiedPackageInterfaceName()+".eINSTANCE")
+				.addTypeToInstance(genPkg.getQualifiedFactoryInterfaceName(), genPkg.getQualifiedFactoryInterfaceName()+".eINSTANCE");
+		}
+		return bindFactory.getBindings();
 	}
 	
 }

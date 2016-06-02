@@ -13,6 +13,8 @@ import com.google.inject.name.Names;
 import java.util.Properties;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.IGrammarAccess;
+import org.eclipse.xtext.example.arithmetics.arithmetics.ArithmeticsFactory;
+import org.eclipse.xtext.example.arithmetics.arithmetics.ArithmeticsPackage;
 import org.eclipse.xtext.example.arithmetics.generator.ArithmeticsGenerator;
 import org.eclipse.xtext.example.arithmetics.parser.antlr.ArithmeticsAntlrTokenFileProvider;
 import org.eclipse.xtext.example.arithmetics.parser.antlr.ArithmeticsParser;
@@ -85,6 +87,16 @@ public abstract class AbstractArithmeticsRuntimeModule extends DefaultRuntimeMod
 	// contributed by org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessFragment2
 	public Class<? extends IGrammarAccess> bindIGrammarAccess() {
 		return ArithmeticsGrammarAccess.class;
+	}
+	
+	// contributed by org.eclipse.xtext.xtext.generator.ecore.EMFGeneratorFragment2
+	public ArithmeticsPackage bindArithmeticsPackageToInstance() {
+		return ArithmeticsPackage.eINSTANCE;
+	}
+	
+	// contributed by org.eclipse.xtext.xtext.generator.ecore.EMFGeneratorFragment2
+	public ArithmeticsFactory bindArithmeticsFactoryToInstance() {
+		return ArithmeticsFactory.eINSTANCE;
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.serializer.SerializerFragment2

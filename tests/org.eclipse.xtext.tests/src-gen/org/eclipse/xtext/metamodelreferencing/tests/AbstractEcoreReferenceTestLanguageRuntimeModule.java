@@ -78,6 +78,16 @@ public abstract class AbstractEcoreReferenceTestLanguageRuntimeModule extends or
 		return org.eclipse.xtext.metamodelreferencing.tests.services.EcoreReferenceTestLanguageGrammarAccess.class;
 	}
 
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.metamodelreferencing.tests.ecoreReference.EcoreReferencePackage bindEcoreReferencePackageToInstance() {
+		return org.eclipse.xtext.metamodelreferencing.tests.ecoreReference.EcoreReferencePackage.eINSTANCE;
+	}
+
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.metamodelreferencing.tests.ecoreReference.EcoreReferenceFactory bindEcoreReferenceFactoryToInstance() {
+		return org.eclipse.xtext.metamodelreferencing.tests.ecoreReference.EcoreReferenceFactory.eINSTANCE;
+	}
+
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
 		return org.eclipse.xtext.metamodelreferencing.tests.serializer.EcoreReferenceTestLanguageSemanticSequencer.class;

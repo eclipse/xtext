@@ -33,6 +33,16 @@ public abstract class AbstractDomainModelTestLanguageRuntimeModule extends org.e
 			binder.bind(String.class).annotatedWith(Names.named(Constants.FILE_EXTENSIONS)).toInstance("domainmodeltestlanguage");
 	}
 	
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.ui.tests.editor.contentassist.domainModelTest.DomainModelTestPackage bindDomainModelTestPackageToInstance() {
+		return org.eclipse.xtext.ui.tests.editor.contentassist.domainModelTest.DomainModelTestPackage.eINSTANCE;
+	}
+
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.ui.tests.editor.contentassist.domainModelTest.DomainModelTestFactory bindDomainModelTestFactoryToInstance() {
+		return org.eclipse.xtext.ui.tests.editor.contentassist.domainModelTest.DomainModelTestFactory.eINSTANCE;
+	}
+
 	// contributed by org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment
 	public java.lang.ClassLoader bindClassLoaderToInstance() {
 		return getClass().getClassLoader();

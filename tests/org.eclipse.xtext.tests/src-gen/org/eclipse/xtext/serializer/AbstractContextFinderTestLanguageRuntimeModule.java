@@ -78,6 +78,16 @@ public abstract class AbstractContextFinderTestLanguageRuntimeModule extends org
 		return org.eclipse.xtext.serializer.services.ContextFinderTestLanguageGrammarAccess.class;
 	}
 
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.serializer.contextFinderTest.ContextFinderTestPackage bindContextFinderTestPackageToInstance() {
+		return org.eclipse.xtext.serializer.contextFinderTest.ContextFinderTestPackage.eINSTANCE;
+	}
+
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.serializer.contextFinderTest.ContextFinderTestFactory bindContextFinderTestFactoryToInstance() {
+		return org.eclipse.xtext.serializer.contextFinderTest.ContextFinderTestFactory.eINSTANCE;
+	}
+
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
 		return org.eclipse.xtext.serializer.serializer.ContextFinderTestLanguageSemanticSequencer.class;

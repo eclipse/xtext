@@ -33,6 +33,16 @@ public abstract class AbstractBuilderTestLanguageRuntimeModule extends org.eclip
 			binder.bind(String.class).annotatedWith(Names.named(Constants.FILE_EXTENSIONS)).toInstance("buildertestlanguage");
 	}
 	
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.builder.tests.builderTestLanguage.BuilderTestLanguagePackage bindBuilderTestLanguagePackageToInstance() {
+		return org.eclipse.xtext.builder.tests.builderTestLanguage.BuilderTestLanguagePackage.eINSTANCE;
+	}
+
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.builder.tests.builderTestLanguage.BuilderTestLanguageFactory bindBuilderTestLanguageFactoryToInstance() {
+		return org.eclipse.xtext.builder.tests.builderTestLanguage.BuilderTestLanguageFactory.eINSTANCE;
+	}
+
 	// contributed by org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment
 	public java.lang.ClassLoader bindClassLoaderToInstance() {
 		return getClass().getClassLoader();

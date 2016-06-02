@@ -43,6 +43,16 @@ public abstract class AbstractStatemachineRuntimeModule extends org.eclipse.xtex
 		return org.eclipse.xtext.example.fowlerdsl.services.StatemachineGrammarAccess.class;
 	}
 
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.example.fowlerdsl.statemachine.StatemachinePackage bindStatemachinePackageToInstance() {
+		return org.eclipse.xtext.example.fowlerdsl.statemachine.StatemachinePackage.eINSTANCE;
+	}
+
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.example.fowlerdsl.statemachine.StatemachineFactory bindStatemachineFactoryToInstance() {
+		return org.eclipse.xtext.example.fowlerdsl.statemachine.StatemachineFactory.eINSTANCE;
+	}
+
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
 		return org.eclipse.xtext.example.fowlerdsl.serializer.StatemachineSemanticSequencer.class;

@@ -33,6 +33,16 @@ public abstract class AbstractKeywordsUiTestLanguageRuntimeModule extends org.ec
 			binder.bind(String.class).annotatedWith(Names.named(Constants.FILE_EXTENSIONS)).toInstance("keywordsuitestlanguage");
 	}
 	
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.ui.tests.parser.keywords.keywordsUiTestLanguage.KeywordsUiTestLanguagePackage bindKeywordsUiTestLanguagePackageToInstance() {
+		return org.eclipse.xtext.ui.tests.parser.keywords.keywordsUiTestLanguage.KeywordsUiTestLanguagePackage.eINSTANCE;
+	}
+
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.ui.tests.parser.keywords.keywordsUiTestLanguage.KeywordsUiTestLanguageFactory bindKeywordsUiTestLanguageFactoryToInstance() {
+		return org.eclipse.xtext.ui.tests.parser.keywords.keywordsUiTestLanguage.KeywordsUiTestLanguageFactory.eINSTANCE;
+	}
+
 	// contributed by org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment
 	public java.lang.ClassLoader bindClassLoaderToInstance() {
 		return getClass().getClassLoader();

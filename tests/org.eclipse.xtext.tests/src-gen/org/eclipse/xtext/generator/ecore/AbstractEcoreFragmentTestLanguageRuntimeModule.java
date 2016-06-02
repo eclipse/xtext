@@ -78,6 +78,16 @@ public abstract class AbstractEcoreFragmentTestLanguageRuntimeModule extends org
 		return org.eclipse.xtext.generator.ecore.services.EcoreFragmentTestLanguageGrammarAccess.class;
 	}
 
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.generator.ecore.second.SecondPackage bindSecondPackageToInstance() {
+		return org.eclipse.xtext.generator.ecore.second.SecondPackage.eINSTANCE;
+	}
+
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.generator.ecore.second.SecondFactory bindSecondFactoryToInstance() {
+		return org.eclipse.xtext.generator.ecore.second.SecondFactory.eINSTANCE;
+	}
+
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
 		return org.eclipse.xtext.generator.ecore.serializer.EcoreFragmentTestLanguageSemanticSequencer.class;

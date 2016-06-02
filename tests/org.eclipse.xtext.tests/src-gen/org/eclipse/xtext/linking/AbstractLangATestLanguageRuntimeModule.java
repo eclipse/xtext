@@ -78,6 +78,16 @@ public abstract class AbstractLangATestLanguageRuntimeModule extends org.eclipse
 		return org.eclipse.xtext.linking.services.LangATestLanguageGrammarAccess.class;
 	}
 
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.linking.langATestLanguage.LangATestLanguagePackage bindLangATestLanguagePackageToInstance() {
+		return org.eclipse.xtext.linking.langATestLanguage.LangATestLanguagePackage.eINSTANCE;
+	}
+
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.linking.langATestLanguage.LangATestLanguageFactory bindLangATestLanguageFactoryToInstance() {
+		return org.eclipse.xtext.linking.langATestLanguage.LangATestLanguageFactory.eINSTANCE;
+	}
+
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
 		return org.eclipse.xtext.linking.serializer.LangATestLanguageSemanticSequencer.class;

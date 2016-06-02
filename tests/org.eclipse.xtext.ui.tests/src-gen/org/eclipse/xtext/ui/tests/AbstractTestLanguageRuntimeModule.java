@@ -33,6 +33,16 @@ public abstract class AbstractTestLanguageRuntimeModule extends org.eclipse.xtex
 			binder.bind(String.class).annotatedWith(Names.named(Constants.FILE_EXTENSIONS)).toInstance("testlanguage");
 	}
 	
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.ui.tests.foo.FooPackage bindFooPackageToInstance() {
+		return org.eclipse.xtext.ui.tests.foo.FooPackage.eINSTANCE;
+	}
+
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.ui.tests.foo.FooFactory bindFooFactoryToInstance() {
+		return org.eclipse.xtext.ui.tests.foo.FooFactory.eINSTANCE;
+	}
+
 	// contributed by org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment
 	public java.lang.ClassLoader bindClassLoaderToInstance() {
 		return getClass().getClassLoader();

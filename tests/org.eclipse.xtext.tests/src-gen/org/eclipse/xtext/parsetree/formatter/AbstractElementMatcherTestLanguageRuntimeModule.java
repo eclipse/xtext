@@ -78,6 +78,16 @@ public abstract class AbstractElementMatcherTestLanguageRuntimeModule extends or
 		return org.eclipse.xtext.parsetree.formatter.services.ElementMatcherTestLanguageGrammarAccess.class;
 	}
 
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.ElementmatchertestlanguagePackage bindElementmatchertestlanguagePackageToInstance() {
+		return org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.ElementmatchertestlanguagePackage.eINSTANCE;
+	}
+
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.ElementmatchertestlanguageFactory bindElementmatchertestlanguageFactoryToInstance() {
+		return org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.ElementmatchertestlanguageFactory.eINSTANCE;
+	}
+
 	// contributed by org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment
 	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
 		return org.eclipse.xtext.parsetree.formatter.parseTreeConstruction.ElementMatcherTestLanguageParsetreeConstructor.class;

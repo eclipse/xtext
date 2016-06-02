@@ -33,6 +33,16 @@ public abstract class AbstractEncodingUiTestLanguageRuntimeModule extends org.ec
 			binder.bind(String.class).annotatedWith(Names.named(Constants.FILE_EXTENSIONS)).toInstance("encodinguitestlanguage");
 	}
 	
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.ui.tests.editor.encoding.encodingTest.EncodingTestPackage bindEncodingTestPackageToInstance() {
+		return org.eclipse.xtext.ui.tests.editor.encoding.encodingTest.EncodingTestPackage.eINSTANCE;
+	}
+
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.ui.tests.editor.encoding.encodingTest.EncodingTestFactory bindEncodingTestFactoryToInstance() {
+		return org.eclipse.xtext.ui.tests.editor.encoding.encodingTest.EncodingTestFactory.eINSTANCE;
+	}
+
 	// contributed by org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment
 	public java.lang.ClassLoader bindClassLoaderToInstance() {
 		return getClass().getClassLoader();

@@ -78,6 +78,16 @@ public abstract class AbstractIgnoreCaseImportsTestLanguageRuntimeModule extends
 		return org.eclipse.xtext.linking.services.IgnoreCaseImportsTestLanguageGrammarAccess.class;
 	}
 
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.linking.ignoreCaseImportsTest.IgnoreCaseImportsTestPackage bindIgnoreCaseImportsTestPackageToInstance() {
+		return org.eclipse.xtext.linking.ignoreCaseImportsTest.IgnoreCaseImportsTestPackage.eINSTANCE;
+	}
+
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.linking.ignoreCaseImportsTest.IgnoreCaseImportsTestFactory bindIgnoreCaseImportsTestFactoryToInstance() {
+		return org.eclipse.xtext.linking.ignoreCaseImportsTest.IgnoreCaseImportsTestFactory.eINSTANCE;
+	}
+
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
 		return org.eclipse.xtext.linking.serializer.IgnoreCaseImportsTestLanguageSemanticSequencer.class;

@@ -78,6 +78,16 @@ public abstract class AbstractActionTestLanguageRuntimeModule extends org.eclips
 		return org.eclipse.xtext.testlanguages.services.ActionTestLanguageGrammarAccess.class;
 	}
 
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.testlanguages.actionLang.ActionLangPackage bindActionLangPackageToInstance() {
+		return org.eclipse.xtext.testlanguages.actionLang.ActionLangPackage.eINSTANCE;
+	}
+
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.testlanguages.actionLang.ActionLangFactory bindActionLangFactoryToInstance() {
+		return org.eclipse.xtext.testlanguages.actionLang.ActionLangFactory.eINSTANCE;
+	}
+
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
 		return org.eclipse.xtext.testlanguages.serializer.ActionTestLanguageSemanticSequencer.class;

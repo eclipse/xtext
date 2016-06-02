@@ -88,6 +88,16 @@ public abstract class AbstractBug299237TestLanguageRuntimeModule extends org.ecl
 		return org.eclipse.xtext.parser.antlr.services.Bug299237TestLanguageGrammarAccess.class;
 	}
 
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.parser.antlr.bug299237Test.Bug299237TestPackage bindBug299237TestPackageToInstance() {
+		return org.eclipse.xtext.parser.antlr.bug299237Test.Bug299237TestPackage.eINSTANCE;
+	}
+
+	// contributed by org.eclipse.xtext.generator.ecore.EMFGeneratorFragment
+	public org.eclipse.xtext.parser.antlr.bug299237Test.Bug299237TestFactory bindBug299237TestFactoryToInstance() {
+		return org.eclipse.xtext.parser.antlr.bug299237Test.Bug299237TestFactory.eINSTANCE;
+	}
+
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
 		return org.eclipse.xtext.parser.antlr.serializer.Bug299237TestLanguageSemanticSequencer.class;
