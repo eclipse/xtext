@@ -1,0 +1,17 @@
+/* XPECT_SETUP org.eclipse.xtext.example.domainmodel.xpect.tests.scoping.DMScopingTest END_SETUP */
+
+
+ 
+package pkg1 {
+	entity MyEntity {
+		// besides "int", we can reference... and we can not reference foooobar
+		// XPECT scope at int --> int, String, java.lang.String, boolean, !foooobar, !innnnteger, ...
+		id:int
+		name:String
+	}
+	
+	// XPECT scope at MyEntity --> MyEnt2, MyEntity, pkg1.MyEntity, ...
+	entity MyEnt2 extends MyEntity {}
+}
+
+

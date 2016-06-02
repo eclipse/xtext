@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="xpect" nsURI="http://www.eclipse.org/xpect/Xpect" nsPrefix="xpect">
+  <eClassifiers xsi:type="ecore:EClass" name="XpectFile">
+    <eOperations name="isIgnore" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eOperations name="getTest" eType="#//XpectTest"/>
+    <eOperations name="getInvocations">
+      <eGenericType eClassifier="ecore:EDataType ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//Iterable">
+        <eTypeArguments eClassifier="#//XpectInvocation"/>
+      </eGenericType>
+    </eOperations>
+    <eOperations name="getInvocation" eType="#//XpectInvocation">
+      <eParameters name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="getInvocationAt" eType="#//XpectInvocation">
+      <eParameters name="offset" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="getDocument" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eOperations name="getJavaModel" eType="ecore:EClass XpectJavaModel.ecore#//XpectJavaModel"/>
+    <eOperations name="createSetupInitializer">
+      <eGenericType eClassifier="#//ISetupInitializer">
+        <eTypeArguments eTypeParameter="#//XpectFile/createSetupInitializer/T"/>
+      </eGenericType>
+      <eTypeParameters name="T"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="members" upperBound="-1"
+        eType="#//Member" containment="true" eOpposite="#//Member/file"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="XpectTest" eSuperTypes="#//Member #//AbstractComponent">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="declaredSuite" eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmDeclaredType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="XpectIgnore" eSuperTypes="#//Member"/>
+  <eClassifiers xsi:type="ecore:EClass" name="XpectInvocation" eSuperTypes="#//Member">
+    <eOperations name="getMethodName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eOperations name="getRelatedRegion">
+      <eGenericType eTypeParameter="#//XpectInvocation/getRelatedRegion/T"/>
+      <eTypeParameters name="T">
+        <eBounds eClassifier="#//StatementRelatedRegion"/>
+      </eTypeParameters>
+      <eParameters name="type">
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaClass">
+          <eTypeArguments eTypeParameter="#//XpectInvocation/getRelatedRegion/T"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eOperations name="getFile" eType="#//XpectFile"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        changeable="false" transient="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ignore" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="method" eType="ecore:EClass XpectJavaModel.ecore#//XjmXpectMethod"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="arguments" upperBound="-1"
+        eType="#//XpectArgument" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="relatedRegions" unique="false"
+        upperBound="-1" eType="#//StatementRelatedRegion" changeable="false" transient="true"
+        derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="extendedRegion" eType="#//StatementRelatedRegion"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="XpectArgument">
+    <eOperations name="getJavaType">
+      <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaClass">
+        <eTypeArguments/>
+      </eGenericType>
+    </eOperations>
+    <eOperations name="getStatement" eType="#//XpectInvocation"/>
+    <eOperations name="getAnnotationOrDefault">
+      <eGenericType eTypeParameter="#//XpectArgument/getAnnotationOrDefault/T"/>
+      <eTypeParameters name="T">
+        <eBounds eClassifier="ecore:EDataType XpectJavaModel.ecore#//JavaAnnotation"/>
+      </eTypeParameters>
+      <eParameters name="annotationType">
+        <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaClass">
+          <eTypeArguments eTypeParameter="#//XpectArgument/getAnnotationOrDefault/T"/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eOperations name="toString" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eParameters name="showClass" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+      <eParameters name="showMethod" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    </eOperations>
+    <eOperations name="getStateAnnotation" eType="ecore:EDataType XpectJavaModel.ecore#//JavaAnnotation"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="index" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Member">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="file" eType="#//XpectFile"
+        eOpposite="#//XpectFile/members"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Text" eSuperTypes="#//Member">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="text" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractComponent" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
+        eType="#//Literal" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="assignments" upperBound="-1"
+        eType="#//Assignment" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Assignment">
+    <eOperations name="getInstance" eType="#//AbstractComponent"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="declaredTarget" eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmOperation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//Value"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Value"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Component" eSuperTypes="#//Value #//AbstractComponent">
+    <eOperations name="getAssignment" eType="#//Assignment"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="componentClass" eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmDeclaredType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Literal" eSuperTypes="#//Value"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ClassLiteral" eSuperTypes="#//Literal">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmDeclaredType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BooleanLiteral" eSuperTypes="#//Literal">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IntLiteral" eSuperTypes="#//Literal">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StringLiteral" eSuperTypes="#//Literal">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="StatementRelatedRegion" instanceClassName="org.eclipse.xpect.parameter.IStatementRelatedRegion"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="ISetupInitializer" instanceClassName="org.eclipse.xpect.setup.ISetupInitializer">
+    <eTypeParameters name="T"/>
+  </eClassifiers>
+</ecore:EPackage>

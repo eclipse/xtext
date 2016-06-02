@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?pde version="3.8"?><target name="Xpect Target Definition (Eclipse 3.8 - Juno)" sequenceNumber="32">
+<locations>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="de.itemis.xtext.antlr.sdk.feature.group" version="2.1.1.v201405091103"/>
+<repository location="http://download.itemis.com/updates/releases/2.1.1/"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.xtext.sdk.feature.group" version="2.8.4.v201508050135"/>
+<repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.8.4/"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.emf.mwe2.runtime.sdk.feature.group" version="2.8.1.v201508030321"/>
+<repository location="http://download.eclipse.org/modeling/emft/mwe/updates/releases/2.8.1/R201508030321/mwe/"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.jdt.junit.runners.feature.feature.group" version="0.1.0.201308221506"/>
+<repository location="http://meysholdt.github.io/eclipse_jdt_junit_runners/updatesite/"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="de.itemis.statefullexer.feature.group" version="1.0.0.201311181130"/>
+<repository location="http://meysholdt.github.io/xtext_stateful_lexer/updatesite/"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.xtext.example.arithmetics.sdk.feature.group" version="2.8.4.201508041756"/>
+<unit id="org.eclipse.xtext.example.domainmodel.sdk.feature.group" version="2.8.4.201508041756"/>
+<repository location="http://meysholdt.github.io/xtext_examples/repositories/generated-with-xtext_2_8_4/"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.gef.sdk.feature.group" version="3.10.0.201506010206"/>
+<repository location="http://download.eclipse.org/releases/mars/201506241002"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.sdk.ide" version="4.5.0.I20150603-2000"/>
+<repository location="http://download.eclipse.org/eclipse/updates/4.5/R-4.5-201506032000"/>
+</location>
+</locations>
+<environment>
+<nl>en_EN</nl>
+</environment>
+<launcherArgs>
+<vmArgs>-Xms128m -Xmx768m -Xss4m -XX:MaxPermSize=256m</vmArgs>
+<programArgs>--launcher.XXMaxPermSize 256m</programArgs>
+</launcherArgs>
+</target>

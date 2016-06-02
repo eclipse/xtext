@@ -1,0 +1,55 @@
+
+/* XPECT_SETUP org.eclipse.xtext.example.domainmodel.xpect.tests.parser.ParserTest
+	ResourceSet {
+		ThisFile {}
+		File "test2.dmodel" {}
+	}
+	Workspace {
+		JavaProject {
+			SrcFolder {
+				ThisFile {}
+				File "test2.dmodel" {}
+			}
+		}
+	}
+END_SETUP */
+
+
+/* XPECT ast ---
+DomainModel {
+  elements = [
+    PackageDeclaration {
+      name = 'pkg1'
+      elements = [
+        Entity {
+          name = 'MyEntity'
+          superType = JvmParameterizedTypeReference {
+            type -> JvmGenericType test2.dmodel#/1
+          }
+          features = [
+            Property {
+              name = 'id'
+              type = JvmParameterizedTypeReference {
+                type -> JvmPrimitiveType java:/Primitives#int
+              }
+            }
+            Property {
+              name = 'name'
+              type = JvmParameterizedTypeReference {
+                type -> JvmGenericType java:/Objects/java.lang.String#java.lang.String
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+--- */
+
+package pkg1 {
+	entity MyEntity extends pkg2.MyEntity2 {
+		id:int
+		name:String
+	}
+}

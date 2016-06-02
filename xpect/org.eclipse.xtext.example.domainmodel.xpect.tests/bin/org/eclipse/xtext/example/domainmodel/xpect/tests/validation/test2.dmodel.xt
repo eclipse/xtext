@@ -1,0 +1,12 @@
+/* XPECT_SETUP org.eclipse.xtext.example.domainmodel.xpect.tests.validation.DMValidationTest END_SETUP */
+
+
+package pkg1 {
+	entity MyEntity {
+		// the character % is not valid syntax
+		// XPECT errors --> "extraneous input '%' expecting '}'" at "%"
+		%
+	}
+}
+
+

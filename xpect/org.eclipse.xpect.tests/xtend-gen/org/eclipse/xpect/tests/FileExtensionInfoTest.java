@@ -1,0 +1,454 @@
+package org.eclipse.xpect.tests;
+
+import com.google.common.io.Closeables;
+import java.io.ByteArrayInputStream;
+import java.net.URL;
+import org.eclipse.xpect.registry.FileExtensionInfoRegistry;
+import org.eclipse.xpect.registry.StandaloneExtensionRegistry;
+import org.eclipse.xpect.tests.TestUtil;
+import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.junit.Test;
+
+@SuppressWarnings("all")
+public class FileExtensionInfoTest {
+  @Test
+  public void testEmfExtensionParserDefault() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("<extension point=\"org.eclipse.emf.ecore.extension_parser\">");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("<parser");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("class=\"org.FooExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory\"");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("type=\"foo\">");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("</parser>");
+    _builder.newLine();
+    _builder.append("</extension>");
+    _builder.newLine();
+    final String actual = this.parse(_builder);
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("IEmfFileExtensionInfo{fileExtensions=[foo]}");
+    _builder_1.newLine();
+    final String expected = _builder_1.toString();
+    TestUtil.assertEquals(expected, actual);
+  }
+  
+  @Test
+  public void testEmfExtensionParser() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("<extension point=\"org.eclipse.emf.ecore.extension_parser\">");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("<parser");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("class=\"org.FooExecutableExtensionFactory:org.foo.BarFactory\"");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("type=\"foo\">");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("</parser>");
+    _builder.newLine();
+    _builder.append("</extension>");
+    _builder.newLine();
+    final String actual = this.parse(_builder);
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("IEmfFileExtensionInfo{fileExtensions=[foo], resourceFactory=org.foo.BarFactory}");
+    _builder_1.newLine();
+    final String expected = _builder_1.toString();
+    TestUtil.assertEquals(expected, actual);
+  }
+  
+  @Test
+  public void testResourceServiceProviderDefault() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("<extension point=\"org.eclipse.xtext.extension_resourceServiceProvider\">");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("<resourceServiceProvider");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("class=\"org.FooExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider\"");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("uriExtension=\"foo\">");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("</resourceServiceProvider>");
+    _builder.newLine();
+    _builder.append("</extension>");
+    _builder.newLine();
+    _builder.append("<extension point=\"org.xpect.fileExtensions\">");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("<fileExtension");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("emfResourceFactory=\"org.eclipse.xtext.resource.IResourceFactory\"");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("fileExtension=\"foo\"");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("xtextLanguageName=\"org.foo.Foo\"");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("xtextResourceServiceProvider=\"org.eclipse.xtext.resource.IResourceServiceProvider\"");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("xtextRuntimeModule=\"org.foo.RuntimeModule\">");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("</fileExtension>");
+    _builder.newLine();
+    _builder.append("</extension>");
+    _builder.newLine();
+    final String actual = this.parse(_builder);
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("IXtextFileExtensionInfo{fileExtensions=[foo], languageID=org.foo.Foo, runtimeModule=org.foo.RuntimeModule, uiModule=org.FooUiModule}");
+    _builder_1.newLine();
+    final String expected = _builder_1.toString();
+    TestUtil.assertEquals(expected, actual);
+  }
+  
+  @Test
+  public void testResourceServiceProvider() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("<extension point=\"org.eclipse.xtext.extension_resourceServiceProvider\">");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("<resourceServiceProvider");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("class=\"org.FooExecutableExtensionFactory:org.foo.ResourceUIServiceProvider\"");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("uriExtension=\"foo\">");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("</resourceServiceProvider>");
+    _builder.newLine();
+    _builder.append("</extension>");
+    _builder.newLine();
+    _builder.append("<extension point=\"org.xpect.fileExtensions\">");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("<fileExtension");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("emfResourceFactory=\"org.foo.ResourceFactory\"");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("fileExtension=\"foo\"");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("xtextLanguageName=\"org.foo.Foo\"");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("xtextResourceServiceProvider=\"org.foo.ResourceServiceProvider\"");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("xtextRuntimeModule=\"org.foo.RuntimeModule\">");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("</fileExtension>");
+    _builder.newLine();
+    _builder.append("</extension>");
+    _builder.newLine();
+    final String actual = this.parse(_builder);
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("IXtextFileExtensionInfo{fileExtensions=[foo], resourceFactory=org.foo.ResourceFactory, languageID=org.foo.Foo, runtimeModule=org.foo.RuntimeModule, uiModule=org.FooUiModule, resourceServiceProvider=org.foo.ResourceServiceProvider, resourceUIServiceProvider=org.foo.ResourceUIServiceProvider}");
+    _builder_1.newLine();
+    final String expected = _builder_1.toString();
+    TestUtil.assertEquals(expected, actual);
+  }
+  
+  @Test
+  public void testEditor() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("<extension point=\"org.eclipse.ui.editors\">");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("<editor");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("class=\"org.foo.ui.FooExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor\"");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("contributorClass=\"org.eclipse.ui.editors.text.TextEditorActionContributor\"");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("default=\"true\"");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("extensions=\"foo, bar\"");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("id=\"org.foo.Foo\"");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("name=\"Foo Editor\">");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("</editor>");
+    _builder.newLine();
+    _builder.append("</extension>");
+    _builder.newLine();
+    final String actual = this.parse(_builder);
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("IXtextFileExtensionInfo{fileExtensions=[bar, foo], languageID=org.foo.Foo, runtimeModule=org.foo.FooRuntimeModule, uiModule=org.foo.ui.FooUiModule}");
+    _builder_1.newLine();
+    final String expected = _builder_1.toString();
+    TestUtil.assertEquals(expected, actual);
+  }
+  
+  @Test
+  public void testXpectFileExtension() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("<extension point=\"org.xpect.fileExtensions\">");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("<fileExtension");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("emfResourceFactory=\"org.foo.ResourceFactory\"");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("fileExtension=\"foo, bar\"");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("xtextLanguageName=\"org.foo.Foo\"");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("xtextResourceServiceProvider=\"org.foo.ResourceServiceProvider\"");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("xtextResourceUIServiceProvider=\"org.foo.ResourceUIServiceProvider\"");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("xtextRuntimeModule=\"org.foo.RuntimeModule\"");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("xtextUiModule=\"org.foo.uiModle\">");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("</fileExtension>");
+    _builder.newLine();
+    _builder.append("</extension>");
+    _builder.newLine();
+    final String actual = this.parse(_builder);
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("IXtextFileExtensionInfo{fileExtensions=[bar, foo], resourceFactory=org.foo.ResourceFactory, languageID=org.foo.Foo, runtimeModule=org.foo.RuntimeModule, uiModule=org.foo.uiModle, resourceServiceProvider=org.foo.ResourceServiceProvider, resourceUIServiceProvider=org.foo.ResourceUIServiceProvider}");
+    _builder_1.newLine();
+    final String expected = _builder_1.toString();
+    TestUtil.assertEquals(expected, actual);
+  }
+  
+  @Test
+  public void testLanguageWithoutUI() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("<extension point=\"org.xpect.fileExtensions\">");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("<fileExtension");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("emfResourceFactory=\"org.foo.ResourceFactory\"");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("fileExtension=\"foo, bar\"");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("xtextLanguageName=\"org.foo.Foo\"");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("xtextResourceServiceProvider=\"org.foo.ResourceServiceProvider\"");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("xtextRuntimeModule=\"org.foo.RuntimeModule\">");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("</fileExtension>");
+    _builder.newLine();
+    _builder.append("</extension>");
+    _builder.newLine();
+    final String actual = this.parse(_builder);
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("IXtextFileExtensionInfo{fileExtensions=[bar, foo], resourceFactory=org.foo.ResourceFactory, languageID=org.foo.Foo, runtimeModule=org.foo.RuntimeModule, resourceServiceProvider=org.foo.ResourceServiceProvider}");
+    _builder_1.newLine();
+    final String expected = _builder_1.toString();
+    TestUtil.assertEquals(expected, actual);
+  }
+  
+  @Test
+  public void testRedundant() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("<extension point=\"org.eclipse.emf.ecore.extension_parser\">");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("<parser");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("class=\"org.FooExecutableExtensionFactory:org.foo.ResourceFactory\"");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("type=\"foo\">");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("</parser>");
+    _builder.newLine();
+    _builder.append("</extension>");
+    _builder.newLine();
+    _builder.append("<extension point=\"org.eclipse.emf.ecore.extension_parser\">");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("<parser");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("class=\"org.FooExecutableExtensionFactory:org.foo.ResourceFactory\"");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("type=\"bar\">");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("</parser>");
+    _builder.newLine();
+    _builder.append("</extension>");
+    _builder.newLine();
+    _builder.append("<extension point=\"org.eclipse.xtext.extension_resourceServiceProvider\">");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("<resourceServiceProvider");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("class=\"org.FooExecutableExtensionFactory:org.foo.ResourceUIServiceProvider\"");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("uriExtension=\"foo\">");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("</resourceServiceProvider>");
+    _builder.newLine();
+    _builder.append("</extension>");
+    _builder.newLine();
+    _builder.append("<extension point=\"org.eclipse.xtext.extension_resourceServiceProvider\">");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("<resourceServiceProvider");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("class=\"org.FooExecutableExtensionFactory:org.foo.ResourceUIServiceProvider\"");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("uriExtension=\"bar\">");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("</resourceServiceProvider>");
+    _builder.newLine();
+    _builder.append("</extension>");
+    _builder.newLine();
+    _builder.append("<extension point=\"org.eclipse.ui.editors\">");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("<editor");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("class=\"org.FooExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor\"");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("contributorClass=\"org.eclipse.ui.editors.text.TextEditorActionContributor\"");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("default=\"true\"");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("extensions=\"foo, bar\"");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("id=\"org.foo.Foo\"");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("name=\"Foo Editor\">");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("</editor>");
+    _builder.newLine();
+    _builder.append("</extension>");
+    _builder.newLine();
+    _builder.append("<extension point=\"org.xpect.fileExtensions\">");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("<fileExtension");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("emfResourceFactory=\"org.foo.ResourceFactory\"");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("fileExtension=\"foo, bar\"");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("xtextLanguageName=\"org.foo.Foo\"");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("xtextResourceServiceProvider=\"org.foo.ResourceServiceProvider\"");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("xtextResourceUIServiceProvider=\"org.foo.ResourceUIServiceProvider\"");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("xtextRuntimeModule=\"org.foo.FooRuntimeModule\"");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("xtextUiModule=\"org.FooUiModule\">");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("</fileExtension>");
+    _builder.newLine();
+    _builder.append("</extension>");
+    _builder.newLine();
+    final String actual = this.parse(_builder);
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("IXtextFileExtensionInfo{fileExtensions=[bar, foo], resourceFactory=org.foo.ResourceFactory, languageID=org.foo.Foo, runtimeModule=org.foo.FooRuntimeModule, uiModule=org.FooUiModule, resourceServiceProvider=org.foo.ResourceServiceProvider, resourceUIServiceProvider=org.foo.ResourceUIServiceProvider}");
+    _builder_1.newLine();
+    final String expected = _builder_1.toString();
+    TestUtil.assertEquals(expected, actual);
+  }
+  
+  public String parse(final CharSequence pluginXmlContent) {
+    try {
+      String _xblockexpression = null;
+      {
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+        _builder.newLine();
+        _builder.append("<?eclipse version=\"3.0\"?>");
+        _builder.newLine();
+        _builder.append("<plugin>");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append(pluginXmlContent, "\t");
+        _builder.newLineIfNotEmpty();
+        _builder.append("</plugin>");
+        _builder.newLine();
+        String _string = _builder.toString();
+        byte[] _bytes = _string.getBytes("UTF-8");
+        final ByteArrayInputStream in = new ByteArrayInputStream(_bytes);
+        URL _uRL = new URL("file:/plugin.xml");
+        final StandaloneExtensionRegistry extensionInfo = new StandaloneExtensionRegistry(_uRL, in);
+        Closeables.closeQuietly(in);
+        final FileExtensionInfoRegistry fileExtensionInfo = new FileExtensionInfoRegistry(extensionInfo);
+        _xblockexpression = fileExtensionInfo.toString();
+      }
+      return _xblockexpression;
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+}

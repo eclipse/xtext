@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<plugin>
+   <extension-point id="fileExtensions" name="fileExtensions" schema="schema/fileExtensions.exsd"/>
+   <extension-point id="testSuite" name="testSuite" schema="schema/testSuite.exsd"/>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated Xpect -->
+      <package
+            uri="http://www.eclipse.org/xpect/Xpect"
+            class="org.eclipse.xpect.XpectPackage"
+            genModel="model/Xpect.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated Xpect -->
+      <package
+            uri="http://www.eclipse.org/xpect/XpectJavaModel"
+            class="org.eclipse.xpect.XpectJavaModelPackage"
+            genModel="model/Xpect.genmodel"/>
+   </extension>
+
+</plugin>

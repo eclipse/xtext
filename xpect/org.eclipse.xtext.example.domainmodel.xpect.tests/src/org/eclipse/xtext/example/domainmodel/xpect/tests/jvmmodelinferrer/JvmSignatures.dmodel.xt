@@ -1,0 +1,32 @@
+/* XPECT_SETUP org.eclipse.xtext.example.domainmodel.xpect.tests.jvmmodelinferrer.DMJvmModelInferrerTest END_SETUP */
+
+/*
+Test the signatures of public and protected members.  
+XPECT jvmModelSignatures ---
+package pkg1;
+
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+
+@SuppressWarnings("all")
+public class MyEntity {
+  public MyEntity() {...}
+  
+  public MyEntity(final Procedure1<MyEntity> initializer) {...}
+  
+  public String getName() {...}
+  
+  public void setName(final String name) {...}
+  
+  @Override
+  public String toString() {...}
+}
+----
+*/
+ 
+package pkg1 {
+	entity MyEntity {
+		name:String
+	}
+}
+
+

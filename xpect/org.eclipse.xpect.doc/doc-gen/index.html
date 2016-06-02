@@ -1,0 +1,208 @@
+<h1>Xpect Reference</h1>
+<h2>Annotations For Test Classes</h2>
+<h3>org.junit.runner.RunWith</h3>
+<p>
+
+</p>
+<ul>
+<li>
+Class 
+<b>value</b>
+ default: null
+</li>
+</ul>
+<h3>org.xpect.setup.XpectSetup</h3>
+<p>
+
+</p>
+<ul>
+<li>
+Class 
+<b>value</b>
+ default: null
+</li>
+</ul>
+<h3>org.xpect.runner.XpectSuiteClasses</h3>
+<p>
+
+</p>
+<ul>
+<li>
+Class 
+<b>value</b>
+ default: null
+</li>
+</ul>
+<h3>org.xpect.runner.XpectTestFiles</h3>
+<p>
+
+</p>
+<ul>
+<li>
+String 
+<b>baseDir</b>
+ default: ""
+</li>
+<li>
+String 
+<b>fileExtensions</b>
+ default: {"xt", "xpect"}
+</li>
+<li>
+String 
+<b>files</b>
+ default: {}
+</li>
+<li>
+FileRoot 
+<b>relativeTo</b>
+ default: org.xpect.runner.XpectTestFiles.FileRoot.CLASS
+</li>
+</ul>
+<h2>Annotations For Test Methods</h2>
+<h3>org.junit.Test</h3>
+<p>
+
+</p>
+<ul>
+<li>
+Class 
+<b>expected</b>
+ default: org.junit.Test.None.class
+</li>
+<li>
+long 
+<b>timeout</b>
+ default: 0L
+</li>
+</ul>
+<h3>org.xpect.runner.Xpect</h3>
+<p>
+
+</p>
+<ul>
+</ul>
+<h3>org.xpect.parameter.ParameterParser</h3>
+<p>
+
+</p>
+<ul>
+<li>
+String 
+<b>endToken</b>
+ default: "\n"
+</li>
+<li>
+String 
+<b>syntax</b>
+ default: ""
+</li>
+</ul>
+<h2>Annotations For Test Method Parameters</h2>
+<h3>org.xpect.expectation.StringExpectation</h3>
+<p>
+
+</p>
+<ul>
+<li>
+boolean 
+<b>caseSensitive</b>
+ default: true
+</li>
+<li>
+boolean 
+<b>whitespaceSensitive</b>
+ default: false
+</li>
+</ul>
+<h3>org.xpect.expectation.LinesExpectation</h3>
+<p>
+
+</p>
+<ul>
+<li>
+boolean 
+<b>caseSensitive</b>
+ default: true
+</li>
+<li>
+Class 
+<b>itemFormatter</b>
+ default: org.xpect.expectation.ActualCollection.ToString.class
+</li>
+<li>
+boolean 
+<b>ordered</b>
+ default: false
+</li>
+<li>
+boolean 
+<b>quoted</b>
+ default: false
+</li>
+<li>
+boolean 
+<b>whitespaceSensitive</b>
+ default: false
+</li>
+</ul>
+<h3>org.xpect.expectation.CommaSeparatedValuesExpectation</h3>
+<p>
+
+</p>
+<ul>
+<li>
+boolean 
+<b>caseSensitive</b>
+ default: true
+</li>
+<li>
+Class 
+<b>itemFormatter</b>
+ default: org.xpect.expectation.ActualCollection.ToString.class
+</li>
+<li>
+int 
+<b>maxItemsPerLine</b>
+ default: -1
+</li>
+<li>
+int 
+<b>maxLineWidth</b>
+ default: 80
+</li>
+<li>
+boolean 
+<b>ordered</b>
+ default: false
+</li>
+<li>
+boolean 
+<b>quoted</b>
+ default: false
+</li>
+<li>
+boolean 
+<b>whitespaceSensitive</b>
+ default: false
+</li>
+</ul>
+<h2>Setups</h2>
+<h3>org.xpect.xtext.lib.setup.XtextWorkspaceSetup</h3>
+
+../org.xpect.xtext.lib/src/org/xpect/xtext/lib/setup/XtextWorkspaceSetup.java
+<h3>org.xpect.xtext.lib.setup.XtextStandaloneSetup</h3>
+
+../org.xpect.xtext.lib/src/org/xpect/xtext/lib/setup/XtextStandaloneSetup.java
+<h2>Test Library</h2>
+<h3>org.xpect.xtext.lib.tests.XtextTests</h3>
+
+<h3>org.xpect.xtext.lib.tests.ValidationTest</h3>
+
+<h3>org.xpect.xtext.lib.tests.ScopingTest</h3>
+
+<h3>org.xpect.xtext.lib.tests.ResourceDescriptionTest</h3>
+
+<h3>org.xpect.xtext.lib.tests.LinkingTest</h3>
+
+<h3>org.xpect.xtext.lib.tests.JvmModelInferrerTest</h3>

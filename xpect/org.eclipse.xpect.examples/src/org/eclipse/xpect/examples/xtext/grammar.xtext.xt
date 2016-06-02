@@ -1,0 +1,17 @@
+//  XPECT_SETUP org.xpect.examples.xtext.DMXtextTests END_SETUP
+grammar org.xpect.examples.xtext.Grammar with org.eclipse.xtext.common.Terminals
+
+generate foo "http://foo"
+
+// XPECT errors --> "A rule's name has to be unique." at "Rule1"
+Rule1:
+	name=ID;
+	
+// XPECT errors --> "A rule's name has to be unique." at "Rule1"
+Rule1:
+	name=ID;
+
+Other:
+	// XPECT scope at Other --> ANY_OTHER, ID, INT, ML_COMMENT, SL_COMMENT, STRING, WS
+	"foo" call=Other
+;

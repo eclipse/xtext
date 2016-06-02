@@ -1,0 +1,15 @@
+  XPECT_SETUP org.xpect.tests.parameter.ParameterParserTest END_SETUP
+  
+
+XPECT testFailureMessage --> When parsing "xxx" with syntax "('at' arg1=OFFSET)?", the trailing part "xxx" remains unmatched. expected:<...          intOffset [xxx ]-->                 ...> but was:<...          intOffset []-->                 ...>
+XPECT              intOffset xxx -->                   x 
+
+XPECT testFailureMessage --> could not parse " xxx " with grammar "'kw'"
+XPECT mandatoryKeyword xxx --> x 
+
+XPECT testFailureMessage --> Parameters that match syntax "'kw'" are required, but have not been provided.
+XPECT mandatoryKeyword --> x 
+
+XPECT testFailureMessage --> Error creating value for argument org.xpect.tests.parameter.ParameterParserTest.mandatoryParameter(int arg0)
+XPECT mandatoryParameter --> x 
+

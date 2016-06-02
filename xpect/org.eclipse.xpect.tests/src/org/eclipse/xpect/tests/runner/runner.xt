@@ -1,0 +1,20 @@
+   XPECT_SETUP org.xpect.tests.runner.RunnerTest END_SETUP  
+
+// this should pass
+XPECT expectedExpectation --> expectedExpectation
+
+
+// assert a wrong single-line expectation
+XPECT testFailureDiff  --> [unexpected|expectedExpectation]
+XPECT expectedExpectation --> unexpected
+
+
+// assert a wrong multi-line expectation
+XPECT testFailureDiff  ---
+- expectedExpectation1
+  expectedExpectation
+---
+XPECT expectedExpectation ---
+expectedExpectation1
+expectedExpectation
+---
