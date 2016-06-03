@@ -7,16 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.tests.server
 
-import org.eclipse.xtend.lib.annotations.Accessors
 import org.junit.Test
-
-import static org.junit.Assert.*
-import static io.typefox.lsapi.util.LsapiFactories.*
 
 /**
  * @author kosyakov - Initial contribution and API
  */
-class DefinitionTest extends AbstractLanguageServerTest {
+class DefinitionTest extends AbstractTestLangLanguageServerTest {
 
 	@Test
 	def void testDefinition_01() {
@@ -33,29 +29,6 @@ class DefinitionTest extends AbstractLanguageServerTest {
 				MyModel.testlang [[0, 5] .. [0, 8]]
 			'''
 		]
-	}
-
-	protected def void testDefinition((DefinitionTestConfiguration)=>void configurator) {
-		val extension configuration = new DefinitionTestConfiguration
-		configurator.apply(configuration)
-
-		val fileUri = filePath -> model
-
-		initialize
-		open(fileUri, model)
-
-		val definitions = languageServer.definition(newTextDocumentPositionParams(fileUri, line, column))
-		val actualDefinitions = definitions.get.toExpectation
-		assertEquals(expectedDefinitions, actualDefinitions)
-	}
-
-	@Accessors
-	static class DefinitionTestConfiguration {
-		String model = ''
-		String filePath = 'MyModel.testlang'
-		int line = 0
-		int column = 0
-		String expectedDefinitions = ''
 	}
 
 }
