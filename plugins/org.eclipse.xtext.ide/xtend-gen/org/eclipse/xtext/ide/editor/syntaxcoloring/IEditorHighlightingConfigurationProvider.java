@@ -113,7 +113,7 @@ public interface IEditorHighlightingConfigurationProvider {
         public Boolean apply(final Keyword it) {
           String _value = it.getValue();
           char _charAt = _value.charAt(0);
-          return Boolean.valueOf(Character.isJavaIdentifierStart(_charAt));
+          return Boolean.valueOf(Character.isLetter(_charAt));
         }
       };
       Iterable<Keyword> _filter = IterableExtensions.<Keyword>filter(_containedKeywords, _function);

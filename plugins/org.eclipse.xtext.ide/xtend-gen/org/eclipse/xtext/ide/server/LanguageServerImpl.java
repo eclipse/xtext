@@ -92,6 +92,7 @@ import org.eclipse.xtext.ide.server.hover.HoverService;
 import org.eclipse.xtext.ide.server.symbol.DocumentSymbolService;
 import org.eclipse.xtext.ide.server.symbol.WorkspaceSymbolService;
 import org.eclipse.xtext.resource.FileExtensionProvider;
+import org.eclipse.xtext.resource.IMimeTypeProvider;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
@@ -186,6 +187,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
     for (final IResourceServiceProvider serviceProvider : _set) {
       {
         final FileExtensionProvider extensionProvider = serviceProvider.<FileExtensionProvider>get(FileExtensionProvider.class);
+        final IMimeTypeProvider mimeTypesProvider = serviceProvider.<IMimeTypeProvider>get(IMimeTypeProvider.class);
         final LanguageInfo langInfo = serviceProvider.<LanguageInfo>get(LanguageInfo.class);
         final IEditorHighlightingConfigurationProvider highlightingProvider = serviceProvider.<IEditorHighlightingConfigurationProvider>get(IEditorHighlightingConfigurationProvider.class);
         LanguageDescriptionImpl _languageDescriptionImpl = new LanguageDescriptionImpl();
@@ -197,6 +199,8 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
             it.setFileExtensions(_list);
             String _languageName = langInfo.getLanguageName();
             it.setLanguageId(_languageName);
+            List<String> _mimeTypes = mimeTypesProvider.getMimeTypes();
+            it.setMimeTypes(_mimeTypes);
             if ((highlightingProvider != null)) {
               String _clientName = params.getClientName();
               String _configuration = highlightingProvider.getConfiguration(_clientName);

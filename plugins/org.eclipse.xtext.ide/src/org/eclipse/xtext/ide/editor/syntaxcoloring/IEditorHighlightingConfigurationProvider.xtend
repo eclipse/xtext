@@ -65,7 +65,7 @@ interface IEditorHighlightingConfigurationProvider {
 
         def Iterable<String> getKeywords() {
             GrammarUtil.containedKeywords(grammarAccess.grammar).filter [
-                Character.isJavaIdentifierStart(it.value.charAt(0))
+                Character.isLetter(it.value.charAt(0))
             ].map[value].toSet.sort
         }
 

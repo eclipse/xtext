@@ -189,21 +189,45 @@ public class DocumentTest {
     ObjectExtensions.<Document>operator_doubleArrow(_document, _function);
   }
   
+  @Test
+  public void testUpdate_nonIncrementalChange() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("hello world");
+    _builder.newLine();
+    _builder.append("foo");
+    _builder.newLine();
+    _builder.append("bar");
+    Document _document = new Document(1, _builder.toString());
+    final Procedure1<Document> _function = new Procedure1<Document>() {
+      @Override
+      public void apply(final Document it) {
+        TextEditImpl _change = DocumentTest.this.change(null, null, " foo ");
+        Document _applyChanges = it.applyChanges(
+          Collections.<TextEdit>unmodifiableList(CollectionLiterals.<TextEdit>newArrayList(_change)));
+        String _contents = _applyChanges.getContents();
+        Assert.assertEquals(" foo ", _contents);
+      }
+    };
+    ObjectExtensions.<Document>operator_doubleArrow(_document, _function);
+  }
+  
   private TextEditImpl change(final PositionImpl startPos, final PositionImpl endPos, final String newText) {
     TextEditImpl _textEditImpl = new TextEditImpl();
     final Procedure1<TextEditImpl> _function = new Procedure1<TextEditImpl>() {
       @Override
       public void apply(final TextEditImpl it) {
-        RangeImpl _rangeImpl = new RangeImpl();
-        final Procedure1<RangeImpl> _function = new Procedure1<RangeImpl>() {
-          @Override
-          public void apply(final RangeImpl it) {
-            it.setStart(startPos);
-            it.setEnd(endPos);
-          }
-        };
-        RangeImpl _doubleArrow = ObjectExtensions.<RangeImpl>operator_doubleArrow(_rangeImpl, _function);
-        it.setRange(_doubleArrow);
+        if ((startPos != null)) {
+          RangeImpl _rangeImpl = new RangeImpl();
+          final Procedure1<RangeImpl> _function = new Procedure1<RangeImpl>() {
+            @Override
+            public void apply(final RangeImpl it) {
+              it.setStart(startPos);
+              it.setEnd(endPos);
+            }
+          };
+          RangeImpl _doubleArrow = ObjectExtensions.<RangeImpl>operator_doubleArrow(_rangeImpl, _function);
+          it.setRange(_doubleArrow);
+        }
         it.setNewText(newText);
       }
     };

@@ -45,9 +45,13 @@ import org.eclipse.xtend.lib.annotations.Data
     def Document applyChanges(Iterable<? extends TextEdit> changes) {
         var newContent = contents
         for (change : changes) {
-            val start = getOffSet(change.range.start)
-            val end = getOffSet(change.range.end)
-            newContent = newContent.substring(0, start) + change.newText + newContent.substring(end)
+            if (change.range === null) {
+                newContent = change.newText
+            } else {
+                val start = getOffSet(change.range.start)
+                val end = getOffSet(change.range.end)
+                newContent = newContent.substring(0, start) + change.newText + newContent.substring(end)
+            }
         }
         return new Document(version + 1, newContent)
     }
