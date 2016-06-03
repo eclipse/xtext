@@ -133,7 +133,7 @@ branches.each { branch ->
 						config.builders.'hudson.plugins.copyartifact.CopyArtifact'[1]
 							.project = "target-platforms-${branch.displayName}"
 						def builder = config.builders.'hudson.plugins.buckminster.EclipseBuckminsterBuilder'
-						def params = '-Declipse.p2.mirrors=false\n-Dcheckout.location=${WORKSPACE}/git-repo/\n-Dxtext.checkout.location=${checkout.location}\n-Dxtext.p2.repository=${WORKSPACE}/repositories/xtext.p2.repository'
+						def params = '-Declipse.p2.mirrors=false\n-Dcheckout.location=${WORKSPACE}/git-repo/\n-Dxtext.checkout.location=${checkout.location}\n-Dmaven.snapshots.repository.uri=http://repo.maven.apache.org/maven2\n-Dxtext.p2.repository=${WORKSPACE}/repositories/xtext.p2.repository'
 						if (job.jdk == jdks['1.8']) {
 							params += '\n-DJAVA8=true'
 							builder.installationName = 'buckminster-4.4'

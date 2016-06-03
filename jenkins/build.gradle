@@ -14,7 +14,7 @@ ext.branches = [
 		displayName: 'master',
 		platforms: [
 			oldest: [
-				target: 'Helios',
+				target: 'Kepler',
 				jdk: jdks['1.8']
 			],
 			latest: [
