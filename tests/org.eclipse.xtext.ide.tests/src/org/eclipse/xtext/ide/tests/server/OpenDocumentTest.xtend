@@ -17,7 +17,7 @@ import static extension io.typefox.lsapi.util.LsapiFactories.*
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-class OpenDocumentTest extends AbstractLanguageServerTest {
+class OpenDocumentTest extends AbstractTestLangLanguageServerTest {
     
     @Test
     def void testOpenedDocumentShadowsPersistedFile() {

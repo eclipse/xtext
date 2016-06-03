@@ -20,7 +20,7 @@ import io.typefox.lsapi.util.LsapiFactories;
 import java.util.Collections;
 import java.util.List;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.ide.tests.server.AbstractLanguageServerTest;
+import org.eclipse.xtext.ide.tests.server.AbstractTestLangLanguageServerTest;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.junit.Assert;
@@ -30,7 +30,7 @@ import org.junit.Test;
  * @author Sven Efftinge - Initial contribution and API
  */
 @SuppressWarnings("all")
-public class OpenDocumentTest extends AbstractLanguageServerTest {
+public class OpenDocumentTest extends AbstractTestLangLanguageServerTest {
   @Test
   public void testOpenedDocumentShadowsPersistedFile() {
     StringConcatenation _builder = new StringConcatenation();

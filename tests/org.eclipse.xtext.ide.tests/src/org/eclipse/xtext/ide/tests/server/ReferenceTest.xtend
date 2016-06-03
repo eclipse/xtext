@@ -7,17 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.tests.server
 
-import io.typefox.lsapi.ReferenceContextImpl
-import org.eclipse.xtend.lib.annotations.Accessors
 import org.junit.Test
-
-import static io.typefox.lsapi.util.LsapiFactories.*
-import static org.junit.Assert.*
 
 /**
  * @author kosyakov - Initial contribution and API
  */
-class ReferenceTest extends AbstractLanguageServerTest {
+class ReferenceTest extends AbstractTestLangLanguageServerTest {
 
 	@Test
 	def void testReferences_01() {
@@ -51,32 +46,6 @@ class ReferenceTest extends AbstractLanguageServerTest {
 				MyModel.testlang [[2, 1] .. [2, 4]]
 			'''
 		]
-	}
-
-	protected def void testReferences((ReferenceTestConfiguration)=>void configurator) {
-		val extension configuration = new ReferenceTestConfiguration
-		configurator.apply(configuration)
-
-		val fileUri = filePath -> model
-
-		initialize
-		open(fileUri, model)
-
-		val referenceContext = new ReferenceContextImpl
-		referenceContext.includeDeclaration = includeDeclaration
-		val definitions = languageServer.references(newReferenceParams(fileUri, line, column, referenceContext))
-		val actualDefinitions = definitions.get.toExpectation
-		assertEquals(expectedReferences, actualDefinitions)
-	}
-
-	@Accessors
-	static class ReferenceTestConfiguration {
-		String model = ''
-		String filePath = 'MyModel.testlang'
-		int line = 0
-		int column = 0
-		boolean includeDeclaration = false
-		String expectedReferences = ''
 	}
 
 }

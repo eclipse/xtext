@@ -7,22 +7,32 @@
  */
 package org.eclipse.xtext.ide.tests.server;
 
+import com.google.common.base.Objects;
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Module;
 import com.google.inject.binder.AnnotatedBindingBuilder;
+import io.typefox.lsapi.CompletionItem;
+import io.typefox.lsapi.CompletionList;
 import io.typefox.lsapi.Diagnostic;
 import io.typefox.lsapi.DidCloseTextDocumentParamsImpl;
 import io.typefox.lsapi.DidOpenTextDocumentParamsImpl;
+import io.typefox.lsapi.DocumentSymbolParamsImpl;
+import io.typefox.lsapi.Hover;
 import io.typefox.lsapi.InitializeParamsImpl;
 import io.typefox.lsapi.InitializeResult;
 import io.typefox.lsapi.Location;
+import io.typefox.lsapi.MarkedString;
 import io.typefox.lsapi.Position;
 import io.typefox.lsapi.PublishDiagnosticsParams;
 import io.typefox.lsapi.Range;
+import io.typefox.lsapi.ReferenceContextImpl;
+import io.typefox.lsapi.ReferenceParamsImpl;
 import io.typefox.lsapi.SymbolInformation;
+import io.typefox.lsapi.TextDocumentPositionParamsImpl;
+import io.typefox.lsapi.WorkspaceSymbolParamsImpl;
 import io.typefox.lsapi.services.TextDocumentService;
 import io.typefox.lsapi.util.LsapiFactories;
 import java.io.File;
@@ -35,11 +45,21 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
+import org.eclipse.xtend.lib.annotations.Accessors;
+import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.LanguageInfo;
 import org.eclipse.xtext.ide.server.LanguageServerImpl;
 import org.eclipse.xtext.ide.server.ServerModule;
 import org.eclipse.xtext.ide.server.UriExtensions;
 import org.eclipse.xtext.ide.server.concurrent.RequestManager;
+import org.eclipse.xtext.ide.tests.server.DefinitionTestConfiguration;
+import org.eclipse.xtext.ide.tests.server.DocumentSymbolConfiguraiton;
+import org.eclipse.xtext.ide.tests.server.HoverTestConfiguration;
+import org.eclipse.xtext.ide.tests.server.ReferenceTestConfiguration;
+import org.eclipse.xtext.ide.tests.server.TestCompletionConfiguration;
+import org.eclipse.xtext.ide.tests.server.WorkspaceSymbolConfiguraiton;
+import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.Files;
 import org.eclipse.xtext.util.Modules2;
@@ -48,14 +68,20 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
+import org.junit.Assert;
 import org.junit.Before;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@FinalFieldsConstructor
 @SuppressWarnings("all")
-public class AbstractLanguageServerTest implements Consumer<PublishDiagnosticsParams> {
+public abstract class AbstractLanguageServerTest implements Consumer<PublishDiagnosticsParams> {
+  @Accessors
+  protected final String fileExtension;
+  
   @Before
   public void setup() {
     try {
@@ -81,6 +107,12 @@ public class AbstractLanguageServerTest implements Consumer<PublishDiagnosticsPa
       });
       final Injector injector = Guice.createInjector(module);
       injector.injectMembers(this);
+      Map<String, Object> _extensionToFactoryMap = this.resourceServerProviderRegistry.getExtensionToFactoryMap();
+      final Object resourceServiceProvider = _extensionToFactoryMap.get(this.fileExtension);
+      if ((resourceServiceProvider instanceof IResourceServiceProvider)) {
+        LanguageInfo _get = ((IResourceServiceProvider)resourceServiceProvider).<LanguageInfo>get(LanguageInfo.class);
+        this.languageInfo = _get;
+      }
       TextDocumentService _textDocumentService = this.languageServer.getTextDocumentService();
       _textDocumentService.onPublishDiagnostics(this);
       File _file = new File("./test-data/test-project");
@@ -97,6 +129,9 @@ public class AbstractLanguageServerTest implements Consumer<PublishDiagnosticsPa
   }
   
   @Inject
+  protected IResourceServiceProvider.Registry resourceServerProviderRegistry;
+  
+  @Inject
   @Extension
   private UriExtensions _uriExtensions;
   
@@ -106,6 +141,8 @@ public class AbstractLanguageServerTest implements Consumer<PublishDiagnosticsPa
   protected Map<String, List<? extends Diagnostic>> diagnostics = CollectionLiterals.<String, List<? extends Diagnostic>>newHashMap();
   
   protected File root;
+  
+  protected LanguageInfo languageInfo;
   
   protected Path getRootPath() {
     Path _path = this.root.toPath();
@@ -148,7 +185,12 @@ public class AbstractLanguageServerTest implements Consumer<PublishDiagnosticsPa
   }
   
   protected void open(final String fileUri, final String model) {
-    DidOpenTextDocumentParamsImpl _newDidOpenTextDocumentParams = LsapiFactories.newDidOpenTextDocumentParams(fileUri, "testlang", 1, model);
+    String _languageName = this.languageInfo.getLanguageName();
+    this.open(fileUri, _languageName, model);
+  }
+  
+  protected void open(final String fileUri, final String langaugeId, final String model) {
+    DidOpenTextDocumentParamsImpl _newDidOpenTextDocumentParams = LsapiFactories.newDidOpenTextDocumentParams(fileUri, langaugeId, 1, model);
     this.languageServer.didOpen(_newDidOpenTextDocumentParams);
   }
   
@@ -272,11 +314,231 @@ public class AbstractLanguageServerTest implements Consumer<PublishDiagnosticsPa
     return _builder.toString();
   }
   
+  protected String _toExpectation(final CompletionItem it) {
+    StringConcatenation _builder = new StringConcatenation();
+    String _label = it.getLabel();
+    _builder.append(_label, "");
+    {
+      String _detail = it.getDetail();
+      boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(_detail);
+      boolean _not = (!_isNullOrEmpty);
+      if (_not) {
+        _builder.append(" (");
+        String _detail_1 = it.getDetail();
+        _builder.append(_detail_1, "");
+        _builder.append(")");
+      }
+    }
+    {
+      String _insertText = it.getInsertText();
+      String _label_1 = it.getLabel();
+      boolean _notEquals = (!Objects.equal(_insertText, _label_1));
+      if (_notEquals) {
+        _builder.append(" -> ");
+        String _insertText_1 = it.getInsertText();
+        _builder.append(_insertText_1, "");
+      }
+    }
+    _builder.newLineIfNotEmpty();
+    return _builder.toString();
+  }
+  
+  protected String _toExpectation(final Hover it) {
+    StringConcatenation _builder = new StringConcatenation();
+    Range _range = it.getRange();
+    String _expectation = this.toExpectation(_range);
+    _builder.append(_expectation, "");
+    _builder.newLineIfNotEmpty();
+    {
+      List<? extends MarkedString> _contents = it.getContents();
+      for(final MarkedString content : _contents) {
+        String _expectation_1 = this.toExpectation(content);
+        _builder.append(_expectation_1, "");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    return _builder.toString();
+  }
+  
+  protected String _toExpectation(final MarkedString it) {
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      String _language = it.getLanguage();
+      boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(_language);
+      boolean _not = (!_isNullOrEmpty);
+      if (_not) {
+        String _language_1 = it.getLanguage();
+        _builder.append(_language_1, "");
+        _builder.append(" -> ");
+      }
+    }
+    String _value = it.getValue();
+    _builder.append(_value, "");
+    return _builder.toString();
+  }
+  
+  protected void testCompletion(final Procedure1<? super TestCompletionConfiguration> configurator) {
+    try {
+      @Extension
+      final TestCompletionConfiguration configuration = new TestCompletionConfiguration();
+      configuration.setFilePath(("MyModel." + this.fileExtension));
+      configurator.apply(configuration);
+      String _filePath = configuration.getFilePath();
+      String _model = configuration.getModel();
+      final String fileUri = this.operator_mappedTo(_filePath, _model);
+      this.initialize();
+      String _model_1 = configuration.getModel();
+      this.open(fileUri, _model_1);
+      int _line = configuration.getLine();
+      int _column = configuration.getColumn();
+      TextDocumentPositionParamsImpl _newTextDocumentPositionParams = LsapiFactories.newTextDocumentPositionParams(fileUri, _line, _column);
+      final CompletableFuture<CompletionList> completionItems = this.languageServer.completion(_newTextDocumentPositionParams);
+      CompletionList _get = completionItems.get();
+      List<? extends CompletionItem> _items = _get.getItems();
+      final String actualCompletionItems = this.toExpectation(_items);
+      String _expectedCompletionItems = configuration.getExpectedCompletionItems();
+      Assert.assertEquals(_expectedCompletionItems, actualCompletionItems);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  protected void testDefinition(final Procedure1<? super DefinitionTestConfiguration> configurator) {
+    try {
+      @Extension
+      final DefinitionTestConfiguration configuration = new DefinitionTestConfiguration();
+      configuration.setFilePath(("MyModel." + this.fileExtension));
+      configurator.apply(configuration);
+      String _filePath = configuration.getFilePath();
+      String _model = configuration.getModel();
+      final String fileUri = this.operator_mappedTo(_filePath, _model);
+      this.initialize();
+      String _model_1 = configuration.getModel();
+      this.open(fileUri, _model_1);
+      int _line = configuration.getLine();
+      int _column = configuration.getColumn();
+      TextDocumentPositionParamsImpl _newTextDocumentPositionParams = LsapiFactories.newTextDocumentPositionParams(fileUri, _line, _column);
+      final CompletableFuture<List<? extends Location>> definitions = this.languageServer.definition(_newTextDocumentPositionParams);
+      List<? extends Location> _get = definitions.get();
+      final String actualDefinitions = this.toExpectation(_get);
+      String _expectedDefinitions = configuration.getExpectedDefinitions();
+      Assert.assertEquals(_expectedDefinitions, actualDefinitions);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  protected void testHover(final Procedure1<? super HoverTestConfiguration> configurator) {
+    try {
+      @Extension
+      final HoverTestConfiguration configuration = new HoverTestConfiguration();
+      configuration.setFilePath(("MyModel." + this.fileExtension));
+      configurator.apply(configuration);
+      String _filePath = configuration.getFilePath();
+      String _model = configuration.getModel();
+      final String fileUri = this.operator_mappedTo(_filePath, _model);
+      this.initialize();
+      String _model_1 = configuration.getModel();
+      this.open(fileUri, _model_1);
+      int _line = configuration.getLine();
+      int _column = configuration.getColumn();
+      TextDocumentPositionParamsImpl _newTextDocumentPositionParams = LsapiFactories.newTextDocumentPositionParams(fileUri, _line, _column);
+      final CompletableFuture<Hover> hover = this.languageServer.hover(_newTextDocumentPositionParams);
+      Hover _get = hover.get();
+      final String actualHover = this.toExpectation(_get);
+      String _expectedHover = configuration.getExpectedHover();
+      Assert.assertEquals(_expectedHover, actualHover);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  protected void testDocumentSymbol(final Procedure1<? super DocumentSymbolConfiguraiton> configurator) {
+    try {
+      @Extension
+      final DocumentSymbolConfiguraiton configuration = new DocumentSymbolConfiguraiton();
+      configuration.setFilePath(("MyModel." + this.fileExtension));
+      configurator.apply(configuration);
+      String _filePath = configuration.getFilePath();
+      String _model = configuration.getModel();
+      final String fileUri = this.operator_mappedTo(_filePath, _model);
+      this.initialize();
+      String _model_1 = configuration.getModel();
+      this.open(fileUri, _model_1);
+      DocumentSymbolParamsImpl _newDocumentSymbolParams = LsapiFactories.newDocumentSymbolParams(fileUri);
+      final CompletableFuture<List<? extends SymbolInformation>> symbols = this.languageServer.documentSymbol(_newDocumentSymbolParams);
+      List<? extends SymbolInformation> _get = symbols.get();
+      final String actualSymbols = this.toExpectation(_get);
+      String _expectedSymbols = configuration.getExpectedSymbols();
+      Assert.assertEquals(_expectedSymbols, actualSymbols);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  protected void testSymbol(final Procedure1<? super WorkspaceSymbolConfiguraiton> configurator) {
+    try {
+      @Extension
+      final WorkspaceSymbolConfiguraiton configuration = new WorkspaceSymbolConfiguraiton();
+      configuration.setFilePath(("MyModel." + this.fileExtension));
+      configurator.apply(configuration);
+      String _filePath = configuration.getFilePath();
+      String _model = configuration.getModel();
+      final String fileUri = this.operator_mappedTo(_filePath, _model);
+      this.initialize();
+      String _model_1 = configuration.getModel();
+      this.open(fileUri, _model_1);
+      String _query = configuration.getQuery();
+      WorkspaceSymbolParamsImpl _newWorkspaceSymbolParams = LsapiFactories.newWorkspaceSymbolParams(_query);
+      CompletableFuture<List<? extends SymbolInformation>> _symbol = this.languageServer.symbol(_newWorkspaceSymbolParams);
+      final List<? extends SymbolInformation> symbols = _symbol.get();
+      final String actualSymbols = this.toExpectation(symbols);
+      String _expectedSymbols = configuration.getExpectedSymbols();
+      Assert.assertEquals(_expectedSymbols, actualSymbols);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  protected void testReferences(final Procedure1<? super ReferenceTestConfiguration> configurator) {
+    try {
+      @Extension
+      final ReferenceTestConfiguration configuration = new ReferenceTestConfiguration();
+      configuration.setFilePath(("MyModel." + this.fileExtension));
+      configurator.apply(configuration);
+      String _filePath = configuration.getFilePath();
+      String _model = configuration.getModel();
+      final String fileUri = this.operator_mappedTo(_filePath, _model);
+      this.initialize();
+      String _model_1 = configuration.getModel();
+      this.open(fileUri, _model_1);
+      final ReferenceContextImpl referenceContext = new ReferenceContextImpl();
+      boolean _isIncludeDeclaration = configuration.isIncludeDeclaration();
+      referenceContext.setIncludeDeclaration(_isIncludeDeclaration);
+      int _line = configuration.getLine();
+      int _column = configuration.getColumn();
+      ReferenceParamsImpl _newReferenceParams = LsapiFactories.newReferenceParams(fileUri, _line, _column, referenceContext);
+      final CompletableFuture<List<? extends Location>> definitions = this.languageServer.references(_newReferenceParams);
+      List<? extends Location> _get = definitions.get();
+      final String actualDefinitions = this.toExpectation(_get);
+      String _expectedReferences = configuration.getExpectedReferences();
+      Assert.assertEquals(_expectedReferences, actualDefinitions);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
   protected String toExpectation(final Object elements) {
     if (elements instanceof List) {
       return _toExpectation((List<?>)elements);
+    } else if (elements instanceof CompletionItem) {
+      return _toExpectation((CompletionItem)elements);
+    } else if (elements instanceof Hover) {
+      return _toExpectation((Hover)elements);
     } else if (elements instanceof Location) {
       return _toExpectation((Location)elements);
+    } else if (elements instanceof MarkedString) {
+      return _toExpectation((MarkedString)elements);
     } else if (elements instanceof Position) {
       return _toExpectation((Position)elements);
     } else if (elements instanceof Range) {
@@ -289,5 +551,15 @@ public class AbstractLanguageServerTest implements Consumer<PublishDiagnosticsPa
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(elements).toString());
     }
+  }
+  
+  public AbstractLanguageServerTest(final String fileExtension) {
+    super();
+    this.fileExtension = fileExtension;
+  }
+  
+  @Pure
+  public String getFileExtension() {
+    return this.fileExtension;
   }
 }
