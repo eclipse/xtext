@@ -129,6 +129,7 @@ build</commands>
       <params>-DECLIPSE.TARGET.ALIAS=Stable
 -Dforce.javadoc=false
 -Dcheckout.location=${WORKSPACE}/git-repo
+-Dmaven.snapshots.repository.uri=http://repo.maven.apache.org/maven2
 -Dmwe.p2.repository=file:${WORKSPACE}/repositories/eclipse/final
 -Dxpand.p2.repository=file:${WORKSPACE}/repositories/eclipse/final
 -Declipse.target.platform=file:${WORKSPACE}/repositories/eclipse/final
@@ -152,6 +153,7 @@ build</commands>
       <params>-DECLIPSE.TARGET.ALIAS=Stable
 -Dforce.javadoc=false
 -Dcheckout.location=${WORKSPACE}/git-repo
+-Dmaven.snapshots.repository.uri=http://repo.maven.apache.org/maven2
 -Dmwe.p2.repository=file:${WORKSPACE}/repositories/eclipse/final
 -Dxpand.p2.repository=file:${WORKSPACE}/repositories/eclipse/final
 -Declipse.target.platform=file:${WORKSPACE}/repositories/eclipse/final
