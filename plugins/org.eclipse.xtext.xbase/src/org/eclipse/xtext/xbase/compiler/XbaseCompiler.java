@@ -80,6 +80,7 @@ import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.internal.FeatureLinkHelper;
 import org.eclipse.xtext.xbase.typesystem.override.BottomResolvedOperation;
 import org.eclipse.xtext.xbase.typesystem.override.OverrideTester;
+import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
@@ -165,9 +166,20 @@ public class XbaseCompiler extends FeatureCallCompiler {
 				}
 			}
 			if (!skipTypeName) {
-				b.append("new ")
+				if (literalType instanceof CompoundTypeReference) {
+					for (LightweightTypeReference c : literalType.getMultiTypeComponents()) {
+						if (c.isArray()) {
+							b.append("new ")
+							.append(c.getType()) // append raw type since we cannot create generic arrays
+							.append(" ");
+							break;
+						}
+					}
+				} else {
+					b.append("new ")
 					.append(literalType.getType()) // append raw type since we cannot create generic arrays
 					.append(" ");
+				}
 			}
 			if (literal.getElements().isEmpty()) {
 				b.append("{}");
