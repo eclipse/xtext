@@ -111,16 +111,7 @@ public class CompilerBug441580Test extends AbstractXtendCompilerTest {
     _builder_1.append("try {");
     _builder_1.newLine();
     _builder_1.append("        ");
-    _builder_1.append("Class<? extends C> _class = this.getClass();");
-    _builder_1.newLine();
-    _builder_1.append("        ");
-    _builder_1.append("ClassLoader _classLoader = _class.getClassLoader();");
-    _builder_1.newLine();
-    _builder_1.append("        ");
-    _builder_1.append("InputStream _resourceAsStream = _classLoader.getResourceAsStream(fileName);");
-    _builder_1.newLine();
-    _builder_1.append("        ");
-    _builder_1.append("in = _resourceAsStream;");
+    _builder_1.append("in = this.getClass().getClassLoader().getResourceAsStream(fileName);");
     _builder_1.newLine();
     _builder_1.append("        ");
     _builder_1.append("ByteArrayOutputStream _byteArrayOutputStream = new ByteArrayOutputStream();");

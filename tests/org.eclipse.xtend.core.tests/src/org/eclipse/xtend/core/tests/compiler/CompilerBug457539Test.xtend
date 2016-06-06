@@ -418,8 +418,7 @@ class CompilerBug457539Test extends AbstractXtendCompilerTest {
 			      public void apply(final StringBuilder it) {
 			        Long _long = new Long(0);
 			        C.this.<Serializable>m(it, _long);
-			        int _length = it.length();
-			        InputOutput.<Integer>println(Integer.valueOf(_length));
+			        InputOutput.<Integer>println(Integer.valueOf(it.length()));
 			      }
 			    };
 			    _newIterable.forEach2(_function);

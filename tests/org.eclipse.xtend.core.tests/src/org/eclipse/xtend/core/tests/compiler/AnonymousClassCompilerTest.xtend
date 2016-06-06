@@ -932,6 +932,7 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 		'''.assertCompilesTo('''
 			import java.util.ArrayList;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+			import org.eclipse.xtext.xbase.lib.Functions.Function0;
 			
 			@SuppressWarnings("all")
 			public class C {
@@ -940,15 +941,18 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			      public abstract void m();
 			    }
 			    
-			    __C_1 ___C_1 = new __C_1() {
-			      public void run() {
+			    return CollectionLiterals.<ArrayList<__C_1>>newArrayList(CollectionLiterals.<__C_1>newArrayList(new Function0<__C_1>() {
+			      public __C_1 apply() {
+			        __C_1 ___C_1 = new __C_1() {
+			          public void run() {
+			          }
+			          
+			          public void m() {
+			          }
+			        };
+			        return ___C_1;
 			      }
-			      
-			      public void m() {
-			      }
-			    };
-			    ArrayList<__C_1> _newArrayList = CollectionLiterals.<__C_1>newArrayList(___C_1);
-			    return CollectionLiterals.<ArrayList<__C_1>>newArrayList(_newArrayList);
+			    }.apply()));
 			  }
 			}
 		''')

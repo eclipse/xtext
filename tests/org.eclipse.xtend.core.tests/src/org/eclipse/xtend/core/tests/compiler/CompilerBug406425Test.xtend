@@ -45,11 +45,8 @@ class CompilerBug406425Test extends AbstractXtendCompilerTest {
 			    MyEntity _myEntity = new MyEntity();
 			    final Procedure1<MyEntity> _function = new Procedure1<MyEntity>() {
 			      public void apply(final MyEntity it) {
-			        Matcher<MyEntity> _nullValue = Test.<MyEntity>nullValue();
-			        Assert.<MyEntity>assertThat(it, _nullValue);
-			        String _name = it.getName();
-			        Matcher<String> _is = Is.<String>is("");
-			        Assert.<String>assertThat(_name, _is);
+			        Assert.<MyEntity>assertThat(it, Test.<MyEntity>nullValue());
+			        Assert.<String>assertThat(it.getName(), Is.<String>is(""));
 			      }
 			    };
 			    return ObjectExtensions.<MyEntity>operator_doubleArrow(_myEntity, _function);
@@ -94,8 +91,7 @@ class CompilerBug406425Test extends AbstractXtendCompilerTest {
 			        Test<Serializable> _test = new Test<Serializable>();
 			        Long _long = new Long(0);
 			        _test.m(it, _long);
-			        int _length = it.length();
-			        InputOutput.<Integer>println(Integer.valueOf(_length));
+			        InputOutput.<Integer>println(Integer.valueOf(it.length()));
 			      }
 			    };
 			    return ObjectExtensions.<StringBuilder>operator_doubleArrow(_stringBuilder, _function);
@@ -135,8 +131,7 @@ class CompilerBug406425Test extends AbstractXtendCompilerTest {
 			      public void apply(final StringBuilder it) {
 			        Long _long = new Long(0);
 			        Test.this.<Serializable>m(it, _long);
-			        int _length = it.length();
-			        InputOutput.<Integer>println(Integer.valueOf(_length));
+			        InputOutput.<Integer>println(Integer.valueOf(it.length()));
 			      }
 			    };
 			    return ObjectExtensions.<StringBuilder>operator_doubleArrow(_stringBuilder, _function);
@@ -176,8 +171,7 @@ class CompilerBug406425Test extends AbstractXtendCompilerTest {
 			      public void apply(final StringBuilder it) {
 			        Long _long = new Long(0);
 			        Test.this.<Serializable>m(it, _long);
-			        int _length = it.length();
-			        InputOutput.<Integer>println(Integer.valueOf(_length));
+			        InputOutput.<Integer>println(Integer.valueOf(it.length()));
 			      }
 			    };
 			    return ObjectExtensions.<StringBuilder>operator_doubleArrow(_stringBuilder, _function);
@@ -217,8 +211,7 @@ class CompilerBug406425Test extends AbstractXtendCompilerTest {
 			      public void apply(final StringBuilder it) {
 			        Long _long = new Long(0);
 			        Test.this.<Serializable>m(it, _long);
-			        int _length = it.length();
-			        InputOutput.<Integer>println(Integer.valueOf(_length));
+			        InputOutput.<Integer>println(Integer.valueOf(it.length()));
 			      }
 			    };
 			    return ObjectExtensions.<StringBuilder>operator_doubleArrow(_stringBuilder, _function);
@@ -261,8 +254,7 @@ class CompilerBug406425Test extends AbstractXtendCompilerTest {
 			      public void apply(final StringBuilder it) {
 			        Long _long = new Long(0);
 			        Test.this.<Serializable>m(it, _long);
-			        int _length = it.length();
-			        InputOutput.<Integer>println(Integer.valueOf(_length));
+			        InputOutput.<Integer>println(Integer.valueOf(it.length()));
 			      }
 			    };
 			    IterableExtensions.<StringBuilder>forEach(_newArrayList, _function);
@@ -302,8 +294,7 @@ class CompilerBug406425Test extends AbstractXtendCompilerTest {
 			      public void apply(final StringBuilder it) {
 			        Long _long = new Long(0);
 			        Test.<Serializable>m(it, _long);
-			        int _length = it.length();
-			        InputOutput.<Integer>println(Integer.valueOf(_length));
+			        InputOutput.<Integer>println(Integer.valueOf(it.length()));
 			      }
 			    };
 			    return ObjectExtensions.<StringBuilder>operator_doubleArrow(_stringBuilder, _function);
@@ -343,8 +334,7 @@ class CompilerBug406425Test extends AbstractXtendCompilerTest {
 			      public void apply(final StringBuilder it) {
 			        Long _long = new Long(0);
 			        Test.<Serializable>m(it, _long);
-			        int _length = it.length();
-			        InputOutput.<Integer>println(Integer.valueOf(_length));
+			        InputOutput.<Integer>println(Integer.valueOf(it.length()));
 			      }
 			    };
 			    return ObjectExtensions.<StringBuilder>operator_doubleArrow(_stringBuilder, _function);
@@ -388,8 +378,7 @@ class CompilerBug406425Test extends AbstractXtendCompilerTest {
 			        Test _test = new Test();
 			        Long _long = new Long(0);
 			        _test.<Serializable>m(it, _long);
-			        int _length = it.length();
-			        InputOutput.<Integer>println(Integer.valueOf(_length));
+			        InputOutput.<Integer>println(Integer.valueOf(it.length()));
 			      }
 			    };
 			    IterableExtensions.<StringBuilder>forEach(_newArrayList, _function);
@@ -433,8 +422,7 @@ class CompilerBug406425Test extends AbstractXtendCompilerTest {
 			        Test<Serializable> _test = new Test<Serializable>();
 			        Long _long = new Long(0);
 			        _test.m(it, _long);
-			        int _length = it.length();
-			        InputOutput.<Integer>println(Integer.valueOf(_length));
+			        InputOutput.<Integer>println(Integer.valueOf(it.length()));
 			      }
 			    };
 			    IterableExtensions.<StringBuilder>forEach(_newArrayList, _function);
@@ -477,8 +465,7 @@ class CompilerBug406425Test extends AbstractXtendCompilerTest {
 			      public void apply(final StringBuilder it) {
 			        Long _long = new Long(0);
 			        Test.<Serializable>m(it, _long);
-			        int _length = it.length();
-			        InputOutput.<Integer>println(Integer.valueOf(_length));
+			        InputOutput.<Integer>println(Integer.valueOf(it.length()));
 			      }
 			    };
 			    IterableExtensions.<StringBuilder>forEach(_newArrayList, _function);

@@ -33,7 +33,6 @@ class CompilerBug383534Test extends AbstractXtendCompilerTest {
 				}
 			}
 		''', '''
-			import java.util.ArrayList;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			import org.eclipse.xtext.xbase.lib.Conversions;
 			import org.eclipse.xtext.xbase.lib.FunctionExtensions;
@@ -52,10 +51,8 @@ class CompilerBug383534Test extends AbstractXtendCompilerTest {
 			    };
 			    final Function2<? super String, ? super String, ? extends String> strAdd = _function;
 			    final Function1<String, String> curriedStrAdd = FunctionExtensions.<String, String, String>curry(strAdd, "x");
-			    String _apply = strAdd.apply("x", "y");
-			    InputOutput.<String>println(_apply);
-			    String _apply_1 = curriedStrAdd.apply("y");
-			    InputOutput.<String>println(_apply_1);
+			    InputOutput.<String>println(strAdd.apply("x", "y"));
+			    InputOutput.<String>println(curriedStrAdd.apply("y"));
 			    final Function2<String, String[], String> _function_1 = new Function2<String, String[], String>() {
 			      public String apply(final String s1, final String[] s2) {
 			        final Function2<String, String, String> _function = new Function2<String, String, String>() {
@@ -69,12 +66,8 @@ class CompilerBug383534Test extends AbstractXtendCompilerTest {
 			    };
 			    final Function2<? super String, ? super String[], ? extends String> strAdd2 = _function_1;
 			    final Function1<String[], String> curriedStrAdd2 = FunctionExtensions.<String, String[], String>curry(strAdd2, "x");
-			    ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList("y", "z");
-			    String _apply_2 = strAdd2.apply("x", ((String[])Conversions.unwrapArray(_newArrayList, String.class)));
-			    InputOutput.<String>println(_apply_2);
-			    ArrayList<String> _newArrayList_1 = CollectionLiterals.<String>newArrayList("y", "z");
-			    String _apply_3 = curriedStrAdd2.apply(((String[])Conversions.unwrapArray(_newArrayList_1, String.class)));
-			    InputOutput.<String>println(_apply_3);
+			    InputOutput.<String>println(strAdd2.apply("x", ((String[])Conversions.unwrapArray(CollectionLiterals.<String>newArrayList("y", "z"), String.class))));
+			    InputOutput.<String>println(curriedStrAdd2.apply(((String[])Conversions.unwrapArray(CollectionLiterals.<String>newArrayList("y", "z"), String.class))));
 			  }
 			}
 		''')
@@ -107,10 +100,8 @@ class CompilerBug383534Test extends AbstractXtendCompilerTest {
 			    };
 			    final Function2<? super String, ? super String, ? extends String> strAdd = _function;
 			    final Function1<String, String> curriedStrAdd = FunctionExtensions.<String, String, String>curry(strAdd, "x");
-			    String _apply = strAdd.apply("x", "y");
-			    InputOutput.<String>println(_apply);
-			    String _apply_1 = curriedStrAdd.apply("y");
-			    InputOutput.<String>println(_apply_1);
+			    InputOutput.<String>println(strAdd.apply("x", "y"));
+			    InputOutput.<String>println(curriedStrAdd.apply("y"));
 			  }
 			}
 		''')
@@ -128,7 +119,6 @@ class CompilerBug383534Test extends AbstractXtendCompilerTest {
 				}
 			}
 		''', '''
-			import java.util.ArrayList;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			import org.eclipse.xtext.xbase.lib.Conversions;
 			import org.eclipse.xtext.xbase.lib.FunctionExtensions;
@@ -148,12 +138,8 @@ class CompilerBug383534Test extends AbstractXtendCompilerTest {
 			    };
 			    final Function2<? super String, ? super String[], ? extends String> strAdd = _function;
 			    final Function1<String[], String> curriedStrAdd = FunctionExtensions.<String, String[], String>curry(strAdd, "x");
-			    ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList("y", "z");
-			    String _apply = strAdd.apply("x", ((String[])Conversions.unwrapArray(_newArrayList, String.class)));
-			    InputOutput.<String>println(_apply);
-			    ArrayList<String> _newArrayList_1 = CollectionLiterals.<String>newArrayList("y", "z");
-			    String _apply_1 = curriedStrAdd.apply(((String[])Conversions.unwrapArray(_newArrayList_1, String.class)));
-			    InputOutput.<String>println(_apply_1);
+			    InputOutput.<String>println(strAdd.apply("x", ((String[])Conversions.unwrapArray(CollectionLiterals.<String>newArrayList("y", "z"), String.class))));
+			    InputOutput.<String>println(curriedStrAdd.apply(((String[])Conversions.unwrapArray(CollectionLiterals.<String>newArrayList("y", "z"), String.class))));
 			  }
 			}
 		''')
@@ -194,10 +180,8 @@ class CompilerBug383534Test extends AbstractXtendCompilerTest {
 			    };
 			    final Function2<? super String, ? super String[], ? extends String> strAdd = _function;
 			    final Function1<String[], String> curriedStrAdd = FunctionExtensions.<String, String[], String>curry(strAdd, "x");
-			    String _apply = strAdd.apply("x", new String[] { "y" });
-			    InputOutput.<String>println(_apply);
-			    String _apply_1 = curriedStrAdd.apply(new String[] { "y" });
-			    InputOutput.<String>println(_apply_1);
+			    InputOutput.<String>println(strAdd.apply("x", new String[] { "y" }));
+			    InputOutput.<String>println(curriedStrAdd.apply(new String[] { "y" }));
 			  }
 			}
 		''')

@@ -4097,8 +4097,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class B extends A {
 			  public String client(final CharSequence c) {
-			    CharSequence _m = this.m();
-			    return this.client(_m);
+			    return this.client(this.m());
 			  }
 			  
 			  public CharSequence m() {

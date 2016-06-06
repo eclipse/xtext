@@ -533,14 +533,12 @@ class CompilerBug435473Test extends AbstractXtendCompilerTest {
 			import java.util.List;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			import org.hamcrest.CoreMatchers;
-			import org.hamcrest.Matcher;
 			import org.junit.Assert;
 			
 			@SuppressWarnings("all")
 			public class Outer {
 			  public void m() {
-			    Matcher<Iterable<? super Integer>> _hasItem = CoreMatchers.<Integer>hasItem(Integer.valueOf(5));
-			    Assert.<List<Number>>assertThat(Collections.<Number>unmodifiableList(CollectionLiterals.<Number>newArrayList(Integer.valueOf(1), Double.valueOf(2.0), Integer.valueOf(3))), _hasItem);
+			    Assert.<List<Number>>assertThat(Collections.<Number>unmodifiableList(CollectionLiterals.<Number>newArrayList(Integer.valueOf(1), Double.valueOf(2.0), Integer.valueOf(3))), CoreMatchers.<Integer>hasItem(Integer.valueOf(5)));
 			  }
 			}
 		''')
@@ -561,14 +559,12 @@ class CompilerBug435473Test extends AbstractXtendCompilerTest {
 			import java.util.Set;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			import org.hamcrest.CoreMatchers;
-			import org.hamcrest.Matcher;
 			import org.junit.Assert;
 			
 			@SuppressWarnings("all")
 			public class Outer {
 			  public void m() {
-			    Matcher<Iterable<? super Integer>> _hasItem = CoreMatchers.<Integer>hasItem(Integer.valueOf(5));
-			    Assert.<Set<Number>>assertThat(Collections.<Number>unmodifiableSet(CollectionLiterals.<Number>newHashSet(Integer.valueOf(1), Double.valueOf(2.0), Integer.valueOf(3))), _hasItem);
+			    Assert.<Set<Number>>assertThat(Collections.<Number>unmodifiableSet(CollectionLiterals.<Number>newHashSet(Integer.valueOf(1), Double.valueOf(2.0), Integer.valueOf(3))), CoreMatchers.<Integer>hasItem(Integer.valueOf(5)));
 			  }
 			}
 		''')
