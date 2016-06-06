@@ -27,7 +27,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
  * Consider the following scenario:
  * <pre>
  *   val x = if (guard) return 'dummy' else 1
- * <pre>
+ * </pre>
  * 
  * The return type of the {@link XIfExpression if expression} is the 
  * type <code>Comparable&lt;?&gt; & Serializable</code> while the actual type
