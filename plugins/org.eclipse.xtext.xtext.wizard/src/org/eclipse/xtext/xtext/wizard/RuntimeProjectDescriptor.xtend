@@ -10,11 +10,14 @@ package org.eclipse.xtext.xtext.wizard
 import org.eclipse.xtext.xtext.wizard.ecore2xtext.Ecore2XtextGrammarCreator
 
 import static org.eclipse.xtext.xtext.wizard.ExternalDependency.*
+import org.eclipse.xtend.lib.annotations.Accessors
 
 class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 
 	val grammarCreator = new Ecore2XtextGrammarCreator
 	val RuntimeTestProjectDescriptor testProject
+	@Accessors
+	var boolean withPluginXml = true
 	
 	new(WizardConfiguration config) {
 		super(config)
@@ -99,7 +102,8 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 	override getBinIncludes() {
 		val includes = newLinkedHashSet
 		includes += super.binIncludes
-		includes += "plugin.xml"
+		if (withPluginXml)
+			includes += "plugin.xml"
 		includes
 	}
 
