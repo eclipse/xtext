@@ -66,8 +66,8 @@ class RequestManager {
 		if (cancelIndicator instanceof CancellableIndicator)
 			cancelIndicators += cancelIndicator
 
+		semaphore.acquire(MAX_PERMITS)
 		return CompletableFuture.runAsync([
-			semaphore.acquire(MAX_PERMITS)
 			try {
 				writeRequest.apply(cancelIndicator)
 			} finally {
@@ -100,8 +100,8 @@ class RequestManager {
 		if (cancelIndicator instanceof CancellableIndicator)
 			cancelIndicators += cancelIndicator
 
+		semaphore.acquire(1)
 		return CompletableFuture.supplyAsync([
-			semaphore.acquire(1)
 			try {
 				return readRequest.apply(cancelIndicator)
 			} finally {

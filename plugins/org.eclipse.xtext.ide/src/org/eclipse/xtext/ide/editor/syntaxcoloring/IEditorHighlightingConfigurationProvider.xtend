@@ -35,7 +35,7 @@ interface IEditorHighlightingConfigurationProvider {
                     [
                       «getStandardPatterns»
                       {
-                        match: "\\\\b(?:«keywords.join('|')»)\\\\b", 
+                        match: "\\b(?:«keywords.join('|')»)\\b", 
                         name: "keyword.«languageInfo.shortName»" 
                       }
                     ]

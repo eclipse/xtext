@@ -48,11 +48,11 @@ public interface IEditorHighlightingConfigurationProvider {
         _builder.append("{");
         _builder.newLine();
         _builder.append("    ");
-        _builder.append("match: \"\\\\\\\\b(?:");
+        _builder.append("match: \"\\\\b(?:");
         Iterable<String> _keywords = this.getKeywords();
         String _join = IterableExtensions.join(_keywords, "|");
         _builder.append(_join, "    ");
-        _builder.append(")\\\\\\\\b\", ");
+        _builder.append(")\\\\b\", ");
         _builder.newLineIfNotEmpty();
         _builder.append("    ");
         _builder.append("name: \"keyword.");
