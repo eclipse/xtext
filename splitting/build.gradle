@@ -1,0 +1,29 @@
+apply plugin: 'java'
+
+def splitDir = file("$buildDir/splitting")
+
+sourceSets.main.java.srcDirs = ['src']
+
+def splittingPath = "$buildDir/splitting"
+def allHistoryFiles = file(splittingPath + "/all-files.txt")
+def allProjects = file(splittingPath + "/all-projects.txt")
+def unmappedPaths = file(splittingPath + "/unmapped-paths.txt")
+
+task listFiles(type: Exec) {
+	outputs.file allHistoryFiles
+	workingDir '..'
+	commandLine 'git', 'log', '--pretty=format:', '--name-only', '--diff-filter=A'
+	doFirst {
+		new File(allHistoryFiles.parent).mkdirs()
+		standardOutput = new FileOutputStream(allHistoryFiles)
+	}
+}
+
+task findProjects(type: JavaExec) {
+	dependsOn(sourceSets.main.runtimeClasspath, listFiles)
+	inputs.file allHistoryFiles
+	outputs.files allProjects, unmappedPaths
+	classpath = sourceSets.main.runtimeClasspath.filter{it.exists()}
+	main = "org.eclipse.xtext.splitting.FindProjects"
+	args splittingPath
+}
