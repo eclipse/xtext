@@ -1,13 +1,12 @@
 apply plugin: 'java'
 
-def splitDir = file("$buildDir/splitting")
-
 sourceSets.main.java.srcDirs = ['src']
 
-def splittingPath = "$buildDir/splitting"
-def allHistoryFiles = file(splittingPath + "/all-files.txt")
-def allProjects = file(splittingPath + "/all-projects.txt")
-def unmappedPaths = file(splittingPath + "/unmapped-paths.txt")
+def outputFilesDir = "$buildDir/splitting"
+def allHistoryFiles = file(outputFilesDir + "/all-files.txt")
+def allProjects = file(outputFilesDir + "/all-projects.txt")
+def unmappedPaths = file(outputFilesDir + "/unmapped-paths.txt")
+def splittingFile = file("splitting.txt")
 
 task listFiles(type: Exec) {
 	outputs.file allHistoryFiles
@@ -25,5 +24,13 @@ task findProjects(type: JavaExec) {
 	outputs.files allProjects, unmappedPaths
 	classpath = sourceSets.main.runtimeClasspath.filter{it.exists()}
 	main = "org.eclipse.xtext.splitting.FindProjects"
-	args splittingPath
+	args outputFilesDir
+}
+
+task validateSplitting(type: JavaExec) {
+	dependsOn(sourceSets.main.runtimeClasspath, listFiles)
+	inputs.files splittingFile, allHistoryFiles
+	classpath = sourceSets.main.runtimeClasspath.filter{it.exists()}
+	main = "org.eclipse.xtext.splitting.ValidateSplitting"
+	args splittingFile, outputFilesDir
 }
