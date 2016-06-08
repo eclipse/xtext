@@ -10,12 +10,20 @@ package org.eclipse.xtext.splitting;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
+import java.util.LinkedHashSet;
 import java.util.Map;
+import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class GenerateRemovals {
+	
+	public static final Set<String> GEN_DIRS = Collections.unmodifiableSet(new LinkedHashSet<>(Arrays.asList(
+		"src-gen", "xtend-gen", "xtext-gen", "emf-gen"
+	)));
 
 	public static void main(String[] args) {
 		if (args.length != 2) {
@@ -23,9 +31,9 @@ public class GenerateRemovals {
 		}
 		String outputDir = args[1];
 		try {
-			final Map<String, List<String>> removalPaths = new HashMap<>();
+			final Map<String, Set<String>> removalPaths = new HashMap<>();
 			for (String targetRepo : ValidateSplitting.REPOSITORIES) {
-				removalPaths.put(targetRepo, new ArrayList<>());
+				removalPaths.put(targetRepo, new LinkedHashSet<>());
 			}
 			
 			// Gather paths to be removed from the history for each target repository
@@ -46,6 +54,32 @@ public class GenerateRemovals {
 							if (!isInTargetRepo) {
 								String path = parts[0].trim();
 								removalPaths.get(targetRepo).add(path);
+							}
+						}
+					}
+				}
+			}
+			
+			// Add directories with generated code to the removal list
+			final Pattern segmentPattern = Pattern.compile("/");
+			try (BufferedReader reader = new BufferedReader(new FileReader(outputDir + "/" + FindProjects.ALL_FILES))) {
+				String line;
+				while ((line = reader.readLine()) != null) {
+					String file = line.replaceAll("\"|\\\\.", "");
+					for (String genDir : GEN_DIRS) {
+						int genDirIndex = file.indexOf(genDir);
+						if (genDirIndex > 0) {
+							for (String targetRepo :  ValidateSplitting.REPOSITORIES) {
+								Set<String> repoRemovals = removalPaths.get(targetRepo);
+								Matcher matcher = segmentPattern.matcher(file);
+								boolean foundRemoval = false;
+								int genDirEndIndex = genDirIndex + genDir.length();
+								while (!foundRemoval && matcher.find() && matcher.start() <= genDirEndIndex) {
+									if (repoRemovals.contains(file.substring(0, matcher.start())))
+										foundRemoval = true;
+								}
+								if (!foundRemoval)
+									repoRemovals.add(file.substring(0, genDirEndIndex));
 							}
 						}
 					}
