@@ -26,12 +26,12 @@ public class FindProjects {
 
 	public static void main(String[] args) {
 		if (args.length != 1) {
-			fail("Expected path to working directory as argument.");
+			fail("Expected path to output files as argument.");
 		}
-		String workingDir = args[0];
+		String outputDir = args[0];
 		try {
 			final Directory root = new Directory(".", null);
-			try (BufferedReader reader = new BufferedReader(new FileReader(workingDir + "/" + ALL_FILES))) {
+			try (BufferedReader reader = new BufferedReader(new FileReader(outputDir + "/" + ALL_FILES))) {
 				// Gather all paths in a directory structure
 				String line;
 				while ((line = reader.readLine()) != null) {
@@ -64,7 +64,7 @@ public class FindProjects {
 			
 			// Write the collected projects into a file
 			Collections.sort(projects);
-			try (FileWriter writer = new FileWriter(workingDir + "/" + ALL_PROJECTS)) {
+			try (FileWriter writer = new FileWriter(outputDir + "/" + ALL_PROJECTS)) {
 				for (Directory project : projects) {
 					writer.write(project.toString());
 					writer.write('\n');
@@ -73,7 +73,7 @@ public class FindProjects {
 			
 			// Write the unmapped paths into another file
 			Collections.sort(otherPaths);
-			try (FileWriter writer = new FileWriter(workingDir + "/" + UNMAPPED_PATHS)) {
+			try (FileWriter writer = new FileWriter(outputDir + "/" + UNMAPPED_PATHS)) {
 				for (DirectoryEntry path : otherPaths) {
 					writer.write(path.toString());
 					writer.write('\n');
