@@ -61,6 +61,6 @@ repositories.each { targetRepo ->
 		dependsOn(generateRemovals)
 		inputs.file removalsFile
 		workingDir '..'
-		commandLine 'splitting/git-filter-branch.sh', removalsFile.path
+		commandLine 'splitting/git-filter-branch.sh', removalsFile.path, file('.').canonicalPath
 	}
 }

@@ -39,17 +39,16 @@ public class ValidateSplitting {
 				while ((line = reader.readLine()) != null) {
 					if (!line.isEmpty()) {
 						String[] parts = line.split(">>");
-						if (parts.length != 2) {
+						if (parts.length != 2)
 							fail("Invalid line: " + line);
-						}
-						String[] repos = parts[1].split(",");
-						if (repos.length == 0) {
-							fail("Invalid line: " + line);
-						}
-						for (String repo : repos) {
-							String trimmed = repo.trim();
-							if (!(REPOSITORIES.contains(trimmed) || DELETE.equals(trimmed))) {
-								fail("Invalid repository: " + trimmed);
+						if (!DELETE.equals(parts[1].trim())) {
+							String[] repos = parts[1].split(",");
+							if (repos.length == 0)
+								fail("Invalid line: " + line);
+							for (String repo : repos) {
+								String trimmed = repo.trim();
+								if (!REPOSITORIES.contains(trimmed))
+									fail("Invalid repository: " + trimmed);
 							}
 						}
 						String path = parts[0].trim();
@@ -74,9 +73,8 @@ public class ValidateSplitting {
 								if (specifiedPaths.contains(file.substring(0, lastMatch)))
 									foundSplitting = true;
 							}
-							if (!foundSplitting) {
+							if (!foundSplitting)
 								fail("File not covered by splitting: " + file);
-							}
 						}
 					}
 				}
