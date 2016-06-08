@@ -247,6 +247,7 @@ plugins/org.eclipse.emf.index >> delete
 plugins/org.eclipse.emf.index.ui >> delete
 plugins/org.eclipse.xtext.doc.manual >> delete
 settings.gradle >> delete
+splitting >> delete
 test.txt >> delete
 tests/.settings >> delete
 tests/build.gradle >> delete
