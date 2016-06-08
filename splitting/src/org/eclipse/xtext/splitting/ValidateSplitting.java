@@ -67,10 +67,8 @@ public class ValidateSplitting {
 						if (!specifiedPaths.contains(file)) {
 							Matcher matcher = segmentPattern.matcher(file);
 							boolean foundSplitting = false;
-							int lastMatch = -1;
 							while (!foundSplitting && matcher.find()) {
-								lastMatch = matcher.start();
-								if (specifiedPaths.contains(file.substring(0, lastMatch)))
+								if (specifiedPaths.contains(file.substring(0, matcher.start())))
 									foundSplitting = true;
 							}
 							if (!foundSplitting)
