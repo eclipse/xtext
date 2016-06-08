@@ -12,23 +12,24 @@ import java.io.FileReader;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ValidateSplitting {
 	
-	public static final Set<String> REPOSITORIES = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(
-		"core", "extras", "lib", "xtend", "eclipse", "idea", "web", "maven", "xtext-website", "xtend-website" 
+	public static final Set<String> REPOSITORIES = Collections.unmodifiableSet(new LinkedHashSet<>(Arrays.asList(
+		"core", "extras", "lib", "xtend", "eclipse", "idea", "web", "maven", "xtext-website", "xtend-website"
 	)));
 	
 	public static final String DELETE = "delete";
 	
 	public static void main(String[] args) {
 		if (args.length != 2) {
-			fail("Expected paths to splitting.txt and working directory as arguments.");
+			fail("Expected paths to splitting.txt and output files as arguments.");
 		}
-		String workingDir = args[1];
+		String outputDir = args[1];
 		try {
 			
 			// Validate repositories and gather all paths from the splitting file
@@ -59,7 +60,7 @@ public class ValidateSplitting {
 			
 			// Check whether each file has a specified path as prefix
 			final Pattern segmentPattern = Pattern.compile("/");
-			try (BufferedReader reader = new BufferedReader(new FileReader(workingDir + "/" + FindProjects.ALL_FILES))) {
+			try (BufferedReader reader = new BufferedReader(new FileReader(outputDir + "/" + FindProjects.ALL_FILES))) {
 				String line;
 				while ((line = reader.readLine()) != null) {
 					if (!line.isEmpty()) {
