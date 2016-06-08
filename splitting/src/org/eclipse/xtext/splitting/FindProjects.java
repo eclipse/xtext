@@ -26,8 +26,7 @@ public class FindProjects {
 
 	public static void main(String[] args) {
 		if (args.length != 1) {
-			System.err.println("Expected file list as argument.");
-			return;
+			fail("Expected path to working directory as argument.");
 		}
 		String workingDir = args[0];
 		try {
@@ -82,7 +81,14 @@ public class FindProjects {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			System.exit(1);
 		}
+	}
+	
+	private static void fail(String message) {
+		System.err.print("ERROR: ");
+		System.err.println(message);
+		System.exit(1);
 	}
 	
 	private static boolean findProjects(Directory dir, List<Directory> projects, List<DirectoryEntry> otherPaths, boolean skipOtherPaths) {
