@@ -2,10 +2,9 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-SymbolicName: org.eclipse.xtext.xtext.generator;singleton:=true
 Bundle-Version: 2.11.0.qualifier
-Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Bundle-Name: %pluginName
-Bundle-Vendor: %providerName
+Bundle-Name: Xtext Generator 2
+Bundle-Vendor: Eclipse Xtext
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext;x-installation:=greedy,
  org.eclipse.xtext.util;x-installation:=greedy,

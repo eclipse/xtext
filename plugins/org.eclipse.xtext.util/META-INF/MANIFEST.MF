@@ -1,11 +1,10 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: %pluginName
-Bundle-Localization: plugin
+Bundle-Name: Xtext Utility
 Bundle-SymbolicName: org.eclipse.xtext.util
 Bundle-Version: 2.11.0.qualifier
 Maven-Version: 2.11.0-SNAPSHOT
-Bundle-Vendor: %providerName
+Bundle-Vendor: Eclipse Xtext
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.eclipse.xtext.util;
   uses:="org.eclipse.emf.ecore.resource,
