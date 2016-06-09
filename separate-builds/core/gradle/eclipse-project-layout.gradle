@@ -11,8 +11,9 @@ sourceSets {
 		java.srcDirs = ['src', 'xtend-gen', 'src-gen', 'emf-gen']
 		resources {
 			srcDirs = ['src', 'src-gen', 'emf-gen', '.']
-			exclude '**/*._trace', '**/*.xtendbin', '**/*.xtend'
 			include 'plugin.xml', 'schema/**', 'about.ini', 'about.mappings', 'about.properties', 'about.html'
+			exclude '**/*._trace', '**/*.xtendbin', '**/*.xtend'
+			exclude 'src', 'xtend-gen', 'src-gen', 'emf-gen', 'build', 'target'
 		}
 	}
 	configure(isTestProject? main : test)  {
