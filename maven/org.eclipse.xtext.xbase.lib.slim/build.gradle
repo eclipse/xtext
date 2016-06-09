@@ -1,0 +1,12 @@
+group = 'org.eclipse.xtext'
+
+dependencies {
+	compile project(':org.eclipse.xtext.xbase.lib')
+	compile "com.google.guava:guava-jdk5:$versions.guava"
+}
+
+sourceSets.main {
+	java.srcDirs = ['src/main/java']
+}
+
+// TODO all the magic that was done in the old Maven build

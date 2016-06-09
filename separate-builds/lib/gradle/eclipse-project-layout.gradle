@@ -8,12 +8,12 @@ def isTestProject = name.endsWith('tests')
 
 sourceSets {
 	configure(isTestProject? test : main)  {
-		java.srcDirs = ['src', 'xtend-gen', 'src-gen', 'emf-gen']
+		java.srcDirs = ['src', 'xtend-gen']
 		resources {
-			srcDirs = ['src', 'src-gen', 'emf-gen', '.']
+			srcDirs = ['src', '.']
 			include 'plugin.xml', 'schema/**', 'about.ini', 'about.mappings', 'about.properties', 'about.html'
 			exclude '**/*._trace', '**/*.xtendbin', '**/*.xtend'
-			exclude 'src', 'xtend-gen', 'src-gen', 'emf-gen', 'build', 'target'
+			exclude 'src', 'xtend-gen', 'build', 'target'
 		}
 	}
 	configure(isTestProject? main : test)  {

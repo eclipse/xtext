@@ -1,0 +1,21 @@
+rootProject.name = 'xtext-core'
+
+[
+	'org.eclipse.xtext.xbase.lib',
+	'org.eclipse.xtext.xbase.lib.gwt',
+	'org.eclipse.xtend.lib',
+	'org.eclipse.xtend.lib.macro',
+	'org.eclipse.xtend.lib.gwt',
+	'org.eclipse.xtend2.lib'
+].each { projectName ->
+	include projectName
+	project(":$projectName").projectDir = file("../../plugins/$projectName")
+}
+
+[
+	'org.eclipse.xtext.xbase.lib.slim',
+	'org.eclipse.xtend.lib.gwt.test'
+].each { projectName ->
+	include projectName
+	project(":$projectName").projectDir = file("../../maven/$projectName")
+}

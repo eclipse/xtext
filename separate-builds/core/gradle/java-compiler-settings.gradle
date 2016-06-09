@@ -21,4 +21,4 @@ configurations {
 	}
 }
 
-sourceSets.main.compileClasspath += [configurations.optional]
+sourceSets.main.compileClasspath += configurations.optional
