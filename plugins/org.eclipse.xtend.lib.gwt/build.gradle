@@ -1,0 +1,7 @@
+group = 'org.eclipse.xtend'
+
+dependencies {
+	compile project(':org.eclipse.xtend.lib')
+}
+
+sourceSets.main.resources.include 'OSGI-INF/**', '**/*.gwt.xml'

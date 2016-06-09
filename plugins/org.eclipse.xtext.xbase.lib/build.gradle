@@ -1,0 +1,7 @@
+group = 'org.eclipse.xtext'
+
+dependencies {
+	compile "com.google.guava:guava:$versions.guava"
+}
+
+sourceSets.main.resources.include 'about_org.eclipse.xtext.xbase.lib.html'
