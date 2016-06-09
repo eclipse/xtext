@@ -1,3 +1,23 @@
+sourceSets.main.java.srcDir 'packrat'
+
 dependencies {
-	compile project(':plugins:org.eclipse.xtext.smap')
+	compile project(':org.eclipse.xtext.util')
+	compile project(':org.eclipse.xtext.smap') // TODO eliminate dependency
+	compile "org.eclipse.xtend:org.eclipse.xtend.lib:$versions.xtext"
+    compile "log4j:log4j:$versions.log4j"
+	compile "org.eclipse.equinox:org.eclipse.equinox.common:$versions.equinoxCommon"
+	compile "org.eclipse.emf:org.eclipse.emf.common:$versions.emfCommon"
+	compile "org.eclipse.emf:org.eclipse.emf.ecore.xmi:$versions.emfEcore"
+	compile "com.google.inject:guice:$versions.guice"
+	compile "org.antlr:antlr-runtime:$versions.antlr"
+	optional "org.eclipse.core:org.eclipse.core.runtime:$versions.eclipseCore"
+	optional "org.eclipse.equinox:org.eclipse.equinox.registry:$versions.equinoxRegistry"
+	optional "org.eclipse.emf:org.eclipse.emf.mwe.utils:$versions.emfMwe"
+	optional "org.eclipse.xpand:org.eclipse.xtend:$versions.xpand"
+	optional "org.eclipse.xpand:org.eclipse.xtend.typesystem.emf:$versions.xpand"
+	optional "org.ow2.asm:asm-commons:$versions.asm"
+}
+
+sourceSets.main.resources {
+	include 'org/**', 'modeling32.png'
 }
