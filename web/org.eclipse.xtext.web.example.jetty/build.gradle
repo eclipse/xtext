@@ -1,14 +1,12 @@
+apply from: "${rootDir}/gradle/default-project-layout.gradle"
+
 apply plugin: 'war'
 
-plugins.withType(JavaBasePlugin) {
-	sourceCompatibility = 1.8
-}
-
 dependencies {
-	compile project(':web:org.eclipse.xtext.web.servlet')
-    compile project(':web:org.eclipse.xtext.web.example.statemachine.ide')
-	compile project(':web:org.eclipse.xtext.xbase.web')
-	compile project(':intellij:org.eclipse.xtext.idea.example.entities.ide')
+	compile project(':org.eclipse.xtext.web.servlet')
+    compile project(':org.eclipse.xtext.web.example.statemachine.ide')
+	compile project(':org.eclipse.xtext.xbase.web')
+	compile project(':org.eclipse.xtext.idea.example.entities.ide')
 	compile group: 'org.webjars', name: 'requirejs', version: '2.2.0'
 	compile group: 'org.webjars', name: 'requirejs-text', version: '2.0.15'
 	compile group: 'org.webjars', name: 'jquery', version: '2.2.3'

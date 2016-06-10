@@ -1,0 +1,11 @@
+apply plugin: 'eclipse'
+
+eclipse {
+	eclipseProject.enabled = false
+	cleanEclipseProject.enabled = false
+	
+	plugins.withType(JavaBasePlugin) {
+		eclipseJdt.enabled = false
+		cleanEclipseJdt.enabled = false
+	}
+}

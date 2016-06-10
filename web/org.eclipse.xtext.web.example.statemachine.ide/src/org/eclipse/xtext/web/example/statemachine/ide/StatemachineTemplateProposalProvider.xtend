@@ -16,8 +16,8 @@ class StatemachineTemplateProposalProvider extends AbstractIdeTemplateProposalPr
 	
 	def void createStateProposal(ContentAssistContext context, IIdeContentProposalAcceptor acceptor) {
 		val StringConcatenationClient template = '''
-			state Â«variable('name')Â»
-				Â«cursorÂ»
+			state «variable('name')»
+				«cursor»
 			end
 		'''
 		acceptProposal('state', 'Create a new state', template, context, acceptor)
