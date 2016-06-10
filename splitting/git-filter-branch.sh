@@ -1,7 +1,6 @@
 #!/bin/bash
 
-# TODO change source branch to 'master'
-git checkout -B split-$3 msp/separateBuilds
+git checkout -B split-$3 refs/remotes/origin/master
 
 REMOVALS=`cat $1 | tr '\n' ' '`
 git filter-branch -f --prune-empty \
