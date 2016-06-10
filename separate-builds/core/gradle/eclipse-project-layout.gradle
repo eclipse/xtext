@@ -12,7 +12,8 @@ sourceSets {
 		resources {
 			srcDirs = ['src', 'src-gen', 'emf-gen', '.']
 			include 'plugin.xml', 'schema/**', 'model/**', 'about.ini', 'about.mappings', 'about.properties', 'about.html',
-				'**/*.properties', '**/*.xtextbin', '**/*.xmi', '**/*.g', '**/*.tokens'
+				'**/*.properties', '**/*.xtextbin', '**/*.xmi', '**/*.g', '**/*.tokens',
+				'META-INF/**'
 			exclude 'bin', 'src', 'xtend-gen', 'src-gen', 'emf-gen', 'build', 'target', 'build.properties'
 		}
 	}
