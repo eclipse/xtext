@@ -11,3 +11,10 @@ rootProject.name = 'xtext-core'
 	include projectName
 	project(":$projectName").projectDir = file("../../plugins/$projectName")
 }
+
+[
+    'org.eclipse.xtext.ide.tests'
+].each { projectName ->
+    include projectName
+    project(":$projectName").projectDir = file("../../tests/$projectName")
+}
