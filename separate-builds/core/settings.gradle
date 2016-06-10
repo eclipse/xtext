@@ -1,0 +1,13 @@
+rootProject.name = 'xtext-core'
+
+[
+	'org.eclipse.xtext',
+	'org.eclipse.xtext.ide',
+	'org.eclipse.xtext.util',
+	'org.eclipse.xtext.smap',
+	'org.eclipse.xtext.xtext.generator',
+	'org.eclipse.xtext.xtext.wizard'
+].each { projectName ->
+	include projectName
+	project(":$projectName").projectDir = file("../../plugins/$projectName")
+}

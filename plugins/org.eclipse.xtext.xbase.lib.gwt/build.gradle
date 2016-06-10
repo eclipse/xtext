@@ -1,0 +1,10 @@
+group = 'org.eclipse.xtext'
+
+dependencies {
+	compile project(':org.eclipse.xtext.xbase.lib')
+}
+
+sourceSets.main.resources {
+	include 'OSGI-INF/**', '**/*.gwt.xml'
+	exclude 'src-super'
+}

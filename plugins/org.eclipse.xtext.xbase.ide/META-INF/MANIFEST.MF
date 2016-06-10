@@ -1,12 +1,11 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: %pluginName
-Bundle-Vendor: %providerName
+Bundle-Name: Xbase Generic IDE Services
+Bundle-Vendor: Eclipse Xtext
 Bundle-SymbolicName: org.eclipse.xtext.xbase.ide;singleton:=true
 Bundle-Version: 2.11.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
-Bundle-Localization: plugin
 Require-Bundle: org.eclipse.xtext.ide,
  org.eclipse.xtext.xbase;visibility:=reexport,
  org.eclipse.xtext.xbase.lib,
