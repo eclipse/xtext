@@ -8,6 +8,7 @@ tests/org.eclipse.xtext.tests >> core, extras
 tests/org.eclipse.xtext.ide.tests >> core
 devtools/org.eclipse.xtext.bootstrap >> core
 devtools/org.eclipse.xtext.contributor >> core
+separate-builds/core >> core
 
 devtools/org.eclipse.xtext.language-generator >> extras
 plugins/org.eclipse.xtext.builder.standalone >> extras
@@ -31,6 +32,7 @@ tests/org.eclipse.xtext.testlanguages >> extras
 tests/org.eclipse.xtext.testlanguages.ide >> extras
 tests/org.eclipse.xtext.testlanguages.tests >> extras
 tests/org.eclipse.xtext.xbase.tests >> extras
+separate-builds/extras >> extras
 
 maven/org.eclipse.xtend.lib.gwt.test >> lib
 maven/org.eclipse.xtext.xbase.lib.slim >> lib
@@ -43,6 +45,7 @@ plugins/org.eclipse.xtext.xbase.lib >> lib
 plugins/org.eclipse.xtext.xbase.lib.gwt >> lib
 plugins/org.eclipse.xtext.xbase.lib.maven >> lib
 plugins/org.eclipse.xtext.xtend2.lib >> lib
+separate-builds/lib >> lib
 
 docs/org.eclipse.xtend.bootstrapdoc >> xtend
 docs/org.eclipse.xtend.doc >> xtend
@@ -86,6 +89,7 @@ tests/org.eclipse.xtext.xtend.tests >> xtend
 tests/org.eclipse.xtext.xtend2.standalone.tests >> xtend
 tests/org.eclipse.xtext.xtend2.tests >> xtend
 tests/org.eclipse.xtext.xtend2.ui.tests >> xtend
+separate-builds/xtend >> xtend
 
 features >> eclipse
 releng >> eclipse
@@ -158,10 +162,13 @@ tests/org.eclipse.xtext.xbase.testlanguages.ui >> eclipse
 tests/org.eclipse.xtext.xbase.ui.tests >> eclipse
 tests/org.eclipse.xtext.xtext.ui.graph.tests >> eclipse
 tests/org.eclipse.xtext.xtext.ui.tests >> eclipse
+separate-builds/eclipse >> eclipse
 
 intellij >> idea
+separate-builds/idea >> idea
 
 web >> web
+separate-builds/web >> web
 
 maven/org.eclipse.xtend.core >> maven
 maven/org.eclipse.xtend.ide.common >> maven
@@ -190,6 +197,7 @@ plugins/org.eclipse.xtext.standalone.maven >> maven
 plugins/org.eclipse.xtext.xtend2.maven >> maven
 plugins/org.eclipse.xtext.xtend2.standalone >> maven
 plugins/org.eclipse.xtext.xtend2.standalone.maven >> maven
+separate-builds/maven >> maven
 
 website >> xtext-website
 xtext-website >> xtext-website
@@ -248,6 +256,7 @@ plugins/org.eclipse.emf.index.ui >> delete
 plugins/org.eclipse.xtext.doc.manual >> delete
 settings.gradle >> delete
 splitting >> delete
+separate-builds/.project >> delete
 test.txt >> delete
 tests/.settings >> delete
 tests/build.gradle >> delete
