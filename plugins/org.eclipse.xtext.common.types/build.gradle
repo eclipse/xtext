@@ -1,0 +1,6 @@
+dependencies {
+	compile "org.eclipse.xtext:org.eclipse.xtext:$versions.xtext"
+	compile "org.ow2.asm:asm-commons:$versions.asm"
+	optional "org.eclipse.emf:org.eclipse.emf.mwe.utils:$versions.emfMwe"
+	optional "org.eclipse.emf:org.eclipse.emf.mwe2.lib:$versions.emfMwe2"
+}

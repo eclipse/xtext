@@ -1,0 +1,4 @@
+dependencies {
+	compile project(':org.eclipse.xtext.xbase')
+	compile "org.eclipse.xtext:org.eclipse.xtext.ide:$versions.xtext"
+}

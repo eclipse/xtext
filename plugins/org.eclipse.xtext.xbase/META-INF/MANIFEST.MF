@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: %pluginName
-Bundle-Vendor: %providerName
+Bundle-Name: Xbase Model
+Bundle-Vendor: Eclipse Xtext
 Bundle-Version: 2.11.0.qualifier
 Bundle-SymbolicName: org.eclipse.xtext.xbase;singleton:=true
 Bundle-ActivationPolicy: lazy
@@ -120,4 +120,3 @@ Export-Package: org.eclipse.xtext.xbase,
 Import-Package: com.ibm.icu.text;version="4.0.0";resolution:=optional,
  javax.annotation,
  org.apache.log4j;version="1.2.15"
-Bundle-Localization: plugin
