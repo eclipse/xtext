@@ -19,4 +19,5 @@ dependencies {
 sourceSets.main {
 	java.srcDir 'packrat'
 	resources.include 'org/**', 'modeling32.png'
+	resources.exclude 'packrat'
 }
