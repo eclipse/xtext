@@ -13,6 +13,9 @@ apply plugin: 'gwt'
 
 group = 'org.eclipse.xtend'
 
+install.enabled = false
+uploadArchives.enabled = false
+
 dependencies {
 	compile project(':org.eclipse.xtend.lib.gwt')
 }
@@ -21,6 +24,3 @@ gwt {
 	gwtVersion = versions.gwt
 	modules 'org.eclipse.xtend.lib.test.Test'
 }
-
-getTasksByName('install', false).each { enabled = false } 
-getTasksByName('uploadArtifacts', false).each { enabled = false } 
