@@ -1,11 +1,10 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: %pluginName
-Bundle-Vendor: %providerName
+Bundle-Name: Xtext Common Types
+Bundle-Vendor: Eclipse Xtext
 Bundle-Version: 2.11.0.qualifier
 Bundle-SymbolicName: org.eclipse.xtext.common.types;singleton:=true
 Bundle-ActivationPolicy: lazy
-Bundle-Localization: plugin
 Require-Bundle: 
  org.eclipse.emf.ecore;bundle-version="2.10.2",
  org.eclipse.emf.common;bundle-version="2.10.1",
