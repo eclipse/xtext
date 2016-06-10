@@ -7,99 +7,20 @@
  */
 package org.eclipse.xtext.ide.tests.server;
 
-import io.typefox.lsapi.Location;
-import io.typefox.lsapi.ReferenceContextImpl;
-import io.typefox.lsapi.ReferenceParamsImpl;
-import io.typefox.lsapi.util.LsapiFactories;
-import java.util.List;
-import java.util.concurrent.CompletableFuture;
-import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.ide.tests.server.AbstractLanguageServerTest;
-import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.ide.tests.server.AbstractTestLangLanguageServerTest;
+import org.eclipse.xtext.ide.tests.server.ReferenceTestConfiguration;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-import org.eclipse.xtext.xbase.lib.Pure;
-import org.junit.Assert;
 import org.junit.Test;
 
 /**
  * @author kosyakov - Initial contribution and API
  */
 @SuppressWarnings("all")
-public class ReferenceTest extends AbstractLanguageServerTest {
-  @Accessors
-  public static class ReferenceTestConfiguration {
-    private String model = "";
-    
-    private String filePath = "MyModel.testlang";
-    
-    private int line = 0;
-    
-    private int column = 0;
-    
-    private boolean includeDeclaration = false;
-    
-    private String expectedReferences = "";
-    
-    @Pure
-    public String getModel() {
-      return this.model;
-    }
-    
-    public void setModel(final String model) {
-      this.model = model;
-    }
-    
-    @Pure
-    public String getFilePath() {
-      return this.filePath;
-    }
-    
-    public void setFilePath(final String filePath) {
-      this.filePath = filePath;
-    }
-    
-    @Pure
-    public int getLine() {
-      return this.line;
-    }
-    
-    public void setLine(final int line) {
-      this.line = line;
-    }
-    
-    @Pure
-    public int getColumn() {
-      return this.column;
-    }
-    
-    public void setColumn(final int column) {
-      this.column = column;
-    }
-    
-    @Pure
-    public boolean isIncludeDeclaration() {
-      return this.includeDeclaration;
-    }
-    
-    public void setIncludeDeclaration(final boolean includeDeclaration) {
-      this.includeDeclaration = includeDeclaration;
-    }
-    
-    @Pure
-    public String getExpectedReferences() {
-      return this.expectedReferences;
-    }
-    
-    public void setExpectedReferences(final String expectedReferences) {
-      this.expectedReferences = expectedReferences;
-    }
-  }
-  
+public class ReferenceTest extends AbstractTestLangLanguageServerTest {
   @Test
   public void testReferences_01() {
-    final Procedure1<ReferenceTest.ReferenceTestConfiguration> _function = (ReferenceTest.ReferenceTestConfiguration it) -> {
+    final Procedure1<ReferenceTestConfiguration> _function = (ReferenceTestConfiguration it) -> {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("type Foo {}");
       _builder.newLine();
@@ -110,20 +31,20 @@ public class ReferenceTest extends AbstractLanguageServerTest {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      it.model = _builder.toString();
+      it.setModel(_builder.toString());
       int _length = "type F".length();
-      it.column = _length;
+      it.setColumn(_length);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("MyModel.testlang [[2, 1] .. [2, 4]]");
       _builder_1.newLine();
-      it.expectedReferences = _builder_1.toString();
+      it.setExpectedReferences(_builder_1.toString());
     };
     this.testReferences(_function);
   }
   
   @Test
   public void testReferences_02() {
-    final Procedure1<ReferenceTest.ReferenceTestConfiguration> _function = (ReferenceTest.ReferenceTestConfiguration it) -> {
+    final Procedure1<ReferenceTestConfiguration> _function = (ReferenceTestConfiguration it) -> {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("type Foo {}");
       _builder.newLine();
@@ -134,37 +55,17 @@ public class ReferenceTest extends AbstractLanguageServerTest {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      it.model = _builder.toString();
+      it.setModel(_builder.toString());
       int _length = "type F".length();
-      it.column = _length;
-      it.includeDeclaration = true;
+      it.setColumn(_length);
+      it.setIncludeDeclaration(true);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("MyModel.testlang [[0, 5] .. [0, 8]]");
       _builder_1.newLine();
       _builder_1.append("MyModel.testlang [[2, 1] .. [2, 4]]");
       _builder_1.newLine();
-      it.expectedReferences = _builder_1.toString();
+      it.setExpectedReferences(_builder_1.toString());
     };
     this.testReferences(_function);
-  }
-  
-  protected void testReferences(final Procedure1<? super ReferenceTest.ReferenceTestConfiguration> configurator) {
-    try {
-      @Extension
-      final ReferenceTest.ReferenceTestConfiguration configuration = new ReferenceTest.ReferenceTestConfiguration();
-      configurator.apply(configuration);
-      final String fileUri = this.operator_mappedTo(configuration.filePath, configuration.model);
-      this.initialize();
-      this.open(fileUri, configuration.model);
-      final ReferenceContextImpl referenceContext = new ReferenceContextImpl();
-      referenceContext.setIncludeDeclaration(configuration.includeDeclaration);
-      ReferenceParamsImpl _newReferenceParams = LsapiFactories.newReferenceParams(fileUri, configuration.line, configuration.column, referenceContext);
-      final CompletableFuture<List<? extends Location>> definitions = this.languageServer.references(_newReferenceParams);
-      List<? extends Location> _get = definitions.get();
-      final String actualDefinitions = this.toExpectation(_get);
-      Assert.assertEquals(configuration.expectedReferences, actualDefinitions);
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
   }
 }

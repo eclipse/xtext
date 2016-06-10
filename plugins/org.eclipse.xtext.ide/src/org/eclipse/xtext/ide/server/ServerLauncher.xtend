@@ -9,95 +9,71 @@ package org.eclipse.xtext.ide.server
 
 import com.google.inject.Guice
 import com.google.inject.Inject
-import io.typefox.lsapi.NotificationMessage
 import io.typefox.lsapi.services.json.LanguageServerToJsonAdapter
+import io.typefox.lsapi.services.json.LoggingJsonAdapter
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
 import java.io.FileOutputStream
+import java.io.InputStream
+import java.io.OutputStream
 import java.io.PrintStream
+import java.io.PrintWriter
+import java.sql.Timestamp
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  * @since 2.11
  */
 class ServerLauncher {
-    
-    private static boolean IS_DEBUG = false
-    
-    def static void main(String[] args) {
-        IS_DEBUG = args.exists[it == 'debug']
-    	val launcher = Guice.createInjector(new ServerModule).getInstance(ServerLauncher)
-    	launcher.start()
-    }
-    
-    @Inject LanguageServerImpl languageServer 
-    
-    def void start() {
-        val stdin = System.in
-        val stdout = System.out
-        redirectStandardStreams()
-        
-        System.err.println("Starting Xtext Language Server.")
-        val messageAcceptor = new LanguageServerToJsonAdapter(languageServer) {
-            override protected _doAccept(NotificationMessage message) {
-                if (IS_DEBUG) {
-                    println(message)
-                }
-                super._doAccept(message)
-            }
-            
-            override protected sendResponse(String responseId, Object resultValue) {
-                if (IS_DEBUG) {
-                    println("response : "+resultValue)
-                }
-                super.sendResponse(responseId, resultValue)
-            }
-            
-            override protected sendNotification(String methodId, Object parameter) {
-                if (IS_DEBUG) {
-                    println("id"+methodId)
-                    println("notification : "+parameter)
-                }
-                super.sendNotification(methodId, parameter)
-            }
-            
-            override protected sendResponseError(String responseId, String errorMessage, int errorCode, Object errorData) {
-                if (IS_DEBUG) {
-                    println("id"+responseId)
-                    println("error : "+errorMessage)
-                }
-                super.sendResponseError(responseId, errorMessage, errorCode, errorData)
-            }
-            
-			override exit() {
-        		System.err.println("Exit notification received. Good Bye!")
-				super.exit()
+
+	private static boolean IS_DEBUG = false
+
+	def static void main(String[] args) {
+		IS_DEBUG = args.exists[it == 'debug']
+		val stdin = System.in
+		val stdout = System.out
+		redirectStandardStreams()
+		val launcher = Guice.createInjector(new ServerModule).getInstance(ServerLauncher)
+		launcher.start(stdin, stdout)
+	}
+
+	@Inject LanguageServerImpl languageServer
+
+	def void start(InputStream in, OutputStream out) {
+		System.err.println("Starting Xtext Language Server.")
+
+		val messageAcceptor = if (IS_DEBUG) {
+				new LoggingJsonAdapter(languageServer) => [
+					errorLog = new PrintWriter(System.err)
+					messageLog = new PrintWriter(System.out)
+				]
+			} else {
+				new LanguageServerToJsonAdapter(languageServer) => [
+					protocol.addErrorListener [ p1, p2 |
+						p2.printStackTrace(System.err)
+					]
+				]
 			}
-            
-        }
-        messageAcceptor.protocol.addErrorListener[p1, p2|
-            p2.printStackTrace(System.err)
-        ]
-        messageAcceptor.connect(stdin, stdout)
-        System.err.println("started.")
-        messageAcceptor.join
-        while (true) {
-            Thread.sleep(10_000l)
-        }
-    }
-    
-    def redirectStandardStreams() {
-        System.setIn(new ByteArrayInputStream(newByteArrayOfSize(0)))
-        val id = ServerLauncher.name+"-"+System.currentTimeMillis
-        if (IS_DEBUG) {
-            val stdFileOut = new FileOutputStream("out-"+id+".log")
-            System.setOut(new PrintStream(stdFileOut))
-            val stdFileErr = new FileOutputStream("error-"+id+".log")
-            System.setErr(new PrintStream(stdFileErr))
-        } else {
-            System.setOut(new PrintStream(new ByteArrayOutputStream()))
-            System.setErr(new PrintStream(new ByteArrayOutputStream()))
-        }
-    }
-    
+		messageAcceptor.connect(in, out)
+		System.err.println("started.")
+		messageAcceptor.join
+		while (true) {
+			Thread.sleep(10_000l)
+		}
+	}
+
+	def static redirectStandardStreams() {
+		System.setIn(new ByteArrayInputStream(newByteArrayOfSize(0)))
+		val id = ServerLauncher.name + "-" + new Timestamp(System.currentTimeMillis)
+		if (IS_DEBUG) {
+			val stdFileOut = new FileOutputStream("out-" + id + ".log")
+			System.setOut(new PrintStream(stdFileOut))
+			val stdFileErr = new FileOutputStream("error-" + id + ".log")
+			System.setErr(new PrintStream(stdFileErr))
+		} else {
+			System.setOut(new PrintStream(new ByteArrayOutputStream()))
+			System.setErr(new PrintStream(new ByteArrayOutputStream()))
+		}
+	}
+
 }

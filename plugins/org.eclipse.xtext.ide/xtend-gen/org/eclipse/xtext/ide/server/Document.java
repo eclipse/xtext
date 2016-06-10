@@ -56,16 +56,21 @@ public class Document {
   public Document applyChanges(final Iterable<? extends TextEdit> changes) {
     String newContent = this.contents;
     for (final TextEdit change : changes) {
-      {
-        Range _range = change.getRange();
-        Position _start = _range.getStart();
-        final int start = this.getOffSet(_start);
+      Range _range = change.getRange();
+      boolean _tripleEquals = (_range == null);
+      if (_tripleEquals) {
+        String _newText = change.getNewText();
+        newContent = _newText;
+      } else {
         Range _range_1 = change.getRange();
-        Position _end = _range_1.getEnd();
+        Position _start = _range_1.getStart();
+        final int start = this.getOffSet(_start);
+        Range _range_2 = change.getRange();
+        Position _end = _range_2.getEnd();
         final int end = this.getOffSet(_end);
         String _substring = newContent.substring(0, start);
-        String _newText = change.getNewText();
-        String _plus = (_substring + _newText);
+        String _newText_1 = change.getNewText();
+        String _plus = (_substring + _newText_1);
         String _substring_1 = newContent.substring(end);
         String _plus_1 = (_plus + _substring_1);
         newContent = _plus_1;

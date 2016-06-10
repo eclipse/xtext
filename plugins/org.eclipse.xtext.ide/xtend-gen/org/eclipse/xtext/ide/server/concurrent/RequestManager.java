@@ -72,32 +72,32 @@ public class RequestManager {
    * </p>
    */
   public CompletableFuture<Void> runWrite(final Procedure1<? super CancelIndicator> writeRequest, final CancelIndicator cancelIndicator) {
-    final Consumer<CancellableIndicator> _function = (CancellableIndicator it) -> {
-      it.cancel();
-    };
-    this.cancelIndicators.forEach(_function);
-    if ((cancelIndicator instanceof CancellableIndicator)) {
-      this.cancelIndicators.add(((CancellableIndicator)cancelIndicator));
-    }
-    final Runnable _function_1 = () -> {
-      try {
-        this.semaphore.acquire(this.MAX_PERMITS);
+    try {
+      final Consumer<CancellableIndicator> _function = (CancellableIndicator it) -> {
+        it.cancel();
+      };
+      this.cancelIndicators.forEach(_function);
+      if ((cancelIndicator instanceof CancellableIndicator)) {
+        this.cancelIndicators.add(((CancellableIndicator)cancelIndicator));
+      }
+      this.semaphore.acquire(this.MAX_PERMITS);
+      final Runnable _function_1 = () -> {
         try {
           writeRequest.apply(cancelIndicator);
         } finally {
           this.semaphore.release(this.MAX_PERMITS);
         }
-      } catch (Throwable _e) {
-        throw Exceptions.sneakyThrow(_e);
-      }
-    };
-    CompletableFuture<Void> _runAsync = CompletableFuture.runAsync(_function_1, this.writeExecutorService);
-    final BiConsumer<Void, Throwable> _function_2 = (Void $0, Throwable $1) -> {
-      if ((cancelIndicator instanceof CancellableIndicator)) {
-        this.cancelIndicators.remove(((CancellableIndicator)cancelIndicator));
-      }
-    };
-    return _runAsync.whenComplete(_function_2);
+      };
+      CompletableFuture<Void> _runAsync = CompletableFuture.runAsync(_function_1, this.writeExecutorService);
+      final BiConsumer<Void, Throwable> _function_2 = (Void $0, Throwable $1) -> {
+        if ((cancelIndicator instanceof CancellableIndicator)) {
+          this.cancelIndicators.remove(((CancellableIndicator)cancelIndicator));
+        }
+      };
+      return _runAsync.whenComplete(_function_2);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
   
   public <V extends Object> CompletableFuture<V> runRead(final Function1<? super CancelIndicator, ? extends V> readRequest) {
@@ -119,27 +119,27 @@ public class RequestManager {
    * </p>
    */
   public <V extends Object> CompletableFuture<V> runRead(final Function1<? super CancelIndicator, ? extends V> readRequest, final CancelIndicator cancelIndicator) {
-    if ((cancelIndicator instanceof CancellableIndicator)) {
-      this.cancelIndicators.add(((CancellableIndicator)cancelIndicator));
-    }
-    final Supplier<V> _function = () -> {
-      try {
-        this.semaphore.acquire(1);
+    try {
+      if ((cancelIndicator instanceof CancellableIndicator)) {
+        this.cancelIndicators.add(((CancellableIndicator)cancelIndicator));
+      }
+      this.semaphore.acquire(1);
+      final Supplier<V> _function = () -> {
         try {
           return readRequest.apply(cancelIndicator);
         } finally {
           this.semaphore.release(1);
         }
-      } catch (Throwable _e) {
-        throw Exceptions.sneakyThrow(_e);
-      }
-    };
-    CompletableFuture<V> _supplyAsync = CompletableFuture.<V>supplyAsync(_function, this.readExecutorService);
-    final BiConsumer<V, Throwable> _function_1 = (V $0, Throwable $1) -> {
-      if ((cancelIndicator instanceof CancellableIndicator)) {
-        this.cancelIndicators.remove(((CancellableIndicator)cancelIndicator));
-      }
-    };
-    return _supplyAsync.whenComplete(_function_1);
+      };
+      CompletableFuture<V> _supplyAsync = CompletableFuture.<V>supplyAsync(_function, this.readExecutorService);
+      final BiConsumer<V, Throwable> _function_1 = (V $0, Throwable $1) -> {
+        if ((cancelIndicator instanceof CancellableIndicator)) {
+          this.cancelIndicators.remove(((CancellableIndicator)cancelIndicator));
+        }
+      };
+      return _supplyAsync.whenComplete(_function_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
 }

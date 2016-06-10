@@ -11,21 +11,25 @@ import com.google.common.base.Objects;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
-import io.typefox.lsapi.NotificationMessage;
 import io.typefox.lsapi.services.json.LanguageServerProtocol;
 import io.typefox.lsapi.services.json.LanguageServerToJsonAdapter;
+import io.typefox.lsapi.services.json.LoggingJsonAdapter;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.PrintStream;
+import java.io.PrintWriter;
+import java.sql.Timestamp;
 import org.eclipse.xtext.ide.server.LanguageServerImpl;
 import org.eclipse.xtext.ide.server.ServerModule;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 
 /**
@@ -42,68 +46,44 @@ public class ServerLauncher {
     };
     boolean _exists = IterableExtensions.<String>exists(((Iterable<String>)Conversions.doWrapArray(args)), _function);
     ServerLauncher.IS_DEBUG = _exists;
+    final InputStream stdin = System.in;
+    final PrintStream stdout = System.out;
+    ServerLauncher.redirectStandardStreams();
     ServerModule _serverModule = new ServerModule();
     Injector _createInjector = Guice.createInjector(_serverModule);
     final ServerLauncher launcher = _createInjector.<ServerLauncher>getInstance(ServerLauncher.class);
-    launcher.start();
+    launcher.start(stdin, stdout);
   }
   
   @Inject
   private LanguageServerImpl languageServer;
   
-  public void start() {
+  public void start(final InputStream in, final OutputStream out) {
     try {
-      final InputStream stdin = System.in;
-      final PrintStream stdout = System.out;
-      this.redirectStandardStreams();
       System.err.println("Starting Xtext Language Server.");
-      final LanguageServerToJsonAdapter messageAcceptor = new LanguageServerToJsonAdapter(this.languageServer) {
-        @Override
-        protected void _doAccept(final NotificationMessage message) {
-          if (ServerLauncher.IS_DEBUG) {
-            InputOutput.<NotificationMessage>println(message);
-          }
-          super._doAccept(message);
-        }
-        
-        @Override
-        protected void sendResponse(final String responseId, final Object resultValue) {
-          if (ServerLauncher.IS_DEBUG) {
-            InputOutput.<String>println(("response : " + resultValue));
-          }
-          super.sendResponse(responseId, resultValue);
-        }
-        
-        @Override
-        protected void sendNotification(final String methodId, final Object parameter) {
-          if (ServerLauncher.IS_DEBUG) {
-            InputOutput.<String>println(("id" + methodId));
-            InputOutput.<String>println(("notification : " + parameter));
-          }
-          super.sendNotification(methodId, parameter);
-        }
-        
-        @Override
-        protected void sendResponseError(final String responseId, final String errorMessage, final int errorCode, final Object errorData) {
-          if (ServerLauncher.IS_DEBUG) {
-            InputOutput.<String>println(("id" + responseId));
-            InputOutput.<String>println(("error : " + errorMessage));
-          }
-          super.sendResponseError(responseId, errorMessage, errorCode, errorData);
-        }
-        
-        @Override
-        public void exit() {
-          System.err.println("Exit notification received. Good Bye!");
-          super.exit();
-        }
-      };
-      LanguageServerProtocol _protocol = messageAcceptor.getProtocol();
-      final Procedure2<String, Throwable> _function = (String p1, Throwable p2) -> {
-        p2.printStackTrace(System.err);
-      };
-      _protocol.addErrorListener(_function);
-      messageAcceptor.connect(stdin, stdout);
+      LanguageServerToJsonAdapter _xifexpression = null;
+      if (ServerLauncher.IS_DEBUG) {
+        LoggingJsonAdapter _loggingJsonAdapter = new LoggingJsonAdapter(this.languageServer);
+        final Procedure1<LoggingJsonAdapter> _function = (LoggingJsonAdapter it) -> {
+          PrintWriter _printWriter = new PrintWriter(System.err);
+          it.setErrorLog(_printWriter);
+          PrintWriter _printWriter_1 = new PrintWriter(System.out);
+          it.setMessageLog(_printWriter_1);
+        };
+        _xifexpression = ObjectExtensions.<LoggingJsonAdapter>operator_doubleArrow(_loggingJsonAdapter, _function);
+      } else {
+        LanguageServerToJsonAdapter _languageServerToJsonAdapter = new LanguageServerToJsonAdapter(this.languageServer);
+        final Procedure1<LanguageServerToJsonAdapter> _function_1 = (LanguageServerToJsonAdapter it) -> {
+          LanguageServerProtocol _protocol = it.getProtocol();
+          final Procedure2<String, Throwable> _function_2 = (String p1, Throwable p2) -> {
+            p2.printStackTrace(System.err);
+          };
+          _protocol.addErrorListener(_function_2);
+        };
+        _xifexpression = ObjectExtensions.<LanguageServerToJsonAdapter>operator_doubleArrow(_languageServerToJsonAdapter, _function_1);
+      }
+      final LanguageServerToJsonAdapter messageAcceptor = _xifexpression;
+      messageAcceptor.connect(in, out);
       System.err.println("started.");
       messageAcceptor.join();
       while (true) {
@@ -114,7 +94,7 @@ public class ServerLauncher {
     }
   }
   
-  public void redirectStandardStreams() {
+  public static void redirectStandardStreams() {
     try {
       byte[] _newByteArrayOfSize = new byte[0];
       ByteArrayInputStream _byteArrayInputStream = new ByteArrayInputStream(_newByteArrayOfSize);
@@ -122,7 +102,8 @@ public class ServerLauncher {
       String _name = ServerLauncher.class.getName();
       String _plus = (_name + "-");
       long _currentTimeMillis = System.currentTimeMillis();
-      final String id = (_plus + Long.valueOf(_currentTimeMillis));
+      Timestamp _timestamp = new Timestamp(_currentTimeMillis);
+      final String id = (_plus + _timestamp);
       if (ServerLauncher.IS_DEBUG) {
         final FileOutputStream stdFileOut = new FileOutputStream((("out-" + id) + ".log"));
         PrintStream _printStream = new PrintStream(stdFileOut);

@@ -7,65 +7,20 @@
  */
 package org.eclipse.xtext.ide.tests.server;
 
-import io.typefox.lsapi.DocumentSymbolParamsImpl;
-import io.typefox.lsapi.SymbolInformation;
-import io.typefox.lsapi.util.LsapiFactories;
-import java.util.List;
-import java.util.concurrent.CompletableFuture;
-import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.ide.tests.server.AbstractLanguageServerTest;
-import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.ide.tests.server.AbstractTestLangLanguageServerTest;
+import org.eclipse.xtext.ide.tests.server.DocumentSymbolConfiguraiton;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-import org.eclipse.xtext.xbase.lib.Pure;
-import org.junit.Assert;
 import org.junit.Test;
 
 /**
  * @author kosyakov - Initial contribution and API
  */
 @SuppressWarnings("all")
-public class DocumentSymbolTest extends AbstractLanguageServerTest {
-  @Accessors
-  public static class DocumentSymbolConfiguraiton {
-    private String model = "";
-    
-    private String filePath = "MyModel.testlang";
-    
-    private String expectedSymbols = "";
-    
-    @Pure
-    public String getModel() {
-      return this.model;
-    }
-    
-    public void setModel(final String model) {
-      this.model = model;
-    }
-    
-    @Pure
-    public String getFilePath() {
-      return this.filePath;
-    }
-    
-    public void setFilePath(final String filePath) {
-      this.filePath = filePath;
-    }
-    
-    @Pure
-    public String getExpectedSymbols() {
-      return this.expectedSymbols;
-    }
-    
-    public void setExpectedSymbols(final String expectedSymbols) {
-      this.expectedSymbols = expectedSymbols;
-    }
-  }
-  
+public class DocumentSymbolTest extends AbstractTestLangLanguageServerTest {
   @Test
   public void testDocumentSymbol_01() {
-    final Procedure1<DocumentSymbolTest.DocumentSymbolConfiguraiton> _function = (DocumentSymbolTest.DocumentSymbolConfiguraiton it) -> {
+    final Procedure1<DocumentSymbolConfiguraiton> _function = (DocumentSymbolConfiguraiton it) -> {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("type Foo {");
       _builder.newLine();
@@ -81,7 +36,7 @@ public class DocumentSymbolTest extends AbstractLanguageServerTest {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      it.model = _builder.toString();
+      it.setModel(_builder.toString());
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("symbol \"Foo\" {");
       _builder_1.newLine();
@@ -142,26 +97,8 @@ public class DocumentSymbolTest extends AbstractLanguageServerTest {
       _builder_1.newLine();
       _builder_1.append("}");
       _builder_1.newLine();
-      it.expectedSymbols = _builder_1.toString();
+      it.setExpectedSymbols(_builder_1.toString());
     };
     this.testDocumentSymbol(_function);
-  }
-  
-  protected void testDocumentSymbol(final Procedure1<? super DocumentSymbolTest.DocumentSymbolConfiguraiton> configurator) {
-    try {
-      @Extension
-      final DocumentSymbolTest.DocumentSymbolConfiguraiton configuration = new DocumentSymbolTest.DocumentSymbolConfiguraiton();
-      configurator.apply(configuration);
-      final String fileUri = this.operator_mappedTo(configuration.filePath, configuration.model);
-      this.initialize();
-      this.open(fileUri, configuration.model);
-      DocumentSymbolParamsImpl _newDocumentSymbolParams = LsapiFactories.newDocumentSymbolParams(fileUri);
-      final CompletableFuture<List<? extends SymbolInformation>> symbols = this.languageServer.documentSymbol(_newDocumentSymbolParams);
-      List<? extends SymbolInformation> _get = symbols.get();
-      final String actualSymbols = this.toExpectation(_get);
-      Assert.assertEquals(configuration.expectedSymbols, actualSymbols);
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
   }
 }

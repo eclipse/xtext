@@ -5,30 +5,24 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ide.tests.server
+package org.eclipse.xtext.resource
 
-import org.junit.Test
+import com.google.inject.ImplementedBy
+import java.util.List
 
 /**
- * @author kosyakov - Initial contribution and API
+ * @author Sven Efftinge - Initial contribution and API
  */
-class DefinitionTest extends AbstractTestLangLanguageServerTest {
-
-	@Test
-	def void testDefinition_01() {
-		testDefinition[
-			model = '''
-				type Foo {}
-				type Bar {
-					Foo foo
-				}
-			'''
-			line = 2
-			column = 3
-			expectedDefinitions = '''
-				MyModel.testlang [[0, 5] .. [0, 8]]
-			'''
-		]
-	}
-
+@ImplementedBy(DefaultImpl)
+interface IMimeTypeProvider {
+    
+    def List<String> getMimeTypes()
+    
+    static class DefaultImpl implements IMimeTypeProvider {
+        
+        override getMimeTypes() {
+            #[]
+        }
+        
+    }
 }

@@ -96,12 +96,25 @@ class DocumentTest {
         ]
     }
     
+    @Test def void testUpdate_nonIncrementalChange() {
+        new Document(1, '''
+            hello world
+            foo
+            bar''') => [
+            assertEquals(' foo ', applyChanges(#[
+                change(null, null, " foo ")
+            ]).contents)
+        ]
+    }
+    
     private def change(PositionImpl startPos, PositionImpl endPos, String newText) {
         new TextEditImpl => [
-              range = new RangeImpl => [
-                  start = startPos
-                  end = endPos
-              ]
+              if (startPos !== null) {
+                  range = new RangeImpl => [
+                      start = startPos
+                      end = endPos
+                  ]
+              }
               it.newText = newText
             ]
     }
