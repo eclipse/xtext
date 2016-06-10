@@ -11,6 +11,7 @@ import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.List;
+import java.util.function.Consumer;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.CancelIndicator;
@@ -22,7 +23,6 @@ import org.eclipse.xtext.web.server.model.IXtextWebDocument;
 import org.eclipse.xtext.web.server.validation.ValidationResult;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 /**
  * Service class for model validation.
@@ -51,9 +51,9 @@ public class ValidationService extends AbstractCachedService<ValidationResult> {
       }
     };
     Iterable<Issue> _filter = IterableExtensions.<Issue>filter(issues, _function);
-    final Procedure1<Issue> _function_1 = new Procedure1<Issue>() {
+    final Consumer<Issue> _function_1 = new Consumer<Issue>() {
       @Override
-      public void apply(final Issue issue) {
+      public void accept(final Issue issue) {
         List<ValidationResult.Issue> _issues = result.getIssues();
         String _message = issue.getMessage();
         Severity _severity = issue.getSeverity();
@@ -66,7 +66,7 @@ public class ValidationService extends AbstractCachedService<ValidationResult> {
         _issues.add(_issue);
       }
     };
-    IterableExtensions.<Issue>forEach(_filter, _function_1);
+    _filter.forEach(_function_1);
     return result;
   }
   

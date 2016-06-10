@@ -1,0 +1,6 @@
+apply from: "${rootDir}/gradle/eclipse-project-layout.gradle"
+
+dependencies {
+	compile project(':org.eclipse.xtext.web.example.statemachine')
+	compile "org.eclipse.xtext:org.eclipse.xtext.ide:$versions.xtext"
+}

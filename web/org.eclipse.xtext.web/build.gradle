@@ -2,13 +2,15 @@ plugins {
 	id 'com.moowork.node' version "0.10"
 }
 
+apply from: "${rootDir}/gradle/default-project-layout.gradle"
+
 dependencies {
-    compile group: 'log4j', name: 'log4j', version: '1.2.17'
-    compile project(':plugins:org.eclipse.xtext.common.types')
-    compile project(':plugins:org.eclipse.xtext.ide')
+	compile "com.google.inject:guice:$versions.guice"
+    compile "org.eclipse.xtext:org.eclipse.xtext.ide:$versions.xtext"
+    compile "org.eclipse.xtext:org.eclipse.xtext.common.types:$versions.xtext"
     testCompile group: 'junit', name: 'junit', version: '4.12'
-    testCompile project(':plugins:org.eclipse.xtext.junit4')
-    testCompile project(':web:org.eclipse.xtext.web.example.statemachine.ide')
+    testCompile "org.eclipse.xtext:org.eclipse.xtext.junit4:$versions.xtext"
+    testCompile project(':org.eclipse.xtext.web.example.statemachine.ide')
 }
 
 jar.manifest {

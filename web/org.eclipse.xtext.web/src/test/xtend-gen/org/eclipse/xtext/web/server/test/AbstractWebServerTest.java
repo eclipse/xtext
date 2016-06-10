@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.function.Consumer;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
@@ -33,7 +34,6 @@ import org.eclipse.xtext.web.server.test.MockServiceContext;
 import org.eclipse.xtext.web.server.test.languages.StatemachineWebModule;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
@@ -101,13 +101,13 @@ public class AbstractWebServerTest extends AbstractXtextTests {
   @Override
   public void tearDown() {
     try {
-      final Procedure1<ExecutorService> _function = new Procedure1<ExecutorService>() {
+      final Consumer<ExecutorService> _function = new Consumer<ExecutorService>() {
         @Override
-        public void apply(final ExecutorService it) {
+        public void accept(final ExecutorService it) {
           it.shutdown();
         }
       };
-      IterableExtensions.<ExecutorService>forEach(this.executorServices, _function);
+      this.executorServices.forEach(_function);
       this.executorServices.clear();
       super.tearDown();
     } catch (Throwable _e) {
