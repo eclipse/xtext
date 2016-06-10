@@ -10,10 +10,10 @@ sourceSets {
 	configure(isTestProject? test : main)  {
 		java.srcDirs = ['src', 'xtend-gen']
 		resources {
-			srcDirs = ['src', '.']
-			include 'plugin.xml', 'schema/**', 'about.ini', 'about.mappings', 'about.properties', 'about.html'
-			exclude '**/*._trace', '**/*.xtendbin', '**/*.xtend'
-			exclude 'src', 'xtend-gen', 'build', 'target'
+			srcDirs = ['src', 'src-gen', 'emf-gen', '.']
+			include 'plugin.xml', 'schema/**', 'model/**', 'about.ini', 'about.mappings', 'about.properties', 'about.html',
+				'**/*.properties', '**/*.xtextbin', '**/*.xmi', '**/*.g', '**/*.tokens'
+			exclude 'bin', 'src', 'xtend-gen', 'src-gen', 'emf-gen', 'build', 'target', 'build.properties'
 		}
 	}
 	configure(isTestProject? main : test)  {
