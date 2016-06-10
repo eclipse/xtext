@@ -1,4 +1,4 @@
-rootProject.name = 'xtext-core'
+rootProject.name = 'xtext-lib'
 
 [
 	'org.eclipse.xtext.xbase.lib',
