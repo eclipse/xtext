@@ -7,17 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.tests.server
 
-import org.eclipse.xtend.lib.annotations.Accessors
 import org.junit.Test
-
-import static org.junit.Assert.*
-
-import static extension io.typefox.lsapi.util.LsapiFactories.*
 
 /**
  * @author kosyakov - Initial contribution and API
  */
-class DocumentSymbolTest extends AbstractLanguageServerTest {
+class DocumentSymbolTest extends AbstractTestLangLanguageServerTest {
 
 	@Test
 	def void testDocumentSymbol_01() {
@@ -56,26 +51,6 @@ class DocumentSymbolTest extends AbstractLanguageServerTest {
 				}
 			'''
 		]
-	}
-
-	protected def void testDocumentSymbol((DocumentSymbolConfiguraiton)=>void configurator) {
-		val extension configuration = new DocumentSymbolConfiguraiton
-		configurator.apply(configuration)
-		val fileUri = filePath -> model
-
-		initialize
-		open(fileUri, model)
-
-		val symbols = languageServer.documentSymbol(fileUri.newDocumentSymbolParams)
-		val String actualSymbols = symbols.get.toExpectation
-		assertEquals(expectedSymbols, actualSymbols)
-	}
-
-	@Accessors
-	static class DocumentSymbolConfiguraiton {
-		String model = ''
-		String filePath = 'MyModel.testlang'
-		String expectedSymbols = ''
 	}
 
 }

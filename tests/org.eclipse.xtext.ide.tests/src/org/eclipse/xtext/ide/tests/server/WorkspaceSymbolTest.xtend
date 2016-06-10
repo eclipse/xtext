@@ -7,21 +7,16 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.tests.server
 
-import org.eclipse.xtend.lib.annotations.Accessors
 import org.junit.Test
-
-import static org.junit.Assert.*
-
-import static extension io.typefox.lsapi.util.LsapiFactories.*
 
 /**
  * @author kosyakov - Initial contribution and API
  */
-class WorkspaceSymbolTest extends AbstractLanguageServerTest {
+class WorkspaceSymbolTest extends AbstractTestLangLanguageServerTest {
 
 	@Test
-	def void testDocumentSymbol_01() {
-		testDocumentSymbol[
+	def void testSymbol_01() {
+		testSymbol[
 			model = '''
 				type Foo {
 					int bar
@@ -53,8 +48,8 @@ class WorkspaceSymbolTest extends AbstractLanguageServerTest {
 	}
 
 	@Test
-	def void testDocumentSymbol_02() {
-		testDocumentSymbol[
+	def void testSymbol_02() {
+		testSymbol[
 			model = '''
 				type Foo {
 					int bar
@@ -83,28 +78,6 @@ class WorkspaceSymbolTest extends AbstractLanguageServerTest {
 				}
 			'''
 		]
-	}
-
-	protected def void testDocumentSymbol((WorkspaceSymbolConfiguraiton)=>void configurator) {
-		val extension configuration = new WorkspaceSymbolConfiguraiton
-		configurator.apply(configuration)
-		val fileUri = filePath -> model
-
-		initialize
-		open(fileUri, model)
-
-		val symbols = languageServer.symbol(query.newWorkspaceSymbolParams).get
-		
-		val String actualSymbols = symbols.toExpectation
-		assertEquals(expectedSymbols, actualSymbols)
-	}
-
-	@Accessors
-	static class WorkspaceSymbolConfiguraiton {
-		String model = ''
-		String filePath = 'MyModel.testlang'
-		String query = ''
-		String expectedSymbols = ''
 	}
 	
 }

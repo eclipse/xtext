@@ -71,6 +71,7 @@ import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.eclipse.xtext.validation.Issue
 
 import static io.typefox.lsapi.util.LsapiFactories.*
+import org.eclipse.xtext.resource.IMimeTypeProvider
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -94,6 +95,9 @@ import static io.typefox.lsapi.util.LsapiFactories.*
 		if (params.rootPath === null) {
 			throw new IllegalArgumentException("Bad initialization request. rootPath must not be null.")
 		}
+		if (languagesRegistry.extensionToFactoryMap.isEmpty) {
+			throw new IllegalStateException("No Xtext languages have been registered. Please make sure you have added the languages's setup class in '/META-INF/services/org.eclipse.xtext.ISetup'")
+		}
 		this.params = params
 		workspaceManager = workspaceManagerProvider.get
 		resourceAccess = new WorkspaceResourceAccess(workspaceManager)
@@ -114,11 +118,13 @@ import static io.typefox.lsapi.util.LsapiFactories.*
 		result.supportedLanguages = newArrayList()
 		for (serviceProvider : languagesRegistry.extensionToFactoryMap.values.filter(IResourceServiceProvider).toSet) {
 		    val extensionProvider = serviceProvider.get(FileExtensionProvider)
+		    val mimeTypesProvider = serviceProvider.get(IMimeTypeProvider)
 		    val langInfo = serviceProvider.get(LanguageInfo)
 		    val highlightingProvider = serviceProvider.get(IEditorHighlightingConfigurationProvider)
 		    val language = new LanguageDescriptionImpl => [
 		        fileExtensions = extensionProvider.fileExtensions.toList
 		        languageId = langInfo.languageName
+		        mimeTypes = mimeTypesProvider.mimeTypes
 		        if (highlightingProvider !== null)
 		          highlightingConfiguration = highlightingProvider.getConfiguration(params.clientName)
 		    ]

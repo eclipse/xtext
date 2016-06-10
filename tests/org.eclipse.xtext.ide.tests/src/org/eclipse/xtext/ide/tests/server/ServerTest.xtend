@@ -17,7 +17,7 @@ import static extension io.typefox.lsapi.util.LsapiFactories.*
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-class ServerTest extends AbstractLanguageServerTest {
+class ServerTest extends AbstractTestLangLanguageServerTest {
     
     @Test
     def void testInitializeBuild() {
