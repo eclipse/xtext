@@ -1,6 +1,6 @@
 #!/bin/bash
 
-git checkout -B split-$3 refs/remotes/origin/master
+git checkout -B split-$3 refs/remotes/origin/repo_splitting
 
 REMOVALS=`cat $1 | tr '\n' ' '`
 git filter-branch -f --prune-empty \
