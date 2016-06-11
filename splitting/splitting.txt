@@ -255,7 +255,7 @@ plugins/org.eclipse.emf.index >> delete
 plugins/org.eclipse.emf.index.ui >> delete
 plugins/org.eclipse.xtext.doc.manual >> delete
 settings.gradle >> delete
-splitting >> delete
+splitting >> core, extras, lib, xtend, eclipse, idea, web, maven, xtext-website, xtend-website
 separate-builds/.project >> delete
 test.txt >> delete
 tests/.settings >> delete
