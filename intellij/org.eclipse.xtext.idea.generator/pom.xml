@@ -8,8 +8,6 @@
 		<relativePath>../../maven/org.eclipse.xtext.tycho.parent</relativePath>
 	</parent>
 	<packaging>eclipse-plugin</packaging>
-
 	<artifactId>org.eclipse.xtext.idea.generator</artifactId>
-	<name>Xtext IDEA Generator</name>
-	
+
 </project>

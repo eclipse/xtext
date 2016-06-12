@@ -8,15 +8,6 @@
 		<relativePath>../../maven/org.eclipse.xtext.tycho.parent</relativePath>
 	</parent>
 	<packaging>eclipse-plugin</packaging>
-
-	<name>Common Types Edit Library</name>
 	<artifactId>org.eclipse.xtext.common.types.edit</artifactId>
 
-	<dependencies>
-		<dependency>
-			<groupId>org.eclipse.xtext</groupId>
-			<artifactId>org.eclipse.xtext.common.types</artifactId>
-			<version>[${project.version}]</version>
-		</dependency>
-	</dependencies>
 </project>

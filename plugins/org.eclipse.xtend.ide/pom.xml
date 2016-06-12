@@ -8,6 +8,6 @@
 		<relativePath>../../maven/org.eclipse.xtext.tycho.parent</relativePath>
 	</parent>
 	<packaging>eclipse-plugin</packaging>
-	<artifactId>org.eclipse.xtext.ui.shared</artifactId>
+	<artifactId>org.eclipse.xtend.ide</artifactId>
 
 </project>
