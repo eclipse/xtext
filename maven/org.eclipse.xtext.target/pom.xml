@@ -12,6 +12,4 @@
 
 	<packaging>eclipse-target-definition</packaging>
 	<artifactId>org.eclipse.xtext.target</artifactId>
-
-	<name>Xtext Target platform</name>
 </project>
