@@ -87,8 +87,6 @@ public class RequestManagerTest {
   public void testRunReadAfterWrite() {
     try {
       final Procedure1<CancelIndicator> _function = (CancelIndicator it) -> {
-        while ((this.sharedState.get() == 0)) {
-        }
         this.sharedState.incrementAndGet();
       };
       this.requestManager.runWrite(_function);
@@ -96,9 +94,8 @@ public class RequestManagerTest {
         return Integer.valueOf(this.sharedState.get());
       };
       final CompletableFuture<Integer> future = this.requestManager.<Integer>runRead(_function_1);
-      this.sharedState.incrementAndGet();
       Integer _get = future.get();
-      Assert.assertEquals(2, (_get).intValue());
+      Assert.assertEquals(1, (_get).intValue());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -141,8 +138,8 @@ public class RequestManagerTest {
     };
     this.requestManager.<Integer>runRead(_function);
     final Procedure1<CancelIndicator> _function_1 = (CancelIndicator it) -> {
-      while ((this.sharedState.get() == 0)) {
-      }
+      int _get = this.sharedState.get();
+      Assert.assertEquals(1, _get);
       this.sharedState.incrementAndGet();
     };
     CompletableFuture<Void> _runWrite = this.requestManager.runWrite(_function_1);
