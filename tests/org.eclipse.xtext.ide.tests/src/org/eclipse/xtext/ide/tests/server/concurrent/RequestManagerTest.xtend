@@ -65,15 +65,12 @@ class RequestManagerTest {
 	@Test
 	def void testRunReadAfterWrite() {
 		requestManager.runWrite [
-			while (sharedState.get == 0) {
-			}
-			sharedState.incrementAndGet
+    		sharedState.incrementAndGet
 		]
 		val future = requestManager.runRead [
 			sharedState.get
 		]
-		sharedState.incrementAndGet
-		assertEquals(2, future.get)
+		assertEquals(1, future.get)
 	}
 
 	@Test
@@ -102,8 +99,7 @@ class RequestManagerTest {
 			sharedState.incrementAndGet
 		]
 		requestManager.runWrite [
-			while (sharedState.get == 0) {
-			}
+			assertEquals(1, sharedState.get)
 			sharedState.incrementAndGet
 		].join
 		assertEquals(2, sharedState.get)
