@@ -90,9 +90,37 @@ tests/org.eclipse.xtext.xtend2.standalone.tests >> xtend
 tests/org.eclipse.xtext.xtend2.tests >> xtend
 tests/org.eclipse.xtext.xtend2.ui.tests >> xtend
 separate-builds/xtend >> xtend
+features/org.eclipse.xtend.gwt.feature >> xtend
+features/org.eclipse.xtend.sdk.feature >> xtend
 
-features >> eclipse
+
+features/org.eclipse.emf.index.feature >> eclipse
+features/org.eclipse.xtend.build.feature >> eclipse
+features/org.eclipse.xtend.feature >> eclipse
+features/org.eclipse.xtend.m2e.feature >> eclipse
+features/org.eclipse.xtend.swtbot.tests.feature >> eclipse
+features/org.eclipse.xtend.tests.feature >> eclipse
+features/org.eclipse.xtext.build.feature >> eclipse
+features/org.eclipse.xtext.docs.feature >> eclipse
+features/org.eclipse.xtext.examples.feature >> eclipse
+features/org.eclipse.xtext.gwt.feature >> eclipse
+features/org.eclipse.xtext.license.feature >> eclipse
+features/org.eclipse.xtext.m2e.feature >> eclipse
+features/org.eclipse.xtext.redist.feature >> eclipse
+features/org.eclipse.xtext.runtime.feature >> eclipse
+features/org.eclipse.xtext.sdk.feature >> eclipse
+features/org.eclipse.xtext.site.feature >> eclipse
+features/org.eclipse.xtext.tests.feature >> eclipse
+features/org.eclipse.xtext.ui.feature >> eclipse
+features/org.eclipse.xtext.xbase.feature >> eclipse
+features/org.eclipse.xtext.xbase.lib.feature >> eclipse
+features/org.eclipse.xtext.xtend2.m2e.feature >> eclipse
+features/org.eclipse.xtext.xtend2.sdk.feature >> eclipse
+features/org.eclipse.xtext.xtext.ui.feature >> eclipse
+
+
 releng >> eclipse
+
 docs/gen_toc.jar >> eclipse
 docs/org.eclipse.xtext.doc >> eclipse
 docs/org.eclipse.xtext.doc.xdoc >> eclipse
@@ -164,8 +192,63 @@ tests/org.eclipse.xtext.xtext.ui.graph.tests >> eclipse
 tests/org.eclipse.xtext.xtext.ui.tests >> eclipse
 separate-builds/eclipse >> eclipse
 
-intellij >> idea
 separate-builds/idea >> idea
+intellij/intellij-dependencies >> idea
+intellij/org.eclipse.xtend.idea >> idea
+intellij/org.eclipse.xtend.idea.tests >> idea
+intellij/org.eclipse.xtext.core.idea.tests >> idea
+intellij/org.eclipse.xtext.idea >> idea
+intellij/org.eclipse.xtext.idea.all >> idea
+intellij/org.eclipse.xtext.idea.builder >> idea
+intellij/org.eclipse.xtext.idea.builder.tests >> idea
+intellij/org.eclipse.xtext.idea.common.types.RefactoringTestLanguage >> idea
+intellij/org.eclipse.xtext.idea.common.types.tests >> idea
+intellij/org.eclipse.xtext.idea.example.entities >> idea
+intellij/org.eclipse.xtext.idea.example.entities.ide >> idea
+intellij/org.eclipse.xtext.idea.example.entities.idea >> idea
+intellij/org.eclipse.xtext.idea.example.entities.tests >> idea
+intellij/org.eclipse.xtext.idea.example.entities.ui >> idea
+intellij/org.eclipse.xtext.idea.generator >> idea, eclipse
+intellij/org.eclipse.xtext.idea.junit >> idea
+intellij/org.eclipse.xtext.idea.sdomain >> idea
+intellij/org.eclipse.xtext.idea.sdomain.idea >> idea
+intellij/org.eclipse.xtext.idea.sdomain.idea.tests >> idea
+intellij/org.eclipse.xtext.idea.sdomain.tests >> idea
+intellij/org.eclipse.xtext.idea.sdomain.ui >> idea
+intellij/org.eclipse.xtext.idea.tests >> idea
+intellij/org.eclipse.xtext.purexbase.idea >> idea
+intellij/org.eclipse.xtext.testlanguages.idea >> idea
+intellij/org.eclipse.xtext.xbase.idea >> idea
+intellij/org.eclipse.xtext.xbase.idea.tests >> idea
+intellij/org.eclipse.xtext.xtex.idea >> idea
+intellij/org.eclipse.xtext.xtext.idea >> idea
+intellij/org.eclipse.xtext.xtext.idea.tests >> idea
+intellij/org.xtext.idea >> idea
+intellij/org.xtext.idea.all >> idea
+intellij/org.xtext.idea.builder >> idea
+intellij/org.xtext.idea.generator >> idea
+intellij/org.xtext.idea.sdomain >> idea
+intellij/org.xtext.idea.sdomain.idea >> idea
+intellij/org.xtext.idea.sdomain.idea.tests >> idea
+intellij/org.xtext.idea.sdomain.tests >> idea
+intellij/org.xtext.idea.sdomain.ui >> idea
+intellij/refresh-gradle-dependencies-idea.launch >> idea
+intellij/refresh-gradle-dependencies.launch >> idea
+intellij/debug.idea.launch >> idea
+intellij/.project >> idea
+intellij/.settings >> idea
+intellij/buildSrc >> idea
+intellij/gradle >> idea
+intellij/gradle.ant >> idea
+intellij/updatePlugins.xml >> idea
+intellij/org.eclipse.xtext.idea.plugin >> idea
+intellij/PsiViewer__1_.jar >> delete
+intellij/prepareIntellij.gradle >> idea
+intellij/.gitignore >> idea
+intellij/build.gradle >> idea
+intellij/gradlew >> idea
+intellij/gradlew.bat >> idea
+intellij/settings.gradle >> idea
 
 web >> web
 separate-builds/web >> web
@@ -182,8 +265,8 @@ maven/org.eclipse.xtext.ide >> maven
 maven/org.eclipse.xtext.maven.plugin >> maven
 maven/org.eclipse.xtext.parent >> maven
 maven/org.eclipse.xtext.standalone.parent >> maven
-maven/org.eclipse.xtext.target >> maven
-maven/org.eclipse.xtext.tycho.parent >> maven
+maven/org.eclipse.xtext.target >> maven, eclipse, xtend
+maven/org.eclipse.xtext.tycho.parent >> maven, eclipse, xtend
 maven/org.eclipse.xtext.tycho.tests.parent >> maven
 maven/org.eclipse.xtext.xbase >> maven
 maven/org.eclipse.xtext.xtext >> maven
