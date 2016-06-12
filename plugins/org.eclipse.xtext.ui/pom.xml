@@ -8,15 +8,6 @@
 		<relativePath>../../maven/org.eclipse.xtext.tycho.parent</relativePath>
 	</parent>
 	<packaging>eclipse-plugin</packaging>
-
 	<artifactId>org.eclipse.xtext.ui</artifactId>
-	<name>Xtext UI</name>
 
-	<dependencies>
-		<dependency>
-			<groupId>org.eclipse.xtext</groupId>
-			<artifactId>org.eclipse.xtext</artifactId>
-			<version>[${project.version}]</version>
-		</dependency>
-	</dependencies>
 </project>

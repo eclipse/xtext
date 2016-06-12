@@ -8,7 +8,6 @@
 		<relativePath>../../maven/org.eclipse.xtext.tycho.parent</relativePath>
 	</parent>
 	<packaging>eclipse-plugin</packaging>
-
 	<artifactId>org.eclipse.xtext.ui.codetemplates</artifactId>
-	<name>Xtext UI Codetemplates</name>
+
 </project>

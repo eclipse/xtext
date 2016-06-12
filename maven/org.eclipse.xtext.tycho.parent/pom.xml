@@ -1,82 +1,182 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<parent>
-		<groupId>org.eclipse.xtext</groupId>
-		<artifactId>org.eclipse.xtext.parent</artifactId>
-		<version>2.11.0-SNAPSHOT</version>
-		<relativePath>../org.eclipse.xtext.parent</relativePath>
-	</parent>
 	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>org.eclipse.xtext</groupId>
 	<artifactId>org.eclipse.xtext.tycho.parent</artifactId>
-	<name>Xtext Eclipse plugins parent</name>
+	<version>2.11.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
-	<modules>
-		<module>../org.eclipse.xtext.target</module>
+	<properties>
+		<mavenVersion>3.2.5</mavenVersion>
+		<tycho-version>0.25.0</tycho-version>
+		<emf.version>(2.8,3.0)</emf.version>
+		<mwe2-version>2.8.3</mwe2-version>
+		<mwe-version>1.3.13</mwe-version>
+		<xpand-version>2.0.0</xpand-version>
 
-		<module>../../plugins/org.eclipse.xtext.xbase.lib</module>
-		<module>../../plugins/org.eclipse.xtend.lib</module>
-		<module>../../plugins/org.eclipse.xtend.lib.macro</module>
+		<maven-install-version>2.5.1</maven-install-version>
+		<jar-plugin-version>2.4</jar-plugin-version>
+		<asm.version>5.0.1</asm.version>
+		<guava.version>[14.0,19.0)</guava.version>
+		<javax-inject.version>1</javax-inject.version>
+		<google-inject.version>3.0</google-inject.version>
+		<log4j.version>1.2.16</log4j.version>
+		<commons-logging.version>1.1.3</commons-logging.version>
+		<commons-cli.version>1.2</commons-cli.version>
+		<equinox-common-version>3.6.0</equinox-common-version>
+		<jdt-core-version>3.10.0</jdt-core-version>
+		<icu4j.version>52.1</icu4j.version>
+		<antlr.version>[3.2, 3.3)</antlr.version>
+		<antlr-generator-version>[2.1.1, 3.0)</antlr-generator-version>
+		<junit-version>4.8.1</junit-version>
+		<cbi-plugins.version>1.1.3</cbi-plugins.version>
 
-		<module>../../plugins/org.eclipse.xtext.util</module>
-		<module>../../plugins/org.eclipse.xtext.smap</module>
+		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>ISO-8859-1</project.reporting.outputEncoding>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<maven.javadoc.failOnError>false</maven.javadoc.failOnError>
+		<sign.skip>true</sign.skip>
+	</properties>
 
-		<module>../../plugins/org.eclipse.xtext</module>
-		<module>../../plugins/org.eclipse.xtext.ide</module>
-		<module>../../plugins/org.eclipse.xtext.java</module>
+	<scm>
+		<connection>scm:git:git://github.com/eclipse/xtext.git</connection>
+		<developerConnection>scm:git:ssh://git@github.com:eclipse/xtext.git</developerConnection>
+		<url>https://github.com/eclipse/xtext.git</url>
+	</scm>
 
-		<module>../../plugins/org.eclipse.xtext.common.types</module>
-		<module>../../plugins/org.eclipse.xtext.ecore</module>
-		<module>../../plugins/org.eclipse.xtext.generator</module>
-		<module>../../plugins/org.eclipse.xtext.xtext.generator</module>
-		<module>../../plugins/org.eclipse.xtext.xtext.wizard</module>
-		<module>../../plugins/org.eclipse.xtext.xbase</module>
-		<module>../../plugins/org.eclipse.xtext.xbase.ide</module>
-		<module>../../plugins/org.eclipse.xtext.junit4</module>
+	<repositories>
+		<repository>
+			<id>source for lsapi</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots/</url> <!-- for lsapi -->
+		</repository>
+	</repositories>
 
-		<!-- new deps from xbase.junit -->
-		<module>../../plugins/org.eclipse.xtext.builder</module>
-		<module>../../plugins/org.eclipse.xtext.ui</module>
-		<module>../../plugins/org.eclipse.xtext.xbase.ui</module>
-		<module>../../plugins/org.eclipse.xtext.common.types.ui</module>
-		<module>../../plugins/org.eclipse.xtext.ui.codetemplates</module>
-		<module>../../plugins/org.eclipse.xtext.ui.codetemplates.ui</module>
-		<module>../../plugins/org.eclipse.xtext.ui.shared</module>
-		<module>../../plugins/org.eclipse.xtext.common.types.edit</module>
-
-		<module>../../plugins/org.eclipse.xtext.xbase.junit</module>
-		<module>../../plugins/org.eclipse.xtend.core</module>
-		<module>../../plugins/org.eclipse.xtend.ide.common</module>
-
-		<module>../../plugins/org.eclipse.xtext.builder.standalone</module>
-		<module>../../plugins/org.eclipse.xtext.xbase.lib.gwt</module>
-		<module>../../plugins/org.eclipse.xtend.lib.gwt</module>
-	</modules>
-
-	<profiles>
-		<profile>
-			<id>include-unpublished</id>
-			<modules>
-				<module>../../intellij/org.eclipse.xtext.idea.example.entities</module>
-				<module>../../intellij/org.eclipse.xtext.idea.example.entities.ide</module>
-				<module>../../intellij/org.eclipse.xtext.idea.example.entities.ui</module>
-				<module>../../intellij/org.eclipse.xtext.idea.sdomain</module>
-				<module>../../intellij/org.eclipse.xtext.idea.sdomain.ui</module>
-				<module>../../intellij/org.eclipse.xtext.idea.sdomain.tests</module>
-				<module>../../tests/org.eclipse.xtext.testlanguages</module>
-				<module>../../tests/org.eclipse.xtext.testlanguages.ide</module>
-				<module>../../tests/org.eclipse.xtend.core.tests</module>
-				<module>../../tests/org.eclipse.xtext.tests</module>
-				<module>../../tests/org.eclipse.xtext.common.types.tests</module>
-				<module>../../plugins/org.eclipse.xtext.purexbase</module>
-				<module>../../tests/org.eclipse.xtext.xbase.tests</module>
-				<module>../../tests/org.eclipse.xtext.xbase.testlanguages</module>
-				<module>../../tests/org.eclipse.xtext.xbase.testlanguages.ui</module>
-				<module>../../web/org.eclipse.xtext.web.example.statemachine</module>
-				<module>../../web/org.eclipse.xtext.web.example.statemachine.ide</module>
-			</modules>
-		</profile>
-	</profiles>
+	<dependencies>
+		<dependency>
+			<groupId>io.typefox.lsapi</groupId>
+			<artifactId>io.typefox.lsapi.services</artifactId>
+			<version>0.2.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.xtend</groupId>
+			<artifactId>org.eclipse.xtend.lib</artifactId>
+			<version>2.11.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.xtend</groupId>
+			<artifactId>org.eclipse.xtend.lib.gwt</artifactId>
+			<version>2.11.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.xtend</groupId>
+			<artifactId>org.eclipse.xtend.lib.macro</artifactId>
+			<version>2.11.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.xtend</groupId>
+			<artifactId>org.eclipse.xtend2.lib</artifactId>
+			<version>2.11.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext.xbase.lib</artifactId>
+			<version>2.11.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext.xbase.lib.gwt</artifactId>
+			<version>2.11.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext</artifactId>
+			<version>2.11.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext.ide</artifactId>
+			<version>2.11.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext.smap</artifactId>
+			<version>2.11.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext.util</artifactId>
+			<version>2.11.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext.xtext.generator</artifactId>
+			<version>2.11.0-SNAPSHOT</version>
+			<exclusions>
+				<exclusion>
+					<!-- TODO: this should not be necessary -->
+					<groupId>org.eclipse.emf</groupId>
+					<artifactId>org.eclipse.emf.mwe2.lib</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext.xtext.wizard</artifactId>
+			<version>2.11.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext.builder.standalone</artifactId>
+			<version>2.11.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext.common.types</artifactId>
+			<version>2.11.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext.ecore</artifactId>
+			<version>2.11.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext.generator</artifactId>
+			<version>2.11.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext.java</artifactId>
+			<version>2.11.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext.purexbase</artifactId>
+			<version>2.11.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext.testlanguages</artifactId>
+			<version>2.11.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext.testlanguages.ide</artifactId>
+			<version>2.11.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext.xbase</artifactId>
+			<version>2.11.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext.xbase.ide</artifactId>
+			<version>2.11.0-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
 
 	<build>
 		<plugins>
@@ -96,20 +196,20 @@
 						<excludeResource>**/*.xtendbin</excludeResource>
 						<excludeResource>**/*._trace</excludeResource>
 					</excludeResources>
-					</configuration>
-					<dependencies>
-						<dependency>
-							<groupId>org.eclipse.tycho</groupId>
-							<artifactId>tycho-compiler-jdt</artifactId>
-							<version>${tycho-version}</version>
-							<exclusions>
-								<exclusion>
-									<groupId>org.eclipse.tycho</groupId>
-									<artifactId>org.eclipse.jdt.compiler.apt</artifactId>
-								</exclusion>
-							</exclusions>
-						</dependency>
-					</dependencies>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>org.eclipse.tycho</groupId>
+						<artifactId>tycho-compiler-jdt</artifactId>
+						<version>${tycho-version}</version>
+						<exclusions>
+							<exclusion>
+								<groupId>org.eclipse.tycho</groupId>
+								<artifactId>org.eclipse.jdt.compiler.apt</artifactId>
+							</exclusion>
+						</exclusions>
+					</dependency>
+				</dependencies>
 			</plugin>
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
@@ -121,12 +221,12 @@
 				<artifactId>target-platform-configuration</artifactId>
 				<version>${tycho-version}</version>
 				<configuration>
+					<pomDependencies>consider</pomDependencies>
 					<target>
 						<artifact>
 							<groupId>org.eclipse.xtext</groupId>
 							<artifactId>org.eclipse.xtext.target</artifactId>
 							<version>${project.parent.version}</version>
-							<!-- Uses artifactId+.target by default -->
 						</artifact>
 					</target>
 					<environments>
@@ -156,63 +256,73 @@
 					<format>'v'yyyyMMdd-HHmm</format>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-source-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<executions>
+					<execution>
+						<id>plugin-source</id>
+						<goals>
+							<goal>plugin-source</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.tycho.extras</groupId>
+				<artifactId>tycho-source-feature-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<executions>
+					<execution>
+						<id>source-feature</id>
+						<phase>package</phase>
+						<goals>
+							<goal>source-feature</goal>
+						</goals>
+						<configuration>
+							<excludes>
+								<plugin id="org.eclipse.xtext.xbase.lib" />
+								<plugin id="org.eclipse.xtext.xbase.lib.gwt" />
+								<plugin id="org.eclipse.xtext" />
+								<plugin id="org.eclipse.xtext.generator" />
+								<plugin id="org.eclipse.xtext.xtext.generator" />
+								<plugin id="org.eclipse.xtext.util" />
+								<plugin id="org.eclipse.xtext.logging" />
+								<plugin id="org.eclipse.xtext.common.types" />
+								<plugin id="org.eclipse.xtext.builder" />
+								<plugin id="org.eclipse.xtext.ecore" />
+								<plugin id="org.eclipse.xtext.smap" />
+								<plugin id="org.eclipse.xtext.xtext.wizard" />
+								<plugin id="org.eclipse.xtext.builder.standalone" />
+								<plugin id="org.eclipse.xtext.java" />
+								<plugin id="org.eclipse.xtext.ide" />
+								<plugin id="org.antlr.runtime" />
+								<plugin id="org.apache.log4j" />
+								<plugin id="org.apache.commons.lang" />
+								<plugin id="org.eclipse.xtext.doc" />
+								<plugin id="org.eclipse.xtext.xbase" />
+								<plugin id="org.eclipse.xtext.xbase.ide" />
+								<plugin id="org.eclipse.xtext.purexbase" />
+								<plugin id="org.eclipse.xtend.lib" />
+								<plugin id="org.eclipse.xtend.lib.macro" />
+								<plugin id="org.eclipse.xtend2.lib" />
+								<plugin id="org.eclipse.xtend.examples" />
+								<plugin id="org.eclipse.xtend.doc" />
+								<plugin id="org.eclipse.xtend.lib.gwt" />
+								<feature id="org.eclipse.xtext.runtime" />
+								<feature id="org.eclipse.xtext.xbase.lib" />
+								<feature id="org.eclipse.xtext.xbase" />
+								<feature id="org.eclipse.xtext.ui" />
+								<feature id="org.eclipse.xtext.examples" />
+								<feature id="org.eclipse.xtext.docs" />
+								<feature id="org.eclipse.xtext.xtext.ui" />
+								<feature id="org.eclipse.xtext.gwt" />
+							</excludes>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
-		<pluginManagement>
-			<plugins>
-				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
-				<plugin>
-					<groupId>org.eclipse.m2e</groupId>
-					<artifactId>lifecycle-mapping</artifactId>
-					<version>1.0.0</version>
-					<configuration>
-						<lifecycleMappingMetadata>
-							<pluginExecutions>
-								<pluginExecution>
-									<pluginExecutionFilter>
-										<groupId>
-											org.eclipse.tycho
-										</groupId>
-										<artifactId>
-											tycho-compiler-plugin
-										</artifactId>
-										<versionRange>
-											[0.22.0,)
-										</versionRange>
-										<goals>
-											<goal>compile</goal>
-										</goals>
-									</pluginExecutionFilter>
-									<action>
-										<ignore></ignore>
-									</action>
-								</pluginExecution>
-								<pluginExecution>
-									<pluginExecutionFilter>
-										<groupId>
-											org.eclipse.tycho
-										</groupId>
-										<artifactId>
-											tycho-packaging-plugin
-										</artifactId>
-										<versionRange>
-											[0.22.0,)
-										</versionRange>
-										<goals>
-											<goal>
-												validate-version
-											</goal>
-											<goal>validate-id</goal>
-										</goals>
-									</pluginExecutionFilter>
-									<action>
-										<ignore></ignore>
-									</action>
-								</pluginExecution>
-							</pluginExecutions>
-						</lifecycleMappingMetadata>
-					</configuration>
-				</plugin>
-			</plugins>
-		</pluginManagement>
 	</build>
 </project>
