@@ -33,26 +33,13 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
          id="org.eclipse.xtext.xbase.lib"
          version="0.0.0"/>
 
-   <includes
-         id="org.eclipse.xtext.xbase.lib.source"
-         version="0.0.0"/>
-
    <requires>
       <import plugin="com.google.guava"/>
-      <import plugin="com.google.guava.source"/>
       <import plugin="org.apache.commons.lang"/>
-      <import plugin="org.apache.commons.lang.source"/>
    </requires>
 
    <plugin
          id="org.eclipse.xtend.core"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.xtend.core.source"
          download-size="0"
          install-size="0"
          version="0.0.0"
@@ -66,21 +53,7 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
          unpack="false"/>
 
    <plugin
-         id="org.eclipse.xtend.ide.common.source"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="org.eclipse.xtend.lib"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.xtend.lib.source"
          download-size="0"
          install-size="0"
          version="0.0.0"
@@ -94,13 +67,6 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
          unpack="false"/>
 
    <plugin
-         id="org.eclipse.xtend.lib.macro.source"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="org.eclipse.xtend2.lib"
          download-size="0"
          install-size="0"
@@ -108,21 +74,7 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
          unpack="false"/>
 
    <plugin
-         id="org.eclipse.xtend2.lib.source"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="org.eclipse.xtend.ide"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.xtend.ide.source"
          download-size="0"
          install-size="0"
          version="0.0.0"
@@ -151,13 +103,6 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
 
    <plugin
          id="org.eclipse.xtend.standalone"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.xtend.standalone.source"
          download-size="0"
          install-size="0"
          version="0.0.0"
