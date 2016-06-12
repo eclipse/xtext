@@ -7,13 +7,13 @@
  */
 package org.eclipse.xtext.ide.tests.server;
 
-import org.eclipse.xtext.ide.tests.server.AbstractLanguageServerTest;
+import org.eclipse.xtext.testing.AbstractLanguageServerTest;
 
 /**
- * @author kosyakov - Initial contribution and API
+ * @author akosyakov - Initial contribution and API
  */
 @SuppressWarnings("all")
-public abstract class AbstractTestLangLanguageServerTest extends AbstractLanguageServerTest {
+public class AbstractTestLangLanguageServerTest extends AbstractLanguageServerTest {
   public AbstractTestLangLanguageServerTest() {
     super("testlang");
   }

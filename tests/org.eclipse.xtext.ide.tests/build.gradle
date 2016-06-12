@@ -1,8 +1,10 @@
 dependencies {
 	compile project(':org.eclipse.xtext.ide')
+	compile project(':org.eclipse.xtext.testing')
+	compile project(':org.eclipse.xtext.xtext.generator')
 	compile "io.typefox.lsapi:io.typefox.lsapi.services:$versions.lsapi"
 	compile 'junit:junit:4.12'
 }
 
-sourceSets.test.java.srcDirs += ['testlang-src', 'testlang-src-gen']
+sourceSets.test.java.srcDirs = ['testlang-src', 'testlang-src-gen'] + sourceSets.test.java.srcDirs
 sourceSets.test.resources.srcDirs += ['testlang-src', 'testlang-src-gen']

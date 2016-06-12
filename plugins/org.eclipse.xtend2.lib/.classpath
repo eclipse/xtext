@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry excluding="bin|src|xtend-gen|src-gen|emf-gen|build|target|build.properties" including="plugin.xml|schema/**|model/**|about.ini|about.mappings|about.properties|about.html|**/*.properties|**/*.xtextbin|**/*.xmi|**/*.g|**/*.tokens" kind="src" path="">
+		<attributes>
+			<attribute name="FROM_GRADLE_MODEL" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry kind="src" path="/org.eclipse.xtend.lib"/>
+	<classpathentry kind="src" path="/org.eclipse.xtext.xbase.lib"/>
+	<classpathentry kind="src" path="/org.eclipse.xtend.lib.macro"/>
+	<classpathentry kind="lib" path="/Users/efftinge/.gradle/caches/modules-2/files-2.1/com.google.guava/guava/19.0-rc3/ffe5638f514e43ffb71163bbd453b1f9cc218426/guava-19.0-rc3.jar" sourcepath="/Users/efftinge/.gradle/caches/modules-2/files-2.1/com.google.guava/guava/19.0-rc3/e3daf900ba8410397da90dd768c9419ae2ab3812/guava-19.0-rc3-sources.jar"/>
+	<classpathentry kind="con" path="org.eclipse.buildship.core.gradleclasspathcontainer"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

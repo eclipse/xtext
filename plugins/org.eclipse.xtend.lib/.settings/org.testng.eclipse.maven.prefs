@@ -1,0 +1,5 @@
+eclipse.preferences.version=1
+org.testng.eclipse.maven.argline=true
+org.testng.eclipse.maven.environ=false
+org.testng.eclipse.maven.sysproperties=false
+userprojectsettings=false

@@ -9,7 +9,7 @@ package org.eclipse.xtext.ide.tests.server;
 
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.ide.tests.server.AbstractTestLangLanguageServerTest;
-import org.eclipse.xtext.ide.tests.server.TestCompletionConfiguration;
+import org.eclipse.xtext.testing.TestCompletionConfiguration;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Test;
 

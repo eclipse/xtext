@@ -18,3 +18,6 @@ rootProject.name = 'xtext-core'
     include projectName
     project(":$projectName").projectDir = file("../../tests/$projectName")
 }
+
+include 'org.eclipse.xtext.testing'
+project(':org.eclipse.xtext.testing').projectDir = file('./org.eclipse.xtext.testing')

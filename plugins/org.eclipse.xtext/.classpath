@@ -15,17 +15,17 @@
 			<attribute name="FROM_GRADLE_MODEL" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry excluding="emf-gen/|packrat/|src-gen/|src/|xtend-gen/" including="META-INF/|about.html|about.ini|about.mappings|about.properties|modeling32.png|plugin.xml|schema/" kind="src" path="">
-		<attributes>
-			<attribute name="FROM_GRADLE_MODEL" value="true"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="src" path="xtend-gen">
 		<attributes>
 			<attribute name="FROM_GRADLE_MODEL" value="true"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="packrat">
+		<attributes>
+			<attribute name="FROM_GRADLE_MODEL" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry excluding="bin/|build/|emf-gen/|packrat/|src-gen/|src/|target/|xtend-gen/" including="META-INF/|about.html|about.ini|about.mappings|about.properties|modeling32.png|plugin.xml|schema/" kind="src" path="">
 		<attributes>
 			<attribute name="FROM_GRADLE_MODEL" value="true"/>
 		</attributes>
