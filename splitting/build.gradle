@@ -70,3 +70,10 @@ task(allFilterBranch) {
 	description 'Runs the filter-branch tasks for all target repositories.'
     repositories.each { dependsOn("${it}FilterBranch") }
 }
+
+task pushToGithub(type: Exec) {
+	group 'Git History Manipulation'
+	description 'Force-Push all branches to TypeFox/xtext-splitted-repo on Github.'
+	workingDir '..'
+    commandLine 'git', 'push', '--all', '-f', 'https://xtext-repo-split@github.com/TypeFox/xtext-splitted-repo.git'
+}
