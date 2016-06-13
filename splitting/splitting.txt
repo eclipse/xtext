@@ -1,13 +1,24 @@
+splitting >> core, extras, lib, xtend, eclipse, idea, web, maven
+tests/org.eclipse.xtext.tests >> core, extras, eclipse
+tests/org.eclipse.xtext.common.types.test >> extras, eclipse
+tests/org.eclipse.xtext.common.types.tests >> extras, eclipse
+tests/org.eclipse.xtext.java.tests >> extras, eclipse
+tests/org.eclipse.xtext.purexbase.tests >> extras, eclipse
+intellij/org.eclipse.xtext.idea.example.entities >> idea, web
+intellij/org.eclipse.xtext.idea.example.entities.ide >> idea, web
+intellij/org.eclipse.xtext.idea.generator >> idea, eclipse
+maven/org.eclipse.xtext.parent >> maven, xtend
+maven/org.eclipse.xtext.target >> maven, eclipse, xtend
+maven/org.eclipse.xtext.tycho.parent >> maven, eclipse, xtend
+
+
 plugins/org.eclipse.xtext >> core
 plugins/org.eclipse.xtext.core >> core
 plugins/org.eclipse.xtext.ide >> core
 plugins/org.eclipse.xtext.util >> core
 plugins/org.eclipse.xtext.xtext.generator >> core
 plugins/org.eclipse.xtext.xtext.wizard >> core
-tests/org.eclipse.xtext.tests >> core, extras
 tests/org.eclipse.xtext.ide.tests >> core
-devtools/org.eclipse.xtext.bootstrap >> delete
-devtools/org.eclipse.xtext.contributor >> eclipse
 separate-builds/core >> core
 
 devtools/org.eclipse.xtext.language-generator >> extras
@@ -24,10 +35,6 @@ plugins/org.eclipse.xtext.smap >> extras
 plugins/org.eclipse.xtext.xbase >> extras
 plugins/org.eclipse.xtext.xbase.ide >> extras
 tests/org.eclipse.xtext.generator.tests >> extras
-tests/org.eclipse.xtext.common.types.test >> extras, eclipse
-tests/org.eclipse.xtext.common.types.tests >> extras, eclipse
-tests/org.eclipse.xtext.java.tests >> extras, eclipse
-tests/org.eclipse.xtext.purexbase.tests >> extras, eclipse
 tests/org.eclipse.xtext.testlanguages >> extras
 tests/org.eclipse.xtext.testlanguages.ide >> extras
 tests/org.eclipse.xtext.testlanguages.tests >> extras
@@ -97,7 +104,23 @@ features/org.eclipse.xtend.sdk.feature >> xtend
 website-xtend >> xtend
 xtend-website >> xtend
 xtend.website.generator >> xtend
+maven/org.eclipse.xtend.core >> xtend
+maven/org.eclipse.xtend.ide.common >> xtend
+maven/org.eclipse.xtend.maven.android.archetype >> xtend
+maven/org.eclipse.xtend.maven.archetype >> xtend
+maven/org.eclipse.xtend.maven.plugin >> xtend
+plugins/org.eclipse.xtend.maven.plugin >> xtend
+plugins/org.eclipse.xtend.standalone.maven >> xtend
+plugins/org.eclipse.xtend2.lib.maven >> xtend
+plugins/org.eclipse.xtend2.maven.plugin >> xtend
+plugins/org.eclipse.xtend2.standalone.maven >> xtend
+plugins/org.eclipse.xtext.xtend2.maven >> xtend
+plugins/org.eclipse.xtext.xtend2.standalone >> xtend
+plugins/org.eclipse.xtext.xtend2.standalone.maven >> xtend
 
+
+releng >> eclipse
+devtools/org.eclipse.xtext.contributor >> eclipse
 features/org.eclipse.emf.index.feature >> eclipse
 features/org.eclipse.xtend.build.feature >> eclipse
 features/org.eclipse.xtend.feature >> eclipse
@@ -121,10 +144,6 @@ features/org.eclipse.xtext.xbase.lib.feature >> eclipse
 features/org.eclipse.xtext.xtend2.m2e.feature >> eclipse
 features/org.eclipse.xtext.xtend2.sdk.feature >> eclipse
 features/org.eclipse.xtext.xtext.ui.feature >> eclipse
-
-
-releng >> eclipse
-
 docs/gen_toc.jar >> eclipse
 docs/org.eclipse.xtext.doc >> eclipse
 docs/org.eclipse.xtext.doc.xdoc >> eclipse
@@ -205,12 +224,9 @@ intellij/org.eclipse.xtext.idea.builder >> idea
 intellij/org.eclipse.xtext.idea.builder.tests >> idea
 intellij/org.eclipse.xtext.idea.common.types.RefactoringTestLanguage >> idea
 intellij/org.eclipse.xtext.idea.common.types.tests >> idea
-intellij/org.eclipse.xtext.idea.example.entities >> idea, web
-intellij/org.eclipse.xtext.idea.example.entities.ide >> idea, web
 intellij/org.eclipse.xtext.idea.example.entities.idea >> idea
 intellij/org.eclipse.xtext.idea.example.entities.tests >> idea
 intellij/org.eclipse.xtext.idea.example.entities.ui >> idea
-intellij/org.eclipse.xtext.idea.generator >> idea, eclipse
 intellij/org.eclipse.xtext.idea.junit >> idea
 intellij/org.eclipse.xtext.idea.sdomain >> idea
 intellij/org.eclipse.xtext.idea.sdomain.idea >> idea
@@ -255,33 +271,17 @@ intellij/settings.gradle >> idea
 web >> web
 separate-builds/web >> web
 
-maven/org.eclipse.xtend.core >> xtend
-maven/org.eclipse.xtend.ide.common >> xtend
-maven/org.eclipse.xtend.maven.android.archetype >> xtend
-maven/org.eclipse.xtend.maven.archetype >> xtend
-maven/org.eclipse.xtend.maven.plugin >> xtend
 maven/org.eclipse.xtext >> maven
 maven/org.eclipse.xtext.common.types >> maven
 maven/org.eclipse.xtext.dependencies >> maven
 maven/org.eclipse.xtext.ide >> maven
 maven/org.eclipse.xtext.maven.plugin >> maven
-maven/org.eclipse.xtext.parent >> maven, xtend
 maven/org.eclipse.xtext.standalone.parent >> maven
-maven/org.eclipse.xtext.target >> maven, eclipse, xtend
-maven/org.eclipse.xtext.tycho.parent >> maven, eclipse, xtend
 maven/org.eclipse.xtext.tycho.tests.parent >> maven
 maven/org.eclipse.xtext.xbase >> maven
 maven/org.eclipse.xtext.xtext >> maven
-plugins/org.eclipse.xtend.maven.plugin >> xtend
-plugins/org.eclipse.xtend.standalone.maven >> xtend
-plugins/org.eclipse.xtend2.lib.maven >> xtend
-plugins/org.eclipse.xtend2.maven.plugin >> xtend
-plugins/org.eclipse.xtend2.standalone.maven >> xtend
 plugins/org.eclipse.xtext.maven.plugin >> maven
 plugins/org.eclipse.xtext.standalone.maven >> maven
-plugins/org.eclipse.xtext.xtend2.maven >> xtend
-plugins/org.eclipse.xtext.xtend2.standalone >> xtend
-plugins/org.eclipse.xtext.xtend2.standalone.maven >> xtend
 separate-builds/maven >> maven
 
 .DS_Store >> delete
@@ -332,7 +332,6 @@ plugins/org.eclipse.emf.index >> delete
 plugins/org.eclipse.emf.index.ui >> delete
 plugins/org.eclipse.xtext.doc.manual >> delete
 settings.gradle >> delete
-splitting >> core, extras, lib, xtend, eclipse, idea, web, maven
 separate-builds/.project >> delete
 test.txt >> delete
 tests/.settings >> delete
@@ -342,3 +341,4 @@ tests/org.eclipse.emf.index.ui.tests >> delete
 website >> delete
 xtext-website >> delete
 xtext.website.generator >> delete
+devtools/org.eclipse.xtext.bootstrap >> delete
