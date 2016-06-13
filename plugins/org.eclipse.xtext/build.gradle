@@ -1,6 +1,5 @@
 dependencies {
 	compile project(':org.eclipse.xtext.util')
-	compile project(':org.eclipse.xtext.smap') // TODO eliminate dependency
 	compile "org.eclipse.xtend:org.eclipse.xtend.lib:$versions.xtext"
     compile "log4j:log4j:$versions.log4j"
 	compile "org.eclipse.equinox:org.eclipse.equinox.common:$versions.equinoxCommon"
