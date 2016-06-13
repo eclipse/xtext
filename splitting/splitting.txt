@@ -1,4 +1,7 @@
 splitting >> core, extras, lib, xtend, eclipse, idea, web, maven
+tests/org.eclipse.xtext.testlanguages >> core, extras
+tests/org.eclipse.xtext.testlanguages.ide >> core, extras
+tests/org.eclipse.xtext.testlanguages.tests >> core, extras
 tests/org.eclipse.xtext.tests >> core, extras, eclipse
 tests/org.eclipse.xtext.common.types.test >> extras, eclipse
 tests/org.eclipse.xtext.common.types.tests >> extras, eclipse
@@ -13,15 +16,11 @@ maven/org.eclipse.xtext.tycho.parent >> eclipse, xtend
 maven/org.eclipse.xtext.tycho.tests.parent >> eclipse, xtend
 
 plugins/org.eclipse.xtext >> core
-plugins/org.eclipse.xtext.core >> core
 plugins/org.eclipse.xtext.ide >> core
 plugins/org.eclipse.xtext.util >> core
 plugins/org.eclipse.xtext.xtext.generator >> core
 plugins/org.eclipse.xtext.xtext.wizard >> core
 tests/org.eclipse.xtext.ide.tests >> core
-tests/org.eclipse.xtext.testlanguages >> core
-tests/org.eclipse.xtext.testlanguages.ide >> core
-tests/org.eclipse.xtext.testlanguages.tests >> core
 separate-builds/core >> core
 
 plugins/org.eclipse.xtext.builder.standalone >> extras
@@ -298,6 +297,7 @@ maven/org.eclipse.xtext.ide >> delete
 maven/org.eclipse.xtext.standalone.parent >> delete
 maven/org.eclipse.xtext.xbase >> delete
 
+plugins/org.eclipse.xtext.core >> delete
 plugins/org.eclipse.xtext.maven.plugin >> delete
 plugins/org.eclipse.xtext.standalone.maven >> delete
 plugins/.settings >> delete
