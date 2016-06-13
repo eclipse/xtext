@@ -56,7 +56,6 @@ examples/org.eclipse.xtend.examples/.settings >> xtend
 examples/org.eclipse.xtend.examples/META-INF >> xtend
 examples/org.eclipse.xtend.examples/about.html >> xtend
 examples/org.eclipse.xtend.examples/build.properties >> xtend
-examples/org.eclipse.xtend.examples/contents >> xtend
 examples/org.eclipse.xtend.examples/icons >> xtend
 examples/org.eclipse.xtend.examples/plugin.properties >> xtend
 examples/org.eclipse.xtend.examples/plugin.xml >> xtend
@@ -474,7 +473,6 @@ releng/.project >> delete
 releng/.settings >> delete
 releng/LOCAL_WORKSPACE_SETUP.txt >> delete
 releng/META-INF >> delete
-releng/MOVED_TO_org.eclipse.xtext.releng >> delete
 releng/build-local-macosx.properties >> delete
 releng/build-local.properties >> delete
 releng/build.properties >> delete
