@@ -1,0 +1,4 @@
+dependencies {
+	compile project(':org.eclipse.xtext.xbase')
+	compile project(':org.eclipse.xtext.common.types')
+}
