@@ -75,6 +75,8 @@ plugins/org.eclipse.xtext.xtend2.bootstrapdoc >> xtend
 plugins/org.eclipse.xtext.xtend2.doc >> xtend
 plugins/org.eclipse.xtext.xtend2.m2e >> xtend
 plugins/org.eclipse.xtext.xtend2.ui >> xtend
+intellij/org.eclipse.xtend.idea >> idea
+intellij/org.eclipse.xtend.idea.tests >> idea
 tests/org.eclipse.xtend.caliper.tests >> xtend
 tests/org.eclipse.xtend.core.tests >> xtend
 tests/org.eclipse.xtend.core.tests.java8 >> xtend
@@ -196,8 +198,6 @@ separate-builds/eclipse >> eclipse
 
 separate-builds/idea >> idea
 intellij/intellij-dependencies >> idea
-intellij/org.eclipse.xtend.idea >> idea
-intellij/org.eclipse.xtend.idea.tests >> idea
 intellij/org.eclipse.xtext.core.idea.tests >> idea
 intellij/org.eclipse.xtext.idea >> idea
 intellij/org.eclipse.xtext.idea.all >> idea
