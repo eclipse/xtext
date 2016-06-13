@@ -18,6 +18,11 @@ dependencies {
 
 sourceSets.main {
 	java.srcDir 'packrat'
-	resources.include 'org/**', 'modeling32.png'
 	resources.exclude 'packrat'
+}
+
+jar {
+    from('.') {
+        include 'org/**', 'modeling32.png'
+    }
 }
