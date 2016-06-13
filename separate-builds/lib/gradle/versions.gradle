@@ -2,5 +2,5 @@ version = '2.11.0-SNAPSHOT'
 
 ext.versions = [
 	'guava': '[14.0,19.0[',
-	'gwt': '2.6.1'
+	'gwt': '2.7.0'
 ]
