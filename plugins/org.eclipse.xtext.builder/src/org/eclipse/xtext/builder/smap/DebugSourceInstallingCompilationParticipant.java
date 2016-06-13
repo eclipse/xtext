@@ -33,7 +33,7 @@ import org.eclipse.xtext.generator.trace.ITrace;
 import org.eclipse.xtext.generator.trace.ITraceToBytecodeInstaller;
 import org.eclipse.xtext.generator.trace.SourceRelativeURI;
 import org.eclipse.xtext.generator.trace.TraceAsPrimarySourceInstaller;
-import org.eclipse.xtext.generator.trace.TraceAsSmapInstaller;
+import org.eclipse.xtext.smap.TraceAsSmapInstaller;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.generator.trace.AbstractEclipseTrace;

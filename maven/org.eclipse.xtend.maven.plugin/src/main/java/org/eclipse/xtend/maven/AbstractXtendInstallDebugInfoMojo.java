@@ -13,9 +13,9 @@ import java.util.Set;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
 import org.eclipse.xtext.generator.trace.ITraceToBytecodeInstaller;
 import org.eclipse.xtext.generator.trace.TraceAsPrimarySourceInstaller;
-import org.eclipse.xtext.generator.trace.TraceAsSmapInstaller;
 import org.eclipse.xtext.generator.trace.TraceFileNameProvider;
 import org.eclipse.xtext.generator.trace.TraceRegionSerializer;
+import org.eclipse.xtext.smap.TraceAsSmapInstaller;
 import org.eclipse.xtext.util.Strings;
 
 import com.google.common.collect.LinkedHashMultimap;

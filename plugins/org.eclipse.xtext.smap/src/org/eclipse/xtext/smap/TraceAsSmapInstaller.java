@@ -5,9 +5,9 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.generator.trace;
+package org.eclipse.xtext.smap;
 
-import static com.google.common.collect.Maps.*;
+import static com.google.common.collect.Maps.newHashMap;
 
 import java.io.IOException;
 import java.util.List;
@@ -15,11 +15,12 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.eclipse.xtext.LanguageInfo;
+import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
+import org.eclipse.xtext.generator.trace.ITraceToBytecodeInstaller;
+import org.eclipse.xtext.generator.trace.LineMappingProvider;
 import org.eclipse.xtext.generator.trace.LineMappingProvider.LineMapping;
+import org.eclipse.xtext.generator.trace.SourceRelativeURI;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
-import org.eclipse.xtext.smap.SDEInstaller;
-import org.eclipse.xtext.smap.SmapGenerator;
-import org.eclipse.xtext.smap.SmapStratum;
 
 import com.google.inject.Inject;
 
