@@ -42,9 +42,8 @@ import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.util.Files
 import org.eclipse.xtext.util.Modules2
+import org.junit.Assert
 import org.junit.Before
-
-import static org.junit.Assert.*
 
 import static extension io.typefox.lsapi.util.LsapiFactories.*
 
@@ -207,7 +206,7 @@ abstract class AbstractLanguageServerTest implements Consumer<PublishDiagnostics
         val actualCompletionItems = completionItems.get.items.toExpectation
         assertEquals(expectedCompletionItems, actualCompletionItems)
     }
-
+    
     protected def void testDefinition((DefinitionTestConfiguration)=>void configurator) {
         val extension configuration = new DefinitionTestConfiguration
         configuration.filePath = 'MyModel.' + fileExtension
@@ -281,6 +280,10 @@ abstract class AbstractLanguageServerTest implements Consumer<PublishDiagnostics
         val definitions = languageServer.references(newReferenceParams(fileUri, line, column, referenceContext))
         val actualDefinitions = definitions.get.toExpectation
         assertEquals(expectedReferences, actualDefinitions)
+    }
+    
+    def void assertEquals(String expected, String actual) {
+        Assert.assertEquals(expected.replace('\t','    '), actual)
     }
 
 }

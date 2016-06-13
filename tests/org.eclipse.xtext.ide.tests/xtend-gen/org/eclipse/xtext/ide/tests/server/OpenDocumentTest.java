@@ -46,7 +46,7 @@ public class OpenDocumentTest extends AbstractTestLangLanguageServerTest {
     List<? extends Diagnostic> _get = this.diagnostics.get(firstFile);
     Diagnostic _head = IterableExtensions.head(_get);
     String _message = _head.getMessage();
-    Assert.assertEquals("Couldn\'t resolve reference to TypeDeclaration \'NonExisting\'.", _message);
+    this.assertEquals("Couldn\'t resolve reference to TypeDeclaration \'NonExisting\'.", _message);
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("type Foo {");
     _builder_1.newLine();
@@ -60,7 +60,7 @@ public class OpenDocumentTest extends AbstractTestLangLanguageServerTest {
     List<? extends Diagnostic> _get_1 = this.diagnostics.get(firstFile);
     Diagnostic _head_1 = IterableExtensions.head(_get_1);
     String _message_1 = _head_1.getMessage();
-    Assert.assertEquals("Couldn\'t resolve reference to TypeDeclaration \'NonExisting\'.", _message_1);
+    this.assertEquals("Couldn\'t resolve reference to TypeDeclaration \'NonExisting\'.", _message_1);
     StringConcatenation _builder_2 = new StringConcatenation();
     _builder_2.append("type NonExisting {");
     _builder_2.newLine();
@@ -74,7 +74,7 @@ public class OpenDocumentTest extends AbstractTestLangLanguageServerTest {
     List<? extends Diagnostic> _get_3 = this.diagnostics.get(firstFile);
     Diagnostic _head_3 = IterableExtensions.head(_get_3);
     String _message_2 = _head_3.getMessage();
-    Assert.assertEquals("Couldn\'t resolve reference to TypeDeclaration \'NonExisting\'.", _message_2);
+    this.assertEquals("Couldn\'t resolve reference to TypeDeclaration \'NonExisting\'.", _message_2);
   }
   
   @Test
@@ -92,7 +92,7 @@ public class OpenDocumentTest extends AbstractTestLangLanguageServerTest {
     List<? extends Diagnostic> _get = this.diagnostics.get(firstFile);
     Diagnostic _head = IterableExtensions.head(_get);
     String _message = _head.getMessage();
-    Assert.assertEquals("Couldn\'t resolve reference to TypeDeclaration \'NonExisting\'.", _message);
+    this.assertEquals("Couldn\'t resolve reference to TypeDeclaration \'NonExisting\'.", _message);
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("type Test {");
     _builder_1.newLine();
@@ -105,7 +105,7 @@ public class OpenDocumentTest extends AbstractTestLangLanguageServerTest {
     List<? extends Diagnostic> _get_1 = this.diagnostics.get(firstFile);
     Diagnostic _head_1 = IterableExtensions.head(_get_1);
     String _message_1 = _head_1.getMessage();
-    Assert.assertEquals("Couldn\'t resolve reference to TypeDeclaration \'NonExisting\'.", _message_1);
+    this.assertEquals("Couldn\'t resolve reference to TypeDeclaration \'NonExisting\'.", _message_1);
     PositionImpl _newPosition = LsapiFactories.newPosition(1, 4);
     PositionImpl _newPosition_1 = LsapiFactories.newPosition(1, 15);
     RangeImpl _newRange = LsapiFactories.newRange(_newPosition, _newPosition_1);

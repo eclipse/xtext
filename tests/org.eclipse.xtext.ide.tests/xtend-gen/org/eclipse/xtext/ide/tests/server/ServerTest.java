@@ -74,7 +74,7 @@ public class ServerTest extends AbstractTestLangLanguageServerTest {
     if (_head_1!=null) {
       _message=_head_1.getMessage();
     }
-    Assert.assertEquals("Couldn\'t resolve reference to TypeDeclaration \'NonExisting\'.", _message);
+    this.assertEquals("Couldn\'t resolve reference to TypeDeclaration \'NonExisting\'.", _message);
     Collection<List<? extends Diagnostic>> _values_1 = this.diagnostics.values();
     List<? extends Diagnostic> _head_2 = IterableExtensions.<List<? extends Diagnostic>>head(_values_1);
     Diagnostic _head_3 = IterableExtensions.head(_head_2);
@@ -122,7 +122,7 @@ public class ServerTest extends AbstractTestLangLanguageServerTest {
     List<? extends Diagnostic> _head = IterableExtensions.<List<? extends Diagnostic>>head(_values);
     Diagnostic _head_1 = IterableExtensions.head(_head);
     String _message = _head_1.getMessage();
-    Assert.assertEquals("Couldn\'t resolve reference to TypeDeclaration \'NonExisting\'.", _message);
+    this.assertEquals("Couldn\'t resolve reference to TypeDeclaration \'NonExisting\'.", _message);
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("type NonExisting {");
     _builder_1.newLine();

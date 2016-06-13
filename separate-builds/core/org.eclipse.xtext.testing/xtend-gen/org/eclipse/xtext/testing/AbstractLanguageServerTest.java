@@ -397,7 +397,7 @@ public abstract class AbstractLanguageServerTest implements Consumer<PublishDiag
       List<? extends CompletionItem> _items = _get.getItems();
       final String actualCompletionItems = this.toExpectation(_items);
       String _expectedCompletionItems = configuration.getExpectedCompletionItems();
-      Assert.assertEquals(_expectedCompletionItems, actualCompletionItems);
+      this.assertEquals(_expectedCompletionItems, actualCompletionItems);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -422,7 +422,7 @@ public abstract class AbstractLanguageServerTest implements Consumer<PublishDiag
       List<? extends Location> _get = definitions.get();
       final String actualDefinitions = this.toExpectation(_get);
       String _expectedDefinitions = configuration.getExpectedDefinitions();
-      Assert.assertEquals(_expectedDefinitions, actualDefinitions);
+      this.assertEquals(_expectedDefinitions, actualDefinitions);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -447,7 +447,7 @@ public abstract class AbstractLanguageServerTest implements Consumer<PublishDiag
       Hover _get = hover.get();
       final String actualHover = this.toExpectation(_get);
       String _expectedHover = configuration.getExpectedHover();
-      Assert.assertEquals(_expectedHover, actualHover);
+      this.assertEquals(_expectedHover, actualHover);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -470,7 +470,7 @@ public abstract class AbstractLanguageServerTest implements Consumer<PublishDiag
       List<? extends SymbolInformation> _get = symbols.get();
       final String actualSymbols = this.toExpectation(_get);
       String _expectedSymbols = configuration.getExpectedSymbols();
-      Assert.assertEquals(_expectedSymbols, actualSymbols);
+      this.assertEquals(_expectedSymbols, actualSymbols);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -494,7 +494,7 @@ public abstract class AbstractLanguageServerTest implements Consumer<PublishDiag
       final List<? extends SymbolInformation> symbols = _symbol.get();
       final String actualSymbols = this.toExpectation(symbols);
       String _expectedSymbols = configuration.getExpectedSymbols();
-      Assert.assertEquals(_expectedSymbols, actualSymbols);
+      this.assertEquals(_expectedSymbols, actualSymbols);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -522,10 +522,15 @@ public abstract class AbstractLanguageServerTest implements Consumer<PublishDiag
       List<? extends Location> _get = definitions.get();
       final String actualDefinitions = this.toExpectation(_get);
       String _expectedReferences = configuration.getExpectedReferences();
-      Assert.assertEquals(_expectedReferences, actualDefinitions);
+      this.assertEquals(_expectedReferences, actualDefinitions);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  public void assertEquals(final String expected, final String actual) {
+    String _replace = expected.replace("\t", "    ");
+    Assert.assertEquals(_replace, actual);
   }
   
   protected String toExpectation(final Object elements) {
