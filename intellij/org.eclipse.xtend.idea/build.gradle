@@ -1,13 +1,15 @@
 dependencies {
-	compile project(":plugins:org.eclipse.xtend.ide.common")
+	compile project(":org.eclipse.xtend.ide.common")
+	compile project(":org.eclipse.xtext.idea") // TODO change to maven dep
 }
 
 ideaDevelopment {
 	pluginDependencies {
-		project ':intellij:org.eclipse.xtext.idea'
 		id 'junit' // id is Junit
 		id 'maven' // id is org.jetbrains.idea.maven
 		id 'gradle'// is is org.jetbrains.plugins.gradle
 		id 'Groovy'// id is org.intellij.groovy
+		
+		id 'org.eclipse.xtext.idea'
 	}
 }

@@ -1,0 +1,16 @@
+dependencies {
+	compile project(':org.eclipse.xtend.core')
+	compile "org.eclipse.xtext:org.eclipse.xtext.java:$versions.xtext"
+	compile "org.eclipse.xtext:org.eclipse.xtext.junit4:$versions.xtext"
+	compile "org.eclipse.xtext:org.eclipse.xtext.xbase.junit:$versions.xtext"
+}
+
+sourceSets {
+	main.java.srcDirs = ['src', 'xtend-gen', 'testdata']
+	main.resources.srcDirs = ['src', 'testdata']
+	test.java.srcDirs = ['suites']
+	test.resources.srcDirs = []
+}
+
+// The tests have to be executed as Eclipse plug-in tests, so disable them in the Gradle build
+test.enabled = false

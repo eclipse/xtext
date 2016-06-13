@@ -1,8 +1,7 @@
 dependencies {
-	testCompile project(':intellij:org.eclipse.xtext.idea.junit')
-	testCompile project(':tests:org.eclipse.xtend.core.tests')
+	compile project(':org.eclipse.xtend.core.tests')
+	compile project(':org.eclipse.xtext.idea.junit') // TODO change to maven dep
 }
-
 
 ideaDevelopment {
 	pluginDependencies {
@@ -12,7 +11,6 @@ ideaDevelopment {
 		id 'Groovy' // id is org.jetbrains.plugins.gradle
 		id 'properties'
 		
-		project ':intellij:org.eclipse.xtext.idea'
-		project ':intellij:org.eclipse.xtend.idea'
+		project ':org.eclipse.xtend.idea'
 	}
 }

@@ -1,0 +1,33 @@
+rootProject.name = 'xtext-xtend'
+
+[
+	'org.eclipse.xtend.idea',
+	'org.eclipse.xtend.idea.tests'
+].each { projectName ->
+	include projectName
+	project(":$projectName").projectDir = file("../../intellij/$projectName")
+}
+
+[
+	'org.eclipse.xtend.core',
+	'org.eclipse.xtend.ide.common'
+].each { projectName ->
+	include projectName
+	project(":$projectName").projectDir = file("../../plugins/$projectName")
+}
+
+[
+	'org.eclipse.xtend.core.tests'
+].each { projectName ->
+	include projectName
+	project(":$projectName").projectDir = file("../../tests/$projectName")
+}
+
+// TODO remove the following
+[
+	'org.eclipse.xtext.idea',
+	'org.eclipse.xtext.idea.junit'
+].each { projectName ->
+	include projectName
+	project(":$projectName").projectDir = file("../../intellij/$projectName")
+}

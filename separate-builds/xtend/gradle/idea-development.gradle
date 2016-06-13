@@ -1,0 +1,41 @@
+buildscript {
+	repositories {
+		jcenter()
+	}
+	dependencies {
+		classpath "org.xtext:xtext-idea-gradle-plugin:${versions.ideaGradlePluginVersion}"
+	}
+}
+
+apply plugin: org.xtext.gradle.idea.IdeaDevelopmentPlugin
+
+ideaDevelopment {
+	ideaVersion = versions.ideaVersion
+	pluginDependencies {
+		id 'junit'
+	}
+}
+
+dependencies {
+	ideaProvided ideaDevelopment.toolsJar()
+}
+
+def isTestProject = name.endsWith('tests')
+def isIntellijPlugin = file('META-INF/plugin.xml').exists() && !isTestProject
+
+if (isIntellijPlugin) {
+	apply plugin: org.xtext.gradle.idea.IdeaPluginPlugin
+}
+
+tasks.withType(Test) {
+	minHeapSize = "512m"
+	maxHeapSize = "1g"
+	jvmArgs '-XX:MaxPermSize=300m', '-ea'
+	/*
+	 * We have an active annotation that allows us to delegate
+	 * to existing tests and run them in an IntelliJ context.
+	 * The Delegates themselves are not valid JUnit tests, but
+	 * look like one. So we need to filter them out here
+	 */
+	exclude {it.name.endsWith('Delegate.class')}
+}
