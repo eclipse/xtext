@@ -3,3 +3,9 @@ group = 'org.eclipse.xtend'
 dependencies {
 	compile project(':org.eclipse.xtext.xbase.lib')
 }
+
+jar {
+    from('.') {
+        include 'about_org.eclipse.xtend.lib.macro.html'
+    }
+}

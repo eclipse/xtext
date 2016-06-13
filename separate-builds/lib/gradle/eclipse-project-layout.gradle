@@ -5,7 +5,8 @@
  */
 
 def isTestProject = name.endsWith('tests')
-def sourceDirs = ['src', 'src-gen', 'xtend-gen', 'emf-gen']
+def sourceDirs = ['src', 'xtend-gen', 'src-gen', 'emf-gen']
+
 sourceSets {
 	configure(isTestProject? test : main)  {
 		java.srcDirs = sourceDirs
@@ -22,6 +23,9 @@ sourceSets {
 
 jar {
 	from ('.') {
-   	    include 'META-INF/**', 'about*.*', 'plugin.xml', 'schema/**', 'model/**'
-   	}
+		include 'about*.*', 'plugin.xml', 'schema/**', 'model/**'
+	}
+	metaInf {
+		from 'META-INF'
+	}
 }

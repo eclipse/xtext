@@ -5,4 +5,8 @@ dependencies {
 	compile project(':org.eclipse.xtend.lib.macro')
 }
 
-sourceSets.main.resources.include 'about_org.eclipse.xtend.lib.html'
+jar {
+    from('.') {
+        include 'about_org.eclipse.xtend.lib.html'
+    }
+}

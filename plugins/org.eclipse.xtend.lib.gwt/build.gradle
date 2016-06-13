@@ -4,4 +4,8 @@ dependencies {
 	compile project(':org.eclipse.xtend.lib')
 }
 
-sourceSets.main.resources.include 'OSGI-INF/**', '**/*.gwt.xml'
+jar {
+    from('.') {
+        include 'OSGI-INF/**'
+    }
+}
