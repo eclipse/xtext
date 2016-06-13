@@ -4,15 +4,21 @@ rootProject.name = 'xtext-core'
 	'org.eclipse.xtext',
 	'org.eclipse.xtext.ide',
 	'org.eclipse.xtext.util',
-	'org.eclipse.xtext.smap',
 	'org.eclipse.xtext.xtext.generator',
-	'org.eclipse.xtext.xtext.wizard'
+	'org.eclipse.xtext.xtext.wizard',
+	'org.eclipse.xtext.smap',             // TODO remove
+	'org.eclipse.xtext.common.types'      // TODO remove
 ].each { projectName ->
 	include projectName
 	project(":$projectName").projectDir = file("../../plugins/$projectName")
 }
 
 [
+/*
+	These tests currently fail because they were originally run as plug-in tests
+	'org.eclipse.xtext.tests',
+	'org.eclipse.xtext.testlanguages'
+*/
     'org.eclipse.xtext.ide.tests'
 ].each { projectName ->
     include projectName
@@ -20,4 +26,3 @@ rootProject.name = 'xtext-core'
 }
 
 include 'org.eclipse.xtext.testing'
-project(':org.eclipse.xtext.testing').projectDir = file('./org.eclipse.xtext.testing')
