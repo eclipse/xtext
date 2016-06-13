@@ -6,7 +6,7 @@ plugins/org.eclipse.xtext.xtext.generator >> core
 plugins/org.eclipse.xtext.xtext.wizard >> core
 tests/org.eclipse.xtext.tests >> core, extras
 tests/org.eclipse.xtext.ide.tests >> core
-devtools/org.eclipse.xtext.bootstrap >> core
+devtools/org.eclipse.xtext.bootstrap >> delete
 devtools/org.eclipse.xtext.contributor >> core
 separate-builds/core >> core
 
