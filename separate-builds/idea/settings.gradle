@@ -1,0 +1,16 @@
+rootProject.name = 'xtext-extras'
+
+[
+	'org.eclipse.xtext.idea',
+	'org.eclipse.xtext.idea.example.entities',
+	'org.eclipse.xtext.idea.example.entities.ide',
+	'org.eclipse.xtext.idea.example.entities.idea',
+	'org.eclipse.xtext.idea.junit',
+	'org.eclipse.xtext.idea.sdomain',
+	'org.eclipse.xtext.idea.sdomain.idea',
+	'org.eclipse.xtext.idea.sdomain.idea.tests',
+	'org.eclipse.xtext.xtext.idea'
+].each { projectName ->
+	include projectName
+	project(":$projectName").projectDir = file("../../intellij/$projectName")
+}

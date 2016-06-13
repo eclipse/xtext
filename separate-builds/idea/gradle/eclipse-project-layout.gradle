@@ -1,0 +1,30 @@
+/*
+ * Since we use the Eclipse Style layout where sources and resources
+ * live in the same folders, we need to make some adjustments to Gradle'
+ * defaults.
+ */
+
+def isTestProject = name.endsWith('tests')
+
+sourceSets {
+	configure(isTestProject? test : main)  {
+		java.srcDirs = ['src', 'xtend-gen', 'src-gen', 'emf-gen']
+		resources {
+			srcDirs = ['src', 'src-gen', 'emf-gen', '.']
+			include 'plugin.xml', 'schema/**', 'model/**', 'about.ini', 'about.mappings', 'about.properties', 'about.html',
+				'**/*.properties', '**/*.xtextbin', '**/*.xmi', '**/*.g', '**/*.tokens',
+				'META-INF/**'
+			exclude 'bin', 'src', 'xtend-gen', 'src-gen', 'emf-gen', 'build', 'target', 'build.properties'
+		}
+	}
+	configure(isTestProject? main : test)  {
+		java.srcDirs = []
+		resources.srcDirs = []
+	}
+}
+
+jar {
+	metaInf {
+		from 'META-INF'
+	}
+}

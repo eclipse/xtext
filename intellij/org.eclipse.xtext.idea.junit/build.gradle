@@ -1,9 +1,9 @@
 dependencies {
-	compile project(':plugins:org.eclipse.xtext.junit4')
+	compile "org.eclipse.xtext:org.eclipse.xtext.junit4:$versions.xtext"
 }
 
 ideaDevelopment {
 	pluginDependencies {
-		project ':intellij:org.eclipse.xtext.idea'
+		project ':org.eclipse.xtext.idea'
 	}
 }

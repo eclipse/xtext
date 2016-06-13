@@ -1,0 +1,28 @@
+plugins.withType(JavaBasePlugin) {
+	sourceCompatibility = '1.8'
+}
+
+tasks.withType(JavaCompile) {
+	options.encoding = 'ISO-8859-1'
+}
+
+configurations {
+    optional {
+    	description 'Dependencies required at build time, but not exported into meta data'
+        extendsFrom compile
+    }
+    
+	/*
+	 * Put any unwanted transitive dependencies here, they will be excluded from all projects
+	 */
+    all {
+		exclude group: 'org.antlr', module: 'stringtemplate'
+		exclude module: 'cglib'
+		// IntelliJ's test infrastructure is not compatible with ASM 5
+		exclude group: 'org.ow2.asm'
+	}
+}
+
+sourceSets.main.compileClasspath += configurations.optional
+javadoc.classpath += configurations.optional
+javadoc.options.addStringOption('-Xdoclint:none')

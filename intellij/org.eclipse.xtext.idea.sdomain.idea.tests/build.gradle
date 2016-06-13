@@ -1,10 +1,10 @@
 dependencies {
-	testCompile project(':intellij:org.eclipse.xtext.idea.junit')
+	testCompile project(':org.eclipse.xtext.idea.junit')
 }
 
 ideaDevelopment {
 	pluginDependencies {
-		project ':intellij:org.eclipse.xtext.idea'
-		project ':intellij:org.eclipse.xtext.idea.sdomain.idea'
+		project ':org.eclipse.xtext.idea'
+		project ':org.eclipse.xtext.idea.sdomain.idea'
 	}
 }
