@@ -11,7 +11,7 @@ import com.intellij.openapi.fileTypes.LanguageFileType;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiFile;
 import java.awt.datatransfer.StringSelection;
-import junit.framework.TestCase;
+import junit.framework.Assert;
 import org.eclipse.xtext.idea.tests.LightToolingTest;
 import org.eclipse.xtext.junit4.internal.LineDelimiters;
 
@@ -76,7 +76,7 @@ public abstract class AbstractAutoEditTest extends LightToolingTest {
     }
     final String actualState = _xblockexpression;
     String _dumpFormattingModel = this.dumpFormattingModel();
-    TestCase.assertEquals(_dumpFormattingModel, expectedState, actualState);
+    Assert.assertEquals(_dumpFormattingModel, expectedState, actualState);
   }
   
   protected void newLine() {

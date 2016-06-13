@@ -15,7 +15,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.codeStyle.CodeStyleManager;
-import junit.framework.TestCase;
+import junit.framework.Assert;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.idea.tests.LightToolingTest;
 
@@ -3667,18 +3667,15 @@ public abstract class AbstractXbaseAdjustLineIndentTest extends LightToolingTest
     Editor _editor = this.myFixture.getEditor();
     Document _document = _editor.getDocument();
     String _text = _document.getText();
-    TestCase.assertEquals(_dumpFormattingModel, expectedAdjustedModel, _text);
+    Assert.assertEquals(_dumpFormattingModel, expectedAdjustedModel, _text);
   }
   
   protected Runnable adjustLineIndent(final PsiFile file) {
-    final Runnable _function = new Runnable() {
-      @Override
-      public void run() {
-        Project _project = AbstractXbaseAdjustLineIndentTest.this.getProject();
-        CodeStyleManager _instance = CodeStyleManager.getInstance(_project);
-        TextRange _textRange = file.getTextRange();
-        _instance.adjustLineIndent(file, _textRange);
-      }
+    final Runnable _function = () -> {
+      Project _project = this.getProject();
+      CodeStyleManager _instance = CodeStyleManager.getInstance(_project);
+      TextRange _textRange = file.getTextRange();
+      _instance.adjustLineIndent(file, _textRange);
     };
     return _function;
   }

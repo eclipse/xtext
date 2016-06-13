@@ -1,4 +1,4 @@
-rootProject.name = 'xtext-extras'
+rootProject.name = 'xtext-web'
 
 [
 	'org.eclipse.xtext.web',

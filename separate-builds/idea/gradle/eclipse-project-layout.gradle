@@ -5,26 +5,24 @@
  */
 
 def isTestProject = name.endsWith('tests')
+def sourceDirs = ['src', 'xtend-gen', 'src-gen', 'emf-gen']
 
 sourceSets {
-	configure(isTestProject? test : main)  {
-		java.srcDirs = ['src', 'xtend-gen', 'src-gen', 'emf-gen']
-		resources {
-			srcDirs = ['src', 'src-gen', 'emf-gen', '.']
-			include 'plugin.xml', 'schema/**', 'model/**', 'about.ini', 'about.mappings', 'about.properties', 'about.html',
-				'**/*.properties', '**/*.xtextbin', '**/*.xmi', '**/*.g', '**/*.tokens',
-				'META-INF/**'
-			exclude 'bin', 'src', 'xtend-gen', 'src-gen', 'emf-gen', 'build', 'target', 'build.properties'
-		}
-	}
-	configure(isTestProject? main : test)  {
-		java.srcDirs = []
-		resources.srcDirs = []
-	}
+    configure(isTestProject? test : main)  {
+        java.srcDirs = sourceDirs
+        resources {
+            srcDirs = sourceDirs
+            exclude '**/*.java', '**/*.xtendbin', '**/*.xtend', '**/*._trace'
+        }
+    }
+    configure(isTestProject? main : test)  {
+        java.srcDirs = []
+        resources.srcDirs = []
+    }
 }
 
 jar {
-	metaInf {
-		from 'META-INF'
-	}
+    from ('.') {
+   	    include 'META-INF/**', 'about*.*', 'plugin.xml', 'schema/**', 'model/**'
+   	}
 }

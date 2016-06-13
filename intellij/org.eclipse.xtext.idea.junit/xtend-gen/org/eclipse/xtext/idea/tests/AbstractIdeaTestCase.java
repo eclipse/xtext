@@ -19,7 +19,7 @@ import com.intellij.psi.PsiManager;
 import com.intellij.testFramework.IdeaTestCase;
 import com.intellij.testFramework.PlatformTestCase;
 import java.util.List;
-import junit.framework.TestCase;
+import junit.framework.Assert;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.psi.impl.BaseXtextFile;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
@@ -50,19 +50,16 @@ public abstract class AbstractIdeaTestCase extends IdeaTestCase {
   }
   
   protected VirtualFile addFile(final Pair<String, String> file) {
-    final Computable<VirtualFile> _function = new Computable<VirtualFile>() {
-      @Override
-      public VirtualFile compute() {
-        try {
-          String _key = file.getKey();
-          final VirtualFile result = AbstractIdeaTestCase.this.srcFolder.findOrCreateChildData(AbstractIdeaTestCase.this, _key);
-          String _value = file.getValue();
-          VfsUtil.saveText(result, _value);
-          AbstractIdeaTestCase.this.assertNoCompileErrors(result);
-          return result;
-        } catch (Throwable _e) {
-          throw Exceptions.sneakyThrow(_e);
-        }
+    final Computable<VirtualFile> _function = () -> {
+      try {
+        String _key = file.getKey();
+        final VirtualFile result = this.srcFolder.findOrCreateChildData(this, _key);
+        String _value = file.getValue();
+        VfsUtil.saveText(result, _value);
+        this.assertNoCompileErrors(result);
+        return result;
+      } catch (Throwable _e) {
+        throw Exceptions.sneakyThrow(_e);
       }
     };
     return this.<VirtualFile>write(_function);
@@ -71,29 +68,26 @@ public abstract class AbstractIdeaTestCase extends IdeaTestCase {
   @Override
   protected void setUp() throws Exception {
     super.setUp();
-    final Computable<Object> _function = new Computable<Object>() {
-      @Override
-      public Object compute() {
-        try {
-          Module _module = AbstractIdeaTestCase.this.getModule();
-          final ModuleRootManager mnr = ModuleRootManager.getInstance(_module);
-          final ModifiableRootModel model = mnr.getModifiableModel();
-          Project _project = AbstractIdeaTestCase.this.getProject();
-          VirtualFile _baseDir = _project.getBaseDir();
-          final ContentEntry entry = model.addContentEntry(_baseDir);
-          Project _project_1 = AbstractIdeaTestCase.this.getProject();
-          VirtualFile _baseDir_1 = _project_1.getBaseDir();
-          VirtualFile _createDirectoryIfMissing = VfsUtil.createDirectoryIfMissing(_baseDir_1, "src");
-          AbstractIdeaTestCase.this.srcFolder = _createDirectoryIfMissing;
-          boolean _isTestSource = AbstractIdeaTestCase.this.isTestSource(AbstractIdeaTestCase.this.srcFolder);
-          entry.addSourceFolder(AbstractIdeaTestCase.this.srcFolder, _isTestSource);
-          Module _module_1 = AbstractIdeaTestCase.this.getModule();
-          AbstractIdeaTestCase.this.configureModule(_module_1, model, entry);
-          model.commit();
-          return null;
-        } catch (Throwable _e) {
-          throw Exceptions.sneakyThrow(_e);
-        }
+    final Computable<Object> _function = () -> {
+      try {
+        Module _module = this.getModule();
+        final ModuleRootManager mnr = ModuleRootManager.getInstance(_module);
+        final ModifiableRootModel model = mnr.getModifiableModel();
+        Project _project = this.getProject();
+        VirtualFile _baseDir = _project.getBaseDir();
+        final ContentEntry entry = model.addContentEntry(_baseDir);
+        Project _project_1 = this.getProject();
+        VirtualFile _baseDir_1 = _project_1.getBaseDir();
+        VirtualFile _createDirectoryIfMissing = VfsUtil.createDirectoryIfMissing(_baseDir_1, "src");
+        this.srcFolder = _createDirectoryIfMissing;
+        boolean _isTestSource = this.isTestSource(this.srcFolder);
+        entry.addSourceFolder(this.srcFolder, _isTestSource);
+        Module _module_1 = this.getModule();
+        this.configureModule(_module_1, model, entry);
+        model.commit();
+        return null;
+      } catch (Throwable _e) {
+        throw Exceptions.sneakyThrow(_e);
       }
     };
     this.<Object>write(_function);
@@ -113,15 +107,12 @@ public abstract class AbstractIdeaTestCase extends IdeaTestCase {
       final List<Issue> issues = _resourceValidator.validate(resource, 
         CheckMode.NORMAL_AND_FAST, CancelIndicator.NullImpl);
       String _string = issues.toString();
-      final Function1<Issue, Boolean> _function = new Function1<Issue, Boolean>() {
-        @Override
-        public Boolean apply(final Issue it) {
-          Severity _severity = it.getSeverity();
-          return Boolean.valueOf(Objects.equal(_severity, Severity.ERROR));
-        }
+      final Function1<Issue, Boolean> _function = (Issue it) -> {
+        Severity _severity = it.getSeverity();
+        return Boolean.valueOf(Objects.equal(_severity, Severity.ERROR));
       };
       boolean _exists = IterableExtensions.<Issue>exists(issues, _function);
-      TestCase.assertFalse(_string, _exists);
+      Assert.assertFalse(_string, _exists);
     }
   }
   

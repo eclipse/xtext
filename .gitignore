@@ -10,3 +10,9 @@ target
 build/
 !**/src/**/build/
 !**/xtend-gen/**/build/
+
+.project
+.classpath
+org.eclipse.buildship.core.prefs
+org.eclipse.jdt.core.prefs
+.gitignore

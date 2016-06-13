@@ -115,11 +115,8 @@ public abstract class AbstractLanguageParsingTestCase extends ParsingTestCase im
       }
     };
     appContainer.registerComponentInstance(EditorFactory.class, editorFactory);
-    final Function<CharSequence, Document> _function = new Function<CharSequence, Document>() {
-      @Override
-      public Document fun(final CharSequence charSequence) {
-        return editorFactory.createDocument(charSequence);
-      }
+    final Function<CharSequence, Document> _function = (CharSequence charSequence) -> {
+      return editorFactory.createDocument(charSequence);
     };
     MockFileDocumentManagerImpl _mockFileDocumentManagerImpl = new MockFileDocumentManagerImpl(_function, FileDocumentManagerImpl.HARD_REF_TO_DOCUMENT_KEY);
     appContainer.registerComponentInstance(FileDocumentManager.class, _mockFileDocumentManagerImpl);
@@ -230,11 +227,8 @@ public abstract class AbstractLanguageParsingTestCase extends ParsingTestCase im
     XtextResource _xblockexpression = null;
     {
       PsiToEcoreTransformator _get = this.psiToEcoreTransformatorProvider.get();
-      final Procedure1<PsiToEcoreTransformator> _function = new Procedure1<PsiToEcoreTransformator>() {
-        @Override
-        public void apply(final PsiToEcoreTransformator it) {
-          it.setXtextFile(((BaseXtextFile) AbstractLanguageParsingTestCase.this.myFile));
-        }
+      final Procedure1<PsiToEcoreTransformator> _function = (PsiToEcoreTransformator it) -> {
+        it.setXtextFile(((BaseXtextFile) this.myFile));
       };
       final PsiToEcoreTransformator psiToEcoreTransformator = ObjectExtensions.<PsiToEcoreTransformator>operator_doubleArrow(_get, _function);
       VirtualFile _virtualFile = this.myFile.getVirtualFile();
@@ -242,19 +236,16 @@ public abstract class AbstractLanguageParsingTestCase extends ParsingTestCase im
       final URI uri = URI.createURI(_url);
       XtextResourceSet _createFreshResourceSet = this.createFreshResourceSet();
       Resource _createResource = _createFreshResourceSet.createResource(uri);
-      final Procedure1<XtextResource> _function_1 = new Procedure1<XtextResource>() {
-        @Override
-        public void apply(final XtextResource it) {
-          try {
-            it.setParser(psiToEcoreTransformator);
-            byte[] _newByteArrayOfSize = new byte[0];
-            ByteArrayInputStream _byteArrayInputStream = new ByteArrayInputStream(_newByteArrayOfSize);
-            it.load(_byteArrayInputStream, null);
-            PsiToEcoreAdapter _adapter = psiToEcoreTransformator.getAdapter();
-            _adapter.attachToEmfObject(it);
-          } catch (Throwable _e) {
-            throw Exceptions.sneakyThrow(_e);
-          }
+      final Procedure1<XtextResource> _function_1 = (XtextResource it) -> {
+        try {
+          it.setParser(psiToEcoreTransformator);
+          byte[] _newByteArrayOfSize = new byte[0];
+          ByteArrayInputStream _byteArrayInputStream = new ByteArrayInputStream(_newByteArrayOfSize);
+          it.load(_byteArrayInputStream, null);
+          PsiToEcoreAdapter _adapter = psiToEcoreTransformator.getAdapter();
+          _adapter.attachToEmfObject(it);
+        } catch (Throwable _e) {
+          throw Exceptions.sneakyThrow(_e);
         }
       };
       _xblockexpression = ObjectExtensions.<XtextResource>operator_doubleArrow(
@@ -268,11 +259,8 @@ public abstract class AbstractLanguageParsingTestCase extends ParsingTestCase im
     Map<String, ResourceDescriptionsData> _emptyMap = CollectionLiterals.<String, ResourceDescriptionsData>emptyMap();
     new ChunkedResourceDescriptions(_emptyMap, resourceSet);
     ProjectDescription _projectDescription = new ProjectDescription();
-    final Procedure1<ProjectDescription> _function = new Procedure1<ProjectDescription>() {
-      @Override
-      public void apply(final ProjectDescription it) {
-        it.setName("parsing-test-project");
-      }
+    final Procedure1<ProjectDescription> _function = (ProjectDescription it) -> {
+      it.setName("parsing-test-project");
     };
     final ProjectDescription project = ObjectExtensions.<ProjectDescription>operator_doubleArrow(_projectDescription, _function);
     project.attachToEmfObject(resourceSet);
@@ -287,17 +275,14 @@ public abstract class AbstractLanguageParsingTestCase extends ParsingTestCase im
       String _url = _virtualFile.getUrl();
       final URI uri = URI.createURI(_url);
       Resource _createResource = resourceSet.createResource(uri);
-      final Procedure1<XtextResource> _function = new Procedure1<XtextResource>() {
-        @Override
-        public void apply(final XtextResource it) {
-          try {
-            String _text = AbstractLanguageParsingTestCase.this.myFile.getText();
-            byte[] _bytes = _text.getBytes();
-            ByteArrayInputStream _byteArrayInputStream = new ByteArrayInputStream(_bytes);
-            it.load(_byteArrayInputStream, null);
-          } catch (Throwable _e) {
-            throw Exceptions.sneakyThrow(_e);
-          }
+      final Procedure1<XtextResource> _function = (XtextResource it) -> {
+        try {
+          String _text = this.myFile.getText();
+          byte[] _bytes = _text.getBytes();
+          ByteArrayInputStream _byteArrayInputStream = new ByteArrayInputStream(_bytes);
+          it.load(_byteArrayInputStream, null);
+        } catch (Throwable _e) {
+          throw Exceptions.sneakyThrow(_e);
         }
       };
       _xblockexpression = ObjectExtensions.<XtextResource>operator_doubleArrow(

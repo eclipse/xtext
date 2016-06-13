@@ -57,6 +57,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import junit.framework.Assert;
 import junit.framework.AssertionFailedError;
 import junit.framework.TestCase;
 import org.eclipse.xtend.lib.annotations.Accessors;
@@ -80,7 +81,7 @@ public abstract class AbstractDebuggerTestCase extends AbstractIdeaTestCase {
   
   private DebugProcessImpl myDebugProcess;
   
-  private final static int timeout = 10000;
+  private final static int timeout = 10_000;
   
   @Override
   protected void tearDown() throws Exception {
@@ -100,7 +101,7 @@ public abstract class AbstractDebuggerTestCase extends AbstractIdeaTestCase {
     final SourcePosition sp = _context.getSourcePosition();
     PsiFile _file = sp.getFile();
     VirtualFile _virtualFile = _file.getVirtualFile();
-    TestCase.assertEquals(file, _virtualFile);
+    Assert.assertEquals(file, _virtualFile);
     Project _project = this.getProject();
     PsiDocumentManager _instance = PsiDocumentManager.getInstance(_project);
     PsiFile _file_1 = sp.getFile();
@@ -112,11 +113,11 @@ public abstract class AbstractDebuggerTestCase extends AbstractIdeaTestCase {
       VirtualFile _virtualFile_1 = _file_2.getVirtualFile();
       String _name = _virtualFile_1.getName();
       String _plus = ((("couldn\'t find \'" + fragment) + "\' in file ") + _name);
-      TestCase.fail(_plus);
+      Assert.fail(_plus);
     }
     int _lineNumber = doc.getLineNumber(index);
     int _line = sp.getLine();
-    TestCase.assertEquals(_lineNumber, _line);
+    Assert.assertEquals(_lineNumber, _line);
   }
   
   protected void assertCurrentLine(final VirtualFile file, final int line) {
@@ -125,15 +126,15 @@ public abstract class AbstractDebuggerTestCase extends AbstractIdeaTestCase {
     final SourcePosition sp = _context.getSourcePosition();
     PsiFile _file = sp.getFile();
     VirtualFile _virtualFile = _file.getVirtualFile();
-    TestCase.assertEquals(file, _virtualFile);
+    Assert.assertEquals(file, _virtualFile);
     int _line = sp.getLine();
-    TestCase.assertEquals(line, _line);
+    Assert.assertEquals(line, _line);
   }
   
   protected void assertProcessTerminated() {
     ProcessHandler _processHandler = this.myDebugProcess.getProcessHandler();
     boolean _isProcessTerminated = _processHandler.isProcessTerminated();
-    TestCase.assertTrue(_isProcessTerminated);
+    Assert.assertTrue(_isProcessTerminated);
   }
   
   protected LineBreakpoint<?> addLineBreakpoint(final VirtualFile file, final int line) {
@@ -156,7 +157,7 @@ public abstract class AbstractDebuggerTestCase extends AbstractIdeaTestCase {
           final AssertionFailedError e = (AssertionFailedError)_t;
           String _message = e.getMessage();
           String _plus = ((("Failed on step " + i) + " : ") + _message);
-          TestCase.fail(_plus);
+          Assert.fail(_plus);
         } else {
           throw Exceptions.sneakyThrow(_t);
         }
@@ -165,41 +166,29 @@ public abstract class AbstractDebuggerTestCase extends AbstractIdeaTestCase {
   }
   
   protected SuspendContextImpl stepOver() {
-    final Runnable _function = new Runnable() {
-      @Override
-      public void run() {
-        AbstractDebuggerTestCase.this.myDebuggerSession.stepOver(false);
-      }
+    final Runnable _function = () -> {
+      this.myDebuggerSession.stepOver(false);
     };
     return this.waitForContextChange(_function);
   }
   
   protected SuspendContextImpl stepInto() {
-    final Runnable _function = new Runnable() {
-      @Override
-      public void run() {
-        AbstractDebuggerTestCase.this.myDebuggerSession.stepInto(false, null);
-      }
+    final Runnable _function = () -> {
+      this.myDebuggerSession.stepInto(false, null);
     };
     return this.waitForContextChange(_function);
   }
   
   protected SuspendContextImpl stepOut() {
-    final Runnable _function = new Runnable() {
-      @Override
-      public void run() {
-        AbstractDebuggerTestCase.this.myDebuggerSession.stepOut();
-      }
+    final Runnable _function = () -> {
+      this.myDebuggerSession.stepOut();
     };
     return this.waitForContextChange(_function);
   }
   
   protected SuspendContextImpl resume() {
-    final Runnable _function = new Runnable() {
-      @Override
-      public void run() {
-        AbstractDebuggerTestCase.this.myDebuggerSession.resume();
-      }
+    final Runnable _function = () -> {
+      this.myDebuggerSession.resume();
     };
     return this.waitForContextChange(_function);
   }
@@ -208,7 +197,7 @@ public abstract class AbstractDebuggerTestCase extends AbstractIdeaTestCase {
     try {
       ProcessHandler _processHandler = this.myDebugProcess.getProcessHandler();
       boolean _isProcessTerminated = _processHandler.isProcessTerminated();
-      TestCase.assertFalse(_isProcessTerminated);
+      Assert.assertFalse(_isProcessTerminated);
       int i = 0;
       final SuspendManager suspendManager = this.myDebugProcess.getSuspendManager();
       DebuggerSession _session = this.myDebugProcess.getSession();
@@ -234,7 +223,7 @@ public abstract class AbstractDebuggerTestCase extends AbstractIdeaTestCase {
         ProcessHandler _processHandler_1 = this.myDebugProcess.getProcessHandler();
         boolean _isProcessTerminated_1 = _processHandler_1.isProcessTerminated();
         _builder.append(_isProcessTerminated_1, "");
-        TestCase.fail(_builder.toString());
+        Assert.fail(_builder.toString());
       }
       return suspendManager.getPausedContext();
     } catch (Throwable _e) {
@@ -278,12 +267,9 @@ public abstract class AbstractDebuggerTestCase extends AbstractIdeaTestCase {
     final int before = args.size();
     File _file = new File(modulePath, "src");
     File[] _listFiles = _file.listFiles();
-    final Function1<File, Boolean> _function = new Function1<File, Boolean>() {
-      @Override
-      public Boolean apply(final File it) {
-        String _name = it.getName();
-        return Boolean.valueOf(_name.endsWith(".java"));
-      }
+    final Function1<File, Boolean> _function = (File it) -> {
+      String _name_1 = it.getName();
+      return Boolean.valueOf(_name_1.endsWith(".java"));
     };
     Iterable<File> _filter = IterableExtensions.<File>filter(((Iterable<File>)Conversions.doWrapArray(_listFiles)), _function);
     for (final File file : _filter) {
@@ -292,12 +278,9 @@ public abstract class AbstractDebuggerTestCase extends AbstractIdeaTestCase {
     }
     File _file_1 = new File(modulePath, "xtend-gen");
     File[] _listFiles_1 = _file_1.listFiles();
-    final Function1<File, Boolean> _function_1 = new Function1<File, Boolean>() {
-      @Override
-      public Boolean apply(final File it) {
-        String _name = it.getName();
-        return Boolean.valueOf(_name.endsWith(".java"));
-      }
+    final Function1<File, Boolean> _function_1 = (File it) -> {
+      String _name_1 = it.getName();
+      return Boolean.valueOf(_name_1.endsWith(".java"));
     };
     Iterable<File> _filter_1 = IterableExtensions.<File>filter(((Iterable<File>)Conversions.doWrapArray(_listFiles_1)), _function_1);
     for (final File file_1 : _filter_1) {
@@ -306,32 +289,29 @@ public abstract class AbstractDebuggerTestCase extends AbstractIdeaTestCase {
     }
     int _size = args.size();
     boolean _lessThan = (before < _size);
-    TestCase.assertTrue("No Java files!", _lessThan);
+    Assert.assertTrue("No Java files!", _lessThan);
     String[] _stringArray = ArrayUtil.toStringArray(args);
     Main.compile(_stringArray);
   }
   
   protected void startDebugProcess(final String className) throws ExecutionException, InterruptedException, InvocationTargetException {
-    TestCase.assertTrue((this.myDebugProcess == null));
+    Assert.assertTrue((this.myDebugProcess == null));
     JavaParameters _javaParameters = new JavaParameters();
-    final Procedure1<JavaParameters> _function = new Procedure1<JavaParameters>() {
-      @Override
-      public void apply(final JavaParameters it) {
-        try {
-          it.setMainClass(className);
-          Module _module = AbstractDebuggerTestCase.this.getModule();
-          Sdk _testProjectJdk = AbstractDebuggerTestCase.this.getTestProjectJdk();
-          it.configureByModule(_module, JavaParameters.JDK_AND_CLASSES, _testProjectJdk);
-          Module _module_1 = AbstractDebuggerTestCase.this.getModule();
-          VirtualFile _moduleFile = _module_1.getModuleFile();
-          VirtualFile _parent = _moduleFile.getParent();
-          final String modulePath = _parent.getPath();
-          final File classesDir = new File(modulePath, "classes");
-          PathsList _classPath = it.getClassPath();
-          _classPath.add(classesDir);
-        } catch (Throwable _e) {
-          throw Exceptions.sneakyThrow(_e);
-        }
+    final Procedure1<JavaParameters> _function = (JavaParameters it) -> {
+      try {
+        it.setMainClass(className);
+        Module _module = this.getModule();
+        Sdk _testProjectJdk = this.getTestProjectJdk();
+        it.configureByModule(_module, JavaParameters.JDK_AND_CLASSES, _testProjectJdk);
+        Module _module_1 = this.getModule();
+        VirtualFile _moduleFile = _module_1.getModuleFile();
+        VirtualFile _parent = _moduleFile.getParent();
+        final String modulePath = _parent.getPath();
+        final File classesDir = new File(modulePath, "classes");
+        PathsList _classPath = it.getClassPath();
+        _classPath.add(classesDir);
+      } catch (Throwable _e) {
+        throw Exceptions.sneakyThrow(_e);
       }
     };
     JavaParameters _doubleArrow = ObjectExtensions.<JavaParameters>operator_doubleArrow(_javaParameters, _function);
@@ -339,29 +319,23 @@ public abstract class AbstractDebuggerTestCase extends AbstractIdeaTestCase {
     this.myDebuggerSession = _createLocalProcess;
     DebugProcessImpl _process = this.myDebuggerSession.getProcess();
     this.myDebugProcess = _process;
-    final Disposable _function_1 = new Disposable() {
-      @Override
-      public void dispose() {
-        AbstractDebuggerTestCase.this.myDebugProcess.dispose();
-      }
+    final Disposable _function_1 = () -> {
+      this.myDebugProcess.dispose();
     };
     this.<Disposable>disposeOnTearDown(_function_1);
-    final Runnable _function_2 = new Runnable() {
-      @Override
-      public void run() {
-        try {
-          DebugProcessImpl _process = AbstractDebuggerTestCase.this.myDebuggerSession.getProcess();
-          ProcessHandler _processHandler = _process.getProcessHandler();
-          _processHandler.startNotify();
-          while ((!AbstractDebuggerTestCase.this.myDebuggerSession.isAttached())) {
-            {
-              UIUtil.dispatchAllInvocationEvents();
-              Thread.sleep(10);
-            }
+    final Runnable _function_2 = () -> {
+      try {
+        DebugProcessImpl _process_1 = this.myDebuggerSession.getProcess();
+        ProcessHandler _processHandler = _process_1.getProcessHandler();
+        _processHandler.startNotify();
+        while ((!this.myDebuggerSession.isAttached())) {
+          {
+            UIUtil.dispatchAllInvocationEvents();
+            Thread.sleep(10);
           }
-        } catch (Throwable _e) {
-          throw Exceptions.sneakyThrow(_e);
         }
+      } catch (Throwable _e) {
+        throw Exceptions.sneakyThrow(_e);
       }
     };
     this.waitForContextChange(_function_2);
@@ -413,22 +387,19 @@ public abstract class AbstractDebuggerTestCase extends AbstractIdeaTestCase {
     };
     JavaParameters _javaParameters = javaCommandLineState.getJavaParameters();
     final RemoteConnection debugParameters = DebuggerManagerImpl.createDebugParameters(_javaParameters, debuggerRunnerSettings, true);
-    final Runnable _function = new Runnable() {
-      @Override
-      public void run() {
-        try {
-          ExecutionEnvironment _environment = javaCommandLineState.getEnvironment();
-          DebuggerSession _attachVirtualMachine = AbstractDebuggerTestCase.this.attachVirtualMachine(javaCommandLineState, _environment, debugParameters, 
-            false);
-          debuggerSession[0] = _attachVirtualMachine;
-        } catch (final Throwable _t) {
-          if (_t instanceof ExecutionException) {
-            final ExecutionException e = (ExecutionException)_t;
-            String _message = e.getMessage();
-            TestCase.fail(_message);
-          } else {
-            throw Exceptions.sneakyThrow(_t);
-          }
+    final Runnable _function = () -> {
+      try {
+        ExecutionEnvironment _environment = javaCommandLineState.getEnvironment();
+        DebuggerSession _attachVirtualMachine = this.attachVirtualMachine(javaCommandLineState, _environment, debugParameters, 
+          false);
+        debuggerSession[0] = _attachVirtualMachine;
+      } catch (final Throwable _t) {
+        if (_t instanceof ExecutionException) {
+          final ExecutionException e = (ExecutionException)_t;
+          String _message = e.getMessage();
+          Assert.fail(_message);
+        } else {
+          throw Exceptions.sneakyThrow(_t);
         }
       }
     };
@@ -450,7 +421,7 @@ public abstract class AbstractDebuggerTestCase extends AbstractIdeaTestCase {
     DebuggerManagerEx _instanceEx = DebuggerManagerEx.getInstanceEx(this.myProject);
     DebugProcess _debugProcess = _instanceEx.getDebugProcess(processHandler);
     DebugProcessImpl process = ((DebugProcessImpl) _debugProcess);
-    TestCase.assertNotNull(process);
+    Assert.assertNotNull(process);
     return debuggerSession[0];
   }
   

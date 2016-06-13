@@ -15,6 +15,7 @@ import com.intellij.psi.PsiErrorElement;
 import java.util.List;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtend.lib.annotations.AccessorType;
@@ -113,7 +114,24 @@ public class XtextResourceAsserts extends Assert {
       if ((semanticElement != null)) {
         EClass _eClass = semanticElement.eClass();
         final EStructuralFeature feature = _eClass.getEStructuralFeature("name");
-        if ((((feature instanceof EAttribute) && (!feature.isMany())) && String.class.isAssignableFrom(feature.getEType().getInstanceClass()))) {
+        boolean _and = false;
+        boolean _and_1 = false;
+        if (!(feature instanceof EAttribute)) {
+          _and_1 = false;
+        } else {
+          boolean _isMany = feature.isMany();
+          boolean _not = (!_isMany);
+          _and_1 = _not;
+        }
+        if (!_and_1) {
+          _and = false;
+        } else {
+          EClassifier _eType = feature.getEType();
+          Class<?> _instanceClass = _eType.getInstanceClass();
+          boolean _isAssignableFrom = String.class.isAssignableFrom(_instanceClass);
+          _and = _isAssignableFrom;
+        }
+        if (_and) {
           EObject _semanticElement = node.getSemanticElement();
           final List<INode> nodes = NodeModelUtils.findNodesForFeature(_semanticElement, feature);
           final List<ASTNode> astNodes = this.astNodeExtension.findNodesForFeature(astNode, feature);
@@ -163,11 +181,8 @@ public class XtextResourceAsserts extends Assert {
       _builder.newLineIfNotEmpty();
       {
         ASTNode[] _children = astNode.getChildren(null);
-        final Function1<ASTNode, String> _function = new Function1<ASTNode, String>() {
-          @Override
-          public String apply(final ASTNode it) {
-            return XtextResourceAsserts.this.printAST(it);
-          }
+        final Function1<ASTNode, String> _function = (ASTNode it) -> {
+          return this.printAST(it);
         };
         List<String> _map = ListExtensions.<ASTNode, String>map(((List<ASTNode>)Conversions.doWrapArray(_children)), _function);
         Iterable<String> _filterNull = IterableExtensions.<String>filterNull(_map);
@@ -221,11 +236,8 @@ public class XtextResourceAsserts extends Assert {
   
   protected boolean belongsTo(final INode node, final ICompositeNode rootNode) {
     BidiTreeIterable<INode> _asTreeIterable = rootNode.getAsTreeIterable();
-    final Function1<INode, Boolean> _function = new Function1<INode, Boolean>() {
-      @Override
-      public Boolean apply(final INode it) {
-        return Boolean.valueOf(Objects.equal(it, node));
-      }
+    final Function1<INode, Boolean> _function = (INode it) -> {
+      return Boolean.valueOf(Objects.equal(it, node));
     };
     return IterableExtensions.<INode>exists(_asTreeIterable, _function);
   }

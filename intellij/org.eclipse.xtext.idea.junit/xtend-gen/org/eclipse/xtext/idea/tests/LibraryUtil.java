@@ -31,11 +31,8 @@ import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 @SuppressWarnings("all")
 public class LibraryUtil {
   public static void addGuavaLibrary(final Module it) {
-    final Consumer<ModifiableRootModel> _function = new Consumer<ModifiableRootModel>() {
-      @Override
-      public void consume(final ModifiableRootModel it) {
-        LibraryUtil.addGuavaLibrary(it);
-      }
+    final Consumer<ModifiableRootModel> _function = (ModifiableRootModel it_1) -> {
+      LibraryUtil.addGuavaLibrary(it_1);
     };
     ModuleRootModificationUtil.updateModel(it, _function);
   }
@@ -45,11 +42,8 @@ public class LibraryUtil {
   }
   
   public static void addXbaseLibrary(final Module it) {
-    final Consumer<ModifiableRootModel> _function = new Consumer<ModifiableRootModel>() {
-      @Override
-      public void consume(final ModifiableRootModel it) {
-        LibraryUtil.addXbaseLibrary(it);
-      }
+    final Consumer<ModifiableRootModel> _function = (ModifiableRootModel it_1) -> {
+      LibraryUtil.addXbaseLibrary(it_1);
     };
     ModuleRootModificationUtil.updateModel(it, _function);
   }
@@ -61,11 +55,8 @@ public class LibraryUtil {
   }
   
   public static void addXtendLibrary(final Module it) {
-    final Consumer<ModifiableRootModel> _function = new Consumer<ModifiableRootModel>() {
-      @Override
-      public void consume(final ModifiableRootModel it) {
-        LibraryUtil.addXtendLibrary(it);
-      }
+    final Consumer<ModifiableRootModel> _function = (ModifiableRootModel it_1) -> {
+      LibraryUtil.addXtendLibrary(it_1);
     };
     ModuleRootModificationUtil.updateModel(it, _function);
   }
@@ -84,11 +75,8 @@ public class LibraryUtil {
     int _length = ignoredFilesList.length;
     boolean _greaterThan = (_length > 1);
     if (_greaterThan) {
-      final Function2<String, String, String> _function = new Function2<String, String, String>() {
-        @Override
-        public String apply(final String p1, final String p2) {
-          return (p1 + p2);
-        }
+      final Function2<String, String, String> _function = (String p1, String p2) -> {
+        return (p1 + p2);
       };
       String _reduce = IterableExtensions.<String>reduce(((Iterable<? extends String>)Conversions.doWrapArray(ignoredFilesList)), _function);
       fileTypeManager.setIgnoredFilesList(_reduce);
@@ -96,11 +84,8 @@ public class LibraryUtil {
   }
   
   public static void addLibrary(final Module it, final String libName, final Class<?> clazz) {
-    final Consumer<ModifiableRootModel> _function = new Consumer<ModifiableRootModel>() {
-      @Override
-      public void consume(final ModifiableRootModel it) {
-        LibraryUtil.addLibrary(it, libName, clazz);
-      }
+    final Consumer<ModifiableRootModel> _function = (ModifiableRootModel it_1) -> {
+      LibraryUtil.addLibrary(it_1, libName, clazz);
     };
     ModuleRootModificationUtil.updateModel(it, _function);
   }

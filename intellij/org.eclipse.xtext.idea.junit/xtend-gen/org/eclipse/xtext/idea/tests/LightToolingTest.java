@@ -57,7 +57,7 @@ import com.intellij.util.Consumer;
 import com.intellij.util.ui.tree.TreeUtil;
 import java.util.List;
 import javax.swing.JTree;
-import junit.framework.TestCase;
+import junit.framework.Assert;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -154,22 +154,16 @@ public class LightToolingTest extends LightCodeInsightFixtureTestCase {
     final FacetManager mnr = FacetManager.getInstance(module);
     FacetTypeRegistry _instance = FacetTypeRegistry.getInstance();
     FacetType[] _facetTypes = _instance.getFacetTypes();
-    final Function1<FacetType, Boolean> _function = new Function1<FacetType, Boolean>() {
-      @Override
-      public Boolean apply(final FacetType it) {
-        String _stringId = it.getStringId();
-        return Boolean.valueOf(Objects.equal(_stringId, languageId));
-      }
+    final Function1<FacetType, Boolean> _function = (FacetType it) -> {
+      String _stringId = it.getStringId();
+      return Boolean.valueOf(Objects.equal(_stringId, languageId));
     };
     final FacetType facetType = IterableExtensions.<FacetType>findFirst(((Iterable<FacetType>)Conversions.doWrapArray(_facetTypes)), _function);
     Application _application = ApplicationManager.getApplication();
-    final Runnable _function_1 = new Runnable() {
-      @Override
-      public void run() {
-        String _defaultFacetName = facetType.getDefaultFacetName();
-        mnr.<Facet, FacetConfiguration>addFacet(facetType, _defaultFacetName, null);
-        return;
-      }
+    final Runnable _function_1 = () -> {
+      String _defaultFacetName = facetType.getDefaultFacetName();
+      mnr.<Facet, FacetConfiguration>addFacet(facetType, _defaultFacetName, null);
+      return;
     };
     _application.runWriteAction(_function_1);
   }
@@ -212,7 +206,7 @@ public class LightToolingTest extends LightCodeInsightFixtureTestCase {
   protected void assertLookupStrings(final String... items) {
     List<String> _list = IterableExtensions.<String>toList(((Iterable<String>)Conversions.doWrapArray(items)));
     List<String> _lookupElementStrings = this.myFixture.getLookupElementStrings();
-    TestCase.assertEquals(_list, _lookupElementStrings);
+    Assert.assertEquals(_list, _lookupElementStrings);
   }
   
   protected void assertHighlights(final String lineDelimitedHighlights) {
@@ -221,22 +215,19 @@ public class LightToolingTest extends LightCodeInsightFixtureTestCase {
     PsiFile _file = this.myFixture.getFile();
     VirtualFile _virtualFile = _file.getVirtualFile();
     EditorHighlighter _createHighlighter = HighlighterFactory.createHighlighter(_project, _virtualFile);
-    final Procedure1<EditorHighlighter> _function = new Procedure1<EditorHighlighter>() {
-      @Override
-      public void apply(final EditorHighlighter it) {
-        Editor _editor = LightToolingTest.this.myFixture.getEditor();
-        Document _document = _editor.getDocument();
-        String _text = _document.getText();
-        it.setText(_text);
-        Editor _editor_1 = LightToolingTest.this.myFixture.getEditor();
-        EditorColorsScheme _colorsScheme = _editor_1.getColorsScheme();
-        it.setColorScheme(_colorsScheme);
-      }
+    final Procedure1<EditorHighlighter> _function = (EditorHighlighter it) -> {
+      Editor _editor = this.myFixture.getEditor();
+      Document _document = _editor.getDocument();
+      String _text = _document.getText();
+      it.setText(_text);
+      Editor _editor_1 = this.myFixture.getEditor();
+      EditorColorsScheme _colorsScheme = _editor_1.getColorsScheme();
+      it.setColorScheme(_colorsScheme);
     };
     final EditorHighlighter highlighter = ObjectExtensions.<EditorHighlighter>operator_doubleArrow(_createHighlighter, _function);
     final HighlighterIterator highlights = highlighter.createIterator(0);
     final String actualHighlights = this.compactHighlights(highlights);
-    TestCase.assertEquals(expectedHighlights, actualHighlights);
+    Assert.assertEquals(expectedHighlights, actualHighlights);
   }
   
   protected String compactHighlights(final HighlighterIterator highlights) {
@@ -286,11 +277,8 @@ public class LightToolingTest extends LightCodeInsightFixtureTestCase {
   }
   
   protected void testStructureView(final String model, final String expected) {
-    final Consumer<StructureViewComponent> _function = new Consumer<StructureViewComponent>() {
-      @Override
-      public void consume(final StructureViewComponent component) {
-        LightToolingTest.this.assertTreeStructure(component, expected);
-      }
+    final Consumer<StructureViewComponent> _function = (StructureViewComponent component) -> {
+      this.assertTreeStructure(component, expected);
     };
     this.testStructureView(model, _function);
   }
@@ -335,12 +323,9 @@ public class LightToolingTest extends LightCodeInsightFixtureTestCase {
   protected Iterable<PsiFile> getGeneratedSources(final PsiFile sourceFile, final Function1<? super VirtualFile, ? extends Boolean> filter) {
     VirtualFile _virtualFile = sourceFile.getVirtualFile();
     Iterable<VirtualFile> _generatedSources = this.getGeneratedSources(_virtualFile, filter);
-    final Function1<VirtualFile, PsiFile> _function = new Function1<VirtualFile, PsiFile>() {
-      @Override
-      public PsiFile apply(final VirtualFile it) {
-        PsiManager _psiManager = LightToolingTest.this.getPsiManager();
-        return _psiManager.findFile(it);
-      }
+    final Function1<VirtualFile, PsiFile> _function = (VirtualFile it) -> {
+      PsiManager _psiManager = this.getPsiManager();
+      return _psiManager.findFile(it);
     };
     Iterable<PsiFile> _map = IterableExtensions.<VirtualFile, PsiFile>map(_generatedSources, _function);
     return IterableExtensions.<PsiFile>filterNull(_map);
@@ -348,11 +333,8 @@ public class LightToolingTest extends LightCodeInsightFixtureTestCase {
   
   protected Iterable<VirtualFile> getGeneratedSources(final VirtualFile sourceFile, final Function1<? super VirtualFile, ? extends Boolean> filter) {
     Iterable<VirtualFile> _generatedSources = this.getGeneratedSources(sourceFile);
-    final Function1<VirtualFile, Boolean> _function = new Function1<VirtualFile, Boolean>() {
-      @Override
-      public Boolean apply(final VirtualFile it) {
-        return filter.apply(it);
-      }
+    final Function1<VirtualFile, Boolean> _function = (VirtualFile it) -> {
+      return filter.apply(it);
     };
     return IterableExtensions.<VirtualFile>filter(_generatedSources, _function);
   }
@@ -361,11 +343,8 @@ public class LightToolingTest extends LightCodeInsightFixtureTestCase {
     XtextAutoBuilderComponent _builder = this.getBuilder();
     URI _uRI = VirtualFileURIUtil.getURI(sourceFile);
     Iterable<URI> _generatedSources = _builder.getGeneratedSources(_uRI);
-    final Function1<URI, VirtualFile> _function = new Function1<URI, VirtualFile>() {
-      @Override
-      public VirtualFile apply(final URI it) {
-        return VirtualFileURIUtil.getVirtualFile(it);
-      }
+    final Function1<URI, VirtualFile> _function = (URI it) -> {
+      return VirtualFileURIUtil.getVirtualFile(it);
     };
     Iterable<VirtualFile> _map = IterableExtensions.<URI, VirtualFile>map(_generatedSources, _function);
     return IterableExtensions.<VirtualFile>filterNull(_map);

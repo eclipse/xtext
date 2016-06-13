@@ -59,11 +59,8 @@ public abstract class AbstractXbaseWordsScannerTest extends LightToolingTest {
   public void testProcessOperator_01() {
     final Set<QualifiedName> operators = this.operatorMapping.getOperators();
     String _join = IterableExtensions.join(operators, " ");
-    final Function1<QualifiedName, String> _function = new Function1<QualifiedName, String>() {
-      @Override
-      public String apply(final QualifiedName it) {
-        return it.toString();
-      }
+    final Function1<QualifiedName, String> _function = (QualifiedName it) -> {
+      return it.toString();
     };
     Iterable<String> _map = IterableExtensions.<QualifiedName, String>map(operators, _function);
     this.assertWords(_join, ((String[])Conversions.unwrapArray(_map, String.class)));
@@ -86,11 +83,8 @@ public abstract class AbstractXbaseWordsScannerTest extends LightToolingTest {
       }
     }
     expectedWords.add("after");
-    final Function1<QualifiedName, CharSequence> _function = new Function1<QualifiedName, CharSequence>() {
-      @Override
-      public CharSequence apply(final QualifiedName it) {
-        return it.toString();
-      }
+    final Function1<QualifiedName, CharSequence> _function = (QualifiedName it) -> {
+      return it.toString();
     };
     String _join = IterableExtensions.<QualifiedName>join(operators, "before ", " foo bar ", " after", _function);
     this.assertWords(_join, ((String[])Conversions.unwrapArray(expectedWords, String.class)));
@@ -99,11 +93,8 @@ public abstract class AbstractXbaseWordsScannerTest extends LightToolingTest {
   public void testProcessCompoundOperators() {
     final Set<QualifiedName> operators = this.operatorMapping.getCompoundOperators();
     String _join = IterableExtensions.join(operators, " ");
-    final Function1<QualifiedName, String> _function = new Function1<QualifiedName, String>() {
-      @Override
-      public String apply(final QualifiedName it) {
-        return it.toString();
-      }
+    final Function1<QualifiedName, String> _function = (QualifiedName it) -> {
+      return it.toString();
     };
     Iterable<String> _map = IterableExtensions.<QualifiedName, String>map(operators, _function);
     this.assertWords(_join, ((String[])Conversions.unwrapArray(_map, String.class)));
@@ -112,16 +103,13 @@ public abstract class AbstractXbaseWordsScannerTest extends LightToolingTest {
   protected void assertWords(final CharSequence text, final String... expectedWords) {
     final Collection<String> words = CollectionLiterals.<String>newLinkedList();
     final WordsScanner wordsScanner = this.wordsScannerProvider.get();
-    final Processor<WordOccurrence> _function = new Processor<WordOccurrence>() {
-      @Override
-      public boolean process(final WordOccurrence it) {
-        CharSequence _baseText = it.getBaseText();
-        int _start = it.getStart();
-        int _end = it.getEnd();
-        CharSequence _subSequence = _baseText.subSequence(_start, _end);
-        String _string = _subSequence.toString();
-        return words.add(_string);
-      }
+    final Processor<WordOccurrence> _function = (WordOccurrence it) -> {
+      CharSequence _baseText = it.getBaseText();
+      int _start = it.getStart();
+      int _end = it.getEnd();
+      CharSequence _subSequence = _baseText.subSequence(_start, _end);
+      String _string = _subSequence.toString();
+      return words.add(_string);
     };
     wordsScanner.processWords(text, _function);
     String _string = text.toString();
