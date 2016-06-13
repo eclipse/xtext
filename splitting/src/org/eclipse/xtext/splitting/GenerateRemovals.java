@@ -21,8 +21,8 @@ import java.util.regex.Pattern;
 
 public class GenerateRemovals {
 	
-	public static final Set<String> GEN_DIRS = Collections.unmodifiableSet(new LinkedHashSet<>(Arrays.asList(
-		"src-gen", "xtend-gen", "xtext-gen", "emf-gen"
+	public static final Set<String> REMOVE_DIRS = Collections.unmodifiableSet(new LinkedHashSet<>(Arrays.asList(
+		"bin", "src-gen", "xtend-gen", "xtext-gen", "emf-gen"
 	)));
 
 	public static void main(String[] args) {
@@ -66,7 +66,7 @@ public class GenerateRemovals {
 				String line;
 				while ((line = reader.readLine()) != null) {
 					String file = line.replaceAll("\"|\\\\.", "");
-					for (String genDir : GEN_DIRS) {
+					for (String genDir : REMOVE_DIRS) {
 						int genDirIndex = file.indexOf(genDir);
 						if (genDirIndex > 0) {
 							for (String targetRepo :  ValidateSplitting.REPOSITORIES) {
