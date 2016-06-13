@@ -125,13 +125,8 @@ separate-builds/eclipse >> eclipse
 
 
 separate-builds/idea >> idea
-intellij/intellij-dependencies >> idea
 intellij/org.eclipse.xtext.core.idea.tests >> idea
 intellij/org.eclipse.xtext.idea >> idea
-intellij/org.eclipse.xtext.idea.all >> idea
-intellij/org.eclipse.xtext.idea.builder >> idea
-intellij/org.eclipse.xtext.idea.builder.tests >> idea
-intellij/org.eclipse.xtext.idea.common.types.RefactoringTestLanguage >> idea
 intellij/org.eclipse.xtext.idea.common.types.tests >> idea
 intellij/org.eclipse.xtext.idea.example.entities.idea >> idea
 intellij/org.eclipse.xtext.idea.example.entities.tests >> idea
@@ -147,35 +142,16 @@ intellij/org.eclipse.xtext.purexbase.idea >> idea
 intellij/org.eclipse.xtext.testlanguages.idea >> idea
 intellij/org.eclipse.xtext.xbase.idea >> idea
 intellij/org.eclipse.xtext.xbase.idea.tests >> idea
-intellij/org.eclipse.xtext.xtex.idea >> idea
 intellij/org.eclipse.xtext.xtext.idea >> idea
 intellij/org.eclipse.xtext.xtext.idea.tests >> idea
-intellij/org.xtext.idea >> idea
-intellij/org.xtext.idea.all >> idea
-intellij/org.xtext.idea.builder >> idea
-intellij/org.xtext.idea.generator >> idea
-intellij/org.xtext.idea.sdomain >> idea
-intellij/org.xtext.idea.sdomain.idea >> idea
-intellij/org.xtext.idea.sdomain.idea.tests >> idea
-intellij/org.xtext.idea.sdomain.tests >> idea
-intellij/org.xtext.idea.sdomain.ui >> idea
-intellij/refresh-gradle-dependencies-idea.launch >> idea
-intellij/refresh-gradle-dependencies.launch >> idea
-intellij/debug.idea.launch >> idea
-intellij/.project >> idea
+
+
 intellij/.settings >> idea
-intellij/buildSrc >> idea
-intellij/gradle >> idea
-intellij/gradle.ant >> idea
-intellij/updatePlugins.xml >> idea
-intellij/org.eclipse.xtext.idea.plugin >> idea
-intellij/PsiViewer__1_.jar >> delete
-intellij/prepareIntellij.gradle >> idea
 intellij/.gitignore >> idea
+intellij/.project >> idea
 intellij/build.gradle >> idea
-intellij/gradlew >> idea
-intellij/gradlew.bat >> idea
-intellij/settings.gradle >> idea
+intellij/debug.idea.launch >> idea
+intellij/refresh-gradle-dependencies-idea.launch >> idea
 
 web >> web
 separate-builds/web >> web
@@ -192,6 +168,9 @@ maven/org.eclipse.xtext.xtext >> maven
 plugins/org.eclipse.xtext.maven.plugin >> maven
 plugins/org.eclipse.xtext.standalone.maven >> maven
 separate-builds/maven >> maven
+
+
+
 
 .DS_Store >> delete
 .gitignore >> delete
@@ -342,3 +321,29 @@ examples/org.eclipse.xtext.example.ecoredsl >> delete
 examples/org.eclipse.xtext.example.ecoredsl.ui >> delete
 examples/org.eclipse.xtext.example.fowlerdsl >> delete
 examples/org.eclipse.xtext.example.fowlerdsl.ui >> delete
+intellij/refresh-gradle-dependencies.launch >> delete
+intellij/buildSrc >> delete
+intellij/gradle >> delete
+intellij/gradle.ant >> delete
+intellij/updatePlugins.xml >> delete
+intellij/org.eclipse.xtext.idea.plugin >> delete
+intellij/PsiViewer__1_.jar >> delete
+intellij/prepareIntellij.gradle >> delete
+intellij/gradlew >> delete
+intellij/gradlew.bat >> delete
+intellij/settings.gradle >> delete
+intellij/intellij-dependencies >> delete
+intellij/org.eclipse.xtext.idea.all >> delete
+intellij/org.eclipse.xtext.idea.builder >> delete
+intellij/org.eclipse.xtext.idea.builder.tests >> delete
+intellij/org.eclipse.xtext.idea.common.types.RefactoringTestLanguage >> delete
+intellij/org.eclipse.xtext.xtex.idea >> delete
+intellij/org.xtext.idea >> delete
+intellij/org.xtext.idea.all >> delete
+intellij/org.xtext.idea.builder >> delete
+intellij/org.xtext.idea.generator >> delete
+intellij/org.xtext.idea.sdomain >> delete
+intellij/org.xtext.idea.sdomain.idea >> delete
+intellij/org.xtext.idea.sdomain.idea.tests >> delete
+intellij/org.xtext.idea.sdomain.tests >> delete
+intellij/org.xtext.idea.sdomain.ui >> delete
