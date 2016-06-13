@@ -92,7 +92,9 @@ tests/org.eclipse.xtext.xtend2.ui.tests >> xtend
 separate-builds/xtend >> xtend
 features/org.eclipse.xtend.gwt.feature >> xtend
 features/org.eclipse.xtend.sdk.feature >> xtend
-
+website-xtend >> xtend
+xtend-website >> xtend
+xtend.website.generator >> xtend
 
 features/org.eclipse.emf.index.feature >> eclipse
 features/org.eclipse.xtend.build.feature >> eclipse
@@ -203,8 +205,8 @@ intellij/org.eclipse.xtext.idea.builder >> idea
 intellij/org.eclipse.xtext.idea.builder.tests >> idea
 intellij/org.eclipse.xtext.idea.common.types.RefactoringTestLanguage >> idea
 intellij/org.eclipse.xtext.idea.common.types.tests >> idea
-intellij/org.eclipse.xtext.idea.example.entities >> idea
-intellij/org.eclipse.xtext.idea.example.entities.ide >> idea
+intellij/org.eclipse.xtext.idea.example.entities >> idea, web
+intellij/org.eclipse.xtext.idea.example.entities.ide >> idea, web
 intellij/org.eclipse.xtext.idea.example.entities.idea >> idea
 intellij/org.eclipse.xtext.idea.example.entities.tests >> idea
 intellij/org.eclipse.xtext.idea.example.entities.ui >> idea
@@ -282,14 +284,6 @@ plugins/org.eclipse.xtext.xtend2.standalone >> maven
 plugins/org.eclipse.xtext.xtend2.standalone.maven >> maven
 separate-builds/maven >> maven
 
-website >> xtext-website
-xtext-website >> xtext-website
-xtext.website.generator >> xtext-website
-
-website-xtend >> xtend-website
-xtend-website >> xtend-website
-xtend.website.generator >> xtend-website
-
 .DS_Store >> delete
 .gitignore >> delete
 .project >> delete
@@ -338,10 +332,13 @@ plugins/org.eclipse.emf.index >> delete
 plugins/org.eclipse.emf.index.ui >> delete
 plugins/org.eclipse.xtext.doc.manual >> delete
 settings.gradle >> delete
-splitting >> core, extras, lib, xtend, eclipse, idea, web, maven, xtext-website, xtend-website
+splitting >> core, extras, lib, xtend, eclipse, idea, web, maven
 separate-builds/.project >> delete
 test.txt >> delete
 tests/.settings >> delete
 tests/build.gradle >> delete
 tests/org.eclipse.emf.index.tests >> delete
 tests/org.eclipse.emf.index.ui.tests >> delete
+website >> delete
+xtext-website >> delete
+xtext.website.generator >> delete
