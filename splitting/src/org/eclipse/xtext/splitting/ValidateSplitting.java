@@ -20,7 +20,7 @@ import java.util.regex.Pattern;
 public class ValidateSplitting {
 	
 	public static final Set<String> REPOSITORIES = Collections.unmodifiableSet(new LinkedHashSet<>(Arrays.asList(
-		"core", "extras", "lib", "xtend", "eclipse", "idea", "web", "maven", "xtext-website", "xtend-website"
+		"core", "extras", "lib", "xtend", "eclipse", "idea", "web", "maven"
 	)));
 	
 	public static final String DELETE = "delete";
