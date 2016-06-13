@@ -52,7 +52,8 @@ public class ValidateSplitting {
 							}
 						}
 						String path = parts[0].trim();
-						specifiedPaths.add(path);
+						if (!specifiedPaths.add(path))
+							fail("Path has ambiguous specification: " + path);
 					}
 				}
 			}
