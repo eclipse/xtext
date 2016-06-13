@@ -1,4 +1,6 @@
 dependencies {
-	compile project(':plugins:org.eclipse.xtext.xbase.junit')
-	compile "org.eclipse.jdt:org.eclipse.jdt.core:${versions.'jdt-core-version'}"
+	compile "org.eclipse.xtext:org.eclipse.xtext.xbase:$versions.xtext"
+	compile "org.eclipse.jdt:org.eclipse.jdt.core:$versions.jdtCore"
+	optional "org.eclipse.xtext:org.eclipse.xtext.xbase.junit:$versions.xtext"
+	optional "org.apache.ant:ant:$versions.ant"
 }
