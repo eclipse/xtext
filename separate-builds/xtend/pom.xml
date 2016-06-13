@@ -15,6 +15,10 @@
 		<module>../../plugins/org.eclipse.xtend.ide.common</module>
 		<module>../../plugins/org.eclipse.xtend.m2e</module>
 		<module>../../plugins/org.eclipse.xtend.standalone</module>
+		<module>../../maven/org.eclipse.xtext.parent</module>
+		<module>../../maven/org.eclipse.xtend.maven.plugin</module>
+		<module>../../maven/org.eclipse.xtend.maven.archetype</module>
+		<module>../../maven/org.eclipse.xtend.maven.android.archetype</module>
 		<module>../../docs/org.eclipse.xtend.doc</module>
 		<module>../../examples/org.eclipse.xtend.examples</module>
 		<module>../../features/org.eclipse.xtend.gwt.feature</module>
