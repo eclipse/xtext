@@ -32,6 +32,18 @@
 		<module>../../docs/org.eclipse.xtext.doc</module>
 		<module>../../examples/org.eclipse.xtext.xtext.ui.examples/org.eclipse.xtext.xtext.ui.examples</module>
 		<module>../../intellij/org.eclipse.xtext.idea.generator</module>
+		<module>../../maven/org.eclipse.xtext.tycho.tests.parent</module>
+		<module>../../tests/org.eclipse.xtext.builder.tests</module>
+		<module>../../tests/org.eclipse.xtext.junit4.tests</module>
+		<module>../../tests/org.eclipse.xtext.ui.codetemplates.tests</module>
+		<module>../../tests/org.eclipse.xtext.ui.tests</module>
+		<module>../../tests/org.eclipse.xtext.testlanguages.ui</module>
+		<module>../../tests/org.eclipse.xtext.xbase.testlanguages.ui</module>
+		<module>../../tests/org.eclipse.xtext.xbase.tests</module> <!-- TODO: remove, this belongs to repo 'extras' -->
+		<module>../../tests/org.eclipse.xtext.common.types.tests</module> <!-- TODO: remove, this belongs to repo 'extras' -->
+		<module>../../tests/org.eclipse.xtext.xbase.ui.tests</module>
+		<module>../../tests/org.eclipse.xtext.xtext.ui.graph.tests</module>
+		<module>../../tests/org.eclipse.xtext.xtext.ui.tests</module>
 		<module>../../features/org.eclipse.xtext.sdk.feature</module>
 		<module>../../features/org.eclipse.xtext.gwt.feature</module>
 		<module>../../features/org.eclipse.xtext.docs.feature</module>

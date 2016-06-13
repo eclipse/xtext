@@ -11,10 +11,6 @@
 	<name>Xtext Eclipse tests plugins parent</name>
 	<packaging>pom</packaging>
 
-	<modules>
-		<module>../../tests/org.eclipse.xtext.builder.tests</module>
-	</modules>
-
 	<properties>
 		<os-jvm-flags />
 		<memory-settings>-Xmx1G -XX:MaxPermSize=256m</memory-settings>
