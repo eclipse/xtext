@@ -3,10 +3,11 @@ tests/org.eclipse.xtext.testlanguages >> core, extras
 tests/org.eclipse.xtext.testlanguages.ide >> core, extras
 tests/org.eclipse.xtext.testlanguages.tests >> core, extras
 tests/org.eclipse.xtext.tests >> core, extras, eclipse
-tests/org.eclipse.xtext.common.types.test >> extras, eclipse
 tests/org.eclipse.xtext.common.types.tests >> extras, eclipse
 tests/org.eclipse.xtext.java.tests >> extras, eclipse
 tests/org.eclipse.xtext.purexbase.tests >> extras, eclipse
+tests/org.eclipse.xtext.generator.tests >> core, extras
+tests/org.eclipse.xtext.junit4.tests >> core, eclipse
 intellij/org.eclipse.xtext.idea.example.entities >> idea, web
 intellij/org.eclipse.xtext.idea.example.entities.ide >> idea, web
 intellij/org.eclipse.xtext.idea.generator >> idea, eclipse
@@ -14,6 +15,7 @@ maven/org.eclipse.xtext.parent >> maven, eclipse, xtend
 maven/org.eclipse.xtext.target >> maven, eclipse, xtend
 maven/org.eclipse.xtext.tycho.parent >> eclipse, xtend
 maven/org.eclipse.xtext.tycho.tests.parent >> eclipse, xtend
+plugins/org.eclipse.xtext.junit4 >> core, eclipse
 
 plugins/org.eclipse.xtext >> core
 plugins/org.eclipse.xtext.ide >> core
@@ -33,19 +35,16 @@ plugins/org.eclipse.xtext.purexbase.test >> extras
 plugins/org.eclipse.xtext.smap >> extras
 plugins/org.eclipse.xtext.xbase >> extras
 plugins/org.eclipse.xtext.xbase.ide >> extras
-tests/org.eclipse.xtext.generator.tests >> extras
 tests/org.eclipse.xtext.xbase.tests >> extras
 tests/org.eclipse.xtext.xbase.testlanguages >> extras
 separate-builds/extras >> extras
 
-maven/org.eclipse.xtend.lib.gwt.test >> lib
 plugins/org.eclipse.xtend.lib >> lib
 plugins/org.eclipse.xtend.lib.gwt >> lib
+maven/org.eclipse.xtend.lib.gwt.test >> lib
 plugins/org.eclipse.xtend.lib.macro >> lib
-plugins/org.eclipse.xtend.lib.maven >> lib
 plugins/org.eclipse.xtext.xbase.lib >> lib
 plugins/org.eclipse.xtext.xbase.lib.gwt >> lib
-plugins/org.eclipse.xtext.xbase.lib.maven >> lib
 separate-builds/lib >> lib
 
 separate-builds/xtend >> xtend
@@ -162,7 +161,6 @@ plugins/org.eclipse.xtext.common.types.shared >> eclipse
 plugins/org.eclipse.xtext.common.types.shared.jdt38 >> eclipse
 plugins/org.eclipse.xtext.common.types.ui >> eclipse
 plugins/org.eclipse.xtext.compatibility.galileo >> eclipse
-plugins/org.eclipse.xtext.junit4 >> eclipse
 plugins/org.eclipse.xtext.logging >> eclipse
 plugins/org.eclipse.xtext.m2e >> eclipse
 plugins/org.eclipse.xtext.purexbase.ui >> eclipse
@@ -176,7 +174,6 @@ plugins/org.eclipse.xtext.xbase.ui >> eclipse
 plugins/org.eclipse.xtext.xtext.ui >> eclipse
 plugins/org.eclipse.xtext.xtext.ui.graph >> eclipse
 tests/org.eclipse.xtext.builder.tests >> eclipse
-tests/org.eclipse.xtext.junit4.tests >> eclipse
 tests/org.eclipse.xtext.testlanguages.ui >> eclipse
 tests/org.eclipse.xtext.xbase.testlanguages.ui >> eclipse
 tests/org.eclipse.xtext.ui.codetemplates.tests >> eclipse
@@ -361,6 +358,8 @@ plugins/org.eclipse.xtext.ui.junit >> delete
 plugins/org.eclipse.xtext.wikitext.core >> delete
 plugins/org.eclipse.xtext.wizard >> delete
 plugins/org.eclipse.xtext.xbase.doc >> delete
+plugins/org.eclipse.xtend.lib.maven >> delete
+plugins/org.eclipse.xtext.xbase.lib.maven >> delete
 
 separate-builds/.project >> delete
 
@@ -385,6 +384,7 @@ tests/org.eclipse.xtext.ui.common.tests >> delete
 tests/org.eclipse.xtext.ui.core.tests >> delete
 tests/org.eclipse.xtext.wikitext.tests >> delete
 tests/org.eclipse.xtext.ui.integration.tests >> delete
+tests/org.eclipse.xtext.common.types.test >> delete
 
 features/org.eclipse.emf.index.feature >> delete
 features/org.eclipse.xtend.build.feature >> delete
