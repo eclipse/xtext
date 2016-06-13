@@ -1,12 +1,12 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: %pluginName
+Bundle-Name: Xtext IDE Tests
 Bundle-SymbolicName: org.eclipse.xtext.ide.tests;singleton:=true
 Bundle-Version: 2.11.0.qualifier
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
-Bundle-Vendor: %providerName
+Bundle-Vendor: Eclipse Xtext
 Require-Bundle: org.eclipse.xtext;visibility:=reexport,
  org.eclipse.xtend.lib,
  org.eclipse.core.runtime;bundle-version="3.6.0",
