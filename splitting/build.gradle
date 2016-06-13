@@ -7,7 +7,7 @@ def allHistoryFiles = file(outputFilesDir + "/all-files.txt")
 def allProjects = file(outputFilesDir + "/all-projects.txt")
 def unmappedPaths = file(outputFilesDir + "/unmapped-paths.txt")
 def splittingFile = file("splitting.txt")
-def repositories = ["core", "extras", "lib", "xtend", "eclipse", "idea", "web", "maven", "xtext-website", "xtend-website"]
+def repositories = ["core", "extras", "lib", "xtend", "eclipse", "idea", "web", "maven"]
 
 task listFiles(type: Exec) {
 	group 'Splitting Helper'
