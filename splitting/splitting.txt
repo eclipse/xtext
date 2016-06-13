@@ -7,7 +7,7 @@ plugins/org.eclipse.xtext.xtext.wizard >> core
 tests/org.eclipse.xtext.tests >> core, extras
 tests/org.eclipse.xtext.ide.tests >> core
 devtools/org.eclipse.xtext.bootstrap >> delete
-devtools/org.eclipse.xtext.contributor >> core
+devtools/org.eclipse.xtext.contributor >> eclipse
 separate-builds/core >> core
 
 devtools/org.eclipse.xtext.language-generator >> extras
