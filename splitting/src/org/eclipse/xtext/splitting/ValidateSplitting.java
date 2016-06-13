@@ -57,8 +57,17 @@ public class ValidateSplitting {
 				}
 			}
 			
-			// Check whether each file has a specified path as prefix
+			// Check whether any path has an ambiguous specification
 			final Pattern segmentPattern = Pattern.compile("/");
+			for (String path : specifiedPaths) {
+				Matcher matcher = segmentPattern.matcher(path);
+				while (matcher.find()) {
+					if (specifiedPaths.contains(path.substring(0, matcher.start())))
+						fail("Path has ambiguous specification: " + path);
+				}
+			}
+			
+			// Check whether each file has a specified path as prefix
 			try (BufferedReader reader = new BufferedReader(new FileReader(outputDir + "/" + FindProjects.ALL_FILES))) {
 				String line;
 				while ((line = reader.readLine()) != null) {
