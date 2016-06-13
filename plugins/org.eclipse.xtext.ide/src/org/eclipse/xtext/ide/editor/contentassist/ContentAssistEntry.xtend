@@ -70,4 +70,29 @@ class ContentAssistEntry {
 	 */
 	transient Object source
 	
+	/**
+	 * The kind of element that is proposed. Could be one of the constants below something specific a concrete client understands.
+	 */
+	String kind
+	
+	public static val KIND_TEXT = "TEXT"
+    public static val KIND_METHOD = "METHOD"
+    public static val KIND_FUNCTION = "FUNCTION"
+    public static val KIND_CONSTRUCTOR = "CONSTRUCTOR"
+    public static val KIND_FIELD = "FIELD"
+    public static val KIND_VARIABLE = "VARIABLE"
+    public static val KIND_CLASS = "CLASS"
+    public static val KIND_INTERFACE = "INTERFACE"
+    public static val KIND_MODULE = "MODULE"
+    public static val KIND_PROPERTY = "PROPERTY"
+    public static val KIND_UNIT = "UNIT"
+    public static val KIND_VALUE = "VALUE"
+    public static val KIND_ENUM = "ENUM"
+    public static val KIND_KEYWORD = "KEYWORD"
+    public static val KIND_SNIPPET = "SNIPPET"
+    public static val KIND_COLOR = "COLOR"
+    public static val KIND_FILE = "FILE"
+    public static val KIND_REFERENCE = "REFERENCE"
+    public static val KIND_UNKOWN = "UNKOWN"
+    
 }

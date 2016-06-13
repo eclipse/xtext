@@ -275,8 +275,33 @@ import org.eclipse.xtext.resource.IMimeTypeProvider
 		completionItem.label = entry.label ?: entry.proposal
 		completionItem.detail = entry.description
 		completionItem.insertText = entry.proposal
+		completionItem.kind = translateKind(entry)
 		return completionItem
 	}
+    
+    protected def translateKind(ContentAssistEntry entry) {
+        switch entry.kind {
+            case ContentAssistEntry.KIND_CLASS : CompletionItem.KIND_CLASS
+            case ContentAssistEntry.KIND_COLOR : CompletionItem.KIND_COLOR
+            case ContentAssistEntry.KIND_CONSTRUCTOR : CompletionItem.KIND_CONSTRUCTOR
+            case ContentAssistEntry.KIND_ENUM : CompletionItem.KIND_ENUM
+            case ContentAssistEntry.KIND_FIELD : CompletionItem.KIND_FIELD
+            case ContentAssistEntry.KIND_FILE : CompletionItem.KIND_FILE
+            case ContentAssistEntry.KIND_FUNCTION : CompletionItem.KIND_FUNCTION
+            case ContentAssistEntry.KIND_INTERFACE : CompletionItem.KIND_INTERFACE
+            case ContentAssistEntry.KIND_KEYWORD : CompletionItem.KIND_KEYWORD
+            case ContentAssistEntry.KIND_METHOD : CompletionItem.KIND_METHOD
+            case ContentAssistEntry.KIND_MODULE : CompletionItem.KIND_MODULE
+            case ContentAssistEntry.KIND_PROPERTY : CompletionItem.KIND_PROPERTY
+            case ContentAssistEntry.KIND_REFERENCE : CompletionItem.KIND_REFERENCE
+            case ContentAssistEntry.KIND_SNIPPET : CompletionItem.KIND_SNIPPET
+            case ContentAssistEntry.KIND_TEXT : CompletionItem.KIND_TEXT
+            case ContentAssistEntry.KIND_UNIT : CompletionItem.KIND_UNIT
+            case ContentAssistEntry.KIND_VALUE : CompletionItem.KIND_VALUE
+            case ContentAssistEntry.KIND_VARIABLE : CompletionItem.KIND_VARIABLE
+            default : CompletionItem.KIND_VALUE
+        }
+    }
 
 	// end completion stuff
 	// symbols
