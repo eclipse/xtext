@@ -3,6 +3,7 @@ dependencies {
 	compile "org.eclipse.emf:org.eclipse.emf.codegen:$versions.emfEcore"
 	compile "org.eclipse.xpand:org.eclipse.xpand:$versions.xpand"
 	compile "org.eclipse.xpand:org.eclipse.xtend:$versions.xpand"
+	optional "org.eclipse.jdt:org.eclipse.jdt.core:$versions.jdtCore"
 }
 
 sourceSets.main.java.srcDir 'packrat'

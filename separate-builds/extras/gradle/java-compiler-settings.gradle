@@ -22,3 +22,6 @@ configurations {
 }
 
 sourceSets.main.compileClasspath += configurations.optional
+eclipse.classpath.plusConfigurations += [configurations.optional]
+javadoc.classpath += configurations.optional
+javadoc.options.addStringOption('-Xdoclint:none')

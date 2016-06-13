@@ -1,5 +1,7 @@
 dependencies {
 	compile project(':org.eclipse.xtext.common.types')
+	optional project(':org.eclipse.xtext.generator')
+	optional "org.eclipse.xtext:org.eclipse.xtext.xtext.generator:$versions.xtext"
 }
 
-sourceSets.main.java.srcDir 'deprecated'
+sourceSets.main.java.srcDirs += ['deprecated', 'generator']
