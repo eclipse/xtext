@@ -7,9 +7,10 @@ tests/org.eclipse.xtext.purexbase.tests >> extras, eclipse
 intellij/org.eclipse.xtext.idea.example.entities >> idea, web
 intellij/org.eclipse.xtext.idea.example.entities.ide >> idea, web
 intellij/org.eclipse.xtext.idea.generator >> idea, eclipse
-maven/org.eclipse.xtext.parent >> maven, xtend
+maven/org.eclipse.xtext.parent >> maven, eclipse, xtend
 maven/org.eclipse.xtext.target >> maven, eclipse, xtend
-maven/org.eclipse.xtext.tycho.parent >> maven, eclipse, xtend
+maven/org.eclipse.xtext.tycho.parent >> eclipse, xtend
+maven/org.eclipse.xtext.tycho.tests.parent >> eclipse, xtend
 
 plugins/org.eclipse.xtext >> core
 plugins/org.eclipse.xtext.core >> core
@@ -83,7 +84,67 @@ maven/org.eclipse.xtend.maven.archetype >> xtend
 maven/org.eclipse.xtend.maven.plugin >> xtend
 
 
-releng >> eclipse
+releng/org.eclipse.xtend.releng >> delete
+releng/org.eclipse.xtext.pom.modifier >> delete
+releng/org.eclipse.xtext.releng/Install buckminster headless.launch  >> delete
+releng/org.eclipse.xtext.releng/META-INF/CVS >> delete
+releng/org.eclipse.xtext.releng/api-baseline/runtime_2.0.0_M6 >> delete
+releng/org.eclipse.xtext.releng/api-baseline/runtime_2.0.0_M7 >> delete
+releng/org.eclipse.xtext.releng/api-baseline/runtime_2.0.0_final >> delete
+releng/org.eclipse.xtext.releng/api-baseline/runtime_2.1.0_final >> delete
+releng/org.eclipse.xtext.releng/api-baseline/runtime_2.2.1 >> delete
+releng/org.eclipse.xtext.releng/bin >> delete
+releng/org.eclipse.xtext.releng/lib >> delete
+releng/org.eclipse.xtext.releng/src >> delete
+releng/org.eclipse.xtext.releng/statistics >> delete
+releng/org.eclipse.xtext.releng/team >> delete
+releng/DELETE.ME >> delete
+releng/MOVED_TO_org.eclipse.xtext.releng >> delete
+releng/.classpath >> delete
+releng/.project >> delete
+releng/.settings >> delete
+releng/LOCAL_WORKSPACE_SETUP.txt >> delete
+releng/META-INF >> delete
+releng/MOVED_TO_org.eclipse.xtext.releng >> delete
+releng/build-local-macosx.properties >> delete
+releng/build-local.properties >> delete
+releng/build.properties >> delete
+releng/build.xml >> delete
+releng/hudson >> delete
+releng/libs >> delete
+releng/maps >> delete
+releng/team >> delete
+releng/promote.properties >> delete
+releng/testing.properties >> delete
+
+releng/org.eclipse.xtext.releng/.classpath >> eclipse
+releng/org.eclipse.xtext.releng/.gitignore >> eclipse
+releng/org.eclipse.xtext.releng/.project >> eclipse
+releng/org.eclipse.xtext.releng/.settings >> eclipse
+releng/org.eclipse.xtext.releng/META-INF/MANIFEST.MF >> eclipse
+releng/org.eclipse.xtext.releng/api-baseline/.gitignore >> eclipse
+releng/org.eclipse.xtext.releng/api-baseline/api-baseline.target >> eclipse
+releng/org.eclipse.xtext.releng/api-baseline/readme.txt >> eclipse
+releng/org.eclipse.xtext.releng/buckminster.cspec >> eclipse
+releng/org.eclipse.xtext.releng/build.properties >> eclipse
+releng/org.eclipse.xtext.releng/component.def >> eclipse
+releng/org.eclipse.xtext.releng/distrobuilder >> eclipse
+releng/org.eclipse.xtext.releng/findbugs >> eclipse
+releng/org.eclipse.xtext.releng/generate xtext javadoc.launch  >> eclipse
+releng/org.eclipse.xtext.releng/javadoc.ant >> eclipse
+releng/org.eclipse.xtext.releng/local-xtext-build.launch >> eclipse
+releng/org.eclipse.xtext.releng/org.eclipse.xtext.releng javadoc.ant.launch >> eclipse
+releng/org.eclipse.xtext.releng/plugin_customization.ini >> eclipse
+releng/org.eclipse.xtext.releng/projectSet.psf >> eclipse
+releng/org.eclipse.xtext.releng/promote.properties >> eclipse
+releng/org.eclipse.xtext.releng/promoter.ant >> eclipse
+releng/org.eclipse.xtext.releng/publisher.properties >> eclipse
+releng/org.eclipse.xtext.releng/releng >> eclipse
+releng/org.eclipse.xtext.releng/sonar >> eclipse
+releng/org.eclipse.xtext.releng/target-platforms >> eclipse
+
+
+releng/org.eclipse.xtext.core.parent >> eclipse
 devtools/org.eclipse.xtext.contributor >> eclipse
 features/org.eclipse.xtend.swtbot.tests.feature >> eclipse
 features/org.eclipse.xtend.tests.feature >> eclipse
@@ -203,18 +264,8 @@ web/org.eclipse.xtext.xbase.web >> web
 web/refresh-gradle-dependencies-web.launch >> web
 separate-builds/web >> web
 
-
-maven/org.eclipse.xtext >> maven
-maven/org.eclipse.xtext.common.types >> maven
-maven/org.eclipse.xtext.dependencies >> maven
-maven/org.eclipse.xtext.ide >> maven
 maven/org.eclipse.xtext.maven.plugin >> maven
-maven/org.eclipse.xtext.standalone.parent >> maven
-maven/org.eclipse.xtext.tycho.tests.parent >> maven
-maven/org.eclipse.xtext.xbase >> maven
 maven/org.eclipse.xtext.xtext >> maven
-plugins/org.eclipse.xtext.maven.plugin >> maven
-plugins/org.eclipse.xtext.standalone.maven >> maven
 separate-builds/maven >> maven
 
 
@@ -275,7 +326,15 @@ maven/wrapper >> delete
 maven/org.eclipse.xtext.xbase.lib.slim >> delete
 maven/org.eclipse.xtend.core >> delete
 maven/org.eclipse.xtend.ide.common >> delete
+maven/org.eclipse.xtext >> delete
+maven/org.eclipse.xtext.common.types >> delete
+maven/org.eclipse.xtext.dependencies >> delete
+maven/org.eclipse.xtext.ide >> delete
+maven/org.eclipse.xtext.standalone.parent >> delete
+maven/org.eclipse.xtext.xbase >> delete
 
+plugins/org.eclipse.xtext.maven.plugin >> delete
+plugins/org.eclipse.xtext.standalone.maven >> delete
 plugins/.settings >> delete
 plugins/build.gradle >> delete
 plugins/com.google.collect >> delete
