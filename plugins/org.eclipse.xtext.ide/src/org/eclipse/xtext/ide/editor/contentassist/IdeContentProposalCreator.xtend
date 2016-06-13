@@ -26,7 +26,7 @@ class IdeContentProposalCreator {
 	 * Returns an entry with the given proposal and the prefix from the context, or null if the proposal is not valid.
 	 */
 	def ContentAssistEntry createProposal(String proposal, ContentAssistContext context) {
-		createProposal(proposal, context.prefix, context, null)
+		createProposal(proposal, context.prefix, context, ContentAssistEntry.KIND_UNKOWN, null)
 	}
 	
 	/**
@@ -34,19 +34,28 @@ class IdeContentProposalCreator {
 	 * If it is valid, the initializer function is applied to it.
 	 */
 	def ContentAssistEntry createProposal(String proposal, ContentAssistContext context, (ContentAssistEntry)=>void init) {
-		createProposal(proposal, context.prefix, context, init)
+		createProposal(proposal, context.prefix, context, ContentAssistEntry.KIND_UNKOWN, init)
+	}
+	
+	/**
+	 * Returns an entry with the given proposal and the prefix from the context, or null if the proposal is not valid.
+	 * If it is valid, the initializer function is applied to it.
+	 */
+	def ContentAssistEntry createProposal(String proposal, ContentAssistContext context, String kind, (ContentAssistEntry)=>void init) {
+		createProposal(proposal, context.prefix, context, kind, init)
 	}
 	
 	/**
 	 * Returns an entry with the given proposal and prefix, or null if the proposal is not valid.
 	 * If it is valid, the initializer function is applied to it.
 	 */
-	def ContentAssistEntry createProposal(String proposal, String prefix, ContentAssistContext context,
+	def ContentAssistEntry createProposal(String proposal, String prefix, ContentAssistContext context, String kind,
 			(ContentAssistEntry)=>void init) {
 		if (isValidProposal(proposal, prefix, context)) {
 			val result = new ContentAssistEntry
 			result.proposal = proposal
 			result.prefix = prefix
+			result.kind = kind
 			if (init !== null)
 				init.apply(result)
 			return result

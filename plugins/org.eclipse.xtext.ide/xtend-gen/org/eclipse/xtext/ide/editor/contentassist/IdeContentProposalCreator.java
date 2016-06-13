@@ -35,7 +35,7 @@ public class IdeContentProposalCreator {
    */
   public ContentAssistEntry createProposal(final String proposal, final ContentAssistContext context) {
     String _prefix = context.getPrefix();
-    return this.createProposal(proposal, _prefix, context, null);
+    return this.createProposal(proposal, _prefix, context, ContentAssistEntry.KIND_UNKOWN, null);
   }
   
   /**
@@ -44,19 +44,29 @@ public class IdeContentProposalCreator {
    */
   public ContentAssistEntry createProposal(final String proposal, final ContentAssistContext context, final Procedure1<? super ContentAssistEntry> init) {
     String _prefix = context.getPrefix();
-    return this.createProposal(proposal, _prefix, context, init);
+    return this.createProposal(proposal, _prefix, context, ContentAssistEntry.KIND_UNKOWN, init);
+  }
+  
+  /**
+   * Returns an entry with the given proposal and the prefix from the context, or null if the proposal is not valid.
+   * If it is valid, the initializer function is applied to it.
+   */
+  public ContentAssistEntry createProposal(final String proposal, final ContentAssistContext context, final String kind, final Procedure1<? super ContentAssistEntry> init) {
+    String _prefix = context.getPrefix();
+    return this.createProposal(proposal, _prefix, context, kind, init);
   }
   
   /**
    * Returns an entry with the given proposal and prefix, or null if the proposal is not valid.
    * If it is valid, the initializer function is applied to it.
    */
-  public ContentAssistEntry createProposal(final String proposal, final String prefix, final ContentAssistContext context, final Procedure1<? super ContentAssistEntry> init) {
+  public ContentAssistEntry createProposal(final String proposal, final String prefix, final ContentAssistContext context, final String kind, final Procedure1<? super ContentAssistEntry> init) {
     boolean _isValidProposal = this.isValidProposal(proposal, prefix, context);
     if (_isValidProposal) {
       final ContentAssistEntry result = new ContentAssistEntry();
       result.setProposal(proposal);
       result.setPrefix(prefix);
+      result.setKind(kind);
       if ((init != null)) {
         init.apply(result);
       }

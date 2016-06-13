@@ -72,6 +72,49 @@ public class ContentAssistEntry {
    */
   private transient Object source;
   
+  /**
+   * The kind of element that is proposed. Could be one of the constants below something specific a concrete client understands.
+   */
+  private String kind;
+  
+  public final static String KIND_TEXT = "TEXT";
+  
+  public final static String KIND_METHOD = "METHOD";
+  
+  public final static String KIND_FUNCTION = "FUNCTION";
+  
+  public final static String KIND_CONSTRUCTOR = "CONSTRUCTOR";
+  
+  public final static String KIND_FIELD = "FIELD";
+  
+  public final static String KIND_VARIABLE = "VARIABLE";
+  
+  public final static String KIND_CLASS = "CLASS";
+  
+  public final static String KIND_INTERFACE = "INTERFACE";
+  
+  public final static String KIND_MODULE = "MODULE";
+  
+  public final static String KIND_PROPERTY = "PROPERTY";
+  
+  public final static String KIND_UNIT = "UNIT";
+  
+  public final static String KIND_VALUE = "VALUE";
+  
+  public final static String KIND_ENUM = "ENUM";
+  
+  public final static String KIND_KEYWORD = "KEYWORD";
+  
+  public final static String KIND_SNIPPET = "SNIPPET";
+  
+  public final static String KIND_COLOR = "COLOR";
+  
+  public final static String KIND_FILE = "FILE";
+  
+  public final static String KIND_REFERENCE = "REFERENCE";
+  
+  public final static String KIND_UNKOWN = "UNKOWN";
+  
   @Pure
   public String getPrefix() {
     return this.prefix;
@@ -136,6 +179,15 @@ public class ContentAssistEntry {
     this.source = source;
   }
   
+  @Pure
+  public String getKind() {
+    return this.kind;
+  }
+  
+  public void setKind(final String kind) {
+    this.kind = kind;
+  }
+  
   @Override
   @Pure
   public String toString() {
@@ -148,6 +200,7 @@ public class ContentAssistEntry {
     b.add("escapePosition", this.escapePosition);
     b.add("textReplacements", this.textReplacements);
     b.add("editPositions", this.editPositions);
+    b.add("kind", this.kind);
     return b.toString();
   }
   
@@ -196,6 +249,11 @@ public class ContentAssistEntry {
         return false;
     } else if (!this.editPositions.equals(other.editPositions))
       return false;
+    if (this.kind == null) {
+      if (other.kind != null)
+        return false;
+    } else if (!this.kind.equals(other.kind))
+      return false;
     return true;
   }
   
@@ -211,6 +269,7 @@ public class ContentAssistEntry {
     result = prime * result + ((this.escapePosition== null) ? 0 : this.escapePosition.hashCode());
     result = prime * result + ((this.textReplacements== null) ? 0 : this.textReplacements.hashCode());
     result = prime * result + ((this.editPositions== null) ? 0 : this.editPositions.hashCode());
+    result = prime * result + ((this.kind== null) ? 0 : this.kind.hashCode());
     return result;
   }
 }

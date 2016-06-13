@@ -455,7 +455,74 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
     completionItem.setDetail(_description);
     String _proposal_1 = entry.getProposal();
     completionItem.setInsertText(_proposal_1);
+    int _translateKind = this.translateKind(entry);
+    completionItem.setKind(Integer.valueOf(_translateKind));
     return completionItem;
+  }
+  
+  protected int translateKind(final ContentAssistEntry entry) {
+    int _switchResult = (int) 0;
+    String _kind = entry.getKind();
+    switch (_kind) {
+      case ContentAssistEntry.KIND_CLASS:
+        _switchResult = CompletionItem.KIND_CLASS;
+        break;
+      case ContentAssistEntry.KIND_COLOR:
+        _switchResult = CompletionItem.KIND_COLOR;
+        break;
+      case ContentAssistEntry.KIND_CONSTRUCTOR:
+        _switchResult = CompletionItem.KIND_CONSTRUCTOR;
+        break;
+      case ContentAssistEntry.KIND_ENUM:
+        _switchResult = CompletionItem.KIND_ENUM;
+        break;
+      case ContentAssistEntry.KIND_FIELD:
+        _switchResult = CompletionItem.KIND_FIELD;
+        break;
+      case ContentAssistEntry.KIND_FILE:
+        _switchResult = CompletionItem.KIND_FILE;
+        break;
+      case ContentAssistEntry.KIND_FUNCTION:
+        _switchResult = CompletionItem.KIND_FUNCTION;
+        break;
+      case ContentAssistEntry.KIND_INTERFACE:
+        _switchResult = CompletionItem.KIND_INTERFACE;
+        break;
+      case ContentAssistEntry.KIND_KEYWORD:
+        _switchResult = CompletionItem.KIND_KEYWORD;
+        break;
+      case ContentAssistEntry.KIND_METHOD:
+        _switchResult = CompletionItem.KIND_METHOD;
+        break;
+      case ContentAssistEntry.KIND_MODULE:
+        _switchResult = CompletionItem.KIND_MODULE;
+        break;
+      case ContentAssistEntry.KIND_PROPERTY:
+        _switchResult = CompletionItem.KIND_PROPERTY;
+        break;
+      case ContentAssistEntry.KIND_REFERENCE:
+        _switchResult = CompletionItem.KIND_REFERENCE;
+        break;
+      case ContentAssistEntry.KIND_SNIPPET:
+        _switchResult = CompletionItem.KIND_SNIPPET;
+        break;
+      case ContentAssistEntry.KIND_TEXT:
+        _switchResult = CompletionItem.KIND_TEXT;
+        break;
+      case ContentAssistEntry.KIND_UNIT:
+        _switchResult = CompletionItem.KIND_UNIT;
+        break;
+      case ContentAssistEntry.KIND_VALUE:
+        _switchResult = CompletionItem.KIND_VALUE;
+        break;
+      case ContentAssistEntry.KIND_VARIABLE:
+        _switchResult = CompletionItem.KIND_VARIABLE;
+        break;
+      default:
+        _switchResult = CompletionItem.KIND_VALUE;
+        break;
+    }
+    return _switchResult;
   }
   
   @Override

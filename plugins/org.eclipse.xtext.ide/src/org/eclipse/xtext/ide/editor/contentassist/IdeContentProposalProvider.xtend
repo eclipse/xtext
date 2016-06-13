@@ -88,10 +88,13 @@ class IdeContentProposalProvider {
 					else
 						assignment.feature
 				val entry = proposalCreator.createProposal(proposal, context) [
-					if (rule.name == 'STRING')
+					if (rule.name == 'STRING') {
 						editPositions += new TextRegion(context.offset + 1, proposal.length - 2)
-					else
+						kind = ContentAssistEntry.KIND_TEXT
+					} else {
 						editPositions += new TextRegion(context.offset, proposal.length)
+						kind = ContentAssistEntry.KIND_VALUE
+					}
 					description = rule.name
 				]
 				acceptor.accept(entry, proposalPriorities.getDefaultPriority(entry))
@@ -103,6 +106,7 @@ class IdeContentProposalProvider {
 			IIdeContentProposalAcceptor acceptor) {
 		if (filterKeyword(keyword, context)) {
 			val entry = proposalCreator.createProposal(keyword.value, context)
+			entry.kind = ContentAssistEntry.KIND_KEYWORD
 			acceptor.accept(entry, proposalPriorities.getKeywordPriority(keyword.value, entry))
 		}
 	}

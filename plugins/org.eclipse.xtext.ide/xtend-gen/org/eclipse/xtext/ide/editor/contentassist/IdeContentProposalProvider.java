@@ -134,12 +134,14 @@ public class IdeContentProposalProvider {
               int _minus = (_length - 2);
               TextRegion _textRegion = new TextRegion(_plus_1, _minus);
               _editPositions.add(_textRegion);
+              it.setKind(ContentAssistEntry.KIND_TEXT);
             } else {
               ArrayList<TextRegion> _editPositions_1 = it.getEditPositions();
               int _offset_1 = context.getOffset();
               int _length_1 = proposal.length();
               TextRegion _textRegion_1 = new TextRegion(_offset_1, _length_1);
               _editPositions_1.add(_textRegion_1);
+              it.setKind(ContentAssistEntry.KIND_VALUE);
             }
             String _name_2 = rule.getName();
             it.setDescription(_name_2);
@@ -157,6 +159,7 @@ public class IdeContentProposalProvider {
     if (_filterKeyword) {
       String _value = keyword.getValue();
       final ContentAssistEntry entry = this.proposalCreator.createProposal(_value, context);
+      entry.setKind(ContentAssistEntry.KIND_KEYWORD);
       String _value_1 = keyword.getValue();
       int _keywordPriority = this.proposalPriorities.getKeywordPriority(_value_1, entry);
       acceptor.accept(entry, _keywordPriority);
