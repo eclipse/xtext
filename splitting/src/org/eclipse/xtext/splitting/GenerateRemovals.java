@@ -67,13 +67,13 @@ public class GenerateRemovals {
 				while ((line = reader.readLine()) != null) {
 					String file = line.replaceAll("\"|\\\\.", "");
 					for (String genDir : REMOVE_DIRS) {
-						int genDirIndex = file.indexOf(genDir);
-						if (genDirIndex > 0) {
+						int genDirIndex = file.indexOf("/" + genDir + "/");
+						if (genDirIndex >= 0) {
 							for (String targetRepo :  ValidateSplitting.REPOSITORIES) {
 								Set<String> repoRemovals = removalPaths.get(targetRepo);
 								Matcher matcher = segmentPattern.matcher(file);
 								boolean foundRemoval = false;
-								int genDirEndIndex = genDirIndex + genDir.length();
+								int genDirEndIndex = genDirIndex + genDir.length() + 1;
 								while (!foundRemoval && matcher.find() && matcher.start() <= genDirEndIndex) {
 									if (repoRemovals.contains(file.substring(0, matcher.start())))
 										foundRemoval = true;
