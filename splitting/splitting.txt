@@ -255,33 +255,33 @@ intellij/settings.gradle >> idea
 web >> web
 separate-builds/web >> web
 
-maven/org.eclipse.xtend.core >> maven
-maven/org.eclipse.xtend.ide.common >> maven
-maven/org.eclipse.xtend.maven.android.archetype >> maven
-maven/org.eclipse.xtend.maven.archetype >> maven
-maven/org.eclipse.xtend.maven.plugin >> maven
+maven/org.eclipse.xtend.core >> xtend
+maven/org.eclipse.xtend.ide.common >> xtend
+maven/org.eclipse.xtend.maven.android.archetype >> xtend
+maven/org.eclipse.xtend.maven.archetype >> xtend
+maven/org.eclipse.xtend.maven.plugin >> xtend
 maven/org.eclipse.xtext >> maven
 maven/org.eclipse.xtext.common.types >> maven
 maven/org.eclipse.xtext.dependencies >> maven
 maven/org.eclipse.xtext.ide >> maven
 maven/org.eclipse.xtext.maven.plugin >> maven
-maven/org.eclipse.xtext.parent >> maven
+maven/org.eclipse.xtext.parent >> maven, xtend
 maven/org.eclipse.xtext.standalone.parent >> maven
 maven/org.eclipse.xtext.target >> maven, eclipse, xtend
 maven/org.eclipse.xtext.tycho.parent >> maven, eclipse, xtend
 maven/org.eclipse.xtext.tycho.tests.parent >> maven
 maven/org.eclipse.xtext.xbase >> maven
 maven/org.eclipse.xtext.xtext >> maven
-plugins/org.eclipse.xtend.maven.plugin >> maven
-plugins/org.eclipse.xtend.standalone.maven >> maven
-plugins/org.eclipse.xtend2.lib.maven >> maven
-plugins/org.eclipse.xtend2.maven.plugin >> maven
-plugins/org.eclipse.xtend2.standalone.maven >> maven
+plugins/org.eclipse.xtend.maven.plugin >> xtend
+plugins/org.eclipse.xtend.standalone.maven >> xtend
+plugins/org.eclipse.xtend2.lib.maven >> xtend
+plugins/org.eclipse.xtend2.maven.plugin >> xtend
+plugins/org.eclipse.xtend2.standalone.maven >> xtend
 plugins/org.eclipse.xtext.maven.plugin >> maven
 plugins/org.eclipse.xtext.standalone.maven >> maven
-plugins/org.eclipse.xtext.xtend2.maven >> maven
-plugins/org.eclipse.xtext.xtend2.standalone >> maven
-plugins/org.eclipse.xtext.xtend2.standalone.maven >> maven
+plugins/org.eclipse.xtext.xtend2.maven >> xtend
+plugins/org.eclipse.xtext.xtend2.standalone >> xtend
+plugins/org.eclipse.xtext.xtend2.standalone.maven >> xtend
 separate-builds/maven >> maven
 
 .DS_Store >> delete
