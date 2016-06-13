@@ -17,7 +17,8 @@ rootProject.name = 'xtext-extras'
 
 [
 	'org.eclipse.xtext.testlanguages',
-	'org.eclipse.xtext.testlanguages.ide'
+	'org.eclipse.xtext.testlanguages.ide',
+	'org.eclipse.xtext.xbase.testlanguages'
 ].each { projectName ->
 	include projectName
 	project(":$projectName").projectDir = file("../../tests/$projectName")
