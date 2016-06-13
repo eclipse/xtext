@@ -6,22 +6,23 @@
 
 def isTestProject = name.endsWith('tests')
 def sourceDirs = ['src', 'xtend-gen', 'src-gen', 'emf-gen']
+
 sourceSets {
-	configure(isTestProject? test : main)  {
-		java.srcDirs = sourceDirs
-		resources {
-			srcDirs = sourceDirs
-			exclude '**/*.java', '**/*.xtendbin', '**/*.xtend', '**/*._trace'
-		}
-	}
-	configure(isTestProject? main : test)  {
-		java.srcDirs = []
-		resources.srcDirs = []
-	}
+    configure(isTestProject? test : main)  {
+        java.srcDirs = sourceDirs
+        resources {
+            srcDirs = sourceDirs
+            exclude '**/*.java', '**/*.xtendbin', '**/*.xtend', '**/*._trace'
+        }
+    }
+    configure(isTestProject? main : test)  {
+        java.srcDirs = []
+        resources.srcDirs = []
+    }
 }
 
 jar {
-	from ('.') {
+    from ('.') {
    	    include 'META-INF/**', 'about*.*', 'plugin.xml', 'schema/**', 'model/**'
    	}
 }
