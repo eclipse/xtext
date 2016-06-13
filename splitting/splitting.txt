@@ -144,8 +144,6 @@ intellij/org.eclipse.xtext.xbase.idea >> idea
 intellij/org.eclipse.xtext.xbase.idea.tests >> idea
 intellij/org.eclipse.xtext.xtext.idea >> idea
 intellij/org.eclipse.xtext.xtext.idea.tests >> idea
-
-
 intellij/.settings >> idea
 intellij/.gitignore >> idea
 intellij/.project >> idea
@@ -153,8 +151,19 @@ intellij/build.gradle >> idea
 intellij/debug.idea.launch >> idea
 intellij/refresh-gradle-dependencies-idea.launch >> idea
 
-web >> web
+
+web/build.gradle >> web
+web/.project >> web
+web/.settings >> web
+web/org.eclipse.xtext.web >> web
+web/org.eclipse.xtext.web.example.jetty >> web
+web/org.eclipse.xtext.web.example.statemachine >> web
+web/org.eclipse.xtext.web.example.statemachine.ide >> web
+web/org.eclipse.xtext.web.servlet >> web
+web/org.eclipse.xtext.xbase.web >> web
+web/refresh-gradle-dependencies-web.launch >> web
 separate-builds/web >> web
+
 
 maven/org.eclipse.xtext >> maven
 maven/org.eclipse.xtext.common.types >> maven
@@ -347,3 +356,6 @@ intellij/org.xtext.idea.sdomain.idea >> delete
 intellij/org.xtext.idea.sdomain.idea.tests >> delete
 intellij/org.xtext.idea.sdomain.tests >> delete
 intellij/org.xtext.idea.sdomain.ui >> delete
+web/refresh-gradle-dependencies.launch >> delete
+web/org.eclipse.xtext.web.example.statemachine.web >> delete
+web/org.eclipse.xtext.web.generator >> delete
