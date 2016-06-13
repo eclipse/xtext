@@ -188,33 +188,55 @@ separate-builds/maven >> maven
 CONTRIBUTING >> delete
 README.md >> delete
 build.gradle >> delete
-develop >> delete
-devtools/com.rcpquickstart.bundletestcollector >> delete
-devtools/org.eclipse.xtext.reference >> delete
-devtools/org.eclipse.xtext.reference.ui >> delete
-devtools/org.eclipse.xtext.testcollector >> delete
-docs/images >> delete
-docs/org.xtext.sevenlanguages.doc.xdoc >> delete
 dummy.txt >> delete
-gradle >> delete
 gradle-app.setting >> delete
 gradle.ant >> delete
 gradle.properties >> delete
 gradlew >> delete
 gradlew.bat >> delete
 hover.patch.txt >> delete
-jenkins >> delete
-maven/.settings >> delete
-maven/build.gradle >> delete
-maven/mvnw >> delete
-maven/mvnw.bat >> delete
-maven/wrapper >> delete
 org.eclipse.core.resources.prefs >> delete
 org.eclipse.core.runtime.prefs >> delete
 org.eclipse.jdt.core.prefs >> delete
 org.eclipse.jdt.launching.prefs >> delete
 org.eclipse.jdt.ui.prefs >> delete
 org.eclipse.xtend.core.Xtend.prefs >> delete
+settings.gradle >> delete
+test.txt >> delete
+
+develop >> delete
+gradle >> delete
+jenkins >> delete
+website >> delete
+xtext-website >> delete
+xtext.website.generator >> delete
+website-xtend >> delete
+xtend-website >> delete
+xtend.website.generator >> delete
+
+devtools/com.rcpquickstart.bundletestcollector >> delete
+devtools/org.eclipse.xtext.reference >> delete
+devtools/org.eclipse.xtext.reference.ui >> delete
+devtools/org.eclipse.xtext.testcollector >> delete
+devtools/org.eclipse.xtext.bootstrap >> delete
+devtools/org.eclipse.xtext.language-generator >> delete
+
+docs/images >> delete
+docs/org.xtext.sevenlanguages.doc.xdoc >> delete
+docs/org.eclipse.xtend.bootstrapdoc >> delete
+docs/org.eclipse.xtend.doc.xdoc >> delete
+docs/gen_toc.jar >> delete
+docs/org.eclipse.xtext.doc.xdoc >> delete
+
+maven/.settings >> delete
+maven/build.gradle >> delete
+maven/mvnw >> delete
+maven/mvnw.bat >> delete
+maven/wrapper >> delete
+maven/org.eclipse.xtext.xbase.lib.slim >> delete
+maven/org.eclipse.xtend.core >> delete
+maven/org.eclipse.xtend.ide.common >> delete
+
 plugins/.settings >> delete
 plugins/build.gradle >> delete
 plugins/com.google.collect >> delete
@@ -228,27 +250,12 @@ plugins/org.apache.log4j >> delete
 plugins/org.eclipse.emf.index >> delete
 plugins/org.eclipse.emf.index.ui >> delete
 plugins/org.eclipse.xtext.doc.manual >> delete
-settings.gradle >> delete
-separate-builds/.project >> delete
-test.txt >> delete
-tests/.settings >> delete
-tests/build.gradle >> delete
-tests/org.eclipse.emf.index.tests >> delete
-tests/org.eclipse.emf.index.ui.tests >> delete
-website >> delete
-xtext-website >> delete
-xtext.website.generator >> delete
-devtools/org.eclipse.xtext.bootstrap >> delete
-devtools/org.eclipse.xtext.language-generator >> delete
 plugins/org.eclipse.xtext.generator.parser >> delete
 plugins/org.eclipse.xtext.index >> delete
 plugins/org.eclipse.xtext.xtend2.lib >> delete
 plugins/org.eclipse.xtend2.lib >> delete
-maven/org.eclipse.xtext.xbase.lib.slim >> delete
-docs/org.eclipse.xtend.bootstrapdoc >> delete
 plugins/org.eclipse.xtend.bootstrapdoc >> delete
 plugins/org.eclipse.xtext.xtend2.bootstrapdoc >> delete
-docs/org.eclipse.xtend.doc.xdoc >> delete
 plugins/org.eclipse.xtend.doc >> delete
 plugins/org.eclipse.xtend.doc.xdoc >> delete
 plugins/org.eclipse.xtend.gradle.plugin >> delete
@@ -265,18 +272,6 @@ plugins/org.eclipse.xtext.xtend2 >> delete
 plugins/org.eclipse.xtext.xtend2.doc >> delete
 plugins/org.eclipse.xtext.xtend2.m2e >> delete
 plugins/org.eclipse.xtext.xtend2.ui >> delete
-tests/org.eclipse.xtend.ide.tests.data >> delete
-tests/org.eclipse.xtend.macro.lang.tests >> delete
-tests/org.eclipse.xtend.standalone.tests >> delete
-tests/org.eclipse.xtext.xtend.tests >> delete
-tests/org.eclipse.xtext.xtend2.standalone.tests >> delete
-tests/org.eclipse.xtext.xtend2.tests >> delete
-tests/org.eclipse.xtext.xtend2.ui.tests >> delete
-website-xtend >> delete
-xtend-website >> delete
-xtend.website.generator >> delete
-maven/org.eclipse.xtend.core >> delete
-maven/org.eclipse.xtend.ide.common >> delete
 plugins/org.eclipse.xtend.maven.plugin >> delete
 plugins/org.eclipse.xtend.standalone.maven >> delete
 plugins/org.eclipse.xtend2.lib.maven >> delete
@@ -285,16 +280,6 @@ plugins/org.eclipse.xtend2.standalone.maven >> delete
 plugins/org.eclipse.xtext.xtend2.maven >> delete
 plugins/org.eclipse.xtext.xtend2.standalone >> delete
 plugins/org.eclipse.xtext.xtend2.standalone.maven >> delete
-features/org.eclipse.emf.index.feature >> delete
-features/org.eclipse.xtend.build.feature >> delete
-features/org.eclipse.xtend.feature >> delete
-features/org.eclipse.xtend.m2e.feature >> delete
-features/org.eclipse.xtext.m2e.feature >> delete
-features/org.eclipse.xtext.site.feature >> delete
-features/org.eclipse.xtext.xtend2.m2e.feature >> delete
-features/org.eclipse.xtext.xtend2.sdk.feature >> delete
-docs/gen_toc.jar >> delete
-docs/org.eclipse.xtext.doc.xdoc >> delete
 plugins/org.eclipse.xtext.common.ui >> delete
 plugins/org.eclipse.xtext.doc >> delete
 plugins/org.eclipse.xtext.doc.xdoc >> delete
@@ -314,6 +299,20 @@ plugins/org.eclipse.xtext.ui.junit >> delete
 plugins/org.eclipse.xtext.wikitext.core >> delete
 plugins/org.eclipse.xtext.wizard >> delete
 plugins/org.eclipse.xtext.xbase.doc >> delete
+
+separate-builds/.project >> delete
+
+tests/.settings >> delete
+tests/build.gradle >> delete
+tests/org.eclipse.emf.index.tests >> delete
+tests/org.eclipse.emf.index.ui.tests >> delete
+tests/org.eclipse.xtend.ide.tests.data >> delete
+tests/org.eclipse.xtend.macro.lang.tests >> delete
+tests/org.eclipse.xtend.standalone.tests >> delete
+tests/org.eclipse.xtext.xtend.tests >> delete
+tests/org.eclipse.xtext.xtend2.standalone.tests >> delete
+tests/org.eclipse.xtext.xtend2.tests >> delete
+tests/org.eclipse.xtext.xtend2.ui.tests >> delete
 tests/org.eclipse.xtext.automated.tests >> delete
 tests/org.eclipse.xtext.example.domainmodel.ui.tests >> delete
 tests/org.eclipse.xtext.index.tests >> delete
@@ -324,12 +323,23 @@ tests/org.eclipse.xtext.ui.common.tests >> delete
 tests/org.eclipse.xtext.ui.core.tests >> delete
 tests/org.eclipse.xtext.wikitext.tests >> delete
 tests/org.eclipse.xtext.ui.integration.tests >> delete
+
+features/org.eclipse.emf.index.feature >> delete
+features/org.eclipse.xtend.build.feature >> delete
+features/org.eclipse.xtend.feature >> delete
+features/org.eclipse.xtend.m2e.feature >> delete
+features/org.eclipse.xtext.m2e.feature >> delete
+features/org.eclipse.xtext.site.feature >> delete
+features/org.eclipse.xtext.xtend2.m2e.feature >> delete
+features/org.eclipse.xtext.xtend2.sdk.feature >> delete
+
 examples/org.eclipse.xtext.example.domainmodel >> delete
 examples/org.eclipse.xtext.example.domainmodel.ui >> delete
 examples/org.eclipse.xtext.example.ecoredsl >> delete
 examples/org.eclipse.xtext.example.ecoredsl.ui >> delete
 examples/org.eclipse.xtext.example.fowlerdsl >> delete
 examples/org.eclipse.xtext.example.fowlerdsl.ui >> delete
+
 intellij/refresh-gradle-dependencies.launch >> delete
 intellij/buildSrc >> delete
 intellij/gradle >> delete
@@ -356,6 +366,7 @@ intellij/org.xtext.idea.sdomain.idea >> delete
 intellij/org.xtext.idea.sdomain.idea.tests >> delete
 intellij/org.xtext.idea.sdomain.tests >> delete
 intellij/org.xtext.idea.sdomain.ui >> delete
+
 web/refresh-gradle-dependencies.launch >> delete
 web/org.eclipse.xtext.web.example.statemachine.web >> delete
 web/org.eclipse.xtext.web.generator >> delete
