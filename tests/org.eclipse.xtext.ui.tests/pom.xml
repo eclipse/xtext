@@ -8,7 +8,7 @@
 		<relativePath>../../maven/org.eclipse.xtext.tycho.tests.parent</relativePath>
 	</parent>
 
-	<artifactId>org.eclipse.xtext.builder.tests</artifactId>
+	<artifactId>org.eclipse.xtext.ui.tests</artifactId>
 	<packaging>eclipse-test-plugin</packaging>
 
 	<build>
@@ -16,11 +16,6 @@
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>tycho-surefire-plugin</artifactId>
-				<configuration>
-					<includes>
-						<include>**/standalone/*.java</include>
-					</includes>
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>
