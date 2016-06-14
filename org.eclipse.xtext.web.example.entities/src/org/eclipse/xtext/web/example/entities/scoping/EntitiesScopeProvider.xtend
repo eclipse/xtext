@@ -5,15 +5,15 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.idea.example.entities
+package org.eclipse.xtext.web.example.entities.scoping
 
 
 /**
- * Initialization support for running Xtext languages without Equinox extension registry.
+ * This class contains custom scoping description.
+ * 
+ * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#scoping
+ * on how and when to use it.
  */
-class EntitiesStandaloneSetup extends EntitiesStandaloneSetupGenerated {
+class EntitiesScopeProvider extends AbstractEntitiesScopeProvider {
 
-	def static void doSetup() {
-		new EntitiesStandaloneSetup().createInjectorAndDoEMFRegistration()
-	}
 }

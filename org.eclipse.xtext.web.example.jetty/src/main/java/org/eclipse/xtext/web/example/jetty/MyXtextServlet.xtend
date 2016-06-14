@@ -7,15 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.web.example.jetty
 
-import com.google.inject.Guice
 import com.google.inject.Provider
 import java.util.List
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import javax.servlet.annotation.WebServlet
-import org.eclipse.xtext.idea.example.entities.EntitiesRuntimeModule
-import org.eclipse.xtext.idea.example.entities.EntitiesStandaloneSetup
-import org.eclipse.xtext.util.Modules2
 import org.eclipse.xtext.web.server.persistence.ResourceBaseProviderImpl
 import org.eclipse.xtext.web.servlet.XtextServlet
 
@@ -29,13 +25,7 @@ class MyXtextServlet extends XtextServlet {
 		val Provider<ExecutorService> executorServiceProvider = [Executors.newCachedThreadPool => [executorServices += it]]
 		val resourceBaseProvider = new ResourceBaseProviderImpl('./test-files')
 		new StatemachineWebSetup(executorServiceProvider, resourceBaseProvider).createInjectorAndDoEMFRegistration
-		new EntitiesStandaloneSetup {
-			override createInjector() {
-				val runtimeModule = new EntitiesRuntimeModule
-				val webModule = new EntitiesWebModule(executorServiceProvider, resourceBaseProvider)
-				return Guice.createInjector(Modules2.mixin(runtimeModule, webModule))
-			}
-		}.createInjectorAndDoEMFRegistration
+		new EntitiesWebSetup(executorServiceProvider, resourceBaseProvider).createInjectorAndDoEMFRegistration
 	}
 	
 	override destroy() {

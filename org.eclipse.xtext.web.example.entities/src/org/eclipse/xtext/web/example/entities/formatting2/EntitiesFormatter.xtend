@@ -5,14 +5,14 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.idea.example.entities.formatting2
+package org.eclipse.xtext.web.example.entities.formatting2
 
 import com.google.inject.Inject
 import org.eclipse.xtext.formatting2.IFormattableDocument
-import org.eclipse.xtext.idea.example.entities.domainmodel.AbstractElement
-import org.eclipse.xtext.idea.example.entities.domainmodel.Entities
-import org.eclipse.xtext.idea.example.entities.domainmodel.PackageDeclaration
-import org.eclipse.xtext.idea.example.entities.services.EntitiesGrammarAccess
+import org.eclipse.xtext.web.example.entities.domainmodel.AbstractElement
+import org.eclipse.xtext.web.example.entities.domainmodel.Entities
+import org.eclipse.xtext.web.example.entities.domainmodel.PackageDeclaration
+import org.eclipse.xtext.web.example.entities.services.EntitiesGrammarAccess
 import org.eclipse.xtext.xbase.formatting2.XbaseFormatter
 
 class EntitiesFormatter extends XbaseFormatter {

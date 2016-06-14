@@ -5,18 +5,18 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-module org.eclipse.xtext.web.example.statemachine.GenerateStatemachine
+module org.eclipse.xtext.web.example.entities.GenerateEntities
 
 import org.eclipse.xtext.xtext.generator.*
 import org.eclipse.xtext.xtext.generator.model.project.*
 
 var rootPath = ".."
-var baseName = "org.eclipse.xtext.web.example.statemachine"
+var baseName = "org.eclipse.xtext.web.example.entities"
 
 Workflow {
-	
-	component = XtextGenerator {
-		configuration = StateMachineGeneratorModule {
+    
+    component = XtextGenerator {
+		configuration = EntitiesGeneratorModule {
 			project = StandardProjectConfig {
 				rootPath = rootPath
 				baseName = baseName
@@ -32,7 +32,7 @@ Workflow {
 				}
 			}
 			code = {
-				encoding = "UTF-8"
+				encoding = "ISO-8859-1"
 				fileHeader = 
 "/*******************************************************************************
  * Copyright (c) 2015 itemis AG (http://www.itemis.eu) and others.
@@ -44,12 +44,13 @@ Workflow {
 			}
 		}
 		cleaner = {
-			exclude = "AbstractEntitiesWebModule.java"
+			exclude = "AbstractStatemachineWebModule.java"
 		}
-		language = {
-			grammarUri = "classpath:/org/eclipse/xtext/web/example/statemachine/Statemachine.xtext"
-			fileExtensions = "statemachine"
-			
+    	language = {
+    		grammarUri = "classpath:/org/eclipse/xtext/web/example/entities/Entities.xtext"
+    		fileExtensions = "entities"
+    		referencedResource = "platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel"
+    
 			// Java API to access grammar elements (required by several other fragments)
 			fragment = grammarAccess.GrammarAccessFragment2 {}
 
@@ -85,16 +86,17 @@ Workflow {
 			// JavaScript-based syntax highlighting
 			fragment = web.WebIntegrationFragment {
 				framework = "Orion"
-				highlightingPath = "xtext/statemachine-syntax.js"
+				highlightingPath = "xtext/entities-syntax.js"
 			}
 			fragment = web.WebIntegrationFragment {
 				framework = "Ace"
-				highlightingPath = "xtext/ace-mode-statemachine.js"
+				highlightingPath = "xtext/ace-mode-entities.js"
 			}
 			fragment = web.WebIntegrationFragment {
 				framework = "CodeMirror"
-				highlightingPath = "xtext/cm-mode-statemachine.js"
+				highlightingPath = "xtext/cm-mode-entities.js"
 			}
-		}
-	}
+    	}
+    }
 }
+

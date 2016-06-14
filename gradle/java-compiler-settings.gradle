@@ -5,3 +5,29 @@ plugins.withType(JavaBasePlugin) {
 tasks.withType(JavaCompile) {
 	options.encoding = 'ISO-8859-1'
 }
+
+sourceSets {
+    generator {
+        java {
+            compileClasspath += main.output
+            runtimeClasspath += main.output
+        }
+    }
+}
+
+configurations {
+	generatorCompile.extendsFrom mainCompile
+	generatorRuntime.extendsFrom mainRuntime
+    
+	/*
+	 * Put any unwanted transitive dependencies here, they will be excluded from all projects
+	 */
+    all {
+		exclude group: 'org.antlr', module: 'stringtemplate'
+		exclude module: 'cglib'
+	}
+}
+
+eclipse.classpath.plusConfigurations += [configurations.generatorCompile]
+
+javadoc.options.addStringOption('-Xdoclint:none')

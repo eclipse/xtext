@@ -2,4 +2,8 @@ apply from: "${rootDir}/gradle/eclipse-project-layout.gradle"
 
 dependencies {
 	compile "org.eclipse.xtext:org.eclipse.xtext.xbase:$versions.xtext"
+	generatorCompile "org.eclipse.xtext:org.eclipse.xtext.xtext.generator:$versions.xtext"
+	generatorRuntime "org.eclipse.emf:org.eclipse.emf.mwe2.launch:$versions.emfMwe2"
 }
+
+sourceSets.generator.java.srcDir 'generator'

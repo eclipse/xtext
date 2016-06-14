@@ -17,10 +17,10 @@ import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtend.lib.annotations.Accessors
-import org.eclipse.xtext.idea.example.entities.EntitiesRuntimeModule
-import org.eclipse.xtext.idea.example.entities.EntitiesStandaloneSetup
 import org.eclipse.xtext.junit4.AbstractXtextTests
 import org.eclipse.xtext.util.Modules2
+import org.eclipse.xtext.web.example.entities.EntitiesRuntimeModule
+import org.eclipse.xtext.web.example.entities.EntitiesStandaloneSetup
 import org.eclipse.xtext.web.server.ISession
 import org.eclipse.xtext.web.server.XtextServiceDispatcher
 import org.eclipse.xtext.web.server.persistence.IResourceBaseProvider

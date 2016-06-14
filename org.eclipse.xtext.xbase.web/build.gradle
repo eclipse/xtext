@@ -5,7 +5,7 @@ dependencies {
     compile "org.eclipse.xtext:org.eclipse.xtext.xbase.ide:$versions.xtext"
     testCompile group: 'junit', name: 'junit', version: '4.12'
     testCompile "org.eclipse.xtext:org.eclipse.xtext.junit4:$versions.xtext"
-    testCompile project(':org.eclipse.xtext.idea.example.entities.ide')
+    testCompile project(':org.eclipse.xtext.web.example.entities.ide')
 }
 
 jar.manifest {

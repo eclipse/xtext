@@ -1,21 +1,10 @@
 rootProject.name = 'xtext-web'
 
-[
-	'org.eclipse.xtext.web',
-	'org.eclipse.xtext.web.example.jetty',
-	'org.eclipse.xtext.web.example.statemachine',
-	'org.eclipse.xtext.web.example.statemachine.ide',
-	'org.eclipse.xtext.web.servlet',
-	'org.eclipse.xtext.xbase.web'
-].each { projectName ->
-	include projectName
-	project(":$projectName").projectDir = file("../../web/$projectName")
-}
-
-[
-	'org.eclipse.xtext.idea.example.entities',
-	'org.eclipse.xtext.idea.example.entities.ide'
-].each { projectName ->
-	include projectName
-	project(":$projectName").projectDir = file("../../intellij/$projectName")
-}
+include 'org.eclipse.xtext.web'
+include 'org.eclipse.xtext.xbase.web'
+include 'org.eclipse.xtext.web.servlet'
+include 'org.eclipse.xtext.web.example.jetty'
+include 'org.eclipse.xtext.web.example.statemachine'
+include 'org.eclipse.xtext.web.example.statemachine.ide'
+include 'org.eclipse.xtext.web.example.entities'
+include 'org.eclipse.xtext.web.example.entities.ide'
