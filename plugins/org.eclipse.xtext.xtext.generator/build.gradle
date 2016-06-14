@@ -1,8 +1,0 @@
-dependencies {
-	compile project(':org.eclipse.xtext')
-	compile "org.eclipse.emf:org.eclipse.emf.codegen:$versions.emfEcore"
-	compile "org.eclipse.emf:org.eclipse.emf.codegen.ecore:$versions.emfEcore"
-	compile "org.eclipse.emf:org.eclipse.emf.mwe.utils:$versions.emfMwe"
-	compile "org.eclipse.emf:org.eclipse.emf.mwe2.lib:$versions.emfMwe2"
-	compile "com.ibm.icu:icu4j:$versions.icu"
-}

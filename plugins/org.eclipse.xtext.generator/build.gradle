@@ -1,8 +1,0 @@
-dependencies {
-	compile "org.eclipse.xtext:org.eclipse.xtext.xtext.generator:$versions.xtext"
-	compile "org.eclipse.emf:org.eclipse.emf.codegen:$versions.emfEcore"
-	compile "org.eclipse.xpand:org.eclipse.xpand:$versions.xpand"
-	compile "org.eclipse.xpand:org.eclipse.xtend:$versions.xpand"
-}
-
-sourceSets.main.java.srcDir 'packrat'

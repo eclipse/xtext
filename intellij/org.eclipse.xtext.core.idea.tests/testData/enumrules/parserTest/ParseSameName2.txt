@@ -1,6 +1,0 @@
-org.eclipse.xtext.enumrules.idea.lang.psi.impl.EnumRulesTestLanguageFileImpl:a.enumrulestestlanguage(0,18)
-  org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_ELEMENT_TYPE)('anonymous')(0,18)
-    PsiElement(Model_GeneratedKeyword_1_0_ELEMENT_TYPE)('generated')(0,9)
-    org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_GeneratedGeneratedEnumEnumRuleCall_1_1_0_ELEMENT_TYPE)(9,18)
-      PsiWhiteSpace(' ')(9,10)
-      PsiElement(GeneratedEnum_SameNameEnumLiteralDeclaration_0_ELEMENT_TYPE)('SameName')(10,18)

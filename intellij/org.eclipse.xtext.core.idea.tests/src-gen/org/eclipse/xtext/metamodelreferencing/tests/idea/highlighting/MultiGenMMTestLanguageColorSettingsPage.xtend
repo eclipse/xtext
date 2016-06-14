@@ -1,4 +1,0 @@
-package org.eclipse.xtext.metamodelreferencing.tests.idea.highlighting
-
-class MultiGenMMTestLanguageColorSettingsPage extends MultiGenMMTestLanguageBaseColorSettingsPage {
-}

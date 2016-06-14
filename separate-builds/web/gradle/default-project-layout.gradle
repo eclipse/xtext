@@ -1,5 +1,0 @@
-sourceSets {
-	main.java.srcDir 'src/main/xtend-gen'
-	main.java.srcDir 'src/main/xtext-gen'
-	test.java.srcDir 'src/test/xtend-gen'
-}

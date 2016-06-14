@@ -1,8 +1,0 @@
-org.eclipse.xtext.parser.assignments.idea.lang.psi.impl.AssignmentsTestLanguageFileImpl:a.assignmentstestlanguage(0,19)
-  org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_ELEMENT_TYPE)('anonymous')(0,19)
-    PsiElement(Model_SimpleKeyword_0_0_ELEMENT_TYPE)('simple')(0,6)
-    org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_SingleSingleValueParserRuleCall_0_1_0_0_ELEMENT_TYPE)('anonymous')(6,19)
-      PsiWhiteSpace(' ')(6,7)
-      PsiElement(SingleValue_IdKeyword_0_0_ELEMENT_TYPE)('id')(7,9)
-      PsiWhiteSpace(' ')(9,10)
-      PsiElement(SingleValue_ValueIDTerminalRuleCall_0_1_0_ELEMENT_TYPE)('something')(10,19)

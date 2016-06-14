@@ -1,4 +1,0 @@
-package org.eclipse.xtext.parsetree.reconstr.idea.highlighting
-
-class ComplexReconstrTestLanguageColorSettingsPage extends ComplexReconstrTestLanguageBaseColorSettingsPage {
-}

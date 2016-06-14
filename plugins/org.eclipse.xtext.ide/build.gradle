@@ -1,4 +1,0 @@
-dependencies {
-	compile project(':org.eclipse.xtext')
-	compile "io.typefox.lsapi:io.typefox.lsapi.services:$versions.lsapi"
-}

@@ -1,4 +1,0 @@
-package org.eclipse.xtext.grammarinheritance.serializer;
-
-public class AbstractTestLanguageSyntacticSequencer extends AbstractAbstractTestLanguageSyntacticSequencer {
-}

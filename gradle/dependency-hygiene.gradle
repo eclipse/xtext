@@ -1,7 +1,0 @@
-/*
- * Put any unwanted transitive dependencies here, they will be excluded from all projects
- */
-configurations.all {
-	exclude group: 'org.antlr', module: 'stringtemplate'
-	exclude module:'cglib'
-}

@@ -1,4 +1,0 @@
-package org.eclipse.xtext.valueconverter.idea.highlighting
-
-class QualifiedNameTestLanguageColorSettingsPage extends QualifiedNameTestLanguageBaseColorSettingsPage {
-}

@@ -1,5 +1,0 @@
-group = 'org.eclipse.xtend'
-
-dependencies {
-	compile project(':org.eclipse.xtend.lib')
-}

@@ -1,5 +1,0 @@
-dependencies {
-	compile project(':org.eclipse.xtext.common.types')
-}
-
-sourceSets.main.java.srcDir 'deprecated'

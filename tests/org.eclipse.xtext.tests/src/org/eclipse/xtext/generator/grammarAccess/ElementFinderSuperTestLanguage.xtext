@@ -1,9 +1,0 @@
-grammar org.eclipse.xtext.generator.grammarAccess.ElementFinderSuperTestLanguage with org.eclipse.xtext.common.Terminals
-
-generate elementfinder "http://example.org/grammarfinder/super/0.1"
-
-SomeRoot:
-	(elements += SomeType)*;
-	
-SomeType:
-	name=ID "superKeyword";

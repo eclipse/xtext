@@ -1,9 +1,0 @@
-dependencies {
-	compile project(':tests:org.eclipse.xtext.testlanguages.ide')
-}
-
-ideaDevelopment {
-	pluginDependencies {
-		project ':intellij:org.eclipse.xtext.idea'
-	}
-}

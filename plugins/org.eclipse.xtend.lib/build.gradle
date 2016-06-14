@@ -1,8 +1,0 @@
-group = 'org.eclipse.xtend'
-
-dependencies {
-	compile project(':org.eclipse.xtext.xbase.lib')
-	compile project(':org.eclipse.xtend.lib.macro')
-}
-
-sourceSets.main.resources.include 'about_org.eclipse.xtend.lib.html'
