@@ -1,7 +1,0 @@
-build.commands=org.eclipse.jdt.core.javabuilder
-connection.gradle.distribution=GRADLE_DISTRIBUTION(WRAPPER)
-connection.project.dir=../../separate-builds/lib
-derived.resources=.gradle,build
-eclipse.preferences.version=1
-natures=org.eclipse.jdt.core.javanature
-project.path=\:org.eclipse.xtend.lib
