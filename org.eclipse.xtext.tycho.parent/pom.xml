@@ -41,147 +41,10 @@
 	</properties>
 
 	<scm>
-		<connection>scm:git:git://github.com/eclipse/xtext.git</connection>
-		<developerConnection>scm:git:ssh://git@github.com:eclipse/xtext.git</developerConnection>
-		<url>https://github.com/eclipse/xtext.git</url>
+		<connection>scm:git:https://github.com/eclipse/xtext-xtend.git</connection>
+		<developerConnection>scm:git:ssh://git@github.com:eclipse/xtext-xtend.git</developerConnection>
+		<url>https://github.com/eclipse/xtext-xtend</url>
 	</scm>
-
-	<repositories>
-		<repository>
-			<id>source for lsapi</id>
-			<url>https://oss.sonatype.org/content/repositories/snapshots/</url> <!-- for lsapi -->
-		</repository>
-	</repositories>
-
-	<dependencies>
-		<dependency>
-			<groupId>io.typefox.lsapi</groupId>
-			<artifactId>io.typefox.lsapi.services</artifactId>
-			<version>0.2.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.xtend</groupId>
-			<artifactId>org.eclipse.xtend.lib</artifactId>
-			<version>2.11.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.xtend</groupId>
-			<artifactId>org.eclipse.xtend.lib.gwt</artifactId>
-			<version>2.11.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.xtend</groupId>
-			<artifactId>org.eclipse.xtend.lib.macro</artifactId>
-			<version>2.11.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.xtend</groupId>
-			<artifactId>org.eclipse.xtend2.lib</artifactId>
-			<version>2.11.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.xtext</groupId>
-			<artifactId>org.eclipse.xtext.xbase.lib</artifactId>
-			<version>2.11.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.xtext</groupId>
-			<artifactId>org.eclipse.xtext.xbase.lib.gwt</artifactId>
-			<version>2.11.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.xtext</groupId>
-			<artifactId>org.eclipse.xtext</artifactId>
-			<version>2.11.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.xtext</groupId>
-			<artifactId>org.eclipse.xtext.ide</artifactId>
-			<version>2.11.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.xtext</groupId>
-			<artifactId>org.eclipse.xtext.smap</artifactId>
-			<version>2.11.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.xtext</groupId>
-			<artifactId>org.eclipse.xtext.util</artifactId>
-			<version>2.11.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.xtext</groupId>
-			<artifactId>org.eclipse.xtext.xtext.generator</artifactId>
-			<version>2.11.0-SNAPSHOT</version>
-			<exclusions>
-				<exclusion>
-					<!-- TODO: this should not be necessary -->
-					<groupId>org.eclipse.emf</groupId>
-					<artifactId>org.eclipse.emf.mwe2.lib</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.xtext</groupId>
-			<artifactId>org.eclipse.xtext.xtext.wizard</artifactId>
-			<version>2.11.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.xtext</groupId>
-			<artifactId>org.eclipse.xtext.builder.standalone</artifactId>
-			<version>2.11.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.xtext</groupId>
-			<artifactId>org.eclipse.xtext.common.types</artifactId>
-			<version>2.11.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.xtext</groupId>
-			<artifactId>org.eclipse.xtext.ecore</artifactId>
-			<version>2.11.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.xtext</groupId>
-			<artifactId>org.eclipse.xtext.generator</artifactId>
-			<version>2.11.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.xtext</groupId>
-			<artifactId>org.eclipse.xtext.java</artifactId>
-			<version>2.11.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.xtext</groupId>
-			<artifactId>org.eclipse.xtext.purexbase</artifactId>
-			<version>2.11.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.xtext</groupId>
-			<artifactId>org.eclipse.xtext.xbase</artifactId>
-			<version>2.11.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.xtext</groupId>
-			<artifactId>org.eclipse.xtext.xbase.ide</artifactId>
-			<version>2.11.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.xtext</groupId>
-			<artifactId>org.eclipse.xtext.testlanguages</artifactId>
-			<version>2.11.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.xtext</groupId>
-			<artifactId>org.eclipse.xtext.testlanguages.ide</artifactId>
-			<version>2.11.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.xtext</groupId>
-			<artifactId>org.eclipse.xtext.xbase.testlanguages</artifactId>
-			<version>2.11.0-SNAPSHOT</version>
-		</dependency>
-	</dependencies>
 
 	<build>
 		<plugins>
@@ -226,7 +89,6 @@
 				<artifactId>target-platform-configuration</artifactId>
 				<version>${tycho-version}</version>
 				<configuration>
-					<pomDependencies>consider</pomDependencies>
 					<target>
 						<artifact>
 							<groupId>org.eclipse.xtext</groupId>

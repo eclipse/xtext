@@ -9,6 +9,7 @@
 
 	<modules>
 		<module>org.eclipse.xtext.tycho.parent</module>
+		<module>org.eclipse.xtext.license.feature</module>
 		<module>org.eclipse.xtext.target</module>
 		<module>org.eclipse.xtend.core</module>
 		<module>org.eclipse.xtend.ide</module>

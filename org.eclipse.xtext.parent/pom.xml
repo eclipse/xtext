@@ -5,6 +5,9 @@
 		<groupId>org.sonatype.oss</groupId>
 		<artifactId>oss-parent</artifactId>
 		<version>7</version>
+		<!-- empty <relativePath> tag need to be here -->
+		<!-- http://stackoverflow.com/questions/6003831/parent-relativepath-points-at-my-com-mycompanymyproject-instead-of-org-apache -->
+		<relativePath></relativePath>
 	</parent>
 
 	<groupId>org.eclipse.xtext</groupId>
@@ -12,7 +15,7 @@
 	<packaging>pom</packaging>
 	<version>2.11.0-SNAPSHOT</version>
 
-	
+
 	<properties>
 		<mavenVersion>3.2.5</mavenVersion>
 		<tycho-version>0.25.0</tycho-version>
