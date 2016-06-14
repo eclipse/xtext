@@ -1,6 +1,6 @@
 # Xtext Core Framework
 
-This repository contains the editor-platform independent language framework. 
+This repository contains the platform-independent language framework. 
 
 ## How To Build
 
