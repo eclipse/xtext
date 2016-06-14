@@ -1,25 +1,11 @@
 rootProject.name = 'xtext-core'
 
-[
-	'org.eclipse.xtext',
-	'org.eclipse.xtext.ide',
-	'org.eclipse.xtext.util',
-	'org.eclipse.xtext.xtext.generator',
-	'org.eclipse.xtext.xtext.wizard'
-].each { projectName ->
-	include projectName
-	project(":$projectName").projectDir = file("../../plugins/$projectName")
-}
-
-[
-/*
-	Test project must be split before it works properly.
-	'org.eclipse.xtext.tests',
-*/
-    'org.eclipse.xtext.ide.tests'
-].each { projectName ->
-    include projectName
-    project(":$projectName").projectDir = file("../../tests/$projectName")
-}
-
+include 'org.eclipse.xtext'
+include 'org.eclipse.xtext.ide'
+include 'org.eclipse.xtext.util'
+include 'org.eclipse.xtext.xtext.generator'
+include 'org.eclipse.xtext.xtext.wizard'
 include 'org.eclipse.xtext.testing'
+// Test project must be split before it works properly.
+// include 'org.eclipse.xtext.tests'
+include 'org.eclipse.xtext.ide.tests'
