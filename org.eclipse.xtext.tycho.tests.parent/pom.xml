@@ -8,7 +8,6 @@
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>org.eclipse.xtext.tycho.tests.parent</artifactId>
-	<name>Xtext Eclipse tests plugins parent</name>
 	<packaging>pom</packaging>
 
 	<properties>

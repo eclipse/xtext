@@ -10,7 +10,6 @@
 	<groupId>org.eclipse.xtend</groupId>
 	<artifactId>xtend-archetype</artifactId>
 	<packaging>maven-archetype</packaging>
-	<name>Create a simple Xtend project</name>
 	<url>http://xtend-lang.org</url>
 
 	<properties>

@@ -10,7 +10,6 @@
 	<artifactId>xtend-maven-plugin</artifactId>
 	<groupId>org.eclipse.xtend</groupId>
 	<packaging>maven-plugin</packaging>
-	<name>Xtend Maven Plugin</name>
 	
 	<url>http://xtend-lang.org</url>
 	
