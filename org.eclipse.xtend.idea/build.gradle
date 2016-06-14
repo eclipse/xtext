@@ -1,6 +1,6 @@
 dependencies {
 	compile project(":org.eclipse.xtend.ide.common")
-	compile project(":org.eclipse.xtext.idea") // TODO change to maven dep
+	compile "org.eclipse.xtext:org.eclipse.xtext.idea:$versions.xtext"
 }
 
 ideaDevelopment {
