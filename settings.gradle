@@ -1,25 +1,14 @@
 rootProject.name = 'xtext-extras'
 
-[
-	'org.eclipse.xtext.common.types',
-	'org.eclipse.xtext.java',
-	'org.eclipse.xtext.xbase',
-	'org.eclipse.xtext.xbase.ide',
-	'org.eclipse.xtext.purexbase',
-	'org.eclipse.xtext.ecore',
-	'org.eclipse.xtext.smap',
-	'org.eclipse.xtext.builder.standalone',
-	'org.eclipse.xtext.generator'
-].each { projectName ->
-	include projectName
-	project(":$projectName").projectDir = file("../../plugins/$projectName")
-}
-
-[
-	'org.eclipse.xtext.testlanguages',
-	'org.eclipse.xtext.testlanguages.ide',
-	'org.eclipse.xtext.xbase.testlanguages'
-].each { projectName ->
-	include projectName
-	project(":$projectName").projectDir = file("../../tests/$projectName")
-}
+include 'org.eclipse.xtext.common.types'
+include 'org.eclipse.xtext.java'
+include 'org.eclipse.xtext.xbase'
+include 'org.eclipse.xtext.xbase.ide'
+include 'org.eclipse.xtext.purexbase'
+include 'org.eclipse.xtext.ecore'
+include 'org.eclipse.xtext.smap'
+include 'org.eclipse.xtext.builder.standalone'
+include 'org.eclipse.xtext.generator'
+include 'org.eclipse.xtext.testlanguages'
+include 'org.eclipse.xtext.testlanguages.ide'
+include 'org.eclipse.xtext.xbase.testlanguages'
