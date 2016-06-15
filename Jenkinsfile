@@ -4,6 +4,6 @@ node {
    checkout scm
 
    stage 'Build'
-   sh "./gradlew build"
+   sh "./gradlew build uploadArchives"
    archive '**/build/**/*.jar'
 }

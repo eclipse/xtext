@@ -1,0 +1,79 @@
+apply plugin: 'signing'
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+	classifier = 'sources'
+	from sourceSets.main.allSource
+	from ('.') {
+		include 'schema/**', 'model/**'
+	}
+	metaInf {
+		from 'META-INF'
+	}
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+	classifier = 'javadoc'
+	from javadoc.destinationDir
+}
+
+artifacts {
+	archives sourcesJar, javadocJar
+}
+
+def envSecretKeyRingFile = System.getenv('SIGNING_KEY_RING')
+if (envSecretKeyRingFile != null)
+	ext.'signing.secretKeyRingFile' = envSecretKeyRingFile
+def envKeyId = System.getenv('SIGNING_KEY_ID')
+if (envKeyId != null)
+	ext.'signing.keyId' = envKeyId
+def envPassword = System.getenv('SIGNING_PASSWORD')
+if (envPassword != null)
+	ext.'signing.password' = envPassword
+
+signing {
+	required { gradle.taskGraph.hasTask('uploadArchives') }
+	sign configurations.archives
+}
+if (!project.hasProperty('signing.secretKeyRingFile') || !project.property('signing.secretKeyRingFile')
+		|| !project.hasProperty('signing.keyId') || !project.property('signing.keyId')
+		|| !project.hasProperty('signing.password') || !project.property('signing.password')) {
+	signArchives.enabled = false
+}
+
+def envSonatypeUser = System.getenv('SONATYPE_USER')
+if (envSonatypeUser != null)
+	ext.'sonatypeUserName' = envSonatypeUser
+def envSonatypePassword = System.getenv('SONATYPE_PASSWORD')
+if (envSonatypePassword != null)
+	ext.'sonatypePassword' = envSonatypePassword
+
+uploadArchives.repositories.mavenDeployer {
+	beforeDeployment { deployment -> signing.signPom(deployment) }
+	repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+		if (project.hasProperty('sonatypeUserName') && project.hasProperty('sonatypePassword')) {
+			authentication(userName: sonatypeUserName, password: sonatypePassword)
+		}
+	}
+	snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+		if (project.hasProperty('sonatypeUserName') && project.hasProperty('sonatypePassword')) {
+			authentication(userName: sonatypeUserName, password: sonatypePassword)
+		}
+	}
+	pom.project {
+		packaging 'jar'
+		url 'https://www.eclipse.org/Xtext/'
+		licenses {
+			license {
+				name 'Eclipse Public License, Version 1.0'
+				url 'http://www.eclipse.org/legal/epl-v10.html'
+			}
+		}
+		scm {
+			connection 'scm:git:git@github.com:eclipse/xtext-core.git'
+			developerConnection 'scm:git:git@github.com:eclipse/xtext-core.git'
+			url 'git@github.com:eclipse/xtext-core.git'
+		}
+	}
+}
+
+apply from: "${rootDir}/gradle/developers.gradle"

@@ -12,6 +12,7 @@ subprojects {
 	apply from: "${rootDir}/gradle/versions.gradle"
 	apply from: "${rootDir}/gradle/eclipse-project-layout.gradle"
 	apply from: "${rootDir}/gradle/java-compiler-settings.gradle"
+	apply from: "${rootDir}/gradle/maven-deployment.gradle"
 	
 	group = 'org.eclipse.xtext'
 }

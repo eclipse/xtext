@@ -6,6 +6,12 @@ tasks.withType(JavaCompile) {
 	options.encoding = 'ISO-8859-1'
 }
 
+tasks.withType(Javadoc) {
+	options.encoding = 'ISO-8859-1'
+	options.tags = [ 'noreference', 'noextend', 'noimplement', 'noinstantiate', 'nooverride', 'model', 'generated', 'ordered' ] 
+	options.addStringOption('Xdoclint:none', '-quiet')
+}
+
 configurations {
     optional {
     	description 'Dependencies required at build time, but not exported into meta data'
@@ -25,4 +31,3 @@ configurations {
 sourceSets.main.compileClasspath += configurations.optional
 eclipse.classpath.plusConfigurations += [configurations.optional]
 javadoc.classpath += configurations.optional
-javadoc.options.addStringOption('-Xdoclint:none')
