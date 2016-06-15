@@ -135,7 +135,7 @@ class DefaultCallHierarchyBuilder extends AbstractHierarchyBuilder implements IC
 	}
 
 	/**
-	 * @returns a root hierarchy node for the given declaration; cannot be <code>null</code>
+	 * @return a root hierarchy node for the given declaration; cannot be <code>null</code>
 	 */
 	protected def IHierarchyNode createRoot(IEObjectDescription declaration) {
 		val node = new DefaultHierarchyNode
@@ -145,7 +145,7 @@ class DefaultCallHierarchyBuilder extends AbstractHierarchyBuilder implements IC
 	}
 
 	/**
-	 * @returns a child node for the given declaration and the parent node; cannot be <code>null</code> 
+	 * @return a child node for the given declaration and the parent node; cannot be <code>null</code> 
 	 */
 	protected def IHierarchyNode createChild(IEObjectDescription declaration, IHierarchyNode parent) {
 		val node = new DefaultHierarchyNode
@@ -171,7 +171,7 @@ class DefaultCallHierarchyBuilder extends AbstractHierarchyBuilder implements IC
 	}
 
 	/**
-	 * @returns a hierarchy node reference for the given reference; cannot be <code>null</code>
+	 * @return a hierarchy node reference for the given reference; cannot be <code>null</code>
 	 */
 	protected def IHierarchyNodeReference createNodeReference(IReferenceDescription reference) {
 		return readOnly(reference.sourceEObjectUri) [ sourceObject |

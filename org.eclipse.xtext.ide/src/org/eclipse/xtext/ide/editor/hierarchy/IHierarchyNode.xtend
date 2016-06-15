@@ -20,27 +20,27 @@ import org.eclipse.xtext.resource.IEObjectDescription
 interface IHierarchyNode extends INavigatable {
 
 	/**
-	 * @returns an associated element that is used to build child nodes
+	 * @return an associated element that is used to build child nodes
 	 */
 	def IEObjectDescription getElement()
 
 	/**
-	 * @returns a parent; <code>null</code> if the node is a root
+	 * @return a parent; <code>null</code> if the node is a root
 	 */
 	def IHierarchyNode getParent()
 
 	/**
-	 * @returns references used to reach the node from a parent; empty if the node is a root 
+	 * @return references used to reach the node from a parent; empty if the node is a root 
 	 */
 	def Collection<IHierarchyNodeReference> getReferences()
 
 	/**
-	 * @returns whether there is a parent (can be transitive) containing the same element as the node
+	 * @return whether there is a parent (can be transitive) containing the same element as the node
 	 */
 	def boolean isRecursive()
 
 	/**
-	 * @returns whether the node may have children; e.g. a recursive node cannot have children 
+	 * @return whether the node may have children; e.g. a recursive node cannot have children 
 	 */
 	def boolean mayHaveChildren()
 }

@@ -21,27 +21,27 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 @SuppressWarnings("all")
 public interface IHierarchyNode extends INavigatable {
   /**
-   * @returns an associated element that is used to build child nodes
+   * @return an associated element that is used to build child nodes
    */
   public abstract IEObjectDescription getElement();
   
   /**
-   * @returns a parent; <code>null</code> if the node is a root
+   * @return a parent; <code>null</code> if the node is a root
    */
   public abstract IHierarchyNode getParent();
   
   /**
-   * @returns references used to reach the node from a parent; empty if the node is a root
+   * @return references used to reach the node from a parent; empty if the node is a root
    */
   public abstract Collection<IHierarchyNodeReference> getReferences();
   
   /**
-   * @returns whether there is a parent (can be transitive) containing the same element as the node
+   * @return whether there is a parent (can be transitive) containing the same element as the node
    */
   public abstract boolean isRecursive();
   
   /**
-   * @returns whether the node may have children; e.g. a recursive node cannot have children
+   * @return whether the node may have children; e.g. a recursive node cannot have children
    */
   public abstract boolean mayHaveChildren();
 }

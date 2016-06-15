@@ -20,12 +20,12 @@ import org.eclipse.emf.common.util.URI
 interface IHierarchyBuilder {
 
 	/**
-	 * @returns root hierarchy nodes for the given URI; empty if the hierarchy cannot be built for the given URI
+	 * @return root hierarchy nodes for the given URI; empty if the hierarchy cannot be built for the given URI
 	 */
 	def Collection<IHierarchyNode> buildRoots(URI rootURI, IProgressMonitor monitor)
 
 	/**
-	 * @returns child nodes for the given parent node; empty if {@link IHierarchyNode#mayHaveChildren} returns <code>false</code> for the parent 
+	 * @return child nodes for the given parent node; empty if {@link IHierarchyNode#mayHaveChildren} returns <code>false</code> for the parent 
 	 */
 	def Collection<IHierarchyNode> buildChildren(IHierarchyNode parent, IProgressMonitor monitor)
 

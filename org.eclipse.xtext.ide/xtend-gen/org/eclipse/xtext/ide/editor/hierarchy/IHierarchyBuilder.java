@@ -21,12 +21,12 @@ import org.eclipse.xtext.ide.editor.hierarchy.IHierarchyNode;
 @SuppressWarnings("all")
 public interface IHierarchyBuilder {
   /**
-   * @returns root hierarchy nodes for the given URI; empty if the hierarchy cannot be built for the given URI
+   * @return root hierarchy nodes for the given URI; empty if the hierarchy cannot be built for the given URI
    */
   public abstract Collection<IHierarchyNode> buildRoots(final URI rootURI, final IProgressMonitor monitor);
   
   /**
-   * @returns child nodes for the given parent node; empty if {@link IHierarchyNode#mayHaveChildren} returns <code>false</code> for the parent
+   * @return child nodes for the given parent node; empty if {@link IHierarchyNode#mayHaveChildren} returns <code>false</code> for the parent
    */
   public abstract Collection<IHierarchyNode> buildChildren(final IHierarchyNode parent, final IProgressMonitor monitor);
 }

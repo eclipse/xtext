@@ -11,7 +11,7 @@ import org.eclipse.xtext.ide.labels.SimpleImageDescription;
 
 /**
  * Describes an image in a platform independent way.
- * Subclasses should implement {@link #equals(Object)} and {@link #hashCode()}.
+ * Subclasses should implement {@link Object#equals(Object)} and {@link Object#hashCode()}.
  * 
  * @author Jan Koehnlein - Initial contribution and API
  * @noimplement

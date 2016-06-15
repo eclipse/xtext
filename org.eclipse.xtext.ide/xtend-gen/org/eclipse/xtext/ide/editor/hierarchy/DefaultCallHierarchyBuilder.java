@@ -190,7 +190,7 @@ public class DefaultCallHierarchyBuilder extends AbstractHierarchyBuilder implem
   }
   
   /**
-   * @returns a root hierarchy node for the given declaration; cannot be <code>null</code>
+   * @return a root hierarchy node for the given declaration; cannot be <code>null</code>
    */
   protected IHierarchyNode createRoot(final IEObjectDescription declaration) {
     final DefaultHierarchyNode node = new DefaultHierarchyNode();
@@ -200,7 +200,7 @@ public class DefaultCallHierarchyBuilder extends AbstractHierarchyBuilder implem
   }
   
   /**
-   * @returns a child node for the given declaration and the parent node; cannot be <code>null</code>
+   * @return a child node for the given declaration and the parent node; cannot be <code>null</code>
    */
   protected IHierarchyNode createChild(final IEObjectDescription declaration, final IHierarchyNode parent) {
     final DefaultHierarchyNode node = new DefaultHierarchyNode();
@@ -228,7 +228,7 @@ public class DefaultCallHierarchyBuilder extends AbstractHierarchyBuilder implem
   }
   
   /**
-   * @returns a hierarchy node reference for the given reference; cannot be <code>null</code>
+   * @return a hierarchy node reference for the given reference; cannot be <code>null</code>
    */
   protected IHierarchyNodeReference createNodeReference(final IReferenceDescription reference) {
     URI _sourceEObjectUri = reference.getSourceEObjectUri();

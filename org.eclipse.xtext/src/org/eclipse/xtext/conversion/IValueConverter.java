@@ -63,7 +63,7 @@ public interface IValueConverter<Type> {
 	 * set the rule according to the annotation of the method that provides
 	 * the value converter.
 	 * 
-	 * @throw IllegalArgumentException if the rule doesn't match the expectation of the value converter
+	 * @throws IllegalArgumentException if the rule doesn't match the expectation of the value converter
 	 */
 	interface RuleSpecific {
 		void setRule(AbstractRule rule) throws IllegalArgumentException;
