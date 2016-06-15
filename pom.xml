@@ -8,8 +8,8 @@
 	<version>2.11.0-SNAPSHOT</version>
 
 	<modules>
-		<module>../../maven/org.eclipse.xtext.parent</module>
-		<module>../../maven/org.eclipse.xtext.maven.plugin</module>
+		<module>org.eclipse.xtext.parent</module>
+		<module>org.eclipse.xtext.maven.plugin</module>
 	</modules>
 
 </project>
