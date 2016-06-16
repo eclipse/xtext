@@ -75,6 +75,8 @@ class XbaseGeneratorFragment2 extends AbstractXtextGeneratorFragment {
 				'org.eclipse.xtext.xbase.ui', 'org.eclipse.jdt.debug.ui'
 			])
 		}
+		
+		language.webGenModule.superClass = 'org.eclipse.xtext.xbase.web.DefaultXbaseWebModule'.typeRef
 	}
 	
 	protected def contributeRuntimeGuiceBindings() {
@@ -180,7 +182,6 @@ class XbaseGeneratorFragment2 extends AbstractXtextGeneratorFragment {
 			language.eclipsePluginGenModule.superClass = 'org.eclipse.xtext.xbase.annotations.ui.DefaultXbaseWithAnnotationsUiModule'.typeRef
 		else
 			language.eclipsePluginGenModule.superClass = 'org.eclipse.xtext.xbase.ui.DefaultXbaseUiModule'.typeRef
-		language.webGenModule.superClass = 'org.eclipse.xtext.xbase.web.DefaultXbaseWebModule'.typeRef
 	}
 	
 	protected def doGenerateXtendInferrer() {
