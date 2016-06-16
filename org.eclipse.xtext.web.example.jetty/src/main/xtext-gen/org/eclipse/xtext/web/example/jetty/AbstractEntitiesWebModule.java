@@ -20,13 +20,13 @@ import org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer;
 import org.eclipse.xtext.web.example.entities.ide.contentassist.antlr.EntitiesParser;
 import org.eclipse.xtext.web.example.entities.ide.contentassist.antlr.internal.InternalEntitiesLexer;
-import org.eclipse.xtext.web.server.DefaultWebModule;
+import org.eclipse.xtext.xbase.web.DefaultXbaseWebModule;
 
 /**
  * Manual modifications go to {@link EntitiesWebModule}.
  */
 @SuppressWarnings("all")
-public abstract class AbstractEntitiesWebModule extends DefaultWebModule {
+public abstract class AbstractEntitiesWebModule extends DefaultXbaseWebModule {
 
 	public AbstractEntitiesWebModule(Provider<ExecutorService> executorServiceProvider) {
 		super(executorServiceProvider);

@@ -13,10 +13,10 @@ import com.google.inject.name.Names;
 import java.util.Properties;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.IGrammarAccess;
+import org.eclipse.xtext.common.types.xtext.TypesAwareDefaultGlobalScopeProvider;
 import org.eclipse.xtext.formatting2.FormatterPreferenceValuesProvider;
 import org.eclipse.xtext.formatting2.FormatterPreferences;
 import org.eclipse.xtext.formatting2.IFormatter2;
-import org.eclipse.xtext.naming.DefaultDeclarativeQualifiedNameProvider;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parser.ITokenToStringConverter;
@@ -28,18 +28,19 @@ import org.eclipse.xtext.parser.antlr.Lexer;
 import org.eclipse.xtext.parser.antlr.LexerBindings;
 import org.eclipse.xtext.parser.antlr.LexerProvider;
 import org.eclipse.xtext.preferences.IPreferenceValuesProvider;
+import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.IgnoreCaseLinking;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
-import org.eclipse.xtext.scoping.impl.DefaultGlobalScopeProvider;
 import org.eclipse.xtext.serializer.ISerializer;
 import org.eclipse.xtext.serializer.impl.Serializer;
 import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer;
-import org.eclipse.xtext.service.DefaultRuntimeModule;
 import org.eclipse.xtext.service.SingletonBinding;
+import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.web.example.entities.formatting2.EntitiesFormatter;
+import org.eclipse.xtext.web.example.entities.jvmmodel.EntitiesJvmModelInferrer;
 import org.eclipse.xtext.web.example.entities.parser.antlr.EntitiesAntlrTokenFileProvider;
 import org.eclipse.xtext.web.example.entities.parser.antlr.EntitiesParser;
 import org.eclipse.xtext.web.example.entities.parser.antlr.internal.InternalEntitiesLexer;
@@ -48,14 +49,25 @@ import org.eclipse.xtext.web.example.entities.serializer.EntitiesSemanticSequenc
 import org.eclipse.xtext.web.example.entities.serializer.EntitiesSyntacticSequencer;
 import org.eclipse.xtext.web.example.entities.services.EntitiesGrammarAccess;
 import org.eclipse.xtext.web.example.entities.validation.EntitiesValidator;
+import org.eclipse.xtext.xbase.DefaultXbaseRuntimeModule;
+import org.eclipse.xtext.xbase.annotations.validation.DerivedStateAwareResourceValidator;
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer;
+import org.eclipse.xtext.xbase.jvmmodel.JvmLocationInFileProvider;
 import org.eclipse.xtext.xbase.scoping.XImportSectionNamespaceScopeProvider;
+import org.eclipse.xtext.xbase.scoping.XbaseQualifiedNameProvider;
 import org.eclipse.xtext.xbase.scoping.batch.IBatchScopeProvider;
+import org.eclipse.xtext.xbase.typesystem.internal.DefaultBatchTypeResolver;
+import org.eclipse.xtext.xbase.typesystem.internal.DefaultReentrantTypeResolver;
+import org.eclipse.xtext.xbase.typesystem.internal.LogicalContainerAwareBatchTypeResolver;
+import org.eclipse.xtext.xbase.typesystem.internal.LogicalContainerAwareReentrantTypeResolver;
+import org.eclipse.xtext.xbase.validation.FeatureNameValidator;
+import org.eclipse.xtext.xbase.validation.LogicalContainerAwareFeatureNameValidator;
 
 /**
  * Manual modifications go to {@link EntitiesRuntimeModule}.
  */
 @SuppressWarnings("all")
-public abstract class AbstractEntitiesRuntimeModule extends DefaultRuntimeModule {
+public abstract class AbstractEntitiesRuntimeModule extends DefaultXbaseRuntimeModule {
 
 	protected Properties properties = null;
 
@@ -153,18 +165,8 @@ public abstract class AbstractEntitiesRuntimeModule extends DefaultRuntimeModule
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.scoping.ImportNamespacesScopingFragment2
-	public Class<? extends IGlobalScopeProvider> bindIGlobalScopeProvider() {
-		return DefaultGlobalScopeProvider.class;
-	}
-	
-	// contributed by org.eclipse.xtext.xtext.generator.scoping.ImportNamespacesScopingFragment2
 	public void configureIgnoreCaseLinking(Binder binder) {
 		binder.bindConstant().annotatedWith(IgnoreCaseLinking.class).to(false);
-	}
-	
-	// contributed by org.eclipse.xtext.xtext.generator.exporting.QualifiedNamesFragment2
-	public Class<? extends IQualifiedNameProvider> bindIQualifiedNameProvider() {
-		return DefaultDeclarativeQualifiedNameProvider.class;
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.formatting.Formatter2Fragment2
@@ -175,6 +177,46 @@ public abstract class AbstractEntitiesRuntimeModule extends DefaultRuntimeModule
 	// contributed by org.eclipse.xtext.xtext.generator.formatting.Formatter2Fragment2
 	public void configureFormatterPreferences(Binder binder) {
 		binder.bind(IPreferenceValuesProvider.class).annotatedWith(FormatterPreferences.class).to(FormatterPreferenceValuesProvider.class);
+	}
+	
+	// contributed by org.eclipse.xtext.xtext.generator.xbase.XbaseGeneratorFragment2
+	public Class<? extends IQualifiedNameProvider> bindIQualifiedNameProvider() {
+		return XbaseQualifiedNameProvider.class;
+	}
+	
+	// contributed by org.eclipse.xtext.xtext.generator.xbase.XbaseGeneratorFragment2
+	public Class<? extends ILocationInFileProvider> bindILocationInFileProvider() {
+		return JvmLocationInFileProvider.class;
+	}
+	
+	// contributed by org.eclipse.xtext.xtext.generator.xbase.XbaseGeneratorFragment2
+	public Class<? extends IGlobalScopeProvider> bindIGlobalScopeProvider() {
+		return TypesAwareDefaultGlobalScopeProvider.class;
+	}
+	
+	// contributed by org.eclipse.xtext.xtext.generator.xbase.XbaseGeneratorFragment2
+	public Class<? extends FeatureNameValidator> bindFeatureNameValidator() {
+		return LogicalContainerAwareFeatureNameValidator.class;
+	}
+	
+	// contributed by org.eclipse.xtext.xtext.generator.xbase.XbaseGeneratorFragment2
+	public Class<? extends DefaultBatchTypeResolver> bindDefaultBatchTypeResolver() {
+		return LogicalContainerAwareBatchTypeResolver.class;
+	}
+	
+	// contributed by org.eclipse.xtext.xtext.generator.xbase.XbaseGeneratorFragment2
+	public Class<? extends DefaultReentrantTypeResolver> bindDefaultReentrantTypeResolver() {
+		return LogicalContainerAwareReentrantTypeResolver.class;
+	}
+	
+	// contributed by org.eclipse.xtext.xtext.generator.xbase.XbaseGeneratorFragment2
+	public Class<? extends IResourceValidator> bindIResourceValidator() {
+		return DerivedStateAwareResourceValidator.class;
+	}
+	
+	// contributed by org.eclipse.xtext.xtext.generator.xbase.XbaseGeneratorFragment2
+	public Class<? extends IJvmModelInferrer> bindIJvmModelInferrer() {
+		return EntitiesJvmModelInferrer.class;
 	}
 	
 }
