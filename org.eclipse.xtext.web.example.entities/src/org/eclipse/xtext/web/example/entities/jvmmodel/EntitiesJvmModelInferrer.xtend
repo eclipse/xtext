@@ -8,10 +8,10 @@
 package org.eclipse.xtext.web.example.entities.jvmmodel
 
 import com.google.inject.Inject
-import org.eclipse.xtend.lib.Property
 import org.eclipse.xtext.naming.IQualifiedNameProvider
 import org.eclipse.xtext.web.example.entities.domainmodel.Entity
 import org.eclipse.xtext.web.example.entities.domainmodel.Operation
+import org.eclipse.xtext.web.example.entities.domainmodel.Property
 import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
