@@ -35,7 +35,9 @@ task testJs(type: NodeTask) {
 check.dependsOn(testJs)
 
 def optResources = file("$buildDir/opt-resources/META-INF/resources/xtext/${project.version}")
-sourceSets.main.resources.srcDir "$buildDir/opt-resources"
+jar.from ("$buildDir/opt-resources") {
+	include 'META-INF/resources/**'
+}
 
 task copyImages(type: Copy) {
 	from 'src/main/css/xtext/images'
