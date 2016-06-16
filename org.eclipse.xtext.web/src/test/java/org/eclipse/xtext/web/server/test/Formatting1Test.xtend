@@ -12,6 +12,8 @@ import org.eclipse.xtext.web.server.formatting.FormattingResult
 import org.eclipse.xtext.web.server.test.languages.formatting.StatemachineFormatter
 import org.junit.Test
 
+import static org.junit.Assert.*
+
 class Formatting1Test extends AbstractWebServerTest {
 	
 	override protected getRuntimeModule() {

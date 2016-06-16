@@ -28,6 +28,6 @@ configurations {
 	}
 }
 
-eclipse.classpath.plusConfigurations += [configurations.generatorCompile]
+eclipse.classpath.plusConfigurations += [configurations.generatorRuntime]
 
 javadoc.options.addStringOption('-Xdoclint:none')

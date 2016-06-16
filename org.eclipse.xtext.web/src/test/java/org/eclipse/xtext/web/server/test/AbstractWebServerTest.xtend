@@ -8,6 +8,7 @@
 package org.eclipse.xtext.web.server.test
 
 import com.google.inject.Guice
+import com.google.inject.Inject
 import com.google.inject.Module
 import com.google.inject.util.Modules
 import java.io.File
@@ -18,17 +19,17 @@ import java.util.Map
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import org.eclipse.emf.common.util.URI
-import org.eclipse.xtend.lib.annotations.Accessors
-import org.eclipse.xtext.junit4.AbstractXtextTests
 import org.eclipse.xtext.web.example.statemachine.StatemachineRuntimeModule
 import org.eclipse.xtext.web.example.statemachine.StatemachineStandaloneSetup
+import org.eclipse.xtext.web.example.statemachine.tests.StatemachineInjectorProvider
 import org.eclipse.xtext.web.server.ISession
 import org.eclipse.xtext.web.server.XtextServiceDispatcher
 import org.eclipse.xtext.web.server.persistence.IResourceBaseProvider
 import org.eclipse.xtext.web.server.test.languages.StatemachineWebModule
+import org.junit.After
+import org.junit.Before
 
-@Accessors(PROTECTED_GETTER)
-class AbstractWebServerTest extends AbstractXtextTests {
+abstract class AbstractWebServerTest {
 	
 	static class TestResourceBaseProvider implements IResourceBaseProvider {
 		val testFiles = new HashMap<String, URI>
@@ -38,33 +39,42 @@ class AbstractWebServerTest extends AbstractXtextTests {
 		}
 	}
 	
+	val injectorProvider = new StatemachineInjectorProvider {
+		override protected internalCreateInjector() {
+			new StatemachineStandaloneSetup {
+				override createInjector() {
+					val webModule = new StatemachineWebModule[Executors.newCachedThreadPool => [executorServices += it]]
+					webModule.resourceBaseProvider = resourceBaseProvider
+					return Guice.createInjector(Modules.override(runtimeModule).with(webModule))
+				}
+			}.createInjectorAndDoEMFRegistration()
+		}
+	}
+	
 	val List<ExecutorService> executorServices = newArrayList
 	
 	TestResourceBaseProvider resourceBaseProvider
 	
-	XtextServiceDispatcher dispatcher
+	@Inject XtextServiceDispatcher dispatcher
 	
 	protected def Module getRuntimeModule() {
 		new StatemachineRuntimeModule
 	}
 	
-	override void setUp() {
-		super.setUp()
+	@Before
+	def void setup() {
 		resourceBaseProvider = new TestResourceBaseProvider
-		with(new StatemachineStandaloneSetup {
-			override createInjector() {
-				val webModule = new StatemachineWebModule[Executors.newCachedThreadPool => [executorServices += it]]
-				webModule.resourceBaseProvider = resourceBaseProvider
-				return Guice.createInjector(Modules.override(runtimeModule).with(webModule))
-			}
-		})
-		dispatcher = injector.getInstance(XtextServiceDispatcher)
+		val injector = injectorProvider.injector
+		injector.injectMembers(this)
+		injectorProvider.setupRegistry()
 	}
 	
-	override tearDown() {
+	@After
+	def void teardown() {
 		executorServices.forEach[shutdown()]
 		executorServices.clear()
-		super.tearDown()
+		resourceBaseProvider.testFiles.clear()
+		injectorProvider.restoreRegistry()
 	}
 	
 	protected def createFile(String content) {
@@ -82,8 +92,8 @@ class AbstractWebServerTest extends AbstractXtextTests {
 	}
 	
 	protected def getService(Map<String, String> parameters, ISession session) {
-		val requestData = new MockServiceContext(parameters, session)
-		dispatcher.getService(requestData)
+		val serviceContext = new MockServiceContext(parameters, session)
+		dispatcher.getService(serviceContext)
 	}
 	
 }

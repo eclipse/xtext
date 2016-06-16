@@ -8,9 +8,11 @@
 package org.eclipse.xtext.xbase.web.test;
 
 import com.google.inject.Guice;
+import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Module;
 import com.google.inject.Provider;
+import com.google.inject.util.Modules;
 import java.io.File;
 import java.io.FileWriter;
 import java.util.HashMap;
@@ -20,12 +22,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.function.Consumer;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.xtend.lib.annotations.AccessorType;
-import org.eclipse.xtend.lib.annotations.Accessors;
-import org.eclipse.xtext.junit4.AbstractXtextTests;
-import org.eclipse.xtext.util.Modules2;
 import org.eclipse.xtext.web.example.entities.EntitiesRuntimeModule;
 import org.eclipse.xtext.web.example.entities.EntitiesStandaloneSetup;
+import org.eclipse.xtext.web.example.entities.tests.EntitiesInjectorProvider;
 import org.eclipse.xtext.web.server.ISession;
 import org.eclipse.xtext.web.server.XtextServiceDispatcher;
 import org.eclipse.xtext.web.server.persistence.IResourceBaseProvider;
@@ -33,14 +32,14 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.web.test.HashMapSession;
 import org.eclipse.xtext.xbase.web.test.MockServiceContext;
 import org.eclipse.xtext.xbase.web.test.languages.EntitiesWebModule;
+import org.junit.After;
+import org.junit.Before;
 
-@Accessors(AccessorType.PROTECTED_GETTER)
 @SuppressWarnings("all")
-public class AbstractXbaseWebTest extends AbstractXtextTests {
+public abstract class AbstractXbaseWebTest {
   public static class TestResourceBaseProvider implements IResourceBaseProvider {
     private final HashMap<String, URI> testFiles = new HashMap<String, URI>();
     
@@ -50,23 +49,10 @@ public class AbstractXbaseWebTest extends AbstractXtextTests {
     }
   }
   
-  private final List<ExecutorService> executorServices = CollectionLiterals.<ExecutorService>newArrayList();
-  
-  private AbstractXbaseWebTest.TestResourceBaseProvider resourceBaseProvider;
-  
-  private XtextServiceDispatcher dispatcher;
-  
-  protected EntitiesRuntimeModule getRuntimeModule() {
-    return new EntitiesRuntimeModule();
-  }
-  
-  @Override
-  public void setUp() {
-    try {
-      super.setUp();
-      AbstractXbaseWebTest.TestResourceBaseProvider _testResourceBaseProvider = new AbstractXbaseWebTest.TestResourceBaseProvider();
-      this.resourceBaseProvider = _testResourceBaseProvider;
-      this.with(new EntitiesStandaloneSetup() {
+  private final EntitiesInjectorProvider injectorProvider = new EntitiesInjectorProvider() {
+    @Override
+    protected Injector internalCreateInjector() {
+      return new EntitiesStandaloneSetup() {
         @Override
         public Injector createInjector() {
           final Provider<ExecutorService> _function = () -> {
@@ -78,31 +64,44 @@ public class AbstractXbaseWebTest extends AbstractXtextTests {
           };
           final EntitiesWebModule webModule = new EntitiesWebModule(_function);
           webModule.setResourceBaseProvider(AbstractXbaseWebTest.this.resourceBaseProvider);
-          EntitiesRuntimeModule _runtimeModule = AbstractXbaseWebTest.this.getRuntimeModule();
-          Module _mixin = Modules2.mixin(_runtimeModule, webModule);
-          return Guice.createInjector(_mixin);
+          Module _runtimeModule = AbstractXbaseWebTest.this.getRuntimeModule();
+          Modules.OverriddenModuleBuilder _override = Modules.override(_runtimeModule);
+          Module _with = _override.with(webModule);
+          return Guice.createInjector(_with);
         }
-      });
-      Injector _injector = this.getInjector();
-      XtextServiceDispatcher _instance = _injector.<XtextServiceDispatcher>getInstance(XtextServiceDispatcher.class);
-      this.dispatcher = _instance;
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
+      }.createInjectorAndDoEMFRegistration();
     }
+  };
+  
+  private final List<ExecutorService> executorServices = CollectionLiterals.<ExecutorService>newArrayList();
+  
+  private AbstractXbaseWebTest.TestResourceBaseProvider resourceBaseProvider;
+  
+  @Inject
+  private XtextServiceDispatcher dispatcher;
+  
+  protected Module getRuntimeModule() {
+    return new EntitiesRuntimeModule();
   }
   
-  @Override
-  public void tearDown() {
-    try {
-      final Consumer<ExecutorService> _function = (ExecutorService it) -> {
-        it.shutdown();
-      };
-      this.executorServices.forEach(_function);
-      this.executorServices.clear();
-      super.tearDown();
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+  @Before
+  public void setup() {
+    AbstractXbaseWebTest.TestResourceBaseProvider _testResourceBaseProvider = new AbstractXbaseWebTest.TestResourceBaseProvider();
+    this.resourceBaseProvider = _testResourceBaseProvider;
+    final Injector injector = this.injectorProvider.getInjector();
+    injector.injectMembers(this);
+    this.injectorProvider.setupRegistry();
+  }
+  
+  @After
+  public void teardown() {
+    final Consumer<ExecutorService> _function = (ExecutorService it) -> {
+      it.shutdown();
+    };
+    this.executorServices.forEach(_function);
+    this.executorServices.clear();
+    this.resourceBaseProvider.testFiles.clear();
+    this.injectorProvider.restoreRegistry();
   }
   
   protected File createFile(final String content) {
@@ -134,20 +133,5 @@ public class AbstractXbaseWebTest extends AbstractXtextTests {
       _xblockexpression = this.dispatcher.getService(serviceContext);
     }
     return _xblockexpression;
-  }
-  
-  @Pure
-  protected List<ExecutorService> getExecutorServices() {
-    return this.executorServices;
-  }
-  
-  @Pure
-  protected AbstractXbaseWebTest.TestResourceBaseProvider getResourceBaseProvider() {
-    return this.resourceBaseProvider;
-  }
-  
-  @Pure
-  protected XtextServiceDispatcher getDispatcher() {
-    return this.dispatcher;
   }
 }

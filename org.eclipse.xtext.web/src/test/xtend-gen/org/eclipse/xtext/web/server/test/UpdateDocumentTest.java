@@ -7,7 +7,7 @@
  */
 package org.eclipse.xtext.web.server.test;
 
-import com.google.inject.Injector;
+import com.google.inject.Inject;
 import com.google.inject.Module;
 import com.google.inject.Singleton;
 import java.io.File;
@@ -151,7 +151,11 @@ public class UpdateDocumentTest extends AbstractWebServerTest {
     }
   }
   
+  @Inject
   private UpdateDocumentTest.TestResourceValidator resourceValidator;
+  
+  @Inject
+  private ExecutorService executorService;
   
   @Override
   protected Module getRuntimeModule() {
@@ -164,14 +168,6 @@ public class UpdateDocumentTest extends AbstractWebServerTest {
         return UpdateDocumentTest.TestResourceValidator.class;
       }
     };
-  }
-  
-  @Override
-  public void setUp() {
-    super.setUp();
-    Injector _injector = this.getInjector();
-    IResourceValidator _instance = _injector.<IResourceValidator>getInstance(IResourceValidator.class);
-    this.resourceValidator = ((UpdateDocumentTest.TestResourceValidator) _instance);
   }
   
   @Test
@@ -364,13 +360,11 @@ public class UpdateDocumentTest extends AbstractWebServerTest {
       return Boolean.valueOf((it.entryCounter == 1));
     };
     this.resourceValidator.waitUntil(_function);
-    Injector _injector = this.getInjector();
-    ExecutorService _instance = _injector.<ExecutorService>getInstance(ExecutorService.class);
     final Callable<IServiceResult> _function_1 = () -> {
       Function0<? extends IServiceResult> _service_1 = update2.getService();
       return _service_1.apply();
     };
-    _instance.<IServiceResult>submit(_function_1);
+    this.executorService.<IServiceResult>submit(_function_1);
     final Function1<UpdateDocumentTest.TestResourceValidator, Boolean> _function_2 = (UpdateDocumentTest.TestResourceValidator it) -> {
       return Boolean.valueOf((it.exitCounter == 1));
     };
@@ -410,13 +404,11 @@ public class UpdateDocumentTest extends AbstractWebServerTest {
       return Boolean.valueOf((it.entryCounter == 1));
     };
     this.resourceValidator.waitUntil(_function);
-    Injector _injector = this.getInjector();
-    ExecutorService _instance = _injector.<ExecutorService>getInstance(ExecutorService.class);
     final Callable<IServiceResult> _function_1 = () -> {
       Function0<? extends IServiceResult> _service_1 = contentAssist.getService();
       return _service_1.apply();
     };
-    _instance.<IServiceResult>submit(_function_1);
+    this.executorService.<IServiceResult>submit(_function_1);
     final Function1<UpdateDocumentTest.TestResourceValidator, Boolean> _function_2 = (UpdateDocumentTest.TestResourceValidator it) -> {
       return Boolean.valueOf((it.exitCounter == 1));
     };
@@ -445,13 +437,11 @@ public class UpdateDocumentTest extends AbstractWebServerTest {
     Pair<String, String> _mappedTo_6 = Pair.<String, String>of("deltaReplaceLength", "3");
     final XtextServiceDispatcher.ServiceDescriptor update = this.getService(
       Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo_2, _mappedTo_3, _mappedTo_4, _mappedTo_5, _mappedTo_6)), session);
-    Injector _injector = this.getInjector();
-    ExecutorService _instance = _injector.<ExecutorService>getInstance(ExecutorService.class);
     final Callable<IServiceResult> _function = () -> {
       Function0<? extends IServiceResult> _service = validate.getService();
       return _service.apply();
     };
-    _instance.<IServiceResult>submit(_function);
+    this.executorService.<IServiceResult>submit(_function);
     final Function1<UpdateDocumentTest.TestResourceValidator, Boolean> _function_1 = (UpdateDocumentTest.TestResourceValidator it) -> {
       return Boolean.valueOf((it.entryCounter == 1));
     };
@@ -484,13 +474,11 @@ public class UpdateDocumentTest extends AbstractWebServerTest {
     Pair<String, String> _mappedTo_4 = Pair.<String, String>of("caretOffset", "0");
     final XtextServiceDispatcher.ServiceDescriptor contentAssist = this.getService(
       Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo_2, _mappedTo_3, _mappedTo_4)), session);
-    Injector _injector = this.getInjector();
-    ExecutorService _instance = _injector.<ExecutorService>getInstance(ExecutorService.class);
     final Callable<IServiceResult> _function = () -> {
       Function0<? extends IServiceResult> _service = validate.getService();
       return _service.apply();
     };
-    _instance.<IServiceResult>submit(_function);
+    this.executorService.<IServiceResult>submit(_function);
     final Function1<UpdateDocumentTest.TestResourceValidator, Boolean> _function_1 = (UpdateDocumentTest.TestResourceValidator it) -> {
       return Boolean.valueOf((it.entryCounter == 1));
     };

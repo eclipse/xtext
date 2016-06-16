@@ -12,6 +12,7 @@ import org.eclipse.xtext.web.server.contentassist.ContentAssistResult
 import org.junit.Test
 
 import static org.hamcrest.core.IsInstanceOf.*
+import static org.junit.Assert.*
 
 class ContentAssistTest extends AbstractWebServerTest {
 	

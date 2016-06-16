@@ -10,6 +10,8 @@ package org.eclipse.xtext.web.server.test
 import org.eclipse.xtext.web.server.formatting.FormattingResult
 import org.junit.Test
 
+import static org.junit.Assert.*
+
 class Formatting2Test extends AbstractWebServerTest {
 	
 	@Test def testFormatFile() {

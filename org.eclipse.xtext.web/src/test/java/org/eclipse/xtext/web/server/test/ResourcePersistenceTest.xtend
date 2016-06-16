@@ -12,6 +12,8 @@ import com.google.common.io.Files
 import org.eclipse.xtext.web.server.persistence.ResourceContentResult
 import org.junit.Test
 
+import static org.junit.Assert.*
+
 class ResourcePersistenceTest extends AbstractWebServerTest {
 	
 	@Test def testLoadFile() {

@@ -18,6 +18,8 @@ import org.eclipse.xtext.web.server.generator.GeneratorService
 import org.eclipse.xtext.web.server.test.GeneratorTest.Generator
 import org.junit.Test
 
+import static org.junit.Assert.*
+
 class GeneratorTest extends AbstractWebServerTest {
 	
 	static Generator generatorInstance

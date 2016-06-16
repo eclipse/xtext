@@ -8,8 +8,10 @@
 package org.eclipse.xtext.web.server.test
 
 import org.eclipse.xtext.web.server.hover.HoverResult
-import org.junit.Test
 import org.eclipse.xtext.web.server.syntaxcoloring.HighlightingResult
+import org.junit.Test
+
+import static org.junit.Assert.*
 
 class HighlightingTest extends AbstractWebServerTest {
 	def protected assertHighlighting(CharSequence resourceContent, String... styleClasses) {

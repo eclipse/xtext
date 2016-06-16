@@ -30,6 +30,12 @@ Workflow {
 					srcGen = "../org.eclipse.xtext.web.example.jetty/src/main/xtext-gen"
 					assets = "../org.eclipse.xtext.web.example.jetty/src/main/webapp"
 				}
+				runtimeTest = {
+					enabled = true
+					root = "../org.eclipse.xtext.web"
+					src = "../org.eclipse.xtext.web/src/test/java"
+					srcGen = "../org.eclipse.xtext.web/src/test/xtext-gen"
+				}
 			}
 			code = {
 				encoding = "UTF-8"
@@ -81,6 +87,11 @@ Workflow {
 
 			// formatter API
 			fragment = formatting.Formatter2Fragment2 {}
+			
+			// testing API
+			fragment = junit.Junit4Fragment2 {
+				generateStub = false
+			}
 			
 			// JavaScript-based syntax highlighting
 			fragment = web.WebIntegrationFragment {

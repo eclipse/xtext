@@ -6,6 +6,8 @@ import org.eclipse.xtext.web.server.formatting.FormattingResult
 import org.eclipse.xtext.web.server.test.Bug489571Test.Bug489571IndentationInformation
 import org.junit.Test
 
+import static org.junit.Assert.*
+
 class Bug489571Test extends AbstractWebServerTest {
 
 	override protected getRuntimeModule() {

@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.web.server.test
 
+import com.google.inject.Inject
 import com.google.inject.Singleton
 import java.util.concurrent.ExecutorService
 import org.eclipse.emf.ecore.resource.Resource
@@ -21,10 +22,10 @@ import org.eclipse.xtext.web.server.model.DocumentStateResult
 import org.eclipse.xtext.web.server.model.XtextWebDocument
 import org.eclipse.xtext.web.server.persistence.ResourceContentResult
 import org.eclipse.xtext.web.server.test.UpdateDocumentTest.TestResourceValidator
-import org.junit.Assert
 import org.junit.Test
 
 import static org.hamcrest.core.IsInstanceOf.*
+import static org.junit.Assert.*
 
 class UpdateDocumentTest extends AbstractWebServerTest {
 	
@@ -73,13 +74,15 @@ class UpdateDocumentTest extends AbstractWebServerTest {
 		synchronized def waitUntil((TestResourceValidator)=>boolean condition) {
 			val startTime = System.currentTimeMillis
 			while (!condition.apply(this)) {
-				Assert.assertTrue(System.currentTimeMillis - startTime < 8000)
+				assertTrue(System.currentTimeMillis - startTime < 8000)
 				this.wait(3000)
 			}
 		}
 	}
 	
-	TestResourceValidator resourceValidator
+	@Inject TestResourceValidator resourceValidator
+	
+	@Inject ExecutorService executorService
 	
 	override protected getRuntimeModule() {
 		new StatemachineRuntimeModule {
@@ -87,11 +90,6 @@ class UpdateDocumentTest extends AbstractWebServerTest {
 				TestResourceValidator
 			}
 		}
-	}
-	
-	override setUp() {
-		super.setUp()
-		resourceValidator = injector.getInstance(IResourceValidator) as TestResourceValidator
 	}
 	
 	@Test def testCorrectStateId() {
@@ -226,7 +224,7 @@ class UpdateDocumentTest extends AbstractWebServerTest {
 				'requiredStateId' -> updateResult.stateId
 			}, session)
 		resourceValidator.waitUntil[entryCounter == 1]
-		injector.getInstance(ExecutorService).submit[update2.service.apply()]
+		executorService.submit[update2.service.apply()]
 		resourceValidator.waitUntil[exitCounter == 1]
 		assertTrue(resourceValidator.canceled)
 		// Make sure the new background job is scheduled before the executor service is shut down
@@ -252,7 +250,7 @@ class UpdateDocumentTest extends AbstractWebServerTest {
 				'requiredStateId' -> updateResult.stateId
 			}, session)
 		resourceValidator.waitUntil[entryCounter == 1]
-		injector.getInstance(ExecutorService).submit[contentAssist.service.apply()]
+		executorService.submit[contentAssist.service.apply()]
 		resourceValidator.waitUntil[exitCounter == 1]
 		assertTrue(resourceValidator.canceled)
 		// Make sure the new background job is scheduled before the executor service is shut down
@@ -271,7 +269,7 @@ class UpdateDocumentTest extends AbstractWebServerTest {
 				'deltaOffset' -> '6',
 				'deltaReplaceLength' -> '3'
 			}, session)
-		injector.getInstance(ExecutorService).submit[validate.service.apply()]
+		executorService.submit[validate.service.apply()]
 		resourceValidator.waitUntil[entryCounter == 1]
 		update.service.apply()
 		resourceValidator.waitUntil[exitCounter == 1]
@@ -290,7 +288,7 @@ class UpdateDocumentTest extends AbstractWebServerTest {
 				'resource' -> file.name,
 				'caretOffset' -> '0'
 			}, session)
-		injector.getInstance(ExecutorService).submit[validate.service.apply()]
+		executorService.submit[validate.service.apply()]
 		resourceValidator.waitUntil[entryCounter == 1]
 		contentAssist.service.apply()
 		resourceValidator.waitUntil[exitCounter == 1]

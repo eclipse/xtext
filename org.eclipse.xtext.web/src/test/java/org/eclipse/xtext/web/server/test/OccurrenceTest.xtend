@@ -10,6 +10,8 @@ package org.eclipse.xtext.web.server.test
 import org.eclipse.xtext.web.server.occurrences.OccurrencesResult
 import org.junit.Test
 
+import static org.junit.Assert.*
+
 class OccurrenceTest extends AbstractWebServerTest {
 	
 	def protected getOccurrences(CharSequence resourceContent) {
@@ -24,7 +26,7 @@ class OccurrenceTest extends AbstractWebServerTest {
 	}
 	
 	def protected assertOccurrences(CharSequence resourceContent, CharSequence expectation) {
-		expectation.toString.trim.assertEquals(resourceContent.occurrences.toString.trim)
+		assertEquals(expectation.toString.trim, resourceContent.occurrences.toString.trim)
 	}
 	
 	@Test 

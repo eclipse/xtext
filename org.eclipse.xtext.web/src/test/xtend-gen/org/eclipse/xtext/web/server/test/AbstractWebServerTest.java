@@ -8,6 +8,7 @@
 package org.eclipse.xtext.web.server.test;
 
 import com.google.inject.Guice;
+import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Module;
 import com.google.inject.Provider;
@@ -21,11 +22,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.function.Consumer;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.xtend.lib.annotations.AccessorType;
-import org.eclipse.xtend.lib.annotations.Accessors;
-import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.web.example.statemachine.StatemachineRuntimeModule;
 import org.eclipse.xtext.web.example.statemachine.StatemachineStandaloneSetup;
+import org.eclipse.xtext.web.example.statemachine.tests.StatemachineInjectorProvider;
 import org.eclipse.xtext.web.server.ISession;
 import org.eclipse.xtext.web.server.XtextServiceDispatcher;
 import org.eclipse.xtext.web.server.persistence.IResourceBaseProvider;
@@ -36,11 +35,11 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-import org.eclipse.xtext.xbase.lib.Pure;
+import org.junit.After;
+import org.junit.Before;
 
-@Accessors(AccessorType.PROTECTED_GETTER)
 @SuppressWarnings("all")
-public class AbstractWebServerTest extends AbstractXtextTests {
+public abstract class AbstractWebServerTest {
   public static class TestResourceBaseProvider implements IResourceBaseProvider {
     private final HashMap<String, URI> testFiles = new HashMap<String, URI>();
     
@@ -50,23 +49,10 @@ public class AbstractWebServerTest extends AbstractXtextTests {
     }
   }
   
-  private final List<ExecutorService> executorServices = CollectionLiterals.<ExecutorService>newArrayList();
-  
-  private AbstractWebServerTest.TestResourceBaseProvider resourceBaseProvider;
-  
-  private XtextServiceDispatcher dispatcher;
-  
-  protected Module getRuntimeModule() {
-    return new StatemachineRuntimeModule();
-  }
-  
-  @Override
-  public void setUp() {
-    try {
-      super.setUp();
-      AbstractWebServerTest.TestResourceBaseProvider _testResourceBaseProvider = new AbstractWebServerTest.TestResourceBaseProvider();
-      this.resourceBaseProvider = _testResourceBaseProvider;
-      this.with(new StatemachineStandaloneSetup() {
+  private final StatemachineInjectorProvider injectorProvider = new StatemachineInjectorProvider() {
+    @Override
+    protected Injector internalCreateInjector() {
+      return new StatemachineStandaloneSetup() {
         @Override
         public Injector createInjector() {
           final Provider<ExecutorService> _function = () -> {
@@ -83,27 +69,39 @@ public class AbstractWebServerTest extends AbstractXtextTests {
           Module _with = _override.with(webModule);
           return Guice.createInjector(_with);
         }
-      });
-      Injector _injector = this.getInjector();
-      XtextServiceDispatcher _instance = _injector.<XtextServiceDispatcher>getInstance(XtextServiceDispatcher.class);
-      this.dispatcher = _instance;
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
+      }.createInjectorAndDoEMFRegistration();
     }
+  };
+  
+  private final List<ExecutorService> executorServices = CollectionLiterals.<ExecutorService>newArrayList();
+  
+  private AbstractWebServerTest.TestResourceBaseProvider resourceBaseProvider;
+  
+  @Inject
+  private XtextServiceDispatcher dispatcher;
+  
+  protected Module getRuntimeModule() {
+    return new StatemachineRuntimeModule();
   }
   
-  @Override
-  public void tearDown() {
-    try {
-      final Consumer<ExecutorService> _function = (ExecutorService it) -> {
-        it.shutdown();
-      };
-      this.executorServices.forEach(_function);
-      this.executorServices.clear();
-      super.tearDown();
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+  @Before
+  public void setup() {
+    AbstractWebServerTest.TestResourceBaseProvider _testResourceBaseProvider = new AbstractWebServerTest.TestResourceBaseProvider();
+    this.resourceBaseProvider = _testResourceBaseProvider;
+    final Injector injector = this.injectorProvider.getInjector();
+    injector.injectMembers(this);
+    this.injectorProvider.setupRegistry();
+  }
+  
+  @After
+  public void teardown() {
+    final Consumer<ExecutorService> _function = (ExecutorService it) -> {
+      it.shutdown();
+    };
+    this.executorServices.forEach(_function);
+    this.executorServices.clear();
+    this.resourceBaseProvider.testFiles.clear();
+    this.injectorProvider.restoreRegistry();
   }
   
   protected File createFile(final String content) {
@@ -131,24 +129,9 @@ public class AbstractWebServerTest extends AbstractXtextTests {
   protected XtextServiceDispatcher.ServiceDescriptor getService(final Map<String, String> parameters, final ISession session) {
     XtextServiceDispatcher.ServiceDescriptor _xblockexpression = null;
     {
-      final MockServiceContext requestData = new MockServiceContext(parameters, session);
-      _xblockexpression = this.dispatcher.getService(requestData);
+      final MockServiceContext serviceContext = new MockServiceContext(parameters, session);
+      _xblockexpression = this.dispatcher.getService(serviceContext);
     }
     return _xblockexpression;
-  }
-  
-  @Pure
-  protected List<ExecutorService> getExecutorServices() {
-    return this.executorServices;
-  }
-  
-  @Pure
-  protected AbstractWebServerTest.TestResourceBaseProvider getResourceBaseProvider() {
-    return this.resourceBaseProvider;
-  }
-  
-  @Pure
-  protected XtextServiceDispatcher getDispatcher() {
-    return this.dispatcher;
   }
 }

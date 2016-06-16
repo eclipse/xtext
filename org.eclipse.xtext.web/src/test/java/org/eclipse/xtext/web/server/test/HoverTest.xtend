@@ -10,6 +10,8 @@ package org.eclipse.xtext.web.server.test
 import org.eclipse.xtext.web.server.hover.HoverResult
 import org.junit.Test
 
+import static extension org.junit.Assert.*
+
 class HoverTest extends AbstractWebServerTest {
 	
 	def protected getHover(CharSequence resourceContent) {

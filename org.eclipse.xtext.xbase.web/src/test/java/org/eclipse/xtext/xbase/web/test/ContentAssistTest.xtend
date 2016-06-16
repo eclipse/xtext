@@ -10,6 +10,8 @@ package org.eclipse.xtext.xbase.web.test
 import org.eclipse.xtext.web.server.contentassist.ContentAssistResult
 import org.junit.Test
 
+import static org.junit.Assert.*
+
 class ContentAssistTest extends AbstractXbaseWebTest {
 	
 	protected def assertContentAssistResult(CharSequence resourceContent, CharSequence expectedResult) {

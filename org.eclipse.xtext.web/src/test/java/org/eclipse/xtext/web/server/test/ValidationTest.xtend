@@ -12,6 +12,7 @@ import org.eclipse.xtext.web.server.validation.ValidationResult
 import org.junit.Test
 
 import static org.hamcrest.core.IsInstanceOf.*
+import static org.junit.Assert.*
 
 class ValidationTest extends AbstractWebServerTest {
 	
