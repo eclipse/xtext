@@ -10,8 +10,8 @@
      ====================================================================== -->
 <project name="project" default="zip_all_examples">
 
-	<property name="source" location="contents" />
-	<property name="target_xtext" location="org.eclipse.xtext.xtext.ui.examples/contents" />
+	<property name="source" location="projects" />
+	<property name="target_xtext" location="contents" />
 
 	<macrodef name="zip_example">
 		<attribute name="name" default="default" />
