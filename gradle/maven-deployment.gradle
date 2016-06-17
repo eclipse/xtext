@@ -16,6 +16,15 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
 	from javadoc.destinationDir
 }
 
+task createLocalMavenRepo(type: Upload) {
+  configuration = configurations['archives']
+  repositories {
+    mavenDeployer {
+      repository(url: "file:" + file("../build/maven-repository"))
+    }
+  }
+}
+
 artifacts {
 	archives sourcesJar, javadocJar
 }
