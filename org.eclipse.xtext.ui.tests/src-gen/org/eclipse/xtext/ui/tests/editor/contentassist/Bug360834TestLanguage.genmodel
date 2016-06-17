@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.xtext.ui.tests/src-gen" editDirectory="/org.eclipse.xtext.ui.tests.edit/src"
+    editorDirectory="/org.eclipse.xtext.ui.tests.editor/src" modelPluginID="org.eclipse.xtext.ui.tests"
+    forceOverwrite="true" modelName="Bug360834TestLanguage" updateClasspath="false"
+    rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" complianceLevel="6.0"
+    copyrightFields="false" editPluginID="org.eclipse.xtext.ui.tests.edit" editorPluginID="org.eclipse.xtext.ui.tests.editor"
+    runtimeVersion="2.9">
+  <genPackages prefix="Bug360834TestLanguage" basePackage="org.eclipse.xtext.ui.tests.editor.contentassist"
+      disposableProviderFactory="true" ecorePackage="Bug360834TestLanguage.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Bug360834TestLanguage.ecore#//Visibility">
+      <genEnumLiterals ecoreEnumLiteral="Bug360834TestLanguage.ecore#//Visibility/PUBLIC"/>
+      <genEnumLiterals ecoreEnumLiteral="Bug360834TestLanguage.ecore#//Visibility/PROTECTED"/>
+      <genEnumLiterals ecoreEnumLiteral="Bug360834TestLanguage.ecore#//Visibility/PRIVATE"/>
+    </genEnums>
+    <genClasses ecoreClass="Bug360834TestLanguage.ecore#//Model">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug360834TestLanguage.ecore#//Model/element"/>
+    </genClasses>
+    <genClasses ecoreClass="Bug360834TestLanguage.ecore#//Alternative">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug360834TestLanguage.ecore#//Alternative/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug360834TestLanguage.ecore#//Alternative/rootDeclaration"/>
+    </genClasses>
+    <genClasses ecoreClass="Bug360834TestLanguage.ecore#//RecursiveClassDeclaration">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug360834TestLanguage.ecore#//RecursiveClassDeclaration/modifiers"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug360834TestLanguage.ecore#//RecursiveClassDeclaration/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug360834TestLanguage.ecore#//RecursiveClassDeclaration/members"/>
+    </genClasses>
+    <genClasses ecoreClass="Bug360834TestLanguage.ecore#//Modifiers">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug360834TestLanguage.ecore#//Modifiers/final"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug360834TestLanguage.ecore#//Modifiers/abstract"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug360834TestLanguage.ecore#//Modifiers/extern"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug360834TestLanguage.ecore#//Modifiers/visibility"/>
+    </genClasses>
+    <genClasses ecoreClass="Bug360834TestLanguage.ecore#//Unordered">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug360834TestLanguage.ecore#//Unordered/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug360834TestLanguage.ecore#//Unordered/rootDeclaration"/>
+    </genClasses>
+    <genClasses ecoreClass="Bug360834TestLanguage.ecore#//SimpleClassDeclaration">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug360834TestLanguage.ecore#//SimpleClassDeclaration/modifiers"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug360834TestLanguage.ecore#//SimpleClassDeclaration/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug360834TestLanguage.ecore#//SimpleClassDeclaration/members"/>
+    </genClasses>
+    <genClasses ecoreClass="Bug360834TestLanguage.ecore#//ClassMember">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug360834TestLanguage.ecore#//ClassMember/modifiers"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug360834TestLanguage.ecore#//ClassMember/name"/>
+    </genClasses>
+    <genClasses ecoreClass="Bug360834TestLanguage.ecore#//UnorderedModifiers"/>
+  </genPackages>
+</genmodel:GenModel>

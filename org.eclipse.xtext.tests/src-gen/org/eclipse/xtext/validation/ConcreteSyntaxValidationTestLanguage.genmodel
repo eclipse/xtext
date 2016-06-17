@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.xtext.tests/src-gen" editDirectory="/org.eclipse.xtext.tests.edit/src"
+    editorDirectory="/org.eclipse.xtext.tests.editor/src" modelPluginID="org.eclipse.xtext.tests"
+    forceOverwrite="true" modelName="ConcreteSyntaxValidationTestLanguage" updateClasspath="false"
+    rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" complianceLevel="6.0"
+    copyrightFields="false" editPluginID="org.eclipse.xtext.tests.edit" editorPluginID="org.eclipse.xtext.tests.editor"
+    runtimeVersion="2.9" usedGenPackages="platform:/resource/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
+  <genPackages prefix="Csvalidationtest" basePackage="org.eclipse.xtext.validation"
+      disposableProviderFactory="true" ecorePackage="ConcreteSyntaxValidationTestLanguage.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="ConcreteSyntaxValidationTestLanguage.ecore#//TransientSerializeables1Enum">
+      <genEnumLiterals ecoreEnumLiteral="ConcreteSyntaxValidationTestLanguage.ecore#//TransientSerializeables1Enum/lit1"/>
+      <genEnumLiterals ecoreEnumLiteral="ConcreteSyntaxValidationTestLanguage.ecore#//TransientSerializeables1Enum/lit2"/>
+    </genEnums>
+    <genClasses ecoreClass="ConcreteSyntaxValidationTestLanguage.ecore#//Model">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ConcreteSyntaxValidationTestLanguage.ecore#//Model/x1"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ConcreteSyntaxValidationTestLanguage.ecore#//Model/x2"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ConcreteSyntaxValidationTestLanguage.ecore#//Model/x3"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ConcreteSyntaxValidationTestLanguage.ecore#//Model/x4"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ConcreteSyntaxValidationTestLanguage.ecore#//Model/x5"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ConcreteSyntaxValidationTestLanguage.ecore#//Model/x6"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ConcreteSyntaxValidationTestLanguage.ecore#//Model/x7"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ConcreteSyntaxValidationTestLanguage.ecore#//Model/x8"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ConcreteSyntaxValidationTestLanguage.ecore#//Model/x9"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ConcreteSyntaxValidationTestLanguage.ecore#//Model/x10"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ConcreteSyntaxValidationTestLanguage.ecore#//Model/x11"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ConcreteSyntaxValidationTestLanguage.ecore#//Model/x12"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ConcreteSyntaxValidationTestLanguage.ecore#//Model/x13"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ConcreteSyntaxValidationTestLanguage.ecore#//Model/x14"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ConcreteSyntaxValidationTestLanguage.ecore#//Model/x15"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ConcreteSyntaxValidationTestLanguage.ecore#//Model/x16"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ConcreteSyntaxValidationTestLanguage.ecore#//Model/x17"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ConcreteSyntaxValidationTestLanguage.ecore#//Model/x18"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ConcreteSyntaxValidationTestLanguage.ecore#//Model/x19"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ConcreteSyntaxValidationTestLanguage.ecore#//Model/x20"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ConcreteSyntaxValidationTestLanguage.ecore#//Model/x21"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ConcreteSyntaxValidationTestLanguage.ecore#//Model/x22"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ConcreteSyntaxValidationTestLanguage.ecore#//Model/x23"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ConcreteSyntaxValidationTestLanguage.ecore#//Model/x24"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ConcreteSyntaxValidationTestLanguage.ecore#//Model/x25"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ConcreteSyntaxValidationTestLanguage.ecore#//Model/x26"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ConcreteSyntaxValidationTestLanguage.ecore#//Model/x27"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ConcreteSyntaxValidationTestLanguage.ecore#//Model/x28"/>
+    </genClasses>
+    <genClasses ecoreClass="ConcreteSyntaxValidationTestLanguage.ecore#//SimpleGroup">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//SimpleGroup/val1"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//SimpleGroup/val2"/>
+    </genClasses>
+    <genClasses ecoreClass="ConcreteSyntaxValidationTestLanguage.ecore#//SimpleAlternative">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//SimpleAlternative/val1"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//SimpleAlternative/val2"/>
+    </genClasses>
+    <genClasses ecoreClass="ConcreteSyntaxValidationTestLanguage.ecore#//SimpleMultiplicities">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//SimpleMultiplicities/val1"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//SimpleMultiplicities/val2"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//SimpleMultiplicities/val3"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//SimpleMultiplicities/val4"/>
+    </genClasses>
+    <genClasses ecoreClass="ConcreteSyntaxValidationTestLanguage.ecore#//GroupMultiplicities">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//GroupMultiplicities/val1"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//GroupMultiplicities/val2"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//GroupMultiplicities/val3"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//GroupMultiplicities/val4"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//GroupMultiplicities/val5"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//GroupMultiplicities/val6"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//GroupMultiplicities/val7"/>
+    </genClasses>
+    <genClasses ecoreClass="ConcreteSyntaxValidationTestLanguage.ecore#//AlternativeMultiplicities">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//AlternativeMultiplicities/val2"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//AlternativeMultiplicities/val3"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//AlternativeMultiplicities/val4"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//AlternativeMultiplicities/val5"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//AlternativeMultiplicities/val6"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//AlternativeMultiplicities/val7"/>
+    </genClasses>
+    <genClasses ecoreClass="ConcreteSyntaxValidationTestLanguage.ecore#//AssignedAction">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//AssignedAction/val1"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ConcreteSyntaxValidationTestLanguage.ecore#//AssignedAction/child"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//AssignedAction/val2"/>
+    </genClasses>
+    <genClasses ecoreClass="ConcreteSyntaxValidationTestLanguage.ecore#//UnassignedAction1">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//UnassignedAction1/val1"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//UnassignedAction1/val2"/>
+    </genClasses>
+    <genClasses ecoreClass="ConcreteSyntaxValidationTestLanguage.ecore#//UnassignedAction2"/>
+    <genClasses ecoreClass="ConcreteSyntaxValidationTestLanguage.ecore#//UnassignedAction3">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//UnassignedAction3/val1"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//UnassignedAction3/val2"/>
+    </genClasses>
+    <genClasses ecoreClass="ConcreteSyntaxValidationTestLanguage.ecore#//UnassignedRuleCall1"/>
+    <genClasses ecoreClass="ConcreteSyntaxValidationTestLanguage.ecore#//UnassignedRuleCall1Sub">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//UnassignedRuleCall1Sub/val2"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//UnassignedRuleCall1Sub/val1"/>
+    </genClasses>
+    <genClasses ecoreClass="ConcreteSyntaxValidationTestLanguage.ecore#//UnassignedRuleCall2"/>
+    <genClasses ecoreClass="ConcreteSyntaxValidationTestLanguage.ecore#//UnassignedRuleCall2Sub">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//UnassignedRuleCall2Sub/val2"/>
+    </genClasses>
+    <genClasses ecoreClass="ConcreteSyntaxValidationTestLanguage.ecore#//Combination1">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//Combination1/val1"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//Combination1/val2"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//Combination1/val3"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//Combination1/val4"/>
+    </genClasses>
+    <genClasses ecoreClass="ConcreteSyntaxValidationTestLanguage.ecore#//Combination2">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//Combination2/val1"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//Combination2/val2"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//Combination2/val3"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//Combination2/val4"/>
+    </genClasses>
+    <genClasses ecoreClass="ConcreteSyntaxValidationTestLanguage.ecore#//Combination3">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//Combination3/val1"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//Combination3/val2"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//Combination3/val3"/>
+    </genClasses>
+    <genClasses ecoreClass="ConcreteSyntaxValidationTestLanguage.ecore#//Combination4">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//Combination4/val1"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//Combination4/val2"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//Combination4/val3"/>
+    </genClasses>
+    <genClasses ecoreClass="ConcreteSyntaxValidationTestLanguage.ecore#//List1">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//List1/val1"/>
+    </genClasses>
+    <genClasses ecoreClass="ConcreteSyntaxValidationTestLanguage.ecore#//List2">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//List2/val1"/>
+    </genClasses>
+    <genClasses ecoreClass="ConcreteSyntaxValidationTestLanguage.ecore#//List3">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//List3/val1"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//List3/val2"/>
+    </genClasses>
+    <genClasses ecoreClass="ConcreteSyntaxValidationTestLanguage.ecore#//List4">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//List4/val1"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//List4/val2"/>
+    </genClasses>
+    <genClasses ecoreClass="ConcreteSyntaxValidationTestLanguage.ecore#//List5">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//List5/val1"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//List5/val2"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//List5/val3"/>
+    </genClasses>
+    <genClasses ecoreClass="ConcreteSyntaxValidationTestLanguage.ecore#//AltList1">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//AltList1/val1"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//AltList1/val2"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//AltList1/val3"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//AltList1/val4"/>
+    </genClasses>
+    <genClasses ecoreClass="ConcreteSyntaxValidationTestLanguage.ecore#//AltList2">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//AltList2/val1"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//AltList2/val2"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//AltList2/val3"/>
+    </genClasses>
+    <genClasses ecoreClass="ConcreteSyntaxValidationTestLanguage.ecore#//TransientObject">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//TransientObject/val1"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ConcreteSyntaxValidationTestLanguage.ecore#//TransientObject/nested"/>
+    </genClasses>
+    <genClasses ecoreClass="ConcreteSyntaxValidationTestLanguage.ecore#//TransientObjectSub">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//TransientObjectSub/val2"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//TransientObjectSub/val3"/>
+    </genClasses>
+    <genClasses ecoreClass="ConcreteSyntaxValidationTestLanguage.ecore#//TransientSerializeables1">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//TransientSerializeables1/val1"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//TransientSerializeables1/enum1"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//TransientSerializeables1/val2"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//TransientSerializeables1/int1"/>
+    </genClasses>
+    <genClasses ecoreClass="ConcreteSyntaxValidationTestLanguage.ecore#//StaticSimplification">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//StaticSimplification/val1"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//StaticSimplification/val2"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//StaticSimplification/val3"/>
+    </genClasses>
+    <genClasses ecoreClass="ConcreteSyntaxValidationTestLanguage.ecore#//TwoVersion">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//TwoVersion/shared1"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//TwoVersion/shared2"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//TwoVersion/shared3"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//TwoVersion/version1"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//TwoVersion/extra1"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//TwoVersion/extra2"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//TwoVersion/extra3"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//TwoVersion/extra4"/>
+    </genClasses>
+    <genClasses ecoreClass="ConcreteSyntaxValidationTestLanguage.ecore#//Heuristic1">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//Heuristic1/a"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//Heuristic1/b"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//Heuristic1/c"/>
+    </genClasses>
+    <genClasses ecoreClass="ConcreteSyntaxValidationTestLanguage.ecore#//UnassignedAction2Sub">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//UnassignedAction2Sub/val1"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//UnassignedAction2Sub/val2"/>
+    </genClasses>
+    <genClasses ecoreClass="ConcreteSyntaxValidationTestLanguage.ecore#//UnassignedAction2Sub1"/>
+    <genClasses ecoreClass="ConcreteSyntaxValidationTestLanguage.ecore#//UnassignedAction2Sub2"/>
+    <genClasses ecoreClass="ConcreteSyntaxValidationTestLanguage.ecore#//UnassignedRuleCall2SubAction"/>
+    <genClasses ecoreClass="ConcreteSyntaxValidationTestLanguage.ecore#//EmptyAlternativeSub"/>
+  </genPackages>
+</genmodel:GenModel>

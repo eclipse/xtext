@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="contextFinderTest" nsURI="http://www.eclipse.org/2009/tmf/xtext/contextfindertestlanguage"
+    nsPrefix="contextFinderTest">
+  <eClassifiers xsi:type="ecore:EClass" name="Model">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="model" eType="#//Model"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attributeExclusion" eType="#//AttributeExclusionTest"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="nestedType" eType="#//NestedTypeTest"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="nestedTypeRecursiveTest2"
+        eType="#//NestedTypeRecursiveTest" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parentRef" eType="ecore:EClass platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EObject"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="quantityExclusion" eType="#//QuantityExclusionTest"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="valueExclusion" eType="#//ValueExclusionTest"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="nodeExclusion" eType="#//NodeExclusion"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="nodeExclusionList" eType="#//NodeExclusionList"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AttributeExclusionTest">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="attr1" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="attr2" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NestedTypeTest">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="nested" eType="#//NestedTypeChild"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NestedTypeChild">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NestedTypeChild1" eSuperTypes="#//NestedTypeChild"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NestedTypeChild2" eSuperTypes="#//NestedTypeChild"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NestedTypeRecursiveTest">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//NestedTypeRecursiveTest"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ParentRefTest1">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="child1" eType="#//ParentRefTestChild"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ParentRefTest2">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="child2" eType="#//ParentRefTestChild"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ParentRefTestChild">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="child" eType="#//ParentRefTestChild"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="QuantityExclusionTest">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="attr1" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="attr2" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ValueExclusionTest">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val" eType="#//ValueExclusionTestEn"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ValueExclusionTestEn">
+    <eLiterals name="lit0" literal="lit0"/>
+    <eLiterals name="lit1" value="1" literal="lit1"/>
+    <eLiterals name="lit2" value="2" literal="lit2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NodeExclusion">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ref" eType="#//Model"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NodeExclusionList">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ref" unique="false" upperBound="-1"
+        eType="#//Model"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NestedTypeRecursiveTest1" eSuperTypes="#//NestedTypeRecursiveTest"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NestedTypeRecursiveTest2" eSuperTypes="#//NestedTypeRecursiveTest"/>
+</ecore:EPackage>

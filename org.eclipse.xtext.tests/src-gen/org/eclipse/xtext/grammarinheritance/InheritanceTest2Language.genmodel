@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.xtext.tests/src-gen" editDirectory="/org.eclipse.xtext.tests.edit/src"
+    editorDirectory="/org.eclipse.xtext.tests.editor/src" modelPluginID="org.eclipse.xtext.tests"
+    forceOverwrite="true" modelName="InheritanceTest2Language" updateClasspath="false"
+    rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" complianceLevel="6.0"
+    copyrightFields="false" editPluginID="org.eclipse.xtext.tests.edit" editorPluginID="org.eclipse.xtext.tests.editor"
+    runtimeVersion="2.9" usedGenPackages="platform:/resource/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore BaseInheritanceTestLanguage.genmodel#//baseInheritanceTest InheritanceTestLanguage.genmodel#//inheritanceTest">
+  <genPackages prefix="InheritanceTest2" basePackage="org.eclipse.xtext.grammarinheritance"
+      disposableProviderFactory="true" ecorePackage="InheritanceTest2Language.ecore#/">
+    <genClasses ecoreClass="InheritanceTest2Language.ecore#//Model">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute InheritanceTest2Language.ecore#//Model/ids"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

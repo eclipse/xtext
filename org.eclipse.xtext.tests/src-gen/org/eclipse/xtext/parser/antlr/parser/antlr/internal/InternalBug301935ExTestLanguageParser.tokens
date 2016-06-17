@@ -1,0 +1,5 @@
+'\n'=4
+'\r'=5
+RULE_ANY_OTHER=8
+RULE_ID=6
+RULE_WS=7

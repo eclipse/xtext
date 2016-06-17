@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.xtext.tests/src-gen" editDirectory="/org.eclipse.xtext.tests.edit/src"
+    editorDirectory="/org.eclipse.xtext.tests.editor/src" modelPluginID="org.eclipse.xtext.tests"
+    forceOverwrite="true" modelName="LocationProviderTestLanguage" updateClasspath="false"
+    rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" complianceLevel="6.0"
+    copyrightFields="false" editPluginID="org.eclipse.xtext.tests.edit" editorPluginID="org.eclipse.xtext.tests.editor"
+    runtimeVersion="2.9" usedGenPackages="platform:/resource/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
+  <genPackages prefix="Locationprovidertest" basePackage="org.eclipse.xtext.resource"
+      disposableProviderFactory="true" ecorePackage="LocationProviderTestLanguage.ecore#/">
+    <genClasses ecoreClass="LocationProviderTestLanguage.ecore#//Model">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LocationProviderTestLanguage.ecore#//Model/elements"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LocationProviderTestLanguage.ecore#//Model/components"/>
+    </genClasses>
+    <genClasses ecoreClass="LocationProviderTestLanguage.ecore#//Element">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LocationProviderTestLanguage.ecore#//Element/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference LocationProviderTestLanguage.ecore#//Element/singleref"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference LocationProviderTestLanguage.ecore#//Element/multirefs"/>
+    </genClasses>
+    <genClasses ecoreClass="LocationProviderTestLanguage.ecore#//Component">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LocationProviderTestLanguage.ecore#//Component/mode"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LocationProviderTestLanguage.ecore#//Component/transition"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LocationProviderTestLanguage.ecore#//Component/name"/>
+    </genClasses>
+    <genClasses ecoreClass="LocationProviderTestLanguage.ecore#//Bus">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LocationProviderTestLanguage.ecore#//Bus/port"/>
+    </genClasses>
+    <genClasses ecoreClass="LocationProviderTestLanguage.ecore#//Processor">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LocationProviderTestLanguage.ecore#//Processor/data"/>
+    </genClasses>
+    <genClasses ecoreClass="LocationProviderTestLanguage.ecore#//Mode">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LocationProviderTestLanguage.ecore#//Mode/name"/>
+    </genClasses>
+    <genClasses ecoreClass="LocationProviderTestLanguage.ecore#//Transition">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LocationProviderTestLanguage.ecore#//Transition/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference LocationProviderTestLanguage.ecore#//Transition/source"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference LocationProviderTestLanguage.ecore#//Transition/destination"/>
+    </genClasses>
+    <genClasses ecoreClass="LocationProviderTestLanguage.ecore#//Port">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LocationProviderTestLanguage.ecore#//Port/name"/>
+    </genClasses>
+    <genClasses ecoreClass="LocationProviderTestLanguage.ecore#//Data">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LocationProviderTestLanguage.ecore#//Data/name"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>
