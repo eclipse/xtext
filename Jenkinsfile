@@ -6,8 +6,8 @@ node {
 		checkout scm
 		
 		stage 'Build'
-		sh "./gradlew build"
-		archive '**/build/**/*.jar'
+		sh "./gradlew build createLocalMavenRepo"
+		archive 'build/maven-repository/**/*.*'
 		
 		slackSend "Build Succeeded - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
 		
