@@ -48,8 +48,20 @@
 
 	<repositories>
 		<repository>
-			<id>source for lsapi</id>
-			<url>https://oss.sonatype.org/content/repositories/snapshots/</url> <!-- for lsapi -->
+			<id>lsapi-from-jenkins</id>
+			<url>http://services.typefox.io/open-source/jenkins/job/lsapi/lastStableBuild/artifact/build/maven-repository/</url>
+		</repository>
+		<repository>
+			<id>xtext-lib-from-jenkins</id>
+			<url>http://services.typefox.io/open-source/jenkins/job/xtext-lib/job/master/lastStableBuild/artifact/build/maven-repository/</url>
+		</repository>
+		<repository>
+			<id>xtext-core-from-jenkins</id>
+			<url>http://services.typefox.io/open-source/jenkins/job/xtext-core/job/master/lastStableBuild/artifact/build/maven-repository/</url>
+		</repository>
+		<repository>
+			<id>xtext-extras-from-jenkins</id>
+			<url>http://services.typefox.io/open-source/jenkins//job/xtext-extras/job/master/lastStableBuild/artifact/build/maven-repository/</url>
 		</repository>
 	</repositories>
 
