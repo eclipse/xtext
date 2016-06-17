@@ -13,9 +13,8 @@
 
 	<properties>
 		<os-jvm-flags />
-		<memory-settings>-Xmx1G -XX:MaxPermSize=256m</memory-settings>
-		<debug-settings>-Xdebug
-			-Xrunjdwp:transport=dt_socket,address=8000,server=y,suspend=y</debug-settings>
+		<memory-settings>-Xmx2G</memory-settings>
+		<debug-settings>-Xdebug -Xrunjdwp:transport=dt_socket,address=8000,server=y,suspend=y</debug-settings>
 	</properties>
 
 	<profiles>
@@ -103,7 +102,6 @@
 					<artifactId>tycho-surefire-plugin</artifactId>
 					<version>${tycho-version}</version>
 					<configuration>
-						<debugPort>8013</debugPort>
 						<!-- <forkedProcessTimeoutInSeconds>1200</forkedProcessTimeoutInSeconds> -->
 						<useUIHarness>true</useUIHarness>
 						<useUIThread>false</useUIThread>
