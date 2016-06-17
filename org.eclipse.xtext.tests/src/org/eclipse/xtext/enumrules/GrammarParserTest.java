@@ -12,6 +12,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.xml.namespace.XMLNamespacePackage;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.EnumLiteralDeclaration;
 import org.eclipse.xtext.EnumRule;
@@ -30,6 +31,11 @@ public class GrammarParserTest extends AbstractEnumRulesTest {
 	public void setUp() throws Exception {
 		super.setUp();
 		with(XtextStandaloneSetup.class);
+	}
+	
+	@Override
+	public void tearDown() throws Exception {
+		super.tearDown();
 	}
 	
 	private void checkEnums(Grammar grammar) {

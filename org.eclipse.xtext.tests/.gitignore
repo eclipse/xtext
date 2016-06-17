@@ -1,1 +1,2 @@
-bin
+!src/org/eclipse/xtext/build
+!xtend-gen/org/eclipse/xtext/build

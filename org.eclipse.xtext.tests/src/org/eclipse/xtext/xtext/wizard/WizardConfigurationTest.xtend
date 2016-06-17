@@ -341,21 +341,7 @@ class WizardConfigurationTest {
 	}
 	
 	@Test
-	def void allBuildSystemsUseJava6() {
-		val parentPom = config.parentProject.pom.content
-		assertTrue(parentPom.contains("<maven.compiler.source>1.6</maven.compiler.source>"))
-		assertTrue(parentPom.contains("<maven.compiler.target>1.6</maven.compiler.target>"))
-		val parentGradle = config.parentProject.buildGradle.content
-		assertTrue(parentGradle.contains("sourceCompatibility = '1.6'"))
-		assertTrue(parentGradle.contains("targetCompatibility = '1.6'"))
-		allJavaProjects.map[manifest].forEach[
-			assertTrue(contains("Bundle-RequiredExecutionEnvironment: JavaSE-1.8"))
-		]
-	}
-	
-	@Test
-	def void allBuildSystemsUseOtherJava() {
-		config.javaVersion = JavaVersion.JAVA8
+	def void allBuildSystemsUseJava8() {
 		val parentPom = config.parentProject.pom.content
 		assertTrue(parentPom.contains("<maven.compiler.source>1.8</maven.compiler.source>"))
 		assertTrue(parentPom.contains("<maven.compiler.target>1.8</maven.compiler.target>"))
@@ -364,6 +350,20 @@ class WizardConfigurationTest {
 		assertTrue(parentGradle.contains("targetCompatibility = '1.8'"))
 		allJavaProjects.map[manifest].forEach[
 			assertTrue(contains("Bundle-RequiredExecutionEnvironment: JavaSE-1.8"))
+		]
+	}
+	
+	@Test
+	def void allBuildSystemsUseOtherJava() {
+		config.javaVersion = JavaVersion.JAVA7
+		val parentPom = config.parentProject.pom.content
+		assertTrue(parentPom.contains("<maven.compiler.source>1.7</maven.compiler.source>"))
+		assertTrue(parentPom.contains("<maven.compiler.target>1.7</maven.compiler.target>"))
+		val parentGradle = config.parentProject.buildGradle.content
+		assertTrue(parentGradle.contains("sourceCompatibility = '1.7'"))
+		assertTrue(parentGradle.contains("targetCompatibility = '1.7'"))
+		allJavaProjects.map[manifest].forEach[
+			assertTrue(contains("Bundle-RequiredExecutionEnvironment: JavaSE-1.7"))
 		]
 	}
 	

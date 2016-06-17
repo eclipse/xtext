@@ -25,8 +25,11 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.xml.type.XMLTypePackage;
 import org.eclipse.emf.mwe.utils.StandaloneSetup;
-import org.eclipse.xtext.junit4.TemporaryFolder;
+import org.eclipse.xtext.testing.GlobalRegistries;
+import org.eclipse.xtext.testing.GlobalRegistries.GlobalStateMemento;
+import org.eclipse.xtext.tests.TemporaryFolder;
 import org.eclipse.xtext.util.concurrent.AbstractReadWriteAcces;
 import org.eclipse.xtext.util.concurrent.IReadAccess;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
@@ -49,12 +52,16 @@ public class ConcurrentAccessTest extends Assert {
 	
 	private Resource resource;
 
+	private GlobalStateMemento globalStateMemento;
+
 	static {
 		new StandaloneSetup();
 	}
 
 	@Before
 	public void setUp() throws Exception {
+		globalStateMemento = GlobalRegistries.makeCopyOfGlobalState();
+		EPackage.Registry.INSTANCE.put(XMLTypePackage.eNS_URI, XMLTypePackage.eINSTANCE);
 		ResourceSet resourceSet = new ResourceSetImpl();
 		resource = new XtextResource(URI.createFileURI("something.ecore"));
 		resourceSet.getResources().add(resource);
@@ -89,6 +96,7 @@ public class ConcurrentAccessTest extends Assert {
 	@After
 	public void tearDown() throws Exception {
 		resource = null;
+		globalStateMemento.restoreGlobalState();
 	}
 	
 	@Test public void testDummy() {

@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource
 
+import java.io.File
 import java.io.IOException
 import java.util.Map
 import org.eclipse.emf.common.util.URI
@@ -56,7 +57,7 @@ abstract class AbstractXtextResourceSetTest extends AbstractResourceSetTest {
 		assertEquals(0, rs.URIResourceMap.size)
 		
 		val resource = new XtextResource
-		resource.URI = URI::createURI('foo')
+		resource.URI = URI::createFileURI(new File('foo').absolutePath)
 		
 		rs.resources += resource
 		
@@ -75,7 +76,7 @@ abstract class AbstractXtextResourceSetTest extends AbstractResourceSetTest {
 		assertEquals(0, rs.URIResourceMap.size)
 		
 		val resource = new XtextResource
-		resource.URI = URI::createURI('foo')
+		resource.URI = URI::createFileURI(new File('foo').absolutePath)
 		
 		rs.resources += newArrayList(resource)
 		
@@ -100,14 +101,14 @@ abstract class AbstractXtextResourceSetTest extends AbstractResourceSetTest {
 		assertEquals(resource, rs.URIResourceMap.get(null))
 		
 		// set the URI
-		resource.URI = URI::createURI('foo')
+		resource.URI = URI::createFileURI(new File('foo').absolutePath)
 		assertEquals(1, rs.URIResourceMap.size)
 		assertFalse(rs.URIResourceMap.containsKey(null))
 		assertEquals(resource, rs.URIResourceMap.get(resource.URI))
 		assertEquals(resource, rs.URIResourceMap.get(rs.URIConverter.normalize(resource.URI)))
 		
 		// set the URI
-		resource.URI = URI::createURI('bar')
+		resource.URI = URI::createFileURI(new File('bar').absolutePath)
 		assertEquals(1, rs.URIResourceMap.size)
 		assertFalse(rs.URIResourceMap.containsKey(null))
 		assertEquals(resource, rs.URIResourceMap.get(resource.URI))
@@ -132,10 +133,9 @@ abstract class AbstractXtextResourceSetTest extends AbstractResourceSetTest {
 		assertEquals(0, rs.URIResourceMap.size)
 		
 		val resource = new XtextResource
-		resource.URI = URI::createURI('foo')
+		resource.URI = URI::createFileURI(new File('foo').absolutePath)
 		
 		rs.resources += newArrayList(resource)
-		
 		assertEquals(1, rs.URIResourceMap.size)
 		
 		rs.resources.clear
@@ -151,7 +151,7 @@ abstract class AbstractXtextResourceSetTest extends AbstractResourceSetTest {
 		assertEquals(0, rs.URIResourceMap.size)
 		
 		val resource = new XtextResource
-		resource.URI = URI::createURI('foo')
+		resource.URI = URI::createFileURI(new File('foo').absolutePath)
 		
 		rs.resources += newArrayList(resource)
 		

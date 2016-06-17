@@ -18,11 +18,11 @@ import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
 import org.eclipse.xtext.grammarinheritance.services.BaseInheritanceTestLanguageGrammarAccess;
 import org.eclipse.xtext.grammarinheritance.services.InheritanceTestLanguageGrammarAccess;
-import org.eclipse.xtext.junit4.AbstractXtextTests;
-import org.eclipse.xtext.junit4.serializer.SerializerTester;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.service.GrammarProvider;
 import org.eclipse.xtext.services.XtextGrammarAccess;
+import org.eclipse.xtext.testing.serializer.SerializerTestHelper;
+import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -35,7 +35,7 @@ import com.google.inject.Provider;
  */
 public class XtextSerializerTest extends AbstractXtextTests {
 	@Inject
-	private SerializerTester tester;
+	private SerializerTestHelper tester;
 
 	private Grammar load(URI uri) {
 		XtextResourceSet rs = new XtextResourceSet();

@@ -12,6 +12,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.xml.namespace.XMLNamespacePackage;
 import org.eclipse.emf.mwe.core.WorkflowContext;
 import org.eclipse.emf.mwe.core.WorkflowContextDefaultImpl;
 import org.eclipse.emf.mwe.core.issues.IssuesImpl;
@@ -20,11 +21,12 @@ import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.XtextStandaloneSetup;
-import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.linking.ImportUriTestLanguageStandaloneSetup;
 import org.eclipse.xtext.linking.importedURI.Type;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
+import org.eclipse.xtext.tests.AbstractXtextTests;
+import org.junit.Before;
 import org.junit.Test;
 
 import com.google.inject.Binder;
@@ -36,6 +38,12 @@ import com.google.inject.name.Names;
  * @author Sven Efftinge - Initial contribution and API
  */
 public class UriBasedReaderTest extends AbstractXtextTests {
+	
+	@Override
+	@Before
+	public void setUp() throws Exception {
+		super.setUp();
+	}
 
 	/**
 	 * @author Sebastian Zarnekow - Initial contribution and API

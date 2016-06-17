@@ -35,8 +35,4 @@ CompositeGeneratorFragment {
 	fragment = ecore.EcoreGeneratorFragment auto-inject {}
 	fragment = serializer.SerializerFragment auto-inject {}
 	fragment = builder.BuilderIntegrationFragment {}
-    fragment = org.eclipse.xtext.idea.generator.parser.antlr.XtextAntlrIDEAGeneratorFragment auto-inject {
-    	options = auto-inject {}
-    }
-	fragment = org.eclipse.xtext.idea.generator.IdeaPluginGenerator auto-inject {}
 }

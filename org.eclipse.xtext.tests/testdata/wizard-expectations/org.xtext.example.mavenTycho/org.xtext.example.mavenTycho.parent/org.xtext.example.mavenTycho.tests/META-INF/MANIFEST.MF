@@ -7,6 +7,6 @@ Bundle-SymbolicName: org.xtext.example.mavenTycho.tests; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.xtext.example.mavenTycho,
  org.junit;bundle-version="4.7.0",
- org.eclipse.xtext.junit4,
+ org.eclipse.xtext.testing,
  org.eclipse.xtext.xbase.junit
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
