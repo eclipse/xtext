@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.xtext.tests/src-gen" editDirectory="/org.eclipse.xtext.tests.edit/src"
+    editorDirectory="/org.eclipse.xtext.tests.editor/src" modelPluginID="org.eclipse.xtext.tests"
+    forceOverwrite="true" modelName="Bug305397" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    complianceLevel="6.0" copyrightFields="false" editPluginID="org.eclipse.xtext.tests.edit"
+    editorPluginID="org.eclipse.xtext.tests.editor" runtimeVersion="2.9" usedGenPackages="platform:/resource/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
+  <genPackages prefix="Bug305397" basePackage="org.eclipse.xtext.parsetree.impl" disposableProviderFactory="true"
+      ecorePackage="Bug305397.ecore#/">
+    <genClasses ecoreClass="Bug305397.ecore#//Model">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug305397.ecore#//Model/elements"/>
+    </genClasses>
+    <genClasses ecoreClass="Bug305397.ecore#//Element">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug305397.ecore#//Element/a"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug305397.ecore#//Element/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug305397.ecore#//Element/elements"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

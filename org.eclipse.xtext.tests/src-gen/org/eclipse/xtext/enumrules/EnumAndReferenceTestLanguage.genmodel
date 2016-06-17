@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.xtext.tests/src-gen" editDirectory="/org.eclipse.xtext.tests.edit/src"
+    editorDirectory="/org.eclipse.xtext.tests.editor/src" modelPluginID="org.eclipse.xtext.tests"
+    forceOverwrite="true" modelName="EnumAndReferenceTestLanguage" updateClasspath="false"
+    rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" complianceLevel="6.0"
+    copyrightFields="false" editPluginID="org.eclipse.xtext.tests.edit" editorPluginID="org.eclipse.xtext.tests.editor"
+    runtimeVersion="2.9" usedGenPackages="platform:/resource/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
+  <genPackages prefix="EnumAndReferenceTestLanguage" basePackage="org.eclipse.xtext.enumrules"
+      disposableProviderFactory="true" ecorePackage="EnumAndReferenceTestLanguage.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="EnumAndReferenceTestLanguage.ecore#//KindOfKeyword">
+      <genEnumLiterals ecoreEnumLiteral="EnumAndReferenceTestLanguage.ecore#//KindOfKeyword/kindOfKeyword"/>
+      <genEnumLiterals ecoreEnumLiteral="EnumAndReferenceTestLanguage.ecore#//KindOfKeyword/anotherEnumLiteral"/>
+    </genEnums>
+    <genClasses ecoreClass="EnumAndReferenceTestLanguage.ecore#//EntityWithEnumAndReference">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EnumAndReferenceTestLanguage.ecore#//EntityWithEnumAndReference/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EnumAndReferenceTestLanguage.ecore#//EntityWithEnumAndReference/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference EnumAndReferenceTestLanguage.ecore#//EntityWithEnumAndReference/ref"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

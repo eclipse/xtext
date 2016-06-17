@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.xtext.tests/src-gen" editDirectory="/org.eclipse.xtext.tests.edit/src"
+    editorDirectory="/org.eclipse.xtext.tests.editor/src" modelPluginID="org.eclipse.xtext.tests"
+    forceOverwrite="true" modelName="IndexTestLanguage" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    complianceLevel="6.0" copyrightFields="false" editPluginID="org.eclipse.xtext.tests.edit"
+    editorPluginID="org.eclipse.xtext.tests.editor" runtimeVersion="2.9" usedGenPackages="platform:/resource/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
+  <genPackages prefix="IndexTestLanguage" basePackage="org.eclipse.xtext.index" disposableProviderFactory="true"
+      ecorePackage="IndexTestLanguage.ecore#/">
+    <genClasses ecoreClass="IndexTestLanguage.ecore#//File">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference IndexTestLanguage.ecore#//File/elements"/>
+    </genClasses>
+    <genClasses ecoreClass="IndexTestLanguage.ecore#//Import">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute IndexTestLanguage.ecore#//Import/importedNamespace"/>
+    </genClasses>
+    <genClasses ecoreClass="IndexTestLanguage.ecore#//Namespace">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute IndexTestLanguage.ecore#//Namespace/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference IndexTestLanguage.ecore#//Namespace/elements"/>
+    </genClasses>
+    <genClasses ecoreClass="IndexTestLanguage.ecore#//Element"/>
+    <genClasses ecoreClass="IndexTestLanguage.ecore#//Type">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute IndexTestLanguage.ecore#//Type/name"/>
+    </genClasses>
+    <genClasses ecoreClass="IndexTestLanguage.ecore#//Entity">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference IndexTestLanguage.ecore#//Entity/properties"/>
+    </genClasses>
+    <genClasses ecoreClass="IndexTestLanguage.ecore#//Datatype"/>
+    <genClasses ecoreClass="IndexTestLanguage.ecore#//Property">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference IndexTestLanguage.ecore#//Property/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute IndexTestLanguage.ecore#//Property/name"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

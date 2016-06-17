@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.xtext.tests/src-gen" editDirectory="/org.eclipse.xtext.tests.edit/src"
+    editorDirectory="/org.eclipse.xtext.tests.editor/src" modelPluginID="org.eclipse.xtext.tests"
+    forceOverwrite="true" modelName="FormatterTestLanguage" updateClasspath="false"
+    rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" complianceLevel="6.0"
+    copyrightFields="false" editPluginID="org.eclipse.xtext.tests.edit" editorPluginID="org.eclipse.xtext.tests.editor"
+    runtimeVersion="2.9" usedGenPackages="platform:/resource/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
+  <genPackages prefix="Formattertestlanguage" basePackage="org.eclipse.xtext.parsetree.formatter"
+      disposableProviderFactory="true" ecorePackage="FormatterTestLanguage.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="FormatterTestLanguage.ecore#//Enum1">
+      <genEnumLiterals ecoreEnumLiteral="FormatterTestLanguage.ecore#//Enum1/lit1"/>
+      <genEnumLiterals ecoreEnumLiteral="FormatterTestLanguage.ecore#//Enum1/lit2"/>
+      <genEnumLiterals ecoreEnumLiteral="FormatterTestLanguage.ecore#//Enum1/lit3"/>
+    </genEnums>
+    <genClasses ecoreClass="FormatterTestLanguage.ecore#//Root"/>
+    <genClasses ecoreClass="FormatterTestLanguage.ecore#//Line"/>
+    <genClasses ecoreClass="FormatterTestLanguage.ecore#//Decl">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FormatterTestLanguage.ecore#//Decl/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FormatterTestLanguage.ecore#//Decl/name"/>
+    </genClasses>
+    <genClasses ecoreClass="FormatterTestLanguage.ecore#//Assign">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FormatterTestLanguage.ecore#//Assign/var"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FormatterTestLanguage.ecore#//Assign/op"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FormatterTestLanguage.ecore#//Assign/val"/>
+    </genClasses>
+    <genClasses ecoreClass="FormatterTestLanguage.ecore#//Meth">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FormatterTestLanguage.ecore#//Meth/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FormatterTestLanguage.ecore#//Meth/param"/>
+    </genClasses>
+    <genClasses ecoreClass="FormatterTestLanguage.ecore#//Param">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FormatterTestLanguage.ecore#//Param/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FormatterTestLanguage.ecore#//Param/type"/>
+    </genClasses>
+    <genClasses ecoreClass="FormatterTestLanguage.ecore#//Space">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FormatterTestLanguage.ecore#//Space/val"/>
+    </genClasses>
+    <genClasses ecoreClass="FormatterTestLanguage.ecore#//TestLinewrap">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FormatterTestLanguage.ecore#//TestLinewrap/items"/>
+    </genClasses>
+    <genClasses ecoreClass="FormatterTestLanguage.ecore#//TestLinewrapMinMax">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FormatterTestLanguage.ecore#//TestLinewrapMinMax/items"/>
+    </genClasses>
+    <genClasses ecoreClass="FormatterTestLanguage.ecore#//TestIndentation">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FormatterTestLanguage.ecore#//TestIndentation/items"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FormatterTestLanguage.ecore#//TestIndentation/semi"/>
+    </genClasses>
+    <genClasses ecoreClass="FormatterTestLanguage.ecore#//FqnObj">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FormatterTestLanguage.ecore#//FqnObj/name"/>
+    </genClasses>
+    <genClasses ecoreClass="FormatterTestLanguage.ecore#//FqnRef">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference FormatterTestLanguage.ecore#//FqnRef/ref"/>
+    </genClasses>
+    <genClasses ecoreClass="FormatterTestLanguage.ecore#//Enumeration">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FormatterTestLanguage.ecore#//Enumeration/val"/>
+    </genClasses>
+    <genClasses ecoreClass="FormatterTestLanguage.ecore#//SuppressedHidden">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FormatterTestLanguage.ecore#//SuppressedHidden/vals"/>
+    </genClasses>
+    <genClasses ecoreClass="FormatterTestLanguage.ecore#//SuppressedHiddenSub">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FormatterTestLanguage.ecore#//SuppressedHiddenSub/idval"/>
+    </genClasses>
+    <genClasses ecoreClass="FormatterTestLanguage.ecore#//SuppressedHiddenSubSub"/>
+    <genClasses ecoreClass="FormatterTestLanguage.ecore#//SuppressedHiddenSubID"/>
+    <genClasses ecoreClass="FormatterTestLanguage.ecore#//Datatypes">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FormatterTestLanguage.ecore#//Datatypes/val1"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FormatterTestLanguage.ecore#//Datatypes/val2"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FormatterTestLanguage.ecore#//Datatypes/val3"/>
+    </genClasses>
+    <genClasses ecoreClass="FormatterTestLanguage.ecore#//WrappingDataTypeTest">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FormatterTestLanguage.ecore#//WrappingDataTypeTest/datatype"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

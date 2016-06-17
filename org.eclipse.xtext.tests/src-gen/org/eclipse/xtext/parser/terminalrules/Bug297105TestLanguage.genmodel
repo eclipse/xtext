@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.xtext.tests/src-gen" editDirectory="/org.eclipse.xtext.tests.edit/src"
+    editorDirectory="/org.eclipse.xtext.tests.editor/src" modelPluginID="org.eclipse.xtext.tests"
+    forceOverwrite="true" modelName="Bug297105TestLanguage" updateClasspath="false"
+    rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" complianceLevel="6.0"
+    copyrightFields="false" editPluginID="org.eclipse.xtext.tests.edit" editorPluginID="org.eclipse.xtext.tests.editor"
+    runtimeVersion="2.9" usedGenPackages="platform:/resource/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
+  <genPackages prefix="Bug297105TestLanguage" basePackage="org.eclipse.xtext.parser.terminalrules"
+      disposableProviderFactory="true" ecorePackage="Bug297105TestLanguage.ecore#/">
+    <genClasses ecoreClass="Bug297105TestLanguage.ecore#//Model">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug297105TestLanguage.ecore#//Model/expressions"/>
+    </genClasses>
+    <genClasses ecoreClass="Bug297105TestLanguage.ecore#//Expression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug297105TestLanguage.ecore#//Expression/left"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug297105TestLanguage.ecore#//Expression/right"/>
+    </genClasses>
+    <genClasses ecoreClass="Bug297105TestLanguage.ecore#//Literal">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug297105TestLanguage.ecore#//Literal/value"/>
+    </genClasses>
+    <genClasses ecoreClass="Bug297105TestLanguage.ecore#//IntLiteral"/>
+    <genClasses ecoreClass="Bug297105TestLanguage.ecore#//RealLiteral"/>
+  </genPackages>
+</genmodel:GenModel>

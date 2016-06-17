@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.xtext.tests/src-gen" editDirectory="/org.eclipse.xtext.tests.edit/src"
+    editorDirectory="/org.eclipse.xtext.tests.editor/src" modelPluginID="org.eclipse.xtext.tests"
+    forceOverwrite="true" modelName="XtextGrammarTestLanguage" updateClasspath="false"
+    rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" complianceLevel="6.0"
+    copyrightFields="false" editPluginID="org.eclipse.xtext.tests.edit" editorPluginID="org.eclipse.xtext.tests.editor"
+    runtimeVersion="2.9" usedGenPackages="platform:/resource/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
+  <genPackages prefix="XtextTest" basePackage="org.eclipse.xtext" disposableProviderFactory="true"
+      ecorePackage="XtextGrammarTestLanguage.ecore#/">
+    <genClasses ecoreClass="XtextGrammarTestLanguage.ecore#//Grammar">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute XtextGrammarTestLanguage.ecore#//Grammar/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference XtextGrammarTestLanguage.ecore#//Grammar/usedGrammars"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute XtextGrammarTestLanguage.ecore#//Grammar/definesHiddenTokens"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference XtextGrammarTestLanguage.ecore#//Grammar/hiddenTokens"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference XtextGrammarTestLanguage.ecore#//Grammar/metamodelDeclarations"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference XtextGrammarTestLanguage.ecore#//Grammar/rules"/>
+    </genClasses>
+    <genClasses ecoreClass="XtextGrammarTestLanguage.ecore#//AbstractRule">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference XtextGrammarTestLanguage.ecore#//AbstractRule/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference XtextGrammarTestLanguage.ecore#//AbstractRule/alternatives"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute XtextGrammarTestLanguage.ecore#//AbstractRule/name"/>
+    </genClasses>
+    <genClasses ecoreClass="XtextGrammarTestLanguage.ecore#//AbstractMetamodelDeclaration">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference XtextGrammarTestLanguage.ecore#//AbstractMetamodelDeclaration/ePackage"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute XtextGrammarTestLanguage.ecore#//AbstractMetamodelDeclaration/alias"/>
+    </genClasses>
+    <genClasses ecoreClass="XtextGrammarTestLanguage.ecore#//GeneratedMetamodel">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute XtextGrammarTestLanguage.ecore#//GeneratedMetamodel/name"/>
+    </genClasses>
+    <genClasses ecoreClass="XtextGrammarTestLanguage.ecore#//ReferencedMetamodel"/>
+    <genClasses ecoreClass="XtextGrammarTestLanguage.ecore#//ParserRule">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute XtextGrammarTestLanguage.ecore#//ParserRule/fragment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute XtextGrammarTestLanguage.ecore#//ParserRule/wildcard"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute XtextGrammarTestLanguage.ecore#//ParserRule/definesHiddenTokens"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference XtextGrammarTestLanguage.ecore#//ParserRule/hiddenTokens"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference XtextGrammarTestLanguage.ecore#//ParserRule/parameters"/>
+    </genClasses>
+    <genClasses ecoreClass="XtextGrammarTestLanguage.ecore#//Parameter">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute XtextGrammarTestLanguage.ecore#//Parameter/name"/>
+    </genClasses>
+    <genClasses ecoreClass="XtextGrammarTestLanguage.ecore#//TypeRef">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference XtextGrammarTestLanguage.ecore#//TypeRef/metamodel"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference XtextGrammarTestLanguage.ecore#//TypeRef/classifier"/>
+    </genClasses>
+    <genClasses ecoreClass="XtextGrammarTestLanguage.ecore#//AbstractElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute XtextGrammarTestLanguage.ecore#//AbstractElement/cardinality"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute XtextGrammarTestLanguage.ecore#//AbstractElement/predicated"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute XtextGrammarTestLanguage.ecore#//AbstractElement/firstSetPredicated"/>
+    </genClasses>
+    <genClasses ecoreClass="XtextGrammarTestLanguage.ecore#//Action">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference XtextGrammarTestLanguage.ecore#//Action/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute XtextGrammarTestLanguage.ecore#//Action/feature"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute XtextGrammarTestLanguage.ecore#//Action/operator"/>
+    </genClasses>
+    <genClasses ecoreClass="XtextGrammarTestLanguage.ecore#//Keyword">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute XtextGrammarTestLanguage.ecore#//Keyword/value"/>
+    </genClasses>
+    <genClasses ecoreClass="XtextGrammarTestLanguage.ecore#//RuleCall">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference XtextGrammarTestLanguage.ecore#//RuleCall/rule"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference XtextGrammarTestLanguage.ecore#//RuleCall/arguments"/>
+    </genClasses>
+    <genClasses ecoreClass="XtextGrammarTestLanguage.ecore#//NamedArgument">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute XtextGrammarTestLanguage.ecore#//NamedArgument/literalValue"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference XtextGrammarTestLanguage.ecore#//NamedArgument/parameter"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference XtextGrammarTestLanguage.ecore#//NamedArgument/value"/>
+    </genClasses>
+    <genClasses ecoreClass="XtextGrammarTestLanguage.ecore#//Assignment">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute XtextGrammarTestLanguage.ecore#//Assignment/feature"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute XtextGrammarTestLanguage.ecore#//Assignment/operator"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference XtextGrammarTestLanguage.ecore#//Assignment/terminal"/>
+    </genClasses>
+    <genClasses ecoreClass="XtextGrammarTestLanguage.ecore#//CrossReference">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference XtextGrammarTestLanguage.ecore#//CrossReference/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference XtextGrammarTestLanguage.ecore#//CrossReference/terminal"/>
+    </genClasses>
+    <genClasses ecoreClass="XtextGrammarTestLanguage.ecore#//Group">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference XtextGrammarTestLanguage.ecore#//Group/elements"/>
+    </genClasses>
+    <genClasses ecoreClass="XtextGrammarTestLanguage.ecore#//TerminalRule">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute XtextGrammarTestLanguage.ecore#//TerminalRule/fragment"/>
+    </genClasses>
+    <genClasses ecoreClass="XtextGrammarTestLanguage.ecore#//AbstractNegatedToken">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference XtextGrammarTestLanguage.ecore#//AbstractNegatedToken/terminal"/>
+    </genClasses>
+    <genClasses ecoreClass="XtextGrammarTestLanguage.ecore#//NegatedToken"/>
+    <genClasses ecoreClass="XtextGrammarTestLanguage.ecore#//UntilToken"/>
+    <genClasses ecoreClass="XtextGrammarTestLanguage.ecore#//Wildcard"/>
+    <genClasses ecoreClass="XtextGrammarTestLanguage.ecore#//EOF"/>
+    <genClasses ecoreClass="XtextGrammarTestLanguage.ecore#//EnumRule"/>
+    <genClasses ecoreClass="XtextGrammarTestLanguage.ecore#//EnumLiteralDeclaration">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference XtextGrammarTestLanguage.ecore#//EnumLiteralDeclaration/enumLiteral"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference XtextGrammarTestLanguage.ecore#//EnumLiteralDeclaration/literal"/>
+    </genClasses>
+    <genClasses ecoreClass="XtextGrammarTestLanguage.ecore#//Alternatives">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference XtextGrammarTestLanguage.ecore#//Alternatives/elements"/>
+    </genClasses>
+    <genClasses ecoreClass="XtextGrammarTestLanguage.ecore#//ConditionalBranch">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute XtextGrammarTestLanguage.ecore#//ConditionalBranch/filtered"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference XtextGrammarTestLanguage.ecore#//ConditionalBranch/parameter"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference XtextGrammarTestLanguage.ecore#//ConditionalBranch/guardedElement"/>
+    </genClasses>
+    <genClasses ecoreClass="XtextGrammarTestLanguage.ecore#//UnorderedGroup">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference XtextGrammarTestLanguage.ecore#//UnorderedGroup/elements"/>
+    </genClasses>
+    <genClasses ecoreClass="XtextGrammarTestLanguage.ecore#//CharacterRange">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference XtextGrammarTestLanguage.ecore#//CharacterRange/left"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference XtextGrammarTestLanguage.ecore#//CharacterRange/right"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

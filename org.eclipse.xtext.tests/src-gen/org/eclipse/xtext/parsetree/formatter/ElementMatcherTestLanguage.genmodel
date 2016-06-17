@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.xtext.tests/src-gen" editDirectory="/org.eclipse.xtext.tests.edit/src"
+    editorDirectory="/org.eclipse.xtext.tests.editor/src" modelPluginID="org.eclipse.xtext.tests"
+    forceOverwrite="true" modelName="ElementMatcherTestLanguage" updateClasspath="false"
+    rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" complianceLevel="6.0"
+    copyrightFields="false" editPluginID="org.eclipse.xtext.tests.edit" editorPluginID="org.eclipse.xtext.tests.editor"
+    runtimeVersion="2.9" usedGenPackages="platform:/resource/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
+  <genPackages prefix="Elementmatchertestlanguage" basePackage="org.eclipse.xtext.parsetree.formatter"
+      disposableProviderFactory="true" ecorePackage="ElementMatcherTestLanguage.ecore#/">
+    <genClasses ecoreClass="ElementMatcherTestLanguage.ecore#//Model"/>
+    <genClasses ecoreClass="ElementMatcherTestLanguage.ecore#//Simple">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ElementMatcherTestLanguage.ecore#//Simple/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ElementMatcherTestLanguage.ecore#//Simple/optional"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ElementMatcherTestLanguage.ecore#//Simple/datatype"/>
+    </genClasses>
+    <genClasses ecoreClass="ElementMatcherTestLanguage.ecore#//RuleCalls"/>
+    <genClasses ecoreClass="ElementMatcherTestLanguage.ecore#//RuleCallsSub">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ElementMatcherTestLanguage.ecore#//RuleCallsSub/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ElementMatcherTestLanguage.ecore#//RuleCallsSub/call1"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ElementMatcherTestLanguage.ecore#//RuleCallsSub/call2"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ElementMatcherTestLanguage.ecore#//RuleCallsSub/sub"/>
+    </genClasses>
+    <genClasses ecoreClass="ElementMatcherTestLanguage.ecore#//RuleCallsAss1">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ElementMatcherTestLanguage.ecore#//RuleCallsAss1/name"/>
+    </genClasses>
+    <genClasses ecoreClass="ElementMatcherTestLanguage.ecore#//RuleCallsAss2">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ElementMatcherTestLanguage.ecore#//RuleCallsAss2/name"/>
+    </genClasses>
+    <genClasses ecoreClass="ElementMatcherTestLanguage.ecore#//OptionalCalls">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ElementMatcherTestLanguage.ecore#//OptionalCalls/opt1"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ElementMatcherTestLanguage.ecore#//OptionalCalls/name"/>
+    </genClasses>
+    <genClasses ecoreClass="ElementMatcherTestLanguage.ecore#//OptionalCallsSub1">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ElementMatcherTestLanguage.ecore#//OptionalCallsSub1/opt2"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ElementMatcherTestLanguage.ecore#//OptionalCallsSub1/opt3"/>
+    </genClasses>
+    <genClasses ecoreClass="ElementMatcherTestLanguage.ecore#//OptionalCallsSub2">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ElementMatcherTestLanguage.ecore#//OptionalCallsSub2/name"/>
+    </genClasses>
+    <genClasses ecoreClass="ElementMatcherTestLanguage.ecore#//OptionalCallsSub3">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ElementMatcherTestLanguage.ecore#//OptionalCallsSub3/name"/>
+    </genClasses>
+    <genClasses ecoreClass="ElementMatcherTestLanguage.ecore#//Recursion"/>
+    <genClasses ecoreClass="ElementMatcherTestLanguage.ecore#//RecursionSub">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ElementMatcherTestLanguage.ecore#//RecursionSub/sub"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ElementMatcherTestLanguage.ecore#//RecursionSub/vals"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ElementMatcherTestLanguage.ecore#//RecursionSub/semi"/>
+    </genClasses>
+    <genClasses ecoreClass="ElementMatcherTestLanguage.ecore#//Loop">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ElementMatcherTestLanguage.ecore#//Loop/names"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ElementMatcherTestLanguage.ecore#//Loop/gr"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ElementMatcherTestLanguage.ecore#//Loop/ints"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ElementMatcherTestLanguage.ecore#//Loop/strings"/>
+    </genClasses>
+    <genClasses ecoreClass="ElementMatcherTestLanguage.ecore#//Expression"/>
+    <genClasses ecoreClass="ElementMatcherTestLanguage.ecore#//RuleCalls12">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ElementMatcherTestLanguage.ecore#//RuleCalls12/constructor"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ElementMatcherTestLanguage.ecore#//RuleCalls12/fields"/>
+    </genClasses>
+    <genClasses ecoreClass="ElementMatcherTestLanguage.ecore#//Constructor">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ElementMatcherTestLanguage.ecore#//Constructor/kw1"/>
+    </genClasses>
+    <genClasses ecoreClass="ElementMatcherTestLanguage.ecore#//Field"/>
+    <genClasses ecoreClass="ElementMatcherTestLanguage.ecore#//Parameter">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ElementMatcherTestLanguage.ecore#//Parameter/kw2"/>
+    </genClasses>
+    <genClasses ecoreClass="ElementMatcherTestLanguage.ecore#//NestedStart"/>
+    <genClasses ecoreClass="ElementMatcherTestLanguage.ecore#//NestedStartSub">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ElementMatcherTestLanguage.ecore#//NestedStartSub/name"/>
+    </genClasses>
+    <genClasses ecoreClass="ElementMatcherTestLanguage.ecore#//Add">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ElementMatcherTestLanguage.ecore#//Add/left"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ElementMatcherTestLanguage.ecore#//Add/right"/>
+    </genClasses>
+    <genClasses ecoreClass="ElementMatcherTestLanguage.ecore#//Mult">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ElementMatcherTestLanguage.ecore#//Mult/left"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ElementMatcherTestLanguage.ecore#//Mult/right"/>
+    </genClasses>
+    <genClasses ecoreClass="ElementMatcherTestLanguage.ecore#//Value">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ElementMatcherTestLanguage.ecore#//Value/val"/>
+    </genClasses>
+    <genClasses ecoreClass="ElementMatcherTestLanguage.ecore#//Function">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ElementMatcherTestLanguage.ecore#//Function/func"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ElementMatcherTestLanguage.ecore#//Function/param"/>
+    </genClasses>
+    <genClasses ecoreClass="ElementMatcherTestLanguage.ecore#//Pointer">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ElementMatcherTestLanguage.ecore#//Pointer/target"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

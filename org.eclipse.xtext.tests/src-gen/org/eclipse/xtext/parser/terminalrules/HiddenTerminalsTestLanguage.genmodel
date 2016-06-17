@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.xtext.tests/src-gen" editDirectory="/org.eclipse.xtext.tests.edit/src"
+    editorDirectory="/org.eclipse.xtext.tests.editor/src" modelPluginID="org.eclipse.xtext.tests"
+    forceOverwrite="true" modelName="HiddenTerminalsTestLanguage" updateClasspath="false"
+    rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" complianceLevel="6.0"
+    copyrightFields="false" editPluginID="org.eclipse.xtext.tests.edit" editorPluginID="org.eclipse.xtext.tests.editor"
+    runtimeVersion="2.9" usedGenPackages="platform:/resource/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
+  <genPackages prefix="HiddenTerminalsTestLanguage" basePackage="org.eclipse.xtext.parser.terminalrules"
+      disposableProviderFactory="true" ecorePackage="HiddenTerminalsTestLanguage.ecore#/">
+    <genClasses ecoreClass="HiddenTerminalsTestLanguage.ecore#//Model">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute HiddenTerminalsTestLanguage.ecore#//Model/valid"/>
+    </genClasses>
+    <genClasses ecoreClass="HiddenTerminalsTestLanguage.ecore#//WithoutHiddens">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute HiddenTerminalsTestLanguage.ecore#//WithoutHiddens/spaces"/>
+    </genClasses>
+    <genClasses ecoreClass="HiddenTerminalsTestLanguage.ecore#//WithHiddens"/>
+    <genClasses ecoreClass="HiddenTerminalsTestLanguage.ecore#//OverridingHiddens">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference HiddenTerminalsTestLanguage.ecore#//OverridingHiddens/called"/>
+    </genClasses>
+    <genClasses ecoreClass="HiddenTerminalsTestLanguage.ecore#//OverridingHiddensCall">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute HiddenTerminalsTestLanguage.ecore#//OverridingHiddensCall/spaces"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute HiddenTerminalsTestLanguage.ecore#//OverridingHiddensCall/valid"/>
+    </genClasses>
+    <genClasses ecoreClass="HiddenTerminalsTestLanguage.ecore#//InheritingHiddens">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference HiddenTerminalsTestLanguage.ecore#//InheritingHiddens/called"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference HiddenTerminalsTestLanguage.ecore#//InheritingHiddens/hidingCalled"/>
+    </genClasses>
+    <genClasses ecoreClass="HiddenTerminalsTestLanguage.ecore#//DatatypeHiddens"/>
+    <genClasses ecoreClass="HiddenTerminalsTestLanguage.ecore#//HidingHiddens">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute HiddenTerminalsTestLanguage.ecore#//HidingHiddens/space"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference HiddenTerminalsTestLanguage.ecore#//HidingHiddens/called"/>
+    </genClasses>
+    <genClasses ecoreClass="HiddenTerminalsTestLanguage.ecore#//InheritingHiddensCall">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute HiddenTerminalsTestLanguage.ecore#//InheritingHiddensCall/valid"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>
