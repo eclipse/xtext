@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xtext.generator
 
 import com.google.inject.Injector
+import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.xtext.generator.builder.BuilderIntegrationFragment2
@@ -29,6 +30,7 @@ import org.eclipse.xtext.xtext.generator.ui.contentAssist.ContentAssistFragment2
 import org.eclipse.xtext.xtext.generator.ui.labeling.LabelProviderFragment2
 import org.eclipse.xtext.xtext.generator.ui.outline.OutlineTreeProviderFragment2
 import org.eclipse.xtext.xtext.generator.ui.outline.QuickOutlineFragment2
+import org.eclipse.xtext.xtext.generator.ui.projectWizard.SimpleProjectWizardFragment2
 import org.eclipse.xtext.xtext.generator.ui.quickfix.QuickfixProviderFragment2
 import org.eclipse.xtext.xtext.generator.ui.refactoring.RefactorElementNameFragment2
 import org.eclipse.xtext.xtext.generator.ui.templates.CodetemplatesGeneratorFragment2
@@ -36,8 +38,6 @@ import org.eclipse.xtext.xtext.generator.validation.ValidatorFragment2
 import org.eclipse.xtext.xtext.generator.web.WebIntegrationFragment
 import org.eclipse.xtext.xtext.generator.xbase.XbaseGeneratorFragment2
 import org.eclipse.xtext.xtext.generator.xbase.XtypeGeneratorFragment2
-import java.util.List
-import org.eclipse.xtext.xtext.generator.ui.projectWizard.SimpleProjectWizardFragment2
 
 /**
  * @author Sven Efftinge - Initial contribution and API

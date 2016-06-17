@@ -29,5 +29,7 @@ configurations {
 }
 
 sourceSets.main.compileClasspath += configurations.optional
+sourceSets.test.compileClasspath += configurations.optional
+sourceSets.test.runtimeClasspath += configurations.optional
 eclipse.classpath.plusConfigurations += [configurations.optional]
 javadoc.classpath += configurations.optional

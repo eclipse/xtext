@@ -28,7 +28,7 @@ class WizardConfiguration {
 	ProjectLayout projectLayout = ProjectLayout.FLAT
 	
 	boolean needsGradleWrapper = true
-	JavaVersion  javaVersion = JavaVersion.JAVA6
+	JavaVersion javaVersion = JavaVersion.JAVA8
 	
 	val LanguageDescriptor language = new LanguageDescriptor
 

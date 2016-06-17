@@ -7,5 +7,6 @@ include 'org.eclipse.xtext.xtext.generator'
 include 'org.eclipse.xtext.xtext.wizard'
 include 'org.eclipse.xtext.testing'
 // Test project must be split before it works properly.
-// include 'org.eclipse.xtext.tests'
+include 'org.eclipse.xtext.tests'
 include 'org.eclipse.xtext.ide.tests'
+include 'org.eclipse.xtext.testlanguages'

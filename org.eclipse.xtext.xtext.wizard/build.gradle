@@ -2,4 +2,4 @@ dependencies {
 	compile project(':org.eclipse.xtext')
 }
 
-sourceSets.main.resources.srcDirs += 'resources'
+sourceSets.main.resources.srcDir 'resources'
