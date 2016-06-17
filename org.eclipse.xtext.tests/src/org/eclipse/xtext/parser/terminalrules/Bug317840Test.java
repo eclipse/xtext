@@ -7,13 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser.terminalrules;
 
-import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parser.terminalrules.bug317840TestLanguage.Element;
 import org.eclipse.xtext.parser.terminalrules.bug317840TestLanguage.Model;
+import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.junit.Test;
 
 /**

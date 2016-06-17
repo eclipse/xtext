@@ -9,14 +9,14 @@ package org.eclipse.xtext.parser.indentation
 
 import com.google.inject.Inject
 import org.eclipse.xtend2.lib.StringConcatenation
-import org.eclipse.xtext.junit4.InjectWith
-import org.eclipse.xtext.junit4.XtextRunner
-import org.eclipse.xtext.junit4.util.ParseHelper
-import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 import org.eclipse.xtext.nodemodel.impl.InvariantChecker
 import org.eclipse.xtext.parser.indentation.indentationAwareTestLanguage.Tree
 import org.eclipse.xtext.parser.indentation.indentationAwareTestLanguage.TreeNode
 import org.eclipse.xtext.resource.XtextResource
+import org.eclipse.xtext.testing.InjectWith
+import org.eclipse.xtext.testing.XtextRunner
+import org.eclipse.xtext.testing.util.ParseHelper
+import org.eclipse.xtext.testing.validation.ValidationTestHelper
 import org.junit.Test
 import org.junit.runner.RunWith
 

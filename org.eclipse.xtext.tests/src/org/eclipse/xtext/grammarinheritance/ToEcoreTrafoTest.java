@@ -19,9 +19,9 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.grammarinheritance.ametamodel.AmetamodelPackage;
-import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.eclipse.xtext.xtext.ecoreInference.Xtext2EcoreTransformer;
 import org.junit.Test;
 

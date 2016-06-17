@@ -10,9 +10,9 @@ package org.eclipse.xtext.linking;
 import java.io.IOException;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.resource.containers.FlatResourceSetBasedAllContainersState;
+import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.eclipse.xtext.util.internal.Stopwatches;
 import org.eclipse.xtext.util.internal.Stopwatches.StoppedTask;
 import org.junit.Assert;

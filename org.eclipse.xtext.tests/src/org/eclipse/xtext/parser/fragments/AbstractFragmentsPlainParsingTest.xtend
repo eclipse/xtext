@@ -7,11 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser.fragments
 
-import org.eclipse.xtext.junit4.AbstractXtextTests
 import com.google.inject.Injector
-import org.junit.Test
 import org.eclipse.xtext.resource.XtextResource
+import org.eclipse.xtext.tests.AbstractXtextTests
 import org.junit.Ignore
+import org.junit.Test
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

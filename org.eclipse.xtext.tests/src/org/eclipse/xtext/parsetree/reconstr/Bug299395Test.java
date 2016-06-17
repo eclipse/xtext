@@ -7,10 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.parsetree.reconstr;
 
-import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.parsetree.reconstr.bug299395.Bug299395Factory;
 import org.eclipse.xtext.parsetree.reconstr.bug299395.Model;
 import org.eclipse.xtext.parsetree.reconstr.bug299395.SubModel;
+import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.junit.Test;
 
 /**

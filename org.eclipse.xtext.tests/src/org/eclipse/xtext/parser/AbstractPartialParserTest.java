@@ -8,12 +8,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser;
 
-import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.nodemodel.BidiTreeIterator;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.parser.impl.PartialParsingHelper;
 import org.eclipse.xtext.parser.impl.PartialParsingPointers;
+import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.eclipse.xtext.util.EmfStructureComparator;
 import org.eclipse.xtext.util.ReplaceRegion;
 

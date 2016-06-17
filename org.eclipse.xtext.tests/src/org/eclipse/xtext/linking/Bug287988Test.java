@@ -8,9 +8,9 @@
 package org.eclipse.xtext.linking;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.linking.bug287988Test.BaseAttribute;
 import org.eclipse.xtext.linking.bug287988Test.Model;
+import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.junit.Test;
 
 /**

@@ -18,11 +18,11 @@ import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.xtext.diagnostics.Severity;
-import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.linking.LangATestLanguageStandaloneSetup;
 import org.eclipse.xtext.linking.langATestLanguage.LangATestLanguagePackage;
 import org.eclipse.xtext.linking.langATestLanguage.Type;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.eclipse.xtext.util.StringInputStream;
 import org.junit.Test;
 

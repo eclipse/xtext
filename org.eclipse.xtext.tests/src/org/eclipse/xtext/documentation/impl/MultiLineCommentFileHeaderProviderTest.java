@@ -10,7 +10,7 @@ package org.eclipse.xtext.documentation.impl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.documentation.IFileHeaderProvider;
 import org.eclipse.xtext.dummy.DummyTestLanguageStandaloneSetup;
-import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.junit.Test;
 
 /**

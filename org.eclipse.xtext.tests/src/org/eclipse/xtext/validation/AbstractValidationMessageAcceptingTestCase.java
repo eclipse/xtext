@@ -9,7 +9,7 @@ package org.eclipse.xtext.validation;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.eclipse.xtext.tests.AbstractXtextTests;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

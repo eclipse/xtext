@@ -13,7 +13,7 @@ package org.eclipse.xtext.documentation.impl;
 import org.eclipse.xtext.dummy.DummyTestLanguageStandaloneSetup;
 import org.eclipse.xtext.dummy.dummyLang.Element;
 import org.eclipse.xtext.dummy.dummyLang.Model;
-import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.junit.Test;
 
 /**

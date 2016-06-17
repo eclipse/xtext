@@ -9,13 +9,13 @@ package org.eclipse.xtext.parser.terminalrules;
 
 import java.io.ByteArrayOutputStream;
 
-import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.parser.terminalrules.unicode.AbstractString;
 import org.eclipse.xtext.parser.terminalrules.unicode.GString;
 import org.eclipse.xtext.parser.terminalrules.unicode.Model;
 import org.eclipse.xtext.parser.terminalrules.unicode.QuotedString;
 import org.eclipse.xtext.parser.terminalrules.unicode.UnicodeFactory;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.junit.Test;
 
 /**

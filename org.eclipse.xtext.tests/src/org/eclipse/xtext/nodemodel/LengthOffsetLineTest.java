@@ -11,7 +11,7 @@ package org.eclipse.xtext.nodemodel;
 import java.util.Iterator;
 
 import org.eclipse.xtext.dummy.DummyTestLanguageStandaloneSetup;
-import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.junit.Test;
 
 public class LengthOffsetLineTest extends AbstractXtextTests {

@@ -1,8 +1,8 @@
 package org.eclipse.xtext.parser;
 
-import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.testlanguages.indent.IndentationAwareTestLanguageStandaloneSetup;
+import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.eclipse.xtext.util.StringInputStream;
 import org.junit.Test;
 

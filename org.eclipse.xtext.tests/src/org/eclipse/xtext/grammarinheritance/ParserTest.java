@@ -12,9 +12,9 @@ import java.util.List;
 import org.eclipse.xtext.grammarinheritance.inheritanceTest.Element;
 import org.eclipse.xtext.grammarinheritance.inheritanceTest.InheritanceTestPackage;
 import org.eclipse.xtext.grammarinheritance.inheritanceTest.Model;
-import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.junit.Test;
 
 /**

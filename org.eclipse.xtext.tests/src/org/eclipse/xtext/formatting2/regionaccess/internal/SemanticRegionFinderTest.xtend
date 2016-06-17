@@ -21,11 +21,11 @@ import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlangu
 import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Mixed
 import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Root
 import org.eclipse.xtext.formatting2.regionaccess.internal.services.RegionAccessTestLanguageGrammarAccess
-import org.eclipse.xtext.junit4.InjectWith
-import org.eclipse.xtext.junit4.XtextRunner
-import org.eclipse.xtext.junit4.util.ParseHelper
-import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 import org.eclipse.xtext.resource.XtextResource
+import org.eclipse.xtext.testing.InjectWith
+import org.eclipse.xtext.testing.XtextRunner
+import org.eclipse.xtext.testing.util.ParseHelper
+import org.eclipse.xtext.testing.validation.ValidationTestHelper
 import org.junit.Test
 import org.junit.runner.RunWith
 

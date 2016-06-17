@@ -11,13 +11,15 @@ import static org.eclipse.xtext.util.Strings.*;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.formatting.IWhitespaceInformationProvider;
-import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.eclipse.xtext.tests.AbstractXtextTests;
+import org.junit.Test;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
 public class LineSeparatorHarminizerTest extends AbstractXtextTests {
 
+	@Test
 	public void testHarmonizeLineBreaks() {
 		IWhitespaceInformationProvider whitespaceInformationProvider = get(IWhitespaceInformationProvider.class);
 		URI uri = URI.createURI("example.txt");

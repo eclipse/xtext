@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.parser
 
-import org.eclipse.xtext.generator.parser.antlr.AntlrGrammarComparator
-
 /**
  * @author Christian Schneider - Initial contribution and API
  */

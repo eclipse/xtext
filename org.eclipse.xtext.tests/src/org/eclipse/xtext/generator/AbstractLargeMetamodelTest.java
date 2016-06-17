@@ -7,9 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator;
 
-//import org.eclipse.xtext.generator.generatorTestLanguage.GeneratorTestLanguagePackage;
-//import org.eclipse.xtext.generator.generatorTestLanguage.Rule;
-import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.junit.Ignore;
 import org.junit.Test;
 

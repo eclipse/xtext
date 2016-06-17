@@ -14,8 +14,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.xtext.junit4.AbstractXtextTests;
-import org.eclipse.xtext.junit4.util.ParseHelper;
 import org.eclipse.xtext.serializer.analysis.Context2NameFunction;
 import org.eclipse.xtext.serializer.analysis.SerializationContext;
 import org.eclipse.xtext.serializer.contextFinderTest.ContextFinderTestPackage;
@@ -24,6 +22,8 @@ import org.eclipse.xtext.serializer.contextFinderTest.ParentRefTest1;
 import org.eclipse.xtext.serializer.contextFinderTest.ParentRefTest2;
 import org.eclipse.xtext.serializer.contextFinderTest.ParentRefTestChild;
 import org.eclipse.xtext.serializer.sequencer.IContextFinder;
+import org.eclipse.xtext.testing.util.ParseHelper;
+import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.junit.Test;
 
 import com.google.common.base.Joiner;

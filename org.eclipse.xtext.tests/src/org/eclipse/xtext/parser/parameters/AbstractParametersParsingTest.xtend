@@ -8,9 +8,9 @@
 package org.eclipse.xtext.parser.parameters
 
 import com.google.inject.Injector
-import org.eclipse.xtext.junit4.AbstractXtextTests
 import org.eclipse.xtext.parser.parameters.parametersTestLanguage.ParserRuleParameters
 import org.eclipse.xtext.resource.XtextResource
+import org.eclipse.xtext.tests.AbstractXtextTests
 import org.junit.Test
 
 /**

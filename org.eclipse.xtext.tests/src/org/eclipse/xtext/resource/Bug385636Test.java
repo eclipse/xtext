@@ -9,8 +9,8 @@ package org.eclipse.xtext.resource;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.resource.bug385636.Program;
+import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.junit.Before;
 import org.junit.Test;
 

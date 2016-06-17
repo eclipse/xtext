@@ -11,7 +11,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.diagnostics.Diagnostic;
-import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.linking.importedURI.ImportedURIPackage;
 import org.eclipse.xtext.linking.importedURI.Main;
 import org.eclipse.xtext.linking.importedURI.Type;
@@ -19,6 +18,7 @@ import org.eclipse.xtext.linking.lazy.SyntheticLinkingSupport;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.eclipse.xtext.util.LineAndColumn;
 import org.junit.Test;
 

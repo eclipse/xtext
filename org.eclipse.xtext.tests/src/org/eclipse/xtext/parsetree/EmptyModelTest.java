@@ -7,11 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.parsetree;
 
-import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.testlanguages.OptionalEmptyTestLanguageStandaloneSetup;
 import org.eclipse.xtext.testlanguages.optionalEmpty.Model;
+import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.eclipse.xtext.util.StringInputStream;
 import org.junit.Test;
 

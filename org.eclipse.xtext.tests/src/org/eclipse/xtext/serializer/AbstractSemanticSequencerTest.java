@@ -8,14 +8,14 @@
 package org.eclipse.xtext.serializer;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.junit4.AbstractXtextTests;
-import org.eclipse.xtext.junit4.serializer.DebugSequenceAcceptor;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic;
 import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.NodeModelSemanticSequencer;
 import org.eclipse.xtext.serializer.sequencertest.NullCrossRef;
 import org.eclipse.xtext.serializer.sequencertest.NullValue;
 import org.eclipse.xtext.serializer.serializer.SequencerTestLanguageSemanticSequencer;
+import org.eclipse.xtext.testing.serializer.DebugSequenceAcceptor;
+import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;

@@ -12,7 +12,7 @@ import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.conversion.ValueConverterWithValueException;
 import org.eclipse.xtext.conversion.impl.STRINGValueConverter;
-import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.junit.Test;
 
 /**

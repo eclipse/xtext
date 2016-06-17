@@ -7,11 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser.assignments;
 
-import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.parser.assignments.assignmentsTestLanguage.Model;
 import org.eclipse.xtext.parser.assignments.assignmentsTestLanguage.MultiValue;
 import org.eclipse.xtext.parser.assignments.assignmentsTestLanguage.SingleValue;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.junit.Test;
 
 /**

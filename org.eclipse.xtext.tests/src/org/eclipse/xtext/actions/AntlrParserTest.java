@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.actions;
 
-import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
@@ -19,6 +18,7 @@ import org.eclipse.xtext.testlanguages.actionLang.ActionLangPackage;
 import org.eclipse.xtext.testlanguages.actionLang.Model;
 import org.eclipse.xtext.testlanguages.actionLang.Parent;
 import org.eclipse.xtext.testlanguages.services.ActionTestLanguageGrammarAccess;
+import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.junit.Test;
 
 import com.google.common.collect.Iterables;

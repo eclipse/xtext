@@ -15,7 +15,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.linking.lazy.lazyLinking.LazyLinkingPackage;
 import org.eclipse.xtext.linking.lazy.lazyLinking.Model;
 import org.eclipse.xtext.linking.lazy.lazyLinking.Property;
@@ -23,6 +22,7 @@ import org.eclipse.xtext.linking.lazy.lazyLinking.Type;
 import org.eclipse.xtext.linking.lazy.lazyLinking.UnresolvedProxyProperty;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.eclipse.xtext.util.StringInputStream;
 import org.junit.Test;
 

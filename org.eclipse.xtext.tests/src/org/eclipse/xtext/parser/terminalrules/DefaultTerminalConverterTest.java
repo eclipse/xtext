@@ -9,10 +9,10 @@ package org.eclipse.xtext.parser.terminalrules;
 
 import java.util.Date;
 
-import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.parser.terminalrules.ecoreTerminalsTestLanguage.EcoreTerminalsTestLanguageFactory;
 import org.eclipse.xtext.parser.terminalrules.ecoreTerminalsTestLanguage.Model;
 import org.eclipse.xtext.serializer.ISerializer;
+import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.junit.Test;
 
 import com.ibm.icu.text.SimpleDateFormat;

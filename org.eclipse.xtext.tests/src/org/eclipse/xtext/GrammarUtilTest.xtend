@@ -11,12 +11,12 @@ import java.util.List
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.EReference
 import org.eclipse.emf.ecore.resource.Resource
-import org.eclipse.xtext.junit4.AbstractXtextTests
 import org.eclipse.xtext.linking.LangATestLanguageStandaloneSetup
 import org.eclipse.xtext.linking.langATestLanguage.Main
 import org.eclipse.xtext.linking.services.LangATestLanguageGrammarAccess
 import org.eclipse.xtext.resource.XtextResource
 import org.junit.Test
+import org.eclipse.xtext.tests.AbstractXtextTests
 
 /**
  * @author Heiko Behrens - Initial contribution and API

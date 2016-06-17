@@ -7,11 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.parsetree.reconstr;
 
-import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.linking.LangATestLanguageStandaloneSetup;
 import org.eclipse.xtext.linking.langATestLanguage.LangATestLanguageFactory;
 import org.eclipse.xtext.linking.langATestLanguage.Main;
 import org.eclipse.xtext.linking.langATestLanguage.Type;
+import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.junit.Test;
 
 /**

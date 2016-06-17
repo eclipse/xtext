@@ -7,11 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser
 
-import org.eclipse.xtext.junit4.AbstractXtextTests
-import org.eclipse.xtext.junit4.smoketest.processors.PartialParsingProcessor
 import org.eclipse.xtext.parsetree.reconstr.SerializationErrorTestLanguageStandaloneSetup
 import org.eclipse.xtext.parsetree.reconstr.serializationerror.Model
 import org.eclipse.xtext.resource.XtextResource
+import org.eclipse.xtext.testing.smoketest.processors.PartialParsingProcessor
+import org.eclipse.xtext.tests.AbstractXtextTests
 import org.junit.Test
 
 /**

@@ -13,12 +13,12 @@ import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.EcorePackage
 import org.eclipse.emf.ecore.util.EcoreUtil
-import org.eclipse.xtext.junit4.AbstractXtextTests
 import org.eclipse.xtext.linking.LangATestLanguageStandaloneSetup
 import org.eclipse.xtext.linking.langATestLanguage.Main
 import org.eclipse.xtext.resource.XtextResourceSet
 import org.junit.Assert
 import org.junit.Test
+import org.eclipse.xtext.tests.AbstractXtextTests
 
 /**
  * @author Sven Efftinge - Initial contribution and API

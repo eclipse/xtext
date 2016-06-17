@@ -7,16 +7,16 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.generator
 
-import org.eclipse.xtext.XtextStandaloneSetup
-import org.eclipse.xtext.junit4.AbstractXtextTests
-import org.junit.Test
-import org.eclipse.xtext.Grammar
-import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrDebugGrammarGenerator
-import org.eclipse.xtext.generator.InMemoryFileSystemAccess
-import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess
-import com.google.inject.Injector
-import org.eclipse.xtext.generator.parser.antlr.AntlrOptions
 import com.google.inject.Guice
+import com.google.inject.Injector
+import org.eclipse.xtext.Grammar
+import org.eclipse.xtext.XtextStandaloneSetup
+import org.eclipse.xtext.generator.InMemoryFileSystemAccess
+import org.eclipse.xtext.tests.AbstractXtextTests
+import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess
+import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrDebugGrammarGenerator
+import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrOptions
+import org.junit.Test
 
 class AntlrGeneratorFragmentTest extends AbstractXtextTests {
 	

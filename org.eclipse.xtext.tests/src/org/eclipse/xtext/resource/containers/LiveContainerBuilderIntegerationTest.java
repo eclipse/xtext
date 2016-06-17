@@ -8,9 +8,9 @@
 package org.eclipse.xtext.resource.containers;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.resource.LiveContainerBuilderIntegerationTestLanguageInjectorProvider;
 import org.eclipse.xtext.resource.liveContainerBuilderIntegerationTestLanguage.LiveContainerBuilderIntegerationTestLanguagePackage;
+import org.eclipse.xtext.testing.InjectWith;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API

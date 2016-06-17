@@ -7,8 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.linking.lazy;
 
-import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.linking.lazy.bug311337.Model;
+import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.junit.Test;
 
 /**
