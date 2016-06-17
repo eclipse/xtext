@@ -1,9 +1,6 @@
 subprojects {
 	repositories {
 		jcenter()
-		maven {
-			url 'https://oss.sonatype.org/content/repositories/snapshots'
-		}
 	}
 	
 	apply plugin: 'eclipse'
@@ -13,4 +10,11 @@ subprojects {
 	apply from: "${rootDir}/gradle/eclipse-project-layout.gradle"
 	apply from: "${rootDir}/gradle/java-compiler-settings.gradle"
 	
+	uploadArchives {
+	    repositories {
+	       mavenDeployer {
+	            repository(url: "file:" + file("../build/maven-repository"))
+	        }
+	    }
+	}
 }
