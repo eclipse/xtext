@@ -31,8 +31,6 @@ sourceSets.test.java {
 	srcDir 'src-gen2'
 	srcDir 'xtend-gen'
 	srcDir 'testdata'
-	srcDir 'suites'
-	srcDir 'smoke-suites'
 	srcDir 'longrunning/src'
 	srcDir 'longrunning/xtend-gen'
 }
