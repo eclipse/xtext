@@ -28,19 +28,20 @@ import org.eclipse.xtext.linking.impl.Linker
 import org.eclipse.xtext.linking.impl.LinkingDiagnosticMessageProvider
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.resource.XtextResourceSet
+import org.eclipse.xtext.tests.AbstractXtextTests
 import org.eclipse.xtext.tests.TestErrorAcceptor
 import org.eclipse.xtext.util.OnChangeEvictingCache
 import org.eclipse.xtext.xtext.XtextLinker
 import org.eclipse.xtext.xtext.ecoreInference.Xtext2EcoreTransformerTest.MyErrorAcceptor
+import org.junit.Ignore
 import org.junit.Test
-import org.eclipse.xtext.tests.AbstractXtextTests
-import org.eclipse.xtext.xtext.XtextLinker.PackageRemover
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
  * @author Heiko Behrens
  * @see https://www.eclipse.org/Xtext/documentation/301_grammarlanguage.html#metamodel-inference
  */
+ @Ignore
 class Xtext2EcoreTransformerTest extends AbstractXtextTests {
 	/**
 	 * @author Dennis Hübner - Initial contribution and API
