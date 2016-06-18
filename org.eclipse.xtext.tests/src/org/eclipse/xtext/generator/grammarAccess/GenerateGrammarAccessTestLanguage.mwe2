@@ -19,6 +19,7 @@ var lineDelimiter = '\n'
 Workflow {
 	bean = StandaloneSetup {
 		platformUri="${runtimeProject}/.."
+		registerGenModelFile="platform:/resource/org.eclipse.xtext.tests/src/org/eclipse/xtext/generator/grammarAccess/ametamodel.genmodel"
 	}
 	
 	component = DirectoryCleaner {

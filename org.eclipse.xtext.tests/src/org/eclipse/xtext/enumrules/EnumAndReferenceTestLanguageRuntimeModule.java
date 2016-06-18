@@ -4,7 +4,7 @@
 package org.eclipse.xtext.enumrules;
 
 /**
- * Use this class to register components to be used within the IDE.
+ * Use this class to register components to be used at runtime / without the Equinox extension registry.
  */
 public class EnumAndReferenceTestLanguageRuntimeModule extends org.eclipse.xtext.enumrules.AbstractEnumAndReferenceTestLanguageRuntimeModule {
 

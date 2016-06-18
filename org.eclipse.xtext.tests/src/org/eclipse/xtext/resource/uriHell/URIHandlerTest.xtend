@@ -21,13 +21,18 @@ import org.eclipse.emf.ecore.EcoreFactory
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.emf.ecore.util.EcoreUtil
-import org.eclipse.xtext.junit4.InjectWith
-import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.resource.XtextResourceSet
+import org.eclipse.xtext.testing.InjectWith
+import org.eclipse.xtext.testing.XtextRunner
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.junit.After
+import org.eclipse.xtext.testing.GlobalRegistries
+import org.eclipse.xtext.testing.GlobalRegistries.GlobalStateMemento
+import org.eclipse.emf.ecore.EPackage
+import org.eclipse.emf.ecore.xml.type.XMLTypePackage
 
 /**
  * Base test case for different places in the workspace where
@@ -56,9 +61,18 @@ abstract class AbstractURIHandlerTest extends Assert {
 	protected XtextResourceSet resourceSet
 	protected Resource primaryResource
 	protected Resource referencedResource
+	
+	@After
+	def void tearDown() {
+		globalState.restoreGlobalState
+	}
+	
+	private GlobalStateMemento globalState;
 
 	@Before
 	def void setUp() {
+		globalState = GlobalRegistries.makeCopyOfGlobalState
+		EPackage.Registry.INSTANCE.put(XMLTypePackage.eNS_URI, XMLTypePackage.eINSTANCE)
 		resourceSet = getNewResourceSet
 		primaryResource = resourceSet.createResource(getResourceURI)
 		referencedResource = resourceSet.createResource(getReferencedURI)

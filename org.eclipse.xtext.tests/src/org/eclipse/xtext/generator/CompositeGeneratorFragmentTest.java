@@ -15,7 +15,7 @@ import org.apache.log4j.Level;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.xpand2.XpandExecutionContext;
 import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.junit4.logging.LoggingTester;
+import org.eclipse.xtext.testing.logging.LoggingTester;
 import org.junit.Assert;
 import org.junit.Test;
 

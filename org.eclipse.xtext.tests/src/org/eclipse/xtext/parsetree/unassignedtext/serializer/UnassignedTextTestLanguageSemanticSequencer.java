@@ -1,4 +1,0 @@
-package org.eclipse.xtext.parsetree.unassignedtext.serializer;
-
-public class UnassignedTextTestLanguageSemanticSequencer extends AbstractUnassignedTextTestLanguageSemanticSequencer {
-}
