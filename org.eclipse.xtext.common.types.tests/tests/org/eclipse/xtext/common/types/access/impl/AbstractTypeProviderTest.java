@@ -226,6 +226,7 @@ public abstract class AbstractTypeProviderTest extends Assert {
 
 	protected void assertMembers(String typeName, Set<String> memberNames) {
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
+		System.out.println(type.getMembers());
 		assertEquals(memberNames.size(), type.getMembers().size());
 		for (org.eclipse.xtext.common.types.JvmMember member : type.getMembers()) {
 			assertTrue(member.getIdentifier(), member instanceof JvmOperation);
@@ -318,7 +319,7 @@ public abstract class AbstractTypeProviderTest extends Assert {
 	@Test
 	public void testFindTypeByName_javaLangCharSequence_02() {
 		String typeName = CharSequence.class.getName();
-		Set<String> memberNames = Sets.newHashSet("length", "charAt", "subSequence", "toString");
+		Set<String> memberNames = Sets.newHashSet("length", "chars", "charAt", "codePoints", "subSequence", "toString");
 		assertMembers(typeName, memberNames);
 	}
 

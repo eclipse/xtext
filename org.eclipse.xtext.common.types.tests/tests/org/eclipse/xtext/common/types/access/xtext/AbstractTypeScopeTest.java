@@ -13,7 +13,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmVoid;
 import org.eclipse.xtext.common.types.TypesFactory;
-import org.eclipse.xtext.common.types.access.jdt.MockJavaProjectProvider;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
@@ -30,7 +29,7 @@ import com.google.common.collect.Lists;
 public abstract class AbstractTypeScopeTest extends Assert {
 
 	@BeforeClass public static void createMockJavaProject() throws Exception {
-		MockJavaProjectProvider.setUp();
+//		MockJavaProjectProvider.setUp();
 	}
 
 	@Test public void testGetOuterScope_01() {

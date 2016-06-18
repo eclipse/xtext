@@ -50,7 +50,6 @@ import org.eclipse.xtext.xtext.ecoreInference.IXtext2EcorePostProcessor;
 import org.eclipse.xtext.xtext.ecoreInference.TransformationErrorCode;
 import org.eclipse.xtext.xtext.ecoreInference.Xtext2EcoreTransformer;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -58,7 +57,6 @@ import org.junit.Test;
  * @author Heiko Behrens
  * @see https://www.eclipse.org/Xtext/documentation/301_grammarlanguage.html#metamodel-inference
  */
-@Ignore
 @SuppressWarnings("all")
 public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
   /**

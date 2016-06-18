@@ -5,7 +5,7 @@ Bundle-SymbolicName: org.eclipse.xtext.common.types.tests;singleton:=true
 Bundle-Version: 2.11.0.qualifier
 Bundle-Vendor: Eclipse Xtext
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Require-Bundle: org.eclipse.xtext.junit4,
+Require-Bundle: org.eclipse.xtext.testing,
  org.eclipse.xtext.util,
  org.eclipse.xtext.common.types,
  org.eclipse.emf.ecore;bundle-version="2.10.2",

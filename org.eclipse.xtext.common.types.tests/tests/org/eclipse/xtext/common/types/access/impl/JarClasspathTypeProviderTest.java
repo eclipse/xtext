@@ -12,9 +12,9 @@ import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.access.ClassLoaderFromJar;
 import org.eclipse.xtext.common.types.testSetups.Bug470767;
 import org.eclipse.xtext.common.types.xtext.ui.RefactoringTestLanguageInjectorProvider;
-import org.eclipse.xtext.junit4.InjectWith;
-import org.eclipse.xtext.junit4.XtextRunner;
-import org.eclipse.xtext.junit4.logging.LoggingTester;
+import org.eclipse.xtext.testing.InjectWith;
+import org.eclipse.xtext.testing.XtextRunner;
+import org.eclipse.xtext.testing.logging.LoggingTester;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 

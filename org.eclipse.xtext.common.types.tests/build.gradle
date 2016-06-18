@@ -1,0 +1,52 @@
+
+//workaround for superClassName is empty!
+configurations {
+  testCompile.exclude module: "org.osgi.foundation"
+  mwe2 {
+		extendsFrom compile
+	}
+}
+
+dependencies {
+
+	compile project(':org.eclipse.xtext.testlanguages')
+	compile project(':org.eclipse.xtext.generator')
+	compile project(':org.eclipse.xtext.common.types')
+	compile "org.eclipse.jdt:org.eclipse.jdt.core:$versions.jdtCore"
+	//compile "org.eclipse.core:org.eclipse.core.runtime:$versions.eclipseCore"
+	compile "org.eclipse.xtext:org.eclipse.xtext.testing:$versions.xtext"
+	compile "org.eclipse.xtext:org.eclipse.xtext.xtext.generator:$versions.xtext"
+	compile "org.eclipse.xtext:org.eclipse.xtext.xtext.wizard:$versions.xtext"
+	compile 'junit:junit:4.12'
+	
+	// TODO eliminate all following dependencies
+
+	//compile "org.eclipse.xtext:org.eclipse.xtext.junit4:$versions.xtext"
+	
+	compile "org.eclipse.xpand:org.eclipse.xpand:$versions.xpand"
+	
+	mwe2 "org.eclipse.xtext:org.eclipse.xtext.generator:$versions.xtext"
+	mwe2 "org.eclipse.emf:org.eclipse.emf.mwe2.launch:$versions.emfMwe2"
+	mwe2 "org.eclipse.xtext:org.eclipse.xtext.xtext.generator:$versions.xtext"
+	mwe2 "org.eclipse.xtext:org.eclipse.xtext.ecore:$versions.xtext"
+}
+
+eclipse.classpath.plusConfigurations += [configurations.mwe2]
+
+sourceSets.test.java {
+	srcDir 'tests'
+	srcDir 'testdata'
+	srcDir 'suites'
+}
+
+sourceSets {
+	test.resources {
+		srcDir 'tests'
+		srcDir 'testdata'
+		srcDir 'suites'
+	}
+}
+
+test {
+	
+}

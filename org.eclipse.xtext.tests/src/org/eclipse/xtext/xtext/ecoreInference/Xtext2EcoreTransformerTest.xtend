@@ -33,7 +33,6 @@ import org.eclipse.xtext.tests.TestErrorAcceptor
 import org.eclipse.xtext.util.OnChangeEvictingCache
 import org.eclipse.xtext.xtext.XtextLinker
 import org.eclipse.xtext.xtext.ecoreInference.Xtext2EcoreTransformerTest.MyErrorAcceptor
-import org.junit.Ignore
 import org.junit.Test
 import org.eclipse.xtext.xtext.XtextLinker.PackageRemover
 
@@ -42,7 +41,6 @@ import org.eclipse.xtext.xtext.XtextLinker.PackageRemover
  * @author Heiko Behrens
  * @see https://www.eclipse.org/Xtext/documentation/301_grammarlanguage.html#metamodel-inference
  */
- @Ignore
 class Xtext2EcoreTransformerTest extends AbstractXtextTests {
 	/**
 	 * @author Dennis Hübner - Initial contribution and API

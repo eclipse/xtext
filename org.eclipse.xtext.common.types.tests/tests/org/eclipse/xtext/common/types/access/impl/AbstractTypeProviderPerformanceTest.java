@@ -8,8 +8,11 @@
 package org.eclipse.xtext.common.types.access.impl;
 
 import static com.google.common.collect.Iterables.*;
-import static com.google.common.collect.Lists.*;
+import static com.google.common.collect.Lists.transform;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
@@ -20,14 +23,14 @@ import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
-import org.eclipse.xtext.common.types.access.jdt.MockJavaProjectProvider;
-import org.eclipse.xtext.junit4.internal.StopwatchRule;
+import org.eclipse.xtext.tests.StopwatchRule;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
+import com.google.common.collect.Lists;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -39,7 +42,7 @@ public abstract class AbstractTypeProviderPerformanceTest {
 	@Rule public StopwatchRule rule = new StopwatchRule(true);
 	
 	public Iterable<String> getClassNamesToLoad() throws Exception {
-		List<String> resource = MockJavaProjectProvider.readResource("/org/eclipse/xtext/common/types/testSetups/files.list");
+		List<String> resource = AbstractTypeProviderPerformanceTest.readResource("/org/eclipse/xtext/common/types/testSetups/files.list");
 		return filter(transform(resource, new Function<String, String>() {
 			@Override
 			public String apply(String arg) {
@@ -53,6 +56,21 @@ public abstract class AbstractTypeProviderPerformanceTest {
 			}
 		});
 	}
+	
+	public static List<String> readResource(String name) throws Exception {
+		InputStream stream = AbstractTypeProviderPerformanceTest.class.getResourceAsStream(name);
+		BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
+		try {
+			String line = null;
+			List<String> result = Lists.newArrayList();
+			while( (line = reader.readLine()) != null) {
+				result.add(line);
+			}
+			return result;
+		} finally {
+			reader.close();
+		}
+}
 	
 	@Test
 	public void testLoadTypesAndResolveAllParameterNames() throws Exception {

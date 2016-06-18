@@ -22,7 +22,7 @@ var lineDelimiter = '\n'
 Workflow {
 	bean = StandaloneSetup {
 		ignoreBrokenProjectFiles = true
-		platformUri = "${runtimeProject}/../.."
+		platformUri = "${runtimeProject}/.."
 		registerGenModelFile = "platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel"
 	} 
 	
@@ -32,13 +32,13 @@ Workflow {
 	
 	component = Generator auto-inject {
 		pathRtProject = "${runtimeProject}"
-		pathUiProject = "${runtimeProject}"
 		pathTestProject = "${runtimeProject}"
 		projectNameRt = "${projectName}"
 		activator = "org.eclipse.xtext.common.types.tests.AbstractActivator"
 		mergeManifest = false
 		
 		language = { 
+			
 			uri="classpath:/org/eclipse/xtext/common/types/xtext/ui/ContentAssistTestLanguage.xtext"
 			fileExtensions = "typesAssistTest"
 			fragment = @CommonTestLanguagesFragments {

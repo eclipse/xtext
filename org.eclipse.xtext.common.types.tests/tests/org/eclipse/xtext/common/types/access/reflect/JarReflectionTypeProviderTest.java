@@ -12,7 +12,7 @@ import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.access.ClassLoaderFromJar;
 import org.eclipse.xtext.common.types.access.impl.AbstractRuntimeJvmTypeProvider;
 import org.eclipse.xtext.common.types.testSetups.Bug470767;
-import org.eclipse.xtext.junit4.logging.LoggingTester;
+import org.eclipse.xtext.testing.logging.LoggingTester;
 import org.junit.Test;
 
 import com.google.common.collect.Iterables;
