@@ -35,6 +35,7 @@ import org.eclipse.xtext.xtext.XtextLinker
 import org.eclipse.xtext.xtext.ecoreInference.Xtext2EcoreTransformerTest.MyErrorAcceptor
 import org.junit.Ignore
 import org.junit.Test
+import org.eclipse.xtext.xtext.XtextLinker.PackageRemover
 
 /**
  * @author Jan Köhnlein - Initial contribution and API

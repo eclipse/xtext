@@ -29,12 +29,22 @@ import org.eclipse.xtext.GeneratedMetamodel;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.XtextStandaloneSetup;
+import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
 import org.eclipse.xtext.ecore.EcoreSupportStandaloneSetup;
+import org.eclipse.xtext.linking.ILinker;
+import org.eclipse.xtext.linking.ILinkingService;
+import org.eclipse.xtext.linking.impl.Linker;
+import org.eclipse.xtext.linking.impl.LinkingDiagnosticMessageProvider;
+import org.eclipse.xtext.linking.impl.LinkingHelper;
+import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.eclipse.xtext.tests.TestErrorAcceptor;
+import org.eclipse.xtext.util.OnChangeEvictingCache;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xtext.XtextLinker;
 import org.eclipse.xtext.xtext.ecoreInference.ErrorAcceptor;
 import org.eclipse.xtext.xtext.ecoreInference.IXtext2EcorePostProcessor;
 import org.eclipse.xtext.xtext.ecoreInference.TransformationErrorCode;
@@ -137,8 +147,42 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
   
   @Override
   public XtextResource doGetResource(final InputStream in, final URI uri) throws Exception {
-    throw new Error("Unresolved compilation problems:"
-      + "\nPackageRemover cannot be resolved.");
+    XtextResourceSet rs = this.<XtextResourceSet>get(XtextResourceSet.class);
+    Class<? extends Xtext2EcoreTransformerTest> _class = this.getClass();
+    rs.setClasspathURIContext(_class);
+    IResourceFactory _resourceFactory = this.getResourceFactory();
+    Resource _createResource = _resourceFactory.createResource(uri);
+    final XtextResource resource = ((XtextResource) _createResource);
+    EList<Resource> _resources = rs.getResources();
+    _resources.add(resource);
+    XtextLinker linker = new XtextLinker() {
+      @Override
+      protected Xtext2EcoreTransformer createTransformer(final Grammar grammar, final IDiagnosticConsumer consumer) {
+        Xtext2EcoreTransformer result = super.createTransformer(grammar, consumer);
+        ErrorAcceptor _errorAcceptor = result.getErrorAcceptor();
+        Xtext2EcoreTransformerTest.MyErrorAcceptor _myErrorAcceptor = new Xtext2EcoreTransformerTest.MyErrorAcceptor(_errorAcceptor, Xtext2EcoreTransformerTest.this.errorAcceptorMock);
+        result.setErrorAcceptor(_myErrorAcceptor);
+        return result;
+      }
+    };
+    ILinker _linker = resource.getLinker();
+    IScopeProvider _scopeProvider = ((XtextLinker) _linker).getScopeProvider();
+    linker.setScopeProvider(_scopeProvider);
+    ILinker _linker_1 = resource.getLinker();
+    ILinkingService _linkingService = ((Linker) _linker_1).getLinkingService();
+    linker.setLinkingService(_linkingService);
+    ILinker _linker_2 = resource.getLinker();
+    LinkingHelper _linkingHelper = ((Linker) _linker_2).getLinkingHelper();
+    linker.setLinkingHelper(_linkingHelper);
+    XtextLinker.PackageRemover _packageRemover = new XtextLinker.PackageRemover();
+    linker.setPackageRemover(_packageRemover);
+    LinkingDiagnosticMessageProvider _linkingDiagnosticMessageProvider = new LinkingDiagnosticMessageProvider();
+    linker.setDiagnosticMessageProvider(_linkingDiagnosticMessageProvider);
+    OnChangeEvictingCache _onChangeEvictingCache = new OnChangeEvictingCache();
+    linker.setCache(_onChangeEvictingCache);
+    resource.setLinker(linker);
+    resource.load(in, null);
+    return resource;
   }
   
   private List<EPackage> getEPackagesFromGrammar(final String xtextGrammar, final int expectedErrors) throws Exception {
