@@ -1,0 +1,32 @@
+
+//workaround for superClassName is empty!
+configurations {
+  testCompile.exclude module: "org.osgi.foundation"
+}
+
+dependencies {
+
+	compile project(':org.eclipse.xtext.purexbase')
+	compile project(':org.eclipse.xtext.xbase.tests')
+
+	//compile "org.eclipse.core:org.eclipse.core.runtime:$versions.eclipseCore"
+	compile "org.eclipse.jdt:org.eclipse.jdt.core:$versions.jdtCore"
+	compile "org.eclipse.xtext:org.eclipse.xtext.testing:$versions.xtext"
+	compile 'junit:junit:4.12'
+	
+	// TODO eliminate all following dependencies
+
+	//compile "org.eclipse.xtext:org.eclipse.xtext.junit4:$versions.xtext"
+	
+	compile "org.eclipse.xpand:org.eclipse.xpand:$versions.xpand"
+}
+
+
+
+sourceSets.test.java {
+	srcDir 'xtend-gen'
+	srcDir 'src-gen'
+}
+test {
+	
+}

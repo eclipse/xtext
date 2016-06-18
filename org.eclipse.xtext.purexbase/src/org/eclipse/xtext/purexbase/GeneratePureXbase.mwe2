@@ -2,7 +2,6 @@ module org.eclipse.xtext.purexbase.PureXbase
 
 import org.eclipse.emf.mwe.utils.*
 import org.eclipse.xtext.generator.*
-import org.eclipse.xtext.ui.generator.*
 
 var grammarURI = "classpath:/org/eclipse/xtext/purexbase/PureXbase.xtext"
 var fileExtensions = "xbase"
@@ -10,9 +9,6 @@ var projectName = "org.eclipse.xtext.purexbase"
 var runtimeProject = "../${projectName}"
 var generateXtendStub = true
 var lineDelimiter = '\n'
-
-var ideaProjectName = "org.eclipse.xtext.purexbase.idea"
-var ideaProjectPath = "../../intellij/${ideaProjectName}"
 
 Workflow {
     bean = StandaloneSetup {
@@ -35,16 +31,10 @@ Workflow {
 		directory = "${runtimeProject}/model/generated"
 	}
 
-	component = DirectoryCleaner {
-		directory = "${ideaProjectPath}/src-gen"
-	}
-
 	component = Generator auto-inject {
 		pathRtProject = runtimeProject
-		pathUiProject = "${runtimeProject}.ui"
-		pathTestProject = "../../tests/${projectName}.tests"
+		pathTestProject = "../${projectName}.tests"
 		projectNameRt = projectName
-		projectNameUi = "${projectName}.ui"
 		language = auto-inject {
 			uri = grammarURI
 
@@ -95,22 +85,6 @@ Workflow {
     		// formatter API
     		fragment = formatting.FormatterFragment auto-inject {}
     
-    		// labeling API
-    		fragment = labeling.LabelProviderFragment auto-inject {}
-    
-    		// outline API
-    		fragment = outline.OutlineTreeProviderFragment auto-inject {}
-    		fragment = outline.QuickOutlineFragment auto-inject {}
-    
-    		// quickfix API
-    		fragment = quickfix.QuickfixProviderFragment auto-inject {}
-    
-    		// content assist API
-    		fragment = contentAssist.ContentAssistFragment auto-inject {}
-    
-    		// generates a more lightweight Antlr parser and lexer tailored for content assist
-    		fragment = parser.antlr.XtextAntlrUiGeneratorFragment auto-inject {}
-    
     		// generates junit test support classes into Generator#pathTestProject
     		fragment = junit.Junit4Fragment auto-inject {}
     
@@ -119,29 +93,13 @@ Workflow {
     		//      generatorProjectName = "${projectName}"
     		// }
     
-    		// rename refactoring
-    		fragment = refactoring.RefactorElementNameFragment auto-inject {}
-    
     		// provides the necessary bindings for java types integration
     		fragment = types.TypesGeneratorFragment auto-inject {}
     
     		// generates the required bindings only if the grammar inherits from Xbase
     		fragment = xbase.XbaseGeneratorFragment auto-inject {}
     
-    		// provides a preference page for template proposals
-    		fragment = templates.CodetemplatesGeneratorFragment auto-inject {
-    			suppressRestriction = false
-    		}
-    
-    		// provides a compare view
-    		fragment = compare.CompareFragment auto-inject {}
     		
-    		fragment = org.eclipse.xtext.idea.generator.IdeaPluginGenerator auto-inject {
-    			runtimeProjectName = projectName
-    			runtimeProjectPath = runtimeProject
-	        }
-	        
-	        fragment = org.eclipse.xtext.idea.generator.parser.antlr.XtextAntlrIDEAGeneratorFragment auto-inject {}
     	}
     }
 }

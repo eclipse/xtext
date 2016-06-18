@@ -8,16 +8,16 @@
 package org.eclipse.xtext.purexbase.test
 
 import com.google.inject.Inject
-import org.eclipse.xtext.junit4.InjectWith
-import org.eclipse.xtext.junit4.TemporaryFolder
-import org.eclipse.xtext.junit4.XtextRunner
+import org.eclipse.xtext.testing.InjectWith
+import org.eclipse.xtext.testing.XtextRunner
 import org.eclipse.xtext.xbase.compiler.CompilationTestHelper
 import org.junit.Rule
 import org.junit.Test
+import org.junit.rules.TemporaryFolder
 import org.junit.runner.RunWith
 
 @RunWith(XtextRunner)
-@InjectWith(RuntimeInjectorProvider) 
+@InjectWith(RuntimeInjectorProvider)
 class CompilerTest {
 	
 	@Rule @Inject public TemporaryFolder temporaryFolder

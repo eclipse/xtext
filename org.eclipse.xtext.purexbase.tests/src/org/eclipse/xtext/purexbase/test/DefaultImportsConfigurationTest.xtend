@@ -1,12 +1,12 @@
 package org.eclipse.xtext.purexbase.test
 
 import com.google.inject.Inject
-import org.eclipse.xtext.junit4.InjectWith
-import org.eclipse.xtext.junit4.XtextRunner
-import org.eclipse.xtext.junit4.util.ParseHelper
 import org.eclipse.xtext.purexbase.PureXbaseInjectorProvider
 import org.eclipse.xtext.purexbase.pureXbase.Model
 import org.eclipse.xtext.resource.XtextResource
+import org.eclipse.xtext.testing.InjectWith
+import org.eclipse.xtext.testing.XtextRunner
+import org.eclipse.xtext.testing.util.ParseHelper
 import org.eclipse.xtext.xbase.imports.DefaultImportsConfiguration
 import org.junit.Test
 import org.junit.runner.RunWith
