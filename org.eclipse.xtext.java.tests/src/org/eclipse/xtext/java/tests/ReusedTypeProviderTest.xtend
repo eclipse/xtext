@@ -1,8 +1,13 @@
 package org.eclipse.xtext.java.tests
 
 import com.google.common.collect.Iterables
+import com.google.common.collect.Lists
 import com.google.inject.Inject
 import com.google.inject.Provider
+import java.io.BufferedReader
+import java.io.InputStream
+import java.io.InputStreamReader
+import java.util.List
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.xtext.build.BuildRequest
@@ -15,21 +20,20 @@ import org.eclipse.xtext.common.types.JvmFormalParameter
 import org.eclipse.xtext.common.types.JvmGenericType
 import org.eclipse.xtext.common.types.JvmOperation
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider
-import org.eclipse.xtext.common.types.access.impl.AbstractTypeProviderTest
-import org.eclipse.xtext.common.types.access.jdt.MockJavaProjectProvider
-import org.eclipse.xtext.common.types.testSetups.AbstractMethods
-import org.eclipse.xtext.common.types.testSetups.Bug347739ThreeTypeParamsSuperSuper
-import org.eclipse.xtext.common.types.testSetups.ClassWithVarArgs
-import org.eclipse.xtext.junit4.InjectWith
-import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.resource.impl.ChunkedResourceDescriptions
 import org.eclipse.xtext.resource.impl.ProjectDescription
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData
+import org.eclipse.xtext.testing.InjectWith
+import org.eclipse.xtext.testing.XtextRunner
+import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.junit.Ignore
+import org.eclipse.xtext.common.types.access.impl.AbstractTypeProviderTest
+import org.eclipse.xtext.common.types.testSetups.Bug347739ThreeTypeParamsSuperSuper
+import org.eclipse.xtext.common.types.testSetups.AbstractMethods
+import org.eclipse.xtext.common.types.testSetups.ClassWithVarArgs
 
 @RunWith(XtextRunner)
 @InjectWith(JavaInjectorProvider)
@@ -42,11 +46,26 @@ class ReusedTypeProviderTest extends AbstractTypeProviderTest {
 	
 	static IJvmTypeProvider typeProvider
 	
+	def static List<String> readResource(String name) throws Exception {
+		val InputStream stream = ReusedTypeProviderTest.getResourceAsStream(name);
+		val BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
+		try {
+			var String line = null;
+			val List<String> result = Lists.newArrayList();
+			while( (line = reader.readLine()) != null) {
+				result.add(line);
+			}
+			return result;
+		} finally {
+			reader.close();
+		}
+	}
+	
 	override setUp() throws Exception {
 		super.setUp()
 		if (typeProvider == null) {
 			val pathToSources = "/org/eclipse/xtext/common/types/testSetups";
-			val files = MockJavaProjectProvider.readResource(pathToSources + "/files.list")
+			val files = readResource(pathToSources + "/files.list")
 			val part = new ResourceDescriptionsData(emptySet)
 			val resourceSet = resourceSetProvider.get => [
 				val projectDesc = new ProjectDescription => [
@@ -61,7 +80,7 @@ class ReusedTypeProviderTest extends AbstractTypeProviderTest {
 			val buildRequest = new BuildRequest => [
 				for (file : files.filterNull) {
 					val fullPath = pathToSources+"/"+file
-					val url = MockJavaProjectProvider.getResource(fullPath)
+					val url = ReusedTypeProviderTest.getResource(fullPath)
 					dirtyFiles += URI.createURI(url.toExternalForm)
 				}
 				setResourceSet(resourceSet)

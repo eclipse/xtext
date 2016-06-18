@@ -33,10 +33,23 @@ dependencies {
 
 eclipse.classpath.plusConfigurations += [configurations.mwe2]
 
+//fixme move common used classes to a separate module / sourcefolder
 sourceSets.test.java {
 	srcDir 'tests'
 	srcDir 'testdata'
 	srcDir 'suites'
+}
+
+sourceSets.main.java {
+	srcDir 'src'
+	srcDir 'tests'
+	srcDir 'testdata'
+	srcDir 'src-gen'
+}
+
+sourceSets.main.resources {
+	srcDir 'testdata'
+	srcDir 'src-gen'
 }
 
 sourceSets {

@@ -70,7 +70,7 @@ public abstract class AbstractTypeProviderPerformanceTest {
 		} finally {
 			reader.close();
 		}
-}
+	}
 	
 	@Test
 	public void testLoadTypesAndResolveAllParameterNames() throws Exception {
