@@ -1,7 +1,7 @@
 package org.eclipse.xtext.xbase.tests.jvmmodel
 
 import com.google.inject.Inject
-import org.eclipse.xtext.junit4.validation.ValidationTestHelper
+import org.eclipse.xtext.testing.validation.ValidationTestHelper
 import org.eclipse.xtext.preferences.IPreferenceValuesProvider$SingletonPreferenceValuesProvider
 import org.eclipse.xtext.preferences.MapBasedPreferenceValues
 import org.eclipse.xtext.xbase.validation.IssueCodes

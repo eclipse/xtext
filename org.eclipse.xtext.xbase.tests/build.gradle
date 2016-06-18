@@ -1,0 +1,48 @@
+
+//workaround for superClassName is empty!
+configurations {
+  testCompile.exclude module: "org.osgi.foundation"
+}
+
+dependencies {
+
+	compile project(':org.eclipse.xtext.testlanguages')
+	compile project(':org.eclipse.xtext.generator')
+	compile project(':org.eclipse.xtext.common.types')
+	compile project(':org.eclipse.xtext.xbase.testlanguages')
+
+	//compile "org.eclipse.core:org.eclipse.core.runtime:$versions.eclipseCore"
+	compile "org.eclipse.jdt:org.eclipse.jdt.core:$versions.jdtCore"
+	compile "org.eclipse.xtext:org.eclipse.xtext.testing:$versions.xtext"
+	compile "org.eclipse.xtext:org.eclipse.xtext.xtext.generator:$versions.xtext"
+	compile "org.eclipse.xtext:org.eclipse.xtext.xtext.wizard:$versions.xtext"
+	compile 'junit:junit:4.12'
+	
+	// TODO eliminate all following dependencies
+
+	//compile "org.eclipse.xtext:org.eclipse.xtext.junit4:$versions.xtext"
+	
+	compile "org.eclipse.xpand:org.eclipse.xpand:$versions.xpand"
+}
+
+
+
+sourceSets.test.java {
+	srcDir 'src-gen2'
+	srcDir 'xtend-gen'
+	srcDir 'testdata'
+	srcDir 'suites'
+	srcDir 'smoke-suites'
+	srcDir 'longrunning/src'
+	srcDir 'longrunning/xtend-gen'
+}
+
+sourceSets {
+	test.resources {
+		srcDir 'src-gen2'
+	}
+}
+
+test {
+	
+}

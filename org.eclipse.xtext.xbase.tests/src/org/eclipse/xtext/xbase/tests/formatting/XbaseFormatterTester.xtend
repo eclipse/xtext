@@ -8,9 +8,9 @@
 package org.eclipse.xtext.xbase.tests.formatting
 
 import org.eclipse.xtext.formatting2.FormatterPreferenceKeys
-import org.eclipse.xtext.junit4.formatter.FormatterTestRequest
-import org.eclipse.xtext.junit4.formatter.FormatterTester
+import org.eclipse.xtext.testing.formatter.FormatterTestRequest
 import org.eclipse.xtext.util.Strings
+import org.eclipse.xtext.xbase.junit.formatter.FormatterTester
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API

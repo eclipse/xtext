@@ -2,7 +2,6 @@ module org.eclipse.xtext.xbase.testlanguages.GenerateXbaseTestLanguages
 
 import org.eclipse.emf.mwe.utils.*
 import org.eclipse.xtext.generator.*
-import org.eclipse.xtext.ui.generator.*
 
 var fileExtensions = ""
 var projectName = "org.eclipse.xtext.xbase.testlanguages"
@@ -34,10 +33,8 @@ Workflow {
     
     component = Generator auto-inject {
     	pathRtProject = runtimeProject
-    	pathUiProject = "${runtimeProject}.ui"
-    	pathTestProject = "${runtimeProject}.ui"
     	projectNameRt = projectName
-    	projectNameUi = "${projectName}.ui"
+    	pathTestProject = runtimeProject
     	encoding = encoding
     	language = auto-inject {
     		uri = "classpath:/org/eclipse/xtext/xbase/testlanguages/XImportSectionTestLang.xtext"
@@ -84,27 +81,8 @@ Workflow {
     		// formatter API
     		fragment = formatting.FormatterFragment auto-inject {}
     
-    		// labeling API
-    		fragment = labeling.LabelProviderFragment auto-inject {}
-    
-    		// outline API
-    		fragment = outline.OutlineTreeProviderFragment auto-inject {}
-    		fragment = outline.QuickOutlineFragment auto-inject {}
-    
-    		// quickfix API
-    		fragment = quickfix.QuickfixProviderFragment auto-inject {}
-    
-    		// content assist API
-    		fragment = contentAssist.ContentAssistFragment auto-inject {}
-    
-    		// generates a more lightweight Antlr parser and lexer tailored for content assist
-    		fragment = parser.antlr.XtextAntlrUiGeneratorFragment auto-inject {}
-    
     		// generates junit test support classes into Generator#pathTestProject
     		fragment = junit.Junit4Fragment auto-inject {}
-    
-    		// rename refactoring
-    		fragment = refactoring.RefactorElementNameFragment auto-inject {}
     
     		// provides the necessary bindings for java types integration
     		fragment = types.TypesGeneratorFragment auto-inject {}
@@ -112,11 +90,6 @@ Workflow {
     		// generates the required bindings only if the grammar inherits from Xbase
     		fragment = xbase.XbaseGeneratorFragment auto-inject {}
     
-    		// provides a preference page for template proposals
-    		fragment = templates.CodetemplatesGeneratorFragment auto-inject {}
-    
-    		// provides a compare view
-    		fragment = compare.CompareFragment auto-inject {}
     	}
 
     	language = auto-inject {
@@ -152,12 +125,6 @@ Workflow {
     		fragment = scoping.ImportNamespacesScopingFragment auto-inject {}
     		fragment = exporting.QualifiedNamesFragment auto-inject {}
     		fragment = builder.BuilderIntegrationFragment auto-inject {}
-    
-    		// content assist API
-    		fragment = contentAssist.ContentAssistFragment auto-inject {}
-    
-    		// generates a more lightweight Antlr parser and lexer tailored for content assist
-    		fragment = parser.antlr.XtextAntlrUiGeneratorFragment auto-inject {}
     
     		// generates junit test support classes into Generator#pathTestProject
     		fragment = junit.Junit4Fragment auto-inject {}
@@ -205,12 +172,6 @@ Workflow {
     
 		    // generator API
     		fragment = generator.GeneratorFragment auto-inject {}
-    
-    		// content assist API
-    		fragment = contentAssist.ContentAssistFragment auto-inject {}
-    
-    		// generates a more lightweight Antlr parser and lexer tailored for content assist
-    		fragment = parser.antlr.XtextAntlrUiGeneratorFragment auto-inject {}
     
     		// generates junit test support classes into Generator#pathTestProject
     		fragment = junit.Junit4Fragment auto-inject {}

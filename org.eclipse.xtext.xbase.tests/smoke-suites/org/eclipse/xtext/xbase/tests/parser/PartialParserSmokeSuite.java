@@ -1,8 +1,8 @@
 package org.eclipse.xtext.xbase.tests.parser;
 
-import org.eclipse.xtext.junit4.smoketest.ProcessedBy;
-import org.eclipse.xtext.junit4.smoketest.XtextSmokeTestRunner;
-import org.eclipse.xtext.junit4.smoketest.processors.PartialParsingProcessor;
+import org.eclipse.xtext.testing.smoketest.ProcessedBy;
+import org.eclipse.xtext.testing.smoketest.XtextSmokeTestRunner;
+import org.eclipse.xtext.testing.smoketest.processors.PartialParsingProcessor;
 import org.eclipse.xtext.xbase.tests.compiler.CompilerSuite;
 import org.junit.runner.RunWith;
 

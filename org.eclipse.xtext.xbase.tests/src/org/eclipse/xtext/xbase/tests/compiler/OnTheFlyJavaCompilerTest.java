@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.compiler;
 
-import org.eclipse.xtext.junit4.TemporaryFolder;
+import org.eclipse.xtext.xbase.TemporaryFolder;
 import org.eclipse.xtext.xbase.compiler.OnTheFlyJavaCompiler;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;

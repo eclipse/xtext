@@ -41,6 +41,5 @@ public class XImportSectionTestLangStandaloneSetupGenerated implements ISetup {
 		
 
 
-
 	}
 }

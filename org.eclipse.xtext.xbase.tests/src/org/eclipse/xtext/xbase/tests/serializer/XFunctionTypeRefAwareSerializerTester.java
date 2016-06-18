@@ -9,7 +9,6 @@ package org.eclipse.xtext.xbase.tests.serializer;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.TypesPackage;
-import org.eclipse.xtext.junit4.serializer.SerializerTester;
 import org.eclipse.xtext.util.EmfFormatter;
 import org.eclipse.xtext.xtype.XtypePackage;
 import org.junit.Assert;

@@ -7,8 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.compiler;
 
-import org.eclipse.xtext.junit4.smoketest.ProcessedBy;
-import org.eclipse.xtext.junit4.smoketest.XtextSmokeTestRunner;
+import org.eclipse.xtext.testing.smoketest.ProcessedBy;
+import org.eclipse.xtext.testing.smoketest.XtextSmokeTestRunner;
 import org.eclipse.xtext.xbase.junit.typesystem.TypeSystemSmokeTester;
 import org.junit.runner.RunWith;
 

@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.serializer;
 
-import org.eclipse.xtext.junit4.serializer.SerializerTester;
 import org.eclipse.xtext.xbase.XbaseStandaloneSetup;
 import org.eclipse.xtext.xbase.tests.XbaseInjectorProvider;
 
