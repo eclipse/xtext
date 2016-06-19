@@ -17,9 +17,9 @@
 		<module>org.eclipse.xtend.m2e</module>
 		<module>org.eclipse.xtend.standalone</module>
 		<module>org.eclipse.xtext.parent</module>
-		<module>org.eclipse.xtend.maven.plugin</module>
+		<!-- <module>org.eclipse.xtend.maven.plugin</module>
 		<module>org.eclipse.xtend.maven.archetype</module>
-		<module>org.eclipse.xtend.maven.android.archetype</module>
+		<module>org.eclipse.xtend.maven.android.archetype</module> -->
 		<module>org.eclipse.xtend.doc</module>
 		<module>org.eclipse.xtend.examples</module>
 		<module>org.eclipse.xtend.gwt.feature</module>
