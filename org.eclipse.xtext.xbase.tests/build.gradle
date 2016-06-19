@@ -25,7 +25,11 @@ dependencies {
 	compile "org.eclipse.xpand:org.eclipse.xpand:$versions.xpand"
 }
 
-
+sourceSets.main.java {
+	srcDir 'src'
+	srcDir 'xtend-gen'
+	srcDir 'testdata'
+}
 
 sourceSets.test.java {
 	srcDir 'src-gen2'
