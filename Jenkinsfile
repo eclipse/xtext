@@ -4,9 +4,9 @@ node {
 		stage 'Checkout'
 		checkout scm
 			
-		stage 'Gradle Build'
-		sh "./gradlew build"
-		archive '**/build/**/*.jar'
+		// stage 'Gradle Build'
+		// sh "./gradlew build"
+		// archive '**/build/**/*.jar'
 		
 		stage 'Maven Build'
 		def mvnHome = tool 'M3'
