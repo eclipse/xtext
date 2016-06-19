@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.tests;
 
 import static org.junit.Assert.*;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -21,6 +22,7 @@ public class BasicDependencyCheckTest {
 	 * see Bug [364082] Optional dependency to JDT from xbase core bundle
 	 */
 	@Test
+	@Ignore("https://github.com/eclipse/xtext-extras/issues/10")
 	public void testJavaCoreNotOnClassPath() {
 		try {
 			ClassLoader classLoader = org.eclipse.xtext.xbase.XbaseRuntimeModule.class.getClassLoader();
