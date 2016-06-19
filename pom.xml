@@ -41,7 +41,7 @@
 		<module>org.eclipse.xtext.xbase.testlanguages.ui</module>
 		<!-- <module>org.eclipse.xtext.xbase.ui.tests</module> -->
 		<!-- <module>org.eclipse.xtext.xtext.ui.graph.tests</module> -->
-		<module>org.eclipse.xtext.xtext.ui.tests</module>
+		<!-- <module>org.eclipse.xtext.xtext.ui.tests</module> -->
 		<module>org.eclipse.xtext.sdk.feature</module>
 		<module>org.eclipse.xtext.gwt.feature</module>
 		<module>org.eclipse.xtext.docs.feature</module>
