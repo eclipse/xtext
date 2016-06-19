@@ -9,7 +9,7 @@ node {
 		wrap([$class:'Xvnc', useXauthority: true]) {
 			sh "${mvnHome}/bin/mvn --batch-mode --update-snapshots clean install"
 		}
-		archive '**/target/**/*.jar'
+		archive 'target/**/*.*'
 				
 		slackSend "Build Succeeded - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
 		

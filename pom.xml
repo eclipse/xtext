@@ -53,6 +53,8 @@
 		<module>org.eclipse.xtext.xbase.feature</module>
 		<module>org.eclipse.xtext.xbase.lib.feature</module>
 		<module>org.eclipse.xtext.xtext.ui.feature</module>
+		<!-- <module>org.eclipse.xtext.build.feature</module> -->
+		<module>org.eclipse.xtext.p2-repository</module>
 	</modules>
 
 </project>

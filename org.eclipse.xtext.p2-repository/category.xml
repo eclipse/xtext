@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/org.eclipse.xtext.docs_2.11.0.qualifier.jar" id="org.eclipse.xtext.docs" version="2.11.0.qualifier">
+      <category name="Xtext"/>
+   </feature>
+   <feature url="features/org.eclipse.xtext.examples_2.11.0.qualifier.jar" id="org.eclipse.xtext.examples" version="2.11.0.qualifier">
+      <category name="Xtext"/>
+   </feature>
+   <feature url="features/org.eclipse.xtext.gwt_2.11.0.qualifier.jar" id="org.eclipse.xtext.gwt" version="2.11.0.qualifier">
+      <category name="Xtext"/>
+   </feature>
+   <feature url="features/org.eclipse.xtext.license_2.6.0.qualifier.jar" id="org.eclipse.xtext.license" version="2.6.0.qualifier">
+      <category name="Xtext"/>
+   </feature>
+   <feature url="features/org.eclipse.xtext.redist_2.11.0.qualifier.jar" id="org.eclipse.xtext.redist" version="2.11.0.qualifier">
+      <category name="Xtext"/>
+   </feature>
+   <feature url="features/org.eclipse.xtext.runtime_2.11.0.qualifier.jar" id="org.eclipse.xtext.runtime" version="2.11.0.qualifier">
+      <category name="Xtext"/>
+   </feature>
+   <feature url="features/org.eclipse.xtext.sdk_2.11.0.qualifier.jar" id="org.eclipse.xtext.sdk" version="2.11.0.qualifier">
+      <category name="Xtext"/>
+   </feature>
+   <feature url="features/org.eclipse.xtext.ui_2.11.0.qualifier.jar" id="org.eclipse.xtext.ui" version="2.11.0.qualifier">
+      <category name="Xtext"/>
+   </feature>
+   <feature url="features/org.eclipse.xtext.xbase_2.11.0.qualifier.jar" id="org.eclipse.xtext.xbase" version="2.11.0.qualifier">
+      <category name="Xtext"/>
+   </feature>
+   <feature url="features/org.eclipse.xtext.xbase.lib_2.11.0.qualifier.jar" id="org.eclipse.xtext.xbase.lib" version="2.11.0.qualifier">
+      <category name="Xtext"/>
+   </feature>
+   <feature url="features/org.eclipse.xtext.xtext.ui_2.11.0.qualifier.jar" id="org.eclipse.xtext.xtext.ui" version="2.11.0.qualifier">
+      <category name="Xtext"/>
+   </feature>
+   <category-def name="Xtext" label="Xtext"/>
+</site>
