@@ -246,14 +246,14 @@ public class NewLanguageFeaturesCompilerTest extends AbstractOutputComparingComp
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("Iterable<java.util.Collection<Object>> _plus = com.google.common.collect.Iterables.<java.util.Collection<Object>>concat(((Iterable<java.util.List<Object>>) null), ((Iterable<java.util.Set<Object>>) null));");
     _builder_1.newLine();
-    _builder_1.append("final org.eclipse.xtext.xbase.lib.Procedures.Procedure1<java.util.Collection<Object>> _function = (java.util.Collection<Object> it) -> {");
+    _builder_1.append("final java.util.function.Consumer<java.util.Collection<Object>> _function = (java.util.Collection<Object> it) -> {");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("it.size();");
     _builder_1.newLine();
     _builder_1.append("};");
     _builder_1.newLine();
-    _builder_1.append("org.eclipse.xtext.xbase.lib.IterableExtensions.<java.util.Collection<Object>>forEach(_plus, _function);");
+    _builder_1.append("_plus.forEach(_function);");
     _builder_1.newLine();
     this.compilesTo(_builder, _builder_1, JavaVersion.JAVA8);
   }
@@ -264,14 +264,14 @@ public class NewLanguageFeaturesCompilerTest extends AbstractOutputComparingComp
     _builder.append("(null as Iterable<String[]>).forEach[ reverse ]");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("final org.eclipse.xtext.xbase.lib.Procedures.Procedure1<String[]> _function = (String[] it) -> {");
+    _builder_1.append("final java.util.function.Consumer<String[]> _function = (String[] it) -> {");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("org.eclipse.xtext.xbase.lib.ListExtensions.<String>reverse(((java.util.List<String>)org.eclipse.xtext.xbase.lib.Conversions.doWrapArray(it)));");
     _builder_1.newLine();
     _builder_1.append("};");
     _builder_1.newLine();
-    _builder_1.append("org.eclipse.xtext.xbase.lib.IterableExtensions.<String[]>forEach(((Iterable<String[]>) null), _function);");
+    _builder_1.append("((Iterable<String[]>) null).forEach(_function);");
     _builder_1.newLine();
     this.compilesTo(_builder, _builder_1, JavaVersion.JAVA8);
   }

@@ -461,7 +461,7 @@ abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
 	}
 		
 	@Test def void testTypeForVoidClosure() throws Exception {
-		"newArrayList('foo','bar').forEach []".bindTypeArgumentsTo("String").and("String").done
+		"newArrayList('foo','bar').forall []".bindTypeArgumentsTo("String").and("String").done
 	}
 	
 	@Test def void testClosure_01() throws Exception {
@@ -1114,7 +1114,7 @@ abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
 	@Test def void testFeatureCall_71() throws Exception {
 		"{
 			val list = newArrayList
-			list.forEach[String s | s]
+			list.forall[String s | s.length > 0]
 			list
 		}".bindTypeArgumentsTo("String").and("String").done
 	}
@@ -1138,7 +1138,7 @@ abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
 	@Test def void testFeatureCall_75() throws Exception {
 		"{
 			val list = newArrayList
-			list.forEach[ s | s.toString ]
+			list.forall[ s | s.toString.length > 0 ]
 			list
 		}".bindTypeArgumentsTo("Object").and("Object").done
 	}

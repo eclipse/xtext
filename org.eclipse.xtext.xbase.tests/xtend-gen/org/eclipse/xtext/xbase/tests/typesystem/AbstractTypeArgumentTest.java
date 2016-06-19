@@ -686,7 +686,7 @@ public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
   
   @Test
   public void testTypeForVoidClosure() throws Exception {
-    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("newArrayList(\'foo\',\'bar\').forEach []", "String");
+    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("newArrayList(\'foo\',\'bar\').forall []", "String");
     Iterator<XExpression> _and = this.and(_bindTypeArgumentsTo, "String");
     this.done(_and);
   }
@@ -1645,7 +1645,7 @@ public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
   
   @Test
   public void testFeatureCall_71() throws Exception {
-    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist.forEach[String s | s]\n\t\t\tlist\n\t\t}", "String");
+    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist.forall[String s | s.length > 0]\n\t\t\tlist\n\t\t}", "String");
     Iterator<XExpression> _and = this.and(_bindTypeArgumentsTo, "String");
     this.done(_and);
   }
@@ -1673,7 +1673,7 @@ public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
   
   @Test
   public void testFeatureCall_75() throws Exception {
-    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist.forEach[ s | s.toString ]\n\t\t\tlist\n\t\t}", "Object");
+    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist.forall[ s | s.toString.length > 0 ]\n\t\t\tlist\n\t\t}", "Object");
     Iterator<XExpression> _and = this.and(_bindTypeArgumentsTo, "Object");
     this.done(_and);
   }
