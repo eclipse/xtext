@@ -24,6 +24,7 @@
 		<module>org.eclipse.xtend.examples</module>
 		<module>org.eclipse.xtend.gwt.feature</module>
 		<module>org.eclipse.xtend.sdk.feature</module>
+		<module>org.eclipse.xtend.p2-repository</module>
 	</modules>
 
 </project>
