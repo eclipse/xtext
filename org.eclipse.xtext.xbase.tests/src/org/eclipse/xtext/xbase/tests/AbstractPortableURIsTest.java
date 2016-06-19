@@ -65,7 +65,11 @@ public abstract class AbstractPortableURIsTest extends URIHandlerImpl.PlatformSc
 		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("genmodel", new EcoreResourceFactoryImpl());
 		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("ecore", new EcoreResourceFactoryImpl());
 		resourceSet.getURIConverter().getURIMap().put(URI.createPlatformPluginURI("org.eclipse.xtext/", false), URI.createURI("classpath:/"));
+		resourceSet.getURIConverter().getURIMap().put(URI.createPlatformPluginURI("org.eclipse.xtext.xbase/", false), URI.createURI("classpath:/"));
+		resourceSet.getURIConverter().getURIMap().put(URI.createPlatformPluginURI("org.eclipse.xtext.common.types/", false), URI.createURI("classpath:/"));
 		resourceSet.getURIConverter().getURIMap().put(URI.createPlatformResourceURI("org.eclipse.emf.ecore/", false), URI.createURI("classpath:/"));
+		resourceSet.getURIConverter().getURIMap().put(URI.createPlatformResourceURI("org.eclipse.xtext.xbase/", false), URI.createURI("classpath:/"));
+		resourceSet.getURIConverter().getURIMap().put(URI.createPlatformResourceURI("org.eclipse.xtext.common.types/", false), URI.createURI("classpath:/"));
 		resourceSet.getLoadOptions().put(XMLResource.OPTION_URI_HANDLER, this);
 	}
 	
