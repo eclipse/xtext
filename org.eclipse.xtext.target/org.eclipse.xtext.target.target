@@ -28,13 +28,17 @@
 </location>
 
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.xtext.sdk.feature.group" version="2.10.1.v201606010729"/>
+<unit id="org.eclipse.xtext.sdk.feature.group" version="0.0.0"/>
+<unit id="org.eclipse.xtext.gwt.feature.group" version="0.0.0"/>
+<unit id="org.eclipse.xtext.redist.feature.group" version="0.0.0"/>
+<repository location="http://services.typefox.io/open-source/jenkins/job/xtext-eclipse/job/master/lastStableBuild/artifact/build/p2-repository/"/>
+</location>
+
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.emf.mwe2.language.sdk.feature.group" version="2.9.0.201605272309"/>
-<unit id="org.eclipse.xtext.gwt.feature.group" version="2.10.1.v201606010729"/>
-<unit id="org.eclipse.xtend.gwt.feature.group" version="2.10.1.v201606010729"/>
-<unit id="org.eclipse.xtext.redist.feature.group" version="2.10.1.v201606010729"/>
 <repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/latest/"/>
 </location>
+
 
 
 </locations>
