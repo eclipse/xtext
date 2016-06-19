@@ -41,12 +41,12 @@ import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.workspace.FileProjectConfig;
 import org.eclipse.xtext.workspace.ProjectConfigAdapter;
+import org.eclipse.xtext.xbase.TemporaryFolder;
 import org.eclipse.xtext.xbase.compiler.RegisteringFileSystemAccess.GeneratedFile;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.junit.Assert;
-import org.junit.rules.TemporaryFolder;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;

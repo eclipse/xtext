@@ -23,12 +23,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
 
+import org.eclipse.xtext.xbase.TemporaryFolder;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.TemporaryFolder;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.inject.Inject;
