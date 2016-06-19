@@ -126,12 +126,12 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 				// TODO AbstractStringBuilder is package private and should not be part of the resolved type
 				"Iterable<AbstractStringBuilder> _plus = com.google.common.collect.Iterables.<AbstractStringBuilder>concat(((Iterable<StringBuilder>) null), ((Iterable<StringBuffer>) null));\n" + 
 				"Iterable<Object> _plus_1 = com.google.common.collect.Iterables.<Object>concat(_plus, ((Iterable<String>) null));\n" + 
-				"final org.eclipse.xtext.xbase.lib.Procedures.Procedure1<Object> _function = new org.eclipse.xtext.xbase.lib.Procedures.Procedure1<Object>() {\n" + 
-				"  public void apply(final Object it) {\n" + 
+				"final java.util.function.Consumer<Object> _function = new java.util.function.Consumer<Object>() {\n" + 
+				"  public void accept(final Object it) {\n" + 
 				"    ((CharSequence)it).length();\n" + 
 				"  }\n" + 
 				"};\n" + 
-				"org.eclipse.xtext.xbase.lib.IterableExtensions.<Object>forEach(_plus_1, _function);", 
+				"_plus_1.forEach(_function);", 
 				"((null as Iterable<StringBuilder>) + (null as Iterable<StringBuffer>) + (null as Iterable<String>)).forEach[ length ]");
 	}
 	
@@ -144,91 +144,91 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 	
 	@Test public void testImplicitReferenceToSynonym_01() throws Exception {
 		assertCompilesTo(
-				"final org.eclipse.xtext.xbase.lib.Procedures.Procedure1<String[]> _function = new org.eclipse.xtext.xbase.lib.Procedures.Procedure1<String[]>() {\n" + 
-				"  public void apply(final String[] it) {\n" + 
+				"final java.util.function.Consumer<String[]> _function = new java.util.function.Consumer<String[]>() {\n" + 
+				"  public void accept(final String[] it) {\n" + 
 				"    ((java.util.List<String>)org.eclipse.xtext.xbase.lib.Conversions.doWrapArray(it)).subList(1, 1);\n" +
 				"  }\n" + 
 				"};\n" + 
-				"org.eclipse.xtext.xbase.lib.IterableExtensions.<String[]>forEach(((Iterable<String[]>) null), _function);", 
+				"((Iterable<String[]>) null).forEach(_function);", 
 				"(null as Iterable<String[]>).forEach[ subList(1,1) ]");
 	}
 	
 	@Test public void testImplicitReferenceToSynonym_02() throws Exception {
 		assertCompilesTo(
-				"final org.eclipse.xtext.xbase.lib.Procedures.Procedure1<String[]> _function = new org.eclipse.xtext.xbase.lib.Procedures.Procedure1<String[]>() {\n" + 
-				"  public void apply(final String[] it) {\n" + 
+				"final java.util.function.Consumer<String[]> _function = new java.util.function.Consumer<String[]>() {\n" + 
+				"  public void accept(final String[] it) {\n" + 
 				"    ((java.util.List<String>)org.eclipse.xtext.xbase.lib.Conversions.doWrapArray(it)).size();\n" +
 				"  }\n" + 
 				"};\n" + 
-				"org.eclipse.xtext.xbase.lib.IterableExtensions.<String[]>forEach(((Iterable<String[]>) null), _function);", 
+				"((Iterable<String[]>) null).forEach(_function);", 
 				"(null as Iterable<String[]>).forEach[ size() ]");
 	}
 	
 	@Test public void testImplicitReferenceToSynonymWithPrimitives() throws Exception {
 		assertCompilesTo(
-				"final org.eclipse.xtext.xbase.lib.Procedures.Procedure1<int[]> _function = new org.eclipse.xtext.xbase.lib.Procedures.Procedure1<int[]>() {\n" + 
-				"  public void apply(final int[] it) {\n" + 
+				"final java.util.function.Consumer<int[]> _function = new java.util.function.Consumer<int[]>() {\n" + 
+				"  public void accept(final int[] it) {\n" + 
 				"    ((java.util.List<Integer>)org.eclipse.xtext.xbase.lib.Conversions.doWrapArray(it)).subList(1, 1);\n" +
 				"  }\n" + 
 				"};\n" + 
-				"org.eclipse.xtext.xbase.lib.IterableExtensions.<int[]>forEach(((Iterable<int[]>) null), _function);", 
+				"((Iterable<int[]>) null).forEach(_function);", 
 				"(null as Iterable<int[]>).forEach[ subList(1,1) ]");
 	}
 	
 	@Test public void testImplicitReferenceToArray() throws Exception {
 		assertCompilesTo(
-				"final org.eclipse.xtext.xbase.lib.Procedures.Procedure1<String[]> _function = new org.eclipse.xtext.xbase.lib.Procedures.Procedure1<String[]>() {\n" + 
-				"  public void apply(final String[] it) {\n" + 
+				"final java.util.function.Consumer<String[]> _function = new java.util.function.Consumer<String[]>() {\n" + 
+				"  public void accept(final String[] it) {\n" + 
 				"    int _length = it.length;\n" +
 				"    org.eclipse.xtext.xbase.lib.InputOutput.<Integer>println(Integer.valueOf(_length));\n" + 
 				"  }\n" + 
 				"};\n" + 
-				"org.eclipse.xtext.xbase.lib.IterableExtensions.<String[]>forEach(((Iterable<String[]>) null), _function);", 
+				"((Iterable<String[]>) null).forEach(_function);", 
 				"(null as Iterable<String[]>).forEach[ println(length) ]");
 	}
 	
 	@Test public void testExplicitReferenceToSynonym_01() throws Exception {
 		assertCompilesTo(
-				"final org.eclipse.xtext.xbase.lib.Procedures.Procedure1<String[]> _function = new org.eclipse.xtext.xbase.lib.Procedures.Procedure1<String[]>() {\n" + 
-				"  public void apply(final String[] it) {\n" + 
+				"final java.util.function.Consumer<String[]> _function = new java.util.function.Consumer<String[]>() {\n" + 
+				"  public void accept(final String[] it) {\n" + 
 				"    ((java.util.List<String>)org.eclipse.xtext.xbase.lib.Conversions.doWrapArray(it)).subList(1, 1);\n" +
 				"  }\n" + 
 				"};\n" + 
-				"org.eclipse.xtext.xbase.lib.IterableExtensions.<String[]>forEach(((Iterable<String[]>) null), _function);", 
+				"((Iterable<String[]>) null).forEach(_function);", 
 				"(null as Iterable<String[]>).forEach[ it.subList(1,1) ]");
 	}
 	
 	@Test public void testExplicitReferenceToSynonym_02() throws Exception {
 		assertCompilesTo(
-				"final org.eclipse.xtext.xbase.lib.Procedures.Procedure1<String[]> _function = new org.eclipse.xtext.xbase.lib.Procedures.Procedure1<String[]>() {\n" + 
-				"  public void apply(final String[] it) {\n" + 
+				"final java.util.function.Consumer<String[]> _function = new java.util.function.Consumer<String[]>() {\n" + 
+				"  public void accept(final String[] it) {\n" + 
 				"    ((java.util.List<String>)org.eclipse.xtext.xbase.lib.Conversions.doWrapArray(it)).size();\n" +
 				"  }\n" + 
 				"};\n" + 
-				"org.eclipse.xtext.xbase.lib.IterableExtensions.<String[]>forEach(((Iterable<String[]>) null), _function);", 
+				"((Iterable<String[]>) null).forEach(_function);", 
 				"(null as Iterable<String[]>).forEach[ it.size ]");
 	}
 	
 	@Test public void testExplicitReferenceToSynonymWithPrimitives() throws Exception {
 		assertCompilesTo(
-				"final org.eclipse.xtext.xbase.lib.Procedures.Procedure1<int[]> _function = new org.eclipse.xtext.xbase.lib.Procedures.Procedure1<int[]>() {\n" + 
-				"  public void apply(final int[] it) {\n" + 
+				"final java.util.function.Consumer<int[]> _function = new java.util.function.Consumer<int[]>() {\n" + 
+				"  public void accept(final int[] it) {\n" + 
 				"    ((java.util.List<Integer>)org.eclipse.xtext.xbase.lib.Conversions.doWrapArray(it)).subList(1, 1);\n" +
 				"  }\n" + 
 				"};\n" + 
-				"org.eclipse.xtext.xbase.lib.IterableExtensions.<int[]>forEach(((Iterable<int[]>) null), _function);", 
+				"((Iterable<int[]>) null).forEach(_function);", 
 				"(null as Iterable<int[]>).forEach[ it.subList(1,1) ]");
 	}
 	
 	@Test public void testExplicitReferenceToArray() throws Exception {
 		assertCompilesTo(
-				"final org.eclipse.xtext.xbase.lib.Procedures.Procedure1<String[]> _function = new org.eclipse.xtext.xbase.lib.Procedures.Procedure1<String[]>() {\n" + 
-				"  public void apply(final String[] it) {\n" + 
+				"final java.util.function.Consumer<String[]> _function = new java.util.function.Consumer<String[]>() {\n" + 
+				"  public void accept(final String[] it) {\n" + 
 				"    int _length = it.length;\n" +
 				"    org.eclipse.xtext.xbase.lib.InputOutput.<Integer>println(Integer.valueOf(_length));\n" + 
 				"  }\n" + 
 				"};\n" + 
-				"org.eclipse.xtext.xbase.lib.IterableExtensions.<String[]>forEach(((Iterable<String[]>) null), _function);", 
+				"((Iterable<String[]>) null).forEach(_function);", 
 				"(null as Iterable<String[]>).forEach[ println(it.length) ]");
 	}
 	

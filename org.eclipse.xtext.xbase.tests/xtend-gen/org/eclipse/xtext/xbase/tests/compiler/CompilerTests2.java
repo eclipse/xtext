@@ -668,10 +668,10 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("final java.util.List<String> list = java.util.Collections.<String>unmodifiableList(org.eclipse.xtext.xbase.lib.CollectionLiterals.<String>newArrayList(\"1\", \"2\"));");
       _builder_1.newLine();
-      _builder_1.append("final org.eclipse.xtext.xbase.lib.Procedures.Procedure1<String> _function = new org.eclipse.xtext.xbase.lib.Procedures.Procedure1<String>() {");
+      _builder_1.append("final java.util.function.Consumer<String> _function = new java.util.function.Consumer<String>() {");
       _builder_1.newLine();
       _builder_1.append("  ");
-      _builder_1.append("public void apply(final String it) {");
+      _builder_1.append("public void accept(final String it) {");
       _builder_1.newLine();
       _builder_1.append("    ");
       _builder_1.append("String _switchResult = null;");
@@ -699,12 +699,12 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
       _builder_1.newLine();
       _builder_1.append("};");
       _builder_1.newLine();
-      _builder_1.append("org.eclipse.xtext.xbase.lib.IterableExtensions.<String>forEach(list, _function);");
+      _builder_1.append("list.forEach(_function);");
       _builder_1.newLine();
-      _builder_1.append("final org.eclipse.xtext.xbase.lib.Procedures.Procedure1<String> _function_1 = new org.eclipse.xtext.xbase.lib.Procedures.Procedure1<String>() {");
+      _builder_1.append("final java.util.function.Consumer<String> _function_1 = new java.util.function.Consumer<String>() {");
       _builder_1.newLine();
       _builder_1.append("  ");
-      _builder_1.append("public void apply(final String it) {");
+      _builder_1.append("public void accept(final String it) {");
       _builder_1.newLine();
       _builder_1.append("    ");
       _builder_1.append("org.eclipse.xtext.xbase.lib.InputOutput.<String>println(it);");
@@ -714,7 +714,7 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
       _builder_1.newLine();
       _builder_1.append("};");
       _builder_1.newLine();
-      _builder_1.append("org.eclipse.xtext.xbase.lib.IterableExtensions.<String>forEach(list, _function_1);");
+      _builder_1.append("list.forEach(_function_1);");
       _builder_1.newLine();
       this.compilesTo(_builder, _builder_1);
     } catch (Throwable _e) {
@@ -763,10 +763,10 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("final java.util.List<String> list = java.util.Collections.<String>unmodifiableList(org.eclipse.xtext.xbase.lib.CollectionLiterals.<String>newArrayList(\"1\", \"2\"));");
       _builder_1.newLine();
-      _builder_1.append("final org.eclipse.xtext.xbase.lib.Procedures.Procedure1<String> _function = new org.eclipse.xtext.xbase.lib.Procedures.Procedure1<String>() {");
+      _builder_1.append("final java.util.function.Consumer<String> _function = new java.util.function.Consumer<String>() {");
       _builder_1.newLine();
       _builder_1.append("  ");
-      _builder_1.append("public void apply(final String it) {");
+      _builder_1.append("public void accept(final String it) {");
       _builder_1.newLine();
       _builder_1.append("    ");
       _builder_1.append("String _switchResult = null;");
@@ -803,12 +803,12 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
       _builder_1.newLine();
       _builder_1.append("};");
       _builder_1.newLine();
-      _builder_1.append("org.eclipse.xtext.xbase.lib.IterableExtensions.<String>forEach(list, _function);");
+      _builder_1.append("list.forEach(_function);");
       _builder_1.newLine();
-      _builder_1.append("final org.eclipse.xtext.xbase.lib.Procedures.Procedure1<String> _function_1 = new org.eclipse.xtext.xbase.lib.Procedures.Procedure1<String>() {");
+      _builder_1.append("final java.util.function.Consumer<String> _function_1 = new java.util.function.Consumer<String>() {");
       _builder_1.newLine();
       _builder_1.append("  ");
-      _builder_1.append("public void apply(final String it) {");
+      _builder_1.append("public void accept(final String it) {");
       _builder_1.newLine();
       _builder_1.append("    ");
       _builder_1.append("org.eclipse.xtext.xbase.lib.InputOutput.<String>println(it);");
@@ -818,7 +818,7 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
       _builder_1.newLine();
       _builder_1.append("};");
       _builder_1.newLine();
-      _builder_1.append("org.eclipse.xtext.xbase.lib.IterableExtensions.<String>forEach(list, _function_1);");
+      _builder_1.append("list.forEach(_function_1);");
       _builder_1.newLine();
       this.compilesTo(_builder, _builder_1);
     } catch (Throwable _e) {
@@ -867,10 +867,10 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("final java.util.List<String> list = java.util.Collections.<String>unmodifiableList(org.eclipse.xtext.xbase.lib.CollectionLiterals.<String>newArrayList(\"1\", \"2\"));");
       _builder_1.newLine();
-      _builder_1.append("final org.eclipse.xtext.xbase.lib.Procedures.Procedure1<String> _function = new org.eclipse.xtext.xbase.lib.Procedures.Procedure1<String>() {");
+      _builder_1.append("final java.util.function.Consumer<String> _function = new java.util.function.Consumer<String>() {");
       _builder_1.newLine();
       _builder_1.append("  ");
-      _builder_1.append("public void apply(final String it) {");
+      _builder_1.append("public void accept(final String it) {");
       _builder_1.newLine();
       _builder_1.append("    ");
       _builder_1.append("String _switchResult = null;");
@@ -928,12 +928,12 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
       _builder_1.newLine();
       _builder_1.append("};");
       _builder_1.newLine();
-      _builder_1.append("org.eclipse.xtext.xbase.lib.IterableExtensions.<String>forEach(list, _function);");
+      _builder_1.append("list.forEach(_function);");
       _builder_1.newLine();
-      _builder_1.append("final org.eclipse.xtext.xbase.lib.Procedures.Procedure1<String> _function_1 = new org.eclipse.xtext.xbase.lib.Procedures.Procedure1<String>() {");
+      _builder_1.append("final java.util.function.Consumer<String> _function_1 = new java.util.function.Consumer<String>() {");
       _builder_1.newLine();
       _builder_1.append("  ");
-      _builder_1.append("public void apply(final String it) {");
+      _builder_1.append("public void accept(final String it) {");
       _builder_1.newLine();
       _builder_1.append("    ");
       _builder_1.append("org.eclipse.xtext.xbase.lib.InputOutput.<String>println(it);");
@@ -943,7 +943,7 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
       _builder_1.newLine();
       _builder_1.append("};");
       _builder_1.newLine();
-      _builder_1.append("org.eclipse.xtext.xbase.lib.IterableExtensions.<String>forEach(list, _function_1);");
+      _builder_1.append("list.forEach(_function_1);");
       _builder_1.newLine();
       this.compilesTo(_builder, _builder_1);
     } catch (Throwable _e) {

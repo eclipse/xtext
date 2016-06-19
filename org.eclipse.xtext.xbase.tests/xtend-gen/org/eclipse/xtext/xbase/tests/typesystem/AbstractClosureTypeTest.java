@@ -640,13 +640,13 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
   @Test
   public void testTypeForVoidClosure_01() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'foo\',\'bar\').forEach []", "(String)=>void");
-    this.withEquivalents(_resolvesClosuresTo, "Procedure1<String>");
+    this.withEquivalents(_resolvesClosuresTo, "Consumer<String>");
   }
   
   @Test
   public void testTypeForVoidClosure_02() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'foo\',\'bar\').forEach [ return ]", "(String)=>void");
-    this.withEquivalents(_resolvesClosuresTo, "Procedure1<String>");
+    this.withEquivalents(_resolvesClosuresTo, "Consumer<String>");
   }
   
   @Test
@@ -1555,7 +1555,7 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
   @Test
   public void testFeatureCall_062() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist.forEach[String s | s]\n\t\t\tlist\n\t\t}", "(String)=>void");
-    this.withEquivalents(_resolvesClosuresTo, "Procedure1<String>");
+    this.withEquivalents(_resolvesClosuresTo, "Consumer<String>");
   }
   
   @Test
@@ -1579,7 +1579,7 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
   @Test
   public void testFeatureCall_066() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist.forEach[ s | s.toString ]\n\t\t\tlist\n\t\t}", "(Object)=>void");
-    this.withEquivalents(_resolvesClosuresTo, "Procedure1<Object>");
+    this.withEquivalents(_resolvesClosuresTo, "Consumer<Object>");
   }
   
   @Test
