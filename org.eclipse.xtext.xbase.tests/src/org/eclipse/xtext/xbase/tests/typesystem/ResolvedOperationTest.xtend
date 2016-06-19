@@ -365,7 +365,7 @@ class ResolvedOperationTest extends AbstractXbaseTestCase {
 	
 	@Test
 	def void testShadowedMethodResolution_05() {
-		val operation = '(null as testdata.MethodOverrides4).<java.io.Serializable>staticM5()'.toOperation
+		val operation = '(null as testdata.MethodOverrides4).<java.io.Serializable>staticM5(null)'.toOperation
 		operation.has(1).candidatesAndOverrides(0).withDetail(TYPE_PARAMETER_MISMATCH)
 	}
 	

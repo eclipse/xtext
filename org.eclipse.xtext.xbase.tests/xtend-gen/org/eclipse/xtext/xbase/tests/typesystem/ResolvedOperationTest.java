@@ -534,7 +534,7 @@ public class ResolvedOperationTest extends AbstractXbaseTestCase {
   
   @Test
   public void testShadowedMethodResolution_05() {
-    final IResolvedOperation operation = this.toOperation("(null as testdata.MethodOverrides4).<java.io.Serializable>staticM5()");
+    final IResolvedOperation operation = this.toOperation("(null as testdata.MethodOverrides4).<java.io.Serializable>staticM5(null)");
     IResolvedOperation _has = this.has(operation, 1);
     IResolvedOperation _candidatesAndOverrides = this.candidatesAndOverrides(_has, 0);
     this.withDetail(_candidatesAndOverrides, IOverrideCheckResult.OverrideCheckDetails.TYPE_PARAMETER_MISMATCH);
