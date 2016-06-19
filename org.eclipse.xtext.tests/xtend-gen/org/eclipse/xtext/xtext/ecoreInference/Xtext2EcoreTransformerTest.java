@@ -29,6 +29,7 @@ import org.eclipse.xtext.GeneratedMetamodel;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.XtextStandaloneSetup;
+import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
 import org.eclipse.xtext.ecore.EcoreSupportStandaloneSetup;
 import org.eclipse.xtext.linking.ILinker;
@@ -118,6 +119,7 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
   @Override
   public void setUp() throws Exception {
     super.setUp();
+    EPackage.Registry.INSTANCE.put(TypesPackage.eNS_URI, TypesPackage.eINSTANCE);
     TestErrorAcceptor _testErrorAcceptor = new TestErrorAcceptor();
     this.errorAcceptorMock = _testErrorAcceptor;
     EcoreSupportStandaloneSetup.setup();

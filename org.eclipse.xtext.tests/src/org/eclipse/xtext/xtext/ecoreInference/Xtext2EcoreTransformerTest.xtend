@@ -35,6 +35,8 @@ import org.eclipse.xtext.xtext.XtextLinker
 import org.eclipse.xtext.xtext.ecoreInference.Xtext2EcoreTransformerTest.MyErrorAcceptor
 import org.junit.Test
 import org.eclipse.xtext.xtext.XtextLinker.PackageRemover
+import org.eclipse.emf.ecore.resource.URIConverter
+import org.eclipse.xtext.common.types.TypesPackage
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
@@ -83,6 +85,7 @@ class Xtext2EcoreTransformerTest extends AbstractXtextTests {
 
 	override void setUp() throws Exception {
 		super.setUp()
+		EPackage.Registry.INSTANCE.put(TypesPackage.eNS_URI, TypesPackage.eINSTANCE)
 		errorAcceptorMock = new TestErrorAcceptor()
 		EcoreSupportStandaloneSetup.setup()
 		with(XtextStandaloneSetup)
