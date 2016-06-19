@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.xtext.tests/src-gen" editDirectory="/org.eclipse.xtext.tests.edit/src"
+    editorDirectory="/org.eclipse.xtext.tests.editor/src" modelPluginID="org.eclipse.xtext.tests"
+    forceOverwrite="true" modelName="SimpleExpressionsTestLanguage" updateClasspath="false"
+    rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" complianceLevel="6.0"
+    copyrightFields="false" editPluginID="org.eclipse.xtext.tests.edit" editorPluginID="org.eclipse.xtext.tests.editor"
+    runtimeVersion="2.9" usedGenPackages="platform:/resource/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
+  <genPackages prefix="SimpleExpressions" basePackage="org.eclipse.xtext.testlanguages"
+      disposableProviderFactory="true" ecorePackage="SimpleExpressionsTestLanguage.ecore#/">
+    <genClasses ecoreClass="SimpleExpressionsTestLanguage.ecore#//Sequence">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimpleExpressionsTestLanguage.ecore#//Sequence/expressions"/>
+    </genClasses>
+    <genClasses ecoreClass="SimpleExpressionsTestLanguage.ecore#//Expression"/>
+    <genClasses ecoreClass="SimpleExpressionsTestLanguage.ecore#//Atom">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleExpressionsTestLanguage.ecore#//Atom/name"/>
+    </genClasses>
+    <genClasses ecoreClass="SimpleExpressionsTestLanguage.ecore#//Op">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SimpleExpressionsTestLanguage.ecore#//Op/values"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SimpleExpressionsTestLanguage.ecore#//Op/operator"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

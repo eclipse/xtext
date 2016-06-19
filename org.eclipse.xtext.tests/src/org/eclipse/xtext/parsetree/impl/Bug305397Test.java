@@ -7,11 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.parsetree.impl;
 
-import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parsetree.impl.bug305397.Element;
 import org.eclipse.xtext.parsetree.impl.bug305397.Model;
+import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.junit.Test;
 
 /**

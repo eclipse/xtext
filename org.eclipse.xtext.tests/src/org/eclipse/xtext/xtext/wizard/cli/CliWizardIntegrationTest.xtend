@@ -15,7 +15,7 @@ import java.util.Comparator
 import java.util.List
 import java.util.Set
 import org.eclipse.xtend.lib.annotations.Data
-import org.eclipse.xtext.junit4.internal.LineDelimiters
+import org.eclipse.xtext.tests.LineDelimiters
 import org.eclipse.xtext.util.XtextVersion
 import org.eclipse.xtext.xtext.wizard.BuildSystem
 import org.eclipse.xtext.xtext.wizard.LanguageDescriptor.FileExtensions

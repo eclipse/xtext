@@ -14,10 +14,10 @@ import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.XtextFactory;
 import org.eclipse.xtext.XtextStandaloneSetup;
-import org.eclipse.xtext.generator.parser.antlr.AntlrGrammarGenUtil;
 import org.eclipse.xtext.grammaranalysis.impl.GrammarElementTitleSwitch;
-import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.services.XtextGrammarAccess;
+import org.eclipse.xtext.tests.AbstractXtextTests;
+import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrGrammarGenUtil;
 import org.junit.Test;
 
 /**

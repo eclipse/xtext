@@ -16,7 +16,7 @@ class RuntimeTestProjectDescriptor extends TestProjectDescriptor {
 	override getExternalDependencies() {
 		val deps = newLinkedHashSet
 		deps += super.externalDependencies
-		deps += createXtextDependency("org.eclipse.xtext.junit4") => [maven.scope = Scope.TESTCOMPILE]
+		deps += createXtextDependency("org.eclipse.xtext.testing") => [maven.scope = Scope.TESTCOMPILE]
 		deps += createXtextDependency("org.eclipse.xtext.xbase.junit") => [maven.scope = Scope.TESTCOMPILE]
 		deps
 	}

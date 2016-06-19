@@ -7,12 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext;
 
-import org.eclipse.xtext.junit4.internal.AbstractPortableURIsTest;
+import org.eclipse.xtext.tests.AbstractPortableURIsTest;
 import org.junit.Test;
 
 /**
  * @author zarnekow - Initial contribution and API
  */
+// UI Test
 public class URIsInEcoreFilesTest extends AbstractPortableURIsTest {
 	
 	@Test public void testXtext() {

@@ -15,10 +15,10 @@ import java.util.Set;
 import org.apache.log4j.Logger;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextStandaloneSetup;
-import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraint;
 import org.eclipse.xtext.serializer.analysis.SerializationContext;
+import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.eclipse.xtext.util.Pair;
 import org.junit.Test;
 

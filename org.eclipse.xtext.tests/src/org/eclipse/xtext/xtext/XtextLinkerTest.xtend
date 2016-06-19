@@ -7,23 +7,23 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext
 
+import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.InternalEObject
+import org.eclipse.xtext.Alternatives
+import org.eclipse.xtext.Assignment
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.GrammarUtil
+import org.eclipse.xtext.Group
+import org.eclipse.xtext.LiteralCondition
+import org.eclipse.xtext.Negation
+import org.eclipse.xtext.ParameterReference
+import org.eclipse.xtext.ParserRule
 import org.eclipse.xtext.RuleCall
 import org.eclipse.xtext.TerminalRule
 import org.eclipse.xtext.XtextStandaloneSetup
-import org.eclipse.xtext.junit4.AbstractXtextTests
-import org.junit.Test
-import org.eclipse.xtext.Group
-import org.eclipse.xtext.Assignment
-import org.eclipse.xtext.ParserRule
-import org.eclipse.xtext.Alternatives
-import org.eclipse.xtext.Negation
-import org.eclipse.xtext.ParameterReference
-import org.eclipse.xtext.LiteralCondition
-import org.eclipse.emf.common.util.URI
+import org.eclipse.xtext.tests.AbstractXtextTests
 import org.eclipse.xtext.util.LazyStringInputStream
+import org.junit.Test
 
 /**
  * @author Sven Efftinge - Initial contribution and API

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="testLang" nsURI="http://www.eclipse.org/2008/xtext/TestLang"
+    nsPrefix="testLang">
+  <eClassifiers xsi:type="ecore:EClass" name="Model">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="multiFeature" upperBound="-1"
+        eType="#//AbstractElement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ChoiceElement" eSuperTypes="#//AbstractElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="optionalKeyword" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ReducibleElement" eSuperTypes="#//AbstractElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TerminalElement" eSuperTypes="#//ReducibleElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="stringFeature" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ReducibleComposite" eSuperTypes="#//ReducibleElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="actionFeature" upperBound="-1"
+        eType="#//TerminalElement" containment="true"/>
+  </eClassifiers>
+</ecore:EPackage>

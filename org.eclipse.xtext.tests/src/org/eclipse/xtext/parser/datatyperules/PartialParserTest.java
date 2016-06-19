@@ -7,9 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser.datatyperules;
 
-import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.eclipse.xtext.tests.EmfAssert;
 import org.eclipse.xtext.util.ReplaceRegion;
 import org.junit.Test;

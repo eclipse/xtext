@@ -8,10 +8,10 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextStandaloneSetup;
-import org.eclipse.xtext.junit4.AbstractXtextTests;
-import org.eclipse.xtext.junit4.internal.LineDelimiters;
 import org.eclipse.xtext.resource.SaveOptions;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.tests.AbstractXtextTests;
+import org.eclipse.xtext.tests.LineDelimiters;
 import org.eclipse.xtext.util.StringInputStream;
 import org.junit.Test;
 

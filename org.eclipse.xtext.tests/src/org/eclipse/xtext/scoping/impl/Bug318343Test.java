@@ -7,14 +7,16 @@
  *******************************************************************************/
 package org.eclipse.xtext.scoping.impl;
 
+import java.io.File;
+
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.linking.LangATestLanguageStandaloneSetup;
 import org.eclipse.xtext.linking.langATestLanguage.LangATestLanguagePackage;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.eclipse.xtext.util.StringInputStream;
 import org.junit.Test;
 
@@ -33,8 +35,8 @@ public class Bug318343Test extends AbstractXtextTests {
 		with(LangATestLanguageStandaloneSetup.class);
 		globalScopeProvider = get(DefaultGlobalScopeProvider.class);
 		XtextResourceSet xtextResourceSet = get(XtextResourceSet.class);
-		resource1 = xtextResourceSet.createResource(URI.createURI("uri1.langatestlanguage"));
-		resource2 = xtextResourceSet.createResource(URI.createURI("uri2.langatestlanguage"));
+		resource1 = xtextResourceSet.createResource(URI.createFileURI(new File("uri1.langatestlanguage").getAbsolutePath()));
+		resource2 = xtextResourceSet.createResource(URI.createFileURI(new File("uri2.langatestlanguage").getAbsolutePath()));
 		resource1.load(new StringInputStream("type t1"),null);
 		resource2.load(new StringInputStream("type t2"),null);
 	}

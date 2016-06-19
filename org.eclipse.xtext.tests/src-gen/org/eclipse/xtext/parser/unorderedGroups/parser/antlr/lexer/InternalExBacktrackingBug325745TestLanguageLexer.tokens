@@ -1,0 +1,13 @@
+Asterisk=6
+ColonEqualsSign=4
+ExclamationMark=5
+FullStop=7
+LeftSquareBracket=8
+RULE_ANY_OTHER=16
+RULE_ID=10
+RULE_INT=11
+RULE_ML_COMMENT=13
+RULE_SL_COMMENT=14
+RULE_STRING=12
+RULE_WS=15
+RightSquareBracket=9

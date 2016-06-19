@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.validation;
 
-import static org.eclipse.xtext.junit4.validation.AssertableDiagnostics.*;
+import static org.eclipse.xtext.validation.AssertableDiagnostics.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -18,8 +18,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.xtext.XtextStandaloneSetup;
-import org.eclipse.xtext.junit4.AbstractXtextTests;
-import org.eclipse.xtext.junit4.validation.ValidatorTester;
+import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.junit.Test;
 
 import com.google.inject.Key;

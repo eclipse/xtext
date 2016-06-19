@@ -10,6 +10,8 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.xtend.lib.annotations.AccessorType;
+import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Grammar;
@@ -41,6 +43,19 @@ public class Junit4Fragment2 extends AbstractStubGeneratingFragment {
   @Inject
   private FileAccessFactory fileAccessFactory;
   
+  @Accessors(AccessorType.PUBLIC_SETTER)
+  private boolean useDeprecatedClasses;
+  
+  protected String getTestingPackage() {
+    String _xifexpression = null;
+    if (this.useDeprecatedClasses) {
+      _xifexpression = "org.eclipse.xtext.junit4";
+    } else {
+      _xifexpression = "org.eclipse.xtext.testing";
+    }
+    return _xifexpression;
+  }
+  
   @Override
   public void generate() {
     IXtextProjectConfig _projectConfig = this.getProjectConfig();
@@ -53,8 +68,8 @@ public class Junit4Fragment2 extends AbstractStubGeneratingFragment {
       ManifestAccess _manifest_1 = _runtimeTest_1.getManifest();
       final Procedure1<ManifestAccess> _function = (ManifestAccess it) -> {
         Set<String> _requiredBundles = it.getRequiredBundles();
-        CollectionExtensions.<String>addAll(_requiredBundles, 
-          "org.eclipse.xtext.junit4", 
+        String _testingPackage = this.getTestingPackage();
+        CollectionExtensions.<String>addAll(_requiredBundles, _testingPackage, 
           "org.eclipse.xtext.xbase.lib");
         Set<String> _exportedPackages = it.getExportedPackages();
         Grammar _grammar = this.getGrammar();
@@ -141,11 +156,17 @@ public class Junit4Fragment2 extends AbstractStubGeneratingFragment {
     }
   }
   
-  public JavaFileAccess generateExampleRuntimeTest() {
-    final TypeReference xtextRunner = new TypeReference("org.eclipse.xtext.junit4.XtextRunner");
+  protected JavaFileAccess generateExampleRuntimeTest() {
+    String _testingPackage = this.getTestingPackage();
+    String _plus = (_testingPackage + ".XtextRunner");
+    final TypeReference xtextRunner = new TypeReference(_plus);
     final TypeReference runWith = new TypeReference("org.junit.runner.RunWith");
-    final TypeReference injectWith = new TypeReference("org.eclipse.xtext.junit4.InjectWith");
-    final TypeReference parseHelper = new TypeReference("org.eclipse.xtext.junit4.util.ParseHelper");
+    String _testingPackage_1 = this.getTestingPackage();
+    String _plus_1 = (_testingPackage_1 + ".InjectWith");
+    final TypeReference injectWith = new TypeReference(_plus_1);
+    String _testingPackage_2 = this.getTestingPackage();
+    String _plus_2 = (_testingPackage_2 + ".util.ParseHelper");
+    final TypeReference parseHelper = new TypeReference(_plus_2);
     final TypeReference test = new TypeReference("org.junit.Test");
     final TypeReference assert_ = new TypeReference("org.junit.Assert");
     Grammar _grammar = this.getGrammar();
@@ -226,7 +247,7 @@ public class Junit4Fragment2 extends AbstractStubGeneratingFragment {
     return this.fileAccessFactory.createXtendFile(_exampleRuntimeTest, _client);
   }
   
-  public TypeReference exampleRuntimeTest() {
+  protected TypeReference exampleRuntimeTest() {
     Grammar _grammar = this.getGrammar();
     String _runtimeTestBasePackage = this._xtextGeneratorNaming.getRuntimeTestBasePackage(_grammar);
     Grammar _grammar_1 = this.getGrammar();
@@ -235,14 +256,19 @@ public class Junit4Fragment2 extends AbstractStubGeneratingFragment {
     return new TypeReference(_runtimeTestBasePackage, _plus);
   }
   
-  public JavaFileAccess generateInjectorProvider() {
+  protected JavaFileAccess generateInjectorProvider() {
     JavaFileAccess _xblockexpression = null;
     {
       TypeReference _injectorProvider = this.injectorProvider();
       final JavaFileAccess file = this.fileAccessFactory.createJavaFile(_injectorProvider);
-      final TypeReference globalRegistries = new TypeReference("org.eclipse.xtext.junit4.GlobalRegistries");
-      final TypeReference globalStateMemento = new TypeReference("org.eclipse.xtext.junit4", "GlobalRegistries.GlobalStateMemento");
-      final TypeReference iRegistryConfigurator = new TypeReference("org.eclipse.xtext.junit4.IRegistryConfigurator");
+      String _testingPackage = this.getTestingPackage();
+      String _plus = (_testingPackage + ".GlobalRegistries");
+      final TypeReference globalRegistries = new TypeReference(_plus);
+      String _testingPackage_1 = this.getTestingPackage();
+      final TypeReference globalStateMemento = new TypeReference(_testingPackage_1, "GlobalRegistries.GlobalStateMemento");
+      String _testingPackage_2 = this.getTestingPackage();
+      String _plus_1 = (_testingPackage_2 + ".IRegistryConfigurator");
+      final TypeReference iRegistryConfigurator = new TypeReference(_plus_1);
       final TypeReference classLoader = new TypeReference("java.lang.ClassLoader");
       final TypeReference guice = new TypeReference("com.google.inject.Guice");
       StringConcatenationClient _client = new StringConcatenationClient() {
@@ -440,11 +466,13 @@ public class Junit4Fragment2 extends AbstractStubGeneratingFragment {
     return _xblockexpression;
   }
   
-  public TypeReference iInjectorProvider() {
-    return new TypeReference("org.eclipse.xtext.junit4.IInjectorProvider");
+  protected TypeReference iInjectorProvider() {
+    String _testingPackage = this.getTestingPackage();
+    String _plus = (_testingPackage + ".IInjectorProvider");
+    return new TypeReference(_plus);
   }
   
-  public TypeReference injectorProvider() {
+  protected TypeReference injectorProvider() {
     Grammar _grammar = this.getGrammar();
     String _runtimeTestBasePackage = this._xtextGeneratorNaming.getRuntimeTestBasePackage(_grammar);
     Grammar _grammar_1 = this.getGrammar();
@@ -453,7 +481,7 @@ public class Junit4Fragment2 extends AbstractStubGeneratingFragment {
     return new TypeReference(_runtimeTestBasePackage, _plus);
   }
   
-  public JavaFileAccess generateUiInjectorProvider() {
+  protected JavaFileAccess generateUiInjectorProvider() {
     JavaFileAccess _xblockexpression = null;
     {
       TypeReference _uiInjectorProvider = this.uiInjectorProvider();
@@ -503,12 +531,16 @@ public class Junit4Fragment2 extends AbstractStubGeneratingFragment {
     return _xblockexpression;
   }
   
-  public TypeReference uiInjectorProvider() {
+  protected TypeReference uiInjectorProvider() {
     Grammar _grammar = this.getGrammar();
     String _eclipsePluginTestBasePackage = this._xtextGeneratorNaming.getEclipsePluginTestBasePackage(_grammar);
     Grammar _grammar_1 = this.getGrammar();
     String _simpleName = GrammarUtil.getSimpleName(_grammar_1);
     String _plus = (_simpleName + "UiInjectorProvider");
     return new TypeReference(_eclipsePluginTestBasePackage, _plus);
+  }
+  
+  public void setUseDeprecatedClasses(final boolean useDeprecatedClasses) {
+    this.useDeprecatedClasses = useDeprecatedClasses;
   }
 }

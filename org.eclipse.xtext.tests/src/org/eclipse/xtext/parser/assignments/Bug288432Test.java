@@ -7,11 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser.assignments;
 
-import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.parser.assignments.bug288432Test.Body;
 import org.eclipse.xtext.parser.assignments.bug288432Test.MyElement;
 import org.eclipse.xtext.parser.assignments.bug288432Test.MyInt;
 import org.eclipse.xtext.parser.assignments.bug288432Test.ParameterObject;
+import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.junit.Test;
 
 /**

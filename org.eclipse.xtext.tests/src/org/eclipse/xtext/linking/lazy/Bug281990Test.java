@@ -10,13 +10,14 @@ package org.eclipse.xtext.linking.lazy;
 import org.apache.log4j.Level;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.xtext.junit4.AbstractXtextTests;
-import org.eclipse.xtext.junit4.logging.LoggingTester;
-import org.eclipse.xtext.junit4.logging.LoggingTester.LogCapture;
+import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.linking.lazy.lazyLinking.Model;
 import org.eclipse.xtext.linking.lazy.lazyLinking.Type;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
+import org.eclipse.xtext.testing.logging.LoggingTester;
+import org.eclipse.xtext.testing.logging.LoggingTester.LogCapture;
+import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.junit.Test;
 
@@ -35,6 +36,7 @@ public class Bug281990Test extends AbstractXtextTests {
 	@Override
 	public void setUp() throws Exception {
 		super.setUp();
+		XtextStandaloneSetup.doSetup();
 		with(new LazyLinkingTestLanguageRuntimeModule() {
 			@Override
 			public Class<? extends IScopeProvider> bindIScopeProvider() {

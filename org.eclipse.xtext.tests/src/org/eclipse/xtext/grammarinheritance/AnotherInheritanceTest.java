@@ -12,8 +12,9 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.grammarinheritance.ametamodel.AmetamodelPackage;
+import org.eclipse.xtext.grammarinheritance.foo.FooPackage;
 import org.eclipse.xtext.grammarinheritance.services.InheritanceTest2LanguageGrammarAccess;
-import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.junit.Test;
 
 public class AnotherInheritanceTest extends AbstractXtextTests {

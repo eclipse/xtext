@@ -7,10 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser.unorderedGroups;
 
-import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.Model;
 import org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.UnorderedGroupsTestLanguageFactory;
 import org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.UnorderedSerialization;
+import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.junit.Test;
 
 /**

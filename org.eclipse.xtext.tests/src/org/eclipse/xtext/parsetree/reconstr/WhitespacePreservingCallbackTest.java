@@ -1,10 +1,10 @@
 package org.eclipse.xtext.parsetree.reconstr;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parsetree.reconstr.complexrewritetest.ComplexrewritetestPackage;
 import org.eclipse.xtext.resource.SaveOptions;
+import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.junit.Test;
 
 public class WhitespacePreservingCallbackTest extends AbstractXtextTests {

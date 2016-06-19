@@ -14,10 +14,10 @@ import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.Diagnostician;
-import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.linking.ImportUriTestLanguageRuntimeModule;
 import org.eclipse.xtext.linking.ImportUriTestLanguageStandaloneSetup;
 import org.eclipse.xtext.linking.importedURI.ImportedURIPackage;
+import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.junit.Test;
 
 import com.google.inject.Binder;

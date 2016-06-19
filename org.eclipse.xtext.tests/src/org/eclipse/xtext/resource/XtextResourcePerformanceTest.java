@@ -7,8 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource;
 
-import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
+import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.junit.Test;
 
 import com.google.common.collect.Iterables;

@@ -12,8 +12,6 @@ import org.eclipse.xtext.formatting.INodeModelStreamer;
 import org.eclipse.xtext.formatting.impl.AbstractTokenStream;
 import org.eclipse.xtext.formatting.impl.DefaultNodeModelFormatter;
 import org.eclipse.xtext.formatting.impl.NodeModelStreamer;
-import org.eclipse.xtext.junit4.AbstractXtextTests;
-import org.eclipse.xtext.junit4.util.ParseHelper;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parsetree.formatter.formattertestlanguage.Decl;
@@ -30,6 +28,8 @@ import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic;
 import org.eclipse.xtext.serializer.sequencer.IHiddenTokenSequencer;
 import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer;
+import org.eclipse.xtext.testing.util.ParseHelper;
+import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.junit.Test;
 
 public class FormatterTest extends AbstractXtextTests {

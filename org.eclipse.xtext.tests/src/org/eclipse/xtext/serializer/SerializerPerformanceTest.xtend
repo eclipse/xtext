@@ -8,10 +8,10 @@
 package org.eclipse.xtext.serializer
 
 import com.google.inject.Inject
-import org.eclipse.xtext.junit4.InjectWith
-import org.eclipse.xtext.junit4.XtextRunner
-import org.eclipse.xtext.junit4.util.ParseHelper
 import org.eclipse.xtext.serializer.hiddentokensequencertest.Model
+import org.eclipse.xtext.testing.InjectWith
+import org.eclipse.xtext.testing.XtextRunner
+import org.eclipse.xtext.testing.util.ParseHelper
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test

@@ -1,7 +1,6 @@
 package org.eclipse.xtext.parsetree.reconstr;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.Action1;
 import org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.AppendToFileEnd;
 import org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.Commentable;
@@ -10,6 +9,7 @@ import org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.Hiddentokenmer
 import org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.RefList;
 import org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.ValueList;
 import org.eclipse.xtext.resource.SaveOptions;
+import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.junit.Ignore;
 import org.junit.Test;
 

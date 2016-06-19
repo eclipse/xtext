@@ -13,7 +13,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.linking.impl.DefaultLinkingService;
 import org.eclipse.xtext.linking.impl.Linker;
 import org.eclipse.xtext.linking.impl.LinkingDiagnosticMessageProvider;
@@ -32,6 +31,7 @@ import org.eclipse.xtext.scoping.impl.ImportUriResolver;
 import org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider;
 import org.eclipse.xtext.scoping.impl.LoadOnDemandResourceDescriptions;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
+import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.eclipse.xtext.util.IResourceScopeCache;
 import org.junit.Test;
 

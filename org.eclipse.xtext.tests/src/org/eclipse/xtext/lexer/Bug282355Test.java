@@ -8,8 +8,8 @@
 package org.eclipse.xtext.lexer;
 
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.lexer.backtrackingTestLanguage.Model;
+import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.junit.Test;
 
 /**

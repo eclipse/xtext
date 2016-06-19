@@ -9,9 +9,9 @@ package org.eclipse.xtext.parser.unorderedGroups;
 
 import java.util.List;
 
-import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.Model;
 import org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.NestedModel;
+import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.junit.Test;
 
 /**

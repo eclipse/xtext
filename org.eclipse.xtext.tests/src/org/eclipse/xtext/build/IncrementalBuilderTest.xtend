@@ -13,11 +13,11 @@ import org.eclipse.core.runtime.OperationCanceledException
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtext.build.BuildRequest.IPostValidationCallback
 import org.eclipse.xtext.index.IndexTestLanguageInjectorProvider
-import org.eclipse.xtext.junit4.InjectWith
-import org.eclipse.xtext.junit4.XtextRunner
-import org.eclipse.xtext.junit4.build.AbstractIncrementalBuilderTest
 import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.eclipse.xtext.util.CancelIndicator
+import org.eclipse.xtext.testing.XtextRunner
+import org.eclipse.xtext.testing.InjectWith
+import org.eclipse.xtext.testing.builder.AbstractIncrementalBuilderTest
 import org.eclipse.xtext.validation.Issue
 import org.junit.Test
 import org.junit.runner.RunWith

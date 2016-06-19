@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.xtext.tests/src-gen" editDirectory="/org.eclipse.xtext.tests.edit/src"
+    editorDirectory="/org.eclipse.xtext.tests.editor/src" modelPluginID="org.eclipse.xtext.tests"
+    forceOverwrite="true" modelName="Bug385636" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    complianceLevel="6.0" copyrightFields="false" editPluginID="org.eclipse.xtext.tests.edit"
+    editorPluginID="org.eclipse.xtext.tests.editor" runtimeVersion="2.9" usedGenPackages="platform:/resource/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
+  <genPackages prefix="Bug385636" basePackage="org.eclipse.xtext.resource" disposableProviderFactory="true"
+      ecorePackage="Bug385636.ecore#/">
+    <genClasses ecoreClass="Bug385636.ecore#//Program">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug385636.ecore#//Program/define"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug385636.ecore#//Program/statements"/>
+    </genClasses>
+    <genClasses ecoreClass="Bug385636.ecore#//DefineVariables">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug385636.ecore#//DefineVariables/variables"/>
+    </genClasses>
+    <genClasses ecoreClass="Bug385636.ecore#//DefineVariable">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug385636.ecore#//DefineVariable/name"/>
+    </genClasses>
+    <genClasses ecoreClass="Bug385636.ecore#//NVariableAccess">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Bug385636.ecore#//NVariableAccess/variable"/>
+    </genClasses>
+    <genClasses ecoreClass="Bug385636.ecore#//Expression"/>
+    <genClasses ecoreClass="Bug385636.ecore#//Expression_VariableName">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug385636.ecore#//Expression_VariableName/variable"/>
+    </genClasses>
+    <genClasses ecoreClass="Bug385636.ecore#//Expression_Larger_Equal">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug385636.ecore#//Expression_Larger_Equal/left"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug385636.ecore#//Expression_Larger_Equal/right"/>
+    </genClasses>
+    <genClasses ecoreClass="Bug385636.ecore#//Expression_Smaller">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug385636.ecore#//Expression_Smaller/left"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug385636.ecore#//Expression_Smaller/right"/>
+    </genClasses>
+    <genClasses ecoreClass="Bug385636.ecore#//Expression_Smaller_Equal">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug385636.ecore#//Expression_Smaller_Equal/left"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug385636.ecore#//Expression_Smaller_Equal/right"/>
+    </genClasses>
+    <genClasses ecoreClass="Bug385636.ecore#//Expression_Equal">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug385636.ecore#//Expression_Equal/left"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug385636.ecore#//Expression_Equal/right"/>
+    </genClasses>
+    <genClasses ecoreClass="Bug385636.ecore#//Expression_Not_Equal">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug385636.ecore#//Expression_Not_Equal/left"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug385636.ecore#//Expression_Not_Equal/right"/>
+    </genClasses>
+    <genClasses ecoreClass="Bug385636.ecore#//Expression_Not_Less">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug385636.ecore#//Expression_Not_Less/left"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug385636.ecore#//Expression_Not_Less/right"/>
+    </genClasses>
+    <genClasses ecoreClass="Bug385636.ecore#//Expression_Not_Greater">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug385636.ecore#//Expression_Not_Greater/left"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug385636.ecore#//Expression_Not_Greater/right"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

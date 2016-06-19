@@ -17,24 +17,24 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({
 	XtextPlatformResourceURIHandlerTest.class,
-	FilesInSameSourceFolderTest.class,
-	FilesInDifferentProjectSourceFoldersTest.class,
-	FilesInDifferentProjectModelTest.class,
-	FilesInSourceAndModelSameProjectTest.class,
-	FilesInSourceAndModelDifferentProjectsTest.class,
-	FilesInSourceMavenAndModelDifferentProjectsTest.class,
-	FilesInModelAndSourceDifferentProjectsTest.class,
-	FilesInModelAndSourceMavenDifferentProjectsTest.class,
-	FileInSourceAndPackagedProjectTest.class,
-	FileInSourceMavenAndPackagedProjectTest.class,
-	LoadedByClasspathFromModelFolderURITest.class,
-	LoadedByClasspathFromSourceFolderTest.class,
-	LoadedByClasspathFromMavenStructureTest.class,
-	LoadedByClasspathBothFromMavenStructureTest.class,
-	LoadedByClasspathFromModelFolderURITest2.class,
-	LoadedByClasspathFromSourceFolderTest2.class,
-	LoadedByClasspathFromMavenStructureTest2.class,
-	LoadedByClasspathBothFromMavenStructureTest2.class
+//	FilesInSameSourceFolderTest.class,
+//	FilesInDifferentProjectSourceFoldersTest.class,
+//	FilesInDifferentProjectModelTest.class,
+//	FilesInSourceAndModelSameProjectTest.class,
+//	FilesInSourceAndModelDifferentProjectsTest.class,
+//	FilesInSourceMavenAndModelDifferentProjectsTest.class,
+//	FilesInModelAndSourceDifferentProjectsTest.class,
+//	FilesInModelAndSourceMavenDifferentProjectsTest.class,
+//	FileInSourceAndPackagedProjectTest.class,
+//	FileInSourceMavenAndPackagedProjectTest.class,
+//	LoadedByClasspathFromModelFolderURITest.class,
+//	LoadedByClasspathFromSourceFolderTest.class,
+//	LoadedByClasspathFromMavenStructureTest.class,
+//	LoadedByClasspathBothFromMavenStructureTest.class,
+//	LoadedByClasspathFromModelFolderURITest2.class,
+//	LoadedByClasspathFromSourceFolderTest2.class,
+//	LoadedByClasspathFromMavenStructureTest2.class,
+//	LoadedByClasspathBothFromMavenStructureTest2.class
 })
 public class URIHandlerSuite {
 }

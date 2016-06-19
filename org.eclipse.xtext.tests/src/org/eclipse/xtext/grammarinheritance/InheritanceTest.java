@@ -20,8 +20,8 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.grammarinheritance.ametamodel.AmetamodelPackage;
 import org.eclipse.xtext.grammarinheritance.foo.ConcreteParserRule;
-import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.junit.Test;
 
 import com.google.common.base.Function;

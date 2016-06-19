@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="sequencertest" nsURI="http://www.eclipse.org/2009/tmf/xtext/sequencertestlanguage"
+    nsPrefix="sequencertest">
+  <eClassifiers xsi:type="ecore:EClass" name="Model">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="x1" eType="#//SimpleGroup"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="x2" eType="#//SimpleAlternative"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="x3" eType="#//SimpleMultiplicities"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="x4" eType="#//GroupMultiplicities"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="x5" eType="#//AlternativeMultiplicities"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="x6" eType="#//List1" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="x7" eType="#//List2" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="x8" eType="#//AltList1"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="x9" eType="#//AltList2"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="x10" eType="ecore:EClass platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EObject"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="x11" eType="ecore:EClass platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EObject"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="x12" eType="ecore:EClass platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EObject"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="x13" eType="#//SingleEnum"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="x14" eType="#//SingleCrossReference"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="x15" eType="#//SingleContainmentReference"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="x19" eType="#//DependentAlternative1"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="x20" eType="#//DependentAlternative2"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="x21" eType="#//Optional"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="x22" eType="#//Float" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="x23" eType="#//UnorderedAlternative"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="x24" eType="#//UnorderedGroup"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="x25" eType="#//UnorderedGroupOptional"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="x26" eType="#//UnorderedGroupBoolean"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="x27" eType="#//Complex1"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="x28" eType="#//OptionalDouble"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="x29" eType="#//NullValue"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="x30" eType="#//NullValue"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="x31" eType="#//NullCrossRef"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="x32" eType="#//NullCrossRef"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="x33" eType="#//FragmentCallerType"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="x34" eType="#//ParameterCaller"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="x35" eType="#//ParameterDelegation"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SimpleGroup">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val1" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val2" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SimpleAlternative">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val1" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val2" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SimpleMultiplicities">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val1" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val2" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val3" unique="false" upperBound="-1"
+        eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val4" unique="false" upperBound="-1"
+        eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GroupMultiplicities">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val1" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val2" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val3" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val4" unique="false" upperBound="-1"
+        eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val5" unique="false" upperBound="-1"
+        eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val6" unique="false" upperBound="-1"
+        eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val7" unique="false" upperBound="-1"
+        eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AlternativeMultiplicities">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val2" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val3" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val4" unique="false" upperBound="-1"
+        eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val5" unique="false" upperBound="-1"
+        eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val6" unique="false" upperBound="-1"
+        eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val7" unique="false" upperBound="-1"
+        eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="List1">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val1" unique="false" upperBound="-1"
+        eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="List2">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val1" unique="false" upperBound="-1"
+        eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AltList1">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val1" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val2" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val3" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val4" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AltList2">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val1" unique="false" upperBound="-1"
+        eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val2" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val3" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SingleKeywords">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SingleKeywordsOrID">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SingleTerminals">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SingleEnum">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val" eType="#//DefEnum"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="DefEnum">
+    <eLiterals name="kw1" literal="kw1"/>
+    <eLiterals name="kw2" value="1" literal="kw2"/>
+    <eLiterals name="kw3" value="2" literal="kw3"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SingleCrossReference">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ref" eType="#//SingleCrossReference"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SingleContainmentReference">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="child" eType="ecore:EClass platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EObject"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SingleContainmentReferenceChild1">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SingleContainmentReferenceChild2">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SingleContainmentReferenceChild3">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MultiKeywords">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val" unique="false" upperBound="-1"
+        eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MultiKeywordsOrID">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val" unique="false" upperBound="-1"
+        eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MultiTerminals">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val" unique="false" upperBound="-1"
+        eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DependentAlternative1">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="flag" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DependentAlternative2">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val" unique="false" upperBound="-1"
+        eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="flag" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Optional">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="int0" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="int1" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="int2" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Float"/>
+  <eClassifiers xsi:type="ecore:EClass" name="UnorderedAlternative">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val1" unique="false" upperBound="-1"
+        eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val2" unique="false" upperBound="-1"
+        eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="val3" upperBound="-1" eType="#//UnorderedAlternativeVal"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="val4" upperBound="-1" eType="#//UnorderedAlternativeValDelegate"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UnorderedAlternativeVal">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UnorderedAlternativeValDelegate"/>
+  <eClassifiers xsi:type="ecore:EClass" name="UnorderedAlternativeVal2" eSuperTypes="#//UnorderedAlternativeValDelegate">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UnorderedGroup">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val1" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val2" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="val3" eType="#//UnorderedGroupVal"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="val4" eType="#//UnorderedGroupValDelegate"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UnorderedGroupVal">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UnorderedGroupValDelegate"/>
+  <eClassifiers xsi:type="ecore:EClass" name="UnorderedGroupVal2" eSuperTypes="#//UnorderedGroupValDelegate">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UnorderedGroupOptional">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val1" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="va2" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val3" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UnorderedGroupBoolean">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val1" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val2" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val3" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Complex1">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val1" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val2" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val3" unique="false" upperBound="-1"
+        eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val4" unique="false" upperBound="-1"
+        eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val5" unique="false" upperBound="-1"
+        eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val6" unique="false" upperBound="-1"
+        eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OptionalDouble">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="double0" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EDouble"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="double1" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EDouble"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="double2" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EDouble"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NullValue">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="foo" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NullCrossRef">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ref" eType="ecore:EClass platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="foo" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FragmentCallerType">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val1" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="fragVal" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ParameterCaller">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="p" eType="#//Parameterized"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Parameterized">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="v1" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="v2" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="v3" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ParameterDelegation">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="p" eType="#//Delegation"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Delegation">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="p" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="np" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DelegationA" eSuperTypes="#//Delegation">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//Delegation"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rc2" eType="#//Delegation"
+        containment="true"/>
+  </eClassifiers>
+</ecore:EPackage>

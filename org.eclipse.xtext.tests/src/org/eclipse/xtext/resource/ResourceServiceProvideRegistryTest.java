@@ -11,8 +11,8 @@ import static org.junit.Assert.*;
 
 import org.apache.log4j.Level;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.xtext.junit4.logging.LoggingTester;
 import org.eclipse.xtext.resource.impl.ResourceServiceProviderRegistryImpl;
+import org.eclipse.xtext.testing.logging.LoggingTester;
 import org.junit.Test;
 
 /**

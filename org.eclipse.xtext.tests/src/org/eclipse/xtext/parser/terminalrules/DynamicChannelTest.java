@@ -10,9 +10,9 @@ package org.eclipse.xtext.parser.terminalrules;
 import java.io.StringReader;
 import java.util.List;
 
-import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.parser.IParseResult;
+import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.junit.Test;
 
 import com.google.common.collect.Iterables;

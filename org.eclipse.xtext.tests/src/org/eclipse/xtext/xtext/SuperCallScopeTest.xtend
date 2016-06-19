@@ -11,9 +11,9 @@ import org.eclipse.xtext.AbstractRule
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.GrammarUtil
 import org.eclipse.xtext.XtextStandaloneSetup
-import org.eclipse.xtext.junit4.AbstractXtextTests
 import org.eclipse.xtext.naming.QualifiedName
 import org.eclipse.xtext.resource.IEObjectDescription
+import org.eclipse.xtext.tests.AbstractXtextTests
 import org.junit.Test
 
 /**

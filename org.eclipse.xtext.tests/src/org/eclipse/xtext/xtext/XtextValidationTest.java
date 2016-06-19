@@ -23,8 +23,11 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.emf.ecore.util.EcoreValidator;
+import org.eclipse.emf.mwe.utils.Mapping;
+import org.eclipse.emf.mwe.utils.StandaloneSetup;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
@@ -337,6 +340,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 	
 	@Test
 	public void testBug322875_02() throws Exception {
+		URIConverter.URI_MAP.put(URI.createURI("platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore"), URI.createURI(getClass().getResource("/model/Ecore.ecore").toExternalForm()));
 		String testGrammar = "grammar foo.Bar with org.eclipse.xtext.common.Terminals\n " +
 				" import 'platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore'  " +
 				"Model returns EClass: name=ID;";

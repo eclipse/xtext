@@ -1,17 +1,52 @@
+configurations {
+	mwe2 {
+		extendsFrom compile
+	}
+}
+
+repositories {
+   flatDir {
+       dirs 'lib'
+   }
+}
+
 dependencies {
 	compile project(':org.eclipse.xtext.testing')
 	compile project(':org.eclipse.xtext.xtext.generator')
 	compile project(':org.eclipse.xtext.xtext.wizard')
 	compile 'junit:junit:4.12'
 	
+	compile "org.eclipse.emf:org.eclipse.emf.common:$versions.emfCommon"
+	compile "org.eclipse.emf:org.eclipse.emf.ecore.xmi:$versions.emfEcore"
+	
+   compile name: 'simple'
+	
 	// TODO eliminate all following dependencies
+	//compile ":org.eclipse.xtext.testlanguages"
 	compile project(':org.eclipse.xtext.testlanguages')
-	compile "org.eclipse.xtext:org.eclipse.xtext.junit4:$versions.xtext"
-	compile "org.eclipse.xtext:org.eclipse.xtext.generator:$versions.xtext"
+	//compile "org.eclipse.xtext:org.eclipse.xtext.junit4:$versions.xtext"
 	compile "org.eclipse.xpand:org.eclipse.xpand:$versions.xpand"
+	
+	//XXX compile/mwe2 "org.eclipse.xtext:org.eclipse.xtext.generator:$versions.xtext"
+	//XXX mwe2 "org.eclipse.emf:org.eclipse.emf.mwe2.launch:$versions.emfMwe2"
+	//XXX mwe2 "org.eclipse.xtext:org.eclipse.xtext.xtext.generator:$versions.xtext"
+	//XXX mwe2 "org.eclipse.xtext:org.eclipse.xtext.ecore:$versions.xtext"
 }
+
+eclipse.classpath.plusConfigurations += [configurations.mwe2]
 
 sourceSets.test.java {
 	srcDir 'src-gen2'
 	srcDir 'suites'
+}
+
+sourceSets {
+	test.resources {
+		srcDir 'src-gen2'
+		srcDir 'suites'
+	}
+}
+
+test {
+	exclude 'org.eclipse.xtext.serializer.contextFinderTest.NestedTypeRecursiveTest.class'
 }

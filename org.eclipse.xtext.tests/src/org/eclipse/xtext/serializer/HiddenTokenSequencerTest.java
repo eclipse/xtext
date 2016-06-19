@@ -14,8 +14,6 @@ import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.grammaranalysis.impl.GrammarElementTitleSwitch;
-import org.eclipse.xtext.junit4.AbstractXtextTests;
-import org.eclipse.xtext.junit4.serializer.DebugSequenceAcceptor;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
@@ -28,6 +26,8 @@ import org.eclipse.xtext.serializer.sequencer.IHiddenTokenSequencer;
 import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer;
 import org.eclipse.xtext.serializer.sequencer.NodeModelSemanticSequencer;
+import org.eclipse.xtext.testing.serializer.DebugSequenceAcceptor;
+import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.junit.Ignore;
 import org.junit.Test;
 

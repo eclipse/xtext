@@ -17,10 +17,15 @@ import java.io.StringWriter;
 import java.util.Collections;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
+import org.eclipse.emf.ecore.xml.type.XMLTypePackage;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.testing.GlobalRegistries;
+import org.eclipse.xtext.testing.GlobalRegistries.GlobalStateMemento;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -55,9 +60,17 @@ public class SrcSegmentsInUrisAreNotRemovedTests {
 			+ "    </eStructuralFeatures>\n" + "  </eClassifiers>\n"
 			+ "</ecore:EPackage>";
 
+	private GlobalStateMemento globalStateMemento;
+
+	@After
+	public void tearDown() {
+		globalStateMemento.restoreGlobalState();
+	}
+	
 	@Before
 	public void setUp() throws Exception {
-
+		globalStateMemento = GlobalRegistries.makeCopyOfGlobalState();
+		EPackage.Registry.INSTANCE.put(XMLTypePackage.eNS_URI, XMLTypePackage.eINSTANCE);
 		EcoreResourceFactoryImpl resFactory = new EcoreResourceFactoryImpl();
 		set.getResourceFactoryRegistry().getExtensionToFactoryMap()
 				.put("ecore", resFactory);

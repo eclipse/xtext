@@ -17,7 +17,9 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.eclipse.emf.ecore.xml.namespace.XMLNamespacePackage;
+import org.eclipse.xtext.tests.AbstractXtextTests;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -32,6 +34,12 @@ public class ClassloaderClasspathUriResolverTest extends AbstractXtextTests {
 		_resolver = new ClassloaderClasspathUriResolver();
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				"ecore", new XMIResourceFactoryImpl());
+	}
+	
+	@Override
+	@After
+	public void tearDown() throws Exception {
+		super.tearDown();
 	}
 
 	@Test public void testClasspathUriForFile() {
@@ -73,6 +81,7 @@ public class ClassloaderClasspathUriResolverTest extends AbstractXtextTests {
 		URI normalizedUri = _resolver.resolve(getClass().getClassLoader(), classpathUri);
 		assertEquals(expectedUri, normalizedUri.toString());
 		ResourceSet resourceSet = new ResourceSetImpl();
+		System.out.println(normalizedUri);
 		Resource resource = resourceSet.getResource(normalizedUri, true);
 		assertNotNull("Classpth URI ot registered", resource);
 		assertTrue("Resource not loaded", resource.isLoaded());
@@ -86,4 +95,5 @@ public class ClassloaderClasspathUriResolverTest extends AbstractXtextTests {
 		URI uri = resolver.findResourceOnClasspath(loader, URI.createURI("classpath:/pack/ClassLoaderClasspathUriResolverTest.txt"));
 		assertNotNull(uri);
 	}
+
 }

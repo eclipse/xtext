@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.xtext.tests/src-gen" editDirectory="/org.eclipse.xtext.tests.edit/src"
+    editorDirectory="/org.eclipse.xtext.tests.editor/src" modelPluginID="org.eclipse.xtext.tests"
+    forceOverwrite="true" modelName="ContextFinderTestLanguage" updateClasspath="false"
+    rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" complianceLevel="6.0"
+    copyrightFields="false" editPluginID="org.eclipse.xtext.tests.edit" editorPluginID="org.eclipse.xtext.tests.editor"
+    runtimeVersion="2.9" usedGenPackages="platform:/resource/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
+  <genPackages prefix="ContextFinderTest" basePackage="org.eclipse.xtext.serializer"
+      disposableProviderFactory="true" ecorePackage="ContextFinderTestLanguage.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="ContextFinderTestLanguage.ecore#//ValueExclusionTestEn">
+      <genEnumLiterals ecoreEnumLiteral="ContextFinderTestLanguage.ecore#//ValueExclusionTestEn/lit0"/>
+      <genEnumLiterals ecoreEnumLiteral="ContextFinderTestLanguage.ecore#//ValueExclusionTestEn/lit1"/>
+      <genEnumLiterals ecoreEnumLiteral="ContextFinderTestLanguage.ecore#//ValueExclusionTestEn/lit2"/>
+    </genEnums>
+    <genClasses ecoreClass="ContextFinderTestLanguage.ecore#//Model">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ContextFinderTestLanguage.ecore#//Model/model"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ContextFinderTestLanguage.ecore#//Model/attributeExclusion"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ContextFinderTestLanguage.ecore#//Model/nestedType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ContextFinderTestLanguage.ecore#//Model/nestedTypeRecursiveTest2"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ContextFinderTestLanguage.ecore#//Model/parentRef"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ContextFinderTestLanguage.ecore#//Model/quantityExclusion"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ContextFinderTestLanguage.ecore#//Model/valueExclusion"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ContextFinderTestLanguage.ecore#//Model/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ContextFinderTestLanguage.ecore#//Model/nodeExclusion"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ContextFinderTestLanguage.ecore#//Model/nodeExclusionList"/>
+    </genClasses>
+    <genClasses ecoreClass="ContextFinderTestLanguage.ecore#//AttributeExclusionTest">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ContextFinderTestLanguage.ecore#//AttributeExclusionTest/attr1"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ContextFinderTestLanguage.ecore#//AttributeExclusionTest/attr2"/>
+    </genClasses>
+    <genClasses ecoreClass="ContextFinderTestLanguage.ecore#//NestedTypeTest">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ContextFinderTestLanguage.ecore#//NestedTypeTest/nested"/>
+    </genClasses>
+    <genClasses ecoreClass="ContextFinderTestLanguage.ecore#//NestedTypeChild">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ContextFinderTestLanguage.ecore#//NestedTypeChild/val"/>
+    </genClasses>
+    <genClasses ecoreClass="ContextFinderTestLanguage.ecore#//NestedTypeChild1"/>
+    <genClasses ecoreClass="ContextFinderTestLanguage.ecore#//NestedTypeChild2"/>
+    <genClasses ecoreClass="ContextFinderTestLanguage.ecore#//NestedTypeRecursiveTest">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ContextFinderTestLanguage.ecore#//NestedTypeRecursiveTest/left"/>
+    </genClasses>
+    <genClasses ecoreClass="ContextFinderTestLanguage.ecore#//ParentRefTest1">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ContextFinderTestLanguage.ecore#//ParentRefTest1/child1"/>
+    </genClasses>
+    <genClasses ecoreClass="ContextFinderTestLanguage.ecore#//ParentRefTest2">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ContextFinderTestLanguage.ecore#//ParentRefTest2/child2"/>
+    </genClasses>
+    <genClasses ecoreClass="ContextFinderTestLanguage.ecore#//ParentRefTestChild">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ContextFinderTestLanguage.ecore#//ParentRefTestChild/child"/>
+    </genClasses>
+    <genClasses ecoreClass="ContextFinderTestLanguage.ecore#//QuantityExclusionTest">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ContextFinderTestLanguage.ecore#//QuantityExclusionTest/attr1"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ContextFinderTestLanguage.ecore#//QuantityExclusionTest/attr2"/>
+    </genClasses>
+    <genClasses ecoreClass="ContextFinderTestLanguage.ecore#//ValueExclusionTest">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ContextFinderTestLanguage.ecore#//ValueExclusionTest/val"/>
+    </genClasses>
+    <genClasses ecoreClass="ContextFinderTestLanguage.ecore#//NodeExclusion">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ContextFinderTestLanguage.ecore#//NodeExclusion/ref"/>
+    </genClasses>
+    <genClasses ecoreClass="ContextFinderTestLanguage.ecore#//NodeExclusionList">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ContextFinderTestLanguage.ecore#//NodeExclusionList/ref"/>
+    </genClasses>
+    <genClasses ecoreClass="ContextFinderTestLanguage.ecore#//NestedTypeRecursiveTest1"/>
+    <genClasses ecoreClass="ContextFinderTestLanguage.ecore#//NestedTypeRecursiveTest2"/>
+  </genPackages>
+</genmodel:GenModel>

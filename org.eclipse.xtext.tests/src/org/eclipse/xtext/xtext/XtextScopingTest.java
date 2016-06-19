@@ -18,10 +18,10 @@ import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.XtextStandaloneSetup;
-import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer.ICrossReferenceSerializer;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.services.XtextGrammarAccess;
+import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.junit.Test;
 
 /**

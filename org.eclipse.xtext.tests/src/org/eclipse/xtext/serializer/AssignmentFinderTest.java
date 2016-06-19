@@ -14,8 +14,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.grammaranalysis.impl.GrammarElementTitleSwitch;
-import org.eclipse.xtext.junit4.AbstractXtextTests;
-import org.eclipse.xtext.junit4.util.ParseHelper;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.serializer.analysis.GrammarElementDeclarationOrder;
 import org.eclipse.xtext.serializer.analysis.SerializationContext;
@@ -42,6 +40,8 @@ import org.eclipse.xtext.serializer.services.AssignmentFinderTestLanguageGrammar
 import org.eclipse.xtext.serializer.services.AssignmentFinderTestLanguageGrammarAccess.MixedValueElements;
 import org.eclipse.xtext.serializer.services.AssignmentFinderTestLanguageGrammarAccess.TerminalBoolElements;
 import org.eclipse.xtext.serializer.services.AssignmentFinderTestLanguageGrammarAccess.TerminalValElements;
+import org.eclipse.xtext.testing.util.ParseHelper;
+import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.junit.Test;
 
 import com.google.common.base.Joiner;

@@ -12,12 +12,12 @@ import java.util.HashSet;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.linking.ImportUriTestLanguageStandaloneSetup;
 import org.eclipse.xtext.linking.importedURI.ImportedURIPackage;
 import org.eclipse.xtext.linking.importedURI.Main;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.junit.Test;
 
 import com.google.common.collect.Sets;

@@ -10,10 +10,10 @@ package org.eclipse.xtext.parsetree;
 
 import java.util.List;
 
-import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.testlanguages.OptionalEmptyTestLanguageStandaloneSetup;
+import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.junit.Test;
 
 import com.google.common.base.Predicate;

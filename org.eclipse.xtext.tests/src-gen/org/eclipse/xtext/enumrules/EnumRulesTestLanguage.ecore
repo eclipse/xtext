@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="enumRulesTestLanguage" nsURI="http://www.eclipse.org/2009/tmf/xtext/EnumRulesTest"
+    nsPrefix="enumRulesTestLanguage">
+  <eClassifiers xsi:type="ecore:EClass" name="Model">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="existing" eType="ecore:EEnum ../../../../../src/org/eclipse/xtext/enumrules/enums.ecore#//ExistingEnum"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="generated" eType="#//GeneratedEnum"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="GeneratedEnum">
+    <eLiterals name="SameName" literal="SameName"/>
+    <eLiterals name="DifferentName" value="1" literal="DifferentLiteral"/>
+  </eClassifiers>
+</ecore:EPackage>

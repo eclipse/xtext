@@ -13,9 +13,6 @@ import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.IGrammarAccess;
-import org.eclipse.xtext.junit4.AbstractXtextTests;
-import org.eclipse.xtext.junit4.logging.LoggingTester;
-import org.eclipse.xtext.junit4.logging.LoggingTester.LogCapture;
 import org.eclipse.xtext.linking.impl.DefaultLinkingService;
 import org.eclipse.xtext.linking.impl.IllegalNodeException;
 import org.eclipse.xtext.linking.langATestLanguage.LangATestLanguageFactory;
@@ -35,6 +32,9 @@ import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer.ICrossReferenceSeri
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.service.SingletonBinding;
+import org.eclipse.xtext.testing.logging.LoggingTester;
+import org.eclipse.xtext.testing.logging.LoggingTester.LogCapture;
+import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.junit.Test;
 
 import com.google.common.collect.Lists;

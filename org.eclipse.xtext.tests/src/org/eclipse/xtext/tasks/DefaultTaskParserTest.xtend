@@ -8,7 +8,7 @@
 package org.eclipse.xtext.tasks
 
 import java.util.List
-import org.eclipse.xtext.junit4.internal.LineDelimiters
+import org.eclipse.xtext.tests.LineDelimiters
 import org.junit.Before
 import org.junit.Test
 

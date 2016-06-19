@@ -18,8 +18,8 @@ import org.eclipse.emf.ecore.resource.URIHandler;
 import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextStandaloneSetup;
-import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.resource.IExternalContentSupport.IExternalContentProvider;
+import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.junit.Test;
 
 import com.google.common.collect.Maps;

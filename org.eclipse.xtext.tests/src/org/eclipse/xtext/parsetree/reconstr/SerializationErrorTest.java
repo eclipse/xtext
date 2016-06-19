@@ -11,7 +11,6 @@ package org.eclipse.xtext.parsetree.reconstr;
 import java.io.IOException;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor.TreeConstructionReport;
 import org.eclipse.xtext.parsetree.reconstr.impl.TokenStringBuffer;
 import org.eclipse.xtext.parsetree.reconstr.serializationerror.Indent;
@@ -20,6 +19,7 @@ import org.eclipse.xtext.parsetree.reconstr.serializationerror.TwoOptions;
 import org.eclipse.xtext.parsetree.reconstr.serializationerror.TwoRequired;
 import org.eclipse.xtext.resource.SaveOptions;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.junit.Test;
 
 public class SerializationErrorTest extends AbstractXtextTests {

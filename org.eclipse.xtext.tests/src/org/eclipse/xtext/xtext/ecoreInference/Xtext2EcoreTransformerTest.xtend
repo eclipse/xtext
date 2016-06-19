@@ -32,18 +32,20 @@ import org.eclipse.xtext.TypeRef
 import org.eclipse.xtext.XtextStandaloneSetup
 import org.eclipse.xtext.diagnostics.ExceptionDiagnostic
 import org.eclipse.xtext.diagnostics.IDiagnosticConsumer
-import org.eclipse.xtext.ecore.EcoreSupportStandaloneSetup
-import org.eclipse.xtext.junit4.AbstractXtextTests
 import org.eclipse.xtext.linking.impl.Linker
 import org.eclipse.xtext.linking.impl.LinkingDiagnosticMessageProvider
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.resource.XtextResourceSet
+import org.eclipse.xtext.tests.AbstractXtextTests
 import org.eclipse.xtext.tests.TestErrorAcceptor
 import org.eclipse.xtext.util.OnChangeEvictingCache
 import org.eclipse.xtext.xtext.XtextLinker
 import org.eclipse.xtext.xtext.ecoreInference.Xtext2EcoreTransformerTest.MyErrorAcceptor
 import org.junit.Test
 import org.eclipse.xtext.xtext.XtextLinker.PackageRemover
+import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl
+import org.eclipse.emf.ecore.xmi.XMLResource
+import org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
@@ -86,7 +88,6 @@ class Xtext2EcoreTransformerTest extends AbstractXtextTests {
 	override void setUp() throws Exception {
 		super.setUp()
 		errorAcceptorMock = new TestErrorAcceptor()
-		EcoreSupportStandaloneSetup.setup()
 		with(XtextStandaloneSetup)
 	}
 
@@ -1717,86 +1718,6 @@ class Xtext2EcoreTransformerTest extends AbstractXtextTests {
 		getResourceFromString(grammarAsString)
 	}
 
-	@Test def void testMultiInheritance_01() throws Exception {
-		val grammarAsString = '''
-			grammar test with org.eclipse.xtext.enumrules.EnumRulesTestLanguage
-			import 'http://www.eclipse.org/xtext/common/JavaVMTypes' as types
-			generate myDsl "http://example.xtext.org/MyDsl" as mydsl
-			Array returns mydsl::Array: componentType=ComponentType componentType=DeclaredType;
-			DeclaredType returns types::JvmDeclaredType: members+=DeclaredType;
-			ComponentType returns types::JvmComponentType: 'ignore';
-		'''
-		val resource = getResourceFromString(grammarAsString)
-		val grammar = resource.contents.head as Grammar
-		var array = grammar.rules.head.type.classifier as EClass
-		assertEquals("JvmComponentType", array.feature("componentType").EType.name)
-	}
-
-	@Test def void testMultiInheritance_02() throws Exception {
-		val grammarAsString = '''
-			grammar test with org.eclipse.xtext.enumrules.EnumRulesTestLanguage
-			import 'http://www.eclipse.org/xtext/common/JavaVMTypes' as types
-			generate myDsl "http://example.xtext.org/MyDsl" as mydsl
-			Array returns mydsl::Array: componentType=DeclaredType componentType=ComponentType;
-			DeclaredType returns types::JvmDeclaredType: members+=DeclaredType;
-			ComponentType returns types::JvmComponentType: 'ignore';
-		'''
-		val resource = getResourceFromString(grammarAsString)
-		val grammar = resource.contents.head as Grammar
-		var array = grammar.rules.head.type.classifier as EClass
-		assertEquals("JvmComponentType", array.feature("componentType").EType.name)
-	}
-
-	@Test def void testBug316610_01() throws Exception {
-		val grammarAsString = '''
-			grammar test with org.eclipse.xtext.enumrules.EnumRulesTestLanguage
-			import 'http://www.eclipse.org/xtext/common/JavaVMTypes' as types
-			DeclaredType returns types::JvmDeclaredType: superTypes+=DeclaredType;'''
-		val resource = getResourceFromStringAndExpect(grammarAsString, 1)
-		assertTrue(resource.errors.head.getMessage().contains("JvmTypeReference"))
-	}
-
-	@Test def void testBug316610_02() throws Exception {
-		val grammarAsString = '''
-			grammar test with org.eclipse.xtext.enumrules.EnumRulesTestLanguage
-			import 'http://www.eclipse.org/xtext/common/JavaVMTypes' as types
-			Array returns types::JvmGenericArrayTypeReference: componentType=STRING;'''
-		val resource = getResourceFromStringAndExpect(grammarAsString, 1)
-		assertTrue(resource.errors.head.getMessage().contains("JvmTypeReference"))
-	}
-
-	@Test def void testBug316610_03() throws Exception {
-		val grammarAsString = '''
-			grammar test with org.eclipse.xtext.enumrules.EnumRulesTestLanguage
-			import 'http://www.eclipse.org/xtext/common/JavaVMTypes' as types
-			DeclaredType returns types::JvmDeclaredType: superTypes=[types::JvmTypeReference];'''
-		val resource = getResourceFromStringAndExpect(grammarAsString, 1)
-		assertTrue(resource.errors.head.getMessage().contains(
-			"cardinality"))
-	}
-
-	@Test def void testBug316610_04() throws Exception {
-		val grammarAsString = '''
-			grammar test with org.eclipse.xtext.enumrules.EnumRulesTestLanguage
-			import 'http://www.eclipse.org/xtext/common/JavaVMTypes' as types
-			DeclaredType returns types::JvmDeclaredType: superTypes+=[types::JvmTypeReference];
-		'''
-		val resource = getResourceFromStringAndExpect(grammarAsString, 1)
-		assertTrue(resource.errors.head.getMessage().contains("containment"))
-	}
-
-	@Test def void testBug346035_01() throws Exception {
-		val grammarAsString = '''
-			grammar test with org.eclipse.xtext.common.Terminals
-			import 'platform:/resource/org.eclipse.xtext.xbase/model/Xbase.ecore' as xbase
-			generate myDsl 'uri'
-			Model: elements+=Element*;
-			Element returns xbase::XExpression : {Element} 'Hello';
-			terminal ID : '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
-		'''
-		getResourceFromString(grammarAsString)
-	}
-
 	@Test def void testBug346685_a01() throws Exception {
 		var String grammar = '''grammar test with org.eclipse.xtext.common.Terminals generate test 'http://test'«»'''
 		grammar += " RuleA returns TypeA: RuleB ({TypeC.x=current} 'x' | {TypeD.x=current} 'y')? name+=STRING;"
@@ -2149,33 +2070,6 @@ class Xtext2EcoreTransformerTest extends AbstractXtextTests {
 		assertNotNull(typeD.feature("b"))
 		assertNotNull(typeD.feature("c"))
 		assertEquals(3, typeD.features.size)
-	}
-
-	@Test def void testEcoreReference_01() throws Exception {
-		val resourceSet = new XtextResourceSet()
-		resourceSet.setClasspathURIContext(getClass())
-		resourceSet.getURIConverter().getURIMap().put(URI.createURI(
-			"platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore"), URI.createURI(
-			"platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore"))
-		assertFalse(
-			resourceSet.getResource(URI.createURI("platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore"), true).
-				contents.isEmpty)
-		assertFalse(
-			resourceSet.getResource(URI.createURI(
-				"platform:/plugin/org.eclipse.xtext.tests/src/org/eclipse/xtext/metamodelreferencing/tests/EcorePerNsURI.ecore"),
-				true).contents.isEmpty)
-		assertFalse(
-			resourceSet.getResource(URI.createURI(
-				"platform:/plugin/org.eclipse.xtext.tests/src/org/eclipse/xtext/metamodelreferencing/tests/EcorePerPlatformResource.ecore"),
-				true).contents.isEmpty)
-		assertFalse(
-			resourceSet.getResource(URI.createURI(
-				"platform:/plugin/org.eclipse.xtext.tests/src/org/eclipse/xtext/metamodelreferencing/tests/EcorePerPlatformPlugin.ecore"),
-				true).contents.isEmpty)
-		val resource = resourceSet.getResource(URI.createURI(
-			"classpath:/org/eclipse/xtext/metamodelreferencing/tests/EcoreReferenceTestLanguage.xtext"),
-			true) as XtextResource
-		assertTrue(Joiner.on("\n").join(resource.errors), resource.errors.isEmpty)
 	}
 
 	@Test def void testBug413171_01() throws Exception {

@@ -11,13 +11,13 @@ import com.google.inject.Inject
 import org.eclipse.xtext.formatting2.internal.formattertestlanguage.IDList
 import org.eclipse.xtext.formatting2.internal.formattertestlanguage.KWList
 import org.eclipse.xtext.formatting2.internal.services.FormatterTestLanguageGrammarAccess
-import org.eclipse.xtext.junit4.InjectWith
-import org.eclipse.xtext.junit4.XtextRunner
+import org.eclipse.xtext.testing.XtextRunner
+import org.eclipse.xtext.testing.InjectWith
+import org.eclipse.xtext.util.TextRegion
 import org.junit.Test
 import org.junit.runner.RunWith
 
 import static org.eclipse.xtext.formatting2.FormatterPreferenceKeys.*
-import org.eclipse.xtext.util.TextRegion
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API

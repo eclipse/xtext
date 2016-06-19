@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.xtext.tests/src-gen" editDirectory="/org.eclipse.xtext.tests.edit/src"
+    editorDirectory="/org.eclipse.xtext.tests.editor/src" modelPluginID="org.eclipse.xtext.tests"
+    forceOverwrite="true" modelName="SyntacticSequencerTestLanguage" updateClasspath="false"
+    rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" complianceLevel="6.0"
+    copyrightFields="false" editPluginID="org.eclipse.xtext.tests.edit" editorPluginID="org.eclipse.xtext.tests.editor"
+    runtimeVersion="2.9" usedGenPackages="platform:/resource/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
+  <genPackages prefix="Syntacticsequencertest" basePackage="org.eclipse.xtext.serializer"
+      disposableProviderFactory="true" ecorePackage="SyntacticSequencerTestLanguage.ecore#/">
+    <genClasses ecoreClass="SyntacticSequencerTestLanguage.ecore#//Model">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SyntacticSequencerTestLanguage.ecore#//Model/x1"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SyntacticSequencerTestLanguage.ecore#//Model/x2"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SyntacticSequencerTestLanguage.ecore#//Model/x3"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SyntacticSequencerTestLanguage.ecore#//Model/x4"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SyntacticSequencerTestLanguage.ecore#//Model/x5"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SyntacticSequencerTestLanguage.ecore#//Model/x6"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SyntacticSequencerTestLanguage.ecore#//Model/x7"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SyntacticSequencerTestLanguage.ecore#//Model/x8"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SyntacticSequencerTestLanguage.ecore#//Model/x9"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SyntacticSequencerTestLanguage.ecore#//Model/x10"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SyntacticSequencerTestLanguage.ecore#//Model/x11"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SyntacticSequencerTestLanguage.ecore#//Model/x12"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SyntacticSequencerTestLanguage.ecore#//Model/x13"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SyntacticSequencerTestLanguage.ecore#//Model/x14"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SyntacticSequencerTestLanguage.ecore#//Model/x15"/>
+    </genClasses>
+    <genClasses ecoreClass="SyntacticSequencerTestLanguage.ecore#//MandatoryKeywords">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SyntacticSequencerTestLanguage.ecore#//MandatoryKeywords/val1"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SyntacticSequencerTestLanguage.ecore#//MandatoryKeywords/val2"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SyntacticSequencerTestLanguage.ecore#//MandatoryKeywords/val3"/>
+    </genClasses>
+    <genClasses ecoreClass="SyntacticSequencerTestLanguage.ecore#//Exp0"/>
+    <genClasses ecoreClass="SyntacticSequencerTestLanguage.ecore#//Exp1"/>
+    <genClasses ecoreClass="SyntacticSequencerTestLanguage.ecore#//Exp2"/>
+    <genClasses ecoreClass="SyntacticSequencerTestLanguage.ecore#//SingleCrossReference">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SyntacticSequencerTestLanguage.ecore#//SingleCrossReference/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SyntacticSequencerTestLanguage.ecore#//SingleCrossReference/ref1"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SyntacticSequencerTestLanguage.ecore#//SingleCrossReference/ref2"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SyntacticSequencerTestLanguage.ecore#//SingleCrossReference/ref3"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SyntacticSequencerTestLanguage.ecore#//SingleCrossReference/ref4"/>
+    </genClasses>
+    <genClasses ecoreClass="SyntacticSequencerTestLanguage.ecore#//BooleanAlternative">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SyntacticSequencerTestLanguage.ecore#//BooleanAlternative/bool"/>
+    </genClasses>
+    <genClasses ecoreClass="SyntacticSequencerTestLanguage.ecore#//BooleanAlternativeLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SyntacticSequencerTestLanguage.ecore#//BooleanAlternativeLiteral/isTrue"/>
+    </genClasses>
+    <genClasses ecoreClass="SyntacticSequencerTestLanguage.ecore#//UnassignedDatatype">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SyntacticSequencerTestLanguage.ecore#//UnassignedDatatype/val"/>
+    </genClasses>
+    <genClasses ecoreClass="SyntacticSequencerTestLanguage.ecore#//OptionalSingleTransition">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SyntacticSequencerTestLanguage.ecore#//OptionalSingleTransition/val"/>
+    </genClasses>
+    <genClasses ecoreClass="SyntacticSequencerTestLanguage.ecore#//OptionalManyTransition">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SyntacticSequencerTestLanguage.ecore#//OptionalManyTransition/val"/>
+    </genClasses>
+    <genClasses ecoreClass="SyntacticSequencerTestLanguage.ecore#//MandatoryManyTransition">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SyntacticSequencerTestLanguage.ecore#//MandatoryManyTransition/val"/>
+    </genClasses>
+    <genClasses ecoreClass="SyntacticSequencerTestLanguage.ecore#//AlternativeTransition">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SyntacticSequencerTestLanguage.ecore#//AlternativeTransition/val"/>
+    </genClasses>
+    <genClasses ecoreClass="SyntacticSequencerTestLanguage.ecore#//BooleanValues">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SyntacticSequencerTestLanguage.ecore#//BooleanValues/val1"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SyntacticSequencerTestLanguage.ecore#//BooleanValues/val2"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SyntacticSequencerTestLanguage.ecore#//BooleanValues/val3"/>
+    </genClasses>
+    <genClasses ecoreClass="SyntacticSequencerTestLanguage.ecore#//LongAlternative">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SyntacticSequencerTestLanguage.ecore#//LongAlternative/foo"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SyntacticSequencerTestLanguage.ecore#//LongAlternative/val1"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SyntacticSequencerTestLanguage.ecore#//LongAlternative/val2"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SyntacticSequencerTestLanguage.ecore#//LongAlternative/val3"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SyntacticSequencerTestLanguage.ecore#//LongAlternative/val4"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SyntacticSequencerTestLanguage.ecore#//LongAlternative/val5"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SyntacticSequencerTestLanguage.ecore#//LongAlternative/val6"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SyntacticSequencerTestLanguage.ecore#//LongAlternative/val7"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SyntacticSequencerTestLanguage.ecore#//LongAlternative/val8"/>
+    </genClasses>
+    <genClasses ecoreClass="SyntacticSequencerTestLanguage.ecore#//ActionOnly"/>
+    <genClasses ecoreClass="SyntacticSequencerTestLanguage.ecore#//FragmentCallerType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SyntacticSequencerTestLanguage.ecore#//FragmentCallerType/val1"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SyntacticSequencerTestLanguage.ecore#//FragmentCallerType/val"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SyntacticSequencerTestLanguage.ecore#//FragmentCallerType/fragVal"/>
+    </genClasses>
+    <genClasses ecoreClass="SyntacticSequencerTestLanguage.ecore#//Add0">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SyntacticSequencerTestLanguage.ecore#//Add0/left"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SyntacticSequencerTestLanguage.ecore#//Add0/right"/>
+    </genClasses>
+    <genClasses ecoreClass="SyntacticSequencerTestLanguage.ecore#//Val0">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SyntacticSequencerTestLanguage.ecore#//Val0/name"/>
+    </genClasses>
+    <genClasses ecoreClass="SyntacticSequencerTestLanguage.ecore#//Add1">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SyntacticSequencerTestLanguage.ecore#//Add1/left"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SyntacticSequencerTestLanguage.ecore#//Add1/right"/>
+    </genClasses>
+    <genClasses ecoreClass="SyntacticSequencerTestLanguage.ecore#//Val1">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SyntacticSequencerTestLanguage.ecore#//Val1/name"/>
+    </genClasses>
+    <genClasses ecoreClass="SyntacticSequencerTestLanguage.ecore#//Add2">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SyntacticSequencerTestLanguage.ecore#//Add2/left"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SyntacticSequencerTestLanguage.ecore#//Add2/right"/>
+    </genClasses>
+    <genClasses ecoreClass="SyntacticSequencerTestLanguage.ecore#//Mult2">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SyntacticSequencerTestLanguage.ecore#//Mult2/left"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SyntacticSequencerTestLanguage.ecore#//Mult2/right"/>
+    </genClasses>
+    <genClasses ecoreClass="SyntacticSequencerTestLanguage.ecore#//Val2">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SyntacticSequencerTestLanguage.ecore#//Val2/name"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.xtext.tests/src-gen" editDirectory="/org.eclipse.xtext.tests.edit/src"
+    editorDirectory="/org.eclipse.xtext.tests.editor/src" modelPluginID="org.eclipse.xtext.tests"
+    forceOverwrite="true" modelName="XtextTerminalsTestLanguage" updateClasspath="false"
+    rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" complianceLevel="6.0"
+    copyrightFields="false" editPluginID="org.eclipse.xtext.tests.edit" editorPluginID="org.eclipse.xtext.tests.editor"
+    runtimeVersion="2.9" usedGenPackages="platform:/resource/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
+  <genPackages prefix="XtextTerminalsTestLanguage" basePackage="org.eclipse.xtext.parser.terminalrules"
+      disposableProviderFactory="true" ecorePackage="XtextTerminalsTestLanguage.ecore#/">
+    <genClasses ecoreClass="XtextTerminalsTestLanguage.ecore#//Grammar">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute XtextTerminalsTestLanguage.ecore#//Grammar/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference XtextTerminalsTestLanguage.ecore#//Grammar/usedGrammars"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute XtextTerminalsTestLanguage.ecore#//Grammar/definesHiddenTokens"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference XtextTerminalsTestLanguage.ecore#//Grammar/hiddenTokens"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference XtextTerminalsTestLanguage.ecore#//Grammar/metamodelDeclarations"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference XtextTerminalsTestLanguage.ecore#//Grammar/rules"/>
+    </genClasses>
+    <genClasses ecoreClass="XtextTerminalsTestLanguage.ecore#//AbstractRule">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute XtextTerminalsTestLanguage.ecore#//AbstractRule/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference XtextTerminalsTestLanguage.ecore#//AbstractRule/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference XtextTerminalsTestLanguage.ecore#//AbstractRule/alternatives"/>
+    </genClasses>
+    <genClasses ecoreClass="XtextTerminalsTestLanguage.ecore#//AbstractMetamodelDeclaration">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference XtextTerminalsTestLanguage.ecore#//AbstractMetamodelDeclaration/ePackage"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute XtextTerminalsTestLanguage.ecore#//AbstractMetamodelDeclaration/alias"/>
+    </genClasses>
+    <genClasses ecoreClass="XtextTerminalsTestLanguage.ecore#//GeneratedMetamodel">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute XtextTerminalsTestLanguage.ecore#//GeneratedMetamodel/name"/>
+    </genClasses>
+    <genClasses ecoreClass="XtextTerminalsTestLanguage.ecore#//ReferencedMetamodel"/>
+    <genClasses ecoreClass="XtextTerminalsTestLanguage.ecore#//ParserRule">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute XtextTerminalsTestLanguage.ecore#//ParserRule/definesHiddenTokens"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference XtextTerminalsTestLanguage.ecore#//ParserRule/hiddenTokens"/>
+    </genClasses>
+    <genClasses ecoreClass="XtextTerminalsTestLanguage.ecore#//TypeRef">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference XtextTerminalsTestLanguage.ecore#//TypeRef/metamodel"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference XtextTerminalsTestLanguage.ecore#//TypeRef/classifier"/>
+    </genClasses>
+    <genClasses ecoreClass="XtextTerminalsTestLanguage.ecore#//AbstractElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute XtextTerminalsTestLanguage.ecore#//AbstractElement/cardinality"/>
+    </genClasses>
+    <genClasses ecoreClass="XtextTerminalsTestLanguage.ecore#//Action">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference XtextTerminalsTestLanguage.ecore#//Action/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute XtextTerminalsTestLanguage.ecore#//Action/feature"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute XtextTerminalsTestLanguage.ecore#//Action/operator"/>
+    </genClasses>
+    <genClasses ecoreClass="XtextTerminalsTestLanguage.ecore#//Keyword">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute XtextTerminalsTestLanguage.ecore#//Keyword/value"/>
+    </genClasses>
+    <genClasses ecoreClass="XtextTerminalsTestLanguage.ecore#//RuleCall">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference XtextTerminalsTestLanguage.ecore#//RuleCall/rule"/>
+    </genClasses>
+    <genClasses ecoreClass="XtextTerminalsTestLanguage.ecore#//Assignment">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute XtextTerminalsTestLanguage.ecore#//Assignment/feature"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute XtextTerminalsTestLanguage.ecore#//Assignment/operator"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference XtextTerminalsTestLanguage.ecore#//Assignment/terminal"/>
+    </genClasses>
+    <genClasses ecoreClass="XtextTerminalsTestLanguage.ecore#//CrossReference">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference XtextTerminalsTestLanguage.ecore#//CrossReference/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference XtextTerminalsTestLanguage.ecore#//CrossReference/terminal"/>
+    </genClasses>
+    <genClasses ecoreClass="XtextTerminalsTestLanguage.ecore#//TerminalRule"/>
+    <genClasses ecoreClass="XtextTerminalsTestLanguage.ecore#//AbstractNegatedToken">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference XtextTerminalsTestLanguage.ecore#//AbstractNegatedToken/terminal"/>
+    </genClasses>
+    <genClasses ecoreClass="XtextTerminalsTestLanguage.ecore#//NegatedToken"/>
+    <genClasses ecoreClass="XtextTerminalsTestLanguage.ecore#//UntilToken"/>
+    <genClasses ecoreClass="XtextTerminalsTestLanguage.ecore#//Wildcard"/>
+    <genClasses ecoreClass="XtextTerminalsTestLanguage.ecore#//EnumRule"/>
+    <genClasses ecoreClass="XtextTerminalsTestLanguage.ecore#//EnumLiteralDeclaration">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference XtextTerminalsTestLanguage.ecore#//EnumLiteralDeclaration/enumLiteral"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference XtextTerminalsTestLanguage.ecore#//EnumLiteralDeclaration/literal"/>
+    </genClasses>
+    <genClasses ecoreClass="XtextTerminalsTestLanguage.ecore#//Alternatives">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference XtextTerminalsTestLanguage.ecore#//Alternatives/groups"/>
+    </genClasses>
+    <genClasses ecoreClass="XtextTerminalsTestLanguage.ecore#//Group">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference XtextTerminalsTestLanguage.ecore#//Group/tokens"/>
+    </genClasses>
+    <genClasses ecoreClass="XtextTerminalsTestLanguage.ecore#//CharacterRange">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference XtextTerminalsTestLanguage.ecore#//CharacterRange/left"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference XtextTerminalsTestLanguage.ecore#//CharacterRange/right"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

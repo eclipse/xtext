@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="hiddentokenmergertest" nsURI="http://www.eclipse.org/2009/tmf/xtext/hiddentokensmerger"
+    nsPrefix="hiddentokenmergertest">
+  <eClassifiers xsi:type="ecore:EClass" name="Model"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DatatypeBug286557" eSuperTypes="#//Model">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ref" eType="#//DatatypeBug286557"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EnumBug" eSuperTypes="#//Model">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="return" eType="#//EnumBugEnum"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="EnumBugEnum">
+    <eLiterals name="array" literal="array"/>
+    <eLiterals name="object" value="1" literal="object"/>
+    <eLiterals name="resultSet" value="2" literal="resultSet"/>
+    <eLiterals name="iterator" value="3" literal="iterator"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Commentable" eSuperTypes="#//Model">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="item" upperBound="-1" eType="#//CommentableItem"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CommentableItem">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ValueList" eSuperTypes="#//Model">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ids" unique="false" upperBound="-1"
+        eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RefList" eSuperTypes="#//Model">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="objs" upperBound="-1" eType="#//RefObj"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="refs" unique="false" upperBound="-1"
+        eType="#//RefObj"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RefObj">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SingleRef" eSuperTypes="#//Model">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="obj" eType="#//RefObj"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ref" eType="#//RefObj"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AppendToFileEnd" eSuperTypes="#//Model">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="items" upperBound="-1"
+        eType="#//AppendToFileEndItem" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AppendToFileEndItem">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Action1" eSuperTypes="#//Model">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="actions2" upperBound="-1"
+        eType="ecore:EClass platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EObject"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Action1Sub1"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Action1Sub2"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Action1Sub" eSuperTypes="#//Action1Sub1"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Action1SubClass" eSuperTypes="#//Action1Sub2"/>
+</ecore:EPackage>

@@ -9,16 +9,16 @@ package org.eclipse.xtext.parser.fragments
 
 import com.google.inject.Inject
 import com.google.inject.Injector
-import org.eclipse.xtext.junit4.AbstractXtextTests
-import org.eclipse.xtext.junit4.util.ParseHelper
-import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 import org.eclipse.xtext.nodemodel.impl.InvariantChecker
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 import org.eclipse.xtext.parser.fragments.fragmentTestLanguage.PRFNamedWithAction
 import org.eclipse.xtext.parser.fragments.fragmentTestLanguage.ParserRuleFragments
 import org.eclipse.xtext.resource.XtextResource
+import org.eclipse.xtext.testing.util.ParseHelper
+import org.eclipse.xtext.testing.validation.ValidationTestHelper
+import org.eclipse.xtext.tests.AbstractXtextTests
 import org.junit.Test
 import org.junit.Ignore
-import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

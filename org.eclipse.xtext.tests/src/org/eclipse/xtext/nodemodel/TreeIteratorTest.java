@@ -8,10 +8,10 @@
 package org.eclipse.xtext.nodemodel;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.nodemodel.impl.SyntheticCompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.testlanguages.SimpleExpressionsTestLanguageStandaloneSetup;
+import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.junit.Test;
 
 /**

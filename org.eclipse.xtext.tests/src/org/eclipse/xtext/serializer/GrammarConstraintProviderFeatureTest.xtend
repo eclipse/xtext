@@ -9,13 +9,13 @@ package org.eclipse.xtext.serializer
 
 import com.google.inject.Inject
 import org.eclipse.xtext.Grammar
-import org.eclipse.xtext.junit4.InjectWith
-import org.eclipse.xtext.junit4.XtextRunner
-import org.eclipse.xtext.junit4.internal.XtextInjectorProvider
-import org.eclipse.xtext.junit4.util.ParseHelper
-import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IFeatureInfo
+import org.eclipse.xtext.testing.InjectWith
+import org.eclipse.xtext.testing.XtextRunner
+import org.eclipse.xtext.testing.util.ParseHelper
+import org.eclipse.xtext.testing.validation.ValidationTestHelper
+import org.eclipse.xtext.tests.XtextInjectorProvider
 import org.junit.runner.RunWith
 import org.junit.Test
 import org.junit.Assert

@@ -14,8 +14,8 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.formatting2.AbstractFormatter2
 import org.eclipse.xtext.formatting2.IFormattableDocument
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionExtensions
-import org.eclipse.xtext.junit4.formatter.FormatterTestRequest
-import org.eclipse.xtext.junit4.formatter.FormatterTester
+import org.eclipse.xtext.testing.formatter.FormatterTestRequest
+import org.eclipse.xtext.testing.formatter.FormatterTestHelper
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -34,7 +34,7 @@ class GenericFormatterTester {
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-class FormatterTesterWithImpl extends FormatterTester {
+class FormatterTesterWithImpl extends FormatterTestHelper {
 	override protected createFormatter(FormatterTestRequest req) {
 		(req as GenericFormatterTestRequest).formatter
 	}

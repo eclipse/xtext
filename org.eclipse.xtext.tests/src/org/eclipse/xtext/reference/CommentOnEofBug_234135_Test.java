@@ -12,9 +12,9 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.TerminalRule;
-import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
+import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.junit.Test;
 
 import com.google.common.collect.Lists;

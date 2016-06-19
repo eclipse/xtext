@@ -10,7 +10,6 @@ package org.eclipse.xtext.resource;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.resource.locationprovidertest.Bus;
 import org.eclipse.xtext.resource.locationprovidertest.Component;
 import org.eclipse.xtext.resource.locationprovidertest.Element;
@@ -18,6 +17,7 @@ import org.eclipse.xtext.resource.locationprovidertest.LocationprovidertestPacka
 import org.eclipse.xtext.resource.locationprovidertest.Mode;
 import org.eclipse.xtext.resource.locationprovidertest.Model;
 import org.eclipse.xtext.resource.locationprovidertest.Processor;
+import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 import org.junit.Test;
 

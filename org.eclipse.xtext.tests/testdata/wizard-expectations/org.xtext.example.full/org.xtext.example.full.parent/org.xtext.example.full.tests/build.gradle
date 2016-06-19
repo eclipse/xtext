@@ -1,6 +1,6 @@
 dependencies {
 	compile project(':org.xtext.example.full')
-	testCompile "org.eclipse.xtext:org.eclipse.xtext.junit4:${xtextVersion}"
+	testCompile "org.eclipse.xtext:org.eclipse.xtext.testing:${xtextVersion}"
 	testCompile "org.eclipse.xtext:org.eclipse.xtext.xbase.junit:${xtextVersion}"
 }
 //this is an eclipse plugin project

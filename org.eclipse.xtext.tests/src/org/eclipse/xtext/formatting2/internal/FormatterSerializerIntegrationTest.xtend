@@ -19,9 +19,9 @@ import org.eclipse.xtext.formatting2.IFormattableDocument
 import org.eclipse.xtext.formatting2.IFormatter2
 import org.eclipse.xtext.formatting2.internal.formattertestlanguage.FormattertestlanguageFactory
 import org.eclipse.xtext.formatting2.internal.formattertestlanguage.IDList
-import org.eclipse.xtext.junit4.InjectWith
-import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.resource.IResourceFactory
+import org.eclipse.xtext.testing.InjectWith
+import org.eclipse.xtext.testing.XtextRunner
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith

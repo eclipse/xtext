@@ -2,6 +2,7 @@ package org.eclipse.xtext.xtext.generator.junit
 
 import com.google.inject.Inject
 import com.google.inject.Injector
+import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.xtext.generator.AbstractStubGeneratingFragment
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory
@@ -12,14 +13,25 @@ import org.eclipse.xtext.xtext.generator.util.GenModelUtil2
 import static extension org.eclipse.xtext.GrammarUtil.*
 
 class Junit4Fragment2 extends AbstractStubGeneratingFragment {
+	
 	@Inject extension XtextGeneratorNaming
 	@Inject FileAccessFactory fileAccessFactory
-
+	
+	@Accessors(PUBLIC_SETTER)
+	boolean useDeprecatedClasses
+	
+	def protected getTestingPackage() {
+		if (useDeprecatedClasses)
+			"org.eclipse.xtext.junit4"
+		else
+			"org.eclipse.xtext.testing"
+	}
+	
 	override generate() {
 		if (projectConfig.runtimeTest.manifest != null) {
 			projectConfig.runtimeTest.manifest => [
 				requiredBundles.addAll(
-					"org.eclipse.xtext.junit4",
+					testingPackage,
 					"org.eclipse.xtext.xbase.lib"
 				)
 				exportedPackages.add(grammar.runtimeTestBasePackage)
@@ -59,11 +71,11 @@ class Junit4Fragment2 extends AbstractStubGeneratingFragment {
 			generateUiInjectorProvider.writeTo(projectConfig.eclipsePluginTest.srcGen)
 	}
 	
-	def JavaFileAccess generateExampleRuntimeTest() {
-		val xtextRunner = new TypeReference("org.eclipse.xtext.junit4.XtextRunner")
+	def protected JavaFileAccess generateExampleRuntimeTest() {
+		val xtextRunner = new TypeReference(testingPackage + ".XtextRunner")
 		val runWith = new TypeReference("org.junit.runner.RunWith")
-		val injectWith = new TypeReference("org.eclipse.xtext.junit4.InjectWith")
-		val parseHelper = new TypeReference("org.eclipse.xtext.junit4.util.ParseHelper")
+		val injectWith = new TypeReference(testingPackage + ".InjectWith")
+		val parseHelper = new TypeReference(testingPackage + ".util.ParseHelper")
 		val test = new TypeReference("org.junit.Test")
 		val assert = new TypeReference("org.junit.Assert")
 		val rootType = new TypeReference(GenModelUtil2.getJavaTypeName(grammar.rules.head.type.classifier, grammar.eResource.resourceSet))
@@ -87,15 +99,15 @@ class Junit4Fragment2 extends AbstractStubGeneratingFragment {
 		''')
 	}
 	
-	def exampleRuntimeTest() {
+	def protected exampleRuntimeTest() {
 		new TypeReference(grammar.runtimeTestBasePackage, grammar.simpleName + "ParsingTest")
 	}
 
-	def JavaFileAccess generateInjectorProvider() {
+	def protected JavaFileAccess generateInjectorProvider() {
 		val file = fileAccessFactory.createJavaFile(injectorProvider)
-		val globalRegistries = new TypeReference("org.eclipse.xtext.junit4.GlobalRegistries")
-		val globalStateMemento = new TypeReference("org.eclipse.xtext.junit4", "GlobalRegistries.GlobalStateMemento")
-		val iRegistryConfigurator = new TypeReference("org.eclipse.xtext.junit4.IRegistryConfigurator")
+		val globalRegistries = new TypeReference(testingPackage + ".GlobalRegistries")
+		val globalStateMemento = new TypeReference(testingPackage, "GlobalRegistries.GlobalStateMemento")
+		val iRegistryConfigurator = new TypeReference(testingPackage + ".IRegistryConfigurator")
 		val classLoader = new TypeReference("java.lang.ClassLoader")
 		val guice = new TypeReference("com.google.inject.Guice")
 		file.content = '''
@@ -155,15 +167,15 @@ class Junit4Fragment2 extends AbstractStubGeneratingFragment {
 		file
 	}
 	
-	def TypeReference iInjectorProvider() {
-		new TypeReference("org.eclipse.xtext.junit4.IInjectorProvider")
+	def protected TypeReference iInjectorProvider() {
+		new TypeReference(testingPackage + ".IInjectorProvider")
 	}
 
-	def TypeReference injectorProvider() {
+	def protected TypeReference injectorProvider() {
 		new TypeReference(grammar.runtimeTestBasePackage, grammar.simpleName + "InjectorProvider")
 	}
 
-	def JavaFileAccess generateUiInjectorProvider() {
+	def protected JavaFileAccess generateUiInjectorProvider() {
 		val file = fileAccessFactory.createJavaFile(uiInjectorProvider)
 		file.content = '''
 			public class «uiInjectorProvider.simpleName» implements «iInjectorProvider» {
@@ -178,7 +190,7 @@ class Junit4Fragment2 extends AbstractStubGeneratingFragment {
 		file
 	}
 
-	def TypeReference uiInjectorProvider() {
+	def protected TypeReference uiInjectorProvider() {
 		new TypeReference(grammar.eclipsePluginTestBasePackage, grammar.simpleName + "UiInjectorProvider")
 	}
 }

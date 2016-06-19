@@ -8,11 +8,11 @@
 package org.eclipse.xtext.resource;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.resource.eObjectAtOffsetTestLanguage.Foo;
 import org.eclipse.xtext.resource.eObjectAtOffsetTestLanguage.FooBar;
 import org.eclipse.xtext.resource.eObjectAtOffsetTestLanguage.Model;
+import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.eclipse.xtext.util.TextRegion;
 import org.junit.Test;
 

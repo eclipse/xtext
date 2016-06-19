@@ -8,7 +8,7 @@
 package org.eclipse.xtext;
 
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.junit.Test;
 
 /**

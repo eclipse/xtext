@@ -8,7 +8,7 @@
 package org.eclipse.xtext.validation;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.eclipse.xtext.validation.IAssignmentQuantityAllocator.IQuantities;
 import org.eclipse.xtext.validation.IConcreteSyntaxConstraintProvider.ISyntaxConstraint;
 import org.eclipse.xtext.validation.IConcreteSyntaxDiagnosticProvider.IConcreteSyntaxDiagnostic;

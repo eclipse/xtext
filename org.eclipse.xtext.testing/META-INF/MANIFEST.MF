@@ -6,8 +6,16 @@ Bundle-Version: 2.11.0.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: Eclipse Xtext
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Export-Package: org.eclipse.xtext.testing
+Export-Package: org.eclipse.xtext.testing,
+ org.eclipse.xtext.testing.builder,
+ org.eclipse.xtext.testing.formatter,
+ org.eclipse.xtext.testing.serializer,
+ org.eclipse.xtext.testing.util,
+ org.eclipse.xtext.testing.validation
 Require-Bundle: org.eclipse.xtext;visibility:=reexport,
- org.eclipse.xtext.ide;visibility:=reexport
+ org.eclipse.xtext.ide;visibility:=reexport,
+ org.junit;bundle-version="4.12.0";resolution:=optional,
+ io.typefox.lsapi;resolution:=optional,
+ io.typefox.lsapi.services;resolution:=optional
 Import-Package: org.apache.log4j;version="1.2.15"
 Bundle-ActivationPolicy: lazy

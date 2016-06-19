@@ -13,7 +13,6 @@ import java.util.Map;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
@@ -24,6 +23,7 @@ import org.eclipse.xtext.parsetree.reconstr.ICommentAssociater;
 import org.eclipse.xtext.parsetree.reconstr.Serializer;
 import org.eclipse.xtext.resource.SaveOptions;
 import org.eclipse.xtext.serializer.ISerializer;
+import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.eclipse.xtext.util.ReplaceRegion;
 import org.junit.Test;
 

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.xtext.tests/src-gen" editDirectory="/org.eclipse.xtext.tests.edit/src"
+    editorDirectory="/org.eclipse.xtext.tests.editor/src" modelPluginID="org.eclipse.xtext.tests"
+    forceOverwrite="true" modelName="EpatchTestLanguage" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    complianceLevel="6.0" copyrightFields="false" editPluginID="org.eclipse.xtext.tests.edit"
+    editorPluginID="org.eclipse.xtext.tests.editor" runtimeVersion="2.9" usedGenPackages="platform:/resource/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
+  <genPackages prefix="EpatchTestLanguage" basePackage="org.eclipse.xtext.parser.epatch"
+      disposableProviderFactory="true" ecorePackage="EpatchTestLanguage.ecore#/">
+    <genClasses ecoreClass="EpatchTestLanguage.ecore#//EPatch">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EpatchTestLanguage.ecore#//EPatch/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EpatchTestLanguage.ecore#//EPatch/imports"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EpatchTestLanguage.ecore#//EPatch/resources"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EpatchTestLanguage.ecore#//EPatch/objects"/>
+    </genClasses>
+    <genClasses ecoreClass="EpatchTestLanguage.ecore#//Import"/>
+    <genClasses ecoreClass="EpatchTestLanguage.ecore#//ModelImport">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EpatchTestLanguage.ecore#//ModelImport/name"/>
+    </genClasses>
+    <genClasses ecoreClass="EpatchTestLanguage.ecore#//ResourceImport">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EpatchTestLanguage.ecore#//ResourceImport/uri"/>
+    </genClasses>
+    <genClasses ecoreClass="EpatchTestLanguage.ecore#//EPackageImport">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EpatchTestLanguage.ecore#//EPackageImport/nsURI"/>
+    </genClasses>
+    <genClasses ecoreClass="EpatchTestLanguage.ecore#//JavaImport">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EpatchTestLanguage.ecore#//JavaImport/path"/>
+    </genClasses>
+    <genClasses ecoreClass="EpatchTestLanguage.ecore#//ExtensionImport">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EpatchTestLanguage.ecore#//ExtensionImport/path"/>
+    </genClasses>
+    <genClasses ecoreClass="EpatchTestLanguage.ecore#//NamedResource">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EpatchTestLanguage.ecore#//NamedResource/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EpatchTestLanguage.ecore#//NamedResource/leftUri"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EpatchTestLanguage.ecore#//NamedResource/leftRoot"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EpatchTestLanguage.ecore#//NamedResource/rightUri"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EpatchTestLanguage.ecore#//NamedResource/rightRoot"/>
+    </genClasses>
+    <genClasses ecoreClass="EpatchTestLanguage.ecore#//NamedObject">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EpatchTestLanguage.ecore#//NamedObject/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EpatchTestLanguage.ecore#//NamedObject/assignments"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EpatchTestLanguage.ecore#//NamedObject/leftMig"/>
+    </genClasses>
+    <genClasses ecoreClass="EpatchTestLanguage.ecore#//ObjectRef">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference EpatchTestLanguage.ecore#//ObjectRef/leftRes"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EpatchTestLanguage.ecore#//ObjectRef/leftFrag"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference EpatchTestLanguage.ecore#//ObjectRef/rightRes"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EpatchTestLanguage.ecore#//ObjectRef/rightFrag"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EpatchTestLanguage.ecore#//ObjectRef/rightMig"/>
+    </genClasses>
+    <genClasses ecoreClass="EpatchTestLanguage.ecore#//Assignment">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EpatchTestLanguage.ecore#//Assignment/feature"/>
+    </genClasses>
+    <genClasses ecoreClass="EpatchTestLanguage.ecore#//SingleAssignment">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EpatchTestLanguage.ecore#//SingleAssignment/leftValue"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EpatchTestLanguage.ecore#//SingleAssignment/rightValue"/>
+    </genClasses>
+    <genClasses ecoreClass="EpatchTestLanguage.ecore#//ListAssignment">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EpatchTestLanguage.ecore#//ListAssignment/leftValues"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EpatchTestLanguage.ecore#//ListAssignment/rightValues"/>
+    </genClasses>
+    <genClasses ecoreClass="EpatchTestLanguage.ecore#//AssignmentValue">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EpatchTestLanguage.ecore#//AssignmentValue/value"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference EpatchTestLanguage.ecore#//AssignmentValue/refObject"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EpatchTestLanguage.ecore#//AssignmentValue/refFeature"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EpatchTestLanguage.ecore#//AssignmentValue/refIndex"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EpatchTestLanguage.ecore#//AssignmentValue/newObject"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference EpatchTestLanguage.ecore#//AssignmentValue/import"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EpatchTestLanguage.ecore#//AssignmentValue/impFrag"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EpatchTestLanguage.ecore#//AssignmentValue/index"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EpatchTestLanguage.ecore#//AssignmentValue/keyword"/>
+    </genClasses>
+    <genClasses ecoreClass="EpatchTestLanguage.ecore#//CreatedObject"/>
+    <genClasses ecoreClass="EpatchTestLanguage.ecore#//ObjectNew">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference EpatchTestLanguage.ecore#//ObjectNew/import"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EpatchTestLanguage.ecore#//ObjectNew/impFrag"/>
+    </genClasses>
+    <genClasses ecoreClass="EpatchTestLanguage.ecore#//ObjectCopy">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference EpatchTestLanguage.ecore#//ObjectCopy/resource"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EpatchTestLanguage.ecore#//ObjectCopy/fragment"/>
+    </genClasses>
+    <genClasses ecoreClass="EpatchTestLanguage.ecore#//Migration">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EpatchTestLanguage.ecore#//Migration/first"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EpatchTestLanguage.ecore#//Migration/asOp"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EpatchTestLanguage.ecore#//Migration/eachOp"/>
+    </genClasses>
+    <genClasses ecoreClass="EpatchTestLanguage.ecore#//Executable"/>
+    <genClasses ecoreClass="EpatchTestLanguage.ecore#//JavaExecutable">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EpatchTestLanguage.ecore#//JavaExecutable/method"/>
+    </genClasses>
+    <genClasses ecoreClass="EpatchTestLanguage.ecore#//ExpressionExecutable">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EpatchTestLanguage.ecore#//ExpressionExecutable/exprstr"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

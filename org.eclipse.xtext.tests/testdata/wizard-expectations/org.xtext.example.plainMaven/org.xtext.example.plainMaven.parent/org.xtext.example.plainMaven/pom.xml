@@ -185,7 +185,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
-			<artifactId>org.eclipse.xtext.junit4</artifactId>
+			<artifactId>org.eclipse.xtext.testing</artifactId>
 			<version>${xtextVersion}</version>
 			<scope>test</scope>
 		</dependency>

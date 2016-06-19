@@ -1,8 +1,8 @@
 package org.eclipse.xtext.parsetree;
 
-import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.testlanguages.SimpleExpressionsTestLanguageStandaloneSetup;
+import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.junit.Test;
 
 public class SerializeTest extends AbstractXtextTests {

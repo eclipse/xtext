@@ -12,8 +12,8 @@ import java.util.Map;
 import java.util.Set;
 
 import org.antlr.runtime.Token;
-import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
+import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.junit.Test;
 
 import com.google.common.collect.Sets;

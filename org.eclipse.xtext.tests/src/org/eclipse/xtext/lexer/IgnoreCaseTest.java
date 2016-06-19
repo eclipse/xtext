@@ -7,9 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.lexer;
 
-import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.lexer.ignoreCaseTestLanguage.Model;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.junit.Test;
 
 /**

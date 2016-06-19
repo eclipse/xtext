@@ -8,7 +8,7 @@
 package org.eclipse.xtext.xtext
 
 import org.eclipse.xtext.XtextStandaloneSetup
-import org.eclipse.xtext.junit4.AbstractXtextTests
+import org.eclipse.xtext.tests.AbstractXtextTests
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.validation.CheckMode
 import org.junit.Test

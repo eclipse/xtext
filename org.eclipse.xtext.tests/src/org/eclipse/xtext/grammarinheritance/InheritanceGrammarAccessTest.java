@@ -7,8 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.grammarinheritance;
 
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.xtext.grammarinheritance.ametamodel.AmetamodelPackage;
+import org.eclipse.xtext.grammarinheritance.foo.FooPackage;
 import org.eclipse.xtext.grammarinheritance.services.AbstractTestLanguageGrammarAccess;
-import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.junit.Test;
 
 /**
@@ -19,6 +22,7 @@ public class InheritanceGrammarAccessTest extends AbstractXtextTests {
 	@Override
 	public void setUp() throws Exception {
 		super.setUp();
+		EPackage.Registry.INSTANCE.put(AmetamodelPackage.eNS_URI, AmetamodelPackage.eINSTANCE);
 		with(new ConcreteTestLanguageStandaloneSetup());
 	}
 

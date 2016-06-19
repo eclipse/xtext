@@ -11,8 +11,8 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.XtextStandaloneSetup;
-import org.eclipse.xtext.generator.parser.antlr.TerminalRuleToLexerBody;
-import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.eclipse.xtext.tests.AbstractXtextTests;
+import org.eclipse.xtext.xtext.generator.parser.antlr.TerminalRuleToLexerBody;
 import org.junit.Test;
 
 //import org.eclipse.xtext.generator.parser.TerminalRuleToLexerBody;

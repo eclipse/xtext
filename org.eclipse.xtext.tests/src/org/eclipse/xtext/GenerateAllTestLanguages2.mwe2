@@ -20,7 +20,6 @@ Workflow {
 	bean = StandaloneSetup {
 		ignoreBrokenProjectFiles = true
 		platformUri = "${runtimeProject}/.."
-		platformUri = "${runtimeProject}/../../plugins"
 		scanClassPath = true
 		uriMap = {
 			from = "platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore"

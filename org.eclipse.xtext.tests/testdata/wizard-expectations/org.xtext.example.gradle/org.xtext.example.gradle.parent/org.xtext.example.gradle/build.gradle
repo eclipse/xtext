@@ -1,5 +1,5 @@
 dependencies {
-	testCompile "org.eclipse.xtext:org.eclipse.xtext.junit4:${xtextVersion}"
+	testCompile "org.eclipse.xtext:org.eclipse.xtext.testing:${xtextVersion}"
 	testCompile "org.eclipse.xtext:org.eclipse.xtext.xbase.junit:${xtextVersion}"
 	compile "org.eclipse.xtext:org.eclipse.xtext:${xtextVersion}"
 	compile "org.eclipse.xtext:org.eclipse.xtext.xbase:${xtextVersion}"

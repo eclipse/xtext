@@ -9,8 +9,8 @@
 package org.eclipse.xtext.metamodelreferencing.tests;
 
 import org.eclipse.xtext.XtextStandaloneSetup;
-import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.metamodelreferencing.tests.simpleTest.Foo;
+import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.junit.Test;
 
 public class MultiGenMMTest extends AbstractXtextTests {

@@ -11,8 +11,8 @@ import java.io.IOException
 import org.eclipse.emf.common.util.EList
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.EObject
-import org.eclipse.xtext.junit4.AbstractXtextTests
 import org.eclipse.xtext.testlanguages.OptionalEmptyTestLanguageStandaloneSetup
+import org.eclipse.xtext.tests.AbstractXtextTests
 import org.eclipse.xtext.util.StringInputStream
 import org.junit.Test
 
