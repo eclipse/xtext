@@ -18,10 +18,12 @@ import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.EPackage
 import org.eclipse.emf.ecore.EReference
 import org.eclipse.emf.ecore.EStructuralFeature
+import org.eclipse.emf.ecore.xmi.XMLResource
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.GeneratedMetamodel
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.XtextStandaloneSetup
+import org.eclipse.xtext.common.types.TypesPackage
 import org.eclipse.xtext.diagnostics.IDiagnosticConsumer
 import org.eclipse.xtext.ecore.EcoreSupportStandaloneSetup
 import org.eclipse.xtext.linking.impl.Linker
@@ -35,8 +37,6 @@ import org.eclipse.xtext.xtext.XtextLinker
 import org.eclipse.xtext.xtext.ecoreInference.Xtext2EcoreTransformerTest.MyErrorAcceptor
 import org.junit.Test
 import org.eclipse.xtext.xtext.XtextLinker.PackageRemover
-import org.eclipse.emf.ecore.resource.URIConverter
-import org.eclipse.xtext.common.types.TypesPackage
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
@@ -110,6 +110,13 @@ class Xtext2EcoreTransformerTest extends AbstractXtextTests {
 
 	override XtextResource doGetResource(InputStream in, URI uri) throws Exception {
 		var rs = get(XtextResourceSet)
+		rs.getURIConverter().getURIMap().put(URI.createPlatformPluginURI("org.eclipse.xtext/", false), URI.createURI("classpath:/"));
+		rs.getURIConverter().getURIMap().put(URI.createPlatformPluginURI("org.eclipse.xtext.xbase/", false), URI.createURI("classpath:/"));
+		rs.getURIConverter().getURIMap().put(URI.createPlatformPluginURI("org.eclipse.xtext.common.types/", false), URI.createURI("classpath:/"));
+		rs.getURIConverter().getURIMap().put(URI.createPlatformPluginURI("org.eclipse.emf.ecore/", false), URI.createURI("classpath:/"));
+		rs.getURIConverter().getURIMap().put(URI.createPlatformResourceURI("org.eclipse.xtext.xbase/", false), URI.createURI("classpath:/"));
+		rs.getURIConverter().getURIMap().put(URI.createPlatformResourceURI("org.eclipse.emf.ecore/", false), URI.createURI("classpath:/"));
+		rs.getURIConverter().getURIMap().put(URI.createPlatformResourceURI("org.eclipse.xtext.common.types/", false), URI.createURI("classpath:/"));
 		rs.setClasspathURIContext(getClass())
 		val resource = getResourceFactory().createResource(uri) as XtextResource
 		rs.getResources().add(resource)
@@ -248,10 +255,21 @@ class Xtext2EcoreTransformerTest extends AbstractXtextTests {
 		'''
 		getResourceFromString(grammarAsString)
 	}
+	
+	
 
 
 	@Test def void testEcoreReference_01() throws Exception {
 		val resourceSet = new XtextResourceSet()
+		resourceSet.getURIConverter().getURIMap().put(URI.createPlatformPluginURI("org.eclipse.xtext/", false), URI.createURI("classpath:/"));
+		resourceSet.getURIConverter().getURIMap().put(URI.createPlatformPluginURI("org.eclipse.xtext.xbase/", false), URI.createURI("classpath:/"));
+		resourceSet.getURIConverter().getURIMap().put(URI.createPlatformPluginURI("org.eclipse.xtext.common.types/", false), URI.createURI("classpath:/"));
+		resourceSet.getURIConverter().getURIMap().put(URI.createPlatformPluginURI("org.eclipse.emf.ecore/", false), URI.createURI("classpath:/"));
+		resourceSet.getURIConverter().getURIMap().put(URI.createPlatformPluginURI("org.eclipse.xtext.tests/src/", false), URI.createURI("classpath:/"));
+		resourceSet.getURIConverter().getURIMap().put(URI.createPlatformResourceURI("org.eclipse.xtext.xbase/", false), URI.createURI("classpath:/"));
+		resourceSet.getURIConverter().getURIMap().put(URI.createPlatformResourceURI("org.eclipse.emf.ecore/", false), URI.createURI("classpath:/"));
+		resourceSet.getURIConverter().getURIMap().put(URI.createPlatformResourceURI("org.eclipse.xtext.common.types/", false), URI.createURI("classpath:/"));
+		resourceSet.getURIConverter().getURIMap().put(URI.createPlatformResourceURI("org.eclipse.xtext.tests/src/", false), URI.createURI("classpath:/"));
 		resourceSet.setClasspathURIContext(getClass())
 		resourceSet.getURIConverter().getURIMap().put(URI.createURI(
 			"platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore"), URI.createURI(

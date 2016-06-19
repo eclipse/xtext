@@ -148,6 +148,41 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
   @Override
   public XtextResource doGetResource(final InputStream in, final URI uri) throws Exception {
     XtextResourceSet rs = this.<XtextResourceSet>get(XtextResourceSet.class);
+    URIConverter _uRIConverter = rs.getURIConverter();
+    Map<URI, URI> _uRIMap = _uRIConverter.getURIMap();
+    URI _createPlatformPluginURI = URI.createPlatformPluginURI("org.eclipse.xtext/", false);
+    URI _createURI = URI.createURI("classpath:/");
+    _uRIMap.put(_createPlatformPluginURI, _createURI);
+    URIConverter _uRIConverter_1 = rs.getURIConverter();
+    Map<URI, URI> _uRIMap_1 = _uRIConverter_1.getURIMap();
+    URI _createPlatformPluginURI_1 = URI.createPlatformPluginURI("org.eclipse.xtext.xbase/", false);
+    URI _createURI_1 = URI.createURI("classpath:/");
+    _uRIMap_1.put(_createPlatformPluginURI_1, _createURI_1);
+    URIConverter _uRIConverter_2 = rs.getURIConverter();
+    Map<URI, URI> _uRIMap_2 = _uRIConverter_2.getURIMap();
+    URI _createPlatformPluginURI_2 = URI.createPlatformPluginURI("org.eclipse.xtext.common.types/", false);
+    URI _createURI_2 = URI.createURI("classpath:/");
+    _uRIMap_2.put(_createPlatformPluginURI_2, _createURI_2);
+    URIConverter _uRIConverter_3 = rs.getURIConverter();
+    Map<URI, URI> _uRIMap_3 = _uRIConverter_3.getURIMap();
+    URI _createPlatformPluginURI_3 = URI.createPlatformPluginURI("org.eclipse.emf.ecore/", false);
+    URI _createURI_3 = URI.createURI("classpath:/");
+    _uRIMap_3.put(_createPlatformPluginURI_3, _createURI_3);
+    URIConverter _uRIConverter_4 = rs.getURIConverter();
+    Map<URI, URI> _uRIMap_4 = _uRIConverter_4.getURIMap();
+    URI _createPlatformResourceURI = URI.createPlatformResourceURI("org.eclipse.xtext.xbase/", false);
+    URI _createURI_4 = URI.createURI("classpath:/");
+    _uRIMap_4.put(_createPlatformResourceURI, _createURI_4);
+    URIConverter _uRIConverter_5 = rs.getURIConverter();
+    Map<URI, URI> _uRIMap_5 = _uRIConverter_5.getURIMap();
+    URI _createPlatformResourceURI_1 = URI.createPlatformResourceURI("org.eclipse.emf.ecore/", false);
+    URI _createURI_5 = URI.createURI("classpath:/");
+    _uRIMap_5.put(_createPlatformResourceURI_1, _createURI_5);
+    URIConverter _uRIConverter_6 = rs.getURIConverter();
+    Map<URI, URI> _uRIMap_6 = _uRIConverter_6.getURIMap();
+    URI _createPlatformResourceURI_2 = URI.createPlatformResourceURI("org.eclipse.xtext.common.types/", false);
+    URI _createURI_6 = URI.createURI("classpath:/");
+    _uRIMap_6.put(_createPlatformResourceURI_2, _createURI_6);
     Class<? extends Xtext2EcoreTransformerTest> _class = this.getClass();
     rs.setClasspathURIContext(_class);
     IResourceFactory _resourceFactory = this.getResourceFactory();
@@ -390,44 +425,89 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
   @Test
   public void testEcoreReference_01() throws Exception {
     final XtextResourceSet resourceSet = new XtextResourceSet();
-    Class<? extends Xtext2EcoreTransformerTest> _class = this.getClass();
-    resourceSet.setClasspathURIContext(_class);
     URIConverter _uRIConverter = resourceSet.getURIConverter();
     Map<URI, URI> _uRIMap = _uRIConverter.getURIMap();
-    URI _createURI = URI.createURI(
+    URI _createPlatformPluginURI = URI.createPlatformPluginURI("org.eclipse.xtext/", false);
+    URI _createURI = URI.createURI("classpath:/");
+    _uRIMap.put(_createPlatformPluginURI, _createURI);
+    URIConverter _uRIConverter_1 = resourceSet.getURIConverter();
+    Map<URI, URI> _uRIMap_1 = _uRIConverter_1.getURIMap();
+    URI _createPlatformPluginURI_1 = URI.createPlatformPluginURI("org.eclipse.xtext.xbase/", false);
+    URI _createURI_1 = URI.createURI("classpath:/");
+    _uRIMap_1.put(_createPlatformPluginURI_1, _createURI_1);
+    URIConverter _uRIConverter_2 = resourceSet.getURIConverter();
+    Map<URI, URI> _uRIMap_2 = _uRIConverter_2.getURIMap();
+    URI _createPlatformPluginURI_2 = URI.createPlatformPluginURI("org.eclipse.xtext.common.types/", false);
+    URI _createURI_2 = URI.createURI("classpath:/");
+    _uRIMap_2.put(_createPlatformPluginURI_2, _createURI_2);
+    URIConverter _uRIConverter_3 = resourceSet.getURIConverter();
+    Map<URI, URI> _uRIMap_3 = _uRIConverter_3.getURIMap();
+    URI _createPlatformPluginURI_3 = URI.createPlatformPluginURI("org.eclipse.emf.ecore/", false);
+    URI _createURI_3 = URI.createURI("classpath:/");
+    _uRIMap_3.put(_createPlatformPluginURI_3, _createURI_3);
+    URIConverter _uRIConverter_4 = resourceSet.getURIConverter();
+    Map<URI, URI> _uRIMap_4 = _uRIConverter_4.getURIMap();
+    URI _createPlatformPluginURI_4 = URI.createPlatformPluginURI("org.eclipse.xtext.tests/src/", false);
+    URI _createURI_4 = URI.createURI("classpath:/");
+    _uRIMap_4.put(_createPlatformPluginURI_4, _createURI_4);
+    URIConverter _uRIConverter_5 = resourceSet.getURIConverter();
+    Map<URI, URI> _uRIMap_5 = _uRIConverter_5.getURIMap();
+    URI _createPlatformResourceURI = URI.createPlatformResourceURI("org.eclipse.xtext.xbase/", false);
+    URI _createURI_5 = URI.createURI("classpath:/");
+    _uRIMap_5.put(_createPlatformResourceURI, _createURI_5);
+    URIConverter _uRIConverter_6 = resourceSet.getURIConverter();
+    Map<URI, URI> _uRIMap_6 = _uRIConverter_6.getURIMap();
+    URI _createPlatformResourceURI_1 = URI.createPlatformResourceURI("org.eclipse.emf.ecore/", false);
+    URI _createURI_6 = URI.createURI("classpath:/");
+    _uRIMap_6.put(_createPlatformResourceURI_1, _createURI_6);
+    URIConverter _uRIConverter_7 = resourceSet.getURIConverter();
+    Map<URI, URI> _uRIMap_7 = _uRIConverter_7.getURIMap();
+    URI _createPlatformResourceURI_2 = URI.createPlatformResourceURI("org.eclipse.xtext.common.types/", false);
+    URI _createURI_7 = URI.createURI("classpath:/");
+    _uRIMap_7.put(_createPlatformResourceURI_2, _createURI_7);
+    URIConverter _uRIConverter_8 = resourceSet.getURIConverter();
+    Map<URI, URI> _uRIMap_8 = _uRIConverter_8.getURIMap();
+    URI _createPlatformResourceURI_3 = URI.createPlatformResourceURI("org.eclipse.xtext.tests/src/", false);
+    URI _createURI_8 = URI.createURI("classpath:/");
+    _uRIMap_8.put(_createPlatformResourceURI_3, _createURI_8);
+    Class<? extends Xtext2EcoreTransformerTest> _class = this.getClass();
+    resourceSet.setClasspathURIContext(_class);
+    URIConverter _uRIConverter_9 = resourceSet.getURIConverter();
+    Map<URI, URI> _uRIMap_9 = _uRIConverter_9.getURIMap();
+    URI _createURI_9 = URI.createURI(
       "platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore");
-    URI _createURI_1 = URI.createURI(
+    URI _createURI_10 = URI.createURI(
       "platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore");
-    _uRIMap.put(_createURI, _createURI_1);
-    URI _createURI_2 = URI.createURI("platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore");
-    Resource _resource = resourceSet.getResource(_createURI_2, true);
+    _uRIMap_9.put(_createURI_9, _createURI_10);
+    URI _createURI_11 = URI.createURI("platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore");
+    Resource _resource = resourceSet.getResource(_createURI_11, true);
     EList<EObject> _contents = _resource.getContents();
     boolean _isEmpty = _contents.isEmpty();
     Assert.assertFalse(_isEmpty);
-    URI _createURI_3 = URI.createURI(
+    URI _createURI_12 = URI.createURI(
       "platform:/plugin/org.eclipse.xtext.tests/src/org/eclipse/xtext/metamodelreferencing/tests/EcorePerNsURI.ecore");
-    Resource _resource_1 = resourceSet.getResource(_createURI_3, 
+    Resource _resource_1 = resourceSet.getResource(_createURI_12, 
       true);
     EList<EObject> _contents_1 = _resource_1.getContents();
     boolean _isEmpty_1 = _contents_1.isEmpty();
     Assert.assertFalse(_isEmpty_1);
-    URI _createURI_4 = URI.createURI(
+    URI _createURI_13 = URI.createURI(
       "platform:/plugin/org.eclipse.xtext.tests/src/org/eclipse/xtext/metamodelreferencing/tests/EcorePerPlatformResource.ecore");
-    Resource _resource_2 = resourceSet.getResource(_createURI_4, 
+    Resource _resource_2 = resourceSet.getResource(_createURI_13, 
       true);
     EList<EObject> _contents_2 = _resource_2.getContents();
     boolean _isEmpty_2 = _contents_2.isEmpty();
     Assert.assertFalse(_isEmpty_2);
-    URI _createURI_5 = URI.createURI(
+    URI _createURI_14 = URI.createURI(
       "platform:/plugin/org.eclipse.xtext.tests/src/org/eclipse/xtext/metamodelreferencing/tests/EcorePerPlatformPlugin.ecore");
-    Resource _resource_3 = resourceSet.getResource(_createURI_5, 
+    Resource _resource_3 = resourceSet.getResource(_createURI_14, 
       true);
     EList<EObject> _contents_3 = _resource_3.getContents();
     boolean _isEmpty_3 = _contents_3.isEmpty();
     Assert.assertFalse(_isEmpty_3);
-    URI _createURI_6 = URI.createURI(
+    URI _createURI_15 = URI.createURI(
       "classpath:/org/eclipse/xtext/metamodelreferencing/tests/EcoreReferenceTestLanguage.xtext");
-    Resource _resource_4 = resourceSet.getResource(_createURI_6, 
+    Resource _resource_4 = resourceSet.getResource(_createURI_15, 
       true);
     final XtextResource resource = ((XtextResource) _resource_4);
     Joiner _on = Joiner.on("\n");
