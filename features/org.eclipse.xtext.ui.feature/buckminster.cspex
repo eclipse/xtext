@@ -5,6 +5,7 @@
 	<groups>
 		<public name="source.bundle.only.jars" filter="(!(cbi.include.source=false))">
 			<attribute name="source.bundle.jar" component="org.eclipse.xtext.ui" />
+			<attribute name="source.bundle.jar" component="org.eclipse.xtext.ide" />
 			<attribute name="source.bundle.jar" component="org.eclipse.xtext.common.types.ui" />
 			<attribute name="source.bundle.jar" component="org.eclipse.xtext.common.types.shared" />
 			<attribute name="source.bundle.jar" component="org.eclipse.xtext.ui.shared" />
