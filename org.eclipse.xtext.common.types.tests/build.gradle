@@ -2,14 +2,12 @@
 //workaround for superClassName is empty!
 configurations {
   testCompile.exclude module: "org.osgi.foundation"
-  mwe2 {
-		extendsFrom compile
-	}
 }
 
 dependencies {
 
 	compile project(':org.eclipse.xtext.testlanguages')
+	compile project(':org.eclipse.xtext.xbase.testdata')
 	compile project(':org.eclipse.xtext.generator')
 	compile project(':org.eclipse.xtext.common.types')
 	compile "org.eclipse.jdt:org.eclipse.jdt.core:$versions.jdtCore"
@@ -20,9 +18,6 @@ dependencies {
 	compile 'junit:junit:4.12'
 	
 	// TODO eliminate all following dependencies
-
-	//compile "org.eclipse.xtext:org.eclipse.xtext.junit4:$versions.xtext"
-	
 	compile "org.eclipse.xpand:org.eclipse.xpand:$versions.xpand"
 	
 	mwe2 "org.eclipse.xtext:org.eclipse.xtext.generator:$versions.xtext"
@@ -36,30 +31,10 @@ eclipse.classpath.plusConfigurations += [configurations.mwe2]
 //fixme move common used classes to a separate module / sourcefolder
 sourceSets.test.java {
 	srcDir 'tests'
-	srcDir 'testdata'
 	srcDir 'suites'
 }
 
-sourceSets.main.java {
-	srcDir 'src'
+sourceSets.test.resources {
 	srcDir 'tests'
-	srcDir 'testdata'
-	srcDir 'src-gen'
-}
-
-sourceSets.main.resources {
-	srcDir 'testdata'
-	srcDir 'src-gen'
-}
-
-sourceSets {
-	test.resources {
-		srcDir 'tests'
-		srcDir 'testdata'
-		srcDir 'suites'
-	}
-}
-
-test {
-	
+	srcDir 'suites'
 }

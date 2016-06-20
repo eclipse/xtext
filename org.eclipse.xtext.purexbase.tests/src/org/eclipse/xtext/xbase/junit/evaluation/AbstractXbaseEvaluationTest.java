@@ -7,10 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.junit.evaluation;
 
-import static com.google.common.collect.Lists.*;
-import static com.google.common.collect.Maps.*;
-import static com.google.common.collect.Sets.*;
-import static java.util.Collections.*;
+import static com.google.common.collect.Lists.newArrayList;
+import static com.google.common.collect.Maps.newHashMap;
+import static com.google.common.collect.Sets.newHashSet;
+import static com.google.common.collect.Sets.newTreeSet;
+import static java.util.Collections.emptyList;
 
 import java.io.IOException;
 import java.lang.annotation.RetentionPolicy;

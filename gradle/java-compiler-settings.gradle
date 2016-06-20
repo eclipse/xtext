@@ -19,6 +19,16 @@ configurations {
 		exclude group: 'org.antlr', module: 'stringtemplate'
 		exclude module: 'cglib'
 	}
+	mwe2 {
+		extendsFrom compile
+	}
+}
+
+dependencies {
+	mwe2 "org.eclipse.xtext:org.eclipse.xtext.generator:$versions.xtext"
+	mwe2 "org.eclipse.emf:org.eclipse.emf.mwe2.launch:$versions.emfMwe2"
+	mwe2 "org.eclipse.xtext:org.eclipse.xtext.xtext.generator:$versions.xtext"
+	mwe2 "org.eclipse.xtext:org.eclipse.xtext.ecore:$versions.xtext"
 }
 
 sourceSets.main.compileClasspath += configurations.optional

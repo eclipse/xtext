@@ -9,7 +9,7 @@ dependencies {
 	compile project(':org.eclipse.xtext.testlanguages')
 	compile project(':org.eclipse.xtext.generator')
 	compile project(':org.eclipse.xtext.common.types')
-	compile project(':org.eclipse.xtext.common.types.tests')
+	compile project(':org.eclipse.xtext.xbase.testdata')
 	compile project(':org.eclipse.xtext.java')
 
 	//compile "org.eclipse.core:org.eclipse.core.runtime:$versions.eclipseCore"
@@ -29,6 +29,9 @@ dependencies {
 
 sourceSets.test.java {
 	srcDir 'xtend-gen'
+}
+
+sourceSets.test.resources {
 }
 
 test {

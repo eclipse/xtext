@@ -20,6 +20,10 @@ import org.eclipse.xtext.common.types.JvmFormalParameter
 import org.eclipse.xtext.common.types.JvmGenericType
 import org.eclipse.xtext.common.types.JvmOperation
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider
+import org.eclipse.xtext.common.types.access.impl.AbstractTypeProviderTest
+import org.eclipse.xtext.common.types.testSetups.AbstractMethods
+import org.eclipse.xtext.common.types.testSetups.Bug347739ThreeTypeParamsSuperSuper
+import org.eclipse.xtext.common.types.testSetups.ClassWithVarArgs
 import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.resource.impl.ChunkedResourceDescriptions
@@ -30,10 +34,6 @@ import org.eclipse.xtext.testing.XtextRunner
 import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.eclipse.xtext.common.types.access.impl.AbstractTypeProviderTest
-import org.eclipse.xtext.common.types.testSetups.Bug347739ThreeTypeParamsSuperSuper
-import org.eclipse.xtext.common.types.testSetups.AbstractMethods
-import org.eclipse.xtext.common.types.testSetups.ClassWithVarArgs
 
 @RunWith(XtextRunner)
 @InjectWith(JavaInjectorProvider)

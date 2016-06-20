@@ -1,3 +1,5 @@
 dependencies {
 	compile project(':org.eclipse.xtext.xbase')
 }
+
+eclipse.classpath.plusConfigurations += [configurations.mwe2]

@@ -8,5 +8,6 @@ ext.versions = [
 	'jdtCore': '[3.6.0,4.0[',
 	'xpand': '2.0.0',
 	'asm': '5.0.1',
-	'icu': '52.1'
+	'icu': '52.1',
+	'guice': '3.0'
 ]
