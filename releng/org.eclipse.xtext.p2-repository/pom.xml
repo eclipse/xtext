@@ -41,12 +41,12 @@
 						</goals>
 						<configuration>
 							<tasks>
-								<copy todir="${basedir}/../build/p2-repository/">
+								<copy todir="${basedir}/../../build/p2-repository/">
 									<fileset dir="${basedir}/target/repository/" />
 								</copy>
 								<copy
 									file="${basedir}/target/org.eclipse.xtext.p2-repository-2.11.0-SNAPSHOT.zip"
-									toDir="${basedir}/../build/" />
+									toDir="${basedir}/../../build/" />
 							</tasks>
 						</configuration>
 					</execution>

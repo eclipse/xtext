@@ -7,7 +7,7 @@
 		<groupId>org.eclipse.xtext</groupId>
 		<artifactId>org.eclipse.xtext.tycho.parent</artifactId>
 		<version>2.11.0-SNAPSHOT</version>
-		<relativePath>../org.eclipse.xtext.tycho.parent/pom.xml</relativePath>
+		<relativePath>../org.eclipse.xtext.tycho.parent</relativePath>
 	</parent>
 
 	<packaging>eclipse-target-definition</packaging>

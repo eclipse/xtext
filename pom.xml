@@ -8,8 +8,11 @@
 	<version>2.11.0-SNAPSHOT</version>
 
 	<modules>
-		<module>org.eclipse.xtext.tycho.parent</module>
-		<module>org.eclipse.xtext.target</module>
+		<module>releng/org.eclipse.xtext.target</module>
+		<module>releng/org.eclipse.xtext.tycho.parent</module>
+		<module>releng/org.eclipse.xtext.tycho.tests.parent</module>
+		<module>releng/org.eclipse.xtext.p2-repository</module>
+		
 		<module>org.eclipse.xtext.logging</module>
 		<module>org.eclipse.xtext.activities</module>
 		<module>org.eclipse.xtext.builder</module>
@@ -32,7 +35,6 @@
 		<module>org.eclipse.xtext.doc</module>
 		<module>org.eclipse.xtext.xtext.ui.examples</module>
 		<module>org.eclipse.xtext.idea.generator</module>
-		<module>org.eclipse.xtext.tycho.tests.parent</module>
 		<module>org.eclipse.xtext.builder.tests</module>
 		<module>org.eclipse.xtext.junit4.tests</module>
 		<module>org.eclipse.xtext.ui.codetemplates.tests</module>
@@ -54,7 +56,6 @@
 		<module>org.eclipse.xtext.xbase.lib.feature</module>
 		<module>org.eclipse.xtext.xtext.ui.feature</module>
 		<!-- <module>org.eclipse.xtext.build.feature</module> -->
-		<module>org.eclipse.xtext.p2-repository</module>
 	</modules>
 
 </project>
