@@ -6,7 +6,7 @@ node {
 		checkout scm
 		
 		stage 'Build'
-		sh "./gradlew build createLocalMavenRepo"
+		sh "./gradlew clean build createLocalMavenRepo --refresh-dependencies --continue --rerun-tasks"
 		archive 'build/maven-repository/**/*.*'
 		
 		slackSend "Build Succeeded - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
@@ -14,5 +14,7 @@ node {
 	} catch (e) {
 		slackSend color: 'danger', message: "Build Failed - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
 		throw e
+	} finally {
+		step([$class: 'JUnitResultArchiver', testResults: '**/build/test-results/*.xml'])
 	}
 }

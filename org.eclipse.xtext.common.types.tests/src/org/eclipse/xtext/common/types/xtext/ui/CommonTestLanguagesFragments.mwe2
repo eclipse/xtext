@@ -37,8 +37,8 @@ CompositeGeneratorFragment {
 	fragment = parser.antlr.XtextAntlrGeneratorFragment auto-inject {
 		options = auto-inject {}
 	}
-	fragment = contentAssist.JavaBasedContentAssistFragment {}
-	fragment = parser.antlr.XtextAntlrUiGeneratorFragment auto-inject {
-		options = auto-inject {}
-	}
+//	fragment = contentAssist.JavaBasedContentAssistFragment {}
+//	fragment = parser.antlr.XtextAntlrUiGeneratorFragment auto-inject {
+//		options = auto-inject {}
+//	}
 }

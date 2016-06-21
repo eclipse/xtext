@@ -1,9 +1,9 @@
 package org.eclipse.xtext.java.tests
 
 import com.google.inject.Injector
+import org.eclipse.xtext.testing.IInjectorProvider
+import org.eclipse.xtext.testing.IRegistryConfigurator
 import org.eclipse.xtext.java.JavaSourceLanguageSetup
-import org.eclipse.xtext.junit4.IInjectorProvider
-import org.eclipse.xtext.junit4.IRegistryConfigurator
 
 class JavaInjectorProvider implements IInjectorProvider, IRegistryConfigurator {
 	

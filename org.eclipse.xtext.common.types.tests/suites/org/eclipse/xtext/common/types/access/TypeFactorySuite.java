@@ -8,8 +8,6 @@
 package org.eclipse.xtext.common.types.access;
 
 import org.eclipse.xtext.common.types.access.impl.ClasspathTypeProviderTest;
-import org.eclipse.xtext.common.types.access.jdt.JdtTypeProviderTest;
-import org.eclipse.xtext.common.types.access.jdt.SourceBasedJdtTypeProviderTest;
 import org.eclipse.xtext.common.types.access.reflect.ReflectionTypeProviderTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -20,8 +18,6 @@ import org.junit.runners.Suite.SuiteClasses;
  */
 @RunWith(Suite.class)
 @SuiteClasses({
-	JdtTypeProviderTest.class,
-	SourceBasedJdtTypeProviderTest.class,
 	ReflectionTypeProviderTest.class,
 	ClasspathTypeProviderTest.class
 })

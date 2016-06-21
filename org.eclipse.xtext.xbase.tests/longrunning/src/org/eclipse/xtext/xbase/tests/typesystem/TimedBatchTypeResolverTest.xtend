@@ -8,8 +8,8 @@
 package org.eclipse.xtext.xbase.tests.typesystem
 
 import com.google.inject.Inject
-import org.eclipse.xtext.junit4.internal.StopwatchRule
-import org.eclipse.xtext.junit4.internal.Timed
+import org.eclipse.xtext.tests.StopwatchRule
+import org.eclipse.xtext.tests.Timed
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 import org.junit.Ignore
 import org.junit.Rule

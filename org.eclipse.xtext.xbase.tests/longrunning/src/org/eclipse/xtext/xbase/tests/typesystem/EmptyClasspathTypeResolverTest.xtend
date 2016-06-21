@@ -10,9 +10,9 @@ package org.eclipse.xtext.xbase.tests.typesystem
 import com.google.inject.Guice
 import com.google.inject.Inject
 import org.eclipse.emf.ecore.EObject
-import org.eclipse.xtext.junit4.InjectWith
-import org.eclipse.xtext.junit4.XtextRunner
-import org.eclipse.xtext.junit4.util.ParseHelper
+import org.eclipse.xtext.testing.InjectWith
+import org.eclipse.xtext.testing.XtextRunner
+import org.eclipse.xtext.testing.util.ParseHelper
 import org.eclipse.xtext.xbase.XbaseStandaloneSetup
 import org.eclipse.xtext.xbase.tests.XbaseInjectorProvider
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver

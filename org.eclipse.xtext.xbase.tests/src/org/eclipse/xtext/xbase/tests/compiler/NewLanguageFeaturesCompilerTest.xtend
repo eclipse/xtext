@@ -128,10 +128,10 @@ class NewLanguageFeaturesCompilerTest extends AbstractOutputComparingCompilerTes
 			((null as Iterable<java.util.List<Object>>) + (null as Iterable<java.util.Set<Object>>)).forEach[ size ]
 		'''.compilesTo('''
 			Iterable<java.util.Collection<Object>> _plus = com.google.common.collect.Iterables.<java.util.Collection<Object>>concat(((Iterable<java.util.List<Object>>) null), ((Iterable<java.util.Set<Object>>) null));
-			final org.eclipse.xtext.xbase.lib.Procedures.Procedure1<java.util.Collection<Object>> _function = (java.util.Collection<Object> it) -> {
+			final java.util.function.Consumer<java.util.Collection<Object>> _function = (java.util.Collection<Object> it) -> {
 			  it.size();
 			};
-			org.eclipse.xtext.xbase.lib.IterableExtensions.<java.util.Collection<Object>>forEach(_plus, _function);
+			_plus.forEach(_function);
 		''', JAVA8)
 	}
 	
@@ -139,10 +139,10 @@ class NewLanguageFeaturesCompilerTest extends AbstractOutputComparingCompilerTes
 		'''
 			(null as Iterable<String[]>).forEach[ reverse ]
 		'''.compilesTo('''
-			final org.eclipse.xtext.xbase.lib.Procedures.Procedure1<String[]> _function = (String[] it) -> {
+			final java.util.function.Consumer<String[]> _function = (String[] it) -> {
 			  org.eclipse.xtext.xbase.lib.ListExtensions.<String>reverse(((java.util.List<String>)org.eclipse.xtext.xbase.lib.Conversions.doWrapArray(it)));
 			};
-			org.eclipse.xtext.xbase.lib.IterableExtensions.<String[]>forEach(((Iterable<String[]>) null), _function);
+			((Iterable<String[]>) null).forEach(_function);
 		''', JAVA8)
 	}
 	

@@ -15,6 +15,7 @@ dependencies {
 	compile project(':org.eclipse.xtext.testlanguages')
 	compile project(':org.eclipse.xtext.generator')
 	compile project(':org.eclipse.xtext.common.types')
+	compile project(':org.eclipse.xtext.xbase')
 
     compile name: 'simple'
 	
@@ -41,6 +42,7 @@ sourceSets.test.java {
 sourceSets {
 	test.resources {
 		srcDir 'src-gen2'
+		srcDir 'src'
 	}
 }
 

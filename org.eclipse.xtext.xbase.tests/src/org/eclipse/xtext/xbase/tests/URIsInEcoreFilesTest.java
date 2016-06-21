@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests;
 
-import org.eclipse.xtext.junit4.internal.AbstractPortableURIsTest;
 import org.junit.Test;
 
 /**

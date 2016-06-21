@@ -6,7 +6,7 @@ import static org.junit.Assert.*
 import org.eclipse.xtext.xbase.lib.util.ToStringHelper
 import java.lang.annotation.RetentionPolicy
 import org.eclipse.xtext.util.Wrapper
-import static org.eclipse.xtext.junit4.internal.LineDelimiters.*
+import static org.eclipse.xtext.xbase.junit.LineDelimiters.*
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder
 import org.eclipse.xtend.lib.annotations.Data
 

@@ -24,90 +24,90 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_STRING", "RULE_HEX", "RULE_INT", "RULE_DECIMAL", "RULE_ID", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'var'", "'val'", "'='", "'+='", "'-='", "'*='", "'/='", "'%='", "'<'", "'>'", "'>='", "'||'", "'&&'", "'=='", "'!='", "'==='", "'!=='", "'instanceof'", "'->'", "'..<'", "'..'", "'=>'", "'<>'", "'?:'", "'+'", "'-'", "'*'", "'**'", "'/'", "'%'", "'!'", "'as'", "'++'", "'--'", "'.'", "'::'", "'?.'", "','", "'('", "')'", "'#'", "'{'", "'}'", "'['", "']'", "'|'", "';'", "'if'", "'else'", "'switch'", "':'", "'default'", "'case'", "'for'", "'while'", "'do'", "'extends'", "'static'", "'import'", "'extension'", "'super'", "'new'", "'false'", "'true'", "'null'", "'typeof'", "'throw'", "'return'", "'try'", "'finally'", "'synchronized'", "'catch'", "'?'", "'&'"
     };
-    public static final int T__68=68;
-    public static final int T__69=69;
-    public static final int RULE_ID=8;
-    public static final int T__66=66;
-    public static final int T__67=67;
-    public static final int T__64=64;
-    public static final int T__29=29;
-    public static final int T__65=65;
-    public static final int T__28=28;
-    public static final int T__62=62;
-    public static final int T__27=27;
-    public static final int T__63=63;
-    public static final int T__26=26;
-    public static final int T__25=25;
-    public static final int T__24=24;
-    public static final int T__23=23;
-    public static final int T__22=22;
-    public static final int RULE_ANY_OTHER=12;
-    public static final int T__21=21;
-    public static final int T__20=20;
-    public static final int T__61=61;
-    public static final int T__60=60;
-    public static final int EOF=-1;
+    public static final int RULE_HEX=5;
+    public static final int T__50=50;
+    public static final int T__19=19;
+    public static final int T__15=15;
+    public static final int T__59=59;
+    public static final int T__16=16;
+    public static final int T__17=17;
+    public static final int T__18=18;
     public static final int T__55=55;
     public static final int T__56=56;
-    public static final int T__19=19;
+    public static final int T__13=13;
     public static final int T__57=57;
-    public static final int RULE_HEX=5;
+    public static final int T__14=14;
     public static final int T__58=58;
-    public static final int T__16=16;
     public static final int T__51=51;
-    public static final int T__15=15;
     public static final int T__52=52;
     public static final int T__53=53;
-    public static final int T__18=18;
     public static final int T__54=54;
-    public static final int T__17=17;
-    public static final int T__14=14;
-    public static final int T__13=13;
-    public static final int T__59=59;
-    public static final int RULE_INT=6;
+    public static final int T__60=60;
+    public static final int T__61=61;
+    public static final int RULE_ID=8;
     public static final int RULE_DECIMAL=7;
-    public static final int T__50=50;
-    public static final int T__42=42;
-    public static final int T__43=43;
-    public static final int T__40=40;
-    public static final int T__41=41;
-    public static final int T__80=80;
-    public static final int T__46=46;
-    public static final int T__81=81;
-    public static final int T__47=47;
-    public static final int T__82=82;
-    public static final int T__44=44;
-    public static final int T__83=83;
-    public static final int T__45=45;
-    public static final int T__48=48;
-    public static final int T__49=49;
-    public static final int T__85=85;
-    public static final int RULE_SL_COMMENT=10;
-    public static final int T__84=84;
-    public static final int T__86=86;
+    public static final int T__26=26;
+    public static final int T__27=27;
+    public static final int T__28=28;
+    public static final int RULE_INT=6;
+    public static final int T__29=29;
+    public static final int T__22=22;
+    public static final int T__66=66;
     public static final int RULE_ML_COMMENT=9;
-    public static final int T__30=30;
-    public static final int T__31=31;
-    public static final int RULE_STRING=4;
-    public static final int T__32=32;
-    public static final int T__71=71;
-    public static final int T__33=33;
-    public static final int T__72=72;
-    public static final int T__34=34;
-    public static final int T__35=35;
+    public static final int T__23=23;
+    public static final int T__67=67;
+    public static final int T__24=24;
+    public static final int T__68=68;
+    public static final int T__25=25;
+    public static final int T__69=69;
+    public static final int T__62=62;
+    public static final int T__63=63;
+    public static final int T__20=20;
+    public static final int T__64=64;
+    public static final int T__21=21;
+    public static final int T__65=65;
     public static final int T__70=70;
-    public static final int T__36=36;
+    public static final int T__71=71;
+    public static final int T__72=72;
+    public static final int RULE_STRING=4;
+    public static final int RULE_SL_COMMENT=10;
     public static final int T__37=37;
     public static final int T__38=38;
     public static final int T__39=39;
-    public static final int RULE_WS=11;
-    public static final int T__76=76;
-    public static final int T__75=75;
-    public static final int T__74=74;
-    public static final int T__73=73;
-    public static final int T__79=79;
-    public static final int T__78=78;
+    public static final int T__33=33;
     public static final int T__77=77;
+    public static final int T__34=34;
+    public static final int T__78=78;
+    public static final int T__35=35;
+    public static final int T__79=79;
+    public static final int T__36=36;
+    public static final int T__73=73;
+    public static final int EOF=-1;
+    public static final int T__30=30;
+    public static final int T__74=74;
+    public static final int T__31=31;
+    public static final int T__75=75;
+    public static final int T__32=32;
+    public static final int T__76=76;
+    public static final int T__80=80;
+    public static final int T__81=81;
+    public static final int T__82=82;
+    public static final int T__83=83;
+    public static final int RULE_WS=11;
+    public static final int RULE_ANY_OTHER=12;
+    public static final int T__48=48;
+    public static final int T__49=49;
+    public static final int T__44=44;
+    public static final int T__45=45;
+    public static final int T__46=46;
+    public static final int T__47=47;
+    public static final int T__40=40;
+    public static final int T__84=84;
+    public static final int T__41=41;
+    public static final int T__85=85;
+    public static final int T__42=42;
+    public static final int T__86=86;
+    public static final int T__43=43;
 
     // delegates
     // delegators
@@ -3449,11 +3449,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                     if ( (LA15_0==22) ) {
                         int LA15_1 = input.LA(2);
 
-                        if ( (LA15_1==EOF||(LA15_1>=RULE_STRING && LA15_1<=RULE_ID)||LA15_1==21||(LA15_1>=37 && LA15_1<=38)||LA15_1==43||LA15_1==51||(LA15_1>=53 && LA15_1<=54)||LA15_1==56||LA15_1==60||LA15_1==62||(LA15_1>=66 && LA15_1<=81)||LA15_1==83) ) {
-                            alt15=2;
-                        }
-                        else if ( (LA15_1==22) && (synpred9_InternalContentAssistFragmentTestLang())) {
+                        if ( (LA15_1==22) && (synpred9_InternalContentAssistFragmentTestLang())) {
                             alt15=1;
+                        }
+                        else if ( (LA15_1==EOF||(LA15_1>=RULE_STRING && LA15_1<=RULE_ID)||LA15_1==21||(LA15_1>=37 && LA15_1<=38)||LA15_1==43||LA15_1==51||(LA15_1>=53 && LA15_1<=54)||LA15_1==56||LA15_1==60||LA15_1==62||(LA15_1>=66 && LA15_1<=81)||LA15_1==83) ) {
+                            alt15=2;
                         }
                         else {
                             if (state.backtracking>0) {state.failed=true; return current;}
@@ -6998,11 +6998,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
             if ( (LA38_0==53) ) {
                 int LA38_1 = input.LA(2);
 
-                if ( (LA38_1==54) ) {
-                    alt38=1;
-                }
-                else if ( (LA38_1==56) ) {
+                if ( (LA38_1==56) ) {
                     alt38=2;
+                }
+                else if ( (LA38_1==54) ) {
+                    alt38=1;
                 }
                 else {
                     if (state.backtracking>0) {state.failed=true; return current;}
@@ -18998,263 +18998,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
     // Delegated rules
 
-    public final boolean synpred6_InternalContentAssistFragmentTestLang() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred6_InternalContentAssistFragmentTestLang_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred35_InternalContentAssistFragmentTestLang() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred35_InternalContentAssistFragmentTestLang_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred1_InternalContentAssistFragmentTestLang() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred1_InternalContentAssistFragmentTestLang_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred26_InternalContentAssistFragmentTestLang() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred26_InternalContentAssistFragmentTestLang_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred33_InternalContentAssistFragmentTestLang() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred33_InternalContentAssistFragmentTestLang_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred7_InternalContentAssistFragmentTestLang() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred7_InternalContentAssistFragmentTestLang_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred21_InternalContentAssistFragmentTestLang() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred21_InternalContentAssistFragmentTestLang_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred27_InternalContentAssistFragmentTestLang() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred27_InternalContentAssistFragmentTestLang_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
     public final boolean synpred10_InternalContentAssistFragmentTestLang() {
         state.backtracking++;
         int start = input.mark();
         try {
             synpred10_InternalContentAssistFragmentTestLang_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred28_InternalContentAssistFragmentTestLang() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred28_InternalContentAssistFragmentTestLang_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred36_InternalContentAssistFragmentTestLang() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred36_InternalContentAssistFragmentTestLang_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred4_InternalContentAssistFragmentTestLang() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred4_InternalContentAssistFragmentTestLang_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred9_InternalContentAssistFragmentTestLang() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred9_InternalContentAssistFragmentTestLang_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred19_InternalContentAssistFragmentTestLang() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred19_InternalContentAssistFragmentTestLang_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred38_InternalContentAssistFragmentTestLang() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred38_InternalContentAssistFragmentTestLang_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred13_InternalContentAssistFragmentTestLang() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred13_InternalContentAssistFragmentTestLang_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred5_InternalContentAssistFragmentTestLang() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred5_InternalContentAssistFragmentTestLang_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred34_InternalContentAssistFragmentTestLang() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred34_InternalContentAssistFragmentTestLang_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred16_InternalContentAssistFragmentTestLang() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred16_InternalContentAssistFragmentTestLang_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -19278,39 +19026,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         state.failed=false;
         return success;
     }
-    public final boolean synpred18_InternalContentAssistFragmentTestLang() {
+    public final boolean synpred20_InternalContentAssistFragmentTestLang() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred18_InternalContentAssistFragmentTestLang_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred2_InternalContentAssistFragmentTestLang() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred2_InternalContentAssistFragmentTestLang_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred46_InternalContentAssistFragmentTestLang() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred46_InternalContentAssistFragmentTestLang_fragment(); // can never throw exception
+            synpred20_InternalContentAssistFragmentTestLang_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -19334,76 +19054,6 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         state.failed=false;
         return success;
     }
-    public final boolean synpred15_InternalContentAssistFragmentTestLang() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred15_InternalContentAssistFragmentTestLang_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred24_InternalContentAssistFragmentTestLang() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred24_InternalContentAssistFragmentTestLang_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred30_InternalContentAssistFragmentTestLang() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred30_InternalContentAssistFragmentTestLang_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred45_InternalContentAssistFragmentTestLang() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred45_InternalContentAssistFragmentTestLang_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred37_InternalContentAssistFragmentTestLang() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred37_InternalContentAssistFragmentTestLang_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
     public final boolean synpred32_InternalContentAssistFragmentTestLang() {
         state.backtracking++;
         int start = input.mark();
@@ -19418,11 +19068,67 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         state.failed=false;
         return success;
     }
-    public final boolean synpred12_InternalContentAssistFragmentTestLang() {
+    public final boolean synpred33_InternalContentAssistFragmentTestLang() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred12_InternalContentAssistFragmentTestLang_fragment(); // can never throw exception
+            synpred33_InternalContentAssistFragmentTestLang_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred21_InternalContentAssistFragmentTestLang() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred21_InternalContentAssistFragmentTestLang_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred44_InternalContentAssistFragmentTestLang() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred44_InternalContentAssistFragmentTestLang_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred1_InternalContentAssistFragmentTestLang() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred1_InternalContentAssistFragmentTestLang_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred2_InternalContentAssistFragmentTestLang() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred2_InternalContentAssistFragmentTestLang_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -19446,11 +19152,25 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         state.failed=false;
         return success;
     }
-    public final boolean synpred44_InternalContentAssistFragmentTestLang() {
+    public final boolean synpred31_InternalContentAssistFragmentTestLang() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred44_InternalContentAssistFragmentTestLang_fragment(); // can never throw exception
+            synpred31_InternalContentAssistFragmentTestLang_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred30_InternalContentAssistFragmentTestLang() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred30_InternalContentAssistFragmentTestLang_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -19488,11 +19208,123 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         state.failed=false;
         return success;
     }
-    public final boolean synpred39_InternalContentAssistFragmentTestLang() {
+    public final boolean synpred4_InternalContentAssistFragmentTestLang() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred39_InternalContentAssistFragmentTestLang_fragment(); // can never throw exception
+            synpred4_InternalContentAssistFragmentTestLang_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred5_InternalContentAssistFragmentTestLang() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred5_InternalContentAssistFragmentTestLang_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred6_InternalContentAssistFragmentTestLang() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred6_InternalContentAssistFragmentTestLang_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred45_InternalContentAssistFragmentTestLang() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred45_InternalContentAssistFragmentTestLang_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred35_InternalContentAssistFragmentTestLang() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred35_InternalContentAssistFragmentTestLang_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred34_InternalContentAssistFragmentTestLang() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred34_InternalContentAssistFragmentTestLang_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred46_InternalContentAssistFragmentTestLang() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred46_InternalContentAssistFragmentTestLang_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred12_InternalContentAssistFragmentTestLang() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred12_InternalContentAssistFragmentTestLang_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred13_InternalContentAssistFragmentTestLang() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred13_InternalContentAssistFragmentTestLang_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -19516,25 +19348,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         state.failed=false;
         return success;
     }
-    public final boolean synpred20_InternalContentAssistFragmentTestLang() {
+    public final boolean synpred18_InternalContentAssistFragmentTestLang() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred20_InternalContentAssistFragmentTestLang_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred31_InternalContentAssistFragmentTestLang() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred31_InternalContentAssistFragmentTestLang_fragment(); // can never throw exception
+            synpred18_InternalContentAssistFragmentTestLang_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -19558,11 +19376,193 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         state.failed=false;
         return success;
     }
+    public final boolean synpred19_InternalContentAssistFragmentTestLang() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred19_InternalContentAssistFragmentTestLang_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred15_InternalContentAssistFragmentTestLang() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred15_InternalContentAssistFragmentTestLang_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred16_InternalContentAssistFragmentTestLang() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred16_InternalContentAssistFragmentTestLang_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred24_InternalContentAssistFragmentTestLang() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred24_InternalContentAssistFragmentTestLang_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred26_InternalContentAssistFragmentTestLang() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred26_InternalContentAssistFragmentTestLang_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred28_InternalContentAssistFragmentTestLang() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred28_InternalContentAssistFragmentTestLang_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred36_InternalContentAssistFragmentTestLang() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred36_InternalContentAssistFragmentTestLang_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred37_InternalContentAssistFragmentTestLang() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred37_InternalContentAssistFragmentTestLang_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred7_InternalContentAssistFragmentTestLang() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred7_InternalContentAssistFragmentTestLang_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
     public final boolean synpred8_InternalContentAssistFragmentTestLang() {
         state.backtracking++;
         int start = input.mark();
         try {
             synpred8_InternalContentAssistFragmentTestLang_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred9_InternalContentAssistFragmentTestLang() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred9_InternalContentAssistFragmentTestLang_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred38_InternalContentAssistFragmentTestLang() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred38_InternalContentAssistFragmentTestLang_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred39_InternalContentAssistFragmentTestLang() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred39_InternalContentAssistFragmentTestLang_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred27_InternalContentAssistFragmentTestLang() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred27_InternalContentAssistFragmentTestLang_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -19600,7 +19600,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
     static final String dfa_3s = "\1\4\7\0\2\uffff";
     static final String dfa_4s = "\1\124\7\0\2\uffff";
     static final String dfa_5s = "\10\uffff\1\2\1\1";
-    static final String dfa_6s = "\1\uffff\1\1\1\2\1\3\1\4\1\5\1\0\1\6\2\uffff}>";
+    static final String dfa_6s = "\1\uffff\1\2\1\3\1\4\1\5\1\6\1\1\1\0\2\uffff}>";
     static final String[] dfa_7s = {
             "\5\10\4\uffff\2\10\1\uffff\1\1\1\2\1\3\1\4\1\5\1\6\1\7\43\10\1\uffff\32\10",
             "\1\uffff",
@@ -19643,6 +19643,21 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         	int _s = s;
             switch ( s ) {
                     case 0 : 
+                        int LA4_7 = input.LA(1);
+
+                         
+                        int index4_7 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred2_InternalContentAssistFragmentTestLang()) ) {s = 9;}
+
+                        else if ( (true) ) {s = 8;}
+
+                         
+                        input.seek(index4_7);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 1 : 
                         int LA4_6 = input.LA(1);
 
                          
@@ -19657,7 +19672,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                         input.seek(index4_6);
                         if ( s>=0 ) return s;
                         break;
-                    case 1 : 
+                    case 2 : 
                         int LA4_1 = input.LA(1);
 
                          
@@ -19672,7 +19687,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                         input.seek(index4_1);
                         if ( s>=0 ) return s;
                         break;
-                    case 2 : 
+                    case 3 : 
                         int LA4_2 = input.LA(1);
 
                          
@@ -19687,7 +19702,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                         input.seek(index4_2);
                         if ( s>=0 ) return s;
                         break;
-                    case 3 : 
+                    case 4 : 
                         int LA4_3 = input.LA(1);
 
                          
@@ -19702,7 +19717,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                         input.seek(index4_3);
                         if ( s>=0 ) return s;
                         break;
-                    case 4 : 
+                    case 5 : 
                         int LA4_4 = input.LA(1);
 
                          
@@ -19717,7 +19732,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                         input.seek(index4_4);
                         if ( s>=0 ) return s;
                         break;
-                    case 5 : 
+                    case 6 : 
                         int LA4_5 = input.LA(1);
 
                          
@@ -19730,21 +19745,6 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
 
                          
                         input.seek(index4_5);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 6 : 
-                        int LA4_7 = input.LA(1);
-
-                         
-                        int index4_7 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred2_InternalContentAssistFragmentTestLang()) ) {s = 9;}
-
-                        else if ( (true) ) {s = 8;}
-
-                         
-                        input.seek(index4_7);
                         if ( s>=0 ) return s;
                         break;
             }
@@ -19760,7 +19760,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
     static final String dfa_10s = "\1\4\1\uffff\10\0\1\uffff";
     static final String dfa_11s = "\1\124\1\uffff\10\0\1\uffff";
     static final String dfa_12s = "\1\uffff\1\2\10\uffff\1\1";
-    static final String dfa_13s = "\2\uffff\1\5\1\3\1\7\1\6\1\2\1\4\1\1\1\0\1\uffff}>";
+    static final String dfa_13s = "\2\uffff\1\5\1\2\1\0\1\1\1\6\1\7\1\3\1\4\1\uffff}>";
     static final String[] dfa_14s = {
             "\5\1\4\uffff\2\1\1\uffff\5\1\1\2\1\3\10\1\1\4\1\5\1\6\1\7\1\10\1\11\25\1\1\uffff\32\1",
             "",
@@ -19804,10 +19804,10 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         	int _s = s;
             switch ( s ) {
                     case 0 : 
-                        int LA14_9 = input.LA(1);
+                        int LA14_4 = input.LA(1);
 
                          
-                        int index14_9 = input.index();
+                        int index14_4 = input.index();
                         input.rewind();
                         s = -1;
                         if ( (synpred8_InternalContentAssistFragmentTestLang()) ) {s = 10;}
@@ -19815,14 +19815,14 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                         else if ( (true) ) {s = 1;}
 
                          
-                        input.seek(index14_9);
+                        input.seek(index14_4);
                         if ( s>=0 ) return s;
                         break;
                     case 1 : 
-                        int LA14_8 = input.LA(1);
+                        int LA14_5 = input.LA(1);
 
                          
-                        int index14_8 = input.index();
+                        int index14_5 = input.index();
                         input.rewind();
                         s = -1;
                         if ( (synpred8_InternalContentAssistFragmentTestLang()) ) {s = 10;}
@@ -19830,25 +19830,10 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                         else if ( (true) ) {s = 1;}
 
                          
-                        input.seek(index14_8);
+                        input.seek(index14_5);
                         if ( s>=0 ) return s;
                         break;
                     case 2 : 
-                        int LA14_6 = input.LA(1);
-
-                         
-                        int index14_6 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred8_InternalContentAssistFragmentTestLang()) ) {s = 10;}
-
-                        else if ( (true) ) {s = 1;}
-
-                         
-                        input.seek(index14_6);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 3 : 
                         int LA14_3 = input.LA(1);
 
                          
@@ -19863,11 +19848,11 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                         input.seek(index14_3);
                         if ( s>=0 ) return s;
                         break;
-                    case 4 : 
-                        int LA14_7 = input.LA(1);
+                    case 3 : 
+                        int LA14_8 = input.LA(1);
 
                          
-                        int index14_7 = input.index();
+                        int index14_8 = input.index();
                         input.rewind();
                         s = -1;
                         if ( (synpred8_InternalContentAssistFragmentTestLang()) ) {s = 10;}
@@ -19875,7 +19860,22 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                         else if ( (true) ) {s = 1;}
 
                          
-                        input.seek(index14_7);
+                        input.seek(index14_8);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 4 : 
+                        int LA14_9 = input.LA(1);
+
+                         
+                        int index14_9 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred8_InternalContentAssistFragmentTestLang()) ) {s = 10;}
+
+                        else if ( (true) ) {s = 1;}
+
+                         
+                        input.seek(index14_9);
                         if ( s>=0 ) return s;
                         break;
                     case 5 : 
@@ -19894,10 +19894,10 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                         if ( s>=0 ) return s;
                         break;
                     case 6 : 
-                        int LA14_5 = input.LA(1);
+                        int LA14_6 = input.LA(1);
 
                          
-                        int index14_5 = input.index();
+                        int index14_6 = input.index();
                         input.rewind();
                         s = -1;
                         if ( (synpred8_InternalContentAssistFragmentTestLang()) ) {s = 10;}
@@ -19905,14 +19905,14 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                         else if ( (true) ) {s = 1;}
 
                          
-                        input.seek(index14_5);
+                        input.seek(index14_6);
                         if ( s>=0 ) return s;
                         break;
                     case 7 : 
-                        int LA14_4 = input.LA(1);
+                        int LA14_7 = input.LA(1);
 
                          
-                        int index14_4 = input.index();
+                        int index14_7 = input.index();
                         input.rewind();
                         s = -1;
                         if ( (synpred8_InternalContentAssistFragmentTestLang()) ) {s = 10;}
@@ -19920,7 +19920,7 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
                         else if ( (true) ) {s = 1;}
 
                          
-                        input.seek(index14_4);
+                        input.seek(index14_7);
                         if ( s>=0 ) return s;
                         break;
             }
@@ -19933,13 +19933,13 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
     }
     static final String dfa_15s = "\1\25\2\uffff\1\26\7\uffff";
     static final String dfa_16s = "\1\44\2\uffff\1\41\7\uffff";
-    static final String dfa_17s = "\1\uffff\1\1\1\2\1\uffff\1\4\1\5\1\7\1\10\1\11\1\3\1\6";
+    static final String dfa_17s = "\1\uffff\1\1\1\2\1\uffff\1\4\1\5\1\7\1\10\1\11\1\6\1\3";
     static final String dfa_18s = "\13\uffff}>";
     static final String[] dfa_19s = {
             "\1\6\1\3\10\uffff\1\1\1\2\1\4\1\5\1\7\1\10",
             "",
             "",
-            "\1\12\12\uffff\1\11",
+            "\1\11\12\uffff\1\12",
             "",
             "",
             "",
@@ -22095,19 +22095,19 @@ public class InternalContentAssistFragmentTestLangParser extends AbstractInterna
         }
     }
     static final String dfa_72s = "\7\uffff";
-    static final String dfa_73s = "\2\uffff\1\4\2\uffff\1\4\1\uffff";
-    static final String dfa_74s = "\1\10\1\uffff\1\57\1\10\1\uffff\1\57\1\uffff";
-    static final String dfa_75s = "\1\106\1\uffff\1\73\1\47\1\uffff\1\73\1\uffff";
-    static final String dfa_76s = "\1\uffff\1\1\2\uffff\1\2\1\uffff\1\3";
+    static final String dfa_73s = "\2\uffff\1\4\3\uffff\1\4";
+    static final String dfa_74s = "\1\10\1\uffff\1\57\1\10\2\uffff\1\57";
+    static final String dfa_75s = "\1\106\1\uffff\1\73\1\47\2\uffff\1\73";
+    static final String dfa_76s = "\1\uffff\1\1\2\uffff\1\2\1\3\1\uffff";
     static final String dfa_77s = "\7\uffff}>";
     static final String[] dfa_78s = {
             "\1\2\75\uffff\1\1",
             "",
             "\1\3\13\uffff\1\4",
-            "\1\5\36\uffff\1\6",
+            "\1\6\36\uffff\1\5",
             "",
-            "\1\3\13\uffff\1\4",
-            ""
+            "",
+            "\1\3\13\uffff\1\4"
     };
 
     static final short[] dfa_72 = DFA.unpackEncodedString(dfa_72s);

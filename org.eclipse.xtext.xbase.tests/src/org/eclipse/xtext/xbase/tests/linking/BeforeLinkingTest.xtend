@@ -8,7 +8,7 @@
 package org.eclipse.xtext.xbase.tests.linking
 
 import com.google.inject.Inject
-import org.eclipse.xtext.junit4.util.ParseHelper
+import org.eclipse.xtext.testing.util.ParseHelper
 import org.eclipse.xtext.xbase.XBlockExpression
 import org.eclipse.xtext.xbase.XClosure
 import org.eclipse.xtext.xbase.XExpression

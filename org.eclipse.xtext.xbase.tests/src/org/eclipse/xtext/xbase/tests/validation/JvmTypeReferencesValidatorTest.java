@@ -10,7 +10,7 @@ package org.eclipse.xtext.xbase.tests.validation;
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 
 import org.eclipse.xtext.common.types.TypesPackage;
-import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
+import org.eclipse.xtext.testing.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.eclipse.xtext.xbase.validation.IssueCodes;

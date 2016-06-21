@@ -367,8 +367,8 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 			}
 		'''.compilesTo('''
 			final java.util.List<String> list = java.util.Collections.<String>unmodifiableList(org.eclipse.xtext.xbase.lib.CollectionLiterals.<String>newArrayList("1", "2"));
-			final org.eclipse.xtext.xbase.lib.Procedures.Procedure1<String> _function = new org.eclipse.xtext.xbase.lib.Procedures.Procedure1<String>() {
-			  public void apply(final String it) {
+			final java.util.function.Consumer<String> _function = new java.util.function.Consumer<String>() {
+			  public void accept(final String it) {
 			    String _switchResult = null;
 			    boolean _matched = false;
 			    if (it instanceof CharSequence) {
@@ -378,13 +378,13 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 			    final String res = _switchResult;
 			  }
 			};
-			org.eclipse.xtext.xbase.lib.IterableExtensions.<String>forEach(list, _function);
-			final org.eclipse.xtext.xbase.lib.Procedures.Procedure1<String> _function_1 = new org.eclipse.xtext.xbase.lib.Procedures.Procedure1<String>() {
-			  public void apply(final String it) {
+			list.forEach(_function);
+			final java.util.function.Consumer<String> _function_1 = new java.util.function.Consumer<String>() {
+			  public void accept(final String it) {
 			    org.eclipse.xtext.xbase.lib.InputOutput.<String>println(it);
 			  }
 			};
-			org.eclipse.xtext.xbase.lib.IterableExtensions.<String>forEach(list, _function_1);
+			list.forEach(_function_1);
 		''')
 	}
 
@@ -404,8 +404,8 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 			}
 		'''.compilesTo('''
 			final java.util.List<String> list = java.util.Collections.<String>unmodifiableList(org.eclipse.xtext.xbase.lib.CollectionLiterals.<String>newArrayList("1", "2"));
-			final org.eclipse.xtext.xbase.lib.Procedures.Procedure1<String> _function = new org.eclipse.xtext.xbase.lib.Procedures.Procedure1<String>() {
-			  public void apply(final String it) {
+			final java.util.function.Consumer<String> _function = new java.util.function.Consumer<String>() {
+			  public void accept(final String it) {
 			    String _switchResult = null;
 			    boolean _matched = false;
 			    if (it instanceof CharSequence) {
@@ -418,13 +418,13 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 			    final String res = _switchResult;
 			  }
 			};
-			org.eclipse.xtext.xbase.lib.IterableExtensions.<String>forEach(list, _function);
-			final org.eclipse.xtext.xbase.lib.Procedures.Procedure1<String> _function_1 = new org.eclipse.xtext.xbase.lib.Procedures.Procedure1<String>() {
-			  public void apply(final String it) {
+			list.forEach(_function);
+			final java.util.function.Consumer<String> _function_1 = new java.util.function.Consumer<String>() {
+			  public void accept(final String it) {
 			    org.eclipse.xtext.xbase.lib.InputOutput.<String>println(it);
 			  }
 			};
-			org.eclipse.xtext.xbase.lib.IterableExtensions.<String>forEach(list, _function_1);
+			list.forEach(_function_1);
 		''')
 	}
 	
@@ -444,8 +444,8 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 			}
 		'''.compilesTo('''
 			final java.util.List<String> list = java.util.Collections.<String>unmodifiableList(org.eclipse.xtext.xbase.lib.CollectionLiterals.<String>newArrayList("1", "2"));
-			final org.eclipse.xtext.xbase.lib.Procedures.Procedure1<String> _function = new org.eclipse.xtext.xbase.lib.Procedures.Procedure1<String>() {
-			  public void apply(final String it) {
+			final java.util.function.Consumer<String> _function = new java.util.function.Consumer<String>() {
+			  public void accept(final String it) {
 			    String _switchResult = null;
 			    boolean _matched = false;
 			    if (it instanceof String) {
@@ -465,13 +465,13 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 			    final String res = _switchResult;
 			  }
 			};
-			org.eclipse.xtext.xbase.lib.IterableExtensions.<String>forEach(list, _function);
-			final org.eclipse.xtext.xbase.lib.Procedures.Procedure1<String> _function_1 = new org.eclipse.xtext.xbase.lib.Procedures.Procedure1<String>() {
-			  public void apply(final String it) {
+			list.forEach(_function);
+			final java.util.function.Consumer<String> _function_1 = new java.util.function.Consumer<String>() {
+			  public void accept(final String it) {
 			    org.eclipse.xtext.xbase.lib.InputOutput.<String>println(it);
 			  }
 			};
-			org.eclipse.xtext.xbase.lib.IterableExtensions.<String>forEach(list, _function_1);
+			list.forEach(_function_1);
 		''')
 	}
 	

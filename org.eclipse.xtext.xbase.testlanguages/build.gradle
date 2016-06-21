@@ -1,4 +1,11 @@
+configurations {
+  testCompile.exclude module: "org.osgi.foundation"
+}
+
 dependencies {
 	compile project(':org.eclipse.xtext.xbase')
 	compile project(':org.eclipse.xtext.common.types')
+	compile "org.eclipse.xtext:org.eclipse.xtext.testing:$versions.xtext"
 }
+
+eclipse.classpath.plusConfigurations += [configurations.mwe2]

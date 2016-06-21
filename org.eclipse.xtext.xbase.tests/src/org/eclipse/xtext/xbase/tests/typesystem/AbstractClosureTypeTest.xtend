@@ -571,11 +571,11 @@ abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test def void testTypeForVoidClosure_01() throws Exception {
-		"newArrayList('foo','bar').forEach []".resolvesClosuresTo("(String)=>void").withEquivalents("Procedure1<String>")
+		"newArrayList('foo','bar').forEach []".resolvesClosuresTo("(String)=>void").withEquivalents("Consumer<String>")
 	}
 	
 	@Test def void testTypeForVoidClosure_02() throws Exception {
-		"newArrayList('foo','bar').forEach [ return ]".resolvesClosuresTo("(String)=>void").withEquivalents("Procedure1<String>")
+		"newArrayList('foo','bar').forEach [ return ]".resolvesClosuresTo("(String)=>void").withEquivalents("Consumer<String>")
 	}
 
 	@Test def void testClosure_00() throws Exception {
@@ -1554,7 +1554,7 @@ abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
 			val list = newArrayList
 			list.forEach[String s | s]
 			list
-		}".resolvesClosuresTo("(String)=>void").withEquivalents("Procedure1<String>")
+		}".resolvesClosuresTo("(String)=>void").withEquivalents("Consumer<String>")
 	}
 	
 	@Test def void testFeatureCall_063() throws Exception {
@@ -1582,7 +1582,7 @@ abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
 			val list = newArrayList
 			list.forEach[ s | s.toString ]
 			list
-		}".resolvesClosuresTo("(Object)=>void").withEquivalents("Procedure1<Object>")
+		}".resolvesClosuresTo("(Object)=>void").withEquivalents("Consumer<Object>")
 	}
 	
 	@Test def void testFeatureCall_067() throws Exception {

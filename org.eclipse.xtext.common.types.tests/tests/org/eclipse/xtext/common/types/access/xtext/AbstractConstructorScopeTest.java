@@ -16,7 +16,6 @@ import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmVoid;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.TypesPackage;
-import org.eclipse.xtext.common.types.access.jdt.MockJavaProjectProvider;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -36,7 +35,7 @@ import com.google.common.collect.Lists;
 public abstract class AbstractConstructorScopeTest extends Assert {
 
 	@BeforeClass public static void createMockJavaProject() throws Exception {
-		MockJavaProjectProvider.setUp();
+//		MockJavaProjectProvider.setUp();
 	}
 	
 	@Test public void testGetOuterScope_01() {
@@ -72,37 +71,37 @@ public abstract class AbstractConstructorScopeTest extends Assert {
 	}
 	
 	@Test public void testGetElementByName_06() {
-		IEObjectDescription hashMapEntry = getConstructorScope().getSingleElement(QualifiedName.create("java", "util", "HashMap$Entry"));
+		IEObjectDescription hashMapEntry = getConstructorScope().getSingleElement(QualifiedName.create("java", "util", "Hashtable$Entry"));
 		assertNotNull(hashMapEntry);
 		assertFalse(hashMapEntry.getEObjectOrProxy().eIsProxy());
 		assertEquals(TypesPackage.Literals.JVM_CONSTRUCTOR, hashMapEntry.getEClass());
-		assertEquals(QualifiedName.create("java", "util", "HashMap$Entry"), hashMapEntry.getName());
+		assertEquals(QualifiedName.create("java", "util", "Hashtable$Entry"), hashMapEntry.getName());
 	}
 	
 	@Test public void testGetElementByName_07() {
-		IEObjectDescription hashMapEntry = getConstructorScope().getSingleElement(QualifiedName.create("java", "util", "HashMap", "Entry"));
+		IEObjectDescription hashMapEntry = getConstructorScope().getSingleElement(QualifiedName.create("java", "util", "Hashtable", "Entry"));
 		assertNotNull(hashMapEntry);
 		assertFalse(hashMapEntry.getEObjectOrProxy().eIsProxy());
 		assertEquals(TypesPackage.Literals.JVM_CONSTRUCTOR, hashMapEntry.getEClass());
-		assertEquals(QualifiedName.create("java", "util", "HashMap", "Entry"), hashMapEntry.getName());
+		assertEquals(QualifiedName.create("java", "util", "Hashtable", "Entry"), hashMapEntry.getName());
 	}
 	
 	@Test public void testGetElementsByName_01() {
-		Iterable<IEObjectDescription> descriptions = getConstructorScope().getElements(QualifiedName.create("java", "util", "HashMap$Entry"));
+		Iterable<IEObjectDescription> descriptions = getConstructorScope().getElements(QualifiedName.create("java", "util", "Hashtable$Entry"));
 		IEObjectDescription hashMapEntry = Iterables.getOnlyElement(descriptions);
 		assertNotNull(hashMapEntry);
 		assertFalse(hashMapEntry.getEObjectOrProxy().eIsProxy());
 		assertEquals(TypesPackage.Literals.JVM_CONSTRUCTOR, hashMapEntry.getEClass());
-		assertEquals(QualifiedName.create("java", "util", "HashMap$Entry"), hashMapEntry.getName());
+		assertEquals(QualifiedName.create("java", "util", "Hashtable$Entry"), hashMapEntry.getName());
 	}
 	
 	@Test public void testGetElementsByName_02() {
-		Iterable<IEObjectDescription> descriptions = getConstructorScope().getElements(QualifiedName.create("java", "util", "HashMap", "Entry"));
+		Iterable<IEObjectDescription> descriptions = getConstructorScope().getElements(QualifiedName.create("java", "util", "Hashtable", "Entry"));
 		IEObjectDescription hashMapEntry = Iterables.getOnlyElement(descriptions);
 		assertNotNull(hashMapEntry);
 		assertFalse(hashMapEntry.getEObjectOrProxy().eIsProxy());
 		assertEquals(TypesPackage.Literals.JVM_CONSTRUCTOR, hashMapEntry.getEClass());
-		assertEquals(QualifiedName.create("java", "util", "HashMap", "Entry"), hashMapEntry.getName());
+		assertEquals(QualifiedName.create("java", "util", "Hashtable", "Entry"), hashMapEntry.getName());
 	}
 	
 	@Test public void testGetElementsByName_03() {
@@ -151,7 +150,7 @@ public abstract class AbstractConstructorScopeTest extends Assert {
 	}
 	
 	@Test public void testGetElementByInstance_04() {
-		QualifiedName qualifiedName = QualifiedName.create("java", "util", "HashMap", "Entry");
+		QualifiedName qualifiedName = QualifiedName.create("java", "util", "Hashtable", "Entry");
 		IEObjectDescription hashMapEntry = getConstructorScope().getSingleElement(qualifiedName);
 		JvmConstructor constructor = (JvmConstructor) hashMapEntry.getEObjectOrProxy();
 		IEObjectDescription element = getConstructorScope().getSingleElement(constructor);
@@ -160,14 +159,14 @@ public abstract class AbstractConstructorScopeTest extends Assert {
 	}
 	
 	@Test public void testGetElementsByInstance_04() {
-		QualifiedName qualifiedName = QualifiedName.create("java", "util", "HashMap", "Entry");
+		QualifiedName qualifiedName = QualifiedName.create("java", "util", "Hashtable", "Entry");
 		IEObjectDescription hashMapEntry = getConstructorScope().getSingleElement(qualifiedName);
 		JvmConstructor constructor = (JvmConstructor) hashMapEntry.getEObjectOrProxy();
 		Iterable<IEObjectDescription> descriptions = getConstructorScope().getElements(constructor);
 		List<IEObjectDescription> list = Lists.newArrayList(descriptions);
 		assertEquals(2, list.size());
 		assertEquals(qualifiedName, list.get(0).getName());
-		QualifiedName qualifiedNameWithDollar = QualifiedName.create("java", "util", "HashMap$Entry");
+		QualifiedName qualifiedNameWithDollar = QualifiedName.create("java", "util", "Hashtable$Entry");
 		assertEquals(qualifiedNameWithDollar, list.get(1).getName());
 	}
 	

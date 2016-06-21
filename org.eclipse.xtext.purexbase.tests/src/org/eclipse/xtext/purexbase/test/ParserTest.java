@@ -7,13 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.purexbase.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
-import org.eclipse.xtext.junit4.InjectWith;
-import org.eclipse.xtext.junit4.XtextRunner;
-import org.eclipse.xtext.junit4.util.ParseHelper;
 import org.eclipse.xtext.purexbase.PureXbaseInjectorProvider;
 import org.eclipse.xtext.purexbase.pureXbase.Model;
+import org.eclipse.xtext.testing.InjectWith;
+import org.eclipse.xtext.testing.XtextRunner;
+import org.eclipse.xtext.testing.util.ParseHelper;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.junit.Test;
 import org.junit.runner.RunWith;

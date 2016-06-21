@@ -24,92 +24,92 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalAntlrP
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_STRING", "RULE_HEX", "RULE_INT", "RULE_DECIMAL", "RULE_ID", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'some'", "'token'", "'='", "'+='", "'-='", "'*='", "'/='", "'%='", "'<'", "'>'", "'>='", "'||'", "'&&'", "'=='", "'!='", "'==='", "'!=='", "'instanceof'", "'->'", "'..<'", "'..'", "'=>'", "'<>'", "'?:'", "'+'", "'-'", "'*'", "'**'", "'/'", "'%'", "'!'", "'as'", "'++'", "'--'", "'.'", "'::'", "'?.'", "','", "'('", "')'", "'#'", "'{'", "'}'", "'['", "']'", "'|'", "';'", "'if'", "'else'", "'switch'", "':'", "'default'", "'case'", "'for'", "'while'", "'do'", "'var'", "'val'", "'extends'", "'static'", "'import'", "'extension'", "'super'", "'new'", "'false'", "'true'", "'null'", "'typeof'", "'throw'", "'return'", "'try'", "'finally'", "'synchronized'", "'catch'", "'?'", "'&'"
     };
-    public static final int T__68=68;
-    public static final int T__69=69;
-    public static final int RULE_ID=8;
-    public static final int T__66=66;
-    public static final int T__67=67;
-    public static final int T__64=64;
-    public static final int T__29=29;
-    public static final int T__65=65;
-    public static final int T__28=28;
-    public static final int T__62=62;
-    public static final int T__27=27;
-    public static final int T__63=63;
-    public static final int T__26=26;
-    public static final int T__25=25;
-    public static final int T__24=24;
-    public static final int T__23=23;
-    public static final int T__22=22;
-    public static final int RULE_ANY_OTHER=12;
-    public static final int T__21=21;
-    public static final int T__20=20;
-    public static final int T__61=61;
-    public static final int T__60=60;
-    public static final int EOF=-1;
+    public static final int RULE_HEX=5;
+    public static final int T__50=50;
+    public static final int T__19=19;
+    public static final int T__15=15;
+    public static final int T__59=59;
+    public static final int T__16=16;
+    public static final int T__17=17;
+    public static final int T__18=18;
     public static final int T__55=55;
     public static final int T__56=56;
-    public static final int T__19=19;
+    public static final int T__13=13;
     public static final int T__57=57;
-    public static final int RULE_HEX=5;
+    public static final int T__14=14;
     public static final int T__58=58;
-    public static final int T__16=16;
     public static final int T__51=51;
-    public static final int T__15=15;
     public static final int T__52=52;
     public static final int T__53=53;
-    public static final int T__18=18;
     public static final int T__54=54;
-    public static final int T__17=17;
-    public static final int T__14=14;
-    public static final int T__13=13;
-    public static final int T__59=59;
-    public static final int RULE_INT=6;
+    public static final int T__60=60;
+    public static final int T__61=61;
+    public static final int RULE_ID=8;
     public static final int RULE_DECIMAL=7;
-    public static final int T__50=50;
-    public static final int T__42=42;
-    public static final int T__43=43;
-    public static final int T__40=40;
-    public static final int T__41=41;
-    public static final int T__80=80;
-    public static final int T__46=46;
-    public static final int T__81=81;
-    public static final int T__47=47;
-    public static final int T__82=82;
-    public static final int T__44=44;
-    public static final int T__83=83;
-    public static final int T__45=45;
-    public static final int T__48=48;
-    public static final int T__49=49;
-    public static final int T__85=85;
-    public static final int RULE_SL_COMMENT=10;
-    public static final int T__84=84;
-    public static final int T__87=87;
-    public static final int T__86=86;
-    public static final int T__88=88;
+    public static final int T__26=26;
+    public static final int T__27=27;
+    public static final int T__28=28;
+    public static final int RULE_INT=6;
+    public static final int T__29=29;
+    public static final int T__22=22;
+    public static final int T__66=66;
     public static final int RULE_ML_COMMENT=9;
-    public static final int T__30=30;
-    public static final int T__31=31;
-    public static final int RULE_STRING=4;
-    public static final int T__32=32;
-    public static final int T__71=71;
-    public static final int T__33=33;
-    public static final int T__72=72;
-    public static final int T__34=34;
-    public static final int T__35=35;
+    public static final int T__23=23;
+    public static final int T__67=67;
+    public static final int T__24=24;
+    public static final int T__68=68;
+    public static final int T__25=25;
+    public static final int T__69=69;
+    public static final int T__62=62;
+    public static final int T__63=63;
+    public static final int T__20=20;
+    public static final int T__64=64;
+    public static final int T__21=21;
+    public static final int T__65=65;
     public static final int T__70=70;
-    public static final int T__36=36;
+    public static final int T__71=71;
+    public static final int T__72=72;
+    public static final int RULE_STRING=4;
+    public static final int RULE_SL_COMMENT=10;
     public static final int T__37=37;
     public static final int T__38=38;
     public static final int T__39=39;
-    public static final int RULE_WS=11;
-    public static final int T__76=76;
-    public static final int T__75=75;
-    public static final int T__74=74;
-    public static final int T__73=73;
-    public static final int T__79=79;
-    public static final int T__78=78;
+    public static final int T__33=33;
     public static final int T__77=77;
+    public static final int T__34=34;
+    public static final int T__78=78;
+    public static final int T__35=35;
+    public static final int T__79=79;
+    public static final int T__36=36;
+    public static final int T__73=73;
+    public static final int EOF=-1;
+    public static final int T__30=30;
+    public static final int T__74=74;
+    public static final int T__31=31;
+    public static final int T__75=75;
+    public static final int T__32=32;
+    public static final int T__76=76;
+    public static final int T__80=80;
+    public static final int T__81=81;
+    public static final int T__82=82;
+    public static final int T__83=83;
+    public static final int RULE_WS=11;
+    public static final int RULE_ANY_OTHER=12;
+    public static final int T__48=48;
+    public static final int T__49=49;
+    public static final int T__44=44;
+    public static final int T__88=88;
+    public static final int T__45=45;
+    public static final int T__46=46;
+    public static final int T__47=47;
+    public static final int T__40=40;
+    public static final int T__84=84;
+    public static final int T__41=41;
+    public static final int T__85=85;
+    public static final int T__42=42;
+    public static final int T__86=86;
+    public static final int T__43=43;
+    public static final int T__87=87;
 
     // delegates
     // delegators
@@ -3080,11 +3080,11 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalAntlrP
                     if ( (LA12_0==22) ) {
                         int LA12_1 = input.LA(2);
 
-                        if ( (LA12_1==EOF||(LA12_1>=RULE_STRING && LA12_1<=RULE_ID)||LA12_1==21||(LA12_1>=37 && LA12_1<=38)||LA12_1==43||LA12_1==51||(LA12_1>=53 && LA12_1<=54)||LA12_1==56||LA12_1==60||LA12_1==62||(LA12_1>=66 && LA12_1<=68)||(LA12_1>=71 && LA12_1<=83)||LA12_1==85) ) {
-                            alt12=2;
-                        }
-                        else if ( (LA12_1==22) && (synpred8_InternalXImportSectionTestLang())) {
+                        if ( (LA12_1==22) && (synpred8_InternalXImportSectionTestLang())) {
                             alt12=1;
+                        }
+                        else if ( (LA12_1==EOF||(LA12_1>=RULE_STRING && LA12_1<=RULE_ID)||LA12_1==21||(LA12_1>=37 && LA12_1<=38)||LA12_1==43||LA12_1==51||(LA12_1>=53 && LA12_1<=54)||LA12_1==56||LA12_1==60||LA12_1==62||(LA12_1>=66 && LA12_1<=68)||(LA12_1>=71 && LA12_1<=83)||LA12_1==85) ) {
+                            alt12=2;
                         }
                         else {
                             if (state.backtracking>0) {state.failed=true; return current;}
@@ -6629,11 +6629,11 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalAntlrP
             if ( (LA35_0==53) ) {
                 int LA35_1 = input.LA(2);
 
-                if ( (LA35_1==54) ) {
-                    alt35=1;
-                }
-                else if ( (LA35_1==56) ) {
+                if ( (LA35_1==56) ) {
                     alt35=2;
+                }
+                else if ( (LA35_1==54) ) {
+                    alt35=1;
                 }
                 else {
                     if (state.backtracking>0) {state.failed=true; return current;}
@@ -19152,137 +19152,11 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalAntlrP
 
     // Delegated rules
 
-    public final boolean synpred7_InternalXImportSectionTestLang() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred7_InternalXImportSectionTestLang_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred16_InternalXImportSectionTestLang() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred16_InternalXImportSectionTestLang_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred32_InternalXImportSectionTestLang() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred32_InternalXImportSectionTestLang_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred4_InternalXImportSectionTestLang() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred4_InternalXImportSectionTestLang_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred14_InternalXImportSectionTestLang() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred14_InternalXImportSectionTestLang_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred27_InternalXImportSectionTestLang() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred27_InternalXImportSectionTestLang_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred9_InternalXImportSectionTestLang() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred9_InternalXImportSectionTestLang_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
     public final boolean synpred25_InternalXImportSectionTestLang() {
         state.backtracking++;
         int start = input.mark();
         try {
             synpred25_InternalXImportSectionTestLang_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred1_InternalXImportSectionTestLang() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred1_InternalXImportSectionTestLang_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred37_InternalXImportSectionTestLang() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred37_InternalXImportSectionTestLang_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -19306,11 +19180,11 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalAntlrP
         state.failed=false;
         return success;
     }
-    public final boolean synpred12_InternalXImportSectionTestLang() {
+    public final boolean synpred46_InternalXImportSectionTestLang() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred12_InternalXImportSectionTestLang_fragment(); // can never throw exception
+            synpred46_InternalXImportSectionTestLang_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -19320,11 +19194,53 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalAntlrP
         state.failed=false;
         return success;
     }
-    public final boolean synpred46_InternalXImportSectionTestLang() {
+    public final boolean synpred8_InternalXImportSectionTestLang() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred46_InternalXImportSectionTestLang_fragment(); // can never throw exception
+            synpred8_InternalXImportSectionTestLang_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred16_InternalXImportSectionTestLang() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred16_InternalXImportSectionTestLang_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred37_InternalXImportSectionTestLang() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred37_InternalXImportSectionTestLang_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred12_InternalXImportSectionTestLang() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred12_InternalXImportSectionTestLang_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -19348,11 +19264,11 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalAntlrP
         state.failed=false;
         return success;
     }
-    public final boolean synpred26_InternalXImportSectionTestLang() {
+    public final boolean synpred4_InternalXImportSectionTestLang() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred26_InternalXImportSectionTestLang_fragment(); // can never throw exception
+            synpred4_InternalXImportSectionTestLang_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -19362,11 +19278,109 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalAntlrP
         state.failed=false;
         return success;
     }
-    public final boolean synpred23_InternalXImportSectionTestLang() {
+    public final boolean synpred21_InternalXImportSectionTestLang() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred23_InternalXImportSectionTestLang_fragment(); // can never throw exception
+            synpred21_InternalXImportSectionTestLang_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred29_InternalXImportSectionTestLang() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred29_InternalXImportSectionTestLang_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred19_InternalXImportSectionTestLang() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred19_InternalXImportSectionTestLang_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred45_InternalXImportSectionTestLang() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred45_InternalXImportSectionTestLang_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred33_InternalXImportSectionTestLang() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred33_InternalXImportSectionTestLang_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred7_InternalXImportSectionTestLang() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred7_InternalXImportSectionTestLang_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred15_InternalXImportSectionTestLang() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred15_InternalXImportSectionTestLang_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred3_InternalXImportSectionTestLang() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred3_InternalXImportSectionTestLang_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -19404,11 +19418,11 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalAntlrP
         state.failed=false;
         return success;
     }
-    public final boolean synpred38_InternalXImportSectionTestLang() {
+    public final boolean synpred23_InternalXImportSectionTestLang() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred38_InternalXImportSectionTestLang_fragment(); // can never throw exception
+            synpred23_InternalXImportSectionTestLang_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -19418,11 +19432,53 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalAntlrP
         state.failed=false;
         return success;
     }
-    public final boolean synpred8_InternalXImportSectionTestLang() {
+    public final boolean synpred32_InternalXImportSectionTestLang() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred8_InternalXImportSectionTestLang_fragment(); // can never throw exception
+            synpred32_InternalXImportSectionTestLang_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred11_InternalXImportSectionTestLang() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred11_InternalXImportSectionTestLang_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred39_InternalXImportSectionTestLang() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred39_InternalXImportSectionTestLang_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred6_InternalXImportSectionTestLang() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred6_InternalXImportSectionTestLang_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -19437,6 +19493,20 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalAntlrP
         int start = input.mark();
         try {
             synpred18_InternalXImportSectionTestLang_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred14_InternalXImportSectionTestLang() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred14_InternalXImportSectionTestLang_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -19474,90 +19544,6 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalAntlrP
         state.failed=false;
         return success;
     }
-    public final boolean synpred45_InternalXImportSectionTestLang() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred45_InternalXImportSectionTestLang_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred15_InternalXImportSectionTestLang() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred15_InternalXImportSectionTestLang_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred39_InternalXImportSectionTestLang() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred39_InternalXImportSectionTestLang_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred29_InternalXImportSectionTestLang() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred29_InternalXImportSectionTestLang_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred34_InternalXImportSectionTestLang() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred34_InternalXImportSectionTestLang_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred21_InternalXImportSectionTestLang() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred21_InternalXImportSectionTestLang_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
     public final boolean synpred44_InternalXImportSectionTestLang() {
         state.backtracking++;
         int start = input.mark();
@@ -19572,81 +19558,11 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalAntlrP
         state.failed=false;
         return success;
     }
-    public final boolean synpred6_InternalXImportSectionTestLang() {
+    public final boolean synpred27_InternalXImportSectionTestLang() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred6_InternalXImportSectionTestLang_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred10_InternalXImportSectionTestLang() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred10_InternalXImportSectionTestLang_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred5_InternalXImportSectionTestLang() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred5_InternalXImportSectionTestLang_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred13_InternalXImportSectionTestLang() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred13_InternalXImportSectionTestLang_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred11_InternalXImportSectionTestLang() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred11_InternalXImportSectionTestLang_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred17_InternalXImportSectionTestLang() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred17_InternalXImportSectionTestLang_fragment(); // can never throw exception
+            synpred27_InternalXImportSectionTestLang_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -19670,11 +19586,11 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalAntlrP
         state.failed=false;
         return success;
     }
-    public final boolean synpred3_InternalXImportSectionTestLang() {
+    public final boolean synpred10_InternalXImportSectionTestLang() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred3_InternalXImportSectionTestLang_fragment(); // can never throw exception
+            synpred10_InternalXImportSectionTestLang_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -19684,11 +19600,11 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalAntlrP
         state.failed=false;
         return success;
     }
-    public final boolean synpred19_InternalXImportSectionTestLang() {
+    public final boolean synpred17_InternalXImportSectionTestLang() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred19_InternalXImportSectionTestLang_fragment(); // can never throw exception
+            synpred17_InternalXImportSectionTestLang_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -19698,11 +19614,67 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalAntlrP
         state.failed=false;
         return success;
     }
-    public final boolean synpred33_InternalXImportSectionTestLang() {
+    public final boolean synpred9_InternalXImportSectionTestLang() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred33_InternalXImportSectionTestLang_fragment(); // can never throw exception
+            synpred9_InternalXImportSectionTestLang_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred38_InternalXImportSectionTestLang() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred38_InternalXImportSectionTestLang_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred13_InternalXImportSectionTestLang() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred13_InternalXImportSectionTestLang_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred5_InternalXImportSectionTestLang() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred5_InternalXImportSectionTestLang_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred34_InternalXImportSectionTestLang() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred34_InternalXImportSectionTestLang_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -19717,6 +19689,34 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalAntlrP
         int start = input.mark();
         try {
             synpred43_InternalXImportSectionTestLang_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred1_InternalXImportSectionTestLang() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred1_InternalXImportSectionTestLang_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred26_InternalXImportSectionTestLang() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred26_InternalXImportSectionTestLang_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -19754,7 +19754,7 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalAntlrP
     static final String dfa_3s = "\1\4\7\0\2\uffff";
     static final String dfa_4s = "\1\126\7\0\2\uffff";
     static final String dfa_5s = "\10\uffff\1\2\1\1";
-    static final String dfa_6s = "\1\uffff\1\4\1\6\1\3\1\2\1\1\1\0\1\5\2\uffff}>";
+    static final String dfa_6s = "\1\uffff\1\1\1\2\1\3\1\4\1\5\1\6\1\0\2\uffff}>";
     static final String[] dfa_7s = {
             "\5\10\7\uffff\1\1\1\2\1\3\1\4\1\5\1\6\1\7\43\10\1\uffff\34\10",
             "\1\uffff",
@@ -19797,10 +19797,10 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalAntlrP
         	int _s = s;
             switch ( s ) {
                     case 0 : 
-                        int LA1_6 = input.LA(1);
+                        int LA1_7 = input.LA(1);
 
                          
-                        int index1_6 = input.index();
+                        int index1_7 = input.index();
                         input.rewind();
                         s = -1;
                         if ( (synpred1_InternalXImportSectionTestLang()) ) {s = 9;}
@@ -19808,14 +19808,14 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalAntlrP
                         else if ( (true) ) {s = 8;}
 
                          
-                        input.seek(index1_6);
+                        input.seek(index1_7);
                         if ( s>=0 ) return s;
                         break;
                     case 1 : 
-                        int LA1_5 = input.LA(1);
+                        int LA1_1 = input.LA(1);
 
                          
-                        int index1_5 = input.index();
+                        int index1_1 = input.index();
                         input.rewind();
                         s = -1;
                         if ( (synpred1_InternalXImportSectionTestLang()) ) {s = 9;}
@@ -19823,14 +19823,14 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalAntlrP
                         else if ( (true) ) {s = 8;}
 
                          
-                        input.seek(index1_5);
+                        input.seek(index1_1);
                         if ( s>=0 ) return s;
                         break;
                     case 2 : 
-                        int LA1_4 = input.LA(1);
+                        int LA1_2 = input.LA(1);
 
                          
-                        int index1_4 = input.index();
+                        int index1_2 = input.index();
                         input.rewind();
                         s = -1;
                         if ( (synpred1_InternalXImportSectionTestLang()) ) {s = 9;}
@@ -19838,7 +19838,7 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalAntlrP
                         else if ( (true) ) {s = 8;}
 
                          
-                        input.seek(index1_4);
+                        input.seek(index1_2);
                         if ( s>=0 ) return s;
                         break;
                     case 3 : 
@@ -19857,10 +19857,10 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalAntlrP
                         if ( s>=0 ) return s;
                         break;
                     case 4 : 
-                        int LA1_1 = input.LA(1);
+                        int LA1_4 = input.LA(1);
 
                          
-                        int index1_1 = input.index();
+                        int index1_4 = input.index();
                         input.rewind();
                         s = -1;
                         if ( (synpred1_InternalXImportSectionTestLang()) ) {s = 9;}
@@ -19868,14 +19868,14 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalAntlrP
                         else if ( (true) ) {s = 8;}
 
                          
-                        input.seek(index1_1);
+                        input.seek(index1_4);
                         if ( s>=0 ) return s;
                         break;
                     case 5 : 
-                        int LA1_7 = input.LA(1);
+                        int LA1_5 = input.LA(1);
 
                          
-                        int index1_7 = input.index();
+                        int index1_5 = input.index();
                         input.rewind();
                         s = -1;
                         if ( (synpred1_InternalXImportSectionTestLang()) ) {s = 9;}
@@ -19883,14 +19883,14 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalAntlrP
                         else if ( (true) ) {s = 8;}
 
                          
-                        input.seek(index1_7);
+                        input.seek(index1_5);
                         if ( s>=0 ) return s;
                         break;
                     case 6 : 
-                        int LA1_2 = input.LA(1);
+                        int LA1_6 = input.LA(1);
 
                          
-                        int index1_2 = input.index();
+                        int index1_6 = input.index();
                         input.rewind();
                         s = -1;
                         if ( (synpred1_InternalXImportSectionTestLang()) ) {s = 9;}
@@ -19898,7 +19898,7 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalAntlrP
                         else if ( (true) ) {s = 8;}
 
                          
-                        input.seek(index1_2);
+                        input.seek(index1_6);
                         if ( s>=0 ) return s;
                         break;
             }
@@ -19914,7 +19914,7 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalAntlrP
     static final String dfa_10s = "\1\4\1\uffff\10\0\1\uffff";
     static final String dfa_11s = "\1\126\1\uffff\10\0\1\uffff";
     static final String dfa_12s = "\1\uffff\1\2\10\uffff\1\1";
-    static final String dfa_13s = "\2\uffff\1\5\1\2\1\3\1\1\1\7\1\0\1\4\1\6\1\uffff}>";
+    static final String dfa_13s = "\2\uffff\1\7\1\6\1\4\1\5\1\3\1\2\1\0\1\1\1\uffff}>";
     static final String[] dfa_14s = {
             "\5\1\7\uffff\5\1\1\2\1\3\10\1\1\4\1\5\1\6\1\7\1\10\1\11\25\1\1\uffff\34\1",
             "",
@@ -19958,66 +19958,6 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalAntlrP
         	int _s = s;
             switch ( s ) {
                     case 0 : 
-                        int LA11_7 = input.LA(1);
-
-                         
-                        int index11_7 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred7_InternalXImportSectionTestLang()) ) {s = 10;}
-
-                        else if ( (true) ) {s = 1;}
-
-                         
-                        input.seek(index11_7);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 1 : 
-                        int LA11_5 = input.LA(1);
-
-                         
-                        int index11_5 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred7_InternalXImportSectionTestLang()) ) {s = 10;}
-
-                        else if ( (true) ) {s = 1;}
-
-                         
-                        input.seek(index11_5);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 2 : 
-                        int LA11_3 = input.LA(1);
-
-                         
-                        int index11_3 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred7_InternalXImportSectionTestLang()) ) {s = 10;}
-
-                        else if ( (true) ) {s = 1;}
-
-                         
-                        input.seek(index11_3);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 3 : 
-                        int LA11_4 = input.LA(1);
-
-                         
-                        int index11_4 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred7_InternalXImportSectionTestLang()) ) {s = 10;}
-
-                        else if ( (true) ) {s = 1;}
-
-                         
-                        input.seek(index11_4);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 4 : 
                         int LA11_8 = input.LA(1);
 
                          
@@ -20032,22 +19972,7 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalAntlrP
                         input.seek(index11_8);
                         if ( s>=0 ) return s;
                         break;
-                    case 5 : 
-                        int LA11_2 = input.LA(1);
-
-                         
-                        int index11_2 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred7_InternalXImportSectionTestLang()) ) {s = 10;}
-
-                        else if ( (true) ) {s = 1;}
-
-                         
-                        input.seek(index11_2);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 6 : 
+                    case 1 : 
                         int LA11_9 = input.LA(1);
 
                          
@@ -20062,7 +19987,22 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalAntlrP
                         input.seek(index11_9);
                         if ( s>=0 ) return s;
                         break;
-                    case 7 : 
+                    case 2 : 
+                        int LA11_7 = input.LA(1);
+
+                         
+                        int index11_7 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred7_InternalXImportSectionTestLang()) ) {s = 10;}
+
+                        else if ( (true) ) {s = 1;}
+
+                         
+                        input.seek(index11_7);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 3 : 
                         int LA11_6 = input.LA(1);
 
                          
@@ -20077,6 +20017,66 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalAntlrP
                         input.seek(index11_6);
                         if ( s>=0 ) return s;
                         break;
+                    case 4 : 
+                        int LA11_4 = input.LA(1);
+
+                         
+                        int index11_4 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred7_InternalXImportSectionTestLang()) ) {s = 10;}
+
+                        else if ( (true) ) {s = 1;}
+
+                         
+                        input.seek(index11_4);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 5 : 
+                        int LA11_5 = input.LA(1);
+
+                         
+                        int index11_5 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred7_InternalXImportSectionTestLang()) ) {s = 10;}
+
+                        else if ( (true) ) {s = 1;}
+
+                         
+                        input.seek(index11_5);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 6 : 
+                        int LA11_3 = input.LA(1);
+
+                         
+                        int index11_3 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred7_InternalXImportSectionTestLang()) ) {s = 10;}
+
+                        else if ( (true) ) {s = 1;}
+
+                         
+                        input.seek(index11_3);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 7 : 
+                        int LA11_2 = input.LA(1);
+
+                         
+                        int index11_2 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred7_InternalXImportSectionTestLang()) ) {s = 10;}
+
+                        else if ( (true) ) {s = 1;}
+
+                         
+                        input.seek(index11_2);
+                        if ( s>=0 ) return s;
+                        break;
             }
             if (state.backtracking>0) {state.failed=true; return -1;}
             NoViableAltException nvae =
@@ -20087,13 +20087,13 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalAntlrP
     }
     static final String dfa_15s = "\1\25\2\uffff\1\26\7\uffff";
     static final String dfa_16s = "\1\44\2\uffff\1\41\7\uffff";
-    static final String dfa_17s = "\1\uffff\1\1\1\2\1\uffff\1\4\1\5\1\7\1\10\1\11\1\3\1\6";
+    static final String dfa_17s = "\1\uffff\1\1\1\2\1\uffff\1\4\1\5\1\7\1\10\1\11\1\6\1\3";
     static final String dfa_18s = "\13\uffff}>";
     static final String[] dfa_19s = {
             "\1\6\1\3\10\uffff\1\1\1\2\1\4\1\5\1\7\1\10",
             "",
             "",
-            "\1\12\12\uffff\1\11",
+            "\1\11\12\uffff\1\12",
             "",
             "",
             "",
@@ -22249,19 +22249,19 @@ public class InternalXImportSectionTestLangParser extends AbstractInternalAntlrP
         }
     }
     static final String dfa_72s = "\7\uffff";
-    static final String dfa_73s = "\2\uffff\1\4\3\uffff\1\4";
-    static final String dfa_74s = "\1\10\1\uffff\1\57\1\10\2\uffff\1\57";
-    static final String dfa_75s = "\1\110\1\uffff\1\111\1\47\2\uffff\1\111";
-    static final String dfa_76s = "\1\uffff\1\1\2\uffff\1\2\1\3\1\uffff";
+    static final String dfa_73s = "\2\uffff\1\4\2\uffff\1\4\1\uffff";
+    static final String dfa_74s = "\1\10\1\uffff\1\57\1\10\1\uffff\1\57\1\uffff";
+    static final String dfa_75s = "\1\110\1\uffff\1\111\1\47\1\uffff\1\111\1\uffff";
+    static final String dfa_76s = "\1\uffff\1\1\2\uffff\1\2\1\uffff\1\3";
     static final String dfa_77s = "\7\uffff}>";
     static final String[] dfa_78s = {
             "\1\2\77\uffff\1\1",
             "",
             "\1\3\13\uffff\1\4\15\uffff\1\4",
-            "\1\6\36\uffff\1\5",
+            "\1\5\36\uffff\1\6",
             "",
-            "",
-            "\1\3\13\uffff\1\4\15\uffff\1\4"
+            "\1\3\13\uffff\1\4\15\uffff\1\4",
+            ""
     };
 
     static final short[] dfa_72 = DFA.unpackEncodedString(dfa_72s);

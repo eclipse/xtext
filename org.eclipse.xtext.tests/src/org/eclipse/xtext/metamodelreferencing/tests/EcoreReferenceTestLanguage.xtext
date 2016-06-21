@@ -1,0 +1,118 @@
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ *******************************************************************************/
+grammar org.eclipse.xtext.metamodelreferencing.tests.EcoreReferenceTestLanguage with org.eclipse.xtext.common.Terminals
+
+/* SuppressWarnings[external] */
+import "http://www.eclipse.org/2011/tmf/xtext/ecorePerNsURI"
+import "http://www.eclipse.org/2011/tmf/xtext/ecorePerPlatformPlugin"
+import "http://www.eclipse.org/2011/tmf/xtext/ecorePerPlatformResource"
+import "http://www.eclipse.org/emf/2002/Ecore"
+generate ecoreReference "http://www.eclipse.org/2011/tmf/xtext/ecoreReference"
+
+Model:
+	extends+=ExtendsNsURIEObject
+	extends+=ExtendsPluginEObject
+	extends+=ExtendsResourceEObject
+;
+
+ExtendsNsURIEObject:
+	'ExtendsNsURIEObject' name=ValidID 
+	( 
+	  'EObject' eObjectReference1=[EObject] 
+	| 'ExtendsNsURIEObject' eObjectReference1=[ExtendsNsURIEObject] 
+	| 'ExtendsPluginEObject' eObjectReference1=[ExtendsPluginEObject]
+	| 'ExtendsResourceEObject' eObjectReference1=[ExtendsResourceEObject]
+	)
+	(
+		'ExtendsPluginEObject'
+		eAttributeReference=[MyEAttribute]
+		eObjectReference2=[ExtendsNsURIEObject]
+		eObjectReference3=[ExtendsPluginEObject]
+		eObjectReference4=[ExtendsResourceEObject]
+		eObjectContainment+=ExtendsNsURIEObject?
+		eObjectContainment+=ExtendsPluginEObject?
+		eObjectContainment+=ExtendsResourceEObject?
+		eObjectContainment+=EObject
+		eObjectContainment+=EAttribute
+		eObjectContainment+=MyEAttribute
+	)?
+;
+
+MyEAttribute: 
+	{MyEAttribute} 'MyEAttribute'
+;
+
+EAttribute: 
+	{EAttribute} 'EAttribute'
+;
+
+ExtendsPluginEObject:
+	'ExtendsPluginEObject' name=ValidID 
+	( 
+	  'EObject' eObjectReference1=[EObject] 
+	| 'ExtendsNsURIEObject' eObjectReference1=[ExtendsNsURIEObject] 
+	| 'ExtendsPluginEObject' eObjectReference1=[ExtendsPluginEObject]
+	| 'ExtendsResourceEObject' eObjectReference1=[ExtendsResourceEObject]
+	)
+	(
+		'ExtendsPluginEObject'
+		eObjectReference2=[ExtendsNsURIEObject]
+		eObjectReference3=[ExtendsPluginEObject]
+		eObjectReference4=[ExtendsResourceEObject]
+		eObjectContainment+=ExtendsNsURIEObject?
+		eObjectContainment+=ExtendsPluginEObject?
+		eObjectContainment+=ExtendsResourceEObject?
+		eObjectContainment+=EObject
+		eObjectContainment+=EAttribute
+		eObjectContainment+=MyEAttribute
+	)?
+;
+
+Unused_01 returns ExtendsNsURIEObject:
+	{MyNamedElement_01} name = ValidID
+;
+
+Unused_02 returns ExtendsResourceEObject:
+	{MyNamedElement_02} name = ValidID
+;
+
+Unused_03 returns ExtendsPluginEObject:
+	{MyNamedElement_03} name = ValidID
+;
+
+
+ExtendsResourceEObject: 
+	'ExtendsResourceEObject' name=ValidID 
+	( 
+	  'EObject' eObjectReference1=[EObject] 
+	| 'ExtendsNsURIEObject' eObjectReference1=[ExtendsNsURIEObject] 
+	| 'ExtendsPluginEObject' eObjectReference1=[ExtendsPluginEObject]
+	| 'ExtendsResourceEObject' eObjectReference1=[ExtendsResourceEObject]
+	)
+	(
+		'ExtendsResourceEObject'
+		eObjectReference2=[ExtendsNsURIEObject]
+		eObjectReference3=[ExtendsPluginEObject]
+		eObjectReference4=[ExtendsResourceEObject]
+		eObjectContainment+=ExtendsNsURIEObject
+		eObjectContainment+=ExtendsPluginEObject
+		eObjectContainment+=ExtendsResourceEObject
+		eObjectContainment+=EObject
+		eObjectContainment+=EAttribute
+		eObjectContainment+=MyEAttribute
+	)?
+;
+
+EObject:
+	{EObject} 'object'
+;
+
+ValidID returns EString:
+	ID
+;

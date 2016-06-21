@@ -8,11 +8,11 @@
 package org.eclipse.xtext.xbase.tests.imports
 
 import org.junit.runner.RunWith
-import org.eclipse.xtext.junit4.XtextRunner
-import org.eclipse.xtext.junit4.InjectWith
+import org.eclipse.xtext.testing.XtextRunner
+import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.xbase.testlanguages.XImportSectionTestLangInjectorProvider
 import com.google.inject.Inject
-import org.eclipse.xtext.junit4.util.ParseHelper
+import org.eclipse.xtext.testing.util.ParseHelper
 import org.eclipse.xtext.xbase.testlanguages.xImportSectionTestLang.ImportSectionTestLanguageRoot
 import org.eclipse.xtext.xbase.imports.DefaultImportsConfiguration
 import org.eclipse.xtext.resource.XtextResource

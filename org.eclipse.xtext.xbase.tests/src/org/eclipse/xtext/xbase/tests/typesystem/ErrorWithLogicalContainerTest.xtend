@@ -11,7 +11,7 @@ import com.google.inject.Inject
 import org.eclipse.xtext.xbase.junit.typesystem.Oven
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
 import org.junit.Test
-import org.eclipse.xtext.junit4.InjectWith
+import org.eclipse.xtext.testing.InjectWith
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

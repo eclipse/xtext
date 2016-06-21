@@ -23,9 +23,9 @@ package «qualifiedTestName().toJavaPackage()»;
 import static org.junit.Assert.assertNotNull;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.junit4.InjectWith;
-import org.eclipse.xtext.junit4.XtextRunner;
-import org.eclipse.xtext.junit4.util.ParseHelper;
+import «junit4Fragment.testingPackage».InjectWith;
+import «junit4Fragment.testingPackage».XtextRunner;
+import «junit4Fragment.testingPackage».util.ParseHelper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -55,10 +55,10 @@ package «qualifiedInjectorProviderName().toJavaPackage()»;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 «annotationImports()-»
-import org.eclipse.xtext.junit4.GlobalRegistries;
-import org.eclipse.xtext.junit4.GlobalRegistries.GlobalStateMemento;
-import org.eclipse.xtext.junit4.IInjectorProvider;
-import org.eclipse.xtext.junit4.IRegistryConfigurator;
+import «junit4Fragment.testingPackage».GlobalRegistries;
+import «junit4Fragment.testingPackage».GlobalRegistries.GlobalStateMemento;
+import «junit4Fragment.testingPackage».IInjectorProvider;
+import «junit4Fragment.testingPackage».IRegistryConfigurator;
 
 «classAnnotations()»public class «qualifiedInjectorProviderName().toSimpleName()» implements IInjectorProvider, IRegistryConfigurator {
 
@@ -122,7 +122,7 @@ import org.eclipse.xtext.junit4.IRegistryConfigurator;
 package «qualifiedUiInjectorProviderName().toJavaPackage()»;
 
 «annotationImports()-»
-import org.eclipse.xtext.junit4.IInjectorProvider;
+import «junit4Fragment.testingPackage».IInjectorProvider;
 
 import com.google.inject.Injector;
 

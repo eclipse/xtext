@@ -1,0 +1,17 @@
+
+//workaround for superClassName is empty!
+configurations {
+  testCompile.exclude module: "org.osgi.foundation"
+}
+
+dependencies {
+
+	compile project(':org.eclipse.xtext.xbase')
+	compile 'junit:junit:4.12'
+	compile "org.eclipse.jdt:org.eclipse.jdt.core:$versions.jdtCore"
+}
+
+sourceSets.main.java {
+	srcDir 'src'
+	srcDir 'xtend-gen'
+}
