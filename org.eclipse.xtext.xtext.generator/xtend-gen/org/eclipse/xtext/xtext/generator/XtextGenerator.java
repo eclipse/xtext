@@ -32,6 +32,7 @@ import org.eclipse.emf.mwe.core.lib.AbstractWorkflowComponent2;
 import org.eclipse.emf.mwe.core.monitor.ProgressMonitor;
 import org.eclipse.emf.mwe.utils.StandaloneSetup;
 import org.eclipse.xtend.lib.annotations.Accessors;
+import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.GeneratedMetamodel;
 import org.eclipse.xtext.Grammar;
@@ -64,6 +65,7 @@ import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
 import org.eclipse.xtext.xtext.generator.model.JavaFileAccess;
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess;
+import org.eclipse.xtext.xtext.generator.model.TextFileAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
 import org.eclipse.xtext.xtext.generator.model.project.BundleProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.project.IBundleProjectConfig;
@@ -214,6 +216,7 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
       this.generatePluginXmls();
       this.generateManifests();
       this.generateActivator();
+      this.generateServices();
     } catch (final Throwable _t_1) {
       if (_t_1 instanceof Exception) {
         final Exception e_1 = (Exception)_t_1;
@@ -245,10 +248,14 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
     IRuntimeProjectConfig _runtime_1 = this.projectConfig.getRuntime();
     IXtextGeneratorFileSystemAccess _src = _runtime_1.getSrc();
     _createRuntimeSetup.writeTo(_src);
+    JavaFileAccess _createIdeSetup = this.templates.createIdeSetup(language);
+    IBundleProjectConfig _genericIde = this.projectConfig.getGenericIde();
+    IXtextGeneratorFileSystemAccess _src_1 = _genericIde.getSrc();
+    _createIdeSetup.writeTo(_src_1);
     JavaFileAccess _createWebSetup = this.templates.createWebSetup(language);
     IWebProjectConfig _web = this.projectConfig.getWeb();
-    IXtextGeneratorFileSystemAccess _src_1 = _web.getSrc();
-    _createWebSetup.writeTo(_src_1);
+    IXtextGeneratorFileSystemAccess _src_2 = _web.getSrc();
+    _createWebSetup.writeTo(_src_2);
   }
   
   protected void generateModules(final IXtextGeneratorLanguage language) {
@@ -260,30 +267,38 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
     IRuntimeProjectConfig _runtime_1 = this.projectConfig.getRuntime();
     IXtextGeneratorFileSystemAccess _src = _runtime_1.getSrc();
     _createRuntimeModule.writeTo(_src);
+    JavaFileAccess _createIdeModule = this.templates.createIdeModule(language);
+    IBundleProjectConfig _genericIde = this.projectConfig.getGenericIde();
+    IXtextGeneratorFileSystemAccess _src_1 = _genericIde.getSrc();
+    _createIdeModule.writeTo(_src_1);
+    JavaFileAccess _createIdeGenModule = this.templates.createIdeGenModule(language);
+    IBundleProjectConfig _genericIde_1 = this.projectConfig.getGenericIde();
+    IXtextGeneratorFileSystemAccess _srcGen_1 = _genericIde_1.getSrcGen();
+    _createIdeGenModule.writeTo(_srcGen_1);
     JavaFileAccess _createEclipsePluginGenModule = this.templates.createEclipsePluginGenModule(language);
     IBundleProjectConfig _eclipsePlugin = this.projectConfig.getEclipsePlugin();
-    IXtextGeneratorFileSystemAccess _srcGen_1 = _eclipsePlugin.getSrcGen();
-    _createEclipsePluginGenModule.writeTo(_srcGen_1);
+    IXtextGeneratorFileSystemAccess _srcGen_2 = _eclipsePlugin.getSrcGen();
+    _createEclipsePluginGenModule.writeTo(_srcGen_2);
     JavaFileAccess _createEclipsePluginModule = this.templates.createEclipsePluginModule(language);
     IBundleProjectConfig _eclipsePlugin_1 = this.projectConfig.getEclipsePlugin();
-    IXtextGeneratorFileSystemAccess _src_1 = _eclipsePlugin_1.getSrc();
-    _createEclipsePluginModule.writeTo(_src_1);
+    IXtextGeneratorFileSystemAccess _src_2 = _eclipsePlugin_1.getSrc();
+    _createEclipsePluginModule.writeTo(_src_2);
     JavaFileAccess _createIdeaGenModule = this.templates.createIdeaGenModule(language);
     ISubProjectConfig _ideaPlugin = this.projectConfig.getIdeaPlugin();
-    IXtextGeneratorFileSystemAccess _srcGen_2 = _ideaPlugin.getSrcGen();
-    _createIdeaGenModule.writeTo(_srcGen_2);
+    IXtextGeneratorFileSystemAccess _srcGen_3 = _ideaPlugin.getSrcGen();
+    _createIdeaGenModule.writeTo(_srcGen_3);
     JavaFileAccess _createIdeaModule = this.templates.createIdeaModule(language);
     ISubProjectConfig _ideaPlugin_1 = this.projectConfig.getIdeaPlugin();
-    IXtextGeneratorFileSystemAccess _src_2 = _ideaPlugin_1.getSrc();
-    _createIdeaModule.writeTo(_src_2);
+    IXtextGeneratorFileSystemAccess _src_3 = _ideaPlugin_1.getSrc();
+    _createIdeaModule.writeTo(_src_3);
     JavaFileAccess _createWebGenModule = this.templates.createWebGenModule(language);
     IWebProjectConfig _web = this.projectConfig.getWeb();
-    IXtextGeneratorFileSystemAccess _srcGen_3 = _web.getSrcGen();
-    _createWebGenModule.writeTo(_srcGen_3);
+    IXtextGeneratorFileSystemAccess _srcGen_4 = _web.getSrcGen();
+    _createWebGenModule.writeTo(_srcGen_4);
     JavaFileAccess _createWebModule = this.templates.createWebModule(language);
     IWebProjectConfig _web_1 = this.projectConfig.getWeb();
-    IXtextGeneratorFileSystemAccess _src_3 = _web_1.getSrc();
-    _createWebModule.writeTo(_src_3);
+    IXtextGeneratorFileSystemAccess _src_4 = _web_1.getSrc();
+    _createWebModule.writeTo(_src_4);
   }
   
   protected void generateExecutableExtensionFactory(final IXtextGeneratorLanguage language) {
@@ -408,6 +423,31 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
         in.close();
       }
     }
+  }
+  
+  protected void generateServices() {
+    if (((this.projectConfig.getGenericIde().getSrcGen() == null) || this.languageConfigs.isEmpty())) {
+      return;
+    }
+    final TextFileAccess file = new TextFileAccess();
+    file.setPath("META-INF/services/org.eclipse.xtext.ISetup");
+    StringConcatenationClient _client = new StringConcatenationClient() {
+      @Override
+      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+        {
+          for(final XtextGeneratorLanguage lang : XtextGenerator.this.languageConfigs) {
+            Grammar _grammar = lang.getGrammar();
+            TypeReference _ideSetup = XtextGenerator.this.naming.getIdeSetup(_grammar);
+            _builder.append(_ideSetup, "");
+            _builder.newLineIfNotEmpty();
+          }
+        }
+      }
+    };
+    file.setContent(_client);
+    IBundleProjectConfig _genericIde = this.projectConfig.getGenericIde();
+    IXtextGeneratorFileSystemAccess _srcGen = _genericIde.getSrcGen();
+    file.writeTo(_srcGen);
   }
   
   protected void generateActivator() {

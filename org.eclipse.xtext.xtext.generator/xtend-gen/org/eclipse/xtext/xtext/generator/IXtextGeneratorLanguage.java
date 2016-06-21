@@ -26,6 +26,8 @@ public interface IXtextGeneratorLanguage {
   
   public abstract GuiceModuleAccess getRuntimeGenModule();
   
+  public abstract GuiceModuleAccess getIdeGenModule();
+  
   public abstract GuiceModuleAccess getEclipsePluginGenModule();
   
   public abstract GuiceModuleAccess getIdeaGenModule();

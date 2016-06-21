@@ -26,6 +26,8 @@ interface IXtextGeneratorLanguage {
 	
 	def GuiceModuleAccess getRuntimeGenModule()
 	
+	def GuiceModuleAccess getIdeGenModule()
+	
 	def GuiceModuleAccess getEclipsePluginGenModule()
 	
 	def GuiceModuleAccess getIdeaGenModule()

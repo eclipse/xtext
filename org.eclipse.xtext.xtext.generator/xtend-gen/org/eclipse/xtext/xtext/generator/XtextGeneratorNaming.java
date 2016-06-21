@@ -65,6 +65,42 @@ public class XtextGeneratorNaming {
     return new TypeReference(_runtimeBasePackage, _plus);
   }
   
+  public String getIdeBasePackage(final Grammar grammar) {
+    String _runtimeBasePackage = this.getRuntimeBasePackage(grammar);
+    return (_runtimeBasePackage + ".ide");
+  }
+  
+  public String getIdeTestBasePackage(final Grammar grammar) {
+    String _ideBasePackage = this.getIdeBasePackage(grammar);
+    return (_ideBasePackage + ".tests");
+  }
+  
+  public TypeReference getIdeModule(final Grammar grammar) {
+    String _ideBasePackage = this.getIdeBasePackage(grammar);
+    String _simpleName = GrammarUtil.getSimpleName(grammar);
+    String _plus = (_simpleName + "IdeModule");
+    return new TypeReference(_ideBasePackage, _plus);
+  }
+  
+  public TypeReference getIdeGenModule(final Grammar grammar) {
+    String _ideBasePackage = this.getIdeBasePackage(grammar);
+    String _simpleName = GrammarUtil.getSimpleName(grammar);
+    String _plus = ("Abstract" + _simpleName);
+    String _plus_1 = (_plus + "IdeModule");
+    return new TypeReference(_ideBasePackage, _plus_1);
+  }
+  
+  public TypeReference getIdeDefaultModule(final Grammar grammar) {
+    return new TypeReference("org.eclipse.xtext.ide.DefaultIdeModule");
+  }
+  
+  public TypeReference getIdeSetup(final Grammar grammar) {
+    String _ideBasePackage = this.getIdeBasePackage(grammar);
+    String _simpleName = GrammarUtil.getSimpleName(grammar);
+    String _plus = (_simpleName + "IdeSetup");
+    return new TypeReference(_ideBasePackage, _plus);
+  }
+  
   public String getEclipsePluginBasePackage(final Grammar grammar) {
     String _namespace = GrammarUtil.getNamespace(grammar);
     return (_namespace + ".ui");

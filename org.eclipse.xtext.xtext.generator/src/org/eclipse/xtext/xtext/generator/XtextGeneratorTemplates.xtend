@@ -231,6 +231,84 @@ class XtextGeneratorTemplates {
 		return file
 	}
 	
+	
+	def JavaFileAccess createIdeModule(IXtextGeneratorLanguage langConfig) {
+		val it = langConfig.grammar
+		if (langConfig.generateXtendStubs) {
+			return fileAccessFactory.createXtendFile(ideModule,'''
+				/**
+				 * Use this class to register ide components.
+				 */
+				class «ideModule.simpleName» extends «ideGenModule» {
+				}
+			''')
+		} else {
+			return fileAccessFactory.createJavaFile(ideModule,'''
+				/**
+				 * Use this class to register ide components.
+				 */
+				public class «ideModule.simpleName» extends «ideGenModule» {
+				}
+			''')
+		}
+	}
+	
+	def JavaFileAccess createIdeGenModule(IXtextGeneratorLanguage langConfig) {
+		val it = langConfig.grammar
+		val superClass = langConfig.ideGenModule.superClass ?: ideDefaultModule
+		val file = fileAccessFactory.createGeneratedJavaFile(ideGenModule)
+		file.importNestedTypeThreshold = JavaFileAccess.DONT_IMPORT_NESTED_TYPES
+		
+		file.typeComment = '''
+			/**
+			 * Manual modifications go to {@link «ideModule.simpleName»}.
+			 */
+		'''
+		file.annotations += new SuppressWarningsAnnotation
+		file.content = '''
+			public abstract class «ideGenModule.simpleName» extends «superClass» {
+			
+				«FOR binding : langConfig.ideGenModule.bindings»
+					«binding.createBindingMethod»
+					
+				«ENDFOR»
+			}
+		'''
+		file.markedAsGenerated = true
+		return file
+	}
+	
+	def JavaFileAccess createIdeSetup(IXtextGeneratorLanguage langConfig) {
+		val it = langConfig.grammar
+		if (langConfig.generateXtendStubs) {
+			return fileAccessFactory.createXtendFile(ideSetup,'''
+				/**
+				 * Initialization support for running Xtext languages without Equinox extension registry.
+				 */
+				class «ideSetup.simpleName» extends «runtimeSetup» {
+				
+					override createInjector() {
+						«Guice».createInjector(new «runtimeModule», new «ideModule»)
+					}
+				}
+		 	''')
+		} else {
+			return fileAccessFactory.createJavaFile(runtimeSetup,'''
+				/**
+				 * Initialization support for running Xtext languages without Equinox extension registry.
+				 */
+				public class «ideSetup.simpleName» extends «runtimeSetup» {
+				
+					@Override
+					public «Injector» createInjector() {
+						return «Guice».createInjector(new «runtimeModule»(), new «ideModule»());
+					}
+				}
+		 	''')
+		}
+	}
+	
+	
 	def JavaFileAccess createEclipsePluginModule(IXtextGeneratorLanguage langConfig) {
 		val it = langConfig.grammar
 		if (langConfig.generateXtendStubs) {

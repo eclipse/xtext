@@ -97,8 +97,10 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 		if (debugGrammar)
 			generateDebugGrammar()
 		generateProductionGrammar()
-		if (projectConfig.genericIde.srcGen != null)
+		if (projectConfig.genericIde.srcGen != null) {
 			generateContentAssistGrammar()
+			addIdeBindingsAndImports()
+		}
 		
 		generateProductionParser().writeTo(projectConfig.runtime.srcGen)
 		generateAntlrTokenFileProvider().writeTo(projectConfig.runtime.srcGen)
@@ -108,6 +110,7 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 			generateContentAssistTokenSource().writeTo(projectConfig.genericIde.src)
 		}
 		addRuntimeBindingsAndImports()
+		addIdeBindingsAndImports()
 		addUiBindingsAndImports()
 		addWebBindings()
 	}
@@ -465,6 +468,28 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 		}
 		rtBindings.contributeTo(language.runtimeGenModule)
 	
+	}
+	
+	def protected void addIdeBindingsAndImports() {
+		val extension naming = contentAssistNaming
+		if (projectConfig.genericIde.manifest !== null) {
+			projectConfig.genericIde.manifest=>[
+				exportedPackages += #[
+					grammar.lexerClass.packageName,
+					grammar.parserClass.packageName,
+					grammar.internalParserClass.packageName
+				]
+				requiredBundles += "org.antlr.runtime"
+			]
+		}
+		val rtBindings = new GuiceModuleAccess.BindingFactory()
+			.addConfiguredBinding("ContentAssistLexer", '''
+				binder.bind(«grammar.lexerSuperClass».class)
+					.annotatedWith(«Names».named(«"org.eclipse.xtext.ide.LexerIdeBindings".typeRef».CONTENT_ASSIST))
+					.to(«grammar.lexerClass».class);
+			''')
+			.addTypeToType('org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser'.typeRef, grammar.parserClass)
+		rtBindings.contributeTo(language.ideGenModule)
 	}
 	
 	def protected addUiBindingsAndImports() {

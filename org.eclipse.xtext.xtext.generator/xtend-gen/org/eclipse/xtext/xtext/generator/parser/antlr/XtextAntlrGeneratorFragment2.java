@@ -168,6 +168,7 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
     boolean _notEquals = (!Objects.equal(_srcGen, null));
     if (_notEquals) {
       this.generateContentAssistGrammar();
+      this.addIdeBindingsAndImports();
     }
     JavaFileAccess _generateProductionParser = this.generateProductionParser();
     IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
@@ -203,6 +204,7 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
       _generateContentAssistTokenSource.writeTo(_src_1);
     }
     this.addRuntimeBindingsAndImports();
+    this.addIdeBindingsAndImports();
     this.addUiBindingsAndImports();
     this.addWebBindings();
   }
@@ -1423,6 +1425,71 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
     IXtextGeneratorLanguage _language = this.getLanguage();
     GuiceModuleAccess _runtimeGenModule = _language.getRuntimeGenModule();
     rtBindings.contributeTo(_runtimeGenModule);
+  }
+  
+  protected void addIdeBindingsAndImports() {
+    @Extension
+    final ContentAssistGrammarNaming naming = this.contentAssistNaming;
+    IXtextProjectConfig _projectConfig = this.getProjectConfig();
+    IBundleProjectConfig _genericIde = _projectConfig.getGenericIde();
+    ManifestAccess _manifest = _genericIde.getManifest();
+    boolean _tripleNotEquals = (_manifest != null);
+    if (_tripleNotEquals) {
+      IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
+      IBundleProjectConfig _genericIde_1 = _projectConfig_1.getGenericIde();
+      ManifestAccess _manifest_1 = _genericIde_1.getManifest();
+      final Procedure1<ManifestAccess> _function = (ManifestAccess it) -> {
+        Set<String> _exportedPackages = it.getExportedPackages();
+        Grammar _grammar = this.getGrammar();
+        TypeReference _lexerClass = naming.getLexerClass(_grammar);
+        String _packageName = _lexerClass.getPackageName();
+        Grammar _grammar_1 = this.getGrammar();
+        TypeReference _parserClass = naming.getParserClass(_grammar_1);
+        String _packageName_1 = _parserClass.getPackageName();
+        Grammar _grammar_2 = this.getGrammar();
+        TypeReference _internalParserClass = naming.getInternalParserClass(_grammar_2);
+        String _packageName_2 = _internalParserClass.getPackageName();
+        Iterables.<String>addAll(_exportedPackages, Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList(_packageName, _packageName_1, _packageName_2)));
+        Set<String> _requiredBundles = it.getRequiredBundles();
+        _requiredBundles.add("org.antlr.runtime");
+      };
+      ObjectExtensions.<ManifestAccess>operator_doubleArrow(_manifest_1, _function);
+    }
+    GuiceModuleAccess.BindingFactory _bindingFactory = new GuiceModuleAccess.BindingFactory();
+    StringConcatenationClient _client = new StringConcatenationClient() {
+      @Override
+      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+        _builder.append("binder.bind(");
+        Grammar _grammar = XtextAntlrGeneratorFragment2.this.getGrammar();
+        TypeReference _lexerSuperClass = naming.getLexerSuperClass(_grammar);
+        _builder.append(_lexerSuperClass, "");
+        _builder.append(".class)");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        _builder.append(".annotatedWith(");
+        _builder.append(Names.class, "\t");
+        _builder.append(".named(");
+        TypeReference _typeRef = TypeReference.typeRef("org.eclipse.xtext.ide.LexerIdeBindings");
+        _builder.append(_typeRef, "\t");
+        _builder.append(".CONTENT_ASSIST))");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        _builder.append(".to(");
+        Grammar _grammar_1 = XtextAntlrGeneratorFragment2.this.getGrammar();
+        TypeReference _lexerClass = naming.getLexerClass(_grammar_1);
+        _builder.append(_lexerClass, "\t");
+        _builder.append(".class);");
+        _builder.newLineIfNotEmpty();
+      }
+    };
+    GuiceModuleAccess.BindingFactory _addConfiguredBinding = _bindingFactory.addConfiguredBinding("ContentAssistLexer", _client);
+    TypeReference _typeRef = TypeReference.typeRef("org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser");
+    Grammar _grammar = this.getGrammar();
+    TypeReference _parserClass = naming.getParserClass(_grammar);
+    final GuiceModuleAccess.BindingFactory rtBindings = _addConfiguredBinding.addTypeToType(_typeRef, _parserClass);
+    IXtextGeneratorLanguage _language = this.getLanguage();
+    GuiceModuleAccess _ideGenModule = _language.getIdeGenModule();
+    rtBindings.contributeTo(_ideGenModule);
   }
   
   protected void addUiBindingsAndImports() {
