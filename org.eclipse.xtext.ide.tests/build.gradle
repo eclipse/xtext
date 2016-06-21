@@ -20,8 +20,8 @@ task generateXtextLanguage(type: JavaExec) {
 	args += "rootPath=/${projectDir}/.."
 }
 
-compileJava.dependsOn(generateXtextLanguage)
-clean.dependsOn(cleanGenerateXtextLanguage)
+//compileJava.dependsOn(generateXtextLanguage)
+//clean.dependsOn(cleanGenerateXtextLanguage)
 eclipse.classpath.plusConfigurations += [configurations.mwe2]
 
 sourceSets.test.java.srcDirs = ['testlang-src', 'testlang-src-gen'] + sourceSets.test.java.srcDirs

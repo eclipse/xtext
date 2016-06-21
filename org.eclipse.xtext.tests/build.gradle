@@ -9,13 +9,11 @@ dependencies {
 	compile project(':org.eclipse.xtext.xtext.generator')
 	compile project(':org.eclipse.xtext.xtext.wizard')
 	compile project(':org.eclipse.xtext.testlanguages')
-	compile 'junit:junit:$versions.junit'
-	
+	compile "junit:junit:$versions.junit"
 	compile "org.eclipse.emf:org.eclipse.emf.common:$versions.emfCommon"
 	compile "org.eclipse.emf:org.eclipse.emf.ecore.xmi:$versions.emfEcore"
 	
     compile name: 'simple'
-	
 	
 	mwe2 "org.eclipse.emf:org.eclipse.emf.mwe2.launch:$versions.emfMwe2"
 	mwe2 "org.eclipse.xpand:org.eclipse.xpand:$versions.xpand"
