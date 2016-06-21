@@ -17,6 +17,10 @@ configurations {
     	description 'Dependencies required at build time, but not exported into meta data'
         extendsFrom compile
     }
+    mwe2 {
+    	description 'Dependencies required by MWE2'
+        extendsFrom compile
+    }
     
 	/*
 	 * Put any unwanted transitive dependencies here, they will be excluded from all projects
@@ -32,4 +36,5 @@ sourceSets.main.compileClasspath += configurations.optional
 sourceSets.test.compileClasspath += configurations.optional
 sourceSets.test.runtimeClasspath += configurations.optional
 eclipse.classpath.plusConfigurations += [configurations.optional]
+eclipse.classpath.plusConfigurations += [configurations.mwe2]
 javadoc.classpath += configurations.optional
