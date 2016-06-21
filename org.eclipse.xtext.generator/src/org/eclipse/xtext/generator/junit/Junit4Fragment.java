@@ -24,6 +24,22 @@ import com.google.common.collect.Lists;
  */
 public class Junit4Fragment extends AbstractGeneratorFragment {
 	private static final Logger log = Logger.getLogger(Junit4Fragment.class);
+	
+	private boolean useDeprecatedClasses = true;
+	
+	/**
+	 * @since 2.11
+	 */
+	public boolean isUseDeprecatedClasses() {
+		return useDeprecatedClasses;
+	}
+
+	/**
+	 * @since 2.11
+	 */
+	public void setUseDeprecatedClasses(boolean useDeprecatedClasses) {
+		this.useDeprecatedClasses = useDeprecatedClasses;
+	}
 
 	@Deprecated
 	private boolean genContentAssistTest;
@@ -83,7 +99,7 @@ public class Junit4Fragment extends AbstractGeneratorFragment {
 	public String[] getRequiredBundlesTests(Grammar grammar) {
 		List<String> bundles = Lists.newArrayList(
 			getNaming().getProjectNameRt(),
-			"org.eclipse.xtext.junit4",
+			getTestingPackage(),
 			"org.eclipse.xtext.xbase.lib"
 		);
 		if (getNaming().hasUI()) {
@@ -92,6 +108,16 @@ public class Junit4Fragment extends AbstractGeneratorFragment {
 			bundles.add("org.eclipse.ui.workbench;resolution:=optional");
 		}
 		return bundles.toArray(new String[bundles.size()]);
+	}
+	
+	/**
+	 * @since 2.11
+	 */
+	public String getTestingPackage() {
+		if (useDeprecatedClasses)
+			return "org.eclipse.xtext.junit4";
+		else
+			return "org.eclipse.xtext.testing";
 	}
 
 	/**

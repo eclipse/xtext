@@ -82,7 +82,9 @@ Workflow {
     		fragment = formatting.FormatterFragment auto-inject {}
     
     		// generates junit test support classes into Generator#pathTestProject
-    		fragment = junit.Junit4Fragment auto-inject {}
+    		fragment = junit.Junit4Fragment auto-inject {
+    			useDeprecatedClasses = false
+    		}
     
     		// provides the necessary bindings for java types integration
     		fragment = types.TypesGeneratorFragment auto-inject {}
@@ -127,7 +129,9 @@ Workflow {
     		fragment = builder.BuilderIntegrationFragment auto-inject {}
     
     		// generates junit test support classes into Generator#pathTestProject
-    		fragment = junit.Junit4Fragment auto-inject {}
+    		fragment = junit.Junit4Fragment auto-inject {
+    			useDeprecatedClasses = false
+    		}
     
     		// provides the necessary bindings for java types integration
     		fragment = types.TypesGeneratorFragment auto-inject {}
@@ -174,7 +178,9 @@ Workflow {
     		fragment = generator.GeneratorFragment auto-inject {}
     
     		// generates junit test support classes into Generator#pathTestProject
-    		fragment = junit.Junit4Fragment auto-inject {}
+    		fragment = junit.Junit4Fragment auto-inject {
+    			useDeprecatedClasses = false
+    		}
     
     		// provides the necessary bindings for java types integration
     		fragment = types.TypesGeneratorFragment auto-inject {}

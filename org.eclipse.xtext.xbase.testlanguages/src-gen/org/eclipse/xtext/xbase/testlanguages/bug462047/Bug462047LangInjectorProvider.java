@@ -3,13 +3,12 @@
  */
 package org.eclipse.xtext.xbase.testlanguages.bug462047;
 
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 import org.eclipse.xtext.testing.GlobalRegistries;
 import org.eclipse.xtext.testing.GlobalRegistries.GlobalStateMemento;
 import org.eclipse.xtext.testing.IInjectorProvider;
 import org.eclipse.xtext.testing.IRegistryConfigurator;
-
-import com.google.inject.Guice;
-import com.google.inject.Injector;
 
 public class Bug462047LangInjectorProvider implements IInjectorProvider, IRegistryConfigurator {
 
