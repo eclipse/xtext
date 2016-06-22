@@ -15,11 +15,6 @@ var generateDebugData = false
 var srcGenOnly=true
 var emfRuntimeVersion = "2.9"
 
-var runtimeProjectName = "org.eclipse.xtext.tests"
-var runtimeProjectPath = "../${runtimeProjectName}"
-var ideaProjectName = "org.eclipse.xtext.core.idea.tests"
-var ideaProjectPath = "../../intellij/${ideaProjectName}"
-
 CompositeGeneratorFragment {
 	fragment = parser.antlr.XtextAntlrGeneratorFragment auto-inject {
 		options = auto-inject {}
