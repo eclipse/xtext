@@ -35,6 +35,7 @@ import org.eclipse.xtext.xtext.generator.model.ManifestAccess
 import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess
 import org.eclipse.xtext.xtext.generator.model.project.BundleProjectConfig
 import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig
+import org.eclipse.xtext.xtext.generator.model.TextFileAccess
 
 /**
  * The Xtext language infrastructure generator. Can be configured with {@link IXtextGeneratorFragment}
@@ -139,6 +140,7 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 			generatePluginXmls
 			generateManifests
 			generateActivator
+			generateServices
 		} catch (Exception e) {
 			handleException(e, issues)
 		}
@@ -155,12 +157,15 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 	protected def generateSetups(IXtextGeneratorLanguage language) {
 		templates.createRuntimeGenSetup(language).writeTo(projectConfig.runtime.srcGen)
 		templates.createRuntimeSetup(language).writeTo(projectConfig.runtime.src)
+		templates.createIdeSetup(language).writeTo(projectConfig.genericIde.src)
 		templates.createWebSetup(language).writeTo(projectConfig.web.src)
 	}
 	
 	protected def generateModules(IXtextGeneratorLanguage language) {
 		templates.createRuntimeGenModule(language).writeTo(projectConfig.runtime.srcGen)
 		templates.createRuntimeModule(language).writeTo(projectConfig.runtime.src)
+		templates.createIdeModule(language).writeTo(projectConfig.genericIde.src)
+		templates.createIdeGenModule(language).writeTo(projectConfig.genericIde.srcGen)
 		templates.createEclipsePluginGenModule(language).writeTo(projectConfig.eclipsePlugin.srcGen)
 		templates.createEclipsePluginModule(language).writeTo(projectConfig.eclipsePlugin.src)
 		templates.createIdeaGenModule(language).writeTo(projectConfig.ideaPlugin.srcGen)
@@ -248,12 +253,26 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 		}
 	}
 	
-	protected def generateActivator() {
+	protected def void generateServices() {
+		if (projectConfig.genericIde.srcGen === null || languageConfigs.empty) {
+			return
+		}
+		val file = new TextFileAccess()
+		file.path = "META-INF/services/org.eclipse.xtext.ISetup"
+		file.content = '''
+			«FOR lang : languageConfigs»
+				«naming.getIdeSetup(lang.grammar)»
+			«ENDFOR»
+		'''
+		file.writeTo(projectConfig.genericIde.srcGen)
+	}
+	
+	protected def void generateActivator() {
 		if (projectConfig.eclipsePlugin.srcGen !== null && !languageConfigs.empty)
 			templates.createEclipsePluginActivator(languageConfigs).writeTo(projectConfig.eclipsePlugin.srcGen)
 	}
 	
-	protected def generatePluginXmls() {
+	protected def void generatePluginXmls() {
 		val pluginXmls = projectConfig.enabledProjects.filter(BundleProjectConfig).map[pluginXml -> root].toList
 		// Filter null values and merge duplicate entries
 		val uri2PluginXml = Maps.<URI, PluginXmlAccess>newHashMapWithExpectedSize(pluginXmls.size)

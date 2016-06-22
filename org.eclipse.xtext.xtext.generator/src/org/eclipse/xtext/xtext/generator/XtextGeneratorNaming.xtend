@@ -50,6 +50,30 @@ class XtextGeneratorNaming {
 		new TypeReference(grammar.runtimeBasePackage, getSimpleName(grammar) + 'StandaloneSetupGenerated')
 	}
 	
+	def getIdeBasePackage(Grammar grammar) {
+		return grammar.runtimeBasePackage+".ide"
+	}
+	
+	def getIdeTestBasePackage(Grammar grammar) {
+		grammar.ideBasePackage + ".tests"
+	}
+	
+	def getIdeModule(Grammar grammar) {
+		new TypeReference(grammar.ideBasePackage, getSimpleName(grammar) + 'IdeModule')
+	}
+	
+	def getIdeGenModule(Grammar grammar) {
+		new TypeReference(grammar.ideBasePackage, 'Abstract' + getSimpleName(grammar) + 'IdeModule')
+	}
+	
+	def getIdeDefaultModule(Grammar grammar) {
+		new TypeReference('org.eclipse.xtext.ide.DefaultIdeModule')
+	}
+	
+	def getIdeSetup(Grammar grammar) {
+		new TypeReference(grammar.ideBasePackage, getSimpleName(grammar) + 'IdeSetup')
+	}
+	
 	def getEclipsePluginBasePackage(Grammar grammar) {
 		return getNamespace(grammar) + '.ui'
 	}

@@ -29,5 +29,5 @@ Workflow {
 		srcPath = "foo"
 		lineDelimiter = lineDelimiter
 	}
-	component = org.eclipse.xtext.generator.ecore.GenModelAccessTestGenerator {}
+//	component = org.eclipse.xtext.generator.ecore.GenModelAccessTestGenerator {}
 }

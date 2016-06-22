@@ -1,9 +1,3 @@
-configurations {
-	mwe2 {
-		extendsFrom compile
-	}
-}
-
 repositories {
    flatDir {
        dirs 'lib'
@@ -14,26 +8,19 @@ dependencies {
 	compile project(':org.eclipse.xtext.testing')
 	compile project(':org.eclipse.xtext.xtext.generator')
 	compile project(':org.eclipse.xtext.xtext.wizard')
-	compile 'junit:junit:4.12'
-	
+	compile project(':org.eclipse.xtext.testlanguages')
+	compile "junit:junit:$versions.junit"
 	compile "org.eclipse.emf:org.eclipse.emf.common:$versions.emfCommon"
 	compile "org.eclipse.emf:org.eclipse.emf.ecore.xmi:$versions.emfEcore"
 	
-   compile name: 'simple'
+    compile name: 'simple'
 	
-	// TODO eliminate all following dependencies
-	//compile ":org.eclipse.xtext.testlanguages"
-	compile project(':org.eclipse.xtext.testlanguages')
-	//compile "org.eclipse.xtext:org.eclipse.xtext.junit4:$versions.xtext"
-	compile "org.eclipse.xpand:org.eclipse.xpand:$versions.xpand"
-	
-	//XXX compile/mwe2 "org.eclipse.xtext:org.eclipse.xtext.generator:$versions.xtext"
-	//XXX mwe2 "org.eclipse.emf:org.eclipse.emf.mwe2.launch:$versions.emfMwe2"
-	//XXX mwe2 "org.eclipse.xtext:org.eclipse.xtext.xtext.generator:$versions.xtext"
-	//XXX mwe2 "org.eclipse.xtext:org.eclipse.xtext.ecore:$versions.xtext"
+	mwe2 "org.eclipse.emf:org.eclipse.emf.mwe2.launch:$versions.emfMwe2"
+	mwe2 "org.eclipse.xpand:org.eclipse.xpand:$versions.xpand"
+	mwe2 "org.eclipse.xtext:org.eclipse.xtext.generator:$versions.xtext_bootstrap"
+	mwe2 "org.eclipse.xtext:org.eclipse.xtext.xtext.generator:$versions.xtext_bootstrap"
+	mwe2 "org.eclipse.xtext:org.eclipse.xtext.ecore:$versions.xtext_bootstrap"
 }
-
-eclipse.classpath.plusConfigurations += [configurations.mwe2]
 
 sourceSets.test.java {
 	srcDir 'src-gen2'
