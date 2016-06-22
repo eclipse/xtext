@@ -54,7 +54,9 @@ Workflow {
 			fragment = @CommonTestLanguagesFragments {
 				file.extensions = "typesRefactoring"	
 			} 
-			fragment = junit.Junit4Fragment {}
+			fragment = junit.Junit4Fragment {
+				useDeprecatedClasses = false
+			}
 		}
 		language = {
 			uri="classpath:/org/eclipse/xtext/common/types/xtext/ui/RefactoringTestLanguage1.xtext"
