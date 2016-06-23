@@ -40,7 +40,7 @@ class OpenDocumentTest extends AbstractTestLangLanguageServerTest {
 			].newDidChangeWatchedFilesParams
 		)
         
-        // still errorneous
+        // still erroneous
         assertEquals("Couldn't resolve reference to TypeDeclaration 'NonExisting'.", diagnostics.get(firstFile).head.message)
         
         // let's open the document with a different content

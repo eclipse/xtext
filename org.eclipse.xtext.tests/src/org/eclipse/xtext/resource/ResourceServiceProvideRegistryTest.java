@@ -38,7 +38,7 @@ public class ResourceServiceProvideRegistryTest {
 			public void run() {
 				assertNull(reg.getResourceServiceProvider(URI.createURI("hubba.foo")));
 			}
-		}).assertLogEntry("Errorneous resource service provider registered for 'hubba.foo'. Removing it from the registry.");
+		}).assertLogEntry("Erroneous resource service provider registered for 'hubba.foo'. Removing it from the registry.");
 		
 		assertEquals(0, reg.getExtensionToFactoryMap().size());
 	}

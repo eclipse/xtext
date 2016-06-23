@@ -31,7 +31,7 @@ class ReducedXtextResourceValidatorTest extends AbstractXtextTests {
 			import 'http://test' as test
 			Root returns test::Foo: name=ID;
 		'''
-		val issues = resourceValidator.validate(grammarAsString.errorneousResource, CheckMode.NORMAL_AND_FAST, CancelIndicator.NullImpl)
+		val issues = resourceValidator.validate(grammarAsString.erroneousResource, CheckMode.NORMAL_AND_FAST, CancelIndicator.NullImpl)
 		assertEquals(issues.toString, 0, issues.size)
 	}
 	
@@ -41,7 +41,7 @@ class ReducedXtextResourceValidatorTest extends AbstractXtextTests {
 			import 'http://test' as test
 			Root returns test::Foo: name=ID;;
 		'''
-		val issues = resourceValidator.validate(grammarAsString.errorneousResource, CheckMode.NORMAL_AND_FAST, CancelIndicator.NullImpl)
+		val issues = resourceValidator.validate(grammarAsString.erroneousResource, CheckMode.NORMAL_AND_FAST, CancelIndicator.NullImpl)
 		assertEquals(issues.toString, 1, issues.size)
 		assertTrue(issues.toString, issues.head.message.contains("extraneous input ';'"))
 	}
@@ -52,7 +52,7 @@ class ReducedXtextResourceValidatorTest extends AbstractXtextTests {
 			import 'http://test' as test
 			Root returns test::Foo : name=IDS;
 		'''
-		val issues = resourceValidator.validate(grammarAsString.errorneousResource, CheckMode.NORMAL_AND_FAST, CancelIndicator.NullImpl)
+		val issues = resourceValidator.validate(grammarAsString.erroneousResource, CheckMode.NORMAL_AND_FAST, CancelIndicator.NullImpl)
 		assertEquals(issues.toString, 1, issues.size)
 		assertTrue(issues.toString, issues.head.message.contains("IDS"))
 	}
@@ -63,12 +63,12 @@ class ReducedXtextResourceValidatorTest extends AbstractXtextTests {
 			import 'http://test' as test
 			Root returns test::Foo : name='foo';
 		'''
-		val issues = resourceValidator.validate(grammarAsString.errorneousResource, CheckMode.NORMAL_AND_FAST, CancelIndicator.NullImpl)
+		val issues = resourceValidator.validate(grammarAsString.erroneousResource, CheckMode.NORMAL_AND_FAST, CancelIndicator.NullImpl)
 		assertEquals(issues.toString, 1, issues.size)
 		assertTrue(issues.toString, issues.head.message.contains("Trminals"))
 	}
 	
-	def getErrorneousResource(CharSequence seq) {
+	def getErroneousResource(CharSequence seq) {
 		return seq.toString.asStream.doGetResource(testModelURI)
 	}
 }
