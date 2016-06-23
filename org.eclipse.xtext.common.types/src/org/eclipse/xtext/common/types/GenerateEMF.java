@@ -27,19 +27,14 @@ public class GenerateEMF {
 		
 		new StandaloneSetup() {{
 			registerProject(new File(".project").getAbsoluteFile());
-			registerProject(new File(".." + separator + "org.eclipse.xtext.common.types.edit" + separator+ ".project"));
 		}};
 		
 		new DirectoryCleaner() {{
 			setDirectory("../"+projectName+"/emf-gen");
 		}}.invoke(null);
 		
-		new DirectoryCleaner() {{
-			setDirectory("../"+projectName+".edit/emf-gen");
-		}}.invoke(null);
 		
 		new EcoreGenerator() {{
-			setGenerateEdit(true);
 			setGenModel("platform:/resource/"+projectName+"/model/JavaVMTypes.genmodel");
 			addSrcPath("platform:/resource/"+projectName+"/src");
 			setLineDelimiter("\n");

@@ -19,33 +19,25 @@ dependencies {
 
     compile name: 'simple'
 	
-	//compile "org.eclipse.core:org.eclipse.core.runtime:$versions.eclipseCore"
 	compile "org.eclipse.xtext:org.eclipse.xtext.testing:$versions.xtext"
 	compile "org.eclipse.xtext:org.eclipse.xtext.xtext.generator:$versions.xtext"
 	compile "org.eclipse.xtext:org.eclipse.xtext.xtext.wizard:$versions.xtext"
 	compile 'junit:junit:4.12'
 	
 	// TODO eliminate all following dependencies
-
-	//compile "org.eclipse.xtext:org.eclipse.xtext.junit4:$versions.xtext"
-	
 	compile "org.eclipse.xpand:org.eclipse.xpand:$versions.xpand"
 }
 
-
-
+eclipse.classpath.plusConfigurations += [configurations.mwe2]
+sourceSets.main.resources {
+	srcDir 'src'
+}
 sourceSets.test.java {
 	srcDir 'src-gen2'
 	srcDir 'xtend-gen'
 }
 
-sourceSets {
-	test.resources {
-		srcDir 'src-gen2'
-		srcDir 'src'
-	}
-}
-
-test {
-	
+sourceSets.test.resources {
+	srcDir 'src-gen2'
+	srcDir 'src'
 }

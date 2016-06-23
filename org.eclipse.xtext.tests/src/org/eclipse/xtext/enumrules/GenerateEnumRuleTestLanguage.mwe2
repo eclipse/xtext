@@ -18,7 +18,10 @@ var lineDelimiter = '\n'
 
 Workflow {
 	bean = StandaloneSetup {
-		platformUri="${runtimeProject}/.."
+		projectMapping = {
+			path = "${runtimeProject}"
+			projectName = "org.eclipse.xtext.tests"
+		}
 		registerGenModelFile = "platform:/resource/org.eclipse.xtext.tests/src/org/eclipse/xtext/enumrules/enums.genmodel"
 	}
 	
