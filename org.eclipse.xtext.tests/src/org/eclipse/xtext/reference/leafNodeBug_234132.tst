@@ -1,4 +1,0 @@
-/**
-* Multiline commentr
-*/
-spielplatz {}
