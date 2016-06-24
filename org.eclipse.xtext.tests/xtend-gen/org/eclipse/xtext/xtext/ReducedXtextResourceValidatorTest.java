@@ -49,8 +49,8 @@ public class ReducedXtextResourceValidatorTest extends AbstractXtextTests {
     _builder.append("Root returns test::Foo: name=ID;");
     _builder.newLine();
     final String grammarAsString = _builder.toString();
-    XtextResource _errorneousResource = this.getErrorneousResource(grammarAsString);
-    final List<Issue> issues = this.resourceValidator.validate(_errorneousResource, CheckMode.NORMAL_AND_FAST, CancelIndicator.NullImpl);
+    XtextResource _erroneousResource = this.getErroneousResource(grammarAsString);
+    final List<Issue> issues = this.resourceValidator.validate(_erroneousResource, CheckMode.NORMAL_AND_FAST, CancelIndicator.NullImpl);
     String _string = issues.toString();
     int _size = issues.size();
     Assert.assertEquals(_string, 0, _size);
@@ -66,8 +66,8 @@ public class ReducedXtextResourceValidatorTest extends AbstractXtextTests {
     _builder.append("Root returns test::Foo: name=ID;;");
     _builder.newLine();
     final String grammarAsString = _builder.toString();
-    XtextResource _errorneousResource = this.getErrorneousResource(grammarAsString);
-    final List<Issue> issues = this.resourceValidator.validate(_errorneousResource, CheckMode.NORMAL_AND_FAST, CancelIndicator.NullImpl);
+    XtextResource _erroneousResource = this.getErroneousResource(grammarAsString);
+    final List<Issue> issues = this.resourceValidator.validate(_erroneousResource, CheckMode.NORMAL_AND_FAST, CancelIndicator.NullImpl);
     String _string = issues.toString();
     int _size = issues.size();
     Assert.assertEquals(_string, 1, _size);
@@ -88,8 +88,8 @@ public class ReducedXtextResourceValidatorTest extends AbstractXtextTests {
     _builder.append("Root returns test::Foo : name=IDS;");
     _builder.newLine();
     final String grammarAsString = _builder.toString();
-    XtextResource _errorneousResource = this.getErrorneousResource(grammarAsString);
-    final List<Issue> issues = this.resourceValidator.validate(_errorneousResource, CheckMode.NORMAL_AND_FAST, CancelIndicator.NullImpl);
+    XtextResource _erroneousResource = this.getErroneousResource(grammarAsString);
+    final List<Issue> issues = this.resourceValidator.validate(_erroneousResource, CheckMode.NORMAL_AND_FAST, CancelIndicator.NullImpl);
     String _string = issues.toString();
     int _size = issues.size();
     Assert.assertEquals(_string, 1, _size);
@@ -110,8 +110,8 @@ public class ReducedXtextResourceValidatorTest extends AbstractXtextTests {
     _builder.append("Root returns test::Foo : name=\'foo\';");
     _builder.newLine();
     final String grammarAsString = _builder.toString();
-    XtextResource _errorneousResource = this.getErrorneousResource(grammarAsString);
-    final List<Issue> issues = this.resourceValidator.validate(_errorneousResource, CheckMode.NORMAL_AND_FAST, CancelIndicator.NullImpl);
+    XtextResource _erroneousResource = this.getErroneousResource(grammarAsString);
+    final List<Issue> issues = this.resourceValidator.validate(_erroneousResource, CheckMode.NORMAL_AND_FAST, CancelIndicator.NullImpl);
     String _string = issues.toString();
     int _size = issues.size();
     Assert.assertEquals(_string, 1, _size);
@@ -122,7 +122,7 @@ public class ReducedXtextResourceValidatorTest extends AbstractXtextTests {
     Assert.assertTrue(_string_1, _contains);
   }
   
-  public XtextResource getErrorneousResource(final CharSequence seq) {
+  public XtextResource getErroneousResource(final CharSequence seq) {
     try {
       String _string = seq.toString();
       InputStream _asStream = this.getAsStream(_string);
