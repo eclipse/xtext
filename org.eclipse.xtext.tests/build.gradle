@@ -36,4 +36,5 @@ sourceSets {
 
 test {
 	exclude 'org.eclipse.xtext.serializer.contextFinderTest.NestedTypeRecursiveTest.class'
+	exclude '**/*Suite.class'
 }
