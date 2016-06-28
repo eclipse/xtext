@@ -33,3 +33,7 @@ sourceSets.test.resources {
 	srcDir 'tests'
 	srcDir 'suites'
 }
+
+test {
+	exclude '**/*Suite.class'
+}

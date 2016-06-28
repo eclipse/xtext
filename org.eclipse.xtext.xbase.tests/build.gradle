@@ -28,10 +28,16 @@ sourceSets.test.java {
 	srcDir 'xtend-gen'
 	srcDir 'longrunning/src'
 	srcDir 'longrunning/xtend-gen'
+	srcDir 'suites'
+	srcDir 'smoke-suites'
 }
 
 sourceSets {
 	test.resources {
 		srcDir 'src-gen2'
 	}
+}
+
+test {
+	exclude '**/*Suite.class'
 }
