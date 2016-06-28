@@ -27,4 +27,4 @@ import org.junit.runners.Suite.SuiteClasses;
 	CompilerTraceTest.class,
 	CompilerTests2.class
 })
-public class CompilerAndInterpreterSuiteOldAPI {}
+public class CompilerAndInterpreterSuiteOldAPISuite {}
