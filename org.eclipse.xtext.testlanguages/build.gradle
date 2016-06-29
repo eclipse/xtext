@@ -1,3 +1,5 @@
 dependencies {
 	compile project(':org.eclipse.xtext.common.types')
 }
+
+eclipse.classpath.plusConfigurations += [configurations.mwe2]
