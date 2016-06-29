@@ -29,3 +29,10 @@ jar {
 		from 'META-INF'
 	}
 }
+
+eclipse {
+	project {
+		natures 'org.eclipse.xtext.ui.shared.xtextNature'
+		buildCommand 'org.eclipse.xtext.ui.shared.xtextBuilder'
+	}
+}
