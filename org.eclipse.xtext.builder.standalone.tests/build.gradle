@@ -1,0 +1,8 @@
+dependencies {
+	compile project(':org.eclipse.xtext.builder.standalone')
+	compile 'junit:junit:4.12'
+	compile "org.eclipse.xtext:org.eclipse.xtext.testing:$versions.xtext"
+	compile "org.eclipse.jdt:org.eclipse.jdt.core:$versions.jdtCore"
+}
+
+eclipse.classpath.plusConfigurations += [configurations.mwe2]
