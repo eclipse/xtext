@@ -159,10 +159,12 @@ public class IdeContentProposalProvider {
     if (_filterKeyword) {
       String _value = keyword.getValue();
       final ContentAssistEntry entry = this.proposalCreator.createProposal(_value, context);
-      entry.setKind(ContentAssistEntry.KIND_KEYWORD);
-      String _value_1 = keyword.getValue();
-      int _keywordPriority = this.proposalPriorities.getKeywordPriority(_value_1, entry);
-      acceptor.accept(entry, _keywordPriority);
+      if ((entry != null)) {
+        entry.setKind(ContentAssistEntry.KIND_KEYWORD);
+        String _value_1 = keyword.getValue();
+        int _keywordPriority = this.proposalPriorities.getKeywordPriority(_value_1, entry);
+        acceptor.accept(entry, _keywordPriority);
+      }
     }
   }
   
