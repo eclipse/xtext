@@ -52,6 +52,7 @@ interface IEditorHighlightingConfigurationProvider {
             {include: "orion.c-like#comment_block"},
             {include: "orion.lib#string_doubleQuote"},
             {include: "orion.lib#string_singleQuote"},
+            {include: "orion.lib#doc_block"},
             {include: "orion.lib#number_decimal"},
             {include: "orion.lib#number_hex"},
             {include: "orion.lib#brace_open"},
@@ -61,7 +62,6 @@ interface IEditorHighlightingConfigurationProvider {
             {include: "orion.lib#parenthesis_open"},
             {include: "orion.lib#parenthesis_close"},
             {include: "orion.lib#operator"},
-            {include: "orion.lib#doc_block"},
         '''
 
         def Iterable<String> getKeywords() {
