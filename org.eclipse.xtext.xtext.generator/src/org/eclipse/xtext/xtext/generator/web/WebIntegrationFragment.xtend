@@ -392,6 +392,9 @@ class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
 				|| (inheritsTerminals || inheritsXbase) && !suppressedPatterns.contains('string_singleQuote'))
 			patterns += '{include: "orion.lib#string_singleQuote"}'
 		
+		if (enabledPatterns.contains('doc_block'))
+			patterns += '{include: "orion.lib#doc_block"}'
+		
 		if (enabledPatterns.contains('number_decimal')
 				|| (inheritsTerminals || inheritsXbase) && !suppressedPatterns.contains('number_decimal'))
 			patterns += '{include: "orion.lib#number_decimal"}'
@@ -423,9 +426,6 @@ class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
 		if (enabledPatterns.contains('parenthesis_close')
 				|| keywords.contains(')') && !suppressedPatterns.contains('parenthesis_close'))
 			patterns += '{include: "orion.lib#parenthesis_close"}'
-		
-		if (enabledPatterns.contains('doc_block'))
-			patterns += '{include: "orion.lib#doc_block"}'
 		
 		return patterns
 	}

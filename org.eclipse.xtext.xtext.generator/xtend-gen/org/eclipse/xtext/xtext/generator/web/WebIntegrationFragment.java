@@ -797,6 +797,10 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
     if ((this.enabledPatterns.contains("string_singleQuote") || ((inheritsTerminals || inheritsXbase) && (!this.suppressedPatterns.contains("string_singleQuote"))))) {
       patterns.add("{include: \"orion.lib#string_singleQuote\"}");
     }
+    boolean _contains = this.enabledPatterns.contains("doc_block");
+    if (_contains) {
+      patterns.add("{include: \"orion.lib#doc_block\"}");
+    }
     if ((this.enabledPatterns.contains("number_decimal") || ((inheritsTerminals || inheritsXbase) && (!this.suppressedPatterns.contains("number_decimal"))))) {
       patterns.add("{include: \"orion.lib#number_decimal\"}");
     }
@@ -820,10 +824,6 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
     }
     if ((this.enabledPatterns.contains("parenthesis_close") || (keywords.contains(")") && (!this.suppressedPatterns.contains("parenthesis_close"))))) {
       patterns.add("{include: \"orion.lib#parenthesis_close\"}");
-    }
-    boolean _contains = this.enabledPatterns.contains("doc_block");
-    if (_contains) {
-      patterns.add("{include: \"orion.lib#doc_block\"}");
     }
     return patterns;
   }

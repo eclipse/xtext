@@ -83,6 +83,8 @@ public interface IEditorHighlightingConfigurationProvider {
       _builder.newLine();
       _builder.append("{include: \"orion.lib#string_singleQuote\"},");
       _builder.newLine();
+      _builder.append("{include: \"orion.lib#doc_block\"},");
+      _builder.newLine();
       _builder.append("{include: \"orion.lib#number_decimal\"},");
       _builder.newLine();
       _builder.append("{include: \"orion.lib#number_hex\"},");
@@ -100,8 +102,6 @@ public interface IEditorHighlightingConfigurationProvider {
       _builder.append("{include: \"orion.lib#parenthesis_close\"},");
       _builder.newLine();
       _builder.append("{include: \"orion.lib#operator\"},");
-      _builder.newLine();
-      _builder.append("{include: \"orion.lib#doc_block\"},");
       _builder.newLine();
       return _builder;
     }
