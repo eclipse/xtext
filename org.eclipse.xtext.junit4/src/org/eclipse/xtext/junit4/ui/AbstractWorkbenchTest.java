@@ -18,6 +18,7 @@ import org.eclipse.ui.PlatformUI;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.BeforeClass;
 
 /**
  * Abstract base class for test classes that need access to the workbench.
@@ -25,6 +26,11 @@ import org.junit.Before;
  * @author Peter Friese - Initial contribution and API
  */
 public abstract class AbstractWorkbenchTest extends Assert {
+	
+	@BeforeClass
+	public static void setupTargetPlatform() throws Exception {
+		TargetPlatformUtil.setTargetPlatform();
+	}
 
 	@Before
 	public void setUp() throws Exception {
