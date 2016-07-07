@@ -1,4 +1,0 @@
-dependencies {
-	compile project(':org.eclipse.xtext.testlanguages')
-	compile "org.eclipse.xtext:org.eclipse.xtext.ide:$versions.xtext"
-}

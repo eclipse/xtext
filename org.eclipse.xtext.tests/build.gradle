@@ -12,13 +12,13 @@ repositories {
 
 dependencies {
 
-	compile project(':org.eclipse.xtext.testlanguages')
 	compile project(':org.eclipse.xtext.generator')
 	compile project(':org.eclipse.xtext.common.types')
 	compile project(':org.eclipse.xtext.xbase')
 
     compile name: 'simple'
 	
+	compile "org.eclipse.xtext:org.eclipse.xtext.testlanguages:$versions.xtext"
 	compile "org.eclipse.xtext:org.eclipse.xtext.testing:$versions.xtext"
 	compile "org.eclipse.xtext:org.eclipse.xtext.xtext.generator:$versions.xtext"
 	compile "org.eclipse.xtext:org.eclipse.xtext.xtext.wizard:$versions.xtext"

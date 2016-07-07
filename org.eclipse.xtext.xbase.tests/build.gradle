@@ -6,7 +6,6 @@ configurations {
 
 dependencies {
 
-	compile project(':org.eclipse.xtext.testlanguages')
 	compile project(':org.eclipse.xtext.generator')
 	compile project(':org.eclipse.xtext.common.types')
 	compile project(':org.eclipse.xtext.xbase.testlanguages')
