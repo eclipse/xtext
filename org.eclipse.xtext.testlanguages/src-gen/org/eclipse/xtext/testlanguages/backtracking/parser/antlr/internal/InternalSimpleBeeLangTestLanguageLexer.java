@@ -12,81 +12,81 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class InternalSimpleBeeLangTestLanguageLexer extends Lexer {
-    public static final int T__68=68;
-    public static final int T__69=69;
-    public static final int RULE_ID=5;
-    public static final int T__66=66;
-    public static final int T__67=67;
-    public static final int T__29=29;
-    public static final int T__64=64;
-    public static final int T__28=28;
-    public static final int T__65=65;
-    public static final int T__27=27;
-    public static final int T__62=62;
-    public static final int T__26=26;
-    public static final int T__63=63;
-    public static final int T__25=25;
-    public static final int T__24=24;
-    public static final int T__23=23;
-    public static final int T__22=22;
-    public static final int RULE_ANY_OTHER=12;
-    public static final int T__21=21;
-    public static final int T__20=20;
-    public static final int T__61=61;
-    public static final int EOF=-1;
-    public static final int T__60=60;
+    public static final int RULE_HEX=8;
+    public static final int T__50=50;
+    public static final int T__19=19;
+    public static final int T__15=15;
+    public static final int T__59=59;
+    public static final int T__16=16;
+    public static final int T__17=17;
+    public static final int T__18=18;
     public static final int T__55=55;
     public static final int T__56=56;
-    public static final int T__19=19;
+    public static final int T__13=13;
     public static final int T__57=57;
-    public static final int RULE_HEX=8;
+    public static final int T__14=14;
     public static final int T__58=58;
-    public static final int T__16=16;
     public static final int T__51=51;
-    public static final int T__15=15;
     public static final int T__52=52;
     public static final int T__53=53;
-    public static final int T__18=18;
     public static final int T__54=54;
-    public static final int T__17=17;
-    public static final int T__14=14;
-    public static final int T__13=13;
-    public static final int T__59=59;
-    public static final int RULE_INT=6;
-    public static final int T__50=50;
-    public static final int T__42=42;
-    public static final int T__43=43;
-    public static final int T__40=40;
-    public static final int T__41=41;
-    public static final int T__46=46;
-    public static final int T__47=47;
-    public static final int T__44=44;
-    public static final int T__45=45;
-    public static final int T__48=48;
-    public static final int T__49=49;
-    public static final int RULE_SL_COMMENT=10;
-    public static final int RULE_ML_COMMENT=9;
-    public static final int T__30=30;
-    public static final int T__31=31;
-    public static final int T__32=32;
-    public static final int RULE_STRING=7;
-    public static final int T__33=33;
-    public static final int T__71=71;
-    public static final int T__34=34;
-    public static final int T__72=72;
-    public static final int T__35=35;
-    public static final int T__36=36;
-    public static final int T__70=70;
+    public static final int T__60=60;
+    public static final int T__61=61;
+    public static final int RULE_ID=5;
     public static final int RULE_DOCUMENTATION=4;
+    public static final int T__26=26;
+    public static final int T__27=27;
+    public static final int T__28=28;
+    public static final int RULE_INT=6;
+    public static final int T__29=29;
+    public static final int T__22=22;
+    public static final int T__66=66;
+    public static final int RULE_ML_COMMENT=9;
+    public static final int T__23=23;
+    public static final int T__67=67;
+    public static final int T__24=24;
+    public static final int T__68=68;
+    public static final int T__25=25;
+    public static final int T__69=69;
+    public static final int T__62=62;
+    public static final int T__63=63;
+    public static final int T__20=20;
+    public static final int T__64=64;
+    public static final int T__21=21;
+    public static final int T__65=65;
+    public static final int T__70=70;
+    public static final int T__71=71;
+    public static final int T__72=72;
+    public static final int RULE_STRING=7;
+    public static final int RULE_SL_COMMENT=10;
     public static final int T__37=37;
     public static final int T__38=38;
     public static final int T__39=39;
+    public static final int T__33=33;
+    public static final int T__77=77;
+    public static final int T__34=34;
+    public static final int T__35=35;
+    public static final int T__36=36;
+    public static final int T__73=73;
+    public static final int EOF=-1;
+    public static final int T__30=30;
+    public static final int T__74=74;
+    public static final int T__31=31;
+    public static final int T__75=75;
+    public static final int T__32=32;
     public static final int T__76=76;
     public static final int RULE_WS=11;
-    public static final int T__75=75;
-    public static final int T__74=74;
-    public static final int T__73=73;
-    public static final int T__77=77;
+    public static final int RULE_ANY_OTHER=12;
+    public static final int T__48=48;
+    public static final int T__49=49;
+    public static final int T__44=44;
+    public static final int T__45=45;
+    public static final int T__46=46;
+    public static final int T__47=47;
+    public static final int T__40=40;
+    public static final int T__41=41;
+    public static final int T__42=42;
+    public static final int T__43=43;
 
     // delegates
     // delegators
@@ -2612,7 +2612,7 @@ public class InternalSimpleBeeLangTestLanguageLexer extends Lexer {
     static final String DFA14_acceptS =
         "\4\uffff\1\4\1\5\1\uffff\1\7\1\10\4\uffff\1\15\6\uffff\1\27\1\uffff\1\31\14\uffff\1\70\1\71\4\uffff\1\104\1\105\2\uffff\1\111\1\112\1\uffff\1\104\4\uffff\1\4\1\5\1\uffff\1\7\1\10\4\uffff\1\15\6\uffff\1\36\1\uffff\1\110\1\24\2\uffff\1\27\1\uffff\1\67\1\31\1\uffff\1\53\1\32\1\33\1\65\1\57\1\34\1\66\1\60\1\35\1\61\1\37\1\62\1\40\1\uffff\1\64\1\45\1\47\1\46\1\50\2\uffff\1\55\1\101\1\56\1\70\1\71\2\uffff\1\103\1\105\1\106\1\111\17\uffff\1\20\2\uffff\1\107\2\uffff\1\30\1\63\1\42\1\41\1\44\1\43\6\uffff\1\51\1\52\7\uffff\1\14\3\uffff\1\100\12\uffff\1\1\10\uffff\1\16\1\72\1\17\7\uffff\1\77\2\uffff\1\74\6\uffff\1\102\1\25\6\uffff\1\6\1\11\3\uffff\1\21\1\uffff\1\54\2\uffff\1\2\5\uffff\1\73\1\76\1\uffff\1\12\2\uffff\1\13\1\26\3\uffff\1\3\1\75\1\22\1\23";
     static final String DFA14_specialS =
-        "\1\2\52\uffff\1\5\1\4\31\uffff\1\3\72\uffff\1\7\36\uffff\1\10\1\6\1\1\23\uffff\1\0\66\uffff}>";
+        "\1\5\52\uffff\1\4\1\6\31\uffff\1\10\72\uffff\1\2\36\uffff\1\1\1\0\1\7\23\uffff\1\3\66\uffff}>";
     static final String[] DFA14_transitionS = {
             "\11\56\2\55\2\56\1\55\22\56\1\55\1\35\1\53\2\56\1\33\1\42\1\54\1\24\1\26\1\32\1\30\1\4\1\31\1\25\1\22\1\47\11\52\1\7\1\10\1\37\1\27\1\36\2\56\32\51\1\43\1\56\1\44\1\50\1\51\1\56\1\20\1\45\1\40\1\51\1\14\1\23\1\21\1\51\1\3\4\51\1\17\1\11\1\12\1\51\1\13\1\6\1\46\1\1\1\2\1\16\3\51\1\5\1\41\1\15\1\34\uff81\56",
             "\1\57",
@@ -2890,6 +2890,42 @@ public class InternalSimpleBeeLangTestLanguageLexer extends Lexer {
         	int _s = s;
             switch ( s ) {
                     case 0 : 
+                        int LA14_161 = input.LA(1);
+
+                        s = -1;
+                        if ( (LA14_161=='/') ) {s = 182;}
+
+                        else if ( (LA14_161=='*') ) {s = 161;}
+
+                        else if ( ((LA14_161>='\u0000' && LA14_161<=')')||(LA14_161>='+' && LA14_161<='.')||(LA14_161>='0' && LA14_161<='\uFFFF')) ) {s = 162;}
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 1 : 
+                        int LA14_160 = input.LA(1);
+
+                        s = -1;
+                        if ( (LA14_160=='*') ) {s = 161;}
+
+                        else if ( ((LA14_160>='\u0000' && LA14_160<=')')||(LA14_160>='+' && LA14_160<='\uFFFF')) ) {s = 162;}
+
+                        else s = 130;
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 2 : 
+                        int LA14_129 = input.LA(1);
+
+                        s = -1;
+                        if ( (LA14_129=='/') ) {s = 160;}
+
+                        else if ( (LA14_129=='*') ) {s = 161;}
+
+                        else if ( ((LA14_129>='\u0000' && LA14_129<=')')||(LA14_129>='+' && LA14_129<='.')||(LA14_129>='0' && LA14_129<='\uFFFF')) ) {s = 162;}
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 3 : 
                         int LA14_182 = input.LA(1);
 
                         s = -1;
@@ -2901,17 +2937,17 @@ public class InternalSimpleBeeLangTestLanguageLexer extends Lexer {
 
                         if ( s>=0 ) return s;
                         break;
-                    case 1 : 
-                        int LA14_162 = input.LA(1);
+                    case 4 : 
+                        int LA14_43 = input.LA(1);
 
                         s = -1;
-                        if ( (LA14_162=='*') ) {s = 161;}
+                        if ( ((LA14_43>='\u0000' && LA14_43<='\uFFFF')) ) {s = 110;}
 
-                        else if ( ((LA14_162>='\u0000' && LA14_162<=')')||(LA14_162>='+' && LA14_162<='\uFFFF')) ) {s = 162;}
+                        else s = 46;
 
                         if ( s>=0 ) return s;
                         break;
-                    case 2 : 
+                    case 5 : 
                         int LA14_0 = input.LA(1);
 
                         s = -1;
@@ -3009,17 +3045,7 @@ public class InternalSimpleBeeLangTestLanguageLexer extends Lexer {
 
                         if ( s>=0 ) return s;
                         break;
-                    case 3 : 
-                        int LA14_70 = input.LA(1);
-
-                        s = -1;
-                        if ( (LA14_70=='*') ) {s = 129;}
-
-                        else if ( ((LA14_70>='\u0000' && LA14_70<=')')||(LA14_70>='+' && LA14_70<='\uFFFF')) ) {s = 130;}
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 4 : 
+                    case 6 : 
                         int LA14_44 = input.LA(1);
 
                         s = -1;
@@ -3029,49 +3055,23 @@ public class InternalSimpleBeeLangTestLanguageLexer extends Lexer {
 
                         if ( s>=0 ) return s;
                         break;
-                    case 5 : 
-                        int LA14_43 = input.LA(1);
-
-                        s = -1;
-                        if ( ((LA14_43>='\u0000' && LA14_43<='\uFFFF')) ) {s = 110;}
-
-                        else s = 46;
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 6 : 
-                        int LA14_161 = input.LA(1);
-
-                        s = -1;
-                        if ( (LA14_161=='/') ) {s = 182;}
-
-                        else if ( (LA14_161=='*') ) {s = 161;}
-
-                        else if ( ((LA14_161>='\u0000' && LA14_161<=')')||(LA14_161>='+' && LA14_161<='.')||(LA14_161>='0' && LA14_161<='\uFFFF')) ) {s = 162;}
-
-                        if ( s>=0 ) return s;
-                        break;
                     case 7 : 
-                        int LA14_129 = input.LA(1);
+                        int LA14_162 = input.LA(1);
 
                         s = -1;
-                        if ( (LA14_129=='/') ) {s = 160;}
+                        if ( (LA14_162=='*') ) {s = 161;}
 
-                        else if ( (LA14_129=='*') ) {s = 161;}
-
-                        else if ( ((LA14_129>='\u0000' && LA14_129<=')')||(LA14_129>='+' && LA14_129<='.')||(LA14_129>='0' && LA14_129<='\uFFFF')) ) {s = 162;}
+                        else if ( ((LA14_162>='\u0000' && LA14_162<=')')||(LA14_162>='+' && LA14_162<='\uFFFF')) ) {s = 162;}
 
                         if ( s>=0 ) return s;
                         break;
                     case 8 : 
-                        int LA14_160 = input.LA(1);
+                        int LA14_70 = input.LA(1);
 
                         s = -1;
-                        if ( (LA14_160=='*') ) {s = 161;}
+                        if ( (LA14_70=='*') ) {s = 129;}
 
-                        else if ( ((LA14_160>='\u0000' && LA14_160<=')')||(LA14_160>='+' && LA14_160<='\uFFFF')) ) {s = 162;}
-
-                        else s = 130;
+                        else if ( ((LA14_70>='\u0000' && LA14_70<=')')||(LA14_70>='+' && LA14_70<='\uFFFF')) ) {s = 130;}
 
                         if ( s>=0 ) return s;
                         break;

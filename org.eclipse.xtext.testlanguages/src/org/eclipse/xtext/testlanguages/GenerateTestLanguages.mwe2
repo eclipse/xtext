@@ -15,10 +15,11 @@ Workflow {
 
 				eclipsePlugin = {
 					enabled = true
+					root = "${rootPath}/../xtext-eclipse/org.eclipse.xtext.testlanguages.ui"	
 				}
 				ideaPlugin = {
-					enabled = true
-					root = "${rootPath}/../intellij/org.eclipse.xtext.testlanguages.idea"	
+					enabled = false
+					root = "${rootPath}/../xtext-intellij/org.eclipse.xtext.testlanguages.idea"	
 				}
 				
 				createEclipseMetaData = true

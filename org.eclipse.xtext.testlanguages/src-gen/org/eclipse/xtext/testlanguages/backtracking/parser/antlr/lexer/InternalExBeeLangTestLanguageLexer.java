@@ -12,81 +12,81 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class InternalExBeeLangTestLanguageLexer extends Lexer {
+    public static final int Val=30;
+    public static final int HyphenMinusHyphenMinus=38;
+    public static final int New=29;
+    public static final int RULE_HEX=70;
+    public static final int EqualsSignGreaterThanSign=44;
+    public static final int Var=31;
+    public static final int SolidusEqualsSign=41;
+    public static final int Builder=11;
+    public static final int Unit=22;
+    public static final int FullStopFullStopFullStop=26;
+    public static final int LessThanSign=61;
+    public static final int Name=20;
+    public static final int PercentSign=50;
+    public static final int Implements=6;
+    public static final int Input=19;
+    public static final int LeftParenthesis=51;
+    public static final int Version=13;
+    public static final int FullStopFullStop=40;
+    public static final int Cached=14;
+    public static final int This=21;
+    public static final int AsteriskEqualsSign=35;
+    public static final int RightSquareBracket=65;
+    public static final int ExclamationMark=49;
+    public static final int ExclamationMarkEqualsSignEqualsSign=25;
+    public static final int GreaterThanSign=63;
+    public static final int RequiresMax=4;
     public static final int RULE_ID=71;
-    public static final int VerticalLineVerticalLine=47;
-    public static final int HyphenMinus=56;
+    public static final int Requires=10;
     public static final int RightParenthesis=52;
+    public static final int RULE_DOCUMENTATION=69;
+    public static final int EqualsSignEqualsSignEqualsSign=27;
+    public static final int GreaterThanSignEqualsSign=45;
+    public static final int RequiresMin=5;
+    public static final int EqualsSignEqualsSign=43;
+    public static final int VerticalLine=67;
+    public static final int PlusSign=54;
+    public static final int RULE_INT=72;
+    public static final int RULE_ML_COMMENT=74;
+    public static final int LeftSquareBracket=64;
+    public static final int TildeEqualsSign=48;
+    public static final int VerticalLineVerticalLine=47;
+    public static final int RULE_STRING=73;
+    public static final int Properties=7;
+    public static final int Env=28;
+    public static final int Source=17;
+    public static final int With=24;
+    public static final int RULE_SL_COMMENT=75;
+    public static final int Function=8;
+    public static final int Comma=55;
+    public static final int EqualsSign=62;
+    public static final int As=46;
+    public static final int HyphenMinus=56;
     public static final int AmpersandAmpersand=34;
     public static final int Output=16;
-    public static final int RULE_ANY_OTHER=77;
-    public static final int ExclamationMark=49;
-    public static final int LeftParenthesis=51;
-    public static final int RightSquareBracket=65;
-    public static final int Final=18;
-    public static final int Context=12;
-    public static final int Solidus=58;
-    public static final int EOF=-1;
-    public static final int GreaterThanSign=63;
-    public static final int EqualsSignEqualsSign=43;
-    public static final int FullStop=57;
-    public static final int Version=13;
-    public static final int PercentSign=50;
-    public static final int RULE_HEX=70;
-    public static final int FullStopFullStopFullStop=26;
-    public static final int HyphenMinusHyphenMinus=38;
-    public static final int EqualsSignGreaterThanSign=44;
-    public static final int LessThanSign=61;
-    public static final int When=23;
-    public static final int Implements=6;
-    public static final int Source=17;
-    public static final int RULE_INT=72;
-    public static final int EqualsSignEqualsSignEqualsSign=27;
-    public static final int TildeEqualsSign=48;
-    public static final int PlusSignPlusSign=36;
-    public static final int LeftSquareBracket=64;
-    public static final int FullStopFullStop=40;
-    public static final int Provides=9;
-    public static final int PercentSignEqualsSign=33;
-    public static final int ExclamationMarkEqualsSign=32;
-    public static final int Asterisk=53;
-    public static final int Requires=10;
-    public static final int RequiresMin=5;
-    public static final int As=46;
-    public static final int RequiresMax=4;
-    public static final int Cached=14;
-    public static final int Greedy=15;
-    public static final int This=21;
-    public static final int Unit=22;
-    public static final int Properties=7;
-    public static final int SolidusEqualsSign=41;
-    public static final int LessThanSignEqualsSign=42;
-    public static final int LeftCurlyBracket=66;
-    public static final int Colon=59;
-    public static final int Semicolon=60;
-    public static final int Builder=11;
-    public static final int RULE_SL_COMMENT=75;
-    public static final int With=24;
-    public static final int RULE_ML_COMMENT=74;
-    public static final int Input=19;
-    public static final int RULE_STRING=73;
-    public static final int PlusSign=54;
-    public static final int RULE_DOCUMENTATION=69;
-    public static final int Function=8;
-    public static final int VerticalLine=67;
-    public static final int New=29;
-    public static final int AsteriskEqualsSign=35;
     public static final int HyphenMinusEqualsSign=39;
-    public static final int Name=20;
-    public static final int Env=28;
-    public static final int PlusSignEqualsSign=37;
-    public static final int GreaterThanSignEqualsSign=45;
-    public static final int ExclamationMarkEqualsSignEqualsSign=25;
-    public static final int RULE_WS=76;
-    public static final int EqualsSign=62;
-    public static final int Comma=55;
-    public static final int Val=30;
-    public static final int Var=31;
+    public static final int LessThanSignEqualsSign=42;
+    public static final int Solidus=58;
+    public static final int Colon=59;
     public static final int RightCurlyBracket=68;
+    public static final int EOF=-1;
+    public static final int Greedy=15;
+    public static final int Final=18;
+    public static final int Asterisk=53;
+    public static final int PercentSignEqualsSign=33;
+    public static final int PlusSignEqualsSign=37;
+    public static final int Context=12;
+    public static final int FullStop=57;
+    public static final int RULE_WS=76;
+    public static final int LeftCurlyBracket=66;
+    public static final int RULE_ANY_OTHER=77;
+    public static final int Provides=9;
+    public static final int Semicolon=60;
+    public static final int When=23;
+    public static final int PlusSignPlusSign=36;
+    public static final int ExclamationMarkEqualsSign=32;
 
     // delegates
     // delegators
@@ -2612,7 +2612,7 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
     static final String DFA14_acceptS =
         "\36\uffff\1\60\1\61\1\64\1\70\1\71\1\75\1\76\1\77\1\101\2\uffff\1\104\1\105\2\uffff\1\111\1\112\1\uffff\1\104\24\uffff\1\56\1\uffff\1\66\1\uffff\1\51\1\73\1\uffff\1\36\1\57\1\37\1\40\1\62\1\41\1\42\1\63\1\43\1\44\1\65\1\46\1\uffff\1\110\1\67\1\47\1\72\1\52\1\74\1\uffff\1\54\1\100\1\55\1\60\1\61\1\64\1\70\1\71\1\75\1\76\1\77\1\101\1\103\1\105\1\106\1\111\25\uffff\1\26\1\35\1\27\1\45\1\30\1\50\2\uffff\1\107\1\53\13\uffff\1\33\1\34\4\uffff\1\32\4\uffff\1\31\21\uffff\1\21\1\22\1\23\1\24\1\25\3\uffff\1\20\3\uffff\1\17\7\uffff\1\102\7\uffff\1\13\1\uffff\1\14\1\15\1\16\5\uffff\1\10\1\11\1\12\1\uffff\1\7\2\uffff\1\6\1\5\3\uffff\1\1\1\2\1\3\1\4";
     static final String DFA14_specialS =
-        "\1\2\52\uffff\1\5\1\4\53\uffff\1\3\63\uffff\1\7\31\uffff\1\10\1\6\1\1\23\uffff\1\0\60\uffff}>";
+        "\1\5\52\uffff\1\4\1\6\53\uffff\1\10\63\uffff\1\2\31\uffff\1\1\1\0\1\7\23\uffff\1\3\60\uffff}>";
     static final String[] DFA14_transitionS = {
             "\11\56\2\55\2\56\1\55\22\56\1\55\1\17\1\53\2\56\1\23\1\24\1\54\1\36\1\37\1\25\1\26\1\40\1\27\1\20\1\30\1\47\11\52\1\41\1\42\1\31\1\21\1\32\2\56\32\51\1\43\1\56\1\44\1\50\1\51\1\56\1\33\1\5\1\6\1\51\1\22\1\4\1\10\1\51\1\2\4\51\1\13\1\11\1\3\1\51\1\1\1\12\1\14\1\15\1\7\1\16\3\51\1\45\1\34\1\46\1\35\uff81\56",
             "\1\57",
@@ -2890,6 +2890,42 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
         	int _s = s;
             switch ( s ) {
                     case 0 : 
+                        int LA14_167 = input.LA(1);
+
+                        s = -1;
+                        if ( (LA14_167=='/') ) {s = 188;}
+
+                        else if ( (LA14_167=='*') ) {s = 167;}
+
+                        else if ( ((LA14_167>='\u0000' && LA14_167<=')')||(LA14_167>='+' && LA14_167<='.')||(LA14_167>='0' && LA14_167<='\uFFFF')) ) {s = 168;}
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 1 : 
+                        int LA14_166 = input.LA(1);
+
+                        s = -1;
+                        if ( (LA14_166=='*') ) {s = 167;}
+
+                        else if ( ((LA14_166>='\u0000' && LA14_166<=')')||(LA14_166>='+' && LA14_166<='\uFFFF')) ) {s = 168;}
+
+                        else s = 141;
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 2 : 
+                        int LA14_140 = input.LA(1);
+
+                        s = -1;
+                        if ( (LA14_140=='/') ) {s = 166;}
+
+                        else if ( (LA14_140=='*') ) {s = 167;}
+
+                        else if ( ((LA14_140>='\u0000' && LA14_140<=')')||(LA14_140>='+' && LA14_140<='.')||(LA14_140>='0' && LA14_140<='\uFFFF')) ) {s = 168;}
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 3 : 
                         int LA14_188 = input.LA(1);
 
                         s = -1;
@@ -2901,17 +2937,17 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
 
                         if ( s>=0 ) return s;
                         break;
-                    case 1 : 
-                        int LA14_168 = input.LA(1);
+                    case 4 : 
+                        int LA14_43 = input.LA(1);
 
                         s = -1;
-                        if ( (LA14_168=='*') ) {s = 167;}
+                        if ( ((LA14_43>='\u0000' && LA14_43<='\uFFFF')) ) {s = 110;}
 
-                        else if ( ((LA14_168>='\u0000' && LA14_168<=')')||(LA14_168>='+' && LA14_168<='\uFFFF')) ) {s = 168;}
+                        else s = 46;
 
                         if ( s>=0 ) return s;
                         break;
-                    case 2 : 
+                    case 5 : 
                         int LA14_0 = input.LA(1);
 
                         s = -1;
@@ -3009,17 +3045,7 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
 
                         if ( s>=0 ) return s;
                         break;
-                    case 3 : 
-                        int LA14_88 = input.LA(1);
-
-                        s = -1;
-                        if ( (LA14_88=='*') ) {s = 140;}
-
-                        else if ( ((LA14_88>='\u0000' && LA14_88<=')')||(LA14_88>='+' && LA14_88<='\uFFFF')) ) {s = 141;}
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 4 : 
+                    case 6 : 
                         int LA14_44 = input.LA(1);
 
                         s = -1;
@@ -3029,49 +3055,23 @@ public class InternalExBeeLangTestLanguageLexer extends Lexer {
 
                         if ( s>=0 ) return s;
                         break;
-                    case 5 : 
-                        int LA14_43 = input.LA(1);
-
-                        s = -1;
-                        if ( ((LA14_43>='\u0000' && LA14_43<='\uFFFF')) ) {s = 110;}
-
-                        else s = 46;
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 6 : 
-                        int LA14_167 = input.LA(1);
-
-                        s = -1;
-                        if ( (LA14_167=='/') ) {s = 188;}
-
-                        else if ( (LA14_167=='*') ) {s = 167;}
-
-                        else if ( ((LA14_167>='\u0000' && LA14_167<=')')||(LA14_167>='+' && LA14_167<='.')||(LA14_167>='0' && LA14_167<='\uFFFF')) ) {s = 168;}
-
-                        if ( s>=0 ) return s;
-                        break;
                     case 7 : 
-                        int LA14_140 = input.LA(1);
+                        int LA14_168 = input.LA(1);
 
                         s = -1;
-                        if ( (LA14_140=='/') ) {s = 166;}
+                        if ( (LA14_168=='*') ) {s = 167;}
 
-                        else if ( (LA14_140=='*') ) {s = 167;}
-
-                        else if ( ((LA14_140>='\u0000' && LA14_140<=')')||(LA14_140>='+' && LA14_140<='.')||(LA14_140>='0' && LA14_140<='\uFFFF')) ) {s = 168;}
+                        else if ( ((LA14_168>='\u0000' && LA14_168<=')')||(LA14_168>='+' && LA14_168<='\uFFFF')) ) {s = 168;}
 
                         if ( s>=0 ) return s;
                         break;
                     case 8 : 
-                        int LA14_166 = input.LA(1);
+                        int LA14_88 = input.LA(1);
 
                         s = -1;
-                        if ( (LA14_166=='*') ) {s = 167;}
+                        if ( (LA14_88=='*') ) {s = 140;}
 
-                        else if ( ((LA14_166>='\u0000' && LA14_166<=')')||(LA14_166>='+' && LA14_166<='\uFFFF')) ) {s = 168;}
-
-                        else s = 141;
+                        else if ( ((LA14_88>='\u0000' && LA14_88<=')')||(LA14_88>='+' && LA14_88<='\uFFFF')) ) {s = 141;}
 
                         if ( s>=0 ) return s;
                         break;

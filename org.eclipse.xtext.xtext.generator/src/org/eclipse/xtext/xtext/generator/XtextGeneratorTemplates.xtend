@@ -293,7 +293,7 @@ class XtextGeneratorTemplates {
 				}
 		 	''')
 		} else {
-			return fileAccessFactory.createJavaFile(runtimeSetup,'''
+			return fileAccessFactory.createJavaFile(ideSetup,'''
 				/**
 				 * Initialization support for running Xtext languages without Equinox extension registry.
 				 */

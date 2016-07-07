@@ -942,7 +942,7 @@ public class XtextGeneratorTemplates {
       };
       return this.fileAccessFactory.createXtendFile(_ideSetup, _client);
     } else {
-      TypeReference _runtimeSetup = this.naming.getRuntimeSetup(it);
+      TypeReference _ideSetup_1 = this.naming.getIdeSetup(it);
       StringConcatenationClient _client_1 = new StringConcatenationClient() {
         @Override
         protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -990,7 +990,7 @@ public class XtextGeneratorTemplates {
           _builder.newLine();
         }
       };
-      return this.fileAccessFactory.createJavaFile(_runtimeSetup, _client_1);
+      return this.fileAccessFactory.createJavaFile(_ideSetup_1, _client_1);
     }
   }
   

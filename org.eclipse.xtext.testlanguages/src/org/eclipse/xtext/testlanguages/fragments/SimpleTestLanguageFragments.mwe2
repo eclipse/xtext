@@ -71,9 +71,9 @@ XtextGeneratorLanguage {
   			methodsPerClass = "100"
   		}
     }
-    fragment = org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorComparisonFragment {
-    	options = auto-inject {}
-    }
+//    fragment = org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorComparisonFragment {
+//    	options = auto-inject {}
+//    }
     
 	fragment = idea.IdeaPluginGenerator auto-inject {
 		generateXtendStub = true

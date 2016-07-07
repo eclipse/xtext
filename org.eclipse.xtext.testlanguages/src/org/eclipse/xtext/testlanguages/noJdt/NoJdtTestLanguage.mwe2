@@ -31,7 +31,7 @@ XtextGeneratorLanguage {
 	//      backtrack = true
 	//  }
 	}
-	fragment = org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorComparisonFragment {}
+//	fragment = org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorComparisonFragment {}
 	
 	// Xtend-based API for validation
 	fragment = validation.ValidatorFragment2 auto-inject {
