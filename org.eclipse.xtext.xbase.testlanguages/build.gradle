@@ -1,11 +1,9 @@
-configurations {
-  testCompile.exclude module: "org.osgi.foundation"
-}
-
 dependencies {
 	compile project(':org.eclipse.xtext.xbase')
 	compile project(':org.eclipse.xtext.common.types')
 	compile "org.eclipse.xtext:org.eclipse.xtext.testing:$versions.xtext"
+	mwe2Compile project(':org.eclipse.xtext.generator')
+	mwe2Runtime "org.eclipse.emf:org.eclipse.emf.mwe2.launch:$versions.emfMwe2"
 }
 
-eclipse.classpath.plusConfigurations += [configurations.mwe2]
+uploadArchives.enabled = false

@@ -30,6 +30,9 @@ jar {
 	}
 }
 
+if (isTestProject)
+	uploadArchives.enabled = false
+
 eclipse {
 	project {
 		natures 'org.eclipse.xtext.ui.shared.xtextNature'

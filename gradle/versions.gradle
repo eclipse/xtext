@@ -9,5 +9,6 @@ ext.versions = [
 	'xpand': '2.0.0',
 	'asm': '5.0.1',
 	'icu': '52.1',
-	'guice': '3.0'
+	'guice': '3.0',
+	'junit': '4.12'
 ]

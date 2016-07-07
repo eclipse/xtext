@@ -12,8 +12,8 @@ task sourcesJar(type: Jar, dependsOn: classes) {
 }
 
 task javadocJar(type: Jar, dependsOn: javadoc) {
-classifier = 'javadoc'
-from javadoc.destinationDir
+	classifier = 'javadoc'
+	from javadoc.destinationDir
 }
 
 task createLocalMavenRepo(type: Upload) {
@@ -26,7 +26,7 @@ task createLocalMavenRepo(type: Upload) {
 }
 
 artifacts {
-	archives sourcesJar //, javadocJar
+	archives sourcesJar, javadocJar
 }
 
 def envSecretKeyRingFile = System.getenv('SIGNING_KEY_RING')

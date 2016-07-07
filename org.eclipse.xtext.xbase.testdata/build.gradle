@@ -1,15 +1,7 @@
 dependencies {
 	compile "org.eclipse.xtext:org.eclipse.xtext.xbase.lib:$versions.xtext"
 	compile "com.google.inject:guice:$versions.guice"
-	compile 'junit:junit:4.12'
+	compile "junit:junit:$versions.junit"
 }
 
-sourceSets.main.java {
-	srcDir 'src'
-	srcDir 'xtend-gen'
-}
-
-sourceSets.main.resources {
-	srcDir 'src'
-}
-
+uploadArchives.enabled = false

@@ -6,32 +6,42 @@ tasks.withType(JavaCompile) {
 	options.encoding = 'ISO-8859-1'
 }
 
+tasks.withType(Javadoc) {
+	options.encoding = 'ISO-8859-1'
+	options.tags = [ 'noreference', 'noextend', 'noimplement', 'noinstantiate', 'nooverride', 'model', 'generated', 'ordered' ] 
+	options.addStringOption('Xdoclint:none', '-quiet')
+}
+
+sourceSets {
+    mwe2 {
+        java {
+            compileClasspath += main.output
+            runtimeClasspath += main.output
+        }
+    }
+}
+
 configurations {
     optional {
     	description 'Dependencies required at build time, but not exported into meta data'
         extendsFrom compile
     }
+	mwe2Compile.extendsFrom mainCompile
+	mwe2Runtime.extendsFrom mainRuntime
     
 	/*
 	 * Put any unwanted transitive dependencies here, they will be excluded from all projects
 	 */
     all {
+    	exclude group: 'org.apache.felix', module: 'org.osgi.foundation'
 		exclude group: 'org.antlr', module: 'stringtemplate'
 		exclude module: 'cglib'
 	}
-	mwe2 {
-		extendsFrom compile
-	}
-}
-
-dependencies {
-	mwe2 project(':org.eclipse.xtext.generator')
-	mwe2 "org.eclipse.emf:org.eclipse.emf.mwe2.launch:$versions.emfMwe2"
-	mwe2 "org.eclipse.xtext:org.eclipse.xtext.xtext.generator:$versions.xtext"
-	mwe2 "org.eclipse.xtext:org.eclipse.xtext.ecore:$versions.xtext"
 }
 
 sourceSets.main.compileClasspath += configurations.optional
+sourceSets.test.compileClasspath += configurations.optional
+sourceSets.test.runtimeClasspath += configurations.optional
 eclipse.classpath.plusConfigurations += [configurations.optional]
+eclipse.classpath.plusConfigurations += [configurations.mwe2Runtime]
 javadoc.classpath += configurations.optional
-javadoc.options.addStringOption('-Xdoclint:none')

@@ -1,9 +1,3 @@
-
-//workaround for superClassName is empty!
-configurations {
-  testCompile.exclude module: "org.osgi.foundation"
-}	
-
 repositories {
    flatDir {
        dirs 'lib'
@@ -11,33 +5,17 @@ repositories {
 }
 
 dependencies {
-
 	compile project(':org.eclipse.xtext.generator')
 	compile project(':org.eclipse.xtext.common.types')
 	compile project(':org.eclipse.xtext.xbase')
-
+	// From the 'lib' folder
     compile name: 'simple'
-	
-	compile "org.eclipse.xtext:org.eclipse.xtext.testlanguages:$versions.xtext"
 	compile "org.eclipse.xtext:org.eclipse.xtext.testing:$versions.xtext"
-	compile "org.eclipse.xtext:org.eclipse.xtext.xtext.generator:$versions.xtext"
-	compile "org.eclipse.xtext:org.eclipse.xtext.xtext.wizard:$versions.xtext"
-	compile 'junit:junit:4.12'
-	
-	// TODO eliminate all following dependencies
-	compile "org.eclipse.xpand:org.eclipse.xpand:$versions.xpand"
+	compile "org.eclipse.xtext:org.eclipse.xtext.testlanguages:$versions.xtext"
+	compile "junit:junit:$versions.junit"
+	mwe2Compile project(':org.eclipse.xtext.generator')
+	mwe2Runtime "org.eclipse.emf:org.eclipse.emf.mwe2.launch:$versions.emfMwe2"
 }
 
-eclipse.classpath.plusConfigurations += [configurations.mwe2]
-sourceSets.main.resources {
-	srcDir 'src'
-}
-sourceSets.test.java {
-	srcDir 'src-gen2'
-	srcDir 'xtend-gen'
-}
-
-sourceSets.test.resources {
-	srcDir 'src-gen2'
-	srcDir 'src'
-}
+sourceSets.test.java.srcDir 'src-gen2'
+sourceSets.test.resources.srcDir 'src-gen2'
