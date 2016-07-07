@@ -10,6 +10,6 @@
 	<packaging>eclipse-test-plugin</packaging>
 
 	<groupId>org.eclipse.xtext</groupId>
-	<artifactId>org.eclipse.xtext.common.types.tests</artifactId>
+	<artifactId>org.eclipse.xtext.common.types.eclipse.tests</artifactId>
 
 </project>

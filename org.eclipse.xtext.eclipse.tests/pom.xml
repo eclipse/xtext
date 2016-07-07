@@ -10,5 +10,5 @@
 	<packaging>eclipse-test-plugin</packaging>
 
 	<groupId>org.eclipse.xtext</groupId>
-	<artifactId>org.eclipse.xtext.tests</artifactId>
+	<artifactId>org.eclipse.xtext.eclipse.tests</artifactId>
 </project>
