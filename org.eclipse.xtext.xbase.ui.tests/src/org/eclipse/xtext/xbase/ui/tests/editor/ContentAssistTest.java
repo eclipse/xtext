@@ -17,6 +17,7 @@ import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtext.xbase.junit.ui.AbstractXbaseContentAssistTest;
 import org.eclipse.xtext.xbase.ui.internal.XbaseActivator;
 import org.eclipse.xtext.xbase.ui.tests.AbstractXbaseUITestCase;
+import org.eclipse.xtext.xbase.ui.tests.TargetPlatformUtil;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 
@@ -35,6 +36,7 @@ public class ContentAssistTest extends AbstractXbaseContentAssistTest {
 	
 	@BeforeClass
 	public static void createTestProject() throws Exception {
+		TargetPlatformUtil.setTargetPlatform();
 		staticProject = AbstractXbaseUITestCase.createPluginProject(PROJECT_NAME);
 		doInitFeatures(JavaCore.create(staticProject));
 	}

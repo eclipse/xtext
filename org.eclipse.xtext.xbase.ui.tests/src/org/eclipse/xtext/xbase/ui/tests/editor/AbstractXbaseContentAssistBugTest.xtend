@@ -21,6 +21,7 @@ import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.common.types.access.jdt.JdtTypeProviderFactory
 import org.eclipse.xtext.junit4.ui.ContentAssistProcessorTestBuilder
+import org.eclipse.xtext.xbase.ui.tests.TargetPlatformUtil
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -33,6 +34,7 @@ class AbstractXbaseContentAssistBugTest extends AbstractXbaseUITestCase implemen
 	
 	@BeforeClass
 	def static void createTestProject() throws Exception {
+		TargetPlatformUtil.setTargetPlatform
 		staticProject = AbstractXbaseUITestCase::createPluginProject(typeof(AbstractXbaseContentAssistBugTest).name);
 	}
 	

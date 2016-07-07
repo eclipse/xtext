@@ -30,9 +30,11 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.resource.BatchLinkableResource;
 import org.eclipse.xtext.xbase.testlanguages.bug462047.Bug462047LangUiInjectorProvider;
 import org.eclipse.xtext.xbase.ui.tests.AbstractXbaseUITestCase;
+import org.eclipse.xtext.xbase.ui.tests.TargetPlatformUtil;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -43,6 +45,15 @@ import org.junit.runner.RunWith;
 @InjectWith(Bug462047LangUiInjectorProvider.class)
 @SuppressWarnings("all")
 public class Bug462047Test extends AbstractEditorTest {
+  @BeforeClass
+  public static void setupTargetPlatform() {
+    try {
+      TargetPlatformUtil.setTargetPlatform();
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
   private IProject project;
   
   @Inject

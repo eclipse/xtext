@@ -22,6 +22,7 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.ui.tests.AbstractXbaseUITestCase;
+import org.eclipse.xtext.xbase.ui.tests.TargetPlatformUtil;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -37,6 +38,7 @@ public class AbstractXbaseContentAssistBugTest extends AbstractXbaseUITestCase i
   
   @BeforeClass
   public static void createTestProject() throws Exception {
+    TargetPlatformUtil.setTargetPlatform();
     String _name = AbstractXbaseContentAssistBugTest.class.getName();
     IProject _createPluginProject = AbstractXbaseUITestCase.createPluginProject(_name);
     AbstractXbaseContentAssistBugTest.staticProject = _createPluginProject;
