@@ -34,6 +34,7 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.xtext.common.types.tests.AbstractActivator;
+import org.eclipse.xtext.common.types.util.TargetPlatformUtil;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.junit4.ui.util.PluginUtil;
@@ -67,6 +68,7 @@ public class MockJavaProjectProvider implements IJavaProjectProvider {
 	public static void setUp() throws Exception {
 		if(javaProject != null)
 			return;
+		TargetPlatformUtil.setTargetPlatform();
 		javaProject = createJavaProject("projectWithoutSources",
 				new String[] {
 						JavaCore.NATURE_ID,

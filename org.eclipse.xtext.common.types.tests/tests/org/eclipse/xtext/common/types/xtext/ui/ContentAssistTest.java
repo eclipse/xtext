@@ -83,8 +83,8 @@ public class ContentAssistTest extends AbstractContentAssistProcessorTest {
 		if (isJava6()) {
 			builder.assertText("java.util.ArrayList", "com.google.common.collect.ArrayListMultimap");
 		} else {
-			builder.assertText("java.util.ArrayList", "java.util.ArrayList.Itr", "java.util.ArrayList.ListItr",
-					"java.util.ArrayList.SubList", "com.google.common.collect.ArrayListMultimap");
+			builder.assertText("java.util.ArrayList", "java.util.ArrayList.ArrayListSpliterator", "java.util.ArrayList.Itr",
+					"java.util.ArrayList.ListItr", "java.util.ArrayList.SubList", "com.google.common.collect.ArrayListMultimap");
 		}
 	}
 
@@ -95,14 +95,16 @@ public class ContentAssistTest extends AbstractContentAssistProcessorTest {
 		if (isJava6()) {
 			builder.assertText("ArrayList", "com.google.common.collect.ArrayListMultimap");
 		} else {
-			builder.assertText("ArrayList", "ArrayList.Itr", "ArrayList.ListItr", "ArrayList.SubList",
-					"com.google.common.collect.ArrayListMultimap");
+			builder.assertText("ArrayList", "ArrayList.ArrayListSpliterator", "ArrayList.Itr", "ArrayList.ListItr", "ArrayList.SubList",
+					"com.google.common.collect.ArrayListMultimap"
+					);
 		}
 	}
 
 	@Test public void testCustomArrayList_01() throws Exception {
 		newBuilder().append("custom ArrayLis").assertText(
 				"java.util.ArrayList",
+				"java.util.ArrayList.ArrayListSpliterator",
 				"java.util.Arrays.ArrayList",
 				"com.google.common.collect.ArrayListMultimap");
 	}
@@ -110,6 +112,7 @@ public class ContentAssistTest extends AbstractContentAssistProcessorTest {
 	@Test public void testCustomArrayList_02() throws Exception {
 		newBuilder().append("import java.util.* custom ArrayLis").assertText(
 				"ArrayList",
+				"ArrayList.ArrayListSpliterator",
 				"Arrays.ArrayList",
 				"com.google.common.collect.ArrayListMultimap");
 	}
@@ -123,7 +126,7 @@ public class ContentAssistTest extends AbstractContentAssistProcessorTest {
 	}
 	
 	@Test public void testCustomArrayList_03() throws Exception {
-		newBuilder().append("import java.util.* custom java.util.ArrayLis").assertText("ArrayList");
+		newBuilder().append("import java.util.* custom java.util.ArrayLis").assertText("ArrayList","ArrayList.ArrayListSpliterator");
 	}
 
 	@Test public void testCustomBlockingQueue_01() throws Exception {

@@ -318,7 +318,7 @@ public abstract class AbstractTypeProviderTest extends Assert {
 	@Test
 	public void testFindTypeByName_javaLangCharSequence_02() {
 		String typeName = CharSequence.class.getName();
-		Set<String> memberNames = Sets.newHashSet("length", "charAt", "subSequence", "toString");
+		Set<String> memberNames = Sets.newHashSet("length", "chars", "charAt", "codePoints", "subSequence", "toString");
 		assertMembers(typeName, memberNames);
 	}
 

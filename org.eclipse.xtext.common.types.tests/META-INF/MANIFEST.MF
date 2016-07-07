@@ -25,9 +25,10 @@ Require-Bundle: org.eclipse.xtext.junit4,
  org.eclipse.jdt.ui;bundle-version="3.6.0",
  org.eclipse.xtext.builder,
  org.hamcrest.core;bundle-version="1.1.0",
- org.eclipse.ui.ide;bundle-version="3.6.0"
-Export-Package: org.eclipse.xtext.common.types,
- org.eclipse.xtext.common.types.access,
+ org.eclipse.ui.ide;bundle-version="3.6.0",
+ org.eclipse.pde.core,
+ org.eclipse.xtext.common.types.shared
+Export-Package: org.eclipse.xtext.common.types.access,
  org.eclipse.xtext.common.types.access.impl,
  org.eclipse.xtext.common.types.access.jdt,
  org.eclipse.xtext.common.types.access.xtext,
