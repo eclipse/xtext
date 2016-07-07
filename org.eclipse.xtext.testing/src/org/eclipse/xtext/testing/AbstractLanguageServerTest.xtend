@@ -22,6 +22,7 @@ import io.typefox.lsapi.PublishDiagnosticsParams
 import io.typefox.lsapi.Range
 import io.typefox.lsapi.ReferenceContextImpl
 import io.typefox.lsapi.SymbolInformation
+import io.typefox.lsapi.TextEdit
 import java.io.File
 import java.io.FileWriter
 import java.net.URI
@@ -176,8 +177,13 @@ abstract class AbstractLanguageServerTest implements Consumer<PublishDiagnostics
         }
     '''
 
-    protected def dispatch String toExpectation(CompletionItem it) '''
-        «label»«IF !detail.nullOrEmpty» («detail»)«ENDIF»«IF insertText != label» -> «insertText»«ENDIF»
+    protected def dispatch String toExpectation(
+        CompletionItem it) '''
+        «label»«IF !detail.nullOrEmpty» («detail»)«ENDIF»«IF textEdit !== null» -> «textEdit.toExpectation»«ELSEIF insertText !== null && insertText != label» -> «insertText»«ENDIF»
+    '''
+
+    protected dispatch def String toExpectation(TextEdit it) '''
+        «newText» «range.toExpectation»
     '''
 
     protected dispatch def String toExpectation(Hover it) '''
@@ -206,7 +212,7 @@ abstract class AbstractLanguageServerTest implements Consumer<PublishDiagnostics
         val actualCompletionItems = completionItems.get.items.toExpectation
         assertEquals(expectedCompletionItems, actualCompletionItems)
     }
-    
+
     protected def void testDefinition((DefinitionTestConfiguration)=>void configurator) {
         val extension configuration = new DefinitionTestConfiguration
         configuration.filePath = 'MyModel.' + fileExtension
@@ -281,9 +287,9 @@ abstract class AbstractLanguageServerTest implements Consumer<PublishDiagnostics
         val actualDefinitions = definitions.get.toExpectation
         assertEquals(expectedReferences, actualDefinitions)
     }
-    
+
     def void assertEquals(String expected, String actual) {
-        Assert.assertEquals(expected.replace('\t','    '), actual)
+        Assert.assertEquals(expected.replace('\t', '    '), actual)
     }
 
 }

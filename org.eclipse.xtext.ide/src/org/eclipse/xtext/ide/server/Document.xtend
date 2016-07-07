@@ -8,18 +8,21 @@
 package org.eclipse.xtext.ide.server
 
 import io.typefox.lsapi.Position
+import io.typefox.lsapi.PositionImpl
 import io.typefox.lsapi.TextEdit
 import org.eclipse.xtend.lib.annotations.Data
+
+import static io.typefox.lsapi.util.LsapiFactories.*
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  * @since 2.11
  */
 @Data class Document {
-    
+
     int version
     String contents
-    
+
     def int getOffSet(Position position) {
         val l = contents.length
         val char NL = '\n'
@@ -40,9 +43,32 @@ import org.eclipse.xtend.lib.annotations.Data
         if (position.line === line && position.character === column) {
             return l
         }
-        throw new IndexOutOfBoundsException(position.toString + " text was : "+contents)
+        throw new IndexOutOfBoundsException(position.toString + " text was : " + contents)
     }
-    
+
+    def PositionImpl getPosition(int offset) {
+        val l = contents.length
+        if (offset < 0 || offset >= l)
+            throw new IndexOutOfBoundsException(offset + " text was : " + contents)
+
+        val char NL = '\n'
+        var line = 0
+        var column = 0
+        for (var i = 0; i < l; i++) {
+            val ch = contents.charAt(i)
+            if (i === offset) {
+                return newPosition(line, column)
+            }
+            if (ch === NL) {
+                line++
+                column = 0
+            } else {
+                column++
+            }
+        }
+        return newPosition(line, column)
+    }
+
     def Document applyChanges(Iterable<? extends TextEdit> changes) {
         var newContent = contents
         for (change : changes) {
@@ -56,5 +82,5 @@ import org.eclipse.xtend.lib.annotations.Data
         }
         return new Document(version + 1, newContent)
     }
-    
+
 }

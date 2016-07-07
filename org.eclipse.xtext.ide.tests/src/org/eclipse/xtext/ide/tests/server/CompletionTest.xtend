@@ -50,9 +50,27 @@ class CompletionTest extends AbstractTestLangLanguageServerTest {
 				int
 				string
 				}
-				{
+				{ -> { [[1, 9] .. [1, 10]]
 			'''
 		]
 	}
+
+    @Test
+    def void testCompletion_04() {
+        testCompletion [
+            model = '''
+                type Foo {
+                    Foo foo
+                }
+            '''
+            line = 1
+            column = '    Fo'.length
+            expectedCompletionItems = '''
+                Foo (TypeDeclaration) -> Foo [[1, 4] .. [1, 6]]
+                name (ID)
+                [
+            '''
+        ]
+    }
 
 }

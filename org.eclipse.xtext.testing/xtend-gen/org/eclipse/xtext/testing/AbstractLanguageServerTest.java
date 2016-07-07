@@ -32,6 +32,7 @@ import io.typefox.lsapi.ReferenceContextImpl;
 import io.typefox.lsapi.ReferenceParamsImpl;
 import io.typefox.lsapi.SymbolInformation;
 import io.typefox.lsapi.TextDocumentPositionParamsImpl;
+import io.typefox.lsapi.TextEdit;
 import io.typefox.lsapi.WorkspaceSymbolParamsImpl;
 import io.typefox.lsapi.services.TextDocumentService;
 import io.typefox.lsapi.util.LsapiFactories;
@@ -330,15 +331,33 @@ public abstract class AbstractLanguageServerTest implements Consumer<PublishDiag
       }
     }
     {
-      String _insertText = it.getInsertText();
-      String _label_1 = it.getLabel();
-      boolean _notEquals = (!Objects.equal(_insertText, _label_1));
-      if (_notEquals) {
+      TextEdit _textEdit = it.getTextEdit();
+      boolean _tripleNotEquals = (_textEdit != null);
+      if (_tripleNotEquals) {
         _builder.append(" -> ");
-        String _insertText_1 = it.getInsertText();
-        _builder.append(_insertText_1, "");
+        TextEdit _textEdit_1 = it.getTextEdit();
+        String _expectation = this.toExpectation(_textEdit_1);
+        _builder.append(_expectation, "");
+      } else {
+        if (((it.getInsertText() != null) && (!Objects.equal(it.getInsertText(), it.getLabel())))) {
+          _builder.append(" -> ");
+          String _insertText = it.getInsertText();
+          _builder.append(_insertText, "");
+        }
       }
     }
+    _builder.newLineIfNotEmpty();
+    return _builder.toString();
+  }
+  
+  protected String _toExpectation(final TextEdit it) {
+    StringConcatenation _builder = new StringConcatenation();
+    String _newText = it.getNewText();
+    _builder.append(_newText, "");
+    _builder.append(" ");
+    Range _range = it.getRange();
+    String _expectation = this.toExpectation(_range);
+    _builder.append(_expectation, "");
     _builder.newLineIfNotEmpty();
     return _builder.toString();
   }
@@ -550,6 +569,8 @@ public abstract class AbstractLanguageServerTest implements Consumer<PublishDiag
       return _toExpectation((Range)elements);
     } else if (elements instanceof SymbolInformation) {
       return _toExpectation((SymbolInformation)elements);
+    } else if (elements instanceof TextEdit) {
+      return _toExpectation((TextEdit)elements);
     } else if (elements == null) {
       return _toExpectation((Void)null);
     } else {

@@ -67,7 +67,34 @@ public class CompletionTest extends AbstractTestLangLanguageServerTest {
       _builder_1.newLine();
       _builder_1.append("}");
       _builder_1.newLine();
-      _builder_1.append("{");
+      _builder_1.append("{ -> { [[1, 9] .. [1, 10]]");
+      _builder_1.newLine();
+      it.setExpectedCompletionItems(_builder_1.toString());
+    };
+    this.testCompletion(_function);
+  }
+  
+  @Test
+  public void testCompletion_04() {
+    final Procedure1<TestCompletionConfiguration> _function = (TestCompletionConfiguration it) -> {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("type Foo {");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("Foo foo");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      it.setModel(_builder.toString());
+      it.setLine(1);
+      int _length = "    Fo".length();
+      it.setColumn(_length);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("Foo (TypeDeclaration) -> Foo [[1, 4] .. [1, 6]]");
+      _builder_1.newLine();
+      _builder_1.append("name (ID)");
+      _builder_1.newLine();
+      _builder_1.append("[");
       _builder_1.newLine();
       it.setExpectedCompletionItems(_builder_1.toString());
     };

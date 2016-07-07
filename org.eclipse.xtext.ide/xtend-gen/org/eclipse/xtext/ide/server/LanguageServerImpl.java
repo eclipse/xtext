@@ -59,6 +59,7 @@ import io.typefox.lsapi.TextDocumentIdentifier;
 import io.typefox.lsapi.TextDocumentItem;
 import io.typefox.lsapi.TextDocumentPositionParams;
 import io.typefox.lsapi.TextEdit;
+import io.typefox.lsapi.TextEditImpl;
 import io.typefox.lsapi.VersionedTextDocumentIdentifier;
 import io.typefox.lsapi.WorkspaceEdit;
 import io.typefox.lsapi.WorkspaceSymbolParams;
@@ -100,6 +101,7 @@ import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -108,6 +110,7 @@ import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 import org.eclipse.xtext.xbase.lib.Pure;
+import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -422,25 +425,35 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
       if ((contentAssistService == null)) {
         return result;
       }
-      final Function2<Document, XtextResource, Iterable<ContentAssistEntry>> _function_1 = (Document document, XtextResource resource) -> {
+      final Function2<Document, XtextResource, Function0<List<CompletionItemImpl>>> _function_1 = (Document document, XtextResource resource) -> {
         Position _position = params.getPosition();
-        final int offset = document.getOffSet(_position);
+        final int caretOffset = document.getOffSet(_position);
         String _contents = document.getContents();
-        return contentAssistService.createProposals(_contents, offset, resource, cancelIndicator);
+        final Iterable<ContentAssistEntry> entries = contentAssistService.createProposals(_contents, caretOffset, resource, cancelIndicator);
+        final Function0<List<CompletionItemImpl>> _function_2 = () -> {
+          List<CompletionItemImpl> _xblockexpression = null;
+          {
+            Position _position_1 = params.getPosition();
+            final PositionImpl caretPosition = LsapiFactories.copyPosition(_position_1);
+            final Function1<ContentAssistEntry, CompletionItemImpl> _function_3 = (ContentAssistEntry it) -> {
+              return this.toCompletionItem(it, caretOffset, caretPosition, document);
+            };
+            Iterable<CompletionItemImpl> _map = IterableExtensions.<ContentAssistEntry, CompletionItemImpl>map(entries, _function_3);
+            _xblockexpression = IterableExtensions.<CompletionItemImpl>toList(_map);
+          }
+          return _xblockexpression;
+        };
+        return _function_2;
       };
-      final Iterable<ContentAssistEntry> entries = this.workspaceManager.<Iterable<ContentAssistEntry>>doRead(uri, _function_1);
-      final Function1<ContentAssistEntry, CompletionItemImpl> _function_2 = (ContentAssistEntry it) -> {
-        return this.toCompletionItem(it);
-      };
-      Iterable<CompletionItemImpl> _map = IterableExtensions.<ContentAssistEntry, CompletionItemImpl>map(entries, _function_2);
-      List<CompletionItemImpl> _list = IterableExtensions.<CompletionItemImpl>toList(_map);
-      result.setItems(_list);
+      Function0<List<CompletionItemImpl>> _doRead = this.workspaceManager.<Function0<List<CompletionItemImpl>>>doRead(uri, _function_1);
+      List<CompletionItemImpl> _apply = _doRead.apply();
+      result.setItems(_apply);
       return result;
     };
     return this.requestManager.<CompletionList>runRead(_function);
   }
   
-  protected CompletionItemImpl toCompletionItem(final ContentAssistEntry entry) {
+  protected CompletionItemImpl toCompletionItem(final ContentAssistEntry entry, final int caretOffset, final PositionImpl caretPosition, final Document document) {
     final CompletionItemImpl completionItem = new CompletionItemImpl();
     String _elvis = null;
     String _label = entry.getLabel();
@@ -453,8 +466,22 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
     completionItem.setLabel(_elvis);
     String _description = entry.getDescription();
     completionItem.setDetail(_description);
-    String _proposal_1 = entry.getProposal();
-    completionItem.setInsertText(_proposal_1);
+    String _prefix = entry.getPrefix();
+    boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(_prefix);
+    boolean _not = (!_isNullOrEmpty);
+    if (_not) {
+      String _prefix_1 = entry.getPrefix();
+      int _length = _prefix_1.length();
+      final int prefixOffset = (caretOffset - _length);
+      final PositionImpl prefixPosition = document.getPosition(prefixOffset);
+      RangeImpl _newRange = LsapiFactories.newRange(prefixPosition, caretPosition);
+      String _proposal_1 = entry.getProposal();
+      TextEditImpl _newTextEdit = LsapiFactories.newTextEdit(_newRange, _proposal_1);
+      completionItem.setTextEdit(_newTextEdit);
+    } else {
+      String _proposal_2 = entry.getProposal();
+      completionItem.setInsertText(_proposal_2);
+    }
     int _translateKind = this.translateKind(entry);
     completionItem.setKind(Integer.valueOf(_translateKind));
     return completionItem;

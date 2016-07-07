@@ -36,6 +36,7 @@ import io.typefox.lsapi.InitializeResultImpl
 import io.typefox.lsapi.LanguageDescriptionImpl
 import io.typefox.lsapi.Location
 import io.typefox.lsapi.MessageParams
+import io.typefox.lsapi.PositionImpl
 import io.typefox.lsapi.PublishDiagnosticsParams
 import io.typefox.lsapi.PublishDiagnosticsParamsImpl
 import io.typefox.lsapi.RangeImpl
@@ -67,11 +68,11 @@ import org.eclipse.xtext.ide.server.hover.HoverService
 import org.eclipse.xtext.ide.server.symbol.DocumentSymbolService
 import org.eclipse.xtext.ide.server.symbol.WorkspaceSymbolService
 import org.eclipse.xtext.resource.FileExtensionProvider
+import org.eclipse.xtext.resource.IMimeTypeProvider
 import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.eclipse.xtext.validation.Issue
 
-import static io.typefox.lsapi.util.LsapiFactories.*
-import org.eclipse.xtext.resource.IMimeTypeProvider
+import static extension io.typefox.lsapi.util.LsapiFactories.*
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -260,21 +261,30 @@ import org.eclipse.xtext.resource.IMimeTypeProvider
 			val result = new CompletionListImpl
 			if (contentAssistService === null)
 				return result
-
-			val entries = workspaceManager.doRead(uri) [ document, resource |
-				val offset = document.getOffSet(params.position)
-				return contentAssistService.createProposals(document.contents, offset, resource, cancelIndicator)
-			]
-			result.items = entries.map[toCompletionItem].toList 
-			return result
+            
+            result.items = workspaceManager.doRead(uri) [ document, resource |
+                val caretOffset = document.getOffSet(params.position)
+                val entries = contentAssistService.createProposals(document.contents, caretOffset, resource, cancelIndicator)
+                return [|
+                    val caretPosition = params.position.copyPosition
+                    entries.map[toCompletionItem(caretOffset, caretPosition, document)].toList
+                ]
+            ].apply
+            return result
 		]
 	}
 
-	protected def CompletionItemImpl toCompletionItem(ContentAssistEntry entry) {
+	protected def CompletionItemImpl toCompletionItem(ContentAssistEntry entry, int caretOffset, PositionImpl caretPosition, Document document) {
 		val completionItem = new CompletionItemImpl
 		completionItem.label = entry.label ?: entry.proposal
 		completionItem.detail = entry.description
-		completionItem.insertText = entry.proposal
+		if (!entry.prefix.nullOrEmpty) {
+		    val prefixOffset = caretOffset - entry.prefix.length
+		    val prefixPosition = document.getPosition(prefixOffset)
+		    completionItem.textEdit = newTextEdit(newRange(prefixPosition, caretPosition), entry.proposal) 
+		} else {
+		  completionItem.insertText = entry.proposal
+		}
 		completionItem.kind = translateKind(entry)
 		return completionItem
 	}
