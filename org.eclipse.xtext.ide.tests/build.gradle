@@ -1,17 +1,16 @@
 dependencies {
 	compile project(':org.eclipse.xtext.ide')
 	compile project(':org.eclipse.xtext.testing')
-	compile project(':org.eclipse.xtext.xtext.generator')
 	compile "junit:junit:$versions.junit"
 	compile "io.typefox.lsapi:io.typefox.lsapi.services:$versions.lsapi"
-	mwe2 "org.eclipse.emf:org.eclipse.emf.mwe2.launch:$versions.emfMwe2"
-	mwe2 "org.eclipse.xtext:org.eclipse.xtext.common.types:$versions.xtext_bootstrap"
+	mwe2Compile project(':org.eclipse.xtext.xtext.generator')
+	mwe2Compile "org.eclipse.xtext:org.eclipse.xtext.common.types:$versions.xtext_bootstrap"
+	mwe2Runtime "org.eclipse.emf:org.eclipse.emf.mwe2.launch:$versions.emfMwe2"
 }
-
 
 task generateXtextLanguage(type: JavaExec) {
 	main = 'org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher'
-	classpath = configurations.mwe2
+	classpath = configurations.mwe2Runtime
 	inputs.file "testlang-src/org/eclipse/xtext/ide/tests/testlanguage/GenerateTestLanguage.mwe2"
 	inputs.file "testlang-src/org/eclipse/xtext/ide/tests/testlanguage/TestLanguage.xtext"
 	outputs.dir "testlang-src-gen"
@@ -20,9 +19,11 @@ task generateXtextLanguage(type: JavaExec) {
 	args += "rootPath=/${projectDir}/.."
 }
 
-//compileJava.dependsOn(generateXtextLanguage)
-//clean.dependsOn(cleanGenerateXtextLanguage)
-eclipse.classpath.plusConfigurations += [configurations.mwe2]
-
-sourceSets.test.java.srcDirs = ['testlang-src', 'testlang-src-gen'] + sourceSets.test.java.srcDirs
-sourceSets.test.resources.srcDirs += ['testlang-src', 'testlang-src-gen']
+sourceSets.test.java {
+	srcDir 'testlang-src'
+	srcDir 'testlang-src-gen'
+}
+sourceSets.test.resources {
+	srcDir 'testlang-src'
+	srcDir 'testlang-src-gen'
+}

@@ -15,11 +15,11 @@ dependencies {
 	// From the 'lib' folder
     compile name: 'simple'
 	
-	mwe2 "org.eclipse.emf:org.eclipse.emf.mwe2.launch:$versions.emfMwe2"
-	mwe2 "org.eclipse.xpand:org.eclipse.xpand:$versions.xpand"
-	mwe2 "org.eclipse.xtext:org.eclipse.xtext.generator:$versions.xtext_bootstrap"
-	mwe2 "org.eclipse.xtext:org.eclipse.xtext.xtext.generator:$versions.xtext_bootstrap"
-	mwe2 "org.eclipse.xtext:org.eclipse.xtext.ecore:$versions.xtext_bootstrap"
+	mwe2Compile "org.eclipse.xpand:org.eclipse.xpand:$versions.xpand"
+	mwe2Compile "org.eclipse.xtext:org.eclipse.xtext.generator:$versions.xtext_bootstrap"
+	mwe2Compile "org.eclipse.xtext:org.eclipse.xtext.xtext.generator:$versions.xtext_bootstrap"
+	mwe2Compile "org.eclipse.xtext:org.eclipse.xtext.ecore:$versions.xtext_bootstrap"
+	mwe2Runtime "org.eclipse.emf:org.eclipse.emf.mwe2.launch:$versions.emfMwe2"
 }
 
 sourceSets.test.java {
