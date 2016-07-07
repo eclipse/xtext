@@ -10,10 +10,10 @@ import org.eclipse.xtext.junit4.util.ParseHelper
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.xbase.XExpression
-import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
-import org.eclipse.xtext.xbase.tests.XbaseInjectorProviderWithScopeTracking
 import org.eclipse.xtext.xbase.ui.refactoring.ExpressionUtil
 import org.eclipse.xtext.xbase.ui.refactoring.NewFeatureNameUtil
+import org.eclipse.xtext.xbase.ui.tests.AbstractXbaseTestCase
+import org.eclipse.xtext.xbase.ui.tests.XbaseInjectorProviderWithScopeTracking
 import org.junit.Test
 import org.junit.runner.RunWith
 

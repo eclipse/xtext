@@ -16,8 +16,8 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.eclipse.xtext.xbase.ui.refactoring.ExpressionUtil;
+import org.eclipse.xtext.xbase.ui.tests.AbstractXbaseTestCase;
 import org.junit.Assert;
 import org.junit.Test;
 

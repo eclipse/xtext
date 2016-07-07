@@ -7,8 +7,8 @@ import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 import org.eclipse.xtext.resource.ILocationInFileProvider
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.xbase.XExpression
-import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
 import org.eclipse.xtext.xbase.ui.refactoring.ExpressionUtil
+import org.eclipse.xtext.xbase.ui.tests.AbstractXbaseTestCase
 import org.junit.Test
 
 /**
