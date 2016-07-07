@@ -12,12 +12,12 @@
 		<module>releng/org.eclipse.xtext.tycho.parent</module>
 		<module>releng/org.eclipse.xtext.tycho.tests.parent</module>
 		<module>releng/org.eclipse.xtext.p2-repository</module>
-		
+
 		<module>org.eclipse.xtext.logging</module>
 		<module>org.eclipse.xtext.activities</module>
 		<module>org.eclipse.xtext.builder</module>
 		<module>org.eclipse.xtext.ui</module>
-		<module>org.eclipse.xtext.common.types.tests</module>
+		<module>org.eclipse.xtext.common.types.eclipse.tests</module>
 		<module>org.eclipse.xtext.common.types.ui</module>
 		<module>org.eclipse.xtext.common.types.edit</module>
 		<module>org.eclipse.xtext.common.types.shared</module>
@@ -39,7 +39,7 @@
 		<module>org.eclipse.xtext.builder.tests</module>
 		<module>org.eclipse.xtext.junit4.tests</module>
 		<module>org.eclipse.xtext.ui.codetemplates.tests</module>
-		<module>org.eclipse.xtext.tests</module>
+		<module>org.eclipse.xtext.eclipse.tests</module>
 		<!-- <module>org.eclipse.xtext.ui.tests</module> -->
 		<!-- <module>org.eclipse.xtext.testlanguages.ui</module> -->
 		<module>org.eclipse.xtext.xbase.testlanguages.ui</module>

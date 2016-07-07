@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: org.eclipse.xtext.purexbase.tests
 Bundle-Vendor: Eclipse Xtext
 Bundle-Version: 2.11.0.qualifier
-Bundle-SymbolicName: org.eclipse.xtext.purexbase.tests;singleton:=true
+Bundle-SymbolicName: org.eclipse.xtext.purexbase.eclipse.tests;singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext.purexbase,
  org.eclipse.xtext.purexbase.ui,
