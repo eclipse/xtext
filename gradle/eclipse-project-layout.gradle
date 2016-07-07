@@ -29,3 +29,6 @@ jar {
 		from 'META-INF'
 	}
 }
+
+if (isTestProject)
+	uploadArchives.enabled = false

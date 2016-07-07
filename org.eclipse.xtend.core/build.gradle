@@ -3,4 +3,14 @@ dependencies {
 	compile "org.eclipse.jdt:org.eclipse.jdt.core:$versions.jdtCore"
 	optional "org.eclipse.xtext:org.eclipse.xtext.xbase.junit:$versions.xtext"
 	optional "org.apache.ant:ant:$versions.ant"
+	mwe2Compile "org.eclipse.xtext:org.eclipse.xtext.xtext.generator:$versions.xtext"
+	mwe2Compile "org.eclipse.xtext:org.eclipse.xtext.generator:$versions.xtext"
+	mwe2Compile "org.eclipse.xpand:org.eclipse.xpand:$versions.xpand"
+	mwe2Compile "org.eclipse.xpand:org.eclipse.xtend:$versions.xpand"
+	mwe2Runtime "org.eclipse.emf:org.eclipse.emf.mwe2.launch:$versions.emfMwe2"
+}
+
+sourceSets {
+	mwe2.java.srcDir 'generator'
+	mwe2.java.srcDir 'generator-xtend-gen'
 }

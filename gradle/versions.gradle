@@ -5,5 +5,6 @@ ext.versions = [
 	'ideaVersion' : project.hasProperty('ideaEAP') ? "LATEST-EAP-SNAPSHOT" : "145.972.3",
 	'ideaGradlePluginVersion' : '1.0.0-RC6',
 	'jdtCore': '[3.6.0,4.0[',
+	'xpand': '2.0.0',
 	'ant': '[1.7,2.0['
 ]
