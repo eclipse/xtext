@@ -26,3 +26,6 @@ jar {
 		include 'about*.*', 'plugin.xml', 'schema/**', 'model/**'
 	}
 }
+
+if (isTestProject)
+	uploadArchives.enabled = false

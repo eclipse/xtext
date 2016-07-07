@@ -2,9 +2,15 @@ apply from: "${rootDir}/gradle/eclipse-project-layout.gradle"
 
 dependencies {
 	compile "org.eclipse.xtext:org.eclipse.xtext:$versions.xtext"
-	generatorCompile "org.eclipse.xtext:org.eclipse.xtext.xtext.generator:$versions.xtext"
-	generatorCompile "org.eclipse.xtext:org.eclipse.xtext.common.types:$versions.xtext"
-	generatorRuntime "org.eclipse.emf:org.eclipse.emf.mwe2.launch:$versions.emfMwe2"
+	mwe2Compile "org.eclipse.xtext:org.eclipse.xtext.xtext.generator:$versions.xtext"
+	mwe2Compile "org.eclipse.xtext:org.eclipse.xtext.common.types:$versions.xtext"
+	mwe2Runtime "org.eclipse.emf:org.eclipse.emf.mwe2.launch:$versions.emfMwe2"
 }
 
-sourceSets.generator.java.srcDir 'generator'
+sourceSets.mwe2.java.srcDir 'generator'
+
+jar {
+	metaInf {
+		from 'META-INF'
+	}
+}
