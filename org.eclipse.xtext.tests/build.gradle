@@ -12,7 +12,7 @@ dependencies {
 	compile "junit:junit:$versions.junit"
 	compile "org.eclipse.emf:org.eclipse.emf.common:$versions.emfCommon"
 	compile "org.eclipse.emf:org.eclipse.emf.ecore.xmi:$versions.emfEcore"
-	
+	// From the 'lib' folder
     compile name: 'simple'
 	
 	mwe2 "org.eclipse.emf:org.eclipse.emf.mwe2.launch:$versions.emfMwe2"
@@ -27,11 +27,9 @@ sourceSets.test.java {
 	srcDir 'suites'
 }
 
-sourceSets {
-	test.resources {
-		srcDir 'src-gen2'
-		srcDir 'suites'
-	}
+sourceSets.test.resources {
+	srcDir 'src-gen2'
+	srcDir 'suites'
 }
 
 test {

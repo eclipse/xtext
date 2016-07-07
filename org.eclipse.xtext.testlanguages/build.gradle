@@ -7,3 +7,4 @@ dependencies {
 	mwe2 "org.eclipse.xpand:org.eclipse.xpand:$versions.xpand"
 }
 
+uploadArchives.enabled = false
