@@ -78,9 +78,9 @@ uploadArchives.repositories.mavenDeployer {
 			}
 		}
 		scm {
-			connection 'scm:git:git@github.com:eclipse/xtext-core.git'
-			developerConnection 'scm:git:git@github.com:eclipse/xtext-core.git'
-			url 'git@github.com:eclipse/xtext-core.git'
+			connection 'scm:git:git@github.com:eclipse/xtext-extras.git'
+			developerConnection 'scm:git:git@github.com:eclipse/xtext-extras.git'
+			url 'git@github.com:eclipse/xtext-extras.git'
 		}
 	}
 }
