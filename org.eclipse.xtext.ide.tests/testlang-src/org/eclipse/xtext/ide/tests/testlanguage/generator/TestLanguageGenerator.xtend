@@ -11,6 +11,9 @@ import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.generator.AbstractGenerator
 import org.eclipse.xtext.generator.IFileSystemAccess2
 import org.eclipse.xtext.generator.IGeneratorContext
+import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.PrimitiveType
+import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.TypeDeclaration
+import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.TypeReference
 
 /**
  * Generates code from your model files on save.
@@ -20,10 +23,30 @@ import org.eclipse.xtext.generator.IGeneratorContext
 class TestLanguageGenerator extends AbstractGenerator {
 
 	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
-//		fsa.generateFile('greetings.txt', 'People to greet: ' + 
-//			resource.allContents
-//				.filter(typeof(Greeting))
-//				.map[name]
-//				.join(', '))
+		for (type : resource.allContents.filter(TypeDeclaration).toList) {
+			fsa.generateFile(type.name+".java", '''
+			public class «type.name» {
+				«FOR p : type.properties»
+					private «p.type.toJava» «p.name»;
+					
+					public void set«p.name.toFirstUpper»(«p.type.toJava» «p.name») {
+						this.«p.name» = «p.name»;
+					}
+					
+					public «p.type.toJava» get«p.name.toFirstUpper»() {
+						return this.«p.name»;
+					}
+				«ENDFOR»
+			}
+			''')
+		}
+	}
+	
+	def dispatch String toJava(TypeReference type) {
+		type.typeRef.name+type.arrayDiemensions.map['[]'].join('')
+	}
+	
+	def dispatch String toJava(PrimitiveType type) {
+		type.name+type.arrayDiemensions.map['[]'].join('')
 	}
 }
