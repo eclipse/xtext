@@ -29,3 +29,13 @@ jar {
 		from 'META-INF'
 	}
 }
+
+if (isTestProject)
+	uploadArchives.enabled = false
+
+eclipse {
+	project {
+		natures 'org.eclipse.xtext.ui.shared.xtextNature'
+		buildCommand 'org.eclipse.xtext.ui.shared.xtextBuilder'
+	}
+}

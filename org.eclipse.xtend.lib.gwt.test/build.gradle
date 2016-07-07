@@ -18,6 +18,7 @@ uploadArchives.enabled = false
 
 dependencies {
 	compile project(':org.eclipse.xtend.lib.gwt')
+	compile "com.google.gwt:gwt-dev:$versions.gwt"
 }
 
 gwt {

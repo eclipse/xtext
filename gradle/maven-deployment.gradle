@@ -1,0 +1,7 @@
+uploadArchives {
+    repositories {
+       mavenDeployer {
+            repository(url: "file:" + file("../build/maven-repository"))
+        }
+    }
+}

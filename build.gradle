@@ -3,18 +3,11 @@ subprojects {
 		jcenter()
 	}
 	
-	apply plugin: 'eclipse'
 	apply plugin: 'java'
+	apply plugin: 'eclipse'
 	apply plugin: 'maven'
 	apply from: "${rootDir}/gradle/versions.gradle"
 	apply from: "${rootDir}/gradle/eclipse-project-layout.gradle"
 	apply from: "${rootDir}/gradle/java-compiler-settings.gradle"
-	
-	uploadArchives {
-	    repositories {
-	       mavenDeployer {
-	            repository(url: "file:" + file("../build/maven-repository"))
-	        }
-	    }
-	}
+	apply from: "${rootDir}/gradle/maven-deployment.gradle"
 }
