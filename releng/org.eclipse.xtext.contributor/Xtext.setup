@@ -5,7 +5,6 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:git="http://www.eclipse.org/oomph/setup/git/1.0"
     xmlns:jdt="http://www.eclipse.org/oomph/setup/jdt/1.0"
-    xmlns:launching="http://www.eclipse.org/oomph/setup/launching/1.0"
     xmlns:pde="http://www.eclipse.org/oomph/setup/pde/1.0"
     xmlns:predicates="http://www.eclipse.org/oomph/predicates/1.0"
     xmlns:projects="http://www.eclipse.org/oomph/setup/projects/1.0"
@@ -14,13 +13,13 @@
     xmlns:setup.targlets="http://www.eclipse.org/oomph/setup/targlets/1.0"
     xmlns:setup.workingsets="http://www.eclipse.org/oomph/setup/workingsets/1.0"
     xmlns:workingsets="http://www.eclipse.org/oomph/workingsets/1.0"
-    xsi:schemaLocation="http://www.eclipse.org/oomph/setup/git/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Git.ecore http://www.eclipse.org/oomph/setup/jdt/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/JDT.ecore http://www.eclipse.org/oomph/setup/launching/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Launching.ecore http://www.eclipse.org/oomph/setup/pde/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/PDE.ecore http://www.eclipse.org/oomph/predicates/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Predicates.ecore http://www.eclipse.org/oomph/setup/projects/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Projects.ecore http://www.eclipse.org/oomph/setup/targlets/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/SetupTarglets.ecore http://www.eclipse.org/oomph/setup/workingsets/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/SetupWorkingSets.ecore http://www.eclipse.org/oomph/workingsets/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/WorkingSets.ecore"
+    xsi:schemaLocation="http://www.eclipse.org/oomph/setup/git/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Git.ecore http://www.eclipse.org/oomph/setup/jdt/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/JDT.ecore http://www.eclipse.org/oomph/setup/pde/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/PDE.ecore http://www.eclipse.org/oomph/predicates/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Predicates.ecore http://www.eclipse.org/oomph/setup/projects/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Projects.ecore http://www.eclipse.org/oomph/setup/targlets/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/SetupTarglets.ecore http://www.eclipse.org/oomph/setup/workingsets/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/SetupWorkingSets.ecore http://www.eclipse.org/oomph/workingsets/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/WorkingSets.ecore"
     name="xtext"
     label="Xtext">
   <setupTask
       xsi:type="jdt:JRETask"
-      version="J2SE-1.6"
-      location="${jre.location-1.6}"/>
+      version="JavaSE-1.8"
+      location="${jre.location-1.8}"/>
   <setupTask
       xsi:type="setup:EclipseIniTask"
       option="-Xmx"
@@ -37,10 +36,6 @@
       name="xtext.git.branch"
       value="${scope.project.stream.name}"/>
   <setupTask
-      xsi:type="setup:StringSubstitutionTask"
-      name="git.xtext.location"
-      value="${git.clone.xtext.location}"/>
-  <setupTask
       xsi:type="setup:VariableTask"
       name="eclipse.target.platform"
       defaultValue="Luna"
@@ -51,7 +46,11 @@
   <setupTask
       xsi:type="setup:VariableTask"
       name="xtext.nightly.composite"
-      value="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/nightly/"/>
+      value="http://services.typefox.io/open-source/jenkins/job/xtext-eclipse/job/master/lastStableBuild/artifact/build/p2-repository/"/>
+  <setupTask
+      xsi:type="setup:VariableTask"
+      name="mwe2.update.site"
+      value="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/maintenance/nightly/"/>
   <setupTask
       xsi:type="setup:VariableTask"
       name="emf.update.site"
@@ -170,15 +169,15 @@
       <setupTask
           xsi:type="setup:PreferenceTask"
           key="/instance/org.eclipse.jdt.core/org.eclipse.jdt.core.compiler.codegen.targetPlatform"
-          value="1.6"/>
+          value="1.8"/>
       <setupTask
           xsi:type="setup:PreferenceTask"
           key="/instance/org.eclipse.jdt.core/org.eclipse.jdt.core.compiler.source"
-          value="1.6"/>
+          value="1.8"/>
       <setupTask
           xsi:type="setup:PreferenceTask"
           key="/instance/org.eclipse.jdt.core/org.eclipse.jdt.core.compiler.compliance"
-          value="1.6"/>
+          value="1.8"/>
     </setupTask>
     <setupTask
         xsi:type="setup:CompoundTask"
@@ -249,6 +248,8 @@
     <requirement
         name="org.eclipse.xtext.sdk.feature.group"/>
     <requirement
+        name="org.eclipse.xtend.sdk.feature.group"/>
+    <requirement
         name="org.eclipse.emf.mwe2.language.sdk.feature.group"/>
     <requirement
         name="org.eclipse.epp.mpc.feature.group"/>
@@ -258,6 +259,8 @@
         name="org.eclipse.pde.feature.group"/>
     <repository
         url="${xtext.nightly.composite}"/>
+    <repository
+        url="${mwe2.update.site}"/>
   </setupTask>
   <setupTask
       xsi:type="setup.p2:P2Task"
@@ -270,12 +273,14 @@
     <requirement
         name="org.jboss.tools.m2e.jdt.feature.feature.group"/>
     <requirement
-        name="org.springsource.ide.eclipse.gradle.feature.feature.group"/>
+        name="org.eclipse.buildship.feature.group"/>
     <requirement
         name="edu.umd.cs.findbugs.plugin.eclipse.feature.group"
         optional="true"/>
     <requirement
         name="org.eclipse.wst.jsdt.feature.feature.group"/>
+    <requirement
+        name="org.sonatype.tycho.m2e.feature.feature.group"/>
     <repository
         url="http://download.eclipse.org/modeling/emft/b3/updates-4.4/"/>
     <repository
@@ -283,233 +288,68 @@
     <repository
         url="http://download.eclipse.org/technology/m2e/releases/1.5/1.5.2.20150413-2215/"/>
     <repository
-        url="http://dist.springsource.com/release/TOOLS/update/e4.4/"/>
+        url="http://download.eclipse.org/buildship/updates/e45/milestones/2.x/"/>
     <repository
         url="http://findbugs.cs.umd.edu/eclipse"/>
+    <repository
+        url="http://repo1.maven.org/maven2/.m2e/connectors/m2eclipse-tycho/0.8.0/N/0.8.0.201409231215/"/>
   </setupTask>
   <setupTask
-      xsi:type="git:GitCloneTask"
-      id="git.clone.xtext"
-      remoteURI="eclipse/xtext"
-      checkoutBranch="${xtext.git.branch}">
-    <annotation
-        source="http://www.eclipse.org/oomph/setup/InducedChoices">
-      <detail
-          key="inherit">
-        <value>github.remoteURIs</value>
-      </detail>
-      <detail
-          key="label">
-        <value>Github Repository</value>
-      </detail>
-      <detail
-          key="target">
-        <value>remoteURI</value>
-      </detail>
-    </annotation>
-    <description>${scope.project.label}</description>
-  </setupTask>
-  <setupTask
-      xsi:type="setup.targlets:TargletTask">
-    <targlet
-        name="Xtext Target Platform"
-        activeRepositoryList="${eclipse.target.platform}">
-      <requirement
-          name="org.eclipse.platform.feature.group"/>
-      <requirement
-          name="org.eclipse.jdt.feature.group"/>
-      <requirement
-          name="org.eclipse.pde.feature.group"/>
-      <requirement
-          name="org.eclipse.emf.sdk.feature.group"/>
-      <requirement
-          name="org.eclipse.emf.mwe2.language.sdk.feature.group"/>
-      <requirement
-          name="org.eclipse.emf.mwe2.launcher.feature.group"/>
-      <requirement
-          name="org.junit"
-          versionRange="[4.11.0,4.12.0)"/>
-      <requirement
-          name="org.eclipse.jdt.java8patch.feature.group"
-          optional="true"/>
-      <requirement
-          name="org.eclipse.pde.java8patch.feature.group"
-          optional="true"/>
-      <repositoryList
-          name="Neon">
-        <repository
-            url="${xtext.nightly.composite}"/>
-        <repository
-            url="${antlr-gen.update.site}"/>
-        <repository
-            url="http://download.eclipse.org/tools/gef/updates/milestones"/>
-        <repository
-            url="http://download.eclipse.org/technology/m2e/releases/1.6/"/>
-        <repository
-            url="http://download.eclipse.org/technology/swtbot/releases/latest/"/>
-        <repository
-            url="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/"/>
-        <repository
-            url="${emf.update.site}"/>
-        <repository
-            url="http://download.eclipse.org/eclipse/updates/4.6/"/>
-      </repositoryList>
-      <repositoryList
-          name="Mars">
-        <repository
-            url="${xtext.nightly.composite}"/>
-        <repository
-            url="${antlr-gen.update.site}"/>
-        <repository
-            url="http://download.eclipse.org/tools/gef/updates/milestones"/>
-        <repository
-            url="http://download.eclipse.org/technology/m2e/releases/1.6/"/>
-        <repository
-            url="http://download.eclipse.org/technology/swtbot/releases/latest/"/>
-        <repository
-            url="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/"/>
-        <repository
-            url="${emf.update.site}"/>
-        <repository
-            url="http://download.eclipse.org/eclipse/updates/4.5/"/>
-      </repositoryList>
-      <repositoryList
-          name="Luna">
-        <repository
-            url="${xtext.nightly.composite}"/>
-        <repository
-            url="http://download.eclipse.org/tools/gef/updates/milestones"/>
-        <repository
-            url="http://download.eclipse.org/technology/m2e/releases/1.5/"/>
-        <repository
-            url="http://download.eclipse.org/technology/swtbot/releases/latest/"/>
-        <repository
-            url="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/"/>
-        <repository
-            url="${emf.update.site}"/>
-        <repository
-            url="${antlr-gen.update.site}"/>
-        <repository
-            url="http://download.eclipse.org/eclipse/updates/4.4/"/>
-      </repositoryList>
-      <repositoryList
-          name="Kepler">
-        <repository
-            url="${xtext.nightly.composite}"/>
-        <repository
-            url="http://download.eclipse.org/technology/m2e/releases/1.4/"/>
-        <repository
-            url="http://download.eclipse.org/technology/swtbot/releases/latest/"/>
-        <repository
-            url="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/"/>
-        <repository
-            url="${emf.update.site}"/>
-        <repository
-            url="${draw2d.p2.repository}"/>
-        <repository
-            url="${antlr-gen.update.site}"/>
-        <repository
-            url="http://download.eclipse.org/eclipse/updates/4.3-P-builds/"/>
-      </repositoryList>
-      <repositoryList
-          name="Juno">
-        <repository
-            url="${xtext.nightly.composite}"/>
-        <repository
-            url="http://download.eclipse.org/technology/m2e/releases/1.3/"/>
-        <repository
-            url="http://download.eclipse.org/technology/swtbot/releases/latest/"/>
-        <repository
-            url="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/"/>
-        <repository
-            url="${emf.update.site}"/>
-        <repository
-            url="${draw2d.p2.repository}"/>
-        <repository
-            url="${antlr-gen.update.site}"/>
-        <repository
-            url="http://download.eclipse.org/eclipse/updates/4.2/"/>
-      </repositoryList>
-      <repositoryList
-          name="Indigo">
-        <repository
-            url="${xtext.nightly.composite}"/>
-        <repository
-            url="http://download.eclipse.org/technology/m2e/releases/1.2/"/>
-        <repository
-            url="http://download.eclipse.org/technology/swtbot/releases/latest/"/>
-        <repository
-            url="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/"/>
-        <repository
-            url="${emf.update.site}"/>
-        <repository
-            url="${draw2d.p2.repository}"/>
-        <repository
-            url="${antlr-gen.update.site}"/>
-        <repository
-            url="http://download.eclipse.org/eclipse/updates/3.7/"/>
-      </repositoryList>
-      <repositoryList
-          name="Helios">
-        <repository
-            url="${xtext.nightly.composite}"/>
-        <repository
-            url="http://download.eclipse.org/technology/swtbot/releases/latest/"/>
-        <repository
-            url="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/"/>
-        <repository
-            url="${emf.update.site}"/>
-        <repository
-            url="${draw2d.p2.repository}"/>
-        <repository
-            url="${antlr-gen.update.site}"/>
-        <repository
-            url="http://download.eclipse.org/eclipse/updates/3.6/"/>
-        <repository
-            url="http://download.eclipse.org/technology/m2e/releases/1.1/"/>
-      </repositoryList>
-    </targlet>
-    <targlet
-        name="Xtext Tools"
-        activeRepositoryList="Oldest Helios">
-      <requirement
-          name="org.eclipse.m2e.feature.feature.group"/>
-      <requirement
-          name="org.eclipse.jem.util"/>
-      <repositoryList
-          name="Oldest Helios">
-        <repository
-            url="http://download.eclipse.org/webtools/downloads/drops/R3.2.3/R-3.2.3-20110217214612/repository"/>
-        <repository
-            url="http://download.eclipse.org/technology/m2e/releases/1.1/"/>
-      </repositoryList>
-    </targlet>
-    <description>Target platform</description>
+      xsi:type="setup.workingsets:WorkingSetTask">
+    <workingSet
+        name="Root Projects"
+        id="">
+      <predicate
+          xsi:type="predicates:OrPredicate">
+        <operand
+            xsi:type="predicates:FilePredicate"
+            filePattern="settings.gradle"/>
+        <operand
+            xsi:type="predicates:NamePredicate"
+            pattern="xtext-eclipse"/>
+      </predicate>
+    </workingSet>
   </setupTask>
   <project name="core"
-      label="Core">
+      label="Xtext Core">
+    <setupTask
+        xsi:type="git:GitCloneTask"
+        id="git.clone.xtext.core"
+        remoteURI="eclipse/xtext-core"
+        pushURI=""
+        checkoutBranch="${xtext.git.branch}">
+      <annotation
+          source="http://www.eclipse.org/oomph/setup/InducedChoices">
+        <detail
+            key="inherit">
+          <value>github.remoteURIs</value>
+        </detail>
+        <detail
+            key="label">
+          <value>Github Repository</value>
+        </detail>
+        <detail
+            key="target">
+          <value>remoteURI</value>
+        </detail>
+      </annotation>
+      <description>${scope.project.label}</description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup:StringSubstitutionTask"
+        name="git.xtext.core.location"
+        value="${git.clone.xtext.core.location}"/>
+    <setupTask
+        xsi:type="projects:ProjectsImportTask">
+      <sourceLocator
+          rootFolder="${git.clone.xtext.core.location}"
+          locateNestedProjects="true"/>
+      <description>Maven Dependencies</description>
+    </setupTask>
     <setupTask
         xsi:type="setup.workingsets:WorkingSetTask">
       <workingSet
-          name="Releng">
-        <predicate
-            xsi:type="predicates:OrPredicate">
-          <operand
-              xsi:type="predicates:AndPredicate">
-            <operand
-                xsi:type="predicates:RepositoryPredicate"
-                project="org.eclipse.xtext"/>
-            <operand
-                xsi:type="predicates:NamePredicate"
-                pattern=".*\.xtext\.contributor|.*releng|.*build.feature|^jenkins$"/>
-          </operand>
-          <operand
-              xsi:type="predicates:NamePredicate"
-              pattern="org.eclipse.simrel.build"/>
-        </predicate>
-      </workingSet>
-      <workingSet
-          name="Xtext">
+          name="Core">
         <predicate
             xsi:type="predicates:AndPredicate">
           <operand
@@ -517,266 +357,454 @@
               project="org.eclipse.xtext"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@projects[name='core']/@setupTasks.0/@workingSets.8 //@projects[name='core']/@setupTasks.0/@workingSets.5 //@projects[name='core']/@setupTasks.0/@workingSets.2 //@projects[name='core']/@setupTasks.0/@workingSets.4 //@projects[name='core']/@setupTasks.0/@workingSets.3 //@projects[name='core']/@setupTasks.0/@workingSets.6 //@projects[name='core']/@setupTasks.0/@workingSets.10 //@projects[name='core']/@setupTasks.0/@workingSets.0 //@projects[name='core']/@setupTasks.0/@workingSets.7 //@projects[name='core']/@setupTasks.0/@workingSets.11 //@projects[name='core']/@setupTasks.0/@workingSets.12"/>
-          <operand
-              xsi:type="predicates:NaturePredicate"
-              nature="org.eclipse.pde.PluginNature"/>
+              excludedWorkingSet="//@setupTasks.13/@workingSets.0"/>
         </predicate>
       </workingSet>
+    </setupTask>
+    <stream
+        name="master"/>
+    <stream
+        name="maintenance">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="xtext.git.branch"
+          value="maintenance"/>
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="xtext.nightly.composite"
+          value="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/maintenance/nightly/"/>
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="emf.update.site"
+          value="http://download.eclipse.org/modeling/emf/emf/updates/2.11.x/"/>
+    </stream>
+    <description>Provide the core grammar infrastructure, core framework and Language Server support</description>
+  </project>
+  <project name="lib"
+      label="Xbase/Xtend Libraries">
+    <setupTask
+        xsi:type="git:GitCloneTask"
+        id="git.clone.xtext.lib"
+        remoteURI="eclipse/xtext-lib"
+        checkoutBranch="${xtext.git.branch}">
+      <annotation
+          source="http://www.eclipse.org/oomph/setup/InducedChoices">
+        <detail
+            key="inherit">
+          <value>github.remoteURIs</value>
+        </detail>
+        <detail
+            key="label">
+          <value>Github Repository</value>
+        </detail>
+        <detail
+            key="target">
+          <value>remoteURI</value>
+        </detail>
+      </annotation>
+      <description>${scope.project.label}</description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup:StringSubstitutionTask"
+        name="git.xtext.lib.location"
+        value="${git.clone.xtext.lib.location}">
+      <description></description>
+    </setupTask>
+    <setupTask
+        xsi:type="projects:ProjectsImportTask">
+      <sourceLocator
+          rootFolder="${git.clone.xtext.lib.location}"
+          locateNestedProjects="true"/>
+      <description>Maven Dependencies</description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup.workingsets:WorkingSetTask">
       <workingSet
-          name="Xbase">
+          name="Xbase/Xtend Libs"
+          id="">
         <predicate
             xsi:type="predicates:AndPredicate">
           <operand
               xsi:type="predicates:RepositoryPredicate"
-              project="org.eclipse.xtend.core"/>
-          <operand
-              xsi:type="predicates:NamePredicate"
-              pattern=".*xbase.*"/>
+              project="org.eclipse.xtext.xbase.lib"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@projects[name='core']/@setupTasks.0/@workingSets.4 //@projects[name='core']/@setupTasks.0/@workingSets.8 //@projects[name='core']/@setupTasks.0/@workingSets.7 //@projects[name='core']/@setupTasks.0/@workingSets.11"/>
+              excludedWorkingSet="//@setupTasks.13/@workingSets.0"/>
         </predicate>
       </workingSet>
+    </setupTask>
+    <stream
+        name="master"/>
+    <stream
+        name="maintenance">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="xtext.git.branch"
+          value="maintenance"/>
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="xtext.nightly.composite"
+          value="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/maintenance/nightly/"/>
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="emf.update.site"
+          value="http://download.eclipse.org/modeling/emf/emf/updates/2.11.x/"/>
+    </stream>
+    <description>Libraries for Xbase and Xtend</description>
+  </project>
+  <project name="extras"
+      label="Extras">
+    <setupTask
+        xsi:type="git:GitCloneTask"
+        id="git.clone.xtext.extras"
+        remoteURI="eclipse/xtext-extras"
+        checkoutBranch="${xtext.git.branch}">
+      <annotation
+          source="http://www.eclipse.org/oomph/setup/InducedChoices">
+        <detail
+            key="inherit">
+          <value>github.remoteURIs</value>
+        </detail>
+        <detail
+            key="label">
+          <value>Github Repository</value>
+        </detail>
+        <detail
+            key="target">
+          <value>remoteURI</value>
+        </detail>
+      </annotation>
+      <description>${scope.project.label}</description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup:StringSubstitutionTask"
+        name="git.xtext.extras.location"
+        value="${git.clone.xtext.extras.location}"/>
+    <setupTask
+        xsi:type="projects:ProjectsImportTask">
+      <sourceLocator
+          rootFolder="${git.clone.xtext.extras.location}"
+          locateNestedProjects="true"/>
+      <description>Maven Dependencies</description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup.workingsets:WorkingSetTask">
       <workingSet
-          name="Xtend">
+          name="Extras">
         <predicate
             xsi:type="predicates:AndPredicate">
           <operand
               xsi:type="predicates:RepositoryPredicate"
-              project="org.eclipse.xtend.core"/>
-          <operand
-              xsi:type="predicates:NamePredicate"
-              pattern=".*xtend.*"/>
+              project="org.eclipse.xtext.xbase"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@projects[name='core']/@setupTasks.0/@workingSets.6 //@projects[name='core']/@setupTasks.0/@workingSets.8 //@projects[name='core']/@setupTasks.0/@workingSets.9 //@projects[name='core']/@setupTasks.0/@workingSets.10 //@projects[name='core']/@setupTasks.0/@workingSets.7 //@projects[name='core']/@setupTasks.0/@workingSets.11"/>
+              excludedWorkingSet="//@setupTasks.13/@workingSets.0"/>
         </predicate>
       </workingSet>
+    </setupTask>
+    <stream
+        name="master"/>
+    <stream
+        name="maintenance">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="xtext.git.branch"
+          value="maintenance"/>
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="xtext.nightly.composite"
+          value="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/maintenance/nightly/"/>
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="emf.update.site"
+          value="http://download.eclipse.org/modeling/emf/emf/updates/2.11.x/"/>
+    </stream>
+    <description>Additional editor-independent features, mostly Java support</description>
+  </project>
+  <project name="eclipse"
+      label="Eclipse Support">
+    <setupTask
+        xsi:type="git:GitCloneTask"
+        id="git.clone.xtext.eclipse"
+        remoteURI="eclipse/xtext-eclipse"
+        checkoutBranch="${xtext.git.branch}">
+      <annotation
+          source="http://www.eclipse.org/oomph/setup/InducedChoices">
+        <detail
+            key="inherit">
+          <value>github.remoteURIs</value>
+        </detail>
+        <detail
+            key="label">
+          <value>Github Repository</value>
+        </detail>
+        <detail
+            key="target">
+          <value>remoteURI</value>
+        </detail>
+      </annotation>
+      <description>${scope.project.label}</description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup:StringSubstitutionTask"
+        name="git.xtext.eclipse.location"
+        value="${git.clone.xtext.eclipse.location}"/>
+    <setupTask
+        xsi:type="setup.targlets:TargletTask">
+      <targlet
+          name="Xtext Target Platform"
+          activeRepositoryList="${eclipse.target.platform}">
+        <requirement
+            name="org.eclipse.platform.feature.group"/>
+        <requirement
+            name="org.eclipse.jdt.feature.group"/>
+        <requirement
+            name="org.eclipse.pde.feature.group"/>
+        <requirement
+            name="org.eclipse.emf.sdk.feature.group"/>
+        <requirement
+            name="org.eclipse.emf.mwe2.language.sdk.feature.group"/>
+        <requirement
+            name="org.eclipse.emf.mwe2.launcher.feature.group"/>
+        <requirement
+            name="org.junit"
+            versionRange="[4.11.0,4.12.0)"/>
+        <requirement
+            name="org.eclipse.jdt.java8patch.feature.group"
+            optional="true"/>
+        <requirement
+            name="org.eclipse.pde.java8patch.feature.group"
+            optional="true"/>
+        <requirement
+            name="org.eclipse.draw2d.sdk.feature.group"/>
+        <repositoryList
+            name="Neon">
+          <repository
+              url="${xtext.nightly.composite}"/>
+          <repository
+              url="${mwe2.update.site}"/>
+          <repository
+              url="${antlr-gen.update.site}"/>
+          <repository
+              url="http://download.eclipse.org/tools/gef/updates/milestones"/>
+          <repository
+              url="http://download.eclipse.org/technology/m2e/releases/1.7"/>
+          <repository
+              url="http://download.eclipse.org/technology/swtbot/releases/latest/"/>
+          <repository
+              url="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/"/>
+          <repository
+              url="${emf.update.site}"/>
+          <repository
+              url="http://download.eclipse.org/eclipse/updates/4.6/"/>
+          <repository
+              url="${draw2d.p2.repository}"/>
+        </repositoryList>
+        <repositoryList
+            name="Mars">
+          <repository
+              url="${xtext.nightly.composite}"/>
+          <repository
+              url="${mwe2.update.site}"/>
+          <repository
+              url="${antlr-gen.update.site}"/>
+          <repository
+              url="http://download.eclipse.org/tools/gef/updates/milestones"/>
+          <repository
+              url="http://download.eclipse.org/technology/m2e/releases/1.6/"/>
+          <repository
+              url="http://download.eclipse.org/technology/swtbot/releases/latest/"/>
+          <repository
+              url="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/"/>
+          <repository
+              url="${emf.update.site}"/>
+          <repository
+              url="http://download.eclipse.org/eclipse/updates/4.5/"/>
+          <repository
+              url="${draw2d.p2.repository}"/>
+        </repositoryList>
+        <repositoryList
+            name="Luna">
+          <repository
+              url="${xtext.nightly.composite}"/>
+          <repository
+              url="${mwe2.update.site}"/>
+          <repository
+              url="http://download.eclipse.org/tools/gef/updates/milestones"/>
+          <repository
+              url="http://download.eclipse.org/technology/m2e/releases/1.5/"/>
+          <repository
+              url="http://download.eclipse.org/technology/swtbot/releases/latest/"/>
+          <repository
+              url="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/"/>
+          <repository
+              url="${emf.update.site}"/>
+          <repository
+              url="${antlr-gen.update.site}"/>
+          <repository
+              url="http://download.eclipse.org/eclipse/updates/4.4/"/>
+          <repository
+              url="${draw2d.p2.repository}"/>
+        </repositoryList>
+        <repositoryList
+            name="Kepler">
+          <repository
+              url="${xtext.nightly.composite}"/>
+          <repository
+              url="${mwe2.update.site}"/>
+          <repository
+              url="http://download.eclipse.org/technology/m2e/releases/1.4/"/>
+          <repository
+              url="http://download.eclipse.org/technology/swtbot/releases/latest/"/>
+          <repository
+              url="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/"/>
+          <repository
+              url="${emf.update.site}"/>
+          <repository
+              url="${draw2d.p2.repository}"/>
+          <repository
+              url="${antlr-gen.update.site}"/>
+          <repository
+              url="http://download.eclipse.org/eclipse/updates/4.3-P-builds/"/>
+        </repositoryList>
+        <repositoryList
+            name="Juno">
+          <repository
+              url="${xtext.nightly.composite}"/>
+          <repository
+              url="${mwe2.update.site}"/>
+          <repository
+              url="http://download.eclipse.org/technology/m2e/releases/1.3/"/>
+          <repository
+              url="http://download.eclipse.org/technology/swtbot/releases/latest/"/>
+          <repository
+              url="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/"/>
+          <repository
+              url="${emf.update.site}"/>
+          <repository
+              url="${draw2d.p2.repository}"/>
+          <repository
+              url="${antlr-gen.update.site}"/>
+          <repository
+              url="http://download.eclipse.org/eclipse/updates/4.2/"/>
+        </repositoryList>
+        <repositoryList
+            name="Indigo">
+          <repository
+              url="${xtext.nightly.composite}"/>
+          <repository
+              url="${mwe2.update.site}"/>
+          <repository
+              url="http://download.eclipse.org/technology/m2e/releases/1.2/"/>
+          <repository
+              url="http://download.eclipse.org/technology/swtbot/releases/latest/"/>
+          <repository
+              url="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/"/>
+          <repository
+              url="${emf.update.site}"/>
+          <repository
+              url="${draw2d.p2.repository}"/>
+          <repository
+              url="${antlr-gen.update.site}"/>
+          <repository
+              url="http://download.eclipse.org/eclipse/updates/3.7/"/>
+        </repositoryList>
+        <repositoryList
+            name="Helios">
+          <repository
+              url="${xtext.nightly.composite}"/>
+          <repository
+              url="${mwe2.update.site}"/>
+          <repository
+              url="http://download.eclipse.org/technology/swtbot/releases/latest/"/>
+          <repository
+              url="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/"/>
+          <repository
+              url="${emf.update.site}"/>
+          <repository
+              url="${draw2d.p2.repository}"/>
+          <repository
+              url="${antlr-gen.update.site}"/>
+          <repository
+              url="http://download.eclipse.org/eclipse/updates/3.6/"/>
+          <repository
+              url="http://download.eclipse.org/technology/m2e/releases/1.1/"/>
+        </repositoryList>
+      </targlet>
+      <targlet
+          name="Xtext Tools"
+          activeRepositoryList="Oldest Helios">
+        <requirement
+            name="org.eclipse.m2e.feature.feature.group"/>
+        <requirement
+            name="org.eclipse.jem.util"/>
+        <repositoryList
+            name="Oldest Helios">
+          <repository
+              url="http://download.eclipse.org/webtools/downloads/drops/R3.2.3/R-3.2.3-20110217214612/repository"/>
+          <repository
+              url="http://download.eclipse.org/technology/m2e/releases/1.1/"/>
+        </repositoryList>
+      </targlet>
+      <description>Target platform</description>
+    </setupTask>
+    <setupTask
+        xsi:type="projects:ProjectsImportTask">
+      <sourceLocator
+          rootFolder="${git.clone.xtext.eclipse.location}"
+          locateNestedProjects="true"/>
+      <description>Maven Dependencies</description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup.workingsets:WorkingSetTask">
       <workingSet
-          name="Xbase Tests">
-        <predicate
-            xsi:type="predicates:AndPredicate">
-          <operand
-              xsi:type="predicates:RepositoryPredicate"
-              project="org.eclipse.xtend.core"/>
-          <operand
-              xsi:type="predicates:NamePredicate"
-              pattern=".*xbase.*test.*"/>
-          <operand
-              xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@projects[name='core']/@setupTasks.0/@workingSets.8 //@projects[name='core']/@setupTasks.0/@workingSets.11"/>
-        </predicate>
-      </workingSet>
-      <workingSet
-          name="Xtext Tests">
-        <predicate
-            xsi:type="predicates:AndPredicate">
-          <operand
-              xsi:type="predicates:RepositoryPredicate"
-              project="org.eclipse.xtext"/>
-          <operand
-              xsi:type="predicates:NamePredicate"
-              pattern=".*tests.*"/>
-          <operand
-              xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@projects[name='core']/@setupTasks.0/@workingSets.4 //@projects[name='core']/@setupTasks.0/@workingSets.7 //@projects[name='core']/@setupTasks.0/@workingSets.8 //@projects[name='core']/@setupTasks.0/@workingSets.6 //@projects[name='core']/@setupTasks.0/@workingSets.11 //@projects[name='core']/@setupTasks.0/@workingSets.9"/>
-        </predicate>
-      </workingSet>
-      <workingSet
-          name="Xtend Tests">
-        <predicate
-            xsi:type="predicates:AndPredicate">
-          <operand
-              xsi:type="predicates:RepositoryPredicate"
-              project="org.eclipse.xtend.core"/>
-          <operand
-              xsi:type="predicates:NamePredicate"
-              pattern=".*xtend.*tests.*"/>
-          <operand
-              xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@projects[name='core']/@setupTasks.0/@workingSets.8 //@projects[name='core']/@setupTasks.0/@workingSets.11"/>
-        </predicate>
-      </workingSet>
-      <workingSet
-          name="Xtext Examples">
-        <predicate
-            xsi:type="predicates:AndPredicate">
-          <operand
-              xsi:type="predicates:NamePredicate"
-              pattern=".*example.*|xtend-euler|.*tutorial"/>
-          <operand
-              xsi:type="predicates:RepositoryPredicate"
-              project="org.eclipse.xtext.example.arithmetics"/>
-          <operand
-              xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@projects[name='core']/@setupTasks.0/@workingSets.8 //@projects[name='core']/@setupTasks.0/@workingSets.11"/>
-        </predicate>
-      </workingSet>
-      <workingSet
-          name="Features">
+          name="Eclipse">
         <predicate
             xsi:type="predicates:AndPredicate">
           <operand
               xsi:type="predicates:RepositoryPredicate"
               project="org.eclipse.xtext.sdk.feature"/>
           <operand
-              xsi:type="predicates:NaturePredicate"
-              nature="org.eclipse.pde.FeatureNature"/>
+              xsi:type="workingsets:ExclusionPredicate"
+              excludedWorkingSet="//@setupTasks.13/@workingSets.0 //@projects[name='eclipse']/@setupTasks.4/@workingSets.2 //@projects[name='eclipse']/@setupTasks.4/@workingSets.1"/>
         </predicate>
       </workingSet>
       <workingSet
-          name="Maven">
+          name="Eclipse Features">
         <predicate
             xsi:type="predicates:AndPredicate">
           <operand
               xsi:type="predicates:RepositoryPredicate"
-              project="org.eclipse.xtext"/>
+              project="org.eclipse.xtext.sdk.feature"/>
           <operand
-              xsi:type="predicates:NamePredicate"
-              pattern=".*\.maven.*|.*\.parent|.*\.target"/>
-        </predicate>
-      </workingSet>
-      <workingSet
-          name="Docs">
-        <predicate
-            xsi:type="predicates:AndPredicate">
+              xsi:type="workingsets:ExclusionPredicate"
+              excludedWorkingSet="//@setupTasks.13/@workingSets.0 //@projects[name='eclipse']/@setupTasks.4/@workingSets.2"/>
           <operand
-              xsi:type="predicates:NotPredicate">
+              xsi:type="predicates:OrPredicate">
             <operand
                 xsi:type="predicates:NaturePredicate"
                 nature="org.eclipse.pde.FeatureNature"/>
+            <operand
+                xsi:type="predicates:NaturePredicate"
+                nature="org.eclipse.xtext.build.feature"/>
           </operand>
-          <operand
-              xsi:type="predicates:NamePredicate"
-              pattern=".*\.doc|.*-website"/>
         </predicate>
       </workingSet>
       <workingSet
-          name="Idea">
+          name="Eclipse Examples">
         <predicate
             xsi:type="predicates:AndPredicate">
           <operand
-              xsi:type="predicates:NamePredicate"
-              pattern=".*\.idea.*|intellij"/>
-          <operand
               xsi:type="predicates:RepositoryPredicate"
-              project="intellij"/>
-        </predicate>
-      </workingSet>
-      <workingSet
-          name="Web"
-          id="">
-        <predicate
-            xsi:type="predicates:AndPredicate">
+              project="org.eclipse.xtext.sdk.feature"/>
+          <operand
+              xsi:type="workingsets:ExclusionPredicate"
+              excludedWorkingSet="//@setupTasks.13/@workingSets.0"/>
           <operand
               xsi:type="predicates:NamePredicate"
-              pattern=".*\.web.*|^web$"/>
-          <operand
-              xsi:type="predicates:RepositoryPredicate"
-              project="org.eclipse.xtext"/>
+              pattern=".*\.example\..*"/>
         </predicate>
       </workingSet>
-    </setupTask>
-    <setupTask
-        xsi:type="setup.targlets:TargletTask">
-      <targlet
-          name="Xtext Core">
-        <requirement
-            name="org.eclipse.xtext.tests.feature.group"/>
-        <requirement
-            name="org.eclipse.xtext.build.feature.group"/>
-        <requirement
-            name="org.eclipse.xtend.tests.feature.group"/>
-        <requirement
-            name="org.eclipse.xtext.bootstrap"/>
-        <requirement
-            name="org.eclipse.xtext.compatibility.galileo"/>
-        <requirement
-            name="org.eclipse.xtext.language-generator"/>
-        <requirement
-            name="org.eclipse.xtext.ui.codetemplates.tests"/>
-        <requirement
-            name="org.eclipse.xtend.performance.tests"/>
-        <requirement
-            name="org.eclipse.xtext.contributor"/>
-        <requirement
-            name="org.eclipse.xtext.releng"/>
-        <sourceLocator
-            rootFolder="${git.clone.xtext.location}"/>
-      </targlet>
-    </setupTask>
-    <setupTask
-        xsi:type="setup.targlets:TargletTask">
-      <targlet
-          name="Xtext/Xtend Examples">
-        <requirement
-            name="org.eclipse.xtend.examples-container"/>
-        <requirement
-            name="xtend-examples"/>
-        <requirement
-            name="xtend-annotation-examples-client"/>
-        <requirement
-            name="xtend-annotation-examples"/>
-        <requirement
-            name="org.eclipse.xtext.xtext.ui.examples-container"/>
-        <requirement
-            name="org.eclipse.xtext.xtext.ui.examples"/>
-        <requirement
-            name="org.eclipse.xtext.example.arithmetics.ui.tests"/>
-        <requirement
-            name="org.eclipse.xtext.example.homeautomation.tests"/>
-        <requirement
-            name="org.eclipse.xtext.example.homeautomation.ui"/>
-        <requirement
-            name="org.eclipse.xtext.example.fowlerdsl.ui"/>
-        <requirement
-            name="xbase.tutorial"/>
-        <requirement
-            name="xtend-euler"/>
-        <sourceLocator
-            rootFolder="${git.clone.xtext.location/examples/org.eclipse.xtext.xtext.ui.examples/contents}"/>
-        <sourceLocator
-            rootFolder="${git.clone.xtext.location/examples/org.eclipse.xtend.examples-container/contents}"/>
-        <sourceLocator
-            rootFolder="${git.clone.xtext.location/examples/}"/>
-        <sourceLocator
-            rootFolder="${git.clone.xtext.location/examples/org.eclipse.xtext.xtext.ui.examples/org.eclipse.xtext.xtext.ui.examples}"/>
-      </targlet>
-    </setupTask>
-    <setupTask
-        xsi:type="projects:ProjectsImportTask">
-      <sourceLocator
-          rootFolder="${git.clone.xtext.location/maven}"/>
-      <sourceLocator
-          rootFolder="${git.clone.xtext.location/xtext-website}"/>
-      <sourceLocator
-          rootFolder="${git.clone.xtext.location/xtend-website}"/>
-      <sourceLocator
-          rootFolder="${git.clone.xtext.location/intellij}"
-          locateNestedProjects="true"/>
-      <sourceLocator
-          rootFolder="${git.clone.xtext.location/web}"
-          locateNestedProjects="true"/>
-      <description>Maven Dependencies</description>
-    </setupTask>
-    <setupTask
-        xsi:type="launching:LaunchTask"
-        id="refresh-gradle-dependencies"
-        launcher="/intellij/refresh-gradle-dependencies-idea.launch">
-      <description>
-        Refreshes the .classpath files for the Gradle projects
-        Downloads Intellij IDEA if needed
-      </description>
-    </setupTask>
-    <setupTask
-        xsi:type="launching:LaunchTask"
-        id="refresh-gradle-dependencies-web"
-        launcher="/web/refresh-gradle-dependencies-web.launch">
-      <description>
-        Refreshes the .classpath files for the Gradle projects
-        Downloads Intellij IDEA if needed
-      </description>
     </setupTask>
     <stream
         name="master">
@@ -808,7 +836,293 @@
           location="${installation.location}/api/v2.9/"
           remoteURI="http://www.eclipse.org/downloads/download.php?file=/modeling/tmf/xtext/downloads/drops/2.9.0/R201512010527/tmf-xtext-Update-2.9.0.zip&amp;r=1"/>
     </stream>
-    <description>Provide the core grammar infrastructure</description>
+    <description>Plug-ins for Eclipse</description>
+  </project>
+  <project name="idea"
+      label="IntelliJ IDEA Support">
+    <setupTask
+        xsi:type="git:GitCloneTask"
+        id="git.clone.xtext.idea"
+        remoteURI="eclipse/xtext-idea"
+        checkoutBranch="${xtext.git.branch}">
+      <annotation
+          source="http://www.eclipse.org/oomph/setup/InducedChoices">
+        <detail
+            key="inherit">
+          <value>github.remoteURIs</value>
+        </detail>
+        <detail
+            key="label">
+          <value>Github Repository</value>
+        </detail>
+        <detail
+            key="target">
+          <value>remoteURI</value>
+        </detail>
+      </annotation>
+      <description>${scope.project.label}</description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup:StringSubstitutionTask"
+        name="git.xtext.idea.location"
+        value="${git.clone.xtext.idea.location}">
+      <description></description>
+    </setupTask>
+    <setupTask
+        xsi:type="projects:ProjectsImportTask">
+      <sourceLocator
+          rootFolder="${git.clone.xtext.idea.location}"
+          locateNestedProjects="true"/>
+      <description>Maven Dependencies</description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup.workingsets:WorkingSetTask">
+      <workingSet
+          name="IDEA"
+          id="">
+        <predicate
+            xsi:type="predicates:AndPredicate">
+          <operand
+              xsi:type="predicates:RepositoryPredicate"
+              project="org.eclipse.xtext.core.idea.tests"/>
+          <operand
+              xsi:type="workingsets:ExclusionPredicate"
+              excludedWorkingSet="//@setupTasks.13/@workingSets.0"/>
+        </predicate>
+      </workingSet>
+    </setupTask>
+    <stream
+        name="master"/>
+    <stream
+        name="maintenance">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="xtext.git.branch"
+          value="maintenance"/>
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="xtext.nightly.composite"
+          value="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/maintenance/nightly/"/>
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="emf.update.site"
+          value="http://download.eclipse.org/modeling/emf/emf/updates/2.11.x/"/>
+    </stream>
+    <description>Plug-ins for IntelliJ IDEA</description>
+  </project>
+  <project name="web"
+      label="Web Support">
+    <setupTask
+        xsi:type="git:GitCloneTask"
+        id="git.clone.xtext.web"
+        remoteURI="eclipse/xtext-web"
+        checkoutBranch="${xtext.git.branch}">
+      <annotation
+          source="http://www.eclipse.org/oomph/setup/InducedChoices">
+        <detail
+            key="inherit">
+          <value>github.remoteURIs</value>
+        </detail>
+        <detail
+            key="label">
+          <value>Github Repository</value>
+        </detail>
+        <detail
+            key="target">
+          <value>remoteURI</value>
+        </detail>
+      </annotation>
+      <description>${scope.project.label}</description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup:StringSubstitutionTask"
+        name="git.xtext.web.location"
+        value="${git.clone.xtext.web.location}">
+      <description></description>
+    </setupTask>
+    <setupTask
+        xsi:type="projects:ProjectsImportTask">
+      <sourceLocator
+          rootFolder="${git.clone.xtext.web.location}"
+          locateNestedProjects="true"/>
+      <description>Maven Dependencies</description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup.workingsets:WorkingSetTask">
+      <workingSet
+          name="Web"
+          id="">
+        <predicate
+            xsi:type="predicates:AndPredicate">
+          <operand
+              xsi:type="predicates:RepositoryPredicate"
+              project="org.eclipse.xtext.web"/>
+          <operand
+              xsi:type="workingsets:ExclusionPredicate"
+              excludedWorkingSet="//@setupTasks.13/@workingSets.0"/>
+        </predicate>
+      </workingSet>
+    </setupTask>
+    <stream
+        name="master"/>
+    <stream
+        name="maintenance">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="xtext.git.branch"
+          value="maintenance"/>
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="xtext.nightly.composite"
+          value="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/maintenance/nightly/"/>
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="emf.update.site"
+          value="http://download.eclipse.org/modeling/emf/emf/updates/2.11.x/"/>
+    </stream>
+    <description>Support for Orion, Ace and CodeMirror</description>
+  </project>
+  <project name="maven"
+      label="Maven Support">
+    <setupTask
+        xsi:type="git:GitCloneTask"
+        id="git.clone.xtext.maven"
+        remoteURI="eclipse/xtext-maven"
+        checkoutBranch="${xtext.git.branch}">
+      <annotation
+          source="http://www.eclipse.org/oomph/setup/InducedChoices">
+        <detail
+            key="inherit">
+          <value>github.remoteURIs</value>
+        </detail>
+        <detail
+            key="label">
+          <value>Github Repository</value>
+        </detail>
+        <detail
+            key="target">
+          <value>remoteURI</value>
+        </detail>
+      </annotation>
+      <description>${scope.project.label}</description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup:StringSubstitutionTask"
+        name="git.xtext.maven.location"
+        value="${git.clone.xtext.maven.location}">
+      <description></description>
+    </setupTask>
+    <setupTask
+        xsi:type="projects:ProjectsImportTask">
+      <sourceLocator
+          rootFolder="${git.clone.xtext.maven.location}"
+          locateNestedProjects="true"/>
+      <description>Maven Dependencies</description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup.workingsets:WorkingSetTask">
+      <workingSet
+          name="Maven">
+        <predicate
+            xsi:type="predicates:AndPredicate">
+          <operand
+              xsi:type="predicates:RepositoryPredicate"
+              project="org.eclipse.xtext.maven.plugin"/>
+          <operand
+              xsi:type="workingsets:ExclusionPredicate"
+              excludedWorkingSet="//@setupTasks.13/@workingSets.0"/>
+        </predicate>
+      </workingSet>
+    </setupTask>
+    <stream
+        name="master"/>
+    <stream
+        name="maintenance">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="xtext.git.branch"
+          value="maintenance"/>
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="xtext.nightly.composite"
+          value="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/maintenance/nightly/"/>
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="emf.update.site"
+          value="http://download.eclipse.org/modeling/emf/emf/updates/2.11.x/"/>
+    </stream>
+    <description>Support for Maven</description>
+  </project>
+  <project name="xtend"
+      label="Xtend Language">
+    <setupTask
+        xsi:type="git:GitCloneTask"
+        id="git.clone.xtext.xtend"
+        remoteURI="eclipse/xtext-xtend"
+        checkoutBranch="${xtext.git.branch}">
+      <annotation
+          source="http://www.eclipse.org/oomph/setup/InducedChoices">
+        <detail
+            key="inherit">
+          <value>github.remoteURIs</value>
+        </detail>
+        <detail
+            key="label">
+          <value>Github Repository</value>
+        </detail>
+        <detail
+            key="target">
+          <value>remoteURI</value>
+        </detail>
+      </annotation>
+      <description>${scope.project.label}</description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup:StringSubstitutionTask"
+        name="git.xtext.xtend.location"
+        value="${git.clone.xtext.xtend.location}">
+      <description></description>
+    </setupTask>
+    <setupTask
+        xsi:type="projects:ProjectsImportTask">
+      <sourceLocator
+          rootFolder="${git.clone.xtext.xtend.location}"
+          locateNestedProjects="true"/>
+      <description>Maven Dependencies</description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup.workingsets:WorkingSetTask">
+      <workingSet
+          name="Xtend">
+        <predicate
+            xsi:type="predicates:AndPredicate">
+          <operand
+              xsi:type="predicates:RepositoryPredicate"
+              project="org.eclipse.xtend.core"/>
+          <operand
+              xsi:type="workingsets:ExclusionPredicate"
+              excludedWorkingSet="//@setupTasks.13/@workingSets.0"/>
+        </predicate>
+      </workingSet>
+    </setupTask>
+    <stream
+        name="master"/>
+    <stream
+        name="maintenance">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="xtext.git.branch"
+          value="maintenance"/>
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="xtext.nightly.composite"
+          value="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/maintenance/nightly/"/>
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="emf.update.site"
+          value="http://download.eclipse.org/modeling/emf/emf/updates/2.11.x/"/>
+    </stream>
+    <description>The Xtend language</description>
   </project>
   <logicalProjectContainer
       xsi:type="setup:ProjectCatalog"
