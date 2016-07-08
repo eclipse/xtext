@@ -194,7 +194,7 @@ public class XtextGrammarRefactoringIntegrationTest extends AbstractLinkedEditin
 	}
 
 	@Test
-	@Flaky
+	@Flaky(trials=10)
 	public void testRefactorXtextGrammarWithGeneratedClassifierAndModelWithRefToClassifier() throws Exception {
 		ResourceSet rs = resourceSetProvider.get();
 		EcoreFactory eInstance = EcoreFactory.eINSTANCE;
