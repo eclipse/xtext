@@ -22,6 +22,14 @@ dependencies {
 	mwe2Runtime "org.eclipse.emf:org.eclipse.emf.mwe2.launch:$versions.emfMwe2"
 }
 
+sourceSets.main.java {
+	srcDir 'src'
+	srcDir 'src-gen2'
+	srcDir 'src-gen'
+	srcDir 'emf-gen'
+	srcDir 'xtend-gen'
+}
+
 sourceSets.test.java {
 	srcDir 'src-gen2'
 	srcDir 'suites'
@@ -30,6 +38,15 @@ sourceSets.test.java {
 sourceSets.test.resources {
 	srcDir 'src-gen2'
 	srcDir 'suites'
+}
+
+jar {
+	from ('.') {
+		include 'about*.*', 'plugin.xml', 'schema/**', 'model/**', '**/*.genmodel', '**/*.ecore'
+	}
+	metaInf {
+		from 'META-INF'
+	}
 }
 
 test {
