@@ -41,11 +41,8 @@ sourceSets.test.resources {
 }
 
 jar {
-	from ('.') {
-		include 'about*.*', 'plugin.xml', 'schema/**', 'model/**', '**/*.genmodel', '**/*.ecore'
-	}
-	metaInf {
-		from 'META-INF'
+	from ('src-gen') {
+		include '*+/*.genmodel', '**/*.ecore'
 	}
 }
 
