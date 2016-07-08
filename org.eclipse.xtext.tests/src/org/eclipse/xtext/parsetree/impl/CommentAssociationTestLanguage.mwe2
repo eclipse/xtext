@@ -8,7 +8,7 @@
 module org.eclipse.xtext.parsetree.impl.CommentAssociationTestLanguage
 
 import org.eclipse.emf.mwe.utils.StandaloneSetup
-import org.eclipse.xtext.generator.*
+import org.eclipse.xtext.xtext.generator.*
 
 var projectName = "org.eclipse.xtext.tests"
 var runtimeProject = "../${projectName}"
@@ -19,13 +19,24 @@ Workflow {
 		platformUri="${runtimeProject}/.."
 	}
 
-	component = Generator auto-inject {
-		pathRtProject = runtimeProject
-		projectNameRt = projectName
-		
-		language = {
-			uri = "classpath:/org/eclipse/xtext/parsetree/impl/CommentAssociationTestLanguage.xtext"
-			fragment = @org.eclipse.xtext.TestLanguagesFragmentsParseTreeConstructor {}
+	component = XtextGenerator {
+		cleaner = {
+			enabled = false
 		}
+		configuration = {
+			project = model.project.StandardProjectConfig {
+				baseName = projectName
+				rootPath = ".."
+			}
+			code = {
+				lineDelimiter = lineDelimiter
+				preferXtendStubs = false
+			}
+		}
+		
+//		language = { XXX
+//			grammarUri = "classpath:/org/eclipse/xtext/parsetree/impl/CommentAssociationTestLanguage.xtext"
+//			fragment = @org.eclipse.xtext.TestLanguagesFragmentsParseTreeConstructor {}
+//		}
 	}
 }

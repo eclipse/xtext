@@ -10,7 +10,7 @@ module org.eclipse.xtext.parsetree.formatter.GenerateFormatterTestLanguages
 import org.eclipse.emf.mwe2.runtime.workflow.Workflow
 import org.eclipse.emf.mwe.utils.*
 import org.eclipse.xtext.*
-import org.eclipse.xtext.generator.*
+import org.eclipse.xtext.xtext.generator.*
 
 var projectName = "org.eclipse.xtext.tests"
 var runtimeProject = "../${projectName}"
@@ -25,19 +25,36 @@ Workflow {
 		directory = "${runtimeProject}/src-gen/org/eclipse/xtext/formatting2"
 	}
 
-	component = Generator auto-inject {
-		pathRtProject = runtimeProject
-		pathTestProject = runtimeProject
-		projectNameRt = projectName
+	component = XtextGenerator {
+		cleaner = {
+			enabled = false
+		}
+		configuration = {
+			project = model.project.StandardProjectConfig {
+				baseName = projectName
+				rootPath = ".."
+				runtimeTest = {
+					enabled = true
+					root = runtimeProject
+					src = "${runtimeProject}/src"
+					srcGen = "${runtimeProject}/src-gen"
+				}
+			}
+			code = {
+				lineDelimiter = lineDelimiter
+				preferXtendStubs = false
+			}
+		}
+		
 		language = {
-			uri = "classpath:/org/eclipse/xtext/formatting2/internal/FormatterTestLanguage.xtext"
-			fragment = @ TestLanguagesFragments auto-inject {}
-			fragment = generator.junit.Junit4Fragment {}
+			grammarUri = "classpath:/org/eclipse/xtext/formatting2/internal/FormatterTestLanguage.xtext"
+			fragment = @TestLanguagesFragments auto-inject {}
+			fragment = xtext.generator.junit.Junit4Fragment2 {}
 		}
 		language = {
-			uri = "classpath:/org/eclipse/xtext/formatting2/regionaccess/internal/RegionAccessTestLanguage.xtext"
-			fragment = @ TestLanguagesFragments auto-inject {}
-			fragment = generator.junit.Junit4Fragment {}
+			grammarUri = "classpath:/org/eclipse/xtext/formatting2/regionaccess/internal/RegionAccessTestLanguage.xtext"
+			fragment = @TestLanguagesFragments auto-inject {}
+			fragment = xtext.generator.junit.Junit4Fragment2 {}
 		}
 	}
 }

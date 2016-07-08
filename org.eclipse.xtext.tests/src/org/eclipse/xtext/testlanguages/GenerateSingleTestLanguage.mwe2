@@ -9,7 +9,7 @@ module org.eclipse.xtext.testlanguages.GenerateSingleTestLanguage
 
 import org.eclipse.emf.mwe2.runtime.workflow.Workflow
 import org.eclipse.emf.mwe.utils.*
-import org.eclipse.xtext.generator.*
+import org.eclipse.xtext.xtext.generator.*
 
 var projectName = "org.eclipse.xtext.tests"
 var runtimeProject = "../${projectName}"
@@ -34,12 +34,28 @@ Workflow {
 		registerGeneratedEPackage = "org.eclipse.emf.ecore.EcorePackage"
 	}
 	
-	component = Generator auto-inject {
-		mergeManifest = false
-		pathRtProject = runtimeProject
-		projectNameRt = projectName
+	component = XtextGenerator {
+		cleaner = {
+			enabled = false
+		}
+		configuration = {
+			project = model.project.StandardProjectConfig {
+				baseName = projectName
+				rootPath = ".."
+				runtime = {
+					manifest = {
+						merge = false
+					}
+				}
+			}
+			code = {
+				lineDelimiter = lineDelimiter
+				preferXtendStubs = false
+			}
+		}
+		
 		language = { 
-			uri = "classpath:/org/eclipse/xtext/testlanguages/ActionTestLanguage2.xtext"
+			grammarUri = "classpath:/org/eclipse/xtext/testlanguages/ActionTestLanguage2.xtext"
 			fragment = @org.eclipse.xtext.TestLanguagesFragments {}
 		}
 	}

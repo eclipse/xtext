@@ -10,14 +10,11 @@ module org.eclipse.xtext.parsetree.reconstr.GenerateReconstrTestLanguages
 import org.eclipse.emf.mwe2.runtime.workflow.Workflow
 import org.eclipse.emf.mwe.utils.*
 import org.eclipse.xtext.*
-import org.eclipse.xtext.generator.*
+import org.eclipse.xtext.xtext.generator.*
 
 var projectName = "org.eclipse.xtext.tests"
 var runtimeProject = "../${projectName}"
 var lineDelimiter = '\n'
-
-//var generateDotDiagram = true
-//var graphvizCommand = "/opt/local/bin/dot -o %1.pdf -v -T pdf"
 
 Workflow {
 	bean = StandaloneSetup {
@@ -28,40 +25,51 @@ Workflow {
 		directory = "${runtimeProject}/src-gen/org/eclipse/xtext/parsetree/reconstr"
 	}
 	
-	component = Generator auto-inject {
-		pathRtProject = runtimeProject
-		projectNameRt = projectName
+	component = XtextGenerator {
+		cleaner = {
+			enabled = false
+		}
+		configuration = {
+			project = model.project.StandardProjectConfig {
+				baseName = projectName
+				rootPath = ".."
+			}
+			code = {
+				lineDelimiter = lineDelimiter
+				preferXtendStubs = false
+			}
+		}
 		
 		language = {
-			uri = "classpath:/org/eclipse/xtext/parsetree/reconstr/Bug299395TestLanguage.xtext"
+			grammarUri = "classpath:/org/eclipse/xtext/parsetree/reconstr/Bug299395TestLanguage.xtext"
 			fragment = @TestLanguagesFragments auto-inject {}
 		}
 		language = {
-			uri = "classpath:/org/eclipse/xtext/parsetree/reconstr/Bug302128TestLanguage.xtext"
+			grammarUri = "classpath:/org/eclipse/xtext/parsetree/reconstr/Bug302128TestLanguage.xtext"
 			fragment = @TestLanguagesFragments auto-inject {}
 		}
 		language = {
-			uri = "classpath:/org/eclipse/xtext/parsetree/reconstr/PartialSerializationTestLanguage.xtext"
+			grammarUri = "classpath:/org/eclipse/xtext/parsetree/reconstr/PartialSerializationTestLanguage.xtext"
 			fragment = @TestLanguagesFragments auto-inject {}
 		}
 		language = {
-			uri = "classpath:/org/eclipse/xtext/parsetree/reconstr/SerializationBug269362TestLanguage.xtext"
+			grammarUri = "classpath:/org/eclipse/xtext/parsetree/reconstr/SerializationBug269362TestLanguage.xtext"
 			fragment = @TestLanguagesFragments auto-inject {}
 		}
 		language = {
-			uri = "classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTestLanguage.xtext"
+			grammarUri = "classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTestLanguage.xtext"
 			fragment = @TestLanguagesFragments auto-inject {}
 		}
 		language = {
-			uri = "classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.xtext"
+			grammarUri = "classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.xtext"
 			fragment = @TestLanguagesFragments auto-inject {}
 		}
 		language = {
-			uri = "classpath:/org/eclipse/xtext/parsetree/reconstr/SerializationErrorTestLanguage.xtext"
+			grammarUri = "classpath:/org/eclipse/xtext/parsetree/reconstr/SerializationErrorTestLanguage.xtext"
 			fragment = @TestLanguagesFragments auto-inject {}
 		}
 		language = {
-			uri = "classpath:/org/eclipse/xtext/parsetree/reconstr/HiddenTokensMergerTestLanguage.xtext"
+			grammarUri = "classpath:/org/eclipse/xtext/parsetree/reconstr/HiddenTokensMergerTestLanguage.xtext"
 			fragment = @TestLanguagesFragments auto-inject {}
 		}
 	}

@@ -1,34 +1,23 @@
 module org.eclipse.xtext.TestLanguagesFragments
 
-import org.eclipse.xtext.generator.*
+import org.eclipse.xtext.xtext.generator.*
 
 var genModel = ""
-var basePackage = ""
-var javaModelDirectory = ""
-var xmiModelDirectory = ""
-var file.extensions = ""
 var classSplitting = true
 var skipGenerate = false
 var backtrack = false
 var memoize = false
 var generateDebugData = false
-var srcGenOnly=true
+var generateStub = false
 var emfRuntimeVersion = "2.9"
 
-var runtimeProjectName = "org.eclipse.xtext.tests"
-var runtimeProjectPath = "../${runtimeProjectName}"
-var ideaProjectName = "org.eclipse.xtext.core.idea.tests"
-var ideaProjectPath = "../../intellij/${ideaProjectName}"
-
-CompositeGeneratorFragment {
-	fragment = parser.antlr.XtextAntlrGeneratorFragment auto-inject {
+CompositeGeneratorFragment2 {
+	fragment = parser.antlr.XtextAntlrGeneratorFragment2 auto-inject {
 		options = auto-inject {}
+		debugGrammar = true
 	}
-	fragment = parser.antlr.DebugAntlrGeneratorFragment auto-inject {}
-	fragment = resourceFactory.ResourceFactoryFragment { 
-		fileExtensions = file.extensions
-	}
-	fragment = grammarAccess.GrammarAccessFragment auto-inject {}
-	fragment = ecore.EcoreGeneratorFragment auto-inject {}
-	fragment = serializer.SerializerFragment auto-inject {}
+	fragment = resourceFactory.ResourceFactoryFragment2 {}
+	fragment = grammarAccess.GrammarAccessFragment2 auto-inject {}
+	fragment = tests.TestsEMFGeneratorFragment auto-inject {}
+	fragment = serializer.SerializerFragment2 auto-inject {}
 }

@@ -10,7 +10,7 @@ module org.eclipse.xtext.parser.parameters.GenerateParametersTestLanguages
 import org.eclipse.emf.mwe2.runtime.workflow.Workflow
 import org.eclipse.emf.mwe.utils.*
 import org.eclipse.xtext.*
-import org.eclipse.xtext.generator.*
+import org.eclipse.xtext.xtext.generator.*
 
 var projectName = "org.eclipse.xtext.tests"
 var runtimeProject = "../${projectName}"
@@ -30,30 +30,46 @@ Workflow {
 		directory = "../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/parameters/idea"
 	}
 	
-	component = Generator auto-inject {
-		pathRtProject = runtimeProject
-		pathTestProject = runtimeProject
-		projectNameRt = projectName
+	component = XtextGenerator {
+		cleaner = {
+			enabled = false
+		}
+		configuration = {
+			project = model.project.StandardProjectConfig {
+				baseName = projectName
+				rootPath = ".."
+				runtimeTest = {
+					enabled = true
+					root = runtimeProject
+					src = "${runtimeProject}/src"
+					srcGen = "${runtimeProject}/src-gen"
+				}
+			}
+			code = {
+				lineDelimiter = lineDelimiter
+				preferXtendStubs = false
+			}
+		}
 		
 		language = {
-			uri = "classpath:/org/eclipse/xtext/parser/parameters/ParametersTestLanguage.xtext"
+			grammarUri = "classpath:/org/eclipse/xtext/parser/parameters/ParametersTestLanguage.xtext"
 			fragment = @TestLanguagesFragments auto-inject {}
-			fragment = junit.Junit4Fragment {}
+			fragment = xtext.generator.junit.Junit4Fragment2 {}
 		}
 		language = {
-			uri = "classpath:/org/eclipse/xtext/parser/parameters/TwoParametersTestLanguage.xtext"
+			grammarUri = "classpath:/org/eclipse/xtext/parser/parameters/TwoParametersTestLanguage.xtext"
 			fragment = @TestLanguagesFragments auto-inject {}
-			fragment = junit.Junit4Fragment {}
+			fragment = xtext.generator.junit.Junit4Fragment2 {}
 		}
 		language = {
-			uri = "classpath:/org/eclipse/xtext/parser/parameters/NoParametersTestLanguage.xtext"
+			grammarUri = "classpath:/org/eclipse/xtext/parser/parameters/NoParametersTestLanguage.xtext"
 			fragment = @TestLanguagesFragments auto-inject {}
-			fragment = junit.Junit4Fragment {}
+			fragment = xtext.generator.junit.Junit4Fragment2 {}
 		}
 		language = {
-			uri = "classpath:/org/eclipse/xtext/parser/parameters/ParametersTestLanguageEx.xtext"
+			grammarUri = "classpath:/org/eclipse/xtext/parser/parameters/ParametersTestLanguageEx.xtext"
 			fragment = @TestLanguagesFragmentsEx auto-inject {}
-			fragment = junit.Junit4Fragment {}
+			fragment = xtext.generator.junit.Junit4Fragment2 {}
 		}
 	}
 }
