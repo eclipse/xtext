@@ -33,5 +33,4 @@ jar {
 if (isTestProject) {
 	jar.from(sourceSets.test.output)
 	uploadArchives.enabled = false
-	javadoc.enabled = false
 }

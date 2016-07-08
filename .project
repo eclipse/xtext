@@ -14,4 +14,15 @@
 	<natures>
 		<nature>org.eclipse.buildship.core.gradleprojectnature</nature>
 	</natures>
+	<filteredResources>
+		<filter>
+			<id>1467961969409</id>
+			<name></name>
+			<type>10</type>
+			<matcher>
+				<id>org.eclipse.ui.ide.multiFilter</id>
+				<arguments>1.0-name-matches-false-false-org.eclipse.xtext.*</arguments>
+			</matcher>
+		</filter>
+	</filteredResources>
 </projectDescription>
