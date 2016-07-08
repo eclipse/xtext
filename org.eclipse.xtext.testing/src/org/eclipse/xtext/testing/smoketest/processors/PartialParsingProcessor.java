@@ -27,7 +27,6 @@ import com.google.inject.Inject;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
- * @since 2.8
  */
 public class PartialParsingProcessor extends DeltaScenarioProcessor {
 

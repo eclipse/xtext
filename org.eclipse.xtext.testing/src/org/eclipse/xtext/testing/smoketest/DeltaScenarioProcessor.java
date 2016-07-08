@@ -14,7 +14,6 @@ import org.eclipse.xtext.util.ReplaceRegion;
  * in more information about the scenario.
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
- * @since 2.8
  */
 public abstract class DeltaScenarioProcessor extends ScenarioProcessor {
 

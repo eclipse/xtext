@@ -29,7 +29,6 @@ import com.google.inject.Provider;
  * all resources are available in the resource set.
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
- * @since 2.8
  */
 public class ResourceHelper {
 
@@ -73,9 +72,6 @@ public class ResourceHelper {
 		return resource(getAsStream(text), uriToUse, null, resourceSetToUse);
 	}
 	
-	/**
-	 * @since 2.8
-	 */
 	public Resource resource(CharSequence text, URI uriToUse) throws Exception {
 		return resource(getAsStream(text), uriToUse, null, createResourceSet());
 	}

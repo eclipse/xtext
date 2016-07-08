@@ -57,9 +57,6 @@ public class XtextRunner extends BlockJUnit4ClassRunner {
 		}
 	}
 
-	/**
-	 * @since 2.7
-	 */
 	protected Statement superMethodBlock(FrameworkMethod method) {
 		return super.methodBlock(method);
 	}

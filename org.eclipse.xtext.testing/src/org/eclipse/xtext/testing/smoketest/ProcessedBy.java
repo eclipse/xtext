@@ -21,7 +21,6 @@ import com.google.common.annotations.Beta;
  * that processes a given input string.
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
- * @since 2.7
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)

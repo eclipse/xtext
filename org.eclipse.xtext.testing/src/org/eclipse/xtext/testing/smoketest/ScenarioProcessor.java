@@ -15,11 +15,10 @@ import com.google.inject.Injector;
  * Abstract base class for a smoke test scenario processor.
  * Clients implement {@link #processFile(String)} and optionally
  * {@link #preProcess(String)}. The processor instance is created by
- * the guice injector that is returned by the {@link org.eclipse.xtext.junit4.IInjectorProvider}
+ * the guice injector that is returned by the {@link org.eclipse.xtext.testing.IInjectorProvider}
  * of the test class.
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
- * @since 2.7
  */
 @Beta
 public abstract class ScenarioProcessor {

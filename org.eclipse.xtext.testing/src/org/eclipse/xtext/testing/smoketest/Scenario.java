@@ -25,7 +25,6 @@ import com.google.common.collect.Iterables;
  * Default scenarios that are used for permuting smoke tests.
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
- * @since 2.7
  */
 @Beta
 public enum Scenario {
@@ -159,8 +158,6 @@ public enum Scenario {
 	
 	/**
 	 * Create permutations of the input document and pass that to the given tester.
-	 * 
-	 * @since 2.8
 	 */
 	public abstract void processInput(String input, DeltaScenarioProcessor tester) throws Exception;
 }

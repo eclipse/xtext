@@ -52,45 +52,27 @@ public class ValidationTestHelper {
 		assertNoError(model.eResource(), issueCode, null);
 	}
 	
-	/**
-	 * @since 2.9
-	 */
 	public void assertNoError(final EObject model, final String issueCode, final String userData) {
 		assertNoError(model.eResource(), issueCode, userData);
 	}
 
-	/**
-	 * @since 2.4
-	 */
 	public void assertNoErrors(final EObject model, final EClass objectType, final String code,
 			final String... messageParts) {
 		assertNoIssues(model, objectType, code, Severity.ERROR, messageParts);
 	}
 	
-	/**
-	 * @since 2.6
-	 */
 	public void assertNoErrors(final EObject model, final String code) {
 		assertNoIssues(model, EcorePackage.Literals.EOBJECT, code, Severity.ERROR);
 	}
 	
-	/**
-	 * @since 2.4
-	 */
 	public void assertNoIssues(final EObject model, final EClass objectType) {
 		assertNoIssues(model.eResource(), objectType);
 	}
 	
-	/**
-	 * @since 2.4
-	 */
 	public void assertNoIssue(final EObject model, final EClass objectType, final String issueCode) {
 		assertNoIssue(model.eResource(), objectType, issueCode);
 	}
 
-	/**
-	 * @since 2.4
-	 */
 	public void assertError(final EObject model, final EClass objectType, final String code, int offset, int length, 
 			final String... messageParts) {
 		assertIssue(model, objectType, code, offset, length, Severity.ERROR, messageParts);
@@ -101,33 +83,21 @@ public class ValidationTestHelper {
 		assertIssue(model, objectType, code, Severity.ERROR, messageParts);
 	}
 	
-	/**
-	 * @since 2.4
-	 */
 	public void assertIssue(final EObject model, final EClass objectType, final String code, final Severity severity,
 			final String... messageParts) {
 		assertIssue(model, objectType, code, -1, -1, severity, messageParts);
 	}
 	
-	/**
-	 * @since 2.4
-	 */
 	public void assertIssue(EObject model, EClass objectType, String issueCode, int offset, int length,  Severity severity,
 			String... messageParts) {
 		assertIssue(model.eResource(), objectType, issueCode, offset, length, severity, messageParts);
 	}
 	
-	/**
-	 * @since 2.4
-	 */
 	public void assertNoIssues(final EObject model, final EClass objectType, final String code, final Severity severity,
 			final String... messageParts) {
 		assertNoIssues(model, objectType, code, -1, -1, severity, messageParts);
 	}
 	
-	/**
-	 * @since 2.4
-	 */
 	public void assertNoIssues(EObject model, EClass objectType, String issueCode, int offset, int length,  Severity severity,
 			String... messageParts) {
 		assertNoIssues(model.eResource(), objectType, issueCode, offset, length, severity, messageParts);
@@ -138,43 +108,28 @@ public class ValidationTestHelper {
 		assertIssue(model, objectType, code, Severity.WARNING, messageParts);
 	}
 
-	/**
-	 * @since 2.4
-	 */
 	public void assertNoWarnings(final EObject model, final EClass objectType, final String code,
 			final String... messageParts) {
 		assertNoIssues(model, objectType, code, Severity.WARNING, messageParts);
 	}
 
-	/**
-	 * @since 2.4
-	 */
 	public void assertWarning(final EObject model, final EClass objectType, final String code, int offset, int length, 
 			final String... messageParts) {
 		assertIssue(model, objectType, code, offset, length, Severity.WARNING, messageParts);
 	}
 
-	/**
-	 * @since 2.8
-	 */
 	public List<Issue> validate(Resource resource) {
 		IResourceValidator validator = ((XtextResource) resource).getResourceServiceProvider()
 				.getResourceValidator();
 		return validator.validate(resource, CheckMode.ALL, CancelIndicator.NullImpl);
 	}
 	
-	/**
-	 * @since 2.8
-	 */
 	public void assertNoIssues(final Resource resource) {
 		final List<Issue> validate = validate(resource);
 		if (!isEmpty(validate))
 			fail("Expected no issues, but got :" + getIssuesAsString(resource, validate, new StringBuilder()));
 	}
 	
-	/**
-	 * @since 2.8
-	 */
 	public void assertNoErrors(final Resource resource) {
 		final List<Issue> validate = validate(resource);
 		Iterable<Issue> issues = filter(validate, new Predicate<Issue>() {
@@ -187,16 +142,10 @@ public class ValidationTestHelper {
 			fail("Expected no errors, but got :" + getIssuesAsString(resource, issues, new StringBuilder()));
 	}
 
-	/**
-	 * @since 2.8
-	 */
 	public void assertNoError(final Resource resource, final String issuecode) {
 		assertNoError(resource, issuecode, null);
 	}
 	
-	/**
-	 * @since 2.9
-	 */
 	public void assertNoError(final Resource resource, final String issuecode, final String userData) {
 		final List<Issue> validate = validate(resource);
 		Iterable<Issue> issues = filter(validate, new Predicate<Issue>() {
@@ -212,24 +161,15 @@ public class ValidationTestHelper {
 			fail("Expected no error '" + issuecode + "' but got " + getIssuesAsString(resource, issues, new StringBuilder()));
 	}
 
-	/**
-	 * @since 2.8
-	 */
 	public void assertNoErrors(final Resource resource, final EClass objectType, final String code,
 			final String... messageParts) {
 		assertNoIssues(resource, objectType, code, Severity.ERROR, messageParts);
 	}
 	
-	/**
-	 * @since 2.8
-	 */
 	public void assertNoErrors(final Resource resource, final String code) {
 		assertNoIssues(resource, EcorePackage.Literals.EOBJECT, code, Severity.ERROR);
 	}
 	
-	/**
-	 * @since 2.8
-	 */
 	public void assertNoIssues(final Resource resource, final EClass objectType) {
 		final List<Issue> validate = validate(resource);
 		Iterable<Issue> issues = filter(validate, new Predicate<Issue>() {
@@ -246,9 +186,6 @@ public class ValidationTestHelper {
 			fail("Expected no error on instances of  '" + objectType.getName() + "' but got " + getIssuesAsString(resource, issues, new StringBuilder()));
 	}
 	
-	/**
-	 * @since 2.8
-	 */
 	public void assertNoIssue(final Resource resource, final EClass objectType, final String issuecode) {
 		final List<Issue> validate = validate(resource);
 		Iterable<Issue> issues = filter(validate, new Predicate<Issue>() {
@@ -268,33 +205,21 @@ public class ValidationTestHelper {
 		}
 	}
 
-	/**
-	 * @since 2.8
-	 */
 	public void assertError(final Resource resource, final EClass objectType, final String code, int offset, int length, 
 			final String... messageParts) {
 		assertIssue(resource, objectType, code, offset, length, Severity.ERROR, messageParts);
 	}
 
-	/**
-	 * @since 2.8
-	 */
 	public void assertError(final Resource resource, final EClass objectType, final String code,
 			final String... messageParts) {
 		assertIssue(resource, objectType, code, Severity.ERROR, messageParts);
 	}
 	
-	/**
-	 * @since 2.8
-	 */
 	public void assertIssue(final Resource resource, final EClass objectType, final String code, final Severity severity,
 			final String... messageParts) {
 		assertIssue(resource, objectType, code, -1, -1, severity, messageParts);
 	}
 	
-	/**
-	 * @since 2.8
-	 */
 	public void assertIssue(final Resource resource, final EClass objectType, final String code, final int offset, final int length,  final Severity severity,
 			final String... messageParts) {
 		final List<Issue> allIssues = validate(resource);
@@ -317,17 +242,11 @@ public class ValidationTestHelper {
 		}
 	}
 	
-	/**
-	 * @since 2.8
-	 */
 	public void assertNoIssues(final Resource resource, final EClass objectType, final String code, final Severity severity,
 			final String... messageParts) {
 		assertNoIssues(resource, objectType, code, -1, -1, severity, messageParts);
 	}
 	
-	/**
-	 * @since 2.8
-	 */
 	public void assertNoIssues(final Resource resource, final EClass objectType, final String code, final int offset, final int length,  final Severity severity,
 			final String... messageParts) {
 		final List<Issue> allIssues = validate(resource);
@@ -346,42 +265,27 @@ public class ValidationTestHelper {
 		}
 	}
 
-	/**
-	 * @since 2.8
-	 */
 	public void assertWarning(final Resource resource, final EClass objectType, final String code,
 			final String... messageParts) {
 		assertIssue(resource, objectType, code, Severity.WARNING, messageParts);
 	}
 
-	/**
-	 * @since 2.8
-	 */
 	public void assertNoWarnings(final Resource resource, final EClass objectType, final String code,
 			final String... messageParts) {
 		assertNoIssues(resource, objectType, code, Severity.WARNING, messageParts);
 	}
 
-	/**
-	 * @since 2.8
-	 */
 	public void assertWarning(final Resource resource, final EClass objectType, final String code, int offset, int length, 
 			final String... messageParts) {
 		assertIssue(resource, objectType, code, offset, length, Severity.WARNING, messageParts);
 	}
 
-	/**
-	 * @since 2.4
-	 */
 	protected Iterable<Issue> matchIssues(final EObject model, final EClass objectType, final String code,
 			final int offset, final int length, final Severity severity, final List<Issue> validate,
 			final String... messageParts) {
 		return doMatchIssues(model.eResource(), objectType, code, offset, length, severity, validate, messageParts);
 	}
 	
-	/**
-	 * @since 2.8
-	 */
 	protected Iterable<Issue> matchIssues(final Resource resource, final EClass objectType, final String code,
 			final int offset, final int length, final Severity severity, final List<Issue> validate,
 			final String... messageParts) {
@@ -393,9 +297,6 @@ public class ValidationTestHelper {
 		return doMatchIssues(resource, objectType, code, offset, length, severity, validate, messageParts);
 	}
 
-	/**
-	 * @since 2.8
-	 */
 	protected Iterable<Issue> doMatchIssues(final Resource resource, final EClass objectType, final String code,
 			final int offset, final int length, final Severity severity, final List<Issue> validate,
 			final String... messageParts) {
@@ -420,16 +321,10 @@ public class ValidationTestHelper {
 		});
 	}
 	
-	/**
-	 * @since 2.4
-	 */
 	protected StringBuilder getIssuesAsString(final EObject model, final Iterable<Issue> issues, StringBuilder result) {
 		return doGetIssuesAsString(model.eResource(), issues, result);
 	}
 	
-	/**
-	 * @since 2.8
-	 */
 	protected StringBuilder getIssuesAsString(final Resource resource, final Iterable<Issue> issues, StringBuilder result) {
 		// keep the original impl of #getIssuesAsString(EObject, ..) in the call graph  
 		List<EObject> contents = resource.getContents();
@@ -439,9 +334,6 @@ public class ValidationTestHelper {
 		return doGetIssuesAsString(resource, issues, result);
 	}
 
-	/**
-	 * @since 2.8
-	 */
 	protected StringBuilder doGetIssuesAsString(Resource resource, final Iterable<Issue> issues, StringBuilder result) {
 		for (Issue issue : issues) {
 			URI uri = issue.getUriToProblem();

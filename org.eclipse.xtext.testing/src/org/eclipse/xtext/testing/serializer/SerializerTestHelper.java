@@ -67,26 +67,17 @@ public class SerializerTestHelper {
 	@Inject
 	protected ValidationTestHelper validationHelper;
 
-	/**
-	 * @since 2.3
-	 */
 	protected void assertEqualWithEmfFormatter(EObject semanticObject, EObject parsed) {
 		String expected = EmfFormatter.objToStr(semanticObject);
 		String actual = EmfFormatter.objToStr(parsed);
 		Assert.assertEquals(expected, actual);
 	}
 
-	/**
-	 * @since 2.3
-	 */
 	public void assertSerializable(EObject semanticObject) {
 		assertSerializeWithNodeModel(semanticObject);
 		assertSerializeWithoutNodeModel(semanticObject);
 	}
 
-	/**
-	 * @since 2.3
-	 */
 	public void assertSerializable(String semanticObject) {
 		assertSerializeWithNodeModel(semanticObject);
 		assertSerializeWithoutNodeModel(semanticObject);
@@ -195,9 +186,6 @@ public class SerializerTestHelper {
 			pair.getFirst().eAdapters().add((Adapter) pair.getSecond());
 	}
 
-	/**
-	 * @since 2.3
-	 */
 	protected String serialize(EObject semanticObject, DelegatingSequenceAcceptor... acceptors) {
 		ISequenceAcceptor debug = null;
 		try {
@@ -228,16 +216,10 @@ public class SerializerTestHelper {
 		}
 	}
 
-	/**
-	 * @since 2.3
-	 */
 	protected String serializeWithNodeModel(EObject semanticObject) {
 		return serialize(semanticObject, new AssertStructureAcceptor(), new AssertNodeModelAcceptor());
 	}
 
-	/**
-	 * @since 2.3
-	 */
 	protected String serializeWithoutNodeModel(EObject semanticObject) {
 		return serialize(semanticObject, new WhitespaceAddingSequenceAcceptor(), new AssertStructureAcceptor());
 	}

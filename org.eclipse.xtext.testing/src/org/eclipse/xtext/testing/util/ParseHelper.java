@@ -30,9 +30,6 @@ public class ParseHelper<T extends EObject> {
 
 	public String fileExtension;
 	
-	/**
-	 * @since 2.5
-	 */
 	@Inject
 	public void setFileExtensionProvider(FileExtensionProvider extensionProvider) {
 		fileExtension = extensionProvider.getPrimaryFileExtension();

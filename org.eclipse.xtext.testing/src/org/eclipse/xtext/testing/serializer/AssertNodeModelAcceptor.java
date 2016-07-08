@@ -44,9 +44,6 @@ public class AssertNodeModelAcceptor extends DelegatingSequenceAcceptor {
 		super.acceptAssignedCrossRefEnum(enumRC, token, value, index, node);
 	}
 
-	/**
-	 * @since 2.3
-	 */
 	@Override
 	public void acceptAssignedCrossRefKeyword(Keyword kw, String token, EObject value, int index, ILeafNode node) {
 		assertNode(node);
@@ -77,9 +74,6 @@ public class AssertNodeModelAcceptor extends DelegatingSequenceAcceptor {
 		super.acceptAssignedKeyword(keyword, token, value, index, node);
 	}
 	
-	/**
-	 * @since 2.3
-	 */
 	@Override
 	public void acceptAssignedKeyword(Keyword keyword, String token, Object value, int index, ILeafNode node) {
 		assertNode(node);

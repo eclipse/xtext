@@ -27,7 +27,6 @@ import com.google.common.annotations.Beta;
  * initializes the test suite.
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
- * @since 2.7
  */
 @Beta
 public class RunnerBuilder extends org.junit.runners.model.RunnerBuilder {

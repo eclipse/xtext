@@ -54,16 +54,10 @@ public class DebugSequenceAcceptor extends DelegatingSequenceAcceptor {
 		this(null, printInstantly);
 	}
 
-	/**
-	 * @since 2.3
-	 */
 	public DebugSequenceAcceptor(ISemanticSequenceAcceptor delegate) {
 		this(delegate, false);
 	}
 
-	/**
-	 * @since 2.3
-	 */
 	public DebugSequenceAcceptor(ISemanticSequenceAcceptor delegate, boolean printInstantly) {
 		super(delegate);
 		this.printInstantly = printInstantly;
@@ -81,9 +75,6 @@ public class DebugSequenceAcceptor extends DelegatingSequenceAcceptor {
 		super.acceptAssignedCrossRefEnum(enumRC, token, value, index, node);
 	}
 
-	/**
-	 * @since 2.3
-	 */
 	@Override
 	public void acceptAssignedCrossRefKeyword(Keyword kw, String token, EObject value, int index, ILeafNode node) {
 		add(titles.doSwitch(kw), token, EmfFormatter.objPath(value), index, node);
@@ -113,9 +104,6 @@ public class DebugSequenceAcceptor extends DelegatingSequenceAcceptor {
 		super.acceptAssignedKeyword(keyword, token, value, index, node);
 	}
 
-	/**
-	 * @since 2.3
-	 */
 	@Override
 	public void acceptAssignedKeyword(Keyword keyword, String token, Object value, int index, ILeafNode node) {
 		add(titles.doSwitch(keyword), token, String.valueOf(value), index, node);

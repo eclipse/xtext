@@ -21,7 +21,6 @@ import com.google.common.annotations.Beta;
  * of the available permutations of the original input.
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
- * @since 2.7
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)

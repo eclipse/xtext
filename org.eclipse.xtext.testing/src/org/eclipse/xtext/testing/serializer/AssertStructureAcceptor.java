@@ -24,7 +24,6 @@ import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
- * @since 2.3
  */
 public class AssertStructureAcceptor extends DelegatingSequenceAcceptor {
 

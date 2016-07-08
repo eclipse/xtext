@@ -54,8 +54,6 @@ import org.junit.Before;
 /**
  * Abstract base class for testing languages in the incremental builder.
  * 
- * @since 2.9
- * 
  * @noreference
  * @noimplement
  */

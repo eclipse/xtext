@@ -21,7 +21,6 @@ import com.google.common.annotations.Beta;
  * skip it during smoke testing.
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
- * @since 2.7
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.METHOD, ElementType.TYPE})

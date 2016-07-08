@@ -27,7 +27,6 @@ import com.google.common.annotations.Beta;
  * by the smoke test, annotate those with {@link IgnoredBySmokeTest}.
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
- * @since 2.7
  */
 @Beta
 public class XtextSmokeTestRunner extends Suite {

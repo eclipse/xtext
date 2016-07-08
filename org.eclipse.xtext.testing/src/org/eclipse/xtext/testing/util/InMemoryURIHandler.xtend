@@ -19,8 +19,6 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 
 /**
- * @since 2.9
- * 
  * @noimplement
  * @noreference
  */
