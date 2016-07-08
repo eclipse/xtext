@@ -29,7 +29,9 @@ import com.google.common.collect.Lists;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
+ * @deprecated Use org.eclipse.xtext.testing.serializer.DebugSequenceAcceptor instead
  */
+@Deprecated
 public class DebugSequenceAcceptor extends DelegatingSequenceAcceptor {
 
 	protected final static int COLS = 5;

@@ -14,20 +14,19 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import com.google.common.annotations.Beta;
-
 /**
  * Mandatory annotation for smoke test suites. Points to the class
  * that processes a given input string.
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  * @since 2.7
+ * @deprecated Use org.eclipse.xtext.testing.smoketest.ProcessedBy instead
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 @Inherited
 @Documented
-@Beta
+@Deprecated
 public @interface ProcessedBy {
 	
 	/**

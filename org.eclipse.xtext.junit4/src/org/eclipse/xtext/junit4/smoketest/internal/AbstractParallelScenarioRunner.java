@@ -30,13 +30,12 @@ import org.junit.runners.model.InitializationError;
 import org.junit.runners.model.RunnerScheduler;
 import org.junit.runners.model.Statement;
 
-import com.google.common.annotations.Beta;
 import com.google.common.collect.Lists;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@Beta
+@SuppressWarnings("deprecation")
 public abstract class AbstractParallelScenarioRunner extends AbstractScenarioRunner {
 
 	private final Map<FrameworkMethod, String> testData;

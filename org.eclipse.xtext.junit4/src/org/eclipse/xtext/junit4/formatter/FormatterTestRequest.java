@@ -17,6 +17,10 @@ import org.eclipse.xtext.xbase.lib.Procedures;
 import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 
+/**
+ * @deprecated Use org.eclipse.xtext.testing.formatter.FormatterTestRequest instead
+ */
+@Deprecated
 public class FormatterTestRequest {
 	private boolean allowSyntaxErrors = false;
 	private boolean allowUnformattedWhitespace = true; // TODO: default should be false

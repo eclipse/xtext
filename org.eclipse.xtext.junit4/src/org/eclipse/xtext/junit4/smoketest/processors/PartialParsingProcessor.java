@@ -28,7 +28,9 @@ import com.google.inject.Inject;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  * @since 2.8
+ * @deprecated Use org.eclipse.xtext.testing.smoketest.processors.PartialParsingProcessor instead
  */
+@Deprecated
 public class PartialParsingProcessor extends DeltaScenarioProcessor {
 
 	private static final String DELIM = "\n----------------------\n";

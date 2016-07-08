@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.junit4.smoketest;
 
-import com.google.common.annotations.Beta;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 
@@ -20,8 +19,9 @@ import com.google.inject.Injector;
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  * @since 2.7
+ * @deprecated Use org.eclipse.xtext.testing.smoketest.ScenarioProcessor instead
  */
-@Beta
+@Deprecated
 public abstract class ScenarioProcessor {
 
 	@Inject

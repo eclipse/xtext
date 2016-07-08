@@ -20,11 +20,13 @@ import java.lang.annotation.Target;
  * 
  * @author Michael Clay - Initial contribution and API
  * @see org.eclipse.xtext.junit4.model.IInjectorProvider
+ * @deprecated Use org.eclipse.xtext.testing.InjectWith instead
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.TYPE})
 @Inherited
 @Documented
+@Deprecated
 public @interface InjectWith {
 	/**
 	 * the IInjectorProvider class which will be used to create an {@link Injector Injector}.

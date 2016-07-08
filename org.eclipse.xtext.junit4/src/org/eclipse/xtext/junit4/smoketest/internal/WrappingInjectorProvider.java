@@ -21,7 +21,6 @@ import org.eclipse.xtext.resource.FileExtensionProvider;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 
-import com.google.common.annotations.Beta;
 import com.google.inject.Binder;
 import com.google.inject.Binding;
 import com.google.inject.Guice;
@@ -33,7 +32,7 @@ import com.google.inject.util.Modules;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@Beta
+@SuppressWarnings("deprecation")
 public class WrappingInjectorProvider implements IInjectorProvider, IRegistryConfigurator {
 
 	private final IInjectorProvider delegate;

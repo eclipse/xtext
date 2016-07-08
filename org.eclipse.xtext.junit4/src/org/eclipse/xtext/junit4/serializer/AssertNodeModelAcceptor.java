@@ -20,7 +20,9 @@ import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
+ * @deprecated Use org.eclipse.xtext.testing.serializer.AssertNodeModelAcceptor instead
  */
+@Deprecated
 public class AssertNodeModelAcceptor extends DelegatingSequenceAcceptor {
 
 	public AssertNodeModelAcceptor() {

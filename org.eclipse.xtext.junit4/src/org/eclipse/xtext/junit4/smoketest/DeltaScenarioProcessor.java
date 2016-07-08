@@ -15,7 +15,9 @@ import org.eclipse.xtext.util.ReplaceRegion;
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  * @since 2.8
+ * @deprecated Use org.eclipse.xtext.testing.smoketest.DeltaScenarioProcessor instead
  */
+@Deprecated
 public abstract class DeltaScenarioProcessor extends ScenarioProcessor {
 
 	@Override

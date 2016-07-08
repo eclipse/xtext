@@ -11,8 +11,6 @@ import org.eclipse.xtext.junit4.smoketest.internal.RunnerBuilder;
 import org.junit.runners.Suite;
 import org.junit.runners.model.InitializationError;
 
-import com.google.common.annotations.Beta;
-
 /**
  * Use this runner on a class that is annotated with {@link Suite.SuiteClasses}
  * to test the input documents that are used in that test class for exceptions
@@ -28,8 +26,9 @@ import com.google.common.annotations.Beta;
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  * @since 2.7
+ * @deprecated Use org.eclipse.xtext.testing.smoketest.XtextSmokeTestRunner instead
  */
-@Beta
+@Deprecated
 public class XtextSmokeTestRunner extends Suite {
 
 	public XtextSmokeTestRunner(Class<?> klass) throws InitializationError {

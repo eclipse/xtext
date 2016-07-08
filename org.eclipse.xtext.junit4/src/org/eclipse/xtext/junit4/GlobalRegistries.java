@@ -25,7 +25,9 @@ import org.eclipse.xtext.validation.CompositeEValidator;
  * Utility for tests to avoid being based on and doing any side effects to the global registries from EMF.
  * 
  * @author Sven Efftinge - Initial contribution and API
+ * @deprecated Use org.eclipse.xtext.testing.GlobalRegistries instead
  */
+@Deprecated
 public class GlobalRegistries {
 	
 	public static class GlobalStateMemento {

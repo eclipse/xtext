@@ -15,7 +15,9 @@ import com.google.inject.Injector;
  * @author Michael Clay - Initial contribution and API
  * 
  * @see com.google.inject.Injector
+ * @deprecated Use org.eclipse.xtext.testing.IInjectorProvider instead
  */
+@Deprecated
 public interface IInjectorProvider {
 
 	Injector getInjector();

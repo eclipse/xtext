@@ -12,7 +12,9 @@ package org.eclipse.xtext.junit4;
  * state registries such as {@link org.eclipse.emf.ecore.EPackage.Registry}.
  * 
  * @author Michael Clay - Initial contribution and API
+ * @deprecated Use org.eclipse.xtext.testing.IRegistryConfigurator instead
  */
+@Deprecated
 public interface IRegistryConfigurator {
 
 	/**

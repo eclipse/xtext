@@ -14,20 +14,19 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import com.google.common.annotations.Beta;
-
 /**
  * Optionally annotate a test class or test method with {@code @IgnoredBySmokeTest} to
  * skip it during smoke testing.
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  * @since 2.7
+ * @deprecated Use org.eclipse.xtext.testing.smoketest.IgnoredBySmokeTest instead
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.METHOD, ElementType.TYPE})
 @Inherited
 @Documented
-@Beta
+@Deprecated
 public @interface IgnoredBySmokeTest {
 	/**
 	 * The optional reason why the test is ignored when run as a smoke test.

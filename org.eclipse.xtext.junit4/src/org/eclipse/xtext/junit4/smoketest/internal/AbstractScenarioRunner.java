@@ -22,12 +22,10 @@ import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.InitializationError;
 import org.junit.runners.model.Statement;
 
-import com.google.common.annotations.Beta;
-
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@Beta
+@SuppressWarnings("deprecation")
 public abstract class AbstractScenarioRunner extends XtextRunner {
 
 	private WrappingInjectorProvider injectorProvider = null;

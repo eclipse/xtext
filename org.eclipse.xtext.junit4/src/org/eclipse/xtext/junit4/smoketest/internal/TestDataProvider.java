@@ -16,13 +16,11 @@ import org.eclipse.xtext.parser.AbstractParser;
 import org.eclipse.xtext.parser.IParseResult;
 import org.junit.Assert;
 
-import com.google.common.annotations.Beta;
 import com.google.common.io.CharStreams;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@Beta
 public class TestDataProvider extends AbstractParser { 
 	@Override
 	public IParseResult parse(ParserRule rule, Reader reader) throws TestDataCarrier {

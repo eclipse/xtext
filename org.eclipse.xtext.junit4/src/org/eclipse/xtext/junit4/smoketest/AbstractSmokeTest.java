@@ -30,7 +30,9 @@ import com.google.inject.Provider;
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author Sven Efftinge
+ * @deprecated Use org.eclipse.xtext.testing.smoketest.AbstractSmokeTest instead
  */
+@Deprecated
 public abstract class AbstractSmokeTest {
 
 	@Inject

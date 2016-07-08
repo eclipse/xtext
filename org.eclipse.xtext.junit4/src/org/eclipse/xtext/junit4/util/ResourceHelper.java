@@ -30,7 +30,9 @@ import com.google.inject.Provider;
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  * @since 2.8
+ * @deprecated Use org.eclipse.xtext.testing.util.ResourceHelper instead
  */
+@Deprecated
 public class ResourceHelper {
 
 	@Inject

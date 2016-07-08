@@ -17,7 +17,6 @@ import org.junit.runner.notification.RunNotifier;
 import org.junit.runners.ParentRunner;
 import org.junit.runners.model.InitializationError;
 
-import com.google.common.annotations.Beta;
 import com.google.common.collect.Lists;
 
 /**
@@ -26,7 +25,7 @@ import com.google.common.collect.Lists;
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@Beta
+@SuppressWarnings("deprecation")
 public class AllScenariosRunner extends ParentRunner<Runner> {
 
 	private final List<Runner> runners;

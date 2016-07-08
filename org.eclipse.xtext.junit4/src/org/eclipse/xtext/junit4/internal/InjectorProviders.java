@@ -13,7 +13,6 @@ import org.eclipse.xtext.junit4.IInjectorProvider;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.junit.runners.model.TestClass;
 
-import com.google.common.annotations.Beta;
 import com.google.common.collect.ClassToInstanceMap;
 import com.google.common.collect.MutableClassToInstanceMap;
 
@@ -25,7 +24,7 @@ import com.google.common.collect.MutableClassToInstanceMap;
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@Beta
+@SuppressWarnings("deprecation")
 public class InjectorProviders {
 
 	private static ClassToInstanceMap<IInjectorProvider> injectorProviderClassCache = MutableClassToInstanceMap.create();

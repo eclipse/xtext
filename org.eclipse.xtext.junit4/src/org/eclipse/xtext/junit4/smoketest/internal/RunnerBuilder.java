@@ -20,8 +20,6 @@ import org.junit.internal.builders.IgnoredClassRunner;
 import org.junit.runner.Runner;
 import org.junit.runners.model.InitializationError;
 
-import com.google.common.annotations.Beta;
-
 /**
  * Reads all the smoke test suite related annotations on a class and 
  * initializes the test suite.
@@ -29,7 +27,7 @@ import com.google.common.annotations.Beta;
  * @author Sebastian Zarnekow - Initial contribution and API
  * @since 2.7
  */
-@Beta
+@SuppressWarnings("deprecation")
 public class RunnerBuilder extends org.junit.runners.model.RunnerBuilder {
 	
 	private final Delegate delegate;

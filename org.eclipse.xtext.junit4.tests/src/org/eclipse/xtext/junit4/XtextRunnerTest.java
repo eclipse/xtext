@@ -7,12 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.junit4;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-import org.eclipse.xtext.junit4.IInjectorProvider;
-import org.eclipse.xtext.junit4.IRegistryConfigurator;
-import org.eclipse.xtext.junit4.InjectWith;
-import org.eclipse.xtext.junit4.XtextRunner;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -29,6 +26,7 @@ import com.google.inject.Module;
  */
 @InjectWith(XtextRunnerTest.MyInjectorProvider.class)
 @RunWith(XtextRunner.class)
+@SuppressWarnings("deprecation")
 public class XtextRunnerTest {
 
 	private static boolean injectorCreated = false;

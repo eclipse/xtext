@@ -27,7 +27,9 @@ import org.eclipse.xtext.xbase.lib.Pure;
  * 
  * @noimplement
  * @noreference
+ * @deprecated Use org.eclipse.xtext.testing.util.InMemoryURIHandler instead
  */
+@Deprecated
 @SuppressWarnings("all")
 public class InMemoryURIHandler implements URIHandler {
   @Accessors

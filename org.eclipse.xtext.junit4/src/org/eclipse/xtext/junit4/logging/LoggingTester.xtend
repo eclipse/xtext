@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.junit4.logging
 
-import com.google.common.annotations.Beta
 import com.google.common.primitives.Longs
 import java.util.Collections
 import java.util.Comparator
@@ -25,7 +24,11 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.Data
 import org.junit.Assert
 
-@Beta class LoggingTester {
+/**
+ * @deprecated Use org.eclipse.xtext.testing.logging.LoggingTester instead
+ */
+@Deprecated
+class LoggingTester {
 
 	@Data
 	static class LogCapture {

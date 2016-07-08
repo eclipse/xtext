@@ -47,7 +47,9 @@ import com.google.inject.Provider;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
+ * @deprecated Use org.eclipse.xtext.testing.serializer.SerializerTestHelper instead
  */
+@Deprecated
 public class SerializerTester {
 	@Inject
 	protected ContextFinder contextFinder;

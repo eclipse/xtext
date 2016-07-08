@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.junit4.logging;
 
-import com.google.common.annotations.Beta;
 import com.google.common.base.Objects;
 import com.google.common.primitives.Longs;
 import java.util.ArrayList;
@@ -37,7 +36,10 @@ import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 import org.junit.Assert;
 
-@Beta
+/**
+ * @deprecated Use org.eclipse.xtext.testing.logging.LoggingTester instead
+ */
+@Deprecated
 @SuppressWarnings("all")
 public class LoggingTester {
   @Data

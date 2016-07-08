@@ -22,7 +22,9 @@ import com.google.inject.Inject;
  * Some convenience methods for parsing (i.e. testing, etc.)
  * 
  * @author Sven Efftinge - Initial contribution and API
+ * @deprecated Use org.eclipse.xtext.testing.util.ParseHelper instead
  */
+@Deprecated
 public class ParseHelper<T extends EObject> {
 
 	@Inject

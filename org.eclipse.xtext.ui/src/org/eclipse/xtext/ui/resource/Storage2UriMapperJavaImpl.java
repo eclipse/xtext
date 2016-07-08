@@ -15,7 +15,6 @@ import static java.util.Collections.*;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -56,7 +55,6 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.ForwardingMap;
-import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 

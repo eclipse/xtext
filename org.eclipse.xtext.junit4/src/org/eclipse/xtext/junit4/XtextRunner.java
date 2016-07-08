@@ -17,7 +17,9 @@ import com.google.inject.Injector;
 
 /**
  * @author Michael Clay - Initial contribution and API
+ * @deprecated Use org.eclipse.xtext.testing.XtextRunner instead
  */
+@Deprecated
 public class XtextRunner extends BlockJUnit4ClassRunner {
 	public XtextRunner(Class<?> klass) throws InitializationError {
 		super(klass);

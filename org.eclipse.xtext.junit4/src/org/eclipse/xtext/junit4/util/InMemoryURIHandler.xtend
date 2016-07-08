@@ -23,7 +23,9 @@ import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
  * 
  * @noimplement
  * @noreference
+ * @deprecated Use org.eclipse.xtext.testing.util.InMemoryURIHandler instead
  */
+ @Deprecated
 class InMemoryURIHandler implements URIHandler {
 
 	@Accessors @FinalFieldsConstructor static class InMemFile {

@@ -11,7 +11,6 @@ import java.util.Map;
 
 import org.eclipse.xtext.junit4.IInjectorProvider;
 
-import com.google.common.annotations.Beta;
 import com.google.common.collect.Maps;
 
 /**
@@ -19,7 +18,7 @@ import com.google.common.collect.Maps;
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@Beta
+@SuppressWarnings("deprecation")
 public class InjectorCache {
 	private static Map<IInjectorProvider, WrappingInjectorProvider> cachedInjectors = Maps.newHashMap();
 	

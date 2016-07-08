@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.junit4.smoketest.internal;
 
-import com.google.common.annotations.Beta;
-
 /**
  * An error that is thrown by the {@link TestDataProvider} to bail out
  * with the text to parse. Caught by the {@link ScenarioRunner} to
@@ -16,7 +14,6 @@ import com.google.common.annotations.Beta;
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@Beta
 class TestDataCarrier extends AssertionError {
 	private static final long serialVersionUID = 1L;
 	private String data;

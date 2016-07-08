@@ -21,6 +21,7 @@ import com.google.common.collect.Lists;
 /**
  * @author Sebastian Zarnekow
  */
+@SuppressWarnings("deprecation")
 public class SmokeTestScenarioTest {
 
 	@Test public void testSkipLastCharacters_01() throws Exception {

@@ -14,20 +14,19 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import com.google.common.annotations.Beta;
-
 /**
  * Optional annotation for a smoke test suite to use only a subset
  * of the available permutations of the original input.
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  * @since 2.7
+ * @deprecated Use org.eclipse.xtext.testing.smoketest.Scenarios instead
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 @Inherited
 @Documented
-@Beta
+@Deprecated
 public @interface Scenarios {
 
 	/**

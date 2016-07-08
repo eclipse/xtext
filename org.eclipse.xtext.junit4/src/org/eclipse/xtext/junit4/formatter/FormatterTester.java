@@ -45,7 +45,9 @@ import com.google.inject.Provider;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
+ * @deprecated Use org.eclipse.xtext.testing.formatter.FormatterTestHelper instead
  */
+@Deprecated
 public class FormatterTester {
 
 	@Inject(optional = true)

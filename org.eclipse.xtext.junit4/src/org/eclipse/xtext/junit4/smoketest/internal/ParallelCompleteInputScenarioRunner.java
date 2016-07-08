@@ -12,12 +12,10 @@ import org.eclipse.xtext.junit4.smoketest.ScenarioProcessor;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.InitializationError;
 
-import com.google.common.annotations.Beta;
-
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@Beta
+@SuppressWarnings("deprecation")
 public class ParallelCompleteInputScenarioRunner extends AbstractParallelScenarioRunner {
 
 	public ParallelCompleteInputScenarioRunner(Class<?> klass, Class<? extends ScenarioProcessor> processorClass)

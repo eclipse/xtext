@@ -18,7 +18,6 @@ import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.util.StringInputStream;
 import org.junit.Assert;
 
-import com.google.common.annotations.Beta;
 import com.google.common.collect.Iterables;
 
 /**
@@ -26,8 +25,9 @@ import com.google.common.collect.Iterables;
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  * @since 2.7
+ * @deprecated Use org.eclipse.xtext.testing.smoketest.Scenario instead
  */
-@Beta
+@Deprecated
 public enum Scenario {
 	/**
 	 * Simulates typing from the first to the last character.

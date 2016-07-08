@@ -11,6 +11,7 @@ import com.google.inject.Injector;
 /**
  * @since 2.9
  */
+@SuppressWarnings("deprecation")
 public class XtextInjectorProvider implements IInjectorProvider, IRegistryConfigurator {
 
 	protected GlobalStateMemento stateBeforeInjectorCreation;

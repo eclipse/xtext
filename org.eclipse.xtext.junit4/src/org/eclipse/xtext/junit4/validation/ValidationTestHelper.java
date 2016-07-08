@@ -33,7 +33,9 @@ import com.google.common.collect.Iterables;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  * @author Sven Efftinge
+ * @deprecated Use org.eclipse.xtext.testing.validation.ValidationTestHelper instead
  */
+@Deprecated
 public class ValidationTestHelper {
 
 	public List<Issue> validate(EObject model) {
