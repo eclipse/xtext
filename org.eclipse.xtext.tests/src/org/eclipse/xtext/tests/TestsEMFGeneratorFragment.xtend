@@ -32,7 +32,7 @@ class TestsEMFGeneratorFragment extends EMFGeneratorFragment2 {
 		else
 			javaModelDirectory
 				+ '/' + grammar.name.substring(0, grammar.name.lastIndexOf('.')).replace('.', '/')
-				+ grammar.modelName + '.ecore'
+				+ '/' + grammar.modelName + '.ecore'
 	}
 	
 	override protected getGenModelPath(Grammar grammar) {
@@ -41,7 +41,7 @@ class TestsEMFGeneratorFragment extends EMFGeneratorFragment2 {
 		else
 			javaModelDirectory
 				+ '/' + grammar.name.substring(0, grammar.name.lastIndexOf('.')).replace('.', '/')
-				+ grammar.modelName + '.genmodel'
+				+ '/' + grammar.modelName + '.genmodel'
 	}
 	
 }

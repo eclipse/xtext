@@ -3,20 +3,27 @@
  */
 package org.eclipse.xtext.enumrules.services;
 
-import com.google.inject.Singleton;
 import com.google.inject.Inject;
-
+import com.google.inject.Singleton;
 import java.util.List;
-
-import org.eclipse.xtext.*;
-import org.eclipse.xtext.service.GrammarProvider;
-import org.eclipse.xtext.service.AbstractElementFinder.*;
-
+import org.eclipse.xtext.Alternatives;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.EnumLiteralDeclaration;
+import org.eclipse.xtext.EnumRule;
+import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.Group;
+import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
+import org.eclipse.xtext.service.AbstractElementFinder.AbstractEnumRuleElementFinder;
+import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder;
+import org.eclipse.xtext.service.GrammarProvider;
 
 @Singleton
 public class EnumRulesTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
-	
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.enumrules.EnumRulesTestLanguage.Model");
@@ -37,47 +44,46 @@ public class EnumRulesTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//Model:
 		//	'existing' existing=ExistingEnum ('generated' generated=GeneratedEnum)? | 'generated' generated=GeneratedEnum;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'existing' existing=ExistingEnum ('generated' generated=GeneratedEnum)? | 'generated' generated=GeneratedEnum
 		public Alternatives getAlternatives() { return cAlternatives; }
-
+		
 		//'existing' existing=ExistingEnum ('generated' generated=GeneratedEnum)?
 		public Group getGroup_0() { return cGroup_0; }
-
+		
 		//'existing'
 		public Keyword getExistingKeyword_0_0() { return cExistingKeyword_0_0; }
-
+		
 		//existing=ExistingEnum
 		public Assignment getExistingAssignment_0_1() { return cExistingAssignment_0_1; }
-
+		
 		//ExistingEnum
 		public RuleCall getExistingExistingEnumEnumRuleCall_0_1_0() { return cExistingExistingEnumEnumRuleCall_0_1_0; }
-
+		
 		//('generated' generated=GeneratedEnum)?
 		public Group getGroup_0_2() { return cGroup_0_2; }
-
+		
 		//'generated'
 		public Keyword getGeneratedKeyword_0_2_0() { return cGeneratedKeyword_0_2_0; }
-
+		
 		//generated=GeneratedEnum
 		public Assignment getGeneratedAssignment_0_2_1() { return cGeneratedAssignment_0_2_1; }
-
+		
 		//GeneratedEnum
 		public RuleCall getGeneratedGeneratedEnumEnumRuleCall_0_2_1_0() { return cGeneratedGeneratedEnumEnumRuleCall_0_2_1_0; }
-
+		
 		//'generated' generated=GeneratedEnum
 		public Group getGroup_1() { return cGroup_1; }
-
+		
 		//'generated'
 		public Keyword getGeneratedKeyword_1_0() { return cGeneratedKeyword_1_0; }
-
+		
 		//generated=GeneratedEnum
 		public Assignment getGeneratedAssignment_1_1() { return cGeneratedAssignment_1_1; }
-
+		
 		//GeneratedEnum
 		public RuleCall getGeneratedGeneratedEnumEnumRuleCall_1_1_0() { return cGeneratedGeneratedEnumEnumRuleCall_1_1_0; }
 	}
-	
 	
 	public class ExistingEnumElements extends AbstractEnumRuleElementFinder {
 		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.enumrules.EnumRulesTestLanguage.ExistingEnum");
@@ -92,29 +98,28 @@ public class EnumRulesTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//enum ExistingEnum:
 		//	SameName | OverriddenLiteral="overridden" | DifferentName="DifferentLiteral";
 		public EnumRule getRule() { return rule; }
-
+		
 		//SameName | OverriddenLiteral="overridden" | DifferentName="DifferentLiteral"
 		public Alternatives getAlternatives() { return cAlternatives; }
-
+		
 		//SameName
 		public EnumLiteralDeclaration getSameNameEnumLiteralDeclaration_0() { return cSameNameEnumLiteralDeclaration_0; }
-
+		
 		//"SameName"
 		public Keyword getSameNameSameNameKeyword_0_0() { return cSameNameSameNameKeyword_0_0; }
-
+		
 		//OverriddenLiteral="overridden"
 		public EnumLiteralDeclaration getOverriddenLiteralEnumLiteralDeclaration_1() { return cOverriddenLiteralEnumLiteralDeclaration_1; }
-
+		
 		//"overridden"
 		public Keyword getOverriddenLiteralOverriddenKeyword_1_0() { return cOverriddenLiteralOverriddenKeyword_1_0; }
-
+		
 		//DifferentName="DifferentLiteral"
 		public EnumLiteralDeclaration getDifferentNameEnumLiteralDeclaration_2() { return cDifferentNameEnumLiteralDeclaration_2; }
-
+		
 		//"DifferentLiteral"
 		public Keyword getDifferentNameDifferentLiteralKeyword_2_0() { return cDifferentNameDifferentLiteralKeyword_2_0; }
 	}
-
 	public class GeneratedEnumElements extends AbstractEnumRuleElementFinder {
 		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.enumrules.EnumRulesTestLanguage.GeneratedEnum");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -126,19 +131,19 @@ public class EnumRulesTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//enum GeneratedEnum:
 		//	SameName | DifferentName="DifferentLiteral";
 		public EnumRule getRule() { return rule; }
-
+		
 		//SameName | DifferentName="DifferentLiteral"
 		public Alternatives getAlternatives() { return cAlternatives; }
-
+		
 		//SameName
 		public EnumLiteralDeclaration getSameNameEnumLiteralDeclaration_0() { return cSameNameEnumLiteralDeclaration_0; }
-
+		
 		//"SameName"
 		public Keyword getSameNameSameNameKeyword_0_0() { return cSameNameSameNameKeyword_0_0; }
-
+		
 		//DifferentName="DifferentLiteral"
 		public EnumLiteralDeclaration getDifferentNameEnumLiteralDeclaration_1() { return cDifferentNameEnumLiteralDeclaration_1; }
-
+		
 		//"DifferentLiteral"
 		public Keyword getDifferentNameDifferentLiteralKeyword_1_0() { return cDifferentNameDifferentLiteralKeyword_1_0; }
 	}
@@ -148,12 +153,12 @@ public class EnumRulesTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	private final GeneratedEnumElements eGeneratedEnum;
 	
 	private final Grammar grammar;
-
+	
 	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public EnumRulesTestLanguageGrammarAccess(GrammarProvider grammarProvider,
-		TerminalsGrammarAccess gaTerminals) {
+			TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
 		this.pModel = new ModelElements();
@@ -182,7 +187,7 @@ public class EnumRulesTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return grammar;
 	}
 	
-
+	
 	public TerminalsGrammarAccess getTerminalsGrammarAccess() {
 		return gaTerminals;
 	}
@@ -197,7 +202,7 @@ public class EnumRulesTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getModelRule() {
 		return getModelAccess().getRule();
 	}
-
+	
 	//enum ExistingEnum:
 	//	SameName | OverriddenLiteral="overridden" | DifferentName="DifferentLiteral";
 	public ExistingEnumElements getExistingEnumAccess() {
@@ -207,7 +212,7 @@ public class EnumRulesTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public EnumRule getExistingEnumRule() {
 		return getExistingEnumAccess().getRule();
 	}
-
+	
 	//enum GeneratedEnum:
 	//	SameName | DifferentName="DifferentLiteral";
 	public GeneratedEnumElements getGeneratedEnumAccess() {
@@ -217,47 +222,47 @@ public class EnumRulesTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public EnumRule getGeneratedEnumRule() {
 		return getGeneratedEnumAccess().getRule();
 	}
-
+	
 	//terminal ID:
 	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
-	} 
-
+	}
+	
 	//terminal INT returns ecore::EInt:
 	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
-	} 
-
+	}
+	
 	//terminal STRING:
 	//	'"' ('\\' . | !('\\' | '"'))* '"' |
 	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
-	} 
-
+	}
+	
 	//terminal ML_COMMENT:
 	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal SL_COMMENT:
 	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal WS:
 	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
-	} 
-
+	}
+	
 	//terminal ANY_OTHER:
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
-	} 
+	}
 }

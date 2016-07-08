@@ -45,9 +45,10 @@ public class TestsEMFGeneratorFragment extends EMFGeneratorFragment2 {
       String _substring = _name.substring(0, _lastIndexOf);
       String _replace = _substring.replace(".", "/");
       String _plus_1 = (_plus + _replace);
+      String _plus_2 = (_plus_1 + "/");
       String _modelName = this.getModelName(grammar);
-      String _plus_2 = (_plus_1 + _modelName);
-      _xifexpression = (_plus_2 + ".ecore");
+      String _plus_3 = (_plus_2 + _modelName);
+      _xifexpression = (_plus_3 + ".ecore");
     }
     return _xifexpression;
   }
@@ -68,9 +69,10 @@ public class TestsEMFGeneratorFragment extends EMFGeneratorFragment2 {
       String _substring = _name.substring(0, _lastIndexOf);
       String _replace = _substring.replace(".", "/");
       String _plus_1 = (_plus + _replace);
+      String _plus_2 = (_plus_1 + "/");
       String _modelName = this.getModelName(grammar);
-      String _plus_2 = (_plus_1 + _modelName);
-      _xifexpression = (_plus_2 + ".genmodel");
+      String _plus_3 = (_plus_2 + _modelName);
+      _xifexpression = (_plus_3 + ".genmodel");
     }
     return _xifexpression;
   }
