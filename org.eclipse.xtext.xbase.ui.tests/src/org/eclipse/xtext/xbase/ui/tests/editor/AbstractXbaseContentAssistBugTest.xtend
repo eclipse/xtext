@@ -7,21 +7,21 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.ui.tests.editor
 
-import static org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.*
-
-import org.eclipse.xtext.xbase.ui.tests.AbstractXbaseUITestCase
-import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider
-import org.eclipse.core.resources.IProject
-import org.junit.BeforeClass
-import org.junit.AfterClass
-import org.eclipse.emf.ecore.resource.ResourceSet
-import org.eclipse.core.runtime.CoreException
 import java.io.InputStream
-import org.eclipse.xtext.resource.XtextResource
-import org.eclipse.xtext.resource.XtextResourceSet
+import org.eclipse.core.resources.IProject
+import org.eclipse.core.runtime.CoreException
+import org.eclipse.emf.ecore.resource.ResourceSet
+import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider
 import org.eclipse.xtext.common.types.access.jdt.JdtTypeProviderFactory
 import org.eclipse.xtext.junit4.ui.ContentAssistProcessorTestBuilder
-import org.eclipse.xtext.xbase.ui.tests.TargetPlatformUtil
+import org.eclipse.xtext.junit4.ui.util.TargetPlatformUtil
+import org.eclipse.xtext.resource.XtextResource
+import org.eclipse.xtext.resource.XtextResourceSet
+import org.eclipse.xtext.xbase.ui.tests.AbstractXbaseUITestCase
+import org.junit.AfterClass
+import org.junit.BeforeClass
+
+import static org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.*
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

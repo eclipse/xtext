@@ -37,6 +37,7 @@ import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.junit4.ui.AbstractLinkedEditingIntegrationTest;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
+import org.eclipse.xtext.junit4.ui.util.TargetPlatformUtil;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.XtextEditor;
@@ -45,6 +46,7 @@ import org.eclipse.xtext.ui.refactoring.ui.RenameRefactoringController;
 import org.eclipse.xtext.util.SimpleAttributeResolver;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.xtext.ui.Activator;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.google.common.base.Predicate;
@@ -76,6 +78,11 @@ public class XtextGrammarRefactoringIntegrationTest extends AbstractLinkedEditin
 	protected Change undoChange;
 	private URI greetingParserRuleUri;
 	private URI modelParserRuleUri;
+	
+	@BeforeClass
+	public static void setupTargetPlatform() throws Exception {
+		TargetPlatformUtil.setTargetPlatform();
+	}
 
 	@Inject
 	private Provider<ResourceSet> resourceSetProvider;
@@ -90,11 +97,11 @@ public class XtextGrammarRefactoringIntegrationTest extends AbstractLinkedEditin
 		addNature(javaProject.getProject(), XtextProjectHelper.NATURE_ID);
 		Injector injector = Activator.getInstance().getInjector(getEditorId());
 		injector.injectMembers(this);
-		grammar = "grammar org.xtext.example.mydsl.MyDsl hidden(WS) generate myDsl 'http://testrefactoring' import 'http://www.eclipse.org/emf/2002/Ecore' as ecore Model: greetings+="
+		grammar = "grammar org.xtext.example.mydsl.MyDsl\n hidden(WS) generate myDsl\n 'http://testrefactoring'\n import 'http://www.eclipse.org/emf/2002/Ecore'\n as ecore \nModel: greetings+="
 				+ CLASSIFIERNAME
-				+ "*; "
+				+ "*; \n"
 				+ CLASSIFIERNAME
-				+ ": 'Hello' name=ID '!'; terminal ID : '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*; terminal WS: (' '|'\t'|'\r'|'\n')+;";
+				+ ": 'Hello' name=ID '!';\n terminal ID : '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;\n terminal WS: (' '|'\t'|'\r'|'\n')+;";
 		grammarFile = IResourcesSetupUtil.createFile(GRAMMAR_FILE, grammar);
 		grammarUri = URI.createPlatformResourceURI(GRAMMAR_FILE, true);
 		EcoreFactory eInstance = EcoreFactory.eINSTANCE;
