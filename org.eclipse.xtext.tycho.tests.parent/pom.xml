@@ -12,7 +12,7 @@
 
 	<properties>
 		<os-jvm-flags />
-		<memory-settings>-Xmx1G -XX:MaxPermSize=256m</memory-settings>
+		<memory-settings>-Xmx2G -XX:MaxPermSize=256m</memory-settings>
 		<debug-settings>-Xdebug
 			-Xrunjdwp:transport=dt_socket,address=8000,server=y,suspend=y</debug-settings>
 	</properties>
@@ -90,6 +90,16 @@
 								<id>org.eclipse.pde.api.tools.ee.feature</id>
 								<versionRange>1.0.0</versionRange>
 							</requirement>
+							<requirement>
+								<type>eclipse-feature</type>
+								<id>org.eclipse.jdt</id>
+								<versionRange>1.0.0</versionRange>
+							</requirement>
+							<requirement>
+								<type>eclipse-plugin</type>
+								<id>org.eclipse.xtext.common.types.shared.jdt38</id>
+								<versionRange>1.0.0</versionRange>
+							</requirement>
 						</extraRequirements>
 					</dependency-resolution>
 				</configuration>
@@ -102,10 +112,10 @@
 					<artifactId>tycho-surefire-plugin</artifactId>
 					<version>${tycho-version}</version>
 					<configuration>
-						<debugPort>8013</debugPort>
+						<!--<debugPort>8013</debugPort>-->
 						<!-- <forkedProcessTimeoutInSeconds>1200</forkedProcessTimeoutInSeconds> -->
 						<useUIHarness>true</useUIHarness>
-						<useUIThread>false</useUIThread>
+						<useUIThread>true</useUIThread>
 						<argLine>${memory-settings} ${os-jvm-flags}</argLine>
 					</configuration>
 				</plugin>

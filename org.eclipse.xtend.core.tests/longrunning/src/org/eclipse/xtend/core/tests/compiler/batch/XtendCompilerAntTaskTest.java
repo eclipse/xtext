@@ -18,9 +18,12 @@ import org.apache.tools.ant.Project;
 import org.apache.tools.ant.ProjectHelper;
 import org.apache.tools.ant.types.selectors.FilenameSelector;
 import org.eclipse.pde.core.plugin.TargetPlatform;
+import org.eclipse.xtext.junit4.ui.util.TargetPlatformUtil;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -32,6 +35,11 @@ public class XtendCompilerAntTaskTest {
 	private StringBuffer errBuffer;
 	private BuildException buildException;
 	private AntTestListener antTestListener;
+	
+	@BeforeClass
+	public static void setupTargetPlaform() throws Exception {
+		TargetPlatformUtil.setTargetPlatform();
+	}
 
 	@Before
 	public void setUp() {
@@ -111,8 +119,8 @@ public class XtendCompilerAntTaskTest {
 		project = new Project();
 		project.init();
 		File antFile = new File(System.getProperty("root"), filename);
-		File pluginsFolder = new File(new File(TargetPlatform.getLocation()), "plugins");
-		project.setUserProperty("deps.dir", pluginsFolder.getAbsolutePath());
+		File depsFolder = new File(System.getProperty("root"), "target/antDeps");
+		project.setUserProperty("deps.dir", depsFolder.getAbsolutePath());
 		project.setUserProperty("ant.file", antFile.getAbsolutePath());
 		antTestListener = new AntTestListener(Project.MSG_ERR);
 		project.addBuildListener(antTestListener);

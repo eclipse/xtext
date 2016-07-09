@@ -9,6 +9,7 @@ package org.eclipse.xtend.core.tests.compiler;
 
 import org.eclipse.xtend.core.tests.compiler.AbstractXtendCompilerTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -91,6 +92,7 @@ public class OverloadedExtensionCompilerTest extends AbstractXtendCompilerTest {
     this.assertCompilesTo(_builder, _builder_1);
   }
   
+  @Ignore("https://github.com/eclipse/xtext-xtend/issues/6")
   @Test
   public void test_02() {
     StringConcatenation _builder = new StringConcatenation();

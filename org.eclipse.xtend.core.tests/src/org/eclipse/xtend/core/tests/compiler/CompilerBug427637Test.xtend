@@ -57,17 +57,16 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 			}
 		''', '''
 			import java.util.List;
-			import org.eclipse.xtext.xbase.lib.IterableExtensions;
-			import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+			import java.util.function.Consumer;
 			
 			@SuppressWarnings("all")
 			public class C {
 			  public <V extends Object> void m(final List<? extends V> list) {
-			    final Procedure1<V> _function = new Procedure1<V>() {
-			      public void apply(final V it) {
+			    final Consumer<V> _function = new Consumer<V>() {
+			      public void accept(final V it) {
 			      }
 			    };
-			    IterableExtensions.forEach(list, _function);
+			    list.forEach(_function);
 			  }
 			}
 		''')
@@ -116,17 +115,16 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 			}
 		''', '''
 			import java.util.List;
-			import org.eclipse.xtext.xbase.lib.IterableExtensions;
-			import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+			import java.util.function.Consumer;
 			
 			@SuppressWarnings("all")
 			public class C {
 			  public <V extends Object> void m(final List<V> list) {
-			    final Procedure1<V> _function = new Procedure1<V>() {
-			      public void apply(final V it) {
+			    final Consumer<V> _function = new Consumer<V>() {
+			      public void accept(final V it) {
 			      }
 			    };
-			    IterableExtensions.<V>forEach(list, _function);
+			    list.forEach(_function);
 			  }
 			}
 		''')
@@ -175,17 +173,16 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 			}
 		''', '''
 			import java.util.List;
-			import org.eclipse.xtext.xbase.lib.IterableExtensions;
-			import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+			import java.util.function.Consumer;
 			
 			@SuppressWarnings("all")
 			public class C {
 			  public <V extends Object> void m(final List<? super V> list) {
-			    final Procedure1<Object> _function = new Procedure1<Object>() {
-			      public void apply(final Object it) {
+			    final Consumer<Object> _function = new Consumer<Object>() {
+			      public void accept(final Object it) {
 			      }
 			    };
-			    IterableExtensions.forEach(list, _function);
+			    list.forEach(_function);
 			  }
 			}
 		''')
@@ -235,18 +232,17 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 			}
 		''', '''
 			import java.util.List;
-			import org.eclipse.xtext.xbase.lib.IterableExtensions;
-			import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+			import java.util.function.Consumer;
 			
 			@SuppressWarnings("all")
 			public class C {
 			  public <V extends Object> void m(final List<? extends V> list) {
 			    List<? extends V> _subList = list.subList(1, 1);
-			    final Procedure1<V> _function = new Procedure1<V>() {
-			      public void apply(final V it) {
+			    final Consumer<V> _function = new Consumer<V>() {
+			      public void accept(final V it) {
 			      }
 			    };
-			    IterableExtensions.forEach(_subList, _function);
+			    _subList.forEach(_function);
 			  }
 			}
 		''')
@@ -296,18 +292,17 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 			}
 		''', '''
 			import java.util.List;
-			import org.eclipse.xtext.xbase.lib.IterableExtensions;
-			import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+			import java.util.function.Consumer;
 			
 			@SuppressWarnings("all")
 			public class C {
 			  public <V extends Object> void m(final List<V> list) {
 			    List<V> _subList = list.subList(1, 1);
-			    final Procedure1<V> _function = new Procedure1<V>() {
-			      public void apply(final V it) {
+			    final Consumer<V> _function = new Consumer<V>() {
+			      public void accept(final V it) {
 			      }
 			    };
-			    IterableExtensions.<V>forEach(_subList, _function);
+			    _subList.forEach(_function);
 			  }
 			}
 		''')
@@ -357,18 +352,17 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 			}
 		''', '''
 			import java.util.List;
-			import org.eclipse.xtext.xbase.lib.IterableExtensions;
-			import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+			import java.util.function.Consumer;
 			
 			@SuppressWarnings("all")
 			public class C {
 			  public <V extends Object> void m(final List<? super V> list) {
 			    List<? super V> _subList = list.subList(1, 1);
-			    final Procedure1<Object> _function = new Procedure1<Object>() {
-			      public void apply(final Object it) {
+			    final Consumer<Object> _function = new Consumer<Object>() {
+			      public void accept(final Object it) {
 			      }
 			    };
-			    IterableExtensions.forEach(_subList, _function);
+			    _subList.forEach(_function);
 			  }
 			}
 		''')
@@ -421,19 +415,18 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 			}
 		''', '''
 			import java.util.List;
-			import org.eclipse.xtext.xbase.lib.IterableExtensions;
-			import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+			import java.util.function.Consumer;
 			
 			@SuppressWarnings("all")
 			public class C {
 			  public <V extends Object> void m(final List<? extends V> list) {
 			    List<? extends V> _subList = list.subList(1, 1);
-			    final Procedure1<V> _function = new Procedure1<V>() {
-			      public void apply(final V it) {
+			    final Consumer<V> _function = new Consumer<V>() {
+			      public void accept(final V it) {
 			        it.toString();
 			      }
 			    };
-			    IterableExtensions.forEach(_subList, _function);
+			    _subList.forEach(_function);
 			  }
 			}
 		''')
@@ -486,19 +479,18 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 			}
 		''', '''
 			import java.util.List;
-			import org.eclipse.xtext.xbase.lib.IterableExtensions;
-			import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+			import java.util.function.Consumer;
 			
 			@SuppressWarnings("all")
 			public class C {
 			  public <V extends Object> void m(final List<V> list) {
 			    List<V> _subList = list.subList(1, 1);
-			    final Procedure1<V> _function = new Procedure1<V>() {
-			      public void apply(final V it) {
+			    final Consumer<V> _function = new Consumer<V>() {
+			      public void accept(final V it) {
 			        it.toString();
 			      }
 			    };
-			    IterableExtensions.<V>forEach(_subList, _function);
+			    _subList.forEach(_function);
 			  }
 			}
 		''')
@@ -551,19 +543,18 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 			}
 		''', '''
 			import java.util.List;
-			import org.eclipse.xtext.xbase.lib.IterableExtensions;
-			import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+			import java.util.function.Consumer;
 			
 			@SuppressWarnings("all")
 			public class C {
 			  public <V extends Object> void m(final List<? super V> list) {
 			    List<? super V> _subList = list.subList(1, 1);
-			    final Procedure1<Object> _function = new Procedure1<Object>() {
-			      public void apply(final Object it) {
+			    final Consumer<Object> _function = new Consumer<Object>() {
+			      public void accept(final Object it) {
 			        it.toString();
 			      }
 			    };
-			    IterableExtensions.forEach(_subList, _function);
+			    _subList.forEach(_function);
 			  }
 			}
 		''')
@@ -618,19 +609,18 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 			}
 		''', '''
 			import java.util.List;
-			import org.eclipse.xtext.xbase.lib.IterableExtensions;
-			import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+			import java.util.function.Consumer;
 			
 			@SuppressWarnings("all")
 			public class C {
 			  public <V extends Object> void m(final List<? extends V> list) {
 			    final List<V> target = null;
-			    final Procedure1<V> _function = new Procedure1<V>() {
-			      public void apply(final V it) {
+			    final Consumer<V> _function = new Consumer<V>() {
+			      public void accept(final V it) {
 			        target.add(it);
 			      }
 			    };
-			    IterableExtensions.forEach(list, _function);
+			    list.forEach(_function);
 			  }
 			}
 		''')
@@ -655,17 +645,16 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 			import com.google.common.collect.Iterables;
 			import java.util.ArrayList;
 			import java.util.List;
+			import java.util.function.Consumer;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-			import org.eclipse.xtext.xbase.lib.IterableExtensions;
-			import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 			
 			@SuppressWarnings("all")
 			public class C {
 			  public <T extends Object> void m(final List<? extends T> list) {
 			    final List<T> target = null;
 			    List<? extends T> _subList = list.subList(0, 1);
-			    final Procedure1<T> _function = new Procedure1<T>() {
-			      public void apply(final T it) {
+			    final Consumer<T> _function = new Consumer<T>() {
+			      public void accept(final T it) {
 			        List<T> _subList = target.subList(0, 1);
 			        _subList.add(it);
 			        List<T> _subList_1 = target.subList(0, 1);
@@ -678,7 +667,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 			        Iterables.removeAll(_subList_3, _newArrayList_1);
 			      }
 			    };
-			    IterableExtensions.forEach(_subList, _function);
+			    _subList.forEach(_function);
 			  }
 			}
 		''')
@@ -727,8 +716,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 			}
 		''', '''
 			import java.util.List;
-			import org.eclipse.xtext.xbase.lib.IterableExtensions;
-			import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+			import java.util.function.Consumer;
 			
 			@SuppressWarnings("all")
 			public class Listener<T extends Node & XActivatable> implements ListChangeListener<T> {
@@ -740,25 +728,25 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 			        boolean _wasAdded = change.wasAdded();
 			        if (_wasAdded) {
 			          List<? extends T> _addedSubList = change.getAddedSubList();
-			          final Procedure1<T> _function = new Procedure1<T>() {
-			            public void apply(final T it) {
+			          final Consumer<T> _function = new Consumer<T>() {
+			            public void accept(final T it) {
 			              ObservableList<Node> _children = Listener.this.layer.getChildren();
 			              _children.add(it);
 			              it.activate();
 			            }
 			          };
-			          IterableExtensions.forEach(_addedSubList, _function);
+			          _addedSubList.forEach(_function);
 			        }
 			        boolean _wasRemoved = change.wasRemoved();
 			        if (_wasRemoved) {
 			          List<? extends T> _removed = change.getRemoved();
-			          final Procedure1<T> _function_1 = new Procedure1<T>() {
-			            public void apply(final T it) {
+			          final Consumer<T> _function_1 = new Consumer<T>() {
+			            public void accept(final T it) {
 			              ObservableList<Node> _children = Listener.this.layer.getChildren();
 			              _children.remove(it);
 			            }
 			          };
-			          IterableExtensions.forEach(_removed, _function_1);
+			          _removed.forEach(_function_1);
 			        }
 			      }
 			    }
@@ -810,8 +798,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 			}
 		''', '''
 			import java.util.List;
-			import org.eclipse.xtext.xbase.lib.IterableExtensions;
-			import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+			import java.util.function.Consumer;
 			
 			@SuppressWarnings("all")
 			public class Listener<T extends Node & XActivatable> implements ListChangeListener<T> {
@@ -823,25 +810,25 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 			        boolean _wasAdded = change.wasAdded();
 			        if (_wasAdded) {
 			          List<? extends T> _addedSubList = change.getAddedSubList();
-			          final Procedure1<T> _function = new Procedure1<T>() {
-			            public void apply(final T it) {
+			          final Consumer<T> _function = new Consumer<T>() {
+			            public void accept(final T it) {
 			              ObservableList<Node> _children = Listener.this.layer.getChildren();
 			              _children.add(it);
 			              it.activate();
 			            }
 			          };
-			          IterableExtensions.forEach(_addedSubList, _function);
+			          _addedSubList.forEach(_function);
 			        }
 			        boolean _wasRemoved = change.wasRemoved();
 			        if (_wasRemoved) {
 			          List<? extends T> _removed = change.getRemoved();
-			          final Procedure1<T> _function_1 = new Procedure1<T>() {
-			            public void apply(final T it) {
+			          final Consumer<T> _function_1 = new Consumer<T>() {
+			            public void accept(final T it) {
 			              ObservableList<Node> _children = Listener.this.layer.getChildren();
 			              _children.remove(it);
 			            }
 			          };
-			          IterableExtensions.forEach(_removed, _function_1);
+			          _removed.forEach(_function_1);
 			        }
 			      }
 			    }

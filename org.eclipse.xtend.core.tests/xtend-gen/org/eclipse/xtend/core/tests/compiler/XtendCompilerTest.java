@@ -8883,11 +8883,9 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("import java.util.ArrayList;");
     _builder_1.newLine();
+    _builder_1.append("import java.util.function.Consumer;");
+    _builder_1.newLine();
     _builder_1.append("import org.eclipse.xtext.xbase.lib.CollectionLiterals;");
-    _builder_1.newLine();
-    _builder_1.append("import org.eclipse.xtext.xbase.lib.IterableExtensions;");
-    _builder_1.newLine();
-    _builder_1.append("import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;");
     _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("@SuppressWarnings(\"all\")");
@@ -8922,10 +8920,10 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("_matched=true;");
     _builder_1.newLine();
     _builder_1.append("        ");
-    _builder_1.append("final Procedure1<String> _function = new Procedure1<String>() {");
+    _builder_1.append("final Consumer<String> _function = new Consumer<String>() {");
     _builder_1.newLine();
     _builder_1.append("          ");
-    _builder_1.append("public void apply(final String break_) {");
+    _builder_1.append("public void accept(final String break_) {");
     _builder_1.newLine();
     _builder_1.append("            ");
     _builder_1.append("(break_ + continue_).toString();");
@@ -8937,7 +8935,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("};");
     _builder_1.newLine();
     _builder_1.append("        ");
-    _builder_1.append("IterableExtensions.<String>forEach(synchronized_, _function);");
+    _builder_1.append("synchronized_.forEach(_function);");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("}");

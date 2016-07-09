@@ -32,6 +32,8 @@ class Bug427440Test extends AbstractXtendContentAssistBugTest {
 					}
 				''').computeCompletionProposals('|').iterator
 		proposals.next.assertContains("augument")
+		proposals.next.assertContains("annotatedInterfaces")
+		proposals.next.assertContains("annotatedSuperclass")
 		proposals.next.assertContains("annotation")
 		proposals.next.assertContains("annotations")
 		proposals.next.assertContains("anonymousClass")

@@ -57,15 +57,19 @@ public class Bug427440Test extends AbstractXtendContentAssistBugTest {
     ICompletionProposal _next = proposals.next();
     this.assertContains(_next, "augument");
     ICompletionProposal _next_1 = proposals.next();
-    this.assertContains(_next_1, "annotation");
+    this.assertContains(_next_1, "annotatedInterfaces");
     ICompletionProposal _next_2 = proposals.next();
-    this.assertContains(_next_2, "annotations");
+    this.assertContains(_next_2, "annotatedSuperclass");
     ICompletionProposal _next_3 = proposals.next();
-    this.assertContains(_next_3, "anonymousClass");
+    this.assertContains(_next_3, "annotation");
     ICompletionProposal _next_4 = proposals.next();
-    this.assertContains(_next_4, "array");
+    this.assertContains(_next_4, "annotations");
     ICompletionProposal _next_5 = proposals.next();
-    this.assertContains(_next_5, "asSubclass()");
+    this.assertContains(_next_5, "anonymousClass");
+    ICompletionProposal _next_6 = proposals.next();
+    this.assertContains(_next_6, "array");
+    ICompletionProposal _next_7 = proposals.next();
+    this.assertContains(_next_7, "asSubclass()");
   }
   
   public void assertContains(final ICompletionProposal proposal, final String text) {

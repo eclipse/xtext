@@ -9,11 +9,13 @@ package org.eclipse.xtend.core.tests.compiler;
 
 import org.eclipse.xtend.core.tests.compiler.AbstractXtendCompilerTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@Ignore("https://github.com/eclipse/xtext-xtend/issues/6")
 @SuppressWarnings("all")
 public class CompilerBug440906Test extends AbstractXtendCompilerTest {
   @Test

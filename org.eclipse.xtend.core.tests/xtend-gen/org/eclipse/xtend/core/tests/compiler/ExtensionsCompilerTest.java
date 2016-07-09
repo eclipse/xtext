@@ -1673,13 +1673,11 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("import java.util.ArrayList;");
     _builder_1.newLine();
+    _builder_1.append("import java.util.function.Consumer;");
+    _builder_1.newLine();
     _builder_1.append("import org.eclipse.xtext.xbase.lib.CollectionLiterals;");
     _builder_1.newLine();
     _builder_1.append("import org.eclipse.xtext.xbase.lib.Extension;");
-    _builder_1.newLine();
-    _builder_1.append("import org.eclipse.xtext.xbase.lib.IterableExtensions;");
-    _builder_1.newLine();
-    _builder_1.append("import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;");
     _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("@SuppressWarnings(\"all\")");
@@ -1693,10 +1691,10 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList();");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("final Procedure1<String> _function = new Procedure1<String>() {");
+    _builder_1.append("final Consumer<String> _function = new Consumer<String>() {");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("public void apply(@Extension final String s) {");
+    _builder_1.append("public void accept(@Extension final String s) {");
     _builder_1.newLine();
     _builder_1.append("        ");
     _builder_1.append("s.substring(it);");
@@ -1708,7 +1706,7 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("};");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("IterableExtensions.<String>forEach(_newArrayList, _function);");
+    _builder_1.append("_newArrayList.forEach(_function);");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");

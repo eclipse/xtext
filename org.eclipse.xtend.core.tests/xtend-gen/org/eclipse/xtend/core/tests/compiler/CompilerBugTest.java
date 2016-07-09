@@ -3865,9 +3865,7 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("import java.util.Set;");
     _builder_1.newLine();
-    _builder_1.append("import org.eclipse.xtext.xbase.lib.IterableExtensions;");
-    _builder_1.newLine();
-    _builder_1.append("import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;");
+    _builder_1.append("import java.util.function.Consumer;");
     _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("@SuppressWarnings(\"all\")");
@@ -3881,10 +3879,10 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("Set<? extends Map.Entry<? extends K, ? extends V>> _entrySet = t.entrySet();");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("final Procedure1<Map.Entry<? extends K, ? extends V>> _function = new Procedure1<Map.Entry<? extends K, ? extends V>>() {");
+    _builder_1.append("final Consumer<Map.Entry<? extends K, ? extends V>> _function = new Consumer<Map.Entry<? extends K, ? extends V>>() {");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("public void apply(final Map.Entry<? extends K, ? extends V> it) {");
+    _builder_1.append("public void accept(final Map.Entry<? extends K, ? extends V> it) {");
     _builder_1.newLine();
     _builder_1.append("        ");
     _builder_1.append("K _key = it.getKey();");
@@ -3902,7 +3900,7 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder_1.append("};");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("IterableExtensions.forEach(_entrySet, _function);");
+    _builder_1.append("_entrySet.forEach(_function);");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");

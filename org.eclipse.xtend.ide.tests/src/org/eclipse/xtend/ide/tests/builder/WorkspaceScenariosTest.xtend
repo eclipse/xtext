@@ -22,10 +22,12 @@ import org.eclipse.jdt.core.JavaCore
 import org.eclipse.xtend.ide.tests.XtendIDEInjectorProvider
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
+import org.eclipse.xtext.junit4.ui.util.TargetPlatformUtil
 import org.eclipse.xtext.resource.IResourceDescriptions
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider
 import org.eclipse.xtext.util.StringInputStream
 import org.junit.Assert
+import org.junit.BeforeClass
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -41,6 +43,11 @@ import static extension org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.*
 @RunWith(XtextRunner)
 @InjectWith(XtendIDEInjectorProvider)
 class WorkspaceScenariosTest {
+	
+	@BeforeClass
+	def static void setupTargetPlatform() {
+		TargetPlatformUtil.setTargetPlatform
+	}
 	
 	@Inject
 	@Named(ResourceDescriptionsProvider.PERSISTED_DESCRIPTIONS)

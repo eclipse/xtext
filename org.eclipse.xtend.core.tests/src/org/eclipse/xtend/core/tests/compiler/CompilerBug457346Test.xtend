@@ -7,11 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.tests.compiler
 
+import org.junit.Ignore
 import org.junit.Test
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+//FIXME https://github.com/eclipse/xtext-xtend/issues/6
+@Ignore("https://github.com/eclipse/xtext-xtend/issues/6")
 class CompilerBug457346Test extends AbstractXtendCompilerTest {
 	
 	@Test

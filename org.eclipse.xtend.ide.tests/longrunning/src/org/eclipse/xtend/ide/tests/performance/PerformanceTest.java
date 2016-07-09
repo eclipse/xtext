@@ -297,6 +297,7 @@ public class PerformanceTest extends AbstractXtendUITestCase {
 	@Override
 	public void tearDown() throws Exception {
 		workbenchTestHelper.tearDown();
+		super.tearDown();
 	}
 	
 	@Test public void testBuildProject() throws Exception {

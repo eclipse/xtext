@@ -790,21 +790,20 @@ class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
 				}
 			''', '''
 				import java.util.ArrayList;
+				import java.util.function.Consumer;
 				import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 				import org.eclipse.xtext.xbase.lib.Extension;
-				import org.eclipse.xtext.xbase.lib.IterableExtensions;
-				import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-				
+
 				@SuppressWarnings("all")
 				public class C {
 				  public void m(final int it) {
 				    ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList();
-				    final Procedure1<String> _function = new Procedure1<String>() {
-				      public void apply(@Extension final String s) {
+				    final Consumer<String> _function = new Consumer<String>() {
+				      public void accept(@Extension final String s) {
 				        s.substring(it);
 				      }
 				    };
-				    IterableExtensions.<String>forEach(_newArrayList, _function);
+				    _newArrayList.forEach(_function);
 				  }
 				}
 			''')

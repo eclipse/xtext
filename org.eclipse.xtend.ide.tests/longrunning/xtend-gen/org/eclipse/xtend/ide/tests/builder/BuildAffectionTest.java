@@ -35,6 +35,7 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -778,6 +779,7 @@ public class BuildAffectionTest {
     }
   }
   
+  @Ignore("https://github.com/eclipse/xtext-xtend/issues/8")
   @Test
   public void testAffected_dependentProject_Java() {
     try {
@@ -828,6 +830,7 @@ public class BuildAffectionTest {
     }
   }
   
+  @Ignore("https://github.com/eclipse/xtext-xtend/issues/8")
   @Test
   public void testAffected_dependentProject_Java_WithExpression() {
     try {
@@ -977,6 +980,7 @@ public class BuildAffectionTest {
     }
   }
   
+  @Ignore("https://github.com/eclipse/xtext-xtend/issues/8")
   @Test
   public void testAffected_annotationProcessorChanged_separateFiles() {
     try {

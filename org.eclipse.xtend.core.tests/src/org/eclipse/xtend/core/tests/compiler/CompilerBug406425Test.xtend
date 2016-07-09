@@ -243,11 +243,10 @@ class CompilerBug406425Test extends AbstractXtendCompilerTest {
 		''', '''
 			import java.io.Serializable;
 			import java.util.ArrayList;
+			import java.util.function.Consumer;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			import org.eclipse.xtext.xbase.lib.InputOutput;
-			import org.eclipse.xtext.xbase.lib.IterableExtensions;
-			import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-			
+
 			@SuppressWarnings("all")
 			public class Test {
 			  public <T extends Object> Object m(final T a, final T b) {
@@ -257,15 +256,15 @@ class CompilerBug406425Test extends AbstractXtendCompilerTest {
 			  public void m() {
 			    StringBuilder _stringBuilder = new StringBuilder();
 			    ArrayList<StringBuilder> _newArrayList = CollectionLiterals.<StringBuilder>newArrayList(_stringBuilder);
-			    final Procedure1<StringBuilder> _function = new Procedure1<StringBuilder>() {
-			      public void apply(final StringBuilder it) {
+			    final Consumer<StringBuilder> _function = new Consumer<StringBuilder>() {
+			      public void accept(final StringBuilder it) {
 			        Long _long = new Long(0);
 			        Test.this.<Serializable>m(it, _long);
 			        int _length = it.length();
 			        InputOutput.<Integer>println(Integer.valueOf(_length));
 			      }
 			    };
-			    IterableExtensions.<StringBuilder>forEach(_newArrayList, _function);
+			    _newArrayList.forEach(_function);
 			  }
 			}
 		''')
@@ -369,11 +368,10 @@ class CompilerBug406425Test extends AbstractXtendCompilerTest {
 		''', '''
 			import java.io.Serializable;
 			import java.util.ArrayList;
+			import java.util.function.Consumer;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			import org.eclipse.xtext.xbase.lib.InputOutput;
-			import org.eclipse.xtext.xbase.lib.IterableExtensions;
-			import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-			
+
 			@SuppressWarnings("all")
 			public class Test {
 			  public <T extends Object> Object m(final T a, final T b) {
@@ -383,8 +381,8 @@ class CompilerBug406425Test extends AbstractXtendCompilerTest {
 			  public static void m() {
 			    StringBuilder _stringBuilder = new StringBuilder();
 			    ArrayList<StringBuilder> _newArrayList = CollectionLiterals.<StringBuilder>newArrayList(_stringBuilder);
-			    final Procedure1<StringBuilder> _function = new Procedure1<StringBuilder>() {
-			      public void apply(final StringBuilder it) {
+			    final Consumer<StringBuilder> _function = new Consumer<StringBuilder>() {
+			      public void accept(final StringBuilder it) {
 			        Test _test = new Test();
 			        Long _long = new Long(0);
 			        _test.<Serializable>m(it, _long);
@@ -392,7 +390,7 @@ class CompilerBug406425Test extends AbstractXtendCompilerTest {
 			        InputOutput.<Integer>println(Integer.valueOf(_length));
 			      }
 			    };
-			    IterableExtensions.<StringBuilder>forEach(_newArrayList, _function);
+			    _newArrayList.forEach(_function);
 			  }
 			}
 		''')
@@ -414,11 +412,10 @@ class CompilerBug406425Test extends AbstractXtendCompilerTest {
 		''', '''
 			import java.io.Serializable;
 			import java.util.ArrayList;
+			import java.util.function.Consumer;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			import org.eclipse.xtext.xbase.lib.InputOutput;
-			import org.eclipse.xtext.xbase.lib.IterableExtensions;
-			import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-			
+
 			@SuppressWarnings("all")
 			public class Test<T extends Object> {
 			  public Object m(final T a, final T b) {
@@ -428,8 +425,8 @@ class CompilerBug406425Test extends AbstractXtendCompilerTest {
 			  public static void m() {
 			    StringBuilder _stringBuilder = new StringBuilder();
 			    ArrayList<StringBuilder> _newArrayList = CollectionLiterals.<StringBuilder>newArrayList(_stringBuilder);
-			    final Procedure1<StringBuilder> _function = new Procedure1<StringBuilder>() {
-			      public void apply(final StringBuilder it) {
+			    final Consumer<StringBuilder> _function = new Consumer<StringBuilder>() {
+			      public void accept(final StringBuilder it) {
 			        Test<Serializable> _test = new Test<Serializable>();
 			        Long _long = new Long(0);
 			        _test.m(it, _long);
@@ -437,7 +434,7 @@ class CompilerBug406425Test extends AbstractXtendCompilerTest {
 			        InputOutput.<Integer>println(Integer.valueOf(_length));
 			      }
 			    };
-			    IterableExtensions.<StringBuilder>forEach(_newArrayList, _function);
+			    _newArrayList.forEach(_function);
 			  }
 			}
 		''')
@@ -459,11 +456,10 @@ class CompilerBug406425Test extends AbstractXtendCompilerTest {
 		''', '''
 			import java.io.Serializable;
 			import java.util.ArrayList;
+			import java.util.function.Consumer;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			import org.eclipse.xtext.xbase.lib.InputOutput;
-			import org.eclipse.xtext.xbase.lib.IterableExtensions;
-			import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-			
+
 			@SuppressWarnings("all")
 			public class Test {
 			  public static <T extends Object> Object m(final T a, final T b) {
@@ -473,15 +469,15 @@ class CompilerBug406425Test extends AbstractXtendCompilerTest {
 			  public static void m() {
 			    StringBuilder _stringBuilder = new StringBuilder();
 			    ArrayList<StringBuilder> _newArrayList = CollectionLiterals.<StringBuilder>newArrayList(_stringBuilder);
-			    final Procedure1<StringBuilder> _function = new Procedure1<StringBuilder>() {
-			      public void apply(final StringBuilder it) {
+			    final Consumer<StringBuilder> _function = new Consumer<StringBuilder>() {
+			      public void accept(final StringBuilder it) {
 			        Long _long = new Long(0);
 			        Test.<Serializable>m(it, _long);
 			        int _length = it.length();
 			        InputOutput.<Integer>println(Integer.valueOf(_length));
 			      }
 			    };
-			    IterableExtensions.<StringBuilder>forEach(_newArrayList, _function);
+			    _newArrayList.forEach(_function);
 			  }
 			}
 		''')
