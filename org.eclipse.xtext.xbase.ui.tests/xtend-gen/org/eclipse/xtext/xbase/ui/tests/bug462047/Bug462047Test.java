@@ -20,6 +20,7 @@ import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.junit4.logging.LoggingTester;
 import org.eclipse.xtext.junit4.ui.AbstractEditorTest;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
+import org.eclipse.xtext.junit4.ui.util.TargetPlatformUtil;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.XtextEditorInfo;
@@ -33,6 +34,7 @@ import org.eclipse.xtext.xbase.ui.tests.AbstractXbaseUITestCase;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -43,6 +45,15 @@ import org.junit.runner.RunWith;
 @InjectWith(Bug462047LangUiInjectorProvider.class)
 @SuppressWarnings("all")
 public class Bug462047Test extends AbstractEditorTest {
+  @BeforeClass
+  public static void setupTargetPlatform() {
+    try {
+      TargetPlatformUtil.setTargetPlatform();
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
   private IProject project;
   
   @Inject

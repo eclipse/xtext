@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.common.types.util;
+package org.eclipse.xtext.junit4.ui.util;
 
 import java.io.File;
 import java.util.ArrayList;

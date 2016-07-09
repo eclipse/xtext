@@ -21,6 +21,7 @@ import org.eclipse.xtext.XtextRuntimeModule;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.junit4.ui.AbstractContentAssistProcessorTest;
 import org.eclipse.xtext.junit4.ui.ContentAssistProcessorTestBuilder;
+import org.eclipse.xtext.junit4.ui.util.TargetPlatformUtil;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.contentassist.ContentProposalLabelProvider;
 import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
@@ -32,6 +33,7 @@ import org.eclipse.xtext.xtext.ui.Activator;
 import org.eclipse.xtext.xtext.ui.internal.XtextUIModuleInternal;
 import org.junit.AfterClass;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.google.common.collect.Lists;
@@ -47,6 +49,11 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	private static final String TEST_PROJECT = "TestProject";
 	private static final String MODEL_FILE_NAME = "mytestmodel";
 	private static IProject project;
+	
+	@BeforeClass
+	public static void setupTargetPlatform() throws Exception {
+		TargetPlatformUtil.setTargetPlatform();
+	}
 
 	@Before
 	public void doSetupProject() throws Exception{

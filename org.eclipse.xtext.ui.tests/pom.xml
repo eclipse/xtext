@@ -16,6 +16,15 @@
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>tycho-surefire-plugin</artifactId>
+				<configuration>
+					<bundleStartLevel>
+						<bundle>
+						<id>org.eclipse.xtext.ui.shared</id>
+						<level>6</level>
+						<autoStart>true</autoStart>
+						</bundle>
+					</bundleStartLevel>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

@@ -17,6 +17,7 @@ import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.junit4.logging.LoggingTester
 import org.eclipse.xtext.junit4.ui.AbstractEditorTest
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil
+import org.eclipse.xtext.junit4.ui.util.TargetPlatformUtil
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.ui.editor.XtextEditorInfo
 import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil
@@ -25,6 +26,7 @@ import org.eclipse.xtext.xbase.testlanguages.bug462047.Bug462047LangUiInjectorPr
 import org.eclipse.xtext.xbase.ui.tests.AbstractXbaseUITestCase
 import org.junit.After
 import org.junit.Before
+import org.junit.BeforeClass
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -34,6 +36,11 @@ import org.junit.runner.RunWith
 @RunWith(XtextRunner)
 @InjectWith(Bug462047LangUiInjectorProvider)
 class Bug462047Test extends AbstractEditorTest {
+	
+	@BeforeClass
+	def static void setupTargetPlatform() {
+		TargetPlatformUtil.setTargetPlatform();
+	}
 	
 	IProject project
 	
