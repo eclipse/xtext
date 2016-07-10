@@ -606,6 +606,26 @@ public class IterableExtensions {
 		return IteratorExtensions.toMap(values.iterator(), computeKeys);
 	}
 	
+	
+	/**
+	 * Returns a map for which the {@link Map#values} are product of invoking supplied function {@code computeValues} 
+	 * on input iterable elements, and each key is the product of invoking a supplied function {@code computeKeys} on same elements. 
+	 * If the function produces the same key for different values, the last one will be contained in the map.
+	 * 
+	 * @param inputs
+	 *            the elements to use when constructing the {@code Map}. May not be <code>null</code>.
+	 * @param computeKeys
+	 *            the function used to produce the key for each value. May not be <code>null</code>.
+	 * @param computeValues
+	 *            the function used to produce the values for each key. May not be <code>null</code>.
+	 * @return a map mapping the result of evaluating the functions {@code keyFunction} and {@code computeValues} on each value in the input
+	 *         iterator to that value
+	 */
+	public static <T, K, V> Map<K, V> toMap(Iterable<? extends T> inputs, Function1<? super T, K> computeKeys, Function1<? super T, V> computeValues) {
+        return IteratorExtensions.toMap(inputs.iterator(),computeKeys,computeValues);
+    }
+
+	
 	/**
 	 * Returns a map for which the {@link Map#values} is a collection of lists, where the elements in the list will 
 	 * appear in the order as they appeared in the iterable. Each key is the product of invoking the supplied 
