@@ -1,4 +1,4 @@
-package org.eclipse.xtext.linking.parser.antlr.internal; 
+package org.eclipse.xtext.linking.parser.antlr.internal;
 
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
@@ -53,18 +53,18 @@ public class InternalAbstractIgnoreCaseLinkingTestLanguageParser extends Abstrac
 
 
      	private AbstractIgnoreCaseLinkingTestLanguageGrammarAccess grammarAccess;
-     	
+
         public InternalAbstractIgnoreCaseLinkingTestLanguageParser(TokenStream input, AbstractIgnoreCaseLinkingTestLanguageGrammarAccess grammarAccess) {
             this(input);
             this.grammarAccess = grammarAccess;
             registerRules(grammarAccess.getGrammar());
         }
-        
+
         @Override
         protected String getFirstRuleName() {
-        	return "Model";	
+        	return "Model";
        	}
-       	
+
        	@Override
        	protected AbstractIgnoreCaseLinkingTestLanguageGrammarAccess getGrammarAccess() {
        		return grammarAccess;
@@ -72,8 +72,9 @@ public class InternalAbstractIgnoreCaseLinkingTestLanguageParser extends Abstrac
 
 
 
+
     // $ANTLR start "entryRuleModel"
-    // InternalAbstractIgnoreCaseLinkingTestLanguage.g:67:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
+    // InternalAbstractIgnoreCaseLinkingTestLanguage.g:64:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
     public final EObject entryRuleModel() throws RecognitionException {
         EObject current = null;
 
@@ -81,8 +82,8 @@ public class InternalAbstractIgnoreCaseLinkingTestLanguageParser extends Abstrac
 
 
         try {
-            // InternalAbstractIgnoreCaseLinkingTestLanguage.g:68:2: (iv_ruleModel= ruleModel EOF )
-            // InternalAbstractIgnoreCaseLinkingTestLanguage.g:69:2: iv_ruleModel= ruleModel EOF
+            // InternalAbstractIgnoreCaseLinkingTestLanguage.g:64:46: (iv_ruleModel= ruleModel EOF )
+            // InternalAbstractIgnoreCaseLinkingTestLanguage.g:65:2: iv_ruleModel= ruleModel EOF
             {
              newCompositeNode(grammarAccess.getModelRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -96,11 +97,11 @@ public class InternalAbstractIgnoreCaseLinkingTestLanguageParser extends Abstrac
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -109,20 +110,21 @@ public class InternalAbstractIgnoreCaseLinkingTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "ruleModel"
-    // InternalAbstractIgnoreCaseLinkingTestLanguage.g:76:1: ruleModel returns [EObject current=null] : ( (lv_elements_0_0= ruleElement ) )+ ;
+    // InternalAbstractIgnoreCaseLinkingTestLanguage.g:71:1: ruleModel returns [EObject current=null] : ( (lv_elements_0_0= ruleElement ) )+ ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
         EObject lv_elements_0_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalAbstractIgnoreCaseLinkingTestLanguage.g:79:28: ( ( (lv_elements_0_0= ruleElement ) )+ )
-            // InternalAbstractIgnoreCaseLinkingTestLanguage.g:80:1: ( (lv_elements_0_0= ruleElement ) )+
+            // InternalAbstractIgnoreCaseLinkingTestLanguage.g:77:2: ( ( (lv_elements_0_0= ruleElement ) )+ )
+            // InternalAbstractIgnoreCaseLinkingTestLanguage.g:78:2: ( (lv_elements_0_0= ruleElement ) )+
             {
-            // InternalAbstractIgnoreCaseLinkingTestLanguage.g:80:1: ( (lv_elements_0_0= ruleElement ) )+
+            // InternalAbstractIgnoreCaseLinkingTestLanguage.g:78:2: ( (lv_elements_0_0= ruleElement ) )+
             int cnt1=0;
             loop1:
             do {
@@ -136,30 +138,30 @@ public class InternalAbstractIgnoreCaseLinkingTestLanguageParser extends Abstrac
 
                 switch (alt1) {
             	case 1 :
-            	    // InternalAbstractIgnoreCaseLinkingTestLanguage.g:81:1: (lv_elements_0_0= ruleElement )
+            	    // InternalAbstractIgnoreCaseLinkingTestLanguage.g:79:3: (lv_elements_0_0= ruleElement )
             	    {
-            	    // InternalAbstractIgnoreCaseLinkingTestLanguage.g:81:1: (lv_elements_0_0= ruleElement )
-            	    // InternalAbstractIgnoreCaseLinkingTestLanguage.g:82:3: lv_elements_0_0= ruleElement
+            	    // InternalAbstractIgnoreCaseLinkingTestLanguage.g:79:3: (lv_elements_0_0= ruleElement )
+            	    // InternalAbstractIgnoreCaseLinkingTestLanguage.g:80:4: lv_elements_0_0= ruleElement
             	    {
-            	     
-            	    	        newCompositeNode(grammarAccess.getModelAccess().getElementsElementParserRuleCall_0()); 
-            	    	    
+
+            	    				newCompositeNode(grammarAccess.getModelAccess().getElementsElementParserRuleCall_0());
+            	    			
             	    pushFollow(FollowSets000.FOLLOW_3);
             	    lv_elements_0_0=ruleElement();
 
             	    state._fsp--;
 
 
-            	    	        if (current==null) {
-            	    	            current = createModelElementForParent(grammarAccess.getModelRule());
-            	    	        }
-            	           		add(
-            	           			current, 
-            	           			"elements",
-            	            		lv_elements_0_0, 
-            	            		"org.eclipse.xtext.linking.AbstractIgnoreCaseLinkingTestLanguage.Element");
-            	    	        afterParserOrEnumRuleCall();
-            	    	    
+            	    				if (current==null) {
+            	    					current = createModelElementForParent(grammarAccess.getModelRule());
+            	    				}
+            	    				add(
+            	    					current,
+            	    					"elements",
+            	    					lv_elements_0_0,
+            	    					"org.eclipse.xtext.linking.AbstractIgnoreCaseLinkingTestLanguage.Element");
+            	    				afterParserOrEnumRuleCall();
+            	    			
 
             	    }
 
@@ -179,13 +181,15 @@ public class InternalAbstractIgnoreCaseLinkingTestLanguageParser extends Abstrac
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -194,7 +198,7 @@ public class InternalAbstractIgnoreCaseLinkingTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "entryRuleElement"
-    // InternalAbstractIgnoreCaseLinkingTestLanguage.g:106:1: entryRuleElement returns [EObject current=null] : iv_ruleElement= ruleElement EOF ;
+    // InternalAbstractIgnoreCaseLinkingTestLanguage.g:100:1: entryRuleElement returns [EObject current=null] : iv_ruleElement= ruleElement EOF ;
     public final EObject entryRuleElement() throws RecognitionException {
         EObject current = null;
 
@@ -202,8 +206,8 @@ public class InternalAbstractIgnoreCaseLinkingTestLanguageParser extends Abstrac
 
 
         try {
-            // InternalAbstractIgnoreCaseLinkingTestLanguage.g:107:2: (iv_ruleElement= ruleElement EOF )
-            // InternalAbstractIgnoreCaseLinkingTestLanguage.g:108:2: iv_ruleElement= ruleElement EOF
+            // InternalAbstractIgnoreCaseLinkingTestLanguage.g:100:48: (iv_ruleElement= ruleElement EOF )
+            // InternalAbstractIgnoreCaseLinkingTestLanguage.g:101:2: iv_ruleElement= ruleElement EOF
             {
              newCompositeNode(grammarAccess.getElementRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -217,11 +221,11 @@ public class InternalAbstractIgnoreCaseLinkingTestLanguageParser extends Abstrac
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -230,7 +234,7 @@ public class InternalAbstractIgnoreCaseLinkingTestLanguageParser extends Abstrac
 
 
     // $ANTLR start "ruleElement"
-    // InternalAbstractIgnoreCaseLinkingTestLanguage.g:115:1: ruleElement returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) ( (otherlv_1= RULE_ID ) )? otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* otherlv_4= '}' ) ;
+    // InternalAbstractIgnoreCaseLinkingTestLanguage.g:107:1: ruleElement returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) ( (otherlv_1= RULE_ID ) )? otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* otherlv_4= '}' ) ;
     public final EObject ruleElement() throws RecognitionException {
         EObject current = null;
 
@@ -241,42 +245,43 @@ public class InternalAbstractIgnoreCaseLinkingTestLanguageParser extends Abstrac
         EObject lv_elements_3_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalAbstractIgnoreCaseLinkingTestLanguage.g:118:28: ( ( ( (lv_name_0_0= RULE_ID ) ) ( (otherlv_1= RULE_ID ) )? otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* otherlv_4= '}' ) )
-            // InternalAbstractIgnoreCaseLinkingTestLanguage.g:119:1: ( ( (lv_name_0_0= RULE_ID ) ) ( (otherlv_1= RULE_ID ) )? otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* otherlv_4= '}' )
+            // InternalAbstractIgnoreCaseLinkingTestLanguage.g:113:2: ( ( ( (lv_name_0_0= RULE_ID ) ) ( (otherlv_1= RULE_ID ) )? otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* otherlv_4= '}' ) )
+            // InternalAbstractIgnoreCaseLinkingTestLanguage.g:114:2: ( ( (lv_name_0_0= RULE_ID ) ) ( (otherlv_1= RULE_ID ) )? otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* otherlv_4= '}' )
             {
-            // InternalAbstractIgnoreCaseLinkingTestLanguage.g:119:1: ( ( (lv_name_0_0= RULE_ID ) ) ( (otherlv_1= RULE_ID ) )? otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* otherlv_4= '}' )
-            // InternalAbstractIgnoreCaseLinkingTestLanguage.g:119:2: ( (lv_name_0_0= RULE_ID ) ) ( (otherlv_1= RULE_ID ) )? otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* otherlv_4= '}'
+            // InternalAbstractIgnoreCaseLinkingTestLanguage.g:114:2: ( ( (lv_name_0_0= RULE_ID ) ) ( (otherlv_1= RULE_ID ) )? otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* otherlv_4= '}' )
+            // InternalAbstractIgnoreCaseLinkingTestLanguage.g:115:3: ( (lv_name_0_0= RULE_ID ) ) ( (otherlv_1= RULE_ID ) )? otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* otherlv_4= '}'
             {
-            // InternalAbstractIgnoreCaseLinkingTestLanguage.g:119:2: ( (lv_name_0_0= RULE_ID ) )
-            // InternalAbstractIgnoreCaseLinkingTestLanguage.g:120:1: (lv_name_0_0= RULE_ID )
+            // InternalAbstractIgnoreCaseLinkingTestLanguage.g:115:3: ( (lv_name_0_0= RULE_ID ) )
+            // InternalAbstractIgnoreCaseLinkingTestLanguage.g:116:4: (lv_name_0_0= RULE_ID )
             {
-            // InternalAbstractIgnoreCaseLinkingTestLanguage.g:120:1: (lv_name_0_0= RULE_ID )
-            // InternalAbstractIgnoreCaseLinkingTestLanguage.g:121:3: lv_name_0_0= RULE_ID
+            // InternalAbstractIgnoreCaseLinkingTestLanguage.g:116:4: (lv_name_0_0= RULE_ID )
+            // InternalAbstractIgnoreCaseLinkingTestLanguage.g:117:5: lv_name_0_0= RULE_ID
             {
             lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_4); 
 
-            			newLeafNode(lv_name_0_0, grammarAccess.getElementAccess().getNameIDTerminalRuleCall_0_0()); 
-            		
+            					newLeafNode(lv_name_0_0, grammarAccess.getElementAccess().getNameIDTerminalRuleCall_0_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getElementRule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"name",
-                    		lv_name_0_0, 
-                    		"org.eclipse.xtext.common.Terminals.ID");
-            	    
-
-            }
-
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getElementRule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"name",
+            						lv_name_0_0,
+            						"org.eclipse.xtext.common.Terminals.ID");
+            				
 
             }
 
-            // InternalAbstractIgnoreCaseLinkingTestLanguage.g:137:2: ( (otherlv_1= RULE_ID ) )?
+
+            }
+
+            // InternalAbstractIgnoreCaseLinkingTestLanguage.g:133:3: ( (otherlv_1= RULE_ID ) )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -285,20 +290,20 @@ public class InternalAbstractIgnoreCaseLinkingTestLanguageParser extends Abstrac
             }
             switch (alt2) {
                 case 1 :
-                    // InternalAbstractIgnoreCaseLinkingTestLanguage.g:138:1: (otherlv_1= RULE_ID )
+                    // InternalAbstractIgnoreCaseLinkingTestLanguage.g:134:4: (otherlv_1= RULE_ID )
                     {
-                    // InternalAbstractIgnoreCaseLinkingTestLanguage.g:138:1: (otherlv_1= RULE_ID )
-                    // InternalAbstractIgnoreCaseLinkingTestLanguage.g:139:3: otherlv_1= RULE_ID
+                    // InternalAbstractIgnoreCaseLinkingTestLanguage.g:134:4: (otherlv_1= RULE_ID )
+                    // InternalAbstractIgnoreCaseLinkingTestLanguage.g:135:5: otherlv_1= RULE_ID
                     {
 
-                    			if (current==null) {
-                    	            current = createModelElement(grammarAccess.getElementRule());
-                    	        }
-                            
+                    					if (current==null) {
+                    						current = createModelElement(grammarAccess.getElementRule());
+                    					}
+                    				
                     otherlv_1=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_5); 
 
-                    		newLeafNode(otherlv_1, grammarAccess.getElementAccess().getReferenceElementCrossReference_1_0()); 
-                    	
+                    					newLeafNode(otherlv_1, grammarAccess.getElementAccess().getReferenceElementCrossReference_1_0());
+                    				
 
                     }
 
@@ -310,9 +315,9 @@ public class InternalAbstractIgnoreCaseLinkingTestLanguageParser extends Abstrac
 
             otherlv_2=(Token)match(input,11,FollowSets000.FOLLOW_6); 
 
-                	newLeafNode(otherlv_2, grammarAccess.getElementAccess().getLeftCurlyBracketKeyword_2());
-                
-            // InternalAbstractIgnoreCaseLinkingTestLanguage.g:154:1: ( (lv_elements_3_0= ruleElement ) )*
+            			newLeafNode(otherlv_2, grammarAccess.getElementAccess().getLeftCurlyBracketKeyword_2());
+            		
+            // InternalAbstractIgnoreCaseLinkingTestLanguage.g:150:3: ( (lv_elements_3_0= ruleElement ) )*
             loop3:
             do {
                 int alt3=2;
@@ -325,30 +330,30 @@ public class InternalAbstractIgnoreCaseLinkingTestLanguageParser extends Abstrac
 
                 switch (alt3) {
             	case 1 :
-            	    // InternalAbstractIgnoreCaseLinkingTestLanguage.g:155:1: (lv_elements_3_0= ruleElement )
+            	    // InternalAbstractIgnoreCaseLinkingTestLanguage.g:151:4: (lv_elements_3_0= ruleElement )
             	    {
-            	    // InternalAbstractIgnoreCaseLinkingTestLanguage.g:155:1: (lv_elements_3_0= ruleElement )
-            	    // InternalAbstractIgnoreCaseLinkingTestLanguage.g:156:3: lv_elements_3_0= ruleElement
+            	    // InternalAbstractIgnoreCaseLinkingTestLanguage.g:151:4: (lv_elements_3_0= ruleElement )
+            	    // InternalAbstractIgnoreCaseLinkingTestLanguage.g:152:5: lv_elements_3_0= ruleElement
             	    {
-            	     
-            	    	        newCompositeNode(grammarAccess.getElementAccess().getElementsElementParserRuleCall_3_0()); 
-            	    	    
+
+            	    					newCompositeNode(grammarAccess.getElementAccess().getElementsElementParserRuleCall_3_0());
+            	    				
             	    pushFollow(FollowSets000.FOLLOW_6);
             	    lv_elements_3_0=ruleElement();
 
             	    state._fsp--;
 
 
-            	    	        if (current==null) {
-            	    	            current = createModelElementForParent(grammarAccess.getElementRule());
-            	    	        }
-            	           		add(
-            	           			current, 
-            	           			"elements",
-            	            		lv_elements_3_0, 
-            	            		"org.eclipse.xtext.linking.AbstractIgnoreCaseLinkingTestLanguage.Element");
-            	    	        afterParserOrEnumRuleCall();
-            	    	    
+            	    					if (current==null) {
+            	    						current = createModelElementForParent(grammarAccess.getElementRule());
+            	    					}
+            	    					add(
+            	    						current,
+            	    						"elements",
+            	    						lv_elements_3_0,
+            	    						"org.eclipse.xtext.linking.AbstractIgnoreCaseLinkingTestLanguage.Element");
+            	    					afterParserOrEnumRuleCall();
+            	    				
 
             	    }
 
@@ -363,21 +368,23 @@ public class InternalAbstractIgnoreCaseLinkingTestLanguageParser extends Abstrac
 
             otherlv_4=(Token)match(input,12,FollowSets000.FOLLOW_2); 
 
-                	newLeafNode(otherlv_4, grammarAccess.getElementAccess().getRightCurlyBracketKeyword_4());
-                
+            			newLeafNode(otherlv_4, grammarAccess.getElementAccess().getRightCurlyBracketKeyword_4());
+            		
 
             }
 
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;

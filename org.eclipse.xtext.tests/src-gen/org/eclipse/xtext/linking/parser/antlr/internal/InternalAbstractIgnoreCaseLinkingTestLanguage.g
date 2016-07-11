@@ -5,7 +5,6 @@ grammar InternalAbstractIgnoreCaseLinkingTestLanguage;
 
 options {
 	superClass=AbstractInternalAntlrParser;
-	
 }
 
 @lexer::header {
@@ -17,7 +16,7 @@ import org.eclipse.xtext.parser.antlr.Lexer;
 }
 
 @parser::header {
-package org.eclipse.xtext.linking.parser.antlr.internal; 
+package org.eclipse.xtext.linking.parser.antlr.internal;
 
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
@@ -35,150 +34,144 @@ import org.eclipse.xtext.linking.services.AbstractIgnoreCaseLinkingTestLanguageG
 @parser::members {
 
  	private AbstractIgnoreCaseLinkingTestLanguageGrammarAccess grammarAccess;
- 	
+
     public InternalAbstractIgnoreCaseLinkingTestLanguageParser(TokenStream input, AbstractIgnoreCaseLinkingTestLanguageGrammarAccess grammarAccess) {
         this(input);
         this.grammarAccess = grammarAccess;
         registerRules(grammarAccess.getGrammar());
     }
-    
+
     @Override
     protected String getFirstRuleName() {
-    	return "Model";	
+    	return "Model";
    	}
-   	
+
    	@Override
    	protected AbstractIgnoreCaseLinkingTestLanguageGrammarAccess getGrammarAccess() {
    		return grammarAccess;
    	}
+
 }
 
-@rulecatch { 
-    catch (RecognitionException re) { 
-        recover(input,re); 
+@rulecatch {
+    catch (RecognitionException re) {
+        recover(input,re);
         appendSkippedTokens();
-    } 
+    }
 }
-
-
-
 
 // Entry rule entryRuleModel
-entryRuleModel returns [EObject current=null] 
-	:
+entryRuleModel returns [EObject current=null]:
 	{ newCompositeNode(grammarAccess.getModelRule()); }
-	 iv_ruleModel=ruleModel 
-	 { $current=$iv_ruleModel.current; } 
-	 EOF 
-;
+	iv_ruleModel=ruleModel
+	{ $current=$iv_ruleModel.current; }
+	EOF;
 
 // Rule Model
-ruleModel returns [EObject current=null] 
-    @init { enterRule(); 
-    }
-    @after { leaveRule(); }:
-(
-(
-		{ 
-	        newCompositeNode(grammarAccess.getModelAccess().getElementsElementParserRuleCall_0()); 
-	    }
-		lv_elements_0_0=ruleElement		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getModelRule());
-	        }
-       		add(
-       			$current, 
-       			"elements",
-        		lv_elements_0_0, 
-        		"org.eclipse.xtext.linking.AbstractIgnoreCaseLinkingTestLanguage.Element");
-	        afterParserOrEnumRuleCall();
-	    }
-
-)
-)+
+ruleModel returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			{
+				newCompositeNode(grammarAccess.getModelAccess().getElementsElementParserRuleCall_0());
+			}
+			lv_elements_0_0=ruleElement
+			{
+				if ($current==null) {
+					$current = createModelElementForParent(grammarAccess.getModelRule());
+				}
+				add(
+					$current,
+					"elements",
+					lv_elements_0_0,
+					"org.eclipse.xtext.linking.AbstractIgnoreCaseLinkingTestLanguage.Element");
+				afterParserOrEnumRuleCall();
+			}
+		)
+	)+
 ;
-
-
-
-
 
 // Entry rule entryRuleElement
-entryRuleElement returns [EObject current=null] 
-	:
+entryRuleElement returns [EObject current=null]:
 	{ newCompositeNode(grammarAccess.getElementRule()); }
-	 iv_ruleElement=ruleElement 
-	 { $current=$iv_ruleElement.current; } 
-	 EOF 
-;
+	iv_ruleElement=ruleElement
+	{ $current=$iv_ruleElement.current; }
+	EOF;
 
 // Rule Element
-ruleElement returns [EObject current=null] 
-    @init { enterRule(); 
-    }
-    @after { leaveRule(); }:
-((
-(
-		lv_name_0_0=RULE_ID
+ruleElement returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			(
+				lv_name_0_0=RULE_ID
+				{
+					newLeafNode(lv_name_0_0, grammarAccess.getElementAccess().getNameIDTerminalRuleCall_0_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getElementRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"name",
+						lv_name_0_0,
+						"org.eclipse.xtext.common.Terminals.ID");
+				}
+			)
+		)
+		(
+			(
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getElementRule());
+					}
+				}
+				otherlv_1=RULE_ID
+				{
+					newLeafNode(otherlv_1, grammarAccess.getElementAccess().getReferenceElementCrossReference_1_0());
+				}
+			)
+		)?
+		otherlv_2='{'
 		{
-			newLeafNode(lv_name_0_0, grammarAccess.getElementAccess().getNameIDTerminalRuleCall_0_0()); 
+			newLeafNode(otherlv_2, grammarAccess.getElementAccess().getLeftCurlyBracketKeyword_2());
 		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getElementAccess().getElementsElementParserRuleCall_3_0());
+				}
+				lv_elements_3_0=ruleElement
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getElementRule());
+					}
+					add(
+						$current,
+						"elements",
+						lv_elements_3_0,
+						"org.eclipse.xtext.linking.AbstractIgnoreCaseLinkingTestLanguage.Element");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)*
+		otherlv_4='}'
 		{
-	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getElementRule());
-	        }
-       		setWithLastConsumed(
-       			$current, 
-       			"name",
-        		lv_name_0_0, 
-        		"org.eclipse.xtext.common.Terminals.ID");
-	    }
-
-)
-)(
-(
-		{
-			if ($current==null) {
-	            $current = createModelElement(grammarAccess.getElementRule());
-	        }
-        }
-	otherlv_1=RULE_ID
-	{
-		newLeafNode(otherlv_1, grammarAccess.getElementAccess().getReferenceElementCrossReference_1_0()); 
-	}
-
-)
-)?	otherlv_2='{' 
-    {
-    	newLeafNode(otherlv_2, grammarAccess.getElementAccess().getLeftCurlyBracketKeyword_2());
-    }
-(
-(
-		{ 
-	        newCompositeNode(grammarAccess.getElementAccess().getElementsElementParserRuleCall_3_0()); 
-	    }
-		lv_elements_3_0=ruleElement		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getElementRule());
-	        }
-       		add(
-       			$current, 
-       			"elements",
-        		lv_elements_3_0, 
-        		"org.eclipse.xtext.linking.AbstractIgnoreCaseLinkingTestLanguage.Element");
-	        afterParserOrEnumRuleCall();
-	    }
-
-)
-)*	otherlv_4='}' 
-    {
-    	newLeafNode(otherlv_4, grammarAccess.getElementAccess().getRightCurlyBracketKeyword_4());
-    }
-)
+			newLeafNode(otherlv_4, grammarAccess.getElementAccess().getRightCurlyBracketKeyword_4());
+		}
+	)
 ;
-
-
-
-
 
 RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
@@ -193,5 +186,3 @@ RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
 RULE_WS : (' '|'\t'|'\r'|'\n')+;
 
 RULE_ANY_OTHER : .;
-
-

@@ -3,21 +3,22 @@
  */
 package org.eclipse.xtext.linking.services;
 
-import com.google.inject.Singleton;
 import com.google.inject.Inject;
-
+import com.google.inject.Singleton;
 import java.util.List;
-
-import org.eclipse.xtext.*;
-import org.eclipse.xtext.service.GrammarProvider;
-import org.eclipse.xtext.service.AbstractElementFinder.*;
-
-import org.eclipse.xtext.linking.services.AbstractIgnoreCaseLinkingTestLanguageGrammarAccess;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.Group;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
+import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder;
+import org.eclipse.xtext.service.GrammarProvider;
 
 @Singleton
 public class IgnoreCaseImportsTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
-	
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.linking.IgnoreCaseImportsTestLanguage.Model");
@@ -31,23 +32,22 @@ public class IgnoreCaseImportsTestLanguageGrammarAccess extends AbstractGrammarE
 		//	imports+=Import*
 		//	elements+=Element+;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//imports+=Import* elements+=Element+
 		public Group getGroup() { return cGroup; }
-
+		
 		//imports+=Import*
 		public Assignment getImportsAssignment_0() { return cImportsAssignment_0; }
-
+		
 		//Import
 		public RuleCall getImportsImportParserRuleCall_0_0() { return cImportsImportParserRuleCall_0_0; }
-
+		
 		//elements+=Element+
 		public Assignment getElementsAssignment_1() { return cElementsAssignment_1; }
-
+		
 		//Element
 		public RuleCall getElementsElementParserRuleCall_1_0() { return cElementsElementParserRuleCall_1_0; }
 	}
-
 	public class ImportElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.linking.IgnoreCaseImportsTestLanguage.Import");
 		private final Assignment cImportURIAssignment = (Assignment)rule.eContents().get(1);
@@ -56,10 +56,10 @@ public class IgnoreCaseImportsTestLanguageGrammarAccess extends AbstractGrammarE
 		//Import:
 		//	importURI=STRING;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//importURI=STRING
 		public Assignment getImportURIAssignment() { return cImportURIAssignment; }
-
+		
 		//STRING
 		public RuleCall getImportURISTRINGTerminalRuleCall_0() { return cImportURISTRINGTerminalRuleCall_0; }
 	}
@@ -69,15 +69,15 @@ public class IgnoreCaseImportsTestLanguageGrammarAccess extends AbstractGrammarE
 	private final ImportElements pImport;
 	
 	private final Grammar grammar;
-
+	
 	private final AbstractIgnoreCaseLinkingTestLanguageGrammarAccess gaAbstractIgnoreCaseLinkingTestLanguage;
-
+	
 	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public IgnoreCaseImportsTestLanguageGrammarAccess(GrammarProvider grammarProvider,
-		AbstractIgnoreCaseLinkingTestLanguageGrammarAccess gaAbstractIgnoreCaseLinkingTestLanguage,
-		TerminalsGrammarAccess gaTerminals) {
+			AbstractIgnoreCaseLinkingTestLanguageGrammarAccess gaAbstractIgnoreCaseLinkingTestLanguage,
+			TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaAbstractIgnoreCaseLinkingTestLanguage = gaAbstractIgnoreCaseLinkingTestLanguage;
 		this.gaTerminals = gaTerminals;
@@ -106,11 +106,11 @@ public class IgnoreCaseImportsTestLanguageGrammarAccess extends AbstractGrammarE
 		return grammar;
 	}
 	
-
+	
 	public AbstractIgnoreCaseLinkingTestLanguageGrammarAccess getAbstractIgnoreCaseLinkingTestLanguageGrammarAccess() {
 		return gaAbstractIgnoreCaseLinkingTestLanguage;
 	}
-
+	
 	public TerminalsGrammarAccess getTerminalsGrammarAccess() {
 		return gaTerminals;
 	}
@@ -126,7 +126,7 @@ public class IgnoreCaseImportsTestLanguageGrammarAccess extends AbstractGrammarE
 	public ParserRule getModelRule() {
 		return getModelAccess().getRule();
 	}
-
+	
 	//Import:
 	//	importURI=STRING;
 	public ImportElements getImportAccess() {
@@ -136,7 +136,7 @@ public class IgnoreCaseImportsTestLanguageGrammarAccess extends AbstractGrammarE
 	public ParserRule getImportRule() {
 		return getImportAccess().getRule();
 	}
-
+	
 	//Element:
 	//	name=ID reference=[Element]? '{'
 	//	elements+=Element*
@@ -148,47 +148,47 @@ public class IgnoreCaseImportsTestLanguageGrammarAccess extends AbstractGrammarE
 	public ParserRule getElementRule() {
 		return getElementAccess().getRule();
 	}
-
+	
 	//terminal ID:
 	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
-	} 
-
+	}
+	
 	//terminal INT returns ecore::EInt:
 	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
-	} 
-
+	}
+	
 	//terminal STRING:
 	//	'"' ('\\' . | !('\\' | '"'))* '"' |
 	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
-	} 
-
+	}
+	
 	//terminal ML_COMMENT:
 	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal SL_COMMENT:
 	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal WS:
 	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
-	} 
-
+	}
+	
 	//terminal ANY_OTHER:
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
-	} 
+	}
 }

@@ -77,8 +77,8 @@ Workflow {
 		}
 		language = {
 			grammarUri = "classpath:/org/eclipse/xtext/linking/AbstractIgnoreCaseLinkingTestLanguage.xtext"
-			fragment = @TestLanguagesFragments {
-			}
+			fragment = @TestLanguagesFragments {}
+			fragment = xtext.generator.scoping.ImportNamespacesScopingFragment2 {}
 		}
 		language = {
 			grammarUri = "classpath:/org/eclipse/xtext/linking/IgnoreCaseNamespacesTestLanguage.xtext"
@@ -93,7 +93,7 @@ Workflow {
 			grammarUri = "classpath:/org/eclipse/xtext/linking/IgnoreCaseImportsTestLanguage.xtext"
 			fragment = xtext.generator.CompositeGeneratorFragment2 {
 				fragment = @TestLanguagesFragments {}
-				fragment = xtext.generator.scoping.ImportNamespacesScopingFragment2 { //XXX ImportURIScopingFragment
+				fragment = tests.ImportURIScopingFragment2 {
 					ignoreCase = true
 				}
 			}

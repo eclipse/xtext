@@ -5,7 +5,6 @@ grammar InternalBug289059TestLanguage;
 
 options {
 	superClass=AbstractInternalAntlrParser;
-	
 }
 
 @lexer::header {
@@ -17,7 +16,7 @@ import org.eclipse.xtext.parser.antlr.Lexer;
 }
 
 @parser::header {
-package org.eclipse.xtext.linking.parser.antlr.internal; 
+package org.eclipse.xtext.linking.parser.antlr.internal;
 
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
@@ -35,134 +34,130 @@ import org.eclipse.xtext.linking.services.Bug289059TestLanguageGrammarAccess;
 @parser::members {
 
  	private Bug289059TestLanguageGrammarAccess grammarAccess;
- 	
+
     public InternalBug289059TestLanguageParser(TokenStream input, Bug289059TestLanguageGrammarAccess grammarAccess) {
         this(input);
         this.grammarAccess = grammarAccess;
         registerRules(grammarAccess.getGrammar());
     }
-    
+
     @Override
     protected String getFirstRuleName() {
-    	return "Model";	
+    	return "Model";
    	}
-   	
+
    	@Override
    	protected Bug289059TestLanguageGrammarAccess getGrammarAccess() {
    		return grammarAccess;
    	}
+
 }
 
-@rulecatch { 
-    catch (RecognitionException re) { 
-        recover(input,re); 
+@rulecatch {
+    catch (RecognitionException re) {
+        recover(input,re);
         appendSkippedTokens();
-    } 
+    }
 }
-
-
-
 
 // Entry rule entryRuleModel
-entryRuleModel returns [EObject current=null] 
-	:
+entryRuleModel returns [EObject current=null]:
 	{ newCompositeNode(grammarAccess.getModelRule()); }
-	 iv_ruleModel=ruleModel 
-	 { $current=$iv_ruleModel.current; } 
-	 EOF 
-;
+	iv_ruleModel=ruleModel
+	{ $current=$iv_ruleModel.current; }
+	EOF;
 
 // Rule Model
-ruleModel returns [EObject current=null] 
-    @init { enterRule(); 
-    }
-    @after { leaveRule(); }:
-((
-(
-		lv_name_0_0=RULE_ID
-		{
-			newLeafNode(lv_name_0_0, grammarAccess.getModelAccess().getNameIDTerminalRuleCall_0_0()); 
-		}
-		{
-	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getModelRule());
-	        }
-       		setWithLastConsumed(
-       			$current, 
-       			"name",
-        		lv_name_0_0, 
-        		"org.eclipse.xtext.common.Terminals.ID");
-	    }
-
-)
-)(
-(
-		{ 
-	        newCompositeNode(grammarAccess.getModelAccess().getEnabledUnassignedActionParserRuleCall_1_0()); 
-	    }
-		lv_enabled_1_0=ruleUnassignedAction		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getModelRule());
-	        }
-       		set(
-       			$current, 
-       			"enabled",
-        		lv_enabled_1_0, 
-        		"org.eclipse.xtext.linking.Bug289059TestLanguage.UnassignedAction");
-	        afterParserOrEnumRuleCall();
-	    }
-
-)
-)?(
-(
-		{
-			if ($current==null) {
-	            $current = createModelElement(grammarAccess.getModelRule());
-	        }
-        }
-	otherlv_2=RULE_ID
-	{
-		newLeafNode(otherlv_2, grammarAccess.getModelAccess().getReferenceModelCrossReference_2_0()); 
-	}
-
-)
-)?)
+ruleModel returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			(
+				lv_name_0_0=RULE_ID
+				{
+					newLeafNode(lv_name_0_0, grammarAccess.getModelAccess().getNameIDTerminalRuleCall_0_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getModelRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"name",
+						lv_name_0_0,
+						"org.eclipse.xtext.common.Terminals.ID");
+				}
+			)
+		)
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getModelAccess().getEnabledUnassignedActionParserRuleCall_1_0());
+				}
+				lv_enabled_1_0=ruleUnassignedAction
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getModelRule());
+					}
+					set(
+						$current,
+						"enabled",
+						lv_enabled_1_0,
+						"org.eclipse.xtext.linking.Bug289059TestLanguage.UnassignedAction");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)?
+		(
+			(
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getModelRule());
+					}
+				}
+				otherlv_2=RULE_ID
+				{
+					newLeafNode(otherlv_2, grammarAccess.getModelAccess().getReferenceModelCrossReference_2_0());
+				}
+			)
+		)?
+	)
 ;
-
-
-
-
 
 // Entry rule entryRuleUnassignedAction
-entryRuleUnassignedAction returns [EObject current=null] 
-	:
+entryRuleUnassignedAction returns [EObject current=null]:
 	{ newCompositeNode(grammarAccess.getUnassignedActionRule()); }
-	 iv_ruleUnassignedAction=ruleUnassignedAction 
-	 { $current=$iv_ruleUnassignedAction.current; } 
-	 EOF 
-;
+	iv_ruleUnassignedAction=ruleUnassignedAction
+	{ $current=$iv_ruleUnassignedAction.current; }
+	EOF;
 
 // Rule UnassignedAction
-ruleUnassignedAction returns [EObject current=null] 
-    @init { enterRule(); 
-    }
-    @after { leaveRule(); }:
-((
-    {
-        $current = forceCreateModelElement(
-            grammarAccess.getUnassignedActionAccess().getUnassignedActionAction_0(),
-            $current);
-    }
-)	otherlv_1='enabled' 
-    {
-    	newLeafNode(otherlv_1, grammarAccess.getUnassignedActionAccess().getEnabledKeyword_1());
-    }
-)
+ruleUnassignedAction returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			{
+				$current = forceCreateModelElement(
+					grammarAccess.getUnassignedActionAccess().getUnassignedActionAction_0(),
+					$current);
+			}
+		)
+		otherlv_1='enabled'
+		{
+			newLeafNode(otherlv_1, grammarAccess.getUnassignedActionAccess().getEnabledKeyword_1());
+		}
+	)
 ;
-
-
-
-
 
 RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
@@ -177,5 +172,3 @@ RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
 RULE_WS : (' '|'\t'|'\r'|'\n')+;
 
 RULE_ANY_OTHER : .;
-
-

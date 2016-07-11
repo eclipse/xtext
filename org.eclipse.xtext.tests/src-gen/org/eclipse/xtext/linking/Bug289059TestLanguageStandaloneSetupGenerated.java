@@ -3,22 +3,22 @@
  */
 package org.eclipse.xtext.linking;
 
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.ISetup;
+import org.eclipse.xtext.common.TerminalsStandaloneSetup;
+import org.eclipse.xtext.linking.bug289059Test.Bug289059TestPackage;
+import org.eclipse.xtext.resource.IResourceFactory;
+import org.eclipse.xtext.resource.IResourceServiceProvider;
 
-import com.google.inject.Guice;
-import com.google.inject.Injector;
-
-/**
- * Generated from StandaloneSetup.xpt!
- */
 @SuppressWarnings("all")
 public class Bug289059TestLanguageStandaloneSetupGenerated implements ISetup {
 
 	@Override
 	public Injector createInjectorAndDoEMFRegistration() {
-		org.eclipse.xtext.common.TerminalsStandaloneSetup.doSetup();
+		TerminalsStandaloneSetup.doSetup();
 
 		Injector injector = createInjector();
 		register(injector);
@@ -26,19 +26,17 @@ public class Bug289059TestLanguageStandaloneSetupGenerated implements ISetup {
 	}
 	
 	public Injector createInjector() {
-		return Guice.createInjector(new org.eclipse.xtext.linking.Bug289059TestLanguageRuntimeModule());
+		return Guice.createInjector(new Bug289059TestLanguageRuntimeModule());
 	}
 	
 	public void register(Injector injector) {
-
-		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);
-		org.eclipse.xtext.resource.IResourceServiceProvider serviceProvider = injector.getInstance(org.eclipse.xtext.resource.IResourceServiceProvider.class);
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("bug289059testlanguage", resourceFactory);
-		org.eclipse.xtext.resource.IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put("bug289059testlanguage", serviceProvider);
+		IResourceFactory resourceFactory = injector.getInstance(IResourceFactory.class);
+		IResourceServiceProvider serviceProvider = injector.getInstance(IResourceServiceProvider.class);
 		
-	if (!EPackage.Registry.INSTANCE.containsKey("http://eclipse.org/xtext/Bug289059TestLanguage")) {
-		EPackage.Registry.INSTANCE.put("http://eclipse.org/xtext/Bug289059TestLanguage", org.eclipse.xtext.linking.bug289059Test.Bug289059TestPackage.eINSTANCE);
-	}
-
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("bug289059testlanguage", resourceFactory);
+		IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put("bug289059testlanguage", serviceProvider);
+		if (!EPackage.Registry.INSTANCE.containsKey("http://eclipse.org/xtext/Bug289059TestLanguage")) {
+			EPackage.Registry.INSTANCE.put("http://eclipse.org/xtext/Bug289059TestLanguage", Bug289059TestPackage.eINSTANCE);
+		}
 	}
 }

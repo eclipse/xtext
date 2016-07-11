@@ -3,20 +3,24 @@
  */
 package org.eclipse.xtext.linking.services;
 
-import com.google.inject.Singleton;
 import com.google.inject.Inject;
-
+import com.google.inject.Singleton;
 import java.util.List;
-
-import org.eclipse.xtext.*;
-import org.eclipse.xtext.service.GrammarProvider;
-import org.eclipse.xtext.service.AbstractElementFinder.*;
-
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.Group;
+import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
+import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder;
+import org.eclipse.xtext.service.GrammarProvider;
 
 @Singleton
 public class Bug362902GrammarAccess extends AbstractGrammarElementFinder {
-	
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.linking.Bug362902.Model");
@@ -32,29 +36,28 @@ public class Bug362902GrammarAccess extends AbstractGrammarElementFinder {
 		//	greetings+=Greeting*
 		//	'favourite' favourite=[Greeting|MyId];
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//greetings+=Greeting* 'favourite' favourite=[Greeting|MyId]
 		public Group getGroup() { return cGroup; }
-
+		
 		//greetings+=Greeting*
 		public Assignment getGreetingsAssignment_0() { return cGreetingsAssignment_0; }
-
+		
 		//Greeting
 		public RuleCall getGreetingsGreetingParserRuleCall_0_0() { return cGreetingsGreetingParserRuleCall_0_0; }
-
+		
 		//'favourite'
 		public Keyword getFavouriteKeyword_1() { return cFavouriteKeyword_1; }
-
+		
 		//favourite=[Greeting|MyId]
 		public Assignment getFavouriteAssignment_2() { return cFavouriteAssignment_2; }
-
+		
 		//[Greeting|MyId]
 		public CrossReference getFavouriteGreetingCrossReference_2_0() { return cFavouriteGreetingCrossReference_2_0; }
-
+		
 		//MyId
 		public RuleCall getFavouriteGreetingMyIdParserRuleCall_2_0_1() { return cFavouriteGreetingMyIdParserRuleCall_2_0_1; }
 	}
-
 	public class GreetingElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.linking.Bug362902.Greeting");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -66,23 +69,22 @@ public class Bug362902GrammarAccess extends AbstractGrammarElementFinder {
 		//Greeting:
 		//	'Hello' name=MyId '!';
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'Hello' name=MyId '!'
 		public Group getGroup() { return cGroup; }
-
+		
 		//'Hello'
 		public Keyword getHelloKeyword_0() { return cHelloKeyword_0; }
-
+		
 		//name=MyId
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
-
+		
 		//MyId
 		public RuleCall getNameMyIdParserRuleCall_1_0() { return cNameMyIdParserRuleCall_1_0; }
-
+		
 		//'!'
 		public Keyword getExclamationMarkKeyword_2() { return cExclamationMarkKeyword_2; }
 	}
-
 	public class MyIdElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.linking.Bug362902.MyId");
 		private final RuleCall cIDTerminalRuleCall = (RuleCall)rule.eContents().get(1);
@@ -90,7 +92,7 @@ public class Bug362902GrammarAccess extends AbstractGrammarElementFinder {
 		//MyId:
 		//	ID;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//ID
 		public RuleCall getIDTerminalRuleCall() { return cIDTerminalRuleCall; }
 	}
@@ -101,12 +103,12 @@ public class Bug362902GrammarAccess extends AbstractGrammarElementFinder {
 	private final MyIdElements pMyId;
 	
 	private final Grammar grammar;
-
+	
 	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public Bug362902GrammarAccess(GrammarProvider grammarProvider,
-		TerminalsGrammarAccess gaTerminals) {
+			TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
 		this.pModel = new ModelElements();
@@ -135,7 +137,7 @@ public class Bug362902GrammarAccess extends AbstractGrammarElementFinder {
 		return grammar;
 	}
 	
-
+	
 	public TerminalsGrammarAccess getTerminalsGrammarAccess() {
 		return gaTerminals;
 	}
@@ -151,7 +153,7 @@ public class Bug362902GrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getModelRule() {
 		return getModelAccess().getRule();
 	}
-
+	
 	//Greeting:
 	//	'Hello' name=MyId '!';
 	public GreetingElements getGreetingAccess() {
@@ -161,7 +163,7 @@ public class Bug362902GrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getGreetingRule() {
 		return getGreetingAccess().getRule();
 	}
-
+	
 	//MyId:
 	//	ID;
 	public MyIdElements getMyIdAccess() {
@@ -171,47 +173,47 @@ public class Bug362902GrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getMyIdRule() {
 		return getMyIdAccess().getRule();
 	}
-
+	
 	//terminal ID:
 	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
-	} 
-
+	}
+	
 	//terminal INT returns ecore::EInt:
 	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
-	} 
-
+	}
+	
 	//terminal STRING:
 	//	'"' ('\\' . | !('\\' | '"'))* '"' |
 	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
-	} 
-
+	}
+	
 	//terminal ML_COMMENT:
 	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal SL_COMMENT:
 	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal WS:
 	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
-	} 
-
+	}
+	
 	//terminal ANY_OTHER:
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
-	} 
+	}
 }

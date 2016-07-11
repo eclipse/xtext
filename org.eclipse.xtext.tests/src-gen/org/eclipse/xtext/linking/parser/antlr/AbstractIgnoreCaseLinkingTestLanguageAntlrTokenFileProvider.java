@@ -7,10 +7,10 @@ import java.io.InputStream;
 import org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider;
 
 public class AbstractIgnoreCaseLinkingTestLanguageAntlrTokenFileProvider implements IAntlrTokenFileProvider {
-	
+
 	@Override
 	public InputStream getAntlrTokenFile() {
 		ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/linking/parser/antlr/internal/InternalAbstractIgnoreCaseLinkingTestLanguage.tokens");
+		return classLoader.getResourceAsStream("org/eclipse/xtext/linking/parser/antlr/internal/InternalAbstractIgnoreCaseLinkingTestLanguage.tokens");
 	}
 }

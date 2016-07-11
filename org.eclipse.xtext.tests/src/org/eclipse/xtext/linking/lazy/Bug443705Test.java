@@ -12,6 +12,7 @@ import java.util.Collections;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.linking.lazy.lazyLinking.Property;
+import org.eclipse.xtext.linking.lazy.tests.LazyLinkingTestLanguageInjectorProvider;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.XtextResource;

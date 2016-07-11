@@ -18,7 +18,7 @@ import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
 
 @SuppressWarnings("all")
-public abstract class AbstractAbstractIgnoreCaseLinkingTestLanguageSemanticSequencer extends AbstractDelegatingSemanticSequencer {
+public class AbstractIgnoreCaseLinkingTestLanguageSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 
 	@Inject
 	private AbstractIgnoreCaseLinkingTestLanguageGrammarAccess grammarAccess;

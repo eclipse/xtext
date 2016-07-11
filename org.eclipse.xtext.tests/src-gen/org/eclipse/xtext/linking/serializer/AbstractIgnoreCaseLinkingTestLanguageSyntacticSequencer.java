@@ -15,7 +15,7 @@ import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISyn
 import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
 
 @SuppressWarnings("all")
-public abstract class AbstractAbstractIgnoreCaseLinkingTestLanguageSyntacticSequencer extends AbstractSyntacticSequencer {
+public class AbstractIgnoreCaseLinkingTestLanguageSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected AbstractIgnoreCaseLinkingTestLanguageGrammarAccess grammarAccess;
 	

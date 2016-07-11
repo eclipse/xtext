@@ -3,22 +3,21 @@
  */
 package org.eclipse.xtext.linking;
 
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.ISetup;
+import org.eclipse.xtext.linking.ignoreCaseNamespacesTest.IgnoreCaseNamespacesTestPackage;
+import org.eclipse.xtext.resource.IResourceFactory;
+import org.eclipse.xtext.resource.IResourceServiceProvider;
 
-import com.google.inject.Guice;
-import com.google.inject.Injector;
-
-/**
- * Generated from StandaloneSetup.xpt!
- */
 @SuppressWarnings("all")
 public class IgnoreCaseNamespacesTestLanguageStandaloneSetupGenerated implements ISetup {
 
 	@Override
 	public Injector createInjectorAndDoEMFRegistration() {
-		org.eclipse.xtext.linking.AbstractIgnoreCaseLinkingTestLanguageStandaloneSetup.doSetup();
+		AbstractIgnoreCaseLinkingTestLanguageStandaloneSetup.doSetup();
 
 		Injector injector = createInjector();
 		register(injector);
@@ -26,19 +25,17 @@ public class IgnoreCaseNamespacesTestLanguageStandaloneSetupGenerated implements
 	}
 	
 	public Injector createInjector() {
-		return Guice.createInjector(new org.eclipse.xtext.linking.IgnoreCaseNamespacesTestLanguageRuntimeModule());
+		return Guice.createInjector(new IgnoreCaseNamespacesTestLanguageRuntimeModule());
 	}
 	
 	public void register(Injector injector) {
-
-		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);
-		org.eclipse.xtext.resource.IResourceServiceProvider serviceProvider = injector.getInstance(org.eclipse.xtext.resource.IResourceServiceProvider.class);
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ignorecasenamespacestestlanguage", resourceFactory);
-		org.eclipse.xtext.resource.IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put("ignorecasenamespacestestlanguage", serviceProvider);
+		IResourceFactory resourceFactory = injector.getInstance(IResourceFactory.class);
+		IResourceServiceProvider serviceProvider = injector.getInstance(IResourceServiceProvider.class);
 		
-	if (!EPackage.Registry.INSTANCE.containsKey("http://eclipse.org/xtext/ignoreCaseNamespacesTestLanguage")) {
-		EPackage.Registry.INSTANCE.put("http://eclipse.org/xtext/ignoreCaseNamespacesTestLanguage", org.eclipse.xtext.linking.ignoreCaseNamespacesTest.IgnoreCaseNamespacesTestPackage.eINSTANCE);
-	}
-
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("ignorecasenamespacestestlanguage", resourceFactory);
+		IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put("ignorecasenamespacestestlanguage", serviceProvider);
+		if (!EPackage.Registry.INSTANCE.containsKey("http://eclipse.org/xtext/ignoreCaseNamespacesTestLanguage")) {
+			EPackage.Registry.INSTANCE.put("http://eclipse.org/xtext/ignoreCaseNamespacesTestLanguage", IgnoreCaseNamespacesTestPackage.eINSTANCE);
+		}
 	}
 }
