@@ -698,7 +698,7 @@ import com.google.common.collect.Sets;
 	}
 	
 	/**
-	 * Returns a map for which the {@link Map#values} are product of invoking supplied function {@code computeValues} 
+	 * Returns a map for which the {@link Map#values} are the product of invoking supplied function {@code computeValues} 
 	 * on input iterable elements, and each key is the product of invoking a supplied function {@code computeKeys} on same elements. 
 	 * If the function produces the same key for different values, the last one will be contained in the map. The input iterator is left exhausted.
 	 * 
