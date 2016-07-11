@@ -4,36 +4,37 @@
 package org.eclipse.xtext.grammarinheritance.parser.antlr;
 
 import com.google.inject.Inject;
-
-import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.grammarinheritance.parser.antlr.internal.InternalBaseInheritanceTestLanguageParser;
 import org.eclipse.xtext.grammarinheritance.services.BaseInheritanceTestLanguageGrammarAccess;
+import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
-public class BaseInheritanceTestLanguageParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {
-	
+public class BaseInheritanceTestLanguageParser extends AbstractAntlrParser {
+
 	@Inject
 	private BaseInheritanceTestLanguageGrammarAccess grammarAccess;
-	
+
 	@Override
 	protected void setInitialHiddenTokens(XtextTokenStream tokenStream) {
 		tokenStream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
 	}
 	
+
 	@Override
-	protected org.eclipse.xtext.grammarinheritance.parser.antlr.internal.InternalBaseInheritanceTestLanguageParser createParser(XtextTokenStream stream) {
-		return new org.eclipse.xtext.grammarinheritance.parser.antlr.internal.InternalBaseInheritanceTestLanguageParser(stream, getGrammarAccess());
+	protected InternalBaseInheritanceTestLanguageParser createParser(XtextTokenStream stream) {
+		return new InternalBaseInheritanceTestLanguageParser(stream, getGrammarAccess());
 	}
-	
+
 	@Override 
 	protected String getDefaultRuleName() {
 		return "Model";
 	}
-	
+
 	public BaseInheritanceTestLanguageGrammarAccess getGrammarAccess() {
 		return this.grammarAccess;
 	}
-	
+
 	public void setGrammarAccess(BaseInheritanceTestLanguageGrammarAccess grammarAccess) {
 		this.grammarAccess = grammarAccess;
 	}
-	
 }

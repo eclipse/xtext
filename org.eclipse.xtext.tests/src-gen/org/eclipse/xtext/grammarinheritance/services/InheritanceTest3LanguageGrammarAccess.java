@@ -3,22 +3,25 @@
  */
 package org.eclipse.xtext.grammarinheritance.services;
 
-import com.google.inject.Singleton;
 import com.google.inject.Inject;
-
+import com.google.inject.Singleton;
 import java.util.List;
-
-import org.eclipse.xtext.*;
-import org.eclipse.xtext.service.GrammarProvider;
-import org.eclipse.xtext.service.AbstractElementFinder.*;
-
-import org.eclipse.xtext.grammarinheritance.services.InheritanceTestLanguageGrammarAccess;
-import org.eclipse.xtext.grammarinheritance.services.BaseInheritanceTestLanguageGrammarAccess;
+import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Alternatives;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.Group;
+import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
+import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder;
+import org.eclipse.xtext.service.GrammarProvider;
 
 @Singleton
 public class InheritanceTest3LanguageGrammarAccess extends AbstractGrammarElementFinder {
-	
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.grammarinheritance.InheritanceTest3Language.Model");
@@ -27,11 +30,10 @@ public class InheritanceTest3LanguageGrammarAccess extends AbstractGrammarElemen
 		//Model:
 		//	super::Model;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//super::Model
 		public RuleCall getModelParserRuleCall() { return cModelParserRuleCall; }
 	}
-
 	public class ElementElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.grammarinheritance.InheritanceTest3Language.Element");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -58,56 +60,56 @@ public class InheritanceTest3LanguageGrammarAccess extends AbstractGrammarElemen
 		//	| {Element} "element" name=Terminals::ID
 		//	| {Element} "element" name=super::STRING;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//super::Element | {Element} "element" name=super::ID | {Element} "element" name=Terminals::ID | {Element} "element"
 		//name=super::STRING
 		public Alternatives getAlternatives() { return cAlternatives; }
-
+		
 		//super::Element
 		public RuleCall getElementParserRuleCall_0() { return cElementParserRuleCall_0; }
-
+		
 		//{Element} "element" name=super::ID
 		public Group getGroup_1() { return cGroup_1; }
-
+		
 		//{Element}
 		public Action getElementAction_1_0() { return cElementAction_1_0; }
-
+		
 		//"element"
 		public Keyword getElementKeyword_1_1() { return cElementKeyword_1_1; }
-
+		
 		//name=super::ID
 		public Assignment getNameAssignment_1_2() { return cNameAssignment_1_2; }
-
+		
 		//super::ID
 		public RuleCall getNameIDTerminalRuleCall_1_2_0() { return cNameIDTerminalRuleCall_1_2_0; }
-
+		
 		//{Element} "element" name=Terminals::ID
 		public Group getGroup_2() { return cGroup_2; }
-
+		
 		//{Element}
 		public Action getElementAction_2_0() { return cElementAction_2_0; }
-
+		
 		//"element"
 		public Keyword getElementKeyword_2_1() { return cElementKeyword_2_1; }
-
+		
 		//name=Terminals::ID
 		public Assignment getNameAssignment_2_2() { return cNameAssignment_2_2; }
-
+		
 		//Terminals::ID
 		public RuleCall getNameIDTerminalRuleCall_2_2_0() { return cNameIDTerminalRuleCall_2_2_0; }
-
+		
 		//{Element} "element" name=super::STRING
 		public Group getGroup_3() { return cGroup_3; }
-
+		
 		//{Element}
 		public Action getElementAction_3_0() { return cElementAction_3_0; }
-
+		
 		//"element"
 		public Keyword getElementKeyword_3_1() { return cElementKeyword_3_1; }
-
+		
 		//name=super::STRING
 		public Assignment getNameAssignment_3_2() { return cNameAssignment_3_2; }
-
+		
 		//super::STRING
 		public RuleCall getNameSTRINGTerminalRuleCall_3_2_0() { return cNameSTRINGTerminalRuleCall_3_2_0; }
 	}
@@ -118,18 +120,18 @@ public class InheritanceTest3LanguageGrammarAccess extends AbstractGrammarElemen
 	private final TerminalRule tID;
 	
 	private final Grammar grammar;
-
+	
 	private final InheritanceTestLanguageGrammarAccess gaInheritanceTestLanguage;
-
+	
 	private final BaseInheritanceTestLanguageGrammarAccess gaBaseInheritanceTestLanguage;
-
+	
 	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public InheritanceTest3LanguageGrammarAccess(GrammarProvider grammarProvider,
-		InheritanceTestLanguageGrammarAccess gaInheritanceTestLanguage,
-		BaseInheritanceTestLanguageGrammarAccess gaBaseInheritanceTestLanguage,
-		TerminalsGrammarAccess gaTerminals) {
+			InheritanceTestLanguageGrammarAccess gaInheritanceTestLanguage,
+			BaseInheritanceTestLanguageGrammarAccess gaBaseInheritanceTestLanguage,
+			TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaInheritanceTestLanguage = gaInheritanceTestLanguage;
 		this.gaBaseInheritanceTestLanguage = gaBaseInheritanceTestLanguage;
@@ -160,15 +162,15 @@ public class InheritanceTest3LanguageGrammarAccess extends AbstractGrammarElemen
 		return grammar;
 	}
 	
-
+	
 	public InheritanceTestLanguageGrammarAccess getInheritanceTestLanguageGrammarAccess() {
 		return gaInheritanceTestLanguage;
 	}
-
+	
 	public BaseInheritanceTestLanguageGrammarAccess getBaseInheritanceTestLanguageGrammarAccess() {
 		return gaBaseInheritanceTestLanguage;
 	}
-
+	
 	public TerminalsGrammarAccess getTerminalsGrammarAccess() {
 		return gaTerminals;
 	}
@@ -183,7 +185,7 @@ public class InheritanceTest3LanguageGrammarAccess extends AbstractGrammarElemen
 	public ParserRule getModelRule() {
 		return getModelAccess().getRule();
 	}
-
+	
 	//Element:
 	//	super::Element
 	//	| {Element} "element" name=super::ID
@@ -196,13 +198,13 @@ public class InheritanceTest3LanguageGrammarAccess extends AbstractGrammarElemen
 	public ParserRule getElementRule() {
 		return getElementAccess().getRule();
 	}
-
+	
 	//terminal ID:
 	//	'id';
 	public TerminalRule getIDRule() {
 		return tID;
-	} 
-
+	}
+	
 	//Model:
 	//	"model" name=super::ID "{"
 	//	elements+=super::Element*
@@ -214,7 +216,7 @@ public class InheritanceTest3LanguageGrammarAccess extends AbstractGrammarElemen
 	public ParserRule getInheritanceTestLanguageModelRule() {
 		return getInheritanceTestLanguageModelAccess().getRule();
 	}
-
+	
 	//Element:
 	//	"element" name=super::ID;
 	public InheritanceTestLanguageGrammarAccess.ElementElements getInheritanceTestLanguageElementAccess() {
@@ -224,13 +226,13 @@ public class InheritanceTest3LanguageGrammarAccess extends AbstractGrammarElemen
 	public ParserRule getInheritanceTestLanguageElementRule() {
 		return getInheritanceTestLanguageElementAccess().getRule();
 	}
-
+	
 	//terminal ID:
 	//	'a'..'z'+;
 	public TerminalRule getInheritanceTestLanguageIDRule() {
 		return gaInheritanceTestLanguage.getIDRule();
-	} 
-
+	}
+	
 	//FQN:
 	//	super::ID ('.' super::ID)*;
 	public BaseInheritanceTestLanguageGrammarAccess.FQNElements getFQNAccess() {
@@ -240,47 +242,47 @@ public class InheritanceTest3LanguageGrammarAccess extends AbstractGrammarElemen
 	public ParserRule getFQNRule() {
 		return getFQNAccess().getRule();
 	}
-
+	
 	//terminal ID:
 	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getTerminalsIDRule() {
 		return gaTerminals.getIDRule();
-	} 
-
+	}
+	
 	//terminal INT returns ecore::EInt:
 	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
-	} 
-
+	}
+	
 	//terminal STRING:
 	//	'"' ('\\' . | !('\\' | '"'))* '"' |
 	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
-	} 
-
+	}
+	
 	//terminal ML_COMMENT:
 	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal SL_COMMENT:
 	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal WS:
 	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
-	} 
-
+	}
+	
 	//terminal ANY_OTHER:
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
-	} 
+	}
 }

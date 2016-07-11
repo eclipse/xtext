@@ -88,6 +88,15 @@ public interface AmetamodelPackage extends EPackage {
 	int ATYPE_FEATURE_COUNT = 1;
 
 	/**
+	 * The number of operations of the '<em>AType</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATYPE_OPERATION_COUNT = 0;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.grammarinheritance.ametamodel.impl.AModelImpl <em>AModel</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -114,6 +123,16 @@ public interface AmetamodelPackage extends EPackage {
 	 * @ordered
 	 */
 	int AMODEL_FEATURE_COUNT = 1;
+
+
+	/**
+	 * The number of operations of the '<em>AModel</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AMODEL_OPERATION_COUNT = 0;
 
 
 	/**

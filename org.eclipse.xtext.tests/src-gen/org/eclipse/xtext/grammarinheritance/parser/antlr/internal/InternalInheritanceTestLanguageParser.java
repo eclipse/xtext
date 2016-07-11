@@ -1,4 +1,4 @@
-package org.eclipse.xtext.grammarinheritance.parser.antlr.internal; 
+package org.eclipse.xtext.grammarinheritance.parser.antlr.internal;
 
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
@@ -55,18 +55,18 @@ public class InternalInheritanceTestLanguageParser extends AbstractInternalAntlr
 
 
      	private InheritanceTestLanguageGrammarAccess grammarAccess;
-     	
+
         public InternalInheritanceTestLanguageParser(TokenStream input, InheritanceTestLanguageGrammarAccess grammarAccess) {
             this(input);
             this.grammarAccess = grammarAccess;
             registerRules(grammarAccess.getGrammar());
         }
-        
+
         @Override
         protected String getFirstRuleName() {
-        	return "Model";	
+        	return "Model";
        	}
-       	
+
        	@Override
        	protected InheritanceTestLanguageGrammarAccess getGrammarAccess() {
        		return grammarAccess;
@@ -74,8 +74,9 @@ public class InternalInheritanceTestLanguageParser extends AbstractInternalAntlr
 
 
 
+
     // $ANTLR start "entryRuleModel"
-    // InternalInheritanceTestLanguage.g:67:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
+    // InternalInheritanceTestLanguage.g:64:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
     public final EObject entryRuleModel() throws RecognitionException {
         EObject current = null;
 
@@ -83,8 +84,8 @@ public class InternalInheritanceTestLanguageParser extends AbstractInternalAntlr
 
 
         try {
-            // InternalInheritanceTestLanguage.g:68:2: (iv_ruleModel= ruleModel EOF )
-            // InternalInheritanceTestLanguage.g:69:2: iv_ruleModel= ruleModel EOF
+            // InternalInheritanceTestLanguage.g:64:46: (iv_ruleModel= ruleModel EOF )
+            // InternalInheritanceTestLanguage.g:65:2: iv_ruleModel= ruleModel EOF
             {
              newCompositeNode(grammarAccess.getModelRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -98,11 +99,11 @@ public class InternalInheritanceTestLanguageParser extends AbstractInternalAntlr
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -111,7 +112,7 @@ public class InternalInheritanceTestLanguageParser extends AbstractInternalAntlr
 
 
     // $ANTLR start "ruleModel"
-    // InternalInheritanceTestLanguage.g:76:1: ruleModel returns [EObject current=null] : (otherlv_0= 'model' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* otherlv_4= '}' ) ;
+    // InternalInheritanceTestLanguage.g:71:1: ruleModel returns [EObject current=null] : (otherlv_0= 'model' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* otherlv_4= '}' ) ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
@@ -122,39 +123,40 @@ public class InternalInheritanceTestLanguageParser extends AbstractInternalAntlr
         EObject lv_elements_3_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalInheritanceTestLanguage.g:79:28: ( (otherlv_0= 'model' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* otherlv_4= '}' ) )
-            // InternalInheritanceTestLanguage.g:80:1: (otherlv_0= 'model' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* otherlv_4= '}' )
+            // InternalInheritanceTestLanguage.g:77:2: ( (otherlv_0= 'model' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* otherlv_4= '}' ) )
+            // InternalInheritanceTestLanguage.g:78:2: (otherlv_0= 'model' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* otherlv_4= '}' )
             {
-            // InternalInheritanceTestLanguage.g:80:1: (otherlv_0= 'model' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* otherlv_4= '}' )
-            // InternalInheritanceTestLanguage.g:80:3: otherlv_0= 'model' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* otherlv_4= '}'
+            // InternalInheritanceTestLanguage.g:78:2: (otherlv_0= 'model' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* otherlv_4= '}' )
+            // InternalInheritanceTestLanguage.g:79:3: otherlv_0= 'model' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* otherlv_4= '}'
             {
             otherlv_0=(Token)match(input,11,FollowSets000.FOLLOW_3); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getModelAccess().getModelKeyword_0());
-                
-            // InternalInheritanceTestLanguage.g:84:1: ( (lv_name_1_0= RULE_ID ) )
-            // InternalInheritanceTestLanguage.g:85:1: (lv_name_1_0= RULE_ID )
+            			newLeafNode(otherlv_0, grammarAccess.getModelAccess().getModelKeyword_0());
+            		
+            // InternalInheritanceTestLanguage.g:83:3: ( (lv_name_1_0= RULE_ID ) )
+            // InternalInheritanceTestLanguage.g:84:4: (lv_name_1_0= RULE_ID )
             {
-            // InternalInheritanceTestLanguage.g:85:1: (lv_name_1_0= RULE_ID )
-            // InternalInheritanceTestLanguage.g:86:3: lv_name_1_0= RULE_ID
+            // InternalInheritanceTestLanguage.g:84:4: (lv_name_1_0= RULE_ID )
+            // InternalInheritanceTestLanguage.g:85:5: lv_name_1_0= RULE_ID
             {
             lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_4); 
 
-            			newLeafNode(lv_name_1_0, grammarAccess.getModelAccess().getNameIDTerminalRuleCall_1_0()); 
-            		
+            					newLeafNode(lv_name_1_0, grammarAccess.getModelAccess().getNameIDTerminalRuleCall_1_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getModelRule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"name",
-                    		lv_name_1_0, 
-                    		"org.eclipse.xtext.grammarinheritance.InheritanceTestLanguage.ID");
-            	    
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getModelRule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"name",
+            						lv_name_1_0,
+            						"org.eclipse.xtext.grammarinheritance.InheritanceTestLanguage.ID");
+            				
 
             }
 
@@ -163,9 +165,9 @@ public class InternalInheritanceTestLanguageParser extends AbstractInternalAntlr
 
             otherlv_2=(Token)match(input,12,FollowSets000.FOLLOW_5); 
 
-                	newLeafNode(otherlv_2, grammarAccess.getModelAccess().getLeftCurlyBracketKeyword_2());
-                
-            // InternalInheritanceTestLanguage.g:106:1: ( (lv_elements_3_0= ruleElement ) )*
+            			newLeafNode(otherlv_2, grammarAccess.getModelAccess().getLeftCurlyBracketKeyword_2());
+            		
+            // InternalInheritanceTestLanguage.g:105:3: ( (lv_elements_3_0= ruleElement ) )*
             loop1:
             do {
                 int alt1=2;
@@ -178,30 +180,30 @@ public class InternalInheritanceTestLanguageParser extends AbstractInternalAntlr
 
                 switch (alt1) {
             	case 1 :
-            	    // InternalInheritanceTestLanguage.g:107:1: (lv_elements_3_0= ruleElement )
+            	    // InternalInheritanceTestLanguage.g:106:4: (lv_elements_3_0= ruleElement )
             	    {
-            	    // InternalInheritanceTestLanguage.g:107:1: (lv_elements_3_0= ruleElement )
-            	    // InternalInheritanceTestLanguage.g:108:3: lv_elements_3_0= ruleElement
+            	    // InternalInheritanceTestLanguage.g:106:4: (lv_elements_3_0= ruleElement )
+            	    // InternalInheritanceTestLanguage.g:107:5: lv_elements_3_0= ruleElement
             	    {
-            	     
-            	    	        newCompositeNode(grammarAccess.getModelAccess().getElementsElementParserRuleCall_3_0()); 
-            	    	    
+
+            	    					newCompositeNode(grammarAccess.getModelAccess().getElementsElementParserRuleCall_3_0());
+            	    				
             	    pushFollow(FollowSets000.FOLLOW_5);
             	    lv_elements_3_0=ruleElement();
 
             	    state._fsp--;
 
 
-            	    	        if (current==null) {
-            	    	            current = createModelElementForParent(grammarAccess.getModelRule());
-            	    	        }
-            	           		add(
-            	           			current, 
-            	           			"elements",
-            	            		lv_elements_3_0, 
-            	            		"org.eclipse.xtext.grammarinheritance.InheritanceTestLanguage.Element");
-            	    	        afterParserOrEnumRuleCall();
-            	    	    
+            	    					if (current==null) {
+            	    						current = createModelElementForParent(grammarAccess.getModelRule());
+            	    					}
+            	    					add(
+            	    						current,
+            	    						"elements",
+            	    						lv_elements_3_0,
+            	    						"org.eclipse.xtext.grammarinheritance.InheritanceTestLanguage.Element");
+            	    					afterParserOrEnumRuleCall();
+            	    				
 
             	    }
 
@@ -216,21 +218,23 @@ public class InternalInheritanceTestLanguageParser extends AbstractInternalAntlr
 
             otherlv_4=(Token)match(input,13,FollowSets000.FOLLOW_2); 
 
-                	newLeafNode(otherlv_4, grammarAccess.getModelAccess().getRightCurlyBracketKeyword_4());
-                
+            			newLeafNode(otherlv_4, grammarAccess.getModelAccess().getRightCurlyBracketKeyword_4());
+            		
 
             }
 
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -239,7 +243,7 @@ public class InternalInheritanceTestLanguageParser extends AbstractInternalAntlr
 
 
     // $ANTLR start "entryRuleElement"
-    // InternalInheritanceTestLanguage.g:136:1: entryRuleElement returns [EObject current=null] : iv_ruleElement= ruleElement EOF ;
+    // InternalInheritanceTestLanguage.g:132:1: entryRuleElement returns [EObject current=null] : iv_ruleElement= ruleElement EOF ;
     public final EObject entryRuleElement() throws RecognitionException {
         EObject current = null;
 
@@ -247,8 +251,8 @@ public class InternalInheritanceTestLanguageParser extends AbstractInternalAntlr
 
 
         try {
-            // InternalInheritanceTestLanguage.g:137:2: (iv_ruleElement= ruleElement EOF )
-            // InternalInheritanceTestLanguage.g:138:2: iv_ruleElement= ruleElement EOF
+            // InternalInheritanceTestLanguage.g:132:48: (iv_ruleElement= ruleElement EOF )
+            // InternalInheritanceTestLanguage.g:133:2: iv_ruleElement= ruleElement EOF
             {
              newCompositeNode(grammarAccess.getElementRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -262,11 +266,11 @@ public class InternalInheritanceTestLanguageParser extends AbstractInternalAntlr
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -275,49 +279,47 @@ public class InternalInheritanceTestLanguageParser extends AbstractInternalAntlr
 
 
     // $ANTLR start "ruleElement"
-    // InternalInheritanceTestLanguage.g:145:1: ruleElement returns [EObject current=null] : (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) ) ;
+    // InternalInheritanceTestLanguage.g:139:1: ruleElement returns [EObject current=null] : (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) ) ;
     public final EObject ruleElement() throws RecognitionException {
         EObject current = null;
 
         Token otherlv_0=null;
         Token lv_name_1_0=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalInheritanceTestLanguage.g:148:28: ( (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) ) )
-            // InternalInheritanceTestLanguage.g:149:1: (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) )
+            // InternalInheritanceTestLanguage.g:145:2: ( (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) ) )
+            // InternalInheritanceTestLanguage.g:146:2: (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) )
             {
-            // InternalInheritanceTestLanguage.g:149:1: (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) )
-            // InternalInheritanceTestLanguage.g:149:3: otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) )
+            // InternalInheritanceTestLanguage.g:146:2: (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) )
+            // InternalInheritanceTestLanguage.g:147:3: otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) )
             {
             otherlv_0=(Token)match(input,14,FollowSets000.FOLLOW_3); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getElementAccess().getElementKeyword_0());
-                
-            // InternalInheritanceTestLanguage.g:153:1: ( (lv_name_1_0= RULE_ID ) )
-            // InternalInheritanceTestLanguage.g:154:1: (lv_name_1_0= RULE_ID )
+            			newLeafNode(otherlv_0, grammarAccess.getElementAccess().getElementKeyword_0());
+            		
+            // InternalInheritanceTestLanguage.g:151:3: ( (lv_name_1_0= RULE_ID ) )
+            // InternalInheritanceTestLanguage.g:152:4: (lv_name_1_0= RULE_ID )
             {
-            // InternalInheritanceTestLanguage.g:154:1: (lv_name_1_0= RULE_ID )
-            // InternalInheritanceTestLanguage.g:155:3: lv_name_1_0= RULE_ID
+            // InternalInheritanceTestLanguage.g:152:4: (lv_name_1_0= RULE_ID )
+            // InternalInheritanceTestLanguage.g:153:5: lv_name_1_0= RULE_ID
             {
             lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
-            			newLeafNode(lv_name_1_0, grammarAccess.getElementAccess().getNameIDTerminalRuleCall_1_0()); 
-            		
+            					newLeafNode(lv_name_1_0, grammarAccess.getElementAccess().getNameIDTerminalRuleCall_1_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getElementRule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"name",
-                    		lv_name_1_0, 
-                    		"org.eclipse.xtext.grammarinheritance.InheritanceTestLanguage.ID");
-            	    
-
-            }
-
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getElementRule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"name",
+            						lv_name_1_0,
+            						"org.eclipse.xtext.grammarinheritance.InheritanceTestLanguage.ID");
+            				
 
             }
 
@@ -327,13 +329,18 @@ public class InternalInheritanceTestLanguageParser extends AbstractInternalAntlr
 
             }
 
-             leaveRule(); 
+
+            }
+
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;

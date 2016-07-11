@@ -1,4 +1,4 @@
-package org.eclipse.xtext.grammarinheritance.parser.antlr.internal; 
+package org.eclipse.xtext.grammarinheritance.parser.antlr.internal;
 
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
@@ -53,18 +53,18 @@ public class InternalAbstractTestLanguageParser extends AbstractInternalAntlrPar
 
 
      	private AbstractTestLanguageGrammarAccess grammarAccess;
-     	
+
         public InternalAbstractTestLanguageParser(TokenStream input, AbstractTestLanguageGrammarAccess grammarAccess) {
             this(input);
             this.grammarAccess = grammarAccess;
             registerRules(grammarAccess.getGrammar());
         }
-        
+
         @Override
         protected String getFirstRuleName() {
-        	return "InheritedParserRule";	
+        	return "InheritedParserRule";
        	}
-       	
+
        	@Override
        	protected AbstractTestLanguageGrammarAccess getGrammarAccess() {
        		return grammarAccess;
@@ -72,8 +72,9 @@ public class InternalAbstractTestLanguageParser extends AbstractInternalAntlrPar
 
 
 
+
     // $ANTLR start "entryRuleInheritedParserRule"
-    // InternalAbstractTestLanguage.g:67:1: entryRuleInheritedParserRule returns [EObject current=null] : iv_ruleInheritedParserRule= ruleInheritedParserRule EOF ;
+    // InternalAbstractTestLanguage.g:64:1: entryRuleInheritedParserRule returns [EObject current=null] : iv_ruleInheritedParserRule= ruleInheritedParserRule EOF ;
     public final EObject entryRuleInheritedParserRule() throws RecognitionException {
         EObject current = null;
 
@@ -81,8 +82,8 @@ public class InternalAbstractTestLanguageParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalAbstractTestLanguage.g:68:2: (iv_ruleInheritedParserRule= ruleInheritedParserRule EOF )
-            // InternalAbstractTestLanguage.g:69:2: iv_ruleInheritedParserRule= ruleInheritedParserRule EOF
+            // InternalAbstractTestLanguage.g:64:60: (iv_ruleInheritedParserRule= ruleInheritedParserRule EOF )
+            // InternalAbstractTestLanguage.g:65:2: iv_ruleInheritedParserRule= ruleInheritedParserRule EOF
             {
              newCompositeNode(grammarAccess.getInheritedParserRuleRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -96,11 +97,11 @@ public class InternalAbstractTestLanguageParser extends AbstractInternalAntlrPar
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -109,49 +110,47 @@ public class InternalAbstractTestLanguageParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleInheritedParserRule"
-    // InternalAbstractTestLanguage.g:76:1: ruleInheritedParserRule returns [EObject current=null] : (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) ) ;
+    // InternalAbstractTestLanguage.g:71:1: ruleInheritedParserRule returns [EObject current=null] : (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) ) ;
     public final EObject ruleInheritedParserRule() throws RecognitionException {
         EObject current = null;
 
         Token otherlv_0=null;
         Token lv_name_1_0=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalAbstractTestLanguage.g:79:28: ( (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) ) )
-            // InternalAbstractTestLanguage.g:80:1: (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) )
+            // InternalAbstractTestLanguage.g:77:2: ( (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) ) )
+            // InternalAbstractTestLanguage.g:78:2: (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) )
             {
-            // InternalAbstractTestLanguage.g:80:1: (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) )
-            // InternalAbstractTestLanguage.g:80:3: otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) )
+            // InternalAbstractTestLanguage.g:78:2: (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) )
+            // InternalAbstractTestLanguage.g:79:3: otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) )
             {
             otherlv_0=(Token)match(input,12,FollowSets000.FOLLOW_3); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getInheritedParserRuleAccess().getElementKeyword_0());
-                
-            // InternalAbstractTestLanguage.g:84:1: ( (lv_name_1_0= RULE_ID ) )
-            // InternalAbstractTestLanguage.g:85:1: (lv_name_1_0= RULE_ID )
+            			newLeafNode(otherlv_0, grammarAccess.getInheritedParserRuleAccess().getElementKeyword_0());
+            		
+            // InternalAbstractTestLanguage.g:83:3: ( (lv_name_1_0= RULE_ID ) )
+            // InternalAbstractTestLanguage.g:84:4: (lv_name_1_0= RULE_ID )
             {
-            // InternalAbstractTestLanguage.g:85:1: (lv_name_1_0= RULE_ID )
-            // InternalAbstractTestLanguage.g:86:3: lv_name_1_0= RULE_ID
+            // InternalAbstractTestLanguage.g:84:4: (lv_name_1_0= RULE_ID )
+            // InternalAbstractTestLanguage.g:85:5: lv_name_1_0= RULE_ID
             {
             lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
-            			newLeafNode(lv_name_1_0, grammarAccess.getInheritedParserRuleAccess().getNameIDTerminalRuleCall_1_0()); 
-            		
+            					newLeafNode(lv_name_1_0, grammarAccess.getInheritedParserRuleAccess().getNameIDTerminalRuleCall_1_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getInheritedParserRuleRule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"name",
-                    		lv_name_1_0, 
-                    		"org.eclipse.xtext.grammarinheritance.AbstractTestLanguage.ID");
-            	    
-
-            }
-
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getInheritedParserRuleRule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"name",
+            						lv_name_1_0,
+            						"org.eclipse.xtext.grammarinheritance.AbstractTestLanguage.ID");
+            				
 
             }
 
@@ -161,13 +160,18 @@ public class InternalAbstractTestLanguageParser extends AbstractInternalAntlrPar
 
             }
 
-             leaveRule(); 
+
+            }
+
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -176,7 +180,7 @@ public class InternalAbstractTestLanguageParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleOverridableParserRule"
-    // InternalAbstractTestLanguage.g:112:1: entryRuleOverridableParserRule returns [EObject current=null] : iv_ruleOverridableParserRule= ruleOverridableParserRule EOF ;
+    // InternalAbstractTestLanguage.g:105:1: entryRuleOverridableParserRule returns [EObject current=null] : iv_ruleOverridableParserRule= ruleOverridableParserRule EOF ;
     public final EObject entryRuleOverridableParserRule() throws RecognitionException {
         EObject current = null;
 
@@ -184,8 +188,8 @@ public class InternalAbstractTestLanguageParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalAbstractTestLanguage.g:113:2: (iv_ruleOverridableParserRule= ruleOverridableParserRule EOF )
-            // InternalAbstractTestLanguage.g:114:2: iv_ruleOverridableParserRule= ruleOverridableParserRule EOF
+            // InternalAbstractTestLanguage.g:105:62: (iv_ruleOverridableParserRule= ruleOverridableParserRule EOF )
+            // InternalAbstractTestLanguage.g:106:2: iv_ruleOverridableParserRule= ruleOverridableParserRule EOF
             {
              newCompositeNode(grammarAccess.getOverridableParserRuleRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -199,11 +203,11 @@ public class InternalAbstractTestLanguageParser extends AbstractInternalAntlrPar
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -212,49 +216,47 @@ public class InternalAbstractTestLanguageParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleOverridableParserRule"
-    // InternalAbstractTestLanguage.g:121:1: ruleOverridableParserRule returns [EObject current=null] : (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) ) ;
+    // InternalAbstractTestLanguage.g:112:1: ruleOverridableParserRule returns [EObject current=null] : (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) ) ;
     public final EObject ruleOverridableParserRule() throws RecognitionException {
         EObject current = null;
 
         Token otherlv_0=null;
         Token lv_name_1_0=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalAbstractTestLanguage.g:124:28: ( (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) ) )
-            // InternalAbstractTestLanguage.g:125:1: (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) )
+            // InternalAbstractTestLanguage.g:118:2: ( (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) ) )
+            // InternalAbstractTestLanguage.g:119:2: (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) )
             {
-            // InternalAbstractTestLanguage.g:125:1: (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) )
-            // InternalAbstractTestLanguage.g:125:3: otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) )
+            // InternalAbstractTestLanguage.g:119:2: (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) )
+            // InternalAbstractTestLanguage.g:120:3: otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) )
             {
             otherlv_0=(Token)match(input,12,FollowSets000.FOLLOW_3); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getOverridableParserRuleAccess().getElementKeyword_0());
-                
-            // InternalAbstractTestLanguage.g:129:1: ( (lv_name_1_0= RULE_ID ) )
-            // InternalAbstractTestLanguage.g:130:1: (lv_name_1_0= RULE_ID )
+            			newLeafNode(otherlv_0, grammarAccess.getOverridableParserRuleAccess().getElementKeyword_0());
+            		
+            // InternalAbstractTestLanguage.g:124:3: ( (lv_name_1_0= RULE_ID ) )
+            // InternalAbstractTestLanguage.g:125:4: (lv_name_1_0= RULE_ID )
             {
-            // InternalAbstractTestLanguage.g:130:1: (lv_name_1_0= RULE_ID )
-            // InternalAbstractTestLanguage.g:131:3: lv_name_1_0= RULE_ID
+            // InternalAbstractTestLanguage.g:125:4: (lv_name_1_0= RULE_ID )
+            // InternalAbstractTestLanguage.g:126:5: lv_name_1_0= RULE_ID
             {
             lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
-            			newLeafNode(lv_name_1_0, grammarAccess.getOverridableParserRuleAccess().getNameIDTerminalRuleCall_1_0()); 
-            		
+            					newLeafNode(lv_name_1_0, grammarAccess.getOverridableParserRuleAccess().getNameIDTerminalRuleCall_1_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getOverridableParserRuleRule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"name",
-                    		lv_name_1_0, 
-                    		"org.eclipse.xtext.grammarinheritance.AbstractTestLanguage.ID");
-            	    
-
-            }
-
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getOverridableParserRuleRule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"name",
+            						lv_name_1_0,
+            						"org.eclipse.xtext.grammarinheritance.AbstractTestLanguage.ID");
+            				
 
             }
 
@@ -264,13 +266,18 @@ public class InternalAbstractTestLanguageParser extends AbstractInternalAntlrPar
 
             }
 
-             leaveRule(); 
+
+            }
+
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -279,7 +286,7 @@ public class InternalAbstractTestLanguageParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleExtendableParserRule"
-    // InternalAbstractTestLanguage.g:159:1: entryRuleExtendableParserRule returns [EObject current=null] : iv_ruleExtendableParserRule= ruleExtendableParserRule EOF ;
+    // InternalAbstractTestLanguage.g:146:1: entryRuleExtendableParserRule returns [EObject current=null] : iv_ruleExtendableParserRule= ruleExtendableParserRule EOF ;
     public final EObject entryRuleExtendableParserRule() throws RecognitionException {
         EObject current = null;
 
@@ -287,8 +294,8 @@ public class InternalAbstractTestLanguageParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalAbstractTestLanguage.g:160:2: (iv_ruleExtendableParserRule= ruleExtendableParserRule EOF )
-            // InternalAbstractTestLanguage.g:161:2: iv_ruleExtendableParserRule= ruleExtendableParserRule EOF
+            // InternalAbstractTestLanguage.g:146:61: (iv_ruleExtendableParserRule= ruleExtendableParserRule EOF )
+            // InternalAbstractTestLanguage.g:147:2: iv_ruleExtendableParserRule= ruleExtendableParserRule EOF
             {
              newCompositeNode(grammarAccess.getExtendableParserRuleRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -302,11 +309,11 @@ public class InternalAbstractTestLanguageParser extends AbstractInternalAntlrPar
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -315,49 +322,47 @@ public class InternalAbstractTestLanguageParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleExtendableParserRule"
-    // InternalAbstractTestLanguage.g:168:1: ruleExtendableParserRule returns [EObject current=null] : (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) ) ;
+    // InternalAbstractTestLanguage.g:153:1: ruleExtendableParserRule returns [EObject current=null] : (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) ) ;
     public final EObject ruleExtendableParserRule() throws RecognitionException {
         EObject current = null;
 
         Token otherlv_0=null;
         Token lv_name_1_0=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalAbstractTestLanguage.g:171:28: ( (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) ) )
-            // InternalAbstractTestLanguage.g:172:1: (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) )
+            // InternalAbstractTestLanguage.g:159:2: ( (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) ) )
+            // InternalAbstractTestLanguage.g:160:2: (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) )
             {
-            // InternalAbstractTestLanguage.g:172:1: (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) )
-            // InternalAbstractTestLanguage.g:172:3: otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) )
+            // InternalAbstractTestLanguage.g:160:2: (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) )
+            // InternalAbstractTestLanguage.g:161:3: otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) )
             {
             otherlv_0=(Token)match(input,12,FollowSets000.FOLLOW_3); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getExtendableParserRuleAccess().getElementKeyword_0());
-                
-            // InternalAbstractTestLanguage.g:176:1: ( (lv_name_1_0= RULE_ID ) )
-            // InternalAbstractTestLanguage.g:177:1: (lv_name_1_0= RULE_ID )
+            			newLeafNode(otherlv_0, grammarAccess.getExtendableParserRuleAccess().getElementKeyword_0());
+            		
+            // InternalAbstractTestLanguage.g:165:3: ( (lv_name_1_0= RULE_ID ) )
+            // InternalAbstractTestLanguage.g:166:4: (lv_name_1_0= RULE_ID )
             {
-            // InternalAbstractTestLanguage.g:177:1: (lv_name_1_0= RULE_ID )
-            // InternalAbstractTestLanguage.g:178:3: lv_name_1_0= RULE_ID
+            // InternalAbstractTestLanguage.g:166:4: (lv_name_1_0= RULE_ID )
+            // InternalAbstractTestLanguage.g:167:5: lv_name_1_0= RULE_ID
             {
             lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
-            			newLeafNode(lv_name_1_0, grammarAccess.getExtendableParserRuleAccess().getNameIDTerminalRuleCall_1_0()); 
-            		
+            					newLeafNode(lv_name_1_0, grammarAccess.getExtendableParserRuleAccess().getNameIDTerminalRuleCall_1_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getExtendableParserRuleRule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"name",
-                    		lv_name_1_0, 
-                    		"org.eclipse.xtext.grammarinheritance.AbstractTestLanguage.ID");
-            	    
-
-            }
-
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getExtendableParserRuleRule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"name",
+            						lv_name_1_0,
+            						"org.eclipse.xtext.grammarinheritance.AbstractTestLanguage.ID");
+            				
 
             }
 
@@ -367,13 +372,18 @@ public class InternalAbstractTestLanguageParser extends AbstractInternalAntlrPar
 
             }
 
-             leaveRule(); 
+
+            }
+
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
