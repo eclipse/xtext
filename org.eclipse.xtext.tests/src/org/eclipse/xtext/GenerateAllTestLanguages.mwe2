@@ -110,7 +110,9 @@ Workflow {
 		}
 		language = { 
 			grammarUri = "classpath:/org/eclipse/xtext/linking/lazy/LazyLinkingTestLanguage.xtext"
-			fragment = junit.Junit4Fragment2 {}
+			fragment = junit.Junit4Fragment2 {
+				generateStub = false
+			}
 			fragment = @TestLanguagesFragments {}
 		}
 		language = { 
@@ -326,19 +328,25 @@ Workflow {
 		language = {
 			grammarUri = "classpath:/org/eclipse/xtext/parser/fragments/FragmentTestLanguage.xtext"
 			fragment = @TestLanguagesFragments auto-inject {}
-			fragment = junit.Junit4Fragment2 {}
+			fragment = junit.Junit4Fragment2 {
+				generateStub = false
+			}
 		}
 		language = {
 			grammarUri = "classpath:/org/eclipse/xtext/parser/fragments/FragmentTestLanguageEx.xtext"
 			fragment = @TestLanguagesFragmentsEx auto-inject {}
-			fragment = junit.Junit4Fragment2 {}
+			fragment = junit.Junit4Fragment2 {
+				generateStub = false
+			}
 		}
 		language = {
 			grammarUri = "classpath:/org/eclipse/xtext/parser/indentation/IndentationAwareTestLanguage.xtext"
 			fragment = @TestLanguagesFragmentsEx auto-inject {
 				generateStub = true
 			}
-			fragment = junit.Junit4Fragment2 {}
+			fragment = junit.Junit4Fragment2 {
+				generateStub = false
+			}
 		}
 		language = { 
 			grammarUri = "classpath:/org/eclipse/xtext/parser/keywords/KeywordsTestLanguage.xtext"
@@ -347,22 +355,30 @@ Workflow {
 		language = {
 			grammarUri = "classpath:/org/eclipse/xtext/parser/parameters/ParametersTestLanguage.xtext"
 			fragment = @TestLanguagesFragments auto-inject {}
-			fragment = junit.Junit4Fragment2 {}
+			fragment = junit.Junit4Fragment2 {
+				generateStub = false
+			}
 		}
 		language = {
 			grammarUri = "classpath:/org/eclipse/xtext/parser/parameters/TwoParametersTestLanguage.xtext"
 			fragment = @TestLanguagesFragments auto-inject {}
-			fragment = junit.Junit4Fragment2 {}
+			fragment = junit.Junit4Fragment2 {
+				generateStub = false
+			}
 		}
 		language = {
 			grammarUri = "classpath:/org/eclipse/xtext/parser/parameters/NoParametersTestLanguage.xtext"
 			fragment = @TestLanguagesFragments auto-inject {}
-			fragment = junit.Junit4Fragment2 {}
+			fragment = junit.Junit4Fragment2 {
+				generateStub = false
+			}
 		}
 		language = {
 			grammarUri = "classpath:/org/eclipse/xtext/parser/parameters/ParametersTestLanguageEx.xtext"
 			fragment = @TestLanguagesFragmentsEx auto-inject {}
-			fragment = junit.Junit4Fragment2 {}
+			fragment = junit.Junit4Fragment2 {
+				generateStub = false
+			}
 		}
 		language = { 
 			grammarUri = "classpath:/org/eclipse/xtext/parser/terminalrules/Bug292245TestLanguage.xtext"
@@ -420,12 +436,16 @@ Workflow {
 		language = {
 			grammarUri = "classpath:/org/eclipse/xtext/formatting2/internal/FormatterTestLanguage.xtext"
 			fragment = @TestLanguagesFragments auto-inject {}
-			fragment = junit.Junit4Fragment2 {}
+			fragment = junit.Junit4Fragment2 {
+				generateStub = false
+			}
 		}
 		language = {
 			grammarUri = "classpath:/org/eclipse/xtext/formatting2/regionaccess/internal/RegionAccessTestLanguage.xtext"
 			fragment = @TestLanguagesFragments auto-inject {}
-			fragment = junit.Junit4Fragment2 {}
+			fragment = junit.Junit4Fragment2 {
+				generateStub = false
+			}
 		}
 		language = { 
 			grammarUri = "classpath:/org/eclipse/xtext/parsetree/formatter/FormatterTestLanguage.xtext"

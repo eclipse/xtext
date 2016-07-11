@@ -104,7 +104,9 @@ Workflow {
 		}
 		language = {
 			grammarUri = "classpath:/org/eclipse/xtext/linking/lazy/LazyLinkingTestLanguage.xtext"
-			fragment = xtext.generator.junit.Junit4Fragment2 {}
+			fragment = junit.Junit4Fragment2 {
+				generateStub = false
+			}
 			fragment = @TestLanguagesFragments {}
 		}
 	}

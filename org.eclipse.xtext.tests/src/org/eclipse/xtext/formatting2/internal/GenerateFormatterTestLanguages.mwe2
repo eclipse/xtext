@@ -49,12 +49,16 @@ Workflow {
 		language = {
 			grammarUri = "classpath:/org/eclipse/xtext/formatting2/internal/FormatterTestLanguage.xtext"
 			fragment = @TestLanguagesFragments auto-inject {}
-			fragment = xtext.generator.junit.Junit4Fragment2 {}
+			fragment = junit.Junit4Fragment2 {
+				generateStub = false
+			}
 		}
 		language = {
 			grammarUri = "classpath:/org/eclipse/xtext/formatting2/regionaccess/internal/RegionAccessTestLanguage.xtext"
 			fragment = @TestLanguagesFragments auto-inject {}
-			fragment = xtext.generator.junit.Junit4Fragment2 {}
+			fragment = junit.Junit4Fragment2 {
+				generateStub = false
+			}
 		}
 	}
 }

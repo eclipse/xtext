@@ -4,36 +4,37 @@
 package org.eclipse.xtext.formatting2.regionaccess.internal.parser.antlr;
 
 import com.google.inject.Inject;
-
-import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.formatting2.regionaccess.internal.parser.antlr.internal.InternalRegionAccessTestLanguageParser;
 import org.eclipse.xtext.formatting2.regionaccess.internal.services.RegionAccessTestLanguageGrammarAccess;
+import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
-public class RegionAccessTestLanguageParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {
-	
+public class RegionAccessTestLanguageParser extends AbstractAntlrParser {
+
 	@Inject
 	private RegionAccessTestLanguageGrammarAccess grammarAccess;
-	
+
 	@Override
 	protected void setInitialHiddenTokens(XtextTokenStream tokenStream) {
 		tokenStream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
 	}
 	
+
 	@Override
-	protected org.eclipse.xtext.formatting2.regionaccess.internal.parser.antlr.internal.InternalRegionAccessTestLanguageParser createParser(XtextTokenStream stream) {
-		return new org.eclipse.xtext.formatting2.regionaccess.internal.parser.antlr.internal.InternalRegionAccessTestLanguageParser(stream, getGrammarAccess());
+	protected InternalRegionAccessTestLanguageParser createParser(XtextTokenStream stream) {
+		return new InternalRegionAccessTestLanguageParser(stream, getGrammarAccess());
 	}
-	
+
 	@Override 
 	protected String getDefaultRuleName() {
 		return "Root";
 	}
-	
+
 	public RegionAccessTestLanguageGrammarAccess getGrammarAccess() {
 		return this.grammarAccess;
 	}
-	
+
 	public void setGrammarAccess(RegionAccessTestLanguageGrammarAccess grammarAccess) {
 		this.grammarAccess = grammarAccess;
 	}
-	
 }

@@ -56,14 +56,18 @@ Workflow {
 			fragment = @TestLanguagesFragments auto-inject {
 				generateStub = true
 			}
-			fragment = xtext.generator.junit.Junit4Fragment2 {}
+			fragment = junit.Junit4Fragment2 {
+				generateStub = false
+			}
 		}
 		language = {
 			grammarUri = "classpath:/org/eclipse/xtext/parser/fragments/FragmentTestLanguageEx.xtext"
 			fragment = @TestLanguagesFragmentsEx auto-inject {
 				generateStub = true
 			}
-			fragment = xtext.generator.junit.Junit4Fragment2 {}
+			fragment = junit.Junit4Fragment2 {
+				generateStub = false
+			}
 		}
 	}
 }

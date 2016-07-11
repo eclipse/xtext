@@ -51,7 +51,9 @@ Workflow {
 			fragment = @TestLanguagesFragmentsEx auto-inject {
 				generateStub = true
 			}
-			fragment = xtext.generator.junit.Junit4Fragment2 {}
+			fragment = junit.Junit4Fragment2 {
+				generateStub = false
+			}
 		}
 	}
 }
