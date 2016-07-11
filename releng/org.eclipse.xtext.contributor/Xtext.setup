@@ -69,8 +69,9 @@
       xsi:type="setup:VariableTask"
       id="github.user.password"
       type="PASSWORD"
-      name="github.user.password">
-    <description>github.user.password</description>
+      name="github.user.password"
+      label="Github user password">
+    <description>Github user password</description>
   </setupTask>
   <setupTask
       xsi:type="setup:CompoundTask"
