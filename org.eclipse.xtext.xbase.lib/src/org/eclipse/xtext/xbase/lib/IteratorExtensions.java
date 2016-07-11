@@ -698,6 +698,35 @@ import com.google.common.collect.Sets;
 	}
 	
 	/**
+	 * Returns a map for which the {@link Map#values} are product of invoking supplied function {@code computeValues} 
+	 * on input iterable elements, and each key is the product of invoking a supplied function {@code computeKeys} on same elements. 
+	 * If the function produces the same key for different values, the last one will be contained in the map. The input iterator is left exhausted.
+	 * 
+	 * @param inputs
+	 *            the elements to use when constructing the {@code Map}. May not be <code>null</code>.
+	 * @param computeKeys
+	 *            the function used to produce the key for each value. May not be <code>null</code>.
+	 * @param computeValues
+	 *            the function used to produce the values for each key. May not be <code>null</code>.
+	 * @return a map mapping the result of evaluating the functions {@code keyFunction} and {@code computeValues} on each value in the input
+	 *         iterator to that value
+	 */
+	public static <T, K, V> Map<K, V> toMap(Iterator<? extends T> inputs, Function1<? super T, K> computeKeys, Function1<? super T, V> computeValues) {
+        if (computeKeys == null)
+            throw new NullPointerException("computeKeys");
+        if (computeValues == null)
+            throw new NullPointerException("computeValues");
+        Map<K, V> result = Maps.newLinkedHashMap();
+        while(inputs.hasNext()) {
+            T t = inputs.next();
+            result.put(computeKeys.apply(t), computeValues.apply(t));
+        }
+        return result;
+    }
+	
+	
+	
+	/**
 	 * Returns a map for which the {@link Map#values} is a collection of lists, where the elements in the list will 
 	 * appear in the order as they appeared in the iterator. Each key is the product of invoking the supplied 
 	 * function {@code computeKeys} on its corresponding value. So a key of that map groups a list of values for 
