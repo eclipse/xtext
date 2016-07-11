@@ -29,13 +29,13 @@ public class SubTestLanguageStandaloneSetupGenerated implements ISetup {
 	}
 	
 	public void register(Injector injector) {
-		if (!EPackage.Registry.INSTANCE.containsKey("http://www.eclipse.org/2009/tmf/xtext/SubTestLanguage")) {
-			EPackage.Registry.INSTANCE.put("http://www.eclipse.org/2009/tmf/xtext/SubTestLanguage", SubPackagePackage.eINSTANCE);
-		}
 		IResourceFactory resourceFactory = injector.getInstance(IResourceFactory.class);
 		IResourceServiceProvider serviceProvider = injector.getInstance(IResourceServiceProvider.class);
 		
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("subtestlanguage", resourceFactory);
 		IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put("subtestlanguage", serviceProvider);
+		if (!EPackage.Registry.INSTANCE.containsKey("http://www.eclipse.org/2009/tmf/xtext/SubTestLanguage")) {
+			EPackage.Registry.INSTANCE.put("http://www.eclipse.org/2009/tmf/xtext/SubTestLanguage", SubPackagePackage.eINSTANCE);
+		}
 	}
 }

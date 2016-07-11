@@ -37,9 +37,13 @@ Workflow {
 		}
 		
 		language = {
+			grammarUri = "classpath:/org/eclipse/xtext/generator/ecore/SuperTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = {
 			grammarUri = "classpath:/org/eclipse/xtext/generator/ecore/SubTestLanguage.xtext"
-			fragment = @TestLanguagesFragments {
-			}
+			referencedResource = "classpath:/org/eclipse/xtext/generator/ecore/SuperTestLanguage.genmodel"
+			fragment = @TestLanguagesFragments {}
 		}
 	}
 }
