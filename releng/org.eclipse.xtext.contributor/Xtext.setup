@@ -243,7 +243,7 @@
   </setupTask>
   <setupTask
       xsi:type="setup.p2:P2Task"
-      label="eclipse">
+      label="Eclipse">
     <requirement
         name="org.eclipse.emf.sdk.feature.group"/>
     <requirement
@@ -265,7 +265,7 @@
   </setupTask>
   <setupTask
       xsi:type="setup.p2:P2Task"
-      label="tools">
+      label="Tools">
     <requirement
         name="org.eclipse.m2e.feature.feature.group"
         versionRange="[1.0.0,1.7.0)"/>
