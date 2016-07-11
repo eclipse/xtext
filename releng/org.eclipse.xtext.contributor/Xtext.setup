@@ -14,7 +14,7 @@
     xmlns:setup.targlets="http://www.eclipse.org/oomph/setup/targlets/1.0"
     xmlns:setup.workingsets="http://www.eclipse.org/oomph/setup/workingsets/1.0"
     xmlns:workingsets="http://www.eclipse.org/oomph/workingsets/1.0"
-    xsi:schemaLocation="http://www.eclipse.org/oomph/setup/git/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Git.ecore http://www.eclipse.org/oomph/setup/jdt/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/JDT.ecore http://www.eclipse.org/oomph/setup/mylyn/1.0 index:/models/Mylyn.ecore http://www.eclipse.org/oomph/setup/pde/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/PDE.ecore http://www.eclipse.org/oomph/predicates/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Predicates.ecore http://www.eclipse.org/oomph/setup/projects/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Projects.ecore http://www.eclipse.org/oomph/setup/targlets/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/SetupTarglets.ecore http://www.eclipse.org/oomph/setup/workingsets/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/SetupWorkingSets.ecore http://www.eclipse.org/oomph/workingsets/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/WorkingSets.ecore"
+    xsi:schemaLocation="http://www.eclipse.org/oomph/setup/git/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Git.ecore http://www.eclipse.org/oomph/setup/jdt/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/JDT.ecore http://www.eclipse.org/oomph/setup/mylyn/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Mylyn.ecore http://www.eclipse.org/oomph/setup/pde/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/PDE.ecore http://www.eclipse.org/oomph/predicates/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Predicates.ecore http://www.eclipse.org/oomph/setup/projects/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Projects.ecore http://www.eclipse.org/oomph/setup/targlets/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/SetupTarglets.ecore http://www.eclipse.org/oomph/setup/workingsets/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/SetupWorkingSets.ecore http://www.eclipse.org/oomph/workingsets/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/WorkingSets.ecore"
     name="xtext"
     label="Xtext">
   <setupTask
@@ -363,6 +363,129 @@
       password="${eclipse.user.password}">
     <query summary="Xtext Bugs"
         url="https://bugs.eclipse.org/bugs/buglist.cgi?product=TMF&amp;bug_status=UNCONFIRMED&amp;bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED"/>
+  </setupTask>
+  <setupTask
+      xsi:type="setup:CompoundTask"
+      name="Mylyn Github Issues">
+    <setupTask
+        xsi:type="setup:VariableTask"
+        id="github.user.password"
+        type="PASSWORD"
+        name="github.user.password">
+      <description>github.user.password</description>
+    </setupTask>
+    <setupTask
+        xsi:type="mylyn:MylynQueriesTask"
+        connectorKind="github"
+        repositoryURL="https://github.com/eclipse/xtext-core"
+        userID="${github.user.id}"
+        password="${github.user.password}">
+      <query
+          summary="Xtext-Core Issues"
+          url="">
+        <attribute
+            key="state"
+            value="open::"/>
+      </query>
+    </setupTask>
+    <setupTask
+        xsi:type="mylyn:MylynQueriesTask"
+        connectorKind="github"
+        repositoryURL="https://github.com/eclipse/xtext-lib"
+        userID="${github.user.id}"
+        password="${github.user.password}">
+      <query
+          summary="Xtext-Lib Issues"
+          url="">
+        <attribute
+            key="state"
+            value="open::"/>
+      </query>
+    </setupTask>
+    <setupTask
+        xsi:type="mylyn:MylynQueriesTask"
+        connectorKind="github"
+        repositoryURL="https://github.com/eclipse/xtext-extras"
+        userID="${github.user.id}"
+        password="${github.user.password}">
+      <query
+          summary="Xtext-Extras Issues"
+          url="">
+        <attribute
+            key="state"
+            value="open::"/>
+      </query>
+    </setupTask>
+    <setupTask
+        xsi:type="mylyn:MylynQueriesTask"
+        connectorKind="github"
+        repositoryURL="https://github.com/eclipse/xtext-eclipse"
+        userID="${github.user.id}"
+        password="${github.user.password}">
+      <query
+          summary="Xtext-Eclipse Issues"
+          url="">
+        <attribute
+            key="state"
+            value="open::"/>
+      </query>
+    </setupTask>
+    <setupTask
+        xsi:type="mylyn:MylynQueriesTask"
+        connectorKind="github"
+        repositoryURL="https://github.com/eclipse/xtext-idea"
+        userID="${github.user.id}"
+        password="${github.user.password}">
+      <query
+          summary="Xtext-Idea Issues"
+          url="">
+        <attribute
+            key="state"
+            value="open::"/>
+      </query>
+    </setupTask>
+    <setupTask
+        xsi:type="mylyn:MylynQueriesTask"
+        connectorKind="github"
+        repositoryURL="https://github.com/eclipse/xtext-web"
+        userID="${github.user.id}"
+        password="${github.user.password}">
+      <query
+          summary="Xtext-Web Issues"
+          url="">
+        <attribute
+            key="state"
+            value="open::"/>
+      </query>
+    </setupTask>
+    <setupTask
+        xsi:type="mylyn:MylynQueriesTask"
+        connectorKind="github"
+        repositoryURL="https://github.com/eclipse/xtext-maven"
+        userID="${github.user.id}"
+        password="${github.user.password}">
+      <query
+          summary="Xtext-Maven Issues"
+          url="">
+        <attribute
+            key="state"
+            value="open::"/>
+      </query>
+    </setupTask>
+    <setupTask
+        xsi:type="mylyn:MylynQueriesTask"
+        connectorKind="github"
+        repositoryURL="https://github.com/eclipse/xtext-xtend"
+        userID="${github.user.id}"
+        password="${github.user.password}">
+      <query
+          summary="Xtext-Xtend Issues"
+          url="">
+        <attribute
+            key="state"
+            value="open::"/>
+      </query>
+    </setupTask>
   </setupTask>
   <project name="core"
       label="Xtext Core">
