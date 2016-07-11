@@ -75,10 +75,16 @@ public class BacktrackingLexerTestLanguageSemanticSequencer extends AbstractDele
 	 *
 	 * Constraint:
 	 *     (
-	 *         (enums+=EnumName+ ycs+=Yc+ abs+=Ab+ xbs+=Xb+ ((ys+=CharY+ as+=CharA+) | as+=CharA+)?) | 
-	 *         (((enums+=EnumName+ abs+=Ab+) | (enums+=EnumName+ ycs+=Yc+ abs+=Ab+) | abs+=Ab+)? ys+=CharY+ as+=CharA+) | 
-	 *         enums+=EnumName+ | 
-	 *         (enums+=EnumName+ (ycs+=Yc+ | (ycs+=Yc+ (abs+=Ab+ | (abs+=Ab+ as+=CharA+))))?)
+	 *         (enums+=EnumName* ((xbs+=Xb+ as+=CharA+) | as+=CharA+)) | 
+	 *         (enums+=EnumName* ycs+=Yc+ ((xbs+=Xb+ as+=CharA+) | as+=CharA+)) | 
+	 *         (((enums+=EnumName* abs+=Ab+) | (enums+=EnumName* ycs+=Yc+ abs+=Ab+) | abs+=Ab+) ((xbs+=Xb+ as+=CharA+) | as+=CharA+)) | 
+	 *         (
+	 *             ((enums+=EnumName* ((abs+=Ab+ xbs+=Xb+) | xbs+=Xb+)) | (enums+=EnumName* ycs+=Yc+ ((abs+=Ab+ xbs+=Xb+) | xbs+=Xb+)) | (abs+=Ab+ xbs+=Xb+) | xbs+=Xb+)? 
+	 *             ys+=CharY+ 
+	 *             as+=CharA+
+	 *         ) | 
+	 *         (xbs+=Xb+ as+=CharA+) | 
+	 *         as+=CharA+
 	 *     )?
 	 */
 	protected void sequence_Model(ISerializationContext context, Model semanticObject) {

@@ -1,4 +1,4 @@
-package org.eclipse.xtext.lexer.parser.antlr.internal; 
+package org.eclipse.xtext.lexer.parser.antlr.internal;
 
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
@@ -47,29 +47,29 @@ public class InternalIgnoreCaseLexerTestLanguageParser extends AbstractInternalA
 
 
 
+     	private IgnoreCaseLexerTestLanguageGrammarAccess grammarAccess;
 
-    	private IgnoreCaseLexerTestLanguageGrammarAccess grammarAccess;
-    	 	
-    	public InternalIgnoreCaseLexerTestLanguageParser(TokenStream input, IgnoreCaseLexerTestLanguageGrammarAccess grammarAccess) {
-    		this(input);
-    		this.grammarAccess = grammarAccess;
-    		registerRules(grammarAccess.getGrammar());
-    	}
-    	
-    	@Override
-    	protected String getFirstRuleName() {
-    		return "Model";	
-    	} 
-    	   	   	
-    	@Override
-    	protected IgnoreCaseLexerTestLanguageGrammarAccess getGrammarAccess() {
-    		return grammarAccess;
-    	}
+        public InternalIgnoreCaseLexerTestLanguageParser(TokenStream input, IgnoreCaseLexerTestLanguageGrammarAccess grammarAccess) {
+            this(input);
+            this.grammarAccess = grammarAccess;
+            registerRules(grammarAccess.getGrammar());
+        }
+
+        @Override
+        protected String getFirstRuleName() {
+        	return "Model";
+       	}
+
+       	@Override
+       	protected IgnoreCaseLexerTestLanguageGrammarAccess getGrammarAccess() {
+       		return grammarAccess;
+       	}
+
 
 
 
     // $ANTLR start "entryRuleModel"
-    // InternalIgnoreCaseLexerTestLanguageParser.g:61:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
+    // InternalIgnoreCaseLexerTestLanguageParser.g:57:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
     public final EObject entryRuleModel() throws RecognitionException {
         EObject current = null;
 
@@ -77,8 +77,8 @@ public class InternalIgnoreCaseLexerTestLanguageParser extends AbstractInternalA
 
 
         try {
-            // InternalIgnoreCaseLexerTestLanguageParser.g:62:2: (iv_ruleModel= ruleModel EOF )
-            // InternalIgnoreCaseLexerTestLanguageParser.g:63:2: iv_ruleModel= ruleModel EOF
+            // InternalIgnoreCaseLexerTestLanguageParser.g:57:46: (iv_ruleModel= ruleModel EOF )
+            // InternalIgnoreCaseLexerTestLanguageParser.g:58:2: iv_ruleModel= ruleModel EOF
             {
              newCompositeNode(grammarAccess.getModelRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -92,11 +92,11 @@ public class InternalIgnoreCaseLexerTestLanguageParser extends AbstractInternalA
             }
 
         }
-         
-        	catch (RecognitionException re) { 
-        	    recover(input,re); 
-        	    appendSkippedTokens();
-        	}
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
         finally {
         }
         return current;
@@ -105,7 +105,7 @@ public class InternalIgnoreCaseLexerTestLanguageParser extends AbstractInternalA
 
 
     // $ANTLR start "ruleModel"
-    // InternalIgnoreCaseLexerTestLanguageParser.g:70:1: ruleModel returns [EObject current=null] : (otherlv_0= Case (otherlv_1= Foo )? ( (lv_value_2_0= Case ) ) ) ;
+    // InternalIgnoreCaseLexerTestLanguageParser.g:64:1: ruleModel returns [EObject current=null] : (otherlv_0= Case (otherlv_1= Foo )? ( (lv_value_2_0= Case ) ) ) ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
@@ -113,20 +113,21 @@ public class InternalIgnoreCaseLexerTestLanguageParser extends AbstractInternalA
         Token otherlv_1=null;
         Token lv_value_2_0=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalIgnoreCaseLexerTestLanguageParser.g:73:28: ( (otherlv_0= Case (otherlv_1= Foo )? ( (lv_value_2_0= Case ) ) ) )
-            // InternalIgnoreCaseLexerTestLanguageParser.g:74:1: (otherlv_0= Case (otherlv_1= Foo )? ( (lv_value_2_0= Case ) ) )
+            // InternalIgnoreCaseLexerTestLanguageParser.g:70:2: ( (otherlv_0= Case (otherlv_1= Foo )? ( (lv_value_2_0= Case ) ) ) )
+            // InternalIgnoreCaseLexerTestLanguageParser.g:71:2: (otherlv_0= Case (otherlv_1= Foo )? ( (lv_value_2_0= Case ) ) )
             {
-            // InternalIgnoreCaseLexerTestLanguageParser.g:74:1: (otherlv_0= Case (otherlv_1= Foo )? ( (lv_value_2_0= Case ) ) )
-            // InternalIgnoreCaseLexerTestLanguageParser.g:75:2: otherlv_0= Case (otherlv_1= Foo )? ( (lv_value_2_0= Case ) )
+            // InternalIgnoreCaseLexerTestLanguageParser.g:71:2: (otherlv_0= Case (otherlv_1= Foo )? ( (lv_value_2_0= Case ) ) )
+            // InternalIgnoreCaseLexerTestLanguageParser.g:72:3: otherlv_0= Case (otherlv_1= Foo )? ( (lv_value_2_0= Case ) )
             {
             otherlv_0=(Token)match(input,Case,FollowSets000.FOLLOW_3); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getModelAccess().getCaseKeyword_0());
-                
-            // InternalIgnoreCaseLexerTestLanguageParser.g:79:1: (otherlv_1= Foo )?
+            			newLeafNode(otherlv_0, grammarAccess.getModelAccess().getCaseKeyword_0());
+            		
+            // InternalIgnoreCaseLexerTestLanguageParser.g:76:3: (otherlv_1= Foo )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -135,37 +136,34 @@ public class InternalIgnoreCaseLexerTestLanguageParser extends AbstractInternalA
             }
             switch (alt1) {
                 case 1 :
-                    // InternalIgnoreCaseLexerTestLanguageParser.g:80:2: otherlv_1= Foo
+                    // InternalIgnoreCaseLexerTestLanguageParser.g:77:4: otherlv_1= Foo
                     {
                     otherlv_1=(Token)match(input,Foo,FollowSets000.FOLLOW_4); 
 
-                        	newLeafNode(otherlv_1, grammarAccess.getModelAccess().getFooKeyword_1());
-                        
+                    				newLeafNode(otherlv_1, grammarAccess.getModelAccess().getFooKeyword_1());
+                    			
 
                     }
                     break;
 
             }
 
-            // InternalIgnoreCaseLexerTestLanguageParser.g:84:3: ( (lv_value_2_0= Case ) )
-            // InternalIgnoreCaseLexerTestLanguageParser.g:85:1: (lv_value_2_0= Case )
+            // InternalIgnoreCaseLexerTestLanguageParser.g:82:3: ( (lv_value_2_0= Case ) )
+            // InternalIgnoreCaseLexerTestLanguageParser.g:83:4: (lv_value_2_0= Case )
             {
-            // InternalIgnoreCaseLexerTestLanguageParser.g:85:1: (lv_value_2_0= Case )
-            // InternalIgnoreCaseLexerTestLanguageParser.g:86:3: lv_value_2_0= Case
+            // InternalIgnoreCaseLexerTestLanguageParser.g:83:4: (lv_value_2_0= Case )
+            // InternalIgnoreCaseLexerTestLanguageParser.g:84:5: lv_value_2_0= Case
             {
             lv_value_2_0=(Token)match(input,Case,FollowSets000.FOLLOW_2); 
 
-                    newLeafNode(lv_value_2_0, grammarAccess.getModelAccess().getValueCaSeKeyword_2_0());
-                
+            					newLeafNode(lv_value_2_0, grammarAccess.getModelAccess().getValueCaSeKeyword_2_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getModelRule());
-            	        }
-                   		setWithLastConsumed(current, "value", lv_value_2_0, "CaSe");
-            	    
-
-            }
-
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getModelRule());
+            					}
+            					setWithLastConsumed(current, "value", lv_value_2_0, "CaSe");
+            				
 
             }
 
@@ -175,13 +173,18 @@ public class InternalIgnoreCaseLexerTestLanguageParser extends AbstractInternalA
 
             }
 
-             leaveRule(); 
+
+            }
+
+
+            	leaveRule();
+
         }
-         
-        	catch (RecognitionException re) { 
-        	    recover(input,re); 
-        	    appendSkippedTokens();
-        	}
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
         finally {
         }
         return current;

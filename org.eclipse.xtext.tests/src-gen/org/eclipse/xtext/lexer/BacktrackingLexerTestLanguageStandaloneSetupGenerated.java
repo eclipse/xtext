@@ -44,13 +44,13 @@ public class BacktrackingLexerTestLanguageStandaloneSetupGenerated implements IS
 	}
 	
 	public void register(Injector injector) {
-		if (!EPackage.Registry.INSTANCE.containsKey("http://www.eclipse.org/2008/tmf/xtext/BacktrackingLexerTest")) {
-			EPackage.Registry.INSTANCE.put("http://www.eclipse.org/2008/tmf/xtext/BacktrackingLexerTest", BacktrackingTestLanguagePackage.eINSTANCE);
-		}
 		IResourceFactory resourceFactory = injector.getInstance(IResourceFactory.class);
 		IResourceServiceProvider serviceProvider = injector.getInstance(IResourceServiceProvider.class);
 		
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("backtrackinglexertestlanguage", resourceFactory);
 		IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put("backtrackinglexertestlanguage", serviceProvider);
+		if (!EPackage.Registry.INSTANCE.containsKey("http://www.eclipse.org/2008/tmf/xtext/BacktrackingLexerTest")) {
+			EPackage.Registry.INSTANCE.put("http://www.eclipse.org/2008/tmf/xtext/BacktrackingLexerTest", BacktrackingTestLanguagePackage.eINSTANCE);
+		}
 	}
 }

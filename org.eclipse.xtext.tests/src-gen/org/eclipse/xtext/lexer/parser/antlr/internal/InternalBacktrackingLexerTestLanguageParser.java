@@ -25,14 +25,14 @@ public class InternalBacktrackingLexerTestLanguageParser extends AbstractInterna
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "Abc", "Efg", "RULE_CHARA", "RULE_CHARB", "RULE_CHARX", "RULE_YC", "RULE_CHARY", "RULE_CHARC", "RULE_WS", "RULE_SL_COMMENT"
     };
-    public static final int RULE_CHARX=8;
-    public static final int RULE_YC=9;
-    public static final int Efg=5;
-    public static final int RULE_CHARY=10;
     public static final int Abc=4;
     public static final int RULE_WS=12;
-    public static final int RULE_CHARA=6;
+    public static final int Efg=5;
+    public static final int RULE_CHARX=8;
     public static final int RULE_SL_COMMENT=13;
+    public static final int RULE_CHARY=10;
+    public static final int RULE_YC=9;
+    public static final int RULE_CHARA=6;
     public static final int EOF=-1;
     public static final int RULE_CHARB=7;
     public static final int RULE_CHARC=11;

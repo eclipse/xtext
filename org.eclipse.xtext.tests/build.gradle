@@ -18,12 +18,7 @@ dependencies {
 }
 
 sourceSets.test.java {
-	srcDir 'src-gen2'
 	srcDir 'suites'
-}
-
-sourceSets.test.resources {
-	srcDir 'src-gen2'
 }
 
 test {

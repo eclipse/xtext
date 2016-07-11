@@ -3,19 +3,21 @@
  */
 package org.eclipse.xtext.lexer.services;
 
-import com.google.inject.Singleton;
 import com.google.inject.Inject;
-
+import com.google.inject.Singleton;
 import java.util.List;
-
-import org.eclipse.xtext.*;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.Group;
+import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.TerminalRule;
+import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder;
 import org.eclipse.xtext.service.GrammarProvider;
-import org.eclipse.xtext.service.AbstractElementFinder.*;
-
 
 @Singleton
 public class IgnoreCaseLexerTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
-	
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.lexer.IgnoreCaseLexerTestLanguage.Model");
@@ -28,19 +30,19 @@ public class IgnoreCaseLexerTestLanguageGrammarAccess extends AbstractGrammarEle
 		//Model:
 		//	"case" "foo"? value="CaSe";
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//"case" "foo"? value="CaSe"
 		public Group getGroup() { return cGroup; }
-
+		
 		//"case"
 		public Keyword getCaseKeyword_0() { return cCaseKeyword_0; }
-
+		
 		//"foo"?
 		public Keyword getFooKeyword_1() { return cFooKeyword_1; }
-
+		
 		//value="CaSe"
 		public Assignment getValueAssignment_2() { return cValueAssignment_2; }
-
+		
 		//"CaSe"
 		public Keyword getValueCaSeKeyword_2_0() { return cValueCaSeKeyword_2_0; }
 	}
@@ -92,16 +94,16 @@ public class IgnoreCaseLexerTestLanguageGrammarAccess extends AbstractGrammarEle
 	public ParserRule getModelRule() {
 		return getModelAccess().getRule();
 	}
-
+	
 	//terminal WS:
 	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return tWS;
-	} 
-
+	}
+	
 	//terminal SL_COMMENT:
 	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return tSL_COMMENT;
-	} 
+	}
 }

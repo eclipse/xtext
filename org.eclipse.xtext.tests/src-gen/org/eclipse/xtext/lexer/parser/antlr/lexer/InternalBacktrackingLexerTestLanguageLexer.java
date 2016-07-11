@@ -13,25 +13,25 @@ import java.util.Map;
 import java.util.HashMap;
 @SuppressWarnings("all")
 public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
-    public static final int FRAGMENT_Abc=14;
-    public static final int FRAGMENT_RULE_CHARY=20;
-    public static final int FRAGMENT_RULE_CHARA=16;
-    public static final int FRAGMENT_RULE_CHARX=18;
-    public static final int RULE_CHARY=10;
-    public static final int Abc=4;
-    public static final int EOF=-1;
-    public static final int RULE_SL_COMMENT=13;
-    public static final int FRAGMENT_RULE_YC=19;
-    public static final int FRAGMENT_RULE_CHARB=17;
-    public static final int FRAGMENT_Efg=15;
-    public static final int SYNTHETIC_ALL_KEYWORDS=23;
-    public static final int RULE_CHARX=8;
     public static final int FRAGMENT_RULE_SL_COMMENT=22;
+    public static final int Abc=4;
     public static final int Efg=5;
-    public static final int RULE_YC=9;
-    public static final int FRAGMENT_RULE_WS=21;
-    public static final int RULE_CHARA=6;
+    public static final int RULE_SL_COMMENT=13;
+    public static final int RULE_CHARY=10;
+    public static final int FRAGMENT_RULE_CHARX=18;
+    public static final int FRAGMENT_RULE_CHARY=20;
+    public static final int EOF=-1;
+    public static final int FRAGMENT_RULE_YC=19;
+    public static final int FRAGMENT_RULE_CHARA=16;
     public static final int RULE_WS=12;
+    public static final int RULE_CHARX=8;
+    public static final int FRAGMENT_RULE_CHARB=17;
+    public static final int FRAGMENT_Abc=14;
+    public static final int FRAGMENT_RULE_WS=21;
+    public static final int SYNTHETIC_ALL_KEYWORDS=23;
+    public static final int FRAGMENT_Efg=15;
+    public static final int RULE_YC=9;
+    public static final int RULE_CHARA=6;
     public static final int RULE_CHARB=7;
     public static final int RULE_CHARC=11;
 
@@ -707,39 +707,11 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
     }
     // $ANTLR end synpred9_InternalBacktrackingLexerTestLanguageLexer
 
-    public final boolean synpred2_InternalBacktrackingLexerTestLanguageLexer() {
+    public final boolean synpred1_InternalBacktrackingLexerTestLanguageLexer() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred2_InternalBacktrackingLexerTestLanguageLexer_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred8_InternalBacktrackingLexerTestLanguageLexer() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred8_InternalBacktrackingLexerTestLanguageLexer_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred3_InternalBacktrackingLexerTestLanguageLexer() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred3_InternalBacktrackingLexerTestLanguageLexer_fragment(); // can never throw exception
+            synpred1_InternalBacktrackingLexerTestLanguageLexer_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -763,53 +735,11 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
         state.failed=false;
         return success;
     }
-    public final boolean synpred5_InternalBacktrackingLexerTestLanguageLexer() {
+    public final boolean synpred2_InternalBacktrackingLexerTestLanguageLexer() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred5_InternalBacktrackingLexerTestLanguageLexer_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred1_InternalBacktrackingLexerTestLanguageLexer() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred1_InternalBacktrackingLexerTestLanguageLexer_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred9_InternalBacktrackingLexerTestLanguageLexer() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred9_InternalBacktrackingLexerTestLanguageLexer_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred4_InternalBacktrackingLexerTestLanguageLexer() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred4_InternalBacktrackingLexerTestLanguageLexer_fragment(); // can never throw exception
+            synpred2_InternalBacktrackingLexerTestLanguageLexer_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -833,6 +763,76 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
         state.failed=false;
         return success;
     }
+    public final boolean synpred3_InternalBacktrackingLexerTestLanguageLexer() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred3_InternalBacktrackingLexerTestLanguageLexer_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred4_InternalBacktrackingLexerTestLanguageLexer() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred4_InternalBacktrackingLexerTestLanguageLexer_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred9_InternalBacktrackingLexerTestLanguageLexer() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred9_InternalBacktrackingLexerTestLanguageLexer_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred5_InternalBacktrackingLexerTestLanguageLexer() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred5_InternalBacktrackingLexerTestLanguageLexer_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred8_InternalBacktrackingLexerTestLanguageLexer() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred8_InternalBacktrackingLexerTestLanguageLexer_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
 
 
     protected DFA1 dfa1 = new DFA1(this);
@@ -847,7 +847,7 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
     static final String DFA1_acceptS =
         "\2\uffff\1\2\1\4\1\5\1\uffff\1\10\1\11\1\1\1\3\1\7\1\6";
     static final String DFA1_specialS =
-        "\1\2\1\1\3\uffff\1\0\6\uffff}>";
+        "\1\1\1\0\3\uffff\1\2\6\uffff}>";
     static final String[] DFA1_transitionS = {
             "\2\6\2\uffff\1\6\22\uffff\1\6\16\uffff\1\7\21\uffff\1\1\3\uffff\1\2\22\uffff\1\4\1\5\10\uffff\1\3",
             "\1\10",
@@ -900,21 +900,6 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
         	int _s = s;
             switch ( s ) {
                     case 0 : 
-                        int LA1_5 = input.LA(1);
-
-                         
-                        int index1_5 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (LA1_5=='c') && (synpred6_InternalBacktrackingLexerTestLanguageLexer())) {s = 11;}
-
-                        else s = 10;
-
-                         
-                        input.seek(index1_5);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 1 : 
                         int LA1_1 = input.LA(1);
 
                          
@@ -929,7 +914,7 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
                         input.seek(index1_1);
                         if ( s>=0 ) return s;
                         break;
-                    case 2 : 
+                    case 1 : 
                         int LA1_0 = input.LA(1);
 
                          
@@ -952,6 +937,21 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
 
                          
                         input.seek(index1_0);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 2 : 
+                        int LA1_5 = input.LA(1);
+
+                         
+                        int index1_5 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (LA1_5=='c') && (synpred6_InternalBacktrackingLexerTestLanguageLexer())) {s = 11;}
+
+                        else s = 10;
+
+                         
+                        input.seek(index1_5);
                         if ( s>=0 ) return s;
                         break;
             }
