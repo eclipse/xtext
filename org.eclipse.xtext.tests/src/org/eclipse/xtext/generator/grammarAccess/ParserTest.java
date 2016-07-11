@@ -17,6 +17,7 @@ import org.eclipse.xtext.generator.grammarAccess.ametamodel.asubpackage.AModel;
 import org.eclipse.xtext.generator.grammarAccess.ametamodel.asubpackage.AsubpackagePackage;
 import org.eclipse.xtext.generator.grammarAccess.ametamodel.asubpackage.emptyPackage.subsubpackage.SubsubpackagePackage;
 import org.eclipse.xtext.tests.AbstractXtextTests;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -32,6 +33,8 @@ public class ParserTest extends AbstractXtextTests {
 		with(GrammarAccessTestLanguageStandaloneSetup.class);
 	}
 	
+	// TODO https://github.com/eclipse/xtext-core/issues/32
+	@Ignore
 	@Test public void testInstantiate() throws Exception {
 		String modelAsText = "foo bar";
 		AModel model = (AModel) getModel(modelAsText);

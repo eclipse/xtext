@@ -15,10 +15,10 @@ import org.eclipse.xtext.generator.grammarAccess.ametamodel.asubpackage.AType;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.generator.grammarAccess.ametamodel.asubpackage.emptyPackage.subsubpackage.AnotherType#getRef <em>Ref</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.generator.grammarAccess.ametamodel.asubpackage.emptyPackage.subsubpackage.SubsubpackagePackage#getAnotherType()
  * @model
