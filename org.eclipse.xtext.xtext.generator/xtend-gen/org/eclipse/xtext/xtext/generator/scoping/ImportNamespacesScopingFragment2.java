@@ -24,6 +24,7 @@ import org.eclipse.xtext.scoping.impl.DefaultGlobalScopeProvider;
 import org.eclipse.xtext.scoping.impl.DelegatingScopeProvider;
 import org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.generator.AbstractInheritingFragment;
 import org.eclipse.xtext.xtext.generator.IXtextGeneratorLanguage;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
@@ -53,7 +54,7 @@ public class ImportNamespacesScopingFragment2 extends AbstractInheritingFragment
   @Inject
   private FileAccessFactory fileAccessFactory;
   
-  @Accessors(AccessorType.PUBLIC_SETTER)
+  @Accessors({ AccessorType.PUBLIC_SETTER, AccessorType.PROTECTED_GETTER })
   private boolean ignoreCase = false;
   
   protected TypeReference getScopeProviderClass(final Grammar grammar) {
@@ -107,7 +108,7 @@ public class ImportNamespacesScopingFragment2 extends AbstractInheritingFragment
     return _xifexpression;
   }
   
-  public TypeReference getDelegateScopeProvider() {
+  protected TypeReference getDelegateScopeProvider() {
     TypeReference _xifexpression = null;
     IXtextGeneratorLanguage _language = this.getLanguage();
     Grammar _grammar = _language.getGrammar();
@@ -118,6 +119,10 @@ public class ImportNamespacesScopingFragment2 extends AbstractInheritingFragment
       _xifexpression = TypeReference.typeRef(ImportedNamespaceAwareLocalScopeProvider.class);
     }
     return _xifexpression;
+  }
+  
+  protected TypeReference getGlobalScopeProvider() {
+    return TypeReference.typeRef(DefaultGlobalScopeProvider.class);
   }
   
   @Override
@@ -191,8 +196,8 @@ public class ImportNamespacesScopingFragment2 extends AbstractInheritingFragment
     };
     bindingFactory.addConfiguredBinding(_plus, _client);
     TypeReference _typeRef = TypeReference.typeRef(IGlobalScopeProvider.class);
-    TypeReference _typeRef_1 = TypeReference.typeRef(DefaultGlobalScopeProvider.class);
-    bindingFactory.addTypeToType(_typeRef, _typeRef_1);
+    TypeReference _globalScopeProvider = this.getGlobalScopeProvider();
+    bindingFactory.addTypeToType(_typeRef, _globalScopeProvider);
     String _simpleName_1 = IgnoreCaseLinking.class.getSimpleName();
     StringConcatenationClient _client_1 = new StringConcatenationClient() {
       @Override
@@ -210,7 +215,7 @@ public class ImportNamespacesScopingFragment2 extends AbstractInheritingFragment
     bindingFactory.contributeTo(_runtimeGenModule);
   }
   
-  public void generateGenScopeProvider() {
+  protected void generateGenScopeProvider() {
     TypeReference _xifexpression = null;
     boolean _isGenerateStub = this.isGenerateStub();
     if (_isGenerateStub) {
@@ -342,6 +347,11 @@ public class ImportNamespacesScopingFragment2 extends AbstractInheritingFragment
     IRuntimeProjectConfig _runtime = _projectConfig.getRuntime();
     IXtextGeneratorFileSystemAccess _src = _runtime.getSrc();
     _createXtendFile.writeTo(_src);
+  }
+  
+  @Pure
+  protected boolean isIgnoreCase() {
+    return this.ignoreCase;
   }
   
   public void setIgnoreCase(final boolean ignoreCase) {

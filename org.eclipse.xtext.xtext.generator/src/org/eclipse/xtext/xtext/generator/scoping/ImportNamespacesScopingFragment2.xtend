@@ -29,7 +29,6 @@ import static org.eclipse.xtext.GrammarUtil.*
 
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 import static extension org.eclipse.xtext.xtext.generator.util.GrammarUtil2.*
-import org.eclipse.xtext.resource.IBatchLinkableResource
 
 class ImportNamespacesScopingFragment2 extends AbstractInheritingFragment {
 	
@@ -37,7 +36,7 @@ class ImportNamespacesScopingFragment2 extends AbstractInheritingFragment {
 	@Inject extension XbaseUsageDetector
 	@Inject FileAccessFactory fileAccessFactory
 
-	@Accessors(PUBLIC_SETTER)
+	@Accessors(PUBLIC_SETTER, PROTECTED_GETTER)
 	boolean ignoreCase = false
 	
 	protected def TypeReference getScopeProviderClass(Grammar grammar) {
@@ -68,11 +67,15 @@ class ImportNamespacesScopingFragment2 extends AbstractInheritingFragment {
 		}
 	}
 	
-	def TypeReference getDelegateScopeProvider() {
+	protected def TypeReference getDelegateScopeProvider() {
 		if (language.grammar.inheritsXbase)
 			'org.eclipse.xtext.xbase.scoping.XImportSectionNamespaceScopeProvider'.typeRef
 		else
 			ImportedNamespaceAwareLocalScopeProvider.typeRef
+	}
+	
+	protected def TypeReference getGlobalScopeProvider() {
+		DefaultGlobalScopeProvider.typeRef
 	}
 	
 	override generate() {
@@ -107,13 +110,13 @@ class ImportNamespacesScopingFragment2 extends AbstractInheritingFragment {
 		
 		bindingFactory.addConfiguredBinding(IScopeProvider.simpleName + 'Delegate', 
 				'''binder.bind(«IScopeProvider».class).annotatedWith(«Names».named(«AbstractDeclarativeScopeProvider».NAMED_DELEGATE)).to(«getDelegateScopeProvider».class);''')
-		bindingFactory.addTypeToType(IGlobalScopeProvider.typeRef, DefaultGlobalScopeProvider.typeRef)
+		bindingFactory.addTypeToType(IGlobalScopeProvider.typeRef, globalScopeProvider)
 		bindingFactory.addConfiguredBinding(IgnoreCaseLinking.simpleName, 
 				'''binder.bindConstant().annotatedWith(«IgnoreCaseLinking».class).to(«ignoreCase»);''')
 		bindingFactory.contributeTo(language.runtimeGenModule)
 	}
 	
-	def generateGenScopeProvider() {
+	protected def generateGenScopeProvider() {
 		val genClass = if (isGenerateStub) grammar.abstractScopeProviderClass else grammar.scopeProviderClass		
 		val file = fileAccessFactory.createGeneratedJavaFile(genClass)
 		
