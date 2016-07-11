@@ -139,7 +139,7 @@ abstract class AbstractAntlrGrammarGenerator {
 	protected def compileTokens(Grammar it, AntlrOptions options) '''
 		«IF options.isBacktrackLexer»
 			tokens {
-				«FOR kw : allKeywords.sort.sortBy[-length]»
+				«FOR kw : keywordHelper.allKeywords»
 					«keywordHelper.getRuleName(kw)»;
 				«ENDFOR»
 				«FOR rule: allTerminalRules»
@@ -195,7 +195,7 @@ abstract class AbstractAntlrGrammarGenerator {
 	'''
 	
 	protected def compileKeywordRules(Grammar it, AntlrOptions options) {
-		val allKeywords = allKeywords.sort.sortBy[-length]
+		val allKeywords = keywordHelper.allKeywords
 		val allTerminalRules = allTerminalRules
 		
 		val synthetic_kw_alternatives = newArrayList
