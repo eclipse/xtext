@@ -40,8 +40,7 @@ public class NestedPackage1Switch<T>
 	 */
 	public NestedPackage1Switch()
 	{
-		if (modelPackage == null)
-		{
+		if (modelPackage == null) {
 			modelPackage = NestedPackage1Package.eINSTANCE;
 		}
 	}
@@ -67,12 +66,10 @@ public class NestedPackage1Switch<T>
 	 */
 	protected T doSwitch(EClass theEClass, EObject theEObject)
 	{
-		if (theEClass.eContainer() == modelPackage)
-		{
+		if (theEClass.eContainer() == modelPackage) {
 			return doSwitch(theEClass.getClassifierID(), theEObject);
 		}
-		else
-		{
+		else {
 			List<EClass> eSuperTypes = theEClass.getESuperTypes();
 			return
 				eSuperTypes.isEmpty() ?
@@ -90,10 +87,8 @@ public class NestedPackage1Switch<T>
 	 */
 	protected T doSwitch(int classifierID, EObject theEObject)
 	{
-		switch (classifierID)
-		{
-			case NestedPackage1Package.NESTED_CLASS1:
-			{
+		switch (classifierID) {
+			case NestedPackage1Package.NESTED_CLASS1: {
 				NestedClass1 nestedClass1 = (NestedClass1)theEObject;
 				T result = caseNestedClass1(nestedClass1);
 				if (result == null) result = defaultCase(theEObject);

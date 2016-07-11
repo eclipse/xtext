@@ -51,8 +51,7 @@ public enum RootEnum implements Enumerator
 	 * @generated
 	 */
 	private static final RootEnum[] VALUES_ARRAY =
-		new RootEnum[]
-		{
+		new RootEnum[] {
 			LITERAL,
 		};
 
@@ -74,11 +73,9 @@ public enum RootEnum implements Enumerator
 	 */
 	public static RootEnum get(String literal)
 	{
-		for (int i = 0; i < VALUES_ARRAY.length; ++i)
-		{
+		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
 			RootEnum result = VALUES_ARRAY[i];
-			if (result.toString().equals(literal))
-			{
+			if (result.toString().equals(literal)) {
 				return result;
 			}
 		}
@@ -95,11 +92,9 @@ public enum RootEnum implements Enumerator
 	 */
 	public static RootEnum getByName(String name)
 	{
-		for (int i = 0; i < VALUES_ARRAY.length; ++i)
-		{
+		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
 			RootEnum result = VALUES_ARRAY[i];
-			if (result.getName().equals(name))
-			{
+			if (result.getName().equals(name)) {
 				return result;
 			}
 		}
@@ -116,8 +111,7 @@ public enum RootEnum implements Enumerator
 	 */
 	public static RootEnum get(int value)
 	{
-		switch (value)
-		{
+		switch (value) {
 			case LITERAL_VALUE: return LITERAL;
 		}
 		return null;

@@ -112,12 +112,10 @@ public class NoLitClassImpl extends EObjectImpl implements NoLitClass
 	 */
 	public NestedClass1 getReference2()
 	{
-		if (reference2 != null && reference2.eIsProxy())
-		{
+		if (reference2 != null && reference2.eIsProxy()) {
 			InternalEObject oldReference2 = (InternalEObject)reference2;
 			reference2 = (NestedClass1)eResolveProxy(oldReference2);
-			if (reference2 != oldReference2)
-			{
+			if (reference2 != oldReference2) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, NoLiteralsPackage.NO_LIT_CLASS__REFERENCE2, oldReference2, reference2));
 			}
@@ -156,8 +154,7 @@ public class NoLitClassImpl extends EObjectImpl implements NoLitClass
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case NoLiteralsPackage.NO_LIT_CLASS__ATTRIBUTE2:
 				return getAttribute2();
 			case NoLiteralsPackage.NO_LIT_CLASS__REFERENCE2:
@@ -175,8 +172,7 @@ public class NoLitClassImpl extends EObjectImpl implements NoLitClass
 	@Override
 	public void eSet(int featureID, Object newValue)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case NoLiteralsPackage.NO_LIT_CLASS__ATTRIBUTE2:
 				setAttribute2((String)newValue);
 				return;
@@ -195,8 +191,7 @@ public class NoLitClassImpl extends EObjectImpl implements NoLitClass
 	@Override
 	public void eUnset(int featureID)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case NoLiteralsPackage.NO_LIT_CLASS__ATTRIBUTE2:
 				setAttribute2(ATTRIBUTE2_EDEFAULT);
 				return;
@@ -215,8 +210,7 @@ public class NoLitClassImpl extends EObjectImpl implements NoLitClass
 	@Override
 	public boolean eIsSet(int featureID)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case NoLiteralsPackage.NO_LIT_CLASS__ATTRIBUTE2:
 				return ATTRIBUTE2_EDEFAULT == null ? attribute2 != null : !ATTRIBUTE2_EDEFAULT.equals(attribute2);
 			case NoLiteralsPackage.NO_LIT_CLASS__REFERENCE2:

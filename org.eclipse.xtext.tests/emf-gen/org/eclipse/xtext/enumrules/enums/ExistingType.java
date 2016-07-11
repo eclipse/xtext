@@ -15,11 +15,11 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.enumrules.enums.ExistingType#getEnumFeature <em>Enum Feature</em>}</li>
  *   <li>{@link org.eclipse.xtext.enumrules.enums.ExistingType#getStringFeature <em>String Feature</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.enumrules.enums.EnumsPackage#getExistingType()
  * @model

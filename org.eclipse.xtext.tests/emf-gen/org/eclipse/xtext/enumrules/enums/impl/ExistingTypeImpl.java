@@ -23,11 +23,11 @@ import org.eclipse.xtext.enumrules.enums.ExistingType;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.enumrules.enums.impl.ExistingTypeImpl#getEnumFeature <em>Enum Feature</em>}</li>
  *   <li>{@link org.eclipse.xtext.enumrules.enums.impl.ExistingTypeImpl#getStringFeature <em>String Feature</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
