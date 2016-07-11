@@ -1,0 +1,13 @@
+group = 'org.eclipse.xtend'
+
+dependencies {
+	compile project(':org.eclipse.xtext.xbase.lib')
+	compile project(':org.eclipse.xtend.lib')
+	compile 'junit:junit:4.12'
+}
+
+jar {
+    from('.') {
+        include 'about_org.eclipse.xtend.lib.html'
+    }
+}
