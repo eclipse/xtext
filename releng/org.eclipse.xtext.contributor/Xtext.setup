@@ -1084,6 +1084,21 @@
       <description></description>
     </setupTask>
     <setupTask
+        xsi:type="setup.p2:P2Task"
+        id="p2.swtbot"
+        label="SWTBot"
+        licenseConfirmationDisabled="true">
+      <requirement
+          name="org.eclipse.swtbot.eclipse.feature.group"/>
+      <requirement
+          name="org.eclipse.swtbot.ide.feature.group"/>
+      <requirement
+          name="org.eclipse.swtbot.generator.feature.feature.group"/>
+      <repository
+          url="http://download.eclipse.org/technology/swtbot/releases/latest/"/>
+      <description>UI testing framework</description>
+    </setupTask>
+    <setupTask
         xsi:type="projects:ProjectsImportTask">
       <sourceLocator
           rootFolder="${git.clone.xtext.xtend.location}"
@@ -1104,6 +1119,23 @@
               excludedWorkingSet="//@setupTasks.13/@workingSets.0"/>
         </predicate>
       </workingSet>
+    </setupTask>
+    <setupTask
+        xsi:type="setup.targlets:TargletTask">
+      <targlet
+          name="SWTBot">
+        <requirement
+            name="org.eclipse.swtbot.eclipse.feature.group"/>
+        <requirement
+            name="org.eclipse.swtbot.ide.feature.group"/>
+        <requirement
+            name="org.eclipse.swtbot.generator.feature.feature.group"/>
+        <repositoryList
+            name="SWTBot">
+          <repository
+              url="http://download.eclipse.org/technology/swtbot/releases/latest/"/>
+        </repositoryList>
+      </targlet>
     </setupTask>
     <stream
         name="master"/>
