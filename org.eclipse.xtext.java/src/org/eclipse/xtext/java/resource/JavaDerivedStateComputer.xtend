@@ -6,6 +6,7 @@ import java.util.List
 import org.eclipse.emf.common.util.EList
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.resource.Resource
+import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.jdt.internal.compiler.CompilationResult
 import org.eclipse.jdt.internal.compiler.Compiler
 import org.eclipse.jdt.internal.compiler.DefaultErrorHandlingPolicies
@@ -25,6 +26,7 @@ import org.eclipse.xtext.common.types.descriptions.EObjectDescriptionBasedStubGe
 import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader
 import org.eclipse.xtext.resource.IResourceDescriptionsProvider
 import org.eclipse.xtext.resource.XtextResourceSet
+import org.eclipse.xtext.util.JavaVersion
 
 class JavaDerivedStateComputer {
 	
@@ -47,7 +49,7 @@ class JavaDerivedStateComputer {
 		val compilationUnit = getCompilationUnit(resource)
 		val parser = new Parser(new ProblemReporter(
 				DefaultErrorHandlingPolicies.proceedWithAllProblems(),
-				compilerOptions,
+				resource.compilerOptions,
 				new DefaultProblemFactory()), true)
 		val compilationResult = new CompilationResult(compilationUnit, 0, 1, -1)
 		val result = parser.dietParse(compilationUnit, compilationResult)
@@ -110,7 +112,7 @@ class JavaDerivedStateComputer {
 			throw new IllegalStateException("no index installed")
 		// TODO use container manager
 		val nameEnv = new IndexAwareNameEnvironment(classLoader, data, stubGenerator)
-		val compiler = new Compiler(nameEnv, DefaultErrorHandlingPolicies.proceedWithAllProblems(), getCompilerOptions(), [
+		val compiler = new Compiler(nameEnv, DefaultErrorHandlingPolicies.proceedWithAllProblems(), resource.compilerOptions, [
 			if (Arrays.equals(it.fileName, compilationUnit.fileName)) {
 				val map = newHashMap
 				var List<String> topLevelTypes = newArrayList
@@ -123,8 +125,14 @@ class JavaDerivedStateComputer {
 				}
 				val inMemClassLoader = new InMemoryClassLoader(map, classLoader)
 				for (topLevel : topLevelTypes) {
-					val builder = new JvmDeclaredTypeBuilder(new BinaryClass(topLevel, inMemClassLoader), new ClassFileBytesAccess(), inMemClassLoader)
-					resource.contents += builder.buildType
+					try {
+                        val builder = new JvmDeclaredTypeBuilder(new BinaryClass(topLevel, inMemClassLoader),
+                            new ClassFileBytesAccess(), inMemClassLoader)
+                        val type = builder.buildType
+                        resource.contents += type
+                    } catch (Throwable t) {
+                        throw new IllegalStateException("could not load type '" + topLevel + "'", t)
+                    }
 				}
 			}
 		], new DefaultProblemFactory())
@@ -137,26 +145,60 @@ class JavaDerivedStateComputer {
 	}
 	
 	protected def CompilerOptions getCompilerOptions() {
-		val jdkVersion = ClassFileConstants.JDK1_7;
-		return new CompilerOptions => [ compilerOptions |
-			compilerOptions.targetJDK = jdkVersion
-			compilerOptions.inlineJsrBytecode = true
-			compilerOptions.sourceLevel = jdkVersion
-			// these fields have been introduces in JDT 3.7
-			try {
-				CompilerOptions.getField("originalSourceLevel").setLong(compilerOptions, jdkVersion)
-			} catch (NoSuchFieldException e) {
-				// ignore
-			}
-			compilerOptions.complianceLevel = jdkVersion
-			// these fields have been introduces in JDT 3.7
-			try {
-				CompilerOptions.getField("originalComplianceLevel").setLong(compilerOptions, jdkVersion)
-			} catch (NoSuchFieldException e) {
-				// ignore
-			}
-		]
-	}
+        getCompilerOptions(null as JavaConfig)
+    }
+
+    protected def CompilerOptions getCompilerOptions(Resource resource) {
+        resource?.resourceSet.compilerOptions
+    }
+
+    protected def CompilerOptions getCompilerOptions(ResourceSet resourceSet) {
+        JavaConfig?.findInEmfObject(resourceSet).compilerOptions
+    }
+
+    protected def CompilerOptions getCompilerOptions(JavaConfig javaConfig) {
+        val sourceVersion = javaConfig?.javaSourceLevel ?: JavaVersion.JAVA7
+        val targetVersion = javaConfig?.javaTargetLevel ?: JavaVersion.JAVA7
+
+        val sourceLevel = sourceVersion.toJdtVersion
+        val targetLevel = targetVersion.toJdtVersion
+        val compilerOptions = new CompilerOptions
+        compilerOptions.targetJDK = targetLevel
+        compilerOptions.inlineJsrBytecode = true
+        compilerOptions.sourceLevel = sourceLevel
+        // these fields have been introduces in JDT 3.7
+        try {
+            CompilerOptions.getField("originalSourceLevel").setLong(compilerOptions, targetLevel)
+        } catch (NoSuchFieldException e) {
+            // ignore
+        }
+        compilerOptions.complianceLevel = sourceLevel
+        // these fields have been introduces in JDT 3.7
+        try {
+            CompilerOptions.getField("originalComplianceLevel").setLong(compilerOptions, targetLevel)
+        } catch (NoSuchFieldException e) {
+            // ignore
+        }
+        return compilerOptions
+    }
+
+    protected def long toJdtVersion(JavaVersion version) {
+        switch (version) {
+            case JAVA5:
+                ClassFileConstants.JDK1_5
+            case JAVA6:
+                ClassFileConstants.JDK1_6
+            case JAVA7:
+                ClassFileConstants.JDK1_7
+            case JAVA8: {
+                try {
+                    ClassFileConstants.getField('JDK1_8').getLong(null)
+                } catch (NoSuchFieldException e) {
+                    ClassFileConstants.JDK1_7
+                }
+            }
+        }
+    }
 	
 	protected def ClassLoader getClassLoader(Resource it) {
 		(resourceSet as XtextResourceSet).classpathURIContext as ClassLoader 

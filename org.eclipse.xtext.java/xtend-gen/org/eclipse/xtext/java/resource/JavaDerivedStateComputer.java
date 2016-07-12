@@ -38,11 +38,13 @@ import org.eclipse.xtext.common.types.access.binary.asm.JvmDeclaredTypeBuilder;
 import org.eclipse.xtext.common.types.descriptions.EObjectDescriptionBasedStubGenerator;
 import org.eclipse.xtext.java.resource.InMemoryClassLoader;
 import org.eclipse.xtext.java.resource.IndexAwareNameEnvironment;
+import org.eclipse.xtext.java.resource.JavaConfig;
 import org.eclipse.xtext.java.resource.JavaResource;
 import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceDescriptionsProvider;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.util.JavaVersion;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -82,7 +84,7 @@ public class JavaDerivedStateComputer {
     }
     final CompilationUnit compilationUnit = this.getCompilationUnit(resource);
     IErrorHandlingPolicy _proceedWithAllProblems = DefaultErrorHandlingPolicies.proceedWithAllProblems();
-    CompilerOptions _compilerOptions = this.getCompilerOptions();
+    CompilerOptions _compilerOptions = this.getCompilerOptions(resource);
     DefaultProblemFactory _defaultProblemFactory = new DefaultProblemFactory();
     ProblemReporter _problemReporter = new ProblemReporter(_proceedWithAllProblems, _compilerOptions, _defaultProblemFactory);
     final Parser parser = new Parser(_problemReporter, true);
@@ -192,7 +194,7 @@ public class JavaDerivedStateComputer {
     }
     final IndexAwareNameEnvironment nameEnv = new IndexAwareNameEnvironment(classLoader, data, this.stubGenerator);
     IErrorHandlingPolicy _proceedWithAllProblems = DefaultErrorHandlingPolicies.proceedWithAllProblems();
-    CompilerOptions _compilerOptions = this.getCompilerOptions();
+    CompilerOptions _compilerOptions = this.getCompilerOptions(resource);
     final ICompilerRequestor _function = (CompilationResult it) -> {
       boolean _equals_1 = Arrays.equals(it.fileName, compilationUnit.fileName);
       if (_equals_1) {
@@ -216,13 +218,20 @@ public class JavaDerivedStateComputer {
         }
         final InMemoryClassLoader inMemClassLoader = new InMemoryClassLoader(map, classLoader);
         for (final String topLevel : topLevelTypes) {
-          {
+          try {
             BinaryClass _binaryClass = new BinaryClass(topLevel, inMemClassLoader);
             ClassFileBytesAccess _classFileBytesAccess = new ClassFileBytesAccess();
             final JvmDeclaredTypeBuilder builder = new JvmDeclaredTypeBuilder(_binaryClass, _classFileBytesAccess, inMemClassLoader);
+            final JvmDeclaredType type = builder.buildType();
             EList<EObject> _contents = resource.getContents();
-            JvmDeclaredType _buildType = builder.buildType();
-            _contents.add(_buildType);
+            _contents.add(type);
+          } catch (final Throwable _t) {
+            if (_t instanceof Throwable) {
+              final Throwable t = (Throwable)_t;
+              throw new IllegalStateException((("could not load type \'" + topLevel) + "\'"), t);
+            } else {
+              throw Exceptions.sneakyThrow(_t);
+            }
           }
         }
       }
@@ -244,39 +253,119 @@ public class JavaDerivedStateComputer {
   }
   
   protected CompilerOptions getCompilerOptions() {
-    final long jdkVersion = ClassFileConstants.JDK1_7;
-    CompilerOptions _compilerOptions = new CompilerOptions();
-    final Procedure1<CompilerOptions> _function = (CompilerOptions compilerOptions) -> {
-      try {
-        compilerOptions.targetJDK = jdkVersion;
-        compilerOptions.inlineJsrBytecode = true;
-        compilerOptions.sourceLevel = jdkVersion;
-        try {
-          Field _field = CompilerOptions.class.getField("originalSourceLevel");
-          _field.setLong(compilerOptions, jdkVersion);
-        } catch (final Throwable _t) {
-          if (_t instanceof NoSuchFieldException) {
-            final NoSuchFieldException e = (NoSuchFieldException)_t;
-          } else {
-            throw Exceptions.sneakyThrow(_t);
-          }
-        }
-        compilerOptions.complianceLevel = jdkVersion;
-        try {
-          Field _field_1 = CompilerOptions.class.getField("originalComplianceLevel");
-          _field_1.setLong(compilerOptions, jdkVersion);
-        } catch (final Throwable _t_1) {
-          if (_t_1 instanceof NoSuchFieldException) {
-            final NoSuchFieldException e_1 = (NoSuchFieldException)_t_1;
-          } else {
-            throw Exceptions.sneakyThrow(_t_1);
-          }
-        }
-      } catch (Throwable _e) {
-        throw Exceptions.sneakyThrow(_e);
+    return this.getCompilerOptions(((JavaConfig) null));
+  }
+  
+  protected CompilerOptions getCompilerOptions(final Resource resource) {
+    ResourceSet _resourceSet = null;
+    if (resource!=null) {
+      _resourceSet=resource.getResourceSet();
+    }
+    return this.getCompilerOptions(_resourceSet);
+  }
+  
+  protected CompilerOptions getCompilerOptions(final ResourceSet resourceSet) {
+    JavaConfig _findInEmfObject = null;
+    if (JavaConfig.class!=null) {
+      _findInEmfObject=JavaConfig.findInEmfObject(resourceSet);
+    }
+    return this.getCompilerOptions(_findInEmfObject);
+  }
+  
+  protected CompilerOptions getCompilerOptions(final JavaConfig javaConfig) {
+    try {
+      JavaVersion _elvis = null;
+      JavaVersion _javaSourceLevel = null;
+      if (javaConfig!=null) {
+        _javaSourceLevel=javaConfig.getJavaSourceLevel();
       }
-    };
-    return ObjectExtensions.<CompilerOptions>operator_doubleArrow(_compilerOptions, _function);
+      if (_javaSourceLevel != null) {
+        _elvis = _javaSourceLevel;
+      } else {
+        _elvis = JavaVersion.JAVA7;
+      }
+      final JavaVersion sourceVersion = _elvis;
+      JavaVersion _elvis_1 = null;
+      JavaVersion _javaTargetLevel = null;
+      if (javaConfig!=null) {
+        _javaTargetLevel=javaConfig.getJavaTargetLevel();
+      }
+      if (_javaTargetLevel != null) {
+        _elvis_1 = _javaTargetLevel;
+      } else {
+        _elvis_1 = JavaVersion.JAVA7;
+      }
+      final JavaVersion targetVersion = _elvis_1;
+      final long sourceLevel = this.toJdtVersion(sourceVersion);
+      final long targetLevel = this.toJdtVersion(targetVersion);
+      final CompilerOptions compilerOptions = new CompilerOptions();
+      compilerOptions.targetJDK = targetLevel;
+      compilerOptions.inlineJsrBytecode = true;
+      compilerOptions.sourceLevel = sourceLevel;
+      try {
+        Field _field = CompilerOptions.class.getField("originalSourceLevel");
+        _field.setLong(compilerOptions, targetLevel);
+      } catch (final Throwable _t) {
+        if (_t instanceof NoSuchFieldException) {
+          final NoSuchFieldException e = (NoSuchFieldException)_t;
+        } else {
+          throw Exceptions.sneakyThrow(_t);
+        }
+      }
+      compilerOptions.complianceLevel = sourceLevel;
+      try {
+        Field _field_1 = CompilerOptions.class.getField("originalComplianceLevel");
+        _field_1.setLong(compilerOptions, targetLevel);
+      } catch (final Throwable _t_1) {
+        if (_t_1 instanceof NoSuchFieldException) {
+          final NoSuchFieldException e_1 = (NoSuchFieldException)_t_1;
+        } else {
+          throw Exceptions.sneakyThrow(_t_1);
+        }
+      }
+      return compilerOptions;
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  protected long toJdtVersion(final JavaVersion version) {
+    try {
+      long _switchResult = (long) 0;
+      if (version != null) {
+        switch (version) {
+          case JAVA5:
+            _switchResult = ClassFileConstants.JDK1_5;
+            break;
+          case JAVA6:
+            _switchResult = ClassFileConstants.JDK1_6;
+            break;
+          case JAVA7:
+            _switchResult = ClassFileConstants.JDK1_7;
+            break;
+          case JAVA8:
+            long _xtrycatchfinallyexpression = (long) 0;
+            try {
+              Field _field = ClassFileConstants.class.getField("JDK1_8");
+              _xtrycatchfinallyexpression = _field.getLong(null);
+            } catch (final Throwable _t) {
+              if (_t instanceof NoSuchFieldException) {
+                final NoSuchFieldException e = (NoSuchFieldException)_t;
+                _xtrycatchfinallyexpression = ClassFileConstants.JDK1_7;
+              } else {
+                throw Exceptions.sneakyThrow(_t);
+              }
+            }
+            _switchResult = _xtrycatchfinallyexpression;
+            break;
+          default:
+            break;
+        }
+      }
+      return _switchResult;
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
   
   protected ClassLoader getClassLoader(final Resource it) {
