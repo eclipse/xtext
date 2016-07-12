@@ -42,12 +42,7 @@ Workflow {
 		
 		language = {
 			grammarUri = "classpath:/org/eclipse/xtext/parsetree/formatter/FormatterTestLanguage.xtext"
-			fragment = @TestLanguagesFragments auto-inject {}
+			fragment = @TestLanguagesFragments {}
 		}
-		
-//		language = { XXX
-//			grammarUri = "classpath:/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.xtext"
-//			fragment = @TestLanguagesFragmentsParseTreeConstructor auto-inject {}
-//		}
 	}
 }

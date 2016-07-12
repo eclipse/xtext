@@ -1,4 +1,4 @@
-package org.eclipse.xtext.parsetree.formatter.parser.antlr.internal; 
+package org.eclipse.xtext.parsetree.formatter.parser.antlr.internal;
 
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
@@ -85,18 +85,18 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
      	private FormatterTestLanguageGrammarAccess grammarAccess;
-     	
+
         public InternalFormatterTestLanguageParser(TokenStream input, FormatterTestLanguageGrammarAccess grammarAccess) {
             this(input);
             this.grammarAccess = grammarAccess;
             registerRules(grammarAccess.getGrammar());
         }
-        
+
         @Override
         protected String getFirstRuleName() {
-        	return "Root";	
+        	return "Root";
        	}
-       	
+
        	@Override
        	protected FormatterTestLanguageGrammarAccess getGrammarAccess() {
        		return grammarAccess;
@@ -104,8 +104,9 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
 
+
     // $ANTLR start "entryRuleRoot"
-    // InternalFormatterTestLanguage.g:68:1: entryRuleRoot returns [EObject current=null] : iv_ruleRoot= ruleRoot EOF ;
+    // InternalFormatterTestLanguage.g:65:1: entryRuleRoot returns [EObject current=null] : iv_ruleRoot= ruleRoot EOF ;
     public final EObject entryRuleRoot() throws RecognitionException {
         EObject current = null;
 
@@ -113,8 +114,8 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // InternalFormatterTestLanguage.g:69:2: (iv_ruleRoot= ruleRoot EOF )
-            // InternalFormatterTestLanguage.g:70:2: iv_ruleRoot= ruleRoot EOF
+            // InternalFormatterTestLanguage.g:65:45: (iv_ruleRoot= ruleRoot EOF )
+            // InternalFormatterTestLanguage.g:66:2: iv_ruleRoot= ruleRoot EOF
             {
              newCompositeNode(grammarAccess.getRootRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -128,11 +129,11 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -141,7 +142,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleRoot"
-    // InternalFormatterTestLanguage.g:77:1: ruleRoot returns [EObject current=null] : (otherlv_0= 'test' (this_TestLinewrap_1= ruleTestLinewrap | this_TestIndentation_2= ruleTestIndentation | this_TestLinewrapMinMax_3= ruleTestLinewrapMinMax | this_WrappingDataTypeTest_4= ruleWrappingDataTypeTest ) ) ;
+    // InternalFormatterTestLanguage.g:72:1: ruleRoot returns [EObject current=null] : (otherlv_0= 'test' (this_TestLinewrap_1= ruleTestLinewrap | this_TestIndentation_2= ruleTestIndentation | this_TestLinewrapMinMax_3= ruleTestLinewrapMinMax | this_WrappingDataTypeTest_4= ruleWrappingDataTypeTest ) ) ;
     public final EObject ruleRoot() throws RecognitionException {
         EObject current = null;
 
@@ -155,20 +156,21 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
         EObject this_WrappingDataTypeTest_4 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalFormatterTestLanguage.g:80:28: ( (otherlv_0= 'test' (this_TestLinewrap_1= ruleTestLinewrap | this_TestIndentation_2= ruleTestIndentation | this_TestLinewrapMinMax_3= ruleTestLinewrapMinMax | this_WrappingDataTypeTest_4= ruleWrappingDataTypeTest ) ) )
-            // InternalFormatterTestLanguage.g:81:1: (otherlv_0= 'test' (this_TestLinewrap_1= ruleTestLinewrap | this_TestIndentation_2= ruleTestIndentation | this_TestLinewrapMinMax_3= ruleTestLinewrapMinMax | this_WrappingDataTypeTest_4= ruleWrappingDataTypeTest ) )
+            // InternalFormatterTestLanguage.g:78:2: ( (otherlv_0= 'test' (this_TestLinewrap_1= ruleTestLinewrap | this_TestIndentation_2= ruleTestIndentation | this_TestLinewrapMinMax_3= ruleTestLinewrapMinMax | this_WrappingDataTypeTest_4= ruleWrappingDataTypeTest ) ) )
+            // InternalFormatterTestLanguage.g:79:2: (otherlv_0= 'test' (this_TestLinewrap_1= ruleTestLinewrap | this_TestIndentation_2= ruleTestIndentation | this_TestLinewrapMinMax_3= ruleTestLinewrapMinMax | this_WrappingDataTypeTest_4= ruleWrappingDataTypeTest ) )
             {
-            // InternalFormatterTestLanguage.g:81:1: (otherlv_0= 'test' (this_TestLinewrap_1= ruleTestLinewrap | this_TestIndentation_2= ruleTestIndentation | this_TestLinewrapMinMax_3= ruleTestLinewrapMinMax | this_WrappingDataTypeTest_4= ruleWrappingDataTypeTest ) )
-            // InternalFormatterTestLanguage.g:81:3: otherlv_0= 'test' (this_TestLinewrap_1= ruleTestLinewrap | this_TestIndentation_2= ruleTestIndentation | this_TestLinewrapMinMax_3= ruleTestLinewrapMinMax | this_WrappingDataTypeTest_4= ruleWrappingDataTypeTest )
+            // InternalFormatterTestLanguage.g:79:2: (otherlv_0= 'test' (this_TestLinewrap_1= ruleTestLinewrap | this_TestIndentation_2= ruleTestIndentation | this_TestLinewrapMinMax_3= ruleTestLinewrapMinMax | this_WrappingDataTypeTest_4= ruleWrappingDataTypeTest ) )
+            // InternalFormatterTestLanguage.g:80:3: otherlv_0= 'test' (this_TestLinewrap_1= ruleTestLinewrap | this_TestIndentation_2= ruleTestIndentation | this_TestLinewrapMinMax_3= ruleTestLinewrapMinMax | this_WrappingDataTypeTest_4= ruleWrappingDataTypeTest )
             {
             otherlv_0=(Token)match(input,11,FollowSets000.FOLLOW_3); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getRootAccess().getTestKeyword_0());
-                
-            // InternalFormatterTestLanguage.g:85:1: (this_TestLinewrap_1= ruleTestLinewrap | this_TestIndentation_2= ruleTestIndentation | this_TestLinewrapMinMax_3= ruleTestLinewrapMinMax | this_WrappingDataTypeTest_4= ruleWrappingDataTypeTest )
+            			newLeafNode(otherlv_0, grammarAccess.getRootAccess().getTestKeyword_0());
+            		
+            // InternalFormatterTestLanguage.g:84:3: (this_TestLinewrap_1= ruleTestLinewrap | this_TestIndentation_2= ruleTestIndentation | this_TestLinewrapMinMax_3= ruleTestLinewrapMinMax | this_WrappingDataTypeTest_4= ruleWrappingDataTypeTest )
             int alt1=4;
             switch ( input.LA(1) ) {
             case 24:
@@ -200,74 +202,74 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
             switch (alt1) {
                 case 1 :
-                    // InternalFormatterTestLanguage.g:86:5: this_TestLinewrap_1= ruleTestLinewrap
+                    // InternalFormatterTestLanguage.g:85:4: this_TestLinewrap_1= ruleTestLinewrap
                     {
-                     
-                            newCompositeNode(grammarAccess.getRootAccess().getTestLinewrapParserRuleCall_1_0()); 
-                        
+
+                    				newCompositeNode(grammarAccess.getRootAccess().getTestLinewrapParserRuleCall_1_0());
+                    			
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_TestLinewrap_1=ruleTestLinewrap();
 
                     state._fsp--;
 
-                     
-                            current = this_TestLinewrap_1; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    				current = this_TestLinewrap_1;
+                    				afterParserOrEnumRuleCall();
+                    			
 
                     }
                     break;
                 case 2 :
-                    // InternalFormatterTestLanguage.g:96:5: this_TestIndentation_2= ruleTestIndentation
+                    // InternalFormatterTestLanguage.g:94:4: this_TestIndentation_2= ruleTestIndentation
                     {
-                     
-                            newCompositeNode(grammarAccess.getRootAccess().getTestIndentationParserRuleCall_1_1()); 
-                        
+
+                    				newCompositeNode(grammarAccess.getRootAccess().getTestIndentationParserRuleCall_1_1());
+                    			
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_TestIndentation_2=ruleTestIndentation();
 
                     state._fsp--;
 
-                     
-                            current = this_TestIndentation_2; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    				current = this_TestIndentation_2;
+                    				afterParserOrEnumRuleCall();
+                    			
 
                     }
                     break;
                 case 3 :
-                    // InternalFormatterTestLanguage.g:106:5: this_TestLinewrapMinMax_3= ruleTestLinewrapMinMax
+                    // InternalFormatterTestLanguage.g:103:4: this_TestLinewrapMinMax_3= ruleTestLinewrapMinMax
                     {
-                     
-                            newCompositeNode(grammarAccess.getRootAccess().getTestLinewrapMinMaxParserRuleCall_1_2()); 
-                        
+
+                    				newCompositeNode(grammarAccess.getRootAccess().getTestLinewrapMinMaxParserRuleCall_1_2());
+                    			
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_TestLinewrapMinMax_3=ruleTestLinewrapMinMax();
 
                     state._fsp--;
 
-                     
-                            current = this_TestLinewrapMinMax_3; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    				current = this_TestLinewrapMinMax_3;
+                    				afterParserOrEnumRuleCall();
+                    			
 
                     }
                     break;
                 case 4 :
-                    // InternalFormatterTestLanguage.g:116:5: this_WrappingDataTypeTest_4= ruleWrappingDataTypeTest
+                    // InternalFormatterTestLanguage.g:112:4: this_WrappingDataTypeTest_4= ruleWrappingDataTypeTest
                     {
-                     
-                            newCompositeNode(grammarAccess.getRootAccess().getWrappingDataTypeTestParserRuleCall_1_3()); 
-                        
+
+                    				newCompositeNode(grammarAccess.getRootAccess().getWrappingDataTypeTestParserRuleCall_1_3());
+                    			
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_WrappingDataTypeTest_4=ruleWrappingDataTypeTest();
 
                     state._fsp--;
 
-                     
-                            current = this_WrappingDataTypeTest_4; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    				current = this_WrappingDataTypeTest_4;
+                    				afterParserOrEnumRuleCall();
+                    			
 
                     }
                     break;
@@ -280,13 +282,15 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -295,7 +299,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleLine"
-    // InternalFormatterTestLanguage.g:132:1: entryRuleLine returns [EObject current=null] : iv_ruleLine= ruleLine EOF ;
+    // InternalFormatterTestLanguage.g:125:1: entryRuleLine returns [EObject current=null] : iv_ruleLine= ruleLine EOF ;
     public final EObject entryRuleLine() throws RecognitionException {
         EObject current = null;
 
@@ -303,8 +307,8 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // InternalFormatterTestLanguage.g:133:2: (iv_ruleLine= ruleLine EOF )
-            // InternalFormatterTestLanguage.g:134:2: iv_ruleLine= ruleLine EOF
+            // InternalFormatterTestLanguage.g:125:45: (iv_ruleLine= ruleLine EOF )
+            // InternalFormatterTestLanguage.g:126:2: iv_ruleLine= ruleLine EOF
             {
              newCompositeNode(grammarAccess.getLineRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -318,11 +322,11 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -331,7 +335,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleLine"
-    // InternalFormatterTestLanguage.g:141:1: ruleLine returns [EObject current=null] : ( (this_Decl_0= ruleDecl | this_Assign_1= ruleAssign | this_Meth_2= ruleMeth | this_FqnObj_3= ruleFqnObj | this_FqnRef_4= ruleFqnRef | this_Enumeration_5= ruleEnumeration | (this_SuppressedHidden_6= ruleSuppressedHidden otherlv_7= 'post' ) | this_Space_8= ruleSpace | this_Datatypes_9= ruleDatatypes ) otherlv_10= ';' ) ;
+    // InternalFormatterTestLanguage.g:132:1: ruleLine returns [EObject current=null] : ( (this_Decl_0= ruleDecl | this_Assign_1= ruleAssign | this_Meth_2= ruleMeth | this_FqnObj_3= ruleFqnObj | this_FqnRef_4= ruleFqnRef | this_Enumeration_5= ruleEnumeration | (this_SuppressedHidden_6= ruleSuppressedHidden otherlv_7= 'post' ) | this_Space_8= ruleSpace | this_Datatypes_9= ruleDatatypes ) otherlv_10= ';' ) ;
     public final EObject ruleLine() throws RecognitionException {
         EObject current = null;
 
@@ -356,149 +360,150 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
         EObject this_Datatypes_9 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalFormatterTestLanguage.g:144:28: ( ( (this_Decl_0= ruleDecl | this_Assign_1= ruleAssign | this_Meth_2= ruleMeth | this_FqnObj_3= ruleFqnObj | this_FqnRef_4= ruleFqnRef | this_Enumeration_5= ruleEnumeration | (this_SuppressedHidden_6= ruleSuppressedHidden otherlv_7= 'post' ) | this_Space_8= ruleSpace | this_Datatypes_9= ruleDatatypes ) otherlv_10= ';' ) )
-            // InternalFormatterTestLanguage.g:145:1: ( (this_Decl_0= ruleDecl | this_Assign_1= ruleAssign | this_Meth_2= ruleMeth | this_FqnObj_3= ruleFqnObj | this_FqnRef_4= ruleFqnRef | this_Enumeration_5= ruleEnumeration | (this_SuppressedHidden_6= ruleSuppressedHidden otherlv_7= 'post' ) | this_Space_8= ruleSpace | this_Datatypes_9= ruleDatatypes ) otherlv_10= ';' )
+            // InternalFormatterTestLanguage.g:138:2: ( ( (this_Decl_0= ruleDecl | this_Assign_1= ruleAssign | this_Meth_2= ruleMeth | this_FqnObj_3= ruleFqnObj | this_FqnRef_4= ruleFqnRef | this_Enumeration_5= ruleEnumeration | (this_SuppressedHidden_6= ruleSuppressedHidden otherlv_7= 'post' ) | this_Space_8= ruleSpace | this_Datatypes_9= ruleDatatypes ) otherlv_10= ';' ) )
+            // InternalFormatterTestLanguage.g:139:2: ( (this_Decl_0= ruleDecl | this_Assign_1= ruleAssign | this_Meth_2= ruleMeth | this_FqnObj_3= ruleFqnObj | this_FqnRef_4= ruleFqnRef | this_Enumeration_5= ruleEnumeration | (this_SuppressedHidden_6= ruleSuppressedHidden otherlv_7= 'post' ) | this_Space_8= ruleSpace | this_Datatypes_9= ruleDatatypes ) otherlv_10= ';' )
             {
-            // InternalFormatterTestLanguage.g:145:1: ( (this_Decl_0= ruleDecl | this_Assign_1= ruleAssign | this_Meth_2= ruleMeth | this_FqnObj_3= ruleFqnObj | this_FqnRef_4= ruleFqnRef | this_Enumeration_5= ruleEnumeration | (this_SuppressedHidden_6= ruleSuppressedHidden otherlv_7= 'post' ) | this_Space_8= ruleSpace | this_Datatypes_9= ruleDatatypes ) otherlv_10= ';' )
-            // InternalFormatterTestLanguage.g:145:2: (this_Decl_0= ruleDecl | this_Assign_1= ruleAssign | this_Meth_2= ruleMeth | this_FqnObj_3= ruleFqnObj | this_FqnRef_4= ruleFqnRef | this_Enumeration_5= ruleEnumeration | (this_SuppressedHidden_6= ruleSuppressedHidden otherlv_7= 'post' ) | this_Space_8= ruleSpace | this_Datatypes_9= ruleDatatypes ) otherlv_10= ';'
+            // InternalFormatterTestLanguage.g:139:2: ( (this_Decl_0= ruleDecl | this_Assign_1= ruleAssign | this_Meth_2= ruleMeth | this_FqnObj_3= ruleFqnObj | this_FqnRef_4= ruleFqnRef | this_Enumeration_5= ruleEnumeration | (this_SuppressedHidden_6= ruleSuppressedHidden otherlv_7= 'post' ) | this_Space_8= ruleSpace | this_Datatypes_9= ruleDatatypes ) otherlv_10= ';' )
+            // InternalFormatterTestLanguage.g:140:3: (this_Decl_0= ruleDecl | this_Assign_1= ruleAssign | this_Meth_2= ruleMeth | this_FqnObj_3= ruleFqnObj | this_FqnRef_4= ruleFqnRef | this_Enumeration_5= ruleEnumeration | (this_SuppressedHidden_6= ruleSuppressedHidden otherlv_7= 'post' ) | this_Space_8= ruleSpace | this_Datatypes_9= ruleDatatypes ) otherlv_10= ';'
             {
-            // InternalFormatterTestLanguage.g:145:2: (this_Decl_0= ruleDecl | this_Assign_1= ruleAssign | this_Meth_2= ruleMeth | this_FqnObj_3= ruleFqnObj | this_FqnRef_4= ruleFqnRef | this_Enumeration_5= ruleEnumeration | (this_SuppressedHidden_6= ruleSuppressedHidden otherlv_7= 'post' ) | this_Space_8= ruleSpace | this_Datatypes_9= ruleDatatypes )
+            // InternalFormatterTestLanguage.g:140:3: (this_Decl_0= ruleDecl | this_Assign_1= ruleAssign | this_Meth_2= ruleMeth | this_FqnObj_3= ruleFqnObj | this_FqnRef_4= ruleFqnRef | this_Enumeration_5= ruleEnumeration | (this_SuppressedHidden_6= ruleSuppressedHidden otherlv_7= 'post' ) | this_Space_8= ruleSpace | this_Datatypes_9= ruleDatatypes )
             int alt2=9;
             alt2 = dfa2.predict(input);
             switch (alt2) {
                 case 1 :
-                    // InternalFormatterTestLanguage.g:146:5: this_Decl_0= ruleDecl
+                    // InternalFormatterTestLanguage.g:141:4: this_Decl_0= ruleDecl
                     {
-                     
-                            newCompositeNode(grammarAccess.getLineAccess().getDeclParserRuleCall_0_0()); 
-                        
+
+                    				newCompositeNode(grammarAccess.getLineAccess().getDeclParserRuleCall_0_0());
+                    			
                     pushFollow(FollowSets000.FOLLOW_4);
                     this_Decl_0=ruleDecl();
 
                     state._fsp--;
 
-                     
-                            current = this_Decl_0; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    				current = this_Decl_0;
+                    				afterParserOrEnumRuleCall();
+                    			
 
                     }
                     break;
                 case 2 :
-                    // InternalFormatterTestLanguage.g:156:5: this_Assign_1= ruleAssign
+                    // InternalFormatterTestLanguage.g:150:4: this_Assign_1= ruleAssign
                     {
-                     
-                            newCompositeNode(grammarAccess.getLineAccess().getAssignParserRuleCall_0_1()); 
-                        
+
+                    				newCompositeNode(grammarAccess.getLineAccess().getAssignParserRuleCall_0_1());
+                    			
                     pushFollow(FollowSets000.FOLLOW_4);
                     this_Assign_1=ruleAssign();
 
                     state._fsp--;
 
-                     
-                            current = this_Assign_1; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    				current = this_Assign_1;
+                    				afterParserOrEnumRuleCall();
+                    			
 
                     }
                     break;
                 case 3 :
-                    // InternalFormatterTestLanguage.g:166:5: this_Meth_2= ruleMeth
+                    // InternalFormatterTestLanguage.g:159:4: this_Meth_2= ruleMeth
                     {
-                     
-                            newCompositeNode(grammarAccess.getLineAccess().getMethParserRuleCall_0_2()); 
-                        
+
+                    				newCompositeNode(grammarAccess.getLineAccess().getMethParserRuleCall_0_2());
+                    			
                     pushFollow(FollowSets000.FOLLOW_4);
                     this_Meth_2=ruleMeth();
 
                     state._fsp--;
 
-                     
-                            current = this_Meth_2; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    				current = this_Meth_2;
+                    				afterParserOrEnumRuleCall();
+                    			
 
                     }
                     break;
                 case 4 :
-                    // InternalFormatterTestLanguage.g:176:5: this_FqnObj_3= ruleFqnObj
+                    // InternalFormatterTestLanguage.g:168:4: this_FqnObj_3= ruleFqnObj
                     {
-                     
-                            newCompositeNode(grammarAccess.getLineAccess().getFqnObjParserRuleCall_0_3()); 
-                        
+
+                    				newCompositeNode(grammarAccess.getLineAccess().getFqnObjParserRuleCall_0_3());
+                    			
                     pushFollow(FollowSets000.FOLLOW_4);
                     this_FqnObj_3=ruleFqnObj();
 
                     state._fsp--;
 
-                     
-                            current = this_FqnObj_3; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    				current = this_FqnObj_3;
+                    				afterParserOrEnumRuleCall();
+                    			
 
                     }
                     break;
                 case 5 :
-                    // InternalFormatterTestLanguage.g:186:5: this_FqnRef_4= ruleFqnRef
+                    // InternalFormatterTestLanguage.g:177:4: this_FqnRef_4= ruleFqnRef
                     {
-                     
-                            newCompositeNode(grammarAccess.getLineAccess().getFqnRefParserRuleCall_0_4()); 
-                        
+
+                    				newCompositeNode(grammarAccess.getLineAccess().getFqnRefParserRuleCall_0_4());
+                    			
                     pushFollow(FollowSets000.FOLLOW_4);
                     this_FqnRef_4=ruleFqnRef();
 
                     state._fsp--;
 
-                     
-                            current = this_FqnRef_4; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    				current = this_FqnRef_4;
+                    				afterParserOrEnumRuleCall();
+                    			
 
                     }
                     break;
                 case 6 :
-                    // InternalFormatterTestLanguage.g:196:5: this_Enumeration_5= ruleEnumeration
+                    // InternalFormatterTestLanguage.g:186:4: this_Enumeration_5= ruleEnumeration
                     {
-                     
-                            newCompositeNode(grammarAccess.getLineAccess().getEnumerationParserRuleCall_0_5()); 
-                        
+
+                    				newCompositeNode(grammarAccess.getLineAccess().getEnumerationParserRuleCall_0_5());
+                    			
                     pushFollow(FollowSets000.FOLLOW_4);
                     this_Enumeration_5=ruleEnumeration();
 
                     state._fsp--;
 
-                     
-                            current = this_Enumeration_5; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    				current = this_Enumeration_5;
+                    				afterParserOrEnumRuleCall();
+                    			
 
                     }
                     break;
                 case 7 :
-                    // InternalFormatterTestLanguage.g:205:6: (this_SuppressedHidden_6= ruleSuppressedHidden otherlv_7= 'post' )
+                    // InternalFormatterTestLanguage.g:195:4: (this_SuppressedHidden_6= ruleSuppressedHidden otherlv_7= 'post' )
                     {
-                    // InternalFormatterTestLanguage.g:205:6: (this_SuppressedHidden_6= ruleSuppressedHidden otherlv_7= 'post' )
-                    // InternalFormatterTestLanguage.g:206:5: this_SuppressedHidden_6= ruleSuppressedHidden otherlv_7= 'post'
+                    // InternalFormatterTestLanguage.g:195:4: (this_SuppressedHidden_6= ruleSuppressedHidden otherlv_7= 'post' )
+                    // InternalFormatterTestLanguage.g:196:5: this_SuppressedHidden_6= ruleSuppressedHidden otherlv_7= 'post'
                     {
-                     
-                            newCompositeNode(grammarAccess.getLineAccess().getSuppressedHiddenParserRuleCall_0_6_0()); 
-                        
+
+                    					newCompositeNode(grammarAccess.getLineAccess().getSuppressedHiddenParserRuleCall_0_6_0());
+                    				
                     pushFollow(FollowSets000.FOLLOW_5);
                     this_SuppressedHidden_6=ruleSuppressedHidden();
 
                     state._fsp--;
 
-                     
-                            current = this_SuppressedHidden_6; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    					current = this_SuppressedHidden_6;
+                    					afterParserOrEnumRuleCall();
+                    				
                     otherlv_7=(Token)match(input,12,FollowSets000.FOLLOW_4); 
 
-                        	newLeafNode(otherlv_7, grammarAccess.getLineAccess().getPostKeyword_0_6_1());
-                        
+                    					newLeafNode(otherlv_7, grammarAccess.getLineAccess().getPostKeyword_0_6_1());
+                    				
 
                     }
 
@@ -506,38 +511,38 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
                     }
                     break;
                 case 8 :
-                    // InternalFormatterTestLanguage.g:220:5: this_Space_8= ruleSpace
+                    // InternalFormatterTestLanguage.g:210:4: this_Space_8= ruleSpace
                     {
-                     
-                            newCompositeNode(grammarAccess.getLineAccess().getSpaceParserRuleCall_0_7()); 
-                        
+
+                    				newCompositeNode(grammarAccess.getLineAccess().getSpaceParserRuleCall_0_7());
+                    			
                     pushFollow(FollowSets000.FOLLOW_4);
                     this_Space_8=ruleSpace();
 
                     state._fsp--;
 
-                     
-                            current = this_Space_8; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    				current = this_Space_8;
+                    				afterParserOrEnumRuleCall();
+                    			
 
                     }
                     break;
                 case 9 :
-                    // InternalFormatterTestLanguage.g:230:5: this_Datatypes_9= ruleDatatypes
+                    // InternalFormatterTestLanguage.g:219:4: this_Datatypes_9= ruleDatatypes
                     {
-                     
-                            newCompositeNode(grammarAccess.getLineAccess().getDatatypesParserRuleCall_0_8()); 
-                        
+
+                    				newCompositeNode(grammarAccess.getLineAccess().getDatatypesParserRuleCall_0_8());
+                    			
                     pushFollow(FollowSets000.FOLLOW_4);
                     this_Datatypes_9=ruleDatatypes();
 
                     state._fsp--;
 
-                     
-                            current = this_Datatypes_9; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    				current = this_Datatypes_9;
+                    				afterParserOrEnumRuleCall();
+                    			
 
                     }
                     break;
@@ -546,21 +551,23 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
             otherlv_10=(Token)match(input,13,FollowSets000.FOLLOW_2); 
 
-                	newLeafNode(otherlv_10, grammarAccess.getLineAccess().getSemicolonKeyword_1());
-                
+            			newLeafNode(otherlv_10, grammarAccess.getLineAccess().getSemicolonKeyword_1());
+            		
 
             }
 
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -569,7 +576,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleDecl"
-    // InternalFormatterTestLanguage.g:250:1: entryRuleDecl returns [EObject current=null] : iv_ruleDecl= ruleDecl EOF ;
+    // InternalFormatterTestLanguage.g:236:1: entryRuleDecl returns [EObject current=null] : iv_ruleDecl= ruleDecl EOF ;
     public final EObject entryRuleDecl() throws RecognitionException {
         EObject current = null;
 
@@ -577,8 +584,8 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // InternalFormatterTestLanguage.g:251:2: (iv_ruleDecl= ruleDecl EOF )
-            // InternalFormatterTestLanguage.g:252:2: iv_ruleDecl= ruleDecl EOF
+            // InternalFormatterTestLanguage.g:236:45: (iv_ruleDecl= ruleDecl EOF )
+            // InternalFormatterTestLanguage.g:237:2: iv_ruleDecl= ruleDecl EOF
             {
              newCompositeNode(grammarAccess.getDeclRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -592,11 +599,11 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -605,71 +612,69 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleDecl"
-    // InternalFormatterTestLanguage.g:259:1: ruleDecl returns [EObject current=null] : ( ( (lv_type_0_0= RULE_ID ) ) ( (lv_name_1_0= RULE_ID ) ) ) ;
+    // InternalFormatterTestLanguage.g:243:1: ruleDecl returns [EObject current=null] : ( ( (lv_type_0_0= RULE_ID ) ) ( (lv_name_1_0= RULE_ID ) ) ) ;
     public final EObject ruleDecl() throws RecognitionException {
         EObject current = null;
 
         Token lv_type_0_0=null;
         Token lv_name_1_0=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalFormatterTestLanguage.g:262:28: ( ( ( (lv_type_0_0= RULE_ID ) ) ( (lv_name_1_0= RULE_ID ) ) ) )
-            // InternalFormatterTestLanguage.g:263:1: ( ( (lv_type_0_0= RULE_ID ) ) ( (lv_name_1_0= RULE_ID ) ) )
+            // InternalFormatterTestLanguage.g:249:2: ( ( ( (lv_type_0_0= RULE_ID ) ) ( (lv_name_1_0= RULE_ID ) ) ) )
+            // InternalFormatterTestLanguage.g:250:2: ( ( (lv_type_0_0= RULE_ID ) ) ( (lv_name_1_0= RULE_ID ) ) )
             {
-            // InternalFormatterTestLanguage.g:263:1: ( ( (lv_type_0_0= RULE_ID ) ) ( (lv_name_1_0= RULE_ID ) ) )
-            // InternalFormatterTestLanguage.g:263:2: ( (lv_type_0_0= RULE_ID ) ) ( (lv_name_1_0= RULE_ID ) )
+            // InternalFormatterTestLanguage.g:250:2: ( ( (lv_type_0_0= RULE_ID ) ) ( (lv_name_1_0= RULE_ID ) ) )
+            // InternalFormatterTestLanguage.g:251:3: ( (lv_type_0_0= RULE_ID ) ) ( (lv_name_1_0= RULE_ID ) )
             {
-            // InternalFormatterTestLanguage.g:263:2: ( (lv_type_0_0= RULE_ID ) )
-            // InternalFormatterTestLanguage.g:264:1: (lv_type_0_0= RULE_ID )
+            // InternalFormatterTestLanguage.g:251:3: ( (lv_type_0_0= RULE_ID ) )
+            // InternalFormatterTestLanguage.g:252:4: (lv_type_0_0= RULE_ID )
             {
-            // InternalFormatterTestLanguage.g:264:1: (lv_type_0_0= RULE_ID )
-            // InternalFormatterTestLanguage.g:265:3: lv_type_0_0= RULE_ID
+            // InternalFormatterTestLanguage.g:252:4: (lv_type_0_0= RULE_ID )
+            // InternalFormatterTestLanguage.g:253:5: lv_type_0_0= RULE_ID
             {
             lv_type_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_6); 
 
-            			newLeafNode(lv_type_0_0, grammarAccess.getDeclAccess().getTypeIDTerminalRuleCall_0_0()); 
-            		
+            					newLeafNode(lv_type_0_0, grammarAccess.getDeclAccess().getTypeIDTerminalRuleCall_0_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getDeclRule());
-            	        }
-                   		addWithLastConsumed(
-                   			current, 
-                   			"type",
-                    		lv_type_0_0, 
-                    		"org.eclipse.xtext.common.Terminals.ID");
-            	    
-
-            }
-
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getDeclRule());
+            					}
+            					addWithLastConsumed(
+            						current,
+            						"type",
+            						lv_type_0_0,
+            						"org.eclipse.xtext.common.Terminals.ID");
+            				
 
             }
 
-            // InternalFormatterTestLanguage.g:281:2: ( (lv_name_1_0= RULE_ID ) )
-            // InternalFormatterTestLanguage.g:282:1: (lv_name_1_0= RULE_ID )
+
+            }
+
+            // InternalFormatterTestLanguage.g:269:3: ( (lv_name_1_0= RULE_ID ) )
+            // InternalFormatterTestLanguage.g:270:4: (lv_name_1_0= RULE_ID )
             {
-            // InternalFormatterTestLanguage.g:282:1: (lv_name_1_0= RULE_ID )
-            // InternalFormatterTestLanguage.g:283:3: lv_name_1_0= RULE_ID
+            // InternalFormatterTestLanguage.g:270:4: (lv_name_1_0= RULE_ID )
+            // InternalFormatterTestLanguage.g:271:5: lv_name_1_0= RULE_ID
             {
             lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
-            			newLeafNode(lv_name_1_0, grammarAccess.getDeclAccess().getNameIDTerminalRuleCall_1_0()); 
-            		
+            					newLeafNode(lv_name_1_0, grammarAccess.getDeclAccess().getNameIDTerminalRuleCall_1_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getDeclRule());
-            	        }
-                   		addWithLastConsumed(
-                   			current, 
-                   			"name",
-                    		lv_name_1_0, 
-                    		"org.eclipse.xtext.common.Terminals.ID");
-            	    
-
-            }
-
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getDeclRule());
+            					}
+            					addWithLastConsumed(
+            						current,
+            						"name",
+            						lv_name_1_0,
+            						"org.eclipse.xtext.common.Terminals.ID");
+            				
 
             }
 
@@ -679,13 +684,18 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-             leaveRule(); 
+
+            }
+
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -694,7 +704,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleAssign"
-    // InternalFormatterTestLanguage.g:307:1: entryRuleAssign returns [EObject current=null] : iv_ruleAssign= ruleAssign EOF ;
+    // InternalFormatterTestLanguage.g:291:1: entryRuleAssign returns [EObject current=null] : iv_ruleAssign= ruleAssign EOF ;
     public final EObject entryRuleAssign() throws RecognitionException {
         EObject current = null;
 
@@ -702,8 +712,8 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // InternalFormatterTestLanguage.g:308:2: (iv_ruleAssign= ruleAssign EOF )
-            // InternalFormatterTestLanguage.g:309:2: iv_ruleAssign= ruleAssign EOF
+            // InternalFormatterTestLanguage.g:291:47: (iv_ruleAssign= ruleAssign EOF )
+            // InternalFormatterTestLanguage.g:292:2: iv_ruleAssign= ruleAssign EOF
             {
              newCompositeNode(grammarAccess.getAssignRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -717,11 +727,11 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -730,7 +740,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleAssign"
-    // InternalFormatterTestLanguage.g:316:1: ruleAssign returns [EObject current=null] : ( ( (lv_var_0_0= RULE_ID ) ) ( ( (lv_op_1_1= '=' | lv_op_1_2= '+=' ) ) ) otherlv_2= '[' ( ( (lv_val_3_0= RULE_INT ) ) (otherlv_4= ',' ( (lv_val_5_0= RULE_INT ) ) )* )? otherlv_6= ']' ) ;
+    // InternalFormatterTestLanguage.g:298:1: ruleAssign returns [EObject current=null] : ( ( (lv_var_0_0= RULE_ID ) ) ( ( (lv_op_1_1= '=' | lv_op_1_2= '+=' ) ) ) otherlv_2= '[' ( ( (lv_val_3_0= RULE_INT ) ) (otherlv_4= ',' ( (lv_val_5_0= RULE_INT ) ) )* )? otherlv_6= ']' ) ;
     public final EObject ruleAssign() throws RecognitionException {
         EObject current = null;
 
@@ -743,48 +753,49 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
         Token lv_val_5_0=null;
         Token otherlv_6=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalFormatterTestLanguage.g:319:28: ( ( ( (lv_var_0_0= RULE_ID ) ) ( ( (lv_op_1_1= '=' | lv_op_1_2= '+=' ) ) ) otherlv_2= '[' ( ( (lv_val_3_0= RULE_INT ) ) (otherlv_4= ',' ( (lv_val_5_0= RULE_INT ) ) )* )? otherlv_6= ']' ) )
-            // InternalFormatterTestLanguage.g:320:1: ( ( (lv_var_0_0= RULE_ID ) ) ( ( (lv_op_1_1= '=' | lv_op_1_2= '+=' ) ) ) otherlv_2= '[' ( ( (lv_val_3_0= RULE_INT ) ) (otherlv_4= ',' ( (lv_val_5_0= RULE_INT ) ) )* )? otherlv_6= ']' )
+            // InternalFormatterTestLanguage.g:304:2: ( ( ( (lv_var_0_0= RULE_ID ) ) ( ( (lv_op_1_1= '=' | lv_op_1_2= '+=' ) ) ) otherlv_2= '[' ( ( (lv_val_3_0= RULE_INT ) ) (otherlv_4= ',' ( (lv_val_5_0= RULE_INT ) ) )* )? otherlv_6= ']' ) )
+            // InternalFormatterTestLanguage.g:305:2: ( ( (lv_var_0_0= RULE_ID ) ) ( ( (lv_op_1_1= '=' | lv_op_1_2= '+=' ) ) ) otherlv_2= '[' ( ( (lv_val_3_0= RULE_INT ) ) (otherlv_4= ',' ( (lv_val_5_0= RULE_INT ) ) )* )? otherlv_6= ']' )
             {
-            // InternalFormatterTestLanguage.g:320:1: ( ( (lv_var_0_0= RULE_ID ) ) ( ( (lv_op_1_1= '=' | lv_op_1_2= '+=' ) ) ) otherlv_2= '[' ( ( (lv_val_3_0= RULE_INT ) ) (otherlv_4= ',' ( (lv_val_5_0= RULE_INT ) ) )* )? otherlv_6= ']' )
-            // InternalFormatterTestLanguage.g:320:2: ( (lv_var_0_0= RULE_ID ) ) ( ( (lv_op_1_1= '=' | lv_op_1_2= '+=' ) ) ) otherlv_2= '[' ( ( (lv_val_3_0= RULE_INT ) ) (otherlv_4= ',' ( (lv_val_5_0= RULE_INT ) ) )* )? otherlv_6= ']'
+            // InternalFormatterTestLanguage.g:305:2: ( ( (lv_var_0_0= RULE_ID ) ) ( ( (lv_op_1_1= '=' | lv_op_1_2= '+=' ) ) ) otherlv_2= '[' ( ( (lv_val_3_0= RULE_INT ) ) (otherlv_4= ',' ( (lv_val_5_0= RULE_INT ) ) )* )? otherlv_6= ']' )
+            // InternalFormatterTestLanguage.g:306:3: ( (lv_var_0_0= RULE_ID ) ) ( ( (lv_op_1_1= '=' | lv_op_1_2= '+=' ) ) ) otherlv_2= '[' ( ( (lv_val_3_0= RULE_INT ) ) (otherlv_4= ',' ( (lv_val_5_0= RULE_INT ) ) )* )? otherlv_6= ']'
             {
-            // InternalFormatterTestLanguage.g:320:2: ( (lv_var_0_0= RULE_ID ) )
-            // InternalFormatterTestLanguage.g:321:1: (lv_var_0_0= RULE_ID )
+            // InternalFormatterTestLanguage.g:306:3: ( (lv_var_0_0= RULE_ID ) )
+            // InternalFormatterTestLanguage.g:307:4: (lv_var_0_0= RULE_ID )
             {
-            // InternalFormatterTestLanguage.g:321:1: (lv_var_0_0= RULE_ID )
-            // InternalFormatterTestLanguage.g:322:3: lv_var_0_0= RULE_ID
+            // InternalFormatterTestLanguage.g:307:4: (lv_var_0_0= RULE_ID )
+            // InternalFormatterTestLanguage.g:308:5: lv_var_0_0= RULE_ID
             {
             lv_var_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_7); 
 
-            			newLeafNode(lv_var_0_0, grammarAccess.getAssignAccess().getVarIDTerminalRuleCall_0_0()); 
-            		
+            					newLeafNode(lv_var_0_0, grammarAccess.getAssignAccess().getVarIDTerminalRuleCall_0_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getAssignRule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"var",
-                    		lv_var_0_0, 
-                    		"org.eclipse.xtext.common.Terminals.ID");
-            	    
-
-            }
-
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getAssignRule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"var",
+            						lv_var_0_0,
+            						"org.eclipse.xtext.common.Terminals.ID");
+            				
 
             }
 
-            // InternalFormatterTestLanguage.g:338:2: ( ( (lv_op_1_1= '=' | lv_op_1_2= '+=' ) ) )
-            // InternalFormatterTestLanguage.g:339:1: ( (lv_op_1_1= '=' | lv_op_1_2= '+=' ) )
+
+            }
+
+            // InternalFormatterTestLanguage.g:324:3: ( ( (lv_op_1_1= '=' | lv_op_1_2= '+=' ) ) )
+            // InternalFormatterTestLanguage.g:325:4: ( (lv_op_1_1= '=' | lv_op_1_2= '+=' ) )
             {
-            // InternalFormatterTestLanguage.g:339:1: ( (lv_op_1_1= '=' | lv_op_1_2= '+=' ) )
-            // InternalFormatterTestLanguage.g:340:1: (lv_op_1_1= '=' | lv_op_1_2= '+=' )
+            // InternalFormatterTestLanguage.g:325:4: ( (lv_op_1_1= '=' | lv_op_1_2= '+=' ) )
+            // InternalFormatterTestLanguage.g:326:5: (lv_op_1_1= '=' | lv_op_1_2= '+=' )
             {
-            // InternalFormatterTestLanguage.g:340:1: (lv_op_1_1= '=' | lv_op_1_2= '+=' )
+            // InternalFormatterTestLanguage.g:326:5: (lv_op_1_1= '=' | lv_op_1_2= '+=' )
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -802,34 +813,34 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
             }
             switch (alt3) {
                 case 1 :
-                    // InternalFormatterTestLanguage.g:341:3: lv_op_1_1= '='
+                    // InternalFormatterTestLanguage.g:327:6: lv_op_1_1= '='
                     {
                     lv_op_1_1=(Token)match(input,14,FollowSets000.FOLLOW_8); 
 
-                            newLeafNode(lv_op_1_1, grammarAccess.getAssignAccess().getOpEqualsSignKeyword_1_0_0());
-                        
+                    						newLeafNode(lv_op_1_1, grammarAccess.getAssignAccess().getOpEqualsSignKeyword_1_0_0());
+                    					
 
-                    	        if (current==null) {
-                    	            current = createModelElement(grammarAccess.getAssignRule());
-                    	        }
-                           		setWithLastConsumed(current, "op", lv_op_1_1, null);
-                    	    
+                    						if (current==null) {
+                    							current = createModelElement(grammarAccess.getAssignRule());
+                    						}
+                    						setWithLastConsumed(current, "op", lv_op_1_1, null);
+                    					
 
                     }
                     break;
                 case 2 :
-                    // InternalFormatterTestLanguage.g:353:8: lv_op_1_2= '+='
+                    // InternalFormatterTestLanguage.g:338:6: lv_op_1_2= '+='
                     {
                     lv_op_1_2=(Token)match(input,15,FollowSets000.FOLLOW_8); 
 
-                            newLeafNode(lv_op_1_2, grammarAccess.getAssignAccess().getOpPlusSignEqualsSignKeyword_1_0_1());
-                        
+                    						newLeafNode(lv_op_1_2, grammarAccess.getAssignAccess().getOpPlusSignEqualsSignKeyword_1_0_1());
+                    					
 
-                    	        if (current==null) {
-                    	            current = createModelElement(grammarAccess.getAssignRule());
-                    	        }
-                           		setWithLastConsumed(current, "op", lv_op_1_2, null);
-                    	    
+                    						if (current==null) {
+                    							current = createModelElement(grammarAccess.getAssignRule());
+                    						}
+                    						setWithLastConsumed(current, "op", lv_op_1_2, null);
+                    					
 
                     }
                     break;
@@ -844,9 +855,9 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
             otherlv_2=(Token)match(input,16,FollowSets000.FOLLOW_9); 
 
-                	newLeafNode(otherlv_2, grammarAccess.getAssignAccess().getLeftSquareBracketKeyword_2());
-                
-            // InternalFormatterTestLanguage.g:372:1: ( ( (lv_val_3_0= RULE_INT ) ) (otherlv_4= ',' ( (lv_val_5_0= RULE_INT ) ) )* )?
+            			newLeafNode(otherlv_2, grammarAccess.getAssignAccess().getLeftSquareBracketKeyword_2());
+            		
+            // InternalFormatterTestLanguage.g:355:3: ( ( (lv_val_3_0= RULE_INT ) ) (otherlv_4= ',' ( (lv_val_5_0= RULE_INT ) ) )* )?
             int alt5=2;
             int LA5_0 = input.LA(1);
 
@@ -855,35 +866,35 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
             }
             switch (alt5) {
                 case 1 :
-                    // InternalFormatterTestLanguage.g:372:2: ( (lv_val_3_0= RULE_INT ) ) (otherlv_4= ',' ( (lv_val_5_0= RULE_INT ) ) )*
+                    // InternalFormatterTestLanguage.g:356:4: ( (lv_val_3_0= RULE_INT ) ) (otherlv_4= ',' ( (lv_val_5_0= RULE_INT ) ) )*
                     {
-                    // InternalFormatterTestLanguage.g:372:2: ( (lv_val_3_0= RULE_INT ) )
-                    // InternalFormatterTestLanguage.g:373:1: (lv_val_3_0= RULE_INT )
+                    // InternalFormatterTestLanguage.g:356:4: ( (lv_val_3_0= RULE_INT ) )
+                    // InternalFormatterTestLanguage.g:357:5: (lv_val_3_0= RULE_INT )
                     {
-                    // InternalFormatterTestLanguage.g:373:1: (lv_val_3_0= RULE_INT )
-                    // InternalFormatterTestLanguage.g:374:3: lv_val_3_0= RULE_INT
+                    // InternalFormatterTestLanguage.g:357:5: (lv_val_3_0= RULE_INT )
+                    // InternalFormatterTestLanguage.g:358:6: lv_val_3_0= RULE_INT
                     {
                     lv_val_3_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_10); 
 
-                    			newLeafNode(lv_val_3_0, grammarAccess.getAssignAccess().getValINTTerminalRuleCall_3_0_0()); 
-                    		
+                    						newLeafNode(lv_val_3_0, grammarAccess.getAssignAccess().getValINTTerminalRuleCall_3_0_0());
+                    					
 
-                    	        if (current==null) {
-                    	            current = createModelElement(grammarAccess.getAssignRule());
-                    	        }
-                           		addWithLastConsumed(
-                           			current, 
-                           			"val",
-                            		lv_val_3_0, 
-                            		"org.eclipse.xtext.common.Terminals.INT");
-                    	    
-
-                    }
-
+                    						if (current==null) {
+                    							current = createModelElement(grammarAccess.getAssignRule());
+                    						}
+                    						addWithLastConsumed(
+                    							current,
+                    							"val",
+                    							lv_val_3_0,
+                    							"org.eclipse.xtext.common.Terminals.INT");
+                    					
 
                     }
 
-                    // InternalFormatterTestLanguage.g:390:2: (otherlv_4= ',' ( (lv_val_5_0= RULE_INT ) ) )*
+
+                    }
+
+                    // InternalFormatterTestLanguage.g:374:4: (otherlv_4= ',' ( (lv_val_5_0= RULE_INT ) ) )*
                     loop4:
                     do {
                         int alt4=2;
@@ -896,32 +907,32 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
                         switch (alt4) {
                     	case 1 :
-                    	    // InternalFormatterTestLanguage.g:390:4: otherlv_4= ',' ( (lv_val_5_0= RULE_INT ) )
+                    	    // InternalFormatterTestLanguage.g:375:5: otherlv_4= ',' ( (lv_val_5_0= RULE_INT ) )
                     	    {
                     	    otherlv_4=(Token)match(input,17,FollowSets000.FOLLOW_11); 
 
-                    	        	newLeafNode(otherlv_4, grammarAccess.getAssignAccess().getCommaKeyword_3_1_0());
-                    	        
-                    	    // InternalFormatterTestLanguage.g:394:1: ( (lv_val_5_0= RULE_INT ) )
-                    	    // InternalFormatterTestLanguage.g:395:1: (lv_val_5_0= RULE_INT )
+                    	    					newLeafNode(otherlv_4, grammarAccess.getAssignAccess().getCommaKeyword_3_1_0());
+                    	    				
+                    	    // InternalFormatterTestLanguage.g:379:5: ( (lv_val_5_0= RULE_INT ) )
+                    	    // InternalFormatterTestLanguage.g:380:6: (lv_val_5_0= RULE_INT )
                     	    {
-                    	    // InternalFormatterTestLanguage.g:395:1: (lv_val_5_0= RULE_INT )
-                    	    // InternalFormatterTestLanguage.g:396:3: lv_val_5_0= RULE_INT
+                    	    // InternalFormatterTestLanguage.g:380:6: (lv_val_5_0= RULE_INT )
+                    	    // InternalFormatterTestLanguage.g:381:7: lv_val_5_0= RULE_INT
                     	    {
                     	    lv_val_5_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_10); 
 
-                    	    			newLeafNode(lv_val_5_0, grammarAccess.getAssignAccess().getValINTTerminalRuleCall_3_1_1_0()); 
-                    	    		
+                    	    							newLeafNode(lv_val_5_0, grammarAccess.getAssignAccess().getValINTTerminalRuleCall_3_1_1_0());
+                    	    						
 
-                    	    	        if (current==null) {
-                    	    	            current = createModelElement(grammarAccess.getAssignRule());
-                    	    	        }
-                    	           		addWithLastConsumed(
-                    	           			current, 
-                    	           			"val",
-                    	            		lv_val_5_0, 
-                    	            		"org.eclipse.xtext.common.Terminals.INT");
-                    	    	    
+                    	    							if (current==null) {
+                    	    								current = createModelElement(grammarAccess.getAssignRule());
+                    	    							}
+                    	    							addWithLastConsumed(
+                    	    								current,
+                    	    								"val",
+                    	    								lv_val_5_0,
+                    	    								"org.eclipse.xtext.common.Terminals.INT");
+                    	    						
 
                     	    }
 
@@ -945,21 +956,23 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
             otherlv_6=(Token)match(input,18,FollowSets000.FOLLOW_2); 
 
-                	newLeafNode(otherlv_6, grammarAccess.getAssignAccess().getRightSquareBracketKeyword_4());
-                
+            			newLeafNode(otherlv_6, grammarAccess.getAssignAccess().getRightSquareBracketKeyword_4());
+            		
 
             }
 
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -968,7 +981,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleMeth"
-    // InternalFormatterTestLanguage.g:424:1: entryRuleMeth returns [EObject current=null] : iv_ruleMeth= ruleMeth EOF ;
+    // InternalFormatterTestLanguage.g:407:1: entryRuleMeth returns [EObject current=null] : iv_ruleMeth= ruleMeth EOF ;
     public final EObject entryRuleMeth() throws RecognitionException {
         EObject current = null;
 
@@ -976,8 +989,8 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // InternalFormatterTestLanguage.g:425:2: (iv_ruleMeth= ruleMeth EOF )
-            // InternalFormatterTestLanguage.g:426:2: iv_ruleMeth= ruleMeth EOF
+            // InternalFormatterTestLanguage.g:407:45: (iv_ruleMeth= ruleMeth EOF )
+            // InternalFormatterTestLanguage.g:408:2: iv_ruleMeth= ruleMeth EOF
             {
              newCompositeNode(grammarAccess.getMethRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -991,11 +1004,11 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1004,7 +1017,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleMeth"
-    // InternalFormatterTestLanguage.g:433:1: ruleMeth returns [EObject current=null] : (otherlv_0= 'void' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '(' ( ( (lv_param_3_0= ruleParam ) ) (otherlv_4= ',' ( (lv_param_5_0= ruleParam ) ) )* )? otherlv_6= ')' ) ;
+    // InternalFormatterTestLanguage.g:414:1: ruleMeth returns [EObject current=null] : (otherlv_0= 'void' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '(' ( ( (lv_param_3_0= ruleParam ) ) (otherlv_4= ',' ( (lv_param_5_0= ruleParam ) ) )* )? otherlv_6= ')' ) ;
     public final EObject ruleMeth() throws RecognitionException {
         EObject current = null;
 
@@ -1018,39 +1031,40 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
         EObject lv_param_5_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalFormatterTestLanguage.g:436:28: ( (otherlv_0= 'void' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '(' ( ( (lv_param_3_0= ruleParam ) ) (otherlv_4= ',' ( (lv_param_5_0= ruleParam ) ) )* )? otherlv_6= ')' ) )
-            // InternalFormatterTestLanguage.g:437:1: (otherlv_0= 'void' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '(' ( ( (lv_param_3_0= ruleParam ) ) (otherlv_4= ',' ( (lv_param_5_0= ruleParam ) ) )* )? otherlv_6= ')' )
+            // InternalFormatterTestLanguage.g:420:2: ( (otherlv_0= 'void' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '(' ( ( (lv_param_3_0= ruleParam ) ) (otherlv_4= ',' ( (lv_param_5_0= ruleParam ) ) )* )? otherlv_6= ')' ) )
+            // InternalFormatterTestLanguage.g:421:2: (otherlv_0= 'void' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '(' ( ( (lv_param_3_0= ruleParam ) ) (otherlv_4= ',' ( (lv_param_5_0= ruleParam ) ) )* )? otherlv_6= ')' )
             {
-            // InternalFormatterTestLanguage.g:437:1: (otherlv_0= 'void' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '(' ( ( (lv_param_3_0= ruleParam ) ) (otherlv_4= ',' ( (lv_param_5_0= ruleParam ) ) )* )? otherlv_6= ')' )
-            // InternalFormatterTestLanguage.g:437:3: otherlv_0= 'void' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '(' ( ( (lv_param_3_0= ruleParam ) ) (otherlv_4= ',' ( (lv_param_5_0= ruleParam ) ) )* )? otherlv_6= ')'
+            // InternalFormatterTestLanguage.g:421:2: (otherlv_0= 'void' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '(' ( ( (lv_param_3_0= ruleParam ) ) (otherlv_4= ',' ( (lv_param_5_0= ruleParam ) ) )* )? otherlv_6= ')' )
+            // InternalFormatterTestLanguage.g:422:3: otherlv_0= 'void' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '(' ( ( (lv_param_3_0= ruleParam ) ) (otherlv_4= ',' ( (lv_param_5_0= ruleParam ) ) )* )? otherlv_6= ')'
             {
             otherlv_0=(Token)match(input,19,FollowSets000.FOLLOW_6); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getMethAccess().getVoidKeyword_0());
-                
-            // InternalFormatterTestLanguage.g:441:1: ( (lv_name_1_0= RULE_ID ) )
-            // InternalFormatterTestLanguage.g:442:1: (lv_name_1_0= RULE_ID )
+            			newLeafNode(otherlv_0, grammarAccess.getMethAccess().getVoidKeyword_0());
+            		
+            // InternalFormatterTestLanguage.g:426:3: ( (lv_name_1_0= RULE_ID ) )
+            // InternalFormatterTestLanguage.g:427:4: (lv_name_1_0= RULE_ID )
             {
-            // InternalFormatterTestLanguage.g:442:1: (lv_name_1_0= RULE_ID )
-            // InternalFormatterTestLanguage.g:443:3: lv_name_1_0= RULE_ID
+            // InternalFormatterTestLanguage.g:427:4: (lv_name_1_0= RULE_ID )
+            // InternalFormatterTestLanguage.g:428:5: lv_name_1_0= RULE_ID
             {
             lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_12); 
 
-            			newLeafNode(lv_name_1_0, grammarAccess.getMethAccess().getNameIDTerminalRuleCall_1_0()); 
-            		
+            					newLeafNode(lv_name_1_0, grammarAccess.getMethAccess().getNameIDTerminalRuleCall_1_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getMethRule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"name",
-                    		lv_name_1_0, 
-                    		"org.eclipse.xtext.common.Terminals.ID");
-            	    
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getMethRule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"name",
+            						lv_name_1_0,
+            						"org.eclipse.xtext.common.Terminals.ID");
+            				
 
             }
 
@@ -1059,9 +1073,9 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
             otherlv_2=(Token)match(input,20,FollowSets000.FOLLOW_13); 
 
-                	newLeafNode(otherlv_2, grammarAccess.getMethAccess().getLeftParenthesisKeyword_2());
-                
-            // InternalFormatterTestLanguage.g:463:1: ( ( (lv_param_3_0= ruleParam ) ) (otherlv_4= ',' ( (lv_param_5_0= ruleParam ) ) )* )?
+            			newLeafNode(otherlv_2, grammarAccess.getMethAccess().getLeftParenthesisKeyword_2());
+            		
+            // InternalFormatterTestLanguage.g:448:3: ( ( (lv_param_3_0= ruleParam ) ) (otherlv_4= ',' ( (lv_param_5_0= ruleParam ) ) )* )?
             int alt7=2;
             int LA7_0 = input.LA(1);
 
@@ -1070,40 +1084,40 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
             }
             switch (alt7) {
                 case 1 :
-                    // InternalFormatterTestLanguage.g:463:2: ( (lv_param_3_0= ruleParam ) ) (otherlv_4= ',' ( (lv_param_5_0= ruleParam ) ) )*
+                    // InternalFormatterTestLanguage.g:449:4: ( (lv_param_3_0= ruleParam ) ) (otherlv_4= ',' ( (lv_param_5_0= ruleParam ) ) )*
                     {
-                    // InternalFormatterTestLanguage.g:463:2: ( (lv_param_3_0= ruleParam ) )
-                    // InternalFormatterTestLanguage.g:464:1: (lv_param_3_0= ruleParam )
+                    // InternalFormatterTestLanguage.g:449:4: ( (lv_param_3_0= ruleParam ) )
+                    // InternalFormatterTestLanguage.g:450:5: (lv_param_3_0= ruleParam )
                     {
-                    // InternalFormatterTestLanguage.g:464:1: (lv_param_3_0= ruleParam )
-                    // InternalFormatterTestLanguage.g:465:3: lv_param_3_0= ruleParam
+                    // InternalFormatterTestLanguage.g:450:5: (lv_param_3_0= ruleParam )
+                    // InternalFormatterTestLanguage.g:451:6: lv_param_3_0= ruleParam
                     {
-                     
-                    	        newCompositeNode(grammarAccess.getMethAccess().getParamParamParserRuleCall_3_0_0()); 
-                    	    
+
+                    						newCompositeNode(grammarAccess.getMethAccess().getParamParamParserRuleCall_3_0_0());
+                    					
                     pushFollow(FollowSets000.FOLLOW_14);
                     lv_param_3_0=ruleParam();
 
                     state._fsp--;
 
 
-                    	        if (current==null) {
-                    	            current = createModelElementForParent(grammarAccess.getMethRule());
-                    	        }
-                           		add(
-                           			current, 
-                           			"param",
-                            		lv_param_3_0, 
-                            		"org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.Param");
-                    	        afterParserOrEnumRuleCall();
-                    	    
+                    						if (current==null) {
+                    							current = createModelElementForParent(grammarAccess.getMethRule());
+                    						}
+                    						add(
+                    							current,
+                    							"param",
+                    							lv_param_3_0,
+                    							"org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.Param");
+                    						afterParserOrEnumRuleCall();
+                    					
 
                     }
 
 
                     }
 
-                    // InternalFormatterTestLanguage.g:481:2: (otherlv_4= ',' ( (lv_param_5_0= ruleParam ) ) )*
+                    // InternalFormatterTestLanguage.g:468:4: (otherlv_4= ',' ( (lv_param_5_0= ruleParam ) ) )*
                     loop6:
                     do {
                         int alt6=2;
@@ -1116,37 +1130,37 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
                         switch (alt6) {
                     	case 1 :
-                    	    // InternalFormatterTestLanguage.g:481:4: otherlv_4= ',' ( (lv_param_5_0= ruleParam ) )
+                    	    // InternalFormatterTestLanguage.g:469:5: otherlv_4= ',' ( (lv_param_5_0= ruleParam ) )
                     	    {
                     	    otherlv_4=(Token)match(input,17,FollowSets000.FOLLOW_6); 
 
-                    	        	newLeafNode(otherlv_4, grammarAccess.getMethAccess().getCommaKeyword_3_1_0());
-                    	        
-                    	    // InternalFormatterTestLanguage.g:485:1: ( (lv_param_5_0= ruleParam ) )
-                    	    // InternalFormatterTestLanguage.g:486:1: (lv_param_5_0= ruleParam )
+                    	    					newLeafNode(otherlv_4, grammarAccess.getMethAccess().getCommaKeyword_3_1_0());
+                    	    				
+                    	    // InternalFormatterTestLanguage.g:473:5: ( (lv_param_5_0= ruleParam ) )
+                    	    // InternalFormatterTestLanguage.g:474:6: (lv_param_5_0= ruleParam )
                     	    {
-                    	    // InternalFormatterTestLanguage.g:486:1: (lv_param_5_0= ruleParam )
-                    	    // InternalFormatterTestLanguage.g:487:3: lv_param_5_0= ruleParam
+                    	    // InternalFormatterTestLanguage.g:474:6: (lv_param_5_0= ruleParam )
+                    	    // InternalFormatterTestLanguage.g:475:7: lv_param_5_0= ruleParam
                     	    {
-                    	     
-                    	    	        newCompositeNode(grammarAccess.getMethAccess().getParamParamParserRuleCall_3_1_1_0()); 
-                    	    	    
+
+                    	    							newCompositeNode(grammarAccess.getMethAccess().getParamParamParserRuleCall_3_1_1_0());
+                    	    						
                     	    pushFollow(FollowSets000.FOLLOW_14);
                     	    lv_param_5_0=ruleParam();
 
                     	    state._fsp--;
 
 
-                    	    	        if (current==null) {
-                    	    	            current = createModelElementForParent(grammarAccess.getMethRule());
-                    	    	        }
-                    	           		add(
-                    	           			current, 
-                    	           			"param",
-                    	            		lv_param_5_0, 
-                    	            		"org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.Param");
-                    	    	        afterParserOrEnumRuleCall();
-                    	    	    
+                    	    							if (current==null) {
+                    	    								current = createModelElementForParent(grammarAccess.getMethRule());
+                    	    							}
+                    	    							add(
+                    	    								current,
+                    	    								"param",
+                    	    								lv_param_5_0,
+                    	    								"org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.Param");
+                    	    							afterParserOrEnumRuleCall();
+                    	    						
 
                     	    }
 
@@ -1170,21 +1184,23 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
             otherlv_6=(Token)match(input,21,FollowSets000.FOLLOW_2); 
 
-                	newLeafNode(otherlv_6, grammarAccess.getMethAccess().getRightParenthesisKeyword_4());
-                
+            			newLeafNode(otherlv_6, grammarAccess.getMethAccess().getRightParenthesisKeyword_4());
+            		
 
             }
 
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1193,7 +1209,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleParam"
-    // InternalFormatterTestLanguage.g:515:1: entryRuleParam returns [EObject current=null] : iv_ruleParam= ruleParam EOF ;
+    // InternalFormatterTestLanguage.g:502:1: entryRuleParam returns [EObject current=null] : iv_ruleParam= ruleParam EOF ;
     public final EObject entryRuleParam() throws RecognitionException {
         EObject current = null;
 
@@ -1201,8 +1217,8 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // InternalFormatterTestLanguage.g:516:2: (iv_ruleParam= ruleParam EOF )
-            // InternalFormatterTestLanguage.g:517:2: iv_ruleParam= ruleParam EOF
+            // InternalFormatterTestLanguage.g:502:46: (iv_ruleParam= ruleParam EOF )
+            // InternalFormatterTestLanguage.g:503:2: iv_ruleParam= ruleParam EOF
             {
              newCompositeNode(grammarAccess.getParamRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -1216,11 +1232,11 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1229,7 +1245,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleParam"
-    // InternalFormatterTestLanguage.g:524:1: ruleParam returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= ':' ( (lv_type_2_0= RULE_ID ) ) ) ;
+    // InternalFormatterTestLanguage.g:509:1: ruleParam returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= ':' ( (lv_type_2_0= RULE_ID ) ) ) ;
     public final EObject ruleParam() throws RecognitionException {
         EObject current = null;
 
@@ -1237,35 +1253,36 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
         Token otherlv_1=null;
         Token lv_type_2_0=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalFormatterTestLanguage.g:527:28: ( ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= ':' ( (lv_type_2_0= RULE_ID ) ) ) )
-            // InternalFormatterTestLanguage.g:528:1: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= ':' ( (lv_type_2_0= RULE_ID ) ) )
+            // InternalFormatterTestLanguage.g:515:2: ( ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= ':' ( (lv_type_2_0= RULE_ID ) ) ) )
+            // InternalFormatterTestLanguage.g:516:2: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= ':' ( (lv_type_2_0= RULE_ID ) ) )
             {
-            // InternalFormatterTestLanguage.g:528:1: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= ':' ( (lv_type_2_0= RULE_ID ) ) )
-            // InternalFormatterTestLanguage.g:528:2: ( (lv_name_0_0= RULE_ID ) ) otherlv_1= ':' ( (lv_type_2_0= RULE_ID ) )
+            // InternalFormatterTestLanguage.g:516:2: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= ':' ( (lv_type_2_0= RULE_ID ) ) )
+            // InternalFormatterTestLanguage.g:517:3: ( (lv_name_0_0= RULE_ID ) ) otherlv_1= ':' ( (lv_type_2_0= RULE_ID ) )
             {
-            // InternalFormatterTestLanguage.g:528:2: ( (lv_name_0_0= RULE_ID ) )
-            // InternalFormatterTestLanguage.g:529:1: (lv_name_0_0= RULE_ID )
+            // InternalFormatterTestLanguage.g:517:3: ( (lv_name_0_0= RULE_ID ) )
+            // InternalFormatterTestLanguage.g:518:4: (lv_name_0_0= RULE_ID )
             {
-            // InternalFormatterTestLanguage.g:529:1: (lv_name_0_0= RULE_ID )
-            // InternalFormatterTestLanguage.g:530:3: lv_name_0_0= RULE_ID
+            // InternalFormatterTestLanguage.g:518:4: (lv_name_0_0= RULE_ID )
+            // InternalFormatterTestLanguage.g:519:5: lv_name_0_0= RULE_ID
             {
             lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_15); 
 
-            			newLeafNode(lv_name_0_0, grammarAccess.getParamAccess().getNameIDTerminalRuleCall_0_0()); 
-            		
+            					newLeafNode(lv_name_0_0, grammarAccess.getParamAccess().getNameIDTerminalRuleCall_0_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getParamRule());
-            	        }
-                   		addWithLastConsumed(
-                   			current, 
-                   			"name",
-                    		lv_name_0_0, 
-                    		"org.eclipse.xtext.common.Terminals.ID");
-            	    
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getParamRule());
+            					}
+            					addWithLastConsumed(
+            						current,
+            						"name",
+            						lv_name_0_0,
+            						"org.eclipse.xtext.common.Terminals.ID");
+            				
 
             }
 
@@ -1274,31 +1291,28 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
             otherlv_1=(Token)match(input,22,FollowSets000.FOLLOW_6); 
 
-                	newLeafNode(otherlv_1, grammarAccess.getParamAccess().getColonKeyword_1());
-                
-            // InternalFormatterTestLanguage.g:550:1: ( (lv_type_2_0= RULE_ID ) )
-            // InternalFormatterTestLanguage.g:551:1: (lv_type_2_0= RULE_ID )
+            			newLeafNode(otherlv_1, grammarAccess.getParamAccess().getColonKeyword_1());
+            		
+            // InternalFormatterTestLanguage.g:539:3: ( (lv_type_2_0= RULE_ID ) )
+            // InternalFormatterTestLanguage.g:540:4: (lv_type_2_0= RULE_ID )
             {
-            // InternalFormatterTestLanguage.g:551:1: (lv_type_2_0= RULE_ID )
-            // InternalFormatterTestLanguage.g:552:3: lv_type_2_0= RULE_ID
+            // InternalFormatterTestLanguage.g:540:4: (lv_type_2_0= RULE_ID )
+            // InternalFormatterTestLanguage.g:541:5: lv_type_2_0= RULE_ID
             {
             lv_type_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
-            			newLeafNode(lv_type_2_0, grammarAccess.getParamAccess().getTypeIDTerminalRuleCall_2_0()); 
-            		
+            					newLeafNode(lv_type_2_0, grammarAccess.getParamAccess().getTypeIDTerminalRuleCall_2_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getParamRule());
-            	        }
-                   		addWithLastConsumed(
-                   			current, 
-                   			"type",
-                    		lv_type_2_0, 
-                    		"org.eclipse.xtext.common.Terminals.ID");
-            	    
-
-            }
-
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getParamRule());
+            					}
+            					addWithLastConsumed(
+            						current,
+            						"type",
+            						lv_type_2_0,
+            						"org.eclipse.xtext.common.Terminals.ID");
+            				
 
             }
 
@@ -1308,13 +1322,18 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-             leaveRule(); 
+
+            }
+
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1323,7 +1342,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleSpace"
-    // InternalFormatterTestLanguage.g:576:1: entryRuleSpace returns [EObject current=null] : iv_ruleSpace= ruleSpace EOF ;
+    // InternalFormatterTestLanguage.g:561:1: entryRuleSpace returns [EObject current=null] : iv_ruleSpace= ruleSpace EOF ;
     public final EObject entryRuleSpace() throws RecognitionException {
         EObject current = null;
 
@@ -1331,8 +1350,8 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // InternalFormatterTestLanguage.g:577:2: (iv_ruleSpace= ruleSpace EOF )
-            // InternalFormatterTestLanguage.g:578:2: iv_ruleSpace= ruleSpace EOF
+            // InternalFormatterTestLanguage.g:561:46: (iv_ruleSpace= ruleSpace EOF )
+            // InternalFormatterTestLanguage.g:562:2: iv_ruleSpace= ruleSpace EOF
             {
              newCompositeNode(grammarAccess.getSpaceRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -1346,11 +1365,11 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1359,49 +1378,47 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleSpace"
-    // InternalFormatterTestLanguage.g:585:1: ruleSpace returns [EObject current=null] : (otherlv_0= 'space' ( (lv_val_1_0= RULE_ID ) ) ) ;
+    // InternalFormatterTestLanguage.g:568:1: ruleSpace returns [EObject current=null] : (otherlv_0= 'space' ( (lv_val_1_0= RULE_ID ) ) ) ;
     public final EObject ruleSpace() throws RecognitionException {
         EObject current = null;
 
         Token otherlv_0=null;
         Token lv_val_1_0=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalFormatterTestLanguage.g:588:28: ( (otherlv_0= 'space' ( (lv_val_1_0= RULE_ID ) ) ) )
-            // InternalFormatterTestLanguage.g:589:1: (otherlv_0= 'space' ( (lv_val_1_0= RULE_ID ) ) )
+            // InternalFormatterTestLanguage.g:574:2: ( (otherlv_0= 'space' ( (lv_val_1_0= RULE_ID ) ) ) )
+            // InternalFormatterTestLanguage.g:575:2: (otherlv_0= 'space' ( (lv_val_1_0= RULE_ID ) ) )
             {
-            // InternalFormatterTestLanguage.g:589:1: (otherlv_0= 'space' ( (lv_val_1_0= RULE_ID ) ) )
-            // InternalFormatterTestLanguage.g:589:3: otherlv_0= 'space' ( (lv_val_1_0= RULE_ID ) )
+            // InternalFormatterTestLanguage.g:575:2: (otherlv_0= 'space' ( (lv_val_1_0= RULE_ID ) ) )
+            // InternalFormatterTestLanguage.g:576:3: otherlv_0= 'space' ( (lv_val_1_0= RULE_ID ) )
             {
             otherlv_0=(Token)match(input,23,FollowSets000.FOLLOW_6); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getSpaceAccess().getSpaceKeyword_0());
-                
-            // InternalFormatterTestLanguage.g:593:1: ( (lv_val_1_0= RULE_ID ) )
-            // InternalFormatterTestLanguage.g:594:1: (lv_val_1_0= RULE_ID )
+            			newLeafNode(otherlv_0, grammarAccess.getSpaceAccess().getSpaceKeyword_0());
+            		
+            // InternalFormatterTestLanguage.g:580:3: ( (lv_val_1_0= RULE_ID ) )
+            // InternalFormatterTestLanguage.g:581:4: (lv_val_1_0= RULE_ID )
             {
-            // InternalFormatterTestLanguage.g:594:1: (lv_val_1_0= RULE_ID )
-            // InternalFormatterTestLanguage.g:595:3: lv_val_1_0= RULE_ID
+            // InternalFormatterTestLanguage.g:581:4: (lv_val_1_0= RULE_ID )
+            // InternalFormatterTestLanguage.g:582:5: lv_val_1_0= RULE_ID
             {
             lv_val_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
-            			newLeafNode(lv_val_1_0, grammarAccess.getSpaceAccess().getValIDTerminalRuleCall_1_0()); 
-            		
+            					newLeafNode(lv_val_1_0, grammarAccess.getSpaceAccess().getValIDTerminalRuleCall_1_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getSpaceRule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"val",
-                    		lv_val_1_0, 
-                    		"org.eclipse.xtext.common.Terminals.ID");
-            	    
-
-            }
-
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getSpaceRule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"val",
+            						lv_val_1_0,
+            						"org.eclipse.xtext.common.Terminals.ID");
+            				
 
             }
 
@@ -1411,13 +1428,18 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-             leaveRule(); 
+
+            }
+
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1426,7 +1448,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleTestLinewrap"
-    // InternalFormatterTestLanguage.g:619:1: entryRuleTestLinewrap returns [EObject current=null] : iv_ruleTestLinewrap= ruleTestLinewrap EOF ;
+    // InternalFormatterTestLanguage.g:602:1: entryRuleTestLinewrap returns [EObject current=null] : iv_ruleTestLinewrap= ruleTestLinewrap EOF ;
     public final EObject entryRuleTestLinewrap() throws RecognitionException {
         EObject current = null;
 
@@ -1434,8 +1456,8 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // InternalFormatterTestLanguage.g:620:2: (iv_ruleTestLinewrap= ruleTestLinewrap EOF )
-            // InternalFormatterTestLanguage.g:621:2: iv_ruleTestLinewrap= ruleTestLinewrap EOF
+            // InternalFormatterTestLanguage.g:602:53: (iv_ruleTestLinewrap= ruleTestLinewrap EOF )
+            // InternalFormatterTestLanguage.g:603:2: iv_ruleTestLinewrap= ruleTestLinewrap EOF
             {
              newCompositeNode(grammarAccess.getTestLinewrapRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -1449,11 +1471,11 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1462,7 +1484,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleTestLinewrap"
-    // InternalFormatterTestLanguage.g:628:1: ruleTestLinewrap returns [EObject current=null] : ( () otherlv_1= 'linewrap' ( (lv_items_2_0= ruleLine ) )* ) ;
+    // InternalFormatterTestLanguage.g:609:1: ruleTestLinewrap returns [EObject current=null] : ( () otherlv_1= 'linewrap' ( (lv_items_2_0= ruleLine ) )* ) ;
     public final EObject ruleTestLinewrap() throws RecognitionException {
         EObject current = null;
 
@@ -1470,31 +1492,32 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
         EObject lv_items_2_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalFormatterTestLanguage.g:631:28: ( ( () otherlv_1= 'linewrap' ( (lv_items_2_0= ruleLine ) )* ) )
-            // InternalFormatterTestLanguage.g:632:1: ( () otherlv_1= 'linewrap' ( (lv_items_2_0= ruleLine ) )* )
+            // InternalFormatterTestLanguage.g:615:2: ( ( () otherlv_1= 'linewrap' ( (lv_items_2_0= ruleLine ) )* ) )
+            // InternalFormatterTestLanguage.g:616:2: ( () otherlv_1= 'linewrap' ( (lv_items_2_0= ruleLine ) )* )
             {
-            // InternalFormatterTestLanguage.g:632:1: ( () otherlv_1= 'linewrap' ( (lv_items_2_0= ruleLine ) )* )
-            // InternalFormatterTestLanguage.g:632:2: () otherlv_1= 'linewrap' ( (lv_items_2_0= ruleLine ) )*
+            // InternalFormatterTestLanguage.g:616:2: ( () otherlv_1= 'linewrap' ( (lv_items_2_0= ruleLine ) )* )
+            // InternalFormatterTestLanguage.g:617:3: () otherlv_1= 'linewrap' ( (lv_items_2_0= ruleLine ) )*
             {
-            // InternalFormatterTestLanguage.g:632:2: ()
-            // InternalFormatterTestLanguage.g:633:5: 
+            // InternalFormatterTestLanguage.g:617:3: ()
+            // InternalFormatterTestLanguage.g:618:4: 
             {
 
-                    current = forceCreateModelElement(
-                        grammarAccess.getTestLinewrapAccess().getTestLinewrapAction_0(),
-                        current);
-                
+            				current = forceCreateModelElement(
+            					grammarAccess.getTestLinewrapAccess().getTestLinewrapAction_0(),
+            					current);
+            			
 
             }
 
             otherlv_1=(Token)match(input,24,FollowSets000.FOLLOW_16); 
 
-                	newLeafNode(otherlv_1, grammarAccess.getTestLinewrapAccess().getLinewrapKeyword_1());
-                
-            // InternalFormatterTestLanguage.g:642:1: ( (lv_items_2_0= ruleLine ) )*
+            			newLeafNode(otherlv_1, grammarAccess.getTestLinewrapAccess().getLinewrapKeyword_1());
+            		
+            // InternalFormatterTestLanguage.g:628:3: ( (lv_items_2_0= ruleLine ) )*
             loop8:
             do {
                 int alt8=2;
@@ -1507,30 +1530,30 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
                 switch (alt8) {
             	case 1 :
-            	    // InternalFormatterTestLanguage.g:643:1: (lv_items_2_0= ruleLine )
+            	    // InternalFormatterTestLanguage.g:629:4: (lv_items_2_0= ruleLine )
             	    {
-            	    // InternalFormatterTestLanguage.g:643:1: (lv_items_2_0= ruleLine )
-            	    // InternalFormatterTestLanguage.g:644:3: lv_items_2_0= ruleLine
+            	    // InternalFormatterTestLanguage.g:629:4: (lv_items_2_0= ruleLine )
+            	    // InternalFormatterTestLanguage.g:630:5: lv_items_2_0= ruleLine
             	    {
-            	     
-            	    	        newCompositeNode(grammarAccess.getTestLinewrapAccess().getItemsLineParserRuleCall_2_0()); 
-            	    	    
+
+            	    					newCompositeNode(grammarAccess.getTestLinewrapAccess().getItemsLineParserRuleCall_2_0());
+            	    				
             	    pushFollow(FollowSets000.FOLLOW_16);
             	    lv_items_2_0=ruleLine();
 
             	    state._fsp--;
 
 
-            	    	        if (current==null) {
-            	    	            current = createModelElementForParent(grammarAccess.getTestLinewrapRule());
-            	    	        }
-            	           		add(
-            	           			current, 
-            	           			"items",
-            	            		lv_items_2_0, 
-            	            		"org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.Line");
-            	    	        afterParserOrEnumRuleCall();
-            	    	    
+            	    					if (current==null) {
+            	    						current = createModelElementForParent(grammarAccess.getTestLinewrapRule());
+            	    					}
+            	    					add(
+            	    						current,
+            	    						"items",
+            	    						lv_items_2_0,
+            	    						"org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.Line");
+            	    					afterParserOrEnumRuleCall();
+            	    				
 
             	    }
 
@@ -1549,13 +1572,15 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1564,7 +1589,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleTestLinewrapMinMax"
-    // InternalFormatterTestLanguage.g:668:1: entryRuleTestLinewrapMinMax returns [EObject current=null] : iv_ruleTestLinewrapMinMax= ruleTestLinewrapMinMax EOF ;
+    // InternalFormatterTestLanguage.g:651:1: entryRuleTestLinewrapMinMax returns [EObject current=null] : iv_ruleTestLinewrapMinMax= ruleTestLinewrapMinMax EOF ;
     public final EObject entryRuleTestLinewrapMinMax() throws RecognitionException {
         EObject current = null;
 
@@ -1572,8 +1597,8 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // InternalFormatterTestLanguage.g:669:2: (iv_ruleTestLinewrapMinMax= ruleTestLinewrapMinMax EOF )
-            // InternalFormatterTestLanguage.g:670:2: iv_ruleTestLinewrapMinMax= ruleTestLinewrapMinMax EOF
+            // InternalFormatterTestLanguage.g:651:59: (iv_ruleTestLinewrapMinMax= ruleTestLinewrapMinMax EOF )
+            // InternalFormatterTestLanguage.g:652:2: iv_ruleTestLinewrapMinMax= ruleTestLinewrapMinMax EOF
             {
              newCompositeNode(grammarAccess.getTestLinewrapMinMaxRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -1587,11 +1612,11 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1600,7 +1625,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleTestLinewrapMinMax"
-    // InternalFormatterTestLanguage.g:677:1: ruleTestLinewrapMinMax returns [EObject current=null] : ( () otherlv_1= 'wrapminmax' ( (lv_items_2_0= ruleLine ) )* ) ;
+    // InternalFormatterTestLanguage.g:658:1: ruleTestLinewrapMinMax returns [EObject current=null] : ( () otherlv_1= 'wrapminmax' ( (lv_items_2_0= ruleLine ) )* ) ;
     public final EObject ruleTestLinewrapMinMax() throws RecognitionException {
         EObject current = null;
 
@@ -1608,31 +1633,32 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
         EObject lv_items_2_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalFormatterTestLanguage.g:680:28: ( ( () otherlv_1= 'wrapminmax' ( (lv_items_2_0= ruleLine ) )* ) )
-            // InternalFormatterTestLanguage.g:681:1: ( () otherlv_1= 'wrapminmax' ( (lv_items_2_0= ruleLine ) )* )
+            // InternalFormatterTestLanguage.g:664:2: ( ( () otherlv_1= 'wrapminmax' ( (lv_items_2_0= ruleLine ) )* ) )
+            // InternalFormatterTestLanguage.g:665:2: ( () otherlv_1= 'wrapminmax' ( (lv_items_2_0= ruleLine ) )* )
             {
-            // InternalFormatterTestLanguage.g:681:1: ( () otherlv_1= 'wrapminmax' ( (lv_items_2_0= ruleLine ) )* )
-            // InternalFormatterTestLanguage.g:681:2: () otherlv_1= 'wrapminmax' ( (lv_items_2_0= ruleLine ) )*
+            // InternalFormatterTestLanguage.g:665:2: ( () otherlv_1= 'wrapminmax' ( (lv_items_2_0= ruleLine ) )* )
+            // InternalFormatterTestLanguage.g:666:3: () otherlv_1= 'wrapminmax' ( (lv_items_2_0= ruleLine ) )*
             {
-            // InternalFormatterTestLanguage.g:681:2: ()
-            // InternalFormatterTestLanguage.g:682:5: 
+            // InternalFormatterTestLanguage.g:666:3: ()
+            // InternalFormatterTestLanguage.g:667:4: 
             {
 
-                    current = forceCreateModelElement(
-                        grammarAccess.getTestLinewrapMinMaxAccess().getTestLinewrapMinMaxAction_0(),
-                        current);
-                
+            				current = forceCreateModelElement(
+            					grammarAccess.getTestLinewrapMinMaxAccess().getTestLinewrapMinMaxAction_0(),
+            					current);
+            			
 
             }
 
             otherlv_1=(Token)match(input,25,FollowSets000.FOLLOW_16); 
 
-                	newLeafNode(otherlv_1, grammarAccess.getTestLinewrapMinMaxAccess().getWrapminmaxKeyword_1());
-                
-            // InternalFormatterTestLanguage.g:691:1: ( (lv_items_2_0= ruleLine ) )*
+            			newLeafNode(otherlv_1, grammarAccess.getTestLinewrapMinMaxAccess().getWrapminmaxKeyword_1());
+            		
+            // InternalFormatterTestLanguage.g:677:3: ( (lv_items_2_0= ruleLine ) )*
             loop9:
             do {
                 int alt9=2;
@@ -1645,30 +1671,30 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
                 switch (alt9) {
             	case 1 :
-            	    // InternalFormatterTestLanguage.g:692:1: (lv_items_2_0= ruleLine )
+            	    // InternalFormatterTestLanguage.g:678:4: (lv_items_2_0= ruleLine )
             	    {
-            	    // InternalFormatterTestLanguage.g:692:1: (lv_items_2_0= ruleLine )
-            	    // InternalFormatterTestLanguage.g:693:3: lv_items_2_0= ruleLine
+            	    // InternalFormatterTestLanguage.g:678:4: (lv_items_2_0= ruleLine )
+            	    // InternalFormatterTestLanguage.g:679:5: lv_items_2_0= ruleLine
             	    {
-            	     
-            	    	        newCompositeNode(grammarAccess.getTestLinewrapMinMaxAccess().getItemsLineParserRuleCall_2_0()); 
-            	    	    
+
+            	    					newCompositeNode(grammarAccess.getTestLinewrapMinMaxAccess().getItemsLineParserRuleCall_2_0());
+            	    				
             	    pushFollow(FollowSets000.FOLLOW_16);
             	    lv_items_2_0=ruleLine();
 
             	    state._fsp--;
 
 
-            	    	        if (current==null) {
-            	    	            current = createModelElementForParent(grammarAccess.getTestLinewrapMinMaxRule());
-            	    	        }
-            	           		add(
-            	           			current, 
-            	           			"items",
-            	            		lv_items_2_0, 
-            	            		"org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.Line");
-            	    	        afterParserOrEnumRuleCall();
-            	    	    
+            	    					if (current==null) {
+            	    						current = createModelElementForParent(grammarAccess.getTestLinewrapMinMaxRule());
+            	    					}
+            	    					add(
+            	    						current,
+            	    						"items",
+            	    						lv_items_2_0,
+            	    						"org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.Line");
+            	    					afterParserOrEnumRuleCall();
+            	    				
 
             	    }
 
@@ -1687,13 +1713,15 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1702,7 +1730,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleTestIndentation"
-    // InternalFormatterTestLanguage.g:717:1: entryRuleTestIndentation returns [EObject current=null] : iv_ruleTestIndentation= ruleTestIndentation EOF ;
+    // InternalFormatterTestLanguage.g:700:1: entryRuleTestIndentation returns [EObject current=null] : iv_ruleTestIndentation= ruleTestIndentation EOF ;
     public final EObject entryRuleTestIndentation() throws RecognitionException {
         EObject current = null;
 
@@ -1710,8 +1738,8 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // InternalFormatterTestLanguage.g:718:2: (iv_ruleTestIndentation= ruleTestIndentation EOF )
-            // InternalFormatterTestLanguage.g:719:2: iv_ruleTestIndentation= ruleTestIndentation EOF
+            // InternalFormatterTestLanguage.g:700:56: (iv_ruleTestIndentation= ruleTestIndentation EOF )
+            // InternalFormatterTestLanguage.g:701:2: iv_ruleTestIndentation= ruleTestIndentation EOF
             {
              newCompositeNode(grammarAccess.getTestIndentationRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -1725,11 +1753,11 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1738,7 +1766,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleTestIndentation"
-    // InternalFormatterTestLanguage.g:726:1: ruleTestIndentation returns [EObject current=null] : ( () otherlv_1= 'indentation' otherlv_2= '{' ( ( (lv_items_3_1= ruleLine | lv_items_3_2= ruleTestIndentation ) ) )* otherlv_4= '}' ( (lv_semi_5_0= ';' ) )? ) ;
+    // InternalFormatterTestLanguage.g:707:1: ruleTestIndentation returns [EObject current=null] : ( () otherlv_1= 'indentation' otherlv_2= '{' ( ( (lv_items_3_1= ruleLine | lv_items_3_2= ruleTestIndentation ) ) )* otherlv_4= '}' ( (lv_semi_5_0= ';' ) )? ) ;
     public final EObject ruleTestIndentation() throws RecognitionException {
         EObject current = null;
 
@@ -1751,35 +1779,36 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
         EObject lv_items_3_2 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalFormatterTestLanguage.g:729:28: ( ( () otherlv_1= 'indentation' otherlv_2= '{' ( ( (lv_items_3_1= ruleLine | lv_items_3_2= ruleTestIndentation ) ) )* otherlv_4= '}' ( (lv_semi_5_0= ';' ) )? ) )
-            // InternalFormatterTestLanguage.g:730:1: ( () otherlv_1= 'indentation' otherlv_2= '{' ( ( (lv_items_3_1= ruleLine | lv_items_3_2= ruleTestIndentation ) ) )* otherlv_4= '}' ( (lv_semi_5_0= ';' ) )? )
+            // InternalFormatterTestLanguage.g:713:2: ( ( () otherlv_1= 'indentation' otherlv_2= '{' ( ( (lv_items_3_1= ruleLine | lv_items_3_2= ruleTestIndentation ) ) )* otherlv_4= '}' ( (lv_semi_5_0= ';' ) )? ) )
+            // InternalFormatterTestLanguage.g:714:2: ( () otherlv_1= 'indentation' otherlv_2= '{' ( ( (lv_items_3_1= ruleLine | lv_items_3_2= ruleTestIndentation ) ) )* otherlv_4= '}' ( (lv_semi_5_0= ';' ) )? )
             {
-            // InternalFormatterTestLanguage.g:730:1: ( () otherlv_1= 'indentation' otherlv_2= '{' ( ( (lv_items_3_1= ruleLine | lv_items_3_2= ruleTestIndentation ) ) )* otherlv_4= '}' ( (lv_semi_5_0= ';' ) )? )
-            // InternalFormatterTestLanguage.g:730:2: () otherlv_1= 'indentation' otherlv_2= '{' ( ( (lv_items_3_1= ruleLine | lv_items_3_2= ruleTestIndentation ) ) )* otherlv_4= '}' ( (lv_semi_5_0= ';' ) )?
+            // InternalFormatterTestLanguage.g:714:2: ( () otherlv_1= 'indentation' otherlv_2= '{' ( ( (lv_items_3_1= ruleLine | lv_items_3_2= ruleTestIndentation ) ) )* otherlv_4= '}' ( (lv_semi_5_0= ';' ) )? )
+            // InternalFormatterTestLanguage.g:715:3: () otherlv_1= 'indentation' otherlv_2= '{' ( ( (lv_items_3_1= ruleLine | lv_items_3_2= ruleTestIndentation ) ) )* otherlv_4= '}' ( (lv_semi_5_0= ';' ) )?
             {
-            // InternalFormatterTestLanguage.g:730:2: ()
-            // InternalFormatterTestLanguage.g:731:5: 
+            // InternalFormatterTestLanguage.g:715:3: ()
+            // InternalFormatterTestLanguage.g:716:4: 
             {
 
-                    current = forceCreateModelElement(
-                        grammarAccess.getTestIndentationAccess().getTestIndentationAction_0(),
-                        current);
-                
+            				current = forceCreateModelElement(
+            					grammarAccess.getTestIndentationAccess().getTestIndentationAction_0(),
+            					current);
+            			
 
             }
 
             otherlv_1=(Token)match(input,26,FollowSets000.FOLLOW_17); 
 
-                	newLeafNode(otherlv_1, grammarAccess.getTestIndentationAccess().getIndentationKeyword_1());
-                
+            			newLeafNode(otherlv_1, grammarAccess.getTestIndentationAccess().getIndentationKeyword_1());
+            		
             otherlv_2=(Token)match(input,27,FollowSets000.FOLLOW_18); 
 
-                	newLeafNode(otherlv_2, grammarAccess.getTestIndentationAccess().getLeftCurlyBracketKeyword_2());
-                
-            // InternalFormatterTestLanguage.g:744:1: ( ( (lv_items_3_1= ruleLine | lv_items_3_2= ruleTestIndentation ) ) )*
+            			newLeafNode(otherlv_2, grammarAccess.getTestIndentationAccess().getLeftCurlyBracketKeyword_2());
+            		
+            // InternalFormatterTestLanguage.g:730:3: ( ( (lv_items_3_1= ruleLine | lv_items_3_2= ruleTestIndentation ) ) )*
             loop11:
             do {
                 int alt11=2;
@@ -1792,12 +1821,12 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
                 switch (alt11) {
             	case 1 :
-            	    // InternalFormatterTestLanguage.g:745:1: ( (lv_items_3_1= ruleLine | lv_items_3_2= ruleTestIndentation ) )
+            	    // InternalFormatterTestLanguage.g:731:4: ( (lv_items_3_1= ruleLine | lv_items_3_2= ruleTestIndentation ) )
             	    {
-            	    // InternalFormatterTestLanguage.g:745:1: ( (lv_items_3_1= ruleLine | lv_items_3_2= ruleTestIndentation ) )
-            	    // InternalFormatterTestLanguage.g:746:1: (lv_items_3_1= ruleLine | lv_items_3_2= ruleTestIndentation )
+            	    // InternalFormatterTestLanguage.g:731:4: ( (lv_items_3_1= ruleLine | lv_items_3_2= ruleTestIndentation ) )
+            	    // InternalFormatterTestLanguage.g:732:5: (lv_items_3_1= ruleLine | lv_items_3_2= ruleTestIndentation )
             	    {
-            	    // InternalFormatterTestLanguage.g:746:1: (lv_items_3_1= ruleLine | lv_items_3_2= ruleTestIndentation )
+            	    // InternalFormatterTestLanguage.g:732:5: (lv_items_3_1= ruleLine | lv_items_3_2= ruleTestIndentation )
             	    int alt10=2;
             	    int LA10_0 = input.LA(1);
 
@@ -1815,52 +1844,52 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
             	    }
             	    switch (alt10) {
             	        case 1 :
-            	            // InternalFormatterTestLanguage.g:747:3: lv_items_3_1= ruleLine
+            	            // InternalFormatterTestLanguage.g:733:6: lv_items_3_1= ruleLine
             	            {
-            	             
-            	            	        newCompositeNode(grammarAccess.getTestIndentationAccess().getItemsLineParserRuleCall_3_0_0()); 
-            	            	    
+
+            	            						newCompositeNode(grammarAccess.getTestIndentationAccess().getItemsLineParserRuleCall_3_0_0());
+            	            					
             	            pushFollow(FollowSets000.FOLLOW_18);
             	            lv_items_3_1=ruleLine();
 
             	            state._fsp--;
 
 
-            	            	        if (current==null) {
-            	            	            current = createModelElementForParent(grammarAccess.getTestIndentationRule());
-            	            	        }
-            	                   		add(
-            	                   			current, 
-            	                   			"items",
-            	                    		lv_items_3_1, 
-            	                    		"org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.Line");
-            	            	        afterParserOrEnumRuleCall();
-            	            	    
+            	            						if (current==null) {
+            	            							current = createModelElementForParent(grammarAccess.getTestIndentationRule());
+            	            						}
+            	            						add(
+            	            							current,
+            	            							"items",
+            	            							lv_items_3_1,
+            	            							"org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.Line");
+            	            						afterParserOrEnumRuleCall();
+            	            					
 
             	            }
             	            break;
             	        case 2 :
-            	            // InternalFormatterTestLanguage.g:762:8: lv_items_3_2= ruleTestIndentation
+            	            // InternalFormatterTestLanguage.g:749:6: lv_items_3_2= ruleTestIndentation
             	            {
-            	             
-            	            	        newCompositeNode(grammarAccess.getTestIndentationAccess().getItemsTestIndentationParserRuleCall_3_0_1()); 
-            	            	    
+
+            	            						newCompositeNode(grammarAccess.getTestIndentationAccess().getItemsTestIndentationParserRuleCall_3_0_1());
+            	            					
             	            pushFollow(FollowSets000.FOLLOW_18);
             	            lv_items_3_2=ruleTestIndentation();
 
             	            state._fsp--;
 
 
-            	            	        if (current==null) {
-            	            	            current = createModelElementForParent(grammarAccess.getTestIndentationRule());
-            	            	        }
-            	                   		add(
-            	                   			current, 
-            	                   			"items",
-            	                    		lv_items_3_2, 
-            	                    		"org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.TestIndentation");
-            	            	        afterParserOrEnumRuleCall();
-            	            	    
+            	            						if (current==null) {
+            	            							current = createModelElementForParent(grammarAccess.getTestIndentationRule());
+            	            						}
+            	            						add(
+            	            							current,
+            	            							"items",
+            	            							lv_items_3_2,
+            	            							"org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.TestIndentation");
+            	            						afterParserOrEnumRuleCall();
+            	            					
 
             	            }
             	            break;
@@ -1881,9 +1910,9 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
             otherlv_4=(Token)match(input,28,FollowSets000.FOLLOW_19); 
 
-                	newLeafNode(otherlv_4, grammarAccess.getTestIndentationAccess().getRightCurlyBracketKeyword_4());
-                
-            // InternalFormatterTestLanguage.g:784:1: ( (lv_semi_5_0= ';' ) )?
+            			newLeafNode(otherlv_4, grammarAccess.getTestIndentationAccess().getRightCurlyBracketKeyword_4());
+            		
+            // InternalFormatterTestLanguage.g:771:3: ( (lv_semi_5_0= ';' ) )?
             int alt12=2;
             int LA12_0 = input.LA(1);
 
@@ -1892,21 +1921,21 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
             }
             switch (alt12) {
                 case 1 :
-                    // InternalFormatterTestLanguage.g:785:1: (lv_semi_5_0= ';' )
+                    // InternalFormatterTestLanguage.g:772:4: (lv_semi_5_0= ';' )
                     {
-                    // InternalFormatterTestLanguage.g:785:1: (lv_semi_5_0= ';' )
-                    // InternalFormatterTestLanguage.g:786:3: lv_semi_5_0= ';'
+                    // InternalFormatterTestLanguage.g:772:4: (lv_semi_5_0= ';' )
+                    // InternalFormatterTestLanguage.g:773:5: lv_semi_5_0= ';'
                     {
                     lv_semi_5_0=(Token)match(input,13,FollowSets000.FOLLOW_2); 
 
-                            newLeafNode(lv_semi_5_0, grammarAccess.getTestIndentationAccess().getSemiSemicolonKeyword_5_0());
-                        
+                    					newLeafNode(lv_semi_5_0, grammarAccess.getTestIndentationAccess().getSemiSemicolonKeyword_5_0());
+                    				
 
-                    	        if (current==null) {
-                    	            current = createModelElement(grammarAccess.getTestIndentationRule());
-                    	        }
-                           		setWithLastConsumed(current, "semi", true, ";");
-                    	    
+                    					if (current==null) {
+                    						current = createModelElement(grammarAccess.getTestIndentationRule());
+                    					}
+                    					setWithLastConsumed(current, "semi", true, ";");
+                    				
 
                     }
 
@@ -1922,13 +1951,15 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1937,7 +1968,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleFqnObj"
-    // InternalFormatterTestLanguage.g:807:1: entryRuleFqnObj returns [EObject current=null] : iv_ruleFqnObj= ruleFqnObj EOF ;
+    // InternalFormatterTestLanguage.g:789:1: entryRuleFqnObj returns [EObject current=null] : iv_ruleFqnObj= ruleFqnObj EOF ;
     public final EObject entryRuleFqnObj() throws RecognitionException {
         EObject current = null;
 
@@ -1945,8 +1976,8 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // InternalFormatterTestLanguage.g:808:2: (iv_ruleFqnObj= ruleFqnObj EOF )
-            // InternalFormatterTestLanguage.g:809:2: iv_ruleFqnObj= ruleFqnObj EOF
+            // InternalFormatterTestLanguage.g:789:47: (iv_ruleFqnObj= ruleFqnObj EOF )
+            // InternalFormatterTestLanguage.g:790:2: iv_ruleFqnObj= ruleFqnObj EOF
             {
              newCompositeNode(grammarAccess.getFqnObjRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -1960,11 +1991,11 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1973,7 +2004,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleFqnObj"
-    // InternalFormatterTestLanguage.g:816:1: ruleFqnObj returns [EObject current=null] : (otherlv_0= 'fqn' ( (lv_name_1_0= ruleFQN ) ) ) ;
+    // InternalFormatterTestLanguage.g:796:1: ruleFqnObj returns [EObject current=null] : (otherlv_0= 'fqn' ( (lv_name_1_0= ruleFQN ) ) ) ;
     public final EObject ruleFqnObj() throws RecognitionException {
         EObject current = null;
 
@@ -1981,44 +2012,45 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
         AntlrDatatypeRuleToken lv_name_1_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalFormatterTestLanguage.g:819:28: ( (otherlv_0= 'fqn' ( (lv_name_1_0= ruleFQN ) ) ) )
-            // InternalFormatterTestLanguage.g:820:1: (otherlv_0= 'fqn' ( (lv_name_1_0= ruleFQN ) ) )
+            // InternalFormatterTestLanguage.g:802:2: ( (otherlv_0= 'fqn' ( (lv_name_1_0= ruleFQN ) ) ) )
+            // InternalFormatterTestLanguage.g:803:2: (otherlv_0= 'fqn' ( (lv_name_1_0= ruleFQN ) ) )
             {
-            // InternalFormatterTestLanguage.g:820:1: (otherlv_0= 'fqn' ( (lv_name_1_0= ruleFQN ) ) )
-            // InternalFormatterTestLanguage.g:820:3: otherlv_0= 'fqn' ( (lv_name_1_0= ruleFQN ) )
+            // InternalFormatterTestLanguage.g:803:2: (otherlv_0= 'fqn' ( (lv_name_1_0= ruleFQN ) ) )
+            // InternalFormatterTestLanguage.g:804:3: otherlv_0= 'fqn' ( (lv_name_1_0= ruleFQN ) )
             {
             otherlv_0=(Token)match(input,29,FollowSets000.FOLLOW_6); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getFqnObjAccess().getFqnKeyword_0());
-                
-            // InternalFormatterTestLanguage.g:824:1: ( (lv_name_1_0= ruleFQN ) )
-            // InternalFormatterTestLanguage.g:825:1: (lv_name_1_0= ruleFQN )
+            			newLeafNode(otherlv_0, grammarAccess.getFqnObjAccess().getFqnKeyword_0());
+            		
+            // InternalFormatterTestLanguage.g:808:3: ( (lv_name_1_0= ruleFQN ) )
+            // InternalFormatterTestLanguage.g:809:4: (lv_name_1_0= ruleFQN )
             {
-            // InternalFormatterTestLanguage.g:825:1: (lv_name_1_0= ruleFQN )
-            // InternalFormatterTestLanguage.g:826:3: lv_name_1_0= ruleFQN
+            // InternalFormatterTestLanguage.g:809:4: (lv_name_1_0= ruleFQN )
+            // InternalFormatterTestLanguage.g:810:5: lv_name_1_0= ruleFQN
             {
-             
-            	        newCompositeNode(grammarAccess.getFqnObjAccess().getNameFQNParserRuleCall_1_0()); 
-            	    
+
+            					newCompositeNode(grammarAccess.getFqnObjAccess().getNameFQNParserRuleCall_1_0());
+            				
             pushFollow(FollowSets000.FOLLOW_2);
             lv_name_1_0=ruleFQN();
 
             state._fsp--;
 
 
-            	        if (current==null) {
-            	            current = createModelElementForParent(grammarAccess.getFqnObjRule());
-            	        }
-                   		set(
-                   			current, 
-                   			"name",
-                    		lv_name_1_0, 
-                    		"org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.FQN");
-            	        afterParserOrEnumRuleCall();
-            	    
+            					if (current==null) {
+            						current = createModelElementForParent(grammarAccess.getFqnObjRule());
+            					}
+            					set(
+            						current,
+            						"name",
+            						lv_name_1_0,
+            						"org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.FQN");
+            					afterParserOrEnumRuleCall();
+            				
 
             }
 
@@ -2031,13 +2063,15 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -2046,7 +2080,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleFQN"
-    // InternalFormatterTestLanguage.g:850:1: entryRuleFQN returns [String current=null] : iv_ruleFQN= ruleFQN EOF ;
+    // InternalFormatterTestLanguage.g:831:1: entryRuleFQN returns [String current=null] : iv_ruleFQN= ruleFQN EOF ;
     public final String entryRuleFQN() throws RecognitionException {
         String current = null;
 
@@ -2054,8 +2088,8 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // InternalFormatterTestLanguage.g:851:2: (iv_ruleFQN= ruleFQN EOF )
-            // InternalFormatterTestLanguage.g:852:2: iv_ruleFQN= ruleFQN EOF
+            // InternalFormatterTestLanguage.g:831:43: (iv_ruleFQN= ruleFQN EOF )
+            // InternalFormatterTestLanguage.g:832:2: iv_ruleFQN= ruleFQN EOF
             {
              newCompositeNode(grammarAccess.getFQNRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -2069,11 +2103,11 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -2082,7 +2116,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleFQN"
-    // InternalFormatterTestLanguage.g:859:1: ruleFQN returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) ;
+    // InternalFormatterTestLanguage.g:838:1: ruleFQN returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) ;
     public final AntlrDatatypeRuleToken ruleFQN() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -2090,23 +2124,24 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
         Token kw=null;
         Token this_ID_2=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalFormatterTestLanguage.g:862:28: ( (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) )
-            // InternalFormatterTestLanguage.g:863:1: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
+            // InternalFormatterTestLanguage.g:844:2: ( (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) )
+            // InternalFormatterTestLanguage.g:845:2: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
             {
-            // InternalFormatterTestLanguage.g:863:1: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
-            // InternalFormatterTestLanguage.g:863:6: this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )*
+            // InternalFormatterTestLanguage.g:845:2: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
+            // InternalFormatterTestLanguage.g:846:3: this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )*
             {
             this_ID_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_20); 
 
-            		current.merge(this_ID_0);
-                
-             
-                newLeafNode(this_ID_0, grammarAccess.getFQNAccess().getIDTerminalRuleCall_0()); 
-                
-            // InternalFormatterTestLanguage.g:870:1: (kw= '.' this_ID_2= RULE_ID )*
+            			current.merge(this_ID_0);
+            		
+
+            			newLeafNode(this_ID_0, grammarAccess.getFQNAccess().getIDTerminalRuleCall_0());
+            		
+            // InternalFormatterTestLanguage.g:853:3: (kw= '.' this_ID_2= RULE_ID )*
             loop13:
             do {
                 int alt13=2;
@@ -2119,20 +2154,20 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
                 switch (alt13) {
             	case 1 :
-            	    // InternalFormatterTestLanguage.g:871:2: kw= '.' this_ID_2= RULE_ID
+            	    // InternalFormatterTestLanguage.g:854:4: kw= '.' this_ID_2= RULE_ID
             	    {
             	    kw=(Token)match(input,30,FollowSets000.FOLLOW_6); 
 
-            	            current.merge(kw);
-            	            newLeafNode(kw, grammarAccess.getFQNAccess().getFullStopKeyword_1_0()); 
-            	        
+            	    				current.merge(kw);
+            	    				newLeafNode(kw, grammarAccess.getFQNAccess().getFullStopKeyword_1_0());
+            	    			
             	    this_ID_2=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_20); 
 
-            	    		current.merge(this_ID_2);
-            	        
-            	     
-            	        newLeafNode(this_ID_2, grammarAccess.getFQNAccess().getIDTerminalRuleCall_1_1()); 
-            	        
+            	    				current.merge(this_ID_2);
+            	    			
+
+            	    				newLeafNode(this_ID_2, grammarAccess.getFQNAccess().getIDTerminalRuleCall_1_1());
+            	    			
 
             	    }
             	    break;
@@ -2148,13 +2183,15 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -2163,7 +2200,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleFqnRef"
-    // InternalFormatterTestLanguage.g:891:1: entryRuleFqnRef returns [EObject current=null] : iv_ruleFqnRef= ruleFqnRef EOF ;
+    // InternalFormatterTestLanguage.g:871:1: entryRuleFqnRef returns [EObject current=null] : iv_ruleFqnRef= ruleFqnRef EOF ;
     public final EObject entryRuleFqnRef() throws RecognitionException {
         EObject current = null;
 
@@ -2171,8 +2208,8 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // InternalFormatterTestLanguage.g:892:2: (iv_ruleFqnRef= ruleFqnRef EOF )
-            // InternalFormatterTestLanguage.g:893:2: iv_ruleFqnRef= ruleFqnRef EOF
+            // InternalFormatterTestLanguage.g:871:47: (iv_ruleFqnRef= ruleFqnRef EOF )
+            // InternalFormatterTestLanguage.g:872:2: iv_ruleFqnRef= ruleFqnRef EOF
             {
              newCompositeNode(grammarAccess.getFqnRefRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -2186,11 +2223,11 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -2199,47 +2236,48 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleFqnRef"
-    // InternalFormatterTestLanguage.g:900:1: ruleFqnRef returns [EObject current=null] : (otherlv_0= 'fqnref' ( ( ruleFQN ) ) ) ;
+    // InternalFormatterTestLanguage.g:878:1: ruleFqnRef returns [EObject current=null] : (otherlv_0= 'fqnref' ( ( ruleFQN ) ) ) ;
     public final EObject ruleFqnRef() throws RecognitionException {
         EObject current = null;
 
         Token otherlv_0=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalFormatterTestLanguage.g:903:28: ( (otherlv_0= 'fqnref' ( ( ruleFQN ) ) ) )
-            // InternalFormatterTestLanguage.g:904:1: (otherlv_0= 'fqnref' ( ( ruleFQN ) ) )
+            // InternalFormatterTestLanguage.g:884:2: ( (otherlv_0= 'fqnref' ( ( ruleFQN ) ) ) )
+            // InternalFormatterTestLanguage.g:885:2: (otherlv_0= 'fqnref' ( ( ruleFQN ) ) )
             {
-            // InternalFormatterTestLanguage.g:904:1: (otherlv_0= 'fqnref' ( ( ruleFQN ) ) )
-            // InternalFormatterTestLanguage.g:904:3: otherlv_0= 'fqnref' ( ( ruleFQN ) )
+            // InternalFormatterTestLanguage.g:885:2: (otherlv_0= 'fqnref' ( ( ruleFQN ) ) )
+            // InternalFormatterTestLanguage.g:886:3: otherlv_0= 'fqnref' ( ( ruleFQN ) )
             {
             otherlv_0=(Token)match(input,31,FollowSets000.FOLLOW_6); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getFqnRefAccess().getFqnrefKeyword_0());
-                
-            // InternalFormatterTestLanguage.g:908:1: ( ( ruleFQN ) )
-            // InternalFormatterTestLanguage.g:909:1: ( ruleFQN )
+            			newLeafNode(otherlv_0, grammarAccess.getFqnRefAccess().getFqnrefKeyword_0());
+            		
+            // InternalFormatterTestLanguage.g:890:3: ( ( ruleFQN ) )
+            // InternalFormatterTestLanguage.g:891:4: ( ruleFQN )
             {
-            // InternalFormatterTestLanguage.g:909:1: ( ruleFQN )
-            // InternalFormatterTestLanguage.g:910:3: ruleFQN
+            // InternalFormatterTestLanguage.g:891:4: ( ruleFQN )
+            // InternalFormatterTestLanguage.g:892:5: ruleFQN
             {
 
-            			if (current==null) {
-            	            current = createModelElement(grammarAccess.getFqnRefRule());
-            	        }
-                    
-             
-            	        newCompositeNode(grammarAccess.getFqnRefAccess().getRefFqnObjCrossReference_1_0()); 
-            	    
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getFqnRefRule());
+            					}
+            				
+
+            					newCompositeNode(grammarAccess.getFqnRefAccess().getRefFqnObjCrossReference_1_0());
+            				
             pushFollow(FollowSets000.FOLLOW_2);
             ruleFQN();
 
             state._fsp--;
 
-             
-            	        afterParserOrEnumRuleCall();
-            	    
+
+            					afterParserOrEnumRuleCall();
+            				
 
             }
 
@@ -2252,13 +2290,15 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -2267,7 +2307,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleEnumeration"
-    // InternalFormatterTestLanguage.g:931:1: entryRuleEnumeration returns [EObject current=null] : iv_ruleEnumeration= ruleEnumeration EOF ;
+    // InternalFormatterTestLanguage.g:910:1: entryRuleEnumeration returns [EObject current=null] : iv_ruleEnumeration= ruleEnumeration EOF ;
     public final EObject entryRuleEnumeration() throws RecognitionException {
         EObject current = null;
 
@@ -2275,8 +2315,8 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // InternalFormatterTestLanguage.g:932:2: (iv_ruleEnumeration= ruleEnumeration EOF )
-            // InternalFormatterTestLanguage.g:933:2: iv_ruleEnumeration= ruleEnumeration EOF
+            // InternalFormatterTestLanguage.g:910:52: (iv_ruleEnumeration= ruleEnumeration EOF )
+            // InternalFormatterTestLanguage.g:911:2: iv_ruleEnumeration= ruleEnumeration EOF
             {
              newCompositeNode(grammarAccess.getEnumerationRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -2290,11 +2330,11 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -2303,7 +2343,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleEnumeration"
-    // InternalFormatterTestLanguage.g:940:1: ruleEnumeration returns [EObject current=null] : (otherlv_0= 'enum' ( (lv_val_1_0= ruleEnum1 ) )+ (otherlv_2= ',' ( (lv_val_3_0= ruleEnum1 ) ) )* ) ;
+    // InternalFormatterTestLanguage.g:917:1: ruleEnumeration returns [EObject current=null] : (otherlv_0= 'enum' ( (lv_val_1_0= ruleEnum1 ) )+ (otherlv_2= ',' ( (lv_val_3_0= ruleEnum1 ) ) )* ) ;
     public final EObject ruleEnumeration() throws RecognitionException {
         EObject current = null;
 
@@ -2314,20 +2354,21 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
         Enumerator lv_val_3_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalFormatterTestLanguage.g:943:28: ( (otherlv_0= 'enum' ( (lv_val_1_0= ruleEnum1 ) )+ (otherlv_2= ',' ( (lv_val_3_0= ruleEnum1 ) ) )* ) )
-            // InternalFormatterTestLanguage.g:944:1: (otherlv_0= 'enum' ( (lv_val_1_0= ruleEnum1 ) )+ (otherlv_2= ',' ( (lv_val_3_0= ruleEnum1 ) ) )* )
+            // InternalFormatterTestLanguage.g:923:2: ( (otherlv_0= 'enum' ( (lv_val_1_0= ruleEnum1 ) )+ (otherlv_2= ',' ( (lv_val_3_0= ruleEnum1 ) ) )* ) )
+            // InternalFormatterTestLanguage.g:924:2: (otherlv_0= 'enum' ( (lv_val_1_0= ruleEnum1 ) )+ (otherlv_2= ',' ( (lv_val_3_0= ruleEnum1 ) ) )* )
             {
-            // InternalFormatterTestLanguage.g:944:1: (otherlv_0= 'enum' ( (lv_val_1_0= ruleEnum1 ) )+ (otherlv_2= ',' ( (lv_val_3_0= ruleEnum1 ) ) )* )
-            // InternalFormatterTestLanguage.g:944:3: otherlv_0= 'enum' ( (lv_val_1_0= ruleEnum1 ) )+ (otherlv_2= ',' ( (lv_val_3_0= ruleEnum1 ) ) )*
+            // InternalFormatterTestLanguage.g:924:2: (otherlv_0= 'enum' ( (lv_val_1_0= ruleEnum1 ) )+ (otherlv_2= ',' ( (lv_val_3_0= ruleEnum1 ) ) )* )
+            // InternalFormatterTestLanguage.g:925:3: otherlv_0= 'enum' ( (lv_val_1_0= ruleEnum1 ) )+ (otherlv_2= ',' ( (lv_val_3_0= ruleEnum1 ) ) )*
             {
             otherlv_0=(Token)match(input,32,FollowSets000.FOLLOW_21); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getEnumerationAccess().getEnumKeyword_0());
-                
-            // InternalFormatterTestLanguage.g:948:1: ( (lv_val_1_0= ruleEnum1 ) )+
+            			newLeafNode(otherlv_0, grammarAccess.getEnumerationAccess().getEnumKeyword_0());
+            		
+            // InternalFormatterTestLanguage.g:929:3: ( (lv_val_1_0= ruleEnum1 ) )+
             int cnt14=0;
             loop14:
             do {
@@ -2341,30 +2382,30 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
                 switch (alt14) {
             	case 1 :
-            	    // InternalFormatterTestLanguage.g:949:1: (lv_val_1_0= ruleEnum1 )
+            	    // InternalFormatterTestLanguage.g:930:4: (lv_val_1_0= ruleEnum1 )
             	    {
-            	    // InternalFormatterTestLanguage.g:949:1: (lv_val_1_0= ruleEnum1 )
-            	    // InternalFormatterTestLanguage.g:950:3: lv_val_1_0= ruleEnum1
+            	    // InternalFormatterTestLanguage.g:930:4: (lv_val_1_0= ruleEnum1 )
+            	    // InternalFormatterTestLanguage.g:931:5: lv_val_1_0= ruleEnum1
             	    {
-            	     
-            	    	        newCompositeNode(grammarAccess.getEnumerationAccess().getValEnum1EnumRuleCall_1_0()); 
-            	    	    
+
+            	    					newCompositeNode(grammarAccess.getEnumerationAccess().getValEnum1EnumRuleCall_1_0());
+            	    				
             	    pushFollow(FollowSets000.FOLLOW_22);
             	    lv_val_1_0=ruleEnum1();
 
             	    state._fsp--;
 
 
-            	    	        if (current==null) {
-            	    	            current = createModelElementForParent(grammarAccess.getEnumerationRule());
-            	    	        }
-            	           		add(
-            	           			current, 
-            	           			"val",
-            	            		lv_val_1_0, 
-            	            		"org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.Enum1");
-            	    	        afterParserOrEnumRuleCall();
-            	    	    
+            	    					if (current==null) {
+            	    						current = createModelElementForParent(grammarAccess.getEnumerationRule());
+            	    					}
+            	    					add(
+            	    						current,
+            	    						"val",
+            	    						lv_val_1_0,
+            	    						"org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.Enum1");
+            	    					afterParserOrEnumRuleCall();
+            	    				
 
             	    }
 
@@ -2381,7 +2422,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
                 cnt14++;
             } while (true);
 
-            // InternalFormatterTestLanguage.g:966:3: (otherlv_2= ',' ( (lv_val_3_0= ruleEnum1 ) ) )*
+            // InternalFormatterTestLanguage.g:948:3: (otherlv_2= ',' ( (lv_val_3_0= ruleEnum1 ) ) )*
             loop15:
             do {
                 int alt15=2;
@@ -2394,37 +2435,37 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
                 switch (alt15) {
             	case 1 :
-            	    // InternalFormatterTestLanguage.g:966:5: otherlv_2= ',' ( (lv_val_3_0= ruleEnum1 ) )
+            	    // InternalFormatterTestLanguage.g:949:4: otherlv_2= ',' ( (lv_val_3_0= ruleEnum1 ) )
             	    {
             	    otherlv_2=(Token)match(input,17,FollowSets000.FOLLOW_21); 
 
-            	        	newLeafNode(otherlv_2, grammarAccess.getEnumerationAccess().getCommaKeyword_2_0());
-            	        
-            	    // InternalFormatterTestLanguage.g:970:1: ( (lv_val_3_0= ruleEnum1 ) )
-            	    // InternalFormatterTestLanguage.g:971:1: (lv_val_3_0= ruleEnum1 )
+            	    				newLeafNode(otherlv_2, grammarAccess.getEnumerationAccess().getCommaKeyword_2_0());
+            	    			
+            	    // InternalFormatterTestLanguage.g:953:4: ( (lv_val_3_0= ruleEnum1 ) )
+            	    // InternalFormatterTestLanguage.g:954:5: (lv_val_3_0= ruleEnum1 )
             	    {
-            	    // InternalFormatterTestLanguage.g:971:1: (lv_val_3_0= ruleEnum1 )
-            	    // InternalFormatterTestLanguage.g:972:3: lv_val_3_0= ruleEnum1
+            	    // InternalFormatterTestLanguage.g:954:5: (lv_val_3_0= ruleEnum1 )
+            	    // InternalFormatterTestLanguage.g:955:6: lv_val_3_0= ruleEnum1
             	    {
-            	     
-            	    	        newCompositeNode(grammarAccess.getEnumerationAccess().getValEnum1EnumRuleCall_2_1_0()); 
-            	    	    
+
+            	    						newCompositeNode(grammarAccess.getEnumerationAccess().getValEnum1EnumRuleCall_2_1_0());
+            	    					
             	    pushFollow(FollowSets000.FOLLOW_23);
             	    lv_val_3_0=ruleEnum1();
 
             	    state._fsp--;
 
 
-            	    	        if (current==null) {
-            	    	            current = createModelElementForParent(grammarAccess.getEnumerationRule());
-            	    	        }
-            	           		add(
-            	           			current, 
-            	           			"val",
-            	            		lv_val_3_0, 
-            	            		"org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.Enum1");
-            	    	        afterParserOrEnumRuleCall();
-            	    	    
+            	    						if (current==null) {
+            	    							current = createModelElementForParent(grammarAccess.getEnumerationRule());
+            	    						}
+            	    						add(
+            	    							current,
+            	    							"val",
+            	    							lv_val_3_0,
+            	    							"org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.Enum1");
+            	    						afterParserOrEnumRuleCall();
+            	    					
 
             	    }
 
@@ -2446,13 +2487,15 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -2461,19 +2504,19 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleSuppressedHidden"
-    // InternalFormatterTestLanguage.g:996:1: entryRuleSuppressedHidden returns [EObject current=null] : iv_ruleSuppressedHidden= ruleSuppressedHidden EOF ;
+    // InternalFormatterTestLanguage.g:977:1: entryRuleSuppressedHidden returns [EObject current=null] : iv_ruleSuppressedHidden= ruleSuppressedHidden EOF ;
     public final EObject entryRuleSuppressedHidden() throws RecognitionException {
         EObject current = null;
 
         EObject iv_ruleSuppressedHidden = null;
 
 
-         
-        		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
-        	
+
+        	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
+
         try {
-            // InternalFormatterTestLanguage.g:1000:2: (iv_ruleSuppressedHidden= ruleSuppressedHidden EOF )
-            // InternalFormatterTestLanguage.g:1001:2: iv_ruleSuppressedHidden= ruleSuppressedHidden EOF
+            // InternalFormatterTestLanguage.g:979:2: (iv_ruleSuppressedHidden= ruleSuppressedHidden EOF )
+            // InternalFormatterTestLanguage.g:980:2: iv_ruleSuppressedHidden= ruleSuppressedHidden EOF
             {
              newCompositeNode(grammarAccess.getSuppressedHiddenRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -2487,11 +2530,11 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
 
             	myHiddenTokenState.restore();
@@ -2503,7 +2546,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleSuppressedHidden"
-    // InternalFormatterTestLanguage.g:1011:1: ruleSuppressedHidden returns [EObject current=null] : ( () otherlv_1= '`' ( ( (lv_vals_2_0= ruleSuppressedHiddenSub ) ) (otherlv_3= '%' ( (lv_vals_4_0= ruleSuppressedHiddenSub ) ) )* )? otherlv_5= '`' ) ;
+    // InternalFormatterTestLanguage.g:989:1: ruleSuppressedHidden returns [EObject current=null] : ( () otherlv_1= '`' ( ( (lv_vals_2_0= ruleSuppressedHiddenSub ) ) (otherlv_3= '%' ( (lv_vals_4_0= ruleSuppressedHiddenSub ) ) )* )? otherlv_5= '`' ) ;
     public final EObject ruleSuppressedHidden() throws RecognitionException {
         EObject current = null;
 
@@ -2515,32 +2558,33 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
         EObject lv_vals_4_0 = null;
 
 
-         enterRule(); 
-        		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
-            
+
+        	enterRule();
+        	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
+
         try {
-            // InternalFormatterTestLanguage.g:1015:28: ( ( () otherlv_1= '`' ( ( (lv_vals_2_0= ruleSuppressedHiddenSub ) ) (otherlv_3= '%' ( (lv_vals_4_0= ruleSuppressedHiddenSub ) ) )* )? otherlv_5= '`' ) )
-            // InternalFormatterTestLanguage.g:1016:1: ( () otherlv_1= '`' ( ( (lv_vals_2_0= ruleSuppressedHiddenSub ) ) (otherlv_3= '%' ( (lv_vals_4_0= ruleSuppressedHiddenSub ) ) )* )? otherlv_5= '`' )
+            // InternalFormatterTestLanguage.g:996:2: ( ( () otherlv_1= '`' ( ( (lv_vals_2_0= ruleSuppressedHiddenSub ) ) (otherlv_3= '%' ( (lv_vals_4_0= ruleSuppressedHiddenSub ) ) )* )? otherlv_5= '`' ) )
+            // InternalFormatterTestLanguage.g:997:2: ( () otherlv_1= '`' ( ( (lv_vals_2_0= ruleSuppressedHiddenSub ) ) (otherlv_3= '%' ( (lv_vals_4_0= ruleSuppressedHiddenSub ) ) )* )? otherlv_5= '`' )
             {
-            // InternalFormatterTestLanguage.g:1016:1: ( () otherlv_1= '`' ( ( (lv_vals_2_0= ruleSuppressedHiddenSub ) ) (otherlv_3= '%' ( (lv_vals_4_0= ruleSuppressedHiddenSub ) ) )* )? otherlv_5= '`' )
-            // InternalFormatterTestLanguage.g:1016:2: () otherlv_1= '`' ( ( (lv_vals_2_0= ruleSuppressedHiddenSub ) ) (otherlv_3= '%' ( (lv_vals_4_0= ruleSuppressedHiddenSub ) ) )* )? otherlv_5= '`'
+            // InternalFormatterTestLanguage.g:997:2: ( () otherlv_1= '`' ( ( (lv_vals_2_0= ruleSuppressedHiddenSub ) ) (otherlv_3= '%' ( (lv_vals_4_0= ruleSuppressedHiddenSub ) ) )* )? otherlv_5= '`' )
+            // InternalFormatterTestLanguage.g:998:3: () otherlv_1= '`' ( ( (lv_vals_2_0= ruleSuppressedHiddenSub ) ) (otherlv_3= '%' ( (lv_vals_4_0= ruleSuppressedHiddenSub ) ) )* )? otherlv_5= '`'
             {
-            // InternalFormatterTestLanguage.g:1016:2: ()
-            // InternalFormatterTestLanguage.g:1017:5: 
+            // InternalFormatterTestLanguage.g:998:3: ()
+            // InternalFormatterTestLanguage.g:999:4: 
             {
 
-                    current = forceCreateModelElement(
-                        grammarAccess.getSuppressedHiddenAccess().getSuppressedHiddenAction_0(),
-                        current);
-                
+            				current = forceCreateModelElement(
+            					grammarAccess.getSuppressedHiddenAccess().getSuppressedHiddenAction_0(),
+            					current);
+            			
 
             }
 
             otherlv_1=(Token)match(input,33,FollowSets000.FOLLOW_24); 
 
-                	newLeafNode(otherlv_1, grammarAccess.getSuppressedHiddenAccess().getGraveAccentKeyword_1());
-                
-            // InternalFormatterTestLanguage.g:1026:1: ( ( (lv_vals_2_0= ruleSuppressedHiddenSub ) ) (otherlv_3= '%' ( (lv_vals_4_0= ruleSuppressedHiddenSub ) ) )* )?
+            			newLeafNode(otherlv_1, grammarAccess.getSuppressedHiddenAccess().getGraveAccentKeyword_1());
+            		
+            // InternalFormatterTestLanguage.g:1009:3: ( ( (lv_vals_2_0= ruleSuppressedHiddenSub ) ) (otherlv_3= '%' ( (lv_vals_4_0= ruleSuppressedHiddenSub ) ) )* )?
             int alt17=2;
             int LA17_0 = input.LA(1);
 
@@ -2549,40 +2593,40 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
             }
             switch (alt17) {
                 case 1 :
-                    // InternalFormatterTestLanguage.g:1026:2: ( (lv_vals_2_0= ruleSuppressedHiddenSub ) ) (otherlv_3= '%' ( (lv_vals_4_0= ruleSuppressedHiddenSub ) ) )*
+                    // InternalFormatterTestLanguage.g:1010:4: ( (lv_vals_2_0= ruleSuppressedHiddenSub ) ) (otherlv_3= '%' ( (lv_vals_4_0= ruleSuppressedHiddenSub ) ) )*
                     {
-                    // InternalFormatterTestLanguage.g:1026:2: ( (lv_vals_2_0= ruleSuppressedHiddenSub ) )
-                    // InternalFormatterTestLanguage.g:1027:1: (lv_vals_2_0= ruleSuppressedHiddenSub )
+                    // InternalFormatterTestLanguage.g:1010:4: ( (lv_vals_2_0= ruleSuppressedHiddenSub ) )
+                    // InternalFormatterTestLanguage.g:1011:5: (lv_vals_2_0= ruleSuppressedHiddenSub )
                     {
-                    // InternalFormatterTestLanguage.g:1027:1: (lv_vals_2_0= ruleSuppressedHiddenSub )
-                    // InternalFormatterTestLanguage.g:1028:3: lv_vals_2_0= ruleSuppressedHiddenSub
+                    // InternalFormatterTestLanguage.g:1011:5: (lv_vals_2_0= ruleSuppressedHiddenSub )
+                    // InternalFormatterTestLanguage.g:1012:6: lv_vals_2_0= ruleSuppressedHiddenSub
                     {
-                     
-                    	        newCompositeNode(grammarAccess.getSuppressedHiddenAccess().getValsSuppressedHiddenSubParserRuleCall_2_0_0()); 
-                    	    
+
+                    						newCompositeNode(grammarAccess.getSuppressedHiddenAccess().getValsSuppressedHiddenSubParserRuleCall_2_0_0());
+                    					
                     pushFollow(FollowSets000.FOLLOW_25);
                     lv_vals_2_0=ruleSuppressedHiddenSub();
 
                     state._fsp--;
 
 
-                    	        if (current==null) {
-                    	            current = createModelElementForParent(grammarAccess.getSuppressedHiddenRule());
-                    	        }
-                           		add(
-                           			current, 
-                           			"vals",
-                            		lv_vals_2_0, 
-                            		"org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.SuppressedHiddenSub");
-                    	        afterParserOrEnumRuleCall();
-                    	    
+                    						if (current==null) {
+                    							current = createModelElementForParent(grammarAccess.getSuppressedHiddenRule());
+                    						}
+                    						add(
+                    							current,
+                    							"vals",
+                    							lv_vals_2_0,
+                    							"org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.SuppressedHiddenSub");
+                    						afterParserOrEnumRuleCall();
+                    					
 
                     }
 
 
                     }
 
-                    // InternalFormatterTestLanguage.g:1044:2: (otherlv_3= '%' ( (lv_vals_4_0= ruleSuppressedHiddenSub ) ) )*
+                    // InternalFormatterTestLanguage.g:1029:4: (otherlv_3= '%' ( (lv_vals_4_0= ruleSuppressedHiddenSub ) ) )*
                     loop16:
                     do {
                         int alt16=2;
@@ -2595,37 +2639,37 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
                         switch (alt16) {
                     	case 1 :
-                    	    // InternalFormatterTestLanguage.g:1044:4: otherlv_3= '%' ( (lv_vals_4_0= ruleSuppressedHiddenSub ) )
+                    	    // InternalFormatterTestLanguage.g:1030:5: otherlv_3= '%' ( (lv_vals_4_0= ruleSuppressedHiddenSub ) )
                     	    {
                     	    otherlv_3=(Token)match(input,34,FollowSets000.FOLLOW_26); 
 
-                    	        	newLeafNode(otherlv_3, grammarAccess.getSuppressedHiddenAccess().getPercentSignKeyword_2_1_0());
-                    	        
-                    	    // InternalFormatterTestLanguage.g:1048:1: ( (lv_vals_4_0= ruleSuppressedHiddenSub ) )
-                    	    // InternalFormatterTestLanguage.g:1049:1: (lv_vals_4_0= ruleSuppressedHiddenSub )
+                    	    					newLeafNode(otherlv_3, grammarAccess.getSuppressedHiddenAccess().getPercentSignKeyword_2_1_0());
+                    	    				
+                    	    // InternalFormatterTestLanguage.g:1034:5: ( (lv_vals_4_0= ruleSuppressedHiddenSub ) )
+                    	    // InternalFormatterTestLanguage.g:1035:6: (lv_vals_4_0= ruleSuppressedHiddenSub )
                     	    {
-                    	    // InternalFormatterTestLanguage.g:1049:1: (lv_vals_4_0= ruleSuppressedHiddenSub )
-                    	    // InternalFormatterTestLanguage.g:1050:3: lv_vals_4_0= ruleSuppressedHiddenSub
+                    	    // InternalFormatterTestLanguage.g:1035:6: (lv_vals_4_0= ruleSuppressedHiddenSub )
+                    	    // InternalFormatterTestLanguage.g:1036:7: lv_vals_4_0= ruleSuppressedHiddenSub
                     	    {
-                    	     
-                    	    	        newCompositeNode(grammarAccess.getSuppressedHiddenAccess().getValsSuppressedHiddenSubParserRuleCall_2_1_1_0()); 
-                    	    	    
+
+                    	    							newCompositeNode(grammarAccess.getSuppressedHiddenAccess().getValsSuppressedHiddenSubParserRuleCall_2_1_1_0());
+                    	    						
                     	    pushFollow(FollowSets000.FOLLOW_25);
                     	    lv_vals_4_0=ruleSuppressedHiddenSub();
 
                     	    state._fsp--;
 
 
-                    	    	        if (current==null) {
-                    	    	            current = createModelElementForParent(grammarAccess.getSuppressedHiddenRule());
-                    	    	        }
-                    	           		add(
-                    	           			current, 
-                    	           			"vals",
-                    	            		lv_vals_4_0, 
-                    	            		"org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.SuppressedHiddenSub");
-                    	    	        afterParserOrEnumRuleCall();
-                    	    	    
+                    	    							if (current==null) {
+                    	    								current = createModelElementForParent(grammarAccess.getSuppressedHiddenRule());
+                    	    							}
+                    	    							add(
+                    	    								current,
+                    	    								"vals",
+                    	    								lv_vals_4_0,
+                    	    								"org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.SuppressedHiddenSub");
+                    	    							afterParserOrEnumRuleCall();
+                    	    						
 
                     	    }
 
@@ -2649,21 +2693,23 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
             otherlv_5=(Token)match(input,33,FollowSets000.FOLLOW_2); 
 
-                	newLeafNode(otherlv_5, grammarAccess.getSuppressedHiddenAccess().getGraveAccentKeyword_3());
-                
+            			newLeafNode(otherlv_5, grammarAccess.getSuppressedHiddenAccess().getGraveAccentKeyword_3());
+            		
 
             }
 
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
 
             	myHiddenTokenState.restore();
@@ -2675,7 +2721,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleSuppressedHiddenSub"
-    // InternalFormatterTestLanguage.g:1081:1: entryRuleSuppressedHiddenSub returns [EObject current=null] : iv_ruleSuppressedHiddenSub= ruleSuppressedHiddenSub EOF ;
+    // InternalFormatterTestLanguage.g:1066:1: entryRuleSuppressedHiddenSub returns [EObject current=null] : iv_ruleSuppressedHiddenSub= ruleSuppressedHiddenSub EOF ;
     public final EObject entryRuleSuppressedHiddenSub() throws RecognitionException {
         EObject current = null;
 
@@ -2683,8 +2729,8 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // InternalFormatterTestLanguage.g:1082:2: (iv_ruleSuppressedHiddenSub= ruleSuppressedHiddenSub EOF )
-            // InternalFormatterTestLanguage.g:1083:2: iv_ruleSuppressedHiddenSub= ruleSuppressedHiddenSub EOF
+            // InternalFormatterTestLanguage.g:1066:60: (iv_ruleSuppressedHiddenSub= ruleSuppressedHiddenSub EOF )
+            // InternalFormatterTestLanguage.g:1067:2: iv_ruleSuppressedHiddenSub= ruleSuppressedHiddenSub EOF
             {
              newCompositeNode(grammarAccess.getSuppressedHiddenSubRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -2698,11 +2744,11 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -2711,7 +2757,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleSuppressedHiddenSub"
-    // InternalFormatterTestLanguage.g:1090:1: ruleSuppressedHiddenSub returns [EObject current=null] : (this_SuppressedHiddenSubSub_0= ruleSuppressedHiddenSubSub | this_SuppressedHiddenSubID_1= ruleSuppressedHiddenSubID ) ;
+    // InternalFormatterTestLanguage.g:1073:1: ruleSuppressedHiddenSub returns [EObject current=null] : (this_SuppressedHiddenSubSub_0= ruleSuppressedHiddenSubSub | this_SuppressedHiddenSubID_1= ruleSuppressedHiddenSubID ) ;
     public final EObject ruleSuppressedHiddenSub() throws RecognitionException {
         EObject current = null;
 
@@ -2720,13 +2766,14 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
         EObject this_SuppressedHiddenSubID_1 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalFormatterTestLanguage.g:1093:28: ( (this_SuppressedHiddenSubSub_0= ruleSuppressedHiddenSubSub | this_SuppressedHiddenSubID_1= ruleSuppressedHiddenSubID ) )
-            // InternalFormatterTestLanguage.g:1094:1: (this_SuppressedHiddenSubSub_0= ruleSuppressedHiddenSubSub | this_SuppressedHiddenSubID_1= ruleSuppressedHiddenSubID )
+            // InternalFormatterTestLanguage.g:1079:2: ( (this_SuppressedHiddenSubSub_0= ruleSuppressedHiddenSubSub | this_SuppressedHiddenSubID_1= ruleSuppressedHiddenSubID ) )
+            // InternalFormatterTestLanguage.g:1080:2: (this_SuppressedHiddenSubSub_0= ruleSuppressedHiddenSubSub | this_SuppressedHiddenSubID_1= ruleSuppressedHiddenSubID )
             {
-            // InternalFormatterTestLanguage.g:1094:1: (this_SuppressedHiddenSubSub_0= ruleSuppressedHiddenSubSub | this_SuppressedHiddenSubID_1= ruleSuppressedHiddenSubID )
+            // InternalFormatterTestLanguage.g:1080:2: (this_SuppressedHiddenSubSub_0= ruleSuppressedHiddenSubSub | this_SuppressedHiddenSubID_1= ruleSuppressedHiddenSubID )
             int alt18=2;
             int LA18_0 = input.LA(1);
 
@@ -2744,38 +2791,38 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
             }
             switch (alt18) {
                 case 1 :
-                    // InternalFormatterTestLanguage.g:1095:5: this_SuppressedHiddenSubSub_0= ruleSuppressedHiddenSubSub
+                    // InternalFormatterTestLanguage.g:1081:3: this_SuppressedHiddenSubSub_0= ruleSuppressedHiddenSubSub
                     {
-                     
-                            newCompositeNode(grammarAccess.getSuppressedHiddenSubAccess().getSuppressedHiddenSubSubParserRuleCall_0()); 
-                        
+
+                    			newCompositeNode(grammarAccess.getSuppressedHiddenSubAccess().getSuppressedHiddenSubSubParserRuleCall_0());
+                    		
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_SuppressedHiddenSubSub_0=ruleSuppressedHiddenSubSub();
 
                     state._fsp--;
 
-                     
-                            current = this_SuppressedHiddenSubSub_0; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    			current = this_SuppressedHiddenSubSub_0;
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
                 case 2 :
-                    // InternalFormatterTestLanguage.g:1105:5: this_SuppressedHiddenSubID_1= ruleSuppressedHiddenSubID
+                    // InternalFormatterTestLanguage.g:1090:3: this_SuppressedHiddenSubID_1= ruleSuppressedHiddenSubID
                     {
-                     
-                            newCompositeNode(grammarAccess.getSuppressedHiddenSubAccess().getSuppressedHiddenSubIDParserRuleCall_1()); 
-                        
+
+                    			newCompositeNode(grammarAccess.getSuppressedHiddenSubAccess().getSuppressedHiddenSubIDParserRuleCall_1());
+                    		
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_SuppressedHiddenSubID_1=ruleSuppressedHiddenSubID();
 
                     state._fsp--;
 
-                     
-                            current = this_SuppressedHiddenSubID_1; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    			current = this_SuppressedHiddenSubID_1;
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
@@ -2785,13 +2832,15 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -2800,19 +2849,19 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleSuppressedHiddenSubSub"
-    // InternalFormatterTestLanguage.g:1121:1: entryRuleSuppressedHiddenSubSub returns [EObject current=null] : iv_ruleSuppressedHiddenSubSub= ruleSuppressedHiddenSubSub EOF ;
+    // InternalFormatterTestLanguage.g:1102:1: entryRuleSuppressedHiddenSubSub returns [EObject current=null] : iv_ruleSuppressedHiddenSubSub= ruleSuppressedHiddenSubSub EOF ;
     public final EObject entryRuleSuppressedHiddenSubSub() throws RecognitionException {
         EObject current = null;
 
         EObject iv_ruleSuppressedHiddenSubSub = null;
 
 
-         
-        		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS");
-        	
+
+        	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS");
+
         try {
-            // InternalFormatterTestLanguage.g:1125:2: (iv_ruleSuppressedHiddenSubSub= ruleSuppressedHiddenSubSub EOF )
-            // InternalFormatterTestLanguage.g:1126:2: iv_ruleSuppressedHiddenSubSub= ruleSuppressedHiddenSubSub EOF
+            // InternalFormatterTestLanguage.g:1104:2: (iv_ruleSuppressedHiddenSubSub= ruleSuppressedHiddenSubSub EOF )
+            // InternalFormatterTestLanguage.g:1105:2: iv_ruleSuppressedHiddenSubSub= ruleSuppressedHiddenSubSub EOF
             {
              newCompositeNode(grammarAccess.getSuppressedHiddenSubSubRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -2826,11 +2875,11 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
 
             	myHiddenTokenState.restore();
@@ -2842,7 +2891,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleSuppressedHiddenSubSub"
-    // InternalFormatterTestLanguage.g:1136:1: ruleSuppressedHiddenSubSub returns [EObject current=null] : (otherlv_0= '<' ( (lv_idval_1_0= RULE_ID ) ) otherlv_2= '>' ) ;
+    // InternalFormatterTestLanguage.g:1114:1: ruleSuppressedHiddenSubSub returns [EObject current=null] : (otherlv_0= '<' ( (lv_idval_1_0= RULE_ID ) ) otherlv_2= '>' ) ;
     public final EObject ruleSuppressedHiddenSubSub() throws RecognitionException {
         EObject current = null;
 
@@ -2850,40 +2899,41 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
         Token lv_idval_1_0=null;
         Token otherlv_2=null;
 
-         enterRule(); 
-        		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS");
-            
+
+        	enterRule();
+        	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS");
+
         try {
-            // InternalFormatterTestLanguage.g:1140:28: ( (otherlv_0= '<' ( (lv_idval_1_0= RULE_ID ) ) otherlv_2= '>' ) )
-            // InternalFormatterTestLanguage.g:1141:1: (otherlv_0= '<' ( (lv_idval_1_0= RULE_ID ) ) otherlv_2= '>' )
+            // InternalFormatterTestLanguage.g:1121:2: ( (otherlv_0= '<' ( (lv_idval_1_0= RULE_ID ) ) otherlv_2= '>' ) )
+            // InternalFormatterTestLanguage.g:1122:2: (otherlv_0= '<' ( (lv_idval_1_0= RULE_ID ) ) otherlv_2= '>' )
             {
-            // InternalFormatterTestLanguage.g:1141:1: (otherlv_0= '<' ( (lv_idval_1_0= RULE_ID ) ) otherlv_2= '>' )
-            // InternalFormatterTestLanguage.g:1141:3: otherlv_0= '<' ( (lv_idval_1_0= RULE_ID ) ) otherlv_2= '>'
+            // InternalFormatterTestLanguage.g:1122:2: (otherlv_0= '<' ( (lv_idval_1_0= RULE_ID ) ) otherlv_2= '>' )
+            // InternalFormatterTestLanguage.g:1123:3: otherlv_0= '<' ( (lv_idval_1_0= RULE_ID ) ) otherlv_2= '>'
             {
             otherlv_0=(Token)match(input,35,FollowSets000.FOLLOW_6); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getSuppressedHiddenSubSubAccess().getLessThanSignKeyword_0());
-                
-            // InternalFormatterTestLanguage.g:1145:1: ( (lv_idval_1_0= RULE_ID ) )
-            // InternalFormatterTestLanguage.g:1146:1: (lv_idval_1_0= RULE_ID )
+            			newLeafNode(otherlv_0, grammarAccess.getSuppressedHiddenSubSubAccess().getLessThanSignKeyword_0());
+            		
+            // InternalFormatterTestLanguage.g:1127:3: ( (lv_idval_1_0= RULE_ID ) )
+            // InternalFormatterTestLanguage.g:1128:4: (lv_idval_1_0= RULE_ID )
             {
-            // InternalFormatterTestLanguage.g:1146:1: (lv_idval_1_0= RULE_ID )
-            // InternalFormatterTestLanguage.g:1147:3: lv_idval_1_0= RULE_ID
+            // InternalFormatterTestLanguage.g:1128:4: (lv_idval_1_0= RULE_ID )
+            // InternalFormatterTestLanguage.g:1129:5: lv_idval_1_0= RULE_ID
             {
             lv_idval_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_27); 
 
-            			newLeafNode(lv_idval_1_0, grammarAccess.getSuppressedHiddenSubSubAccess().getIdvalIDTerminalRuleCall_1_0()); 
-            		
+            					newLeafNode(lv_idval_1_0, grammarAccess.getSuppressedHiddenSubSubAccess().getIdvalIDTerminalRuleCall_1_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getSuppressedHiddenSubSubRule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"idval",
-                    		lv_idval_1_0, 
-                    		"org.eclipse.xtext.common.Terminals.ID");
-            	    
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getSuppressedHiddenSubSubRule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"idval",
+            						lv_idval_1_0,
+            						"org.eclipse.xtext.common.Terminals.ID");
+            				
 
             }
 
@@ -2892,21 +2942,23 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
             otherlv_2=(Token)match(input,36,FollowSets000.FOLLOW_2); 
 
-                	newLeafNode(otherlv_2, grammarAccess.getSuppressedHiddenSubSubAccess().getGreaterThanSignKeyword_2());
-                
+            			newLeafNode(otherlv_2, grammarAccess.getSuppressedHiddenSubSubAccess().getGreaterThanSignKeyword_2());
+            		
 
             }
 
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
 
             	myHiddenTokenState.restore();
@@ -2918,7 +2970,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleSuppressedHiddenSubID"
-    // InternalFormatterTestLanguage.g:1178:1: entryRuleSuppressedHiddenSubID returns [EObject current=null] : iv_ruleSuppressedHiddenSubID= ruleSuppressedHiddenSubID EOF ;
+    // InternalFormatterTestLanguage.g:1156:1: entryRuleSuppressedHiddenSubID returns [EObject current=null] : iv_ruleSuppressedHiddenSubID= ruleSuppressedHiddenSubID EOF ;
     public final EObject entryRuleSuppressedHiddenSubID() throws RecognitionException {
         EObject current = null;
 
@@ -2926,8 +2978,8 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // InternalFormatterTestLanguage.g:1179:2: (iv_ruleSuppressedHiddenSubID= ruleSuppressedHiddenSubID EOF )
-            // InternalFormatterTestLanguage.g:1180:2: iv_ruleSuppressedHiddenSubID= ruleSuppressedHiddenSubID EOF
+            // InternalFormatterTestLanguage.g:1156:62: (iv_ruleSuppressedHiddenSubID= ruleSuppressedHiddenSubID EOF )
+            // InternalFormatterTestLanguage.g:1157:2: iv_ruleSuppressedHiddenSubID= ruleSuppressedHiddenSubID EOF
             {
              newCompositeNode(grammarAccess.getSuppressedHiddenSubIDRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -2941,11 +2993,11 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -2954,54 +3006,57 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleSuppressedHiddenSubID"
-    // InternalFormatterTestLanguage.g:1187:1: ruleSuppressedHiddenSubID returns [EObject current=null] : ( (lv_idval_0_0= RULE_ID ) ) ;
+    // InternalFormatterTestLanguage.g:1163:1: ruleSuppressedHiddenSubID returns [EObject current=null] : ( (lv_idval_0_0= RULE_ID ) ) ;
     public final EObject ruleSuppressedHiddenSubID() throws RecognitionException {
         EObject current = null;
 
         Token lv_idval_0_0=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalFormatterTestLanguage.g:1190:28: ( ( (lv_idval_0_0= RULE_ID ) ) )
-            // InternalFormatterTestLanguage.g:1191:1: ( (lv_idval_0_0= RULE_ID ) )
+            // InternalFormatterTestLanguage.g:1169:2: ( ( (lv_idval_0_0= RULE_ID ) ) )
+            // InternalFormatterTestLanguage.g:1170:2: ( (lv_idval_0_0= RULE_ID ) )
             {
-            // InternalFormatterTestLanguage.g:1191:1: ( (lv_idval_0_0= RULE_ID ) )
-            // InternalFormatterTestLanguage.g:1192:1: (lv_idval_0_0= RULE_ID )
+            // InternalFormatterTestLanguage.g:1170:2: ( (lv_idval_0_0= RULE_ID ) )
+            // InternalFormatterTestLanguage.g:1171:3: (lv_idval_0_0= RULE_ID )
             {
-            // InternalFormatterTestLanguage.g:1192:1: (lv_idval_0_0= RULE_ID )
-            // InternalFormatterTestLanguage.g:1193:3: lv_idval_0_0= RULE_ID
+            // InternalFormatterTestLanguage.g:1171:3: (lv_idval_0_0= RULE_ID )
+            // InternalFormatterTestLanguage.g:1172:4: lv_idval_0_0= RULE_ID
             {
             lv_idval_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
-            			newLeafNode(lv_idval_0_0, grammarAccess.getSuppressedHiddenSubIDAccess().getIdvalIDTerminalRuleCall_0()); 
-            		
+            				newLeafNode(lv_idval_0_0, grammarAccess.getSuppressedHiddenSubIDAccess().getIdvalIDTerminalRuleCall_0());
+            			
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getSuppressedHiddenSubIDRule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"idval",
-                    		lv_idval_0_0, 
-                    		"org.eclipse.xtext.common.Terminals.ID");
-            	    
-
-            }
-
+            				if (current==null) {
+            					current = createModelElement(grammarAccess.getSuppressedHiddenSubIDRule());
+            				}
+            				setWithLastConsumed(
+            					current,
+            					"idval",
+            					lv_idval_0_0,
+            					"org.eclipse.xtext.common.Terminals.ID");
+            			
 
             }
 
 
             }
 
-             leaveRule(); 
+
+            }
+
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -3010,7 +3065,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleDatatype1"
-    // InternalFormatterTestLanguage.g:1217:1: entryRuleDatatype1 returns [String current=null] : iv_ruleDatatype1= ruleDatatype1 EOF ;
+    // InternalFormatterTestLanguage.g:1191:1: entryRuleDatatype1 returns [String current=null] : iv_ruleDatatype1= ruleDatatype1 EOF ;
     public final String entryRuleDatatype1() throws RecognitionException {
         String current = null;
 
@@ -3018,8 +3073,8 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // InternalFormatterTestLanguage.g:1218:2: (iv_ruleDatatype1= ruleDatatype1 EOF )
-            // InternalFormatterTestLanguage.g:1219:2: iv_ruleDatatype1= ruleDatatype1 EOF
+            // InternalFormatterTestLanguage.g:1191:49: (iv_ruleDatatype1= ruleDatatype1 EOF )
+            // InternalFormatterTestLanguage.g:1192:2: iv_ruleDatatype1= ruleDatatype1 EOF
             {
              newCompositeNode(grammarAccess.getDatatype1Rule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -3033,11 +3088,11 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -3046,22 +3101,23 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleDatatype1"
-    // InternalFormatterTestLanguage.g:1226:1: ruleDatatype1 returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : this_FQN_0= ruleFQN ;
+    // InternalFormatterTestLanguage.g:1198:1: ruleDatatype1 returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : this_FQN_0= ruleFQN ;
     public final AntlrDatatypeRuleToken ruleDatatype1() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
         AntlrDatatypeRuleToken this_FQN_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalFormatterTestLanguage.g:1229:28: (this_FQN_0= ruleFQN )
-            // InternalFormatterTestLanguage.g:1231:5: this_FQN_0= ruleFQN
+            // InternalFormatterTestLanguage.g:1204:2: (this_FQN_0= ruleFQN )
+            // InternalFormatterTestLanguage.g:1205:2: this_FQN_0= ruleFQN
             {
-             
-                    newCompositeNode(grammarAccess.getDatatype1Access().getFQNParserRuleCall()); 
-                
+
+            		newCompositeNode(grammarAccess.getDatatype1Access().getFQNParserRuleCall());
+            	
             pushFollow(FollowSets000.FOLLOW_2);
             this_FQN_0=ruleFQN();
 
@@ -3069,20 +3125,22 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
             		current.merge(this_FQN_0);
-                
-             
-                    afterParserOrEnumRuleCall();
-                
+            	
+
+            		afterParserOrEnumRuleCall();
+            	
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -3091,7 +3149,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleDatatype2"
-    // InternalFormatterTestLanguage.g:1249:1: entryRuleDatatype2 returns [String current=null] : iv_ruleDatatype2= ruleDatatype2 EOF ;
+    // InternalFormatterTestLanguage.g:1218:1: entryRuleDatatype2 returns [String current=null] : iv_ruleDatatype2= ruleDatatype2 EOF ;
     public final String entryRuleDatatype2() throws RecognitionException {
         String current = null;
 
@@ -3099,8 +3157,8 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // InternalFormatterTestLanguage.g:1250:2: (iv_ruleDatatype2= ruleDatatype2 EOF )
-            // InternalFormatterTestLanguage.g:1251:2: iv_ruleDatatype2= ruleDatatype2 EOF
+            // InternalFormatterTestLanguage.g:1218:49: (iv_ruleDatatype2= ruleDatatype2 EOF )
+            // InternalFormatterTestLanguage.g:1219:2: iv_ruleDatatype2= ruleDatatype2 EOF
             {
              newCompositeNode(grammarAccess.getDatatype2Rule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -3114,11 +3172,11 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -3127,22 +3185,23 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleDatatype2"
-    // InternalFormatterTestLanguage.g:1258:1: ruleDatatype2 returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : this_FQN_0= ruleFQN ;
+    // InternalFormatterTestLanguage.g:1225:1: ruleDatatype2 returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : this_FQN_0= ruleFQN ;
     public final AntlrDatatypeRuleToken ruleDatatype2() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
         AntlrDatatypeRuleToken this_FQN_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalFormatterTestLanguage.g:1261:28: (this_FQN_0= ruleFQN )
-            // InternalFormatterTestLanguage.g:1263:5: this_FQN_0= ruleFQN
+            // InternalFormatterTestLanguage.g:1231:2: (this_FQN_0= ruleFQN )
+            // InternalFormatterTestLanguage.g:1232:2: this_FQN_0= ruleFQN
             {
-             
-                    newCompositeNode(grammarAccess.getDatatype2Access().getFQNParserRuleCall()); 
-                
+
+            		newCompositeNode(grammarAccess.getDatatype2Access().getFQNParserRuleCall());
+            	
             pushFollow(FollowSets000.FOLLOW_2);
             this_FQN_0=ruleFQN();
 
@@ -3150,20 +3209,22 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
             		current.merge(this_FQN_0);
-                
-             
-                    afterParserOrEnumRuleCall();
-                
+            	
+
+            		afterParserOrEnumRuleCall();
+            	
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -3172,7 +3233,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleDatatype3"
-    // InternalFormatterTestLanguage.g:1281:1: entryRuleDatatype3 returns [String current=null] : iv_ruleDatatype3= ruleDatatype3 EOF ;
+    // InternalFormatterTestLanguage.g:1245:1: entryRuleDatatype3 returns [String current=null] : iv_ruleDatatype3= ruleDatatype3 EOF ;
     public final String entryRuleDatatype3() throws RecognitionException {
         String current = null;
 
@@ -3180,8 +3241,8 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // InternalFormatterTestLanguage.g:1282:2: (iv_ruleDatatype3= ruleDatatype3 EOF )
-            // InternalFormatterTestLanguage.g:1283:2: iv_ruleDatatype3= ruleDatatype3 EOF
+            // InternalFormatterTestLanguage.g:1245:49: (iv_ruleDatatype3= ruleDatatype3 EOF )
+            // InternalFormatterTestLanguage.g:1246:2: iv_ruleDatatype3= ruleDatatype3 EOF
             {
              newCompositeNode(grammarAccess.getDatatype3Rule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -3195,11 +3256,11 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -3208,22 +3269,23 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleDatatype3"
-    // InternalFormatterTestLanguage.g:1290:1: ruleDatatype3 returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : this_FQN_0= ruleFQN ;
+    // InternalFormatterTestLanguage.g:1252:1: ruleDatatype3 returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : this_FQN_0= ruleFQN ;
     public final AntlrDatatypeRuleToken ruleDatatype3() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
         AntlrDatatypeRuleToken this_FQN_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalFormatterTestLanguage.g:1293:28: (this_FQN_0= ruleFQN )
-            // InternalFormatterTestLanguage.g:1295:5: this_FQN_0= ruleFQN
+            // InternalFormatterTestLanguage.g:1258:2: (this_FQN_0= ruleFQN )
+            // InternalFormatterTestLanguage.g:1259:2: this_FQN_0= ruleFQN
             {
-             
-                    newCompositeNode(grammarAccess.getDatatype3Access().getFQNParserRuleCall()); 
-                
+
+            		newCompositeNode(grammarAccess.getDatatype3Access().getFQNParserRuleCall());
+            	
             pushFollow(FollowSets000.FOLLOW_2);
             this_FQN_0=ruleFQN();
 
@@ -3231,20 +3293,22 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
             		current.merge(this_FQN_0);
-                
-             
-                    afterParserOrEnumRuleCall();
-                
+            	
+
+            		afterParserOrEnumRuleCall();
+            	
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -3253,7 +3317,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleDatatypes"
-    // InternalFormatterTestLanguage.g:1313:1: entryRuleDatatypes returns [EObject current=null] : iv_ruleDatatypes= ruleDatatypes EOF ;
+    // InternalFormatterTestLanguage.g:1272:1: entryRuleDatatypes returns [EObject current=null] : iv_ruleDatatypes= ruleDatatypes EOF ;
     public final EObject entryRuleDatatypes() throws RecognitionException {
         EObject current = null;
 
@@ -3261,8 +3325,8 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // InternalFormatterTestLanguage.g:1314:2: (iv_ruleDatatypes= ruleDatatypes EOF )
-            // InternalFormatterTestLanguage.g:1315:2: iv_ruleDatatypes= ruleDatatypes EOF
+            // InternalFormatterTestLanguage.g:1272:50: (iv_ruleDatatypes= ruleDatatypes EOF )
+            // InternalFormatterTestLanguage.g:1273:2: iv_ruleDatatypes= ruleDatatypes EOF
             {
              newCompositeNode(grammarAccess.getDatatypesRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -3276,11 +3340,11 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -3289,7 +3353,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleDatatypes"
-    // InternalFormatterTestLanguage.g:1322:1: ruleDatatypes returns [EObject current=null] : (otherlv_0= 'datatypes' ( (lv_val1_1_0= ruleDatatype1 ) ) otherlv_2= 'kw1' ( (lv_val2_3_0= ruleDatatype2 ) ) ( (lv_val3_4_0= ruleDatatype3 ) ) otherlv_5= 'kw3' ) ;
+    // InternalFormatterTestLanguage.g:1279:1: ruleDatatypes returns [EObject current=null] : (otherlv_0= 'datatypes' ( (lv_val1_1_0= ruleDatatype1 ) ) otherlv_2= 'kw1' ( (lv_val2_3_0= ruleDatatype2 ) ) ( (lv_val3_4_0= ruleDatatype3 ) ) otherlv_5= 'kw3' ) ;
     public final EObject ruleDatatypes() throws RecognitionException {
         EObject current = null;
 
@@ -3303,44 +3367,45 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
         AntlrDatatypeRuleToken lv_val3_4_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalFormatterTestLanguage.g:1325:28: ( (otherlv_0= 'datatypes' ( (lv_val1_1_0= ruleDatatype1 ) ) otherlv_2= 'kw1' ( (lv_val2_3_0= ruleDatatype2 ) ) ( (lv_val3_4_0= ruleDatatype3 ) ) otherlv_5= 'kw3' ) )
-            // InternalFormatterTestLanguage.g:1326:1: (otherlv_0= 'datatypes' ( (lv_val1_1_0= ruleDatatype1 ) ) otherlv_2= 'kw1' ( (lv_val2_3_0= ruleDatatype2 ) ) ( (lv_val3_4_0= ruleDatatype3 ) ) otherlv_5= 'kw3' )
+            // InternalFormatterTestLanguage.g:1285:2: ( (otherlv_0= 'datatypes' ( (lv_val1_1_0= ruleDatatype1 ) ) otherlv_2= 'kw1' ( (lv_val2_3_0= ruleDatatype2 ) ) ( (lv_val3_4_0= ruleDatatype3 ) ) otherlv_5= 'kw3' ) )
+            // InternalFormatterTestLanguage.g:1286:2: (otherlv_0= 'datatypes' ( (lv_val1_1_0= ruleDatatype1 ) ) otherlv_2= 'kw1' ( (lv_val2_3_0= ruleDatatype2 ) ) ( (lv_val3_4_0= ruleDatatype3 ) ) otherlv_5= 'kw3' )
             {
-            // InternalFormatterTestLanguage.g:1326:1: (otherlv_0= 'datatypes' ( (lv_val1_1_0= ruleDatatype1 ) ) otherlv_2= 'kw1' ( (lv_val2_3_0= ruleDatatype2 ) ) ( (lv_val3_4_0= ruleDatatype3 ) ) otherlv_5= 'kw3' )
-            // InternalFormatterTestLanguage.g:1326:3: otherlv_0= 'datatypes' ( (lv_val1_1_0= ruleDatatype1 ) ) otherlv_2= 'kw1' ( (lv_val2_3_0= ruleDatatype2 ) ) ( (lv_val3_4_0= ruleDatatype3 ) ) otherlv_5= 'kw3'
+            // InternalFormatterTestLanguage.g:1286:2: (otherlv_0= 'datatypes' ( (lv_val1_1_0= ruleDatatype1 ) ) otherlv_2= 'kw1' ( (lv_val2_3_0= ruleDatatype2 ) ) ( (lv_val3_4_0= ruleDatatype3 ) ) otherlv_5= 'kw3' )
+            // InternalFormatterTestLanguage.g:1287:3: otherlv_0= 'datatypes' ( (lv_val1_1_0= ruleDatatype1 ) ) otherlv_2= 'kw1' ( (lv_val2_3_0= ruleDatatype2 ) ) ( (lv_val3_4_0= ruleDatatype3 ) ) otherlv_5= 'kw3'
             {
             otherlv_0=(Token)match(input,37,FollowSets000.FOLLOW_6); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getDatatypesAccess().getDatatypesKeyword_0());
-                
-            // InternalFormatterTestLanguage.g:1330:1: ( (lv_val1_1_0= ruleDatatype1 ) )
-            // InternalFormatterTestLanguage.g:1331:1: (lv_val1_1_0= ruleDatatype1 )
+            			newLeafNode(otherlv_0, grammarAccess.getDatatypesAccess().getDatatypesKeyword_0());
+            		
+            // InternalFormatterTestLanguage.g:1291:3: ( (lv_val1_1_0= ruleDatatype1 ) )
+            // InternalFormatterTestLanguage.g:1292:4: (lv_val1_1_0= ruleDatatype1 )
             {
-            // InternalFormatterTestLanguage.g:1331:1: (lv_val1_1_0= ruleDatatype1 )
-            // InternalFormatterTestLanguage.g:1332:3: lv_val1_1_0= ruleDatatype1
+            // InternalFormatterTestLanguage.g:1292:4: (lv_val1_1_0= ruleDatatype1 )
+            // InternalFormatterTestLanguage.g:1293:5: lv_val1_1_0= ruleDatatype1
             {
-             
-            	        newCompositeNode(grammarAccess.getDatatypesAccess().getVal1Datatype1ParserRuleCall_1_0()); 
-            	    
+
+            					newCompositeNode(grammarAccess.getDatatypesAccess().getVal1Datatype1ParserRuleCall_1_0());
+            				
             pushFollow(FollowSets000.FOLLOW_28);
             lv_val1_1_0=ruleDatatype1();
 
             state._fsp--;
 
 
-            	        if (current==null) {
-            	            current = createModelElementForParent(grammarAccess.getDatatypesRule());
-            	        }
-                   		set(
-                   			current, 
-                   			"val1",
-                    		lv_val1_1_0, 
-                    		"org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.Datatype1");
-            	        afterParserOrEnumRuleCall();
-            	    
+            					if (current==null) {
+            						current = createModelElementForParent(grammarAccess.getDatatypesRule());
+            					}
+            					set(
+            						current,
+            						"val1",
+            						lv_val1_1_0,
+            						"org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.Datatype1");
+            					afterParserOrEnumRuleCall();
+            				
 
             }
 
@@ -3349,64 +3414,64 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
             otherlv_2=(Token)match(input,38,FollowSets000.FOLLOW_6); 
 
-                	newLeafNode(otherlv_2, grammarAccess.getDatatypesAccess().getKw1Keyword_2());
-                
-            // InternalFormatterTestLanguage.g:1352:1: ( (lv_val2_3_0= ruleDatatype2 ) )
-            // InternalFormatterTestLanguage.g:1353:1: (lv_val2_3_0= ruleDatatype2 )
+            			newLeafNode(otherlv_2, grammarAccess.getDatatypesAccess().getKw1Keyword_2());
+            		
+            // InternalFormatterTestLanguage.g:1314:3: ( (lv_val2_3_0= ruleDatatype2 ) )
+            // InternalFormatterTestLanguage.g:1315:4: (lv_val2_3_0= ruleDatatype2 )
             {
-            // InternalFormatterTestLanguage.g:1353:1: (lv_val2_3_0= ruleDatatype2 )
-            // InternalFormatterTestLanguage.g:1354:3: lv_val2_3_0= ruleDatatype2
+            // InternalFormatterTestLanguage.g:1315:4: (lv_val2_3_0= ruleDatatype2 )
+            // InternalFormatterTestLanguage.g:1316:5: lv_val2_3_0= ruleDatatype2
             {
-             
-            	        newCompositeNode(grammarAccess.getDatatypesAccess().getVal2Datatype2ParserRuleCall_3_0()); 
-            	    
+
+            					newCompositeNode(grammarAccess.getDatatypesAccess().getVal2Datatype2ParserRuleCall_3_0());
+            				
             pushFollow(FollowSets000.FOLLOW_6);
             lv_val2_3_0=ruleDatatype2();
 
             state._fsp--;
 
 
-            	        if (current==null) {
-            	            current = createModelElementForParent(grammarAccess.getDatatypesRule());
-            	        }
-                   		set(
-                   			current, 
-                   			"val2",
-                    		lv_val2_3_0, 
-                    		"org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.Datatype2");
-            	        afterParserOrEnumRuleCall();
-            	    
+            					if (current==null) {
+            						current = createModelElementForParent(grammarAccess.getDatatypesRule());
+            					}
+            					set(
+            						current,
+            						"val2",
+            						lv_val2_3_0,
+            						"org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.Datatype2");
+            					afterParserOrEnumRuleCall();
+            				
 
             }
 
 
             }
 
-            // InternalFormatterTestLanguage.g:1370:2: ( (lv_val3_4_0= ruleDatatype3 ) )
-            // InternalFormatterTestLanguage.g:1371:1: (lv_val3_4_0= ruleDatatype3 )
+            // InternalFormatterTestLanguage.g:1333:3: ( (lv_val3_4_0= ruleDatatype3 ) )
+            // InternalFormatterTestLanguage.g:1334:4: (lv_val3_4_0= ruleDatatype3 )
             {
-            // InternalFormatterTestLanguage.g:1371:1: (lv_val3_4_0= ruleDatatype3 )
-            // InternalFormatterTestLanguage.g:1372:3: lv_val3_4_0= ruleDatatype3
+            // InternalFormatterTestLanguage.g:1334:4: (lv_val3_4_0= ruleDatatype3 )
+            // InternalFormatterTestLanguage.g:1335:5: lv_val3_4_0= ruleDatatype3
             {
-             
-            	        newCompositeNode(grammarAccess.getDatatypesAccess().getVal3Datatype3ParserRuleCall_4_0()); 
-            	    
+
+            					newCompositeNode(grammarAccess.getDatatypesAccess().getVal3Datatype3ParserRuleCall_4_0());
+            				
             pushFollow(FollowSets000.FOLLOW_29);
             lv_val3_4_0=ruleDatatype3();
 
             state._fsp--;
 
 
-            	        if (current==null) {
-            	            current = createModelElementForParent(grammarAccess.getDatatypesRule());
-            	        }
-                   		set(
-                   			current, 
-                   			"val3",
-                    		lv_val3_4_0, 
-                    		"org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.Datatype3");
-            	        afterParserOrEnumRuleCall();
-            	    
+            					if (current==null) {
+            						current = createModelElementForParent(grammarAccess.getDatatypesRule());
+            					}
+            					set(
+            						current,
+            						"val3",
+            						lv_val3_4_0,
+            						"org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.Datatype3");
+            					afterParserOrEnumRuleCall();
+            				
 
             }
 
@@ -3415,21 +3480,23 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
             otherlv_5=(Token)match(input,39,FollowSets000.FOLLOW_2); 
 
-                	newLeafNode(otherlv_5, grammarAccess.getDatatypesAccess().getKw3Keyword_5());
-                
+            			newLeafNode(otherlv_5, grammarAccess.getDatatypesAccess().getKw3Keyword_5());
+            		
 
             }
 
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -3438,7 +3505,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleWrappingDataTypeTest"
-    // InternalFormatterTestLanguage.g:1400:1: entryRuleWrappingDataTypeTest returns [EObject current=null] : iv_ruleWrappingDataTypeTest= ruleWrappingDataTypeTest EOF ;
+    // InternalFormatterTestLanguage.g:1360:1: entryRuleWrappingDataTypeTest returns [EObject current=null] : iv_ruleWrappingDataTypeTest= ruleWrappingDataTypeTest EOF ;
     public final EObject entryRuleWrappingDataTypeTest() throws RecognitionException {
         EObject current = null;
 
@@ -3446,8 +3513,8 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // InternalFormatterTestLanguage.g:1401:2: (iv_ruleWrappingDataTypeTest= ruleWrappingDataTypeTest EOF )
-            // InternalFormatterTestLanguage.g:1402:2: iv_ruleWrappingDataTypeTest= ruleWrappingDataTypeTest EOF
+            // InternalFormatterTestLanguage.g:1360:61: (iv_ruleWrappingDataTypeTest= ruleWrappingDataTypeTest EOF )
+            // InternalFormatterTestLanguage.g:1361:2: iv_ruleWrappingDataTypeTest= ruleWrappingDataTypeTest EOF
             {
              newCompositeNode(grammarAccess.getWrappingDataTypeTestRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -3461,11 +3528,11 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -3474,7 +3541,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleWrappingDataTypeTest"
-    // InternalFormatterTestLanguage.g:1409:1: ruleWrappingDataTypeTest returns [EObject current=null] : (otherlv_0= 'wrappingdt' ( (lv_datatype_1_0= ruleWrappingDataType ) ) otherlv_2= 'kw1' ) ;
+    // InternalFormatterTestLanguage.g:1367:1: ruleWrappingDataTypeTest returns [EObject current=null] : (otherlv_0= 'wrappingdt' ( (lv_datatype_1_0= ruleWrappingDataType ) ) otherlv_2= 'kw1' ) ;
     public final EObject ruleWrappingDataTypeTest() throws RecognitionException {
         EObject current = null;
 
@@ -3483,44 +3550,45 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
         AntlrDatatypeRuleToken lv_datatype_1_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalFormatterTestLanguage.g:1412:28: ( (otherlv_0= 'wrappingdt' ( (lv_datatype_1_0= ruleWrappingDataType ) ) otherlv_2= 'kw1' ) )
-            // InternalFormatterTestLanguage.g:1413:1: (otherlv_0= 'wrappingdt' ( (lv_datatype_1_0= ruleWrappingDataType ) ) otherlv_2= 'kw1' )
+            // InternalFormatterTestLanguage.g:1373:2: ( (otherlv_0= 'wrappingdt' ( (lv_datatype_1_0= ruleWrappingDataType ) ) otherlv_2= 'kw1' ) )
+            // InternalFormatterTestLanguage.g:1374:2: (otherlv_0= 'wrappingdt' ( (lv_datatype_1_0= ruleWrappingDataType ) ) otherlv_2= 'kw1' )
             {
-            // InternalFormatterTestLanguage.g:1413:1: (otherlv_0= 'wrappingdt' ( (lv_datatype_1_0= ruleWrappingDataType ) ) otherlv_2= 'kw1' )
-            // InternalFormatterTestLanguage.g:1413:3: otherlv_0= 'wrappingdt' ( (lv_datatype_1_0= ruleWrappingDataType ) ) otherlv_2= 'kw1'
+            // InternalFormatterTestLanguage.g:1374:2: (otherlv_0= 'wrappingdt' ( (lv_datatype_1_0= ruleWrappingDataType ) ) otherlv_2= 'kw1' )
+            // InternalFormatterTestLanguage.g:1375:3: otherlv_0= 'wrappingdt' ( (lv_datatype_1_0= ruleWrappingDataType ) ) otherlv_2= 'kw1'
             {
             otherlv_0=(Token)match(input,40,FollowSets000.FOLLOW_6); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getWrappingDataTypeTestAccess().getWrappingdtKeyword_0());
-                
-            // InternalFormatterTestLanguage.g:1417:1: ( (lv_datatype_1_0= ruleWrappingDataType ) )
-            // InternalFormatterTestLanguage.g:1418:1: (lv_datatype_1_0= ruleWrappingDataType )
+            			newLeafNode(otherlv_0, grammarAccess.getWrappingDataTypeTestAccess().getWrappingdtKeyword_0());
+            		
+            // InternalFormatterTestLanguage.g:1379:3: ( (lv_datatype_1_0= ruleWrappingDataType ) )
+            // InternalFormatterTestLanguage.g:1380:4: (lv_datatype_1_0= ruleWrappingDataType )
             {
-            // InternalFormatterTestLanguage.g:1418:1: (lv_datatype_1_0= ruleWrappingDataType )
-            // InternalFormatterTestLanguage.g:1419:3: lv_datatype_1_0= ruleWrappingDataType
+            // InternalFormatterTestLanguage.g:1380:4: (lv_datatype_1_0= ruleWrappingDataType )
+            // InternalFormatterTestLanguage.g:1381:5: lv_datatype_1_0= ruleWrappingDataType
             {
-             
-            	        newCompositeNode(grammarAccess.getWrappingDataTypeTestAccess().getDatatypeWrappingDataTypeParserRuleCall_1_0()); 
-            	    
+
+            					newCompositeNode(grammarAccess.getWrappingDataTypeTestAccess().getDatatypeWrappingDataTypeParserRuleCall_1_0());
+            				
             pushFollow(FollowSets000.FOLLOW_28);
             lv_datatype_1_0=ruleWrappingDataType();
 
             state._fsp--;
 
 
-            	        if (current==null) {
-            	            current = createModelElementForParent(grammarAccess.getWrappingDataTypeTestRule());
-            	        }
-                   		set(
-                   			current, 
-                   			"datatype",
-                    		lv_datatype_1_0, 
-                    		"org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.WrappingDataType");
-            	        afterParserOrEnumRuleCall();
-            	    
+            					if (current==null) {
+            						current = createModelElementForParent(grammarAccess.getWrappingDataTypeTestRule());
+            					}
+            					set(
+            						current,
+            						"datatype",
+            						lv_datatype_1_0,
+            						"org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.WrappingDataType");
+            					afterParserOrEnumRuleCall();
+            				
 
             }
 
@@ -3529,21 +3597,23 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
             otherlv_2=(Token)match(input,38,FollowSets000.FOLLOW_2); 
 
-                	newLeafNode(otherlv_2, grammarAccess.getWrappingDataTypeTestAccess().getKw1Keyword_2());
-                
+            			newLeafNode(otherlv_2, grammarAccess.getWrappingDataTypeTestAccess().getKw1Keyword_2());
+            		
 
             }
 
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -3552,7 +3622,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleWrappingDataType"
-    // InternalFormatterTestLanguage.g:1447:1: entryRuleWrappingDataType returns [String current=null] : iv_ruleWrappingDataType= ruleWrappingDataType EOF ;
+    // InternalFormatterTestLanguage.g:1406:1: entryRuleWrappingDataType returns [String current=null] : iv_ruleWrappingDataType= ruleWrappingDataType EOF ;
     public final String entryRuleWrappingDataType() throws RecognitionException {
         String current = null;
 
@@ -3560,8 +3630,8 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // InternalFormatterTestLanguage.g:1448:2: (iv_ruleWrappingDataType= ruleWrappingDataType EOF )
-            // InternalFormatterTestLanguage.g:1449:2: iv_ruleWrappingDataType= ruleWrappingDataType EOF
+            // InternalFormatterTestLanguage.g:1406:56: (iv_ruleWrappingDataType= ruleWrappingDataType EOF )
+            // InternalFormatterTestLanguage.g:1407:2: iv_ruleWrappingDataType= ruleWrappingDataType EOF
             {
              newCompositeNode(grammarAccess.getWrappingDataTypeRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -3575,11 +3645,11 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -3588,19 +3658,20 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleWrappingDataType"
-    // InternalFormatterTestLanguage.g:1456:1: ruleWrappingDataType returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ID_0= RULE_ID )+ ;
+    // InternalFormatterTestLanguage.g:1413:1: ruleWrappingDataType returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ID_0= RULE_ID )+ ;
     public final AntlrDatatypeRuleToken ruleWrappingDataType() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
         Token this_ID_0=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalFormatterTestLanguage.g:1459:28: ( (this_ID_0= RULE_ID )+ )
-            // InternalFormatterTestLanguage.g:1460:1: (this_ID_0= RULE_ID )+
+            // InternalFormatterTestLanguage.g:1419:2: ( (this_ID_0= RULE_ID )+ )
+            // InternalFormatterTestLanguage.g:1420:2: (this_ID_0= RULE_ID )+
             {
-            // InternalFormatterTestLanguage.g:1460:1: (this_ID_0= RULE_ID )+
+            // InternalFormatterTestLanguage.g:1420:2: (this_ID_0= RULE_ID )+
             int cnt19=0;
             loop19:
             do {
@@ -3614,15 +3685,15 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
                 switch (alt19) {
             	case 1 :
-            	    // InternalFormatterTestLanguage.g:1460:6: this_ID_0= RULE_ID
+            	    // InternalFormatterTestLanguage.g:1421:3: this_ID_0= RULE_ID
             	    {
             	    this_ID_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_30); 
 
-            	    		current.merge(this_ID_0);
-            	        
-            	     
-            	        newLeafNode(this_ID_0, grammarAccess.getWrappingDataTypeAccess().getIDTerminalRuleCall()); 
-            	        
+            	    			current.merge(this_ID_0);
+            	    		
+
+            	    			newLeafNode(this_ID_0, grammarAccess.getWrappingDataTypeAccess().getIDTerminalRuleCall());
+            	    		
 
             	    }
             	    break;
@@ -3639,13 +3710,15 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -3654,7 +3727,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleEnum1"
-    // InternalFormatterTestLanguage.g:1475:1: ruleEnum1 returns [Enumerator current=null] : ( (enumLiteral_0= 'lit1' ) | (enumLiteral_1= 'lit2' ) | (enumLiteral_2= 'lit3' ) ) ;
+    // InternalFormatterTestLanguage.g:1432:1: ruleEnum1 returns [Enumerator current=null] : ( (enumLiteral_0= 'lit1' ) | (enumLiteral_1= 'lit2' ) | (enumLiteral_2= 'lit3' ) ) ;
     public final Enumerator ruleEnum1() throws RecognitionException {
         Enumerator current = null;
 
@@ -3662,12 +3735,14 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
         Token enumLiteral_1=null;
         Token enumLiteral_2=null;
 
-         enterRule(); 
+
+        	enterRule();
+
         try {
-            // InternalFormatterTestLanguage.g:1477:28: ( ( (enumLiteral_0= 'lit1' ) | (enumLiteral_1= 'lit2' ) | (enumLiteral_2= 'lit3' ) ) )
-            // InternalFormatterTestLanguage.g:1478:1: ( (enumLiteral_0= 'lit1' ) | (enumLiteral_1= 'lit2' ) | (enumLiteral_2= 'lit3' ) )
+            // InternalFormatterTestLanguage.g:1438:2: ( ( (enumLiteral_0= 'lit1' ) | (enumLiteral_1= 'lit2' ) | (enumLiteral_2= 'lit3' ) ) )
+            // InternalFormatterTestLanguage.g:1439:2: ( (enumLiteral_0= 'lit1' ) | (enumLiteral_1= 'lit2' ) | (enumLiteral_2= 'lit3' ) )
             {
-            // InternalFormatterTestLanguage.g:1478:1: ( (enumLiteral_0= 'lit1' ) | (enumLiteral_1= 'lit2' ) | (enumLiteral_2= 'lit3' ) )
+            // InternalFormatterTestLanguage.g:1439:2: ( (enumLiteral_0= 'lit1' ) | (enumLiteral_1= 'lit2' ) | (enumLiteral_2= 'lit3' ) )
             int alt20=3;
             switch ( input.LA(1) ) {
             case 41:
@@ -3694,16 +3769,16 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
             switch (alt20) {
                 case 1 :
-                    // InternalFormatterTestLanguage.g:1478:2: (enumLiteral_0= 'lit1' )
+                    // InternalFormatterTestLanguage.g:1440:3: (enumLiteral_0= 'lit1' )
                     {
-                    // InternalFormatterTestLanguage.g:1478:2: (enumLiteral_0= 'lit1' )
-                    // InternalFormatterTestLanguage.g:1478:4: enumLiteral_0= 'lit1'
+                    // InternalFormatterTestLanguage.g:1440:3: (enumLiteral_0= 'lit1' )
+                    // InternalFormatterTestLanguage.g:1441:4: enumLiteral_0= 'lit1'
                     {
                     enumLiteral_0=(Token)match(input,41,FollowSets000.FOLLOW_2); 
 
-                            current = grammarAccess.getEnum1Access().getLit1EnumLiteralDeclaration_0().getEnumLiteral().getInstance();
-                            newLeafNode(enumLiteral_0, grammarAccess.getEnum1Access().getLit1EnumLiteralDeclaration_0()); 
-                        
+                    				current = grammarAccess.getEnum1Access().getLit1EnumLiteralDeclaration_0().getEnumLiteral().getInstance();
+                    				newLeafNode(enumLiteral_0, grammarAccess.getEnum1Access().getLit1EnumLiteralDeclaration_0());
+                    			
 
                     }
 
@@ -3711,16 +3786,16 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
                     }
                     break;
                 case 2 :
-                    // InternalFormatterTestLanguage.g:1484:6: (enumLiteral_1= 'lit2' )
+                    // InternalFormatterTestLanguage.g:1448:3: (enumLiteral_1= 'lit2' )
                     {
-                    // InternalFormatterTestLanguage.g:1484:6: (enumLiteral_1= 'lit2' )
-                    // InternalFormatterTestLanguage.g:1484:8: enumLiteral_1= 'lit2'
+                    // InternalFormatterTestLanguage.g:1448:3: (enumLiteral_1= 'lit2' )
+                    // InternalFormatterTestLanguage.g:1449:4: enumLiteral_1= 'lit2'
                     {
                     enumLiteral_1=(Token)match(input,42,FollowSets000.FOLLOW_2); 
 
-                            current = grammarAccess.getEnum1Access().getLit2EnumLiteralDeclaration_1().getEnumLiteral().getInstance();
-                            newLeafNode(enumLiteral_1, grammarAccess.getEnum1Access().getLit2EnumLiteralDeclaration_1()); 
-                        
+                    				current = grammarAccess.getEnum1Access().getLit2EnumLiteralDeclaration_1().getEnumLiteral().getInstance();
+                    				newLeafNode(enumLiteral_1, grammarAccess.getEnum1Access().getLit2EnumLiteralDeclaration_1());
+                    			
 
                     }
 
@@ -3728,16 +3803,16 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
                     }
                     break;
                 case 3 :
-                    // InternalFormatterTestLanguage.g:1490:6: (enumLiteral_2= 'lit3' )
+                    // InternalFormatterTestLanguage.g:1456:3: (enumLiteral_2= 'lit3' )
                     {
-                    // InternalFormatterTestLanguage.g:1490:6: (enumLiteral_2= 'lit3' )
-                    // InternalFormatterTestLanguage.g:1490:8: enumLiteral_2= 'lit3'
+                    // InternalFormatterTestLanguage.g:1456:3: (enumLiteral_2= 'lit3' )
+                    // InternalFormatterTestLanguage.g:1457:4: enumLiteral_2= 'lit3'
                     {
                     enumLiteral_2=(Token)match(input,43,FollowSets000.FOLLOW_2); 
 
-                            current = grammarAccess.getEnum1Access().getLit3EnumLiteralDeclaration_2().getEnumLiteral().getInstance();
-                            newLeafNode(enumLiteral_2, grammarAccess.getEnum1Access().getLit3EnumLiteralDeclaration_2()); 
-                        
+                    				current = grammarAccess.getEnum1Access().getLit3EnumLiteralDeclaration_2().getEnumLiteral().getInstance();
+                    				newLeafNode(enumLiteral_2, grammarAccess.getEnum1Access().getLit3EnumLiteralDeclaration_2());
+                    			
 
                     }
 
@@ -3750,13 +3825,15 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -3807,7 +3884,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
             this.transition = dfa_6;
         }
         public String getDescription() {
-            return "145:2: (this_Decl_0= ruleDecl | this_Assign_1= ruleAssign | this_Meth_2= ruleMeth | this_FqnObj_3= ruleFqnObj | this_FqnRef_4= ruleFqnRef | this_Enumeration_5= ruleEnumeration | (this_SuppressedHidden_6= ruleSuppressedHidden otherlv_7= 'post' ) | this_Space_8= ruleSpace | this_Datatypes_9= ruleDatatypes )";
+            return "140:3: (this_Decl_0= ruleDecl | this_Assign_1= ruleAssign | this_Meth_2= ruleMeth | this_FqnObj_3= ruleFqnObj | this_FqnRef_4= ruleFqnRef | this_Enumeration_5= ruleEnumeration | (this_SuppressedHidden_6= ruleSuppressedHidden otherlv_7= 'post' ) | this_Space_8= ruleSpace | this_Datatypes_9= ruleDatatypes )";
         }
     }
  

@@ -29,7 +29,6 @@ import org.eclipse.xtext.nodemodel.impl.InvariantChecker;
 import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
-import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
@@ -147,10 +146,6 @@ public abstract class AbstractXtextTests extends Assert implements ResourceLoadH
 
 	protected IGrammarAccess getGrammarAccess() {
 		return getInjector().getInstance(IGrammarAccess.class);
-	}
-
-	protected IParseTreeConstructor getParseTreeConstructor() {
-		return getInjector().getInstance(IParseTreeConstructor.class);
 	}
 
 	protected IResourceFactory getResourceFactory()  {
