@@ -3,7 +3,6 @@ package org.eclipse.xtext.java.resource;
 import com.google.inject.ConfigurationException;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
-import java.util.Set;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.resource.FileExtensionProvider;
@@ -23,9 +22,7 @@ public class JavaResourceServiceProvider implements IResourceServiceProvider {
   
   @Override
   public boolean canHandle(final URI uri) {
-    Set<String> _fileExtensions = this.extensionProvider.getFileExtensions();
-    String _fileExtension = uri.fileExtension();
-    return _fileExtensions.contains(_fileExtension);
+    return (this.extensionProvider.getFileExtensions().contains(uri.fileExtension()) && (!uri.isArchive()));
   }
   
   @Override

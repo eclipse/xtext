@@ -16,7 +16,7 @@ class JavaResourceServiceProvider implements IResourceServiceProvider {
 	@Inject FileExtensionProvider extensionProvider
 	
 	override canHandle(URI uri) {
-		return extensionProvider.fileExtensions.contains(uri.fileExtension)
+		return extensionProvider.fileExtensions.contains(uri.fileExtension) && !uri.archive
 	}
 	
 	override <T> get(Class<T> t) {
