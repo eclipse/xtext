@@ -3,19 +3,20 @@
  */
 package org.eclipse.xtext.parser.encoding.services;
 
-import com.google.inject.Singleton;
 import com.google.inject.Inject;
-
+import com.google.inject.Singleton;
 import java.util.List;
-
-import org.eclipse.xtext.*;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TerminalRule;
+import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder;
 import org.eclipse.xtext.service.GrammarProvider;
-import org.eclipse.xtext.service.AbstractElementFinder.*;
-
 
 @Singleton
 public class EncodingTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
-	
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.encoding.EncodingTestLanguage.Model");
@@ -25,14 +26,13 @@ public class EncodingTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		//Model:
 		//	words+=Word*;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//words+=Word*
 		public Assignment getWordsAssignment() { return cWordsAssignment; }
-
+		
 		//Word
 		public RuleCall getWordsWordParserRuleCall_0() { return cWordsWordParserRuleCall_0; }
 	}
-
 	public class WordElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.encoding.EncodingTestLanguage.Word");
 		private final Assignment cValueAssignment = (Assignment)rule.eContents().get(1);
@@ -41,10 +41,10 @@ public class EncodingTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		//Word:
 		//	value=LEXEME;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//value=LEXEME
 		public Assignment getValueAssignment() { return cValueAssignment; }
-
+		
 		//LEXEME
 		public RuleCall getValueLEXEMETerminalRuleCall_0() { return cValueLEXEMETerminalRuleCall_0; }
 	}
@@ -100,7 +100,7 @@ public class EncodingTestLanguageGrammarAccess extends AbstractGrammarElementFin
 	public ParserRule getModelRule() {
 		return getModelAccess().getRule();
 	}
-
+	
 	//Word:
 	//	value=LEXEME;
 	public WordElements getWordAccess() {
@@ -110,22 +110,22 @@ public class EncodingTestLanguageGrammarAccess extends AbstractGrammarElementFin
 	public ParserRule getWordRule() {
 		return getWordAccess().getRule();
 	}
-
+	
 	//terminal LEXEME:
 	//	'a'..'z' | 'A'..'Z' | '0'..'9' | 'ä' | 'ö' | 'ü' | 'ß' | 'Ä' | 'Ö' | 'Ü'*;
 	public TerminalRule getLEXEMERule() {
 		return tLEXEME;
-	} 
-
+	}
+	
 	//terminal WS:
 	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return tWS;
-	} 
-
+	}
+	
 	//terminal ANY_OTHER:
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return tANY_OTHER;
-	} 
+	}
 }

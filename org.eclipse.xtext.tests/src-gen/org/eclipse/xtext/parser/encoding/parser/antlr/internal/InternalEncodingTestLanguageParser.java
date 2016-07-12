@@ -1,4 +1,4 @@
-package org.eclipse.xtext.parser.encoding.parser.antlr.internal; 
+package org.eclipse.xtext.parser.encoding.parser.antlr.internal;
 
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
@@ -47,18 +47,18 @@ public class InternalEncodingTestLanguageParser extends AbstractInternalAntlrPar
 
 
      	private EncodingTestLanguageGrammarAccess grammarAccess;
-     	
+
         public InternalEncodingTestLanguageParser(TokenStream input, EncodingTestLanguageGrammarAccess grammarAccess) {
             this(input);
             this.grammarAccess = grammarAccess;
             registerRules(grammarAccess.getGrammar());
         }
-        
+
         @Override
         protected String getFirstRuleName() {
-        	return "Model";	
+        	return "Model";
        	}
-       	
+
        	@Override
        	protected EncodingTestLanguageGrammarAccess getGrammarAccess() {
        		return grammarAccess;
@@ -66,8 +66,9 @@ public class InternalEncodingTestLanguageParser extends AbstractInternalAntlrPar
 
 
 
+
     // $ANTLR start "entryRuleModel"
-    // InternalEncodingTestLanguage.g:67:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
+    // InternalEncodingTestLanguage.g:64:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
     public final EObject entryRuleModel() throws RecognitionException {
         EObject current = null;
 
@@ -75,8 +76,8 @@ public class InternalEncodingTestLanguageParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalEncodingTestLanguage.g:68:2: (iv_ruleModel= ruleModel EOF )
-            // InternalEncodingTestLanguage.g:69:2: iv_ruleModel= ruleModel EOF
+            // InternalEncodingTestLanguage.g:64:46: (iv_ruleModel= ruleModel EOF )
+            // InternalEncodingTestLanguage.g:65:2: iv_ruleModel= ruleModel EOF
             {
              newCompositeNode(grammarAccess.getModelRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -90,11 +91,11 @@ public class InternalEncodingTestLanguageParser extends AbstractInternalAntlrPar
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -103,20 +104,21 @@ public class InternalEncodingTestLanguageParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleModel"
-    // InternalEncodingTestLanguage.g:76:1: ruleModel returns [EObject current=null] : ( (lv_words_0_0= ruleWord ) )* ;
+    // InternalEncodingTestLanguage.g:71:1: ruleModel returns [EObject current=null] : ( (lv_words_0_0= ruleWord ) )* ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
         EObject lv_words_0_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalEncodingTestLanguage.g:79:28: ( ( (lv_words_0_0= ruleWord ) )* )
-            // InternalEncodingTestLanguage.g:80:1: ( (lv_words_0_0= ruleWord ) )*
+            // InternalEncodingTestLanguage.g:77:2: ( ( (lv_words_0_0= ruleWord ) )* )
+            // InternalEncodingTestLanguage.g:78:2: ( (lv_words_0_0= ruleWord ) )*
             {
-            // InternalEncodingTestLanguage.g:80:1: ( (lv_words_0_0= ruleWord ) )*
+            // InternalEncodingTestLanguage.g:78:2: ( (lv_words_0_0= ruleWord ) )*
             loop1:
             do {
                 int alt1=2;
@@ -129,30 +131,30 @@ public class InternalEncodingTestLanguageParser extends AbstractInternalAntlrPar
 
                 switch (alt1) {
             	case 1 :
-            	    // InternalEncodingTestLanguage.g:81:1: (lv_words_0_0= ruleWord )
+            	    // InternalEncodingTestLanguage.g:79:3: (lv_words_0_0= ruleWord )
             	    {
-            	    // InternalEncodingTestLanguage.g:81:1: (lv_words_0_0= ruleWord )
-            	    // InternalEncodingTestLanguage.g:82:3: lv_words_0_0= ruleWord
+            	    // InternalEncodingTestLanguage.g:79:3: (lv_words_0_0= ruleWord )
+            	    // InternalEncodingTestLanguage.g:80:4: lv_words_0_0= ruleWord
             	    {
-            	     
-            	    	        newCompositeNode(grammarAccess.getModelAccess().getWordsWordParserRuleCall_0()); 
-            	    	    
+
+            	    				newCompositeNode(grammarAccess.getModelAccess().getWordsWordParserRuleCall_0());
+            	    			
             	    pushFollow(FollowSets000.FOLLOW_3);
             	    lv_words_0_0=ruleWord();
 
             	    state._fsp--;
 
 
-            	    	        if (current==null) {
-            	    	            current = createModelElementForParent(grammarAccess.getModelRule());
-            	    	        }
-            	           		add(
-            	           			current, 
-            	           			"words",
-            	            		lv_words_0_0, 
-            	            		"org.eclipse.xtext.parser.encoding.EncodingTestLanguage.Word");
-            	    	        afterParserOrEnumRuleCall();
-            	    	    
+            	    				if (current==null) {
+            	    					current = createModelElementForParent(grammarAccess.getModelRule());
+            	    				}
+            	    				add(
+            	    					current,
+            	    					"words",
+            	    					lv_words_0_0,
+            	    					"org.eclipse.xtext.parser.encoding.EncodingTestLanguage.Word");
+            	    				afterParserOrEnumRuleCall();
+            	    			
 
             	    }
 
@@ -168,13 +170,15 @@ public class InternalEncodingTestLanguageParser extends AbstractInternalAntlrPar
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -183,7 +187,7 @@ public class InternalEncodingTestLanguageParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "entryRuleWord"
-    // InternalEncodingTestLanguage.g:106:1: entryRuleWord returns [EObject current=null] : iv_ruleWord= ruleWord EOF ;
+    // InternalEncodingTestLanguage.g:100:1: entryRuleWord returns [EObject current=null] : iv_ruleWord= ruleWord EOF ;
     public final EObject entryRuleWord() throws RecognitionException {
         EObject current = null;
 
@@ -191,8 +195,8 @@ public class InternalEncodingTestLanguageParser extends AbstractInternalAntlrPar
 
 
         try {
-            // InternalEncodingTestLanguage.g:107:2: (iv_ruleWord= ruleWord EOF )
-            // InternalEncodingTestLanguage.g:108:2: iv_ruleWord= ruleWord EOF
+            // InternalEncodingTestLanguage.g:100:45: (iv_ruleWord= ruleWord EOF )
+            // InternalEncodingTestLanguage.g:101:2: iv_ruleWord= ruleWord EOF
             {
              newCompositeNode(grammarAccess.getWordRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -206,11 +210,11 @@ public class InternalEncodingTestLanguageParser extends AbstractInternalAntlrPar
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -219,54 +223,57 @@ public class InternalEncodingTestLanguageParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleWord"
-    // InternalEncodingTestLanguage.g:115:1: ruleWord returns [EObject current=null] : ( (lv_value_0_0= RULE_LEXEME ) ) ;
+    // InternalEncodingTestLanguage.g:107:1: ruleWord returns [EObject current=null] : ( (lv_value_0_0= RULE_LEXEME ) ) ;
     public final EObject ruleWord() throws RecognitionException {
         EObject current = null;
 
         Token lv_value_0_0=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalEncodingTestLanguage.g:118:28: ( ( (lv_value_0_0= RULE_LEXEME ) ) )
-            // InternalEncodingTestLanguage.g:119:1: ( (lv_value_0_0= RULE_LEXEME ) )
+            // InternalEncodingTestLanguage.g:113:2: ( ( (lv_value_0_0= RULE_LEXEME ) ) )
+            // InternalEncodingTestLanguage.g:114:2: ( (lv_value_0_0= RULE_LEXEME ) )
             {
-            // InternalEncodingTestLanguage.g:119:1: ( (lv_value_0_0= RULE_LEXEME ) )
-            // InternalEncodingTestLanguage.g:120:1: (lv_value_0_0= RULE_LEXEME )
+            // InternalEncodingTestLanguage.g:114:2: ( (lv_value_0_0= RULE_LEXEME ) )
+            // InternalEncodingTestLanguage.g:115:3: (lv_value_0_0= RULE_LEXEME )
             {
-            // InternalEncodingTestLanguage.g:120:1: (lv_value_0_0= RULE_LEXEME )
-            // InternalEncodingTestLanguage.g:121:3: lv_value_0_0= RULE_LEXEME
+            // InternalEncodingTestLanguage.g:115:3: (lv_value_0_0= RULE_LEXEME )
+            // InternalEncodingTestLanguage.g:116:4: lv_value_0_0= RULE_LEXEME
             {
             lv_value_0_0=(Token)match(input,RULE_LEXEME,FollowSets000.FOLLOW_2); 
 
-            			newLeafNode(lv_value_0_0, grammarAccess.getWordAccess().getValueLEXEMETerminalRuleCall_0()); 
-            		
+            				newLeafNode(lv_value_0_0, grammarAccess.getWordAccess().getValueLEXEMETerminalRuleCall_0());
+            			
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getWordRule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"value",
-                    		lv_value_0_0, 
-                    		"org.eclipse.xtext.parser.encoding.EncodingTestLanguage.LEXEME");
-            	    
-
-            }
-
+            				if (current==null) {
+            					current = createModelElement(grammarAccess.getWordRule());
+            				}
+            				setWithLastConsumed(
+            					current,
+            					"value",
+            					lv_value_0_0,
+            					"org.eclipse.xtext.parser.encoding.EncodingTestLanguage.LEXEME");
+            			
 
             }
 
 
             }
 
-             leaveRule(); 
+
+            }
+
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;

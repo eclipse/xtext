@@ -35,6 +35,7 @@ Workflow {
 				rootPath = ".."
 			}
 			code = {
+				encoding = 'ISO-8859-1'
 				lineDelimiter = lineDelimiter
 				preferXtendStubs = false
 			}

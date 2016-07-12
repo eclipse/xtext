@@ -15,7 +15,6 @@ import org.eclipse.xtext.xtext.generator.*
 var projectName = "org.eclipse.xtext.tests"
 var runtimeProject = "../${projectName}"
 var lineDelimiter = '\n'
-var encoding = 'ISO-8859-1'
 
 Workflow {
 	bean = StandaloneSetup {
@@ -52,8 +51,8 @@ Workflow {
 				rootPath = ".."
 			}
 			code = {
+				encoding = 'ISO-8859-1'
 				lineDelimiter = lineDelimiter
-				encoding = encoding
 				preferXtendStubs = false
 			}
 		}
