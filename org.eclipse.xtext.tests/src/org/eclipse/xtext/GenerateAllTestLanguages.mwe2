@@ -96,7 +96,7 @@ Workflow {
 		}
 		language = { 
 			grammarUri = "classpath:/org/eclipse/xtext/lexer/BacktrackingLexerTestLanguage.xtext"
-			fragment = @TestLanguagesFragmentsEx {
+			fragment = @TestLanguagesFragments {
 				backtrack = true
 				backtrackLexer = true
 				memoize = true
@@ -104,7 +104,7 @@ Workflow {
 		}
 		language = { 
 			grammarUri = "classpath:/org/eclipse/xtext/lexer/IgnoreCaseLexerTestLanguage.xtext"
-			fragment = @TestLanguagesFragmentsEx {
+			fragment = @TestLanguagesFragments {
 				ignoreCase = true
 			}
 		}
@@ -259,7 +259,7 @@ Workflow {
 		}
 		language = { 
 			grammarUri = "classpath:/org/eclipse/xtext/parser/antlr/Bug289524ExTestLanguage.xtext"
-			fragment = @TestLanguagesFragmentsEx {
+			fragment = @TestLanguagesFragments {
 				backtrack = true
 			}
 		}
@@ -271,13 +271,13 @@ Workflow {
 		}
 		language = { 
 			grammarUri = "classpath:/org/eclipse/xtext/parser/antlr/Bug296889ExTestLanguage.xtext"
-			fragment = @TestLanguagesFragmentsEx {
+			fragment = @TestLanguagesFragments {
 				backtrack = true
 			}
 		}
 		language = { 
 			grammarUri = "classpath:/org/eclipse/xtext/parser/antlr/Bug299237TestLanguage.xtext"
-			fragment = @TestLanguagesFragmentsEx {
+			fragment = @TestLanguagesFragments {
 				ignoreCase = true
 			}
 		}
@@ -293,13 +293,13 @@ Workflow {
 		}
 		language = { 
 			grammarUri = "classpath:/org/eclipse/xtext/parser/antlr/Bug301935ExTestLanguage.xtext"
-			fragment = @TestLanguagesFragmentsEx {
+			fragment = @TestLanguagesFragments {
 				ignoreCase = true
 			}
 		}
 		language = {
 			grammarUri = "classpath:/org/eclipse/xtext/parser/antlr/Bug443221TestLanguage.xtext"
-			fragment = @TestLanguagesFragmentsEx {}
+			fragment = @TestLanguagesFragments {}
 		}
 		language = { 
 			grammarUri = "classpath:/org/eclipse/xtext/parser/assignments/AssignmentsTestLanguage.xtext"
@@ -334,14 +334,14 @@ Workflow {
 		}
 		language = {
 			grammarUri = "classpath:/org/eclipse/xtext/parser/fragments/FragmentTestLanguageEx.xtext"
-			fragment = @TestLanguagesFragmentsEx auto-inject {}
+			fragment = @TestLanguagesFragments auto-inject {}
 			fragment = junit.Junit4Fragment2 {
 				generateStub = false
 			}
 		}
 		language = {
 			grammarUri = "classpath:/org/eclipse/xtext/parser/indentation/IndentationAwareTestLanguage.xtext"
-			fragment = @TestLanguagesFragmentsEx auto-inject {
+			fragment = @TestLanguagesFragments auto-inject {
 				generateStub = true
 			}
 			fragment = junit.Junit4Fragment2 {
@@ -375,7 +375,7 @@ Workflow {
 		}
 		language = {
 			grammarUri = "classpath:/org/eclipse/xtext/parser/parameters/ParametersTestLanguageEx.xtext"
-			fragment = @TestLanguagesFragmentsEx auto-inject {}
+			fragment = @TestLanguagesFragments auto-inject {}
 			fragment = junit.Junit4Fragment2 {
 				generateStub = false
 			}
@@ -429,7 +429,7 @@ Workflow {
 		}
 		language = {
 			grammarUri = "classpath:/org/eclipse/xtext/parser/unorderedGroups/ExBacktrackingBug325745TestLanguage.xtext"
-			fragment = @TestLanguagesFragmentsEx {
+			fragment = @TestLanguagesFragments {
 				backtrack = true
 			}
 		}

@@ -52,7 +52,7 @@ Workflow {
 		}
 		language = {
 			grammarUri = "classpath:/org/eclipse/xtext/parser/antlr/Bug289524ExTestLanguage.xtext"
-			fragment = @TestLanguagesFragmentsEx {
+			fragment = @TestLanguagesFragments {
 				backtrack = true
 			}
 		}
@@ -64,7 +64,7 @@ Workflow {
 		}
 		language = {
 			grammarUri = "classpath:/org/eclipse/xtext/parser/antlr/Bug296889ExTestLanguage.xtext"
-			fragment = @TestLanguagesFragmentsEx {
+			fragment = @TestLanguagesFragments {
 				backtrack = true
 			}
 		}
@@ -74,7 +74,7 @@ Workflow {
 		}
 		language = {
 			grammarUri = "classpath:/org/eclipse/xtext/parser/antlr/Bug301935ExTestLanguage.xtext"
-			fragment = @TestLanguagesFragmentsEx {
+			fragment = @TestLanguagesFragments {
 				ignoreCase = true
 			}
 		}
@@ -84,11 +84,11 @@ Workflow {
 		}
 		language = {
 			grammarUri = "classpath:/org/eclipse/xtext/parser/antlr/Bug443221TestLanguage.xtext"
-			fragment = @TestLanguagesFragmentsEx {}
+			fragment = @TestLanguagesFragments {}
 		}
 		language = {
 			grammarUri = "classpath:/org/eclipse/xtext/parser/antlr/Bug299237TestLanguage.xtext"
-			fragment = @TestLanguagesFragmentsEx {
+			fragment = @TestLanguagesFragments {
 				ignoreCase = true
 			}
 		}

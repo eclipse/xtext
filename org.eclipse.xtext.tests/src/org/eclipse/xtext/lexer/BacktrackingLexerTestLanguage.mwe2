@@ -42,7 +42,7 @@ Workflow {
 		
 		language = {
 			grammarUri = "classpath:/org/eclipse/xtext/lexer/BacktrackingLexerTestLanguage.xtext"
-			fragment = @TestLanguagesFragmentsEx {
+			fragment = @TestLanguagesFragments {
 				backtrack = true
 				memoize = true
 				backtrackLexer = true

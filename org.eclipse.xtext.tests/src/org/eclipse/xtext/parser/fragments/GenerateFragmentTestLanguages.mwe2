@@ -62,7 +62,7 @@ Workflow {
 		}
 		language = {
 			grammarUri = "classpath:/org/eclipse/xtext/parser/fragments/FragmentTestLanguageEx.xtext"
-			fragment = @TestLanguagesFragmentsEx auto-inject {
+			fragment = @TestLanguagesFragments auto-inject {
 				generateStub = true
 			}
 			fragment = junit.Junit4Fragment2 {

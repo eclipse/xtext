@@ -73,7 +73,7 @@ Workflow {
 		}
 		language = {
 			grammarUri = "classpath:/org/eclipse/xtext/parser/unorderedGroups/ExBacktrackingBug325745TestLanguage.xtext"
-			fragment = @TestLanguagesFragmentsEx auto-inject {
+			fragment = @TestLanguagesFragments auto-inject {
 				backtrack = true
 			}
 		}

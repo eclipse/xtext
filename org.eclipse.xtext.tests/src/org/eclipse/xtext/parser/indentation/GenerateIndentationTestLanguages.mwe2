@@ -48,7 +48,7 @@ Workflow {
 		
 		language = {
 			grammarUri = "classpath:/org/eclipse/xtext/parser/indentation/IndentationAwareTestLanguage.xtext"
-			fragment = @TestLanguagesFragmentsEx auto-inject {
+			fragment = @TestLanguagesFragments auto-inject {
 				generateStub = true
 			}
 			fragment = junit.Junit4Fragment2 {

@@ -43,7 +43,7 @@ Workflow {
 		
 		language = {
 			grammarUri = "classpath:/org/eclipse/xtext/lexer/IgnoreCaseLexerTestLanguage.xtext"
-			fragment = @TestLanguagesFragmentsEx {
+			fragment = @TestLanguagesFragments {
 				ignoreCase = true
 			}
 		}
