@@ -42,7 +42,9 @@ Workflow {
 		
 		language = {
 			grammarUri = "classpath:/org/eclipse/xtext/parsetree/unassignedtext/UnassignedTextTestLanguage.xtext"
-			fragment = @TestLanguagesFragments {}
+			fragment = @TestLanguagesFragments {
+				generateStub = true
+			}
 		}
 	}
 }

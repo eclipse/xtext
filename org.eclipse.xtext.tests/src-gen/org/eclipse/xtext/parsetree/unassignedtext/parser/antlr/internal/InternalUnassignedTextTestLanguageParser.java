@@ -1,4 +1,4 @@
-package org.eclipse.xtext.parsetree.unassignedtext.parser.antlr.internal; 
+package org.eclipse.xtext.parsetree.unassignedtext.parser.antlr.internal;
 
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
@@ -60,18 +60,18 @@ public class InternalUnassignedTextTestLanguageParser extends AbstractInternalAn
 
 
      	private UnassignedTextTestLanguageGrammarAccess grammarAccess;
-     	
+
         public InternalUnassignedTextTestLanguageParser(TokenStream input, UnassignedTextTestLanguageGrammarAccess grammarAccess) {
             this(input);
             this.grammarAccess = grammarAccess;
             registerRules(grammarAccess.getGrammar());
         }
-        
+
         @Override
         protected String getFirstRuleName() {
-        	return "Model";	
+        	return "Model";
        	}
-       	
+
        	@Override
        	protected UnassignedTextTestLanguageGrammarAccess getGrammarAccess() {
        		return grammarAccess;
@@ -79,8 +79,9 @@ public class InternalUnassignedTextTestLanguageParser extends AbstractInternalAn
 
 
 
+
     // $ANTLR start "entryRuleModel"
-    // InternalUnassignedTextTestLanguage.g:67:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
+    // InternalUnassignedTextTestLanguage.g:64:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
     public final EObject entryRuleModel() throws RecognitionException {
         EObject current = null;
 
@@ -88,8 +89,8 @@ public class InternalUnassignedTextTestLanguageParser extends AbstractInternalAn
 
 
         try {
-            // InternalUnassignedTextTestLanguage.g:68:2: (iv_ruleModel= ruleModel EOF )
-            // InternalUnassignedTextTestLanguage.g:69:2: iv_ruleModel= ruleModel EOF
+            // InternalUnassignedTextTestLanguage.g:64:46: (iv_ruleModel= ruleModel EOF )
+            // InternalUnassignedTextTestLanguage.g:65:2: iv_ruleModel= ruleModel EOF
             {
              newCompositeNode(grammarAccess.getModelRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -103,11 +104,11 @@ public class InternalUnassignedTextTestLanguageParser extends AbstractInternalAn
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -116,7 +117,7 @@ public class InternalUnassignedTextTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "ruleModel"
-    // InternalUnassignedTextTestLanguage.g:76:1: ruleModel returns [EObject current=null] : (this_CaseInsensitiveKeywordRule_0= ruleCaseInsensitiveKeywordRule | this_PluralRule_1= rulePluralRule | this_MultiRule_2= ruleMultiRule | this_DatatypeRule_3= ruleDatatypeRule | this_CommonTerminalsRule_4= ruleCommonTerminalsRule ) ;
+    // InternalUnassignedTextTestLanguage.g:71:1: ruleModel returns [EObject current=null] : (this_CaseInsensitiveKeywordRule_0= ruleCaseInsensitiveKeywordRule | this_PluralRule_1= rulePluralRule | this_MultiRule_2= ruleMultiRule | this_DatatypeRule_3= ruleDatatypeRule | this_CommonTerminalsRule_4= ruleCommonTerminalsRule ) ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
@@ -131,13 +132,14 @@ public class InternalUnassignedTextTestLanguageParser extends AbstractInternalAn
         EObject this_CommonTerminalsRule_4 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalUnassignedTextTestLanguage.g:79:28: ( (this_CaseInsensitiveKeywordRule_0= ruleCaseInsensitiveKeywordRule | this_PluralRule_1= rulePluralRule | this_MultiRule_2= ruleMultiRule | this_DatatypeRule_3= ruleDatatypeRule | this_CommonTerminalsRule_4= ruleCommonTerminalsRule ) )
-            // InternalUnassignedTextTestLanguage.g:80:1: (this_CaseInsensitiveKeywordRule_0= ruleCaseInsensitiveKeywordRule | this_PluralRule_1= rulePluralRule | this_MultiRule_2= ruleMultiRule | this_DatatypeRule_3= ruleDatatypeRule | this_CommonTerminalsRule_4= ruleCommonTerminalsRule )
+            // InternalUnassignedTextTestLanguage.g:77:2: ( (this_CaseInsensitiveKeywordRule_0= ruleCaseInsensitiveKeywordRule | this_PluralRule_1= rulePluralRule | this_MultiRule_2= ruleMultiRule | this_DatatypeRule_3= ruleDatatypeRule | this_CommonTerminalsRule_4= ruleCommonTerminalsRule ) )
+            // InternalUnassignedTextTestLanguage.g:78:2: (this_CaseInsensitiveKeywordRule_0= ruleCaseInsensitiveKeywordRule | this_PluralRule_1= rulePluralRule | this_MultiRule_2= ruleMultiRule | this_DatatypeRule_3= ruleDatatypeRule | this_CommonTerminalsRule_4= ruleCommonTerminalsRule )
             {
-            // InternalUnassignedTextTestLanguage.g:80:1: (this_CaseInsensitiveKeywordRule_0= ruleCaseInsensitiveKeywordRule | this_PluralRule_1= rulePluralRule | this_MultiRule_2= ruleMultiRule | this_DatatypeRule_3= ruleDatatypeRule | this_CommonTerminalsRule_4= ruleCommonTerminalsRule )
+            // InternalUnassignedTextTestLanguage.g:78:2: (this_CaseInsensitiveKeywordRule_0= ruleCaseInsensitiveKeywordRule | this_PluralRule_1= rulePluralRule | this_MultiRule_2= ruleMultiRule | this_DatatypeRule_3= ruleDatatypeRule | this_CommonTerminalsRule_4= ruleCommonTerminalsRule )
             int alt1=5;
             switch ( input.LA(1) ) {
             case RULE_CASEINSENSITIVEKEYWORD:
@@ -174,92 +176,92 @@ public class InternalUnassignedTextTestLanguageParser extends AbstractInternalAn
 
             switch (alt1) {
                 case 1 :
-                    // InternalUnassignedTextTestLanguage.g:81:5: this_CaseInsensitiveKeywordRule_0= ruleCaseInsensitiveKeywordRule
+                    // InternalUnassignedTextTestLanguage.g:79:3: this_CaseInsensitiveKeywordRule_0= ruleCaseInsensitiveKeywordRule
                     {
-                     
-                            newCompositeNode(grammarAccess.getModelAccess().getCaseInsensitiveKeywordRuleParserRuleCall_0()); 
-                        
+
+                    			newCompositeNode(grammarAccess.getModelAccess().getCaseInsensitiveKeywordRuleParserRuleCall_0());
+                    		
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_CaseInsensitiveKeywordRule_0=ruleCaseInsensitiveKeywordRule();
 
                     state._fsp--;
 
-                     
-                            current = this_CaseInsensitiveKeywordRule_0; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    			current = this_CaseInsensitiveKeywordRule_0;
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
                 case 2 :
-                    // InternalUnassignedTextTestLanguage.g:91:5: this_PluralRule_1= rulePluralRule
+                    // InternalUnassignedTextTestLanguage.g:88:3: this_PluralRule_1= rulePluralRule
                     {
-                     
-                            newCompositeNode(grammarAccess.getModelAccess().getPluralRuleParserRuleCall_1()); 
-                        
+
+                    			newCompositeNode(grammarAccess.getModelAccess().getPluralRuleParserRuleCall_1());
+                    		
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_PluralRule_1=rulePluralRule();
 
                     state._fsp--;
 
-                     
-                            current = this_PluralRule_1; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    			current = this_PluralRule_1;
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
                 case 3 :
-                    // InternalUnassignedTextTestLanguage.g:101:5: this_MultiRule_2= ruleMultiRule
+                    // InternalUnassignedTextTestLanguage.g:97:3: this_MultiRule_2= ruleMultiRule
                     {
-                     
-                            newCompositeNode(grammarAccess.getModelAccess().getMultiRuleParserRuleCall_2()); 
-                        
+
+                    			newCompositeNode(grammarAccess.getModelAccess().getMultiRuleParserRuleCall_2());
+                    		
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_MultiRule_2=ruleMultiRule();
 
                     state._fsp--;
 
-                     
-                            current = this_MultiRule_2; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    			current = this_MultiRule_2;
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
                 case 4 :
-                    // InternalUnassignedTextTestLanguage.g:111:5: this_DatatypeRule_3= ruleDatatypeRule
+                    // InternalUnassignedTextTestLanguage.g:106:3: this_DatatypeRule_3= ruleDatatypeRule
                     {
-                     
-                            newCompositeNode(grammarAccess.getModelAccess().getDatatypeRuleParserRuleCall_3()); 
-                        
+
+                    			newCompositeNode(grammarAccess.getModelAccess().getDatatypeRuleParserRuleCall_3());
+                    		
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_DatatypeRule_3=ruleDatatypeRule();
 
                     state._fsp--;
 
-                     
-                            current = this_DatatypeRule_3; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    			current = this_DatatypeRule_3;
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
                 case 5 :
-                    // InternalUnassignedTextTestLanguage.g:121:5: this_CommonTerminalsRule_4= ruleCommonTerminalsRule
+                    // InternalUnassignedTextTestLanguage.g:115:3: this_CommonTerminalsRule_4= ruleCommonTerminalsRule
                     {
-                     
-                            newCompositeNode(grammarAccess.getModelAccess().getCommonTerminalsRuleParserRuleCall_4()); 
-                        
+
+                    			newCompositeNode(grammarAccess.getModelAccess().getCommonTerminalsRuleParserRuleCall_4());
+                    		
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_CommonTerminalsRule_4=ruleCommonTerminalsRule();
 
                     state._fsp--;
 
-                     
-                            current = this_CommonTerminalsRule_4; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    			current = this_CommonTerminalsRule_4;
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
@@ -269,13 +271,15 @@ public class InternalUnassignedTextTestLanguageParser extends AbstractInternalAn
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -284,7 +288,7 @@ public class InternalUnassignedTextTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "entryRuleCaseInsensitiveKeywordRule"
-    // InternalUnassignedTextTestLanguage.g:137:1: entryRuleCaseInsensitiveKeywordRule returns [EObject current=null] : iv_ruleCaseInsensitiveKeywordRule= ruleCaseInsensitiveKeywordRule EOF ;
+    // InternalUnassignedTextTestLanguage.g:127:1: entryRuleCaseInsensitiveKeywordRule returns [EObject current=null] : iv_ruleCaseInsensitiveKeywordRule= ruleCaseInsensitiveKeywordRule EOF ;
     public final EObject entryRuleCaseInsensitiveKeywordRule() throws RecognitionException {
         EObject current = null;
 
@@ -292,8 +296,8 @@ public class InternalUnassignedTextTestLanguageParser extends AbstractInternalAn
 
 
         try {
-            // InternalUnassignedTextTestLanguage.g:138:2: (iv_ruleCaseInsensitiveKeywordRule= ruleCaseInsensitiveKeywordRule EOF )
-            // InternalUnassignedTextTestLanguage.g:139:2: iv_ruleCaseInsensitiveKeywordRule= ruleCaseInsensitiveKeywordRule EOF
+            // InternalUnassignedTextTestLanguage.g:127:67: (iv_ruleCaseInsensitiveKeywordRule= ruleCaseInsensitiveKeywordRule EOF )
+            // InternalUnassignedTextTestLanguage.g:128:2: iv_ruleCaseInsensitiveKeywordRule= ruleCaseInsensitiveKeywordRule EOF
             {
              newCompositeNode(grammarAccess.getCaseInsensitiveKeywordRuleRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -307,11 +311,11 @@ public class InternalUnassignedTextTestLanguageParser extends AbstractInternalAn
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -320,49 +324,47 @@ public class InternalUnassignedTextTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "ruleCaseInsensitiveKeywordRule"
-    // InternalUnassignedTextTestLanguage.g:146:1: ruleCaseInsensitiveKeywordRule returns [EObject current=null] : (this_CaseInsensitiveKeyword_0= RULE_CASEINSENSITIVEKEYWORD ( (lv_val_1_0= RULE_INT ) ) ) ;
+    // InternalUnassignedTextTestLanguage.g:134:1: ruleCaseInsensitiveKeywordRule returns [EObject current=null] : (this_CaseInsensitiveKeyword_0= RULE_CASEINSENSITIVEKEYWORD ( (lv_val_1_0= RULE_INT ) ) ) ;
     public final EObject ruleCaseInsensitiveKeywordRule() throws RecognitionException {
         EObject current = null;
 
         Token this_CaseInsensitiveKeyword_0=null;
         Token lv_val_1_0=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalUnassignedTextTestLanguage.g:149:28: ( (this_CaseInsensitiveKeyword_0= RULE_CASEINSENSITIVEKEYWORD ( (lv_val_1_0= RULE_INT ) ) ) )
-            // InternalUnassignedTextTestLanguage.g:150:1: (this_CaseInsensitiveKeyword_0= RULE_CASEINSENSITIVEKEYWORD ( (lv_val_1_0= RULE_INT ) ) )
+            // InternalUnassignedTextTestLanguage.g:140:2: ( (this_CaseInsensitiveKeyword_0= RULE_CASEINSENSITIVEKEYWORD ( (lv_val_1_0= RULE_INT ) ) ) )
+            // InternalUnassignedTextTestLanguage.g:141:2: (this_CaseInsensitiveKeyword_0= RULE_CASEINSENSITIVEKEYWORD ( (lv_val_1_0= RULE_INT ) ) )
             {
-            // InternalUnassignedTextTestLanguage.g:150:1: (this_CaseInsensitiveKeyword_0= RULE_CASEINSENSITIVEKEYWORD ( (lv_val_1_0= RULE_INT ) ) )
-            // InternalUnassignedTextTestLanguage.g:150:2: this_CaseInsensitiveKeyword_0= RULE_CASEINSENSITIVEKEYWORD ( (lv_val_1_0= RULE_INT ) )
+            // InternalUnassignedTextTestLanguage.g:141:2: (this_CaseInsensitiveKeyword_0= RULE_CASEINSENSITIVEKEYWORD ( (lv_val_1_0= RULE_INT ) ) )
+            // InternalUnassignedTextTestLanguage.g:142:3: this_CaseInsensitiveKeyword_0= RULE_CASEINSENSITIVEKEYWORD ( (lv_val_1_0= RULE_INT ) )
             {
             this_CaseInsensitiveKeyword_0=(Token)match(input,RULE_CASEINSENSITIVEKEYWORD,FollowSets000.FOLLOW_3); 
-             
-                newLeafNode(this_CaseInsensitiveKeyword_0, grammarAccess.getCaseInsensitiveKeywordRuleAccess().getCaseInsensitiveKeywordTerminalRuleCall_0()); 
-                
-            // InternalUnassignedTextTestLanguage.g:154:1: ( (lv_val_1_0= RULE_INT ) )
-            // InternalUnassignedTextTestLanguage.g:155:1: (lv_val_1_0= RULE_INT )
+
+            			newLeafNode(this_CaseInsensitiveKeyword_0, grammarAccess.getCaseInsensitiveKeywordRuleAccess().getCaseInsensitiveKeywordTerminalRuleCall_0());
+            		
+            // InternalUnassignedTextTestLanguage.g:146:3: ( (lv_val_1_0= RULE_INT ) )
+            // InternalUnassignedTextTestLanguage.g:147:4: (lv_val_1_0= RULE_INT )
             {
-            // InternalUnassignedTextTestLanguage.g:155:1: (lv_val_1_0= RULE_INT )
-            // InternalUnassignedTextTestLanguage.g:156:3: lv_val_1_0= RULE_INT
+            // InternalUnassignedTextTestLanguage.g:147:4: (lv_val_1_0= RULE_INT )
+            // InternalUnassignedTextTestLanguage.g:148:5: lv_val_1_0= RULE_INT
             {
             lv_val_1_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_2); 
 
-            			newLeafNode(lv_val_1_0, grammarAccess.getCaseInsensitiveKeywordRuleAccess().getValINTTerminalRuleCall_1_0()); 
-            		
+            					newLeafNode(lv_val_1_0, grammarAccess.getCaseInsensitiveKeywordRuleAccess().getValINTTerminalRuleCall_1_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getCaseInsensitiveKeywordRuleRule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"val",
-                    		lv_val_1_0, 
-                    		"org.eclipse.xtext.common.Terminals.INT");
-            	    
-
-            }
-
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getCaseInsensitiveKeywordRuleRule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"val",
+            						lv_val_1_0,
+            						"org.eclipse.xtext.common.Terminals.INT");
+            				
 
             }
 
@@ -372,13 +374,18 @@ public class InternalUnassignedTextTestLanguageParser extends AbstractInternalAn
 
             }
 
-             leaveRule(); 
+
+            }
+
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -387,7 +394,7 @@ public class InternalUnassignedTextTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "entryRulePluralRule"
-    // InternalUnassignedTextTestLanguage.g:180:1: entryRulePluralRule returns [EObject current=null] : iv_rulePluralRule= rulePluralRule EOF ;
+    // InternalUnassignedTextTestLanguage.g:168:1: entryRulePluralRule returns [EObject current=null] : iv_rulePluralRule= rulePluralRule EOF ;
     public final EObject entryRulePluralRule() throws RecognitionException {
         EObject current = null;
 
@@ -395,8 +402,8 @@ public class InternalUnassignedTextTestLanguageParser extends AbstractInternalAn
 
 
         try {
-            // InternalUnassignedTextTestLanguage.g:181:2: (iv_rulePluralRule= rulePluralRule EOF )
-            // InternalUnassignedTextTestLanguage.g:182:2: iv_rulePluralRule= rulePluralRule EOF
+            // InternalUnassignedTextTestLanguage.g:168:51: (iv_rulePluralRule= rulePluralRule EOF )
+            // InternalUnassignedTextTestLanguage.g:169:2: iv_rulePluralRule= rulePluralRule EOF
             {
              newCompositeNode(grammarAccess.getPluralRuleRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -410,11 +417,11 @@ public class InternalUnassignedTextTestLanguageParser extends AbstractInternalAn
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -423,7 +430,7 @@ public class InternalUnassignedTextTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "rulePluralRule"
-    // InternalUnassignedTextTestLanguage.g:189:1: rulePluralRule returns [EObject current=null] : (otherlv_0= 'contents:' ( (lv_count_1_0= RULE_INT ) ) this_Plural_2= RULE_PLURAL ) ;
+    // InternalUnassignedTextTestLanguage.g:175:1: rulePluralRule returns [EObject current=null] : (otherlv_0= 'contents:' ( (lv_count_1_0= RULE_INT ) ) this_Plural_2= RULE_PLURAL ) ;
     public final EObject rulePluralRule() throws RecognitionException {
         EObject current = null;
 
@@ -431,39 +438,40 @@ public class InternalUnassignedTextTestLanguageParser extends AbstractInternalAn
         Token lv_count_1_0=null;
         Token this_Plural_2=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalUnassignedTextTestLanguage.g:192:28: ( (otherlv_0= 'contents:' ( (lv_count_1_0= RULE_INT ) ) this_Plural_2= RULE_PLURAL ) )
-            // InternalUnassignedTextTestLanguage.g:193:1: (otherlv_0= 'contents:' ( (lv_count_1_0= RULE_INT ) ) this_Plural_2= RULE_PLURAL )
+            // InternalUnassignedTextTestLanguage.g:181:2: ( (otherlv_0= 'contents:' ( (lv_count_1_0= RULE_INT ) ) this_Plural_2= RULE_PLURAL ) )
+            // InternalUnassignedTextTestLanguage.g:182:2: (otherlv_0= 'contents:' ( (lv_count_1_0= RULE_INT ) ) this_Plural_2= RULE_PLURAL )
             {
-            // InternalUnassignedTextTestLanguage.g:193:1: (otherlv_0= 'contents:' ( (lv_count_1_0= RULE_INT ) ) this_Plural_2= RULE_PLURAL )
-            // InternalUnassignedTextTestLanguage.g:193:3: otherlv_0= 'contents:' ( (lv_count_1_0= RULE_INT ) ) this_Plural_2= RULE_PLURAL
+            // InternalUnassignedTextTestLanguage.g:182:2: (otherlv_0= 'contents:' ( (lv_count_1_0= RULE_INT ) ) this_Plural_2= RULE_PLURAL )
+            // InternalUnassignedTextTestLanguage.g:183:3: otherlv_0= 'contents:' ( (lv_count_1_0= RULE_INT ) ) this_Plural_2= RULE_PLURAL
             {
             otherlv_0=(Token)match(input,15,FollowSets000.FOLLOW_3); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getPluralRuleAccess().getContentsKeyword_0());
-                
-            // InternalUnassignedTextTestLanguage.g:197:1: ( (lv_count_1_0= RULE_INT ) )
-            // InternalUnassignedTextTestLanguage.g:198:1: (lv_count_1_0= RULE_INT )
+            			newLeafNode(otherlv_0, grammarAccess.getPluralRuleAccess().getContentsKeyword_0());
+            		
+            // InternalUnassignedTextTestLanguage.g:187:3: ( (lv_count_1_0= RULE_INT ) )
+            // InternalUnassignedTextTestLanguage.g:188:4: (lv_count_1_0= RULE_INT )
             {
-            // InternalUnassignedTextTestLanguage.g:198:1: (lv_count_1_0= RULE_INT )
-            // InternalUnassignedTextTestLanguage.g:199:3: lv_count_1_0= RULE_INT
+            // InternalUnassignedTextTestLanguage.g:188:4: (lv_count_1_0= RULE_INT )
+            // InternalUnassignedTextTestLanguage.g:189:5: lv_count_1_0= RULE_INT
             {
             lv_count_1_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_4); 
 
-            			newLeafNode(lv_count_1_0, grammarAccess.getPluralRuleAccess().getCountINTTerminalRuleCall_1_0()); 
-            		
+            					newLeafNode(lv_count_1_0, grammarAccess.getPluralRuleAccess().getCountINTTerminalRuleCall_1_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getPluralRuleRule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"count",
-                    		lv_count_1_0, 
-                    		"org.eclipse.xtext.common.Terminals.INT");
-            	    
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getPluralRuleRule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"count",
+            						lv_count_1_0,
+            						"org.eclipse.xtext.common.Terminals.INT");
+            				
 
             }
 
@@ -471,22 +479,24 @@ public class InternalUnassignedTextTestLanguageParser extends AbstractInternalAn
             }
 
             this_Plural_2=(Token)match(input,RULE_PLURAL,FollowSets000.FOLLOW_2); 
-             
-                newLeafNode(this_Plural_2, grammarAccess.getPluralRuleAccess().getPluralTerminalRuleCall_2()); 
-                
+
+            			newLeafNode(this_Plural_2, grammarAccess.getPluralRuleAccess().getPluralTerminalRuleCall_2());
+            		
 
             }
 
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -495,7 +505,7 @@ public class InternalUnassignedTextTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "entryRuleMultiRule"
-    // InternalUnassignedTextTestLanguage.g:227:1: entryRuleMultiRule returns [EObject current=null] : iv_ruleMultiRule= ruleMultiRule EOF ;
+    // InternalUnassignedTextTestLanguage.g:213:1: entryRuleMultiRule returns [EObject current=null] : iv_ruleMultiRule= ruleMultiRule EOF ;
     public final EObject entryRuleMultiRule() throws RecognitionException {
         EObject current = null;
 
@@ -503,8 +513,8 @@ public class InternalUnassignedTextTestLanguageParser extends AbstractInternalAn
 
 
         try {
-            // InternalUnassignedTextTestLanguage.g:228:2: (iv_ruleMultiRule= ruleMultiRule EOF )
-            // InternalUnassignedTextTestLanguage.g:229:2: iv_ruleMultiRule= ruleMultiRule EOF
+            // InternalUnassignedTextTestLanguage.g:213:50: (iv_ruleMultiRule= ruleMultiRule EOF )
+            // InternalUnassignedTextTestLanguage.g:214:2: iv_ruleMultiRule= ruleMultiRule EOF
             {
              newCompositeNode(grammarAccess.getMultiRuleRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -518,11 +528,11 @@ public class InternalUnassignedTextTestLanguageParser extends AbstractInternalAn
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -531,7 +541,7 @@ public class InternalUnassignedTextTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "ruleMultiRule"
-    // InternalUnassignedTextTestLanguage.g:236:1: ruleMultiRule returns [EObject current=null] : (otherlv_0= 'multi' ( (lv_val_1_0= RULE_INT ) ) this_Multi_2= RULE_MULTI this_Multi_3= RULE_MULTI this_Multi_4= RULE_MULTI ) ;
+    // InternalUnassignedTextTestLanguage.g:220:1: ruleMultiRule returns [EObject current=null] : (otherlv_0= 'multi' ( (lv_val_1_0= RULE_INT ) ) this_Multi_2= RULE_MULTI this_Multi_3= RULE_MULTI this_Multi_4= RULE_MULTI ) ;
     public final EObject ruleMultiRule() throws RecognitionException {
         EObject current = null;
 
@@ -541,39 +551,40 @@ public class InternalUnassignedTextTestLanguageParser extends AbstractInternalAn
         Token this_Multi_3=null;
         Token this_Multi_4=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalUnassignedTextTestLanguage.g:239:28: ( (otherlv_0= 'multi' ( (lv_val_1_0= RULE_INT ) ) this_Multi_2= RULE_MULTI this_Multi_3= RULE_MULTI this_Multi_4= RULE_MULTI ) )
-            // InternalUnassignedTextTestLanguage.g:240:1: (otherlv_0= 'multi' ( (lv_val_1_0= RULE_INT ) ) this_Multi_2= RULE_MULTI this_Multi_3= RULE_MULTI this_Multi_4= RULE_MULTI )
+            // InternalUnassignedTextTestLanguage.g:226:2: ( (otherlv_0= 'multi' ( (lv_val_1_0= RULE_INT ) ) this_Multi_2= RULE_MULTI this_Multi_3= RULE_MULTI this_Multi_4= RULE_MULTI ) )
+            // InternalUnassignedTextTestLanguage.g:227:2: (otherlv_0= 'multi' ( (lv_val_1_0= RULE_INT ) ) this_Multi_2= RULE_MULTI this_Multi_3= RULE_MULTI this_Multi_4= RULE_MULTI )
             {
-            // InternalUnassignedTextTestLanguage.g:240:1: (otherlv_0= 'multi' ( (lv_val_1_0= RULE_INT ) ) this_Multi_2= RULE_MULTI this_Multi_3= RULE_MULTI this_Multi_4= RULE_MULTI )
-            // InternalUnassignedTextTestLanguage.g:240:3: otherlv_0= 'multi' ( (lv_val_1_0= RULE_INT ) ) this_Multi_2= RULE_MULTI this_Multi_3= RULE_MULTI this_Multi_4= RULE_MULTI
+            // InternalUnassignedTextTestLanguage.g:227:2: (otherlv_0= 'multi' ( (lv_val_1_0= RULE_INT ) ) this_Multi_2= RULE_MULTI this_Multi_3= RULE_MULTI this_Multi_4= RULE_MULTI )
+            // InternalUnassignedTextTestLanguage.g:228:3: otherlv_0= 'multi' ( (lv_val_1_0= RULE_INT ) ) this_Multi_2= RULE_MULTI this_Multi_3= RULE_MULTI this_Multi_4= RULE_MULTI
             {
             otherlv_0=(Token)match(input,16,FollowSets000.FOLLOW_3); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getMultiRuleAccess().getMultiKeyword_0());
-                
-            // InternalUnassignedTextTestLanguage.g:244:1: ( (lv_val_1_0= RULE_INT ) )
-            // InternalUnassignedTextTestLanguage.g:245:1: (lv_val_1_0= RULE_INT )
+            			newLeafNode(otherlv_0, grammarAccess.getMultiRuleAccess().getMultiKeyword_0());
+            		
+            // InternalUnassignedTextTestLanguage.g:232:3: ( (lv_val_1_0= RULE_INT ) )
+            // InternalUnassignedTextTestLanguage.g:233:4: (lv_val_1_0= RULE_INT )
             {
-            // InternalUnassignedTextTestLanguage.g:245:1: (lv_val_1_0= RULE_INT )
-            // InternalUnassignedTextTestLanguage.g:246:3: lv_val_1_0= RULE_INT
+            // InternalUnassignedTextTestLanguage.g:233:4: (lv_val_1_0= RULE_INT )
+            // InternalUnassignedTextTestLanguage.g:234:5: lv_val_1_0= RULE_INT
             {
             lv_val_1_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_5); 
 
-            			newLeafNode(lv_val_1_0, grammarAccess.getMultiRuleAccess().getValINTTerminalRuleCall_1_0()); 
-            		
+            					newLeafNode(lv_val_1_0, grammarAccess.getMultiRuleAccess().getValINTTerminalRuleCall_1_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getMultiRuleRule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"val",
-                    		lv_val_1_0, 
-                    		"org.eclipse.xtext.common.Terminals.INT");
-            	    
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getMultiRuleRule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"val",
+            						lv_val_1_0,
+            						"org.eclipse.xtext.common.Terminals.INT");
+            				
 
             }
 
@@ -581,30 +592,32 @@ public class InternalUnassignedTextTestLanguageParser extends AbstractInternalAn
             }
 
             this_Multi_2=(Token)match(input,RULE_MULTI,FollowSets000.FOLLOW_5); 
-             
-                newLeafNode(this_Multi_2, grammarAccess.getMultiRuleAccess().getMultiTerminalRuleCall_2()); 
-                
+
+            			newLeafNode(this_Multi_2, grammarAccess.getMultiRuleAccess().getMultiTerminalRuleCall_2());
+            		
             this_Multi_3=(Token)match(input,RULE_MULTI,FollowSets000.FOLLOW_5); 
-             
-                newLeafNode(this_Multi_3, grammarAccess.getMultiRuleAccess().getMultiTerminalRuleCall_3()); 
-                
+
+            			newLeafNode(this_Multi_3, grammarAccess.getMultiRuleAccess().getMultiTerminalRuleCall_3());
+            		
             this_Multi_4=(Token)match(input,RULE_MULTI,FollowSets000.FOLLOW_2); 
-             
-                newLeafNode(this_Multi_4, grammarAccess.getMultiRuleAccess().getMultiTerminalRuleCall_4()); 
-                
+
+            			newLeafNode(this_Multi_4, grammarAccess.getMultiRuleAccess().getMultiTerminalRuleCall_4());
+            		
 
             }
 
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -613,7 +626,7 @@ public class InternalUnassignedTextTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "entryRuleDatatypeRule"
-    // InternalUnassignedTextTestLanguage.g:282:1: entryRuleDatatypeRule returns [EObject current=null] : iv_ruleDatatypeRule= ruleDatatypeRule EOF ;
+    // InternalUnassignedTextTestLanguage.g:266:1: entryRuleDatatypeRule returns [EObject current=null] : iv_ruleDatatypeRule= ruleDatatypeRule EOF ;
     public final EObject entryRuleDatatypeRule() throws RecognitionException {
         EObject current = null;
 
@@ -621,8 +634,8 @@ public class InternalUnassignedTextTestLanguageParser extends AbstractInternalAn
 
 
         try {
-            // InternalUnassignedTextTestLanguage.g:283:2: (iv_ruleDatatypeRule= ruleDatatypeRule EOF )
-            // InternalUnassignedTextTestLanguage.g:284:2: iv_ruleDatatypeRule= ruleDatatypeRule EOF
+            // InternalUnassignedTextTestLanguage.g:266:53: (iv_ruleDatatypeRule= ruleDatatypeRule EOF )
+            // InternalUnassignedTextTestLanguage.g:267:2: iv_ruleDatatypeRule= ruleDatatypeRule EOF
             {
              newCompositeNode(grammarAccess.getDatatypeRuleRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -636,11 +649,11 @@ public class InternalUnassignedTextTestLanguageParser extends AbstractInternalAn
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -649,76 +662,79 @@ public class InternalUnassignedTextTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "ruleDatatypeRule"
-    // InternalUnassignedTextTestLanguage.g:291:1: ruleDatatypeRule returns [EObject current=null] : (otherlv_0= 'datatype' ( (lv_val_1_0= RULE_INT ) ) ruleDatatype ) ;
+    // InternalUnassignedTextTestLanguage.g:273:1: ruleDatatypeRule returns [EObject current=null] : (otherlv_0= 'datatype' ( (lv_val_1_0= RULE_INT ) ) ruleDatatype ) ;
     public final EObject ruleDatatypeRule() throws RecognitionException {
         EObject current = null;
 
         Token otherlv_0=null;
         Token lv_val_1_0=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalUnassignedTextTestLanguage.g:294:28: ( (otherlv_0= 'datatype' ( (lv_val_1_0= RULE_INT ) ) ruleDatatype ) )
-            // InternalUnassignedTextTestLanguage.g:295:1: (otherlv_0= 'datatype' ( (lv_val_1_0= RULE_INT ) ) ruleDatatype )
+            // InternalUnassignedTextTestLanguage.g:279:2: ( (otherlv_0= 'datatype' ( (lv_val_1_0= RULE_INT ) ) ruleDatatype ) )
+            // InternalUnassignedTextTestLanguage.g:280:2: (otherlv_0= 'datatype' ( (lv_val_1_0= RULE_INT ) ) ruleDatatype )
             {
-            // InternalUnassignedTextTestLanguage.g:295:1: (otherlv_0= 'datatype' ( (lv_val_1_0= RULE_INT ) ) ruleDatatype )
-            // InternalUnassignedTextTestLanguage.g:295:3: otherlv_0= 'datatype' ( (lv_val_1_0= RULE_INT ) ) ruleDatatype
+            // InternalUnassignedTextTestLanguage.g:280:2: (otherlv_0= 'datatype' ( (lv_val_1_0= RULE_INT ) ) ruleDatatype )
+            // InternalUnassignedTextTestLanguage.g:281:3: otherlv_0= 'datatype' ( (lv_val_1_0= RULE_INT ) ) ruleDatatype
             {
             otherlv_0=(Token)match(input,17,FollowSets000.FOLLOW_3); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getDatatypeRuleAccess().getDatatypeKeyword_0());
-                
-            // InternalUnassignedTextTestLanguage.g:299:1: ( (lv_val_1_0= RULE_INT ) )
-            // InternalUnassignedTextTestLanguage.g:300:1: (lv_val_1_0= RULE_INT )
+            			newLeafNode(otherlv_0, grammarAccess.getDatatypeRuleAccess().getDatatypeKeyword_0());
+            		
+            // InternalUnassignedTextTestLanguage.g:285:3: ( (lv_val_1_0= RULE_INT ) )
+            // InternalUnassignedTextTestLanguage.g:286:4: (lv_val_1_0= RULE_INT )
             {
-            // InternalUnassignedTextTestLanguage.g:300:1: (lv_val_1_0= RULE_INT )
-            // InternalUnassignedTextTestLanguage.g:301:3: lv_val_1_0= RULE_INT
+            // InternalUnassignedTextTestLanguage.g:286:4: (lv_val_1_0= RULE_INT )
+            // InternalUnassignedTextTestLanguage.g:287:5: lv_val_1_0= RULE_INT
             {
             lv_val_1_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_6); 
 
-            			newLeafNode(lv_val_1_0, grammarAccess.getDatatypeRuleAccess().getValINTTerminalRuleCall_1_0()); 
+            					newLeafNode(lv_val_1_0, grammarAccess.getDatatypeRuleAccess().getValINTTerminalRuleCall_1_0());
+            				
+
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getDatatypeRuleRule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"val",
+            						lv_val_1_0,
+            						"org.eclipse.xtext.common.Terminals.INT");
+            				
+
+            }
+
+
+            }
+
+
+            			newCompositeNode(grammarAccess.getDatatypeRuleAccess().getDatatypeParserRuleCall_2());
             		
-
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getDatatypeRuleRule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"val",
-                    		lv_val_1_0, 
-                    		"org.eclipse.xtext.common.Terminals.INT");
-            	    
-
-            }
-
-
-            }
-
-             
-                    newCompositeNode(grammarAccess.getDatatypeRuleAccess().getDatatypeParserRuleCall_2()); 
-                
             pushFollow(FollowSets000.FOLLOW_2);
             ruleDatatype();
 
             state._fsp--;
 
-             
-                    afterParserOrEnumRuleCall();
-                
+
+            			afterParserOrEnumRuleCall();
+            		
 
             }
 
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -727,7 +743,7 @@ public class InternalUnassignedTextTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "entryRuleDatatype"
-    // InternalUnassignedTextTestLanguage.g:333:1: entryRuleDatatype returns [String current=null] : iv_ruleDatatype= ruleDatatype EOF ;
+    // InternalUnassignedTextTestLanguage.g:314:1: entryRuleDatatype returns [String current=null] : iv_ruleDatatype= ruleDatatype EOF ;
     public final String entryRuleDatatype() throws RecognitionException {
         String current = null;
 
@@ -735,8 +751,8 @@ public class InternalUnassignedTextTestLanguageParser extends AbstractInternalAn
 
 
         try {
-            // InternalUnassignedTextTestLanguage.g:334:2: (iv_ruleDatatype= ruleDatatype EOF )
-            // InternalUnassignedTextTestLanguage.g:335:2: iv_ruleDatatype= ruleDatatype EOF
+            // InternalUnassignedTextTestLanguage.g:314:48: (iv_ruleDatatype= ruleDatatype EOF )
+            // InternalUnassignedTextTestLanguage.g:315:2: iv_ruleDatatype= ruleDatatype EOF
             {
              newCompositeNode(grammarAccess.getDatatypeRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -750,11 +766,11 @@ public class InternalUnassignedTextTestLanguageParser extends AbstractInternalAn
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -763,7 +779,7 @@ public class InternalUnassignedTextTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "ruleDatatype"
-    // InternalUnassignedTextTestLanguage.g:342:1: ruleDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= 'str' | this_INT_1= RULE_INT | this_Datatype2_2= ruleDatatype2 ) ;
+    // InternalUnassignedTextTestLanguage.g:321:1: ruleDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= 'str' | this_INT_1= RULE_INT | this_Datatype2_2= ruleDatatype2 ) ;
     public final AntlrDatatypeRuleToken ruleDatatype() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -772,13 +788,14 @@ public class InternalUnassignedTextTestLanguageParser extends AbstractInternalAn
         AntlrDatatypeRuleToken this_Datatype2_2 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalUnassignedTextTestLanguage.g:345:28: ( (kw= 'str' | this_INT_1= RULE_INT | this_Datatype2_2= ruleDatatype2 ) )
-            // InternalUnassignedTextTestLanguage.g:346:1: (kw= 'str' | this_INT_1= RULE_INT | this_Datatype2_2= ruleDatatype2 )
+            // InternalUnassignedTextTestLanguage.g:327:2: ( (kw= 'str' | this_INT_1= RULE_INT | this_Datatype2_2= ruleDatatype2 ) )
+            // InternalUnassignedTextTestLanguage.g:328:2: (kw= 'str' | this_INT_1= RULE_INT | this_Datatype2_2= ruleDatatype2 )
             {
-            // InternalUnassignedTextTestLanguage.g:346:1: (kw= 'str' | this_INT_1= RULE_INT | this_Datatype2_2= ruleDatatype2 )
+            // InternalUnassignedTextTestLanguage.g:328:2: (kw= 'str' | this_INT_1= RULE_INT | this_Datatype2_2= ruleDatatype2 )
             int alt2=3;
             switch ( input.LA(1) ) {
             case 18:
@@ -805,46 +822,46 @@ public class InternalUnassignedTextTestLanguageParser extends AbstractInternalAn
 
             switch (alt2) {
                 case 1 :
-                    // InternalUnassignedTextTestLanguage.g:347:2: kw= 'str'
+                    // InternalUnassignedTextTestLanguage.g:329:3: kw= 'str'
                     {
                     kw=(Token)match(input,18,FollowSets000.FOLLOW_2); 
 
-                            current.merge(kw);
-                            newLeafNode(kw, grammarAccess.getDatatypeAccess().getStrKeyword_0()); 
-                        
+                    			current.merge(kw);
+                    			newLeafNode(kw, grammarAccess.getDatatypeAccess().getStrKeyword_0());
+                    		
 
                     }
                     break;
                 case 2 :
-                    // InternalUnassignedTextTestLanguage.g:353:10: this_INT_1= RULE_INT
+                    // InternalUnassignedTextTestLanguage.g:335:3: this_INT_1= RULE_INT
                     {
                     this_INT_1=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_2); 
 
-                    		current.merge(this_INT_1);
-                        
-                     
-                        newLeafNode(this_INT_1, grammarAccess.getDatatypeAccess().getINTTerminalRuleCall_1()); 
-                        
+                    			current.merge(this_INT_1);
+                    		
+
+                    			newLeafNode(this_INT_1, grammarAccess.getDatatypeAccess().getINTTerminalRuleCall_1());
+                    		
 
                     }
                     break;
                 case 3 :
-                    // InternalUnassignedTextTestLanguage.g:362:5: this_Datatype2_2= ruleDatatype2
+                    // InternalUnassignedTextTestLanguage.g:343:3: this_Datatype2_2= ruleDatatype2
                     {
-                     
-                            newCompositeNode(grammarAccess.getDatatypeAccess().getDatatype2ParserRuleCall_2()); 
-                        
+
+                    			newCompositeNode(grammarAccess.getDatatypeAccess().getDatatype2ParserRuleCall_2());
+                    		
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_Datatype2_2=ruleDatatype2();
 
                     state._fsp--;
 
 
-                    		current.merge(this_Datatype2_2);
-                        
-                     
-                            afterParserOrEnumRuleCall();
-                        
+                    			current.merge(this_Datatype2_2);
+                    		
+
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
@@ -854,13 +871,15 @@ public class InternalUnassignedTextTestLanguageParser extends AbstractInternalAn
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -869,7 +888,7 @@ public class InternalUnassignedTextTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "entryRuleDatatype2"
-    // InternalUnassignedTextTestLanguage.g:380:1: entryRuleDatatype2 returns [String current=null] : iv_ruleDatatype2= ruleDatatype2 EOF ;
+    // InternalUnassignedTextTestLanguage.g:357:1: entryRuleDatatype2 returns [String current=null] : iv_ruleDatatype2= ruleDatatype2 EOF ;
     public final String entryRuleDatatype2() throws RecognitionException {
         String current = null;
 
@@ -877,8 +896,8 @@ public class InternalUnassignedTextTestLanguageParser extends AbstractInternalAn
 
 
         try {
-            // InternalUnassignedTextTestLanguage.g:381:2: (iv_ruleDatatype2= ruleDatatype2 EOF )
-            // InternalUnassignedTextTestLanguage.g:382:2: iv_ruleDatatype2= ruleDatatype2 EOF
+            // InternalUnassignedTextTestLanguage.g:357:49: (iv_ruleDatatype2= ruleDatatype2 EOF )
+            // InternalUnassignedTextTestLanguage.g:358:2: iv_ruleDatatype2= ruleDatatype2 EOF
             {
              newCompositeNode(grammarAccess.getDatatype2Rule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -892,11 +911,11 @@ public class InternalUnassignedTextTestLanguageParser extends AbstractInternalAn
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -905,35 +924,38 @@ public class InternalUnassignedTextTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "ruleDatatype2"
-    // InternalUnassignedTextTestLanguage.g:389:1: ruleDatatype2 returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : this_STRING_0= RULE_STRING ;
+    // InternalUnassignedTextTestLanguage.g:364:1: ruleDatatype2 returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : this_STRING_0= RULE_STRING ;
     public final AntlrDatatypeRuleToken ruleDatatype2() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
         Token this_STRING_0=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalUnassignedTextTestLanguage.g:392:28: (this_STRING_0= RULE_STRING )
-            // InternalUnassignedTextTestLanguage.g:393:5: this_STRING_0= RULE_STRING
+            // InternalUnassignedTextTestLanguage.g:370:2: (this_STRING_0= RULE_STRING )
+            // InternalUnassignedTextTestLanguage.g:371:2: this_STRING_0= RULE_STRING
             {
             this_STRING_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_2); 
 
             		current.merge(this_STRING_0);
-                
-             
-                newLeafNode(this_STRING_0, grammarAccess.getDatatype2Access().getSTRINGTerminalRuleCall()); 
-                
+            	
+
+            		newLeafNode(this_STRING_0, grammarAccess.getDatatype2Access().getSTRINGTerminalRuleCall());
+            	
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -942,7 +964,7 @@ public class InternalUnassignedTextTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "entryRuleCommonTerminalsRule"
-    // InternalUnassignedTextTestLanguage.g:408:1: entryRuleCommonTerminalsRule returns [EObject current=null] : iv_ruleCommonTerminalsRule= ruleCommonTerminalsRule EOF ;
+    // InternalUnassignedTextTestLanguage.g:381:1: entryRuleCommonTerminalsRule returns [EObject current=null] : iv_ruleCommonTerminalsRule= ruleCommonTerminalsRule EOF ;
     public final EObject entryRuleCommonTerminalsRule() throws RecognitionException {
         EObject current = null;
 
@@ -950,8 +972,8 @@ public class InternalUnassignedTextTestLanguageParser extends AbstractInternalAn
 
 
         try {
-            // InternalUnassignedTextTestLanguage.g:409:2: (iv_ruleCommonTerminalsRule= ruleCommonTerminalsRule EOF )
-            // InternalUnassignedTextTestLanguage.g:410:2: iv_ruleCommonTerminalsRule= ruleCommonTerminalsRule EOF
+            // InternalUnassignedTextTestLanguage.g:381:60: (iv_ruleCommonTerminalsRule= ruleCommonTerminalsRule EOF )
+            // InternalUnassignedTextTestLanguage.g:382:2: iv_ruleCommonTerminalsRule= ruleCommonTerminalsRule EOF
             {
              newCompositeNode(grammarAccess.getCommonTerminalsRuleRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -965,11 +987,11 @@ public class InternalUnassignedTextTestLanguageParser extends AbstractInternalAn
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -978,7 +1000,7 @@ public class InternalUnassignedTextTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "ruleCommonTerminalsRule"
-    // InternalUnassignedTextTestLanguage.g:417:1: ruleCommonTerminalsRule returns [EObject current=null] : (otherlv_0= 'terminals' this_ID_1= RULE_ID this_INT_2= RULE_INT this_STRING_3= RULE_STRING ( (lv_val_4_0= RULE_ID ) ) ) ;
+    // InternalUnassignedTextTestLanguage.g:388:1: ruleCommonTerminalsRule returns [EObject current=null] : (otherlv_0= 'terminals' this_ID_1= RULE_ID this_INT_2= RULE_INT this_STRING_3= RULE_STRING ( (lv_val_4_0= RULE_ID ) ) ) ;
     public final EObject ruleCommonTerminalsRule() throws RecognitionException {
         EObject current = null;
 
@@ -988,54 +1010,52 @@ public class InternalUnassignedTextTestLanguageParser extends AbstractInternalAn
         Token this_STRING_3=null;
         Token lv_val_4_0=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalUnassignedTextTestLanguage.g:420:28: ( (otherlv_0= 'terminals' this_ID_1= RULE_ID this_INT_2= RULE_INT this_STRING_3= RULE_STRING ( (lv_val_4_0= RULE_ID ) ) ) )
-            // InternalUnassignedTextTestLanguage.g:421:1: (otherlv_0= 'terminals' this_ID_1= RULE_ID this_INT_2= RULE_INT this_STRING_3= RULE_STRING ( (lv_val_4_0= RULE_ID ) ) )
+            // InternalUnassignedTextTestLanguage.g:394:2: ( (otherlv_0= 'terminals' this_ID_1= RULE_ID this_INT_2= RULE_INT this_STRING_3= RULE_STRING ( (lv_val_4_0= RULE_ID ) ) ) )
+            // InternalUnassignedTextTestLanguage.g:395:2: (otherlv_0= 'terminals' this_ID_1= RULE_ID this_INT_2= RULE_INT this_STRING_3= RULE_STRING ( (lv_val_4_0= RULE_ID ) ) )
             {
-            // InternalUnassignedTextTestLanguage.g:421:1: (otherlv_0= 'terminals' this_ID_1= RULE_ID this_INT_2= RULE_INT this_STRING_3= RULE_STRING ( (lv_val_4_0= RULE_ID ) ) )
-            // InternalUnassignedTextTestLanguage.g:421:3: otherlv_0= 'terminals' this_ID_1= RULE_ID this_INT_2= RULE_INT this_STRING_3= RULE_STRING ( (lv_val_4_0= RULE_ID ) )
+            // InternalUnassignedTextTestLanguage.g:395:2: (otherlv_0= 'terminals' this_ID_1= RULE_ID this_INT_2= RULE_INT this_STRING_3= RULE_STRING ( (lv_val_4_0= RULE_ID ) ) )
+            // InternalUnassignedTextTestLanguage.g:396:3: otherlv_0= 'terminals' this_ID_1= RULE_ID this_INT_2= RULE_INT this_STRING_3= RULE_STRING ( (lv_val_4_0= RULE_ID ) )
             {
             otherlv_0=(Token)match(input,19,FollowSets000.FOLLOW_7); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getCommonTerminalsRuleAccess().getTerminalsKeyword_0());
-                
+            			newLeafNode(otherlv_0, grammarAccess.getCommonTerminalsRuleAccess().getTerminalsKeyword_0());
+            		
             this_ID_1=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_3); 
-             
-                newLeafNode(this_ID_1, grammarAccess.getCommonTerminalsRuleAccess().getIDTerminalRuleCall_1()); 
-                
+
+            			newLeafNode(this_ID_1, grammarAccess.getCommonTerminalsRuleAccess().getIDTerminalRuleCall_1());
+            		
             this_INT_2=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_8); 
-             
-                newLeafNode(this_INT_2, grammarAccess.getCommonTerminalsRuleAccess().getINTTerminalRuleCall_2()); 
-                
+
+            			newLeafNode(this_INT_2, grammarAccess.getCommonTerminalsRuleAccess().getINTTerminalRuleCall_2());
+            		
             this_STRING_3=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_7); 
-             
-                newLeafNode(this_STRING_3, grammarAccess.getCommonTerminalsRuleAccess().getSTRINGTerminalRuleCall_3()); 
-                
-            // InternalUnassignedTextTestLanguage.g:437:1: ( (lv_val_4_0= RULE_ID ) )
-            // InternalUnassignedTextTestLanguage.g:438:1: (lv_val_4_0= RULE_ID )
+
+            			newLeafNode(this_STRING_3, grammarAccess.getCommonTerminalsRuleAccess().getSTRINGTerminalRuleCall_3());
+            		
+            // InternalUnassignedTextTestLanguage.g:412:3: ( (lv_val_4_0= RULE_ID ) )
+            // InternalUnassignedTextTestLanguage.g:413:4: (lv_val_4_0= RULE_ID )
             {
-            // InternalUnassignedTextTestLanguage.g:438:1: (lv_val_4_0= RULE_ID )
-            // InternalUnassignedTextTestLanguage.g:439:3: lv_val_4_0= RULE_ID
+            // InternalUnassignedTextTestLanguage.g:413:4: (lv_val_4_0= RULE_ID )
+            // InternalUnassignedTextTestLanguage.g:414:5: lv_val_4_0= RULE_ID
             {
             lv_val_4_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
-            			newLeafNode(lv_val_4_0, grammarAccess.getCommonTerminalsRuleAccess().getValIDTerminalRuleCall_4_0()); 
-            		
+            					newLeafNode(lv_val_4_0, grammarAccess.getCommonTerminalsRuleAccess().getValIDTerminalRuleCall_4_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getCommonTerminalsRuleRule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"val",
-                    		lv_val_4_0, 
-                    		"org.eclipse.xtext.common.Terminals.ID");
-            	    
-
-            }
-
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getCommonTerminalsRuleRule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"val",
+            						lv_val_4_0,
+            						"org.eclipse.xtext.common.Terminals.ID");
+            				
 
             }
 
@@ -1045,13 +1065,18 @@ public class InternalUnassignedTextTestLanguageParser extends AbstractInternalAn
 
             }
 
-             leaveRule(); 
+
+            }
+
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
