@@ -26,7 +26,6 @@ import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.google.inject.Binder;
@@ -69,8 +68,6 @@ public class UriBasedReaderTest extends AbstractXtextTests {
 		}
 	}
 
-	// TODO https://github.com/eclipse/xtext-core/issues/32
-	@Ignore
 	@SuppressWarnings("unchecked")
 	@Test public void testTransitiveReferences() throws Exception {
 		UriBasedReader reader = new UriBasedReader();
