@@ -5,7 +5,6 @@ grammar InternalBug301935TestLanguage;
 
 options {
 	superClass=AbstractInternalAntlrParser;
-	
 }
 
 @lexer::header {
@@ -17,7 +16,7 @@ import org.eclipse.xtext.parser.antlr.Lexer;
 }
 
 @parser::header {
-package org.eclipse.xtext.parser.antlr.parser.antlr.internal; 
+package org.eclipse.xtext.parser.antlr.parser.antlr.internal;
 
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
@@ -35,176 +34,173 @@ import org.eclipse.xtext.parser.antlr.services.Bug301935TestLanguageGrammarAcces
 @parser::members {
 
  	private Bug301935TestLanguageGrammarAccess grammarAccess;
- 	
+
     public InternalBug301935TestLanguageParser(TokenStream input, Bug301935TestLanguageGrammarAccess grammarAccess) {
         this(input);
         this.grammarAccess = grammarAccess;
         registerRules(grammarAccess.getGrammar());
     }
-    
+
     @Override
     protected String getFirstRuleName() {
-    	return "Model";	
+    	return "Model";
    	}
-   	
+
    	@Override
    	protected Bug301935TestLanguageGrammarAccess getGrammarAccess() {
    		return grammarAccess;
    	}
+
 }
 
-@rulecatch { 
-    catch (RecognitionException re) { 
-        recover(input,re); 
+@rulecatch {
+    catch (RecognitionException re) {
+        recover(input,re);
         appendSkippedTokens();
-    } 
+    }
 }
-
-
-
 
 // Entry rule entryRuleModel
-entryRuleModel returns [EObject current=null] 
-	:
+entryRuleModel returns [EObject current=null]:
 	{ newCompositeNode(grammarAccess.getModelRule()); }
-	 iv_ruleModel=ruleModel 
-	 { $current=$iv_ruleModel.current; } 
-	 EOF 
-;
+	iv_ruleModel=ruleModel
+	{ $current=$iv_ruleModel.current; }
+	EOF;
 
 // Rule Model
-ruleModel returns [EObject current=null] 
-    @init { enterRule(); 
-    }
-    @after { leaveRule(); }:
-((
-(
-		lv_name_0_0=RULE_ID
+ruleModel returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			(
+				lv_name_0_0=RULE_ID
+				{
+					newLeafNode(lv_name_0_0, grammarAccess.getModelAccess().getNameIDTerminalRuleCall_0_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getModelRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"name",
+						lv_name_0_0,
+						"org.eclipse.xtext.parser.antlr.Bug301935TestLanguage.ID");
+				}
+			)
+		)
+		this_WS_1=RULE_WS
 		{
-			newLeafNode(lv_name_0_0, grammarAccess.getModelAccess().getNameIDTerminalRuleCall_0_0()); 
+			newLeafNode(this_WS_1, grammarAccess.getModelAccess().getWSTerminalRuleCall_1());
 		}
+		(
+			(
+				lv_value_2_0=RULE_ID
+				{
+					newLeafNode(lv_value_2_0, grammarAccess.getModelAccess().getValueIDTerminalRuleCall_2_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getModelRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"value",
+						lv_value_2_0,
+						"org.eclipse.xtext.parser.antlr.Bug301935TestLanguage.ID");
+				}
+			)
+		)
 		{
-	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getModelRule());
-	        }
-       		setWithLastConsumed(
-       			$current, 
-       			"name",
-        		lv_name_0_0, 
-        		"org.eclipse.xtext.parser.antlr.Bug301935TestLanguage.ID");
-	    }
-
-)
-)this_WS_1=RULE_WS
-    { 
-    newLeafNode(this_WS_1, grammarAccess.getModelAccess().getWSTerminalRuleCall_1()); 
-    }
-(
-(
-		lv_value_2_0=RULE_ID
-		{
-			newLeafNode(lv_value_2_0, grammarAccess.getModelAccess().getValueIDTerminalRuleCall_2_0()); 
+			newCompositeNode(grammarAccess.getModelAccess().getNLParserRuleCall_3());
 		}
+		ruleNL
 		{
-	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getModelRule());
-	        }
-       		setWithLastConsumed(
-       			$current, 
-       			"value",
-        		lv_value_2_0, 
-        		"org.eclipse.xtext.parser.antlr.Bug301935TestLanguage.ID");
-	    }
-
-)
-)
-    { 
-        newCompositeNode(grammarAccess.getModelAccess().getNLParserRuleCall_3()); 
-    }
-ruleNL
-    { 
-        afterParserOrEnumRuleCall();
-    }
-(
-(
-		lv_value2_4_0=RULE_ID
-		{
-			newLeafNode(lv_value2_4_0, grammarAccess.getModelAccess().getValue2IDTerminalRuleCall_4_0()); 
+			afterParserOrEnumRuleCall();
 		}
+		(
+			(
+				lv_value2_4_0=RULE_ID
+				{
+					newLeafNode(lv_value2_4_0, grammarAccess.getModelAccess().getValue2IDTerminalRuleCall_4_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getModelRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"value2",
+						lv_value2_4_0,
+						"org.eclipse.xtext.parser.antlr.Bug301935TestLanguage.ID");
+				}
+			)
+		)
+		this_WS_5=RULE_WS
 		{
-	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getModelRule());
-	        }
-       		setWithLastConsumed(
-       			$current, 
-       			"value2",
-        		lv_value2_4_0, 
-        		"org.eclipse.xtext.parser.antlr.Bug301935TestLanguage.ID");
-	    }
-
-)
-)this_WS_5=RULE_WS
-    { 
-    newLeafNode(this_WS_5, grammarAccess.getModelAccess().getWSTerminalRuleCall_5()); 
-    }
-)
+			newLeafNode(this_WS_5, grammarAccess.getModelAccess().getWSTerminalRuleCall_5());
+		}
+	)
 ;
-
-
-
-
 
 // Entry rule entryRuleNL
-entryRuleNL returns [String current=null] 
-	:
-	{ newCompositeNode(grammarAccess.getNLRule()); } 
-	 iv_ruleNL=ruleNL 
-	 { $current=$iv_ruleNL.current.getText(); }  
-	 EOF 
-;
+entryRuleNL returns [String current=null]:
+	{ newCompositeNode(grammarAccess.getNLRule()); }
+	iv_ruleNL=ruleNL
+	{ $current=$iv_ruleNL.current.getText(); }
+	EOF;
 
 // Rule NL
-ruleNL returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
-    @init { enterRule(); 
-    }
-    @after { leaveRule(); }:
-((    this_WS_0=RULE_WS    {
-		$current.merge(this_WS_0);
-    }
-
-    { 
-    newLeafNode(this_WS_0, grammarAccess.getNLAccess().getWSTerminalRuleCall_0()); 
-    }
-)*((
-	kw='\r' 
-    {
-        $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getNLAccess().getControl000dKeyword_1_0()); 
-    }
-)?
-	kw='\n' 
-    {
-        $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getNLAccess().getControl000aKeyword_1_1()); 
-    }
-)(    this_WS_3=RULE_WS    {
-		$current.merge(this_WS_3);
-    }
-
-    { 
-    newLeafNode(this_WS_3, grammarAccess.getNLAccess().getWSTerminalRuleCall_2()); 
-    }
-)*)
-    ;
-
-
-
-
+ruleNL returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			this_WS_0=RULE_WS
+			{
+				$current.merge(this_WS_0);
+			}
+			{
+				newLeafNode(this_WS_0, grammarAccess.getNLAccess().getWSTerminalRuleCall_0());
+			}
+		)*
+		(
+			(
+				kw='\r'
+				{
+					$current.merge(kw);
+					newLeafNode(kw, grammarAccess.getNLAccess().getControl000dKeyword_1_0());
+				}
+			)?
+			kw='\n'
+			{
+				$current.merge(kw);
+				newLeafNode(kw, grammarAccess.getNLAccess().getControl000aKeyword_1_1());
+			}
+		)
+		(
+			this_WS_3=RULE_WS
+			{
+				$current.merge(this_WS_3);
+			}
+			{
+				newLeafNode(this_WS_3, grammarAccess.getNLAccess().getWSTerminalRuleCall_2());
+			}
+		)*
+	)
+;
 
 RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
 RULE_WS : (' '|'\t')+;
 
 RULE_ANY_OTHER : .;
-
-

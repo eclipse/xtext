@@ -1,4 +1,4 @@
-package org.eclipse.xtext.parser.antlr.parser.antlr.internal; 
+package org.eclipse.xtext.parser.antlr.parser.antlr.internal;
 
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
@@ -58,20 +58,20 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
       This grammar contains a lot of empty actions to work around a bug in ANTLR.
       Otherwise the ANTLR tool will create synpreds that cannot be compiled in some rare cases.
     */
-     
+
      	private Bug296889TestLanguageGrammarAccess grammarAccess;
-     	
+
         public InternalBug296889TestLanguageParser(TokenStream input, Bug296889TestLanguageGrammarAccess grammarAccess) {
             this(input);
             this.grammarAccess = grammarAccess;
             registerRules(grammarAccess.getGrammar());
         }
-        
+
         @Override
         protected String getFirstRuleName() {
-        	return "Model";	
+        	return "Model";
        	}
-       	
+
        	@Override
        	protected Bug296889TestLanguageGrammarAccess getGrammarAccess() {
        		return grammarAccess;
@@ -79,8 +79,9 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
 
 
 
+
     // $ANTLR start "entryRuleModel"
-    // InternalBug296889TestLanguage.g:73:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
+    // InternalBug296889TestLanguage.g:70:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
     public final EObject entryRuleModel() throws RecognitionException {
         EObject current = null;
 
@@ -88,8 +89,8 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // InternalBug296889TestLanguage.g:74:2: (iv_ruleModel= ruleModel EOF )
-            // InternalBug296889TestLanguage.g:75:2: iv_ruleModel= ruleModel EOF
+            // InternalBug296889TestLanguage.g:70:46: (iv_ruleModel= ruleModel EOF )
+            // InternalBug296889TestLanguage.g:71:2: iv_ruleModel= ruleModel EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getModelRule()); 
@@ -107,11 +108,11 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -120,7 +121,7 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleModel"
-    // InternalBug296889TestLanguage.g:82:1: ruleModel returns [EObject current=null] : ( (otherlv_0= 'Model' ( (lv_expressions_1_0= ruleExpression ) )* ) | (otherlv_2= 'DataType' ( (lv_values_3_0= ruleDataTypeExpression ) )* ) ) ;
+    // InternalBug296889TestLanguage.g:77:1: ruleModel returns [EObject current=null] : ( (otherlv_0= 'Model' ( (lv_expressions_1_0= ruleExpression ) )* ) | (otherlv_2= 'DataType' ( (lv_values_3_0= ruleDataTypeExpression ) )* ) ) ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
@@ -131,13 +132,14 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
         AntlrDatatypeRuleToken lv_values_3_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalBug296889TestLanguage.g:85:28: ( ( (otherlv_0= 'Model' ( (lv_expressions_1_0= ruleExpression ) )* ) | (otherlv_2= 'DataType' ( (lv_values_3_0= ruleDataTypeExpression ) )* ) ) )
-            // InternalBug296889TestLanguage.g:86:1: ( (otherlv_0= 'Model' ( (lv_expressions_1_0= ruleExpression ) )* ) | (otherlv_2= 'DataType' ( (lv_values_3_0= ruleDataTypeExpression ) )* ) )
+            // InternalBug296889TestLanguage.g:83:2: ( ( (otherlv_0= 'Model' ( (lv_expressions_1_0= ruleExpression ) )* ) | (otherlv_2= 'DataType' ( (lv_values_3_0= ruleDataTypeExpression ) )* ) ) )
+            // InternalBug296889TestLanguage.g:84:2: ( (otherlv_0= 'Model' ( (lv_expressions_1_0= ruleExpression ) )* ) | (otherlv_2= 'DataType' ( (lv_values_3_0= ruleDataTypeExpression ) )* ) )
             {
-            // InternalBug296889TestLanguage.g:86:1: ( (otherlv_0= 'Model' ( (lv_expressions_1_0= ruleExpression ) )* ) | (otherlv_2= 'DataType' ( (lv_values_3_0= ruleDataTypeExpression ) )* ) )
+            // InternalBug296889TestLanguage.g:84:2: ( (otherlv_0= 'Model' ( (lv_expressions_1_0= ruleExpression ) )* ) | (otherlv_2= 'DataType' ( (lv_values_3_0= ruleDataTypeExpression ) )* ) )
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -156,18 +158,18 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
             }
             switch (alt3) {
                 case 1 :
-                    // InternalBug296889TestLanguage.g:86:2: (otherlv_0= 'Model' ( (lv_expressions_1_0= ruleExpression ) )* )
+                    // InternalBug296889TestLanguage.g:85:3: (otherlv_0= 'Model' ( (lv_expressions_1_0= ruleExpression ) )* )
                     {
-                    // InternalBug296889TestLanguage.g:86:2: (otherlv_0= 'Model' ( (lv_expressions_1_0= ruleExpression ) )* )
+                    // InternalBug296889TestLanguage.g:85:3: (otherlv_0= 'Model' ( (lv_expressions_1_0= ruleExpression ) )* )
                     // InternalBug296889TestLanguage.g:86:4: otherlv_0= 'Model' ( (lv_expressions_1_0= ruleExpression ) )*
                     {
                     otherlv_0=(Token)match(input,11,FollowSets000.FOLLOW_3); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
-                          	newLeafNode(otherlv_0, grammarAccess.getModelAccess().getModelKeyword_0_0());
-                          
+                      				newLeafNode(otherlv_0, grammarAccess.getModelAccess().getModelKeyword_0_0());
+                      			
                     }
-                    // InternalBug296889TestLanguage.g:90:1: ( (lv_expressions_1_0= ruleExpression ) )*
+                    // InternalBug296889TestLanguage.g:90:4: ( (lv_expressions_1_0= ruleExpression ) )*
                     loop1:
                     do {
                         int alt1=2;
@@ -180,15 +182,15 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
 
                         switch (alt1) {
                     	case 1 :
-                    	    // InternalBug296889TestLanguage.g:91:1: (lv_expressions_1_0= ruleExpression )
+                    	    // InternalBug296889TestLanguage.g:91:5: (lv_expressions_1_0= ruleExpression )
                     	    {
-                    	    // InternalBug296889TestLanguage.g:91:1: (lv_expressions_1_0= ruleExpression )
-                    	    // InternalBug296889TestLanguage.g:92:3: lv_expressions_1_0= ruleExpression
+                    	    // InternalBug296889TestLanguage.g:91:5: (lv_expressions_1_0= ruleExpression )
+                    	    // InternalBug296889TestLanguage.g:92:6: lv_expressions_1_0= ruleExpression
                     	    {
                     	    if ( state.backtracking==0 ) {
-                    	       
-                    	      	        newCompositeNode(grammarAccess.getModelAccess().getExpressionsExpressionParserRuleCall_0_1_0()); 
-                    	      	    
+
+                    	      						newCompositeNode(grammarAccess.getModelAccess().getExpressionsExpressionParserRuleCall_0_1_0());
+                    	      					
                     	    }
                     	    pushFollow(FollowSets000.FOLLOW_3);
                     	    lv_expressions_1_0=ruleExpression();
@@ -197,16 +199,16 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
                     	    if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
 
-                    	      	        if (current==null) {
-                    	      	            current = createModelElementForParent(grammarAccess.getModelRule());
-                    	      	        }
-                    	             		add(
-                    	             			current, 
-                    	             			"expressions",
-                    	              		lv_expressions_1_0, 
-                    	              		"org.eclipse.xtext.parser.antlr.Bug296889TestLanguage.Expression");
-                    	      	        afterParserOrEnumRuleCall();
-                    	      	    
+                    	      						if (current==null) {
+                    	      							current = createModelElementForParent(grammarAccess.getModelRule());
+                    	      						}
+                    	      						add(
+                    	      							current,
+                    	      							"expressions",
+                    	      							lv_expressions_1_0,
+                    	      							"org.eclipse.xtext.parser.antlr.Bug296889TestLanguage.Expression");
+                    	      						afterParserOrEnumRuleCall();
+                    	      					
                     	    }
 
                     	    }
@@ -227,18 +229,18 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
                     }
                     break;
                 case 2 :
-                    // InternalBug296889TestLanguage.g:109:6: (otherlv_2= 'DataType' ( (lv_values_3_0= ruleDataTypeExpression ) )* )
+                    // InternalBug296889TestLanguage.g:111:3: (otherlv_2= 'DataType' ( (lv_values_3_0= ruleDataTypeExpression ) )* )
                     {
-                    // InternalBug296889TestLanguage.g:109:6: (otherlv_2= 'DataType' ( (lv_values_3_0= ruleDataTypeExpression ) )* )
-                    // InternalBug296889TestLanguage.g:109:8: otherlv_2= 'DataType' ( (lv_values_3_0= ruleDataTypeExpression ) )*
+                    // InternalBug296889TestLanguage.g:111:3: (otherlv_2= 'DataType' ( (lv_values_3_0= ruleDataTypeExpression ) )* )
+                    // InternalBug296889TestLanguage.g:112:4: otherlv_2= 'DataType' ( (lv_values_3_0= ruleDataTypeExpression ) )*
                     {
                     otherlv_2=(Token)match(input,12,FollowSets000.FOLLOW_3); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
-                          	newLeafNode(otherlv_2, grammarAccess.getModelAccess().getDataTypeKeyword_1_0());
-                          
+                      				newLeafNode(otherlv_2, grammarAccess.getModelAccess().getDataTypeKeyword_1_0());
+                      			
                     }
-                    // InternalBug296889TestLanguage.g:113:1: ( (lv_values_3_0= ruleDataTypeExpression ) )*
+                    // InternalBug296889TestLanguage.g:116:4: ( (lv_values_3_0= ruleDataTypeExpression ) )*
                     loop2:
                     do {
                         int alt2=2;
@@ -251,15 +253,15 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
 
                         switch (alt2) {
                     	case 1 :
-                    	    // InternalBug296889TestLanguage.g:114:1: (lv_values_3_0= ruleDataTypeExpression )
+                    	    // InternalBug296889TestLanguage.g:117:5: (lv_values_3_0= ruleDataTypeExpression )
                     	    {
-                    	    // InternalBug296889TestLanguage.g:114:1: (lv_values_3_0= ruleDataTypeExpression )
-                    	    // InternalBug296889TestLanguage.g:115:3: lv_values_3_0= ruleDataTypeExpression
+                    	    // InternalBug296889TestLanguage.g:117:5: (lv_values_3_0= ruleDataTypeExpression )
+                    	    // InternalBug296889TestLanguage.g:118:6: lv_values_3_0= ruleDataTypeExpression
                     	    {
                     	    if ( state.backtracking==0 ) {
-                    	       
-                    	      	        newCompositeNode(grammarAccess.getModelAccess().getValuesDataTypeExpressionParserRuleCall_1_1_0()); 
-                    	      	    
+
+                    	      						newCompositeNode(grammarAccess.getModelAccess().getValuesDataTypeExpressionParserRuleCall_1_1_0());
+                    	      					
                     	    }
                     	    pushFollow(FollowSets000.FOLLOW_3);
                     	    lv_values_3_0=ruleDataTypeExpression();
@@ -268,16 +270,16 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
                     	    if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
 
-                    	      	        if (current==null) {
-                    	      	            current = createModelElementForParent(grammarAccess.getModelRule());
-                    	      	        }
-                    	             		add(
-                    	             			current, 
-                    	             			"values",
-                    	              		lv_values_3_0, 
-                    	              		"org.eclipse.xtext.parser.antlr.Bug296889TestLanguage.DataTypeExpression");
-                    	      	        afterParserOrEnumRuleCall();
-                    	      	    
+                    	      						if (current==null) {
+                    	      							current = createModelElementForParent(grammarAccess.getModelRule());
+                    	      						}
+                    	      						add(
+                    	      							current,
+                    	      							"values",
+                    	      							lv_values_3_0,
+                    	      							"org.eclipse.xtext.parser.antlr.Bug296889TestLanguage.DataTypeExpression");
+                    	      						afterParserOrEnumRuleCall();
+                    	      					
                     	    }
 
                     	    }
@@ -304,14 +306,16 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
             }
 
             if ( state.backtracking==0 ) {
-               leaveRule(); 
+
+              	leaveRule();
+
             }
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -320,7 +324,7 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleExpression"
-    // InternalBug296889TestLanguage.g:139:1: entryRuleExpression returns [EObject current=null] : iv_ruleExpression= ruleExpression EOF ;
+    // InternalBug296889TestLanguage.g:140:1: entryRuleExpression returns [EObject current=null] : iv_ruleExpression= ruleExpression EOF ;
     public final EObject entryRuleExpression() throws RecognitionException {
         EObject current = null;
 
@@ -328,7 +332,7 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // InternalBug296889TestLanguage.g:140:2: (iv_ruleExpression= ruleExpression EOF )
+            // InternalBug296889TestLanguage.g:140:51: (iv_ruleExpression= ruleExpression EOF )
             // InternalBug296889TestLanguage.g:141:2: iv_ruleExpression= ruleExpression EOF
             {
             if ( state.backtracking==0 ) {
@@ -347,11 +351,11 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -360,7 +364,7 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleExpression"
-    // InternalBug296889TestLanguage.g:148:1: ruleExpression returns [EObject current=null] : (this_Postop_0= rulePostop | this_Preop_1= rulePreop ) ;
+    // InternalBug296889TestLanguage.g:147:1: ruleExpression returns [EObject current=null] : (this_Postop_0= rulePostop | this_Preop_1= rulePreop ) ;
     public final EObject ruleExpression() throws RecognitionException {
         EObject current = null;
 
@@ -369,13 +373,14 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
         EObject this_Preop_1 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalBug296889TestLanguage.g:151:28: ( (this_Postop_0= rulePostop | this_Preop_1= rulePreop ) )
-            // InternalBug296889TestLanguage.g:152:1: (this_Postop_0= rulePostop | this_Preop_1= rulePreop )
+            // InternalBug296889TestLanguage.g:153:2: ( (this_Postop_0= rulePostop | this_Preop_1= rulePreop ) )
+            // InternalBug296889TestLanguage.g:154:2: (this_Postop_0= rulePostop | this_Preop_1= rulePreop )
             {
-            // InternalBug296889TestLanguage.g:152:1: (this_Postop_0= rulePostop | this_Preop_1= rulePreop )
+            // InternalBug296889TestLanguage.g:154:2: (this_Postop_0= rulePostop | this_Preop_1= rulePreop )
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -394,17 +399,17 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
             }
             switch (alt4) {
                 case 1 :
-                    // InternalBug296889TestLanguage.g:153:2: this_Postop_0= rulePostop
+                    // InternalBug296889TestLanguage.g:155:3: this_Postop_0= rulePostop
                     {
                     if ( state.backtracking==0 ) {
-                       
-                      	  /* */ 
-                      	
+
+                      			/* */
+                      		
                     }
                     if ( state.backtracking==0 ) {
-                       
-                              newCompositeNode(grammarAccess.getExpressionAccess().getPostopParserRuleCall_0()); 
-                          
+
+                      			newCompositeNode(grammarAccess.getExpressionAccess().getPostopParserRuleCall_0());
+                      		
                     }
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_Postop_0=rulePostop();
@@ -412,26 +417,26 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
                     state._fsp--;
                     if (state.failed) return current;
                     if ( state.backtracking==0 ) {
-                       
-                              current = this_Postop_0; 
-                              afterParserOrEnumRuleCall();
-                          
+
+                      			current = this_Postop_0;
+                      			afterParserOrEnumRuleCall();
+                      		
                     }
 
                     }
                     break;
                 case 2 :
-                    // InternalBug296889TestLanguage.g:166:2: this_Preop_1= rulePreop
+                    // InternalBug296889TestLanguage.g:167:3: this_Preop_1= rulePreop
                     {
                     if ( state.backtracking==0 ) {
-                       
-                      	  /* */ 
-                      	
+
+                      			/* */
+                      		
                     }
                     if ( state.backtracking==0 ) {
-                       
-                              newCompositeNode(grammarAccess.getExpressionAccess().getPreopParserRuleCall_1()); 
-                          
+
+                      			newCompositeNode(grammarAccess.getExpressionAccess().getPreopParserRuleCall_1());
+                      		
                     }
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_Preop_1=rulePreop();
@@ -439,10 +444,10 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
                     state._fsp--;
                     if (state.failed) return current;
                     if ( state.backtracking==0 ) {
-                       
-                              current = this_Preop_1; 
-                              afterParserOrEnumRuleCall();
-                          
+
+                      			current = this_Preop_1;
+                      			afterParserOrEnumRuleCall();
+                      		
                     }
 
                     }
@@ -454,14 +459,16 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
             }
 
             if ( state.backtracking==0 ) {
-               leaveRule(); 
+
+              	leaveRule();
+
             }
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -470,7 +477,7 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRulePreop"
-    // InternalBug296889TestLanguage.g:185:1: entryRulePreop returns [EObject current=null] : iv_rulePreop= rulePreop EOF ;
+    // InternalBug296889TestLanguage.g:182:1: entryRulePreop returns [EObject current=null] : iv_rulePreop= rulePreop EOF ;
     public final EObject entryRulePreop() throws RecognitionException {
         EObject current = null;
 
@@ -478,8 +485,8 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // InternalBug296889TestLanguage.g:186:2: (iv_rulePreop= rulePreop EOF )
-            // InternalBug296889TestLanguage.g:187:2: iv_rulePreop= rulePreop EOF
+            // InternalBug296889TestLanguage.g:182:46: (iv_rulePreop= rulePreop EOF )
+            // InternalBug296889TestLanguage.g:183:2: iv_rulePreop= rulePreop EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getPreopRule()); 
@@ -497,11 +504,11 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -510,7 +517,7 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "rulePreop"
-    // InternalBug296889TestLanguage.g:194:1: rulePreop returns [EObject current=null] : ( () ( (lv_functionName_1_0= '--' ) ) ( (lv_expr_2_0= ruleVariable ) ) ) ;
+    // InternalBug296889TestLanguage.g:189:1: rulePreop returns [EObject current=null] : ( () ( (lv_functionName_1_0= '--' ) ) ( (lv_expr_2_0= ruleVariable ) ) ) ;
     public final EObject rulePreop() throws RecognitionException {
         EObject current = null;
 
@@ -518,52 +525,53 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
         EObject lv_expr_2_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalBug296889TestLanguage.g:197:28: ( ( () ( (lv_functionName_1_0= '--' ) ) ( (lv_expr_2_0= ruleVariable ) ) ) )
-            // InternalBug296889TestLanguage.g:198:1: ( () ( (lv_functionName_1_0= '--' ) ) ( (lv_expr_2_0= ruleVariable ) ) )
+            // InternalBug296889TestLanguage.g:195:2: ( ( () ( (lv_functionName_1_0= '--' ) ) ( (lv_expr_2_0= ruleVariable ) ) ) )
+            // InternalBug296889TestLanguage.g:196:2: ( () ( (lv_functionName_1_0= '--' ) ) ( (lv_expr_2_0= ruleVariable ) ) )
             {
-            // InternalBug296889TestLanguage.g:198:1: ( () ( (lv_functionName_1_0= '--' ) ) ( (lv_expr_2_0= ruleVariable ) ) )
-            // InternalBug296889TestLanguage.g:198:2: () ( (lv_functionName_1_0= '--' ) ) ( (lv_expr_2_0= ruleVariable ) )
+            // InternalBug296889TestLanguage.g:196:2: ( () ( (lv_functionName_1_0= '--' ) ) ( (lv_expr_2_0= ruleVariable ) ) )
+            // InternalBug296889TestLanguage.g:197:3: () ( (lv_functionName_1_0= '--' ) ) ( (lv_expr_2_0= ruleVariable ) )
             {
-            // InternalBug296889TestLanguage.g:198:2: ()
-            // InternalBug296889TestLanguage.g:199:2: 
+            // InternalBug296889TestLanguage.g:197:3: ()
+            // InternalBug296889TestLanguage.g:198:4: 
             {
             if ( state.backtracking==0 ) {
-               
-              	  /* */ 
-              	
+
+              				/* */
+              			
             }
             if ( state.backtracking==0 ) {
 
-                      current = forceCreateModelElement(
-                          grammarAccess.getPreopAccess().getPreopAction_0(),
-                          current);
-                  
+              				current = forceCreateModelElement(
+              					grammarAccess.getPreopAccess().getPreopAction_0(),
+              					current);
+              			
             }
 
             }
 
-            // InternalBug296889TestLanguage.g:207:2: ( (lv_functionName_1_0= '--' ) )
-            // InternalBug296889TestLanguage.g:208:1: (lv_functionName_1_0= '--' )
+            // InternalBug296889TestLanguage.g:207:3: ( (lv_functionName_1_0= '--' ) )
+            // InternalBug296889TestLanguage.g:208:4: (lv_functionName_1_0= '--' )
             {
-            // InternalBug296889TestLanguage.g:208:1: (lv_functionName_1_0= '--' )
-            // InternalBug296889TestLanguage.g:209:3: lv_functionName_1_0= '--'
+            // InternalBug296889TestLanguage.g:208:4: (lv_functionName_1_0= '--' )
+            // InternalBug296889TestLanguage.g:209:5: lv_functionName_1_0= '--'
             {
             lv_functionName_1_0=(Token)match(input,13,FollowSets000.FOLLOW_4); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
-                      newLeafNode(lv_functionName_1_0, grammarAccess.getPreopAccess().getFunctionNameHyphenMinusHyphenMinusKeyword_1_0());
-                  
+              					newLeafNode(lv_functionName_1_0, grammarAccess.getPreopAccess().getFunctionNameHyphenMinusHyphenMinusKeyword_1_0());
+              				
             }
             if ( state.backtracking==0 ) {
 
-              	        if (current==null) {
-              	            current = createModelElement(grammarAccess.getPreopRule());
-              	        }
-                     		setWithLastConsumed(current, "functionName", lv_functionName_1_0, "--");
-              	    
+              					if (current==null) {
+              						current = createModelElement(grammarAccess.getPreopRule());
+              					}
+              					setWithLastConsumed(current, "functionName", lv_functionName_1_0, "--");
+              				
             }
 
             }
@@ -571,16 +579,16 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-            // InternalBug296889TestLanguage.g:222:2: ( (lv_expr_2_0= ruleVariable ) )
-            // InternalBug296889TestLanguage.g:223:1: (lv_expr_2_0= ruleVariable )
+            // InternalBug296889TestLanguage.g:221:3: ( (lv_expr_2_0= ruleVariable ) )
+            // InternalBug296889TestLanguage.g:222:4: (lv_expr_2_0= ruleVariable )
             {
-            // InternalBug296889TestLanguage.g:223:1: (lv_expr_2_0= ruleVariable )
-            // InternalBug296889TestLanguage.g:224:3: lv_expr_2_0= ruleVariable
+            // InternalBug296889TestLanguage.g:222:4: (lv_expr_2_0= ruleVariable )
+            // InternalBug296889TestLanguage.g:223:5: lv_expr_2_0= ruleVariable
             {
             if ( state.backtracking==0 ) {
-               
-              	        newCompositeNode(grammarAccess.getPreopAccess().getExprVariableParserRuleCall_2_0()); 
-              	    
+
+              					newCompositeNode(grammarAccess.getPreopAccess().getExprVariableParserRuleCall_2_0());
+              				
             }
             pushFollow(FollowSets000.FOLLOW_2);
             lv_expr_2_0=ruleVariable();
@@ -589,16 +597,16 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
             if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
-              	        if (current==null) {
-              	            current = createModelElementForParent(grammarAccess.getPreopRule());
-              	        }
-                     		set(
-                     			current, 
-                     			"expr",
-                      		lv_expr_2_0, 
-                      		"org.eclipse.xtext.parser.antlr.Bug296889TestLanguage.Variable");
-              	        afterParserOrEnumRuleCall();
-              	    
+              					if (current==null) {
+              						current = createModelElementForParent(grammarAccess.getPreopRule());
+              					}
+              					set(
+              						current,
+              						"expr",
+              						lv_expr_2_0,
+              						"org.eclipse.xtext.parser.antlr.Bug296889TestLanguage.Variable");
+              					afterParserOrEnumRuleCall();
+              				
             }
 
             }
@@ -613,14 +621,16 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
             }
 
             if ( state.backtracking==0 ) {
-               leaveRule(); 
+
+              	leaveRule();
+
             }
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -629,7 +639,7 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRulePostop"
-    // InternalBug296889TestLanguage.g:248:1: entryRulePostop returns [EObject current=null] : iv_rulePostop= rulePostop EOF ;
+    // InternalBug296889TestLanguage.g:244:1: entryRulePostop returns [EObject current=null] : iv_rulePostop= rulePostop EOF ;
     public final EObject entryRulePostop() throws RecognitionException {
         EObject current = null;
 
@@ -637,8 +647,8 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // InternalBug296889TestLanguage.g:249:2: (iv_rulePostop= rulePostop EOF )
-            // InternalBug296889TestLanguage.g:250:2: iv_rulePostop= rulePostop EOF
+            // InternalBug296889TestLanguage.g:244:47: (iv_rulePostop= rulePostop EOF )
+            // InternalBug296889TestLanguage.g:245:2: iv_rulePostop= rulePostop EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getPostopRule()); 
@@ -656,11 +666,11 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -669,7 +679,7 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "rulePostop"
-    // InternalBug296889TestLanguage.g:257:1: rulePostop returns [EObject current=null] : (this_Variable_0= ruleVariable ( () ( (lv_functionName_2_0= '--' ) ) )? ) ;
+    // InternalBug296889TestLanguage.g:251:1: rulePostop returns [EObject current=null] : (this_Variable_0= ruleVariable ( () ( (lv_functionName_2_0= '--' ) ) )? ) ;
     public final EObject rulePostop() throws RecognitionException {
         EObject current = null;
 
@@ -677,24 +687,25 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
         EObject this_Variable_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalBug296889TestLanguage.g:260:28: ( (this_Variable_0= ruleVariable ( () ( (lv_functionName_2_0= '--' ) ) )? ) )
-            // InternalBug296889TestLanguage.g:261:1: (this_Variable_0= ruleVariable ( () ( (lv_functionName_2_0= '--' ) ) )? )
+            // InternalBug296889TestLanguage.g:257:2: ( (this_Variable_0= ruleVariable ( () ( (lv_functionName_2_0= '--' ) ) )? ) )
+            // InternalBug296889TestLanguage.g:258:2: (this_Variable_0= ruleVariable ( () ( (lv_functionName_2_0= '--' ) ) )? )
             {
-            // InternalBug296889TestLanguage.g:261:1: (this_Variable_0= ruleVariable ( () ( (lv_functionName_2_0= '--' ) ) )? )
-            // InternalBug296889TestLanguage.g:262:2: this_Variable_0= ruleVariable ( () ( (lv_functionName_2_0= '--' ) ) )?
+            // InternalBug296889TestLanguage.g:258:2: (this_Variable_0= ruleVariable ( () ( (lv_functionName_2_0= '--' ) ) )? )
+            // InternalBug296889TestLanguage.g:259:3: this_Variable_0= ruleVariable ( () ( (lv_functionName_2_0= '--' ) ) )?
             {
             if ( state.backtracking==0 ) {
-               
-              	  /* */ 
-              	
+
+              			/* */
+              		
             }
             if ( state.backtracking==0 ) {
-               
-                      newCompositeNode(grammarAccess.getPostopAccess().getVariableParserRuleCall_0()); 
-                  
+
+              			newCompositeNode(grammarAccess.getPostopAccess().getVariableParserRuleCall_0());
+              		
             }
             pushFollow(FollowSets000.FOLLOW_5);
             this_Variable_0=ruleVariable();
@@ -702,12 +713,12 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
             state._fsp--;
             if (state.failed) return current;
             if ( state.backtracking==0 ) {
-               
-                      current = this_Variable_0; 
-                      afterParserOrEnumRuleCall();
-                  
+
+              			current = this_Variable_0;
+              			afterParserOrEnumRuleCall();
+              		
             }
-            // InternalBug296889TestLanguage.g:273:1: ( () ( (lv_functionName_2_0= '--' ) ) )?
+            // InternalBug296889TestLanguage.g:270:3: ( () ( (lv_functionName_2_0= '--' ) ) )?
             int alt5=2;
             int LA5_0 = input.LA(1);
 
@@ -727,45 +738,45 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
             }
             switch (alt5) {
                 case 1 :
-                    // InternalBug296889TestLanguage.g:273:2: () ( (lv_functionName_2_0= '--' ) )
+                    // InternalBug296889TestLanguage.g:271:4: () ( (lv_functionName_2_0= '--' ) )
                     {
-                    // InternalBug296889TestLanguage.g:273:2: ()
-                    // InternalBug296889TestLanguage.g:274:2: 
+                    // InternalBug296889TestLanguage.g:271:4: ()
+                    // InternalBug296889TestLanguage.g:272:5: 
                     {
                     if ( state.backtracking==0 ) {
-                       
-                      	  /* */ 
-                      	
+
+                      					/* */
+                      				
                     }
                     if ( state.backtracking==0 ) {
 
-                              current = forceCreateModelElementAndSet(
-                                  grammarAccess.getPostopAccess().getPostopExprAction_1_0(),
-                                  current);
-                          
+                      					current = forceCreateModelElementAndSet(
+                      						grammarAccess.getPostopAccess().getPostopExprAction_1_0(),
+                      						current);
+                      				
                     }
 
                     }
 
-                    // InternalBug296889TestLanguage.g:282:2: ( (lv_functionName_2_0= '--' ) )
-                    // InternalBug296889TestLanguage.g:283:1: (lv_functionName_2_0= '--' )
+                    // InternalBug296889TestLanguage.g:281:4: ( (lv_functionName_2_0= '--' ) )
+                    // InternalBug296889TestLanguage.g:282:5: (lv_functionName_2_0= '--' )
                     {
-                    // InternalBug296889TestLanguage.g:283:1: (lv_functionName_2_0= '--' )
-                    // InternalBug296889TestLanguage.g:284:3: lv_functionName_2_0= '--'
+                    // InternalBug296889TestLanguage.g:282:5: (lv_functionName_2_0= '--' )
+                    // InternalBug296889TestLanguage.g:283:6: lv_functionName_2_0= '--'
                     {
                     lv_functionName_2_0=(Token)match(input,13,FollowSets000.FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
-                              newLeafNode(lv_functionName_2_0, grammarAccess.getPostopAccess().getFunctionNameHyphenMinusHyphenMinusKeyword_1_1_0());
-                          
+                      						newLeafNode(lv_functionName_2_0, grammarAccess.getPostopAccess().getFunctionNameHyphenMinusHyphenMinusKeyword_1_1_0());
+                      					
                     }
                     if ( state.backtracking==0 ) {
 
-                      	        if (current==null) {
-                      	            current = createModelElement(grammarAccess.getPostopRule());
-                      	        }
-                             		setWithLastConsumed(current, "functionName", lv_functionName_2_0, "--");
-                      	    
+                      						if (current==null) {
+                      							current = createModelElement(grammarAccess.getPostopRule());
+                      						}
+                      						setWithLastConsumed(current, "functionName", lv_functionName_2_0, "--");
+                      					
                     }
 
                     }
@@ -786,14 +797,16 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
             }
 
             if ( state.backtracking==0 ) {
-               leaveRule(); 
+
+              	leaveRule();
+
             }
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -802,7 +815,7 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleVariable"
-    // InternalBug296889TestLanguage.g:305:1: entryRuleVariable returns [EObject current=null] : iv_ruleVariable= ruleVariable EOF ;
+    // InternalBug296889TestLanguage.g:300:1: entryRuleVariable returns [EObject current=null] : iv_ruleVariable= ruleVariable EOF ;
     public final EObject entryRuleVariable() throws RecognitionException {
         EObject current = null;
 
@@ -810,8 +823,8 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // InternalBug296889TestLanguage.g:306:2: (iv_ruleVariable= ruleVariable EOF )
-            // InternalBug296889TestLanguage.g:307:2: iv_ruleVariable= ruleVariable EOF
+            // InternalBug296889TestLanguage.g:300:49: (iv_ruleVariable= ruleVariable EOF )
+            // InternalBug296889TestLanguage.g:301:2: iv_ruleVariable= ruleVariable EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getVariableRule()); 
@@ -829,11 +842,11 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -842,62 +855,63 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleVariable"
-    // InternalBug296889TestLanguage.g:314:1: ruleVariable returns [EObject current=null] : ( () ( (lv_name_1_0= RULE_ID ) ) ) ;
+    // InternalBug296889TestLanguage.g:307:1: ruleVariable returns [EObject current=null] : ( () ( (lv_name_1_0= RULE_ID ) ) ) ;
     public final EObject ruleVariable() throws RecognitionException {
         EObject current = null;
 
         Token lv_name_1_0=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalBug296889TestLanguage.g:317:28: ( ( () ( (lv_name_1_0= RULE_ID ) ) ) )
-            // InternalBug296889TestLanguage.g:318:1: ( () ( (lv_name_1_0= RULE_ID ) ) )
+            // InternalBug296889TestLanguage.g:313:2: ( ( () ( (lv_name_1_0= RULE_ID ) ) ) )
+            // InternalBug296889TestLanguage.g:314:2: ( () ( (lv_name_1_0= RULE_ID ) ) )
             {
-            // InternalBug296889TestLanguage.g:318:1: ( () ( (lv_name_1_0= RULE_ID ) ) )
-            // InternalBug296889TestLanguage.g:318:2: () ( (lv_name_1_0= RULE_ID ) )
+            // InternalBug296889TestLanguage.g:314:2: ( () ( (lv_name_1_0= RULE_ID ) ) )
+            // InternalBug296889TestLanguage.g:315:3: () ( (lv_name_1_0= RULE_ID ) )
             {
-            // InternalBug296889TestLanguage.g:318:2: ()
-            // InternalBug296889TestLanguage.g:319:2: 
+            // InternalBug296889TestLanguage.g:315:3: ()
+            // InternalBug296889TestLanguage.g:316:4: 
             {
             if ( state.backtracking==0 ) {
-               
-              	  /* */ 
-              	
+
+              				/* */
+              			
             }
             if ( state.backtracking==0 ) {
 
-                      current = forceCreateModelElement(
-                          grammarAccess.getVariableAccess().getVariableAction_0(),
-                          current);
-                  
+              				current = forceCreateModelElement(
+              					grammarAccess.getVariableAccess().getVariableAction_0(),
+              					current);
+              			
             }
 
             }
 
-            // InternalBug296889TestLanguage.g:327:2: ( (lv_name_1_0= RULE_ID ) )
-            // InternalBug296889TestLanguage.g:328:1: (lv_name_1_0= RULE_ID )
+            // InternalBug296889TestLanguage.g:325:3: ( (lv_name_1_0= RULE_ID ) )
+            // InternalBug296889TestLanguage.g:326:4: (lv_name_1_0= RULE_ID )
             {
-            // InternalBug296889TestLanguage.g:328:1: (lv_name_1_0= RULE_ID )
-            // InternalBug296889TestLanguage.g:329:3: lv_name_1_0= RULE_ID
+            // InternalBug296889TestLanguage.g:326:4: (lv_name_1_0= RULE_ID )
+            // InternalBug296889TestLanguage.g:327:5: lv_name_1_0= RULE_ID
             {
             lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
-              			newLeafNode(lv_name_1_0, grammarAccess.getVariableAccess().getNameIDTerminalRuleCall_1_0()); 
-              		
+              					newLeafNode(lv_name_1_0, grammarAccess.getVariableAccess().getNameIDTerminalRuleCall_1_0());
+              				
             }
             if ( state.backtracking==0 ) {
 
-              	        if (current==null) {
-              	            current = createModelElement(grammarAccess.getVariableRule());
-              	        }
-                     		setWithLastConsumed(
-                     			current, 
-                     			"name",
-                      		lv_name_1_0, 
-                      		"org.eclipse.xtext.common.Terminals.ID");
-              	    
+              					if (current==null) {
+              						current = createModelElement(grammarAccess.getVariableRule());
+              					}
+              					setWithLastConsumed(
+              						current,
+              						"name",
+              						lv_name_1_0,
+              						"org.eclipse.xtext.common.Terminals.ID");
+              				
             }
 
             }
@@ -912,14 +926,16 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
             }
 
             if ( state.backtracking==0 ) {
-               leaveRule(); 
+
+              	leaveRule();
+
             }
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -928,7 +944,7 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleDataTypeExpression"
-    // InternalBug296889TestLanguage.g:353:1: entryRuleDataTypeExpression returns [String current=null] : iv_ruleDataTypeExpression= ruleDataTypeExpression EOF ;
+    // InternalBug296889TestLanguage.g:347:1: entryRuleDataTypeExpression returns [String current=null] : iv_ruleDataTypeExpression= ruleDataTypeExpression EOF ;
     public final String entryRuleDataTypeExpression() throws RecognitionException {
         String current = null;
 
@@ -936,8 +952,8 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // InternalBug296889TestLanguage.g:354:2: (iv_ruleDataTypeExpression= ruleDataTypeExpression EOF )
-            // InternalBug296889TestLanguage.g:355:2: iv_ruleDataTypeExpression= ruleDataTypeExpression EOF
+            // InternalBug296889TestLanguage.g:347:58: (iv_ruleDataTypeExpression= ruleDataTypeExpression EOF )
+            // InternalBug296889TestLanguage.g:348:2: iv_ruleDataTypeExpression= ruleDataTypeExpression EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getDataTypeExpressionRule()); 
@@ -955,11 +971,11 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -968,7 +984,7 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleDataTypeExpression"
-    // InternalBug296889TestLanguage.g:362:1: ruleDataTypeExpression returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_DataTypePostop_0= ruleDataTypePostop | this_DataTypePreop_1= ruleDataTypePreop ) ;
+    // InternalBug296889TestLanguage.g:354:1: ruleDataTypeExpression returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_DataTypePostop_0= ruleDataTypePostop | this_DataTypePreop_1= ruleDataTypePreop ) ;
     public final AntlrDatatypeRuleToken ruleDataTypeExpression() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -977,13 +993,14 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
         AntlrDatatypeRuleToken this_DataTypePreop_1 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalBug296889TestLanguage.g:365:28: ( (this_DataTypePostop_0= ruleDataTypePostop | this_DataTypePreop_1= ruleDataTypePreop ) )
-            // InternalBug296889TestLanguage.g:366:1: (this_DataTypePostop_0= ruleDataTypePostop | this_DataTypePreop_1= ruleDataTypePreop )
+            // InternalBug296889TestLanguage.g:360:2: ( (this_DataTypePostop_0= ruleDataTypePostop | this_DataTypePreop_1= ruleDataTypePreop ) )
+            // InternalBug296889TestLanguage.g:361:2: (this_DataTypePostop_0= ruleDataTypePostop | this_DataTypePreop_1= ruleDataTypePreop )
             {
-            // InternalBug296889TestLanguage.g:366:1: (this_DataTypePostop_0= ruleDataTypePostop | this_DataTypePreop_1= ruleDataTypePreop )
+            // InternalBug296889TestLanguage.g:361:2: (this_DataTypePostop_0= ruleDataTypePostop | this_DataTypePreop_1= ruleDataTypePreop )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -1002,12 +1019,12 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
             }
             switch (alt6) {
                 case 1 :
-                    // InternalBug296889TestLanguage.g:367:5: this_DataTypePostop_0= ruleDataTypePostop
+                    // InternalBug296889TestLanguage.g:362:3: this_DataTypePostop_0= ruleDataTypePostop
                     {
                     if ( state.backtracking==0 ) {
-                       
-                              newCompositeNode(grammarAccess.getDataTypeExpressionAccess().getDataTypePostopParserRuleCall_0()); 
-                          
+
+                      			newCompositeNode(grammarAccess.getDataTypeExpressionAccess().getDataTypePostopParserRuleCall_0());
+                      		
                     }
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_DataTypePostop_0=ruleDataTypePostop();
@@ -1016,24 +1033,24 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
                     if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
-                      		current.merge(this_DataTypePostop_0);
-                          
+                      			current.merge(this_DataTypePostop_0);
+                      		
                     }
                     if ( state.backtracking==0 ) {
-                       
-                              afterParserOrEnumRuleCall();
-                          
+
+                      			afterParserOrEnumRuleCall();
+                      		
                     }
 
                     }
                     break;
                 case 2 :
-                    // InternalBug296889TestLanguage.g:379:5: this_DataTypePreop_1= ruleDataTypePreop
+                    // InternalBug296889TestLanguage.g:373:3: this_DataTypePreop_1= ruleDataTypePreop
                     {
                     if ( state.backtracking==0 ) {
-                       
-                              newCompositeNode(grammarAccess.getDataTypeExpressionAccess().getDataTypePreopParserRuleCall_1()); 
-                          
+
+                      			newCompositeNode(grammarAccess.getDataTypeExpressionAccess().getDataTypePreopParserRuleCall_1());
+                      		
                     }
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_DataTypePreop_1=ruleDataTypePreop();
@@ -1042,13 +1059,13 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
                     if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
-                      		current.merge(this_DataTypePreop_1);
-                          
+                      			current.merge(this_DataTypePreop_1);
+                      		
                     }
                     if ( state.backtracking==0 ) {
-                       
-                              afterParserOrEnumRuleCall();
-                          
+
+                      			afterParserOrEnumRuleCall();
+                      		
                     }
 
                     }
@@ -1060,14 +1077,16 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
             }
 
             if ( state.backtracking==0 ) {
-               leaveRule(); 
+
+              	leaveRule();
+
             }
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1076,7 +1095,7 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleDataTypePreop"
-    // InternalBug296889TestLanguage.g:397:1: entryRuleDataTypePreop returns [String current=null] : iv_ruleDataTypePreop= ruleDataTypePreop EOF ;
+    // InternalBug296889TestLanguage.g:387:1: entryRuleDataTypePreop returns [String current=null] : iv_ruleDataTypePreop= ruleDataTypePreop EOF ;
     public final String entryRuleDataTypePreop() throws RecognitionException {
         String current = null;
 
@@ -1084,8 +1103,8 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // InternalBug296889TestLanguage.g:398:2: (iv_ruleDataTypePreop= ruleDataTypePreop EOF )
-            // InternalBug296889TestLanguage.g:399:2: iv_ruleDataTypePreop= ruleDataTypePreop EOF
+            // InternalBug296889TestLanguage.g:387:53: (iv_ruleDataTypePreop= ruleDataTypePreop EOF )
+            // InternalBug296889TestLanguage.g:388:2: iv_ruleDataTypePreop= ruleDataTypePreop EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getDataTypePreopRule()); 
@@ -1103,11 +1122,11 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1116,7 +1135,7 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleDataTypePreop"
-    // InternalBug296889TestLanguage.g:406:1: ruleDataTypePreop returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= '--' this_DataTypeVariable_1= ruleDataTypeVariable ) ;
+    // InternalBug296889TestLanguage.g:394:1: ruleDataTypePreop returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= '--' this_DataTypeVariable_1= ruleDataTypeVariable ) ;
     public final AntlrDatatypeRuleToken ruleDataTypePreop() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -1124,26 +1143,27 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
         AntlrDatatypeRuleToken this_DataTypeVariable_1 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalBug296889TestLanguage.g:409:28: ( (kw= '--' this_DataTypeVariable_1= ruleDataTypeVariable ) )
-            // InternalBug296889TestLanguage.g:410:1: (kw= '--' this_DataTypeVariable_1= ruleDataTypeVariable )
+            // InternalBug296889TestLanguage.g:400:2: ( (kw= '--' this_DataTypeVariable_1= ruleDataTypeVariable ) )
+            // InternalBug296889TestLanguage.g:401:2: (kw= '--' this_DataTypeVariable_1= ruleDataTypeVariable )
             {
-            // InternalBug296889TestLanguage.g:410:1: (kw= '--' this_DataTypeVariable_1= ruleDataTypeVariable )
-            // InternalBug296889TestLanguage.g:411:2: kw= '--' this_DataTypeVariable_1= ruleDataTypeVariable
+            // InternalBug296889TestLanguage.g:401:2: (kw= '--' this_DataTypeVariable_1= ruleDataTypeVariable )
+            // InternalBug296889TestLanguage.g:402:3: kw= '--' this_DataTypeVariable_1= ruleDataTypeVariable
             {
             kw=(Token)match(input,13,FollowSets000.FOLLOW_4); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
-                      current.merge(kw);
-                      newLeafNode(kw, grammarAccess.getDataTypePreopAccess().getHyphenMinusHyphenMinusKeyword_0()); 
-                  
+              			current.merge(kw);
+              			newLeafNode(kw, grammarAccess.getDataTypePreopAccess().getHyphenMinusHyphenMinusKeyword_0());
+              		
             }
             if ( state.backtracking==0 ) {
-               
-                      newCompositeNode(grammarAccess.getDataTypePreopAccess().getDataTypeVariableParserRuleCall_1()); 
-                  
+
+              			newCompositeNode(grammarAccess.getDataTypePreopAccess().getDataTypeVariableParserRuleCall_1());
+              		
             }
             pushFollow(FollowSets000.FOLLOW_2);
             this_DataTypeVariable_1=ruleDataTypeVariable();
@@ -1152,13 +1172,13 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
             if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
-              		current.merge(this_DataTypeVariable_1);
-                  
+              			current.merge(this_DataTypeVariable_1);
+              		
             }
             if ( state.backtracking==0 ) {
-               
-                      afterParserOrEnumRuleCall();
-                  
+
+              			afterParserOrEnumRuleCall();
+              		
             }
 
             }
@@ -1167,14 +1187,16 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
             }
 
             if ( state.backtracking==0 ) {
-               leaveRule(); 
+
+              	leaveRule();
+
             }
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1183,7 +1205,7 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleDataTypePostop"
-    // InternalBug296889TestLanguage.g:435:1: entryRuleDataTypePostop returns [String current=null] : iv_ruleDataTypePostop= ruleDataTypePostop EOF ;
+    // InternalBug296889TestLanguage.g:421:1: entryRuleDataTypePostop returns [String current=null] : iv_ruleDataTypePostop= ruleDataTypePostop EOF ;
     public final String entryRuleDataTypePostop() throws RecognitionException {
         String current = null;
 
@@ -1191,8 +1213,8 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // InternalBug296889TestLanguage.g:436:2: (iv_ruleDataTypePostop= ruleDataTypePostop EOF )
-            // InternalBug296889TestLanguage.g:437:2: iv_ruleDataTypePostop= ruleDataTypePostop EOF
+            // InternalBug296889TestLanguage.g:421:54: (iv_ruleDataTypePostop= ruleDataTypePostop EOF )
+            // InternalBug296889TestLanguage.g:422:2: iv_ruleDataTypePostop= ruleDataTypePostop EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getDataTypePostopRule()); 
@@ -1210,11 +1232,11 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1223,7 +1245,7 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleDataTypePostop"
-    // InternalBug296889TestLanguage.g:444:1: ruleDataTypePostop returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_DataTypeVariable_0= ruleDataTypeVariable (kw= '--' )? ) ;
+    // InternalBug296889TestLanguage.g:428:1: ruleDataTypePostop returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_DataTypeVariable_0= ruleDataTypeVariable (kw= '--' )? ) ;
     public final AntlrDatatypeRuleToken ruleDataTypePostop() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -1231,19 +1253,20 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
         AntlrDatatypeRuleToken this_DataTypeVariable_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalBug296889TestLanguage.g:447:28: ( (this_DataTypeVariable_0= ruleDataTypeVariable (kw= '--' )? ) )
-            // InternalBug296889TestLanguage.g:448:1: (this_DataTypeVariable_0= ruleDataTypeVariable (kw= '--' )? )
+            // InternalBug296889TestLanguage.g:434:2: ( (this_DataTypeVariable_0= ruleDataTypeVariable (kw= '--' )? ) )
+            // InternalBug296889TestLanguage.g:435:2: (this_DataTypeVariable_0= ruleDataTypeVariable (kw= '--' )? )
             {
-            // InternalBug296889TestLanguage.g:448:1: (this_DataTypeVariable_0= ruleDataTypeVariable (kw= '--' )? )
-            // InternalBug296889TestLanguage.g:449:5: this_DataTypeVariable_0= ruleDataTypeVariable (kw= '--' )?
+            // InternalBug296889TestLanguage.g:435:2: (this_DataTypeVariable_0= ruleDataTypeVariable (kw= '--' )? )
+            // InternalBug296889TestLanguage.g:436:3: this_DataTypeVariable_0= ruleDataTypeVariable (kw= '--' )?
             {
             if ( state.backtracking==0 ) {
-               
-                      newCompositeNode(grammarAccess.getDataTypePostopAccess().getDataTypeVariableParserRuleCall_0()); 
-                  
+
+              			newCompositeNode(grammarAccess.getDataTypePostopAccess().getDataTypeVariableParserRuleCall_0());
+              		
             }
             pushFollow(FollowSets000.FOLLOW_5);
             this_DataTypeVariable_0=ruleDataTypeVariable();
@@ -1252,15 +1275,15 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
             if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
-              		current.merge(this_DataTypeVariable_0);
-                  
+              			current.merge(this_DataTypeVariable_0);
+              		
             }
             if ( state.backtracking==0 ) {
-               
-                      afterParserOrEnumRuleCall();
-                  
+
+              			afterParserOrEnumRuleCall();
+              		
             }
-            // InternalBug296889TestLanguage.g:459:1: (kw= '--' )?
+            // InternalBug296889TestLanguage.g:446:3: (kw= '--' )?
             int alt7=2;
             int LA7_0 = input.LA(1);
 
@@ -1280,14 +1303,14 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
             }
             switch (alt7) {
                 case 1 :
-                    // InternalBug296889TestLanguage.g:460:2: kw= '--'
+                    // InternalBug296889TestLanguage.g:447:4: kw= '--'
                     {
                     kw=(Token)match(input,13,FollowSets000.FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
-                              current.merge(kw);
-                              newLeafNode(kw, grammarAccess.getDataTypePostopAccess().getHyphenMinusHyphenMinusKeyword_1()); 
-                          
+                      				current.merge(kw);
+                      				newLeafNode(kw, grammarAccess.getDataTypePostopAccess().getHyphenMinusHyphenMinusKeyword_1());
+                      			
                     }
 
                     }
@@ -1302,14 +1325,16 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
             }
 
             if ( state.backtracking==0 ) {
-               leaveRule(); 
+
+              	leaveRule();
+
             }
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1318,7 +1343,7 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleDataTypeVariable"
-    // InternalBug296889TestLanguage.g:473:1: entryRuleDataTypeVariable returns [String current=null] : iv_ruleDataTypeVariable= ruleDataTypeVariable EOF ;
+    // InternalBug296889TestLanguage.g:457:1: entryRuleDataTypeVariable returns [String current=null] : iv_ruleDataTypeVariable= ruleDataTypeVariable EOF ;
     public final String entryRuleDataTypeVariable() throws RecognitionException {
         String current = null;
 
@@ -1326,8 +1351,8 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // InternalBug296889TestLanguage.g:474:2: (iv_ruleDataTypeVariable= ruleDataTypeVariable EOF )
-            // InternalBug296889TestLanguage.g:475:2: iv_ruleDataTypeVariable= ruleDataTypeVariable EOF
+            // InternalBug296889TestLanguage.g:457:56: (iv_ruleDataTypeVariable= ruleDataTypeVariable EOF )
+            // InternalBug296889TestLanguage.g:458:2: iv_ruleDataTypeVariable= ruleDataTypeVariable EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getDataTypeVariableRule()); 
@@ -1345,11 +1370,11 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1358,41 +1383,44 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleDataTypeVariable"
-    // InternalBug296889TestLanguage.g:482:1: ruleDataTypeVariable returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : this_ID_0= RULE_ID ;
+    // InternalBug296889TestLanguage.g:464:1: ruleDataTypeVariable returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : this_ID_0= RULE_ID ;
     public final AntlrDatatypeRuleToken ruleDataTypeVariable() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
         Token this_ID_0=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalBug296889TestLanguage.g:485:28: (this_ID_0= RULE_ID )
-            // InternalBug296889TestLanguage.g:486:5: this_ID_0= RULE_ID
+            // InternalBug296889TestLanguage.g:470:2: (this_ID_0= RULE_ID )
+            // InternalBug296889TestLanguage.g:471:2: this_ID_0= RULE_ID
             {
             this_ID_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               		current.merge(this_ID_0);
-                  
+              	
             }
             if ( state.backtracking==0 ) {
-               
-                  newLeafNode(this_ID_0, grammarAccess.getDataTypeVariableAccess().getIDTerminalRuleCall()); 
-                  
+
+              		newLeafNode(this_ID_0, grammarAccess.getDataTypeVariableAccess().getIDTerminalRuleCall());
+              	
             }
 
             }
 
             if ( state.backtracking==0 ) {
-               leaveRule(); 
+
+              	leaveRule();
+
             }
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1403,25 +1431,25 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
     public final void synpred5_InternalBug296889TestLanguage_fragment() throws RecognitionException {   
         Token lv_functionName_2_0=null;
 
-        // InternalBug296889TestLanguage.g:273:2: ( () ( (lv_functionName_2_0= '--' ) ) )
-        // InternalBug296889TestLanguage.g:273:2: () ( (lv_functionName_2_0= '--' ) )
+        // InternalBug296889TestLanguage.g:271:4: ( () ( (lv_functionName_2_0= '--' ) ) )
+        // InternalBug296889TestLanguage.g:271:4: () ( (lv_functionName_2_0= '--' ) )
         {
-        // InternalBug296889TestLanguage.g:273:2: ()
-        // InternalBug296889TestLanguage.g:274:2: 
+        // InternalBug296889TestLanguage.g:271:4: ()
+        // InternalBug296889TestLanguage.g:272:5: 
         {
         if ( state.backtracking==0 ) {
-           
-          	  /* */ 
-          	
+
+          					/* */
+          				
         }
 
         }
 
-        // InternalBug296889TestLanguage.g:282:2: ( (lv_functionName_2_0= '--' ) )
-        // InternalBug296889TestLanguage.g:283:1: (lv_functionName_2_0= '--' )
+        // InternalBug296889TestLanguage.g:281:4: ( (lv_functionName_2_0= '--' ) )
+        // InternalBug296889TestLanguage.g:282:5: (lv_functionName_2_0= '--' )
         {
-        // InternalBug296889TestLanguage.g:283:1: (lv_functionName_2_0= '--' )
-        // InternalBug296889TestLanguage.g:284:3: lv_functionName_2_0= '--'
+        // InternalBug296889TestLanguage.g:282:5: (lv_functionName_2_0= '--' )
+        // InternalBug296889TestLanguage.g:283:6: lv_functionName_2_0= '--'
         {
         lv_functionName_2_0=(Token)match(input,13,FollowSets000.FOLLOW_2); if (state.failed) return ;
 
@@ -1439,8 +1467,8 @@ public class InternalBug296889TestLanguageParser extends AbstractInternalAntlrPa
     public final void synpred7_InternalBug296889TestLanguage_fragment() throws RecognitionException {   
         Token kw=null;
 
-        // InternalBug296889TestLanguage.g:460:2: (kw= '--' )
-        // InternalBug296889TestLanguage.g:460:2: kw= '--'
+        // InternalBug296889TestLanguage.g:447:4: (kw= '--' )
+        // InternalBug296889TestLanguage.g:447:4: kw= '--'
         {
         kw=(Token)match(input,13,FollowSets000.FOLLOW_2); if (state.failed) return ;
 

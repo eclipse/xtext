@@ -4,36 +4,37 @@
 package org.eclipse.xtext.parser.antlr.parser.antlr;
 
 import com.google.inject.Inject;
-
+import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.parser.antlr.internal.InternalBug301935TestLanguageParser;
 import org.eclipse.xtext.parser.antlr.services.Bug301935TestLanguageGrammarAccess;
 
-public class Bug301935TestLanguageParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {
-	
+public class Bug301935TestLanguageParser extends AbstractAntlrParser {
+
 	@Inject
 	private Bug301935TestLanguageGrammarAccess grammarAccess;
-	
+
 	@Override
 	protected void setInitialHiddenTokens(XtextTokenStream tokenStream) {
 		tokenStream.setInitialHiddenTokens();
 	}
 	
+
 	@Override
-	protected org.eclipse.xtext.parser.antlr.parser.antlr.internal.InternalBug301935TestLanguageParser createParser(XtextTokenStream stream) {
-		return new org.eclipse.xtext.parser.antlr.parser.antlr.internal.InternalBug301935TestLanguageParser(stream, getGrammarAccess());
+	protected InternalBug301935TestLanguageParser createParser(XtextTokenStream stream) {
+		return new InternalBug301935TestLanguageParser(stream, getGrammarAccess());
 	}
-	
+
 	@Override 
 	protected String getDefaultRuleName() {
 		return "Model";
 	}
-	
+
 	public Bug301935TestLanguageGrammarAccess getGrammarAccess() {
 		return this.grammarAccess;
 	}
-	
+
 	public void setGrammarAccess(Bug301935TestLanguageGrammarAccess grammarAccess) {
 		this.grammarAccess = grammarAccess;
 	}
-	
 }

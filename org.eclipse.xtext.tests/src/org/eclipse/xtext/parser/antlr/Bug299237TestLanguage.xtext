@@ -12,5 +12,3 @@ generate bug299237Test "http://eclipse.org/xtext/Bug299237TestLanguage"
 Model: 
     "model" name=ID ";"
 ;
-
-	

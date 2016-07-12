@@ -86,5 +86,11 @@ Workflow {
 			grammarUri = "classpath:/org/eclipse/xtext/parser/antlr/Bug443221TestLanguage.xtext"
 			fragment = @TestLanguagesFragmentsEx {}
 		}
+		language = {
+			grammarUri = "classpath:/org/eclipse/xtext/parser/antlr/Bug299237TestLanguage.xtext"
+			fragment = @TestLanguagesFragmentsEx {
+				ignoreCase = true
+			}
+		}
 	}
 }

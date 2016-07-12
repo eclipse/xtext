@@ -1,4 +1,4 @@
-package org.eclipse.xtext.parser.antlr.parser.antlr.internal; 
+package org.eclipse.xtext.parser.antlr.parser.antlr.internal;
 
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
@@ -21,23 +21,23 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalBug443221TestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "KW___dummy___1", "DollarSign_1", "KW___dummy__", "KW__dummy_", "Dummy", "DollarSign", "KW__", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'dummy'", "'_'", "'_dummy_'", "'__dummy__'", "'$__dummy__'", "'$'", "'DollarSign'"
     };
-    public static final int RULE_ID=11;
-    public static final int RULE_WS=16;
-    public static final int KW___dummy___1=4;
-    public static final int RULE_STRING=13;
-    public static final int RULE_ANY_OTHER=17;
-    public static final int DollarSign_1=5;
-    public static final int KW__dummy_=7;
-    public static final int KW__=10;
-    public static final int RULE_SL_COMMENT=15;
-    public static final int KW___dummy__=6;
-    public static final int RULE_INT=12;
-    public static final int DollarSign=9;
-    public static final int RULE_ML_COMMENT=14;
+    public static final int RULE_ID=4;
+    public static final int RULE_WS=9;
+    public static final int RULE_STRING=6;
+    public static final int RULE_ANY_OTHER=10;
+    public static final int RULE_SL_COMMENT=8;
+    public static final int T__15=15;
+    public static final int T__16=16;
+    public static final int T__17=17;
+    public static final int RULE_INT=5;
+    public static final int T__11=11;
+    public static final int RULE_ML_COMMENT=7;
+    public static final int T__12=12;
+    public static final int T__13=13;
+    public static final int T__14=14;
     public static final int EOF=-1;
-    public static final int Dummy=8;
 
     // delegates
     // delegators
@@ -53,33 +53,33 @@ public class InternalBug443221TestLanguageParser extends AbstractInternalAntlrPa
         
 
     public String[] getTokenNames() { return InternalBug443221TestLanguageParser.tokenNames; }
-    public String getGrammarFileName() { return "InternalBug443221TestLanguageParser.g"; }
+    public String getGrammarFileName() { return "InternalBug443221TestLanguage.g"; }
 
 
 
+     	private Bug443221TestLanguageGrammarAccess grammarAccess;
 
-    	private Bug443221TestLanguageGrammarAccess grammarAccess;
-    	 	
-    	public InternalBug443221TestLanguageParser(TokenStream input, Bug443221TestLanguageGrammarAccess grammarAccess) {
-    		this(input);
-    		this.grammarAccess = grammarAccess;
-    		registerRules(grammarAccess.getGrammar());
-    	}
-    	
-    	@Override
-    	protected String getFirstRuleName() {
-    		return "Model";	
-    	} 
-    	   	   	
-    	@Override
-    	protected Bug443221TestLanguageGrammarAccess getGrammarAccess() {
-    		return grammarAccess;
-    	}
+        public InternalBug443221TestLanguageParser(TokenStream input, Bug443221TestLanguageGrammarAccess grammarAccess) {
+            this(input);
+            this.grammarAccess = grammarAccess;
+            registerRules(grammarAccess.getGrammar());
+        }
+
+        @Override
+        protected String getFirstRuleName() {
+        	return "Model";
+       	}
+
+       	@Override
+       	protected Bug443221TestLanguageGrammarAccess getGrammarAccess() {
+       		return grammarAccess;
+       	}
+
 
 
 
     // $ANTLR start "entryRuleModel"
-    // InternalBug443221TestLanguageParser.g:61:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
+    // InternalBug443221TestLanguage.g:64:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
     public final EObject entryRuleModel() throws RecognitionException {
         EObject current = null;
 
@@ -87,8 +87,8 @@ public class InternalBug443221TestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // InternalBug443221TestLanguageParser.g:62:2: (iv_ruleModel= ruleModel EOF )
-            // InternalBug443221TestLanguageParser.g:63:2: iv_ruleModel= ruleModel EOF
+            // InternalBug443221TestLanguage.g:64:46: (iv_ruleModel= ruleModel EOF )
+            // InternalBug443221TestLanguage.g:65:2: iv_ruleModel= ruleModel EOF
             {
              newCompositeNode(grammarAccess.getModelRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -102,11 +102,11 @@ public class InternalBug443221TestLanguageParser extends AbstractInternalAntlrPa
             }
 
         }
-         
-        	catch (RecognitionException re) { 
-        	    recover(input,re); 
-        	    appendSkippedTokens();
-        	}
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
         finally {
         }
         return current;
@@ -115,7 +115,7 @@ public class InternalBug443221TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleModel"
-    // InternalBug443221TestLanguageParser.g:70:1: ruleModel returns [EObject current=null] : ( () otherlv_1= Dummy ( (lv_name_2_0= RULE_ID ) ) otherlv_3= KW__ otherlv_4= KW__dummy_ otherlv_5= KW___dummy__ otherlv_6= KW___dummy___1 otherlv_7= DollarSign otherlv_8= DollarSign_1 ) ;
+    // InternalBug443221TestLanguage.g:71:1: ruleModel returns [EObject current=null] : ( () otherlv_1= 'dummy' ( (lv_name_2_0= RULE_ID ) ) otherlv_3= '_' otherlv_4= '_dummy_' otherlv_5= '__dummy__' otherlv_6= '$__dummy__' otherlv_7= '$' otherlv_8= 'DollarSign' ) ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
@@ -128,93 +128,96 @@ public class InternalBug443221TestLanguageParser extends AbstractInternalAntlrPa
         Token otherlv_7=null;
         Token otherlv_8=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalBug443221TestLanguageParser.g:73:28: ( ( () otherlv_1= Dummy ( (lv_name_2_0= RULE_ID ) ) otherlv_3= KW__ otherlv_4= KW__dummy_ otherlv_5= KW___dummy__ otherlv_6= KW___dummy___1 otherlv_7= DollarSign otherlv_8= DollarSign_1 ) )
-            // InternalBug443221TestLanguageParser.g:74:1: ( () otherlv_1= Dummy ( (lv_name_2_0= RULE_ID ) ) otherlv_3= KW__ otherlv_4= KW__dummy_ otherlv_5= KW___dummy__ otherlv_6= KW___dummy___1 otherlv_7= DollarSign otherlv_8= DollarSign_1 )
+            // InternalBug443221TestLanguage.g:77:2: ( ( () otherlv_1= 'dummy' ( (lv_name_2_0= RULE_ID ) ) otherlv_3= '_' otherlv_4= '_dummy_' otherlv_5= '__dummy__' otherlv_6= '$__dummy__' otherlv_7= '$' otherlv_8= 'DollarSign' ) )
+            // InternalBug443221TestLanguage.g:78:2: ( () otherlv_1= 'dummy' ( (lv_name_2_0= RULE_ID ) ) otherlv_3= '_' otherlv_4= '_dummy_' otherlv_5= '__dummy__' otherlv_6= '$__dummy__' otherlv_7= '$' otherlv_8= 'DollarSign' )
             {
-            // InternalBug443221TestLanguageParser.g:74:1: ( () otherlv_1= Dummy ( (lv_name_2_0= RULE_ID ) ) otherlv_3= KW__ otherlv_4= KW__dummy_ otherlv_5= KW___dummy__ otherlv_6= KW___dummy___1 otherlv_7= DollarSign otherlv_8= DollarSign_1 )
-            // InternalBug443221TestLanguageParser.g:74:2: () otherlv_1= Dummy ( (lv_name_2_0= RULE_ID ) ) otherlv_3= KW__ otherlv_4= KW__dummy_ otherlv_5= KW___dummy__ otherlv_6= KW___dummy___1 otherlv_7= DollarSign otherlv_8= DollarSign_1
+            // InternalBug443221TestLanguage.g:78:2: ( () otherlv_1= 'dummy' ( (lv_name_2_0= RULE_ID ) ) otherlv_3= '_' otherlv_4= '_dummy_' otherlv_5= '__dummy__' otherlv_6= '$__dummy__' otherlv_7= '$' otherlv_8= 'DollarSign' )
+            // InternalBug443221TestLanguage.g:79:3: () otherlv_1= 'dummy' ( (lv_name_2_0= RULE_ID ) ) otherlv_3= '_' otherlv_4= '_dummy_' otherlv_5= '__dummy__' otherlv_6= '$__dummy__' otherlv_7= '$' otherlv_8= 'DollarSign'
             {
-            // InternalBug443221TestLanguageParser.g:74:2: ()
-            // InternalBug443221TestLanguageParser.g:75:5: 
+            // InternalBug443221TestLanguage.g:79:3: ()
+            // InternalBug443221TestLanguage.g:80:4: 
             {
 
-                    current = forceCreateModelElement(
-                        grammarAccess.getModelAccess().getModelAction_0(),
-                        current);
-                
+            				current = forceCreateModelElement(
+            					grammarAccess.getModelAccess().getModelAction_0(),
+            					current);
+            			
 
             }
 
-            otherlv_1=(Token)match(input,Dummy,FollowSets000.FOLLOW_3); 
+            otherlv_1=(Token)match(input,11,FollowSets000.FOLLOW_3); 
 
-                	newLeafNode(otherlv_1, grammarAccess.getModelAccess().getDummyKeyword_1());
-                
-            // InternalBug443221TestLanguageParser.g:85:1: ( (lv_name_2_0= RULE_ID ) )
-            // InternalBug443221TestLanguageParser.g:86:1: (lv_name_2_0= RULE_ID )
+            			newLeafNode(otherlv_1, grammarAccess.getModelAccess().getDummyKeyword_1());
+            		
+            // InternalBug443221TestLanguage.g:90:3: ( (lv_name_2_0= RULE_ID ) )
+            // InternalBug443221TestLanguage.g:91:4: (lv_name_2_0= RULE_ID )
             {
-            // InternalBug443221TestLanguageParser.g:86:1: (lv_name_2_0= RULE_ID )
-            // InternalBug443221TestLanguageParser.g:87:3: lv_name_2_0= RULE_ID
+            // InternalBug443221TestLanguage.g:91:4: (lv_name_2_0= RULE_ID )
+            // InternalBug443221TestLanguage.g:92:5: lv_name_2_0= RULE_ID
             {
             lv_name_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_4); 
 
-            			newLeafNode(lv_name_2_0, grammarAccess.getModelAccess().getNameIDTerminalRuleCall_2_0()); 
+            					newLeafNode(lv_name_2_0, grammarAccess.getModelAccess().getNameIDTerminalRuleCall_2_0());
+            				
+
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getModelRule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"name",
+            						lv_name_2_0,
+            						"org.eclipse.xtext.common.Terminals.ID");
+            				
+
+            }
+
+
+            }
+
+            otherlv_3=(Token)match(input,12,FollowSets000.FOLLOW_5); 
+
+            			newLeafNode(otherlv_3, grammarAccess.getModelAccess().get_Keyword_3());
+            		
+            otherlv_4=(Token)match(input,13,FollowSets000.FOLLOW_6); 
+
+            			newLeafNode(otherlv_4, grammarAccess.getModelAccess().get_dummy_Keyword_4());
+            		
+            otherlv_5=(Token)match(input,14,FollowSets000.FOLLOW_7); 
+
+            			newLeafNode(otherlv_5, grammarAccess.getModelAccess().get__dummy__Keyword_5());
+            		
+            otherlv_6=(Token)match(input,15,FollowSets000.FOLLOW_8); 
+
+            			newLeafNode(otherlv_6, grammarAccess.getModelAccess().get__dummy__Keyword_6());
+            		
+            otherlv_7=(Token)match(input,16,FollowSets000.FOLLOW_9); 
+
+            			newLeafNode(otherlv_7, grammarAccess.getModelAccess().getDollarSignKeyword_7());
+            		
+            otherlv_8=(Token)match(input,17,FollowSets000.FOLLOW_2); 
+
+            			newLeafNode(otherlv_8, grammarAccess.getModelAccess().getDollarSignKeyword_8());
             		
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getModelRule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"name",
-                    		lv_name_2_0, 
-                    		"org.eclipse.xtext.common.Terminals.ID");
-            	    
-
             }
 
 
             }
 
-            otherlv_3=(Token)match(input,KW__,FollowSets000.FOLLOW_5); 
 
-                	newLeafNode(otherlv_3, grammarAccess.getModelAccess().get_Keyword_3());
-                
-            otherlv_4=(Token)match(input,KW__dummy_,FollowSets000.FOLLOW_6); 
+            	leaveRule();
 
-                	newLeafNode(otherlv_4, grammarAccess.getModelAccess().get_dummy_Keyword_4());
-                
-            otherlv_5=(Token)match(input,KW___dummy__,FollowSets000.FOLLOW_7); 
-
-                	newLeafNode(otherlv_5, grammarAccess.getModelAccess().get__dummy__Keyword_5());
-                
-            otherlv_6=(Token)match(input,KW___dummy___1,FollowSets000.FOLLOW_8); 
-
-                	newLeafNode(otherlv_6, grammarAccess.getModelAccess().get__dummy__Keyword_6());
-                
-            otherlv_7=(Token)match(input,DollarSign,FollowSets000.FOLLOW_9); 
-
-                	newLeafNode(otherlv_7, grammarAccess.getModelAccess().getDollarSignKeyword_7());
-                
-            otherlv_8=(Token)match(input,DollarSign_1,FollowSets000.FOLLOW_2); 
-
-                	newLeafNode(otherlv_8, grammarAccess.getModelAccess().getDollarSignKeyword_8());
-                
-
-            }
-
-
-            }
-
-             leaveRule(); 
         }
-         
-        	catch (RecognitionException re) { 
-        	    recover(input,re); 
-        	    appendSkippedTokens();
-        	}
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
         finally {
         }
         return current;
@@ -230,13 +233,13 @@ public class InternalBug443221TestLanguageParser extends AbstractInternalAntlrPa
     private static class FollowSets000 {
         public static final BitSet FOLLOW_1 = new BitSet(new long[]{0x0000000000000000L});
         public static final BitSet FOLLOW_2 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000000000800L});
-        public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000000000400L});
-        public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000000000000080L});
-        public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x0000000000000040L});
-        public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_8 = new BitSet(new long[]{0x0000000000000200L});
-        public static final BitSet FOLLOW_9 = new BitSet(new long[]{0x0000000000000020L});
+        public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000000001000L});
+        public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000000000002000L});
+        public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x0000000000004000L});
+        public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x0000000000008000L});
+        public static final BitSet FOLLOW_8 = new BitSet(new long[]{0x0000000000010000L});
+        public static final BitSet FOLLOW_9 = new BitSet(new long[]{0x0000000000020000L});
     }
 
 

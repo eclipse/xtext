@@ -31,7 +31,7 @@ public class PartialParsingTestUtilFactoryImpl extends EFactoryImpl implements P
 	 */
 	public static PartialParsingTestUtilFactory init() {
 		try {
-			PartialParsingTestUtilFactory thePartialParsingTestUtilFactory = (PartialParsingTestUtilFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2009/tmf/xtext/PartialParsingTestUtil"); 
+			PartialParsingTestUtilFactory thePartialParsingTestUtilFactory = (PartialParsingTestUtilFactory)EPackage.Registry.INSTANCE.getEFactory(PartialParsingTestUtilPackage.eNS_URI);
 			if (thePartialParsingTestUtilFactory != null) {
 				return thePartialParsingTestUtilFactory;
 			}
