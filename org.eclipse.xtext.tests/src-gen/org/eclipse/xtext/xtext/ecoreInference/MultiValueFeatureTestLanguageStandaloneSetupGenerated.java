@@ -3,22 +3,22 @@
  */
 package org.eclipse.xtext.xtext.ecoreInference;
 
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.ISetup;
+import org.eclipse.xtext.common.TerminalsStandaloneSetup;
+import org.eclipse.xtext.resource.IResourceFactory;
+import org.eclipse.xtext.resource.IResourceServiceProvider;
+import org.eclipse.xtext.xtext.ecoreInference.multiValueFeatureTestLanguage.MultiValueFeatureTestLanguagePackage;
 
-import com.google.inject.Guice;
-import com.google.inject.Injector;
-
-/**
- * Generated from StandaloneSetup.xpt!
- */
 @SuppressWarnings("all")
 public class MultiValueFeatureTestLanguageStandaloneSetupGenerated implements ISetup {
 
 	@Override
 	public Injector createInjectorAndDoEMFRegistration() {
-		org.eclipse.xtext.common.TerminalsStandaloneSetup.doSetup();
+		TerminalsStandaloneSetup.doSetup();
 
 		Injector injector = createInjector();
 		register(injector);
@@ -26,19 +26,17 @@ public class MultiValueFeatureTestLanguageStandaloneSetupGenerated implements IS
 	}
 	
 	public Injector createInjector() {
-		return Guice.createInjector(new org.eclipse.xtext.xtext.ecoreInference.MultiValueFeatureTestLanguageRuntimeModule());
+		return Guice.createInjector(new MultiValueFeatureTestLanguageRuntimeModule());
 	}
 	
 	public void register(Injector injector) {
-
-		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);
-		org.eclipse.xtext.resource.IResourceServiceProvider serviceProvider = injector.getInstance(org.eclipse.xtext.resource.IResourceServiceProvider.class);
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("multivaluefeaturetestlanguage", resourceFactory);
-		org.eclipse.xtext.resource.IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put("multivaluefeaturetestlanguage", serviceProvider);
+		IResourceFactory resourceFactory = injector.getInstance(IResourceFactory.class);
+		IResourceServiceProvider serviceProvider = injector.getInstance(IResourceServiceProvider.class);
 		
-	if (!EPackage.Registry.INSTANCE.containsKey("http://www.eclipse.org/2008/xtext/MultiValueFeatureTestLanguage")) {
-		EPackage.Registry.INSTANCE.put("http://www.eclipse.org/2008/xtext/MultiValueFeatureTestLanguage", org.eclipse.xtext.xtext.ecoreInference.multiValueFeatureTestLanguage.MultiValueFeatureTestLanguagePackage.eINSTANCE);
-	}
-
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("multivaluefeaturetestlanguage", resourceFactory);
+		IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put("multivaluefeaturetestlanguage", serviceProvider);
+		if (!EPackage.Registry.INSTANCE.containsKey("http://www.eclipse.org/2008/xtext/MultiValueFeatureTestLanguage")) {
+			EPackage.Registry.INSTANCE.put("http://www.eclipse.org/2008/xtext/MultiValueFeatureTestLanguage", MultiValueFeatureTestLanguagePackage.eINSTANCE);
+		}
 	}
 }

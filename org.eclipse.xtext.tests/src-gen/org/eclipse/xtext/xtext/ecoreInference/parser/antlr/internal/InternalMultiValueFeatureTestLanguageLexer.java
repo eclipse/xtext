@@ -39,10 +39,10 @@ public class InternalMultiValueFeatureTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalMultiValueFeatureTestLanguage.g:105:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // InternalMultiValueFeatureTestLanguage.g:105:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalMultiValueFeatureTestLanguage.g:98:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // InternalMultiValueFeatureTestLanguage.g:98:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // InternalMultiValueFeatureTestLanguage.g:105:11: ( '^' )?
+            // InternalMultiValueFeatureTestLanguage.g:98:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -51,7 +51,7 @@ public class InternalMultiValueFeatureTestLanguageLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // InternalMultiValueFeatureTestLanguage.g:105:11: '^'
+                    // InternalMultiValueFeatureTestLanguage.g:98:11: '^'
                     {
                     match('^'); 
 
@@ -69,7 +69,7 @@ public class InternalMultiValueFeatureTestLanguageLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // InternalMultiValueFeatureTestLanguage.g:105:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalMultiValueFeatureTestLanguage.g:98:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -118,10 +118,10 @@ public class InternalMultiValueFeatureTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalMultiValueFeatureTestLanguage.g:107:10: ( ( '0' .. '9' )+ )
-            // InternalMultiValueFeatureTestLanguage.g:107:12: ( '0' .. '9' )+
+            // InternalMultiValueFeatureTestLanguage.g:100:10: ( ( '0' .. '9' )+ )
+            // InternalMultiValueFeatureTestLanguage.g:100:12: ( '0' .. '9' )+
             {
-            // InternalMultiValueFeatureTestLanguage.g:107:12: ( '0' .. '9' )+
+            // InternalMultiValueFeatureTestLanguage.g:100:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -135,7 +135,7 @@ public class InternalMultiValueFeatureTestLanguageLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // InternalMultiValueFeatureTestLanguage.g:107:13: '0' .. '9'
+            	    // InternalMultiValueFeatureTestLanguage.g:100:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -167,10 +167,10 @@ public class InternalMultiValueFeatureTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalMultiValueFeatureTestLanguage.g:109:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // InternalMultiValueFeatureTestLanguage.g:109:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalMultiValueFeatureTestLanguage.g:102:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // InternalMultiValueFeatureTestLanguage.g:102:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // InternalMultiValueFeatureTestLanguage.g:109:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalMultiValueFeatureTestLanguage.g:102:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -188,10 +188,10 @@ public class InternalMultiValueFeatureTestLanguageLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // InternalMultiValueFeatureTestLanguage.g:109:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // InternalMultiValueFeatureTestLanguage.g:102:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // InternalMultiValueFeatureTestLanguage.g:109:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // InternalMultiValueFeatureTestLanguage.g:102:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -207,7 +207,7 @@ public class InternalMultiValueFeatureTestLanguageLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // InternalMultiValueFeatureTestLanguage.g:109:21: '\\\\' .
+                    	    // InternalMultiValueFeatureTestLanguage.g:102:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -215,7 +215,7 @@ public class InternalMultiValueFeatureTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalMultiValueFeatureTestLanguage.g:109:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // InternalMultiValueFeatureTestLanguage.g:102:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -240,10 +240,10 @@ public class InternalMultiValueFeatureTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalMultiValueFeatureTestLanguage.g:109:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // InternalMultiValueFeatureTestLanguage.g:102:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // InternalMultiValueFeatureTestLanguage.g:109:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // InternalMultiValueFeatureTestLanguage.g:102:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -259,7 +259,7 @@ public class InternalMultiValueFeatureTestLanguageLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // InternalMultiValueFeatureTestLanguage.g:109:54: '\\\\' .
+                    	    // InternalMultiValueFeatureTestLanguage.g:102:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -267,7 +267,7 @@ public class InternalMultiValueFeatureTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalMultiValueFeatureTestLanguage.g:109:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // InternalMultiValueFeatureTestLanguage.g:102:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -310,12 +310,12 @@ public class InternalMultiValueFeatureTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalMultiValueFeatureTestLanguage.g:111:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // InternalMultiValueFeatureTestLanguage.g:111:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // InternalMultiValueFeatureTestLanguage.g:104:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // InternalMultiValueFeatureTestLanguage.g:104:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // InternalMultiValueFeatureTestLanguage.g:111:24: ( options {greedy=false; } : . )*
+            // InternalMultiValueFeatureTestLanguage.g:104:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -340,7 +340,7 @@ public class InternalMultiValueFeatureTestLanguageLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // InternalMultiValueFeatureTestLanguage.g:111:52: .
+            	    // InternalMultiValueFeatureTestLanguage.g:104:52: .
             	    {
             	    matchAny(); 
 
@@ -370,12 +370,12 @@ public class InternalMultiValueFeatureTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalMultiValueFeatureTestLanguage.g:113:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // InternalMultiValueFeatureTestLanguage.g:113:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // InternalMultiValueFeatureTestLanguage.g:106:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // InternalMultiValueFeatureTestLanguage.g:106:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // InternalMultiValueFeatureTestLanguage.g:113:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalMultiValueFeatureTestLanguage.g:106:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -388,7 +388,7 @@ public class InternalMultiValueFeatureTestLanguageLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // InternalMultiValueFeatureTestLanguage.g:113:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalMultiValueFeatureTestLanguage.g:106:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -408,7 +408,7 @@ public class InternalMultiValueFeatureTestLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // InternalMultiValueFeatureTestLanguage.g:113:40: ( ( '\\r' )? '\\n' )?
+            // InternalMultiValueFeatureTestLanguage.g:106:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -417,9 +417,9 @@ public class InternalMultiValueFeatureTestLanguageLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // InternalMultiValueFeatureTestLanguage.g:113:41: ( '\\r' )? '\\n'
+                    // InternalMultiValueFeatureTestLanguage.g:106:41: ( '\\r' )? '\\n'
                     {
-                    // InternalMultiValueFeatureTestLanguage.g:113:41: ( '\\r' )?
+                    // InternalMultiValueFeatureTestLanguage.g:106:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -428,7 +428,7 @@ public class InternalMultiValueFeatureTestLanguageLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // InternalMultiValueFeatureTestLanguage.g:113:41: '\\r'
+                            // InternalMultiValueFeatureTestLanguage.g:106:41: '\\r'
                             {
                             match('\r'); 
 
@@ -460,10 +460,10 @@ public class InternalMultiValueFeatureTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalMultiValueFeatureTestLanguage.g:115:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // InternalMultiValueFeatureTestLanguage.g:115:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalMultiValueFeatureTestLanguage.g:108:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalMultiValueFeatureTestLanguage.g:108:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // InternalMultiValueFeatureTestLanguage.g:115:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalMultiValueFeatureTestLanguage.g:108:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -517,8 +517,8 @@ public class InternalMultiValueFeatureTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalMultiValueFeatureTestLanguage.g:117:16: ( . )
-            // InternalMultiValueFeatureTestLanguage.g:117:18: .
+            // InternalMultiValueFeatureTestLanguage.g:110:16: ( . )
+            // InternalMultiValueFeatureTestLanguage.g:110:18: .
             {
             matchAny(); 
 

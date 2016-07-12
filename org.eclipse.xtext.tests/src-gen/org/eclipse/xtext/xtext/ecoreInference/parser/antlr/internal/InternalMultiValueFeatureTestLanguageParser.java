@@ -1,4 +1,4 @@
-package org.eclipse.xtext.xtext.ecoreInference.parser.antlr.internal; 
+package org.eclipse.xtext.xtext.ecoreInference.parser.antlr.internal;
 
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
@@ -51,18 +51,18 @@ public class InternalMultiValueFeatureTestLanguageParser extends AbstractInterna
 
 
      	private MultiValueFeatureTestLanguageGrammarAccess grammarAccess;
-     	
+
         public InternalMultiValueFeatureTestLanguageParser(TokenStream input, MultiValueFeatureTestLanguageGrammarAccess grammarAccess) {
             this(input);
             this.grammarAccess = grammarAccess;
             registerRules(grammarAccess.getGrammar());
         }
-        
+
         @Override
         protected String getFirstRuleName() {
-        	return "Start";	
+        	return "Start";
        	}
-       	
+
        	@Override
        	protected MultiValueFeatureTestLanguageGrammarAccess getGrammarAccess() {
        		return grammarAccess;
@@ -70,8 +70,9 @@ public class InternalMultiValueFeatureTestLanguageParser extends AbstractInterna
 
 
 
+
     // $ANTLR start "entryRuleStart"
-    // InternalMultiValueFeatureTestLanguage.g:67:1: entryRuleStart returns [EObject current=null] : iv_ruleStart= ruleStart EOF ;
+    // InternalMultiValueFeatureTestLanguage.g:64:1: entryRuleStart returns [EObject current=null] : iv_ruleStart= ruleStart EOF ;
     public final EObject entryRuleStart() throws RecognitionException {
         EObject current = null;
 
@@ -79,8 +80,8 @@ public class InternalMultiValueFeatureTestLanguageParser extends AbstractInterna
 
 
         try {
-            // InternalMultiValueFeatureTestLanguage.g:68:2: (iv_ruleStart= ruleStart EOF )
-            // InternalMultiValueFeatureTestLanguage.g:69:2: iv_ruleStart= ruleStart EOF
+            // InternalMultiValueFeatureTestLanguage.g:64:46: (iv_ruleStart= ruleStart EOF )
+            // InternalMultiValueFeatureTestLanguage.g:65:2: iv_ruleStart= ruleStart EOF
             {
              newCompositeNode(grammarAccess.getStartRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -94,11 +95,11 @@ public class InternalMultiValueFeatureTestLanguageParser extends AbstractInterna
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -107,19 +108,20 @@ public class InternalMultiValueFeatureTestLanguageParser extends AbstractInterna
 
 
     // $ANTLR start "ruleStart"
-    // InternalMultiValueFeatureTestLanguage.g:76:1: ruleStart returns [EObject current=null] : ( (lv_featureA_0_0= RULE_ID ) )+ ;
+    // InternalMultiValueFeatureTestLanguage.g:71:1: ruleStart returns [EObject current=null] : ( (lv_featureA_0_0= RULE_ID ) )+ ;
     public final EObject ruleStart() throws RecognitionException {
         EObject current = null;
 
         Token lv_featureA_0_0=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalMultiValueFeatureTestLanguage.g:79:28: ( ( (lv_featureA_0_0= RULE_ID ) )+ )
-            // InternalMultiValueFeatureTestLanguage.g:80:1: ( (lv_featureA_0_0= RULE_ID ) )+
+            // InternalMultiValueFeatureTestLanguage.g:77:2: ( ( (lv_featureA_0_0= RULE_ID ) )+ )
+            // InternalMultiValueFeatureTestLanguage.g:78:2: ( (lv_featureA_0_0= RULE_ID ) )+
             {
-            // InternalMultiValueFeatureTestLanguage.g:80:1: ( (lv_featureA_0_0= RULE_ID ) )+
+            // InternalMultiValueFeatureTestLanguage.g:78:2: ( (lv_featureA_0_0= RULE_ID ) )+
             int cnt1=0;
             loop1:
             do {
@@ -133,25 +135,25 @@ public class InternalMultiValueFeatureTestLanguageParser extends AbstractInterna
 
                 switch (alt1) {
             	case 1 :
-            	    // InternalMultiValueFeatureTestLanguage.g:81:1: (lv_featureA_0_0= RULE_ID )
+            	    // InternalMultiValueFeatureTestLanguage.g:79:3: (lv_featureA_0_0= RULE_ID )
             	    {
-            	    // InternalMultiValueFeatureTestLanguage.g:81:1: (lv_featureA_0_0= RULE_ID )
-            	    // InternalMultiValueFeatureTestLanguage.g:82:3: lv_featureA_0_0= RULE_ID
+            	    // InternalMultiValueFeatureTestLanguage.g:79:3: (lv_featureA_0_0= RULE_ID )
+            	    // InternalMultiValueFeatureTestLanguage.g:80:4: lv_featureA_0_0= RULE_ID
             	    {
             	    lv_featureA_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_3); 
 
-            	    			newLeafNode(lv_featureA_0_0, grammarAccess.getStartAccess().getFeatureAIDTerminalRuleCall_0()); 
-            	    		
+            	    				newLeafNode(lv_featureA_0_0, grammarAccess.getStartAccess().getFeatureAIDTerminalRuleCall_0());
+            	    			
 
-            	    	        if (current==null) {
-            	    	            current = createModelElement(grammarAccess.getStartRule());
-            	    	        }
-            	           		addWithLastConsumed(
-            	           			current, 
-            	           			"featureA",
-            	            		lv_featureA_0_0, 
-            	            		"org.eclipse.xtext.common.Terminals.ID");
-            	    	    
+            	    				if (current==null) {
+            	    					current = createModelElement(grammarAccess.getStartRule());
+            	    				}
+            	    				addWithLastConsumed(
+            	    					current,
+            	    					"featureA",
+            	    					lv_featureA_0_0,
+            	    					"org.eclipse.xtext.common.Terminals.ID");
+            	    			
 
             	    }
 
@@ -171,13 +173,15 @@ public class InternalMultiValueFeatureTestLanguageParser extends AbstractInterna
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;

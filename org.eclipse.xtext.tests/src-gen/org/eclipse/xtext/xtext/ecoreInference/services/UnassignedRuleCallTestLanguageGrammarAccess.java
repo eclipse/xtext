@@ -3,20 +3,23 @@
  */
 package org.eclipse.xtext.xtext.ecoreInference.services;
 
-import com.google.inject.Singleton;
 import com.google.inject.Inject;
-
+import com.google.inject.Singleton;
 import java.util.List;
-
-import org.eclipse.xtext.*;
-import org.eclipse.xtext.service.GrammarProvider;
-import org.eclipse.xtext.service.AbstractElementFinder.*;
-
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.Group;
+import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
+import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder;
+import org.eclipse.xtext.service.GrammarProvider;
 
 @Singleton
 public class UnassignedRuleCallTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
-	
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.xtext.ecoreInference.UnassignedRuleCallTestLanguage.Model");
@@ -29,23 +32,22 @@ public class UnassignedRuleCallTestLanguageGrammarAccess extends AbstractGrammar
 		//Model:
 		//	'model' INT+ modelFeatures=ModelFeatures;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'model' INT+ modelFeatures=ModelFeatures
 		public Group getGroup() { return cGroup; }
-
+		
 		//'model'
 		public Keyword getModelKeyword_0() { return cModelKeyword_0; }
-
+		
 		//INT+
 		public RuleCall getINTTerminalRuleCall_1() { return cINTTerminalRuleCall_1; }
-
+		
 		//modelFeatures=ModelFeatures
 		public Assignment getModelFeaturesAssignment_2() { return cModelFeaturesAssignment_2; }
-
+		
 		//ModelFeatures
 		public RuleCall getModelFeaturesModelFeaturesParserRuleCall_2_0() { return cModelFeaturesModelFeaturesParserRuleCall_2_0; }
 	}
-
 	public class ModelFeaturesElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.xtext.ecoreInference.UnassignedRuleCallTestLanguage.ModelFeatures");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -58,26 +60,25 @@ public class UnassignedRuleCallTestLanguageGrammarAccess extends AbstractGrammar
 		//ModelFeatures:
 		//	'feature' name=ID DataTypeRule ';';
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'feature' name=ID DataTypeRule ';'
 		public Group getGroup() { return cGroup; }
-
+		
 		//'feature'
 		public Keyword getFeatureKeyword_0() { return cFeatureKeyword_0; }
-
+		
 		//name=ID
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
-
+		
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
-
+		
 		//DataTypeRule
 		public RuleCall getDataTypeRuleParserRuleCall_2() { return cDataTypeRuleParserRuleCall_2; }
-
+		
 		//';'
 		public Keyword getSemicolonKeyword_3() { return cSemicolonKeyword_3; }
 	}
-
 	public class DataTypeRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.xtext.ecoreInference.UnassignedRuleCallTestLanguage.DataTypeRule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -89,19 +90,19 @@ public class UnassignedRuleCallTestLanguageGrammarAccess extends AbstractGrammar
 		//DataTypeRule:
 		//	INT 'keyword' INT STRING?;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//INT 'keyword' INT STRING?
 		public Group getGroup() { return cGroup; }
-
+		
 		//INT
 		public RuleCall getINTTerminalRuleCall_0() { return cINTTerminalRuleCall_0; }
-
+		
 		//'keyword'
 		public Keyword getKeywordKeyword_1() { return cKeywordKeyword_1; }
-
+		
 		//INT
 		public RuleCall getINTTerminalRuleCall_2() { return cINTTerminalRuleCall_2; }
-
+		
 		//STRING?
 		public RuleCall getSTRINGTerminalRuleCall_3() { return cSTRINGTerminalRuleCall_3; }
 	}
@@ -112,12 +113,12 @@ public class UnassignedRuleCallTestLanguageGrammarAccess extends AbstractGrammar
 	private final DataTypeRuleElements pDataTypeRule;
 	
 	private final Grammar grammar;
-
+	
 	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public UnassignedRuleCallTestLanguageGrammarAccess(GrammarProvider grammarProvider,
-		TerminalsGrammarAccess gaTerminals) {
+			TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
 		this.pModel = new ModelElements();
@@ -146,7 +147,7 @@ public class UnassignedRuleCallTestLanguageGrammarAccess extends AbstractGrammar
 		return grammar;
 	}
 	
-
+	
 	public TerminalsGrammarAccess getTerminalsGrammarAccess() {
 		return gaTerminals;
 	}
@@ -161,7 +162,7 @@ public class UnassignedRuleCallTestLanguageGrammarAccess extends AbstractGrammar
 	public ParserRule getModelRule() {
 		return getModelAccess().getRule();
 	}
-
+	
 	//ModelFeatures:
 	//	'feature' name=ID DataTypeRule ';';
 	public ModelFeaturesElements getModelFeaturesAccess() {
@@ -171,7 +172,7 @@ public class UnassignedRuleCallTestLanguageGrammarAccess extends AbstractGrammar
 	public ParserRule getModelFeaturesRule() {
 		return getModelFeaturesAccess().getRule();
 	}
-
+	
 	//DataTypeRule:
 	//	INT 'keyword' INT STRING?;
 	public DataTypeRuleElements getDataTypeRuleAccess() {
@@ -181,47 +182,47 @@ public class UnassignedRuleCallTestLanguageGrammarAccess extends AbstractGrammar
 	public ParserRule getDataTypeRuleRule() {
 		return getDataTypeRuleAccess().getRule();
 	}
-
+	
 	//terminal ID:
 	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
-	} 
-
+	}
+	
 	//terminal INT returns ecore::EInt:
 	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
-	} 
-
+	}
+	
 	//terminal STRING:
 	//	'"' ('\\' . | !('\\' | '"'))* '"' |
 	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
-	} 
-
+	}
+	
 	//terminal ML_COMMENT:
 	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal SL_COMMENT:
 	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal WS:
 	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
-	} 
-
+	}
+	
 	//terminal ANY_OTHER:
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
-	} 
+	}
 }
