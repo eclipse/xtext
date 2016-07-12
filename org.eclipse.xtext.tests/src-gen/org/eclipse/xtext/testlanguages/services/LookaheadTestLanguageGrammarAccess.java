@@ -3,20 +3,24 @@
  */
 package org.eclipse.xtext.testlanguages.services;
 
-import com.google.inject.Singleton;
 import com.google.inject.Inject;
-
+import com.google.inject.Singleton;
 import java.util.List;
-
-import org.eclipse.xtext.*;
-import org.eclipse.xtext.service.GrammarProvider;
-import org.eclipse.xtext.service.AbstractElementFinder.*;
-
+import org.eclipse.xtext.Alternatives;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.Group;
+import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
+import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder;
+import org.eclipse.xtext.service.GrammarProvider;
 
 @Singleton
 public class LookaheadTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
-	
 	
 	public class EntryElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.LookaheadTestLanguage.Entry");
@@ -26,14 +30,13 @@ public class LookaheadTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//Entry:
 		//	contents+=Alts*;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//contents+=Alts*
 		public Assignment getContentsAssignment() { return cContentsAssignment; }
-
+		
 		//Alts
 		public RuleCall getContentsAltsParserRuleCall_0() { return cContentsAltsParserRuleCall_0; }
 	}
-
 	public class AltsElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.LookaheadTestLanguage.Alts");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -44,20 +47,19 @@ public class LookaheadTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//Alts:
 		//	LookAhead0 | LookAhead1 | LookAhead3;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//LookAhead0 | LookAhead1 | LookAhead3
 		public Alternatives getAlternatives() { return cAlternatives; }
-
+		
 		//LookAhead0
 		public RuleCall getLookAhead0ParserRuleCall_0() { return cLookAhead0ParserRuleCall_0; }
-
+		
 		//LookAhead1
 		public RuleCall getLookAhead1ParserRuleCall_1() { return cLookAhead1ParserRuleCall_1; }
-
+		
 		//LookAhead3
 		public RuleCall getLookAhead3ParserRuleCall_2() { return cLookAhead3ParserRuleCall_2; }
 	}
-
 	public class LookAhead0Elements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.LookaheadTestLanguage.LookAhead0");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -68,20 +70,19 @@ public class LookaheadTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//LookAhead0:
 		//	'bar' x='a';
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'bar' x='a'
 		public Group getGroup() { return cGroup; }
-
+		
 		//'bar'
 		public Keyword getBarKeyword_0() { return cBarKeyword_0; }
-
+		
 		//x='a'
 		public Assignment getXAssignment_1() { return cXAssignment_1; }
-
+		
 		//'a'
 		public Keyword getXAKeyword_1_0() { return cXAKeyword_1_0; }
 	}
-
 	public class LookAhead1Elements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.LookaheadTestLanguage.LookAhead1");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -96,32 +97,31 @@ public class LookaheadTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//LookAhead1:
 		//	'foo' y=LookAhead2 x='b' z='d';
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'foo' y=LookAhead2 x='b' z='d'
 		public Group getGroup() { return cGroup; }
-
+		
 		//'foo'
 		public Keyword getFooKeyword_0() { return cFooKeyword_0; }
-
+		
 		//y=LookAhead2
 		public Assignment getYAssignment_1() { return cYAssignment_1; }
-
+		
 		//LookAhead2
 		public RuleCall getYLookAhead2ParserRuleCall_1_0() { return cYLookAhead2ParserRuleCall_1_0; }
-
+		
 		//x='b'
 		public Assignment getXAssignment_2() { return cXAssignment_2; }
-
+		
 		//'b'
 		public Keyword getXBKeyword_2_0() { return cXBKeyword_2_0; }
-
+		
 		//z='d'
 		public Assignment getZAssignment_3() { return cZAssignment_3; }
-
+		
 		//'d'
 		public Keyword getZDKeyword_3_0() { return cZDKeyword_3_0; }
 	}
-
 	public class LookAhead2Elements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.LookaheadTestLanguage.LookAhead2");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -135,29 +135,28 @@ public class LookaheadTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//LookAhead2:
 		//	(z='foo' | z='bar') 'c';
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//(z='foo' | z='bar') 'c'
 		public Group getGroup() { return cGroup; }
-
+		
 		//(z='foo' | z='bar')
 		public Alternatives getAlternatives_0() { return cAlternatives_0; }
-
+		
 		//z='foo'
 		public Assignment getZAssignment_0_0() { return cZAssignment_0_0; }
-
+		
 		//'foo'
 		public Keyword getZFooKeyword_0_0_0() { return cZFooKeyword_0_0_0; }
-
+		
 		//z='bar'
 		public Assignment getZAssignment_0_1() { return cZAssignment_0_1; }
-
+		
 		//'bar'
 		public Keyword getZBarKeyword_0_1_0() { return cZBarKeyword_0_1_0; }
-
+		
 		//'c'
 		public Keyword getCKeyword_1() { return cCKeyword_1; }
 	}
-
 	public class LookAhead3Elements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.LookaheadTestLanguage.LookAhead3");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -171,29 +170,28 @@ public class LookaheadTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//LookAhead3:
 		//	'foo' 'bar' x='b' z=LookAhead4;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'foo' 'bar' x='b' z=LookAhead4
 		public Group getGroup() { return cGroup; }
-
+		
 		//'foo'
 		public Keyword getFooKeyword_0() { return cFooKeyword_0; }
-
+		
 		//'bar'
 		public Keyword getBarKeyword_1() { return cBarKeyword_1; }
-
+		
 		//x='b'
 		public Assignment getXAssignment_2() { return cXAssignment_2; }
-
+		
 		//'b'
 		public Keyword getXBKeyword_2_0() { return cXBKeyword_2_0; }
-
+		
 		//z=LookAhead4
 		public Assignment getZAssignment_3() { return cZAssignment_3; }
-
+		
 		//LookAhead4
 		public RuleCall getZLookAhead4ParserRuleCall_3_0() { return cZLookAhead4ParserRuleCall_3_0; }
 	}
-
 	public class LookAhead4Elements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.LookaheadTestLanguage.LookAhead4");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -205,19 +203,19 @@ public class LookaheadTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//LookAhead4:
 		//	x='c' | x='d';
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//x='c' | x='d'
 		public Alternatives getAlternatives() { return cAlternatives; }
-
+		
 		//x='c'
 		public Assignment getXAssignment_0() { return cXAssignment_0; }
-
+		
 		//'c'
 		public Keyword getXCKeyword_0_0() { return cXCKeyword_0_0; }
-
+		
 		//x='d'
 		public Assignment getXAssignment_1() { return cXAssignment_1; }
-
+		
 		//'d'
 		public Keyword getXDKeyword_1_0() { return cXDKeyword_1_0; }
 	}
@@ -232,12 +230,12 @@ public class LookaheadTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	private final LookAhead4Elements pLookAhead4;
 	
 	private final Grammar grammar;
-
+	
 	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public LookaheadTestLanguageGrammarAccess(GrammarProvider grammarProvider,
-		TerminalsGrammarAccess gaTerminals) {
+			TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
 		this.pEntry = new EntryElements();
@@ -270,7 +268,7 @@ public class LookaheadTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return grammar;
 	}
 	
-
+	
 	public TerminalsGrammarAccess getTerminalsGrammarAccess() {
 		return gaTerminals;
 	}
@@ -285,7 +283,7 @@ public class LookaheadTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getEntryRule() {
 		return getEntryAccess().getRule();
 	}
-
+	
 	//Alts:
 	//	LookAhead0 | LookAhead1 | LookAhead3;
 	public AltsElements getAltsAccess() {
@@ -295,7 +293,7 @@ public class LookaheadTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getAltsRule() {
 		return getAltsAccess().getRule();
 	}
-
+	
 	//LookAhead0:
 	//	'bar' x='a';
 	public LookAhead0Elements getLookAhead0Access() {
@@ -305,7 +303,7 @@ public class LookaheadTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getLookAhead0Rule() {
 		return getLookAhead0Access().getRule();
 	}
-
+	
 	//LookAhead1:
 	//	'foo' y=LookAhead2 x='b' z='d';
 	public LookAhead1Elements getLookAhead1Access() {
@@ -315,7 +313,7 @@ public class LookaheadTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getLookAhead1Rule() {
 		return getLookAhead1Access().getRule();
 	}
-
+	
 	//LookAhead2:
 	//	(z='foo' | z='bar') 'c';
 	public LookAhead2Elements getLookAhead2Access() {
@@ -325,7 +323,7 @@ public class LookaheadTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getLookAhead2Rule() {
 		return getLookAhead2Access().getRule();
 	}
-
+	
 	//LookAhead3:
 	//	'foo' 'bar' x='b' z=LookAhead4;
 	public LookAhead3Elements getLookAhead3Access() {
@@ -335,7 +333,7 @@ public class LookaheadTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getLookAhead3Rule() {
 		return getLookAhead3Access().getRule();
 	}
-
+	
 	//LookAhead4:
 	//	x='c' | x='d';
 	public LookAhead4Elements getLookAhead4Access() {
@@ -345,47 +343,47 @@ public class LookaheadTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getLookAhead4Rule() {
 		return getLookAhead4Access().getRule();
 	}
-
+	
 	//terminal ID:
 	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
-	} 
-
+	}
+	
 	//terminal INT returns ecore::EInt:
 	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
-	} 
-
+	}
+	
 	//terminal STRING:
 	//	'"' ('\\' . | !('\\' | '"'))* '"' |
 	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
-	} 
-
+	}
+	
 	//terminal ML_COMMENT:
 	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal SL_COMMENT:
 	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal WS:
 	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
-	} 
-
+	}
+	
 	//terminal ANY_OTHER:
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
-	} 
+	}
 }

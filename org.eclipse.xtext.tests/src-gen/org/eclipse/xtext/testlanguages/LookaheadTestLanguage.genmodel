@@ -7,7 +7,7 @@
     copyrightFields="false" editPluginID="org.eclipse.xtext.tests.edit" editorPluginID="org.eclipse.xtext.tests.editor"
     runtimeVersion="2.9" usedGenPackages="platform:/resource/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
   <genPackages prefix="LookaheadLang" basePackage="org.eclipse.xtext.testlanguages"
-      disposableProviderFactory="true" ecorePackage="LookaheadTestLanguage.ecore#/">
+      disposableProviderFactory="true" fileExtensions="lookaheadtestlanguage" ecorePackage="LookaheadTestLanguage.ecore#/">
     <genClasses ecoreClass="LookaheadTestLanguage.ecore#//Entry">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LookaheadTestLanguage.ecore#//Entry/contents"/>
     </genClasses>

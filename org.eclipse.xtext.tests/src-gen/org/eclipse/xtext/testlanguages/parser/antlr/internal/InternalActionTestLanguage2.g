@@ -5,7 +5,6 @@ grammar InternalActionTestLanguage2;
 
 options {
 	superClass=AbstractInternalAntlrParser;
-	
 }
 
 @lexer::header {
@@ -17,7 +16,7 @@ import org.eclipse.xtext.parser.antlr.Lexer;
 }
 
 @parser::header {
-package org.eclipse.xtext.testlanguages.parser.antlr.internal; 
+package org.eclipse.xtext.testlanguages.parser.antlr.internal;
 
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
@@ -35,127 +34,121 @@ import org.eclipse.xtext.testlanguages.services.ActionTestLanguage2GrammarAccess
 @parser::members {
 
  	private ActionTestLanguage2GrammarAccess grammarAccess;
- 	
+
     public InternalActionTestLanguage2Parser(TokenStream input, ActionTestLanguage2GrammarAccess grammarAccess) {
         this(input);
         this.grammarAccess = grammarAccess;
         registerRules(grammarAccess.getGrammar());
     }
-    
+
     @Override
     protected String getFirstRuleName() {
-    	return "ORing";	
+    	return "ORing";
    	}
-   	
+
    	@Override
    	protected ActionTestLanguage2GrammarAccess getGrammarAccess() {
    		return grammarAccess;
    	}
+
 }
 
-@rulecatch { 
-    catch (RecognitionException re) { 
-        recover(input,re); 
+@rulecatch {
+    catch (RecognitionException re) {
+        recover(input,re);
         appendSkippedTokens();
-    } 
+    }
 }
-
-
-
 
 // Entry rule entryRuleORing
-entryRuleORing returns [EObject current=null] 
-	:
+entryRuleORing returns [EObject current=null]:
 	{ newCompositeNode(grammarAccess.getORingRule()); }
-	 iv_ruleORing=ruleORing 
-	 { $current=$iv_ruleORing.current; } 
-	 EOF 
-;
+	iv_ruleORing=ruleORing
+	{ $current=$iv_ruleORing.current; }
+	EOF;
 
 // Rule ORing
-ruleORing returns [EObject current=null] 
-    @init { enterRule(); 
-    }
-    @after { leaveRule(); }:
-(
-    { 
-        newCompositeNode(grammarAccess.getORingAccess().getValueParserRuleCall_0()); 
-    }
-    this_Value_0=ruleValue
-    { 
-        $current = $this_Value_0.current; 
-        afterParserOrEnumRuleCall();
-    }
-((
-    {
-        $current = forceCreateModelElementAndAdd(
-            grammarAccess.getORingAccess().getORingDisjunctsAction_1_0(),
-            $current);
-    }
-)	otherlv_2='|' 
-    {
-    	newLeafNode(otherlv_2, grammarAccess.getORingAccess().getVerticalLineKeyword_1_1());
-    }
-(
-(
-		{ 
-	        newCompositeNode(grammarAccess.getORingAccess().getDisjunctsValueParserRuleCall_1_2_0()); 
-	    }
-		lv_disjuncts_3_0=ruleValue		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getORingRule());
-	        }
-       		add(
-       			$current, 
-       			"disjuncts",
-        		lv_disjuncts_3_0, 
-        		"org.eclipse.xtext.testlanguages.ActionTestLanguage2.Value");
-	        afterParserOrEnumRuleCall();
-	    }
-
-)
-))*)
+ruleORing returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		{
+			newCompositeNode(grammarAccess.getORingAccess().getValueParserRuleCall_0());
+		}
+		this_Value_0=ruleValue
+		{
+			$current = $this_Value_0.current;
+			afterParserOrEnumRuleCall();
+		}
+		(
+			(
+				{
+					$current = forceCreateModelElementAndAdd(
+						grammarAccess.getORingAccess().getORingDisjunctsAction_1_0(),
+						$current);
+				}
+			)
+			otherlv_2='|'
+			{
+				newLeafNode(otherlv_2, grammarAccess.getORingAccess().getVerticalLineKeyword_1_1());
+			}
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getORingAccess().getDisjunctsValueParserRuleCall_1_2_0());
+					}
+					lv_disjuncts_3_0=ruleValue
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getORingRule());
+						}
+						add(
+							$current,
+							"disjuncts",
+							lv_disjuncts_3_0,
+							"org.eclipse.xtext.testlanguages.ActionTestLanguage2.Value");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+		)*
+	)
 ;
-
-
-
-
 
 // Entry rule entryRuleValue
-entryRuleValue returns [EObject current=null] 
-	:
+entryRuleValue returns [EObject current=null]:
 	{ newCompositeNode(grammarAccess.getValueRule()); }
-	 iv_ruleValue=ruleValue 
-	 { $current=$iv_ruleValue.current; } 
-	 EOF 
-;
+	iv_ruleValue=ruleValue
+	{ $current=$iv_ruleValue.current; }
+	EOF;
 
 // Rule Value
-ruleValue returns [EObject current=null] 
-    @init { enterRule(); 
-    }
-    @after { leaveRule(); }:
-(
-(
-		lv_value_0_0=	'a' 
-    {
-        newLeafNode(lv_value_0_0, grammarAccess.getValueAccess().getValueAKeyword_0());
-    }
- 
-	    {
-	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getValueRule());
-	        }
-       		setWithLastConsumed($current, "value", lv_value_0_0, "a");
-	    }
-
-)
-)
+ruleValue returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			lv_value_0_0='a'
+			{
+				newLeafNode(lv_value_0_0, grammarAccess.getValueAccess().getValueAKeyword_0());
+			}
+			{
+				if ($current==null) {
+					$current = createModelElement(grammarAccess.getValueRule());
+				}
+				setWithLastConsumed($current, "value", lv_value_0_0, "a");
+			}
+		)
+	)
 ;
-
-
-
-
 
 RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
@@ -170,5 +163,3 @@ RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
 RULE_WS : (' '|'\t'|'\r'|'\n')+;
 
 RULE_ANY_OTHER : .;
-
-

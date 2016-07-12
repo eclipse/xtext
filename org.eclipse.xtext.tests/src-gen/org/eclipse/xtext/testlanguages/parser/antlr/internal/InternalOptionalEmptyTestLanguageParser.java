@@ -1,4 +1,4 @@
-package org.eclipse.xtext.testlanguages.parser.antlr.internal; 
+package org.eclipse.xtext.testlanguages.parser.antlr.internal;
 
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
@@ -52,18 +52,18 @@ public class InternalOptionalEmptyTestLanguageParser extends AbstractInternalAnt
 
 
      	private OptionalEmptyTestLanguageGrammarAccess grammarAccess;
-     	
+
         public InternalOptionalEmptyTestLanguageParser(TokenStream input, OptionalEmptyTestLanguageGrammarAccess grammarAccess) {
             this(input);
             this.grammarAccess = grammarAccess;
             registerRules(grammarAccess.getGrammar());
         }
-        
+
         @Override
         protected String getFirstRuleName() {
-        	return "Model";	
+        	return "Model";
        	}
-       	
+
        	@Override
        	protected OptionalEmptyTestLanguageGrammarAccess getGrammarAccess() {
        		return grammarAccess;
@@ -71,8 +71,9 @@ public class InternalOptionalEmptyTestLanguageParser extends AbstractInternalAnt
 
 
 
+
     // $ANTLR start "entryRuleModel"
-    // InternalOptionalEmptyTestLanguage.g:67:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
+    // InternalOptionalEmptyTestLanguage.g:64:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
     public final EObject entryRuleModel() throws RecognitionException {
         EObject current = null;
 
@@ -80,8 +81,8 @@ public class InternalOptionalEmptyTestLanguageParser extends AbstractInternalAnt
 
 
         try {
-            // InternalOptionalEmptyTestLanguage.g:68:2: (iv_ruleModel= ruleModel EOF )
-            // InternalOptionalEmptyTestLanguage.g:69:2: iv_ruleModel= ruleModel EOF
+            // InternalOptionalEmptyTestLanguage.g:64:46: (iv_ruleModel= ruleModel EOF )
+            // InternalOptionalEmptyTestLanguage.g:65:2: iv_ruleModel= ruleModel EOF
             {
              newCompositeNode(grammarAccess.getModelRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -95,11 +96,11 @@ public class InternalOptionalEmptyTestLanguageParser extends AbstractInternalAnt
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -108,20 +109,21 @@ public class InternalOptionalEmptyTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "ruleModel"
-    // InternalOptionalEmptyTestLanguage.g:76:1: ruleModel returns [EObject current=null] : ( (lv_child_0_0= ruleGreeting ) )? ;
+    // InternalOptionalEmptyTestLanguage.g:71:1: ruleModel returns [EObject current=null] : ( (lv_child_0_0= ruleGreeting ) )? ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
         EObject lv_child_0_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalOptionalEmptyTestLanguage.g:79:28: ( ( (lv_child_0_0= ruleGreeting ) )? )
-            // InternalOptionalEmptyTestLanguage.g:80:1: ( (lv_child_0_0= ruleGreeting ) )?
+            // InternalOptionalEmptyTestLanguage.g:77:2: ( ( (lv_child_0_0= ruleGreeting ) )? )
+            // InternalOptionalEmptyTestLanguage.g:78:2: ( (lv_child_0_0= ruleGreeting ) )?
             {
-            // InternalOptionalEmptyTestLanguage.g:80:1: ( (lv_child_0_0= ruleGreeting ) )?
+            // InternalOptionalEmptyTestLanguage.g:78:2: ( (lv_child_0_0= ruleGreeting ) )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -130,30 +132,30 @@ public class InternalOptionalEmptyTestLanguageParser extends AbstractInternalAnt
             }
             switch (alt1) {
                 case 1 :
-                    // InternalOptionalEmptyTestLanguage.g:81:1: (lv_child_0_0= ruleGreeting )
+                    // InternalOptionalEmptyTestLanguage.g:79:3: (lv_child_0_0= ruleGreeting )
                     {
-                    // InternalOptionalEmptyTestLanguage.g:81:1: (lv_child_0_0= ruleGreeting )
-                    // InternalOptionalEmptyTestLanguage.g:82:3: lv_child_0_0= ruleGreeting
+                    // InternalOptionalEmptyTestLanguage.g:79:3: (lv_child_0_0= ruleGreeting )
+                    // InternalOptionalEmptyTestLanguage.g:80:4: lv_child_0_0= ruleGreeting
                     {
-                     
-                    	        newCompositeNode(grammarAccess.getModelAccess().getChildGreetingParserRuleCall_0()); 
-                    	    
+
+                    				newCompositeNode(grammarAccess.getModelAccess().getChildGreetingParserRuleCall_0());
+                    			
                     pushFollow(FollowSets000.FOLLOW_2);
                     lv_child_0_0=ruleGreeting();
 
                     state._fsp--;
 
 
-                    	        if (current==null) {
-                    	            current = createModelElementForParent(grammarAccess.getModelRule());
-                    	        }
-                           		set(
-                           			current, 
-                           			"child",
-                            		lv_child_0_0, 
-                            		"org.eclipse.xtext.testlanguages.OptionalEmptyTestLanguage.Greeting");
-                    	        afterParserOrEnumRuleCall();
-                    	    
+                    				if (current==null) {
+                    					current = createModelElementForParent(grammarAccess.getModelRule());
+                    				}
+                    				set(
+                    					current,
+                    					"child",
+                    					lv_child_0_0,
+                    					"org.eclipse.xtext.testlanguages.OptionalEmptyTestLanguage.Greeting");
+                    				afterParserOrEnumRuleCall();
+                    			
 
                     }
 
@@ -166,13 +168,15 @@ public class InternalOptionalEmptyTestLanguageParser extends AbstractInternalAnt
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -181,7 +185,7 @@ public class InternalOptionalEmptyTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "entryRuleGreeting"
-    // InternalOptionalEmptyTestLanguage.g:106:1: entryRuleGreeting returns [EObject current=null] : iv_ruleGreeting= ruleGreeting EOF ;
+    // InternalOptionalEmptyTestLanguage.g:100:1: entryRuleGreeting returns [EObject current=null] : iv_ruleGreeting= ruleGreeting EOF ;
     public final EObject entryRuleGreeting() throws RecognitionException {
         EObject current = null;
 
@@ -189,8 +193,8 @@ public class InternalOptionalEmptyTestLanguageParser extends AbstractInternalAnt
 
 
         try {
-            // InternalOptionalEmptyTestLanguage.g:107:2: (iv_ruleGreeting= ruleGreeting EOF )
-            // InternalOptionalEmptyTestLanguage.g:108:2: iv_ruleGreeting= ruleGreeting EOF
+            // InternalOptionalEmptyTestLanguage.g:100:49: (iv_ruleGreeting= ruleGreeting EOF )
+            // InternalOptionalEmptyTestLanguage.g:101:2: iv_ruleGreeting= ruleGreeting EOF
             {
              newCompositeNode(grammarAccess.getGreetingRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -204,11 +208,11 @@ public class InternalOptionalEmptyTestLanguageParser extends AbstractInternalAnt
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -217,49 +221,47 @@ public class InternalOptionalEmptyTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "ruleGreeting"
-    // InternalOptionalEmptyTestLanguage.g:115:1: ruleGreeting returns [EObject current=null] : (otherlv_0= 'hallo' ( (lv_name_1_0= RULE_ID ) ) ) ;
+    // InternalOptionalEmptyTestLanguage.g:107:1: ruleGreeting returns [EObject current=null] : (otherlv_0= 'hallo' ( (lv_name_1_0= RULE_ID ) ) ) ;
     public final EObject ruleGreeting() throws RecognitionException {
         EObject current = null;
 
         Token otherlv_0=null;
         Token lv_name_1_0=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalOptionalEmptyTestLanguage.g:118:28: ( (otherlv_0= 'hallo' ( (lv_name_1_0= RULE_ID ) ) ) )
-            // InternalOptionalEmptyTestLanguage.g:119:1: (otherlv_0= 'hallo' ( (lv_name_1_0= RULE_ID ) ) )
+            // InternalOptionalEmptyTestLanguage.g:113:2: ( (otherlv_0= 'hallo' ( (lv_name_1_0= RULE_ID ) ) ) )
+            // InternalOptionalEmptyTestLanguage.g:114:2: (otherlv_0= 'hallo' ( (lv_name_1_0= RULE_ID ) ) )
             {
-            // InternalOptionalEmptyTestLanguage.g:119:1: (otherlv_0= 'hallo' ( (lv_name_1_0= RULE_ID ) ) )
-            // InternalOptionalEmptyTestLanguage.g:119:3: otherlv_0= 'hallo' ( (lv_name_1_0= RULE_ID ) )
+            // InternalOptionalEmptyTestLanguage.g:114:2: (otherlv_0= 'hallo' ( (lv_name_1_0= RULE_ID ) ) )
+            // InternalOptionalEmptyTestLanguage.g:115:3: otherlv_0= 'hallo' ( (lv_name_1_0= RULE_ID ) )
             {
             otherlv_0=(Token)match(input,11,FollowSets000.FOLLOW_3); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getGreetingAccess().getHalloKeyword_0());
-                
-            // InternalOptionalEmptyTestLanguage.g:123:1: ( (lv_name_1_0= RULE_ID ) )
-            // InternalOptionalEmptyTestLanguage.g:124:1: (lv_name_1_0= RULE_ID )
+            			newLeafNode(otherlv_0, grammarAccess.getGreetingAccess().getHalloKeyword_0());
+            		
+            // InternalOptionalEmptyTestLanguage.g:119:3: ( (lv_name_1_0= RULE_ID ) )
+            // InternalOptionalEmptyTestLanguage.g:120:4: (lv_name_1_0= RULE_ID )
             {
-            // InternalOptionalEmptyTestLanguage.g:124:1: (lv_name_1_0= RULE_ID )
-            // InternalOptionalEmptyTestLanguage.g:125:3: lv_name_1_0= RULE_ID
+            // InternalOptionalEmptyTestLanguage.g:120:4: (lv_name_1_0= RULE_ID )
+            // InternalOptionalEmptyTestLanguage.g:121:5: lv_name_1_0= RULE_ID
             {
             lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
-            			newLeafNode(lv_name_1_0, grammarAccess.getGreetingAccess().getNameIDTerminalRuleCall_1_0()); 
-            		
+            					newLeafNode(lv_name_1_0, grammarAccess.getGreetingAccess().getNameIDTerminalRuleCall_1_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getGreetingRule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"name",
-                    		lv_name_1_0, 
-                    		"org.eclipse.xtext.common.Terminals.ID");
-            	    
-
-            }
-
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getGreetingRule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"name",
+            						lv_name_1_0,
+            						"org.eclipse.xtext.common.Terminals.ID");
+            				
 
             }
 
@@ -269,13 +271,18 @@ public class InternalOptionalEmptyTestLanguageParser extends AbstractInternalAnt
 
             }
 
-             leaveRule(); 
+
+            }
+
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;

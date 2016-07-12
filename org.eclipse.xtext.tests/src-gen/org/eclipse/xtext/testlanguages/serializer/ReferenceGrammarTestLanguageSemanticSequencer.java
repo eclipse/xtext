@@ -99,7 +99,7 @@ public class ReferenceGrammarTestLanguageSemanticSequencer extends AbstractDeleg
 	 *     Farbe returns Farbe
 	 *
 	 * Constraint:
-	 *     (wert='ROT' | wert='BLAU' | wert='GELB' | wert='GRÜN')
+	 *     (wert='ROT' | wert='BLAU' | wert='GELB' | wert='GRï¿½N')
 	 */
 	protected void sequence_Farbe(ISerializationContext context, Farbe semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

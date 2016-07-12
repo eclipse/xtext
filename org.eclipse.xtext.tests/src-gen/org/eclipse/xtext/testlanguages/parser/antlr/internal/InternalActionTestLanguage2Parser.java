@@ -1,4 +1,4 @@
-package org.eclipse.xtext.testlanguages.parser.antlr.internal; 
+package org.eclipse.xtext.testlanguages.parser.antlr.internal;
 
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
@@ -53,18 +53,18 @@ public class InternalActionTestLanguage2Parser extends AbstractInternalAntlrPars
 
 
      	private ActionTestLanguage2GrammarAccess grammarAccess;
-     	
+
         public InternalActionTestLanguage2Parser(TokenStream input, ActionTestLanguage2GrammarAccess grammarAccess) {
             this(input);
             this.grammarAccess = grammarAccess;
             registerRules(grammarAccess.getGrammar());
         }
-        
+
         @Override
         protected String getFirstRuleName() {
-        	return "ORing";	
+        	return "ORing";
        	}
-       	
+
        	@Override
        	protected ActionTestLanguage2GrammarAccess getGrammarAccess() {
        		return grammarAccess;
@@ -72,8 +72,9 @@ public class InternalActionTestLanguage2Parser extends AbstractInternalAntlrPars
 
 
 
+
     // $ANTLR start "entryRuleORing"
-    // InternalActionTestLanguage2.g:67:1: entryRuleORing returns [EObject current=null] : iv_ruleORing= ruleORing EOF ;
+    // InternalActionTestLanguage2.g:64:1: entryRuleORing returns [EObject current=null] : iv_ruleORing= ruleORing EOF ;
     public final EObject entryRuleORing() throws RecognitionException {
         EObject current = null;
 
@@ -81,8 +82,8 @@ public class InternalActionTestLanguage2Parser extends AbstractInternalAntlrPars
 
 
         try {
-            // InternalActionTestLanguage2.g:68:2: (iv_ruleORing= ruleORing EOF )
-            // InternalActionTestLanguage2.g:69:2: iv_ruleORing= ruleORing EOF
+            // InternalActionTestLanguage2.g:64:46: (iv_ruleORing= ruleORing EOF )
+            // InternalActionTestLanguage2.g:65:2: iv_ruleORing= ruleORing EOF
             {
              newCompositeNode(grammarAccess.getORingRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -96,11 +97,11 @@ public class InternalActionTestLanguage2Parser extends AbstractInternalAntlrPars
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -109,7 +110,7 @@ public class InternalActionTestLanguage2Parser extends AbstractInternalAntlrPars
 
 
     // $ANTLR start "ruleORing"
-    // InternalActionTestLanguage2.g:76:1: ruleORing returns [EObject current=null] : (this_Value_0= ruleValue ( () otherlv_2= '|' ( (lv_disjuncts_3_0= ruleValue ) ) )* ) ;
+    // InternalActionTestLanguage2.g:71:1: ruleORing returns [EObject current=null] : (this_Value_0= ruleValue ( () otherlv_2= '|' ( (lv_disjuncts_3_0= ruleValue ) ) )* ) ;
     public final EObject ruleORing() throws RecognitionException {
         EObject current = null;
 
@@ -119,28 +120,29 @@ public class InternalActionTestLanguage2Parser extends AbstractInternalAntlrPars
         EObject lv_disjuncts_3_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalActionTestLanguage2.g:79:28: ( (this_Value_0= ruleValue ( () otherlv_2= '|' ( (lv_disjuncts_3_0= ruleValue ) ) )* ) )
-            // InternalActionTestLanguage2.g:80:1: (this_Value_0= ruleValue ( () otherlv_2= '|' ( (lv_disjuncts_3_0= ruleValue ) ) )* )
+            // InternalActionTestLanguage2.g:77:2: ( (this_Value_0= ruleValue ( () otherlv_2= '|' ( (lv_disjuncts_3_0= ruleValue ) ) )* ) )
+            // InternalActionTestLanguage2.g:78:2: (this_Value_0= ruleValue ( () otherlv_2= '|' ( (lv_disjuncts_3_0= ruleValue ) ) )* )
             {
-            // InternalActionTestLanguage2.g:80:1: (this_Value_0= ruleValue ( () otherlv_2= '|' ( (lv_disjuncts_3_0= ruleValue ) ) )* )
-            // InternalActionTestLanguage2.g:81:5: this_Value_0= ruleValue ( () otherlv_2= '|' ( (lv_disjuncts_3_0= ruleValue ) ) )*
+            // InternalActionTestLanguage2.g:78:2: (this_Value_0= ruleValue ( () otherlv_2= '|' ( (lv_disjuncts_3_0= ruleValue ) ) )* )
+            // InternalActionTestLanguage2.g:79:3: this_Value_0= ruleValue ( () otherlv_2= '|' ( (lv_disjuncts_3_0= ruleValue ) ) )*
             {
-             
-                    newCompositeNode(grammarAccess.getORingAccess().getValueParserRuleCall_0()); 
-                
+
+            			newCompositeNode(grammarAccess.getORingAccess().getValueParserRuleCall_0());
+            		
             pushFollow(FollowSets000.FOLLOW_3);
             this_Value_0=ruleValue();
 
             state._fsp--;
 
-             
-                    current = this_Value_0; 
-                    afterParserOrEnumRuleCall();
-                
-            // InternalActionTestLanguage2.g:89:1: ( () otherlv_2= '|' ( (lv_disjuncts_3_0= ruleValue ) ) )*
+
+            			current = this_Value_0;
+            			afterParserOrEnumRuleCall();
+            		
+            // InternalActionTestLanguage2.g:87:3: ( () otherlv_2= '|' ( (lv_disjuncts_3_0= ruleValue ) ) )*
             loop1:
             do {
                 int alt1=2;
@@ -153,48 +155,48 @@ public class InternalActionTestLanguage2Parser extends AbstractInternalAntlrPars
 
                 switch (alt1) {
             	case 1 :
-            	    // InternalActionTestLanguage2.g:89:2: () otherlv_2= '|' ( (lv_disjuncts_3_0= ruleValue ) )
+            	    // InternalActionTestLanguage2.g:88:4: () otherlv_2= '|' ( (lv_disjuncts_3_0= ruleValue ) )
             	    {
-            	    // InternalActionTestLanguage2.g:89:2: ()
-            	    // InternalActionTestLanguage2.g:90:5: 
+            	    // InternalActionTestLanguage2.g:88:4: ()
+            	    // InternalActionTestLanguage2.g:89:5: 
             	    {
 
-            	            current = forceCreateModelElementAndAdd(
-            	                grammarAccess.getORingAccess().getORingDisjunctsAction_1_0(),
-            	                current);
-            	        
+            	    					current = forceCreateModelElementAndAdd(
+            	    						grammarAccess.getORingAccess().getORingDisjunctsAction_1_0(),
+            	    						current);
+            	    				
 
             	    }
 
             	    otherlv_2=(Token)match(input,11,FollowSets000.FOLLOW_4); 
 
-            	        	newLeafNode(otherlv_2, grammarAccess.getORingAccess().getVerticalLineKeyword_1_1());
-            	        
-            	    // InternalActionTestLanguage2.g:99:1: ( (lv_disjuncts_3_0= ruleValue ) )
-            	    // InternalActionTestLanguage2.g:100:1: (lv_disjuncts_3_0= ruleValue )
+            	    				newLeafNode(otherlv_2, grammarAccess.getORingAccess().getVerticalLineKeyword_1_1());
+            	    			
+            	    // InternalActionTestLanguage2.g:99:4: ( (lv_disjuncts_3_0= ruleValue ) )
+            	    // InternalActionTestLanguage2.g:100:5: (lv_disjuncts_3_0= ruleValue )
             	    {
-            	    // InternalActionTestLanguage2.g:100:1: (lv_disjuncts_3_0= ruleValue )
-            	    // InternalActionTestLanguage2.g:101:3: lv_disjuncts_3_0= ruleValue
+            	    // InternalActionTestLanguage2.g:100:5: (lv_disjuncts_3_0= ruleValue )
+            	    // InternalActionTestLanguage2.g:101:6: lv_disjuncts_3_0= ruleValue
             	    {
-            	     
-            	    	        newCompositeNode(grammarAccess.getORingAccess().getDisjunctsValueParserRuleCall_1_2_0()); 
-            	    	    
+
+            	    						newCompositeNode(grammarAccess.getORingAccess().getDisjunctsValueParserRuleCall_1_2_0());
+            	    					
             	    pushFollow(FollowSets000.FOLLOW_3);
             	    lv_disjuncts_3_0=ruleValue();
 
             	    state._fsp--;
 
 
-            	    	        if (current==null) {
-            	    	            current = createModelElementForParent(grammarAccess.getORingRule());
-            	    	        }
-            	           		add(
-            	           			current, 
-            	           			"disjuncts",
-            	            		lv_disjuncts_3_0, 
-            	            		"org.eclipse.xtext.testlanguages.ActionTestLanguage2.Value");
-            	    	        afterParserOrEnumRuleCall();
-            	    	    
+            	    						if (current==null) {
+            	    							current = createModelElementForParent(grammarAccess.getORingRule());
+            	    						}
+            	    						add(
+            	    							current,
+            	    							"disjuncts",
+            	    							lv_disjuncts_3_0,
+            	    							"org.eclipse.xtext.testlanguages.ActionTestLanguage2.Value");
+            	    						afterParserOrEnumRuleCall();
+            	    					
 
             	    }
 
@@ -216,13 +218,15 @@ public class InternalActionTestLanguage2Parser extends AbstractInternalAntlrPars
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -231,7 +235,7 @@ public class InternalActionTestLanguage2Parser extends AbstractInternalAntlrPars
 
 
     // $ANTLR start "entryRuleValue"
-    // InternalActionTestLanguage2.g:125:1: entryRuleValue returns [EObject current=null] : iv_ruleValue= ruleValue EOF ;
+    // InternalActionTestLanguage2.g:123:1: entryRuleValue returns [EObject current=null] : iv_ruleValue= ruleValue EOF ;
     public final EObject entryRuleValue() throws RecognitionException {
         EObject current = null;
 
@@ -239,8 +243,8 @@ public class InternalActionTestLanguage2Parser extends AbstractInternalAntlrPars
 
 
         try {
-            // InternalActionTestLanguage2.g:126:2: (iv_ruleValue= ruleValue EOF )
-            // InternalActionTestLanguage2.g:127:2: iv_ruleValue= ruleValue EOF
+            // InternalActionTestLanguage2.g:123:46: (iv_ruleValue= ruleValue EOF )
+            // InternalActionTestLanguage2.g:124:2: iv_ruleValue= ruleValue EOF
             {
              newCompositeNode(grammarAccess.getValueRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -254,11 +258,11 @@ public class InternalActionTestLanguage2Parser extends AbstractInternalAntlrPars
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -267,50 +271,53 @@ public class InternalActionTestLanguage2Parser extends AbstractInternalAntlrPars
 
 
     // $ANTLR start "ruleValue"
-    // InternalActionTestLanguage2.g:134:1: ruleValue returns [EObject current=null] : ( (lv_value_0_0= 'a' ) ) ;
+    // InternalActionTestLanguage2.g:130:1: ruleValue returns [EObject current=null] : ( (lv_value_0_0= 'a' ) ) ;
     public final EObject ruleValue() throws RecognitionException {
         EObject current = null;
 
         Token lv_value_0_0=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalActionTestLanguage2.g:137:28: ( ( (lv_value_0_0= 'a' ) ) )
-            // InternalActionTestLanguage2.g:138:1: ( (lv_value_0_0= 'a' ) )
+            // InternalActionTestLanguage2.g:136:2: ( ( (lv_value_0_0= 'a' ) ) )
+            // InternalActionTestLanguage2.g:137:2: ( (lv_value_0_0= 'a' ) )
             {
-            // InternalActionTestLanguage2.g:138:1: ( (lv_value_0_0= 'a' ) )
-            // InternalActionTestLanguage2.g:139:1: (lv_value_0_0= 'a' )
+            // InternalActionTestLanguage2.g:137:2: ( (lv_value_0_0= 'a' ) )
+            // InternalActionTestLanguage2.g:138:3: (lv_value_0_0= 'a' )
             {
-            // InternalActionTestLanguage2.g:139:1: (lv_value_0_0= 'a' )
-            // InternalActionTestLanguage2.g:140:3: lv_value_0_0= 'a'
+            // InternalActionTestLanguage2.g:138:3: (lv_value_0_0= 'a' )
+            // InternalActionTestLanguage2.g:139:4: lv_value_0_0= 'a'
             {
             lv_value_0_0=(Token)match(input,12,FollowSets000.FOLLOW_2); 
 
-                    newLeafNode(lv_value_0_0, grammarAccess.getValueAccess().getValueAKeyword_0());
-                
+            				newLeafNode(lv_value_0_0, grammarAccess.getValueAccess().getValueAKeyword_0());
+            			
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getValueRule());
-            	        }
-                   		setWithLastConsumed(current, "value", lv_value_0_0, "a");
-            	    
-
-            }
-
+            				if (current==null) {
+            					current = createModelElement(grammarAccess.getValueRule());
+            				}
+            				setWithLastConsumed(current, "value", lv_value_0_0, "a");
+            			
 
             }
 
 
             }
 
-             leaveRule(); 
+
+            }
+
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;

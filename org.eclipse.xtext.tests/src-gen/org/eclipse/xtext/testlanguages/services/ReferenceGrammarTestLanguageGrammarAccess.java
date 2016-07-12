@@ -3,20 +3,25 @@
  */
 package org.eclipse.xtext.testlanguages.services;
 
-import com.google.inject.Singleton;
 import com.google.inject.Inject;
-
+import com.google.inject.Singleton;
 import java.util.List;
-
-import org.eclipse.xtext.*;
-import org.eclipse.xtext.service.GrammarProvider;
-import org.eclipse.xtext.service.AbstractElementFinder.*;
-
+import org.eclipse.xtext.Alternatives;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.Group;
+import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
+import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder;
+import org.eclipse.xtext.service.GrammarProvider;
 
 @Singleton
 public class ReferenceGrammarTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
-	
 	
 	public class SpielplatzElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguage.Spielplatz");
@@ -42,60 +47,59 @@ public class ReferenceGrammarTestLanguageGrammarAccess extends AbstractGrammarEl
 		//	("spielplatz" groesse=INT beschreibung=STRING? "{" (kinder+=Kind | erzieher+=Erwachsener | spielzeuge+=Spielzeug |
 		//	familie+=Familie)* "}")?;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//("spielplatz" groesse=INT beschreibung=STRING? "{" (kinder+=Kind | erzieher+=Erwachsener | spielzeuge+=Spielzeug |
 		//familie+=Familie)* "}")?
 		public Group getGroup() { return cGroup; }
-
+		
 		//"spielplatz"
 		public Keyword getSpielplatzKeyword_0() { return cSpielplatzKeyword_0; }
-
+		
 		//groesse=INT
 		public Assignment getGroesseAssignment_1() { return cGroesseAssignment_1; }
-
+		
 		//INT
 		public RuleCall getGroesseINTTerminalRuleCall_1_0() { return cGroesseINTTerminalRuleCall_1_0; }
-
+		
 		//beschreibung=STRING?
 		public Assignment getBeschreibungAssignment_2() { return cBeschreibungAssignment_2; }
-
+		
 		//STRING
 		public RuleCall getBeschreibungSTRINGTerminalRuleCall_2_0() { return cBeschreibungSTRINGTerminalRuleCall_2_0; }
-
+		
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
-
+		
 		//(kinder+=Kind | erzieher+=Erwachsener | spielzeuge+=Spielzeug | familie+=Familie)*
 		public Alternatives getAlternatives_4() { return cAlternatives_4; }
-
+		
 		//kinder+=Kind
 		public Assignment getKinderAssignment_4_0() { return cKinderAssignment_4_0; }
-
+		
 		//Kind
 		public RuleCall getKinderKindParserRuleCall_4_0_0() { return cKinderKindParserRuleCall_4_0_0; }
-
+		
 		//erzieher+=Erwachsener
 		public Assignment getErzieherAssignment_4_1() { return cErzieherAssignment_4_1; }
-
+		
 		//Erwachsener
 		public RuleCall getErzieherErwachsenerParserRuleCall_4_1_0() { return cErzieherErwachsenerParserRuleCall_4_1_0; }
-
+		
 		//spielzeuge+=Spielzeug
 		public Assignment getSpielzeugeAssignment_4_2() { return cSpielzeugeAssignment_4_2; }
-
+		
 		//Spielzeug
 		public RuleCall getSpielzeugeSpielzeugParserRuleCall_4_2_0() { return cSpielzeugeSpielzeugParserRuleCall_4_2_0; }
-
+		
 		//familie+=Familie
 		public Assignment getFamilieAssignment_4_3() { return cFamilieAssignment_4_3; }
-
+		
 		//Familie
 		public RuleCall getFamilieFamilieParserRuleCall_4_3_0() { return cFamilieFamilieParserRuleCall_4_3_0; }
-
+		
 		//"}"
 		public Keyword getRightCurlyBracketKeyword_5() { return cRightCurlyBracketKeyword_5; }
 	}
-
 	public class PersonElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguage.Person");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -105,17 +109,16 @@ public class ReferenceGrammarTestLanguageGrammarAccess extends AbstractGrammarEl
 		//Person:
 		//	Kind | Erwachsener;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//Kind | Erwachsener
 		public Alternatives getAlternatives() { return cAlternatives; }
-
+		
 		//Kind
 		public RuleCall getKindParserRuleCall_0() { return cKindParserRuleCall_0; }
-
+		
 		//Erwachsener
 		public RuleCall getErwachsenerParserRuleCall_1() { return cErwachsenerParserRuleCall_1; }
 	}
-
 	public class KindElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguage.Kind");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -130,32 +133,31 @@ public class ReferenceGrammarTestLanguageGrammarAccess extends AbstractGrammarEl
 		//Kind:
 		//	"kind" "(" name=ID age=INT ")";
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//"kind" "(" name=ID age=INT ")"
 		public Group getGroup() { return cGroup; }
-
+		
 		//"kind"
 		public Keyword getKindKeyword_0() { return cKindKeyword_0; }
-
+		
 		//"("
 		public Keyword getLeftParenthesisKeyword_1() { return cLeftParenthesisKeyword_1; }
-
+		
 		//name=ID
 		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
-
+		
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
-
+		
 		//age=INT
 		public Assignment getAgeAssignment_3() { return cAgeAssignment_3; }
-
+		
 		//INT
 		public RuleCall getAgeINTTerminalRuleCall_3_0() { return cAgeINTTerminalRuleCall_3_0; }
-
+		
 		//")"
 		public Keyword getRightParenthesisKeyword_4() { return cRightParenthesisKeyword_4; }
 	}
-
 	public class ErwachsenerElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguage.Erwachsener");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -170,32 +172,31 @@ public class ReferenceGrammarTestLanguageGrammarAccess extends AbstractGrammarEl
 		//Erwachsener:
 		//	"erwachsener" "(" name=ID age=INT ")";
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//"erwachsener" "(" name=ID age=INT ")"
 		public Group getGroup() { return cGroup; }
-
+		
 		//"erwachsener"
 		public Keyword getErwachsenerKeyword_0() { return cErwachsenerKeyword_0; }
-
+		
 		//"("
 		public Keyword getLeftParenthesisKeyword_1() { return cLeftParenthesisKeyword_1; }
-
+		
 		//name=ID
 		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
-
+		
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
-
+		
 		//age=INT
 		public Assignment getAgeAssignment_3() { return cAgeAssignment_3; }
-
+		
 		//INT
 		public RuleCall getAgeINTTerminalRuleCall_3_0() { return cAgeINTTerminalRuleCall_3_0; }
-
+		
 		//")"
 		public Keyword getRightParenthesisKeyword_4() { return cRightParenthesisKeyword_4; }
 	}
-
 	public class SpielzeugElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguage.Spielzeug");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -210,32 +211,31 @@ public class ReferenceGrammarTestLanguageGrammarAccess extends AbstractGrammarEl
 		//Spielzeug:
 		//	"spielzeug" "(" name=ID farbe=Farbe ")";
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//"spielzeug" "(" name=ID farbe=Farbe ")"
 		public Group getGroup() { return cGroup; }
-
+		
 		//"spielzeug"
 		public Keyword getSpielzeugKeyword_0() { return cSpielzeugKeyword_0; }
-
+		
 		//"("
 		public Keyword getLeftParenthesisKeyword_1() { return cLeftParenthesisKeyword_1; }
-
+		
 		//name=ID
 		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
-
+		
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
-
+		
 		//farbe=Farbe
 		public Assignment getFarbeAssignment_3() { return cFarbeAssignment_3; }
-
+		
 		//Farbe
 		public RuleCall getFarbeFarbeParserRuleCall_3_0() { return cFarbeFarbeParserRuleCall_3_0; }
-
+		
 		//")"
 		public Keyword getRightParenthesisKeyword_4() { return cRightParenthesisKeyword_4; }
 	}
-
 	public class FarbeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguage.Farbe");
 		private final Assignment cWertAssignment = (Assignment)rule.eContents().get(1);
@@ -243,31 +243,30 @@ public class ReferenceGrammarTestLanguageGrammarAccess extends AbstractGrammarEl
 		private final Keyword cWertROTKeyword_0_0 = (Keyword)cWertAlternatives_0.eContents().get(0);
 		private final Keyword cWertBLAUKeyword_0_1 = (Keyword)cWertAlternatives_0.eContents().get(1);
 		private final Keyword cWertGELBKeyword_0_2 = (Keyword)cWertAlternatives_0.eContents().get(2);
-		private final Keyword cWertGRÜNKeyword_0_3 = (Keyword)cWertAlternatives_0.eContents().get(3);
+		private final Keyword cWertGRNKeyword_0_3 = (Keyword)cWertAlternatives_0.eContents().get(3);
 		
 		//Farbe:
-		//	wert=("ROT" | "BLAU" | "GELB" | "GRÜN");
+		//	wert=("ROT" | "BLAU" | "GELB" | "GRï¿½N");
 		@Override public ParserRule getRule() { return rule; }
-
-		//wert=("ROT" | "BLAU" | "GELB" | "GRÜN")
+		
+		//wert=("ROT" | "BLAU" | "GELB" | "GRï¿½N")
 		public Assignment getWertAssignment() { return cWertAssignment; }
-
-		//("ROT" | "BLAU" | "GELB" | "GRÜN")
+		
+		//("ROT" | "BLAU" | "GELB" | "GRï¿½N")
 		public Alternatives getWertAlternatives_0() { return cWertAlternatives_0; }
-
+		
 		//"ROT"
 		public Keyword getWertROTKeyword_0_0() { return cWertROTKeyword_0_0; }
-
+		
 		//"BLAU"
 		public Keyword getWertBLAUKeyword_0_1() { return cWertBLAUKeyword_0_1; }
-
+		
 		//"GELB"
 		public Keyword getWertGELBKeyword_0_2() { return cWertGELBKeyword_0_2; }
-
-		//"GRÜN"
-		public Keyword getWertGRÜNKeyword_0_3() { return cWertGRÜNKeyword_0_3; }
+		
+		//"GRï¿½N"
+		public Keyword getWertGRNKeyword_0_3() { return cWertGRNKeyword_0_3; }
 	}
-
 	public class FamilieElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguage.Familie");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -298,74 +297,74 @@ public class ReferenceGrammarTestLanguageGrammarAccess extends AbstractGrammarEl
 		//	"familie" "(" name=("keyword" | STRING | ID) mutter=[Erwachsener] vater=[Erwachsener] kinder+=[Kind] (","
 		//	kinder+=[Kind])* ")";
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//"familie" "(" name=("keyword" | STRING | ID) mutter=[Erwachsener] vater=[Erwachsener] kinder+=[Kind] (","
 		//kinder+=[Kind])* ")"
 		public Group getGroup() { return cGroup; }
-
+		
 		//"familie"
 		public Keyword getFamilieKeyword_0() { return cFamilieKeyword_0; }
-
+		
 		//"("
 		public Keyword getLeftParenthesisKeyword_1() { return cLeftParenthesisKeyword_1; }
-
+		
 		//name=("keyword" | STRING | ID)
 		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
-
+		
 		//("keyword" | STRING | ID)
 		public Alternatives getNameAlternatives_2_0() { return cNameAlternatives_2_0; }
-
+		
 		//"keyword"
 		public Keyword getNameKeywordKeyword_2_0_0() { return cNameKeywordKeyword_2_0_0; }
-
+		
 		//STRING
 		public RuleCall getNameSTRINGTerminalRuleCall_2_0_1() { return cNameSTRINGTerminalRuleCall_2_0_1; }
-
+		
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_2_0_2() { return cNameIDTerminalRuleCall_2_0_2; }
-
+		
 		//mutter=[Erwachsener]
 		public Assignment getMutterAssignment_3() { return cMutterAssignment_3; }
-
+		
 		//[Erwachsener]
 		public CrossReference getMutterErwachsenerCrossReference_3_0() { return cMutterErwachsenerCrossReference_3_0; }
-
+		
 		//ID
 		public RuleCall getMutterErwachsenerIDTerminalRuleCall_3_0_1() { return cMutterErwachsenerIDTerminalRuleCall_3_0_1; }
-
+		
 		//vater=[Erwachsener]
 		public Assignment getVaterAssignment_4() { return cVaterAssignment_4; }
-
+		
 		//[Erwachsener]
 		public CrossReference getVaterErwachsenerCrossReference_4_0() { return cVaterErwachsenerCrossReference_4_0; }
-
+		
 		//ID
 		public RuleCall getVaterErwachsenerIDTerminalRuleCall_4_0_1() { return cVaterErwachsenerIDTerminalRuleCall_4_0_1; }
-
+		
 		//kinder+=[Kind]
 		public Assignment getKinderAssignment_5() { return cKinderAssignment_5; }
-
+		
 		//[Kind]
 		public CrossReference getKinderKindCrossReference_5_0() { return cKinderKindCrossReference_5_0; }
-
+		
 		//ID
 		public RuleCall getKinderKindIDTerminalRuleCall_5_0_1() { return cKinderKindIDTerminalRuleCall_5_0_1; }
-
+		
 		//("," kinder+=[Kind])*
 		public Group getGroup_6() { return cGroup_6; }
-
+		
 		//","
 		public Keyword getCommaKeyword_6_0() { return cCommaKeyword_6_0; }
-
+		
 		//kinder+=[Kind]
 		public Assignment getKinderAssignment_6_1() { return cKinderAssignment_6_1; }
-
+		
 		//[Kind]
 		public CrossReference getKinderKindCrossReference_6_1_0() { return cKinderKindCrossReference_6_1_0; }
-
+		
 		//ID
 		public RuleCall getKinderKindIDTerminalRuleCall_6_1_0_1() { return cKinderKindIDTerminalRuleCall_6_1_0_1; }
-
+		
 		//")"
 		public Keyword getRightParenthesisKeyword_7() { return cRightParenthesisKeyword_7; }
 	}
@@ -380,12 +379,12 @@ public class ReferenceGrammarTestLanguageGrammarAccess extends AbstractGrammarEl
 	private final FamilieElements pFamilie;
 	
 	private final Grammar grammar;
-
+	
 	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public ReferenceGrammarTestLanguageGrammarAccess(GrammarProvider grammarProvider,
-		TerminalsGrammarAccess gaTerminals) {
+			TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
 		this.pSpielplatz = new SpielplatzElements();
@@ -418,7 +417,7 @@ public class ReferenceGrammarTestLanguageGrammarAccess extends AbstractGrammarEl
 		return grammar;
 	}
 	
-
+	
 	public TerminalsGrammarAccess getTerminalsGrammarAccess() {
 		return gaTerminals;
 	}
@@ -434,7 +433,7 @@ public class ReferenceGrammarTestLanguageGrammarAccess extends AbstractGrammarEl
 	public ParserRule getSpielplatzRule() {
 		return getSpielplatzAccess().getRule();
 	}
-
+	
 	//Person:
 	//	Kind | Erwachsener;
 	public PersonElements getPersonAccess() {
@@ -444,7 +443,7 @@ public class ReferenceGrammarTestLanguageGrammarAccess extends AbstractGrammarEl
 	public ParserRule getPersonRule() {
 		return getPersonAccess().getRule();
 	}
-
+	
 	//Kind:
 	//	"kind" "(" name=ID age=INT ")";
 	public KindElements getKindAccess() {
@@ -454,7 +453,7 @@ public class ReferenceGrammarTestLanguageGrammarAccess extends AbstractGrammarEl
 	public ParserRule getKindRule() {
 		return getKindAccess().getRule();
 	}
-
+	
 	//Erwachsener:
 	//	"erwachsener" "(" name=ID age=INT ")";
 	public ErwachsenerElements getErwachsenerAccess() {
@@ -464,7 +463,7 @@ public class ReferenceGrammarTestLanguageGrammarAccess extends AbstractGrammarEl
 	public ParserRule getErwachsenerRule() {
 		return getErwachsenerAccess().getRule();
 	}
-
+	
 	//Spielzeug:
 	//	"spielzeug" "(" name=ID farbe=Farbe ")";
 	public SpielzeugElements getSpielzeugAccess() {
@@ -474,9 +473,9 @@ public class ReferenceGrammarTestLanguageGrammarAccess extends AbstractGrammarEl
 	public ParserRule getSpielzeugRule() {
 		return getSpielzeugAccess().getRule();
 	}
-
+	
 	//Farbe:
-	//	wert=("ROT" | "BLAU" | "GELB" | "GRÜN");
+	//	wert=("ROT" | "BLAU" | "GELB" | "GRï¿½N");
 	public FarbeElements getFarbeAccess() {
 		return pFarbe;
 	}
@@ -484,7 +483,7 @@ public class ReferenceGrammarTestLanguageGrammarAccess extends AbstractGrammarEl
 	public ParserRule getFarbeRule() {
 		return getFarbeAccess().getRule();
 	}
-
+	
 	//Familie:
 	//	"familie" "(" name=("keyword" | STRING | ID) mutter=[Erwachsener] vater=[Erwachsener] kinder+=[Kind] (","
 	//	kinder+=[Kind])* ")";
@@ -495,47 +494,47 @@ public class ReferenceGrammarTestLanguageGrammarAccess extends AbstractGrammarEl
 	public ParserRule getFamilieRule() {
 		return getFamilieAccess().getRule();
 	}
-
+	
 	//terminal ID:
 	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
-	} 
-
+	}
+	
 	//terminal INT returns ecore::EInt:
 	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
-	} 
-
+	}
+	
 	//terminal STRING:
 	//	'"' ('\\' . | !('\\' | '"'))* '"' |
 	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
-	} 
-
+	}
+	
 	//terminal ML_COMMENT:
 	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal SL_COMMENT:
 	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal WS:
 	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
-	} 
-
+	}
+	
 	//terminal ANY_OTHER:
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
-	} 
+	}
 }
