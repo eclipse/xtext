@@ -33,8 +33,16 @@ class BuildContext {
 	def <T> Iterable<T> executeClustered(Iterable<URI> uri, (Resource)=>T operation) {
 		if(loader == null) 
 			loader = new ClusteringStorageAwareResourceLoader(this)
-		return loader.executeClustered(uri.filter[resourceServiceProvider!=null], operation)
+		return loader.executeClustered(uri.filter[canHandle], operation)
 	}
+	
+	protected def boolean canHandle(URI uri) {
+        val resourceServiceProvider = resourceServiceProviderProvider.apply(uri)
+        if (resourceServiceProvider === null)
+            return false
+
+        return resourceServiceProvider.canHandle(uri)
+    }
 	
 	def getResourceServiceProvider(URI uri) {
 		val resourceServiceProvider = resourceServiceProviderProvider.apply(uri)
