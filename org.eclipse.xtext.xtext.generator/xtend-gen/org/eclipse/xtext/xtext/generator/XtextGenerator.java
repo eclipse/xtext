@@ -20,6 +20,7 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Map;
 import java.util.Set;
 import java.util.function.Consumer;
 import org.apache.log4j.Logger;
@@ -31,12 +32,15 @@ import org.eclipse.emf.mwe.core.issues.Issues;
 import org.eclipse.emf.mwe.core.lib.AbstractWorkflowComponent2;
 import org.eclipse.emf.mwe.core.monitor.ProgressMonitor;
 import org.eclipse.emf.mwe.utils.StandaloneSetup;
+import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.GeneratedMetamodel;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextStandaloneSetup;
+import org.eclipse.xtext.parser.IEncodingProvider;
+import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.util.MergeableManifest;
 import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.util.Tuples;
@@ -106,6 +110,9 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
   @Inject
   private XtextGeneratorNaming naming;
   
+  @Accessors(AccessorType.PROTECTED_GETTER)
+  private final Map<String, String> defaultEncodings = CollectionLiterals.<String, String>newHashMap();
+  
   public XtextGenerator() {
     XtextStandaloneSetup _xtextStandaloneSetup = new XtextStandaloneSetup();
     _xtextStandaloneSetup.createInjectorAndDoEMFRegistration();
@@ -159,6 +166,7 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
       XtextGenerator.LOG.info("Initializing Xtext generator");
       StandaloneSetup _standaloneSetup = new StandaloneSetup();
       _standaloneSetup.addRegisterGeneratedEPackage("org.eclipse.xtext.common.types.TypesPackage");
+      this.initializeEncoding("xtext");
       Injector _createInjector = this.createInjector();
       this.injector = _createInjector;
       this.injector.injectMembers(this);
@@ -175,6 +183,37 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
           final Injector languageInjector = this.createLanguageInjector(this.injector, language);
           language.initialize(languageInjector);
         }
+      }
+    }
+  }
+  
+  protected void initializeEncoding(final String langExtension) {
+    final IResourceServiceProvider.Registry serviceProviderRegistry = IResourceServiceProvider.Registry.INSTANCE;
+    Map<String, Object> _extensionToFactoryMap = serviceProviderRegistry.getExtensionToFactoryMap();
+    Object _get = _extensionToFactoryMap.get(langExtension);
+    final IResourceServiceProvider serviceProvider = ((IResourceServiceProvider) _get);
+    if ((serviceProvider != null)) {
+      final IEncodingProvider encodingProvider = serviceProvider.<IEncodingProvider>get(IEncodingProvider.class);
+      if ((encodingProvider instanceof IEncodingProvider.Runtime)) {
+        String _defaultEncoding = ((IEncodingProvider.Runtime)encodingProvider).getDefaultEncoding();
+        this.defaultEncodings.put(langExtension, _defaultEncoding);
+        CodeConfig _code = this.configuration.getCode();
+        String _encoding = _code.getEncoding();
+        ((IEncodingProvider.Runtime)encodingProvider).setDefaultEncoding(_encoding);
+      }
+    }
+  }
+  
+  protected void restoreEncoding(final String langExtension) {
+    final IResourceServiceProvider.Registry serviceProviderRegistry = IResourceServiceProvider.Registry.INSTANCE;
+    Map<String, Object> _extensionToFactoryMap = serviceProviderRegistry.getExtensionToFactoryMap();
+    Object _get = _extensionToFactoryMap.get(langExtension);
+    final IResourceServiceProvider serviceProvider = ((IResourceServiceProvider) _get);
+    if (((serviceProvider != null) && this.defaultEncodings.containsKey(langExtension))) {
+      final IEncodingProvider encodingProvider = serviceProvider.<IEncodingProvider>get(IEncodingProvider.class);
+      if ((encodingProvider instanceof IEncodingProvider.Runtime)) {
+        String _get_1 = this.defaultEncodings.get(langExtension);
+        ((IEncodingProvider.Runtime)encodingProvider).setDefaultEncoding(_get_1);
       }
     }
   }
@@ -224,6 +263,8 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
       } else {
         throw Exceptions.sneakyThrow(_t_1);
       }
+    } finally {
+      this.restoreEncoding("xtext");
     }
   }
   
@@ -545,5 +586,10 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
   
   public void setStandaloneSetup(final XtextGeneratorStandaloneSetup standaloneSetup) {
     this.standaloneSetup = standaloneSetup;
+  }
+  
+  @Pure
+  protected Map<String, String> getDefaultEncodings() {
+    return this.defaultEncodings;
   }
 }
