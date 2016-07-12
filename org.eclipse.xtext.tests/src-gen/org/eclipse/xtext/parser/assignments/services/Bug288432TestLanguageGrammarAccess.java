@@ -3,20 +3,25 @@
  */
 package org.eclipse.xtext.parser.assignments.services;
 
-import com.google.inject.Singleton;
 import com.google.inject.Inject;
-
+import com.google.inject.Singleton;
 import java.util.List;
-
-import org.eclipse.xtext.*;
-import org.eclipse.xtext.service.GrammarProvider;
-import org.eclipse.xtext.service.AbstractElementFinder.*;
-
+import org.eclipse.xtext.Alternatives;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.Group;
+import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
+import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder;
+import org.eclipse.xtext.service.GrammarProvider;
 
 @Singleton
 public class Bug288432TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
-	
 	
 	public class BodyElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.assignments.Bug288432TestLanguage.Body");
@@ -45,62 +50,61 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//	content=(Content | ParameterRef) foo+=Foo+
 		//	'end body';
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//('(' parameter+=Parameter (',' parameter+=Parameter)* ')')? 'body' content=(Content | ParameterRef) foo+=Foo+ 'end body'
 		public Group getGroup() { return cGroup; }
-
+		
 		//('(' parameter+=Parameter (',' parameter+=Parameter)* ')')?
 		public Group getGroup_0() { return cGroup_0; }
-
+		
 		//'('
 		public Keyword getLeftParenthesisKeyword_0_0() { return cLeftParenthesisKeyword_0_0; }
-
+		
 		//parameter+=Parameter
 		public Assignment getParameterAssignment_0_1() { return cParameterAssignment_0_1; }
-
+		
 		//Parameter
 		public RuleCall getParameterParameterParserRuleCall_0_1_0() { return cParameterParameterParserRuleCall_0_1_0; }
-
+		
 		//(',' parameter+=Parameter)*
 		public Group getGroup_0_2() { return cGroup_0_2; }
-
+		
 		//','
 		public Keyword getCommaKeyword_0_2_0() { return cCommaKeyword_0_2_0; }
-
+		
 		//parameter+=Parameter
 		public Assignment getParameterAssignment_0_2_1() { return cParameterAssignment_0_2_1; }
-
+		
 		//Parameter
 		public RuleCall getParameterParameterParserRuleCall_0_2_1_0() { return cParameterParameterParserRuleCall_0_2_1_0; }
-
+		
 		//')'
 		public Keyword getRightParenthesisKeyword_0_3() { return cRightParenthesisKeyword_0_3; }
-
+		
 		//'body'
 		public Keyword getBodyKeyword_1() { return cBodyKeyword_1; }
-
+		
 		//content=(Content | ParameterRef)
 		public Assignment getContentAssignment_2() { return cContentAssignment_2; }
-
+		
 		//(Content | ParameterRef)
 		public Alternatives getContentAlternatives_2_0() { return cContentAlternatives_2_0; }
-
+		
 		//Content
 		public RuleCall getContentContentParserRuleCall_2_0_0() { return cContentContentParserRuleCall_2_0_0; }
-
+		
 		//ParameterRef
 		public RuleCall getContentParameterRefParserRuleCall_2_0_1() { return cContentParameterRefParserRuleCall_2_0_1; }
-
+		
 		//foo+=Foo+
 		public Assignment getFooAssignment_3() { return cFooAssignment_3; }
-
+		
 		//Foo
 		public RuleCall getFooFooParserRuleCall_3_0() { return cFooFooParserRuleCall_3_0; }
-
+		
 		//'end body'
 		public Keyword getEndBodyKeyword_4() { return cEndBodyKeyword_4; }
 	}
-
 	public class FooElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.assignments.Bug288432TestLanguage.Foo");
 		private final Assignment cFooValueAssignment = (Assignment)rule.eContents().get(1);
@@ -109,14 +113,13 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//Foo:
 		//	fooValue=STRING;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//fooValue=STRING
 		public Assignment getFooValueAssignment() { return cFooValueAssignment; }
-
+		
 		//STRING
 		public RuleCall getFooValueSTRINGTerminalRuleCall_0() { return cFooValueSTRINGTerminalRuleCall_0; }
 	}
-
 	public class ContentElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.assignments.Bug288432TestLanguage.Content");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -127,20 +130,19 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//Content:
 		//	'content' MyElement 'end content';
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'content' MyElement 'end content'
 		public Group getGroup() { return cGroup; }
-
+		
 		//'content'
 		public Keyword getContentKeyword_0() { return cContentKeyword_0; }
-
+		
 		//MyElement
 		public RuleCall getMyElementParserRuleCall_1() { return cMyElementParserRuleCall_1; }
-
+		
 		//'end content'
 		public Keyword getEndContentKeyword_2() { return cEndContentKeyword_2; }
 	}
-
 	public class MyElementElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.assignments.Bug288432TestLanguage.MyElement");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -153,26 +155,25 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//MyElement:
 		//	'element' bar=(MyInt | ParameterRef);
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'element' bar=(MyInt | ParameterRef)
 		public Group getGroup() { return cGroup; }
-
+		
 		//'element'
 		public Keyword getElementKeyword_0() { return cElementKeyword_0; }
-
+		
 		//bar=(MyInt | ParameterRef)
 		public Assignment getBarAssignment_1() { return cBarAssignment_1; }
-
+		
 		//(MyInt | ParameterRef)
 		public Alternatives getBarAlternatives_1_0() { return cBarAlternatives_1_0; }
-
+		
 		//MyInt
 		public RuleCall getBarMyIntParserRuleCall_1_0_0() { return cBarMyIntParserRuleCall_1_0_0; }
-
+		
 		//ParameterRef
 		public RuleCall getBarParameterRefParserRuleCall_1_0_1() { return cBarParameterRefParserRuleCall_1_0_1; }
 	}
-
 	public class ParameterObjectElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.assignments.Bug288432TestLanguage.ParameterObject");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -183,20 +184,19 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//ParameterObject:
 		//	MyInt | Content | ParameterRef;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//MyInt | Content | ParameterRef
 		public Alternatives getAlternatives() { return cAlternatives; }
-
+		
 		//MyInt
 		public RuleCall getMyIntParserRuleCall_0() { return cMyIntParserRuleCall_0; }
-
+		
 		//Content
 		public RuleCall getContentParserRuleCall_1() { return cContentParserRuleCall_1; }
-
+		
 		//ParameterRef
 		public RuleCall getParameterRefParserRuleCall_2() { return cParameterRefParserRuleCall_2; }
 	}
-
 	public class ParameterElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.assignments.Bug288432TestLanguage.Parameter");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -210,26 +210,25 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//	name=ID
 		//	value=[ParameterObject]?;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//name=ID value=[ParameterObject]?
 		public Group getGroup() { return cGroup; }
-
+		
 		//name=ID
 		public Assignment getNameAssignment_0() { return cNameAssignment_0; }
-
+		
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_0_0() { return cNameIDTerminalRuleCall_0_0; }
-
+		
 		//value=[ParameterObject]?
 		public Assignment getValueAssignment_1() { return cValueAssignment_1; }
-
+		
 		//[ParameterObject]
 		public CrossReference getValueParameterObjectCrossReference_1_0() { return cValueParameterObjectCrossReference_1_0; }
-
+		
 		//ID
 		public RuleCall getValueParameterObjectIDTerminalRuleCall_1_0_1() { return cValueParameterObjectIDTerminalRuleCall_1_0_1; }
 	}
-
 	public class ParameterRefElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.assignments.Bug288432TestLanguage.ParameterRef");
 		private final Assignment cParameterAssignment = (Assignment)rule.eContents().get(1);
@@ -239,17 +238,16 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//ParameterRef:
 		//	parameter=[Parameter];
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//parameter=[Parameter]
 		public Assignment getParameterAssignment() { return cParameterAssignment; }
-
+		
 		//[Parameter]
 		public CrossReference getParameterParameterCrossReference_0() { return cParameterParameterCrossReference_0; }
-
+		
 		//ID
 		public RuleCall getParameterParameterIDTerminalRuleCall_0_1() { return cParameterParameterIDTerminalRuleCall_0_1; }
 	}
-
 	public class MyIntElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.assignments.Bug288432TestLanguage.MyInt");
 		private final Assignment cIntAssignment = (Assignment)rule.eContents().get(1);
@@ -258,10 +256,10 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//MyInt:
 		//	int=INT;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//int=INT
 		public Assignment getIntAssignment() { return cIntAssignment; }
-
+		
 		//INT
 		public RuleCall getIntINTTerminalRuleCall_0() { return cIntINTTerminalRuleCall_0; }
 	}
@@ -277,12 +275,12 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	private final MyIntElements pMyInt;
 	
 	private final Grammar grammar;
-
+	
 	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public Bug288432TestLanguageGrammarAccess(GrammarProvider grammarProvider,
-		TerminalsGrammarAccess gaTerminals) {
+			TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
 		this.pBody = new BodyElements();
@@ -316,7 +314,7 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return grammar;
 	}
 	
-
+	
 	public TerminalsGrammarAccess getTerminalsGrammarAccess() {
 		return gaTerminals;
 	}
@@ -334,7 +332,7 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getBodyRule() {
 		return getBodyAccess().getRule();
 	}
-
+	
 	//Foo:
 	//	fooValue=STRING;
 	public FooElements getFooAccess() {
@@ -344,7 +342,7 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getFooRule() {
 		return getFooAccess().getRule();
 	}
-
+	
 	//Content:
 	//	'content' MyElement 'end content';
 	public ContentElements getContentAccess() {
@@ -354,7 +352,7 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getContentRule() {
 		return getContentAccess().getRule();
 	}
-
+	
 	//MyElement:
 	//	'element' bar=(MyInt | ParameterRef);
 	public MyElementElements getMyElementAccess() {
@@ -364,7 +362,7 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getMyElementRule() {
 		return getMyElementAccess().getRule();
 	}
-
+	
 	//ParameterObject:
 	//	MyInt | Content | ParameterRef;
 	public ParameterObjectElements getParameterObjectAccess() {
@@ -374,7 +372,7 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getParameterObjectRule() {
 		return getParameterObjectAccess().getRule();
 	}
-
+	
 	//Parameter:
 	//	name=ID
 	//	value=[ParameterObject]?;
@@ -385,7 +383,7 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getParameterRule() {
 		return getParameterAccess().getRule();
 	}
-
+	
 	//ParameterRef:
 	//	parameter=[Parameter];
 	public ParameterRefElements getParameterRefAccess() {
@@ -395,7 +393,7 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getParameterRefRule() {
 		return getParameterRefAccess().getRule();
 	}
-
+	
 	//MyInt:
 	//	int=INT;
 	public MyIntElements getMyIntAccess() {
@@ -405,47 +403,47 @@ public class Bug288432TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getMyIntRule() {
 		return getMyIntAccess().getRule();
 	}
-
+	
 	//terminal ID:
 	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
-	} 
-
+	}
+	
 	//terminal INT returns ecore::EInt:
 	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
-	} 
-
+	}
+	
 	//terminal STRING:
 	//	'"' ('\\' . | !('\\' | '"'))* '"' |
 	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
-	} 
-
+	}
+	
 	//terminal ML_COMMENT:
 	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal SL_COMMENT:
 	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal WS:
 	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
-	} 
-
+	}
+	
 	//terminal ANY_OTHER:
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
-	} 
+	}
 }
