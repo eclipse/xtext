@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parsetree.reconstr.partialserializationtest.NodeRoot;
 import org.eclipse.xtext.resource.SaveOptions;
 import org.eclipse.xtext.tests.AbstractXtextTests;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -29,6 +30,8 @@ public class PartialSerializationTest extends AbstractXtextTests {
 		return getSerializer().serialize(obj, SaveOptions.defaultOptions());
 	}
 
+	// TODO https://github.com/eclipse/xtext-core/issues/32
+	@Ignore
 	@Test public void testSimple() throws Exception {
 		String model = " #1  node  test  (  node  subnode  )";
 		NodeRoot root = (NodeRoot) getModel(model);
@@ -41,12 +44,16 @@ public class PartialSerializationTest extends AbstractXtextTests {
 		assertEquals(model, doSerialize(root));
 	}
 
+	// TODO https://github.com/eclipse/xtext-core/issues/32
+	@Ignore
 	@Test public void testSimpleSurroundComments2() throws Exception {
 		String model = "/* x1 */ #1 /* x2 */ node /* x3 */ test  (  node  subnode /* x4 */ ) /* x5 */";
 		NodeRoot root = (NodeRoot) getModel(model);
 		assertEquals("/* x2 */ node /* x3 */ test  (  node  subnode /* x4 */ ) /* x5 */", doSerialize(root.getNode()));
 	}
 
+	// TODO https://github.com/eclipse/xtext-core/issues/32
+	@Ignore
 	@Test public void testSimpleSurroundComments3() throws Exception {
 		String model = "/* x1 */ #1 /* x2 */ node /* x3 */ test /* x4 */  ( /* x5 */ node /* x6 */ subnode /* x7 */ ) /* x8 */";
 		NodeRoot root = (NodeRoot) getModel(model);

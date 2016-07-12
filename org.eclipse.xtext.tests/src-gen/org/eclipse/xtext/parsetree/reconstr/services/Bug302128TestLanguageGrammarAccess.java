@@ -3,20 +3,24 @@
  */
 package org.eclipse.xtext.parsetree.reconstr.services;
 
-import com.google.inject.Singleton;
 import com.google.inject.Inject;
-
+import com.google.inject.Singleton;
 import java.util.List;
-
-import org.eclipse.xtext.*;
-import org.eclipse.xtext.service.GrammarProvider;
-import org.eclipse.xtext.service.AbstractElementFinder.*;
-
+import org.eclipse.xtext.Alternatives;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.Group;
+import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
+import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder;
+import org.eclipse.xtext.service.GrammarProvider;
 
 @Singleton
 public class Bug302128TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
-	
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.Bug302128TestLanguage.Model");
@@ -26,14 +30,13 @@ public class Bug302128TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//Model:
 		//	elements+=Element*;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//elements+=Element*
 		public Assignment getElementsAssignment() { return cElementsAssignment; }
-
+		
 		//Element
 		public RuleCall getElementsElementParserRuleCall_0() { return cElementsElementParserRuleCall_0; }
 	}
-
 	public class ElementElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.Bug302128TestLanguage.Element");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -45,23 +48,22 @@ public class Bug302128TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//Element:
 		//	name=Variable value=Value?;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//name=Variable value=Value?
 		public Group getGroup() { return cGroup; }
-
+		
 		//name=Variable
 		public Assignment getNameAssignment_0() { return cNameAssignment_0; }
-
+		
 		//Variable
 		public RuleCall getNameVariableParserRuleCall_0_0() { return cNameVariableParserRuleCall_0_0; }
-
+		
 		//value=Value?
 		public Assignment getValueAssignment_1() { return cValueAssignment_1; }
-
+		
 		//Value
 		public RuleCall getValueValueTerminalRuleCall_1_0() { return cValueValueTerminalRuleCall_1_0; }
 	}
-
 	public class VariableElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.Bug302128TestLanguage.Variable");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -75,25 +77,25 @@ public class Bug302128TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//Variable:
 		//	ID (('.' | '-') ID)*;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//ID (('.' | '-') ID)*
 		public Group getGroup() { return cGroup; }
-
+		
 		//ID
 		public RuleCall getIDTerminalRuleCall_0() { return cIDTerminalRuleCall_0; }
-
+		
 		//(('.' | '-') ID)*
 		public Group getGroup_1() { return cGroup_1; }
-
+		
 		//('.' | '-')
 		public Alternatives getAlternatives_1_0() { return cAlternatives_1_0; }
-
+		
 		//'.'
 		public Keyword getFullStopKeyword_1_0_0() { return cFullStopKeyword_1_0_0; }
-
+		
 		//'-'
 		public Keyword getHyphenMinusKeyword_1_0_1() { return cHyphenMinusKeyword_1_0_1; }
-
+		
 		//ID
 		public RuleCall getIDTerminalRuleCall_1_1() { return cIDTerminalRuleCall_1_1; }
 	}
@@ -106,12 +108,12 @@ public class Bug302128TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	private final TerminalRule tSL_COMMENT;
 	
 	private final Grammar grammar;
-
+	
 	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public Bug302128TestLanguageGrammarAccess(GrammarProvider grammarProvider,
-		TerminalsGrammarAccess gaTerminals) {
+			TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
 		this.pModel = new ModelElements();
@@ -142,7 +144,7 @@ public class Bug302128TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return grammar;
 	}
 	
-
+	
 	public TerminalsGrammarAccess getTerminalsGrammarAccess() {
 		return gaTerminals;
 	}
@@ -157,7 +159,7 @@ public class Bug302128TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getModelRule() {
 		return getModelAccess().getRule();
 	}
-
+	
 	//Element:
 	//	name=Variable value=Value?;
 	public ElementElements getElementAccess() {
@@ -167,7 +169,7 @@ public class Bug302128TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getElementRule() {
 		return getElementAccess().getRule();
 	}
-
+	
 	//Variable:
 	//	ID (('.' | '-') ID)*;
 	public VariableElements getVariableAccess() {
@@ -177,53 +179,53 @@ public class Bug302128TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getVariableRule() {
 		return getVariableAccess().getRule();
 	}
-
+	
 	//terminal Value:
 	//	('=' | '+=' | '-=')->'\n';
 	public TerminalRule getValueRule() {
 		return tValue;
-	} 
-
+	}
+	
 	//terminal SL_COMMENT:
 	//	'#' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return tSL_COMMENT;
-	} 
-
+	}
+	
 	//terminal ID:
 	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
-	} 
-
+	}
+	
 	//terminal INT returns ecore::EInt:
 	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
-	} 
-
+	}
+	
 	//terminal STRING:
 	//	'"' ('\\' . | !('\\' | '"'))* '"' |
 	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
-	} 
-
+	}
+	
 	//terminal ML_COMMENT:
 	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal WS:
 	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
-	} 
-
+	}
+	
 	//terminal ANY_OTHER:
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
-	} 
+	}
 }

@@ -1,4 +1,4 @@
-package org.eclipse.xtext.parsetree.reconstr.parser.antlr.internal; 
+package org.eclipse.xtext.parsetree.reconstr.parser.antlr.internal;
 
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
@@ -114,18 +114,18 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
      	private SimpleReconstrTestLanguageGrammarAccess grammarAccess;
-     	
+
         public InternalSimpleReconstrTestLanguageParser(TokenStream input, SimpleReconstrTestLanguageGrammarAccess grammarAccess) {
             this(input);
             this.grammarAccess = grammarAccess;
             registerRules(grammarAccess.getGrammar());
         }
-        
+
         @Override
         protected String getFirstRuleName() {
-        	return "Op";	
+        	return "Op";
        	}
-       	
+
        	@Override
        	protected SimpleReconstrTestLanguageGrammarAccess getGrammarAccess() {
        		return grammarAccess;
@@ -133,8 +133,9 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
 
+
     // $ANTLR start "entryRuleOp"
-    // InternalSimpleReconstrTestLanguage.g:68:1: entryRuleOp returns [EObject current=null] : iv_ruleOp= ruleOp EOF ;
+    // InternalSimpleReconstrTestLanguage.g:65:1: entryRuleOp returns [EObject current=null] : iv_ruleOp= ruleOp EOF ;
     public final EObject entryRuleOp() throws RecognitionException {
         EObject current = null;
 
@@ -142,8 +143,8 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
         try {
-            // InternalSimpleReconstrTestLanguage.g:69:2: (iv_ruleOp= ruleOp EOF )
-            // InternalSimpleReconstrTestLanguage.g:70:2: iv_ruleOp= ruleOp EOF
+            // InternalSimpleReconstrTestLanguage.g:65:43: (iv_ruleOp= ruleOp EOF )
+            // InternalSimpleReconstrTestLanguage.g:66:2: iv_ruleOp= ruleOp EOF
             {
              newCompositeNode(grammarAccess.getOpRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -157,11 +158,11 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -170,7 +171,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "ruleOp"
-    // InternalSimpleReconstrTestLanguage.g:77:1: ruleOp returns [EObject current=null] : (this_Term_0= ruleTerm ( () ( (lv_values_2_0= ruleTerm ) ) )* ) ;
+    // InternalSimpleReconstrTestLanguage.g:72:1: ruleOp returns [EObject current=null] : (this_Term_0= ruleTerm ( () ( (lv_values_2_0= ruleTerm ) ) )* ) ;
     public final EObject ruleOp() throws RecognitionException {
         EObject current = null;
 
@@ -179,28 +180,29 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
         EObject lv_values_2_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalSimpleReconstrTestLanguage.g:80:28: ( (this_Term_0= ruleTerm ( () ( (lv_values_2_0= ruleTerm ) ) )* ) )
-            // InternalSimpleReconstrTestLanguage.g:81:1: (this_Term_0= ruleTerm ( () ( (lv_values_2_0= ruleTerm ) ) )* )
+            // InternalSimpleReconstrTestLanguage.g:78:2: ( (this_Term_0= ruleTerm ( () ( (lv_values_2_0= ruleTerm ) ) )* ) )
+            // InternalSimpleReconstrTestLanguage.g:79:2: (this_Term_0= ruleTerm ( () ( (lv_values_2_0= ruleTerm ) ) )* )
             {
-            // InternalSimpleReconstrTestLanguage.g:81:1: (this_Term_0= ruleTerm ( () ( (lv_values_2_0= ruleTerm ) ) )* )
-            // InternalSimpleReconstrTestLanguage.g:82:5: this_Term_0= ruleTerm ( () ( (lv_values_2_0= ruleTerm ) ) )*
+            // InternalSimpleReconstrTestLanguage.g:79:2: (this_Term_0= ruleTerm ( () ( (lv_values_2_0= ruleTerm ) ) )* )
+            // InternalSimpleReconstrTestLanguage.g:80:3: this_Term_0= ruleTerm ( () ( (lv_values_2_0= ruleTerm ) ) )*
             {
-             
-                    newCompositeNode(grammarAccess.getOpAccess().getTermParserRuleCall_0()); 
-                
+
+            			newCompositeNode(grammarAccess.getOpAccess().getTermParserRuleCall_0());
+            		
             pushFollow(FollowSets000.FOLLOW_3);
             this_Term_0=ruleTerm();
 
             state._fsp--;
 
-             
-                    current = this_Term_0; 
-                    afterParserOrEnumRuleCall();
-                
-            // InternalSimpleReconstrTestLanguage.g:90:1: ( () ( (lv_values_2_0= ruleTerm ) ) )*
+
+            			current = this_Term_0;
+            			afterParserOrEnumRuleCall();
+            		
+            // InternalSimpleReconstrTestLanguage.g:88:3: ( () ( (lv_values_2_0= ruleTerm ) ) )*
             loop1:
             do {
                 int alt1=2;
@@ -213,44 +215,44 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
                 switch (alt1) {
             	case 1 :
-            	    // InternalSimpleReconstrTestLanguage.g:90:2: () ( (lv_values_2_0= ruleTerm ) )
+            	    // InternalSimpleReconstrTestLanguage.g:89:4: () ( (lv_values_2_0= ruleTerm ) )
             	    {
-            	    // InternalSimpleReconstrTestLanguage.g:90:2: ()
-            	    // InternalSimpleReconstrTestLanguage.g:91:5: 
+            	    // InternalSimpleReconstrTestLanguage.g:89:4: ()
+            	    // InternalSimpleReconstrTestLanguage.g:90:5: 
             	    {
 
-            	            current = forceCreateModelElementAndAdd(
-            	                grammarAccess.getOpAccess().getOpValuesAction_1_0(),
-            	                current);
-            	        
+            	    					current = forceCreateModelElementAndAdd(
+            	    						grammarAccess.getOpAccess().getOpValuesAction_1_0(),
+            	    						current);
+            	    				
 
             	    }
 
-            	    // InternalSimpleReconstrTestLanguage.g:96:2: ( (lv_values_2_0= ruleTerm ) )
-            	    // InternalSimpleReconstrTestLanguage.g:97:1: (lv_values_2_0= ruleTerm )
+            	    // InternalSimpleReconstrTestLanguage.g:96:4: ( (lv_values_2_0= ruleTerm ) )
+            	    // InternalSimpleReconstrTestLanguage.g:97:5: (lv_values_2_0= ruleTerm )
             	    {
-            	    // InternalSimpleReconstrTestLanguage.g:97:1: (lv_values_2_0= ruleTerm )
-            	    // InternalSimpleReconstrTestLanguage.g:98:3: lv_values_2_0= ruleTerm
+            	    // InternalSimpleReconstrTestLanguage.g:97:5: (lv_values_2_0= ruleTerm )
+            	    // InternalSimpleReconstrTestLanguage.g:98:6: lv_values_2_0= ruleTerm
             	    {
-            	     
-            	    	        newCompositeNode(grammarAccess.getOpAccess().getValuesTermParserRuleCall_1_1_0()); 
-            	    	    
+
+            	    						newCompositeNode(grammarAccess.getOpAccess().getValuesTermParserRuleCall_1_1_0());
+            	    					
             	    pushFollow(FollowSets000.FOLLOW_3);
             	    lv_values_2_0=ruleTerm();
 
             	    state._fsp--;
 
 
-            	    	        if (current==null) {
-            	    	            current = createModelElementForParent(grammarAccess.getOpRule());
-            	    	        }
-            	           		add(
-            	           			current, 
-            	           			"values",
-            	            		lv_values_2_0, 
-            	            		"org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage.Term");
-            	    	        afterParserOrEnumRuleCall();
-            	    	    
+            	    						if (current==null) {
+            	    							current = createModelElementForParent(grammarAccess.getOpRule());
+            	    						}
+            	    						add(
+            	    							current,
+            	    							"values",
+            	    							lv_values_2_0,
+            	    							"org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage.Term");
+            	    						afterParserOrEnumRuleCall();
+            	    					
 
             	    }
 
@@ -272,13 +274,15 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -287,7 +291,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "entryRuleTerm"
-    // InternalSimpleReconstrTestLanguage.g:122:1: entryRuleTerm returns [EObject current=null] : iv_ruleTerm= ruleTerm EOF ;
+    // InternalSimpleReconstrTestLanguage.g:120:1: entryRuleTerm returns [EObject current=null] : iv_ruleTerm= ruleTerm EOF ;
     public final EObject entryRuleTerm() throws RecognitionException {
         EObject current = null;
 
@@ -295,8 +299,8 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
         try {
-            // InternalSimpleReconstrTestLanguage.g:123:2: (iv_ruleTerm= ruleTerm EOF )
-            // InternalSimpleReconstrTestLanguage.g:124:2: iv_ruleTerm= ruleTerm EOF
+            // InternalSimpleReconstrTestLanguage.g:120:45: (iv_ruleTerm= ruleTerm EOF )
+            // InternalSimpleReconstrTestLanguage.g:121:2: iv_ruleTerm= ruleTerm EOF
             {
              newCompositeNode(grammarAccess.getTermRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -310,11 +314,11 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -323,7 +327,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "ruleTerm"
-    // InternalSimpleReconstrTestLanguage.g:131:1: ruleTerm returns [EObject current=null] : (this_Atom_0= ruleAtom | this_TwoNumbers_1= ruleTwoNumbers | this_ManyStrings_2= ruleManyStrings | this_Type_3= ruleType | this_Ref2_4= ruleRef2 | this_Spare_5= ruleSpare | this_Boolean_6= ruleBoolean | this_Transient1_7= ruleTransient1 | this_Consumed1_8= ruleConsumed1 | this_Consumed2_9= ruleConsumed2 | this_Loop1_10= ruleLoop1 | this_Loop2_11= ruleLoop2 | this_Loop3_12= ruleLoop3 | this_Loop4_13= ruleLoop4 | this_LoopBug285452_14= ruleLoopBug285452 | this_DuplicateBug284491_15= ruleDuplicateBug284491 | this_EmptyObjectBug284850_16= ruleEmptyObjectBug284850 | this_MultiInheritanceBug280439_17= ruleMultiInheritanceBug280439 | this_EObjectRef_18= ruleEObjectRef | this_TypeBug305577_1_19= ruleTypeBug305577_1 | this_TypeBug305577_2_20= ruleTypeBug305577_2 | this_Parens_21= ruleParens | this_Bug305171_22= ruleBug305171 | this_Bug310435Val_23= ruleBug310435Val | this_Bug310435Enum_24= ruleBug310435Enum | this_CrossRefNameTest_25= ruleCrossRefNameTest ) ;
+    // InternalSimpleReconstrTestLanguage.g:127:1: ruleTerm returns [EObject current=null] : (this_Atom_0= ruleAtom | this_TwoNumbers_1= ruleTwoNumbers | this_ManyStrings_2= ruleManyStrings | this_Type_3= ruleType | this_Ref2_4= ruleRef2 | this_Spare_5= ruleSpare | this_Boolean_6= ruleBoolean | this_Transient1_7= ruleTransient1 | this_Consumed1_8= ruleConsumed1 | this_Consumed2_9= ruleConsumed2 | this_Loop1_10= ruleLoop1 | this_Loop2_11= ruleLoop2 | this_Loop3_12= ruleLoop3 | this_Loop4_13= ruleLoop4 | this_LoopBug285452_14= ruleLoopBug285452 | this_DuplicateBug284491_15= ruleDuplicateBug284491 | this_EmptyObjectBug284850_16= ruleEmptyObjectBug284850 | this_MultiInheritanceBug280439_17= ruleMultiInheritanceBug280439 | this_EObjectRef_18= ruleEObjectRef | this_TypeBug305577_1_19= ruleTypeBug305577_1 | this_TypeBug305577_2_20= ruleTypeBug305577_2 | this_Parens_21= ruleParens | this_Bug305171_22= ruleBug305171 | this_Bug310435Val_23= ruleBug310435Val | this_Bug310435Enum_24= ruleBug310435Enum | this_CrossRefNameTest_25= ruleCrossRefNameTest ) ;
     public final EObject ruleTerm() throws RecognitionException {
         EObject current = null;
 
@@ -380,13 +384,14 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
         EObject this_CrossRefNameTest_25 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalSimpleReconstrTestLanguage.g:134:28: ( (this_Atom_0= ruleAtom | this_TwoNumbers_1= ruleTwoNumbers | this_ManyStrings_2= ruleManyStrings | this_Type_3= ruleType | this_Ref2_4= ruleRef2 | this_Spare_5= ruleSpare | this_Boolean_6= ruleBoolean | this_Transient1_7= ruleTransient1 | this_Consumed1_8= ruleConsumed1 | this_Consumed2_9= ruleConsumed2 | this_Loop1_10= ruleLoop1 | this_Loop2_11= ruleLoop2 | this_Loop3_12= ruleLoop3 | this_Loop4_13= ruleLoop4 | this_LoopBug285452_14= ruleLoopBug285452 | this_DuplicateBug284491_15= ruleDuplicateBug284491 | this_EmptyObjectBug284850_16= ruleEmptyObjectBug284850 | this_MultiInheritanceBug280439_17= ruleMultiInheritanceBug280439 | this_EObjectRef_18= ruleEObjectRef | this_TypeBug305577_1_19= ruleTypeBug305577_1 | this_TypeBug305577_2_20= ruleTypeBug305577_2 | this_Parens_21= ruleParens | this_Bug305171_22= ruleBug305171 | this_Bug310435Val_23= ruleBug310435Val | this_Bug310435Enum_24= ruleBug310435Enum | this_CrossRefNameTest_25= ruleCrossRefNameTest ) )
-            // InternalSimpleReconstrTestLanguage.g:135:1: (this_Atom_0= ruleAtom | this_TwoNumbers_1= ruleTwoNumbers | this_ManyStrings_2= ruleManyStrings | this_Type_3= ruleType | this_Ref2_4= ruleRef2 | this_Spare_5= ruleSpare | this_Boolean_6= ruleBoolean | this_Transient1_7= ruleTransient1 | this_Consumed1_8= ruleConsumed1 | this_Consumed2_9= ruleConsumed2 | this_Loop1_10= ruleLoop1 | this_Loop2_11= ruleLoop2 | this_Loop3_12= ruleLoop3 | this_Loop4_13= ruleLoop4 | this_LoopBug285452_14= ruleLoopBug285452 | this_DuplicateBug284491_15= ruleDuplicateBug284491 | this_EmptyObjectBug284850_16= ruleEmptyObjectBug284850 | this_MultiInheritanceBug280439_17= ruleMultiInheritanceBug280439 | this_EObjectRef_18= ruleEObjectRef | this_TypeBug305577_1_19= ruleTypeBug305577_1 | this_TypeBug305577_2_20= ruleTypeBug305577_2 | this_Parens_21= ruleParens | this_Bug305171_22= ruleBug305171 | this_Bug310435Val_23= ruleBug310435Val | this_Bug310435Enum_24= ruleBug310435Enum | this_CrossRefNameTest_25= ruleCrossRefNameTest )
+            // InternalSimpleReconstrTestLanguage.g:133:2: ( (this_Atom_0= ruleAtom | this_TwoNumbers_1= ruleTwoNumbers | this_ManyStrings_2= ruleManyStrings | this_Type_3= ruleType | this_Ref2_4= ruleRef2 | this_Spare_5= ruleSpare | this_Boolean_6= ruleBoolean | this_Transient1_7= ruleTransient1 | this_Consumed1_8= ruleConsumed1 | this_Consumed2_9= ruleConsumed2 | this_Loop1_10= ruleLoop1 | this_Loop2_11= ruleLoop2 | this_Loop3_12= ruleLoop3 | this_Loop4_13= ruleLoop4 | this_LoopBug285452_14= ruleLoopBug285452 | this_DuplicateBug284491_15= ruleDuplicateBug284491 | this_EmptyObjectBug284850_16= ruleEmptyObjectBug284850 | this_MultiInheritanceBug280439_17= ruleMultiInheritanceBug280439 | this_EObjectRef_18= ruleEObjectRef | this_TypeBug305577_1_19= ruleTypeBug305577_1 | this_TypeBug305577_2_20= ruleTypeBug305577_2 | this_Parens_21= ruleParens | this_Bug305171_22= ruleBug305171 | this_Bug310435Val_23= ruleBug310435Val | this_Bug310435Enum_24= ruleBug310435Enum | this_CrossRefNameTest_25= ruleCrossRefNameTest ) )
+            // InternalSimpleReconstrTestLanguage.g:134:2: (this_Atom_0= ruleAtom | this_TwoNumbers_1= ruleTwoNumbers | this_ManyStrings_2= ruleManyStrings | this_Type_3= ruleType | this_Ref2_4= ruleRef2 | this_Spare_5= ruleSpare | this_Boolean_6= ruleBoolean | this_Transient1_7= ruleTransient1 | this_Consumed1_8= ruleConsumed1 | this_Consumed2_9= ruleConsumed2 | this_Loop1_10= ruleLoop1 | this_Loop2_11= ruleLoop2 | this_Loop3_12= ruleLoop3 | this_Loop4_13= ruleLoop4 | this_LoopBug285452_14= ruleLoopBug285452 | this_DuplicateBug284491_15= ruleDuplicateBug284491 | this_EmptyObjectBug284850_16= ruleEmptyObjectBug284850 | this_MultiInheritanceBug280439_17= ruleMultiInheritanceBug280439 | this_EObjectRef_18= ruleEObjectRef | this_TypeBug305577_1_19= ruleTypeBug305577_1 | this_TypeBug305577_2_20= ruleTypeBug305577_2 | this_Parens_21= ruleParens | this_Bug305171_22= ruleBug305171 | this_Bug310435Val_23= ruleBug310435Val | this_Bug310435Enum_24= ruleBug310435Enum | this_CrossRefNameTest_25= ruleCrossRefNameTest )
             {
-            // InternalSimpleReconstrTestLanguage.g:135:1: (this_Atom_0= ruleAtom | this_TwoNumbers_1= ruleTwoNumbers | this_ManyStrings_2= ruleManyStrings | this_Type_3= ruleType | this_Ref2_4= ruleRef2 | this_Spare_5= ruleSpare | this_Boolean_6= ruleBoolean | this_Transient1_7= ruleTransient1 | this_Consumed1_8= ruleConsumed1 | this_Consumed2_9= ruleConsumed2 | this_Loop1_10= ruleLoop1 | this_Loop2_11= ruleLoop2 | this_Loop3_12= ruleLoop3 | this_Loop4_13= ruleLoop4 | this_LoopBug285452_14= ruleLoopBug285452 | this_DuplicateBug284491_15= ruleDuplicateBug284491 | this_EmptyObjectBug284850_16= ruleEmptyObjectBug284850 | this_MultiInheritanceBug280439_17= ruleMultiInheritanceBug280439 | this_EObjectRef_18= ruleEObjectRef | this_TypeBug305577_1_19= ruleTypeBug305577_1 | this_TypeBug305577_2_20= ruleTypeBug305577_2 | this_Parens_21= ruleParens | this_Bug305171_22= ruleBug305171 | this_Bug310435Val_23= ruleBug310435Val | this_Bug310435Enum_24= ruleBug310435Enum | this_CrossRefNameTest_25= ruleCrossRefNameTest )
+            // InternalSimpleReconstrTestLanguage.g:134:2: (this_Atom_0= ruleAtom | this_TwoNumbers_1= ruleTwoNumbers | this_ManyStrings_2= ruleManyStrings | this_Type_3= ruleType | this_Ref2_4= ruleRef2 | this_Spare_5= ruleSpare | this_Boolean_6= ruleBoolean | this_Transient1_7= ruleTransient1 | this_Consumed1_8= ruleConsumed1 | this_Consumed2_9= ruleConsumed2 | this_Loop1_10= ruleLoop1 | this_Loop2_11= ruleLoop2 | this_Loop3_12= ruleLoop3 | this_Loop4_13= ruleLoop4 | this_LoopBug285452_14= ruleLoopBug285452 | this_DuplicateBug284491_15= ruleDuplicateBug284491 | this_EmptyObjectBug284850_16= ruleEmptyObjectBug284850 | this_MultiInheritanceBug280439_17= ruleMultiInheritanceBug280439 | this_EObjectRef_18= ruleEObjectRef | this_TypeBug305577_1_19= ruleTypeBug305577_1 | this_TypeBug305577_2_20= ruleTypeBug305577_2 | this_Parens_21= ruleParens | this_Bug305171_22= ruleBug305171 | this_Bug310435Val_23= ruleBug310435Val | this_Bug310435Enum_24= ruleBug310435Enum | this_CrossRefNameTest_25= ruleCrossRefNameTest )
             int alt2=26;
             switch ( input.LA(1) ) {
             case RULE_ID:
@@ -531,470 +536,470 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
             switch (alt2) {
                 case 1 :
-                    // InternalSimpleReconstrTestLanguage.g:136:5: this_Atom_0= ruleAtom
+                    // InternalSimpleReconstrTestLanguage.g:135:3: this_Atom_0= ruleAtom
                     {
-                     
-                            newCompositeNode(grammarAccess.getTermAccess().getAtomParserRuleCall_0()); 
-                        
+
+                    			newCompositeNode(grammarAccess.getTermAccess().getAtomParserRuleCall_0());
+                    		
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_Atom_0=ruleAtom();
 
                     state._fsp--;
 
-                     
-                            current = this_Atom_0; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    			current = this_Atom_0;
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
                 case 2 :
-                    // InternalSimpleReconstrTestLanguage.g:146:5: this_TwoNumbers_1= ruleTwoNumbers
+                    // InternalSimpleReconstrTestLanguage.g:144:3: this_TwoNumbers_1= ruleTwoNumbers
                     {
-                     
-                            newCompositeNode(grammarAccess.getTermAccess().getTwoNumbersParserRuleCall_1()); 
-                        
+
+                    			newCompositeNode(grammarAccess.getTermAccess().getTwoNumbersParserRuleCall_1());
+                    		
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_TwoNumbers_1=ruleTwoNumbers();
 
                     state._fsp--;
 
-                     
-                            current = this_TwoNumbers_1; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    			current = this_TwoNumbers_1;
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
                 case 3 :
-                    // InternalSimpleReconstrTestLanguage.g:156:5: this_ManyStrings_2= ruleManyStrings
+                    // InternalSimpleReconstrTestLanguage.g:153:3: this_ManyStrings_2= ruleManyStrings
                     {
-                     
-                            newCompositeNode(grammarAccess.getTermAccess().getManyStringsParserRuleCall_2()); 
-                        
+
+                    			newCompositeNode(grammarAccess.getTermAccess().getManyStringsParserRuleCall_2());
+                    		
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_ManyStrings_2=ruleManyStrings();
 
                     state._fsp--;
 
-                     
-                            current = this_ManyStrings_2; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    			current = this_ManyStrings_2;
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
                 case 4 :
-                    // InternalSimpleReconstrTestLanguage.g:166:5: this_Type_3= ruleType
+                    // InternalSimpleReconstrTestLanguage.g:162:3: this_Type_3= ruleType
                     {
-                     
-                            newCompositeNode(grammarAccess.getTermAccess().getTypeParserRuleCall_3()); 
-                        
+
+                    			newCompositeNode(grammarAccess.getTermAccess().getTypeParserRuleCall_3());
+                    		
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_Type_3=ruleType();
 
                     state._fsp--;
 
-                     
-                            current = this_Type_3; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    			current = this_Type_3;
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
                 case 5 :
-                    // InternalSimpleReconstrTestLanguage.g:176:5: this_Ref2_4= ruleRef2
+                    // InternalSimpleReconstrTestLanguage.g:171:3: this_Ref2_4= ruleRef2
                     {
-                     
-                            newCompositeNode(grammarAccess.getTermAccess().getRef2ParserRuleCall_4()); 
-                        
+
+                    			newCompositeNode(grammarAccess.getTermAccess().getRef2ParserRuleCall_4());
+                    		
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_Ref2_4=ruleRef2();
 
                     state._fsp--;
 
-                     
-                            current = this_Ref2_4; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    			current = this_Ref2_4;
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
                 case 6 :
-                    // InternalSimpleReconstrTestLanguage.g:186:5: this_Spare_5= ruleSpare
+                    // InternalSimpleReconstrTestLanguage.g:180:3: this_Spare_5= ruleSpare
                     {
-                     
-                            newCompositeNode(grammarAccess.getTermAccess().getSpareParserRuleCall_5()); 
-                        
+
+                    			newCompositeNode(grammarAccess.getTermAccess().getSpareParserRuleCall_5());
+                    		
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_Spare_5=ruleSpare();
 
                     state._fsp--;
 
-                     
-                            current = this_Spare_5; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    			current = this_Spare_5;
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
                 case 7 :
-                    // InternalSimpleReconstrTestLanguage.g:196:5: this_Boolean_6= ruleBoolean
+                    // InternalSimpleReconstrTestLanguage.g:189:3: this_Boolean_6= ruleBoolean
                     {
-                     
-                            newCompositeNode(grammarAccess.getTermAccess().getBooleanParserRuleCall_6()); 
-                        
+
+                    			newCompositeNode(grammarAccess.getTermAccess().getBooleanParserRuleCall_6());
+                    		
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_Boolean_6=ruleBoolean();
 
                     state._fsp--;
 
-                     
-                            current = this_Boolean_6; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    			current = this_Boolean_6;
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
                 case 8 :
-                    // InternalSimpleReconstrTestLanguage.g:206:5: this_Transient1_7= ruleTransient1
+                    // InternalSimpleReconstrTestLanguage.g:198:3: this_Transient1_7= ruleTransient1
                     {
-                     
-                            newCompositeNode(grammarAccess.getTermAccess().getTransient1ParserRuleCall_7()); 
-                        
+
+                    			newCompositeNode(grammarAccess.getTermAccess().getTransient1ParserRuleCall_7());
+                    		
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_Transient1_7=ruleTransient1();
 
                     state._fsp--;
 
-                     
-                            current = this_Transient1_7; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    			current = this_Transient1_7;
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
                 case 9 :
-                    // InternalSimpleReconstrTestLanguage.g:216:5: this_Consumed1_8= ruleConsumed1
+                    // InternalSimpleReconstrTestLanguage.g:207:3: this_Consumed1_8= ruleConsumed1
                     {
-                     
-                            newCompositeNode(grammarAccess.getTermAccess().getConsumed1ParserRuleCall_8()); 
-                        
+
+                    			newCompositeNode(grammarAccess.getTermAccess().getConsumed1ParserRuleCall_8());
+                    		
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_Consumed1_8=ruleConsumed1();
 
                     state._fsp--;
 
-                     
-                            current = this_Consumed1_8; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    			current = this_Consumed1_8;
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
                 case 10 :
-                    // InternalSimpleReconstrTestLanguage.g:226:5: this_Consumed2_9= ruleConsumed2
+                    // InternalSimpleReconstrTestLanguage.g:216:3: this_Consumed2_9= ruleConsumed2
                     {
-                     
-                            newCompositeNode(grammarAccess.getTermAccess().getConsumed2ParserRuleCall_9()); 
-                        
+
+                    			newCompositeNode(grammarAccess.getTermAccess().getConsumed2ParserRuleCall_9());
+                    		
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_Consumed2_9=ruleConsumed2();
 
                     state._fsp--;
 
-                     
-                            current = this_Consumed2_9; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    			current = this_Consumed2_9;
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
                 case 11 :
-                    // InternalSimpleReconstrTestLanguage.g:236:5: this_Loop1_10= ruleLoop1
+                    // InternalSimpleReconstrTestLanguage.g:225:3: this_Loop1_10= ruleLoop1
                     {
-                     
-                            newCompositeNode(grammarAccess.getTermAccess().getLoop1ParserRuleCall_10()); 
-                        
+
+                    			newCompositeNode(grammarAccess.getTermAccess().getLoop1ParserRuleCall_10());
+                    		
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_Loop1_10=ruleLoop1();
 
                     state._fsp--;
 
-                     
-                            current = this_Loop1_10; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    			current = this_Loop1_10;
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
                 case 12 :
-                    // InternalSimpleReconstrTestLanguage.g:246:5: this_Loop2_11= ruleLoop2
+                    // InternalSimpleReconstrTestLanguage.g:234:3: this_Loop2_11= ruleLoop2
                     {
-                     
-                            newCompositeNode(grammarAccess.getTermAccess().getLoop2ParserRuleCall_11()); 
-                        
+
+                    			newCompositeNode(grammarAccess.getTermAccess().getLoop2ParserRuleCall_11());
+                    		
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_Loop2_11=ruleLoop2();
 
                     state._fsp--;
 
-                     
-                            current = this_Loop2_11; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    			current = this_Loop2_11;
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
                 case 13 :
-                    // InternalSimpleReconstrTestLanguage.g:256:5: this_Loop3_12= ruleLoop3
+                    // InternalSimpleReconstrTestLanguage.g:243:3: this_Loop3_12= ruleLoop3
                     {
-                     
-                            newCompositeNode(grammarAccess.getTermAccess().getLoop3ParserRuleCall_12()); 
-                        
+
+                    			newCompositeNode(grammarAccess.getTermAccess().getLoop3ParserRuleCall_12());
+                    		
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_Loop3_12=ruleLoop3();
 
                     state._fsp--;
 
-                     
-                            current = this_Loop3_12; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    			current = this_Loop3_12;
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
                 case 14 :
-                    // InternalSimpleReconstrTestLanguage.g:266:5: this_Loop4_13= ruleLoop4
+                    // InternalSimpleReconstrTestLanguage.g:252:3: this_Loop4_13= ruleLoop4
                     {
-                     
-                            newCompositeNode(grammarAccess.getTermAccess().getLoop4ParserRuleCall_13()); 
-                        
+
+                    			newCompositeNode(grammarAccess.getTermAccess().getLoop4ParserRuleCall_13());
+                    		
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_Loop4_13=ruleLoop4();
 
                     state._fsp--;
 
-                     
-                            current = this_Loop4_13; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    			current = this_Loop4_13;
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
                 case 15 :
-                    // InternalSimpleReconstrTestLanguage.g:276:5: this_LoopBug285452_14= ruleLoopBug285452
+                    // InternalSimpleReconstrTestLanguage.g:261:3: this_LoopBug285452_14= ruleLoopBug285452
                     {
-                     
-                            newCompositeNode(grammarAccess.getTermAccess().getLoopBug285452ParserRuleCall_14()); 
-                        
+
+                    			newCompositeNode(grammarAccess.getTermAccess().getLoopBug285452ParserRuleCall_14());
+                    		
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_LoopBug285452_14=ruleLoopBug285452();
 
                     state._fsp--;
 
-                     
-                            current = this_LoopBug285452_14; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    			current = this_LoopBug285452_14;
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
                 case 16 :
-                    // InternalSimpleReconstrTestLanguage.g:286:5: this_DuplicateBug284491_15= ruleDuplicateBug284491
+                    // InternalSimpleReconstrTestLanguage.g:270:3: this_DuplicateBug284491_15= ruleDuplicateBug284491
                     {
-                     
-                            newCompositeNode(grammarAccess.getTermAccess().getDuplicateBug284491ParserRuleCall_15()); 
-                        
+
+                    			newCompositeNode(grammarAccess.getTermAccess().getDuplicateBug284491ParserRuleCall_15());
+                    		
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_DuplicateBug284491_15=ruleDuplicateBug284491();
 
                     state._fsp--;
 
-                     
-                            current = this_DuplicateBug284491_15; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    			current = this_DuplicateBug284491_15;
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
                 case 17 :
-                    // InternalSimpleReconstrTestLanguage.g:296:5: this_EmptyObjectBug284850_16= ruleEmptyObjectBug284850
+                    // InternalSimpleReconstrTestLanguage.g:279:3: this_EmptyObjectBug284850_16= ruleEmptyObjectBug284850
                     {
-                     
-                            newCompositeNode(grammarAccess.getTermAccess().getEmptyObjectBug284850ParserRuleCall_16()); 
-                        
+
+                    			newCompositeNode(grammarAccess.getTermAccess().getEmptyObjectBug284850ParserRuleCall_16());
+                    		
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_EmptyObjectBug284850_16=ruleEmptyObjectBug284850();
 
                     state._fsp--;
 
-                     
-                            current = this_EmptyObjectBug284850_16; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    			current = this_EmptyObjectBug284850_16;
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
                 case 18 :
-                    // InternalSimpleReconstrTestLanguage.g:306:5: this_MultiInheritanceBug280439_17= ruleMultiInheritanceBug280439
+                    // InternalSimpleReconstrTestLanguage.g:288:3: this_MultiInheritanceBug280439_17= ruleMultiInheritanceBug280439
                     {
-                     
-                            newCompositeNode(grammarAccess.getTermAccess().getMultiInheritanceBug280439ParserRuleCall_17()); 
-                        
+
+                    			newCompositeNode(grammarAccess.getTermAccess().getMultiInheritanceBug280439ParserRuleCall_17());
+                    		
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_MultiInheritanceBug280439_17=ruleMultiInheritanceBug280439();
 
                     state._fsp--;
 
-                     
-                            current = this_MultiInheritanceBug280439_17; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    			current = this_MultiInheritanceBug280439_17;
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
                 case 19 :
-                    // InternalSimpleReconstrTestLanguage.g:316:5: this_EObjectRef_18= ruleEObjectRef
+                    // InternalSimpleReconstrTestLanguage.g:297:3: this_EObjectRef_18= ruleEObjectRef
                     {
-                     
-                            newCompositeNode(grammarAccess.getTermAccess().getEObjectRefParserRuleCall_18()); 
-                        
+
+                    			newCompositeNode(grammarAccess.getTermAccess().getEObjectRefParserRuleCall_18());
+                    		
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_EObjectRef_18=ruleEObjectRef();
 
                     state._fsp--;
 
-                     
-                            current = this_EObjectRef_18; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    			current = this_EObjectRef_18;
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
                 case 20 :
-                    // InternalSimpleReconstrTestLanguage.g:326:5: this_TypeBug305577_1_19= ruleTypeBug305577_1
+                    // InternalSimpleReconstrTestLanguage.g:306:3: this_TypeBug305577_1_19= ruleTypeBug305577_1
                     {
-                     
-                            newCompositeNode(grammarAccess.getTermAccess().getTypeBug305577_1ParserRuleCall_19()); 
-                        
+
+                    			newCompositeNode(grammarAccess.getTermAccess().getTypeBug305577_1ParserRuleCall_19());
+                    		
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_TypeBug305577_1_19=ruleTypeBug305577_1();
 
                     state._fsp--;
 
-                     
-                            current = this_TypeBug305577_1_19; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    			current = this_TypeBug305577_1_19;
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
                 case 21 :
-                    // InternalSimpleReconstrTestLanguage.g:336:5: this_TypeBug305577_2_20= ruleTypeBug305577_2
+                    // InternalSimpleReconstrTestLanguage.g:315:3: this_TypeBug305577_2_20= ruleTypeBug305577_2
                     {
-                     
-                            newCompositeNode(grammarAccess.getTermAccess().getTypeBug305577_2ParserRuleCall_20()); 
-                        
+
+                    			newCompositeNode(grammarAccess.getTermAccess().getTypeBug305577_2ParserRuleCall_20());
+                    		
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_TypeBug305577_2_20=ruleTypeBug305577_2();
 
                     state._fsp--;
 
-                     
-                            current = this_TypeBug305577_2_20; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    			current = this_TypeBug305577_2_20;
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
                 case 22 :
-                    // InternalSimpleReconstrTestLanguage.g:346:5: this_Parens_21= ruleParens
+                    // InternalSimpleReconstrTestLanguage.g:324:3: this_Parens_21= ruleParens
                     {
-                     
-                            newCompositeNode(grammarAccess.getTermAccess().getParensParserRuleCall_21()); 
-                        
+
+                    			newCompositeNode(grammarAccess.getTermAccess().getParensParserRuleCall_21());
+                    		
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_Parens_21=ruleParens();
 
                     state._fsp--;
 
-                     
-                            current = this_Parens_21; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    			current = this_Parens_21;
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
                 case 23 :
-                    // InternalSimpleReconstrTestLanguage.g:356:5: this_Bug305171_22= ruleBug305171
+                    // InternalSimpleReconstrTestLanguage.g:333:3: this_Bug305171_22= ruleBug305171
                     {
-                     
-                            newCompositeNode(grammarAccess.getTermAccess().getBug305171ParserRuleCall_22()); 
-                        
+
+                    			newCompositeNode(grammarAccess.getTermAccess().getBug305171ParserRuleCall_22());
+                    		
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_Bug305171_22=ruleBug305171();
 
                     state._fsp--;
 
-                     
-                            current = this_Bug305171_22; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    			current = this_Bug305171_22;
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
                 case 24 :
-                    // InternalSimpleReconstrTestLanguage.g:366:5: this_Bug310435Val_23= ruleBug310435Val
+                    // InternalSimpleReconstrTestLanguage.g:342:3: this_Bug310435Val_23= ruleBug310435Val
                     {
-                     
-                            newCompositeNode(grammarAccess.getTermAccess().getBug310435ValParserRuleCall_23()); 
-                        
+
+                    			newCompositeNode(grammarAccess.getTermAccess().getBug310435ValParserRuleCall_23());
+                    		
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_Bug310435Val_23=ruleBug310435Val();
 
                     state._fsp--;
 
-                     
-                            current = this_Bug310435Val_23; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    			current = this_Bug310435Val_23;
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
                 case 25 :
-                    // InternalSimpleReconstrTestLanguage.g:376:5: this_Bug310435Enum_24= ruleBug310435Enum
+                    // InternalSimpleReconstrTestLanguage.g:351:3: this_Bug310435Enum_24= ruleBug310435Enum
                     {
-                     
-                            newCompositeNode(grammarAccess.getTermAccess().getBug310435EnumParserRuleCall_24()); 
-                        
+
+                    			newCompositeNode(grammarAccess.getTermAccess().getBug310435EnumParserRuleCall_24());
+                    		
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_Bug310435Enum_24=ruleBug310435Enum();
 
                     state._fsp--;
 
-                     
-                            current = this_Bug310435Enum_24; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    			current = this_Bug310435Enum_24;
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
                 case 26 :
-                    // InternalSimpleReconstrTestLanguage.g:386:5: this_CrossRefNameTest_25= ruleCrossRefNameTest
+                    // InternalSimpleReconstrTestLanguage.g:360:3: this_CrossRefNameTest_25= ruleCrossRefNameTest
                     {
-                     
-                            newCompositeNode(grammarAccess.getTermAccess().getCrossRefNameTestParserRuleCall_25()); 
-                        
+
+                    			newCompositeNode(grammarAccess.getTermAccess().getCrossRefNameTestParserRuleCall_25());
+                    		
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_CrossRefNameTest_25=ruleCrossRefNameTest();
 
                     state._fsp--;
 
-                     
-                            current = this_CrossRefNameTest_25; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    			current = this_CrossRefNameTest_25;
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
@@ -1004,13 +1009,15 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1019,7 +1026,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "entryRuleAtom"
-    // InternalSimpleReconstrTestLanguage.g:402:1: entryRuleAtom returns [EObject current=null] : iv_ruleAtom= ruleAtom EOF ;
+    // InternalSimpleReconstrTestLanguage.g:372:1: entryRuleAtom returns [EObject current=null] : iv_ruleAtom= ruleAtom EOF ;
     public final EObject entryRuleAtom() throws RecognitionException {
         EObject current = null;
 
@@ -1027,8 +1034,8 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
         try {
-            // InternalSimpleReconstrTestLanguage.g:403:2: (iv_ruleAtom= ruleAtom EOF )
-            // InternalSimpleReconstrTestLanguage.g:404:2: iv_ruleAtom= ruleAtom EOF
+            // InternalSimpleReconstrTestLanguage.g:372:45: (iv_ruleAtom= ruleAtom EOF )
+            // InternalSimpleReconstrTestLanguage.g:373:2: iv_ruleAtom= ruleAtom EOF
             {
              newCompositeNode(grammarAccess.getAtomRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -1042,11 +1049,11 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1055,54 +1062,57 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "ruleAtom"
-    // InternalSimpleReconstrTestLanguage.g:411:1: ruleAtom returns [EObject current=null] : ( (lv_name_0_0= RULE_ID ) ) ;
+    // InternalSimpleReconstrTestLanguage.g:379:1: ruleAtom returns [EObject current=null] : ( (lv_name_0_0= RULE_ID ) ) ;
     public final EObject ruleAtom() throws RecognitionException {
         EObject current = null;
 
         Token lv_name_0_0=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalSimpleReconstrTestLanguage.g:414:28: ( ( (lv_name_0_0= RULE_ID ) ) )
-            // InternalSimpleReconstrTestLanguage.g:415:1: ( (lv_name_0_0= RULE_ID ) )
+            // InternalSimpleReconstrTestLanguage.g:385:2: ( ( (lv_name_0_0= RULE_ID ) ) )
+            // InternalSimpleReconstrTestLanguage.g:386:2: ( (lv_name_0_0= RULE_ID ) )
             {
-            // InternalSimpleReconstrTestLanguage.g:415:1: ( (lv_name_0_0= RULE_ID ) )
-            // InternalSimpleReconstrTestLanguage.g:416:1: (lv_name_0_0= RULE_ID )
+            // InternalSimpleReconstrTestLanguage.g:386:2: ( (lv_name_0_0= RULE_ID ) )
+            // InternalSimpleReconstrTestLanguage.g:387:3: (lv_name_0_0= RULE_ID )
             {
-            // InternalSimpleReconstrTestLanguage.g:416:1: (lv_name_0_0= RULE_ID )
-            // InternalSimpleReconstrTestLanguage.g:417:3: lv_name_0_0= RULE_ID
+            // InternalSimpleReconstrTestLanguage.g:387:3: (lv_name_0_0= RULE_ID )
+            // InternalSimpleReconstrTestLanguage.g:388:4: lv_name_0_0= RULE_ID
             {
             lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
-            			newLeafNode(lv_name_0_0, grammarAccess.getAtomAccess().getNameIDTerminalRuleCall_0()); 
-            		
+            				newLeafNode(lv_name_0_0, grammarAccess.getAtomAccess().getNameIDTerminalRuleCall_0());
+            			
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getAtomRule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"name",
-                    		lv_name_0_0, 
-                    		"org.eclipse.xtext.common.Terminals.ID");
-            	    
-
-            }
-
+            				if (current==null) {
+            					current = createModelElement(grammarAccess.getAtomRule());
+            				}
+            				setWithLastConsumed(
+            					current,
+            					"name",
+            					lv_name_0_0,
+            					"org.eclipse.xtext.common.Terminals.ID");
+            			
 
             }
 
 
             }
 
-             leaveRule(); 
+
+            }
+
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1111,7 +1121,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "entryRuleParens"
-    // InternalSimpleReconstrTestLanguage.g:441:1: entryRuleParens returns [EObject current=null] : iv_ruleParens= ruleParens EOF ;
+    // InternalSimpleReconstrTestLanguage.g:407:1: entryRuleParens returns [EObject current=null] : iv_ruleParens= ruleParens EOF ;
     public final EObject entryRuleParens() throws RecognitionException {
         EObject current = null;
 
@@ -1119,8 +1129,8 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
         try {
-            // InternalSimpleReconstrTestLanguage.g:442:2: (iv_ruleParens= ruleParens EOF )
-            // InternalSimpleReconstrTestLanguage.g:443:2: iv_ruleParens= ruleParens EOF
+            // InternalSimpleReconstrTestLanguage.g:407:47: (iv_ruleParens= ruleParens EOF )
+            // InternalSimpleReconstrTestLanguage.g:408:2: iv_ruleParens= ruleParens EOF
             {
              newCompositeNode(grammarAccess.getParensRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -1134,11 +1144,11 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1147,7 +1157,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "ruleParens"
-    // InternalSimpleReconstrTestLanguage.g:450:1: ruleParens returns [EObject current=null] : (otherlv_0= '(' this_Op_1= ruleOp otherlv_2= ')' ( (lv_em_3_0= '!' ) )? ) ;
+    // InternalSimpleReconstrTestLanguage.g:414:1: ruleParens returns [EObject current=null] : (otherlv_0= '(' this_Op_1= ruleOp otherlv_2= ')' ( (lv_em_3_0= '!' ) )? ) ;
     public final EObject ruleParens() throws RecognitionException {
         EObject current = null;
 
@@ -1157,36 +1167,37 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
         EObject this_Op_1 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalSimpleReconstrTestLanguage.g:453:28: ( (otherlv_0= '(' this_Op_1= ruleOp otherlv_2= ')' ( (lv_em_3_0= '!' ) )? ) )
-            // InternalSimpleReconstrTestLanguage.g:454:1: (otherlv_0= '(' this_Op_1= ruleOp otherlv_2= ')' ( (lv_em_3_0= '!' ) )? )
+            // InternalSimpleReconstrTestLanguage.g:420:2: ( (otherlv_0= '(' this_Op_1= ruleOp otherlv_2= ')' ( (lv_em_3_0= '!' ) )? ) )
+            // InternalSimpleReconstrTestLanguage.g:421:2: (otherlv_0= '(' this_Op_1= ruleOp otherlv_2= ')' ( (lv_em_3_0= '!' ) )? )
             {
-            // InternalSimpleReconstrTestLanguage.g:454:1: (otherlv_0= '(' this_Op_1= ruleOp otherlv_2= ')' ( (lv_em_3_0= '!' ) )? )
-            // InternalSimpleReconstrTestLanguage.g:454:3: otherlv_0= '(' this_Op_1= ruleOp otherlv_2= ')' ( (lv_em_3_0= '!' ) )?
+            // InternalSimpleReconstrTestLanguage.g:421:2: (otherlv_0= '(' this_Op_1= ruleOp otherlv_2= ')' ( (lv_em_3_0= '!' ) )? )
+            // InternalSimpleReconstrTestLanguage.g:422:3: otherlv_0= '(' this_Op_1= ruleOp otherlv_2= ')' ( (lv_em_3_0= '!' ) )?
             {
             otherlv_0=(Token)match(input,13,FollowSets000.FOLLOW_4); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getParensAccess().getLeftParenthesisKeyword_0());
-                
-             
-                    newCompositeNode(grammarAccess.getParensAccess().getOpParserRuleCall_1()); 
-                
+            			newLeafNode(otherlv_0, grammarAccess.getParensAccess().getLeftParenthesisKeyword_0());
+            		
+
+            			newCompositeNode(grammarAccess.getParensAccess().getOpParserRuleCall_1());
+            		
             pushFollow(FollowSets000.FOLLOW_5);
             this_Op_1=ruleOp();
 
             state._fsp--;
 
-             
-                    current = this_Op_1; 
-                    afterParserOrEnumRuleCall();
-                
+
+            			current = this_Op_1;
+            			afterParserOrEnumRuleCall();
+            		
             otherlv_2=(Token)match(input,14,FollowSets000.FOLLOW_6); 
 
-                	newLeafNode(otherlv_2, grammarAccess.getParensAccess().getRightParenthesisKeyword_2());
-                
-            // InternalSimpleReconstrTestLanguage.g:471:1: ( (lv_em_3_0= '!' ) )?
+            			newLeafNode(otherlv_2, grammarAccess.getParensAccess().getRightParenthesisKeyword_2());
+            		
+            // InternalSimpleReconstrTestLanguage.g:438:3: ( (lv_em_3_0= '!' ) )?
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -1195,21 +1206,21 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
             }
             switch (alt3) {
                 case 1 :
-                    // InternalSimpleReconstrTestLanguage.g:472:1: (lv_em_3_0= '!' )
+                    // InternalSimpleReconstrTestLanguage.g:439:4: (lv_em_3_0= '!' )
                     {
-                    // InternalSimpleReconstrTestLanguage.g:472:1: (lv_em_3_0= '!' )
-                    // InternalSimpleReconstrTestLanguage.g:473:3: lv_em_3_0= '!'
+                    // InternalSimpleReconstrTestLanguage.g:439:4: (lv_em_3_0= '!' )
+                    // InternalSimpleReconstrTestLanguage.g:440:5: lv_em_3_0= '!'
                     {
                     lv_em_3_0=(Token)match(input,15,FollowSets000.FOLLOW_2); 
 
-                            newLeafNode(lv_em_3_0, grammarAccess.getParensAccess().getEmExclamationMarkKeyword_3_0());
-                        
+                    					newLeafNode(lv_em_3_0, grammarAccess.getParensAccess().getEmExclamationMarkKeyword_3_0());
+                    				
 
-                    	        if (current==null) {
-                    	            current = createModelElement(grammarAccess.getParensRule());
-                    	        }
-                           		setWithLastConsumed(current, "em", lv_em_3_0, "!");
-                    	    
+                    					if (current==null) {
+                    						current = createModelElement(grammarAccess.getParensRule());
+                    					}
+                    					setWithLastConsumed(current, "em", lv_em_3_0, "!");
+                    				
 
                     }
 
@@ -1225,13 +1236,15 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1240,7 +1253,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "entryRuleTwoNumbers"
-    // InternalSimpleReconstrTestLanguage.g:494:1: entryRuleTwoNumbers returns [EObject current=null] : iv_ruleTwoNumbers= ruleTwoNumbers EOF ;
+    // InternalSimpleReconstrTestLanguage.g:456:1: entryRuleTwoNumbers returns [EObject current=null] : iv_ruleTwoNumbers= ruleTwoNumbers EOF ;
     public final EObject entryRuleTwoNumbers() throws RecognitionException {
         EObject current = null;
 
@@ -1248,8 +1261,8 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
         try {
-            // InternalSimpleReconstrTestLanguage.g:495:2: (iv_ruleTwoNumbers= ruleTwoNumbers EOF )
-            // InternalSimpleReconstrTestLanguage.g:496:2: iv_ruleTwoNumbers= ruleTwoNumbers EOF
+            // InternalSimpleReconstrTestLanguage.g:456:51: (iv_ruleTwoNumbers= ruleTwoNumbers EOF )
+            // InternalSimpleReconstrTestLanguage.g:457:2: iv_ruleTwoNumbers= ruleTwoNumbers EOF
             {
              newCompositeNode(grammarAccess.getTwoNumbersRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -1263,11 +1276,11 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1276,7 +1289,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "ruleTwoNumbers"
-    // InternalSimpleReconstrTestLanguage.g:503:1: ruleTwoNumbers returns [EObject current=null] : ( ( (lv_num1_0_0= RULE_INT ) ) ( (lv_num2_1_0= RULE_INT ) ) (otherlv_2= '#' ( (lv_num3_3_0= RULE_INT ) ) )* ) ;
+    // InternalSimpleReconstrTestLanguage.g:463:1: ruleTwoNumbers returns [EObject current=null] : ( ( (lv_num1_0_0= RULE_INT ) ) ( (lv_num2_1_0= RULE_INT ) ) (otherlv_2= '#' ( (lv_num3_3_0= RULE_INT ) ) )* ) ;
     public final EObject ruleTwoNumbers() throws RecognitionException {
         EObject current = null;
 
@@ -1285,68 +1298,69 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
         Token otherlv_2=null;
         Token lv_num3_3_0=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalSimpleReconstrTestLanguage.g:506:28: ( ( ( (lv_num1_0_0= RULE_INT ) ) ( (lv_num2_1_0= RULE_INT ) ) (otherlv_2= '#' ( (lv_num3_3_0= RULE_INT ) ) )* ) )
-            // InternalSimpleReconstrTestLanguage.g:507:1: ( ( (lv_num1_0_0= RULE_INT ) ) ( (lv_num2_1_0= RULE_INT ) ) (otherlv_2= '#' ( (lv_num3_3_0= RULE_INT ) ) )* )
+            // InternalSimpleReconstrTestLanguage.g:469:2: ( ( ( (lv_num1_0_0= RULE_INT ) ) ( (lv_num2_1_0= RULE_INT ) ) (otherlv_2= '#' ( (lv_num3_3_0= RULE_INT ) ) )* ) )
+            // InternalSimpleReconstrTestLanguage.g:470:2: ( ( (lv_num1_0_0= RULE_INT ) ) ( (lv_num2_1_0= RULE_INT ) ) (otherlv_2= '#' ( (lv_num3_3_0= RULE_INT ) ) )* )
             {
-            // InternalSimpleReconstrTestLanguage.g:507:1: ( ( (lv_num1_0_0= RULE_INT ) ) ( (lv_num2_1_0= RULE_INT ) ) (otherlv_2= '#' ( (lv_num3_3_0= RULE_INT ) ) )* )
-            // InternalSimpleReconstrTestLanguage.g:507:2: ( (lv_num1_0_0= RULE_INT ) ) ( (lv_num2_1_0= RULE_INT ) ) (otherlv_2= '#' ( (lv_num3_3_0= RULE_INT ) ) )*
+            // InternalSimpleReconstrTestLanguage.g:470:2: ( ( (lv_num1_0_0= RULE_INT ) ) ( (lv_num2_1_0= RULE_INT ) ) (otherlv_2= '#' ( (lv_num3_3_0= RULE_INT ) ) )* )
+            // InternalSimpleReconstrTestLanguage.g:471:3: ( (lv_num1_0_0= RULE_INT ) ) ( (lv_num2_1_0= RULE_INT ) ) (otherlv_2= '#' ( (lv_num3_3_0= RULE_INT ) ) )*
             {
-            // InternalSimpleReconstrTestLanguage.g:507:2: ( (lv_num1_0_0= RULE_INT ) )
-            // InternalSimpleReconstrTestLanguage.g:508:1: (lv_num1_0_0= RULE_INT )
+            // InternalSimpleReconstrTestLanguage.g:471:3: ( (lv_num1_0_0= RULE_INT ) )
+            // InternalSimpleReconstrTestLanguage.g:472:4: (lv_num1_0_0= RULE_INT )
             {
-            // InternalSimpleReconstrTestLanguage.g:508:1: (lv_num1_0_0= RULE_INT )
-            // InternalSimpleReconstrTestLanguage.g:509:3: lv_num1_0_0= RULE_INT
+            // InternalSimpleReconstrTestLanguage.g:472:4: (lv_num1_0_0= RULE_INT )
+            // InternalSimpleReconstrTestLanguage.g:473:5: lv_num1_0_0= RULE_INT
             {
             lv_num1_0_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_7); 
 
-            			newLeafNode(lv_num1_0_0, grammarAccess.getTwoNumbersAccess().getNum1INTTerminalRuleCall_0_0()); 
-            		
+            					newLeafNode(lv_num1_0_0, grammarAccess.getTwoNumbersAccess().getNum1INTTerminalRuleCall_0_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getTwoNumbersRule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"num1",
-                    		lv_num1_0_0, 
-                    		"org.eclipse.xtext.common.Terminals.INT");
-            	    
-
-            }
-
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getTwoNumbersRule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"num1",
+            						lv_num1_0_0,
+            						"org.eclipse.xtext.common.Terminals.INT");
+            				
 
             }
 
-            // InternalSimpleReconstrTestLanguage.g:525:2: ( (lv_num2_1_0= RULE_INT ) )
-            // InternalSimpleReconstrTestLanguage.g:526:1: (lv_num2_1_0= RULE_INT )
+
+            }
+
+            // InternalSimpleReconstrTestLanguage.g:489:3: ( (lv_num2_1_0= RULE_INT ) )
+            // InternalSimpleReconstrTestLanguage.g:490:4: (lv_num2_1_0= RULE_INT )
             {
-            // InternalSimpleReconstrTestLanguage.g:526:1: (lv_num2_1_0= RULE_INT )
-            // InternalSimpleReconstrTestLanguage.g:527:3: lv_num2_1_0= RULE_INT
+            // InternalSimpleReconstrTestLanguage.g:490:4: (lv_num2_1_0= RULE_INT )
+            // InternalSimpleReconstrTestLanguage.g:491:5: lv_num2_1_0= RULE_INT
             {
             lv_num2_1_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_8); 
 
-            			newLeafNode(lv_num2_1_0, grammarAccess.getTwoNumbersAccess().getNum2INTTerminalRuleCall_1_0()); 
-            		
+            					newLeafNode(lv_num2_1_0, grammarAccess.getTwoNumbersAccess().getNum2INTTerminalRuleCall_1_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getTwoNumbersRule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"num2",
-                    		lv_num2_1_0, 
-                    		"org.eclipse.xtext.common.Terminals.INT");
-            	    
-
-            }
-
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getTwoNumbersRule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"num2",
+            						lv_num2_1_0,
+            						"org.eclipse.xtext.common.Terminals.INT");
+            				
 
             }
 
-            // InternalSimpleReconstrTestLanguage.g:543:2: (otherlv_2= '#' ( (lv_num3_3_0= RULE_INT ) ) )*
+
+            }
+
+            // InternalSimpleReconstrTestLanguage.g:507:3: (otherlv_2= '#' ( (lv_num3_3_0= RULE_INT ) ) )*
             loop4:
             do {
                 int alt4=2;
@@ -1359,32 +1373,32 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
                 switch (alt4) {
             	case 1 :
-            	    // InternalSimpleReconstrTestLanguage.g:543:4: otherlv_2= '#' ( (lv_num3_3_0= RULE_INT ) )
+            	    // InternalSimpleReconstrTestLanguage.g:508:4: otherlv_2= '#' ( (lv_num3_3_0= RULE_INT ) )
             	    {
             	    otherlv_2=(Token)match(input,16,FollowSets000.FOLLOW_7); 
 
-            	        	newLeafNode(otherlv_2, grammarAccess.getTwoNumbersAccess().getNumberSignKeyword_2_0());
-            	        
-            	    // InternalSimpleReconstrTestLanguage.g:547:1: ( (lv_num3_3_0= RULE_INT ) )
-            	    // InternalSimpleReconstrTestLanguage.g:548:1: (lv_num3_3_0= RULE_INT )
+            	    				newLeafNode(otherlv_2, grammarAccess.getTwoNumbersAccess().getNumberSignKeyword_2_0());
+            	    			
+            	    // InternalSimpleReconstrTestLanguage.g:512:4: ( (lv_num3_3_0= RULE_INT ) )
+            	    // InternalSimpleReconstrTestLanguage.g:513:5: (lv_num3_3_0= RULE_INT )
             	    {
-            	    // InternalSimpleReconstrTestLanguage.g:548:1: (lv_num3_3_0= RULE_INT )
-            	    // InternalSimpleReconstrTestLanguage.g:549:3: lv_num3_3_0= RULE_INT
+            	    // InternalSimpleReconstrTestLanguage.g:513:5: (lv_num3_3_0= RULE_INT )
+            	    // InternalSimpleReconstrTestLanguage.g:514:6: lv_num3_3_0= RULE_INT
             	    {
             	    lv_num3_3_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_8); 
 
-            	    			newLeafNode(lv_num3_3_0, grammarAccess.getTwoNumbersAccess().getNum3INTTerminalRuleCall_2_1_0()); 
-            	    		
+            	    						newLeafNode(lv_num3_3_0, grammarAccess.getTwoNumbersAccess().getNum3INTTerminalRuleCall_2_1_0());
+            	    					
 
-            	    	        if (current==null) {
-            	    	            current = createModelElement(grammarAccess.getTwoNumbersRule());
-            	    	        }
-            	           		addWithLastConsumed(
-            	           			current, 
-            	           			"num3",
-            	            		lv_num3_3_0, 
-            	            		"org.eclipse.xtext.common.Terminals.INT");
-            	    	    
+            	    						if (current==null) {
+            	    							current = createModelElement(grammarAccess.getTwoNumbersRule());
+            	    						}
+            	    						addWithLastConsumed(
+            	    							current,
+            	    							"num3",
+            	    							lv_num3_3_0,
+            	    							"org.eclipse.xtext.common.Terminals.INT");
+            	    					
 
             	    }
 
@@ -1406,13 +1420,15 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1421,7 +1437,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "entryRuleManyStrings"
-    // InternalSimpleReconstrTestLanguage.g:573:1: entryRuleManyStrings returns [EObject current=null] : iv_ruleManyStrings= ruleManyStrings EOF ;
+    // InternalSimpleReconstrTestLanguage.g:535:1: entryRuleManyStrings returns [EObject current=null] : iv_ruleManyStrings= ruleManyStrings EOF ;
     public final EObject entryRuleManyStrings() throws RecognitionException {
         EObject current = null;
 
@@ -1429,8 +1445,8 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
         try {
-            // InternalSimpleReconstrTestLanguage.g:574:2: (iv_ruleManyStrings= ruleManyStrings EOF )
-            // InternalSimpleReconstrTestLanguage.g:575:2: iv_ruleManyStrings= ruleManyStrings EOF
+            // InternalSimpleReconstrTestLanguage.g:535:52: (iv_ruleManyStrings= ruleManyStrings EOF )
+            // InternalSimpleReconstrTestLanguage.g:536:2: iv_ruleManyStrings= ruleManyStrings EOF
             {
              newCompositeNode(grammarAccess.getManyStringsRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -1444,11 +1460,11 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1457,7 +1473,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "ruleManyStrings"
-    // InternalSimpleReconstrTestLanguage.g:582:1: ruleManyStrings returns [EObject current=null] : (otherlv_0= '=' ( (lv_str1_1_0= RULE_STRING ) )* ( (lv_str2_2_0= RULE_STRING ) ) ) ;
+    // InternalSimpleReconstrTestLanguage.g:542:1: ruleManyStrings returns [EObject current=null] : (otherlv_0= '=' ( (lv_str1_1_0= RULE_STRING ) )* ( (lv_str2_2_0= RULE_STRING ) ) ) ;
     public final EObject ruleManyStrings() throws RecognitionException {
         EObject current = null;
 
@@ -1465,20 +1481,21 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
         Token lv_str1_1_0=null;
         Token lv_str2_2_0=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalSimpleReconstrTestLanguage.g:585:28: ( (otherlv_0= '=' ( (lv_str1_1_0= RULE_STRING ) )* ( (lv_str2_2_0= RULE_STRING ) ) ) )
-            // InternalSimpleReconstrTestLanguage.g:586:1: (otherlv_0= '=' ( (lv_str1_1_0= RULE_STRING ) )* ( (lv_str2_2_0= RULE_STRING ) ) )
+            // InternalSimpleReconstrTestLanguage.g:548:2: ( (otherlv_0= '=' ( (lv_str1_1_0= RULE_STRING ) )* ( (lv_str2_2_0= RULE_STRING ) ) ) )
+            // InternalSimpleReconstrTestLanguage.g:549:2: (otherlv_0= '=' ( (lv_str1_1_0= RULE_STRING ) )* ( (lv_str2_2_0= RULE_STRING ) ) )
             {
-            // InternalSimpleReconstrTestLanguage.g:586:1: (otherlv_0= '=' ( (lv_str1_1_0= RULE_STRING ) )* ( (lv_str2_2_0= RULE_STRING ) ) )
-            // InternalSimpleReconstrTestLanguage.g:586:3: otherlv_0= '=' ( (lv_str1_1_0= RULE_STRING ) )* ( (lv_str2_2_0= RULE_STRING ) )
+            // InternalSimpleReconstrTestLanguage.g:549:2: (otherlv_0= '=' ( (lv_str1_1_0= RULE_STRING ) )* ( (lv_str2_2_0= RULE_STRING ) ) )
+            // InternalSimpleReconstrTestLanguage.g:550:3: otherlv_0= '=' ( (lv_str1_1_0= RULE_STRING ) )* ( (lv_str2_2_0= RULE_STRING ) )
             {
             otherlv_0=(Token)match(input,17,FollowSets000.FOLLOW_9); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getManyStringsAccess().getEqualsSignKeyword_0());
-                
-            // InternalSimpleReconstrTestLanguage.g:590:1: ( (lv_str1_1_0= RULE_STRING ) )*
+            			newLeafNode(otherlv_0, grammarAccess.getManyStringsAccess().getEqualsSignKeyword_0());
+            		
+            // InternalSimpleReconstrTestLanguage.g:554:3: ( (lv_str1_1_0= RULE_STRING ) )*
             loop5:
             do {
                 int alt5=2;
@@ -1497,25 +1514,25 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
                 switch (alt5) {
             	case 1 :
-            	    // InternalSimpleReconstrTestLanguage.g:591:1: (lv_str1_1_0= RULE_STRING )
+            	    // InternalSimpleReconstrTestLanguage.g:555:4: (lv_str1_1_0= RULE_STRING )
             	    {
-            	    // InternalSimpleReconstrTestLanguage.g:591:1: (lv_str1_1_0= RULE_STRING )
-            	    // InternalSimpleReconstrTestLanguage.g:592:3: lv_str1_1_0= RULE_STRING
+            	    // InternalSimpleReconstrTestLanguage.g:555:4: (lv_str1_1_0= RULE_STRING )
+            	    // InternalSimpleReconstrTestLanguage.g:556:5: lv_str1_1_0= RULE_STRING
             	    {
             	    lv_str1_1_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_9); 
 
-            	    			newLeafNode(lv_str1_1_0, grammarAccess.getManyStringsAccess().getStr1STRINGTerminalRuleCall_1_0()); 
-            	    		
+            	    					newLeafNode(lv_str1_1_0, grammarAccess.getManyStringsAccess().getStr1STRINGTerminalRuleCall_1_0());
+            	    				
 
-            	    	        if (current==null) {
-            	    	            current = createModelElement(grammarAccess.getManyStringsRule());
-            	    	        }
-            	           		addWithLastConsumed(
-            	           			current, 
-            	           			"str1",
-            	            		lv_str1_1_0, 
-            	            		"org.eclipse.xtext.common.Terminals.STRING");
-            	    	    
+            	    					if (current==null) {
+            	    						current = createModelElement(grammarAccess.getManyStringsRule());
+            	    					}
+            	    					addWithLastConsumed(
+            	    						current,
+            	    						"str1",
+            	    						lv_str1_1_0,
+            	    						"org.eclipse.xtext.common.Terminals.STRING");
+            	    				
 
             	    }
 
@@ -1528,29 +1545,26 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
                 }
             } while (true);
 
-            // InternalSimpleReconstrTestLanguage.g:608:3: ( (lv_str2_2_0= RULE_STRING ) )
-            // InternalSimpleReconstrTestLanguage.g:609:1: (lv_str2_2_0= RULE_STRING )
+            // InternalSimpleReconstrTestLanguage.g:572:3: ( (lv_str2_2_0= RULE_STRING ) )
+            // InternalSimpleReconstrTestLanguage.g:573:4: (lv_str2_2_0= RULE_STRING )
             {
-            // InternalSimpleReconstrTestLanguage.g:609:1: (lv_str2_2_0= RULE_STRING )
-            // InternalSimpleReconstrTestLanguage.g:610:3: lv_str2_2_0= RULE_STRING
+            // InternalSimpleReconstrTestLanguage.g:573:4: (lv_str2_2_0= RULE_STRING )
+            // InternalSimpleReconstrTestLanguage.g:574:5: lv_str2_2_0= RULE_STRING
             {
             lv_str2_2_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_2); 
 
-            			newLeafNode(lv_str2_2_0, grammarAccess.getManyStringsAccess().getStr2STRINGTerminalRuleCall_2_0()); 
-            		
+            					newLeafNode(lv_str2_2_0, grammarAccess.getManyStringsAccess().getStr2STRINGTerminalRuleCall_2_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getManyStringsRule());
-            	        }
-                   		addWithLastConsumed(
-                   			current, 
-                   			"str2",
-                    		lv_str2_2_0, 
-                    		"org.eclipse.xtext.common.Terminals.STRING");
-            	    
-
-            }
-
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getManyStringsRule());
+            					}
+            					addWithLastConsumed(
+            						current,
+            						"str2",
+            						lv_str2_2_0,
+            						"org.eclipse.xtext.common.Terminals.STRING");
+            				
 
             }
 
@@ -1560,13 +1574,18 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
             }
 
-             leaveRule(); 
+
+            }
+
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1575,7 +1594,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "entryRuleType"
-    // InternalSimpleReconstrTestLanguage.g:634:1: entryRuleType returns [EObject current=null] : iv_ruleType= ruleType EOF ;
+    // InternalSimpleReconstrTestLanguage.g:594:1: entryRuleType returns [EObject current=null] : iv_ruleType= ruleType EOF ;
     public final EObject entryRuleType() throws RecognitionException {
         EObject current = null;
 
@@ -1583,8 +1602,8 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
         try {
-            // InternalSimpleReconstrTestLanguage.g:635:2: (iv_ruleType= ruleType EOF )
-            // InternalSimpleReconstrTestLanguage.g:636:2: iv_ruleType= ruleType EOF
+            // InternalSimpleReconstrTestLanguage.g:594:45: (iv_ruleType= ruleType EOF )
+            // InternalSimpleReconstrTestLanguage.g:595:2: iv_ruleType= ruleType EOF
             {
              newCompositeNode(grammarAccess.getTypeRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -1598,11 +1617,11 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1611,7 +1630,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "ruleType"
-    // InternalSimpleReconstrTestLanguage.g:643:1: ruleType returns [EObject current=null] : (otherlv_0= 'type' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) ) ;
+    // InternalSimpleReconstrTestLanguage.g:601:1: ruleType returns [EObject current=null] : (otherlv_0= 'type' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) ) ;
     public final EObject ruleType() throws RecognitionException {
         EObject current = null;
 
@@ -1620,39 +1639,40 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
         Token otherlv_2=null;
         Token otherlv_3=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalSimpleReconstrTestLanguage.g:646:28: ( (otherlv_0= 'type' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) ) )
-            // InternalSimpleReconstrTestLanguage.g:647:1: (otherlv_0= 'type' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) )
+            // InternalSimpleReconstrTestLanguage.g:607:2: ( (otherlv_0= 'type' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) ) )
+            // InternalSimpleReconstrTestLanguage.g:608:2: (otherlv_0= 'type' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) )
             {
-            // InternalSimpleReconstrTestLanguage.g:647:1: (otherlv_0= 'type' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) )
-            // InternalSimpleReconstrTestLanguage.g:647:3: otherlv_0= 'type' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) )
+            // InternalSimpleReconstrTestLanguage.g:608:2: (otherlv_0= 'type' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) )
+            // InternalSimpleReconstrTestLanguage.g:609:3: otherlv_0= 'type' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) )
             {
             otherlv_0=(Token)match(input,18,FollowSets000.FOLLOW_10); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getTypeAccess().getTypeKeyword_0());
-                
-            // InternalSimpleReconstrTestLanguage.g:651:1: ( (lv_name_1_0= RULE_ID ) )
-            // InternalSimpleReconstrTestLanguage.g:652:1: (lv_name_1_0= RULE_ID )
+            			newLeafNode(otherlv_0, grammarAccess.getTypeAccess().getTypeKeyword_0());
+            		
+            // InternalSimpleReconstrTestLanguage.g:613:3: ( (lv_name_1_0= RULE_ID ) )
+            // InternalSimpleReconstrTestLanguage.g:614:4: (lv_name_1_0= RULE_ID )
             {
-            // InternalSimpleReconstrTestLanguage.g:652:1: (lv_name_1_0= RULE_ID )
-            // InternalSimpleReconstrTestLanguage.g:653:3: lv_name_1_0= RULE_ID
+            // InternalSimpleReconstrTestLanguage.g:614:4: (lv_name_1_0= RULE_ID )
+            // InternalSimpleReconstrTestLanguage.g:615:5: lv_name_1_0= RULE_ID
             {
             lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_11); 
 
-            			newLeafNode(lv_name_1_0, grammarAccess.getTypeAccess().getNameIDTerminalRuleCall_1_0()); 
-            		
+            					newLeafNode(lv_name_1_0, grammarAccess.getTypeAccess().getNameIDTerminalRuleCall_1_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getTypeRule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"name",
-                    		lv_name_1_0, 
-                    		"org.eclipse.xtext.common.Terminals.ID");
-            	    
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getTypeRule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"name",
+            						lv_name_1_0,
+            						"org.eclipse.xtext.common.Terminals.ID");
+            				
 
             }
 
@@ -1661,23 +1681,23 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
             otherlv_2=(Token)match(input,19,FollowSets000.FOLLOW_10); 
 
-                	newLeafNode(otherlv_2, grammarAccess.getTypeAccess().getExtendsKeyword_2());
-                
-            // InternalSimpleReconstrTestLanguage.g:673:1: ( (otherlv_3= RULE_ID ) )
-            // InternalSimpleReconstrTestLanguage.g:674:1: (otherlv_3= RULE_ID )
+            			newLeafNode(otherlv_2, grammarAccess.getTypeAccess().getExtendsKeyword_2());
+            		
+            // InternalSimpleReconstrTestLanguage.g:635:3: ( (otherlv_3= RULE_ID ) )
+            // InternalSimpleReconstrTestLanguage.g:636:4: (otherlv_3= RULE_ID )
             {
-            // InternalSimpleReconstrTestLanguage.g:674:1: (otherlv_3= RULE_ID )
-            // InternalSimpleReconstrTestLanguage.g:675:3: otherlv_3= RULE_ID
+            // InternalSimpleReconstrTestLanguage.g:636:4: (otherlv_3= RULE_ID )
+            // InternalSimpleReconstrTestLanguage.g:637:5: otherlv_3= RULE_ID
             {
 
-            			if (current==null) {
-            	            current = createModelElement(grammarAccess.getTypeRule());
-            	        }
-                    
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getTypeRule());
+            					}
+            				
             otherlv_3=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
-            		newLeafNode(otherlv_3, grammarAccess.getTypeAccess().getExtendsTypeCrossReference_3_0()); 
-            	
+            					newLeafNode(otherlv_3, grammarAccess.getTypeAccess().getExtendsTypeCrossReference_3_0());
+            				
 
             }
 
@@ -1690,13 +1710,15 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1705,7 +1727,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "entryRuleRef2"
-    // InternalSimpleReconstrTestLanguage.g:694:1: entryRuleRef2 returns [EObject current=null] : iv_ruleRef2= ruleRef2 EOF ;
+    // InternalSimpleReconstrTestLanguage.g:652:1: entryRuleRef2 returns [EObject current=null] : iv_ruleRef2= ruleRef2 EOF ;
     public final EObject entryRuleRef2() throws RecognitionException {
         EObject current = null;
 
@@ -1713,8 +1735,8 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
         try {
-            // InternalSimpleReconstrTestLanguage.g:695:2: (iv_ruleRef2= ruleRef2 EOF )
-            // InternalSimpleReconstrTestLanguage.g:696:2: iv_ruleRef2= ruleRef2 EOF
+            // InternalSimpleReconstrTestLanguage.g:652:45: (iv_ruleRef2= ruleRef2 EOF )
+            // InternalSimpleReconstrTestLanguage.g:653:2: iv_ruleRef2= ruleRef2 EOF
             {
              newCompositeNode(grammarAccess.getRef2Rule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -1728,11 +1750,11 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1741,7 +1763,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "ruleRef2"
-    // InternalSimpleReconstrTestLanguage.g:703:1: ruleRef2 returns [EObject current=null] : (otherlv_0= '#2' ( ( (lv_ref2_1_1= 'mykeyword1' | lv_ref2_1_2= RULE_STRING | lv_ref2_1_3= 'mykeyword2' ) ) ) ) ;
+    // InternalSimpleReconstrTestLanguage.g:659:1: ruleRef2 returns [EObject current=null] : (otherlv_0= '#2' ( ( (lv_ref2_1_1= 'mykeyword1' | lv_ref2_1_2= RULE_STRING | lv_ref2_1_3= 'mykeyword2' ) ) ) ) ;
     public final EObject ruleRef2() throws RecognitionException {
         EObject current = null;
 
@@ -1750,26 +1772,27 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
         Token lv_ref2_1_2=null;
         Token lv_ref2_1_3=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalSimpleReconstrTestLanguage.g:706:28: ( (otherlv_0= '#2' ( ( (lv_ref2_1_1= 'mykeyword1' | lv_ref2_1_2= RULE_STRING | lv_ref2_1_3= 'mykeyword2' ) ) ) ) )
-            // InternalSimpleReconstrTestLanguage.g:707:1: (otherlv_0= '#2' ( ( (lv_ref2_1_1= 'mykeyword1' | lv_ref2_1_2= RULE_STRING | lv_ref2_1_3= 'mykeyword2' ) ) ) )
+            // InternalSimpleReconstrTestLanguage.g:665:2: ( (otherlv_0= '#2' ( ( (lv_ref2_1_1= 'mykeyword1' | lv_ref2_1_2= RULE_STRING | lv_ref2_1_3= 'mykeyword2' ) ) ) ) )
+            // InternalSimpleReconstrTestLanguage.g:666:2: (otherlv_0= '#2' ( ( (lv_ref2_1_1= 'mykeyword1' | lv_ref2_1_2= RULE_STRING | lv_ref2_1_3= 'mykeyword2' ) ) ) )
             {
-            // InternalSimpleReconstrTestLanguage.g:707:1: (otherlv_0= '#2' ( ( (lv_ref2_1_1= 'mykeyword1' | lv_ref2_1_2= RULE_STRING | lv_ref2_1_3= 'mykeyword2' ) ) ) )
-            // InternalSimpleReconstrTestLanguage.g:707:3: otherlv_0= '#2' ( ( (lv_ref2_1_1= 'mykeyword1' | lv_ref2_1_2= RULE_STRING | lv_ref2_1_3= 'mykeyword2' ) ) )
+            // InternalSimpleReconstrTestLanguage.g:666:2: (otherlv_0= '#2' ( ( (lv_ref2_1_1= 'mykeyword1' | lv_ref2_1_2= RULE_STRING | lv_ref2_1_3= 'mykeyword2' ) ) ) )
+            // InternalSimpleReconstrTestLanguage.g:667:3: otherlv_0= '#2' ( ( (lv_ref2_1_1= 'mykeyword1' | lv_ref2_1_2= RULE_STRING | lv_ref2_1_3= 'mykeyword2' ) ) )
             {
             otherlv_0=(Token)match(input,20,FollowSets000.FOLLOW_12); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getRef2Access().getNumberSignDigitTwoKeyword_0());
-                
-            // InternalSimpleReconstrTestLanguage.g:711:1: ( ( (lv_ref2_1_1= 'mykeyword1' | lv_ref2_1_2= RULE_STRING | lv_ref2_1_3= 'mykeyword2' ) ) )
-            // InternalSimpleReconstrTestLanguage.g:712:1: ( (lv_ref2_1_1= 'mykeyword1' | lv_ref2_1_2= RULE_STRING | lv_ref2_1_3= 'mykeyword2' ) )
+            			newLeafNode(otherlv_0, grammarAccess.getRef2Access().getNumberSignDigitTwoKeyword_0());
+            		
+            // InternalSimpleReconstrTestLanguage.g:671:3: ( ( (lv_ref2_1_1= 'mykeyword1' | lv_ref2_1_2= RULE_STRING | lv_ref2_1_3= 'mykeyword2' ) ) )
+            // InternalSimpleReconstrTestLanguage.g:672:4: ( (lv_ref2_1_1= 'mykeyword1' | lv_ref2_1_2= RULE_STRING | lv_ref2_1_3= 'mykeyword2' ) )
             {
-            // InternalSimpleReconstrTestLanguage.g:712:1: ( (lv_ref2_1_1= 'mykeyword1' | lv_ref2_1_2= RULE_STRING | lv_ref2_1_3= 'mykeyword2' ) )
-            // InternalSimpleReconstrTestLanguage.g:713:1: (lv_ref2_1_1= 'mykeyword1' | lv_ref2_1_2= RULE_STRING | lv_ref2_1_3= 'mykeyword2' )
+            // InternalSimpleReconstrTestLanguage.g:672:4: ( (lv_ref2_1_1= 'mykeyword1' | lv_ref2_1_2= RULE_STRING | lv_ref2_1_3= 'mykeyword2' ) )
+            // InternalSimpleReconstrTestLanguage.g:673:5: (lv_ref2_1_1= 'mykeyword1' | lv_ref2_1_2= RULE_STRING | lv_ref2_1_3= 'mykeyword2' )
             {
-            // InternalSimpleReconstrTestLanguage.g:713:1: (lv_ref2_1_1= 'mykeyword1' | lv_ref2_1_2= RULE_STRING | lv_ref2_1_3= 'mykeyword2' )
+            // InternalSimpleReconstrTestLanguage.g:673:5: (lv_ref2_1_1= 'mykeyword1' | lv_ref2_1_2= RULE_STRING | lv_ref2_1_3= 'mykeyword2' )
             int alt6=3;
             switch ( input.LA(1) ) {
             case 21:
@@ -1796,54 +1819,54 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
             switch (alt6) {
                 case 1 :
-                    // InternalSimpleReconstrTestLanguage.g:714:3: lv_ref2_1_1= 'mykeyword1'
+                    // InternalSimpleReconstrTestLanguage.g:674:6: lv_ref2_1_1= 'mykeyword1'
                     {
                     lv_ref2_1_1=(Token)match(input,21,FollowSets000.FOLLOW_2); 
 
-                            newLeafNode(lv_ref2_1_1, grammarAccess.getRef2Access().getRef2Mykeyword1Keyword_1_0_0());
-                        
+                    						newLeafNode(lv_ref2_1_1, grammarAccess.getRef2Access().getRef2Mykeyword1Keyword_1_0_0());
+                    					
 
-                    	        if (current==null) {
-                    	            current = createModelElement(grammarAccess.getRef2Rule());
-                    	        }
-                           		setWithLastConsumed(current, "ref2", lv_ref2_1_1, null);
-                    	    
+                    						if (current==null) {
+                    							current = createModelElement(grammarAccess.getRef2Rule());
+                    						}
+                    						setWithLastConsumed(current, "ref2", lv_ref2_1_1, null);
+                    					
 
                     }
                     break;
                 case 2 :
-                    // InternalSimpleReconstrTestLanguage.g:726:8: lv_ref2_1_2= RULE_STRING
+                    // InternalSimpleReconstrTestLanguage.g:685:6: lv_ref2_1_2= RULE_STRING
                     {
                     lv_ref2_1_2=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_2); 
 
-                    			newLeafNode(lv_ref2_1_2, grammarAccess.getRef2Access().getRef2STRINGTerminalRuleCall_1_0_1()); 
-                    		
+                    						newLeafNode(lv_ref2_1_2, grammarAccess.getRef2Access().getRef2STRINGTerminalRuleCall_1_0_1());
+                    					
 
-                    	        if (current==null) {
-                    	            current = createModelElement(grammarAccess.getRef2Rule());
-                    	        }
-                           		setWithLastConsumed(
-                           			current, 
-                           			"ref2",
-                            		lv_ref2_1_2, 
-                            		"org.eclipse.xtext.common.Terminals.STRING");
-                    	    
+                    						if (current==null) {
+                    							current = createModelElement(grammarAccess.getRef2Rule());
+                    						}
+                    						setWithLastConsumed(
+                    							current,
+                    							"ref2",
+                    							lv_ref2_1_2,
+                    							"org.eclipse.xtext.common.Terminals.STRING");
+                    					
 
                     }
                     break;
                 case 3 :
-                    // InternalSimpleReconstrTestLanguage.g:741:8: lv_ref2_1_3= 'mykeyword2'
+                    // InternalSimpleReconstrTestLanguage.g:700:6: lv_ref2_1_3= 'mykeyword2'
                     {
                     lv_ref2_1_3=(Token)match(input,22,FollowSets000.FOLLOW_2); 
 
-                            newLeafNode(lv_ref2_1_3, grammarAccess.getRef2Access().getRef2Mykeyword2Keyword_1_0_2());
-                        
+                    						newLeafNode(lv_ref2_1_3, grammarAccess.getRef2Access().getRef2Mykeyword2Keyword_1_0_2());
+                    					
 
-                    	        if (current==null) {
-                    	            current = createModelElement(grammarAccess.getRef2Rule());
-                    	        }
-                           		setWithLastConsumed(current, "ref2", lv_ref2_1_3, null);
-                    	    
+                    						if (current==null) {
+                    							current = createModelElement(grammarAccess.getRef2Rule());
+                    						}
+                    						setWithLastConsumed(current, "ref2", lv_ref2_1_3, null);
+                    					
 
                     }
                     break;
@@ -1862,13 +1885,15 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1877,7 +1902,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "entryRuleSpare"
-    // InternalSimpleReconstrTestLanguage.g:764:1: entryRuleSpare returns [EObject current=null] : iv_ruleSpare= ruleSpare EOF ;
+    // InternalSimpleReconstrTestLanguage.g:717:1: entryRuleSpare returns [EObject current=null] : iv_ruleSpare= ruleSpare EOF ;
     public final EObject entryRuleSpare() throws RecognitionException {
         EObject current = null;
 
@@ -1885,8 +1910,8 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
         try {
-            // InternalSimpleReconstrTestLanguage.g:765:2: (iv_ruleSpare= ruleSpare EOF )
-            // InternalSimpleReconstrTestLanguage.g:766:2: iv_ruleSpare= ruleSpare EOF
+            // InternalSimpleReconstrTestLanguage.g:717:46: (iv_ruleSpare= ruleSpare EOF )
+            // InternalSimpleReconstrTestLanguage.g:718:2: iv_ruleSpare= ruleSpare EOF
             {
              newCompositeNode(grammarAccess.getSpareRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -1900,11 +1925,11 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1913,7 +1938,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "ruleSpare"
-    // InternalSimpleReconstrTestLanguage.g:773:1: ruleSpare returns [EObject current=null] : (otherlv_0= '#3' ( (lv_id_1_0= RULE_ID ) ) (otherlv_2= '.' ( (lv_id_3_0= RULE_ID ) ) )* ) ;
+    // InternalSimpleReconstrTestLanguage.g:724:1: ruleSpare returns [EObject current=null] : (otherlv_0= '#3' ( (lv_id_1_0= RULE_ID ) ) (otherlv_2= '.' ( (lv_id_3_0= RULE_ID ) ) )* ) ;
     public final EObject ruleSpare() throws RecognitionException {
         EObject current = null;
 
@@ -1922,46 +1947,47 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
         Token otherlv_2=null;
         Token lv_id_3_0=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalSimpleReconstrTestLanguage.g:776:28: ( (otherlv_0= '#3' ( (lv_id_1_0= RULE_ID ) ) (otherlv_2= '.' ( (lv_id_3_0= RULE_ID ) ) )* ) )
-            // InternalSimpleReconstrTestLanguage.g:777:1: (otherlv_0= '#3' ( (lv_id_1_0= RULE_ID ) ) (otherlv_2= '.' ( (lv_id_3_0= RULE_ID ) ) )* )
+            // InternalSimpleReconstrTestLanguage.g:730:2: ( (otherlv_0= '#3' ( (lv_id_1_0= RULE_ID ) ) (otherlv_2= '.' ( (lv_id_3_0= RULE_ID ) ) )* ) )
+            // InternalSimpleReconstrTestLanguage.g:731:2: (otherlv_0= '#3' ( (lv_id_1_0= RULE_ID ) ) (otherlv_2= '.' ( (lv_id_3_0= RULE_ID ) ) )* )
             {
-            // InternalSimpleReconstrTestLanguage.g:777:1: (otherlv_0= '#3' ( (lv_id_1_0= RULE_ID ) ) (otherlv_2= '.' ( (lv_id_3_0= RULE_ID ) ) )* )
-            // InternalSimpleReconstrTestLanguage.g:777:3: otherlv_0= '#3' ( (lv_id_1_0= RULE_ID ) ) (otherlv_2= '.' ( (lv_id_3_0= RULE_ID ) ) )*
+            // InternalSimpleReconstrTestLanguage.g:731:2: (otherlv_0= '#3' ( (lv_id_1_0= RULE_ID ) ) (otherlv_2= '.' ( (lv_id_3_0= RULE_ID ) ) )* )
+            // InternalSimpleReconstrTestLanguage.g:732:3: otherlv_0= '#3' ( (lv_id_1_0= RULE_ID ) ) (otherlv_2= '.' ( (lv_id_3_0= RULE_ID ) ) )*
             {
             otherlv_0=(Token)match(input,23,FollowSets000.FOLLOW_10); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getSpareAccess().getNumberSignDigitThreeKeyword_0());
-                
-            // InternalSimpleReconstrTestLanguage.g:781:1: ( (lv_id_1_0= RULE_ID ) )
-            // InternalSimpleReconstrTestLanguage.g:782:1: (lv_id_1_0= RULE_ID )
+            			newLeafNode(otherlv_0, grammarAccess.getSpareAccess().getNumberSignDigitThreeKeyword_0());
+            		
+            // InternalSimpleReconstrTestLanguage.g:736:3: ( (lv_id_1_0= RULE_ID ) )
+            // InternalSimpleReconstrTestLanguage.g:737:4: (lv_id_1_0= RULE_ID )
             {
-            // InternalSimpleReconstrTestLanguage.g:782:1: (lv_id_1_0= RULE_ID )
-            // InternalSimpleReconstrTestLanguage.g:783:3: lv_id_1_0= RULE_ID
+            // InternalSimpleReconstrTestLanguage.g:737:4: (lv_id_1_0= RULE_ID )
+            // InternalSimpleReconstrTestLanguage.g:738:5: lv_id_1_0= RULE_ID
             {
             lv_id_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_13); 
 
-            			newLeafNode(lv_id_1_0, grammarAccess.getSpareAccess().getIdIDTerminalRuleCall_1_0()); 
-            		
+            					newLeafNode(lv_id_1_0, grammarAccess.getSpareAccess().getIdIDTerminalRuleCall_1_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getSpareRule());
-            	        }
-                   		addWithLastConsumed(
-                   			current, 
-                   			"id",
-                    		lv_id_1_0, 
-                    		"org.eclipse.xtext.common.Terminals.ID");
-            	    
-
-            }
-
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getSpareRule());
+            					}
+            					addWithLastConsumed(
+            						current,
+            						"id",
+            						lv_id_1_0,
+            						"org.eclipse.xtext.common.Terminals.ID");
+            				
 
             }
 
-            // InternalSimpleReconstrTestLanguage.g:799:2: (otherlv_2= '.' ( (lv_id_3_0= RULE_ID ) ) )*
+
+            }
+
+            // InternalSimpleReconstrTestLanguage.g:754:3: (otherlv_2= '.' ( (lv_id_3_0= RULE_ID ) ) )*
             loop7:
             do {
                 int alt7=2;
@@ -1974,32 +2000,32 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
                 switch (alt7) {
             	case 1 :
-            	    // InternalSimpleReconstrTestLanguage.g:799:4: otherlv_2= '.' ( (lv_id_3_0= RULE_ID ) )
+            	    // InternalSimpleReconstrTestLanguage.g:755:4: otherlv_2= '.' ( (lv_id_3_0= RULE_ID ) )
             	    {
             	    otherlv_2=(Token)match(input,24,FollowSets000.FOLLOW_10); 
 
-            	        	newLeafNode(otherlv_2, grammarAccess.getSpareAccess().getFullStopKeyword_2_0());
-            	        
-            	    // InternalSimpleReconstrTestLanguage.g:803:1: ( (lv_id_3_0= RULE_ID ) )
-            	    // InternalSimpleReconstrTestLanguage.g:804:1: (lv_id_3_0= RULE_ID )
+            	    				newLeafNode(otherlv_2, grammarAccess.getSpareAccess().getFullStopKeyword_2_0());
+            	    			
+            	    // InternalSimpleReconstrTestLanguage.g:759:4: ( (lv_id_3_0= RULE_ID ) )
+            	    // InternalSimpleReconstrTestLanguage.g:760:5: (lv_id_3_0= RULE_ID )
             	    {
-            	    // InternalSimpleReconstrTestLanguage.g:804:1: (lv_id_3_0= RULE_ID )
-            	    // InternalSimpleReconstrTestLanguage.g:805:3: lv_id_3_0= RULE_ID
+            	    // InternalSimpleReconstrTestLanguage.g:760:5: (lv_id_3_0= RULE_ID )
+            	    // InternalSimpleReconstrTestLanguage.g:761:6: lv_id_3_0= RULE_ID
             	    {
             	    lv_id_3_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_13); 
 
-            	    			newLeafNode(lv_id_3_0, grammarAccess.getSpareAccess().getIdIDTerminalRuleCall_2_1_0()); 
-            	    		
+            	    						newLeafNode(lv_id_3_0, grammarAccess.getSpareAccess().getIdIDTerminalRuleCall_2_1_0());
+            	    					
 
-            	    	        if (current==null) {
-            	    	            current = createModelElement(grammarAccess.getSpareRule());
-            	    	        }
-            	           		addWithLastConsumed(
-            	           			current, 
-            	           			"id",
-            	            		lv_id_3_0, 
-            	            		"org.eclipse.xtext.common.Terminals.ID");
-            	    	    
+            	    						if (current==null) {
+            	    							current = createModelElement(grammarAccess.getSpareRule());
+            	    						}
+            	    						addWithLastConsumed(
+            	    							current,
+            	    							"id",
+            	    							lv_id_3_0,
+            	    							"org.eclipse.xtext.common.Terminals.ID");
+            	    					
 
             	    }
 
@@ -2021,13 +2047,15 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -2036,7 +2064,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "entryRuleBoolean"
-    // InternalSimpleReconstrTestLanguage.g:829:1: entryRuleBoolean returns [EObject current=null] : iv_ruleBoolean= ruleBoolean EOF ;
+    // InternalSimpleReconstrTestLanguage.g:782:1: entryRuleBoolean returns [EObject current=null] : iv_ruleBoolean= ruleBoolean EOF ;
     public final EObject entryRuleBoolean() throws RecognitionException {
         EObject current = null;
 
@@ -2044,8 +2072,8 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
         try {
-            // InternalSimpleReconstrTestLanguage.g:830:2: (iv_ruleBoolean= ruleBoolean EOF )
-            // InternalSimpleReconstrTestLanguage.g:831:2: iv_ruleBoolean= ruleBoolean EOF
+            // InternalSimpleReconstrTestLanguage.g:782:48: (iv_ruleBoolean= ruleBoolean EOF )
+            // InternalSimpleReconstrTestLanguage.g:783:2: iv_ruleBoolean= ruleBoolean EOF
             {
              newCompositeNode(grammarAccess.getBooleanRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -2059,11 +2087,11 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -2072,7 +2100,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "ruleBoolean"
-    // InternalSimpleReconstrTestLanguage.g:838:1: ruleBoolean returns [EObject current=null] : (otherlv_0= '#4' ( (lv_bool_1_0= 'myoption' ) )? otherlv_2= 'kw' ( (lv_value_3_0= RULE_ID ) ) ) ;
+    // InternalSimpleReconstrTestLanguage.g:789:1: ruleBoolean returns [EObject current=null] : (otherlv_0= '#4' ( (lv_bool_1_0= 'myoption' ) )? otherlv_2= 'kw' ( (lv_value_3_0= RULE_ID ) ) ) ;
     public final EObject ruleBoolean() throws RecognitionException {
         EObject current = null;
 
@@ -2081,20 +2109,21 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
         Token otherlv_2=null;
         Token lv_value_3_0=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalSimpleReconstrTestLanguage.g:841:28: ( (otherlv_0= '#4' ( (lv_bool_1_0= 'myoption' ) )? otherlv_2= 'kw' ( (lv_value_3_0= RULE_ID ) ) ) )
-            // InternalSimpleReconstrTestLanguage.g:842:1: (otherlv_0= '#4' ( (lv_bool_1_0= 'myoption' ) )? otherlv_2= 'kw' ( (lv_value_3_0= RULE_ID ) ) )
+            // InternalSimpleReconstrTestLanguage.g:795:2: ( (otherlv_0= '#4' ( (lv_bool_1_0= 'myoption' ) )? otherlv_2= 'kw' ( (lv_value_3_0= RULE_ID ) ) ) )
+            // InternalSimpleReconstrTestLanguage.g:796:2: (otherlv_0= '#4' ( (lv_bool_1_0= 'myoption' ) )? otherlv_2= 'kw' ( (lv_value_3_0= RULE_ID ) ) )
             {
-            // InternalSimpleReconstrTestLanguage.g:842:1: (otherlv_0= '#4' ( (lv_bool_1_0= 'myoption' ) )? otherlv_2= 'kw' ( (lv_value_3_0= RULE_ID ) ) )
-            // InternalSimpleReconstrTestLanguage.g:842:3: otherlv_0= '#4' ( (lv_bool_1_0= 'myoption' ) )? otherlv_2= 'kw' ( (lv_value_3_0= RULE_ID ) )
+            // InternalSimpleReconstrTestLanguage.g:796:2: (otherlv_0= '#4' ( (lv_bool_1_0= 'myoption' ) )? otherlv_2= 'kw' ( (lv_value_3_0= RULE_ID ) ) )
+            // InternalSimpleReconstrTestLanguage.g:797:3: otherlv_0= '#4' ( (lv_bool_1_0= 'myoption' ) )? otherlv_2= 'kw' ( (lv_value_3_0= RULE_ID ) )
             {
             otherlv_0=(Token)match(input,25,FollowSets000.FOLLOW_14); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getBooleanAccess().getNumberSignDigitFourKeyword_0());
-                
-            // InternalSimpleReconstrTestLanguage.g:846:1: ( (lv_bool_1_0= 'myoption' ) )?
+            			newLeafNode(otherlv_0, grammarAccess.getBooleanAccess().getNumberSignDigitFourKeyword_0());
+            		
+            // InternalSimpleReconstrTestLanguage.g:801:3: ( (lv_bool_1_0= 'myoption' ) )?
             int alt8=2;
             int LA8_0 = input.LA(1);
 
@@ -2103,21 +2132,21 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
             }
             switch (alt8) {
                 case 1 :
-                    // InternalSimpleReconstrTestLanguage.g:847:1: (lv_bool_1_0= 'myoption' )
+                    // InternalSimpleReconstrTestLanguage.g:802:4: (lv_bool_1_0= 'myoption' )
                     {
-                    // InternalSimpleReconstrTestLanguage.g:847:1: (lv_bool_1_0= 'myoption' )
-                    // InternalSimpleReconstrTestLanguage.g:848:3: lv_bool_1_0= 'myoption'
+                    // InternalSimpleReconstrTestLanguage.g:802:4: (lv_bool_1_0= 'myoption' )
+                    // InternalSimpleReconstrTestLanguage.g:803:5: lv_bool_1_0= 'myoption'
                     {
                     lv_bool_1_0=(Token)match(input,26,FollowSets000.FOLLOW_15); 
 
-                            newLeafNode(lv_bool_1_0, grammarAccess.getBooleanAccess().getBoolMyoptionKeyword_1_0());
-                        
+                    					newLeafNode(lv_bool_1_0, grammarAccess.getBooleanAccess().getBoolMyoptionKeyword_1_0());
+                    				
 
-                    	        if (current==null) {
-                    	            current = createModelElement(grammarAccess.getBooleanRule());
-                    	        }
-                           		setWithLastConsumed(current, "bool", true, "myoption");
-                    	    
+                    					if (current==null) {
+                    						current = createModelElement(grammarAccess.getBooleanRule());
+                    					}
+                    					setWithLastConsumed(current, "bool", true, "myoption");
+                    				
 
                     }
 
@@ -2129,31 +2158,28 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
             otherlv_2=(Token)match(input,27,FollowSets000.FOLLOW_10); 
 
-                	newLeafNode(otherlv_2, grammarAccess.getBooleanAccess().getKwKeyword_2());
-                
-            // InternalSimpleReconstrTestLanguage.g:865:1: ( (lv_value_3_0= RULE_ID ) )
-            // InternalSimpleReconstrTestLanguage.g:866:1: (lv_value_3_0= RULE_ID )
+            			newLeafNode(otherlv_2, grammarAccess.getBooleanAccess().getKwKeyword_2());
+            		
+            // InternalSimpleReconstrTestLanguage.g:819:3: ( (lv_value_3_0= RULE_ID ) )
+            // InternalSimpleReconstrTestLanguage.g:820:4: (lv_value_3_0= RULE_ID )
             {
-            // InternalSimpleReconstrTestLanguage.g:866:1: (lv_value_3_0= RULE_ID )
-            // InternalSimpleReconstrTestLanguage.g:867:3: lv_value_3_0= RULE_ID
+            // InternalSimpleReconstrTestLanguage.g:820:4: (lv_value_3_0= RULE_ID )
+            // InternalSimpleReconstrTestLanguage.g:821:5: lv_value_3_0= RULE_ID
             {
             lv_value_3_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
-            			newLeafNode(lv_value_3_0, grammarAccess.getBooleanAccess().getValueIDTerminalRuleCall_3_0()); 
-            		
+            					newLeafNode(lv_value_3_0, grammarAccess.getBooleanAccess().getValueIDTerminalRuleCall_3_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getBooleanRule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"value",
-                    		lv_value_3_0, 
-                    		"org.eclipse.xtext.common.Terminals.ID");
-            	    
-
-            }
-
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getBooleanRule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"value",
+            						lv_value_3_0,
+            						"org.eclipse.xtext.common.Terminals.ID");
+            				
 
             }
 
@@ -2163,13 +2189,18 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
             }
 
-             leaveRule(); 
+
+            }
+
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -2178,7 +2209,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "entryRuleTransient1"
-    // InternalSimpleReconstrTestLanguage.g:891:1: entryRuleTransient1 returns [EObject current=null] : iv_ruleTransient1= ruleTransient1 EOF ;
+    // InternalSimpleReconstrTestLanguage.g:841:1: entryRuleTransient1 returns [EObject current=null] : iv_ruleTransient1= ruleTransient1 EOF ;
     public final EObject entryRuleTransient1() throws RecognitionException {
         EObject current = null;
 
@@ -2186,8 +2217,8 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
         try {
-            // InternalSimpleReconstrTestLanguage.g:892:2: (iv_ruleTransient1= ruleTransient1 EOF )
-            // InternalSimpleReconstrTestLanguage.g:893:2: iv_ruleTransient1= ruleTransient1 EOF
+            // InternalSimpleReconstrTestLanguage.g:841:51: (iv_ruleTransient1= ruleTransient1 EOF )
+            // InternalSimpleReconstrTestLanguage.g:842:2: iv_ruleTransient1= ruleTransient1 EOF
             {
              newCompositeNode(grammarAccess.getTransient1Rule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -2201,11 +2232,11 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -2214,7 +2245,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "ruleTransient1"
-    // InternalSimpleReconstrTestLanguage.g:900:1: ruleTransient1 returns [EObject current=null] : (otherlv_0= '#5' ( ( (lv_precStar_1_0= '*' ) ) | ( (lv_prec_2_0= RULE_INT ) ) ) (otherlv_3= ',' ( ( (lv_scaleStar_4_0= '*' ) ) | ( (lv_scale_5_0= RULE_INT ) ) ) )? ) ;
+    // InternalSimpleReconstrTestLanguage.g:848:1: ruleTransient1 returns [EObject current=null] : (otherlv_0= '#5' ( ( (lv_precStar_1_0= '*' ) ) | ( (lv_prec_2_0= RULE_INT ) ) ) (otherlv_3= ',' ( ( (lv_scaleStar_4_0= '*' ) ) | ( (lv_scale_5_0= RULE_INT ) ) ) )? ) ;
     public final EObject ruleTransient1() throws RecognitionException {
         EObject current = null;
 
@@ -2225,20 +2256,21 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
         Token lv_scaleStar_4_0=null;
         Token lv_scale_5_0=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalSimpleReconstrTestLanguage.g:903:28: ( (otherlv_0= '#5' ( ( (lv_precStar_1_0= '*' ) ) | ( (lv_prec_2_0= RULE_INT ) ) ) (otherlv_3= ',' ( ( (lv_scaleStar_4_0= '*' ) ) | ( (lv_scale_5_0= RULE_INT ) ) ) )? ) )
-            // InternalSimpleReconstrTestLanguage.g:904:1: (otherlv_0= '#5' ( ( (lv_precStar_1_0= '*' ) ) | ( (lv_prec_2_0= RULE_INT ) ) ) (otherlv_3= ',' ( ( (lv_scaleStar_4_0= '*' ) ) | ( (lv_scale_5_0= RULE_INT ) ) ) )? )
+            // InternalSimpleReconstrTestLanguage.g:854:2: ( (otherlv_0= '#5' ( ( (lv_precStar_1_0= '*' ) ) | ( (lv_prec_2_0= RULE_INT ) ) ) (otherlv_3= ',' ( ( (lv_scaleStar_4_0= '*' ) ) | ( (lv_scale_5_0= RULE_INT ) ) ) )? ) )
+            // InternalSimpleReconstrTestLanguage.g:855:2: (otherlv_0= '#5' ( ( (lv_precStar_1_0= '*' ) ) | ( (lv_prec_2_0= RULE_INT ) ) ) (otherlv_3= ',' ( ( (lv_scaleStar_4_0= '*' ) ) | ( (lv_scale_5_0= RULE_INT ) ) ) )? )
             {
-            // InternalSimpleReconstrTestLanguage.g:904:1: (otherlv_0= '#5' ( ( (lv_precStar_1_0= '*' ) ) | ( (lv_prec_2_0= RULE_INT ) ) ) (otherlv_3= ',' ( ( (lv_scaleStar_4_0= '*' ) ) | ( (lv_scale_5_0= RULE_INT ) ) ) )? )
-            // InternalSimpleReconstrTestLanguage.g:904:3: otherlv_0= '#5' ( ( (lv_precStar_1_0= '*' ) ) | ( (lv_prec_2_0= RULE_INT ) ) ) (otherlv_3= ',' ( ( (lv_scaleStar_4_0= '*' ) ) | ( (lv_scale_5_0= RULE_INT ) ) ) )?
+            // InternalSimpleReconstrTestLanguage.g:855:2: (otherlv_0= '#5' ( ( (lv_precStar_1_0= '*' ) ) | ( (lv_prec_2_0= RULE_INT ) ) ) (otherlv_3= ',' ( ( (lv_scaleStar_4_0= '*' ) ) | ( (lv_scale_5_0= RULE_INT ) ) ) )? )
+            // InternalSimpleReconstrTestLanguage.g:856:3: otherlv_0= '#5' ( ( (lv_precStar_1_0= '*' ) ) | ( (lv_prec_2_0= RULE_INT ) ) ) (otherlv_3= ',' ( ( (lv_scaleStar_4_0= '*' ) ) | ( (lv_scale_5_0= RULE_INT ) ) ) )?
             {
             otherlv_0=(Token)match(input,28,FollowSets000.FOLLOW_16); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getTransient1Access().getNumberSignDigitFiveKeyword_0());
-                
-            // InternalSimpleReconstrTestLanguage.g:908:1: ( ( (lv_precStar_1_0= '*' ) ) | ( (lv_prec_2_0= RULE_INT ) ) )
+            			newLeafNode(otherlv_0, grammarAccess.getTransient1Access().getNumberSignDigitFiveKeyword_0());
+            		
+            // InternalSimpleReconstrTestLanguage.g:860:3: ( ( (lv_precStar_1_0= '*' ) ) | ( (lv_prec_2_0= RULE_INT ) ) )
             int alt9=2;
             int LA9_0 = input.LA(1);
 
@@ -2256,24 +2288,24 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
             }
             switch (alt9) {
                 case 1 :
-                    // InternalSimpleReconstrTestLanguage.g:908:2: ( (lv_precStar_1_0= '*' ) )
+                    // InternalSimpleReconstrTestLanguage.g:861:4: ( (lv_precStar_1_0= '*' ) )
                     {
-                    // InternalSimpleReconstrTestLanguage.g:908:2: ( (lv_precStar_1_0= '*' ) )
-                    // InternalSimpleReconstrTestLanguage.g:909:1: (lv_precStar_1_0= '*' )
+                    // InternalSimpleReconstrTestLanguage.g:861:4: ( (lv_precStar_1_0= '*' ) )
+                    // InternalSimpleReconstrTestLanguage.g:862:5: (lv_precStar_1_0= '*' )
                     {
-                    // InternalSimpleReconstrTestLanguage.g:909:1: (lv_precStar_1_0= '*' )
-                    // InternalSimpleReconstrTestLanguage.g:910:3: lv_precStar_1_0= '*'
+                    // InternalSimpleReconstrTestLanguage.g:862:5: (lv_precStar_1_0= '*' )
+                    // InternalSimpleReconstrTestLanguage.g:863:6: lv_precStar_1_0= '*'
                     {
                     lv_precStar_1_0=(Token)match(input,29,FollowSets000.FOLLOW_17); 
 
-                            newLeafNode(lv_precStar_1_0, grammarAccess.getTransient1Access().getPrecStarAsteriskKeyword_1_0_0());
-                        
+                    						newLeafNode(lv_precStar_1_0, grammarAccess.getTransient1Access().getPrecStarAsteriskKeyword_1_0_0());
+                    					
 
-                    	        if (current==null) {
-                    	            current = createModelElement(grammarAccess.getTransient1Rule());
-                    	        }
-                           		setWithLastConsumed(current, "precStar", true, "*");
-                    	    
+                    						if (current==null) {
+                    							current = createModelElement(grammarAccess.getTransient1Rule());
+                    						}
+                    						setWithLastConsumed(current, "precStar", true, "*");
+                    					
 
                     }
 
@@ -2284,28 +2316,28 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
                     }
                     break;
                 case 2 :
-                    // InternalSimpleReconstrTestLanguage.g:924:6: ( (lv_prec_2_0= RULE_INT ) )
+                    // InternalSimpleReconstrTestLanguage.g:876:4: ( (lv_prec_2_0= RULE_INT ) )
                     {
-                    // InternalSimpleReconstrTestLanguage.g:924:6: ( (lv_prec_2_0= RULE_INT ) )
-                    // InternalSimpleReconstrTestLanguage.g:925:1: (lv_prec_2_0= RULE_INT )
+                    // InternalSimpleReconstrTestLanguage.g:876:4: ( (lv_prec_2_0= RULE_INT ) )
+                    // InternalSimpleReconstrTestLanguage.g:877:5: (lv_prec_2_0= RULE_INT )
                     {
-                    // InternalSimpleReconstrTestLanguage.g:925:1: (lv_prec_2_0= RULE_INT )
-                    // InternalSimpleReconstrTestLanguage.g:926:3: lv_prec_2_0= RULE_INT
+                    // InternalSimpleReconstrTestLanguage.g:877:5: (lv_prec_2_0= RULE_INT )
+                    // InternalSimpleReconstrTestLanguage.g:878:6: lv_prec_2_0= RULE_INT
                     {
                     lv_prec_2_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_17); 
 
-                    			newLeafNode(lv_prec_2_0, grammarAccess.getTransient1Access().getPrecINTTerminalRuleCall_1_1_0()); 
-                    		
+                    						newLeafNode(lv_prec_2_0, grammarAccess.getTransient1Access().getPrecINTTerminalRuleCall_1_1_0());
+                    					
 
-                    	        if (current==null) {
-                    	            current = createModelElement(grammarAccess.getTransient1Rule());
-                    	        }
-                           		setWithLastConsumed(
-                           			current, 
-                           			"prec",
-                            		lv_prec_2_0, 
-                            		"org.eclipse.xtext.common.Terminals.INT");
-                    	    
+                    						if (current==null) {
+                    							current = createModelElement(grammarAccess.getTransient1Rule());
+                    						}
+                    						setWithLastConsumed(
+                    							current,
+                    							"prec",
+                    							lv_prec_2_0,
+                    							"org.eclipse.xtext.common.Terminals.INT");
+                    					
 
                     }
 
@@ -2318,7 +2350,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
             }
 
-            // InternalSimpleReconstrTestLanguage.g:942:3: (otherlv_3= ',' ( ( (lv_scaleStar_4_0= '*' ) ) | ( (lv_scale_5_0= RULE_INT ) ) ) )?
+            // InternalSimpleReconstrTestLanguage.g:895:3: (otherlv_3= ',' ( ( (lv_scaleStar_4_0= '*' ) ) | ( (lv_scale_5_0= RULE_INT ) ) ) )?
             int alt11=2;
             int LA11_0 = input.LA(1);
 
@@ -2327,13 +2359,13 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
             }
             switch (alt11) {
                 case 1 :
-                    // InternalSimpleReconstrTestLanguage.g:942:5: otherlv_3= ',' ( ( (lv_scaleStar_4_0= '*' ) ) | ( (lv_scale_5_0= RULE_INT ) ) )
+                    // InternalSimpleReconstrTestLanguage.g:896:4: otherlv_3= ',' ( ( (lv_scaleStar_4_0= '*' ) ) | ( (lv_scale_5_0= RULE_INT ) ) )
                     {
                     otherlv_3=(Token)match(input,30,FollowSets000.FOLLOW_16); 
 
-                        	newLeafNode(otherlv_3, grammarAccess.getTransient1Access().getCommaKeyword_2_0());
-                        
-                    // InternalSimpleReconstrTestLanguage.g:946:1: ( ( (lv_scaleStar_4_0= '*' ) ) | ( (lv_scale_5_0= RULE_INT ) ) )
+                    				newLeafNode(otherlv_3, grammarAccess.getTransient1Access().getCommaKeyword_2_0());
+                    			
+                    // InternalSimpleReconstrTestLanguage.g:900:4: ( ( (lv_scaleStar_4_0= '*' ) ) | ( (lv_scale_5_0= RULE_INT ) ) )
                     int alt10=2;
                     int LA10_0 = input.LA(1);
 
@@ -2351,24 +2383,24 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
                     }
                     switch (alt10) {
                         case 1 :
-                            // InternalSimpleReconstrTestLanguage.g:946:2: ( (lv_scaleStar_4_0= '*' ) )
+                            // InternalSimpleReconstrTestLanguage.g:901:5: ( (lv_scaleStar_4_0= '*' ) )
                             {
-                            // InternalSimpleReconstrTestLanguage.g:946:2: ( (lv_scaleStar_4_0= '*' ) )
-                            // InternalSimpleReconstrTestLanguage.g:947:1: (lv_scaleStar_4_0= '*' )
+                            // InternalSimpleReconstrTestLanguage.g:901:5: ( (lv_scaleStar_4_0= '*' ) )
+                            // InternalSimpleReconstrTestLanguage.g:902:6: (lv_scaleStar_4_0= '*' )
                             {
-                            // InternalSimpleReconstrTestLanguage.g:947:1: (lv_scaleStar_4_0= '*' )
-                            // InternalSimpleReconstrTestLanguage.g:948:3: lv_scaleStar_4_0= '*'
+                            // InternalSimpleReconstrTestLanguage.g:902:6: (lv_scaleStar_4_0= '*' )
+                            // InternalSimpleReconstrTestLanguage.g:903:7: lv_scaleStar_4_0= '*'
                             {
                             lv_scaleStar_4_0=(Token)match(input,29,FollowSets000.FOLLOW_2); 
 
-                                    newLeafNode(lv_scaleStar_4_0, grammarAccess.getTransient1Access().getScaleStarAsteriskKeyword_2_1_0_0());
-                                
+                            							newLeafNode(lv_scaleStar_4_0, grammarAccess.getTransient1Access().getScaleStarAsteriskKeyword_2_1_0_0());
+                            						
 
-                            	        if (current==null) {
-                            	            current = createModelElement(grammarAccess.getTransient1Rule());
-                            	        }
-                                   		setWithLastConsumed(current, "scaleStar", true, "*");
-                            	    
+                            							if (current==null) {
+                            								current = createModelElement(grammarAccess.getTransient1Rule());
+                            							}
+                            							setWithLastConsumed(current, "scaleStar", true, "*");
+                            						
 
                             }
 
@@ -2379,28 +2411,28 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
                             }
                             break;
                         case 2 :
-                            // InternalSimpleReconstrTestLanguage.g:962:6: ( (lv_scale_5_0= RULE_INT ) )
+                            // InternalSimpleReconstrTestLanguage.g:916:5: ( (lv_scale_5_0= RULE_INT ) )
                             {
-                            // InternalSimpleReconstrTestLanguage.g:962:6: ( (lv_scale_5_0= RULE_INT ) )
-                            // InternalSimpleReconstrTestLanguage.g:963:1: (lv_scale_5_0= RULE_INT )
+                            // InternalSimpleReconstrTestLanguage.g:916:5: ( (lv_scale_5_0= RULE_INT ) )
+                            // InternalSimpleReconstrTestLanguage.g:917:6: (lv_scale_5_0= RULE_INT )
                             {
-                            // InternalSimpleReconstrTestLanguage.g:963:1: (lv_scale_5_0= RULE_INT )
-                            // InternalSimpleReconstrTestLanguage.g:964:3: lv_scale_5_0= RULE_INT
+                            // InternalSimpleReconstrTestLanguage.g:917:6: (lv_scale_5_0= RULE_INT )
+                            // InternalSimpleReconstrTestLanguage.g:918:7: lv_scale_5_0= RULE_INT
                             {
                             lv_scale_5_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_2); 
 
-                            			newLeafNode(lv_scale_5_0, grammarAccess.getTransient1Access().getScaleINTTerminalRuleCall_2_1_1_0()); 
-                            		
+                            							newLeafNode(lv_scale_5_0, grammarAccess.getTransient1Access().getScaleINTTerminalRuleCall_2_1_1_0());
+                            						
 
-                            	        if (current==null) {
-                            	            current = createModelElement(grammarAccess.getTransient1Rule());
-                            	        }
-                                   		setWithLastConsumed(
-                                   			current, 
-                                   			"scale",
-                                    		lv_scale_5_0, 
-                                    		"org.eclipse.xtext.common.Terminals.INT");
-                            	    
+                            							if (current==null) {
+                            								current = createModelElement(grammarAccess.getTransient1Rule());
+                            							}
+                            							setWithLastConsumed(
+                            								current,
+                            								"scale",
+                            								lv_scale_5_0,
+                            								"org.eclipse.xtext.common.Terminals.INT");
+                            						
 
                             }
 
@@ -2425,13 +2457,15 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -2440,7 +2474,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "entryRuleConsumed1"
-    // InternalSimpleReconstrTestLanguage.g:988:1: entryRuleConsumed1 returns [EObject current=null] : iv_ruleConsumed1= ruleConsumed1 EOF ;
+    // InternalSimpleReconstrTestLanguage.g:940:1: entryRuleConsumed1 returns [EObject current=null] : iv_ruleConsumed1= ruleConsumed1 EOF ;
     public final EObject entryRuleConsumed1() throws RecognitionException {
         EObject current = null;
 
@@ -2448,8 +2482,8 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
         try {
-            // InternalSimpleReconstrTestLanguage.g:989:2: (iv_ruleConsumed1= ruleConsumed1 EOF )
-            // InternalSimpleReconstrTestLanguage.g:990:2: iv_ruleConsumed1= ruleConsumed1 EOF
+            // InternalSimpleReconstrTestLanguage.g:940:50: (iv_ruleConsumed1= ruleConsumed1 EOF )
+            // InternalSimpleReconstrTestLanguage.g:941:2: iv_ruleConsumed1= ruleConsumed1 EOF
             {
              newCompositeNode(grammarAccess.getConsumed1Rule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -2463,11 +2497,11 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -2476,7 +2510,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "ruleConsumed1"
-    // InternalSimpleReconstrTestLanguage.g:997:1: ruleConsumed1 returns [EObject current=null] : (otherlv_0= '#6' ( (otherlv_1= 'v1' ( (lv_v1_2_0= RULE_INT ) )* ( (lv_v2_3_0= RULE_ID ) ) ) | (otherlv_4= 'v2' ( (lv_v2_5_0= RULE_ID ) )* ( (lv_v1_6_0= RULE_INT ) ) ) ) ) ;
+    // InternalSimpleReconstrTestLanguage.g:947:1: ruleConsumed1 returns [EObject current=null] : (otherlv_0= '#6' ( (otherlv_1= 'v1' ( (lv_v1_2_0= RULE_INT ) )* ( (lv_v2_3_0= RULE_ID ) ) ) | (otherlv_4= 'v2' ( (lv_v2_5_0= RULE_ID ) )* ( (lv_v1_6_0= RULE_INT ) ) ) ) ) ;
     public final EObject ruleConsumed1() throws RecognitionException {
         EObject current = null;
 
@@ -2488,20 +2522,21 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
         Token lv_v2_5_0=null;
         Token lv_v1_6_0=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalSimpleReconstrTestLanguage.g:1000:28: ( (otherlv_0= '#6' ( (otherlv_1= 'v1' ( (lv_v1_2_0= RULE_INT ) )* ( (lv_v2_3_0= RULE_ID ) ) ) | (otherlv_4= 'v2' ( (lv_v2_5_0= RULE_ID ) )* ( (lv_v1_6_0= RULE_INT ) ) ) ) ) )
-            // InternalSimpleReconstrTestLanguage.g:1001:1: (otherlv_0= '#6' ( (otherlv_1= 'v1' ( (lv_v1_2_0= RULE_INT ) )* ( (lv_v2_3_0= RULE_ID ) ) ) | (otherlv_4= 'v2' ( (lv_v2_5_0= RULE_ID ) )* ( (lv_v1_6_0= RULE_INT ) ) ) ) )
+            // InternalSimpleReconstrTestLanguage.g:953:2: ( (otherlv_0= '#6' ( (otherlv_1= 'v1' ( (lv_v1_2_0= RULE_INT ) )* ( (lv_v2_3_0= RULE_ID ) ) ) | (otherlv_4= 'v2' ( (lv_v2_5_0= RULE_ID ) )* ( (lv_v1_6_0= RULE_INT ) ) ) ) ) )
+            // InternalSimpleReconstrTestLanguage.g:954:2: (otherlv_0= '#6' ( (otherlv_1= 'v1' ( (lv_v1_2_0= RULE_INT ) )* ( (lv_v2_3_0= RULE_ID ) ) ) | (otherlv_4= 'v2' ( (lv_v2_5_0= RULE_ID ) )* ( (lv_v1_6_0= RULE_INT ) ) ) ) )
             {
-            // InternalSimpleReconstrTestLanguage.g:1001:1: (otherlv_0= '#6' ( (otherlv_1= 'v1' ( (lv_v1_2_0= RULE_INT ) )* ( (lv_v2_3_0= RULE_ID ) ) ) | (otherlv_4= 'v2' ( (lv_v2_5_0= RULE_ID ) )* ( (lv_v1_6_0= RULE_INT ) ) ) ) )
-            // InternalSimpleReconstrTestLanguage.g:1001:3: otherlv_0= '#6' ( (otherlv_1= 'v1' ( (lv_v1_2_0= RULE_INT ) )* ( (lv_v2_3_0= RULE_ID ) ) ) | (otherlv_4= 'v2' ( (lv_v2_5_0= RULE_ID ) )* ( (lv_v1_6_0= RULE_INT ) ) ) )
+            // InternalSimpleReconstrTestLanguage.g:954:2: (otherlv_0= '#6' ( (otherlv_1= 'v1' ( (lv_v1_2_0= RULE_INT ) )* ( (lv_v2_3_0= RULE_ID ) ) ) | (otherlv_4= 'v2' ( (lv_v2_5_0= RULE_ID ) )* ( (lv_v1_6_0= RULE_INT ) ) ) ) )
+            // InternalSimpleReconstrTestLanguage.g:955:3: otherlv_0= '#6' ( (otherlv_1= 'v1' ( (lv_v1_2_0= RULE_INT ) )* ( (lv_v2_3_0= RULE_ID ) ) ) | (otherlv_4= 'v2' ( (lv_v2_5_0= RULE_ID ) )* ( (lv_v1_6_0= RULE_INT ) ) ) )
             {
             otherlv_0=(Token)match(input,31,FollowSets000.FOLLOW_18); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getConsumed1Access().getNumberSignDigitSixKeyword_0());
-                
-            // InternalSimpleReconstrTestLanguage.g:1005:1: ( (otherlv_1= 'v1' ( (lv_v1_2_0= RULE_INT ) )* ( (lv_v2_3_0= RULE_ID ) ) ) | (otherlv_4= 'v2' ( (lv_v2_5_0= RULE_ID ) )* ( (lv_v1_6_0= RULE_INT ) ) ) )
+            			newLeafNode(otherlv_0, grammarAccess.getConsumed1Access().getNumberSignDigitSixKeyword_0());
+            		
+            // InternalSimpleReconstrTestLanguage.g:959:3: ( (otherlv_1= 'v1' ( (lv_v1_2_0= RULE_INT ) )* ( (lv_v2_3_0= RULE_ID ) ) ) | (otherlv_4= 'v2' ( (lv_v2_5_0= RULE_ID ) )* ( (lv_v1_6_0= RULE_INT ) ) ) )
             int alt14=2;
             int LA14_0 = input.LA(1);
 
@@ -2519,16 +2554,16 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
             }
             switch (alt14) {
                 case 1 :
-                    // InternalSimpleReconstrTestLanguage.g:1005:2: (otherlv_1= 'v1' ( (lv_v1_2_0= RULE_INT ) )* ( (lv_v2_3_0= RULE_ID ) ) )
+                    // InternalSimpleReconstrTestLanguage.g:960:4: (otherlv_1= 'v1' ( (lv_v1_2_0= RULE_INT ) )* ( (lv_v2_3_0= RULE_ID ) ) )
                     {
-                    // InternalSimpleReconstrTestLanguage.g:1005:2: (otherlv_1= 'v1' ( (lv_v1_2_0= RULE_INT ) )* ( (lv_v2_3_0= RULE_ID ) ) )
-                    // InternalSimpleReconstrTestLanguage.g:1005:4: otherlv_1= 'v1' ( (lv_v1_2_0= RULE_INT ) )* ( (lv_v2_3_0= RULE_ID ) )
+                    // InternalSimpleReconstrTestLanguage.g:960:4: (otherlv_1= 'v1' ( (lv_v1_2_0= RULE_INT ) )* ( (lv_v2_3_0= RULE_ID ) ) )
+                    // InternalSimpleReconstrTestLanguage.g:961:5: otherlv_1= 'v1' ( (lv_v1_2_0= RULE_INT ) )* ( (lv_v2_3_0= RULE_ID ) )
                     {
                     otherlv_1=(Token)match(input,32,FollowSets000.FOLLOW_19); 
 
-                        	newLeafNode(otherlv_1, grammarAccess.getConsumed1Access().getV1Keyword_1_0_0());
-                        
-                    // InternalSimpleReconstrTestLanguage.g:1009:1: ( (lv_v1_2_0= RULE_INT ) )*
+                    					newLeafNode(otherlv_1, grammarAccess.getConsumed1Access().getV1Keyword_1_0_0());
+                    				
+                    // InternalSimpleReconstrTestLanguage.g:965:5: ( (lv_v1_2_0= RULE_INT ) )*
                     loop12:
                     do {
                         int alt12=2;
@@ -2541,25 +2576,25 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
                         switch (alt12) {
                     	case 1 :
-                    	    // InternalSimpleReconstrTestLanguage.g:1010:1: (lv_v1_2_0= RULE_INT )
+                    	    // InternalSimpleReconstrTestLanguage.g:966:6: (lv_v1_2_0= RULE_INT )
                     	    {
-                    	    // InternalSimpleReconstrTestLanguage.g:1010:1: (lv_v1_2_0= RULE_INT )
-                    	    // InternalSimpleReconstrTestLanguage.g:1011:3: lv_v1_2_0= RULE_INT
+                    	    // InternalSimpleReconstrTestLanguage.g:966:6: (lv_v1_2_0= RULE_INT )
+                    	    // InternalSimpleReconstrTestLanguage.g:967:7: lv_v1_2_0= RULE_INT
                     	    {
                     	    lv_v1_2_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_19); 
 
-                    	    			newLeafNode(lv_v1_2_0, grammarAccess.getConsumed1Access().getV1INTTerminalRuleCall_1_0_1_0()); 
-                    	    		
+                    	    							newLeafNode(lv_v1_2_0, grammarAccess.getConsumed1Access().getV1INTTerminalRuleCall_1_0_1_0());
+                    	    						
 
-                    	    	        if (current==null) {
-                    	    	            current = createModelElement(grammarAccess.getConsumed1Rule());
-                    	    	        }
-                    	           		addWithLastConsumed(
-                    	           			current, 
-                    	           			"v1",
-                    	            		lv_v1_2_0, 
-                    	            		"org.eclipse.xtext.common.Terminals.INT");
-                    	    	    
+                    	    							if (current==null) {
+                    	    								current = createModelElement(grammarAccess.getConsumed1Rule());
+                    	    							}
+                    	    							addWithLastConsumed(
+                    	    								current,
+                    	    								"v1",
+                    	    								lv_v1_2_0,
+                    	    								"org.eclipse.xtext.common.Terminals.INT");
+                    	    						
 
                     	    }
 
@@ -2572,26 +2607,26 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
                         }
                     } while (true);
 
-                    // InternalSimpleReconstrTestLanguage.g:1027:3: ( (lv_v2_3_0= RULE_ID ) )
-                    // InternalSimpleReconstrTestLanguage.g:1028:1: (lv_v2_3_0= RULE_ID )
+                    // InternalSimpleReconstrTestLanguage.g:983:5: ( (lv_v2_3_0= RULE_ID ) )
+                    // InternalSimpleReconstrTestLanguage.g:984:6: (lv_v2_3_0= RULE_ID )
                     {
-                    // InternalSimpleReconstrTestLanguage.g:1028:1: (lv_v2_3_0= RULE_ID )
-                    // InternalSimpleReconstrTestLanguage.g:1029:3: lv_v2_3_0= RULE_ID
+                    // InternalSimpleReconstrTestLanguage.g:984:6: (lv_v2_3_0= RULE_ID )
+                    // InternalSimpleReconstrTestLanguage.g:985:7: lv_v2_3_0= RULE_ID
                     {
                     lv_v2_3_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
-                    			newLeafNode(lv_v2_3_0, grammarAccess.getConsumed1Access().getV2IDTerminalRuleCall_1_0_2_0()); 
-                    		
+                    							newLeafNode(lv_v2_3_0, grammarAccess.getConsumed1Access().getV2IDTerminalRuleCall_1_0_2_0());
+                    						
 
-                    	        if (current==null) {
-                    	            current = createModelElement(grammarAccess.getConsumed1Rule());
-                    	        }
-                           		addWithLastConsumed(
-                           			current, 
-                           			"v2",
-                            		lv_v2_3_0, 
-                            		"org.eclipse.xtext.common.Terminals.ID");
-                    	    
+                    							if (current==null) {
+                    								current = createModelElement(grammarAccess.getConsumed1Rule());
+                    							}
+                    							addWithLastConsumed(
+                    								current,
+                    								"v2",
+                    								lv_v2_3_0,
+                    								"org.eclipse.xtext.common.Terminals.ID");
+                    						
 
                     }
 
@@ -2605,16 +2640,16 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
                     }
                     break;
                 case 2 :
-                    // InternalSimpleReconstrTestLanguage.g:1046:6: (otherlv_4= 'v2' ( (lv_v2_5_0= RULE_ID ) )* ( (lv_v1_6_0= RULE_INT ) ) )
+                    // InternalSimpleReconstrTestLanguage.g:1003:4: (otherlv_4= 'v2' ( (lv_v2_5_0= RULE_ID ) )* ( (lv_v1_6_0= RULE_INT ) ) )
                     {
-                    // InternalSimpleReconstrTestLanguage.g:1046:6: (otherlv_4= 'v2' ( (lv_v2_5_0= RULE_ID ) )* ( (lv_v1_6_0= RULE_INT ) ) )
-                    // InternalSimpleReconstrTestLanguage.g:1046:8: otherlv_4= 'v2' ( (lv_v2_5_0= RULE_ID ) )* ( (lv_v1_6_0= RULE_INT ) )
+                    // InternalSimpleReconstrTestLanguage.g:1003:4: (otherlv_4= 'v2' ( (lv_v2_5_0= RULE_ID ) )* ( (lv_v1_6_0= RULE_INT ) ) )
+                    // InternalSimpleReconstrTestLanguage.g:1004:5: otherlv_4= 'v2' ( (lv_v2_5_0= RULE_ID ) )* ( (lv_v1_6_0= RULE_INT ) )
                     {
                     otherlv_4=(Token)match(input,33,FollowSets000.FOLLOW_19); 
 
-                        	newLeafNode(otherlv_4, grammarAccess.getConsumed1Access().getV2Keyword_1_1_0());
-                        
-                    // InternalSimpleReconstrTestLanguage.g:1050:1: ( (lv_v2_5_0= RULE_ID ) )*
+                    					newLeafNode(otherlv_4, grammarAccess.getConsumed1Access().getV2Keyword_1_1_0());
+                    				
+                    // InternalSimpleReconstrTestLanguage.g:1008:5: ( (lv_v2_5_0= RULE_ID ) )*
                     loop13:
                     do {
                         int alt13=2;
@@ -2627,25 +2662,25 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
                         switch (alt13) {
                     	case 1 :
-                    	    // InternalSimpleReconstrTestLanguage.g:1051:1: (lv_v2_5_0= RULE_ID )
+                    	    // InternalSimpleReconstrTestLanguage.g:1009:6: (lv_v2_5_0= RULE_ID )
                     	    {
-                    	    // InternalSimpleReconstrTestLanguage.g:1051:1: (lv_v2_5_0= RULE_ID )
-                    	    // InternalSimpleReconstrTestLanguage.g:1052:3: lv_v2_5_0= RULE_ID
+                    	    // InternalSimpleReconstrTestLanguage.g:1009:6: (lv_v2_5_0= RULE_ID )
+                    	    // InternalSimpleReconstrTestLanguage.g:1010:7: lv_v2_5_0= RULE_ID
                     	    {
                     	    lv_v2_5_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_19); 
 
-                    	    			newLeafNode(lv_v2_5_0, grammarAccess.getConsumed1Access().getV2IDTerminalRuleCall_1_1_1_0()); 
-                    	    		
+                    	    							newLeafNode(lv_v2_5_0, grammarAccess.getConsumed1Access().getV2IDTerminalRuleCall_1_1_1_0());
+                    	    						
 
-                    	    	        if (current==null) {
-                    	    	            current = createModelElement(grammarAccess.getConsumed1Rule());
-                    	    	        }
-                    	           		addWithLastConsumed(
-                    	           			current, 
-                    	           			"v2",
-                    	            		lv_v2_5_0, 
-                    	            		"org.eclipse.xtext.common.Terminals.ID");
-                    	    	    
+                    	    							if (current==null) {
+                    	    								current = createModelElement(grammarAccess.getConsumed1Rule());
+                    	    							}
+                    	    							addWithLastConsumed(
+                    	    								current,
+                    	    								"v2",
+                    	    								lv_v2_5_0,
+                    	    								"org.eclipse.xtext.common.Terminals.ID");
+                    	    						
 
                     	    }
 
@@ -2658,26 +2693,26 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
                         }
                     } while (true);
 
-                    // InternalSimpleReconstrTestLanguage.g:1068:3: ( (lv_v1_6_0= RULE_INT ) )
-                    // InternalSimpleReconstrTestLanguage.g:1069:1: (lv_v1_6_0= RULE_INT )
+                    // InternalSimpleReconstrTestLanguage.g:1026:5: ( (lv_v1_6_0= RULE_INT ) )
+                    // InternalSimpleReconstrTestLanguage.g:1027:6: (lv_v1_6_0= RULE_INT )
                     {
-                    // InternalSimpleReconstrTestLanguage.g:1069:1: (lv_v1_6_0= RULE_INT )
-                    // InternalSimpleReconstrTestLanguage.g:1070:3: lv_v1_6_0= RULE_INT
+                    // InternalSimpleReconstrTestLanguage.g:1027:6: (lv_v1_6_0= RULE_INT )
+                    // InternalSimpleReconstrTestLanguage.g:1028:7: lv_v1_6_0= RULE_INT
                     {
                     lv_v1_6_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_2); 
 
-                    			newLeafNode(lv_v1_6_0, grammarAccess.getConsumed1Access().getV1INTTerminalRuleCall_1_1_2_0()); 
-                    		
+                    							newLeafNode(lv_v1_6_0, grammarAccess.getConsumed1Access().getV1INTTerminalRuleCall_1_1_2_0());
+                    						
 
-                    	        if (current==null) {
-                    	            current = createModelElement(grammarAccess.getConsumed1Rule());
-                    	        }
-                           		addWithLastConsumed(
-                           			current, 
-                           			"v1",
-                            		lv_v1_6_0, 
-                            		"org.eclipse.xtext.common.Terminals.INT");
-                    	    
+                    							if (current==null) {
+                    								current = createModelElement(grammarAccess.getConsumed1Rule());
+                    							}
+                    							addWithLastConsumed(
+                    								current,
+                    								"v1",
+                    								lv_v1_6_0,
+                    								"org.eclipse.xtext.common.Terminals.INT");
+                    						
 
                     }
 
@@ -2699,13 +2734,15 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -2714,7 +2751,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "entryRuleConsumed2"
-    // InternalSimpleReconstrTestLanguage.g:1094:1: entryRuleConsumed2 returns [EObject current=null] : iv_ruleConsumed2= ruleConsumed2 EOF ;
+    // InternalSimpleReconstrTestLanguage.g:1050:1: entryRuleConsumed2 returns [EObject current=null] : iv_ruleConsumed2= ruleConsumed2 EOF ;
     public final EObject entryRuleConsumed2() throws RecognitionException {
         EObject current = null;
 
@@ -2722,8 +2759,8 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
         try {
-            // InternalSimpleReconstrTestLanguage.g:1095:2: (iv_ruleConsumed2= ruleConsumed2 EOF )
-            // InternalSimpleReconstrTestLanguage.g:1096:2: iv_ruleConsumed2= ruleConsumed2 EOF
+            // InternalSimpleReconstrTestLanguage.g:1050:50: (iv_ruleConsumed2= ruleConsumed2 EOF )
+            // InternalSimpleReconstrTestLanguage.g:1051:2: iv_ruleConsumed2= ruleConsumed2 EOF
             {
              newCompositeNode(grammarAccess.getConsumed2Rule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -2737,11 +2774,11 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -2750,7 +2787,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "ruleConsumed2"
-    // InternalSimpleReconstrTestLanguage.g:1103:1: ruleConsumed2 returns [EObject current=null] : (otherlv_0= '#7' ( (lv_child_1_0= ruleConsumed1 ) ) ) ;
+    // InternalSimpleReconstrTestLanguage.g:1057:1: ruleConsumed2 returns [EObject current=null] : (otherlv_0= '#7' ( (lv_child_1_0= ruleConsumed1 ) ) ) ;
     public final EObject ruleConsumed2() throws RecognitionException {
         EObject current = null;
 
@@ -2758,44 +2795,45 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
         EObject lv_child_1_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalSimpleReconstrTestLanguage.g:1106:28: ( (otherlv_0= '#7' ( (lv_child_1_0= ruleConsumed1 ) ) ) )
-            // InternalSimpleReconstrTestLanguage.g:1107:1: (otherlv_0= '#7' ( (lv_child_1_0= ruleConsumed1 ) ) )
+            // InternalSimpleReconstrTestLanguage.g:1063:2: ( (otherlv_0= '#7' ( (lv_child_1_0= ruleConsumed1 ) ) ) )
+            // InternalSimpleReconstrTestLanguage.g:1064:2: (otherlv_0= '#7' ( (lv_child_1_0= ruleConsumed1 ) ) )
             {
-            // InternalSimpleReconstrTestLanguage.g:1107:1: (otherlv_0= '#7' ( (lv_child_1_0= ruleConsumed1 ) ) )
-            // InternalSimpleReconstrTestLanguage.g:1107:3: otherlv_0= '#7' ( (lv_child_1_0= ruleConsumed1 ) )
+            // InternalSimpleReconstrTestLanguage.g:1064:2: (otherlv_0= '#7' ( (lv_child_1_0= ruleConsumed1 ) ) )
+            // InternalSimpleReconstrTestLanguage.g:1065:3: otherlv_0= '#7' ( (lv_child_1_0= ruleConsumed1 ) )
             {
             otherlv_0=(Token)match(input,34,FollowSets000.FOLLOW_20); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getConsumed2Access().getNumberSignDigitSevenKeyword_0());
-                
-            // InternalSimpleReconstrTestLanguage.g:1111:1: ( (lv_child_1_0= ruleConsumed1 ) )
-            // InternalSimpleReconstrTestLanguage.g:1112:1: (lv_child_1_0= ruleConsumed1 )
+            			newLeafNode(otherlv_0, grammarAccess.getConsumed2Access().getNumberSignDigitSevenKeyword_0());
+            		
+            // InternalSimpleReconstrTestLanguage.g:1069:3: ( (lv_child_1_0= ruleConsumed1 ) )
+            // InternalSimpleReconstrTestLanguage.g:1070:4: (lv_child_1_0= ruleConsumed1 )
             {
-            // InternalSimpleReconstrTestLanguage.g:1112:1: (lv_child_1_0= ruleConsumed1 )
-            // InternalSimpleReconstrTestLanguage.g:1113:3: lv_child_1_0= ruleConsumed1
+            // InternalSimpleReconstrTestLanguage.g:1070:4: (lv_child_1_0= ruleConsumed1 )
+            // InternalSimpleReconstrTestLanguage.g:1071:5: lv_child_1_0= ruleConsumed1
             {
-             
-            	        newCompositeNode(grammarAccess.getConsumed2Access().getChildConsumed1ParserRuleCall_1_0()); 
-            	    
+
+            					newCompositeNode(grammarAccess.getConsumed2Access().getChildConsumed1ParserRuleCall_1_0());
+            				
             pushFollow(FollowSets000.FOLLOW_2);
             lv_child_1_0=ruleConsumed1();
 
             state._fsp--;
 
 
-            	        if (current==null) {
-            	            current = createModelElementForParent(grammarAccess.getConsumed2Rule());
-            	        }
-                   		set(
-                   			current, 
-                   			"child",
-                    		lv_child_1_0, 
-                    		"org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage.Consumed1");
-            	        afterParserOrEnumRuleCall();
-            	    
+            					if (current==null) {
+            						current = createModelElementForParent(grammarAccess.getConsumed2Rule());
+            					}
+            					set(
+            						current,
+            						"child",
+            						lv_child_1_0,
+            						"org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage.Consumed1");
+            					afterParserOrEnumRuleCall();
+            				
 
             }
 
@@ -2808,13 +2846,15 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -2823,7 +2863,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "entryRuleLoop1"
-    // InternalSimpleReconstrTestLanguage.g:1137:1: entryRuleLoop1 returns [EObject current=null] : iv_ruleLoop1= ruleLoop1 EOF ;
+    // InternalSimpleReconstrTestLanguage.g:1092:1: entryRuleLoop1 returns [EObject current=null] : iv_ruleLoop1= ruleLoop1 EOF ;
     public final EObject entryRuleLoop1() throws RecognitionException {
         EObject current = null;
 
@@ -2831,8 +2871,8 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
         try {
-            // InternalSimpleReconstrTestLanguage.g:1138:2: (iv_ruleLoop1= ruleLoop1 EOF )
-            // InternalSimpleReconstrTestLanguage.g:1139:2: iv_ruleLoop1= ruleLoop1 EOF
+            // InternalSimpleReconstrTestLanguage.g:1092:46: (iv_ruleLoop1= ruleLoop1 EOF )
+            // InternalSimpleReconstrTestLanguage.g:1093:2: iv_ruleLoop1= ruleLoop1 EOF
             {
              newCompositeNode(grammarAccess.getLoop1Rule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -2846,11 +2886,11 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -2859,7 +2899,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "ruleLoop1"
-    // InternalSimpleReconstrTestLanguage.g:1146:1: ruleLoop1 returns [EObject current=null] : ( (otherlv_0= 'kw0' )? otherlv_1= '#8' ( (lv_id_2_0= RULE_ID ) ) (otherlv_3= 'kw1' )? ( (lv_id_4_0= RULE_ID ) ) ( (otherlv_5= 'kw2' )* otherlv_6= 'kw30' )+ ) ;
+    // InternalSimpleReconstrTestLanguage.g:1099:1: ruleLoop1 returns [EObject current=null] : ( (otherlv_0= 'kw0' )? otherlv_1= '#8' ( (lv_id_2_0= RULE_ID ) ) (otherlv_3= 'kw1' )? ( (lv_id_4_0= RULE_ID ) ) ( (otherlv_5= 'kw2' )* otherlv_6= 'kw30' )+ ) ;
     public final EObject ruleLoop1() throws RecognitionException {
         EObject current = null;
 
@@ -2871,16 +2911,17 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
         Token otherlv_5=null;
         Token otherlv_6=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalSimpleReconstrTestLanguage.g:1149:28: ( ( (otherlv_0= 'kw0' )? otherlv_1= '#8' ( (lv_id_2_0= RULE_ID ) ) (otherlv_3= 'kw1' )? ( (lv_id_4_0= RULE_ID ) ) ( (otherlv_5= 'kw2' )* otherlv_6= 'kw30' )+ ) )
-            // InternalSimpleReconstrTestLanguage.g:1150:1: ( (otherlv_0= 'kw0' )? otherlv_1= '#8' ( (lv_id_2_0= RULE_ID ) ) (otherlv_3= 'kw1' )? ( (lv_id_4_0= RULE_ID ) ) ( (otherlv_5= 'kw2' )* otherlv_6= 'kw30' )+ )
+            // InternalSimpleReconstrTestLanguage.g:1105:2: ( ( (otherlv_0= 'kw0' )? otherlv_1= '#8' ( (lv_id_2_0= RULE_ID ) ) (otherlv_3= 'kw1' )? ( (lv_id_4_0= RULE_ID ) ) ( (otherlv_5= 'kw2' )* otherlv_6= 'kw30' )+ ) )
+            // InternalSimpleReconstrTestLanguage.g:1106:2: ( (otherlv_0= 'kw0' )? otherlv_1= '#8' ( (lv_id_2_0= RULE_ID ) ) (otherlv_3= 'kw1' )? ( (lv_id_4_0= RULE_ID ) ) ( (otherlv_5= 'kw2' )* otherlv_6= 'kw30' )+ )
             {
-            // InternalSimpleReconstrTestLanguage.g:1150:1: ( (otherlv_0= 'kw0' )? otherlv_1= '#8' ( (lv_id_2_0= RULE_ID ) ) (otherlv_3= 'kw1' )? ( (lv_id_4_0= RULE_ID ) ) ( (otherlv_5= 'kw2' )* otherlv_6= 'kw30' )+ )
-            // InternalSimpleReconstrTestLanguage.g:1150:2: (otherlv_0= 'kw0' )? otherlv_1= '#8' ( (lv_id_2_0= RULE_ID ) ) (otherlv_3= 'kw1' )? ( (lv_id_4_0= RULE_ID ) ) ( (otherlv_5= 'kw2' )* otherlv_6= 'kw30' )+
+            // InternalSimpleReconstrTestLanguage.g:1106:2: ( (otherlv_0= 'kw0' )? otherlv_1= '#8' ( (lv_id_2_0= RULE_ID ) ) (otherlv_3= 'kw1' )? ( (lv_id_4_0= RULE_ID ) ) ( (otherlv_5= 'kw2' )* otherlv_6= 'kw30' )+ )
+            // InternalSimpleReconstrTestLanguage.g:1107:3: (otherlv_0= 'kw0' )? otherlv_1= '#8' ( (lv_id_2_0= RULE_ID ) ) (otherlv_3= 'kw1' )? ( (lv_id_4_0= RULE_ID ) ) ( (otherlv_5= 'kw2' )* otherlv_6= 'kw30' )+
             {
-            // InternalSimpleReconstrTestLanguage.g:1150:2: (otherlv_0= 'kw0' )?
+            // InternalSimpleReconstrTestLanguage.g:1107:3: (otherlv_0= 'kw0' )?
             int alt15=2;
             int LA15_0 = input.LA(1);
 
@@ -2889,12 +2930,12 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
             }
             switch (alt15) {
                 case 1 :
-                    // InternalSimpleReconstrTestLanguage.g:1150:4: otherlv_0= 'kw0'
+                    // InternalSimpleReconstrTestLanguage.g:1108:4: otherlv_0= 'kw0'
                     {
                     otherlv_0=(Token)match(input,35,FollowSets000.FOLLOW_21); 
 
-                        	newLeafNode(otherlv_0, grammarAccess.getLoop1Access().getKw0Keyword_0());
-                        
+                    				newLeafNode(otherlv_0, grammarAccess.getLoop1Access().getKw0Keyword_0());
+                    			
 
                     }
                     break;
@@ -2903,35 +2944,35 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
             otherlv_1=(Token)match(input,36,FollowSets000.FOLLOW_10); 
 
-                	newLeafNode(otherlv_1, grammarAccess.getLoop1Access().getNumberSignDigitEightKeyword_1());
-                
-            // InternalSimpleReconstrTestLanguage.g:1158:1: ( (lv_id_2_0= RULE_ID ) )
-            // InternalSimpleReconstrTestLanguage.g:1159:1: (lv_id_2_0= RULE_ID )
+            			newLeafNode(otherlv_1, grammarAccess.getLoop1Access().getNumberSignDigitEightKeyword_1());
+            		
+            // InternalSimpleReconstrTestLanguage.g:1117:3: ( (lv_id_2_0= RULE_ID ) )
+            // InternalSimpleReconstrTestLanguage.g:1118:4: (lv_id_2_0= RULE_ID )
             {
-            // InternalSimpleReconstrTestLanguage.g:1159:1: (lv_id_2_0= RULE_ID )
-            // InternalSimpleReconstrTestLanguage.g:1160:3: lv_id_2_0= RULE_ID
+            // InternalSimpleReconstrTestLanguage.g:1118:4: (lv_id_2_0= RULE_ID )
+            // InternalSimpleReconstrTestLanguage.g:1119:5: lv_id_2_0= RULE_ID
             {
             lv_id_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_22); 
 
-            			newLeafNode(lv_id_2_0, grammarAccess.getLoop1Access().getIdIDTerminalRuleCall_2_0()); 
-            		
+            					newLeafNode(lv_id_2_0, grammarAccess.getLoop1Access().getIdIDTerminalRuleCall_2_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getLoop1Rule());
-            	        }
-                   		addWithLastConsumed(
-                   			current, 
-                   			"id",
-                    		lv_id_2_0, 
-                    		"org.eclipse.xtext.common.Terminals.ID");
-            	    
-
-            }
-
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getLoop1Rule());
+            					}
+            					addWithLastConsumed(
+            						current,
+            						"id",
+            						lv_id_2_0,
+            						"org.eclipse.xtext.common.Terminals.ID");
+            				
 
             }
 
-            // InternalSimpleReconstrTestLanguage.g:1176:2: (otherlv_3= 'kw1' )?
+
+            }
+
+            // InternalSimpleReconstrTestLanguage.g:1135:3: (otherlv_3= 'kw1' )?
             int alt16=2;
             int LA16_0 = input.LA(1);
 
@@ -2940,45 +2981,45 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
             }
             switch (alt16) {
                 case 1 :
-                    // InternalSimpleReconstrTestLanguage.g:1176:4: otherlv_3= 'kw1'
+                    // InternalSimpleReconstrTestLanguage.g:1136:4: otherlv_3= 'kw1'
                     {
                     otherlv_3=(Token)match(input,37,FollowSets000.FOLLOW_10); 
 
-                        	newLeafNode(otherlv_3, grammarAccess.getLoop1Access().getKw1Keyword_3());
-                        
+                    				newLeafNode(otherlv_3, grammarAccess.getLoop1Access().getKw1Keyword_3());
+                    			
 
                     }
                     break;
 
             }
 
-            // InternalSimpleReconstrTestLanguage.g:1180:3: ( (lv_id_4_0= RULE_ID ) )
-            // InternalSimpleReconstrTestLanguage.g:1181:1: (lv_id_4_0= RULE_ID )
+            // InternalSimpleReconstrTestLanguage.g:1141:3: ( (lv_id_4_0= RULE_ID ) )
+            // InternalSimpleReconstrTestLanguage.g:1142:4: (lv_id_4_0= RULE_ID )
             {
-            // InternalSimpleReconstrTestLanguage.g:1181:1: (lv_id_4_0= RULE_ID )
-            // InternalSimpleReconstrTestLanguage.g:1182:3: lv_id_4_0= RULE_ID
+            // InternalSimpleReconstrTestLanguage.g:1142:4: (lv_id_4_0= RULE_ID )
+            // InternalSimpleReconstrTestLanguage.g:1143:5: lv_id_4_0= RULE_ID
             {
             lv_id_4_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_23); 
 
-            			newLeafNode(lv_id_4_0, grammarAccess.getLoop1Access().getIdIDTerminalRuleCall_4_0()); 
-            		
+            					newLeafNode(lv_id_4_0, grammarAccess.getLoop1Access().getIdIDTerminalRuleCall_4_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getLoop1Rule());
-            	        }
-                   		addWithLastConsumed(
-                   			current, 
-                   			"id",
-                    		lv_id_4_0, 
-                    		"org.eclipse.xtext.common.Terminals.ID");
-            	    
-
-            }
-
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getLoop1Rule());
+            					}
+            					addWithLastConsumed(
+            						current,
+            						"id",
+            						lv_id_4_0,
+            						"org.eclipse.xtext.common.Terminals.ID");
+            				
 
             }
 
-            // InternalSimpleReconstrTestLanguage.g:1198:2: ( (otherlv_5= 'kw2' )* otherlv_6= 'kw30' )+
+
+            }
+
+            // InternalSimpleReconstrTestLanguage.g:1159:3: ( (otherlv_5= 'kw2' )* otherlv_6= 'kw30' )+
             int cnt18=0;
             loop18:
             do {
@@ -3001,9 +3042,9 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
                 switch (alt18) {
             	case 1 :
-            	    // InternalSimpleReconstrTestLanguage.g:1198:3: (otherlv_5= 'kw2' )* otherlv_6= 'kw30'
+            	    // InternalSimpleReconstrTestLanguage.g:1160:4: (otherlv_5= 'kw2' )* otherlv_6= 'kw30'
             	    {
-            	    // InternalSimpleReconstrTestLanguage.g:1198:3: (otherlv_5= 'kw2' )*
+            	    // InternalSimpleReconstrTestLanguage.g:1160:4: (otherlv_5= 'kw2' )*
             	    loop17:
             	    do {
             	        int alt17=2;
@@ -3016,12 +3057,12 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
             	        switch (alt17) {
             	    	case 1 :
-            	    	    // InternalSimpleReconstrTestLanguage.g:1198:5: otherlv_5= 'kw2'
+            	    	    // InternalSimpleReconstrTestLanguage.g:1161:5: otherlv_5= 'kw2'
             	    	    {
             	    	    otherlv_5=(Token)match(input,38,FollowSets000.FOLLOW_23); 
 
-            	    	        	newLeafNode(otherlv_5, grammarAccess.getLoop1Access().getKw2Keyword_5_0());
-            	    	        
+            	    	    					newLeafNode(otherlv_5, grammarAccess.getLoop1Access().getKw2Keyword_5_0());
+            	    	    				
 
             	    	    }
             	    	    break;
@@ -3033,8 +3074,8 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
             	    otherlv_6=(Token)match(input,39,FollowSets000.FOLLOW_24); 
 
-            	        	newLeafNode(otherlv_6, grammarAccess.getLoop1Access().getKw30Keyword_5_1());
-            	        
+            	    				newLeafNode(otherlv_6, grammarAccess.getLoop1Access().getKw30Keyword_5_1());
+            	    			
 
             	    }
             	    break;
@@ -3054,13 +3095,15 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -3069,7 +3112,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "entryRuleLoop2"
-    // InternalSimpleReconstrTestLanguage.g:1214:1: entryRuleLoop2 returns [EObject current=null] : iv_ruleLoop2= ruleLoop2 EOF ;
+    // InternalSimpleReconstrTestLanguage.g:1175:1: entryRuleLoop2 returns [EObject current=null] : iv_ruleLoop2= ruleLoop2 EOF ;
     public final EObject entryRuleLoop2() throws RecognitionException {
         EObject current = null;
 
@@ -3077,8 +3120,8 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
         try {
-            // InternalSimpleReconstrTestLanguage.g:1215:2: (iv_ruleLoop2= ruleLoop2 EOF )
-            // InternalSimpleReconstrTestLanguage.g:1216:2: iv_ruleLoop2= ruleLoop2 EOF
+            // InternalSimpleReconstrTestLanguage.g:1175:46: (iv_ruleLoop2= ruleLoop2 EOF )
+            // InternalSimpleReconstrTestLanguage.g:1176:2: iv_ruleLoop2= ruleLoop2 EOF
             {
              newCompositeNode(grammarAccess.getLoop2Rule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -3092,11 +3135,11 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -3105,7 +3148,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "ruleLoop2"
-    // InternalSimpleReconstrTestLanguage.g:1223:1: ruleLoop2 returns [EObject current=null] : (otherlv_0= '#9' ( (lv_id_1_0= RULE_ID ) ) (otherlv_2= 'kw1' | ( ( (lv_id_3_0= RULE_ID ) ) otherlv_4= 'kw2' ) ) (otherlv_5= 'kw3' | ( ( (lv_id_6_0= RULE_ID ) ) otherlv_7= 'kw4' ) )? (otherlv_8= 'kw5' | otherlv_9= 'kw6' ) ) ;
+    // InternalSimpleReconstrTestLanguage.g:1182:1: ruleLoop2 returns [EObject current=null] : (otherlv_0= '#9' ( (lv_id_1_0= RULE_ID ) ) (otherlv_2= 'kw1' | ( ( (lv_id_3_0= RULE_ID ) ) otherlv_4= 'kw2' ) ) (otherlv_5= 'kw3' | ( ( (lv_id_6_0= RULE_ID ) ) otherlv_7= 'kw4' ) )? (otherlv_8= 'kw5' | otherlv_9= 'kw6' ) ) ;
     public final EObject ruleLoop2() throws RecognitionException {
         EObject current = null;
 
@@ -3120,46 +3163,47 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
         Token otherlv_8=null;
         Token otherlv_9=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalSimpleReconstrTestLanguage.g:1226:28: ( (otherlv_0= '#9' ( (lv_id_1_0= RULE_ID ) ) (otherlv_2= 'kw1' | ( ( (lv_id_3_0= RULE_ID ) ) otherlv_4= 'kw2' ) ) (otherlv_5= 'kw3' | ( ( (lv_id_6_0= RULE_ID ) ) otherlv_7= 'kw4' ) )? (otherlv_8= 'kw5' | otherlv_9= 'kw6' ) ) )
-            // InternalSimpleReconstrTestLanguage.g:1227:1: (otherlv_0= '#9' ( (lv_id_1_0= RULE_ID ) ) (otherlv_2= 'kw1' | ( ( (lv_id_3_0= RULE_ID ) ) otherlv_4= 'kw2' ) ) (otherlv_5= 'kw3' | ( ( (lv_id_6_0= RULE_ID ) ) otherlv_7= 'kw4' ) )? (otherlv_8= 'kw5' | otherlv_9= 'kw6' ) )
+            // InternalSimpleReconstrTestLanguage.g:1188:2: ( (otherlv_0= '#9' ( (lv_id_1_0= RULE_ID ) ) (otherlv_2= 'kw1' | ( ( (lv_id_3_0= RULE_ID ) ) otherlv_4= 'kw2' ) ) (otherlv_5= 'kw3' | ( ( (lv_id_6_0= RULE_ID ) ) otherlv_7= 'kw4' ) )? (otherlv_8= 'kw5' | otherlv_9= 'kw6' ) ) )
+            // InternalSimpleReconstrTestLanguage.g:1189:2: (otherlv_0= '#9' ( (lv_id_1_0= RULE_ID ) ) (otherlv_2= 'kw1' | ( ( (lv_id_3_0= RULE_ID ) ) otherlv_4= 'kw2' ) ) (otherlv_5= 'kw3' | ( ( (lv_id_6_0= RULE_ID ) ) otherlv_7= 'kw4' ) )? (otherlv_8= 'kw5' | otherlv_9= 'kw6' ) )
             {
-            // InternalSimpleReconstrTestLanguage.g:1227:1: (otherlv_0= '#9' ( (lv_id_1_0= RULE_ID ) ) (otherlv_2= 'kw1' | ( ( (lv_id_3_0= RULE_ID ) ) otherlv_4= 'kw2' ) ) (otherlv_5= 'kw3' | ( ( (lv_id_6_0= RULE_ID ) ) otherlv_7= 'kw4' ) )? (otherlv_8= 'kw5' | otherlv_9= 'kw6' ) )
-            // InternalSimpleReconstrTestLanguage.g:1227:3: otherlv_0= '#9' ( (lv_id_1_0= RULE_ID ) ) (otherlv_2= 'kw1' | ( ( (lv_id_3_0= RULE_ID ) ) otherlv_4= 'kw2' ) ) (otherlv_5= 'kw3' | ( ( (lv_id_6_0= RULE_ID ) ) otherlv_7= 'kw4' ) )? (otherlv_8= 'kw5' | otherlv_9= 'kw6' )
+            // InternalSimpleReconstrTestLanguage.g:1189:2: (otherlv_0= '#9' ( (lv_id_1_0= RULE_ID ) ) (otherlv_2= 'kw1' | ( ( (lv_id_3_0= RULE_ID ) ) otherlv_4= 'kw2' ) ) (otherlv_5= 'kw3' | ( ( (lv_id_6_0= RULE_ID ) ) otherlv_7= 'kw4' ) )? (otherlv_8= 'kw5' | otherlv_9= 'kw6' ) )
+            // InternalSimpleReconstrTestLanguage.g:1190:3: otherlv_0= '#9' ( (lv_id_1_0= RULE_ID ) ) (otherlv_2= 'kw1' | ( ( (lv_id_3_0= RULE_ID ) ) otherlv_4= 'kw2' ) ) (otherlv_5= 'kw3' | ( ( (lv_id_6_0= RULE_ID ) ) otherlv_7= 'kw4' ) )? (otherlv_8= 'kw5' | otherlv_9= 'kw6' )
             {
             otherlv_0=(Token)match(input,40,FollowSets000.FOLLOW_10); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getLoop2Access().getNumberSignDigitNineKeyword_0());
-                
-            // InternalSimpleReconstrTestLanguage.g:1231:1: ( (lv_id_1_0= RULE_ID ) )
-            // InternalSimpleReconstrTestLanguage.g:1232:1: (lv_id_1_0= RULE_ID )
+            			newLeafNode(otherlv_0, grammarAccess.getLoop2Access().getNumberSignDigitNineKeyword_0());
+            		
+            // InternalSimpleReconstrTestLanguage.g:1194:3: ( (lv_id_1_0= RULE_ID ) )
+            // InternalSimpleReconstrTestLanguage.g:1195:4: (lv_id_1_0= RULE_ID )
             {
-            // InternalSimpleReconstrTestLanguage.g:1232:1: (lv_id_1_0= RULE_ID )
-            // InternalSimpleReconstrTestLanguage.g:1233:3: lv_id_1_0= RULE_ID
+            // InternalSimpleReconstrTestLanguage.g:1195:4: (lv_id_1_0= RULE_ID )
+            // InternalSimpleReconstrTestLanguage.g:1196:5: lv_id_1_0= RULE_ID
             {
             lv_id_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_22); 
 
-            			newLeafNode(lv_id_1_0, grammarAccess.getLoop2Access().getIdIDTerminalRuleCall_1_0()); 
-            		
+            					newLeafNode(lv_id_1_0, grammarAccess.getLoop2Access().getIdIDTerminalRuleCall_1_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getLoop2Rule());
-            	        }
-                   		addWithLastConsumed(
-                   			current, 
-                   			"id",
-                    		lv_id_1_0, 
-                    		"org.eclipse.xtext.common.Terminals.ID");
-            	    
-
-            }
-
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getLoop2Rule());
+            					}
+            					addWithLastConsumed(
+            						current,
+            						"id",
+            						lv_id_1_0,
+            						"org.eclipse.xtext.common.Terminals.ID");
+            				
 
             }
 
-            // InternalSimpleReconstrTestLanguage.g:1249:2: (otherlv_2= 'kw1' | ( ( (lv_id_3_0= RULE_ID ) ) otherlv_4= 'kw2' ) )
+
+            }
+
+            // InternalSimpleReconstrTestLanguage.g:1212:3: (otherlv_2= 'kw1' | ( ( (lv_id_3_0= RULE_ID ) ) otherlv_4= 'kw2' ) )
             int alt19=2;
             int LA19_0 = input.LA(1);
 
@@ -3177,41 +3221,41 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
             }
             switch (alt19) {
                 case 1 :
-                    // InternalSimpleReconstrTestLanguage.g:1249:4: otherlv_2= 'kw1'
+                    // InternalSimpleReconstrTestLanguage.g:1213:4: otherlv_2= 'kw1'
                     {
                     otherlv_2=(Token)match(input,37,FollowSets000.FOLLOW_25); 
 
-                        	newLeafNode(otherlv_2, grammarAccess.getLoop2Access().getKw1Keyword_2_0());
-                        
+                    				newLeafNode(otherlv_2, grammarAccess.getLoop2Access().getKw1Keyword_2_0());
+                    			
 
                     }
                     break;
                 case 2 :
-                    // InternalSimpleReconstrTestLanguage.g:1254:6: ( ( (lv_id_3_0= RULE_ID ) ) otherlv_4= 'kw2' )
+                    // InternalSimpleReconstrTestLanguage.g:1218:4: ( ( (lv_id_3_0= RULE_ID ) ) otherlv_4= 'kw2' )
                     {
-                    // InternalSimpleReconstrTestLanguage.g:1254:6: ( ( (lv_id_3_0= RULE_ID ) ) otherlv_4= 'kw2' )
-                    // InternalSimpleReconstrTestLanguage.g:1254:7: ( (lv_id_3_0= RULE_ID ) ) otherlv_4= 'kw2'
+                    // InternalSimpleReconstrTestLanguage.g:1218:4: ( ( (lv_id_3_0= RULE_ID ) ) otherlv_4= 'kw2' )
+                    // InternalSimpleReconstrTestLanguage.g:1219:5: ( (lv_id_3_0= RULE_ID ) ) otherlv_4= 'kw2'
                     {
-                    // InternalSimpleReconstrTestLanguage.g:1254:7: ( (lv_id_3_0= RULE_ID ) )
-                    // InternalSimpleReconstrTestLanguage.g:1255:1: (lv_id_3_0= RULE_ID )
+                    // InternalSimpleReconstrTestLanguage.g:1219:5: ( (lv_id_3_0= RULE_ID ) )
+                    // InternalSimpleReconstrTestLanguage.g:1220:6: (lv_id_3_0= RULE_ID )
                     {
-                    // InternalSimpleReconstrTestLanguage.g:1255:1: (lv_id_3_0= RULE_ID )
-                    // InternalSimpleReconstrTestLanguage.g:1256:3: lv_id_3_0= RULE_ID
+                    // InternalSimpleReconstrTestLanguage.g:1220:6: (lv_id_3_0= RULE_ID )
+                    // InternalSimpleReconstrTestLanguage.g:1221:7: lv_id_3_0= RULE_ID
                     {
                     lv_id_3_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_26); 
 
-                    			newLeafNode(lv_id_3_0, grammarAccess.getLoop2Access().getIdIDTerminalRuleCall_2_1_0_0()); 
-                    		
+                    							newLeafNode(lv_id_3_0, grammarAccess.getLoop2Access().getIdIDTerminalRuleCall_2_1_0_0());
+                    						
 
-                    	        if (current==null) {
-                    	            current = createModelElement(grammarAccess.getLoop2Rule());
-                    	        }
-                           		addWithLastConsumed(
-                           			current, 
-                           			"id",
-                            		lv_id_3_0, 
-                            		"org.eclipse.xtext.common.Terminals.ID");
-                    	    
+                    							if (current==null) {
+                    								current = createModelElement(grammarAccess.getLoop2Rule());
+                    							}
+                    							addWithLastConsumed(
+                    								current,
+                    								"id",
+                    								lv_id_3_0,
+                    								"org.eclipse.xtext.common.Terminals.ID");
+                    						
 
                     }
 
@@ -3220,8 +3264,8 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
                     otherlv_4=(Token)match(input,38,FollowSets000.FOLLOW_25); 
 
-                        	newLeafNode(otherlv_4, grammarAccess.getLoop2Access().getKw2Keyword_2_1_1());
-                        
+                    					newLeafNode(otherlv_4, grammarAccess.getLoop2Access().getKw2Keyword_2_1_1());
+                    				
 
                     }
 
@@ -3231,7 +3275,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
             }
 
-            // InternalSimpleReconstrTestLanguage.g:1276:3: (otherlv_5= 'kw3' | ( ( (lv_id_6_0= RULE_ID ) ) otherlv_7= 'kw4' ) )?
+            // InternalSimpleReconstrTestLanguage.g:1243:3: (otherlv_5= 'kw3' | ( ( (lv_id_6_0= RULE_ID ) ) otherlv_7= 'kw4' ) )?
             int alt20=3;
             int LA20_0 = input.LA(1);
 
@@ -3243,41 +3287,41 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
             }
             switch (alt20) {
                 case 1 :
-                    // InternalSimpleReconstrTestLanguage.g:1276:5: otherlv_5= 'kw3'
+                    // InternalSimpleReconstrTestLanguage.g:1244:4: otherlv_5= 'kw3'
                     {
                     otherlv_5=(Token)match(input,41,FollowSets000.FOLLOW_27); 
 
-                        	newLeafNode(otherlv_5, grammarAccess.getLoop2Access().getKw3Keyword_3_0());
-                        
+                    				newLeafNode(otherlv_5, grammarAccess.getLoop2Access().getKw3Keyword_3_0());
+                    			
 
                     }
                     break;
                 case 2 :
-                    // InternalSimpleReconstrTestLanguage.g:1281:6: ( ( (lv_id_6_0= RULE_ID ) ) otherlv_7= 'kw4' )
+                    // InternalSimpleReconstrTestLanguage.g:1249:4: ( ( (lv_id_6_0= RULE_ID ) ) otherlv_7= 'kw4' )
                     {
-                    // InternalSimpleReconstrTestLanguage.g:1281:6: ( ( (lv_id_6_0= RULE_ID ) ) otherlv_7= 'kw4' )
-                    // InternalSimpleReconstrTestLanguage.g:1281:7: ( (lv_id_6_0= RULE_ID ) ) otherlv_7= 'kw4'
+                    // InternalSimpleReconstrTestLanguage.g:1249:4: ( ( (lv_id_6_0= RULE_ID ) ) otherlv_7= 'kw4' )
+                    // InternalSimpleReconstrTestLanguage.g:1250:5: ( (lv_id_6_0= RULE_ID ) ) otherlv_7= 'kw4'
                     {
-                    // InternalSimpleReconstrTestLanguage.g:1281:7: ( (lv_id_6_0= RULE_ID ) )
-                    // InternalSimpleReconstrTestLanguage.g:1282:1: (lv_id_6_0= RULE_ID )
+                    // InternalSimpleReconstrTestLanguage.g:1250:5: ( (lv_id_6_0= RULE_ID ) )
+                    // InternalSimpleReconstrTestLanguage.g:1251:6: (lv_id_6_0= RULE_ID )
                     {
-                    // InternalSimpleReconstrTestLanguage.g:1282:1: (lv_id_6_0= RULE_ID )
-                    // InternalSimpleReconstrTestLanguage.g:1283:3: lv_id_6_0= RULE_ID
+                    // InternalSimpleReconstrTestLanguage.g:1251:6: (lv_id_6_0= RULE_ID )
+                    // InternalSimpleReconstrTestLanguage.g:1252:7: lv_id_6_0= RULE_ID
                     {
                     lv_id_6_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_28); 
 
-                    			newLeafNode(lv_id_6_0, grammarAccess.getLoop2Access().getIdIDTerminalRuleCall_3_1_0_0()); 
-                    		
+                    							newLeafNode(lv_id_6_0, grammarAccess.getLoop2Access().getIdIDTerminalRuleCall_3_1_0_0());
+                    						
 
-                    	        if (current==null) {
-                    	            current = createModelElement(grammarAccess.getLoop2Rule());
-                    	        }
-                           		addWithLastConsumed(
-                           			current, 
-                           			"id",
-                            		lv_id_6_0, 
-                            		"org.eclipse.xtext.common.Terminals.ID");
-                    	    
+                    							if (current==null) {
+                    								current = createModelElement(grammarAccess.getLoop2Rule());
+                    							}
+                    							addWithLastConsumed(
+                    								current,
+                    								"id",
+                    								lv_id_6_0,
+                    								"org.eclipse.xtext.common.Terminals.ID");
+                    						
 
                     }
 
@@ -3286,8 +3330,8 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
                     otherlv_7=(Token)match(input,42,FollowSets000.FOLLOW_27); 
 
-                        	newLeafNode(otherlv_7, grammarAccess.getLoop2Access().getKw4Keyword_3_1_1());
-                        
+                    					newLeafNode(otherlv_7, grammarAccess.getLoop2Access().getKw4Keyword_3_1_1());
+                    				
 
                     }
 
@@ -3297,7 +3341,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
             }
 
-            // InternalSimpleReconstrTestLanguage.g:1303:4: (otherlv_8= 'kw5' | otherlv_9= 'kw6' )
+            // InternalSimpleReconstrTestLanguage.g:1274:3: (otherlv_8= 'kw5' | otherlv_9= 'kw6' )
             int alt21=2;
             int LA21_0 = input.LA(1);
 
@@ -3315,22 +3359,22 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
             }
             switch (alt21) {
                 case 1 :
-                    // InternalSimpleReconstrTestLanguage.g:1303:6: otherlv_8= 'kw5'
+                    // InternalSimpleReconstrTestLanguage.g:1275:4: otherlv_8= 'kw5'
                     {
                     otherlv_8=(Token)match(input,43,FollowSets000.FOLLOW_2); 
 
-                        	newLeafNode(otherlv_8, grammarAccess.getLoop2Access().getKw5Keyword_4_0());
-                        
+                    				newLeafNode(otherlv_8, grammarAccess.getLoop2Access().getKw5Keyword_4_0());
+                    			
 
                     }
                     break;
                 case 2 :
-                    // InternalSimpleReconstrTestLanguage.g:1308:7: otherlv_9= 'kw6'
+                    // InternalSimpleReconstrTestLanguage.g:1280:4: otherlv_9= 'kw6'
                     {
                     otherlv_9=(Token)match(input,44,FollowSets000.FOLLOW_2); 
 
-                        	newLeafNode(otherlv_9, grammarAccess.getLoop2Access().getKw6Keyword_4_1());
-                        
+                    				newLeafNode(otherlv_9, grammarAccess.getLoop2Access().getKw6Keyword_4_1());
+                    			
 
                     }
                     break;
@@ -3343,13 +3387,15 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -3358,7 +3404,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "entryRuleLoop3"
-    // InternalSimpleReconstrTestLanguage.g:1320:1: entryRuleLoop3 returns [EObject current=null] : iv_ruleLoop3= ruleLoop3 EOF ;
+    // InternalSimpleReconstrTestLanguage.g:1289:1: entryRuleLoop3 returns [EObject current=null] : iv_ruleLoop3= ruleLoop3 EOF ;
     public final EObject entryRuleLoop3() throws RecognitionException {
         EObject current = null;
 
@@ -3366,8 +3412,8 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
         try {
-            // InternalSimpleReconstrTestLanguage.g:1321:2: (iv_ruleLoop3= ruleLoop3 EOF )
-            // InternalSimpleReconstrTestLanguage.g:1322:2: iv_ruleLoop3= ruleLoop3 EOF
+            // InternalSimpleReconstrTestLanguage.g:1289:46: (iv_ruleLoop3= ruleLoop3 EOF )
+            // InternalSimpleReconstrTestLanguage.g:1290:2: iv_ruleLoop3= ruleLoop3 EOF
             {
              newCompositeNode(grammarAccess.getLoop3Rule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -3381,11 +3427,11 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -3394,7 +3440,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "ruleLoop3"
-    // InternalSimpleReconstrTestLanguage.g:1329:1: ruleLoop3 returns [EObject current=null] : ( (otherlv_0= 'kw1' | otherlv_1= 'kw2' | otherlv_2= 'kw3' ) otherlv_3= '#10' ( (lv_id_4_0= RULE_ID ) ) (otherlv_5= 'kw4' ( (lv_id_6_0= RULE_ID ) ) otherlv_7= 'kw5' )* ) ;
+    // InternalSimpleReconstrTestLanguage.g:1296:1: ruleLoop3 returns [EObject current=null] : ( (otherlv_0= 'kw1' | otherlv_1= 'kw2' | otherlv_2= 'kw3' ) otherlv_3= '#10' ( (lv_id_4_0= RULE_ID ) ) (otherlv_5= 'kw4' ( (lv_id_6_0= RULE_ID ) ) otherlv_7= 'kw5' )* ) ;
     public final EObject ruleLoop3() throws RecognitionException {
         EObject current = null;
 
@@ -3407,16 +3453,17 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
         Token lv_id_6_0=null;
         Token otherlv_7=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalSimpleReconstrTestLanguage.g:1332:28: ( ( (otherlv_0= 'kw1' | otherlv_1= 'kw2' | otherlv_2= 'kw3' ) otherlv_3= '#10' ( (lv_id_4_0= RULE_ID ) ) (otherlv_5= 'kw4' ( (lv_id_6_0= RULE_ID ) ) otherlv_7= 'kw5' )* ) )
-            // InternalSimpleReconstrTestLanguage.g:1333:1: ( (otherlv_0= 'kw1' | otherlv_1= 'kw2' | otherlv_2= 'kw3' ) otherlv_3= '#10' ( (lv_id_4_0= RULE_ID ) ) (otherlv_5= 'kw4' ( (lv_id_6_0= RULE_ID ) ) otherlv_7= 'kw5' )* )
+            // InternalSimpleReconstrTestLanguage.g:1302:2: ( ( (otherlv_0= 'kw1' | otherlv_1= 'kw2' | otherlv_2= 'kw3' ) otherlv_3= '#10' ( (lv_id_4_0= RULE_ID ) ) (otherlv_5= 'kw4' ( (lv_id_6_0= RULE_ID ) ) otherlv_7= 'kw5' )* ) )
+            // InternalSimpleReconstrTestLanguage.g:1303:2: ( (otherlv_0= 'kw1' | otherlv_1= 'kw2' | otherlv_2= 'kw3' ) otherlv_3= '#10' ( (lv_id_4_0= RULE_ID ) ) (otherlv_5= 'kw4' ( (lv_id_6_0= RULE_ID ) ) otherlv_7= 'kw5' )* )
             {
-            // InternalSimpleReconstrTestLanguage.g:1333:1: ( (otherlv_0= 'kw1' | otherlv_1= 'kw2' | otherlv_2= 'kw3' ) otherlv_3= '#10' ( (lv_id_4_0= RULE_ID ) ) (otherlv_5= 'kw4' ( (lv_id_6_0= RULE_ID ) ) otherlv_7= 'kw5' )* )
-            // InternalSimpleReconstrTestLanguage.g:1333:2: (otherlv_0= 'kw1' | otherlv_1= 'kw2' | otherlv_2= 'kw3' ) otherlv_3= '#10' ( (lv_id_4_0= RULE_ID ) ) (otherlv_5= 'kw4' ( (lv_id_6_0= RULE_ID ) ) otherlv_7= 'kw5' )*
+            // InternalSimpleReconstrTestLanguage.g:1303:2: ( (otherlv_0= 'kw1' | otherlv_1= 'kw2' | otherlv_2= 'kw3' ) otherlv_3= '#10' ( (lv_id_4_0= RULE_ID ) ) (otherlv_5= 'kw4' ( (lv_id_6_0= RULE_ID ) ) otherlv_7= 'kw5' )* )
+            // InternalSimpleReconstrTestLanguage.g:1304:3: (otherlv_0= 'kw1' | otherlv_1= 'kw2' | otherlv_2= 'kw3' ) otherlv_3= '#10' ( (lv_id_4_0= RULE_ID ) ) (otherlv_5= 'kw4' ( (lv_id_6_0= RULE_ID ) ) otherlv_7= 'kw5' )*
             {
-            // InternalSimpleReconstrTestLanguage.g:1333:2: (otherlv_0= 'kw1' | otherlv_1= 'kw2' | otherlv_2= 'kw3' )
+            // InternalSimpleReconstrTestLanguage.g:1304:3: (otherlv_0= 'kw1' | otherlv_1= 'kw2' | otherlv_2= 'kw3' )
             int alt22=3;
             switch ( input.LA(1) ) {
             case 37:
@@ -3443,32 +3490,32 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
             switch (alt22) {
                 case 1 :
-                    // InternalSimpleReconstrTestLanguage.g:1333:4: otherlv_0= 'kw1'
+                    // InternalSimpleReconstrTestLanguage.g:1305:4: otherlv_0= 'kw1'
                     {
                     otherlv_0=(Token)match(input,37,FollowSets000.FOLLOW_29); 
 
-                        	newLeafNode(otherlv_0, grammarAccess.getLoop3Access().getKw1Keyword_0_0());
-                        
+                    				newLeafNode(otherlv_0, grammarAccess.getLoop3Access().getKw1Keyword_0_0());
+                    			
 
                     }
                     break;
                 case 2 :
-                    // InternalSimpleReconstrTestLanguage.g:1338:7: otherlv_1= 'kw2'
+                    // InternalSimpleReconstrTestLanguage.g:1310:4: otherlv_1= 'kw2'
                     {
                     otherlv_1=(Token)match(input,38,FollowSets000.FOLLOW_29); 
 
-                        	newLeafNode(otherlv_1, grammarAccess.getLoop3Access().getKw2Keyword_0_1());
-                        
+                    				newLeafNode(otherlv_1, grammarAccess.getLoop3Access().getKw2Keyword_0_1());
+                    			
 
                     }
                     break;
                 case 3 :
-                    // InternalSimpleReconstrTestLanguage.g:1343:7: otherlv_2= 'kw3'
+                    // InternalSimpleReconstrTestLanguage.g:1315:4: otherlv_2= 'kw3'
                     {
                     otherlv_2=(Token)match(input,41,FollowSets000.FOLLOW_29); 
 
-                        	newLeafNode(otherlv_2, grammarAccess.getLoop3Access().getKw3Keyword_0_2());
-                        
+                    				newLeafNode(otherlv_2, grammarAccess.getLoop3Access().getKw3Keyword_0_2());
+                    			
 
                     }
                     break;
@@ -3477,35 +3524,35 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
             otherlv_3=(Token)match(input,45,FollowSets000.FOLLOW_10); 
 
-                	newLeafNode(otherlv_3, grammarAccess.getLoop3Access().getNumberSignDigitOneDigitZeroKeyword_1());
-                
-            // InternalSimpleReconstrTestLanguage.g:1351:1: ( (lv_id_4_0= RULE_ID ) )
-            // InternalSimpleReconstrTestLanguage.g:1352:1: (lv_id_4_0= RULE_ID )
+            			newLeafNode(otherlv_3, grammarAccess.getLoop3Access().getNumberSignDigitOneDigitZeroKeyword_1());
+            		
+            // InternalSimpleReconstrTestLanguage.g:1324:3: ( (lv_id_4_0= RULE_ID ) )
+            // InternalSimpleReconstrTestLanguage.g:1325:4: (lv_id_4_0= RULE_ID )
             {
-            // InternalSimpleReconstrTestLanguage.g:1352:1: (lv_id_4_0= RULE_ID )
-            // InternalSimpleReconstrTestLanguage.g:1353:3: lv_id_4_0= RULE_ID
+            // InternalSimpleReconstrTestLanguage.g:1325:4: (lv_id_4_0= RULE_ID )
+            // InternalSimpleReconstrTestLanguage.g:1326:5: lv_id_4_0= RULE_ID
             {
             lv_id_4_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_30); 
 
-            			newLeafNode(lv_id_4_0, grammarAccess.getLoop3Access().getIdIDTerminalRuleCall_2_0()); 
-            		
+            					newLeafNode(lv_id_4_0, grammarAccess.getLoop3Access().getIdIDTerminalRuleCall_2_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getLoop3Rule());
-            	        }
-                   		addWithLastConsumed(
-                   			current, 
-                   			"id",
-                    		lv_id_4_0, 
-                    		"org.eclipse.xtext.common.Terminals.ID");
-            	    
-
-            }
-
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getLoop3Rule());
+            					}
+            					addWithLastConsumed(
+            						current,
+            						"id",
+            						lv_id_4_0,
+            						"org.eclipse.xtext.common.Terminals.ID");
+            				
 
             }
 
-            // InternalSimpleReconstrTestLanguage.g:1369:2: (otherlv_5= 'kw4' ( (lv_id_6_0= RULE_ID ) ) otherlv_7= 'kw5' )*
+
+            }
+
+            // InternalSimpleReconstrTestLanguage.g:1342:3: (otherlv_5= 'kw4' ( (lv_id_6_0= RULE_ID ) ) otherlv_7= 'kw5' )*
             loop23:
             do {
                 int alt23=2;
@@ -3518,32 +3565,32 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
                 switch (alt23) {
             	case 1 :
-            	    // InternalSimpleReconstrTestLanguage.g:1369:4: otherlv_5= 'kw4' ( (lv_id_6_0= RULE_ID ) ) otherlv_7= 'kw5'
+            	    // InternalSimpleReconstrTestLanguage.g:1343:4: otherlv_5= 'kw4' ( (lv_id_6_0= RULE_ID ) ) otherlv_7= 'kw5'
             	    {
             	    otherlv_5=(Token)match(input,42,FollowSets000.FOLLOW_10); 
 
-            	        	newLeafNode(otherlv_5, grammarAccess.getLoop3Access().getKw4Keyword_3_0());
-            	        
-            	    // InternalSimpleReconstrTestLanguage.g:1373:1: ( (lv_id_6_0= RULE_ID ) )
-            	    // InternalSimpleReconstrTestLanguage.g:1374:1: (lv_id_6_0= RULE_ID )
+            	    				newLeafNode(otherlv_5, grammarAccess.getLoop3Access().getKw4Keyword_3_0());
+            	    			
+            	    // InternalSimpleReconstrTestLanguage.g:1347:4: ( (lv_id_6_0= RULE_ID ) )
+            	    // InternalSimpleReconstrTestLanguage.g:1348:5: (lv_id_6_0= RULE_ID )
             	    {
-            	    // InternalSimpleReconstrTestLanguage.g:1374:1: (lv_id_6_0= RULE_ID )
-            	    // InternalSimpleReconstrTestLanguage.g:1375:3: lv_id_6_0= RULE_ID
+            	    // InternalSimpleReconstrTestLanguage.g:1348:5: (lv_id_6_0= RULE_ID )
+            	    // InternalSimpleReconstrTestLanguage.g:1349:6: lv_id_6_0= RULE_ID
             	    {
             	    lv_id_6_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_31); 
 
-            	    			newLeafNode(lv_id_6_0, grammarAccess.getLoop3Access().getIdIDTerminalRuleCall_3_1_0()); 
-            	    		
+            	    						newLeafNode(lv_id_6_0, grammarAccess.getLoop3Access().getIdIDTerminalRuleCall_3_1_0());
+            	    					
 
-            	    	        if (current==null) {
-            	    	            current = createModelElement(grammarAccess.getLoop3Rule());
-            	    	        }
-            	           		addWithLastConsumed(
-            	           			current, 
-            	           			"id",
-            	            		lv_id_6_0, 
-            	            		"org.eclipse.xtext.common.Terminals.ID");
-            	    	    
+            	    						if (current==null) {
+            	    							current = createModelElement(grammarAccess.getLoop3Rule());
+            	    						}
+            	    						addWithLastConsumed(
+            	    							current,
+            	    							"id",
+            	    							lv_id_6_0,
+            	    							"org.eclipse.xtext.common.Terminals.ID");
+            	    					
 
             	    }
 
@@ -3552,8 +3599,8 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
             	    otherlv_7=(Token)match(input,43,FollowSets000.FOLLOW_30); 
 
-            	        	newLeafNode(otherlv_7, grammarAccess.getLoop3Access().getKw5Keyword_3_2());
-            	        
+            	    				newLeafNode(otherlv_7, grammarAccess.getLoop3Access().getKw5Keyword_3_2());
+            	    			
 
             	    }
             	    break;
@@ -3569,13 +3616,15 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -3584,7 +3633,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "entryRuleLoop4"
-    // InternalSimpleReconstrTestLanguage.g:1403:1: entryRuleLoop4 returns [EObject current=null] : iv_ruleLoop4= ruleLoop4 EOF ;
+    // InternalSimpleReconstrTestLanguage.g:1374:1: entryRuleLoop4 returns [EObject current=null] : iv_ruleLoop4= ruleLoop4 EOF ;
     public final EObject entryRuleLoop4() throws RecognitionException {
         EObject current = null;
 
@@ -3592,8 +3641,8 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
         try {
-            // InternalSimpleReconstrTestLanguage.g:1404:2: (iv_ruleLoop4= ruleLoop4 EOF )
-            // InternalSimpleReconstrTestLanguage.g:1405:2: iv_ruleLoop4= ruleLoop4 EOF
+            // InternalSimpleReconstrTestLanguage.g:1374:46: (iv_ruleLoop4= ruleLoop4 EOF )
+            // InternalSimpleReconstrTestLanguage.g:1375:2: iv_ruleLoop4= ruleLoop4 EOF
             {
              newCompositeNode(grammarAccess.getLoop4Rule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -3607,11 +3656,11 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -3620,7 +3669,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "ruleLoop4"
-    // InternalSimpleReconstrTestLanguage.g:1412:1: ruleLoop4 returns [EObject current=null] : (otherlv_0= '#11' (otherlv_1= 'kw1' | otherlv_2= 'kw2' | (otherlv_3= 'kw3' otherlv_4= 'kw4' ) ) ( (lv_id_5_0= RULE_ID ) ) (otherlv_6= 'kw5' (otherlv_7= 'kw6' (otherlv_8= 'kw7' )? )? )+ ) ;
+    // InternalSimpleReconstrTestLanguage.g:1381:1: ruleLoop4 returns [EObject current=null] : (otherlv_0= '#11' (otherlv_1= 'kw1' | otherlv_2= 'kw2' | (otherlv_3= 'kw3' otherlv_4= 'kw4' ) ) ( (lv_id_5_0= RULE_ID ) ) (otherlv_6= 'kw5' (otherlv_7= 'kw6' (otherlv_8= 'kw7' )? )? )+ ) ;
     public final EObject ruleLoop4() throws RecognitionException {
         EObject current = null;
 
@@ -3634,20 +3683,21 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
         Token otherlv_7=null;
         Token otherlv_8=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalSimpleReconstrTestLanguage.g:1415:28: ( (otherlv_0= '#11' (otherlv_1= 'kw1' | otherlv_2= 'kw2' | (otherlv_3= 'kw3' otherlv_4= 'kw4' ) ) ( (lv_id_5_0= RULE_ID ) ) (otherlv_6= 'kw5' (otherlv_7= 'kw6' (otherlv_8= 'kw7' )? )? )+ ) )
-            // InternalSimpleReconstrTestLanguage.g:1416:1: (otherlv_0= '#11' (otherlv_1= 'kw1' | otherlv_2= 'kw2' | (otherlv_3= 'kw3' otherlv_4= 'kw4' ) ) ( (lv_id_5_0= RULE_ID ) ) (otherlv_6= 'kw5' (otherlv_7= 'kw6' (otherlv_8= 'kw7' )? )? )+ )
+            // InternalSimpleReconstrTestLanguage.g:1387:2: ( (otherlv_0= '#11' (otherlv_1= 'kw1' | otherlv_2= 'kw2' | (otherlv_3= 'kw3' otherlv_4= 'kw4' ) ) ( (lv_id_5_0= RULE_ID ) ) (otherlv_6= 'kw5' (otherlv_7= 'kw6' (otherlv_8= 'kw7' )? )? )+ ) )
+            // InternalSimpleReconstrTestLanguage.g:1388:2: (otherlv_0= '#11' (otherlv_1= 'kw1' | otherlv_2= 'kw2' | (otherlv_3= 'kw3' otherlv_4= 'kw4' ) ) ( (lv_id_5_0= RULE_ID ) ) (otherlv_6= 'kw5' (otherlv_7= 'kw6' (otherlv_8= 'kw7' )? )? )+ )
             {
-            // InternalSimpleReconstrTestLanguage.g:1416:1: (otherlv_0= '#11' (otherlv_1= 'kw1' | otherlv_2= 'kw2' | (otherlv_3= 'kw3' otherlv_4= 'kw4' ) ) ( (lv_id_5_0= RULE_ID ) ) (otherlv_6= 'kw5' (otherlv_7= 'kw6' (otherlv_8= 'kw7' )? )? )+ )
-            // InternalSimpleReconstrTestLanguage.g:1416:3: otherlv_0= '#11' (otherlv_1= 'kw1' | otherlv_2= 'kw2' | (otherlv_3= 'kw3' otherlv_4= 'kw4' ) ) ( (lv_id_5_0= RULE_ID ) ) (otherlv_6= 'kw5' (otherlv_7= 'kw6' (otherlv_8= 'kw7' )? )? )+
+            // InternalSimpleReconstrTestLanguage.g:1388:2: (otherlv_0= '#11' (otherlv_1= 'kw1' | otherlv_2= 'kw2' | (otherlv_3= 'kw3' otherlv_4= 'kw4' ) ) ( (lv_id_5_0= RULE_ID ) ) (otherlv_6= 'kw5' (otherlv_7= 'kw6' (otherlv_8= 'kw7' )? )? )+ )
+            // InternalSimpleReconstrTestLanguage.g:1389:3: otherlv_0= '#11' (otherlv_1= 'kw1' | otherlv_2= 'kw2' | (otherlv_3= 'kw3' otherlv_4= 'kw4' ) ) ( (lv_id_5_0= RULE_ID ) ) (otherlv_6= 'kw5' (otherlv_7= 'kw6' (otherlv_8= 'kw7' )? )? )+
             {
             otherlv_0=(Token)match(input,46,FollowSets000.FOLLOW_32); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getLoop4Access().getNumberSignDigitOneDigitOneKeyword_0());
-                
-            // InternalSimpleReconstrTestLanguage.g:1420:1: (otherlv_1= 'kw1' | otherlv_2= 'kw2' | (otherlv_3= 'kw3' otherlv_4= 'kw4' ) )
+            			newLeafNode(otherlv_0, grammarAccess.getLoop4Access().getNumberSignDigitOneDigitOneKeyword_0());
+            		
+            // InternalSimpleReconstrTestLanguage.g:1393:3: (otherlv_1= 'kw1' | otherlv_2= 'kw2' | (otherlv_3= 'kw3' otherlv_4= 'kw4' ) )
             int alt24=3;
             switch ( input.LA(1) ) {
             case 37:
@@ -3674,39 +3724,39 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
             switch (alt24) {
                 case 1 :
-                    // InternalSimpleReconstrTestLanguage.g:1420:3: otherlv_1= 'kw1'
+                    // InternalSimpleReconstrTestLanguage.g:1394:4: otherlv_1= 'kw1'
                     {
                     otherlv_1=(Token)match(input,37,FollowSets000.FOLLOW_10); 
 
-                        	newLeafNode(otherlv_1, grammarAccess.getLoop4Access().getKw1Keyword_1_0());
-                        
+                    				newLeafNode(otherlv_1, grammarAccess.getLoop4Access().getKw1Keyword_1_0());
+                    			
 
                     }
                     break;
                 case 2 :
-                    // InternalSimpleReconstrTestLanguage.g:1425:7: otherlv_2= 'kw2'
+                    // InternalSimpleReconstrTestLanguage.g:1399:4: otherlv_2= 'kw2'
                     {
                     otherlv_2=(Token)match(input,38,FollowSets000.FOLLOW_10); 
 
-                        	newLeafNode(otherlv_2, grammarAccess.getLoop4Access().getKw2Keyword_1_1());
-                        
+                    				newLeafNode(otherlv_2, grammarAccess.getLoop4Access().getKw2Keyword_1_1());
+                    			
 
                     }
                     break;
                 case 3 :
-                    // InternalSimpleReconstrTestLanguage.g:1430:6: (otherlv_3= 'kw3' otherlv_4= 'kw4' )
+                    // InternalSimpleReconstrTestLanguage.g:1404:4: (otherlv_3= 'kw3' otherlv_4= 'kw4' )
                     {
-                    // InternalSimpleReconstrTestLanguage.g:1430:6: (otherlv_3= 'kw3' otherlv_4= 'kw4' )
-                    // InternalSimpleReconstrTestLanguage.g:1430:8: otherlv_3= 'kw3' otherlv_4= 'kw4'
+                    // InternalSimpleReconstrTestLanguage.g:1404:4: (otherlv_3= 'kw3' otherlv_4= 'kw4' )
+                    // InternalSimpleReconstrTestLanguage.g:1405:5: otherlv_3= 'kw3' otherlv_4= 'kw4'
                     {
                     otherlv_3=(Token)match(input,41,FollowSets000.FOLLOW_28); 
 
-                        	newLeafNode(otherlv_3, grammarAccess.getLoop4Access().getKw3Keyword_1_2_0());
-                        
+                    					newLeafNode(otherlv_3, grammarAccess.getLoop4Access().getKw3Keyword_1_2_0());
+                    				
                     otherlv_4=(Token)match(input,42,FollowSets000.FOLLOW_10); 
 
-                        	newLeafNode(otherlv_4, grammarAccess.getLoop4Access().getKw4Keyword_1_2_1());
-                        
+                    					newLeafNode(otherlv_4, grammarAccess.getLoop4Access().getKw4Keyword_1_2_1());
+                    				
 
                     }
 
@@ -3716,33 +3766,33 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
             }
 
-            // InternalSimpleReconstrTestLanguage.g:1438:3: ( (lv_id_5_0= RULE_ID ) )
-            // InternalSimpleReconstrTestLanguage.g:1439:1: (lv_id_5_0= RULE_ID )
+            // InternalSimpleReconstrTestLanguage.g:1415:3: ( (lv_id_5_0= RULE_ID ) )
+            // InternalSimpleReconstrTestLanguage.g:1416:4: (lv_id_5_0= RULE_ID )
             {
-            // InternalSimpleReconstrTestLanguage.g:1439:1: (lv_id_5_0= RULE_ID )
-            // InternalSimpleReconstrTestLanguage.g:1440:3: lv_id_5_0= RULE_ID
+            // InternalSimpleReconstrTestLanguage.g:1416:4: (lv_id_5_0= RULE_ID )
+            // InternalSimpleReconstrTestLanguage.g:1417:5: lv_id_5_0= RULE_ID
             {
             lv_id_5_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_31); 
 
-            			newLeafNode(lv_id_5_0, grammarAccess.getLoop4Access().getIdIDTerminalRuleCall_2_0()); 
-            		
+            					newLeafNode(lv_id_5_0, grammarAccess.getLoop4Access().getIdIDTerminalRuleCall_2_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getLoop4Rule());
-            	        }
-                   		addWithLastConsumed(
-                   			current, 
-                   			"id",
-                    		lv_id_5_0, 
-                    		"org.eclipse.xtext.common.Terminals.ID");
-            	    
-
-            }
-
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getLoop4Rule());
+            					}
+            					addWithLastConsumed(
+            						current,
+            						"id",
+            						lv_id_5_0,
+            						"org.eclipse.xtext.common.Terminals.ID");
+            				
 
             }
 
-            // InternalSimpleReconstrTestLanguage.g:1456:2: (otherlv_6= 'kw5' (otherlv_7= 'kw6' (otherlv_8= 'kw7' )? )? )+
+
+            }
+
+            // InternalSimpleReconstrTestLanguage.g:1433:3: (otherlv_6= 'kw5' (otherlv_7= 'kw6' (otherlv_8= 'kw7' )? )? )+
             int cnt27=0;
             loop27:
             do {
@@ -3756,13 +3806,13 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
                 switch (alt27) {
             	case 1 :
-            	    // InternalSimpleReconstrTestLanguage.g:1456:4: otherlv_6= 'kw5' (otherlv_7= 'kw6' (otherlv_8= 'kw7' )? )?
+            	    // InternalSimpleReconstrTestLanguage.g:1434:4: otherlv_6= 'kw5' (otherlv_7= 'kw6' (otherlv_8= 'kw7' )? )?
             	    {
             	    otherlv_6=(Token)match(input,43,FollowSets000.FOLLOW_33); 
 
-            	        	newLeafNode(otherlv_6, grammarAccess.getLoop4Access().getKw5Keyword_3_0());
-            	        
-            	    // InternalSimpleReconstrTestLanguage.g:1460:1: (otherlv_7= 'kw6' (otherlv_8= 'kw7' )? )?
+            	    				newLeafNode(otherlv_6, grammarAccess.getLoop4Access().getKw5Keyword_3_0());
+            	    			
+            	    // InternalSimpleReconstrTestLanguage.g:1438:4: (otherlv_7= 'kw6' (otherlv_8= 'kw7' )? )?
             	    int alt26=2;
             	    int LA26_0 = input.LA(1);
 
@@ -3771,13 +3821,13 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
             	    }
             	    switch (alt26) {
             	        case 1 :
-            	            // InternalSimpleReconstrTestLanguage.g:1460:3: otherlv_7= 'kw6' (otherlv_8= 'kw7' )?
+            	            // InternalSimpleReconstrTestLanguage.g:1439:5: otherlv_7= 'kw6' (otherlv_8= 'kw7' )?
             	            {
             	            otherlv_7=(Token)match(input,44,FollowSets000.FOLLOW_34); 
 
-            	                	newLeafNode(otherlv_7, grammarAccess.getLoop4Access().getKw6Keyword_3_1_0());
-            	                
-            	            // InternalSimpleReconstrTestLanguage.g:1464:1: (otherlv_8= 'kw7' )?
+            	            					newLeafNode(otherlv_7, grammarAccess.getLoop4Access().getKw6Keyword_3_1_0());
+            	            				
+            	            // InternalSimpleReconstrTestLanguage.g:1443:5: (otherlv_8= 'kw7' )?
             	            int alt25=2;
             	            int LA25_0 = input.LA(1);
 
@@ -3786,12 +3836,12 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
             	            }
             	            switch (alt25) {
             	                case 1 :
-            	                    // InternalSimpleReconstrTestLanguage.g:1464:3: otherlv_8= 'kw7'
+            	                    // InternalSimpleReconstrTestLanguage.g:1444:6: otherlv_8= 'kw7'
             	                    {
             	                    otherlv_8=(Token)match(input,47,FollowSets000.FOLLOW_35); 
 
-            	                        	newLeafNode(otherlv_8, grammarAccess.getLoop4Access().getKw7Keyword_3_1_1());
-            	                        
+            	                    						newLeafNode(otherlv_8, grammarAccess.getLoop4Access().getKw7Keyword_3_1_1());
+            	                    					
 
             	                    }
             	                    break;
@@ -3823,13 +3873,15 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -3838,7 +3890,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "entryRuleLoopBug285452"
-    // InternalSimpleReconstrTestLanguage.g:1476:1: entryRuleLoopBug285452 returns [EObject current=null] : iv_ruleLoopBug285452= ruleLoopBug285452 EOF ;
+    // InternalSimpleReconstrTestLanguage.g:1455:1: entryRuleLoopBug285452 returns [EObject current=null] : iv_ruleLoopBug285452= ruleLoopBug285452 EOF ;
     public final EObject entryRuleLoopBug285452() throws RecognitionException {
         EObject current = null;
 
@@ -3846,8 +3898,8 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
         try {
-            // InternalSimpleReconstrTestLanguage.g:1477:2: (iv_ruleLoopBug285452= ruleLoopBug285452 EOF )
-            // InternalSimpleReconstrTestLanguage.g:1478:2: iv_ruleLoopBug285452= ruleLoopBug285452 EOF
+            // InternalSimpleReconstrTestLanguage.g:1455:54: (iv_ruleLoopBug285452= ruleLoopBug285452 EOF )
+            // InternalSimpleReconstrTestLanguage.g:1456:2: iv_ruleLoopBug285452= ruleLoopBug285452 EOF
             {
              newCompositeNode(grammarAccess.getLoopBug285452Rule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -3861,11 +3913,11 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -3874,7 +3926,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "ruleLoopBug285452"
-    // InternalSimpleReconstrTestLanguage.g:1485:1: ruleLoopBug285452 returns [EObject current=null] : (otherlv_0= '#12' ( ( (lv_interface_1_0= 'interface' ) ) | otherlv_2= 'class' ) ( (lv_name_3_0= RULE_ID ) ) ) ;
+    // InternalSimpleReconstrTestLanguage.g:1462:1: ruleLoopBug285452 returns [EObject current=null] : (otherlv_0= '#12' ( ( (lv_interface_1_0= 'interface' ) ) | otherlv_2= 'class' ) ( (lv_name_3_0= RULE_ID ) ) ) ;
     public final EObject ruleLoopBug285452() throws RecognitionException {
         EObject current = null;
 
@@ -3883,20 +3935,21 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
         Token otherlv_2=null;
         Token lv_name_3_0=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalSimpleReconstrTestLanguage.g:1488:28: ( (otherlv_0= '#12' ( ( (lv_interface_1_0= 'interface' ) ) | otherlv_2= 'class' ) ( (lv_name_3_0= RULE_ID ) ) ) )
-            // InternalSimpleReconstrTestLanguage.g:1489:1: (otherlv_0= '#12' ( ( (lv_interface_1_0= 'interface' ) ) | otherlv_2= 'class' ) ( (lv_name_3_0= RULE_ID ) ) )
+            // InternalSimpleReconstrTestLanguage.g:1468:2: ( (otherlv_0= '#12' ( ( (lv_interface_1_0= 'interface' ) ) | otherlv_2= 'class' ) ( (lv_name_3_0= RULE_ID ) ) ) )
+            // InternalSimpleReconstrTestLanguage.g:1469:2: (otherlv_0= '#12' ( ( (lv_interface_1_0= 'interface' ) ) | otherlv_2= 'class' ) ( (lv_name_3_0= RULE_ID ) ) )
             {
-            // InternalSimpleReconstrTestLanguage.g:1489:1: (otherlv_0= '#12' ( ( (lv_interface_1_0= 'interface' ) ) | otherlv_2= 'class' ) ( (lv_name_3_0= RULE_ID ) ) )
-            // InternalSimpleReconstrTestLanguage.g:1489:3: otherlv_0= '#12' ( ( (lv_interface_1_0= 'interface' ) ) | otherlv_2= 'class' ) ( (lv_name_3_0= RULE_ID ) )
+            // InternalSimpleReconstrTestLanguage.g:1469:2: (otherlv_0= '#12' ( ( (lv_interface_1_0= 'interface' ) ) | otherlv_2= 'class' ) ( (lv_name_3_0= RULE_ID ) ) )
+            // InternalSimpleReconstrTestLanguage.g:1470:3: otherlv_0= '#12' ( ( (lv_interface_1_0= 'interface' ) ) | otherlv_2= 'class' ) ( (lv_name_3_0= RULE_ID ) )
             {
             otherlv_0=(Token)match(input,48,FollowSets000.FOLLOW_36); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getLoopBug285452Access().getNumberSignDigitOneDigitTwoKeyword_0());
-                
-            // InternalSimpleReconstrTestLanguage.g:1493:1: ( ( (lv_interface_1_0= 'interface' ) ) | otherlv_2= 'class' )
+            			newLeafNode(otherlv_0, grammarAccess.getLoopBug285452Access().getNumberSignDigitOneDigitTwoKeyword_0());
+            		
+            // InternalSimpleReconstrTestLanguage.g:1474:3: ( ( (lv_interface_1_0= 'interface' ) ) | otherlv_2= 'class' )
             int alt28=2;
             int LA28_0 = input.LA(1);
 
@@ -3914,24 +3967,24 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
             }
             switch (alt28) {
                 case 1 :
-                    // InternalSimpleReconstrTestLanguage.g:1493:2: ( (lv_interface_1_0= 'interface' ) )
+                    // InternalSimpleReconstrTestLanguage.g:1475:4: ( (lv_interface_1_0= 'interface' ) )
                     {
-                    // InternalSimpleReconstrTestLanguage.g:1493:2: ( (lv_interface_1_0= 'interface' ) )
-                    // InternalSimpleReconstrTestLanguage.g:1494:1: (lv_interface_1_0= 'interface' )
+                    // InternalSimpleReconstrTestLanguage.g:1475:4: ( (lv_interface_1_0= 'interface' ) )
+                    // InternalSimpleReconstrTestLanguage.g:1476:5: (lv_interface_1_0= 'interface' )
                     {
-                    // InternalSimpleReconstrTestLanguage.g:1494:1: (lv_interface_1_0= 'interface' )
-                    // InternalSimpleReconstrTestLanguage.g:1495:3: lv_interface_1_0= 'interface'
+                    // InternalSimpleReconstrTestLanguage.g:1476:5: (lv_interface_1_0= 'interface' )
+                    // InternalSimpleReconstrTestLanguage.g:1477:6: lv_interface_1_0= 'interface'
                     {
                     lv_interface_1_0=(Token)match(input,49,FollowSets000.FOLLOW_10); 
 
-                            newLeafNode(lv_interface_1_0, grammarAccess.getLoopBug285452Access().getInterfaceInterfaceKeyword_1_0_0());
-                        
+                    						newLeafNode(lv_interface_1_0, grammarAccess.getLoopBug285452Access().getInterfaceInterfaceKeyword_1_0_0());
+                    					
 
-                    	        if (current==null) {
-                    	            current = createModelElement(grammarAccess.getLoopBug285452Rule());
-                    	        }
-                           		setWithLastConsumed(current, "interface", true, "interface");
-                    	    
+                    						if (current==null) {
+                    							current = createModelElement(grammarAccess.getLoopBug285452Rule());
+                    						}
+                    						setWithLastConsumed(current, "interface", true, "interface");
+                    					
 
                     }
 
@@ -3942,41 +3995,38 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
                     }
                     break;
                 case 2 :
-                    // InternalSimpleReconstrTestLanguage.g:1509:7: otherlv_2= 'class'
+                    // InternalSimpleReconstrTestLanguage.g:1490:4: otherlv_2= 'class'
                     {
                     otherlv_2=(Token)match(input,50,FollowSets000.FOLLOW_10); 
 
-                        	newLeafNode(otherlv_2, grammarAccess.getLoopBug285452Access().getClassKeyword_1_1());
-                        
+                    				newLeafNode(otherlv_2, grammarAccess.getLoopBug285452Access().getClassKeyword_1_1());
+                    			
 
                     }
                     break;
 
             }
 
-            // InternalSimpleReconstrTestLanguage.g:1513:2: ( (lv_name_3_0= RULE_ID ) )
-            // InternalSimpleReconstrTestLanguage.g:1514:1: (lv_name_3_0= RULE_ID )
+            // InternalSimpleReconstrTestLanguage.g:1495:3: ( (lv_name_3_0= RULE_ID ) )
+            // InternalSimpleReconstrTestLanguage.g:1496:4: (lv_name_3_0= RULE_ID )
             {
-            // InternalSimpleReconstrTestLanguage.g:1514:1: (lv_name_3_0= RULE_ID )
-            // InternalSimpleReconstrTestLanguage.g:1515:3: lv_name_3_0= RULE_ID
+            // InternalSimpleReconstrTestLanguage.g:1496:4: (lv_name_3_0= RULE_ID )
+            // InternalSimpleReconstrTestLanguage.g:1497:5: lv_name_3_0= RULE_ID
             {
             lv_name_3_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
-            			newLeafNode(lv_name_3_0, grammarAccess.getLoopBug285452Access().getNameIDTerminalRuleCall_2_0()); 
-            		
+            					newLeafNode(lv_name_3_0, grammarAccess.getLoopBug285452Access().getNameIDTerminalRuleCall_2_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getLoopBug285452Rule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"name",
-                    		lv_name_3_0, 
-                    		"org.eclipse.xtext.common.Terminals.ID");
-            	    
-
-            }
-
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getLoopBug285452Rule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"name",
+            						lv_name_3_0,
+            						"org.eclipse.xtext.common.Terminals.ID");
+            				
 
             }
 
@@ -3986,13 +4036,18 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
             }
 
-             leaveRule(); 
+
+            }
+
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -4001,7 +4056,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "entryRuleDuplicateBug284491"
-    // InternalSimpleReconstrTestLanguage.g:1539:1: entryRuleDuplicateBug284491 returns [EObject current=null] : iv_ruleDuplicateBug284491= ruleDuplicateBug284491 EOF ;
+    // InternalSimpleReconstrTestLanguage.g:1517:1: entryRuleDuplicateBug284491 returns [EObject current=null] : iv_ruleDuplicateBug284491= ruleDuplicateBug284491 EOF ;
     public final EObject entryRuleDuplicateBug284491() throws RecognitionException {
         EObject current = null;
 
@@ -4009,8 +4064,8 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
         try {
-            // InternalSimpleReconstrTestLanguage.g:1540:2: (iv_ruleDuplicateBug284491= ruleDuplicateBug284491 EOF )
-            // InternalSimpleReconstrTestLanguage.g:1541:2: iv_ruleDuplicateBug284491= ruleDuplicateBug284491 EOF
+            // InternalSimpleReconstrTestLanguage.g:1517:59: (iv_ruleDuplicateBug284491= ruleDuplicateBug284491 EOF )
+            // InternalSimpleReconstrTestLanguage.g:1518:2: iv_ruleDuplicateBug284491= ruleDuplicateBug284491 EOF
             {
              newCompositeNode(grammarAccess.getDuplicateBug284491Rule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -4024,11 +4079,11 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -4037,7 +4092,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "ruleDuplicateBug284491"
-    // InternalSimpleReconstrTestLanguage.g:1548:1: ruleDuplicateBug284491 returns [EObject current=null] : (otherlv_0= '#13' ( ( (lv_static_1_0= 'static' ) ) | ( (lv_final_2_0= 'final' ) ) | ( (lv_transient_3_0= 'transient' ) ) )* ) ;
+    // InternalSimpleReconstrTestLanguage.g:1524:1: ruleDuplicateBug284491 returns [EObject current=null] : (otherlv_0= '#13' ( ( (lv_static_1_0= 'static' ) ) | ( (lv_final_2_0= 'final' ) ) | ( (lv_transient_3_0= 'transient' ) ) )* ) ;
     public final EObject ruleDuplicateBug284491() throws RecognitionException {
         EObject current = null;
 
@@ -4046,20 +4101,21 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
         Token lv_final_2_0=null;
         Token lv_transient_3_0=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalSimpleReconstrTestLanguage.g:1551:28: ( (otherlv_0= '#13' ( ( (lv_static_1_0= 'static' ) ) | ( (lv_final_2_0= 'final' ) ) | ( (lv_transient_3_0= 'transient' ) ) )* ) )
-            // InternalSimpleReconstrTestLanguage.g:1552:1: (otherlv_0= '#13' ( ( (lv_static_1_0= 'static' ) ) | ( (lv_final_2_0= 'final' ) ) | ( (lv_transient_3_0= 'transient' ) ) )* )
+            // InternalSimpleReconstrTestLanguage.g:1530:2: ( (otherlv_0= '#13' ( ( (lv_static_1_0= 'static' ) ) | ( (lv_final_2_0= 'final' ) ) | ( (lv_transient_3_0= 'transient' ) ) )* ) )
+            // InternalSimpleReconstrTestLanguage.g:1531:2: (otherlv_0= '#13' ( ( (lv_static_1_0= 'static' ) ) | ( (lv_final_2_0= 'final' ) ) | ( (lv_transient_3_0= 'transient' ) ) )* )
             {
-            // InternalSimpleReconstrTestLanguage.g:1552:1: (otherlv_0= '#13' ( ( (lv_static_1_0= 'static' ) ) | ( (lv_final_2_0= 'final' ) ) | ( (lv_transient_3_0= 'transient' ) ) )* )
-            // InternalSimpleReconstrTestLanguage.g:1552:3: otherlv_0= '#13' ( ( (lv_static_1_0= 'static' ) ) | ( (lv_final_2_0= 'final' ) ) | ( (lv_transient_3_0= 'transient' ) ) )*
+            // InternalSimpleReconstrTestLanguage.g:1531:2: (otherlv_0= '#13' ( ( (lv_static_1_0= 'static' ) ) | ( (lv_final_2_0= 'final' ) ) | ( (lv_transient_3_0= 'transient' ) ) )* )
+            // InternalSimpleReconstrTestLanguage.g:1532:3: otherlv_0= '#13' ( ( (lv_static_1_0= 'static' ) ) | ( (lv_final_2_0= 'final' ) ) | ( (lv_transient_3_0= 'transient' ) ) )*
             {
             otherlv_0=(Token)match(input,51,FollowSets000.FOLLOW_37); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getDuplicateBug284491Access().getNumberSignDigitOneDigitThreeKeyword_0());
-                
-            // InternalSimpleReconstrTestLanguage.g:1556:1: ( ( (lv_static_1_0= 'static' ) ) | ( (lv_final_2_0= 'final' ) ) | ( (lv_transient_3_0= 'transient' ) ) )*
+            			newLeafNode(otherlv_0, grammarAccess.getDuplicateBug284491Access().getNumberSignDigitOneDigitThreeKeyword_0());
+            		
+            // InternalSimpleReconstrTestLanguage.g:1536:3: ( ( (lv_static_1_0= 'static' ) ) | ( (lv_final_2_0= 'final' ) ) | ( (lv_transient_3_0= 'transient' ) ) )*
             loop29:
             do {
                 int alt29=4;
@@ -4084,24 +4140,24 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
                 switch (alt29) {
             	case 1 :
-            	    // InternalSimpleReconstrTestLanguage.g:1556:2: ( (lv_static_1_0= 'static' ) )
+            	    // InternalSimpleReconstrTestLanguage.g:1537:4: ( (lv_static_1_0= 'static' ) )
             	    {
-            	    // InternalSimpleReconstrTestLanguage.g:1556:2: ( (lv_static_1_0= 'static' ) )
-            	    // InternalSimpleReconstrTestLanguage.g:1557:1: (lv_static_1_0= 'static' )
+            	    // InternalSimpleReconstrTestLanguage.g:1537:4: ( (lv_static_1_0= 'static' ) )
+            	    // InternalSimpleReconstrTestLanguage.g:1538:5: (lv_static_1_0= 'static' )
             	    {
-            	    // InternalSimpleReconstrTestLanguage.g:1557:1: (lv_static_1_0= 'static' )
-            	    // InternalSimpleReconstrTestLanguage.g:1558:3: lv_static_1_0= 'static'
+            	    // InternalSimpleReconstrTestLanguage.g:1538:5: (lv_static_1_0= 'static' )
+            	    // InternalSimpleReconstrTestLanguage.g:1539:6: lv_static_1_0= 'static'
             	    {
             	    lv_static_1_0=(Token)match(input,52,FollowSets000.FOLLOW_37); 
 
-            	            newLeafNode(lv_static_1_0, grammarAccess.getDuplicateBug284491Access().getStaticStaticKeyword_1_0_0());
-            	        
+            	    						newLeafNode(lv_static_1_0, grammarAccess.getDuplicateBug284491Access().getStaticStaticKeyword_1_0_0());
+            	    					
 
-            	    	        if (current==null) {
-            	    	            current = createModelElement(grammarAccess.getDuplicateBug284491Rule());
-            	    	        }
-            	           		setWithLastConsumed(current, "static", true, "static");
-            	    	    
+            	    						if (current==null) {
+            	    							current = createModelElement(grammarAccess.getDuplicateBug284491Rule());
+            	    						}
+            	    						setWithLastConsumed(current, "static", true, "static");
+            	    					
 
             	    }
 
@@ -4112,24 +4168,24 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
             	    }
             	    break;
             	case 2 :
-            	    // InternalSimpleReconstrTestLanguage.g:1572:6: ( (lv_final_2_0= 'final' ) )
+            	    // InternalSimpleReconstrTestLanguage.g:1552:4: ( (lv_final_2_0= 'final' ) )
             	    {
-            	    // InternalSimpleReconstrTestLanguage.g:1572:6: ( (lv_final_2_0= 'final' ) )
-            	    // InternalSimpleReconstrTestLanguage.g:1573:1: (lv_final_2_0= 'final' )
+            	    // InternalSimpleReconstrTestLanguage.g:1552:4: ( (lv_final_2_0= 'final' ) )
+            	    // InternalSimpleReconstrTestLanguage.g:1553:5: (lv_final_2_0= 'final' )
             	    {
-            	    // InternalSimpleReconstrTestLanguage.g:1573:1: (lv_final_2_0= 'final' )
-            	    // InternalSimpleReconstrTestLanguage.g:1574:3: lv_final_2_0= 'final'
+            	    // InternalSimpleReconstrTestLanguage.g:1553:5: (lv_final_2_0= 'final' )
+            	    // InternalSimpleReconstrTestLanguage.g:1554:6: lv_final_2_0= 'final'
             	    {
             	    lv_final_2_0=(Token)match(input,53,FollowSets000.FOLLOW_37); 
 
-            	            newLeafNode(lv_final_2_0, grammarAccess.getDuplicateBug284491Access().getFinalFinalKeyword_1_1_0());
-            	        
+            	    						newLeafNode(lv_final_2_0, grammarAccess.getDuplicateBug284491Access().getFinalFinalKeyword_1_1_0());
+            	    					
 
-            	    	        if (current==null) {
-            	    	            current = createModelElement(grammarAccess.getDuplicateBug284491Rule());
-            	    	        }
-            	           		setWithLastConsumed(current, "final", true, "final");
-            	    	    
+            	    						if (current==null) {
+            	    							current = createModelElement(grammarAccess.getDuplicateBug284491Rule());
+            	    						}
+            	    						setWithLastConsumed(current, "final", true, "final");
+            	    					
 
             	    }
 
@@ -4140,24 +4196,24 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
             	    }
             	    break;
             	case 3 :
-            	    // InternalSimpleReconstrTestLanguage.g:1588:6: ( (lv_transient_3_0= 'transient' ) )
+            	    // InternalSimpleReconstrTestLanguage.g:1567:4: ( (lv_transient_3_0= 'transient' ) )
             	    {
-            	    // InternalSimpleReconstrTestLanguage.g:1588:6: ( (lv_transient_3_0= 'transient' ) )
-            	    // InternalSimpleReconstrTestLanguage.g:1589:1: (lv_transient_3_0= 'transient' )
+            	    // InternalSimpleReconstrTestLanguage.g:1567:4: ( (lv_transient_3_0= 'transient' ) )
+            	    // InternalSimpleReconstrTestLanguage.g:1568:5: (lv_transient_3_0= 'transient' )
             	    {
-            	    // InternalSimpleReconstrTestLanguage.g:1589:1: (lv_transient_3_0= 'transient' )
-            	    // InternalSimpleReconstrTestLanguage.g:1590:3: lv_transient_3_0= 'transient'
+            	    // InternalSimpleReconstrTestLanguage.g:1568:5: (lv_transient_3_0= 'transient' )
+            	    // InternalSimpleReconstrTestLanguage.g:1569:6: lv_transient_3_0= 'transient'
             	    {
             	    lv_transient_3_0=(Token)match(input,54,FollowSets000.FOLLOW_37); 
 
-            	            newLeafNode(lv_transient_3_0, grammarAccess.getDuplicateBug284491Access().getTransientTransientKeyword_1_2_0());
-            	        
+            	    						newLeafNode(lv_transient_3_0, grammarAccess.getDuplicateBug284491Access().getTransientTransientKeyword_1_2_0());
+            	    					
 
-            	    	        if (current==null) {
-            	    	            current = createModelElement(grammarAccess.getDuplicateBug284491Rule());
-            	    	        }
-            	           		setWithLastConsumed(current, "transient", true, "transient");
-            	    	    
+            	    						if (current==null) {
+            	    							current = createModelElement(grammarAccess.getDuplicateBug284491Rule());
+            	    						}
+            	    						setWithLastConsumed(current, "transient", true, "transient");
+            	    					
 
             	    }
 
@@ -4179,13 +4235,15 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -4194,7 +4252,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "entryRuleEmptyObjectBug284850"
-    // InternalSimpleReconstrTestLanguage.g:1611:1: entryRuleEmptyObjectBug284850 returns [EObject current=null] : iv_ruleEmptyObjectBug284850= ruleEmptyObjectBug284850 EOF ;
+    // InternalSimpleReconstrTestLanguage.g:1586:1: entryRuleEmptyObjectBug284850 returns [EObject current=null] : iv_ruleEmptyObjectBug284850= ruleEmptyObjectBug284850 EOF ;
     public final EObject entryRuleEmptyObjectBug284850() throws RecognitionException {
         EObject current = null;
 
@@ -4202,8 +4260,8 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
         try {
-            // InternalSimpleReconstrTestLanguage.g:1612:2: (iv_ruleEmptyObjectBug284850= ruleEmptyObjectBug284850 EOF )
-            // InternalSimpleReconstrTestLanguage.g:1613:2: iv_ruleEmptyObjectBug284850= ruleEmptyObjectBug284850 EOF
+            // InternalSimpleReconstrTestLanguage.g:1586:61: (iv_ruleEmptyObjectBug284850= ruleEmptyObjectBug284850 EOF )
+            // InternalSimpleReconstrTestLanguage.g:1587:2: iv_ruleEmptyObjectBug284850= ruleEmptyObjectBug284850 EOF
             {
              newCompositeNode(grammarAccess.getEmptyObjectBug284850Rule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -4217,11 +4275,11 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -4230,7 +4288,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "ruleEmptyObjectBug284850"
-    // InternalSimpleReconstrTestLanguage.g:1620:1: ruleEmptyObjectBug284850 returns [EObject current=null] : (otherlv_0= '#14' ( (lv_items_1_0= ruleEmptyObjectItems ) ) ) ;
+    // InternalSimpleReconstrTestLanguage.g:1593:1: ruleEmptyObjectBug284850 returns [EObject current=null] : (otherlv_0= '#14' ( (lv_items_1_0= ruleEmptyObjectItems ) ) ) ;
     public final EObject ruleEmptyObjectBug284850() throws RecognitionException {
         EObject current = null;
 
@@ -4238,44 +4296,45 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
         EObject lv_items_1_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalSimpleReconstrTestLanguage.g:1623:28: ( (otherlv_0= '#14' ( (lv_items_1_0= ruleEmptyObjectItems ) ) ) )
-            // InternalSimpleReconstrTestLanguage.g:1624:1: (otherlv_0= '#14' ( (lv_items_1_0= ruleEmptyObjectItems ) ) )
+            // InternalSimpleReconstrTestLanguage.g:1599:2: ( (otherlv_0= '#14' ( (lv_items_1_0= ruleEmptyObjectItems ) ) ) )
+            // InternalSimpleReconstrTestLanguage.g:1600:2: (otherlv_0= '#14' ( (lv_items_1_0= ruleEmptyObjectItems ) ) )
             {
-            // InternalSimpleReconstrTestLanguage.g:1624:1: (otherlv_0= '#14' ( (lv_items_1_0= ruleEmptyObjectItems ) ) )
-            // InternalSimpleReconstrTestLanguage.g:1624:3: otherlv_0= '#14' ( (lv_items_1_0= ruleEmptyObjectItems ) )
+            // InternalSimpleReconstrTestLanguage.g:1600:2: (otherlv_0= '#14' ( (lv_items_1_0= ruleEmptyObjectItems ) ) )
+            // InternalSimpleReconstrTestLanguage.g:1601:3: otherlv_0= '#14' ( (lv_items_1_0= ruleEmptyObjectItems ) )
             {
             otherlv_0=(Token)match(input,55,FollowSets000.FOLLOW_38); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getEmptyObjectBug284850Access().getNumberSignDigitOneDigitFourKeyword_0());
-                
-            // InternalSimpleReconstrTestLanguage.g:1628:1: ( (lv_items_1_0= ruleEmptyObjectItems ) )
-            // InternalSimpleReconstrTestLanguage.g:1629:1: (lv_items_1_0= ruleEmptyObjectItems )
+            			newLeafNode(otherlv_0, grammarAccess.getEmptyObjectBug284850Access().getNumberSignDigitOneDigitFourKeyword_0());
+            		
+            // InternalSimpleReconstrTestLanguage.g:1605:3: ( (lv_items_1_0= ruleEmptyObjectItems ) )
+            // InternalSimpleReconstrTestLanguage.g:1606:4: (lv_items_1_0= ruleEmptyObjectItems )
             {
-            // InternalSimpleReconstrTestLanguage.g:1629:1: (lv_items_1_0= ruleEmptyObjectItems )
-            // InternalSimpleReconstrTestLanguage.g:1630:3: lv_items_1_0= ruleEmptyObjectItems
+            // InternalSimpleReconstrTestLanguage.g:1606:4: (lv_items_1_0= ruleEmptyObjectItems )
+            // InternalSimpleReconstrTestLanguage.g:1607:5: lv_items_1_0= ruleEmptyObjectItems
             {
-             
-            	        newCompositeNode(grammarAccess.getEmptyObjectBug284850Access().getItemsEmptyObjectItemsParserRuleCall_1_0()); 
-            	    
+
+            					newCompositeNode(grammarAccess.getEmptyObjectBug284850Access().getItemsEmptyObjectItemsParserRuleCall_1_0());
+            				
             pushFollow(FollowSets000.FOLLOW_2);
             lv_items_1_0=ruleEmptyObjectItems();
 
             state._fsp--;
 
 
-            	        if (current==null) {
-            	            current = createModelElementForParent(grammarAccess.getEmptyObjectBug284850Rule());
-            	        }
-                   		set(
-                   			current, 
-                   			"items",
-                    		lv_items_1_0, 
-                    		"org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage.EmptyObjectItems");
-            	        afterParserOrEnumRuleCall();
-            	    
+            					if (current==null) {
+            						current = createModelElementForParent(grammarAccess.getEmptyObjectBug284850Rule());
+            					}
+            					set(
+            						current,
+            						"items",
+            						lv_items_1_0,
+            						"org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage.EmptyObjectItems");
+            					afterParserOrEnumRuleCall();
+            				
 
             }
 
@@ -4288,13 +4347,15 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -4303,7 +4364,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "entryRuleEmptyObjectItems"
-    // InternalSimpleReconstrTestLanguage.g:1654:1: entryRuleEmptyObjectItems returns [EObject current=null] : iv_ruleEmptyObjectItems= ruleEmptyObjectItems EOF ;
+    // InternalSimpleReconstrTestLanguage.g:1628:1: entryRuleEmptyObjectItems returns [EObject current=null] : iv_ruleEmptyObjectItems= ruleEmptyObjectItems EOF ;
     public final EObject entryRuleEmptyObjectItems() throws RecognitionException {
         EObject current = null;
 
@@ -4311,8 +4372,8 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
         try {
-            // InternalSimpleReconstrTestLanguage.g:1655:2: (iv_ruleEmptyObjectItems= ruleEmptyObjectItems EOF )
-            // InternalSimpleReconstrTestLanguage.g:1656:2: iv_ruleEmptyObjectItems= ruleEmptyObjectItems EOF
+            // InternalSimpleReconstrTestLanguage.g:1628:57: (iv_ruleEmptyObjectItems= ruleEmptyObjectItems EOF )
+            // InternalSimpleReconstrTestLanguage.g:1629:2: iv_ruleEmptyObjectItems= ruleEmptyObjectItems EOF
             {
              newCompositeNode(grammarAccess.getEmptyObjectItemsRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -4326,11 +4387,11 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -4339,20 +4400,21 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "ruleEmptyObjectItems"
-    // InternalSimpleReconstrTestLanguage.g:1663:1: ruleEmptyObjectItems returns [EObject current=null] : ( (lv_list_0_0= ruleEmptyObjectItem ) )* ;
+    // InternalSimpleReconstrTestLanguage.g:1635:1: ruleEmptyObjectItems returns [EObject current=null] : ( (lv_list_0_0= ruleEmptyObjectItem ) )* ;
     public final EObject ruleEmptyObjectItems() throws RecognitionException {
         EObject current = null;
 
         EObject lv_list_0_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalSimpleReconstrTestLanguage.g:1666:28: ( ( (lv_list_0_0= ruleEmptyObjectItem ) )* )
-            // InternalSimpleReconstrTestLanguage.g:1667:1: ( (lv_list_0_0= ruleEmptyObjectItem ) )*
+            // InternalSimpleReconstrTestLanguage.g:1641:2: ( ( (lv_list_0_0= ruleEmptyObjectItem ) )* )
+            // InternalSimpleReconstrTestLanguage.g:1642:2: ( (lv_list_0_0= ruleEmptyObjectItem ) )*
             {
-            // InternalSimpleReconstrTestLanguage.g:1667:1: ( (lv_list_0_0= ruleEmptyObjectItem ) )*
+            // InternalSimpleReconstrTestLanguage.g:1642:2: ( (lv_list_0_0= ruleEmptyObjectItem ) )*
             loop30:
             do {
                 int alt30=2;
@@ -4365,30 +4427,30 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
                 switch (alt30) {
             	case 1 :
-            	    // InternalSimpleReconstrTestLanguage.g:1668:1: (lv_list_0_0= ruleEmptyObjectItem )
+            	    // InternalSimpleReconstrTestLanguage.g:1643:3: (lv_list_0_0= ruleEmptyObjectItem )
             	    {
-            	    // InternalSimpleReconstrTestLanguage.g:1668:1: (lv_list_0_0= ruleEmptyObjectItem )
-            	    // InternalSimpleReconstrTestLanguage.g:1669:3: lv_list_0_0= ruleEmptyObjectItem
+            	    // InternalSimpleReconstrTestLanguage.g:1643:3: (lv_list_0_0= ruleEmptyObjectItem )
+            	    // InternalSimpleReconstrTestLanguage.g:1644:4: lv_list_0_0= ruleEmptyObjectItem
             	    {
-            	     
-            	    	        newCompositeNode(grammarAccess.getEmptyObjectItemsAccess().getListEmptyObjectItemParserRuleCall_0()); 
-            	    	    
+
+            	    				newCompositeNode(grammarAccess.getEmptyObjectItemsAccess().getListEmptyObjectItemParserRuleCall_0());
+            	    			
             	    pushFollow(FollowSets000.FOLLOW_39);
             	    lv_list_0_0=ruleEmptyObjectItem();
 
             	    state._fsp--;
 
 
-            	    	        if (current==null) {
-            	    	            current = createModelElementForParent(grammarAccess.getEmptyObjectItemsRule());
-            	    	        }
-            	           		add(
-            	           			current, 
-            	           			"list",
-            	            		lv_list_0_0, 
-            	            		"org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage.EmptyObjectItem");
-            	    	        afterParserOrEnumRuleCall();
-            	    	    
+            	    				if (current==null) {
+            	    					current = createModelElementForParent(grammarAccess.getEmptyObjectItemsRule());
+            	    				}
+            	    				add(
+            	    					current,
+            	    					"list",
+            	    					lv_list_0_0,
+            	    					"org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage.EmptyObjectItem");
+            	    				afterParserOrEnumRuleCall();
+            	    			
 
             	    }
 
@@ -4404,13 +4466,15 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -4419,7 +4483,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "entryRuleEmptyObjectItem"
-    // InternalSimpleReconstrTestLanguage.g:1693:1: entryRuleEmptyObjectItem returns [EObject current=null] : iv_ruleEmptyObjectItem= ruleEmptyObjectItem EOF ;
+    // InternalSimpleReconstrTestLanguage.g:1664:1: entryRuleEmptyObjectItem returns [EObject current=null] : iv_ruleEmptyObjectItem= ruleEmptyObjectItem EOF ;
     public final EObject entryRuleEmptyObjectItem() throws RecognitionException {
         EObject current = null;
 
@@ -4427,8 +4491,8 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
         try {
-            // InternalSimpleReconstrTestLanguage.g:1694:2: (iv_ruleEmptyObjectItem= ruleEmptyObjectItem EOF )
-            // InternalSimpleReconstrTestLanguage.g:1695:2: iv_ruleEmptyObjectItem= ruleEmptyObjectItem EOF
+            // InternalSimpleReconstrTestLanguage.g:1664:56: (iv_ruleEmptyObjectItem= ruleEmptyObjectItem EOF )
+            // InternalSimpleReconstrTestLanguage.g:1665:2: iv_ruleEmptyObjectItem= ruleEmptyObjectItem EOF
             {
              newCompositeNode(grammarAccess.getEmptyObjectItemRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -4442,11 +4506,11 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -4455,49 +4519,47 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "ruleEmptyObjectItem"
-    // InternalSimpleReconstrTestLanguage.g:1702:1: ruleEmptyObjectItem returns [EObject current=null] : (otherlv_0= 'item' ( (lv_name_1_0= RULE_ID ) ) ) ;
+    // InternalSimpleReconstrTestLanguage.g:1671:1: ruleEmptyObjectItem returns [EObject current=null] : (otherlv_0= 'item' ( (lv_name_1_0= RULE_ID ) ) ) ;
     public final EObject ruleEmptyObjectItem() throws RecognitionException {
         EObject current = null;
 
         Token otherlv_0=null;
         Token lv_name_1_0=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalSimpleReconstrTestLanguage.g:1705:28: ( (otherlv_0= 'item' ( (lv_name_1_0= RULE_ID ) ) ) )
-            // InternalSimpleReconstrTestLanguage.g:1706:1: (otherlv_0= 'item' ( (lv_name_1_0= RULE_ID ) ) )
+            // InternalSimpleReconstrTestLanguage.g:1677:2: ( (otherlv_0= 'item' ( (lv_name_1_0= RULE_ID ) ) ) )
+            // InternalSimpleReconstrTestLanguage.g:1678:2: (otherlv_0= 'item' ( (lv_name_1_0= RULE_ID ) ) )
             {
-            // InternalSimpleReconstrTestLanguage.g:1706:1: (otherlv_0= 'item' ( (lv_name_1_0= RULE_ID ) ) )
-            // InternalSimpleReconstrTestLanguage.g:1706:3: otherlv_0= 'item' ( (lv_name_1_0= RULE_ID ) )
+            // InternalSimpleReconstrTestLanguage.g:1678:2: (otherlv_0= 'item' ( (lv_name_1_0= RULE_ID ) ) )
+            // InternalSimpleReconstrTestLanguage.g:1679:3: otherlv_0= 'item' ( (lv_name_1_0= RULE_ID ) )
             {
             otherlv_0=(Token)match(input,56,FollowSets000.FOLLOW_10); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getEmptyObjectItemAccess().getItemKeyword_0());
-                
-            // InternalSimpleReconstrTestLanguage.g:1710:1: ( (lv_name_1_0= RULE_ID ) )
-            // InternalSimpleReconstrTestLanguage.g:1711:1: (lv_name_1_0= RULE_ID )
+            			newLeafNode(otherlv_0, grammarAccess.getEmptyObjectItemAccess().getItemKeyword_0());
+            		
+            // InternalSimpleReconstrTestLanguage.g:1683:3: ( (lv_name_1_0= RULE_ID ) )
+            // InternalSimpleReconstrTestLanguage.g:1684:4: (lv_name_1_0= RULE_ID )
             {
-            // InternalSimpleReconstrTestLanguage.g:1711:1: (lv_name_1_0= RULE_ID )
-            // InternalSimpleReconstrTestLanguage.g:1712:3: lv_name_1_0= RULE_ID
+            // InternalSimpleReconstrTestLanguage.g:1684:4: (lv_name_1_0= RULE_ID )
+            // InternalSimpleReconstrTestLanguage.g:1685:5: lv_name_1_0= RULE_ID
             {
             lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
-            			newLeafNode(lv_name_1_0, grammarAccess.getEmptyObjectItemAccess().getNameIDTerminalRuleCall_1_0()); 
-            		
+            					newLeafNode(lv_name_1_0, grammarAccess.getEmptyObjectItemAccess().getNameIDTerminalRuleCall_1_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getEmptyObjectItemRule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"name",
-                    		lv_name_1_0, 
-                    		"org.eclipse.xtext.common.Terminals.ID");
-            	    
-
-            }
-
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getEmptyObjectItemRule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"name",
+            						lv_name_1_0,
+            						"org.eclipse.xtext.common.Terminals.ID");
+            				
 
             }
 
@@ -4507,13 +4569,18 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
             }
 
-             leaveRule(); 
+
+            }
+
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -4522,7 +4589,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "entryRuleMultiInheritanceBug280439"
-    // InternalSimpleReconstrTestLanguage.g:1736:1: entryRuleMultiInheritanceBug280439 returns [EObject current=null] : iv_ruleMultiInheritanceBug280439= ruleMultiInheritanceBug280439 EOF ;
+    // InternalSimpleReconstrTestLanguage.g:1705:1: entryRuleMultiInheritanceBug280439 returns [EObject current=null] : iv_ruleMultiInheritanceBug280439= ruleMultiInheritanceBug280439 EOF ;
     public final EObject entryRuleMultiInheritanceBug280439() throws RecognitionException {
         EObject current = null;
 
@@ -4530,8 +4597,8 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
         try {
-            // InternalSimpleReconstrTestLanguage.g:1737:2: (iv_ruleMultiInheritanceBug280439= ruleMultiInheritanceBug280439 EOF )
-            // InternalSimpleReconstrTestLanguage.g:1738:2: iv_ruleMultiInheritanceBug280439= ruleMultiInheritanceBug280439 EOF
+            // InternalSimpleReconstrTestLanguage.g:1705:66: (iv_ruleMultiInheritanceBug280439= ruleMultiInheritanceBug280439 EOF )
+            // InternalSimpleReconstrTestLanguage.g:1706:2: iv_ruleMultiInheritanceBug280439= ruleMultiInheritanceBug280439 EOF
             {
              newCompositeNode(grammarAccess.getMultiInheritanceBug280439Rule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -4545,11 +4612,11 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -4558,7 +4625,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "ruleMultiInheritanceBug280439"
-    // InternalSimpleReconstrTestLanguage.g:1745:1: ruleMultiInheritanceBug280439 returns [EObject current=null] : (otherlv_0= '#15' ( (lv_val_1_0= ruleConcreteMulti ) ) ) ;
+    // InternalSimpleReconstrTestLanguage.g:1712:1: ruleMultiInheritanceBug280439 returns [EObject current=null] : (otherlv_0= '#15' ( (lv_val_1_0= ruleConcreteMulti ) ) ) ;
     public final EObject ruleMultiInheritanceBug280439() throws RecognitionException {
         EObject current = null;
 
@@ -4566,44 +4633,45 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
         EObject lv_val_1_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalSimpleReconstrTestLanguage.g:1748:28: ( (otherlv_0= '#15' ( (lv_val_1_0= ruleConcreteMulti ) ) ) )
-            // InternalSimpleReconstrTestLanguage.g:1749:1: (otherlv_0= '#15' ( (lv_val_1_0= ruleConcreteMulti ) ) )
+            // InternalSimpleReconstrTestLanguage.g:1718:2: ( (otherlv_0= '#15' ( (lv_val_1_0= ruleConcreteMulti ) ) ) )
+            // InternalSimpleReconstrTestLanguage.g:1719:2: (otherlv_0= '#15' ( (lv_val_1_0= ruleConcreteMulti ) ) )
             {
-            // InternalSimpleReconstrTestLanguage.g:1749:1: (otherlv_0= '#15' ( (lv_val_1_0= ruleConcreteMulti ) ) )
-            // InternalSimpleReconstrTestLanguage.g:1749:3: otherlv_0= '#15' ( (lv_val_1_0= ruleConcreteMulti ) )
+            // InternalSimpleReconstrTestLanguage.g:1719:2: (otherlv_0= '#15' ( (lv_val_1_0= ruleConcreteMulti ) ) )
+            // InternalSimpleReconstrTestLanguage.g:1720:3: otherlv_0= '#15' ( (lv_val_1_0= ruleConcreteMulti ) )
             {
             otherlv_0=(Token)match(input,57,FollowSets000.FOLLOW_10); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getMultiInheritanceBug280439Access().getNumberSignDigitOneDigitFiveKeyword_0());
-                
-            // InternalSimpleReconstrTestLanguage.g:1753:1: ( (lv_val_1_0= ruleConcreteMulti ) )
-            // InternalSimpleReconstrTestLanguage.g:1754:1: (lv_val_1_0= ruleConcreteMulti )
+            			newLeafNode(otherlv_0, grammarAccess.getMultiInheritanceBug280439Access().getNumberSignDigitOneDigitFiveKeyword_0());
+            		
+            // InternalSimpleReconstrTestLanguage.g:1724:3: ( (lv_val_1_0= ruleConcreteMulti ) )
+            // InternalSimpleReconstrTestLanguage.g:1725:4: (lv_val_1_0= ruleConcreteMulti )
             {
-            // InternalSimpleReconstrTestLanguage.g:1754:1: (lv_val_1_0= ruleConcreteMulti )
-            // InternalSimpleReconstrTestLanguage.g:1755:3: lv_val_1_0= ruleConcreteMulti
+            // InternalSimpleReconstrTestLanguage.g:1725:4: (lv_val_1_0= ruleConcreteMulti )
+            // InternalSimpleReconstrTestLanguage.g:1726:5: lv_val_1_0= ruleConcreteMulti
             {
-             
-            	        newCompositeNode(grammarAccess.getMultiInheritanceBug280439Access().getValConcreteMultiParserRuleCall_1_0()); 
-            	    
+
+            					newCompositeNode(grammarAccess.getMultiInheritanceBug280439Access().getValConcreteMultiParserRuleCall_1_0());
+            				
             pushFollow(FollowSets000.FOLLOW_2);
             lv_val_1_0=ruleConcreteMulti();
 
             state._fsp--;
 
 
-            	        if (current==null) {
-            	            current = createModelElementForParent(grammarAccess.getMultiInheritanceBug280439Rule());
-            	        }
-                   		set(
-                   			current, 
-                   			"val",
-                    		lv_val_1_0, 
-                    		"org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage.ConcreteMulti");
-            	        afterParserOrEnumRuleCall();
-            	    
+            					if (current==null) {
+            						current = createModelElementForParent(grammarAccess.getMultiInheritanceBug280439Rule());
+            					}
+            					set(
+            						current,
+            						"val",
+            						lv_val_1_0,
+            						"org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage.ConcreteMulti");
+            					afterParserOrEnumRuleCall();
+            				
 
             }
 
@@ -4616,13 +4684,15 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -4631,7 +4701,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "entryRuleConcreteMulti"
-    // InternalSimpleReconstrTestLanguage.g:1783:1: entryRuleConcreteMulti returns [EObject current=null] : iv_ruleConcreteMulti= ruleConcreteMulti EOF ;
+    // InternalSimpleReconstrTestLanguage.g:1747:1: entryRuleConcreteMulti returns [EObject current=null] : iv_ruleConcreteMulti= ruleConcreteMulti EOF ;
     public final EObject entryRuleConcreteMulti() throws RecognitionException {
         EObject current = null;
 
@@ -4639,8 +4709,8 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
         try {
-            // InternalSimpleReconstrTestLanguage.g:1784:2: (iv_ruleConcreteMulti= ruleConcreteMulti EOF )
-            // InternalSimpleReconstrTestLanguage.g:1785:2: iv_ruleConcreteMulti= ruleConcreteMulti EOF
+            // InternalSimpleReconstrTestLanguage.g:1747:54: (iv_ruleConcreteMulti= ruleConcreteMulti EOF )
+            // InternalSimpleReconstrTestLanguage.g:1748:2: iv_ruleConcreteMulti= ruleConcreteMulti EOF
             {
              newCompositeNode(grammarAccess.getConcreteMultiRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -4654,11 +4724,11 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -4667,71 +4737,69 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "ruleConcreteMulti"
-    // InternalSimpleReconstrTestLanguage.g:1792:1: ruleConcreteMulti returns [EObject current=null] : ( ( (lv_m1_0_0= RULE_ID ) ) ( (lv_m2_1_0= RULE_ID ) ) ) ;
+    // InternalSimpleReconstrTestLanguage.g:1754:1: ruleConcreteMulti returns [EObject current=null] : ( ( (lv_m1_0_0= RULE_ID ) ) ( (lv_m2_1_0= RULE_ID ) ) ) ;
     public final EObject ruleConcreteMulti() throws RecognitionException {
         EObject current = null;
 
         Token lv_m1_0_0=null;
         Token lv_m2_1_0=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalSimpleReconstrTestLanguage.g:1795:28: ( ( ( (lv_m1_0_0= RULE_ID ) ) ( (lv_m2_1_0= RULE_ID ) ) ) )
-            // InternalSimpleReconstrTestLanguage.g:1796:1: ( ( (lv_m1_0_0= RULE_ID ) ) ( (lv_m2_1_0= RULE_ID ) ) )
+            // InternalSimpleReconstrTestLanguage.g:1760:2: ( ( ( (lv_m1_0_0= RULE_ID ) ) ( (lv_m2_1_0= RULE_ID ) ) ) )
+            // InternalSimpleReconstrTestLanguage.g:1761:2: ( ( (lv_m1_0_0= RULE_ID ) ) ( (lv_m2_1_0= RULE_ID ) ) )
             {
-            // InternalSimpleReconstrTestLanguage.g:1796:1: ( ( (lv_m1_0_0= RULE_ID ) ) ( (lv_m2_1_0= RULE_ID ) ) )
-            // InternalSimpleReconstrTestLanguage.g:1796:2: ( (lv_m1_0_0= RULE_ID ) ) ( (lv_m2_1_0= RULE_ID ) )
+            // InternalSimpleReconstrTestLanguage.g:1761:2: ( ( (lv_m1_0_0= RULE_ID ) ) ( (lv_m2_1_0= RULE_ID ) ) )
+            // InternalSimpleReconstrTestLanguage.g:1762:3: ( (lv_m1_0_0= RULE_ID ) ) ( (lv_m2_1_0= RULE_ID ) )
             {
-            // InternalSimpleReconstrTestLanguage.g:1796:2: ( (lv_m1_0_0= RULE_ID ) )
-            // InternalSimpleReconstrTestLanguage.g:1797:1: (lv_m1_0_0= RULE_ID )
+            // InternalSimpleReconstrTestLanguage.g:1762:3: ( (lv_m1_0_0= RULE_ID ) )
+            // InternalSimpleReconstrTestLanguage.g:1763:4: (lv_m1_0_0= RULE_ID )
             {
-            // InternalSimpleReconstrTestLanguage.g:1797:1: (lv_m1_0_0= RULE_ID )
-            // InternalSimpleReconstrTestLanguage.g:1798:3: lv_m1_0_0= RULE_ID
+            // InternalSimpleReconstrTestLanguage.g:1763:4: (lv_m1_0_0= RULE_ID )
+            // InternalSimpleReconstrTestLanguage.g:1764:5: lv_m1_0_0= RULE_ID
             {
             lv_m1_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_10); 
 
-            			newLeafNode(lv_m1_0_0, grammarAccess.getConcreteMultiAccess().getM1IDTerminalRuleCall_0_0()); 
-            		
+            					newLeafNode(lv_m1_0_0, grammarAccess.getConcreteMultiAccess().getM1IDTerminalRuleCall_0_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getConcreteMultiRule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"m1",
-                    		lv_m1_0_0, 
-                    		"org.eclipse.xtext.common.Terminals.ID");
-            	    
-
-            }
-
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getConcreteMultiRule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"m1",
+            						lv_m1_0_0,
+            						"org.eclipse.xtext.common.Terminals.ID");
+            				
 
             }
 
-            // InternalSimpleReconstrTestLanguage.g:1814:2: ( (lv_m2_1_0= RULE_ID ) )
-            // InternalSimpleReconstrTestLanguage.g:1815:1: (lv_m2_1_0= RULE_ID )
+
+            }
+
+            // InternalSimpleReconstrTestLanguage.g:1780:3: ( (lv_m2_1_0= RULE_ID ) )
+            // InternalSimpleReconstrTestLanguage.g:1781:4: (lv_m2_1_0= RULE_ID )
             {
-            // InternalSimpleReconstrTestLanguage.g:1815:1: (lv_m2_1_0= RULE_ID )
-            // InternalSimpleReconstrTestLanguage.g:1816:3: lv_m2_1_0= RULE_ID
+            // InternalSimpleReconstrTestLanguage.g:1781:4: (lv_m2_1_0= RULE_ID )
+            // InternalSimpleReconstrTestLanguage.g:1782:5: lv_m2_1_0= RULE_ID
             {
             lv_m2_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
-            			newLeafNode(lv_m2_1_0, grammarAccess.getConcreteMultiAccess().getM2IDTerminalRuleCall_1_0()); 
-            		
+            					newLeafNode(lv_m2_1_0, grammarAccess.getConcreteMultiAccess().getM2IDTerminalRuleCall_1_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getConcreteMultiRule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"m2",
-                    		lv_m2_1_0, 
-                    		"org.eclipse.xtext.common.Terminals.ID");
-            	    
-
-            }
-
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getConcreteMultiRule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"m2",
+            						lv_m2_1_0,
+            						"org.eclipse.xtext.common.Terminals.ID");
+            				
 
             }
 
@@ -4741,13 +4809,18 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
             }
 
-             leaveRule(); 
+
+            }
+
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -4756,7 +4829,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "entryRuleEObjectRef"
-    // InternalSimpleReconstrTestLanguage.g:1840:1: entryRuleEObjectRef returns [EObject current=null] : iv_ruleEObjectRef= ruleEObjectRef EOF ;
+    // InternalSimpleReconstrTestLanguage.g:1802:1: entryRuleEObjectRef returns [EObject current=null] : iv_ruleEObjectRef= ruleEObjectRef EOF ;
     public final EObject entryRuleEObjectRef() throws RecognitionException {
         EObject current = null;
 
@@ -4764,8 +4837,8 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
         try {
-            // InternalSimpleReconstrTestLanguage.g:1841:2: (iv_ruleEObjectRef= ruleEObjectRef EOF )
-            // InternalSimpleReconstrTestLanguage.g:1842:2: iv_ruleEObjectRef= ruleEObjectRef EOF
+            // InternalSimpleReconstrTestLanguage.g:1802:51: (iv_ruleEObjectRef= ruleEObjectRef EOF )
+            // InternalSimpleReconstrTestLanguage.g:1803:2: iv_ruleEObjectRef= ruleEObjectRef EOF
             {
              newCompositeNode(grammarAccess.getEObjectRefRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -4779,11 +4852,11 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -4792,7 +4865,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "ruleEObjectRef"
-    // InternalSimpleReconstrTestLanguage.g:1849:1: ruleEObjectRef returns [EObject current=null] : (otherlv_0= '#16' ( (lv_obj_1_0= ruleEObjectElement ) ) otherlv_2= 'refs' ( (otherlv_3= RULE_ID ) ) ) ;
+    // InternalSimpleReconstrTestLanguage.g:1809:1: ruleEObjectRef returns [EObject current=null] : (otherlv_0= '#16' ( (lv_obj_1_0= ruleEObjectElement ) ) otherlv_2= 'refs' ( (otherlv_3= RULE_ID ) ) ) ;
     public final EObject ruleEObjectRef() throws RecognitionException {
         EObject current = null;
 
@@ -4802,44 +4875,45 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
         EObject lv_obj_1_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalSimpleReconstrTestLanguage.g:1852:28: ( (otherlv_0= '#16' ( (lv_obj_1_0= ruleEObjectElement ) ) otherlv_2= 'refs' ( (otherlv_3= RULE_ID ) ) ) )
-            // InternalSimpleReconstrTestLanguage.g:1853:1: (otherlv_0= '#16' ( (lv_obj_1_0= ruleEObjectElement ) ) otherlv_2= 'refs' ( (otherlv_3= RULE_ID ) ) )
+            // InternalSimpleReconstrTestLanguage.g:1815:2: ( (otherlv_0= '#16' ( (lv_obj_1_0= ruleEObjectElement ) ) otherlv_2= 'refs' ( (otherlv_3= RULE_ID ) ) ) )
+            // InternalSimpleReconstrTestLanguage.g:1816:2: (otherlv_0= '#16' ( (lv_obj_1_0= ruleEObjectElement ) ) otherlv_2= 'refs' ( (otherlv_3= RULE_ID ) ) )
             {
-            // InternalSimpleReconstrTestLanguage.g:1853:1: (otherlv_0= '#16' ( (lv_obj_1_0= ruleEObjectElement ) ) otherlv_2= 'refs' ( (otherlv_3= RULE_ID ) ) )
-            // InternalSimpleReconstrTestLanguage.g:1853:3: otherlv_0= '#16' ( (lv_obj_1_0= ruleEObjectElement ) ) otherlv_2= 'refs' ( (otherlv_3= RULE_ID ) )
+            // InternalSimpleReconstrTestLanguage.g:1816:2: (otherlv_0= '#16' ( (lv_obj_1_0= ruleEObjectElement ) ) otherlv_2= 'refs' ( (otherlv_3= RULE_ID ) ) )
+            // InternalSimpleReconstrTestLanguage.g:1817:3: otherlv_0= '#16' ( (lv_obj_1_0= ruleEObjectElement ) ) otherlv_2= 'refs' ( (otherlv_3= RULE_ID ) )
             {
             otherlv_0=(Token)match(input,58,FollowSets000.FOLLOW_10); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getEObjectRefAccess().getNumberSignDigitOneDigitSixKeyword_0());
-                
-            // InternalSimpleReconstrTestLanguage.g:1857:1: ( (lv_obj_1_0= ruleEObjectElement ) )
-            // InternalSimpleReconstrTestLanguage.g:1858:1: (lv_obj_1_0= ruleEObjectElement )
+            			newLeafNode(otherlv_0, grammarAccess.getEObjectRefAccess().getNumberSignDigitOneDigitSixKeyword_0());
+            		
+            // InternalSimpleReconstrTestLanguage.g:1821:3: ( (lv_obj_1_0= ruleEObjectElement ) )
+            // InternalSimpleReconstrTestLanguage.g:1822:4: (lv_obj_1_0= ruleEObjectElement )
             {
-            // InternalSimpleReconstrTestLanguage.g:1858:1: (lv_obj_1_0= ruleEObjectElement )
-            // InternalSimpleReconstrTestLanguage.g:1859:3: lv_obj_1_0= ruleEObjectElement
+            // InternalSimpleReconstrTestLanguage.g:1822:4: (lv_obj_1_0= ruleEObjectElement )
+            // InternalSimpleReconstrTestLanguage.g:1823:5: lv_obj_1_0= ruleEObjectElement
             {
-             
-            	        newCompositeNode(grammarAccess.getEObjectRefAccess().getObjEObjectElementParserRuleCall_1_0()); 
-            	    
+
+            					newCompositeNode(grammarAccess.getEObjectRefAccess().getObjEObjectElementParserRuleCall_1_0());
+            				
             pushFollow(FollowSets000.FOLLOW_40);
             lv_obj_1_0=ruleEObjectElement();
 
             state._fsp--;
 
 
-            	        if (current==null) {
-            	            current = createModelElementForParent(grammarAccess.getEObjectRefRule());
-            	        }
-                   		set(
-                   			current, 
-                   			"obj",
-                    		lv_obj_1_0, 
-                    		"org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage.EObjectElement");
-            	        afterParserOrEnumRuleCall();
-            	    
+            					if (current==null) {
+            						current = createModelElementForParent(grammarAccess.getEObjectRefRule());
+            					}
+            					set(
+            						current,
+            						"obj",
+            						lv_obj_1_0,
+            						"org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage.EObjectElement");
+            					afterParserOrEnumRuleCall();
+            				
 
             }
 
@@ -4848,23 +4922,23 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
             otherlv_2=(Token)match(input,59,FollowSets000.FOLLOW_10); 
 
-                	newLeafNode(otherlv_2, grammarAccess.getEObjectRefAccess().getRefsKeyword_2());
-                
-            // InternalSimpleReconstrTestLanguage.g:1879:1: ( (otherlv_3= RULE_ID ) )
-            // InternalSimpleReconstrTestLanguage.g:1880:1: (otherlv_3= RULE_ID )
+            			newLeafNode(otherlv_2, grammarAccess.getEObjectRefAccess().getRefsKeyword_2());
+            		
+            // InternalSimpleReconstrTestLanguage.g:1844:3: ( (otherlv_3= RULE_ID ) )
+            // InternalSimpleReconstrTestLanguage.g:1845:4: (otherlv_3= RULE_ID )
             {
-            // InternalSimpleReconstrTestLanguage.g:1880:1: (otherlv_3= RULE_ID )
-            // InternalSimpleReconstrTestLanguage.g:1881:3: otherlv_3= RULE_ID
+            // InternalSimpleReconstrTestLanguage.g:1845:4: (otherlv_3= RULE_ID )
+            // InternalSimpleReconstrTestLanguage.g:1846:5: otherlv_3= RULE_ID
             {
 
-            			if (current==null) {
-            	            current = createModelElement(grammarAccess.getEObjectRefRule());
-            	        }
-                    
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getEObjectRefRule());
+            					}
+            				
             otherlv_3=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
-            		newLeafNode(otherlv_3, grammarAccess.getEObjectRefAccess().getRefEObjectCrossReference_3_0()); 
-            	
+            					newLeafNode(otherlv_3, grammarAccess.getEObjectRefAccess().getRefEObjectCrossReference_3_0());
+            				
 
             }
 
@@ -4877,13 +4951,15 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -4892,7 +4968,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "entryRuleEObjectElement"
-    // InternalSimpleReconstrTestLanguage.g:1900:1: entryRuleEObjectElement returns [EObject current=null] : iv_ruleEObjectElement= ruleEObjectElement EOF ;
+    // InternalSimpleReconstrTestLanguage.g:1861:1: entryRuleEObjectElement returns [EObject current=null] : iv_ruleEObjectElement= ruleEObjectElement EOF ;
     public final EObject entryRuleEObjectElement() throws RecognitionException {
         EObject current = null;
 
@@ -4900,8 +4976,8 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
         try {
-            // InternalSimpleReconstrTestLanguage.g:1901:2: (iv_ruleEObjectElement= ruleEObjectElement EOF )
-            // InternalSimpleReconstrTestLanguage.g:1902:2: iv_ruleEObjectElement= ruleEObjectElement EOF
+            // InternalSimpleReconstrTestLanguage.g:1861:55: (iv_ruleEObjectElement= ruleEObjectElement EOF )
+            // InternalSimpleReconstrTestLanguage.g:1862:2: iv_ruleEObjectElement= ruleEObjectElement EOF
             {
              newCompositeNode(grammarAccess.getEObjectElementRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -4915,11 +4991,11 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -4928,54 +5004,57 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "ruleEObjectElement"
-    // InternalSimpleReconstrTestLanguage.g:1909:1: ruleEObjectElement returns [EObject current=null] : ( (lv_name_0_0= RULE_ID ) ) ;
+    // InternalSimpleReconstrTestLanguage.g:1868:1: ruleEObjectElement returns [EObject current=null] : ( (lv_name_0_0= RULE_ID ) ) ;
     public final EObject ruleEObjectElement() throws RecognitionException {
         EObject current = null;
 
         Token lv_name_0_0=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalSimpleReconstrTestLanguage.g:1912:28: ( ( (lv_name_0_0= RULE_ID ) ) )
-            // InternalSimpleReconstrTestLanguage.g:1913:1: ( (lv_name_0_0= RULE_ID ) )
+            // InternalSimpleReconstrTestLanguage.g:1874:2: ( ( (lv_name_0_0= RULE_ID ) ) )
+            // InternalSimpleReconstrTestLanguage.g:1875:2: ( (lv_name_0_0= RULE_ID ) )
             {
-            // InternalSimpleReconstrTestLanguage.g:1913:1: ( (lv_name_0_0= RULE_ID ) )
-            // InternalSimpleReconstrTestLanguage.g:1914:1: (lv_name_0_0= RULE_ID )
+            // InternalSimpleReconstrTestLanguage.g:1875:2: ( (lv_name_0_0= RULE_ID ) )
+            // InternalSimpleReconstrTestLanguage.g:1876:3: (lv_name_0_0= RULE_ID )
             {
-            // InternalSimpleReconstrTestLanguage.g:1914:1: (lv_name_0_0= RULE_ID )
-            // InternalSimpleReconstrTestLanguage.g:1915:3: lv_name_0_0= RULE_ID
+            // InternalSimpleReconstrTestLanguage.g:1876:3: (lv_name_0_0= RULE_ID )
+            // InternalSimpleReconstrTestLanguage.g:1877:4: lv_name_0_0= RULE_ID
             {
             lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
-            			newLeafNode(lv_name_0_0, grammarAccess.getEObjectElementAccess().getNameIDTerminalRuleCall_0()); 
-            		
+            				newLeafNode(lv_name_0_0, grammarAccess.getEObjectElementAccess().getNameIDTerminalRuleCall_0());
+            			
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getEObjectElementRule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"name",
-                    		lv_name_0_0, 
-                    		"org.eclipse.xtext.common.Terminals.ID");
-            	    
-
-            }
-
+            				if (current==null) {
+            					current = createModelElement(grammarAccess.getEObjectElementRule());
+            				}
+            				setWithLastConsumed(
+            					current,
+            					"name",
+            					lv_name_0_0,
+            					"org.eclipse.xtext.common.Terminals.ID");
+            			
 
             }
 
 
             }
 
-             leaveRule(); 
+
+            }
+
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -4984,7 +5063,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "entryRuleTypeBug305577_1"
-    // InternalSimpleReconstrTestLanguage.g:1939:1: entryRuleTypeBug305577_1 returns [EObject current=null] : iv_ruleTypeBug305577_1= ruleTypeBug305577_1 EOF ;
+    // InternalSimpleReconstrTestLanguage.g:1896:1: entryRuleTypeBug305577_1 returns [EObject current=null] : iv_ruleTypeBug305577_1= ruleTypeBug305577_1 EOF ;
     public final EObject entryRuleTypeBug305577_1() throws RecognitionException {
         EObject current = null;
 
@@ -4992,8 +5071,8 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
         try {
-            // InternalSimpleReconstrTestLanguage.g:1940:2: (iv_ruleTypeBug305577_1= ruleTypeBug305577_1 EOF )
-            // InternalSimpleReconstrTestLanguage.g:1941:2: iv_ruleTypeBug305577_1= ruleTypeBug305577_1 EOF
+            // InternalSimpleReconstrTestLanguage.g:1896:56: (iv_ruleTypeBug305577_1= ruleTypeBug305577_1 EOF )
+            // InternalSimpleReconstrTestLanguage.g:1897:2: iv_ruleTypeBug305577_1= ruleTypeBug305577_1 EOF
             {
              newCompositeNode(grammarAccess.getTypeBug305577_1Rule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -5007,11 +5086,11 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -5020,7 +5099,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "ruleTypeBug305577_1"
-    // InternalSimpleReconstrTestLanguage.g:1948:1: ruleTypeBug305577_1 returns [EObject current=null] : (otherlv_0= '#17' (this_TypeBug1A_1= ruleTypeBug1A | this_TypeBug1B_2= ruleTypeBug1B ) ) ;
+    // InternalSimpleReconstrTestLanguage.g:1903:1: ruleTypeBug305577_1 returns [EObject current=null] : (otherlv_0= '#17' (this_TypeBug1A_1= ruleTypeBug1A | this_TypeBug1B_2= ruleTypeBug1B ) ) ;
     public final EObject ruleTypeBug305577_1() throws RecognitionException {
         EObject current = null;
 
@@ -5030,20 +5109,21 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
         EObject this_TypeBug1B_2 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalSimpleReconstrTestLanguage.g:1951:28: ( (otherlv_0= '#17' (this_TypeBug1A_1= ruleTypeBug1A | this_TypeBug1B_2= ruleTypeBug1B ) ) )
-            // InternalSimpleReconstrTestLanguage.g:1952:1: (otherlv_0= '#17' (this_TypeBug1A_1= ruleTypeBug1A | this_TypeBug1B_2= ruleTypeBug1B ) )
+            // InternalSimpleReconstrTestLanguage.g:1909:2: ( (otherlv_0= '#17' (this_TypeBug1A_1= ruleTypeBug1A | this_TypeBug1B_2= ruleTypeBug1B ) ) )
+            // InternalSimpleReconstrTestLanguage.g:1910:2: (otherlv_0= '#17' (this_TypeBug1A_1= ruleTypeBug1A | this_TypeBug1B_2= ruleTypeBug1B ) )
             {
-            // InternalSimpleReconstrTestLanguage.g:1952:1: (otherlv_0= '#17' (this_TypeBug1A_1= ruleTypeBug1A | this_TypeBug1B_2= ruleTypeBug1B ) )
-            // InternalSimpleReconstrTestLanguage.g:1952:3: otherlv_0= '#17' (this_TypeBug1A_1= ruleTypeBug1A | this_TypeBug1B_2= ruleTypeBug1B )
+            // InternalSimpleReconstrTestLanguage.g:1910:2: (otherlv_0= '#17' (this_TypeBug1A_1= ruleTypeBug1A | this_TypeBug1B_2= ruleTypeBug1B ) )
+            // InternalSimpleReconstrTestLanguage.g:1911:3: otherlv_0= '#17' (this_TypeBug1A_1= ruleTypeBug1A | this_TypeBug1B_2= ruleTypeBug1B )
             {
             otherlv_0=(Token)match(input,60,FollowSets000.FOLLOW_41); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getTypeBug305577_1Access().getNumberSignDigitOneDigitSevenKeyword_0());
-                
-            // InternalSimpleReconstrTestLanguage.g:1956:1: (this_TypeBug1A_1= ruleTypeBug1A | this_TypeBug1B_2= ruleTypeBug1B )
+            			newLeafNode(otherlv_0, grammarAccess.getTypeBug305577_1Access().getNumberSignDigitOneDigitSevenKeyword_0());
+            		
+            // InternalSimpleReconstrTestLanguage.g:1915:3: (this_TypeBug1A_1= ruleTypeBug1A | this_TypeBug1B_2= ruleTypeBug1B )
             int alt31=2;
             int LA31_0 = input.LA(1);
 
@@ -5061,38 +5141,38 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
             }
             switch (alt31) {
                 case 1 :
-                    // InternalSimpleReconstrTestLanguage.g:1957:5: this_TypeBug1A_1= ruleTypeBug1A
+                    // InternalSimpleReconstrTestLanguage.g:1916:4: this_TypeBug1A_1= ruleTypeBug1A
                     {
-                     
-                            newCompositeNode(grammarAccess.getTypeBug305577_1Access().getTypeBug1AParserRuleCall_1_0()); 
-                        
+
+                    				newCompositeNode(grammarAccess.getTypeBug305577_1Access().getTypeBug1AParserRuleCall_1_0());
+                    			
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_TypeBug1A_1=ruleTypeBug1A();
 
                     state._fsp--;
 
-                     
-                            current = this_TypeBug1A_1; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    				current = this_TypeBug1A_1;
+                    				afterParserOrEnumRuleCall();
+                    			
 
                     }
                     break;
                 case 2 :
-                    // InternalSimpleReconstrTestLanguage.g:1967:5: this_TypeBug1B_2= ruleTypeBug1B
+                    // InternalSimpleReconstrTestLanguage.g:1925:4: this_TypeBug1B_2= ruleTypeBug1B
                     {
-                     
-                            newCompositeNode(grammarAccess.getTypeBug305577_1Access().getTypeBug1BParserRuleCall_1_1()); 
-                        
+
+                    				newCompositeNode(grammarAccess.getTypeBug305577_1Access().getTypeBug1BParserRuleCall_1_1());
+                    			
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_TypeBug1B_2=ruleTypeBug1B();
 
                     state._fsp--;
 
-                     
-                            current = this_TypeBug1B_2; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    				current = this_TypeBug1B_2;
+                    				afterParserOrEnumRuleCall();
+                    			
 
                     }
                     break;
@@ -5105,13 +5185,15 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -5120,7 +5202,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "entryRuleTypeBug305577_2"
-    // InternalSimpleReconstrTestLanguage.g:1983:1: entryRuleTypeBug305577_2 returns [EObject current=null] : iv_ruleTypeBug305577_2= ruleTypeBug305577_2 EOF ;
+    // InternalSimpleReconstrTestLanguage.g:1938:1: entryRuleTypeBug305577_2 returns [EObject current=null] : iv_ruleTypeBug305577_2= ruleTypeBug305577_2 EOF ;
     public final EObject entryRuleTypeBug305577_2() throws RecognitionException {
         EObject current = null;
 
@@ -5128,8 +5210,8 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
         try {
-            // InternalSimpleReconstrTestLanguage.g:1984:2: (iv_ruleTypeBug305577_2= ruleTypeBug305577_2 EOF )
-            // InternalSimpleReconstrTestLanguage.g:1985:2: iv_ruleTypeBug305577_2= ruleTypeBug305577_2 EOF
+            // InternalSimpleReconstrTestLanguage.g:1938:56: (iv_ruleTypeBug305577_2= ruleTypeBug305577_2 EOF )
+            // InternalSimpleReconstrTestLanguage.g:1939:2: iv_ruleTypeBug305577_2= ruleTypeBug305577_2 EOF
             {
              newCompositeNode(grammarAccess.getTypeBug305577_2Rule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -5143,11 +5225,11 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -5156,7 +5238,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "ruleTypeBug305577_2"
-    // InternalSimpleReconstrTestLanguage.g:1992:1: ruleTypeBug305577_2 returns [EObject current=null] : (otherlv_0= '#18' (this_TypeBug2B_1= ruleTypeBug2B | this_TypeBug2A_2= ruleTypeBug2A ) ) ;
+    // InternalSimpleReconstrTestLanguage.g:1945:1: ruleTypeBug305577_2 returns [EObject current=null] : (otherlv_0= '#18' (this_TypeBug2B_1= ruleTypeBug2B | this_TypeBug2A_2= ruleTypeBug2A ) ) ;
     public final EObject ruleTypeBug305577_2() throws RecognitionException {
         EObject current = null;
 
@@ -5166,20 +5248,21 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
         EObject this_TypeBug2A_2 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalSimpleReconstrTestLanguage.g:1995:28: ( (otherlv_0= '#18' (this_TypeBug2B_1= ruleTypeBug2B | this_TypeBug2A_2= ruleTypeBug2A ) ) )
-            // InternalSimpleReconstrTestLanguage.g:1996:1: (otherlv_0= '#18' (this_TypeBug2B_1= ruleTypeBug2B | this_TypeBug2A_2= ruleTypeBug2A ) )
+            // InternalSimpleReconstrTestLanguage.g:1951:2: ( (otherlv_0= '#18' (this_TypeBug2B_1= ruleTypeBug2B | this_TypeBug2A_2= ruleTypeBug2A ) ) )
+            // InternalSimpleReconstrTestLanguage.g:1952:2: (otherlv_0= '#18' (this_TypeBug2B_1= ruleTypeBug2B | this_TypeBug2A_2= ruleTypeBug2A ) )
             {
-            // InternalSimpleReconstrTestLanguage.g:1996:1: (otherlv_0= '#18' (this_TypeBug2B_1= ruleTypeBug2B | this_TypeBug2A_2= ruleTypeBug2A ) )
-            // InternalSimpleReconstrTestLanguage.g:1996:3: otherlv_0= '#18' (this_TypeBug2B_1= ruleTypeBug2B | this_TypeBug2A_2= ruleTypeBug2A )
+            // InternalSimpleReconstrTestLanguage.g:1952:2: (otherlv_0= '#18' (this_TypeBug2B_1= ruleTypeBug2B | this_TypeBug2A_2= ruleTypeBug2A ) )
+            // InternalSimpleReconstrTestLanguage.g:1953:3: otherlv_0= '#18' (this_TypeBug2B_1= ruleTypeBug2B | this_TypeBug2A_2= ruleTypeBug2A )
             {
             otherlv_0=(Token)match(input,61,FollowSets000.FOLLOW_41); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getTypeBug305577_2Access().getNumberSignDigitOneDigitEightKeyword_0());
-                
-            // InternalSimpleReconstrTestLanguage.g:2000:1: (this_TypeBug2B_1= ruleTypeBug2B | this_TypeBug2A_2= ruleTypeBug2A )
+            			newLeafNode(otherlv_0, grammarAccess.getTypeBug305577_2Access().getNumberSignDigitOneDigitEightKeyword_0());
+            		
+            // InternalSimpleReconstrTestLanguage.g:1957:3: (this_TypeBug2B_1= ruleTypeBug2B | this_TypeBug2A_2= ruleTypeBug2A )
             int alt32=2;
             int LA32_0 = input.LA(1);
 
@@ -5197,38 +5280,38 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
             }
             switch (alt32) {
                 case 1 :
-                    // InternalSimpleReconstrTestLanguage.g:2001:5: this_TypeBug2B_1= ruleTypeBug2B
+                    // InternalSimpleReconstrTestLanguage.g:1958:4: this_TypeBug2B_1= ruleTypeBug2B
                     {
-                     
-                            newCompositeNode(grammarAccess.getTypeBug305577_2Access().getTypeBug2BParserRuleCall_1_0()); 
-                        
+
+                    				newCompositeNode(grammarAccess.getTypeBug305577_2Access().getTypeBug2BParserRuleCall_1_0());
+                    			
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_TypeBug2B_1=ruleTypeBug2B();
 
                     state._fsp--;
 
-                     
-                            current = this_TypeBug2B_1; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    				current = this_TypeBug2B_1;
+                    				afterParserOrEnumRuleCall();
+                    			
 
                     }
                     break;
                 case 2 :
-                    // InternalSimpleReconstrTestLanguage.g:2011:5: this_TypeBug2A_2= ruleTypeBug2A
+                    // InternalSimpleReconstrTestLanguage.g:1967:4: this_TypeBug2A_2= ruleTypeBug2A
                     {
-                     
-                            newCompositeNode(grammarAccess.getTypeBug305577_2Access().getTypeBug2AParserRuleCall_1_1()); 
-                        
+
+                    				newCompositeNode(grammarAccess.getTypeBug305577_2Access().getTypeBug2AParserRuleCall_1_1());
+                    			
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_TypeBug2A_2=ruleTypeBug2A();
 
                     state._fsp--;
 
-                     
-                            current = this_TypeBug2A_2; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    				current = this_TypeBug2A_2;
+                    				afterParserOrEnumRuleCall();
+                    			
 
                     }
                     break;
@@ -5241,13 +5324,15 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -5256,7 +5341,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "entryRuleTypeBug1A"
-    // InternalSimpleReconstrTestLanguage.g:2029:1: entryRuleTypeBug1A returns [EObject current=null] : iv_ruleTypeBug1A= ruleTypeBug1A EOF ;
+    // InternalSimpleReconstrTestLanguage.g:1980:1: entryRuleTypeBug1A returns [EObject current=null] : iv_ruleTypeBug1A= ruleTypeBug1A EOF ;
     public final EObject entryRuleTypeBug1A() throws RecognitionException {
         EObject current = null;
 
@@ -5264,8 +5349,8 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
         try {
-            // InternalSimpleReconstrTestLanguage.g:2030:2: (iv_ruleTypeBug1A= ruleTypeBug1A EOF )
-            // InternalSimpleReconstrTestLanguage.g:2031:2: iv_ruleTypeBug1A= ruleTypeBug1A EOF
+            // InternalSimpleReconstrTestLanguage.g:1980:50: (iv_ruleTypeBug1A= ruleTypeBug1A EOF )
+            // InternalSimpleReconstrTestLanguage.g:1981:2: iv_ruleTypeBug1A= ruleTypeBug1A EOF
             {
              newCompositeNode(grammarAccess.getTypeBug1ARule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -5279,11 +5364,11 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -5292,60 +5377,58 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "ruleTypeBug1A"
-    // InternalSimpleReconstrTestLanguage.g:2038:1: ruleTypeBug1A returns [EObject current=null] : ( () otherlv_1= 'ka' ( (lv_name_2_0= RULE_ID ) ) ) ;
+    // InternalSimpleReconstrTestLanguage.g:1987:1: ruleTypeBug1A returns [EObject current=null] : ( () otherlv_1= 'ka' ( (lv_name_2_0= RULE_ID ) ) ) ;
     public final EObject ruleTypeBug1A() throws RecognitionException {
         EObject current = null;
 
         Token otherlv_1=null;
         Token lv_name_2_0=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalSimpleReconstrTestLanguage.g:2041:28: ( ( () otherlv_1= 'ka' ( (lv_name_2_0= RULE_ID ) ) ) )
-            // InternalSimpleReconstrTestLanguage.g:2042:1: ( () otherlv_1= 'ka' ( (lv_name_2_0= RULE_ID ) ) )
+            // InternalSimpleReconstrTestLanguage.g:1993:2: ( ( () otherlv_1= 'ka' ( (lv_name_2_0= RULE_ID ) ) ) )
+            // InternalSimpleReconstrTestLanguage.g:1994:2: ( () otherlv_1= 'ka' ( (lv_name_2_0= RULE_ID ) ) )
             {
-            // InternalSimpleReconstrTestLanguage.g:2042:1: ( () otherlv_1= 'ka' ( (lv_name_2_0= RULE_ID ) ) )
-            // InternalSimpleReconstrTestLanguage.g:2042:2: () otherlv_1= 'ka' ( (lv_name_2_0= RULE_ID ) )
+            // InternalSimpleReconstrTestLanguage.g:1994:2: ( () otherlv_1= 'ka' ( (lv_name_2_0= RULE_ID ) ) )
+            // InternalSimpleReconstrTestLanguage.g:1995:3: () otherlv_1= 'ka' ( (lv_name_2_0= RULE_ID ) )
             {
-            // InternalSimpleReconstrTestLanguage.g:2042:2: ()
-            // InternalSimpleReconstrTestLanguage.g:2043:5: 
+            // InternalSimpleReconstrTestLanguage.g:1995:3: ()
+            // InternalSimpleReconstrTestLanguage.g:1996:4: 
             {
 
-                    current = forceCreateModelElement(
-                        grammarAccess.getTypeBug1AAccess().getTypeBug1AAction_0(),
-                        current);
-                
+            				current = forceCreateModelElement(
+            					grammarAccess.getTypeBug1AAccess().getTypeBug1AAction_0(),
+            					current);
+            			
 
             }
 
             otherlv_1=(Token)match(input,62,FollowSets000.FOLLOW_10); 
 
-                	newLeafNode(otherlv_1, grammarAccess.getTypeBug1AAccess().getKaKeyword_1());
-                
-            // InternalSimpleReconstrTestLanguage.g:2052:1: ( (lv_name_2_0= RULE_ID ) )
-            // InternalSimpleReconstrTestLanguage.g:2053:1: (lv_name_2_0= RULE_ID )
+            			newLeafNode(otherlv_1, grammarAccess.getTypeBug1AAccess().getKaKeyword_1());
+            		
+            // InternalSimpleReconstrTestLanguage.g:2006:3: ( (lv_name_2_0= RULE_ID ) )
+            // InternalSimpleReconstrTestLanguage.g:2007:4: (lv_name_2_0= RULE_ID )
             {
-            // InternalSimpleReconstrTestLanguage.g:2053:1: (lv_name_2_0= RULE_ID )
-            // InternalSimpleReconstrTestLanguage.g:2054:3: lv_name_2_0= RULE_ID
+            // InternalSimpleReconstrTestLanguage.g:2007:4: (lv_name_2_0= RULE_ID )
+            // InternalSimpleReconstrTestLanguage.g:2008:5: lv_name_2_0= RULE_ID
             {
             lv_name_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
-            			newLeafNode(lv_name_2_0, grammarAccess.getTypeBug1AAccess().getNameIDTerminalRuleCall_2_0()); 
-            		
+            					newLeafNode(lv_name_2_0, grammarAccess.getTypeBug1AAccess().getNameIDTerminalRuleCall_2_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getTypeBug1ARule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"name",
-                    		lv_name_2_0, 
-                    		"org.eclipse.xtext.common.Terminals.ID");
-            	    
-
-            }
-
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getTypeBug1ARule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"name",
+            						lv_name_2_0,
+            						"org.eclipse.xtext.common.Terminals.ID");
+            				
 
             }
 
@@ -5355,13 +5438,18 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
             }
 
-             leaveRule(); 
+
+            }
+
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -5370,7 +5458,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "entryRuleTypeBug1B"
-    // InternalSimpleReconstrTestLanguage.g:2078:1: entryRuleTypeBug1B returns [EObject current=null] : iv_ruleTypeBug1B= ruleTypeBug1B EOF ;
+    // InternalSimpleReconstrTestLanguage.g:2028:1: entryRuleTypeBug1B returns [EObject current=null] : iv_ruleTypeBug1B= ruleTypeBug1B EOF ;
     public final EObject entryRuleTypeBug1B() throws RecognitionException {
         EObject current = null;
 
@@ -5378,8 +5466,8 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
         try {
-            // InternalSimpleReconstrTestLanguage.g:2079:2: (iv_ruleTypeBug1B= ruleTypeBug1B EOF )
-            // InternalSimpleReconstrTestLanguage.g:2080:2: iv_ruleTypeBug1B= ruleTypeBug1B EOF
+            // InternalSimpleReconstrTestLanguage.g:2028:50: (iv_ruleTypeBug1B= ruleTypeBug1B EOF )
+            // InternalSimpleReconstrTestLanguage.g:2029:2: iv_ruleTypeBug1B= ruleTypeBug1B EOF
             {
              newCompositeNode(grammarAccess.getTypeBug1BRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -5393,11 +5481,11 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -5406,60 +5494,58 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "ruleTypeBug1B"
-    // InternalSimpleReconstrTestLanguage.g:2087:1: ruleTypeBug1B returns [EObject current=null] : ( () otherlv_1= 'kb' ( (lv_name_2_0= RULE_ID ) ) ) ;
+    // InternalSimpleReconstrTestLanguage.g:2035:1: ruleTypeBug1B returns [EObject current=null] : ( () otherlv_1= 'kb' ( (lv_name_2_0= RULE_ID ) ) ) ;
     public final EObject ruleTypeBug1B() throws RecognitionException {
         EObject current = null;
 
         Token otherlv_1=null;
         Token lv_name_2_0=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalSimpleReconstrTestLanguage.g:2090:28: ( ( () otherlv_1= 'kb' ( (lv_name_2_0= RULE_ID ) ) ) )
-            // InternalSimpleReconstrTestLanguage.g:2091:1: ( () otherlv_1= 'kb' ( (lv_name_2_0= RULE_ID ) ) )
+            // InternalSimpleReconstrTestLanguage.g:2041:2: ( ( () otherlv_1= 'kb' ( (lv_name_2_0= RULE_ID ) ) ) )
+            // InternalSimpleReconstrTestLanguage.g:2042:2: ( () otherlv_1= 'kb' ( (lv_name_2_0= RULE_ID ) ) )
             {
-            // InternalSimpleReconstrTestLanguage.g:2091:1: ( () otherlv_1= 'kb' ( (lv_name_2_0= RULE_ID ) ) )
-            // InternalSimpleReconstrTestLanguage.g:2091:2: () otherlv_1= 'kb' ( (lv_name_2_0= RULE_ID ) )
+            // InternalSimpleReconstrTestLanguage.g:2042:2: ( () otherlv_1= 'kb' ( (lv_name_2_0= RULE_ID ) ) )
+            // InternalSimpleReconstrTestLanguage.g:2043:3: () otherlv_1= 'kb' ( (lv_name_2_0= RULE_ID ) )
             {
-            // InternalSimpleReconstrTestLanguage.g:2091:2: ()
-            // InternalSimpleReconstrTestLanguage.g:2092:5: 
+            // InternalSimpleReconstrTestLanguage.g:2043:3: ()
+            // InternalSimpleReconstrTestLanguage.g:2044:4: 
             {
 
-                    current = forceCreateModelElement(
-                        grammarAccess.getTypeBug1BAccess().getTypeBug1BAction_0(),
-                        current);
-                
+            				current = forceCreateModelElement(
+            					grammarAccess.getTypeBug1BAccess().getTypeBug1BAction_0(),
+            					current);
+            			
 
             }
 
             otherlv_1=(Token)match(input,63,FollowSets000.FOLLOW_10); 
 
-                	newLeafNode(otherlv_1, grammarAccess.getTypeBug1BAccess().getKbKeyword_1());
-                
-            // InternalSimpleReconstrTestLanguage.g:2101:1: ( (lv_name_2_0= RULE_ID ) )
-            // InternalSimpleReconstrTestLanguage.g:2102:1: (lv_name_2_0= RULE_ID )
+            			newLeafNode(otherlv_1, grammarAccess.getTypeBug1BAccess().getKbKeyword_1());
+            		
+            // InternalSimpleReconstrTestLanguage.g:2054:3: ( (lv_name_2_0= RULE_ID ) )
+            // InternalSimpleReconstrTestLanguage.g:2055:4: (lv_name_2_0= RULE_ID )
             {
-            // InternalSimpleReconstrTestLanguage.g:2102:1: (lv_name_2_0= RULE_ID )
-            // InternalSimpleReconstrTestLanguage.g:2103:3: lv_name_2_0= RULE_ID
+            // InternalSimpleReconstrTestLanguage.g:2055:4: (lv_name_2_0= RULE_ID )
+            // InternalSimpleReconstrTestLanguage.g:2056:5: lv_name_2_0= RULE_ID
             {
             lv_name_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
-            			newLeafNode(lv_name_2_0, grammarAccess.getTypeBug1BAccess().getNameIDTerminalRuleCall_2_0()); 
-            		
+            					newLeafNode(lv_name_2_0, grammarAccess.getTypeBug1BAccess().getNameIDTerminalRuleCall_2_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getTypeBug1BRule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"name",
-                    		lv_name_2_0, 
-                    		"org.eclipse.xtext.common.Terminals.ID");
-            	    
-
-            }
-
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getTypeBug1BRule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"name",
+            						lv_name_2_0,
+            						"org.eclipse.xtext.common.Terminals.ID");
+            				
 
             }
 
@@ -5469,13 +5555,18 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
             }
 
-             leaveRule(); 
+
+            }
+
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -5484,7 +5575,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "entryRuleTypeBug2A"
-    // InternalSimpleReconstrTestLanguage.g:2129:1: entryRuleTypeBug2A returns [EObject current=null] : iv_ruleTypeBug2A= ruleTypeBug2A EOF ;
+    // InternalSimpleReconstrTestLanguage.g:2076:1: entryRuleTypeBug2A returns [EObject current=null] : iv_ruleTypeBug2A= ruleTypeBug2A EOF ;
     public final EObject entryRuleTypeBug2A() throws RecognitionException {
         EObject current = null;
 
@@ -5492,8 +5583,8 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
         try {
-            // InternalSimpleReconstrTestLanguage.g:2130:2: (iv_ruleTypeBug2A= ruleTypeBug2A EOF )
-            // InternalSimpleReconstrTestLanguage.g:2131:2: iv_ruleTypeBug2A= ruleTypeBug2A EOF
+            // InternalSimpleReconstrTestLanguage.g:2076:50: (iv_ruleTypeBug2A= ruleTypeBug2A EOF )
+            // InternalSimpleReconstrTestLanguage.g:2077:2: iv_ruleTypeBug2A= ruleTypeBug2A EOF
             {
              newCompositeNode(grammarAccess.getTypeBug2ARule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -5507,11 +5598,11 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -5520,60 +5611,58 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "ruleTypeBug2A"
-    // InternalSimpleReconstrTestLanguage.g:2138:1: ruleTypeBug2A returns [EObject current=null] : ( () otherlv_1= 'ka' ( (lv_name_2_0= RULE_ID ) ) ) ;
+    // InternalSimpleReconstrTestLanguage.g:2083:1: ruleTypeBug2A returns [EObject current=null] : ( () otherlv_1= 'ka' ( (lv_name_2_0= RULE_ID ) ) ) ;
     public final EObject ruleTypeBug2A() throws RecognitionException {
         EObject current = null;
 
         Token otherlv_1=null;
         Token lv_name_2_0=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalSimpleReconstrTestLanguage.g:2141:28: ( ( () otherlv_1= 'ka' ( (lv_name_2_0= RULE_ID ) ) ) )
-            // InternalSimpleReconstrTestLanguage.g:2142:1: ( () otherlv_1= 'ka' ( (lv_name_2_0= RULE_ID ) ) )
+            // InternalSimpleReconstrTestLanguage.g:2089:2: ( ( () otherlv_1= 'ka' ( (lv_name_2_0= RULE_ID ) ) ) )
+            // InternalSimpleReconstrTestLanguage.g:2090:2: ( () otherlv_1= 'ka' ( (lv_name_2_0= RULE_ID ) ) )
             {
-            // InternalSimpleReconstrTestLanguage.g:2142:1: ( () otherlv_1= 'ka' ( (lv_name_2_0= RULE_ID ) ) )
-            // InternalSimpleReconstrTestLanguage.g:2142:2: () otherlv_1= 'ka' ( (lv_name_2_0= RULE_ID ) )
+            // InternalSimpleReconstrTestLanguage.g:2090:2: ( () otherlv_1= 'ka' ( (lv_name_2_0= RULE_ID ) ) )
+            // InternalSimpleReconstrTestLanguage.g:2091:3: () otherlv_1= 'ka' ( (lv_name_2_0= RULE_ID ) )
             {
-            // InternalSimpleReconstrTestLanguage.g:2142:2: ()
-            // InternalSimpleReconstrTestLanguage.g:2143:5: 
+            // InternalSimpleReconstrTestLanguage.g:2091:3: ()
+            // InternalSimpleReconstrTestLanguage.g:2092:4: 
             {
 
-                    current = forceCreateModelElement(
-                        grammarAccess.getTypeBug2AAccess().getTypeBug2AAction_0(),
-                        current);
-                
+            				current = forceCreateModelElement(
+            					grammarAccess.getTypeBug2AAccess().getTypeBug2AAction_0(),
+            					current);
+            			
 
             }
 
             otherlv_1=(Token)match(input,62,FollowSets000.FOLLOW_10); 
 
-                	newLeafNode(otherlv_1, grammarAccess.getTypeBug2AAccess().getKaKeyword_1());
-                
-            // InternalSimpleReconstrTestLanguage.g:2152:1: ( (lv_name_2_0= RULE_ID ) )
-            // InternalSimpleReconstrTestLanguage.g:2153:1: (lv_name_2_0= RULE_ID )
+            			newLeafNode(otherlv_1, grammarAccess.getTypeBug2AAccess().getKaKeyword_1());
+            		
+            // InternalSimpleReconstrTestLanguage.g:2102:3: ( (lv_name_2_0= RULE_ID ) )
+            // InternalSimpleReconstrTestLanguage.g:2103:4: (lv_name_2_0= RULE_ID )
             {
-            // InternalSimpleReconstrTestLanguage.g:2153:1: (lv_name_2_0= RULE_ID )
-            // InternalSimpleReconstrTestLanguage.g:2154:3: lv_name_2_0= RULE_ID
+            // InternalSimpleReconstrTestLanguage.g:2103:4: (lv_name_2_0= RULE_ID )
+            // InternalSimpleReconstrTestLanguage.g:2104:5: lv_name_2_0= RULE_ID
             {
             lv_name_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
-            			newLeafNode(lv_name_2_0, grammarAccess.getTypeBug2AAccess().getNameIDTerminalRuleCall_2_0()); 
-            		
+            					newLeafNode(lv_name_2_0, grammarAccess.getTypeBug2AAccess().getNameIDTerminalRuleCall_2_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getTypeBug2ARule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"name",
-                    		lv_name_2_0, 
-                    		"org.eclipse.xtext.common.Terminals.ID");
-            	    
-
-            }
-
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getTypeBug2ARule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"name",
+            						lv_name_2_0,
+            						"org.eclipse.xtext.common.Terminals.ID");
+            				
 
             }
 
@@ -5583,13 +5672,18 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
             }
 
-             leaveRule(); 
+
+            }
+
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -5598,7 +5692,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "entryRuleTypeBug2B"
-    // InternalSimpleReconstrTestLanguage.g:2178:1: entryRuleTypeBug2B returns [EObject current=null] : iv_ruleTypeBug2B= ruleTypeBug2B EOF ;
+    // InternalSimpleReconstrTestLanguage.g:2124:1: entryRuleTypeBug2B returns [EObject current=null] : iv_ruleTypeBug2B= ruleTypeBug2B EOF ;
     public final EObject entryRuleTypeBug2B() throws RecognitionException {
         EObject current = null;
 
@@ -5606,8 +5700,8 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
         try {
-            // InternalSimpleReconstrTestLanguage.g:2179:2: (iv_ruleTypeBug2B= ruleTypeBug2B EOF )
-            // InternalSimpleReconstrTestLanguage.g:2180:2: iv_ruleTypeBug2B= ruleTypeBug2B EOF
+            // InternalSimpleReconstrTestLanguage.g:2124:50: (iv_ruleTypeBug2B= ruleTypeBug2B EOF )
+            // InternalSimpleReconstrTestLanguage.g:2125:2: iv_ruleTypeBug2B= ruleTypeBug2B EOF
             {
              newCompositeNode(grammarAccess.getTypeBug2BRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -5621,11 +5715,11 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -5634,60 +5728,58 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "ruleTypeBug2B"
-    // InternalSimpleReconstrTestLanguage.g:2187:1: ruleTypeBug2B returns [EObject current=null] : ( () otherlv_1= 'kb' ( (lv_name_2_0= RULE_ID ) ) ) ;
+    // InternalSimpleReconstrTestLanguage.g:2131:1: ruleTypeBug2B returns [EObject current=null] : ( () otherlv_1= 'kb' ( (lv_name_2_0= RULE_ID ) ) ) ;
     public final EObject ruleTypeBug2B() throws RecognitionException {
         EObject current = null;
 
         Token otherlv_1=null;
         Token lv_name_2_0=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalSimpleReconstrTestLanguage.g:2190:28: ( ( () otherlv_1= 'kb' ( (lv_name_2_0= RULE_ID ) ) ) )
-            // InternalSimpleReconstrTestLanguage.g:2191:1: ( () otherlv_1= 'kb' ( (lv_name_2_0= RULE_ID ) ) )
+            // InternalSimpleReconstrTestLanguage.g:2137:2: ( ( () otherlv_1= 'kb' ( (lv_name_2_0= RULE_ID ) ) ) )
+            // InternalSimpleReconstrTestLanguage.g:2138:2: ( () otherlv_1= 'kb' ( (lv_name_2_0= RULE_ID ) ) )
             {
-            // InternalSimpleReconstrTestLanguage.g:2191:1: ( () otherlv_1= 'kb' ( (lv_name_2_0= RULE_ID ) ) )
-            // InternalSimpleReconstrTestLanguage.g:2191:2: () otherlv_1= 'kb' ( (lv_name_2_0= RULE_ID ) )
+            // InternalSimpleReconstrTestLanguage.g:2138:2: ( () otherlv_1= 'kb' ( (lv_name_2_0= RULE_ID ) ) )
+            // InternalSimpleReconstrTestLanguage.g:2139:3: () otherlv_1= 'kb' ( (lv_name_2_0= RULE_ID ) )
             {
-            // InternalSimpleReconstrTestLanguage.g:2191:2: ()
-            // InternalSimpleReconstrTestLanguage.g:2192:5: 
+            // InternalSimpleReconstrTestLanguage.g:2139:3: ()
+            // InternalSimpleReconstrTestLanguage.g:2140:4: 
             {
 
-                    current = forceCreateModelElement(
-                        grammarAccess.getTypeBug2BAccess().getTypeBug2BAction_0(),
-                        current);
-                
+            				current = forceCreateModelElement(
+            					grammarAccess.getTypeBug2BAccess().getTypeBug2BAction_0(),
+            					current);
+            			
 
             }
 
             otherlv_1=(Token)match(input,63,FollowSets000.FOLLOW_10); 
 
-                	newLeafNode(otherlv_1, grammarAccess.getTypeBug2BAccess().getKbKeyword_1());
-                
-            // InternalSimpleReconstrTestLanguage.g:2201:1: ( (lv_name_2_0= RULE_ID ) )
-            // InternalSimpleReconstrTestLanguage.g:2202:1: (lv_name_2_0= RULE_ID )
+            			newLeafNode(otherlv_1, grammarAccess.getTypeBug2BAccess().getKbKeyword_1());
+            		
+            // InternalSimpleReconstrTestLanguage.g:2150:3: ( (lv_name_2_0= RULE_ID ) )
+            // InternalSimpleReconstrTestLanguage.g:2151:4: (lv_name_2_0= RULE_ID )
             {
-            // InternalSimpleReconstrTestLanguage.g:2202:1: (lv_name_2_0= RULE_ID )
-            // InternalSimpleReconstrTestLanguage.g:2203:3: lv_name_2_0= RULE_ID
+            // InternalSimpleReconstrTestLanguage.g:2151:4: (lv_name_2_0= RULE_ID )
+            // InternalSimpleReconstrTestLanguage.g:2152:5: lv_name_2_0= RULE_ID
             {
             lv_name_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
-            			newLeafNode(lv_name_2_0, grammarAccess.getTypeBug2BAccess().getNameIDTerminalRuleCall_2_0()); 
-            		
+            					newLeafNode(lv_name_2_0, grammarAccess.getTypeBug2BAccess().getNameIDTerminalRuleCall_2_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getTypeBug2BRule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"name",
-                    		lv_name_2_0, 
-                    		"org.eclipse.xtext.common.Terminals.ID");
-            	    
-
-            }
-
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getTypeBug2BRule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"name",
+            						lv_name_2_0,
+            						"org.eclipse.xtext.common.Terminals.ID");
+            				
 
             }
 
@@ -5697,13 +5789,18 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
             }
 
-             leaveRule(); 
+
+            }
+
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -5712,7 +5809,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "entryRuleBug305171"
-    // InternalSimpleReconstrTestLanguage.g:2227:1: entryRuleBug305171 returns [EObject current=null] : iv_ruleBug305171= ruleBug305171 EOF ;
+    // InternalSimpleReconstrTestLanguage.g:2172:1: entryRuleBug305171 returns [EObject current=null] : iv_ruleBug305171= ruleBug305171 EOF ;
     public final EObject entryRuleBug305171() throws RecognitionException {
         EObject current = null;
 
@@ -5720,8 +5817,8 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
         try {
-            // InternalSimpleReconstrTestLanguage.g:2228:2: (iv_ruleBug305171= ruleBug305171 EOF )
-            // InternalSimpleReconstrTestLanguage.g:2229:2: iv_ruleBug305171= ruleBug305171 EOF
+            // InternalSimpleReconstrTestLanguage.g:2172:50: (iv_ruleBug305171= ruleBug305171 EOF )
+            // InternalSimpleReconstrTestLanguage.g:2173:2: iv_ruleBug305171= ruleBug305171 EOF
             {
              newCompositeNode(grammarAccess.getBug305171Rule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -5735,11 +5832,11 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -5748,7 +5845,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "ruleBug305171"
-    // InternalSimpleReconstrTestLanguage.g:2236:1: ruleBug305171 returns [EObject current=null] : (otherlv_0= '#19' ( (otherlv_1= 'kx' ( (lv_x_2_0= RULE_ID ) ) (otherlv_3= ',' ( (lv_x_4_0= RULE_ID ) ) )* )? ( (otherlv_5= 'ky' ( (lv_y_6_0= RULE_ID ) ) (otherlv_7= ',' ( (lv_y_8_0= RULE_ID ) ) )* )? (otherlv_9= 'kz' ( (lv_z_10_0= RULE_ID ) ) (otherlv_11= ',' ( (lv_z_12_0= RULE_ID ) ) )* )? ) ) ( (lv_name_13_0= RULE_ID ) ) ) ;
+    // InternalSimpleReconstrTestLanguage.g:2179:1: ruleBug305171 returns [EObject current=null] : (otherlv_0= '#19' ( (otherlv_1= 'kx' ( (lv_x_2_0= RULE_ID ) ) (otherlv_3= ',' ( (lv_x_4_0= RULE_ID ) ) )* )? ( (otherlv_5= 'ky' ( (lv_y_6_0= RULE_ID ) ) (otherlv_7= ',' ( (lv_y_8_0= RULE_ID ) ) )* )? (otherlv_9= 'kz' ( (lv_z_10_0= RULE_ID ) ) (otherlv_11= ',' ( (lv_z_12_0= RULE_ID ) ) )* )? ) ) ( (lv_name_13_0= RULE_ID ) ) ) ;
     public final EObject ruleBug305171() throws RecognitionException {
         EObject current = null;
 
@@ -5767,23 +5864,24 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
         Token lv_z_12_0=null;
         Token lv_name_13_0=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalSimpleReconstrTestLanguage.g:2239:28: ( (otherlv_0= '#19' ( (otherlv_1= 'kx' ( (lv_x_2_0= RULE_ID ) ) (otherlv_3= ',' ( (lv_x_4_0= RULE_ID ) ) )* )? ( (otherlv_5= 'ky' ( (lv_y_6_0= RULE_ID ) ) (otherlv_7= ',' ( (lv_y_8_0= RULE_ID ) ) )* )? (otherlv_9= 'kz' ( (lv_z_10_0= RULE_ID ) ) (otherlv_11= ',' ( (lv_z_12_0= RULE_ID ) ) )* )? ) ) ( (lv_name_13_0= RULE_ID ) ) ) )
-            // InternalSimpleReconstrTestLanguage.g:2240:1: (otherlv_0= '#19' ( (otherlv_1= 'kx' ( (lv_x_2_0= RULE_ID ) ) (otherlv_3= ',' ( (lv_x_4_0= RULE_ID ) ) )* )? ( (otherlv_5= 'ky' ( (lv_y_6_0= RULE_ID ) ) (otherlv_7= ',' ( (lv_y_8_0= RULE_ID ) ) )* )? (otherlv_9= 'kz' ( (lv_z_10_0= RULE_ID ) ) (otherlv_11= ',' ( (lv_z_12_0= RULE_ID ) ) )* )? ) ) ( (lv_name_13_0= RULE_ID ) ) )
+            // InternalSimpleReconstrTestLanguage.g:2185:2: ( (otherlv_0= '#19' ( (otherlv_1= 'kx' ( (lv_x_2_0= RULE_ID ) ) (otherlv_3= ',' ( (lv_x_4_0= RULE_ID ) ) )* )? ( (otherlv_5= 'ky' ( (lv_y_6_0= RULE_ID ) ) (otherlv_7= ',' ( (lv_y_8_0= RULE_ID ) ) )* )? (otherlv_9= 'kz' ( (lv_z_10_0= RULE_ID ) ) (otherlv_11= ',' ( (lv_z_12_0= RULE_ID ) ) )* )? ) ) ( (lv_name_13_0= RULE_ID ) ) ) )
+            // InternalSimpleReconstrTestLanguage.g:2186:2: (otherlv_0= '#19' ( (otherlv_1= 'kx' ( (lv_x_2_0= RULE_ID ) ) (otherlv_3= ',' ( (lv_x_4_0= RULE_ID ) ) )* )? ( (otherlv_5= 'ky' ( (lv_y_6_0= RULE_ID ) ) (otherlv_7= ',' ( (lv_y_8_0= RULE_ID ) ) )* )? (otherlv_9= 'kz' ( (lv_z_10_0= RULE_ID ) ) (otherlv_11= ',' ( (lv_z_12_0= RULE_ID ) ) )* )? ) ) ( (lv_name_13_0= RULE_ID ) ) )
             {
-            // InternalSimpleReconstrTestLanguage.g:2240:1: (otherlv_0= '#19' ( (otherlv_1= 'kx' ( (lv_x_2_0= RULE_ID ) ) (otherlv_3= ',' ( (lv_x_4_0= RULE_ID ) ) )* )? ( (otherlv_5= 'ky' ( (lv_y_6_0= RULE_ID ) ) (otherlv_7= ',' ( (lv_y_8_0= RULE_ID ) ) )* )? (otherlv_9= 'kz' ( (lv_z_10_0= RULE_ID ) ) (otherlv_11= ',' ( (lv_z_12_0= RULE_ID ) ) )* )? ) ) ( (lv_name_13_0= RULE_ID ) ) )
-            // InternalSimpleReconstrTestLanguage.g:2240:3: otherlv_0= '#19' ( (otherlv_1= 'kx' ( (lv_x_2_0= RULE_ID ) ) (otherlv_3= ',' ( (lv_x_4_0= RULE_ID ) ) )* )? ( (otherlv_5= 'ky' ( (lv_y_6_0= RULE_ID ) ) (otherlv_7= ',' ( (lv_y_8_0= RULE_ID ) ) )* )? (otherlv_9= 'kz' ( (lv_z_10_0= RULE_ID ) ) (otherlv_11= ',' ( (lv_z_12_0= RULE_ID ) ) )* )? ) ) ( (lv_name_13_0= RULE_ID ) )
+            // InternalSimpleReconstrTestLanguage.g:2186:2: (otherlv_0= '#19' ( (otherlv_1= 'kx' ( (lv_x_2_0= RULE_ID ) ) (otherlv_3= ',' ( (lv_x_4_0= RULE_ID ) ) )* )? ( (otherlv_5= 'ky' ( (lv_y_6_0= RULE_ID ) ) (otherlv_7= ',' ( (lv_y_8_0= RULE_ID ) ) )* )? (otherlv_9= 'kz' ( (lv_z_10_0= RULE_ID ) ) (otherlv_11= ',' ( (lv_z_12_0= RULE_ID ) ) )* )? ) ) ( (lv_name_13_0= RULE_ID ) ) )
+            // InternalSimpleReconstrTestLanguage.g:2187:3: otherlv_0= '#19' ( (otherlv_1= 'kx' ( (lv_x_2_0= RULE_ID ) ) (otherlv_3= ',' ( (lv_x_4_0= RULE_ID ) ) )* )? ( (otherlv_5= 'ky' ( (lv_y_6_0= RULE_ID ) ) (otherlv_7= ',' ( (lv_y_8_0= RULE_ID ) ) )* )? (otherlv_9= 'kz' ( (lv_z_10_0= RULE_ID ) ) (otherlv_11= ',' ( (lv_z_12_0= RULE_ID ) ) )* )? ) ) ( (lv_name_13_0= RULE_ID ) )
             {
             otherlv_0=(Token)match(input,64,FollowSets000.FOLLOW_42); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getBug305171Access().getNumberSignDigitOneDigitNineKeyword_0());
-                
-            // InternalSimpleReconstrTestLanguage.g:2244:1: ( (otherlv_1= 'kx' ( (lv_x_2_0= RULE_ID ) ) (otherlv_3= ',' ( (lv_x_4_0= RULE_ID ) ) )* )? ( (otherlv_5= 'ky' ( (lv_y_6_0= RULE_ID ) ) (otherlv_7= ',' ( (lv_y_8_0= RULE_ID ) ) )* )? (otherlv_9= 'kz' ( (lv_z_10_0= RULE_ID ) ) (otherlv_11= ',' ( (lv_z_12_0= RULE_ID ) ) )* )? ) )
-            // InternalSimpleReconstrTestLanguage.g:2244:2: (otherlv_1= 'kx' ( (lv_x_2_0= RULE_ID ) ) (otherlv_3= ',' ( (lv_x_4_0= RULE_ID ) ) )* )? ( (otherlv_5= 'ky' ( (lv_y_6_0= RULE_ID ) ) (otherlv_7= ',' ( (lv_y_8_0= RULE_ID ) ) )* )? (otherlv_9= 'kz' ( (lv_z_10_0= RULE_ID ) ) (otherlv_11= ',' ( (lv_z_12_0= RULE_ID ) ) )* )? )
+            			newLeafNode(otherlv_0, grammarAccess.getBug305171Access().getNumberSignDigitOneDigitNineKeyword_0());
+            		
+            // InternalSimpleReconstrTestLanguage.g:2191:3: ( (otherlv_1= 'kx' ( (lv_x_2_0= RULE_ID ) ) (otherlv_3= ',' ( (lv_x_4_0= RULE_ID ) ) )* )? ( (otherlv_5= 'ky' ( (lv_y_6_0= RULE_ID ) ) (otherlv_7= ',' ( (lv_y_8_0= RULE_ID ) ) )* )? (otherlv_9= 'kz' ( (lv_z_10_0= RULE_ID ) ) (otherlv_11= ',' ( (lv_z_12_0= RULE_ID ) ) )* )? ) )
+            // InternalSimpleReconstrTestLanguage.g:2192:4: (otherlv_1= 'kx' ( (lv_x_2_0= RULE_ID ) ) (otherlv_3= ',' ( (lv_x_4_0= RULE_ID ) ) )* )? ( (otherlv_5= 'ky' ( (lv_y_6_0= RULE_ID ) ) (otherlv_7= ',' ( (lv_y_8_0= RULE_ID ) ) )* )? (otherlv_9= 'kz' ( (lv_z_10_0= RULE_ID ) ) (otherlv_11= ',' ( (lv_z_12_0= RULE_ID ) ) )* )? )
             {
-            // InternalSimpleReconstrTestLanguage.g:2244:2: (otherlv_1= 'kx' ( (lv_x_2_0= RULE_ID ) ) (otherlv_3= ',' ( (lv_x_4_0= RULE_ID ) ) )* )?
+            // InternalSimpleReconstrTestLanguage.g:2192:4: (otherlv_1= 'kx' ( (lv_x_2_0= RULE_ID ) ) (otherlv_3= ',' ( (lv_x_4_0= RULE_ID ) ) )* )?
             int alt34=2;
             int LA34_0 = input.LA(1);
 
@@ -5792,39 +5890,39 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
             }
             switch (alt34) {
                 case 1 :
-                    // InternalSimpleReconstrTestLanguage.g:2244:4: otherlv_1= 'kx' ( (lv_x_2_0= RULE_ID ) ) (otherlv_3= ',' ( (lv_x_4_0= RULE_ID ) ) )*
+                    // InternalSimpleReconstrTestLanguage.g:2193:5: otherlv_1= 'kx' ( (lv_x_2_0= RULE_ID ) ) (otherlv_3= ',' ( (lv_x_4_0= RULE_ID ) ) )*
                     {
                     otherlv_1=(Token)match(input,65,FollowSets000.FOLLOW_10); 
 
-                        	newLeafNode(otherlv_1, grammarAccess.getBug305171Access().getKxKeyword_1_0_0());
-                        
-                    // InternalSimpleReconstrTestLanguage.g:2248:1: ( (lv_x_2_0= RULE_ID ) )
-                    // InternalSimpleReconstrTestLanguage.g:2249:1: (lv_x_2_0= RULE_ID )
+                    					newLeafNode(otherlv_1, grammarAccess.getBug305171Access().getKxKeyword_1_0_0());
+                    				
+                    // InternalSimpleReconstrTestLanguage.g:2197:5: ( (lv_x_2_0= RULE_ID ) )
+                    // InternalSimpleReconstrTestLanguage.g:2198:6: (lv_x_2_0= RULE_ID )
                     {
-                    // InternalSimpleReconstrTestLanguage.g:2249:1: (lv_x_2_0= RULE_ID )
-                    // InternalSimpleReconstrTestLanguage.g:2250:3: lv_x_2_0= RULE_ID
+                    // InternalSimpleReconstrTestLanguage.g:2198:6: (lv_x_2_0= RULE_ID )
+                    // InternalSimpleReconstrTestLanguage.g:2199:7: lv_x_2_0= RULE_ID
                     {
                     lv_x_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_43); 
 
-                    			newLeafNode(lv_x_2_0, grammarAccess.getBug305171Access().getXIDTerminalRuleCall_1_0_1_0()); 
-                    		
+                    							newLeafNode(lv_x_2_0, grammarAccess.getBug305171Access().getXIDTerminalRuleCall_1_0_1_0());
+                    						
 
-                    	        if (current==null) {
-                    	            current = createModelElement(grammarAccess.getBug305171Rule());
-                    	        }
-                           		addWithLastConsumed(
-                           			current, 
-                           			"x",
-                            		lv_x_2_0, 
-                            		"org.eclipse.xtext.common.Terminals.ID");
-                    	    
-
-                    }
-
+                    							if (current==null) {
+                    								current = createModelElement(grammarAccess.getBug305171Rule());
+                    							}
+                    							addWithLastConsumed(
+                    								current,
+                    								"x",
+                    								lv_x_2_0,
+                    								"org.eclipse.xtext.common.Terminals.ID");
+                    						
 
                     }
 
-                    // InternalSimpleReconstrTestLanguage.g:2266:2: (otherlv_3= ',' ( (lv_x_4_0= RULE_ID ) ) )*
+
+                    }
+
+                    // InternalSimpleReconstrTestLanguage.g:2215:5: (otherlv_3= ',' ( (lv_x_4_0= RULE_ID ) ) )*
                     loop33:
                     do {
                         int alt33=2;
@@ -5837,32 +5935,32 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
                         switch (alt33) {
                     	case 1 :
-                    	    // InternalSimpleReconstrTestLanguage.g:2266:4: otherlv_3= ',' ( (lv_x_4_0= RULE_ID ) )
+                    	    // InternalSimpleReconstrTestLanguage.g:2216:6: otherlv_3= ',' ( (lv_x_4_0= RULE_ID ) )
                     	    {
                     	    otherlv_3=(Token)match(input,30,FollowSets000.FOLLOW_10); 
 
-                    	        	newLeafNode(otherlv_3, grammarAccess.getBug305171Access().getCommaKeyword_1_0_2_0());
-                    	        
-                    	    // InternalSimpleReconstrTestLanguage.g:2270:1: ( (lv_x_4_0= RULE_ID ) )
-                    	    // InternalSimpleReconstrTestLanguage.g:2271:1: (lv_x_4_0= RULE_ID )
+                    	    						newLeafNode(otherlv_3, grammarAccess.getBug305171Access().getCommaKeyword_1_0_2_0());
+                    	    					
+                    	    // InternalSimpleReconstrTestLanguage.g:2220:6: ( (lv_x_4_0= RULE_ID ) )
+                    	    // InternalSimpleReconstrTestLanguage.g:2221:7: (lv_x_4_0= RULE_ID )
                     	    {
-                    	    // InternalSimpleReconstrTestLanguage.g:2271:1: (lv_x_4_0= RULE_ID )
-                    	    // InternalSimpleReconstrTestLanguage.g:2272:3: lv_x_4_0= RULE_ID
+                    	    // InternalSimpleReconstrTestLanguage.g:2221:7: (lv_x_4_0= RULE_ID )
+                    	    // InternalSimpleReconstrTestLanguage.g:2222:8: lv_x_4_0= RULE_ID
                     	    {
                     	    lv_x_4_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_43); 
 
-                    	    			newLeafNode(lv_x_4_0, grammarAccess.getBug305171Access().getXIDTerminalRuleCall_1_0_2_1_0()); 
-                    	    		
+                    	    								newLeafNode(lv_x_4_0, grammarAccess.getBug305171Access().getXIDTerminalRuleCall_1_0_2_1_0());
+                    	    							
 
-                    	    	        if (current==null) {
-                    	    	            current = createModelElement(grammarAccess.getBug305171Rule());
-                    	    	        }
-                    	           		addWithLastConsumed(
-                    	           			current, 
-                    	           			"x",
-                    	            		lv_x_4_0, 
-                    	            		"org.eclipse.xtext.common.Terminals.ID");
-                    	    	    
+                    	    								if (current==null) {
+                    	    									current = createModelElement(grammarAccess.getBug305171Rule());
+                    	    								}
+                    	    								addWithLastConsumed(
+                    	    									current,
+                    	    									"x",
+                    	    									lv_x_4_0,
+                    	    									"org.eclipse.xtext.common.Terminals.ID");
+                    	    							
 
                     	    }
 
@@ -5884,10 +5982,10 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
             }
 
-            // InternalSimpleReconstrTestLanguage.g:2288:6: ( (otherlv_5= 'ky' ( (lv_y_6_0= RULE_ID ) ) (otherlv_7= ',' ( (lv_y_8_0= RULE_ID ) ) )* )? (otherlv_9= 'kz' ( (lv_z_10_0= RULE_ID ) ) (otherlv_11= ',' ( (lv_z_12_0= RULE_ID ) ) )* )? )
-            // InternalSimpleReconstrTestLanguage.g:2288:7: (otherlv_5= 'ky' ( (lv_y_6_0= RULE_ID ) ) (otherlv_7= ',' ( (lv_y_8_0= RULE_ID ) ) )* )? (otherlv_9= 'kz' ( (lv_z_10_0= RULE_ID ) ) (otherlv_11= ',' ( (lv_z_12_0= RULE_ID ) ) )* )?
+            // InternalSimpleReconstrTestLanguage.g:2240:4: ( (otherlv_5= 'ky' ( (lv_y_6_0= RULE_ID ) ) (otherlv_7= ',' ( (lv_y_8_0= RULE_ID ) ) )* )? (otherlv_9= 'kz' ( (lv_z_10_0= RULE_ID ) ) (otherlv_11= ',' ( (lv_z_12_0= RULE_ID ) ) )* )? )
+            // InternalSimpleReconstrTestLanguage.g:2241:5: (otherlv_5= 'ky' ( (lv_y_6_0= RULE_ID ) ) (otherlv_7= ',' ( (lv_y_8_0= RULE_ID ) ) )* )? (otherlv_9= 'kz' ( (lv_z_10_0= RULE_ID ) ) (otherlv_11= ',' ( (lv_z_12_0= RULE_ID ) ) )* )?
             {
-            // InternalSimpleReconstrTestLanguage.g:2288:7: (otherlv_5= 'ky' ( (lv_y_6_0= RULE_ID ) ) (otherlv_7= ',' ( (lv_y_8_0= RULE_ID ) ) )* )?
+            // InternalSimpleReconstrTestLanguage.g:2241:5: (otherlv_5= 'ky' ( (lv_y_6_0= RULE_ID ) ) (otherlv_7= ',' ( (lv_y_8_0= RULE_ID ) ) )* )?
             int alt36=2;
             int LA36_0 = input.LA(1);
 
@@ -5896,39 +5994,39 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
             }
             switch (alt36) {
                 case 1 :
-                    // InternalSimpleReconstrTestLanguage.g:2288:9: otherlv_5= 'ky' ( (lv_y_6_0= RULE_ID ) ) (otherlv_7= ',' ( (lv_y_8_0= RULE_ID ) ) )*
+                    // InternalSimpleReconstrTestLanguage.g:2242:6: otherlv_5= 'ky' ( (lv_y_6_0= RULE_ID ) ) (otherlv_7= ',' ( (lv_y_8_0= RULE_ID ) ) )*
                     {
                     otherlv_5=(Token)match(input,66,FollowSets000.FOLLOW_10); 
 
-                        	newLeafNode(otherlv_5, grammarAccess.getBug305171Access().getKyKeyword_1_1_0_0());
-                        
-                    // InternalSimpleReconstrTestLanguage.g:2292:1: ( (lv_y_6_0= RULE_ID ) )
-                    // InternalSimpleReconstrTestLanguage.g:2293:1: (lv_y_6_0= RULE_ID )
+                    						newLeafNode(otherlv_5, grammarAccess.getBug305171Access().getKyKeyword_1_1_0_0());
+                    					
+                    // InternalSimpleReconstrTestLanguage.g:2246:6: ( (lv_y_6_0= RULE_ID ) )
+                    // InternalSimpleReconstrTestLanguage.g:2247:7: (lv_y_6_0= RULE_ID )
                     {
-                    // InternalSimpleReconstrTestLanguage.g:2293:1: (lv_y_6_0= RULE_ID )
-                    // InternalSimpleReconstrTestLanguage.g:2294:3: lv_y_6_0= RULE_ID
+                    // InternalSimpleReconstrTestLanguage.g:2247:7: (lv_y_6_0= RULE_ID )
+                    // InternalSimpleReconstrTestLanguage.g:2248:8: lv_y_6_0= RULE_ID
                     {
                     lv_y_6_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_44); 
 
-                    			newLeafNode(lv_y_6_0, grammarAccess.getBug305171Access().getYIDTerminalRuleCall_1_1_0_1_0()); 
-                    		
+                    								newLeafNode(lv_y_6_0, grammarAccess.getBug305171Access().getYIDTerminalRuleCall_1_1_0_1_0());
+                    							
 
-                    	        if (current==null) {
-                    	            current = createModelElement(grammarAccess.getBug305171Rule());
-                    	        }
-                           		addWithLastConsumed(
-                           			current, 
-                           			"y",
-                            		lv_y_6_0, 
-                            		"org.eclipse.xtext.common.Terminals.ID");
-                    	    
-
-                    }
-
+                    								if (current==null) {
+                    									current = createModelElement(grammarAccess.getBug305171Rule());
+                    								}
+                    								addWithLastConsumed(
+                    									current,
+                    									"y",
+                    									lv_y_6_0,
+                    									"org.eclipse.xtext.common.Terminals.ID");
+                    							
 
                     }
 
-                    // InternalSimpleReconstrTestLanguage.g:2310:2: (otherlv_7= ',' ( (lv_y_8_0= RULE_ID ) ) )*
+
+                    }
+
+                    // InternalSimpleReconstrTestLanguage.g:2264:6: (otherlv_7= ',' ( (lv_y_8_0= RULE_ID ) ) )*
                     loop35:
                     do {
                         int alt35=2;
@@ -5941,32 +6039,32 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
                         switch (alt35) {
                     	case 1 :
-                    	    // InternalSimpleReconstrTestLanguage.g:2310:4: otherlv_7= ',' ( (lv_y_8_0= RULE_ID ) )
+                    	    // InternalSimpleReconstrTestLanguage.g:2265:7: otherlv_7= ',' ( (lv_y_8_0= RULE_ID ) )
                     	    {
                     	    otherlv_7=(Token)match(input,30,FollowSets000.FOLLOW_10); 
 
-                    	        	newLeafNode(otherlv_7, grammarAccess.getBug305171Access().getCommaKeyword_1_1_0_2_0());
-                    	        
-                    	    // InternalSimpleReconstrTestLanguage.g:2314:1: ( (lv_y_8_0= RULE_ID ) )
-                    	    // InternalSimpleReconstrTestLanguage.g:2315:1: (lv_y_8_0= RULE_ID )
+                    	    							newLeafNode(otherlv_7, grammarAccess.getBug305171Access().getCommaKeyword_1_1_0_2_0());
+                    	    						
+                    	    // InternalSimpleReconstrTestLanguage.g:2269:7: ( (lv_y_8_0= RULE_ID ) )
+                    	    // InternalSimpleReconstrTestLanguage.g:2270:8: (lv_y_8_0= RULE_ID )
                     	    {
-                    	    // InternalSimpleReconstrTestLanguage.g:2315:1: (lv_y_8_0= RULE_ID )
-                    	    // InternalSimpleReconstrTestLanguage.g:2316:3: lv_y_8_0= RULE_ID
+                    	    // InternalSimpleReconstrTestLanguage.g:2270:8: (lv_y_8_0= RULE_ID )
+                    	    // InternalSimpleReconstrTestLanguage.g:2271:9: lv_y_8_0= RULE_ID
                     	    {
                     	    lv_y_8_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_44); 
 
-                    	    			newLeafNode(lv_y_8_0, grammarAccess.getBug305171Access().getYIDTerminalRuleCall_1_1_0_2_1_0()); 
-                    	    		
+                    	    									newLeafNode(lv_y_8_0, grammarAccess.getBug305171Access().getYIDTerminalRuleCall_1_1_0_2_1_0());
+                    	    								
 
-                    	    	        if (current==null) {
-                    	    	            current = createModelElement(grammarAccess.getBug305171Rule());
-                    	    	        }
-                    	           		addWithLastConsumed(
-                    	           			current, 
-                    	           			"y",
-                    	            		lv_y_8_0, 
-                    	            		"org.eclipse.xtext.common.Terminals.ID");
-                    	    	    
+                    	    									if (current==null) {
+                    	    										current = createModelElement(grammarAccess.getBug305171Rule());
+                    	    									}
+                    	    									addWithLastConsumed(
+                    	    										current,
+                    	    										"y",
+                    	    										lv_y_8_0,
+                    	    										"org.eclipse.xtext.common.Terminals.ID");
+                    	    								
 
                     	    }
 
@@ -5988,7 +6086,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
             }
 
-            // InternalSimpleReconstrTestLanguage.g:2332:6: (otherlv_9= 'kz' ( (lv_z_10_0= RULE_ID ) ) (otherlv_11= ',' ( (lv_z_12_0= RULE_ID ) ) )* )?
+            // InternalSimpleReconstrTestLanguage.g:2289:5: (otherlv_9= 'kz' ( (lv_z_10_0= RULE_ID ) ) (otherlv_11= ',' ( (lv_z_12_0= RULE_ID ) ) )* )?
             int alt38=2;
             int LA38_0 = input.LA(1);
 
@@ -5997,39 +6095,39 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
             }
             switch (alt38) {
                 case 1 :
-                    // InternalSimpleReconstrTestLanguage.g:2332:8: otherlv_9= 'kz' ( (lv_z_10_0= RULE_ID ) ) (otherlv_11= ',' ( (lv_z_12_0= RULE_ID ) ) )*
+                    // InternalSimpleReconstrTestLanguage.g:2290:6: otherlv_9= 'kz' ( (lv_z_10_0= RULE_ID ) ) (otherlv_11= ',' ( (lv_z_12_0= RULE_ID ) ) )*
                     {
                     otherlv_9=(Token)match(input,67,FollowSets000.FOLLOW_10); 
 
-                        	newLeafNode(otherlv_9, grammarAccess.getBug305171Access().getKzKeyword_1_1_1_0());
-                        
-                    // InternalSimpleReconstrTestLanguage.g:2336:1: ( (lv_z_10_0= RULE_ID ) )
-                    // InternalSimpleReconstrTestLanguage.g:2337:1: (lv_z_10_0= RULE_ID )
+                    						newLeafNode(otherlv_9, grammarAccess.getBug305171Access().getKzKeyword_1_1_1_0());
+                    					
+                    // InternalSimpleReconstrTestLanguage.g:2294:6: ( (lv_z_10_0= RULE_ID ) )
+                    // InternalSimpleReconstrTestLanguage.g:2295:7: (lv_z_10_0= RULE_ID )
                     {
-                    // InternalSimpleReconstrTestLanguage.g:2337:1: (lv_z_10_0= RULE_ID )
-                    // InternalSimpleReconstrTestLanguage.g:2338:3: lv_z_10_0= RULE_ID
+                    // InternalSimpleReconstrTestLanguage.g:2295:7: (lv_z_10_0= RULE_ID )
+                    // InternalSimpleReconstrTestLanguage.g:2296:8: lv_z_10_0= RULE_ID
                     {
                     lv_z_10_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_45); 
 
-                    			newLeafNode(lv_z_10_0, grammarAccess.getBug305171Access().getZIDTerminalRuleCall_1_1_1_1_0()); 
-                    		
+                    								newLeafNode(lv_z_10_0, grammarAccess.getBug305171Access().getZIDTerminalRuleCall_1_1_1_1_0());
+                    							
 
-                    	        if (current==null) {
-                    	            current = createModelElement(grammarAccess.getBug305171Rule());
-                    	        }
-                           		addWithLastConsumed(
-                           			current, 
-                           			"z",
-                            		lv_z_10_0, 
-                            		"org.eclipse.xtext.common.Terminals.ID");
-                    	    
-
-                    }
-
+                    								if (current==null) {
+                    									current = createModelElement(grammarAccess.getBug305171Rule());
+                    								}
+                    								addWithLastConsumed(
+                    									current,
+                    									"z",
+                    									lv_z_10_0,
+                    									"org.eclipse.xtext.common.Terminals.ID");
+                    							
 
                     }
 
-                    // InternalSimpleReconstrTestLanguage.g:2354:2: (otherlv_11= ',' ( (lv_z_12_0= RULE_ID ) ) )*
+
+                    }
+
+                    // InternalSimpleReconstrTestLanguage.g:2312:6: (otherlv_11= ',' ( (lv_z_12_0= RULE_ID ) ) )*
                     loop37:
                     do {
                         int alt37=2;
@@ -6042,32 +6140,32 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
                         switch (alt37) {
                     	case 1 :
-                    	    // InternalSimpleReconstrTestLanguage.g:2354:4: otherlv_11= ',' ( (lv_z_12_0= RULE_ID ) )
+                    	    // InternalSimpleReconstrTestLanguage.g:2313:7: otherlv_11= ',' ( (lv_z_12_0= RULE_ID ) )
                     	    {
                     	    otherlv_11=(Token)match(input,30,FollowSets000.FOLLOW_10); 
 
-                    	        	newLeafNode(otherlv_11, grammarAccess.getBug305171Access().getCommaKeyword_1_1_1_2_0());
-                    	        
-                    	    // InternalSimpleReconstrTestLanguage.g:2358:1: ( (lv_z_12_0= RULE_ID ) )
-                    	    // InternalSimpleReconstrTestLanguage.g:2359:1: (lv_z_12_0= RULE_ID )
+                    	    							newLeafNode(otherlv_11, grammarAccess.getBug305171Access().getCommaKeyword_1_1_1_2_0());
+                    	    						
+                    	    // InternalSimpleReconstrTestLanguage.g:2317:7: ( (lv_z_12_0= RULE_ID ) )
+                    	    // InternalSimpleReconstrTestLanguage.g:2318:8: (lv_z_12_0= RULE_ID )
                     	    {
-                    	    // InternalSimpleReconstrTestLanguage.g:2359:1: (lv_z_12_0= RULE_ID )
-                    	    // InternalSimpleReconstrTestLanguage.g:2360:3: lv_z_12_0= RULE_ID
+                    	    // InternalSimpleReconstrTestLanguage.g:2318:8: (lv_z_12_0= RULE_ID )
+                    	    // InternalSimpleReconstrTestLanguage.g:2319:9: lv_z_12_0= RULE_ID
                     	    {
                     	    lv_z_12_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_45); 
 
-                    	    			newLeafNode(lv_z_12_0, grammarAccess.getBug305171Access().getZIDTerminalRuleCall_1_1_1_2_1_0()); 
-                    	    		
+                    	    									newLeafNode(lv_z_12_0, grammarAccess.getBug305171Access().getZIDTerminalRuleCall_1_1_1_2_1_0());
+                    	    								
 
-                    	    	        if (current==null) {
-                    	    	            current = createModelElement(grammarAccess.getBug305171Rule());
-                    	    	        }
-                    	           		addWithLastConsumed(
-                    	           			current, 
-                    	           			"z",
-                    	            		lv_z_12_0, 
-                    	            		"org.eclipse.xtext.common.Terminals.ID");
-                    	    	    
+                    	    									if (current==null) {
+                    	    										current = createModelElement(grammarAccess.getBug305171Rule());
+                    	    									}
+                    	    									addWithLastConsumed(
+                    	    										current,
+                    	    										"z",
+                    	    										lv_z_12_0,
+                    	    										"org.eclipse.xtext.common.Terminals.ID");
+                    	    								
 
                     	    }
 
@@ -6095,29 +6193,26 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
             }
 
-            // InternalSimpleReconstrTestLanguage.g:2376:8: ( (lv_name_13_0= RULE_ID ) )
-            // InternalSimpleReconstrTestLanguage.g:2377:1: (lv_name_13_0= RULE_ID )
+            // InternalSimpleReconstrTestLanguage.g:2339:3: ( (lv_name_13_0= RULE_ID ) )
+            // InternalSimpleReconstrTestLanguage.g:2340:4: (lv_name_13_0= RULE_ID )
             {
-            // InternalSimpleReconstrTestLanguage.g:2377:1: (lv_name_13_0= RULE_ID )
-            // InternalSimpleReconstrTestLanguage.g:2378:3: lv_name_13_0= RULE_ID
+            // InternalSimpleReconstrTestLanguage.g:2340:4: (lv_name_13_0= RULE_ID )
+            // InternalSimpleReconstrTestLanguage.g:2341:5: lv_name_13_0= RULE_ID
             {
             lv_name_13_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
-            			newLeafNode(lv_name_13_0, grammarAccess.getBug305171Access().getNameIDTerminalRuleCall_2_0()); 
-            		
+            					newLeafNode(lv_name_13_0, grammarAccess.getBug305171Access().getNameIDTerminalRuleCall_2_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getBug305171Rule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"name",
-                    		lv_name_13_0, 
-                    		"org.eclipse.xtext.common.Terminals.ID");
-            	    
-
-            }
-
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getBug305171Rule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"name",
+            						lv_name_13_0,
+            						"org.eclipse.xtext.common.Terminals.ID");
+            				
 
             }
 
@@ -6127,13 +6222,18 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
             }
 
-             leaveRule(); 
+
+            }
+
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -6142,7 +6242,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "entryRuleBug310435Enum"
-    // InternalSimpleReconstrTestLanguage.g:2402:1: entryRuleBug310435Enum returns [EObject current=null] : iv_ruleBug310435Enum= ruleBug310435Enum EOF ;
+    // InternalSimpleReconstrTestLanguage.g:2361:1: entryRuleBug310435Enum returns [EObject current=null] : iv_ruleBug310435Enum= ruleBug310435Enum EOF ;
     public final EObject entryRuleBug310435Enum() throws RecognitionException {
         EObject current = null;
 
@@ -6150,8 +6250,8 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
         try {
-            // InternalSimpleReconstrTestLanguage.g:2403:2: (iv_ruleBug310435Enum= ruleBug310435Enum EOF )
-            // InternalSimpleReconstrTestLanguage.g:2404:2: iv_ruleBug310435Enum= ruleBug310435Enum EOF
+            // InternalSimpleReconstrTestLanguage.g:2361:54: (iv_ruleBug310435Enum= ruleBug310435Enum EOF )
+            // InternalSimpleReconstrTestLanguage.g:2362:2: iv_ruleBug310435Enum= ruleBug310435Enum EOF
             {
              newCompositeNode(grammarAccess.getBug310435EnumRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -6165,11 +6265,11 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -6178,7 +6278,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "ruleBug310435Enum"
-    // InternalSimpleReconstrTestLanguage.g:2411:1: ruleBug310435Enum returns [EObject current=null] : (otherlv_0= '#20' ( (otherlv_1= 'kw1' ( (lv_lits_2_0= ruleEnumBug310435Lit1 ) ) ) | (otherlv_3= 'kw2' ( (lv_lits_4_0= ruleEnumBug310435Lit2 ) ) ) )* ) ;
+    // InternalSimpleReconstrTestLanguage.g:2368:1: ruleBug310435Enum returns [EObject current=null] : (otherlv_0= '#20' ( (otherlv_1= 'kw1' ( (lv_lits_2_0= ruleEnumBug310435Lit1 ) ) ) | (otherlv_3= 'kw2' ( (lv_lits_4_0= ruleEnumBug310435Lit2 ) ) ) )* ) ;
     public final EObject ruleBug310435Enum() throws RecognitionException {
         EObject current = null;
 
@@ -6190,20 +6290,21 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
         Enumerator lv_lits_4_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalSimpleReconstrTestLanguage.g:2414:28: ( (otherlv_0= '#20' ( (otherlv_1= 'kw1' ( (lv_lits_2_0= ruleEnumBug310435Lit1 ) ) ) | (otherlv_3= 'kw2' ( (lv_lits_4_0= ruleEnumBug310435Lit2 ) ) ) )* ) )
-            // InternalSimpleReconstrTestLanguage.g:2415:1: (otherlv_0= '#20' ( (otherlv_1= 'kw1' ( (lv_lits_2_0= ruleEnumBug310435Lit1 ) ) ) | (otherlv_3= 'kw2' ( (lv_lits_4_0= ruleEnumBug310435Lit2 ) ) ) )* )
+            // InternalSimpleReconstrTestLanguage.g:2374:2: ( (otherlv_0= '#20' ( (otherlv_1= 'kw1' ( (lv_lits_2_0= ruleEnumBug310435Lit1 ) ) ) | (otherlv_3= 'kw2' ( (lv_lits_4_0= ruleEnumBug310435Lit2 ) ) ) )* ) )
+            // InternalSimpleReconstrTestLanguage.g:2375:2: (otherlv_0= '#20' ( (otherlv_1= 'kw1' ( (lv_lits_2_0= ruleEnumBug310435Lit1 ) ) ) | (otherlv_3= 'kw2' ( (lv_lits_4_0= ruleEnumBug310435Lit2 ) ) ) )* )
             {
-            // InternalSimpleReconstrTestLanguage.g:2415:1: (otherlv_0= '#20' ( (otherlv_1= 'kw1' ( (lv_lits_2_0= ruleEnumBug310435Lit1 ) ) ) | (otherlv_3= 'kw2' ( (lv_lits_4_0= ruleEnumBug310435Lit2 ) ) ) )* )
-            // InternalSimpleReconstrTestLanguage.g:2415:3: otherlv_0= '#20' ( (otherlv_1= 'kw1' ( (lv_lits_2_0= ruleEnumBug310435Lit1 ) ) ) | (otherlv_3= 'kw2' ( (lv_lits_4_0= ruleEnumBug310435Lit2 ) ) ) )*
+            // InternalSimpleReconstrTestLanguage.g:2375:2: (otherlv_0= '#20' ( (otherlv_1= 'kw1' ( (lv_lits_2_0= ruleEnumBug310435Lit1 ) ) ) | (otherlv_3= 'kw2' ( (lv_lits_4_0= ruleEnumBug310435Lit2 ) ) ) )* )
+            // InternalSimpleReconstrTestLanguage.g:2376:3: otherlv_0= '#20' ( (otherlv_1= 'kw1' ( (lv_lits_2_0= ruleEnumBug310435Lit1 ) ) ) | (otherlv_3= 'kw2' ( (lv_lits_4_0= ruleEnumBug310435Lit2 ) ) ) )*
             {
             otherlv_0=(Token)match(input,68,FollowSets000.FOLLOW_46); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getBug310435EnumAccess().getNumberSignDigitTwoDigitZeroKeyword_0());
-                
-            // InternalSimpleReconstrTestLanguage.g:2419:1: ( (otherlv_1= 'kw1' ( (lv_lits_2_0= ruleEnumBug310435Lit1 ) ) ) | (otherlv_3= 'kw2' ( (lv_lits_4_0= ruleEnumBug310435Lit2 ) ) ) )*
+            			newLeafNode(otherlv_0, grammarAccess.getBug310435EnumAccess().getNumberSignDigitTwoDigitZeroKeyword_0());
+            		
+            // InternalSimpleReconstrTestLanguage.g:2380:3: ( (otherlv_1= 'kw1' ( (lv_lits_2_0= ruleEnumBug310435Lit1 ) ) ) | (otherlv_3= 'kw2' ( (lv_lits_4_0= ruleEnumBug310435Lit2 ) ) ) )*
             loop39:
             do {
                 int alt39=3;
@@ -6231,40 +6332,40 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
                 switch (alt39) {
             	case 1 :
-            	    // InternalSimpleReconstrTestLanguage.g:2419:2: (otherlv_1= 'kw1' ( (lv_lits_2_0= ruleEnumBug310435Lit1 ) ) )
+            	    // InternalSimpleReconstrTestLanguage.g:2381:4: (otherlv_1= 'kw1' ( (lv_lits_2_0= ruleEnumBug310435Lit1 ) ) )
             	    {
-            	    // InternalSimpleReconstrTestLanguage.g:2419:2: (otherlv_1= 'kw1' ( (lv_lits_2_0= ruleEnumBug310435Lit1 ) ) )
-            	    // InternalSimpleReconstrTestLanguage.g:2419:4: otherlv_1= 'kw1' ( (lv_lits_2_0= ruleEnumBug310435Lit1 ) )
+            	    // InternalSimpleReconstrTestLanguage.g:2381:4: (otherlv_1= 'kw1' ( (lv_lits_2_0= ruleEnumBug310435Lit1 ) ) )
+            	    // InternalSimpleReconstrTestLanguage.g:2382:5: otherlv_1= 'kw1' ( (lv_lits_2_0= ruleEnumBug310435Lit1 ) )
             	    {
             	    otherlv_1=(Token)match(input,37,FollowSets000.FOLLOW_47); 
 
-            	        	newLeafNode(otherlv_1, grammarAccess.getBug310435EnumAccess().getKw1Keyword_1_0_0());
-            	        
-            	    // InternalSimpleReconstrTestLanguage.g:2423:1: ( (lv_lits_2_0= ruleEnumBug310435Lit1 ) )
-            	    // InternalSimpleReconstrTestLanguage.g:2424:1: (lv_lits_2_0= ruleEnumBug310435Lit1 )
+            	    					newLeafNode(otherlv_1, grammarAccess.getBug310435EnumAccess().getKw1Keyword_1_0_0());
+            	    				
+            	    // InternalSimpleReconstrTestLanguage.g:2386:5: ( (lv_lits_2_0= ruleEnumBug310435Lit1 ) )
+            	    // InternalSimpleReconstrTestLanguage.g:2387:6: (lv_lits_2_0= ruleEnumBug310435Lit1 )
             	    {
-            	    // InternalSimpleReconstrTestLanguage.g:2424:1: (lv_lits_2_0= ruleEnumBug310435Lit1 )
-            	    // InternalSimpleReconstrTestLanguage.g:2425:3: lv_lits_2_0= ruleEnumBug310435Lit1
+            	    // InternalSimpleReconstrTestLanguage.g:2387:6: (lv_lits_2_0= ruleEnumBug310435Lit1 )
+            	    // InternalSimpleReconstrTestLanguage.g:2388:7: lv_lits_2_0= ruleEnumBug310435Lit1
             	    {
-            	     
-            	    	        newCompositeNode(grammarAccess.getBug310435EnumAccess().getLitsEnumBug310435Lit1EnumRuleCall_1_0_1_0()); 
-            	    	    
+
+            	    							newCompositeNode(grammarAccess.getBug310435EnumAccess().getLitsEnumBug310435Lit1EnumRuleCall_1_0_1_0());
+            	    						
             	    pushFollow(FollowSets000.FOLLOW_46);
             	    lv_lits_2_0=ruleEnumBug310435Lit1();
 
             	    state._fsp--;
 
 
-            	    	        if (current==null) {
-            	    	            current = createModelElementForParent(grammarAccess.getBug310435EnumRule());
-            	    	        }
-            	           		add(
-            	           			current, 
-            	           			"lits",
-            	            		lv_lits_2_0, 
-            	            		"org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage.EnumBug310435Lit1");
-            	    	        afterParserOrEnumRuleCall();
-            	    	    
+            	    							if (current==null) {
+            	    								current = createModelElementForParent(grammarAccess.getBug310435EnumRule());
+            	    							}
+            	    							add(
+            	    								current,
+            	    								"lits",
+            	    								lv_lits_2_0,
+            	    								"org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage.EnumBug310435Lit1");
+            	    							afterParserOrEnumRuleCall();
+            	    						
 
             	    }
 
@@ -6278,40 +6379,40 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
             	    }
             	    break;
             	case 2 :
-            	    // InternalSimpleReconstrTestLanguage.g:2442:6: (otherlv_3= 'kw2' ( (lv_lits_4_0= ruleEnumBug310435Lit2 ) ) )
+            	    // InternalSimpleReconstrTestLanguage.g:2407:4: (otherlv_3= 'kw2' ( (lv_lits_4_0= ruleEnumBug310435Lit2 ) ) )
             	    {
-            	    // InternalSimpleReconstrTestLanguage.g:2442:6: (otherlv_3= 'kw2' ( (lv_lits_4_0= ruleEnumBug310435Lit2 ) ) )
-            	    // InternalSimpleReconstrTestLanguage.g:2442:8: otherlv_3= 'kw2' ( (lv_lits_4_0= ruleEnumBug310435Lit2 ) )
+            	    // InternalSimpleReconstrTestLanguage.g:2407:4: (otherlv_3= 'kw2' ( (lv_lits_4_0= ruleEnumBug310435Lit2 ) ) )
+            	    // InternalSimpleReconstrTestLanguage.g:2408:5: otherlv_3= 'kw2' ( (lv_lits_4_0= ruleEnumBug310435Lit2 ) )
             	    {
             	    otherlv_3=(Token)match(input,38,FollowSets000.FOLLOW_48); 
 
-            	        	newLeafNode(otherlv_3, grammarAccess.getBug310435EnumAccess().getKw2Keyword_1_1_0());
-            	        
-            	    // InternalSimpleReconstrTestLanguage.g:2446:1: ( (lv_lits_4_0= ruleEnumBug310435Lit2 ) )
-            	    // InternalSimpleReconstrTestLanguage.g:2447:1: (lv_lits_4_0= ruleEnumBug310435Lit2 )
+            	    					newLeafNode(otherlv_3, grammarAccess.getBug310435EnumAccess().getKw2Keyword_1_1_0());
+            	    				
+            	    // InternalSimpleReconstrTestLanguage.g:2412:5: ( (lv_lits_4_0= ruleEnumBug310435Lit2 ) )
+            	    // InternalSimpleReconstrTestLanguage.g:2413:6: (lv_lits_4_0= ruleEnumBug310435Lit2 )
             	    {
-            	    // InternalSimpleReconstrTestLanguage.g:2447:1: (lv_lits_4_0= ruleEnumBug310435Lit2 )
-            	    // InternalSimpleReconstrTestLanguage.g:2448:3: lv_lits_4_0= ruleEnumBug310435Lit2
+            	    // InternalSimpleReconstrTestLanguage.g:2413:6: (lv_lits_4_0= ruleEnumBug310435Lit2 )
+            	    // InternalSimpleReconstrTestLanguage.g:2414:7: lv_lits_4_0= ruleEnumBug310435Lit2
             	    {
-            	     
-            	    	        newCompositeNode(grammarAccess.getBug310435EnumAccess().getLitsEnumBug310435Lit2EnumRuleCall_1_1_1_0()); 
-            	    	    
+
+            	    							newCompositeNode(grammarAccess.getBug310435EnumAccess().getLitsEnumBug310435Lit2EnumRuleCall_1_1_1_0());
+            	    						
             	    pushFollow(FollowSets000.FOLLOW_46);
             	    lv_lits_4_0=ruleEnumBug310435Lit2();
 
             	    state._fsp--;
 
 
-            	    	        if (current==null) {
-            	    	            current = createModelElementForParent(grammarAccess.getBug310435EnumRule());
-            	    	        }
-            	           		add(
-            	           			current, 
-            	           			"lits",
-            	            		lv_lits_4_0, 
-            	            		"org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage.EnumBug310435Lit2");
-            	    	        afterParserOrEnumRuleCall();
-            	    	    
+            	    							if (current==null) {
+            	    								current = createModelElementForParent(grammarAccess.getBug310435EnumRule());
+            	    							}
+            	    							add(
+            	    								current,
+            	    								"lits",
+            	    								lv_lits_4_0,
+            	    								"org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage.EnumBug310435Lit2");
+            	    							afterParserOrEnumRuleCall();
+            	    						
 
             	    }
 
@@ -6336,13 +6437,15 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -6351,7 +6454,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "entryRuleBug310435Val"
-    // InternalSimpleReconstrTestLanguage.g:2472:1: entryRuleBug310435Val returns [EObject current=null] : iv_ruleBug310435Val= ruleBug310435Val EOF ;
+    // InternalSimpleReconstrTestLanguage.g:2437:1: entryRuleBug310435Val returns [EObject current=null] : iv_ruleBug310435Val= ruleBug310435Val EOF ;
     public final EObject entryRuleBug310435Val() throws RecognitionException {
         EObject current = null;
 
@@ -6359,8 +6462,8 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
         try {
-            // InternalSimpleReconstrTestLanguage.g:2473:2: (iv_ruleBug310435Val= ruleBug310435Val EOF )
-            // InternalSimpleReconstrTestLanguage.g:2474:2: iv_ruleBug310435Val= ruleBug310435Val EOF
+            // InternalSimpleReconstrTestLanguage.g:2437:53: (iv_ruleBug310435Val= ruleBug310435Val EOF )
+            // InternalSimpleReconstrTestLanguage.g:2438:2: iv_ruleBug310435Val= ruleBug310435Val EOF
             {
              newCompositeNode(grammarAccess.getBug310435ValRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -6374,11 +6477,11 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -6387,7 +6490,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "ruleBug310435Val"
-    // InternalSimpleReconstrTestLanguage.g:2481:1: ruleBug310435Val returns [EObject current=null] : (otherlv_0= '#21' ( (otherlv_1= 'kw1' ( (lv_lits_2_0= RULE_ID ) ) ) | (otherlv_3= 'kw2' ( (lv_lits_4_0= RULE_STRING ) ) ) )* ) ;
+    // InternalSimpleReconstrTestLanguage.g:2444:1: ruleBug310435Val returns [EObject current=null] : (otherlv_0= '#21' ( (otherlv_1= 'kw1' ( (lv_lits_2_0= RULE_ID ) ) ) | (otherlv_3= 'kw2' ( (lv_lits_4_0= RULE_STRING ) ) ) )* ) ;
     public final EObject ruleBug310435Val() throws RecognitionException {
         EObject current = null;
 
@@ -6397,20 +6500,21 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
         Token otherlv_3=null;
         Token lv_lits_4_0=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalSimpleReconstrTestLanguage.g:2484:28: ( (otherlv_0= '#21' ( (otherlv_1= 'kw1' ( (lv_lits_2_0= RULE_ID ) ) ) | (otherlv_3= 'kw2' ( (lv_lits_4_0= RULE_STRING ) ) ) )* ) )
-            // InternalSimpleReconstrTestLanguage.g:2485:1: (otherlv_0= '#21' ( (otherlv_1= 'kw1' ( (lv_lits_2_0= RULE_ID ) ) ) | (otherlv_3= 'kw2' ( (lv_lits_4_0= RULE_STRING ) ) ) )* )
+            // InternalSimpleReconstrTestLanguage.g:2450:2: ( (otherlv_0= '#21' ( (otherlv_1= 'kw1' ( (lv_lits_2_0= RULE_ID ) ) ) | (otherlv_3= 'kw2' ( (lv_lits_4_0= RULE_STRING ) ) ) )* ) )
+            // InternalSimpleReconstrTestLanguage.g:2451:2: (otherlv_0= '#21' ( (otherlv_1= 'kw1' ( (lv_lits_2_0= RULE_ID ) ) ) | (otherlv_3= 'kw2' ( (lv_lits_4_0= RULE_STRING ) ) ) )* )
             {
-            // InternalSimpleReconstrTestLanguage.g:2485:1: (otherlv_0= '#21' ( (otherlv_1= 'kw1' ( (lv_lits_2_0= RULE_ID ) ) ) | (otherlv_3= 'kw2' ( (lv_lits_4_0= RULE_STRING ) ) ) )* )
-            // InternalSimpleReconstrTestLanguage.g:2485:3: otherlv_0= '#21' ( (otherlv_1= 'kw1' ( (lv_lits_2_0= RULE_ID ) ) ) | (otherlv_3= 'kw2' ( (lv_lits_4_0= RULE_STRING ) ) ) )*
+            // InternalSimpleReconstrTestLanguage.g:2451:2: (otherlv_0= '#21' ( (otherlv_1= 'kw1' ( (lv_lits_2_0= RULE_ID ) ) ) | (otherlv_3= 'kw2' ( (lv_lits_4_0= RULE_STRING ) ) ) )* )
+            // InternalSimpleReconstrTestLanguage.g:2452:3: otherlv_0= '#21' ( (otherlv_1= 'kw1' ( (lv_lits_2_0= RULE_ID ) ) ) | (otherlv_3= 'kw2' ( (lv_lits_4_0= RULE_STRING ) ) ) )*
             {
             otherlv_0=(Token)match(input,69,FollowSets000.FOLLOW_46); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getBug310435ValAccess().getNumberSignDigitTwoDigitOneKeyword_0());
-                
-            // InternalSimpleReconstrTestLanguage.g:2489:1: ( (otherlv_1= 'kw1' ( (lv_lits_2_0= RULE_ID ) ) ) | (otherlv_3= 'kw2' ( (lv_lits_4_0= RULE_STRING ) ) ) )*
+            			newLeafNode(otherlv_0, grammarAccess.getBug310435ValAccess().getNumberSignDigitTwoDigitOneKeyword_0());
+            		
+            // InternalSimpleReconstrTestLanguage.g:2456:3: ( (otherlv_1= 'kw1' ( (lv_lits_2_0= RULE_ID ) ) ) | (otherlv_3= 'kw2' ( (lv_lits_4_0= RULE_STRING ) ) ) )*
             loop40:
             do {
                 int alt40=3;
@@ -6438,35 +6542,35 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
                 switch (alt40) {
             	case 1 :
-            	    // InternalSimpleReconstrTestLanguage.g:2489:2: (otherlv_1= 'kw1' ( (lv_lits_2_0= RULE_ID ) ) )
+            	    // InternalSimpleReconstrTestLanguage.g:2457:4: (otherlv_1= 'kw1' ( (lv_lits_2_0= RULE_ID ) ) )
             	    {
-            	    // InternalSimpleReconstrTestLanguage.g:2489:2: (otherlv_1= 'kw1' ( (lv_lits_2_0= RULE_ID ) ) )
-            	    // InternalSimpleReconstrTestLanguage.g:2489:4: otherlv_1= 'kw1' ( (lv_lits_2_0= RULE_ID ) )
+            	    // InternalSimpleReconstrTestLanguage.g:2457:4: (otherlv_1= 'kw1' ( (lv_lits_2_0= RULE_ID ) ) )
+            	    // InternalSimpleReconstrTestLanguage.g:2458:5: otherlv_1= 'kw1' ( (lv_lits_2_0= RULE_ID ) )
             	    {
             	    otherlv_1=(Token)match(input,37,FollowSets000.FOLLOW_10); 
 
-            	        	newLeafNode(otherlv_1, grammarAccess.getBug310435ValAccess().getKw1Keyword_1_0_0());
-            	        
-            	    // InternalSimpleReconstrTestLanguage.g:2493:1: ( (lv_lits_2_0= RULE_ID ) )
-            	    // InternalSimpleReconstrTestLanguage.g:2494:1: (lv_lits_2_0= RULE_ID )
+            	    					newLeafNode(otherlv_1, grammarAccess.getBug310435ValAccess().getKw1Keyword_1_0_0());
+            	    				
+            	    // InternalSimpleReconstrTestLanguage.g:2462:5: ( (lv_lits_2_0= RULE_ID ) )
+            	    // InternalSimpleReconstrTestLanguage.g:2463:6: (lv_lits_2_0= RULE_ID )
             	    {
-            	    // InternalSimpleReconstrTestLanguage.g:2494:1: (lv_lits_2_0= RULE_ID )
-            	    // InternalSimpleReconstrTestLanguage.g:2495:3: lv_lits_2_0= RULE_ID
+            	    // InternalSimpleReconstrTestLanguage.g:2463:6: (lv_lits_2_0= RULE_ID )
+            	    // InternalSimpleReconstrTestLanguage.g:2464:7: lv_lits_2_0= RULE_ID
             	    {
             	    lv_lits_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_46); 
 
-            	    			newLeafNode(lv_lits_2_0, grammarAccess.getBug310435ValAccess().getLitsIDTerminalRuleCall_1_0_1_0()); 
-            	    		
+            	    							newLeafNode(lv_lits_2_0, grammarAccess.getBug310435ValAccess().getLitsIDTerminalRuleCall_1_0_1_0());
+            	    						
 
-            	    	        if (current==null) {
-            	    	            current = createModelElement(grammarAccess.getBug310435ValRule());
-            	    	        }
-            	           		addWithLastConsumed(
-            	           			current, 
-            	           			"lits",
-            	            		lv_lits_2_0, 
-            	            		"org.eclipse.xtext.common.Terminals.ID");
-            	    	    
+            	    							if (current==null) {
+            	    								current = createModelElement(grammarAccess.getBug310435ValRule());
+            	    							}
+            	    							addWithLastConsumed(
+            	    								current,
+            	    								"lits",
+            	    								lv_lits_2_0,
+            	    								"org.eclipse.xtext.common.Terminals.ID");
+            	    						
 
             	    }
 
@@ -6480,35 +6584,35 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
             	    }
             	    break;
             	case 2 :
-            	    // InternalSimpleReconstrTestLanguage.g:2512:6: (otherlv_3= 'kw2' ( (lv_lits_4_0= RULE_STRING ) ) )
+            	    // InternalSimpleReconstrTestLanguage.g:2482:4: (otherlv_3= 'kw2' ( (lv_lits_4_0= RULE_STRING ) ) )
             	    {
-            	    // InternalSimpleReconstrTestLanguage.g:2512:6: (otherlv_3= 'kw2' ( (lv_lits_4_0= RULE_STRING ) ) )
-            	    // InternalSimpleReconstrTestLanguage.g:2512:8: otherlv_3= 'kw2' ( (lv_lits_4_0= RULE_STRING ) )
+            	    // InternalSimpleReconstrTestLanguage.g:2482:4: (otherlv_3= 'kw2' ( (lv_lits_4_0= RULE_STRING ) ) )
+            	    // InternalSimpleReconstrTestLanguage.g:2483:5: otherlv_3= 'kw2' ( (lv_lits_4_0= RULE_STRING ) )
             	    {
             	    otherlv_3=(Token)match(input,38,FollowSets000.FOLLOW_9); 
 
-            	        	newLeafNode(otherlv_3, grammarAccess.getBug310435ValAccess().getKw2Keyword_1_1_0());
-            	        
-            	    // InternalSimpleReconstrTestLanguage.g:2516:1: ( (lv_lits_4_0= RULE_STRING ) )
-            	    // InternalSimpleReconstrTestLanguage.g:2517:1: (lv_lits_4_0= RULE_STRING )
+            	    					newLeafNode(otherlv_3, grammarAccess.getBug310435ValAccess().getKw2Keyword_1_1_0());
+            	    				
+            	    // InternalSimpleReconstrTestLanguage.g:2487:5: ( (lv_lits_4_0= RULE_STRING ) )
+            	    // InternalSimpleReconstrTestLanguage.g:2488:6: (lv_lits_4_0= RULE_STRING )
             	    {
-            	    // InternalSimpleReconstrTestLanguage.g:2517:1: (lv_lits_4_0= RULE_STRING )
-            	    // InternalSimpleReconstrTestLanguage.g:2518:3: lv_lits_4_0= RULE_STRING
+            	    // InternalSimpleReconstrTestLanguage.g:2488:6: (lv_lits_4_0= RULE_STRING )
+            	    // InternalSimpleReconstrTestLanguage.g:2489:7: lv_lits_4_0= RULE_STRING
             	    {
             	    lv_lits_4_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_46); 
 
-            	    			newLeafNode(lv_lits_4_0, grammarAccess.getBug310435ValAccess().getLitsSTRINGTerminalRuleCall_1_1_1_0()); 
-            	    		
+            	    							newLeafNode(lv_lits_4_0, grammarAccess.getBug310435ValAccess().getLitsSTRINGTerminalRuleCall_1_1_1_0());
+            	    						
 
-            	    	        if (current==null) {
-            	    	            current = createModelElement(grammarAccess.getBug310435ValRule());
-            	    	        }
-            	           		addWithLastConsumed(
-            	           			current, 
-            	           			"lits",
-            	            		lv_lits_4_0, 
-            	            		"org.eclipse.xtext.common.Terminals.STRING");
-            	    	    
+            	    							if (current==null) {
+            	    								current = createModelElement(grammarAccess.getBug310435ValRule());
+            	    							}
+            	    							addWithLastConsumed(
+            	    								current,
+            	    								"lits",
+            	    								lv_lits_4_0,
+            	    								"org.eclipse.xtext.common.Terminals.STRING");
+            	    						
 
             	    }
 
@@ -6533,13 +6637,15 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -6548,7 +6654,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "entryRuleCrossRefNameTest"
-    // InternalSimpleReconstrTestLanguage.g:2542:1: entryRuleCrossRefNameTest returns [EObject current=null] : iv_ruleCrossRefNameTest= ruleCrossRefNameTest EOF ;
+    // InternalSimpleReconstrTestLanguage.g:2511:1: entryRuleCrossRefNameTest returns [EObject current=null] : iv_ruleCrossRefNameTest= ruleCrossRefNameTest EOF ;
     public final EObject entryRuleCrossRefNameTest() throws RecognitionException {
         EObject current = null;
 
@@ -6556,8 +6662,8 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
         try {
-            // InternalSimpleReconstrTestLanguage.g:2543:2: (iv_ruleCrossRefNameTest= ruleCrossRefNameTest EOF )
-            // InternalSimpleReconstrTestLanguage.g:2544:2: iv_ruleCrossRefNameTest= ruleCrossRefNameTest EOF
+            // InternalSimpleReconstrTestLanguage.g:2511:57: (iv_ruleCrossRefNameTest= ruleCrossRefNameTest EOF )
+            // InternalSimpleReconstrTestLanguage.g:2512:2: iv_ruleCrossRefNameTest= ruleCrossRefNameTest EOF
             {
              newCompositeNode(grammarAccess.getCrossRefNameTestRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -6571,11 +6677,11 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -6584,7 +6690,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "ruleCrossRefNameTest"
-    // InternalSimpleReconstrTestLanguage.g:2551:1: ruleCrossRefNameTest returns [EObject current=null] : (otherlv_0= '#22' ( (lv_named_1_0= ruleCrossRefNamed ) )* otherlv_2= 'kw1' ( (otherlv_3= 'kw2' ( (otherlv_4= RULE_ID1 ) ) ) | (otherlv_5= 'kw3' ( (otherlv_6= RULE_ID2 ) ) ) )* ) ;
+    // InternalSimpleReconstrTestLanguage.g:2518:1: ruleCrossRefNameTest returns [EObject current=null] : (otherlv_0= '#22' ( (lv_named_1_0= ruleCrossRefNamed ) )* otherlv_2= 'kw1' ( (otherlv_3= 'kw2' ( (otherlv_4= RULE_ID1 ) ) ) | (otherlv_5= 'kw3' ( (otherlv_6= RULE_ID2 ) ) ) )* ) ;
     public final EObject ruleCrossRefNameTest() throws RecognitionException {
         EObject current = null;
 
@@ -6597,20 +6703,21 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
         EObject lv_named_1_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalSimpleReconstrTestLanguage.g:2554:28: ( (otherlv_0= '#22' ( (lv_named_1_0= ruleCrossRefNamed ) )* otherlv_2= 'kw1' ( (otherlv_3= 'kw2' ( (otherlv_4= RULE_ID1 ) ) ) | (otherlv_5= 'kw3' ( (otherlv_6= RULE_ID2 ) ) ) )* ) )
-            // InternalSimpleReconstrTestLanguage.g:2555:1: (otherlv_0= '#22' ( (lv_named_1_0= ruleCrossRefNamed ) )* otherlv_2= 'kw1' ( (otherlv_3= 'kw2' ( (otherlv_4= RULE_ID1 ) ) ) | (otherlv_5= 'kw3' ( (otherlv_6= RULE_ID2 ) ) ) )* )
+            // InternalSimpleReconstrTestLanguage.g:2524:2: ( (otherlv_0= '#22' ( (lv_named_1_0= ruleCrossRefNamed ) )* otherlv_2= 'kw1' ( (otherlv_3= 'kw2' ( (otherlv_4= RULE_ID1 ) ) ) | (otherlv_5= 'kw3' ( (otherlv_6= RULE_ID2 ) ) ) )* ) )
+            // InternalSimpleReconstrTestLanguage.g:2525:2: (otherlv_0= '#22' ( (lv_named_1_0= ruleCrossRefNamed ) )* otherlv_2= 'kw1' ( (otherlv_3= 'kw2' ( (otherlv_4= RULE_ID1 ) ) ) | (otherlv_5= 'kw3' ( (otherlv_6= RULE_ID2 ) ) ) )* )
             {
-            // InternalSimpleReconstrTestLanguage.g:2555:1: (otherlv_0= '#22' ( (lv_named_1_0= ruleCrossRefNamed ) )* otherlv_2= 'kw1' ( (otherlv_3= 'kw2' ( (otherlv_4= RULE_ID1 ) ) ) | (otherlv_5= 'kw3' ( (otherlv_6= RULE_ID2 ) ) ) )* )
-            // InternalSimpleReconstrTestLanguage.g:2555:3: otherlv_0= '#22' ( (lv_named_1_0= ruleCrossRefNamed ) )* otherlv_2= 'kw1' ( (otherlv_3= 'kw2' ( (otherlv_4= RULE_ID1 ) ) ) | (otherlv_5= 'kw3' ( (otherlv_6= RULE_ID2 ) ) ) )*
+            // InternalSimpleReconstrTestLanguage.g:2525:2: (otherlv_0= '#22' ( (lv_named_1_0= ruleCrossRefNamed ) )* otherlv_2= 'kw1' ( (otherlv_3= 'kw2' ( (otherlv_4= RULE_ID1 ) ) ) | (otherlv_5= 'kw3' ( (otherlv_6= RULE_ID2 ) ) ) )* )
+            // InternalSimpleReconstrTestLanguage.g:2526:3: otherlv_0= '#22' ( (lv_named_1_0= ruleCrossRefNamed ) )* otherlv_2= 'kw1' ( (otherlv_3= 'kw2' ( (otherlv_4= RULE_ID1 ) ) ) | (otherlv_5= 'kw3' ( (otherlv_6= RULE_ID2 ) ) ) )*
             {
             otherlv_0=(Token)match(input,70,FollowSets000.FOLLOW_49); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getCrossRefNameTestAccess().getNumberSignDigitTwoDigitTwoKeyword_0());
-                
-            // InternalSimpleReconstrTestLanguage.g:2559:1: ( (lv_named_1_0= ruleCrossRefNamed ) )*
+            			newLeafNode(otherlv_0, grammarAccess.getCrossRefNameTestAccess().getNumberSignDigitTwoDigitTwoKeyword_0());
+            		
+            // InternalSimpleReconstrTestLanguage.g:2530:3: ( (lv_named_1_0= ruleCrossRefNamed ) )*
             loop41:
             do {
                 int alt41=2;
@@ -6623,30 +6730,30 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
                 switch (alt41) {
             	case 1 :
-            	    // InternalSimpleReconstrTestLanguage.g:2560:1: (lv_named_1_0= ruleCrossRefNamed )
+            	    // InternalSimpleReconstrTestLanguage.g:2531:4: (lv_named_1_0= ruleCrossRefNamed )
             	    {
-            	    // InternalSimpleReconstrTestLanguage.g:2560:1: (lv_named_1_0= ruleCrossRefNamed )
-            	    // InternalSimpleReconstrTestLanguage.g:2561:3: lv_named_1_0= ruleCrossRefNamed
+            	    // InternalSimpleReconstrTestLanguage.g:2531:4: (lv_named_1_0= ruleCrossRefNamed )
+            	    // InternalSimpleReconstrTestLanguage.g:2532:5: lv_named_1_0= ruleCrossRefNamed
             	    {
-            	     
-            	    	        newCompositeNode(grammarAccess.getCrossRefNameTestAccess().getNamedCrossRefNamedParserRuleCall_1_0()); 
-            	    	    
+
+            	    					newCompositeNode(grammarAccess.getCrossRefNameTestAccess().getNamedCrossRefNamedParserRuleCall_1_0());
+            	    				
             	    pushFollow(FollowSets000.FOLLOW_49);
             	    lv_named_1_0=ruleCrossRefNamed();
 
             	    state._fsp--;
 
 
-            	    	        if (current==null) {
-            	    	            current = createModelElementForParent(grammarAccess.getCrossRefNameTestRule());
-            	    	        }
-            	           		add(
-            	           			current, 
-            	           			"named",
-            	            		lv_named_1_0, 
-            	            		"org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage.CrossRefNamed");
-            	    	        afterParserOrEnumRuleCall();
-            	    	    
+            	    					if (current==null) {
+            	    						current = createModelElementForParent(grammarAccess.getCrossRefNameTestRule());
+            	    					}
+            	    					add(
+            	    						current,
+            	    						"named",
+            	    						lv_named_1_0,
+            	    						"org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage.CrossRefNamed");
+            	    					afterParserOrEnumRuleCall();
+            	    				
 
             	    }
 
@@ -6661,9 +6768,9 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
             otherlv_2=(Token)match(input,37,FollowSets000.FOLLOW_50); 
 
-                	newLeafNode(otherlv_2, grammarAccess.getCrossRefNameTestAccess().getKw1Keyword_2());
-                
-            // InternalSimpleReconstrTestLanguage.g:2581:1: ( (otherlv_3= 'kw2' ( (otherlv_4= RULE_ID1 ) ) ) | (otherlv_5= 'kw3' ( (otherlv_6= RULE_ID2 ) ) ) )*
+            			newLeafNode(otherlv_2, grammarAccess.getCrossRefNameTestAccess().getKw1Keyword_2());
+            		
+            // InternalSimpleReconstrTestLanguage.g:2553:3: ( (otherlv_3= 'kw2' ( (otherlv_4= RULE_ID1 ) ) ) | (otherlv_5= 'kw3' ( (otherlv_6= RULE_ID2 ) ) ) )*
             loop42:
             do {
                 int alt42=3;
@@ -6691,30 +6798,30 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
                 switch (alt42) {
             	case 1 :
-            	    // InternalSimpleReconstrTestLanguage.g:2581:2: (otherlv_3= 'kw2' ( (otherlv_4= RULE_ID1 ) ) )
+            	    // InternalSimpleReconstrTestLanguage.g:2554:4: (otherlv_3= 'kw2' ( (otherlv_4= RULE_ID1 ) ) )
             	    {
-            	    // InternalSimpleReconstrTestLanguage.g:2581:2: (otherlv_3= 'kw2' ( (otherlv_4= RULE_ID1 ) ) )
-            	    // InternalSimpleReconstrTestLanguage.g:2581:4: otherlv_3= 'kw2' ( (otherlv_4= RULE_ID1 ) )
+            	    // InternalSimpleReconstrTestLanguage.g:2554:4: (otherlv_3= 'kw2' ( (otherlv_4= RULE_ID1 ) ) )
+            	    // InternalSimpleReconstrTestLanguage.g:2555:5: otherlv_3= 'kw2' ( (otherlv_4= RULE_ID1 ) )
             	    {
             	    otherlv_3=(Token)match(input,38,FollowSets000.FOLLOW_51); 
 
-            	        	newLeafNode(otherlv_3, grammarAccess.getCrossRefNameTestAccess().getKw2Keyword_3_0_0());
-            	        
-            	    // InternalSimpleReconstrTestLanguage.g:2585:1: ( (otherlv_4= RULE_ID1 ) )
-            	    // InternalSimpleReconstrTestLanguage.g:2586:1: (otherlv_4= RULE_ID1 )
+            	    					newLeafNode(otherlv_3, grammarAccess.getCrossRefNameTestAccess().getKw2Keyword_3_0_0());
+            	    				
+            	    // InternalSimpleReconstrTestLanguage.g:2559:5: ( (otherlv_4= RULE_ID1 ) )
+            	    // InternalSimpleReconstrTestLanguage.g:2560:6: (otherlv_4= RULE_ID1 )
             	    {
-            	    // InternalSimpleReconstrTestLanguage.g:2586:1: (otherlv_4= RULE_ID1 )
-            	    // InternalSimpleReconstrTestLanguage.g:2587:3: otherlv_4= RULE_ID1
+            	    // InternalSimpleReconstrTestLanguage.g:2560:6: (otherlv_4= RULE_ID1 )
+            	    // InternalSimpleReconstrTestLanguage.g:2561:7: otherlv_4= RULE_ID1
             	    {
 
-            	    			if (current==null) {
-            	    	            current = createModelElement(grammarAccess.getCrossRefNameTestRule());
-            	    	        }
-            	            
+            	    							if (current==null) {
+            	    								current = createModelElement(grammarAccess.getCrossRefNameTestRule());
+            	    							}
+            	    						
             	    otherlv_4=(Token)match(input,RULE_ID1,FollowSets000.FOLLOW_50); 
 
-            	    		newLeafNode(otherlv_4, grammarAccess.getCrossRefNameTestAccess().getRefCrossRefNamedCrossReference_3_0_1_0()); 
-            	    	
+            	    							newLeafNode(otherlv_4, grammarAccess.getCrossRefNameTestAccess().getRefCrossRefNamedCrossReference_3_0_1_0());
+            	    						
 
             	    }
 
@@ -6728,30 +6835,30 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
             	    }
             	    break;
             	case 2 :
-            	    // InternalSimpleReconstrTestLanguage.g:2599:6: (otherlv_5= 'kw3' ( (otherlv_6= RULE_ID2 ) ) )
+            	    // InternalSimpleReconstrTestLanguage.g:2574:4: (otherlv_5= 'kw3' ( (otherlv_6= RULE_ID2 ) ) )
             	    {
-            	    // InternalSimpleReconstrTestLanguage.g:2599:6: (otherlv_5= 'kw3' ( (otherlv_6= RULE_ID2 ) ) )
-            	    // InternalSimpleReconstrTestLanguage.g:2599:8: otherlv_5= 'kw3' ( (otherlv_6= RULE_ID2 ) )
+            	    // InternalSimpleReconstrTestLanguage.g:2574:4: (otherlv_5= 'kw3' ( (otherlv_6= RULE_ID2 ) ) )
+            	    // InternalSimpleReconstrTestLanguage.g:2575:5: otherlv_5= 'kw3' ( (otherlv_6= RULE_ID2 ) )
             	    {
             	    otherlv_5=(Token)match(input,41,FollowSets000.FOLLOW_52); 
 
-            	        	newLeafNode(otherlv_5, grammarAccess.getCrossRefNameTestAccess().getKw3Keyword_3_1_0());
-            	        
-            	    // InternalSimpleReconstrTestLanguage.g:2603:1: ( (otherlv_6= RULE_ID2 ) )
-            	    // InternalSimpleReconstrTestLanguage.g:2604:1: (otherlv_6= RULE_ID2 )
+            	    					newLeafNode(otherlv_5, grammarAccess.getCrossRefNameTestAccess().getKw3Keyword_3_1_0());
+            	    				
+            	    // InternalSimpleReconstrTestLanguage.g:2579:5: ( (otherlv_6= RULE_ID2 ) )
+            	    // InternalSimpleReconstrTestLanguage.g:2580:6: (otherlv_6= RULE_ID2 )
             	    {
-            	    // InternalSimpleReconstrTestLanguage.g:2604:1: (otherlv_6= RULE_ID2 )
-            	    // InternalSimpleReconstrTestLanguage.g:2605:3: otherlv_6= RULE_ID2
+            	    // InternalSimpleReconstrTestLanguage.g:2580:6: (otherlv_6= RULE_ID2 )
+            	    // InternalSimpleReconstrTestLanguage.g:2581:7: otherlv_6= RULE_ID2
             	    {
 
-            	    			if (current==null) {
-            	    	            current = createModelElement(grammarAccess.getCrossRefNameTestRule());
-            	    	        }
-            	            
+            	    							if (current==null) {
+            	    								current = createModelElement(grammarAccess.getCrossRefNameTestRule());
+            	    							}
+            	    						
             	    otherlv_6=(Token)match(input,RULE_ID2,FollowSets000.FOLLOW_50); 
 
-            	    		newLeafNode(otherlv_6, grammarAccess.getCrossRefNameTestAccess().getRefCrossRefNamedCrossReference_3_1_1_0()); 
-            	    	
+            	    							newLeafNode(otherlv_6, grammarAccess.getCrossRefNameTestAccess().getRefCrossRefNamedCrossReference_3_1_1_0());
+            	    						
 
             	    }
 
@@ -6776,13 +6883,15 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -6791,7 +6900,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "entryRuleCrossRefNamed"
-    // InternalSimpleReconstrTestLanguage.g:2624:1: entryRuleCrossRefNamed returns [EObject current=null] : iv_ruleCrossRefNamed= ruleCrossRefNamed EOF ;
+    // InternalSimpleReconstrTestLanguage.g:2598:1: entryRuleCrossRefNamed returns [EObject current=null] : iv_ruleCrossRefNamed= ruleCrossRefNamed EOF ;
     public final EObject entryRuleCrossRefNamed() throws RecognitionException {
         EObject current = null;
 
@@ -6799,8 +6908,8 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
         try {
-            // InternalSimpleReconstrTestLanguage.g:2625:2: (iv_ruleCrossRefNamed= ruleCrossRefNamed EOF )
-            // InternalSimpleReconstrTestLanguage.g:2626:2: iv_ruleCrossRefNamed= ruleCrossRefNamed EOF
+            // InternalSimpleReconstrTestLanguage.g:2598:54: (iv_ruleCrossRefNamed= ruleCrossRefNamed EOF )
+            // InternalSimpleReconstrTestLanguage.g:2599:2: iv_ruleCrossRefNamed= ruleCrossRefNamed EOF
             {
              newCompositeNode(grammarAccess.getCrossRefNamedRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -6814,11 +6923,11 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -6827,26 +6936,27 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "ruleCrossRefNamed"
-    // InternalSimpleReconstrTestLanguage.g:2633:1: ruleCrossRefNamed returns [EObject current=null] : ( ( (lv_name_0_1= RULE_ID1 | lv_name_0_2= RULE_ID2 ) ) ) ;
+    // InternalSimpleReconstrTestLanguage.g:2605:1: ruleCrossRefNamed returns [EObject current=null] : ( ( (lv_name_0_1= RULE_ID1 | lv_name_0_2= RULE_ID2 ) ) ) ;
     public final EObject ruleCrossRefNamed() throws RecognitionException {
         EObject current = null;
 
         Token lv_name_0_1=null;
         Token lv_name_0_2=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalSimpleReconstrTestLanguage.g:2636:28: ( ( ( (lv_name_0_1= RULE_ID1 | lv_name_0_2= RULE_ID2 ) ) ) )
-            // InternalSimpleReconstrTestLanguage.g:2637:1: ( ( (lv_name_0_1= RULE_ID1 | lv_name_0_2= RULE_ID2 ) ) )
+            // InternalSimpleReconstrTestLanguage.g:2611:2: ( ( ( (lv_name_0_1= RULE_ID1 | lv_name_0_2= RULE_ID2 ) ) ) )
+            // InternalSimpleReconstrTestLanguage.g:2612:2: ( ( (lv_name_0_1= RULE_ID1 | lv_name_0_2= RULE_ID2 ) ) )
             {
-            // InternalSimpleReconstrTestLanguage.g:2637:1: ( ( (lv_name_0_1= RULE_ID1 | lv_name_0_2= RULE_ID2 ) ) )
-            // InternalSimpleReconstrTestLanguage.g:2638:1: ( (lv_name_0_1= RULE_ID1 | lv_name_0_2= RULE_ID2 ) )
+            // InternalSimpleReconstrTestLanguage.g:2612:2: ( ( (lv_name_0_1= RULE_ID1 | lv_name_0_2= RULE_ID2 ) ) )
+            // InternalSimpleReconstrTestLanguage.g:2613:3: ( (lv_name_0_1= RULE_ID1 | lv_name_0_2= RULE_ID2 ) )
             {
-            // InternalSimpleReconstrTestLanguage.g:2638:1: ( (lv_name_0_1= RULE_ID1 | lv_name_0_2= RULE_ID2 ) )
-            // InternalSimpleReconstrTestLanguage.g:2639:1: (lv_name_0_1= RULE_ID1 | lv_name_0_2= RULE_ID2 )
+            // InternalSimpleReconstrTestLanguage.g:2613:3: ( (lv_name_0_1= RULE_ID1 | lv_name_0_2= RULE_ID2 ) )
+            // InternalSimpleReconstrTestLanguage.g:2614:4: (lv_name_0_1= RULE_ID1 | lv_name_0_2= RULE_ID2 )
             {
-            // InternalSimpleReconstrTestLanguage.g:2639:1: (lv_name_0_1= RULE_ID1 | lv_name_0_2= RULE_ID2 )
+            // InternalSimpleReconstrTestLanguage.g:2614:4: (lv_name_0_1= RULE_ID1 | lv_name_0_2= RULE_ID2 )
             int alt43=2;
             int LA43_0 = input.LA(1);
 
@@ -6864,42 +6974,42 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
             }
             switch (alt43) {
                 case 1 :
-                    // InternalSimpleReconstrTestLanguage.g:2640:3: lv_name_0_1= RULE_ID1
+                    // InternalSimpleReconstrTestLanguage.g:2615:5: lv_name_0_1= RULE_ID1
                     {
                     lv_name_0_1=(Token)match(input,RULE_ID1,FollowSets000.FOLLOW_2); 
 
-                    			newLeafNode(lv_name_0_1, grammarAccess.getCrossRefNamedAccess().getNameID1TerminalRuleCall_0_0()); 
-                    		
+                    					newLeafNode(lv_name_0_1, grammarAccess.getCrossRefNamedAccess().getNameID1TerminalRuleCall_0_0());
+                    				
 
-                    	        if (current==null) {
-                    	            current = createModelElement(grammarAccess.getCrossRefNamedRule());
-                    	        }
-                           		setWithLastConsumed(
-                           			current, 
-                           			"name",
-                            		lv_name_0_1, 
-                            		"org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage.ID1");
-                    	    
+                    					if (current==null) {
+                    						current = createModelElement(grammarAccess.getCrossRefNamedRule());
+                    					}
+                    					setWithLastConsumed(
+                    						current,
+                    						"name",
+                    						lv_name_0_1,
+                    						"org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage.ID1");
+                    				
 
                     }
                     break;
                 case 2 :
-                    // InternalSimpleReconstrTestLanguage.g:2655:8: lv_name_0_2= RULE_ID2
+                    // InternalSimpleReconstrTestLanguage.g:2630:5: lv_name_0_2= RULE_ID2
                     {
                     lv_name_0_2=(Token)match(input,RULE_ID2,FollowSets000.FOLLOW_2); 
 
-                    			newLeafNode(lv_name_0_2, grammarAccess.getCrossRefNamedAccess().getNameID2TerminalRuleCall_0_1()); 
-                    		
+                    					newLeafNode(lv_name_0_2, grammarAccess.getCrossRefNamedAccess().getNameID2TerminalRuleCall_0_1());
+                    				
 
-                    	        if (current==null) {
-                    	            current = createModelElement(grammarAccess.getCrossRefNamedRule());
-                    	        }
-                           		setWithLastConsumed(
-                           			current, 
-                           			"name",
-                            		lv_name_0_2, 
-                            		"org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage.ID2");
-                    	    
+                    					if (current==null) {
+                    						current = createModelElement(grammarAccess.getCrossRefNamedRule());
+                    					}
+                    					setWithLastConsumed(
+                    						current,
+                    						"name",
+                    						lv_name_0_2,
+                    						"org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage.ID2");
+                    				
 
                     }
                     break;
@@ -6915,13 +7025,15 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -6930,38 +7042,42 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "ruleEnumBug310435Lit1"
-    // InternalSimpleReconstrTestLanguage.g:2681:1: ruleEnumBug310435Lit1 returns [Enumerator current=null] : (enumLiteral_0= 'lit1' ) ;
+    // InternalSimpleReconstrTestLanguage.g:2650:1: ruleEnumBug310435Lit1 returns [Enumerator current=null] : (enumLiteral_0= 'lit1' ) ;
     public final Enumerator ruleEnumBug310435Lit1() throws RecognitionException {
         Enumerator current = null;
 
         Token enumLiteral_0=null;
 
-         enterRule(); 
+
+        	enterRule();
+
         try {
-            // InternalSimpleReconstrTestLanguage.g:2683:28: ( (enumLiteral_0= 'lit1' ) )
-            // InternalSimpleReconstrTestLanguage.g:2684:1: (enumLiteral_0= 'lit1' )
+            // InternalSimpleReconstrTestLanguage.g:2656:2: ( (enumLiteral_0= 'lit1' ) )
+            // InternalSimpleReconstrTestLanguage.g:2657:2: (enumLiteral_0= 'lit1' )
             {
-            // InternalSimpleReconstrTestLanguage.g:2684:1: (enumLiteral_0= 'lit1' )
-            // InternalSimpleReconstrTestLanguage.g:2684:3: enumLiteral_0= 'lit1'
+            // InternalSimpleReconstrTestLanguage.g:2657:2: (enumLiteral_0= 'lit1' )
+            // InternalSimpleReconstrTestLanguage.g:2658:3: enumLiteral_0= 'lit1'
             {
             enumLiteral_0=(Token)match(input,71,FollowSets000.FOLLOW_2); 
 
-                    current = grammarAccess.getEnumBug310435Lit1Access().getLit1EnumLiteralDeclaration().getEnumLiteral().getInstance();
-                    newLeafNode(enumLiteral_0, grammarAccess.getEnumBug310435Lit1Access().getLit1EnumLiteralDeclaration()); 
-                
+            			current = grammarAccess.getEnumBug310435Lit1Access().getLit1EnumLiteralDeclaration().getEnumLiteral().getInstance();
+            			newLeafNode(enumLiteral_0, grammarAccess.getEnumBug310435Lit1Access().getLit1EnumLiteralDeclaration());
+            		
 
             }
 
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -6970,38 +7086,42 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "ruleEnumBug310435Lit2"
-    // InternalSimpleReconstrTestLanguage.g:2694:1: ruleEnumBug310435Lit2 returns [Enumerator current=null] : (enumLiteral_0= 'lit2' ) ;
+    // InternalSimpleReconstrTestLanguage.g:2667:1: ruleEnumBug310435Lit2 returns [Enumerator current=null] : (enumLiteral_0= 'lit2' ) ;
     public final Enumerator ruleEnumBug310435Lit2() throws RecognitionException {
         Enumerator current = null;
 
         Token enumLiteral_0=null;
 
-         enterRule(); 
+
+        	enterRule();
+
         try {
-            // InternalSimpleReconstrTestLanguage.g:2696:28: ( (enumLiteral_0= 'lit2' ) )
-            // InternalSimpleReconstrTestLanguage.g:2697:1: (enumLiteral_0= 'lit2' )
+            // InternalSimpleReconstrTestLanguage.g:2673:2: ( (enumLiteral_0= 'lit2' ) )
+            // InternalSimpleReconstrTestLanguage.g:2674:2: (enumLiteral_0= 'lit2' )
             {
-            // InternalSimpleReconstrTestLanguage.g:2697:1: (enumLiteral_0= 'lit2' )
-            // InternalSimpleReconstrTestLanguage.g:2697:3: enumLiteral_0= 'lit2'
+            // InternalSimpleReconstrTestLanguage.g:2674:2: (enumLiteral_0= 'lit2' )
+            // InternalSimpleReconstrTestLanguage.g:2675:3: enumLiteral_0= 'lit2'
             {
             enumLiteral_0=(Token)match(input,72,FollowSets000.FOLLOW_2); 
 
-                    current = grammarAccess.getEnumBug310435Lit2Access().getLit2EnumLiteralDeclaration().getEnumLiteral().getInstance();
-                    newLeafNode(enumLiteral_0, grammarAccess.getEnumBug310435Lit2Access().getLit2EnumLiteralDeclaration()); 
-                
+            			current = grammarAccess.getEnumBug310435Lit2Access().getLit2EnumLiteralDeclaration().getEnumLiteral().getInstance();
+            			newLeafNode(enumLiteral_0, grammarAccess.getEnumBug310435Lit2Access().getLit2EnumLiteralDeclaration());
+            		
 
             }
 
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
