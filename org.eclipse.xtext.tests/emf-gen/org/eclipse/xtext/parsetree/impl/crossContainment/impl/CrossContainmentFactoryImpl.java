@@ -31,7 +31,7 @@ public class CrossContainmentFactoryImpl extends EFactoryImpl implements CrossCo
 	 */
 	public static CrossContainmentFactory init() {
 		try {
-			CrossContainmentFactory theCrossContainmentFactory = (CrossContainmentFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/xtext/test/crossContainment"); 
+			CrossContainmentFactory theCrossContainmentFactory = (CrossContainmentFactory)EPackage.Registry.INSTANCE.getEFactory(CrossContainmentPackage.eNS_URI);
 			if (theCrossContainmentFactory != null) {
 				return theCrossContainmentFactory;
 			}

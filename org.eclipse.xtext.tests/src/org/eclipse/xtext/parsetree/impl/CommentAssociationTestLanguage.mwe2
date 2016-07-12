@@ -34,9 +34,9 @@ Workflow {
 			}
 		}
 		
-//		language = { XXX
-//			grammarUri = "classpath:/org/eclipse/xtext/parsetree/impl/CommentAssociationTestLanguage.xtext"
-//			fragment = @org.eclipse.xtext.TestLanguagesFragmentsParseTreeConstructor {}
-//		}
+		language = {
+			grammarUri = "classpath:/org/eclipse/xtext/parsetree/impl/CommentAssociationTestLanguage.xtext"
+			fragment = @org.eclipse.xtext.TestLanguagesFragments {}
+		}
 	}
 }

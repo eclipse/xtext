@@ -17,11 +17,11 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.impl.crossContainment.Element#getContainer <em>Container</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.impl.crossContainment.Element#getContainment <em>Containment</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.parsetree.impl.crossContainment.CrossContainmentPackage#getElement()
  * @model

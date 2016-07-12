@@ -32,11 +32,11 @@ import org.eclipse.xtext.parsetree.impl.crossContainment.Element;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parsetree.impl.crossContainment.impl.ElementImpl#getContainer <em>Container</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.impl.crossContainment.impl.ElementImpl#getContainment <em>Containment</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

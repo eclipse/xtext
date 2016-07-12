@@ -7,7 +7,8 @@
     copyrightFields="false" editPluginID="org.eclipse.xtext.tests.edit" editorPluginID="org.eclipse.xtext.tests.editor"
     runtimeVersion="2.9" usedGenPackages="platform:/resource/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
   <genPackages prefix="CommentAssociation" basePackage="org.eclipse.xtext.parsetree.impl"
-      disposableProviderFactory="true" ecorePackage="CommentAssociationTestLanguage.ecore#/">
+      disposableProviderFactory="true" fileExtensions="commentassociationtestlanguage"
+      ecorePackage="CommentAssociationTestLanguage.ecore#/">
     <genClasses ecoreClass="CommentAssociationTestLanguage.ecore#//Model">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CommentAssociationTestLanguage.ecore#//Model/elements"/>
     </genClasses>
