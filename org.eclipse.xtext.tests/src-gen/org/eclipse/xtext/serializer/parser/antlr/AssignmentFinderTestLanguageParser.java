@@ -4,36 +4,37 @@
 package org.eclipse.xtext.serializer.parser.antlr;
 
 import com.google.inject.Inject;
-
+import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.serializer.parser.antlr.internal.InternalAssignmentFinderTestLanguageParser;
 import org.eclipse.xtext.serializer.services.AssignmentFinderTestLanguageGrammarAccess;
 
-public class AssignmentFinderTestLanguageParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {
-	
+public class AssignmentFinderTestLanguageParser extends AbstractAntlrParser {
+
 	@Inject
 	private AssignmentFinderTestLanguageGrammarAccess grammarAccess;
-	
+
 	@Override
 	protected void setInitialHiddenTokens(XtextTokenStream tokenStream) {
 		tokenStream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
 	}
 	
+
 	@Override
-	protected org.eclipse.xtext.serializer.parser.antlr.internal.InternalAssignmentFinderTestLanguageParser createParser(XtextTokenStream stream) {
-		return new org.eclipse.xtext.serializer.parser.antlr.internal.InternalAssignmentFinderTestLanguageParser(stream, getGrammarAccess());
+	protected InternalAssignmentFinderTestLanguageParser createParser(XtextTokenStream stream) {
+		return new InternalAssignmentFinderTestLanguageParser(stream, getGrammarAccess());
 	}
-	
+
 	@Override 
 	protected String getDefaultRuleName() {
 		return "Model";
 	}
-	
+
 	public AssignmentFinderTestLanguageGrammarAccess getGrammarAccess() {
 		return this.grammarAccess;
 	}
-	
+
 	public void setGrammarAccess(AssignmentFinderTestLanguageGrammarAccess grammarAccess) {
 		this.grammarAccess = grammarAccess;
 	}
-	
 }

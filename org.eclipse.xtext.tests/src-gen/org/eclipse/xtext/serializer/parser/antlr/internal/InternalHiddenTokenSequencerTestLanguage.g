@@ -5,7 +5,6 @@ grammar InternalHiddenTokenSequencerTestLanguage;
 
 options {
 	superClass=AbstractInternalAntlrParser;
-	
 }
 
 @lexer::header {
@@ -17,7 +16,7 @@ import org.eclipse.xtext.parser.antlr.Lexer;
 }
 
 @parser::header {
-package org.eclipse.xtext.serializer.parser.antlr.internal; 
+package org.eclipse.xtext.serializer.parser.antlr.internal;
 
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
@@ -35,176 +34,168 @@ import org.eclipse.xtext.serializer.services.HiddenTokenSequencerTestLanguageGra
 @parser::members {
 
  	private HiddenTokenSequencerTestLanguageGrammarAccess grammarAccess;
- 	
+
     public InternalHiddenTokenSequencerTestLanguageParser(TokenStream input, HiddenTokenSequencerTestLanguageGrammarAccess grammarAccess) {
         this(input);
         this.grammarAccess = grammarAccess;
         registerRules(grammarAccess.getGrammar());
     }
-    
+
     @Override
     protected String getFirstRuleName() {
-    	return "Model";	
+    	return "Model";
    	}
-   	
+
    	@Override
    	protected HiddenTokenSequencerTestLanguageGrammarAccess getGrammarAccess() {
    		return grammarAccess;
    	}
+
 }
 
-@rulecatch { 
-    catch (RecognitionException re) { 
-        recover(input,re); 
+@rulecatch {
+    catch (RecognitionException re) {
+        recover(input,re);
         appendSkippedTokens();
-    } 
+    }
 }
-
-
-
 
 // Entry rule entryRuleModel
-entryRuleModel returns [EObject current=null] 
-	:
+entryRuleModel returns [EObject current=null]:
 	{ newCompositeNode(grammarAccess.getModelRule()); }
-	 iv_ruleModel=ruleModel 
-	 { $current=$iv_ruleModel.current; } 
-	 EOF 
-;
+	iv_ruleModel=ruleModel
+	{ $current=$iv_ruleModel.current; }
+	EOF;
 
 // Rule Model
-ruleModel returns [EObject current=null] 
-    @init { enterRule(); 
-    }
-    @after { leaveRule(); }:
-(
-(
-		{ 
-	        newCompositeNode(grammarAccess.getModelAccess().getDomainModelDomainModelParserRuleCall_0()); 
-	    }
-		lv_domainModel_0_0=ruleDomainModel		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getModelRule());
-	        }
-       		set(
-       			$current, 
-       			"domainModel",
-        		lv_domainModel_0_0, 
-        		"org.eclipse.xtext.serializer.HiddenTokenSequencerTestLanguage.DomainModel");
-	        afterParserOrEnumRuleCall();
-	    }
-
-)
-)
+ruleModel returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			{
+				newCompositeNode(grammarAccess.getModelAccess().getDomainModelDomainModelParserRuleCall_0());
+			}
+			lv_domainModel_0_0=ruleDomainModel
+			{
+				if ($current==null) {
+					$current = createModelElementForParent(grammarAccess.getModelRule());
+				}
+				set(
+					$current,
+					"domainModel",
+					lv_domainModel_0_0,
+					"org.eclipse.xtext.serializer.HiddenTokenSequencerTestLanguage.DomainModel");
+				afterParserOrEnumRuleCall();
+			}
+		)
+	)
 ;
-
-
-
-
 
 // Entry rule entryRuleDomainModel
-entryRuleDomainModel returns [EObject current=null] 
-	:
+entryRuleDomainModel returns [EObject current=null]:
 	{ newCompositeNode(grammarAccess.getDomainModelRule()); }
-	 iv_ruleDomainModel=ruleDomainModel 
-	 { $current=$iv_ruleDomainModel.current; } 
-	 EOF 
-;
+	iv_ruleDomainModel=ruleDomainModel
+	{ $current=$iv_ruleDomainModel.current; }
+	EOF;
 
 // Rule DomainModel
-ruleDomainModel returns [EObject current=null] 
-    @init { enterRule(); 
-    }
-    @after { leaveRule(); }:
-(	otherlv_0='entities' 
-    {
-    	newLeafNode(otherlv_0, grammarAccess.getDomainModelAccess().getEntitiesKeyword_0());
-    }
-(
-(
-		{ 
-	        newCompositeNode(grammarAccess.getDomainModelAccess().getEntitiesEntityParserRuleCall_1_0()); 
-	    }
-		lv_entities_1_0=ruleEntity		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getDomainModelRule());
-	        }
-       		add(
-       			$current, 
-       			"entities",
-        		lv_entities_1_0, 
-        		"org.eclipse.xtext.serializer.HiddenTokenSequencerTestLanguage.Entity");
-	        afterParserOrEnumRuleCall();
-	    }
-
-)
-)*	otherlv_2='end' 
-    {
-    	newLeafNode(otherlv_2, grammarAccess.getDomainModelAccess().getEndKeyword_2());
-    }
-)
+ruleDomainModel returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0='entities'
+		{
+			newLeafNode(otherlv_0, grammarAccess.getDomainModelAccess().getEntitiesKeyword_0());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getDomainModelAccess().getEntitiesEntityParserRuleCall_1_0());
+				}
+				lv_entities_1_0=ruleEntity
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getDomainModelRule());
+					}
+					add(
+						$current,
+						"entities",
+						lv_entities_1_0,
+						"org.eclipse.xtext.serializer.HiddenTokenSequencerTestLanguage.Entity");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)*
+		otherlv_2='end'
+		{
+			newLeafNode(otherlv_2, grammarAccess.getDomainModelAccess().getEndKeyword_2());
+		}
+	)
 ;
-
-
-
-
 
 // Entry rule entryRuleEntity
-entryRuleEntity returns [EObject current=null] 
-	:
+entryRuleEntity returns [EObject current=null]:
 	{ newCompositeNode(grammarAccess.getEntityRule()); }
-	 iv_ruleEntity=ruleEntity 
-	 { $current=$iv_ruleEntity.current; } 
-	 EOF 
-;
+	iv_ruleEntity=ruleEntity
+	{ $current=$iv_ruleEntity.current; }
+	EOF;
 
 // Rule Entity
-ruleEntity returns [EObject current=null] 
-    @init { enterRule(); 
-    }
-    @after { leaveRule(); }:
-((
-(
-		lv_name_0_0=RULE_ID
-		{
-			newLeafNode(lv_name_0_0, grammarAccess.getEntityAccess().getNameIDTerminalRuleCall_0_0()); 
-		}
-		{
-	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getEntityRule());
-	        }
-       		setWithLastConsumed(
-       			$current, 
-       			"name",
-        		lv_name_0_0, 
-        		"org.eclipse.xtext.common.Terminals.ID");
-	    }
-
-)
-)(
-(
-		lv_description_1_0=RULE_STRING
-		{
-			newLeafNode(lv_description_1_0, grammarAccess.getEntityAccess().getDescriptionSTRINGTerminalRuleCall_1_0()); 
-		}
-		{
-	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getEntityRule());
-	        }
-       		setWithLastConsumed(
-       			$current, 
-       			"description",
-        		lv_description_1_0, 
-        		"org.eclipse.xtext.common.Terminals.STRING");
-	    }
-
-)
-))
+ruleEntity returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			(
+				lv_name_0_0=RULE_ID
+				{
+					newLeafNode(lv_name_0_0, grammarAccess.getEntityAccess().getNameIDTerminalRuleCall_0_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getEntityRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"name",
+						lv_name_0_0,
+						"org.eclipse.xtext.common.Terminals.ID");
+				}
+			)
+		)
+		(
+			(
+				lv_description_1_0=RULE_STRING
+				{
+					newLeafNode(lv_description_1_0, grammarAccess.getEntityAccess().getDescriptionSTRINGTerminalRuleCall_1_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getEntityRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"description",
+						lv_description_1_0,
+						"org.eclipse.xtext.common.Terminals.STRING");
+				}
+			)
+		)
+	)
 ;
-
-
-
-
 
 RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
@@ -219,5 +210,3 @@ RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
 RULE_WS : (' '|'\t'|'\r'|'\n')+;
 
 RULE_ANY_OTHER : .;
-
-
