@@ -31,7 +31,7 @@ public class EcorePerPlatformResourceFactoryImpl extends EFactoryImpl implements
 	 */
 	public static EcorePerPlatformResourceFactory init() {
 		try {
-			EcorePerPlatformResourceFactory theEcorePerPlatformResourceFactory = (EcorePerPlatformResourceFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2011/tmf/xtext/ecorePerPlatformResource"); 
+			EcorePerPlatformResourceFactory theEcorePerPlatformResourceFactory = (EcorePerPlatformResourceFactory)EPackage.Registry.INSTANCE.getEFactory(EcorePerPlatformResourcePackage.eNS_URI);
 			if (theEcorePerPlatformResourceFactory != null) {
 				return theEcorePerPlatformResourceFactory;
 			}

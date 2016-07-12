@@ -1,4 +1,4 @@
-package org.eclipse.xtext.metamodelreferencing.tests.parser.antlr.internal; 
+package org.eclipse.xtext.metamodelreferencing.tests.parser.antlr.internal;
 
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
@@ -51,18 +51,18 @@ public class InternalMetamodelRefTestLanguageParser extends AbstractInternalAntl
 
 
      	private MetamodelRefTestLanguageGrammarAccess grammarAccess;
-     	
+
         public InternalMetamodelRefTestLanguageParser(TokenStream input, MetamodelRefTestLanguageGrammarAccess grammarAccess) {
             this(input);
             this.grammarAccess = grammarAccess;
             registerRules(grammarAccess.getGrammar());
         }
-        
+
         @Override
         protected String getFirstRuleName() {
-        	return "Foo";	
+        	return "Foo";
        	}
-       	
+
        	@Override
        	protected MetamodelRefTestLanguageGrammarAccess getGrammarAccess() {
        		return grammarAccess;
@@ -70,8 +70,9 @@ public class InternalMetamodelRefTestLanguageParser extends AbstractInternalAntl
 
 
 
+
     // $ANTLR start "entryRuleFoo"
-    // InternalMetamodelRefTestLanguage.g:67:1: entryRuleFoo returns [EObject current=null] : iv_ruleFoo= ruleFoo EOF ;
+    // InternalMetamodelRefTestLanguage.g:64:1: entryRuleFoo returns [EObject current=null] : iv_ruleFoo= ruleFoo EOF ;
     public final EObject entryRuleFoo() throws RecognitionException {
         EObject current = null;
 
@@ -79,8 +80,8 @@ public class InternalMetamodelRefTestLanguageParser extends AbstractInternalAntl
 
 
         try {
-            // InternalMetamodelRefTestLanguage.g:68:2: (iv_ruleFoo= ruleFoo EOF )
-            // InternalMetamodelRefTestLanguage.g:69:2: iv_ruleFoo= ruleFoo EOF
+            // InternalMetamodelRefTestLanguage.g:64:44: (iv_ruleFoo= ruleFoo EOF )
+            // InternalMetamodelRefTestLanguage.g:65:2: iv_ruleFoo= ruleFoo EOF
             {
              newCompositeNode(grammarAccess.getFooRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -94,11 +95,11 @@ public class InternalMetamodelRefTestLanguageParser extends AbstractInternalAntl
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -107,7 +108,7 @@ public class InternalMetamodelRefTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "ruleFoo"
-    // InternalMetamodelRefTestLanguage.g:76:1: ruleFoo returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_nameRefs_1_0= ruleNameRef ) )* ) ;
+    // InternalMetamodelRefTestLanguage.g:71:1: ruleFoo returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_nameRefs_1_0= ruleNameRef ) )* ) ;
     public final EObject ruleFoo() throws RecognitionException {
         EObject current = null;
 
@@ -115,42 +116,43 @@ public class InternalMetamodelRefTestLanguageParser extends AbstractInternalAntl
         EObject lv_nameRefs_1_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalMetamodelRefTestLanguage.g:79:28: ( ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_nameRefs_1_0= ruleNameRef ) )* ) )
-            // InternalMetamodelRefTestLanguage.g:80:1: ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_nameRefs_1_0= ruleNameRef ) )* )
+            // InternalMetamodelRefTestLanguage.g:77:2: ( ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_nameRefs_1_0= ruleNameRef ) )* ) )
+            // InternalMetamodelRefTestLanguage.g:78:2: ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_nameRefs_1_0= ruleNameRef ) )* )
             {
-            // InternalMetamodelRefTestLanguage.g:80:1: ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_nameRefs_1_0= ruleNameRef ) )* )
-            // InternalMetamodelRefTestLanguage.g:80:2: ( (lv_name_0_0= RULE_ID ) ) ( (lv_nameRefs_1_0= ruleNameRef ) )*
+            // InternalMetamodelRefTestLanguage.g:78:2: ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_nameRefs_1_0= ruleNameRef ) )* )
+            // InternalMetamodelRefTestLanguage.g:79:3: ( (lv_name_0_0= RULE_ID ) ) ( (lv_nameRefs_1_0= ruleNameRef ) )*
             {
-            // InternalMetamodelRefTestLanguage.g:80:2: ( (lv_name_0_0= RULE_ID ) )
-            // InternalMetamodelRefTestLanguage.g:81:1: (lv_name_0_0= RULE_ID )
+            // InternalMetamodelRefTestLanguage.g:79:3: ( (lv_name_0_0= RULE_ID ) )
+            // InternalMetamodelRefTestLanguage.g:80:4: (lv_name_0_0= RULE_ID )
             {
-            // InternalMetamodelRefTestLanguage.g:81:1: (lv_name_0_0= RULE_ID )
-            // InternalMetamodelRefTestLanguage.g:82:3: lv_name_0_0= RULE_ID
+            // InternalMetamodelRefTestLanguage.g:80:4: (lv_name_0_0= RULE_ID )
+            // InternalMetamodelRefTestLanguage.g:81:5: lv_name_0_0= RULE_ID
             {
             lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_3); 
 
-            			newLeafNode(lv_name_0_0, grammarAccess.getFooAccess().getNameIDTerminalRuleCall_0_0()); 
-            		
+            					newLeafNode(lv_name_0_0, grammarAccess.getFooAccess().getNameIDTerminalRuleCall_0_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getFooRule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"name",
-                    		lv_name_0_0, 
-                    		"org.eclipse.xtext.common.Terminals.ID");
-            	    
-
-            }
-
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getFooRule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"name",
+            						lv_name_0_0,
+            						"org.eclipse.xtext.common.Terminals.ID");
+            				
 
             }
 
-            // InternalMetamodelRefTestLanguage.g:98:2: ( (lv_nameRefs_1_0= ruleNameRef ) )*
+
+            }
+
+            // InternalMetamodelRefTestLanguage.g:97:3: ( (lv_nameRefs_1_0= ruleNameRef ) )*
             loop1:
             do {
                 int alt1=2;
@@ -163,30 +165,30 @@ public class InternalMetamodelRefTestLanguageParser extends AbstractInternalAntl
 
                 switch (alt1) {
             	case 1 :
-            	    // InternalMetamodelRefTestLanguage.g:99:1: (lv_nameRefs_1_0= ruleNameRef )
+            	    // InternalMetamodelRefTestLanguage.g:98:4: (lv_nameRefs_1_0= ruleNameRef )
             	    {
-            	    // InternalMetamodelRefTestLanguage.g:99:1: (lv_nameRefs_1_0= ruleNameRef )
-            	    // InternalMetamodelRefTestLanguage.g:100:3: lv_nameRefs_1_0= ruleNameRef
+            	    // InternalMetamodelRefTestLanguage.g:98:4: (lv_nameRefs_1_0= ruleNameRef )
+            	    // InternalMetamodelRefTestLanguage.g:99:5: lv_nameRefs_1_0= ruleNameRef
             	    {
-            	     
-            	    	        newCompositeNode(grammarAccess.getFooAccess().getNameRefsNameRefParserRuleCall_1_0()); 
-            	    	    
+
+            	    					newCompositeNode(grammarAccess.getFooAccess().getNameRefsNameRefParserRuleCall_1_0());
+            	    				
             	    pushFollow(FollowSets000.FOLLOW_3);
             	    lv_nameRefs_1_0=ruleNameRef();
 
             	    state._fsp--;
 
 
-            	    	        if (current==null) {
-            	    	            current = createModelElementForParent(grammarAccess.getFooRule());
-            	    	        }
-            	           		add(
-            	           			current, 
-            	           			"nameRefs",
-            	            		lv_nameRefs_1_0, 
-            	            		"org.eclipse.xtext.metamodelreferencing.tests.MetamodelRefTestLanguage.NameRef");
-            	    	        afterParserOrEnumRuleCall();
-            	    	    
+            	    					if (current==null) {
+            	    						current = createModelElementForParent(grammarAccess.getFooRule());
+            	    					}
+            	    					add(
+            	    						current,
+            	    						"nameRefs",
+            	    						lv_nameRefs_1_0,
+            	    						"org.eclipse.xtext.metamodelreferencing.tests.MetamodelRefTestLanguage.NameRef");
+            	    					afterParserOrEnumRuleCall();
+            	    				
 
             	    }
 
@@ -205,13 +207,15 @@ public class InternalMetamodelRefTestLanguageParser extends AbstractInternalAntl
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -220,7 +224,7 @@ public class InternalMetamodelRefTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "entryRuleNameRef"
-    // InternalMetamodelRefTestLanguage.g:124:1: entryRuleNameRef returns [EObject current=null] : iv_ruleNameRef= ruleNameRef EOF ;
+    // InternalMetamodelRefTestLanguage.g:120:1: entryRuleNameRef returns [EObject current=null] : iv_ruleNameRef= ruleNameRef EOF ;
     public final EObject entryRuleNameRef() throws RecognitionException {
         EObject current = null;
 
@@ -228,8 +232,8 @@ public class InternalMetamodelRefTestLanguageParser extends AbstractInternalAntl
 
 
         try {
-            // InternalMetamodelRefTestLanguage.g:125:2: (iv_ruleNameRef= ruleNameRef EOF )
-            // InternalMetamodelRefTestLanguage.g:126:2: iv_ruleNameRef= ruleNameRef EOF
+            // InternalMetamodelRefTestLanguage.g:120:48: (iv_ruleNameRef= ruleNameRef EOF )
+            // InternalMetamodelRefTestLanguage.g:121:2: iv_ruleNameRef= ruleNameRef EOF
             {
              newCompositeNode(grammarAccess.getNameRefRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -243,11 +247,11 @@ public class InternalMetamodelRefTestLanguageParser extends AbstractInternalAntl
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -256,33 +260,34 @@ public class InternalMetamodelRefTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "ruleNameRef"
-    // InternalMetamodelRefTestLanguage.g:133:1: ruleNameRef returns [EObject current=null] : ( (otherlv_0= RULE_ID ) ) ;
+    // InternalMetamodelRefTestLanguage.g:127:1: ruleNameRef returns [EObject current=null] : ( (otherlv_0= RULE_ID ) ) ;
     public final EObject ruleNameRef() throws RecognitionException {
         EObject current = null;
 
         Token otherlv_0=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalMetamodelRefTestLanguage.g:136:28: ( ( (otherlv_0= RULE_ID ) ) )
-            // InternalMetamodelRefTestLanguage.g:137:1: ( (otherlv_0= RULE_ID ) )
+            // InternalMetamodelRefTestLanguage.g:133:2: ( ( (otherlv_0= RULE_ID ) ) )
+            // InternalMetamodelRefTestLanguage.g:134:2: ( (otherlv_0= RULE_ID ) )
             {
-            // InternalMetamodelRefTestLanguage.g:137:1: ( (otherlv_0= RULE_ID ) )
-            // InternalMetamodelRefTestLanguage.g:138:1: (otherlv_0= RULE_ID )
+            // InternalMetamodelRefTestLanguage.g:134:2: ( (otherlv_0= RULE_ID ) )
+            // InternalMetamodelRefTestLanguage.g:135:3: (otherlv_0= RULE_ID )
             {
-            // InternalMetamodelRefTestLanguage.g:138:1: (otherlv_0= RULE_ID )
-            // InternalMetamodelRefTestLanguage.g:139:3: otherlv_0= RULE_ID
+            // InternalMetamodelRefTestLanguage.g:135:3: (otherlv_0= RULE_ID )
+            // InternalMetamodelRefTestLanguage.g:136:4: otherlv_0= RULE_ID
             {
 
-            			if (current==null) {
-            	            current = createModelElement(grammarAccess.getNameRefRule());
-            	        }
-                    
+            				if (current==null) {
+            					current = createModelElement(grammarAccess.getNameRefRule());
+            				}
+            			
             otherlv_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
-            		newLeafNode(otherlv_0, grammarAccess.getNameRefAccess().getRuleParserRuleCrossReference_0()); 
-            	
+            				newLeafNode(otherlv_0, grammarAccess.getNameRefAccess().getRuleParserRuleCrossReference_0());
+            			
 
             }
 
@@ -292,13 +297,15 @@ public class InternalMetamodelRefTestLanguageParser extends AbstractInternalAntl
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;

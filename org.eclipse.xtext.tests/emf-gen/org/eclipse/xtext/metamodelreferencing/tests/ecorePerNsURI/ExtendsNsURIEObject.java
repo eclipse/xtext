@@ -22,6 +22,7 @@ import org.eclipse.xtext.metamodelreferencing.tests.ecorePerPlatformResource.Ext
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.metamodelreferencing.tests.ecorePerNsURI.ExtendsNsURIEObject#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.metamodelreferencing.tests.ecorePerNsURI.ExtendsNsURIEObject#getEObjectReference1 <em>EObject Reference1</em>}</li>
@@ -31,7 +32,6 @@ import org.eclipse.xtext.metamodelreferencing.tests.ecorePerPlatformResource.Ext
  *   <li>{@link org.eclipse.xtext.metamodelreferencing.tests.ecorePerNsURI.ExtendsNsURIEObject#getEObjectReference4 <em>EObject Reference4</em>}</li>
  *   <li>{@link org.eclipse.xtext.metamodelreferencing.tests.ecorePerNsURI.ExtendsNsURIEObject#getEObjectContainment <em>EObject Containment</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.metamodelreferencing.tests.ecorePerNsURI.EcorePerNsURIPackage#getExtendsNsURIEObject()
  * @model

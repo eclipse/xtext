@@ -5,7 +5,6 @@ grammar InternalMultiGenMMTestLanguage;
 
 options {
 	superClass=AbstractInternalAntlrParser;
-	
 }
 
 @lexer::header {
@@ -17,7 +16,7 @@ import org.eclipse.xtext.parser.antlr.Lexer;
 }
 
 @parser::header {
-package org.eclipse.xtext.metamodelreferencing.tests.parser.antlr.internal; 
+package org.eclipse.xtext.metamodelreferencing.tests.parser.antlr.internal;
 
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
@@ -35,129 +34,122 @@ import org.eclipse.xtext.metamodelreferencing.tests.services.MultiGenMMTestLangu
 @parser::members {
 
  	private MultiGenMMTestLanguageGrammarAccess grammarAccess;
- 	
+
     public InternalMultiGenMMTestLanguageParser(TokenStream input, MultiGenMMTestLanguageGrammarAccess grammarAccess) {
         this(input);
         this.grammarAccess = grammarAccess;
         registerRules(grammarAccess.getGrammar());
     }
-    
+
     @Override
     protected String getFirstRuleName() {
-    	return "Foo";	
+    	return "Foo";
    	}
-   	
+
    	@Override
    	protected MultiGenMMTestLanguageGrammarAccess getGrammarAccess() {
    		return grammarAccess;
    	}
+
 }
 
-@rulecatch { 
-    catch (RecognitionException re) { 
-        recover(input,re); 
+@rulecatch {
+    catch (RecognitionException re) {
+        recover(input,re);
         appendSkippedTokens();
-    } 
+    }
 }
-
-
-
 
 // Entry rule entryRuleFoo
-entryRuleFoo returns [EObject current=null] 
-	:
+entryRuleFoo returns [EObject current=null]:
 	{ newCompositeNode(grammarAccess.getFooRule()); }
-	 iv_ruleFoo=ruleFoo 
-	 { $current=$iv_ruleFoo.current; } 
-	 EOF 
-;
+	iv_ruleFoo=ruleFoo
+	{ $current=$iv_ruleFoo.current; }
+	EOF;
 
 // Rule Foo
-ruleFoo returns [EObject current=null] 
-    @init { enterRule(); 
-    }
-    @after { leaveRule(); }:
-((
-(
-		lv_name_0_0=RULE_ID
-		{
-			newLeafNode(lv_name_0_0, grammarAccess.getFooAccess().getNameIDTerminalRuleCall_0_0()); 
-		}
-		{
-	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getFooRule());
-	        }
-       		setWithLastConsumed(
-       			$current, 
-       			"name",
-        		lv_name_0_0, 
-        		"org.eclipse.xtext.common.Terminals.ID");
-	    }
-
-)
-)(
-(
-		{ 
-	        newCompositeNode(grammarAccess.getFooAccess().getNameRefsNameRefParserRuleCall_1_0()); 
-	    }
-		lv_nameRefs_1_0=ruleNameRef		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getFooRule());
-	        }
-       		add(
-       			$current, 
-       			"nameRefs",
-        		lv_nameRefs_1_0, 
-        		"org.eclipse.xtext.metamodelreferencing.tests.MultiGenMMTestLanguage.NameRef");
-	        afterParserOrEnumRuleCall();
-	    }
-
-)
-)*)
+ruleFoo returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			(
+				lv_name_0_0=RULE_ID
+				{
+					newLeafNode(lv_name_0_0, grammarAccess.getFooAccess().getNameIDTerminalRuleCall_0_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getFooRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"name",
+						lv_name_0_0,
+						"org.eclipse.xtext.common.Terminals.ID");
+				}
+			)
+		)
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getFooAccess().getNameRefsNameRefParserRuleCall_1_0());
+				}
+				lv_nameRefs_1_0=ruleNameRef
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getFooRule());
+					}
+					add(
+						$current,
+						"nameRefs",
+						lv_nameRefs_1_0,
+						"org.eclipse.xtext.metamodelreferencing.tests.MultiGenMMTestLanguage.NameRef");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)*
+	)
 ;
-
-
-
-
 
 // Entry rule entryRuleNameRef
-entryRuleNameRef returns [EObject current=null] 
-	:
+entryRuleNameRef returns [EObject current=null]:
 	{ newCompositeNode(grammarAccess.getNameRefRule()); }
-	 iv_ruleNameRef=ruleNameRef 
-	 { $current=$iv_ruleNameRef.current; } 
-	 EOF 
-;
+	iv_ruleNameRef=ruleNameRef
+	{ $current=$iv_ruleNameRef.current; }
+	EOF;
 
 // Rule NameRef
-ruleNameRef returns [EObject current=null] 
-    @init { enterRule(); 
-    }
-    @after { leaveRule(); }:
-(
-(
-		lv_name_0_0=RULE_STRING
-		{
-			newLeafNode(lv_name_0_0, grammarAccess.getNameRefAccess().getNameSTRINGTerminalRuleCall_0()); 
-		}
-		{
-	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getNameRefRule());
-	        }
-       		setWithLastConsumed(
-       			$current, 
-       			"name",
-        		lv_name_0_0, 
-        		"org.eclipse.xtext.common.Terminals.STRING");
-	    }
-
-)
-)
+ruleNameRef returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			lv_name_0_0=RULE_STRING
+			{
+				newLeafNode(lv_name_0_0, grammarAccess.getNameRefAccess().getNameSTRINGTerminalRuleCall_0());
+			}
+			{
+				if ($current==null) {
+					$current = createModelElement(grammarAccess.getNameRefRule());
+				}
+				setWithLastConsumed(
+					$current,
+					"name",
+					lv_name_0_0,
+					"org.eclipse.xtext.common.Terminals.STRING");
+			}
+		)
+	)
 ;
-
-
-
-
 
 RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
@@ -172,5 +164,3 @@ RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
 RULE_WS : (' '|'\t'|'\r'|'\n')+;
 
 RULE_ANY_OTHER : .;
-
-

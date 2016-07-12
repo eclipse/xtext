@@ -21,6 +21,7 @@ import org.eclipse.xtext.metamodelreferencing.tests.ecorePerPlatformPlugin.Exten
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.metamodelreferencing.tests.ecorePerPlatformResource.ExtendsResourceEObject#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.metamodelreferencing.tests.ecorePerPlatformResource.ExtendsResourceEObject#getEObjectReference1 <em>EObject Reference1</em>}</li>
@@ -29,7 +30,6 @@ import org.eclipse.xtext.metamodelreferencing.tests.ecorePerPlatformPlugin.Exten
  *   <li>{@link org.eclipse.xtext.metamodelreferencing.tests.ecorePerPlatformResource.ExtendsResourceEObject#getEObjectReference4 <em>EObject Reference4</em>}</li>
  *   <li>{@link org.eclipse.xtext.metamodelreferencing.tests.ecorePerPlatformResource.ExtendsResourceEObject#getEObjectContainment <em>EObject Containment</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.metamodelreferencing.tests.ecorePerPlatformResource.EcorePerPlatformResourcePackage#getExtendsResourceEObject()
  * @model

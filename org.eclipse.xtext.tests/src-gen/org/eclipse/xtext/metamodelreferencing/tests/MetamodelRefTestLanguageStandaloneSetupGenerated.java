@@ -3,22 +3,22 @@
  */
 package org.eclipse.xtext.metamodelreferencing.tests;
 
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.ISetup;
+import org.eclipse.xtext.common.TerminalsStandaloneSetup;
+import org.eclipse.xtext.metamodelreferencing.tests.anotherSimpleTest.AnotherSimpleTestPackage;
+import org.eclipse.xtext.resource.IResourceFactory;
+import org.eclipse.xtext.resource.IResourceServiceProvider;
 
-import com.google.inject.Guice;
-import com.google.inject.Injector;
-
-/**
- * Generated from StandaloneSetup.xpt!
- */
 @SuppressWarnings("all")
 public class MetamodelRefTestLanguageStandaloneSetupGenerated implements ISetup {
 
 	@Override
 	public Injector createInjectorAndDoEMFRegistration() {
-		org.eclipse.xtext.common.TerminalsStandaloneSetup.doSetup();
+		TerminalsStandaloneSetup.doSetup();
 
 		Injector injector = createInjector();
 		register(injector);
@@ -26,19 +26,17 @@ public class MetamodelRefTestLanguageStandaloneSetupGenerated implements ISetup 
 	}
 	
 	public Injector createInjector() {
-		return Guice.createInjector(new org.eclipse.xtext.metamodelreferencing.tests.MetamodelRefTestLanguageRuntimeModule());
+		return Guice.createInjector(new MetamodelRefTestLanguageRuntimeModule());
 	}
 	
 	public void register(Injector injector) {
-
-		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);
-		org.eclipse.xtext.resource.IResourceServiceProvider serviceProvider = injector.getInstance(org.eclipse.xtext.resource.IResourceServiceProvider.class);
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("metamodelreftestlanguage", resourceFactory);
-		org.eclipse.xtext.resource.IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put("metamodelreftestlanguage", serviceProvider);
+		IResourceFactory resourceFactory = injector.getInstance(IResourceFactory.class);
+		IResourceServiceProvider serviceProvider = injector.getInstance(IResourceServiceProvider.class);
 		
-	if (!EPackage.Registry.INSTANCE.containsKey("http://eclipse.org/xtext/tests/AnotherSimpleTest")) {
-		EPackage.Registry.INSTANCE.put("http://eclipse.org/xtext/tests/AnotherSimpleTest", org.eclipse.xtext.metamodelreferencing.tests.anotherSimpleTest.AnotherSimpleTestPackage.eINSTANCE);
-	}
-
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("metamodelreftestlanguage", resourceFactory);
+		IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put("metamodelreftestlanguage", serviceProvider);
+		if (!EPackage.Registry.INSTANCE.containsKey("http://eclipse.org/xtext/tests/AnotherSimpleTest")) {
+			EPackage.Registry.INSTANCE.put("http://eclipse.org/xtext/tests/AnotherSimpleTest", AnotherSimpleTestPackage.eINSTANCE);
+		}
 	}
 }

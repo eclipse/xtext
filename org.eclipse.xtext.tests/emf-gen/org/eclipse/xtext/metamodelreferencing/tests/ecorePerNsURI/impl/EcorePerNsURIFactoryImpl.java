@@ -31,7 +31,7 @@ public class EcorePerNsURIFactoryImpl extends EFactoryImpl implements EcorePerNs
 	 */
 	public static EcorePerNsURIFactory init() {
 		try {
-			EcorePerNsURIFactory theEcorePerNsURIFactory = (EcorePerNsURIFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2011/tmf/xtext/ecorePerNsURI"); 
+			EcorePerNsURIFactory theEcorePerNsURIFactory = (EcorePerNsURIFactory)EPackage.Registry.INSTANCE.getEFactory(EcorePerNsURIPackage.eNS_URI);
 			if (theEcorePerNsURIFactory != null) {
 				return theEcorePerNsURIFactory;
 			}

@@ -4,36 +4,37 @@
 package org.eclipse.xtext.metamodelreferencing.tests.parser.antlr;
 
 import com.google.inject.Inject;
-
-import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.metamodelreferencing.tests.parser.antlr.internal.InternalMetamodelRefTestLanguageParser;
 import org.eclipse.xtext.metamodelreferencing.tests.services.MetamodelRefTestLanguageGrammarAccess;
+import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
-public class MetamodelRefTestLanguageParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {
-	
+public class MetamodelRefTestLanguageParser extends AbstractAntlrParser {
+
 	@Inject
 	private MetamodelRefTestLanguageGrammarAccess grammarAccess;
-	
+
 	@Override
 	protected void setInitialHiddenTokens(XtextTokenStream tokenStream) {
 		tokenStream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
 	}
 	
+
 	@Override
-	protected org.eclipse.xtext.metamodelreferencing.tests.parser.antlr.internal.InternalMetamodelRefTestLanguageParser createParser(XtextTokenStream stream) {
-		return new org.eclipse.xtext.metamodelreferencing.tests.parser.antlr.internal.InternalMetamodelRefTestLanguageParser(stream, getGrammarAccess());
+	protected InternalMetamodelRefTestLanguageParser createParser(XtextTokenStream stream) {
+		return new InternalMetamodelRefTestLanguageParser(stream, getGrammarAccess());
 	}
-	
+
 	@Override 
 	protected String getDefaultRuleName() {
 		return "Foo";
 	}
-	
+
 	public MetamodelRefTestLanguageGrammarAccess getGrammarAccess() {
 		return this.grammarAccess;
 	}
-	
+
 	public void setGrammarAccess(MetamodelRefTestLanguageGrammarAccess grammarAccess) {
 		this.grammarAccess = grammarAccess;
 	}
-	
 }

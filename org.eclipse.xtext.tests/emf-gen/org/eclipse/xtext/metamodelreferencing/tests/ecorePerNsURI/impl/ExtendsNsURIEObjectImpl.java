@@ -37,6 +37,7 @@ import org.eclipse.xtext.metamodelreferencing.tests.ecorePerPlatformResource.Ext
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.metamodelreferencing.tests.ecorePerNsURI.impl.ExtendsNsURIEObjectImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.metamodelreferencing.tests.ecorePerNsURI.impl.ExtendsNsURIEObjectImpl#getEObjectReference1 <em>EObject Reference1</em>}</li>
@@ -46,7 +47,6 @@ import org.eclipse.xtext.metamodelreferencing.tests.ecorePerPlatformResource.Ext
  *   <li>{@link org.eclipse.xtext.metamodelreferencing.tests.ecorePerNsURI.impl.ExtendsNsURIEObjectImpl#getEObjectReference4 <em>EObject Reference4</em>}</li>
  *   <li>{@link org.eclipse.xtext.metamodelreferencing.tests.ecorePerNsURI.impl.ExtendsNsURIEObjectImpl#getEObjectContainment <em>EObject Containment</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
