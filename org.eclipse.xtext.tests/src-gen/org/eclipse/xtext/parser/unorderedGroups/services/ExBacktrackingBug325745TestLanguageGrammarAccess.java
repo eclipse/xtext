@@ -3,21 +3,20 @@
  */
 package org.eclipse.xtext.parser.unorderedGroups.services;
 
-import com.google.inject.Singleton;
 import com.google.inject.Inject;
-
+import com.google.inject.Singleton;
 import java.util.List;
-
-import org.eclipse.xtext.*;
-import org.eclipse.xtext.service.GrammarProvider;
-import org.eclipse.xtext.service.AbstractElementFinder.*;
-
-import org.eclipse.xtext.parser.unorderedGroups.services.BacktrackingBug325745TestLanguageGrammarAccess;
+import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
+import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder;
+import org.eclipse.xtext.service.GrammarProvider;
 
 @Singleton
 public class ExBacktrackingBug325745TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
-	
 	
 	public class DelegateModelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.unorderedGroups.ExBacktrackingBug325745TestLanguage.DelegateModel");
@@ -26,7 +25,7 @@ public class ExBacktrackingBug325745TestLanguageGrammarAccess extends AbstractGr
 		//DelegateModel Model:
 		//	Model
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//Model
 		public RuleCall getModelParserRuleCall() { return cModelParserRuleCall; }
 	}
@@ -35,15 +34,15 @@ public class ExBacktrackingBug325745TestLanguageGrammarAccess extends AbstractGr
 	private final DelegateModelElements pDelegateModel;
 	
 	private final Grammar grammar;
-
+	
 	private final BacktrackingBug325745TestLanguageGrammarAccess gaBacktrackingBug325745TestLanguage;
-
+	
 	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public ExBacktrackingBug325745TestLanguageGrammarAccess(GrammarProvider grammarProvider,
-		BacktrackingBug325745TestLanguageGrammarAccess gaBacktrackingBug325745TestLanguage,
-		TerminalsGrammarAccess gaTerminals) {
+			BacktrackingBug325745TestLanguageGrammarAccess gaBacktrackingBug325745TestLanguage,
+			TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaBacktrackingBug325745TestLanguage = gaBacktrackingBug325745TestLanguage;
 		this.gaTerminals = gaTerminals;
@@ -71,11 +70,11 @@ public class ExBacktrackingBug325745TestLanguageGrammarAccess extends AbstractGr
 		return grammar;
 	}
 	
-
+	
 	public BacktrackingBug325745TestLanguageGrammarAccess getBacktrackingBug325745TestLanguageGrammarAccess() {
 		return gaBacktrackingBug325745TestLanguage;
 	}
-
+	
 	public TerminalsGrammarAccess getTerminalsGrammarAccess() {
 		return gaTerminals;
 	}
@@ -90,7 +89,7 @@ public class ExBacktrackingBug325745TestLanguageGrammarAccess extends AbstractGr
 	public ParserRule getDelegateModelRule() {
 		return getDelegateModelAccess().getRule();
 	}
-
+	
 	//Model:
 	//	{Model} fields+=Element+;
 	public BacktrackingBug325745TestLanguageGrammarAccess.ModelElements getModelAccess() {
@@ -100,7 +99,7 @@ public class ExBacktrackingBug325745TestLanguageGrammarAccess extends AbstractGr
 	public ParserRule getModelRule() {
 		return getModelAccess().getRule();
 	}
-
+	
 	//Element:
 	//	name=ID
 	//	dataType=DataType?
@@ -112,7 +111,7 @@ public class ExBacktrackingBug325745TestLanguageGrammarAccess extends AbstractGr
 	public ParserRule getElementRule() {
 		return getElementAccess().getRule();
 	}
-
+	
 	//DataType:
 	//	baseType=ID (':=' defaultValue=STRING)?;
 	public BacktrackingBug325745TestLanguageGrammarAccess.DataTypeElements getDataTypeAccess() {
@@ -122,7 +121,7 @@ public class ExBacktrackingBug325745TestLanguageGrammarAccess extends AbstractGr
 	public ParserRule getDataTypeRule() {
 		return getDataTypeAccess().getRule();
 	}
-
+	
 	//Expression:
 	//	{Expression} ('['? & prefix=STRING?) ('['? terms+=SimpleTerm ']'?)* (']'? & postfix=STRING?);
 	public BacktrackingBug325745TestLanguageGrammarAccess.ExpressionElements getExpressionAccess() {
@@ -132,7 +131,7 @@ public class ExBacktrackingBug325745TestLanguageGrammarAccess extends AbstractGr
 	public ParserRule getExpressionRule() {
 		return getExpressionAccess().getRule();
 	}
-
+	
 	//SimpleTerm:
 	//	lineCount=INT
 	//	'*'?
@@ -146,47 +145,47 @@ public class ExBacktrackingBug325745TestLanguageGrammarAccess extends AbstractGr
 	public ParserRule getSimpleTermRule() {
 		return getSimpleTermAccess().getRule();
 	}
-
+	
 	//terminal ID:
 	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
-	} 
-
+	}
+	
 	//terminal INT returns ecore::EInt:
 	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
-	} 
-
+	}
+	
 	//terminal STRING:
 	//	'"' ('\\' . | !('\\' | '"'))* '"' |
 	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
-	} 
-
+	}
+	
 	//terminal ML_COMMENT:
 	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal SL_COMMENT:
 	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal WS:
 	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
-	} 
-
+	}
+	
 	//terminal ANY_OTHER:
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
-	} 
+	}
 }

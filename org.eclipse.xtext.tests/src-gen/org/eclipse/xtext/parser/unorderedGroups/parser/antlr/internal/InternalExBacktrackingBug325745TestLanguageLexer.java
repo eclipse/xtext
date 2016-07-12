@@ -1,4 +1,4 @@
-package org.eclipse.xtext.parser.unorderedGroups.parser.antlr.lexer;
+package org.eclipse.xtext.parser.unorderedGroups.parser.antlr.internal;
 
 // Hack: Use our own Lexer superclass by means of import. 
 // Currently there is no other way to specify the superclass for the lexer.
@@ -12,20 +12,20 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class InternalExBacktrackingBug325745TestLanguageLexer extends Lexer {
-    public static final int FullStop=7;
-    public static final int RULE_ID=10;
-    public static final int RULE_WS=15;
-    public static final int RULE_STRING=12;
-    public static final int RULE_ANY_OTHER=16;
-    public static final int ColonEqualsSign=4;
-    public static final int RULE_SL_COMMENT=14;
-    public static final int RULE_INT=11;
-    public static final int RULE_ML_COMMENT=13;
-    public static final int LeftSquareBracket=8;
+    public static final int RULE_ID=4;
+    public static final int RULE_WS=9;
+    public static final int RULE_STRING=5;
+    public static final int RULE_ANY_OTHER=10;
+    public static final int RULE_SL_COMMENT=8;
+    public static final int T__15=15;
+    public static final int T__16=16;
+    public static final int RULE_INT=6;
+    public static final int T__11=11;
+    public static final int RULE_ML_COMMENT=7;
+    public static final int T__12=12;
+    public static final int T__13=13;
+    public static final int T__14=14;
     public static final int EOF=-1;
-    public static final int Asterisk=6;
-    public static final int RightSquareBracket=9;
-    public static final int ExclamationMark=5;
 
     // delegates
     // delegators
@@ -38,15 +38,35 @@ public class InternalExBacktrackingBug325745TestLanguageLexer extends Lexer {
         super(input,state);
 
     }
-    public String getGrammarFileName() { return "InternalExBacktrackingBug325745TestLanguageLexer.g"; }
+    public String getGrammarFileName() { return "InternalExBacktrackingBug325745TestLanguage.g"; }
 
-    // $ANTLR start "ColonEqualsSign"
-    public final void mColonEqualsSign() throws RecognitionException {
+    // $ANTLR start "T__11"
+    public final void mT__11() throws RecognitionException {
         try {
-            int _type = ColonEqualsSign;
+            int _type = T__11;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBacktrackingBug325745TestLanguageLexer.g:19:17: ( ':=' )
-            // InternalExBacktrackingBug325745TestLanguageLexer.g:19:19: ':='
+            // InternalExBacktrackingBug325745TestLanguage.g:11:7: ( '.' )
+            // InternalExBacktrackingBug325745TestLanguage.g:11:9: '.'
+            {
+            match('.'); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "T__11"
+
+    // $ANTLR start "T__12"
+    public final void mT__12() throws RecognitionException {
+        try {
+            int _type = T__12;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // InternalExBacktrackingBug325745TestLanguage.g:12:7: ( ':=' )
+            // InternalExBacktrackingBug325745TestLanguage.g:12:9: ':='
             {
             match(":="); 
 
@@ -59,75 +79,15 @@ public class InternalExBacktrackingBug325745TestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "ColonEqualsSign"
+    // $ANTLR end "T__12"
 
-    // $ANTLR start "ExclamationMark"
-    public final void mExclamationMark() throws RecognitionException {
+    // $ANTLR start "T__13"
+    public final void mT__13() throws RecognitionException {
         try {
-            int _type = ExclamationMark;
+            int _type = T__13;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBacktrackingBug325745TestLanguageLexer.g:21:17: ( '!' )
-            // InternalExBacktrackingBug325745TestLanguageLexer.g:21:19: '!'
-            {
-            match('!'); 
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        }
-    }
-    // $ANTLR end "ExclamationMark"
-
-    // $ANTLR start "Asterisk"
-    public final void mAsterisk() throws RecognitionException {
-        try {
-            int _type = Asterisk;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBacktrackingBug325745TestLanguageLexer.g:23:10: ( '*' )
-            // InternalExBacktrackingBug325745TestLanguageLexer.g:23:12: '*'
-            {
-            match('*'); 
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        }
-    }
-    // $ANTLR end "Asterisk"
-
-    // $ANTLR start "FullStop"
-    public final void mFullStop() throws RecognitionException {
-        try {
-            int _type = FullStop;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBacktrackingBug325745TestLanguageLexer.g:25:10: ( '.' )
-            // InternalExBacktrackingBug325745TestLanguageLexer.g:25:12: '.'
-            {
-            match('.'); 
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        }
-    }
-    // $ANTLR end "FullStop"
-
-    // $ANTLR start "LeftSquareBracket"
-    public final void mLeftSquareBracket() throws RecognitionException {
-        try {
-            int _type = LeftSquareBracket;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBacktrackingBug325745TestLanguageLexer.g:27:19: ( '[' )
-            // InternalExBacktrackingBug325745TestLanguageLexer.g:27:21: '['
+            // InternalExBacktrackingBug325745TestLanguage.g:13:7: ( '[' )
+            // InternalExBacktrackingBug325745TestLanguage.g:13:9: '['
             {
             match('['); 
 
@@ -139,15 +99,15 @@ public class InternalExBacktrackingBug325745TestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "LeftSquareBracket"
+    // $ANTLR end "T__13"
 
-    // $ANTLR start "RightSquareBracket"
-    public final void mRightSquareBracket() throws RecognitionException {
+    // $ANTLR start "T__14"
+    public final void mT__14() throws RecognitionException {
         try {
-            int _type = RightSquareBracket;
+            int _type = T__14;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBacktrackingBug325745TestLanguageLexer.g:29:20: ( ']' )
-            // InternalExBacktrackingBug325745TestLanguageLexer.g:29:22: ']'
+            // InternalExBacktrackingBug325745TestLanguage.g:14:7: ( ']' )
+            // InternalExBacktrackingBug325745TestLanguage.g:14:9: ']'
             {
             match(']'); 
 
@@ -159,17 +119,57 @@ public class InternalExBacktrackingBug325745TestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "RightSquareBracket"
+    // $ANTLR end "T__14"
+
+    // $ANTLR start "T__15"
+    public final void mT__15() throws RecognitionException {
+        try {
+            int _type = T__15;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // InternalExBacktrackingBug325745TestLanguage.g:15:7: ( '*' )
+            // InternalExBacktrackingBug325745TestLanguage.g:15:9: '*'
+            {
+            match('*'); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "T__15"
+
+    // $ANTLR start "T__16"
+    public final void mT__16() throws RecognitionException {
+        try {
+            int _type = T__16;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // InternalExBacktrackingBug325745TestLanguage.g:16:7: ( '!' )
+            // InternalExBacktrackingBug325745TestLanguage.g:16:9: '!'
+            {
+            match('!'); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "T__16"
 
     // $ANTLR start "RULE_ID"
     public final void mRULE_ID() throws RecognitionException {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBacktrackingBug325745TestLanguageLexer.g:33:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // InternalExBacktrackingBug325745TestLanguageLexer.g:33:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalExBacktrackingBug325745TestLanguage.g:581:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // InternalExBacktrackingBug325745TestLanguage.g:581:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // InternalExBacktrackingBug325745TestLanguageLexer.g:33:11: ( '^' )?
+            // InternalExBacktrackingBug325745TestLanguage.g:581:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -178,7 +178,7 @@ public class InternalExBacktrackingBug325745TestLanguageLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // InternalExBacktrackingBug325745TestLanguageLexer.g:33:11: '^'
+                    // InternalExBacktrackingBug325745TestLanguage.g:581:11: '^'
                     {
                     match('^'); 
 
@@ -196,7 +196,7 @@ public class InternalExBacktrackingBug325745TestLanguageLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // InternalExBacktrackingBug325745TestLanguageLexer.g:33:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalExBacktrackingBug325745TestLanguage.g:581:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -209,7 +209,7 @@ public class InternalExBacktrackingBug325745TestLanguageLexer extends Lexer {
 
                 switch (alt2) {
             	case 1 :
-            	    // InternalExBacktrackingBug325745TestLanguageLexer.g:
+            	    // InternalExBacktrackingBug325745TestLanguage.g:
             	    {
             	    if ( (input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
             	        input.consume();
@@ -245,10 +245,10 @@ public class InternalExBacktrackingBug325745TestLanguageLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBacktrackingBug325745TestLanguageLexer.g:35:10: ( ( '0' .. '9' )+ )
-            // InternalExBacktrackingBug325745TestLanguageLexer.g:35:12: ( '0' .. '9' )+
+            // InternalExBacktrackingBug325745TestLanguage.g:583:10: ( ( '0' .. '9' )+ )
+            // InternalExBacktrackingBug325745TestLanguage.g:583:12: ( '0' .. '9' )+
             {
-            // InternalExBacktrackingBug325745TestLanguageLexer.g:35:12: ( '0' .. '9' )+
+            // InternalExBacktrackingBug325745TestLanguage.g:583:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -262,7 +262,7 @@ public class InternalExBacktrackingBug325745TestLanguageLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // InternalExBacktrackingBug325745TestLanguageLexer.g:35:13: '0' .. '9'
+            	    // InternalExBacktrackingBug325745TestLanguage.g:583:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -294,10 +294,10 @@ public class InternalExBacktrackingBug325745TestLanguageLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBacktrackingBug325745TestLanguageLexer.g:37:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // InternalExBacktrackingBug325745TestLanguageLexer.g:37:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalExBacktrackingBug325745TestLanguage.g:585:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // InternalExBacktrackingBug325745TestLanguage.g:585:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // InternalExBacktrackingBug325745TestLanguageLexer.g:37:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalExBacktrackingBug325745TestLanguage.g:585:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -315,10 +315,10 @@ public class InternalExBacktrackingBug325745TestLanguageLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // InternalExBacktrackingBug325745TestLanguageLexer.g:37:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // InternalExBacktrackingBug325745TestLanguage.g:585:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // InternalExBacktrackingBug325745TestLanguageLexer.g:37:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // InternalExBacktrackingBug325745TestLanguage.g:585:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -334,7 +334,7 @@ public class InternalExBacktrackingBug325745TestLanguageLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // InternalExBacktrackingBug325745TestLanguageLexer.g:37:21: '\\\\' .
+                    	    // InternalExBacktrackingBug325745TestLanguage.g:585:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -342,7 +342,7 @@ public class InternalExBacktrackingBug325745TestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalExBacktrackingBug325745TestLanguageLexer.g:37:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // InternalExBacktrackingBug325745TestLanguage.g:585:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -367,10 +367,10 @@ public class InternalExBacktrackingBug325745TestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalExBacktrackingBug325745TestLanguageLexer.g:37:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // InternalExBacktrackingBug325745TestLanguage.g:585:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // InternalExBacktrackingBug325745TestLanguageLexer.g:37:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // InternalExBacktrackingBug325745TestLanguage.g:585:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -386,7 +386,7 @@ public class InternalExBacktrackingBug325745TestLanguageLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // InternalExBacktrackingBug325745TestLanguageLexer.g:37:54: '\\\\' .
+                    	    // InternalExBacktrackingBug325745TestLanguage.g:585:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -394,7 +394,7 @@ public class InternalExBacktrackingBug325745TestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalExBacktrackingBug325745TestLanguageLexer.g:37:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // InternalExBacktrackingBug325745TestLanguage.g:585:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -437,12 +437,12 @@ public class InternalExBacktrackingBug325745TestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBacktrackingBug325745TestLanguageLexer.g:39:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // InternalExBacktrackingBug325745TestLanguageLexer.g:39:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // InternalExBacktrackingBug325745TestLanguage.g:587:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // InternalExBacktrackingBug325745TestLanguage.g:587:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // InternalExBacktrackingBug325745TestLanguageLexer.g:39:24: ( options {greedy=false; } : . )*
+            // InternalExBacktrackingBug325745TestLanguage.g:587:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -467,7 +467,7 @@ public class InternalExBacktrackingBug325745TestLanguageLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // InternalExBacktrackingBug325745TestLanguageLexer.g:39:52: .
+            	    // InternalExBacktrackingBug325745TestLanguage.g:587:52: .
             	    {
             	    matchAny(); 
 
@@ -497,12 +497,12 @@ public class InternalExBacktrackingBug325745TestLanguageLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBacktrackingBug325745TestLanguageLexer.g:41:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // InternalExBacktrackingBug325745TestLanguageLexer.g:41:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // InternalExBacktrackingBug325745TestLanguage.g:589:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // InternalExBacktrackingBug325745TestLanguage.g:589:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // InternalExBacktrackingBug325745TestLanguageLexer.g:41:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalExBacktrackingBug325745TestLanguage.g:589:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -515,7 +515,7 @@ public class InternalExBacktrackingBug325745TestLanguageLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // InternalExBacktrackingBug325745TestLanguageLexer.g:41:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalExBacktrackingBug325745TestLanguage.g:589:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -535,7 +535,7 @@ public class InternalExBacktrackingBug325745TestLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // InternalExBacktrackingBug325745TestLanguageLexer.g:41:40: ( ( '\\r' )? '\\n' )?
+            // InternalExBacktrackingBug325745TestLanguage.g:589:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -544,9 +544,9 @@ public class InternalExBacktrackingBug325745TestLanguageLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // InternalExBacktrackingBug325745TestLanguageLexer.g:41:41: ( '\\r' )? '\\n'
+                    // InternalExBacktrackingBug325745TestLanguage.g:589:41: ( '\\r' )? '\\n'
                     {
-                    // InternalExBacktrackingBug325745TestLanguageLexer.g:41:41: ( '\\r' )?
+                    // InternalExBacktrackingBug325745TestLanguage.g:589:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -555,7 +555,7 @@ public class InternalExBacktrackingBug325745TestLanguageLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // InternalExBacktrackingBug325745TestLanguageLexer.g:41:41: '\\r'
+                            // InternalExBacktrackingBug325745TestLanguage.g:589:41: '\\r'
                             {
                             match('\r'); 
 
@@ -587,10 +587,10 @@ public class InternalExBacktrackingBug325745TestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBacktrackingBug325745TestLanguageLexer.g:43:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // InternalExBacktrackingBug325745TestLanguageLexer.g:43:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalExBacktrackingBug325745TestLanguage.g:591:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalExBacktrackingBug325745TestLanguage.g:591:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // InternalExBacktrackingBug325745TestLanguageLexer.g:43:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalExBacktrackingBug325745TestLanguage.g:591:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -604,7 +604,7 @@ public class InternalExBacktrackingBug325745TestLanguageLexer extends Lexer {
 
                 switch (alt11) {
             	case 1 :
-            	    // InternalExBacktrackingBug325745TestLanguageLexer.g:
+            	    // InternalExBacktrackingBug325745TestLanguage.g:
             	    {
             	    if ( (input.LA(1)>='\t' && input.LA(1)<='\n')||input.LA(1)=='\r'||input.LA(1)==' ' ) {
             	        input.consume();
@@ -644,8 +644,8 @@ public class InternalExBacktrackingBug325745TestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalExBacktrackingBug325745TestLanguageLexer.g:45:16: ( . )
-            // InternalExBacktrackingBug325745TestLanguageLexer.g:45:18: .
+            // InternalExBacktrackingBug325745TestLanguage.g:593:16: ( . )
+            // InternalExBacktrackingBug325745TestLanguage.g:593:18: .
             {
             matchAny(); 
 
@@ -660,96 +660,96 @@ public class InternalExBacktrackingBug325745TestLanguageLexer extends Lexer {
     // $ANTLR end "RULE_ANY_OTHER"
 
     public void mTokens() throws RecognitionException {
-        // InternalExBacktrackingBug325745TestLanguageLexer.g:1:8: ( ColonEqualsSign | ExclamationMark | Asterisk | FullStop | LeftSquareBracket | RightSquareBracket | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
+        // InternalExBacktrackingBug325745TestLanguage.g:1:8: ( T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
         int alt12=13;
         alt12 = dfa12.predict(input);
         switch (alt12) {
             case 1 :
-                // InternalExBacktrackingBug325745TestLanguageLexer.g:1:10: ColonEqualsSign
+                // InternalExBacktrackingBug325745TestLanguage.g:1:10: T__11
                 {
-                mColonEqualsSign(); 
+                mT__11(); 
 
                 }
                 break;
             case 2 :
-                // InternalExBacktrackingBug325745TestLanguageLexer.g:1:26: ExclamationMark
+                // InternalExBacktrackingBug325745TestLanguage.g:1:16: T__12
                 {
-                mExclamationMark(); 
+                mT__12(); 
 
                 }
                 break;
             case 3 :
-                // InternalExBacktrackingBug325745TestLanguageLexer.g:1:42: Asterisk
+                // InternalExBacktrackingBug325745TestLanguage.g:1:22: T__13
                 {
-                mAsterisk(); 
+                mT__13(); 
 
                 }
                 break;
             case 4 :
-                // InternalExBacktrackingBug325745TestLanguageLexer.g:1:51: FullStop
+                // InternalExBacktrackingBug325745TestLanguage.g:1:28: T__14
                 {
-                mFullStop(); 
+                mT__14(); 
 
                 }
                 break;
             case 5 :
-                // InternalExBacktrackingBug325745TestLanguageLexer.g:1:60: LeftSquareBracket
+                // InternalExBacktrackingBug325745TestLanguage.g:1:34: T__15
                 {
-                mLeftSquareBracket(); 
+                mT__15(); 
 
                 }
                 break;
             case 6 :
-                // InternalExBacktrackingBug325745TestLanguageLexer.g:1:78: RightSquareBracket
+                // InternalExBacktrackingBug325745TestLanguage.g:1:40: T__16
                 {
-                mRightSquareBracket(); 
+                mT__16(); 
 
                 }
                 break;
             case 7 :
-                // InternalExBacktrackingBug325745TestLanguageLexer.g:1:97: RULE_ID
+                // InternalExBacktrackingBug325745TestLanguage.g:1:46: RULE_ID
                 {
                 mRULE_ID(); 
 
                 }
                 break;
             case 8 :
-                // InternalExBacktrackingBug325745TestLanguageLexer.g:1:105: RULE_INT
+                // InternalExBacktrackingBug325745TestLanguage.g:1:54: RULE_INT
                 {
                 mRULE_INT(); 
 
                 }
                 break;
             case 9 :
-                // InternalExBacktrackingBug325745TestLanguageLexer.g:1:114: RULE_STRING
+                // InternalExBacktrackingBug325745TestLanguage.g:1:63: RULE_STRING
                 {
                 mRULE_STRING(); 
 
                 }
                 break;
             case 10 :
-                // InternalExBacktrackingBug325745TestLanguageLexer.g:1:126: RULE_ML_COMMENT
+                // InternalExBacktrackingBug325745TestLanguage.g:1:75: RULE_ML_COMMENT
                 {
                 mRULE_ML_COMMENT(); 
 
                 }
                 break;
             case 11 :
-                // InternalExBacktrackingBug325745TestLanguageLexer.g:1:142: RULE_SL_COMMENT
+                // InternalExBacktrackingBug325745TestLanguage.g:1:91: RULE_SL_COMMENT
                 {
                 mRULE_SL_COMMENT(); 
 
                 }
                 break;
             case 12 :
-                // InternalExBacktrackingBug325745TestLanguageLexer.g:1:158: RULE_WS
+                // InternalExBacktrackingBug325745TestLanguage.g:1:107: RULE_WS
                 {
                 mRULE_WS(); 
 
                 }
                 break;
             case 13 :
-                // InternalExBacktrackingBug325745TestLanguageLexer.g:1:166: RULE_ANY_OTHER
+                // InternalExBacktrackingBug325745TestLanguage.g:1:115: RULE_ANY_OTHER
                 {
                 mRULE_ANY_OTHER(); 
 
@@ -763,21 +763,21 @@ public class InternalExBacktrackingBug325745TestLanguageLexer extends Lexer {
 
     protected DFA12 dfa12 = new DFA12(this);
     static final String DFA12_eotS =
-        "\1\uffff\1\16\5\uffff\1\16\2\uffff\3\16\16\uffff";
+        "\2\uffff\1\16\4\uffff\1\16\2\uffff\3\16\16\uffff";
     static final String DFA12_eofS =
         "\33\uffff";
     static final String DFA12_minS =
-        "\1\0\1\75\5\uffff\1\101\2\uffff\2\0\1\52\16\uffff";
+        "\1\0\1\uffff\1\75\4\uffff\1\101\2\uffff\2\0\1\52\16\uffff";
     static final String DFA12_maxS =
-        "\1\uffff\1\75\5\uffff\1\172\2\uffff\2\uffff\1\57\16\uffff";
+        "\1\uffff\1\uffff\1\75\4\uffff\1\172\2\uffff\2\uffff\1\57\16\uffff";
     static final String DFA12_acceptS =
-        "\2\uffff\1\2\1\3\1\4\1\5\1\6\1\uffff\1\7\1\10\3\uffff\1\14\1\15\1\1\1\2\1\3\1\4\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1\14";
+        "\1\uffff\1\1\1\uffff\1\3\1\4\1\5\1\6\1\uffff\1\7\1\10\3\uffff\1\14\1\15\1\1\1\2\1\3\1\4\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1\14";
     static final String DFA12_specialS =
         "\1\1\11\uffff\1\2\1\0\17\uffff}>";
     static final String[] DFA12_transitionS = {
-            "\11\16\2\15\2\16\1\15\22\16\1\15\1\2\1\12\4\16\1\13\2\16\1\3\3\16\1\4\1\14\12\11\1\1\6\16\32\10\1\5\1\16\1\6\1\7\1\10\1\16\32\10\uff85\16",
-            "\1\17",
+            "\11\16\2\15\2\16\1\15\22\16\1\15\1\6\1\12\4\16\1\13\2\16\1\5\3\16\1\1\1\14\12\11\1\2\6\16\32\10\1\3\1\16\1\4\1\7\1\10\1\16\32\10\uff85\16",
             "",
+            "\1\20",
             "",
             "",
             "",
@@ -834,7 +834,7 @@ public class InternalExBacktrackingBug325745TestLanguageLexer extends Lexer {
             this.transition = DFA12_transition;
         }
         public String getDescription() {
-            return "1:1: Tokens : ( ColonEqualsSign | ExclamationMark | Asterisk | FullStop | LeftSquareBracket | RightSquareBracket | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );";
+            return "1:1: Tokens : ( T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             IntStream input = _input;
@@ -854,17 +854,17 @@ public class InternalExBacktrackingBug325745TestLanguageLexer extends Lexer {
                         int LA12_0 = input.LA(1);
 
                         s = -1;
-                        if ( (LA12_0==':') ) {s = 1;}
+                        if ( (LA12_0=='.') ) {s = 1;}
 
-                        else if ( (LA12_0=='!') ) {s = 2;}
+                        else if ( (LA12_0==':') ) {s = 2;}
 
-                        else if ( (LA12_0=='*') ) {s = 3;}
+                        else if ( (LA12_0=='[') ) {s = 3;}
 
-                        else if ( (LA12_0=='.') ) {s = 4;}
+                        else if ( (LA12_0==']') ) {s = 4;}
 
-                        else if ( (LA12_0=='[') ) {s = 5;}
+                        else if ( (LA12_0=='*') ) {s = 5;}
 
-                        else if ( (LA12_0==']') ) {s = 6;}
+                        else if ( (LA12_0=='!') ) {s = 6;}
 
                         else if ( (LA12_0=='^') ) {s = 7;}
 

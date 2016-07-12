@@ -3,21 +3,20 @@
  */
 package org.eclipse.xtext.parser.unorderedGroups.services;
 
-import com.google.inject.Singleton;
 import com.google.inject.Inject;
-
+import com.google.inject.Singleton;
 import java.util.List;
-
-import org.eclipse.xtext.*;
-import org.eclipse.xtext.service.GrammarProvider;
-import org.eclipse.xtext.service.AbstractElementFinder.*;
-
-import org.eclipse.xtext.parser.unorderedGroups.services.UnorderedGroupsTestLanguageGrammarAccess;
+import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
+import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder;
+import org.eclipse.xtext.service.GrammarProvider;
 
 @Singleton
 public class ExUnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
-	
 	
 	public class DelegateModelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.unorderedGroups.ExUnorderedGroupsTestLanguage.DelegateModel");
@@ -26,7 +25,7 @@ public class ExUnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarE
 		//DelegateModel Model:
 		//	Model
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//Model
 		public RuleCall getModelParserRuleCall() { return cModelParserRuleCall; }
 	}
@@ -35,15 +34,15 @@ public class ExUnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarE
 	private final DelegateModelElements pDelegateModel;
 	
 	private final Grammar grammar;
-
+	
 	private final UnorderedGroupsTestLanguageGrammarAccess gaUnorderedGroupsTestLanguage;
-
+	
 	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public ExUnorderedGroupsTestLanguageGrammarAccess(GrammarProvider grammarProvider,
-		UnorderedGroupsTestLanguageGrammarAccess gaUnorderedGroupsTestLanguage,
-		TerminalsGrammarAccess gaTerminals) {
+			UnorderedGroupsTestLanguageGrammarAccess gaUnorderedGroupsTestLanguage,
+			TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaUnorderedGroupsTestLanguage = gaUnorderedGroupsTestLanguage;
 		this.gaTerminals = gaTerminals;
@@ -71,11 +70,11 @@ public class ExUnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarE
 		return grammar;
 	}
 	
-
+	
 	public UnorderedGroupsTestLanguageGrammarAccess getUnorderedGroupsTestLanguageGrammarAccess() {
 		return gaUnorderedGroupsTestLanguage;
 	}
-
+	
 	public TerminalsGrammarAccess getTerminalsGrammarAccess() {
 		return gaTerminals;
 	}
@@ -90,7 +89,7 @@ public class ExUnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarE
 	public ParserRule getDelegateModelRule() {
 		return getDelegateModelAccess().getRule();
 	}
-
+	
 	//Model:
 	//	{Model} ('1' (first?='a' & second?='b') | '2' (first?='a' & second?='b' & third?='c' & forth?='d') | '3' (first?='a'?
 	//	& second?='b'?) | '4' (first?='a' & second?='b'?) | '5' (first?='a'? & second?='b') | '6' (firstAsList+='a'+ &
@@ -111,7 +110,7 @@ public class ExUnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarE
 	public ParserRule getModelRule() {
 		return getModelAccess().getRule();
 	}
-
+	
 	//NestedModel:
 	//	{NestedModel} (first?="a" & second?="b")?
 	//	'nested';
@@ -122,7 +121,7 @@ public class ExUnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarE
 	public ParserRule getNestedModelRule() {
 		return getNestedModelAccess().getRule();
 	}
-
+	
 	//UnorderedDatatype:
 	//	'1' ('a' & 'b') | '2' ('a' & 'b' & 'c' & 'd') | '3' ('a'? & 'b'?) | '4' ('a' & 'b'?) | '5' ('a'? & 'b') | '6' ('a'+ &
 	//	'b'*) | '7' ('a'* & 'b'+) | '8' ('a' 'b' 'c' & 'a' 'b' 'd') | '9' ('a' & 'b')+
@@ -137,7 +136,7 @@ public class ExUnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarE
 	public ParserRule getUnorderedDatatypeRule() {
 		return getUnorderedDatatypeAccess().getRule();
 	}
-
+	
 	/// * SuppressWarnings[potentialOverride] * / UnorderedSerialization:
 	//	{UnorderedSerialization} ('1' first?='a'? & second?='b'? & third?='c'? & forth?='d'?
 	//	| '2' (firstAsList+='a' & secondAsList+='b')*
@@ -149,47 +148,47 @@ public class ExUnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarE
 	public ParserRule getUnorderedSerializationRule() {
 		return getUnorderedSerializationAccess().getRule();
 	}
-
+	
 	//terminal ID:
 	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
-	} 
-
+	}
+	
 	//terminal INT returns ecore::EInt:
 	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
-	} 
-
+	}
+	
 	//terminal STRING:
 	//	'"' ('\\' . | !('\\' | '"'))* '"' |
 	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
-	} 
-
+	}
+	
 	//terminal ML_COMMENT:
 	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal SL_COMMENT:
 	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal WS:
 	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
-	} 
-
+	}
+	
 	//terminal ANY_OTHER:
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
-	} 
+	}
 }
