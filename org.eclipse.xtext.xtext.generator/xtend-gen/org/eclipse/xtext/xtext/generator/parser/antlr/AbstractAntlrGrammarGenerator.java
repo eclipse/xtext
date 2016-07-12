@@ -297,14 +297,8 @@ public abstract class AbstractAntlrGrammarGenerator {
         _builder.append("tokens {");
         _builder.newLine();
         {
-          Set<String> _allKeywords = GrammarUtil.getAllKeywords(it);
-          List<String> _sort = IterableExtensions.<String>sort(_allKeywords);
-          final Function1<String, Integer> _function = (String it_1) -> {
-            int _length = it_1.length();
-            return Integer.valueOf((-_length));
-          };
-          List<String> _sortBy = IterableExtensions.<String, Integer>sortBy(_sort, _function);
-          for(final String kw : _sortBy) {
+          Set<String> _allKeywords = this.keywordHelper.getAllKeywords();
+          for(final String kw : _allKeywords) {
             _builder.append("\t");
             String _ruleName = this.keywordHelper.getRuleName(kw);
             _builder.append(_ruleName, "\t");
@@ -442,17 +436,11 @@ public abstract class AbstractAntlrGrammarGenerator {
   protected CharSequence compileKeywordRules(final Grammar it, final AntlrOptions options) {
     CharSequence _xblockexpression = null;
     {
-      Set<String> _allKeywords = GrammarUtil.getAllKeywords(it);
-      List<String> _sort = IterableExtensions.<String>sort(_allKeywords);
-      final Function1<String, Integer> _function = (String it_1) -> {
-        int _length = it_1.length();
-        return Integer.valueOf((-_length));
-      };
-      final List<String> allKeywords = IterableExtensions.<String, Integer>sortBy(_sort, _function);
+      final Set<String> allKeywords = this.keywordHelper.getAllKeywords();
       final List<TerminalRule> allTerminalRules = GrammarUtil.allTerminalRules(it);
       final ArrayList<String> synthetic_kw_alternatives = CollectionLiterals.<String>newArrayList();
       Iterable<Pair<Integer, String>> _indexed = IterableExtensions.<String>indexed(allKeywords);
-      final Function1<Pair<Integer, String>, String> _function_1 = (Pair<Integer, String> it_1) -> {
+      final Function1<Pair<Integer, String>, String> _function = (Pair<Integer, String> it_1) -> {
         String _value = it_1.getValue();
         final String ruleName = this.keywordHelper.getRuleName(_value);
         StringConcatenation _builder = new StringConcatenation();
@@ -465,10 +453,10 @@ public abstract class AbstractAntlrGrammarGenerator {
         _builder.append("; }");
         return _builder.toString();
       };
-      Iterable<String> _map = IterableExtensions.<Pair<Integer, String>, String>map(_indexed, _function_1);
+      Iterable<String> _map = IterableExtensions.<Pair<Integer, String>, String>map(_indexed, _function);
       Iterables.<String>addAll(synthetic_kw_alternatives, _map);
       Iterable<Pair<Integer, TerminalRule>> _indexed_1 = IterableExtensions.<TerminalRule>indexed(allTerminalRules);
-      final Function1<Pair<Integer, TerminalRule>, String> _function_2 = (Pair<Integer, TerminalRule> it_1) -> {
+      final Function1<Pair<Integer, TerminalRule>, String> _function_1 = (Pair<Integer, TerminalRule> it_1) -> {
         if (((!this._syntheticTerminalDetector.isSyntheticTerminalRule(it_1.getValue())) && (!it_1.getValue().isFragment()))) {
           StringConcatenation _builder = new StringConcatenation();
           _builder.append("(FRAGMENT_");
@@ -488,7 +476,7 @@ public abstract class AbstractAntlrGrammarGenerator {
         }
         return null;
       };
-      Iterable<String> _map_1 = IterableExtensions.<Pair<Integer, TerminalRule>, String>map(_indexed_1, _function_2);
+      Iterable<String> _map_1 = IterableExtensions.<Pair<Integer, TerminalRule>, String>map(_indexed_1, _function_1);
       Iterable<String> _filterNull = IterableExtensions.<String>filterNull(_map_1);
       List<String> _list = IterableExtensions.<String>toList(_filterNull);
       synthetic_kw_alternatives.addAll(_list);
