@@ -29,7 +29,7 @@ public class UiTestProjectDescriptor extends TestProjectDescriptor {
       final LinkedHashSet<ExternalDependency> deps = CollectionLiterals.<ExternalDependency>newLinkedHashSet();
       Set<ExternalDependency> _externalDependencies = super.getExternalDependencies();
       Iterables.<ExternalDependency>addAll(deps, _externalDependencies);
-      ExternalDependency _createXtextDependency = ExternalDependency.createXtextDependency("org.eclipse.xtext.junit4");
+      ExternalDependency _createXtextDependency = ExternalDependency.createXtextDependency("org.eclipse.xtext.testing");
       final Procedure1<ExternalDependency> _function = (ExternalDependency it) -> {
         ExternalDependency.MavenCoordinates _maven = it.getMaven();
         _maven.setScope(Scope.TESTCOMPILE);

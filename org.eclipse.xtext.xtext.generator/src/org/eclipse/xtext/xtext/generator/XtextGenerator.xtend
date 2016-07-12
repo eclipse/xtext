@@ -17,6 +17,7 @@ import java.io.IOException
 import java.io.InputStream
 import java.util.HashMap
 import java.util.List
+import java.util.Map
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.mwe.core.WorkflowContext
 import org.eclipse.emf.mwe.core.issues.Issues
@@ -27,15 +28,17 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.GeneratedMetamodel
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.XtextStandaloneSetup
+import org.eclipse.xtext.parser.IEncodingProvider
+import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.eclipse.xtext.util.MergeableManifest
 import org.eclipse.xtext.util.Tuples
 import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess
 import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess
+import org.eclipse.xtext.xtext.generator.model.TextFileAccess
 import org.eclipse.xtext.xtext.generator.model.project.BundleProjectConfig
 import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig
-import org.eclipse.xtext.xtext.generator.model.TextFileAccess
 
 /**
  * The Xtext language infrastructure generator. Can be configured with {@link IXtextGeneratorFragment}
@@ -65,6 +68,9 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 	@Inject XtextGeneratorTemplates templates
 	
 	@Inject XtextGeneratorNaming naming
+	
+	@Accessors(PROTECTED_GETTER)
+	val Map<String, String> defaultEncodings = newHashMap
 	
 	new() {
 		new XtextStandaloneSetup().createInjectorAndDoEMFRegistration()
@@ -100,6 +106,7 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 		if (injector === null) {
 			LOG.info('Initializing Xtext generator')
 			new StandaloneSetup().addRegisterGeneratedEPackage('org.eclipse.xtext.common.types.TypesPackage')
+			initializeEncoding('xtext')
 			injector = createInjector
 			injector.injectMembers(this)
 			injector.getInstance(CodeConfig) => [initialize(injector)]
@@ -110,6 +117,28 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 				val languageInjector = injector.createLanguageInjector(language)
 				language.initialize(languageInjector)
 			}
+		}
+	}
+	
+	protected def initializeEncoding(String langExtension) {
+		val serviceProviderRegistry = IResourceServiceProvider.Registry.INSTANCE
+		val serviceProvider = serviceProviderRegistry.extensionToFactoryMap.get(langExtension) as IResourceServiceProvider
+		if (serviceProvider !== null) {
+			val encodingProvider = serviceProvider.get(IEncodingProvider)
+			if (encodingProvider instanceof IEncodingProvider.Runtime) {
+				defaultEncodings.put(langExtension, encodingProvider.defaultEncoding)
+				encodingProvider.defaultEncoding = configuration.code.encoding
+			}
+		}
+	}
+	
+	protected def restoreEncoding(String langExtension) {
+		val serviceProviderRegistry = IResourceServiceProvider.Registry.INSTANCE
+		val serviceProvider = serviceProviderRegistry.extensionToFactoryMap.get(langExtension) as IResourceServiceProvider
+		if (serviceProvider !== null && defaultEncodings.containsKey(langExtension)) {
+			val encodingProvider = serviceProvider.get(IEncodingProvider)
+			if (encodingProvider instanceof IEncodingProvider.Runtime)
+				encodingProvider.defaultEncoding = defaultEncodings.get(langExtension)
 		}
 	}
 	
@@ -143,6 +172,8 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 			generateServices
 		} catch (Exception e) {
 			handleException(e, issues)
+		} finally {
+			restoreEncoding('xtext')
 		}
 	}
 	
