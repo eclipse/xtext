@@ -1,4 +1,4 @@
-package org.eclipse.xtext.parser.terminalrules.parser.antlr.internal; 
+package org.eclipse.xtext.parser.terminalrules.parser.antlr.internal;
 
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
@@ -51,18 +51,18 @@ public class InternalEcoreTerminalsTestLanguageParser extends AbstractInternalAn
 
 
      	private EcoreTerminalsTestLanguageGrammarAccess grammarAccess;
-     	
+
         public InternalEcoreTerminalsTestLanguageParser(TokenStream input, EcoreTerminalsTestLanguageGrammarAccess grammarAccess) {
             this(input);
             this.grammarAccess = grammarAccess;
             registerRules(grammarAccess.getGrammar());
         }
-        
+
         @Override
         protected String getFirstRuleName() {
-        	return "Model";	
+        	return "Model";
        	}
-       	
+
        	@Override
        	protected EcoreTerminalsTestLanguageGrammarAccess getGrammarAccess() {
        		return grammarAccess;
@@ -70,8 +70,9 @@ public class InternalEcoreTerminalsTestLanguageParser extends AbstractInternalAn
 
 
 
+
     // $ANTLR start "entryRuleModel"
-    // InternalEcoreTerminalsTestLanguage.g:67:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
+    // InternalEcoreTerminalsTestLanguage.g:64:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
     public final EObject entryRuleModel() throws RecognitionException {
         EObject current = null;
 
@@ -79,8 +80,8 @@ public class InternalEcoreTerminalsTestLanguageParser extends AbstractInternalAn
 
 
         try {
-            // InternalEcoreTerminalsTestLanguage.g:68:2: (iv_ruleModel= ruleModel EOF )
-            // InternalEcoreTerminalsTestLanguage.g:69:2: iv_ruleModel= ruleModel EOF
+            // InternalEcoreTerminalsTestLanguage.g:64:46: (iv_ruleModel= ruleModel EOF )
+            // InternalEcoreTerminalsTestLanguage.g:65:2: iv_ruleModel= ruleModel EOF
             {
              newCompositeNode(grammarAccess.getModelRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -94,11 +95,11 @@ public class InternalEcoreTerminalsTestLanguageParser extends AbstractInternalAn
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -107,7 +108,7 @@ public class InternalEcoreTerminalsTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "ruleModel"
-    // InternalEcoreTerminalsTestLanguage.g:76:1: ruleModel returns [EObject current=null] : ( (otherlv_0= 'int' ( (lv_intValues_1_0= RULE_EINT ) ) ) | (otherlv_2= 'double' ( (lv_doubleValues_3_0= RULE_EDOUBLE ) ) ) | (otherlv_4= 'date' ( (lv_dateValues_5_0= RULE_EDATE ) ) ) )* ;
+    // InternalEcoreTerminalsTestLanguage.g:71:1: ruleModel returns [EObject current=null] : ( (otherlv_0= 'int' ( (lv_intValues_1_0= RULE_EINT ) ) ) | (otherlv_2= 'double' ( (lv_doubleValues_3_0= RULE_EDOUBLE ) ) ) | (otherlv_4= 'date' ( (lv_dateValues_5_0= RULE_EDATE ) ) ) )* ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
@@ -118,13 +119,14 @@ public class InternalEcoreTerminalsTestLanguageParser extends AbstractInternalAn
         Token otherlv_4=null;
         Token lv_dateValues_5_0=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalEcoreTerminalsTestLanguage.g:79:28: ( ( (otherlv_0= 'int' ( (lv_intValues_1_0= RULE_EINT ) ) ) | (otherlv_2= 'double' ( (lv_doubleValues_3_0= RULE_EDOUBLE ) ) ) | (otherlv_4= 'date' ( (lv_dateValues_5_0= RULE_EDATE ) ) ) )* )
-            // InternalEcoreTerminalsTestLanguage.g:80:1: ( (otherlv_0= 'int' ( (lv_intValues_1_0= RULE_EINT ) ) ) | (otherlv_2= 'double' ( (lv_doubleValues_3_0= RULE_EDOUBLE ) ) ) | (otherlv_4= 'date' ( (lv_dateValues_5_0= RULE_EDATE ) ) ) )*
+            // InternalEcoreTerminalsTestLanguage.g:77:2: ( ( (otherlv_0= 'int' ( (lv_intValues_1_0= RULE_EINT ) ) ) | (otherlv_2= 'double' ( (lv_doubleValues_3_0= RULE_EDOUBLE ) ) ) | (otherlv_4= 'date' ( (lv_dateValues_5_0= RULE_EDATE ) ) ) )* )
+            // InternalEcoreTerminalsTestLanguage.g:78:2: ( (otherlv_0= 'int' ( (lv_intValues_1_0= RULE_EINT ) ) ) | (otherlv_2= 'double' ( (lv_doubleValues_3_0= RULE_EDOUBLE ) ) ) | (otherlv_4= 'date' ( (lv_dateValues_5_0= RULE_EDATE ) ) ) )*
             {
-            // InternalEcoreTerminalsTestLanguage.g:80:1: ( (otherlv_0= 'int' ( (lv_intValues_1_0= RULE_EINT ) ) ) | (otherlv_2= 'double' ( (lv_doubleValues_3_0= RULE_EDOUBLE ) ) ) | (otherlv_4= 'date' ( (lv_dateValues_5_0= RULE_EDATE ) ) ) )*
+            // InternalEcoreTerminalsTestLanguage.g:78:2: ( (otherlv_0= 'int' ( (lv_intValues_1_0= RULE_EINT ) ) ) | (otherlv_2= 'double' ( (lv_doubleValues_3_0= RULE_EDOUBLE ) ) ) | (otherlv_4= 'date' ( (lv_dateValues_5_0= RULE_EDATE ) ) ) )*
             loop1:
             do {
                 int alt1=4;
@@ -149,35 +151,35 @@ public class InternalEcoreTerminalsTestLanguageParser extends AbstractInternalAn
 
                 switch (alt1) {
             	case 1 :
-            	    // InternalEcoreTerminalsTestLanguage.g:80:2: (otherlv_0= 'int' ( (lv_intValues_1_0= RULE_EINT ) ) )
+            	    // InternalEcoreTerminalsTestLanguage.g:79:3: (otherlv_0= 'int' ( (lv_intValues_1_0= RULE_EINT ) ) )
             	    {
-            	    // InternalEcoreTerminalsTestLanguage.g:80:2: (otherlv_0= 'int' ( (lv_intValues_1_0= RULE_EINT ) ) )
+            	    // InternalEcoreTerminalsTestLanguage.g:79:3: (otherlv_0= 'int' ( (lv_intValues_1_0= RULE_EINT ) ) )
             	    // InternalEcoreTerminalsTestLanguage.g:80:4: otherlv_0= 'int' ( (lv_intValues_1_0= RULE_EINT ) )
             	    {
             	    otherlv_0=(Token)match(input,8,FollowSets000.FOLLOW_3); 
 
-            	        	newLeafNode(otherlv_0, grammarAccess.getModelAccess().getIntKeyword_0_0());
-            	        
-            	    // InternalEcoreTerminalsTestLanguage.g:84:1: ( (lv_intValues_1_0= RULE_EINT ) )
-            	    // InternalEcoreTerminalsTestLanguage.g:85:1: (lv_intValues_1_0= RULE_EINT )
+            	    				newLeafNode(otherlv_0, grammarAccess.getModelAccess().getIntKeyword_0_0());
+            	    			
+            	    // InternalEcoreTerminalsTestLanguage.g:84:4: ( (lv_intValues_1_0= RULE_EINT ) )
+            	    // InternalEcoreTerminalsTestLanguage.g:85:5: (lv_intValues_1_0= RULE_EINT )
             	    {
-            	    // InternalEcoreTerminalsTestLanguage.g:85:1: (lv_intValues_1_0= RULE_EINT )
-            	    // InternalEcoreTerminalsTestLanguage.g:86:3: lv_intValues_1_0= RULE_EINT
+            	    // InternalEcoreTerminalsTestLanguage.g:85:5: (lv_intValues_1_0= RULE_EINT )
+            	    // InternalEcoreTerminalsTestLanguage.g:86:6: lv_intValues_1_0= RULE_EINT
             	    {
             	    lv_intValues_1_0=(Token)match(input,RULE_EINT,FollowSets000.FOLLOW_4); 
 
-            	    			newLeafNode(lv_intValues_1_0, grammarAccess.getModelAccess().getIntValuesEINTTerminalRuleCall_0_1_0()); 
-            	    		
+            	    						newLeafNode(lv_intValues_1_0, grammarAccess.getModelAccess().getIntValuesEINTTerminalRuleCall_0_1_0());
+            	    					
 
-            	    	        if (current==null) {
-            	    	            current = createModelElement(grammarAccess.getModelRule());
-            	    	        }
-            	           		addWithLastConsumed(
-            	           			current, 
-            	           			"intValues",
-            	            		lv_intValues_1_0, 
-            	            		"org.eclipse.xtext.parser.terminalrules.EcoreTerminalsTestLanguage.EINT");
-            	    	    
+            	    						if (current==null) {
+            	    							current = createModelElement(grammarAccess.getModelRule());
+            	    						}
+            	    						addWithLastConsumed(
+            	    							current,
+            	    							"intValues",
+            	    							lv_intValues_1_0,
+            	    							"org.eclipse.xtext.parser.terminalrules.EcoreTerminalsTestLanguage.EINT");
+            	    					
 
             	    }
 
@@ -191,35 +193,35 @@ public class InternalEcoreTerminalsTestLanguageParser extends AbstractInternalAn
             	    }
             	    break;
             	case 2 :
-            	    // InternalEcoreTerminalsTestLanguage.g:103:6: (otherlv_2= 'double' ( (lv_doubleValues_3_0= RULE_EDOUBLE ) ) )
+            	    // InternalEcoreTerminalsTestLanguage.g:104:3: (otherlv_2= 'double' ( (lv_doubleValues_3_0= RULE_EDOUBLE ) ) )
             	    {
-            	    // InternalEcoreTerminalsTestLanguage.g:103:6: (otherlv_2= 'double' ( (lv_doubleValues_3_0= RULE_EDOUBLE ) ) )
-            	    // InternalEcoreTerminalsTestLanguage.g:103:8: otherlv_2= 'double' ( (lv_doubleValues_3_0= RULE_EDOUBLE ) )
+            	    // InternalEcoreTerminalsTestLanguage.g:104:3: (otherlv_2= 'double' ( (lv_doubleValues_3_0= RULE_EDOUBLE ) ) )
+            	    // InternalEcoreTerminalsTestLanguage.g:105:4: otherlv_2= 'double' ( (lv_doubleValues_3_0= RULE_EDOUBLE ) )
             	    {
             	    otherlv_2=(Token)match(input,9,FollowSets000.FOLLOW_5); 
 
-            	        	newLeafNode(otherlv_2, grammarAccess.getModelAccess().getDoubleKeyword_1_0());
-            	        
-            	    // InternalEcoreTerminalsTestLanguage.g:107:1: ( (lv_doubleValues_3_0= RULE_EDOUBLE ) )
-            	    // InternalEcoreTerminalsTestLanguage.g:108:1: (lv_doubleValues_3_0= RULE_EDOUBLE )
+            	    				newLeafNode(otherlv_2, grammarAccess.getModelAccess().getDoubleKeyword_1_0());
+            	    			
+            	    // InternalEcoreTerminalsTestLanguage.g:109:4: ( (lv_doubleValues_3_0= RULE_EDOUBLE ) )
+            	    // InternalEcoreTerminalsTestLanguage.g:110:5: (lv_doubleValues_3_0= RULE_EDOUBLE )
             	    {
-            	    // InternalEcoreTerminalsTestLanguage.g:108:1: (lv_doubleValues_3_0= RULE_EDOUBLE )
-            	    // InternalEcoreTerminalsTestLanguage.g:109:3: lv_doubleValues_3_0= RULE_EDOUBLE
+            	    // InternalEcoreTerminalsTestLanguage.g:110:5: (lv_doubleValues_3_0= RULE_EDOUBLE )
+            	    // InternalEcoreTerminalsTestLanguage.g:111:6: lv_doubleValues_3_0= RULE_EDOUBLE
             	    {
             	    lv_doubleValues_3_0=(Token)match(input,RULE_EDOUBLE,FollowSets000.FOLLOW_4); 
 
-            	    			newLeafNode(lv_doubleValues_3_0, grammarAccess.getModelAccess().getDoubleValuesEDOUBLETerminalRuleCall_1_1_0()); 
-            	    		
+            	    						newLeafNode(lv_doubleValues_3_0, grammarAccess.getModelAccess().getDoubleValuesEDOUBLETerminalRuleCall_1_1_0());
+            	    					
 
-            	    	        if (current==null) {
-            	    	            current = createModelElement(grammarAccess.getModelRule());
-            	    	        }
-            	           		addWithLastConsumed(
-            	           			current, 
-            	           			"doubleValues",
-            	            		lv_doubleValues_3_0, 
-            	            		"org.eclipse.xtext.parser.terminalrules.EcoreTerminalsTestLanguage.EDOUBLE");
-            	    	    
+            	    						if (current==null) {
+            	    							current = createModelElement(grammarAccess.getModelRule());
+            	    						}
+            	    						addWithLastConsumed(
+            	    							current,
+            	    							"doubleValues",
+            	    							lv_doubleValues_3_0,
+            	    							"org.eclipse.xtext.parser.terminalrules.EcoreTerminalsTestLanguage.EDOUBLE");
+            	    					
 
             	    }
 
@@ -233,35 +235,35 @@ public class InternalEcoreTerminalsTestLanguageParser extends AbstractInternalAn
             	    }
             	    break;
             	case 3 :
-            	    // InternalEcoreTerminalsTestLanguage.g:126:6: (otherlv_4= 'date' ( (lv_dateValues_5_0= RULE_EDATE ) ) )
+            	    // InternalEcoreTerminalsTestLanguage.g:129:3: (otherlv_4= 'date' ( (lv_dateValues_5_0= RULE_EDATE ) ) )
             	    {
-            	    // InternalEcoreTerminalsTestLanguage.g:126:6: (otherlv_4= 'date' ( (lv_dateValues_5_0= RULE_EDATE ) ) )
-            	    // InternalEcoreTerminalsTestLanguage.g:126:8: otherlv_4= 'date' ( (lv_dateValues_5_0= RULE_EDATE ) )
+            	    // InternalEcoreTerminalsTestLanguage.g:129:3: (otherlv_4= 'date' ( (lv_dateValues_5_0= RULE_EDATE ) ) )
+            	    // InternalEcoreTerminalsTestLanguage.g:130:4: otherlv_4= 'date' ( (lv_dateValues_5_0= RULE_EDATE ) )
             	    {
             	    otherlv_4=(Token)match(input,10,FollowSets000.FOLLOW_6); 
 
-            	        	newLeafNode(otherlv_4, grammarAccess.getModelAccess().getDateKeyword_2_0());
-            	        
-            	    // InternalEcoreTerminalsTestLanguage.g:130:1: ( (lv_dateValues_5_0= RULE_EDATE ) )
-            	    // InternalEcoreTerminalsTestLanguage.g:131:1: (lv_dateValues_5_0= RULE_EDATE )
+            	    				newLeafNode(otherlv_4, grammarAccess.getModelAccess().getDateKeyword_2_0());
+            	    			
+            	    // InternalEcoreTerminalsTestLanguage.g:134:4: ( (lv_dateValues_5_0= RULE_EDATE ) )
+            	    // InternalEcoreTerminalsTestLanguage.g:135:5: (lv_dateValues_5_0= RULE_EDATE )
             	    {
-            	    // InternalEcoreTerminalsTestLanguage.g:131:1: (lv_dateValues_5_0= RULE_EDATE )
-            	    // InternalEcoreTerminalsTestLanguage.g:132:3: lv_dateValues_5_0= RULE_EDATE
+            	    // InternalEcoreTerminalsTestLanguage.g:135:5: (lv_dateValues_5_0= RULE_EDATE )
+            	    // InternalEcoreTerminalsTestLanguage.g:136:6: lv_dateValues_5_0= RULE_EDATE
             	    {
             	    lv_dateValues_5_0=(Token)match(input,RULE_EDATE,FollowSets000.FOLLOW_4); 
 
-            	    			newLeafNode(lv_dateValues_5_0, grammarAccess.getModelAccess().getDateValuesEDATETerminalRuleCall_2_1_0()); 
-            	    		
+            	    						newLeafNode(lv_dateValues_5_0, grammarAccess.getModelAccess().getDateValuesEDATETerminalRuleCall_2_1_0());
+            	    					
 
-            	    	        if (current==null) {
-            	    	            current = createModelElement(grammarAccess.getModelRule());
-            	    	        }
-            	           		addWithLastConsumed(
-            	           			current, 
-            	           			"dateValues",
-            	            		lv_dateValues_5_0, 
-            	            		"org.eclipse.xtext.parser.terminalrules.EcoreTerminalsTestLanguage.EDATE");
-            	    	    
+            	    						if (current==null) {
+            	    							current = createModelElement(grammarAccess.getModelRule());
+            	    						}
+            	    						addWithLastConsumed(
+            	    							current,
+            	    							"dateValues",
+            	    							lv_dateValues_5_0,
+            	    							"org.eclipse.xtext.parser.terminalrules.EcoreTerminalsTestLanguage.EDATE");
+            	    					
 
             	    }
 
@@ -283,13 +285,15 @@ public class InternalEcoreTerminalsTestLanguageParser extends AbstractInternalAn
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;

@@ -5,7 +5,6 @@ grammar InternalEcoreTerminalsTestLanguage;
 
 options {
 	superClass=AbstractInternalAntlrParser;
-	
 }
 
 @lexer::header {
@@ -17,7 +16,7 @@ import org.eclipse.xtext.parser.antlr.Lexer;
 }
 
 @parser::header {
-package org.eclipse.xtext.parser.terminalrules.parser.antlr.internal; 
+package org.eclipse.xtext.parser.terminalrules.parser.antlr.internal;
 
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
@@ -35,122 +34,124 @@ import org.eclipse.xtext.parser.terminalrules.services.EcoreTerminalsTestLanguag
 @parser::members {
 
  	private EcoreTerminalsTestLanguageGrammarAccess grammarAccess;
- 	
+
     public InternalEcoreTerminalsTestLanguageParser(TokenStream input, EcoreTerminalsTestLanguageGrammarAccess grammarAccess) {
         this(input);
         this.grammarAccess = grammarAccess;
         registerRules(grammarAccess.getGrammar());
     }
-    
+
     @Override
     protected String getFirstRuleName() {
-    	return "Model";	
+    	return "Model";
    	}
-   	
+
    	@Override
    	protected EcoreTerminalsTestLanguageGrammarAccess getGrammarAccess() {
    		return grammarAccess;
    	}
+
 }
 
-@rulecatch { 
-    catch (RecognitionException re) { 
-        recover(input,re); 
+@rulecatch {
+    catch (RecognitionException re) {
+        recover(input,re);
         appendSkippedTokens();
-    } 
+    }
 }
-
-
-
 
 // Entry rule entryRuleModel
-entryRuleModel returns [EObject current=null] 
-	:
+entryRuleModel returns [EObject current=null]:
 	{ newCompositeNode(grammarAccess.getModelRule()); }
-	 iv_ruleModel=ruleModel 
-	 { $current=$iv_ruleModel.current; } 
-	 EOF 
-;
+	iv_ruleModel=ruleModel
+	{ $current=$iv_ruleModel.current; }
+	EOF;
 
 // Rule Model
-ruleModel returns [EObject current=null] 
-    @init { enterRule(); 
-    }
-    @after { leaveRule(); }:
-((	otherlv_0='int' 
-    {
-    	newLeafNode(otherlv_0, grammarAccess.getModelAccess().getIntKeyword_0_0());
-    }
-(
-(
-		lv_intValues_1_0=RULE_EINT
-		{
-			newLeafNode(lv_intValues_1_0, grammarAccess.getModelAccess().getIntValuesEINTTerminalRuleCall_0_1_0()); 
-		}
-		{
-	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getModelRule());
-	        }
-       		addWithLastConsumed(
-       			$current, 
-       			"intValues",
-        		lv_intValues_1_0, 
-        		"org.eclipse.xtext.parser.terminalrules.EcoreTerminalsTestLanguage.EINT");
-	    }
-
-)
-))
-    |(	otherlv_2='double' 
-    {
-    	newLeafNode(otherlv_2, grammarAccess.getModelAccess().getDoubleKeyword_1_0());
-    }
-(
-(
-		lv_doubleValues_3_0=RULE_EDOUBLE
-		{
-			newLeafNode(lv_doubleValues_3_0, grammarAccess.getModelAccess().getDoubleValuesEDOUBLETerminalRuleCall_1_1_0()); 
-		}
-		{
-	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getModelRule());
-	        }
-       		addWithLastConsumed(
-       			$current, 
-       			"doubleValues",
-        		lv_doubleValues_3_0, 
-        		"org.eclipse.xtext.parser.terminalrules.EcoreTerminalsTestLanguage.EDOUBLE");
-	    }
-
-)
-))
-    |(	otherlv_4='date' 
-    {
-    	newLeafNode(otherlv_4, grammarAccess.getModelAccess().getDateKeyword_2_0());
-    }
-(
-(
-		lv_dateValues_5_0=RULE_EDATE
-		{
-			newLeafNode(lv_dateValues_5_0, grammarAccess.getModelAccess().getDateValuesEDATETerminalRuleCall_2_1_0()); 
-		}
-		{
-	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getModelRule());
-	        }
-       		addWithLastConsumed(
-       			$current, 
-       			"dateValues",
-        		lv_dateValues_5_0, 
-        		"org.eclipse.xtext.parser.terminalrules.EcoreTerminalsTestLanguage.EDATE");
-	    }
-
-)
-)))*
+ruleModel returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			otherlv_0='int'
+			{
+				newLeafNode(otherlv_0, grammarAccess.getModelAccess().getIntKeyword_0_0());
+			}
+			(
+				(
+					lv_intValues_1_0=RULE_EINT
+					{
+						newLeafNode(lv_intValues_1_0, grammarAccess.getModelAccess().getIntValuesEINTTerminalRuleCall_0_1_0());
+					}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getModelRule());
+						}
+						addWithLastConsumed(
+							$current,
+							"intValues",
+							lv_intValues_1_0,
+							"org.eclipse.xtext.parser.terminalrules.EcoreTerminalsTestLanguage.EINT");
+					}
+				)
+			)
+		)
+		    |
+		(
+			otherlv_2='double'
+			{
+				newLeafNode(otherlv_2, grammarAccess.getModelAccess().getDoubleKeyword_1_0());
+			}
+			(
+				(
+					lv_doubleValues_3_0=RULE_EDOUBLE
+					{
+						newLeafNode(lv_doubleValues_3_0, grammarAccess.getModelAccess().getDoubleValuesEDOUBLETerminalRuleCall_1_1_0());
+					}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getModelRule());
+						}
+						addWithLastConsumed(
+							$current,
+							"doubleValues",
+							lv_doubleValues_3_0,
+							"org.eclipse.xtext.parser.terminalrules.EcoreTerminalsTestLanguage.EDOUBLE");
+					}
+				)
+			)
+		)
+		    |
+		(
+			otherlv_4='date'
+			{
+				newLeafNode(otherlv_4, grammarAccess.getModelAccess().getDateKeyword_2_0());
+			}
+			(
+				(
+					lv_dateValues_5_0=RULE_EDATE
+					{
+						newLeafNode(lv_dateValues_5_0, grammarAccess.getModelAccess().getDateValuesEDATETerminalRuleCall_2_1_0());
+					}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getModelRule());
+						}
+						addWithLastConsumed(
+							$current,
+							"dateValues",
+							lv_dateValues_5_0,
+							"org.eclipse.xtext.parser.terminalrules.EcoreTerminalsTestLanguage.EDATE");
+					}
+				)
+			)
+		)
+	)*
 ;
-
-
-
-
 
 RULE_EDOUBLE : ('.' ('0'..'9')+|('0'..'9')+ '.' ('0'..'9')*) (('E'|'e') ('-'|'+'?) ('0'..'9')+)?;
 
@@ -159,5 +160,3 @@ RULE_EDATE : '0'..'9' '0'..'9' '0'..'9' '0'..'9' '-' '0'..'9' '0'..'9' '-' '0'..
 RULE_EINT : '-'? ('0'..'9')+;
 
 RULE_WS : (' '|'\t'|'\r'|'\n')+;
-
-

@@ -42,10 +42,10 @@ public class InternalTerminalRulesTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalTerminalRulesTestLanguage.g:238:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // InternalTerminalRulesTestLanguage.g:238:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalTerminalRulesTestLanguage.g:233:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // InternalTerminalRulesTestLanguage.g:233:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // InternalTerminalRulesTestLanguage.g:238:11: ( '^' )?
+            // InternalTerminalRulesTestLanguage.g:233:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -54,7 +54,7 @@ public class InternalTerminalRulesTestLanguageLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // InternalTerminalRulesTestLanguage.g:238:11: '^'
+                    // InternalTerminalRulesTestLanguage.g:233:11: '^'
                     {
                     match('^'); 
 
@@ -72,7 +72,7 @@ public class InternalTerminalRulesTestLanguageLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // InternalTerminalRulesTestLanguage.g:238:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalTerminalRulesTestLanguage.g:233:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -121,10 +121,10 @@ public class InternalTerminalRulesTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalTerminalRulesTestLanguage.g:240:10: ( ( '0' .. '9' )+ )
-            // InternalTerminalRulesTestLanguage.g:240:12: ( '0' .. '9' )+
+            // InternalTerminalRulesTestLanguage.g:235:10: ( ( '0' .. '9' )+ )
+            // InternalTerminalRulesTestLanguage.g:235:12: ( '0' .. '9' )+
             {
-            // InternalTerminalRulesTestLanguage.g:240:12: ( '0' .. '9' )+
+            // InternalTerminalRulesTestLanguage.g:235:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -138,7 +138,7 @@ public class InternalTerminalRulesTestLanguageLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // InternalTerminalRulesTestLanguage.g:240:13: '0' .. '9'
+            	    // InternalTerminalRulesTestLanguage.g:235:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -170,10 +170,10 @@ public class InternalTerminalRulesTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalTerminalRulesTestLanguage.g:242:13: ( ( '\"' ( RULE_ESCAPED_CHAR | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( RULE_ESCAPED_CHAR | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // InternalTerminalRulesTestLanguage.g:242:15: ( '\"' ( RULE_ESCAPED_CHAR | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( RULE_ESCAPED_CHAR | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalTerminalRulesTestLanguage.g:237:13: ( ( '\"' ( RULE_ESCAPED_CHAR | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( RULE_ESCAPED_CHAR | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // InternalTerminalRulesTestLanguage.g:237:15: ( '\"' ( RULE_ESCAPED_CHAR | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( RULE_ESCAPED_CHAR | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // InternalTerminalRulesTestLanguage.g:242:15: ( '\"' ( RULE_ESCAPED_CHAR | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( RULE_ESCAPED_CHAR | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalTerminalRulesTestLanguage.g:237:15: ( '\"' ( RULE_ESCAPED_CHAR | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( RULE_ESCAPED_CHAR | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -191,10 +191,10 @@ public class InternalTerminalRulesTestLanguageLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // InternalTerminalRulesTestLanguage.g:242:16: '\"' ( RULE_ESCAPED_CHAR | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // InternalTerminalRulesTestLanguage.g:237:16: '\"' ( RULE_ESCAPED_CHAR | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // InternalTerminalRulesTestLanguage.g:242:20: ( RULE_ESCAPED_CHAR | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // InternalTerminalRulesTestLanguage.g:237:20: ( RULE_ESCAPED_CHAR | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -210,14 +210,14 @@ public class InternalTerminalRulesTestLanguageLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // InternalTerminalRulesTestLanguage.g:242:21: RULE_ESCAPED_CHAR
+                    	    // InternalTerminalRulesTestLanguage.g:237:21: RULE_ESCAPED_CHAR
                     	    {
                     	    mRULE_ESCAPED_CHAR(); 
 
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalTerminalRulesTestLanguage.g:242:39: ~ ( ( '\\\\' | '\"' ) )
+                    	    // InternalTerminalRulesTestLanguage.g:237:39: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -242,10 +242,10 @@ public class InternalTerminalRulesTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalTerminalRulesTestLanguage.g:242:59: '\\'' ( RULE_ESCAPED_CHAR | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // InternalTerminalRulesTestLanguage.g:237:59: '\\'' ( RULE_ESCAPED_CHAR | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // InternalTerminalRulesTestLanguage.g:242:64: ( RULE_ESCAPED_CHAR | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // InternalTerminalRulesTestLanguage.g:237:64: ( RULE_ESCAPED_CHAR | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -261,14 +261,14 @@ public class InternalTerminalRulesTestLanguageLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // InternalTerminalRulesTestLanguage.g:242:65: RULE_ESCAPED_CHAR
+                    	    // InternalTerminalRulesTestLanguage.g:237:65: RULE_ESCAPED_CHAR
                     	    {
                     	    mRULE_ESCAPED_CHAR(); 
 
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalTerminalRulesTestLanguage.g:242:83: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // InternalTerminalRulesTestLanguage.g:237:83: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -311,12 +311,12 @@ public class InternalTerminalRulesTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_RICH_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalTerminalRulesTestLanguage.g:244:18: ( '\\'\\'\\'' ( RULE_IN_RICH_STRING )* ( '\\'\\'\\'' | ( '\\'' ( '\\'' )? )? EOF ) )
-            // InternalTerminalRulesTestLanguage.g:244:20: '\\'\\'\\'' ( RULE_IN_RICH_STRING )* ( '\\'\\'\\'' | ( '\\'' ( '\\'' )? )? EOF )
+            // InternalTerminalRulesTestLanguage.g:239:18: ( '\\'\\'\\'' ( RULE_IN_RICH_STRING )* ( '\\'\\'\\'' | ( '\\'' ( '\\'' )? )? EOF ) )
+            // InternalTerminalRulesTestLanguage.g:239:20: '\\'\\'\\'' ( RULE_IN_RICH_STRING )* ( '\\'\\'\\'' | ( '\\'' ( '\\'' )? )? EOF )
             {
             match("'''"); 
 
-            // InternalTerminalRulesTestLanguage.g:244:29: ( RULE_IN_RICH_STRING )*
+            // InternalTerminalRulesTestLanguage.g:239:29: ( RULE_IN_RICH_STRING )*
             loop7:
             do {
                 int alt7=2;
@@ -328,26 +328,26 @@ public class InternalTerminalRulesTestLanguageLexer extends Lexer {
                     if ( (LA7_1=='\'') ) {
                         int LA7_4 = input.LA(3);
 
-                        if ( ((LA7_4>='\u0000' && LA7_4<='&')||(LA7_4>='(' && LA7_4<='\u00AA')||(LA7_4>='\u00AC' && LA7_4<='\uFFFF')) ) {
+                        if ( ((LA7_4>='\u0000' && LA7_4<='&')||(LA7_4>='(' && LA7_4<='\uFFFC')||(LA7_4>='\uFFFE' && LA7_4<='\uFFFF')) ) {
                             alt7=1;
                         }
 
 
                     }
-                    else if ( ((LA7_1>='\u0000' && LA7_1<='&')||(LA7_1>='(' && LA7_1<='\u00AA')||(LA7_1>='\u00AC' && LA7_1<='\uFFFF')) ) {
+                    else if ( ((LA7_1>='\u0000' && LA7_1<='&')||(LA7_1>='(' && LA7_1<='\uFFFC')||(LA7_1>='\uFFFE' && LA7_1<='\uFFFF')) ) {
                         alt7=1;
                     }
 
 
                 }
-                else if ( ((LA7_0>='\u0000' && LA7_0<='&')||(LA7_0>='(' && LA7_0<='\u00AA')||(LA7_0>='\u00AC' && LA7_0<='\uFFFF')) ) {
+                else if ( ((LA7_0>='\u0000' && LA7_0<='&')||(LA7_0>='(' && LA7_0<='\uFFFC')||(LA7_0>='\uFFFE' && LA7_0<='\uFFFF')) ) {
                     alt7=1;
                 }
 
 
                 switch (alt7) {
             	case 1 :
-            	    // InternalTerminalRulesTestLanguage.g:244:29: RULE_IN_RICH_STRING
+            	    // InternalTerminalRulesTestLanguage.g:239:29: RULE_IN_RICH_STRING
             	    {
             	    mRULE_IN_RICH_STRING(); 
 
@@ -359,7 +359,7 @@ public class InternalTerminalRulesTestLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // InternalTerminalRulesTestLanguage.g:244:50: ( '\\'\\'\\'' | ( '\\'' ( '\\'' )? )? EOF )
+            // InternalTerminalRulesTestLanguage.g:239:50: ( '\\'\\'\\'' | ( '\\'' ( '\\'' )? )? EOF )
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -382,7 +382,7 @@ public class InternalTerminalRulesTestLanguageLexer extends Lexer {
                 alt10=2;}
             switch (alt10) {
                 case 1 :
-                    // InternalTerminalRulesTestLanguage.g:244:51: '\\'\\'\\''
+                    // InternalTerminalRulesTestLanguage.g:239:51: '\\'\\'\\''
                     {
                     match("'''"); 
 
@@ -390,9 +390,9 @@ public class InternalTerminalRulesTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalTerminalRulesTestLanguage.g:244:60: ( '\\'' ( '\\'' )? )? EOF
+                    // InternalTerminalRulesTestLanguage.g:239:60: ( '\\'' ( '\\'' )? )? EOF
                     {
-                    // InternalTerminalRulesTestLanguage.g:244:60: ( '\\'' ( '\\'' )? )?
+                    // InternalTerminalRulesTestLanguage.g:239:60: ( '\\'' ( '\\'' )? )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -401,10 +401,10 @@ public class InternalTerminalRulesTestLanguageLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // InternalTerminalRulesTestLanguage.g:244:61: '\\'' ( '\\'' )?
+                            // InternalTerminalRulesTestLanguage.g:239:61: '\\'' ( '\\'' )?
                             {
                             match('\''); 
-                            // InternalTerminalRulesTestLanguage.g:244:66: ( '\\'' )?
+                            // InternalTerminalRulesTestLanguage.g:239:66: ( '\\'' )?
                             int alt8=2;
                             int LA8_0 = input.LA(1);
 
@@ -413,7 +413,7 @@ public class InternalTerminalRulesTestLanguageLexer extends Lexer {
                             }
                             switch (alt8) {
                                 case 1 :
-                                    // InternalTerminalRulesTestLanguage.g:244:66: '\\''
+                                    // InternalTerminalRulesTestLanguage.g:239:66: '\\''
                                     {
                                     match('\''); 
 
@@ -449,10 +449,10 @@ public class InternalTerminalRulesTestLanguageLexer extends Lexer {
     // $ANTLR start "RULE_IN_RICH_STRING"
     public final void mRULE_IN_RICH_STRING() throws RecognitionException {
         try {
-            // InternalTerminalRulesTestLanguage.g:246:30: ( ( '\\'\\'' ~ ( ( '\\u00AB' | '\\'' ) ) | '\\'' ~ ( ( '\\u00AB' | '\\'' ) ) | ~ ( ( '\\u00AB' | '\\'' ) ) ) )
-            // InternalTerminalRulesTestLanguage.g:246:32: ( '\\'\\'' ~ ( ( '\\u00AB' | '\\'' ) ) | '\\'' ~ ( ( '\\u00AB' | '\\'' ) ) | ~ ( ( '\\u00AB' | '\\'' ) ) )
+            // InternalTerminalRulesTestLanguage.g:241:30: ( ( '\\'\\'' ~ ( ( '\\uFFFD' | '\\'' ) ) | '\\'' ~ ( ( '\\uFFFD' | '\\'' ) ) | ~ ( ( '\\uFFFD' | '\\'' ) ) ) )
+            // InternalTerminalRulesTestLanguage.g:241:32: ( '\\'\\'' ~ ( ( '\\uFFFD' | '\\'' ) ) | '\\'' ~ ( ( '\\uFFFD' | '\\'' ) ) | ~ ( ( '\\uFFFD' | '\\'' ) ) )
             {
-            // InternalTerminalRulesTestLanguage.g:246:32: ( '\\'\\'' ~ ( ( '\\u00AB' | '\\'' ) ) | '\\'' ~ ( ( '\\u00AB' | '\\'' ) ) | ~ ( ( '\\u00AB' | '\\'' ) ) )
+            // InternalTerminalRulesTestLanguage.g:241:32: ( '\\'\\'' ~ ( ( '\\uFFFD' | '\\'' ) ) | '\\'' ~ ( ( '\\uFFFD' | '\\'' ) ) | ~ ( ( '\\uFFFD' | '\\'' ) ) )
             int alt11=3;
             int LA11_0 = input.LA(1);
 
@@ -462,7 +462,7 @@ public class InternalTerminalRulesTestLanguageLexer extends Lexer {
                 if ( (LA11_1=='\'') ) {
                     alt11=1;
                 }
-                else if ( ((LA11_1>='\u0000' && LA11_1<='&')||(LA11_1>='(' && LA11_1<='\u00AA')||(LA11_1>='\u00AC' && LA11_1<='\uFFFF')) ) {
+                else if ( ((LA11_1>='\u0000' && LA11_1<='&')||(LA11_1>='(' && LA11_1<='\uFFFC')||(LA11_1>='\uFFFE' && LA11_1<='\uFFFF')) ) {
                     alt11=2;
                 }
                 else {
@@ -472,7 +472,7 @@ public class InternalTerminalRulesTestLanguageLexer extends Lexer {
                     throw nvae;
                 }
             }
-            else if ( ((LA11_0>='\u0000' && LA11_0<='&')||(LA11_0>='(' && LA11_0<='\u00AA')||(LA11_0>='\u00AC' && LA11_0<='\uFFFF')) ) {
+            else if ( ((LA11_0>='\u0000' && LA11_0<='&')||(LA11_0>='(' && LA11_0<='\uFFFC')||(LA11_0>='\uFFFE' && LA11_0<='\uFFFF')) ) {
                 alt11=3;
             }
             else {
@@ -483,11 +483,11 @@ public class InternalTerminalRulesTestLanguageLexer extends Lexer {
             }
             switch (alt11) {
                 case 1 :
-                    // InternalTerminalRulesTestLanguage.g:246:33: '\\'\\'' ~ ( ( '\\u00AB' | '\\'' ) )
+                    // InternalTerminalRulesTestLanguage.g:241:33: '\\'\\'' ~ ( ( '\\uFFFD' | '\\'' ) )
                     {
                     match("''"); 
 
-                    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='\u00AA')||(input.LA(1)>='\u00AC' && input.LA(1)<='\uFFFF') ) {
+                    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='\uFFFC')||(input.LA(1)>='\uFFFE' && input.LA(1)<='\uFFFF') ) {
                         input.consume();
 
                     }
@@ -500,10 +500,10 @@ public class InternalTerminalRulesTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalTerminalRulesTestLanguage.g:246:59: '\\'' ~ ( ( '\\u00AB' | '\\'' ) )
+                    // InternalTerminalRulesTestLanguage.g:241:59: '\\'' ~ ( ( '\\uFFFD' | '\\'' ) )
                     {
                     match('\''); 
-                    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='\u00AA')||(input.LA(1)>='\u00AC' && input.LA(1)<='\uFFFF') ) {
+                    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='\uFFFC')||(input.LA(1)>='\uFFFE' && input.LA(1)<='\uFFFF') ) {
                         input.consume();
 
                     }
@@ -516,9 +516,9 @@ public class InternalTerminalRulesTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 3 :
-                    // InternalTerminalRulesTestLanguage.g:246:83: ~ ( ( '\\u00AB' | '\\'' ) )
+                    // InternalTerminalRulesTestLanguage.g:241:83: ~ ( ( '\\uFFFD' | '\\'' ) )
                     {
-                    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='\u00AA')||(input.LA(1)>='\u00AC' && input.LA(1)<='\uFFFF') ) {
+                    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='\uFFFC')||(input.LA(1)>='\uFFFE' && input.LA(1)<='\uFFFF') ) {
                         input.consume();
 
                     }
@@ -545,8 +545,8 @@ public class InternalTerminalRulesTestLanguageLexer extends Lexer {
     // $ANTLR start "RULE_ESCAPED_CHAR"
     public final void mRULE_ESCAPED_CHAR() throws RecognitionException {
         try {
-            // InternalTerminalRulesTestLanguage.g:248:28: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) )
-            // InternalTerminalRulesTestLanguage.g:248:30: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' )
+            // InternalTerminalRulesTestLanguage.g:243:28: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) )
+            // InternalTerminalRulesTestLanguage.g:243:30: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' )
             {
             match('\\'); 
             if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||input.LA(1)=='t' ) {
@@ -572,12 +572,12 @@ public class InternalTerminalRulesTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalTerminalRulesTestLanguage.g:250:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // InternalTerminalRulesTestLanguage.g:250:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // InternalTerminalRulesTestLanguage.g:245:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // InternalTerminalRulesTestLanguage.g:245:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // InternalTerminalRulesTestLanguage.g:250:24: ( options {greedy=false; } : . )*
+            // InternalTerminalRulesTestLanguage.g:245:24: ( options {greedy=false; } : . )*
             loop12:
             do {
                 int alt12=2;
@@ -602,7 +602,7 @@ public class InternalTerminalRulesTestLanguageLexer extends Lexer {
 
                 switch (alt12) {
             	case 1 :
-            	    // InternalTerminalRulesTestLanguage.g:250:52: .
+            	    // InternalTerminalRulesTestLanguage.g:245:52: .
             	    {
             	    matchAny(); 
 
@@ -632,12 +632,12 @@ public class InternalTerminalRulesTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalTerminalRulesTestLanguage.g:252:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // InternalTerminalRulesTestLanguage.g:252:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // InternalTerminalRulesTestLanguage.g:247:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // InternalTerminalRulesTestLanguage.g:247:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // InternalTerminalRulesTestLanguage.g:252:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalTerminalRulesTestLanguage.g:247:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop13:
             do {
                 int alt13=2;
@@ -650,7 +650,7 @@ public class InternalTerminalRulesTestLanguageLexer extends Lexer {
 
                 switch (alt13) {
             	case 1 :
-            	    // InternalTerminalRulesTestLanguage.g:252:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalTerminalRulesTestLanguage.g:247:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -670,7 +670,7 @@ public class InternalTerminalRulesTestLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // InternalTerminalRulesTestLanguage.g:252:40: ( ( '\\r' )? '\\n' )?
+            // InternalTerminalRulesTestLanguage.g:247:40: ( ( '\\r' )? '\\n' )?
             int alt15=2;
             int LA15_0 = input.LA(1);
 
@@ -679,9 +679,9 @@ public class InternalTerminalRulesTestLanguageLexer extends Lexer {
             }
             switch (alt15) {
                 case 1 :
-                    // InternalTerminalRulesTestLanguage.g:252:41: ( '\\r' )? '\\n'
+                    // InternalTerminalRulesTestLanguage.g:247:41: ( '\\r' )? '\\n'
                     {
-                    // InternalTerminalRulesTestLanguage.g:252:41: ( '\\r' )?
+                    // InternalTerminalRulesTestLanguage.g:247:41: ( '\\r' )?
                     int alt14=2;
                     int LA14_0 = input.LA(1);
 
@@ -690,7 +690,7 @@ public class InternalTerminalRulesTestLanguageLexer extends Lexer {
                     }
                     switch (alt14) {
                         case 1 :
-                            // InternalTerminalRulesTestLanguage.g:252:41: '\\r'
+                            // InternalTerminalRulesTestLanguage.g:247:41: '\\r'
                             {
                             match('\r'); 
 
@@ -722,10 +722,10 @@ public class InternalTerminalRulesTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalTerminalRulesTestLanguage.g:254:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // InternalTerminalRulesTestLanguage.g:254:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalTerminalRulesTestLanguage.g:249:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalTerminalRulesTestLanguage.g:249:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // InternalTerminalRulesTestLanguage.g:254:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalTerminalRulesTestLanguage.g:249:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt16=0;
             loop16:
             do {
@@ -779,8 +779,8 @@ public class InternalTerminalRulesTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalTerminalRulesTestLanguage.g:256:16: ( . )
-            // InternalTerminalRulesTestLanguage.g:256:18: .
+            // InternalTerminalRulesTestLanguage.g:251:16: ( . )
+            // InternalTerminalRulesTestLanguage.g:251:18: .
             {
             matchAny(); 
 

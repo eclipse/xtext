@@ -3,19 +3,23 @@
  */
 package org.eclipse.xtext.parser.terminalrules.services;
 
-import com.google.inject.Singleton;
 import com.google.inject.Inject;
-
+import com.google.inject.Singleton;
 import java.util.List;
-
-import org.eclipse.xtext.*;
+import org.eclipse.xtext.Alternatives;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.Group;
+import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TerminalRule;
+import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder;
 import org.eclipse.xtext.service.GrammarProvider;
-import org.eclipse.xtext.service.AbstractElementFinder.*;
-
 
 @Singleton
 public class HiddenTerminalsTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
-	
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.terminalrules.HiddenTerminalsTestLanguage.Model");
@@ -29,26 +33,25 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends AbstractGrammarEle
 		//Model:
 		//	WithoutHiddens | WithHiddens | OverridingHiddens | InheritingHiddens | DatatypeHiddens;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//WithoutHiddens | WithHiddens | OverridingHiddens | InheritingHiddens | DatatypeHiddens
 		public Alternatives getAlternatives() { return cAlternatives; }
-
+		
 		//WithoutHiddens
 		public RuleCall getWithoutHiddensParserRuleCall_0() { return cWithoutHiddensParserRuleCall_0; }
-
+		
 		//WithHiddens
 		public RuleCall getWithHiddensParserRuleCall_1() { return cWithHiddensParserRuleCall_1; }
-
+		
 		//OverridingHiddens
 		public RuleCall getOverridingHiddensParserRuleCall_2() { return cOverridingHiddensParserRuleCall_2; }
-
+		
 		//InheritingHiddens
 		public RuleCall getInheritingHiddensParserRuleCall_3() { return cInheritingHiddensParserRuleCall_3; }
-
+		
 		//DatatypeHiddens
 		public RuleCall getDatatypeHiddensParserRuleCall_4() { return cDatatypeHiddensParserRuleCall_4; }
 	}
-
 	public class WithoutHiddensElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.terminalrules.HiddenTerminalsTestLanguage.WithoutHiddens");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -64,35 +67,34 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends AbstractGrammarEle
 		//WithoutHiddens:
 		//	'without' spaces+=WS 'hiddens' spaces+=WS? valid?=';';
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'without' spaces+=WS 'hiddens' spaces+=WS? valid?=';'
 		public Group getGroup() { return cGroup; }
-
+		
 		//'without'
 		public Keyword getWithoutKeyword_0() { return cWithoutKeyword_0; }
-
+		
 		//spaces+=WS
 		public Assignment getSpacesAssignment_1() { return cSpacesAssignment_1; }
-
+		
 		//WS
 		public RuleCall getSpacesWSTerminalRuleCall_1_0() { return cSpacesWSTerminalRuleCall_1_0; }
-
+		
 		//'hiddens'
 		public Keyword getHiddensKeyword_2() { return cHiddensKeyword_2; }
-
+		
 		//spaces+=WS?
 		public Assignment getSpacesAssignment_3() { return cSpacesAssignment_3; }
-
+		
 		//WS
 		public RuleCall getSpacesWSTerminalRuleCall_3_0() { return cSpacesWSTerminalRuleCall_3_0; }
-
+		
 		//valid?=';'
 		public Assignment getValidAssignment_4() { return cValidAssignment_4; }
-
+		
 		//';'
 		public Keyword getValidSemicolonKeyword_4_0() { return cValidSemicolonKeyword_4_0; }
 	}
-
 	public class WithHiddensElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.terminalrules.HiddenTerminalsTestLanguage.WithHiddens");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -104,23 +106,22 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends AbstractGrammarEle
 		//WithHiddens hidden(WS, ML_COMMENT, SL_COMMENT):
 		//	'with' 'hiddens' valid?=';';
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'with' 'hiddens' valid?=';'
 		public Group getGroup() { return cGroup; }
-
+		
 		//'with'
 		public Keyword getWithKeyword_0() { return cWithKeyword_0; }
-
+		
 		//'hiddens'
 		public Keyword getHiddensKeyword_1() { return cHiddensKeyword_1; }
-
+		
 		//valid?=';'
 		public Assignment getValidAssignment_2() { return cValidAssignment_2; }
-
+		
 		//';'
 		public Keyword getValidSemicolonKeyword_2_0() { return cValidSemicolonKeyword_2_0; }
 	}
-
 	public class OverridingHiddensElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.terminalrules.HiddenTerminalsTestLanguage.OverridingHiddens");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -136,35 +137,34 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends AbstractGrammarEle
 		//OverridingHiddens hidden(WS, ML_COMMENT, SL_COMMENT):
 		//	'overriding' 'hiddens' '(' called=OverridingHiddensCall ')' valid?=';';
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'overriding' 'hiddens' '(' called=OverridingHiddensCall ')' valid?=';'
 		public Group getGroup() { return cGroup; }
-
+		
 		//'overriding'
 		public Keyword getOverridingKeyword_0() { return cOverridingKeyword_0; }
-
+		
 		//'hiddens'
 		public Keyword getHiddensKeyword_1() { return cHiddensKeyword_1; }
-
+		
 		//'('
 		public Keyword getLeftParenthesisKeyword_2() { return cLeftParenthesisKeyword_2; }
-
+		
 		//called=OverridingHiddensCall
 		public Assignment getCalledAssignment_3() { return cCalledAssignment_3; }
-
+		
 		//OverridingHiddensCall
 		public RuleCall getCalledOverridingHiddensCallParserRuleCall_3_0() { return cCalledOverridingHiddensCallParserRuleCall_3_0; }
-
+		
 		//')'
 		public Keyword getRightParenthesisKeyword_4() { return cRightParenthesisKeyword_4; }
-
+		
 		//valid?=';'
 		public Assignment getValidAssignment_5() { return cValidAssignment_5; }
-
+		
 		//';'
 		public Keyword getValidSemicolonKeyword_5_0() { return cValidSemicolonKeyword_5_0; }
 	}
-
 	public class OverridingHiddensCallElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.terminalrules.HiddenTerminalsTestLanguage.OverridingHiddensCall");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -177,26 +177,25 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends AbstractGrammarEle
 		//OverridingHiddensCall hidden():
 		//	'call' spaces+=WS? valid?=';';
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'call' spaces+=WS? valid?=';'
 		public Group getGroup() { return cGroup; }
-
+		
 		//'call'
 		public Keyword getCallKeyword_0() { return cCallKeyword_0; }
-
+		
 		//spaces+=WS?
 		public Assignment getSpacesAssignment_1() { return cSpacesAssignment_1; }
-
+		
 		//WS
 		public RuleCall getSpacesWSTerminalRuleCall_1_0() { return cSpacesWSTerminalRuleCall_1_0; }
-
+		
 		//valid?=';'
 		public Assignment getValidAssignment_2() { return cValidAssignment_2; }
-
+		
 		//';'
 		public Keyword getValidSemicolonKeyword_2_0() { return cValidSemicolonKeyword_2_0; }
 	}
-
 	public class InheritingHiddensElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.terminalrules.HiddenTerminalsTestLanguage.InheritingHiddens");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -215,44 +214,43 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends AbstractGrammarEle
 		//InheritingHiddens hidden(WS, ML_COMMENT, SL_COMMENT):
 		//	'inheriting' 'hiddens' '(' (called=InheritingHiddensCall | hidingCalled=HidingHiddens) ')' valid?=';';
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'inheriting' 'hiddens' '(' (called=InheritingHiddensCall | hidingCalled=HidingHiddens) ')' valid?=';'
 		public Group getGroup() { return cGroup; }
-
+		
 		//'inheriting'
 		public Keyword getInheritingKeyword_0() { return cInheritingKeyword_0; }
-
+		
 		//'hiddens'
 		public Keyword getHiddensKeyword_1() { return cHiddensKeyword_1; }
-
+		
 		//'('
 		public Keyword getLeftParenthesisKeyword_2() { return cLeftParenthesisKeyword_2; }
-
+		
 		//(called=InheritingHiddensCall | hidingCalled=HidingHiddens)
 		public Alternatives getAlternatives_3() { return cAlternatives_3; }
-
+		
 		//called=InheritingHiddensCall
 		public Assignment getCalledAssignment_3_0() { return cCalledAssignment_3_0; }
-
+		
 		//InheritingHiddensCall
 		public RuleCall getCalledInheritingHiddensCallParserRuleCall_3_0_0() { return cCalledInheritingHiddensCallParserRuleCall_3_0_0; }
-
+		
 		//hidingCalled=HidingHiddens
 		public Assignment getHidingCalledAssignment_3_1() { return cHidingCalledAssignment_3_1; }
-
+		
 		//HidingHiddens
 		public RuleCall getHidingCalledHidingHiddensParserRuleCall_3_1_0() { return cHidingCalledHidingHiddensParserRuleCall_3_1_0; }
-
+		
 		//')'
 		public Keyword getRightParenthesisKeyword_4() { return cRightParenthesisKeyword_4; }
-
+		
 		//valid?=';'
 		public Assignment getValidAssignment_5() { return cValidAssignment_5; }
-
+		
 		//';'
 		public Keyword getValidSemicolonKeyword_5_0() { return cValidSemicolonKeyword_5_0; }
 	}
-
 	public class DatatypeHiddensElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.terminalrules.HiddenTerminalsTestLanguage.DatatypeHiddens");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -263,20 +261,19 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends AbstractGrammarEle
 		//DatatypeHiddens:
 		//	'datatype' valid?=DatatypeRule;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'datatype' valid?=DatatypeRule
 		public Group getGroup() { return cGroup; }
-
+		
 		//'datatype'
 		public Keyword getDatatypeKeyword_0() { return cDatatypeKeyword_0; }
-
+		
 		//valid?=DatatypeRule
 		public Assignment getValidAssignment_1() { return cValidAssignment_1; }
-
+		
 		//DatatypeRule
 		public RuleCall getValidDatatypeRuleParserRuleCall_1_0() { return cValidDatatypeRuleParserRuleCall_1_0; }
 	}
-
 	public class DatatypeRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.terminalrules.HiddenTerminalsTestLanguage.DatatypeRule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -286,17 +283,16 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends AbstractGrammarEle
 		//DatatypeRule hidden(WS):
 		//	'rule' ';';
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'rule' ';'
 		public Group getGroup() { return cGroup; }
-
+		
 		//'rule'
 		public Keyword getRuleKeyword_0() { return cRuleKeyword_0; }
-
+		
 		//';'
 		public Keyword getSemicolonKeyword_1() { return cSemicolonKeyword_1; }
 	}
-
 	public class HidingHiddensElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.terminalrules.HiddenTerminalsTestLanguage.HidingHiddens");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -309,26 +305,25 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends AbstractGrammarEle
 		//HidingHiddens hidden():
 		//	'hiding' space=WS called=InheritingHiddensCall;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'hiding' space=WS called=InheritingHiddensCall
 		public Group getGroup() { return cGroup; }
-
+		
 		//'hiding'
 		public Keyword getHidingKeyword_0() { return cHidingKeyword_0; }
-
+		
 		//space=WS
 		public Assignment getSpaceAssignment_1() { return cSpaceAssignment_1; }
-
+		
 		//WS
 		public RuleCall getSpaceWSTerminalRuleCall_1_0() { return cSpaceWSTerminalRuleCall_1_0; }
-
+		
 		//called=InheritingHiddensCall
 		public Assignment getCalledAssignment_2() { return cCalledAssignment_2; }
-
+		
 		//InheritingHiddensCall
 		public RuleCall getCalledInheritingHiddensCallParserRuleCall_2_0() { return cCalledInheritingHiddensCallParserRuleCall_2_0; }
 	}
-
 	public class InheritingHiddensCallElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.terminalrules.HiddenTerminalsTestLanguage.InheritingHiddensCall");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -339,16 +334,16 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends AbstractGrammarEle
 		//InheritingHiddensCall:
 		//	'call' valid?=';';
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'call' valid?=';'
 		public Group getGroup() { return cGroup; }
-
+		
 		//'call'
 		public Keyword getCallKeyword_0() { return cCallKeyword_0; }
-
+		
 		//valid?=';'
 		public Assignment getValidAssignment_1() { return cValidAssignment_1; }
-
+		
 		//';'
 		public Keyword getValidSemicolonKeyword_1_0() { return cValidSemicolonKeyword_1_0; }
 	}
@@ -422,7 +417,7 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends AbstractGrammarEle
 	public ParserRule getModelRule() {
 		return getModelAccess().getRule();
 	}
-
+	
 	//WithoutHiddens:
 	//	'without' spaces+=WS 'hiddens' spaces+=WS? valid?=';';
 	public WithoutHiddensElements getWithoutHiddensAccess() {
@@ -432,7 +427,7 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends AbstractGrammarEle
 	public ParserRule getWithoutHiddensRule() {
 		return getWithoutHiddensAccess().getRule();
 	}
-
+	
 	//WithHiddens hidden(WS, ML_COMMENT, SL_COMMENT):
 	//	'with' 'hiddens' valid?=';';
 	public WithHiddensElements getWithHiddensAccess() {
@@ -442,7 +437,7 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends AbstractGrammarEle
 	public ParserRule getWithHiddensRule() {
 		return getWithHiddensAccess().getRule();
 	}
-
+	
 	//OverridingHiddens hidden(WS, ML_COMMENT, SL_COMMENT):
 	//	'overriding' 'hiddens' '(' called=OverridingHiddensCall ')' valid?=';';
 	public OverridingHiddensElements getOverridingHiddensAccess() {
@@ -452,7 +447,7 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends AbstractGrammarEle
 	public ParserRule getOverridingHiddensRule() {
 		return getOverridingHiddensAccess().getRule();
 	}
-
+	
 	//OverridingHiddensCall hidden():
 	//	'call' spaces+=WS? valid?=';';
 	public OverridingHiddensCallElements getOverridingHiddensCallAccess() {
@@ -462,7 +457,7 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends AbstractGrammarEle
 	public ParserRule getOverridingHiddensCallRule() {
 		return getOverridingHiddensCallAccess().getRule();
 	}
-
+	
 	//InheritingHiddens hidden(WS, ML_COMMENT, SL_COMMENT):
 	//	'inheriting' 'hiddens' '(' (called=InheritingHiddensCall | hidingCalled=HidingHiddens) ')' valid?=';';
 	public InheritingHiddensElements getInheritingHiddensAccess() {
@@ -472,7 +467,7 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends AbstractGrammarEle
 	public ParserRule getInheritingHiddensRule() {
 		return getInheritingHiddensAccess().getRule();
 	}
-
+	
 	//DatatypeHiddens:
 	//	'datatype' valid?=DatatypeRule;
 	public DatatypeHiddensElements getDatatypeHiddensAccess() {
@@ -482,7 +477,7 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends AbstractGrammarEle
 	public ParserRule getDatatypeHiddensRule() {
 		return getDatatypeHiddensAccess().getRule();
 	}
-
+	
 	//DatatypeRule hidden(WS):
 	//	'rule' ';';
 	public DatatypeRuleElements getDatatypeRuleAccess() {
@@ -492,7 +487,7 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends AbstractGrammarEle
 	public ParserRule getDatatypeRuleRule() {
 		return getDatatypeRuleAccess().getRule();
 	}
-
+	
 	//HidingHiddens hidden():
 	//	'hiding' space=WS called=InheritingHiddensCall;
 	public HidingHiddensElements getHidingHiddensAccess() {
@@ -502,7 +497,7 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends AbstractGrammarEle
 	public ParserRule getHidingHiddensRule() {
 		return getHidingHiddensAccess().getRule();
 	}
-
+	
 	//InheritingHiddensCall:
 	//	'call' valid?=';';
 	public InheritingHiddensCallElements getInheritingHiddensCallAccess() {
@@ -512,28 +507,28 @@ public class HiddenTerminalsTestLanguageGrammarAccess extends AbstractGrammarEle
 	public ParserRule getInheritingHiddensCallRule() {
 		return getInheritingHiddensCallAccess().getRule();
 	}
-
+	
 	//terminal ML_COMMENT:
 	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return tML_COMMENT;
-	} 
-
+	}
+	
 	//terminal SL_COMMENT:
 	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return tSL_COMMENT;
-	} 
-
+	}
+	
 	//terminal WS:
 	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return tWS;
-	} 
-
+	}
+	
 	//terminal ANY_OTHER:
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return tANY_OTHER;
-	} 
+	}
 }

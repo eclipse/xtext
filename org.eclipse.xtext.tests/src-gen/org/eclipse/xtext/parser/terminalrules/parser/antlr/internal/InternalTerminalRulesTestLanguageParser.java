@@ -1,4 +1,4 @@
-package org.eclipse.xtext.parser.terminalrules.parser.antlr.internal; 
+package org.eclipse.xtext.parser.terminalrules.parser.antlr.internal;
 
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
@@ -54,18 +54,18 @@ public class InternalTerminalRulesTestLanguageParser extends AbstractInternalAnt
 
 
      	private TerminalRulesTestLanguageGrammarAccess grammarAccess;
-     	
+
         public InternalTerminalRulesTestLanguageParser(TokenStream input, TerminalRulesTestLanguageGrammarAccess grammarAccess) {
             this(input);
             this.grammarAccess = grammarAccess;
             registerRules(grammarAccess.getGrammar());
         }
-        
+
         @Override
         protected String getFirstRuleName() {
-        	return "Model";	
+        	return "Model";
        	}
-       	
+
        	@Override
        	protected TerminalRulesTestLanguageGrammarAccess getGrammarAccess() {
        		return grammarAccess;
@@ -73,8 +73,9 @@ public class InternalTerminalRulesTestLanguageParser extends AbstractInternalAnt
 
 
 
+
     // $ANTLR start "entryRuleModel"
-    // InternalTerminalRulesTestLanguage.g:67:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
+    // InternalTerminalRulesTestLanguage.g:64:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
     public final EObject entryRuleModel() throws RecognitionException {
         EObject current = null;
 
@@ -82,8 +83,8 @@ public class InternalTerminalRulesTestLanguageParser extends AbstractInternalAnt
 
 
         try {
-            // InternalTerminalRulesTestLanguage.g:68:2: (iv_ruleModel= ruleModel EOF )
-            // InternalTerminalRulesTestLanguage.g:69:2: iv_ruleModel= ruleModel EOF
+            // InternalTerminalRulesTestLanguage.g:64:46: (iv_ruleModel= ruleModel EOF )
+            // InternalTerminalRulesTestLanguage.g:65:2: iv_ruleModel= ruleModel EOF
             {
              newCompositeNode(grammarAccess.getModelRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -97,11 +98,11 @@ public class InternalTerminalRulesTestLanguageParser extends AbstractInternalAnt
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -110,7 +111,7 @@ public class InternalTerminalRulesTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "ruleModel"
-    // InternalTerminalRulesTestLanguage.g:76:1: ruleModel returns [EObject current=null] : ( ( (lv_idValue_0_0= RULE_ID ) ) | ( (lv_intValue_1_0= RULE_INT ) ) | ( (lv_stringValue_2_0= RULE_STRING ) ) | ( (lv_richStringValue_3_0= RULE_RICH_STRING ) ) | ( (lv_mlCommentValue_4_0= RULE_ML_COMMENT ) ) | ( (lv_slCommentValue_5_0= RULE_SL_COMMENT ) ) | ( (lv_wsValue_6_0= RULE_WS ) ) | ( (lv_anyValue_7_0= RULE_ANY_OTHER ) ) ) ;
+    // InternalTerminalRulesTestLanguage.g:71:1: ruleModel returns [EObject current=null] : ( ( (lv_idValue_0_0= RULE_ID ) ) | ( (lv_intValue_1_0= RULE_INT ) ) | ( (lv_stringValue_2_0= RULE_STRING ) ) | ( (lv_richStringValue_3_0= RULE_RICH_STRING ) ) | ( (lv_mlCommentValue_4_0= RULE_ML_COMMENT ) ) | ( (lv_slCommentValue_5_0= RULE_SL_COMMENT ) ) | ( (lv_wsValue_6_0= RULE_WS ) ) | ( (lv_anyValue_7_0= RULE_ANY_OTHER ) ) ) ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
@@ -123,13 +124,14 @@ public class InternalTerminalRulesTestLanguageParser extends AbstractInternalAnt
         Token lv_wsValue_6_0=null;
         Token lv_anyValue_7_0=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalTerminalRulesTestLanguage.g:79:28: ( ( ( (lv_idValue_0_0= RULE_ID ) ) | ( (lv_intValue_1_0= RULE_INT ) ) | ( (lv_stringValue_2_0= RULE_STRING ) ) | ( (lv_richStringValue_3_0= RULE_RICH_STRING ) ) | ( (lv_mlCommentValue_4_0= RULE_ML_COMMENT ) ) | ( (lv_slCommentValue_5_0= RULE_SL_COMMENT ) ) | ( (lv_wsValue_6_0= RULE_WS ) ) | ( (lv_anyValue_7_0= RULE_ANY_OTHER ) ) ) )
-            // InternalTerminalRulesTestLanguage.g:80:1: ( ( (lv_idValue_0_0= RULE_ID ) ) | ( (lv_intValue_1_0= RULE_INT ) ) | ( (lv_stringValue_2_0= RULE_STRING ) ) | ( (lv_richStringValue_3_0= RULE_RICH_STRING ) ) | ( (lv_mlCommentValue_4_0= RULE_ML_COMMENT ) ) | ( (lv_slCommentValue_5_0= RULE_SL_COMMENT ) ) | ( (lv_wsValue_6_0= RULE_WS ) ) | ( (lv_anyValue_7_0= RULE_ANY_OTHER ) ) )
+            // InternalTerminalRulesTestLanguage.g:77:2: ( ( ( (lv_idValue_0_0= RULE_ID ) ) | ( (lv_intValue_1_0= RULE_INT ) ) | ( (lv_stringValue_2_0= RULE_STRING ) ) | ( (lv_richStringValue_3_0= RULE_RICH_STRING ) ) | ( (lv_mlCommentValue_4_0= RULE_ML_COMMENT ) ) | ( (lv_slCommentValue_5_0= RULE_SL_COMMENT ) ) | ( (lv_wsValue_6_0= RULE_WS ) ) | ( (lv_anyValue_7_0= RULE_ANY_OTHER ) ) ) )
+            // InternalTerminalRulesTestLanguage.g:78:2: ( ( (lv_idValue_0_0= RULE_ID ) ) | ( (lv_intValue_1_0= RULE_INT ) ) | ( (lv_stringValue_2_0= RULE_STRING ) ) | ( (lv_richStringValue_3_0= RULE_RICH_STRING ) ) | ( (lv_mlCommentValue_4_0= RULE_ML_COMMENT ) ) | ( (lv_slCommentValue_5_0= RULE_SL_COMMENT ) ) | ( (lv_wsValue_6_0= RULE_WS ) ) | ( (lv_anyValue_7_0= RULE_ANY_OTHER ) ) )
             {
-            // InternalTerminalRulesTestLanguage.g:80:1: ( ( (lv_idValue_0_0= RULE_ID ) ) | ( (lv_intValue_1_0= RULE_INT ) ) | ( (lv_stringValue_2_0= RULE_STRING ) ) | ( (lv_richStringValue_3_0= RULE_RICH_STRING ) ) | ( (lv_mlCommentValue_4_0= RULE_ML_COMMENT ) ) | ( (lv_slCommentValue_5_0= RULE_SL_COMMENT ) ) | ( (lv_wsValue_6_0= RULE_WS ) ) | ( (lv_anyValue_7_0= RULE_ANY_OTHER ) ) )
+            // InternalTerminalRulesTestLanguage.g:78:2: ( ( (lv_idValue_0_0= RULE_ID ) ) | ( (lv_intValue_1_0= RULE_INT ) ) | ( (lv_stringValue_2_0= RULE_STRING ) ) | ( (lv_richStringValue_3_0= RULE_RICH_STRING ) ) | ( (lv_mlCommentValue_4_0= RULE_ML_COMMENT ) ) | ( (lv_slCommentValue_5_0= RULE_SL_COMMENT ) ) | ( (lv_wsValue_6_0= RULE_WS ) ) | ( (lv_anyValue_7_0= RULE_ANY_OTHER ) ) )
             int alt1=8;
             switch ( input.LA(1) ) {
             case RULE_ID:
@@ -181,28 +183,28 @@ public class InternalTerminalRulesTestLanguageParser extends AbstractInternalAnt
 
             switch (alt1) {
                 case 1 :
-                    // InternalTerminalRulesTestLanguage.g:80:2: ( (lv_idValue_0_0= RULE_ID ) )
+                    // InternalTerminalRulesTestLanguage.g:79:3: ( (lv_idValue_0_0= RULE_ID ) )
                     {
-                    // InternalTerminalRulesTestLanguage.g:80:2: ( (lv_idValue_0_0= RULE_ID ) )
-                    // InternalTerminalRulesTestLanguage.g:81:1: (lv_idValue_0_0= RULE_ID )
+                    // InternalTerminalRulesTestLanguage.g:79:3: ( (lv_idValue_0_0= RULE_ID ) )
+                    // InternalTerminalRulesTestLanguage.g:80:4: (lv_idValue_0_0= RULE_ID )
                     {
-                    // InternalTerminalRulesTestLanguage.g:81:1: (lv_idValue_0_0= RULE_ID )
-                    // InternalTerminalRulesTestLanguage.g:82:3: lv_idValue_0_0= RULE_ID
+                    // InternalTerminalRulesTestLanguage.g:80:4: (lv_idValue_0_0= RULE_ID )
+                    // InternalTerminalRulesTestLanguage.g:81:5: lv_idValue_0_0= RULE_ID
                     {
                     lv_idValue_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
-                    			newLeafNode(lv_idValue_0_0, grammarAccess.getModelAccess().getIdValueIDTerminalRuleCall_0_0()); 
-                    		
+                    					newLeafNode(lv_idValue_0_0, grammarAccess.getModelAccess().getIdValueIDTerminalRuleCall_0_0());
+                    				
 
-                    	        if (current==null) {
-                    	            current = createModelElement(grammarAccess.getModelRule());
-                    	        }
-                           		setWithLastConsumed(
-                           			current, 
-                           			"idValue",
-                            		lv_idValue_0_0, 
-                            		"org.eclipse.xtext.parser.terminalrules.TerminalRulesTestLanguage.ID");
-                    	    
+                    					if (current==null) {
+                    						current = createModelElement(grammarAccess.getModelRule());
+                    					}
+                    					setWithLastConsumed(
+                    						current,
+                    						"idValue",
+                    						lv_idValue_0_0,
+                    						"org.eclipse.xtext.parser.terminalrules.TerminalRulesTestLanguage.ID");
+                    				
 
                     }
 
@@ -213,28 +215,28 @@ public class InternalTerminalRulesTestLanguageParser extends AbstractInternalAnt
                     }
                     break;
                 case 2 :
-                    // InternalTerminalRulesTestLanguage.g:99:6: ( (lv_intValue_1_0= RULE_INT ) )
+                    // InternalTerminalRulesTestLanguage.g:98:3: ( (lv_intValue_1_0= RULE_INT ) )
                     {
-                    // InternalTerminalRulesTestLanguage.g:99:6: ( (lv_intValue_1_0= RULE_INT ) )
-                    // InternalTerminalRulesTestLanguage.g:100:1: (lv_intValue_1_0= RULE_INT )
+                    // InternalTerminalRulesTestLanguage.g:98:3: ( (lv_intValue_1_0= RULE_INT ) )
+                    // InternalTerminalRulesTestLanguage.g:99:4: (lv_intValue_1_0= RULE_INT )
                     {
-                    // InternalTerminalRulesTestLanguage.g:100:1: (lv_intValue_1_0= RULE_INT )
-                    // InternalTerminalRulesTestLanguage.g:101:3: lv_intValue_1_0= RULE_INT
+                    // InternalTerminalRulesTestLanguage.g:99:4: (lv_intValue_1_0= RULE_INT )
+                    // InternalTerminalRulesTestLanguage.g:100:5: lv_intValue_1_0= RULE_INT
                     {
                     lv_intValue_1_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_2); 
 
-                    			newLeafNode(lv_intValue_1_0, grammarAccess.getModelAccess().getIntValueINTTerminalRuleCall_1_0()); 
-                    		
+                    					newLeafNode(lv_intValue_1_0, grammarAccess.getModelAccess().getIntValueINTTerminalRuleCall_1_0());
+                    				
 
-                    	        if (current==null) {
-                    	            current = createModelElement(grammarAccess.getModelRule());
-                    	        }
-                           		setWithLastConsumed(
-                           			current, 
-                           			"intValue",
-                            		lv_intValue_1_0, 
-                            		"org.eclipse.xtext.parser.terminalrules.TerminalRulesTestLanguage.INT");
-                    	    
+                    					if (current==null) {
+                    						current = createModelElement(grammarAccess.getModelRule());
+                    					}
+                    					setWithLastConsumed(
+                    						current,
+                    						"intValue",
+                    						lv_intValue_1_0,
+                    						"org.eclipse.xtext.parser.terminalrules.TerminalRulesTestLanguage.INT");
+                    				
 
                     }
 
@@ -245,28 +247,28 @@ public class InternalTerminalRulesTestLanguageParser extends AbstractInternalAnt
                     }
                     break;
                 case 3 :
-                    // InternalTerminalRulesTestLanguage.g:118:6: ( (lv_stringValue_2_0= RULE_STRING ) )
+                    // InternalTerminalRulesTestLanguage.g:117:3: ( (lv_stringValue_2_0= RULE_STRING ) )
                     {
-                    // InternalTerminalRulesTestLanguage.g:118:6: ( (lv_stringValue_2_0= RULE_STRING ) )
-                    // InternalTerminalRulesTestLanguage.g:119:1: (lv_stringValue_2_0= RULE_STRING )
+                    // InternalTerminalRulesTestLanguage.g:117:3: ( (lv_stringValue_2_0= RULE_STRING ) )
+                    // InternalTerminalRulesTestLanguage.g:118:4: (lv_stringValue_2_0= RULE_STRING )
                     {
-                    // InternalTerminalRulesTestLanguage.g:119:1: (lv_stringValue_2_0= RULE_STRING )
-                    // InternalTerminalRulesTestLanguage.g:120:3: lv_stringValue_2_0= RULE_STRING
+                    // InternalTerminalRulesTestLanguage.g:118:4: (lv_stringValue_2_0= RULE_STRING )
+                    // InternalTerminalRulesTestLanguage.g:119:5: lv_stringValue_2_0= RULE_STRING
                     {
                     lv_stringValue_2_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_2); 
 
-                    			newLeafNode(lv_stringValue_2_0, grammarAccess.getModelAccess().getStringValueSTRINGTerminalRuleCall_2_0()); 
-                    		
+                    					newLeafNode(lv_stringValue_2_0, grammarAccess.getModelAccess().getStringValueSTRINGTerminalRuleCall_2_0());
+                    				
 
-                    	        if (current==null) {
-                    	            current = createModelElement(grammarAccess.getModelRule());
-                    	        }
-                           		setWithLastConsumed(
-                           			current, 
-                           			"stringValue",
-                            		lv_stringValue_2_0, 
-                            		"org.eclipse.xtext.parser.terminalrules.TerminalRulesTestLanguage.STRING");
-                    	    
+                    					if (current==null) {
+                    						current = createModelElement(grammarAccess.getModelRule());
+                    					}
+                    					setWithLastConsumed(
+                    						current,
+                    						"stringValue",
+                    						lv_stringValue_2_0,
+                    						"org.eclipse.xtext.parser.terminalrules.TerminalRulesTestLanguage.STRING");
+                    				
 
                     }
 
@@ -277,28 +279,28 @@ public class InternalTerminalRulesTestLanguageParser extends AbstractInternalAnt
                     }
                     break;
                 case 4 :
-                    // InternalTerminalRulesTestLanguage.g:137:6: ( (lv_richStringValue_3_0= RULE_RICH_STRING ) )
+                    // InternalTerminalRulesTestLanguage.g:136:3: ( (lv_richStringValue_3_0= RULE_RICH_STRING ) )
                     {
-                    // InternalTerminalRulesTestLanguage.g:137:6: ( (lv_richStringValue_3_0= RULE_RICH_STRING ) )
-                    // InternalTerminalRulesTestLanguage.g:138:1: (lv_richStringValue_3_0= RULE_RICH_STRING )
+                    // InternalTerminalRulesTestLanguage.g:136:3: ( (lv_richStringValue_3_0= RULE_RICH_STRING ) )
+                    // InternalTerminalRulesTestLanguage.g:137:4: (lv_richStringValue_3_0= RULE_RICH_STRING )
                     {
-                    // InternalTerminalRulesTestLanguage.g:138:1: (lv_richStringValue_3_0= RULE_RICH_STRING )
-                    // InternalTerminalRulesTestLanguage.g:139:3: lv_richStringValue_3_0= RULE_RICH_STRING
+                    // InternalTerminalRulesTestLanguage.g:137:4: (lv_richStringValue_3_0= RULE_RICH_STRING )
+                    // InternalTerminalRulesTestLanguage.g:138:5: lv_richStringValue_3_0= RULE_RICH_STRING
                     {
                     lv_richStringValue_3_0=(Token)match(input,RULE_RICH_STRING,FollowSets000.FOLLOW_2); 
 
-                    			newLeafNode(lv_richStringValue_3_0, grammarAccess.getModelAccess().getRichStringValueRICH_STRINGTerminalRuleCall_3_0()); 
-                    		
+                    					newLeafNode(lv_richStringValue_3_0, grammarAccess.getModelAccess().getRichStringValueRICH_STRINGTerminalRuleCall_3_0());
+                    				
 
-                    	        if (current==null) {
-                    	            current = createModelElement(grammarAccess.getModelRule());
-                    	        }
-                           		setWithLastConsumed(
-                           			current, 
-                           			"richStringValue",
-                            		lv_richStringValue_3_0, 
-                            		"org.eclipse.xtext.parser.terminalrules.TerminalRulesTestLanguage.RICH_STRING");
-                    	    
+                    					if (current==null) {
+                    						current = createModelElement(grammarAccess.getModelRule());
+                    					}
+                    					setWithLastConsumed(
+                    						current,
+                    						"richStringValue",
+                    						lv_richStringValue_3_0,
+                    						"org.eclipse.xtext.parser.terminalrules.TerminalRulesTestLanguage.RICH_STRING");
+                    				
 
                     }
 
@@ -309,28 +311,28 @@ public class InternalTerminalRulesTestLanguageParser extends AbstractInternalAnt
                     }
                     break;
                 case 5 :
-                    // InternalTerminalRulesTestLanguage.g:156:6: ( (lv_mlCommentValue_4_0= RULE_ML_COMMENT ) )
+                    // InternalTerminalRulesTestLanguage.g:155:3: ( (lv_mlCommentValue_4_0= RULE_ML_COMMENT ) )
                     {
-                    // InternalTerminalRulesTestLanguage.g:156:6: ( (lv_mlCommentValue_4_0= RULE_ML_COMMENT ) )
-                    // InternalTerminalRulesTestLanguage.g:157:1: (lv_mlCommentValue_4_0= RULE_ML_COMMENT )
+                    // InternalTerminalRulesTestLanguage.g:155:3: ( (lv_mlCommentValue_4_0= RULE_ML_COMMENT ) )
+                    // InternalTerminalRulesTestLanguage.g:156:4: (lv_mlCommentValue_4_0= RULE_ML_COMMENT )
                     {
-                    // InternalTerminalRulesTestLanguage.g:157:1: (lv_mlCommentValue_4_0= RULE_ML_COMMENT )
-                    // InternalTerminalRulesTestLanguage.g:158:3: lv_mlCommentValue_4_0= RULE_ML_COMMENT
+                    // InternalTerminalRulesTestLanguage.g:156:4: (lv_mlCommentValue_4_0= RULE_ML_COMMENT )
+                    // InternalTerminalRulesTestLanguage.g:157:5: lv_mlCommentValue_4_0= RULE_ML_COMMENT
                     {
                     lv_mlCommentValue_4_0=(Token)match(input,RULE_ML_COMMENT,FollowSets000.FOLLOW_2); 
 
-                    			newLeafNode(lv_mlCommentValue_4_0, grammarAccess.getModelAccess().getMlCommentValueML_COMMENTTerminalRuleCall_4_0()); 
-                    		
+                    					newLeafNode(lv_mlCommentValue_4_0, grammarAccess.getModelAccess().getMlCommentValueML_COMMENTTerminalRuleCall_4_0());
+                    				
 
-                    	        if (current==null) {
-                    	            current = createModelElement(grammarAccess.getModelRule());
-                    	        }
-                           		setWithLastConsumed(
-                           			current, 
-                           			"mlCommentValue",
-                            		lv_mlCommentValue_4_0, 
-                            		"org.eclipse.xtext.parser.terminalrules.TerminalRulesTestLanguage.ML_COMMENT");
-                    	    
+                    					if (current==null) {
+                    						current = createModelElement(grammarAccess.getModelRule());
+                    					}
+                    					setWithLastConsumed(
+                    						current,
+                    						"mlCommentValue",
+                    						lv_mlCommentValue_4_0,
+                    						"org.eclipse.xtext.parser.terminalrules.TerminalRulesTestLanguage.ML_COMMENT");
+                    				
 
                     }
 
@@ -341,28 +343,28 @@ public class InternalTerminalRulesTestLanguageParser extends AbstractInternalAnt
                     }
                     break;
                 case 6 :
-                    // InternalTerminalRulesTestLanguage.g:175:6: ( (lv_slCommentValue_5_0= RULE_SL_COMMENT ) )
+                    // InternalTerminalRulesTestLanguage.g:174:3: ( (lv_slCommentValue_5_0= RULE_SL_COMMENT ) )
                     {
-                    // InternalTerminalRulesTestLanguage.g:175:6: ( (lv_slCommentValue_5_0= RULE_SL_COMMENT ) )
-                    // InternalTerminalRulesTestLanguage.g:176:1: (lv_slCommentValue_5_0= RULE_SL_COMMENT )
+                    // InternalTerminalRulesTestLanguage.g:174:3: ( (lv_slCommentValue_5_0= RULE_SL_COMMENT ) )
+                    // InternalTerminalRulesTestLanguage.g:175:4: (lv_slCommentValue_5_0= RULE_SL_COMMENT )
                     {
-                    // InternalTerminalRulesTestLanguage.g:176:1: (lv_slCommentValue_5_0= RULE_SL_COMMENT )
-                    // InternalTerminalRulesTestLanguage.g:177:3: lv_slCommentValue_5_0= RULE_SL_COMMENT
+                    // InternalTerminalRulesTestLanguage.g:175:4: (lv_slCommentValue_5_0= RULE_SL_COMMENT )
+                    // InternalTerminalRulesTestLanguage.g:176:5: lv_slCommentValue_5_0= RULE_SL_COMMENT
                     {
                     lv_slCommentValue_5_0=(Token)match(input,RULE_SL_COMMENT,FollowSets000.FOLLOW_2); 
 
-                    			newLeafNode(lv_slCommentValue_5_0, grammarAccess.getModelAccess().getSlCommentValueSL_COMMENTTerminalRuleCall_5_0()); 
-                    		
+                    					newLeafNode(lv_slCommentValue_5_0, grammarAccess.getModelAccess().getSlCommentValueSL_COMMENTTerminalRuleCall_5_0());
+                    				
 
-                    	        if (current==null) {
-                    	            current = createModelElement(grammarAccess.getModelRule());
-                    	        }
-                           		setWithLastConsumed(
-                           			current, 
-                           			"slCommentValue",
-                            		lv_slCommentValue_5_0, 
-                            		"org.eclipse.xtext.parser.terminalrules.TerminalRulesTestLanguage.SL_COMMENT");
-                    	    
+                    					if (current==null) {
+                    						current = createModelElement(grammarAccess.getModelRule());
+                    					}
+                    					setWithLastConsumed(
+                    						current,
+                    						"slCommentValue",
+                    						lv_slCommentValue_5_0,
+                    						"org.eclipse.xtext.parser.terminalrules.TerminalRulesTestLanguage.SL_COMMENT");
+                    				
 
                     }
 
@@ -373,28 +375,28 @@ public class InternalTerminalRulesTestLanguageParser extends AbstractInternalAnt
                     }
                     break;
                 case 7 :
-                    // InternalTerminalRulesTestLanguage.g:194:6: ( (lv_wsValue_6_0= RULE_WS ) )
+                    // InternalTerminalRulesTestLanguage.g:193:3: ( (lv_wsValue_6_0= RULE_WS ) )
                     {
-                    // InternalTerminalRulesTestLanguage.g:194:6: ( (lv_wsValue_6_0= RULE_WS ) )
-                    // InternalTerminalRulesTestLanguage.g:195:1: (lv_wsValue_6_0= RULE_WS )
+                    // InternalTerminalRulesTestLanguage.g:193:3: ( (lv_wsValue_6_0= RULE_WS ) )
+                    // InternalTerminalRulesTestLanguage.g:194:4: (lv_wsValue_6_0= RULE_WS )
                     {
-                    // InternalTerminalRulesTestLanguage.g:195:1: (lv_wsValue_6_0= RULE_WS )
-                    // InternalTerminalRulesTestLanguage.g:196:3: lv_wsValue_6_0= RULE_WS
+                    // InternalTerminalRulesTestLanguage.g:194:4: (lv_wsValue_6_0= RULE_WS )
+                    // InternalTerminalRulesTestLanguage.g:195:5: lv_wsValue_6_0= RULE_WS
                     {
                     lv_wsValue_6_0=(Token)match(input,RULE_WS,FollowSets000.FOLLOW_2); 
 
-                    			newLeafNode(lv_wsValue_6_0, grammarAccess.getModelAccess().getWsValueWSTerminalRuleCall_6_0()); 
-                    		
+                    					newLeafNode(lv_wsValue_6_0, grammarAccess.getModelAccess().getWsValueWSTerminalRuleCall_6_0());
+                    				
 
-                    	        if (current==null) {
-                    	            current = createModelElement(grammarAccess.getModelRule());
-                    	        }
-                           		setWithLastConsumed(
-                           			current, 
-                           			"wsValue",
-                            		lv_wsValue_6_0, 
-                            		"org.eclipse.xtext.parser.terminalrules.TerminalRulesTestLanguage.WS");
-                    	    
+                    					if (current==null) {
+                    						current = createModelElement(grammarAccess.getModelRule());
+                    					}
+                    					setWithLastConsumed(
+                    						current,
+                    						"wsValue",
+                    						lv_wsValue_6_0,
+                    						"org.eclipse.xtext.parser.terminalrules.TerminalRulesTestLanguage.WS");
+                    				
 
                     }
 
@@ -405,28 +407,28 @@ public class InternalTerminalRulesTestLanguageParser extends AbstractInternalAnt
                     }
                     break;
                 case 8 :
-                    // InternalTerminalRulesTestLanguage.g:213:6: ( (lv_anyValue_7_0= RULE_ANY_OTHER ) )
+                    // InternalTerminalRulesTestLanguage.g:212:3: ( (lv_anyValue_7_0= RULE_ANY_OTHER ) )
                     {
-                    // InternalTerminalRulesTestLanguage.g:213:6: ( (lv_anyValue_7_0= RULE_ANY_OTHER ) )
-                    // InternalTerminalRulesTestLanguage.g:214:1: (lv_anyValue_7_0= RULE_ANY_OTHER )
+                    // InternalTerminalRulesTestLanguage.g:212:3: ( (lv_anyValue_7_0= RULE_ANY_OTHER ) )
+                    // InternalTerminalRulesTestLanguage.g:213:4: (lv_anyValue_7_0= RULE_ANY_OTHER )
                     {
-                    // InternalTerminalRulesTestLanguage.g:214:1: (lv_anyValue_7_0= RULE_ANY_OTHER )
-                    // InternalTerminalRulesTestLanguage.g:215:3: lv_anyValue_7_0= RULE_ANY_OTHER
+                    // InternalTerminalRulesTestLanguage.g:213:4: (lv_anyValue_7_0= RULE_ANY_OTHER )
+                    // InternalTerminalRulesTestLanguage.g:214:5: lv_anyValue_7_0= RULE_ANY_OTHER
                     {
                     lv_anyValue_7_0=(Token)match(input,RULE_ANY_OTHER,FollowSets000.FOLLOW_2); 
 
-                    			newLeafNode(lv_anyValue_7_0, grammarAccess.getModelAccess().getAnyValueANY_OTHERTerminalRuleCall_7_0()); 
-                    		
+                    					newLeafNode(lv_anyValue_7_0, grammarAccess.getModelAccess().getAnyValueANY_OTHERTerminalRuleCall_7_0());
+                    				
 
-                    	        if (current==null) {
-                    	            current = createModelElement(grammarAccess.getModelRule());
-                    	        }
-                           		setWithLastConsumed(
-                           			current, 
-                           			"anyValue",
-                            		lv_anyValue_7_0, 
-                            		"org.eclipse.xtext.parser.terminalrules.TerminalRulesTestLanguage.ANY_OTHER");
-                    	    
+                    					if (current==null) {
+                    						current = createModelElement(grammarAccess.getModelRule());
+                    					}
+                    					setWithLastConsumed(
+                    						current,
+                    						"anyValue",
+                    						lv_anyValue_7_0,
+                    						"org.eclipse.xtext.parser.terminalrules.TerminalRulesTestLanguage.ANY_OTHER");
+                    				
 
                     }
 
@@ -442,13 +444,15 @@ public class InternalTerminalRulesTestLanguageParser extends AbstractInternalAnt
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;

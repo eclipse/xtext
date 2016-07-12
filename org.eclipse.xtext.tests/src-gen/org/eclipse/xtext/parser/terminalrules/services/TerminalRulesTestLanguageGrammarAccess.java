@@ -3,19 +3,21 @@
  */
 package org.eclipse.xtext.parser.terminalrules.services;
 
-import com.google.inject.Singleton;
 import com.google.inject.Inject;
-
+import com.google.inject.Singleton;
 import java.util.List;
-
-import org.eclipse.xtext.*;
+import org.eclipse.xtext.Alternatives;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TerminalRule;
+import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder;
 import org.eclipse.xtext.service.GrammarProvider;
-import org.eclipse.xtext.service.AbstractElementFinder.*;
-
 
 @Singleton
 public class TerminalRulesTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
-	
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.terminalrules.TerminalRulesTestLanguage.Model");
@@ -41,56 +43,56 @@ public class TerminalRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 		//	idValue=ID | intValue=INT | stringValue=STRING | richStringValue=RICH_STRING | mlCommentValue=ML_COMMENT |
 		//	slCommentValue=SL_COMMENT | wsValue=WS | anyValue=ANY_OTHER;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//idValue=ID | intValue=INT | stringValue=STRING | richStringValue=RICH_STRING | mlCommentValue=ML_COMMENT |
 		//slCommentValue=SL_COMMENT | wsValue=WS | anyValue=ANY_OTHER
 		public Alternatives getAlternatives() { return cAlternatives; }
-
+		
 		//idValue=ID
 		public Assignment getIdValueAssignment_0() { return cIdValueAssignment_0; }
-
+		
 		//ID
 		public RuleCall getIdValueIDTerminalRuleCall_0_0() { return cIdValueIDTerminalRuleCall_0_0; }
-
+		
 		//intValue=INT
 		public Assignment getIntValueAssignment_1() { return cIntValueAssignment_1; }
-
+		
 		//INT
 		public RuleCall getIntValueINTTerminalRuleCall_1_0() { return cIntValueINTTerminalRuleCall_1_0; }
-
+		
 		//stringValue=STRING
 		public Assignment getStringValueAssignment_2() { return cStringValueAssignment_2; }
-
+		
 		//STRING
 		public RuleCall getStringValueSTRINGTerminalRuleCall_2_0() { return cStringValueSTRINGTerminalRuleCall_2_0; }
-
+		
 		//richStringValue=RICH_STRING
 		public Assignment getRichStringValueAssignment_3() { return cRichStringValueAssignment_3; }
-
+		
 		//RICH_STRING
 		public RuleCall getRichStringValueRICH_STRINGTerminalRuleCall_3_0() { return cRichStringValueRICH_STRINGTerminalRuleCall_3_0; }
-
+		
 		//mlCommentValue=ML_COMMENT
 		public Assignment getMlCommentValueAssignment_4() { return cMlCommentValueAssignment_4; }
-
+		
 		//ML_COMMENT
 		public RuleCall getMlCommentValueML_COMMENTTerminalRuleCall_4_0() { return cMlCommentValueML_COMMENTTerminalRuleCall_4_0; }
-
+		
 		//slCommentValue=SL_COMMENT
 		public Assignment getSlCommentValueAssignment_5() { return cSlCommentValueAssignment_5; }
-
+		
 		//SL_COMMENT
 		public RuleCall getSlCommentValueSL_COMMENTTerminalRuleCall_5_0() { return cSlCommentValueSL_COMMENTTerminalRuleCall_5_0; }
-
+		
 		//wsValue=WS
 		public Assignment getWsValueAssignment_6() { return cWsValueAssignment_6; }
-
+		
 		//WS
 		public RuleCall getWsValueWSTerminalRuleCall_6_0() { return cWsValueWSTerminalRuleCall_6_0; }
-
+		
 		//anyValue=ANY_OTHER
 		public Assignment getAnyValueAssignment_7() { return cAnyValueAssignment_7; }
-
+		
 		//ANY_OTHER
 		public RuleCall getAnyValueANY_OTHERTerminalRuleCall_7_0() { return cAnyValueANY_OTHERTerminalRuleCall_7_0; }
 	}
@@ -159,65 +161,65 @@ public class TerminalRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 	public ParserRule getModelRule() {
 		return getModelAccess().getRule();
 	}
-
+	
 	//terminal ID:
 	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return tID;
-	} 
-
+	}
+	
 	//terminal INT:
 	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return tINT;
-	} 
-
+	}
+	
 	//terminal STRING:
 	//	'"' (ESCAPED_CHAR | !('\\' | '"'))* '"' |
 	//	"'" (ESCAPED_CHAR | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return tSTRING;
-	} 
-
+	}
+	
 	//terminal RICH_STRING:
 	//	"'''" IN_RICH_STRING* ("'''" | ("'" "'"?)? EOF);
 	public TerminalRule getRICH_STRINGRule() {
 		return tRICH_STRING;
-	} 
-
+	}
+	
 	//terminal fragment IN_RICH_STRING:
-	//	"''" !('«' | "'") | "'" !('«' | "'") | !('«' | "'");
+	//	"''" !('ï¿½' | "'") | "'" !('ï¿½' | "'") | !('ï¿½' | "'");
 	public TerminalRule getIN_RICH_STRINGRule() {
 		return tIN_RICH_STRING;
-	} 
-
+	}
+	
 	//terminal fragment ESCAPED_CHAR:
 	//	'\\' ('b' | 't' | 'n' | 'f' | 'r' | '"' | "'" | '\\');
 	public TerminalRule getESCAPED_CHARRule() {
 		return tESCAPED_CHAR;
-	} 
-
+	}
+	
 	//terminal ML_COMMENT:
 	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return tML_COMMENT;
-	} 
-
+	}
+	
 	//terminal SL_COMMENT:
 	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return tSL_COMMENT;
-	} 
-
+	}
+	
 	//terminal WS:
 	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return tWS;
-	} 
-
+	}
+	
 	//terminal ANY_OTHER:
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return tANY_OTHER;
-	} 
+	}
 }
