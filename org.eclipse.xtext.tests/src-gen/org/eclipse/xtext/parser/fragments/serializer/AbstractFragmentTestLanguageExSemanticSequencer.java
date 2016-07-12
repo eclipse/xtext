@@ -18,7 +18,7 @@ import org.eclipse.xtext.parser.fragments.services.FragmentTestLanguageExGrammar
 import org.eclipse.xtext.serializer.ISerializationContext;
 
 @SuppressWarnings("all")
-public class FragmentTestLanguageExSemanticSequencer extends FragmentTestLanguageSemanticSequencer {
+public abstract class AbstractFragmentTestLanguageExSemanticSequencer extends FragmentTestLanguageSemanticSequencer {
 
 	@Inject
 	private FragmentTestLanguageExGrammarAccess grammarAccess;

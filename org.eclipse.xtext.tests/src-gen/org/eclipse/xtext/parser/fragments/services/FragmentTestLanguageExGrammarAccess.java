@@ -3,21 +3,20 @@
  */
 package org.eclipse.xtext.parser.fragments.services;
 
-import com.google.inject.Singleton;
 import com.google.inject.Inject;
-
+import com.google.inject.Singleton;
 import java.util.List;
-
-import org.eclipse.xtext.*;
-import org.eclipse.xtext.service.GrammarProvider;
-import org.eclipse.xtext.service.AbstractElementFinder.*;
-
-import org.eclipse.xtext.parser.fragments.services.FragmentTestLanguageGrammarAccess;
+import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
+import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder;
+import org.eclipse.xtext.service.GrammarProvider;
 
 @Singleton
 public class FragmentTestLanguageExGrammarAccess extends AbstractGrammarElementFinder {
-	
 	
 	public class ParserRuleFragmentsExElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.fragments.FragmentTestLanguageEx.ParserRuleFragmentsEx");
@@ -26,7 +25,7 @@ public class FragmentTestLanguageExGrammarAccess extends AbstractGrammarElementF
 		//ParserRuleFragmentsEx ParserRuleFragments:
 		//	ParserRuleFragments
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//ParserRuleFragments
 		public RuleCall getParserRuleFragmentsParserRuleCall() { return cParserRuleFragmentsParserRuleCall; }
 	}
@@ -35,15 +34,15 @@ public class FragmentTestLanguageExGrammarAccess extends AbstractGrammarElementF
 	private final ParserRuleFragmentsExElements pParserRuleFragmentsEx;
 	
 	private final Grammar grammar;
-
+	
 	private final FragmentTestLanguageGrammarAccess gaFragmentTestLanguage;
-
+	
 	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public FragmentTestLanguageExGrammarAccess(GrammarProvider grammarProvider,
-		FragmentTestLanguageGrammarAccess gaFragmentTestLanguage,
-		TerminalsGrammarAccess gaTerminals) {
+			FragmentTestLanguageGrammarAccess gaFragmentTestLanguage,
+			TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaFragmentTestLanguage = gaFragmentTestLanguage;
 		this.gaTerminals = gaTerminals;
@@ -71,11 +70,11 @@ public class FragmentTestLanguageExGrammarAccess extends AbstractGrammarElementF
 		return grammar;
 	}
 	
-
+	
 	public FragmentTestLanguageGrammarAccess getFragmentTestLanguageGrammarAccess() {
 		return gaFragmentTestLanguage;
 	}
-
+	
 	public TerminalsGrammarAccess getTerminalsGrammarAccess() {
 		return gaTerminals;
 	}
@@ -90,7 +89,7 @@ public class FragmentTestLanguageExGrammarAccess extends AbstractGrammarElementF
 	public ParserRule getParserRuleFragmentsExRule() {
 		return getParserRuleFragmentsExAccess().getRule();
 	}
-
+	
 	//ParserRuleFragments:
 	//	{ParserRuleFragments} ('#1' element=PRFNamed
 	//	| '#2' element=PRFNamed '->' ref=[PRFNamed] | '#3' element=PRFNamedRefFirst
@@ -109,7 +108,7 @@ public class FragmentTestLanguageExGrammarAccess extends AbstractGrammarElementF
 	public ParserRule getParserRuleFragmentsRule() {
 		return getParserRuleFragmentsAccess().getRule();
 	}
-
+	
 	//PRFNamed:
 	//	PRFNamedFragment (':' ref=[PRFNamed] | '-' PRFNamedRef)?;
 	public FragmentTestLanguageGrammarAccess.PRFNamedElements getPRFNamedAccess() {
@@ -119,7 +118,7 @@ public class FragmentTestLanguageExGrammarAccess extends AbstractGrammarElementF
 	public ParserRule getPRFNamedRule() {
 		return getPRFNamedAccess().getRule();
 	}
-
+	
 	//PRFNamedRecursive PRFNamedWithAction:
 	//	name=ID RecursiveFromFragment
 	public FragmentTestLanguageGrammarAccess.PRFNamedRecursiveElements getPRFNamedRecursiveAccess() {
@@ -129,7 +128,7 @@ public class FragmentTestLanguageExGrammarAccess extends AbstractGrammarElementF
 	public ParserRule getPRFNamedRecursiveRule() {
 		return getPRFNamedRecursiveAccess().getRule();
 	}
-
+	
 	//PRFNamedRecursiveFragment PRFNamedWithAction:
 	//	name=ID RecursiveFragment
 	public FragmentTestLanguageGrammarAccess.PRFNamedRecursiveFragmentElements getPRFNamedRecursiveFragmentAccess() {
@@ -139,7 +138,7 @@ public class FragmentTestLanguageExGrammarAccess extends AbstractGrammarElementF
 	public ParserRule getPRFNamedRecursiveFragmentRule() {
 		return getPRFNamedRecursiveFragmentAccess().getRule();
 	}
-
+	
 	//PRFNamedRefFirst PRFNamed:
 	//	ref=[PRFNamed] '<-' PRFNamedFragment
 	public FragmentTestLanguageGrammarAccess.PRFNamedRefFirstElements getPRFNamedRefFirstAccess() {
@@ -149,7 +148,7 @@ public class FragmentTestLanguageExGrammarAccess extends AbstractGrammarElementF
 	public ParserRule getPRFNamedRefFirstRule() {
 		return getPRFNamedRefFirstAccess().getRule();
 	}
-
+	
 	//PRFNamedWithAction PRFNamed:
 	//	PRFNamed {PRFNamedWithAction.prev=current} name=ID (ref=[PRFNamed] ref2=[PRFNamed])?
 	public FragmentTestLanguageGrammarAccess.PRFNamedWithActionElements getPRFNamedWithActionAccess() {
@@ -159,7 +158,7 @@ public class FragmentTestLanguageExGrammarAccess extends AbstractGrammarElementF
 	public ParserRule getPRFNamedWithActionRule() {
 		return getPRFNamedWithActionAccess().getRule();
 	}
-
+	
 	////PRFNamedWithActionInFragment returns PRFNamed:
 	////	FragmentWithAction ('-' ref=[PRFNamed])?
 	////;
@@ -180,7 +179,7 @@ public class FragmentTestLanguageExGrammarAccess extends AbstractGrammarElementF
 	public ParserRule getPRFNamedWithFQNRule() {
 		return getPRFNamedWithFQNAccess().getRule();
 	}
-
+	
 	//PRFWithPredicate PRFNamed:
 	//	PRFNamedFragment => ('-' PRFNamedRef)?
 	public FragmentTestLanguageGrammarAccess.PRFWithPredicateElements getPRFWithPredicateAccess() {
@@ -190,7 +189,7 @@ public class FragmentTestLanguageExGrammarAccess extends AbstractGrammarElementF
 	public ParserRule getPRFWithPredicateRule() {
 		return getPRFWithPredicateAccess().getRule();
 	}
-
+	
 	//FQN:
 	//	ID Suffix?;
 	public FragmentTestLanguageGrammarAccess.FQNElements getFQNAccess() {
@@ -200,7 +199,7 @@ public class FragmentTestLanguageExGrammarAccess extends AbstractGrammarElementF
 	public ParserRule getFQNRule() {
 		return getFQNAccess().getRule();
 	}
-
+	
 	//FQN2:
 	//	ID Suffix2*;
 	public FragmentTestLanguageGrammarAccess.FQN2Elements getFQN2Access() {
@@ -210,7 +209,7 @@ public class FragmentTestLanguageExGrammarAccess extends AbstractGrammarElementF
 	public ParserRule getFQN2Rule() {
 		return getFQN2Access().getRule();
 	}
-
+	
 	//fragment Suffix:
 	//	'.' ID Suffix?;
 	public FragmentTestLanguageGrammarAccess.SuffixElements getSuffixAccess() {
@@ -220,7 +219,7 @@ public class FragmentTestLanguageExGrammarAccess extends AbstractGrammarElementF
 	public ParserRule getSuffixRule() {
 		return getSuffixAccess().getRule();
 	}
-
+	
 	//fragment Suffix2:
 	//	'.' ID;
 	public FragmentTestLanguageGrammarAccess.Suffix2Elements getSuffix2Access() {
@@ -230,7 +229,7 @@ public class FragmentTestLanguageExGrammarAccess extends AbstractGrammarElementF
 	public ParserRule getSuffix2Rule() {
 		return getSuffix2Access().getRule();
 	}
-
+	
 	////fragment FragmentWithAction returns PRFNamed:
 	////	name=ID {PRFNamedWithAction.prev=current} name=ID (ref2=[PRFNamed])?
 	////;
@@ -251,7 +250,7 @@ public class FragmentTestLanguageExGrammarAccess extends AbstractGrammarElementF
 	public ParserRule getPRFNamedFragmentRule() {
 		return getPRFNamedFragmentAccess().getRule();
 	}
-
+	
 	//fragment PRFNamedRef returns PRFNamed:
 	//	ref=[PRFNamed];
 	public FragmentTestLanguageGrammarAccess.PRFNamedRefElements getPRFNamedRefAccess() {
@@ -261,7 +260,7 @@ public class FragmentTestLanguageExGrammarAccess extends AbstractGrammarElementF
 	public ParserRule getPRFNamedRefRule() {
 		return getPRFNamedRefAccess().getRule();
 	}
-
+	
 	//fragment RecursiveFromFragment returns PRFNamedWithAction:
 	//	prev=NamedInParentheses;
 	public FragmentTestLanguageGrammarAccess.RecursiveFromFragmentElements getRecursiveFromFragmentAccess() {
@@ -271,7 +270,7 @@ public class FragmentTestLanguageExGrammarAccess extends AbstractGrammarElementF
 	public ParserRule getRecursiveFromFragmentRule() {
 		return getRecursiveFromFragmentAccess().getRule();
 	}
-
+	
 	//NamedInParentheses PRFNamed:
 	//	'(' NamedInParentheses ')' | {PRFNamed} name=ID
 	public FragmentTestLanguageGrammarAccess.NamedInParenthesesElements getNamedInParenthesesAccess() {
@@ -281,7 +280,7 @@ public class FragmentTestLanguageExGrammarAccess extends AbstractGrammarElementF
 	public ParserRule getNamedInParenthesesRule() {
 		return getNamedInParenthesesAccess().getRule();
 	}
-
+	
 	//fragment RecursiveFragment returns PRFNamedWithAction:
 	//	'(' RecursiveFragment ')' | prev=NamedByAction;
 	public FragmentTestLanguageGrammarAccess.RecursiveFragmentElements getRecursiveFragmentAccess() {
@@ -291,7 +290,7 @@ public class FragmentTestLanguageExGrammarAccess extends AbstractGrammarElementF
 	public ParserRule getRecursiveFragmentRule() {
 		return getRecursiveFragmentAccess().getRule();
 	}
-
+	
 	//NamedByAction PRFNamed:
 	//	{PRFNamed} name=ID
 	public FragmentTestLanguageGrammarAccess.NamedByActionElements getNamedByActionAccess() {
@@ -301,47 +300,47 @@ public class FragmentTestLanguageExGrammarAccess extends AbstractGrammarElementF
 	public ParserRule getNamedByActionRule() {
 		return getNamedByActionAccess().getRule();
 	}
-
+	
 	//terminal ID:
 	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
-	} 
-
+	}
+	
 	//terminal INT returns ecore::EInt:
 	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
-	} 
-
+	}
+	
 	//terminal STRING:
 	//	'"' ('\\' . | !('\\' | '"'))* '"' |
 	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
-	} 
-
+	}
+	
 	//terminal ML_COMMENT:
 	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal SL_COMMENT:
 	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal WS:
 	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
-	} 
-
+	}
+	
 	//terminal ANY_OTHER:
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
-	} 
+	}
 }

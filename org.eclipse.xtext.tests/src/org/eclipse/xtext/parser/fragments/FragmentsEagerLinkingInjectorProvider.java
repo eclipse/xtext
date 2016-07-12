@@ -9,6 +9,7 @@ package org.eclipse.xtext.parser.fragments;
 
 import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.linking.impl.Linker;
+import org.eclipse.xtext.parser.fragments.tests.FragmentTestLanguageInjectorProvider;
 import org.eclipse.xtext.resource.XtextResource;
 
 import com.google.inject.Guice;

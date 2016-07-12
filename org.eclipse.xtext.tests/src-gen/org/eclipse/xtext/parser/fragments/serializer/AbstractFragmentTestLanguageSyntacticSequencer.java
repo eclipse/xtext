@@ -9,7 +9,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.nodemodel.INode;
-import org.eclipse.xtext.parser.fragments.services.FragmentTestLanguageExGrammarAccess;
+import org.eclipse.xtext.parser.fragments.services.FragmentTestLanguageGrammarAccess;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.AbstractElementAlias;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.TokenAlias;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynNavigable;
@@ -17,15 +17,15 @@ import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISyn
 import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
 
 @SuppressWarnings("all")
-public class FragmentTestLanguageExSyntacticSequencer extends AbstractSyntacticSequencer {
+public abstract class AbstractFragmentTestLanguageSyntacticSequencer extends AbstractSyntacticSequencer {
 
-	protected FragmentTestLanguageExGrammarAccess grammarAccess;
+	protected FragmentTestLanguageGrammarAccess grammarAccess;
 	protected AbstractElementAlias match_NamedInParentheses_LeftParenthesisKeyword_0_0_a;
 	protected AbstractElementAlias match_RecursiveFragment_LeftParenthesisKeyword_0_0_a;
 	
 	@Inject
 	protected void init(IGrammarAccess access) {
-		grammarAccess = (FragmentTestLanguageExGrammarAccess) access;
+		grammarAccess = (FragmentTestLanguageGrammarAccess) access;
 		match_NamedInParentheses_LeftParenthesisKeyword_0_0_a = new TokenAlias(true, true, grammarAccess.getNamedInParenthesesAccess().getLeftParenthesisKeyword_0_0());
 		match_RecursiveFragment_LeftParenthesisKeyword_0_0_a = new TokenAlias(true, true, grammarAccess.getRecursiveFragmentAccess().getLeftParenthesisKeyword_0_0());
 	}

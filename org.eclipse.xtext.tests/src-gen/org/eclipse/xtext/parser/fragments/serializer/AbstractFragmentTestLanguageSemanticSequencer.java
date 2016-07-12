@@ -21,7 +21,7 @@ import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequence
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 
 @SuppressWarnings("all")
-public class FragmentTestLanguageSemanticSequencer extends AbstractDelegatingSemanticSequencer {
+public abstract class AbstractFragmentTestLanguageSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 
 	@Inject
 	private FragmentTestLanguageGrammarAccess grammarAccess;

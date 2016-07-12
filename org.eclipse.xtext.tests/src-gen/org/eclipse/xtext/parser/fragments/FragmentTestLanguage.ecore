@@ -9,7 +9,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PRFNamed">
     <eStructuralFeatures xsi:type="ecore:EReference" name="ref" eType="#//PRFNamed"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PRFNamedWithAction" eSuperTypes="#//PRFNamed">
     <eStructuralFeatures xsi:type="ecore:EReference" name="prev" eType="#//PRFNamed"

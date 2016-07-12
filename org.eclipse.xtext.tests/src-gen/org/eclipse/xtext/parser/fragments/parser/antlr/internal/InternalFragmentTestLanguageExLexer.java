@@ -1,4 +1,4 @@
-package org.eclipse.xtext.parser.fragments.parser.antlr.lexer;
+package org.eclipse.xtext.parser.fragments.parser.antlr.internal;
 
 // Hack: Use our own Lexer superclass by means of import. 
 // Currently there is no other way to specify the superclass for the lexer.
@@ -12,29 +12,29 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class InternalFragmentTestLanguageExLexer extends Lexer {
-    public static final int NumberSignDigitThree=8;
-    public static final int NumberSignDigitNine=11;
-    public static final int NumberSignDigitOneDigitOne=5;
-    public static final int RULE_STRING=21;
-    public static final int NumberSignDigitEight=10;
-    public static final int RULE_SL_COMMENT=23;
-    public static final int HyphenMinus=16;
-    public static final int LeftParenthesis=14;
-    public static final int NumberSignDigitFour=9;
-    public static final int Colon=18;
+    public static final int RULE_STRING=6;
+    public static final int RULE_SL_COMMENT=8;
+    public static final int T__19=19;
+    public static final int T__15=15;
+    public static final int T__16=16;
+    public static final int T__17=17;
+    public static final int T__18=18;
+    public static final int T__11=11;
+    public static final int T__12=12;
+    public static final int T__13=13;
+    public static final int T__14=14;
     public static final int EOF=-1;
-    public static final int NumberSignDigitOneDigitZero=4;
-    public static final int FullStop=17;
-    public static final int RULE_ID=19;
-    public static final int RULE_WS=24;
-    public static final int NumberSignDigitTwo=7;
-    public static final int RightParenthesis=15;
-    public static final int RULE_ANY_OTHER=25;
-    public static final int RULE_INT=20;
-    public static final int LessThanSignHyphenMinus=13;
-    public static final int RULE_ML_COMMENT=22;
-    public static final int HyphenMinusGreaterThanSign=12;
-    public static final int NumberSignDigitOne=6;
+    public static final int RULE_ID=4;
+    public static final int RULE_WS=9;
+    public static final int RULE_ANY_OTHER=10;
+    public static final int RULE_INT=5;
+    public static final int T__22=22;
+    public static final int RULE_ML_COMMENT=7;
+    public static final int T__23=23;
+    public static final int T__24=24;
+    public static final int T__25=25;
+    public static final int T__20=20;
+    public static final int T__21=21;
 
     // delegates
     // delegators
@@ -47,57 +47,15 @@ public class InternalFragmentTestLanguageExLexer extends Lexer {
         super(input,state);
 
     }
-    public String getGrammarFileName() { return "InternalFragmentTestLanguageExLexer.g"; }
+    public String getGrammarFileName() { return "InternalFragmentTestLanguageEx.g"; }
 
-    // $ANTLR start "NumberSignDigitOneDigitZero"
-    public final void mNumberSignDigitOneDigitZero() throws RecognitionException {
+    // $ANTLR start "T__11"
+    public final void mT__11() throws RecognitionException {
         try {
-            int _type = NumberSignDigitOneDigitZero;
+            int _type = T__11;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalFragmentTestLanguageExLexer.g:19:29: ( '#10' )
-            // InternalFragmentTestLanguageExLexer.g:19:31: '#10'
-            {
-            match("#10"); 
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        }
-    }
-    // $ANTLR end "NumberSignDigitOneDigitZero"
-
-    // $ANTLR start "NumberSignDigitOneDigitOne"
-    public final void mNumberSignDigitOneDigitOne() throws RecognitionException {
-        try {
-            int _type = NumberSignDigitOneDigitOne;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalFragmentTestLanguageExLexer.g:21:28: ( '#11' )
-            // InternalFragmentTestLanguageExLexer.g:21:30: '#11'
-            {
-            match("#11"); 
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        }
-    }
-    // $ANTLR end "NumberSignDigitOneDigitOne"
-
-    // $ANTLR start "NumberSignDigitOne"
-    public final void mNumberSignDigitOne() throws RecognitionException {
-        try {
-            int _type = NumberSignDigitOne;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalFragmentTestLanguageExLexer.g:23:20: ( '#1' )
-            // InternalFragmentTestLanguageExLexer.g:23:22: '#1'
+            // InternalFragmentTestLanguageEx.g:11:7: ( '#1' )
+            // InternalFragmentTestLanguageEx.g:11:9: '#1'
             {
             match("#1"); 
 
@@ -110,15 +68,15 @@ public class InternalFragmentTestLanguageExLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "NumberSignDigitOne"
+    // $ANTLR end "T__11"
 
-    // $ANTLR start "NumberSignDigitTwo"
-    public final void mNumberSignDigitTwo() throws RecognitionException {
+    // $ANTLR start "T__12"
+    public final void mT__12() throws RecognitionException {
         try {
-            int _type = NumberSignDigitTwo;
+            int _type = T__12;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalFragmentTestLanguageExLexer.g:25:20: ( '#2' )
-            // InternalFragmentTestLanguageExLexer.g:25:22: '#2'
+            // InternalFragmentTestLanguageEx.g:12:7: ( '#2' )
+            // InternalFragmentTestLanguageEx.g:12:9: '#2'
             {
             match("#2"); 
 
@@ -131,99 +89,15 @@ public class InternalFragmentTestLanguageExLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "NumberSignDigitTwo"
+    // $ANTLR end "T__12"
 
-    // $ANTLR start "NumberSignDigitThree"
-    public final void mNumberSignDigitThree() throws RecognitionException {
+    // $ANTLR start "T__13"
+    public final void mT__13() throws RecognitionException {
         try {
-            int _type = NumberSignDigitThree;
+            int _type = T__13;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalFragmentTestLanguageExLexer.g:27:22: ( '#3' )
-            // InternalFragmentTestLanguageExLexer.g:27:24: '#3'
-            {
-            match("#3"); 
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        }
-    }
-    // $ANTLR end "NumberSignDigitThree"
-
-    // $ANTLR start "NumberSignDigitFour"
-    public final void mNumberSignDigitFour() throws RecognitionException {
-        try {
-            int _type = NumberSignDigitFour;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalFragmentTestLanguageExLexer.g:29:21: ( '#4' )
-            // InternalFragmentTestLanguageExLexer.g:29:23: '#4'
-            {
-            match("#4"); 
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        }
-    }
-    // $ANTLR end "NumberSignDigitFour"
-
-    // $ANTLR start "NumberSignDigitEight"
-    public final void mNumberSignDigitEight() throws RecognitionException {
-        try {
-            int _type = NumberSignDigitEight;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalFragmentTestLanguageExLexer.g:31:22: ( '#8' )
-            // InternalFragmentTestLanguageExLexer.g:31:24: '#8'
-            {
-            match("#8"); 
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        }
-    }
-    // $ANTLR end "NumberSignDigitEight"
-
-    // $ANTLR start "NumberSignDigitNine"
-    public final void mNumberSignDigitNine() throws RecognitionException {
-        try {
-            int _type = NumberSignDigitNine;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalFragmentTestLanguageExLexer.g:33:21: ( '#9' )
-            // InternalFragmentTestLanguageExLexer.g:33:23: '#9'
-            {
-            match("#9"); 
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        }
-    }
-    // $ANTLR end "NumberSignDigitNine"
-
-    // $ANTLR start "HyphenMinusGreaterThanSign"
-    public final void mHyphenMinusGreaterThanSign() throws RecognitionException {
-        try {
-            int _type = HyphenMinusGreaterThanSign;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalFragmentTestLanguageExLexer.g:35:28: ( '->' )
-            // InternalFragmentTestLanguageExLexer.g:35:30: '->'
+            // InternalFragmentTestLanguageEx.g:13:7: ( '->' )
+            // InternalFragmentTestLanguageEx.g:13:9: '->'
             {
             match("->"); 
 
@@ -236,15 +110,181 @@ public class InternalFragmentTestLanguageExLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "HyphenMinusGreaterThanSign"
+    // $ANTLR end "T__13"
 
-    // $ANTLR start "LessThanSignHyphenMinus"
-    public final void mLessThanSignHyphenMinus() throws RecognitionException {
+    // $ANTLR start "T__14"
+    public final void mT__14() throws RecognitionException {
         try {
-            int _type = LessThanSignHyphenMinus;
+            int _type = T__14;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalFragmentTestLanguageExLexer.g:37:25: ( '<-' )
-            // InternalFragmentTestLanguageExLexer.g:37:27: '<-'
+            // InternalFragmentTestLanguageEx.g:14:7: ( '#3' )
+            // InternalFragmentTestLanguageEx.g:14:9: '#3'
+            {
+            match("#3"); 
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "T__14"
+
+    // $ANTLR start "T__15"
+    public final void mT__15() throws RecognitionException {
+        try {
+            int _type = T__15;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // InternalFragmentTestLanguageEx.g:15:7: ( '#4' )
+            // InternalFragmentTestLanguageEx.g:15:9: '#4'
+            {
+            match("#4"); 
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "T__15"
+
+    // $ANTLR start "T__16"
+    public final void mT__16() throws RecognitionException {
+        try {
+            int _type = T__16;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // InternalFragmentTestLanguageEx.g:16:7: ( '#8' )
+            // InternalFragmentTestLanguageEx.g:16:9: '#8'
+            {
+            match("#8"); 
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "T__16"
+
+    // $ANTLR start "T__17"
+    public final void mT__17() throws RecognitionException {
+        try {
+            int _type = T__17;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // InternalFragmentTestLanguageEx.g:17:7: ( '#9' )
+            // InternalFragmentTestLanguageEx.g:17:9: '#9'
+            {
+            match("#9"); 
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "T__17"
+
+    // $ANTLR start "T__18"
+    public final void mT__18() throws RecognitionException {
+        try {
+            int _type = T__18;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // InternalFragmentTestLanguageEx.g:18:7: ( '#10' )
+            // InternalFragmentTestLanguageEx.g:18:9: '#10'
+            {
+            match("#10"); 
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "T__18"
+
+    // $ANTLR start "T__19"
+    public final void mT__19() throws RecognitionException {
+        try {
+            int _type = T__19;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // InternalFragmentTestLanguageEx.g:19:7: ( '#11' )
+            // InternalFragmentTestLanguageEx.g:19:9: '#11'
+            {
+            match("#11"); 
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "T__19"
+
+    // $ANTLR start "T__20"
+    public final void mT__20() throws RecognitionException {
+        try {
+            int _type = T__20;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // InternalFragmentTestLanguageEx.g:20:7: ( ':' )
+            // InternalFragmentTestLanguageEx.g:20:9: ':'
+            {
+            match(':'); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "T__20"
+
+    // $ANTLR start "T__21"
+    public final void mT__21() throws RecognitionException {
+        try {
+            int _type = T__21;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // InternalFragmentTestLanguageEx.g:21:7: ( '-' )
+            // InternalFragmentTestLanguageEx.g:21:9: '-'
+            {
+            match('-'); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "T__21"
+
+    // $ANTLR start "T__22"
+    public final void mT__22() throws RecognitionException {
+        try {
+            int _type = T__22;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // InternalFragmentTestLanguageEx.g:22:7: ( '<-' )
+            // InternalFragmentTestLanguageEx.g:22:9: '<-'
             {
             match("<-"); 
 
@@ -257,75 +297,15 @@ public class InternalFragmentTestLanguageExLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "LessThanSignHyphenMinus"
+    // $ANTLR end "T__22"
 
-    // $ANTLR start "LeftParenthesis"
-    public final void mLeftParenthesis() throws RecognitionException {
+    // $ANTLR start "T__23"
+    public final void mT__23() throws RecognitionException {
         try {
-            int _type = LeftParenthesis;
+            int _type = T__23;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalFragmentTestLanguageExLexer.g:39:17: ( '(' )
-            // InternalFragmentTestLanguageExLexer.g:39:19: '('
-            {
-            match('('); 
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        }
-    }
-    // $ANTLR end "LeftParenthesis"
-
-    // $ANTLR start "RightParenthesis"
-    public final void mRightParenthesis() throws RecognitionException {
-        try {
-            int _type = RightParenthesis;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalFragmentTestLanguageExLexer.g:41:18: ( ')' )
-            // InternalFragmentTestLanguageExLexer.g:41:20: ')'
-            {
-            match(')'); 
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        }
-    }
-    // $ANTLR end "RightParenthesis"
-
-    // $ANTLR start "HyphenMinus"
-    public final void mHyphenMinus() throws RecognitionException {
-        try {
-            int _type = HyphenMinus;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalFragmentTestLanguageExLexer.g:43:13: ( '-' )
-            // InternalFragmentTestLanguageExLexer.g:43:15: '-'
-            {
-            match('-'); 
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        }
-    }
-    // $ANTLR end "HyphenMinus"
-
-    // $ANTLR start "FullStop"
-    public final void mFullStop() throws RecognitionException {
-        try {
-            int _type = FullStop;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalFragmentTestLanguageExLexer.g:45:10: ( '.' )
-            // InternalFragmentTestLanguageExLexer.g:45:12: '.'
+            // InternalFragmentTestLanguageEx.g:23:7: ( '.' )
+            // InternalFragmentTestLanguageEx.g:23:9: '.'
             {
             match('.'); 
 
@@ -337,17 +317,17 @@ public class InternalFragmentTestLanguageExLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "FullStop"
+    // $ANTLR end "T__23"
 
-    // $ANTLR start "Colon"
-    public final void mColon() throws RecognitionException {
+    // $ANTLR start "T__24"
+    public final void mT__24() throws RecognitionException {
         try {
-            int _type = Colon;
+            int _type = T__24;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalFragmentTestLanguageExLexer.g:47:7: ( ':' )
-            // InternalFragmentTestLanguageExLexer.g:47:9: ':'
+            // InternalFragmentTestLanguageEx.g:24:7: ( '(' )
+            // InternalFragmentTestLanguageEx.g:24:9: '('
             {
-            match(':'); 
+            match('('); 
 
             }
 
@@ -357,17 +337,37 @@ public class InternalFragmentTestLanguageExLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "Colon"
+    // $ANTLR end "T__24"
+
+    // $ANTLR start "T__25"
+    public final void mT__25() throws RecognitionException {
+        try {
+            int _type = T__25;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // InternalFragmentTestLanguageEx.g:25:7: ( ')' )
+            // InternalFragmentTestLanguageEx.g:25:9: ')'
+            {
+            match(')'); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "T__25"
 
     // $ANTLR start "RULE_ID"
     public final void mRULE_ID() throws RecognitionException {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalFragmentTestLanguageExLexer.g:51:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // InternalFragmentTestLanguageExLexer.g:51:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalFragmentTestLanguageEx.g:1130:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // InternalFragmentTestLanguageEx.g:1130:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // InternalFragmentTestLanguageExLexer.g:51:11: ( '^' )?
+            // InternalFragmentTestLanguageEx.g:1130:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -376,7 +376,7 @@ public class InternalFragmentTestLanguageExLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // InternalFragmentTestLanguageExLexer.g:51:11: '^'
+                    // InternalFragmentTestLanguageEx.g:1130:11: '^'
                     {
                     match('^'); 
 
@@ -394,7 +394,7 @@ public class InternalFragmentTestLanguageExLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // InternalFragmentTestLanguageExLexer.g:51:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalFragmentTestLanguageEx.g:1130:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -407,7 +407,7 @@ public class InternalFragmentTestLanguageExLexer extends Lexer {
 
                 switch (alt2) {
             	case 1 :
-            	    // InternalFragmentTestLanguageExLexer.g:
+            	    // InternalFragmentTestLanguageEx.g:
             	    {
             	    if ( (input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
             	        input.consume();
@@ -443,10 +443,10 @@ public class InternalFragmentTestLanguageExLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalFragmentTestLanguageExLexer.g:53:10: ( ( '0' .. '9' )+ )
-            // InternalFragmentTestLanguageExLexer.g:53:12: ( '0' .. '9' )+
+            // InternalFragmentTestLanguageEx.g:1132:10: ( ( '0' .. '9' )+ )
+            // InternalFragmentTestLanguageEx.g:1132:12: ( '0' .. '9' )+
             {
-            // InternalFragmentTestLanguageExLexer.g:53:12: ( '0' .. '9' )+
+            // InternalFragmentTestLanguageEx.g:1132:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -460,7 +460,7 @@ public class InternalFragmentTestLanguageExLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // InternalFragmentTestLanguageExLexer.g:53:13: '0' .. '9'
+            	    // InternalFragmentTestLanguageEx.g:1132:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -492,10 +492,10 @@ public class InternalFragmentTestLanguageExLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalFragmentTestLanguageExLexer.g:55:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // InternalFragmentTestLanguageExLexer.g:55:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalFragmentTestLanguageEx.g:1134:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // InternalFragmentTestLanguageEx.g:1134:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // InternalFragmentTestLanguageExLexer.g:55:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalFragmentTestLanguageEx.g:1134:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -513,10 +513,10 @@ public class InternalFragmentTestLanguageExLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // InternalFragmentTestLanguageExLexer.g:55:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // InternalFragmentTestLanguageEx.g:1134:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // InternalFragmentTestLanguageExLexer.g:55:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // InternalFragmentTestLanguageEx.g:1134:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -532,7 +532,7 @@ public class InternalFragmentTestLanguageExLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // InternalFragmentTestLanguageExLexer.g:55:21: '\\\\' .
+                    	    // InternalFragmentTestLanguageEx.g:1134:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -540,7 +540,7 @@ public class InternalFragmentTestLanguageExLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalFragmentTestLanguageExLexer.g:55:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // InternalFragmentTestLanguageEx.g:1134:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -565,10 +565,10 @@ public class InternalFragmentTestLanguageExLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalFragmentTestLanguageExLexer.g:55:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // InternalFragmentTestLanguageEx.g:1134:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // InternalFragmentTestLanguageExLexer.g:55:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // InternalFragmentTestLanguageEx.g:1134:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -584,7 +584,7 @@ public class InternalFragmentTestLanguageExLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // InternalFragmentTestLanguageExLexer.g:55:54: '\\\\' .
+                    	    // InternalFragmentTestLanguageEx.g:1134:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -592,7 +592,7 @@ public class InternalFragmentTestLanguageExLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalFragmentTestLanguageExLexer.g:55:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // InternalFragmentTestLanguageEx.g:1134:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -635,12 +635,12 @@ public class InternalFragmentTestLanguageExLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalFragmentTestLanguageExLexer.g:57:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // InternalFragmentTestLanguageExLexer.g:57:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // InternalFragmentTestLanguageEx.g:1136:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // InternalFragmentTestLanguageEx.g:1136:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // InternalFragmentTestLanguageExLexer.g:57:24: ( options {greedy=false; } : . )*
+            // InternalFragmentTestLanguageEx.g:1136:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -665,7 +665,7 @@ public class InternalFragmentTestLanguageExLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // InternalFragmentTestLanguageExLexer.g:57:52: .
+            	    // InternalFragmentTestLanguageEx.g:1136:52: .
             	    {
             	    matchAny(); 
 
@@ -695,12 +695,12 @@ public class InternalFragmentTestLanguageExLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalFragmentTestLanguageExLexer.g:59:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // InternalFragmentTestLanguageExLexer.g:59:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // InternalFragmentTestLanguageEx.g:1138:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // InternalFragmentTestLanguageEx.g:1138:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // InternalFragmentTestLanguageExLexer.g:59:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalFragmentTestLanguageEx.g:1138:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -713,7 +713,7 @@ public class InternalFragmentTestLanguageExLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // InternalFragmentTestLanguageExLexer.g:59:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalFragmentTestLanguageEx.g:1138:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -733,7 +733,7 @@ public class InternalFragmentTestLanguageExLexer extends Lexer {
                 }
             } while (true);
 
-            // InternalFragmentTestLanguageExLexer.g:59:40: ( ( '\\r' )? '\\n' )?
+            // InternalFragmentTestLanguageEx.g:1138:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -742,9 +742,9 @@ public class InternalFragmentTestLanguageExLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // InternalFragmentTestLanguageExLexer.g:59:41: ( '\\r' )? '\\n'
+                    // InternalFragmentTestLanguageEx.g:1138:41: ( '\\r' )? '\\n'
                     {
-                    // InternalFragmentTestLanguageExLexer.g:59:41: ( '\\r' )?
+                    // InternalFragmentTestLanguageEx.g:1138:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -753,7 +753,7 @@ public class InternalFragmentTestLanguageExLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // InternalFragmentTestLanguageExLexer.g:59:41: '\\r'
+                            // InternalFragmentTestLanguageEx.g:1138:41: '\\r'
                             {
                             match('\r'); 
 
@@ -785,10 +785,10 @@ public class InternalFragmentTestLanguageExLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalFragmentTestLanguageExLexer.g:61:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // InternalFragmentTestLanguageExLexer.g:61:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalFragmentTestLanguageEx.g:1140:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalFragmentTestLanguageEx.g:1140:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // InternalFragmentTestLanguageExLexer.g:61:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalFragmentTestLanguageEx.g:1140:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -802,7 +802,7 @@ public class InternalFragmentTestLanguageExLexer extends Lexer {
 
                 switch (alt11) {
             	case 1 :
-            	    // InternalFragmentTestLanguageExLexer.g:
+            	    // InternalFragmentTestLanguageEx.g:
             	    {
             	    if ( (input.LA(1)>='\t' && input.LA(1)<='\n')||input.LA(1)=='\r'||input.LA(1)==' ' ) {
             	        input.consume();
@@ -842,8 +842,8 @@ public class InternalFragmentTestLanguageExLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalFragmentTestLanguageExLexer.g:63:16: ( . )
-            // InternalFragmentTestLanguageExLexer.g:63:18: .
+            // InternalFragmentTestLanguageEx.g:1142:16: ( . )
+            // InternalFragmentTestLanguageEx.g:1142:18: .
             {
             matchAny(); 
 
@@ -858,159 +858,159 @@ public class InternalFragmentTestLanguageExLexer extends Lexer {
     // $ANTLR end "RULE_ANY_OTHER"
 
     public void mTokens() throws RecognitionException {
-        // InternalFragmentTestLanguageExLexer.g:1:8: ( NumberSignDigitOneDigitZero | NumberSignDigitOneDigitOne | NumberSignDigitOne | NumberSignDigitTwo | NumberSignDigitThree | NumberSignDigitFour | NumberSignDigitEight | NumberSignDigitNine | HyphenMinusGreaterThanSign | LessThanSignHyphenMinus | LeftParenthesis | RightParenthesis | HyphenMinus | FullStop | Colon | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
+        // InternalFragmentTestLanguageEx.g:1:8: ( T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
         int alt12=22;
         alt12 = dfa12.predict(input);
         switch (alt12) {
             case 1 :
-                // InternalFragmentTestLanguageExLexer.g:1:10: NumberSignDigitOneDigitZero
+                // InternalFragmentTestLanguageEx.g:1:10: T__11
                 {
-                mNumberSignDigitOneDigitZero(); 
+                mT__11(); 
 
                 }
                 break;
             case 2 :
-                // InternalFragmentTestLanguageExLexer.g:1:38: NumberSignDigitOneDigitOne
+                // InternalFragmentTestLanguageEx.g:1:16: T__12
                 {
-                mNumberSignDigitOneDigitOne(); 
+                mT__12(); 
 
                 }
                 break;
             case 3 :
-                // InternalFragmentTestLanguageExLexer.g:1:65: NumberSignDigitOne
+                // InternalFragmentTestLanguageEx.g:1:22: T__13
                 {
-                mNumberSignDigitOne(); 
+                mT__13(); 
 
                 }
                 break;
             case 4 :
-                // InternalFragmentTestLanguageExLexer.g:1:84: NumberSignDigitTwo
+                // InternalFragmentTestLanguageEx.g:1:28: T__14
                 {
-                mNumberSignDigitTwo(); 
+                mT__14(); 
 
                 }
                 break;
             case 5 :
-                // InternalFragmentTestLanguageExLexer.g:1:103: NumberSignDigitThree
+                // InternalFragmentTestLanguageEx.g:1:34: T__15
                 {
-                mNumberSignDigitThree(); 
+                mT__15(); 
 
                 }
                 break;
             case 6 :
-                // InternalFragmentTestLanguageExLexer.g:1:124: NumberSignDigitFour
+                // InternalFragmentTestLanguageEx.g:1:40: T__16
                 {
-                mNumberSignDigitFour(); 
+                mT__16(); 
 
                 }
                 break;
             case 7 :
-                // InternalFragmentTestLanguageExLexer.g:1:144: NumberSignDigitEight
+                // InternalFragmentTestLanguageEx.g:1:46: T__17
                 {
-                mNumberSignDigitEight(); 
+                mT__17(); 
 
                 }
                 break;
             case 8 :
-                // InternalFragmentTestLanguageExLexer.g:1:165: NumberSignDigitNine
+                // InternalFragmentTestLanguageEx.g:1:52: T__18
                 {
-                mNumberSignDigitNine(); 
+                mT__18(); 
 
                 }
                 break;
             case 9 :
-                // InternalFragmentTestLanguageExLexer.g:1:185: HyphenMinusGreaterThanSign
+                // InternalFragmentTestLanguageEx.g:1:58: T__19
                 {
-                mHyphenMinusGreaterThanSign(); 
+                mT__19(); 
 
                 }
                 break;
             case 10 :
-                // InternalFragmentTestLanguageExLexer.g:1:212: LessThanSignHyphenMinus
+                // InternalFragmentTestLanguageEx.g:1:64: T__20
                 {
-                mLessThanSignHyphenMinus(); 
+                mT__20(); 
 
                 }
                 break;
             case 11 :
-                // InternalFragmentTestLanguageExLexer.g:1:236: LeftParenthesis
+                // InternalFragmentTestLanguageEx.g:1:70: T__21
                 {
-                mLeftParenthesis(); 
+                mT__21(); 
 
                 }
                 break;
             case 12 :
-                // InternalFragmentTestLanguageExLexer.g:1:252: RightParenthesis
+                // InternalFragmentTestLanguageEx.g:1:76: T__22
                 {
-                mRightParenthesis(); 
+                mT__22(); 
 
                 }
                 break;
             case 13 :
-                // InternalFragmentTestLanguageExLexer.g:1:269: HyphenMinus
+                // InternalFragmentTestLanguageEx.g:1:82: T__23
                 {
-                mHyphenMinus(); 
+                mT__23(); 
 
                 }
                 break;
             case 14 :
-                // InternalFragmentTestLanguageExLexer.g:1:281: FullStop
+                // InternalFragmentTestLanguageEx.g:1:88: T__24
                 {
-                mFullStop(); 
+                mT__24(); 
 
                 }
                 break;
             case 15 :
-                // InternalFragmentTestLanguageExLexer.g:1:290: Colon
+                // InternalFragmentTestLanguageEx.g:1:94: T__25
                 {
-                mColon(); 
+                mT__25(); 
 
                 }
                 break;
             case 16 :
-                // InternalFragmentTestLanguageExLexer.g:1:296: RULE_ID
+                // InternalFragmentTestLanguageEx.g:1:100: RULE_ID
                 {
                 mRULE_ID(); 
 
                 }
                 break;
             case 17 :
-                // InternalFragmentTestLanguageExLexer.g:1:304: RULE_INT
+                // InternalFragmentTestLanguageEx.g:1:108: RULE_INT
                 {
                 mRULE_INT(); 
 
                 }
                 break;
             case 18 :
-                // InternalFragmentTestLanguageExLexer.g:1:313: RULE_STRING
+                // InternalFragmentTestLanguageEx.g:1:117: RULE_STRING
                 {
                 mRULE_STRING(); 
 
                 }
                 break;
             case 19 :
-                // InternalFragmentTestLanguageExLexer.g:1:325: RULE_ML_COMMENT
+                // InternalFragmentTestLanguageEx.g:1:129: RULE_ML_COMMENT
                 {
                 mRULE_ML_COMMENT(); 
 
                 }
                 break;
             case 20 :
-                // InternalFragmentTestLanguageExLexer.g:1:341: RULE_SL_COMMENT
+                // InternalFragmentTestLanguageEx.g:1:145: RULE_SL_COMMENT
                 {
                 mRULE_SL_COMMENT(); 
 
                 }
                 break;
             case 21 :
-                // InternalFragmentTestLanguageExLexer.g:1:357: RULE_WS
+                // InternalFragmentTestLanguageEx.g:1:161: RULE_WS
                 {
                 mRULE_WS(); 
 
                 }
                 break;
             case 22 :
-                // InternalFragmentTestLanguageExLexer.g:1:365: RULE_ANY_OTHER
+                // InternalFragmentTestLanguageEx.g:1:169: RULE_ANY_OTHER
                 {
                 mRULE_ANY_OTHER(); 
 
@@ -1024,23 +1024,23 @@ public class InternalFragmentTestLanguageExLexer extends Lexer {
 
     protected DFA12 dfa12 = new DFA12(this);
     static final String DFA12_eotS =
-        "\1\uffff\1\17\1\27\1\17\4\uffff\1\17\2\uffff\3\17\2\uffff\1\45\25\uffff";
+        "\1\uffff\1\17\1\27\1\uffff\1\17\3\uffff\1\17\2\uffff\3\17\2\uffff\1\45\25\uffff";
     static final String DFA12_eofS =
         "\46\uffff";
     static final String DFA12_minS =
-        "\1\0\1\61\1\76\1\55\4\uffff\1\101\2\uffff\2\0\1\52\2\uffff\1\60\25\uffff";
+        "\1\0\1\61\1\76\1\uffff\1\55\3\uffff\1\101\2\uffff\2\0\1\52\2\uffff\1\60\25\uffff";
     static final String DFA12_maxS =
-        "\1\uffff\1\71\1\76\1\55\4\uffff\1\172\2\uffff\2\uffff\1\57\2\uffff\1\61\25\uffff";
+        "\1\uffff\1\71\1\76\1\uffff\1\55\3\uffff\1\172\2\uffff\2\uffff\1\57\2\uffff\1\61\25\uffff";
     static final String DFA12_acceptS =
-        "\4\uffff\1\13\1\14\1\16\1\17\1\uffff\1\20\1\21\3\uffff\1\25\1\26\1\uffff\1\4\1\5\1\6\1\7\1\10\1\11\1\15\1\12\1\13\1\14\1\16\1\17\1\20\1\21\1\22\1\23\1\24\1\25\1\1\1\2\1\3";
+        "\3\uffff\1\12\1\uffff\1\15\1\16\1\17\1\uffff\1\20\1\21\3\uffff\1\25\1\26\1\uffff\1\2\1\4\1\5\1\6\1\7\1\3\1\13\1\12\1\14\1\15\1\16\1\17\1\20\1\21\1\22\1\23\1\24\1\25\1\10\1\11\1\1";
     static final String DFA12_specialS =
-        "\1\1\12\uffff\1\0\1\2\31\uffff}>";
+        "\1\0\12\uffff\1\1\1\2\31\uffff}>";
     static final String[] DFA12_transitionS = {
-            "\11\17\2\16\2\17\1\16\22\17\1\16\1\17\1\13\1\1\3\17\1\14\1\4\1\5\3\17\1\2\1\6\1\15\12\12\1\7\1\17\1\3\4\17\32\11\3\17\1\10\1\11\1\17\32\11\uff85\17",
+            "\11\17\2\16\2\17\1\16\22\17\1\16\1\17\1\13\1\1\3\17\1\14\1\6\1\7\3\17\1\2\1\5\1\15\12\12\1\3\1\17\1\4\4\17\32\11\3\17\1\10\1\11\1\17\32\11\uff85\17",
             "\1\20\1\21\1\22\1\23\3\uffff\1\24\1\25",
             "\1\26",
-            "\1\30",
             "",
+            "\1\31",
             "",
             "",
             "",
@@ -1106,23 +1106,13 @@ public class InternalFragmentTestLanguageExLexer extends Lexer {
             this.transition = DFA12_transition;
         }
         public String getDescription() {
-            return "1:1: Tokens : ( NumberSignDigitOneDigitZero | NumberSignDigitOneDigitOne | NumberSignDigitOne | NumberSignDigitTwo | NumberSignDigitThree | NumberSignDigitFour | NumberSignDigitEight | NumberSignDigitNine | HyphenMinusGreaterThanSign | LessThanSignHyphenMinus | LeftParenthesis | RightParenthesis | HyphenMinus | FullStop | Colon | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );";
+            return "1:1: Tokens : ( T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             IntStream input = _input;
         	int _s = s;
             switch ( s ) {
                     case 0 : 
-                        int LA12_11 = input.LA(1);
-
-                        s = -1;
-                        if ( ((LA12_11>='\u0000' && LA12_11<='\uFFFF')) ) {s = 31;}
-
-                        else s = 15;
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 1 : 
                         int LA12_0 = input.LA(1);
 
                         s = -1;
@@ -1130,15 +1120,15 @@ public class InternalFragmentTestLanguageExLexer extends Lexer {
 
                         else if ( (LA12_0=='-') ) {s = 2;}
 
-                        else if ( (LA12_0=='<') ) {s = 3;}
+                        else if ( (LA12_0==':') ) {s = 3;}
 
-                        else if ( (LA12_0=='(') ) {s = 4;}
+                        else if ( (LA12_0=='<') ) {s = 4;}
 
-                        else if ( (LA12_0==')') ) {s = 5;}
+                        else if ( (LA12_0=='.') ) {s = 5;}
 
-                        else if ( (LA12_0=='.') ) {s = 6;}
+                        else if ( (LA12_0=='(') ) {s = 6;}
 
-                        else if ( (LA12_0==':') ) {s = 7;}
+                        else if ( (LA12_0==')') ) {s = 7;}
 
                         else if ( (LA12_0=='^') ) {s = 8;}
 
@@ -1155,6 +1145,16 @@ public class InternalFragmentTestLanguageExLexer extends Lexer {
                         else if ( ((LA12_0>='\t' && LA12_0<='\n')||LA12_0=='\r'||LA12_0==' ') ) {s = 14;}
 
                         else if ( ((LA12_0>='\u0000' && LA12_0<='\b')||(LA12_0>='\u000B' && LA12_0<='\f')||(LA12_0>='\u000E' && LA12_0<='\u001F')||LA12_0=='!'||(LA12_0>='$' && LA12_0<='&')||(LA12_0>='*' && LA12_0<=',')||LA12_0==';'||(LA12_0>='=' && LA12_0<='@')||(LA12_0>='[' && LA12_0<=']')||LA12_0=='`'||(LA12_0>='{' && LA12_0<='\uFFFF')) ) {s = 15;}
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 1 : 
+                        int LA12_11 = input.LA(1);
+
+                        s = -1;
+                        if ( ((LA12_11>='\u0000' && LA12_11<='\uFFFF')) ) {s = 31;}
+
+                        else s = 15;
 
                         if ( s>=0 ) return s;
                         break;
