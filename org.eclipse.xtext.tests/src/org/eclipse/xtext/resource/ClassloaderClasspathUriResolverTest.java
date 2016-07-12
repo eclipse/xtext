@@ -17,12 +17,10 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.eclipse.emf.ecore.xml.namespace.XMLNamespacePackage;
 import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
 
 public class ClassloaderClasspathUriResolverTest extends AbstractXtextTests {
 	private ClassloaderClasspathUriResolver _resolver;

@@ -1,4 +1,4 @@
-package org.eclipse.xtext.resource.parser.antlr.internal; 
+package org.eclipse.xtext.resource.parser.antlr.internal;
 
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
@@ -64,18 +64,18 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
 
 
      	private LocationProviderTestLanguageGrammarAccess grammarAccess;
-     	
+
         public InternalLocationProviderTestLanguageParser(TokenStream input, LocationProviderTestLanguageGrammarAccess grammarAccess) {
             this(input);
             this.grammarAccess = grammarAccess;
             registerRules(grammarAccess.getGrammar());
         }
-        
+
         @Override
         protected String getFirstRuleName() {
-        	return "Model";	
+        	return "Model";
        	}
-       	
+
        	@Override
        	protected LocationProviderTestLanguageGrammarAccess getGrammarAccess() {
        		return grammarAccess;
@@ -83,8 +83,9 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
 
 
 
+
     // $ANTLR start "entryRuleModel"
-    // InternalLocationProviderTestLanguage.g:67:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
+    // InternalLocationProviderTestLanguage.g:64:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
     public final EObject entryRuleModel() throws RecognitionException {
         EObject current = null;
 
@@ -92,8 +93,8 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
 
 
         try {
-            // InternalLocationProviderTestLanguage.g:68:2: (iv_ruleModel= ruleModel EOF )
-            // InternalLocationProviderTestLanguage.g:69:2: iv_ruleModel= ruleModel EOF
+            // InternalLocationProviderTestLanguage.g:64:46: (iv_ruleModel= ruleModel EOF )
+            // InternalLocationProviderTestLanguage.g:65:2: iv_ruleModel= ruleModel EOF
             {
              newCompositeNode(grammarAccess.getModelRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -107,11 +108,11 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -120,7 +121,7 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "ruleModel"
-    // InternalLocationProviderTestLanguage.g:76:1: ruleModel returns [EObject current=null] : ( ( (lv_elements_0_0= ruleElement ) )* ( (lv_components_1_0= ruleComponent ) )* ) ;
+    // InternalLocationProviderTestLanguage.g:71:1: ruleModel returns [EObject current=null] : ( ( (lv_elements_0_0= ruleElement ) )* ( (lv_components_1_0= ruleComponent ) )* ) ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
@@ -129,16 +130,17 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
         EObject lv_components_1_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalLocationProviderTestLanguage.g:79:28: ( ( ( (lv_elements_0_0= ruleElement ) )* ( (lv_components_1_0= ruleComponent ) )* ) )
-            // InternalLocationProviderTestLanguage.g:80:1: ( ( (lv_elements_0_0= ruleElement ) )* ( (lv_components_1_0= ruleComponent ) )* )
+            // InternalLocationProviderTestLanguage.g:77:2: ( ( ( (lv_elements_0_0= ruleElement ) )* ( (lv_components_1_0= ruleComponent ) )* ) )
+            // InternalLocationProviderTestLanguage.g:78:2: ( ( (lv_elements_0_0= ruleElement ) )* ( (lv_components_1_0= ruleComponent ) )* )
             {
-            // InternalLocationProviderTestLanguage.g:80:1: ( ( (lv_elements_0_0= ruleElement ) )* ( (lv_components_1_0= ruleComponent ) )* )
-            // InternalLocationProviderTestLanguage.g:80:2: ( (lv_elements_0_0= ruleElement ) )* ( (lv_components_1_0= ruleComponent ) )*
+            // InternalLocationProviderTestLanguage.g:78:2: ( ( (lv_elements_0_0= ruleElement ) )* ( (lv_components_1_0= ruleComponent ) )* )
+            // InternalLocationProviderTestLanguage.g:79:3: ( (lv_elements_0_0= ruleElement ) )* ( (lv_components_1_0= ruleComponent ) )*
             {
-            // InternalLocationProviderTestLanguage.g:80:2: ( (lv_elements_0_0= ruleElement ) )*
+            // InternalLocationProviderTestLanguage.g:79:3: ( (lv_elements_0_0= ruleElement ) )*
             loop1:
             do {
                 int alt1=2;
@@ -151,30 +153,30 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
 
                 switch (alt1) {
             	case 1 :
-            	    // InternalLocationProviderTestLanguage.g:81:1: (lv_elements_0_0= ruleElement )
+            	    // InternalLocationProviderTestLanguage.g:80:4: (lv_elements_0_0= ruleElement )
             	    {
-            	    // InternalLocationProviderTestLanguage.g:81:1: (lv_elements_0_0= ruleElement )
-            	    // InternalLocationProviderTestLanguage.g:82:3: lv_elements_0_0= ruleElement
+            	    // InternalLocationProviderTestLanguage.g:80:4: (lv_elements_0_0= ruleElement )
+            	    // InternalLocationProviderTestLanguage.g:81:5: lv_elements_0_0= ruleElement
             	    {
-            	     
-            	    	        newCompositeNode(grammarAccess.getModelAccess().getElementsElementParserRuleCall_0_0()); 
-            	    	    
+
+            	    					newCompositeNode(grammarAccess.getModelAccess().getElementsElementParserRuleCall_0_0());
+            	    				
             	    pushFollow(FollowSets000.FOLLOW_3);
             	    lv_elements_0_0=ruleElement();
 
             	    state._fsp--;
 
 
-            	    	        if (current==null) {
-            	    	            current = createModelElementForParent(grammarAccess.getModelRule());
-            	    	        }
-            	           		add(
-            	           			current, 
-            	           			"elements",
-            	            		lv_elements_0_0, 
-            	            		"org.eclipse.xtext.resource.LocationProviderTestLanguage.Element");
-            	    	        afterParserOrEnumRuleCall();
-            	    	    
+            	    					if (current==null) {
+            	    						current = createModelElementForParent(grammarAccess.getModelRule());
+            	    					}
+            	    					add(
+            	    						current,
+            	    						"elements",
+            	    						lv_elements_0_0,
+            	    						"org.eclipse.xtext.resource.LocationProviderTestLanguage.Element");
+            	    					afterParserOrEnumRuleCall();
+            	    				
 
             	    }
 
@@ -200,30 +202,30 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
 
                 switch (alt2) {
             	case 1 :
-            	    // InternalLocationProviderTestLanguage.g:99:1: (lv_components_1_0= ruleComponent )
+            	    // InternalLocationProviderTestLanguage.g:99:4: (lv_components_1_0= ruleComponent )
             	    {
-            	    // InternalLocationProviderTestLanguage.g:99:1: (lv_components_1_0= ruleComponent )
-            	    // InternalLocationProviderTestLanguage.g:100:3: lv_components_1_0= ruleComponent
+            	    // InternalLocationProviderTestLanguage.g:99:4: (lv_components_1_0= ruleComponent )
+            	    // InternalLocationProviderTestLanguage.g:100:5: lv_components_1_0= ruleComponent
             	    {
-            	     
-            	    	        newCompositeNode(grammarAccess.getModelAccess().getComponentsComponentParserRuleCall_1_0()); 
-            	    	    
+
+            	    					newCompositeNode(grammarAccess.getModelAccess().getComponentsComponentParserRuleCall_1_0());
+            	    				
             	    pushFollow(FollowSets000.FOLLOW_4);
             	    lv_components_1_0=ruleComponent();
 
             	    state._fsp--;
 
 
-            	    	        if (current==null) {
-            	    	            current = createModelElementForParent(grammarAccess.getModelRule());
-            	    	        }
-            	           		add(
-            	           			current, 
-            	           			"components",
-            	            		lv_components_1_0, 
-            	            		"org.eclipse.xtext.resource.LocationProviderTestLanguage.Component");
-            	    	        afterParserOrEnumRuleCall();
-            	    	    
+            	    					if (current==null) {
+            	    						current = createModelElementForParent(grammarAccess.getModelRule());
+            	    					}
+            	    					add(
+            	    						current,
+            	    						"components",
+            	    						lv_components_1_0,
+            	    						"org.eclipse.xtext.resource.LocationProviderTestLanguage.Component");
+            	    					afterParserOrEnumRuleCall();
+            	    				
 
             	    }
 
@@ -242,13 +244,15 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -257,7 +261,7 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "entryRuleElement"
-    // InternalLocationProviderTestLanguage.g:124:1: entryRuleElement returns [EObject current=null] : iv_ruleElement= ruleElement EOF ;
+    // InternalLocationProviderTestLanguage.g:121:1: entryRuleElement returns [EObject current=null] : iv_ruleElement= ruleElement EOF ;
     public final EObject entryRuleElement() throws RecognitionException {
         EObject current = null;
 
@@ -265,8 +269,8 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
 
 
         try {
-            // InternalLocationProviderTestLanguage.g:125:2: (iv_ruleElement= ruleElement EOF )
-            // InternalLocationProviderTestLanguage.g:126:2: iv_ruleElement= ruleElement EOF
+            // InternalLocationProviderTestLanguage.g:121:48: (iv_ruleElement= ruleElement EOF )
+            // InternalLocationProviderTestLanguage.g:122:2: iv_ruleElement= ruleElement EOF
             {
              newCompositeNode(grammarAccess.getElementRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -280,11 +284,11 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -293,7 +297,7 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "ruleElement"
-    // InternalLocationProviderTestLanguage.g:133:1: ruleElement returns [EObject current=null] : (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= 'singleref' ( (otherlv_3= RULE_ID ) ) )? (otherlv_4= 'multiref' ( (otherlv_5= RULE_ID ) ) )* ) ;
+    // InternalLocationProviderTestLanguage.g:128:1: ruleElement returns [EObject current=null] : (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= 'singleref' ( (otherlv_3= RULE_ID ) ) )? (otherlv_4= 'multiref' ( (otherlv_5= RULE_ID ) ) )* ) ;
     public final EObject ruleElement() throws RecognitionException {
         EObject current = null;
 
@@ -304,46 +308,47 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
         Token otherlv_4=null;
         Token otherlv_5=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalLocationProviderTestLanguage.g:136:28: ( (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= 'singleref' ( (otherlv_3= RULE_ID ) ) )? (otherlv_4= 'multiref' ( (otherlv_5= RULE_ID ) ) )* ) )
-            // InternalLocationProviderTestLanguage.g:137:1: (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= 'singleref' ( (otherlv_3= RULE_ID ) ) )? (otherlv_4= 'multiref' ( (otherlv_5= RULE_ID ) ) )* )
+            // InternalLocationProviderTestLanguage.g:134:2: ( (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= 'singleref' ( (otherlv_3= RULE_ID ) ) )? (otherlv_4= 'multiref' ( (otherlv_5= RULE_ID ) ) )* ) )
+            // InternalLocationProviderTestLanguage.g:135:2: (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= 'singleref' ( (otherlv_3= RULE_ID ) ) )? (otherlv_4= 'multiref' ( (otherlv_5= RULE_ID ) ) )* )
             {
-            // InternalLocationProviderTestLanguage.g:137:1: (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= 'singleref' ( (otherlv_3= RULE_ID ) ) )? (otherlv_4= 'multiref' ( (otherlv_5= RULE_ID ) ) )* )
-            // InternalLocationProviderTestLanguage.g:137:3: otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= 'singleref' ( (otherlv_3= RULE_ID ) ) )? (otherlv_4= 'multiref' ( (otherlv_5= RULE_ID ) ) )*
+            // InternalLocationProviderTestLanguage.g:135:2: (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= 'singleref' ( (otherlv_3= RULE_ID ) ) )? (otherlv_4= 'multiref' ( (otherlv_5= RULE_ID ) ) )* )
+            // InternalLocationProviderTestLanguage.g:136:3: otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= 'singleref' ( (otherlv_3= RULE_ID ) ) )? (otherlv_4= 'multiref' ( (otherlv_5= RULE_ID ) ) )*
             {
             otherlv_0=(Token)match(input,11,FollowSets000.FOLLOW_5); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getElementAccess().getElementKeyword_0());
-                
-            // InternalLocationProviderTestLanguage.g:141:1: ( (lv_name_1_0= RULE_ID ) )
-            // InternalLocationProviderTestLanguage.g:142:1: (lv_name_1_0= RULE_ID )
+            			newLeafNode(otherlv_0, grammarAccess.getElementAccess().getElementKeyword_0());
+            		
+            // InternalLocationProviderTestLanguage.g:140:3: ( (lv_name_1_0= RULE_ID ) )
+            // InternalLocationProviderTestLanguage.g:141:4: (lv_name_1_0= RULE_ID )
             {
-            // InternalLocationProviderTestLanguage.g:142:1: (lv_name_1_0= RULE_ID )
-            // InternalLocationProviderTestLanguage.g:143:3: lv_name_1_0= RULE_ID
+            // InternalLocationProviderTestLanguage.g:141:4: (lv_name_1_0= RULE_ID )
+            // InternalLocationProviderTestLanguage.g:142:5: lv_name_1_0= RULE_ID
             {
             lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_6); 
 
-            			newLeafNode(lv_name_1_0, grammarAccess.getElementAccess().getNameIDTerminalRuleCall_1_0()); 
-            		
+            					newLeafNode(lv_name_1_0, grammarAccess.getElementAccess().getNameIDTerminalRuleCall_1_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getElementRule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"name",
-                    		lv_name_1_0, 
-                    		"org.eclipse.xtext.common.Terminals.ID");
-            	    
-
-            }
-
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getElementRule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"name",
+            						lv_name_1_0,
+            						"org.eclipse.xtext.common.Terminals.ID");
+            				
 
             }
 
-            // InternalLocationProviderTestLanguage.g:159:2: (otherlv_2= 'singleref' ( (otherlv_3= RULE_ID ) ) )?
+
+            }
+
+            // InternalLocationProviderTestLanguage.g:158:3: (otherlv_2= 'singleref' ( (otherlv_3= RULE_ID ) ) )?
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -356,23 +361,23 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
                     {
                     otherlv_2=(Token)match(input,12,FollowSets000.FOLLOW_5); 
 
-                        	newLeafNode(otherlv_2, grammarAccess.getElementAccess().getSinglerefKeyword_2_0());
-                        
-                    // InternalLocationProviderTestLanguage.g:163:1: ( (otherlv_3= RULE_ID ) )
-                    // InternalLocationProviderTestLanguage.g:164:1: (otherlv_3= RULE_ID )
+                    				newLeafNode(otherlv_2, grammarAccess.getElementAccess().getSinglerefKeyword_2_0());
+                    			
+                    // InternalLocationProviderTestLanguage.g:163:4: ( (otherlv_3= RULE_ID ) )
+                    // InternalLocationProviderTestLanguage.g:164:5: (otherlv_3= RULE_ID )
                     {
-                    // InternalLocationProviderTestLanguage.g:164:1: (otherlv_3= RULE_ID )
-                    // InternalLocationProviderTestLanguage.g:165:3: otherlv_3= RULE_ID
+                    // InternalLocationProviderTestLanguage.g:164:5: (otherlv_3= RULE_ID )
+                    // InternalLocationProviderTestLanguage.g:165:6: otherlv_3= RULE_ID
                     {
 
-                    			if (current==null) {
-                    	            current = createModelElement(grammarAccess.getElementRule());
-                    	        }
-                            
+                    						if (current==null) {
+                    							current = createModelElement(grammarAccess.getElementRule());
+                    						}
+                    					
                     otherlv_3=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_7); 
 
-                    		newLeafNode(otherlv_3, grammarAccess.getElementAccess().getSinglerefElementCrossReference_2_1_0()); 
-                    	
+                    						newLeafNode(otherlv_3, grammarAccess.getElementAccess().getSinglerefElementCrossReference_2_1_0());
+                    					
 
                     }
 
@@ -385,7 +390,7 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
 
             }
 
-            // InternalLocationProviderTestLanguage.g:176:4: (otherlv_4= 'multiref' ( (otherlv_5= RULE_ID ) ) )*
+            // InternalLocationProviderTestLanguage.g:177:3: (otherlv_4= 'multiref' ( (otherlv_5= RULE_ID ) ) )*
             loop4:
             do {
                 int alt4=2;
@@ -398,27 +403,27 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
 
                 switch (alt4) {
             	case 1 :
-            	    // InternalLocationProviderTestLanguage.g:176:6: otherlv_4= 'multiref' ( (otherlv_5= RULE_ID ) )
+            	    // InternalLocationProviderTestLanguage.g:178:4: otherlv_4= 'multiref' ( (otherlv_5= RULE_ID ) )
             	    {
             	    otherlv_4=(Token)match(input,13,FollowSets000.FOLLOW_5); 
 
-            	        	newLeafNode(otherlv_4, grammarAccess.getElementAccess().getMultirefKeyword_3_0());
-            	        
-            	    // InternalLocationProviderTestLanguage.g:180:1: ( (otherlv_5= RULE_ID ) )
-            	    // InternalLocationProviderTestLanguage.g:181:1: (otherlv_5= RULE_ID )
+            	    				newLeafNode(otherlv_4, grammarAccess.getElementAccess().getMultirefKeyword_3_0());
+            	    			
+            	    // InternalLocationProviderTestLanguage.g:182:4: ( (otherlv_5= RULE_ID ) )
+            	    // InternalLocationProviderTestLanguage.g:183:5: (otherlv_5= RULE_ID )
             	    {
-            	    // InternalLocationProviderTestLanguage.g:181:1: (otherlv_5= RULE_ID )
-            	    // InternalLocationProviderTestLanguage.g:182:3: otherlv_5= RULE_ID
+            	    // InternalLocationProviderTestLanguage.g:183:5: (otherlv_5= RULE_ID )
+            	    // InternalLocationProviderTestLanguage.g:184:6: otherlv_5= RULE_ID
             	    {
 
-            	    			if (current==null) {
-            	    	            current = createModelElement(grammarAccess.getElementRule());
-            	    	        }
-            	            
+            	    						if (current==null) {
+            	    							current = createModelElement(grammarAccess.getElementRule());
+            	    						}
+            	    					
             	    otherlv_5=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_7); 
 
-            	    		newLeafNode(otherlv_5, grammarAccess.getElementAccess().getMultirefsElementCrossReference_3_1_0()); 
-            	    	
+            	    						newLeafNode(otherlv_5, grammarAccess.getElementAccess().getMultirefsElementCrossReference_3_1_0());
+            	    					
 
             	    }
 
@@ -440,13 +445,15 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -455,7 +462,7 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "entryRuleComponent"
-    // InternalLocationProviderTestLanguage.g:201:1: entryRuleComponent returns [EObject current=null] : iv_ruleComponent= ruleComponent EOF ;
+    // InternalLocationProviderTestLanguage.g:200:1: entryRuleComponent returns [EObject current=null] : iv_ruleComponent= ruleComponent EOF ;
     public final EObject entryRuleComponent() throws RecognitionException {
         EObject current = null;
 
@@ -463,8 +470,8 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
 
 
         try {
-            // InternalLocationProviderTestLanguage.g:202:2: (iv_ruleComponent= ruleComponent EOF )
-            // InternalLocationProviderTestLanguage.g:203:2: iv_ruleComponent= ruleComponent EOF
+            // InternalLocationProviderTestLanguage.g:200:50: (iv_ruleComponent= ruleComponent EOF )
+            // InternalLocationProviderTestLanguage.g:201:2: iv_ruleComponent= ruleComponent EOF
             {
              newCompositeNode(grammarAccess.getComponentRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -478,11 +485,11 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -491,7 +498,7 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "ruleComponent"
-    // InternalLocationProviderTestLanguage.g:210:1: ruleComponent returns [EObject current=null] : ( (this_Bus_0= ruleBus | this_Processor_1= ruleProcessor ) (otherlv_2= 'modes' ( ( (lv_mode_3_0= ruleMode ) ) | ( (lv_transition_4_0= ruleTransition ) ) )+ )? otherlv_5= 'end' otherlv_6= ';' ) ;
+    // InternalLocationProviderTestLanguage.g:207:1: ruleComponent returns [EObject current=null] : ( (this_Bus_0= ruleBus | this_Processor_1= ruleProcessor ) (otherlv_2= 'modes' ( ( (lv_mode_3_0= ruleMode ) ) | ( (lv_transition_4_0= ruleTransition ) ) )+ )? otherlv_5= 'end' otherlv_6= ';' ) ;
     public final EObject ruleComponent() throws RecognitionException {
         EObject current = null;
 
@@ -507,16 +514,17 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
         EObject lv_transition_4_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalLocationProviderTestLanguage.g:213:28: ( ( (this_Bus_0= ruleBus | this_Processor_1= ruleProcessor ) (otherlv_2= 'modes' ( ( (lv_mode_3_0= ruleMode ) ) | ( (lv_transition_4_0= ruleTransition ) ) )+ )? otherlv_5= 'end' otherlv_6= ';' ) )
-            // InternalLocationProviderTestLanguage.g:214:1: ( (this_Bus_0= ruleBus | this_Processor_1= ruleProcessor ) (otherlv_2= 'modes' ( ( (lv_mode_3_0= ruleMode ) ) | ( (lv_transition_4_0= ruleTransition ) ) )+ )? otherlv_5= 'end' otherlv_6= ';' )
+            // InternalLocationProviderTestLanguage.g:213:2: ( ( (this_Bus_0= ruleBus | this_Processor_1= ruleProcessor ) (otherlv_2= 'modes' ( ( (lv_mode_3_0= ruleMode ) ) | ( (lv_transition_4_0= ruleTransition ) ) )+ )? otherlv_5= 'end' otherlv_6= ';' ) )
+            // InternalLocationProviderTestLanguage.g:214:2: ( (this_Bus_0= ruleBus | this_Processor_1= ruleProcessor ) (otherlv_2= 'modes' ( ( (lv_mode_3_0= ruleMode ) ) | ( (lv_transition_4_0= ruleTransition ) ) )+ )? otherlv_5= 'end' otherlv_6= ';' )
             {
-            // InternalLocationProviderTestLanguage.g:214:1: ( (this_Bus_0= ruleBus | this_Processor_1= ruleProcessor ) (otherlv_2= 'modes' ( ( (lv_mode_3_0= ruleMode ) ) | ( (lv_transition_4_0= ruleTransition ) ) )+ )? otherlv_5= 'end' otherlv_6= ';' )
-            // InternalLocationProviderTestLanguage.g:214:2: (this_Bus_0= ruleBus | this_Processor_1= ruleProcessor ) (otherlv_2= 'modes' ( ( (lv_mode_3_0= ruleMode ) ) | ( (lv_transition_4_0= ruleTransition ) ) )+ )? otherlv_5= 'end' otherlv_6= ';'
+            // InternalLocationProviderTestLanguage.g:214:2: ( (this_Bus_0= ruleBus | this_Processor_1= ruleProcessor ) (otherlv_2= 'modes' ( ( (lv_mode_3_0= ruleMode ) ) | ( (lv_transition_4_0= ruleTransition ) ) )+ )? otherlv_5= 'end' otherlv_6= ';' )
+            // InternalLocationProviderTestLanguage.g:215:3: (this_Bus_0= ruleBus | this_Processor_1= ruleProcessor ) (otherlv_2= 'modes' ( ( (lv_mode_3_0= ruleMode ) ) | ( (lv_transition_4_0= ruleTransition ) ) )+ )? otherlv_5= 'end' otherlv_6= ';'
             {
-            // InternalLocationProviderTestLanguage.g:214:2: (this_Bus_0= ruleBus | this_Processor_1= ruleProcessor )
+            // InternalLocationProviderTestLanguage.g:215:3: (this_Bus_0= ruleBus | this_Processor_1= ruleProcessor )
             int alt5=2;
             int LA5_0 = input.LA(1);
 
@@ -534,45 +542,45 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
             }
             switch (alt5) {
                 case 1 :
-                    // InternalLocationProviderTestLanguage.g:215:5: this_Bus_0= ruleBus
+                    // InternalLocationProviderTestLanguage.g:216:4: this_Bus_0= ruleBus
                     {
-                     
-                            newCompositeNode(grammarAccess.getComponentAccess().getBusParserRuleCall_0_0()); 
-                        
+
+                    				newCompositeNode(grammarAccess.getComponentAccess().getBusParserRuleCall_0_0());
+                    			
                     pushFollow(FollowSets000.FOLLOW_8);
                     this_Bus_0=ruleBus();
 
                     state._fsp--;
 
-                     
-                            current = this_Bus_0; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    				current = this_Bus_0;
+                    				afterParserOrEnumRuleCall();
+                    			
 
                     }
                     break;
                 case 2 :
-                    // InternalLocationProviderTestLanguage.g:225:5: this_Processor_1= ruleProcessor
+                    // InternalLocationProviderTestLanguage.g:225:4: this_Processor_1= ruleProcessor
                     {
-                     
-                            newCompositeNode(grammarAccess.getComponentAccess().getProcessorParserRuleCall_0_1()); 
-                        
+
+                    				newCompositeNode(grammarAccess.getComponentAccess().getProcessorParserRuleCall_0_1());
+                    			
                     pushFollow(FollowSets000.FOLLOW_8);
                     this_Processor_1=ruleProcessor();
 
                     state._fsp--;
 
-                     
-                            current = this_Processor_1; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    				current = this_Processor_1;
+                    				afterParserOrEnumRuleCall();
+                    			
 
                     }
                     break;
 
             }
 
-            // InternalLocationProviderTestLanguage.g:233:2: (otherlv_2= 'modes' ( ( (lv_mode_3_0= ruleMode ) ) | ( (lv_transition_4_0= ruleTransition ) ) )+ )?
+            // InternalLocationProviderTestLanguage.g:234:3: (otherlv_2= 'modes' ( ( (lv_mode_3_0= ruleMode ) ) | ( (lv_transition_4_0= ruleTransition ) ) )+ )?
             int alt7=2;
             int LA7_0 = input.LA(1);
 
@@ -581,13 +589,13 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
             }
             switch (alt7) {
                 case 1 :
-                    // InternalLocationProviderTestLanguage.g:233:4: otherlv_2= 'modes' ( ( (lv_mode_3_0= ruleMode ) ) | ( (lv_transition_4_0= ruleTransition ) ) )+
+                    // InternalLocationProviderTestLanguage.g:235:4: otherlv_2= 'modes' ( ( (lv_mode_3_0= ruleMode ) ) | ( (lv_transition_4_0= ruleTransition ) ) )+
                     {
                     otherlv_2=(Token)match(input,14,FollowSets000.FOLLOW_9); 
 
-                        	newLeafNode(otherlv_2, grammarAccess.getComponentAccess().getModesKeyword_1_0());
-                        
-                    // InternalLocationProviderTestLanguage.g:237:1: ( ( (lv_mode_3_0= ruleMode ) ) | ( (lv_transition_4_0= ruleTransition ) ) )+
+                    				newLeafNode(otherlv_2, grammarAccess.getComponentAccess().getModesKeyword_1_0());
+                    			
+                    // InternalLocationProviderTestLanguage.g:239:4: ( ( (lv_mode_3_0= ruleMode ) ) | ( (lv_transition_4_0= ruleTransition ) ) )+
                     int cnt6=0;
                     loop6:
                     do {
@@ -604,33 +612,33 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
 
                         switch (alt6) {
                     	case 1 :
-                    	    // InternalLocationProviderTestLanguage.g:237:2: ( (lv_mode_3_0= ruleMode ) )
+                    	    // InternalLocationProviderTestLanguage.g:240:5: ( (lv_mode_3_0= ruleMode ) )
                     	    {
-                    	    // InternalLocationProviderTestLanguage.g:237:2: ( (lv_mode_3_0= ruleMode ) )
-                    	    // InternalLocationProviderTestLanguage.g:238:1: (lv_mode_3_0= ruleMode )
+                    	    // InternalLocationProviderTestLanguage.g:240:5: ( (lv_mode_3_0= ruleMode ) )
+                    	    // InternalLocationProviderTestLanguage.g:241:6: (lv_mode_3_0= ruleMode )
                     	    {
-                    	    // InternalLocationProviderTestLanguage.g:238:1: (lv_mode_3_0= ruleMode )
-                    	    // InternalLocationProviderTestLanguage.g:239:3: lv_mode_3_0= ruleMode
+                    	    // InternalLocationProviderTestLanguage.g:241:6: (lv_mode_3_0= ruleMode )
+                    	    // InternalLocationProviderTestLanguage.g:242:7: lv_mode_3_0= ruleMode
                     	    {
-                    	     
-                    	    	        newCompositeNode(grammarAccess.getComponentAccess().getModeModeParserRuleCall_1_1_0_0()); 
-                    	    	    
+
+                    	    							newCompositeNode(grammarAccess.getComponentAccess().getModeModeParserRuleCall_1_1_0_0());
+                    	    						
                     	    pushFollow(FollowSets000.FOLLOW_10);
                     	    lv_mode_3_0=ruleMode();
 
                     	    state._fsp--;
 
 
-                    	    	        if (current==null) {
-                    	    	            current = createModelElementForParent(grammarAccess.getComponentRule());
-                    	    	        }
-                    	           		add(
-                    	           			current, 
-                    	           			"mode",
-                    	            		lv_mode_3_0, 
-                    	            		"org.eclipse.xtext.resource.LocationProviderTestLanguage.Mode");
-                    	    	        afterParserOrEnumRuleCall();
-                    	    	    
+                    	    							if (current==null) {
+                    	    								current = createModelElementForParent(grammarAccess.getComponentRule());
+                    	    							}
+                    	    							add(
+                    	    								current,
+                    	    								"mode",
+                    	    								lv_mode_3_0,
+                    	    								"org.eclipse.xtext.resource.LocationProviderTestLanguage.Mode");
+                    	    							afterParserOrEnumRuleCall();
+                    	    						
 
                     	    }
 
@@ -641,33 +649,33 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalLocationProviderTestLanguage.g:256:6: ( (lv_transition_4_0= ruleTransition ) )
+                    	    // InternalLocationProviderTestLanguage.g:260:5: ( (lv_transition_4_0= ruleTransition ) )
                     	    {
-                    	    // InternalLocationProviderTestLanguage.g:256:6: ( (lv_transition_4_0= ruleTransition ) )
-                    	    // InternalLocationProviderTestLanguage.g:257:1: (lv_transition_4_0= ruleTransition )
+                    	    // InternalLocationProviderTestLanguage.g:260:5: ( (lv_transition_4_0= ruleTransition ) )
+                    	    // InternalLocationProviderTestLanguage.g:261:6: (lv_transition_4_0= ruleTransition )
                     	    {
-                    	    // InternalLocationProviderTestLanguage.g:257:1: (lv_transition_4_0= ruleTransition )
-                    	    // InternalLocationProviderTestLanguage.g:258:3: lv_transition_4_0= ruleTransition
+                    	    // InternalLocationProviderTestLanguage.g:261:6: (lv_transition_4_0= ruleTransition )
+                    	    // InternalLocationProviderTestLanguage.g:262:7: lv_transition_4_0= ruleTransition
                     	    {
-                    	     
-                    	    	        newCompositeNode(grammarAccess.getComponentAccess().getTransitionTransitionParserRuleCall_1_1_1_0()); 
-                    	    	    
+
+                    	    							newCompositeNode(grammarAccess.getComponentAccess().getTransitionTransitionParserRuleCall_1_1_1_0());
+                    	    						
                     	    pushFollow(FollowSets000.FOLLOW_10);
                     	    lv_transition_4_0=ruleTransition();
 
                     	    state._fsp--;
 
 
-                    	    	        if (current==null) {
-                    	    	            current = createModelElementForParent(grammarAccess.getComponentRule());
-                    	    	        }
-                    	           		add(
-                    	           			current, 
-                    	           			"transition",
-                    	            		lv_transition_4_0, 
-                    	            		"org.eclipse.xtext.resource.LocationProviderTestLanguage.Transition");
-                    	    	        afterParserOrEnumRuleCall();
-                    	    	    
+                    	    							if (current==null) {
+                    	    								current = createModelElementForParent(grammarAccess.getComponentRule());
+                    	    							}
+                    	    							add(
+                    	    								current,
+                    	    								"transition",
+                    	    								lv_transition_4_0,
+                    	    								"org.eclipse.xtext.resource.LocationProviderTestLanguage.Transition");
+                    	    							afterParserOrEnumRuleCall();
+                    	    						
 
                     	    }
 
@@ -695,25 +703,27 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
 
             otherlv_5=(Token)match(input,15,FollowSets000.FOLLOW_11); 
 
-                	newLeafNode(otherlv_5, grammarAccess.getComponentAccess().getEndKeyword_2());
-                
+            			newLeafNode(otherlv_5, grammarAccess.getComponentAccess().getEndKeyword_2());
+            		
             otherlv_6=(Token)match(input,16,FollowSets000.FOLLOW_2); 
 
-                	newLeafNode(otherlv_6, grammarAccess.getComponentAccess().getSemicolonKeyword_3());
-                
+            			newLeafNode(otherlv_6, grammarAccess.getComponentAccess().getSemicolonKeyword_3());
+            		
 
             }
 
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -722,7 +732,7 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "entryRuleBus"
-    // InternalLocationProviderTestLanguage.g:290:1: entryRuleBus returns [EObject current=null] : iv_ruleBus= ruleBus EOF ;
+    // InternalLocationProviderTestLanguage.g:293:1: entryRuleBus returns [EObject current=null] : iv_ruleBus= ruleBus EOF ;
     public final EObject entryRuleBus() throws RecognitionException {
         EObject current = null;
 
@@ -730,8 +740,8 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
 
 
         try {
-            // InternalLocationProviderTestLanguage.g:291:2: (iv_ruleBus= ruleBus EOF )
-            // InternalLocationProviderTestLanguage.g:292:2: iv_ruleBus= ruleBus EOF
+            // InternalLocationProviderTestLanguage.g:293:44: (iv_ruleBus= ruleBus EOF )
+            // InternalLocationProviderTestLanguage.g:294:2: iv_ruleBus= ruleBus EOF
             {
              newCompositeNode(grammarAccess.getBusRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -745,11 +755,11 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -758,7 +768,7 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "ruleBus"
-    // InternalLocationProviderTestLanguage.g:299:1: ruleBus returns [EObject current=null] : (otherlv_0= 'bus' ( (lv_name_1_0= RULE_ID ) ) ( (lv_port_2_0= rulePort ) )* ) ;
+    // InternalLocationProviderTestLanguage.g:300:1: ruleBus returns [EObject current=null] : (otherlv_0= 'bus' ( (lv_name_1_0= RULE_ID ) ) ( (lv_port_2_0= rulePort ) )* ) ;
     public final EObject ruleBus() throws RecognitionException {
         EObject current = null;
 
@@ -767,46 +777,47 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
         EObject lv_port_2_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalLocationProviderTestLanguage.g:302:28: ( (otherlv_0= 'bus' ( (lv_name_1_0= RULE_ID ) ) ( (lv_port_2_0= rulePort ) )* ) )
-            // InternalLocationProviderTestLanguage.g:303:1: (otherlv_0= 'bus' ( (lv_name_1_0= RULE_ID ) ) ( (lv_port_2_0= rulePort ) )* )
+            // InternalLocationProviderTestLanguage.g:306:2: ( (otherlv_0= 'bus' ( (lv_name_1_0= RULE_ID ) ) ( (lv_port_2_0= rulePort ) )* ) )
+            // InternalLocationProviderTestLanguage.g:307:2: (otherlv_0= 'bus' ( (lv_name_1_0= RULE_ID ) ) ( (lv_port_2_0= rulePort ) )* )
             {
-            // InternalLocationProviderTestLanguage.g:303:1: (otherlv_0= 'bus' ( (lv_name_1_0= RULE_ID ) ) ( (lv_port_2_0= rulePort ) )* )
-            // InternalLocationProviderTestLanguage.g:303:3: otherlv_0= 'bus' ( (lv_name_1_0= RULE_ID ) ) ( (lv_port_2_0= rulePort ) )*
+            // InternalLocationProviderTestLanguage.g:307:2: (otherlv_0= 'bus' ( (lv_name_1_0= RULE_ID ) ) ( (lv_port_2_0= rulePort ) )* )
+            // InternalLocationProviderTestLanguage.g:308:3: otherlv_0= 'bus' ( (lv_name_1_0= RULE_ID ) ) ( (lv_port_2_0= rulePort ) )*
             {
             otherlv_0=(Token)match(input,17,FollowSets000.FOLLOW_5); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getBusAccess().getBusKeyword_0());
-                
-            // InternalLocationProviderTestLanguage.g:307:1: ( (lv_name_1_0= RULE_ID ) )
-            // InternalLocationProviderTestLanguage.g:308:1: (lv_name_1_0= RULE_ID )
+            			newLeafNode(otherlv_0, grammarAccess.getBusAccess().getBusKeyword_0());
+            		
+            // InternalLocationProviderTestLanguage.g:312:3: ( (lv_name_1_0= RULE_ID ) )
+            // InternalLocationProviderTestLanguage.g:313:4: (lv_name_1_0= RULE_ID )
             {
-            // InternalLocationProviderTestLanguage.g:308:1: (lv_name_1_0= RULE_ID )
-            // InternalLocationProviderTestLanguage.g:309:3: lv_name_1_0= RULE_ID
+            // InternalLocationProviderTestLanguage.g:313:4: (lv_name_1_0= RULE_ID )
+            // InternalLocationProviderTestLanguage.g:314:5: lv_name_1_0= RULE_ID
             {
             lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_12); 
 
-            			newLeafNode(lv_name_1_0, grammarAccess.getBusAccess().getNameIDTerminalRuleCall_1_0()); 
-            		
+            					newLeafNode(lv_name_1_0, grammarAccess.getBusAccess().getNameIDTerminalRuleCall_1_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getBusRule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"name",
-                    		lv_name_1_0, 
-                    		"org.eclipse.xtext.common.Terminals.ID");
-            	    
-
-            }
-
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getBusRule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"name",
+            						lv_name_1_0,
+            						"org.eclipse.xtext.common.Terminals.ID");
+            				
 
             }
 
-            // InternalLocationProviderTestLanguage.g:325:2: ( (lv_port_2_0= rulePort ) )*
+
+            }
+
+            // InternalLocationProviderTestLanguage.g:330:3: ( (lv_port_2_0= rulePort ) )*
             loop8:
             do {
                 int alt8=2;
@@ -819,30 +830,30 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
 
                 switch (alt8) {
             	case 1 :
-            	    // InternalLocationProviderTestLanguage.g:326:1: (lv_port_2_0= rulePort )
+            	    // InternalLocationProviderTestLanguage.g:331:4: (lv_port_2_0= rulePort )
             	    {
-            	    // InternalLocationProviderTestLanguage.g:326:1: (lv_port_2_0= rulePort )
-            	    // InternalLocationProviderTestLanguage.g:327:3: lv_port_2_0= rulePort
+            	    // InternalLocationProviderTestLanguage.g:331:4: (lv_port_2_0= rulePort )
+            	    // InternalLocationProviderTestLanguage.g:332:5: lv_port_2_0= rulePort
             	    {
-            	     
-            	    	        newCompositeNode(grammarAccess.getBusAccess().getPortPortParserRuleCall_2_0()); 
-            	    	    
+
+            	    					newCompositeNode(grammarAccess.getBusAccess().getPortPortParserRuleCall_2_0());
+            	    				
             	    pushFollow(FollowSets000.FOLLOW_12);
             	    lv_port_2_0=rulePort();
 
             	    state._fsp--;
 
 
-            	    	        if (current==null) {
-            	    	            current = createModelElementForParent(grammarAccess.getBusRule());
-            	    	        }
-            	           		add(
-            	           			current, 
-            	           			"port",
-            	            		lv_port_2_0, 
-            	            		"org.eclipse.xtext.resource.LocationProviderTestLanguage.Port");
-            	    	        afterParserOrEnumRuleCall();
-            	    	    
+            	    					if (current==null) {
+            	    						current = createModelElementForParent(grammarAccess.getBusRule());
+            	    					}
+            	    					add(
+            	    						current,
+            	    						"port",
+            	    						lv_port_2_0,
+            	    						"org.eclipse.xtext.resource.LocationProviderTestLanguage.Port");
+            	    					afterParserOrEnumRuleCall();
+            	    				
 
             	    }
 
@@ -861,13 +872,15 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -876,7 +889,7 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "entryRuleProcessor"
-    // InternalLocationProviderTestLanguage.g:351:1: entryRuleProcessor returns [EObject current=null] : iv_ruleProcessor= ruleProcessor EOF ;
+    // InternalLocationProviderTestLanguage.g:353:1: entryRuleProcessor returns [EObject current=null] : iv_ruleProcessor= ruleProcessor EOF ;
     public final EObject entryRuleProcessor() throws RecognitionException {
         EObject current = null;
 
@@ -884,8 +897,8 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
 
 
         try {
-            // InternalLocationProviderTestLanguage.g:352:2: (iv_ruleProcessor= ruleProcessor EOF )
-            // InternalLocationProviderTestLanguage.g:353:2: iv_ruleProcessor= ruleProcessor EOF
+            // InternalLocationProviderTestLanguage.g:353:50: (iv_ruleProcessor= ruleProcessor EOF )
+            // InternalLocationProviderTestLanguage.g:354:2: iv_ruleProcessor= ruleProcessor EOF
             {
              newCompositeNode(grammarAccess.getProcessorRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -899,11 +912,11 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -921,46 +934,47 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
         EObject lv_data_2_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalLocationProviderTestLanguage.g:363:28: ( (otherlv_0= 'processor' ( (lv_name_1_0= RULE_ID ) ) ( (lv_data_2_0= ruleData ) )* ) )
-            // InternalLocationProviderTestLanguage.g:364:1: (otherlv_0= 'processor' ( (lv_name_1_0= RULE_ID ) ) ( (lv_data_2_0= ruleData ) )* )
+            // InternalLocationProviderTestLanguage.g:366:2: ( (otherlv_0= 'processor' ( (lv_name_1_0= RULE_ID ) ) ( (lv_data_2_0= ruleData ) )* ) )
+            // InternalLocationProviderTestLanguage.g:367:2: (otherlv_0= 'processor' ( (lv_name_1_0= RULE_ID ) ) ( (lv_data_2_0= ruleData ) )* )
             {
-            // InternalLocationProviderTestLanguage.g:364:1: (otherlv_0= 'processor' ( (lv_name_1_0= RULE_ID ) ) ( (lv_data_2_0= ruleData ) )* )
-            // InternalLocationProviderTestLanguage.g:364:3: otherlv_0= 'processor' ( (lv_name_1_0= RULE_ID ) ) ( (lv_data_2_0= ruleData ) )*
+            // InternalLocationProviderTestLanguage.g:367:2: (otherlv_0= 'processor' ( (lv_name_1_0= RULE_ID ) ) ( (lv_data_2_0= ruleData ) )* )
+            // InternalLocationProviderTestLanguage.g:368:3: otherlv_0= 'processor' ( (lv_name_1_0= RULE_ID ) ) ( (lv_data_2_0= ruleData ) )*
             {
             otherlv_0=(Token)match(input,18,FollowSets000.FOLLOW_5); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getProcessorAccess().getProcessorKeyword_0());
-                
-            // InternalLocationProviderTestLanguage.g:368:1: ( (lv_name_1_0= RULE_ID ) )
-            // InternalLocationProviderTestLanguage.g:369:1: (lv_name_1_0= RULE_ID )
+            			newLeafNode(otherlv_0, grammarAccess.getProcessorAccess().getProcessorKeyword_0());
+            		
+            // InternalLocationProviderTestLanguage.g:372:3: ( (lv_name_1_0= RULE_ID ) )
+            // InternalLocationProviderTestLanguage.g:373:4: (lv_name_1_0= RULE_ID )
             {
-            // InternalLocationProviderTestLanguage.g:369:1: (lv_name_1_0= RULE_ID )
-            // InternalLocationProviderTestLanguage.g:370:3: lv_name_1_0= RULE_ID
+            // InternalLocationProviderTestLanguage.g:373:4: (lv_name_1_0= RULE_ID )
+            // InternalLocationProviderTestLanguage.g:374:5: lv_name_1_0= RULE_ID
             {
             lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_13); 
 
-            			newLeafNode(lv_name_1_0, grammarAccess.getProcessorAccess().getNameIDTerminalRuleCall_1_0()); 
-            		
+            					newLeafNode(lv_name_1_0, grammarAccess.getProcessorAccess().getNameIDTerminalRuleCall_1_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getProcessorRule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"name",
-                    		lv_name_1_0, 
-                    		"org.eclipse.xtext.common.Terminals.ID");
-            	    
-
-            }
-
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getProcessorRule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"name",
+            						lv_name_1_0,
+            						"org.eclipse.xtext.common.Terminals.ID");
+            				
 
             }
 
-            // InternalLocationProviderTestLanguage.g:386:2: ( (lv_data_2_0= ruleData ) )*
+
+            }
+
+            // InternalLocationProviderTestLanguage.g:390:3: ( (lv_data_2_0= ruleData ) )*
             loop9:
             do {
                 int alt9=2;
@@ -973,30 +987,30 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
 
                 switch (alt9) {
             	case 1 :
-            	    // InternalLocationProviderTestLanguage.g:387:1: (lv_data_2_0= ruleData )
+            	    // InternalLocationProviderTestLanguage.g:391:4: (lv_data_2_0= ruleData )
             	    {
-            	    // InternalLocationProviderTestLanguage.g:387:1: (lv_data_2_0= ruleData )
-            	    // InternalLocationProviderTestLanguage.g:388:3: lv_data_2_0= ruleData
+            	    // InternalLocationProviderTestLanguage.g:391:4: (lv_data_2_0= ruleData )
+            	    // InternalLocationProviderTestLanguage.g:392:5: lv_data_2_0= ruleData
             	    {
-            	     
-            	    	        newCompositeNode(grammarAccess.getProcessorAccess().getDataDataParserRuleCall_2_0()); 
-            	    	    
+
+            	    					newCompositeNode(grammarAccess.getProcessorAccess().getDataDataParserRuleCall_2_0());
+            	    				
             	    pushFollow(FollowSets000.FOLLOW_13);
             	    lv_data_2_0=ruleData();
 
             	    state._fsp--;
 
 
-            	    	        if (current==null) {
-            	    	            current = createModelElementForParent(grammarAccess.getProcessorRule());
-            	    	        }
-            	           		add(
-            	           			current, 
-            	           			"data",
-            	            		lv_data_2_0, 
-            	            		"org.eclipse.xtext.resource.LocationProviderTestLanguage.Data");
-            	    	        afterParserOrEnumRuleCall();
-            	    	    
+            	    					if (current==null) {
+            	    						current = createModelElementForParent(grammarAccess.getProcessorRule());
+            	    					}
+            	    					add(
+            	    						current,
+            	    						"data",
+            	    						lv_data_2_0,
+            	    						"org.eclipse.xtext.resource.LocationProviderTestLanguage.Data");
+            	    					afterParserOrEnumRuleCall();
+            	    				
 
             	    }
 
@@ -1015,13 +1029,15 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1030,7 +1046,7 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "entryRuleMode"
-    // InternalLocationProviderTestLanguage.g:412:1: entryRuleMode returns [EObject current=null] : iv_ruleMode= ruleMode EOF ;
+    // InternalLocationProviderTestLanguage.g:413:1: entryRuleMode returns [EObject current=null] : iv_ruleMode= ruleMode EOF ;
     public final EObject entryRuleMode() throws RecognitionException {
         EObject current = null;
 
@@ -1038,7 +1054,7 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
 
 
         try {
-            // InternalLocationProviderTestLanguage.g:413:2: (iv_ruleMode= ruleMode EOF )
+            // InternalLocationProviderTestLanguage.g:413:45: (iv_ruleMode= ruleMode EOF )
             // InternalLocationProviderTestLanguage.g:414:2: iv_ruleMode= ruleMode EOF
             {
              newCompositeNode(grammarAccess.getModeRule()); 
@@ -1053,11 +1069,11 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1066,7 +1082,7 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "ruleMode"
-    // InternalLocationProviderTestLanguage.g:421:1: ruleMode returns [EObject current=null] : (otherlv_0= 'mode' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ';' ) ;
+    // InternalLocationProviderTestLanguage.g:420:1: ruleMode returns [EObject current=null] : (otherlv_0= 'mode' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ';' ) ;
     public final EObject ruleMode() throws RecognitionException {
         EObject current = null;
 
@@ -1074,39 +1090,40 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
         Token lv_name_1_0=null;
         Token otherlv_2=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalLocationProviderTestLanguage.g:424:28: ( (otherlv_0= 'mode' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ';' ) )
-            // InternalLocationProviderTestLanguage.g:425:1: (otherlv_0= 'mode' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ';' )
+            // InternalLocationProviderTestLanguage.g:426:2: ( (otherlv_0= 'mode' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ';' ) )
+            // InternalLocationProviderTestLanguage.g:427:2: (otherlv_0= 'mode' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ';' )
             {
-            // InternalLocationProviderTestLanguage.g:425:1: (otherlv_0= 'mode' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ';' )
-            // InternalLocationProviderTestLanguage.g:425:3: otherlv_0= 'mode' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ';'
+            // InternalLocationProviderTestLanguage.g:427:2: (otherlv_0= 'mode' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ';' )
+            // InternalLocationProviderTestLanguage.g:428:3: otherlv_0= 'mode' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ';'
             {
             otherlv_0=(Token)match(input,19,FollowSets000.FOLLOW_5); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getModeAccess().getModeKeyword_0());
-                
-            // InternalLocationProviderTestLanguage.g:429:1: ( (lv_name_1_0= RULE_ID ) )
-            // InternalLocationProviderTestLanguage.g:430:1: (lv_name_1_0= RULE_ID )
+            			newLeafNode(otherlv_0, grammarAccess.getModeAccess().getModeKeyword_0());
+            		
+            // InternalLocationProviderTestLanguage.g:432:3: ( (lv_name_1_0= RULE_ID ) )
+            // InternalLocationProviderTestLanguage.g:433:4: (lv_name_1_0= RULE_ID )
             {
-            // InternalLocationProviderTestLanguage.g:430:1: (lv_name_1_0= RULE_ID )
-            // InternalLocationProviderTestLanguage.g:431:3: lv_name_1_0= RULE_ID
+            // InternalLocationProviderTestLanguage.g:433:4: (lv_name_1_0= RULE_ID )
+            // InternalLocationProviderTestLanguage.g:434:5: lv_name_1_0= RULE_ID
             {
             lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_11); 
 
-            			newLeafNode(lv_name_1_0, grammarAccess.getModeAccess().getNameIDTerminalRuleCall_1_0()); 
-            		
+            					newLeafNode(lv_name_1_0, grammarAccess.getModeAccess().getNameIDTerminalRuleCall_1_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getModeRule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"name",
-                    		lv_name_1_0, 
-                    		"org.eclipse.xtext.common.Terminals.ID");
-            	    
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getModeRule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"name",
+            						lv_name_1_0,
+            						"org.eclipse.xtext.common.Terminals.ID");
+            				
 
             }
 
@@ -1115,21 +1132,23 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
 
             otherlv_2=(Token)match(input,16,FollowSets000.FOLLOW_2); 
 
-                	newLeafNode(otherlv_2, grammarAccess.getModeAccess().getSemicolonKeyword_2());
-                
+            			newLeafNode(otherlv_2, grammarAccess.getModeAccess().getSemicolonKeyword_2());
+            		
 
             }
 
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1138,7 +1157,7 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "entryRuleTransition"
-    // InternalLocationProviderTestLanguage.g:459:1: entryRuleTransition returns [EObject current=null] : iv_ruleTransition= ruleTransition EOF ;
+    // InternalLocationProviderTestLanguage.g:458:1: entryRuleTransition returns [EObject current=null] : iv_ruleTransition= ruleTransition EOF ;
     public final EObject entryRuleTransition() throws RecognitionException {
         EObject current = null;
 
@@ -1146,8 +1165,8 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
 
 
         try {
-            // InternalLocationProviderTestLanguage.g:460:2: (iv_ruleTransition= ruleTransition EOF )
-            // InternalLocationProviderTestLanguage.g:461:2: iv_ruleTransition= ruleTransition EOF
+            // InternalLocationProviderTestLanguage.g:458:51: (iv_ruleTransition= ruleTransition EOF )
+            // InternalLocationProviderTestLanguage.g:459:2: iv_ruleTransition= ruleTransition EOF
             {
              newCompositeNode(grammarAccess.getTransitionRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -1161,11 +1180,11 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1174,7 +1193,7 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "ruleTransition"
-    // InternalLocationProviderTestLanguage.g:468:1: ruleTransition returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= ':' ( (otherlv_2= RULE_ID ) ) otherlv_3= '->' ( (otherlv_4= RULE_ID ) ) otherlv_5= ';' ) ;
+    // InternalLocationProviderTestLanguage.g:465:1: ruleTransition returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= ':' ( (otherlv_2= RULE_ID ) ) otherlv_3= '->' ( (otherlv_4= RULE_ID ) ) otherlv_5= ';' ) ;
     public final EObject ruleTransition() throws RecognitionException {
         EObject current = null;
 
@@ -1185,35 +1204,36 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
         Token otherlv_4=null;
         Token otherlv_5=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalLocationProviderTestLanguage.g:471:28: ( ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= ':' ( (otherlv_2= RULE_ID ) ) otherlv_3= '->' ( (otherlv_4= RULE_ID ) ) otherlv_5= ';' ) )
-            // InternalLocationProviderTestLanguage.g:472:1: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= ':' ( (otherlv_2= RULE_ID ) ) otherlv_3= '->' ( (otherlv_4= RULE_ID ) ) otherlv_5= ';' )
+            // InternalLocationProviderTestLanguage.g:471:2: ( ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= ':' ( (otherlv_2= RULE_ID ) ) otherlv_3= '->' ( (otherlv_4= RULE_ID ) ) otherlv_5= ';' ) )
+            // InternalLocationProviderTestLanguage.g:472:2: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= ':' ( (otherlv_2= RULE_ID ) ) otherlv_3= '->' ( (otherlv_4= RULE_ID ) ) otherlv_5= ';' )
             {
-            // InternalLocationProviderTestLanguage.g:472:1: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= ':' ( (otherlv_2= RULE_ID ) ) otherlv_3= '->' ( (otherlv_4= RULE_ID ) ) otherlv_5= ';' )
-            // InternalLocationProviderTestLanguage.g:472:2: ( (lv_name_0_0= RULE_ID ) ) otherlv_1= ':' ( (otherlv_2= RULE_ID ) ) otherlv_3= '->' ( (otherlv_4= RULE_ID ) ) otherlv_5= ';'
+            // InternalLocationProviderTestLanguage.g:472:2: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= ':' ( (otherlv_2= RULE_ID ) ) otherlv_3= '->' ( (otherlv_4= RULE_ID ) ) otherlv_5= ';' )
+            // InternalLocationProviderTestLanguage.g:473:3: ( (lv_name_0_0= RULE_ID ) ) otherlv_1= ':' ( (otherlv_2= RULE_ID ) ) otherlv_3= '->' ( (otherlv_4= RULE_ID ) ) otherlv_5= ';'
             {
-            // InternalLocationProviderTestLanguage.g:472:2: ( (lv_name_0_0= RULE_ID ) )
-            // InternalLocationProviderTestLanguage.g:473:1: (lv_name_0_0= RULE_ID )
+            // InternalLocationProviderTestLanguage.g:473:3: ( (lv_name_0_0= RULE_ID ) )
+            // InternalLocationProviderTestLanguage.g:474:4: (lv_name_0_0= RULE_ID )
             {
-            // InternalLocationProviderTestLanguage.g:473:1: (lv_name_0_0= RULE_ID )
-            // InternalLocationProviderTestLanguage.g:474:3: lv_name_0_0= RULE_ID
+            // InternalLocationProviderTestLanguage.g:474:4: (lv_name_0_0= RULE_ID )
+            // InternalLocationProviderTestLanguage.g:475:5: lv_name_0_0= RULE_ID
             {
             lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_14); 
 
-            			newLeafNode(lv_name_0_0, grammarAccess.getTransitionAccess().getNameIDTerminalRuleCall_0_0()); 
-            		
+            					newLeafNode(lv_name_0_0, grammarAccess.getTransitionAccess().getNameIDTerminalRuleCall_0_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getTransitionRule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"name",
-                    		lv_name_0_0, 
-                    		"org.eclipse.xtext.common.Terminals.ID");
-            	    
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getTransitionRule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"name",
+            						lv_name_0_0,
+            						"org.eclipse.xtext.common.Terminals.ID");
+            				
 
             }
 
@@ -1222,23 +1242,23 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
 
             otherlv_1=(Token)match(input,20,FollowSets000.FOLLOW_5); 
 
-                	newLeafNode(otherlv_1, grammarAccess.getTransitionAccess().getColonKeyword_1());
-                
-            // InternalLocationProviderTestLanguage.g:494:1: ( (otherlv_2= RULE_ID ) )
-            // InternalLocationProviderTestLanguage.g:495:1: (otherlv_2= RULE_ID )
+            			newLeafNode(otherlv_1, grammarAccess.getTransitionAccess().getColonKeyword_1());
+            		
+            // InternalLocationProviderTestLanguage.g:495:3: ( (otherlv_2= RULE_ID ) )
+            // InternalLocationProviderTestLanguage.g:496:4: (otherlv_2= RULE_ID )
             {
-            // InternalLocationProviderTestLanguage.g:495:1: (otherlv_2= RULE_ID )
-            // InternalLocationProviderTestLanguage.g:496:3: otherlv_2= RULE_ID
+            // InternalLocationProviderTestLanguage.g:496:4: (otherlv_2= RULE_ID )
+            // InternalLocationProviderTestLanguage.g:497:5: otherlv_2= RULE_ID
             {
 
-            			if (current==null) {
-            	            current = createModelElement(grammarAccess.getTransitionRule());
-            	        }
-                    
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getTransitionRule());
+            					}
+            				
             otherlv_2=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_15); 
 
-            		newLeafNode(otherlv_2, grammarAccess.getTransitionAccess().getSourceModeCrossReference_2_0()); 
-            	
+            					newLeafNode(otherlv_2, grammarAccess.getTransitionAccess().getSourceModeCrossReference_2_0());
+            				
 
             }
 
@@ -1247,23 +1267,23 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
 
             otherlv_3=(Token)match(input,21,FollowSets000.FOLLOW_5); 
 
-                	newLeafNode(otherlv_3, grammarAccess.getTransitionAccess().getHyphenMinusGreaterThanSignKeyword_3());
-                
-            // InternalLocationProviderTestLanguage.g:511:1: ( (otherlv_4= RULE_ID ) )
-            // InternalLocationProviderTestLanguage.g:512:1: (otherlv_4= RULE_ID )
+            			newLeafNode(otherlv_3, grammarAccess.getTransitionAccess().getHyphenMinusGreaterThanSignKeyword_3());
+            		
+            // InternalLocationProviderTestLanguage.g:512:3: ( (otherlv_4= RULE_ID ) )
+            // InternalLocationProviderTestLanguage.g:513:4: (otherlv_4= RULE_ID )
             {
-            // InternalLocationProviderTestLanguage.g:512:1: (otherlv_4= RULE_ID )
-            // InternalLocationProviderTestLanguage.g:513:3: otherlv_4= RULE_ID
+            // InternalLocationProviderTestLanguage.g:513:4: (otherlv_4= RULE_ID )
+            // InternalLocationProviderTestLanguage.g:514:5: otherlv_4= RULE_ID
             {
 
-            			if (current==null) {
-            	            current = createModelElement(grammarAccess.getTransitionRule());
-            	        }
-                    
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getTransitionRule());
+            					}
+            				
             otherlv_4=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_11); 
 
-            		newLeafNode(otherlv_4, grammarAccess.getTransitionAccess().getDestinationModeCrossReference_4_0()); 
-            	
+            					newLeafNode(otherlv_4, grammarAccess.getTransitionAccess().getDestinationModeCrossReference_4_0());
+            				
 
             }
 
@@ -1272,21 +1292,23 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
 
             otherlv_5=(Token)match(input,16,FollowSets000.FOLLOW_2); 
 
-                	newLeafNode(otherlv_5, grammarAccess.getTransitionAccess().getSemicolonKeyword_5());
-                
+            			newLeafNode(otherlv_5, grammarAccess.getTransitionAccess().getSemicolonKeyword_5());
+            		
 
             }
 
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1295,7 +1317,7 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "entryRulePort"
-    // InternalLocationProviderTestLanguage.g:536:1: entryRulePort returns [EObject current=null] : iv_rulePort= rulePort EOF ;
+    // InternalLocationProviderTestLanguage.g:533:1: entryRulePort returns [EObject current=null] : iv_rulePort= rulePort EOF ;
     public final EObject entryRulePort() throws RecognitionException {
         EObject current = null;
 
@@ -1303,8 +1325,8 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
 
 
         try {
-            // InternalLocationProviderTestLanguage.g:537:2: (iv_rulePort= rulePort EOF )
-            // InternalLocationProviderTestLanguage.g:538:2: iv_rulePort= rulePort EOF
+            // InternalLocationProviderTestLanguage.g:533:45: (iv_rulePort= rulePort EOF )
+            // InternalLocationProviderTestLanguage.g:534:2: iv_rulePort= rulePort EOF
             {
              newCompositeNode(grammarAccess.getPortRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -1318,11 +1340,11 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1331,7 +1353,7 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "rulePort"
-    // InternalLocationProviderTestLanguage.g:545:1: rulePort returns [EObject current=null] : (otherlv_0= 'port' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ';' ) ;
+    // InternalLocationProviderTestLanguage.g:540:1: rulePort returns [EObject current=null] : (otherlv_0= 'port' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ';' ) ;
     public final EObject rulePort() throws RecognitionException {
         EObject current = null;
 
@@ -1339,39 +1361,40 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
         Token lv_name_1_0=null;
         Token otherlv_2=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalLocationProviderTestLanguage.g:548:28: ( (otherlv_0= 'port' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ';' ) )
-            // InternalLocationProviderTestLanguage.g:549:1: (otherlv_0= 'port' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ';' )
+            // InternalLocationProviderTestLanguage.g:546:2: ( (otherlv_0= 'port' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ';' ) )
+            // InternalLocationProviderTestLanguage.g:547:2: (otherlv_0= 'port' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ';' )
             {
-            // InternalLocationProviderTestLanguage.g:549:1: (otherlv_0= 'port' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ';' )
-            // InternalLocationProviderTestLanguage.g:549:3: otherlv_0= 'port' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ';'
+            // InternalLocationProviderTestLanguage.g:547:2: (otherlv_0= 'port' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ';' )
+            // InternalLocationProviderTestLanguage.g:548:3: otherlv_0= 'port' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ';'
             {
             otherlv_0=(Token)match(input,22,FollowSets000.FOLLOW_5); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getPortAccess().getPortKeyword_0());
-                
-            // InternalLocationProviderTestLanguage.g:553:1: ( (lv_name_1_0= RULE_ID ) )
-            // InternalLocationProviderTestLanguage.g:554:1: (lv_name_1_0= RULE_ID )
+            			newLeafNode(otherlv_0, grammarAccess.getPortAccess().getPortKeyword_0());
+            		
+            // InternalLocationProviderTestLanguage.g:552:3: ( (lv_name_1_0= RULE_ID ) )
+            // InternalLocationProviderTestLanguage.g:553:4: (lv_name_1_0= RULE_ID )
             {
-            // InternalLocationProviderTestLanguage.g:554:1: (lv_name_1_0= RULE_ID )
-            // InternalLocationProviderTestLanguage.g:555:3: lv_name_1_0= RULE_ID
+            // InternalLocationProviderTestLanguage.g:553:4: (lv_name_1_0= RULE_ID )
+            // InternalLocationProviderTestLanguage.g:554:5: lv_name_1_0= RULE_ID
             {
             lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_11); 
 
-            			newLeafNode(lv_name_1_0, grammarAccess.getPortAccess().getNameIDTerminalRuleCall_1_0()); 
-            		
+            					newLeafNode(lv_name_1_0, grammarAccess.getPortAccess().getNameIDTerminalRuleCall_1_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getPortRule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"name",
-                    		lv_name_1_0, 
-                    		"org.eclipse.xtext.common.Terminals.ID");
-            	    
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getPortRule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"name",
+            						lv_name_1_0,
+            						"org.eclipse.xtext.common.Terminals.ID");
+            				
 
             }
 
@@ -1380,21 +1403,23 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
 
             otherlv_2=(Token)match(input,16,FollowSets000.FOLLOW_2); 
 
-                	newLeafNode(otherlv_2, grammarAccess.getPortAccess().getSemicolonKeyword_2());
-                
+            			newLeafNode(otherlv_2, grammarAccess.getPortAccess().getSemicolonKeyword_2());
+            		
 
             }
 
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1403,7 +1428,7 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "entryRuleData"
-    // InternalLocationProviderTestLanguage.g:583:1: entryRuleData returns [EObject current=null] : iv_ruleData= ruleData EOF ;
+    // InternalLocationProviderTestLanguage.g:578:1: entryRuleData returns [EObject current=null] : iv_ruleData= ruleData EOF ;
     public final EObject entryRuleData() throws RecognitionException {
         EObject current = null;
 
@@ -1411,8 +1436,8 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
 
 
         try {
-            // InternalLocationProviderTestLanguage.g:584:2: (iv_ruleData= ruleData EOF )
-            // InternalLocationProviderTestLanguage.g:585:2: iv_ruleData= ruleData EOF
+            // InternalLocationProviderTestLanguage.g:578:45: (iv_ruleData= ruleData EOF )
+            // InternalLocationProviderTestLanguage.g:579:2: iv_ruleData= ruleData EOF
             {
              newCompositeNode(grammarAccess.getDataRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -1426,11 +1451,11 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1439,7 +1464,7 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "ruleData"
-    // InternalLocationProviderTestLanguage.g:592:1: ruleData returns [EObject current=null] : (otherlv_0= 'data' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ';' ) ;
+    // InternalLocationProviderTestLanguage.g:585:1: ruleData returns [EObject current=null] : (otherlv_0= 'data' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ';' ) ;
     public final EObject ruleData() throws RecognitionException {
         EObject current = null;
 
@@ -1447,39 +1472,40 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
         Token lv_name_1_0=null;
         Token otherlv_2=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalLocationProviderTestLanguage.g:595:28: ( (otherlv_0= 'data' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ';' ) )
-            // InternalLocationProviderTestLanguage.g:596:1: (otherlv_0= 'data' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ';' )
+            // InternalLocationProviderTestLanguage.g:591:2: ( (otherlv_0= 'data' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ';' ) )
+            // InternalLocationProviderTestLanguage.g:592:2: (otherlv_0= 'data' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ';' )
             {
-            // InternalLocationProviderTestLanguage.g:596:1: (otherlv_0= 'data' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ';' )
-            // InternalLocationProviderTestLanguage.g:596:3: otherlv_0= 'data' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ';'
+            // InternalLocationProviderTestLanguage.g:592:2: (otherlv_0= 'data' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ';' )
+            // InternalLocationProviderTestLanguage.g:593:3: otherlv_0= 'data' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ';'
             {
             otherlv_0=(Token)match(input,23,FollowSets000.FOLLOW_5); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getDataAccess().getDataKeyword_0());
-                
-            // InternalLocationProviderTestLanguage.g:600:1: ( (lv_name_1_0= RULE_ID ) )
-            // InternalLocationProviderTestLanguage.g:601:1: (lv_name_1_0= RULE_ID )
+            			newLeafNode(otherlv_0, grammarAccess.getDataAccess().getDataKeyword_0());
+            		
+            // InternalLocationProviderTestLanguage.g:597:3: ( (lv_name_1_0= RULE_ID ) )
+            // InternalLocationProviderTestLanguage.g:598:4: (lv_name_1_0= RULE_ID )
             {
-            // InternalLocationProviderTestLanguage.g:601:1: (lv_name_1_0= RULE_ID )
-            // InternalLocationProviderTestLanguage.g:602:3: lv_name_1_0= RULE_ID
+            // InternalLocationProviderTestLanguage.g:598:4: (lv_name_1_0= RULE_ID )
+            // InternalLocationProviderTestLanguage.g:599:5: lv_name_1_0= RULE_ID
             {
             lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_11); 
 
-            			newLeafNode(lv_name_1_0, grammarAccess.getDataAccess().getNameIDTerminalRuleCall_1_0()); 
-            		
+            					newLeafNode(lv_name_1_0, grammarAccess.getDataAccess().getNameIDTerminalRuleCall_1_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getDataRule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"name",
-                    		lv_name_1_0, 
-                    		"org.eclipse.xtext.common.Terminals.ID");
-            	    
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getDataRule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"name",
+            						lv_name_1_0,
+            						"org.eclipse.xtext.common.Terminals.ID");
+            				
 
             }
 
@@ -1488,21 +1514,23 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
 
             otherlv_2=(Token)match(input,16,FollowSets000.FOLLOW_2); 
 
-                	newLeafNode(otherlv_2, grammarAccess.getDataAccess().getSemicolonKeyword_2());
-                
+            			newLeafNode(otherlv_2, grammarAccess.getDataAccess().getSemicolonKeyword_2());
+            		
 
             }
 
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;

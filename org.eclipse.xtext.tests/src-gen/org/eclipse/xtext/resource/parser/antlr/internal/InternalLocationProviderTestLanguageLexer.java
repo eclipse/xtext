@@ -323,10 +323,10 @@ public class InternalLocationProviderTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalLocationProviderTestLanguage.g:629:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // InternalLocationProviderTestLanguage.g:629:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalLocationProviderTestLanguage.g:622:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // InternalLocationProviderTestLanguage.g:622:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // InternalLocationProviderTestLanguage.g:629:11: ( '^' )?
+            // InternalLocationProviderTestLanguage.g:622:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -335,7 +335,7 @@ public class InternalLocationProviderTestLanguageLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // InternalLocationProviderTestLanguage.g:629:11: '^'
+                    // InternalLocationProviderTestLanguage.g:622:11: '^'
                     {
                     match('^'); 
 
@@ -353,7 +353,7 @@ public class InternalLocationProviderTestLanguageLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // InternalLocationProviderTestLanguage.g:629:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalLocationProviderTestLanguage.g:622:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -402,10 +402,10 @@ public class InternalLocationProviderTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalLocationProviderTestLanguage.g:631:10: ( ( '0' .. '9' )+ )
-            // InternalLocationProviderTestLanguage.g:631:12: ( '0' .. '9' )+
+            // InternalLocationProviderTestLanguage.g:624:10: ( ( '0' .. '9' )+ )
+            // InternalLocationProviderTestLanguage.g:624:12: ( '0' .. '9' )+
             {
-            // InternalLocationProviderTestLanguage.g:631:12: ( '0' .. '9' )+
+            // InternalLocationProviderTestLanguage.g:624:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -419,7 +419,7 @@ public class InternalLocationProviderTestLanguageLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // InternalLocationProviderTestLanguage.g:631:13: '0' .. '9'
+            	    // InternalLocationProviderTestLanguage.g:624:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -451,10 +451,10 @@ public class InternalLocationProviderTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalLocationProviderTestLanguage.g:633:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // InternalLocationProviderTestLanguage.g:633:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalLocationProviderTestLanguage.g:626:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // InternalLocationProviderTestLanguage.g:626:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // InternalLocationProviderTestLanguage.g:633:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalLocationProviderTestLanguage.g:626:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -472,10 +472,10 @@ public class InternalLocationProviderTestLanguageLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // InternalLocationProviderTestLanguage.g:633:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // InternalLocationProviderTestLanguage.g:626:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // InternalLocationProviderTestLanguage.g:633:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // InternalLocationProviderTestLanguage.g:626:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -491,7 +491,7 @@ public class InternalLocationProviderTestLanguageLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // InternalLocationProviderTestLanguage.g:633:21: '\\\\' .
+                    	    // InternalLocationProviderTestLanguage.g:626:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -499,7 +499,7 @@ public class InternalLocationProviderTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalLocationProviderTestLanguage.g:633:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // InternalLocationProviderTestLanguage.g:626:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -524,10 +524,10 @@ public class InternalLocationProviderTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalLocationProviderTestLanguage.g:633:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // InternalLocationProviderTestLanguage.g:626:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // InternalLocationProviderTestLanguage.g:633:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // InternalLocationProviderTestLanguage.g:626:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -543,7 +543,7 @@ public class InternalLocationProviderTestLanguageLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // InternalLocationProviderTestLanguage.g:633:54: '\\\\' .
+                    	    // InternalLocationProviderTestLanguage.g:626:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -551,7 +551,7 @@ public class InternalLocationProviderTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalLocationProviderTestLanguage.g:633:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // InternalLocationProviderTestLanguage.g:626:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -594,12 +594,12 @@ public class InternalLocationProviderTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalLocationProviderTestLanguage.g:635:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // InternalLocationProviderTestLanguage.g:635:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // InternalLocationProviderTestLanguage.g:628:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // InternalLocationProviderTestLanguage.g:628:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // InternalLocationProviderTestLanguage.g:635:24: ( options {greedy=false; } : . )*
+            // InternalLocationProviderTestLanguage.g:628:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -624,7 +624,7 @@ public class InternalLocationProviderTestLanguageLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // InternalLocationProviderTestLanguage.g:635:52: .
+            	    // InternalLocationProviderTestLanguage.g:628:52: .
             	    {
             	    matchAny(); 
 
@@ -654,12 +654,12 @@ public class InternalLocationProviderTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalLocationProviderTestLanguage.g:637:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // InternalLocationProviderTestLanguage.g:637:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // InternalLocationProviderTestLanguage.g:630:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // InternalLocationProviderTestLanguage.g:630:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // InternalLocationProviderTestLanguage.g:637:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalLocationProviderTestLanguage.g:630:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -672,7 +672,7 @@ public class InternalLocationProviderTestLanguageLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // InternalLocationProviderTestLanguage.g:637:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalLocationProviderTestLanguage.g:630:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -692,7 +692,7 @@ public class InternalLocationProviderTestLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // InternalLocationProviderTestLanguage.g:637:40: ( ( '\\r' )? '\\n' )?
+            // InternalLocationProviderTestLanguage.g:630:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -701,9 +701,9 @@ public class InternalLocationProviderTestLanguageLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // InternalLocationProviderTestLanguage.g:637:41: ( '\\r' )? '\\n'
+                    // InternalLocationProviderTestLanguage.g:630:41: ( '\\r' )? '\\n'
                     {
-                    // InternalLocationProviderTestLanguage.g:637:41: ( '\\r' )?
+                    // InternalLocationProviderTestLanguage.g:630:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -712,7 +712,7 @@ public class InternalLocationProviderTestLanguageLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // InternalLocationProviderTestLanguage.g:637:41: '\\r'
+                            // InternalLocationProviderTestLanguage.g:630:41: '\\r'
                             {
                             match('\r'); 
 
@@ -744,10 +744,10 @@ public class InternalLocationProviderTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalLocationProviderTestLanguage.g:639:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // InternalLocationProviderTestLanguage.g:639:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalLocationProviderTestLanguage.g:632:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalLocationProviderTestLanguage.g:632:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // InternalLocationProviderTestLanguage.g:639:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalLocationProviderTestLanguage.g:632:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -801,8 +801,8 @@ public class InternalLocationProviderTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalLocationProviderTestLanguage.g:641:16: ( . )
-            // InternalLocationProviderTestLanguage.g:641:18: .
+            // InternalLocationProviderTestLanguage.g:634:16: ( . )
+            // InternalLocationProviderTestLanguage.g:634:18: .
             {
             matchAny(); 
 
