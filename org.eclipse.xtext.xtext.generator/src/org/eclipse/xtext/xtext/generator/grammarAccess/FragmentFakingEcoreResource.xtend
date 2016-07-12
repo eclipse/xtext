@@ -68,12 +68,16 @@ class FragmentFakingEcoreResource extends XMIResourceImpl {
 				if (!ePackage.EClassifiers.empty) {
 					if (result.length !== 0) {
 						result.append(ePackage.name).append('/')
-						return
+					} else {
+						result.append('//')
 					}
 				}
+			} else {
+				result.append('//')
 			}
+		} else {
+			result.append('//')
 		}
-		result.append('//')
 	}
 
 	@FinalFieldsConstructor	
