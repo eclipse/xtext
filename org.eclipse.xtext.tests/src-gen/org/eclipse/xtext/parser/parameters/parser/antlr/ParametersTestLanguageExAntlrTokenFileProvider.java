@@ -7,10 +7,10 @@ import java.io.InputStream;
 import org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider;
 
 public class ParametersTestLanguageExAntlrTokenFileProvider implements IAntlrTokenFileProvider {
-	
+
 	@Override
 	public InputStream getAntlrTokenFile() {
 		ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguageExParser.tokens");
+		return classLoader.getResourceAsStream("org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguageEx.tokens");
 	}
 }
