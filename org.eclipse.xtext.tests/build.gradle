@@ -21,6 +21,11 @@ sourceSets.test.java {
 	srcDir 'suites'
 }
 
+sourceSets.mwe2.java {
+	srcDir 'generator/src'
+	srcDir 'generator/xtend-gen'
+}
+
 test {
 	exclude 'org.eclipse.xtext.serializer.contextFinderTest.NestedTypeRecursiveTest.class'
 	exclude '**/*Suite.class'
