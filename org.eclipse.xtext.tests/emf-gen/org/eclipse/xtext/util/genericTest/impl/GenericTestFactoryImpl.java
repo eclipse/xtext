@@ -31,7 +31,7 @@ public class GenericTestFactoryImpl extends EFactoryImpl implements GenericTestF
 	 */
 	public static GenericTestFactory init() {
 		try {
-			GenericTestFactory theGenericTestFactory = (GenericTestFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/Xtext/tests/genericTest"); 
+			GenericTestFactory theGenericTestFactory = (GenericTestFactory)EPackage.Registry.INSTANCE.getEFactory(GenericTestPackage.eNS_URI);
 			if (theGenericTestFactory != null) {
 				return theGenericTestFactory;
 			}

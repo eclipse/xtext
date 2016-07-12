@@ -16,8 +16,6 @@ import org.eclipse.xtext.util.genericTest.SomeType;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>C</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * </p>
  *
  * @generated
  */
@@ -39,6 +37,17 @@ public class CImpl<W> extends BImpl<W, SomeType> implements C<W> {
 	@Override
 	protected EClass eStaticClass() {
 		return GenericTestPackage.Literals.C;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * This is specialized for the more specific type known in this context.
+	 * @generated
+	 */
+	@Override
+	public void setOtherReference(W newOtherReference) {
+		super.setOtherReference(newOtherReference);
 	}
 
 } //CImpl

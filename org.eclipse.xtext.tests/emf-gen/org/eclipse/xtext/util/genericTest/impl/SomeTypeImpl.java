@@ -17,8 +17,6 @@ import org.eclipse.xtext.util.genericTest.SomeType;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Some Type</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * </p>
  *
  * @generated
  */

@@ -25,11 +25,11 @@ import org.eclipse.xtext.util.genericTest.SomeType;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.util.genericTest.impl.AImpl#getSomeReference <em>Some Reference</em>}</li>
  *   <li>{@link org.eclipse.xtext.util.genericTest.impl.AImpl#getSomeReference1 <em>Some Reference1</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

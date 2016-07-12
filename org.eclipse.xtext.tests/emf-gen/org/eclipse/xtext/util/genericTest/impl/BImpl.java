@@ -25,11 +25,11 @@ import org.eclipse.xtext.util.genericTest.OtherType;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.util.genericTest.impl.BImpl#getOtherReference <em>Other Reference</em>}</li>
  *   <li>{@link org.eclipse.xtext.util.genericTest.impl.BImpl#getOtherReference1 <em>Other Reference1</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -71,6 +71,17 @@ public class BImpl<U, V> extends AImpl<V> implements B<U, V> {
 	@Override
 	protected EClass eStaticClass() {
 		return GenericTestPackage.Literals.B;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * This is specialized for the more specific type known in this context.
+	 * @generated
+	 */
+	@Override
+	public void setSomeReference(V newSomeReference) {
+		super.setSomeReference(newSomeReference);
 	}
 
 	/**
