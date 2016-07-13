@@ -25,10 +25,10 @@ import org.eclipse.xtext.parser.partialParsingTestUtil.PartialParsingTestUtilPac
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.parser.partialParsingTestUtil.impl.CrossResourceContainerOneChildImpl#getChild <em>Child</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

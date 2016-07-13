@@ -3,20 +3,29 @@
  */
 package org.eclipse.xtext.parsetree.reconstr.services;
 
-import com.google.inject.Singleton;
 import com.google.inject.Inject;
-
+import com.google.inject.Singleton;
 import java.util.List;
-
-import org.eclipse.xtext.*;
-import org.eclipse.xtext.service.GrammarProvider;
-import org.eclipse.xtext.service.AbstractElementFinder.*;
-
+import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Alternatives;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.EnumLiteralDeclaration;
+import org.eclipse.xtext.EnumRule;
+import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.Group;
+import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
+import org.eclipse.xtext.service.AbstractElementFinder.AbstractEnumRuleElementFinder;
+import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder;
+import org.eclipse.xtext.service.GrammarProvider;
 
 @Singleton
 public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
-	
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.HiddenTokensMergerTestLanguage.Model");
@@ -33,35 +42,34 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 		//Model:
 		//	DatatypeBug286557 | EnumBug | Commentable | ValueList | RefList | SingleRef | AppendToFileEnd | Action1;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//DatatypeBug286557 | EnumBug | Commentable | ValueList | RefList | SingleRef | AppendToFileEnd | Action1
 		public Alternatives getAlternatives() { return cAlternatives; }
-
+		
 		//DatatypeBug286557
 		public RuleCall getDatatypeBug286557ParserRuleCall_0() { return cDatatypeBug286557ParserRuleCall_0; }
-
+		
 		//EnumBug
 		public RuleCall getEnumBugParserRuleCall_1() { return cEnumBugParserRuleCall_1; }
-
+		
 		//Commentable
 		public RuleCall getCommentableParserRuleCall_2() { return cCommentableParserRuleCall_2; }
-
+		
 		//ValueList
 		public RuleCall getValueListParserRuleCall_3() { return cValueListParserRuleCall_3; }
-
+		
 		//RefList
 		public RuleCall getRefListParserRuleCall_4() { return cRefListParserRuleCall_4; }
-
+		
 		//SingleRef
 		public RuleCall getSingleRefParserRuleCall_5() { return cSingleRefParserRuleCall_5; }
-
+		
 		//AppendToFileEnd
 		public RuleCall getAppendToFileEndParserRuleCall_6() { return cAppendToFileEndParserRuleCall_6; }
-
+		
 		//Action1
 		public RuleCall getAction1ParserRuleCall_7() { return cAction1ParserRuleCall_7; }
 	}
-
 	public class DatatypeBug286557Elements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.HiddenTokensMergerTestLanguage.DatatypeBug286557");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -78,38 +86,37 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 		//DatatypeBug286557:
 		//	'#1' name=FQN ('ref' ref=[DatatypeBug286557|FQN])? ";";
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'#1' name=FQN ('ref' ref=[DatatypeBug286557|FQN])? ";"
 		public Group getGroup() { return cGroup; }
-
+		
 		//'#1'
 		public Keyword getNumberSignDigitOneKeyword_0() { return cNumberSignDigitOneKeyword_0; }
-
+		
 		//name=FQN
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
-
+		
 		//FQN
 		public RuleCall getNameFQNParserRuleCall_1_0() { return cNameFQNParserRuleCall_1_0; }
-
+		
 		//('ref' ref=[DatatypeBug286557|FQN])?
 		public Group getGroup_2() { return cGroup_2; }
-
+		
 		//'ref'
 		public Keyword getRefKeyword_2_0() { return cRefKeyword_2_0; }
-
+		
 		//ref=[DatatypeBug286557|FQN]
 		public Assignment getRefAssignment_2_1() { return cRefAssignment_2_1; }
-
+		
 		//[DatatypeBug286557|FQN]
 		public CrossReference getRefDatatypeBug286557CrossReference_2_1_0() { return cRefDatatypeBug286557CrossReference_2_1_0; }
-
+		
 		//FQN
 		public RuleCall getRefDatatypeBug286557FQNParserRuleCall_2_1_0_1() { return cRefDatatypeBug286557FQNParserRuleCall_2_1_0_1; }
-
+		
 		//";"
 		public Keyword getSemicolonKeyword_3() { return cSemicolonKeyword_3; }
 	}
-
 	public class FQNElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.HiddenTokensMergerTestLanguage.FQN");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -121,23 +128,22 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 		//FQN:
 		//	ID ('.' ID)*;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//ID ('.' ID)*
 		public Group getGroup() { return cGroup; }
-
+		
 		//ID
 		public RuleCall getIDTerminalRuleCall_0() { return cIDTerminalRuleCall_0; }
-
+		
 		//('.' ID)*
 		public Group getGroup_1() { return cGroup_1; }
-
+		
 		//'.'
 		public Keyword getFullStopKeyword_1_0() { return cFullStopKeyword_1_0; }
-
+		
 		//ID
 		public RuleCall getIDTerminalRuleCall_1_1() { return cIDTerminalRuleCall_1_1; }
 	}
-
 	public class EnumBugElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.HiddenTokensMergerTestLanguage.EnumBug");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -151,29 +157,28 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 		//EnumBug:
 		//	'#2' 'kw1' return=EnumBugEnum name=ID;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'#2' 'kw1' return=EnumBugEnum name=ID
 		public Group getGroup() { return cGroup; }
-
+		
 		//'#2'
 		public Keyword getNumberSignDigitTwoKeyword_0() { return cNumberSignDigitTwoKeyword_0; }
-
+		
 		//'kw1'
 		public Keyword getKw1Keyword_1() { return cKw1Keyword_1; }
-
+		
 		//return=EnumBugEnum
 		public Assignment getReturnAssignment_2() { return cReturnAssignment_2; }
-
+		
 		//EnumBugEnum
 		public RuleCall getReturnEnumBugEnumEnumRuleCall_2_0() { return cReturnEnumBugEnumEnumRuleCall_2_0; }
-
+		
 		//name=ID
 		public Assignment getNameAssignment_3() { return cNameAssignment_3; }
-
+		
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_3_0() { return cNameIDTerminalRuleCall_3_0; }
 	}
-
 	public class CommentableElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.HiddenTokensMergerTestLanguage.Commentable");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -184,20 +189,19 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 		/// * SuppressWarnings[noInstantiation] * / Commentable:
 		//	'#3' item+=CommentableItem*;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'#3' item+=CommentableItem*
 		public Group getGroup() { return cGroup; }
-
+		
 		//'#3'
 		public Keyword getNumberSignDigitThreeKeyword_0() { return cNumberSignDigitThreeKeyword_0; }
-
+		
 		//item+=CommentableItem*
 		public Assignment getItemAssignment_1() { return cItemAssignment_1; }
-
+		
 		//CommentableItem
 		public RuleCall getItemCommentableItemParserRuleCall_1_0() { return cItemCommentableItemParserRuleCall_1_0; }
 	}
-
 	public class CommentableItemElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.HiddenTokensMergerTestLanguage.CommentableItem");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -208,20 +212,19 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 		//CommentableItem:
 		//	'item' id=ID;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'item' id=ID
 		public Group getGroup() { return cGroup; }
-
+		
 		//'item'
 		public Keyword getItemKeyword_0() { return cItemKeyword_0; }
-
+		
 		//id=ID
 		public Assignment getIdAssignment_1() { return cIdAssignment_1; }
-
+		
 		//ID
 		public RuleCall getIdIDTerminalRuleCall_1_0() { return cIdIDTerminalRuleCall_1_0; }
 	}
-
 	public class ValueListElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.HiddenTokensMergerTestLanguage.ValueList");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -232,20 +235,19 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 		/// * SuppressWarnings[noInstantiation] * / ValueList:
 		//	'#4' ids+=FQN*;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'#4' ids+=FQN*
 		public Group getGroup() { return cGroup; }
-
+		
 		//'#4'
 		public Keyword getNumberSignDigitFourKeyword_0() { return cNumberSignDigitFourKeyword_0; }
-
+		
 		//ids+=FQN*
 		public Assignment getIdsAssignment_1() { return cIdsAssignment_1; }
-
+		
 		//FQN
 		public RuleCall getIdsFQNParserRuleCall_1_0() { return cIdsFQNParserRuleCall_1_0; }
 	}
-
 	public class RefListElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.HiddenTokensMergerTestLanguage.RefList");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -260,32 +262,31 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 		/// * SuppressWarnings[noInstantiation] * / RefList:
 		//	'#5' objs+=RefObj* 'refs' refs+=[RefObj|FQN]*;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'#5' objs+=RefObj* 'refs' refs+=[RefObj|FQN]*
 		public Group getGroup() { return cGroup; }
-
+		
 		//'#5'
 		public Keyword getNumberSignDigitFiveKeyword_0() { return cNumberSignDigitFiveKeyword_0; }
-
+		
 		//objs+=RefObj*
 		public Assignment getObjsAssignment_1() { return cObjsAssignment_1; }
-
+		
 		//RefObj
 		public RuleCall getObjsRefObjParserRuleCall_1_0() { return cObjsRefObjParserRuleCall_1_0; }
-
+		
 		//'refs'
 		public Keyword getRefsKeyword_2() { return cRefsKeyword_2; }
-
+		
 		//refs+=[RefObj|FQN]*
 		public Assignment getRefsAssignment_3() { return cRefsAssignment_3; }
-
+		
 		//[RefObj|FQN]
 		public CrossReference getRefsRefObjCrossReference_3_0() { return cRefsRefObjCrossReference_3_0; }
-
+		
 		//FQN
 		public RuleCall getRefsRefObjFQNParserRuleCall_3_0_1() { return cRefsRefObjFQNParserRuleCall_3_0_1; }
 	}
-
 	public class RefObjElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.HiddenTokensMergerTestLanguage.RefObj");
 		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
@@ -294,14 +295,13 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 		//RefObj:
 		//	name=FQN;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//name=FQN
 		public Assignment getNameAssignment() { return cNameAssignment; }
-
+		
 		//FQN
 		public RuleCall getNameFQNParserRuleCall_0() { return cNameFQNParserRuleCall_0; }
 	}
-
 	public class SingleRefElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.HiddenTokensMergerTestLanguage.SingleRef");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -316,32 +316,31 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 		//SingleRef:
 		//	'#6' obj=RefObj 'ref' ref=[RefObj|FQN];
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'#6' obj=RefObj 'ref' ref=[RefObj|FQN]
 		public Group getGroup() { return cGroup; }
-
+		
 		//'#6'
 		public Keyword getNumberSignDigitSixKeyword_0() { return cNumberSignDigitSixKeyword_0; }
-
+		
 		//obj=RefObj
 		public Assignment getObjAssignment_1() { return cObjAssignment_1; }
-
+		
 		//RefObj
 		public RuleCall getObjRefObjParserRuleCall_1_0() { return cObjRefObjParserRuleCall_1_0; }
-
+		
 		//'ref'
 		public Keyword getRefKeyword_2() { return cRefKeyword_2; }
-
+		
 		//ref=[RefObj|FQN]
 		public Assignment getRefAssignment_3() { return cRefAssignment_3; }
-
+		
 		//[RefObj|FQN]
 		public CrossReference getRefRefObjCrossReference_3_0() { return cRefRefObjCrossReference_3_0; }
-
+		
 		//FQN
 		public RuleCall getRefRefObjFQNParserRuleCall_3_0_1() { return cRefRefObjFQNParserRuleCall_3_0_1; }
 	}
-
 	public class AppendToFileEndElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.HiddenTokensMergerTestLanguage.AppendToFileEnd");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -353,20 +352,19 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 		/// * SuppressWarnings[noInstantiation] * / AppendToFileEnd:
 		//	'#7' items+=AppendToFileEndItem*;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'#7' items+=AppendToFileEndItem*
 		public Group getGroup() { return cGroup; }
-
+		
 		//'#7'
 		public Keyword getNumberSignDigitSevenKeyword_0() { return cNumberSignDigitSevenKeyword_0; }
-
+		
 		//items+=AppendToFileEndItem*
 		public Assignment getItemsAssignment_1() { return cItemsAssignment_1; }
-
+		
 		//AppendToFileEndItem
 		public RuleCall getItemsAppendToFileEndItemParserRuleCall_1_0() { return cItemsAppendToFileEndItemParserRuleCall_1_0; }
 	}
-
 	public class AppendToFileEndItemElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.HiddenTokensMergerTestLanguage.AppendToFileEndItem");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -378,23 +376,22 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 		//AppendToFileEndItem:
 		//	'class' name=ID 'endclass';
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'class' name=ID 'endclass'
 		public Group getGroup() { return cGroup; }
-
+		
 		//'class'
 		public Keyword getClassKeyword_0() { return cClassKeyword_0; }
-
+		
 		//name=ID
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
-
+		
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
-
+		
 		//'endclass'
 		public Keyword getEndclassKeyword_2() { return cEndclassKeyword_2; }
 	}
-
 	public class Action1Elements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.HiddenTokensMergerTestLanguage.Action1");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -410,35 +407,34 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 		//Action1:
 		//	'#8' {Action1} name=ID actions2+=Action1Sub1 actions2+=Action1Sub2;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'#8' {Action1} name=ID actions2+=Action1Sub1 actions2+=Action1Sub2
 		public Group getGroup() { return cGroup; }
-
+		
 		//'#8'
 		public Keyword getNumberSignDigitEightKeyword_0() { return cNumberSignDigitEightKeyword_0; }
-
+		
 		//{Action1}
 		public Action getAction1Action_1() { return cAction1Action_1; }
-
+		
 		//name=ID
 		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
-
+		
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
-
+		
 		//actions2+=Action1Sub1
 		public Assignment getActions2Assignment_3() { return cActions2Assignment_3; }
-
+		
 		//Action1Sub1
 		public RuleCall getActions2Action1Sub1ParserRuleCall_3_0() { return cActions2Action1Sub1ParserRuleCall_3_0; }
-
+		
 		//actions2+=Action1Sub2
 		public Assignment getActions2Assignment_4() { return cActions2Assignment_4; }
-
+		
 		//Action1Sub2
 		public RuleCall getActions2Action1Sub2ParserRuleCall_4_0() { return cActions2Action1Sub2ParserRuleCall_4_0; }
 	}
-
 	public class Action1Sub1Elements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.HiddenTokensMergerTestLanguage.Action1Sub1");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -448,17 +444,16 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 		//Action1Sub1:
 		//	{Action1Sub} "sub1";
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//{Action1Sub} "sub1"
 		public Group getGroup() { return cGroup; }
-
+		
 		//{Action1Sub}
 		public Action getAction1SubAction_0() { return cAction1SubAction_0; }
-
+		
 		//"sub1"
 		public Keyword getSub1Keyword_1() { return cSub1Keyword_1; }
 	}
-
 	public class Action1Sub2Elements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.HiddenTokensMergerTestLanguage.Action1Sub2");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -468,17 +463,16 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 		//Action1Sub2:
 		//	{Action1SubClass} "sub2";
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//{Action1SubClass} "sub2"
 		public Group getGroup() { return cGroup; }
-
+		
 		//{Action1SubClass}
 		public Action getAction1SubClassAction_0() { return cAction1SubClassAction_0; }
-
+		
 		//"sub2"
 		public Keyword getSub2Keyword_1() { return cSub2Keyword_1; }
 	}
-	
 	
 	public class EnumBugEnumElements extends AbstractEnumRuleElementFinder {
 		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.HiddenTokensMergerTestLanguage.EnumBugEnum");
@@ -495,31 +489,31 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 		//enum EnumBugEnum:
 		//	array | object | resultSet | iterator;
 		public EnumRule getRule() { return rule; }
-
+		
 		//array | object | resultSet | iterator
 		public Alternatives getAlternatives() { return cAlternatives; }
-
+		
 		//array
 		public EnumLiteralDeclaration getArrayEnumLiteralDeclaration_0() { return cArrayEnumLiteralDeclaration_0; }
-
+		
 		//"array"
 		public Keyword getArrayArrayKeyword_0_0() { return cArrayArrayKeyword_0_0; }
-
+		
 		//object
 		public EnumLiteralDeclaration getObjectEnumLiteralDeclaration_1() { return cObjectEnumLiteralDeclaration_1; }
-
+		
 		//"object"
 		public Keyword getObjectObjectKeyword_1_0() { return cObjectObjectKeyword_1_0; }
-
+		
 		//resultSet
 		public EnumLiteralDeclaration getResultSetEnumLiteralDeclaration_2() { return cResultSetEnumLiteralDeclaration_2; }
-
+		
 		//"resultSet"
 		public Keyword getResultSetResultSetKeyword_2_0() { return cResultSetResultSetKeyword_2_0; }
-
+		
 		//iterator
 		public EnumLiteralDeclaration getIteratorEnumLiteralDeclaration_3() { return cIteratorEnumLiteralDeclaration_3; }
-
+		
 		//"iterator"
 		public Keyword getIteratorIteratorKeyword_3_0() { return cIteratorIteratorKeyword_3_0; }
 	}
@@ -542,12 +536,12 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 	private final Action1Sub2Elements pAction1Sub2;
 	
 	private final Grammar grammar;
-
+	
 	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public HiddenTokensMergerTestLanguageGrammarAccess(GrammarProvider grammarProvider,
-		TerminalsGrammarAccess gaTerminals) {
+			TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
 		this.pModel = new ModelElements();
@@ -589,7 +583,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 		return grammar;
 	}
 	
-
+	
 	public TerminalsGrammarAccess getTerminalsGrammarAccess() {
 		return gaTerminals;
 	}
@@ -604,7 +598,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 	public ParserRule getModelRule() {
 		return getModelAccess().getRule();
 	}
-
+	
 	//DatatypeBug286557:
 	//	'#1' name=FQN ('ref' ref=[DatatypeBug286557|FQN])? ";";
 	public DatatypeBug286557Elements getDatatypeBug286557Access() {
@@ -614,7 +608,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 	public ParserRule getDatatypeBug286557Rule() {
 		return getDatatypeBug286557Access().getRule();
 	}
-
+	
 	//FQN:
 	//	ID ('.' ID)*;
 	public FQNElements getFQNAccess() {
@@ -624,7 +618,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 	public ParserRule getFQNRule() {
 		return getFQNAccess().getRule();
 	}
-
+	
 	//EnumBug:
 	//	'#2' 'kw1' return=EnumBugEnum name=ID;
 	public EnumBugElements getEnumBugAccess() {
@@ -634,7 +628,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 	public ParserRule getEnumBugRule() {
 		return getEnumBugAccess().getRule();
 	}
-
+	
 	//enum EnumBugEnum:
 	//	array | object | resultSet | iterator;
 	public EnumBugEnumElements getEnumBugEnumAccess() {
@@ -644,7 +638,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 	public EnumRule getEnumBugEnumRule() {
 		return getEnumBugEnumAccess().getRule();
 	}
-
+	
 	/// * SuppressWarnings[noInstantiation] * / Commentable:
 	//	'#3' item+=CommentableItem*;
 	public CommentableElements getCommentableAccess() {
@@ -654,7 +648,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 	public ParserRule getCommentableRule() {
 		return getCommentableAccess().getRule();
 	}
-
+	
 	//CommentableItem:
 	//	'item' id=ID;
 	public CommentableItemElements getCommentableItemAccess() {
@@ -664,7 +658,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 	public ParserRule getCommentableItemRule() {
 		return getCommentableItemAccess().getRule();
 	}
-
+	
 	/// * SuppressWarnings[noInstantiation] * / ValueList:
 	//	'#4' ids+=FQN*;
 	public ValueListElements getValueListAccess() {
@@ -674,7 +668,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 	public ParserRule getValueListRule() {
 		return getValueListAccess().getRule();
 	}
-
+	
 	/// * SuppressWarnings[noInstantiation] * / RefList:
 	//	'#5' objs+=RefObj* 'refs' refs+=[RefObj|FQN]*;
 	public RefListElements getRefListAccess() {
@@ -684,7 +678,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 	public ParserRule getRefListRule() {
 		return getRefListAccess().getRule();
 	}
-
+	
 	//RefObj:
 	//	name=FQN;
 	public RefObjElements getRefObjAccess() {
@@ -694,7 +688,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 	public ParserRule getRefObjRule() {
 		return getRefObjAccess().getRule();
 	}
-
+	
 	//SingleRef:
 	//	'#6' obj=RefObj 'ref' ref=[RefObj|FQN];
 	public SingleRefElements getSingleRefAccess() {
@@ -704,7 +698,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 	public ParserRule getSingleRefRule() {
 		return getSingleRefAccess().getRule();
 	}
-
+	
 	//// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=297938
 	/// * SuppressWarnings[noInstantiation] * / AppendToFileEnd:
 	//	'#7' items+=AppendToFileEndItem*;
@@ -715,7 +709,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 	public ParserRule getAppendToFileEndRule() {
 		return getAppendToFileEndAccess().getRule();
 	}
-
+	
 	//AppendToFileEndItem:
 	//	'class' name=ID 'endclass';
 	public AppendToFileEndItemElements getAppendToFileEndItemAccess() {
@@ -725,7 +719,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 	public ParserRule getAppendToFileEndItemRule() {
 		return getAppendToFileEndItemAccess().getRule();
 	}
-
+	
 	//Action1:
 	//	'#8' {Action1} name=ID actions2+=Action1Sub1 actions2+=Action1Sub2;
 	public Action1Elements getAction1Access() {
@@ -735,7 +729,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 	public ParserRule getAction1Rule() {
 		return getAction1Access().getRule();
 	}
-
+	
 	//Action1Sub1:
 	//	{Action1Sub} "sub1";
 	public Action1Sub1Elements getAction1Sub1Access() {
@@ -745,7 +739,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 	public ParserRule getAction1Sub1Rule() {
 		return getAction1Sub1Access().getRule();
 	}
-
+	
 	//Action1Sub2:
 	//	{Action1SubClass} "sub2";
 	public Action1Sub2Elements getAction1Sub2Access() {
@@ -755,47 +749,47 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 	public ParserRule getAction1Sub2Rule() {
 		return getAction1Sub2Access().getRule();
 	}
-
+	
 	//terminal ID:
 	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
-	} 
-
+	}
+	
 	//terminal INT returns ecore::EInt:
 	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
-	} 
-
+	}
+	
 	//terminal STRING:
 	//	'"' ('\\' . | !('\\' | '"'))* '"' |
 	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
-	} 
-
+	}
+	
 	//terminal ML_COMMENT:
 	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal SL_COMMENT:
 	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal WS:
 	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
-	} 
-
+	}
+	
 	//terminal ANY_OTHER:
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
-	} 
+	}
 }

@@ -1,4 +1,4 @@
-package org.eclipse.xtext.parser.antlr.parser.antlr.internal; 
+package org.eclipse.xtext.parser.antlr.parser.antlr.internal;
 
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
@@ -58,18 +58,18 @@ public class InternalBug378967TestLanguageParser extends AbstractInternalAntlrPa
 
 
      	private Bug378967TestLanguageGrammarAccess grammarAccess;
-     	
+
         public InternalBug378967TestLanguageParser(TokenStream input, Bug378967TestLanguageGrammarAccess grammarAccess) {
             this(input);
             this.grammarAccess = grammarAccess;
             registerRules(grammarAccess.getGrammar());
         }
-        
+
         @Override
         protected String getFirstRuleName() {
-        	return "Root";	
+        	return "Root";
        	}
-       	
+
        	@Override
        	protected Bug378967TestLanguageGrammarAccess getGrammarAccess() {
        		return grammarAccess;
@@ -77,8 +77,9 @@ public class InternalBug378967TestLanguageParser extends AbstractInternalAntlrPa
 
 
 
+
     // $ANTLR start "entryRuleRoot"
-    // InternalBug378967TestLanguage.g:68:1: entryRuleRoot returns [EObject current=null] : iv_ruleRoot= ruleRoot EOF ;
+    // InternalBug378967TestLanguage.g:65:1: entryRuleRoot returns [EObject current=null] : iv_ruleRoot= ruleRoot EOF ;
     public final EObject entryRuleRoot() throws RecognitionException {
         EObject current = null;
 
@@ -86,8 +87,8 @@ public class InternalBug378967TestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // InternalBug378967TestLanguage.g:69:2: (iv_ruleRoot= ruleRoot EOF )
-            // InternalBug378967TestLanguage.g:70:2: iv_ruleRoot= ruleRoot EOF
+            // InternalBug378967TestLanguage.g:65:45: (iv_ruleRoot= ruleRoot EOF )
+            // InternalBug378967TestLanguage.g:66:2: iv_ruleRoot= ruleRoot EOF
             {
              newCompositeNode(grammarAccess.getRootRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -101,11 +102,11 @@ public class InternalBug378967TestLanguageParser extends AbstractInternalAntlrPa
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -114,7 +115,7 @@ public class InternalBug378967TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleRoot"
-    // InternalBug378967TestLanguage.g:77:1: ruleRoot returns [EObject current=null] : ( (otherlv_0= '1' ( (lv_element_1_0= ruleRule1 ) ) ) | (otherlv_2= '2' ( (lv_element_3_0= ruleRule2 ) ) ) | (otherlv_4= '3' ( (lv_element_5_0= ruleRule3 ) ) ) | (otherlv_6= '4' ( (lv_element_7_0= ruleRule4 ) ) ) ) ;
+    // InternalBug378967TestLanguage.g:72:1: ruleRoot returns [EObject current=null] : ( (otherlv_0= '1' ( (lv_element_1_0= ruleRule1 ) ) ) | (otherlv_2= '2' ( (lv_element_3_0= ruleRule2 ) ) ) | (otherlv_4= '3' ( (lv_element_5_0= ruleRule3 ) ) ) | (otherlv_6= '4' ( (lv_element_7_0= ruleRule4 ) ) ) ) ;
     public final EObject ruleRoot() throws RecognitionException {
         EObject current = null;
 
@@ -131,13 +132,14 @@ public class InternalBug378967TestLanguageParser extends AbstractInternalAntlrPa
         EObject lv_element_7_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalBug378967TestLanguage.g:80:28: ( ( (otherlv_0= '1' ( (lv_element_1_0= ruleRule1 ) ) ) | (otherlv_2= '2' ( (lv_element_3_0= ruleRule2 ) ) ) | (otherlv_4= '3' ( (lv_element_5_0= ruleRule3 ) ) ) | (otherlv_6= '4' ( (lv_element_7_0= ruleRule4 ) ) ) ) )
-            // InternalBug378967TestLanguage.g:81:1: ( (otherlv_0= '1' ( (lv_element_1_0= ruleRule1 ) ) ) | (otherlv_2= '2' ( (lv_element_3_0= ruleRule2 ) ) ) | (otherlv_4= '3' ( (lv_element_5_0= ruleRule3 ) ) ) | (otherlv_6= '4' ( (lv_element_7_0= ruleRule4 ) ) ) )
+            // InternalBug378967TestLanguage.g:78:2: ( ( (otherlv_0= '1' ( (lv_element_1_0= ruleRule1 ) ) ) | (otherlv_2= '2' ( (lv_element_3_0= ruleRule2 ) ) ) | (otherlv_4= '3' ( (lv_element_5_0= ruleRule3 ) ) ) | (otherlv_6= '4' ( (lv_element_7_0= ruleRule4 ) ) ) ) )
+            // InternalBug378967TestLanguage.g:79:2: ( (otherlv_0= '1' ( (lv_element_1_0= ruleRule1 ) ) ) | (otherlv_2= '2' ( (lv_element_3_0= ruleRule2 ) ) ) | (otherlv_4= '3' ( (lv_element_5_0= ruleRule3 ) ) ) | (otherlv_6= '4' ( (lv_element_7_0= ruleRule4 ) ) ) )
             {
-            // InternalBug378967TestLanguage.g:81:1: ( (otherlv_0= '1' ( (lv_element_1_0= ruleRule1 ) ) ) | (otherlv_2= '2' ( (lv_element_3_0= ruleRule2 ) ) ) | (otherlv_4= '3' ( (lv_element_5_0= ruleRule3 ) ) ) | (otherlv_6= '4' ( (lv_element_7_0= ruleRule4 ) ) ) )
+            // InternalBug378967TestLanguage.g:79:2: ( (otherlv_0= '1' ( (lv_element_1_0= ruleRule1 ) ) ) | (otherlv_2= '2' ( (lv_element_3_0= ruleRule2 ) ) ) | (otherlv_4= '3' ( (lv_element_5_0= ruleRule3 ) ) ) | (otherlv_6= '4' ( (lv_element_7_0= ruleRule4 ) ) ) )
             int alt1=4;
             switch ( input.LA(1) ) {
             case 11:
@@ -169,40 +171,40 @@ public class InternalBug378967TestLanguageParser extends AbstractInternalAntlrPa
 
             switch (alt1) {
                 case 1 :
-                    // InternalBug378967TestLanguage.g:81:2: (otherlv_0= '1' ( (lv_element_1_0= ruleRule1 ) ) )
+                    // InternalBug378967TestLanguage.g:80:3: (otherlv_0= '1' ( (lv_element_1_0= ruleRule1 ) ) )
                     {
-                    // InternalBug378967TestLanguage.g:81:2: (otherlv_0= '1' ( (lv_element_1_0= ruleRule1 ) ) )
+                    // InternalBug378967TestLanguage.g:80:3: (otherlv_0= '1' ( (lv_element_1_0= ruleRule1 ) ) )
                     // InternalBug378967TestLanguage.g:81:4: otherlv_0= '1' ( (lv_element_1_0= ruleRule1 ) )
                     {
                     otherlv_0=(Token)match(input,11,FollowSets000.FOLLOW_3); 
 
-                        	newLeafNode(otherlv_0, grammarAccess.getRootAccess().getDigitOneKeyword_0_0());
-                        
-                    // InternalBug378967TestLanguage.g:85:1: ( (lv_element_1_0= ruleRule1 ) )
-                    // InternalBug378967TestLanguage.g:86:1: (lv_element_1_0= ruleRule1 )
+                    				newLeafNode(otherlv_0, grammarAccess.getRootAccess().getDigitOneKeyword_0_0());
+                    			
+                    // InternalBug378967TestLanguage.g:85:4: ( (lv_element_1_0= ruleRule1 ) )
+                    // InternalBug378967TestLanguage.g:86:5: (lv_element_1_0= ruleRule1 )
                     {
-                    // InternalBug378967TestLanguage.g:86:1: (lv_element_1_0= ruleRule1 )
-                    // InternalBug378967TestLanguage.g:87:3: lv_element_1_0= ruleRule1
+                    // InternalBug378967TestLanguage.g:86:5: (lv_element_1_0= ruleRule1 )
+                    // InternalBug378967TestLanguage.g:87:6: lv_element_1_0= ruleRule1
                     {
-                     
-                    	        newCompositeNode(grammarAccess.getRootAccess().getElementRule1ParserRuleCall_0_1_0()); 
-                    	    
+
+                    						newCompositeNode(grammarAccess.getRootAccess().getElementRule1ParserRuleCall_0_1_0());
+                    					
                     pushFollow(FollowSets000.FOLLOW_2);
                     lv_element_1_0=ruleRule1();
 
                     state._fsp--;
 
 
-                    	        if (current==null) {
-                    	            current = createModelElementForParent(grammarAccess.getRootRule());
-                    	        }
-                           		set(
-                           			current, 
-                           			"element",
-                            		lv_element_1_0, 
-                            		"org.eclipse.xtext.parser.antlr.Bug378967TestLanguage.Rule1");
-                    	        afterParserOrEnumRuleCall();
-                    	    
+                    						if (current==null) {
+                    							current = createModelElementForParent(grammarAccess.getRootRule());
+                    						}
+                    						set(
+                    							current,
+                    							"element",
+                    							lv_element_1_0,
+                    							"org.eclipse.xtext.parser.antlr.Bug378967TestLanguage.Rule1");
+                    						afterParserOrEnumRuleCall();
+                    					
 
                     }
 
@@ -216,40 +218,40 @@ public class InternalBug378967TestLanguageParser extends AbstractInternalAntlrPa
                     }
                     break;
                 case 2 :
-                    // InternalBug378967TestLanguage.g:104:6: (otherlv_2= '2' ( (lv_element_3_0= ruleRule2 ) ) )
+                    // InternalBug378967TestLanguage.g:106:3: (otherlv_2= '2' ( (lv_element_3_0= ruleRule2 ) ) )
                     {
-                    // InternalBug378967TestLanguage.g:104:6: (otherlv_2= '2' ( (lv_element_3_0= ruleRule2 ) ) )
-                    // InternalBug378967TestLanguage.g:104:8: otherlv_2= '2' ( (lv_element_3_0= ruleRule2 ) )
+                    // InternalBug378967TestLanguage.g:106:3: (otherlv_2= '2' ( (lv_element_3_0= ruleRule2 ) ) )
+                    // InternalBug378967TestLanguage.g:107:4: otherlv_2= '2' ( (lv_element_3_0= ruleRule2 ) )
                     {
                     otherlv_2=(Token)match(input,12,FollowSets000.FOLLOW_3); 
 
-                        	newLeafNode(otherlv_2, grammarAccess.getRootAccess().getDigitTwoKeyword_1_0());
-                        
-                    // InternalBug378967TestLanguage.g:108:1: ( (lv_element_3_0= ruleRule2 ) )
-                    // InternalBug378967TestLanguage.g:109:1: (lv_element_3_0= ruleRule2 )
+                    				newLeafNode(otherlv_2, grammarAccess.getRootAccess().getDigitTwoKeyword_1_0());
+                    			
+                    // InternalBug378967TestLanguage.g:111:4: ( (lv_element_3_0= ruleRule2 ) )
+                    // InternalBug378967TestLanguage.g:112:5: (lv_element_3_0= ruleRule2 )
                     {
-                    // InternalBug378967TestLanguage.g:109:1: (lv_element_3_0= ruleRule2 )
-                    // InternalBug378967TestLanguage.g:110:3: lv_element_3_0= ruleRule2
+                    // InternalBug378967TestLanguage.g:112:5: (lv_element_3_0= ruleRule2 )
+                    // InternalBug378967TestLanguage.g:113:6: lv_element_3_0= ruleRule2
                     {
-                     
-                    	        newCompositeNode(grammarAccess.getRootAccess().getElementRule2ParserRuleCall_1_1_0()); 
-                    	    
+
+                    						newCompositeNode(grammarAccess.getRootAccess().getElementRule2ParserRuleCall_1_1_0());
+                    					
                     pushFollow(FollowSets000.FOLLOW_2);
                     lv_element_3_0=ruleRule2();
 
                     state._fsp--;
 
 
-                    	        if (current==null) {
-                    	            current = createModelElementForParent(grammarAccess.getRootRule());
-                    	        }
-                           		set(
-                           			current, 
-                           			"element",
-                            		lv_element_3_0, 
-                            		"org.eclipse.xtext.parser.antlr.Bug378967TestLanguage.Rule2");
-                    	        afterParserOrEnumRuleCall();
-                    	    
+                    						if (current==null) {
+                    							current = createModelElementForParent(grammarAccess.getRootRule());
+                    						}
+                    						set(
+                    							current,
+                    							"element",
+                    							lv_element_3_0,
+                    							"org.eclipse.xtext.parser.antlr.Bug378967TestLanguage.Rule2");
+                    						afterParserOrEnumRuleCall();
+                    					
 
                     }
 
@@ -263,40 +265,40 @@ public class InternalBug378967TestLanguageParser extends AbstractInternalAntlrPa
                     }
                     break;
                 case 3 :
-                    // InternalBug378967TestLanguage.g:127:6: (otherlv_4= '3' ( (lv_element_5_0= ruleRule3 ) ) )
+                    // InternalBug378967TestLanguage.g:132:3: (otherlv_4= '3' ( (lv_element_5_0= ruleRule3 ) ) )
                     {
-                    // InternalBug378967TestLanguage.g:127:6: (otherlv_4= '3' ( (lv_element_5_0= ruleRule3 ) ) )
-                    // InternalBug378967TestLanguage.g:127:8: otherlv_4= '3' ( (lv_element_5_0= ruleRule3 ) )
+                    // InternalBug378967TestLanguage.g:132:3: (otherlv_4= '3' ( (lv_element_5_0= ruleRule3 ) ) )
+                    // InternalBug378967TestLanguage.g:133:4: otherlv_4= '3' ( (lv_element_5_0= ruleRule3 ) )
                     {
                     otherlv_4=(Token)match(input,13,FollowSets000.FOLLOW_3); 
 
-                        	newLeafNode(otherlv_4, grammarAccess.getRootAccess().getDigitThreeKeyword_2_0());
-                        
-                    // InternalBug378967TestLanguage.g:131:1: ( (lv_element_5_0= ruleRule3 ) )
-                    // InternalBug378967TestLanguage.g:132:1: (lv_element_5_0= ruleRule3 )
+                    				newLeafNode(otherlv_4, grammarAccess.getRootAccess().getDigitThreeKeyword_2_0());
+                    			
+                    // InternalBug378967TestLanguage.g:137:4: ( (lv_element_5_0= ruleRule3 ) )
+                    // InternalBug378967TestLanguage.g:138:5: (lv_element_5_0= ruleRule3 )
                     {
-                    // InternalBug378967TestLanguage.g:132:1: (lv_element_5_0= ruleRule3 )
-                    // InternalBug378967TestLanguage.g:133:3: lv_element_5_0= ruleRule3
+                    // InternalBug378967TestLanguage.g:138:5: (lv_element_5_0= ruleRule3 )
+                    // InternalBug378967TestLanguage.g:139:6: lv_element_5_0= ruleRule3
                     {
-                     
-                    	        newCompositeNode(grammarAccess.getRootAccess().getElementRule3ParserRuleCall_2_1_0()); 
-                    	    
+
+                    						newCompositeNode(grammarAccess.getRootAccess().getElementRule3ParserRuleCall_2_1_0());
+                    					
                     pushFollow(FollowSets000.FOLLOW_2);
                     lv_element_5_0=ruleRule3();
 
                     state._fsp--;
 
 
-                    	        if (current==null) {
-                    	            current = createModelElementForParent(grammarAccess.getRootRule());
-                    	        }
-                           		set(
-                           			current, 
-                           			"element",
-                            		lv_element_5_0, 
-                            		"org.eclipse.xtext.parser.antlr.Bug378967TestLanguage.Rule3");
-                    	        afterParserOrEnumRuleCall();
-                    	    
+                    						if (current==null) {
+                    							current = createModelElementForParent(grammarAccess.getRootRule());
+                    						}
+                    						set(
+                    							current,
+                    							"element",
+                    							lv_element_5_0,
+                    							"org.eclipse.xtext.parser.antlr.Bug378967TestLanguage.Rule3");
+                    						afterParserOrEnumRuleCall();
+                    					
 
                     }
 
@@ -310,40 +312,40 @@ public class InternalBug378967TestLanguageParser extends AbstractInternalAntlrPa
                     }
                     break;
                 case 4 :
-                    // InternalBug378967TestLanguage.g:150:6: (otherlv_6= '4' ( (lv_element_7_0= ruleRule4 ) ) )
+                    // InternalBug378967TestLanguage.g:158:3: (otherlv_6= '4' ( (lv_element_7_0= ruleRule4 ) ) )
                     {
-                    // InternalBug378967TestLanguage.g:150:6: (otherlv_6= '4' ( (lv_element_7_0= ruleRule4 ) ) )
-                    // InternalBug378967TestLanguage.g:150:8: otherlv_6= '4' ( (lv_element_7_0= ruleRule4 ) )
+                    // InternalBug378967TestLanguage.g:158:3: (otherlv_6= '4' ( (lv_element_7_0= ruleRule4 ) ) )
+                    // InternalBug378967TestLanguage.g:159:4: otherlv_6= '4' ( (lv_element_7_0= ruleRule4 ) )
                     {
                     otherlv_6=(Token)match(input,14,FollowSets000.FOLLOW_3); 
 
-                        	newLeafNode(otherlv_6, grammarAccess.getRootAccess().getDigitFourKeyword_3_0());
-                        
-                    // InternalBug378967TestLanguage.g:154:1: ( (lv_element_7_0= ruleRule4 ) )
-                    // InternalBug378967TestLanguage.g:155:1: (lv_element_7_0= ruleRule4 )
+                    				newLeafNode(otherlv_6, grammarAccess.getRootAccess().getDigitFourKeyword_3_0());
+                    			
+                    // InternalBug378967TestLanguage.g:163:4: ( (lv_element_7_0= ruleRule4 ) )
+                    // InternalBug378967TestLanguage.g:164:5: (lv_element_7_0= ruleRule4 )
                     {
-                    // InternalBug378967TestLanguage.g:155:1: (lv_element_7_0= ruleRule4 )
-                    // InternalBug378967TestLanguage.g:156:3: lv_element_7_0= ruleRule4
+                    // InternalBug378967TestLanguage.g:164:5: (lv_element_7_0= ruleRule4 )
+                    // InternalBug378967TestLanguage.g:165:6: lv_element_7_0= ruleRule4
                     {
-                     
-                    	        newCompositeNode(grammarAccess.getRootAccess().getElementRule4ParserRuleCall_3_1_0()); 
-                    	    
+
+                    						newCompositeNode(grammarAccess.getRootAccess().getElementRule4ParserRuleCall_3_1_0());
+                    					
                     pushFollow(FollowSets000.FOLLOW_2);
                     lv_element_7_0=ruleRule4();
 
                     state._fsp--;
 
 
-                    	        if (current==null) {
-                    	            current = createModelElementForParent(grammarAccess.getRootRule());
-                    	        }
-                           		set(
-                           			current, 
-                           			"element",
-                            		lv_element_7_0, 
-                            		"org.eclipse.xtext.parser.antlr.Bug378967TestLanguage.Rule4");
-                    	        afterParserOrEnumRuleCall();
-                    	    
+                    						if (current==null) {
+                    							current = createModelElementForParent(grammarAccess.getRootRule());
+                    						}
+                    						set(
+                    							current,
+                    							"element",
+                    							lv_element_7_0,
+                    							"org.eclipse.xtext.parser.antlr.Bug378967TestLanguage.Rule4");
+                    						afterParserOrEnumRuleCall();
+                    					
 
                     }
 
@@ -362,13 +364,15 @@ public class InternalBug378967TestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -377,7 +381,7 @@ public class InternalBug378967TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleRule1"
-    // InternalBug378967TestLanguage.g:180:1: entryRuleRule1 returns [EObject current=null] : iv_ruleRule1= ruleRule1 EOF ;
+    // InternalBug378967TestLanguage.g:187:1: entryRuleRule1 returns [EObject current=null] : iv_ruleRule1= ruleRule1 EOF ;
     public final EObject entryRuleRule1() throws RecognitionException {
         EObject current = null;
 
@@ -385,8 +389,8 @@ public class InternalBug378967TestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // InternalBug378967TestLanguage.g:181:2: (iv_ruleRule1= ruleRule1 EOF )
-            // InternalBug378967TestLanguage.g:182:2: iv_ruleRule1= ruleRule1 EOF
+            // InternalBug378967TestLanguage.g:187:46: (iv_ruleRule1= ruleRule1 EOF )
+            // InternalBug378967TestLanguage.g:188:2: iv_ruleRule1= ruleRule1 EOF
             {
              newCompositeNode(grammarAccess.getRule1Rule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -400,11 +404,11 @@ public class InternalBug378967TestLanguageParser extends AbstractInternalAntlrPa
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -413,7 +417,7 @@ public class InternalBug378967TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleRule1"
-    // InternalBug378967TestLanguage.g:189:1: ruleRule1 returns [EObject current=null] : ( ( (lv_type_0_0= ruleFirstEnum ) ) ( (lv_value_1_0= RULE_INT ) ) ( (lv_unit_2_0= ruleSecondEnum ) ) ) ;
+    // InternalBug378967TestLanguage.g:194:1: ruleRule1 returns [EObject current=null] : ( ( (lv_type_0_0= ruleFirstEnum ) ) ( (lv_value_1_0= RULE_INT ) ) ( (lv_unit_2_0= ruleSecondEnum ) ) ) ;
     public final EObject ruleRule1() throws RecognitionException {
         EObject current = null;
 
@@ -423,97 +427,98 @@ public class InternalBug378967TestLanguageParser extends AbstractInternalAntlrPa
         Enumerator lv_unit_2_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalBug378967TestLanguage.g:192:28: ( ( ( (lv_type_0_0= ruleFirstEnum ) ) ( (lv_value_1_0= RULE_INT ) ) ( (lv_unit_2_0= ruleSecondEnum ) ) ) )
-            // InternalBug378967TestLanguage.g:193:1: ( ( (lv_type_0_0= ruleFirstEnum ) ) ( (lv_value_1_0= RULE_INT ) ) ( (lv_unit_2_0= ruleSecondEnum ) ) )
+            // InternalBug378967TestLanguage.g:200:2: ( ( ( (lv_type_0_0= ruleFirstEnum ) ) ( (lv_value_1_0= RULE_INT ) ) ( (lv_unit_2_0= ruleSecondEnum ) ) ) )
+            // InternalBug378967TestLanguage.g:201:2: ( ( (lv_type_0_0= ruleFirstEnum ) ) ( (lv_value_1_0= RULE_INT ) ) ( (lv_unit_2_0= ruleSecondEnum ) ) )
             {
-            // InternalBug378967TestLanguage.g:193:1: ( ( (lv_type_0_0= ruleFirstEnum ) ) ( (lv_value_1_0= RULE_INT ) ) ( (lv_unit_2_0= ruleSecondEnum ) ) )
-            // InternalBug378967TestLanguage.g:193:2: ( (lv_type_0_0= ruleFirstEnum ) ) ( (lv_value_1_0= RULE_INT ) ) ( (lv_unit_2_0= ruleSecondEnum ) )
+            // InternalBug378967TestLanguage.g:201:2: ( ( (lv_type_0_0= ruleFirstEnum ) ) ( (lv_value_1_0= RULE_INT ) ) ( (lv_unit_2_0= ruleSecondEnum ) ) )
+            // InternalBug378967TestLanguage.g:202:3: ( (lv_type_0_0= ruleFirstEnum ) ) ( (lv_value_1_0= RULE_INT ) ) ( (lv_unit_2_0= ruleSecondEnum ) )
             {
-            // InternalBug378967TestLanguage.g:193:2: ( (lv_type_0_0= ruleFirstEnum ) )
-            // InternalBug378967TestLanguage.g:194:1: (lv_type_0_0= ruleFirstEnum )
+            // InternalBug378967TestLanguage.g:202:3: ( (lv_type_0_0= ruleFirstEnum ) )
+            // InternalBug378967TestLanguage.g:203:4: (lv_type_0_0= ruleFirstEnum )
             {
-            // InternalBug378967TestLanguage.g:194:1: (lv_type_0_0= ruleFirstEnum )
-            // InternalBug378967TestLanguage.g:195:3: lv_type_0_0= ruleFirstEnum
+            // InternalBug378967TestLanguage.g:203:4: (lv_type_0_0= ruleFirstEnum )
+            // InternalBug378967TestLanguage.g:204:5: lv_type_0_0= ruleFirstEnum
             {
-             
-            	        newCompositeNode(grammarAccess.getRule1Access().getTypeFirstEnumEnumRuleCall_0_0()); 
-            	    
+
+            					newCompositeNode(grammarAccess.getRule1Access().getTypeFirstEnumEnumRuleCall_0_0());
+            				
             pushFollow(FollowSets000.FOLLOW_4);
             lv_type_0_0=ruleFirstEnum();
 
             state._fsp--;
 
 
-            	        if (current==null) {
-            	            current = createModelElementForParent(grammarAccess.getRule1Rule());
-            	        }
-                   		set(
-                   			current, 
-                   			"type",
-                    		lv_type_0_0, 
-                    		"org.eclipse.xtext.parser.antlr.Bug378967TestLanguage.FirstEnum");
-            	        afterParserOrEnumRuleCall();
-            	    
+            					if (current==null) {
+            						current = createModelElementForParent(grammarAccess.getRule1Rule());
+            					}
+            					set(
+            						current,
+            						"type",
+            						lv_type_0_0,
+            						"org.eclipse.xtext.parser.antlr.Bug378967TestLanguage.FirstEnum");
+            					afterParserOrEnumRuleCall();
+            				
 
             }
 
 
             }
 
-            // InternalBug378967TestLanguage.g:211:2: ( (lv_value_1_0= RULE_INT ) )
-            // InternalBug378967TestLanguage.g:212:1: (lv_value_1_0= RULE_INT )
+            // InternalBug378967TestLanguage.g:221:3: ( (lv_value_1_0= RULE_INT ) )
+            // InternalBug378967TestLanguage.g:222:4: (lv_value_1_0= RULE_INT )
             {
-            // InternalBug378967TestLanguage.g:212:1: (lv_value_1_0= RULE_INT )
-            // InternalBug378967TestLanguage.g:213:3: lv_value_1_0= RULE_INT
+            // InternalBug378967TestLanguage.g:222:4: (lv_value_1_0= RULE_INT )
+            // InternalBug378967TestLanguage.g:223:5: lv_value_1_0= RULE_INT
             {
             lv_value_1_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_5); 
 
-            			newLeafNode(lv_value_1_0, grammarAccess.getRule1Access().getValueINTTerminalRuleCall_1_0()); 
-            		
+            					newLeafNode(lv_value_1_0, grammarAccess.getRule1Access().getValueINTTerminalRuleCall_1_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getRule1Rule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"value",
-                    		lv_value_1_0, 
-                    		"org.eclipse.xtext.common.Terminals.INT");
-            	    
-
-            }
-
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getRule1Rule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"value",
+            						lv_value_1_0,
+            						"org.eclipse.xtext.common.Terminals.INT");
+            				
 
             }
 
-            // InternalBug378967TestLanguage.g:229:2: ( (lv_unit_2_0= ruleSecondEnum ) )
-            // InternalBug378967TestLanguage.g:230:1: (lv_unit_2_0= ruleSecondEnum )
+
+            }
+
+            // InternalBug378967TestLanguage.g:239:3: ( (lv_unit_2_0= ruleSecondEnum ) )
+            // InternalBug378967TestLanguage.g:240:4: (lv_unit_2_0= ruleSecondEnum )
             {
-            // InternalBug378967TestLanguage.g:230:1: (lv_unit_2_0= ruleSecondEnum )
-            // InternalBug378967TestLanguage.g:231:3: lv_unit_2_0= ruleSecondEnum
+            // InternalBug378967TestLanguage.g:240:4: (lv_unit_2_0= ruleSecondEnum )
+            // InternalBug378967TestLanguage.g:241:5: lv_unit_2_0= ruleSecondEnum
             {
-             
-            	        newCompositeNode(grammarAccess.getRule1Access().getUnitSecondEnumEnumRuleCall_2_0()); 
-            	    
+
+            					newCompositeNode(grammarAccess.getRule1Access().getUnitSecondEnumEnumRuleCall_2_0());
+            				
             pushFollow(FollowSets000.FOLLOW_2);
             lv_unit_2_0=ruleSecondEnum();
 
             state._fsp--;
 
 
-            	        if (current==null) {
-            	            current = createModelElementForParent(grammarAccess.getRule1Rule());
-            	        }
-                   		set(
-                   			current, 
-                   			"unit",
-                    		lv_unit_2_0, 
-                    		"org.eclipse.xtext.parser.antlr.Bug378967TestLanguage.SecondEnum");
-            	        afterParserOrEnumRuleCall();
-            	    
+            					if (current==null) {
+            						current = createModelElementForParent(grammarAccess.getRule1Rule());
+            					}
+            					set(
+            						current,
+            						"unit",
+            						lv_unit_2_0,
+            						"org.eclipse.xtext.parser.antlr.Bug378967TestLanguage.SecondEnum");
+            					afterParserOrEnumRuleCall();
+            				
 
             }
 
@@ -526,13 +531,15 @@ public class InternalBug378967TestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -541,7 +548,7 @@ public class InternalBug378967TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleRule2"
-    // InternalBug378967TestLanguage.g:255:1: entryRuleRule2 returns [EObject current=null] : iv_ruleRule2= ruleRule2 EOF ;
+    // InternalBug378967TestLanguage.g:262:1: entryRuleRule2 returns [EObject current=null] : iv_ruleRule2= ruleRule2 EOF ;
     public final EObject entryRuleRule2() throws RecognitionException {
         EObject current = null;
 
@@ -549,8 +556,8 @@ public class InternalBug378967TestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // InternalBug378967TestLanguage.g:256:2: (iv_ruleRule2= ruleRule2 EOF )
-            // InternalBug378967TestLanguage.g:257:2: iv_ruleRule2= ruleRule2 EOF
+            // InternalBug378967TestLanguage.g:262:46: (iv_ruleRule2= ruleRule2 EOF )
+            // InternalBug378967TestLanguage.g:263:2: iv_ruleRule2= ruleRule2 EOF
             {
              newCompositeNode(grammarAccess.getRule2Rule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -564,11 +571,11 @@ public class InternalBug378967TestLanguageParser extends AbstractInternalAntlrPa
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -577,7 +584,7 @@ public class InternalBug378967TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleRule2"
-    // InternalBug378967TestLanguage.g:264:1: ruleRule2 returns [EObject current=null] : (otherlv_0= 'after' ( (lv_value_1_0= RULE_INT ) ) otherlv_2= 's' ) ;
+    // InternalBug378967TestLanguage.g:269:1: ruleRule2 returns [EObject current=null] : (otherlv_0= 'after' ( (lv_value_1_0= RULE_INT ) ) otherlv_2= 's' ) ;
     public final EObject ruleRule2() throws RecognitionException {
         EObject current = null;
 
@@ -585,39 +592,40 @@ public class InternalBug378967TestLanguageParser extends AbstractInternalAntlrPa
         Token lv_value_1_0=null;
         Token otherlv_2=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalBug378967TestLanguage.g:267:28: ( (otherlv_0= 'after' ( (lv_value_1_0= RULE_INT ) ) otherlv_2= 's' ) )
-            // InternalBug378967TestLanguage.g:268:1: (otherlv_0= 'after' ( (lv_value_1_0= RULE_INT ) ) otherlv_2= 's' )
+            // InternalBug378967TestLanguage.g:275:2: ( (otherlv_0= 'after' ( (lv_value_1_0= RULE_INT ) ) otherlv_2= 's' ) )
+            // InternalBug378967TestLanguage.g:276:2: (otherlv_0= 'after' ( (lv_value_1_0= RULE_INT ) ) otherlv_2= 's' )
             {
-            // InternalBug378967TestLanguage.g:268:1: (otherlv_0= 'after' ( (lv_value_1_0= RULE_INT ) ) otherlv_2= 's' )
-            // InternalBug378967TestLanguage.g:268:3: otherlv_0= 'after' ( (lv_value_1_0= RULE_INT ) ) otherlv_2= 's'
+            // InternalBug378967TestLanguage.g:276:2: (otherlv_0= 'after' ( (lv_value_1_0= RULE_INT ) ) otherlv_2= 's' )
+            // InternalBug378967TestLanguage.g:277:3: otherlv_0= 'after' ( (lv_value_1_0= RULE_INT ) ) otherlv_2= 's'
             {
             otherlv_0=(Token)match(input,15,FollowSets000.FOLLOW_4); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getRule2Access().getAfterKeyword_0());
-                
-            // InternalBug378967TestLanguage.g:272:1: ( (lv_value_1_0= RULE_INT ) )
-            // InternalBug378967TestLanguage.g:273:1: (lv_value_1_0= RULE_INT )
+            			newLeafNode(otherlv_0, grammarAccess.getRule2Access().getAfterKeyword_0());
+            		
+            // InternalBug378967TestLanguage.g:281:3: ( (lv_value_1_0= RULE_INT ) )
+            // InternalBug378967TestLanguage.g:282:4: (lv_value_1_0= RULE_INT )
             {
-            // InternalBug378967TestLanguage.g:273:1: (lv_value_1_0= RULE_INT )
-            // InternalBug378967TestLanguage.g:274:3: lv_value_1_0= RULE_INT
+            // InternalBug378967TestLanguage.g:282:4: (lv_value_1_0= RULE_INT )
+            // InternalBug378967TestLanguage.g:283:5: lv_value_1_0= RULE_INT
             {
             lv_value_1_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_5); 
 
-            			newLeafNode(lv_value_1_0, grammarAccess.getRule2Access().getValueINTTerminalRuleCall_1_0()); 
-            		
+            					newLeafNode(lv_value_1_0, grammarAccess.getRule2Access().getValueINTTerminalRuleCall_1_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getRule2Rule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"value",
-                    		lv_value_1_0, 
-                    		"org.eclipse.xtext.common.Terminals.INT");
-            	    
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getRule2Rule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"value",
+            						lv_value_1_0,
+            						"org.eclipse.xtext.common.Terminals.INT");
+            				
 
             }
 
@@ -626,21 +634,23 @@ public class InternalBug378967TestLanguageParser extends AbstractInternalAntlrPa
 
             otherlv_2=(Token)match(input,16,FollowSets000.FOLLOW_2); 
 
-                	newLeafNode(otherlv_2, grammarAccess.getRule2Access().getSKeyword_2());
-                
+            			newLeafNode(otherlv_2, grammarAccess.getRule2Access().getSKeyword_2());
+            		
 
             }
 
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -649,7 +659,7 @@ public class InternalBug378967TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleRule3"
-    // InternalBug378967TestLanguage.g:302:1: entryRuleRule3 returns [EObject current=null] : iv_ruleRule3= ruleRule3 EOF ;
+    // InternalBug378967TestLanguage.g:307:1: entryRuleRule3 returns [EObject current=null] : iv_ruleRule3= ruleRule3 EOF ;
     public final EObject entryRuleRule3() throws RecognitionException {
         EObject current = null;
 
@@ -657,8 +667,8 @@ public class InternalBug378967TestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // InternalBug378967TestLanguage.g:303:2: (iv_ruleRule3= ruleRule3 EOF )
-            // InternalBug378967TestLanguage.g:304:2: iv_ruleRule3= ruleRule3 EOF
+            // InternalBug378967TestLanguage.g:307:46: (iv_ruleRule3= ruleRule3 EOF )
+            // InternalBug378967TestLanguage.g:308:2: iv_ruleRule3= ruleRule3 EOF
             {
              newCompositeNode(grammarAccess.getRule3Rule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -672,11 +682,11 @@ public class InternalBug378967TestLanguageParser extends AbstractInternalAntlrPa
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -685,82 +695,85 @@ public class InternalBug378967TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleRule3"
-    // InternalBug378967TestLanguage.g:311:1: ruleRule3 returns [EObject current=null] : ( ruleAfter ( (lv_value_1_0= RULE_INT ) ) ruleS ) ;
+    // InternalBug378967TestLanguage.g:314:1: ruleRule3 returns [EObject current=null] : ( ruleAfter ( (lv_value_1_0= RULE_INT ) ) ruleS ) ;
     public final EObject ruleRule3() throws RecognitionException {
         EObject current = null;
 
         Token lv_value_1_0=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalBug378967TestLanguage.g:314:28: ( ( ruleAfter ( (lv_value_1_0= RULE_INT ) ) ruleS ) )
-            // InternalBug378967TestLanguage.g:315:1: ( ruleAfter ( (lv_value_1_0= RULE_INT ) ) ruleS )
+            // InternalBug378967TestLanguage.g:320:2: ( ( ruleAfter ( (lv_value_1_0= RULE_INT ) ) ruleS ) )
+            // InternalBug378967TestLanguage.g:321:2: ( ruleAfter ( (lv_value_1_0= RULE_INT ) ) ruleS )
             {
-            // InternalBug378967TestLanguage.g:315:1: ( ruleAfter ( (lv_value_1_0= RULE_INT ) ) ruleS )
-            // InternalBug378967TestLanguage.g:316:5: ruleAfter ( (lv_value_1_0= RULE_INT ) ) ruleS
+            // InternalBug378967TestLanguage.g:321:2: ( ruleAfter ( (lv_value_1_0= RULE_INT ) ) ruleS )
+            // InternalBug378967TestLanguage.g:322:3: ruleAfter ( (lv_value_1_0= RULE_INT ) ) ruleS
             {
-             
-                    newCompositeNode(grammarAccess.getRule3Access().getAfterParserRuleCall_0()); 
-                
+
+            			newCompositeNode(grammarAccess.getRule3Access().getAfterParserRuleCall_0());
+            		
             pushFollow(FollowSets000.FOLLOW_4);
             ruleAfter();
 
             state._fsp--;
 
-             
-                    afterParserOrEnumRuleCall();
-                
-            // InternalBug378967TestLanguage.g:323:1: ( (lv_value_1_0= RULE_INT ) )
-            // InternalBug378967TestLanguage.g:324:1: (lv_value_1_0= RULE_INT )
+
+            			afterParserOrEnumRuleCall();
+            		
+            // InternalBug378967TestLanguage.g:329:3: ( (lv_value_1_0= RULE_INT ) )
+            // InternalBug378967TestLanguage.g:330:4: (lv_value_1_0= RULE_INT )
             {
-            // InternalBug378967TestLanguage.g:324:1: (lv_value_1_0= RULE_INT )
-            // InternalBug378967TestLanguage.g:325:3: lv_value_1_0= RULE_INT
+            // InternalBug378967TestLanguage.g:330:4: (lv_value_1_0= RULE_INT )
+            // InternalBug378967TestLanguage.g:331:5: lv_value_1_0= RULE_INT
             {
             lv_value_1_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_5); 
 
-            			newLeafNode(lv_value_1_0, grammarAccess.getRule3Access().getValueINTTerminalRuleCall_1_0()); 
+            					newLeafNode(lv_value_1_0, grammarAccess.getRule3Access().getValueINTTerminalRuleCall_1_0());
+            				
+
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getRule3Rule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"value",
+            						lv_value_1_0,
+            						"org.eclipse.xtext.common.Terminals.INT");
+            				
+
+            }
+
+
+            }
+
+
+            			newCompositeNode(grammarAccess.getRule3Access().getSParserRuleCall_2());
             		
-
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getRule3Rule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"value",
-                    		lv_value_1_0, 
-                    		"org.eclipse.xtext.common.Terminals.INT");
-            	    
-
-            }
-
-
-            }
-
-             
-                    newCompositeNode(grammarAccess.getRule3Access().getSParserRuleCall_2()); 
-                
             pushFollow(FollowSets000.FOLLOW_2);
             ruleS();
 
             state._fsp--;
 
-             
-                    afterParserOrEnumRuleCall();
-                
+
+            			afterParserOrEnumRuleCall();
+            		
 
             }
 
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -769,7 +782,7 @@ public class InternalBug378967TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleRule4"
-    // InternalBug378967TestLanguage.g:357:1: entryRuleRule4 returns [EObject current=null] : iv_ruleRule4= ruleRule4 EOF ;
+    // InternalBug378967TestLanguage.g:358:1: entryRuleRule4 returns [EObject current=null] : iv_ruleRule4= ruleRule4 EOF ;
     public final EObject entryRuleRule4() throws RecognitionException {
         EObject current = null;
 
@@ -777,7 +790,7 @@ public class InternalBug378967TestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // InternalBug378967TestLanguage.g:358:2: (iv_ruleRule4= ruleRule4 EOF )
+            // InternalBug378967TestLanguage.g:358:46: (iv_ruleRule4= ruleRule4 EOF )
             // InternalBug378967TestLanguage.g:359:2: iv_ruleRule4= ruleRule4 EOF
             {
              newCompositeNode(grammarAccess.getRule4Rule()); 
@@ -792,11 +805,11 @@ public class InternalBug378967TestLanguageParser extends AbstractInternalAntlrPa
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -805,7 +818,7 @@ public class InternalBug378967TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleRule4"
-    // InternalBug378967TestLanguage.g:366:1: ruleRule4 returns [EObject current=null] : ( ( (lv_after_0_0= ruleAfterObj ) ) ( (lv_value_1_0= RULE_INT ) ) ( (lv_s_2_0= ruleSObj ) ) ) ;
+    // InternalBug378967TestLanguage.g:365:1: ruleRule4 returns [EObject current=null] : ( ( (lv_after_0_0= ruleAfterObj ) ) ( (lv_value_1_0= RULE_INT ) ) ( (lv_s_2_0= ruleSObj ) ) ) ;
     public final EObject ruleRule4() throws RecognitionException {
         EObject current = null;
 
@@ -815,97 +828,98 @@ public class InternalBug378967TestLanguageParser extends AbstractInternalAntlrPa
         EObject lv_s_2_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalBug378967TestLanguage.g:369:28: ( ( ( (lv_after_0_0= ruleAfterObj ) ) ( (lv_value_1_0= RULE_INT ) ) ( (lv_s_2_0= ruleSObj ) ) ) )
-            // InternalBug378967TestLanguage.g:370:1: ( ( (lv_after_0_0= ruleAfterObj ) ) ( (lv_value_1_0= RULE_INT ) ) ( (lv_s_2_0= ruleSObj ) ) )
+            // InternalBug378967TestLanguage.g:371:2: ( ( ( (lv_after_0_0= ruleAfterObj ) ) ( (lv_value_1_0= RULE_INT ) ) ( (lv_s_2_0= ruleSObj ) ) ) )
+            // InternalBug378967TestLanguage.g:372:2: ( ( (lv_after_0_0= ruleAfterObj ) ) ( (lv_value_1_0= RULE_INT ) ) ( (lv_s_2_0= ruleSObj ) ) )
             {
-            // InternalBug378967TestLanguage.g:370:1: ( ( (lv_after_0_0= ruleAfterObj ) ) ( (lv_value_1_0= RULE_INT ) ) ( (lv_s_2_0= ruleSObj ) ) )
-            // InternalBug378967TestLanguage.g:370:2: ( (lv_after_0_0= ruleAfterObj ) ) ( (lv_value_1_0= RULE_INT ) ) ( (lv_s_2_0= ruleSObj ) )
+            // InternalBug378967TestLanguage.g:372:2: ( ( (lv_after_0_0= ruleAfterObj ) ) ( (lv_value_1_0= RULE_INT ) ) ( (lv_s_2_0= ruleSObj ) ) )
+            // InternalBug378967TestLanguage.g:373:3: ( (lv_after_0_0= ruleAfterObj ) ) ( (lv_value_1_0= RULE_INT ) ) ( (lv_s_2_0= ruleSObj ) )
             {
-            // InternalBug378967TestLanguage.g:370:2: ( (lv_after_0_0= ruleAfterObj ) )
-            // InternalBug378967TestLanguage.g:371:1: (lv_after_0_0= ruleAfterObj )
+            // InternalBug378967TestLanguage.g:373:3: ( (lv_after_0_0= ruleAfterObj ) )
+            // InternalBug378967TestLanguage.g:374:4: (lv_after_0_0= ruleAfterObj )
             {
-            // InternalBug378967TestLanguage.g:371:1: (lv_after_0_0= ruleAfterObj )
-            // InternalBug378967TestLanguage.g:372:3: lv_after_0_0= ruleAfterObj
+            // InternalBug378967TestLanguage.g:374:4: (lv_after_0_0= ruleAfterObj )
+            // InternalBug378967TestLanguage.g:375:5: lv_after_0_0= ruleAfterObj
             {
-             
-            	        newCompositeNode(grammarAccess.getRule4Access().getAfterAfterObjParserRuleCall_0_0()); 
-            	    
+
+            					newCompositeNode(grammarAccess.getRule4Access().getAfterAfterObjParserRuleCall_0_0());
+            				
             pushFollow(FollowSets000.FOLLOW_4);
             lv_after_0_0=ruleAfterObj();
 
             state._fsp--;
 
 
-            	        if (current==null) {
-            	            current = createModelElementForParent(grammarAccess.getRule4Rule());
-            	        }
-                   		set(
-                   			current, 
-                   			"after",
-                    		lv_after_0_0, 
-                    		"org.eclipse.xtext.parser.antlr.Bug378967TestLanguage.AfterObj");
-            	        afterParserOrEnumRuleCall();
-            	    
+            					if (current==null) {
+            						current = createModelElementForParent(grammarAccess.getRule4Rule());
+            					}
+            					set(
+            						current,
+            						"after",
+            						lv_after_0_0,
+            						"org.eclipse.xtext.parser.antlr.Bug378967TestLanguage.AfterObj");
+            					afterParserOrEnumRuleCall();
+            				
 
             }
 
 
             }
 
-            // InternalBug378967TestLanguage.g:388:2: ( (lv_value_1_0= RULE_INT ) )
-            // InternalBug378967TestLanguage.g:389:1: (lv_value_1_0= RULE_INT )
+            // InternalBug378967TestLanguage.g:392:3: ( (lv_value_1_0= RULE_INT ) )
+            // InternalBug378967TestLanguage.g:393:4: (lv_value_1_0= RULE_INT )
             {
-            // InternalBug378967TestLanguage.g:389:1: (lv_value_1_0= RULE_INT )
-            // InternalBug378967TestLanguage.g:390:3: lv_value_1_0= RULE_INT
+            // InternalBug378967TestLanguage.g:393:4: (lv_value_1_0= RULE_INT )
+            // InternalBug378967TestLanguage.g:394:5: lv_value_1_0= RULE_INT
             {
             lv_value_1_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_5); 
 
-            			newLeafNode(lv_value_1_0, grammarAccess.getRule4Access().getValueINTTerminalRuleCall_1_0()); 
-            		
+            					newLeafNode(lv_value_1_0, grammarAccess.getRule4Access().getValueINTTerminalRuleCall_1_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getRule4Rule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"value",
-                    		lv_value_1_0, 
-                    		"org.eclipse.xtext.common.Terminals.INT");
-            	    
-
-            }
-
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getRule4Rule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"value",
+            						lv_value_1_0,
+            						"org.eclipse.xtext.common.Terminals.INT");
+            				
 
             }
 
-            // InternalBug378967TestLanguage.g:406:2: ( (lv_s_2_0= ruleSObj ) )
-            // InternalBug378967TestLanguage.g:407:1: (lv_s_2_0= ruleSObj )
+
+            }
+
+            // InternalBug378967TestLanguage.g:410:3: ( (lv_s_2_0= ruleSObj ) )
+            // InternalBug378967TestLanguage.g:411:4: (lv_s_2_0= ruleSObj )
             {
-            // InternalBug378967TestLanguage.g:407:1: (lv_s_2_0= ruleSObj )
-            // InternalBug378967TestLanguage.g:408:3: lv_s_2_0= ruleSObj
+            // InternalBug378967TestLanguage.g:411:4: (lv_s_2_0= ruleSObj )
+            // InternalBug378967TestLanguage.g:412:5: lv_s_2_0= ruleSObj
             {
-             
-            	        newCompositeNode(grammarAccess.getRule4Access().getSSObjParserRuleCall_2_0()); 
-            	    
+
+            					newCompositeNode(grammarAccess.getRule4Access().getSSObjParserRuleCall_2_0());
+            				
             pushFollow(FollowSets000.FOLLOW_2);
             lv_s_2_0=ruleSObj();
 
             state._fsp--;
 
 
-            	        if (current==null) {
-            	            current = createModelElementForParent(grammarAccess.getRule4Rule());
-            	        }
-                   		set(
-                   			current, 
-                   			"s",
-                    		lv_s_2_0, 
-                    		"org.eclipse.xtext.parser.antlr.Bug378967TestLanguage.SObj");
-            	        afterParserOrEnumRuleCall();
-            	    
+            					if (current==null) {
+            						current = createModelElementForParent(grammarAccess.getRule4Rule());
+            					}
+            					set(
+            						current,
+            						"s",
+            						lv_s_2_0,
+            						"org.eclipse.xtext.parser.antlr.Bug378967TestLanguage.SObj");
+            					afterParserOrEnumRuleCall();
+            				
 
             }
 
@@ -918,13 +932,15 @@ public class InternalBug378967TestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -933,7 +949,7 @@ public class InternalBug378967TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleAfterObj"
-    // InternalBug378967TestLanguage.g:432:1: entryRuleAfterObj returns [EObject current=null] : iv_ruleAfterObj= ruleAfterObj EOF ;
+    // InternalBug378967TestLanguage.g:433:1: entryRuleAfterObj returns [EObject current=null] : iv_ruleAfterObj= ruleAfterObj EOF ;
     public final EObject entryRuleAfterObj() throws RecognitionException {
         EObject current = null;
 
@@ -941,7 +957,7 @@ public class InternalBug378967TestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // InternalBug378967TestLanguage.g:433:2: (iv_ruleAfterObj= ruleAfterObj EOF )
+            // InternalBug378967TestLanguage.g:433:49: (iv_ruleAfterObj= ruleAfterObj EOF )
             // InternalBug378967TestLanguage.g:434:2: iv_ruleAfterObj= ruleAfterObj EOF
             {
              newCompositeNode(grammarAccess.getAfterObjRule()); 
@@ -956,11 +972,11 @@ public class InternalBug378967TestLanguageParser extends AbstractInternalAntlrPa
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -969,50 +985,53 @@ public class InternalBug378967TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleAfterObj"
-    // InternalBug378967TestLanguage.g:441:1: ruleAfterObj returns [EObject current=null] : ( (lv_value_0_0= 'after' ) ) ;
+    // InternalBug378967TestLanguage.g:440:1: ruleAfterObj returns [EObject current=null] : ( (lv_value_0_0= 'after' ) ) ;
     public final EObject ruleAfterObj() throws RecognitionException {
         EObject current = null;
 
         Token lv_value_0_0=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalBug378967TestLanguage.g:444:28: ( ( (lv_value_0_0= 'after' ) ) )
-            // InternalBug378967TestLanguage.g:445:1: ( (lv_value_0_0= 'after' ) )
+            // InternalBug378967TestLanguage.g:446:2: ( ( (lv_value_0_0= 'after' ) ) )
+            // InternalBug378967TestLanguage.g:447:2: ( (lv_value_0_0= 'after' ) )
             {
-            // InternalBug378967TestLanguage.g:445:1: ( (lv_value_0_0= 'after' ) )
-            // InternalBug378967TestLanguage.g:446:1: (lv_value_0_0= 'after' )
+            // InternalBug378967TestLanguage.g:447:2: ( (lv_value_0_0= 'after' ) )
+            // InternalBug378967TestLanguage.g:448:3: (lv_value_0_0= 'after' )
             {
-            // InternalBug378967TestLanguage.g:446:1: (lv_value_0_0= 'after' )
-            // InternalBug378967TestLanguage.g:447:3: lv_value_0_0= 'after'
+            // InternalBug378967TestLanguage.g:448:3: (lv_value_0_0= 'after' )
+            // InternalBug378967TestLanguage.g:449:4: lv_value_0_0= 'after'
             {
             lv_value_0_0=(Token)match(input,15,FollowSets000.FOLLOW_2); 
 
-                    newLeafNode(lv_value_0_0, grammarAccess.getAfterObjAccess().getValueAfterKeyword_0());
-                
+            				newLeafNode(lv_value_0_0, grammarAccess.getAfterObjAccess().getValueAfterKeyword_0());
+            			
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getAfterObjRule());
-            	        }
-                   		setWithLastConsumed(current, "value", lv_value_0_0, "after");
-            	    
-
-            }
-
+            				if (current==null) {
+            					current = createModelElement(grammarAccess.getAfterObjRule());
+            				}
+            				setWithLastConsumed(current, "value", lv_value_0_0, "after");
+            			
 
             }
 
 
             }
 
-             leaveRule(); 
+
+            }
+
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1021,7 +1040,7 @@ public class InternalBug378967TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleSObj"
-    // InternalBug378967TestLanguage.g:468:1: entryRuleSObj returns [EObject current=null] : iv_ruleSObj= ruleSObj EOF ;
+    // InternalBug378967TestLanguage.g:464:1: entryRuleSObj returns [EObject current=null] : iv_ruleSObj= ruleSObj EOF ;
     public final EObject entryRuleSObj() throws RecognitionException {
         EObject current = null;
 
@@ -1029,8 +1048,8 @@ public class InternalBug378967TestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // InternalBug378967TestLanguage.g:469:2: (iv_ruleSObj= ruleSObj EOF )
-            // InternalBug378967TestLanguage.g:470:2: iv_ruleSObj= ruleSObj EOF
+            // InternalBug378967TestLanguage.g:464:45: (iv_ruleSObj= ruleSObj EOF )
+            // InternalBug378967TestLanguage.g:465:2: iv_ruleSObj= ruleSObj EOF
             {
              newCompositeNode(grammarAccess.getSObjRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -1044,11 +1063,11 @@ public class InternalBug378967TestLanguageParser extends AbstractInternalAntlrPa
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1057,50 +1076,53 @@ public class InternalBug378967TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleSObj"
-    // InternalBug378967TestLanguage.g:477:1: ruleSObj returns [EObject current=null] : ( (lv_value_0_0= 's' ) ) ;
+    // InternalBug378967TestLanguage.g:471:1: ruleSObj returns [EObject current=null] : ( (lv_value_0_0= 's' ) ) ;
     public final EObject ruleSObj() throws RecognitionException {
         EObject current = null;
 
         Token lv_value_0_0=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalBug378967TestLanguage.g:480:28: ( ( (lv_value_0_0= 's' ) ) )
-            // InternalBug378967TestLanguage.g:481:1: ( (lv_value_0_0= 's' ) )
+            // InternalBug378967TestLanguage.g:477:2: ( ( (lv_value_0_0= 's' ) ) )
+            // InternalBug378967TestLanguage.g:478:2: ( (lv_value_0_0= 's' ) )
             {
-            // InternalBug378967TestLanguage.g:481:1: ( (lv_value_0_0= 's' ) )
-            // InternalBug378967TestLanguage.g:482:1: (lv_value_0_0= 's' )
+            // InternalBug378967TestLanguage.g:478:2: ( (lv_value_0_0= 's' ) )
+            // InternalBug378967TestLanguage.g:479:3: (lv_value_0_0= 's' )
             {
-            // InternalBug378967TestLanguage.g:482:1: (lv_value_0_0= 's' )
-            // InternalBug378967TestLanguage.g:483:3: lv_value_0_0= 's'
+            // InternalBug378967TestLanguage.g:479:3: (lv_value_0_0= 's' )
+            // InternalBug378967TestLanguage.g:480:4: lv_value_0_0= 's'
             {
             lv_value_0_0=(Token)match(input,16,FollowSets000.FOLLOW_2); 
 
-                    newLeafNode(lv_value_0_0, grammarAccess.getSObjAccess().getValueSKeyword_0());
-                
+            				newLeafNode(lv_value_0_0, grammarAccess.getSObjAccess().getValueSKeyword_0());
+            			
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getSObjRule());
-            	        }
-                   		setWithLastConsumed(current, "value", lv_value_0_0, "s");
-            	    
-
-            }
-
+            				if (current==null) {
+            					current = createModelElement(grammarAccess.getSObjRule());
+            				}
+            				setWithLastConsumed(current, "value", lv_value_0_0, "s");
+            			
 
             }
 
 
             }
 
-             leaveRule(); 
+
+            }
+
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1109,7 +1131,7 @@ public class InternalBug378967TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleAfter"
-    // InternalBug378967TestLanguage.g:504:1: entryRuleAfter returns [String current=null] : iv_ruleAfter= ruleAfter EOF ;
+    // InternalBug378967TestLanguage.g:495:1: entryRuleAfter returns [String current=null] : iv_ruleAfter= ruleAfter EOF ;
     public final String entryRuleAfter() throws RecognitionException {
         String current = null;
 
@@ -1117,8 +1139,8 @@ public class InternalBug378967TestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // InternalBug378967TestLanguage.g:505:2: (iv_ruleAfter= ruleAfter EOF )
-            // InternalBug378967TestLanguage.g:506:2: iv_ruleAfter= ruleAfter EOF
+            // InternalBug378967TestLanguage.g:495:45: (iv_ruleAfter= ruleAfter EOF )
+            // InternalBug378967TestLanguage.g:496:2: iv_ruleAfter= ruleAfter EOF
             {
              newCompositeNode(grammarAccess.getAfterRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -1132,11 +1154,11 @@ public class InternalBug378967TestLanguageParser extends AbstractInternalAntlrPa
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1145,33 +1167,36 @@ public class InternalBug378967TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleAfter"
-    // InternalBug378967TestLanguage.g:513:1: ruleAfter returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : kw= 'after' ;
+    // InternalBug378967TestLanguage.g:502:1: ruleAfter returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : kw= 'after' ;
     public final AntlrDatatypeRuleToken ruleAfter() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
         Token kw=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalBug378967TestLanguage.g:516:28: (kw= 'after' )
-            // InternalBug378967TestLanguage.g:518:2: kw= 'after'
+            // InternalBug378967TestLanguage.g:508:2: (kw= 'after' )
+            // InternalBug378967TestLanguage.g:509:2: kw= 'after'
             {
             kw=(Token)match(input,15,FollowSets000.FOLLOW_2); 
 
-                    current.merge(kw);
-                    newLeafNode(kw, grammarAccess.getAfterAccess().getAfterKeyword()); 
-                
+            		current.merge(kw);
+            		newLeafNode(kw, grammarAccess.getAfterAccess().getAfterKeyword());
+            	
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1180,7 +1205,7 @@ public class InternalBug378967TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleS"
-    // InternalBug378967TestLanguage.g:531:1: entryRuleS returns [String current=null] : iv_ruleS= ruleS EOF ;
+    // InternalBug378967TestLanguage.g:517:1: entryRuleS returns [String current=null] : iv_ruleS= ruleS EOF ;
     public final String entryRuleS() throws RecognitionException {
         String current = null;
 
@@ -1188,8 +1213,8 @@ public class InternalBug378967TestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // InternalBug378967TestLanguage.g:532:2: (iv_ruleS= ruleS EOF )
-            // InternalBug378967TestLanguage.g:533:2: iv_ruleS= ruleS EOF
+            // InternalBug378967TestLanguage.g:517:41: (iv_ruleS= ruleS EOF )
+            // InternalBug378967TestLanguage.g:518:2: iv_ruleS= ruleS EOF
             {
              newCompositeNode(grammarAccess.getSRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -1203,11 +1228,11 @@ public class InternalBug378967TestLanguageParser extends AbstractInternalAntlrPa
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1216,33 +1241,36 @@ public class InternalBug378967TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleS"
-    // InternalBug378967TestLanguage.g:540:1: ruleS returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : kw= 's' ;
+    // InternalBug378967TestLanguage.g:524:1: ruleS returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : kw= 's' ;
     public final AntlrDatatypeRuleToken ruleS() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
         Token kw=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalBug378967TestLanguage.g:543:28: (kw= 's' )
-            // InternalBug378967TestLanguage.g:545:2: kw= 's'
+            // InternalBug378967TestLanguage.g:530:2: (kw= 's' )
+            // InternalBug378967TestLanguage.g:531:2: kw= 's'
             {
             kw=(Token)match(input,16,FollowSets000.FOLLOW_2); 
 
-                    current.merge(kw);
-                    newLeafNode(kw, grammarAccess.getSAccess().getSKeyword()); 
-                
+            		current.merge(kw);
+            		newLeafNode(kw, grammarAccess.getSAccess().getSKeyword());
+            	
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1251,38 +1279,42 @@ public class InternalBug378967TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleFirstEnum"
-    // InternalBug378967TestLanguage.g:558:1: ruleFirstEnum returns [Enumerator current=null] : (enumLiteral_0= 'after' ) ;
+    // InternalBug378967TestLanguage.g:539:1: ruleFirstEnum returns [Enumerator current=null] : (enumLiteral_0= 'after' ) ;
     public final Enumerator ruleFirstEnum() throws RecognitionException {
         Enumerator current = null;
 
         Token enumLiteral_0=null;
 
-         enterRule(); 
+
+        	enterRule();
+
         try {
-            // InternalBug378967TestLanguage.g:560:28: ( (enumLiteral_0= 'after' ) )
-            // InternalBug378967TestLanguage.g:561:1: (enumLiteral_0= 'after' )
+            // InternalBug378967TestLanguage.g:545:2: ( (enumLiteral_0= 'after' ) )
+            // InternalBug378967TestLanguage.g:546:2: (enumLiteral_0= 'after' )
             {
-            // InternalBug378967TestLanguage.g:561:1: (enumLiteral_0= 'after' )
-            // InternalBug378967TestLanguage.g:561:3: enumLiteral_0= 'after'
+            // InternalBug378967TestLanguage.g:546:2: (enumLiteral_0= 'after' )
+            // InternalBug378967TestLanguage.g:547:3: enumLiteral_0= 'after'
             {
             enumLiteral_0=(Token)match(input,15,FollowSets000.FOLLOW_2); 
 
-                    current = grammarAccess.getFirstEnumAccess().getValueEnumLiteralDeclaration().getEnumLiteral().getInstance();
-                    newLeafNode(enumLiteral_0, grammarAccess.getFirstEnumAccess().getValueEnumLiteralDeclaration()); 
-                
+            			current = grammarAccess.getFirstEnumAccess().getValueEnumLiteralDeclaration().getEnumLiteral().getInstance();
+            			newLeafNode(enumLiteral_0, grammarAccess.getFirstEnumAccess().getValueEnumLiteralDeclaration());
+            		
 
             }
 
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1291,38 +1323,42 @@ public class InternalBug378967TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleSecondEnum"
-    // InternalBug378967TestLanguage.g:571:1: ruleSecondEnum returns [Enumerator current=null] : (enumLiteral_0= 's' ) ;
+    // InternalBug378967TestLanguage.g:556:1: ruleSecondEnum returns [Enumerator current=null] : (enumLiteral_0= 's' ) ;
     public final Enumerator ruleSecondEnum() throws RecognitionException {
         Enumerator current = null;
 
         Token enumLiteral_0=null;
 
-         enterRule(); 
+
+        	enterRule();
+
         try {
-            // InternalBug378967TestLanguage.g:573:28: ( (enumLiteral_0= 's' ) )
-            // InternalBug378967TestLanguage.g:574:1: (enumLiteral_0= 's' )
+            // InternalBug378967TestLanguage.g:562:2: ( (enumLiteral_0= 's' ) )
+            // InternalBug378967TestLanguage.g:563:2: (enumLiteral_0= 's' )
             {
-            // InternalBug378967TestLanguage.g:574:1: (enumLiteral_0= 's' )
-            // InternalBug378967TestLanguage.g:574:3: enumLiteral_0= 's'
+            // InternalBug378967TestLanguage.g:563:2: (enumLiteral_0= 's' )
+            // InternalBug378967TestLanguage.g:564:3: enumLiteral_0= 's'
             {
             enumLiteral_0=(Token)match(input,16,FollowSets000.FOLLOW_2); 
 
-                    current = grammarAccess.getSecondEnumAccess().getValueEnumLiteralDeclaration().getEnumLiteral().getInstance();
-                    newLeafNode(enumLiteral_0, grammarAccess.getSecondEnumAccess().getValueEnumLiteralDeclaration()); 
-                
+            			current = grammarAccess.getSecondEnumAccess().getValueEnumLiteralDeclaration().getEnumLiteral().getInstance();
+            			newLeafNode(enumLiteral_0, grammarAccess.getSecondEnumAccess().getValueEnumLiteralDeclaration());
+            		
 
             }
 
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;

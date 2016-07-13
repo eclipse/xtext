@@ -4,36 +4,37 @@
 package org.eclipse.xtext.parser.terminalrules.parser.antlr;
 
 import com.google.inject.Inject;
-
+import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.terminalrules.parser.antlr.internal.InternalEcoreTerminalsTestLanguageParser;
 import org.eclipse.xtext.parser.terminalrules.services.EcoreTerminalsTestLanguageGrammarAccess;
 
-public class EcoreTerminalsTestLanguageParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {
-	
+public class EcoreTerminalsTestLanguageParser extends AbstractAntlrParser {
+
 	@Inject
 	private EcoreTerminalsTestLanguageGrammarAccess grammarAccess;
-	
+
 	@Override
 	protected void setInitialHiddenTokens(XtextTokenStream tokenStream) {
 		tokenStream.setInitialHiddenTokens("RULE_WS");
 	}
 	
+
 	@Override
-	protected org.eclipse.xtext.parser.terminalrules.parser.antlr.internal.InternalEcoreTerminalsTestLanguageParser createParser(XtextTokenStream stream) {
-		return new org.eclipse.xtext.parser.terminalrules.parser.antlr.internal.InternalEcoreTerminalsTestLanguageParser(stream, getGrammarAccess());
+	protected InternalEcoreTerminalsTestLanguageParser createParser(XtextTokenStream stream) {
+		return new InternalEcoreTerminalsTestLanguageParser(stream, getGrammarAccess());
 	}
-	
+
 	@Override 
 	protected String getDefaultRuleName() {
 		return "Model";
 	}
-	
+
 	public EcoreTerminalsTestLanguageGrammarAccess getGrammarAccess() {
 		return this.grammarAccess;
 	}
-	
+
 	public void setGrammarAccess(EcoreTerminalsTestLanguageGrammarAccess grammarAccess) {
 		this.grammarAccess = grammarAccess;
 	}
-	
 }

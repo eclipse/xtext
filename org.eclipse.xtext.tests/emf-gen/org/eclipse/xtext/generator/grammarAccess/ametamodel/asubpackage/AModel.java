@@ -17,10 +17,10 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.generator.grammarAccess.ametamodel.asubpackage.AModel#getElements <em>Elements</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.generator.grammarAccess.ametamodel.asubpackage.AsubpackagePackage#getAModel()
  * @model

@@ -3,19 +3,23 @@
  */
 package org.eclipse.xtext.parser.terminalrules.services;
 
-import com.google.inject.Singleton;
 import com.google.inject.Inject;
-
+import com.google.inject.Singleton;
 import java.util.List;
-
-import org.eclipse.xtext.*;
+import org.eclipse.xtext.Alternatives;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.Group;
+import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TerminalRule;
+import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder;
 import org.eclipse.xtext.service.GrammarProvider;
-import org.eclipse.xtext.service.AbstractElementFinder.*;
-
 
 @Singleton
 public class EcoreTerminalsTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
-	
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.terminalrules.EcoreTerminalsTestLanguage.Model");
@@ -38,43 +42,43 @@ public class EcoreTerminalsTestLanguageGrammarAccess extends AbstractGrammarElem
 		//	| 'double' doubleValues+=EDOUBLE
 		//	| 'date' dateValues+=EDATE)*;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//('int' intValues+=EINT | 'double' doubleValues+=EDOUBLE | 'date' dateValues+=EDATE)*
 		public Alternatives getAlternatives() { return cAlternatives; }
-
+		
 		//'int' intValues+=EINT
 		public Group getGroup_0() { return cGroup_0; }
-
+		
 		//'int'
 		public Keyword getIntKeyword_0_0() { return cIntKeyword_0_0; }
-
+		
 		//intValues+=EINT
 		public Assignment getIntValuesAssignment_0_1() { return cIntValuesAssignment_0_1; }
-
+		
 		//EINT
 		public RuleCall getIntValuesEINTTerminalRuleCall_0_1_0() { return cIntValuesEINTTerminalRuleCall_0_1_0; }
-
+		
 		//'double' doubleValues+=EDOUBLE
 		public Group getGroup_1() { return cGroup_1; }
-
+		
 		//'double'
 		public Keyword getDoubleKeyword_1_0() { return cDoubleKeyword_1_0; }
-
+		
 		//doubleValues+=EDOUBLE
 		public Assignment getDoubleValuesAssignment_1_1() { return cDoubleValuesAssignment_1_1; }
-
+		
 		//EDOUBLE
 		public RuleCall getDoubleValuesEDOUBLETerminalRuleCall_1_1_0() { return cDoubleValuesEDOUBLETerminalRuleCall_1_1_0; }
-
+		
 		//'date' dateValues+=EDATE
 		public Group getGroup_2() { return cGroup_2; }
-
+		
 		//'date'
 		public Keyword getDateKeyword_2_0() { return cDateKeyword_2_0; }
-
+		
 		//dateValues+=EDATE
 		public Assignment getDateValuesAssignment_2_1() { return cDateValuesAssignment_2_1; }
-
+		
 		//EDATE
 		public RuleCall getDateValuesEDATETerminalRuleCall_2_1_0() { return cDateValuesEDATETerminalRuleCall_2_1_0; }
 	}
@@ -132,29 +136,29 @@ public class EcoreTerminalsTestLanguageGrammarAccess extends AbstractGrammarElem
 	public ParserRule getModelRule() {
 		return getModelAccess().getRule();
 	}
-
+	
 	//terminal EDOUBLE returns ecore::EDouble:
 	//	('.' '0'..'9'+ | '0'..'9'+ '.' '0'..'9'*) (('E' | 'e') ('-' | '+'?) '0'..'9'+)?;
 	public TerminalRule getEDOUBLERule() {
 		return tEDOUBLE;
-	} 
-
+	}
+	
 	//terminal EDATE returns ecore::EDate:
 	//	'0'..'9' '0'..'9' '0'..'9' '0'..'9' '-' '0'..'9' '0'..'9' '-' '0'..'9' '0'..'9' 'T' '0'..'9' '0'..'9' ':' '0'..'9'
 	//	'0'..'9' ':' '0'..'9' '0'..'9' '.' '0'..'9' '0'..'9' '0'..'9' ('+' | '-') '0'..'9' '0'..'9' '0'..'9' '0'..'9';
 	public TerminalRule getEDATERule() {
 		return tEDATE;
-	} 
-
+	}
+	
 	//terminal EINT returns ecore::EInt:
 	//	'-'? '0'..'9'+;
 	public TerminalRule getEINTRule() {
 		return tEINT;
-	} 
-
+	}
+	
 	//terminal WS:
 	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return tWS;
-	} 
+	}
 }

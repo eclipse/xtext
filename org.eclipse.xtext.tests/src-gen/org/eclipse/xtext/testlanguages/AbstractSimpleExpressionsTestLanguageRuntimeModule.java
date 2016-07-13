@@ -3,18 +3,38 @@
  */
 package org.eclipse.xtext.testlanguages;
 
-import java.util.Properties;
-
-import org.eclipse.xtext.Constants;
-
 import com.google.inject.Binder;
+import com.google.inject.Provider;
 import com.google.inject.name.Names;
+import java.util.Properties;
+import org.eclipse.xtext.Constants;
+import org.eclipse.xtext.IGrammarAccess;
+import org.eclipse.xtext.parser.IParser;
+import org.eclipse.xtext.parser.ITokenToStringConverter;
+import org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider;
+import org.eclipse.xtext.parser.antlr.AntlrTokenToStringConverter;
+import org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider;
+import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
+import org.eclipse.xtext.parser.antlr.Lexer;
+import org.eclipse.xtext.parser.antlr.LexerBindings;
+import org.eclipse.xtext.parser.antlr.LexerProvider;
+import org.eclipse.xtext.serializer.ISerializer;
+import org.eclipse.xtext.serializer.impl.Serializer;
+import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
+import org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer;
+import org.eclipse.xtext.service.DefaultRuntimeModule;
+import org.eclipse.xtext.testlanguages.parser.antlr.SimpleExpressionsTestLanguageAntlrTokenFileProvider;
+import org.eclipse.xtext.testlanguages.parser.antlr.SimpleExpressionsTestLanguageParser;
+import org.eclipse.xtext.testlanguages.parser.antlr.internal.InternalSimpleExpressionsTestLanguageLexer;
+import org.eclipse.xtext.testlanguages.serializer.SimpleExpressionsTestLanguageSemanticSequencer;
+import org.eclipse.xtext.testlanguages.serializer.SimpleExpressionsTestLanguageSyntacticSequencer;
+import org.eclipse.xtext.testlanguages.services.SimpleExpressionsTestLanguageGrammarAccess;
 
 /**
- * Manual modifications go to {org.eclipse.xtext.testlanguages.SimpleExpressionsTestLanguageRuntimeModule}
+ * Manual modifications go to {@link SimpleExpressionsTestLanguageRuntimeModule}.
  */
 @SuppressWarnings("all")
-public abstract class AbstractSimpleExpressionsTestLanguageRuntimeModule extends org.eclipse.xtext.service.DefaultRuntimeModule {
+public abstract class AbstractSimpleExpressionsTestLanguageRuntimeModule extends DefaultRuntimeModule {
 
 	protected Properties properties = null;
 
@@ -33,64 +53,66 @@ public abstract class AbstractSimpleExpressionsTestLanguageRuntimeModule extends
 			binder.bind(String.class).annotatedWith(Names.named(Constants.FILE_EXTENSIONS)).toInstance("simpleexpressionstestlanguage");
 	}
 	
-	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
-	public Class<? extends org.eclipse.xtext.parser.IParser> bindIParser() {
-		return org.eclipse.xtext.testlanguages.parser.antlr.SimpleExpressionsTestLanguageParser.class;
+	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
+	public Class<? extends IParser> bindIParser() {
+		return SimpleExpressionsTestLanguageParser.class;
 	}
-
-	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
-	public Class<? extends org.eclipse.xtext.parser.ITokenToStringConverter> bindITokenToStringConverter() {
-		return org.eclipse.xtext.parser.antlr.AntlrTokenToStringConverter.class;
+	
+	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
+	public Class<? extends ITokenToStringConverter> bindITokenToStringConverter() {
+		return AntlrTokenToStringConverter.class;
 	}
-
-	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
-	public Class<? extends org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider> bindIAntlrTokenFileProvider() {
-		return org.eclipse.xtext.testlanguages.parser.antlr.SimpleExpressionsTestLanguageAntlrTokenFileProvider.class;
+	
+	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
+	public Class<? extends IAntlrTokenFileProvider> bindIAntlrTokenFileProvider() {
+		return SimpleExpressionsTestLanguageAntlrTokenFileProvider.class;
 	}
-
-	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
-	public Class<? extends org.eclipse.xtext.parser.antlr.Lexer> bindLexer() {
-		return org.eclipse.xtext.testlanguages.parser.antlr.internal.InternalSimpleExpressionsTestLanguageLexer.class;
+	
+	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
+	public Class<? extends Lexer> bindLexer() {
+		return InternalSimpleExpressionsTestLanguageLexer.class;
 	}
-
-	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
-	public com.google.inject.Provider<org.eclipse.xtext.testlanguages.parser.antlr.internal.InternalSimpleExpressionsTestLanguageLexer> provideInternalSimpleExpressionsTestLanguageLexer() {
-		return org.eclipse.xtext.parser.antlr.LexerProvider.create(org.eclipse.xtext.testlanguages.parser.antlr.internal.InternalSimpleExpressionsTestLanguageLexer.class);
+	
+	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
+	public Class<? extends ITokenDefProvider> bindITokenDefProvider() {
+		return AntlrTokenDefProvider.class;
 	}
-
-	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
-	public void configureRuntimeLexer(com.google.inject.Binder binder) {
-		binder.bind(org.eclipse.xtext.parser.antlr.Lexer.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.parser.antlr.LexerBindings.RUNTIME)).to(org.eclipse.xtext.testlanguages.parser.antlr.internal.InternalSimpleExpressionsTestLanguageLexer.class);
+	
+	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
+	public Provider<InternalSimpleExpressionsTestLanguageLexer> provideInternalSimpleExpressionsTestLanguageLexer() {
+		return LexerProvider.create(InternalSimpleExpressionsTestLanguageLexer.class);
 	}
-
-	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
-	public Class<? extends org.eclipse.xtext.parser.antlr.ITokenDefProvider> bindITokenDefProvider() {
-		return org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider.class;
+	
+	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
+	public void configureRuntimeLexer(Binder binder) {
+		binder.bind(Lexer.class)
+			.annotatedWith(Names.named(LexerBindings.RUNTIME))
+			.to(InternalSimpleExpressionsTestLanguageLexer.class);
 	}
-
-	// contributed by org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment
-	public java.lang.ClassLoader bindClassLoaderToInstance() {
+	
+	// contributed by org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessFragment2
+	public ClassLoader bindClassLoaderToInstance() {
 		return getClass().getClassLoader();
 	}
-
-	// contributed by org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment
-	public Class<? extends org.eclipse.xtext.IGrammarAccess> bindIGrammarAccess() {
-		return org.eclipse.xtext.testlanguages.services.SimpleExpressionsTestLanguageGrammarAccess.class;
+	
+	// contributed by org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessFragment2
+	public Class<? extends IGrammarAccess> bindIGrammarAccess() {
+		return SimpleExpressionsTestLanguageGrammarAccess.class;
 	}
-
-	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
-	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
-		return org.eclipse.xtext.testlanguages.serializer.SimpleExpressionsTestLanguageSemanticSequencer.class;
+	
+	// contributed by org.eclipse.xtext.xtext.generator.serializer.SerializerFragment2
+	public Class<? extends ISemanticSequencer> bindISemanticSequencer() {
+		return SimpleExpressionsTestLanguageSemanticSequencer.class;
 	}
-
-	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
-	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer> bindISyntacticSequencer() {
-		return org.eclipse.xtext.testlanguages.serializer.SimpleExpressionsTestLanguageSyntacticSequencer.class;
+	
+	// contributed by org.eclipse.xtext.xtext.generator.serializer.SerializerFragment2
+	public Class<? extends ISyntacticSequencer> bindISyntacticSequencer() {
+		return SimpleExpressionsTestLanguageSyntacticSequencer.class;
 	}
-
-	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
-	public Class<? extends org.eclipse.xtext.serializer.ISerializer> bindISerializer() {
-		return org.eclipse.xtext.serializer.impl.Serializer.class;
+	
+	// contributed by org.eclipse.xtext.xtext.generator.serializer.SerializerFragment2
+	public Class<? extends ISerializer> bindISerializer() {
+		return Serializer.class;
 	}
-
+	
 }

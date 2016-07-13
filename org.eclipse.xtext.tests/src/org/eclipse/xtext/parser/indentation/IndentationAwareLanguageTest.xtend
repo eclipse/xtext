@@ -12,6 +12,7 @@ import org.eclipse.xtend2.lib.StringConcatenation
 import org.eclipse.xtext.nodemodel.impl.InvariantChecker
 import org.eclipse.xtext.parser.indentation.indentationAwareTestLanguage.Tree
 import org.eclipse.xtext.parser.indentation.indentationAwareTestLanguage.TreeNode
+import org.eclipse.xtext.parser.indentation.tests.IndentationAwareTestLanguageInjectorProvider
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.XtextRunner

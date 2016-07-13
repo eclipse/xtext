@@ -10,7 +10,7 @@ module org.eclipse.xtext.linking.GenerateLinkingTestLanguages
 import org.eclipse.emf.mwe2.runtime.workflow.Workflow
 import org.eclipse.emf.mwe.utils.*
 import org.eclipse.xtext.*
-import org.eclipse.xtext.generator.*
+import org.eclipse.xtext.xtext.generator.*
 
 var projectName = "org.eclipse.xtext.tests"
 var runtimeProject = "../${projectName}"
@@ -25,70 +25,87 @@ Workflow {
 		directory = "${runtimeProject}/src-gen/org/eclipse/xtext/linking"
 	}
 	
-	component = Generator auto-inject {
-		pathRtProject = runtimeProject
-		pathTestProject = runtimeProject
-		projectNameRt = projectName
+	component = XtextGenerator {
+		cleaner = {
+			enabled = false
+		}
+		configuration = {
+			project = model.project.StandardProjectConfig {
+				baseName = projectName
+				rootPath = ".."
+				runtimeTest = {
+					enabled = true
+					root = runtimeProject
+					src = "${runtimeProject}/src"
+					srcGen = "${runtimeProject}/src-gen"
+				}
+			}
+			code = {
+				encoding = 'ISO-8859-1'
+				lineDelimiter = lineDelimiter
+				preferXtendStubs = false
+			}
+		}
 		
 		language = {
-			uri = "classpath:/org/eclipse/xtext/linking/Bug287988TestLanguage.xtext"
+			grammarUri = "classpath:/org/eclipse/xtext/linking/Bug287988TestLanguage.xtext"
 			fragment = @TestLanguagesFragments {}
 		}
 		language = {
-			uri = "classpath:/org/eclipse/xtext/linking/Bug289059TestLanguage.xtext"
+			grammarUri = "classpath:/org/eclipse/xtext/linking/Bug289059TestLanguage.xtext"
 			fragment = @TestLanguagesFragments {}
 		}
 		language = {
-			uri = "classpath:/org/eclipse/xtext/linking/Bug313089TestLanguage.xtext"
+			grammarUri = "classpath:/org/eclipse/xtext/linking/Bug313089TestLanguage.xtext"
 			fragment = @TestLanguagesFragments {}
 		}
 		language = {
-			uri = "classpath:/org/eclipse/xtext/linking/ImportUriTestLanguage.xtext"
+			grammarUri = "classpath:/org/eclipse/xtext/linking/ImportUriTestLanguage.xtext"
 			fragment = @TestLanguagesFragments {}
 		}
 		language = {
-			uri = "classpath:/org/eclipse/xtext/linking/LangATestLanguage.xtext"
-			fragment = CompositeGeneratorFragment {
+			grammarUri = "classpath:/org/eclipse/xtext/linking/LangATestLanguage.xtext"
+			fragment = xtext.generator.CompositeGeneratorFragment2 {
 				fragment = @TestLanguagesFragments {
 				}
-				fragment = scoping.ImportNamespacesScopingFragment {
+				fragment = scoping.ImportNamespacesScopingFragment2 {
 				}
 			}
 		}
 		language = {
-			uri = "classpath:/org/eclipse/xtext/linking/Bug362902.xtext"
+			grammarUri = "classpath:/org/eclipse/xtext/linking/Bug362902.xtext"
 			fragment = @TestLanguagesFragments {}
 		}
 		language = {
-			uri = "classpath:/org/eclipse/xtext/linking/AbstractIgnoreCaseLinkingTestLanguage.xtext"
-			fragment = @TestLanguagesFragments {
+			grammarUri = "classpath:/org/eclipse/xtext/linking/AbstractIgnoreCaseLinkingTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+			fragment = xtext.generator.scoping.ImportNamespacesScopingFragment2 {
+				ignoreCase = true
 			}
 		}
 		language = {
-			uri = "classpath:/org/eclipse/xtext/linking/IgnoreCaseNamespacesTestLanguage.xtext"
-			fragment = CompositeGeneratorFragment {
-				fragment = @TestLanguagesFragments {}
-				fragment = scoping.ImportNamespacesScopingFragment {
-					ignoreCase = true
-				}
+			grammarUri = "classpath:/org/eclipse/xtext/linking/IgnoreCaseNamespacesTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+			fragment = xtext.generator.scoping.ImportNamespacesScopingFragment2 {
+				ignoreCase = true
 			}
 		}
 		language = {
-			uri = "classpath:/org/eclipse/xtext/linking/IgnoreCaseImportsTestLanguage.xtext"
-			fragment = CompositeGeneratorFragment {
-				fragment = @TestLanguagesFragments {}
-				fragment = scoping.ImportURIScopingFragment {
-					ignoreCase = true
-				}
+			grammarUri = "classpath:/org/eclipse/xtext/linking/IgnoreCaseImportsTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+			fragment = tests.ImportURIScopingFragment2 {
+				ignoreCase = true
 			}
 		}
 		language = { 
-			uri = "classpath:/org/eclipse/xtext/linking/lazy/Bug311337TestLanguage.xtext"
+			grammarUri = "classpath:/org/eclipse/xtext/linking/lazy/Bug311337TestLanguage.xtext"
 			fragment = @TestLanguagesFragments {}
 		}
 		language = {
-			uri = "classpath:/org/eclipse/xtext/linking/lazy/LazyLinkingTestLanguage.xtext"
-			fragment = generator.junit.Junit4Fragment {}
+			grammarUri = "classpath:/org/eclipse/xtext/linking/lazy/LazyLinkingTestLanguage.xtext"
+			fragment = junit.Junit4Fragment2 {
+				generateStub = false
+			}
 			fragment = @TestLanguagesFragments {}
 		}
 	}

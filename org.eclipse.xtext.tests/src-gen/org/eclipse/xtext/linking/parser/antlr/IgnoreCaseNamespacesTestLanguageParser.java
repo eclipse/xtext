@@ -4,36 +4,37 @@
 package org.eclipse.xtext.linking.parser.antlr;
 
 import com.google.inject.Inject;
-
-import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.linking.parser.antlr.internal.InternalIgnoreCaseNamespacesTestLanguageParser;
 import org.eclipse.xtext.linking.services.IgnoreCaseNamespacesTestLanguageGrammarAccess;
+import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
-public class IgnoreCaseNamespacesTestLanguageParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {
-	
+public class IgnoreCaseNamespacesTestLanguageParser extends AbstractAntlrParser {
+
 	@Inject
 	private IgnoreCaseNamespacesTestLanguageGrammarAccess grammarAccess;
-	
+
 	@Override
 	protected void setInitialHiddenTokens(XtextTokenStream tokenStream) {
 		tokenStream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
 	}
 	
+
 	@Override
-	protected org.eclipse.xtext.linking.parser.antlr.internal.InternalIgnoreCaseNamespacesTestLanguageParser createParser(XtextTokenStream stream) {
-		return new org.eclipse.xtext.linking.parser.antlr.internal.InternalIgnoreCaseNamespacesTestLanguageParser(stream, getGrammarAccess());
+	protected InternalIgnoreCaseNamespacesTestLanguageParser createParser(XtextTokenStream stream) {
+		return new InternalIgnoreCaseNamespacesTestLanguageParser(stream, getGrammarAccess());
 	}
-	
+
 	@Override 
 	protected String getDefaultRuleName() {
 		return "Model";
 	}
-	
+
 	public IgnoreCaseNamespacesTestLanguageGrammarAccess getGrammarAccess() {
 		return this.grammarAccess;
 	}
-	
+
 	public void setGrammarAccess(IgnoreCaseNamespacesTestLanguageGrammarAccess grammarAccess) {
 		this.grammarAccess = grammarAccess;
 	}
-	
 }

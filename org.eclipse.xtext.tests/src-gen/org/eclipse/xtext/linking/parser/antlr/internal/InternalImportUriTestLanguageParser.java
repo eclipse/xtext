@@ -1,4 +1,4 @@
-package org.eclipse.xtext.linking.parser.antlr.internal; 
+package org.eclipse.xtext.linking.parser.antlr.internal;
 
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
@@ -54,18 +54,18 @@ public class InternalImportUriTestLanguageParser extends AbstractInternalAntlrPa
 
 
      	private ImportUriTestLanguageGrammarAccess grammarAccess;
-     	
+
         public InternalImportUriTestLanguageParser(TokenStream input, ImportUriTestLanguageGrammarAccess grammarAccess) {
             this(input);
             this.grammarAccess = grammarAccess;
             registerRules(grammarAccess.getGrammar());
         }
-        
+
         @Override
         protected String getFirstRuleName() {
-        	return "Main";	
+        	return "Main";
        	}
-       	
+
        	@Override
        	protected ImportUriTestLanguageGrammarAccess getGrammarAccess() {
        		return grammarAccess;
@@ -73,8 +73,9 @@ public class InternalImportUriTestLanguageParser extends AbstractInternalAntlrPa
 
 
 
+
     // $ANTLR start "entryRuleMain"
-    // InternalImportUriTestLanguage.g:67:1: entryRuleMain returns [EObject current=null] : iv_ruleMain= ruleMain EOF ;
+    // InternalImportUriTestLanguage.g:64:1: entryRuleMain returns [EObject current=null] : iv_ruleMain= ruleMain EOF ;
     public final EObject entryRuleMain() throws RecognitionException {
         EObject current = null;
 
@@ -82,8 +83,8 @@ public class InternalImportUriTestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // InternalImportUriTestLanguage.g:68:2: (iv_ruleMain= ruleMain EOF )
-            // InternalImportUriTestLanguage.g:69:2: iv_ruleMain= ruleMain EOF
+            // InternalImportUriTestLanguage.g:64:45: (iv_ruleMain= ruleMain EOF )
+            // InternalImportUriTestLanguage.g:65:2: iv_ruleMain= ruleMain EOF
             {
              newCompositeNode(grammarAccess.getMainRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -97,11 +98,11 @@ public class InternalImportUriTestLanguageParser extends AbstractInternalAntlrPa
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -110,7 +111,7 @@ public class InternalImportUriTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleMain"
-    // InternalImportUriTestLanguage.g:76:1: ruleMain returns [EObject current=null] : ( ( (lv_imports_0_0= ruleImport ) )* ( (lv_types_1_0= ruleType ) )* ) ;
+    // InternalImportUriTestLanguage.g:71:1: ruleMain returns [EObject current=null] : ( ( (lv_imports_0_0= ruleImport ) )* ( (lv_types_1_0= ruleType ) )* ) ;
     public final EObject ruleMain() throws RecognitionException {
         EObject current = null;
 
@@ -119,16 +120,17 @@ public class InternalImportUriTestLanguageParser extends AbstractInternalAntlrPa
         EObject lv_types_1_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalImportUriTestLanguage.g:79:28: ( ( ( (lv_imports_0_0= ruleImport ) )* ( (lv_types_1_0= ruleType ) )* ) )
-            // InternalImportUriTestLanguage.g:80:1: ( ( (lv_imports_0_0= ruleImport ) )* ( (lv_types_1_0= ruleType ) )* )
+            // InternalImportUriTestLanguage.g:77:2: ( ( ( (lv_imports_0_0= ruleImport ) )* ( (lv_types_1_0= ruleType ) )* ) )
+            // InternalImportUriTestLanguage.g:78:2: ( ( (lv_imports_0_0= ruleImport ) )* ( (lv_types_1_0= ruleType ) )* )
             {
-            // InternalImportUriTestLanguage.g:80:1: ( ( (lv_imports_0_0= ruleImport ) )* ( (lv_types_1_0= ruleType ) )* )
-            // InternalImportUriTestLanguage.g:80:2: ( (lv_imports_0_0= ruleImport ) )* ( (lv_types_1_0= ruleType ) )*
+            // InternalImportUriTestLanguage.g:78:2: ( ( (lv_imports_0_0= ruleImport ) )* ( (lv_types_1_0= ruleType ) )* )
+            // InternalImportUriTestLanguage.g:79:3: ( (lv_imports_0_0= ruleImport ) )* ( (lv_types_1_0= ruleType ) )*
             {
-            // InternalImportUriTestLanguage.g:80:2: ( (lv_imports_0_0= ruleImport ) )*
+            // InternalImportUriTestLanguage.g:79:3: ( (lv_imports_0_0= ruleImport ) )*
             loop1:
             do {
                 int alt1=2;
@@ -141,30 +143,30 @@ public class InternalImportUriTestLanguageParser extends AbstractInternalAntlrPa
 
                 switch (alt1) {
             	case 1 :
-            	    // InternalImportUriTestLanguage.g:81:1: (lv_imports_0_0= ruleImport )
+            	    // InternalImportUriTestLanguage.g:80:4: (lv_imports_0_0= ruleImport )
             	    {
-            	    // InternalImportUriTestLanguage.g:81:1: (lv_imports_0_0= ruleImport )
-            	    // InternalImportUriTestLanguage.g:82:3: lv_imports_0_0= ruleImport
+            	    // InternalImportUriTestLanguage.g:80:4: (lv_imports_0_0= ruleImport )
+            	    // InternalImportUriTestLanguage.g:81:5: lv_imports_0_0= ruleImport
             	    {
-            	     
-            	    	        newCompositeNode(grammarAccess.getMainAccess().getImportsImportParserRuleCall_0_0()); 
-            	    	    
+
+            	    					newCompositeNode(grammarAccess.getMainAccess().getImportsImportParserRuleCall_0_0());
+            	    				
             	    pushFollow(FollowSets000.FOLLOW_3);
             	    lv_imports_0_0=ruleImport();
 
             	    state._fsp--;
 
 
-            	    	        if (current==null) {
-            	    	            current = createModelElementForParent(grammarAccess.getMainRule());
-            	    	        }
-            	           		add(
-            	           			current, 
-            	           			"imports",
-            	            		lv_imports_0_0, 
-            	            		"org.eclipse.xtext.linking.ImportUriTestLanguage.Import");
-            	    	        afterParserOrEnumRuleCall();
-            	    	    
+            	    					if (current==null) {
+            	    						current = createModelElementForParent(grammarAccess.getMainRule());
+            	    					}
+            	    					add(
+            	    						current,
+            	    						"imports",
+            	    						lv_imports_0_0,
+            	    						"org.eclipse.xtext.linking.ImportUriTestLanguage.Import");
+            	    					afterParserOrEnumRuleCall();
+            	    				
 
             	    }
 
@@ -190,30 +192,30 @@ public class InternalImportUriTestLanguageParser extends AbstractInternalAntlrPa
 
                 switch (alt2) {
             	case 1 :
-            	    // InternalImportUriTestLanguage.g:99:1: (lv_types_1_0= ruleType )
+            	    // InternalImportUriTestLanguage.g:99:4: (lv_types_1_0= ruleType )
             	    {
-            	    // InternalImportUriTestLanguage.g:99:1: (lv_types_1_0= ruleType )
-            	    // InternalImportUriTestLanguage.g:100:3: lv_types_1_0= ruleType
+            	    // InternalImportUriTestLanguage.g:99:4: (lv_types_1_0= ruleType )
+            	    // InternalImportUriTestLanguage.g:100:5: lv_types_1_0= ruleType
             	    {
-            	     
-            	    	        newCompositeNode(grammarAccess.getMainAccess().getTypesTypeParserRuleCall_1_0()); 
-            	    	    
+
+            	    					newCompositeNode(grammarAccess.getMainAccess().getTypesTypeParserRuleCall_1_0());
+            	    				
             	    pushFollow(FollowSets000.FOLLOW_4);
             	    lv_types_1_0=ruleType();
 
             	    state._fsp--;
 
 
-            	    	        if (current==null) {
-            	    	            current = createModelElementForParent(grammarAccess.getMainRule());
-            	    	        }
-            	           		add(
-            	           			current, 
-            	           			"types",
-            	            		lv_types_1_0, 
-            	            		"org.eclipse.xtext.linking.ImportUriTestLanguage.Type");
-            	    	        afterParserOrEnumRuleCall();
-            	    	    
+            	    					if (current==null) {
+            	    						current = createModelElementForParent(grammarAccess.getMainRule());
+            	    					}
+            	    					add(
+            	    						current,
+            	    						"types",
+            	    						lv_types_1_0,
+            	    						"org.eclipse.xtext.linking.ImportUriTestLanguage.Type");
+            	    					afterParserOrEnumRuleCall();
+            	    				
 
             	    }
 
@@ -232,13 +234,15 @@ public class InternalImportUriTestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -247,7 +251,7 @@ public class InternalImportUriTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleImport"
-    // InternalImportUriTestLanguage.g:124:1: entryRuleImport returns [EObject current=null] : iv_ruleImport= ruleImport EOF ;
+    // InternalImportUriTestLanguage.g:121:1: entryRuleImport returns [EObject current=null] : iv_ruleImport= ruleImport EOF ;
     public final EObject entryRuleImport() throws RecognitionException {
         EObject current = null;
 
@@ -255,8 +259,8 @@ public class InternalImportUriTestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // InternalImportUriTestLanguage.g:125:2: (iv_ruleImport= ruleImport EOF )
-            // InternalImportUriTestLanguage.g:126:2: iv_ruleImport= ruleImport EOF
+            // InternalImportUriTestLanguage.g:121:47: (iv_ruleImport= ruleImport EOF )
+            // InternalImportUriTestLanguage.g:122:2: iv_ruleImport= ruleImport EOF
             {
              newCompositeNode(grammarAccess.getImportRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -270,11 +274,11 @@ public class InternalImportUriTestLanguageParser extends AbstractInternalAntlrPa
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -283,49 +287,47 @@ public class InternalImportUriTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleImport"
-    // InternalImportUriTestLanguage.g:133:1: ruleImport returns [EObject current=null] : (otherlv_0= 'import' ( (lv_importURI_1_0= RULE_STRING ) ) ) ;
+    // InternalImportUriTestLanguage.g:128:1: ruleImport returns [EObject current=null] : (otherlv_0= 'import' ( (lv_importURI_1_0= RULE_STRING ) ) ) ;
     public final EObject ruleImport() throws RecognitionException {
         EObject current = null;
 
         Token otherlv_0=null;
         Token lv_importURI_1_0=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalImportUriTestLanguage.g:136:28: ( (otherlv_0= 'import' ( (lv_importURI_1_0= RULE_STRING ) ) ) )
-            // InternalImportUriTestLanguage.g:137:1: (otherlv_0= 'import' ( (lv_importURI_1_0= RULE_STRING ) ) )
+            // InternalImportUriTestLanguage.g:134:2: ( (otherlv_0= 'import' ( (lv_importURI_1_0= RULE_STRING ) ) ) )
+            // InternalImportUriTestLanguage.g:135:2: (otherlv_0= 'import' ( (lv_importURI_1_0= RULE_STRING ) ) )
             {
-            // InternalImportUriTestLanguage.g:137:1: (otherlv_0= 'import' ( (lv_importURI_1_0= RULE_STRING ) ) )
-            // InternalImportUriTestLanguage.g:137:3: otherlv_0= 'import' ( (lv_importURI_1_0= RULE_STRING ) )
+            // InternalImportUriTestLanguage.g:135:2: (otherlv_0= 'import' ( (lv_importURI_1_0= RULE_STRING ) ) )
+            // InternalImportUriTestLanguage.g:136:3: otherlv_0= 'import' ( (lv_importURI_1_0= RULE_STRING ) )
             {
             otherlv_0=(Token)match(input,11,FollowSets000.FOLLOW_5); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getImportAccess().getImportKeyword_0());
-                
-            // InternalImportUriTestLanguage.g:141:1: ( (lv_importURI_1_0= RULE_STRING ) )
-            // InternalImportUriTestLanguage.g:142:1: (lv_importURI_1_0= RULE_STRING )
+            			newLeafNode(otherlv_0, grammarAccess.getImportAccess().getImportKeyword_0());
+            		
+            // InternalImportUriTestLanguage.g:140:3: ( (lv_importURI_1_0= RULE_STRING ) )
+            // InternalImportUriTestLanguage.g:141:4: (lv_importURI_1_0= RULE_STRING )
             {
-            // InternalImportUriTestLanguage.g:142:1: (lv_importURI_1_0= RULE_STRING )
-            // InternalImportUriTestLanguage.g:143:3: lv_importURI_1_0= RULE_STRING
+            // InternalImportUriTestLanguage.g:141:4: (lv_importURI_1_0= RULE_STRING )
+            // InternalImportUriTestLanguage.g:142:5: lv_importURI_1_0= RULE_STRING
             {
             lv_importURI_1_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_2); 
 
-            			newLeafNode(lv_importURI_1_0, grammarAccess.getImportAccess().getImportURISTRINGTerminalRuleCall_1_0()); 
-            		
+            					newLeafNode(lv_importURI_1_0, grammarAccess.getImportAccess().getImportURISTRINGTerminalRuleCall_1_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getImportRule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"importURI",
-                    		lv_importURI_1_0, 
-                    		"org.eclipse.xtext.common.Terminals.STRING");
-            	    
-
-            }
-
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getImportRule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"importURI",
+            						lv_importURI_1_0,
+            						"org.eclipse.xtext.common.Terminals.STRING");
+            				
 
             }
 
@@ -335,13 +337,18 @@ public class InternalImportUriTestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-             leaveRule(); 
+
+            }
+
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -350,7 +357,7 @@ public class InternalImportUriTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleType"
-    // InternalImportUriTestLanguage.g:167:1: entryRuleType returns [EObject current=null] : iv_ruleType= ruleType EOF ;
+    // InternalImportUriTestLanguage.g:162:1: entryRuleType returns [EObject current=null] : iv_ruleType= ruleType EOF ;
     public final EObject entryRuleType() throws RecognitionException {
         EObject current = null;
 
@@ -358,8 +365,8 @@ public class InternalImportUriTestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // InternalImportUriTestLanguage.g:168:2: (iv_ruleType= ruleType EOF )
-            // InternalImportUriTestLanguage.g:169:2: iv_ruleType= ruleType EOF
+            // InternalImportUriTestLanguage.g:162:45: (iv_ruleType= ruleType EOF )
+            // InternalImportUriTestLanguage.g:163:2: iv_ruleType= ruleType EOF
             {
              newCompositeNode(grammarAccess.getTypeRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -373,11 +380,11 @@ public class InternalImportUriTestLanguageParser extends AbstractInternalAntlrPa
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -386,7 +393,7 @@ public class InternalImportUriTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleType"
-    // InternalImportUriTestLanguage.g:176:1: ruleType returns [EObject current=null] : (otherlv_0= 'type' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) ) ;
+    // InternalImportUriTestLanguage.g:169:1: ruleType returns [EObject current=null] : (otherlv_0= 'type' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) ) ;
     public final EObject ruleType() throws RecognitionException {
         EObject current = null;
 
@@ -395,39 +402,40 @@ public class InternalImportUriTestLanguageParser extends AbstractInternalAntlrPa
         Token otherlv_2=null;
         Token otherlv_3=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalImportUriTestLanguage.g:179:28: ( (otherlv_0= 'type' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) ) )
-            // InternalImportUriTestLanguage.g:180:1: (otherlv_0= 'type' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) )
+            // InternalImportUriTestLanguage.g:175:2: ( (otherlv_0= 'type' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) ) )
+            // InternalImportUriTestLanguage.g:176:2: (otherlv_0= 'type' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) )
             {
-            // InternalImportUriTestLanguage.g:180:1: (otherlv_0= 'type' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) )
-            // InternalImportUriTestLanguage.g:180:3: otherlv_0= 'type' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) )
+            // InternalImportUriTestLanguage.g:176:2: (otherlv_0= 'type' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) )
+            // InternalImportUriTestLanguage.g:177:3: otherlv_0= 'type' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) )
             {
             otherlv_0=(Token)match(input,12,FollowSets000.FOLLOW_6); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getTypeAccess().getTypeKeyword_0());
-                
-            // InternalImportUriTestLanguage.g:184:1: ( (lv_name_1_0= RULE_ID ) )
-            // InternalImportUriTestLanguage.g:185:1: (lv_name_1_0= RULE_ID )
+            			newLeafNode(otherlv_0, grammarAccess.getTypeAccess().getTypeKeyword_0());
+            		
+            // InternalImportUriTestLanguage.g:181:3: ( (lv_name_1_0= RULE_ID ) )
+            // InternalImportUriTestLanguage.g:182:4: (lv_name_1_0= RULE_ID )
             {
-            // InternalImportUriTestLanguage.g:185:1: (lv_name_1_0= RULE_ID )
-            // InternalImportUriTestLanguage.g:186:3: lv_name_1_0= RULE_ID
+            // InternalImportUriTestLanguage.g:182:4: (lv_name_1_0= RULE_ID )
+            // InternalImportUriTestLanguage.g:183:5: lv_name_1_0= RULE_ID
             {
             lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_7); 
 
-            			newLeafNode(lv_name_1_0, grammarAccess.getTypeAccess().getNameIDTerminalRuleCall_1_0()); 
-            		
+            					newLeafNode(lv_name_1_0, grammarAccess.getTypeAccess().getNameIDTerminalRuleCall_1_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getTypeRule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"name",
-                    		lv_name_1_0, 
-                    		"org.eclipse.xtext.common.Terminals.ID");
-            	    
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getTypeRule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"name",
+            						lv_name_1_0,
+            						"org.eclipse.xtext.common.Terminals.ID");
+            				
 
             }
 
@@ -436,23 +444,23 @@ public class InternalImportUriTestLanguageParser extends AbstractInternalAntlrPa
 
             otherlv_2=(Token)match(input,13,FollowSets000.FOLLOW_6); 
 
-                	newLeafNode(otherlv_2, grammarAccess.getTypeAccess().getExtendsKeyword_2());
-                
-            // InternalImportUriTestLanguage.g:206:1: ( (otherlv_3= RULE_ID ) )
-            // InternalImportUriTestLanguage.g:207:1: (otherlv_3= RULE_ID )
+            			newLeafNode(otherlv_2, grammarAccess.getTypeAccess().getExtendsKeyword_2());
+            		
+            // InternalImportUriTestLanguage.g:203:3: ( (otherlv_3= RULE_ID ) )
+            // InternalImportUriTestLanguage.g:204:4: (otherlv_3= RULE_ID )
             {
-            // InternalImportUriTestLanguage.g:207:1: (otherlv_3= RULE_ID )
-            // InternalImportUriTestLanguage.g:208:3: otherlv_3= RULE_ID
+            // InternalImportUriTestLanguage.g:204:4: (otherlv_3= RULE_ID )
+            // InternalImportUriTestLanguage.g:205:5: otherlv_3= RULE_ID
             {
 
-            			if (current==null) {
-            	            current = createModelElement(grammarAccess.getTypeRule());
-            	        }
-                    
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getTypeRule());
+            					}
+            				
             otherlv_3=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
-            		newLeafNode(otherlv_3, grammarAccess.getTypeAccess().getExtendsTypeCrossReference_3_0()); 
-            	
+            					newLeafNode(otherlv_3, grammarAccess.getTypeAccess().getExtendsTypeCrossReference_3_0());
+            				
 
             }
 
@@ -465,13 +473,15 @@ public class InternalImportUriTestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;

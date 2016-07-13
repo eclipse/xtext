@@ -3,20 +3,23 @@
  */
 package org.eclipse.xtext.testlanguages.services;
 
-import com.google.inject.Singleton;
 import com.google.inject.Inject;
-
+import com.google.inject.Singleton;
 import java.util.List;
-
-import org.eclipse.xtext.*;
-import org.eclipse.xtext.service.GrammarProvider;
-import org.eclipse.xtext.service.AbstractElementFinder.*;
-
+import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.Group;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
+import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder;
+import org.eclipse.xtext.service.GrammarProvider;
 
 @Singleton
 public class ActionTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
-	
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.ActionTestLanguage.Model");
@@ -30,26 +33,25 @@ public class ActionTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 		//Model:
 		//	Child ({Parent.left=current} right=Child)?;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//Child ({Parent.left=current} right=Child)?
 		public Group getGroup() { return cGroup; }
-
+		
 		//Child
 		public RuleCall getChildParserRuleCall_0() { return cChildParserRuleCall_0; }
-
+		
 		//({Parent.left=current} right=Child)?
 		public Group getGroup_1() { return cGroup_1; }
-
+		
 		//{Parent.left=current}
 		public Action getParentLeftAction_1_0() { return cParentLeftAction_1_0; }
-
+		
 		//right=Child
 		public Assignment getRightAssignment_1_1() { return cRightAssignment_1_1; }
-
+		
 		//Child
 		public RuleCall getRightChildParserRuleCall_1_1_0() { return cRightChildParserRuleCall_1_1_0; }
 	}
-
 	public class ChildElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.ActionTestLanguage.Child");
 		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
@@ -58,10 +60,10 @@ public class ActionTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 		//Child:
 		//	name=ID;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//name=ID
 		public Assignment getNameAssignment() { return cNameAssignment; }
-
+		
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_0() { return cNameIDTerminalRuleCall_0; }
 	}
@@ -71,12 +73,12 @@ public class ActionTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 	private final ChildElements pChild;
 	
 	private final Grammar grammar;
-
+	
 	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public ActionTestLanguageGrammarAccess(GrammarProvider grammarProvider,
-		TerminalsGrammarAccess gaTerminals) {
+			TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
 		this.pModel = new ModelElements();
@@ -104,7 +106,7 @@ public class ActionTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 		return grammar;
 	}
 	
-
+	
 	public TerminalsGrammarAccess getTerminalsGrammarAccess() {
 		return gaTerminals;
 	}
@@ -119,7 +121,7 @@ public class ActionTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 	public ParserRule getModelRule() {
 		return getModelAccess().getRule();
 	}
-
+	
 	//Child:
 	//	name=ID;
 	public ChildElements getChildAccess() {
@@ -129,47 +131,47 @@ public class ActionTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 	public ParserRule getChildRule() {
 		return getChildAccess().getRule();
 	}
-
+	
 	//terminal ID:
 	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
-	} 
-
+	}
+	
 	//terminal INT returns ecore::EInt:
 	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
-	} 
-
+	}
+	
 	//terminal STRING:
 	//	'"' ('\\' . | !('\\' | '"'))* '"' |
 	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
-	} 
-
+	}
+	
 	//terminal ML_COMMENT:
 	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal SL_COMMENT:
 	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal WS:
 	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
-	} 
-
+	}
+	
 	//terminal ANY_OTHER:
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
-	} 
+	}
 }

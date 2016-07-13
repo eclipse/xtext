@@ -81,10 +81,10 @@ public class InternalIgnoreCaseImportsTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalIgnoreCaseImportsTestLanguage.g:240:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // InternalIgnoreCaseImportsTestLanguage.g:240:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalIgnoreCaseImportsTestLanguage.g:232:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // InternalIgnoreCaseImportsTestLanguage.g:232:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // InternalIgnoreCaseImportsTestLanguage.g:240:11: ( '^' )?
+            // InternalIgnoreCaseImportsTestLanguage.g:232:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -93,7 +93,7 @@ public class InternalIgnoreCaseImportsTestLanguageLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // InternalIgnoreCaseImportsTestLanguage.g:240:11: '^'
+                    // InternalIgnoreCaseImportsTestLanguage.g:232:11: '^'
                     {
                     match('^'); 
 
@@ -111,7 +111,7 @@ public class InternalIgnoreCaseImportsTestLanguageLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // InternalIgnoreCaseImportsTestLanguage.g:240:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalIgnoreCaseImportsTestLanguage.g:232:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -160,10 +160,10 @@ public class InternalIgnoreCaseImportsTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalIgnoreCaseImportsTestLanguage.g:242:10: ( ( '0' .. '9' )+ )
-            // InternalIgnoreCaseImportsTestLanguage.g:242:12: ( '0' .. '9' )+
+            // InternalIgnoreCaseImportsTestLanguage.g:234:10: ( ( '0' .. '9' )+ )
+            // InternalIgnoreCaseImportsTestLanguage.g:234:12: ( '0' .. '9' )+
             {
-            // InternalIgnoreCaseImportsTestLanguage.g:242:12: ( '0' .. '9' )+
+            // InternalIgnoreCaseImportsTestLanguage.g:234:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -177,7 +177,7 @@ public class InternalIgnoreCaseImportsTestLanguageLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // InternalIgnoreCaseImportsTestLanguage.g:242:13: '0' .. '9'
+            	    // InternalIgnoreCaseImportsTestLanguage.g:234:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -209,10 +209,10 @@ public class InternalIgnoreCaseImportsTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalIgnoreCaseImportsTestLanguage.g:244:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // InternalIgnoreCaseImportsTestLanguage.g:244:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalIgnoreCaseImportsTestLanguage.g:236:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // InternalIgnoreCaseImportsTestLanguage.g:236:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // InternalIgnoreCaseImportsTestLanguage.g:244:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalIgnoreCaseImportsTestLanguage.g:236:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -230,10 +230,10 @@ public class InternalIgnoreCaseImportsTestLanguageLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // InternalIgnoreCaseImportsTestLanguage.g:244:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // InternalIgnoreCaseImportsTestLanguage.g:236:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // InternalIgnoreCaseImportsTestLanguage.g:244:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // InternalIgnoreCaseImportsTestLanguage.g:236:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -249,7 +249,7 @@ public class InternalIgnoreCaseImportsTestLanguageLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // InternalIgnoreCaseImportsTestLanguage.g:244:21: '\\\\' .
+                    	    // InternalIgnoreCaseImportsTestLanguage.g:236:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -257,7 +257,7 @@ public class InternalIgnoreCaseImportsTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalIgnoreCaseImportsTestLanguage.g:244:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // InternalIgnoreCaseImportsTestLanguage.g:236:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -282,10 +282,10 @@ public class InternalIgnoreCaseImportsTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalIgnoreCaseImportsTestLanguage.g:244:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // InternalIgnoreCaseImportsTestLanguage.g:236:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // InternalIgnoreCaseImportsTestLanguage.g:244:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // InternalIgnoreCaseImportsTestLanguage.g:236:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -301,7 +301,7 @@ public class InternalIgnoreCaseImportsTestLanguageLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // InternalIgnoreCaseImportsTestLanguage.g:244:54: '\\\\' .
+                    	    // InternalIgnoreCaseImportsTestLanguage.g:236:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -309,7 +309,7 @@ public class InternalIgnoreCaseImportsTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalIgnoreCaseImportsTestLanguage.g:244:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // InternalIgnoreCaseImportsTestLanguage.g:236:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -352,12 +352,12 @@ public class InternalIgnoreCaseImportsTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalIgnoreCaseImportsTestLanguage.g:246:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // InternalIgnoreCaseImportsTestLanguage.g:246:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // InternalIgnoreCaseImportsTestLanguage.g:238:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // InternalIgnoreCaseImportsTestLanguage.g:238:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // InternalIgnoreCaseImportsTestLanguage.g:246:24: ( options {greedy=false; } : . )*
+            // InternalIgnoreCaseImportsTestLanguage.g:238:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -382,7 +382,7 @@ public class InternalIgnoreCaseImportsTestLanguageLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // InternalIgnoreCaseImportsTestLanguage.g:246:52: .
+            	    // InternalIgnoreCaseImportsTestLanguage.g:238:52: .
             	    {
             	    matchAny(); 
 
@@ -412,12 +412,12 @@ public class InternalIgnoreCaseImportsTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalIgnoreCaseImportsTestLanguage.g:248:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // InternalIgnoreCaseImportsTestLanguage.g:248:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // InternalIgnoreCaseImportsTestLanguage.g:240:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // InternalIgnoreCaseImportsTestLanguage.g:240:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // InternalIgnoreCaseImportsTestLanguage.g:248:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalIgnoreCaseImportsTestLanguage.g:240:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -430,7 +430,7 @@ public class InternalIgnoreCaseImportsTestLanguageLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // InternalIgnoreCaseImportsTestLanguage.g:248:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalIgnoreCaseImportsTestLanguage.g:240:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -450,7 +450,7 @@ public class InternalIgnoreCaseImportsTestLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // InternalIgnoreCaseImportsTestLanguage.g:248:40: ( ( '\\r' )? '\\n' )?
+            // InternalIgnoreCaseImportsTestLanguage.g:240:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -459,9 +459,9 @@ public class InternalIgnoreCaseImportsTestLanguageLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // InternalIgnoreCaseImportsTestLanguage.g:248:41: ( '\\r' )? '\\n'
+                    // InternalIgnoreCaseImportsTestLanguage.g:240:41: ( '\\r' )? '\\n'
                     {
-                    // InternalIgnoreCaseImportsTestLanguage.g:248:41: ( '\\r' )?
+                    // InternalIgnoreCaseImportsTestLanguage.g:240:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -470,7 +470,7 @@ public class InternalIgnoreCaseImportsTestLanguageLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // InternalIgnoreCaseImportsTestLanguage.g:248:41: '\\r'
+                            // InternalIgnoreCaseImportsTestLanguage.g:240:41: '\\r'
                             {
                             match('\r'); 
 
@@ -502,10 +502,10 @@ public class InternalIgnoreCaseImportsTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalIgnoreCaseImportsTestLanguage.g:250:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // InternalIgnoreCaseImportsTestLanguage.g:250:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalIgnoreCaseImportsTestLanguage.g:242:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalIgnoreCaseImportsTestLanguage.g:242:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // InternalIgnoreCaseImportsTestLanguage.g:250:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalIgnoreCaseImportsTestLanguage.g:242:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -559,8 +559,8 @@ public class InternalIgnoreCaseImportsTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalIgnoreCaseImportsTestLanguage.g:252:16: ( . )
-            // InternalIgnoreCaseImportsTestLanguage.g:252:18: .
+            // InternalIgnoreCaseImportsTestLanguage.g:244:16: ( . )
+            // InternalIgnoreCaseImportsTestLanguage.g:244:18: .
             {
             matchAny(); 
 

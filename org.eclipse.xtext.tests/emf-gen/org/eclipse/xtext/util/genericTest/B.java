@@ -14,11 +14,11 @@ package org.eclipse.xtext.util.genericTest;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.util.genericTest.B#getOtherReference <em>Other Reference</em>}</li>
  *   <li>{@link org.eclipse.xtext.util.genericTest.B#getOtherReference1 <em>Other Reference1</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.util.genericTest.GenericTestPackage#getB()
  * @model

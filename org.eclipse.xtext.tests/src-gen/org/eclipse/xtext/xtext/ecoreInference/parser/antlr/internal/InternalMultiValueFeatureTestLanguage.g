@@ -5,7 +5,6 @@ grammar InternalMultiValueFeatureTestLanguage;
 
 options {
 	superClass=AbstractInternalAntlrParser;
-	
 }
 
 @lexer::header {
@@ -17,7 +16,7 @@ import org.eclipse.xtext.parser.antlr.Lexer;
 }
 
 @parser::header {
-package org.eclipse.xtext.xtext.ecoreInference.parser.antlr.internal; 
+package org.eclipse.xtext.xtext.ecoreInference.parser.antlr.internal;
 
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
@@ -35,72 +34,66 @@ import org.eclipse.xtext.xtext.ecoreInference.services.MultiValueFeatureTestLang
 @parser::members {
 
  	private MultiValueFeatureTestLanguageGrammarAccess grammarAccess;
- 	
+
     public InternalMultiValueFeatureTestLanguageParser(TokenStream input, MultiValueFeatureTestLanguageGrammarAccess grammarAccess) {
         this(input);
         this.grammarAccess = grammarAccess;
         registerRules(grammarAccess.getGrammar());
     }
-    
+
     @Override
     protected String getFirstRuleName() {
-    	return "Start";	
+    	return "Start";
    	}
-   	
+
    	@Override
    	protected MultiValueFeatureTestLanguageGrammarAccess getGrammarAccess() {
    		return grammarAccess;
    	}
+
 }
 
-@rulecatch { 
-    catch (RecognitionException re) { 
-        recover(input,re); 
+@rulecatch {
+    catch (RecognitionException re) {
+        recover(input,re);
         appendSkippedTokens();
-    } 
+    }
 }
-
-
-
 
 // Entry rule entryRuleStart
-entryRuleStart returns [EObject current=null] 
-	:
+entryRuleStart returns [EObject current=null]:
 	{ newCompositeNode(grammarAccess.getStartRule()); }
-	 iv_ruleStart=ruleStart 
-	 { $current=$iv_ruleStart.current; } 
-	 EOF 
-;
+	iv_ruleStart=ruleStart
+	{ $current=$iv_ruleStart.current; }
+	EOF;
 
 // Rule Start
-ruleStart returns [EObject current=null] 
-    @init { enterRule(); 
-    }
-    @after { leaveRule(); }:
-(
-(
-		lv_featureA_0_0=RULE_ID
-		{
-			newLeafNode(lv_featureA_0_0, grammarAccess.getStartAccess().getFeatureAIDTerminalRuleCall_0()); 
-		}
-		{
-	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getStartRule());
-	        }
-       		addWithLastConsumed(
-       			$current, 
-       			"featureA",
-        		lv_featureA_0_0, 
-        		"org.eclipse.xtext.common.Terminals.ID");
-	    }
-
-)
-)+
+ruleStart returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			lv_featureA_0_0=RULE_ID
+			{
+				newLeafNode(lv_featureA_0_0, grammarAccess.getStartAccess().getFeatureAIDTerminalRuleCall_0());
+			}
+			{
+				if ($current==null) {
+					$current = createModelElement(grammarAccess.getStartRule());
+				}
+				addWithLastConsumed(
+					$current,
+					"featureA",
+					lv_featureA_0_0,
+					"org.eclipse.xtext.common.Terminals.ID");
+			}
+		)
+	)+
 ;
-
-
-
-
 
 RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
@@ -115,5 +108,3 @@ RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
 RULE_WS : (' '|'\t'|'\r'|'\n')+;
 
 RULE_ANY_OTHER : .;
-
-

@@ -3,20 +3,24 @@
  */
 package org.eclipse.xtext.parsetree.reconstr.services;
 
-import com.google.inject.Singleton;
 import com.google.inject.Inject;
-
+import com.google.inject.Singleton;
 import java.util.List;
-
-import org.eclipse.xtext.*;
-import org.eclipse.xtext.service.GrammarProvider;
-import org.eclipse.xtext.service.AbstractElementFinder.*;
-
+import org.eclipse.xtext.Alternatives;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.Group;
+import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
+import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder;
+import org.eclipse.xtext.service.GrammarProvider;
 
 @Singleton
 public class SerializationBug269362TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
-	
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.SerializationBug269362TestLanguage.Model");
@@ -37,43 +41,43 @@ public class SerializationBug269362TestLanguageGrammarAccess extends AbstractGra
 		//Model:
 		//	'foo' foo=ID ('bar' bar=ID)? | 'bar' bar=ID;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'foo' foo=ID ('bar' bar=ID)? | 'bar' bar=ID
 		public Alternatives getAlternatives() { return cAlternatives; }
-
+		
 		//'foo' foo=ID ('bar' bar=ID)?
 		public Group getGroup_0() { return cGroup_0; }
-
+		
 		//'foo'
 		public Keyword getFooKeyword_0_0() { return cFooKeyword_0_0; }
-
+		
 		//foo=ID
 		public Assignment getFooAssignment_0_1() { return cFooAssignment_0_1; }
-
+		
 		//ID
 		public RuleCall getFooIDTerminalRuleCall_0_1_0() { return cFooIDTerminalRuleCall_0_1_0; }
-
+		
 		//('bar' bar=ID)?
 		public Group getGroup_0_2() { return cGroup_0_2; }
-
+		
 		//'bar'
 		public Keyword getBarKeyword_0_2_0() { return cBarKeyword_0_2_0; }
-
+		
 		//bar=ID
 		public Assignment getBarAssignment_0_2_1() { return cBarAssignment_0_2_1; }
-
+		
 		//ID
 		public RuleCall getBarIDTerminalRuleCall_0_2_1_0() { return cBarIDTerminalRuleCall_0_2_1_0; }
-
+		
 		//'bar' bar=ID
 		public Group getGroup_1() { return cGroup_1; }
-
+		
 		//'bar'
 		public Keyword getBarKeyword_1_0() { return cBarKeyword_1_0; }
-
+		
 		//bar=ID
 		public Assignment getBarAssignment_1_1() { return cBarAssignment_1_1; }
-
+		
 		//ID
 		public RuleCall getBarIDTerminalRuleCall_1_1_0() { return cBarIDTerminalRuleCall_1_1_0; }
 	}
@@ -82,12 +86,12 @@ public class SerializationBug269362TestLanguageGrammarAccess extends AbstractGra
 	private final ModelElements pModel;
 	
 	private final Grammar grammar;
-
+	
 	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public SerializationBug269362TestLanguageGrammarAccess(GrammarProvider grammarProvider,
-		TerminalsGrammarAccess gaTerminals) {
+			TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
 		this.pModel = new ModelElements();
@@ -114,7 +118,7 @@ public class SerializationBug269362TestLanguageGrammarAccess extends AbstractGra
 		return grammar;
 	}
 	
-
+	
 	public TerminalsGrammarAccess getTerminalsGrammarAccess() {
 		return gaTerminals;
 	}
@@ -129,47 +133,47 @@ public class SerializationBug269362TestLanguageGrammarAccess extends AbstractGra
 	public ParserRule getModelRule() {
 		return getModelAccess().getRule();
 	}
-
+	
 	//terminal ID:
 	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
-	} 
-
+	}
+	
 	//terminal INT returns ecore::EInt:
 	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
-	} 
-
+	}
+	
 	//terminal STRING:
 	//	'"' ('\\' . | !('\\' | '"'))* '"' |
 	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
-	} 
-
+	}
+	
 	//terminal ML_COMMENT:
 	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal SL_COMMENT:
 	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal WS:
 	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
-	} 
-
+	}
+	
 	//terminal ANY_OTHER:
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
-	} 
+	}
 }

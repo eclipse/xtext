@@ -31,7 +31,7 @@ public class EcorePerPlatformPluginFactoryImpl extends EFactoryImpl implements E
 	 */
 	public static EcorePerPlatformPluginFactory init() {
 		try {
-			EcorePerPlatformPluginFactory theEcorePerPlatformPluginFactory = (EcorePerPlatformPluginFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2011/tmf/xtext/ecorePerPlatformPlugin"); 
+			EcorePerPlatformPluginFactory theEcorePerPlatformPluginFactory = (EcorePerPlatformPluginFactory)EPackage.Registry.INSTANCE.getEFactory(EcorePerPlatformPluginPackage.eNS_URI);
 			if (theEcorePerPlatformPluginFactory != null) {
 				return theEcorePerPlatformPluginFactory;
 			}

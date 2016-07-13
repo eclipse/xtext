@@ -3,18 +3,45 @@
  */
 package org.eclipse.xtext.linking;
 
-import java.util.Properties;
-
-import org.eclipse.xtext.Constants;
-
 import com.google.inject.Binder;
+import com.google.inject.Provider;
 import com.google.inject.name.Names;
+import java.util.Properties;
+import org.eclipse.xtext.Constants;
+import org.eclipse.xtext.IGrammarAccess;
+import org.eclipse.xtext.linking.parser.antlr.AbstractIgnoreCaseLinkingTestLanguageAntlrTokenFileProvider;
+import org.eclipse.xtext.linking.parser.antlr.AbstractIgnoreCaseLinkingTestLanguageParser;
+import org.eclipse.xtext.linking.parser.antlr.internal.InternalAbstractIgnoreCaseLinkingTestLanguageLexer;
+import org.eclipse.xtext.linking.scoping.AbstractIgnoreCaseLinkingTestLanguageScopeProvider;
+import org.eclipse.xtext.linking.serializer.AbstractIgnoreCaseLinkingTestLanguageSemanticSequencer;
+import org.eclipse.xtext.linking.serializer.AbstractIgnoreCaseLinkingTestLanguageSyntacticSequencer;
+import org.eclipse.xtext.linking.services.AbstractIgnoreCaseLinkingTestLanguageGrammarAccess;
+import org.eclipse.xtext.parser.IParser;
+import org.eclipse.xtext.parser.ITokenToStringConverter;
+import org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider;
+import org.eclipse.xtext.parser.antlr.AntlrTokenToStringConverter;
+import org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider;
+import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
+import org.eclipse.xtext.parser.antlr.Lexer;
+import org.eclipse.xtext.parser.antlr.LexerBindings;
+import org.eclipse.xtext.parser.antlr.LexerProvider;
+import org.eclipse.xtext.scoping.IGlobalScopeProvider;
+import org.eclipse.xtext.scoping.IScopeProvider;
+import org.eclipse.xtext.scoping.IgnoreCaseLinking;
+import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
+import org.eclipse.xtext.scoping.impl.DefaultGlobalScopeProvider;
+import org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider;
+import org.eclipse.xtext.serializer.ISerializer;
+import org.eclipse.xtext.serializer.impl.Serializer;
+import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
+import org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer;
+import org.eclipse.xtext.service.DefaultRuntimeModule;
 
 /**
- * Manual modifications go to {org.eclipse.xtext.linking.AbstractIgnoreCaseLinkingTestLanguageRuntimeModule}
+ * Manual modifications go to {@link AbstractIgnoreCaseLinkingTestLanguageRuntimeModule}.
  */
 @SuppressWarnings("all")
-public abstract class AbstractAbstractIgnoreCaseLinkingTestLanguageRuntimeModule extends org.eclipse.xtext.service.DefaultRuntimeModule {
+public abstract class AbstractAbstractIgnoreCaseLinkingTestLanguageRuntimeModule extends DefaultRuntimeModule {
 
 	protected Properties properties = null;
 
@@ -33,64 +60,86 @@ public abstract class AbstractAbstractIgnoreCaseLinkingTestLanguageRuntimeModule
 			binder.bind(String.class).annotatedWith(Names.named(Constants.FILE_EXTENSIONS)).toInstance("abstractignorecaselinkingtestlanguage");
 	}
 	
-	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
-	public Class<? extends org.eclipse.xtext.parser.IParser> bindIParser() {
-		return org.eclipse.xtext.linking.parser.antlr.AbstractIgnoreCaseLinkingTestLanguageParser.class;
+	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
+	public Class<? extends IParser> bindIParser() {
+		return AbstractIgnoreCaseLinkingTestLanguageParser.class;
 	}
-
-	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
-	public Class<? extends org.eclipse.xtext.parser.ITokenToStringConverter> bindITokenToStringConverter() {
-		return org.eclipse.xtext.parser.antlr.AntlrTokenToStringConverter.class;
+	
+	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
+	public Class<? extends ITokenToStringConverter> bindITokenToStringConverter() {
+		return AntlrTokenToStringConverter.class;
 	}
-
-	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
-	public Class<? extends org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider> bindIAntlrTokenFileProvider() {
-		return org.eclipse.xtext.linking.parser.antlr.AbstractIgnoreCaseLinkingTestLanguageAntlrTokenFileProvider.class;
+	
+	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
+	public Class<? extends IAntlrTokenFileProvider> bindIAntlrTokenFileProvider() {
+		return AbstractIgnoreCaseLinkingTestLanguageAntlrTokenFileProvider.class;
 	}
-
-	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
-	public Class<? extends org.eclipse.xtext.parser.antlr.Lexer> bindLexer() {
-		return org.eclipse.xtext.linking.parser.antlr.internal.InternalAbstractIgnoreCaseLinkingTestLanguageLexer.class;
+	
+	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
+	public Class<? extends Lexer> bindLexer() {
+		return InternalAbstractIgnoreCaseLinkingTestLanguageLexer.class;
 	}
-
-	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
-	public com.google.inject.Provider<org.eclipse.xtext.linking.parser.antlr.internal.InternalAbstractIgnoreCaseLinkingTestLanguageLexer> provideInternalAbstractIgnoreCaseLinkingTestLanguageLexer() {
-		return org.eclipse.xtext.parser.antlr.LexerProvider.create(org.eclipse.xtext.linking.parser.antlr.internal.InternalAbstractIgnoreCaseLinkingTestLanguageLexer.class);
+	
+	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
+	public Class<? extends ITokenDefProvider> bindITokenDefProvider() {
+		return AntlrTokenDefProvider.class;
 	}
-
-	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
-	public void configureRuntimeLexer(com.google.inject.Binder binder) {
-		binder.bind(org.eclipse.xtext.parser.antlr.Lexer.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.parser.antlr.LexerBindings.RUNTIME)).to(org.eclipse.xtext.linking.parser.antlr.internal.InternalAbstractIgnoreCaseLinkingTestLanguageLexer.class);
+	
+	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
+	public Provider<InternalAbstractIgnoreCaseLinkingTestLanguageLexer> provideInternalAbstractIgnoreCaseLinkingTestLanguageLexer() {
+		return LexerProvider.create(InternalAbstractIgnoreCaseLinkingTestLanguageLexer.class);
 	}
-
-	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
-	public Class<? extends org.eclipse.xtext.parser.antlr.ITokenDefProvider> bindITokenDefProvider() {
-		return org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider.class;
+	
+	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
+	public void configureRuntimeLexer(Binder binder) {
+		binder.bind(Lexer.class)
+			.annotatedWith(Names.named(LexerBindings.RUNTIME))
+			.to(InternalAbstractIgnoreCaseLinkingTestLanguageLexer.class);
 	}
-
-	// contributed by org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment
-	public java.lang.ClassLoader bindClassLoaderToInstance() {
+	
+	// contributed by org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessFragment2
+	public ClassLoader bindClassLoaderToInstance() {
 		return getClass().getClassLoader();
 	}
-
-	// contributed by org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment
-	public Class<? extends org.eclipse.xtext.IGrammarAccess> bindIGrammarAccess() {
-		return org.eclipse.xtext.linking.services.AbstractIgnoreCaseLinkingTestLanguageGrammarAccess.class;
+	
+	// contributed by org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessFragment2
+	public Class<? extends IGrammarAccess> bindIGrammarAccess() {
+		return AbstractIgnoreCaseLinkingTestLanguageGrammarAccess.class;
 	}
-
-	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
-	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
-		return org.eclipse.xtext.linking.serializer.AbstractIgnoreCaseLinkingTestLanguageSemanticSequencer.class;
+	
+	// contributed by org.eclipse.xtext.xtext.generator.serializer.SerializerFragment2
+	public Class<? extends ISemanticSequencer> bindISemanticSequencer() {
+		return AbstractIgnoreCaseLinkingTestLanguageSemanticSequencer.class;
 	}
-
-	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
-	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer> bindISyntacticSequencer() {
-		return org.eclipse.xtext.linking.serializer.AbstractIgnoreCaseLinkingTestLanguageSyntacticSequencer.class;
+	
+	// contributed by org.eclipse.xtext.xtext.generator.serializer.SerializerFragment2
+	public Class<? extends ISyntacticSequencer> bindISyntacticSequencer() {
+		return AbstractIgnoreCaseLinkingTestLanguageSyntacticSequencer.class;
 	}
-
-	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
-	public Class<? extends org.eclipse.xtext.serializer.ISerializer> bindISerializer() {
-		return org.eclipse.xtext.serializer.impl.Serializer.class;
+	
+	// contributed by org.eclipse.xtext.xtext.generator.serializer.SerializerFragment2
+	public Class<? extends ISerializer> bindISerializer() {
+		return Serializer.class;
 	}
-
+	
+	// contributed by org.eclipse.xtext.xtext.generator.scoping.ImportNamespacesScopingFragment2
+	public Class<? extends IScopeProvider> bindIScopeProvider() {
+		return AbstractIgnoreCaseLinkingTestLanguageScopeProvider.class;
+	}
+	
+	// contributed by org.eclipse.xtext.xtext.generator.scoping.ImportNamespacesScopingFragment2
+	public void configureIScopeProviderDelegate(Binder binder) {
+		binder.bind(IScopeProvider.class).annotatedWith(Names.named(AbstractDeclarativeScopeProvider.NAMED_DELEGATE)).to(ImportedNamespaceAwareLocalScopeProvider.class);
+	}
+	
+	// contributed by org.eclipse.xtext.xtext.generator.scoping.ImportNamespacesScopingFragment2
+	public Class<? extends IGlobalScopeProvider> bindIGlobalScopeProvider() {
+		return DefaultGlobalScopeProvider.class;
+	}
+	
+	// contributed by org.eclipse.xtext.xtext.generator.scoping.ImportNamespacesScopingFragment2
+	public void configureIgnoreCaseLinking(Binder binder) {
+		binder.bindConstant().annotatedWith(IgnoreCaseLinking.class).to(true);
+	}
+	
 }

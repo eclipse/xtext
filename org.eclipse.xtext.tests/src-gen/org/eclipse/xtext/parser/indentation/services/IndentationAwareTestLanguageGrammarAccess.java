@@ -3,20 +3,23 @@
  */
 package org.eclipse.xtext.parser.indentation.services;
 
-import com.google.inject.Singleton;
 import com.google.inject.Inject;
-
+import com.google.inject.Singleton;
 import java.util.List;
-
-import org.eclipse.xtext.*;
-import org.eclipse.xtext.service.GrammarProvider;
-import org.eclipse.xtext.service.AbstractElementFinder.*;
-
+import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.Group;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
+import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder;
+import org.eclipse.xtext.service.GrammarProvider;
 
 @Singleton
 public class IndentationAwareTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
-	
 	
 	public class TreeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.indentation.IndentationAwareTestLanguage.Tree");
@@ -28,20 +31,19 @@ public class IndentationAwareTestLanguageGrammarAccess extends AbstractGrammarEl
 		//Tree:
 		//	{Tree} nodes+=TreeNode*;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//{Tree} nodes+=TreeNode*
 		public Group getGroup() { return cGroup; }
-
+		
 		//{Tree}
 		public Action getTreeAction_0() { return cTreeAction_0; }
-
+		
 		//nodes+=TreeNode*
 		public Assignment getNodesAssignment_1() { return cNodesAssignment_1; }
-
+		
 		//TreeNode
 		public RuleCall getNodesTreeNodeParserRuleCall_1_0() { return cNodesTreeNodeParserRuleCall_1_0; }
 	}
-
 	public class TreeNodeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.indentation.IndentationAwareTestLanguage.TreeNode");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -58,28 +60,28 @@ public class IndentationAwareTestLanguageGrammarAccess extends AbstractGrammarEl
 		//	children+=TreeNode*
 		//	DEDENT)?;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//name=ID (INDENT children+=TreeNode* DEDENT)?
 		public Group getGroup() { return cGroup; }
-
+		
 		//name=ID
 		public Assignment getNameAssignment_0() { return cNameAssignment_0; }
-
+		
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_0_0() { return cNameIDTerminalRuleCall_0_0; }
-
+		
 		//(INDENT children+=TreeNode* DEDENT)?
 		public Group getGroup_1() { return cGroup_1; }
-
+		
 		//INDENT
 		public RuleCall getINDENTTerminalRuleCall_1_0() { return cINDENTTerminalRuleCall_1_0; }
-
+		
 		//children+=TreeNode*
 		public Assignment getChildrenAssignment_1_1() { return cChildrenAssignment_1_1; }
-
+		
 		//TreeNode
 		public RuleCall getChildrenTreeNodeParserRuleCall_1_1_0() { return cChildrenTreeNodeParserRuleCall_1_1_0; }
-
+		
 		//DEDENT
 		public RuleCall getDEDENTTerminalRuleCall_1_2() { return cDEDENTTerminalRuleCall_1_2; }
 	}
@@ -92,12 +94,12 @@ public class IndentationAwareTestLanguageGrammarAccess extends AbstractGrammarEl
 	private final TerminalRule tDEDENT;
 	
 	private final Grammar grammar;
-
+	
 	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public IndentationAwareTestLanguageGrammarAccess(GrammarProvider grammarProvider,
-		TerminalsGrammarAccess gaTerminals) {
+			TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
 		this.pTree = new TreeElements();
@@ -128,7 +130,7 @@ public class IndentationAwareTestLanguageGrammarAccess extends AbstractGrammarEl
 		return grammar;
 	}
 	
-
+	
 	public TerminalsGrammarAccess getTerminalsGrammarAccess() {
 		return gaTerminals;
 	}
@@ -143,7 +145,7 @@ public class IndentationAwareTestLanguageGrammarAccess extends AbstractGrammarEl
 	public ParserRule getTreeRule() {
 		return getTreeAccess().getRule();
 	}
-
+	
 	//TreeNode:
 	//	name=ID (INDENT
 	//	children+=TreeNode*
@@ -155,59 +157,59 @@ public class IndentationAwareTestLanguageGrammarAccess extends AbstractGrammarEl
 	public ParserRule getTreeNodeRule() {
 		return getTreeNodeAccess().getRule();
 	}
-
+	
 	//terminal SL_COMMENT:
 	//	'//' !('\n' | '\r')*;
 	public TerminalRule getSL_COMMENTRule() {
 		return tSL_COMMENT;
-	} 
-
+	}
+	
 	//terminal INDENT:
 	//	'synthetic:INDENT';
 	public TerminalRule getINDENTRule() {
 		return tINDENT;
-	} 
-
+	}
+	
 	//terminal DEDENT:
 	//	'synthetic:DEDENT';
 	public TerminalRule getDEDENTRule() {
 		return tDEDENT;
-	} 
-
+	}
+	
 	//terminal ID:
 	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
-	} 
-
+	}
+	
 	//terminal INT returns ecore::EInt:
 	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
-	} 
-
+	}
+	
 	//terminal STRING:
 	//	'"' ('\\' . | !('\\' | '"'))* '"' |
 	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
-	} 
-
+	}
+	
 	//terminal ML_COMMENT:
 	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal WS:
 	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
-	} 
-
+	}
+	
 	//terminal ANY_OTHER:
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
-	} 
+	}
 }

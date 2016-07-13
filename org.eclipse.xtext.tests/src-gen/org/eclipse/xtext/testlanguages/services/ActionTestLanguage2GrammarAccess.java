@@ -3,20 +3,24 @@
  */
 package org.eclipse.xtext.testlanguages.services;
 
-import com.google.inject.Singleton;
 import com.google.inject.Inject;
-
+import com.google.inject.Singleton;
 import java.util.List;
-
-import org.eclipse.xtext.*;
-import org.eclipse.xtext.service.GrammarProvider;
-import org.eclipse.xtext.service.AbstractElementFinder.*;
-
+import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.Group;
+import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
+import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder;
+import org.eclipse.xtext.service.GrammarProvider;
 
 @Singleton
 public class ActionTestLanguage2GrammarAccess extends AbstractGrammarElementFinder {
-	
 	
 	public class ORingElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.ActionTestLanguage2.ORing");
@@ -32,29 +36,28 @@ public class ActionTestLanguage2GrammarAccess extends AbstractGrammarElementFind
 		//ORing:
 		//	Value ({ORing.disjuncts+=current} '|' disjuncts+=Value)*;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//Value ({ORing.disjuncts+=current} '|' disjuncts+=Value)*
 		public Group getGroup() { return cGroup; }
-
+		
 		//Value
 		public RuleCall getValueParserRuleCall_0() { return cValueParserRuleCall_0; }
-
+		
 		//({ORing.disjuncts+=current} '|' disjuncts+=Value)*
 		public Group getGroup_1() { return cGroup_1; }
-
+		
 		//{ORing.disjuncts+=current}
 		public Action getORingDisjunctsAction_1_0() { return cORingDisjunctsAction_1_0; }
-
+		
 		//'|'
 		public Keyword getVerticalLineKeyword_1_1() { return cVerticalLineKeyword_1_1; }
-
+		
 		//disjuncts+=Value
 		public Assignment getDisjunctsAssignment_1_2() { return cDisjunctsAssignment_1_2; }
-
+		
 		//Value
 		public RuleCall getDisjunctsValueParserRuleCall_1_2_0() { return cDisjunctsValueParserRuleCall_1_2_0; }
 	}
-
 	public class ValueElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.ActionTestLanguage2.Value");
 		private final Assignment cValueAssignment = (Assignment)rule.eContents().get(1);
@@ -63,10 +66,10 @@ public class ActionTestLanguage2GrammarAccess extends AbstractGrammarElementFind
 		//Value:
 		//	value='a';
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//value='a'
 		public Assignment getValueAssignment() { return cValueAssignment; }
-
+		
 		//'a'
 		public Keyword getValueAKeyword_0() { return cValueAKeyword_0; }
 	}
@@ -76,12 +79,12 @@ public class ActionTestLanguage2GrammarAccess extends AbstractGrammarElementFind
 	private final ValueElements pValue;
 	
 	private final Grammar grammar;
-
+	
 	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public ActionTestLanguage2GrammarAccess(GrammarProvider grammarProvider,
-		TerminalsGrammarAccess gaTerminals) {
+			TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
 		this.pORing = new ORingElements();
@@ -109,7 +112,7 @@ public class ActionTestLanguage2GrammarAccess extends AbstractGrammarElementFind
 		return grammar;
 	}
 	
-
+	
 	public TerminalsGrammarAccess getTerminalsGrammarAccess() {
 		return gaTerminals;
 	}
@@ -125,7 +128,7 @@ public class ActionTestLanguage2GrammarAccess extends AbstractGrammarElementFind
 	public ParserRule getORingRule() {
 		return getORingAccess().getRule();
 	}
-
+	
 	//Value:
 	//	value='a';
 	public ValueElements getValueAccess() {
@@ -135,47 +138,47 @@ public class ActionTestLanguage2GrammarAccess extends AbstractGrammarElementFind
 	public ParserRule getValueRule() {
 		return getValueAccess().getRule();
 	}
-
+	
 	//terminal ID:
 	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
-	} 
-
+	}
+	
 	//terminal INT returns ecore::EInt:
 	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
-	} 
-
+	}
+	
 	//terminal STRING:
 	//	'"' ('\\' . | !('\\' | '"'))* '"' |
 	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
-	} 
-
+	}
+	
 	//terminal ML_COMMENT:
 	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal SL_COMMENT:
 	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal WS:
 	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
-	} 
-
+	}
+	
 	//terminal ANY_OTHER:
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
-	} 
+	}
 }

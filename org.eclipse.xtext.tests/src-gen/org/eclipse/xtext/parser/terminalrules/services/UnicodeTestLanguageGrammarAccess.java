@@ -3,20 +3,22 @@
  */
 package org.eclipse.xtext.parser.terminalrules.services;
 
-import com.google.inject.Singleton;
 import com.google.inject.Inject;
-
+import com.google.inject.Singleton;
 import java.util.List;
-
-import org.eclipse.xtext.*;
-import org.eclipse.xtext.service.GrammarProvider;
-import org.eclipse.xtext.service.AbstractElementFinder.*;
-
+import org.eclipse.xtext.Alternatives;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
+import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder;
+import org.eclipse.xtext.service.GrammarProvider;
 
 @Singleton
 public class UnicodeTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
-	
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.terminalrules.UnicodeTestLanguage.Model");
@@ -26,14 +28,13 @@ public class UnicodeTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		//Model:
 		//	strings+=AbstractString*;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//strings+=AbstractString*
 		public Assignment getStringsAssignment() { return cStringsAssignment; }
-
+		
 		//AbstractString
 		public RuleCall getStringsAbstractStringParserRuleCall_0() { return cStringsAbstractStringParserRuleCall_0; }
 	}
-
 	public class AbstractStringElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.terminalrules.UnicodeTestLanguage.AbstractString");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -43,17 +44,16 @@ public class UnicodeTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		//AbstractString:
 		//	GString | QuotedString;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//GString | QuotedString
 		public Alternatives getAlternatives() { return cAlternatives; }
-
+		
 		//GString
 		public RuleCall getGStringParserRuleCall_0() { return cGStringParserRuleCall_0; }
-
+		
 		//QuotedString
 		public RuleCall getQuotedStringParserRuleCall_1() { return cQuotedStringParserRuleCall_1; }
 	}
-
 	public class GStringElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.terminalrules.UnicodeTestLanguage.GString");
 		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
@@ -62,14 +62,13 @@ public class UnicodeTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		//GString:
 		//	name=GERMAN_STRING;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//name=GERMAN_STRING
 		public Assignment getNameAssignment() { return cNameAssignment; }
-
+		
 		//GERMAN_STRING
 		public RuleCall getNameGERMAN_STRINGTerminalRuleCall_0() { return cNameGERMAN_STRINGTerminalRuleCall_0; }
 	}
-
 	public class QuotedStringElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.terminalrules.UnicodeTestLanguage.QuotedString");
 		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
@@ -78,10 +77,10 @@ public class UnicodeTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		//QuotedString:
 		//	name=STRING;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//name=STRING
 		public Assignment getNameAssignment() { return cNameAssignment; }
-
+		
 		//STRING
 		public RuleCall getNameSTRINGTerminalRuleCall_0() { return cNameSTRINGTerminalRuleCall_0; }
 	}
@@ -94,12 +93,12 @@ public class UnicodeTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	private final TerminalRule tGERMAN_STRING;
 	
 	private final Grammar grammar;
-
+	
 	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public UnicodeTestLanguageGrammarAccess(GrammarProvider grammarProvider,
-		TerminalsGrammarAccess gaTerminals) {
+			TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
 		this.pModel = new ModelElements();
@@ -130,7 +129,7 @@ public class UnicodeTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		return grammar;
 	}
 	
-
+	
 	public TerminalsGrammarAccess getTerminalsGrammarAccess() {
 		return gaTerminals;
 	}
@@ -145,7 +144,7 @@ public class UnicodeTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	public ParserRule getModelRule() {
 		return getModelAccess().getRule();
 	}
-
+	
 	//AbstractString:
 	//	GString | QuotedString;
 	public AbstractStringElements getAbstractStringAccess() {
@@ -155,7 +154,7 @@ public class UnicodeTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	public ParserRule getAbstractStringRule() {
 		return getAbstractStringAccess().getRule();
 	}
-
+	
 	//GString:
 	//	name=GERMAN_STRING;
 	public GStringElements getGStringAccess() {
@@ -165,7 +164,7 @@ public class UnicodeTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	public ParserRule getGStringRule() {
 		return getGStringAccess().getRule();
 	}
-
+	
 	//QuotedString:
 	//	name=STRING;
 	public QuotedStringElements getQuotedStringAccess() {
@@ -175,54 +174,54 @@ public class UnicodeTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	public ParserRule getQuotedStringRule() {
 		return getQuotedStringAccess().getRule();
 	}
-
+	
 	//terminal GERMAN_STRING:
 	//	'A'..'Z' | 'a'..'z'
 	//	| '\\u00c4' | '\\u00d6' | '\\u00dc' | '\\u00e4' | '\\u00f6' | '\\u00fc' | '\\u1E9E'*;
 	public TerminalRule getGERMAN_STRINGRule() {
 		return tGERMAN_STRING;
-	} 
-
+	}
+	
 	//terminal ID:
 	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
-	} 
-
+	}
+	
 	//terminal INT returns ecore::EInt:
 	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
-	} 
-
+	}
+	
 	//terminal STRING:
 	//	'"' ('\\' . | !('\\' | '"'))* '"' |
 	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
-	} 
-
+	}
+	
 	//terminal ML_COMMENT:
 	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal SL_COMMENT:
 	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal WS:
 	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
-	} 
-
+	}
+	
 	//terminal ANY_OTHER:
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
-	} 
+	}
 }

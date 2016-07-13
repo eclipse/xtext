@@ -3,20 +3,25 @@
  */
 package org.eclipse.xtext.parser.antlr.services;
 
-import com.google.inject.Singleton;
 import com.google.inject.Inject;
-
+import com.google.inject.Singleton;
 import java.util.List;
-
-import org.eclipse.xtext.*;
-import org.eclipse.xtext.service.GrammarProvider;
-import org.eclipse.xtext.service.AbstractElementFinder.*;
-
+import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Alternatives;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.Group;
+import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
+import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder;
+import org.eclipse.xtext.service.GrammarProvider;
 
 @Singleton
 public class Bug296889TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
-	
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.antlr.Bug296889TestLanguage.Model");
@@ -33,35 +38,34 @@ public class Bug296889TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		/// * SuppressWarnings[noInstantiation] * / Model:
 		//	"Model" expressions+=Expression* | "DataType" values+=DataTypeExpression*;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//"Model" expressions+=Expression* | "DataType" values+=DataTypeExpression*
 		public Alternatives getAlternatives() { return cAlternatives; }
-
+		
 		//"Model" expressions+=Expression*
 		public Group getGroup_0() { return cGroup_0; }
-
+		
 		//"Model"
 		public Keyword getModelKeyword_0_0() { return cModelKeyword_0_0; }
-
+		
 		//expressions+=Expression*
 		public Assignment getExpressionsAssignment_0_1() { return cExpressionsAssignment_0_1; }
-
+		
 		//Expression
 		public RuleCall getExpressionsExpressionParserRuleCall_0_1_0() { return cExpressionsExpressionParserRuleCall_0_1_0; }
-
+		
 		//"DataType" values+=DataTypeExpression*
 		public Group getGroup_1() { return cGroup_1; }
-
+		
 		//"DataType"
 		public Keyword getDataTypeKeyword_1_0() { return cDataTypeKeyword_1_0; }
-
+		
 		//values+=DataTypeExpression*
 		public Assignment getValuesAssignment_1_1() { return cValuesAssignment_1_1; }
-
+		
 		//DataTypeExpression
 		public RuleCall getValuesDataTypeExpressionParserRuleCall_1_1_0() { return cValuesDataTypeExpressionParserRuleCall_1_1_0; }
 	}
-
 	public class ExpressionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.antlr.Bug296889TestLanguage.Expression");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -71,17 +75,16 @@ public class Bug296889TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//Expression:
 		//	Postop | Preop;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//Postop | Preop
 		public Alternatives getAlternatives() { return cAlternatives; }
-
+		
 		//Postop
 		public RuleCall getPostopParserRuleCall_0() { return cPostopParserRuleCall_0; }
-
+		
 		//Preop
 		public RuleCall getPreopParserRuleCall_1() { return cPreopParserRuleCall_1; }
 	}
-
 	public class PreopElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.antlr.Bug296889TestLanguage.Preop");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -94,26 +97,25 @@ public class Bug296889TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//Preop Expression:
 		//	{Preop} functionName="--" expr=Variable
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//{Preop} functionName="--" expr=Variable
 		public Group getGroup() { return cGroup; }
-
+		
 		//{Preop}
 		public Action getPreopAction_0() { return cPreopAction_0; }
-
+		
 		//functionName="--"
 		public Assignment getFunctionNameAssignment_1() { return cFunctionNameAssignment_1; }
-
+		
 		//"--"
 		public Keyword getFunctionNameHyphenMinusHyphenMinusKeyword_1_0() { return cFunctionNameHyphenMinusHyphenMinusKeyword_1_0; }
-
+		
 		//expr=Variable
 		public Assignment getExprAssignment_2() { return cExprAssignment_2; }
-
+		
 		//Variable
 		public RuleCall getExprVariableParserRuleCall_2_0() { return cExprVariableParserRuleCall_2_0; }
 	}
-
 	public class PostopElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.antlr.Bug296889TestLanguage.Postop");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -126,26 +128,25 @@ public class Bug296889TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//Postop Expression:
 		//	Variable ({Postop.expr=current} functionName="--")?
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//Variable ({Postop.expr=current} functionName="--")?
 		public Group getGroup() { return cGroup; }
-
+		
 		//Variable
 		public RuleCall getVariableParserRuleCall_0() { return cVariableParserRuleCall_0; }
-
+		
 		//({Postop.expr=current} functionName="--")?
 		public Group getGroup_1() { return cGroup_1; }
-
+		
 		//{Postop.expr=current}
 		public Action getPostopExprAction_1_0() { return cPostopExprAction_1_0; }
-
+		
 		//functionName="--"
 		public Assignment getFunctionNameAssignment_1_1() { return cFunctionNameAssignment_1_1; }
-
+		
 		//"--"
 		public Keyword getFunctionNameHyphenMinusHyphenMinusKeyword_1_1_0() { return cFunctionNameHyphenMinusHyphenMinusKeyword_1_1_0; }
 	}
-
 	public class VariableElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.antlr.Bug296889TestLanguage.Variable");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -156,20 +157,19 @@ public class Bug296889TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//Variable Expression:
 		//	{Variable} name=ID
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//{Variable} name=ID
 		public Group getGroup() { return cGroup; }
-
+		
 		//{Variable}
 		public Action getVariableAction_0() { return cVariableAction_0; }
-
+		
 		//name=ID
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
-
+		
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 	}
-
 	public class DataTypeExpressionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.antlr.Bug296889TestLanguage.DataTypeExpression");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -179,17 +179,16 @@ public class Bug296889TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//DataTypeExpression:
 		//	DataTypePostop | DataTypePreop;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//DataTypePostop | DataTypePreop
 		public Alternatives getAlternatives() { return cAlternatives; }
-
+		
 		//DataTypePostop
 		public RuleCall getDataTypePostopParserRuleCall_0() { return cDataTypePostopParserRuleCall_0; }
-
+		
 		//DataTypePreop
 		public RuleCall getDataTypePreopParserRuleCall_1() { return cDataTypePreopParserRuleCall_1; }
 	}
-
 	public class DataTypePreopElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.antlr.Bug296889TestLanguage.DataTypePreop");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -199,17 +198,16 @@ public class Bug296889TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//DataTypePreop:
 		//	"--" DataTypeVariable;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//"--" DataTypeVariable
 		public Group getGroup() { return cGroup; }
-
+		
 		//"--"
 		public Keyword getHyphenMinusHyphenMinusKeyword_0() { return cHyphenMinusHyphenMinusKeyword_0; }
-
+		
 		//DataTypeVariable
 		public RuleCall getDataTypeVariableParserRuleCall_1() { return cDataTypeVariableParserRuleCall_1; }
 	}
-
 	public class DataTypePostopElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.antlr.Bug296889TestLanguage.DataTypePostop");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -219,17 +217,16 @@ public class Bug296889TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//DataTypePostop:
 		//	DataTypeVariable "--"?;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//DataTypeVariable "--"?
 		public Group getGroup() { return cGroup; }
-
+		
 		//DataTypeVariable
 		public RuleCall getDataTypeVariableParserRuleCall_0() { return cDataTypeVariableParserRuleCall_0; }
-
+		
 		//"--"?
 		public Keyword getHyphenMinusHyphenMinusKeyword_1() { return cHyphenMinusHyphenMinusKeyword_1; }
 	}
-
 	public class DataTypeVariableElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.antlr.Bug296889TestLanguage.DataTypeVariable");
 		private final RuleCall cIDTerminalRuleCall = (RuleCall)rule.eContents().get(1);
@@ -237,7 +234,7 @@ public class Bug296889TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//DataTypeVariable:
 		//	ID;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//ID
 		public RuleCall getIDTerminalRuleCall() { return cIDTerminalRuleCall; }
 	}
@@ -254,12 +251,12 @@ public class Bug296889TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	private final DataTypeVariableElements pDataTypeVariable;
 	
 	private final Grammar grammar;
-
+	
 	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public Bug296889TestLanguageGrammarAccess(GrammarProvider grammarProvider,
-		TerminalsGrammarAccess gaTerminals) {
+			TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
 		this.pModel = new ModelElements();
@@ -294,7 +291,7 @@ public class Bug296889TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return grammar;
 	}
 	
-
+	
 	public TerminalsGrammarAccess getTerminalsGrammarAccess() {
 		return gaTerminals;
 	}
@@ -309,7 +306,7 @@ public class Bug296889TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getModelRule() {
 		return getModelAccess().getRule();
 	}
-
+	
 	//Expression:
 	//	Postop | Preop;
 	public ExpressionElements getExpressionAccess() {
@@ -319,7 +316,7 @@ public class Bug296889TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getExpressionRule() {
 		return getExpressionAccess().getRule();
 	}
-
+	
 	//Preop Expression:
 	//	{Preop} functionName="--" expr=Variable
 	public PreopElements getPreopAccess() {
@@ -329,7 +326,7 @@ public class Bug296889TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getPreopRule() {
 		return getPreopAccess().getRule();
 	}
-
+	
 	//Postop Expression:
 	//	Variable ({Postop.expr=current} functionName="--")?
 	public PostopElements getPostopAccess() {
@@ -339,7 +336,7 @@ public class Bug296889TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getPostopRule() {
 		return getPostopAccess().getRule();
 	}
-
+	
 	//Variable Expression:
 	//	{Variable} name=ID
 	public VariableElements getVariableAccess() {
@@ -349,7 +346,7 @@ public class Bug296889TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getVariableRule() {
 		return getVariableAccess().getRule();
 	}
-
+	
 	//DataTypeExpression:
 	//	DataTypePostop | DataTypePreop;
 	public DataTypeExpressionElements getDataTypeExpressionAccess() {
@@ -359,7 +356,7 @@ public class Bug296889TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getDataTypeExpressionRule() {
 		return getDataTypeExpressionAccess().getRule();
 	}
-
+	
 	//DataTypePreop:
 	//	"--" DataTypeVariable;
 	public DataTypePreopElements getDataTypePreopAccess() {
@@ -369,7 +366,7 @@ public class Bug296889TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getDataTypePreopRule() {
 		return getDataTypePreopAccess().getRule();
 	}
-
+	
 	//DataTypePostop:
 	//	DataTypeVariable "--"?;
 	public DataTypePostopElements getDataTypePostopAccess() {
@@ -379,7 +376,7 @@ public class Bug296889TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getDataTypePostopRule() {
 		return getDataTypePostopAccess().getRule();
 	}
-
+	
 	//DataTypeVariable:
 	//	ID;
 	public DataTypeVariableElements getDataTypeVariableAccess() {
@@ -389,47 +386,47 @@ public class Bug296889TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getDataTypeVariableRule() {
 		return getDataTypeVariableAccess().getRule();
 	}
-
+	
 	//terminal ID:
 	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
-	} 
-
+	}
+	
 	//terminal INT returns ecore::EInt:
 	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
-	} 
-
+	}
+	
 	//terminal STRING:
 	//	'"' ('\\' . | !('\\' | '"'))* '"' |
 	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
-	} 
-
+	}
+	
 	//terminal ML_COMMENT:
 	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal SL_COMMENT:
 	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal WS:
 	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
-	} 
-
+	}
+	
 	//terminal ANY_OTHER:
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
-	} 
+	}
 }

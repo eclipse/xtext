@@ -26,10 +26,10 @@ import org.eclipse.xtext.generator.grammarAccess.ametamodel.asubpackage.impl.ATy
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.generator.grammarAccess.ametamodel.asubpackage.emptyPackage.subsubpackage.impl.AnotherTypeImpl#getRef <em>Ref</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

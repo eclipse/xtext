@@ -3,20 +3,19 @@
  */
 package org.eclipse.xtext.parser.antlr.services;
 
-import com.google.inject.Singleton;
 import com.google.inject.Inject;
-
+import com.google.inject.Singleton;
 import java.util.List;
-
-import org.eclipse.xtext.*;
+import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TerminalRule;
+import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder;
 import org.eclipse.xtext.service.GrammarProvider;
-import org.eclipse.xtext.service.AbstractElementFinder.*;
-
-import org.eclipse.xtext.parser.antlr.services.Bug301935TestLanguageGrammarAccess;
 
 @Singleton
 public class Bug301935ExTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
-	
 	
 	public class DelegateModelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.antlr.Bug301935ExTestLanguage.DelegateModel");
@@ -25,7 +24,7 @@ public class Bug301935ExTestLanguageGrammarAccess extends AbstractGrammarElement
 		//DelegateModel Model:
 		//	Model
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//Model
 		public RuleCall getModelParserRuleCall() { return cModelParserRuleCall; }
 	}
@@ -34,12 +33,12 @@ public class Bug301935ExTestLanguageGrammarAccess extends AbstractGrammarElement
 	private final DelegateModelElements pDelegateModel;
 	
 	private final Grammar grammar;
-
+	
 	private final Bug301935TestLanguageGrammarAccess gaBug301935TestLanguage;
 
 	@Inject
 	public Bug301935ExTestLanguageGrammarAccess(GrammarProvider grammarProvider,
-		Bug301935TestLanguageGrammarAccess gaBug301935TestLanguage) {
+			Bug301935TestLanguageGrammarAccess gaBug301935TestLanguage) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaBug301935TestLanguage = gaBug301935TestLanguage;
 		this.pDelegateModel = new DelegateModelElements();
@@ -66,7 +65,7 @@ public class Bug301935ExTestLanguageGrammarAccess extends AbstractGrammarElement
 		return grammar;
 	}
 	
-
+	
 	public Bug301935TestLanguageGrammarAccess getBug301935TestLanguageGrammarAccess() {
 		return gaBug301935TestLanguage;
 	}
@@ -81,7 +80,7 @@ public class Bug301935ExTestLanguageGrammarAccess extends AbstractGrammarElement
 	public ParserRule getDelegateModelRule() {
 		return getDelegateModelAccess().getRule();
 	}
-
+	
 	//Model:
 	//	name=ID WS value=ID NL
 	//	value2=ID WS;
@@ -92,7 +91,7 @@ public class Bug301935ExTestLanguageGrammarAccess extends AbstractGrammarElement
 	public ParserRule getModelRule() {
 		return getModelAccess().getRule();
 	}
-
+	
 	//NL:
 	//	WS* ('\r'? '\n') WS*;
 	public Bug301935TestLanguageGrammarAccess.NLElements getNLAccess() {
@@ -102,22 +101,22 @@ public class Bug301935ExTestLanguageGrammarAccess extends AbstractGrammarElement
 	public ParserRule getNLRule() {
 		return getNLAccess().getRule();
 	}
-
+	
 	//terminal ID:
 	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaBug301935TestLanguage.getIDRule();
-	} 
-
+	}
+	
 	//terminal WS:
 	//	' ' | '\t'+;
 	public TerminalRule getWSRule() {
 		return gaBug301935TestLanguage.getWSRule();
-	} 
-
+	}
+	
 	//terminal ANY_OTHER:
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaBug301935TestLanguage.getANY_OTHERRule();
-	} 
+	}
 }

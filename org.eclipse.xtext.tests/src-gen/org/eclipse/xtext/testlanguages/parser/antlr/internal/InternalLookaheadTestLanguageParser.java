@@ -1,4 +1,4 @@
-package org.eclipse.xtext.testlanguages.parser.antlr.internal; 
+package org.eclipse.xtext.testlanguages.parser.antlr.internal;
 
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
@@ -57,18 +57,18 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
 
 
      	private LookaheadTestLanguageGrammarAccess grammarAccess;
-     	
+
         public InternalLookaheadTestLanguageParser(TokenStream input, LookaheadTestLanguageGrammarAccess grammarAccess) {
             this(input);
             this.grammarAccess = grammarAccess;
             registerRules(grammarAccess.getGrammar());
         }
-        
+
         @Override
         protected String getFirstRuleName() {
-        	return "Entry";	
+        	return "Entry";
        	}
-       	
+
        	@Override
        	protected LookaheadTestLanguageGrammarAccess getGrammarAccess() {
        		return grammarAccess;
@@ -76,8 +76,9 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
 
 
 
+
     // $ANTLR start "entryRuleEntry"
-    // InternalLookaheadTestLanguage.g:67:1: entryRuleEntry returns [EObject current=null] : iv_ruleEntry= ruleEntry EOF ;
+    // InternalLookaheadTestLanguage.g:64:1: entryRuleEntry returns [EObject current=null] : iv_ruleEntry= ruleEntry EOF ;
     public final EObject entryRuleEntry() throws RecognitionException {
         EObject current = null;
 
@@ -85,8 +86,8 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // InternalLookaheadTestLanguage.g:68:2: (iv_ruleEntry= ruleEntry EOF )
-            // InternalLookaheadTestLanguage.g:69:2: iv_ruleEntry= ruleEntry EOF
+            // InternalLookaheadTestLanguage.g:64:46: (iv_ruleEntry= ruleEntry EOF )
+            // InternalLookaheadTestLanguage.g:65:2: iv_ruleEntry= ruleEntry EOF
             {
              newCompositeNode(grammarAccess.getEntryRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -100,11 +101,11 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -113,20 +114,21 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleEntry"
-    // InternalLookaheadTestLanguage.g:76:1: ruleEntry returns [EObject current=null] : ( (lv_contents_0_0= ruleAlts ) )* ;
+    // InternalLookaheadTestLanguage.g:71:1: ruleEntry returns [EObject current=null] : ( (lv_contents_0_0= ruleAlts ) )* ;
     public final EObject ruleEntry() throws RecognitionException {
         EObject current = null;
 
         EObject lv_contents_0_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalLookaheadTestLanguage.g:79:28: ( ( (lv_contents_0_0= ruleAlts ) )* )
-            // InternalLookaheadTestLanguage.g:80:1: ( (lv_contents_0_0= ruleAlts ) )*
+            // InternalLookaheadTestLanguage.g:77:2: ( ( (lv_contents_0_0= ruleAlts ) )* )
+            // InternalLookaheadTestLanguage.g:78:2: ( (lv_contents_0_0= ruleAlts ) )*
             {
-            // InternalLookaheadTestLanguage.g:80:1: ( (lv_contents_0_0= ruleAlts ) )*
+            // InternalLookaheadTestLanguage.g:78:2: ( (lv_contents_0_0= ruleAlts ) )*
             loop1:
             do {
                 int alt1=2;
@@ -139,30 +141,30 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
 
                 switch (alt1) {
             	case 1 :
-            	    // InternalLookaheadTestLanguage.g:81:1: (lv_contents_0_0= ruleAlts )
+            	    // InternalLookaheadTestLanguage.g:79:3: (lv_contents_0_0= ruleAlts )
             	    {
-            	    // InternalLookaheadTestLanguage.g:81:1: (lv_contents_0_0= ruleAlts )
-            	    // InternalLookaheadTestLanguage.g:82:3: lv_contents_0_0= ruleAlts
+            	    // InternalLookaheadTestLanguage.g:79:3: (lv_contents_0_0= ruleAlts )
+            	    // InternalLookaheadTestLanguage.g:80:4: lv_contents_0_0= ruleAlts
             	    {
-            	     
-            	    	        newCompositeNode(grammarAccess.getEntryAccess().getContentsAltsParserRuleCall_0()); 
-            	    	    
+
+            	    				newCompositeNode(grammarAccess.getEntryAccess().getContentsAltsParserRuleCall_0());
+            	    			
             	    pushFollow(FollowSets000.FOLLOW_3);
             	    lv_contents_0_0=ruleAlts();
 
             	    state._fsp--;
 
 
-            	    	        if (current==null) {
-            	    	            current = createModelElementForParent(grammarAccess.getEntryRule());
-            	    	        }
-            	           		add(
-            	           			current, 
-            	           			"contents",
-            	            		lv_contents_0_0, 
-            	            		"org.eclipse.xtext.testlanguages.LookaheadTestLanguage.Alts");
-            	    	        afterParserOrEnumRuleCall();
-            	    	    
+            	    				if (current==null) {
+            	    					current = createModelElementForParent(grammarAccess.getEntryRule());
+            	    				}
+            	    				add(
+            	    					current,
+            	    					"contents",
+            	    					lv_contents_0_0,
+            	    					"org.eclipse.xtext.testlanguages.LookaheadTestLanguage.Alts");
+            	    				afterParserOrEnumRuleCall();
+            	    			
 
             	    }
 
@@ -178,13 +180,15 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -193,7 +197,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleAlts"
-    // InternalLookaheadTestLanguage.g:106:1: entryRuleAlts returns [EObject current=null] : iv_ruleAlts= ruleAlts EOF ;
+    // InternalLookaheadTestLanguage.g:100:1: entryRuleAlts returns [EObject current=null] : iv_ruleAlts= ruleAlts EOF ;
     public final EObject entryRuleAlts() throws RecognitionException {
         EObject current = null;
 
@@ -201,8 +205,8 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // InternalLookaheadTestLanguage.g:107:2: (iv_ruleAlts= ruleAlts EOF )
-            // InternalLookaheadTestLanguage.g:108:2: iv_ruleAlts= ruleAlts EOF
+            // InternalLookaheadTestLanguage.g:100:45: (iv_ruleAlts= ruleAlts EOF )
+            // InternalLookaheadTestLanguage.g:101:2: iv_ruleAlts= ruleAlts EOF
             {
              newCompositeNode(grammarAccess.getAltsRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -216,11 +220,11 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -229,7 +233,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleAlts"
-    // InternalLookaheadTestLanguage.g:115:1: ruleAlts returns [EObject current=null] : (this_LookAhead0_0= ruleLookAhead0 | this_LookAhead1_1= ruleLookAhead1 | this_LookAhead3_2= ruleLookAhead3 ) ;
+    // InternalLookaheadTestLanguage.g:107:1: ruleAlts returns [EObject current=null] : (this_LookAhead0_0= ruleLookAhead0 | this_LookAhead1_1= ruleLookAhead1 | this_LookAhead3_2= ruleLookAhead3 ) ;
     public final EObject ruleAlts() throws RecognitionException {
         EObject current = null;
 
@@ -240,13 +244,14 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
         EObject this_LookAhead3_2 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalLookaheadTestLanguage.g:118:28: ( (this_LookAhead0_0= ruleLookAhead0 | this_LookAhead1_1= ruleLookAhead1 | this_LookAhead3_2= ruleLookAhead3 ) )
-            // InternalLookaheadTestLanguage.g:119:1: (this_LookAhead0_0= ruleLookAhead0 | this_LookAhead1_1= ruleLookAhead1 | this_LookAhead3_2= ruleLookAhead3 )
+            // InternalLookaheadTestLanguage.g:113:2: ( (this_LookAhead0_0= ruleLookAhead0 | this_LookAhead1_1= ruleLookAhead1 | this_LookAhead3_2= ruleLookAhead3 ) )
+            // InternalLookaheadTestLanguage.g:114:2: (this_LookAhead0_0= ruleLookAhead0 | this_LookAhead1_1= ruleLookAhead1 | this_LookAhead3_2= ruleLookAhead3 )
             {
-            // InternalLookaheadTestLanguage.g:119:1: (this_LookAhead0_0= ruleLookAhead0 | this_LookAhead1_1= ruleLookAhead1 | this_LookAhead3_2= ruleLookAhead3 )
+            // InternalLookaheadTestLanguage.g:114:2: (this_LookAhead0_0= ruleLookAhead0 | this_LookAhead1_1= ruleLookAhead1 | this_LookAhead3_2= ruleLookAhead3 )
             int alt2=3;
             int LA2_0 = input.LA(1);
 
@@ -290,56 +295,56 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
             }
             switch (alt2) {
                 case 1 :
-                    // InternalLookaheadTestLanguage.g:120:5: this_LookAhead0_0= ruleLookAhead0
+                    // InternalLookaheadTestLanguage.g:115:3: this_LookAhead0_0= ruleLookAhead0
                     {
-                     
-                            newCompositeNode(grammarAccess.getAltsAccess().getLookAhead0ParserRuleCall_0()); 
-                        
+
+                    			newCompositeNode(grammarAccess.getAltsAccess().getLookAhead0ParserRuleCall_0());
+                    		
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_LookAhead0_0=ruleLookAhead0();
 
                     state._fsp--;
 
-                     
-                            current = this_LookAhead0_0; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    			current = this_LookAhead0_0;
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
                 case 2 :
-                    // InternalLookaheadTestLanguage.g:130:5: this_LookAhead1_1= ruleLookAhead1
+                    // InternalLookaheadTestLanguage.g:124:3: this_LookAhead1_1= ruleLookAhead1
                     {
-                     
-                            newCompositeNode(grammarAccess.getAltsAccess().getLookAhead1ParserRuleCall_1()); 
-                        
+
+                    			newCompositeNode(grammarAccess.getAltsAccess().getLookAhead1ParserRuleCall_1());
+                    		
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_LookAhead1_1=ruleLookAhead1();
 
                     state._fsp--;
 
-                     
-                            current = this_LookAhead1_1; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    			current = this_LookAhead1_1;
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
                 case 3 :
-                    // InternalLookaheadTestLanguage.g:140:5: this_LookAhead3_2= ruleLookAhead3
+                    // InternalLookaheadTestLanguage.g:133:3: this_LookAhead3_2= ruleLookAhead3
                     {
-                     
-                            newCompositeNode(grammarAccess.getAltsAccess().getLookAhead3ParserRuleCall_2()); 
-                        
+
+                    			newCompositeNode(grammarAccess.getAltsAccess().getLookAhead3ParserRuleCall_2());
+                    		
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_LookAhead3_2=ruleLookAhead3();
 
                     state._fsp--;
 
-                     
-                            current = this_LookAhead3_2; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    			current = this_LookAhead3_2;
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
@@ -349,13 +354,15 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -364,7 +371,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleLookAhead0"
-    // InternalLookaheadTestLanguage.g:156:1: entryRuleLookAhead0 returns [EObject current=null] : iv_ruleLookAhead0= ruleLookAhead0 EOF ;
+    // InternalLookaheadTestLanguage.g:145:1: entryRuleLookAhead0 returns [EObject current=null] : iv_ruleLookAhead0= ruleLookAhead0 EOF ;
     public final EObject entryRuleLookAhead0() throws RecognitionException {
         EObject current = null;
 
@@ -372,8 +379,8 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // InternalLookaheadTestLanguage.g:157:2: (iv_ruleLookAhead0= ruleLookAhead0 EOF )
-            // InternalLookaheadTestLanguage.g:158:2: iv_ruleLookAhead0= ruleLookAhead0 EOF
+            // InternalLookaheadTestLanguage.g:145:51: (iv_ruleLookAhead0= ruleLookAhead0 EOF )
+            // InternalLookaheadTestLanguage.g:146:2: iv_ruleLookAhead0= ruleLookAhead0 EOF
             {
              newCompositeNode(grammarAccess.getLookAhead0Rule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -387,11 +394,11 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -400,45 +407,43 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleLookAhead0"
-    // InternalLookaheadTestLanguage.g:165:1: ruleLookAhead0 returns [EObject current=null] : (otherlv_0= 'bar' ( (lv_x_1_0= 'a' ) ) ) ;
+    // InternalLookaheadTestLanguage.g:152:1: ruleLookAhead0 returns [EObject current=null] : (otherlv_0= 'bar' ( (lv_x_1_0= 'a' ) ) ) ;
     public final EObject ruleLookAhead0() throws RecognitionException {
         EObject current = null;
 
         Token otherlv_0=null;
         Token lv_x_1_0=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalLookaheadTestLanguage.g:168:28: ( (otherlv_0= 'bar' ( (lv_x_1_0= 'a' ) ) ) )
-            // InternalLookaheadTestLanguage.g:169:1: (otherlv_0= 'bar' ( (lv_x_1_0= 'a' ) ) )
+            // InternalLookaheadTestLanguage.g:158:2: ( (otherlv_0= 'bar' ( (lv_x_1_0= 'a' ) ) ) )
+            // InternalLookaheadTestLanguage.g:159:2: (otherlv_0= 'bar' ( (lv_x_1_0= 'a' ) ) )
             {
-            // InternalLookaheadTestLanguage.g:169:1: (otherlv_0= 'bar' ( (lv_x_1_0= 'a' ) ) )
-            // InternalLookaheadTestLanguage.g:169:3: otherlv_0= 'bar' ( (lv_x_1_0= 'a' ) )
+            // InternalLookaheadTestLanguage.g:159:2: (otherlv_0= 'bar' ( (lv_x_1_0= 'a' ) ) )
+            // InternalLookaheadTestLanguage.g:160:3: otherlv_0= 'bar' ( (lv_x_1_0= 'a' ) )
             {
             otherlv_0=(Token)match(input,11,FollowSets000.FOLLOW_4); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getLookAhead0Access().getBarKeyword_0());
-                
-            // InternalLookaheadTestLanguage.g:173:1: ( (lv_x_1_0= 'a' ) )
-            // InternalLookaheadTestLanguage.g:174:1: (lv_x_1_0= 'a' )
+            			newLeafNode(otherlv_0, grammarAccess.getLookAhead0Access().getBarKeyword_0());
+            		
+            // InternalLookaheadTestLanguage.g:164:3: ( (lv_x_1_0= 'a' ) )
+            // InternalLookaheadTestLanguage.g:165:4: (lv_x_1_0= 'a' )
             {
-            // InternalLookaheadTestLanguage.g:174:1: (lv_x_1_0= 'a' )
-            // InternalLookaheadTestLanguage.g:175:3: lv_x_1_0= 'a'
+            // InternalLookaheadTestLanguage.g:165:4: (lv_x_1_0= 'a' )
+            // InternalLookaheadTestLanguage.g:166:5: lv_x_1_0= 'a'
             {
             lv_x_1_0=(Token)match(input,12,FollowSets000.FOLLOW_2); 
 
-                    newLeafNode(lv_x_1_0, grammarAccess.getLookAhead0Access().getXAKeyword_1_0());
-                
+            					newLeafNode(lv_x_1_0, grammarAccess.getLookAhead0Access().getXAKeyword_1_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getLookAhead0Rule());
-            	        }
-                   		setWithLastConsumed(current, "x", lv_x_1_0, "a");
-            	    
-
-            }
-
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getLookAhead0Rule());
+            					}
+            					setWithLastConsumed(current, "x", lv_x_1_0, "a");
+            				
 
             }
 
@@ -448,13 +453,18 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-             leaveRule(); 
+
+            }
+
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -463,7 +473,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleLookAhead1"
-    // InternalLookaheadTestLanguage.g:196:1: entryRuleLookAhead1 returns [EObject current=null] : iv_ruleLookAhead1= ruleLookAhead1 EOF ;
+    // InternalLookaheadTestLanguage.g:182:1: entryRuleLookAhead1 returns [EObject current=null] : iv_ruleLookAhead1= ruleLookAhead1 EOF ;
     public final EObject entryRuleLookAhead1() throws RecognitionException {
         EObject current = null;
 
@@ -471,8 +481,8 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // InternalLookaheadTestLanguage.g:197:2: (iv_ruleLookAhead1= ruleLookAhead1 EOF )
-            // InternalLookaheadTestLanguage.g:198:2: iv_ruleLookAhead1= ruleLookAhead1 EOF
+            // InternalLookaheadTestLanguage.g:182:51: (iv_ruleLookAhead1= ruleLookAhead1 EOF )
+            // InternalLookaheadTestLanguage.g:183:2: iv_ruleLookAhead1= ruleLookAhead1 EOF
             {
              newCompositeNode(grammarAccess.getLookAhead1Rule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -486,11 +496,11 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -499,7 +509,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleLookAhead1"
-    // InternalLookaheadTestLanguage.g:205:1: ruleLookAhead1 returns [EObject current=null] : (otherlv_0= 'foo' ( (lv_y_1_0= ruleLookAhead2 ) ) ( (lv_x_2_0= 'b' ) ) ( (lv_z_3_0= 'd' ) ) ) ;
+    // InternalLookaheadTestLanguage.g:189:1: ruleLookAhead1 returns [EObject current=null] : (otherlv_0= 'foo' ( (lv_y_1_0= ruleLookAhead2 ) ) ( (lv_x_2_0= 'b' ) ) ( (lv_z_3_0= 'd' ) ) ) ;
     public final EObject ruleLookAhead1() throws RecognitionException {
         EObject current = null;
 
@@ -509,91 +519,89 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
         EObject lv_y_1_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalLookaheadTestLanguage.g:208:28: ( (otherlv_0= 'foo' ( (lv_y_1_0= ruleLookAhead2 ) ) ( (lv_x_2_0= 'b' ) ) ( (lv_z_3_0= 'd' ) ) ) )
-            // InternalLookaheadTestLanguage.g:209:1: (otherlv_0= 'foo' ( (lv_y_1_0= ruleLookAhead2 ) ) ( (lv_x_2_0= 'b' ) ) ( (lv_z_3_0= 'd' ) ) )
+            // InternalLookaheadTestLanguage.g:195:2: ( (otherlv_0= 'foo' ( (lv_y_1_0= ruleLookAhead2 ) ) ( (lv_x_2_0= 'b' ) ) ( (lv_z_3_0= 'd' ) ) ) )
+            // InternalLookaheadTestLanguage.g:196:2: (otherlv_0= 'foo' ( (lv_y_1_0= ruleLookAhead2 ) ) ( (lv_x_2_0= 'b' ) ) ( (lv_z_3_0= 'd' ) ) )
             {
-            // InternalLookaheadTestLanguage.g:209:1: (otherlv_0= 'foo' ( (lv_y_1_0= ruleLookAhead2 ) ) ( (lv_x_2_0= 'b' ) ) ( (lv_z_3_0= 'd' ) ) )
-            // InternalLookaheadTestLanguage.g:209:3: otherlv_0= 'foo' ( (lv_y_1_0= ruleLookAhead2 ) ) ( (lv_x_2_0= 'b' ) ) ( (lv_z_3_0= 'd' ) )
+            // InternalLookaheadTestLanguage.g:196:2: (otherlv_0= 'foo' ( (lv_y_1_0= ruleLookAhead2 ) ) ( (lv_x_2_0= 'b' ) ) ( (lv_z_3_0= 'd' ) ) )
+            // InternalLookaheadTestLanguage.g:197:3: otherlv_0= 'foo' ( (lv_y_1_0= ruleLookAhead2 ) ) ( (lv_x_2_0= 'b' ) ) ( (lv_z_3_0= 'd' ) )
             {
             otherlv_0=(Token)match(input,13,FollowSets000.FOLLOW_5); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getLookAhead1Access().getFooKeyword_0());
-                
-            // InternalLookaheadTestLanguage.g:213:1: ( (lv_y_1_0= ruleLookAhead2 ) )
-            // InternalLookaheadTestLanguage.g:214:1: (lv_y_1_0= ruleLookAhead2 )
+            			newLeafNode(otherlv_0, grammarAccess.getLookAhead1Access().getFooKeyword_0());
+            		
+            // InternalLookaheadTestLanguage.g:201:3: ( (lv_y_1_0= ruleLookAhead2 ) )
+            // InternalLookaheadTestLanguage.g:202:4: (lv_y_1_0= ruleLookAhead2 )
             {
-            // InternalLookaheadTestLanguage.g:214:1: (lv_y_1_0= ruleLookAhead2 )
-            // InternalLookaheadTestLanguage.g:215:3: lv_y_1_0= ruleLookAhead2
+            // InternalLookaheadTestLanguage.g:202:4: (lv_y_1_0= ruleLookAhead2 )
+            // InternalLookaheadTestLanguage.g:203:5: lv_y_1_0= ruleLookAhead2
             {
-             
-            	        newCompositeNode(grammarAccess.getLookAhead1Access().getYLookAhead2ParserRuleCall_1_0()); 
-            	    
+
+            					newCompositeNode(grammarAccess.getLookAhead1Access().getYLookAhead2ParserRuleCall_1_0());
+            				
             pushFollow(FollowSets000.FOLLOW_6);
             lv_y_1_0=ruleLookAhead2();
 
             state._fsp--;
 
 
-            	        if (current==null) {
-            	            current = createModelElementForParent(grammarAccess.getLookAhead1Rule());
-            	        }
-                   		set(
-                   			current, 
-                   			"y",
-                    		lv_y_1_0, 
-                    		"org.eclipse.xtext.testlanguages.LookaheadTestLanguage.LookAhead2");
-            	        afterParserOrEnumRuleCall();
-            	    
+            					if (current==null) {
+            						current = createModelElementForParent(grammarAccess.getLookAhead1Rule());
+            					}
+            					set(
+            						current,
+            						"y",
+            						lv_y_1_0,
+            						"org.eclipse.xtext.testlanguages.LookaheadTestLanguage.LookAhead2");
+            					afterParserOrEnumRuleCall();
+            				
 
             }
 
 
             }
 
-            // InternalLookaheadTestLanguage.g:231:2: ( (lv_x_2_0= 'b' ) )
-            // InternalLookaheadTestLanguage.g:232:1: (lv_x_2_0= 'b' )
+            // InternalLookaheadTestLanguage.g:220:3: ( (lv_x_2_0= 'b' ) )
+            // InternalLookaheadTestLanguage.g:221:4: (lv_x_2_0= 'b' )
             {
-            // InternalLookaheadTestLanguage.g:232:1: (lv_x_2_0= 'b' )
-            // InternalLookaheadTestLanguage.g:233:3: lv_x_2_0= 'b'
+            // InternalLookaheadTestLanguage.g:221:4: (lv_x_2_0= 'b' )
+            // InternalLookaheadTestLanguage.g:222:5: lv_x_2_0= 'b'
             {
             lv_x_2_0=(Token)match(input,14,FollowSets000.FOLLOW_7); 
 
-                    newLeafNode(lv_x_2_0, grammarAccess.getLookAhead1Access().getXBKeyword_2_0());
-                
+            					newLeafNode(lv_x_2_0, grammarAccess.getLookAhead1Access().getXBKeyword_2_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getLookAhead1Rule());
-            	        }
-                   		setWithLastConsumed(current, "x", lv_x_2_0, "b");
-            	    
-
-            }
-
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getLookAhead1Rule());
+            					}
+            					setWithLastConsumed(current, "x", lv_x_2_0, "b");
+            				
 
             }
 
-            // InternalLookaheadTestLanguage.g:246:2: ( (lv_z_3_0= 'd' ) )
-            // InternalLookaheadTestLanguage.g:247:1: (lv_z_3_0= 'd' )
+
+            }
+
+            // InternalLookaheadTestLanguage.g:234:3: ( (lv_z_3_0= 'd' ) )
+            // InternalLookaheadTestLanguage.g:235:4: (lv_z_3_0= 'd' )
             {
-            // InternalLookaheadTestLanguage.g:247:1: (lv_z_3_0= 'd' )
-            // InternalLookaheadTestLanguage.g:248:3: lv_z_3_0= 'd'
+            // InternalLookaheadTestLanguage.g:235:4: (lv_z_3_0= 'd' )
+            // InternalLookaheadTestLanguage.g:236:5: lv_z_3_0= 'd'
             {
             lv_z_3_0=(Token)match(input,15,FollowSets000.FOLLOW_2); 
 
-                    newLeafNode(lv_z_3_0, grammarAccess.getLookAhead1Access().getZDKeyword_3_0());
-                
+            					newLeafNode(lv_z_3_0, grammarAccess.getLookAhead1Access().getZDKeyword_3_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getLookAhead1Rule());
-            	        }
-                   		setWithLastConsumed(current, "z", lv_z_3_0, "d");
-            	    
-
-            }
-
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getLookAhead1Rule());
+            					}
+            					setWithLastConsumed(current, "z", lv_z_3_0, "d");
+            				
 
             }
 
@@ -603,13 +611,18 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-             leaveRule(); 
+
+            }
+
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -618,7 +631,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleLookAhead2"
-    // InternalLookaheadTestLanguage.g:269:1: entryRuleLookAhead2 returns [EObject current=null] : iv_ruleLookAhead2= ruleLookAhead2 EOF ;
+    // InternalLookaheadTestLanguage.g:252:1: entryRuleLookAhead2 returns [EObject current=null] : iv_ruleLookAhead2= ruleLookAhead2 EOF ;
     public final EObject entryRuleLookAhead2() throws RecognitionException {
         EObject current = null;
 
@@ -626,8 +639,8 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // InternalLookaheadTestLanguage.g:270:2: (iv_ruleLookAhead2= ruleLookAhead2 EOF )
-            // InternalLookaheadTestLanguage.g:271:2: iv_ruleLookAhead2= ruleLookAhead2 EOF
+            // InternalLookaheadTestLanguage.g:252:51: (iv_ruleLookAhead2= ruleLookAhead2 EOF )
+            // InternalLookaheadTestLanguage.g:253:2: iv_ruleLookAhead2= ruleLookAhead2 EOF
             {
              newCompositeNode(grammarAccess.getLookAhead2Rule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -641,11 +654,11 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -654,7 +667,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleLookAhead2"
-    // InternalLookaheadTestLanguage.g:278:1: ruleLookAhead2 returns [EObject current=null] : ( ( ( (lv_z_0_0= 'foo' ) ) | ( (lv_z_1_0= 'bar' ) ) ) otherlv_2= 'c' ) ;
+    // InternalLookaheadTestLanguage.g:259:1: ruleLookAhead2 returns [EObject current=null] : ( ( ( (lv_z_0_0= 'foo' ) ) | ( (lv_z_1_0= 'bar' ) ) ) otherlv_2= 'c' ) ;
     public final EObject ruleLookAhead2() throws RecognitionException {
         EObject current = null;
 
@@ -662,16 +675,17 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
         Token lv_z_1_0=null;
         Token otherlv_2=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalLookaheadTestLanguage.g:281:28: ( ( ( ( (lv_z_0_0= 'foo' ) ) | ( (lv_z_1_0= 'bar' ) ) ) otherlv_2= 'c' ) )
-            // InternalLookaheadTestLanguage.g:282:1: ( ( ( (lv_z_0_0= 'foo' ) ) | ( (lv_z_1_0= 'bar' ) ) ) otherlv_2= 'c' )
+            // InternalLookaheadTestLanguage.g:265:2: ( ( ( ( (lv_z_0_0= 'foo' ) ) | ( (lv_z_1_0= 'bar' ) ) ) otherlv_2= 'c' ) )
+            // InternalLookaheadTestLanguage.g:266:2: ( ( ( (lv_z_0_0= 'foo' ) ) | ( (lv_z_1_0= 'bar' ) ) ) otherlv_2= 'c' )
             {
-            // InternalLookaheadTestLanguage.g:282:1: ( ( ( (lv_z_0_0= 'foo' ) ) | ( (lv_z_1_0= 'bar' ) ) ) otherlv_2= 'c' )
-            // InternalLookaheadTestLanguage.g:282:2: ( ( (lv_z_0_0= 'foo' ) ) | ( (lv_z_1_0= 'bar' ) ) ) otherlv_2= 'c'
+            // InternalLookaheadTestLanguage.g:266:2: ( ( ( (lv_z_0_0= 'foo' ) ) | ( (lv_z_1_0= 'bar' ) ) ) otherlv_2= 'c' )
+            // InternalLookaheadTestLanguage.g:267:3: ( ( (lv_z_0_0= 'foo' ) ) | ( (lv_z_1_0= 'bar' ) ) ) otherlv_2= 'c'
             {
-            // InternalLookaheadTestLanguage.g:282:2: ( ( (lv_z_0_0= 'foo' ) ) | ( (lv_z_1_0= 'bar' ) ) )
+            // InternalLookaheadTestLanguage.g:267:3: ( ( (lv_z_0_0= 'foo' ) ) | ( (lv_z_1_0= 'bar' ) ) )
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -689,24 +703,24 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
             }
             switch (alt3) {
                 case 1 :
-                    // InternalLookaheadTestLanguage.g:282:3: ( (lv_z_0_0= 'foo' ) )
+                    // InternalLookaheadTestLanguage.g:268:4: ( (lv_z_0_0= 'foo' ) )
                     {
-                    // InternalLookaheadTestLanguage.g:282:3: ( (lv_z_0_0= 'foo' ) )
-                    // InternalLookaheadTestLanguage.g:283:1: (lv_z_0_0= 'foo' )
+                    // InternalLookaheadTestLanguage.g:268:4: ( (lv_z_0_0= 'foo' ) )
+                    // InternalLookaheadTestLanguage.g:269:5: (lv_z_0_0= 'foo' )
                     {
-                    // InternalLookaheadTestLanguage.g:283:1: (lv_z_0_0= 'foo' )
-                    // InternalLookaheadTestLanguage.g:284:3: lv_z_0_0= 'foo'
+                    // InternalLookaheadTestLanguage.g:269:5: (lv_z_0_0= 'foo' )
+                    // InternalLookaheadTestLanguage.g:270:6: lv_z_0_0= 'foo'
                     {
                     lv_z_0_0=(Token)match(input,13,FollowSets000.FOLLOW_8); 
 
-                            newLeafNode(lv_z_0_0, grammarAccess.getLookAhead2Access().getZFooKeyword_0_0_0());
-                        
+                    						newLeafNode(lv_z_0_0, grammarAccess.getLookAhead2Access().getZFooKeyword_0_0_0());
+                    					
 
-                    	        if (current==null) {
-                    	            current = createModelElement(grammarAccess.getLookAhead2Rule());
-                    	        }
-                           		setWithLastConsumed(current, "z", lv_z_0_0, "foo");
-                    	    
+                    						if (current==null) {
+                    							current = createModelElement(grammarAccess.getLookAhead2Rule());
+                    						}
+                    						setWithLastConsumed(current, "z", lv_z_0_0, "foo");
+                    					
 
                     }
 
@@ -717,24 +731,24 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
                     }
                     break;
                 case 2 :
-                    // InternalLookaheadTestLanguage.g:298:6: ( (lv_z_1_0= 'bar' ) )
+                    // InternalLookaheadTestLanguage.g:283:4: ( (lv_z_1_0= 'bar' ) )
                     {
-                    // InternalLookaheadTestLanguage.g:298:6: ( (lv_z_1_0= 'bar' ) )
-                    // InternalLookaheadTestLanguage.g:299:1: (lv_z_1_0= 'bar' )
+                    // InternalLookaheadTestLanguage.g:283:4: ( (lv_z_1_0= 'bar' ) )
+                    // InternalLookaheadTestLanguage.g:284:5: (lv_z_1_0= 'bar' )
                     {
-                    // InternalLookaheadTestLanguage.g:299:1: (lv_z_1_0= 'bar' )
-                    // InternalLookaheadTestLanguage.g:300:3: lv_z_1_0= 'bar'
+                    // InternalLookaheadTestLanguage.g:284:5: (lv_z_1_0= 'bar' )
+                    // InternalLookaheadTestLanguage.g:285:6: lv_z_1_0= 'bar'
                     {
                     lv_z_1_0=(Token)match(input,11,FollowSets000.FOLLOW_8); 
 
-                            newLeafNode(lv_z_1_0, grammarAccess.getLookAhead2Access().getZBarKeyword_0_1_0());
-                        
+                    						newLeafNode(lv_z_1_0, grammarAccess.getLookAhead2Access().getZBarKeyword_0_1_0());
+                    					
 
-                    	        if (current==null) {
-                    	            current = createModelElement(grammarAccess.getLookAhead2Rule());
-                    	        }
-                           		setWithLastConsumed(current, "z", lv_z_1_0, "bar");
-                    	    
+                    						if (current==null) {
+                    							current = createModelElement(grammarAccess.getLookAhead2Rule());
+                    						}
+                    						setWithLastConsumed(current, "z", lv_z_1_0, "bar");
+                    					
 
                     }
 
@@ -749,21 +763,23 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
 
             otherlv_2=(Token)match(input,16,FollowSets000.FOLLOW_2); 
 
-                	newLeafNode(otherlv_2, grammarAccess.getLookAhead2Access().getCKeyword_1());
-                
+            			newLeafNode(otherlv_2, grammarAccess.getLookAhead2Access().getCKeyword_1());
+            		
 
             }
 
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -772,7 +788,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleLookAhead3"
-    // InternalLookaheadTestLanguage.g:325:1: entryRuleLookAhead3 returns [EObject current=null] : iv_ruleLookAhead3= ruleLookAhead3 EOF ;
+    // InternalLookaheadTestLanguage.g:306:1: entryRuleLookAhead3 returns [EObject current=null] : iv_ruleLookAhead3= ruleLookAhead3 EOF ;
     public final EObject entryRuleLookAhead3() throws RecognitionException {
         EObject current = null;
 
@@ -780,8 +796,8 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // InternalLookaheadTestLanguage.g:326:2: (iv_ruleLookAhead3= ruleLookAhead3 EOF )
-            // InternalLookaheadTestLanguage.g:327:2: iv_ruleLookAhead3= ruleLookAhead3 EOF
+            // InternalLookaheadTestLanguage.g:306:51: (iv_ruleLookAhead3= ruleLookAhead3 EOF )
+            // InternalLookaheadTestLanguage.g:307:2: iv_ruleLookAhead3= ruleLookAhead3 EOF
             {
              newCompositeNode(grammarAccess.getLookAhead3Rule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -795,11 +811,11 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -808,7 +824,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleLookAhead3"
-    // InternalLookaheadTestLanguage.g:334:1: ruleLookAhead3 returns [EObject current=null] : (otherlv_0= 'foo' otherlv_1= 'bar' ( (lv_x_2_0= 'b' ) ) ( (lv_z_3_0= ruleLookAhead4 ) ) ) ;
+    // InternalLookaheadTestLanguage.g:313:1: ruleLookAhead3 returns [EObject current=null] : (otherlv_0= 'foo' otherlv_1= 'bar' ( (lv_x_2_0= 'b' ) ) ( (lv_z_3_0= ruleLookAhead4 ) ) ) ;
     public final EObject ruleLookAhead3() throws RecognitionException {
         EObject current = null;
 
@@ -818,70 +834,71 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
         EObject lv_z_3_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalLookaheadTestLanguage.g:337:28: ( (otherlv_0= 'foo' otherlv_1= 'bar' ( (lv_x_2_0= 'b' ) ) ( (lv_z_3_0= ruleLookAhead4 ) ) ) )
-            // InternalLookaheadTestLanguage.g:338:1: (otherlv_0= 'foo' otherlv_1= 'bar' ( (lv_x_2_0= 'b' ) ) ( (lv_z_3_0= ruleLookAhead4 ) ) )
+            // InternalLookaheadTestLanguage.g:319:2: ( (otherlv_0= 'foo' otherlv_1= 'bar' ( (lv_x_2_0= 'b' ) ) ( (lv_z_3_0= ruleLookAhead4 ) ) ) )
+            // InternalLookaheadTestLanguage.g:320:2: (otherlv_0= 'foo' otherlv_1= 'bar' ( (lv_x_2_0= 'b' ) ) ( (lv_z_3_0= ruleLookAhead4 ) ) )
             {
-            // InternalLookaheadTestLanguage.g:338:1: (otherlv_0= 'foo' otherlv_1= 'bar' ( (lv_x_2_0= 'b' ) ) ( (lv_z_3_0= ruleLookAhead4 ) ) )
-            // InternalLookaheadTestLanguage.g:338:3: otherlv_0= 'foo' otherlv_1= 'bar' ( (lv_x_2_0= 'b' ) ) ( (lv_z_3_0= ruleLookAhead4 ) )
+            // InternalLookaheadTestLanguage.g:320:2: (otherlv_0= 'foo' otherlv_1= 'bar' ( (lv_x_2_0= 'b' ) ) ( (lv_z_3_0= ruleLookAhead4 ) ) )
+            // InternalLookaheadTestLanguage.g:321:3: otherlv_0= 'foo' otherlv_1= 'bar' ( (lv_x_2_0= 'b' ) ) ( (lv_z_3_0= ruleLookAhead4 ) )
             {
             otherlv_0=(Token)match(input,13,FollowSets000.FOLLOW_9); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getLookAhead3Access().getFooKeyword_0());
-                
+            			newLeafNode(otherlv_0, grammarAccess.getLookAhead3Access().getFooKeyword_0());
+            		
             otherlv_1=(Token)match(input,11,FollowSets000.FOLLOW_6); 
 
-                	newLeafNode(otherlv_1, grammarAccess.getLookAhead3Access().getBarKeyword_1());
-                
-            // InternalLookaheadTestLanguage.g:346:1: ( (lv_x_2_0= 'b' ) )
-            // InternalLookaheadTestLanguage.g:347:1: (lv_x_2_0= 'b' )
+            			newLeafNode(otherlv_1, grammarAccess.getLookAhead3Access().getBarKeyword_1());
+            		
+            // InternalLookaheadTestLanguage.g:329:3: ( (lv_x_2_0= 'b' ) )
+            // InternalLookaheadTestLanguage.g:330:4: (lv_x_2_0= 'b' )
             {
-            // InternalLookaheadTestLanguage.g:347:1: (lv_x_2_0= 'b' )
-            // InternalLookaheadTestLanguage.g:348:3: lv_x_2_0= 'b'
+            // InternalLookaheadTestLanguage.g:330:4: (lv_x_2_0= 'b' )
+            // InternalLookaheadTestLanguage.g:331:5: lv_x_2_0= 'b'
             {
             lv_x_2_0=(Token)match(input,14,FollowSets000.FOLLOW_10); 
 
-                    newLeafNode(lv_x_2_0, grammarAccess.getLookAhead3Access().getXBKeyword_2_0());
-                
+            					newLeafNode(lv_x_2_0, grammarAccess.getLookAhead3Access().getXBKeyword_2_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getLookAhead3Rule());
-            	        }
-                   		setWithLastConsumed(current, "x", lv_x_2_0, "b");
-            	    
-
-            }
-
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getLookAhead3Rule());
+            					}
+            					setWithLastConsumed(current, "x", lv_x_2_0, "b");
+            				
 
             }
 
-            // InternalLookaheadTestLanguage.g:361:2: ( (lv_z_3_0= ruleLookAhead4 ) )
-            // InternalLookaheadTestLanguage.g:362:1: (lv_z_3_0= ruleLookAhead4 )
+
+            }
+
+            // InternalLookaheadTestLanguage.g:343:3: ( (lv_z_3_0= ruleLookAhead4 ) )
+            // InternalLookaheadTestLanguage.g:344:4: (lv_z_3_0= ruleLookAhead4 )
             {
-            // InternalLookaheadTestLanguage.g:362:1: (lv_z_3_0= ruleLookAhead4 )
-            // InternalLookaheadTestLanguage.g:363:3: lv_z_3_0= ruleLookAhead4
+            // InternalLookaheadTestLanguage.g:344:4: (lv_z_3_0= ruleLookAhead4 )
+            // InternalLookaheadTestLanguage.g:345:5: lv_z_3_0= ruleLookAhead4
             {
-             
-            	        newCompositeNode(grammarAccess.getLookAhead3Access().getZLookAhead4ParserRuleCall_3_0()); 
-            	    
+
+            					newCompositeNode(grammarAccess.getLookAhead3Access().getZLookAhead4ParserRuleCall_3_0());
+            				
             pushFollow(FollowSets000.FOLLOW_2);
             lv_z_3_0=ruleLookAhead4();
 
             state._fsp--;
 
 
-            	        if (current==null) {
-            	            current = createModelElementForParent(grammarAccess.getLookAhead3Rule());
-            	        }
-                   		set(
-                   			current, 
-                   			"z",
-                    		lv_z_3_0, 
-                    		"org.eclipse.xtext.testlanguages.LookaheadTestLanguage.LookAhead4");
-            	        afterParserOrEnumRuleCall();
-            	    
+            					if (current==null) {
+            						current = createModelElementForParent(grammarAccess.getLookAhead3Rule());
+            					}
+            					set(
+            						current,
+            						"z",
+            						lv_z_3_0,
+            						"org.eclipse.xtext.testlanguages.LookaheadTestLanguage.LookAhead4");
+            					afterParserOrEnumRuleCall();
+            				
 
             }
 
@@ -894,13 +911,15 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -909,7 +928,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleLookAhead4"
-    // InternalLookaheadTestLanguage.g:387:1: entryRuleLookAhead4 returns [EObject current=null] : iv_ruleLookAhead4= ruleLookAhead4 EOF ;
+    // InternalLookaheadTestLanguage.g:366:1: entryRuleLookAhead4 returns [EObject current=null] : iv_ruleLookAhead4= ruleLookAhead4 EOF ;
     public final EObject entryRuleLookAhead4() throws RecognitionException {
         EObject current = null;
 
@@ -917,8 +936,8 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // InternalLookaheadTestLanguage.g:388:2: (iv_ruleLookAhead4= ruleLookAhead4 EOF )
-            // InternalLookaheadTestLanguage.g:389:2: iv_ruleLookAhead4= ruleLookAhead4 EOF
+            // InternalLookaheadTestLanguage.g:366:51: (iv_ruleLookAhead4= ruleLookAhead4 EOF )
+            // InternalLookaheadTestLanguage.g:367:2: iv_ruleLookAhead4= ruleLookAhead4 EOF
             {
              newCompositeNode(grammarAccess.getLookAhead4Rule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -932,11 +951,11 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -945,20 +964,21 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleLookAhead4"
-    // InternalLookaheadTestLanguage.g:396:1: ruleLookAhead4 returns [EObject current=null] : ( ( (lv_x_0_0= 'c' ) ) | ( (lv_x_1_0= 'd' ) ) ) ;
+    // InternalLookaheadTestLanguage.g:373:1: ruleLookAhead4 returns [EObject current=null] : ( ( (lv_x_0_0= 'c' ) ) | ( (lv_x_1_0= 'd' ) ) ) ;
     public final EObject ruleLookAhead4() throws RecognitionException {
         EObject current = null;
 
         Token lv_x_0_0=null;
         Token lv_x_1_0=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalLookaheadTestLanguage.g:399:28: ( ( ( (lv_x_0_0= 'c' ) ) | ( (lv_x_1_0= 'd' ) ) ) )
-            // InternalLookaheadTestLanguage.g:400:1: ( ( (lv_x_0_0= 'c' ) ) | ( (lv_x_1_0= 'd' ) ) )
+            // InternalLookaheadTestLanguage.g:379:2: ( ( ( (lv_x_0_0= 'c' ) ) | ( (lv_x_1_0= 'd' ) ) ) )
+            // InternalLookaheadTestLanguage.g:380:2: ( ( (lv_x_0_0= 'c' ) ) | ( (lv_x_1_0= 'd' ) ) )
             {
-            // InternalLookaheadTestLanguage.g:400:1: ( ( (lv_x_0_0= 'c' ) ) | ( (lv_x_1_0= 'd' ) ) )
+            // InternalLookaheadTestLanguage.g:380:2: ( ( (lv_x_0_0= 'c' ) ) | ( (lv_x_1_0= 'd' ) ) )
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -976,24 +996,24 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
             }
             switch (alt4) {
                 case 1 :
-                    // InternalLookaheadTestLanguage.g:400:2: ( (lv_x_0_0= 'c' ) )
+                    // InternalLookaheadTestLanguage.g:381:3: ( (lv_x_0_0= 'c' ) )
                     {
-                    // InternalLookaheadTestLanguage.g:400:2: ( (lv_x_0_0= 'c' ) )
-                    // InternalLookaheadTestLanguage.g:401:1: (lv_x_0_0= 'c' )
+                    // InternalLookaheadTestLanguage.g:381:3: ( (lv_x_0_0= 'c' ) )
+                    // InternalLookaheadTestLanguage.g:382:4: (lv_x_0_0= 'c' )
                     {
-                    // InternalLookaheadTestLanguage.g:401:1: (lv_x_0_0= 'c' )
-                    // InternalLookaheadTestLanguage.g:402:3: lv_x_0_0= 'c'
+                    // InternalLookaheadTestLanguage.g:382:4: (lv_x_0_0= 'c' )
+                    // InternalLookaheadTestLanguage.g:383:5: lv_x_0_0= 'c'
                     {
                     lv_x_0_0=(Token)match(input,16,FollowSets000.FOLLOW_2); 
 
-                            newLeafNode(lv_x_0_0, grammarAccess.getLookAhead4Access().getXCKeyword_0_0());
-                        
+                    					newLeafNode(lv_x_0_0, grammarAccess.getLookAhead4Access().getXCKeyword_0_0());
+                    				
 
-                    	        if (current==null) {
-                    	            current = createModelElement(grammarAccess.getLookAhead4Rule());
-                    	        }
-                           		setWithLastConsumed(current, "x", lv_x_0_0, "c");
-                    	    
+                    					if (current==null) {
+                    						current = createModelElement(grammarAccess.getLookAhead4Rule());
+                    					}
+                    					setWithLastConsumed(current, "x", lv_x_0_0, "c");
+                    				
 
                     }
 
@@ -1004,24 +1024,24 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
                     }
                     break;
                 case 2 :
-                    // InternalLookaheadTestLanguage.g:416:6: ( (lv_x_1_0= 'd' ) )
+                    // InternalLookaheadTestLanguage.g:396:3: ( (lv_x_1_0= 'd' ) )
                     {
-                    // InternalLookaheadTestLanguage.g:416:6: ( (lv_x_1_0= 'd' ) )
-                    // InternalLookaheadTestLanguage.g:417:1: (lv_x_1_0= 'd' )
+                    // InternalLookaheadTestLanguage.g:396:3: ( (lv_x_1_0= 'd' ) )
+                    // InternalLookaheadTestLanguage.g:397:4: (lv_x_1_0= 'd' )
                     {
-                    // InternalLookaheadTestLanguage.g:417:1: (lv_x_1_0= 'd' )
-                    // InternalLookaheadTestLanguage.g:418:3: lv_x_1_0= 'd'
+                    // InternalLookaheadTestLanguage.g:397:4: (lv_x_1_0= 'd' )
+                    // InternalLookaheadTestLanguage.g:398:5: lv_x_1_0= 'd'
                     {
                     lv_x_1_0=(Token)match(input,15,FollowSets000.FOLLOW_2); 
 
-                            newLeafNode(lv_x_1_0, grammarAccess.getLookAhead4Access().getXDKeyword_1_0());
-                        
+                    					newLeafNode(lv_x_1_0, grammarAccess.getLookAhead4Access().getXDKeyword_1_0());
+                    				
 
-                    	        if (current==null) {
-                    	            current = createModelElement(grammarAccess.getLookAhead4Rule());
-                    	        }
-                           		setWithLastConsumed(current, "x", lv_x_1_0, "d");
-                    	    
+                    					if (current==null) {
+                    						current = createModelElement(grammarAccess.getLookAhead4Rule());
+                    					}
+                    					setWithLastConsumed(current, "x", lv_x_1_0, "d");
+                    				
 
                     }
 
@@ -1037,13 +1057,15 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;

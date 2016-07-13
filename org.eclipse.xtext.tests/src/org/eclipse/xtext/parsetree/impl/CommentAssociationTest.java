@@ -20,11 +20,11 @@ import org.eclipse.xtext.parsetree.impl.commentAssociation.CommentAssociationFac
 import org.eclipse.xtext.parsetree.impl.commentAssociation.Element;
 import org.eclipse.xtext.parsetree.impl.commentAssociation.Model;
 import org.eclipse.xtext.parsetree.reconstr.ICommentAssociater;
-import org.eclipse.xtext.parsetree.reconstr.Serializer;
 import org.eclipse.xtext.resource.SaveOptions;
 import org.eclipse.xtext.serializer.ISerializer;
 import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.eclipse.xtext.util.ReplaceRegion;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.google.common.collect.ArrayListMultimap;
@@ -33,7 +33,6 @@ import com.google.common.collect.Multimap;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-@SuppressWarnings("deprecation")
 public class CommentAssociationTest extends AbstractXtextTests {
 
 	@Override
@@ -102,6 +101,8 @@ public class CommentAssociationTest extends AbstractXtextTests {
 		checkComments(multimap, z, "// comment pre z\n");
 	}
 
+	// TODO https://github.com/eclipse/xtext-core/issues/32
+	@Ignore
 	@Test public void testSerializeReplacement() throws Exception {
 		String xBlock = 
 				"// comment pre x\n" + 
@@ -131,7 +132,7 @@ public class CommentAssociationTest extends AbstractXtextTests {
 	}
 
 	protected void checkReplaceRegion(Element element, String expectedText, String completeModel) {
-		Serializer serializer = get(Serializer.class);
+		ISerializer serializer = get(ISerializer.class);
 		ReplaceRegion replacement = serializer.serializeReplacement(element, SaveOptions.defaultOptions());
 		assertEquals(expectedText, replacement.getText());
 		assertEquals(completeModel.indexOf(expectedText), replacement.getOffset());
@@ -146,6 +147,8 @@ public class CommentAssociationTest extends AbstractXtextTests {
 		}
 	}
 	
+	// TODO https://github.com/eclipse/xtext-core/issues/32
+	@Ignore
 	@Test public void testCommentsAtEndOfFile() throws Exception {
 		// the text-model without a trailing LB does not work
 		// since the serializer does not know something about the terminal rules
@@ -169,9 +172,5 @@ public class CommentAssociationTest extends AbstractXtextTests {
 		return "element x // comment post x\n parent y element z";
 	}
 	
-	@Override
-	protected ISerializer getSerializer() {
-		return get(Serializer.class);
-	}
 }
 

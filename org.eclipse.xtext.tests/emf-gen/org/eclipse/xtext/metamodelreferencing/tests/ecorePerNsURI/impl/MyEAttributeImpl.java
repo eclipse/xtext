@@ -17,8 +17,6 @@ import org.eclipse.xtext.metamodelreferencing.tests.ecorePerNsURI.EcorePerNsURIP
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>My EAttribute</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * </p>
  *
  * @generated
  */

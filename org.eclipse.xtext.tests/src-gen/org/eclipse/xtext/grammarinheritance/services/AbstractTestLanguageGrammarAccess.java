@@ -3,20 +3,23 @@
  */
 package org.eclipse.xtext.grammarinheritance.services;
 
-import com.google.inject.Singleton;
 import com.google.inject.Inject;
-
+import com.google.inject.Singleton;
 import java.util.List;
-
-import org.eclipse.xtext.*;
-import org.eclipse.xtext.service.GrammarProvider;
-import org.eclipse.xtext.service.AbstractElementFinder.*;
-
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.Group;
+import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
+import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder;
+import org.eclipse.xtext.service.GrammarProvider;
 
 @Singleton
 public class AbstractTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
-	
 	
 	public class InheritedParserRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.grammarinheritance.AbstractTestLanguage.InheritedParserRule");
@@ -28,20 +31,19 @@ public class AbstractTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		//InheritedParserRule mm::AType:
 		//	'element' name=ID
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'element' name=ID
 		public Group getGroup() { return cGroup; }
-
+		
 		//'element'
 		public Keyword getElementKeyword_0() { return cElementKeyword_0; }
-
+		
 		//name=ID
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
-
+		
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 	}
-
 	public class AbstractCallOverridenParserRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.grammarinheritance.AbstractTestLanguage.AbstractCallOverridenParserRule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -52,20 +54,19 @@ public class AbstractTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		/// * SuppressWarnings[noInstantiation] * / AbstractCallOverridenParserRule mm::AModel:
 		//	'overridemodel' elements+=OverridableParserRule*
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'overridemodel' elements+=OverridableParserRule*
 		public Group getGroup() { return cGroup; }
-
+		
 		//'overridemodel'
 		public Keyword getOverridemodelKeyword_0() { return cOverridemodelKeyword_0; }
-
+		
 		//elements+=OverridableParserRule*
 		public Assignment getElementsAssignment_1() { return cElementsAssignment_1; }
-
+		
 		//OverridableParserRule
 		public RuleCall getElementsOverridableParserRuleParserRuleCall_1_0() { return cElementsOverridableParserRuleParserRuleCall_1_0; }
 	}
-
 	public class OverridableParserRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.grammarinheritance.AbstractTestLanguage.OverridableParserRule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -76,20 +77,19 @@ public class AbstractTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		//OverridableParserRule mm::AType:
 		//	'element' name=ID
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'element' name=ID
 		public Group getGroup() { return cGroup; }
-
+		
 		//'element'
 		public Keyword getElementKeyword_0() { return cElementKeyword_0; }
-
+		
 		//name=ID
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
-
+		
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 	}
-
 	public class OverridableParserRule2Elements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.grammarinheritance.AbstractTestLanguage.OverridableParserRule2");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -100,20 +100,19 @@ public class AbstractTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		//OverridableParserRule2 mm::AType:
 		//	'other element' name=STRING
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'other element' name=STRING
 		public Group getGroup() { return cGroup; }
-
+		
 		//'other element'
 		public Keyword getOtherElementKeyword_0() { return cOtherElementKeyword_0; }
-
+		
 		//name=STRING
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
-
+		
 		//STRING
 		public RuleCall getNameSTRINGTerminalRuleCall_1_0() { return cNameSTRINGTerminalRuleCall_1_0; }
 	}
-
 	public class AbstractCallExtendedParserRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.grammarinheritance.AbstractTestLanguage.AbstractCallExtendedParserRule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -124,20 +123,19 @@ public class AbstractTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		/// * SuppressWarnings[noInstantiation] * / AbstractCallExtendedParserRule mm::AModel:
 		//	'extendedmodel' elements+=ExtendableParserRule*
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'extendedmodel' elements+=ExtendableParserRule*
 		public Group getGroup() { return cGroup; }
-
+		
 		//'extendedmodel'
 		public Keyword getExtendedmodelKeyword_0() { return cExtendedmodelKeyword_0; }
-
+		
 		//elements+=ExtendableParserRule*
 		public Assignment getElementsAssignment_1() { return cElementsAssignment_1; }
-
+		
 		//ExtendableParserRule
 		public RuleCall getElementsExtendableParserRuleParserRuleCall_1_0() { return cElementsExtendableParserRuleParserRuleCall_1_0; }
 	}
-
 	public class ExtendableParserRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.grammarinheritance.AbstractTestLanguage.ExtendableParserRule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -148,16 +146,16 @@ public class AbstractTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		//ExtendableParserRule mm::AType:
 		//	'element' name=ID
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'element' name=ID
 		public Group getGroup() { return cGroup; }
-
+		
 		//'element'
 		public Keyword getElementKeyword_0() { return cElementKeyword_0; }
-
+		
 		//name=ID
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
-
+		
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 	}
@@ -173,12 +171,12 @@ public class AbstractTestLanguageGrammarAccess extends AbstractGrammarElementFin
 	private final TerminalRule tID;
 	
 	private final Grammar grammar;
-
+	
 	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public AbstractTestLanguageGrammarAccess(GrammarProvider grammarProvider,
-		TerminalsGrammarAccess gaTerminals) {
+			TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
 		this.pInheritedParserRule = new InheritedParserRuleElements();
@@ -212,7 +210,7 @@ public class AbstractTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		return grammar;
 	}
 	
-
+	
 	public TerminalsGrammarAccess getTerminalsGrammarAccess() {
 		return gaTerminals;
 	}
@@ -227,7 +225,7 @@ public class AbstractTestLanguageGrammarAccess extends AbstractGrammarElementFin
 	public ParserRule getInheritedParserRuleRule() {
 		return getInheritedParserRuleAccess().getRule();
 	}
-
+	
 	/// * SuppressWarnings[noInstantiation] * / AbstractCallOverridenParserRule mm::AModel:
 	//	'overridemodel' elements+=OverridableParserRule*
 	public AbstractCallOverridenParserRuleElements getAbstractCallOverridenParserRuleAccess() {
@@ -237,7 +235,7 @@ public class AbstractTestLanguageGrammarAccess extends AbstractGrammarElementFin
 	public ParserRule getAbstractCallOverridenParserRuleRule() {
 		return getAbstractCallOverridenParserRuleAccess().getRule();
 	}
-
+	
 	//OverridableParserRule mm::AType:
 	//	'element' name=ID
 	public OverridableParserRuleElements getOverridableParserRuleAccess() {
@@ -247,7 +245,7 @@ public class AbstractTestLanguageGrammarAccess extends AbstractGrammarElementFin
 	public ParserRule getOverridableParserRuleRule() {
 		return getOverridableParserRuleAccess().getRule();
 	}
-
+	
 	//OverridableParserRule2 mm::AType:
 	//	'other element' name=STRING
 	public OverridableParserRule2Elements getOverridableParserRule2Access() {
@@ -257,7 +255,7 @@ public class AbstractTestLanguageGrammarAccess extends AbstractGrammarElementFin
 	public ParserRule getOverridableParserRule2Rule() {
 		return getOverridableParserRule2Access().getRule();
 	}
-
+	
 	/// * SuppressWarnings[noInstantiation] * / AbstractCallExtendedParserRule mm::AModel:
 	//	'extendedmodel' elements+=ExtendableParserRule*
 	public AbstractCallExtendedParserRuleElements getAbstractCallExtendedParserRuleAccess() {
@@ -267,7 +265,7 @@ public class AbstractTestLanguageGrammarAccess extends AbstractGrammarElementFin
 	public ParserRule getAbstractCallExtendedParserRuleRule() {
 		return getAbstractCallExtendedParserRuleAccess().getRule();
 	}
-
+	
 	//ExtendableParserRule mm::AType:
 	//	'element' name=ID
 	public ExtendableParserRuleElements getExtendableParserRuleAccess() {
@@ -277,53 +275,53 @@ public class AbstractTestLanguageGrammarAccess extends AbstractGrammarElementFin
 	public ParserRule getExtendableParserRuleRule() {
 		return getExtendableParserRuleAccess().getRule();
 	}
-
+	
 	//terminal REAL returns ecore::EDouble:
 	//	INT '.' INT;
 	public TerminalRule getREALRule() {
 		return tREAL;
-	} 
-
+	}
+	
 	//terminal ID:
 	//	'^'? ('a'..'z' | 'A'..'Z' | 'ö' | 'ä' | 'ü' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return tID;
-	} 
-
+	}
+	
 	//terminal INT returns ecore::EInt:
 	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
-	} 
-
+	}
+	
 	//terminal STRING:
 	//	'"' ('\\' . | !('\\' | '"'))* '"' |
 	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
-	} 
-
+	}
+	
 	//terminal ML_COMMENT:
 	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal SL_COMMENT:
 	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal WS:
 	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
-	} 
-
+	}
+	
 	//terminal ANY_OTHER:
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
-	} 
+	}
 }

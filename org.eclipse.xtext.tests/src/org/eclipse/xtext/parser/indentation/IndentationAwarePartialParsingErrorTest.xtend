@@ -9,6 +9,7 @@ package org.eclipse.xtext.parser.indentation
 
 import com.google.inject.Inject
 import org.eclipse.xtext.parser.indentation.indentationAwareTestLanguage.Tree
+import org.eclipse.xtext.parser.indentation.tests.IndentationAwareTestLanguageInjectorProvider
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.XtextRunner

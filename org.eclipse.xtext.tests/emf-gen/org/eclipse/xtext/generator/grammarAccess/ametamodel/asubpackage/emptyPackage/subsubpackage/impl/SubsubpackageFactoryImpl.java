@@ -31,7 +31,7 @@ public class SubsubpackageFactoryImpl extends EFactoryImpl implements Subsubpack
 	 */
 	public static SubsubpackageFactory init() {
 		try {
-			SubsubpackageFactory theSubsubpackageFactory = (SubsubpackageFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/xtext/tests/grammarAccess/subsubpackage"); 
+			SubsubpackageFactory theSubsubpackageFactory = (SubsubpackageFactory)EPackage.Registry.INSTANCE.getEFactory(SubsubpackagePackage.eNS_URI);
 			if (theSubsubpackageFactory != null) {
 				return theSubsubpackageFactory;
 			}

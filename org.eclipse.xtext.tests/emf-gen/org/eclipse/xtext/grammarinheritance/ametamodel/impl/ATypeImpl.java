@@ -11,8 +11,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.EObjectImpl;
-
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.xtext.grammarinheritance.ametamodel.AType;
 import org.eclipse.xtext.grammarinheritance.ametamodel.AmetamodelPackage;
 
@@ -22,14 +21,14 @@ import org.eclipse.xtext.grammarinheritance.ametamodel.AmetamodelPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.grammarinheritance.ametamodel.impl.ATypeImpl#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
-public class ATypeImpl extends EObjectImpl implements AType {
+public class ATypeImpl extends MinimalEObjectImpl.Container implements AType {
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->

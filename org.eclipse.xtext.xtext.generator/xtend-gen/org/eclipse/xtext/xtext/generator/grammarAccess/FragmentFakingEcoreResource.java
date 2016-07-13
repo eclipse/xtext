@@ -119,11 +119,15 @@ public class FragmentFakingEcoreResource extends XMIResourceImpl {
             String _name = ePackage.getName();
             StringBuilder _append = result.append(_name);
             _append.append("/");
-            return;
+          } else {
+            result.append("//");
           }
         }
+      } else {
+        result.append("//");
       }
+    } else {
+      result.append("//");
     }
-    result.append("//");
   }
 }

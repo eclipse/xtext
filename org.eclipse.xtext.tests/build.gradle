@@ -14,21 +14,16 @@ dependencies {
 	compile "org.eclipse.emf:org.eclipse.emf.ecore.xmi:$versions.emfEcore"
 	// From the 'lib' folder
     compile name: 'simple'
-	
-	mwe2Compile "org.eclipse.xpand:org.eclipse.xpand:$versions.xpand"
-	mwe2Compile "org.eclipse.xtext:org.eclipse.xtext.generator:$versions.xtext_bootstrap"
-	mwe2Compile "org.eclipse.xtext:org.eclipse.xtext.xtext.generator:$versions.xtext_bootstrap"
-	mwe2Compile "org.eclipse.xtext:org.eclipse.xtext.ecore:$versions.xtext_bootstrap"
 	mwe2Runtime "org.eclipse.emf:org.eclipse.emf.mwe2.launch:$versions.emfMwe2"
 }
 
 sourceSets.test.java {
-	srcDir 'src-gen2'
 	srcDir 'suites'
 }
 
-sourceSets.test.resources {
-	srcDir 'src-gen2'
+sourceSets.mwe2.java {
+	srcDir 'generator/src'
+	srcDir 'generator/xtend-gen'
 }
 
 test {

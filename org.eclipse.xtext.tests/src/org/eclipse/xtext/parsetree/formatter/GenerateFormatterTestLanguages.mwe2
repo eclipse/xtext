@@ -10,14 +10,11 @@ module org.eclipse.xtext.parsetree.formatter.GenerateFormatterTestLanguages
 import org.eclipse.emf.mwe2.runtime.workflow.Workflow
 import org.eclipse.emf.mwe.utils.*
 import org.eclipse.xtext.*
-import org.eclipse.xtext.generator.*
+import org.eclipse.xtext.xtext.generator.*
 
 var projectName = "org.eclipse.xtext.tests"
 var runtimeProject = "../${projectName}"
 var lineDelimiter = '\n'
-
-//var generateDotDiagram = true
-//var graphvizCommand = "/opt/local/bin/dot -o %1.pdf -v -T pdf"
 
 Workflow {
 	bean = StandaloneSetup {
@@ -28,18 +25,25 @@ Workflow {
 		directory = "${runtimeProject}/src-gen/org/eclipse/xtext/parsetree/formatter"
 	}
 	
-	component = Generator auto-inject {
-		pathRtProject = runtimeProject
-		projectNameRt = projectName
-		
-		language = {
-			uri = "classpath:/org/eclipse/xtext/parsetree/formatter/FormatterTestLanguage.xtext"
-			fragment = @TestLanguagesFragments auto-inject {}
+	component = XtextGenerator {
+		cleaner = {
+			enabled = false
+		}
+		configuration = {
+			project = model.project.StandardProjectConfig {
+				baseName = projectName
+				rootPath = ".."
+			}
+			code = {
+				encoding = 'ISO-8859-1'
+				lineDelimiter = lineDelimiter
+				preferXtendStubs = false
+			}
 		}
 		
 		language = {
-			uri = "classpath:/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.xtext"
-			fragment = @TestLanguagesFragmentsParseTreeConstructor auto-inject {}
+			grammarUri = "classpath:/org/eclipse/xtext/parsetree/formatter/FormatterTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
 		}
 	}
 }

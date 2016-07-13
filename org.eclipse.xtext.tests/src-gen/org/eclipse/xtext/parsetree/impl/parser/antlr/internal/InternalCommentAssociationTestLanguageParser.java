@@ -1,4 +1,4 @@
-package org.eclipse.xtext.parsetree.impl.parser.antlr.internal; 
+package org.eclipse.xtext.parsetree.impl.parser.antlr.internal;
 
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
@@ -53,18 +53,18 @@ public class InternalCommentAssociationTestLanguageParser extends AbstractIntern
 
 
      	private CommentAssociationTestLanguageGrammarAccess grammarAccess;
-     	
+
         public InternalCommentAssociationTestLanguageParser(TokenStream input, CommentAssociationTestLanguageGrammarAccess grammarAccess) {
             this(input);
             this.grammarAccess = grammarAccess;
             registerRules(grammarAccess.getGrammar());
         }
-        
+
         @Override
         protected String getFirstRuleName() {
-        	return "Model";	
+        	return "Model";
        	}
-       	
+
        	@Override
        	protected CommentAssociationTestLanguageGrammarAccess getGrammarAccess() {
        		return grammarAccess;
@@ -72,8 +72,9 @@ public class InternalCommentAssociationTestLanguageParser extends AbstractIntern
 
 
 
+
     // $ANTLR start "entryRuleModel"
-    // InternalCommentAssociationTestLanguage.g:67:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
+    // InternalCommentAssociationTestLanguage.g:64:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
     public final EObject entryRuleModel() throws RecognitionException {
         EObject current = null;
 
@@ -81,8 +82,8 @@ public class InternalCommentAssociationTestLanguageParser extends AbstractIntern
 
 
         try {
-            // InternalCommentAssociationTestLanguage.g:68:2: (iv_ruleModel= ruleModel EOF )
-            // InternalCommentAssociationTestLanguage.g:69:2: iv_ruleModel= ruleModel EOF
+            // InternalCommentAssociationTestLanguage.g:64:46: (iv_ruleModel= ruleModel EOF )
+            // InternalCommentAssociationTestLanguage.g:65:2: iv_ruleModel= ruleModel EOF
             {
              newCompositeNode(grammarAccess.getModelRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -96,11 +97,11 @@ public class InternalCommentAssociationTestLanguageParser extends AbstractIntern
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -109,20 +110,21 @@ public class InternalCommentAssociationTestLanguageParser extends AbstractIntern
 
 
     // $ANTLR start "ruleModel"
-    // InternalCommentAssociationTestLanguage.g:76:1: ruleModel returns [EObject current=null] : ( (lv_elements_0_0= ruleElement ) )* ;
+    // InternalCommentAssociationTestLanguage.g:71:1: ruleModel returns [EObject current=null] : ( (lv_elements_0_0= ruleElement ) )* ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
         EObject lv_elements_0_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalCommentAssociationTestLanguage.g:79:28: ( ( (lv_elements_0_0= ruleElement ) )* )
-            // InternalCommentAssociationTestLanguage.g:80:1: ( (lv_elements_0_0= ruleElement ) )*
+            // InternalCommentAssociationTestLanguage.g:77:2: ( ( (lv_elements_0_0= ruleElement ) )* )
+            // InternalCommentAssociationTestLanguage.g:78:2: ( (lv_elements_0_0= ruleElement ) )*
             {
-            // InternalCommentAssociationTestLanguage.g:80:1: ( (lv_elements_0_0= ruleElement ) )*
+            // InternalCommentAssociationTestLanguage.g:78:2: ( (lv_elements_0_0= ruleElement ) )*
             loop1:
             do {
                 int alt1=2;
@@ -135,30 +137,30 @@ public class InternalCommentAssociationTestLanguageParser extends AbstractIntern
 
                 switch (alt1) {
             	case 1 :
-            	    // InternalCommentAssociationTestLanguage.g:81:1: (lv_elements_0_0= ruleElement )
+            	    // InternalCommentAssociationTestLanguage.g:79:3: (lv_elements_0_0= ruleElement )
             	    {
-            	    // InternalCommentAssociationTestLanguage.g:81:1: (lv_elements_0_0= ruleElement )
-            	    // InternalCommentAssociationTestLanguage.g:82:3: lv_elements_0_0= ruleElement
+            	    // InternalCommentAssociationTestLanguage.g:79:3: (lv_elements_0_0= ruleElement )
+            	    // InternalCommentAssociationTestLanguage.g:80:4: lv_elements_0_0= ruleElement
             	    {
-            	     
-            	    	        newCompositeNode(grammarAccess.getModelAccess().getElementsElementParserRuleCall_0()); 
-            	    	    
+
+            	    				newCompositeNode(grammarAccess.getModelAccess().getElementsElementParserRuleCall_0());
+            	    			
             	    pushFollow(FollowSets000.FOLLOW_3);
             	    lv_elements_0_0=ruleElement();
 
             	    state._fsp--;
 
 
-            	    	        if (current==null) {
-            	    	            current = createModelElementForParent(grammarAccess.getModelRule());
-            	    	        }
-            	           		add(
-            	           			current, 
-            	           			"elements",
-            	            		lv_elements_0_0, 
-            	            		"org.eclipse.xtext.parsetree.impl.CommentAssociationTestLanguage.Element");
-            	    	        afterParserOrEnumRuleCall();
-            	    	    
+            	    				if (current==null) {
+            	    					current = createModelElementForParent(grammarAccess.getModelRule());
+            	    				}
+            	    				add(
+            	    					current,
+            	    					"elements",
+            	    					lv_elements_0_0,
+            	    					"org.eclipse.xtext.parsetree.impl.CommentAssociationTestLanguage.Element");
+            	    				afterParserOrEnumRuleCall();
+            	    			
 
             	    }
 
@@ -174,13 +176,15 @@ public class InternalCommentAssociationTestLanguageParser extends AbstractIntern
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -189,7 +193,7 @@ public class InternalCommentAssociationTestLanguageParser extends AbstractIntern
 
 
     // $ANTLR start "entryRuleElement"
-    // InternalCommentAssociationTestLanguage.g:106:1: entryRuleElement returns [EObject current=null] : iv_ruleElement= ruleElement EOF ;
+    // InternalCommentAssociationTestLanguage.g:100:1: entryRuleElement returns [EObject current=null] : iv_ruleElement= ruleElement EOF ;
     public final EObject entryRuleElement() throws RecognitionException {
         EObject current = null;
 
@@ -197,8 +201,8 @@ public class InternalCommentAssociationTestLanguageParser extends AbstractIntern
 
 
         try {
-            // InternalCommentAssociationTestLanguage.g:107:2: (iv_ruleElement= ruleElement EOF )
-            // InternalCommentAssociationTestLanguage.g:108:2: iv_ruleElement= ruleElement EOF
+            // InternalCommentAssociationTestLanguage.g:100:48: (iv_ruleElement= ruleElement EOF )
+            // InternalCommentAssociationTestLanguage.g:101:2: iv_ruleElement= ruleElement EOF
             {
              newCompositeNode(grammarAccess.getElementRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -212,11 +216,11 @@ public class InternalCommentAssociationTestLanguageParser extends AbstractIntern
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -225,7 +229,7 @@ public class InternalCommentAssociationTestLanguageParser extends AbstractIntern
 
 
     // $ANTLR start "ruleElement"
-    // InternalCommentAssociationTestLanguage.g:115:1: ruleElement returns [EObject current=null] : (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) ( () otherlv_3= 'parent' ( (lv_name_4_0= RULE_ID ) ) )? ) ;
+    // InternalCommentAssociationTestLanguage.g:107:1: ruleElement returns [EObject current=null] : (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) ( () otherlv_3= 'parent' ( (lv_name_4_0= RULE_ID ) ) )? ) ;
     public final EObject ruleElement() throws RecognitionException {
         EObject current = null;
 
@@ -234,46 +238,47 @@ public class InternalCommentAssociationTestLanguageParser extends AbstractIntern
         Token otherlv_3=null;
         Token lv_name_4_0=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalCommentAssociationTestLanguage.g:118:28: ( (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) ( () otherlv_3= 'parent' ( (lv_name_4_0= RULE_ID ) ) )? ) )
-            // InternalCommentAssociationTestLanguage.g:119:1: (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) ( () otherlv_3= 'parent' ( (lv_name_4_0= RULE_ID ) ) )? )
+            // InternalCommentAssociationTestLanguage.g:113:2: ( (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) ( () otherlv_3= 'parent' ( (lv_name_4_0= RULE_ID ) ) )? ) )
+            // InternalCommentAssociationTestLanguage.g:114:2: (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) ( () otherlv_3= 'parent' ( (lv_name_4_0= RULE_ID ) ) )? )
             {
-            // InternalCommentAssociationTestLanguage.g:119:1: (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) ( () otherlv_3= 'parent' ( (lv_name_4_0= RULE_ID ) ) )? )
-            // InternalCommentAssociationTestLanguage.g:119:3: otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) ( () otherlv_3= 'parent' ( (lv_name_4_0= RULE_ID ) ) )?
+            // InternalCommentAssociationTestLanguage.g:114:2: (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) ( () otherlv_3= 'parent' ( (lv_name_4_0= RULE_ID ) ) )? )
+            // InternalCommentAssociationTestLanguage.g:115:3: otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) ( () otherlv_3= 'parent' ( (lv_name_4_0= RULE_ID ) ) )?
             {
             otherlv_0=(Token)match(input,11,FollowSets000.FOLLOW_4); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getElementAccess().getElementKeyword_0());
-                
-            // InternalCommentAssociationTestLanguage.g:123:1: ( (lv_name_1_0= RULE_ID ) )
-            // InternalCommentAssociationTestLanguage.g:124:1: (lv_name_1_0= RULE_ID )
+            			newLeafNode(otherlv_0, grammarAccess.getElementAccess().getElementKeyword_0());
+            		
+            // InternalCommentAssociationTestLanguage.g:119:3: ( (lv_name_1_0= RULE_ID ) )
+            // InternalCommentAssociationTestLanguage.g:120:4: (lv_name_1_0= RULE_ID )
             {
-            // InternalCommentAssociationTestLanguage.g:124:1: (lv_name_1_0= RULE_ID )
-            // InternalCommentAssociationTestLanguage.g:125:3: lv_name_1_0= RULE_ID
+            // InternalCommentAssociationTestLanguage.g:120:4: (lv_name_1_0= RULE_ID )
+            // InternalCommentAssociationTestLanguage.g:121:5: lv_name_1_0= RULE_ID
             {
             lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_5); 
 
-            			newLeafNode(lv_name_1_0, grammarAccess.getElementAccess().getNameIDTerminalRuleCall_1_0()); 
-            		
+            					newLeafNode(lv_name_1_0, grammarAccess.getElementAccess().getNameIDTerminalRuleCall_1_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getElementRule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"name",
-                    		lv_name_1_0, 
-                    		"org.eclipse.xtext.common.Terminals.ID");
-            	    
-
-            }
-
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getElementRule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"name",
+            						lv_name_1_0,
+            						"org.eclipse.xtext.common.Terminals.ID");
+            				
 
             }
 
-            // InternalCommentAssociationTestLanguage.g:141:2: ( () otherlv_3= 'parent' ( (lv_name_4_0= RULE_ID ) ) )?
+
+            }
+
+            // InternalCommentAssociationTestLanguage.g:137:3: ( () otherlv_3= 'parent' ( (lv_name_4_0= RULE_ID ) ) )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -282,43 +287,43 @@ public class InternalCommentAssociationTestLanguageParser extends AbstractIntern
             }
             switch (alt2) {
                 case 1 :
-                    // InternalCommentAssociationTestLanguage.g:141:3: () otherlv_3= 'parent' ( (lv_name_4_0= RULE_ID ) )
+                    // InternalCommentAssociationTestLanguage.g:138:4: () otherlv_3= 'parent' ( (lv_name_4_0= RULE_ID ) )
                     {
-                    // InternalCommentAssociationTestLanguage.g:141:3: ()
-                    // InternalCommentAssociationTestLanguage.g:142:5: 
+                    // InternalCommentAssociationTestLanguage.g:138:4: ()
+                    // InternalCommentAssociationTestLanguage.g:139:5: 
                     {
 
-                            current = forceCreateModelElementAndSet(
-                                grammarAccess.getElementAccess().getElementChildAction_2_0(),
-                                current);
-                        
+                    					current = forceCreateModelElementAndSet(
+                    						grammarAccess.getElementAccess().getElementChildAction_2_0(),
+                    						current);
+                    				
 
                     }
 
                     otherlv_3=(Token)match(input,12,FollowSets000.FOLLOW_4); 
 
-                        	newLeafNode(otherlv_3, grammarAccess.getElementAccess().getParentKeyword_2_1());
-                        
-                    // InternalCommentAssociationTestLanguage.g:151:1: ( (lv_name_4_0= RULE_ID ) )
-                    // InternalCommentAssociationTestLanguage.g:152:1: (lv_name_4_0= RULE_ID )
+                    				newLeafNode(otherlv_3, grammarAccess.getElementAccess().getParentKeyword_2_1());
+                    			
+                    // InternalCommentAssociationTestLanguage.g:149:4: ( (lv_name_4_0= RULE_ID ) )
+                    // InternalCommentAssociationTestLanguage.g:150:5: (lv_name_4_0= RULE_ID )
                     {
-                    // InternalCommentAssociationTestLanguage.g:152:1: (lv_name_4_0= RULE_ID )
-                    // InternalCommentAssociationTestLanguage.g:153:3: lv_name_4_0= RULE_ID
+                    // InternalCommentAssociationTestLanguage.g:150:5: (lv_name_4_0= RULE_ID )
+                    // InternalCommentAssociationTestLanguage.g:151:6: lv_name_4_0= RULE_ID
                     {
                     lv_name_4_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
-                    			newLeafNode(lv_name_4_0, grammarAccess.getElementAccess().getNameIDTerminalRuleCall_2_2_0()); 
-                    		
+                    						newLeafNode(lv_name_4_0, grammarAccess.getElementAccess().getNameIDTerminalRuleCall_2_2_0());
+                    					
 
-                    	        if (current==null) {
-                    	            current = createModelElement(grammarAccess.getElementRule());
-                    	        }
-                           		setWithLastConsumed(
-                           			current, 
-                           			"name",
-                            		lv_name_4_0, 
-                            		"org.eclipse.xtext.common.Terminals.ID");
-                    	    
+                    						if (current==null) {
+                    							current = createModelElement(grammarAccess.getElementRule());
+                    						}
+                    						setWithLastConsumed(
+                    							current,
+                    							"name",
+                    							lv_name_4_0,
+                    							"org.eclipse.xtext.common.Terminals.ID");
+                    					
 
                     }
 
@@ -337,13 +342,15 @@ public class InternalCommentAssociationTestLanguageParser extends AbstractIntern
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;

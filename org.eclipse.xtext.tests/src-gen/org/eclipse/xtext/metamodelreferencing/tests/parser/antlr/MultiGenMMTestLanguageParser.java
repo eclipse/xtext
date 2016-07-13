@@ -4,36 +4,37 @@
 package org.eclipse.xtext.metamodelreferencing.tests.parser.antlr;
 
 import com.google.inject.Inject;
-
-import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.metamodelreferencing.tests.parser.antlr.internal.InternalMultiGenMMTestLanguageParser;
 import org.eclipse.xtext.metamodelreferencing.tests.services.MultiGenMMTestLanguageGrammarAccess;
+import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
-public class MultiGenMMTestLanguageParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {
-	
+public class MultiGenMMTestLanguageParser extends AbstractAntlrParser {
+
 	@Inject
 	private MultiGenMMTestLanguageGrammarAccess grammarAccess;
-	
+
 	@Override
 	protected void setInitialHiddenTokens(XtextTokenStream tokenStream) {
 		tokenStream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
 	}
 	
+
 	@Override
-	protected org.eclipse.xtext.metamodelreferencing.tests.parser.antlr.internal.InternalMultiGenMMTestLanguageParser createParser(XtextTokenStream stream) {
-		return new org.eclipse.xtext.metamodelreferencing.tests.parser.antlr.internal.InternalMultiGenMMTestLanguageParser(stream, getGrammarAccess());
+	protected InternalMultiGenMMTestLanguageParser createParser(XtextTokenStream stream) {
+		return new InternalMultiGenMMTestLanguageParser(stream, getGrammarAccess());
 	}
-	
+
 	@Override 
 	protected String getDefaultRuleName() {
 		return "Foo";
 	}
-	
+
 	public MultiGenMMTestLanguageGrammarAccess getGrammarAccess() {
 		return this.grammarAccess;
 	}
-	
+
 	public void setGrammarAccess(MultiGenMMTestLanguageGrammarAccess grammarAccess) {
 		this.grammarAccess = grammarAccess;
 	}
-	
 }

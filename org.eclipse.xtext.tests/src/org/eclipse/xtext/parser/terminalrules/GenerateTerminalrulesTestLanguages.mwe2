@@ -10,7 +10,7 @@ module org.eclipse.xtext.parser.terminalrules.GenerateTerminalrulesTestLanguages
 import org.eclipse.emf.mwe2.runtime.workflow.Workflow
 import org.eclipse.emf.mwe.utils.*
 import org.eclipse.xtext.*
-import org.eclipse.xtext.generator.*
+import org.eclipse.xtext.xtext.generator.*
 
 var projectName = "org.eclipse.xtext.tests"
 var runtimeProject = "../${projectName}"
@@ -25,42 +25,54 @@ Workflow {
 		directory = "${runtimeProject}/src-gen/org/eclipse/xtext/parser/terminalrules"
 	}
 	
-	component = Generator auto-inject {
-		pathRtProject = runtimeProject
-		projectNameRt = projectName
+	component = XtextGenerator {
+		cleaner = {
+			enabled = false
+		}
+		configuration = {
+			project = model.project.StandardProjectConfig {
+				baseName = projectName
+				rootPath = ".."
+			}
+			code = {
+				encoding = 'ISO-8859-1'
+				lineDelimiter = lineDelimiter
+				preferXtendStubs = false
+			}
+		}
 		
 		language = {
-			uri = "classpath:/org/eclipse/xtext/parser/terminalrules/Bug292245TestLanguage.xtext"
+			grammarUri = "classpath:/org/eclipse/xtext/parser/terminalrules/Bug292245TestLanguage.xtext"
 			fragment = @TestLanguagesFragments {}
 		}
 		language = {
-			uri = "classpath:/org/eclipse/xtext/parser/terminalrules/Bug297105TestLanguage.xtext"
+			grammarUri = "classpath:/org/eclipse/xtext/parser/terminalrules/Bug297105TestLanguage.xtext"
 			fragment = @TestLanguagesFragments {
 				backtrack = true 
 			}
 		}
 		language = {
-			uri = "classpath:/org/eclipse/xtext/parser/terminalrules/Bug317840TestLanguage.xtext"
+			grammarUri = "classpath:/org/eclipse/xtext/parser/terminalrules/Bug317840TestLanguage.xtext"
 			fragment = @TestLanguagesFragments {}
 		}
 		language = {
-			uri = "classpath:/org/eclipse/xtext/parser/terminalrules/EcoreTerminalsTestLanguage.xtext"
+			grammarUri = "classpath:/org/eclipse/xtext/parser/terminalrules/EcoreTerminalsTestLanguage.xtext"
 			fragment = @TestLanguagesFragments {}
 		}
 		language = {
-			uri = "classpath:/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.xtext"
+			grammarUri = "classpath:/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.xtext"
 			fragment = @TestLanguagesFragments {}
 		}
 		language = {
-			uri = "classpath:/org/eclipse/xtext/parser/terminalrules/TerminalRulesTestLanguage.xtext"
+			grammarUri = "classpath:/org/eclipse/xtext/parser/terminalrules/TerminalRulesTestLanguage.xtext"
 			fragment = @TestLanguagesFragments {}
 		}
 		language = {
-			uri = "classpath:/org/eclipse/xtext/parser/terminalrules/UnicodeTestLanguage.xtext"
+			grammarUri = "classpath:/org/eclipse/xtext/parser/terminalrules/UnicodeTestLanguage.xtext"
 			fragment = @TestLanguagesFragments {}
 		}
 		language = {
-			uri = "classpath:/org/eclipse/xtext/parser/terminalrules/XtextTerminalsTestLanguage.xtext"
+			grammarUri = "classpath:/org/eclipse/xtext/parser/terminalrules/XtextTerminalsTestLanguage.xtext"
 			fragment = @TestLanguagesFragments {}
 		}
 	}

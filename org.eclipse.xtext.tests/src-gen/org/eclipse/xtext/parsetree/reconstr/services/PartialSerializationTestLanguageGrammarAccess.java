@@ -3,20 +3,23 @@
  */
 package org.eclipse.xtext.parsetree.reconstr.services;
 
-import com.google.inject.Singleton;
 import com.google.inject.Inject;
-
+import com.google.inject.Singleton;
 import java.util.List;
-
-import org.eclipse.xtext.*;
-import org.eclipse.xtext.service.GrammarProvider;
-import org.eclipse.xtext.service.AbstractElementFinder.*;
-
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.Group;
+import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
+import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder;
+import org.eclipse.xtext.service.GrammarProvider;
 
 @Singleton
 public class PartialSerializationTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
-	
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.PartialSerializationTestLanguage.Model");
@@ -25,11 +28,10 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractGramm
 		//Model:
 		//	NodeRoot;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//NodeRoot
 		public RuleCall getNodeRootParserRuleCall() { return cNodeRootParserRuleCall; }
 	}
-
 	public class NodeRootElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.PartialSerializationTestLanguage.NodeRoot");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -40,20 +42,19 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractGramm
 		//NodeRoot:
 		//	"#1" node=Node;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//"#1" node=Node
 		public Group getGroup() { return cGroup; }
-
+		
 		//"#1"
 		public Keyword getNumberSignDigitOneKeyword_0() { return cNumberSignDigitOneKeyword_0; }
-
+		
 		//node=Node
 		public Assignment getNodeAssignment_1() { return cNodeAssignment_1; }
-
+		
 		//Node
 		public RuleCall getNodeNodeParserRuleCall_1_0() { return cNodeNodeParserRuleCall_1_0; }
 	}
-
 	public class NodeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.PartialSerializationTestLanguage.Node");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -69,31 +70,31 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractGramm
 		//Node:
 		//	"node" name=ID ("(" children+=Node+ ")")?;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//"node" name=ID ("(" children+=Node+ ")")?
 		public Group getGroup() { return cGroup; }
-
+		
 		//"node"
 		public Keyword getNodeKeyword_0() { return cNodeKeyword_0; }
-
+		
 		//name=ID
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
-
+		
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
-
+		
 		//("(" children+=Node+ ")")?
 		public Group getGroup_2() { return cGroup_2; }
-
+		
 		//"("
 		public Keyword getLeftParenthesisKeyword_2_0() { return cLeftParenthesisKeyword_2_0; }
-
+		
 		//children+=Node+
 		public Assignment getChildrenAssignment_2_1() { return cChildrenAssignment_2_1; }
-
+		
 		//Node
 		public RuleCall getChildrenNodeParserRuleCall_2_1_0() { return cChildrenNodeParserRuleCall_2_1_0; }
-
+		
 		//")"
 		public Keyword getRightParenthesisKeyword_2_2() { return cRightParenthesisKeyword_2_2; }
 	}
@@ -104,12 +105,12 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractGramm
 	private final NodeElements pNode;
 	
 	private final Grammar grammar;
-
+	
 	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public PartialSerializationTestLanguageGrammarAccess(GrammarProvider grammarProvider,
-		TerminalsGrammarAccess gaTerminals) {
+			TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
 		this.pModel = new ModelElements();
@@ -138,7 +139,7 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractGramm
 		return grammar;
 	}
 	
-
+	
 	public TerminalsGrammarAccess getTerminalsGrammarAccess() {
 		return gaTerminals;
 	}
@@ -153,7 +154,7 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractGramm
 	public ParserRule getModelRule() {
 		return getModelAccess().getRule();
 	}
-
+	
 	//NodeRoot:
 	//	"#1" node=Node;
 	public NodeRootElements getNodeRootAccess() {
@@ -163,7 +164,7 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractGramm
 	public ParserRule getNodeRootRule() {
 		return getNodeRootAccess().getRule();
 	}
-
+	
 	//Node:
 	//	"node" name=ID ("(" children+=Node+ ")")?;
 	public NodeElements getNodeAccess() {
@@ -173,47 +174,47 @@ public class PartialSerializationTestLanguageGrammarAccess extends AbstractGramm
 	public ParserRule getNodeRule() {
 		return getNodeAccess().getRule();
 	}
-
+	
 	//terminal ID:
 	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
-	} 
-
+	}
+	
 	//terminal INT returns ecore::EInt:
 	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
-	} 
-
+	}
+	
 	//terminal STRING:
 	//	'"' ('\\' . | !('\\' | '"'))* '"' |
 	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
-	} 
-
+	}
+	
 	//terminal ML_COMMENT:
 	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal SL_COMMENT:
 	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal WS:
 	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
-	} 
-
+	}
+	
 	//terminal ANY_OTHER:
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
-	} 
+	}
 }

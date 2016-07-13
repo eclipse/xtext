@@ -4,10 +4,12 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parsetree.reconstr.complexrewritetest.ComplexrewritetestPackage;
 import org.eclipse.xtext.resource.SaveOptions;
+import org.eclipse.xtext.serializer.ISerializer;
 import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.junit.Test;
 
 public class WhitespacePreservingCallbackTest extends AbstractXtextTests {
+	
 	@Override
 	public void setUp() throws Exception {
 		super.setUp();
@@ -25,7 +27,7 @@ public class WhitespacePreservingCallbackTest extends AbstractXtextTests {
 	@Test
 	public void testFail1() throws Exception {
 		IAstFactory f = getASTFactory();
-		failsWith(f.create(ComplexrewritetestPackage.Literals.ADD), XtextSerializationException.class);
+		failsWith(f.create(ComplexrewritetestPackage.Literals.ADD));
 	}
 
 	@Test
@@ -37,7 +39,7 @@ public class WhitespacePreservingCallbackTest extends AbstractXtextTests {
 		EObject atom1 = f.create(ComplexrewritetestPackage.Literals.ATOM);
 		f.set(atom1, "name", "x", null, null);
 		f.add(add, "addOperands", atom1, null, null);
-		failsWith(add, XtextSerializationException.class);
+		failsWith(add);
 
 		// two operands VALID
 		EObject atom2 = f.create(ComplexrewritetestPackage.Literals.ATOM);
@@ -49,7 +51,7 @@ public class WhitespacePreservingCallbackTest extends AbstractXtextTests {
 		EObject atom3 = f.create(ComplexrewritetestPackage.Literals.ATOM);
 		f.set(atom3, "name", "x", null, null);
 		f.add(add, "addOperands", atom3, null, null);
-		failsWith(add, XtextSerializationException.class);
+		failsWith(add);
 	}
 
 	private void check(String m1) throws Exception {
@@ -61,15 +63,12 @@ public class WhitespacePreservingCallbackTest extends AbstractXtextTests {
 		return getSerializer().serialize(result, SaveOptions.defaultOptions());
 	}
 
-	@SuppressWarnings("deprecation")
-	private void failsWith(EObject o, Class<? extends RuntimeException> clazz) {
+	private void failsWith(EObject o) {
 		try {
-			get(Serializer.class).serialize(o);
-			fail("Should fail with "+clazz.getSimpleName());
+			get(ISerializer.class).serialize(o);
+			fail("Should fail with RuntimeException");
 		} catch (RuntimeException e) {
-			if (!clazz.isInstance(e)) {
-				throw e;
-			}
+			// Test successful
 		}
 	}
 }

@@ -32,7 +32,7 @@ public class EnumsFactoryImpl extends EFactoryImpl implements EnumsFactory {
 	 */
 	public static EnumsFactory init() {
 		try {
-			EnumsFactory theEnumsFactory = (EnumsFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2009/tmf/xtext/EnumRulesTestLanguage/imported"); 
+			EnumsFactory theEnumsFactory = (EnumsFactory)EPackage.Registry.INSTANCE.getEFactory(EnumsPackage.eNS_URI);
 			if (theEnumsFactory != null) {
 				return theEnumsFactory;
 			}

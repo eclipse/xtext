@@ -1,4 +1,4 @@
-package org.eclipse.xtext.resource.parser.antlr.internal; 
+package org.eclipse.xtext.resource.parser.antlr.internal;
 
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
@@ -51,18 +51,18 @@ public class InternalLiveContainerBuilderIntegerationTestLanguageParser extends 
 
 
      	private LiveContainerBuilderIntegerationTestLanguageGrammarAccess grammarAccess;
-     	
+
         public InternalLiveContainerBuilderIntegerationTestLanguageParser(TokenStream input, LiveContainerBuilderIntegerationTestLanguageGrammarAccess grammarAccess) {
             this(input);
             this.grammarAccess = grammarAccess;
             registerRules(grammarAccess.getGrammar());
         }
-        
+
         @Override
         protected String getFirstRuleName() {
-        	return "Model";	
+        	return "Model";
        	}
-       	
+
        	@Override
        	protected LiveContainerBuilderIntegerationTestLanguageGrammarAccess getGrammarAccess() {
        		return grammarAccess;
@@ -70,8 +70,9 @@ public class InternalLiveContainerBuilderIntegerationTestLanguageParser extends 
 
 
 
+
     // $ANTLR start "entryRuleModel"
-    // InternalLiveContainerBuilderIntegerationTestLanguage.g:67:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
+    // InternalLiveContainerBuilderIntegerationTestLanguage.g:64:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
     public final EObject entryRuleModel() throws RecognitionException {
         EObject current = null;
 
@@ -79,8 +80,8 @@ public class InternalLiveContainerBuilderIntegerationTestLanguageParser extends 
 
 
         try {
-            // InternalLiveContainerBuilderIntegerationTestLanguage.g:68:2: (iv_ruleModel= ruleModel EOF )
-            // InternalLiveContainerBuilderIntegerationTestLanguage.g:69:2: iv_ruleModel= ruleModel EOF
+            // InternalLiveContainerBuilderIntegerationTestLanguage.g:64:46: (iv_ruleModel= ruleModel EOF )
+            // InternalLiveContainerBuilderIntegerationTestLanguage.g:65:2: iv_ruleModel= ruleModel EOF
             {
              newCompositeNode(grammarAccess.getModelRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -94,11 +95,11 @@ public class InternalLiveContainerBuilderIntegerationTestLanguageParser extends 
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -107,54 +108,57 @@ public class InternalLiveContainerBuilderIntegerationTestLanguageParser extends 
 
 
     // $ANTLR start "ruleModel"
-    // InternalLiveContainerBuilderIntegerationTestLanguage.g:76:1: ruleModel returns [EObject current=null] : ( (lv_name_0_0= RULE_ID ) ) ;
+    // InternalLiveContainerBuilderIntegerationTestLanguage.g:71:1: ruleModel returns [EObject current=null] : ( (lv_name_0_0= RULE_ID ) ) ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
         Token lv_name_0_0=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalLiveContainerBuilderIntegerationTestLanguage.g:79:28: ( ( (lv_name_0_0= RULE_ID ) ) )
-            // InternalLiveContainerBuilderIntegerationTestLanguage.g:80:1: ( (lv_name_0_0= RULE_ID ) )
+            // InternalLiveContainerBuilderIntegerationTestLanguage.g:77:2: ( ( (lv_name_0_0= RULE_ID ) ) )
+            // InternalLiveContainerBuilderIntegerationTestLanguage.g:78:2: ( (lv_name_0_0= RULE_ID ) )
             {
-            // InternalLiveContainerBuilderIntegerationTestLanguage.g:80:1: ( (lv_name_0_0= RULE_ID ) )
-            // InternalLiveContainerBuilderIntegerationTestLanguage.g:81:1: (lv_name_0_0= RULE_ID )
+            // InternalLiveContainerBuilderIntegerationTestLanguage.g:78:2: ( (lv_name_0_0= RULE_ID ) )
+            // InternalLiveContainerBuilderIntegerationTestLanguage.g:79:3: (lv_name_0_0= RULE_ID )
             {
-            // InternalLiveContainerBuilderIntegerationTestLanguage.g:81:1: (lv_name_0_0= RULE_ID )
-            // InternalLiveContainerBuilderIntegerationTestLanguage.g:82:3: lv_name_0_0= RULE_ID
+            // InternalLiveContainerBuilderIntegerationTestLanguage.g:79:3: (lv_name_0_0= RULE_ID )
+            // InternalLiveContainerBuilderIntegerationTestLanguage.g:80:4: lv_name_0_0= RULE_ID
             {
             lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
-            			newLeafNode(lv_name_0_0, grammarAccess.getModelAccess().getNameIDTerminalRuleCall_0()); 
-            		
+            				newLeafNode(lv_name_0_0, grammarAccess.getModelAccess().getNameIDTerminalRuleCall_0());
+            			
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getModelRule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"name",
-                    		lv_name_0_0, 
-                    		"org.eclipse.xtext.common.Terminals.ID");
-            	    
-
-            }
-
+            				if (current==null) {
+            					current = createModelElement(grammarAccess.getModelRule());
+            				}
+            				setWithLastConsumed(
+            					current,
+            					"name",
+            					lv_name_0_0,
+            					"org.eclipse.xtext.common.Terminals.ID");
+            			
 
             }
 
 
             }
 
-             leaveRule(); 
+
+            }
+
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;

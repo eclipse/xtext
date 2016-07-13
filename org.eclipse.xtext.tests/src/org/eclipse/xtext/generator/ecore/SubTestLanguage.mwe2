@@ -10,7 +10,7 @@ module org.eclipse.xtext.generator.ecore.SubTestLanguage
 import org.eclipse.emf.mwe2.runtime.workflow.Workflow
 import org.eclipse.emf.mwe.utils.*
 import org.eclipse.xtext.TestLanguagesFragments
-import org.eclipse.xtext.generator.Generator
+import org.eclipse.xtext.xtext.generator.*
 
 var projectName = "org.eclipse.xtext.tests"
 var runtimeProject = "../${projectName}"
@@ -21,14 +21,30 @@ Workflow {
 		platformUri="${runtimeProject}/.."
 	}
 	
-	component = Generator auto-inject {
-		pathRtProject = runtimeProject
-		projectNameRt = projectName
+	component = XtextGenerator {
+		cleaner = {
+			enabled = false
+		}
+		configuration = {
+			project = model.project.StandardProjectConfig {
+				baseName = projectName
+				rootPath = ".."
+			}
+			code = {
+				encoding = 'ISO-8859-1'
+				lineDelimiter = lineDelimiter
+				preferXtendStubs = false
+			}
+		}
 		
 		language = {
-			uri = "classpath:/org/eclipse/xtext/generator/ecore/SubTestLanguage.xtext"
-			fragment = @TestLanguagesFragments {
-			}
+			grammarUri = "classpath:/org/eclipse/xtext/generator/ecore/SuperTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = {
+			grammarUri = "classpath:/org/eclipse/xtext/generator/ecore/SubTestLanguage.xtext"
+			referencedResource = "classpath:/org/eclipse/xtext/generator/ecore/SuperTestLanguage.genmodel"
+			fragment = @TestLanguagesFragments {}
 		}
 	}
 }

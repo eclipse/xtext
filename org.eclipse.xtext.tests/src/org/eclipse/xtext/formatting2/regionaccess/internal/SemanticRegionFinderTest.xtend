@@ -21,6 +21,7 @@ import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlangu
 import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Mixed
 import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Root
 import org.eclipse.xtext.formatting2.regionaccess.internal.services.RegionAccessTestLanguageGrammarAccess
+import org.eclipse.xtext.formatting2.regionaccess.internal.tests.RegionAccessTestLanguageInjectorProvider
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.XtextRunner

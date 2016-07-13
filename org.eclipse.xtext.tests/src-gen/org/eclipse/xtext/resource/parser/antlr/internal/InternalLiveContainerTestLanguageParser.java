@@ -1,4 +1,4 @@
-package org.eclipse.xtext.resource.parser.antlr.internal; 
+package org.eclipse.xtext.resource.parser.antlr.internal;
 
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
@@ -51,18 +51,18 @@ public class InternalLiveContainerTestLanguageParser extends AbstractInternalAnt
 
 
      	private LiveContainerTestLanguageGrammarAccess grammarAccess;
-     	
+
         public InternalLiveContainerTestLanguageParser(TokenStream input, LiveContainerTestLanguageGrammarAccess grammarAccess) {
             this(input);
             this.grammarAccess = grammarAccess;
             registerRules(grammarAccess.getGrammar());
         }
-        
+
         @Override
         protected String getFirstRuleName() {
-        	return "Model";	
+        	return "Model";
        	}
-       	
+
        	@Override
        	protected LiveContainerTestLanguageGrammarAccess getGrammarAccess() {
        		return grammarAccess;
@@ -70,8 +70,9 @@ public class InternalLiveContainerTestLanguageParser extends AbstractInternalAnt
 
 
 
+
     // $ANTLR start "entryRuleModel"
-    // InternalLiveContainerTestLanguage.g:67:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
+    // InternalLiveContainerTestLanguage.g:64:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
     public final EObject entryRuleModel() throws RecognitionException {
         EObject current = null;
 
@@ -79,8 +80,8 @@ public class InternalLiveContainerTestLanguageParser extends AbstractInternalAnt
 
 
         try {
-            // InternalLiveContainerTestLanguage.g:68:2: (iv_ruleModel= ruleModel EOF )
-            // InternalLiveContainerTestLanguage.g:69:2: iv_ruleModel= ruleModel EOF
+            // InternalLiveContainerTestLanguage.g:64:46: (iv_ruleModel= ruleModel EOF )
+            // InternalLiveContainerTestLanguage.g:65:2: iv_ruleModel= ruleModel EOF
             {
              newCompositeNode(grammarAccess.getModelRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -94,11 +95,11 @@ public class InternalLiveContainerTestLanguageParser extends AbstractInternalAnt
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -107,54 +108,57 @@ public class InternalLiveContainerTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "ruleModel"
-    // InternalLiveContainerTestLanguage.g:76:1: ruleModel returns [EObject current=null] : ( (lv_name_0_0= RULE_ID ) ) ;
+    // InternalLiveContainerTestLanguage.g:71:1: ruleModel returns [EObject current=null] : ( (lv_name_0_0= RULE_ID ) ) ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
         Token lv_name_0_0=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalLiveContainerTestLanguage.g:79:28: ( ( (lv_name_0_0= RULE_ID ) ) )
-            // InternalLiveContainerTestLanguage.g:80:1: ( (lv_name_0_0= RULE_ID ) )
+            // InternalLiveContainerTestLanguage.g:77:2: ( ( (lv_name_0_0= RULE_ID ) ) )
+            // InternalLiveContainerTestLanguage.g:78:2: ( (lv_name_0_0= RULE_ID ) )
             {
-            // InternalLiveContainerTestLanguage.g:80:1: ( (lv_name_0_0= RULE_ID ) )
-            // InternalLiveContainerTestLanguage.g:81:1: (lv_name_0_0= RULE_ID )
+            // InternalLiveContainerTestLanguage.g:78:2: ( (lv_name_0_0= RULE_ID ) )
+            // InternalLiveContainerTestLanguage.g:79:3: (lv_name_0_0= RULE_ID )
             {
-            // InternalLiveContainerTestLanguage.g:81:1: (lv_name_0_0= RULE_ID )
-            // InternalLiveContainerTestLanguage.g:82:3: lv_name_0_0= RULE_ID
+            // InternalLiveContainerTestLanguage.g:79:3: (lv_name_0_0= RULE_ID )
+            // InternalLiveContainerTestLanguage.g:80:4: lv_name_0_0= RULE_ID
             {
             lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
-            			newLeafNode(lv_name_0_0, grammarAccess.getModelAccess().getNameIDTerminalRuleCall_0()); 
-            		
+            				newLeafNode(lv_name_0_0, grammarAccess.getModelAccess().getNameIDTerminalRuleCall_0());
+            			
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getModelRule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"name",
-                    		lv_name_0_0, 
-                    		"org.eclipse.xtext.common.Terminals.ID");
-            	    
-
-            }
-
+            				if (current==null) {
+            					current = createModelElement(grammarAccess.getModelRule());
+            				}
+            				setWithLastConsumed(
+            					current,
+            					"name",
+            					lv_name_0_0,
+            					"org.eclipse.xtext.common.Terminals.ID");
+            			
 
             }
 
 
             }
 
-             leaveRule(); 
+
+            }
+
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;

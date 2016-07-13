@@ -122,8 +122,8 @@ public class InternalBug292245TestLanguageLexer extends Lexer {
         try {
             int _type = RULE_APOSTROPHE_CHAR;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBug292245TestLanguage.g:399:22: ( '\\'' )
-            // InternalBug292245TestLanguage.g:399:24: '\\''
+            // InternalBug292245TestLanguage.g:382:22: ( '\\'' )
+            // InternalBug292245TestLanguage.g:382:24: '\\''
             {
             match('\''); 
 
@@ -142,8 +142,8 @@ public class InternalBug292245TestLanguageLexer extends Lexer {
         try {
             int _type = RULE_CHAR;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBug292245TestLanguage.g:401:11: ( ( 'A' .. 'Z' | '0' .. '9' ) )
-            // InternalBug292245TestLanguage.g:401:13: ( 'A' .. 'Z' | '0' .. '9' )
+            // InternalBug292245TestLanguage.g:384:11: ( ( 'A' .. 'Z' | '0' .. '9' ) )
+            // InternalBug292245TestLanguage.g:384:13: ( 'A' .. 'Z' | '0' .. '9' )
             {
             if ( (input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='Z') ) {
                 input.consume();
@@ -170,10 +170,10 @@ public class InternalBug292245TestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBug292245TestLanguage.g:403:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // InternalBug292245TestLanguage.g:403:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalBug292245TestLanguage.g:386:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalBug292245TestLanguage.g:386:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // InternalBug292245TestLanguage.g:403:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalBug292245TestLanguage.g:386:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt1=0;
             loop1:
             do {

@@ -11,11 +11,14 @@ import org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.Mode
 import org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.UnorderedGroupsTestLanguageFactory;
 import org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.UnorderedSerialization;
 import org.eclipse.xtext.tests.AbstractXtextTests;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+// TODO https://github.com/eclipse/xtext-core/issues/32
+@Ignore
 public class SerializerTest extends AbstractXtextTests {
 	
 	private Model model;

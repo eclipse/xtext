@@ -1,4 +1,4 @@
-package org.eclipse.xtext.parser.unorderedGroups.parser.antlr.internal; 
+package org.eclipse.xtext.parser.unorderedGroups.parser.antlr.internal;
 
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
@@ -62,20 +62,20 @@ public class InternalSimpleBacktrackingBug325745TestLanguageParser extends Abstr
       This grammar contains a lot of empty actions to work around a bug in ANTLR.
       Otherwise the ANTLR tool will create synpreds that cannot be compiled in some rare cases.
     */
-     
+
      	private SimpleBacktrackingBug325745TestLanguageGrammarAccess grammarAccess;
-     	
+
         public InternalSimpleBacktrackingBug325745TestLanguageParser(TokenStream input, SimpleBacktrackingBug325745TestLanguageGrammarAccess grammarAccess) {
             this(input);
             this.grammarAccess = grammarAccess;
             registerRules(grammarAccess.getGrammar());
         }
-        
+
         @Override
         protected String getFirstRuleName() {
-        	return "DelegateModel";	
+        	return "DelegateModel";
        	}
-       	
+
        	@Override
        	protected SimpleBacktrackingBug325745TestLanguageGrammarAccess getGrammarAccess() {
        		return grammarAccess;
@@ -83,8 +83,9 @@ public class InternalSimpleBacktrackingBug325745TestLanguageParser extends Abstr
 
 
 
+
     // $ANTLR start "entryRuleDelegateModel"
-    // InternalSimpleBacktrackingBug325745TestLanguage.g:74:1: entryRuleDelegateModel returns [EObject current=null] : iv_ruleDelegateModel= ruleDelegateModel EOF ;
+    // InternalSimpleBacktrackingBug325745TestLanguage.g:71:1: entryRuleDelegateModel returns [EObject current=null] : iv_ruleDelegateModel= ruleDelegateModel EOF ;
     public final EObject entryRuleDelegateModel() throws RecognitionException {
         EObject current = null;
 
@@ -92,8 +93,8 @@ public class InternalSimpleBacktrackingBug325745TestLanguageParser extends Abstr
 
 
         try {
-            // InternalSimpleBacktrackingBug325745TestLanguage.g:75:2: (iv_ruleDelegateModel= ruleDelegateModel EOF )
-            // InternalSimpleBacktrackingBug325745TestLanguage.g:76:2: iv_ruleDelegateModel= ruleDelegateModel EOF
+            // InternalSimpleBacktrackingBug325745TestLanguage.g:71:54: (iv_ruleDelegateModel= ruleDelegateModel EOF )
+            // InternalSimpleBacktrackingBug325745TestLanguage.g:72:2: iv_ruleDelegateModel= ruleDelegateModel EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getDelegateModelRule()); 
@@ -111,11 +112,11 @@ public class InternalSimpleBacktrackingBug325745TestLanguageParser extends Abstr
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -124,28 +125,29 @@ public class InternalSimpleBacktrackingBug325745TestLanguageParser extends Abstr
 
 
     // $ANTLR start "ruleDelegateModel"
-    // InternalSimpleBacktrackingBug325745TestLanguage.g:83:1: ruleDelegateModel returns [EObject current=null] : this_Model_0= ruleModel ;
+    // InternalSimpleBacktrackingBug325745TestLanguage.g:78:1: ruleDelegateModel returns [EObject current=null] : this_Model_0= ruleModel ;
     public final EObject ruleDelegateModel() throws RecognitionException {
         EObject current = null;
 
         EObject this_Model_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalSimpleBacktrackingBug325745TestLanguage.g:86:28: (this_Model_0= ruleModel )
-            // InternalSimpleBacktrackingBug325745TestLanguage.g:88:2: this_Model_0= ruleModel
+            // InternalSimpleBacktrackingBug325745TestLanguage.g:84:2: (this_Model_0= ruleModel )
+            // InternalSimpleBacktrackingBug325745TestLanguage.g:85:2: this_Model_0= ruleModel
             {
             if ( state.backtracking==0 ) {
-               
-              	  /* */ 
+
+              		/* */
               	
             }
             if ( state.backtracking==0 ) {
-               
-                      newCompositeNode(grammarAccess.getDelegateModelAccess().getModelParserRuleCall()); 
-                  
+
+              		newCompositeNode(grammarAccess.getDelegateModelAccess().getModelParserRuleCall());
+              	
             }
             pushFollow(FollowSets000.FOLLOW_2);
             this_Model_0=ruleModel();
@@ -153,23 +155,25 @@ public class InternalSimpleBacktrackingBug325745TestLanguageParser extends Abstr
             state._fsp--;
             if (state.failed) return current;
             if ( state.backtracking==0 ) {
-               
-                      current = this_Model_0; 
-                      afterParserOrEnumRuleCall();
-                  
+
+              		current = this_Model_0;
+              		afterParserOrEnumRuleCall();
+              	
             }
 
             }
 
             if ( state.backtracking==0 ) {
-               leaveRule(); 
+
+              	leaveRule();
+
             }
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -178,7 +182,7 @@ public class InternalSimpleBacktrackingBug325745TestLanguageParser extends Abstr
 
 
     // $ANTLR start "entryRuleModel"
-    // InternalSimpleBacktrackingBug325745TestLanguage.g:107:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
+    // InternalSimpleBacktrackingBug325745TestLanguage.g:99:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
     public final EObject entryRuleModel() throws RecognitionException {
         EObject current = null;
 
@@ -186,8 +190,8 @@ public class InternalSimpleBacktrackingBug325745TestLanguageParser extends Abstr
 
 
         try {
-            // InternalSimpleBacktrackingBug325745TestLanguage.g:108:2: (iv_ruleModel= ruleModel EOF )
-            // InternalSimpleBacktrackingBug325745TestLanguage.g:109:2: iv_ruleModel= ruleModel EOF
+            // InternalSimpleBacktrackingBug325745TestLanguage.g:99:46: (iv_ruleModel= ruleModel EOF )
+            // InternalSimpleBacktrackingBug325745TestLanguage.g:100:2: iv_ruleModel= ruleModel EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getModelRule()); 
@@ -205,11 +209,11 @@ public class InternalSimpleBacktrackingBug325745TestLanguageParser extends Abstr
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -218,41 +222,42 @@ public class InternalSimpleBacktrackingBug325745TestLanguageParser extends Abstr
 
 
     // $ANTLR start "ruleModel"
-    // InternalSimpleBacktrackingBug325745TestLanguage.g:116:1: ruleModel returns [EObject current=null] : ( () ( (lv_fields_1_0= ruleElement ) )+ ) ;
+    // InternalSimpleBacktrackingBug325745TestLanguage.g:106:1: ruleModel returns [EObject current=null] : ( () ( (lv_fields_1_0= ruleElement ) )+ ) ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
         EObject lv_fields_1_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalSimpleBacktrackingBug325745TestLanguage.g:119:28: ( ( () ( (lv_fields_1_0= ruleElement ) )+ ) )
-            // InternalSimpleBacktrackingBug325745TestLanguage.g:120:1: ( () ( (lv_fields_1_0= ruleElement ) )+ )
+            // InternalSimpleBacktrackingBug325745TestLanguage.g:112:2: ( ( () ( (lv_fields_1_0= ruleElement ) )+ ) )
+            // InternalSimpleBacktrackingBug325745TestLanguage.g:113:2: ( () ( (lv_fields_1_0= ruleElement ) )+ )
             {
-            // InternalSimpleBacktrackingBug325745TestLanguage.g:120:1: ( () ( (lv_fields_1_0= ruleElement ) )+ )
-            // InternalSimpleBacktrackingBug325745TestLanguage.g:120:2: () ( (lv_fields_1_0= ruleElement ) )+
+            // InternalSimpleBacktrackingBug325745TestLanguage.g:113:2: ( () ( (lv_fields_1_0= ruleElement ) )+ )
+            // InternalSimpleBacktrackingBug325745TestLanguage.g:114:3: () ( (lv_fields_1_0= ruleElement ) )+
             {
-            // InternalSimpleBacktrackingBug325745TestLanguage.g:120:2: ()
-            // InternalSimpleBacktrackingBug325745TestLanguage.g:121:2: 
+            // InternalSimpleBacktrackingBug325745TestLanguage.g:114:3: ()
+            // InternalSimpleBacktrackingBug325745TestLanguage.g:115:4: 
             {
             if ( state.backtracking==0 ) {
-               
-              	  /* */ 
-              	
+
+              				/* */
+              			
             }
             if ( state.backtracking==0 ) {
 
-                      current = forceCreateModelElement(
-                          grammarAccess.getModelAccess().getModelAction_0(),
-                          current);
-                  
+              				current = forceCreateModelElement(
+              					grammarAccess.getModelAccess().getModelAction_0(),
+              					current);
+              			
             }
 
             }
 
-            // InternalSimpleBacktrackingBug325745TestLanguage.g:129:2: ( (lv_fields_1_0= ruleElement ) )+
+            // InternalSimpleBacktrackingBug325745TestLanguage.g:124:3: ( (lv_fields_1_0= ruleElement ) )+
             int cnt1=0;
             loop1:
             do {
@@ -266,15 +271,15 @@ public class InternalSimpleBacktrackingBug325745TestLanguageParser extends Abstr
 
                 switch (alt1) {
             	case 1 :
-            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:130:1: (lv_fields_1_0= ruleElement )
+            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:125:4: (lv_fields_1_0= ruleElement )
             	    {
-            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:130:1: (lv_fields_1_0= ruleElement )
-            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:131:3: lv_fields_1_0= ruleElement
+            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:125:4: (lv_fields_1_0= ruleElement )
+            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:126:5: lv_fields_1_0= ruleElement
             	    {
             	    if ( state.backtracking==0 ) {
-            	       
-            	      	        newCompositeNode(grammarAccess.getModelAccess().getFieldsElementParserRuleCall_1_0()); 
-            	      	    
+
+            	      					newCompositeNode(grammarAccess.getModelAccess().getFieldsElementParserRuleCall_1_0());
+            	      				
             	    }
             	    pushFollow(FollowSets000.FOLLOW_3);
             	    lv_fields_1_0=ruleElement();
@@ -283,16 +288,16 @@ public class InternalSimpleBacktrackingBug325745TestLanguageParser extends Abstr
             	    if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
-            	      	        if (current==null) {
-            	      	            current = createModelElementForParent(grammarAccess.getModelRule());
-            	      	        }
-            	             		add(
-            	             			current, 
-            	             			"fields",
-            	              		lv_fields_1_0, 
-            	              		"org.eclipse.xtext.parser.unorderedGroups.BacktrackingBug325745TestLanguage.Element");
-            	      	        afterParserOrEnumRuleCall();
-            	      	    
+            	      					if (current==null) {
+            	      						current = createModelElementForParent(grammarAccess.getModelRule());
+            	      					}
+            	      					add(
+            	      						current,
+            	      						"fields",
+            	      						lv_fields_1_0,
+            	      						"org.eclipse.xtext.parser.unorderedGroups.BacktrackingBug325745TestLanguage.Element");
+            	      					afterParserOrEnumRuleCall();
+            	      				
             	    }
 
             	    }
@@ -318,14 +323,16 @@ public class InternalSimpleBacktrackingBug325745TestLanguageParser extends Abstr
             }
 
             if ( state.backtracking==0 ) {
-               leaveRule(); 
+
+              	leaveRule();
+
             }
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -334,7 +341,7 @@ public class InternalSimpleBacktrackingBug325745TestLanguageParser extends Abstr
 
 
     // $ANTLR start "entryRuleElement"
-    // InternalSimpleBacktrackingBug325745TestLanguage.g:155:1: entryRuleElement returns [EObject current=null] : iv_ruleElement= ruleElement EOF ;
+    // InternalSimpleBacktrackingBug325745TestLanguage.g:147:1: entryRuleElement returns [EObject current=null] : iv_ruleElement= ruleElement EOF ;
     public final EObject entryRuleElement() throws RecognitionException {
         EObject current = null;
 
@@ -342,8 +349,8 @@ public class InternalSimpleBacktrackingBug325745TestLanguageParser extends Abstr
 
 
         try {
-            // InternalSimpleBacktrackingBug325745TestLanguage.g:156:2: (iv_ruleElement= ruleElement EOF )
-            // InternalSimpleBacktrackingBug325745TestLanguage.g:157:2: iv_ruleElement= ruleElement EOF
+            // InternalSimpleBacktrackingBug325745TestLanguage.g:147:48: (iv_ruleElement= ruleElement EOF )
+            // InternalSimpleBacktrackingBug325745TestLanguage.g:148:2: iv_ruleElement= ruleElement EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getElementRule()); 
@@ -361,11 +368,11 @@ public class InternalSimpleBacktrackingBug325745TestLanguageParser extends Abstr
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -374,7 +381,7 @@ public class InternalSimpleBacktrackingBug325745TestLanguageParser extends Abstr
 
 
     // $ANTLR start "ruleElement"
-    // InternalSimpleBacktrackingBug325745TestLanguage.g:164:1: ruleElement returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_dataType_1_0= ruleDataType ) )? ( (lv_expression_2_0= ruleExpression ) ) otherlv_3= '.' ) ;
+    // InternalSimpleBacktrackingBug325745TestLanguage.g:154:1: ruleElement returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_dataType_1_0= ruleDataType ) )? ( (lv_expression_2_0= ruleExpression ) ) otherlv_3= '.' ) ;
     public final EObject ruleElement() throws RecognitionException {
         EObject current = null;
 
@@ -385,38 +392,39 @@ public class InternalSimpleBacktrackingBug325745TestLanguageParser extends Abstr
         EObject lv_expression_2_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalSimpleBacktrackingBug325745TestLanguage.g:167:28: ( ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_dataType_1_0= ruleDataType ) )? ( (lv_expression_2_0= ruleExpression ) ) otherlv_3= '.' ) )
-            // InternalSimpleBacktrackingBug325745TestLanguage.g:168:1: ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_dataType_1_0= ruleDataType ) )? ( (lv_expression_2_0= ruleExpression ) ) otherlv_3= '.' )
+            // InternalSimpleBacktrackingBug325745TestLanguage.g:160:2: ( ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_dataType_1_0= ruleDataType ) )? ( (lv_expression_2_0= ruleExpression ) ) otherlv_3= '.' ) )
+            // InternalSimpleBacktrackingBug325745TestLanguage.g:161:2: ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_dataType_1_0= ruleDataType ) )? ( (lv_expression_2_0= ruleExpression ) ) otherlv_3= '.' )
             {
-            // InternalSimpleBacktrackingBug325745TestLanguage.g:168:1: ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_dataType_1_0= ruleDataType ) )? ( (lv_expression_2_0= ruleExpression ) ) otherlv_3= '.' )
-            // InternalSimpleBacktrackingBug325745TestLanguage.g:168:2: ( (lv_name_0_0= RULE_ID ) ) ( (lv_dataType_1_0= ruleDataType ) )? ( (lv_expression_2_0= ruleExpression ) ) otherlv_3= '.'
+            // InternalSimpleBacktrackingBug325745TestLanguage.g:161:2: ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_dataType_1_0= ruleDataType ) )? ( (lv_expression_2_0= ruleExpression ) ) otherlv_3= '.' )
+            // InternalSimpleBacktrackingBug325745TestLanguage.g:162:3: ( (lv_name_0_0= RULE_ID ) ) ( (lv_dataType_1_0= ruleDataType ) )? ( (lv_expression_2_0= ruleExpression ) ) otherlv_3= '.'
             {
-            // InternalSimpleBacktrackingBug325745TestLanguage.g:168:2: ( (lv_name_0_0= RULE_ID ) )
-            // InternalSimpleBacktrackingBug325745TestLanguage.g:169:1: (lv_name_0_0= RULE_ID )
+            // InternalSimpleBacktrackingBug325745TestLanguage.g:162:3: ( (lv_name_0_0= RULE_ID ) )
+            // InternalSimpleBacktrackingBug325745TestLanguage.g:163:4: (lv_name_0_0= RULE_ID )
             {
-            // InternalSimpleBacktrackingBug325745TestLanguage.g:169:1: (lv_name_0_0= RULE_ID )
-            // InternalSimpleBacktrackingBug325745TestLanguage.g:170:3: lv_name_0_0= RULE_ID
+            // InternalSimpleBacktrackingBug325745TestLanguage.g:163:4: (lv_name_0_0= RULE_ID )
+            // InternalSimpleBacktrackingBug325745TestLanguage.g:164:5: lv_name_0_0= RULE_ID
             {
             lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_4); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
-              			newLeafNode(lv_name_0_0, grammarAccess.getElementAccess().getNameIDTerminalRuleCall_0_0()); 
-              		
+              					newLeafNode(lv_name_0_0, grammarAccess.getElementAccess().getNameIDTerminalRuleCall_0_0());
+              				
             }
             if ( state.backtracking==0 ) {
 
-              	        if (current==null) {
-              	            current = createModelElement(grammarAccess.getElementRule());
-              	        }
-                     		setWithLastConsumed(
-                     			current, 
-                     			"name",
-                      		lv_name_0_0, 
-                      		"org.eclipse.xtext.common.Terminals.ID");
-              	    
+              					if (current==null) {
+              						current = createModelElement(grammarAccess.getElementRule());
+              					}
+              					setWithLastConsumed(
+              						current,
+              						"name",
+              						lv_name_0_0,
+              						"org.eclipse.xtext.common.Terminals.ID");
+              				
             }
 
             }
@@ -424,7 +432,7 @@ public class InternalSimpleBacktrackingBug325745TestLanguageParser extends Abstr
 
             }
 
-            // InternalSimpleBacktrackingBug325745TestLanguage.g:186:2: ( (lv_dataType_1_0= ruleDataType ) )?
+            // InternalSimpleBacktrackingBug325745TestLanguage.g:180:3: ( (lv_dataType_1_0= ruleDataType ) )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -437,15 +445,15 @@ public class InternalSimpleBacktrackingBug325745TestLanguageParser extends Abstr
             }
             switch (alt2) {
                 case 1 :
-                    // InternalSimpleBacktrackingBug325745TestLanguage.g:187:1: (lv_dataType_1_0= ruleDataType )
+                    // InternalSimpleBacktrackingBug325745TestLanguage.g:181:4: (lv_dataType_1_0= ruleDataType )
                     {
-                    // InternalSimpleBacktrackingBug325745TestLanguage.g:187:1: (lv_dataType_1_0= ruleDataType )
-                    // InternalSimpleBacktrackingBug325745TestLanguage.g:188:3: lv_dataType_1_0= ruleDataType
+                    // InternalSimpleBacktrackingBug325745TestLanguage.g:181:4: (lv_dataType_1_0= ruleDataType )
+                    // InternalSimpleBacktrackingBug325745TestLanguage.g:182:5: lv_dataType_1_0= ruleDataType
                     {
                     if ( state.backtracking==0 ) {
-                       
-                      	        newCompositeNode(grammarAccess.getElementAccess().getDataTypeDataTypeParserRuleCall_1_0()); 
-                      	    
+
+                      					newCompositeNode(grammarAccess.getElementAccess().getDataTypeDataTypeParserRuleCall_1_0());
+                      				
                     }
                     pushFollow(FollowSets000.FOLLOW_4);
                     lv_dataType_1_0=ruleDataType();
@@ -454,16 +462,16 @@ public class InternalSimpleBacktrackingBug325745TestLanguageParser extends Abstr
                     if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
-                      	        if (current==null) {
-                      	            current = createModelElementForParent(grammarAccess.getElementRule());
-                      	        }
-                             		set(
-                             			current, 
-                             			"dataType",
-                              		lv_dataType_1_0, 
-                              		"org.eclipse.xtext.parser.unorderedGroups.BacktrackingBug325745TestLanguage.DataType");
-                      	        afterParserOrEnumRuleCall();
-                      	    
+                      					if (current==null) {
+                      						current = createModelElementForParent(grammarAccess.getElementRule());
+                      					}
+                      					set(
+                      						current,
+                      						"dataType",
+                      						lv_dataType_1_0,
+                      						"org.eclipse.xtext.parser.unorderedGroups.BacktrackingBug325745TestLanguage.DataType");
+                      					afterParserOrEnumRuleCall();
+                      				
                     }
 
                     }
@@ -474,16 +482,16 @@ public class InternalSimpleBacktrackingBug325745TestLanguageParser extends Abstr
 
             }
 
-            // InternalSimpleBacktrackingBug325745TestLanguage.g:204:3: ( (lv_expression_2_0= ruleExpression ) )
-            // InternalSimpleBacktrackingBug325745TestLanguage.g:205:1: (lv_expression_2_0= ruleExpression )
+            // InternalSimpleBacktrackingBug325745TestLanguage.g:199:3: ( (lv_expression_2_0= ruleExpression ) )
+            // InternalSimpleBacktrackingBug325745TestLanguage.g:200:4: (lv_expression_2_0= ruleExpression )
             {
-            // InternalSimpleBacktrackingBug325745TestLanguage.g:205:1: (lv_expression_2_0= ruleExpression )
-            // InternalSimpleBacktrackingBug325745TestLanguage.g:206:3: lv_expression_2_0= ruleExpression
+            // InternalSimpleBacktrackingBug325745TestLanguage.g:200:4: (lv_expression_2_0= ruleExpression )
+            // InternalSimpleBacktrackingBug325745TestLanguage.g:201:5: lv_expression_2_0= ruleExpression
             {
             if ( state.backtracking==0 ) {
-               
-              	        newCompositeNode(grammarAccess.getElementAccess().getExpressionExpressionParserRuleCall_2_0()); 
-              	    
+
+              					newCompositeNode(grammarAccess.getElementAccess().getExpressionExpressionParserRuleCall_2_0());
+              				
             }
             pushFollow(FollowSets000.FOLLOW_5);
             lv_expression_2_0=ruleExpression();
@@ -492,16 +500,16 @@ public class InternalSimpleBacktrackingBug325745TestLanguageParser extends Abstr
             if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
-              	        if (current==null) {
-              	            current = createModelElementForParent(grammarAccess.getElementRule());
-              	        }
-                     		set(
-                     			current, 
-                     			"expression",
-                      		lv_expression_2_0, 
-                      		"org.eclipse.xtext.parser.unorderedGroups.BacktrackingBug325745TestLanguage.Expression");
-              	        afterParserOrEnumRuleCall();
-              	    
+              					if (current==null) {
+              						current = createModelElementForParent(grammarAccess.getElementRule());
+              					}
+              					set(
+              						current,
+              						"expression",
+              						lv_expression_2_0,
+              						"org.eclipse.xtext.parser.unorderedGroups.BacktrackingBug325745TestLanguage.Expression");
+              					afterParserOrEnumRuleCall();
+              				
             }
 
             }
@@ -512,8 +520,8 @@ public class InternalSimpleBacktrackingBug325745TestLanguageParser extends Abstr
             otherlv_3=(Token)match(input,11,FollowSets000.FOLLOW_2); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
-                  	newLeafNode(otherlv_3, grammarAccess.getElementAccess().getFullStopKeyword_3());
-                  
+              			newLeafNode(otherlv_3, grammarAccess.getElementAccess().getFullStopKeyword_3());
+              		
             }
 
             }
@@ -522,14 +530,16 @@ public class InternalSimpleBacktrackingBug325745TestLanguageParser extends Abstr
             }
 
             if ( state.backtracking==0 ) {
-               leaveRule(); 
+
+              	leaveRule();
+
             }
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -538,7 +548,7 @@ public class InternalSimpleBacktrackingBug325745TestLanguageParser extends Abstr
 
 
     // $ANTLR start "entryRuleDataType"
-    // InternalSimpleBacktrackingBug325745TestLanguage.g:234:1: entryRuleDataType returns [EObject current=null] : iv_ruleDataType= ruleDataType EOF ;
+    // InternalSimpleBacktrackingBug325745TestLanguage.g:226:1: entryRuleDataType returns [EObject current=null] : iv_ruleDataType= ruleDataType EOF ;
     public final EObject entryRuleDataType() throws RecognitionException {
         EObject current = null;
 
@@ -546,8 +556,8 @@ public class InternalSimpleBacktrackingBug325745TestLanguageParser extends Abstr
 
 
         try {
-            // InternalSimpleBacktrackingBug325745TestLanguage.g:235:2: (iv_ruleDataType= ruleDataType EOF )
-            // InternalSimpleBacktrackingBug325745TestLanguage.g:236:2: iv_ruleDataType= ruleDataType EOF
+            // InternalSimpleBacktrackingBug325745TestLanguage.g:226:49: (iv_ruleDataType= ruleDataType EOF )
+            // InternalSimpleBacktrackingBug325745TestLanguage.g:227:2: iv_ruleDataType= ruleDataType EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getDataTypeRule()); 
@@ -565,11 +575,11 @@ public class InternalSimpleBacktrackingBug325745TestLanguageParser extends Abstr
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -578,7 +588,7 @@ public class InternalSimpleBacktrackingBug325745TestLanguageParser extends Abstr
 
 
     // $ANTLR start "ruleDataType"
-    // InternalSimpleBacktrackingBug325745TestLanguage.g:243:1: ruleDataType returns [EObject current=null] : ( ( (lv_baseType_0_0= RULE_ID ) ) (otherlv_1= ':=' ( (lv_defaultValue_2_0= RULE_STRING ) ) )? ) ;
+    // InternalSimpleBacktrackingBug325745TestLanguage.g:233:1: ruleDataType returns [EObject current=null] : ( ( (lv_baseType_0_0= RULE_ID ) ) (otherlv_1= ':=' ( (lv_defaultValue_2_0= RULE_STRING ) ) )? ) ;
     public final EObject ruleDataType() throws RecognitionException {
         EObject current = null;
 
@@ -586,38 +596,39 @@ public class InternalSimpleBacktrackingBug325745TestLanguageParser extends Abstr
         Token otherlv_1=null;
         Token lv_defaultValue_2_0=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalSimpleBacktrackingBug325745TestLanguage.g:246:28: ( ( ( (lv_baseType_0_0= RULE_ID ) ) (otherlv_1= ':=' ( (lv_defaultValue_2_0= RULE_STRING ) ) )? ) )
-            // InternalSimpleBacktrackingBug325745TestLanguage.g:247:1: ( ( (lv_baseType_0_0= RULE_ID ) ) (otherlv_1= ':=' ( (lv_defaultValue_2_0= RULE_STRING ) ) )? )
+            // InternalSimpleBacktrackingBug325745TestLanguage.g:239:2: ( ( ( (lv_baseType_0_0= RULE_ID ) ) (otherlv_1= ':=' ( (lv_defaultValue_2_0= RULE_STRING ) ) )? ) )
+            // InternalSimpleBacktrackingBug325745TestLanguage.g:240:2: ( ( (lv_baseType_0_0= RULE_ID ) ) (otherlv_1= ':=' ( (lv_defaultValue_2_0= RULE_STRING ) ) )? )
             {
-            // InternalSimpleBacktrackingBug325745TestLanguage.g:247:1: ( ( (lv_baseType_0_0= RULE_ID ) ) (otherlv_1= ':=' ( (lv_defaultValue_2_0= RULE_STRING ) ) )? )
-            // InternalSimpleBacktrackingBug325745TestLanguage.g:247:2: ( (lv_baseType_0_0= RULE_ID ) ) (otherlv_1= ':=' ( (lv_defaultValue_2_0= RULE_STRING ) ) )?
+            // InternalSimpleBacktrackingBug325745TestLanguage.g:240:2: ( ( (lv_baseType_0_0= RULE_ID ) ) (otherlv_1= ':=' ( (lv_defaultValue_2_0= RULE_STRING ) ) )? )
+            // InternalSimpleBacktrackingBug325745TestLanguage.g:241:3: ( (lv_baseType_0_0= RULE_ID ) ) (otherlv_1= ':=' ( (lv_defaultValue_2_0= RULE_STRING ) ) )?
             {
-            // InternalSimpleBacktrackingBug325745TestLanguage.g:247:2: ( (lv_baseType_0_0= RULE_ID ) )
-            // InternalSimpleBacktrackingBug325745TestLanguage.g:248:1: (lv_baseType_0_0= RULE_ID )
+            // InternalSimpleBacktrackingBug325745TestLanguage.g:241:3: ( (lv_baseType_0_0= RULE_ID ) )
+            // InternalSimpleBacktrackingBug325745TestLanguage.g:242:4: (lv_baseType_0_0= RULE_ID )
             {
-            // InternalSimpleBacktrackingBug325745TestLanguage.g:248:1: (lv_baseType_0_0= RULE_ID )
-            // InternalSimpleBacktrackingBug325745TestLanguage.g:249:3: lv_baseType_0_0= RULE_ID
+            // InternalSimpleBacktrackingBug325745TestLanguage.g:242:4: (lv_baseType_0_0= RULE_ID )
+            // InternalSimpleBacktrackingBug325745TestLanguage.g:243:5: lv_baseType_0_0= RULE_ID
             {
             lv_baseType_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_6); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
-              			newLeafNode(lv_baseType_0_0, grammarAccess.getDataTypeAccess().getBaseTypeIDTerminalRuleCall_0_0()); 
-              		
+              					newLeafNode(lv_baseType_0_0, grammarAccess.getDataTypeAccess().getBaseTypeIDTerminalRuleCall_0_0());
+              				
             }
             if ( state.backtracking==0 ) {
 
-              	        if (current==null) {
-              	            current = createModelElement(grammarAccess.getDataTypeRule());
-              	        }
-                     		setWithLastConsumed(
-                     			current, 
-                     			"baseType",
-                      		lv_baseType_0_0, 
-                      		"org.eclipse.xtext.common.Terminals.ID");
-              	    
+              					if (current==null) {
+              						current = createModelElement(grammarAccess.getDataTypeRule());
+              					}
+              					setWithLastConsumed(
+              						current,
+              						"baseType",
+              						lv_baseType_0_0,
+              						"org.eclipse.xtext.common.Terminals.ID");
+              				
             }
 
             }
@@ -625,7 +636,7 @@ public class InternalSimpleBacktrackingBug325745TestLanguageParser extends Abstr
 
             }
 
-            // InternalSimpleBacktrackingBug325745TestLanguage.g:265:2: (otherlv_1= ':=' ( (lv_defaultValue_2_0= RULE_STRING ) ) )?
+            // InternalSimpleBacktrackingBug325745TestLanguage.g:259:3: (otherlv_1= ':=' ( (lv_defaultValue_2_0= RULE_STRING ) ) )?
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -634,37 +645,37 @@ public class InternalSimpleBacktrackingBug325745TestLanguageParser extends Abstr
             }
             switch (alt3) {
                 case 1 :
-                    // InternalSimpleBacktrackingBug325745TestLanguage.g:265:4: otherlv_1= ':=' ( (lv_defaultValue_2_0= RULE_STRING ) )
+                    // InternalSimpleBacktrackingBug325745TestLanguage.g:260:4: otherlv_1= ':=' ( (lv_defaultValue_2_0= RULE_STRING ) )
                     {
                     otherlv_1=(Token)match(input,12,FollowSets000.FOLLOW_7); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
-                          	newLeafNode(otherlv_1, grammarAccess.getDataTypeAccess().getColonEqualsSignKeyword_1_0());
-                          
+                      				newLeafNode(otherlv_1, grammarAccess.getDataTypeAccess().getColonEqualsSignKeyword_1_0());
+                      			
                     }
-                    // InternalSimpleBacktrackingBug325745TestLanguage.g:269:1: ( (lv_defaultValue_2_0= RULE_STRING ) )
-                    // InternalSimpleBacktrackingBug325745TestLanguage.g:270:1: (lv_defaultValue_2_0= RULE_STRING )
+                    // InternalSimpleBacktrackingBug325745TestLanguage.g:264:4: ( (lv_defaultValue_2_0= RULE_STRING ) )
+                    // InternalSimpleBacktrackingBug325745TestLanguage.g:265:5: (lv_defaultValue_2_0= RULE_STRING )
                     {
-                    // InternalSimpleBacktrackingBug325745TestLanguage.g:270:1: (lv_defaultValue_2_0= RULE_STRING )
-                    // InternalSimpleBacktrackingBug325745TestLanguage.g:271:3: lv_defaultValue_2_0= RULE_STRING
+                    // InternalSimpleBacktrackingBug325745TestLanguage.g:265:5: (lv_defaultValue_2_0= RULE_STRING )
+                    // InternalSimpleBacktrackingBug325745TestLanguage.g:266:6: lv_defaultValue_2_0= RULE_STRING
                     {
                     lv_defaultValue_2_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
-                      			newLeafNode(lv_defaultValue_2_0, grammarAccess.getDataTypeAccess().getDefaultValueSTRINGTerminalRuleCall_1_1_0()); 
-                      		
+                      						newLeafNode(lv_defaultValue_2_0, grammarAccess.getDataTypeAccess().getDefaultValueSTRINGTerminalRuleCall_1_1_0());
+                      					
                     }
                     if ( state.backtracking==0 ) {
 
-                      	        if (current==null) {
-                      	            current = createModelElement(grammarAccess.getDataTypeRule());
-                      	        }
-                             		setWithLastConsumed(
-                             			current, 
-                             			"defaultValue",
-                              		lv_defaultValue_2_0, 
-                              		"org.eclipse.xtext.common.Terminals.STRING");
-                      	    
+                      						if (current==null) {
+                      							current = createModelElement(grammarAccess.getDataTypeRule());
+                      						}
+                      						setWithLastConsumed(
+                      							current,
+                      							"defaultValue",
+                      							lv_defaultValue_2_0,
+                      							"org.eclipse.xtext.common.Terminals.STRING");
+                      					
                     }
 
                     }
@@ -685,14 +696,16 @@ public class InternalSimpleBacktrackingBug325745TestLanguageParser extends Abstr
             }
 
             if ( state.backtracking==0 ) {
-               leaveRule(); 
+
+              	leaveRule();
+
             }
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -701,22 +714,22 @@ public class InternalSimpleBacktrackingBug325745TestLanguageParser extends Abstr
 
 
     // $ANTLR start "entryRuleExpression"
-    // InternalSimpleBacktrackingBug325745TestLanguage.g:295:1: entryRuleExpression returns [EObject current=null] : iv_ruleExpression= ruleExpression EOF ;
+    // InternalSimpleBacktrackingBug325745TestLanguage.g:287:1: entryRuleExpression returns [EObject current=null] : iv_ruleExpression= ruleExpression EOF ;
     public final EObject entryRuleExpression() throws RecognitionException {
         EObject current = null;
 
         EObject iv_ruleExpression = null;
 
 
-         
-        		UnorderedGroupState myUnorderedGroupState = getUnorderedGroupHelper().snapShot(
-        			grammarAccess.getExpressionAccess().getUnorderedGroup_1(), 
-        			grammarAccess.getExpressionAccess().getUnorderedGroup_3()
-        		);
-        	
+
+        	UnorderedGroupState myUnorderedGroupState = getUnorderedGroupHelper().snapShot(
+        	grammarAccess.getExpressionAccess().getUnorderedGroup_1(), 
+        	grammarAccess.getExpressionAccess().getUnorderedGroup_3()
+        	);
+
         try {
-            // InternalSimpleBacktrackingBug325745TestLanguage.g:302:2: (iv_ruleExpression= ruleExpression EOF )
-            // InternalSimpleBacktrackingBug325745TestLanguage.g:303:2: iv_ruleExpression= ruleExpression EOF
+            // InternalSimpleBacktrackingBug325745TestLanguage.g:292:2: (iv_ruleExpression= ruleExpression EOF )
+            // InternalSimpleBacktrackingBug325745TestLanguage.g:293:2: iv_ruleExpression= ruleExpression EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getExpressionRule()); 
@@ -734,11 +747,11 @@ public class InternalSimpleBacktrackingBug325745TestLanguageParser extends Abstr
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
 
             	myUnorderedGroupState.restore();
@@ -750,7 +763,7 @@ public class InternalSimpleBacktrackingBug325745TestLanguageParser extends Abstr
 
 
     // $ANTLR start "ruleExpression"
-    // InternalSimpleBacktrackingBug325745TestLanguage.g:313:1: ruleExpression returns [EObject current=null] : ( () ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) ) )* ) ) ) ( (otherlv_4= '[' )? ( (lv_terms_5_0= ruleSimpleTerm ) ) (otherlv_6= ']' )? )* ( ( ( ( ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) ) )* ) ) ) ) ;
+    // InternalSimpleBacktrackingBug325745TestLanguage.g:302:1: ruleExpression returns [EObject current=null] : ( () ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) ) )* ) ) ) ( (otherlv_4= '[' )? ( (lv_terms_5_0= ruleSimpleTerm ) ) (otherlv_6= ']' )? )* ( ( ( ( ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) ) )* ) ) ) ) ;
     public final EObject ruleExpression() throws RecognitionException {
         EObject current = null;
 
@@ -763,48 +776,49 @@ public class InternalSimpleBacktrackingBug325745TestLanguageParser extends Abstr
         EObject lv_terms_5_0 = null;
 
 
-         enterRule(); 
-        		UnorderedGroupState myUnorderedGroupState = getUnorderedGroupHelper().snapShot(
-        			grammarAccess.getExpressionAccess().getUnorderedGroup_1(), 
-        			grammarAccess.getExpressionAccess().getUnorderedGroup_3()
-        		);
-            
+
+        	enterRule();
+        	UnorderedGroupState myUnorderedGroupState = getUnorderedGroupHelper().snapShot(
+        	grammarAccess.getExpressionAccess().getUnorderedGroup_1(), 
+        	grammarAccess.getExpressionAccess().getUnorderedGroup_3()
+        	);
+
         try {
-            // InternalSimpleBacktrackingBug325745TestLanguage.g:320:28: ( ( () ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) ) )* ) ) ) ( (otherlv_4= '[' )? ( (lv_terms_5_0= ruleSimpleTerm ) ) (otherlv_6= ']' )? )* ( ( ( ( ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) ) )* ) ) ) ) )
-            // InternalSimpleBacktrackingBug325745TestLanguage.g:321:1: ( () ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) ) )* ) ) ) ( (otherlv_4= '[' )? ( (lv_terms_5_0= ruleSimpleTerm ) ) (otherlv_6= ']' )? )* ( ( ( ( ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) ) )* ) ) ) )
+            // InternalSimpleBacktrackingBug325745TestLanguage.g:312:2: ( ( () ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) ) )* ) ) ) ( (otherlv_4= '[' )? ( (lv_terms_5_0= ruleSimpleTerm ) ) (otherlv_6= ']' )? )* ( ( ( ( ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) ) )* ) ) ) ) )
+            // InternalSimpleBacktrackingBug325745TestLanguage.g:313:2: ( () ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) ) )* ) ) ) ( (otherlv_4= '[' )? ( (lv_terms_5_0= ruleSimpleTerm ) ) (otherlv_6= ']' )? )* ( ( ( ( ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) ) )* ) ) ) )
             {
-            // InternalSimpleBacktrackingBug325745TestLanguage.g:321:1: ( () ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) ) )* ) ) ) ( (otherlv_4= '[' )? ( (lv_terms_5_0= ruleSimpleTerm ) ) (otherlv_6= ']' )? )* ( ( ( ( ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) ) )* ) ) ) )
-            // InternalSimpleBacktrackingBug325745TestLanguage.g:321:2: () ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) ) )* ) ) ) ( (otherlv_4= '[' )? ( (lv_terms_5_0= ruleSimpleTerm ) ) (otherlv_6= ']' )? )* ( ( ( ( ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) ) )* ) ) )
+            // InternalSimpleBacktrackingBug325745TestLanguage.g:313:2: ( () ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) ) )* ) ) ) ( (otherlv_4= '[' )? ( (lv_terms_5_0= ruleSimpleTerm ) ) (otherlv_6= ']' )? )* ( ( ( ( ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) ) )* ) ) ) )
+            // InternalSimpleBacktrackingBug325745TestLanguage.g:314:3: () ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) ) )* ) ) ) ( (otherlv_4= '[' )? ( (lv_terms_5_0= ruleSimpleTerm ) ) (otherlv_6= ']' )? )* ( ( ( ( ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) ) )* ) ) )
             {
-            // InternalSimpleBacktrackingBug325745TestLanguage.g:321:2: ()
-            // InternalSimpleBacktrackingBug325745TestLanguage.g:322:2: 
+            // InternalSimpleBacktrackingBug325745TestLanguage.g:314:3: ()
+            // InternalSimpleBacktrackingBug325745TestLanguage.g:315:4: 
             {
             if ( state.backtracking==0 ) {
-               
-              	  /* */ 
-              	
+
+              				/* */
+              			
             }
             if ( state.backtracking==0 ) {
 
-                      current = forceCreateModelElement(
-                          grammarAccess.getExpressionAccess().getExpressionAction_0(),
-                          current);
-                  
+              				current = forceCreateModelElement(
+              					grammarAccess.getExpressionAccess().getExpressionAction_0(),
+              					current);
+              			
             }
 
             }
 
-            // InternalSimpleBacktrackingBug325745TestLanguage.g:330:2: ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) ) )* ) ) )
-            // InternalSimpleBacktrackingBug325745TestLanguage.g:332:1: ( ( ( ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) ) )* ) )
+            // InternalSimpleBacktrackingBug325745TestLanguage.g:324:3: ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) ) )* ) ) )
+            // InternalSimpleBacktrackingBug325745TestLanguage.g:325:4: ( ( ( ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) ) )* ) )
             {
-            // InternalSimpleBacktrackingBug325745TestLanguage.g:332:1: ( ( ( ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) ) )* ) )
-            // InternalSimpleBacktrackingBug325745TestLanguage.g:333:2: ( ( ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) ) )* )
+            // InternalSimpleBacktrackingBug325745TestLanguage.g:325:4: ( ( ( ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) ) )* ) )
+            // InternalSimpleBacktrackingBug325745TestLanguage.g:326:5: ( ( ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) ) )* )
             {
             getUnorderedGroupHelper().enter(grammarAccess.getExpressionAccess().getUnorderedGroup_1());
-            // InternalSimpleBacktrackingBug325745TestLanguage.g:336:2: ( ( ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) ) )* )
-            // InternalSimpleBacktrackingBug325745TestLanguage.g:337:3: ( ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) ) )*
+            // InternalSimpleBacktrackingBug325745TestLanguage.g:329:5: ( ( ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) ) )* )
+            // InternalSimpleBacktrackingBug325745TestLanguage.g:330:6: ( ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) ) )*
             {
-            // InternalSimpleBacktrackingBug325745TestLanguage.g:337:3: ( ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) ) )*
+            // InternalSimpleBacktrackingBug325745TestLanguage.g:330:6: ( ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) ) )*
             loop4:
             do {
                 int alt4=3;
@@ -832,34 +846,34 @@ public class InternalSimpleBacktrackingBug325745TestLanguageParser extends Abstr
 
                 switch (alt4) {
             	case 1 :
-            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:339:4: ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) )
+            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:331:4: ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) )
             	    {
-            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:339:4: ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) )
-            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:340:5: {...}? => ( ({...}? => (otherlv_2= '[' ) ) )
+            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:331:4: ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) )
+            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:332:5: {...}? => ( ({...}? => (otherlv_2= '[' ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getExpressionAccess().getUnorderedGroup_1(), 0) ) {
             	        if (state.backtracking>0) {state.failed=true; return current;}
             	        throw new FailedPredicateException(input, "ruleExpression", "getUnorderedGroupHelper().canSelect(grammarAccess.getExpressionAccess().getUnorderedGroup_1(), 0)");
             	    }
-            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:340:107: ( ({...}? => (otherlv_2= '[' ) ) )
-            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:341:6: ({...}? => (otherlv_2= '[' ) )
+            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:332:107: ( ({...}? => (otherlv_2= '[' ) ) )
+            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:333:6: ({...}? => (otherlv_2= '[' ) )
             	    {
             	    getUnorderedGroupHelper().select(grammarAccess.getExpressionAccess().getUnorderedGroup_1(), 0);
-            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:344:6: ({...}? => (otherlv_2= '[' ) )
-            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:344:7: {...}? => (otherlv_2= '[' )
+            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:336:9: ({...}? => (otherlv_2= '[' ) )
+            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:336:10: {...}? => (otherlv_2= '[' )
             	    {
             	    if ( !((true)) ) {
             	        if (state.backtracking>0) {state.failed=true; return current;}
             	        throw new FailedPredicateException(input, "ruleExpression", "true");
             	    }
-            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:344:16: (otherlv_2= '[' )
-            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:344:18: otherlv_2= '['
+            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:336:19: (otherlv_2= '[' )
+            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:336:20: otherlv_2= '['
             	    {
             	    otherlv_2=(Token)match(input,13,FollowSets000.FOLLOW_8); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
-            	          	newLeafNode(otherlv_2, grammarAccess.getExpressionAccess().getLeftSquareBracketKeyword_1_0());
-            	          
+            	      									newLeafNode(otherlv_2, grammarAccess.getExpressionAccess().getLeftSquareBracketKeyword_1_0());
+            	      								
             	    }
 
             	    }
@@ -878,49 +892,49 @@ public class InternalSimpleBacktrackingBug325745TestLanguageParser extends Abstr
             	    }
             	    break;
             	case 2 :
-            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:355:4: ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) )
+            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:346:4: ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) )
             	    {
-            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:355:4: ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) )
-            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:356:5: {...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) )
+            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:346:4: ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) )
+            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:347:5: {...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getExpressionAccess().getUnorderedGroup_1(), 1) ) {
             	        if (state.backtracking>0) {state.failed=true; return current;}
             	        throw new FailedPredicateException(input, "ruleExpression", "getUnorderedGroupHelper().canSelect(grammarAccess.getExpressionAccess().getUnorderedGroup_1(), 1)");
             	    }
-            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:356:107: ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) )
-            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:357:6: ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) )
+            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:347:107: ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) )
+            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:348:6: ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) )
             	    {
             	    getUnorderedGroupHelper().select(grammarAccess.getExpressionAccess().getUnorderedGroup_1(), 1);
-            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:360:6: ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) )
-            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:360:7: {...}? => ( (lv_prefix_3_0= RULE_STRING ) )
+            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:351:9: ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) )
+            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:351:10: {...}? => ( (lv_prefix_3_0= RULE_STRING ) )
             	    {
             	    if ( !((true)) ) {
             	        if (state.backtracking>0) {state.failed=true; return current;}
             	        throw new FailedPredicateException(input, "ruleExpression", "true");
             	    }
-            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:360:16: ( (lv_prefix_3_0= RULE_STRING ) )
-            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:361:1: (lv_prefix_3_0= RULE_STRING )
+            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:351:19: ( (lv_prefix_3_0= RULE_STRING ) )
+            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:351:20: (lv_prefix_3_0= RULE_STRING )
             	    {
-            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:361:1: (lv_prefix_3_0= RULE_STRING )
-            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:362:3: lv_prefix_3_0= RULE_STRING
+            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:351:20: (lv_prefix_3_0= RULE_STRING )
+            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:352:10: lv_prefix_3_0= RULE_STRING
             	    {
             	    lv_prefix_3_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_8); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
-            	      			newLeafNode(lv_prefix_3_0, grammarAccess.getExpressionAccess().getPrefixSTRINGTerminalRuleCall_1_1_0()); 
-            	      		
+            	      										newLeafNode(lv_prefix_3_0, grammarAccess.getExpressionAccess().getPrefixSTRINGTerminalRuleCall_1_1_0());
+            	      									
             	    }
             	    if ( state.backtracking==0 ) {
 
-            	      	        if (current==null) {
-            	      	            current = createModelElement(grammarAccess.getExpressionRule());
-            	      	        }
-            	             		setWithLastConsumed(
-            	             			current, 
-            	             			"prefix",
-            	              		lv_prefix_3_0, 
-            	              		"org.eclipse.xtext.common.Terminals.STRING");
-            	      	    
+            	      										if (current==null) {
+            	      											current = createModelElement(grammarAccess.getExpressionRule());
+            	      										}
+            	      										setWithLastConsumed(
+            	      											current,
+            	      											"prefix",
+            	      											lv_prefix_3_0,
+            	      											"org.eclipse.xtext.common.Terminals.STRING");
+            	      									
             	    }
 
             	    }
@@ -957,7 +971,7 @@ public class InternalSimpleBacktrackingBug325745TestLanguageParser extends Abstr
 
             }
 
-            // InternalSimpleBacktrackingBug325745TestLanguage.g:392:2: ( (otherlv_4= '[' )? ( (lv_terms_5_0= ruleSimpleTerm ) ) (otherlv_6= ']' )? )*
+            // InternalSimpleBacktrackingBug325745TestLanguage.g:380:3: ( (otherlv_4= '[' )? ( (lv_terms_5_0= ruleSimpleTerm ) ) (otherlv_6= ']' )? )*
             loop7:
             do {
                 int alt7=2;
@@ -970,9 +984,9 @@ public class InternalSimpleBacktrackingBug325745TestLanguageParser extends Abstr
 
                 switch (alt7) {
             	case 1 :
-            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:392:3: (otherlv_4= '[' )? ( (lv_terms_5_0= ruleSimpleTerm ) ) (otherlv_6= ']' )?
+            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:381:4: (otherlv_4= '[' )? ( (lv_terms_5_0= ruleSimpleTerm ) ) (otherlv_6= ']' )?
             	    {
-            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:392:3: (otherlv_4= '[' )?
+            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:381:4: (otherlv_4= '[' )?
             	    int alt5=2;
             	    int LA5_0 = input.LA(1);
 
@@ -981,13 +995,13 @@ public class InternalSimpleBacktrackingBug325745TestLanguageParser extends Abstr
             	    }
             	    switch (alt5) {
             	        case 1 :
-            	            // InternalSimpleBacktrackingBug325745TestLanguage.g:392:5: otherlv_4= '['
+            	            // InternalSimpleBacktrackingBug325745TestLanguage.g:382:5: otherlv_4= '['
             	            {
             	            otherlv_4=(Token)match(input,13,FollowSets000.FOLLOW_9); if (state.failed) return current;
             	            if ( state.backtracking==0 ) {
 
-            	                  	newLeafNode(otherlv_4, grammarAccess.getExpressionAccess().getLeftSquareBracketKeyword_2_0());
-            	                  
+            	              					newLeafNode(otherlv_4, grammarAccess.getExpressionAccess().getLeftSquareBracketKeyword_2_0());
+            	              				
             	            }
 
             	            }
@@ -995,16 +1009,16 @@ public class InternalSimpleBacktrackingBug325745TestLanguageParser extends Abstr
 
             	    }
 
-            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:396:3: ( (lv_terms_5_0= ruleSimpleTerm ) )
-            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:397:1: (lv_terms_5_0= ruleSimpleTerm )
+            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:387:4: ( (lv_terms_5_0= ruleSimpleTerm ) )
+            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:388:5: (lv_terms_5_0= ruleSimpleTerm )
             	    {
-            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:397:1: (lv_terms_5_0= ruleSimpleTerm )
-            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:398:3: lv_terms_5_0= ruleSimpleTerm
+            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:388:5: (lv_terms_5_0= ruleSimpleTerm )
+            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:389:6: lv_terms_5_0= ruleSimpleTerm
             	    {
             	    if ( state.backtracking==0 ) {
-            	       
-            	      	        newCompositeNode(grammarAccess.getExpressionAccess().getTermsSimpleTermParserRuleCall_2_1_0()); 
-            	      	    
+
+            	      						newCompositeNode(grammarAccess.getExpressionAccess().getTermsSimpleTermParserRuleCall_2_1_0());
+            	      					
             	    }
             	    pushFollow(FollowSets000.FOLLOW_8);
             	    lv_terms_5_0=ruleSimpleTerm();
@@ -1013,16 +1027,16 @@ public class InternalSimpleBacktrackingBug325745TestLanguageParser extends Abstr
             	    if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
-            	      	        if (current==null) {
-            	      	            current = createModelElementForParent(grammarAccess.getExpressionRule());
-            	      	        }
-            	             		add(
-            	             			current, 
-            	             			"terms",
-            	              		lv_terms_5_0, 
-            	              		"org.eclipse.xtext.parser.unorderedGroups.BacktrackingBug325745TestLanguage.SimpleTerm");
-            	      	        afterParserOrEnumRuleCall();
-            	      	    
+            	      						if (current==null) {
+            	      							current = createModelElementForParent(grammarAccess.getExpressionRule());
+            	      						}
+            	      						add(
+            	      							current,
+            	      							"terms",
+            	      							lv_terms_5_0,
+            	      							"org.eclipse.xtext.parser.unorderedGroups.BacktrackingBug325745TestLanguage.SimpleTerm");
+            	      						afterParserOrEnumRuleCall();
+            	      					
             	    }
 
             	    }
@@ -1030,7 +1044,7 @@ public class InternalSimpleBacktrackingBug325745TestLanguageParser extends Abstr
 
             	    }
 
-            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:414:2: (otherlv_6= ']' )?
+            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:406:4: (otherlv_6= ']' )?
             	    int alt6=2;
             	    int LA6_0 = input.LA(1);
 
@@ -1043,13 +1057,13 @@ public class InternalSimpleBacktrackingBug325745TestLanguageParser extends Abstr
             	    }
             	    switch (alt6) {
             	        case 1 :
-            	            // InternalSimpleBacktrackingBug325745TestLanguage.g:414:4: otherlv_6= ']'
+            	            // InternalSimpleBacktrackingBug325745TestLanguage.g:407:5: otherlv_6= ']'
             	            {
             	            otherlv_6=(Token)match(input,14,FollowSets000.FOLLOW_8); if (state.failed) return current;
             	            if ( state.backtracking==0 ) {
 
-            	                  	newLeafNode(otherlv_6, grammarAccess.getExpressionAccess().getRightSquareBracketKeyword_2_2());
-            	                  
+            	              					newLeafNode(otherlv_6, grammarAccess.getExpressionAccess().getRightSquareBracketKeyword_2_2());
+            	              				
             	            }
 
             	            }
@@ -1066,17 +1080,17 @@ public class InternalSimpleBacktrackingBug325745TestLanguageParser extends Abstr
                 }
             } while (true);
 
-            // InternalSimpleBacktrackingBug325745TestLanguage.g:418:5: ( ( ( ( ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) ) )* ) ) )
-            // InternalSimpleBacktrackingBug325745TestLanguage.g:420:1: ( ( ( ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) ) )* ) )
+            // InternalSimpleBacktrackingBug325745TestLanguage.g:413:3: ( ( ( ( ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) ) )* ) ) )
+            // InternalSimpleBacktrackingBug325745TestLanguage.g:414:4: ( ( ( ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) ) )* ) )
             {
-            // InternalSimpleBacktrackingBug325745TestLanguage.g:420:1: ( ( ( ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) ) )* ) )
-            // InternalSimpleBacktrackingBug325745TestLanguage.g:421:2: ( ( ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) ) )* )
+            // InternalSimpleBacktrackingBug325745TestLanguage.g:414:4: ( ( ( ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) ) )* ) )
+            // InternalSimpleBacktrackingBug325745TestLanguage.g:415:5: ( ( ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) ) )* )
             {
             getUnorderedGroupHelper().enter(grammarAccess.getExpressionAccess().getUnorderedGroup_3());
-            // InternalSimpleBacktrackingBug325745TestLanguage.g:424:2: ( ( ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) ) )* )
-            // InternalSimpleBacktrackingBug325745TestLanguage.g:425:3: ( ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) ) )*
+            // InternalSimpleBacktrackingBug325745TestLanguage.g:418:5: ( ( ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) ) )* )
+            // InternalSimpleBacktrackingBug325745TestLanguage.g:419:6: ( ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) ) )*
             {
-            // InternalSimpleBacktrackingBug325745TestLanguage.g:425:3: ( ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) ) )*
+            // InternalSimpleBacktrackingBug325745TestLanguage.g:419:6: ( ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) ) | ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) ) )*
             loop8:
             do {
                 int alt8=3;
@@ -1092,34 +1106,34 @@ public class InternalSimpleBacktrackingBug325745TestLanguageParser extends Abstr
 
                 switch (alt8) {
             	case 1 :
-            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:427:4: ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) )
+            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:420:4: ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) )
             	    {
-            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:427:4: ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) )
-            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:428:5: {...}? => ( ({...}? => (otherlv_8= ']' ) ) )
+            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:420:4: ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) )
+            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:421:5: {...}? => ( ({...}? => (otherlv_8= ']' ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getExpressionAccess().getUnorderedGroup_3(), 0) ) {
             	        if (state.backtracking>0) {state.failed=true; return current;}
             	        throw new FailedPredicateException(input, "ruleExpression", "getUnorderedGroupHelper().canSelect(grammarAccess.getExpressionAccess().getUnorderedGroup_3(), 0)");
             	    }
-            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:428:107: ( ({...}? => (otherlv_8= ']' ) ) )
-            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:429:6: ({...}? => (otherlv_8= ']' ) )
+            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:421:107: ( ({...}? => (otherlv_8= ']' ) ) )
+            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:422:6: ({...}? => (otherlv_8= ']' ) )
             	    {
             	    getUnorderedGroupHelper().select(grammarAccess.getExpressionAccess().getUnorderedGroup_3(), 0);
-            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:432:6: ({...}? => (otherlv_8= ']' ) )
-            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:432:7: {...}? => (otherlv_8= ']' )
+            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:425:9: ({...}? => (otherlv_8= ']' ) )
+            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:425:10: {...}? => (otherlv_8= ']' )
             	    {
             	    if ( !((true)) ) {
             	        if (state.backtracking>0) {state.failed=true; return current;}
             	        throw new FailedPredicateException(input, "ruleExpression", "true");
             	    }
-            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:432:16: (otherlv_8= ']' )
-            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:432:18: otherlv_8= ']'
+            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:425:19: (otherlv_8= ']' )
+            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:425:20: otherlv_8= ']'
             	    {
             	    otherlv_8=(Token)match(input,14,FollowSets000.FOLLOW_10); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
-            	          	newLeafNode(otherlv_8, grammarAccess.getExpressionAccess().getRightSquareBracketKeyword_3_0());
-            	          
+            	      									newLeafNode(otherlv_8, grammarAccess.getExpressionAccess().getRightSquareBracketKeyword_3_0());
+            	      								
             	    }
 
             	    }
@@ -1138,49 +1152,49 @@ public class InternalSimpleBacktrackingBug325745TestLanguageParser extends Abstr
             	    }
             	    break;
             	case 2 :
-            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:443:4: ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) )
+            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:435:4: ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) )
             	    {
-            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:443:4: ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) )
-            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:444:5: {...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) )
+            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:435:4: ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) )
+            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:436:5: {...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getExpressionAccess().getUnorderedGroup_3(), 1) ) {
             	        if (state.backtracking>0) {state.failed=true; return current;}
             	        throw new FailedPredicateException(input, "ruleExpression", "getUnorderedGroupHelper().canSelect(grammarAccess.getExpressionAccess().getUnorderedGroup_3(), 1)");
             	    }
-            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:444:107: ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) )
-            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:445:6: ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) )
+            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:436:107: ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) )
+            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:437:6: ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) )
             	    {
             	    getUnorderedGroupHelper().select(grammarAccess.getExpressionAccess().getUnorderedGroup_3(), 1);
-            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:448:6: ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) )
-            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:448:7: {...}? => ( (lv_postfix_9_0= RULE_STRING ) )
+            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:440:9: ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) )
+            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:440:10: {...}? => ( (lv_postfix_9_0= RULE_STRING ) )
             	    {
             	    if ( !((true)) ) {
             	        if (state.backtracking>0) {state.failed=true; return current;}
             	        throw new FailedPredicateException(input, "ruleExpression", "true");
             	    }
-            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:448:16: ( (lv_postfix_9_0= RULE_STRING ) )
-            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:449:1: (lv_postfix_9_0= RULE_STRING )
+            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:440:19: ( (lv_postfix_9_0= RULE_STRING ) )
+            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:440:20: (lv_postfix_9_0= RULE_STRING )
             	    {
-            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:449:1: (lv_postfix_9_0= RULE_STRING )
-            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:450:3: lv_postfix_9_0= RULE_STRING
+            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:440:20: (lv_postfix_9_0= RULE_STRING )
+            	    // InternalSimpleBacktrackingBug325745TestLanguage.g:441:10: lv_postfix_9_0= RULE_STRING
             	    {
             	    lv_postfix_9_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_10); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
-            	      			newLeafNode(lv_postfix_9_0, grammarAccess.getExpressionAccess().getPostfixSTRINGTerminalRuleCall_3_1_0()); 
-            	      		
+            	      										newLeafNode(lv_postfix_9_0, grammarAccess.getExpressionAccess().getPostfixSTRINGTerminalRuleCall_3_1_0());
+            	      									
             	    }
             	    if ( state.backtracking==0 ) {
 
-            	      	        if (current==null) {
-            	      	            current = createModelElement(grammarAccess.getExpressionRule());
-            	      	        }
-            	             		setWithLastConsumed(
-            	             			current, 
-            	             			"postfix",
-            	              		lv_postfix_9_0, 
-            	              		"org.eclipse.xtext.common.Terminals.STRING");
-            	      	    
+            	      										if (current==null) {
+            	      											current = createModelElement(grammarAccess.getExpressionRule());
+            	      										}
+            	      										setWithLastConsumed(
+            	      											current,
+            	      											"postfix",
+            	      											lv_postfix_9_0,
+            	      											"org.eclipse.xtext.common.Terminals.STRING");
+            	      									
             	    }
 
             	    }
@@ -1224,14 +1238,16 @@ public class InternalSimpleBacktrackingBug325745TestLanguageParser extends Abstr
             }
 
             if ( state.backtracking==0 ) {
-               leaveRule(); 
+
+              	leaveRule();
+
             }
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
 
             	myUnorderedGroupState.restore();
@@ -1243,7 +1259,7 @@ public class InternalSimpleBacktrackingBug325745TestLanguageParser extends Abstr
 
 
     // $ANTLR start "entryRuleSimpleTerm"
-    // InternalSimpleBacktrackingBug325745TestLanguage.g:491:1: entryRuleSimpleTerm returns [EObject current=null] : iv_ruleSimpleTerm= ruleSimpleTerm EOF ;
+    // InternalSimpleBacktrackingBug325745TestLanguage.g:476:1: entryRuleSimpleTerm returns [EObject current=null] : iv_ruleSimpleTerm= ruleSimpleTerm EOF ;
     public final EObject entryRuleSimpleTerm() throws RecognitionException {
         EObject current = null;
 
@@ -1251,8 +1267,8 @@ public class InternalSimpleBacktrackingBug325745TestLanguageParser extends Abstr
 
 
         try {
-            // InternalSimpleBacktrackingBug325745TestLanguage.g:492:2: (iv_ruleSimpleTerm= ruleSimpleTerm EOF )
-            // InternalSimpleBacktrackingBug325745TestLanguage.g:493:2: iv_ruleSimpleTerm= ruleSimpleTerm EOF
+            // InternalSimpleBacktrackingBug325745TestLanguage.g:476:51: (iv_ruleSimpleTerm= ruleSimpleTerm EOF )
+            // InternalSimpleBacktrackingBug325745TestLanguage.g:477:2: iv_ruleSimpleTerm= ruleSimpleTerm EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getSimpleTermRule()); 
@@ -1270,11 +1286,11 @@ public class InternalSimpleBacktrackingBug325745TestLanguageParser extends Abstr
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1283,7 +1299,7 @@ public class InternalSimpleBacktrackingBug325745TestLanguageParser extends Abstr
 
 
     // $ANTLR start "ruleSimpleTerm"
-    // InternalSimpleBacktrackingBug325745TestLanguage.g:500:1: ruleSimpleTerm returns [EObject current=null] : ( ( ( (lv_lineCount_0_0= RULE_INT ) ) (otherlv_1= '*' )? ( (lv_charCount_2_0= RULE_INT ) )? (otherlv_3= '!' )? ( (lv_charSet_4_0= RULE_ID ) )? ) | ( (lv_refChar_5_0= RULE_ID ) ) ) ;
+    // InternalSimpleBacktrackingBug325745TestLanguage.g:483:1: ruleSimpleTerm returns [EObject current=null] : ( ( ( (lv_lineCount_0_0= RULE_INT ) ) (otherlv_1= '*' )? ( (lv_charCount_2_0= RULE_INT ) )? (otherlv_3= '!' )? ( (lv_charSet_4_0= RULE_ID ) )? ) | ( (lv_refChar_5_0= RULE_ID ) ) ) ;
     public final EObject ruleSimpleTerm() throws RecognitionException {
         EObject current = null;
 
@@ -1294,13 +1310,14 @@ public class InternalSimpleBacktrackingBug325745TestLanguageParser extends Abstr
         Token lv_charSet_4_0=null;
         Token lv_refChar_5_0=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalSimpleBacktrackingBug325745TestLanguage.g:503:28: ( ( ( ( (lv_lineCount_0_0= RULE_INT ) ) (otherlv_1= '*' )? ( (lv_charCount_2_0= RULE_INT ) )? (otherlv_3= '!' )? ( (lv_charSet_4_0= RULE_ID ) )? ) | ( (lv_refChar_5_0= RULE_ID ) ) ) )
-            // InternalSimpleBacktrackingBug325745TestLanguage.g:504:1: ( ( ( (lv_lineCount_0_0= RULE_INT ) ) (otherlv_1= '*' )? ( (lv_charCount_2_0= RULE_INT ) )? (otherlv_3= '!' )? ( (lv_charSet_4_0= RULE_ID ) )? ) | ( (lv_refChar_5_0= RULE_ID ) ) )
+            // InternalSimpleBacktrackingBug325745TestLanguage.g:489:2: ( ( ( ( (lv_lineCount_0_0= RULE_INT ) ) (otherlv_1= '*' )? ( (lv_charCount_2_0= RULE_INT ) )? (otherlv_3= '!' )? ( (lv_charSet_4_0= RULE_ID ) )? ) | ( (lv_refChar_5_0= RULE_ID ) ) ) )
+            // InternalSimpleBacktrackingBug325745TestLanguage.g:490:2: ( ( ( (lv_lineCount_0_0= RULE_INT ) ) (otherlv_1= '*' )? ( (lv_charCount_2_0= RULE_INT ) )? (otherlv_3= '!' )? ( (lv_charSet_4_0= RULE_ID ) )? ) | ( (lv_refChar_5_0= RULE_ID ) ) )
             {
-            // InternalSimpleBacktrackingBug325745TestLanguage.g:504:1: ( ( ( (lv_lineCount_0_0= RULE_INT ) ) (otherlv_1= '*' )? ( (lv_charCount_2_0= RULE_INT ) )? (otherlv_3= '!' )? ( (lv_charSet_4_0= RULE_ID ) )? ) | ( (lv_refChar_5_0= RULE_ID ) ) )
+            // InternalSimpleBacktrackingBug325745TestLanguage.g:490:2: ( ( ( (lv_lineCount_0_0= RULE_INT ) ) (otherlv_1= '*' )? ( (lv_charCount_2_0= RULE_INT ) )? (otherlv_3= '!' )? ( (lv_charSet_4_0= RULE_ID ) )? ) | ( (lv_refChar_5_0= RULE_ID ) ) )
             int alt13=2;
             int LA13_0 = input.LA(1);
 
@@ -1319,34 +1336,34 @@ public class InternalSimpleBacktrackingBug325745TestLanguageParser extends Abstr
             }
             switch (alt13) {
                 case 1 :
-                    // InternalSimpleBacktrackingBug325745TestLanguage.g:504:2: ( ( (lv_lineCount_0_0= RULE_INT ) ) (otherlv_1= '*' )? ( (lv_charCount_2_0= RULE_INT ) )? (otherlv_3= '!' )? ( (lv_charSet_4_0= RULE_ID ) )? )
+                    // InternalSimpleBacktrackingBug325745TestLanguage.g:491:3: ( ( (lv_lineCount_0_0= RULE_INT ) ) (otherlv_1= '*' )? ( (lv_charCount_2_0= RULE_INT ) )? (otherlv_3= '!' )? ( (lv_charSet_4_0= RULE_ID ) )? )
                     {
-                    // InternalSimpleBacktrackingBug325745TestLanguage.g:504:2: ( ( (lv_lineCount_0_0= RULE_INT ) ) (otherlv_1= '*' )? ( (lv_charCount_2_0= RULE_INT ) )? (otherlv_3= '!' )? ( (lv_charSet_4_0= RULE_ID ) )? )
-                    // InternalSimpleBacktrackingBug325745TestLanguage.g:504:3: ( (lv_lineCount_0_0= RULE_INT ) ) (otherlv_1= '*' )? ( (lv_charCount_2_0= RULE_INT ) )? (otherlv_3= '!' )? ( (lv_charSet_4_0= RULE_ID ) )?
+                    // InternalSimpleBacktrackingBug325745TestLanguage.g:491:3: ( ( (lv_lineCount_0_0= RULE_INT ) ) (otherlv_1= '*' )? ( (lv_charCount_2_0= RULE_INT ) )? (otherlv_3= '!' )? ( (lv_charSet_4_0= RULE_ID ) )? )
+                    // InternalSimpleBacktrackingBug325745TestLanguage.g:492:4: ( (lv_lineCount_0_0= RULE_INT ) ) (otherlv_1= '*' )? ( (lv_charCount_2_0= RULE_INT ) )? (otherlv_3= '!' )? ( (lv_charSet_4_0= RULE_ID ) )?
                     {
-                    // InternalSimpleBacktrackingBug325745TestLanguage.g:504:3: ( (lv_lineCount_0_0= RULE_INT ) )
-                    // InternalSimpleBacktrackingBug325745TestLanguage.g:505:1: (lv_lineCount_0_0= RULE_INT )
+                    // InternalSimpleBacktrackingBug325745TestLanguage.g:492:4: ( (lv_lineCount_0_0= RULE_INT ) )
+                    // InternalSimpleBacktrackingBug325745TestLanguage.g:493:5: (lv_lineCount_0_0= RULE_INT )
                     {
-                    // InternalSimpleBacktrackingBug325745TestLanguage.g:505:1: (lv_lineCount_0_0= RULE_INT )
-                    // InternalSimpleBacktrackingBug325745TestLanguage.g:506:3: lv_lineCount_0_0= RULE_INT
+                    // InternalSimpleBacktrackingBug325745TestLanguage.g:493:5: (lv_lineCount_0_0= RULE_INT )
+                    // InternalSimpleBacktrackingBug325745TestLanguage.g:494:6: lv_lineCount_0_0= RULE_INT
                     {
                     lv_lineCount_0_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_11); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
-                      			newLeafNode(lv_lineCount_0_0, grammarAccess.getSimpleTermAccess().getLineCountINTTerminalRuleCall_0_0_0()); 
-                      		
+                      						newLeafNode(lv_lineCount_0_0, grammarAccess.getSimpleTermAccess().getLineCountINTTerminalRuleCall_0_0_0());
+                      					
                     }
                     if ( state.backtracking==0 ) {
 
-                      	        if (current==null) {
-                      	            current = createModelElement(grammarAccess.getSimpleTermRule());
-                      	        }
-                             		setWithLastConsumed(
-                             			current, 
-                             			"lineCount",
-                              		lv_lineCount_0_0, 
-                              		"org.eclipse.xtext.common.Terminals.INT");
-                      	    
+                      						if (current==null) {
+                      							current = createModelElement(grammarAccess.getSimpleTermRule());
+                      						}
+                      						setWithLastConsumed(
+                      							current,
+                      							"lineCount",
+                      							lv_lineCount_0_0,
+                      							"org.eclipse.xtext.common.Terminals.INT");
+                      					
                     }
 
                     }
@@ -1354,7 +1371,7 @@ public class InternalSimpleBacktrackingBug325745TestLanguageParser extends Abstr
 
                     }
 
-                    // InternalSimpleBacktrackingBug325745TestLanguage.g:522:2: (otherlv_1= '*' )?
+                    // InternalSimpleBacktrackingBug325745TestLanguage.g:510:4: (otherlv_1= '*' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -1363,13 +1380,13 @@ public class InternalSimpleBacktrackingBug325745TestLanguageParser extends Abstr
                     }
                     switch (alt9) {
                         case 1 :
-                            // InternalSimpleBacktrackingBug325745TestLanguage.g:522:4: otherlv_1= '*'
+                            // InternalSimpleBacktrackingBug325745TestLanguage.g:511:5: otherlv_1= '*'
                             {
                             otherlv_1=(Token)match(input,15,FollowSets000.FOLLOW_12); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
-                                  	newLeafNode(otherlv_1, grammarAccess.getSimpleTermAccess().getAsteriskKeyword_0_1());
-                                  
+                              					newLeafNode(otherlv_1, grammarAccess.getSimpleTermAccess().getAsteriskKeyword_0_1());
+                              				
                             }
 
                             }
@@ -1377,7 +1394,7 @@ public class InternalSimpleBacktrackingBug325745TestLanguageParser extends Abstr
 
                     }
 
-                    // InternalSimpleBacktrackingBug325745TestLanguage.g:526:3: ( (lv_charCount_2_0= RULE_INT ) )?
+                    // InternalSimpleBacktrackingBug325745TestLanguage.g:516:4: ( (lv_charCount_2_0= RULE_INT ) )?
                     int alt10=2;
                     int LA10_0 = input.LA(1);
 
@@ -1390,28 +1407,28 @@ public class InternalSimpleBacktrackingBug325745TestLanguageParser extends Abstr
                     }
                     switch (alt10) {
                         case 1 :
-                            // InternalSimpleBacktrackingBug325745TestLanguage.g:527:1: (lv_charCount_2_0= RULE_INT )
+                            // InternalSimpleBacktrackingBug325745TestLanguage.g:517:5: (lv_charCount_2_0= RULE_INT )
                             {
-                            // InternalSimpleBacktrackingBug325745TestLanguage.g:527:1: (lv_charCount_2_0= RULE_INT )
-                            // InternalSimpleBacktrackingBug325745TestLanguage.g:528:3: lv_charCount_2_0= RULE_INT
+                            // InternalSimpleBacktrackingBug325745TestLanguage.g:517:5: (lv_charCount_2_0= RULE_INT )
+                            // InternalSimpleBacktrackingBug325745TestLanguage.g:518:6: lv_charCount_2_0= RULE_INT
                             {
                             lv_charCount_2_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_13); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
-                              			newLeafNode(lv_charCount_2_0, grammarAccess.getSimpleTermAccess().getCharCountINTTerminalRuleCall_0_2_0()); 
-                              		
+                              						newLeafNode(lv_charCount_2_0, grammarAccess.getSimpleTermAccess().getCharCountINTTerminalRuleCall_0_2_0());
+                              					
                             }
                             if ( state.backtracking==0 ) {
 
-                              	        if (current==null) {
-                              	            current = createModelElement(grammarAccess.getSimpleTermRule());
-                              	        }
-                                     		setWithLastConsumed(
-                                     			current, 
-                                     			"charCount",
-                                      		lv_charCount_2_0, 
-                                      		"org.eclipse.xtext.common.Terminals.INT");
-                              	    
+                              						if (current==null) {
+                              							current = createModelElement(grammarAccess.getSimpleTermRule());
+                              						}
+                              						setWithLastConsumed(
+                              							current,
+                              							"charCount",
+                              							lv_charCount_2_0,
+                              							"org.eclipse.xtext.common.Terminals.INT");
+                              					
                             }
 
                             }
@@ -1422,7 +1439,7 @@ public class InternalSimpleBacktrackingBug325745TestLanguageParser extends Abstr
 
                     }
 
-                    // InternalSimpleBacktrackingBug325745TestLanguage.g:544:3: (otherlv_3= '!' )?
+                    // InternalSimpleBacktrackingBug325745TestLanguage.g:534:4: (otherlv_3= '!' )?
                     int alt11=2;
                     int LA11_0 = input.LA(1);
 
@@ -1431,13 +1448,13 @@ public class InternalSimpleBacktrackingBug325745TestLanguageParser extends Abstr
                     }
                     switch (alt11) {
                         case 1 :
-                            // InternalSimpleBacktrackingBug325745TestLanguage.g:544:5: otherlv_3= '!'
+                            // InternalSimpleBacktrackingBug325745TestLanguage.g:535:5: otherlv_3= '!'
                             {
                             otherlv_3=(Token)match(input,16,FollowSets000.FOLLOW_3); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
-                                  	newLeafNode(otherlv_3, grammarAccess.getSimpleTermAccess().getExclamationMarkKeyword_0_3());
-                                  
+                              					newLeafNode(otherlv_3, grammarAccess.getSimpleTermAccess().getExclamationMarkKeyword_0_3());
+                              				
                             }
 
                             }
@@ -1445,7 +1462,7 @@ public class InternalSimpleBacktrackingBug325745TestLanguageParser extends Abstr
 
                     }
 
-                    // InternalSimpleBacktrackingBug325745TestLanguage.g:548:3: ( (lv_charSet_4_0= RULE_ID ) )?
+                    // InternalSimpleBacktrackingBug325745TestLanguage.g:540:4: ( (lv_charSet_4_0= RULE_ID ) )?
                     int alt12=2;
                     int LA12_0 = input.LA(1);
 
@@ -1458,28 +1475,28 @@ public class InternalSimpleBacktrackingBug325745TestLanguageParser extends Abstr
                     }
                     switch (alt12) {
                         case 1 :
-                            // InternalSimpleBacktrackingBug325745TestLanguage.g:549:1: (lv_charSet_4_0= RULE_ID )
+                            // InternalSimpleBacktrackingBug325745TestLanguage.g:541:5: (lv_charSet_4_0= RULE_ID )
                             {
-                            // InternalSimpleBacktrackingBug325745TestLanguage.g:549:1: (lv_charSet_4_0= RULE_ID )
-                            // InternalSimpleBacktrackingBug325745TestLanguage.g:550:3: lv_charSet_4_0= RULE_ID
+                            // InternalSimpleBacktrackingBug325745TestLanguage.g:541:5: (lv_charSet_4_0= RULE_ID )
+                            // InternalSimpleBacktrackingBug325745TestLanguage.g:542:6: lv_charSet_4_0= RULE_ID
                             {
                             lv_charSet_4_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
-                              			newLeafNode(lv_charSet_4_0, grammarAccess.getSimpleTermAccess().getCharSetIDTerminalRuleCall_0_4_0()); 
-                              		
+                              						newLeafNode(lv_charSet_4_0, grammarAccess.getSimpleTermAccess().getCharSetIDTerminalRuleCall_0_4_0());
+                              					
                             }
                             if ( state.backtracking==0 ) {
 
-                              	        if (current==null) {
-                              	            current = createModelElement(grammarAccess.getSimpleTermRule());
-                              	        }
-                                     		setWithLastConsumed(
-                                     			current, 
-                                     			"charSet",
-                                      		lv_charSet_4_0, 
-                                      		"org.eclipse.xtext.common.Terminals.ID");
-                              	    
+                              						if (current==null) {
+                              							current = createModelElement(grammarAccess.getSimpleTermRule());
+                              						}
+                              						setWithLastConsumed(
+                              							current,
+                              							"charSet",
+                              							lv_charSet_4_0,
+                              							"org.eclipse.xtext.common.Terminals.ID");
+                              					
                             }
 
                             }
@@ -1497,31 +1514,31 @@ public class InternalSimpleBacktrackingBug325745TestLanguageParser extends Abstr
                     }
                     break;
                 case 2 :
-                    // InternalSimpleBacktrackingBug325745TestLanguage.g:567:6: ( (lv_refChar_5_0= RULE_ID ) )
+                    // InternalSimpleBacktrackingBug325745TestLanguage.g:560:3: ( (lv_refChar_5_0= RULE_ID ) )
                     {
-                    // InternalSimpleBacktrackingBug325745TestLanguage.g:567:6: ( (lv_refChar_5_0= RULE_ID ) )
-                    // InternalSimpleBacktrackingBug325745TestLanguage.g:568:1: (lv_refChar_5_0= RULE_ID )
+                    // InternalSimpleBacktrackingBug325745TestLanguage.g:560:3: ( (lv_refChar_5_0= RULE_ID ) )
+                    // InternalSimpleBacktrackingBug325745TestLanguage.g:561:4: (lv_refChar_5_0= RULE_ID )
                     {
-                    // InternalSimpleBacktrackingBug325745TestLanguage.g:568:1: (lv_refChar_5_0= RULE_ID )
-                    // InternalSimpleBacktrackingBug325745TestLanguage.g:569:3: lv_refChar_5_0= RULE_ID
+                    // InternalSimpleBacktrackingBug325745TestLanguage.g:561:4: (lv_refChar_5_0= RULE_ID )
+                    // InternalSimpleBacktrackingBug325745TestLanguage.g:562:5: lv_refChar_5_0= RULE_ID
                     {
                     lv_refChar_5_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
-                      			newLeafNode(lv_refChar_5_0, grammarAccess.getSimpleTermAccess().getRefCharIDTerminalRuleCall_1_0()); 
-                      		
+                      					newLeafNode(lv_refChar_5_0, grammarAccess.getSimpleTermAccess().getRefCharIDTerminalRuleCall_1_0());
+                      				
                     }
                     if ( state.backtracking==0 ) {
 
-                      	        if (current==null) {
-                      	            current = createModelElement(grammarAccess.getSimpleTermRule());
-                      	        }
-                             		setWithLastConsumed(
-                             			current, 
-                             			"refChar",
-                              		lv_refChar_5_0, 
-                              		"org.eclipse.xtext.common.Terminals.ID");
-                      	    
+                      					if (current==null) {
+                      						current = createModelElement(grammarAccess.getSimpleTermRule());
+                      					}
+                      					setWithLastConsumed(
+                      						current,
+                      						"refChar",
+                      						lv_refChar_5_0,
+                      						"org.eclipse.xtext.common.Terminals.ID");
+                      				
                     }
 
                     }
@@ -1539,14 +1556,16 @@ public class InternalSimpleBacktrackingBug325745TestLanguageParser extends Abstr
             }
 
             if ( state.backtracking==0 ) {
-               leaveRule(); 
+
+              	leaveRule();
+
             }
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1558,16 +1577,16 @@ public class InternalSimpleBacktrackingBug325745TestLanguageParser extends Abstr
         EObject lv_dataType_1_0 = null;
 
 
-        // InternalSimpleBacktrackingBug325745TestLanguage.g:187:1: ( (lv_dataType_1_0= ruleDataType ) )
-        // InternalSimpleBacktrackingBug325745TestLanguage.g:187:1: (lv_dataType_1_0= ruleDataType )
+        // InternalSimpleBacktrackingBug325745TestLanguage.g:181:4: ( (lv_dataType_1_0= ruleDataType ) )
+        // InternalSimpleBacktrackingBug325745TestLanguage.g:181:4: (lv_dataType_1_0= ruleDataType )
         {
-        // InternalSimpleBacktrackingBug325745TestLanguage.g:187:1: (lv_dataType_1_0= ruleDataType )
-        // InternalSimpleBacktrackingBug325745TestLanguage.g:188:3: lv_dataType_1_0= ruleDataType
+        // InternalSimpleBacktrackingBug325745TestLanguage.g:181:4: (lv_dataType_1_0= ruleDataType )
+        // InternalSimpleBacktrackingBug325745TestLanguage.g:182:5: lv_dataType_1_0= ruleDataType
         {
         if ( state.backtracking==0 ) {
-           
-          	        newCompositeNode(grammarAccess.getElementAccess().getDataTypeDataTypeParserRuleCall_1_0()); 
-          	    
+
+          					newCompositeNode(grammarAccess.getElementAccess().getDataTypeDataTypeParserRuleCall_1_0());
+          				
         }
         pushFollow(FollowSets000.FOLLOW_2);
         lv_dataType_1_0=ruleDataType();
@@ -1586,29 +1605,29 @@ public class InternalSimpleBacktrackingBug325745TestLanguageParser extends Abstr
     public final void synpred4_InternalSimpleBacktrackingBug325745TestLanguage_fragment() throws RecognitionException {   
         Token otherlv_2=null;
 
-        // InternalSimpleBacktrackingBug325745TestLanguage.g:339:4: ( ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) ) )
-        // InternalSimpleBacktrackingBug325745TestLanguage.g:339:4: ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) )
+        // InternalSimpleBacktrackingBug325745TestLanguage.g:331:4: ( ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) ) )
+        // InternalSimpleBacktrackingBug325745TestLanguage.g:331:4: ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) )
         {
-        // InternalSimpleBacktrackingBug325745TestLanguage.g:339:4: ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) )
-        // InternalSimpleBacktrackingBug325745TestLanguage.g:340:5: {...}? => ( ({...}? => (otherlv_2= '[' ) ) )
+        // InternalSimpleBacktrackingBug325745TestLanguage.g:331:4: ({...}? => ( ({...}? => (otherlv_2= '[' ) ) ) )
+        // InternalSimpleBacktrackingBug325745TestLanguage.g:332:5: {...}? => ( ({...}? => (otherlv_2= '[' ) ) )
         {
         if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getExpressionAccess().getUnorderedGroup_1(), 0) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred4_InternalSimpleBacktrackingBug325745TestLanguage", "getUnorderedGroupHelper().canSelect(grammarAccess.getExpressionAccess().getUnorderedGroup_1(), 0)");
         }
-        // InternalSimpleBacktrackingBug325745TestLanguage.g:340:107: ( ({...}? => (otherlv_2= '[' ) ) )
-        // InternalSimpleBacktrackingBug325745TestLanguage.g:341:6: ({...}? => (otherlv_2= '[' ) )
+        // InternalSimpleBacktrackingBug325745TestLanguage.g:332:107: ( ({...}? => (otherlv_2= '[' ) ) )
+        // InternalSimpleBacktrackingBug325745TestLanguage.g:333:6: ({...}? => (otherlv_2= '[' ) )
         {
         getUnorderedGroupHelper().select(grammarAccess.getExpressionAccess().getUnorderedGroup_1(), 0);
-        // InternalSimpleBacktrackingBug325745TestLanguage.g:344:6: ({...}? => (otherlv_2= '[' ) )
-        // InternalSimpleBacktrackingBug325745TestLanguage.g:344:7: {...}? => (otherlv_2= '[' )
+        // InternalSimpleBacktrackingBug325745TestLanguage.g:336:9: ({...}? => (otherlv_2= '[' ) )
+        // InternalSimpleBacktrackingBug325745TestLanguage.g:336:10: {...}? => (otherlv_2= '[' )
         {
         if ( !((true)) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred4_InternalSimpleBacktrackingBug325745TestLanguage", "true");
         }
-        // InternalSimpleBacktrackingBug325745TestLanguage.g:344:16: (otherlv_2= '[' )
-        // InternalSimpleBacktrackingBug325745TestLanguage.g:344:18: otherlv_2= '['
+        // InternalSimpleBacktrackingBug325745TestLanguage.g:336:19: (otherlv_2= '[' )
+        // InternalSimpleBacktrackingBug325745TestLanguage.g:336:20: otherlv_2= '['
         {
         otherlv_2=(Token)match(input,13,FollowSets000.FOLLOW_2); if (state.failed) return ;
 
@@ -1632,32 +1651,32 @@ public class InternalSimpleBacktrackingBug325745TestLanguageParser extends Abstr
     public final void synpred5_InternalSimpleBacktrackingBug325745TestLanguage_fragment() throws RecognitionException {   
         Token lv_prefix_3_0=null;
 
-        // InternalSimpleBacktrackingBug325745TestLanguage.g:355:4: ( ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) ) )
-        // InternalSimpleBacktrackingBug325745TestLanguage.g:355:4: ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) )
+        // InternalSimpleBacktrackingBug325745TestLanguage.g:346:4: ( ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) ) )
+        // InternalSimpleBacktrackingBug325745TestLanguage.g:346:4: ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) )
         {
-        // InternalSimpleBacktrackingBug325745TestLanguage.g:355:4: ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) )
-        // InternalSimpleBacktrackingBug325745TestLanguage.g:356:5: {...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) )
+        // InternalSimpleBacktrackingBug325745TestLanguage.g:346:4: ({...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) ) )
+        // InternalSimpleBacktrackingBug325745TestLanguage.g:347:5: {...}? => ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) )
         {
         if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getExpressionAccess().getUnorderedGroup_1(), 1) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred5_InternalSimpleBacktrackingBug325745TestLanguage", "getUnorderedGroupHelper().canSelect(grammarAccess.getExpressionAccess().getUnorderedGroup_1(), 1)");
         }
-        // InternalSimpleBacktrackingBug325745TestLanguage.g:356:107: ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) )
-        // InternalSimpleBacktrackingBug325745TestLanguage.g:357:6: ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) )
+        // InternalSimpleBacktrackingBug325745TestLanguage.g:347:107: ( ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) ) )
+        // InternalSimpleBacktrackingBug325745TestLanguage.g:348:6: ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) )
         {
         getUnorderedGroupHelper().select(grammarAccess.getExpressionAccess().getUnorderedGroup_1(), 1);
-        // InternalSimpleBacktrackingBug325745TestLanguage.g:360:6: ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) )
-        // InternalSimpleBacktrackingBug325745TestLanguage.g:360:7: {...}? => ( (lv_prefix_3_0= RULE_STRING ) )
+        // InternalSimpleBacktrackingBug325745TestLanguage.g:351:9: ({...}? => ( (lv_prefix_3_0= RULE_STRING ) ) )
+        // InternalSimpleBacktrackingBug325745TestLanguage.g:351:10: {...}? => ( (lv_prefix_3_0= RULE_STRING ) )
         {
         if ( !((true)) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred5_InternalSimpleBacktrackingBug325745TestLanguage", "true");
         }
-        // InternalSimpleBacktrackingBug325745TestLanguage.g:360:16: ( (lv_prefix_3_0= RULE_STRING ) )
-        // InternalSimpleBacktrackingBug325745TestLanguage.g:361:1: (lv_prefix_3_0= RULE_STRING )
+        // InternalSimpleBacktrackingBug325745TestLanguage.g:351:19: ( (lv_prefix_3_0= RULE_STRING ) )
+        // InternalSimpleBacktrackingBug325745TestLanguage.g:351:20: (lv_prefix_3_0= RULE_STRING )
         {
-        // InternalSimpleBacktrackingBug325745TestLanguage.g:361:1: (lv_prefix_3_0= RULE_STRING )
-        // InternalSimpleBacktrackingBug325745TestLanguage.g:362:3: lv_prefix_3_0= RULE_STRING
+        // InternalSimpleBacktrackingBug325745TestLanguage.g:351:20: (lv_prefix_3_0= RULE_STRING )
+        // InternalSimpleBacktrackingBug325745TestLanguage.g:352:10: lv_prefix_3_0= RULE_STRING
         {
         lv_prefix_3_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_2); if (state.failed) return ;
 
@@ -1684,8 +1703,8 @@ public class InternalSimpleBacktrackingBug325745TestLanguageParser extends Abstr
     public final void synpred7_InternalSimpleBacktrackingBug325745TestLanguage_fragment() throws RecognitionException {   
         Token otherlv_6=null;
 
-        // InternalSimpleBacktrackingBug325745TestLanguage.g:414:4: (otherlv_6= ']' )
-        // InternalSimpleBacktrackingBug325745TestLanguage.g:414:4: otherlv_6= ']'
+        // InternalSimpleBacktrackingBug325745TestLanguage.g:407:5: (otherlv_6= ']' )
+        // InternalSimpleBacktrackingBug325745TestLanguage.g:407:5: otherlv_6= ']'
         {
         otherlv_6=(Token)match(input,14,FollowSets000.FOLLOW_2); if (state.failed) return ;
 
@@ -1697,29 +1716,29 @@ public class InternalSimpleBacktrackingBug325745TestLanguageParser extends Abstr
     public final void synpred9_InternalSimpleBacktrackingBug325745TestLanguage_fragment() throws RecognitionException {   
         Token otherlv_8=null;
 
-        // InternalSimpleBacktrackingBug325745TestLanguage.g:427:4: ( ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) ) )
-        // InternalSimpleBacktrackingBug325745TestLanguage.g:427:4: ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) )
+        // InternalSimpleBacktrackingBug325745TestLanguage.g:420:4: ( ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) ) )
+        // InternalSimpleBacktrackingBug325745TestLanguage.g:420:4: ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) )
         {
-        // InternalSimpleBacktrackingBug325745TestLanguage.g:427:4: ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) )
-        // InternalSimpleBacktrackingBug325745TestLanguage.g:428:5: {...}? => ( ({...}? => (otherlv_8= ']' ) ) )
+        // InternalSimpleBacktrackingBug325745TestLanguage.g:420:4: ({...}? => ( ({...}? => (otherlv_8= ']' ) ) ) )
+        // InternalSimpleBacktrackingBug325745TestLanguage.g:421:5: {...}? => ( ({...}? => (otherlv_8= ']' ) ) )
         {
         if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getExpressionAccess().getUnorderedGroup_3(), 0) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred9_InternalSimpleBacktrackingBug325745TestLanguage", "getUnorderedGroupHelper().canSelect(grammarAccess.getExpressionAccess().getUnorderedGroup_3(), 0)");
         }
-        // InternalSimpleBacktrackingBug325745TestLanguage.g:428:107: ( ({...}? => (otherlv_8= ']' ) ) )
-        // InternalSimpleBacktrackingBug325745TestLanguage.g:429:6: ({...}? => (otherlv_8= ']' ) )
+        // InternalSimpleBacktrackingBug325745TestLanguage.g:421:107: ( ({...}? => (otherlv_8= ']' ) ) )
+        // InternalSimpleBacktrackingBug325745TestLanguage.g:422:6: ({...}? => (otherlv_8= ']' ) )
         {
         getUnorderedGroupHelper().select(grammarAccess.getExpressionAccess().getUnorderedGroup_3(), 0);
-        // InternalSimpleBacktrackingBug325745TestLanguage.g:432:6: ({...}? => (otherlv_8= ']' ) )
-        // InternalSimpleBacktrackingBug325745TestLanguage.g:432:7: {...}? => (otherlv_8= ']' )
+        // InternalSimpleBacktrackingBug325745TestLanguage.g:425:9: ({...}? => (otherlv_8= ']' ) )
+        // InternalSimpleBacktrackingBug325745TestLanguage.g:425:10: {...}? => (otherlv_8= ']' )
         {
         if ( !((true)) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred9_InternalSimpleBacktrackingBug325745TestLanguage", "true");
         }
-        // InternalSimpleBacktrackingBug325745TestLanguage.g:432:16: (otherlv_8= ']' )
-        // InternalSimpleBacktrackingBug325745TestLanguage.g:432:18: otherlv_8= ']'
+        // InternalSimpleBacktrackingBug325745TestLanguage.g:425:19: (otherlv_8= ']' )
+        // InternalSimpleBacktrackingBug325745TestLanguage.g:425:20: otherlv_8= ']'
         {
         otherlv_8=(Token)match(input,14,FollowSets000.FOLLOW_2); if (state.failed) return ;
 
@@ -1743,32 +1762,32 @@ public class InternalSimpleBacktrackingBug325745TestLanguageParser extends Abstr
     public final void synpred10_InternalSimpleBacktrackingBug325745TestLanguage_fragment() throws RecognitionException {   
         Token lv_postfix_9_0=null;
 
-        // InternalSimpleBacktrackingBug325745TestLanguage.g:443:4: ( ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) ) )
-        // InternalSimpleBacktrackingBug325745TestLanguage.g:443:4: ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) )
+        // InternalSimpleBacktrackingBug325745TestLanguage.g:435:4: ( ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) ) )
+        // InternalSimpleBacktrackingBug325745TestLanguage.g:435:4: ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) )
         {
-        // InternalSimpleBacktrackingBug325745TestLanguage.g:443:4: ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) )
-        // InternalSimpleBacktrackingBug325745TestLanguage.g:444:5: {...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) )
+        // InternalSimpleBacktrackingBug325745TestLanguage.g:435:4: ({...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) ) )
+        // InternalSimpleBacktrackingBug325745TestLanguage.g:436:5: {...}? => ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) )
         {
         if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getExpressionAccess().getUnorderedGroup_3(), 1) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred10_InternalSimpleBacktrackingBug325745TestLanguage", "getUnorderedGroupHelper().canSelect(grammarAccess.getExpressionAccess().getUnorderedGroup_3(), 1)");
         }
-        // InternalSimpleBacktrackingBug325745TestLanguage.g:444:107: ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) )
-        // InternalSimpleBacktrackingBug325745TestLanguage.g:445:6: ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) )
+        // InternalSimpleBacktrackingBug325745TestLanguage.g:436:107: ( ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) ) )
+        // InternalSimpleBacktrackingBug325745TestLanguage.g:437:6: ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) )
         {
         getUnorderedGroupHelper().select(grammarAccess.getExpressionAccess().getUnorderedGroup_3(), 1);
-        // InternalSimpleBacktrackingBug325745TestLanguage.g:448:6: ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) )
-        // InternalSimpleBacktrackingBug325745TestLanguage.g:448:7: {...}? => ( (lv_postfix_9_0= RULE_STRING ) )
+        // InternalSimpleBacktrackingBug325745TestLanguage.g:440:9: ({...}? => ( (lv_postfix_9_0= RULE_STRING ) ) )
+        // InternalSimpleBacktrackingBug325745TestLanguage.g:440:10: {...}? => ( (lv_postfix_9_0= RULE_STRING ) )
         {
         if ( !((true)) ) {
             if (state.backtracking>0) {state.failed=true; return ;}
             throw new FailedPredicateException(input, "synpred10_InternalSimpleBacktrackingBug325745TestLanguage", "true");
         }
-        // InternalSimpleBacktrackingBug325745TestLanguage.g:448:16: ( (lv_postfix_9_0= RULE_STRING ) )
-        // InternalSimpleBacktrackingBug325745TestLanguage.g:449:1: (lv_postfix_9_0= RULE_STRING )
+        // InternalSimpleBacktrackingBug325745TestLanguage.g:440:19: ( (lv_postfix_9_0= RULE_STRING ) )
+        // InternalSimpleBacktrackingBug325745TestLanguage.g:440:20: (lv_postfix_9_0= RULE_STRING )
         {
-        // InternalSimpleBacktrackingBug325745TestLanguage.g:449:1: (lv_postfix_9_0= RULE_STRING )
-        // InternalSimpleBacktrackingBug325745TestLanguage.g:450:3: lv_postfix_9_0= RULE_STRING
+        // InternalSimpleBacktrackingBug325745TestLanguage.g:440:20: (lv_postfix_9_0= RULE_STRING )
+        // InternalSimpleBacktrackingBug325745TestLanguage.g:441:10: lv_postfix_9_0= RULE_STRING
         {
         lv_postfix_9_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_2); if (state.failed) return ;
 
@@ -1795,11 +1814,11 @@ public class InternalSimpleBacktrackingBug325745TestLanguageParser extends Abstr
     public final void synpred12_InternalSimpleBacktrackingBug325745TestLanguage_fragment() throws RecognitionException {   
         Token lv_charCount_2_0=null;
 
-        // InternalSimpleBacktrackingBug325745TestLanguage.g:527:1: ( (lv_charCount_2_0= RULE_INT ) )
-        // InternalSimpleBacktrackingBug325745TestLanguage.g:527:1: (lv_charCount_2_0= RULE_INT )
+        // InternalSimpleBacktrackingBug325745TestLanguage.g:517:5: ( (lv_charCount_2_0= RULE_INT ) )
+        // InternalSimpleBacktrackingBug325745TestLanguage.g:517:5: (lv_charCount_2_0= RULE_INT )
         {
-        // InternalSimpleBacktrackingBug325745TestLanguage.g:527:1: (lv_charCount_2_0= RULE_INT )
-        // InternalSimpleBacktrackingBug325745TestLanguage.g:528:3: lv_charCount_2_0= RULE_INT
+        // InternalSimpleBacktrackingBug325745TestLanguage.g:517:5: (lv_charCount_2_0= RULE_INT )
+        // InternalSimpleBacktrackingBug325745TestLanguage.g:518:6: lv_charCount_2_0= RULE_INT
         {
         lv_charCount_2_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_2); if (state.failed) return ;
 
@@ -1814,11 +1833,11 @@ public class InternalSimpleBacktrackingBug325745TestLanguageParser extends Abstr
     public final void synpred14_InternalSimpleBacktrackingBug325745TestLanguage_fragment() throws RecognitionException {   
         Token lv_charSet_4_0=null;
 
-        // InternalSimpleBacktrackingBug325745TestLanguage.g:549:1: ( (lv_charSet_4_0= RULE_ID ) )
-        // InternalSimpleBacktrackingBug325745TestLanguage.g:549:1: (lv_charSet_4_0= RULE_ID )
+        // InternalSimpleBacktrackingBug325745TestLanguage.g:541:5: ( (lv_charSet_4_0= RULE_ID ) )
+        // InternalSimpleBacktrackingBug325745TestLanguage.g:541:5: (lv_charSet_4_0= RULE_ID )
         {
-        // InternalSimpleBacktrackingBug325745TestLanguage.g:549:1: (lv_charSet_4_0= RULE_ID )
-        // InternalSimpleBacktrackingBug325745TestLanguage.g:550:3: lv_charSet_4_0= RULE_ID
+        // InternalSimpleBacktrackingBug325745TestLanguage.g:541:5: (lv_charSet_4_0= RULE_ID )
+        // InternalSimpleBacktrackingBug325745TestLanguage.g:542:6: lv_charSet_4_0= RULE_ID
         {
         lv_charSet_4_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); if (state.failed) return ;
 

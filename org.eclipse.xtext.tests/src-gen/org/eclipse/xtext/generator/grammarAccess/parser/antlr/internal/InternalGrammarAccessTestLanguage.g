@@ -5,7 +5,6 @@ grammar InternalGrammarAccessTestLanguage;
 
 options {
 	superClass=AbstractInternalAntlrParser;
-	
 }
 
 @lexer::header {
@@ -17,7 +16,7 @@ import org.eclipse.xtext.parser.antlr.Lexer;
 }
 
 @parser::header {
-package org.eclipse.xtext.generator.grammarAccess.parser.antlr.internal; 
+package org.eclipse.xtext.generator.grammarAccess.parser.antlr.internal;
 
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
@@ -35,174 +34,163 @@ import org.eclipse.xtext.generator.grammarAccess.services.GrammarAccessTestLangu
 @parser::members {
 
  	private GrammarAccessTestLanguageGrammarAccess grammarAccess;
- 	
+
     public InternalGrammarAccessTestLanguageParser(TokenStream input, GrammarAccessTestLanguageGrammarAccess grammarAccess) {
         this(input);
         this.grammarAccess = grammarAccess;
         registerRules(grammarAccess.getGrammar());
     }
-    
+
     @Override
     protected String getFirstRuleName() {
-    	return "Root";	
+    	return "Root";
    	}
-   	
+
    	@Override
    	protected GrammarAccessTestLanguageGrammarAccess getGrammarAccess() {
    		return grammarAccess;
    	}
+
 }
 
-@rulecatch { 
-    catch (RecognitionException re) { 
-        recover(input,re); 
+@rulecatch {
+    catch (RecognitionException re) {
+        recover(input,re);
         appendSkippedTokens();
-    } 
+    }
 }
-
-
-
 
 // Entry rule entryRuleRoot
-entryRuleRoot returns [EObject current=null] 
-	:
+entryRuleRoot returns [EObject current=null]:
 	{ newCompositeNode(grammarAccess.getRootRule()); }
-	 iv_ruleRoot=ruleRoot 
-	 { $current=$iv_ruleRoot.current; } 
-	 EOF 
-;
+	iv_ruleRoot=ruleRoot
+	{ $current=$iv_ruleRoot.current; }
+	EOF;
 
 // Rule Root
-ruleRoot returns [EObject current=null] 
-    @init { enterRule(); 
-    }
-    @after { leaveRule(); }:
-(
-(
-		{ 
-	        newCompositeNode(grammarAccess.getRootAccess().getElementsTypeParserRuleCall_0()); 
-	    }
-		lv_elements_0_0=ruleType		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getRootRule());
-	        }
-       		add(
-       			$current, 
-       			"elements",
-        		lv_elements_0_0, 
-        		"org.eclipse.xtext.generator.grammarAccess.GrammarAccessTestLanguage.Type");
-	        afterParserOrEnumRuleCall();
-	    }
-
-)
-)*
+ruleRoot returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			{
+				newCompositeNode(grammarAccess.getRootAccess().getElementsTypeParserRuleCall_0());
+			}
+			lv_elements_0_0=ruleType
+			{
+				if ($current==null) {
+					$current = createModelElementForParent(grammarAccess.getRootRule());
+				}
+				add(
+					$current,
+					"elements",
+					lv_elements_0_0,
+					"org.eclipse.xtext.generator.grammarAccess.GrammarAccessTestLanguage.Type");
+				afterParserOrEnumRuleCall();
+			}
+		)
+	)*
 ;
-
-
-
-
 
 // Entry rule entryRuleType
-entryRuleType returns [EObject current=null] 
-	:
+entryRuleType returns [EObject current=null]:
 	{ newCompositeNode(grammarAccess.getTypeRule()); }
-	 iv_ruleType=ruleType 
-	 { $current=$iv_ruleType.current; } 
-	 EOF 
-;
+	iv_ruleType=ruleType
+	{ $current=$iv_ruleType.current; }
+	EOF;
 
 // Rule Type
-ruleType returns [EObject current=null] 
-    @init { enterRule(); 
-    }
-    @after { leaveRule(); }:
-(
-    { 
-        newCompositeNode(grammarAccess.getTypeAccess().getATypeParserRuleCall_0()); 
-    }
-    this_AType_0=ruleAType
-    { 
-        $current = $this_AType_0.current; 
-        afterParserOrEnumRuleCall();
-    }
-
-    |
-    { 
-        newCompositeNode(grammarAccess.getTypeAccess().getAnotherTypeParserRuleCall_1()); 
-    }
-    this_AnotherType_1=ruleAnotherType
-    { 
-        $current = $this_AnotherType_1.current; 
-        afterParserOrEnumRuleCall();
-    }
-)
+ruleType returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		{
+			newCompositeNode(grammarAccess.getTypeAccess().getATypeParserRuleCall_0());
+		}
+		this_AType_0=ruleAType
+		{
+			$current = $this_AType_0.current;
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getTypeAccess().getAnotherTypeParserRuleCall_1());
+		}
+		this_AnotherType_1=ruleAnotherType
+		{
+			$current = $this_AnotherType_1.current;
+			afterParserOrEnumRuleCall();
+		}
+	)
 ;
-
-
-
-
 
 // Entry rule entryRuleAType
-entryRuleAType returns [EObject current=null] 
-	:
+entryRuleAType returns [EObject current=null]:
 	{ newCompositeNode(grammarAccess.getATypeRule()); }
-	 iv_ruleAType=ruleAType 
-	 { $current=$iv_ruleAType.current; } 
-	 EOF 
-;
+	iv_ruleAType=ruleAType
+	{ $current=$iv_ruleAType.current; }
+	EOF;
 
 // Rule AType
-ruleAType returns [EObject current=null] 
-    @init { enterRule(); 
-    }
-    @after { leaveRule(); }:
-(	otherlv_0='foo' 
-    {
-    	newLeafNode(otherlv_0, grammarAccess.getATypeAccess().getFooKeyword_0());
-    }
-(
-    {
-        $current = forceCreateModelElement(
-            grammarAccess.getATypeAccess().getATypeAction_1(),
-            $current);
-    }
-))
+ruleAType returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0='foo'
+		{
+			newLeafNode(otherlv_0, grammarAccess.getATypeAccess().getFooKeyword_0());
+		}
+		(
+			{
+				$current = forceCreateModelElement(
+					grammarAccess.getATypeAccess().getATypeAction_1(),
+					$current);
+			}
+		)
+	)
 ;
-
-
-
-
 
 // Entry rule entryRuleAnotherType
-entryRuleAnotherType returns [EObject current=null] 
-	:
+entryRuleAnotherType returns [EObject current=null]:
 	{ newCompositeNode(grammarAccess.getAnotherTypeRule()); }
-	 iv_ruleAnotherType=ruleAnotherType 
-	 { $current=$iv_ruleAnotherType.current; } 
-	 EOF 
-;
+	iv_ruleAnotherType=ruleAnotherType
+	{ $current=$iv_ruleAnotherType.current; }
+	EOF;
 
 // Rule AnotherType
-ruleAnotherType returns [EObject current=null] 
-    @init { enterRule(); 
-    }
-    @after { leaveRule(); }:
-(	otherlv_0='bar' 
-    {
-    	newLeafNode(otherlv_0, grammarAccess.getAnotherTypeAccess().getBarKeyword_0());
-    }
-(
-    {
-        $current = forceCreateModelElement(
-            grammarAccess.getAnotherTypeAccess().getAnotherTypeAction_1(),
-            $current);
-    }
-))
+ruleAnotherType returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0='bar'
+		{
+			newLeafNode(otherlv_0, grammarAccess.getAnotherTypeAccess().getBarKeyword_0());
+		}
+		(
+			{
+				$current = forceCreateModelElement(
+					grammarAccess.getAnotherTypeAccess().getAnotherTypeAction_1(),
+					$current);
+			}
+		)
+	)
 ;
-
-
-
-
 
 RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
@@ -217,5 +205,3 @@ RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
 RULE_WS : (' '|'\t'|'\r'|'\n')+;
 
 RULE_ANY_OTHER : .;
-
-

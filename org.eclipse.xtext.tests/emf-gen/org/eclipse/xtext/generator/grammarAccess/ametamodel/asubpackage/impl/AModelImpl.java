@@ -30,10 +30,10 @@ import org.eclipse.xtext.generator.grammarAccess.ametamodel.asubpackage.Asubpack
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.generator.grammarAccess.ametamodel.asubpackage.impl.AModelImpl#getElements <em>Elements</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

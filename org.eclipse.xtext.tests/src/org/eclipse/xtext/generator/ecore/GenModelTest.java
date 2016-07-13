@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.ecore;
 
-import org.eclipse.xtext.generator.ecore.genmodelaccess.root.AccessTest;
-
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */

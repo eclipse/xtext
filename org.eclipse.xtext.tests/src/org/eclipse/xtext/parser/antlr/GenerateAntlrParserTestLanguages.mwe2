@@ -10,7 +10,7 @@ module org.eclipse.xtext.parser.antlr.GenerateAntlrParserTestLanguages
 import org.eclipse.emf.mwe2.runtime.workflow.Workflow
 import org.eclipse.emf.mwe.utils.*
 import org.eclipse.xtext.*
-import org.eclipse.xtext.generator.*
+import org.eclipse.xtext.xtext.generator.*
 
 var projectName = "org.eclipse.xtext.tests"
 var runtimeProject = "../${projectName}"
@@ -25,55 +25,73 @@ Workflow {
 		directory = "${runtimeProject}/src-gen/org/eclipse/xtext/parser/antlr"
 	}
 	
-	component = Generator auto-inject {
-		pathRtProject = runtimeProject
-		projectNameRt = projectName
+	component = XtextGenerator {
+		cleaner = {
+			enabled = false
+		}
+		configuration = {
+			project = model.project.StandardProjectConfig {
+				baseName = projectName
+				rootPath = ".."
+			}
+			code = {
+				encoding = 'ISO-8859-1'
+				lineDelimiter = lineDelimiter
+				preferXtendStubs = false
+			}
+		}
 		
 		language = {
-			uri = "classpath:/org/eclipse/xtext/parser/antlr/Bug289515TestLanguage.xtext"
+			grammarUri = "classpath:/org/eclipse/xtext/parser/antlr/Bug289515TestLanguage.xtext"
 			fragment = @TestLanguagesFragments {}
 		}
 		language = {
-			uri = "classpath:/org/eclipse/xtext/parser/antlr/Bug289524TestLanguage.xtext"
+			grammarUri = "classpath:/org/eclipse/xtext/parser/antlr/Bug289524TestLanguage.xtext"
 			fragment = @TestLanguagesFragments {
 				backtrack = true
 			}
 		}
 		language = {
-			uri = "classpath:/org/eclipse/xtext/parser/antlr/Bug289524ExTestLanguage.xtext"
-			fragment = @TestLanguagesFragmentsEx {
-				backtrack = true
-			}
-		}
-		language = {
-			uri = "classpath:/org/eclipse/xtext/parser/antlr/Bug296889TestLanguage.xtext"
+			grammarUri = "classpath:/org/eclipse/xtext/parser/antlr/Bug289524ExTestLanguage.xtext"
 			fragment = @TestLanguagesFragments {
 				backtrack = true
 			}
 		}
 		language = {
-			uri = "classpath:/org/eclipse/xtext/parser/antlr/Bug296889ExTestLanguage.xtext"
-			fragment = @TestLanguagesFragmentsEx {
+			grammarUri = "classpath:/org/eclipse/xtext/parser/antlr/Bug296889TestLanguage.xtext"
+			fragment = @TestLanguagesFragments {
 				backtrack = true
 			}
 		}
 		language = {
-			uri = "classpath:/org/eclipse/xtext/parser/antlr/Bug301935TestLanguage.xtext"
+			grammarUri = "classpath:/org/eclipse/xtext/parser/antlr/Bug296889ExTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {
+				backtrack = true
+			}
+		}
+		language = {
+			grammarUri = "classpath:/org/eclipse/xtext/parser/antlr/Bug301935TestLanguage.xtext"
 			fragment = @TestLanguagesFragments {}
 		}
 		language = {
-			uri = "classpath:/org/eclipse/xtext/parser/antlr/Bug301935ExTestLanguage.xtext"
-			fragment = @TestLanguagesFragmentsEx {
+			grammarUri = "classpath:/org/eclipse/xtext/parser/antlr/Bug301935ExTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {
 				ignoreCase = true
 			}
 		}
 		language = {
-			uri = "classpath:/org/eclipse/xtext/parser/antlr/Bug378967TestLanguage.xtext"
+			grammarUri = "classpath:/org/eclipse/xtext/parser/antlr/Bug378967TestLanguage.xtext"
 			fragment = @TestLanguagesFragments {}
 		}
 		language = {
-			uri = "classpath:/org/eclipse/xtext/parser/antlr/Bug443221TestLanguage.xtext"
-			fragment = @TestLanguagesFragmentsEx {}
+			grammarUri = "classpath:/org/eclipse/xtext/parser/antlr/Bug443221TestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = {
+			grammarUri = "classpath:/org/eclipse/xtext/parser/antlr/Bug299237TestLanguage.xtext"
+			fragment = @TestLanguagesFragments {
+				ignoreCase = true
+			}
 		}
 	}
 }

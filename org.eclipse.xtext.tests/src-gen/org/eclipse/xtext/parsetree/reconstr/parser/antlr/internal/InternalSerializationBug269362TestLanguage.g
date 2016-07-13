@@ -5,7 +5,6 @@ grammar InternalSerializationBug269362TestLanguage;
 
 options {
 	superClass=AbstractInternalAntlrParser;
-	
 }
 
 @lexer::header {
@@ -17,7 +16,7 @@ import org.eclipse.xtext.parser.antlr.Lexer;
 }
 
 @parser::header {
-package org.eclipse.xtext.parsetree.reconstr.parser.antlr.internal; 
+package org.eclipse.xtext.parsetree.reconstr.parser.antlr.internal;
 
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
@@ -35,121 +34,123 @@ import org.eclipse.xtext.parsetree.reconstr.services.SerializationBug269362TestL
 @parser::members {
 
  	private SerializationBug269362TestLanguageGrammarAccess grammarAccess;
- 	
+
     public InternalSerializationBug269362TestLanguageParser(TokenStream input, SerializationBug269362TestLanguageGrammarAccess grammarAccess) {
         this(input);
         this.grammarAccess = grammarAccess;
         registerRules(grammarAccess.getGrammar());
     }
-    
+
     @Override
     protected String getFirstRuleName() {
-    	return "Model";	
+    	return "Model";
    	}
-   	
+
    	@Override
    	protected SerializationBug269362TestLanguageGrammarAccess getGrammarAccess() {
    		return grammarAccess;
    	}
+
 }
 
-@rulecatch { 
-    catch (RecognitionException re) { 
-        recover(input,re); 
+@rulecatch {
+    catch (RecognitionException re) {
+        recover(input,re);
         appendSkippedTokens();
-    } 
+    }
 }
-
-
-
 
 // Entry rule entryRuleModel
-entryRuleModel returns [EObject current=null] 
-	:
+entryRuleModel returns [EObject current=null]:
 	{ newCompositeNode(grammarAccess.getModelRule()); }
-	 iv_ruleModel=ruleModel 
-	 { $current=$iv_ruleModel.current; } 
-	 EOF 
-;
+	iv_ruleModel=ruleModel
+	{ $current=$iv_ruleModel.current; }
+	EOF;
 
 // Rule Model
-ruleModel returns [EObject current=null] 
-    @init { enterRule(); 
-    }
-    @after { leaveRule(); }:
-((	otherlv_0='foo' 
-    {
-    	newLeafNode(otherlv_0, grammarAccess.getModelAccess().getFooKeyword_0_0());
-    }
-(
-(
-		lv_foo_1_0=RULE_ID
-		{
-			newLeafNode(lv_foo_1_0, grammarAccess.getModelAccess().getFooIDTerminalRuleCall_0_1_0()); 
-		}
-		{
-	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getModelRule());
-	        }
-       		setWithLastConsumed(
-       			$current, 
-       			"foo",
-        		lv_foo_1_0, 
-        		"org.eclipse.xtext.common.Terminals.ID");
-	    }
-
-)
-)(	otherlv_2='bar' 
-    {
-    	newLeafNode(otherlv_2, grammarAccess.getModelAccess().getBarKeyword_0_2_0());
-    }
-(
-(
-		lv_bar_3_0=RULE_ID
-		{
-			newLeafNode(lv_bar_3_0, grammarAccess.getModelAccess().getBarIDTerminalRuleCall_0_2_1_0()); 
-		}
-		{
-	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getModelRule());
-	        }
-       		setWithLastConsumed(
-       			$current, 
-       			"bar",
-        		lv_bar_3_0, 
-        		"org.eclipse.xtext.common.Terminals.ID");
-	    }
-
-)
-))?)
-    |(	otherlv_4='bar' 
-    {
-    	newLeafNode(otherlv_4, grammarAccess.getModelAccess().getBarKeyword_1_0());
-    }
-(
-(
-		lv_bar_5_0=RULE_ID
-		{
-			newLeafNode(lv_bar_5_0, grammarAccess.getModelAccess().getBarIDTerminalRuleCall_1_1_0()); 
-		}
-		{
-	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getModelRule());
-	        }
-       		setWithLastConsumed(
-       			$current, 
-       			"bar",
-        		lv_bar_5_0, 
-        		"org.eclipse.xtext.common.Terminals.ID");
-	    }
-
-)
-)))
+ruleModel returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			otherlv_0='foo'
+			{
+				newLeafNode(otherlv_0, grammarAccess.getModelAccess().getFooKeyword_0_0());
+			}
+			(
+				(
+					lv_foo_1_0=RULE_ID
+					{
+						newLeafNode(lv_foo_1_0, grammarAccess.getModelAccess().getFooIDTerminalRuleCall_0_1_0());
+					}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getModelRule());
+						}
+						setWithLastConsumed(
+							$current,
+							"foo",
+							lv_foo_1_0,
+							"org.eclipse.xtext.common.Terminals.ID");
+					}
+				)
+			)
+			(
+				otherlv_2='bar'
+				{
+					newLeafNode(otherlv_2, grammarAccess.getModelAccess().getBarKeyword_0_2_0());
+				}
+				(
+					(
+						lv_bar_3_0=RULE_ID
+						{
+							newLeafNode(lv_bar_3_0, grammarAccess.getModelAccess().getBarIDTerminalRuleCall_0_2_1_0());
+						}
+						{
+							if ($current==null) {
+								$current = createModelElement(grammarAccess.getModelRule());
+							}
+							setWithLastConsumed(
+								$current,
+								"bar",
+								lv_bar_3_0,
+								"org.eclipse.xtext.common.Terminals.ID");
+						}
+					)
+				)
+			)?
+		)
+		    |
+		(
+			otherlv_4='bar'
+			{
+				newLeafNode(otherlv_4, grammarAccess.getModelAccess().getBarKeyword_1_0());
+			}
+			(
+				(
+					lv_bar_5_0=RULE_ID
+					{
+						newLeafNode(lv_bar_5_0, grammarAccess.getModelAccess().getBarIDTerminalRuleCall_1_1_0());
+					}
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getModelRule());
+						}
+						setWithLastConsumed(
+							$current,
+							"bar",
+							lv_bar_5_0,
+							"org.eclipse.xtext.common.Terminals.ID");
+					}
+				)
+			)
+		)
+	)
 ;
-
-
-
-
 
 RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
@@ -164,5 +165,3 @@ RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
 RULE_WS : (' '|'\t'|'\r'|'\n')+;
 
 RULE_ANY_OTHER : .;
-
-

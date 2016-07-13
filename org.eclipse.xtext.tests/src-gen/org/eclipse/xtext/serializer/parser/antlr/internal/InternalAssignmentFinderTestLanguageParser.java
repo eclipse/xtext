@@ -1,4 +1,4 @@
-package org.eclipse.xtext.serializer.parser.antlr.internal; 
+package org.eclipse.xtext.serializer.parser.antlr.internal;
 
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
@@ -72,18 +72,18 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
 
 
      	private AssignmentFinderTestLanguageGrammarAccess grammarAccess;
-     	
+
         public InternalAssignmentFinderTestLanguageParser(TokenStream input, AssignmentFinderTestLanguageGrammarAccess grammarAccess) {
             this(input);
             this.grammarAccess = grammarAccess;
             registerRules(grammarAccess.getGrammar());
         }
-        
+
         @Override
         protected String getFirstRuleName() {
-        	return "Model";	
+        	return "Model";
        	}
-       	
+
        	@Override
        	protected AssignmentFinderTestLanguageGrammarAccess getGrammarAccess() {
        		return grammarAccess;
@@ -91,8 +91,9 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
 
 
 
+
     // $ANTLR start "entryRuleModel"
-    // InternalAssignmentFinderTestLanguage.g:68:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
+    // InternalAssignmentFinderTestLanguage.g:65:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
     public final EObject entryRuleModel() throws RecognitionException {
         EObject current = null;
 
@@ -100,8 +101,8 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
 
 
         try {
-            // InternalAssignmentFinderTestLanguage.g:69:2: (iv_ruleModel= ruleModel EOF )
-            // InternalAssignmentFinderTestLanguage.g:70:2: iv_ruleModel= ruleModel EOF
+            // InternalAssignmentFinderTestLanguage.g:65:46: (iv_ruleModel= ruleModel EOF )
+            // InternalAssignmentFinderTestLanguage.g:66:2: iv_ruleModel= ruleModel EOF
             {
              newCompositeNode(grammarAccess.getModelRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -115,11 +116,11 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -128,7 +129,7 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "ruleModel"
-    // InternalAssignmentFinderTestLanguage.g:77:1: ruleModel returns [EObject current=null] : ( (otherlv_0= '#00' ( (lv_keywordVal_1_0= ruleKeywordVal ) ) ) | (otherlv_2= '#01' ( (lv_terminalVal_3_0= ruleTerminalVal ) ) ) | (otherlv_4= '#02' ( (lv_enumVal_5_0= ruleEnumVal ) ) ) | (otherlv_6= '#03' ( (lv_keywordBool_7_0= ruleKeywordBool ) ) ) | (otherlv_8= '#04' ( (lv_terminalBool_9_0= ruleTerminalBool ) ) ) | (otherlv_10= '#05' ( (lv_enumBool_11_0= ruleEnumBool ) ) ) | (otherlv_12= '#06' ( (lv_mixedBool_13_0= ruleMixedBool ) ) ) | (otherlv_14= '#07' ( (lv_mixedValue_15_0= ruleMixedValue ) ) ) | (otherlv_16= '#08' ( (lv_containmentRef_17_0= ruleContainmentRef ) ) ) | (otherlv_18= '#09' ( (lv_crossRef_19_0= ruleCrossRef ) ) ) ) ;
+    // InternalAssignmentFinderTestLanguage.g:72:1: ruleModel returns [EObject current=null] : ( (otherlv_0= '#00' ( (lv_keywordVal_1_0= ruleKeywordVal ) ) ) | (otherlv_2= '#01' ( (lv_terminalVal_3_0= ruleTerminalVal ) ) ) | (otherlv_4= '#02' ( (lv_enumVal_5_0= ruleEnumVal ) ) ) | (otherlv_6= '#03' ( (lv_keywordBool_7_0= ruleKeywordBool ) ) ) | (otherlv_8= '#04' ( (lv_terminalBool_9_0= ruleTerminalBool ) ) ) | (otherlv_10= '#05' ( (lv_enumBool_11_0= ruleEnumBool ) ) ) | (otherlv_12= '#06' ( (lv_mixedBool_13_0= ruleMixedBool ) ) ) | (otherlv_14= '#07' ( (lv_mixedValue_15_0= ruleMixedValue ) ) ) | (otherlv_16= '#08' ( (lv_containmentRef_17_0= ruleContainmentRef ) ) ) | (otherlv_18= '#09' ( (lv_crossRef_19_0= ruleCrossRef ) ) ) ) ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
@@ -163,13 +164,14 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
         EObject lv_crossRef_19_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalAssignmentFinderTestLanguage.g:80:28: ( ( (otherlv_0= '#00' ( (lv_keywordVal_1_0= ruleKeywordVal ) ) ) | (otherlv_2= '#01' ( (lv_terminalVal_3_0= ruleTerminalVal ) ) ) | (otherlv_4= '#02' ( (lv_enumVal_5_0= ruleEnumVal ) ) ) | (otherlv_6= '#03' ( (lv_keywordBool_7_0= ruleKeywordBool ) ) ) | (otherlv_8= '#04' ( (lv_terminalBool_9_0= ruleTerminalBool ) ) ) | (otherlv_10= '#05' ( (lv_enumBool_11_0= ruleEnumBool ) ) ) | (otherlv_12= '#06' ( (lv_mixedBool_13_0= ruleMixedBool ) ) ) | (otherlv_14= '#07' ( (lv_mixedValue_15_0= ruleMixedValue ) ) ) | (otherlv_16= '#08' ( (lv_containmentRef_17_0= ruleContainmentRef ) ) ) | (otherlv_18= '#09' ( (lv_crossRef_19_0= ruleCrossRef ) ) ) ) )
-            // InternalAssignmentFinderTestLanguage.g:81:1: ( (otherlv_0= '#00' ( (lv_keywordVal_1_0= ruleKeywordVal ) ) ) | (otherlv_2= '#01' ( (lv_terminalVal_3_0= ruleTerminalVal ) ) ) | (otherlv_4= '#02' ( (lv_enumVal_5_0= ruleEnumVal ) ) ) | (otherlv_6= '#03' ( (lv_keywordBool_7_0= ruleKeywordBool ) ) ) | (otherlv_8= '#04' ( (lv_terminalBool_9_0= ruleTerminalBool ) ) ) | (otherlv_10= '#05' ( (lv_enumBool_11_0= ruleEnumBool ) ) ) | (otherlv_12= '#06' ( (lv_mixedBool_13_0= ruleMixedBool ) ) ) | (otherlv_14= '#07' ( (lv_mixedValue_15_0= ruleMixedValue ) ) ) | (otherlv_16= '#08' ( (lv_containmentRef_17_0= ruleContainmentRef ) ) ) | (otherlv_18= '#09' ( (lv_crossRef_19_0= ruleCrossRef ) ) ) )
+            // InternalAssignmentFinderTestLanguage.g:78:2: ( ( (otherlv_0= '#00' ( (lv_keywordVal_1_0= ruleKeywordVal ) ) ) | (otherlv_2= '#01' ( (lv_terminalVal_3_0= ruleTerminalVal ) ) ) | (otherlv_4= '#02' ( (lv_enumVal_5_0= ruleEnumVal ) ) ) | (otherlv_6= '#03' ( (lv_keywordBool_7_0= ruleKeywordBool ) ) ) | (otherlv_8= '#04' ( (lv_terminalBool_9_0= ruleTerminalBool ) ) ) | (otherlv_10= '#05' ( (lv_enumBool_11_0= ruleEnumBool ) ) ) | (otherlv_12= '#06' ( (lv_mixedBool_13_0= ruleMixedBool ) ) ) | (otherlv_14= '#07' ( (lv_mixedValue_15_0= ruleMixedValue ) ) ) | (otherlv_16= '#08' ( (lv_containmentRef_17_0= ruleContainmentRef ) ) ) | (otherlv_18= '#09' ( (lv_crossRef_19_0= ruleCrossRef ) ) ) ) )
+            // InternalAssignmentFinderTestLanguage.g:79:2: ( (otherlv_0= '#00' ( (lv_keywordVal_1_0= ruleKeywordVal ) ) ) | (otherlv_2= '#01' ( (lv_terminalVal_3_0= ruleTerminalVal ) ) ) | (otherlv_4= '#02' ( (lv_enumVal_5_0= ruleEnumVal ) ) ) | (otherlv_6= '#03' ( (lv_keywordBool_7_0= ruleKeywordBool ) ) ) | (otherlv_8= '#04' ( (lv_terminalBool_9_0= ruleTerminalBool ) ) ) | (otherlv_10= '#05' ( (lv_enumBool_11_0= ruleEnumBool ) ) ) | (otherlv_12= '#06' ( (lv_mixedBool_13_0= ruleMixedBool ) ) ) | (otherlv_14= '#07' ( (lv_mixedValue_15_0= ruleMixedValue ) ) ) | (otherlv_16= '#08' ( (lv_containmentRef_17_0= ruleContainmentRef ) ) ) | (otherlv_18= '#09' ( (lv_crossRef_19_0= ruleCrossRef ) ) ) )
             {
-            // InternalAssignmentFinderTestLanguage.g:81:1: ( (otherlv_0= '#00' ( (lv_keywordVal_1_0= ruleKeywordVal ) ) ) | (otherlv_2= '#01' ( (lv_terminalVal_3_0= ruleTerminalVal ) ) ) | (otherlv_4= '#02' ( (lv_enumVal_5_0= ruleEnumVal ) ) ) | (otherlv_6= '#03' ( (lv_keywordBool_7_0= ruleKeywordBool ) ) ) | (otherlv_8= '#04' ( (lv_terminalBool_9_0= ruleTerminalBool ) ) ) | (otherlv_10= '#05' ( (lv_enumBool_11_0= ruleEnumBool ) ) ) | (otherlv_12= '#06' ( (lv_mixedBool_13_0= ruleMixedBool ) ) ) | (otherlv_14= '#07' ( (lv_mixedValue_15_0= ruleMixedValue ) ) ) | (otherlv_16= '#08' ( (lv_containmentRef_17_0= ruleContainmentRef ) ) ) | (otherlv_18= '#09' ( (lv_crossRef_19_0= ruleCrossRef ) ) ) )
+            // InternalAssignmentFinderTestLanguage.g:79:2: ( (otherlv_0= '#00' ( (lv_keywordVal_1_0= ruleKeywordVal ) ) ) | (otherlv_2= '#01' ( (lv_terminalVal_3_0= ruleTerminalVal ) ) ) | (otherlv_4= '#02' ( (lv_enumVal_5_0= ruleEnumVal ) ) ) | (otherlv_6= '#03' ( (lv_keywordBool_7_0= ruleKeywordBool ) ) ) | (otherlv_8= '#04' ( (lv_terminalBool_9_0= ruleTerminalBool ) ) ) | (otherlv_10= '#05' ( (lv_enumBool_11_0= ruleEnumBool ) ) ) | (otherlv_12= '#06' ( (lv_mixedBool_13_0= ruleMixedBool ) ) ) | (otherlv_14= '#07' ( (lv_mixedValue_15_0= ruleMixedValue ) ) ) | (otherlv_16= '#08' ( (lv_containmentRef_17_0= ruleContainmentRef ) ) ) | (otherlv_18= '#09' ( (lv_crossRef_19_0= ruleCrossRef ) ) ) )
             int alt1=10;
             switch ( input.LA(1) ) {
             case 13:
@@ -231,40 +233,40 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
 
             switch (alt1) {
                 case 1 :
-                    // InternalAssignmentFinderTestLanguage.g:81:2: (otherlv_0= '#00' ( (lv_keywordVal_1_0= ruleKeywordVal ) ) )
+                    // InternalAssignmentFinderTestLanguage.g:80:3: (otherlv_0= '#00' ( (lv_keywordVal_1_0= ruleKeywordVal ) ) )
                     {
-                    // InternalAssignmentFinderTestLanguage.g:81:2: (otherlv_0= '#00' ( (lv_keywordVal_1_0= ruleKeywordVal ) ) )
+                    // InternalAssignmentFinderTestLanguage.g:80:3: (otherlv_0= '#00' ( (lv_keywordVal_1_0= ruleKeywordVal ) ) )
                     // InternalAssignmentFinderTestLanguage.g:81:4: otherlv_0= '#00' ( (lv_keywordVal_1_0= ruleKeywordVal ) )
                     {
                     otherlv_0=(Token)match(input,13,FollowSets000.FOLLOW_3); 
 
-                        	newLeafNode(otherlv_0, grammarAccess.getModelAccess().getNumberSignDigitZeroDigitZeroKeyword_0_0());
-                        
-                    // InternalAssignmentFinderTestLanguage.g:85:1: ( (lv_keywordVal_1_0= ruleKeywordVal ) )
-                    // InternalAssignmentFinderTestLanguage.g:86:1: (lv_keywordVal_1_0= ruleKeywordVal )
+                    				newLeafNode(otherlv_0, grammarAccess.getModelAccess().getNumberSignDigitZeroDigitZeroKeyword_0_0());
+                    			
+                    // InternalAssignmentFinderTestLanguage.g:85:4: ( (lv_keywordVal_1_0= ruleKeywordVal ) )
+                    // InternalAssignmentFinderTestLanguage.g:86:5: (lv_keywordVal_1_0= ruleKeywordVal )
                     {
-                    // InternalAssignmentFinderTestLanguage.g:86:1: (lv_keywordVal_1_0= ruleKeywordVal )
-                    // InternalAssignmentFinderTestLanguage.g:87:3: lv_keywordVal_1_0= ruleKeywordVal
+                    // InternalAssignmentFinderTestLanguage.g:86:5: (lv_keywordVal_1_0= ruleKeywordVal )
+                    // InternalAssignmentFinderTestLanguage.g:87:6: lv_keywordVal_1_0= ruleKeywordVal
                     {
-                     
-                    	        newCompositeNode(grammarAccess.getModelAccess().getKeywordValKeywordValParserRuleCall_0_1_0()); 
-                    	    
+
+                    						newCompositeNode(grammarAccess.getModelAccess().getKeywordValKeywordValParserRuleCall_0_1_0());
+                    					
                     pushFollow(FollowSets000.FOLLOW_2);
                     lv_keywordVal_1_0=ruleKeywordVal();
 
                     state._fsp--;
 
 
-                    	        if (current==null) {
-                    	            current = createModelElementForParent(grammarAccess.getModelRule());
-                    	        }
-                           		set(
-                           			current, 
-                           			"keywordVal",
-                            		lv_keywordVal_1_0, 
-                            		"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.KeywordVal");
-                    	        afterParserOrEnumRuleCall();
-                    	    
+                    						if (current==null) {
+                    							current = createModelElementForParent(grammarAccess.getModelRule());
+                    						}
+                    						set(
+                    							current,
+                    							"keywordVal",
+                    							lv_keywordVal_1_0,
+                    							"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.KeywordVal");
+                    						afterParserOrEnumRuleCall();
+                    					
 
                     }
 
@@ -278,40 +280,40 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
                     }
                     break;
                 case 2 :
-                    // InternalAssignmentFinderTestLanguage.g:104:6: (otherlv_2= '#01' ( (lv_terminalVal_3_0= ruleTerminalVal ) ) )
+                    // InternalAssignmentFinderTestLanguage.g:106:3: (otherlv_2= '#01' ( (lv_terminalVal_3_0= ruleTerminalVal ) ) )
                     {
-                    // InternalAssignmentFinderTestLanguage.g:104:6: (otherlv_2= '#01' ( (lv_terminalVal_3_0= ruleTerminalVal ) ) )
-                    // InternalAssignmentFinderTestLanguage.g:104:8: otherlv_2= '#01' ( (lv_terminalVal_3_0= ruleTerminalVal ) )
+                    // InternalAssignmentFinderTestLanguage.g:106:3: (otherlv_2= '#01' ( (lv_terminalVal_3_0= ruleTerminalVal ) ) )
+                    // InternalAssignmentFinderTestLanguage.g:107:4: otherlv_2= '#01' ( (lv_terminalVal_3_0= ruleTerminalVal ) )
                     {
                     otherlv_2=(Token)match(input,14,FollowSets000.FOLLOW_4); 
 
-                        	newLeafNode(otherlv_2, grammarAccess.getModelAccess().getNumberSignDigitZeroDigitOneKeyword_1_0());
-                        
-                    // InternalAssignmentFinderTestLanguage.g:108:1: ( (lv_terminalVal_3_0= ruleTerminalVal ) )
-                    // InternalAssignmentFinderTestLanguage.g:109:1: (lv_terminalVal_3_0= ruleTerminalVal )
+                    				newLeafNode(otherlv_2, grammarAccess.getModelAccess().getNumberSignDigitZeroDigitOneKeyword_1_0());
+                    			
+                    // InternalAssignmentFinderTestLanguage.g:111:4: ( (lv_terminalVal_3_0= ruleTerminalVal ) )
+                    // InternalAssignmentFinderTestLanguage.g:112:5: (lv_terminalVal_3_0= ruleTerminalVal )
                     {
-                    // InternalAssignmentFinderTestLanguage.g:109:1: (lv_terminalVal_3_0= ruleTerminalVal )
-                    // InternalAssignmentFinderTestLanguage.g:110:3: lv_terminalVal_3_0= ruleTerminalVal
+                    // InternalAssignmentFinderTestLanguage.g:112:5: (lv_terminalVal_3_0= ruleTerminalVal )
+                    // InternalAssignmentFinderTestLanguage.g:113:6: lv_terminalVal_3_0= ruleTerminalVal
                     {
-                     
-                    	        newCompositeNode(grammarAccess.getModelAccess().getTerminalValTerminalValParserRuleCall_1_1_0()); 
-                    	    
+
+                    						newCompositeNode(grammarAccess.getModelAccess().getTerminalValTerminalValParserRuleCall_1_1_0());
+                    					
                     pushFollow(FollowSets000.FOLLOW_2);
                     lv_terminalVal_3_0=ruleTerminalVal();
 
                     state._fsp--;
 
 
-                    	        if (current==null) {
-                    	            current = createModelElementForParent(grammarAccess.getModelRule());
-                    	        }
-                           		set(
-                           			current, 
-                           			"terminalVal",
-                            		lv_terminalVal_3_0, 
-                            		"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.TerminalVal");
-                    	        afterParserOrEnumRuleCall();
-                    	    
+                    						if (current==null) {
+                    							current = createModelElementForParent(grammarAccess.getModelRule());
+                    						}
+                    						set(
+                    							current,
+                    							"terminalVal",
+                    							lv_terminalVal_3_0,
+                    							"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.TerminalVal");
+                    						afterParserOrEnumRuleCall();
+                    					
 
                     }
 
@@ -325,40 +327,40 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
                     }
                     break;
                 case 3 :
-                    // InternalAssignmentFinderTestLanguage.g:127:6: (otherlv_4= '#02' ( (lv_enumVal_5_0= ruleEnumVal ) ) )
+                    // InternalAssignmentFinderTestLanguage.g:132:3: (otherlv_4= '#02' ( (lv_enumVal_5_0= ruleEnumVal ) ) )
                     {
-                    // InternalAssignmentFinderTestLanguage.g:127:6: (otherlv_4= '#02' ( (lv_enumVal_5_0= ruleEnumVal ) ) )
-                    // InternalAssignmentFinderTestLanguage.g:127:8: otherlv_4= '#02' ( (lv_enumVal_5_0= ruleEnumVal ) )
+                    // InternalAssignmentFinderTestLanguage.g:132:3: (otherlv_4= '#02' ( (lv_enumVal_5_0= ruleEnumVal ) ) )
+                    // InternalAssignmentFinderTestLanguage.g:133:4: otherlv_4= '#02' ( (lv_enumVal_5_0= ruleEnumVal ) )
                     {
                     otherlv_4=(Token)match(input,15,FollowSets000.FOLLOW_5); 
 
-                        	newLeafNode(otherlv_4, grammarAccess.getModelAccess().getNumberSignDigitZeroDigitTwoKeyword_2_0());
-                        
-                    // InternalAssignmentFinderTestLanguage.g:131:1: ( (lv_enumVal_5_0= ruleEnumVal ) )
-                    // InternalAssignmentFinderTestLanguage.g:132:1: (lv_enumVal_5_0= ruleEnumVal )
+                    				newLeafNode(otherlv_4, grammarAccess.getModelAccess().getNumberSignDigitZeroDigitTwoKeyword_2_0());
+                    			
+                    // InternalAssignmentFinderTestLanguage.g:137:4: ( (lv_enumVal_5_0= ruleEnumVal ) )
+                    // InternalAssignmentFinderTestLanguage.g:138:5: (lv_enumVal_5_0= ruleEnumVal )
                     {
-                    // InternalAssignmentFinderTestLanguage.g:132:1: (lv_enumVal_5_0= ruleEnumVal )
-                    // InternalAssignmentFinderTestLanguage.g:133:3: lv_enumVal_5_0= ruleEnumVal
+                    // InternalAssignmentFinderTestLanguage.g:138:5: (lv_enumVal_5_0= ruleEnumVal )
+                    // InternalAssignmentFinderTestLanguage.g:139:6: lv_enumVal_5_0= ruleEnumVal
                     {
-                     
-                    	        newCompositeNode(grammarAccess.getModelAccess().getEnumValEnumValParserRuleCall_2_1_0()); 
-                    	    
+
+                    						newCompositeNode(grammarAccess.getModelAccess().getEnumValEnumValParserRuleCall_2_1_0());
+                    					
                     pushFollow(FollowSets000.FOLLOW_2);
                     lv_enumVal_5_0=ruleEnumVal();
 
                     state._fsp--;
 
 
-                    	        if (current==null) {
-                    	            current = createModelElementForParent(grammarAccess.getModelRule());
-                    	        }
-                           		set(
-                           			current, 
-                           			"enumVal",
-                            		lv_enumVal_5_0, 
-                            		"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.EnumVal");
-                    	        afterParserOrEnumRuleCall();
-                    	    
+                    						if (current==null) {
+                    							current = createModelElementForParent(grammarAccess.getModelRule());
+                    						}
+                    						set(
+                    							current,
+                    							"enumVal",
+                    							lv_enumVal_5_0,
+                    							"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.EnumVal");
+                    						afterParserOrEnumRuleCall();
+                    					
 
                     }
 
@@ -372,40 +374,40 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
                     }
                     break;
                 case 4 :
-                    // InternalAssignmentFinderTestLanguage.g:150:6: (otherlv_6= '#03' ( (lv_keywordBool_7_0= ruleKeywordBool ) ) )
+                    // InternalAssignmentFinderTestLanguage.g:158:3: (otherlv_6= '#03' ( (lv_keywordBool_7_0= ruleKeywordBool ) ) )
                     {
-                    // InternalAssignmentFinderTestLanguage.g:150:6: (otherlv_6= '#03' ( (lv_keywordBool_7_0= ruleKeywordBool ) ) )
-                    // InternalAssignmentFinderTestLanguage.g:150:8: otherlv_6= '#03' ( (lv_keywordBool_7_0= ruleKeywordBool ) )
+                    // InternalAssignmentFinderTestLanguage.g:158:3: (otherlv_6= '#03' ( (lv_keywordBool_7_0= ruleKeywordBool ) ) )
+                    // InternalAssignmentFinderTestLanguage.g:159:4: otherlv_6= '#03' ( (lv_keywordBool_7_0= ruleKeywordBool ) )
                     {
                     otherlv_6=(Token)match(input,16,FollowSets000.FOLLOW_3); 
 
-                        	newLeafNode(otherlv_6, grammarAccess.getModelAccess().getNumberSignDigitZeroDigitThreeKeyword_3_0());
-                        
-                    // InternalAssignmentFinderTestLanguage.g:154:1: ( (lv_keywordBool_7_0= ruleKeywordBool ) )
-                    // InternalAssignmentFinderTestLanguage.g:155:1: (lv_keywordBool_7_0= ruleKeywordBool )
+                    				newLeafNode(otherlv_6, grammarAccess.getModelAccess().getNumberSignDigitZeroDigitThreeKeyword_3_0());
+                    			
+                    // InternalAssignmentFinderTestLanguage.g:163:4: ( (lv_keywordBool_7_0= ruleKeywordBool ) )
+                    // InternalAssignmentFinderTestLanguage.g:164:5: (lv_keywordBool_7_0= ruleKeywordBool )
                     {
-                    // InternalAssignmentFinderTestLanguage.g:155:1: (lv_keywordBool_7_0= ruleKeywordBool )
-                    // InternalAssignmentFinderTestLanguage.g:156:3: lv_keywordBool_7_0= ruleKeywordBool
+                    // InternalAssignmentFinderTestLanguage.g:164:5: (lv_keywordBool_7_0= ruleKeywordBool )
+                    // InternalAssignmentFinderTestLanguage.g:165:6: lv_keywordBool_7_0= ruleKeywordBool
                     {
-                     
-                    	        newCompositeNode(grammarAccess.getModelAccess().getKeywordBoolKeywordBoolParserRuleCall_3_1_0()); 
-                    	    
+
+                    						newCompositeNode(grammarAccess.getModelAccess().getKeywordBoolKeywordBoolParserRuleCall_3_1_0());
+                    					
                     pushFollow(FollowSets000.FOLLOW_2);
                     lv_keywordBool_7_0=ruleKeywordBool();
 
                     state._fsp--;
 
 
-                    	        if (current==null) {
-                    	            current = createModelElementForParent(grammarAccess.getModelRule());
-                    	        }
-                           		set(
-                           			current, 
-                           			"keywordBool",
-                            		lv_keywordBool_7_0, 
-                            		"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.KeywordBool");
-                    	        afterParserOrEnumRuleCall();
-                    	    
+                    						if (current==null) {
+                    							current = createModelElementForParent(grammarAccess.getModelRule());
+                    						}
+                    						set(
+                    							current,
+                    							"keywordBool",
+                    							lv_keywordBool_7_0,
+                    							"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.KeywordBool");
+                    						afterParserOrEnumRuleCall();
+                    					
 
                     }
 
@@ -419,40 +421,40 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
                     }
                     break;
                 case 5 :
-                    // InternalAssignmentFinderTestLanguage.g:173:6: (otherlv_8= '#04' ( (lv_terminalBool_9_0= ruleTerminalBool ) ) )
+                    // InternalAssignmentFinderTestLanguage.g:184:3: (otherlv_8= '#04' ( (lv_terminalBool_9_0= ruleTerminalBool ) ) )
                     {
-                    // InternalAssignmentFinderTestLanguage.g:173:6: (otherlv_8= '#04' ( (lv_terminalBool_9_0= ruleTerminalBool ) ) )
-                    // InternalAssignmentFinderTestLanguage.g:173:8: otherlv_8= '#04' ( (lv_terminalBool_9_0= ruleTerminalBool ) )
+                    // InternalAssignmentFinderTestLanguage.g:184:3: (otherlv_8= '#04' ( (lv_terminalBool_9_0= ruleTerminalBool ) ) )
+                    // InternalAssignmentFinderTestLanguage.g:185:4: otherlv_8= '#04' ( (lv_terminalBool_9_0= ruleTerminalBool ) )
                     {
                     otherlv_8=(Token)match(input,17,FollowSets000.FOLLOW_4); 
 
-                        	newLeafNode(otherlv_8, grammarAccess.getModelAccess().getNumberSignDigitZeroDigitFourKeyword_4_0());
-                        
-                    // InternalAssignmentFinderTestLanguage.g:177:1: ( (lv_terminalBool_9_0= ruleTerminalBool ) )
-                    // InternalAssignmentFinderTestLanguage.g:178:1: (lv_terminalBool_9_0= ruleTerminalBool )
+                    				newLeafNode(otherlv_8, grammarAccess.getModelAccess().getNumberSignDigitZeroDigitFourKeyword_4_0());
+                    			
+                    // InternalAssignmentFinderTestLanguage.g:189:4: ( (lv_terminalBool_9_0= ruleTerminalBool ) )
+                    // InternalAssignmentFinderTestLanguage.g:190:5: (lv_terminalBool_9_0= ruleTerminalBool )
                     {
-                    // InternalAssignmentFinderTestLanguage.g:178:1: (lv_terminalBool_9_0= ruleTerminalBool )
-                    // InternalAssignmentFinderTestLanguage.g:179:3: lv_terminalBool_9_0= ruleTerminalBool
+                    // InternalAssignmentFinderTestLanguage.g:190:5: (lv_terminalBool_9_0= ruleTerminalBool )
+                    // InternalAssignmentFinderTestLanguage.g:191:6: lv_terminalBool_9_0= ruleTerminalBool
                     {
-                     
-                    	        newCompositeNode(grammarAccess.getModelAccess().getTerminalBoolTerminalBoolParserRuleCall_4_1_0()); 
-                    	    
+
+                    						newCompositeNode(grammarAccess.getModelAccess().getTerminalBoolTerminalBoolParserRuleCall_4_1_0());
+                    					
                     pushFollow(FollowSets000.FOLLOW_2);
                     lv_terminalBool_9_0=ruleTerminalBool();
 
                     state._fsp--;
 
 
-                    	        if (current==null) {
-                    	            current = createModelElementForParent(grammarAccess.getModelRule());
-                    	        }
-                           		set(
-                           			current, 
-                           			"terminalBool",
-                            		lv_terminalBool_9_0, 
-                            		"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.TerminalBool");
-                    	        afterParserOrEnumRuleCall();
-                    	    
+                    						if (current==null) {
+                    							current = createModelElementForParent(grammarAccess.getModelRule());
+                    						}
+                    						set(
+                    							current,
+                    							"terminalBool",
+                    							lv_terminalBool_9_0,
+                    							"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.TerminalBool");
+                    						afterParserOrEnumRuleCall();
+                    					
 
                     }
 
@@ -466,40 +468,40 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
                     }
                     break;
                 case 6 :
-                    // InternalAssignmentFinderTestLanguage.g:196:6: (otherlv_10= '#05' ( (lv_enumBool_11_0= ruleEnumBool ) ) )
+                    // InternalAssignmentFinderTestLanguage.g:210:3: (otherlv_10= '#05' ( (lv_enumBool_11_0= ruleEnumBool ) ) )
                     {
-                    // InternalAssignmentFinderTestLanguage.g:196:6: (otherlv_10= '#05' ( (lv_enumBool_11_0= ruleEnumBool ) ) )
-                    // InternalAssignmentFinderTestLanguage.g:196:8: otherlv_10= '#05' ( (lv_enumBool_11_0= ruleEnumBool ) )
+                    // InternalAssignmentFinderTestLanguage.g:210:3: (otherlv_10= '#05' ( (lv_enumBool_11_0= ruleEnumBool ) ) )
+                    // InternalAssignmentFinderTestLanguage.g:211:4: otherlv_10= '#05' ( (lv_enumBool_11_0= ruleEnumBool ) )
                     {
                     otherlv_10=(Token)match(input,18,FollowSets000.FOLLOW_5); 
 
-                        	newLeafNode(otherlv_10, grammarAccess.getModelAccess().getNumberSignDigitZeroDigitFiveKeyword_5_0());
-                        
-                    // InternalAssignmentFinderTestLanguage.g:200:1: ( (lv_enumBool_11_0= ruleEnumBool ) )
-                    // InternalAssignmentFinderTestLanguage.g:201:1: (lv_enumBool_11_0= ruleEnumBool )
+                    				newLeafNode(otherlv_10, grammarAccess.getModelAccess().getNumberSignDigitZeroDigitFiveKeyword_5_0());
+                    			
+                    // InternalAssignmentFinderTestLanguage.g:215:4: ( (lv_enumBool_11_0= ruleEnumBool ) )
+                    // InternalAssignmentFinderTestLanguage.g:216:5: (lv_enumBool_11_0= ruleEnumBool )
                     {
-                    // InternalAssignmentFinderTestLanguage.g:201:1: (lv_enumBool_11_0= ruleEnumBool )
-                    // InternalAssignmentFinderTestLanguage.g:202:3: lv_enumBool_11_0= ruleEnumBool
+                    // InternalAssignmentFinderTestLanguage.g:216:5: (lv_enumBool_11_0= ruleEnumBool )
+                    // InternalAssignmentFinderTestLanguage.g:217:6: lv_enumBool_11_0= ruleEnumBool
                     {
-                     
-                    	        newCompositeNode(grammarAccess.getModelAccess().getEnumBoolEnumBoolParserRuleCall_5_1_0()); 
-                    	    
+
+                    						newCompositeNode(grammarAccess.getModelAccess().getEnumBoolEnumBoolParserRuleCall_5_1_0());
+                    					
                     pushFollow(FollowSets000.FOLLOW_2);
                     lv_enumBool_11_0=ruleEnumBool();
 
                     state._fsp--;
 
 
-                    	        if (current==null) {
-                    	            current = createModelElementForParent(grammarAccess.getModelRule());
-                    	        }
-                           		set(
-                           			current, 
-                           			"enumBool",
-                            		lv_enumBool_11_0, 
-                            		"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.EnumBool");
-                    	        afterParserOrEnumRuleCall();
-                    	    
+                    						if (current==null) {
+                    							current = createModelElementForParent(grammarAccess.getModelRule());
+                    						}
+                    						set(
+                    							current,
+                    							"enumBool",
+                    							lv_enumBool_11_0,
+                    							"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.EnumBool");
+                    						afterParserOrEnumRuleCall();
+                    					
 
                     }
 
@@ -513,40 +515,40 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
                     }
                     break;
                 case 7 :
-                    // InternalAssignmentFinderTestLanguage.g:219:6: (otherlv_12= '#06' ( (lv_mixedBool_13_0= ruleMixedBool ) ) )
+                    // InternalAssignmentFinderTestLanguage.g:236:3: (otherlv_12= '#06' ( (lv_mixedBool_13_0= ruleMixedBool ) ) )
                     {
-                    // InternalAssignmentFinderTestLanguage.g:219:6: (otherlv_12= '#06' ( (lv_mixedBool_13_0= ruleMixedBool ) ) )
-                    // InternalAssignmentFinderTestLanguage.g:219:8: otherlv_12= '#06' ( (lv_mixedBool_13_0= ruleMixedBool ) )
+                    // InternalAssignmentFinderTestLanguage.g:236:3: (otherlv_12= '#06' ( (lv_mixedBool_13_0= ruleMixedBool ) ) )
+                    // InternalAssignmentFinderTestLanguage.g:237:4: otherlv_12= '#06' ( (lv_mixedBool_13_0= ruleMixedBool ) )
                     {
                     otherlv_12=(Token)match(input,19,FollowSets000.FOLLOW_6); 
 
-                        	newLeafNode(otherlv_12, grammarAccess.getModelAccess().getNumberSignDigitZeroDigitSixKeyword_6_0());
-                        
-                    // InternalAssignmentFinderTestLanguage.g:223:1: ( (lv_mixedBool_13_0= ruleMixedBool ) )
-                    // InternalAssignmentFinderTestLanguage.g:224:1: (lv_mixedBool_13_0= ruleMixedBool )
+                    				newLeafNode(otherlv_12, grammarAccess.getModelAccess().getNumberSignDigitZeroDigitSixKeyword_6_0());
+                    			
+                    // InternalAssignmentFinderTestLanguage.g:241:4: ( (lv_mixedBool_13_0= ruleMixedBool ) )
+                    // InternalAssignmentFinderTestLanguage.g:242:5: (lv_mixedBool_13_0= ruleMixedBool )
                     {
-                    // InternalAssignmentFinderTestLanguage.g:224:1: (lv_mixedBool_13_0= ruleMixedBool )
-                    // InternalAssignmentFinderTestLanguage.g:225:3: lv_mixedBool_13_0= ruleMixedBool
+                    // InternalAssignmentFinderTestLanguage.g:242:5: (lv_mixedBool_13_0= ruleMixedBool )
+                    // InternalAssignmentFinderTestLanguage.g:243:6: lv_mixedBool_13_0= ruleMixedBool
                     {
-                     
-                    	        newCompositeNode(grammarAccess.getModelAccess().getMixedBoolMixedBoolParserRuleCall_6_1_0()); 
-                    	    
+
+                    						newCompositeNode(grammarAccess.getModelAccess().getMixedBoolMixedBoolParserRuleCall_6_1_0());
+                    					
                     pushFollow(FollowSets000.FOLLOW_2);
                     lv_mixedBool_13_0=ruleMixedBool();
 
                     state._fsp--;
 
 
-                    	        if (current==null) {
-                    	            current = createModelElementForParent(grammarAccess.getModelRule());
-                    	        }
-                           		set(
-                           			current, 
-                           			"mixedBool",
-                            		lv_mixedBool_13_0, 
-                            		"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.MixedBool");
-                    	        afterParserOrEnumRuleCall();
-                    	    
+                    						if (current==null) {
+                    							current = createModelElementForParent(grammarAccess.getModelRule());
+                    						}
+                    						set(
+                    							current,
+                    							"mixedBool",
+                    							lv_mixedBool_13_0,
+                    							"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.MixedBool");
+                    						afterParserOrEnumRuleCall();
+                    					
 
                     }
 
@@ -560,40 +562,40 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
                     }
                     break;
                 case 8 :
-                    // InternalAssignmentFinderTestLanguage.g:242:6: (otherlv_14= '#07' ( (lv_mixedValue_15_0= ruleMixedValue ) ) )
+                    // InternalAssignmentFinderTestLanguage.g:262:3: (otherlv_14= '#07' ( (lv_mixedValue_15_0= ruleMixedValue ) ) )
                     {
-                    // InternalAssignmentFinderTestLanguage.g:242:6: (otherlv_14= '#07' ( (lv_mixedValue_15_0= ruleMixedValue ) ) )
-                    // InternalAssignmentFinderTestLanguage.g:242:8: otherlv_14= '#07' ( (lv_mixedValue_15_0= ruleMixedValue ) )
+                    // InternalAssignmentFinderTestLanguage.g:262:3: (otherlv_14= '#07' ( (lv_mixedValue_15_0= ruleMixedValue ) ) )
+                    // InternalAssignmentFinderTestLanguage.g:263:4: otherlv_14= '#07' ( (lv_mixedValue_15_0= ruleMixedValue ) )
                     {
                     otherlv_14=(Token)match(input,20,FollowSets000.FOLLOW_7); 
 
-                        	newLeafNode(otherlv_14, grammarAccess.getModelAccess().getNumberSignDigitZeroDigitSevenKeyword_7_0());
-                        
-                    // InternalAssignmentFinderTestLanguage.g:246:1: ( (lv_mixedValue_15_0= ruleMixedValue ) )
-                    // InternalAssignmentFinderTestLanguage.g:247:1: (lv_mixedValue_15_0= ruleMixedValue )
+                    				newLeafNode(otherlv_14, grammarAccess.getModelAccess().getNumberSignDigitZeroDigitSevenKeyword_7_0());
+                    			
+                    // InternalAssignmentFinderTestLanguage.g:267:4: ( (lv_mixedValue_15_0= ruleMixedValue ) )
+                    // InternalAssignmentFinderTestLanguage.g:268:5: (lv_mixedValue_15_0= ruleMixedValue )
                     {
-                    // InternalAssignmentFinderTestLanguage.g:247:1: (lv_mixedValue_15_0= ruleMixedValue )
-                    // InternalAssignmentFinderTestLanguage.g:248:3: lv_mixedValue_15_0= ruleMixedValue
+                    // InternalAssignmentFinderTestLanguage.g:268:5: (lv_mixedValue_15_0= ruleMixedValue )
+                    // InternalAssignmentFinderTestLanguage.g:269:6: lv_mixedValue_15_0= ruleMixedValue
                     {
-                     
-                    	        newCompositeNode(grammarAccess.getModelAccess().getMixedValueMixedValueParserRuleCall_7_1_0()); 
-                    	    
+
+                    						newCompositeNode(grammarAccess.getModelAccess().getMixedValueMixedValueParserRuleCall_7_1_0());
+                    					
                     pushFollow(FollowSets000.FOLLOW_2);
                     lv_mixedValue_15_0=ruleMixedValue();
 
                     state._fsp--;
 
 
-                    	        if (current==null) {
-                    	            current = createModelElementForParent(grammarAccess.getModelRule());
-                    	        }
-                           		set(
-                           			current, 
-                           			"mixedValue",
-                            		lv_mixedValue_15_0, 
-                            		"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.MixedValue");
-                    	        afterParserOrEnumRuleCall();
-                    	    
+                    						if (current==null) {
+                    							current = createModelElementForParent(grammarAccess.getModelRule());
+                    						}
+                    						set(
+                    							current,
+                    							"mixedValue",
+                    							lv_mixedValue_15_0,
+                    							"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.MixedValue");
+                    						afterParserOrEnumRuleCall();
+                    					
 
                     }
 
@@ -607,40 +609,40 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
                     }
                     break;
                 case 9 :
-                    // InternalAssignmentFinderTestLanguage.g:265:6: (otherlv_16= '#08' ( (lv_containmentRef_17_0= ruleContainmentRef ) ) )
+                    // InternalAssignmentFinderTestLanguage.g:288:3: (otherlv_16= '#08' ( (lv_containmentRef_17_0= ruleContainmentRef ) ) )
                     {
-                    // InternalAssignmentFinderTestLanguage.g:265:6: (otherlv_16= '#08' ( (lv_containmentRef_17_0= ruleContainmentRef ) ) )
-                    // InternalAssignmentFinderTestLanguage.g:265:8: otherlv_16= '#08' ( (lv_containmentRef_17_0= ruleContainmentRef ) )
+                    // InternalAssignmentFinderTestLanguage.g:288:3: (otherlv_16= '#08' ( (lv_containmentRef_17_0= ruleContainmentRef ) ) )
+                    // InternalAssignmentFinderTestLanguage.g:289:4: otherlv_16= '#08' ( (lv_containmentRef_17_0= ruleContainmentRef ) )
                     {
                     otherlv_16=(Token)match(input,21,FollowSets000.FOLLOW_3); 
 
-                        	newLeafNode(otherlv_16, grammarAccess.getModelAccess().getNumberSignDigitZeroDigitEightKeyword_8_0());
-                        
-                    // InternalAssignmentFinderTestLanguage.g:269:1: ( (lv_containmentRef_17_0= ruleContainmentRef ) )
-                    // InternalAssignmentFinderTestLanguage.g:270:1: (lv_containmentRef_17_0= ruleContainmentRef )
+                    				newLeafNode(otherlv_16, grammarAccess.getModelAccess().getNumberSignDigitZeroDigitEightKeyword_8_0());
+                    			
+                    // InternalAssignmentFinderTestLanguage.g:293:4: ( (lv_containmentRef_17_0= ruleContainmentRef ) )
+                    // InternalAssignmentFinderTestLanguage.g:294:5: (lv_containmentRef_17_0= ruleContainmentRef )
                     {
-                    // InternalAssignmentFinderTestLanguage.g:270:1: (lv_containmentRef_17_0= ruleContainmentRef )
-                    // InternalAssignmentFinderTestLanguage.g:271:3: lv_containmentRef_17_0= ruleContainmentRef
+                    // InternalAssignmentFinderTestLanguage.g:294:5: (lv_containmentRef_17_0= ruleContainmentRef )
+                    // InternalAssignmentFinderTestLanguage.g:295:6: lv_containmentRef_17_0= ruleContainmentRef
                     {
-                     
-                    	        newCompositeNode(grammarAccess.getModelAccess().getContainmentRefContainmentRefParserRuleCall_8_1_0()); 
-                    	    
+
+                    						newCompositeNode(grammarAccess.getModelAccess().getContainmentRefContainmentRefParserRuleCall_8_1_0());
+                    					
                     pushFollow(FollowSets000.FOLLOW_2);
                     lv_containmentRef_17_0=ruleContainmentRef();
 
                     state._fsp--;
 
 
-                    	        if (current==null) {
-                    	            current = createModelElementForParent(grammarAccess.getModelRule());
-                    	        }
-                           		set(
-                           			current, 
-                           			"containmentRef",
-                            		lv_containmentRef_17_0, 
-                            		"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.ContainmentRef");
-                    	        afterParserOrEnumRuleCall();
-                    	    
+                    						if (current==null) {
+                    							current = createModelElementForParent(grammarAccess.getModelRule());
+                    						}
+                    						set(
+                    							current,
+                    							"containmentRef",
+                    							lv_containmentRef_17_0,
+                    							"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.ContainmentRef");
+                    						afterParserOrEnumRuleCall();
+                    					
 
                     }
 
@@ -654,40 +656,40 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
                     }
                     break;
                 case 10 :
-                    // InternalAssignmentFinderTestLanguage.g:288:6: (otherlv_18= '#09' ( (lv_crossRef_19_0= ruleCrossRef ) ) )
+                    // InternalAssignmentFinderTestLanguage.g:314:3: (otherlv_18= '#09' ( (lv_crossRef_19_0= ruleCrossRef ) ) )
                     {
-                    // InternalAssignmentFinderTestLanguage.g:288:6: (otherlv_18= '#09' ( (lv_crossRef_19_0= ruleCrossRef ) ) )
-                    // InternalAssignmentFinderTestLanguage.g:288:8: otherlv_18= '#09' ( (lv_crossRef_19_0= ruleCrossRef ) )
+                    // InternalAssignmentFinderTestLanguage.g:314:3: (otherlv_18= '#09' ( (lv_crossRef_19_0= ruleCrossRef ) ) )
+                    // InternalAssignmentFinderTestLanguage.g:315:4: otherlv_18= '#09' ( (lv_crossRef_19_0= ruleCrossRef ) )
                     {
                     otherlv_18=(Token)match(input,22,FollowSets000.FOLLOW_8); 
 
-                        	newLeafNode(otherlv_18, grammarAccess.getModelAccess().getNumberSignDigitZeroDigitNineKeyword_9_0());
-                        
-                    // InternalAssignmentFinderTestLanguage.g:292:1: ( (lv_crossRef_19_0= ruleCrossRef ) )
-                    // InternalAssignmentFinderTestLanguage.g:293:1: (lv_crossRef_19_0= ruleCrossRef )
+                    				newLeafNode(otherlv_18, grammarAccess.getModelAccess().getNumberSignDigitZeroDigitNineKeyword_9_0());
+                    			
+                    // InternalAssignmentFinderTestLanguage.g:319:4: ( (lv_crossRef_19_0= ruleCrossRef ) )
+                    // InternalAssignmentFinderTestLanguage.g:320:5: (lv_crossRef_19_0= ruleCrossRef )
                     {
-                    // InternalAssignmentFinderTestLanguage.g:293:1: (lv_crossRef_19_0= ruleCrossRef )
-                    // InternalAssignmentFinderTestLanguage.g:294:3: lv_crossRef_19_0= ruleCrossRef
+                    // InternalAssignmentFinderTestLanguage.g:320:5: (lv_crossRef_19_0= ruleCrossRef )
+                    // InternalAssignmentFinderTestLanguage.g:321:6: lv_crossRef_19_0= ruleCrossRef
                     {
-                     
-                    	        newCompositeNode(grammarAccess.getModelAccess().getCrossRefCrossRefParserRuleCall_9_1_0()); 
-                    	    
+
+                    						newCompositeNode(grammarAccess.getModelAccess().getCrossRefCrossRefParserRuleCall_9_1_0());
+                    					
                     pushFollow(FollowSets000.FOLLOW_2);
                     lv_crossRef_19_0=ruleCrossRef();
 
                     state._fsp--;
 
 
-                    	        if (current==null) {
-                    	            current = createModelElementForParent(grammarAccess.getModelRule());
-                    	        }
-                           		set(
-                           			current, 
-                           			"crossRef",
-                            		lv_crossRef_19_0, 
-                            		"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.CrossRef");
-                    	        afterParserOrEnumRuleCall();
-                    	    
+                    						if (current==null) {
+                    							current = createModelElementForParent(grammarAccess.getModelRule());
+                    						}
+                    						set(
+                    							current,
+                    							"crossRef",
+                    							lv_crossRef_19_0,
+                    							"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.CrossRef");
+                    						afterParserOrEnumRuleCall();
+                    					
 
                     }
 
@@ -706,13 +708,15 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -721,7 +725,7 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "entryRuleKeywordVal"
-    // InternalAssignmentFinderTestLanguage.g:318:1: entryRuleKeywordVal returns [EObject current=null] : iv_ruleKeywordVal= ruleKeywordVal EOF ;
+    // InternalAssignmentFinderTestLanguage.g:343:1: entryRuleKeywordVal returns [EObject current=null] : iv_ruleKeywordVal= ruleKeywordVal EOF ;
     public final EObject entryRuleKeywordVal() throws RecognitionException {
         EObject current = null;
 
@@ -729,8 +733,8 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
 
 
         try {
-            // InternalAssignmentFinderTestLanguage.g:319:2: (iv_ruleKeywordVal= ruleKeywordVal EOF )
-            // InternalAssignmentFinderTestLanguage.g:320:2: iv_ruleKeywordVal= ruleKeywordVal EOF
+            // InternalAssignmentFinderTestLanguage.g:343:51: (iv_ruleKeywordVal= ruleKeywordVal EOF )
+            // InternalAssignmentFinderTestLanguage.g:344:2: iv_ruleKeywordVal= ruleKeywordVal EOF
             {
              newCompositeNode(grammarAccess.getKeywordValRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -744,11 +748,11 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -757,20 +761,21 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "ruleKeywordVal"
-    // InternalAssignmentFinderTestLanguage.g:327:1: ruleKeywordVal returns [EObject current=null] : ( ( (lv_kw_0_0= 'kw1' ) ) | ( (lv_kw_1_0= 'kw2' ) ) ) ;
+    // InternalAssignmentFinderTestLanguage.g:350:1: ruleKeywordVal returns [EObject current=null] : ( ( (lv_kw_0_0= 'kw1' ) ) | ( (lv_kw_1_0= 'kw2' ) ) ) ;
     public final EObject ruleKeywordVal() throws RecognitionException {
         EObject current = null;
 
         Token lv_kw_0_0=null;
         Token lv_kw_1_0=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalAssignmentFinderTestLanguage.g:330:28: ( ( ( (lv_kw_0_0= 'kw1' ) ) | ( (lv_kw_1_0= 'kw2' ) ) ) )
-            // InternalAssignmentFinderTestLanguage.g:331:1: ( ( (lv_kw_0_0= 'kw1' ) ) | ( (lv_kw_1_0= 'kw2' ) ) )
+            // InternalAssignmentFinderTestLanguage.g:356:2: ( ( ( (lv_kw_0_0= 'kw1' ) ) | ( (lv_kw_1_0= 'kw2' ) ) ) )
+            // InternalAssignmentFinderTestLanguage.g:357:2: ( ( (lv_kw_0_0= 'kw1' ) ) | ( (lv_kw_1_0= 'kw2' ) ) )
             {
-            // InternalAssignmentFinderTestLanguage.g:331:1: ( ( (lv_kw_0_0= 'kw1' ) ) | ( (lv_kw_1_0= 'kw2' ) ) )
+            // InternalAssignmentFinderTestLanguage.g:357:2: ( ( (lv_kw_0_0= 'kw1' ) ) | ( (lv_kw_1_0= 'kw2' ) ) )
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -788,24 +793,24 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
             }
             switch (alt2) {
                 case 1 :
-                    // InternalAssignmentFinderTestLanguage.g:331:2: ( (lv_kw_0_0= 'kw1' ) )
+                    // InternalAssignmentFinderTestLanguage.g:358:3: ( (lv_kw_0_0= 'kw1' ) )
                     {
-                    // InternalAssignmentFinderTestLanguage.g:331:2: ( (lv_kw_0_0= 'kw1' ) )
-                    // InternalAssignmentFinderTestLanguage.g:332:1: (lv_kw_0_0= 'kw1' )
+                    // InternalAssignmentFinderTestLanguage.g:358:3: ( (lv_kw_0_0= 'kw1' ) )
+                    // InternalAssignmentFinderTestLanguage.g:359:4: (lv_kw_0_0= 'kw1' )
                     {
-                    // InternalAssignmentFinderTestLanguage.g:332:1: (lv_kw_0_0= 'kw1' )
-                    // InternalAssignmentFinderTestLanguage.g:333:3: lv_kw_0_0= 'kw1'
+                    // InternalAssignmentFinderTestLanguage.g:359:4: (lv_kw_0_0= 'kw1' )
+                    // InternalAssignmentFinderTestLanguage.g:360:5: lv_kw_0_0= 'kw1'
                     {
                     lv_kw_0_0=(Token)match(input,23,FollowSets000.FOLLOW_2); 
 
-                            newLeafNode(lv_kw_0_0, grammarAccess.getKeywordValAccess().getKwKw1Keyword_0_0());
-                        
+                    					newLeafNode(lv_kw_0_0, grammarAccess.getKeywordValAccess().getKwKw1Keyword_0_0());
+                    				
 
-                    	        if (current==null) {
-                    	            current = createModelElement(grammarAccess.getKeywordValRule());
-                    	        }
-                           		setWithLastConsumed(current, "kw", lv_kw_0_0, "kw1");
-                    	    
+                    					if (current==null) {
+                    						current = createModelElement(grammarAccess.getKeywordValRule());
+                    					}
+                    					setWithLastConsumed(current, "kw", lv_kw_0_0, "kw1");
+                    				
 
                     }
 
@@ -816,24 +821,24 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
                     }
                     break;
                 case 2 :
-                    // InternalAssignmentFinderTestLanguage.g:347:6: ( (lv_kw_1_0= 'kw2' ) )
+                    // InternalAssignmentFinderTestLanguage.g:373:3: ( (lv_kw_1_0= 'kw2' ) )
                     {
-                    // InternalAssignmentFinderTestLanguage.g:347:6: ( (lv_kw_1_0= 'kw2' ) )
-                    // InternalAssignmentFinderTestLanguage.g:348:1: (lv_kw_1_0= 'kw2' )
+                    // InternalAssignmentFinderTestLanguage.g:373:3: ( (lv_kw_1_0= 'kw2' ) )
+                    // InternalAssignmentFinderTestLanguage.g:374:4: (lv_kw_1_0= 'kw2' )
                     {
-                    // InternalAssignmentFinderTestLanguage.g:348:1: (lv_kw_1_0= 'kw2' )
-                    // InternalAssignmentFinderTestLanguage.g:349:3: lv_kw_1_0= 'kw2'
+                    // InternalAssignmentFinderTestLanguage.g:374:4: (lv_kw_1_0= 'kw2' )
+                    // InternalAssignmentFinderTestLanguage.g:375:5: lv_kw_1_0= 'kw2'
                     {
                     lv_kw_1_0=(Token)match(input,24,FollowSets000.FOLLOW_2); 
 
-                            newLeafNode(lv_kw_1_0, grammarAccess.getKeywordValAccess().getKwKw2Keyword_1_0());
-                        
+                    					newLeafNode(lv_kw_1_0, grammarAccess.getKeywordValAccess().getKwKw2Keyword_1_0());
+                    				
 
-                    	        if (current==null) {
-                    	            current = createModelElement(grammarAccess.getKeywordValRule());
-                    	        }
-                           		setWithLastConsumed(current, "kw", lv_kw_1_0, "kw2");
-                    	    
+                    					if (current==null) {
+                    						current = createModelElement(grammarAccess.getKeywordValRule());
+                    					}
+                    					setWithLastConsumed(current, "kw", lv_kw_1_0, "kw2");
+                    				
 
                     }
 
@@ -849,13 +854,15 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -864,7 +871,7 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "entryRuleTerminalVal"
-    // InternalAssignmentFinderTestLanguage.g:370:1: entryRuleTerminalVal returns [EObject current=null] : iv_ruleTerminalVal= ruleTerminalVal EOF ;
+    // InternalAssignmentFinderTestLanguage.g:391:1: entryRuleTerminalVal returns [EObject current=null] : iv_ruleTerminalVal= ruleTerminalVal EOF ;
     public final EObject entryRuleTerminalVal() throws RecognitionException {
         EObject current = null;
 
@@ -872,8 +879,8 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
 
 
         try {
-            // InternalAssignmentFinderTestLanguage.g:371:2: (iv_ruleTerminalVal= ruleTerminalVal EOF )
-            // InternalAssignmentFinderTestLanguage.g:372:2: iv_ruleTerminalVal= ruleTerminalVal EOF
+            // InternalAssignmentFinderTestLanguage.g:391:52: (iv_ruleTerminalVal= ruleTerminalVal EOF )
+            // InternalAssignmentFinderTestLanguage.g:392:2: iv_ruleTerminalVal= ruleTerminalVal EOF
             {
              newCompositeNode(grammarAccess.getTerminalValRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -887,11 +894,11 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -900,7 +907,7 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "ruleTerminalVal"
-    // InternalAssignmentFinderTestLanguage.g:379:1: ruleTerminalVal returns [EObject current=null] : ( ( (lv_term_0_0= RULE_TERMINAL1 ) ) | ( (lv_term_1_0= RULE_TERMINAL2 ) ) | ( (lv_term_2_0= '%foo' ) ) ) ;
+    // InternalAssignmentFinderTestLanguage.g:398:1: ruleTerminalVal returns [EObject current=null] : ( ( (lv_term_0_0= RULE_TERMINAL1 ) ) | ( (lv_term_1_0= RULE_TERMINAL2 ) ) | ( (lv_term_2_0= '%foo' ) ) ) ;
     public final EObject ruleTerminalVal() throws RecognitionException {
         EObject current = null;
 
@@ -908,13 +915,14 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
         Token lv_term_1_0=null;
         Token lv_term_2_0=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalAssignmentFinderTestLanguage.g:382:28: ( ( ( (lv_term_0_0= RULE_TERMINAL1 ) ) | ( (lv_term_1_0= RULE_TERMINAL2 ) ) | ( (lv_term_2_0= '%foo' ) ) ) )
-            // InternalAssignmentFinderTestLanguage.g:383:1: ( ( (lv_term_0_0= RULE_TERMINAL1 ) ) | ( (lv_term_1_0= RULE_TERMINAL2 ) ) | ( (lv_term_2_0= '%foo' ) ) )
+            // InternalAssignmentFinderTestLanguage.g:404:2: ( ( ( (lv_term_0_0= RULE_TERMINAL1 ) ) | ( (lv_term_1_0= RULE_TERMINAL2 ) ) | ( (lv_term_2_0= '%foo' ) ) ) )
+            // InternalAssignmentFinderTestLanguage.g:405:2: ( ( (lv_term_0_0= RULE_TERMINAL1 ) ) | ( (lv_term_1_0= RULE_TERMINAL2 ) ) | ( (lv_term_2_0= '%foo' ) ) )
             {
-            // InternalAssignmentFinderTestLanguage.g:383:1: ( ( (lv_term_0_0= RULE_TERMINAL1 ) ) | ( (lv_term_1_0= RULE_TERMINAL2 ) ) | ( (lv_term_2_0= '%foo' ) ) )
+            // InternalAssignmentFinderTestLanguage.g:405:2: ( ( (lv_term_0_0= RULE_TERMINAL1 ) ) | ( (lv_term_1_0= RULE_TERMINAL2 ) ) | ( (lv_term_2_0= '%foo' ) ) )
             int alt3=3;
             switch ( input.LA(1) ) {
             case RULE_TERMINAL1:
@@ -941,28 +949,28 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
 
             switch (alt3) {
                 case 1 :
-                    // InternalAssignmentFinderTestLanguage.g:383:2: ( (lv_term_0_0= RULE_TERMINAL1 ) )
+                    // InternalAssignmentFinderTestLanguage.g:406:3: ( (lv_term_0_0= RULE_TERMINAL1 ) )
                     {
-                    // InternalAssignmentFinderTestLanguage.g:383:2: ( (lv_term_0_0= RULE_TERMINAL1 ) )
-                    // InternalAssignmentFinderTestLanguage.g:384:1: (lv_term_0_0= RULE_TERMINAL1 )
+                    // InternalAssignmentFinderTestLanguage.g:406:3: ( (lv_term_0_0= RULE_TERMINAL1 ) )
+                    // InternalAssignmentFinderTestLanguage.g:407:4: (lv_term_0_0= RULE_TERMINAL1 )
                     {
-                    // InternalAssignmentFinderTestLanguage.g:384:1: (lv_term_0_0= RULE_TERMINAL1 )
-                    // InternalAssignmentFinderTestLanguage.g:385:3: lv_term_0_0= RULE_TERMINAL1
+                    // InternalAssignmentFinderTestLanguage.g:407:4: (lv_term_0_0= RULE_TERMINAL1 )
+                    // InternalAssignmentFinderTestLanguage.g:408:5: lv_term_0_0= RULE_TERMINAL1
                     {
                     lv_term_0_0=(Token)match(input,RULE_TERMINAL1,FollowSets000.FOLLOW_2); 
 
-                    			newLeafNode(lv_term_0_0, grammarAccess.getTerminalValAccess().getTermTerminal1TerminalRuleCall_0_0()); 
-                    		
+                    					newLeafNode(lv_term_0_0, grammarAccess.getTerminalValAccess().getTermTerminal1TerminalRuleCall_0_0());
+                    				
 
-                    	        if (current==null) {
-                    	            current = createModelElement(grammarAccess.getTerminalValRule());
-                    	        }
-                           		setWithLastConsumed(
-                           			current, 
-                           			"term",
-                            		lv_term_0_0, 
-                            		"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.Terminal1");
-                    	    
+                    					if (current==null) {
+                    						current = createModelElement(grammarAccess.getTerminalValRule());
+                    					}
+                    					setWithLastConsumed(
+                    						current,
+                    						"term",
+                    						lv_term_0_0,
+                    						"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.Terminal1");
+                    				
 
                     }
 
@@ -973,28 +981,28 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
                     }
                     break;
                 case 2 :
-                    // InternalAssignmentFinderTestLanguage.g:402:6: ( (lv_term_1_0= RULE_TERMINAL2 ) )
+                    // InternalAssignmentFinderTestLanguage.g:425:3: ( (lv_term_1_0= RULE_TERMINAL2 ) )
                     {
-                    // InternalAssignmentFinderTestLanguage.g:402:6: ( (lv_term_1_0= RULE_TERMINAL2 ) )
-                    // InternalAssignmentFinderTestLanguage.g:403:1: (lv_term_1_0= RULE_TERMINAL2 )
+                    // InternalAssignmentFinderTestLanguage.g:425:3: ( (lv_term_1_0= RULE_TERMINAL2 ) )
+                    // InternalAssignmentFinderTestLanguage.g:426:4: (lv_term_1_0= RULE_TERMINAL2 )
                     {
-                    // InternalAssignmentFinderTestLanguage.g:403:1: (lv_term_1_0= RULE_TERMINAL2 )
-                    // InternalAssignmentFinderTestLanguage.g:404:3: lv_term_1_0= RULE_TERMINAL2
+                    // InternalAssignmentFinderTestLanguage.g:426:4: (lv_term_1_0= RULE_TERMINAL2 )
+                    // InternalAssignmentFinderTestLanguage.g:427:5: lv_term_1_0= RULE_TERMINAL2
                     {
                     lv_term_1_0=(Token)match(input,RULE_TERMINAL2,FollowSets000.FOLLOW_2); 
 
-                    			newLeafNode(lv_term_1_0, grammarAccess.getTerminalValAccess().getTermTerminal2TerminalRuleCall_1_0()); 
-                    		
+                    					newLeafNode(lv_term_1_0, grammarAccess.getTerminalValAccess().getTermTerminal2TerminalRuleCall_1_0());
+                    				
 
-                    	        if (current==null) {
-                    	            current = createModelElement(grammarAccess.getTerminalValRule());
-                    	        }
-                           		setWithLastConsumed(
-                           			current, 
-                           			"term",
-                            		lv_term_1_0, 
-                            		"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.Terminal2");
-                    	    
+                    					if (current==null) {
+                    						current = createModelElement(grammarAccess.getTerminalValRule());
+                    					}
+                    					setWithLastConsumed(
+                    						current,
+                    						"term",
+                    						lv_term_1_0,
+                    						"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.Terminal2");
+                    				
 
                     }
 
@@ -1005,24 +1013,24 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
                     }
                     break;
                 case 3 :
-                    // InternalAssignmentFinderTestLanguage.g:421:6: ( (lv_term_2_0= '%foo' ) )
+                    // InternalAssignmentFinderTestLanguage.g:444:3: ( (lv_term_2_0= '%foo' ) )
                     {
-                    // InternalAssignmentFinderTestLanguage.g:421:6: ( (lv_term_2_0= '%foo' ) )
-                    // InternalAssignmentFinderTestLanguage.g:422:1: (lv_term_2_0= '%foo' )
+                    // InternalAssignmentFinderTestLanguage.g:444:3: ( (lv_term_2_0= '%foo' ) )
+                    // InternalAssignmentFinderTestLanguage.g:445:4: (lv_term_2_0= '%foo' )
                     {
-                    // InternalAssignmentFinderTestLanguage.g:422:1: (lv_term_2_0= '%foo' )
-                    // InternalAssignmentFinderTestLanguage.g:423:3: lv_term_2_0= '%foo'
+                    // InternalAssignmentFinderTestLanguage.g:445:4: (lv_term_2_0= '%foo' )
+                    // InternalAssignmentFinderTestLanguage.g:446:5: lv_term_2_0= '%foo'
                     {
                     lv_term_2_0=(Token)match(input,25,FollowSets000.FOLLOW_2); 
 
-                            newLeafNode(lv_term_2_0, grammarAccess.getTerminalValAccess().getTermFooKeyword_2_0());
-                        
+                    					newLeafNode(lv_term_2_0, grammarAccess.getTerminalValAccess().getTermFooKeyword_2_0());
+                    				
 
-                    	        if (current==null) {
-                    	            current = createModelElement(grammarAccess.getTerminalValRule());
-                    	        }
-                           		setWithLastConsumed(current, "term", lv_term_2_0, "%foo");
-                    	    
+                    					if (current==null) {
+                    						current = createModelElement(grammarAccess.getTerminalValRule());
+                    					}
+                    					setWithLastConsumed(current, "term", lv_term_2_0, "%foo");
+                    				
 
                     }
 
@@ -1038,13 +1046,15 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1053,7 +1063,7 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "entryRuleEnumVal"
-    // InternalAssignmentFinderTestLanguage.g:444:1: entryRuleEnumVal returns [EObject current=null] : iv_ruleEnumVal= ruleEnumVal EOF ;
+    // InternalAssignmentFinderTestLanguage.g:462:1: entryRuleEnumVal returns [EObject current=null] : iv_ruleEnumVal= ruleEnumVal EOF ;
     public final EObject entryRuleEnumVal() throws RecognitionException {
         EObject current = null;
 
@@ -1061,8 +1071,8 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
 
 
         try {
-            // InternalAssignmentFinderTestLanguage.g:445:2: (iv_ruleEnumVal= ruleEnumVal EOF )
-            // InternalAssignmentFinderTestLanguage.g:446:2: iv_ruleEnumVal= ruleEnumVal EOF
+            // InternalAssignmentFinderTestLanguage.g:462:48: (iv_ruleEnumVal= ruleEnumVal EOF )
+            // InternalAssignmentFinderTestLanguage.g:463:2: iv_ruleEnumVal= ruleEnumVal EOF
             {
              newCompositeNode(grammarAccess.getEnumValRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -1076,11 +1086,11 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1089,7 +1099,7 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "ruleEnumVal"
-    // InternalAssignmentFinderTestLanguage.g:453:1: ruleEnumVal returns [EObject current=null] : ( ( (lv_en_0_0= ruleEnum1 ) ) | ( (lv_en_1_0= ruleEnum2 ) ) ) ;
+    // InternalAssignmentFinderTestLanguage.g:469:1: ruleEnumVal returns [EObject current=null] : ( ( (lv_en_0_0= ruleEnum1 ) ) | ( (lv_en_1_0= ruleEnum2 ) ) ) ;
     public final EObject ruleEnumVal() throws RecognitionException {
         EObject current = null;
 
@@ -1098,13 +1108,14 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
         Enumerator lv_en_1_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalAssignmentFinderTestLanguage.g:456:28: ( ( ( (lv_en_0_0= ruleEnum1 ) ) | ( (lv_en_1_0= ruleEnum2 ) ) ) )
-            // InternalAssignmentFinderTestLanguage.g:457:1: ( ( (lv_en_0_0= ruleEnum1 ) ) | ( (lv_en_1_0= ruleEnum2 ) ) )
+            // InternalAssignmentFinderTestLanguage.g:475:2: ( ( ( (lv_en_0_0= ruleEnum1 ) ) | ( (lv_en_1_0= ruleEnum2 ) ) ) )
+            // InternalAssignmentFinderTestLanguage.g:476:2: ( ( (lv_en_0_0= ruleEnum1 ) ) | ( (lv_en_1_0= ruleEnum2 ) ) )
             {
-            // InternalAssignmentFinderTestLanguage.g:457:1: ( ( (lv_en_0_0= ruleEnum1 ) ) | ( (lv_en_1_0= ruleEnum2 ) ) )
+            // InternalAssignmentFinderTestLanguage.g:476:2: ( ( (lv_en_0_0= ruleEnum1 ) ) | ( (lv_en_1_0= ruleEnum2 ) ) )
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -1122,33 +1133,33 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
             }
             switch (alt4) {
                 case 1 :
-                    // InternalAssignmentFinderTestLanguage.g:457:2: ( (lv_en_0_0= ruleEnum1 ) )
+                    // InternalAssignmentFinderTestLanguage.g:477:3: ( (lv_en_0_0= ruleEnum1 ) )
                     {
-                    // InternalAssignmentFinderTestLanguage.g:457:2: ( (lv_en_0_0= ruleEnum1 ) )
-                    // InternalAssignmentFinderTestLanguage.g:458:1: (lv_en_0_0= ruleEnum1 )
+                    // InternalAssignmentFinderTestLanguage.g:477:3: ( (lv_en_0_0= ruleEnum1 ) )
+                    // InternalAssignmentFinderTestLanguage.g:478:4: (lv_en_0_0= ruleEnum1 )
                     {
-                    // InternalAssignmentFinderTestLanguage.g:458:1: (lv_en_0_0= ruleEnum1 )
-                    // InternalAssignmentFinderTestLanguage.g:459:3: lv_en_0_0= ruleEnum1
+                    // InternalAssignmentFinderTestLanguage.g:478:4: (lv_en_0_0= ruleEnum1 )
+                    // InternalAssignmentFinderTestLanguage.g:479:5: lv_en_0_0= ruleEnum1
                     {
-                     
-                    	        newCompositeNode(grammarAccess.getEnumValAccess().getEnEnum1EnumRuleCall_0_0()); 
-                    	    
+
+                    					newCompositeNode(grammarAccess.getEnumValAccess().getEnEnum1EnumRuleCall_0_0());
+                    				
                     pushFollow(FollowSets000.FOLLOW_2);
                     lv_en_0_0=ruleEnum1();
 
                     state._fsp--;
 
 
-                    	        if (current==null) {
-                    	            current = createModelElementForParent(grammarAccess.getEnumValRule());
-                    	        }
-                           		set(
-                           			current, 
-                           			"en",
-                            		lv_en_0_0, 
-                            		"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.Enum1");
-                    	        afterParserOrEnumRuleCall();
-                    	    
+                    					if (current==null) {
+                    						current = createModelElementForParent(grammarAccess.getEnumValRule());
+                    					}
+                    					set(
+                    						current,
+                    						"en",
+                    						lv_en_0_0,
+                    						"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.Enum1");
+                    					afterParserOrEnumRuleCall();
+                    				
 
                     }
 
@@ -1159,33 +1170,33 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
                     }
                     break;
                 case 2 :
-                    // InternalAssignmentFinderTestLanguage.g:476:6: ( (lv_en_1_0= ruleEnum2 ) )
+                    // InternalAssignmentFinderTestLanguage.g:497:3: ( (lv_en_1_0= ruleEnum2 ) )
                     {
-                    // InternalAssignmentFinderTestLanguage.g:476:6: ( (lv_en_1_0= ruleEnum2 ) )
-                    // InternalAssignmentFinderTestLanguage.g:477:1: (lv_en_1_0= ruleEnum2 )
+                    // InternalAssignmentFinderTestLanguage.g:497:3: ( (lv_en_1_0= ruleEnum2 ) )
+                    // InternalAssignmentFinderTestLanguage.g:498:4: (lv_en_1_0= ruleEnum2 )
                     {
-                    // InternalAssignmentFinderTestLanguage.g:477:1: (lv_en_1_0= ruleEnum2 )
-                    // InternalAssignmentFinderTestLanguage.g:478:3: lv_en_1_0= ruleEnum2
+                    // InternalAssignmentFinderTestLanguage.g:498:4: (lv_en_1_0= ruleEnum2 )
+                    // InternalAssignmentFinderTestLanguage.g:499:5: lv_en_1_0= ruleEnum2
                     {
-                     
-                    	        newCompositeNode(grammarAccess.getEnumValAccess().getEnEnum2EnumRuleCall_1_0()); 
-                    	    
+
+                    					newCompositeNode(grammarAccess.getEnumValAccess().getEnEnum2EnumRuleCall_1_0());
+                    				
                     pushFollow(FollowSets000.FOLLOW_2);
                     lv_en_1_0=ruleEnum2();
 
                     state._fsp--;
 
 
-                    	        if (current==null) {
-                    	            current = createModelElementForParent(grammarAccess.getEnumValRule());
-                    	        }
-                           		set(
-                           			current, 
-                           			"en",
-                            		lv_en_1_0, 
-                            		"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.Enum2");
-                    	        afterParserOrEnumRuleCall();
-                    	    
+                    					if (current==null) {
+                    						current = createModelElementForParent(grammarAccess.getEnumValRule());
+                    					}
+                    					set(
+                    						current,
+                    						"en",
+                    						lv_en_1_0,
+                    						"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.Enum2");
+                    					afterParserOrEnumRuleCall();
+                    				
 
                     }
 
@@ -1201,13 +1212,15 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1216,7 +1229,7 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "entryRuleKeywordBool"
-    // InternalAssignmentFinderTestLanguage.g:502:1: entryRuleKeywordBool returns [EObject current=null] : iv_ruleKeywordBool= ruleKeywordBool EOF ;
+    // InternalAssignmentFinderTestLanguage.g:520:1: entryRuleKeywordBool returns [EObject current=null] : iv_ruleKeywordBool= ruleKeywordBool EOF ;
     public final EObject entryRuleKeywordBool() throws RecognitionException {
         EObject current = null;
 
@@ -1224,8 +1237,8 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
 
 
         try {
-            // InternalAssignmentFinderTestLanguage.g:503:2: (iv_ruleKeywordBool= ruleKeywordBool EOF )
-            // InternalAssignmentFinderTestLanguage.g:504:2: iv_ruleKeywordBool= ruleKeywordBool EOF
+            // InternalAssignmentFinderTestLanguage.g:520:52: (iv_ruleKeywordBool= ruleKeywordBool EOF )
+            // InternalAssignmentFinderTestLanguage.g:521:2: iv_ruleKeywordBool= ruleKeywordBool EOF
             {
              newCompositeNode(grammarAccess.getKeywordBoolRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -1239,11 +1252,11 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1252,20 +1265,21 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "ruleKeywordBool"
-    // InternalAssignmentFinderTestLanguage.g:511:1: ruleKeywordBool returns [EObject current=null] : ( ( (lv_kw_0_0= 'kw1' ) ) | ( (lv_kw_1_0= 'kw2' ) ) ) ;
+    // InternalAssignmentFinderTestLanguage.g:527:1: ruleKeywordBool returns [EObject current=null] : ( ( (lv_kw_0_0= 'kw1' ) ) | ( (lv_kw_1_0= 'kw2' ) ) ) ;
     public final EObject ruleKeywordBool() throws RecognitionException {
         EObject current = null;
 
         Token lv_kw_0_0=null;
         Token lv_kw_1_0=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalAssignmentFinderTestLanguage.g:514:28: ( ( ( (lv_kw_0_0= 'kw1' ) ) | ( (lv_kw_1_0= 'kw2' ) ) ) )
-            // InternalAssignmentFinderTestLanguage.g:515:1: ( ( (lv_kw_0_0= 'kw1' ) ) | ( (lv_kw_1_0= 'kw2' ) ) )
+            // InternalAssignmentFinderTestLanguage.g:533:2: ( ( ( (lv_kw_0_0= 'kw1' ) ) | ( (lv_kw_1_0= 'kw2' ) ) ) )
+            // InternalAssignmentFinderTestLanguage.g:534:2: ( ( (lv_kw_0_0= 'kw1' ) ) | ( (lv_kw_1_0= 'kw2' ) ) )
             {
-            // InternalAssignmentFinderTestLanguage.g:515:1: ( ( (lv_kw_0_0= 'kw1' ) ) | ( (lv_kw_1_0= 'kw2' ) ) )
+            // InternalAssignmentFinderTestLanguage.g:534:2: ( ( (lv_kw_0_0= 'kw1' ) ) | ( (lv_kw_1_0= 'kw2' ) ) )
             int alt5=2;
             int LA5_0 = input.LA(1);
 
@@ -1283,24 +1297,24 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
             }
             switch (alt5) {
                 case 1 :
-                    // InternalAssignmentFinderTestLanguage.g:515:2: ( (lv_kw_0_0= 'kw1' ) )
+                    // InternalAssignmentFinderTestLanguage.g:535:3: ( (lv_kw_0_0= 'kw1' ) )
                     {
-                    // InternalAssignmentFinderTestLanguage.g:515:2: ( (lv_kw_0_0= 'kw1' ) )
-                    // InternalAssignmentFinderTestLanguage.g:516:1: (lv_kw_0_0= 'kw1' )
+                    // InternalAssignmentFinderTestLanguage.g:535:3: ( (lv_kw_0_0= 'kw1' ) )
+                    // InternalAssignmentFinderTestLanguage.g:536:4: (lv_kw_0_0= 'kw1' )
                     {
-                    // InternalAssignmentFinderTestLanguage.g:516:1: (lv_kw_0_0= 'kw1' )
-                    // InternalAssignmentFinderTestLanguage.g:517:3: lv_kw_0_0= 'kw1'
+                    // InternalAssignmentFinderTestLanguage.g:536:4: (lv_kw_0_0= 'kw1' )
+                    // InternalAssignmentFinderTestLanguage.g:537:5: lv_kw_0_0= 'kw1'
                     {
                     lv_kw_0_0=(Token)match(input,23,FollowSets000.FOLLOW_2); 
 
-                            newLeafNode(lv_kw_0_0, grammarAccess.getKeywordBoolAccess().getKwKw1Keyword_0_0());
-                        
+                    					newLeafNode(lv_kw_0_0, grammarAccess.getKeywordBoolAccess().getKwKw1Keyword_0_0());
+                    				
 
-                    	        if (current==null) {
-                    	            current = createModelElement(grammarAccess.getKeywordBoolRule());
-                    	        }
-                           		setWithLastConsumed(current, "kw", true, "kw1");
-                    	    
+                    					if (current==null) {
+                    						current = createModelElement(grammarAccess.getKeywordBoolRule());
+                    					}
+                    					setWithLastConsumed(current, "kw", true, "kw1");
+                    				
 
                     }
 
@@ -1311,24 +1325,24 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
                     }
                     break;
                 case 2 :
-                    // InternalAssignmentFinderTestLanguage.g:531:6: ( (lv_kw_1_0= 'kw2' ) )
+                    // InternalAssignmentFinderTestLanguage.g:550:3: ( (lv_kw_1_0= 'kw2' ) )
                     {
-                    // InternalAssignmentFinderTestLanguage.g:531:6: ( (lv_kw_1_0= 'kw2' ) )
-                    // InternalAssignmentFinderTestLanguage.g:532:1: (lv_kw_1_0= 'kw2' )
+                    // InternalAssignmentFinderTestLanguage.g:550:3: ( (lv_kw_1_0= 'kw2' ) )
+                    // InternalAssignmentFinderTestLanguage.g:551:4: (lv_kw_1_0= 'kw2' )
                     {
-                    // InternalAssignmentFinderTestLanguage.g:532:1: (lv_kw_1_0= 'kw2' )
-                    // InternalAssignmentFinderTestLanguage.g:533:3: lv_kw_1_0= 'kw2'
+                    // InternalAssignmentFinderTestLanguage.g:551:4: (lv_kw_1_0= 'kw2' )
+                    // InternalAssignmentFinderTestLanguage.g:552:5: lv_kw_1_0= 'kw2'
                     {
                     lv_kw_1_0=(Token)match(input,24,FollowSets000.FOLLOW_2); 
 
-                            newLeafNode(lv_kw_1_0, grammarAccess.getKeywordBoolAccess().getKwKw2Keyword_1_0());
-                        
+                    					newLeafNode(lv_kw_1_0, grammarAccess.getKeywordBoolAccess().getKwKw2Keyword_1_0());
+                    				
 
-                    	        if (current==null) {
-                    	            current = createModelElement(grammarAccess.getKeywordBoolRule());
-                    	        }
-                           		setWithLastConsumed(current, "kw", true, "kw2");
-                    	    
+                    					if (current==null) {
+                    						current = createModelElement(grammarAccess.getKeywordBoolRule());
+                    					}
+                    					setWithLastConsumed(current, "kw", true, "kw2");
+                    				
 
                     }
 
@@ -1344,13 +1358,15 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1359,7 +1375,7 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "entryRuleTerminalBool"
-    // InternalAssignmentFinderTestLanguage.g:554:1: entryRuleTerminalBool returns [EObject current=null] : iv_ruleTerminalBool= ruleTerminalBool EOF ;
+    // InternalAssignmentFinderTestLanguage.g:568:1: entryRuleTerminalBool returns [EObject current=null] : iv_ruleTerminalBool= ruleTerminalBool EOF ;
     public final EObject entryRuleTerminalBool() throws RecognitionException {
         EObject current = null;
 
@@ -1367,8 +1383,8 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
 
 
         try {
-            // InternalAssignmentFinderTestLanguage.g:555:2: (iv_ruleTerminalBool= ruleTerminalBool EOF )
-            // InternalAssignmentFinderTestLanguage.g:556:2: iv_ruleTerminalBool= ruleTerminalBool EOF
+            // InternalAssignmentFinderTestLanguage.g:568:53: (iv_ruleTerminalBool= ruleTerminalBool EOF )
+            // InternalAssignmentFinderTestLanguage.g:569:2: iv_ruleTerminalBool= ruleTerminalBool EOF
             {
              newCompositeNode(grammarAccess.getTerminalBoolRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -1382,11 +1398,11 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1395,7 +1411,7 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "ruleTerminalBool"
-    // InternalAssignmentFinderTestLanguage.g:563:1: ruleTerminalBool returns [EObject current=null] : ( ( (lv_term_0_0= RULE_TERMINAL1 ) ) | ( (lv_term_1_0= RULE_TERMINAL2 ) ) | ( (lv_term_2_0= '%foo' ) ) ) ;
+    // InternalAssignmentFinderTestLanguage.g:575:1: ruleTerminalBool returns [EObject current=null] : ( ( (lv_term_0_0= RULE_TERMINAL1 ) ) | ( (lv_term_1_0= RULE_TERMINAL2 ) ) | ( (lv_term_2_0= '%foo' ) ) ) ;
     public final EObject ruleTerminalBool() throws RecognitionException {
         EObject current = null;
 
@@ -1403,13 +1419,14 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
         Token lv_term_1_0=null;
         Token lv_term_2_0=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalAssignmentFinderTestLanguage.g:566:28: ( ( ( (lv_term_0_0= RULE_TERMINAL1 ) ) | ( (lv_term_1_0= RULE_TERMINAL2 ) ) | ( (lv_term_2_0= '%foo' ) ) ) )
-            // InternalAssignmentFinderTestLanguage.g:567:1: ( ( (lv_term_0_0= RULE_TERMINAL1 ) ) | ( (lv_term_1_0= RULE_TERMINAL2 ) ) | ( (lv_term_2_0= '%foo' ) ) )
+            // InternalAssignmentFinderTestLanguage.g:581:2: ( ( ( (lv_term_0_0= RULE_TERMINAL1 ) ) | ( (lv_term_1_0= RULE_TERMINAL2 ) ) | ( (lv_term_2_0= '%foo' ) ) ) )
+            // InternalAssignmentFinderTestLanguage.g:582:2: ( ( (lv_term_0_0= RULE_TERMINAL1 ) ) | ( (lv_term_1_0= RULE_TERMINAL2 ) ) | ( (lv_term_2_0= '%foo' ) ) )
             {
-            // InternalAssignmentFinderTestLanguage.g:567:1: ( ( (lv_term_0_0= RULE_TERMINAL1 ) ) | ( (lv_term_1_0= RULE_TERMINAL2 ) ) | ( (lv_term_2_0= '%foo' ) ) )
+            // InternalAssignmentFinderTestLanguage.g:582:2: ( ( (lv_term_0_0= RULE_TERMINAL1 ) ) | ( (lv_term_1_0= RULE_TERMINAL2 ) ) | ( (lv_term_2_0= '%foo' ) ) )
             int alt6=3;
             switch ( input.LA(1) ) {
             case RULE_TERMINAL1:
@@ -1436,28 +1453,28 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
 
             switch (alt6) {
                 case 1 :
-                    // InternalAssignmentFinderTestLanguage.g:567:2: ( (lv_term_0_0= RULE_TERMINAL1 ) )
+                    // InternalAssignmentFinderTestLanguage.g:583:3: ( (lv_term_0_0= RULE_TERMINAL1 ) )
                     {
-                    // InternalAssignmentFinderTestLanguage.g:567:2: ( (lv_term_0_0= RULE_TERMINAL1 ) )
-                    // InternalAssignmentFinderTestLanguage.g:568:1: (lv_term_0_0= RULE_TERMINAL1 )
+                    // InternalAssignmentFinderTestLanguage.g:583:3: ( (lv_term_0_0= RULE_TERMINAL1 ) )
+                    // InternalAssignmentFinderTestLanguage.g:584:4: (lv_term_0_0= RULE_TERMINAL1 )
                     {
-                    // InternalAssignmentFinderTestLanguage.g:568:1: (lv_term_0_0= RULE_TERMINAL1 )
-                    // InternalAssignmentFinderTestLanguage.g:569:3: lv_term_0_0= RULE_TERMINAL1
+                    // InternalAssignmentFinderTestLanguage.g:584:4: (lv_term_0_0= RULE_TERMINAL1 )
+                    // InternalAssignmentFinderTestLanguage.g:585:5: lv_term_0_0= RULE_TERMINAL1
                     {
                     lv_term_0_0=(Token)match(input,RULE_TERMINAL1,FollowSets000.FOLLOW_2); 
 
-                    			newLeafNode(lv_term_0_0, grammarAccess.getTerminalBoolAccess().getTermTerminal1TerminalRuleCall_0_0()); 
-                    		
+                    					newLeafNode(lv_term_0_0, grammarAccess.getTerminalBoolAccess().getTermTerminal1TerminalRuleCall_0_0());
+                    				
 
-                    	        if (current==null) {
-                    	            current = createModelElement(grammarAccess.getTerminalBoolRule());
-                    	        }
-                           		setWithLastConsumed(
-                           			current, 
-                           			"term",
-                            		true, 
-                            		"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.Terminal1");
-                    	    
+                    					if (current==null) {
+                    						current = createModelElement(grammarAccess.getTerminalBoolRule());
+                    					}
+                    					setWithLastConsumed(
+                    						current,
+                    						"term",
+                    						true,
+                    						"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.Terminal1");
+                    				
 
                     }
 
@@ -1468,28 +1485,28 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
                     }
                     break;
                 case 2 :
-                    // InternalAssignmentFinderTestLanguage.g:586:6: ( (lv_term_1_0= RULE_TERMINAL2 ) )
+                    // InternalAssignmentFinderTestLanguage.g:602:3: ( (lv_term_1_0= RULE_TERMINAL2 ) )
                     {
-                    // InternalAssignmentFinderTestLanguage.g:586:6: ( (lv_term_1_0= RULE_TERMINAL2 ) )
-                    // InternalAssignmentFinderTestLanguage.g:587:1: (lv_term_1_0= RULE_TERMINAL2 )
+                    // InternalAssignmentFinderTestLanguage.g:602:3: ( (lv_term_1_0= RULE_TERMINAL2 ) )
+                    // InternalAssignmentFinderTestLanguage.g:603:4: (lv_term_1_0= RULE_TERMINAL2 )
                     {
-                    // InternalAssignmentFinderTestLanguage.g:587:1: (lv_term_1_0= RULE_TERMINAL2 )
-                    // InternalAssignmentFinderTestLanguage.g:588:3: lv_term_1_0= RULE_TERMINAL2
+                    // InternalAssignmentFinderTestLanguage.g:603:4: (lv_term_1_0= RULE_TERMINAL2 )
+                    // InternalAssignmentFinderTestLanguage.g:604:5: lv_term_1_0= RULE_TERMINAL2
                     {
                     lv_term_1_0=(Token)match(input,RULE_TERMINAL2,FollowSets000.FOLLOW_2); 
 
-                    			newLeafNode(lv_term_1_0, grammarAccess.getTerminalBoolAccess().getTermTerminal2TerminalRuleCall_1_0()); 
-                    		
+                    					newLeafNode(lv_term_1_0, grammarAccess.getTerminalBoolAccess().getTermTerminal2TerminalRuleCall_1_0());
+                    				
 
-                    	        if (current==null) {
-                    	            current = createModelElement(grammarAccess.getTerminalBoolRule());
-                    	        }
-                           		setWithLastConsumed(
-                           			current, 
-                           			"term",
-                            		true, 
-                            		"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.Terminal2");
-                    	    
+                    					if (current==null) {
+                    						current = createModelElement(grammarAccess.getTerminalBoolRule());
+                    					}
+                    					setWithLastConsumed(
+                    						current,
+                    						"term",
+                    						true,
+                    						"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.Terminal2");
+                    				
 
                     }
 
@@ -1500,24 +1517,24 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
                     }
                     break;
                 case 3 :
-                    // InternalAssignmentFinderTestLanguage.g:605:6: ( (lv_term_2_0= '%foo' ) )
+                    // InternalAssignmentFinderTestLanguage.g:621:3: ( (lv_term_2_0= '%foo' ) )
                     {
-                    // InternalAssignmentFinderTestLanguage.g:605:6: ( (lv_term_2_0= '%foo' ) )
-                    // InternalAssignmentFinderTestLanguage.g:606:1: (lv_term_2_0= '%foo' )
+                    // InternalAssignmentFinderTestLanguage.g:621:3: ( (lv_term_2_0= '%foo' ) )
+                    // InternalAssignmentFinderTestLanguage.g:622:4: (lv_term_2_0= '%foo' )
                     {
-                    // InternalAssignmentFinderTestLanguage.g:606:1: (lv_term_2_0= '%foo' )
-                    // InternalAssignmentFinderTestLanguage.g:607:3: lv_term_2_0= '%foo'
+                    // InternalAssignmentFinderTestLanguage.g:622:4: (lv_term_2_0= '%foo' )
+                    // InternalAssignmentFinderTestLanguage.g:623:5: lv_term_2_0= '%foo'
                     {
                     lv_term_2_0=(Token)match(input,25,FollowSets000.FOLLOW_2); 
 
-                            newLeafNode(lv_term_2_0, grammarAccess.getTerminalBoolAccess().getTermFooKeyword_2_0());
-                        
+                    					newLeafNode(lv_term_2_0, grammarAccess.getTerminalBoolAccess().getTermFooKeyword_2_0());
+                    				
 
-                    	        if (current==null) {
-                    	            current = createModelElement(grammarAccess.getTerminalBoolRule());
-                    	        }
-                           		setWithLastConsumed(current, "term", true, "%foo");
-                    	    
+                    					if (current==null) {
+                    						current = createModelElement(grammarAccess.getTerminalBoolRule());
+                    					}
+                    					setWithLastConsumed(current, "term", true, "%foo");
+                    				
 
                     }
 
@@ -1533,13 +1550,15 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1548,7 +1567,7 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "entryRuleEnumBool"
-    // InternalAssignmentFinderTestLanguage.g:628:1: entryRuleEnumBool returns [EObject current=null] : iv_ruleEnumBool= ruleEnumBool EOF ;
+    // InternalAssignmentFinderTestLanguage.g:639:1: entryRuleEnumBool returns [EObject current=null] : iv_ruleEnumBool= ruleEnumBool EOF ;
     public final EObject entryRuleEnumBool() throws RecognitionException {
         EObject current = null;
 
@@ -1556,8 +1575,8 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
 
 
         try {
-            // InternalAssignmentFinderTestLanguage.g:629:2: (iv_ruleEnumBool= ruleEnumBool EOF )
-            // InternalAssignmentFinderTestLanguage.g:630:2: iv_ruleEnumBool= ruleEnumBool EOF
+            // InternalAssignmentFinderTestLanguage.g:639:49: (iv_ruleEnumBool= ruleEnumBool EOF )
+            // InternalAssignmentFinderTestLanguage.g:640:2: iv_ruleEnumBool= ruleEnumBool EOF
             {
              newCompositeNode(grammarAccess.getEnumBoolRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -1571,11 +1590,11 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1584,7 +1603,7 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "ruleEnumBool"
-    // InternalAssignmentFinderTestLanguage.g:637:1: ruleEnumBool returns [EObject current=null] : ( ( (lv_en_0_0= ruleEnum1 ) ) | ( (lv_en_1_0= ruleEnum2 ) ) ) ;
+    // InternalAssignmentFinderTestLanguage.g:646:1: ruleEnumBool returns [EObject current=null] : ( ( (lv_en_0_0= ruleEnum1 ) ) | ( (lv_en_1_0= ruleEnum2 ) ) ) ;
     public final EObject ruleEnumBool() throws RecognitionException {
         EObject current = null;
 
@@ -1593,13 +1612,14 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
         Enumerator lv_en_1_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalAssignmentFinderTestLanguage.g:640:28: ( ( ( (lv_en_0_0= ruleEnum1 ) ) | ( (lv_en_1_0= ruleEnum2 ) ) ) )
-            // InternalAssignmentFinderTestLanguage.g:641:1: ( ( (lv_en_0_0= ruleEnum1 ) ) | ( (lv_en_1_0= ruleEnum2 ) ) )
+            // InternalAssignmentFinderTestLanguage.g:652:2: ( ( ( (lv_en_0_0= ruleEnum1 ) ) | ( (lv_en_1_0= ruleEnum2 ) ) ) )
+            // InternalAssignmentFinderTestLanguage.g:653:2: ( ( (lv_en_0_0= ruleEnum1 ) ) | ( (lv_en_1_0= ruleEnum2 ) ) )
             {
-            // InternalAssignmentFinderTestLanguage.g:641:1: ( ( (lv_en_0_0= ruleEnum1 ) ) | ( (lv_en_1_0= ruleEnum2 ) ) )
+            // InternalAssignmentFinderTestLanguage.g:653:2: ( ( (lv_en_0_0= ruleEnum1 ) ) | ( (lv_en_1_0= ruleEnum2 ) ) )
             int alt7=2;
             int LA7_0 = input.LA(1);
 
@@ -1617,33 +1637,33 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
             }
             switch (alt7) {
                 case 1 :
-                    // InternalAssignmentFinderTestLanguage.g:641:2: ( (lv_en_0_0= ruleEnum1 ) )
+                    // InternalAssignmentFinderTestLanguage.g:654:3: ( (lv_en_0_0= ruleEnum1 ) )
                     {
-                    // InternalAssignmentFinderTestLanguage.g:641:2: ( (lv_en_0_0= ruleEnum1 ) )
-                    // InternalAssignmentFinderTestLanguage.g:642:1: (lv_en_0_0= ruleEnum1 )
+                    // InternalAssignmentFinderTestLanguage.g:654:3: ( (lv_en_0_0= ruleEnum1 ) )
+                    // InternalAssignmentFinderTestLanguage.g:655:4: (lv_en_0_0= ruleEnum1 )
                     {
-                    // InternalAssignmentFinderTestLanguage.g:642:1: (lv_en_0_0= ruleEnum1 )
-                    // InternalAssignmentFinderTestLanguage.g:643:3: lv_en_0_0= ruleEnum1
+                    // InternalAssignmentFinderTestLanguage.g:655:4: (lv_en_0_0= ruleEnum1 )
+                    // InternalAssignmentFinderTestLanguage.g:656:5: lv_en_0_0= ruleEnum1
                     {
-                     
-                    	        newCompositeNode(grammarAccess.getEnumBoolAccess().getEnEnum1EnumRuleCall_0_0()); 
-                    	    
+
+                    					newCompositeNode(grammarAccess.getEnumBoolAccess().getEnEnum1EnumRuleCall_0_0());
+                    				
                     pushFollow(FollowSets000.FOLLOW_2);
                     lv_en_0_0=ruleEnum1();
 
                     state._fsp--;
 
 
-                    	        if (current==null) {
-                    	            current = createModelElementForParent(grammarAccess.getEnumBoolRule());
-                    	        }
-                           		set(
-                           			current, 
-                           			"en",
-                            		true, 
-                            		"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.Enum1");
-                    	        afterParserOrEnumRuleCall();
-                    	    
+                    					if (current==null) {
+                    						current = createModelElementForParent(grammarAccess.getEnumBoolRule());
+                    					}
+                    					set(
+                    						current,
+                    						"en",
+                    						true,
+                    						"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.Enum1");
+                    					afterParserOrEnumRuleCall();
+                    				
 
                     }
 
@@ -1654,33 +1674,33 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
                     }
                     break;
                 case 2 :
-                    // InternalAssignmentFinderTestLanguage.g:660:6: ( (lv_en_1_0= ruleEnum2 ) )
+                    // InternalAssignmentFinderTestLanguage.g:674:3: ( (lv_en_1_0= ruleEnum2 ) )
                     {
-                    // InternalAssignmentFinderTestLanguage.g:660:6: ( (lv_en_1_0= ruleEnum2 ) )
-                    // InternalAssignmentFinderTestLanguage.g:661:1: (lv_en_1_0= ruleEnum2 )
+                    // InternalAssignmentFinderTestLanguage.g:674:3: ( (lv_en_1_0= ruleEnum2 ) )
+                    // InternalAssignmentFinderTestLanguage.g:675:4: (lv_en_1_0= ruleEnum2 )
                     {
-                    // InternalAssignmentFinderTestLanguage.g:661:1: (lv_en_1_0= ruleEnum2 )
-                    // InternalAssignmentFinderTestLanguage.g:662:3: lv_en_1_0= ruleEnum2
+                    // InternalAssignmentFinderTestLanguage.g:675:4: (lv_en_1_0= ruleEnum2 )
+                    // InternalAssignmentFinderTestLanguage.g:676:5: lv_en_1_0= ruleEnum2
                     {
-                     
-                    	        newCompositeNode(grammarAccess.getEnumBoolAccess().getEnEnum2EnumRuleCall_1_0()); 
-                    	    
+
+                    					newCompositeNode(grammarAccess.getEnumBoolAccess().getEnEnum2EnumRuleCall_1_0());
+                    				
                     pushFollow(FollowSets000.FOLLOW_2);
                     lv_en_1_0=ruleEnum2();
 
                     state._fsp--;
 
 
-                    	        if (current==null) {
-                    	            current = createModelElementForParent(grammarAccess.getEnumBoolRule());
-                    	        }
-                           		set(
-                           			current, 
-                           			"en",
-                            		true, 
-                            		"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.Enum2");
-                    	        afterParserOrEnumRuleCall();
-                    	    
+                    					if (current==null) {
+                    						current = createModelElementForParent(grammarAccess.getEnumBoolRule());
+                    					}
+                    					set(
+                    						current,
+                    						"en",
+                    						true,
+                    						"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.Enum2");
+                    					afterParserOrEnumRuleCall();
+                    				
 
                     }
 
@@ -1696,13 +1716,15 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1711,7 +1733,7 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "entryRuleMixedBool"
-    // InternalAssignmentFinderTestLanguage.g:686:1: entryRuleMixedBool returns [EObject current=null] : iv_ruleMixedBool= ruleMixedBool EOF ;
+    // InternalAssignmentFinderTestLanguage.g:697:1: entryRuleMixedBool returns [EObject current=null] : iv_ruleMixedBool= ruleMixedBool EOF ;
     public final EObject entryRuleMixedBool() throws RecognitionException {
         EObject current = null;
 
@@ -1719,8 +1741,8 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
 
 
         try {
-            // InternalAssignmentFinderTestLanguage.g:687:2: (iv_ruleMixedBool= ruleMixedBool EOF )
-            // InternalAssignmentFinderTestLanguage.g:688:2: iv_ruleMixedBool= ruleMixedBool EOF
+            // InternalAssignmentFinderTestLanguage.g:697:50: (iv_ruleMixedBool= ruleMixedBool EOF )
+            // InternalAssignmentFinderTestLanguage.g:698:2: iv_ruleMixedBool= ruleMixedBool EOF
             {
              newCompositeNode(grammarAccess.getMixedBoolRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -1734,11 +1756,11 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1747,7 +1769,7 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "ruleMixedBool"
-    // InternalAssignmentFinderTestLanguage.g:695:1: ruleMixedBool returns [EObject current=null] : ( ( (lv_val_0_0= 'kw1' ) ) | ( (lv_val_1_0= ruleBoolean ) ) ) ;
+    // InternalAssignmentFinderTestLanguage.g:704:1: ruleMixedBool returns [EObject current=null] : ( ( (lv_val_0_0= 'kw1' ) ) | ( (lv_val_1_0= ruleBoolean ) ) ) ;
     public final EObject ruleMixedBool() throws RecognitionException {
         EObject current = null;
 
@@ -1755,13 +1777,14 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
         AntlrDatatypeRuleToken lv_val_1_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalAssignmentFinderTestLanguage.g:698:28: ( ( ( (lv_val_0_0= 'kw1' ) ) | ( (lv_val_1_0= ruleBoolean ) ) ) )
-            // InternalAssignmentFinderTestLanguage.g:699:1: ( ( (lv_val_0_0= 'kw1' ) ) | ( (lv_val_1_0= ruleBoolean ) ) )
+            // InternalAssignmentFinderTestLanguage.g:710:2: ( ( ( (lv_val_0_0= 'kw1' ) ) | ( (lv_val_1_0= ruleBoolean ) ) ) )
+            // InternalAssignmentFinderTestLanguage.g:711:2: ( ( (lv_val_0_0= 'kw1' ) ) | ( (lv_val_1_0= ruleBoolean ) ) )
             {
-            // InternalAssignmentFinderTestLanguage.g:699:1: ( ( (lv_val_0_0= 'kw1' ) ) | ( (lv_val_1_0= ruleBoolean ) ) )
+            // InternalAssignmentFinderTestLanguage.g:711:2: ( ( (lv_val_0_0= 'kw1' ) ) | ( (lv_val_1_0= ruleBoolean ) ) )
             int alt8=2;
             int LA8_0 = input.LA(1);
 
@@ -1779,24 +1802,24 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
             }
             switch (alt8) {
                 case 1 :
-                    // InternalAssignmentFinderTestLanguage.g:699:2: ( (lv_val_0_0= 'kw1' ) )
+                    // InternalAssignmentFinderTestLanguage.g:712:3: ( (lv_val_0_0= 'kw1' ) )
                     {
-                    // InternalAssignmentFinderTestLanguage.g:699:2: ( (lv_val_0_0= 'kw1' ) )
-                    // InternalAssignmentFinderTestLanguage.g:700:1: (lv_val_0_0= 'kw1' )
+                    // InternalAssignmentFinderTestLanguage.g:712:3: ( (lv_val_0_0= 'kw1' ) )
+                    // InternalAssignmentFinderTestLanguage.g:713:4: (lv_val_0_0= 'kw1' )
                     {
-                    // InternalAssignmentFinderTestLanguage.g:700:1: (lv_val_0_0= 'kw1' )
-                    // InternalAssignmentFinderTestLanguage.g:701:3: lv_val_0_0= 'kw1'
+                    // InternalAssignmentFinderTestLanguage.g:713:4: (lv_val_0_0= 'kw1' )
+                    // InternalAssignmentFinderTestLanguage.g:714:5: lv_val_0_0= 'kw1'
                     {
                     lv_val_0_0=(Token)match(input,23,FollowSets000.FOLLOW_2); 
 
-                            newLeafNode(lv_val_0_0, grammarAccess.getMixedBoolAccess().getValKw1Keyword_0_0());
-                        
+                    					newLeafNode(lv_val_0_0, grammarAccess.getMixedBoolAccess().getValKw1Keyword_0_0());
+                    				
 
-                    	        if (current==null) {
-                    	            current = createModelElement(grammarAccess.getMixedBoolRule());
-                    	        }
-                           		setWithLastConsumed(current, "val", true, "kw1");
-                    	    
+                    					if (current==null) {
+                    						current = createModelElement(grammarAccess.getMixedBoolRule());
+                    					}
+                    					setWithLastConsumed(current, "val", true, "kw1");
+                    				
 
                     }
 
@@ -1807,33 +1830,33 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
                     }
                     break;
                 case 2 :
-                    // InternalAssignmentFinderTestLanguage.g:715:6: ( (lv_val_1_0= ruleBoolean ) )
+                    // InternalAssignmentFinderTestLanguage.g:727:3: ( (lv_val_1_0= ruleBoolean ) )
                     {
-                    // InternalAssignmentFinderTestLanguage.g:715:6: ( (lv_val_1_0= ruleBoolean ) )
-                    // InternalAssignmentFinderTestLanguage.g:716:1: (lv_val_1_0= ruleBoolean )
+                    // InternalAssignmentFinderTestLanguage.g:727:3: ( (lv_val_1_0= ruleBoolean ) )
+                    // InternalAssignmentFinderTestLanguage.g:728:4: (lv_val_1_0= ruleBoolean )
                     {
-                    // InternalAssignmentFinderTestLanguage.g:716:1: (lv_val_1_0= ruleBoolean )
-                    // InternalAssignmentFinderTestLanguage.g:717:3: lv_val_1_0= ruleBoolean
+                    // InternalAssignmentFinderTestLanguage.g:728:4: (lv_val_1_0= ruleBoolean )
+                    // InternalAssignmentFinderTestLanguage.g:729:5: lv_val_1_0= ruleBoolean
                     {
-                     
-                    	        newCompositeNode(grammarAccess.getMixedBoolAccess().getValBooleanParserRuleCall_1_0()); 
-                    	    
+
+                    					newCompositeNode(grammarAccess.getMixedBoolAccess().getValBooleanParserRuleCall_1_0());
+                    				
                     pushFollow(FollowSets000.FOLLOW_2);
                     lv_val_1_0=ruleBoolean();
 
                     state._fsp--;
 
 
-                    	        if (current==null) {
-                    	            current = createModelElementForParent(grammarAccess.getMixedBoolRule());
-                    	        }
-                           		set(
-                           			current, 
-                           			"val",
-                            		lv_val_1_0, 
-                            		"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.Boolean");
-                    	        afterParserOrEnumRuleCall();
-                    	    
+                    					if (current==null) {
+                    						current = createModelElementForParent(grammarAccess.getMixedBoolRule());
+                    					}
+                    					set(
+                    						current,
+                    						"val",
+                    						lv_val_1_0,
+                    						"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.Boolean");
+                    					afterParserOrEnumRuleCall();
+                    				
 
                     }
 
@@ -1849,13 +1872,15 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1864,7 +1889,7 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "entryRuleBoolean"
-    // InternalAssignmentFinderTestLanguage.g:741:1: entryRuleBoolean returns [String current=null] : iv_ruleBoolean= ruleBoolean EOF ;
+    // InternalAssignmentFinderTestLanguage.g:750:1: entryRuleBoolean returns [String current=null] : iv_ruleBoolean= ruleBoolean EOF ;
     public final String entryRuleBoolean() throws RecognitionException {
         String current = null;
 
@@ -1872,8 +1897,8 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
 
 
         try {
-            // InternalAssignmentFinderTestLanguage.g:742:2: (iv_ruleBoolean= ruleBoolean EOF )
-            // InternalAssignmentFinderTestLanguage.g:743:2: iv_ruleBoolean= ruleBoolean EOF
+            // InternalAssignmentFinderTestLanguage.g:750:47: (iv_ruleBoolean= ruleBoolean EOF )
+            // InternalAssignmentFinderTestLanguage.g:751:2: iv_ruleBoolean= ruleBoolean EOF
             {
              newCompositeNode(grammarAccess.getBooleanRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -1887,11 +1912,11 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1900,19 +1925,20 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "ruleBoolean"
-    // InternalAssignmentFinderTestLanguage.g:750:1: ruleBoolean returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= 'true' | kw= 'false' ) ;
+    // InternalAssignmentFinderTestLanguage.g:757:1: ruleBoolean returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= 'true' | kw= 'false' ) ;
     public final AntlrDatatypeRuleToken ruleBoolean() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
         Token kw=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalAssignmentFinderTestLanguage.g:753:28: ( (kw= 'true' | kw= 'false' ) )
-            // InternalAssignmentFinderTestLanguage.g:754:1: (kw= 'true' | kw= 'false' )
+            // InternalAssignmentFinderTestLanguage.g:763:2: ( (kw= 'true' | kw= 'false' ) )
+            // InternalAssignmentFinderTestLanguage.g:764:2: (kw= 'true' | kw= 'false' )
             {
-            // InternalAssignmentFinderTestLanguage.g:754:1: (kw= 'true' | kw= 'false' )
+            // InternalAssignmentFinderTestLanguage.g:764:2: (kw= 'true' | kw= 'false' )
             int alt9=2;
             int LA9_0 = input.LA(1);
 
@@ -1930,24 +1956,24 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
             }
             switch (alt9) {
                 case 1 :
-                    // InternalAssignmentFinderTestLanguage.g:755:2: kw= 'true'
+                    // InternalAssignmentFinderTestLanguage.g:765:3: kw= 'true'
                     {
                     kw=(Token)match(input,26,FollowSets000.FOLLOW_2); 
 
-                            current.merge(kw);
-                            newLeafNode(kw, grammarAccess.getBooleanAccess().getTrueKeyword_0()); 
-                        
+                    			current.merge(kw);
+                    			newLeafNode(kw, grammarAccess.getBooleanAccess().getTrueKeyword_0());
+                    		
 
                     }
                     break;
                 case 2 :
-                    // InternalAssignmentFinderTestLanguage.g:762:2: kw= 'false'
+                    // InternalAssignmentFinderTestLanguage.g:771:3: kw= 'false'
                     {
                     kw=(Token)match(input,27,FollowSets000.FOLLOW_2); 
 
-                            current.merge(kw);
-                            newLeafNode(kw, grammarAccess.getBooleanAccess().getFalseKeyword_1()); 
-                        
+                    			current.merge(kw);
+                    			newLeafNode(kw, grammarAccess.getBooleanAccess().getFalseKeyword_1());
+                    		
 
                     }
                     break;
@@ -1957,13 +1983,15 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1972,7 +2000,7 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "entryRuleMixedValue"
-    // InternalAssignmentFinderTestLanguage.g:775:1: entryRuleMixedValue returns [EObject current=null] : iv_ruleMixedValue= ruleMixedValue EOF ;
+    // InternalAssignmentFinderTestLanguage.g:780:1: entryRuleMixedValue returns [EObject current=null] : iv_ruleMixedValue= ruleMixedValue EOF ;
     public final EObject entryRuleMixedValue() throws RecognitionException {
         EObject current = null;
 
@@ -1980,8 +2008,8 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
 
 
         try {
-            // InternalAssignmentFinderTestLanguage.g:776:2: (iv_ruleMixedValue= ruleMixedValue EOF )
-            // InternalAssignmentFinderTestLanguage.g:777:2: iv_ruleMixedValue= ruleMixedValue EOF
+            // InternalAssignmentFinderTestLanguage.g:780:51: (iv_ruleMixedValue= ruleMixedValue EOF )
+            // InternalAssignmentFinderTestLanguage.g:781:2: iv_ruleMixedValue= ruleMixedValue EOF
             {
              newCompositeNode(grammarAccess.getMixedValueRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -1995,11 +2023,11 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -2008,7 +2036,7 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "ruleMixedValue"
-    // InternalAssignmentFinderTestLanguage.g:784:1: ruleMixedValue returns [EObject current=null] : ( ( (lv_val_0_0= ruleEnum1 ) ) | ( (lv_val_1_0= ruleDatEnum ) ) ) ;
+    // InternalAssignmentFinderTestLanguage.g:787:1: ruleMixedValue returns [EObject current=null] : ( ( (lv_val_0_0= ruleEnum1 ) ) | ( (lv_val_1_0= ruleDatEnum ) ) ) ;
     public final EObject ruleMixedValue() throws RecognitionException {
         EObject current = null;
 
@@ -2017,13 +2045,14 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
         AntlrDatatypeRuleToken lv_val_1_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalAssignmentFinderTestLanguage.g:787:28: ( ( ( (lv_val_0_0= ruleEnum1 ) ) | ( (lv_val_1_0= ruleDatEnum ) ) ) )
-            // InternalAssignmentFinderTestLanguage.g:788:1: ( ( (lv_val_0_0= ruleEnum1 ) ) | ( (lv_val_1_0= ruleDatEnum ) ) )
+            // InternalAssignmentFinderTestLanguage.g:793:2: ( ( ( (lv_val_0_0= ruleEnum1 ) ) | ( (lv_val_1_0= ruleDatEnum ) ) ) )
+            // InternalAssignmentFinderTestLanguage.g:794:2: ( ( (lv_val_0_0= ruleEnum1 ) ) | ( (lv_val_1_0= ruleDatEnum ) ) )
             {
-            // InternalAssignmentFinderTestLanguage.g:788:1: ( ( (lv_val_0_0= ruleEnum1 ) ) | ( (lv_val_1_0= ruleDatEnum ) ) )
+            // InternalAssignmentFinderTestLanguage.g:794:2: ( ( (lv_val_0_0= ruleEnum1 ) ) | ( (lv_val_1_0= ruleDatEnum ) ) )
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -2041,33 +2070,33 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
             }
             switch (alt10) {
                 case 1 :
-                    // InternalAssignmentFinderTestLanguage.g:788:2: ( (lv_val_0_0= ruleEnum1 ) )
+                    // InternalAssignmentFinderTestLanguage.g:795:3: ( (lv_val_0_0= ruleEnum1 ) )
                     {
-                    // InternalAssignmentFinderTestLanguage.g:788:2: ( (lv_val_0_0= ruleEnum1 ) )
-                    // InternalAssignmentFinderTestLanguage.g:789:1: (lv_val_0_0= ruleEnum1 )
+                    // InternalAssignmentFinderTestLanguage.g:795:3: ( (lv_val_0_0= ruleEnum1 ) )
+                    // InternalAssignmentFinderTestLanguage.g:796:4: (lv_val_0_0= ruleEnum1 )
                     {
-                    // InternalAssignmentFinderTestLanguage.g:789:1: (lv_val_0_0= ruleEnum1 )
-                    // InternalAssignmentFinderTestLanguage.g:790:3: lv_val_0_0= ruleEnum1
+                    // InternalAssignmentFinderTestLanguage.g:796:4: (lv_val_0_0= ruleEnum1 )
+                    // InternalAssignmentFinderTestLanguage.g:797:5: lv_val_0_0= ruleEnum1
                     {
-                     
-                    	        newCompositeNode(grammarAccess.getMixedValueAccess().getValEnum1EnumRuleCall_0_0()); 
-                    	    
+
+                    					newCompositeNode(grammarAccess.getMixedValueAccess().getValEnum1EnumRuleCall_0_0());
+                    				
                     pushFollow(FollowSets000.FOLLOW_2);
                     lv_val_0_0=ruleEnum1();
 
                     state._fsp--;
 
 
-                    	        if (current==null) {
-                    	            current = createModelElementForParent(grammarAccess.getMixedValueRule());
-                    	        }
-                           		set(
-                           			current, 
-                           			"val",
-                            		lv_val_0_0, 
-                            		"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.Enum1");
-                    	        afterParserOrEnumRuleCall();
-                    	    
+                    					if (current==null) {
+                    						current = createModelElementForParent(grammarAccess.getMixedValueRule());
+                    					}
+                    					set(
+                    						current,
+                    						"val",
+                    						lv_val_0_0,
+                    						"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.Enum1");
+                    					afterParserOrEnumRuleCall();
+                    				
 
                     }
 
@@ -2078,33 +2107,33 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
                     }
                     break;
                 case 2 :
-                    // InternalAssignmentFinderTestLanguage.g:807:6: ( (lv_val_1_0= ruleDatEnum ) )
+                    // InternalAssignmentFinderTestLanguage.g:815:3: ( (lv_val_1_0= ruleDatEnum ) )
                     {
-                    // InternalAssignmentFinderTestLanguage.g:807:6: ( (lv_val_1_0= ruleDatEnum ) )
-                    // InternalAssignmentFinderTestLanguage.g:808:1: (lv_val_1_0= ruleDatEnum )
+                    // InternalAssignmentFinderTestLanguage.g:815:3: ( (lv_val_1_0= ruleDatEnum ) )
+                    // InternalAssignmentFinderTestLanguage.g:816:4: (lv_val_1_0= ruleDatEnum )
                     {
-                    // InternalAssignmentFinderTestLanguage.g:808:1: (lv_val_1_0= ruleDatEnum )
-                    // InternalAssignmentFinderTestLanguage.g:809:3: lv_val_1_0= ruleDatEnum
+                    // InternalAssignmentFinderTestLanguage.g:816:4: (lv_val_1_0= ruleDatEnum )
+                    // InternalAssignmentFinderTestLanguage.g:817:5: lv_val_1_0= ruleDatEnum
                     {
-                     
-                    	        newCompositeNode(grammarAccess.getMixedValueAccess().getValDatEnumParserRuleCall_1_0()); 
-                    	    
+
+                    					newCompositeNode(grammarAccess.getMixedValueAccess().getValDatEnumParserRuleCall_1_0());
+                    				
                     pushFollow(FollowSets000.FOLLOW_2);
                     lv_val_1_0=ruleDatEnum();
 
                     state._fsp--;
 
 
-                    	        if (current==null) {
-                    	            current = createModelElementForParent(grammarAccess.getMixedValueRule());
-                    	        }
-                           		set(
-                           			current, 
-                           			"val",
-                            		lv_val_1_0, 
-                            		"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.DatEnum");
-                    	        afterParserOrEnumRuleCall();
-                    	    
+                    					if (current==null) {
+                    						current = createModelElementForParent(grammarAccess.getMixedValueRule());
+                    					}
+                    					set(
+                    						current,
+                    						"val",
+                    						lv_val_1_0,
+                    						"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.DatEnum");
+                    					afterParserOrEnumRuleCall();
+                    				
 
                     }
 
@@ -2120,13 +2149,15 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -2135,7 +2166,7 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "entryRuleDatEnum"
-    // InternalAssignmentFinderTestLanguage.g:833:1: entryRuleDatEnum returns [String current=null] : iv_ruleDatEnum= ruleDatEnum EOF ;
+    // InternalAssignmentFinderTestLanguage.g:838:1: entryRuleDatEnum returns [String current=null] : iv_ruleDatEnum= ruleDatEnum EOF ;
     public final String entryRuleDatEnum() throws RecognitionException {
         String current = null;
 
@@ -2143,8 +2174,8 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
 
 
         try {
-            // InternalAssignmentFinderTestLanguage.g:834:2: (iv_ruleDatEnum= ruleDatEnum EOF )
-            // InternalAssignmentFinderTestLanguage.g:835:2: iv_ruleDatEnum= ruleDatEnum EOF
+            // InternalAssignmentFinderTestLanguage.g:838:47: (iv_ruleDatEnum= ruleDatEnum EOF )
+            // InternalAssignmentFinderTestLanguage.g:839:2: iv_ruleDatEnum= ruleDatEnum EOF
             {
              newCompositeNode(grammarAccess.getDatEnumRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -2158,11 +2189,11 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -2171,33 +2202,36 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "ruleDatEnum"
-    // InternalAssignmentFinderTestLanguage.g:842:1: ruleDatEnum returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : kw= 'lit3' ;
+    // InternalAssignmentFinderTestLanguage.g:845:1: ruleDatEnum returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : kw= 'lit3' ;
     public final AntlrDatatypeRuleToken ruleDatEnum() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
         Token kw=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalAssignmentFinderTestLanguage.g:845:28: (kw= 'lit3' )
-            // InternalAssignmentFinderTestLanguage.g:847:2: kw= 'lit3'
+            // InternalAssignmentFinderTestLanguage.g:851:2: (kw= 'lit3' )
+            // InternalAssignmentFinderTestLanguage.g:852:2: kw= 'lit3'
             {
             kw=(Token)match(input,28,FollowSets000.FOLLOW_2); 
 
-                    current.merge(kw);
-                    newLeafNode(kw, grammarAccess.getDatEnumAccess().getLit3Keyword()); 
-                
+            		current.merge(kw);
+            		newLeafNode(kw, grammarAccess.getDatEnumAccess().getLit3Keyword());
+            	
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -2214,8 +2248,8 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
 
 
         try {
-            // InternalAssignmentFinderTestLanguage.g:861:2: (iv_ruleContainmentRef= ruleContainmentRef EOF )
-            // InternalAssignmentFinderTestLanguage.g:862:2: iv_ruleContainmentRef= ruleContainmentRef EOF
+            // InternalAssignmentFinderTestLanguage.g:860:55: (iv_ruleContainmentRef= ruleContainmentRef EOF )
+            // InternalAssignmentFinderTestLanguage.g:861:2: iv_ruleContainmentRef= ruleContainmentRef EOF
             {
              newCompositeNode(grammarAccess.getContainmentRefRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -2229,11 +2263,11 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -2242,7 +2276,7 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "ruleContainmentRef"
-    // InternalAssignmentFinderTestLanguage.g:869:1: ruleContainmentRef returns [EObject current=null] : ( ( (lv_ctx_0_0= ruleContainmentRef1 ) ) | ( (lv_ctx_1_0= ruleContainmentRef2 ) ) ) ;
+    // InternalAssignmentFinderTestLanguage.g:867:1: ruleContainmentRef returns [EObject current=null] : ( ( (lv_ctx_0_0= ruleContainmentRef1 ) ) | ( (lv_ctx_1_0= ruleContainmentRef2 ) ) ) ;
     public final EObject ruleContainmentRef() throws RecognitionException {
         EObject current = null;
 
@@ -2251,13 +2285,14 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
         EObject lv_ctx_1_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalAssignmentFinderTestLanguage.g:872:28: ( ( ( (lv_ctx_0_0= ruleContainmentRef1 ) ) | ( (lv_ctx_1_0= ruleContainmentRef2 ) ) ) )
-            // InternalAssignmentFinderTestLanguage.g:873:1: ( ( (lv_ctx_0_0= ruleContainmentRef1 ) ) | ( (lv_ctx_1_0= ruleContainmentRef2 ) ) )
+            // InternalAssignmentFinderTestLanguage.g:873:2: ( ( ( (lv_ctx_0_0= ruleContainmentRef1 ) ) | ( (lv_ctx_1_0= ruleContainmentRef2 ) ) ) )
+            // InternalAssignmentFinderTestLanguage.g:874:2: ( ( (lv_ctx_0_0= ruleContainmentRef1 ) ) | ( (lv_ctx_1_0= ruleContainmentRef2 ) ) )
             {
-            // InternalAssignmentFinderTestLanguage.g:873:1: ( ( (lv_ctx_0_0= ruleContainmentRef1 ) ) | ( (lv_ctx_1_0= ruleContainmentRef2 ) ) )
+            // InternalAssignmentFinderTestLanguage.g:874:2: ( ( (lv_ctx_0_0= ruleContainmentRef1 ) ) | ( (lv_ctx_1_0= ruleContainmentRef2 ) ) )
             int alt11=2;
             int LA11_0 = input.LA(1);
 
@@ -2275,33 +2310,33 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
             }
             switch (alt11) {
                 case 1 :
-                    // InternalAssignmentFinderTestLanguage.g:873:2: ( (lv_ctx_0_0= ruleContainmentRef1 ) )
+                    // InternalAssignmentFinderTestLanguage.g:875:3: ( (lv_ctx_0_0= ruleContainmentRef1 ) )
                     {
-                    // InternalAssignmentFinderTestLanguage.g:873:2: ( (lv_ctx_0_0= ruleContainmentRef1 ) )
-                    // InternalAssignmentFinderTestLanguage.g:874:1: (lv_ctx_0_0= ruleContainmentRef1 )
+                    // InternalAssignmentFinderTestLanguage.g:875:3: ( (lv_ctx_0_0= ruleContainmentRef1 ) )
+                    // InternalAssignmentFinderTestLanguage.g:876:4: (lv_ctx_0_0= ruleContainmentRef1 )
                     {
-                    // InternalAssignmentFinderTestLanguage.g:874:1: (lv_ctx_0_0= ruleContainmentRef1 )
-                    // InternalAssignmentFinderTestLanguage.g:875:3: lv_ctx_0_0= ruleContainmentRef1
+                    // InternalAssignmentFinderTestLanguage.g:876:4: (lv_ctx_0_0= ruleContainmentRef1 )
+                    // InternalAssignmentFinderTestLanguage.g:877:5: lv_ctx_0_0= ruleContainmentRef1
                     {
-                     
-                    	        newCompositeNode(grammarAccess.getContainmentRefAccess().getCtxContainmentRef1ParserRuleCall_0_0()); 
-                    	    
+
+                    					newCompositeNode(grammarAccess.getContainmentRefAccess().getCtxContainmentRef1ParserRuleCall_0_0());
+                    				
                     pushFollow(FollowSets000.FOLLOW_2);
                     lv_ctx_0_0=ruleContainmentRef1();
 
                     state._fsp--;
 
 
-                    	        if (current==null) {
-                    	            current = createModelElementForParent(grammarAccess.getContainmentRefRule());
-                    	        }
-                           		set(
-                           			current, 
-                           			"ctx",
-                            		lv_ctx_0_0, 
-                            		"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.ContainmentRef1");
-                    	        afterParserOrEnumRuleCall();
-                    	    
+                    					if (current==null) {
+                    						current = createModelElementForParent(grammarAccess.getContainmentRefRule());
+                    					}
+                    					set(
+                    						current,
+                    						"ctx",
+                    						lv_ctx_0_0,
+                    						"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.ContainmentRef1");
+                    					afterParserOrEnumRuleCall();
+                    				
 
                     }
 
@@ -2312,33 +2347,33 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
                     }
                     break;
                 case 2 :
-                    // InternalAssignmentFinderTestLanguage.g:892:6: ( (lv_ctx_1_0= ruleContainmentRef2 ) )
+                    // InternalAssignmentFinderTestLanguage.g:895:3: ( (lv_ctx_1_0= ruleContainmentRef2 ) )
                     {
-                    // InternalAssignmentFinderTestLanguage.g:892:6: ( (lv_ctx_1_0= ruleContainmentRef2 ) )
-                    // InternalAssignmentFinderTestLanguage.g:893:1: (lv_ctx_1_0= ruleContainmentRef2 )
+                    // InternalAssignmentFinderTestLanguage.g:895:3: ( (lv_ctx_1_0= ruleContainmentRef2 ) )
+                    // InternalAssignmentFinderTestLanguage.g:896:4: (lv_ctx_1_0= ruleContainmentRef2 )
                     {
-                    // InternalAssignmentFinderTestLanguage.g:893:1: (lv_ctx_1_0= ruleContainmentRef2 )
-                    // InternalAssignmentFinderTestLanguage.g:894:3: lv_ctx_1_0= ruleContainmentRef2
+                    // InternalAssignmentFinderTestLanguage.g:896:4: (lv_ctx_1_0= ruleContainmentRef2 )
+                    // InternalAssignmentFinderTestLanguage.g:897:5: lv_ctx_1_0= ruleContainmentRef2
                     {
-                     
-                    	        newCompositeNode(grammarAccess.getContainmentRefAccess().getCtxContainmentRef2ParserRuleCall_1_0()); 
-                    	    
+
+                    					newCompositeNode(grammarAccess.getContainmentRefAccess().getCtxContainmentRef2ParserRuleCall_1_0());
+                    				
                     pushFollow(FollowSets000.FOLLOW_2);
                     lv_ctx_1_0=ruleContainmentRef2();
 
                     state._fsp--;
 
 
-                    	        if (current==null) {
-                    	            current = createModelElementForParent(grammarAccess.getContainmentRefRule());
-                    	        }
-                           		set(
-                           			current, 
-                           			"ctx",
-                            		lv_ctx_1_0, 
-                            		"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.ContainmentRef2");
-                    	        afterParserOrEnumRuleCall();
-                    	    
+                    					if (current==null) {
+                    						current = createModelElementForParent(grammarAccess.getContainmentRefRule());
+                    					}
+                    					set(
+                    						current,
+                    						"ctx",
+                    						lv_ctx_1_0,
+                    						"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.ContainmentRef2");
+                    					afterParserOrEnumRuleCall();
+                    				
 
                     }
 
@@ -2354,13 +2389,15 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -2377,8 +2414,8 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
 
 
         try {
-            // InternalAssignmentFinderTestLanguage.g:919:2: (iv_ruleContainmentRef1= ruleContainmentRef1 EOF )
-            // InternalAssignmentFinderTestLanguage.g:920:2: iv_ruleContainmentRef1= ruleContainmentRef1 EOF
+            // InternalAssignmentFinderTestLanguage.g:918:56: (iv_ruleContainmentRef1= ruleContainmentRef1 EOF )
+            // InternalAssignmentFinderTestLanguage.g:919:2: iv_ruleContainmentRef1= ruleContainmentRef1 EOF
             {
              newCompositeNode(grammarAccess.getContainmentRef1Rule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -2392,11 +2429,11 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -2405,49 +2442,47 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "ruleContainmentRef1"
-    // InternalAssignmentFinderTestLanguage.g:927:1: ruleContainmentRef1 returns [EObject current=null] : (otherlv_0= 'kw1' ( (lv_val1_1_0= RULE_ID ) ) ) ;
+    // InternalAssignmentFinderTestLanguage.g:925:1: ruleContainmentRef1 returns [EObject current=null] : (otherlv_0= 'kw1' ( (lv_val1_1_0= RULE_ID ) ) ) ;
     public final EObject ruleContainmentRef1() throws RecognitionException {
         EObject current = null;
 
         Token otherlv_0=null;
         Token lv_val1_1_0=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalAssignmentFinderTestLanguage.g:930:28: ( (otherlv_0= 'kw1' ( (lv_val1_1_0= RULE_ID ) ) ) )
-            // InternalAssignmentFinderTestLanguage.g:931:1: (otherlv_0= 'kw1' ( (lv_val1_1_0= RULE_ID ) ) )
+            // InternalAssignmentFinderTestLanguage.g:931:2: ( (otherlv_0= 'kw1' ( (lv_val1_1_0= RULE_ID ) ) ) )
+            // InternalAssignmentFinderTestLanguage.g:932:2: (otherlv_0= 'kw1' ( (lv_val1_1_0= RULE_ID ) ) )
             {
-            // InternalAssignmentFinderTestLanguage.g:931:1: (otherlv_0= 'kw1' ( (lv_val1_1_0= RULE_ID ) ) )
-            // InternalAssignmentFinderTestLanguage.g:931:3: otherlv_0= 'kw1' ( (lv_val1_1_0= RULE_ID ) )
+            // InternalAssignmentFinderTestLanguage.g:932:2: (otherlv_0= 'kw1' ( (lv_val1_1_0= RULE_ID ) ) )
+            // InternalAssignmentFinderTestLanguage.g:933:3: otherlv_0= 'kw1' ( (lv_val1_1_0= RULE_ID ) )
             {
             otherlv_0=(Token)match(input,23,FollowSets000.FOLLOW_9); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getContainmentRef1Access().getKw1Keyword_0());
-                
-            // InternalAssignmentFinderTestLanguage.g:935:1: ( (lv_val1_1_0= RULE_ID ) )
-            // InternalAssignmentFinderTestLanguage.g:936:1: (lv_val1_1_0= RULE_ID )
+            			newLeafNode(otherlv_0, grammarAccess.getContainmentRef1Access().getKw1Keyword_0());
+            		
+            // InternalAssignmentFinderTestLanguage.g:937:3: ( (lv_val1_1_0= RULE_ID ) )
+            // InternalAssignmentFinderTestLanguage.g:938:4: (lv_val1_1_0= RULE_ID )
             {
-            // InternalAssignmentFinderTestLanguage.g:936:1: (lv_val1_1_0= RULE_ID )
-            // InternalAssignmentFinderTestLanguage.g:937:3: lv_val1_1_0= RULE_ID
+            // InternalAssignmentFinderTestLanguage.g:938:4: (lv_val1_1_0= RULE_ID )
+            // InternalAssignmentFinderTestLanguage.g:939:5: lv_val1_1_0= RULE_ID
             {
             lv_val1_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
-            			newLeafNode(lv_val1_1_0, grammarAccess.getContainmentRef1Access().getVal1IDTerminalRuleCall_1_0()); 
-            		
+            					newLeafNode(lv_val1_1_0, grammarAccess.getContainmentRef1Access().getVal1IDTerminalRuleCall_1_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getContainmentRef1Rule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"val1",
-                    		lv_val1_1_0, 
-                    		"org.eclipse.xtext.common.Terminals.ID");
-            	    
-
-            }
-
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getContainmentRef1Rule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"val1",
+            						lv_val1_1_0,
+            						"org.eclipse.xtext.common.Terminals.ID");
+            				
 
             }
 
@@ -2457,13 +2492,18 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
 
             }
 
-             leaveRule(); 
+
+            }
+
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -2472,7 +2512,7 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "entryRuleContainmentRef2"
-    // InternalAssignmentFinderTestLanguage.g:961:1: entryRuleContainmentRef2 returns [EObject current=null] : iv_ruleContainmentRef2= ruleContainmentRef2 EOF ;
+    // InternalAssignmentFinderTestLanguage.g:959:1: entryRuleContainmentRef2 returns [EObject current=null] : iv_ruleContainmentRef2= ruleContainmentRef2 EOF ;
     public final EObject entryRuleContainmentRef2() throws RecognitionException {
         EObject current = null;
 
@@ -2480,8 +2520,8 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
 
 
         try {
-            // InternalAssignmentFinderTestLanguage.g:962:2: (iv_ruleContainmentRef2= ruleContainmentRef2 EOF )
-            // InternalAssignmentFinderTestLanguage.g:963:2: iv_ruleContainmentRef2= ruleContainmentRef2 EOF
+            // InternalAssignmentFinderTestLanguage.g:959:56: (iv_ruleContainmentRef2= ruleContainmentRef2 EOF )
+            // InternalAssignmentFinderTestLanguage.g:960:2: iv_ruleContainmentRef2= ruleContainmentRef2 EOF
             {
              newCompositeNode(grammarAccess.getContainmentRef2Rule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -2495,11 +2535,11 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -2508,49 +2548,47 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "ruleContainmentRef2"
-    // InternalAssignmentFinderTestLanguage.g:970:1: ruleContainmentRef2 returns [EObject current=null] : (otherlv_0= 'kw2' ( (lv_val2_1_0= RULE_ID ) ) ) ;
+    // InternalAssignmentFinderTestLanguage.g:966:1: ruleContainmentRef2 returns [EObject current=null] : (otherlv_0= 'kw2' ( (lv_val2_1_0= RULE_ID ) ) ) ;
     public final EObject ruleContainmentRef2() throws RecognitionException {
         EObject current = null;
 
         Token otherlv_0=null;
         Token lv_val2_1_0=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalAssignmentFinderTestLanguage.g:973:28: ( (otherlv_0= 'kw2' ( (lv_val2_1_0= RULE_ID ) ) ) )
-            // InternalAssignmentFinderTestLanguage.g:974:1: (otherlv_0= 'kw2' ( (lv_val2_1_0= RULE_ID ) ) )
+            // InternalAssignmentFinderTestLanguage.g:972:2: ( (otherlv_0= 'kw2' ( (lv_val2_1_0= RULE_ID ) ) ) )
+            // InternalAssignmentFinderTestLanguage.g:973:2: (otherlv_0= 'kw2' ( (lv_val2_1_0= RULE_ID ) ) )
             {
-            // InternalAssignmentFinderTestLanguage.g:974:1: (otherlv_0= 'kw2' ( (lv_val2_1_0= RULE_ID ) ) )
+            // InternalAssignmentFinderTestLanguage.g:973:2: (otherlv_0= 'kw2' ( (lv_val2_1_0= RULE_ID ) ) )
             // InternalAssignmentFinderTestLanguage.g:974:3: otherlv_0= 'kw2' ( (lv_val2_1_0= RULE_ID ) )
             {
             otherlv_0=(Token)match(input,24,FollowSets000.FOLLOW_9); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getContainmentRef2Access().getKw2Keyword_0());
-                
-            // InternalAssignmentFinderTestLanguage.g:978:1: ( (lv_val2_1_0= RULE_ID ) )
-            // InternalAssignmentFinderTestLanguage.g:979:1: (lv_val2_1_0= RULE_ID )
+            			newLeafNode(otherlv_0, grammarAccess.getContainmentRef2Access().getKw2Keyword_0());
+            		
+            // InternalAssignmentFinderTestLanguage.g:978:3: ( (lv_val2_1_0= RULE_ID ) )
+            // InternalAssignmentFinderTestLanguage.g:979:4: (lv_val2_1_0= RULE_ID )
             {
-            // InternalAssignmentFinderTestLanguage.g:979:1: (lv_val2_1_0= RULE_ID )
-            // InternalAssignmentFinderTestLanguage.g:980:3: lv_val2_1_0= RULE_ID
+            // InternalAssignmentFinderTestLanguage.g:979:4: (lv_val2_1_0= RULE_ID )
+            // InternalAssignmentFinderTestLanguage.g:980:5: lv_val2_1_0= RULE_ID
             {
             lv_val2_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
-            			newLeafNode(lv_val2_1_0, grammarAccess.getContainmentRef2Access().getVal2IDTerminalRuleCall_1_0()); 
-            		
+            					newLeafNode(lv_val2_1_0, grammarAccess.getContainmentRef2Access().getVal2IDTerminalRuleCall_1_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getContainmentRef2Rule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"val2",
-                    		lv_val2_1_0, 
-                    		"org.eclipse.xtext.common.Terminals.ID");
-            	    
-
-            }
-
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getContainmentRef2Rule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"val2",
+            						lv_val2_1_0,
+            						"org.eclipse.xtext.common.Terminals.ID");
+            				
 
             }
 
@@ -2560,13 +2598,18 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
 
             }
 
-             leaveRule(); 
+
+            }
+
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -2575,7 +2618,7 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "entryRuleCrossRef"
-    // InternalAssignmentFinderTestLanguage.g:1004:1: entryRuleCrossRef returns [EObject current=null] : iv_ruleCrossRef= ruleCrossRef EOF ;
+    // InternalAssignmentFinderTestLanguage.g:1000:1: entryRuleCrossRef returns [EObject current=null] : iv_ruleCrossRef= ruleCrossRef EOF ;
     public final EObject entryRuleCrossRef() throws RecognitionException {
         EObject current = null;
 
@@ -2583,8 +2626,8 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
 
 
         try {
-            // InternalAssignmentFinderTestLanguage.g:1005:2: (iv_ruleCrossRef= ruleCrossRef EOF )
-            // InternalAssignmentFinderTestLanguage.g:1006:2: iv_ruleCrossRef= ruleCrossRef EOF
+            // InternalAssignmentFinderTestLanguage.g:1000:49: (iv_ruleCrossRef= ruleCrossRef EOF )
+            // InternalAssignmentFinderTestLanguage.g:1001:2: iv_ruleCrossRef= ruleCrossRef EOF
             {
              newCompositeNode(grammarAccess.getCrossRefRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -2598,11 +2641,11 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -2611,7 +2654,7 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "ruleCrossRef"
-    // InternalAssignmentFinderTestLanguage.g:1013:1: ruleCrossRef returns [EObject current=null] : ( ( ( (lv_name_0_1= RULE_TERMINAL1 | lv_name_0_2= RULE_TERMINAL2 ) ) ) ( ( (otherlv_1= RULE_TERMINAL1 ) ) | ( (otherlv_2= RULE_TERMINAL2 ) ) ) ) ;
+    // InternalAssignmentFinderTestLanguage.g:1007:1: ruleCrossRef returns [EObject current=null] : ( ( ( (lv_name_0_1= RULE_TERMINAL1 | lv_name_0_2= RULE_TERMINAL2 ) ) ) ( ( (otherlv_1= RULE_TERMINAL1 ) ) | ( (otherlv_2= RULE_TERMINAL2 ) ) ) ) ;
     public final EObject ruleCrossRef() throws RecognitionException {
         EObject current = null;
 
@@ -2620,22 +2663,23 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
         Token otherlv_1=null;
         Token otherlv_2=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalAssignmentFinderTestLanguage.g:1016:28: ( ( ( ( (lv_name_0_1= RULE_TERMINAL1 | lv_name_0_2= RULE_TERMINAL2 ) ) ) ( ( (otherlv_1= RULE_TERMINAL1 ) ) | ( (otherlv_2= RULE_TERMINAL2 ) ) ) ) )
-            // InternalAssignmentFinderTestLanguage.g:1017:1: ( ( ( (lv_name_0_1= RULE_TERMINAL1 | lv_name_0_2= RULE_TERMINAL2 ) ) ) ( ( (otherlv_1= RULE_TERMINAL1 ) ) | ( (otherlv_2= RULE_TERMINAL2 ) ) ) )
+            // InternalAssignmentFinderTestLanguage.g:1013:2: ( ( ( ( (lv_name_0_1= RULE_TERMINAL1 | lv_name_0_2= RULE_TERMINAL2 ) ) ) ( ( (otherlv_1= RULE_TERMINAL1 ) ) | ( (otherlv_2= RULE_TERMINAL2 ) ) ) ) )
+            // InternalAssignmentFinderTestLanguage.g:1014:2: ( ( ( (lv_name_0_1= RULE_TERMINAL1 | lv_name_0_2= RULE_TERMINAL2 ) ) ) ( ( (otherlv_1= RULE_TERMINAL1 ) ) | ( (otherlv_2= RULE_TERMINAL2 ) ) ) )
             {
-            // InternalAssignmentFinderTestLanguage.g:1017:1: ( ( ( (lv_name_0_1= RULE_TERMINAL1 | lv_name_0_2= RULE_TERMINAL2 ) ) ) ( ( (otherlv_1= RULE_TERMINAL1 ) ) | ( (otherlv_2= RULE_TERMINAL2 ) ) ) )
-            // InternalAssignmentFinderTestLanguage.g:1017:2: ( ( (lv_name_0_1= RULE_TERMINAL1 | lv_name_0_2= RULE_TERMINAL2 ) ) ) ( ( (otherlv_1= RULE_TERMINAL1 ) ) | ( (otherlv_2= RULE_TERMINAL2 ) ) )
+            // InternalAssignmentFinderTestLanguage.g:1014:2: ( ( ( (lv_name_0_1= RULE_TERMINAL1 | lv_name_0_2= RULE_TERMINAL2 ) ) ) ( ( (otherlv_1= RULE_TERMINAL1 ) ) | ( (otherlv_2= RULE_TERMINAL2 ) ) ) )
+            // InternalAssignmentFinderTestLanguage.g:1015:3: ( ( (lv_name_0_1= RULE_TERMINAL1 | lv_name_0_2= RULE_TERMINAL2 ) ) ) ( ( (otherlv_1= RULE_TERMINAL1 ) ) | ( (otherlv_2= RULE_TERMINAL2 ) ) )
             {
-            // InternalAssignmentFinderTestLanguage.g:1017:2: ( ( (lv_name_0_1= RULE_TERMINAL1 | lv_name_0_2= RULE_TERMINAL2 ) ) )
-            // InternalAssignmentFinderTestLanguage.g:1018:1: ( (lv_name_0_1= RULE_TERMINAL1 | lv_name_0_2= RULE_TERMINAL2 ) )
+            // InternalAssignmentFinderTestLanguage.g:1015:3: ( ( (lv_name_0_1= RULE_TERMINAL1 | lv_name_0_2= RULE_TERMINAL2 ) ) )
+            // InternalAssignmentFinderTestLanguage.g:1016:4: ( (lv_name_0_1= RULE_TERMINAL1 | lv_name_0_2= RULE_TERMINAL2 ) )
             {
-            // InternalAssignmentFinderTestLanguage.g:1018:1: ( (lv_name_0_1= RULE_TERMINAL1 | lv_name_0_2= RULE_TERMINAL2 ) )
-            // InternalAssignmentFinderTestLanguage.g:1019:1: (lv_name_0_1= RULE_TERMINAL1 | lv_name_0_2= RULE_TERMINAL2 )
+            // InternalAssignmentFinderTestLanguage.g:1016:4: ( (lv_name_0_1= RULE_TERMINAL1 | lv_name_0_2= RULE_TERMINAL2 ) )
+            // InternalAssignmentFinderTestLanguage.g:1017:5: (lv_name_0_1= RULE_TERMINAL1 | lv_name_0_2= RULE_TERMINAL2 )
             {
-            // InternalAssignmentFinderTestLanguage.g:1019:1: (lv_name_0_1= RULE_TERMINAL1 | lv_name_0_2= RULE_TERMINAL2 )
+            // InternalAssignmentFinderTestLanguage.g:1017:5: (lv_name_0_1= RULE_TERMINAL1 | lv_name_0_2= RULE_TERMINAL2 )
             int alt12=2;
             int LA12_0 = input.LA(1);
 
@@ -2653,42 +2697,42 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
             }
             switch (alt12) {
                 case 1 :
-                    // InternalAssignmentFinderTestLanguage.g:1020:3: lv_name_0_1= RULE_TERMINAL1
+                    // InternalAssignmentFinderTestLanguage.g:1018:6: lv_name_0_1= RULE_TERMINAL1
                     {
                     lv_name_0_1=(Token)match(input,RULE_TERMINAL1,FollowSets000.FOLLOW_8); 
 
-                    			newLeafNode(lv_name_0_1, grammarAccess.getCrossRefAccess().getNameTerminal1TerminalRuleCall_0_0_0()); 
-                    		
+                    						newLeafNode(lv_name_0_1, grammarAccess.getCrossRefAccess().getNameTerminal1TerminalRuleCall_0_0_0());
+                    					
 
-                    	        if (current==null) {
-                    	            current = createModelElement(grammarAccess.getCrossRefRule());
-                    	        }
-                           		setWithLastConsumed(
-                           			current, 
-                           			"name",
-                            		lv_name_0_1, 
-                            		"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.Terminal1");
-                    	    
+                    						if (current==null) {
+                    							current = createModelElement(grammarAccess.getCrossRefRule());
+                    						}
+                    						setWithLastConsumed(
+                    							current,
+                    							"name",
+                    							lv_name_0_1,
+                    							"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.Terminal1");
+                    					
 
                     }
                     break;
                 case 2 :
-                    // InternalAssignmentFinderTestLanguage.g:1035:8: lv_name_0_2= RULE_TERMINAL2
+                    // InternalAssignmentFinderTestLanguage.g:1033:6: lv_name_0_2= RULE_TERMINAL2
                     {
                     lv_name_0_2=(Token)match(input,RULE_TERMINAL2,FollowSets000.FOLLOW_8); 
 
-                    			newLeafNode(lv_name_0_2, grammarAccess.getCrossRefAccess().getNameTerminal2TerminalRuleCall_0_0_1()); 
-                    		
+                    						newLeafNode(lv_name_0_2, grammarAccess.getCrossRefAccess().getNameTerminal2TerminalRuleCall_0_0_1());
+                    					
 
-                    	        if (current==null) {
-                    	            current = createModelElement(grammarAccess.getCrossRefRule());
-                    	        }
-                           		setWithLastConsumed(
-                           			current, 
-                           			"name",
-                            		lv_name_0_2, 
-                            		"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.Terminal2");
-                    	    
+                    						if (current==null) {
+                    							current = createModelElement(grammarAccess.getCrossRefRule());
+                    						}
+                    						setWithLastConsumed(
+                    							current,
+                    							"name",
+                    							lv_name_0_2,
+                    							"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.Terminal2");
+                    					
 
                     }
                     break;
@@ -2701,7 +2745,7 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
 
             }
 
-            // InternalAssignmentFinderTestLanguage.g:1053:2: ( ( (otherlv_1= RULE_TERMINAL1 ) ) | ( (otherlv_2= RULE_TERMINAL2 ) ) )
+            // InternalAssignmentFinderTestLanguage.g:1050:3: ( ( (otherlv_1= RULE_TERMINAL1 ) ) | ( (otherlv_2= RULE_TERMINAL2 ) ) )
             int alt13=2;
             int LA13_0 = input.LA(1);
 
@@ -2719,23 +2763,23 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
             }
             switch (alt13) {
                 case 1 :
-                    // InternalAssignmentFinderTestLanguage.g:1053:3: ( (otherlv_1= RULE_TERMINAL1 ) )
+                    // InternalAssignmentFinderTestLanguage.g:1051:4: ( (otherlv_1= RULE_TERMINAL1 ) )
                     {
-                    // InternalAssignmentFinderTestLanguage.g:1053:3: ( (otherlv_1= RULE_TERMINAL1 ) )
-                    // InternalAssignmentFinderTestLanguage.g:1054:1: (otherlv_1= RULE_TERMINAL1 )
+                    // InternalAssignmentFinderTestLanguage.g:1051:4: ( (otherlv_1= RULE_TERMINAL1 ) )
+                    // InternalAssignmentFinderTestLanguage.g:1052:5: (otherlv_1= RULE_TERMINAL1 )
                     {
-                    // InternalAssignmentFinderTestLanguage.g:1054:1: (otherlv_1= RULE_TERMINAL1 )
-                    // InternalAssignmentFinderTestLanguage.g:1055:3: otherlv_1= RULE_TERMINAL1
+                    // InternalAssignmentFinderTestLanguage.g:1052:5: (otherlv_1= RULE_TERMINAL1 )
+                    // InternalAssignmentFinderTestLanguage.g:1053:6: otherlv_1= RULE_TERMINAL1
                     {
 
-                    			if (current==null) {
-                    	            current = createModelElement(grammarAccess.getCrossRefRule());
-                    	        }
-                            
+                    						if (current==null) {
+                    							current = createModelElement(grammarAccess.getCrossRefRule());
+                    						}
+                    					
                     otherlv_1=(Token)match(input,RULE_TERMINAL1,FollowSets000.FOLLOW_2); 
 
-                    		newLeafNode(otherlv_1, grammarAccess.getCrossRefAccess().getCrossRefCrossRefCrossReference_1_0_0()); 
-                    	
+                    						newLeafNode(otherlv_1, grammarAccess.getCrossRefAccess().getCrossRefCrossRefCrossReference_1_0_0());
+                    					
 
                     }
 
@@ -2746,23 +2790,23 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
                     }
                     break;
                 case 2 :
-                    // InternalAssignmentFinderTestLanguage.g:1067:6: ( (otherlv_2= RULE_TERMINAL2 ) )
+                    // InternalAssignmentFinderTestLanguage.g:1065:4: ( (otherlv_2= RULE_TERMINAL2 ) )
                     {
-                    // InternalAssignmentFinderTestLanguage.g:1067:6: ( (otherlv_2= RULE_TERMINAL2 ) )
-                    // InternalAssignmentFinderTestLanguage.g:1068:1: (otherlv_2= RULE_TERMINAL2 )
+                    // InternalAssignmentFinderTestLanguage.g:1065:4: ( (otherlv_2= RULE_TERMINAL2 ) )
+                    // InternalAssignmentFinderTestLanguage.g:1066:5: (otherlv_2= RULE_TERMINAL2 )
                     {
-                    // InternalAssignmentFinderTestLanguage.g:1068:1: (otherlv_2= RULE_TERMINAL2 )
-                    // InternalAssignmentFinderTestLanguage.g:1069:3: otherlv_2= RULE_TERMINAL2
+                    // InternalAssignmentFinderTestLanguage.g:1066:5: (otherlv_2= RULE_TERMINAL2 )
+                    // InternalAssignmentFinderTestLanguage.g:1067:6: otherlv_2= RULE_TERMINAL2
                     {
 
-                    			if (current==null) {
-                    	            current = createModelElement(grammarAccess.getCrossRefRule());
-                    	        }
-                            
+                    						if (current==null) {
+                    							current = createModelElement(grammarAccess.getCrossRefRule());
+                    						}
+                    					
                     otherlv_2=(Token)match(input,RULE_TERMINAL2,FollowSets000.FOLLOW_2); 
 
-                    		newLeafNode(otherlv_2, grammarAccess.getCrossRefAccess().getCrossRefCrossRefCrossReference_1_1_0()); 
-                    	
+                    						newLeafNode(otherlv_2, grammarAccess.getCrossRefAccess().getCrossRefCrossRefCrossReference_1_1_0());
+                    					
 
                     }
 
@@ -2781,13 +2825,15 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -2796,38 +2842,42 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "ruleEnum1"
-    // InternalAssignmentFinderTestLanguage.g:1088:1: ruleEnum1 returns [Enumerator current=null] : (enumLiteral_0= 'lit1' ) ;
+    // InternalAssignmentFinderTestLanguage.g:1083:1: ruleEnum1 returns [Enumerator current=null] : (enumLiteral_0= 'lit1' ) ;
     public final Enumerator ruleEnum1() throws RecognitionException {
         Enumerator current = null;
 
         Token enumLiteral_0=null;
 
-         enterRule(); 
+
+        	enterRule();
+
         try {
-            // InternalAssignmentFinderTestLanguage.g:1090:28: ( (enumLiteral_0= 'lit1' ) )
-            // InternalAssignmentFinderTestLanguage.g:1091:1: (enumLiteral_0= 'lit1' )
+            // InternalAssignmentFinderTestLanguage.g:1089:2: ( (enumLiteral_0= 'lit1' ) )
+            // InternalAssignmentFinderTestLanguage.g:1090:2: (enumLiteral_0= 'lit1' )
             {
-            // InternalAssignmentFinderTestLanguage.g:1091:1: (enumLiteral_0= 'lit1' )
+            // InternalAssignmentFinderTestLanguage.g:1090:2: (enumLiteral_0= 'lit1' )
             // InternalAssignmentFinderTestLanguage.g:1091:3: enumLiteral_0= 'lit1'
             {
             enumLiteral_0=(Token)match(input,29,FollowSets000.FOLLOW_2); 
 
-                    current = grammarAccess.getEnum1Access().getLit1EnumLiteralDeclaration().getEnumLiteral().getInstance();
-                    newLeafNode(enumLiteral_0, grammarAccess.getEnum1Access().getLit1EnumLiteralDeclaration()); 
-                
+            			current = grammarAccess.getEnum1Access().getLit1EnumLiteralDeclaration().getEnumLiteral().getInstance();
+            			newLeafNode(enumLiteral_0, grammarAccess.getEnum1Access().getLit1EnumLiteralDeclaration());
+            		
 
             }
 
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -2836,38 +2886,42 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "ruleEnum2"
-    // InternalAssignmentFinderTestLanguage.g:1101:1: ruleEnum2 returns [Enumerator current=null] : (enumLiteral_0= 'lit2' ) ;
+    // InternalAssignmentFinderTestLanguage.g:1100:1: ruleEnum2 returns [Enumerator current=null] : (enumLiteral_0= 'lit2' ) ;
     public final Enumerator ruleEnum2() throws RecognitionException {
         Enumerator current = null;
 
         Token enumLiteral_0=null;
 
-         enterRule(); 
+
+        	enterRule();
+
         try {
-            // InternalAssignmentFinderTestLanguage.g:1103:28: ( (enumLiteral_0= 'lit2' ) )
-            // InternalAssignmentFinderTestLanguage.g:1104:1: (enumLiteral_0= 'lit2' )
+            // InternalAssignmentFinderTestLanguage.g:1106:2: ( (enumLiteral_0= 'lit2' ) )
+            // InternalAssignmentFinderTestLanguage.g:1107:2: (enumLiteral_0= 'lit2' )
             {
-            // InternalAssignmentFinderTestLanguage.g:1104:1: (enumLiteral_0= 'lit2' )
-            // InternalAssignmentFinderTestLanguage.g:1104:3: enumLiteral_0= 'lit2'
+            // InternalAssignmentFinderTestLanguage.g:1107:2: (enumLiteral_0= 'lit2' )
+            // InternalAssignmentFinderTestLanguage.g:1108:3: enumLiteral_0= 'lit2'
             {
             enumLiteral_0=(Token)match(input,30,FollowSets000.FOLLOW_2); 
 
-                    current = grammarAccess.getEnum2Access().getLit2EnumLiteralDeclaration().getEnumLiteral().getInstance();
-                    newLeafNode(enumLiteral_0, grammarAccess.getEnum2Access().getLit2EnumLiteralDeclaration()); 
-                
+            			current = grammarAccess.getEnum2Access().getLit2EnumLiteralDeclaration().getEnumLiteral().getInstance();
+            			newLeafNode(enumLiteral_0, grammarAccess.getEnum2Access().getLit2EnumLiteralDeclaration());
+            		
 
             }
 
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;

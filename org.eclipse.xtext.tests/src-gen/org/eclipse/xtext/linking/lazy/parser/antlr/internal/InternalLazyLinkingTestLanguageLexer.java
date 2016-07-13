@@ -233,10 +233,10 @@ public class InternalLazyLinkingTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalLazyLinkingTestLanguage.g:376:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // InternalLazyLinkingTestLanguage.g:376:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalLazyLinkingTestLanguage.g:370:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // InternalLazyLinkingTestLanguage.g:370:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // InternalLazyLinkingTestLanguage.g:376:11: ( '^' )?
+            // InternalLazyLinkingTestLanguage.g:370:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -245,7 +245,7 @@ public class InternalLazyLinkingTestLanguageLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // InternalLazyLinkingTestLanguage.g:376:11: '^'
+                    // InternalLazyLinkingTestLanguage.g:370:11: '^'
                     {
                     match('^'); 
 
@@ -263,7 +263,7 @@ public class InternalLazyLinkingTestLanguageLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // InternalLazyLinkingTestLanguage.g:376:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalLazyLinkingTestLanguage.g:370:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -312,10 +312,10 @@ public class InternalLazyLinkingTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalLazyLinkingTestLanguage.g:378:10: ( ( '0' .. '9' )+ )
-            // InternalLazyLinkingTestLanguage.g:378:12: ( '0' .. '9' )+
+            // InternalLazyLinkingTestLanguage.g:372:10: ( ( '0' .. '9' )+ )
+            // InternalLazyLinkingTestLanguage.g:372:12: ( '0' .. '9' )+
             {
-            // InternalLazyLinkingTestLanguage.g:378:12: ( '0' .. '9' )+
+            // InternalLazyLinkingTestLanguage.g:372:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -329,7 +329,7 @@ public class InternalLazyLinkingTestLanguageLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // InternalLazyLinkingTestLanguage.g:378:13: '0' .. '9'
+            	    // InternalLazyLinkingTestLanguage.g:372:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -361,10 +361,10 @@ public class InternalLazyLinkingTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalLazyLinkingTestLanguage.g:380:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // InternalLazyLinkingTestLanguage.g:380:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalLazyLinkingTestLanguage.g:374:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // InternalLazyLinkingTestLanguage.g:374:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // InternalLazyLinkingTestLanguage.g:380:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalLazyLinkingTestLanguage.g:374:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -382,10 +382,10 @@ public class InternalLazyLinkingTestLanguageLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // InternalLazyLinkingTestLanguage.g:380:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // InternalLazyLinkingTestLanguage.g:374:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // InternalLazyLinkingTestLanguage.g:380:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // InternalLazyLinkingTestLanguage.g:374:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -401,7 +401,7 @@ public class InternalLazyLinkingTestLanguageLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // InternalLazyLinkingTestLanguage.g:380:21: '\\\\' .
+                    	    // InternalLazyLinkingTestLanguage.g:374:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -409,7 +409,7 @@ public class InternalLazyLinkingTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalLazyLinkingTestLanguage.g:380:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // InternalLazyLinkingTestLanguage.g:374:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -434,10 +434,10 @@ public class InternalLazyLinkingTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalLazyLinkingTestLanguage.g:380:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // InternalLazyLinkingTestLanguage.g:374:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // InternalLazyLinkingTestLanguage.g:380:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // InternalLazyLinkingTestLanguage.g:374:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -453,7 +453,7 @@ public class InternalLazyLinkingTestLanguageLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // InternalLazyLinkingTestLanguage.g:380:54: '\\\\' .
+                    	    // InternalLazyLinkingTestLanguage.g:374:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -461,7 +461,7 @@ public class InternalLazyLinkingTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalLazyLinkingTestLanguage.g:380:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // InternalLazyLinkingTestLanguage.g:374:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -504,12 +504,12 @@ public class InternalLazyLinkingTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalLazyLinkingTestLanguage.g:382:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // InternalLazyLinkingTestLanguage.g:382:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // InternalLazyLinkingTestLanguage.g:376:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // InternalLazyLinkingTestLanguage.g:376:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // InternalLazyLinkingTestLanguage.g:382:24: ( options {greedy=false; } : . )*
+            // InternalLazyLinkingTestLanguage.g:376:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -534,7 +534,7 @@ public class InternalLazyLinkingTestLanguageLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // InternalLazyLinkingTestLanguage.g:382:52: .
+            	    // InternalLazyLinkingTestLanguage.g:376:52: .
             	    {
             	    matchAny(); 
 
@@ -564,12 +564,12 @@ public class InternalLazyLinkingTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalLazyLinkingTestLanguage.g:384:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // InternalLazyLinkingTestLanguage.g:384:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // InternalLazyLinkingTestLanguage.g:378:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // InternalLazyLinkingTestLanguage.g:378:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // InternalLazyLinkingTestLanguage.g:384:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalLazyLinkingTestLanguage.g:378:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -582,7 +582,7 @@ public class InternalLazyLinkingTestLanguageLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // InternalLazyLinkingTestLanguage.g:384:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalLazyLinkingTestLanguage.g:378:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -602,7 +602,7 @@ public class InternalLazyLinkingTestLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // InternalLazyLinkingTestLanguage.g:384:40: ( ( '\\r' )? '\\n' )?
+            // InternalLazyLinkingTestLanguage.g:378:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -611,9 +611,9 @@ public class InternalLazyLinkingTestLanguageLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // InternalLazyLinkingTestLanguage.g:384:41: ( '\\r' )? '\\n'
+                    // InternalLazyLinkingTestLanguage.g:378:41: ( '\\r' )? '\\n'
                     {
-                    // InternalLazyLinkingTestLanguage.g:384:41: ( '\\r' )?
+                    // InternalLazyLinkingTestLanguage.g:378:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -622,7 +622,7 @@ public class InternalLazyLinkingTestLanguageLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // InternalLazyLinkingTestLanguage.g:384:41: '\\r'
+                            // InternalLazyLinkingTestLanguage.g:378:41: '\\r'
                             {
                             match('\r'); 
 
@@ -654,10 +654,10 @@ public class InternalLazyLinkingTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalLazyLinkingTestLanguage.g:386:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // InternalLazyLinkingTestLanguage.g:386:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalLazyLinkingTestLanguage.g:380:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalLazyLinkingTestLanguage.g:380:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // InternalLazyLinkingTestLanguage.g:386:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalLazyLinkingTestLanguage.g:380:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -711,8 +711,8 @@ public class InternalLazyLinkingTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalLazyLinkingTestLanguage.g:388:16: ( . )
-            // InternalLazyLinkingTestLanguage.g:388:18: .
+            // InternalLazyLinkingTestLanguage.g:382:16: ( . )
+            // InternalLazyLinkingTestLanguage.g:382:18: .
             {
             matchAny(); 
 

@@ -15,11 +15,11 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.util.genericTest.A#getSomeReference <em>Some Reference</em>}</li>
  *   <li>{@link org.eclipse.xtext.util.genericTest.A#getSomeReference1 <em>Some Reference1</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.util.genericTest.GenericTestPackage#getA()
  * @model

@@ -6,11 +6,10 @@ parser grammar InternalIgnoreCaseLexerTestLanguageParser;
 options {
 	tokenVocab=InternalIgnoreCaseLexerTestLanguageLexer;
 	superClass=AbstractInternalAntlrParser;
-	
 }
 
 @header {
-package org.eclipse.xtext.lexer.parser.antlr.internal; 
+package org.eclipse.xtext.lexer.parser.antlr.internal;
 
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
@@ -27,80 +26,72 @@ import org.eclipse.xtext.lexer.services.IgnoreCaseLexerTestLanguageGrammarAccess
 
 @members {
 
+ 	private IgnoreCaseLexerTestLanguageGrammarAccess grammarAccess;
 
-	private IgnoreCaseLexerTestLanguageGrammarAccess grammarAccess;
-	 	
-	public InternalIgnoreCaseLexerTestLanguageParser(TokenStream input, IgnoreCaseLexerTestLanguageGrammarAccess grammarAccess) {
-		this(input);
-		this.grammarAccess = grammarAccess;
-		registerRules(grammarAccess.getGrammar());
-	}
-	
-	@Override
-	protected String getFirstRuleName() {
-		return "Model";	
-	} 
-	   	   	
-	@Override
-	protected IgnoreCaseLexerTestLanguageGrammarAccess getGrammarAccess() {
-		return grammarAccess;
-	}
+    public InternalIgnoreCaseLexerTestLanguageParser(TokenStream input, IgnoreCaseLexerTestLanguageGrammarAccess grammarAccess) {
+        this(input);
+        this.grammarAccess = grammarAccess;
+        registerRules(grammarAccess.getGrammar());
+    }
+
+    @Override
+    protected String getFirstRuleName() {
+    	return "Model";
+   	}
+
+   	@Override
+   	protected IgnoreCaseLexerTestLanguageGrammarAccess getGrammarAccess() {
+   		return grammarAccess;
+   	}
+
 }
 
-@rulecatch { 
-	catch (RecognitionException re) { 
-	    recover(input,re); 
-	    appendSkippedTokens();
-	}
+@rulecatch {
+    catch (RecognitionException re) {
+        recover(input,re);
+        appendSkippedTokens();
+    }
 }
-
-
-
 
 // Entry rule entryRuleModel
-entryRuleModel returns [EObject current=null]
-	:
+entryRuleModel returns [EObject current=null]:
 	{ newCompositeNode(grammarAccess.getModelRule()); }
-	 iv_ruleModel=ruleModel 
-	 { $current=$iv_ruleModel.current; } 
-	 EOF 
-;
+	iv_ruleModel=ruleModel
+	{ $current=$iv_ruleModel.current; }
+	EOF;
 
 // Rule Model
-ruleModel returns [EObject current=null] 
-    @init { enterRule(); 
-    }
-    @after { leaveRule(); }:
-(
-	otherlv_0=Case
-    {
-    	newLeafNode(otherlv_0, grammarAccess.getModelAccess().getCaseKeyword_0());
-    }
-(
-	otherlv_1=Foo
-    {
-    	newLeafNode(otherlv_1, grammarAccess.getModelAccess().getFooKeyword_1());
-    }
-)?(
-(
-		lv_value_2_0=
-	Case
-    {
-        newLeafNode(lv_value_2_0, grammarAccess.getModelAccess().getValueCaSeKeyword_2_0());
-    }
-
-	    {
-	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getModelRule());
-	        }
-       		setWithLastConsumed($current, "value", lv_value_2_0, "CaSe");
-	    }
-
-)
-))
+ruleModel returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0=Case
+		{
+			newLeafNode(otherlv_0, grammarAccess.getModelAccess().getCaseKeyword_0());
+		}
+		(
+			otherlv_1=Foo
+			{
+				newLeafNode(otherlv_1, grammarAccess.getModelAccess().getFooKeyword_1());
+			}
+		)?
+		(
+			(
+				lv_value_2_0=Case
+				{
+					newLeafNode(lv_value_2_0, grammarAccess.getModelAccess().getValueCaSeKeyword_2_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getModelRule());
+					}
+					setWithLastConsumed($current, "value", lv_value_2_0, "CaSe");
+				}
+			)
+		)
+	)
 ;
-
-
-
-
-

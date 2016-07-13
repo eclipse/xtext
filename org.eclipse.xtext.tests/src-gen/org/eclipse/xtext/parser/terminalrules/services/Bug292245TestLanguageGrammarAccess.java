@@ -3,19 +3,23 @@
  */
 package org.eclipse.xtext.parser.terminalrules.services;
 
-import com.google.inject.Singleton;
 import com.google.inject.Inject;
-
+import com.google.inject.Singleton;
 import java.util.List;
-
-import org.eclipse.xtext.*;
+import org.eclipse.xtext.Alternatives;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.Group;
+import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TerminalRule;
+import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder;
 import org.eclipse.xtext.service.GrammarProvider;
-import org.eclipse.xtext.service.AbstractElementFinder.*;
-
 
 @Singleton
 public class Bug292245TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
-	
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.terminalrules.Bug292245TestLanguage.Model");
@@ -38,47 +42,46 @@ public class Bug292245TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//	| 'ERROR' error+=Error+
 		//	| 'TICK' tick+=Apostrophe+)*;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//('FIX' fix+=Fix+ | 'ERROR' error+=Error+ | 'TICK' tick+=Apostrophe+)*
 		public Alternatives getAlternatives() { return cAlternatives; }
-
+		
 		//'FIX' fix+=Fix+
 		public Group getGroup_0() { return cGroup_0; }
-
+		
 		//'FIX'
 		public Keyword getFIXKeyword_0_0() { return cFIXKeyword_0_0; }
-
+		
 		//fix+=Fix+
 		public Assignment getFixAssignment_0_1() { return cFixAssignment_0_1; }
-
+		
 		//Fix
 		public RuleCall getFixFixParserRuleCall_0_1_0() { return cFixFixParserRuleCall_0_1_0; }
-
+		
 		//'ERROR' error+=Error+
 		public Group getGroup_1() { return cGroup_1; }
-
+		
 		//'ERROR'
 		public Keyword getERRORKeyword_1_0() { return cERRORKeyword_1_0; }
-
+		
 		//error+=Error+
 		public Assignment getErrorAssignment_1_1() { return cErrorAssignment_1_1; }
-
+		
 		//Error
 		public RuleCall getErrorErrorParserRuleCall_1_1_0() { return cErrorErrorParserRuleCall_1_1_0; }
-
+		
 		//'TICK' tick+=Apostrophe+
 		public Group getGroup_2() { return cGroup_2; }
-
+		
 		//'TICK'
 		public Keyword getTICKKeyword_2_0() { return cTICKKeyword_2_0; }
-
+		
 		//tick+=Apostrophe+
 		public Assignment getTickAssignment_2_1() { return cTickAssignment_2_1; }
-
+		
 		//Apostrophe
 		public RuleCall getTickApostropheParserRuleCall_2_1_0() { return cTickApostropheParserRuleCall_2_1_0; }
 	}
-
 	public class ErrorElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.terminalrules.Bug292245TestLanguage.Error");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -89,20 +92,19 @@ public class Bug292245TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//Error hidden():
 		//	APOSTROPHE_CHAR Graphical APOSTROPHE_CHAR;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//APOSTROPHE_CHAR Graphical APOSTROPHE_CHAR
 		public Group getGroup() { return cGroup; }
-
+		
 		//APOSTROPHE_CHAR
 		public RuleCall getAPOSTROPHE_CHARTerminalRuleCall_0() { return cAPOSTROPHE_CHARTerminalRuleCall_0; }
-
+		
 		//Graphical
 		public RuleCall getGraphicalParserRuleCall_1() { return cGraphicalParserRuleCall_1; }
-
+		
 		//APOSTROPHE_CHAR
 		public RuleCall getAPOSTROPHE_CHARTerminalRuleCall_2() { return cAPOSTROPHE_CHARTerminalRuleCall_2; }
 	}
-
 	public class FixElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.terminalrules.Bug292245TestLanguage.Fix");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -114,23 +116,22 @@ public class Bug292245TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//Fix hidden():
 		//	APOSTROPHE_CHAR Graphical APOSTROPHE_CHAR Rehide;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//APOSTROPHE_CHAR Graphical APOSTROPHE_CHAR Rehide
 		public Group getGroup() { return cGroup; }
-
+		
 		//APOSTROPHE_CHAR
 		public RuleCall getAPOSTROPHE_CHARTerminalRuleCall_0() { return cAPOSTROPHE_CHARTerminalRuleCall_0; }
-
+		
 		//Graphical
 		public RuleCall getGraphicalParserRuleCall_1() { return cGraphicalParserRuleCall_1; }
-
+		
 		//APOSTROPHE_CHAR
 		public RuleCall getAPOSTROPHE_CHARTerminalRuleCall_2() { return cAPOSTROPHE_CHARTerminalRuleCall_2; }
-
+		
 		//Rehide
 		public RuleCall getRehideParserRuleCall_3() { return cRehideParserRuleCall_3; }
 	}
-
 	public class ApostropheElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.terminalrules.Bug292245TestLanguage.Apostrophe");
 		private final RuleCall cAPOSTROPHE_CHARTerminalRuleCall = (RuleCall)rule.eContents().get(1);
@@ -138,11 +139,10 @@ public class Bug292245TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//Apostrophe hidden(WS):
 		//	APOSTROPHE_CHAR;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//APOSTROPHE_CHAR
 		public RuleCall getAPOSTROPHE_CHARTerminalRuleCall() { return cAPOSTROPHE_CHARTerminalRuleCall; }
 	}
-
 	public class RehideElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.terminalrules.Bug292245TestLanguage.Rehide");
 		private final Keyword cCircumflexAccentKeyword = (Keyword)rule.eContents().get(1);
@@ -150,11 +150,10 @@ public class Bug292245TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//Rehide hidden(WS):
 		//	"^"?;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//"^"?
 		public Keyword getCircumflexAccentKeyword() { return cCircumflexAccentKeyword; }
 	}
-
 	public class GraphicalElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.terminalrules.Bug292245TestLanguage.Graphical");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -165,13 +164,13 @@ public class Bug292245TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//Graphical:
 		//	CHAR | WS;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//CHAR | WS
 		public Alternatives getAlternatives() { return cAlternatives; }
-
+		
 		//CHAR
 		public RuleCall getCHARTerminalRuleCall_0() { return cCHARTerminalRuleCall_0; }
-
+		
 		//WS
 		public RuleCall getWSTerminalRuleCall_1() { return cWSTerminalRuleCall_1; }
 	}
@@ -237,7 +236,7 @@ public class Bug292245TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getModelRule() {
 		return getModelAccess().getRule();
 	}
-
+	
 	//Error hidden():
 	//	APOSTROPHE_CHAR Graphical APOSTROPHE_CHAR;
 	public ErrorElements getErrorAccess() {
@@ -247,7 +246,7 @@ public class Bug292245TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getErrorRule() {
 		return getErrorAccess().getRule();
 	}
-
+	
 	//Fix hidden():
 	//	APOSTROPHE_CHAR Graphical APOSTROPHE_CHAR Rehide;
 	public FixElements getFixAccess() {
@@ -257,7 +256,7 @@ public class Bug292245TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getFixRule() {
 		return getFixAccess().getRule();
 	}
-
+	
 	//Apostrophe hidden(WS):
 	//	APOSTROPHE_CHAR;
 	public ApostropheElements getApostropheAccess() {
@@ -267,13 +266,13 @@ public class Bug292245TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getApostropheRule() {
 		return getApostropheAccess().getRule();
 	}
-
+	
 	//terminal APOSTROPHE_CHAR:
 	//	"'";
 	public TerminalRule getAPOSTROPHE_CHARRule() {
 		return tAPOSTROPHE_CHAR;
-	} 
-
+	}
+	
 	//Rehide hidden(WS):
 	//	"^"?;
 	public RehideElements getRehideAccess() {
@@ -283,7 +282,7 @@ public class Bug292245TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getRehideRule() {
 		return getRehideAccess().getRule();
 	}
-
+	
 	////some unused char
 	//Graphical:
 	//	CHAR | WS;
@@ -294,16 +293,16 @@ public class Bug292245TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getGraphicalRule() {
 		return getGraphicalAccess().getRule();
 	}
-
+	
 	//terminal CHAR:
 	//	'A'..'Z' | '0'..'9';
 	public TerminalRule getCHARRule() {
 		return tCHAR;
-	} 
-
+	}
+	
 	//terminal WS:
 	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return tWS;
-	} 
+	}
 }

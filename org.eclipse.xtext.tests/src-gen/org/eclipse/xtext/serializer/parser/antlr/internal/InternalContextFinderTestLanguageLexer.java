@@ -390,10 +390,10 @@ public class InternalContextFinderTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalContextFinderTestLanguage.g:1387:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // InternalContextFinderTestLanguage.g:1387:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalContextFinderTestLanguage.g:1374:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // InternalContextFinderTestLanguage.g:1374:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // InternalContextFinderTestLanguage.g:1387:11: ( '^' )?
+            // InternalContextFinderTestLanguage.g:1374:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -402,7 +402,7 @@ public class InternalContextFinderTestLanguageLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // InternalContextFinderTestLanguage.g:1387:11: '^'
+                    // InternalContextFinderTestLanguage.g:1374:11: '^'
                     {
                     match('^'); 
 
@@ -420,7 +420,7 @@ public class InternalContextFinderTestLanguageLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // InternalContextFinderTestLanguage.g:1387:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalContextFinderTestLanguage.g:1374:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -469,10 +469,10 @@ public class InternalContextFinderTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalContextFinderTestLanguage.g:1389:10: ( ( '0' .. '9' )+ )
-            // InternalContextFinderTestLanguage.g:1389:12: ( '0' .. '9' )+
+            // InternalContextFinderTestLanguage.g:1376:10: ( ( '0' .. '9' )+ )
+            // InternalContextFinderTestLanguage.g:1376:12: ( '0' .. '9' )+
             {
-            // InternalContextFinderTestLanguage.g:1389:12: ( '0' .. '9' )+
+            // InternalContextFinderTestLanguage.g:1376:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -486,7 +486,7 @@ public class InternalContextFinderTestLanguageLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // InternalContextFinderTestLanguage.g:1389:13: '0' .. '9'
+            	    // InternalContextFinderTestLanguage.g:1376:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -518,10 +518,10 @@ public class InternalContextFinderTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalContextFinderTestLanguage.g:1391:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // InternalContextFinderTestLanguage.g:1391:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalContextFinderTestLanguage.g:1378:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // InternalContextFinderTestLanguage.g:1378:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // InternalContextFinderTestLanguage.g:1391:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalContextFinderTestLanguage.g:1378:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -539,10 +539,10 @@ public class InternalContextFinderTestLanguageLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // InternalContextFinderTestLanguage.g:1391:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // InternalContextFinderTestLanguage.g:1378:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // InternalContextFinderTestLanguage.g:1391:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // InternalContextFinderTestLanguage.g:1378:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -558,7 +558,7 @@ public class InternalContextFinderTestLanguageLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // InternalContextFinderTestLanguage.g:1391:21: '\\\\' .
+                    	    // InternalContextFinderTestLanguage.g:1378:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -566,7 +566,7 @@ public class InternalContextFinderTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalContextFinderTestLanguage.g:1391:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // InternalContextFinderTestLanguage.g:1378:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -591,10 +591,10 @@ public class InternalContextFinderTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalContextFinderTestLanguage.g:1391:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // InternalContextFinderTestLanguage.g:1378:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // InternalContextFinderTestLanguage.g:1391:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // InternalContextFinderTestLanguage.g:1378:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -610,7 +610,7 @@ public class InternalContextFinderTestLanguageLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // InternalContextFinderTestLanguage.g:1391:54: '\\\\' .
+                    	    // InternalContextFinderTestLanguage.g:1378:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -618,7 +618,7 @@ public class InternalContextFinderTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalContextFinderTestLanguage.g:1391:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // InternalContextFinderTestLanguage.g:1378:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -661,12 +661,12 @@ public class InternalContextFinderTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalContextFinderTestLanguage.g:1393:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // InternalContextFinderTestLanguage.g:1393:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // InternalContextFinderTestLanguage.g:1380:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // InternalContextFinderTestLanguage.g:1380:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // InternalContextFinderTestLanguage.g:1393:24: ( options {greedy=false; } : . )*
+            // InternalContextFinderTestLanguage.g:1380:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -691,7 +691,7 @@ public class InternalContextFinderTestLanguageLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // InternalContextFinderTestLanguage.g:1393:52: .
+            	    // InternalContextFinderTestLanguage.g:1380:52: .
             	    {
             	    matchAny(); 
 
@@ -721,12 +721,12 @@ public class InternalContextFinderTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalContextFinderTestLanguage.g:1395:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // InternalContextFinderTestLanguage.g:1395:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // InternalContextFinderTestLanguage.g:1382:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // InternalContextFinderTestLanguage.g:1382:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // InternalContextFinderTestLanguage.g:1395:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalContextFinderTestLanguage.g:1382:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -739,7 +739,7 @@ public class InternalContextFinderTestLanguageLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // InternalContextFinderTestLanguage.g:1395:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalContextFinderTestLanguage.g:1382:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -759,7 +759,7 @@ public class InternalContextFinderTestLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // InternalContextFinderTestLanguage.g:1395:40: ( ( '\\r' )? '\\n' )?
+            // InternalContextFinderTestLanguage.g:1382:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -768,9 +768,9 @@ public class InternalContextFinderTestLanguageLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // InternalContextFinderTestLanguage.g:1395:41: ( '\\r' )? '\\n'
+                    // InternalContextFinderTestLanguage.g:1382:41: ( '\\r' )? '\\n'
                     {
-                    // InternalContextFinderTestLanguage.g:1395:41: ( '\\r' )?
+                    // InternalContextFinderTestLanguage.g:1382:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -779,7 +779,7 @@ public class InternalContextFinderTestLanguageLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // InternalContextFinderTestLanguage.g:1395:41: '\\r'
+                            // InternalContextFinderTestLanguage.g:1382:41: '\\r'
                             {
                             match('\r'); 
 
@@ -811,10 +811,10 @@ public class InternalContextFinderTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalContextFinderTestLanguage.g:1397:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // InternalContextFinderTestLanguage.g:1397:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalContextFinderTestLanguage.g:1384:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalContextFinderTestLanguage.g:1384:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // InternalContextFinderTestLanguage.g:1397:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalContextFinderTestLanguage.g:1384:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -868,8 +868,8 @@ public class InternalContextFinderTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalContextFinderTestLanguage.g:1399:16: ( . )
-            // InternalContextFinderTestLanguage.g:1399:18: .
+            // InternalContextFinderTestLanguage.g:1386:16: ( . )
+            // InternalContextFinderTestLanguage.g:1386:18: .
             {
             matchAny(); 
 

@@ -3,20 +3,23 @@
  */
 package org.eclipse.xtext.testlanguages.services;
 
-import com.google.inject.Singleton;
 import com.google.inject.Inject;
-
+import com.google.inject.Singleton;
 import java.util.List;
-
-import org.eclipse.xtext.*;
-import org.eclipse.xtext.service.GrammarProvider;
-import org.eclipse.xtext.service.AbstractElementFinder.*;
-
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.Group;
+import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
+import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder;
+import org.eclipse.xtext.service.GrammarProvider;
 
 @Singleton
 public class TreeTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
-	
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.TreeTestLanguage.Model");
@@ -26,14 +29,13 @@ public class TreeTestLanguageGrammarAccess extends AbstractGrammarElementFinder 
 		//Model:
 		//	children+=Node*;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//children+=Node*
 		public Assignment getChildrenAssignment() { return cChildrenAssignment; }
-
+		
 		//Node
 		public RuleCall getChildrenNodeParserRuleCall_0() { return cChildrenNodeParserRuleCall_0; }
 	}
-
 	public class NodeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.TreeTestLanguage.Node");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -53,37 +55,37 @@ public class TreeTestLanguageGrammarAccess extends AbstractGrammarElementFinder 
 		//	'(' attrib=STRING ')'
 		//	'{' children+=Node* '};';
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//name=ID '(' attrib=STRING ')' '{' children+=Node* '};'
 		public Group getGroup() { return cGroup; }
-
+		
 		//name=ID
 		public Assignment getNameAssignment_0() { return cNameAssignment_0; }
-
+		
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_0_0() { return cNameIDTerminalRuleCall_0_0; }
-
+		
 		//'('
 		public Keyword getLeftParenthesisKeyword_1() { return cLeftParenthesisKeyword_1; }
-
+		
 		//attrib=STRING
 		public Assignment getAttribAssignment_2() { return cAttribAssignment_2; }
-
+		
 		//STRING
 		public RuleCall getAttribSTRINGTerminalRuleCall_2_0() { return cAttribSTRINGTerminalRuleCall_2_0; }
-
+		
 		//')'
 		public Keyword getRightParenthesisKeyword_3() { return cRightParenthesisKeyword_3; }
-
+		
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_4() { return cLeftCurlyBracketKeyword_4; }
-
+		
 		//children+=Node*
 		public Assignment getChildrenAssignment_5() { return cChildrenAssignment_5; }
-
+		
 		//Node
 		public RuleCall getChildrenNodeParserRuleCall_5_0() { return cChildrenNodeParserRuleCall_5_0; }
-
+		
 		//'};'
 		public Keyword getRightCurlyBracketSemicolonKeyword_6() { return cRightCurlyBracketSemicolonKeyword_6; }
 	}
@@ -93,12 +95,12 @@ public class TreeTestLanguageGrammarAccess extends AbstractGrammarElementFinder 
 	private final NodeElements pNode;
 	
 	private final Grammar grammar;
-
+	
 	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public TreeTestLanguageGrammarAccess(GrammarProvider grammarProvider,
-		TerminalsGrammarAccess gaTerminals) {
+			TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
 		this.pModel = new ModelElements();
@@ -126,7 +128,7 @@ public class TreeTestLanguageGrammarAccess extends AbstractGrammarElementFinder 
 		return grammar;
 	}
 	
-
+	
 	public TerminalsGrammarAccess getTerminalsGrammarAccess() {
 		return gaTerminals;
 	}
@@ -141,7 +143,7 @@ public class TreeTestLanguageGrammarAccess extends AbstractGrammarElementFinder 
 	public ParserRule getModelRule() {
 		return getModelAccess().getRule();
 	}
-
+	
 	//Node:
 	//	name=ID
 	//	'(' attrib=STRING ')'
@@ -153,47 +155,47 @@ public class TreeTestLanguageGrammarAccess extends AbstractGrammarElementFinder 
 	public ParserRule getNodeRule() {
 		return getNodeAccess().getRule();
 	}
-
+	
 	//terminal ID:
 	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
-	} 
-
+	}
+	
 	//terminal INT returns ecore::EInt:
 	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
-	} 
-
+	}
+	
 	//terminal STRING:
 	//	'"' ('\\' . | !('\\' | '"'))* '"' |
 	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
-	} 
-
+	}
+	
 	//terminal ML_COMMENT:
 	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal SL_COMMENT:
 	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal WS:
 	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
-	} 
-
+	}
+	
 	//terminal ANY_OTHER:
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
-	} 
+	}
 }

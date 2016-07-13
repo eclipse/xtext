@@ -3,20 +3,24 @@
  */
 package org.eclipse.xtext.testlanguages.services;
 
-import com.google.inject.Singleton;
 import com.google.inject.Inject;
-
+import com.google.inject.Singleton;
 import java.util.List;
-
-import org.eclipse.xtext.*;
-import org.eclipse.xtext.service.GrammarProvider;
-import org.eclipse.xtext.service.AbstractElementFinder.*;
-
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.Group;
+import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
+import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder;
+import org.eclipse.xtext.service.GrammarProvider;
 
 @Singleton
 public class FowlerDslTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
-	
 	
 	public class StatemachineElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.FowlerDslTestLanguage.Statemachine");
@@ -41,41 +45,40 @@ public class FowlerDslTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//	'end'
 		//	states+=State*;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'events' events+=Event* 'end' 'commands' commands+=Command* 'end' states+=State*
 		public Group getGroup() { return cGroup; }
-
+		
 		//'events'
 		public Keyword getEventsKeyword_0() { return cEventsKeyword_0; }
-
+		
 		//events+=Event*
 		public Assignment getEventsAssignment_1() { return cEventsAssignment_1; }
-
+		
 		//Event
 		public RuleCall getEventsEventParserRuleCall_1_0() { return cEventsEventParserRuleCall_1_0; }
-
+		
 		//'end'
 		public Keyword getEndKeyword_2() { return cEndKeyword_2; }
-
+		
 		//'commands'
 		public Keyword getCommandsKeyword_3() { return cCommandsKeyword_3; }
-
+		
 		//commands+=Command*
 		public Assignment getCommandsAssignment_4() { return cCommandsAssignment_4; }
-
+		
 		//Command
 		public RuleCall getCommandsCommandParserRuleCall_4_0() { return cCommandsCommandParserRuleCall_4_0; }
-
+		
 		//'end'
 		public Keyword getEndKeyword_5() { return cEndKeyword_5; }
-
+		
 		//states+=State*
 		public Assignment getStatesAssignment_6() { return cStatesAssignment_6; }
-
+		
 		//State
 		public RuleCall getStatesStateParserRuleCall_6_0() { return cStatesStateParserRuleCall_6_0; }
 	}
-
 	public class EventElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.FowlerDslTestLanguage.Event");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -89,29 +92,28 @@ public class FowlerDslTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//Event:
 		//	resetting?='resetting'? name=ID code=ID;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//resetting?='resetting'? name=ID code=ID
 		public Group getGroup() { return cGroup; }
-
+		
 		//resetting?='resetting'?
 		public Assignment getResettingAssignment_0() { return cResettingAssignment_0; }
-
+		
 		//'resetting'
 		public Keyword getResettingResettingKeyword_0_0() { return cResettingResettingKeyword_0_0; }
-
+		
 		//name=ID
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
-
+		
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
-
+		
 		//code=ID
 		public Assignment getCodeAssignment_2() { return cCodeAssignment_2; }
-
+		
 		//ID
 		public RuleCall getCodeIDTerminalRuleCall_2_0() { return cCodeIDTerminalRuleCall_2_0; }
 	}
-
 	public class CommandElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.FowlerDslTestLanguage.Command");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -123,23 +125,22 @@ public class FowlerDslTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//Command:
 		//	name=ID code=ID;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//name=ID code=ID
 		public Group getGroup() { return cGroup; }
-
+		
 		//name=ID
 		public Assignment getNameAssignment_0() { return cNameAssignment_0; }
-
+		
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_0_0() { return cNameIDTerminalRuleCall_0_0; }
-
+		
 		//code=ID
 		public Assignment getCodeAssignment_1() { return cCodeAssignment_1; }
-
+		
 		//ID
 		public RuleCall getCodeIDTerminalRuleCall_1_0() { return cCodeIDTerminalRuleCall_1_0; }
 	}
-
 	public class StateElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.FowlerDslTestLanguage.State");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -162,50 +163,49 @@ public class FowlerDslTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//	transitions+=Transition*
 		//	'end';
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'state' name=ID ('actions' '{' actions+=[Command]+ '}')? transitions+=Transition* 'end'
 		public Group getGroup() { return cGroup; }
-
+		
 		//'state'
 		public Keyword getStateKeyword_0() { return cStateKeyword_0; }
-
+		
 		//name=ID
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
-
+		
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
-
+		
 		//('actions' '{' actions+=[Command]+ '}')?
 		public Group getGroup_2() { return cGroup_2; }
-
+		
 		//'actions'
 		public Keyword getActionsKeyword_2_0() { return cActionsKeyword_2_0; }
-
+		
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_2_1() { return cLeftCurlyBracketKeyword_2_1; }
-
+		
 		//actions+=[Command]+
 		public Assignment getActionsAssignment_2_2() { return cActionsAssignment_2_2; }
-
+		
 		//[Command]
 		public CrossReference getActionsCommandCrossReference_2_2_0() { return cActionsCommandCrossReference_2_2_0; }
-
+		
 		//ID
 		public RuleCall getActionsCommandIDTerminalRuleCall_2_2_0_1() { return cActionsCommandIDTerminalRuleCall_2_2_0_1; }
-
+		
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_2_3() { return cRightCurlyBracketKeyword_2_3; }
-
+		
 		//transitions+=Transition*
 		public Assignment getTransitionsAssignment_3() { return cTransitionsAssignment_3; }
-
+		
 		//Transition
 		public RuleCall getTransitionsTransitionParserRuleCall_3_0() { return cTransitionsTransitionParserRuleCall_3_0; }
-
+		
 		//'end'
 		public Keyword getEndKeyword_4() { return cEndKeyword_4; }
 	}
-
 	public class TransitionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.FowlerDslTestLanguage.Transition");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -220,28 +220,28 @@ public class FowlerDslTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//Transition:
 		//	event=[Event] '=>' state=[State];
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//event=[Event] '=>' state=[State]
 		public Group getGroup() { return cGroup; }
-
+		
 		//event=[Event]
 		public Assignment getEventAssignment_0() { return cEventAssignment_0; }
-
+		
 		//[Event]
 		public CrossReference getEventEventCrossReference_0_0() { return cEventEventCrossReference_0_0; }
-
+		
 		//ID
 		public RuleCall getEventEventIDTerminalRuleCall_0_0_1() { return cEventEventIDTerminalRuleCall_0_0_1; }
-
+		
 		//'=>'
 		public Keyword getEqualsSignGreaterThanSignKeyword_1() { return cEqualsSignGreaterThanSignKeyword_1; }
-
+		
 		//state=[State]
 		public Assignment getStateAssignment_2() { return cStateAssignment_2; }
-
+		
 		//[State]
 		public CrossReference getStateStateCrossReference_2_0() { return cStateStateCrossReference_2_0; }
-
+		
 		//ID
 		public RuleCall getStateStateIDTerminalRuleCall_2_0_1() { return cStateStateIDTerminalRuleCall_2_0_1; }
 	}
@@ -254,12 +254,12 @@ public class FowlerDslTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	private final TransitionElements pTransition;
 	
 	private final Grammar grammar;
-
+	
 	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public FowlerDslTestLanguageGrammarAccess(GrammarProvider grammarProvider,
-		TerminalsGrammarAccess gaTerminals) {
+			TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
 		this.pStatemachine = new StatemachineElements();
@@ -290,7 +290,7 @@ public class FowlerDslTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return grammar;
 	}
 	
-
+	
 	public TerminalsGrammarAccess getTerminalsGrammarAccess() {
 		return gaTerminals;
 	}
@@ -311,7 +311,7 @@ public class FowlerDslTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getStatemachineRule() {
 		return getStatemachineAccess().getRule();
 	}
-
+	
 	//Event:
 	//	resetting?='resetting'? name=ID code=ID;
 	public EventElements getEventAccess() {
@@ -321,7 +321,7 @@ public class FowlerDslTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getEventRule() {
 		return getEventAccess().getRule();
 	}
-
+	
 	//Command:
 	//	name=ID code=ID;
 	public CommandElements getCommandAccess() {
@@ -331,7 +331,7 @@ public class FowlerDslTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getCommandRule() {
 		return getCommandAccess().getRule();
 	}
-
+	
 	//State:
 	//	'state' name=ID ('actions' '{' actions+=[Command]+ '}')?
 	//	transitions+=Transition*
@@ -343,7 +343,7 @@ public class FowlerDslTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getStateRule() {
 		return getStateAccess().getRule();
 	}
-
+	
 	//Transition:
 	//	event=[Event] '=>' state=[State];
 	public TransitionElements getTransitionAccess() {
@@ -353,47 +353,47 @@ public class FowlerDslTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getTransitionRule() {
 		return getTransitionAccess().getRule();
 	}
-
+	
 	//terminal ID:
 	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
-	} 
-
+	}
+	
 	//terminal INT returns ecore::EInt:
 	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
-	} 
-
+	}
+	
 	//terminal STRING:
 	//	'"' ('\\' . | !('\\' | '"'))* '"' |
 	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
-	} 
-
+	}
+	
 	//terminal ML_COMMENT:
 	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal SL_COMMENT:
 	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal WS:
 	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
-	} 
-
+	}
+	
 	//terminal ANY_OTHER:
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
-	} 
+	}
 }

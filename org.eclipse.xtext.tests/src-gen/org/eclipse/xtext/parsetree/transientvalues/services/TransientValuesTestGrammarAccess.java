@@ -3,20 +3,25 @@
  */
 package org.eclipse.xtext.parsetree.transientvalues.services;
 
-import com.google.inject.Singleton;
 import com.google.inject.Inject;
-
+import com.google.inject.Singleton;
 import java.util.List;
-
-import org.eclipse.xtext.*;
-import org.eclipse.xtext.service.GrammarProvider;
-import org.eclipse.xtext.service.AbstractElementFinder.*;
-
+import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Alternatives;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.Group;
+import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
+import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder;
+import org.eclipse.xtext.service.GrammarProvider;
 
 @Singleton
 public class TransientValuesTestGrammarAccess extends AbstractGrammarElementFinder {
-	
 	
 	public class RootElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.transientvalues.TransientValuesTest.Root");
@@ -30,26 +35,25 @@ public class TransientValuesTestGrammarAccess extends AbstractGrammarElementFind
 		//Root:
 		//	"test" (TestRequired | TestOptional | TestList);
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//"test" (TestRequired | TestOptional | TestList)
 		public Group getGroup() { return cGroup; }
-
+		
 		//"test"
 		public Keyword getTestKeyword_0() { return cTestKeyword_0; }
-
+		
 		//(TestRequired | TestOptional | TestList)
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
-
+		
 		//TestRequired
 		public RuleCall getTestRequiredParserRuleCall_1_0() { return cTestRequiredParserRuleCall_1_0; }
-
+		
 		//TestOptional
 		public RuleCall getTestOptionalParserRuleCall_1_1() { return cTestOptionalParserRuleCall_1_1; }
-
+		
 		//TestList
 		public RuleCall getTestListParserRuleCall_1_2() { return cTestListParserRuleCall_1_2; }
 	}
-
 	public class TestRequiredElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.transientvalues.TransientValuesTest.TestRequired");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -63,29 +67,28 @@ public class TransientValuesTestGrammarAccess extends AbstractGrammarElementFind
 		//TestRequired:
 		//	{TestRequired} "required" required1=INT required2=INT;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//{TestRequired} "required" required1=INT required2=INT
 		public Group getGroup() { return cGroup; }
-
+		
 		//{TestRequired}
 		public Action getTestRequiredAction_0() { return cTestRequiredAction_0; }
-
+		
 		//"required"
 		public Keyword getRequiredKeyword_1() { return cRequiredKeyword_1; }
-
+		
 		//required1=INT
 		public Assignment getRequired1Assignment_2() { return cRequired1Assignment_2; }
-
+		
 		//INT
 		public RuleCall getRequired1INTTerminalRuleCall_2_0() { return cRequired1INTTerminalRuleCall_2_0; }
-
+		
 		//required2=INT
 		public Assignment getRequired2Assignment_3() { return cRequired2Assignment_3; }
-
+		
 		//INT
 		public RuleCall getRequired2INTTerminalRuleCall_3_0() { return cRequired2INTTerminalRuleCall_3_0; }
 	}
-
 	public class TestOptionalElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.transientvalues.TransientValuesTest.TestOptional");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -101,35 +104,34 @@ public class TransientValuesTestGrammarAccess extends AbstractGrammarElementFind
 		//TestOptional:
 		//	{TestOptional} "optional" opt1=INT? (":" opt2=INT)?;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//{TestOptional} "optional" opt1=INT? (":" opt2=INT)?
 		public Group getGroup() { return cGroup; }
-
+		
 		//{TestOptional}
 		public Action getTestOptionalAction_0() { return cTestOptionalAction_0; }
-
+		
 		//"optional"
 		public Keyword getOptionalKeyword_1() { return cOptionalKeyword_1; }
-
+		
 		//opt1=INT?
 		public Assignment getOpt1Assignment_2() { return cOpt1Assignment_2; }
-
+		
 		//INT
 		public RuleCall getOpt1INTTerminalRuleCall_2_0() { return cOpt1INTTerminalRuleCall_2_0; }
-
+		
 		//(":" opt2=INT)?
 		public Group getGroup_3() { return cGroup_3; }
-
+		
 		//":"
 		public Keyword getColonKeyword_3_0() { return cColonKeyword_3_0; }
-
+		
 		//opt2=INT
 		public Assignment getOpt2Assignment_3_1() { return cOpt2Assignment_3_1; }
-
+		
 		//INT
 		public RuleCall getOpt2INTTerminalRuleCall_3_1_0() { return cOpt2INTTerminalRuleCall_3_1_0; }
 	}
-
 	public class TestListElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.transientvalues.TransientValuesTest.TestList");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -141,19 +143,19 @@ public class TransientValuesTestGrammarAccess extends AbstractGrammarElementFind
 		//TestList:
 		//	{TestList} "list" item+=INT*;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//{TestList} "list" item+=INT*
 		public Group getGroup() { return cGroup; }
-
+		
 		//{TestList}
 		public Action getTestListAction_0() { return cTestListAction_0; }
-
+		
 		//"list"
 		public Keyword getListKeyword_1() { return cListKeyword_1; }
-
+		
 		//item+=INT*
 		public Assignment getItemAssignment_2() { return cItemAssignment_2; }
-
+		
 		//INT
 		public RuleCall getItemINTTerminalRuleCall_2_0() { return cItemINTTerminalRuleCall_2_0; }
 	}
@@ -165,12 +167,12 @@ public class TransientValuesTestGrammarAccess extends AbstractGrammarElementFind
 	private final TestListElements pTestList;
 	
 	private final Grammar grammar;
-
+	
 	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public TransientValuesTestGrammarAccess(GrammarProvider grammarProvider,
-		TerminalsGrammarAccess gaTerminals) {
+			TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
 		this.pRoot = new RootElements();
@@ -200,7 +202,7 @@ public class TransientValuesTestGrammarAccess extends AbstractGrammarElementFind
 		return grammar;
 	}
 	
-
+	
 	public TerminalsGrammarAccess getTerminalsGrammarAccess() {
 		return gaTerminals;
 	}
@@ -215,7 +217,7 @@ public class TransientValuesTestGrammarAccess extends AbstractGrammarElementFind
 	public ParserRule getRootRule() {
 		return getRootAccess().getRule();
 	}
-
+	
 	//TestRequired:
 	//	{TestRequired} "required" required1=INT required2=INT;
 	public TestRequiredElements getTestRequiredAccess() {
@@ -225,7 +227,7 @@ public class TransientValuesTestGrammarAccess extends AbstractGrammarElementFind
 	public ParserRule getTestRequiredRule() {
 		return getTestRequiredAccess().getRule();
 	}
-
+	
 	//TestOptional:
 	//	{TestOptional} "optional" opt1=INT? (":" opt2=INT)?;
 	public TestOptionalElements getTestOptionalAccess() {
@@ -235,7 +237,7 @@ public class TransientValuesTestGrammarAccess extends AbstractGrammarElementFind
 	public ParserRule getTestOptionalRule() {
 		return getTestOptionalAccess().getRule();
 	}
-
+	
 	//TestList:
 	//	{TestList} "list" item+=INT*;
 	public TestListElements getTestListAccess() {
@@ -245,47 +247,47 @@ public class TransientValuesTestGrammarAccess extends AbstractGrammarElementFind
 	public ParserRule getTestListRule() {
 		return getTestListAccess().getRule();
 	}
-
+	
 	//terminal ID:
 	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
-	} 
-
+	}
+	
 	//terminal INT returns ecore::EInt:
 	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
-	} 
-
+	}
+	
 	//terminal STRING:
 	//	'"' ('\\' . | !('\\' | '"'))* '"' |
 	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
-	} 
-
+	}
+	
 	//terminal ML_COMMENT:
 	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal SL_COMMENT:
 	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal WS:
 	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
-	} 
-
+	}
+	
 	//terminal ANY_OTHER:
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
-	} 
+	}
 }

@@ -3,20 +3,23 @@
  */
 package org.eclipse.xtext.metamodelreferencing.tests.services;
 
-import com.google.inject.Singleton;
 import com.google.inject.Inject;
-
+import com.google.inject.Singleton;
 import java.util.List;
-
-import org.eclipse.xtext.*;
-import org.eclipse.xtext.service.GrammarProvider;
-import org.eclipse.xtext.service.AbstractElementFinder.*;
-
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.Group;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
+import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder;
+import org.eclipse.xtext.service.GrammarProvider;
 
 @Singleton
 public class MetamodelRefTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
-	
 	
 	public class FooElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.metamodelreferencing.tests.MetamodelRefTestLanguage.Foo");
@@ -29,23 +32,22 @@ public class MetamodelRefTestLanguageGrammarAccess extends AbstractGrammarElemen
 		//Foo:
 		//	name=ID nameRefs+=NameRef*;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//name=ID nameRefs+=NameRef*
 		public Group getGroup() { return cGroup; }
-
+		
 		//name=ID
 		public Assignment getNameAssignment_0() { return cNameAssignment_0; }
-
+		
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_0_0() { return cNameIDTerminalRuleCall_0_0; }
-
+		
 		//nameRefs+=NameRef*
 		public Assignment getNameRefsAssignment_1() { return cNameRefsAssignment_1; }
-
+		
 		//NameRef
 		public RuleCall getNameRefsNameRefParserRuleCall_1_0() { return cNameRefsNameRefParserRuleCall_1_0; }
 	}
-
 	public class NameRefElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.metamodelreferencing.tests.MetamodelRefTestLanguage.NameRef");
 		private final Assignment cRuleAssignment = (Assignment)rule.eContents().get(1);
@@ -55,17 +57,16 @@ public class MetamodelRefTestLanguageGrammarAccess extends AbstractGrammarElemen
 		//NameRef xtext::RuleCall:
 		//	rule=[xtext::ParserRule]
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//rule=[xtext::ParserRule]
 		public Assignment getRuleAssignment() { return cRuleAssignment; }
-
+		
 		//[xtext::ParserRule]
 		public CrossReference getRuleParserRuleCrossReference_0() { return cRuleParserRuleCrossReference_0; }
-
+		
 		//ID
 		public RuleCall getRuleParserRuleIDTerminalRuleCall_0_1() { return cRuleParserRuleIDTerminalRuleCall_0_1; }
 	}
-
 	public class MyRuleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.metamodelreferencing.tests.MetamodelRefTestLanguage.MyRule");
 		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
@@ -74,10 +75,10 @@ public class MetamodelRefTestLanguageGrammarAccess extends AbstractGrammarElemen
 		//MyRule xtext::ParserRule:
 		//	name=ID
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//name=ID
 		public Assignment getNameAssignment() { return cNameAssignment; }
-
+		
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_0() { return cNameIDTerminalRuleCall_0; }
 	}
@@ -88,12 +89,12 @@ public class MetamodelRefTestLanguageGrammarAccess extends AbstractGrammarElemen
 	private final MyRuleElements pMyRule;
 	
 	private final Grammar grammar;
-
+	
 	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public MetamodelRefTestLanguageGrammarAccess(GrammarProvider grammarProvider,
-		TerminalsGrammarAccess gaTerminals) {
+			TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
 		this.pFoo = new FooElements();
@@ -122,7 +123,7 @@ public class MetamodelRefTestLanguageGrammarAccess extends AbstractGrammarElemen
 		return grammar;
 	}
 	
-
+	
 	public TerminalsGrammarAccess getTerminalsGrammarAccess() {
 		return gaTerminals;
 	}
@@ -137,7 +138,7 @@ public class MetamodelRefTestLanguageGrammarAccess extends AbstractGrammarElemen
 	public ParserRule getFooRule() {
 		return getFooAccess().getRule();
 	}
-
+	
 	//NameRef xtext::RuleCall:
 	//	rule=[xtext::ParserRule]
 	public NameRefElements getNameRefAccess() {
@@ -147,7 +148,7 @@ public class MetamodelRefTestLanguageGrammarAccess extends AbstractGrammarElemen
 	public ParserRule getNameRefRule() {
 		return getNameRefAccess().getRule();
 	}
-
+	
 	//MyRule xtext::ParserRule:
 	//	name=ID
 	public MyRuleElements getMyRuleAccess() {
@@ -157,47 +158,47 @@ public class MetamodelRefTestLanguageGrammarAccess extends AbstractGrammarElemen
 	public ParserRule getMyRuleRule() {
 		return getMyRuleAccess().getRule();
 	}
-
+	
 	//terminal ID:
 	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
-	} 
-
+	}
+	
 	//terminal INT returns ecore::EInt:
 	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
-	} 
-
+	}
+	
 	//terminal STRING:
 	//	'"' ('\\' . | !('\\' | '"'))* '"' |
 	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
-	} 
-
+	}
+	
 	//terminal ML_COMMENT:
 	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal SL_COMMENT:
 	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal WS:
 	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
-	} 
-
+	}
+	
 	//terminal ANY_OTHER:
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
-	} 
+	}
 }

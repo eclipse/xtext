@@ -3,20 +3,22 @@
  */
 package org.eclipse.xtext.metamodelreferencing.tests.services;
 
-import com.google.inject.Singleton;
 import com.google.inject.Inject;
-
+import com.google.inject.Singleton;
 import java.util.List;
-
-import org.eclipse.xtext.*;
-import org.eclipse.xtext.service.GrammarProvider;
-import org.eclipse.xtext.service.AbstractElementFinder.*;
-
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.Group;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
+import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder;
+import org.eclipse.xtext.service.GrammarProvider;
 
 @Singleton
 public class MultiGenMMTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
-	
 	
 	public class FooElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.metamodelreferencing.tests.MultiGenMMTestLanguage.Foo");
@@ -29,23 +31,22 @@ public class MultiGenMMTestLanguageGrammarAccess extends AbstractGrammarElementF
 		//Foo:
 		//	name=ID nameRefs+=NameRef*;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//name=ID nameRefs+=NameRef*
 		public Group getGroup() { return cGroup; }
-
+		
 		//name=ID
 		public Assignment getNameAssignment_0() { return cNameAssignment_0; }
-
+		
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_0_0() { return cNameIDTerminalRuleCall_0_0; }
-
+		
 		//nameRefs+=NameRef*
 		public Assignment getNameRefsAssignment_1() { return cNameRefsAssignment_1; }
-
+		
 		//NameRef
 		public RuleCall getNameRefsNameRefParserRuleCall_1_0() { return cNameRefsNameRefParserRuleCall_1_0; }
 	}
-
 	public class NameRefElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.metamodelreferencing.tests.MultiGenMMTestLanguage.NameRef");
 		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
@@ -54,10 +55,10 @@ public class MultiGenMMTestLanguageGrammarAccess extends AbstractGrammarElementF
 		//NameRef other::FooBar:
 		//	name=STRING
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//name=STRING
 		public Assignment getNameAssignment() { return cNameAssignment; }
-
+		
 		//STRING
 		public RuleCall getNameSTRINGTerminalRuleCall_0() { return cNameSTRINGTerminalRuleCall_0; }
 	}
@@ -67,12 +68,12 @@ public class MultiGenMMTestLanguageGrammarAccess extends AbstractGrammarElementF
 	private final NameRefElements pNameRef;
 	
 	private final Grammar grammar;
-
+	
 	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public MultiGenMMTestLanguageGrammarAccess(GrammarProvider grammarProvider,
-		TerminalsGrammarAccess gaTerminals) {
+			TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
 		this.pFoo = new FooElements();
@@ -100,7 +101,7 @@ public class MultiGenMMTestLanguageGrammarAccess extends AbstractGrammarElementF
 		return grammar;
 	}
 	
-
+	
 	public TerminalsGrammarAccess getTerminalsGrammarAccess() {
 		return gaTerminals;
 	}
@@ -115,7 +116,7 @@ public class MultiGenMMTestLanguageGrammarAccess extends AbstractGrammarElementF
 	public ParserRule getFooRule() {
 		return getFooAccess().getRule();
 	}
-
+	
 	//NameRef other::FooBar:
 	//	name=STRING
 	public NameRefElements getNameRefAccess() {
@@ -125,47 +126,47 @@ public class MultiGenMMTestLanguageGrammarAccess extends AbstractGrammarElementF
 	public ParserRule getNameRefRule() {
 		return getNameRefAccess().getRule();
 	}
-
+	
 	//terminal ID:
 	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
-	} 
-
+	}
+	
 	//terminal INT returns ecore::EInt:
 	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
-	} 
-
+	}
+	
 	//terminal STRING:
 	//	'"' ('\\' . | !('\\' | '"'))* '"' |
 	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
-	} 
-
+	}
+	
 	//terminal ML_COMMENT:
 	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal SL_COMMENT:
 	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal WS:
 	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
-	} 
-
+	}
+	
 	//terminal ANY_OTHER:
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
-	} 
+	}
 }

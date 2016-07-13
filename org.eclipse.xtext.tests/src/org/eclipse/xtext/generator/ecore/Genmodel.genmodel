@@ -12,7 +12,7 @@
     </genClasses>
   </genPackages>
   <genPackages prefix="Second" basePackage="org.eclipse.xtext.generator.ecore" disposableProviderFactory="true"
-      ecorePackage="../../../../../../src-gen/org/eclipse/xtext/generator/ecore/EcoreFragmentTestLanguage.ecore#/">
+      fileExtensions="ecorefragmenttestlanguage" ecorePackage="../../../../../../src-gen/org/eclipse/xtext/generator/ecore/EcoreFragmentTestLanguage.ecore#/">
     <genClasses ecoreClass="../../../../../../src-gen/org/eclipse/xtext/generator/ecore/EcoreFragmentTestLanguage.ecore#//Second">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../../../../../src-gen/org/eclipse/xtext/generator/ecore/EcoreFragmentTestLanguage.ecore#//Second/name"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ../../../../../../src-gen/org/eclipse/xtext/generator/ecore/EcoreFragmentTestLanguage.ecore#//Second/first"/>

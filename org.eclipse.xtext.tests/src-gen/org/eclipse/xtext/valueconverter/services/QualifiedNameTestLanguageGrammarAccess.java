@@ -3,20 +3,23 @@
  */
 package org.eclipse.xtext.valueconverter.services;
 
-import com.google.inject.Singleton;
 import com.google.inject.Inject;
-
+import com.google.inject.Singleton;
 import java.util.List;
-
-import org.eclipse.xtext.*;
-import org.eclipse.xtext.service.GrammarProvider;
-import org.eclipse.xtext.service.AbstractElementFinder.*;
-
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.Group;
+import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
+import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder;
+import org.eclipse.xtext.service.GrammarProvider;
 
 @Singleton
 public class QualifiedNameTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
-	
 	
 	public class ElementElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.valueconverter.QualifiedNameTestLanguage.Element");
@@ -28,20 +31,19 @@ public class QualifiedNameTestLanguageGrammarAccess extends AbstractGrammarEleme
 		//Element:
 		//	'keyword' qualifiedName=QualifiedName;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'keyword' qualifiedName=QualifiedName
 		public Group getGroup() { return cGroup; }
-
+		
 		//'keyword'
 		public Keyword getKeywordKeyword_0() { return cKeywordKeyword_0; }
-
+		
 		//qualifiedName=QualifiedName
 		public Assignment getQualifiedNameAssignment_1() { return cQualifiedNameAssignment_1; }
-
+		
 		//QualifiedName
 		public RuleCall getQualifiedNameQualifiedNameParserRuleCall_1_0() { return cQualifiedNameQualifiedNameParserRuleCall_1_0; }
 	}
-
 	public class QualifiedNameElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.valueconverter.QualifiedNameTestLanguage.QualifiedName");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -56,28 +58,28 @@ public class QualifiedNameTestLanguageGrammarAccess extends AbstractGrammarEleme
 		//QualifiedName:
 		//	ID ('.' ID)* ('.' '*')?;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//ID ('.' ID)* ('.' '*')?
 		public Group getGroup() { return cGroup; }
-
+		
 		//ID
 		public RuleCall getIDTerminalRuleCall_0() { return cIDTerminalRuleCall_0; }
-
+		
 		//('.' ID)*
 		public Group getGroup_1() { return cGroup_1; }
-
+		
 		//'.'
 		public Keyword getFullStopKeyword_1_0() { return cFullStopKeyword_1_0; }
-
+		
 		//ID
 		public RuleCall getIDTerminalRuleCall_1_1() { return cIDTerminalRuleCall_1_1; }
-
+		
 		//('.' '*')?
 		public Group getGroup_2() { return cGroup_2; }
-
+		
 		//'.'
 		public Keyword getFullStopKeyword_2_0() { return cFullStopKeyword_2_0; }
-
+		
 		//'*'
 		public Keyword getAsteriskKeyword_2_1() { return cAsteriskKeyword_2_1; }
 	}
@@ -87,12 +89,12 @@ public class QualifiedNameTestLanguageGrammarAccess extends AbstractGrammarEleme
 	private final QualifiedNameElements pQualifiedName;
 	
 	private final Grammar grammar;
-
+	
 	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public QualifiedNameTestLanguageGrammarAccess(GrammarProvider grammarProvider,
-		TerminalsGrammarAccess gaTerminals) {
+			TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
 		this.pElement = new ElementElements();
@@ -120,7 +122,7 @@ public class QualifiedNameTestLanguageGrammarAccess extends AbstractGrammarEleme
 		return grammar;
 	}
 	
-
+	
 	public TerminalsGrammarAccess getTerminalsGrammarAccess() {
 		return gaTerminals;
 	}
@@ -135,7 +137,7 @@ public class QualifiedNameTestLanguageGrammarAccess extends AbstractGrammarEleme
 	public ParserRule getElementRule() {
 		return getElementAccess().getRule();
 	}
-
+	
 	//QualifiedName:
 	//	ID ('.' ID)* ('.' '*')?;
 	public QualifiedNameElements getQualifiedNameAccess() {
@@ -145,47 +147,47 @@ public class QualifiedNameTestLanguageGrammarAccess extends AbstractGrammarEleme
 	public ParserRule getQualifiedNameRule() {
 		return getQualifiedNameAccess().getRule();
 	}
-
+	
 	//terminal ID:
 	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
-	} 
-
+	}
+	
 	//terminal INT returns ecore::EInt:
 	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
-	} 
-
+	}
+	
 	//terminal STRING:
 	//	'"' ('\\' . | !('\\' | '"'))* '"' |
 	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
-	} 
-
+	}
+	
 	//terminal ML_COMMENT:
 	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal SL_COMMENT:
 	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal WS:
 	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
-	} 
-
+	}
+	
 	//terminal ANY_OTHER:
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
-	} 
+	}
 }

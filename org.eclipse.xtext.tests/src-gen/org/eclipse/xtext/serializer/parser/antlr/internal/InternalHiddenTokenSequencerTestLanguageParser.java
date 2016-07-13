@@ -1,4 +1,4 @@
-package org.eclipse.xtext.serializer.parser.antlr.internal; 
+package org.eclipse.xtext.serializer.parser.antlr.internal;
 
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
@@ -53,18 +53,18 @@ public class InternalHiddenTokenSequencerTestLanguageParser extends AbstractInte
 
 
      	private HiddenTokenSequencerTestLanguageGrammarAccess grammarAccess;
-     	
+
         public InternalHiddenTokenSequencerTestLanguageParser(TokenStream input, HiddenTokenSequencerTestLanguageGrammarAccess grammarAccess) {
             this(input);
             this.grammarAccess = grammarAccess;
             registerRules(grammarAccess.getGrammar());
         }
-        
+
         @Override
         protected String getFirstRuleName() {
-        	return "Model";	
+        	return "Model";
        	}
-       	
+
        	@Override
        	protected HiddenTokenSequencerTestLanguageGrammarAccess getGrammarAccess() {
        		return grammarAccess;
@@ -72,8 +72,9 @@ public class InternalHiddenTokenSequencerTestLanguageParser extends AbstractInte
 
 
 
+
     // $ANTLR start "entryRuleModel"
-    // InternalHiddenTokenSequencerTestLanguage.g:67:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
+    // InternalHiddenTokenSequencerTestLanguage.g:64:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
     public final EObject entryRuleModel() throws RecognitionException {
         EObject current = null;
 
@@ -81,8 +82,8 @@ public class InternalHiddenTokenSequencerTestLanguageParser extends AbstractInte
 
 
         try {
-            // InternalHiddenTokenSequencerTestLanguage.g:68:2: (iv_ruleModel= ruleModel EOF )
-            // InternalHiddenTokenSequencerTestLanguage.g:69:2: iv_ruleModel= ruleModel EOF
+            // InternalHiddenTokenSequencerTestLanguage.g:64:46: (iv_ruleModel= ruleModel EOF )
+            // InternalHiddenTokenSequencerTestLanguage.g:65:2: iv_ruleModel= ruleModel EOF
             {
              newCompositeNode(grammarAccess.getModelRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -96,11 +97,11 @@ public class InternalHiddenTokenSequencerTestLanguageParser extends AbstractInte
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -109,44 +110,45 @@ public class InternalHiddenTokenSequencerTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "ruleModel"
-    // InternalHiddenTokenSequencerTestLanguage.g:76:1: ruleModel returns [EObject current=null] : ( (lv_domainModel_0_0= ruleDomainModel ) ) ;
+    // InternalHiddenTokenSequencerTestLanguage.g:71:1: ruleModel returns [EObject current=null] : ( (lv_domainModel_0_0= ruleDomainModel ) ) ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
         EObject lv_domainModel_0_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalHiddenTokenSequencerTestLanguage.g:79:28: ( ( (lv_domainModel_0_0= ruleDomainModel ) ) )
-            // InternalHiddenTokenSequencerTestLanguage.g:80:1: ( (lv_domainModel_0_0= ruleDomainModel ) )
+            // InternalHiddenTokenSequencerTestLanguage.g:77:2: ( ( (lv_domainModel_0_0= ruleDomainModel ) ) )
+            // InternalHiddenTokenSequencerTestLanguage.g:78:2: ( (lv_domainModel_0_0= ruleDomainModel ) )
             {
-            // InternalHiddenTokenSequencerTestLanguage.g:80:1: ( (lv_domainModel_0_0= ruleDomainModel ) )
-            // InternalHiddenTokenSequencerTestLanguage.g:81:1: (lv_domainModel_0_0= ruleDomainModel )
+            // InternalHiddenTokenSequencerTestLanguage.g:78:2: ( (lv_domainModel_0_0= ruleDomainModel ) )
+            // InternalHiddenTokenSequencerTestLanguage.g:79:3: (lv_domainModel_0_0= ruleDomainModel )
             {
-            // InternalHiddenTokenSequencerTestLanguage.g:81:1: (lv_domainModel_0_0= ruleDomainModel )
-            // InternalHiddenTokenSequencerTestLanguage.g:82:3: lv_domainModel_0_0= ruleDomainModel
+            // InternalHiddenTokenSequencerTestLanguage.g:79:3: (lv_domainModel_0_0= ruleDomainModel )
+            // InternalHiddenTokenSequencerTestLanguage.g:80:4: lv_domainModel_0_0= ruleDomainModel
             {
-             
-            	        newCompositeNode(grammarAccess.getModelAccess().getDomainModelDomainModelParserRuleCall_0()); 
-            	    
+
+            				newCompositeNode(grammarAccess.getModelAccess().getDomainModelDomainModelParserRuleCall_0());
+            			
             pushFollow(FollowSets000.FOLLOW_2);
             lv_domainModel_0_0=ruleDomainModel();
 
             state._fsp--;
 
 
-            	        if (current==null) {
-            	            current = createModelElementForParent(grammarAccess.getModelRule());
-            	        }
-                   		set(
-                   			current, 
-                   			"domainModel",
-                    		lv_domainModel_0_0, 
-                    		"org.eclipse.xtext.serializer.HiddenTokenSequencerTestLanguage.DomainModel");
-            	        afterParserOrEnumRuleCall();
-            	    
+            				if (current==null) {
+            					current = createModelElementForParent(grammarAccess.getModelRule());
+            				}
+            				set(
+            					current,
+            					"domainModel",
+            					lv_domainModel_0_0,
+            					"org.eclipse.xtext.serializer.HiddenTokenSequencerTestLanguage.DomainModel");
+            				afterParserOrEnumRuleCall();
+            			
 
             }
 
@@ -156,13 +158,15 @@ public class InternalHiddenTokenSequencerTestLanguageParser extends AbstractInte
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -171,7 +175,7 @@ public class InternalHiddenTokenSequencerTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "entryRuleDomainModel"
-    // InternalHiddenTokenSequencerTestLanguage.g:106:1: entryRuleDomainModel returns [EObject current=null] : iv_ruleDomainModel= ruleDomainModel EOF ;
+    // InternalHiddenTokenSequencerTestLanguage.g:100:1: entryRuleDomainModel returns [EObject current=null] : iv_ruleDomainModel= ruleDomainModel EOF ;
     public final EObject entryRuleDomainModel() throws RecognitionException {
         EObject current = null;
 
@@ -179,8 +183,8 @@ public class InternalHiddenTokenSequencerTestLanguageParser extends AbstractInte
 
 
         try {
-            // InternalHiddenTokenSequencerTestLanguage.g:107:2: (iv_ruleDomainModel= ruleDomainModel EOF )
-            // InternalHiddenTokenSequencerTestLanguage.g:108:2: iv_ruleDomainModel= ruleDomainModel EOF
+            // InternalHiddenTokenSequencerTestLanguage.g:100:52: (iv_ruleDomainModel= ruleDomainModel EOF )
+            // InternalHiddenTokenSequencerTestLanguage.g:101:2: iv_ruleDomainModel= ruleDomainModel EOF
             {
              newCompositeNode(grammarAccess.getDomainModelRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -194,11 +198,11 @@ public class InternalHiddenTokenSequencerTestLanguageParser extends AbstractInte
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -207,7 +211,7 @@ public class InternalHiddenTokenSequencerTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "ruleDomainModel"
-    // InternalHiddenTokenSequencerTestLanguage.g:115:1: ruleDomainModel returns [EObject current=null] : (otherlv_0= 'entities' ( (lv_entities_1_0= ruleEntity ) )* otherlv_2= 'end' ) ;
+    // InternalHiddenTokenSequencerTestLanguage.g:107:1: ruleDomainModel returns [EObject current=null] : (otherlv_0= 'entities' ( (lv_entities_1_0= ruleEntity ) )* otherlv_2= 'end' ) ;
     public final EObject ruleDomainModel() throws RecognitionException {
         EObject current = null;
 
@@ -216,20 +220,21 @@ public class InternalHiddenTokenSequencerTestLanguageParser extends AbstractInte
         EObject lv_entities_1_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalHiddenTokenSequencerTestLanguage.g:118:28: ( (otherlv_0= 'entities' ( (lv_entities_1_0= ruleEntity ) )* otherlv_2= 'end' ) )
-            // InternalHiddenTokenSequencerTestLanguage.g:119:1: (otherlv_0= 'entities' ( (lv_entities_1_0= ruleEntity ) )* otherlv_2= 'end' )
+            // InternalHiddenTokenSequencerTestLanguage.g:113:2: ( (otherlv_0= 'entities' ( (lv_entities_1_0= ruleEntity ) )* otherlv_2= 'end' ) )
+            // InternalHiddenTokenSequencerTestLanguage.g:114:2: (otherlv_0= 'entities' ( (lv_entities_1_0= ruleEntity ) )* otherlv_2= 'end' )
             {
-            // InternalHiddenTokenSequencerTestLanguage.g:119:1: (otherlv_0= 'entities' ( (lv_entities_1_0= ruleEntity ) )* otherlv_2= 'end' )
-            // InternalHiddenTokenSequencerTestLanguage.g:119:3: otherlv_0= 'entities' ( (lv_entities_1_0= ruleEntity ) )* otherlv_2= 'end'
+            // InternalHiddenTokenSequencerTestLanguage.g:114:2: (otherlv_0= 'entities' ( (lv_entities_1_0= ruleEntity ) )* otherlv_2= 'end' )
+            // InternalHiddenTokenSequencerTestLanguage.g:115:3: otherlv_0= 'entities' ( (lv_entities_1_0= ruleEntity ) )* otherlv_2= 'end'
             {
             otherlv_0=(Token)match(input,11,FollowSets000.FOLLOW_3); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getDomainModelAccess().getEntitiesKeyword_0());
-                
-            // InternalHiddenTokenSequencerTestLanguage.g:123:1: ( (lv_entities_1_0= ruleEntity ) )*
+            			newLeafNode(otherlv_0, grammarAccess.getDomainModelAccess().getEntitiesKeyword_0());
+            		
+            // InternalHiddenTokenSequencerTestLanguage.g:119:3: ( (lv_entities_1_0= ruleEntity ) )*
             loop1:
             do {
                 int alt1=2;
@@ -242,30 +247,30 @@ public class InternalHiddenTokenSequencerTestLanguageParser extends AbstractInte
 
                 switch (alt1) {
             	case 1 :
-            	    // InternalHiddenTokenSequencerTestLanguage.g:124:1: (lv_entities_1_0= ruleEntity )
+            	    // InternalHiddenTokenSequencerTestLanguage.g:120:4: (lv_entities_1_0= ruleEntity )
             	    {
-            	    // InternalHiddenTokenSequencerTestLanguage.g:124:1: (lv_entities_1_0= ruleEntity )
-            	    // InternalHiddenTokenSequencerTestLanguage.g:125:3: lv_entities_1_0= ruleEntity
+            	    // InternalHiddenTokenSequencerTestLanguage.g:120:4: (lv_entities_1_0= ruleEntity )
+            	    // InternalHiddenTokenSequencerTestLanguage.g:121:5: lv_entities_1_0= ruleEntity
             	    {
-            	     
-            	    	        newCompositeNode(grammarAccess.getDomainModelAccess().getEntitiesEntityParserRuleCall_1_0()); 
-            	    	    
+
+            	    					newCompositeNode(grammarAccess.getDomainModelAccess().getEntitiesEntityParserRuleCall_1_0());
+            	    				
             	    pushFollow(FollowSets000.FOLLOW_3);
             	    lv_entities_1_0=ruleEntity();
 
             	    state._fsp--;
 
 
-            	    	        if (current==null) {
-            	    	            current = createModelElementForParent(grammarAccess.getDomainModelRule());
-            	    	        }
-            	           		add(
-            	           			current, 
-            	           			"entities",
-            	            		lv_entities_1_0, 
-            	            		"org.eclipse.xtext.serializer.HiddenTokenSequencerTestLanguage.Entity");
-            	    	        afterParserOrEnumRuleCall();
-            	    	    
+            	    					if (current==null) {
+            	    						current = createModelElementForParent(grammarAccess.getDomainModelRule());
+            	    					}
+            	    					add(
+            	    						current,
+            	    						"entities",
+            	    						lv_entities_1_0,
+            	    						"org.eclipse.xtext.serializer.HiddenTokenSequencerTestLanguage.Entity");
+            	    					afterParserOrEnumRuleCall();
+            	    				
 
             	    }
 
@@ -280,21 +285,23 @@ public class InternalHiddenTokenSequencerTestLanguageParser extends AbstractInte
 
             otherlv_2=(Token)match(input,12,FollowSets000.FOLLOW_2); 
 
-                	newLeafNode(otherlv_2, grammarAccess.getDomainModelAccess().getEndKeyword_2());
-                
+            			newLeafNode(otherlv_2, grammarAccess.getDomainModelAccess().getEndKeyword_2());
+            		
 
             }
 
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -303,7 +310,7 @@ public class InternalHiddenTokenSequencerTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "entryRuleEntity"
-    // InternalHiddenTokenSequencerTestLanguage.g:153:1: entryRuleEntity returns [EObject current=null] : iv_ruleEntity= ruleEntity EOF ;
+    // InternalHiddenTokenSequencerTestLanguage.g:146:1: entryRuleEntity returns [EObject current=null] : iv_ruleEntity= ruleEntity EOF ;
     public final EObject entryRuleEntity() throws RecognitionException {
         EObject current = null;
 
@@ -311,8 +318,8 @@ public class InternalHiddenTokenSequencerTestLanguageParser extends AbstractInte
 
 
         try {
-            // InternalHiddenTokenSequencerTestLanguage.g:154:2: (iv_ruleEntity= ruleEntity EOF )
-            // InternalHiddenTokenSequencerTestLanguage.g:155:2: iv_ruleEntity= ruleEntity EOF
+            // InternalHiddenTokenSequencerTestLanguage.g:146:47: (iv_ruleEntity= ruleEntity EOF )
+            // InternalHiddenTokenSequencerTestLanguage.g:147:2: iv_ruleEntity= ruleEntity EOF
             {
              newCompositeNode(grammarAccess.getEntityRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -326,11 +333,11 @@ public class InternalHiddenTokenSequencerTestLanguageParser extends AbstractInte
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -339,71 +346,69 @@ public class InternalHiddenTokenSequencerTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "ruleEntity"
-    // InternalHiddenTokenSequencerTestLanguage.g:162:1: ruleEntity returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_description_1_0= RULE_STRING ) ) ) ;
+    // InternalHiddenTokenSequencerTestLanguage.g:153:1: ruleEntity returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_description_1_0= RULE_STRING ) ) ) ;
     public final EObject ruleEntity() throws RecognitionException {
         EObject current = null;
 
         Token lv_name_0_0=null;
         Token lv_description_1_0=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalHiddenTokenSequencerTestLanguage.g:165:28: ( ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_description_1_0= RULE_STRING ) ) ) )
-            // InternalHiddenTokenSequencerTestLanguage.g:166:1: ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_description_1_0= RULE_STRING ) ) )
+            // InternalHiddenTokenSequencerTestLanguage.g:159:2: ( ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_description_1_0= RULE_STRING ) ) ) )
+            // InternalHiddenTokenSequencerTestLanguage.g:160:2: ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_description_1_0= RULE_STRING ) ) )
             {
-            // InternalHiddenTokenSequencerTestLanguage.g:166:1: ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_description_1_0= RULE_STRING ) ) )
-            // InternalHiddenTokenSequencerTestLanguage.g:166:2: ( (lv_name_0_0= RULE_ID ) ) ( (lv_description_1_0= RULE_STRING ) )
+            // InternalHiddenTokenSequencerTestLanguage.g:160:2: ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_description_1_0= RULE_STRING ) ) )
+            // InternalHiddenTokenSequencerTestLanguage.g:161:3: ( (lv_name_0_0= RULE_ID ) ) ( (lv_description_1_0= RULE_STRING ) )
             {
-            // InternalHiddenTokenSequencerTestLanguage.g:166:2: ( (lv_name_0_0= RULE_ID ) )
-            // InternalHiddenTokenSequencerTestLanguage.g:167:1: (lv_name_0_0= RULE_ID )
+            // InternalHiddenTokenSequencerTestLanguage.g:161:3: ( (lv_name_0_0= RULE_ID ) )
+            // InternalHiddenTokenSequencerTestLanguage.g:162:4: (lv_name_0_0= RULE_ID )
             {
-            // InternalHiddenTokenSequencerTestLanguage.g:167:1: (lv_name_0_0= RULE_ID )
-            // InternalHiddenTokenSequencerTestLanguage.g:168:3: lv_name_0_0= RULE_ID
+            // InternalHiddenTokenSequencerTestLanguage.g:162:4: (lv_name_0_0= RULE_ID )
+            // InternalHiddenTokenSequencerTestLanguage.g:163:5: lv_name_0_0= RULE_ID
             {
             lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_4); 
 
-            			newLeafNode(lv_name_0_0, grammarAccess.getEntityAccess().getNameIDTerminalRuleCall_0_0()); 
-            		
+            					newLeafNode(lv_name_0_0, grammarAccess.getEntityAccess().getNameIDTerminalRuleCall_0_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getEntityRule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"name",
-                    		lv_name_0_0, 
-                    		"org.eclipse.xtext.common.Terminals.ID");
-            	    
-
-            }
-
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getEntityRule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"name",
+            						lv_name_0_0,
+            						"org.eclipse.xtext.common.Terminals.ID");
+            				
 
             }
 
-            // InternalHiddenTokenSequencerTestLanguage.g:184:2: ( (lv_description_1_0= RULE_STRING ) )
-            // InternalHiddenTokenSequencerTestLanguage.g:185:1: (lv_description_1_0= RULE_STRING )
+
+            }
+
+            // InternalHiddenTokenSequencerTestLanguage.g:179:3: ( (lv_description_1_0= RULE_STRING ) )
+            // InternalHiddenTokenSequencerTestLanguage.g:180:4: (lv_description_1_0= RULE_STRING )
             {
-            // InternalHiddenTokenSequencerTestLanguage.g:185:1: (lv_description_1_0= RULE_STRING )
-            // InternalHiddenTokenSequencerTestLanguage.g:186:3: lv_description_1_0= RULE_STRING
+            // InternalHiddenTokenSequencerTestLanguage.g:180:4: (lv_description_1_0= RULE_STRING )
+            // InternalHiddenTokenSequencerTestLanguage.g:181:5: lv_description_1_0= RULE_STRING
             {
             lv_description_1_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_2); 
 
-            			newLeafNode(lv_description_1_0, grammarAccess.getEntityAccess().getDescriptionSTRINGTerminalRuleCall_1_0()); 
-            		
+            					newLeafNode(lv_description_1_0, grammarAccess.getEntityAccess().getDescriptionSTRINGTerminalRuleCall_1_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getEntityRule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"description",
-                    		lv_description_1_0, 
-                    		"org.eclipse.xtext.common.Terminals.STRING");
-            	    
-
-            }
-
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getEntityRule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"description",
+            						lv_description_1_0,
+            						"org.eclipse.xtext.common.Terminals.STRING");
+            				
 
             }
 
@@ -413,13 +418,18 @@ public class InternalHiddenTokenSequencerTestLanguageParser extends AbstractInte
 
             }
 
-             leaveRule(); 
+
+            }
+
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;

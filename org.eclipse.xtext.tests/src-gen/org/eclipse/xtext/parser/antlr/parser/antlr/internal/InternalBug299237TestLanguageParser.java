@@ -1,4 +1,4 @@
-package org.eclipse.xtext.parser.antlr.parser.antlr.internal; 
+package org.eclipse.xtext.parser.antlr.parser.antlr.internal;
 
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
@@ -52,29 +52,29 @@ public class InternalBug299237TestLanguageParser extends AbstractInternalAntlrPa
 
 
 
+     	private Bug299237TestLanguageGrammarAccess grammarAccess;
 
-    	private Bug299237TestLanguageGrammarAccess grammarAccess;
-    	 	
-    	public InternalBug299237TestLanguageParser(TokenStream input, Bug299237TestLanguageGrammarAccess grammarAccess) {
-    		this(input);
-    		this.grammarAccess = grammarAccess;
-    		registerRules(grammarAccess.getGrammar());
-    	}
-    	
-    	@Override
-    	protected String getFirstRuleName() {
-    		return "Model";	
-    	} 
-    	   	   	
-    	@Override
-    	protected Bug299237TestLanguageGrammarAccess getGrammarAccess() {
-    		return grammarAccess;
-    	}
+        public InternalBug299237TestLanguageParser(TokenStream input, Bug299237TestLanguageGrammarAccess grammarAccess) {
+            this(input);
+            this.grammarAccess = grammarAccess;
+            registerRules(grammarAccess.getGrammar());
+        }
+
+        @Override
+        protected String getFirstRuleName() {
+        	return "Model";
+       	}
+
+       	@Override
+       	protected Bug299237TestLanguageGrammarAccess getGrammarAccess() {
+       		return grammarAccess;
+       	}
+
 
 
 
     // $ANTLR start "entryRuleModel"
-    // InternalBug299237TestLanguageParser.g:61:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
+    // InternalBug299237TestLanguageParser.g:57:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
     public final EObject entryRuleModel() throws RecognitionException {
         EObject current = null;
 
@@ -82,8 +82,8 @@ public class InternalBug299237TestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // InternalBug299237TestLanguageParser.g:62:2: (iv_ruleModel= ruleModel EOF )
-            // InternalBug299237TestLanguageParser.g:63:2: iv_ruleModel= ruleModel EOF
+            // InternalBug299237TestLanguageParser.g:57:46: (iv_ruleModel= ruleModel EOF )
+            // InternalBug299237TestLanguageParser.g:58:2: iv_ruleModel= ruleModel EOF
             {
              newCompositeNode(grammarAccess.getModelRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -97,11 +97,11 @@ public class InternalBug299237TestLanguageParser extends AbstractInternalAntlrPa
             }
 
         }
-         
-        	catch (RecognitionException re) { 
-        	    recover(input,re); 
-        	    appendSkippedTokens();
-        	}
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
         finally {
         }
         return current;
@@ -110,7 +110,7 @@ public class InternalBug299237TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleModel"
-    // InternalBug299237TestLanguageParser.g:70:1: ruleModel returns [EObject current=null] : (otherlv_0= Model ( (lv_name_1_0= RULE_ID ) ) otherlv_2= Semicolon ) ;
+    // InternalBug299237TestLanguageParser.g:64:1: ruleModel returns [EObject current=null] : (otherlv_0= Model ( (lv_name_1_0= RULE_ID ) ) otherlv_2= Semicolon ) ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
@@ -118,39 +118,40 @@ public class InternalBug299237TestLanguageParser extends AbstractInternalAntlrPa
         Token lv_name_1_0=null;
         Token otherlv_2=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalBug299237TestLanguageParser.g:73:28: ( (otherlv_0= Model ( (lv_name_1_0= RULE_ID ) ) otherlv_2= Semicolon ) )
-            // InternalBug299237TestLanguageParser.g:74:1: (otherlv_0= Model ( (lv_name_1_0= RULE_ID ) ) otherlv_2= Semicolon )
+            // InternalBug299237TestLanguageParser.g:70:2: ( (otherlv_0= Model ( (lv_name_1_0= RULE_ID ) ) otherlv_2= Semicolon ) )
+            // InternalBug299237TestLanguageParser.g:71:2: (otherlv_0= Model ( (lv_name_1_0= RULE_ID ) ) otherlv_2= Semicolon )
             {
-            // InternalBug299237TestLanguageParser.g:74:1: (otherlv_0= Model ( (lv_name_1_0= RULE_ID ) ) otherlv_2= Semicolon )
-            // InternalBug299237TestLanguageParser.g:75:2: otherlv_0= Model ( (lv_name_1_0= RULE_ID ) ) otherlv_2= Semicolon
+            // InternalBug299237TestLanguageParser.g:71:2: (otherlv_0= Model ( (lv_name_1_0= RULE_ID ) ) otherlv_2= Semicolon )
+            // InternalBug299237TestLanguageParser.g:72:3: otherlv_0= Model ( (lv_name_1_0= RULE_ID ) ) otherlv_2= Semicolon
             {
             otherlv_0=(Token)match(input,Model,FollowSets000.FOLLOW_3); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getModelAccess().getModelKeyword_0());
-                
-            // InternalBug299237TestLanguageParser.g:79:1: ( (lv_name_1_0= RULE_ID ) )
-            // InternalBug299237TestLanguageParser.g:80:1: (lv_name_1_0= RULE_ID )
+            			newLeafNode(otherlv_0, grammarAccess.getModelAccess().getModelKeyword_0());
+            		
+            // InternalBug299237TestLanguageParser.g:76:3: ( (lv_name_1_0= RULE_ID ) )
+            // InternalBug299237TestLanguageParser.g:77:4: (lv_name_1_0= RULE_ID )
             {
-            // InternalBug299237TestLanguageParser.g:80:1: (lv_name_1_0= RULE_ID )
-            // InternalBug299237TestLanguageParser.g:81:3: lv_name_1_0= RULE_ID
+            // InternalBug299237TestLanguageParser.g:77:4: (lv_name_1_0= RULE_ID )
+            // InternalBug299237TestLanguageParser.g:78:5: lv_name_1_0= RULE_ID
             {
             lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_4); 
 
-            			newLeafNode(lv_name_1_0, grammarAccess.getModelAccess().getNameIDTerminalRuleCall_1_0()); 
-            		
+            					newLeafNode(lv_name_1_0, grammarAccess.getModelAccess().getNameIDTerminalRuleCall_1_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getModelRule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"name",
-                    		lv_name_1_0, 
-                    		"org.eclipse.xtext.common.Terminals.ID");
-            	    
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getModelRule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"name",
+            						lv_name_1_0,
+            						"org.eclipse.xtext.common.Terminals.ID");
+            				
 
             }
 
@@ -159,21 +160,23 @@ public class InternalBug299237TestLanguageParser extends AbstractInternalAntlrPa
 
             otherlv_2=(Token)match(input,Semicolon,FollowSets000.FOLLOW_2); 
 
-                	newLeafNode(otherlv_2, grammarAccess.getModelAccess().getSemicolonKeyword_2());
-                
+            			newLeafNode(otherlv_2, grammarAccess.getModelAccess().getSemicolonKeyword_2());
+            		
 
             }
 
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-        	catch (RecognitionException re) { 
-        	    recover(input,re); 
-        	    appendSkippedTokens();
-        	}
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
         finally {
         }
         return current;

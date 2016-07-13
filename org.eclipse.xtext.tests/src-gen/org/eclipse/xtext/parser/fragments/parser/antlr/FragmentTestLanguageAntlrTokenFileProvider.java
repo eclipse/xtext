@@ -7,10 +7,10 @@ import java.io.InputStream;
 import org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider;
 
 public class FragmentTestLanguageAntlrTokenFileProvider implements IAntlrTokenFileProvider {
-	
+
 	@Override
 	public InputStream getAntlrTokenFile() {
 		ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/parser/fragments/parser/antlr/internal/InternalFragmentTestLanguage.tokens");
+		return classLoader.getResourceAsStream("org/eclipse/xtext/parser/fragments/parser/antlr/internal/InternalFragmentTestLanguage.tokens");
 	}
 }

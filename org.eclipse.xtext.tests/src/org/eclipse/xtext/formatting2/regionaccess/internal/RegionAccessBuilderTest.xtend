@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.formatting2.debug.TextRegionAccessToString
 import org.eclipse.xtext.formatting2.regionaccess.TextRegionAccessBuilder
 import org.eclipse.xtext.formatting2.regionaccess.internal.regionaccesstestlanguage.Root
+import org.eclipse.xtext.formatting2.regionaccess.internal.tests.RegionAccessTestLanguageInjectorProvider
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.serializer.impl.Serializer
 import org.eclipse.xtext.testing.InjectWith

@@ -10,7 +10,7 @@ module org.eclipse.xtext.parsetree.unassignedtext.GenerateUnassignedTextTestLang
 import org.eclipse.emf.mwe2.runtime.workflow.Workflow
 import org.eclipse.emf.mwe.utils.*
 import org.eclipse.xtext.*
-import org.eclipse.xtext.generator.*
+import org.eclipse.xtext.xtext.generator.*
 
 var projectName = "org.eclipse.xtext.tests"
 var runtimeProject = "../${projectName}"
@@ -25,13 +25,27 @@ Workflow {
 		directory = "${runtimeProject}/src-gen/org/eclipse/xtext/parsetree/unassignedtext"
 	}
 	
-	component = Generator auto-inject {
-		pathRtProject = runtimeProject
-		projectNameRt = projectName
+	component = XtextGenerator {
+		cleaner = {
+			enabled = false
+		}
+		configuration = {
+			project = model.project.StandardProjectConfig {
+				baseName = projectName
+				rootPath = ".."
+			}
+			code = {
+				encoding = 'ISO-8859-1'
+				lineDelimiter = lineDelimiter
+				preferXtendStubs = false
+			}
+		}
 		
 		language = {
-			uri = "classpath:/org/eclipse/xtext/parsetree/unassignedtext/UnassignedTextTestLanguage.xtext"
-			fragment = @TestLanguagesFragments {}
+			grammarUri = "classpath:/org/eclipse/xtext/parsetree/unassignedtext/UnassignedTextTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {
+				generateStub = true
+			}
 		}
 	}
 }

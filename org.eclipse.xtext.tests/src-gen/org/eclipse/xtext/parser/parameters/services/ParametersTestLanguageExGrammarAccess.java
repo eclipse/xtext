@@ -3,21 +3,20 @@
  */
 package org.eclipse.xtext.parser.parameters.services;
 
-import com.google.inject.Singleton;
 import com.google.inject.Inject;
-
+import com.google.inject.Singleton;
 import java.util.List;
-
-import org.eclipse.xtext.*;
-import org.eclipse.xtext.service.GrammarProvider;
-import org.eclipse.xtext.service.AbstractElementFinder.*;
-
-import org.eclipse.xtext.parser.parameters.services.ParametersTestLanguageGrammarAccess;
+import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
+import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder;
+import org.eclipse.xtext.service.GrammarProvider;
 
 @Singleton
 public class ParametersTestLanguageExGrammarAccess extends AbstractGrammarElementFinder {
-	
 	
 	public class ParserRuleParametersElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.parameters.ParametersTestLanguageEx.ParserRuleParameters");
@@ -26,11 +25,10 @@ public class ParametersTestLanguageExGrammarAccess extends AbstractGrammarElemen
 		//ParserRuleParameters:
 		//	super::ParserRuleParameters;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//super::ParserRuleParameters
 		public RuleCall getParserRuleParametersParserRuleCall() { return cParserRuleParametersParserRuleCall; }
 	}
-
 	public class Scenario1Elements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.parameters.ParametersTestLanguageEx.Scenario1");
 		private final RuleCall cScenario1ParserRuleCall = (RuleCall)rule.eContents().get(1);
@@ -38,7 +36,7 @@ public class ParametersTestLanguageExGrammarAccess extends AbstractGrammarElemen
 		//Scenario1 <Param Scenario:
 		//	super::Scenario1<Param>
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//super::Scenario1<Param>
 		public RuleCall getScenario1ParserRuleCall() { return cScenario1ParserRuleCall; }
 	}
@@ -48,15 +46,15 @@ public class ParametersTestLanguageExGrammarAccess extends AbstractGrammarElemen
 	private final Scenario1Elements pScenario1;
 	
 	private final Grammar grammar;
-
+	
 	private final ParametersTestLanguageGrammarAccess gaParametersTestLanguage;
-
+	
 	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public ParametersTestLanguageExGrammarAccess(GrammarProvider grammarProvider,
-		ParametersTestLanguageGrammarAccess gaParametersTestLanguage,
-		TerminalsGrammarAccess gaTerminals) {
+			ParametersTestLanguageGrammarAccess gaParametersTestLanguage,
+			TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaParametersTestLanguage = gaParametersTestLanguage;
 		this.gaTerminals = gaTerminals;
@@ -85,11 +83,11 @@ public class ParametersTestLanguageExGrammarAccess extends AbstractGrammarElemen
 		return grammar;
 	}
 	
-
+	
 	public ParametersTestLanguageGrammarAccess getParametersTestLanguageGrammarAccess() {
 		return gaParametersTestLanguage;
 	}
-
+	
 	public TerminalsGrammarAccess getTerminalsGrammarAccess() {
 		return gaTerminals;
 	}
@@ -104,7 +102,7 @@ public class ParametersTestLanguageExGrammarAccess extends AbstractGrammarElemen
 	public ParserRule getParserRuleParametersRule() {
 		return getParserRuleParametersAccess().getRule();
 	}
-
+	
 	//Scenario1 <Param Scenario:
 	//	super::Scenario1<Param>
 	public Scenario1Elements getScenario1Access() {
@@ -114,7 +112,7 @@ public class ParametersTestLanguageExGrammarAccess extends AbstractGrammarElemen
 	public ParserRule getScenario1Rule() {
 		return getScenario1Access().getRule();
 	}
-
+	
 	//ParserRuleParameters:
 	//	{ParserRuleParameters} ('#1' scenario=super::Scenario1<true> | '#2' scenario=super::Scenario1<Param=false> | '#3'
 	//	scenario=Scenario2<true> | '#4' scenario=Scenario2<false> | => ('#5' scenario=Scenario2<true>) | => ('#6'
@@ -129,7 +127,7 @@ public class ParametersTestLanguageExGrammarAccess extends AbstractGrammarElemen
 	public ParserRule getParametersTestLanguageParserRuleParametersRule() {
 		return getParametersTestLanguageParserRuleParametersAccess().getRule();
 	}
-
+	
 	//Scenario1 <Param Scenario:
 	//	<Param> first=ID
 	//	| <!Param> second=ID
@@ -140,7 +138,7 @@ public class ParametersTestLanguageExGrammarAccess extends AbstractGrammarElemen
 	public ParserRule getParametersTestLanguageScenario1Rule() {
 		return getParametersTestLanguageScenario1Access().getRule();
 	}
-
+	
 	//Scenario2 <AllowKeyword Scenario:
 	//	first=IdOrKeyword<AllowKeyword>
 	public ParametersTestLanguageGrammarAccess.Scenario2Elements getScenario2Access() {
@@ -150,7 +148,7 @@ public class ParametersTestLanguageExGrammarAccess extends AbstractGrammarElemen
 	public ParserRule getScenario2Rule() {
 		return getScenario2Access().getRule();
 	}
-
+	
 	//Scenario3 <AllowKeyword Scenario:
 	//	=> first=IdOrKeyword<AllowKeyword> | second='keyword'
 	public ParametersTestLanguageGrammarAccess.Scenario3Elements getScenario3Access() {
@@ -160,7 +158,7 @@ public class ParametersTestLanguageExGrammarAccess extends AbstractGrammarElemen
 	public ParserRule getScenario3Rule() {
 		return getScenario3Access().getRule();
 	}
-
+	
 	//Scenario4 <AllowKeyword Scenario:
 	//	=> second=IdOrKeyword<AllowKeyword> 'keyword'
 	public ParametersTestLanguageGrammarAccess.Scenario4Elements getScenario4Access() {
@@ -170,7 +168,7 @@ public class ParametersTestLanguageExGrammarAccess extends AbstractGrammarElemen
 	public ParserRule getScenario4Rule() {
 		return getScenario4Access().getRule();
 	}
-
+	
 	//IdOrKeyword <Keyword>:
 	//	<Keyword> 'keyword'
 	//	| ID;
@@ -181,47 +179,47 @@ public class ParametersTestLanguageExGrammarAccess extends AbstractGrammarElemen
 	public ParserRule getIdOrKeywordRule() {
 		return getIdOrKeywordAccess().getRule();
 	}
-
+	
 	//terminal ID:
 	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
-	} 
-
+	}
+	
 	//terminal INT returns ecore::EInt:
 	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
-	} 
-
+	}
+	
 	//terminal STRING:
 	//	'"' ('\\' . | !('\\' | '"'))* '"' |
 	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
-	} 
-
+	}
+	
 	//terminal ML_COMMENT:
 	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal SL_COMMENT:
 	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal WS:
 	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
-	} 
-
+	}
+	
 	//terminal ANY_OTHER:
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
-	} 
+	}
 }

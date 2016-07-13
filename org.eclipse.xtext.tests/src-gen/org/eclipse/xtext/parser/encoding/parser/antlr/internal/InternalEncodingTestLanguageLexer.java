@@ -35,10 +35,10 @@ public class InternalEncodingTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_LEXEME;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalEncodingTestLanguage.g:144:13: ( ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '\\u00E4' | '\\u00F6' | '\\u00FC' | '\\u00DF' | '\\u00C4' | '\\u00D6' | '\\u00DC' )* )
-            // InternalEncodingTestLanguage.g:144:15: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '\\u00E4' | '\\u00F6' | '\\u00FC' | '\\u00DF' | '\\u00C4' | '\\u00D6' | '\\u00DC' )*
+            // InternalEncodingTestLanguage.g:134:13: ( ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '\\u00E4' | '\\u00F6' | '\\u00FC' | '\\u00DF' | '\\u00C4' | '\\u00D6' | '\\u00DC' )* )
+            // InternalEncodingTestLanguage.g:134:15: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '\\u00E4' | '\\u00F6' | '\\u00FC' | '\\u00DF' | '\\u00C4' | '\\u00D6' | '\\u00DC' )*
             {
-            // InternalEncodingTestLanguage.g:144:15: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '\\u00E4' | '\\u00F6' | '\\u00FC' | '\\u00DF' | '\\u00C4' | '\\u00D6' | '\\u00DC' )*
+            // InternalEncodingTestLanguage.g:134:15: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '\\u00E4' | '\\u00F6' | '\\u00FC' | '\\u00DF' | '\\u00C4' | '\\u00D6' | '\\u00DC' )*
             loop1:
             do {
                 int alt1=2;
@@ -87,10 +87,10 @@ public class InternalEncodingTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalEncodingTestLanguage.g:146:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // InternalEncodingTestLanguage.g:146:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalEncodingTestLanguage.g:136:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalEncodingTestLanguage.g:136:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // InternalEncodingTestLanguage.g:146:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalEncodingTestLanguage.g:136:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt2=0;
             loop2:
             do {
@@ -144,8 +144,8 @@ public class InternalEncodingTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalEncodingTestLanguage.g:148:16: ( . )
-            // InternalEncodingTestLanguage.g:148:18: .
+            // InternalEncodingTestLanguage.g:138:16: ( . )
+            // InternalEncodingTestLanguage.g:138:18: .
             {
             matchAny(); 
 

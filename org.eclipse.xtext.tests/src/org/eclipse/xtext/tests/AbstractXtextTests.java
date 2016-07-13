@@ -16,8 +16,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.ecore.xml.namespace.XMLNamespacePackage;
-import org.eclipse.emf.ecore.xml.type.XMLTypePackage;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.ISetup;
@@ -31,7 +29,6 @@ import org.eclipse.xtext.nodemodel.impl.InvariantChecker;
 import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
-import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
@@ -149,10 +146,6 @@ public abstract class AbstractXtextTests extends Assert implements ResourceLoadH
 
 	protected IGrammarAccess getGrammarAccess() {
 		return getInjector().getInstance(IGrammarAccess.class);
-	}
-
-	protected IParseTreeConstructor getParseTreeConstructor() {
-		return getInjector().getInstance(IParseTreeConstructor.class);
 	}
 
 	protected IResourceFactory getResourceFactory()  {
@@ -288,9 +281,7 @@ public abstract class AbstractXtextTests extends Assert implements ResourceLoadH
 	}
 
 	protected boolean shouldTestSerializer(XtextResource resource) {
-		return !isSerializerTestDisabled && !("org.eclipse.xtext.Xtext".equals(resource.getLanguageName()) 
-				// TODO: fix serializer issues in refactoring tests
-				|| "org.eclipse.xtext.ui.tests.refactoring.RefactoringTestLanguage".equals(resource.getLanguageName()));
+		return !isSerializerTestDisabled && !"org.eclipse.xtext.Xtext".equals(resource.getLanguageName());
 	}
 	
 	protected void disableSerializerTest() {

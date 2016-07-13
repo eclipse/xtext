@@ -3,20 +3,22 @@
  */
 package org.eclipse.xtext.parser.keywords.services;
 
-import com.google.inject.Singleton;
 import com.google.inject.Inject;
-
+import com.google.inject.Singleton;
 import java.util.List;
-
-import org.eclipse.xtext.*;
-import org.eclipse.xtext.service.GrammarProvider;
-import org.eclipse.xtext.service.AbstractElementFinder.*;
-
+import org.eclipse.xtext.Alternatives;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
+import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder;
+import org.eclipse.xtext.service.GrammarProvider;
 
 @Singleton
 public class KeywordsTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
-	
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.keywords.KeywordsTestLanguage.Model");
@@ -42,56 +44,56 @@ public class KeywordsTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		//	first?="foo\\bar" | second?="foo\\" | third?="\\bar" | forth?="\\" | fifth?="\"a\"" | sixth?='\'b\'' | seventh?="'c'"
 		//	| eighth?='"d"';
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//first?="foo\\bar" | second?="foo\\" | third?="\\bar" | forth?="\\" | fifth?="\"a\"" | sixth?='\'b\'' | seventh?="'c'" |
 		//eighth?='"d"'
 		public Alternatives getAlternatives() { return cAlternatives; }
-
+		
 		//first?="foo\\bar"
 		public Assignment getFirstAssignment_0() { return cFirstAssignment_0; }
-
+		
 		//"foo\\bar"
 		public Keyword getFirstFooBarKeyword_0_0() { return cFirstFooBarKeyword_0_0; }
-
+		
 		//second?="foo\\"
 		public Assignment getSecondAssignment_1() { return cSecondAssignment_1; }
-
+		
 		//"foo\\"
 		public Keyword getSecondFooKeyword_1_0() { return cSecondFooKeyword_1_0; }
-
+		
 		//third?="\\bar"
 		public Assignment getThirdAssignment_2() { return cThirdAssignment_2; }
-
+		
 		//"\\bar"
 		public Keyword getThirdBarKeyword_2_0() { return cThirdBarKeyword_2_0; }
-
+		
 		//forth?="\\"
 		public Assignment getForthAssignment_3() { return cForthAssignment_3; }
-
+		
 		//"\\"
 		public Keyword getForthReverseSolidusKeyword_3_0() { return cForthReverseSolidusKeyword_3_0; }
-
+		
 		//fifth?="\"a\""
 		public Assignment getFifthAssignment_4() { return cFifthAssignment_4; }
-
+		
 		//"\"a\""
 		public Keyword getFifthAKeyword_4_0() { return cFifthAKeyword_4_0; }
-
+		
 		//sixth?='\'b\''
 		public Assignment getSixthAssignment_5() { return cSixthAssignment_5; }
-
+		
 		//'\'b\''
 		public Keyword getSixthBKeyword_5_0() { return cSixthBKeyword_5_0; }
-
+		
 		//seventh?="'c'"
 		public Assignment getSeventhAssignment_6() { return cSeventhAssignment_6; }
-
+		
 		//"'c'"
 		public Keyword getSeventhCKeyword_6_0() { return cSeventhCKeyword_6_0; }
-
+		
 		//eighth?='"d"'
 		public Assignment getEighthAssignment_7() { return cEighthAssignment_7; }
-
+		
 		//'"d"'
 		public Keyword getEighthDKeyword_7_0() { return cEighthDKeyword_7_0; }
 	}
@@ -100,12 +102,12 @@ public class KeywordsTestLanguageGrammarAccess extends AbstractGrammarElementFin
 	private final ModelElements pModel;
 	
 	private final Grammar grammar;
-
+	
 	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public KeywordsTestLanguageGrammarAccess(GrammarProvider grammarProvider,
-		TerminalsGrammarAccess gaTerminals) {
+			TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
 		this.pModel = new ModelElements();
@@ -132,7 +134,7 @@ public class KeywordsTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		return grammar;
 	}
 	
-
+	
 	public TerminalsGrammarAccess getTerminalsGrammarAccess() {
 		return gaTerminals;
 	}
@@ -148,47 +150,47 @@ public class KeywordsTestLanguageGrammarAccess extends AbstractGrammarElementFin
 	public ParserRule getModelRule() {
 		return getModelAccess().getRule();
 	}
-
+	
 	//terminal ID:
 	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
-	} 
-
+	}
+	
 	//terminal INT returns ecore::EInt:
 	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
-	} 
-
+	}
+	
 	//terminal STRING:
 	//	'"' ('\\' . | !('\\' | '"'))* '"' |
 	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
-	} 
-
+	}
+	
 	//terminal ML_COMMENT:
 	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal SL_COMMENT:
 	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal WS:
 	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
-	} 
-
+	}
+	
 	//terminal ANY_OTHER:
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
-	} 
+	}
 }

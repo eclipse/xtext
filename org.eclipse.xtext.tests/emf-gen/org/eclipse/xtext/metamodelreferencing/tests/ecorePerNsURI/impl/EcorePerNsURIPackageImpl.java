@@ -103,19 +103,16 @@ public class EcorePerNsURIPackageImpl extends EPackageImpl implements EcorePerNs
 		// Obtain or create and register interdependencies
 		EcorePerPlatformPluginPackageImpl theEcorePerPlatformPluginPackage = (EcorePerPlatformPluginPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(EcorePerPlatformPluginPackage.eNS_URI) instanceof EcorePerPlatformPluginPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(EcorePerPlatformPluginPackage.eNS_URI) : EcorePerPlatformPluginPackage.eINSTANCE);
 		EcorePerPlatformResourcePackageImpl theEcorePerPlatformResourcePackage = (EcorePerPlatformResourcePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(EcorePerPlatformResourcePackage.eNS_URI) instanceof EcorePerPlatformResourcePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(EcorePerPlatformResourcePackage.eNS_URI) : EcorePerPlatformResourcePackage.eINSTANCE);
-		EcoreReferencePackageImpl theEcoreReferencePackage = (EcoreReferencePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(EcoreReferencePackage.eNS_URI) instanceof EcoreReferencePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(EcoreReferencePackage.eNS_URI) : EcoreReferencePackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theEcorePerNsURIPackage.createPackageContents();
 		theEcorePerPlatformPluginPackage.createPackageContents();
 		theEcorePerPlatformResourcePackage.createPackageContents();
-		theEcoreReferencePackage.createPackageContents();
 
 		// Initialize created meta-data
 		theEcorePerNsURIPackage.initializePackageContents();
 		theEcorePerPlatformPluginPackage.initializePackageContents();
 		theEcorePerPlatformResourcePackage.initializePackageContents();
-		theEcoreReferencePackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
 		theEcorePerNsURIPackage.freeze();

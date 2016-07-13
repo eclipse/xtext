@@ -31,7 +31,7 @@ public class AmetamodelFactoryImpl extends EFactoryImpl implements AmetamodelFac
 	 */
 	public static AmetamodelFactory init() {
 		try {
-			AmetamodelFactory theAmetamodelFactory = (AmetamodelFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/xtext/tests/grammarinheritance"); 
+			AmetamodelFactory theAmetamodelFactory = (AmetamodelFactory)EPackage.Registry.INSTANCE.getEFactory(AmetamodelPackage.eNS_URI);
 			if (theAmetamodelFactory != null) {
 				return theAmetamodelFactory;
 			}

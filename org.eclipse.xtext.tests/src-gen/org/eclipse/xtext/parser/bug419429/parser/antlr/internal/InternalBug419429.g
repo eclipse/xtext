@@ -5,7 +5,6 @@ grammar InternalBug419429;
 
 options {
 	superClass=AbstractInternalAntlrParser;
-	
 }
 
 @lexer::header {
@@ -17,7 +16,7 @@ import org.eclipse.xtext.parser.antlr.Lexer;
 }
 
 @parser::header {
-package org.eclipse.xtext.parser.bug419429.parser.antlr.internal; 
+package org.eclipse.xtext.parser.bug419429.parser.antlr.internal;
 
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
@@ -35,67 +34,61 @@ import org.eclipse.xtext.parser.bug419429.services.Bug419429GrammarAccess;
 @parser::members {
 
  	private Bug419429GrammarAccess grammarAccess;
- 	
+
     public InternalBug419429Parser(TokenStream input, Bug419429GrammarAccess grammarAccess) {
         this(input);
         this.grammarAccess = grammarAccess;
         registerRules(grammarAccess.getGrammar());
     }
-    
+
     @Override
     protected String getFirstRuleName() {
-    	return "EReference";	
+    	return "EReference";
    	}
-   	
+
    	@Override
    	protected Bug419429GrammarAccess getGrammarAccess() {
    		return grammarAccess;
    	}
+
 }
 
-@rulecatch { 
-    catch (RecognitionException re) { 
-        recover(input,re); 
+@rulecatch {
+    catch (RecognitionException re) {
+        recover(input,re);
         appendSkippedTokens();
-    } 
+    }
 }
-
-
-
 
 // Entry rule entryRuleEReference
-entryRuleEReference returns [EObject current=null] 
-	:
+entryRuleEReference returns [EObject current=null]:
 	{ newCompositeNode(grammarAccess.getEReferenceRule()); }
-	 iv_ruleEReference=ruleEReference 
-	 { $current=$iv_ruleEReference.current; } 
-	 EOF 
-;
+	iv_ruleEReference=ruleEReference
+	{ $current=$iv_ruleEReference.current; }
+	EOF;
 
 // Rule EReference
-ruleEReference returns [EObject current=null] 
-    @init { enterRule(); 
-    }
-    @after { leaveRule(); }:
-(
-(
-		{
-			if ($current==null) {
-	            $current = createModelElement(grammarAccess.getEReferenceRule());
-	        }
-        }
-	otherlv_0=RULE_ID
-	{
-		newLeafNode(otherlv_0, grammarAccess.getEReferenceAccess().getETypeEClassifierCrossReference_0()); 
-	}
-
-)
-)
+ruleEReference returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			{
+				if ($current==null) {
+					$current = createModelElement(grammarAccess.getEReferenceRule());
+				}
+			}
+			otherlv_0=RULE_ID
+			{
+				newLeafNode(otherlv_0, grammarAccess.getEReferenceAccess().getETypeEClassifierCrossReference_0());
+			}
+		)
+	)
 ;
-
-
-
-
 
 RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
@@ -110,5 +103,3 @@ RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
 RULE_WS : (' '|'\t'|'\r'|'\n')+;
 
 RULE_ANY_OTHER : .;
-
-

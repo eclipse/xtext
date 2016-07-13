@@ -5,7 +5,6 @@ grammar InternalTreeTestLanguage;
 
 options {
 	superClass=AbstractInternalAntlrParser;
-	
 }
 
 @lexer::header {
@@ -17,7 +16,7 @@ import org.eclipse.xtext.parser.antlr.Lexer;
 }
 
 @parser::header {
-package org.eclipse.xtext.testlanguages.parser.antlr.internal; 
+package org.eclipse.xtext.testlanguages.parser.antlr.internal;
 
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
@@ -35,163 +34,157 @@ import org.eclipse.xtext.testlanguages.services.TreeTestLanguageGrammarAccess;
 @parser::members {
 
  	private TreeTestLanguageGrammarAccess grammarAccess;
- 	
+
     public InternalTreeTestLanguageParser(TokenStream input, TreeTestLanguageGrammarAccess grammarAccess) {
         this(input);
         this.grammarAccess = grammarAccess;
         registerRules(grammarAccess.getGrammar());
     }
-    
+
     @Override
     protected String getFirstRuleName() {
-    	return "Model";	
+    	return "Model";
    	}
-   	
+
    	@Override
    	protected TreeTestLanguageGrammarAccess getGrammarAccess() {
    		return grammarAccess;
    	}
+
 }
 
-@rulecatch { 
-    catch (RecognitionException re) { 
-        recover(input,re); 
+@rulecatch {
+    catch (RecognitionException re) {
+        recover(input,re);
         appendSkippedTokens();
-    } 
+    }
 }
-
-
-
 
 // Entry rule entryRuleModel
-entryRuleModel returns [EObject current=null] 
-	:
+entryRuleModel returns [EObject current=null]:
 	{ newCompositeNode(grammarAccess.getModelRule()); }
-	 iv_ruleModel=ruleModel 
-	 { $current=$iv_ruleModel.current; } 
-	 EOF 
-;
+	iv_ruleModel=ruleModel
+	{ $current=$iv_ruleModel.current; }
+	EOF;
 
 // Rule Model
-ruleModel returns [EObject current=null] 
-    @init { enterRule(); 
-    }
-    @after { leaveRule(); }:
-(
-(
-		{ 
-	        newCompositeNode(grammarAccess.getModelAccess().getChildrenNodeParserRuleCall_0()); 
-	    }
-		lv_children_0_0=ruleNode		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getModelRule());
-	        }
-       		add(
-       			$current, 
-       			"children",
-        		lv_children_0_0, 
-        		"org.eclipse.xtext.testlanguages.TreeTestLanguage.Node");
-	        afterParserOrEnumRuleCall();
-	    }
-
-)
-)*
+ruleModel returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			{
+				newCompositeNode(grammarAccess.getModelAccess().getChildrenNodeParserRuleCall_0());
+			}
+			lv_children_0_0=ruleNode
+			{
+				if ($current==null) {
+					$current = createModelElementForParent(grammarAccess.getModelRule());
+				}
+				add(
+					$current,
+					"children",
+					lv_children_0_0,
+					"org.eclipse.xtext.testlanguages.TreeTestLanguage.Node");
+				afterParserOrEnumRuleCall();
+			}
+		)
+	)*
 ;
-
-
-
-
 
 // Entry rule entryRuleNode
-entryRuleNode returns [EObject current=null] 
-	:
+entryRuleNode returns [EObject current=null]:
 	{ newCompositeNode(grammarAccess.getNodeRule()); }
-	 iv_ruleNode=ruleNode 
-	 { $current=$iv_ruleNode.current; } 
-	 EOF 
-;
+	iv_ruleNode=ruleNode
+	{ $current=$iv_ruleNode.current; }
+	EOF;
 
 // Rule Node
-ruleNode returns [EObject current=null] 
-    @init { enterRule(); 
-    }
-    @after { leaveRule(); }:
-((
-(
-		lv_name_0_0=RULE_ID
+ruleNode returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			(
+				lv_name_0_0=RULE_ID
+				{
+					newLeafNode(lv_name_0_0, grammarAccess.getNodeAccess().getNameIDTerminalRuleCall_0_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getNodeRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"name",
+						lv_name_0_0,
+						"org.eclipse.xtext.common.Terminals.ID");
+				}
+			)
+		)
+		otherlv_1='('
 		{
-			newLeafNode(lv_name_0_0, grammarAccess.getNodeAccess().getNameIDTerminalRuleCall_0_0()); 
+			newLeafNode(otherlv_1, grammarAccess.getNodeAccess().getLeftParenthesisKeyword_1());
 		}
+		(
+			(
+				lv_attrib_2_0=RULE_STRING
+				{
+					newLeafNode(lv_attrib_2_0, grammarAccess.getNodeAccess().getAttribSTRINGTerminalRuleCall_2_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getNodeRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"attrib",
+						lv_attrib_2_0,
+						"org.eclipse.xtext.common.Terminals.STRING");
+				}
+			)
+		)
+		otherlv_3=')'
 		{
-	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getNodeRule());
-	        }
-       		setWithLastConsumed(
-       			$current, 
-       			"name",
-        		lv_name_0_0, 
-        		"org.eclipse.xtext.common.Terminals.ID");
-	    }
-
-)
-)	otherlv_1='(' 
-    {
-    	newLeafNode(otherlv_1, grammarAccess.getNodeAccess().getLeftParenthesisKeyword_1());
-    }
-(
-(
-		lv_attrib_2_0=RULE_STRING
-		{
-			newLeafNode(lv_attrib_2_0, grammarAccess.getNodeAccess().getAttribSTRINGTerminalRuleCall_2_0()); 
+			newLeafNode(otherlv_3, grammarAccess.getNodeAccess().getRightParenthesisKeyword_3());
 		}
+		otherlv_4='{'
 		{
-	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getNodeRule());
-	        }
-       		setWithLastConsumed(
-       			$current, 
-       			"attrib",
-        		lv_attrib_2_0, 
-        		"org.eclipse.xtext.common.Terminals.STRING");
-	    }
-
-)
-)	otherlv_3=')' 
-    {
-    	newLeafNode(otherlv_3, grammarAccess.getNodeAccess().getRightParenthesisKeyword_3());
-    }
-	otherlv_4='{' 
-    {
-    	newLeafNode(otherlv_4, grammarAccess.getNodeAccess().getLeftCurlyBracketKeyword_4());
-    }
-(
-(
-		{ 
-	        newCompositeNode(grammarAccess.getNodeAccess().getChildrenNodeParserRuleCall_5_0()); 
-	    }
-		lv_children_5_0=ruleNode		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getNodeRule());
-	        }
-       		add(
-       			$current, 
-       			"children",
-        		lv_children_5_0, 
-        		"org.eclipse.xtext.testlanguages.TreeTestLanguage.Node");
-	        afterParserOrEnumRuleCall();
-	    }
-
-)
-)*	otherlv_6='};' 
-    {
-    	newLeafNode(otherlv_6, grammarAccess.getNodeAccess().getRightCurlyBracketSemicolonKeyword_6());
-    }
-)
+			newLeafNode(otherlv_4, grammarAccess.getNodeAccess().getLeftCurlyBracketKeyword_4());
+		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getNodeAccess().getChildrenNodeParserRuleCall_5_0());
+				}
+				lv_children_5_0=ruleNode
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getNodeRule());
+					}
+					add(
+						$current,
+						"children",
+						lv_children_5_0,
+						"org.eclipse.xtext.testlanguages.TreeTestLanguage.Node");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)*
+		otherlv_6='};'
+		{
+			newLeafNode(otherlv_6, grammarAccess.getNodeAccess().getRightCurlyBracketSemicolonKeyword_6());
+		}
+	)
 ;
-
-
-
-
 
 RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
@@ -206,5 +199,3 @@ RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
 RULE_WS : (' '|'\t'|'\r'|'\n')+;
 
 RULE_ANY_OTHER : .;
-
-

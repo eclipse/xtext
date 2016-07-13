@@ -3,20 +3,23 @@
  */
 package org.eclipse.xtext.serializer.services;
 
-import com.google.inject.Singleton;
 import com.google.inject.Inject;
-
+import com.google.inject.Singleton;
 import java.util.List;
-
-import org.eclipse.xtext.*;
-import org.eclipse.xtext.service.GrammarProvider;
-import org.eclipse.xtext.service.AbstractElementFinder.*;
-
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.Group;
+import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
+import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder;
+import org.eclipse.xtext.service.GrammarProvider;
 
 @Singleton
 public class HiddenTokenSequencerTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
-	
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.HiddenTokenSequencerTestLanguage.Model");
@@ -26,14 +29,13 @@ public class HiddenTokenSequencerTestLanguageGrammarAccess extends AbstractGramm
 		//Model:
 		//	domainModel=DomainModel;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//domainModel=DomainModel
 		public Assignment getDomainModelAssignment() { return cDomainModelAssignment; }
-
+		
 		//DomainModel
 		public RuleCall getDomainModelDomainModelParserRuleCall_0() { return cDomainModelDomainModelParserRuleCall_0; }
 	}
-
 	public class DomainModelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.HiddenTokenSequencerTestLanguage.DomainModel");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -47,23 +49,22 @@ public class HiddenTokenSequencerTestLanguageGrammarAccess extends AbstractGramm
 		//	entities+=Entity*
 		//	'end';
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'entities' entities+=Entity* 'end'
 		public Group getGroup() { return cGroup; }
-
+		
 		//'entities'
 		public Keyword getEntitiesKeyword_0() { return cEntitiesKeyword_0; }
-
+		
 		//entities+=Entity*
 		public Assignment getEntitiesAssignment_1() { return cEntitiesAssignment_1; }
-
+		
 		//Entity
 		public RuleCall getEntitiesEntityParserRuleCall_1_0() { return cEntitiesEntityParserRuleCall_1_0; }
-
+		
 		//'end'
 		public Keyword getEndKeyword_2() { return cEndKeyword_2; }
 	}
-
 	public class EntityElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.HiddenTokenSequencerTestLanguage.Entity");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -76,19 +77,19 @@ public class HiddenTokenSequencerTestLanguageGrammarAccess extends AbstractGramm
 		//	name=ID
 		//	description=STRING;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//name=ID description=STRING
 		public Group getGroup() { return cGroup; }
-
+		
 		//name=ID
 		public Assignment getNameAssignment_0() { return cNameAssignment_0; }
-
+		
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_0_0() { return cNameIDTerminalRuleCall_0_0; }
-
+		
 		//description=STRING
 		public Assignment getDescriptionAssignment_1() { return cDescriptionAssignment_1; }
-
+		
 		//STRING
 		public RuleCall getDescriptionSTRINGTerminalRuleCall_1_0() { return cDescriptionSTRINGTerminalRuleCall_1_0; }
 	}
@@ -99,12 +100,12 @@ public class HiddenTokenSequencerTestLanguageGrammarAccess extends AbstractGramm
 	private final EntityElements pEntity;
 	
 	private final Grammar grammar;
-
+	
 	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public HiddenTokenSequencerTestLanguageGrammarAccess(GrammarProvider grammarProvider,
-		TerminalsGrammarAccess gaTerminals) {
+			TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
 		this.pModel = new ModelElements();
@@ -133,7 +134,7 @@ public class HiddenTokenSequencerTestLanguageGrammarAccess extends AbstractGramm
 		return grammar;
 	}
 	
-
+	
 	public TerminalsGrammarAccess getTerminalsGrammarAccess() {
 		return gaTerminals;
 	}
@@ -148,7 +149,7 @@ public class HiddenTokenSequencerTestLanguageGrammarAccess extends AbstractGramm
 	public ParserRule getModelRule() {
 		return getModelAccess().getRule();
 	}
-
+	
 	/// * SuppressWarnings[noInstantiation] * / DomainModel:
 	//	'entities'
 	//	entities+=Entity*
@@ -160,7 +161,7 @@ public class HiddenTokenSequencerTestLanguageGrammarAccess extends AbstractGramm
 	public ParserRule getDomainModelRule() {
 		return getDomainModelAccess().getRule();
 	}
-
+	
 	//Entity:
 	//	name=ID
 	//	description=STRING;
@@ -171,47 +172,47 @@ public class HiddenTokenSequencerTestLanguageGrammarAccess extends AbstractGramm
 	public ParserRule getEntityRule() {
 		return getEntityAccess().getRule();
 	}
-
+	
 	//terminal ID:
 	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
-	} 
-
+	}
+	
 	//terminal INT returns ecore::EInt:
 	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
-	} 
-
+	}
+	
 	//terminal STRING:
 	//	'"' ('\\' . | !('\\' | '"'))* '"' |
 	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
-	} 
-
+	}
+	
 	//terminal ML_COMMENT:
 	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal SL_COMMENT:
 	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal WS:
 	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
-	} 
-
+	}
+	
 	//terminal ANY_OTHER:
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
-	} 
+	}
 }

@@ -1,4 +1,4 @@
-package org.eclipse.xtext.dummy.parser.antlr.internal; 
+package org.eclipse.xtext.dummy.parser.antlr.internal;
 
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
@@ -54,18 +54,18 @@ public class InternalDummyTestLanguageParser extends AbstractInternalAntlrParser
 
 
      	private DummyTestLanguageGrammarAccess grammarAccess;
-     	
+
         public InternalDummyTestLanguageParser(TokenStream input, DummyTestLanguageGrammarAccess grammarAccess) {
             this(input);
             this.grammarAccess = grammarAccess;
             registerRules(grammarAccess.getGrammar());
         }
-        
+
         @Override
         protected String getFirstRuleName() {
-        	return "Model";	
+        	return "Model";
        	}
-       	
+
        	@Override
        	protected DummyTestLanguageGrammarAccess getGrammarAccess() {
        		return grammarAccess;
@@ -73,8 +73,9 @@ public class InternalDummyTestLanguageParser extends AbstractInternalAntlrParser
 
 
 
+
     // $ANTLR start "entryRuleModel"
-    // InternalDummyTestLanguage.g:67:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
+    // InternalDummyTestLanguage.g:64:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
     public final EObject entryRuleModel() throws RecognitionException {
         EObject current = null;
 
@@ -82,8 +83,8 @@ public class InternalDummyTestLanguageParser extends AbstractInternalAntlrParser
 
 
         try {
-            // InternalDummyTestLanguage.g:68:2: (iv_ruleModel= ruleModel EOF )
-            // InternalDummyTestLanguage.g:69:2: iv_ruleModel= ruleModel EOF
+            // InternalDummyTestLanguage.g:64:46: (iv_ruleModel= ruleModel EOF )
+            // InternalDummyTestLanguage.g:65:2: iv_ruleModel= ruleModel EOF
             {
              newCompositeNode(grammarAccess.getModelRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -97,11 +98,11 @@ public class InternalDummyTestLanguageParser extends AbstractInternalAntlrParser
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -110,20 +111,21 @@ public class InternalDummyTestLanguageParser extends AbstractInternalAntlrParser
 
 
     // $ANTLR start "ruleModel"
-    // InternalDummyTestLanguage.g:76:1: ruleModel returns [EObject current=null] : ( (lv_elements_0_0= ruleElement ) )* ;
+    // InternalDummyTestLanguage.g:71:1: ruleModel returns [EObject current=null] : ( (lv_elements_0_0= ruleElement ) )* ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
         EObject lv_elements_0_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalDummyTestLanguage.g:79:28: ( ( (lv_elements_0_0= ruleElement ) )* )
-            // InternalDummyTestLanguage.g:80:1: ( (lv_elements_0_0= ruleElement ) )*
+            // InternalDummyTestLanguage.g:77:2: ( ( (lv_elements_0_0= ruleElement ) )* )
+            // InternalDummyTestLanguage.g:78:2: ( (lv_elements_0_0= ruleElement ) )*
             {
-            // InternalDummyTestLanguage.g:80:1: ( (lv_elements_0_0= ruleElement ) )*
+            // InternalDummyTestLanguage.g:78:2: ( (lv_elements_0_0= ruleElement ) )*
             loop1:
             do {
                 int alt1=2;
@@ -136,30 +138,30 @@ public class InternalDummyTestLanguageParser extends AbstractInternalAntlrParser
 
                 switch (alt1) {
             	case 1 :
-            	    // InternalDummyTestLanguage.g:81:1: (lv_elements_0_0= ruleElement )
+            	    // InternalDummyTestLanguage.g:79:3: (lv_elements_0_0= ruleElement )
             	    {
-            	    // InternalDummyTestLanguage.g:81:1: (lv_elements_0_0= ruleElement )
-            	    // InternalDummyTestLanguage.g:82:3: lv_elements_0_0= ruleElement
+            	    // InternalDummyTestLanguage.g:79:3: (lv_elements_0_0= ruleElement )
+            	    // InternalDummyTestLanguage.g:80:4: lv_elements_0_0= ruleElement
             	    {
-            	     
-            	    	        newCompositeNode(grammarAccess.getModelAccess().getElementsElementParserRuleCall_0()); 
-            	    	    
+
+            	    				newCompositeNode(grammarAccess.getModelAccess().getElementsElementParserRuleCall_0());
+            	    			
             	    pushFollow(FollowSets000.FOLLOW_3);
             	    lv_elements_0_0=ruleElement();
 
             	    state._fsp--;
 
 
-            	    	        if (current==null) {
-            	    	            current = createModelElementForParent(grammarAccess.getModelRule());
-            	    	        }
-            	           		add(
-            	           			current, 
-            	           			"elements",
-            	            		lv_elements_0_0, 
-            	            		"org.eclipse.xtext.dummy.DummyTestLanguage.Element");
-            	    	        afterParserOrEnumRuleCall();
-            	    	    
+            	    				if (current==null) {
+            	    					current = createModelElementForParent(grammarAccess.getModelRule());
+            	    				}
+            	    				add(
+            	    					current,
+            	    					"elements",
+            	    					lv_elements_0_0,
+            	    					"org.eclipse.xtext.dummy.DummyTestLanguage.Element");
+            	    				afterParserOrEnumRuleCall();
+            	    			
 
             	    }
 
@@ -175,13 +177,15 @@ public class InternalDummyTestLanguageParser extends AbstractInternalAntlrParser
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -190,7 +194,7 @@ public class InternalDummyTestLanguageParser extends AbstractInternalAntlrParser
 
 
     // $ANTLR start "entryRuleElement"
-    // InternalDummyTestLanguage.g:106:1: entryRuleElement returns [EObject current=null] : iv_ruleElement= ruleElement EOF ;
+    // InternalDummyTestLanguage.g:100:1: entryRuleElement returns [EObject current=null] : iv_ruleElement= ruleElement EOF ;
     public final EObject entryRuleElement() throws RecognitionException {
         EObject current = null;
 
@@ -198,8 +202,8 @@ public class InternalDummyTestLanguageParser extends AbstractInternalAntlrParser
 
 
         try {
-            // InternalDummyTestLanguage.g:107:2: (iv_ruleElement= ruleElement EOF )
-            // InternalDummyTestLanguage.g:108:2: iv_ruleElement= ruleElement EOF
+            // InternalDummyTestLanguage.g:100:48: (iv_ruleElement= ruleElement EOF )
+            // InternalDummyTestLanguage.g:101:2: iv_ruleElement= ruleElement EOF
             {
              newCompositeNode(grammarAccess.getElementRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -213,11 +217,11 @@ public class InternalDummyTestLanguageParser extends AbstractInternalAntlrParser
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -226,7 +230,7 @@ public class InternalDummyTestLanguageParser extends AbstractInternalAntlrParser
 
 
     // $ANTLR start "ruleElement"
-    // InternalDummyTestLanguage.g:115:1: ruleElement returns [EObject current=null] : ( ( (lv_optional_0_0= 'optional' ) )? otherlv_1= 'element' ( (lv_name_2_0= RULE_ID ) ) ( (lv_descriptions_3_0= RULE_STRING ) )* otherlv_4= ';' ) ;
+    // InternalDummyTestLanguage.g:107:1: ruleElement returns [EObject current=null] : ( ( (lv_optional_0_0= 'optional' ) )? otherlv_1= 'element' ( (lv_name_2_0= RULE_ID ) ) ( (lv_descriptions_3_0= RULE_STRING ) )* otherlv_4= ';' ) ;
     public final EObject ruleElement() throws RecognitionException {
         EObject current = null;
 
@@ -236,16 +240,17 @@ public class InternalDummyTestLanguageParser extends AbstractInternalAntlrParser
         Token lv_descriptions_3_0=null;
         Token otherlv_4=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalDummyTestLanguage.g:118:28: ( ( ( (lv_optional_0_0= 'optional' ) )? otherlv_1= 'element' ( (lv_name_2_0= RULE_ID ) ) ( (lv_descriptions_3_0= RULE_STRING ) )* otherlv_4= ';' ) )
-            // InternalDummyTestLanguage.g:119:1: ( ( (lv_optional_0_0= 'optional' ) )? otherlv_1= 'element' ( (lv_name_2_0= RULE_ID ) ) ( (lv_descriptions_3_0= RULE_STRING ) )* otherlv_4= ';' )
+            // InternalDummyTestLanguage.g:113:2: ( ( ( (lv_optional_0_0= 'optional' ) )? otherlv_1= 'element' ( (lv_name_2_0= RULE_ID ) ) ( (lv_descriptions_3_0= RULE_STRING ) )* otherlv_4= ';' ) )
+            // InternalDummyTestLanguage.g:114:2: ( ( (lv_optional_0_0= 'optional' ) )? otherlv_1= 'element' ( (lv_name_2_0= RULE_ID ) ) ( (lv_descriptions_3_0= RULE_STRING ) )* otherlv_4= ';' )
             {
-            // InternalDummyTestLanguage.g:119:1: ( ( (lv_optional_0_0= 'optional' ) )? otherlv_1= 'element' ( (lv_name_2_0= RULE_ID ) ) ( (lv_descriptions_3_0= RULE_STRING ) )* otherlv_4= ';' )
-            // InternalDummyTestLanguage.g:119:2: ( (lv_optional_0_0= 'optional' ) )? otherlv_1= 'element' ( (lv_name_2_0= RULE_ID ) ) ( (lv_descriptions_3_0= RULE_STRING ) )* otherlv_4= ';'
+            // InternalDummyTestLanguage.g:114:2: ( ( (lv_optional_0_0= 'optional' ) )? otherlv_1= 'element' ( (lv_name_2_0= RULE_ID ) ) ( (lv_descriptions_3_0= RULE_STRING ) )* otherlv_4= ';' )
+            // InternalDummyTestLanguage.g:115:3: ( (lv_optional_0_0= 'optional' ) )? otherlv_1= 'element' ( (lv_name_2_0= RULE_ID ) ) ( (lv_descriptions_3_0= RULE_STRING ) )* otherlv_4= ';'
             {
-            // InternalDummyTestLanguage.g:119:2: ( (lv_optional_0_0= 'optional' ) )?
+            // InternalDummyTestLanguage.g:115:3: ( (lv_optional_0_0= 'optional' ) )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -254,21 +259,21 @@ public class InternalDummyTestLanguageParser extends AbstractInternalAntlrParser
             }
             switch (alt2) {
                 case 1 :
-                    // InternalDummyTestLanguage.g:120:1: (lv_optional_0_0= 'optional' )
+                    // InternalDummyTestLanguage.g:116:4: (lv_optional_0_0= 'optional' )
                     {
-                    // InternalDummyTestLanguage.g:120:1: (lv_optional_0_0= 'optional' )
-                    // InternalDummyTestLanguage.g:121:3: lv_optional_0_0= 'optional'
+                    // InternalDummyTestLanguage.g:116:4: (lv_optional_0_0= 'optional' )
+                    // InternalDummyTestLanguage.g:117:5: lv_optional_0_0= 'optional'
                     {
                     lv_optional_0_0=(Token)match(input,11,FollowSets000.FOLLOW_4); 
 
-                            newLeafNode(lv_optional_0_0, grammarAccess.getElementAccess().getOptionalOptionalKeyword_0_0());
-                        
+                    					newLeafNode(lv_optional_0_0, grammarAccess.getElementAccess().getOptionalOptionalKeyword_0_0());
+                    				
 
-                    	        if (current==null) {
-                    	            current = createModelElement(grammarAccess.getElementRule());
-                    	        }
-                           		setWithLastConsumed(current, "optional", true, "optional");
-                    	    
+                    					if (current==null) {
+                    						current = createModelElement(grammarAccess.getElementRule());
+                    					}
+                    					setWithLastConsumed(current, "optional", true, "optional");
+                    				
 
                     }
 
@@ -280,35 +285,35 @@ public class InternalDummyTestLanguageParser extends AbstractInternalAntlrParser
 
             otherlv_1=(Token)match(input,12,FollowSets000.FOLLOW_5); 
 
-                	newLeafNode(otherlv_1, grammarAccess.getElementAccess().getElementKeyword_1());
-                
-            // InternalDummyTestLanguage.g:138:1: ( (lv_name_2_0= RULE_ID ) )
-            // InternalDummyTestLanguage.g:139:1: (lv_name_2_0= RULE_ID )
+            			newLeafNode(otherlv_1, grammarAccess.getElementAccess().getElementKeyword_1());
+            		
+            // InternalDummyTestLanguage.g:133:3: ( (lv_name_2_0= RULE_ID ) )
+            // InternalDummyTestLanguage.g:134:4: (lv_name_2_0= RULE_ID )
             {
-            // InternalDummyTestLanguage.g:139:1: (lv_name_2_0= RULE_ID )
-            // InternalDummyTestLanguage.g:140:3: lv_name_2_0= RULE_ID
+            // InternalDummyTestLanguage.g:134:4: (lv_name_2_0= RULE_ID )
+            // InternalDummyTestLanguage.g:135:5: lv_name_2_0= RULE_ID
             {
             lv_name_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_6); 
 
-            			newLeafNode(lv_name_2_0, grammarAccess.getElementAccess().getNameIDTerminalRuleCall_2_0()); 
-            		
+            					newLeafNode(lv_name_2_0, grammarAccess.getElementAccess().getNameIDTerminalRuleCall_2_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getElementRule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"name",
-                    		lv_name_2_0, 
-                    		"org.eclipse.xtext.common.Terminals.ID");
-            	    
-
-            }
-
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getElementRule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"name",
+            						lv_name_2_0,
+            						"org.eclipse.xtext.common.Terminals.ID");
+            				
 
             }
 
-            // InternalDummyTestLanguage.g:156:2: ( (lv_descriptions_3_0= RULE_STRING ) )*
+
+            }
+
+            // InternalDummyTestLanguage.g:151:3: ( (lv_descriptions_3_0= RULE_STRING ) )*
             loop3:
             do {
                 int alt3=2;
@@ -321,25 +326,25 @@ public class InternalDummyTestLanguageParser extends AbstractInternalAntlrParser
 
                 switch (alt3) {
             	case 1 :
-            	    // InternalDummyTestLanguage.g:157:1: (lv_descriptions_3_0= RULE_STRING )
+            	    // InternalDummyTestLanguage.g:152:4: (lv_descriptions_3_0= RULE_STRING )
             	    {
-            	    // InternalDummyTestLanguage.g:157:1: (lv_descriptions_3_0= RULE_STRING )
-            	    // InternalDummyTestLanguage.g:158:3: lv_descriptions_3_0= RULE_STRING
+            	    // InternalDummyTestLanguage.g:152:4: (lv_descriptions_3_0= RULE_STRING )
+            	    // InternalDummyTestLanguage.g:153:5: lv_descriptions_3_0= RULE_STRING
             	    {
             	    lv_descriptions_3_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_6); 
 
-            	    			newLeafNode(lv_descriptions_3_0, grammarAccess.getElementAccess().getDescriptionsSTRINGTerminalRuleCall_3_0()); 
-            	    		
+            	    					newLeafNode(lv_descriptions_3_0, grammarAccess.getElementAccess().getDescriptionsSTRINGTerminalRuleCall_3_0());
+            	    				
 
-            	    	        if (current==null) {
-            	    	            current = createModelElement(grammarAccess.getElementRule());
-            	    	        }
-            	           		addWithLastConsumed(
-            	           			current, 
-            	           			"descriptions",
-            	            		lv_descriptions_3_0, 
-            	            		"org.eclipse.xtext.common.Terminals.STRING");
-            	    	    
+            	    					if (current==null) {
+            	    						current = createModelElement(grammarAccess.getElementRule());
+            	    					}
+            	    					addWithLastConsumed(
+            	    						current,
+            	    						"descriptions",
+            	    						lv_descriptions_3_0,
+            	    						"org.eclipse.xtext.common.Terminals.STRING");
+            	    				
 
             	    }
 
@@ -354,21 +359,23 @@ public class InternalDummyTestLanguageParser extends AbstractInternalAntlrParser
 
             otherlv_4=(Token)match(input,13,FollowSets000.FOLLOW_2); 
 
-                	newLeafNode(otherlv_4, grammarAccess.getElementAccess().getSemicolonKeyword_4());
-                
+            			newLeafNode(otherlv_4, grammarAccess.getElementAccess().getSemicolonKeyword_4());
+            		
 
             }
 
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;

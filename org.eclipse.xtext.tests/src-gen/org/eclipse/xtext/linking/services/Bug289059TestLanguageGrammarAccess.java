@@ -3,20 +3,25 @@
  */
 package org.eclipse.xtext.linking.services;
 
-import com.google.inject.Singleton;
 import com.google.inject.Inject;
-
+import com.google.inject.Singleton;
 import java.util.List;
-
-import org.eclipse.xtext.*;
-import org.eclipse.xtext.service.GrammarProvider;
-import org.eclipse.xtext.service.AbstractElementFinder.*;
-
+import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.Group;
+import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
+import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder;
+import org.eclipse.xtext.service.GrammarProvider;
 
 @Singleton
 public class Bug289059TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
-	
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.linking.Bug289059TestLanguage.Model");
@@ -34,32 +39,31 @@ public class Bug289059TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//	enabled=UnassignedAction?
 		//	reference=[Model]?;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//name=ID enabled=UnassignedAction? reference=[Model]?
 		public Group getGroup() { return cGroup; }
-
+		
 		//name=ID
 		public Assignment getNameAssignment_0() { return cNameAssignment_0; }
-
+		
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_0_0() { return cNameIDTerminalRuleCall_0_0; }
-
+		
 		//enabled=UnassignedAction?
 		public Assignment getEnabledAssignment_1() { return cEnabledAssignment_1; }
-
+		
 		//UnassignedAction
 		public RuleCall getEnabledUnassignedActionParserRuleCall_1_0() { return cEnabledUnassignedActionParserRuleCall_1_0; }
-
+		
 		//reference=[Model]?
 		public Assignment getReferenceAssignment_2() { return cReferenceAssignment_2; }
-
+		
 		//[Model]
 		public CrossReference getReferenceModelCrossReference_2_0() { return cReferenceModelCrossReference_2_0; }
-
+		
 		//ID
 		public RuleCall getReferenceModelIDTerminalRuleCall_2_0_1() { return cReferenceModelIDTerminalRuleCall_2_0_1; }
 	}
-
 	public class UnassignedActionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.linking.Bug289059TestLanguage.UnassignedAction");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -69,13 +73,13 @@ public class Bug289059TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//UnassignedAction:
 		//	{UnassignedAction} "enabled";
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//{UnassignedAction} "enabled"
 		public Group getGroup() { return cGroup; }
-
+		
 		//{UnassignedAction}
 		public Action getUnassignedActionAction_0() { return cUnassignedActionAction_0; }
-
+		
 		//"enabled"
 		public Keyword getEnabledKeyword_1() { return cEnabledKeyword_1; }
 	}
@@ -85,12 +89,12 @@ public class Bug289059TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	private final UnassignedActionElements pUnassignedAction;
 	
 	private final Grammar grammar;
-
+	
 	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public Bug289059TestLanguageGrammarAccess(GrammarProvider grammarProvider,
-		TerminalsGrammarAccess gaTerminals) {
+			TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
 		this.pModel = new ModelElements();
@@ -118,7 +122,7 @@ public class Bug289059TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return grammar;
 	}
 	
-
+	
 	public TerminalsGrammarAccess getTerminalsGrammarAccess() {
 		return gaTerminals;
 	}
@@ -135,7 +139,7 @@ public class Bug289059TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getModelRule() {
 		return getModelAccess().getRule();
 	}
-
+	
 	//UnassignedAction:
 	//	{UnassignedAction} "enabled";
 	public UnassignedActionElements getUnassignedActionAccess() {
@@ -145,47 +149,47 @@ public class Bug289059TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getUnassignedActionRule() {
 		return getUnassignedActionAccess().getRule();
 	}
-
+	
 	//terminal ID:
 	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
-	} 
-
+	}
+	
 	//terminal INT returns ecore::EInt:
 	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
-	} 
-
+	}
+	
 	//terminal STRING:
 	//	'"' ('\\' . | !('\\' | '"'))* '"' |
 	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
-	} 
-
+	}
+	
 	//terminal ML_COMMENT:
 	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal SL_COMMENT:
 	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal WS:
 	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
-	} 
-
+	}
+	
 	//terminal ANY_OTHER:
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
-	} 
+	}
 }

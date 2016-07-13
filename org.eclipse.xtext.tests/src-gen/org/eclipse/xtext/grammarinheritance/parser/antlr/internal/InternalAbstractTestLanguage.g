@@ -5,7 +5,6 @@ grammar InternalAbstractTestLanguage;
 
 options {
 	superClass=AbstractInternalAntlrParser;
-	
 }
 
 @lexer::header {
@@ -17,7 +16,7 @@ import org.eclipse.xtext.parser.antlr.Lexer;
 }
 
 @parser::header {
-package org.eclipse.xtext.grammarinheritance.parser.antlr.internal; 
+package org.eclipse.xtext.grammarinheritance.parser.antlr.internal;
 
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
@@ -35,168 +34,154 @@ import org.eclipse.xtext.grammarinheritance.services.AbstractTestLanguageGrammar
 @parser::members {
 
  	private AbstractTestLanguageGrammarAccess grammarAccess;
- 	
+
     public InternalAbstractTestLanguageParser(TokenStream input, AbstractTestLanguageGrammarAccess grammarAccess) {
         this(input);
         this.grammarAccess = grammarAccess;
         registerRules(grammarAccess.getGrammar());
     }
-    
+
     @Override
     protected String getFirstRuleName() {
-    	return "InheritedParserRule";	
+    	return "InheritedParserRule";
    	}
-   	
+
    	@Override
    	protected AbstractTestLanguageGrammarAccess getGrammarAccess() {
    		return grammarAccess;
    	}
+
 }
 
-@rulecatch { 
-    catch (RecognitionException re) { 
-        recover(input,re); 
+@rulecatch {
+    catch (RecognitionException re) {
+        recover(input,re);
         appendSkippedTokens();
-    } 
+    }
 }
-
-
-
 
 // Entry rule entryRuleInheritedParserRule
-entryRuleInheritedParserRule returns [EObject current=null] 
-	:
+entryRuleInheritedParserRule returns [EObject current=null]:
 	{ newCompositeNode(grammarAccess.getInheritedParserRuleRule()); }
-	 iv_ruleInheritedParserRule=ruleInheritedParserRule 
-	 { $current=$iv_ruleInheritedParserRule.current; } 
-	 EOF 
-;
+	iv_ruleInheritedParserRule=ruleInheritedParserRule
+	{ $current=$iv_ruleInheritedParserRule.current; }
+	EOF;
 
 // Rule InheritedParserRule
-ruleInheritedParserRule returns [EObject current=null] 
-    @init { enterRule(); 
-    }
-    @after { leaveRule(); }:
-(	otherlv_0='element' 
-    {
-    	newLeafNode(otherlv_0, grammarAccess.getInheritedParserRuleAccess().getElementKeyword_0());
-    }
-(
-(
-		lv_name_1_0=RULE_ID
+ruleInheritedParserRule returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0='element'
 		{
-			newLeafNode(lv_name_1_0, grammarAccess.getInheritedParserRuleAccess().getNameIDTerminalRuleCall_1_0()); 
+			newLeafNode(otherlv_0, grammarAccess.getInheritedParserRuleAccess().getElementKeyword_0());
 		}
-		{
-	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getInheritedParserRuleRule());
-	        }
-       		setWithLastConsumed(
-       			$current, 
-       			"name",
-        		lv_name_1_0, 
-        		"org.eclipse.xtext.grammarinheritance.AbstractTestLanguage.ID");
-	    }
-
-)
-))
+		(
+			(
+				lv_name_1_0=RULE_ID
+				{
+					newLeafNode(lv_name_1_0, grammarAccess.getInheritedParserRuleAccess().getNameIDTerminalRuleCall_1_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getInheritedParserRuleRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"name",
+						lv_name_1_0,
+						"org.eclipse.xtext.grammarinheritance.AbstractTestLanguage.ID");
+				}
+			)
+		)
+	)
 ;
-
-
-
-
-
-
 
 // Entry rule entryRuleOverridableParserRule
-entryRuleOverridableParserRule returns [EObject current=null] 
-	:
+entryRuleOverridableParserRule returns [EObject current=null]:
 	{ newCompositeNode(grammarAccess.getOverridableParserRuleRule()); }
-	 iv_ruleOverridableParserRule=ruleOverridableParserRule 
-	 { $current=$iv_ruleOverridableParserRule.current; } 
-	 EOF 
-;
+	iv_ruleOverridableParserRule=ruleOverridableParserRule
+	{ $current=$iv_ruleOverridableParserRule.current; }
+	EOF;
 
 // Rule OverridableParserRule
-ruleOverridableParserRule returns [EObject current=null] 
-    @init { enterRule(); 
-    }
-    @after { leaveRule(); }:
-(	otherlv_0='element' 
-    {
-    	newLeafNode(otherlv_0, grammarAccess.getOverridableParserRuleAccess().getElementKeyword_0());
-    }
-(
-(
-		lv_name_1_0=RULE_ID
+ruleOverridableParserRule returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0='element'
 		{
-			newLeafNode(lv_name_1_0, grammarAccess.getOverridableParserRuleAccess().getNameIDTerminalRuleCall_1_0()); 
+			newLeafNode(otherlv_0, grammarAccess.getOverridableParserRuleAccess().getElementKeyword_0());
 		}
-		{
-	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getOverridableParserRuleRule());
-	        }
-       		setWithLastConsumed(
-       			$current, 
-       			"name",
-        		lv_name_1_0, 
-        		"org.eclipse.xtext.grammarinheritance.AbstractTestLanguage.ID");
-	    }
-
-)
-))
+		(
+			(
+				lv_name_1_0=RULE_ID
+				{
+					newLeafNode(lv_name_1_0, grammarAccess.getOverridableParserRuleAccess().getNameIDTerminalRuleCall_1_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getOverridableParserRuleRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"name",
+						lv_name_1_0,
+						"org.eclipse.xtext.grammarinheritance.AbstractTestLanguage.ID");
+				}
+			)
+		)
+	)
 ;
-
-
-
-
-
-
-
-
 
 // Entry rule entryRuleExtendableParserRule
-entryRuleExtendableParserRule returns [EObject current=null] 
-	:
+entryRuleExtendableParserRule returns [EObject current=null]:
 	{ newCompositeNode(grammarAccess.getExtendableParserRuleRule()); }
-	 iv_ruleExtendableParserRule=ruleExtendableParserRule 
-	 { $current=$iv_ruleExtendableParserRule.current; } 
-	 EOF 
-;
+	iv_ruleExtendableParserRule=ruleExtendableParserRule
+	{ $current=$iv_ruleExtendableParserRule.current; }
+	EOF;
 
 // Rule ExtendableParserRule
-ruleExtendableParserRule returns [EObject current=null] 
-    @init { enterRule(); 
-    }
-    @after { leaveRule(); }:
-(	otherlv_0='element' 
-    {
-    	newLeafNode(otherlv_0, grammarAccess.getExtendableParserRuleAccess().getElementKeyword_0());
-    }
-(
-(
-		lv_name_1_0=RULE_ID
+ruleExtendableParserRule returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0='element'
 		{
-			newLeafNode(lv_name_1_0, grammarAccess.getExtendableParserRuleAccess().getNameIDTerminalRuleCall_1_0()); 
+			newLeafNode(otherlv_0, grammarAccess.getExtendableParserRuleAccess().getElementKeyword_0());
 		}
-		{
-	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getExtendableParserRuleRule());
-	        }
-       		setWithLastConsumed(
-       			$current, 
-       			"name",
-        		lv_name_1_0, 
-        		"org.eclipse.xtext.grammarinheritance.AbstractTestLanguage.ID");
-	    }
-
-)
-))
+		(
+			(
+				lv_name_1_0=RULE_ID
+				{
+					newLeafNode(lv_name_1_0, grammarAccess.getExtendableParserRuleAccess().getNameIDTerminalRuleCall_1_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getExtendableParserRuleRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"name",
+						lv_name_1_0,
+						"org.eclipse.xtext.grammarinheritance.AbstractTestLanguage.ID");
+				}
+			)
+		)
+	)
 ;
-
-
-
-
 
 RULE_REAL : RULE_INT '.' RULE_INT;
 
@@ -213,5 +198,3 @@ RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
 RULE_WS : (' '|'\t'|'\r'|'\n')+;
 
 RULE_ANY_OTHER : .;
-
-

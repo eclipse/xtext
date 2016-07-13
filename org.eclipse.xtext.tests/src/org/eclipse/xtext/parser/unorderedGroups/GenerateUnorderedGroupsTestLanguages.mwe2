@@ -10,12 +10,11 @@ module org.eclipse.xtext.parser.unorderedGroups.GenerateUnorderedGroupsTestLangu
 import org.eclipse.emf.mwe2.runtime.workflow.Workflow
 import org.eclipse.emf.mwe.utils.*
 import org.eclipse.xtext.*
-import org.eclipse.xtext.generator.*
+import org.eclipse.xtext.xtext.generator.*
 
 var projectName = "org.eclipse.xtext.tests"
 var runtimeProject = "../${projectName}"
 var lineDelimiter = '\n'
-var srcGenOnly = true
 
 Workflow {
 	bean = StandaloneSetup {
@@ -31,38 +30,49 @@ Workflow {
 		directory = "../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea"
 	}
 	
-	component = Generator auto-inject {
-		pathRtProject = runtimeProject
-		projectNameRt = projectName
+	component = XtextGenerator {
+		cleaner = {
+			enabled = false
+		}
+		configuration = {
+			project = model.project.StandardProjectConfig {
+				baseName = projectName
+				rootPath = ".."
+			}
+			code = {
+				lineDelimiter = lineDelimiter
+				preferXtendStubs = false
+			}
+		}
 		
 		language = {
-			uri = "classpath:/org/eclipse/xtext/parser/unorderedGroups/UnorderedGroupsTestLanguage.xtext"
-			fragment = @TestLanguagesFragmentsParseTreeConstructor auto-inject {}
+			grammarUri = "classpath:/org/eclipse/xtext/parser/unorderedGroups/UnorderedGroupsTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
 		}
 		language = {
-			uri = "classpath:/org/eclipse/xtext/parser/unorderedGroups/SimpleUnorderedGroupsTestLanguage.xtext"
-			fragment = @TestLanguagesFragmentsParseTreeConstructor auto-inject {}
+			grammarUri = "classpath:/org/eclipse/xtext/parser/unorderedGroups/SimpleUnorderedGroupsTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
 		}
 		language = {
-			uri = "classpath:/org/eclipse/xtext/parser/unorderedGroups/ExUnorderedGroupsTestLanguage.xtext"
-			fragment = @TestLanguagesFragmentsExParseTreeConstructor auto-inject {}
+			grammarUri = "classpath:/org/eclipse/xtext/parser/unorderedGroups/ExUnorderedGroupsTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
 		}
 		language = {
-			uri = "classpath:/org/eclipse/xtext/parser/unorderedGroups/BacktrackingBug325745TestLanguage.xtext"
-			fragment = @TestLanguagesFragments auto-inject {
+			grammarUri = "classpath:/org/eclipse/xtext/parser/unorderedGroups/BacktrackingBug325745TestLanguage.xtext"
+			fragment = @TestLanguagesFragments {
 				backtrack = true
-				srcGenOnly = false
+				generateStub = true
 			}
 		}
 		language = {
-			uri = "classpath:/org/eclipse/xtext/parser/unorderedGroups/SimpleBacktrackingBug325745TestLanguage.xtext"
-			fragment = @TestLanguagesFragments auto-inject {
+			grammarUri = "classpath:/org/eclipse/xtext/parser/unorderedGroups/SimpleBacktrackingBug325745TestLanguage.xtext"
+			fragment = @TestLanguagesFragments {
 				backtrack = true
 			}
 		}
 		language = {
-			uri = "classpath:/org/eclipse/xtext/parser/unorderedGroups/ExBacktrackingBug325745TestLanguage.xtext"
-			fragment = @TestLanguagesFragmentsEx auto-inject {
+			grammarUri = "classpath:/org/eclipse/xtext/parser/unorderedGroups/ExBacktrackingBug325745TestLanguage.xtext"
+			fragment = @TestLanguagesFragments {
 				backtrack = true
 			}
 		}

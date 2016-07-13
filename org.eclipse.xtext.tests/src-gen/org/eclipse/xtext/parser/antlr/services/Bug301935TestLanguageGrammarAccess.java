@@ -3,19 +3,22 @@
  */
 package org.eclipse.xtext.parser.antlr.services;
 
-import com.google.inject.Singleton;
 import com.google.inject.Inject;
-
+import com.google.inject.Singleton;
 import java.util.List;
-
-import org.eclipse.xtext.*;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.Group;
+import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TerminalRule;
+import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder;
 import org.eclipse.xtext.service.GrammarProvider;
-import org.eclipse.xtext.service.AbstractElementFinder.*;
-
 
 @Singleton
 public class Bug301935TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
-	
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.antlr.Bug301935TestLanguage.Model");
@@ -34,38 +37,37 @@ public class Bug301935TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//	name=ID WS value=ID NL
 		//	value2=ID WS;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//name=ID WS value=ID NL value2=ID WS
 		public Group getGroup() { return cGroup; }
-
+		
 		//name=ID
 		public Assignment getNameAssignment_0() { return cNameAssignment_0; }
-
+		
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_0_0() { return cNameIDTerminalRuleCall_0_0; }
-
+		
 		//WS
 		public RuleCall getWSTerminalRuleCall_1() { return cWSTerminalRuleCall_1; }
-
+		
 		//value=ID
 		public Assignment getValueAssignment_2() { return cValueAssignment_2; }
-
+		
 		//ID
 		public RuleCall getValueIDTerminalRuleCall_2_0() { return cValueIDTerminalRuleCall_2_0; }
-
+		
 		//NL
 		public RuleCall getNLParserRuleCall_3() { return cNLParserRuleCall_3; }
-
+		
 		//value2=ID
 		public Assignment getValue2Assignment_4() { return cValue2Assignment_4; }
-
+		
 		//ID
 		public RuleCall getValue2IDTerminalRuleCall_4_0() { return cValue2IDTerminalRuleCall_4_0; }
-
+		
 		//WS
 		public RuleCall getWSTerminalRuleCall_5() { return cWSTerminalRuleCall_5; }
 	}
-
 	public class NLElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.antlr.Bug301935TestLanguage.NL");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -78,22 +80,22 @@ public class Bug301935TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//NL:
 		//	WS* ('\r'? '\n') WS*;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//WS* ('\r'? '\n') WS*
 		public Group getGroup() { return cGroup; }
-
+		
 		//WS*
 		public RuleCall getWSTerminalRuleCall_0() { return cWSTerminalRuleCall_0; }
-
+		
 		//('\r'? '\n')
 		public Group getGroup_1() { return cGroup_1; }
-
+		
 		//'\r'?
 		public Keyword getControl000dKeyword_1_0() { return cControl000dKeyword_1_0; }
-
+		
 		//'\n'
 		public Keyword getControl000aKeyword_1_1() { return cControl000aKeyword_1_1; }
-
+		
 		//WS*
 		public RuleCall getWSTerminalRuleCall_2() { return cWSTerminalRuleCall_2; }
 	}
@@ -150,7 +152,7 @@ public class Bug301935TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getModelRule() {
 		return getModelAccess().getRule();
 	}
-
+	
 	//NL:
 	//	WS* ('\r'? '\n') WS*;
 	public NLElements getNLAccess() {
@@ -160,22 +162,22 @@ public class Bug301935TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getNLRule() {
 		return getNLAccess().getRule();
 	}
-
+	
 	//terminal ID:
 	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return tID;
-	} 
-
+	}
+	
 	//terminal WS:
 	//	' ' | '\t'+;
 	public TerminalRule getWSRule() {
 		return tWS;
-	} 
-
+	}
+	
 	//terminal ANY_OTHER:
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return tANY_OTHER;
-	} 
+	}
 }

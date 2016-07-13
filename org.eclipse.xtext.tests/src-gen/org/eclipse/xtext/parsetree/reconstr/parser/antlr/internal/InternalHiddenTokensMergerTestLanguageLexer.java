@@ -521,10 +521,10 @@ public class InternalHiddenTokensMergerTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalHiddenTokensMergerTestLanguage.g:899:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // InternalHiddenTokensMergerTestLanguage.g:899:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalHiddenTokensMergerTestLanguage.g:887:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // InternalHiddenTokensMergerTestLanguage.g:887:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // InternalHiddenTokensMergerTestLanguage.g:899:11: ( '^' )?
+            // InternalHiddenTokensMergerTestLanguage.g:887:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -533,7 +533,7 @@ public class InternalHiddenTokensMergerTestLanguageLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // InternalHiddenTokensMergerTestLanguage.g:899:11: '^'
+                    // InternalHiddenTokensMergerTestLanguage.g:887:11: '^'
                     {
                     match('^'); 
 
@@ -551,7 +551,7 @@ public class InternalHiddenTokensMergerTestLanguageLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // InternalHiddenTokensMergerTestLanguage.g:899:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalHiddenTokensMergerTestLanguage.g:887:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -600,10 +600,10 @@ public class InternalHiddenTokensMergerTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalHiddenTokensMergerTestLanguage.g:901:10: ( ( '0' .. '9' )+ )
-            // InternalHiddenTokensMergerTestLanguage.g:901:12: ( '0' .. '9' )+
+            // InternalHiddenTokensMergerTestLanguage.g:889:10: ( ( '0' .. '9' )+ )
+            // InternalHiddenTokensMergerTestLanguage.g:889:12: ( '0' .. '9' )+
             {
-            // InternalHiddenTokensMergerTestLanguage.g:901:12: ( '0' .. '9' )+
+            // InternalHiddenTokensMergerTestLanguage.g:889:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -617,7 +617,7 @@ public class InternalHiddenTokensMergerTestLanguageLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // InternalHiddenTokensMergerTestLanguage.g:901:13: '0' .. '9'
+            	    // InternalHiddenTokensMergerTestLanguage.g:889:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -649,10 +649,10 @@ public class InternalHiddenTokensMergerTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalHiddenTokensMergerTestLanguage.g:903:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // InternalHiddenTokensMergerTestLanguage.g:903:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalHiddenTokensMergerTestLanguage.g:891:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // InternalHiddenTokensMergerTestLanguage.g:891:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // InternalHiddenTokensMergerTestLanguage.g:903:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalHiddenTokensMergerTestLanguage.g:891:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -670,10 +670,10 @@ public class InternalHiddenTokensMergerTestLanguageLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // InternalHiddenTokensMergerTestLanguage.g:903:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // InternalHiddenTokensMergerTestLanguage.g:891:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // InternalHiddenTokensMergerTestLanguage.g:903:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // InternalHiddenTokensMergerTestLanguage.g:891:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -689,7 +689,7 @@ public class InternalHiddenTokensMergerTestLanguageLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // InternalHiddenTokensMergerTestLanguage.g:903:21: '\\\\' .
+                    	    // InternalHiddenTokensMergerTestLanguage.g:891:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -697,7 +697,7 @@ public class InternalHiddenTokensMergerTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalHiddenTokensMergerTestLanguage.g:903:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // InternalHiddenTokensMergerTestLanguage.g:891:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -722,10 +722,10 @@ public class InternalHiddenTokensMergerTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalHiddenTokensMergerTestLanguage.g:903:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // InternalHiddenTokensMergerTestLanguage.g:891:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // InternalHiddenTokensMergerTestLanguage.g:903:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // InternalHiddenTokensMergerTestLanguage.g:891:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -741,7 +741,7 @@ public class InternalHiddenTokensMergerTestLanguageLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // InternalHiddenTokensMergerTestLanguage.g:903:54: '\\\\' .
+                    	    // InternalHiddenTokensMergerTestLanguage.g:891:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -749,7 +749,7 @@ public class InternalHiddenTokensMergerTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalHiddenTokensMergerTestLanguage.g:903:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // InternalHiddenTokensMergerTestLanguage.g:891:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -792,12 +792,12 @@ public class InternalHiddenTokensMergerTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalHiddenTokensMergerTestLanguage.g:905:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // InternalHiddenTokensMergerTestLanguage.g:905:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // InternalHiddenTokensMergerTestLanguage.g:893:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // InternalHiddenTokensMergerTestLanguage.g:893:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // InternalHiddenTokensMergerTestLanguage.g:905:24: ( options {greedy=false; } : . )*
+            // InternalHiddenTokensMergerTestLanguage.g:893:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -822,7 +822,7 @@ public class InternalHiddenTokensMergerTestLanguageLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // InternalHiddenTokensMergerTestLanguage.g:905:52: .
+            	    // InternalHiddenTokensMergerTestLanguage.g:893:52: .
             	    {
             	    matchAny(); 
 
@@ -852,12 +852,12 @@ public class InternalHiddenTokensMergerTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalHiddenTokensMergerTestLanguage.g:907:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // InternalHiddenTokensMergerTestLanguage.g:907:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // InternalHiddenTokensMergerTestLanguage.g:895:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // InternalHiddenTokensMergerTestLanguage.g:895:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // InternalHiddenTokensMergerTestLanguage.g:907:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalHiddenTokensMergerTestLanguage.g:895:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -870,7 +870,7 @@ public class InternalHiddenTokensMergerTestLanguageLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // InternalHiddenTokensMergerTestLanguage.g:907:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalHiddenTokensMergerTestLanguage.g:895:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -890,7 +890,7 @@ public class InternalHiddenTokensMergerTestLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // InternalHiddenTokensMergerTestLanguage.g:907:40: ( ( '\\r' )? '\\n' )?
+            // InternalHiddenTokensMergerTestLanguage.g:895:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -899,9 +899,9 @@ public class InternalHiddenTokensMergerTestLanguageLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // InternalHiddenTokensMergerTestLanguage.g:907:41: ( '\\r' )? '\\n'
+                    // InternalHiddenTokensMergerTestLanguage.g:895:41: ( '\\r' )? '\\n'
                     {
-                    // InternalHiddenTokensMergerTestLanguage.g:907:41: ( '\\r' )?
+                    // InternalHiddenTokensMergerTestLanguage.g:895:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -910,7 +910,7 @@ public class InternalHiddenTokensMergerTestLanguageLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // InternalHiddenTokensMergerTestLanguage.g:907:41: '\\r'
+                            // InternalHiddenTokensMergerTestLanguage.g:895:41: '\\r'
                             {
                             match('\r'); 
 
@@ -942,10 +942,10 @@ public class InternalHiddenTokensMergerTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalHiddenTokensMergerTestLanguage.g:909:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // InternalHiddenTokensMergerTestLanguage.g:909:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalHiddenTokensMergerTestLanguage.g:897:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalHiddenTokensMergerTestLanguage.g:897:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // InternalHiddenTokensMergerTestLanguage.g:909:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalHiddenTokensMergerTestLanguage.g:897:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -999,8 +999,8 @@ public class InternalHiddenTokensMergerTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalHiddenTokensMergerTestLanguage.g:911:16: ( . )
-            // InternalHiddenTokensMergerTestLanguage.g:911:18: .
+            // InternalHiddenTokensMergerTestLanguage.g:899:16: ( . )
+            // InternalHiddenTokensMergerTestLanguage.g:899:18: .
             {
             matchAny(); 
 

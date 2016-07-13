@@ -10,12 +10,11 @@ module org.eclipse.xtext.grammarinheritance.GenerateInheritanceLanguages
 import org.eclipse.emf.mwe2.runtime.workflow.Workflow
 import org.eclipse.emf.mwe.utils.*
 import org.eclipse.xtext.*
-import org.eclipse.xtext.generator.*
+import org.eclipse.xtext.xtext.generator.*
 
 var projectName = "org.eclipse.xtext.tests"
 var runtimeProject = "../${projectName}"
 var lineDelimiter = '\n'
-var encoding = 'ISO-8859-1'
 
 Workflow {
 	bean = StandaloneSetup {
@@ -42,35 +41,48 @@ Workflow {
 		directory="${runtimeProject}/../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea"
 	}
 	
-	component = Generator auto-inject {
-		pathRtProject = runtimeProject
-		projectNameRt = projectName
+	component = XtextGenerator {
+		cleaner = {
+			enabled = false
+		}
+		configuration = {
+			project = model.project.StandardProjectConfig {
+				baseName = projectName
+				rootPath = ".."
+			}
+			code = {
+				encoding = 'ISO-8859-1'
+				lineDelimiter = lineDelimiter
+				preferXtendStubs = false
+			}
+		}
+		
 		language = auto-inject {
-			uri = "classpath:/org/eclipse/xtext/grammarinheritance/AbstractTestLanguage.xtext"
+			grammarUri = "classpath:/org/eclipse/xtext/grammarinheritance/AbstractTestLanguage.xtext"
 			fragment = @TestLanguagesFragments {
-				srcGenOnly = false
+				generateStub = true
 			}
 		}
 		language = auto-inject {
-			uri = "classpath:/org/eclipse/xtext/grammarinheritance/BaseInheritanceTestLanguage.xtext"
+			grammarUri = "classpath:/org/eclipse/xtext/grammarinheritance/BaseInheritanceTestLanguage.xtext"
 			fragment = @TestLanguagesFragments {}
 		}
 		language = auto-inject {
-			uri = "classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xtext"
+			grammarUri = "classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xtext"
 			fragment = @TestLanguagesFragments {}
 		}
 		language = auto-inject {
-			uri = "classpath:/org/eclipse/xtext/grammarinheritance/InheritanceTestLanguage.xtext"
+			grammarUri = "classpath:/org/eclipse/xtext/grammarinheritance/InheritanceTestLanguage.xtext"
 			fragment = @TestLanguagesFragments {
-				srcGenOnly = false
+				generateStub = true
 			}
 		}
 		language = auto-inject {
-			uri = "classpath:/org/eclipse/xtext/grammarinheritance/InheritanceTest2Language.xtext"
+			grammarUri = "classpath:/org/eclipse/xtext/grammarinheritance/InheritanceTest2Language.xtext"
 			fragment = @TestLanguagesFragments {}
 		}
 		language = auto-inject {
-			uri = "classpath:/org/eclipse/xtext/grammarinheritance/InheritanceTest3Language.xtext"
+			grammarUri = "classpath:/org/eclipse/xtext/grammarinheritance/InheritanceTest3Language.xtext"
 			fragment = @TestLanguagesFragments {}
 		}
 	}

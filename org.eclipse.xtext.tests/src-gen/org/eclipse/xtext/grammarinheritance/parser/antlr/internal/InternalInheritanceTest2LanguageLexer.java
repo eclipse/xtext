@@ -146,10 +146,10 @@ public class InternalInheritanceTest2LanguageLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalInheritanceTest2Language.g:237:9: ( ( 'a' .. 'z' )+ )
-            // InternalInheritanceTest2Language.g:237:11: ( 'a' .. 'z' )+
+            // InternalInheritanceTest2Language.g:231:9: ( ( 'a' .. 'z' )+ )
+            // InternalInheritanceTest2Language.g:231:11: ( 'a' .. 'z' )+
             {
-            // InternalInheritanceTest2Language.g:237:11: ( 'a' .. 'z' )+
+            // InternalInheritanceTest2Language.g:231:11: ( 'a' .. 'z' )+
             int cnt1=0;
             loop1:
             do {
@@ -163,7 +163,7 @@ public class InternalInheritanceTest2LanguageLexer extends Lexer {
 
                 switch (alt1) {
             	case 1 :
-            	    // InternalInheritanceTest2Language.g:237:12: 'a' .. 'z'
+            	    // InternalInheritanceTest2Language.g:231:12: 'a' .. 'z'
             	    {
             	    matchRange('a','z'); 
 
@@ -195,10 +195,10 @@ public class InternalInheritanceTest2LanguageLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalInheritanceTest2Language.g:239:10: ( ( '0' .. '9' )+ )
-            // InternalInheritanceTest2Language.g:239:12: ( '0' .. '9' )+
+            // InternalInheritanceTest2Language.g:233:10: ( ( '0' .. '9' )+ )
+            // InternalInheritanceTest2Language.g:233:12: ( '0' .. '9' )+
             {
-            // InternalInheritanceTest2Language.g:239:12: ( '0' .. '9' )+
+            // InternalInheritanceTest2Language.g:233:12: ( '0' .. '9' )+
             int cnt2=0;
             loop2:
             do {
@@ -212,7 +212,7 @@ public class InternalInheritanceTest2LanguageLexer extends Lexer {
 
                 switch (alt2) {
             	case 1 :
-            	    // InternalInheritanceTest2Language.g:239:13: '0' .. '9'
+            	    // InternalInheritanceTest2Language.g:233:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -244,10 +244,10 @@ public class InternalInheritanceTest2LanguageLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalInheritanceTest2Language.g:241:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // InternalInheritanceTest2Language.g:241:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalInheritanceTest2Language.g:235:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // InternalInheritanceTest2Language.g:235:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // InternalInheritanceTest2Language.g:241:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalInheritanceTest2Language.g:235:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt5=2;
             int LA5_0 = input.LA(1);
 
@@ -265,10 +265,10 @@ public class InternalInheritanceTest2LanguageLexer extends Lexer {
             }
             switch (alt5) {
                 case 1 :
-                    // InternalInheritanceTest2Language.g:241:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // InternalInheritanceTest2Language.g:235:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // InternalInheritanceTest2Language.g:241:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // InternalInheritanceTest2Language.g:235:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop3:
                     do {
                         int alt3=3;
@@ -284,7 +284,7 @@ public class InternalInheritanceTest2LanguageLexer extends Lexer {
 
                         switch (alt3) {
                     	case 1 :
-                    	    // InternalInheritanceTest2Language.g:241:21: '\\\\' .
+                    	    // InternalInheritanceTest2Language.g:235:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -292,7 +292,7 @@ public class InternalInheritanceTest2LanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalInheritanceTest2Language.g:241:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // InternalInheritanceTest2Language.g:235:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -317,10 +317,10 @@ public class InternalInheritanceTest2LanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalInheritanceTest2Language.g:241:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // InternalInheritanceTest2Language.g:235:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // InternalInheritanceTest2Language.g:241:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // InternalInheritanceTest2Language.g:235:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -336,7 +336,7 @@ public class InternalInheritanceTest2LanguageLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // InternalInheritanceTest2Language.g:241:54: '\\\\' .
+                    	    // InternalInheritanceTest2Language.g:235:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -344,7 +344,7 @@ public class InternalInheritanceTest2LanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalInheritanceTest2Language.g:241:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // InternalInheritanceTest2Language.g:235:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -387,12 +387,12 @@ public class InternalInheritanceTest2LanguageLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalInheritanceTest2Language.g:243:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // InternalInheritanceTest2Language.g:243:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // InternalInheritanceTest2Language.g:237:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // InternalInheritanceTest2Language.g:237:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // InternalInheritanceTest2Language.g:243:24: ( options {greedy=false; } : . )*
+            // InternalInheritanceTest2Language.g:237:24: ( options {greedy=false; } : . )*
             loop6:
             do {
                 int alt6=2;
@@ -417,7 +417,7 @@ public class InternalInheritanceTest2LanguageLexer extends Lexer {
 
                 switch (alt6) {
             	case 1 :
-            	    // InternalInheritanceTest2Language.g:243:52: .
+            	    // InternalInheritanceTest2Language.g:237:52: .
             	    {
             	    matchAny(); 
 
@@ -447,12 +447,12 @@ public class InternalInheritanceTest2LanguageLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalInheritanceTest2Language.g:245:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // InternalInheritanceTest2Language.g:245:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // InternalInheritanceTest2Language.g:239:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // InternalInheritanceTest2Language.g:239:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // InternalInheritanceTest2Language.g:245:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalInheritanceTest2Language.g:239:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop7:
             do {
                 int alt7=2;
@@ -465,7 +465,7 @@ public class InternalInheritanceTest2LanguageLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // InternalInheritanceTest2Language.g:245:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalInheritanceTest2Language.g:239:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -485,7 +485,7 @@ public class InternalInheritanceTest2LanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // InternalInheritanceTest2Language.g:245:40: ( ( '\\r' )? '\\n' )?
+            // InternalInheritanceTest2Language.g:239:40: ( ( '\\r' )? '\\n' )?
             int alt9=2;
             int LA9_0 = input.LA(1);
 
@@ -494,9 +494,9 @@ public class InternalInheritanceTest2LanguageLexer extends Lexer {
             }
             switch (alt9) {
                 case 1 :
-                    // InternalInheritanceTest2Language.g:245:41: ( '\\r' )? '\\n'
+                    // InternalInheritanceTest2Language.g:239:41: ( '\\r' )? '\\n'
                     {
-                    // InternalInheritanceTest2Language.g:245:41: ( '\\r' )?
+                    // InternalInheritanceTest2Language.g:239:41: ( '\\r' )?
                     int alt8=2;
                     int LA8_0 = input.LA(1);
 
@@ -505,7 +505,7 @@ public class InternalInheritanceTest2LanguageLexer extends Lexer {
                     }
                     switch (alt8) {
                         case 1 :
-                            // InternalInheritanceTest2Language.g:245:41: '\\r'
+                            // InternalInheritanceTest2Language.g:239:41: '\\r'
                             {
                             match('\r'); 
 
@@ -537,10 +537,10 @@ public class InternalInheritanceTest2LanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalInheritanceTest2Language.g:247:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // InternalInheritanceTest2Language.g:247:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalInheritanceTest2Language.g:241:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalInheritanceTest2Language.g:241:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // InternalInheritanceTest2Language.g:247:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalInheritanceTest2Language.g:241:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt10=0;
             loop10:
             do {
@@ -594,8 +594,8 @@ public class InternalInheritanceTest2LanguageLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalInheritanceTest2Language.g:249:16: ( . )
-            // InternalInheritanceTest2Language.g:249:18: .
+            // InternalInheritanceTest2Language.g:243:16: ( . )
+            // InternalInheritanceTest2Language.g:243:18: .
             {
             matchAny(); 
 

@@ -10,7 +10,7 @@ module org.eclipse.xtext.parser.fragments.GenerateFragmentTestLanguages
 import org.eclipse.emf.mwe2.runtime.workflow.Workflow
 import org.eclipse.emf.mwe.utils.*
 import org.eclipse.xtext.*
-import org.eclipse.xtext.generator.*
+import org.eclipse.xtext.xtext.generator.*
 
 var projectName = "org.eclipse.xtext.tests"
 var runtimeProject = "../${projectName}"
@@ -30,24 +30,45 @@ Workflow {
 		directory = "../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/fragments/idea"
 	}
 	
-	component = Generator auto-inject {
-		pathRtProject = runtimeProject
-		pathTestProject = runtimeProject
-		projectNameRt = projectName
+	component = XtextGenerator {
+		cleaner = {
+			enabled = false
+		}
+		configuration = {
+			project = model.project.StandardProjectConfig {
+				baseName = projectName
+				rootPath = ".."
+				runtimeTest = {
+					enabled = true
+					root = runtimeProject
+					src = "${runtimeProject}/src"
+					srcGen = "${runtimeProject}/src-gen"
+				}
+			}
+			code = {
+				encoding = 'ISO-8859-1'
+				lineDelimiter = lineDelimiter
+				preferXtendStubs = false
+			}
+		}
 		
 		language = {
-			uri = "classpath:/org/eclipse/xtext/parser/fragments/FragmentTestLanguage.xtext"
+			grammarUri = "classpath:/org/eclipse/xtext/parser/fragments/FragmentTestLanguage.xtext"
 			fragment = @TestLanguagesFragments auto-inject {
-				srcGenOnly = true
+				generateStub = true
 			}
-			fragment = junit.Junit4Fragment {}
+			fragment = junit.Junit4Fragment2 {
+				generateStub = false
+			}
 		}
 		language = {
-			uri = "classpath:/org/eclipse/xtext/parser/fragments/FragmentTestLanguageEx.xtext"
-			fragment = @TestLanguagesFragmentsEx auto-inject {
-				srcGenOnly = true
+			grammarUri = "classpath:/org/eclipse/xtext/parser/fragments/FragmentTestLanguageEx.xtext"
+			fragment = @TestLanguagesFragments auto-inject {
+				generateStub = true
 			}
-			fragment = junit.Junit4Fragment {}
+			fragment = junit.Junit4Fragment2 {
+				generateStub = false
+			}
 		}
 	}
 }
