@@ -11,10 +11,8 @@ import com.google.inject.Inject
 import com.google.inject.Provider
 import io.typefox.lsapi.TextEdit
 import java.util.ArrayList
-import java.util.Collection
 import java.util.List
 import java.util.Map
-import java.util.Set
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtext.resource.IExternalContentSupport.IExternalContentProvider
 import org.eclipse.xtext.resource.IResourceDescriptions
@@ -23,6 +21,7 @@ import org.eclipse.xtext.resource.impl.ChunkedResourceDescriptions
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.validation.Issue
+import org.eclipse.xtext.workspace.IWorkspaceConfig
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -31,9 +30,17 @@ import org.eclipse.xtext.validation.Issue
 class WorkspaceManager {
 
     @Inject Provider<ProjectManager> projectManagerProvider
-    Map<URI, ProjectManager> baseDir2ProjectManager = newHashMap()
+    @Inject IWorkspaceConfigFactory workspaceConfigFactory
+    @Inject IProjectDescriptionFactory projectDescriptionFactory
+    @Inject BuildManager buildManager
+    
+    Map<String, ProjectManager> projectName2ProjectManager = newHashMap
 
     URI baseDir
+    IWorkspaceConfig workspaceConfig
+
+    Map<String, ResourceDescriptionsData> fullIndex = newHashMap()
+    
     Map<URI, Document> openDocuments = newHashMap()
     val openedDocumentsContentProvider = new IExternalContentProvider() {
 
@@ -49,67 +56,43 @@ class WorkspaceManager {
             openDocuments.containsKey(uri)
         }
     };
-    Map<String, ResourceDescriptionsData> fullIndex = newHashMap()
     
-    val dirtyFiles = <URI>newLinkedHashSet
-    val deletedFiles = <URI>newLinkedHashSet
-    
-    protected def void queue(Set<URI> files, Collection<URI> toRemove, Collection<URI> toAdd) {
-    	files -= toRemove
-    	files += toAdd
-    }
-
     def void initialize(URI baseDir, (URI, Iterable<Issue>)=>void acceptor, CancelIndicator cancelIndicator) {
         this.baseDir = baseDir
-        // TODO support multi-projects
-        // We will need to figure out how we can identify project structure, dependencies, source folders, etc...
-        val projectManager = projectManagerProvider.get
-        val indexResult = projectManager.initialize(baseDir, acceptor, openedDocumentsContentProvider, [fullIndex], cancelIndicator)
-        baseDir2ProjectManager.put(baseDir, projectManager)
-        fullIndex.put("DEFAULT", indexResult.indexState.resourceDescriptions)
+        workspaceConfig = workspaceConfigFactory.getWorkspaceConfig(baseDir)
+        workspaceConfig.projects.forEach [ projectConfig | 
+            val projectManager = projectManagerProvider.get
+            val projectDescription =  projectDescriptionFactory.getProjectDescription(projectConfig)
+            projectManager.initialize(projectDescription, projectConfig, acceptor, openedDocumentsContentProvider, [fullIndex], cancelIndicator)
+            projectName2ProjectManager.put(projectDescription.name, projectManager)
+        ]
+        buildManager.doFullBuild(cancelIndicator)
     }
 
     def void doBuild(List<URI> dirtyFiles, List<URI> deletedFiles, CancelIndicator cancelIndicator) {
-    	queue(this.dirtyFiles, deletedFiles, dirtyFiles)
-    	queue(this.deletedFiles, dirtyFiles, deletedFiles)
-    	internalBuild(cancelIndicator)
+    	buildManager.doBuild(dirtyFiles, deletedFiles, cancelIndicator)
     }
     
-    protected def void internalBuild(CancelIndicator cancelIndicator) {
-    	//TODO sort projects by dependency
-        val allDirty = new ArrayList(dirtyFiles)
-        for (entry : baseDir2ProjectManager.entrySet) {
-        	val projectDirtyFiles = allDirty.filter[isPrefix(entry.key)].toList
-			val projectDeletedFiles = deletedFiles.filter[isPrefix(entry.key)].toList
-			
-			val result = entry.value.doBuild(projectDirtyFiles, projectDeletedFiles, cancelIndicator)
-        	allDirty.addAll(result.affectedResources.map[uri])
-        	
-        	this.dirtyFiles -= projectDirtyFiles
-        	this.deletedFiles -= projectDeletedFiles
-        }
-    }
-
     def IResourceDescriptions getIndex() {
     	return new ChunkedResourceDescriptions(fullIndex)
     }
 
     def URI getProjectBaseDir(URI candidate) {
-        for (projectBaseDir : baseDir2ProjectManager.keySet.sortBy[-toString.length]) {
-            if (isPrefix(candidate, projectBaseDir)) {
-                return projectBaseDir
-            }
-        }
-        return baseDir
+        val projectConfig = workspaceConfig.findProjectContaining(candidate)
+        projectConfig.path
     }
     
-    protected def boolean isPrefix(URI candidate, URI prefix) {
-        candidate.toString.startsWith(prefix.toString)
-    }
-
     def ProjectManager getProjectManager(URI uri) {
-        val projectBaseDir = getProjectBaseDir(uri)
-        return baseDir2ProjectManager.get(projectBaseDir)
+        val projectConfig = workspaceConfig.findProjectContaining(uri)
+        return projectName2ProjectManager.get(projectConfig.name)
+    }
+    
+    def ProjectManager getProjectManager(String projectName) {
+        projectName2ProjectManager.get(projectName)
+    }
+    
+    def List<ProjectManager> getProjectManagers() {
+        new ArrayList(projectName2ProjectManager.values)
     }
 
     def didChange(URI uri, int version, Iterable<TextEdit> changes, CancelIndicator cancelIndicator) {

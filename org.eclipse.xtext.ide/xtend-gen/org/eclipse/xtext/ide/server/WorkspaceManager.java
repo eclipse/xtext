@@ -7,36 +7,35 @@
  */
 package org.eclipse.xtext.ide.server;
 
-import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import io.typefox.lsapi.TextEdit;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Consumer;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.build.IncrementalBuilder;
-import org.eclipse.xtext.build.IndexState;
+import org.eclipse.xtext.ide.server.BuildManager;
 import org.eclipse.xtext.ide.server.Document;
+import org.eclipse.xtext.ide.server.IProjectDescriptionFactory;
+import org.eclipse.xtext.ide.server.IWorkspaceConfigFactory;
 import org.eclipse.xtext.ide.server.ProjectManager;
 import org.eclipse.xtext.resource.IExternalContentSupport;
-import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.impl.ChunkedResourceDescriptions;
+import org.eclipse.xtext.resource.impl.ProjectDescription;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.validation.Issue;
+import org.eclipse.xtext.workspace.IProjectConfig;
+import org.eclipse.xtext.workspace.IWorkspaceConfig;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 
 /**
@@ -48,9 +47,22 @@ public class WorkspaceManager {
   @Inject
   private Provider<ProjectManager> projectManagerProvider;
   
-  private Map<URI, ProjectManager> baseDir2ProjectManager = CollectionLiterals.<URI, ProjectManager>newHashMap();
+  @Inject
+  private IWorkspaceConfigFactory workspaceConfigFactory;
+  
+  @Inject
+  private IProjectDescriptionFactory projectDescriptionFactory;
+  
+  @Inject
+  private BuildManager buildManager;
+  
+  private Map<String, ProjectManager> projectName2ProjectManager = CollectionLiterals.<String, ProjectManager>newHashMap();
   
   private URI baseDir;
+  
+  private IWorkspaceConfig workspaceConfig;
+  
+  private Map<String, ResourceDescriptionsData> fullIndex = CollectionLiterals.<String, ResourceDescriptionsData>newHashMap();
   
   private Map<URI, Document> openDocuments = CollectionLiterals.<URI, Document>newHashMap();
   
@@ -76,65 +88,27 @@ public class WorkspaceManager {
     }
   };
   
-  private Map<String, ResourceDescriptionsData> fullIndex = CollectionLiterals.<String, ResourceDescriptionsData>newHashMap();
-  
-  private final LinkedHashSet<URI> dirtyFiles = CollectionLiterals.<URI>newLinkedHashSet();
-  
-  private final LinkedHashSet<URI> deletedFiles = CollectionLiterals.<URI>newLinkedHashSet();
-  
-  protected void queue(final Set<URI> files, final Collection<URI> toRemove, final Collection<URI> toAdd) {
-    Iterables.removeAll(files, toRemove);
-    Iterables.<URI>addAll(files, toAdd);
-  }
-  
   public void initialize(final URI baseDir, final Procedure2<? super URI, ? super Iterable<Issue>> acceptor, final CancelIndicator cancelIndicator) {
     this.baseDir = baseDir;
-    final ProjectManager projectManager = this.projectManagerProvider.get();
-    final Provider<Map<String, ResourceDescriptionsData>> _function = () -> {
-      return this.fullIndex;
+    IWorkspaceConfig _workspaceConfig = this.workspaceConfigFactory.getWorkspaceConfig(baseDir);
+    this.workspaceConfig = _workspaceConfig;
+    Set<? extends IProjectConfig> _projects = this.workspaceConfig.getProjects();
+    final Consumer<IProjectConfig> _function = (IProjectConfig projectConfig) -> {
+      final ProjectManager projectManager = this.projectManagerProvider.get();
+      final ProjectDescription projectDescription = this.projectDescriptionFactory.getProjectDescription(projectConfig);
+      final Provider<Map<String, ResourceDescriptionsData>> _function_1 = () -> {
+        return this.fullIndex;
+      };
+      projectManager.initialize(projectDescription, projectConfig, acceptor, this.openedDocumentsContentProvider, _function_1, cancelIndicator);
+      String _name = projectDescription.getName();
+      this.projectName2ProjectManager.put(_name, projectManager);
     };
-    final IncrementalBuilder.Result indexResult = projectManager.initialize(baseDir, acceptor, this.openedDocumentsContentProvider, _function, cancelIndicator);
-    this.baseDir2ProjectManager.put(baseDir, projectManager);
-    IndexState _indexState = indexResult.getIndexState();
-    ResourceDescriptionsData _resourceDescriptions = _indexState.getResourceDescriptions();
-    this.fullIndex.put("DEFAULT", _resourceDescriptions);
+    _projects.forEach(_function);
+    this.buildManager.doFullBuild(cancelIndicator);
   }
   
   public void doBuild(final List<URI> dirtyFiles, final List<URI> deletedFiles, final CancelIndicator cancelIndicator) {
-    this.queue(this.dirtyFiles, deletedFiles, dirtyFiles);
-    this.queue(this.deletedFiles, dirtyFiles, deletedFiles);
-    this.internalBuild(cancelIndicator);
-  }
-  
-  protected void internalBuild(final CancelIndicator cancelIndicator) {
-    final ArrayList<URI> allDirty = new ArrayList<URI>(this.dirtyFiles);
-    Set<Map.Entry<URI, ProjectManager>> _entrySet = this.baseDir2ProjectManager.entrySet();
-    for (final Map.Entry<URI, ProjectManager> entry : _entrySet) {
-      {
-        final Function1<URI, Boolean> _function = (URI it) -> {
-          URI _key = entry.getKey();
-          return Boolean.valueOf(this.isPrefix(it, _key));
-        };
-        Iterable<URI> _filter = IterableExtensions.<URI>filter(allDirty, _function);
-        final List<URI> projectDirtyFiles = IterableExtensions.<URI>toList(_filter);
-        final Function1<URI, Boolean> _function_1 = (URI it) -> {
-          URI _key = entry.getKey();
-          return Boolean.valueOf(this.isPrefix(it, _key));
-        };
-        Iterable<URI> _filter_1 = IterableExtensions.<URI>filter(this.deletedFiles, _function_1);
-        final List<URI> projectDeletedFiles = IterableExtensions.<URI>toList(_filter_1);
-        ProjectManager _value = entry.getValue();
-        final IncrementalBuilder.Result result = _value.doBuild(projectDirtyFiles, projectDeletedFiles, cancelIndicator);
-        List<IResourceDescription.Delta> _affectedResources = result.getAffectedResources();
-        final Function1<IResourceDescription.Delta, URI> _function_2 = (IResourceDescription.Delta it) -> {
-          return it.getUri();
-        };
-        List<URI> _map = ListExtensions.<IResourceDescription.Delta, URI>map(_affectedResources, _function_2);
-        allDirty.addAll(_map);
-        Iterables.removeAll(this.dirtyFiles, projectDirtyFiles);
-        Iterables.removeAll(this.deletedFiles, projectDeletedFiles);
-      }
-    }
+    this.buildManager.doBuild(dirtyFiles, deletedFiles, cancelIndicator);
   }
   
   public IResourceDescriptions getIndex() {
@@ -142,31 +116,27 @@ public class WorkspaceManager {
   }
   
   public URI getProjectBaseDir(final URI candidate) {
-    Set<URI> _keySet = this.baseDir2ProjectManager.keySet();
-    final Function1<URI, Integer> _function = (URI it) -> {
-      String _string = it.toString();
-      int _length = _string.length();
-      return Integer.valueOf((-_length));
-    };
-    List<URI> _sortBy = IterableExtensions.<URI, Integer>sortBy(_keySet, _function);
-    for (final URI projectBaseDir : _sortBy) {
-      boolean _isPrefix = this.isPrefix(candidate, projectBaseDir);
-      if (_isPrefix) {
-        return projectBaseDir;
-      }
+    URI _xblockexpression = null;
+    {
+      final IProjectConfig projectConfig = this.workspaceConfig.findProjectContaining(candidate);
+      _xblockexpression = projectConfig.getPath();
     }
-    return this.baseDir;
-  }
-  
-  protected boolean isPrefix(final URI candidate, final URI prefix) {
-    String _string = candidate.toString();
-    String _string_1 = prefix.toString();
-    return _string.startsWith(_string_1);
+    return _xblockexpression;
   }
   
   public ProjectManager getProjectManager(final URI uri) {
-    final URI projectBaseDir = this.getProjectBaseDir(uri);
-    return this.baseDir2ProjectManager.get(projectBaseDir);
+    final IProjectConfig projectConfig = this.workspaceConfig.findProjectContaining(uri);
+    String _name = projectConfig.getName();
+    return this.projectName2ProjectManager.get(_name);
+  }
+  
+  public ProjectManager getProjectManager(final String projectName) {
+    return this.projectName2ProjectManager.get(projectName);
+  }
+  
+  public List<ProjectManager> getProjectManagers() {
+    Collection<ProjectManager> _values = this.projectName2ProjectManager.values();
+    return new ArrayList<ProjectManager>(_values);
   }
   
   public void didChange(final URI uri, final int version, final Iterable<TextEdit> changes, final CancelIndicator cancelIndicator) {

@@ -15,6 +15,8 @@ import java.util.concurrent.Executors
 import org.eclipse.xtext.ide.server.concurrent.RequestManager
 import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.eclipse.xtext.resource.ResourceServiceProviderServiceLoader
+import org.eclipse.xtext.resource.IContainer
+import org.eclipse.xtext.resource.containers.ProjectDescriptionBasedContainerManager
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -31,6 +33,9 @@ class ServerModule extends AbstractModule {
 		
     	bind(LanguageServer).to(LanguageServerImpl)
         bind(IResourceServiceProvider.Registry).toProvider(ResourceServiceProviderServiceLoader)
+        bind(IWorkspaceConfigFactory).to(ProjectWorkspaceConfigFactory)
+        bind(IProjectDescriptionFactory).to(DefaultProjectDescriptionFactory)
+        bind(IContainer.Manager).to(ProjectDescriptionBasedContainerManager)
     }
     
 }
