@@ -18,7 +18,6 @@ import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 /**
@@ -52,7 +51,7 @@ public class TopologicalSorter {
   
   private IAcceptor<ProjectDescription> cyclicAcceptor;
   
-  public List<ProjectDescription> sortByDependencies(final List<ProjectDescription> descriptions, final Procedure1<? super ProjectDescription> cyclicAcceptor) {
+  public List<ProjectDescription> sortByDependencies(final Iterable<ProjectDescription> descriptions, final Procedure1<? super ProjectDescription> cyclicAcceptor) {
     List<ProjectDescription> _xblockexpression = null;
     {
       this.cyclicAcceptor = new IAcceptor<ProjectDescription>() {
@@ -63,7 +62,7 @@ public class TopologicalSorter {
       final Function1<ProjectDescription, TopologicalSorter.Entry> _function = (ProjectDescription it) -> {
         return new TopologicalSorter.Entry(it);
       };
-      List<TopologicalSorter.Entry> _map = ListExtensions.<ProjectDescription, TopologicalSorter.Entry>map(descriptions, _function);
+      Iterable<TopologicalSorter.Entry> _map = IterableExtensions.<ProjectDescription, TopologicalSorter.Entry>map(descriptions, _function);
       final Function1<TopologicalSorter.Entry, String> _function_1 = (TopologicalSorter.Entry it) -> {
         return it.description.getName();
       };

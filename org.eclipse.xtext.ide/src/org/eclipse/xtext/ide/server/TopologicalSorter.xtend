@@ -24,7 +24,7 @@ class TopologicalSorter {
     Map<String, Entry> name2entry
     IAcceptor<ProjectDescription> cyclicAcceptor
         
-    def List<ProjectDescription> sortByDependencies(List<ProjectDescription> descriptions, (ProjectDescription)=>void cyclicAcceptor) {
+    def List<ProjectDescription> sortByDependencies(Iterable<ProjectDescription> descriptions, (ProjectDescription)=>void cyclicAcceptor) {
         this.cyclicAcceptor = cyclicAcceptor
         name2entry = descriptions.map[new Entry(it)].toMap[description.name]
         result = newLinkedHashSet

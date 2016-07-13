@@ -7,8 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.server
 
+import com.google.common.collect.HashMultimap
 import com.google.inject.Inject
 import com.google.inject.Provider
+import com.google.inject.Singleton
 import java.util.ArrayList
 import java.util.Collection
 import java.util.List
@@ -16,11 +18,8 @@ import java.util.Set
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtend.lib.annotations.Data
 import org.eclipse.xtext.diagnostics.Severity
-import org.eclipse.xtext.util.CancelIndicator
-
-import static extension org.eclipse.xtext.util.UriUtil.*
 import org.eclipse.xtext.resource.impl.ProjectDescription
-import com.google.inject.Singleton
+import org.eclipse.xtext.util.CancelIndicator
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -57,27 +56,27 @@ class BuildManager {
 
     protected def void internalBuild(CancelIndicator cancelIndicator) {
         val allDirty = new ArrayList(dirtyFiles)
-        val List<ProjectBuildData> buildData = newArrayList 
-        for (projectManager : workspaceManager.projectManagers) {
-            val baseDir = projectManager.baseDir
-            val projectDirtyFiles = allDirty.filter[baseDir.isPrefixOf(it)].toList
-            val projectDeletedFiles = deletedFiles.filter[baseDir.isPrefixOf(it)].toList
-            if(!projectDirtyFiles.empty || !projectDeletedFiles.empty) {
-                buildData += new ProjectBuildData(projectManager, projectDirtyFiles, projectDeletedFiles)
-            }
+        val project2dirty = HashMultimap.<ProjectDescription, URI>create 
+        for(URI dirty: allDirty) {
+            val projectManager = workspaceManager.getProjectManager(dirty).projectDescription
+            project2dirty.put(projectManager, dirty)
         }
-        val description2buildData = buildData.toMap[manager.projectDescription]
-        val sortedDescriptions = sortByDependencies(description2buildData.keySet)
-        val sortedBuildData = sortedDescriptions.map[description2buildData.get(it)]
-        for(ProjectBuildData it: sortedBuildData) {
-            val result = manager.doBuild(dirtyFiles, deletedFiles, cancelIndicator)
+        val project2deleted = HashMultimap.<ProjectDescription, URI>create 
+        for(URI deleted: deletedFiles) {
+            val projectManager = workspaceManager.getProjectManager(deleted).projectDescription
+            project2deleted.put(projectManager, deleted)
+        }
+        val sortedDescriptions = sortByDependencies(project2dirty.keySet + project2deleted.keySet)
+        for(ProjectDescription it: sortedDescriptions) {
+            val projectManager = workspaceManager.getProjectManager(name)
+            val result = projectManager.doBuild(project2dirty.get(it).toList, project2deleted.get(it).toList, cancelIndicator)
             allDirty.addAll(result.affectedResources.map[uri])
             this.dirtyFiles -= dirtyFiles
             this.deletedFiles -= deletedFiles
         }        
     }
     
-    protected def sortByDependencies(Collection<ProjectDescription> projectDescriptions) {
+    protected def sortByDependencies(Iterable<ProjectDescription> projectDescriptions) {
         sorterProvider.get.sortByDependencies(projectDescriptions.toList) [
             workspaceManager.getProjectManager(name).reportDependencyCycle
         ]
@@ -89,7 +88,6 @@ class BuildManager {
 
     @Data
     protected static class ProjectBuildData {
-        ProjectManager manager
         List<URI> dirtyFiles
         List<URI> deletedFiles
     }
