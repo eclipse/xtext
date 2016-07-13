@@ -27,15 +27,17 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.GeneratedMetamodel
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.XtextStandaloneSetup
+import org.eclipse.xtext.parser.IEncodingProvider
+import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.eclipse.xtext.util.MergeableManifest
 import org.eclipse.xtext.util.Tuples
 import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess
 import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess
+import org.eclipse.xtext.xtext.generator.model.TextFileAccess
 import org.eclipse.xtext.xtext.generator.model.project.BundleProjectConfig
 import org.eclipse.xtext.xtext.generator.model.project.IXtextProjectConfig
-import org.eclipse.xtext.xtext.generator.model.TextFileAccess
 
 /**
  * The Xtext language infrastructure generator. Can be configured with {@link IXtextGeneratorFragment}
@@ -57,6 +59,9 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 	
 	@Accessors
 	XtextGeneratorStandaloneSetup standaloneSetup = new XtextGeneratorStandaloneSetup
+	
+	@Accessors
+	String grammarEncoding
 	
 	Injector injector
 	
@@ -100,6 +105,7 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 		if (injector === null) {
 			LOG.info('Initializing Xtext generator')
 			new StandaloneSetup().addRegisterGeneratedEPackage('org.eclipse.xtext.common.types.TypesPackage')
+			initializeEncoding
 			injector = createInjector
 			injector.injectMembers(this)
 			injector.getInstance(CodeConfig) => [initialize(injector)]
@@ -110,6 +116,17 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 				val languageInjector = injector.createLanguageInjector(language)
 				language.initialize(languageInjector)
 			}
+		}
+	}
+	
+	protected def initializeEncoding() {
+		val serviceProviderRegistry = IResourceServiceProvider.Registry.INSTANCE
+		val serviceProvider = serviceProviderRegistry.extensionToFactoryMap.get('xtext') as IResourceServiceProvider
+		val encoding = grammarEncoding ?: configuration.code.encoding
+		if (serviceProvider !== null && encoding !== null) {
+			val encodingProvider = serviceProvider.get(IEncodingProvider)
+			if (encodingProvider instanceof IEncodingProvider.Runtime)
+				encodingProvider.defaultEncoding = encoding
 		}
 	}
 	
