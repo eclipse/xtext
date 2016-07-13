@@ -3,16 +3,19 @@
  */
 package org.eclipse.xtext.testlanguages.indent;
 
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.ISetup;
-
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.eclipse.xtext.ISetup;
+import org.eclipse.xtext.XtextPackage;
+import org.eclipse.xtext.resource.IResourceFactory;
+import org.eclipse.xtext.resource.IResourceServiceProvider;
+import org.eclipse.xtext.resource.impl.BinaryGrammarResourceFactoryImpl;
+import org.eclipse.xtext.testlanguages.indent.indentLang.IndentLangPackage;
 
-/**
- * Generated from StandaloneSetup.xpt!
- */
 @SuppressWarnings("all")
 public class IndentationAwareTestLanguageStandaloneSetupGenerated implements ISetup {
 
@@ -21,15 +24,15 @@ public class IndentationAwareTestLanguageStandaloneSetupGenerated implements ISe
 		// register default ePackages
 		if (!Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().containsKey("ecore"))
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
-				"ecore", new org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl());
+				"ecore", new EcoreResourceFactoryImpl());
 		if (!Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().containsKey("xmi"))
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
-				"xmi", new org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl());
+				"xmi", new XMIResourceFactoryImpl());
 		if (!Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().containsKey("xtextbin"))
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
-				"xtextbin", new org.eclipse.xtext.resource.impl.BinaryGrammarResourceFactoryImpl());
-		if (!EPackage.Registry.INSTANCE.containsKey(org.eclipse.xtext.XtextPackage.eNS_URI))
-			EPackage.Registry.INSTANCE.put(org.eclipse.xtext.XtextPackage.eNS_URI, org.eclipse.xtext.XtextPackage.eINSTANCE);
+				"xtextbin", new BinaryGrammarResourceFactoryImpl());
+		if (!EPackage.Registry.INSTANCE.containsKey(XtextPackage.eNS_URI))
+			EPackage.Registry.INSTANCE.put(XtextPackage.eNS_URI, XtextPackage.eINSTANCE);
 
 		Injector injector = createInjector();
 		register(injector);
@@ -37,19 +40,17 @@ public class IndentationAwareTestLanguageStandaloneSetupGenerated implements ISe
 	}
 	
 	public Injector createInjector() {
-		return Guice.createInjector(new org.eclipse.xtext.testlanguages.indent.IndentationAwareTestLanguageRuntimeModule());
+		return Guice.createInjector(new IndentationAwareTestLanguageRuntimeModule());
 	}
 	
 	public void register(Injector injector) {
-
-		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);
-		org.eclipse.xtext.resource.IResourceServiceProvider serviceProvider = injector.getInstance(org.eclipse.xtext.resource.IResourceServiceProvider.class);
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("indentationawaretestlanguage", resourceFactory);
-		org.eclipse.xtext.resource.IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put("indentationawaretestlanguage", serviceProvider);
+		IResourceFactory resourceFactory = injector.getInstance(IResourceFactory.class);
+		IResourceServiceProvider serviceProvider = injector.getInstance(IResourceServiceProvider.class);
 		
-	if (!EPackage.Registry.INSTANCE.containsKey("http://example.xtext.org/IndentationAwareTestLanguage")) {
-		EPackage.Registry.INSTANCE.put("http://example.xtext.org/IndentationAwareTestLanguage", org.eclipse.xtext.testlanguages.indent.indentLang.IndentLangPackage.eINSTANCE);
-	}
-
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("indentationawaretestlanguage", resourceFactory);
+		IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put("indentationawaretestlanguage", serviceProvider);
+		if (!EPackage.Registry.INSTANCE.containsKey("http://example.xtext.org/IndentationAwareTestLanguage")) {
+			EPackage.Registry.INSTANCE.put("http://example.xtext.org/IndentationAwareTestLanguage", IndentLangPackage.eINSTANCE);
+		}
 	}
 }

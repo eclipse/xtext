@@ -188,7 +188,7 @@ public class TerminalRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 	}
 	
 	//terminal fragment IN_RICH_STRING:
-	//	"''" !('ï¿½' | "'") | "'" !('ï¿½' | "'") | !('ï¿½' | "'");
+	//	"''" !('«' | "'") | "'" !('«' | "'") | !('«' | "'");
 	public TerminalRule getIN_RICH_STRINGRule() {
 		return tIN_RICH_STRING;
 	}

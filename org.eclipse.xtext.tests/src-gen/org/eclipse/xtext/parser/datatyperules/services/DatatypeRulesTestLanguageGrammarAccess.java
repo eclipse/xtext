@@ -3,20 +3,24 @@
  */
 package org.eclipse.xtext.parser.datatyperules.services;
 
-import com.google.inject.Singleton;
 import com.google.inject.Inject;
-
+import com.google.inject.Singleton;
 import java.util.List;
-
-import org.eclipse.xtext.*;
-import org.eclipse.xtext.service.GrammarProvider;
-import org.eclipse.xtext.service.AbstractElementFinder.*;
-
+import org.eclipse.xtext.Alternatives;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.Group;
+import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
+import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder;
+import org.eclipse.xtext.service.GrammarProvider;
 
 @Singleton
 public class DatatypeRulesTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
-	
 	
 	public class CompositeModelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.datatyperules.DatatypeRulesTestLanguage.CompositeModel");
@@ -26,14 +30,13 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 		//CompositeModel:
 		//	model+=Model+;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//model+=Model+
 		public Assignment getModelAssignment() { return cModelAssignment; }
-
+		
 		//Model
 		public RuleCall getModelModelParserRuleCall_0() { return cModelModelParserRuleCall_0; }
 	}
-
 	public class ModelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.datatyperules.DatatypeRulesTestLanguage.Model");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -60,68 +63,67 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 		//Model:
 		//	id=NestedModelId (':' value=Fraction)? ('#' vector=Vector)? ('+' dots=Dots)? ('*' double=Double)? ';';
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//id=NestedModelId (':' value=Fraction)? ('#' vector=Vector)? ('+' dots=Dots)? ('*' double=Double)? ';'
 		public Group getGroup() { return cGroup; }
-
+		
 		//id=NestedModelId
 		public Assignment getIdAssignment_0() { return cIdAssignment_0; }
-
+		
 		//NestedModelId
 		public RuleCall getIdNestedModelIdParserRuleCall_0_0() { return cIdNestedModelIdParserRuleCall_0_0; }
-
+		
 		//(':' value=Fraction)?
 		public Group getGroup_1() { return cGroup_1; }
-
+		
 		//':'
 		public Keyword getColonKeyword_1_0() { return cColonKeyword_1_0; }
-
+		
 		//value=Fraction
 		public Assignment getValueAssignment_1_1() { return cValueAssignment_1_1; }
-
+		
 		//Fraction
 		public RuleCall getValueFractionParserRuleCall_1_1_0() { return cValueFractionParserRuleCall_1_1_0; }
-
+		
 		//('#' vector=Vector)?
 		public Group getGroup_2() { return cGroup_2; }
-
+		
 		//'#'
 		public Keyword getNumberSignKeyword_2_0() { return cNumberSignKeyword_2_0; }
-
+		
 		//vector=Vector
 		public Assignment getVectorAssignment_2_1() { return cVectorAssignment_2_1; }
-
+		
 		//Vector
 		public RuleCall getVectorVectorParserRuleCall_2_1_0() { return cVectorVectorParserRuleCall_2_1_0; }
-
+		
 		//('+' dots=Dots)?
 		public Group getGroup_3() { return cGroup_3; }
-
+		
 		//'+'
 		public Keyword getPlusSignKeyword_3_0() { return cPlusSignKeyword_3_0; }
-
+		
 		//dots=Dots
 		public Assignment getDotsAssignment_3_1() { return cDotsAssignment_3_1; }
-
+		
 		//Dots
 		public RuleCall getDotsDotsParserRuleCall_3_1_0() { return cDotsDotsParserRuleCall_3_1_0; }
-
+		
 		//('*' double=Double)?
 		public Group getGroup_4() { return cGroup_4; }
-
+		
 		//'*'
 		public Keyword getAsteriskKeyword_4_0() { return cAsteriskKeyword_4_0; }
-
+		
 		//double=Double
 		public Assignment getDoubleAssignment_4_1() { return cDoubleAssignment_4_1; }
-
+		
 		//Double
 		public RuleCall getDoubleDoubleParserRuleCall_4_1_0() { return cDoubleDoubleParserRuleCall_4_1_0; }
-
+		
 		//';'
 		public Keyword getSemicolonKeyword_5() { return cSemicolonKeyword_5; }
 	}
-
 	public class ModelIdElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.datatyperules.DatatypeRulesTestLanguage.ModelId");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -132,20 +134,19 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 		//ModelId:
 		//	ID '.' ID;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//ID '.' ID
 		public Group getGroup() { return cGroup; }
-
+		
 		//ID
 		public RuleCall getIDTerminalRuleCall_0() { return cIDTerminalRuleCall_0; }
-
+		
 		//'.'
 		public Keyword getFullStopKeyword_1() { return cFullStopKeyword_1; }
-
+		
 		//ID
 		public RuleCall getIDTerminalRuleCall_2() { return cIDTerminalRuleCall_2; }
 	}
-
 	public class NestedModelIdElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.datatyperules.DatatypeRulesTestLanguage.NestedModelId");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -156,20 +157,19 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 		//NestedModelId:
 		//	ModelId '.' ModelId;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//ModelId '.' ModelId
 		public Group getGroup() { return cGroup; }
-
+		
 		//ModelId
 		public RuleCall getModelIdParserRuleCall_0() { return cModelIdParserRuleCall_0; }
-
+		
 		//'.'
 		public Keyword getFullStopKeyword_1() { return cFullStopKeyword_1; }
-
+		
 		//ModelId
 		public RuleCall getModelIdParserRuleCall_2() { return cModelIdParserRuleCall_2; }
 	}
-
 	public class FractionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.datatyperules.DatatypeRulesTestLanguage.Fraction");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -181,23 +181,22 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 		//Fraction ecore::EBigDecimal:
 		//	INT ('/' INT)?
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//INT ('/' INT)?
 		public Group getGroup() { return cGroup; }
-
+		
 		//INT
 		public RuleCall getINTTerminalRuleCall_0() { return cINTTerminalRuleCall_0; }
-
+		
 		//('/' INT)?
 		public Group getGroup_1() { return cGroup_1; }
-
+		
 		//'/'
 		public Keyword getSolidusKeyword_1_0() { return cSolidusKeyword_1_0; }
-
+		
 		//INT
 		public RuleCall getINTTerminalRuleCall_1_1() { return cINTTerminalRuleCall_1_1; }
 	}
-
 	public class VectorElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.datatyperules.DatatypeRulesTestLanguage.Vector");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -209,23 +208,22 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 		//Vector:
 		//	'(' INT INT ')';
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'(' INT INT ')'
 		public Group getGroup() { return cGroup; }
-
+		
 		//'('
 		public Keyword getLeftParenthesisKeyword_0() { return cLeftParenthesisKeyword_0; }
-
+		
 		//INT
 		public RuleCall getINTTerminalRuleCall_1() { return cINTTerminalRuleCall_1; }
-
+		
 		//INT
 		public RuleCall getINTTerminalRuleCall_2() { return cINTTerminalRuleCall_2; }
-
+		
 		//')'
 		public Keyword getRightParenthesisKeyword_3() { return cRightParenthesisKeyword_3; }
 	}
-
 	public class DotsElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.datatyperules.DatatypeRulesTestLanguage.Dots");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -237,23 +235,22 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 		//Dots:
 		//	'.' '.' | '..';
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'.' '.' | '..'
 		public Alternatives getAlternatives() { return cAlternatives; }
-
+		
 		//'.' '.'
 		public Group getGroup_0() { return cGroup_0; }
-
+		
 		//'.'
 		public Keyword getFullStopKeyword_0_0() { return cFullStopKeyword_0_0; }
-
+		
 		//'.'
 		public Keyword getFullStopKeyword_0_1() { return cFullStopKeyword_0_1; }
-
+		
 		//'..'
 		public Keyword getFullStopFullStopKeyword_1() { return cFullStopFullStopKeyword_1; }
 	}
-
 	public class DoubleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.datatyperules.DatatypeRulesTestLanguage.Double");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -269,31 +266,31 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 		//Double ecore::EDouble:
 		//	'-'? INT? '.' INT ('E' '-'? INT)?
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'-'? INT? '.' INT ('E' '-'? INT)?
 		public Group getGroup() { return cGroup; }
-
+		
 		//'-'?
 		public Keyword getHyphenMinusKeyword_0() { return cHyphenMinusKeyword_0; }
-
+		
 		//INT?
 		public RuleCall getINTTerminalRuleCall_1() { return cINTTerminalRuleCall_1; }
-
+		
 		//'.'
 		public Keyword getFullStopKeyword_2() { return cFullStopKeyword_2; }
-
+		
 		//INT
 		public RuleCall getINTTerminalRuleCall_3() { return cINTTerminalRuleCall_3; }
-
+		
 		//('E' '-'? INT)?
 		public Group getGroup_4() { return cGroup_4; }
-
+		
 		//'E'
 		public Keyword getEKeyword_4_0() { return cEKeyword_4_0; }
-
+		
 		//'-'?
 		public Keyword getHyphenMinusKeyword_4_1() { return cHyphenMinusKeyword_4_1; }
-
+		
 		//INT
 		public RuleCall getINTTerminalRuleCall_4_2() { return cINTTerminalRuleCall_4_2; }
 	}
@@ -309,12 +306,12 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 	private final DoubleElements pDouble;
 	
 	private final Grammar grammar;
-
+	
 	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public DatatypeRulesTestLanguageGrammarAccess(GrammarProvider grammarProvider,
-		TerminalsGrammarAccess gaTerminals) {
+			TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
 		this.pCompositeModel = new CompositeModelElements();
@@ -348,7 +345,7 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 		return grammar;
 	}
 	
-
+	
 	public TerminalsGrammarAccess getTerminalsGrammarAccess() {
 		return gaTerminals;
 	}
@@ -363,7 +360,7 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 	public ParserRule getCompositeModelRule() {
 		return getCompositeModelAccess().getRule();
 	}
-
+	
 	//Model:
 	//	id=NestedModelId (':' value=Fraction)? ('#' vector=Vector)? ('+' dots=Dots)? ('*' double=Double)? ';';
 	public ModelElements getModelAccess() {
@@ -373,7 +370,7 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 	public ParserRule getModelRule() {
 		return getModelAccess().getRule();
 	}
-
+	
 	//ModelId:
 	//	ID '.' ID;
 	public ModelIdElements getModelIdAccess() {
@@ -383,7 +380,7 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 	public ParserRule getModelIdRule() {
 		return getModelIdAccess().getRule();
 	}
-
+	
 	//NestedModelId:
 	//	ModelId '.' ModelId;
 	public NestedModelIdElements getNestedModelIdAccess() {
@@ -393,7 +390,7 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 	public ParserRule getNestedModelIdRule() {
 		return getNestedModelIdAccess().getRule();
 	}
-
+	
 	//Fraction ecore::EBigDecimal:
 	//	INT ('/' INT)?
 	public FractionElements getFractionAccess() {
@@ -403,7 +400,7 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 	public ParserRule getFractionRule() {
 		return getFractionAccess().getRule();
 	}
-
+	
 	//Vector:
 	//	'(' INT INT ')';
 	public VectorElements getVectorAccess() {
@@ -413,7 +410,7 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 	public ParserRule getVectorRule() {
 		return getVectorAccess().getRule();
 	}
-
+	
 	//Dots:
 	//	'.' '.' | '..';
 	public DotsElements getDotsAccess() {
@@ -423,7 +420,7 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 	public ParserRule getDotsRule() {
 		return getDotsAccess().getRule();
 	}
-
+	
 	//Double ecore::EDouble:
 	//	'-'? INT? '.' INT ('E' '-'? INT)?
 	public DoubleElements getDoubleAccess() {
@@ -433,47 +430,47 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 	public ParserRule getDoubleRule() {
 		return getDoubleAccess().getRule();
 	}
-
+	
 	//terminal ID:
 	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
-	} 
-
+	}
+	
 	//terminal INT returns ecore::EInt:
 	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
-	} 
-
+	}
+	
 	//terminal STRING:
 	//	'"' ('\\' . | !('\\' | '"'))* '"' |
 	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
-	} 
-
+	}
+	
 	//terminal ML_COMMENT:
 	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal SL_COMMENT:
 	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal WS:
 	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
-	} 
-
+	}
+	
 	//terminal ANY_OTHER:
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
-	} 
+	}
 }

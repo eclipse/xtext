@@ -37,7 +37,8 @@ public class NoLiteralsAdapterFactory extends AdapterFactoryImpl
 	 */
 	public NoLiteralsAdapterFactory()
 	{
-		if (modelPackage == null) {
+		if (modelPackage == null)
+		{
 			modelPackage = NoLiteralsPackage.eINSTANCE;
 		}
 	}
@@ -53,10 +54,12 @@ public class NoLiteralsAdapterFactory extends AdapterFactoryImpl
 	@Override
 	public boolean isFactoryForType(Object object)
 	{
-		if (object == modelPackage) {
+		if (object == modelPackage)
+		{
 			return true;
 		}
-		if (object instanceof EObject) {
+		if (object instanceof EObject)
+		{
 			return ((EObject)object).eClass().getEPackage() == modelPackage;
 		}
 		return false;
@@ -69,13 +72,16 @@ public class NoLiteralsAdapterFactory extends AdapterFactoryImpl
 	 * @generated
 	 */
 	protected NoLiteralsSwitch<Adapter> modelSwitch =
-		new NoLiteralsSwitch<Adapter>() {
+		new NoLiteralsSwitch<Adapter>()
+		{
 			@Override
-			public Adapter caseNoLitClass(NoLitClass object) {
+			public Adapter caseNoLitClass(NoLitClass object)
+			{
 				return createNoLitClassAdapter();
 			}
 			@Override
-			public Adapter defaultCase(EObject object) {
+			public Adapter defaultCase(EObject object)
+			{
 				return createEObjectAdapter();
 			}
 		};

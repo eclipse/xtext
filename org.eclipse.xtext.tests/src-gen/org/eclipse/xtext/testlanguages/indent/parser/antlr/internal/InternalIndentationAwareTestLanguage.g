@@ -5,7 +5,6 @@ grammar InternalIndentationAwareTestLanguage;
 
 options {
 	superClass=AbstractInternalAntlrParser;
-	
 }
 
 @lexer::header {
@@ -17,7 +16,7 @@ import org.eclipse.xtext.parser.antlr.Lexer;
 }
 
 @parser::header {
-package org.eclipse.xtext.testlanguages.indent.parser.antlr.internal; 
+package org.eclipse.xtext.testlanguages.indent.parser.antlr.internal;
 
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
@@ -35,191 +34,191 @@ import org.eclipse.xtext.testlanguages.indent.services.IndentationAwareTestLangu
 @parser::members {
 
  	private IndentationAwareTestLanguageGrammarAccess grammarAccess;
- 	
+
     public InternalIndentationAwareTestLanguageParser(TokenStream input, IndentationAwareTestLanguageGrammarAccess grammarAccess) {
         this(input);
         this.grammarAccess = grammarAccess;
         registerRules(grammarAccess.getGrammar());
     }
-    
+
     @Override
     protected String getFirstRuleName() {
-    	return "NodeList";	
+    	return "NodeList";
    	}
-   	
+
    	@Override
    	protected IndentationAwareTestLanguageGrammarAccess getGrammarAccess() {
    		return grammarAccess;
    	}
+
 }
 
-@rulecatch { 
-    catch (RecognitionException re) { 
-        recover(input,re); 
+@rulecatch {
+    catch (RecognitionException re) {
+        recover(input,re);
         appendSkippedTokens();
-    } 
+    }
 }
-
-
-
 
 // Entry rule entryRuleNodeList
-entryRuleNodeList returns [EObject current=null] 
-	:
+entryRuleNodeList returns [EObject current=null]:
 	{ newCompositeNode(grammarAccess.getNodeListRule()); }
-	 iv_ruleNodeList=ruleNodeList 
-	 { $current=$iv_ruleNodeList.current; } 
-	 EOF 
-;
+	iv_ruleNodeList=ruleNodeList
+	{ $current=$iv_ruleNodeList.current; }
+	EOF;
 
 // Rule NodeList
-ruleNodeList returns [EObject current=null] 
-    @init { enterRule(); 
-    }
-    @after { leaveRule(); }:
-((
-(
-		{ 
-	        newCompositeNode(grammarAccess.getNodeListAccess().getChildrenNodeParserRuleCall_0_0()); 
-	    }
-		lv_children_0_0=ruleNode		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getNodeListRule());
-	        }
-       		add(
-       			$current, 
-       			"children",
-        		lv_children_0_0, 
-        		"org.eclipse.xtext.testlanguages.indent.IndentationAwareTestLanguage.Node");
-	        afterParserOrEnumRuleCall();
-	    }
-
-)
-)(this_NL_1=RULE_NL
-    { 
-    newLeafNode(this_NL_1, grammarAccess.getNodeListAccess().getNLTerminalRuleCall_1_0()); 
-    }
-(
-(
-		{ 
-	        newCompositeNode(grammarAccess.getNodeListAccess().getChildrenNodeParserRuleCall_1_1_0()); 
-	    }
-		lv_children_2_0=ruleNode		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getNodeListRule());
-	        }
-       		add(
-       			$current, 
-       			"children",
-        		lv_children_2_0, 
-        		"org.eclipse.xtext.testlanguages.indent.IndentationAwareTestLanguage.Node");
-	        afterParserOrEnumRuleCall();
-	    }
-
-)
-))*)
+ruleNodeList returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getNodeListAccess().getChildrenNodeParserRuleCall_0_0());
+				}
+				lv_children_0_0=ruleNode
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getNodeListRule());
+					}
+					add(
+						$current,
+						"children",
+						lv_children_0_0,
+						"org.eclipse.xtext.testlanguages.indent.IndentationAwareTestLanguage.Node");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		(
+			this_NL_1=RULE_NL
+			{
+				newLeafNode(this_NL_1, grammarAccess.getNodeListAccess().getNLTerminalRuleCall_1_0());
+			}
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getNodeListAccess().getChildrenNodeParserRuleCall_1_1_0());
+					}
+					lv_children_2_0=ruleNode
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getNodeListRule());
+						}
+						add(
+							$current,
+							"children",
+							lv_children_2_0,
+							"org.eclipse.xtext.testlanguages.indent.IndentationAwareTestLanguage.Node");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+		)*
+	)
 ;
-
-
-
-
 
 // Entry rule entryRuleNode
-entryRuleNode returns [EObject current=null] 
-	:
+entryRuleNode returns [EObject current=null]:
 	{ newCompositeNode(grammarAccess.getNodeRule()); }
-	 iv_ruleNode=ruleNode 
-	 { $current=$iv_ruleNode.current; } 
-	 EOF 
-;
+	iv_ruleNode=ruleNode
+	{ $current=$iv_ruleNode.current; }
+	EOF;
 
 // Rule Node
-ruleNode returns [EObject current=null] 
-    @init { enterRule(); 
-    }
-    @after { leaveRule(); }:
-((
-(
-		{ 
-	        newCompositeNode(grammarAccess.getNodeAccess().getNameStringParserRuleCall_0_0()); 
-	    }
-		lv_name_0_0=ruleString		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getNodeRule());
-	        }
-       		set(
-       			$current, 
-       			"name",
-        		lv_name_0_0, 
-        		"org.eclipse.xtext.testlanguages.indent.IndentationAwareTestLanguage.String");
-	        afterParserOrEnumRuleCall();
-	    }
-
-)
-)(this_NL_1=RULE_NL
-    { 
-    newLeafNode(this_NL_1, grammarAccess.getNodeAccess().getNLTerminalRuleCall_1_0()); 
-    }
-this_BEGIN_2=RULE_BEGIN
-    { 
-    newLeafNode(this_BEGIN_2, grammarAccess.getNodeAccess().getBEGINTerminalRuleCall_1_1()); 
-    }
-(
-(
-		{ 
-	        newCompositeNode(grammarAccess.getNodeAccess().getChildrenNodeListParserRuleCall_1_2_0()); 
-	    }
-		lv_children_3_0=ruleNodeList		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getNodeRule());
-	        }
-       		set(
-       			$current, 
-       			"children",
-        		lv_children_3_0, 
-        		"org.eclipse.xtext.testlanguages.indent.IndentationAwareTestLanguage.NodeList");
-	        afterParserOrEnumRuleCall();
-	    }
-
-)
-)this_END_4=RULE_END
-    { 
-    newLeafNode(this_END_4, grammarAccess.getNodeAccess().getENDTerminalRuleCall_1_3()); 
-    }
-)?)
+ruleNode returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getNodeAccess().getNameStringParserRuleCall_0_0());
+				}
+				lv_name_0_0=ruleString
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getNodeRule());
+					}
+					set(
+						$current,
+						"name",
+						lv_name_0_0,
+						"org.eclipse.xtext.testlanguages.indent.IndentationAwareTestLanguage.String");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
+		(
+			this_NL_1=RULE_NL
+			{
+				newLeafNode(this_NL_1, grammarAccess.getNodeAccess().getNLTerminalRuleCall_1_0());
+			}
+			this_BEGIN_2=RULE_BEGIN
+			{
+				newLeafNode(this_BEGIN_2, grammarAccess.getNodeAccess().getBEGINTerminalRuleCall_1_1());
+			}
+			(
+				(
+					{
+						newCompositeNode(grammarAccess.getNodeAccess().getChildrenNodeListParserRuleCall_1_2_0());
+					}
+					lv_children_3_0=ruleNodeList
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getNodeRule());
+						}
+						set(
+							$current,
+							"children",
+							lv_children_3_0,
+							"org.eclipse.xtext.testlanguages.indent.IndentationAwareTestLanguage.NodeList");
+						afterParserOrEnumRuleCall();
+					}
+				)
+			)
+			this_END_4=RULE_END
+			{
+				newLeafNode(this_END_4, grammarAccess.getNodeAccess().getENDTerminalRuleCall_1_3());
+			}
+		)?
+	)
 ;
-
-
-
-
 
 // Entry rule entryRuleString
-entryRuleString returns [String current=null] 
-	:
-	{ newCompositeNode(grammarAccess.getStringRule()); } 
-	 iv_ruleString=ruleString 
-	 { $current=$iv_ruleString.current.getText(); }  
-	 EOF 
-;
+entryRuleString returns [String current=null]:
+	{ newCompositeNode(grammarAccess.getStringRule()); }
+	iv_ruleString=ruleString
+	{ $current=$iv_ruleString.current.getText(); }
+	EOF;
 
 // Rule String
-ruleString returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
-    @init { enterRule(); 
-    }
-    @after { leaveRule(); }:
-(    this_OTHER_0=RULE_OTHER    {
-		$current.merge(this_OTHER_0);
-    }
-
-    { 
-    newLeafNode(this_OTHER_0, grammarAccess.getStringAccess().getOTHERTerminalRuleCall()); 
-    }
-)+
-    ;
-
-
-
-
+ruleString returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		this_OTHER_0=RULE_OTHER
+		{
+			$current.merge(this_OTHER_0);
+		}
+		{
+			newLeafNode(this_OTHER_0, grammarAccess.getStringAccess().getOTHERTerminalRuleCall());
+		}
+	)+
+;
 
 RULE_NL : ('\r'|'\n')+ '\t'*;
 
@@ -228,5 +227,3 @@ RULE_BEGIN : '{';
 RULE_END : '}';
 
 RULE_OTHER : .;
-
-

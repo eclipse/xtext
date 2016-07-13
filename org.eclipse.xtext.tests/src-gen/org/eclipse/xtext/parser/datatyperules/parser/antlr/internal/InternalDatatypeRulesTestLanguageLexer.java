@@ -292,10 +292,10 @@ public class InternalDatatypeRulesTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalDatatypeRulesTestLanguage.g:520:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // InternalDatatypeRulesTestLanguage.g:520:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalDatatypeRulesTestLanguage.g:511:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // InternalDatatypeRulesTestLanguage.g:511:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // InternalDatatypeRulesTestLanguage.g:520:11: ( '^' )?
+            // InternalDatatypeRulesTestLanguage.g:511:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -304,7 +304,7 @@ public class InternalDatatypeRulesTestLanguageLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // InternalDatatypeRulesTestLanguage.g:520:11: '^'
+                    // InternalDatatypeRulesTestLanguage.g:511:11: '^'
                     {
                     match('^'); 
 
@@ -322,7 +322,7 @@ public class InternalDatatypeRulesTestLanguageLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // InternalDatatypeRulesTestLanguage.g:520:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalDatatypeRulesTestLanguage.g:511:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -371,10 +371,10 @@ public class InternalDatatypeRulesTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalDatatypeRulesTestLanguage.g:522:10: ( ( '0' .. '9' )+ )
-            // InternalDatatypeRulesTestLanguage.g:522:12: ( '0' .. '9' )+
+            // InternalDatatypeRulesTestLanguage.g:513:10: ( ( '0' .. '9' )+ )
+            // InternalDatatypeRulesTestLanguage.g:513:12: ( '0' .. '9' )+
             {
-            // InternalDatatypeRulesTestLanguage.g:522:12: ( '0' .. '9' )+
+            // InternalDatatypeRulesTestLanguage.g:513:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -388,7 +388,7 @@ public class InternalDatatypeRulesTestLanguageLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // InternalDatatypeRulesTestLanguage.g:522:13: '0' .. '9'
+            	    // InternalDatatypeRulesTestLanguage.g:513:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -420,10 +420,10 @@ public class InternalDatatypeRulesTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalDatatypeRulesTestLanguage.g:524:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // InternalDatatypeRulesTestLanguage.g:524:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalDatatypeRulesTestLanguage.g:515:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // InternalDatatypeRulesTestLanguage.g:515:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // InternalDatatypeRulesTestLanguage.g:524:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalDatatypeRulesTestLanguage.g:515:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -441,10 +441,10 @@ public class InternalDatatypeRulesTestLanguageLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // InternalDatatypeRulesTestLanguage.g:524:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // InternalDatatypeRulesTestLanguage.g:515:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // InternalDatatypeRulesTestLanguage.g:524:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // InternalDatatypeRulesTestLanguage.g:515:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -460,7 +460,7 @@ public class InternalDatatypeRulesTestLanguageLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // InternalDatatypeRulesTestLanguage.g:524:21: '\\\\' .
+                    	    // InternalDatatypeRulesTestLanguage.g:515:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -468,7 +468,7 @@ public class InternalDatatypeRulesTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalDatatypeRulesTestLanguage.g:524:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // InternalDatatypeRulesTestLanguage.g:515:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -493,10 +493,10 @@ public class InternalDatatypeRulesTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalDatatypeRulesTestLanguage.g:524:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // InternalDatatypeRulesTestLanguage.g:515:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // InternalDatatypeRulesTestLanguage.g:524:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // InternalDatatypeRulesTestLanguage.g:515:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -512,7 +512,7 @@ public class InternalDatatypeRulesTestLanguageLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // InternalDatatypeRulesTestLanguage.g:524:54: '\\\\' .
+                    	    // InternalDatatypeRulesTestLanguage.g:515:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -520,7 +520,7 @@ public class InternalDatatypeRulesTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalDatatypeRulesTestLanguage.g:524:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // InternalDatatypeRulesTestLanguage.g:515:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -563,12 +563,12 @@ public class InternalDatatypeRulesTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalDatatypeRulesTestLanguage.g:526:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // InternalDatatypeRulesTestLanguage.g:526:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // InternalDatatypeRulesTestLanguage.g:517:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // InternalDatatypeRulesTestLanguage.g:517:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // InternalDatatypeRulesTestLanguage.g:526:24: ( options {greedy=false; } : . )*
+            // InternalDatatypeRulesTestLanguage.g:517:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -593,7 +593,7 @@ public class InternalDatatypeRulesTestLanguageLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // InternalDatatypeRulesTestLanguage.g:526:52: .
+            	    // InternalDatatypeRulesTestLanguage.g:517:52: .
             	    {
             	    matchAny(); 
 
@@ -623,12 +623,12 @@ public class InternalDatatypeRulesTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalDatatypeRulesTestLanguage.g:528:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // InternalDatatypeRulesTestLanguage.g:528:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // InternalDatatypeRulesTestLanguage.g:519:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // InternalDatatypeRulesTestLanguage.g:519:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // InternalDatatypeRulesTestLanguage.g:528:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalDatatypeRulesTestLanguage.g:519:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -641,7 +641,7 @@ public class InternalDatatypeRulesTestLanguageLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // InternalDatatypeRulesTestLanguage.g:528:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalDatatypeRulesTestLanguage.g:519:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -661,7 +661,7 @@ public class InternalDatatypeRulesTestLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // InternalDatatypeRulesTestLanguage.g:528:40: ( ( '\\r' )? '\\n' )?
+            // InternalDatatypeRulesTestLanguage.g:519:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -670,9 +670,9 @@ public class InternalDatatypeRulesTestLanguageLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // InternalDatatypeRulesTestLanguage.g:528:41: ( '\\r' )? '\\n'
+                    // InternalDatatypeRulesTestLanguage.g:519:41: ( '\\r' )? '\\n'
                     {
-                    // InternalDatatypeRulesTestLanguage.g:528:41: ( '\\r' )?
+                    // InternalDatatypeRulesTestLanguage.g:519:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -681,7 +681,7 @@ public class InternalDatatypeRulesTestLanguageLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // InternalDatatypeRulesTestLanguage.g:528:41: '\\r'
+                            // InternalDatatypeRulesTestLanguage.g:519:41: '\\r'
                             {
                             match('\r'); 
 
@@ -713,10 +713,10 @@ public class InternalDatatypeRulesTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalDatatypeRulesTestLanguage.g:530:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // InternalDatatypeRulesTestLanguage.g:530:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalDatatypeRulesTestLanguage.g:521:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalDatatypeRulesTestLanguage.g:521:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // InternalDatatypeRulesTestLanguage.g:530:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalDatatypeRulesTestLanguage.g:521:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -770,8 +770,8 @@ public class InternalDatatypeRulesTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalDatatypeRulesTestLanguage.g:532:16: ( . )
-            // InternalDatatypeRulesTestLanguage.g:532:18: .
+            // InternalDatatypeRulesTestLanguage.g:523:16: ( . )
+            // InternalDatatypeRulesTestLanguage.g:523:18: .
             {
             matchAny(); 
 

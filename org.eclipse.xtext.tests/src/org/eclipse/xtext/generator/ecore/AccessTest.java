@@ -1,11 +1,20 @@
-package org.eclipse.xtext.generator.ecore.genmodelaccess.root;
+/*******************************************************************************
+ * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
+package org.eclipse.xtext.generator.ecore;
 
 import org.eclipse.xtext.generator.ecore.genmodelaccess.nestedPackage1.NestedPackage1Package;
 import org.eclipse.xtext.generator.ecore.genmodelaccess.noLiterals.NoLiteralsPackage;
+import org.eclipse.xtext.generator.ecore.genmodelaccess.root.RootPackage;
 import org.junit.Assert;
 import org.junit.Test;
 
 public abstract class AccessTest extends Assert {
+	
 	@Test public void testRootPackage() {
 		Assert.assertNotNull(RootPackage.eINSTANCE);
 		Assert.assertNotNull(RootPackage.Literals.ROOT_CLASS);
@@ -35,4 +44,5 @@ public abstract class AccessTest extends Assert {
 		Assert.assertNotNull(NoLiteralsPackage.eINSTANCE.getNoLitClass_Reference2());
 		Assert.assertNotNull(NoLiteralsPackage.eINSTANCE.getNoLitEnum());
 	}
+	
 }

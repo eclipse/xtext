@@ -7,10 +7,10 @@ import java.io.InputStream;
 import org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider;
 
 public class Bug305397AntlrTokenFileProvider implements IAntlrTokenFileProvider {
-	
+
 	@Override
 	public InputStream getAntlrTokenFile() {
 		ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/parsetree/impl/parser/antlr/internal/InternalBug305397.tokens");
+		return classLoader.getResourceAsStream("org/eclipse/xtext/parsetree/impl/parser/antlr/internal/InternalBug305397.tokens");
 	}
 }

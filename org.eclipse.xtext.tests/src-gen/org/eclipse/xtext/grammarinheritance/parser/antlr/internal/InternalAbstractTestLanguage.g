@@ -185,7 +185,7 @@ ruleExtendableParserRule returns [EObject current=null]
 
 RULE_REAL : RULE_INT '.' RULE_INT;
 
-RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'\uFFFD'|'\uFFFD'|'\uFFFD'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
+RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'\u00F6'|'\u00E4'|'\u00FC'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
 fragment RULE_INT : ('0'..'9')+;
 

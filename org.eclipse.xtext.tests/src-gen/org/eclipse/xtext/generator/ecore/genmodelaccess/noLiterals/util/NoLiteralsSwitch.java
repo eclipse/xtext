@@ -40,7 +40,8 @@ public class NoLiteralsSwitch<T>
 	 */
 	public NoLiteralsSwitch()
 	{
-		if (modelPackage == null) {
+		if (modelPackage == null)
+		{
 			modelPackage = NoLiteralsPackage.eINSTANCE;
 		}
 	}
@@ -66,10 +67,12 @@ public class NoLiteralsSwitch<T>
 	 */
 	protected T doSwitch(EClass theEClass, EObject theEObject)
 	{
-		if (theEClass.eContainer() == modelPackage) {
+		if (theEClass.eContainer() == modelPackage)
+		{
 			return doSwitch(theEClass.getClassifierID(), theEObject);
 		}
-		else {
+		else
+		{
 			List<EClass> eSuperTypes = theEClass.getESuperTypes();
 			return
 				eSuperTypes.isEmpty() ?
@@ -87,8 +90,10 @@ public class NoLiteralsSwitch<T>
 	 */
 	protected T doSwitch(int classifierID, EObject theEObject)
 	{
-		switch (classifierID) {
-			case NoLiteralsPackage.NO_LIT_CLASS: {
+		switch (classifierID)
+		{
+			case NoLiteralsPackage.NO_LIT_CLASS:
+			{
 				NoLitClass noLitClass = (NoLitClass)theEObject;
 				T result = caseNoLitClass(noLitClass);
 				if (result == null) result = defaultCase(theEObject);

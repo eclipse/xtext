@@ -281,10 +281,10 @@ public class InternalReferenceGrammarTestLanguageLexer extends Lexer {
         try {
             int _type = T__22;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalReferenceGrammarTestLanguage.g:22:7: ( 'GR\\uFFFDN' )
-            // InternalReferenceGrammarTestLanguage.g:22:9: 'GR\\uFFFDN'
+            // InternalReferenceGrammarTestLanguage.g:22:7: ( 'GR\\u00DCN' )
+            // InternalReferenceGrammarTestLanguage.g:22:9: 'GR\\u00DCN'
             {
-            match("GR\uFFFDN"); 
+            match("GR\u00DCN"); 
 
 
             }
@@ -1028,9 +1028,9 @@ public class InternalReferenceGrammarTestLanguageLexer extends Lexer {
     static final String DFA12_eofS =
         "\131\uffff";
     static final String DFA12_minS =
-        "\1\0\1\160\2\uffff\1\145\2\uffff\1\162\1\117\1\114\1\105\1\141\1\uffff\1\101\2\uffff\2\0\1\52\2\uffff\1\151\3\uffff\1\156\1\171\2\uffff\1\167\1\124\1\101\1\114\1\ufffd\1\155\6\uffff\1\145\1\144\1\167\1\141\1\60\1\125\1\102\1\uffff\1\151\1\154\1\60\1\157\1\143\1\uffff\2\60\1\154\1\160\1\uffff\1\162\1\150\2\uffff\1\151\1\154\1\145\1\144\1\163\1\145\1\141\1\165\1\60\1\145\1\60\1\164\1\147\1\uffff\1\156\1\uffff\1\172\1\60\1\145\1\60\1\uffff\1\162\1\uffff\1\60\1\uffff";
+        "\1\0\1\160\2\uffff\1\145\2\uffff\1\162\1\117\1\114\1\105\1\141\1\uffff\1\101\2\uffff\2\0\1\52\2\uffff\1\151\3\uffff\1\156\1\171\2\uffff\1\167\1\124\1\101\1\114\1\u00dc\1\155\6\uffff\1\145\1\144\1\167\1\141\1\60\1\125\1\102\1\uffff\1\151\1\154\1\60\1\157\1\143\1\uffff\2\60\1\154\1\160\1\uffff\1\162\1\150\2\uffff\1\151\1\154\1\145\1\144\1\163\1\145\1\141\1\165\1\60\1\145\1\60\1\164\1\147\1\uffff\1\156\1\uffff\1\172\1\60\1\145\1\60\1\uffff\1\162\1\uffff\1\60\1\uffff";
     static final String DFA12_maxS =
-        "\1\uffff\1\160\2\uffff\1\151\2\uffff\1\162\1\117\1\114\1\122\1\141\1\uffff\1\172\2\uffff\2\uffff\1\57\2\uffff\1\151\3\uffff\1\156\1\171\2\uffff\1\167\1\124\1\101\1\114\1\ufffd\1\155\6\uffff\1\145\1\144\1\167\1\141\1\172\1\125\1\102\1\uffff\1\151\1\154\1\172\1\157\1\143\1\uffff\2\172\1\154\1\172\1\uffff\1\162\1\150\2\uffff\1\151\1\154\1\145\1\144\1\163\1\145\1\141\1\165\1\172\1\145\1\172\1\164\1\147\1\uffff\1\156\1\uffff\2\172\1\145\1\172\1\uffff\1\162\1\uffff\1\172\1\uffff";
+        "\1\uffff\1\160\2\uffff\1\151\2\uffff\1\162\1\117\1\114\1\122\1\141\1\uffff\1\172\2\uffff\2\uffff\1\57\2\uffff\1\151\3\uffff\1\156\1\171\2\uffff\1\167\1\124\1\101\1\114\1\u00dc\1\155\6\uffff\1\145\1\144\1\167\1\141\1\172\1\125\1\102\1\uffff\1\151\1\154\1\172\1\157\1\143\1\uffff\2\172\1\154\1\172\1\uffff\1\162\1\150\2\uffff\1\151\1\154\1\145\1\144\1\163\1\145\1\141\1\165\1\172\1\145\1\172\1\164\1\147\1\uffff\1\156\1\uffff\2\172\1\145\1\172\1\uffff\1\162\1\uffff\1\172\1\uffff";
     static final String DFA12_acceptS =
         "\2\uffff\1\2\1\3\1\uffff\1\5\1\6\5\uffff\1\17\1\uffff\1\20\1\21\3\uffff\1\25\1\26\1\uffff\1\20\1\2\1\3\2\uffff\1\5\1\6\6\uffff\1\17\1\21\1\22\1\23\1\24\1\25\7\uffff\1\14\5\uffff\1\11\4\uffff\1\4\2\uffff\1\12\1\13\15\uffff\1\16\1\uffff\1\15\4\uffff\1\10\1\uffff\1\1\1\uffff\1\7";
     static final String DFA12_specialS =

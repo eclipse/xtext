@@ -84,8 +84,8 @@ public class InternalAbstractTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalAbstractTestLanguage.g:188:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '\\uFFFD' | '\\uFFFD' | '\\uFFFD' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // InternalAbstractTestLanguage.g:188:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '\\uFFFD' | '\\uFFFD' | '\\uFFFD' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalAbstractTestLanguage.g:188:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '\\u00F6' | '\\u00E4' | '\\u00FC' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // InternalAbstractTestLanguage.g:188:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '\\u00F6' | '\\u00E4' | '\\u00FC' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
             // InternalAbstractTestLanguage.g:188:11: ( '^' )?
             int alt1=2;
@@ -105,7 +105,7 @@ public class InternalAbstractTestLanguageLexer extends Lexer {
 
             }
 
-            if ( (input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z')||input.LA(1)=='\uFFFD' ) {
+            if ( (input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z')||input.LA(1)=='\u00E4'||input.LA(1)=='\u00F6'||input.LA(1)=='\u00FC' ) {
                 input.consume();
 
             }
@@ -648,16 +648,16 @@ public class InternalAbstractTestLanguageLexer extends Lexer {
     static final String DFA12_minS =
         "\1\0\1\154\1\56\1\101\1\uffff\2\0\1\52\2\uffff\1\145\6\uffff\1\155\1\145\1\156\1\164\1\60\1\uffff";
     static final String DFA12_maxS =
-        "\1\uffff\1\154\1\71\1\ufffd\1\uffff\2\uffff\1\57\2\uffff\1\145\6\uffff\1\155\1\145\1\156\1\164\1\172\1\uffff";
+        "\1\uffff\1\154\1\71\1\u00fc\1\uffff\2\uffff\1\57\2\uffff\1\145\6\uffff\1\155\1\145\1\156\1\164\1\172\1\uffff";
     static final String DFA12_acceptS =
         "\4\uffff\1\3\3\uffff\1\7\1\10\1\uffff\1\3\1\2\1\4\1\5\1\6\1\7\5\uffff\1\1";
     static final String DFA12_specialS =
         "\1\2\4\uffff\1\0\1\1\20\uffff}>";
     static final String[] DFA12_transitionS = {
-            "\11\11\2\10\2\11\1\10\22\11\1\10\1\11\1\5\4\11\1\6\7\11\1\7\12\2\7\11\32\4\3\11\1\3\1\4\1\11\4\4\1\1\25\4\uff82\11\1\4\2\11",
+            "\11\11\2\10\2\11\1\10\22\11\1\10\1\11\1\5\4\11\1\6\7\11\1\7\12\2\7\11\32\4\3\11\1\3\1\4\1\11\4\4\1\1\25\4\151\11\1\4\21\11\1\4\5\11\1\4\uff03\11",
             "\1\12",
             "\1\14\1\uffff\12\14",
-            "\32\13\4\uffff\1\13\1\uffff\32\13\uff82\uffff\1\13",
+            "\32\13\4\uffff\1\13\1\uffff\32\13\151\uffff\1\13\21\uffff\1\13\5\uffff\1\13",
             "",
             "\0\15",
             "\0\15",
@@ -745,7 +745,7 @@ public class InternalAbstractTestLanguageLexer extends Lexer {
 
                         else if ( (LA12_0=='^') ) {s = 3;}
 
-                        else if ( ((LA12_0>='A' && LA12_0<='Z')||LA12_0=='_'||(LA12_0>='a' && LA12_0<='d')||(LA12_0>='f' && LA12_0<='z')||LA12_0=='\uFFFD') ) {s = 4;}
+                        else if ( ((LA12_0>='A' && LA12_0<='Z')||LA12_0=='_'||(LA12_0>='a' && LA12_0<='d')||(LA12_0>='f' && LA12_0<='z')||LA12_0=='\u00E4'||LA12_0=='\u00F6'||LA12_0=='\u00FC') ) {s = 4;}
 
                         else if ( (LA12_0=='\"') ) {s = 5;}
 
@@ -755,7 +755,7 @@ public class InternalAbstractTestLanguageLexer extends Lexer {
 
                         else if ( ((LA12_0>='\t' && LA12_0<='\n')||LA12_0=='\r'||LA12_0==' ') ) {s = 8;}
 
-                        else if ( ((LA12_0>='\u0000' && LA12_0<='\b')||(LA12_0>='\u000B' && LA12_0<='\f')||(LA12_0>='\u000E' && LA12_0<='\u001F')||LA12_0=='!'||(LA12_0>='#' && LA12_0<='&')||(LA12_0>='(' && LA12_0<='.')||(LA12_0>=':' && LA12_0<='@')||(LA12_0>='[' && LA12_0<=']')||LA12_0=='`'||(LA12_0>='{' && LA12_0<='\uFFFC')||(LA12_0>='\uFFFE' && LA12_0<='\uFFFF')) ) {s = 9;}
+                        else if ( ((LA12_0>='\u0000' && LA12_0<='\b')||(LA12_0>='\u000B' && LA12_0<='\f')||(LA12_0>='\u000E' && LA12_0<='\u001F')||LA12_0=='!'||(LA12_0>='#' && LA12_0<='&')||(LA12_0>='(' && LA12_0<='.')||(LA12_0>=':' && LA12_0<='@')||(LA12_0>='[' && LA12_0<=']')||LA12_0=='`'||(LA12_0>='{' && LA12_0<='\u00E3')||(LA12_0>='\u00E5' && LA12_0<='\u00F5')||(LA12_0>='\u00F7' && LA12_0<='\u00FB')||(LA12_0>='\u00FD' && LA12_0<='\uFFFF')) ) {s = 9;}
 
                         if ( s>=0 ) return s;
                         break;

@@ -1,4 +1,4 @@
-package org.eclipse.xtext.generator.ecore.parser.antlr.internal; 
+package org.eclipse.xtext.generator.ecore.parser.antlr.internal;
 
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
@@ -52,18 +52,18 @@ public class InternalEcoreFragmentTestLanguageParser extends AbstractInternalAnt
 
 
      	private EcoreFragmentTestLanguageGrammarAccess grammarAccess;
-     	
+
         public InternalEcoreFragmentTestLanguageParser(TokenStream input, EcoreFragmentTestLanguageGrammarAccess grammarAccess) {
             this(input);
             this.grammarAccess = grammarAccess;
             registerRules(grammarAccess.getGrammar());
         }
-        
+
         @Override
         protected String getFirstRuleName() {
-        	return "Second";	
+        	return "Second";
        	}
-       	
+
        	@Override
        	protected EcoreFragmentTestLanguageGrammarAccess getGrammarAccess() {
        		return grammarAccess;
@@ -71,8 +71,9 @@ public class InternalEcoreFragmentTestLanguageParser extends AbstractInternalAnt
 
 
 
+
     // $ANTLR start "entryRuleSecond"
-    // InternalEcoreFragmentTestLanguage.g:67:1: entryRuleSecond returns [EObject current=null] : iv_ruleSecond= ruleSecond EOF ;
+    // InternalEcoreFragmentTestLanguage.g:64:1: entryRuleSecond returns [EObject current=null] : iv_ruleSecond= ruleSecond EOF ;
     public final EObject entryRuleSecond() throws RecognitionException {
         EObject current = null;
 
@@ -80,8 +81,8 @@ public class InternalEcoreFragmentTestLanguageParser extends AbstractInternalAnt
 
 
         try {
-            // InternalEcoreFragmentTestLanguage.g:68:2: (iv_ruleSecond= ruleSecond EOF )
-            // InternalEcoreFragmentTestLanguage.g:69:2: iv_ruleSecond= ruleSecond EOF
+            // InternalEcoreFragmentTestLanguage.g:64:47: (iv_ruleSecond= ruleSecond EOF )
+            // InternalEcoreFragmentTestLanguage.g:65:2: iv_ruleSecond= ruleSecond EOF
             {
              newCompositeNode(grammarAccess.getSecondRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -95,11 +96,11 @@ public class InternalEcoreFragmentTestLanguageParser extends AbstractInternalAnt
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -108,7 +109,7 @@ public class InternalEcoreFragmentTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "ruleSecond"
-    // InternalEcoreFragmentTestLanguage.g:76:1: ruleSecond returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= 'first' ( (otherlv_2= RULE_ID ) ) ) ;
+    // InternalEcoreFragmentTestLanguage.g:71:1: ruleSecond returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= 'first' ( (otherlv_2= RULE_ID ) ) ) ;
     public final EObject ruleSecond() throws RecognitionException {
         EObject current = null;
 
@@ -116,35 +117,36 @@ public class InternalEcoreFragmentTestLanguageParser extends AbstractInternalAnt
         Token otherlv_1=null;
         Token otherlv_2=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalEcoreFragmentTestLanguage.g:79:28: ( ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= 'first' ( (otherlv_2= RULE_ID ) ) ) )
-            // InternalEcoreFragmentTestLanguage.g:80:1: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= 'first' ( (otherlv_2= RULE_ID ) ) )
+            // InternalEcoreFragmentTestLanguage.g:77:2: ( ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= 'first' ( (otherlv_2= RULE_ID ) ) ) )
+            // InternalEcoreFragmentTestLanguage.g:78:2: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= 'first' ( (otherlv_2= RULE_ID ) ) )
             {
-            // InternalEcoreFragmentTestLanguage.g:80:1: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= 'first' ( (otherlv_2= RULE_ID ) ) )
-            // InternalEcoreFragmentTestLanguage.g:80:2: ( (lv_name_0_0= RULE_ID ) ) otherlv_1= 'first' ( (otherlv_2= RULE_ID ) )
+            // InternalEcoreFragmentTestLanguage.g:78:2: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= 'first' ( (otherlv_2= RULE_ID ) ) )
+            // InternalEcoreFragmentTestLanguage.g:79:3: ( (lv_name_0_0= RULE_ID ) ) otherlv_1= 'first' ( (otherlv_2= RULE_ID ) )
             {
-            // InternalEcoreFragmentTestLanguage.g:80:2: ( (lv_name_0_0= RULE_ID ) )
-            // InternalEcoreFragmentTestLanguage.g:81:1: (lv_name_0_0= RULE_ID )
+            // InternalEcoreFragmentTestLanguage.g:79:3: ( (lv_name_0_0= RULE_ID ) )
+            // InternalEcoreFragmentTestLanguage.g:80:4: (lv_name_0_0= RULE_ID )
             {
-            // InternalEcoreFragmentTestLanguage.g:81:1: (lv_name_0_0= RULE_ID )
-            // InternalEcoreFragmentTestLanguage.g:82:3: lv_name_0_0= RULE_ID
+            // InternalEcoreFragmentTestLanguage.g:80:4: (lv_name_0_0= RULE_ID )
+            // InternalEcoreFragmentTestLanguage.g:81:5: lv_name_0_0= RULE_ID
             {
             lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_3); 
 
-            			newLeafNode(lv_name_0_0, grammarAccess.getSecondAccess().getNameIDTerminalRuleCall_0_0()); 
-            		
+            					newLeafNode(lv_name_0_0, grammarAccess.getSecondAccess().getNameIDTerminalRuleCall_0_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getSecondRule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"name",
-                    		lv_name_0_0, 
-                    		"org.eclipse.xtext.common.Terminals.ID");
-            	    
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getSecondRule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"name",
+            						lv_name_0_0,
+            						"org.eclipse.xtext.common.Terminals.ID");
+            				
 
             }
 
@@ -153,23 +155,23 @@ public class InternalEcoreFragmentTestLanguageParser extends AbstractInternalAnt
 
             otherlv_1=(Token)match(input,11,FollowSets000.FOLLOW_4); 
 
-                	newLeafNode(otherlv_1, grammarAccess.getSecondAccess().getFirstKeyword_1());
-                
-            // InternalEcoreFragmentTestLanguage.g:102:1: ( (otherlv_2= RULE_ID ) )
-            // InternalEcoreFragmentTestLanguage.g:103:1: (otherlv_2= RULE_ID )
+            			newLeafNode(otherlv_1, grammarAccess.getSecondAccess().getFirstKeyword_1());
+            		
+            // InternalEcoreFragmentTestLanguage.g:101:3: ( (otherlv_2= RULE_ID ) )
+            // InternalEcoreFragmentTestLanguage.g:102:4: (otherlv_2= RULE_ID )
             {
-            // InternalEcoreFragmentTestLanguage.g:103:1: (otherlv_2= RULE_ID )
-            // InternalEcoreFragmentTestLanguage.g:104:3: otherlv_2= RULE_ID
+            // InternalEcoreFragmentTestLanguage.g:102:4: (otherlv_2= RULE_ID )
+            // InternalEcoreFragmentTestLanguage.g:103:5: otherlv_2= RULE_ID
             {
 
-            			if (current==null) {
-            	            current = createModelElement(grammarAccess.getSecondRule());
-            	        }
-                    
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getSecondRule());
+            					}
+            				
             otherlv_2=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
-            		newLeafNode(otherlv_2, grammarAccess.getSecondAccess().getFirstFirstCrossReference_2_0()); 
-            	
+            					newLeafNode(otherlv_2, grammarAccess.getSecondAccess().getFirstFirstCrossReference_2_0());
+            				
 
             }
 
@@ -182,13 +184,15 @@ public class InternalEcoreFragmentTestLanguageParser extends AbstractInternalAnt
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;

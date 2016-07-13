@@ -40,7 +40,8 @@ public class RootSwitch<T>
 	 */
 	public RootSwitch()
 	{
-		if (modelPackage == null) {
+		if (modelPackage == null)
+		{
 			modelPackage = RootPackage.eINSTANCE;
 		}
 	}
@@ -66,10 +67,12 @@ public class RootSwitch<T>
 	 */
 	protected T doSwitch(EClass theEClass, EObject theEObject)
 	{
-		if (theEClass.eContainer() == modelPackage) {
+		if (theEClass.eContainer() == modelPackage)
+		{
 			return doSwitch(theEClass.getClassifierID(), theEObject);
 		}
-		else {
+		else
+		{
 			List<EClass> eSuperTypes = theEClass.getESuperTypes();
 			return
 				eSuperTypes.isEmpty() ?
@@ -87,8 +90,10 @@ public class RootSwitch<T>
 	 */
 	protected T doSwitch(int classifierID, EObject theEObject)
 	{
-		switch (classifierID) {
-			case RootPackage.ROOT_CLASS: {
+		switch (classifierID)
+		{
+			case RootPackage.ROOT_CLASS:
+			{
 				RootClass rootClass = (RootClass)theEObject;
 				T result = caseRootClass(rootClass);
 				if (result == null) result = defaultCase(theEObject);

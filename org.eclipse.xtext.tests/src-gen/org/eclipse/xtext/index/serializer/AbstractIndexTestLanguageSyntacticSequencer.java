@@ -15,7 +15,7 @@ import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISyn
 import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
 
 @SuppressWarnings("all")
-public class IndexTestLanguageSyntacticSequencer extends AbstractSyntacticSequencer {
+public abstract class AbstractIndexTestLanguageSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected IndexTestLanguageGrammarAccess grammarAccess;
 	

@@ -3,19 +3,21 @@
  */
 package org.eclipse.xtext.testlanguages.indent.services;
 
-import com.google.inject.Singleton;
 import com.google.inject.Inject;
-
+import com.google.inject.Singleton;
 import java.util.List;
-
-import org.eclipse.xtext.*;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.Group;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TerminalRule;
+import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder;
 import org.eclipse.xtext.service.GrammarProvider;
-import org.eclipse.xtext.service.AbstractElementFinder.*;
-
 
 @Singleton
 public class IndentationAwareTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
-	
 	
 	public class NodeListElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.indent.IndentationAwareTestLanguage.NodeList");
@@ -30,29 +32,28 @@ public class IndentationAwareTestLanguageGrammarAccess extends AbstractGrammarEl
 		//NodeList:
 		//	children+=Node (NL children+=Node)*;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//children+=Node (NL children+=Node)*
 		public Group getGroup() { return cGroup; }
-
+		
 		//children+=Node
 		public Assignment getChildrenAssignment_0() { return cChildrenAssignment_0; }
-
+		
 		//Node
 		public RuleCall getChildrenNodeParserRuleCall_0_0() { return cChildrenNodeParserRuleCall_0_0; }
-
+		
 		//(NL children+=Node)*
 		public Group getGroup_1() { return cGroup_1; }
-
+		
 		//NL
 		public RuleCall getNLTerminalRuleCall_1_0() { return cNLTerminalRuleCall_1_0; }
-
+		
 		//children+=Node
 		public Assignment getChildrenAssignment_1_1() { return cChildrenAssignment_1_1; }
-
+		
 		//Node
 		public RuleCall getChildrenNodeParserRuleCall_1_1_0() { return cChildrenNodeParserRuleCall_1_1_0; }
 	}
-
 	public class NodeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.indent.IndentationAwareTestLanguage.Node");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -68,35 +69,34 @@ public class IndentationAwareTestLanguageGrammarAccess extends AbstractGrammarEl
 		//Node:
 		//	name=String (NL BEGIN children=NodeList END)?;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//name=String (NL BEGIN children=NodeList END)?
 		public Group getGroup() { return cGroup; }
-
+		
 		//name=String
 		public Assignment getNameAssignment_0() { return cNameAssignment_0; }
-
+		
 		//String
 		public RuleCall getNameStringParserRuleCall_0_0() { return cNameStringParserRuleCall_0_0; }
-
+		
 		//(NL BEGIN children=NodeList END)?
 		public Group getGroup_1() { return cGroup_1; }
-
+		
 		//NL
 		public RuleCall getNLTerminalRuleCall_1_0() { return cNLTerminalRuleCall_1_0; }
-
+		
 		//BEGIN
 		public RuleCall getBEGINTerminalRuleCall_1_1() { return cBEGINTerminalRuleCall_1_1; }
-
+		
 		//children=NodeList
 		public Assignment getChildrenAssignment_1_2() { return cChildrenAssignment_1_2; }
-
+		
 		//NodeList
 		public RuleCall getChildrenNodeListParserRuleCall_1_2_0() { return cChildrenNodeListParserRuleCall_1_2_0; }
-
+		
 		//END
 		public RuleCall getENDTerminalRuleCall_1_3() { return cENDTerminalRuleCall_1_3; }
 	}
-
 	public class StringElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.indent.IndentationAwareTestLanguage.String");
 		private final RuleCall cOTHERTerminalRuleCall = (RuleCall)rule.eContents().get(1);
@@ -104,7 +104,7 @@ public class IndentationAwareTestLanguageGrammarAccess extends AbstractGrammarEl
 		//String:
 		//	OTHER+;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//OTHER+
 		public RuleCall getOTHERTerminalRuleCall() { return cOTHERTerminalRuleCall; }
 	}
@@ -164,7 +164,7 @@ public class IndentationAwareTestLanguageGrammarAccess extends AbstractGrammarEl
 	public ParserRule getNodeListRule() {
 		return getNodeListAccess().getRule();
 	}
-
+	
 	//Node:
 	//	name=String (NL BEGIN children=NodeList END)?;
 	public NodeElements getNodeAccess() {
@@ -174,7 +174,7 @@ public class IndentationAwareTestLanguageGrammarAccess extends AbstractGrammarEl
 	public ParserRule getNodeRule() {
 		return getNodeAccess().getRule();
 	}
-
+	
 	//String:
 	//	OTHER+;
 	public StringElements getStringAccess() {
@@ -184,28 +184,28 @@ public class IndentationAwareTestLanguageGrammarAccess extends AbstractGrammarEl
 	public ParserRule getStringRule() {
 		return getStringAccess().getRule();
 	}
-
+	
 	//terminal NL:
 	//	('\r' | '\n')+ '\t'*;
 	public TerminalRule getNLRule() {
 		return tNL;
-	} 
-
+	}
+	
 	//terminal BEGIN:
 	//	'{';
 	public TerminalRule getBEGINRule() {
 		return tBEGIN;
-	} 
-
+	}
+	
 	//terminal END:
 	//	'}';
 	public TerminalRule getENDRule() {
 		return tEND;
-	} 
-
+	}
+	
 	//terminal OTHER:
 	//	.;
 	public TerminalRule getOTHERRule() {
 		return tOTHER;
-	} 
+	}
 }

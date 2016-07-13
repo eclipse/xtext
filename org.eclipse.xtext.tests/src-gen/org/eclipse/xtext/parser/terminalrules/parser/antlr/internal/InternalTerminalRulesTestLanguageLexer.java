@@ -328,19 +328,19 @@ public class InternalTerminalRulesTestLanguageLexer extends Lexer {
                     if ( (LA7_1=='\'') ) {
                         int LA7_4 = input.LA(3);
 
-                        if ( ((LA7_4>='\u0000' && LA7_4<='&')||(LA7_4>='(' && LA7_4<='\uFFFC')||(LA7_4>='\uFFFE' && LA7_4<='\uFFFF')) ) {
+                        if ( ((LA7_4>='\u0000' && LA7_4<='&')||(LA7_4>='(' && LA7_4<='\u00AA')||(LA7_4>='\u00AC' && LA7_4<='\uFFFF')) ) {
                             alt7=1;
                         }
 
 
                     }
-                    else if ( ((LA7_1>='\u0000' && LA7_1<='&')||(LA7_1>='(' && LA7_1<='\uFFFC')||(LA7_1>='\uFFFE' && LA7_1<='\uFFFF')) ) {
+                    else if ( ((LA7_1>='\u0000' && LA7_1<='&')||(LA7_1>='(' && LA7_1<='\u00AA')||(LA7_1>='\u00AC' && LA7_1<='\uFFFF')) ) {
                         alt7=1;
                     }
 
 
                 }
-                else if ( ((LA7_0>='\u0000' && LA7_0<='&')||(LA7_0>='(' && LA7_0<='\uFFFC')||(LA7_0>='\uFFFE' && LA7_0<='\uFFFF')) ) {
+                else if ( ((LA7_0>='\u0000' && LA7_0<='&')||(LA7_0>='(' && LA7_0<='\u00AA')||(LA7_0>='\u00AC' && LA7_0<='\uFFFF')) ) {
                     alt7=1;
                 }
 
@@ -449,10 +449,10 @@ public class InternalTerminalRulesTestLanguageLexer extends Lexer {
     // $ANTLR start "RULE_IN_RICH_STRING"
     public final void mRULE_IN_RICH_STRING() throws RecognitionException {
         try {
-            // InternalTerminalRulesTestLanguage.g:241:30: ( ( '\\'\\'' ~ ( ( '\\uFFFD' | '\\'' ) ) | '\\'' ~ ( ( '\\uFFFD' | '\\'' ) ) | ~ ( ( '\\uFFFD' | '\\'' ) ) ) )
-            // InternalTerminalRulesTestLanguage.g:241:32: ( '\\'\\'' ~ ( ( '\\uFFFD' | '\\'' ) ) | '\\'' ~ ( ( '\\uFFFD' | '\\'' ) ) | ~ ( ( '\\uFFFD' | '\\'' ) ) )
+            // InternalTerminalRulesTestLanguage.g:241:30: ( ( '\\'\\'' ~ ( ( '\\u00AB' | '\\'' ) ) | '\\'' ~ ( ( '\\u00AB' | '\\'' ) ) | ~ ( ( '\\u00AB' | '\\'' ) ) ) )
+            // InternalTerminalRulesTestLanguage.g:241:32: ( '\\'\\'' ~ ( ( '\\u00AB' | '\\'' ) ) | '\\'' ~ ( ( '\\u00AB' | '\\'' ) ) | ~ ( ( '\\u00AB' | '\\'' ) ) )
             {
-            // InternalTerminalRulesTestLanguage.g:241:32: ( '\\'\\'' ~ ( ( '\\uFFFD' | '\\'' ) ) | '\\'' ~ ( ( '\\uFFFD' | '\\'' ) ) | ~ ( ( '\\uFFFD' | '\\'' ) ) )
+            // InternalTerminalRulesTestLanguage.g:241:32: ( '\\'\\'' ~ ( ( '\\u00AB' | '\\'' ) ) | '\\'' ~ ( ( '\\u00AB' | '\\'' ) ) | ~ ( ( '\\u00AB' | '\\'' ) ) )
             int alt11=3;
             int LA11_0 = input.LA(1);
 
@@ -462,7 +462,7 @@ public class InternalTerminalRulesTestLanguageLexer extends Lexer {
                 if ( (LA11_1=='\'') ) {
                     alt11=1;
                 }
-                else if ( ((LA11_1>='\u0000' && LA11_1<='&')||(LA11_1>='(' && LA11_1<='\uFFFC')||(LA11_1>='\uFFFE' && LA11_1<='\uFFFF')) ) {
+                else if ( ((LA11_1>='\u0000' && LA11_1<='&')||(LA11_1>='(' && LA11_1<='\u00AA')||(LA11_1>='\u00AC' && LA11_1<='\uFFFF')) ) {
                     alt11=2;
                 }
                 else {
@@ -472,7 +472,7 @@ public class InternalTerminalRulesTestLanguageLexer extends Lexer {
                     throw nvae;
                 }
             }
-            else if ( ((LA11_0>='\u0000' && LA11_0<='&')||(LA11_0>='(' && LA11_0<='\uFFFC')||(LA11_0>='\uFFFE' && LA11_0<='\uFFFF')) ) {
+            else if ( ((LA11_0>='\u0000' && LA11_0<='&')||(LA11_0>='(' && LA11_0<='\u00AA')||(LA11_0>='\u00AC' && LA11_0<='\uFFFF')) ) {
                 alt11=3;
             }
             else {
@@ -483,11 +483,11 @@ public class InternalTerminalRulesTestLanguageLexer extends Lexer {
             }
             switch (alt11) {
                 case 1 :
-                    // InternalTerminalRulesTestLanguage.g:241:33: '\\'\\'' ~ ( ( '\\uFFFD' | '\\'' ) )
+                    // InternalTerminalRulesTestLanguage.g:241:33: '\\'\\'' ~ ( ( '\\u00AB' | '\\'' ) )
                     {
                     match("''"); 
 
-                    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='\uFFFC')||(input.LA(1)>='\uFFFE' && input.LA(1)<='\uFFFF') ) {
+                    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='\u00AA')||(input.LA(1)>='\u00AC' && input.LA(1)<='\uFFFF') ) {
                         input.consume();
 
                     }
@@ -500,10 +500,10 @@ public class InternalTerminalRulesTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalTerminalRulesTestLanguage.g:241:59: '\\'' ~ ( ( '\\uFFFD' | '\\'' ) )
+                    // InternalTerminalRulesTestLanguage.g:241:59: '\\'' ~ ( ( '\\u00AB' | '\\'' ) )
                     {
                     match('\''); 
-                    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='\uFFFC')||(input.LA(1)>='\uFFFE' && input.LA(1)<='\uFFFF') ) {
+                    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='\u00AA')||(input.LA(1)>='\u00AC' && input.LA(1)<='\uFFFF') ) {
                         input.consume();
 
                     }
@@ -516,9 +516,9 @@ public class InternalTerminalRulesTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 3 :
-                    // InternalTerminalRulesTestLanguage.g:241:83: ~ ( ( '\\uFFFD' | '\\'' ) )
+                    // InternalTerminalRulesTestLanguage.g:241:83: ~ ( ( '\\u00AB' | '\\'' ) )
                     {
-                    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='\uFFFC')||(input.LA(1)>='\uFFFE' && input.LA(1)<='\uFFFF') ) {
+                    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='\u00AA')||(input.LA(1)>='\u00AC' && input.LA(1)<='\uFFFF') ) {
                         input.consume();
 
                     }

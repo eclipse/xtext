@@ -139,7 +139,7 @@ public abstract class AbstractAbstractIgnoreCaseLinkingTestLanguageRuntimeModule
 	
 	// contributed by org.eclipse.xtext.xtext.generator.scoping.ImportNamespacesScopingFragment2
 	public void configureIgnoreCaseLinking(Binder binder) {
-		binder.bindConstant().annotatedWith(IgnoreCaseLinking.class).to(false);
+		binder.bindConstant().annotatedWith(IgnoreCaseLinking.class).to(true);
 	}
 	
 }

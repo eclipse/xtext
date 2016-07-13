@@ -1,4 +1,4 @@
-package org.eclipse.xtext.parser.bug419429.parser.antlr.internal; 
+package org.eclipse.xtext.parser.bug419429.parser.antlr.internal;
 
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
@@ -51,18 +51,18 @@ public class InternalBug419429Parser extends AbstractInternalAntlrParser {
 
 
      	private Bug419429GrammarAccess grammarAccess;
-     	
+
         public InternalBug419429Parser(TokenStream input, Bug419429GrammarAccess grammarAccess) {
             this(input);
             this.grammarAccess = grammarAccess;
             registerRules(grammarAccess.getGrammar());
         }
-        
+
         @Override
         protected String getFirstRuleName() {
-        	return "EReference";	
+        	return "EReference";
        	}
-       	
+
        	@Override
        	protected Bug419429GrammarAccess getGrammarAccess() {
        		return grammarAccess;
@@ -70,8 +70,9 @@ public class InternalBug419429Parser extends AbstractInternalAntlrParser {
 
 
 
+
     // $ANTLR start "entryRuleEReference"
-    // InternalBug419429.g:67:1: entryRuleEReference returns [EObject current=null] : iv_ruleEReference= ruleEReference EOF ;
+    // InternalBug419429.g:64:1: entryRuleEReference returns [EObject current=null] : iv_ruleEReference= ruleEReference EOF ;
     public final EObject entryRuleEReference() throws RecognitionException {
         EObject current = null;
 
@@ -79,8 +80,8 @@ public class InternalBug419429Parser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalBug419429.g:68:2: (iv_ruleEReference= ruleEReference EOF )
-            // InternalBug419429.g:69:2: iv_ruleEReference= ruleEReference EOF
+            // InternalBug419429.g:64:51: (iv_ruleEReference= ruleEReference EOF )
+            // InternalBug419429.g:65:2: iv_ruleEReference= ruleEReference EOF
             {
              newCompositeNode(grammarAccess.getEReferenceRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -94,11 +95,11 @@ public class InternalBug419429Parser extends AbstractInternalAntlrParser {
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -107,33 +108,34 @@ public class InternalBug419429Parser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEReference"
-    // InternalBug419429.g:76:1: ruleEReference returns [EObject current=null] : ( (otherlv_0= RULE_ID ) ) ;
+    // InternalBug419429.g:71:1: ruleEReference returns [EObject current=null] : ( (otherlv_0= RULE_ID ) ) ;
     public final EObject ruleEReference() throws RecognitionException {
         EObject current = null;
 
         Token otherlv_0=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalBug419429.g:79:28: ( ( (otherlv_0= RULE_ID ) ) )
-            // InternalBug419429.g:80:1: ( (otherlv_0= RULE_ID ) )
+            // InternalBug419429.g:77:2: ( ( (otherlv_0= RULE_ID ) ) )
+            // InternalBug419429.g:78:2: ( (otherlv_0= RULE_ID ) )
             {
-            // InternalBug419429.g:80:1: ( (otherlv_0= RULE_ID ) )
-            // InternalBug419429.g:81:1: (otherlv_0= RULE_ID )
+            // InternalBug419429.g:78:2: ( (otherlv_0= RULE_ID ) )
+            // InternalBug419429.g:79:3: (otherlv_0= RULE_ID )
             {
-            // InternalBug419429.g:81:1: (otherlv_0= RULE_ID )
-            // InternalBug419429.g:82:3: otherlv_0= RULE_ID
+            // InternalBug419429.g:79:3: (otherlv_0= RULE_ID )
+            // InternalBug419429.g:80:4: otherlv_0= RULE_ID
             {
 
-            			if (current==null) {
-            	            current = createModelElement(grammarAccess.getEReferenceRule());
-            	        }
-                    
+            				if (current==null) {
+            					current = createModelElement(grammarAccess.getEReferenceRule());
+            				}
+            			
             otherlv_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
-            		newLeafNode(otherlv_0, grammarAccess.getEReferenceAccess().getETypeEClassifierCrossReference_0()); 
-            	
+            				newLeafNode(otherlv_0, grammarAccess.getEReferenceAccess().getETypeEClassifierCrossReference_0());
+            			
 
             }
 
@@ -143,13 +145,15 @@ public class InternalBug419429Parser extends AbstractInternalAntlrParser {
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;

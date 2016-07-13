@@ -4,36 +4,37 @@
 package org.eclipse.xtext.parsetree.transientvalues.parser.antlr;
 
 import com.google.inject.Inject;
-
+import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parsetree.transientvalues.parser.antlr.internal.InternalTransientValuesTestParser;
 import org.eclipse.xtext.parsetree.transientvalues.services.TransientValuesTestGrammarAccess;
 
-public class TransientValuesTestParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {
-	
+public class TransientValuesTestParser extends AbstractAntlrParser {
+
 	@Inject
 	private TransientValuesTestGrammarAccess grammarAccess;
-	
+
 	@Override
 	protected void setInitialHiddenTokens(XtextTokenStream tokenStream) {
 		tokenStream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
 	}
 	
+
 	@Override
-	protected org.eclipse.xtext.parsetree.transientvalues.parser.antlr.internal.InternalTransientValuesTestParser createParser(XtextTokenStream stream) {
-		return new org.eclipse.xtext.parsetree.transientvalues.parser.antlr.internal.InternalTransientValuesTestParser(stream, getGrammarAccess());
+	protected InternalTransientValuesTestParser createParser(XtextTokenStream stream) {
+		return new InternalTransientValuesTestParser(stream, getGrammarAccess());
 	}
-	
+
 	@Override 
 	protected String getDefaultRuleName() {
 		return "Root";
 	}
-	
+
 	public TransientValuesTestGrammarAccess getGrammarAccess() {
 		return this.grammarAccess;
 	}
-	
+
 	public void setGrammarAccess(TransientValuesTestGrammarAccess grammarAccess) {
 		this.grammarAccess = grammarAccess;
 	}
-	
 }

@@ -243,16 +243,16 @@ public class ReferenceGrammarTestLanguageGrammarAccess extends AbstractGrammarEl
 		private final Keyword cWertROTKeyword_0_0 = (Keyword)cWertAlternatives_0.eContents().get(0);
 		private final Keyword cWertBLAUKeyword_0_1 = (Keyword)cWertAlternatives_0.eContents().get(1);
 		private final Keyword cWertGELBKeyword_0_2 = (Keyword)cWertAlternatives_0.eContents().get(2);
-		private final Keyword cWertGRNKeyword_0_3 = (Keyword)cWertAlternatives_0.eContents().get(3);
+		private final Keyword cWertGRÜNKeyword_0_3 = (Keyword)cWertAlternatives_0.eContents().get(3);
 		
 		//Farbe:
-		//	wert=("ROT" | "BLAU" | "GELB" | "GRï¿½N");
+		//	wert=("ROT" | "BLAU" | "GELB" | "GRÜN");
 		@Override public ParserRule getRule() { return rule; }
 		
-		//wert=("ROT" | "BLAU" | "GELB" | "GRï¿½N")
+		//wert=("ROT" | "BLAU" | "GELB" | "GRÜN")
 		public Assignment getWertAssignment() { return cWertAssignment; }
 		
-		//("ROT" | "BLAU" | "GELB" | "GRï¿½N")
+		//("ROT" | "BLAU" | "GELB" | "GRÜN")
 		public Alternatives getWertAlternatives_0() { return cWertAlternatives_0; }
 		
 		//"ROT"
@@ -264,8 +264,8 @@ public class ReferenceGrammarTestLanguageGrammarAccess extends AbstractGrammarEl
 		//"GELB"
 		public Keyword getWertGELBKeyword_0_2() { return cWertGELBKeyword_0_2; }
 		
-		//"GRï¿½N"
-		public Keyword getWertGRNKeyword_0_3() { return cWertGRNKeyword_0_3; }
+		//"GRÜN"
+		public Keyword getWertGRÜNKeyword_0_3() { return cWertGRÜNKeyword_0_3; }
 	}
 	public class FamilieElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguage.Familie");
@@ -475,7 +475,7 @@ public class ReferenceGrammarTestLanguageGrammarAccess extends AbstractGrammarEl
 	}
 	
 	//Farbe:
-	//	wert=("ROT" | "BLAU" | "GELB" | "GRï¿½N");
+	//	wert=("ROT" | "BLAU" | "GELB" | "GRÜN");
 	public FarbeElements getFarbeAccess() {
 		return pFarbe;
 	}

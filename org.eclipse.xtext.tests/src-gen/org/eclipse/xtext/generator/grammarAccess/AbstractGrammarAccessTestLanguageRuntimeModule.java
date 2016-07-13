@@ -90,6 +90,16 @@ public abstract class AbstractGrammarAccessTestLanguageRuntimeModule extends Def
 			.to(InternalGrammarAccessTestLanguageLexer.class);
 	}
 	
+	// contributed by org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessFragment2
+	public ClassLoader bindClassLoaderToInstance() {
+		return getClass().getClassLoader();
+	}
+	
+	// contributed by org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessFragment2
+	public Class<? extends IGrammarAccess> bindIGrammarAccess() {
+		return GrammarAccessTestLanguageGrammarAccess.class;
+	}
+	
 	// contributed by org.eclipse.xtext.xtext.generator.serializer.SerializerFragment2
 	public Class<? extends ISemanticSequencer> bindISemanticSequencer() {
 		return GrammarAccessTestLanguageSemanticSequencer.class;
@@ -103,16 +113,6 @@ public abstract class AbstractGrammarAccessTestLanguageRuntimeModule extends Def
 	// contributed by org.eclipse.xtext.xtext.generator.serializer.SerializerFragment2
 	public Class<? extends ISerializer> bindISerializer() {
 		return Serializer.class;
-	}
-	
-	// contributed by org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessFragment2
-	public ClassLoader bindClassLoaderToInstance() {
-		return getClass().getClassLoader();
-	}
-	
-	// contributed by org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessFragment2
-	public Class<? extends IGrammarAccess> bindIGrammarAccess() {
-		return GrammarAccessTestLanguageGrammarAccess.class;
 	}
 	
 }

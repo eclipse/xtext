@@ -8,6 +8,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EcorePackage;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
@@ -85,6 +86,9 @@ public class EnumAndReferenceTestLanguagePackageImpl extends EPackageImpl implem
     EnumAndReferenceTestLanguagePackageImpl theEnumAndReferenceTestLanguagePackage = (EnumAndReferenceTestLanguagePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof EnumAndReferenceTestLanguagePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new EnumAndReferenceTestLanguagePackageImpl());
 
     isInited = true;
+
+    // Initialize simple dependencies
+    EcorePackage.eINSTANCE.eClass();
 
     // Create package meta-data objects
     theEnumAndReferenceTestLanguagePackage.createPackageContents();
@@ -214,6 +218,9 @@ public class EnumAndReferenceTestLanguagePackageImpl extends EPackageImpl implem
     setNsPrefix(eNS_PREFIX);
     setNsURI(eNS_URI);
 
+    // Obtain other dependent packages
+    EcorePackage theEcorePackage = (EcorePackage)EPackage.Registry.INSTANCE.getEPackage(EcorePackage.eNS_URI);
+
     // Create type parameters
 
     // Set bounds for type parameters
@@ -223,7 +230,7 @@ public class EnumAndReferenceTestLanguagePackageImpl extends EPackageImpl implem
     // Initialize classes and features; add operations and parameters
     initEClass(entityWithEnumAndReferenceEClass, EntityWithEnumAndReference.class, "EntityWithEnumAndReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getEntityWithEnumAndReference_Type(), this.getKindOfKeyword(), "type", null, 0, 1, EntityWithEnumAndReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getEntityWithEnumAndReference_Name(), ecorePackage.getEString(), "name", null, 0, 1, EntityWithEnumAndReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getEntityWithEnumAndReference_Name(), theEcorePackage.getEString(), "name", null, 0, 1, EntityWithEnumAndReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEntityWithEnumAndReference_Ref(), this.getEntityWithEnumAndReference(), null, "ref", null, 0, 1, EntityWithEnumAndReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Initialize enums and add enum literals
