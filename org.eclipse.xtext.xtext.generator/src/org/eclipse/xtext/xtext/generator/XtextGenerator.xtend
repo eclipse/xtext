@@ -17,7 +17,6 @@ import java.io.IOException
 import java.io.InputStream
 import java.util.HashMap
 import java.util.List
-import java.util.Map
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.mwe.core.WorkflowContext
 import org.eclipse.emf.mwe.core.issues.Issues
@@ -61,6 +60,9 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 	@Accessors
 	XtextGeneratorStandaloneSetup standaloneSetup = new XtextGeneratorStandaloneSetup
 	
+	@Accessors
+	String grammarEncoding
+	
 	Injector injector
 	
 	@Inject IXtextProjectConfig projectConfig
@@ -68,9 +70,6 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 	@Inject XtextGeneratorTemplates templates
 	
 	@Inject XtextGeneratorNaming naming
-	
-	@Accessors(PROTECTED_GETTER)
-	val Map<String, String> defaultEncodings = newHashMap
 	
 	new() {
 		new XtextStandaloneSetup().createInjectorAndDoEMFRegistration()
@@ -106,7 +105,7 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 		if (injector === null) {
 			LOG.info('Initializing Xtext generator')
 			new StandaloneSetup().addRegisterGeneratedEPackage('org.eclipse.xtext.common.types.TypesPackage')
-			initializeEncoding('xtext')
+			initializeEncoding
 			injector = createInjector
 			injector.injectMembers(this)
 			injector.getInstance(CodeConfig) => [initialize(injector)]
@@ -120,25 +119,14 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 		}
 	}
 	
-	protected def initializeEncoding(String langExtension) {
+	protected def initializeEncoding() {
 		val serviceProviderRegistry = IResourceServiceProvider.Registry.INSTANCE
-		val serviceProvider = serviceProviderRegistry.extensionToFactoryMap.get(langExtension) as IResourceServiceProvider
-		if (serviceProvider !== null) {
-			val encodingProvider = serviceProvider.get(IEncodingProvider)
-			if (encodingProvider instanceof IEncodingProvider.Runtime) {
-				defaultEncodings.put(langExtension, encodingProvider.defaultEncoding)
-				encodingProvider.defaultEncoding = configuration.code.encoding
-			}
-		}
-	}
-	
-	protected def restoreEncoding(String langExtension) {
-		val serviceProviderRegistry = IResourceServiceProvider.Registry.INSTANCE
-		val serviceProvider = serviceProviderRegistry.extensionToFactoryMap.get(langExtension) as IResourceServiceProvider
-		if (serviceProvider !== null && defaultEncodings.containsKey(langExtension)) {
+		val serviceProvider = serviceProviderRegistry.extensionToFactoryMap.get('xtext') as IResourceServiceProvider
+		val encoding = grammarEncoding ?: configuration.code.encoding
+		if (serviceProvider !== null && encoding !== null) {
 			val encodingProvider = serviceProvider.get(IEncodingProvider)
 			if (encodingProvider instanceof IEncodingProvider.Runtime)
-				encodingProvider.defaultEncoding = defaultEncodings.get(langExtension)
+				encodingProvider.defaultEncoding = encoding
 		}
 	}
 	
@@ -172,8 +160,6 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 			generateServices
 		} catch (Exception e) {
 			handleException(e, issues)
-		} finally {
-			restoreEncoding('xtext')
 		}
 	}
 	
