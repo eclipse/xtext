@@ -8,6 +8,8 @@
 package org.eclipse.xtext.mwe;
 
 import java.io.File;
+import java.nio.file.FileSystems;
+import java.nio.file.Path;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EPackage;
@@ -26,7 +28,6 @@ import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.google.inject.Binder;
@@ -69,13 +70,11 @@ public class UriBasedReaderTest extends AbstractXtextTests {
 		}
 	}
 
-	// TODO https://github.com/eclipse/xtext-core/issues/32
-	@Ignore
 	@SuppressWarnings("unchecked")
 	@Test public void testTransitiveReferences() throws Exception {
 		UriBasedReader reader = new UriBasedReader();
 		reader.addRegister(new ImportUriTestLanguageStandaloneSetup());
-		reader.addUri("file:/" + pathTo("importUriSubfolder/Start.importuritestlanguage"));
+		reader.addUri(pathTo2("importUriSubfolder/Start.importuritestlanguage"));
 
 		SlotEntry slotEntry = new SlotEntry();
 		slotEntry.setType("Type");
@@ -198,8 +197,11 @@ public class UriBasedReaderTest extends AbstractXtextTests {
 		assertTrue(errorString, errorString.contains(errorURI));
 	}
 
-	public String pathTo(String string) throws Exception {
-		return new ReaderTest().pathTo(string).replace(File.separator, "/");
+	public String pathTo2(String string) throws Exception {
+		Path path = FileSystems.getDefault().getPath("").toAbsolutePath().resolve("src/"+getClass().getName().replace('.', '/') + ".java").getParent();
+		Path resolved = path.resolve(string);
+		String result = resolved.toUri().toString();
+		return result;
 	}
 	
 }
