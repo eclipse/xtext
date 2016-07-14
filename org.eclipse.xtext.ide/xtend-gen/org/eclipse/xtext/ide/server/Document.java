@@ -56,7 +56,7 @@ public class Document {
   
   public PositionImpl getPosition(final int offset) {
     final int l = this.contents.length();
-    if (((offset < 0) || (offset >= l))) {
+    if (((offset < 0) || (offset > l))) {
       String _plus = (Integer.valueOf(offset) + " text was : ");
       String _plus_1 = (_plus + this.contents);
       throw new IndexOutOfBoundsException(_plus_1);

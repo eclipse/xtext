@@ -52,6 +52,11 @@ import org.eclipse.xtext.util.Files
 import org.eclipse.xtext.util.Modules2
 import org.junit.Assert
 import org.junit.Before
+import io.typefox.lsapi.impl.RangeImpl
+import io.typefox.lsapi.impl.PositionImpl
+import io.typefox.lsapi.builders.DocumentFormattingParamsBuilder
+import org.eclipse.xtext.ide.server.Document
+import io.typefox.lsapi.builders.DocumentRangeFormattingParamsBuilder
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -318,7 +323,42 @@ abstract class AbstractLanguageServerTest implements Consumer<PublishDiagnostics
     }
 
     def void assertEquals(String expected, String actual) {
-        Assert.assertEquals(expected.replace('\t', '    '), actual)
+        Assert.assertEquals(expected.replace('\t', '    '), actual.replace('\t', '    '))
+    }
+
+
+    protected def testFormatting((FormattingConfiguration)=>void configurator) {
+        val extension configuration = new FormattingConfiguration
+        configuration.filePath = 'MyModel.' + fileExtension
+        configurator.apply(configuration)
+
+        val fileUri = filePath -> model
+
+        initialize
+        open(fileUri, model)
+        val changes = languageServer.formatting(new DocumentFormattingParamsBuilder [
+            textDocument(fileUri)
+        ].build)
+        val result = new Document(1, model).applyChanges(<TextEdit>newArrayList(changes.get()).reverse)
+        assertEquals(configuration.expectedText, result.contents)
+
+    }
+
+    protected def testRangeFormatting((RangeFormattingConfiguration)=>void configurator) {
+        val extension configuration = new RangeFormattingConfiguration
+        configuration.filePath = 'MyModel.' + fileExtension
+        configurator.apply(configuration)
+        val fileUri = filePath -> model
+
+        initialize
+        open(fileUri, model)
+        val changes = languageServer.rangeFormatting(new DocumentRangeFormattingParamsBuilder [
+            textDocument(fileUri)
+            range(configuration.range)
+        ].build)
+        val result = new Document(1, model).applyChanges(<TextEdit>newArrayList(changes.get()).reverse)
+        assertEquals(configuration.expectedText, result.contents)
+
     }
 
 }
@@ -365,4 +405,17 @@ class TextDocumentPositionConfiguration extends TextDocumentConfiguration {
 class TextDocumentConfiguration {
     String model = ''
     String filePath
+}
+
+@Accessors
+class FormattingConfiguration extends TextDocumentConfiguration {
+    String expectedText = ''
+}
+
+@Accessors
+class RangeFormattingConfiguration extends FormattingConfiguration {
+    Range range = new RangeImpl=>[
+        start = new PositionImpl(0,0)
+        end = new PositionImpl(0,1)
+    ]
 }

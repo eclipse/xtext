@@ -92,6 +92,7 @@ import org.eclipse.xtext.ide.server.concurrent.CancellableIndicator;
 import org.eclipse.xtext.ide.server.concurrent.RequestManager;
 import org.eclipse.xtext.ide.server.contentassist.ContentAssistService;
 import org.eclipse.xtext.ide.server.findReferences.WorkspaceResourceAccess;
+import org.eclipse.xtext.ide.server.formatting.FormattingService;
 import org.eclipse.xtext.ide.server.hover.HoverService;
 import org.eclipse.xtext.ide.server.symbol.DocumentSymbolService;
 import org.eclipse.xtext.ide.server.symbol.WorkspaceSymbolService;
@@ -176,6 +177,8 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
       };
       CompletionOptionsImpl _doubleArrow = ObjectExtensions.<CompletionOptionsImpl>operator_doubleArrow(_completionOptionsImpl, _function_1);
       it.setCompletionProvider(_doubleArrow);
+      it.setDocumentFormattingProvider(Boolean.valueOf(true));
+      it.setDocumentRangeFormattingProvider(Boolean.valueOf(true));
     };
     ServerCapabilitiesImpl _doubleArrow = ObjectExtensions.<ServerCapabilitiesImpl>operator_doubleArrow(_serverCapabilitiesImpl, _function);
     result.setCapabilities(_doubleArrow);
@@ -735,12 +738,58 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
   
   @Override
   public CompletableFuture<List<? extends TextEdit>> formatting(final DocumentFormattingParams params) {
-    throw new UnsupportedOperationException("TODO: auto-generated method stub");
+    final Function1<CancelIndicator, List<? extends TextEdit>> _function = (CancelIndicator cancelIndicator) -> {
+      TextDocumentIdentifier _textDocument = params.getTextDocument();
+      String _uri = _textDocument.getUri();
+      final URI uri = this._uriExtensions.toUri(_uri);
+      final IResourceServiceProvider resourceServiceProvider = this.languagesRegistry.getResourceServiceProvider(uri);
+      FormattingService _get = null;
+      if (resourceServiceProvider!=null) {
+        _get=resourceServiceProvider.<FormattingService>get(FormattingService.class);
+      }
+      final FormattingService formatterService = _get;
+      if ((formatterService == null)) {
+        return Collections.<TextEdit>emptyList();
+      }
+      final Function2<Document, XtextResource, List<TextEdit>> _function_1 = (Document document, XtextResource resource) -> {
+        final int offset = 0;
+        String _contents = document.getContents();
+        final int length = _contents.length();
+        return formatterService.format(resource, document, offset, length);
+      };
+      return this.workspaceManager.<List<? extends TextEdit>>doRead(uri, _function_1);
+    };
+    return this.requestManager.<List<? extends TextEdit>>runRead(_function);
   }
   
   @Override
   public CompletableFuture<List<? extends TextEdit>> rangeFormatting(final DocumentRangeFormattingParams params) {
-    throw new UnsupportedOperationException("TODO: auto-generated method stub");
+    final Function1<CancelIndicator, List<? extends TextEdit>> _function = (CancelIndicator cancelIndicator) -> {
+      TextDocumentIdentifier _textDocument = params.getTextDocument();
+      String _uri = _textDocument.getUri();
+      final URI uri = this._uriExtensions.toUri(_uri);
+      final IResourceServiceProvider resourceServiceProvider = this.languagesRegistry.getResourceServiceProvider(uri);
+      FormattingService _get = null;
+      if (resourceServiceProvider!=null) {
+        _get=resourceServiceProvider.<FormattingService>get(FormattingService.class);
+      }
+      final FormattingService formatterService = _get;
+      if ((formatterService == null)) {
+        return Collections.<TextEdit>emptyList();
+      }
+      final Function2<Document, XtextResource, List<TextEdit>> _function_1 = (Document document, XtextResource resource) -> {
+        Range _range = params.getRange();
+        Position _start = _range.getStart();
+        final int offset = document.getOffSet(_start);
+        Range _range_1 = params.getRange();
+        Position _end = _range_1.getEnd();
+        int _offSet = document.getOffSet(_end);
+        final int length = (_offSet - offset);
+        return formatterService.format(resource, document, offset, length);
+      };
+      return this.workspaceManager.<List<? extends TextEdit>>doRead(uri, _function_1);
+    };
+    return this.requestManager.<List<? extends TextEdit>>runRead(_function);
   }
   
   @Override

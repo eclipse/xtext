@@ -1,0 +1,47 @@
+/*******************************************************************************
+ * Copyright (c) 2016 itemis AG (http://www.itemis.com) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
+package org.eclipse.xtext.ide.tests.testlanguage.formatting2
+
+import javax.inject.Inject
+import org.eclipse.xtext.formatting2.AbstractFormatter2
+import org.eclipse.xtext.formatting2.IFormattableDocument
+import org.eclipse.xtext.ide.tests.testlanguage.services.TestLanguageGrammarAccess
+import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Model
+import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Property
+import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.TypeDeclaration
+
+/**
+ * @author Christian Dietrich - Initial contribution and API
+ */
+class TestLanguageFormatter extends AbstractFormatter2 {
+	
+	@Inject extension TestLanguageGrammarAccess
+
+	def dispatch void format(Model model, extension IFormattableDocument document) {
+		for (type : model.types) {
+			type.format
+		}	
+	}
+	
+	def dispatch void format(TypeDeclaration type, extension IFormattableDocument document) {
+		//type.regionFor.keyword(typeDeclarationAccess.leftCurlyBracketKeyword_2).prepend[oneSpace]
+		type.regionFor.keyword(typeDeclarationAccess.leftCurlyBracketKeyword_2).append[newLine]
+		type.regionFor.keyword(typeDeclarationAccess.rightCurlyBracketKeyword_4).prepend[newLine].append[newLine]
+		interior(
+			type.regionFor.keyword(typeDeclarationAccess.leftCurlyBracketKeyword_2),
+			type.regionFor.keyword(typeDeclarationAccess.rightCurlyBracketKeyword_4)
+		) [indent]
+		for (property : type.properties) {
+			property.format
+		}	
+	}
+	def dispatch void format(Property property, extension IFormattableDocument document) {
+		property.append[newLine]
+	}
+	
+}

@@ -19,6 +19,8 @@ import io.typefox.lsapi.CompletionList;
 import io.typefox.lsapi.Diagnostic;
 import io.typefox.lsapi.DidCloseTextDocumentParams;
 import io.typefox.lsapi.DidOpenTextDocumentParams;
+import io.typefox.lsapi.DocumentFormattingParams;
+import io.typefox.lsapi.DocumentRangeFormattingParams;
 import io.typefox.lsapi.Hover;
 import io.typefox.lsapi.InitializeParams;
 import io.typefox.lsapi.InitializeResult;
@@ -34,6 +36,8 @@ import io.typefox.lsapi.TextDocumentPositionParams;
 import io.typefox.lsapi.TextEdit;
 import io.typefox.lsapi.builders.DidCloseTextDocumentParamsBuilder;
 import io.typefox.lsapi.builders.DidOpenTextDocumentParamsBuilder;
+import io.typefox.lsapi.builders.DocumentFormattingParamsBuilder;
+import io.typefox.lsapi.builders.DocumentRangeFormattingParamsBuilder;
 import io.typefox.lsapi.builders.InitializeParamsBuilder;
 import io.typefox.lsapi.builders.ReferenceParamsBuilder;
 import io.typefox.lsapi.builders.TextDocumentItemBuilder;
@@ -48,6 +52,7 @@ import java.io.FileWriter;
 import java.net.URI;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -57,6 +62,7 @@ import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.LanguageInfo;
+import org.eclipse.xtext.ide.server.Document;
 import org.eclipse.xtext.ide.server.LanguageServerImpl;
 import org.eclipse.xtext.ide.server.ServerModule;
 import org.eclipse.xtext.ide.server.UriExtensions;
@@ -64,7 +70,9 @@ import org.eclipse.xtext.ide.server.concurrent.RequestManager;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.testing.DefinitionTestConfiguration;
 import org.eclipse.xtext.testing.DocumentSymbolConfiguraiton;
+import org.eclipse.xtext.testing.FormattingConfiguration;
 import org.eclipse.xtext.testing.HoverTestConfiguration;
+import org.eclipse.xtext.testing.RangeFormattingConfiguration;
 import org.eclipse.xtext.testing.ReferenceTestConfiguration;
 import org.eclipse.xtext.testing.TestCompletionConfiguration;
 import org.eclipse.xtext.testing.WorkspaceSymbolConfiguraiton;
@@ -72,9 +80,11 @@ import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.Files;
 import org.eclipse.xtext.util.Modules2;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
@@ -597,7 +607,74 @@ public abstract class AbstractLanguageServerTest implements Consumer<PublishDiag
   
   public void assertEquals(final String expected, final String actual) {
     String _replace = expected.replace("\t", "    ");
-    Assert.assertEquals(_replace, actual);
+    String _replace_1 = actual.replace("\t", "    ");
+    Assert.assertEquals(_replace, _replace_1);
+  }
+  
+  protected void testFormatting(final Procedure1<? super FormattingConfiguration> configurator) {
+    try {
+      @Extension
+      final FormattingConfiguration configuration = new FormattingConfiguration();
+      configuration.setFilePath(("MyModel." + this.fileExtension));
+      configurator.apply(configuration);
+      String _filePath = configuration.getFilePath();
+      String _model = configuration.getModel();
+      final String fileUri = this.operator_mappedTo(_filePath, _model);
+      this.initialize();
+      String _model_1 = configuration.getModel();
+      this.open(fileUri, _model_1);
+      final Procedure1<DocumentFormattingParamsBuilder> _function = (DocumentFormattingParamsBuilder it) -> {
+        it.textDocument(fileUri);
+      };
+      DocumentFormattingParamsBuilder _documentFormattingParamsBuilder = new DocumentFormattingParamsBuilder(_function);
+      DocumentFormattingParams _build = _documentFormattingParamsBuilder.build();
+      final CompletableFuture<List<? extends TextEdit>> changes = this.languageServer.formatting(_build);
+      String _model_2 = configuration.getModel();
+      Document _document = new Document(1, _model_2);
+      List<? extends TextEdit> _get = changes.get();
+      ArrayList<TextEdit> _newArrayList = CollectionLiterals.<TextEdit>newArrayList(((TextEdit[])Conversions.unwrapArray(_get, TextEdit.class)));
+      List<TextEdit> _reverse = ListExtensions.<TextEdit>reverse(_newArrayList);
+      final Document result = _document.applyChanges(_reverse);
+      String _expectedText = configuration.getExpectedText();
+      String _contents = result.getContents();
+      this.assertEquals(_expectedText, _contents);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  protected void testRangeFormatting(final Procedure1<? super RangeFormattingConfiguration> configurator) {
+    try {
+      @Extension
+      final RangeFormattingConfiguration configuration = new RangeFormattingConfiguration();
+      configuration.setFilePath(("MyModel." + this.fileExtension));
+      configurator.apply(configuration);
+      String _filePath = configuration.getFilePath();
+      String _model = configuration.getModel();
+      final String fileUri = this.operator_mappedTo(_filePath, _model);
+      this.initialize();
+      String _model_1 = configuration.getModel();
+      this.open(fileUri, _model_1);
+      final Procedure1<DocumentRangeFormattingParamsBuilder> _function = (DocumentRangeFormattingParamsBuilder it) -> {
+        it.textDocument(fileUri);
+        Range _range = configuration.getRange();
+        it.range(_range);
+      };
+      DocumentRangeFormattingParamsBuilder _documentRangeFormattingParamsBuilder = new DocumentRangeFormattingParamsBuilder(_function);
+      DocumentRangeFormattingParams _build = _documentRangeFormattingParamsBuilder.build();
+      final CompletableFuture<List<? extends TextEdit>> changes = this.languageServer.rangeFormatting(_build);
+      String _model_2 = configuration.getModel();
+      Document _document = new Document(1, _model_2);
+      List<? extends TextEdit> _get = changes.get();
+      ArrayList<TextEdit> _newArrayList = CollectionLiterals.<TextEdit>newArrayList(((TextEdit[])Conversions.unwrapArray(_get, TextEdit.class)));
+      List<TextEdit> _reverse = ListExtensions.<TextEdit>reverse(_newArrayList);
+      final Document result = _document.applyChanges(_reverse);
+      String _expectedText = configuration.getExpectedText();
+      String _contents = result.getContents();
+      this.assertEquals(_expectedText, _contents);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
   
   protected String toExpectation(final Object elements) {
