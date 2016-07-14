@@ -11,6 +11,7 @@ import com.google.inject.Inject
 import com.google.inject.Provider
 import org.eclipse.xtend.core.idea.highlighting.XtendHighlightingLexer
 import org.eclipse.xtend.idea.LightXtendTest
+import org.junit.Ignore
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -32,6 +33,8 @@ class XtendHighlightingLexerTest extends LightXtendTest {
 		assertEquals(0, lexer.tokenStart)
 	}
 
+	// TODO https://github.com/eclipse/xtext-xtend/issues/11
+	@Ignore
 	def void testStart_02() {
 		val lexer = lexerProvider.get
 		lexer.start("''' «» '''")

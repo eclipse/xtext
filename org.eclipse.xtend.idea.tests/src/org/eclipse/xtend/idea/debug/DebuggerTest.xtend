@@ -10,12 +10,13 @@ package org.eclipse.xtend.idea.debug
 import com.intellij.openapi.module.Module
 import com.intellij.openapi.roots.ContentEntry
 import com.intellij.openapi.roots.ModifiableRootModel
+import com.intellij.openapi.vfs.VfsUtil
 import org.eclipse.xtend.core.idea.lang.XtendLanguage
 import org.eclipse.xtext.idea.tests.LibraryUtil
 import org.eclipse.xtext.idea.tests.LightToolingTest
 import org.eclipse.xtext.idea.tests.debug.AbstractDebuggerTestCase
 import org.eclipse.xtext.util.internal.Log
-import com.intellij.openapi.vfs.VfsUtil
+import org.junit.Ignore
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -95,6 +96,8 @@ import com.intellij.openapi.vfs.VfsUtil
 		file.assertCurrentLine('System.out.println("done");')
 	}
 	
+	// TODO https://github.com/eclipse/xtext-xtend/issues/11
+	@Ignore
 	def void testTemplateExpression_for() {
 		val file = addFile("MyClass.xtend" -> "
 				class MyClass {
@@ -118,6 +121,8 @@ import com.intellij.openapi.vfs.VfsUtil
 		file.assertCurrentLine("'''//END")
 	}
 	
+	// TODO https://github.com/eclipse/xtext-xtend/issues/11
+	@Ignore
 	def void testTemplateExpression_if() {
 		val file = addFile("MyClass.xtend" -> "
 				class MyClass {
