@@ -250,9 +250,12 @@ import static extension io.typefox.lsapi.util.LsapiFactories.*
 				default: Diagnostic.SEVERITY_HINT
 			}
 			message = issue.message
+            val lineNumber = (issue.lineNumber ?: 1) - 1
+            val column = (issue.column ?: 1) - 1
+            val length = (issue.length ?: 0)
 			range = newRange(
-				newPosition(issue.lineNumber - 1, issue.column - 1),
-				newPosition(issue.lineNumber - 1, issue.column - 1 + issue.length)
+				newPosition(lineNumber, column),
+				newPosition(lineNumber, column + length)
 			)
 		]
 	}

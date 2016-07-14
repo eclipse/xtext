@@ -399,18 +399,32 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
       it.setSeverity(Integer.valueOf(_switchResult));
       String _message = issue.getMessage();
       it.setMessage(_message);
+      Integer _elvis = null;
       Integer _lineNumber = issue.getLineNumber();
-      int _minus = ((_lineNumber).intValue() - 1);
+      if (_lineNumber != null) {
+        _elvis = _lineNumber;
+      } else {
+        _elvis = Integer.valueOf(1);
+      }
+      final int lineNumber = ((_elvis).intValue() - 1);
+      Integer _elvis_1 = null;
       Integer _column = issue.getColumn();
-      int _minus_1 = ((_column).intValue() - 1);
-      PositionImpl _newPosition = LsapiFactories.newPosition(_minus, _minus_1);
-      Integer _lineNumber_1 = issue.getLineNumber();
-      int _minus_2 = ((_lineNumber_1).intValue() - 1);
-      Integer _column_1 = issue.getColumn();
-      int _minus_3 = ((_column_1).intValue() - 1);
+      if (_column != null) {
+        _elvis_1 = _column;
+      } else {
+        _elvis_1 = Integer.valueOf(1);
+      }
+      final int column = ((_elvis_1).intValue() - 1);
+      Integer _elvis_2 = null;
       Integer _length = issue.getLength();
-      int _plus = (_minus_3 + (_length).intValue());
-      PositionImpl _newPosition_1 = LsapiFactories.newPosition(_minus_2, _plus);
+      if (_length != null) {
+        _elvis_2 = _length;
+      } else {
+        _elvis_2 = Integer.valueOf(0);
+      }
+      final Integer length = _elvis_2;
+      PositionImpl _newPosition = LsapiFactories.newPosition(lineNumber, column);
+      PositionImpl _newPosition_1 = LsapiFactories.newPosition(lineNumber, (column + (length).intValue()));
       RangeImpl _newRange = LsapiFactories.newRange(_newPosition, _newPosition_1);
       it.setRange(_newRange);
     };
