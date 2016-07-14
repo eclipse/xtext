@@ -21,7 +21,7 @@ import org.eclipse.xtext.parsetree.impl.commentAssociation.Element;
 import org.eclipse.xtext.parsetree.impl.commentAssociation.Model;
 import org.eclipse.xtext.parsetree.reconstr.ICommentAssociater;
 import org.eclipse.xtext.resource.SaveOptions;
-import org.eclipse.xtext.serializer.ISerializer;
+import org.eclipse.xtext.serializer.impl.Serializer;
 import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.eclipse.xtext.util.ReplaceRegion;
 import org.junit.Ignore;
@@ -102,6 +102,7 @@ public class CommentAssociationTest extends AbstractXtextTests {
 	}
 
 	// TODO https://github.com/eclipse/xtext-core/issues/32
+	//  see https://bugs.eclipse.org/bugs/show_bug.cgi?id=475457
 	@Ignore
 	@Test public void testSerializeReplacement() throws Exception {
 		String xBlock = 
@@ -119,7 +120,6 @@ public class CommentAssociationTest extends AbstractXtextTests {
 				xBlock + 
 				yBlock + 
 				zBlock;
-//		System.out.println(textModel);
 
 		Model model = (Model) getModel(textModel);
 		EList<Element> elements = model.getElements();
@@ -131,8 +131,8 @@ public class CommentAssociationTest extends AbstractXtextTests {
 		checkReplaceRegion(z, zBlock, textModel);
 	}
 
-	protected void checkReplaceRegion(Element element, String expectedText, String completeModel) {
-		ISerializer serializer = get(ISerializer.class);
+	private void checkReplaceRegion(Element element, String expectedText, String completeModel) {
+		Serializer serializer = get(Serializer.class);
 		ReplaceRegion replacement = serializer.serializeReplacement(element, SaveOptions.defaultOptions());
 		assertEquals(expectedText, replacement.getText());
 		assertEquals(completeModel.indexOf(expectedText), replacement.getOffset());
@@ -147,12 +147,7 @@ public class CommentAssociationTest extends AbstractXtextTests {
 		}
 	}
 	
-	// TODO https://github.com/eclipse/xtext-core/issues/32
-	@Ignore
 	@Test public void testCommentsAtEndOfFile() throws Exception {
-		// the text-model without a trailing LB does not work
-		// since the serializer does not know something about the terminal rules
-//		String textModel = "element x // comment post x";
 		String textModel = "element x // comment post x\n";
 		Model model = (Model) getModel(textModel);
 		EList<Element> elements = model.getElements();
@@ -165,12 +160,8 @@ public class CommentAssociationTest extends AbstractXtextTests {
 		model.getElements().add(y);
 		model.getElements().add(z);
 		String serialized = serialize(model);
-		assertEquals(commentsAtEndOfFileExpectation(), serialized);
+		assertEquals("element x // comment post x\nparent y element z", serialized);
 	}
 
-	protected String commentsAtEndOfFileExpectation() {
-		return "element x // comment post x\n parent y element z";
-	}
-	
 }
 

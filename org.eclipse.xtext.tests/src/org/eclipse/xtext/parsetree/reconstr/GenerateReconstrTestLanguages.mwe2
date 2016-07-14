@@ -50,15 +50,7 @@ Workflow {
 			fragment = @TestLanguagesFragments auto-inject {}
 		}
 		language = {
-			grammarUri = "classpath:/org/eclipse/xtext/parsetree/reconstr/PartialSerializationTestLanguage.xtext"
-			fragment = @TestLanguagesFragments auto-inject {}
-		}
-		language = {
 			grammarUri = "classpath:/org/eclipse/xtext/parsetree/reconstr/SerializationBug269362TestLanguage.xtext"
-			fragment = @TestLanguagesFragments auto-inject {}
-		}
-		language = {
-			grammarUri = "classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTestLanguage.xtext"
 			fragment = @TestLanguagesFragments auto-inject {}
 		}
 		language = {
@@ -67,10 +59,6 @@ Workflow {
 		}
 		language = {
 			grammarUri = "classpath:/org/eclipse/xtext/parsetree/reconstr/SerializationErrorTestLanguage.xtext"
-			fragment = @TestLanguagesFragments auto-inject {}
-		}
-		language = {
-			grammarUri = "classpath:/org/eclipse/xtext/parsetree/reconstr/HiddenTokensMergerTestLanguage.xtext"
 			fragment = @TestLanguagesFragments auto-inject {}
 		}
 	}
