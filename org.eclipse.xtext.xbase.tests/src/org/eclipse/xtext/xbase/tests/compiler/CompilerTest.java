@@ -711,4 +711,18 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 				"final java.beans.VetoableChangeListener x = _function;",
 				"{val java.beans.VetoableChangeListener x = []}");
 	}
+	
+	@Test public void testArrayLiteralInForLoop() throws Exception {
+		assertCompilesTo(
+				"for (final String i : new String[] { \"a\", \"b\", \"c\" }) {\n" +
+				"  org.eclipse.xtext.xbase.lib.InputOutput.<String>println(i);\n}",
+				"for (String i : #['a','b','c']) { println(i) }");
+	}
+	
+	@Test public void testArrayLiteralInForLoop2() throws Exception {
+		assertCompilesTo(
+				"for (final String i : java.util.Collections.<String>unmodifiableList(org.eclipse.xtext.xbase.lib.CollectionLiterals.<String>newArrayList(\"a\", \"b\", \"c\"))) {\n" +
+						"  org.eclipse.xtext.xbase.lib.InputOutput.<String>println(i);\n}",
+				"for (i : #['a','b','c']) { println(i) }");
+	}
 }
