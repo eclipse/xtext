@@ -89,6 +89,9 @@ public class ContentAssistTest extends AbstractXbaseWebTest {
     _builder.append("      ");
     _builder.append("editPositions = ArrayList ()");
     _builder.newLine();
+    _builder.append("      ");
+    _builder.append("kind = \"UNKOWN\"");
+    _builder.newLine();
     _builder.append("    ");
     _builder.append("],");
     _builder.newLine();
@@ -119,6 +122,9 @@ public class ContentAssistTest extends AbstractXbaseWebTest {
     _builder.append("      ");
     _builder.append("editPositions = ArrayList ()");
     _builder.newLine();
+    _builder.append("      ");
+    _builder.append("kind = \"UNKOWN\"");
+    _builder.newLine();
     _builder.append("    ");
     _builder.append("],");
     _builder.newLine();
@@ -148,6 +154,9 @@ public class ContentAssistTest extends AbstractXbaseWebTest {
     _builder.newLine();
     _builder.append("      ");
     _builder.append("editPositions = ArrayList ()");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("kind = \"UNKOWN\"");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("]");
@@ -197,6 +206,9 @@ public class ContentAssistTest extends AbstractXbaseWebTest {
     _builder.append("      ");
     _builder.append("editPositions = ArrayList ()");
     _builder.newLine();
+    _builder.append("      ");
+    _builder.append("kind = \"UNKOWN\"");
+    _builder.newLine();
     _builder.append("    ");
     _builder.append("],");
     _builder.newLine();
@@ -227,6 +239,9 @@ public class ContentAssistTest extends AbstractXbaseWebTest {
     _builder.append("      ");
     _builder.append("editPositions = ArrayList ()");
     _builder.newLine();
+    _builder.append("      ");
+    _builder.append("kind = \"UNKOWN\"");
+    _builder.newLine();
     _builder.append("    ");
     _builder.append("],");
     _builder.newLine();
@@ -256,6 +271,9 @@ public class ContentAssistTest extends AbstractXbaseWebTest {
     _builder.newLine();
     _builder.append("      ");
     _builder.append("editPositions = ArrayList ()");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("kind = \"UNKOWN\"");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("]");
@@ -308,6 +326,9 @@ public class ContentAssistTest extends AbstractXbaseWebTest {
     _builder.append("      ");
     _builder.append(")");
     _builder.newLine();
+    _builder.append("      ");
+    _builder.append("kind = \"UNKOWN\"");
+    _builder.newLine();
     _builder.append("    ");
     _builder.append("],");
     _builder.newLine();
@@ -340,6 +361,9 @@ public class ContentAssistTest extends AbstractXbaseWebTest {
     _builder.newLine();
     _builder.append("      ");
     _builder.append(")");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("kind = \"UNKOWN\"");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("],");
@@ -374,6 +398,9 @@ public class ContentAssistTest extends AbstractXbaseWebTest {
     _builder.append("      ");
     _builder.append(")");
     _builder.newLine();
+    _builder.append("      ");
+    _builder.append("kind = \"UNKOWN\"");
+    _builder.newLine();
     _builder.append("    ");
     _builder.append("],");
     _builder.newLine();
@@ -406,6 +433,9 @@ public class ContentAssistTest extends AbstractXbaseWebTest {
     _builder.newLine();
     _builder.append("      ");
     _builder.append(")");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("kind = \"UNKOWN\"");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("],");
@@ -440,6 +470,9 @@ public class ContentAssistTest extends AbstractXbaseWebTest {
     _builder.append("      ");
     _builder.append(")");
     _builder.newLine();
+    _builder.append("      ");
+    _builder.append("kind = \"UNKOWN\"");
+    _builder.newLine();
     _builder.append("    ");
     _builder.append("],");
     _builder.newLine();
@@ -472,6 +505,9 @@ public class ContentAssistTest extends AbstractXbaseWebTest {
     _builder.newLine();
     _builder.append("      ");
     _builder.append(")");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("kind = \"UNKOWN\"");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("],");
@@ -542,6 +578,9 @@ public class ContentAssistTest extends AbstractXbaseWebTest {
     _builder_1.append("      ");
     _builder_1.append("editPositions = ArrayList ()");
     _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("kind = \"UNKOWN\"");
+    _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("],");
     _builder_1.newLine();
@@ -575,6 +614,9 @@ public class ContentAssistTest extends AbstractXbaseWebTest {
     _builder_1.append("      ");
     _builder_1.append(")");
     _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("kind = \"UNKOWN\"");
+    _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("],");
     _builder_1.newLine();
@@ -601,6 +643,9 @@ public class ContentAssistTest extends AbstractXbaseWebTest {
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("editPositions = ArrayList ()");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("kind = \"UNKOWN\"");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("]");
@@ -631,6 +676,9 @@ public class ContentAssistTest extends AbstractXbaseWebTest {
     _builder.append("  ");
     _builder.append("editPositions = ArrayList ()");
     _builder.newLine();
+    _builder.append("  ");
+    _builder.append("kind = \"UNKOWN\"");
+    _builder.newLine();
     _builder.append("],");
     _builder.newLine();
     _builder.append("ContentAssistEntry [");
@@ -649,6 +697,9 @@ public class ContentAssistTest extends AbstractXbaseWebTest {
     _builder.newLine();
     _builder.append("  ");
     _builder.append("editPositions = ArrayList ()");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("kind = \"UNKOWN\"");
     _builder.newLine();
     _builder.append("],");
     _builder.newLine();
@@ -669,6 +720,9 @@ public class ContentAssistTest extends AbstractXbaseWebTest {
     _builder.append("  ");
     _builder.append("editPositions = ArrayList ()");
     _builder.newLine();
+    _builder.append("  ");
+    _builder.append("kind = \"UNKOWN\"");
+    _builder.newLine();
     _builder.append("],");
     _builder.newLine();
     _builder.append("ContentAssistEntry [");
@@ -687,6 +741,9 @@ public class ContentAssistTest extends AbstractXbaseWebTest {
     _builder.newLine();
     _builder.append("  ");
     _builder.append("editPositions = ArrayList ()");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("kind = \"UNKOWN\"");
     _builder.newLine();
     _builder.append("],");
     _builder.newLine();
@@ -707,6 +764,9 @@ public class ContentAssistTest extends AbstractXbaseWebTest {
     _builder.append("  ");
     _builder.append("editPositions = ArrayList ()");
     _builder.newLine();
+    _builder.append("  ");
+    _builder.append("kind = \"UNKOWN\"");
+    _builder.newLine();
     _builder.append("],");
     _builder.newLine();
     _builder.append("ContentAssistEntry [");
@@ -725,6 +785,9 @@ public class ContentAssistTest extends AbstractXbaseWebTest {
     _builder.newLine();
     _builder.append("  ");
     _builder.append("editPositions = ArrayList ()");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("kind = \"UNKOWN\"");
     _builder.newLine();
     _builder.append("],");
     _builder.newLine();
@@ -745,6 +808,9 @@ public class ContentAssistTest extends AbstractXbaseWebTest {
     _builder.append("  ");
     _builder.append("editPositions = ArrayList ()");
     _builder.newLine();
+    _builder.append("  ");
+    _builder.append("kind = \"UNKOWN\"");
+    _builder.newLine();
     _builder.append("],");
     _builder.newLine();
     _builder.append("ContentAssistEntry [");
@@ -763,6 +829,9 @@ public class ContentAssistTest extends AbstractXbaseWebTest {
     _builder.newLine();
     _builder.append("  ");
     _builder.append("editPositions = ArrayList ()");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("kind = \"UNKOWN\"");
     _builder.newLine();
     _builder.append("],");
     _builder.newLine();
@@ -783,6 +852,9 @@ public class ContentAssistTest extends AbstractXbaseWebTest {
     _builder.append("  ");
     _builder.append("editPositions = ArrayList ()");
     _builder.newLine();
+    _builder.append("  ");
+    _builder.append("kind = \"UNKOWN\"");
+    _builder.newLine();
     _builder.append("],");
     _builder.newLine();
     _builder.append("ContentAssistEntry [");
@@ -801,6 +873,9 @@ public class ContentAssistTest extends AbstractXbaseWebTest {
     _builder.newLine();
     _builder.append("  ");
     _builder.append("editPositions = ArrayList ()");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("kind = \"UNKOWN\"");
     _builder.newLine();
     _builder.append("],");
     _builder.newLine();
@@ -821,6 +896,9 @@ public class ContentAssistTest extends AbstractXbaseWebTest {
     _builder.append("  ");
     _builder.append("editPositions = ArrayList ()");
     _builder.newLine();
+    _builder.append("  ");
+    _builder.append("kind = \"UNKOWN\"");
+    _builder.newLine();
     _builder.append("],");
     _builder.newLine();
     _builder.append("ContentAssistEntry [");
@@ -839,6 +917,9 @@ public class ContentAssistTest extends AbstractXbaseWebTest {
     _builder.newLine();
     _builder.append("  ");
     _builder.append("editPositions = ArrayList ()");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("kind = \"UNKOWN\"");
     _builder.newLine();
     _builder.append("],");
     _builder.newLine();
@@ -859,6 +940,9 @@ public class ContentAssistTest extends AbstractXbaseWebTest {
     _builder.append("  ");
     _builder.append("editPositions = ArrayList ()");
     _builder.newLine();
+    _builder.append("  ");
+    _builder.append("kind = \"UNKOWN\"");
+    _builder.newLine();
     _builder.append("],");
     _builder.newLine();
     _builder.append("ContentAssistEntry [");
@@ -878,6 +962,9 @@ public class ContentAssistTest extends AbstractXbaseWebTest {
     _builder.append("  ");
     _builder.append("editPositions = ArrayList ()");
     _builder.newLine();
+    _builder.append("  ");
+    _builder.append("kind = \"UNKOWN\"");
+    _builder.newLine();
     _builder.append("],");
     _builder.newLine();
     _builder.append("ContentAssistEntry [");
@@ -896,6 +983,9 @@ public class ContentAssistTest extends AbstractXbaseWebTest {
     _builder.newLine();
     _builder.append("  ");
     _builder.append("editPositions = ArrayList ()");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("kind = \"UNKOWN\"");
     _builder.newLine();
     _builder.append("],");
     _builder.newLine();
@@ -921,6 +1011,9 @@ public class ContentAssistTest extends AbstractXbaseWebTest {
     _builder.newLine();
     _builder.append("  ");
     _builder.append(")");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("kind = \"TEXT\"");
     _builder.newLine();
     _builder.append("]");
     _builder.newLine();

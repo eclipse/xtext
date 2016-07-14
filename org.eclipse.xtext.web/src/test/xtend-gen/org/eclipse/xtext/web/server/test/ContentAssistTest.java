@@ -116,6 +116,9 @@ public class ContentAssistTest extends AbstractWebServerTest {
     _builder.append("      ");
     _builder.append("editPositions = ArrayList ()");
     _builder.newLine();
+    _builder.append("      ");
+    _builder.append("kind = \"KEYWORD\"");
+    _builder.newLine();
     _builder.append("    ");
     _builder.append("],");
     _builder.newLine();
@@ -134,6 +137,9 @@ public class ContentAssistTest extends AbstractWebServerTest {
     _builder.append("      ");
     _builder.append("editPositions = ArrayList ()");
     _builder.newLine();
+    _builder.append("      ");
+    _builder.append("kind = \"KEYWORD\"");
+    _builder.newLine();
     _builder.append("    ");
     _builder.append("],");
     _builder.newLine();
@@ -151,6 +157,9 @@ public class ContentAssistTest extends AbstractWebServerTest {
     _builder.newLine();
     _builder.append("      ");
     _builder.append("editPositions = ArrayList ()");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("kind = \"KEYWORD\"");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("]");
@@ -187,6 +196,9 @@ public class ContentAssistTest extends AbstractWebServerTest {
     _builder.newLine();
     _builder.append("      ");
     _builder.append("editPositions = ArrayList ()");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("kind = \"KEYWORD\"");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("]");
@@ -341,6 +353,9 @@ public class ContentAssistTest extends AbstractWebServerTest {
     _builder.append("      ");
     _builder.append(")");
     _builder.newLine();
+    _builder.append("      ");
+    _builder.append("kind = \"VALUE\"");
+    _builder.newLine();
     _builder.append("    ");
     _builder.append("]");
     _builder.newLine();
@@ -394,6 +409,9 @@ public class ContentAssistTest extends AbstractWebServerTest {
     _builder_1.append("      ");
     _builder_1.append("editPositions = ArrayList ()");
     _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("kind = \"UNKOWN\"");
+    _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("],");
     _builder_1.newLine();
@@ -414,6 +432,9 @@ public class ContentAssistTest extends AbstractWebServerTest {
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("editPositions = ArrayList ()");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("kind = \"UNKOWN\"");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("]");
@@ -474,6 +495,9 @@ public class ContentAssistTest extends AbstractWebServerTest {
     _builder_1.append("      ");
     _builder_1.append("editPositions = ArrayList ()");
     _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("kind = \"UNKOWN\"");
+    _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("],");
     _builder_1.newLine();
@@ -494,6 +518,9 @@ public class ContentAssistTest extends AbstractWebServerTest {
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("editPositions = ArrayList ()");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("kind = \"UNKOWN\"");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("],");
@@ -516,6 +543,9 @@ public class ContentAssistTest extends AbstractWebServerTest {
     _builder_1.append("      ");
     _builder_1.append("editPositions = ArrayList ()");
     _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("kind = \"UNKOWN\"");
+    _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("],");
     _builder_1.newLine();
@@ -536,6 +566,9 @@ public class ContentAssistTest extends AbstractWebServerTest {
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("editPositions = ArrayList ()");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("kind = \"UNKOWN\"");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("]");
@@ -583,6 +616,9 @@ public class ContentAssistTest extends AbstractWebServerTest {
     _builder_1.append("      ");
     _builder_1.append("editPositions = ArrayList ()");
     _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("kind = \"UNKOWN\"");
+    _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("],");
     _builder_1.newLine();
@@ -600,6 +636,9 @@ public class ContentAssistTest extends AbstractWebServerTest {
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("editPositions = ArrayList ()");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("kind = \"UNKOWN\"");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("]");
@@ -651,6 +690,9 @@ public class ContentAssistTest extends AbstractWebServerTest {
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("editPositions = ArrayList ()");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("kind = \"UNKOWN\"");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("]");
@@ -705,6 +747,9 @@ public class ContentAssistTest extends AbstractWebServerTest {
     _builder_1.append("      ");
     _builder_1.append("editPositions = ArrayList ()");
     _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("kind = \"UNKOWN\"");
+    _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("]");
     _builder_1.newLine();
@@ -757,6 +802,9 @@ public class ContentAssistTest extends AbstractWebServerTest {
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("editPositions = ArrayList ()");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("kind = \"UNKOWN\"");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("]");
@@ -817,6 +865,9 @@ public class ContentAssistTest extends AbstractWebServerTest {
     _builder_1.append("      ");
     _builder_1.append("editPositions = ArrayList ()");
     _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("kind = \"UNKOWN\"");
+    _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("],");
     _builder_1.newLine();
@@ -837,6 +888,9 @@ public class ContentAssistTest extends AbstractWebServerTest {
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("editPositions = ArrayList ()");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("kind = \"UNKOWN\"");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("]");
@@ -897,6 +951,9 @@ public class ContentAssistTest extends AbstractWebServerTest {
     _builder_1.append("      ");
     _builder_1.append("editPositions = ArrayList ()");
     _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("kind = \"UNKOWN\"");
+    _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("],");
     _builder_1.newLine();
@@ -917,6 +974,9 @@ public class ContentAssistTest extends AbstractWebServerTest {
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("editPositions = ArrayList ()");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("kind = \"UNKOWN\"");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("]");
@@ -983,6 +1043,9 @@ public class ContentAssistTest extends AbstractWebServerTest {
     _builder_1.append("      ");
     _builder_1.append("editPositions = ArrayList ()");
     _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("kind = \"UNKOWN\"");
+    _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("],");
     _builder_1.newLine();
@@ -1003,6 +1066,9 @@ public class ContentAssistTest extends AbstractWebServerTest {
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("editPositions = ArrayList ()");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("kind = \"UNKOWN\"");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("]");
@@ -1067,6 +1133,9 @@ public class ContentAssistTest extends AbstractWebServerTest {
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("editPositions = ArrayList ()");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("kind = \"UNKOWN\"");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("]");

@@ -8,7 +8,7 @@ dependencies {
     compile "org.eclipse.xtext:org.eclipse.xtext.ide:$versions.xtext"
     compile "org.eclipse.xtext:org.eclipse.xtext.common.types:$versions.xtext"
     testCompile "junit:junit:$versions.junit"
-    testCompile "org.eclipse.xtext:org.eclipse.xtext.junit4:$versions.xtext"
+    testCompile "org.eclipse.xtext:org.eclipse.xtext.testing:$versions.xtext"
     testCompile project(':org.eclipse.xtext.web.example.statemachine.ide')
 }
 

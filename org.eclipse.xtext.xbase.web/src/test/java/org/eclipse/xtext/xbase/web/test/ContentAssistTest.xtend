@@ -48,6 +48,7 @@ class ContentAssistTest extends AbstractXbaseWebTest {
 			        import java.util.AbstractQueue'
 			      )
 			      editPositions = ArrayList ()
+			      kind = "UNKOWN"
 			    ],
 			    ContentAssistEntry [
 			      prefix = "AbstractQu"
@@ -58,6 +59,7 @@ class ContentAssistTest extends AbstractXbaseWebTest {
 			        import java.util.concurrent.locks.AbstractQueuedLongSynchronizer'
 			      )
 			      editPositions = ArrayList ()
+			      kind = "UNKOWN"
 			    ],
 			    ContentAssistEntry [
 			      prefix = "AbstractQu"
@@ -68,6 +70,7 @@ class ContentAssistTest extends AbstractXbaseWebTest {
 			        import java.util.concurrent.locks.AbstractQueuedSynchronizer'
 			      )
 			      editPositions = ArrayList ()
+			      kind = "UNKOWN"
 			    ]
 			  )
 			]''')
@@ -87,6 +90,7 @@ class ContentAssistTest extends AbstractXbaseWebTest {
 			        import java.util.AbstractQueue'
 			      )
 			      editPositions = ArrayList ()
+			      kind = "UNKOWN"
 			    ],
 			    ContentAssistEntry [
 			      prefix = "AbstractQu"
@@ -97,6 +101,7 @@ class ContentAssistTest extends AbstractXbaseWebTest {
 			        import java.util.concurrent.locks.AbstractQueuedLongSynchronizer'
 			      )
 			      editPositions = ArrayList ()
+			      kind = "UNKOWN"
 			    ],
 			    ContentAssistEntry [
 			      prefix = "AbstractQu"
@@ -107,6 +112,7 @@ class ContentAssistTest extends AbstractXbaseWebTest {
 			        import java.util.concurrent.locks.AbstractQueuedSynchronizer'
 			      )
 			      editPositions = ArrayList ()
+			      kind = "UNKOWN"
 			    ]
 			  )
 			]''')
@@ -127,6 +133,7 @@ class ContentAssistTest extends AbstractXbaseWebTest {
 			      editPositions = ArrayList (
 			        [44:0]
 			      )
+			      kind = "UNKOWN"
 			    ],
 			    ContentAssistEntry [
 			      prefix = "add"
@@ -138,6 +145,7 @@ class ContentAssistTest extends AbstractXbaseWebTest {
 			      editPositions = ArrayList (
 			        [44:0]
 			      )
+			      kind = "UNKOWN"
 			    ],
 			    ContentAssistEntry [
 			      prefix = "add"
@@ -149,6 +157,7 @@ class ContentAssistTest extends AbstractXbaseWebTest {
 			      editPositions = ArrayList (
 			        [47:0]
 			      )
+			      kind = "UNKOWN"
 			    ],
 			    ContentAssistEntry [
 			      prefix = "add"
@@ -160,6 +169,7 @@ class ContentAssistTest extends AbstractXbaseWebTest {
 			      editPositions = ArrayList (
 			        [47:0]
 			      )
+			      kind = "UNKOWN"
 			    ],
 			    ContentAssistEntry [
 			      prefix = "add"
@@ -171,6 +181,7 @@ class ContentAssistTest extends AbstractXbaseWebTest {
 			      editPositions = ArrayList (
 			        [47:0]
 			      )
+			      kind = "UNKOWN"
 			    ],
 			    ContentAssistEntry [
 			      prefix = "add"
@@ -182,6 +193,7 @@ class ContentAssistTest extends AbstractXbaseWebTest {
 			      editPositions = ArrayList (
 			        [47:0]
 			      )
+			      kind = "UNKOWN"
 			    ],
 			    «operators»
 			  )
@@ -209,6 +221,7 @@ class ContentAssistTest extends AbstractXbaseWebTest {
 			      escapePosition = 90
 			      textReplacements = ArrayList ()
 			      editPositions = ArrayList ()
+			      kind = "UNKOWN"
 			    ],
 			    ContentAssistEntry [
 			      prefix = "foob"
@@ -220,6 +233,7 @@ class ContentAssistTest extends AbstractXbaseWebTest {
 			      editPositions = ArrayList (
 			        [93:5]
 			      )
+			      kind = "UNKOWN"
 			    ],
 			    ContentAssistEntry [
 			      prefix = "foob"
@@ -229,6 +243,7 @@ class ContentAssistTest extends AbstractXbaseWebTest {
 			      escapePosition = 90
 			      textReplacements = ArrayList ()
 			      editPositions = ArrayList ()
+			      kind = "UNKOWN"
 			    ]
 			  )
 			]''')
@@ -241,6 +256,7 @@ class ContentAssistTest extends AbstractXbaseWebTest {
 	      description = "JvmOperation"
 	      textReplacements = ArrayList ()
 	      editPositions = ArrayList ()
+	      kind = "UNKOWN"
 	    ],
 	    ContentAssistEntry [
 	      prefix = ""
@@ -248,6 +264,7 @@ class ContentAssistTest extends AbstractXbaseWebTest {
 	      description = "JvmOperation"
 	      textReplacements = ArrayList ()
 	      editPositions = ArrayList ()
+	      kind = "UNKOWN"
 	    ],
 	    ContentAssistEntry [
 	      prefix = ""
@@ -255,6 +272,7 @@ class ContentAssistTest extends AbstractXbaseWebTest {
 	      description = "JvmOperation"
 	      textReplacements = ArrayList ()
 	      editPositions = ArrayList ()
+	      kind = "UNKOWN"
 	    ],
 	    ContentAssistEntry [
 	      prefix = ""
@@ -262,6 +280,7 @@ class ContentAssistTest extends AbstractXbaseWebTest {
 	      description = "JvmOperation"
 	      textReplacements = ArrayList ()
 	      editPositions = ArrayList ()
+	      kind = "UNKOWN"
 	    ],
 	    ContentAssistEntry [
 	      prefix = ""
@@ -269,6 +288,7 @@ class ContentAssistTest extends AbstractXbaseWebTest {
 	      description = "JvmOperation"
 	      textReplacements = ArrayList ()
 	      editPositions = ArrayList ()
+	      kind = "UNKOWN"
 	    ],
 	    ContentAssistEntry [
 	      prefix = ""
@@ -276,6 +296,7 @@ class ContentAssistTest extends AbstractXbaseWebTest {
 	      description = "JvmOperation"
 	      textReplacements = ArrayList ()
 	      editPositions = ArrayList ()
+	      kind = "UNKOWN"
 	    ],
 	    ContentAssistEntry [
 	      prefix = ""
@@ -283,6 +304,7 @@ class ContentAssistTest extends AbstractXbaseWebTest {
 	      description = "JvmOperation"
 	      textReplacements = ArrayList ()
 	      editPositions = ArrayList ()
+	      kind = "UNKOWN"
 	    ],
 	    ContentAssistEntry [
 	      prefix = ""
@@ -290,6 +312,7 @@ class ContentAssistTest extends AbstractXbaseWebTest {
 	      description = "JvmOperation"
 	      textReplacements = ArrayList ()
 	      editPositions = ArrayList ()
+	      kind = "UNKOWN"
 	    ],
 	    ContentAssistEntry [
 	      prefix = ""
@@ -297,6 +320,7 @@ class ContentAssistTest extends AbstractXbaseWebTest {
 	      description = "JvmOperation"
 	      textReplacements = ArrayList ()
 	      editPositions = ArrayList ()
+	      kind = "UNKOWN"
 	    ],
 	    ContentAssistEntry [
 	      prefix = ""
@@ -304,6 +328,7 @@ class ContentAssistTest extends AbstractXbaseWebTest {
 	      description = "JvmOperation"
 	      textReplacements = ArrayList ()
 	      editPositions = ArrayList ()
+	      kind = "UNKOWN"
 	    ],
 	    ContentAssistEntry [
 	      prefix = ""
@@ -311,6 +336,7 @@ class ContentAssistTest extends AbstractXbaseWebTest {
 	      description = "JvmOperation"
 	      textReplacements = ArrayList ()
 	      editPositions = ArrayList ()
+	      kind = "UNKOWN"
 	    ],
 	    ContentAssistEntry [
 	      prefix = ""
@@ -318,6 +344,7 @@ class ContentAssistTest extends AbstractXbaseWebTest {
 	      description = "JvmOperation"
 	      textReplacements = ArrayList ()
 	      editPositions = ArrayList ()
+	      kind = "UNKOWN"
 	    ],
 	    ContentAssistEntry [
 	      prefix = ""
@@ -325,6 +352,7 @@ class ContentAssistTest extends AbstractXbaseWebTest {
 	      description = "JvmOperation"
 	      textReplacements = ArrayList ()
 	      editPositions = ArrayList ()
+	      kind = "UNKOWN"
 	    ],
 	    ContentAssistEntry [
 	      prefix = ""
@@ -332,6 +360,7 @@ class ContentAssistTest extends AbstractXbaseWebTest {
 	      description = "JvmOperation"
 	      textReplacements = ArrayList ()
 	      editPositions = ArrayList ()
+	      kind = "UNKOWN"
 	    ],
 	    ContentAssistEntry [
 	      prefix = ""
@@ -339,6 +368,7 @@ class ContentAssistTest extends AbstractXbaseWebTest {
 	      description = "JvmOperation"
 	      textReplacements = ArrayList ()
 	      editPositions = ArrayList ()
+	      kind = "UNKOWN"
 	    ],
 	    ContentAssistEntry [
 	      prefix = ""
@@ -348,6 +378,7 @@ class ContentAssistTest extends AbstractXbaseWebTest {
 	      editPositions = ArrayList (
 	        [44:5]
 	      )
+	      kind = "TEXT"
 	    ]
 	'''
 	
