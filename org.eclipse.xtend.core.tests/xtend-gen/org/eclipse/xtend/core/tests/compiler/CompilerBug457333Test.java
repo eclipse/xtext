@@ -96,11 +96,11 @@ public class CompilerBug457333Test extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("import java.util.Map;");
     _builder_1.newLine();
+    _builder_1.append("import java.util.function.Consumer;");
+    _builder_1.newLine();
     _builder_1.append("import org.eclipse.xtext.xbase.lib.CollectionLiterals;");
     _builder_1.newLine();
     _builder_1.append("import org.eclipse.xtext.xbase.lib.Functions.Function0;");
-    _builder_1.newLine();
-    _builder_1.append("import org.eclipse.xtext.xbase.lib.IterableExtensions;");
     _builder_1.newLine();
     _builder_1.append("import org.eclipse.xtext.xbase.lib.Pair;");
     _builder_1.newLine();
@@ -126,10 +126,10 @@ public class CompilerBug457333Test extends AbstractXtendCompilerTest {
     _builder_1.append("public void apply(final String project) {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("final Procedure1<String> _function = new Procedure1<String>() {");
+    _builder_1.append("final Consumer<String> _function = new Consumer<String>() {");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("public void apply(final String sourceSet) {");
+    _builder_1.append("public void accept(final String sourceSet) {");
     _builder_1.newLine();
     _builder_1.append("        ");
     _builder_1.append("final XtendPlugin.Action<Object> _function = new XtendPlugin.Action<Object>() {");
@@ -195,7 +195,7 @@ public class CompilerBug457333Test extends AbstractXtendCompilerTest {
     _builder_1.append("};");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("IterableExtensions.<String>forEach(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList(\"\")), _function);");
+    _builder_1.append("Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList(\"\")).forEach(_function);");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");

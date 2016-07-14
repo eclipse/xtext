@@ -29,7 +29,10 @@ Require-Bundle: org.eclipse.xtend.core,
  org.eclipse.xtend.lib,
  org.eclipse.xtend.ide.tests.data,
  org.eclipse.xtext.ide,
- org.eclipse.xtext.common.types.shared;resolution:=optional
+ org.eclipse.xtend.ide.common,
+ org.eclipse.xtext.common.types.shared,
+ org.eclipse.xtext.common.types.ui,
+ org.eclipse.xtext.ui.shared
 Import-Package: org.apache.log4j;version="1.2.15",
  org.junit;version="4.5.0",
  org.junit.rules;version="4.5.0",

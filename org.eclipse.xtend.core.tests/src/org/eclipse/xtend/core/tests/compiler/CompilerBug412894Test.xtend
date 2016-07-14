@@ -29,16 +29,15 @@ class CompilerBug412894Test extends AbstractXtendCompilerTest {
 			}
 		''', '''
 			import java.util.ArrayList;
+			import java.util.function.Consumer;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-			import org.eclipse.xtext.xbase.lib.IterableExtensions;
-			import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-			
+
 			@SuppressWarnings("all")
 			public class C {
 			  public void m() {
 			    final ArrayList<String> list = CollectionLiterals.<String>newArrayList();
-			    final Procedure1<String> _function = new Procedure1<String>() {
-			      public void apply(final String it) {
+			    final Consumer<String> _function = new Consumer<String>() {
+			      public void accept(final String it) {
 			        boolean _matched = false;
 			        if (it instanceof String) {
 			          _matched=true;
@@ -46,7 +45,7 @@ class CompilerBug412894Test extends AbstractXtendCompilerTest {
 			        }
 			      }
 			    };
-			    IterableExtensions.<String>forEach(list, _function);
+			    list.forEach(_function);
 			  }
 			}
 		''')
@@ -69,16 +68,15 @@ class CompilerBug412894Test extends AbstractXtendCompilerTest {
 		''', '''
 			import java.io.Serializable;
 			import java.util.ArrayList;
+			import java.util.function.Consumer;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-			import org.eclipse.xtext.xbase.lib.IterableExtensions;
-			import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 			
 			@SuppressWarnings("all")
 			public class C {
 			  public void m() {
 			    final ArrayList<Serializable> list = CollectionLiterals.<Serializable>newArrayList();
-			    final Procedure1<Serializable> _function = new Procedure1<Serializable>() {
-			      public void apply(final Serializable it) {
+			    final Consumer<Serializable> _function = new Consumer<Serializable>() {
+			      public void accept(final Serializable it) {
 			        boolean _matched = false;
 			        if (it instanceof String) {
 			          _matched=true;
@@ -92,7 +90,7 @@ class CompilerBug412894Test extends AbstractXtendCompilerTest {
 			        }
 			      }
 			    };
-			    IterableExtensions.<Serializable>forEach(list, _function);
+			    list.forEach(_function);
 			  }
 			}
 		''')
@@ -114,16 +112,15 @@ class CompilerBug412894Test extends AbstractXtendCompilerTest {
 		''', '''
 			import java.io.Serializable;
 			import java.util.ArrayList;
+			import java.util.function.Consumer;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-			import org.eclipse.xtext.xbase.lib.IterableExtensions;
-			import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-			
+
 			@SuppressWarnings("all")
 			public class C {
 			  public void m() {
 			    final ArrayList<Serializable> list = CollectionLiterals.<Serializable>newArrayList();
-			    final Procedure1<Serializable> _function = new Procedure1<Serializable>() {
-			      public void apply(final Serializable it) {
+			    final Consumer<Serializable> _function = new Consumer<Serializable>() {
+			      public void accept(final Serializable it) {
 			        boolean _matched = false;
 			        if (it instanceof Number) {
 			          _matched=true;
@@ -132,7 +129,7 @@ class CompilerBug412894Test extends AbstractXtendCompilerTest {
 			        }
 			      }
 			    };
-			    IterableExtensions.<Serializable>forEach(list, _function);
+			    list.forEach(_function);
 			  }
 			}
 		''')
@@ -151,22 +148,21 @@ class CompilerBug412894Test extends AbstractXtendCompilerTest {
 			}
 		''', '''
 			import java.util.ArrayList;
+			import java.util.function.Consumer;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-			import org.eclipse.xtext.xbase.lib.IterableExtensions;
-			import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-			
+
 			@SuppressWarnings("all")
 			public class C {
 			  public void m() {
 			    final ArrayList<Object> list = CollectionLiterals.<Object>newArrayList();
-			    final Procedure1<Object> _function = new Procedure1<Object>() {
-			      public void apply(final Object it) {
+			    final Consumer<Object> _function = new Consumer<Object>() {
+			      public void accept(final Object it) {
 			        if ((it instanceof String)) {
 			          list.add(it);
 			        }
 			      }
 			    };
-			    IterableExtensions.<Object>forEach(list, _function);
+			    list.forEach(_function);
 			  }
 			}
 		''')

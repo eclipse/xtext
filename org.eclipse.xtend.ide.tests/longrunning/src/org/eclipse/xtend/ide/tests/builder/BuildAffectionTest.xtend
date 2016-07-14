@@ -26,6 +26,7 @@ import org.junit.After
 import org.junit.AfterClass
 import org.junit.Before
 import org.junit.BeforeClass
+import org.junit.Ignore
 import org.junit.Test
 
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
@@ -52,6 +53,7 @@ class BuildAffectionTest {
 		// disable auto build
 		val workspace = ResourcesPlugin.workspace
 		val description = workspace.description
+		
 		wasAutoBuilding = description.autoBuilding
 		description.autoBuilding = false
 		workspace.description = description
@@ -495,6 +497,8 @@ class BuildAffectionTest {
 		''')
 	}
 	
+	//FIXME https://github.com/eclipse/xtext-xtend/issues/8
+	@Ignore("https://github.com/eclipse/xtext-xtend/issues/8")
 	@Test
 	def void testAffected_dependentProject_Java() {
 		val foo = createFile('Foo.java', '''
@@ -524,6 +528,8 @@ class BuildAffectionTest {
 		''')
 	}
 	
+	//FIXME https://github.com/eclipse/xtext-xtend/issues/8
+	@Ignore("https://github.com/eclipse/xtext-xtend/issues/8")
 	@Test
 	def void testAffected_dependentProject_Java_WithExpression() {
 		val foo = createFile('Foo.java', '''
@@ -605,6 +611,8 @@ class BuildAffectionTest {
 		''')
 	}
 	
+	//FIXME https://github.com/eclipse/xtext-xtend/issues/8
+	@Ignore("https://github.com/eclipse/xtext-xtend/issues/8")
 	@Test
 	def void testAffected_annotationProcessorChanged_separateFiles() {
 		createFile('Foo', '''

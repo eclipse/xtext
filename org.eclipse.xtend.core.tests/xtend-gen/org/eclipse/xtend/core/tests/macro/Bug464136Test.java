@@ -17,8 +17,10 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
+@Ignore("https://github.com/eclipse/xtext-xtend/issues/6")
 @SuppressWarnings("all")
 public class Bug464136Test extends AbstractActiveAnnotationTest {
   @Test

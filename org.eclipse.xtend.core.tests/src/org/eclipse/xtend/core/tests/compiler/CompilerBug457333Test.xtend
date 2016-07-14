@@ -48,12 +48,12 @@ class CompilerBug457333Test extends AbstractXtendCompilerTest {
 		''', '''
 			import java.util.Collections;
 			import java.util.Map;
+			import java.util.function.Consumer;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			import org.eclipse.xtext.xbase.lib.Functions.Function0;
-			import org.eclipse.xtext.xbase.lib.IterableExtensions;
 			import org.eclipse.xtext.xbase.lib.Pair;
 			import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-			
+
 			@SuppressWarnings("all")
 			public class XtendPlugin implements Procedure1<String> {
 			  public interface Action<T extends Object> {
@@ -61,8 +61,8 @@ class CompilerBug457333Test extends AbstractXtendCompilerTest {
 			  }
 			  
 			  public void apply(final String project) {
-			    final Procedure1<String> _function = new Procedure1<String>() {
-			      public void apply(final String sourceSet) {
+			    final Consumer<String> _function = new Consumer<String>() {
+			      public void accept(final String sourceSet) {
 			        final XtendPlugin.Action<Object> _function = new XtendPlugin.Action<Object>() {
 			          public void exec(final Object it) {
 			            final Function0<Character> _function = new Function0<Character>() {
@@ -84,7 +84,7 @@ class CompilerBug457333Test extends AbstractXtendCompilerTest {
 			        XtendPlugin.this.<Object>create("", Object.class, _function);
 			      }
 			    };
-			    IterableExtensions.<String>forEach(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("")), _function);
+			    Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("")).forEach(_function);
 			  }
 			  
 			  public static void conventionMapping(final Object task, final Map<String, ? extends Function0<?>> mappings) {

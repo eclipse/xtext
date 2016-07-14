@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.tests.compiler
 
+import org.junit.Ignore
 import org.junit.Test
 
 /**
@@ -47,6 +48,8 @@ class OverloadedExtensionCompilerTest extends AbstractXtendCompilerTest {
 		''')
 	}
 	
+	//FIXME https://github.com/eclipse/xtext-xtend/issues/6
+	@Ignore("https://github.com/eclipse/xtext-xtend/issues/6")
 	@Test
 	def test_02() {
 		assertCompilesTo('''

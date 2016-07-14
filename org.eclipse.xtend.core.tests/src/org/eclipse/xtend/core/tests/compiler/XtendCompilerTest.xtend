@@ -3964,10 +3964,9 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			package foo;
 			
 			import java.util.ArrayList;
+			import java.util.function.Consumer;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-			import org.eclipse.xtext.xbase.lib.IterableExtensions;
-			import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-			
+
 			@SuppressWarnings("all")
 			public class Foo {
 			  public void someMethod(final String assert_) {
@@ -3979,12 +3978,12 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			      boolean _greaterThan = (_length > 2);
 			      if (_greaterThan) {
 			        _matched=true;
-			        final Procedure1<String> _function = new Procedure1<String>() {
-			          public void apply(final String break_) {
+			        final Consumer<String> _function = new Consumer<String>() {
+			          public void accept(final String break_) {
 			            (break_ + continue_).toString();
 			          }
 			        };
-			        IterableExtensions.<String>forEach(synchronized_, _function);
+			        synchronized_.forEach(_function);
 			      }
 			    }
 			  }

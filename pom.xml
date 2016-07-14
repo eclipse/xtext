@@ -12,7 +12,11 @@
 		<module>org.eclipse.xtext.license.feature</module>
 		<module>org.eclipse.xtext.target</module>
 		<module>org.eclipse.xtend.core</module>
+		<module>org.eclipse.xtend.core.tests</module>
+		<module>org.eclipse.xtend.core.tests.java8</module>
 		<module>org.eclipse.xtend.ide</module>
+		<module>org.eclipse.xtend.ide.tests</module>
+		<module>org.eclipse.xtend.ide.tests.data</module>
 		<module>org.eclipse.xtend.ide.common</module>
 		<module>org.eclipse.xtend.m2e</module>
 		<module>org.eclipse.xtend.standalone</module>

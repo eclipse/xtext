@@ -51,6 +51,14 @@
 			<id>xtext-lib-from-jenkins</id>
 			<url>http://services.typefox.io/open-source/jenkins/job/xtext-lib/job/master/lastStableBuild/artifact/build/maven-repository/</url>
 		</repository>
+		<repository>
+			<id>xtext-core-from-jenkins</id>
+			<url>http://services.typefox.io/open-source/jenkins/job/xtext-core/job/master/lastStableBuild/artifact/build/maven-repository/</url>
+		</repository>
+		<repository>
+			<id>xtext-extras-from-jenkins</id>
+			<url>http://services.typefox.io/open-source/jenkins//job/xtext-extras/job/master/lastStableBuild/artifact/build/maven-repository/</url>
+		</repository>
 	</repositories>
 
 	<dependencies>
@@ -64,6 +72,12 @@
 			<artifactId>org.eclipse.xtext.xbase.lib.gwt</artifactId>
 			<version>2.11.0-SNAPSHOT</version>
 		</dependency>
+		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext.java</artifactId>
+			<version>2.11.0-SNAPSHOT</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
