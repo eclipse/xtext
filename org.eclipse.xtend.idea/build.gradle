@@ -1,3 +1,5 @@
+apply from: "${rootDir}/gradle/idea-development.gradle"
+
 dependencies {
 	compile project(":org.eclipse.xtend.ide.common")
 	compile "org.eclipse.xtext:org.eclipse.xtext.idea:$versions.xtext"

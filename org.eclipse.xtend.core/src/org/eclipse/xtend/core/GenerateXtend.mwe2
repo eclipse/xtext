@@ -56,7 +56,7 @@ Workflow {
 				}
 				ideaPlugin = {
 					enabled = true
-					root = "../../intellij/org.eclipse.xtend.idea" 
+					name = "org.eclipse.xtend.idea" 
 				}
 				createEclipseMetaData = true
 			}

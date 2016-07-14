@@ -1,18 +1,19 @@
 subprojects {
-	repositories {
-		jcenter()
-		maven {
-			url 'https://oss.sonatype.org/content/repositories/snapshots'
-		}
-	}
-	
 	apply plugin: 'java'
 	apply plugin: 'eclipse'
 	apply plugin: 'maven'
+	
+	apply from: "${rootDir}/gradle/upstream-repositories.gradle"
 	apply from: "${rootDir}/gradle/versions.gradle"
 	apply from: "${rootDir}/gradle/eclipse-project-layout.gradle"
 	apply from: "${rootDir}/gradle/java-compiler-settings.gradle"
-	apply from: "${rootDir}/gradle/idea-development.gradle"
+	apply from: "${rootDir}/gradle/maven-deployment.gradle"
 	
 	group = 'org.eclipse.xtend'
+}
+
+task cleanLocalMavenRepo(type: Delete) {
+	group = 'Upload'
+	description = 'Delete the local Maven repository'
+	delete 'build/maven-repository'
 }

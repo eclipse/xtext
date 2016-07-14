@@ -20,6 +20,8 @@ dependencies {
 	ideaProvided ideaDevelopment.toolsJar()
 }
 
+javadoc.classpath += configurations.ideaProvided
+
 def isTestProject = name.endsWith('tests')
 def isIntellijPlugin = file('META-INF/plugin.xml').exists() && !isTestProject
 
