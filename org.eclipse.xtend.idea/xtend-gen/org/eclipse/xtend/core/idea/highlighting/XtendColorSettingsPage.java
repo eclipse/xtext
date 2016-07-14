@@ -1,0 +1,92 @@
+package org.eclipse.xtend.core.idea.highlighting;
+
+import org.eclipse.xtend.core.idea.highlighting.XtendBaseColorSettingsPage;
+import org.eclipse.xtend2.lib.StringConcatenation;
+
+@SuppressWarnings("all")
+public class XtendColorSettingsPage extends XtendBaseColorSettingsPage {
+  @Override
+  public String getDemoText() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("/**");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("* some comment");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("*/");
+    _builder.newLine();
+    _builder.append("<xbase.annotation>@Annotation</xbase.annotation>");
+    _builder.newLine();
+    _builder.append("<xtend.active.annotation>@ActiveAnnotation</xtend.active.annotation>");
+    _builder.newLine();
+    _builder.append("class XtendType {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("String <xbase.field>str</xbase.field> = \"string\"");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("// <task>TODO: some task</task>");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("Integer i = 5");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("static val <xbase.static.field>staticField</xbase.static.field> = <xbase.static.method.invocation>SomeType.staticMethod</xbase.static.method.invocation>()");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("@Deprecated ");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("def deprecatedMethod(String s) {");
+    _builder.newLine();
+    _builder.append("        ");
+    _builder.append("s.<xbase.extension.method.invacation>extensionMethod</xbase.extension.method.invacation>()");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("def template() ");
+    _builder.append("\'\'\'", "    ");
+    _builder.newLineIfNotEmpty();
+    _builder.append("        ");
+    _builder.append("<xtend.richText>This goes right into the output</xtend.richText>");
+    _builder.newLine();
+    _builder.append("        ");
+    _builder.append("<xtend.richText>   indented in output</xtend.richText>");
+    _builder.newLine();
+    _builder.append("        ");
+    _builder.append("<xtend.richText.delimiter>");
+    _builder.append("«", "        ");
+    _builder.append("</xtend.richText.delimiter>FOR i: 0..10<xtend.richText.delimiter>");
+    _builder.append("»", "        ");
+    _builder.append("</xtend.richText.delimiter>");
+    _builder.newLineIfNotEmpty();
+    _builder.append("            ");
+    _builder.append("not indented in output");
+    _builder.newLine();
+    _builder.append("        ");
+    _builder.append("<xtend.richText.delimiter>");
+    _builder.append("«", "        ");
+    _builder.append("</xtend.richText.delimiter>ENDFOR<xtend.richText.delimiter>");
+    _builder.append("»", "        ");
+    _builder.append("</xtend.richText.delimiter>");
+    _builder.newLineIfNotEmpty();
+    _builder.append("    ");
+    _builder.append("\'\'\'", "    ");
+    _builder.append(" ");
+    _builder.newLineIfNotEmpty();
+    _builder.append("}   ");
+    _builder.newLine();
+    return _builder.toString();
+  }
+}
