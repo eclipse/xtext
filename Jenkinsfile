@@ -5,7 +5,7 @@ node {
 		checkout scm
 		
 		stage 'Build'
-		sh "./gradlew build"
+		sh "./gradlew cleanLocalMavenRepo clean build createLocalMavenRepo --refresh-dependencies --continue"
 		archive '**/build/**/*.jar'
 						
 		slackSend "Build Succeeded - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"

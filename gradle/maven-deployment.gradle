@@ -1,4 +1,5 @@
-apply plugin: 'signing'
+//------------------------------------------------------
+// Create additional sources and Javadoc artifacts
 
 task sourcesJar(type: Jar, dependsOn: classes) {
 	classifier = 'sources'
@@ -16,29 +17,14 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
 	from javadoc.destinationDir
 }
 
-task createLocalMavenRepo(type: Upload) {
-	configuration = configurations['archives']
-	repositories {
-		mavenDeployer {
-			repository(url: "file:" + file("../build/maven-repository"))
-		}
-	}
-}
-
 artifacts {
 	archives sourcesJar, javadocJar
 }
 
-def envSecretKeyRingFile = System.getenv('SIGNING_KEY_RING')
-if (envSecretKeyRingFile != null)
-	ext.'signing.secretKeyRingFile' = envSecretKeyRingFile
-def envKeyId = System.getenv('SIGNING_KEY_ID')
-if (envKeyId != null)
-	ext.'signing.keyId' = envKeyId
-def envPassword = System.getenv('SIGNING_PASSWORD')
-if (envPassword != null)
-	ext.'signing.password' = envPassword
+//------------------------------------------------------
+// Sign the artifacts if the signing info is complete
 
+apply plugin: 'signing'
 signing {
 	required { gradle.taskGraph.hasTask('uploadArchives') }
 	sign configurations.archives
@@ -49,12 +35,43 @@ if (!project.hasProperty('signing.secretKeyRingFile') || !project.property('sign
 	signArchives.enabled = false
 }
 
-def envSonatypeUser = System.getenv('SONATYPE_USER')
-if (envSonatypeUser != null)
-	ext.'sonatypeUserName' = envSonatypeUser
-def envSonatypePassword = System.getenv('SONATYPE_PASSWORD')
-if (envSonatypePassword != null)
-	ext.'sonatypePassword' = envSonatypePassword
+//------------------------------------------------------
+// Configuration function for generated POMs
+
+def configurePom = { pom ->
+	pom.project {
+		packaging 'jar'
+		url 'https://www.eclipse.org/Xtext/'
+		licenses {
+			license {
+				name 'Eclipse Public License, Version 1.0'
+				url 'http://www.eclipse.org/legal/epl-v10.html'
+			}
+		}
+		scm {
+			connection "scm:git:git@github.com:eclipse/${rootProject.name}.git"
+			developerConnection "scm:git:git@github.com:eclipse/${rootProject.name}.git"
+			url "git@github.com:eclipse/${rootProject.name}.git"
+		}
+	}
+	apply from: "${rootDir}/gradle/developers.gradle", to: pom
+}
+
+//------------------------------------------------------
+// Task for copying to a local Maven repository
+
+task createLocalMavenRepo(type: Upload) {
+	group = 'Upload'
+	description = 'Create or update the local Maven repository'
+	configuration = configurations.archives
+	repositories.mavenDeployer {
+		repository(url: "file:" + file("../build/maven-repository"))
+		configurePom(pom)
+	}
+}
+
+//------------------------------------------------------
+// Task for uploading to a remote Maven repository
 
 uploadArchives.repositories.mavenDeployer {
 	beforeDeployment { deployment -> signing.signPom(deployment) }
@@ -68,21 +85,5 @@ uploadArchives.repositories.mavenDeployer {
 			authentication(userName: sonatypeUserName, password: sonatypePassword)
 		}
 	}
-	pom.project {
-		packaging 'jar'
-		url 'https://www.eclipse.org/Xtext/'
-		licenses {
-			license {
-				name 'Eclipse Public License, Version 1.0'
-				url 'http://www.eclipse.org/legal/epl-v10.html'
-			}
-		}
-		scm {
-			connection 'scm:git:git@github.com:eclipse/xtext-web.git'
-			developerConnection 'scm:git:git@github.com:eclipse/xtext-web.git'
-			url 'git@github.com:eclipse/xtext-web.git'
-		}
-	}
+	configurePom(pom)
 }
-
-apply from: "${rootDir}/gradle/developers.gradle"
