@@ -6,7 +6,7 @@ node {
 		
 		stage 'Build'
 		sh "./gradlew cleanLocalMavenRepo clean build createLocalMavenRepo --refresh-dependencies --continue"
-		archive '**/build/**/*.jar'
+		archive 'build/maven-repository/**/*.*'
 						
 		slackSend "Build Succeeded - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
 		

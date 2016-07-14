@@ -1,24 +1,9 @@
-if (!hasProperty('upstreamBranch'))
-	ext.upstreamBranch = 'master'
-def jenkinsRepo = { jobName -> "http://services.typefox.io/open-source/jenkins/job/$jobName/lastStableBuild/artifact/build/maven-repository/" }
-def jenkinsPipelineRepo = { jobName -> "http://services.typefox.io/open-source/jenkins/job/$jobName/job/$upstreamBranch/lastStableBuild/artifact/build/maven-repository/" }
-
 subprojects {
-	repositories {
-		jcenter()
-		if (findProperty('useSonatypeSnapshots') == 'true') {
-			maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
-		} else {
-			maven { url jenkinsRepo('lsapi') }
-			maven { url jenkinsPipelineRepo('xtext-lib') }
-			maven { url jenkinsPipelineRepo('xtext-core') }
-			maven { url jenkinsPipelineRepo('xtext-extras') }
-		}
-	}
-	
 	apply plugin: 'java'
 	apply plugin: 'eclipse'
 	apply plugin: 'maven'
+	
+	apply from: "${rootDir}/gradle/upstream-repositories.gradle"
 	apply from: "${rootDir}/gradle/versions.gradle"
 	apply from: "${rootDir}/gradle/java-compiler-settings.gradle"
 	apply from: "${rootDir}/gradle/osgi-settings.gradle"

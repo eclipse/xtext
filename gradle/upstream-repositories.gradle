@@ -1,0 +1,16 @@
+if (!hasProperty('upstreamBranch'))
+	ext.upstreamBranch = 'master'
+def jenkinsRepo = { jobName -> "http://services.typefox.io/open-source/jenkins/job/$jobName/lastStableBuild/artifact/build/maven-repository/" }
+def jenkinsPipelineRepo = { jobName -> "http://services.typefox.io/open-source/jenkins/job/$jobName/job/$upstreamBranch/lastStableBuild/artifact/build/maven-repository/" }
+
+repositories {
+	jcenter()
+	if (findProperty('useSonatypeSnapshots') == 'true') {
+		maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+	} else {
+		maven { url jenkinsRepo('lsapi') }
+		maven { url jenkinsPipelineRepo('xtext-lib') }
+		maven { url jenkinsPipelineRepo('xtext-core') }
+		maven { url jenkinsPipelineRepo('xtext-extras') }
+	}
+}
