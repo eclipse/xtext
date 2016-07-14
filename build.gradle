@@ -6,8 +6,15 @@ subprojects {
 	apply plugin: 'java'
 	apply plugin: 'eclipse'
 	apply plugin: 'maven'
+	
 	apply from: "${rootDir}/gradle/versions.gradle"
 	apply from: "${rootDir}/gradle/eclipse-project-layout.gradle"
 	apply from: "${rootDir}/gradle/java-compiler-settings.gradle"
 	apply from: "${rootDir}/gradle/maven-deployment.gradle"
+}
+
+task cleanLocalMavenRepo(type: Delete) {
+	group = 'Upload'
+	description = 'Delete the local Maven repository'
+	delete 'build/maven-repository'
 }
