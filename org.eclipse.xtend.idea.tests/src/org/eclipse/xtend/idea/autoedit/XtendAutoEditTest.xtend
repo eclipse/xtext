@@ -12,7 +12,6 @@ import com.intellij.openapi.roots.ContentEntry
 import com.intellij.openapi.roots.ModifiableRootModel
 import org.eclipse.xtend.core.idea.lang.XtendFileType
 import org.eclipse.xtext.xbase.idea.formatting.AbstractXbaseAutoEditTest
-import org.junit.Ignore
 
 import static extension org.eclipse.xtext.idea.tests.LibraryUtil.*
 
@@ -27,8 +26,7 @@ class XtendAutoEditTest extends AbstractXbaseAutoEditTest {
 	}
 	
 	// TODO https://github.com/eclipse/xtext-xtend/issues/11
-	@Ignore
-	def void testRichStringComment_01() {
+	def void ignoreRichStringComment_01() {
 		'''
 		class Foo {
 			def foo() '«»''
@@ -47,8 +45,7 @@ class XtendAutoEditTest extends AbstractXbaseAutoEditTest {
 	}
 	
 	// TODO https://github.com/eclipse/xtext-xtend/issues/11
-	@Ignore
-	def void testRichStringComment_02() {
+	def void ignoreRichStringComment_02() {
 		'''
 		class Foo {
 			def foo() '«»''
@@ -63,8 +60,7 @@ class XtendAutoEditTest extends AbstractXbaseAutoEditTest {
 	}
 	
 	// TODO https://github.com/eclipse/xtext-xtend/issues/11
-	@Ignore
-	def void testRichStringComment_03() {
+	def void ignoreRichStringComment_03() {
 		'''
 		class Foo {
 			def foo() '«»''
@@ -83,8 +79,7 @@ class XtendAutoEditTest extends AbstractXbaseAutoEditTest {
 	}
 	
 	// TODO https://github.com/eclipse/xtext-xtend/issues/11
-	@Ignore
-	def void testRichStringComment_04() {
+	def void ignoreRichStringComment_04() {
 		'''
 		class Foo {
 			def foo() '«»''
@@ -99,8 +94,7 @@ class XtendAutoEditTest extends AbstractXbaseAutoEditTest {
 	}
 	
 	// TODO https://github.com/eclipse/xtext-xtend/issues/11
-	@Ignore
-	def void testRichStringComment_05() {
+	def void ignoreRichStringComment_05() {
 		'''
 		class Foo {
 			def foo() '«»''
@@ -119,8 +113,7 @@ class XtendAutoEditTest extends AbstractXbaseAutoEditTest {
 	}
 	
 	// TODO https://github.com/eclipse/xtext-xtend/issues/11
-	@Ignore
-	def void testRichStringComment_06() {
+	def void ignoreRichStringComment_06() {
 		'''
 		class Foo {
 			def foo() '«»''

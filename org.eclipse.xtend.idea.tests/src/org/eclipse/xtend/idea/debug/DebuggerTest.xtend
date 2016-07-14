@@ -16,7 +16,6 @@ import org.eclipse.xtext.idea.tests.LibraryUtil
 import org.eclipse.xtext.idea.tests.LightToolingTest
 import org.eclipse.xtext.idea.tests.debug.AbstractDebuggerTestCase
 import org.eclipse.xtext.util.internal.Log
-import org.junit.Ignore
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -97,8 +96,7 @@ import org.junit.Ignore
 	}
 	
 	// TODO https://github.com/eclipse/xtext-xtend/issues/11
-	@Ignore
-	def void testTemplateExpression_for() {
+	def void ignoreTemplateExpression_for() {
 		val file = addFile("MyClass.xtend" -> "
 				class MyClass {
 					def static void main(String[] args) {
@@ -122,8 +120,7 @@ import org.junit.Ignore
 	}
 	
 	// TODO https://github.com/eclipse/xtext-xtend/issues/11
-	@Ignore
-	def void testTemplateExpression_if() {
+	def void ignoreTemplateExpression_if() {
 		val file = addFile("MyClass.xtend" -> "
 				class MyClass {
 					def static void main(String[] args) {

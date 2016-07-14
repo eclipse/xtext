@@ -14,7 +14,6 @@ import org.eclipse.xtend.core.idea.lang.XtendFileType;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.idea.tests.LibraryUtil;
 import org.eclipse.xtext.xbase.idea.formatting.AbstractXbaseAutoEditTest;
-import org.junit.Ignore;
 
 @SuppressWarnings("all")
 public class XtendAutoEditTest extends AbstractXbaseAutoEditTest {
@@ -27,8 +26,7 @@ public class XtendAutoEditTest extends AbstractXbaseAutoEditTest {
     LibraryUtil.addXtendLibrary(model);
   }
   
-  @Ignore
-  public void testRichStringComment_01() {
+  public void ignoreRichStringComment_01() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Foo {");
     _builder.newLine();
@@ -69,8 +67,7 @@ public class XtendAutoEditTest extends AbstractXbaseAutoEditTest {
     this.assertAutoIndentOnNewLine(_builder, _builder_1);
   }
   
-  @Ignore
-  public void testRichStringComment_02() {
+  public void ignoreRichStringComment_02() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Foo {");
     _builder.newLine();
@@ -99,8 +96,7 @@ public class XtendAutoEditTest extends AbstractXbaseAutoEditTest {
     this.assertAutoIndentOnNewLine(_builder, _builder_1);
   }
   
-  @Ignore
-  public void testRichStringComment_03() {
+  public void ignoreRichStringComment_03() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Foo {");
     _builder.newLine();
@@ -141,8 +137,7 @@ public class XtendAutoEditTest extends AbstractXbaseAutoEditTest {
     this.assertAutoIndentOnNewLine(_builder, _builder_1);
   }
   
-  @Ignore
-  public void testRichStringComment_04() {
+  public void ignoreRichStringComment_04() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Foo {");
     _builder.newLine();
@@ -171,8 +166,7 @@ public class XtendAutoEditTest extends AbstractXbaseAutoEditTest {
     this.assertAutoIndentOnNewLine(_builder, _builder_1);
   }
   
-  @Ignore
-  public void testRichStringComment_05() {
+  public void ignoreRichStringComment_05() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Foo {");
     _builder.newLine();
@@ -213,8 +207,7 @@ public class XtendAutoEditTest extends AbstractXbaseAutoEditTest {
     this.assertAutoIndentOnNewLine(_builder, _builder_1);
   }
   
-  @Ignore
-  public void testRichStringComment_06() {
+  public void ignoreRichStringComment_06() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Foo {");
     _builder.newLine();

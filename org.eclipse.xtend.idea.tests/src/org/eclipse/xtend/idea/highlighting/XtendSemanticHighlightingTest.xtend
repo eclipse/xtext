@@ -8,7 +8,6 @@
 package org.eclipse.xtend.idea.highlighting
 
 import org.eclipse.xtend.idea.LightXtendTest
-import org.junit.Ignore
 
 import static org.eclipse.xtend.ide.common.highlighting.XtendHighlightingStyles.*
 import static org.eclipse.xtext.ide.editor.syntaxcoloring.HighlightingStyles.*
@@ -137,8 +136,7 @@ class XtendSemanticHighlightingTest extends LightXtendTest {
 	}
 	
 	// TODO https://github.com/eclipse/xtext-xtend/issues/11
-	@Ignore
-	def void testRichText_2() {
+	def void ignoreRichText_2() {
 		'''
 			class «CLASS.$('Foo')» {
 				def «METHOD.$('foo')»(«CLASS.$('String')»[] «PARAMETER_VARIABLE.$('nums')») «white(Q3)»«INSIGNIFICANT_TEMPLATE_TEXT.$(NL)
@@ -153,8 +151,7 @@ class XtendSemanticHighlightingTest extends LightXtendTest {
 	}
 	
 	// TODO https://github.com/eclipse/xtext-xtend/issues/11
-	@Ignore
-	def void testRichText_3() {
+	def void ignoreRichText_3() {
 		'''
 			class «CLASS.$('Foo')» {
 				def «METHOD.$('foo')»(«CLASS.$('String')»[] «PARAMETER_VARIABLE.$('nums')») «white(Q3)»«INSIGNIFICANT_TEMPLATE_TEXT.$(NL)
@@ -169,8 +166,7 @@ class XtendSemanticHighlightingTest extends LightXtendTest {
 	}
 	
 	// TODO https://github.com/eclipse/xtext-xtend/issues/11
-	@Ignore
-	def void testRichText_4() {
+	def void ignoreRichText_4() {
 		'''
 			class «CLASS.$('Foo')» {
 				def «METHOD.$('foo')»() «white(Q3)»«INSIGNIFICANT_TEMPLATE_TEXT.$(NL)

@@ -15,7 +15,6 @@ import org.eclipse.xtext.ide.editor.syntaxcoloring.HighlightingStyles;
 import org.eclipse.xtext.xbase.ide.highlighting.XbaseHighlightingStyles;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-import org.junit.Ignore;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -340,8 +339,7 @@ public class XtendSemanticHighlightingTest extends LightXtendTest {
     this.checkHighlight(_builder);
   }
   
-  @Ignore
-  public void testRichText_2() {
+  public void ignoreRichText_2() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class ");
     CharSequence _$ = this.$(XbaseHighlightingStyles.CLASS, "Foo");
@@ -410,8 +408,7 @@ public class XtendSemanticHighlightingTest extends LightXtendTest {
     this.checkHighlight(_builder);
   }
   
-  @Ignore
-  public void testRichText_3() {
+  public void ignoreRichText_3() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class ");
     CharSequence _$ = this.$(XbaseHighlightingStyles.CLASS, "Foo");
@@ -481,8 +478,7 @@ public class XtendSemanticHighlightingTest extends LightXtendTest {
     this.checkHighlight(_builder);
   }
   
-  @Ignore
-  public void testRichText_4() {
+  public void ignoreRichText_4() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class ");
     CharSequence _$ = this.$(XbaseHighlightingStyles.CLASS, "Foo");

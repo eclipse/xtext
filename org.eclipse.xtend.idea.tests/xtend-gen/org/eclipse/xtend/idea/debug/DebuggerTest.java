@@ -22,7 +22,6 @@ import org.eclipse.xtext.idea.tests.debug.AbstractDebuggerTestCase;
 import org.eclipse.xtext.util.internal.Log;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Pair;
-import org.junit.Ignore;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -169,8 +168,7 @@ public class DebuggerTest extends AbstractDebuggerTestCase {
     }
   }
   
-  @Ignore
-  public void testTemplateExpression_for() {
+  public void ignoreTemplateExpression_for() {
     try {
       Pair<String, String> _mappedTo = Pair.<String, String>of("MyClass.xtend", "\n\t\t\t\tclass MyClass {\n\t\t\t\t\tdef static void main(String[] args) {\n\t\t\t\t\t\tprintln(foo)\n\t\t\t\t\t}\n\n\t\t\t\t\tdef static foo() \'\'\'\n\t\t\t\t\t\t«FOR x : 1..3»\n\t\t\t\t\t\t\tHello «x»,\n\t\t\t\t\t\t\tThis is a second Line\n\t\t\t\t\t\t«ENDFOR»\n\t\t\t\t\t\'\'\'//END\n\t\t\t\t}\n\t\t");
       final VirtualFile file = this.addFile(_mappedTo);
@@ -185,8 +183,7 @@ public class DebuggerTest extends AbstractDebuggerTestCase {
     }
   }
   
-  @Ignore
-  public void testTemplateExpression_if() {
+  public void ignoreTemplateExpression_if() {
     try {
       Pair<String, String> _mappedTo = Pair.<String, String>of("MyClass.xtend", "\n\t\t\t\tclass MyClass {\n\t\t\t\t\tdef static void main(String[] args) {\n\t\t\t\t\t\tprintln(foo(\'xyz\'))\n\t\t\t\t\t}\n\t\t\t\t\n\t\t\t\t\tdef static foo(String text) \'\'\'\n\t\t\t\t\t\t«IF text.length>2»\n\t\t\t\t\t\t\tif «foo(\'xy\')»,\n\t\t\t\t\t\t«ELSEIF text.length==2»\n\t\t\t\t\t\t\telseif «foo(\'x\')»,\n\t\t\t\t\t\t«ELSE»\n\t\t\t\t\t\t\telse «text»\n\t\t\t\t\t\t«ENDIF»\n\t\t\t\t\t\'\'\'//END\n\t\t\t\t}\n\t\t");
       final VirtualFile file = this.addFile(_mappedTo);

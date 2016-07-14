@@ -10,7 +10,6 @@ package org.eclipse.xtend.idea.highlighting;
 import org.eclipse.xtend.idea.LightXtendTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.HighlightingStyles;
-import org.junit.Ignore;
 
 @SuppressWarnings("all")
 public class XtendHighlightingTest extends LightXtendTest {
@@ -108,8 +107,7 @@ public class XtendHighlightingTest extends LightXtendTest {
     this.assertHighlights(_builder_1.toString());
   }
   
-  @Ignore
-  public void testRichString_1() {
+  public void ignoreRichString_1() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Foo {");
     _builder.newLine();
@@ -156,8 +154,7 @@ public class XtendHighlightingTest extends LightXtendTest {
     this.assertHighlights(_builder_1.toString());
   }
   
-  @Ignore
-  public void testRichString_2() {
+  public void ignoreRichString_2() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Foo {");
     _builder.newLine();
@@ -219,8 +216,7 @@ public class XtendHighlightingTest extends LightXtendTest {
     this.assertHighlights(_builder_1.toString());
   }
   
-  @Ignore
-  public void testRichString_3() {
+  public void ignoreRichString_3() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Foo {");
     _builder.newLine();

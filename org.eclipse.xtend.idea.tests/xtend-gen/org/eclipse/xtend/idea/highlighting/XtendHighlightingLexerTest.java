@@ -12,7 +12,6 @@ import com.google.inject.Provider;
 import junit.framework.Assert;
 import org.eclipse.xtend.core.idea.highlighting.XtendHighlightingLexer;
 import org.eclipse.xtend.idea.LightXtendTest;
-import org.junit.Ignore;
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -35,8 +34,7 @@ public class XtendHighlightingLexerTest extends LightXtendTest {
     Assert.assertEquals(0, _tokenStart_2);
   }
   
-  @Ignore
-  public void testStart_02() {
+  public void ignoreStart_02() {
     final XtendHighlightingLexer lexer = this.lexerProvider.get();
     lexer.start("\'\'\' «» \'\'\'");
     int _tokenStart = lexer.getTokenStart();
