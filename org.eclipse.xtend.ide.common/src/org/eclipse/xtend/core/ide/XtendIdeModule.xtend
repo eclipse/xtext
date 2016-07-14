@@ -5,9 +5,11 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtend.core.scoping;
+package org.eclipse.xtend.core.ide
 
-import org.eclipse.xtext.xbase.annotations.typesystem.XbaseWithAnnotationsBatchScopeProvider;
 
-public abstract class AbstractXtendScopeProvider extends XbaseWithAnnotationsBatchScopeProvider {
+/**
+ * Use this class to register ide components.
+ */
+class XtendIdeModule extends AbstractXtendIdeModule {
 }

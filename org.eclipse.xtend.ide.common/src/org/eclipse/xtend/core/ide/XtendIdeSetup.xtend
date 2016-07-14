@@ -5,9 +5,18 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtend.core.scoping;
+package org.eclipse.xtend.core.ide
 
-import org.eclipse.xtext.xbase.annotations.typesystem.XbaseWithAnnotationsBatchScopeProvider;
+import com.google.inject.Guice
+import org.eclipse.xtend.core.XtendRuntimeModule
+import org.eclipse.xtend.core.XtendStandaloneSetup
 
-public abstract class AbstractXtendScopeProvider extends XbaseWithAnnotationsBatchScopeProvider {
+/**
+ * Initialization support for running Xtext languages without Equinox extension registry.
+ */
+class XtendIdeSetup extends XtendStandaloneSetup {
+
+	override createInjector() {
+		Guice.createInjector(new XtendRuntimeModule, new XtendIdeModule)
+	}
 }
