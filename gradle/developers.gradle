@@ -1,4 +1,4 @@
-uploadArchives.repositories.mavenDeployer.pom.project {
+project {
 	developers {
 		developer {
 			name 'Sven Efftinge'
