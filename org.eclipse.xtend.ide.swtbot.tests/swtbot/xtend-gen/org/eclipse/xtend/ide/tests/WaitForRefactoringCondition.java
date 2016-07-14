@@ -11,16 +11,26 @@ import org.eclipse.core.commands.operations.IOperationHistory;
 import org.eclipse.core.commands.operations.IUndoContext;
 import org.eclipse.core.commands.operations.IUndoableOperation;
 import org.eclipse.core.commands.operations.OperationHistoryFactory;
+import org.eclipse.jface.text.IDocument;
+import org.eclipse.swtbot.eclipse.finder.widgets.SWTBotEclipseEditor;
+import org.eclipse.swtbot.swt.finder.waits.DefaultCondition;
+import org.eclipse.text.undo.DocumentUndoManagerRegistry;
+import org.eclipse.text.undo.IDocumentUndoManager;
+import org.eclipse.ui.IEditorInput;
+import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.IEditorReference;
+import org.eclipse.ui.texteditor.IDocumentProvider;
+import org.eclipse.ui.texteditor.ITextEditor;
 
 @SuppressWarnings("all")
-public class WaitForRefactoringCondition /* implements DefaultCondition  */{
-  private /* SWTBotEclipseEditor */Object editor;
+public class WaitForRefactoringCondition extends DefaultCondition {
+  private SWTBotEclipseEditor editor;
   
   private boolean isRedo;
   
-  public WaitForRefactoringCondition(final /* SWTBotEclipseEditor */Object editor, final boolean isRedo) {
-    throw new Error("Unresolved compilation problems:"
-      + "\nThe field WaitForRefactoringCondition.editor refers to the missing type SWTBotEclipseEditor");
+  public WaitForRefactoringCondition(final SWTBotEclipseEditor editor, final boolean isRedo) {
+    this.editor = editor;
+    this.isRedo = isRedo;
   }
   
   @Override
@@ -52,9 +62,17 @@ public class WaitForRefactoringCondition /* implements DefaultCondition  */{
   }
   
   protected IUndoContext getUndoContext() {
-    throw new Error("Unresolved compilation problems:"
-      + "\nThe field WaitForRefactoringCondition.editor refers to the missing type SWTBotEclipseEditor"
-      + "\nreference cannot be resolved"
-      + "\ngetEditor cannot be resolved");
+    IUndoContext _xblockexpression = null;
+    {
+      IEditorReference _reference = this.editor.getReference();
+      IEditorPart _editor = _reference.getEditor(true);
+      final ITextEditor ed = ((ITextEditor) _editor);
+      IDocumentProvider _documentProvider = ed.getDocumentProvider();
+      IEditorInput _editorInput = ed.getEditorInput();
+      final IDocument document = _documentProvider.getDocument(_editorInput);
+      final IDocumentUndoManager undoManager = DocumentUndoManagerRegistry.getDocumentUndoManager(document);
+      _xblockexpression = undoManager.getUndoContext();
+    }
+    return _xblockexpression;
   }
 }

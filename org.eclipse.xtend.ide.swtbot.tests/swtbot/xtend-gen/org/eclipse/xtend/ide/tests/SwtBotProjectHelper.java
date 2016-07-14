@@ -8,8 +8,45 @@
 package org.eclipse.xtend.ide.tests;
 
 import com.google.common.base.Objects;
+import java.util.List;
+import java.util.function.Consumer;
+import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.resources.IWorkspaceRoot;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.swt.widgets.MenuItem;
+import org.eclipse.swtbot.eclipse.finder.SWTWorkbenchBot;
+import org.eclipse.swtbot.eclipse.finder.widgets.SWTBotEclipseEditor;
+import org.eclipse.swtbot.eclipse.finder.widgets.SWTBotEditor;
+import org.eclipse.swtbot.eclipse.finder.widgets.SWTBotPerspective;
+import org.eclipse.swtbot.eclipse.finder.widgets.SWTBotView;
+import org.eclipse.swtbot.swt.finder.SWTBot;
+import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
+import org.eclipse.swtbot.swt.finder.finders.ContextMenuHelper;
+import org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences;
+import org.eclipse.swtbot.swt.finder.utils.SWTUtils;
+import org.eclipse.swtbot.swt.finder.widgets.AbstractSWTBot;
+import org.eclipse.swtbot.swt.finder.widgets.SWTBotButton;
+import org.eclipse.swtbot.swt.finder.widgets.SWTBotList;
+import org.eclipse.swtbot.swt.finder.widgets.SWTBotMenu;
+import org.eclipse.swtbot.swt.finder.widgets.SWTBotShell;
+import org.eclipse.swtbot.swt.finder.widgets.SWTBotStyledText;
+import org.eclipse.swtbot.swt.finder.widgets.SWTBotTabItem;
+import org.eclipse.swtbot.swt.finder.widgets.SWTBotText;
+import org.eclipse.swtbot.swt.finder.widgets.SWTBotTree;
+import org.eclipse.swtbot.swt.finder.widgets.SWTBotTreeItem;
+import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.xbase.lib.Conversions;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.ExclusiveRange;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.InputOutput;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -18,145 +55,189 @@ import org.eclipse.xtext.xbase.lib.Pair;
 public class SwtBotProjectHelper {
   private final static String defaultProject = "test";
   
-  public static Object newXtendProject(final /* SWTWorkbenchBot */Object it) {
-    throw new Error("Unresolved compilation problems:"
-      + "\nThe method newXtendProject(SWTWorkbenchBot) from the type SwtBotProjectHelper refers to the missing type SWTWorkbenchBot");
+  public static SWTBotShell newXtendProject(final SWTWorkbenchBot it) {
+    return SwtBotProjectHelper.newXtendProject(it, SwtBotProjectHelper.defaultProject);
   }
   
-  public static Object newXtendProject(final /* SWTWorkbenchBot */Object it, final String projectName) {
-    throw new Error("Unresolved compilation problems:"
-      + "\nThe method or field activeShell is undefined"
-      + "\nThe method or field views is undefined"
-      + "\nThe method or field title is undefined"
-      + "\nThe method perspectiveByLabel(String) is undefined"
-      + "\nThe method menu(String) is undefined"
-      + "\nThe method shell(String) is undefined"
-      + "\nThe method or field tree is undefined"
-      + "\nThe method button(String) is undefined"
-      + "\nThe method textWithLabel(String) is undefined"
-      + "\nThe method button(String) is undefined"
-      + "\nThe method tabItem(String) is undefined"
-      + "\nThe method button(String) is undefined"
-      + "\nThe method shell(String) is undefined"
-      + "\nThe method or field list is undefined"
-      + "\nThe method button(String) is undefined"
-      + "\nThe method button(String) is undefined"
-      + "\nThe method button(String) is undefined"
-      + "\nfindFirst cannot be resolved"
-      + "\n== cannot be resolved"
-      + "\nclose cannot be resolved"
-      + "\nactivate cannot be resolved"
-      + "\nmenu cannot be resolved"
-      + "\nmenu cannot be resolved"
-      + "\nclick cannot be resolved"
-      + "\nactivate cannot be resolved"
-      + "\nexpandNode cannot be resolved"
-      + "\nselect cannot be resolved"
-      + "\nclick cannot be resolved"
-      + "\ntext cannot be resolved"
-      + "\nclick cannot be resolved"
-      + "\nactivate cannot be resolved"
-      + "\nclick cannot be resolved"
-      + "\nactivate cannot be resolved"
-      + "\nselect cannot be resolved"
-      + "\nclick cannot be resolved"
-      + "\nclick cannot be resolved"
-      + "\nclick cannot be resolved"
-      + "\nactivate cannot be resolved");
+  public static SWTBotShell newXtendProject(final SWTWorkbenchBot it, final String projectName) {
+    SWTBotShell _xblockexpression = null;
+    {
+      final SWTBotShell shell = it.activeShell();
+      List<SWTBotView> _views = it.views();
+      final Function1<SWTBotView, Boolean> _function = (SWTBotView it_1) -> {
+        String _title = it_1.getTitle();
+        return Boolean.valueOf(Objects.equal(_title, "Welcome"));
+      };
+      SWTBotView _findFirst = IterableExtensions.<SWTBotView>findFirst(_views, _function);
+      if (_findFirst!=null) {
+        _findFirst.close();
+      }
+      SWTBotPerspective _perspectiveByLabel = it.perspectiveByLabel("Java");
+      _perspectiveByLabel.activate();
+      SWTBotMenu _menu = it.menu("File");
+      SWTBotMenu _menu_1 = _menu.menu("New");
+      SWTBotMenu _menu_2 = _menu_1.menu("Project...");
+      _menu_2.click();
+      SWTBotShell _shell = it.shell("New Project");
+      _shell.activate();
+      SWTBotTree _tree = it.tree();
+      SWTBotTreeItem _expandNode = SwtBotProjectHelper.expandNode(_tree, "Java");
+      _expandNode.select("Java Project");
+      SWTBotButton _button = it.button("Next >");
+      _button.click();
+      SWTBotText _textWithLabel = it.textWithLabel("Project name:");
+      _textWithLabel.setText("test");
+      SWTBotButton _button_1 = it.button("Next >");
+      _button_1.click();
+      SWTBotTabItem _tabItem = it.tabItem("Libraries");
+      _tabItem.activate();
+      SWTBotButton _button_2 = it.button("Add Library...");
+      _button_2.click();
+      SWTBotShell _shell_1 = it.shell("Add Library");
+      _shell_1.activate();
+      SWTBotList _list = it.list();
+      _list.select("Xtend Library");
+      SWTBotButton _button_3 = it.button("Next >");
+      _button_3.click();
+      SWTBotButton _button_4 = it.button("Finish");
+      _button_4.click();
+      SWTBotButton _button_5 = it.button("Finish");
+      _button_5.click();
+      _xblockexpression = shell.activate();
+    }
+    return _xblockexpression;
   }
   
-  public static Object newJavaEditor(final /* SWTWorkbenchBot */Object it, final String typeName) {
-    throw new Error("Unresolved compilation problems:"
-      + "\nThe method newJavaEditor(SWTWorkbenchBot, String, CharSequence) from the type SwtBotProjectHelper refers to the missing type SWTWorkbenchBot");
+  public static SWTBotEclipseEditor newJavaEditor(final SWTWorkbenchBot it, final String typeName) {
+    return SwtBotProjectHelper.newJavaEditor(it, typeName, "", (SwtBotProjectHelper.defaultProject + "/src"));
   }
   
-  public static Object newJavaEditor(final /* SWTWorkbenchBot */Object it, final String typeName, final CharSequence content) {
-    throw new Error("Unresolved compilation problems:"
-      + "\nThe method content(CharSequence) is undefined for the type Object"
-      + "\nThe method newJavaEditor(SWTWorkbenchBot, String, CharSequence) from the type SwtBotProjectHelper refers to the missing type SWTWorkbenchBot");
+  public static SWTBotEclipseEditor newJavaEditor(final SWTWorkbenchBot it, final String typeName, final CharSequence content) {
+    SWTBotEclipseEditor _newJavaEditor = SwtBotProjectHelper.newJavaEditor(it, typeName, "", (SwtBotProjectHelper.defaultProject + "/src"));
+    final Procedure1<SWTBotEclipseEditor> _function = (SWTBotEclipseEditor it_1) -> {
+      SwtBotProjectHelper.setContent(it_1, content);
+    };
+    return ObjectExtensions.<SWTBotEclipseEditor>operator_doubleArrow(_newJavaEditor, _function);
   }
   
-  public static Object newJavaEditor(final /* SWTWorkbenchBot */Object it, final String typeName, final String packageName, final String sourceFolderPath) {
-    throw new Error("Unresolved compilation problems:"
-      + "\nThe method menu(String) is undefined"
-      + "\nThe method shell(String) is undefined"
-      + "\nThe method textWithLabel(String) is undefined"
-      + "\nThe method textWithLabel(String) is undefined"
-      + "\nThe method textWithLabel(String) is undefined"
-      + "\nThe method button(String) is undefined"
-      + "\nThe method editorByTitle(String) is undefined"
-      + "\nmenu cannot be resolved"
-      + "\nmenu cannot be resolved"
-      + "\nclick cannot be resolved"
-      + "\nactivate cannot be resolved"
-      + "\ntext cannot be resolved"
-      + "\ntext cannot be resolved"
-      + "\ntext cannot be resolved"
-      + "\nclick cannot be resolved"
-      + "\ntoTextEditor cannot be resolved");
+  public static SWTBotEclipseEditor newJavaEditor(final SWTWorkbenchBot it, final String typeName, final String packageName, final String sourceFolderPath) {
+    SWTBotEclipseEditor _xblockexpression = null;
+    {
+      SWTBotMenu _menu = it.menu("File");
+      SWTBotMenu _menu_1 = _menu.menu("New");
+      SWTBotMenu _menu_2 = _menu_1.menu("Class");
+      _menu_2.click();
+      SWTBotShell _shell = it.shell("New Java Class");
+      _shell.activate();
+      SWTBotText _textWithLabel = it.textWithLabel("Source folder:");
+      _textWithLabel.setText(sourceFolderPath);
+      SWTBotText _textWithLabel_1 = it.textWithLabel("Package:");
+      _textWithLabel_1.setText(packageName);
+      SWTBotText _textWithLabel_2 = it.textWithLabel("Name:");
+      _textWithLabel_2.setText(typeName);
+      SWTBotButton _button = it.button("Finish");
+      _button.click();
+      SWTBotEditor _editorByTitle = it.editorByTitle((typeName + ".java"));
+      _xblockexpression = _editorByTitle.toTextEditor();
+    }
+    return _xblockexpression;
   }
   
-  public static Object newXtendEditor(final /* SWTWorkbenchBot */Object it, final String typeName, final CharSequence content) {
-    throw new Error("Unresolved compilation problems:"
-      + "\nThe method content(CharSequence) is undefined for the type Object"
-      + "\nThe method newXtendEditor(SWTWorkbenchBot, String, CharSequence) from the type SwtBotProjectHelper refers to the missing type SWTWorkbenchBot");
+  public static SWTBotEclipseEditor newXtendEditor(final SWTWorkbenchBot it, final String typeName, final CharSequence content) {
+    SWTBotEclipseEditor _newXtendEditor = SwtBotProjectHelper.newXtendEditor(it, typeName, "", (SwtBotProjectHelper.defaultProject + "/src"));
+    final Procedure1<SWTBotEclipseEditor> _function = (SWTBotEclipseEditor it_1) -> {
+      SwtBotProjectHelper.setContent(it_1, content);
+    };
+    return ObjectExtensions.<SWTBotEclipseEditor>operator_doubleArrow(_newXtendEditor, _function);
   }
   
-  public static Object newXtendEditor(final /* SWTWorkbenchBot */Object it, final String typeName, final String packageName, final String sourceFolderPath) {
-    throw new Error("Unresolved compilation problems:"
-      + "\nWidgetNotFoundException cannot be resolved to a type."
-      + "\nThe method menu(String) is undefined"
-      + "\nThe method or field text is undefined"
-      + "\nThe method or field active is undefined"
-      + "\nThe method or field SWTUtils is undefined"
-      + "\nThe method or field SWTBotPreferences is undefined"
-      + "\nThe method or field SWTBotPreferences is undefined"
-      + "\nThe method or field active is undefined"
-      + "\nThe method shell(String) is undefined"
-      + "\nThe method textWithLabel(String) is undefined"
-      + "\nThe method textWithLabel(String) is undefined"
-      + "\nThe method textWithLabel(String) is undefined"
-      + "\nThe method button(String) is undefined"
-      + "\nThe method editorByTitle(String) is undefined"
-      + "\nmenu cannot be resolved"
-      + "\nmenu cannot be resolved"
-      + "\nclick cannot be resolved"
-      + "\nshells cannot be resolved"
-      + "\nforEach cannot be resolved"
-      + "\ncaptureScreenshot cannot be resolved"
-      + "\nSCREENSHOTS_DIR cannot be resolved"
-      + "\nSCREENSHOT_FORMAT cannot be resolved"
-      + "\nshells cannot be resolved"
-      + "\nfilter cannot be resolved"
-      + "\nhead cannot be resolved"
-      + "\nwidget cannot be resolved"
-      + "\nactivate cannot be resolved"
-      + "\ntext cannot be resolved"
-      + "\ntext cannot be resolved"
-      + "\ntext cannot be resolved"
-      + "\nclick cannot be resolved"
-      + "\ntoTextEditor cannot be resolved");
+  public static SWTBotEclipseEditor newXtendEditor(final SWTWorkbenchBot it, final String typeName, final String packageName, final String sourceFolderPath) {
+    SWTBotEclipseEditor _xblockexpression = null;
+    {
+      try {
+        SWTBotMenu _menu = it.menu("File");
+        SWTBotMenu _menu_1 = _menu.menu("New");
+        SWTBotMenu _menu_2 = _menu_1.menu("Xtend Class");
+        _menu_2.click();
+      } catch (final Throwable _t) {
+        if (_t instanceof WidgetNotFoundException) {
+          final WidgetNotFoundException e = (WidgetNotFoundException)_t;
+          SWTBotShell[] _shells = it.shells();
+          final Consumer<SWTBotShell> _function = (SWTBotShell it_1) -> {
+            StringConcatenation _builder = new StringConcatenation();
+            _builder.append("Shell: \'");
+            String _text = it_1.getText();
+            _builder.append(_text, "");
+            _builder.append("\', active: ");
+            boolean _isActive = it_1.isActive();
+            _builder.append(_isActive, "");
+            InputOutput.<String>println(_builder.toString());
+          };
+          ((List<SWTBotShell>)Conversions.doWrapArray(_shells)).forEach(_function);
+          StringConcatenation _builder = new StringConcatenation();
+          _builder.append(SWTBotPreferences.SCREENSHOTS_DIR, "");
+          _builder.append("/MenuFileNotFound");
+          long _currentTimeMillis = System.currentTimeMillis();
+          _builder.append(_currentTimeMillis, "");
+          _builder.append(".");
+          _builder.append(SWTBotPreferences.SCREENSHOT_FORMAT, "");
+          SWTBotShell[] _shells_1 = it.shells();
+          final Function1<SWTBotShell, Boolean> _function_1 = (SWTBotShell it_1) -> {
+            return Boolean.valueOf(it_1.isActive());
+          };
+          Iterable<SWTBotShell> _filter = IterableExtensions.<SWTBotShell>filter(((Iterable<SWTBotShell>)Conversions.doWrapArray(_shells_1)), _function_1);
+          SWTBotShell _head = IterableExtensions.<SWTBotShell>head(_filter);
+          SWTUtils.captureScreenshot(_builder.toString(), 
+            _head.widget);
+          throw e;
+        } else {
+          throw Exceptions.sneakyThrow(_t);
+        }
+      }
+      SWTBotShell _shell = it.shell("Xtend Class");
+      _shell.activate();
+      SWTBotText _textWithLabel = it.textWithLabel("Source folder:");
+      _textWithLabel.setText(sourceFolderPath);
+      SWTBotText _textWithLabel_1 = it.textWithLabel("Package:");
+      _textWithLabel_1.setText(packageName);
+      SWTBotText _textWithLabel_2 = it.textWithLabel("Name:");
+      _textWithLabel_2.setText(typeName);
+      SWTBotButton _button = it.button("Finish");
+      _button.click();
+      SWTBotEditor _editorByTitle = it.editorByTitle((typeName + ".xtend"));
+      _xblockexpression = _editorByTitle.toTextEditor();
+    }
+    return _xblockexpression;
   }
   
-  public static Object closeAllEditors(final /* SWTWorkbenchBot */Object it) {
-    throw new Error("Unresolved compilation problems:"
-      + "\nThe method or field editors is undefined"
-      + "\nThe method or field close is undefined"
-      + "\nforEach cannot be resolved");
+  public static void closeAllEditors(final SWTWorkbenchBot it) {
+    List<? extends SWTBotEditor> _editors = it.editors();
+    final Consumer<SWTBotEditor> _function = (SWTBotEditor it_1) -> {
+      it_1.close();
+    };
+    _editors.forEach(_function);
   }
   
-  public static Object setContent(final /* SWTBotEclipseEditor */Object it, final CharSequence content) {
-    throw new Error("Unresolved compilation problems:"
-      + "\nThe method text(String) is undefined"
-      + "\nThe method selectRange(Integer, Integer, int) is undefined");
+  public static void setContent(final SWTBotEclipseEditor it, final CharSequence content) {
+    final String contentString = content.toString();
+    String _replace = contentString.replace("?", "");
+    it.setText(_replace);
+    final int offset = contentString.indexOf("?");
+    if ((offset != (-1))) {
+      final Pair<Integer, Integer> lineAndColumn = SwtBotProjectHelper.getLineAndColumn(contentString, offset);
+      Integer _key = lineAndColumn.getKey();
+      Integer _value = lineAndColumn.getValue();
+      int _lastIndexOf = contentString.lastIndexOf("?");
+      int _minus = (_lastIndexOf - offset);
+      int _minus_1 = (_minus - 1);
+      it.selectRange((_key).intValue(), (_value).intValue(), _minus_1);
+    }
   }
   
-  public static Object clickableContextMenu(final /* SWTBotEclipseEditor */Object editor, final String... text) {
-    throw new Error("Unresolved compilation problems:"
-      + "\nSWTBotMenu cannot be resolved."
-      + "\nThe method or field ContextMenuHelper is undefined"
-      + "\ncontextMenu cannot be resolved"
-      + "\nstyledText cannot be resolved");
+  public static SWTBotMenu clickableContextMenu(final SWTBotEclipseEditor editor, final String... text) {
+    SWTBotStyledText _styledText = editor.getStyledText();
+    MenuItem _contextMenu = ContextMenuHelper.contextMenu(_styledText, text);
+    return new SWTBotMenu(_contextMenu);
   }
   
   protected static Pair<Integer, Integer> getLineAndColumn(final String content, final int offset) {
@@ -201,48 +282,83 @@ public class SwtBotProjectHelper {
     return _xblockexpression;
   }
   
-  public static Object clearSourceFolderContents(final /* SWTWorkbenchBot */Object it) {
-    throw new Error("Unresolved compilation problems:"
-      + "\nThe method clearSourceFolderContents(SWTWorkbenchBot) from the type SwtBotProjectHelper refers to the missing type SWTWorkbenchBot");
+  public static void clearSourceFolderContents(final SWTWorkbenchBot it) {
+    SwtBotProjectHelper.clearSourceFolderContents(it, SwtBotProjectHelper.defaultProject);
   }
   
-  public static void clearSourceFolderContents(final /* SWTWorkbenchBot */Object it, final String project) {
-    throw new Error("Unresolved compilation problems:"
-      + "\nWidgetNotFoundException cannot be resolved to a type."
-      + "\nThe method or field tree is undefined"
-      + "\nThe method or field tree is undefined"
-      + "\nThe method viewByTitle(String) is undefined"
-      + "\nThe method or field text is undefined"
-      + "\nThe method shell(String) is undefined"
-      + "\nThe method button(String) is undefined"
-      + "\nhasItems cannot be resolved"
-      + "\n! cannot be resolved"
-      + "\nbot cannot be resolved"
-      + "\ntree cannot be resolved"
-      + "\nexpandNode cannot be resolved"
-      + "\nexpandNode cannot be resolved"
-      + "\nitems cannot be resolved"
-      + "\nwidget cannot be resolved"
-      + "\ndisposed cannot be resolved"
-      + "\n! cannot be resolved"
-      + "\nselect cannot be resolved"
-      + "\ntext cannot be resolved"
-      + "\ncontextMenu cannot be resolved"
-      + "\nclick cannot be resolved"
-      + "\nactivate cannot be resolved"
-      + "\nclick cannot be resolved");
+  public static void clearSourceFolderContents(final SWTWorkbenchBot it, final String project) {
+    try {
+      try {
+        SWTBotTree packageExplorerTree = it.tree();
+        SWTBotTree _tree = it.tree();
+        boolean _hasItems = _tree.hasItems();
+        boolean _not = (!_hasItems);
+        if (_not) {
+          SWTBotView _viewByTitle = it.viewByTitle("Package Explorer");
+          SWTBot _bot = _viewByTitle.bot();
+          SWTBotTree _tree_1 = _bot.tree();
+          packageExplorerTree = _tree_1;
+        }
+        SWTBotTreeItem _expandNode = SwtBotProjectHelper.expandNode(packageExplorerTree, project);
+        final SWTBotTreeItem srcNode = SwtBotProjectHelper.expandNode(_expandNode, "src");
+        SWTBotTreeItem[] _items = srcNode.getItems();
+        for (final SWTBotTreeItem source : _items) {
+          boolean _isDisposed = source.widget.isDisposed();
+          boolean _not_1 = (!_isDisposed);
+          if (_not_1) {
+            SWTBotText _text = it.text();
+            InputOutput.<SWTBotText>println(_text);
+            String _text_1 = source.getText();
+            srcNode.select(_text_1);
+            SWTBotMenu _contextMenu = source.contextMenu("Delete");
+            _contextMenu.click();
+            SWTBotShell _shell = it.shell("Delete");
+            _shell.activate();
+            SWTBotButton _button = it.button("OK");
+            _button.click();
+          }
+        }
+      } catch (final Throwable _t) {
+        if (_t instanceof WidgetNotFoundException) {
+          final WidgetNotFoundException exc = (WidgetNotFoundException)_t;
+          IWorkspace _workspace = ResourcesPlugin.getWorkspace();
+          IWorkspaceRoot _root = _workspace.getRoot();
+          IProject _project = _root.getProject(project);
+          IFolder _folder = _project.getFolder("src");
+          IResource[] _members = _folder.members();
+          final Consumer<IResource> _function = (IResource it_1) -> {
+            try {
+              it_1.delete(true, null);
+            } catch (Throwable _e) {
+              throw Exceptions.sneakyThrow(_e);
+            }
+          };
+          ((List<IResource>)Conversions.doWrapArray(_members)).forEach(_function);
+        } else {
+          throw Exceptions.sneakyThrow(_t);
+        }
+      }
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
   
-  public static /* SWTBotTreeItem */Object expandNode(final /* AbstractSWTBot<?> */Object bot, final String node) {
-    throw new Error("Unresolved compilation problems:"
-      + "\nSWTBotTreeItem cannot be resolved to a type."
-      + "\nSWTBotTree cannot be resolved to a type."
-      + "\nSWTBotTreeItem cannot be resolved to a type."
-      + "\nUnreachable code: The if condition can never match. It is already handled by a previous condition."
-      + "\ngetTreeItem cannot be resolved"
-      + "\ngetNode cannot be resolved"
-      + "\nexpanded cannot be resolved"
-      + "\n! cannot be resolved"
-      + "\nexpand cannot be resolved");
+  public static SWTBotTreeItem expandNode(final AbstractSWTBot<?> bot, final String node) {
+    SWTBotTreeItem item = null;
+    if ((bot instanceof SWTBotTree)) {
+      SWTBotTreeItem _treeItem = ((SWTBotTree)bot).getTreeItem(node);
+      item = _treeItem;
+    } else {
+      if ((bot instanceof SWTBotTreeItem)) {
+        SWTBotTreeItem _node = ((SWTBotTreeItem)bot).getNode(node);
+        item = _node;
+      }
+    }
+    boolean _isExpanded = item.isExpanded();
+    boolean _not = (!_isExpanded);
+    if (_not) {
+      item.expand();
+    }
+    return item;
   }
 }

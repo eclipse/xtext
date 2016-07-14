@@ -30,6 +30,7 @@ import org.junit.BeforeClass
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
 
 import static extension org.eclipse.xtend.ide.tests.SwtBotProjectHelper.*
+import org.eclipse.xtext.junit4.ui.util.TargetPlatformUtil
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -40,6 +41,7 @@ abstract class AbstractRefactoringSwtBotTest {
 	
 	@BeforeClass
 	static def void initialize() {
+		TargetPlatformUtil.setTargetPlatform
 		cleanWorkspace
 		bot = new SWTWorkbenchBot
 		bot.newXtendProject('test')
