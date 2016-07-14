@@ -130,17 +130,12 @@ public class BuildManager {
     Iterables.<URI>addAll(files, toAdd);
   }
   
-  public void doFullBuild(final CancelIndicator indicator) {
-    List<ProjectManager> _projectManagers = this.workspaceManager.getProjectManagers();
-    final Function1<ProjectManager, ProjectDescription> _function = (ProjectManager it) -> {
-      return it.getProjectDescription();
-    };
-    List<ProjectDescription> _map = ListExtensions.<ProjectManager, ProjectDescription>map(_projectManagers, _function);
-    final List<ProjectDescription> sortedDescriptions = this.sortByDependencies(_map);
+  public void doInitialBuild(final List<ProjectDescription> projects, final CancelIndicator indicator) {
+    final List<ProjectDescription> sortedDescriptions = this.sortByDependencies(projects);
     for (final ProjectDescription it : sortedDescriptions) {
       String _name = it.getName();
       ProjectManager _projectManager = this.workspaceManager.getProjectManager(_name);
-      _projectManager.doFullBuild(indicator);
+      _projectManager.doInitialBuild(indicator);
     }
   }
   

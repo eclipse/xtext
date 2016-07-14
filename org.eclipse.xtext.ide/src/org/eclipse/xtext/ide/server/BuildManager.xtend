@@ -47,10 +47,10 @@ class BuildManager {
         files += toAdd
     }
 
-    def void doFullBuild(CancelIndicator indicator) {
-        val sortedDescriptions = sortByDependencies(workspaceManager.projectManagers.map[projectDescription])
+    def void doInitialBuild(List<ProjectDescription> projects, CancelIndicator indicator) {
+        val sortedDescriptions = sortByDependencies(projects)
         for(it: sortedDescriptions) {
-            workspaceManager.getProjectManager(name).doFullBuild(indicator)
+            workspaceManager.getProjectManager(name).doInitialBuild(indicator)
         }
     }
 

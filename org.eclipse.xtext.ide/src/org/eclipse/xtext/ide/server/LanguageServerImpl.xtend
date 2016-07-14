@@ -213,6 +213,12 @@ import static extension io.typefox.lsapi.util.LsapiFactories.*
 			workspaceManager.doBuild(dirtyFiles, deletedFiles, cancelIndicator)
 		]
 	}
+	
+	override didChangeConfiguraton(DidChangeConfigurationParams params) {
+        requestManager.runWrite [ cancelIndicator |
+            workspaceManager.refreshWorkspaceConfig(cancelIndicator)
+        ]
+    }
 
 	// end file/content change events
 	// validation stuff
@@ -397,10 +403,6 @@ import static extension io.typefox.lsapi.util.LsapiFactories.*
 	
 	// end hover
 	
-	override didChangeConfiguraton(DidChangeConfigurationParams params) {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
-	}
-
 	override resolveCompletionItem(CompletionItem unresolved) {
 		return CompletableFuture.completedFuture(unresolved)
 	}

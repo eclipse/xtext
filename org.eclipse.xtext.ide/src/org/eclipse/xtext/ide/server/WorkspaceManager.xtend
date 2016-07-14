@@ -37,8 +37,9 @@ class WorkspaceManager {
     Map<String, ProjectManager> projectName2ProjectManager = newHashMap
 
     URI baseDir
+    (URI, Iterable<Issue>)=>void issueAcceptor
     IWorkspaceConfig workspaceConfig
-
+    
     Map<String, ResourceDescriptionsData> fullIndex = newHashMap()
     
     Map<URI, Document> openDocuments = newHashMap()
@@ -57,16 +58,32 @@ class WorkspaceManager {
         }
     };
     
-    def void initialize(URI baseDir, (URI, Iterable<Issue>)=>void acceptor, CancelIndicator cancelIndicator) {
+    def void initialize(URI baseDir, (URI, Iterable<Issue>)=>void issueAcceptor, CancelIndicator cancelIndicator) {
         this.baseDir = baseDir
+        this.issueAcceptor = issueAcceptor
+        refreshWorkspaceConfig(cancelIndicator)
+    }
+    
+    protected def refreshWorkspaceConfig(CancelIndicator cancelIndicator) {
         workspaceConfig = workspaceConfigFactory.getWorkspaceConfig(baseDir)
+        val newProjects = newArrayList
+        val remainingProjectNames = newHashSet(projectName2ProjectManager.keySet)
         workspaceConfig.projects.forEach [ projectConfig | 
-            val projectManager = projectManagerProvider.get
-            val projectDescription =  projectDescriptionFactory.getProjectDescription(projectConfig)
-            projectManager.initialize(projectDescription, projectConfig, acceptor, openedDocumentsContentProvider, [fullIndex], cancelIndicator)
-            projectName2ProjectManager.put(projectDescription.name, projectManager)
+            if(projectName2ProjectManager.containsKey(projectConfig.name)) {
+                remainingProjectNames.remove(projectConfig.name)
+            } else {
+                val projectManager = projectManagerProvider.get
+                val projectDescription =  projectDescriptionFactory.getProjectDescription(projectConfig)
+                projectManager.initialize(projectDescription, projectConfig, issueAcceptor, openedDocumentsContentProvider, [fullIndex], cancelIndicator)
+                projectName2ProjectManager.put(projectDescription.name, projectManager)
+                newProjects.add(projectDescription)
+            } 
         ]
-        buildManager.doFullBuild(cancelIndicator)
+        for(deletedProject: remainingProjectNames) {
+            projectName2ProjectManager.remove(deletedProject)
+            fullIndex.remove(deletedProject)
+        }
+        buildManager.doInitialBuild(newProjects, cancelIndicator)
     }
 
     def void doBuild(List<URI> dirtyFiles, List<URI> deletedFiles, CancelIndicator cancelIndicator) {

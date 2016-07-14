@@ -336,6 +336,14 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
     this.requestManager.runWrite(_function);
   }
   
+  @Override
+  public void didChangeConfiguraton(final DidChangeConfigurationParams params) {
+    final Procedure1<CancelIndicator> _function = (CancelIndicator cancelIndicator) -> {
+      this.workspaceManager.refreshWorkspaceConfig(cancelIndicator);
+    };
+    this.requestManager.runWrite(_function);
+  }
+  
   private List<Consumer<PublishDiagnosticsParams>> diagnosticListeners = CollectionLiterals.<Consumer<PublishDiagnosticsParams>>newArrayList();
   
   private WorkspaceResourceAccess resourceAccess;
@@ -671,11 +679,6 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
       return this.workspaceManager.<Hover>doRead(uri, _function_1);
     };
     return this.requestManager.<Hover>runRead(_function);
-  }
-  
-  @Override
-  public void didChangeConfiguraton(final DidChangeConfigurationParams params) {
-    throw new UnsupportedOperationException("TODO: auto-generated method stub");
   }
   
   @Override

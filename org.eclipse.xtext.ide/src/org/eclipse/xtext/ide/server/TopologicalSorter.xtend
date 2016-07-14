@@ -42,7 +42,8 @@ class TopologicalSorter {
             }
             current.marked = true
             for(it: current.description.dependencies) {
-                if(!name2entry.get(it)?.visit) {
+                val depEntry = name2entry.get(it)
+                if(depEntry != null && !depEntry.visit) {
                     current.markCyclic     
                     return false
                 }

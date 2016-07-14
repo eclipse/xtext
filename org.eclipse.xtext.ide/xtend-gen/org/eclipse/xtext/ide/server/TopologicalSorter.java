@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtext.ide.server;
 
+import com.google.common.base.Objects;
 import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -89,15 +90,12 @@ public class TopologicalSorter {
       current.marked = true;
       List<String> _dependencies = current.description.getDependencies();
       for (final String it : _dependencies) {
-        TopologicalSorter.Entry _get = this.name2entry.get(it);
-        boolean _visit = false;
-        if (_get!=null) {
-          _visit=this.visit(_get);
-        }
-        boolean _not = (!_visit);
-        if (_not) {
-          this.markCyclic(current);
-          return false;
+        {
+          final TopologicalSorter.Entry depEntry = this.name2entry.get(it);
+          if (((!Objects.equal(depEntry, null)) && (!this.visit(depEntry)))) {
+            this.markCyclic(current);
+            return false;
+          }
         }
       }
       current.marked = false;

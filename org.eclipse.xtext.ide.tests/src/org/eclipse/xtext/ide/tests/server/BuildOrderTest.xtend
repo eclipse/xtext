@@ -53,6 +53,15 @@ class BuildOrderTest {
     }
     
     @Test
+    def testJustOne() {
+        val a = new ProjectDescription => [ name = 'a' dependencies=#['b'] ]
+        val b = new ProjectDescription => [ name = 'b' ]
+        assertEquals(#[a], new TopologicalSorter().sortByDependencies(#[a], [fail]))
+        assertEquals(#[b], new TopologicalSorter().sortByDependencies(#[b], [fail]))
+    }
+
+    
+    @Test
     def testCycle() {
         val a = new ProjectDescription => [ name = 'a' dependencies=#['b', 'c'] ]
         val b = new ProjectDescription => [ name = 'b' dependencies=#['c', 'd'] ]
@@ -70,15 +79,6 @@ class BuildOrderTest {
         val cyclic = newArrayList
         assertEquals(#[], new TopologicalSorter().sortByDependencies(#[a], [cyclic.add(it)]))
         assertEquals(#[a], cyclic)
-    }
-
-    @Test
-    def testCycle2() {
-        val a = new ProjectDescription => [ name = 'a' dependencies=#['b'] ]
-        val b = new ProjectDescription => [ name = 'b' dependencies=#['a'] ]
-        val cyclic = newArrayList
-        assertEquals(#[], new TopologicalSorter().sortByDependencies(#[a,b], [cyclic.add(it)]))
-        assertEquals(#[a,b], cyclic)
     }
 
     def assertEquals(List<ProjectDescription> expected, List<ProjectDescription> actual) {

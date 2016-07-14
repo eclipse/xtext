@@ -69,7 +69,7 @@ class ProjectManager {
         this.indexProvider = indexProvider
     }
     
-    def Result doFullBuild(CancelIndicator cancelIndicator) {
+    def Result doInitialBuild(CancelIndicator cancelIndicator) {
         val uris = newArrayList
         projectConfig.sourceFolders.forEach [
             fileSystemScanner.scan(path) [uris += it]

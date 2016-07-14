@@ -13,6 +13,7 @@ import io.typefox.lsapi.TextEdit;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -60,6 +61,8 @@ public class WorkspaceManager {
   
   private URI baseDir;
   
+  private Procedure2<? super URI, ? super Iterable<Issue>> issueAcceptor;
+  
   private IWorkspaceConfig workspaceConfig;
   
   private Map<String, ResourceDescriptionsData> fullIndex = CollectionLiterals.<String, ResourceDescriptionsData>newHashMap();
@@ -88,23 +91,45 @@ public class WorkspaceManager {
     }
   };
   
-  public void initialize(final URI baseDir, final Procedure2<? super URI, ? super Iterable<Issue>> acceptor, final CancelIndicator cancelIndicator) {
+  public void initialize(final URI baseDir, final Procedure2<? super URI, ? super Iterable<Issue>> issueAcceptor, final CancelIndicator cancelIndicator) {
     this.baseDir = baseDir;
-    IWorkspaceConfig _workspaceConfig = this.workspaceConfigFactory.getWorkspaceConfig(baseDir);
+    this.issueAcceptor = issueAcceptor;
+    this.refreshWorkspaceConfig(cancelIndicator);
+  }
+  
+  protected void refreshWorkspaceConfig(final CancelIndicator cancelIndicator) {
+    IWorkspaceConfig _workspaceConfig = this.workspaceConfigFactory.getWorkspaceConfig(this.baseDir);
     this.workspaceConfig = _workspaceConfig;
+    final ArrayList<ProjectDescription> newProjects = CollectionLiterals.<ProjectDescription>newArrayList();
+    Set<String> _keySet = this.projectName2ProjectManager.keySet();
+    final HashSet<Set<String>> remainingProjectNames = CollectionLiterals.<Set<String>>newHashSet(_keySet);
     Set<? extends IProjectConfig> _projects = this.workspaceConfig.getProjects();
     final Consumer<IProjectConfig> _function = (IProjectConfig projectConfig) -> {
-      final ProjectManager projectManager = this.projectManagerProvider.get();
-      final ProjectDescription projectDescription = this.projectDescriptionFactory.getProjectDescription(projectConfig);
-      final Provider<Map<String, ResourceDescriptionsData>> _function_1 = () -> {
-        return this.fullIndex;
-      };
-      projectManager.initialize(projectDescription, projectConfig, acceptor, this.openedDocumentsContentProvider, _function_1, cancelIndicator);
-      String _name = projectDescription.getName();
-      this.projectName2ProjectManager.put(_name, projectManager);
+      String _name = projectConfig.getName();
+      boolean _containsKey = this.projectName2ProjectManager.containsKey(_name);
+      if (_containsKey) {
+        String _name_1 = projectConfig.getName();
+        remainingProjectNames.remove(_name_1);
+      } else {
+        final ProjectManager projectManager = this.projectManagerProvider.get();
+        final ProjectDescription projectDescription = this.projectDescriptionFactory.getProjectDescription(projectConfig);
+        final Provider<Map<String, ResourceDescriptionsData>> _function_1 = () -> {
+          return this.fullIndex;
+        };
+        projectManager.initialize(projectDescription, projectConfig, this.issueAcceptor, this.openedDocumentsContentProvider, _function_1, cancelIndicator);
+        String _name_2 = projectDescription.getName();
+        this.projectName2ProjectManager.put(_name_2, projectManager);
+        newProjects.add(projectDescription);
+      }
     };
     _projects.forEach(_function);
-    this.buildManager.doFullBuild(cancelIndicator);
+    for (final Set<String> deletedProject : remainingProjectNames) {
+      {
+        this.projectName2ProjectManager.remove(deletedProject);
+        this.fullIndex.remove(deletedProject);
+      }
+    }
+    this.buildManager.doInitialBuild(newProjects, cancelIndicator);
   }
   
   public void doBuild(final List<URI> dirtyFiles, final List<URI> deletedFiles, final CancelIndicator cancelIndicator) {

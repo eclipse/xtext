@@ -130,6 +130,33 @@ public class BuildOrderTest {
   }
   
   @Test
+  public void testJustOne() {
+    ProjectDescription _projectDescription = new ProjectDescription();
+    final Procedure1<ProjectDescription> _function = (ProjectDescription it) -> {
+      it.setName("a");
+      it.setDependencies(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("b")));
+    };
+    final ProjectDescription a = ObjectExtensions.<ProjectDescription>operator_doubleArrow(_projectDescription, _function);
+    ProjectDescription _projectDescription_1 = new ProjectDescription();
+    final Procedure1<ProjectDescription> _function_1 = (ProjectDescription it) -> {
+      it.setName("b");
+    };
+    final ProjectDescription b = ObjectExtensions.<ProjectDescription>operator_doubleArrow(_projectDescription_1, _function_1);
+    TopologicalSorter _topologicalSorter = new TopologicalSorter();
+    final Procedure1<ProjectDescription> _function_2 = (ProjectDescription it) -> {
+      Assert.fail();
+    };
+    List<ProjectDescription> _sortByDependencies = _topologicalSorter.sortByDependencies(Collections.<ProjectDescription>unmodifiableList(CollectionLiterals.<ProjectDescription>newArrayList(a)), _function_2);
+    this.assertEquals(Collections.<ProjectDescription>unmodifiableList(CollectionLiterals.<ProjectDescription>newArrayList(a)), _sortByDependencies);
+    TopologicalSorter _topologicalSorter_1 = new TopologicalSorter();
+    final Procedure1<ProjectDescription> _function_3 = (ProjectDescription it) -> {
+      Assert.fail();
+    };
+    List<ProjectDescription> _sortByDependencies_1 = _topologicalSorter_1.sortByDependencies(Collections.<ProjectDescription>unmodifiableList(CollectionLiterals.<ProjectDescription>newArrayList(b)), _function_3);
+    this.assertEquals(Collections.<ProjectDescription>unmodifiableList(CollectionLiterals.<ProjectDescription>newArrayList(b)), _sortByDependencies_1);
+  }
+  
+  @Test
   public void testCycle() {
     ProjectDescription _projectDescription = new ProjectDescription();
     final Procedure1<ProjectDescription> _function = (ProjectDescription it) -> {
@@ -187,30 +214,6 @@ public class BuildOrderTest {
     List<ProjectDescription> _sortByDependencies = _topologicalSorter.sortByDependencies(Collections.<ProjectDescription>unmodifiableList(CollectionLiterals.<ProjectDescription>newArrayList(a)), _function_1);
     this.assertEquals(Collections.<ProjectDescription>unmodifiableList(CollectionLiterals.<ProjectDescription>newArrayList()), _sortByDependencies);
     this.assertEquals(Collections.<ProjectDescription>unmodifiableList(CollectionLiterals.<ProjectDescription>newArrayList(a)), cyclic);
-  }
-  
-  @Test
-  public void testCycle2() {
-    ProjectDescription _projectDescription = new ProjectDescription();
-    final Procedure1<ProjectDescription> _function = (ProjectDescription it) -> {
-      it.setName("a");
-      it.setDependencies(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("b")));
-    };
-    final ProjectDescription a = ObjectExtensions.<ProjectDescription>operator_doubleArrow(_projectDescription, _function);
-    ProjectDescription _projectDescription_1 = new ProjectDescription();
-    final Procedure1<ProjectDescription> _function_1 = (ProjectDescription it) -> {
-      it.setName("b");
-      it.setDependencies(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("a")));
-    };
-    final ProjectDescription b = ObjectExtensions.<ProjectDescription>operator_doubleArrow(_projectDescription_1, _function_1);
-    final ArrayList<ProjectDescription> cyclic = CollectionLiterals.<ProjectDescription>newArrayList();
-    TopologicalSorter _topologicalSorter = new TopologicalSorter();
-    final Procedure1<ProjectDescription> _function_2 = (ProjectDescription it) -> {
-      cyclic.add(it);
-    };
-    List<ProjectDescription> _sortByDependencies = _topologicalSorter.sortByDependencies(Collections.<ProjectDescription>unmodifiableList(CollectionLiterals.<ProjectDescription>newArrayList(a, b)), _function_2);
-    this.assertEquals(Collections.<ProjectDescription>unmodifiableList(CollectionLiterals.<ProjectDescription>newArrayList()), _sortByDependencies);
-    this.assertEquals(Collections.<ProjectDescription>unmodifiableList(CollectionLiterals.<ProjectDescription>newArrayList(a, b)), cyclic);
   }
   
   public void assertEquals(final List<ProjectDescription> expected, final List<ProjectDescription> actual) {

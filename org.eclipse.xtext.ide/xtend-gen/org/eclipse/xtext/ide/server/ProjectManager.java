@@ -94,7 +94,7 @@ public class ProjectManager {
     this.indexProvider = indexProvider;
   }
   
-  public IncrementalBuilder.Result doFullBuild(final CancelIndicator cancelIndicator) {
+  public IncrementalBuilder.Result doInitialBuild(final CancelIndicator cancelIndicator) {
     final ArrayList<URI> uris = CollectionLiterals.<URI>newArrayList();
     Set<? extends ISourceFolder> _sourceFolders = this.projectConfig.getSourceFolders();
     final Consumer<ISourceFolder> _function = (ISourceFolder it) -> {
