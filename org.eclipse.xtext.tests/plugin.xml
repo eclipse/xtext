@@ -3,7 +3,7 @@
 
 <plugin>
 
-<!-- explicitly added below -->
+<!-- explicitly added packages below -->
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
@@ -11,17 +11,6 @@
        class = "org.eclipse.xtext.grammarinheritance.ametamodel.AmetamodelPackage"
        genModel = "org/eclipse/xtext/grammarinheritance/ametamodel.genmodel" /> 
   </extension>
-  <extension point="org.eclipse.xtext.extension_resourceServiceProvider">
-     <resourceServiceProvider
-           class="org.eclipse.xtext.resource.ResourceServiceProviderProviderTest$TestResourceServiceProviderProvider"
-           uriExtension="TestResourceServiceProviderProvider">
-     </resourceServiceProvider>
-     <resourceServiceProvider
-           class="org.eclipse.xtext.resource.ResourceServiceProviderProviderTest$TestResourceServiceProviderExecutableExtensionFactory:foo"
-           uriExtension="TestResourceServiceProviderExecutableExtensionFactory">
-     </resourceServiceProvider>
-  </extension>
-  
 
 <!-- explicitly added packages above -->
   
@@ -552,15 +541,6 @@
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
-       uri = "http://simple/elementmatchertestlanguage" 
-       class = "org.eclipse.xtext.parsetree.formatter.elementmatchertestlanguage.ElementmatchertestlanguagePackage"
-       genModel = "org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.genmodel" /> 
-	
-  </extension>
-
-
-  <extension point="org.eclipse.emf.ecore.generated_package">
-    <package 
        uri = "http://www.xtext.org/tests/bug305397" 
        class = "org.eclipse.xtext.parsetree.impl.bug305397.Bug305397Package"
        genModel = "org/eclipse/xtext/parsetree/impl/Bug305397.genmodel" /> 
@@ -573,15 +553,6 @@
        uri = "http://www.eclipse.org/xtext/tests/CommentAssociation" 
        class = "org.eclipse.xtext.parsetree.impl.commentAssociation.CommentAssociationPackage"
        genModel = "org/eclipse/xtext/parsetree/impl/CommentAssociationTestLanguage.genmodel" /> 
-	
-  </extension>
-
-
-  <extension point="org.eclipse.emf.ecore.generated_package">
-    <package 
-       uri = "http://www.eclipse.org/2009/tmf/xtext/partialserializationtest" 
-       class = "org.eclipse.xtext.parsetree.reconstr.partialserializationtest.PartialserializationtestPackage"
-       genModel = "org/eclipse/xtext/parsetree/reconstr/PartialSerializationTestLanguage.genmodel" /> 
 	
   </extension>
 
@@ -606,15 +577,6 @@
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
-       uri = "http://www.eclipse.org/2009/tmf/xtext/simplerewritetest" 
-       class = "org.eclipse.xtext.parsetree.reconstr.simplerewritetest.SimplerewritetestPackage"
-       genModel = "org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTestLanguage.genmodel" /> 
-	
-  </extension>
-
-
-  <extension point="org.eclipse.emf.ecore.generated_package">
-    <package 
        uri = "http://www.eclipse.org/2009/tmf/xtext/SerializationBugTest/269362" 
        class = "org.eclipse.xtext.parsetree.reconstr.serializationBug269362TestLanguage.SerializationBug269362TestLanguagePackage"
        genModel = "org/eclipse/xtext/parsetree/reconstr/SerializationBug269362TestLanguage.genmodel" /> 
@@ -627,15 +589,6 @@
        uri = "http://www.eclipse.org/2009/tmf/xtext/serializationerror" 
        class = "org.eclipse.xtext.parsetree.reconstr.serializationerror.SerializationerrorPackage"
        genModel = "org/eclipse/xtext/parsetree/reconstr/SerializationErrorTestLanguage.genmodel" /> 
-	
-  </extension>
-
-
-  <extension point="org.eclipse.emf.ecore.generated_package">
-    <package 
-       uri = "http://www.eclipse.org/2009/tmf/xtext/hiddentokensmerger" 
-       class = "org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.HiddentokenmergertestPackage"
-       genModel = "org/eclipse/xtext/parsetree/reconstr/HiddenTokensMergerTestLanguage.genmodel" /> 
 	
   </extension>
 
