@@ -7,7 +7,7 @@ node {
 		stage 'Maven Build'
 		def mvnHome = tool 'M3'
 		wrap([$class:'Xvnc', useXauthority: true]) {
-			sh "${mvnHome}/bin/mvn --batch-mode --update-snapshots clean install"
+			sh "${mvnHome}/bin/mvn --batch-mode --update-snapshots -Dmaven.repo.local=build/maven-repository/ clean install"
 		}
 		archive 'build/**/*.*'
 				
