@@ -6,7 +6,7 @@
       provider-name="%providerName"
       plugin="org.eclipse.xtend.ide"
       license-feature="org.eclipse.xtext.license"
-      license-feature-version="2.6.0.qualifier">
+      license-feature-version="2.11.0.qualifier">
 
    <description>
       %description
