@@ -57,7 +57,7 @@ public class RuntimeProjectConfig extends BundleProjectConfig implements IRuntim
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Could not derive the Ecore model folder from the project configuration. ");
     _builder.newLine();
-    _builder.append("Please make sure that \\\'root\\\' is a prefix of \\\'ecoreModel\\\'.");
+    _builder.append("Please make sure that \'root\' is a prefix of \'ecoreModel\'.");
     _builder.newLine();
     _builder.append("was (root=\'");
     IXtextGeneratorFileSystemAccess _root_2 = this.getRoot();

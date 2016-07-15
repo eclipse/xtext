@@ -36,7 +36,7 @@ class RuntimeProjectConfig extends BundleProjectConfig implements IRuntimeProjec
 		}
 		throw new RuntimeException('''
 			Could not derive the Ecore model folder from the project configuration. 
-			Please make sure that \'root\' is a prefix of \'ecoreModel\'.
+			Please make sure that 'root' is a prefix of 'ecoreModel'.
 			was (root='«root.path»', ecoreModel='«ecoreModel.path»')
 			
 		''')
