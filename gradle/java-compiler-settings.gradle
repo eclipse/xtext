@@ -35,8 +35,6 @@ configurations {
     all {
 		exclude group: 'org.antlr', module: 'stringtemplate'
 		exclude module: 'cglib'
-		// IntelliJ's test infrastructure is not compatible with ASM 5
-		exclude group: 'org.ow2.asm'
 	}
 }
 

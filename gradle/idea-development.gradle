@@ -29,6 +29,11 @@ if (isIntellijPlugin) {
 	apply plugin: org.xtext.gradle.idea.IdeaPluginPlugin
 }
 
+configurations.all {
+	// IntelliJ's test infrastructure is not compatible with ASM 5
+	exclude group: 'org.ow2.asm'
+}
+
 tasks.withType(Test) {
 	minHeapSize = "512m"
 	maxHeapSize = "1g"
