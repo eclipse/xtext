@@ -16,6 +16,7 @@ import org.eclipse.xtext.xtext.ui.wizard.project.NewXtextProjectWizard;
 import org.eclipse.xtext.xtext.ui.wizard.project.XtextProjectCreator;
 import org.eclipse.xtext.xtext.ui.wizard.project.XtextProjectInfo;
 import org.eclipse.xtext.xtext.wizard.Ecore2XtextConfiguration;
+import org.eclipse.xtext.xtext.wizard.RuntimeProjectDescriptor;
 
 import com.google.inject.Inject;
 
@@ -49,6 +50,8 @@ public class NewXtextProjectFromEcoreWizard extends NewXtextProjectWizard {
 	@Override
 	protected IProjectInfo getProjectInfo() {
 		XtextProjectInfo projectInfo = (XtextProjectInfo) super.getProjectInfo();
+		RuntimeProjectDescriptor runtimeProjectDescriptor = projectInfo.getRuntimeProject();
+		runtimeProjectDescriptor.setWithPluginXml(false);
 		Ecore2XtextConfiguration ecore2Xtext = projectInfo.getEcore2Xtext();
 		ecore2Xtext.getEPackageInfos().addAll(ePackageSelectionPage.getEPackageInfos());
 		ecore2Xtext.setRootElementClass(ePackageSelectionPage.getRootElementClass());
