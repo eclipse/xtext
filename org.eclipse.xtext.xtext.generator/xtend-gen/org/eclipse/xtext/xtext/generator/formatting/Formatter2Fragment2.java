@@ -356,6 +356,10 @@ public class Formatter2Fragment2 extends AbstractStubGeneratingFragment {
   protected String toVarName(final ENamedElement element) {
     String _xblockexpression = null;
     {
+      if ((element instanceof EReference)) {
+        EClass _eReferenceType = ((EReference)element).getEReferenceType();
+        return this.toVarName(_eReferenceType);
+      }
       String _name = element.getName();
       final String name = StringExtensions.toFirstLower(_name);
       String _xifexpression = null;

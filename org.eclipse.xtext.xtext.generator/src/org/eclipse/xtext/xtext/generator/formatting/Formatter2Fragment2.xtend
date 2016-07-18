@@ -159,6 +159,8 @@ import org.eclipse.xtext.util.internal.Log
 	}
 	
 	protected def String toVarName(ENamedElement element) {
+		if (element instanceof EReference)
+			return element.EReferenceType.toVarName
 		val name = element.name.toFirstLower
 		if (XtendFileAccess.XTEND_KEYWORDS.contains(name))
 			'_' + name
