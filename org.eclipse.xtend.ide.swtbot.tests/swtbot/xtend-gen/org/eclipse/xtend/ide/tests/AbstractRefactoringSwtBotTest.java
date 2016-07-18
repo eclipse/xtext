@@ -12,13 +12,19 @@ import com.google.inject.Injector;
 import org.eclipse.jface.bindings.keys.KeyStroke;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swtbot.eclipse.finder.SWTWorkbenchBot;
 import org.eclipse.swtbot.eclipse.finder.widgets.SWTBotEclipseEditor;
 import org.eclipse.swtbot.swt.finder.SWTBot;
+import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
+import org.eclipse.swtbot.swt.finder.results.VoidResult;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotButton;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotMenu;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotShell;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotText;
+import org.eclipse.ui.IWorkbench;
+import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.xtend.ide.internal.XtendActivator;
 import org.eclipse.xtend.ide.tests.RefactoringTestParameters;
 import org.eclipse.xtend.ide.tests.SwtBotProjectHelper;
@@ -51,6 +57,15 @@ public abstract class AbstractRefactoringSwtBotTest {
       IResourcesSetupUtil.cleanWorkspace();
       SWTWorkbenchBot _sWTWorkbenchBot = new SWTWorkbenchBot();
       AbstractRefactoringSwtBotTest.bot = _sWTWorkbenchBot;
+      UIThreadRunnable.syncExec(new VoidResult() {
+        @Override
+        public void run() {
+          IWorkbench _workbench = PlatformUI.getWorkbench();
+          IWorkbenchWindow _activeWorkbenchWindow = _workbench.getActiveWorkbenchWindow();
+          Shell _shell = _activeWorkbenchWindow.getShell();
+          _shell.forceActive();
+        }
+      });
       SwtBotProjectHelper.newXtendProject(AbstractRefactoringSwtBotTest.bot, "test");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);

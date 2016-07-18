@@ -15,10 +15,15 @@ import org.eclipse.swt.widgets.Display
 import org.eclipse.swtbot.eclipse.finder.SWTWorkbenchBot
 import org.eclipse.swtbot.eclipse.finder.widgets.SWTBotEclipseEditor
 import org.eclipse.swtbot.swt.finder.SWTBot
+import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable
+import org.eclipse.swtbot.swt.finder.results.VoidResult
 import org.eclipse.swtbot.swt.finder.waits.DefaultCondition
 import org.eclipse.text.undo.DocumentUndoManagerRegistry
+import org.eclipse.ui.PlatformUI
 import org.eclipse.ui.texteditor.ITextEditor
 import org.eclipse.xtend.ide.internal.XtendActivator
+import org.eclipse.xtend.lib.Property
+import org.eclipse.xtext.junit4.ui.util.TargetPlatformUtil
 import org.eclipse.xtext.ui.refactoring.ui.RefactoringPreferences
 import org.eclipse.xtext.ui.refactoring.ui.RenameRefactoringController
 import org.junit.After
@@ -30,7 +35,6 @@ import org.junit.BeforeClass
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
 
 import static extension org.eclipse.xtend.ide.tests.SwtBotProjectHelper.*
-import org.eclipse.xtext.junit4.ui.util.TargetPlatformUtil
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -44,6 +48,11 @@ abstract class AbstractRefactoringSwtBotTest {
 		TargetPlatformUtil.setTargetPlatform
 		cleanWorkspace
 		bot = new SWTWorkbenchBot
+		UIThreadRunnable.syncExec(new VoidResult() {
+			override void run() {
+				PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell().forceActive();
+			}
+		});
 		bot.newXtendProject('test')
 	}
 	
