@@ -9,9 +9,13 @@ package org.eclipse.xtend.ide.tests;
 
 import java.util.Collection;
 import java.util.Collections;
+import org.eclipse.swtbot.eclipse.finder.SWTWorkbenchBot;
+import org.eclipse.swtbot.eclipse.finder.widgets.SWTBotEclipseEditor;
 import org.eclipse.xtend.ide.tests.AbstractRefactoringSwtBotTest;
 import org.eclipse.xtend.ide.tests.ParameterizedSWTBotRunner;
 import org.eclipse.xtend.ide.tests.RefactoringTestParameters;
+import org.eclipse.xtend.ide.tests.SwtBotProjectHelper;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -60,37 +64,88 @@ public class RenameXtendClassSwtBotTest extends AbstractRefactoringSwtBotTest {
   
   @Test
   public void renameXtendClass() {
-    throw new Error("Unresolved compilation problems:"
-      + "\nThe method getBot() from the type AbstractRefactoringSwtBotTest refers to the missing type SWTWorkbenchBot"
-      + "\nThe method getBot() from the type AbstractRefactoringSwtBotTest refers to the missing type SWTWorkbenchBot"
-      + "\nnewXtendEditor cannot be resolved"
-      + "\nnewXtendEditor cannot be resolved"
-      + "\nrenameInXtendEditor cannot be resolved"
-      + "\ntext cannot be resolved"
-      + "\ntext cannot be resolved"
-      + "\ntitle cannot be resolved");
+    SWTWorkbenchBot _bot = this.getBot();
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo extends Bar {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    final SWTBotEclipseEditor fooEditor = SwtBotProjectHelper.newXtendEditor(_bot, "Foo", _builder);
+    SWTWorkbenchBot _bot_1 = this.getBot();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class ?Bar? {}");
+    _builder_1.newLine();
+    final SWTBotEclipseEditor barEditor = SwtBotProjectHelper.newXtendEditor(_bot_1, "Bar", _builder_1);
+    this.renameInXtendEditor(barEditor, "NewBar", "Rename Element");
+    StringConcatenation _builder_2 = new StringConcatenation();
+    _builder_2.append("class Foo extends NewBar {");
+    _builder_2.newLine();
+    _builder_2.append("}");
+    _builder_2.newLine();
+    String _text = fooEditor.getText();
+    this.assertEquals(_builder_2, _text);
+    StringConcatenation _builder_3 = new StringConcatenation();
+    _builder_3.append("class NewBar {}");
+    _builder_3.newLine();
+    String _text_1 = barEditor.getText();
+    this.assertEquals(_builder_3, _text_1);
+    String _title = barEditor.getTitle();
+    this.assertEquals("NewBar.xtend", _title);
   }
   
   @Test
   public void renameXtendClassReference() {
-    throw new Error("Unresolved compilation problems:"
-      + "\nThe method getBot() from the type AbstractRefactoringSwtBotTest refers to the missing type SWTWorkbenchBot"
-      + "\nThe method getBot() from the type AbstractRefactoringSwtBotTest refers to the missing type SWTWorkbenchBot"
-      + "\nnewXtendEditor cannot be resolved"
-      + "\nnewXtendEditor cannot be resolved"
-      + "\nrenameInXtendEditor cannot be resolved"
-      + "\ntext cannot be resolved"
-      + "\ntext cannot be resolved"
-      + "\ntitle cannot be resolved");
+    SWTWorkbenchBot _bot = this.getBot();
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Bar {}");
+    _builder.newLine();
+    final SWTBotEclipseEditor barEditor = SwtBotProjectHelper.newXtendEditor(_bot, "Bar", _builder);
+    SWTWorkbenchBot _bot_1 = this.getBot();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Foo extends ?Bar? {");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    final SWTBotEclipseEditor fooEditor = SwtBotProjectHelper.newXtendEditor(_bot_1, "Foo", _builder_1);
+    this.renameInXtendEditor(fooEditor, "NewBar", "Rename Element");
+    StringConcatenation _builder_2 = new StringConcatenation();
+    _builder_2.append("class Foo extends NewBar {");
+    _builder_2.newLine();
+    _builder_2.append("}");
+    _builder_2.newLine();
+    String _text = fooEditor.getText();
+    this.assertEquals(_builder_2, _text);
+    StringConcatenation _builder_3 = new StringConcatenation();
+    _builder_3.append("class NewBar {}");
+    _builder_3.newLine();
+    String _text_1 = barEditor.getText();
+    this.assertEquals(_builder_3, _text_1);
+    String _title = barEditor.getTitle();
+    this.assertEquals("NewBar.xtend", _title);
   }
   
   @Test
   public void renameXtendClassWithAA() {
-    throw new Error("Unresolved compilation problems:"
-      + "\nThe method getBot() from the type AbstractRefactoringSwtBotTest refers to the missing type SWTWorkbenchBot"
-      + "\nnewXtendEditor cannot be resolved"
-      + "\nrenameInXtendEditor cannot be resolved"
-      + "\ntext cannot be resolved"
-      + "\ntitle cannot be resolved");
+    SWTWorkbenchBot _bot = this.getBot();
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import org.eclipse.xtend.lib.annotations.Data");
+    _builder.newLine();
+    _builder.append("@Data");
+    _builder.newLine();
+    _builder.append("class ?Fonk? {}");
+    _builder.newLine();
+    final SWTBotEclipseEditor barEditor = SwtBotProjectHelper.newXtendEditor(_bot, "Fonk", _builder);
+    this.renameInXtendEditor(barEditor, "NewFonk", "Rename Element");
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import org.eclipse.xtend.lib.annotations.Data");
+    _builder_1.newLine();
+    _builder_1.append("@Data");
+    _builder_1.newLine();
+    _builder_1.append("class NewFonk {}");
+    _builder_1.newLine();
+    String _text = barEditor.getText();
+    this.assertEquals(_builder_1, _text);
+    String _title = barEditor.getTitle();
+    this.assertEquals("NewFonk.xtend", _title);
   }
 }

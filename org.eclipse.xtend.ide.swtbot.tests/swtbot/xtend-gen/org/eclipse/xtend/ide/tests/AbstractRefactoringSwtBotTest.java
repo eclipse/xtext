@@ -8,10 +8,35 @@
 package org.eclipse.xtend.ide.tests;
 
 import com.google.inject.Inject;
+import com.google.inject.Injector;
+import org.eclipse.jface.bindings.keys.KeyStroke;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swtbot.eclipse.finder.SWTWorkbenchBot;
+import org.eclipse.swtbot.eclipse.finder.widgets.SWTBotEclipseEditor;
+import org.eclipse.swtbot.swt.finder.SWTBot;
+import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
+import org.eclipse.swtbot.swt.finder.results.VoidResult;
+import org.eclipse.swtbot.swt.finder.widgets.SWTBotButton;
+import org.eclipse.swtbot.swt.finder.widgets.SWTBotMenu;
+import org.eclipse.swtbot.swt.finder.widgets.SWTBotShell;
+import org.eclipse.swtbot.swt.finder.widgets.SWTBotText;
+import org.eclipse.ui.IWorkbench;
+import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.PlatformUI;
+import org.eclipse.xtend.ide.internal.XtendActivator;
 import org.eclipse.xtend.ide.tests.RefactoringTestParameters;
+import org.eclipse.xtend.ide.tests.SwtBotProjectHelper;
+import org.eclipse.xtend.ide.tests.WaitForLinkedModeCondition;
+import org.eclipse.xtend.ide.tests.WaitForRefactoringCondition;
+import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
+import org.eclipse.xtext.junit4.ui.util.TargetPlatformUtil;
 import org.eclipse.xtext.ui.refactoring.ui.RefactoringPreferences;
 import org.eclipse.xtext.ui.refactoring.ui.RenameRefactoringController;
+import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -23,22 +48,38 @@ import org.junit.BeforeClass;
  */
 @SuppressWarnings("all")
 public abstract class AbstractRefactoringSwtBotTest {
-  private static /* SWTWorkbenchBot */Object bot;
+  private static SWTWorkbenchBot bot;
   
   @BeforeClass
   public static void initialize() {
-    throw new Error("Unresolved compilation problems:"
-      + "\nSWTWorkbenchBot cannot be resolved."
-      + "\nThe field AbstractRefactoringSwtBotTest.bot refers to the missing type SWTWorkbenchBot"
-      + "\nThe field AbstractRefactoringSwtBotTest.bot refers to the missing type SWTWorkbenchBot"
-      + "\nnewXtendProject cannot be resolved");
+    try {
+      TargetPlatformUtil.setTargetPlatform();
+      IResourcesSetupUtil.cleanWorkspace();
+      SWTWorkbenchBot _sWTWorkbenchBot = new SWTWorkbenchBot();
+      AbstractRefactoringSwtBotTest.bot = _sWTWorkbenchBot;
+      UIThreadRunnable.syncExec(new VoidResult() {
+        @Override
+        public void run() {
+          IWorkbench _workbench = PlatformUI.getWorkbench();
+          IWorkbenchWindow _activeWorkbenchWindow = _workbench.getActiveWorkbenchWindow();
+          Shell _shell = _activeWorkbenchWindow.getShell();
+          _shell.forceActive();
+        }
+      });
+      SwtBotProjectHelper.newXtendProject(AbstractRefactoringSwtBotTest.bot, "test");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
   
   @AfterClass
   public static void terminate() {
-    throw new Error("Unresolved compilation problems:"
-      + "\nThe field AbstractRefactoringSwtBotTest.bot refers to the missing type SWTWorkbenchBot"
-      + "\ncloseAllEditors cannot be resolved");
+    try {
+      AbstractRefactoringSwtBotTest.bot.closeAllEditors();
+      IResourcesSetupUtil.cleanWorkspace();
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
   
   @Inject
@@ -51,11 +92,11 @@ public abstract class AbstractRefactoringSwtBotTest {
   
   @Before
   public void setUp() {
-    throw new Error("Unresolved compilation problems:"
-      + "\nThe field AbstractRefactoringSwtBotTest.bot refers to the missing type SWTWorkbenchBot"
-      + "\nThe field AbstractRefactoringSwtBotTest.bot refers to the missing type SWTWorkbenchBot"
-      + "\ncloseAllEditors cannot be resolved"
-      + "\nclearSourceFolderContents cannot be resolved");
+    XtendActivator _instance = XtendActivator.getInstance();
+    Injector _injector = _instance.getInjector(XtendActivator.ORG_ECLIPSE_XTEND_CORE_XTEND);
+    _injector.injectMembers(this);
+    AbstractRefactoringSwtBotTest.bot.closeAllEditors();
+    SwtBotProjectHelper.clearSourceFolderContents(AbstractRefactoringSwtBotTest.bot);
   }
   
   @After
@@ -90,92 +131,107 @@ public abstract class AbstractRefactoringSwtBotTest {
     _default.syncExec(_function);
   }
   
-  public Object renameInXtendEditor(final /* SWTBotEclipseEditor */Object xtendEditor, final String newName, final String dialogName) {
-    throw new Error("Unresolved compilation problems:"
-      + "\nThe method textWithLabel(String) is undefined"
-      + "\nThe method button(String) is undefined"
-      + "\nThe method button(String) is undefined"
-      + "\nThe method waitForLinkedMode() from the type AbstractRefactoringSwtBotTest refers to the missing type Object"
-      + "\nThe field AbstractRefactoringSwtBotTest.bot refers to the missing type SWTWorkbenchBot"
-      + "\nThe field AbstractRefactoringSwtBotTest.bot refers to the missing type SWTWorkbenchBot"
-      + "\nThe field AbstractRefactoringSwtBotTest.bot refers to the missing type SWTWorkbenchBot"
-      + "\nclickableContextMenu cannot be resolved"
-      + "\nclick cannot be resolved"
-      + "\ntypeText cannot be resolved"
-      + "\npressShortcut cannot be resolved"
-      + "\nshell cannot be resolved"
-      + "\nactivate cannot be resolved"
-      + "\nbutton cannot be resolved"
-      + "\nclick cannot be resolved"
-      + "\npressShortcut cannot be resolved"
-      + "\nshell cannot be resolved"
-      + "\nactivate cannot be resolved"
-      + "\nbot cannot be resolved"
-      + "\n=> cannot be resolved"
-      + "\ntext cannot be resolved"
-      + "\nclick cannot be resolved"
-      + "\nclick cannot be resolved"
-      + "\nwaitForRefactoring cannot be resolved");
+  public void renameInXtendEditor(final SWTBotEclipseEditor xtendEditor, final String newName, final String dialogName) {
+    final SWTBotMenu renameMenuItem = SwtBotProjectHelper.clickableContextMenu(xtendEditor, "Refactor", "Rename Element");
+    renameMenuItem.click();
+    boolean _isUseInlineRefactoring = this.testParams.isUseInlineRefactoring();
+    if (_isUseInlineRefactoring) {
+      this.waitForLinkedMode();
+      xtendEditor.typeText(newName);
+      boolean _isUsePreview = this.testParams.isUsePreview();
+      if (_isUsePreview) {
+        xtendEditor.pressShortcut(SWT.CTRL, SWT.CR);
+        SWTBotShell _shell = AbstractRefactoringSwtBotTest.bot.shell(dialogName);
+        _shell.activate();
+        SWTBotButton _button = AbstractRefactoringSwtBotTest.bot.button("OK");
+        _button.click();
+      } else {
+        KeyStroke _instance = KeyStroke.getInstance(SWT.LF);
+        xtendEditor.pressShortcut(_instance);
+      }
+    } else {
+      SWTBotShell _shell_1 = AbstractRefactoringSwtBotTest.bot.shell(dialogName);
+      SWTBotShell _activate = _shell_1.activate();
+      SWTBot _bot = _activate.bot();
+      final Procedure1<SWTBot> _function = (SWTBot it) -> {
+        SWTBotText _textWithLabel = it.textWithLabel("New name:");
+        _textWithLabel.setText(newName);
+        boolean _isUsePreview_1 = this.testParams.isUsePreview();
+        if (_isUsePreview_1) {
+          SWTBotButton _button_1 = it.button("Preview >");
+          _button_1.click();
+        }
+        SWTBotButton _button_2 = it.button("OK");
+        _button_2.click();
+      };
+      ObjectExtensions.<SWTBot>operator_doubleArrow(_bot, _function);
+    }
+    this.waitForRefactoring(xtendEditor);
   }
   
-  public Object renameInJavaEditor(final /* SWTBotEclipseEditor */Object javaEditor, final String newName, final String dialogName) {
-    throw new Error("Unresolved compilation problems:"
-      + "\nThe method textWithLabel(String) is undefined"
-      + "\nThe method button(String) is undefined"
-      + "\nThe method button(String) is undefined"
-      + "\nThe field AbstractRefactoringSwtBotTest.bot refers to the missing type SWTWorkbenchBot"
-      + "\nThe field AbstractRefactoringSwtBotTest.bot refers to the missing type SWTWorkbenchBot"
-      + "\nThe field AbstractRefactoringSwtBotTest.bot refers to the missing type SWTWorkbenchBot"
-      + "\nclickableContextMenu cannot be resolved"
-      + "\nclick cannot be resolved"
-      + "\ntypeText cannot be resolved"
-      + "\npressShortcut cannot be resolved"
-      + "\nshell cannot be resolved"
-      + "\nactivate cannot be resolved"
-      + "\nbutton cannot be resolved"
-      + "\nclick cannot be resolved"
-      + "\npressShortcut cannot be resolved"
-      + "\nshell cannot be resolved"
-      + "\nactivate cannot be resolved"
-      + "\nbot cannot be resolved"
-      + "\n=> cannot be resolved"
-      + "\ntext cannot be resolved"
-      + "\nclick cannot be resolved"
-      + "\nclick cannot be resolved"
-      + "\nwaitForRefactoring cannot be resolved");
+  public void renameInJavaEditor(final SWTBotEclipseEditor javaEditor, final String newName, final String dialogName) {
+    final SWTBotMenu renameMenuItem = SwtBotProjectHelper.clickableContextMenu(javaEditor, "Refactor", "Rename...");
+    renameMenuItem.click();
+    boolean _isUseInlineRefactoring = this.testParams.isUseInlineRefactoring();
+    if (_isUseInlineRefactoring) {
+      javaEditor.typeText(newName);
+      boolean _isUsePreview = this.testParams.isUsePreview();
+      if (_isUsePreview) {
+        javaEditor.pressShortcut(SWT.CTRL, SWT.CR);
+        SWTBotShell _shell = AbstractRefactoringSwtBotTest.bot.shell(dialogName);
+        _shell.activate();
+        SWTBotButton _button = AbstractRefactoringSwtBotTest.bot.button("OK");
+        _button.click();
+      } else {
+        KeyStroke _instance = KeyStroke.getInstance(SWT.LF);
+        javaEditor.pressShortcut(_instance);
+      }
+    } else {
+      SWTBotShell _shell_1 = AbstractRefactoringSwtBotTest.bot.shell(dialogName);
+      SWTBotShell _activate = _shell_1.activate();
+      SWTBot _bot = _activate.bot();
+      final Procedure1<SWTBot> _function = (SWTBot it) -> {
+        SWTBotText _textWithLabel = it.textWithLabel("New name:");
+        _textWithLabel.setText(newName);
+        boolean _isUsePreview_1 = this.testParams.isUsePreview();
+        if (_isUsePreview_1) {
+          SWTBotButton _button_1 = it.button("Next");
+          _button_1.click();
+        }
+        SWTBotButton _button_2 = it.button("Finish");
+        _button_2.click();
+      };
+      ObjectExtensions.<SWTBot>operator_doubleArrow(_bot, _function);
+    }
+    this.waitForRefactoring(javaEditor);
   }
   
-  public Object undo(final /* SWTBotEclipseEditor */Object editor) {
-    throw new Error("Unresolved compilation problems:"
-      + "\nSWTBot cannot be resolved."
-      + "\nThe field AbstractRefactoringSwtBotTest.bot refers to the missing type SWTWorkbenchBot"
-      + "\nThe field AbstractRefactoringSwtBotTest.bot refers to the missing type SWTWorkbenchBot"
-      + "\nThe constructor WaitForRefactoringCondition(SWTBotEclipseEditor, boolean) refers to the missing type SWTBotEclipseEditor"
-      + "\nsetFocus cannot be resolved"
-      + "\npressShortcut cannot be resolved"
-      + "\nshell cannot be resolved"
-      + "\nactivate cannot be resolved"
-      + "\nbutton cannot be resolved"
-      + "\nclick cannot be resolved"
-      + "\nwaitUntil cannot be resolved");
+  public void undo(final SWTBotEclipseEditor editor) {
+    editor.setFocus();
+    editor.pressShortcut(SWT.MOD1, 'Z');
+    SWTBotShell _shell = AbstractRefactoringSwtBotTest.bot.shell("Undo");
+    _shell.activate();
+    SWTBotButton _button = AbstractRefactoringSwtBotTest.bot.button("OK");
+    _button.click();
+    SWTBot _sWTBot = new SWTBot();
+    WaitForRefactoringCondition _waitForRefactoringCondition = new WaitForRefactoringCondition(editor, true);
+    _sWTBot.waitUntil(_waitForRefactoringCondition, 15000);
   }
   
-  protected Object waitForLinkedMode() {
-    throw new Error("Unresolved compilation problems:"
-      + "\nSWTBot cannot be resolved."
-      + "\nwaitUntil cannot be resolved");
+  protected void waitForLinkedMode() {
+    SWTBot _sWTBot = new SWTBot();
+    WaitForLinkedModeCondition _waitForLinkedModeCondition = new WaitForLinkedModeCondition(this.controller);
+    _sWTBot.waitUntil(_waitForLinkedModeCondition);
   }
   
-  protected Object waitForRefactoring(final /* SWTBotEclipseEditor */Object editor) {
-    throw new Error("Unresolved compilation problems:"
-      + "\nSWTBot cannot be resolved."
-      + "\nThe constructor WaitForRefactoringCondition(SWTBotEclipseEditor, boolean) refers to the missing type SWTBotEclipseEditor"
-      + "\nwaitUntil cannot be resolved");
+  protected void waitForRefactoring(final SWTBotEclipseEditor editor) {
+    SWTBot _sWTBot = new SWTBot();
+    WaitForRefactoringCondition _waitForRefactoringCondition = new WaitForRefactoringCondition(editor, false);
+    _sWTBot.waitUntil(_waitForRefactoringCondition, 15000);
   }
   
   protected SWTWorkbenchBot getBot() {
-    throw new Error("Unresolved compilation problems:"
-      + "\nThe field AbstractRefactoringSwtBotTest.bot refers to the missing type SWTWorkbenchBot");
+    return AbstractRefactoringSwtBotTest.bot;
   }
   
   protected void assertEquals(final CharSequence expected, final CharSequence value) {
