@@ -5,6 +5,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:git="http://www.eclipse.org/oomph/setup/git/1.0"
     xmlns:jdt="http://www.eclipse.org/oomph/setup/jdt/1.0"
+    xmlns:mylyn="http://www.eclipse.org/oomph/setup/mylyn/1.0"
     xmlns:pde="http://www.eclipse.org/oomph/setup/pde/1.0"
     xmlns:predicates="http://www.eclipse.org/oomph/predicates/1.0"
     xmlns:projects="http://www.eclipse.org/oomph/setup/projects/1.0"
@@ -13,7 +14,7 @@
     xmlns:setup.targlets="http://www.eclipse.org/oomph/setup/targlets/1.0"
     xmlns:setup.workingsets="http://www.eclipse.org/oomph/setup/workingsets/1.0"
     xmlns:workingsets="http://www.eclipse.org/oomph/workingsets/1.0"
-    xsi:schemaLocation="http://www.eclipse.org/oomph/setup/git/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Git.ecore http://www.eclipse.org/oomph/setup/jdt/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/JDT.ecore http://www.eclipse.org/oomph/setup/pde/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/PDE.ecore http://www.eclipse.org/oomph/predicates/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Predicates.ecore http://www.eclipse.org/oomph/setup/projects/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Projects.ecore http://www.eclipse.org/oomph/setup/targlets/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/SetupTarglets.ecore http://www.eclipse.org/oomph/setup/workingsets/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/SetupWorkingSets.ecore http://www.eclipse.org/oomph/workingsets/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/WorkingSets.ecore"
+    xsi:schemaLocation="http://www.eclipse.org/oomph/setup/git/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Git.ecore http://www.eclipse.org/oomph/setup/jdt/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/JDT.ecore http://www.eclipse.org/oomph/setup/mylyn/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Mylyn.ecore http://www.eclipse.org/oomph/setup/pde/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/PDE.ecore http://www.eclipse.org/oomph/predicates/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Predicates.ecore http://www.eclipse.org/oomph/setup/projects/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Projects.ecore http://www.eclipse.org/oomph/setup/targlets/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/SetupTarglets.ecore http://www.eclipse.org/oomph/setup/workingsets/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/SetupWorkingSets.ecore http://www.eclipse.org/oomph/workingsets/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/WorkingSets.ecore"
     name="xtext"
     label="Xtext">
   <setupTask
@@ -64,6 +65,14 @@
       type="URI"
       name="draw2d.p2.repository"
       value="http://download.eclipse.org/tools/gef/updates/releases"/>
+  <setupTask
+      xsi:type="setup:VariableTask"
+      id="github.user.password"
+      type="PASSWORD"
+      name="github.user.password"
+      label="Github user password">
+    <description>Github user password</description>
+  </setupTask>
   <setupTask
       xsi:type="setup:CompoundTask"
       name="Workspace Preferences">
@@ -242,7 +251,7 @@
   </setupTask>
   <setupTask
       xsi:type="setup.p2:P2Task"
-      label="eclipse">
+      label="Eclipse">
     <requirement
         name="org.eclipse.emf.sdk.feature.group"/>
     <requirement
@@ -264,7 +273,7 @@
   </setupTask>
   <setupTask
       xsi:type="setup.p2:P2Task"
-      label="tools">
+      label="Tools">
     <requirement
         name="org.eclipse.m2e.feature.feature.group"
         versionRange="[1.0.0,1.7.0)"/>
@@ -295,6 +304,51 @@
         url="http://repo1.maven.org/maven2/.m2e/connectors/m2eclipse-tycho/0.8.0/N/0.8.0.201409231215/"/>
   </setupTask>
   <setupTask
+      xsi:type="setup.p2:P2Task"
+      id="p2.mylyn"
+      label="Mylyn"
+      licenseConfirmationDisabled="true">
+    <requirement
+        name="org.eclipse.mylyn.bugzilla_feature.feature.group"/>
+    <requirement
+        name="org.eclipse.mylyn.builds.feature.group"/>
+    <requirement
+        name="org.eclipse.mylyn.context_feature.feature.group"/>
+    <requirement
+        name="org.eclipse.mylyn.discovery.feature.group"/>
+    <requirement
+        name="org.eclipse.mylyn.gerrit.feature.feature.group"/>
+    <requirement
+        name="org.eclipse.mylyn.git.feature.group"/>
+    <requirement
+        name="org.eclipse.mylyn.github.feature.feature.group"/>
+    <requirement
+        name="org.eclipse.mylyn.hudson.feature.group"/>
+    <requirement
+        name="org.eclipse.mylyn.ide_feature.feature.group"/>
+    <requirement
+        name="org.eclipse.mylyn.java_feature.feature.group"/>
+    <requirement
+        name="org.eclipse.mylyn.monitor.feature.group"/>
+    <requirement
+        name="org.eclipse.mylyn.pde_feature.feature.group"/>
+    <requirement
+        name="org.eclipse.mylyn.tasks.ide.feature.group"/>
+    <requirement
+        name="org.eclipse.mylyn.team_feature.feature.group"/>
+    <requirement
+        name="org.eclipse.mylyn.wikitext_feature.feature.group"/>
+    <requirement
+        name="org.eclipse.mylyn_feature.feature.group"/>
+    <requirement
+        name="org.eclipse.egit.mylyn.feature.group"/>
+    <repository
+        url="http://download.eclipse.org/egit/github/updates"/>
+    <repository
+        url="http://download.eclipse.org/mylyn/releases/latest"/>
+    <description>Task and build connector</description>
+  </setupTask>
+  <setupTask
       xsi:type="setup.workingsets:WorkingSetTask">
     <workingSet
         name="Root Projects"
@@ -309,6 +363,14 @@
             pattern="xtext-eclipse"/>
       </predicate>
     </workingSet>
+  </setupTask>
+  <setupTask
+      xsi:type="mylyn:MylynQueriesTask"
+      repositoryURL="https://bugs.eclipse.org/bugs"
+      userID="${bugzilla.id}"
+      password="${eclipse.user.password}">
+    <query summary="Xtext Bugs"
+        url="https://bugs.eclipse.org/bugs/buglist.cgi?product=TMF&amp;bug_status=UNCONFIRMED&amp;bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED"/>
   </setupTask>
   <project name="core"
       label="Xtext Core">
@@ -357,9 +419,27 @@
               project="org.eclipse.xtext"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.13/@workingSets.0"/>
+              excludedWorkingSet="//@setupTasks.15/@workingSets.0"/>
         </predicate>
       </workingSet>
+    </setupTask>
+    <setupTask
+        xsi:type="setup:CompoundTask"
+        name="Mylyn Github Issues">
+      <setupTask
+          xsi:type="mylyn:MylynQueriesTask"
+          connectorKind="github"
+          repositoryURL="https://github.com/eclipse/xtext-core"
+          userID="${github.user.id}"
+          password="${github.user.password}">
+        <query
+            summary="Xtext-Core Issues"
+            url="">
+          <attribute
+              key="state"
+              value="open::"/>
+        </query>
+      </setupTask>
     </setupTask>
     <stream
         name="master"/>
@@ -429,9 +509,27 @@
               project="org.eclipse.xtext.xbase.lib"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.13/@workingSets.0"/>
+              excludedWorkingSet="//@setupTasks.15/@workingSets.0"/>
         </predicate>
       </workingSet>
+    </setupTask>
+    <setupTask
+        xsi:type="setup:CompoundTask"
+        name="Mylyn Github Issues">
+      <setupTask
+          xsi:type="mylyn:MylynQueriesTask"
+          connectorKind="github"
+          repositoryURL="https://github.com/eclipse/xtext-lib"
+          userID="${github.user.id}"
+          password="${github.user.password}">
+        <query
+            summary="Xtext-Lib Issues"
+            url="">
+          <attribute
+              key="state"
+              value="open::"/>
+        </query>
+      </setupTask>
     </setupTask>
     <stream
         name="master"/>
@@ -498,9 +596,27 @@
               project="org.eclipse.xtext.xbase"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.13/@workingSets.0"/>
+              excludedWorkingSet="//@setupTasks.15/@workingSets.0"/>
         </predicate>
       </workingSet>
+    </setupTask>
+    <setupTask
+        xsi:type="setup:CompoundTask"
+        name="Mylyn Github Issues">
+      <setupTask
+          xsi:type="mylyn:MylynQueriesTask"
+          connectorKind="github"
+          repositoryURL="https://github.com/eclipse/xtext-extras"
+          userID="${github.user.id}"
+          password="${github.user.password}">
+        <query
+            summary="Xtext-Extras Issues"
+            url="">
+          <attribute
+              key="state"
+              value="open::"/>
+        </query>
+      </setupTask>
     </setupTask>
     <stream
         name="master"/>
@@ -766,7 +882,7 @@
               project="org.eclipse.xtext.sdk.feature"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.13/@workingSets.0 //@projects[name='eclipse']/@setupTasks.4/@workingSets.2 //@projects[name='eclipse']/@setupTasks.4/@workingSets.1"/>
+              excludedWorkingSet="//@setupTasks.15/@workingSets.0 //@projects[name='eclipse']/@setupTasks.4/@workingSets.2 //@projects[name='eclipse']/@setupTasks.4/@workingSets.1"/>
         </predicate>
       </workingSet>
       <workingSet
@@ -778,7 +894,7 @@
               project="org.eclipse.xtext.sdk.feature"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.13/@workingSets.0 //@projects[name='eclipse']/@setupTasks.4/@workingSets.2"/>
+              excludedWorkingSet="//@setupTasks.15/@workingSets.0 //@projects[name='eclipse']/@setupTasks.4/@workingSets.2"/>
           <operand
               xsi:type="predicates:OrPredicate">
             <operand
@@ -799,12 +915,30 @@
               project="org.eclipse.xtext.sdk.feature"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.13/@workingSets.0"/>
+              excludedWorkingSet="//@setupTasks.15/@workingSets.0"/>
           <operand
               xsi:type="predicates:NamePredicate"
               pattern=".*\.example\..*"/>
         </predicate>
       </workingSet>
+    </setupTask>
+    <setupTask
+        xsi:type="setup:CompoundTask"
+        name="Mylyn Github Issues">
+      <setupTask
+          xsi:type="mylyn:MylynQueriesTask"
+          connectorKind="github"
+          repositoryURL="https://github.com/eclipse/xtext-eclipse"
+          userID="${github.user.id}"
+          password="${github.user.password}">
+        <query
+            summary="Xtext-Eclipse Issues"
+            url="">
+          <attribute
+              key="state"
+              value="open::"/>
+        </query>
+      </setupTask>
     </setupTask>
     <stream
         name="master">
@@ -887,9 +1021,27 @@
               project="org.eclipse.xtext.core.idea.tests"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.13/@workingSets.0"/>
+              excludedWorkingSet="//@setupTasks.15/@workingSets.0"/>
         </predicate>
       </workingSet>
+    </setupTask>
+    <setupTask
+        xsi:type="setup:CompoundTask"
+        name="Mylyn Github Issues">
+      <setupTask
+          xsi:type="mylyn:MylynQueriesTask"
+          connectorKind="github"
+          repositoryURL="https://github.com/eclipse/xtext-idea"
+          userID="${github.user.id}"
+          password="${github.user.password}">
+        <query
+            summary="Xtext-Idea Issues"
+            url="">
+          <attribute
+              key="state"
+              value="open::"/>
+        </query>
+      </setupTask>
     </setupTask>
     <stream
         name="master"/>
@@ -959,9 +1111,27 @@
               project="org.eclipse.xtext.web"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.13/@workingSets.0"/>
+              excludedWorkingSet="//@setupTasks.15/@workingSets.0"/>
         </predicate>
       </workingSet>
+    </setupTask>
+    <setupTask
+        xsi:type="setup:CompoundTask"
+        name="Mylyn Github Issues">
+      <setupTask
+          xsi:type="mylyn:MylynQueriesTask"
+          connectorKind="github"
+          repositoryURL="https://github.com/eclipse/xtext-web"
+          userID="${github.user.id}"
+          password="${github.user.password}">
+        <query
+            summary="Xtext-Web Issues"
+            url="">
+          <attribute
+              key="state"
+              value="open::"/>
+        </query>
+      </setupTask>
     </setupTask>
     <stream
         name="master"/>
@@ -1030,9 +1200,27 @@
               project="org.eclipse.xtext.maven.plugin"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.13/@workingSets.0"/>
+              excludedWorkingSet="//@setupTasks.15/@workingSets.0"/>
         </predicate>
       </workingSet>
+    </setupTask>
+    <setupTask
+        xsi:type="setup:CompoundTask"
+        name="Mylyn Github Issues">
+      <setupTask
+          xsi:type="mylyn:MylynQueriesTask"
+          connectorKind="github"
+          repositoryURL="https://github.com/eclipse/xtext-maven"
+          userID="${github.user.id}"
+          password="${github.user.password}">
+        <query
+            summary="Xtext-Maven Issues"
+            url="">
+          <attribute
+              key="state"
+              value="open::"/>
+        </query>
+      </setupTask>
     </setupTask>
     <stream
         name="master"/>
@@ -1084,6 +1272,21 @@
       <description></description>
     </setupTask>
     <setupTask
+        xsi:type="setup.p2:P2Task"
+        id="p2.swtbot"
+        label="SWTBot"
+        licenseConfirmationDisabled="true">
+      <requirement
+          name="org.eclipse.swtbot.eclipse.feature.group"/>
+      <requirement
+          name="org.eclipse.swtbot.ide.feature.group"/>
+      <requirement
+          name="org.eclipse.swtbot.generator.feature.feature.group"/>
+      <repository
+          url="http://download.eclipse.org/technology/swtbot/releases/latest/"/>
+      <description>UI testing framework</description>
+    </setupTask>
+    <setupTask
         xsi:type="projects:ProjectsImportTask">
       <sourceLocator
           rootFolder="${git.clone.xtext.xtend.location}"
@@ -1101,9 +1304,44 @@
               project="org.eclipse.xtend.core"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.13/@workingSets.0"/>
+              excludedWorkingSet="//@setupTasks.15/@workingSets.0"/>
         </predicate>
       </workingSet>
+    </setupTask>
+    <setupTask
+        xsi:type="setup.targlets:TargletTask">
+      <targlet
+          name="SWTBot">
+        <requirement
+            name="org.eclipse.swtbot.eclipse.feature.group"/>
+        <requirement
+            name="org.eclipse.swtbot.ide.feature.group"/>
+        <requirement
+            name="org.eclipse.swtbot.generator.feature.feature.group"/>
+        <repositoryList
+            name="SWTBot">
+          <repository
+              url="http://download.eclipse.org/technology/swtbot/releases/latest/"/>
+        </repositoryList>
+      </targlet>
+    </setupTask>
+    <setupTask
+        xsi:type="setup:CompoundTask"
+        name="Mylyn Github Issues">
+      <setupTask
+          xsi:type="mylyn:MylynQueriesTask"
+          connectorKind="github"
+          repositoryURL="https://github.com/eclipse/xtext-xtend"
+          userID="${github.user.id}"
+          password="${github.user.password}">
+        <query
+            summary="Xtext-Xtend Issues"
+            url="">
+          <attribute
+              key="state"
+              value="open::"/>
+        </query>
+      </setupTask>
     </setupTask>
     <stream
         name="master"/>
