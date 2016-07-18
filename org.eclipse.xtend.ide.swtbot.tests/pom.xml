@@ -19,6 +19,7 @@
 	            <artifactId>tycho-surefire-plugin</artifactId>
 	            <configuration>
 	              <useUIThread>false</useUIThread>
+					<argLine>${memory-settings} ${os-jvm-flags} -Dorg.eclipse.swtbot.keyboard.layout=EN_US</argLine>
 	            </configuration>
 	        </plugin>
 	    </plugins>
