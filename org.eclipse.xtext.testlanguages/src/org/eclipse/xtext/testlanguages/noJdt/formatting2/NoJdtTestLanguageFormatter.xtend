@@ -16,8 +16,10 @@ class NoJdtTestLanguageFormatter extends AbstractFormatter2 {
 
 	def dispatch void format(Model model, extension IFormattableDocument document) {
 		// TODO: format HiddenRegions around keywords, attributes, cross references, etc. 
-		for (Greeting greetings : model.getGreetings()) {
-			format(greetings, document);
+		for (Greeting greeting : model.getGreetings()) {
+			greeting.format;
 		}
 	}
+	
+	// TODO: implement for 
 }
