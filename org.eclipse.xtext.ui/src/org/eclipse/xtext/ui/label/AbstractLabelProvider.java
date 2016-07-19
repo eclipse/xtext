@@ -171,8 +171,10 @@ public abstract class AbstractLabelProvider extends LabelProvider implements ISt
 	protected String convertToString(Object text) {
 		if (text instanceof StyledString) {
 			return ((StyledString) text).getString();
-		} else if(text instanceof String){
+		} else if (text instanceof String){
 			return (String) text;
+		} else if (text instanceof CharSequence) {
+			return text.toString();
 		}
 		return null;
 	}

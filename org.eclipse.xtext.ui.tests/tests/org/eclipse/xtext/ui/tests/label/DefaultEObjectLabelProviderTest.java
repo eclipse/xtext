@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.jface.viewers.StyledString;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.XtextFactory;
 import org.eclipse.xtext.ui.IImageHelper;
@@ -194,4 +195,20 @@ public class DefaultEObjectLabelProviderTest extends Assert {
 		assertEquals(4, calls.size());
 	}
 
+	@Test public void testGetTextCharSequence() throws Exception {
+		DefaultEObjectLabelProvider defaultLabelProvider = new DefaultEObjectLabelProvider() {
+
+			@SuppressWarnings("unused")
+			public Object text(ParserRule parserRule) {
+				StringConcatenation _builder = new StringConcatenation();
+			    _builder.append(parserRule.getName());
+			    return _builder;
+			}
+
+		};
+		ParserRule parserRule = XtextFactory.eINSTANCE.createParserRule();
+		parserRule.setName("testCreateStyledString");
+		String styledText = defaultLabelProvider.getText(parserRule);
+		assertEquals("testCreateStyledString", styledText);
+	}
 }
