@@ -2,7 +2,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<parent>
 		<groupId>org.eclipse.xtext</groupId>
-		<artifactId>org.eclipse.xtext.parent</artifactId>
+		<artifactId>org.eclipse.xtext.maven.parent</artifactId>
 		<version>2.11.0-SNAPSHOT</version>
 		<relativePath>../org.eclipse.xtext.parent</relativePath>
 	</parent>
@@ -35,6 +35,16 @@
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.builder.standalone</artifactId>
 			<version>[${project.version}]</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext</artifactId>
+			<version>[${project.version}]</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.jdt</groupId>
+			<artifactId>org.eclipse.jdt.core</artifactId>
+			<version>[3.6.0,4)</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>

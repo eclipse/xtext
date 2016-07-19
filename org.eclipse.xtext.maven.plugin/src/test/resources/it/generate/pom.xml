@@ -6,18 +6,45 @@
 	<version>1.0.0-SNAPSHOT</version>
 	<artifactId>xtext-maven-plugin-it</artifactId>
 	<packaging>pom</packaging>
-	<modules>
-		<!-- Needed and build only at IT runtime -->
-		<module>../../../../../../plugins/org.eclipse.xtext.purexbase</module>
-		<module>../../../../../../tests/org.eclipse.xtext.testlanguages/integration-test-pom.xml</module>
-	</modules>
 	<repositories>
+		<repository>
+			<id>lsapi-from-jenkins</id>
+			<url>http://services.typefox.io/open-source/jenkins/job/lsapi/lastStableBuild/artifact/build/maven-repository/</url>
+		</repository>
+		<repository>
+			<id>xtext-lib-from-jenkins</id>
+			<url>http://services.typefox.io/open-source/jenkins/job/xtext-lib/job/master/lastStableBuild/artifact/build/maven-repository/</url>
+		</repository>
+		<repository>
+			<id>xtext-core-from-jenkins</id>
+			<url>http://services.typefox.io/open-source/jenkins/job/xtext-core/job/master/lastStableBuild/artifact/build/maven-repository/</url>
+		</repository>
+		<repository>
+			<id>xtext-extras-from-jenkins</id>
+			<url>http://services.typefox.io/open-source/jenkins/job/xtext-extras/job/cd_issue22/lastStableBuild/artifact/build/maven-repository/</url>
+		</repository>
 		<repository>
 			<id>central snapshots</id>
 			<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
 		</repository>
 	</repositories>
 	<pluginRepositories>
+		<pluginRepository>
+			<id>lsapi-from-jenkins</id>
+			<url>http://services.typefox.io/open-source/jenkins/job/lsapi/lastStableBuild/artifact/build/maven-repository/</url>
+		</pluginRepository>
+		<pluginRepository>
+			<id>xtext-lib-from-jenkins</id>
+			<url>http://services.typefox.io/open-source/jenkins/job/xtext-lib/job/master/lastStableBuild/artifact/build/maven-repository/</url>
+		</pluginRepository>
+		<pluginRepository>
+			<id>xtext-core-from-jenkins</id>
+			<url>http://services.typefox.io/open-source/jenkins/job/xtext-core/job/master/lastStableBuild/artifact/build/maven-repository/</url>
+		</pluginRepository>
+		<pluginRepository>
+			<id>xtext-extras-from-jenkins</id>
+			<url>http://services.typefox.io/open-source/jenkins/job/xtext-extras/job/cd_issue22/lastStableBuild/artifact/build/maven-repository/</url>
+		</pluginRepository>
 		<pluginRepository>
 			<id>central snapshots</id>
 			<url>https://oss.sonatype.org/content/repositories/snapshots/</url>

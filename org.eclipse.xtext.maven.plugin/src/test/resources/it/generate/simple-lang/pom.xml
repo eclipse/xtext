@@ -2,19 +2,27 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+	
+	<parent>
+		<groupId>org.eclipse.xtext</groupId>
+		<version>1.0.0-SNAPSHOT</version>
+		<artifactId>xtext-maven-plugin-it</artifactId>
+	</parent>
+	
 	<groupId>org.eclipse.xtext</groupId>
 	<version>1.0.0-SNAPSHOT</version>
 	<artifactId>simple-lang-test</artifactId>
 	<packaging>jar</packaging>
 	<properties>
-		<xtend.version>IT-SNAPSHOT</xtend.version>
+		<xtend.version>2.11.0-SNAPSHOT</xtend.version>
+		<xtext-maven-version>IT-SNAPSHOT</xtext-maven-version>
 	</properties>
 	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.eclipse.xtext</groupId>
 				<artifactId>xtext-maven-plugin</artifactId>
-				<version>${xtend.version}</version>
+				<version>${xtext-maven-version}</version>
 				<executions>
 					<execution>
 						<phase>generate-sources</phase>
@@ -35,7 +43,7 @@
 					<dependency>
 						<groupId>org.eclipse.xtext</groupId>
 						<artifactId>org.eclipse.xtext.testlanguages</artifactId>
-						<version>IT-SNAPSHOT</version>
+						<version>2.11.0-SNAPSHOT</version>
 					</dependency>
 				</dependencies>
 			</plugin>

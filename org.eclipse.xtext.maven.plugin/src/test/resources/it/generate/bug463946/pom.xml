@@ -12,7 +12,8 @@
 		<artifactId>xtext-maven-plugin-it</artifactId>
 	</parent>
 	<properties>
-		<xtext-version>IT-SNAPSHOT</xtext-version>
+		<xtext-version>2.11.0-SNAPSHOT</xtext-version>
+		<xtext-maven-version>IT-SNAPSHOT</xtext-maven-version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<ecore-xtext-version>[1.1.1-SNAPSHOT,)</ecore-xtext-version>
 		<ecore-xcore-lib-version>[1.1.0-SNAPSHOT,)</ecore-xcore-lib-version>
@@ -55,7 +56,7 @@
 			<plugin>
 				<groupId>org.eclipse.xtext</groupId>
 				<artifactId>xtext-maven-plugin</artifactId>
-				<version>${xtext-version}</version>
+				<version>${xtext-maven-version}</version>
 				<executions>
 					<execution>
 						<phase>generate-sources</phase>

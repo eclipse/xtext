@@ -8,7 +8,7 @@
 	</parent>
 
 	<groupId>org.eclipse.xtext</groupId>
-	<artifactId>org.eclipse.xtext.parent</artifactId>
+	<artifactId>org.eclipse.xtext.maven.parent</artifactId>
 	<packaging>pom</packaging>
 	<version>2.11.0-SNAPSHOT</version>
 
@@ -261,6 +261,45 @@
 			<properties>
 				<javadocExecutable>${java.home}/../bin/javadoc</javadocExecutable>
 			</properties>
+		</profile>
+		<profile>
+			<id>useJenkinsSnapshots</id>
+			<repositories>
+				<repository>
+					<id>lsapi-from-jenkins</id>
+					<url>http://services.typefox.io/open-source/jenkins/job/lsapi/lastStableBuild/artifact/build/maven-repository/</url>
+				</repository>
+				<repository>
+					<id>xtext-lib-from-jenkins</id>
+					<url>http://services.typefox.io/open-source/jenkins/job/xtext-lib/job/master/lastStableBuild/artifact/build/maven-repository/</url>
+				</repository>
+				<repository>
+					<id>xtext-core-from-jenkins</id>
+					<url>http://services.typefox.io/open-source/jenkins/job/xtext-core/job/master/lastStableBuild/artifact/build/maven-repository/</url>
+				</repository>
+				<repository>
+					<id>xtext-extras-from-jenkins</id>
+					<url>http://services.typefox.io/open-source/jenkins/job/xtext-extras/job/cd_issue22/lastStableBuild/artifact/build/maven-repository/</url>
+				</repository>
+			</repositories>
+			<pluginRepositories>
+				<pluginRepository>
+					<id>lsapi-from-jenkins</id>
+					<url>http://services.typefox.io/open-source/jenkins/job/lsapi/lastStableBuild/artifact/build/maven-repository/</url>
+				</pluginRepository>
+				<pluginRepository>
+					<id>xtext-lib-from-jenkins</id>
+					<url>http://services.typefox.io/open-source/jenkins/job/xtext-lib/job/master/lastStableBuild/artifact/build/maven-repository/</url>
+				</pluginRepository>
+				<pluginRepository>
+					<id>xtext-core-from-jenkins</id>
+					<url>http://services.typefox.io/open-source/jenkins/job/xtext-core/job/master/lastStableBuild/artifact/build/maven-repository/</url>
+				</pluginRepository>
+				<pluginRepository>
+					<id>xtext-extras-from-jenkins</id>
+					<url>http://services.typefox.io/open-source/jenkins/job/xtext-extras/job/cd_issue22/lastStableBuild/artifact/build/maven-repository/</url>
+				</pluginRepository>
+			</pluginRepositories>
 		</profile>
 		<profile>
 			<id>snapshot-build</id>
