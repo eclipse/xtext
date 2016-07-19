@@ -16,11 +16,12 @@ import io.typefox.lsapi.CodeLensParams;
 import io.typefox.lsapi.Command;
 import io.typefox.lsapi.CompletionItem;
 import io.typefox.lsapi.CompletionItemImpl;
+import io.typefox.lsapi.CompletionItemKind;
 import io.typefox.lsapi.CompletionList;
 import io.typefox.lsapi.CompletionListImpl;
 import io.typefox.lsapi.CompletionOptionsImpl;
-import io.typefox.lsapi.Diagnostic;
 import io.typefox.lsapi.DiagnosticImpl;
+import io.typefox.lsapi.DiagnosticSeverity;
 import io.typefox.lsapi.DidChangeConfigurationParams;
 import io.typefox.lsapi.DidChangeTextDocumentParams;
 import io.typefox.lsapi.DidChangeWatchedFilesParams;
@@ -32,6 +33,7 @@ import io.typefox.lsapi.DocumentHighlight;
 import io.typefox.lsapi.DocumentOnTypeFormattingParams;
 import io.typefox.lsapi.DocumentRangeFormattingParams;
 import io.typefox.lsapi.DocumentSymbolParams;
+import io.typefox.lsapi.FileChangeType;
 import io.typefox.lsapi.FileEvent;
 import io.typefox.lsapi.Hover;
 import io.typefox.lsapi.InitializeParams;
@@ -49,7 +51,6 @@ import io.typefox.lsapi.RangeImpl;
 import io.typefox.lsapi.ReferenceContext;
 import io.typefox.lsapi.ReferenceParams;
 import io.typefox.lsapi.RenameParams;
-import io.typefox.lsapi.ServerCapabilities;
 import io.typefox.lsapi.ServerCapabilitiesImpl;
 import io.typefox.lsapi.ShowMessageRequestParams;
 import io.typefox.lsapi.SignatureHelp;
@@ -58,6 +59,7 @@ import io.typefox.lsapi.TextDocumentContentChangeEvent;
 import io.typefox.lsapi.TextDocumentIdentifier;
 import io.typefox.lsapi.TextDocumentItem;
 import io.typefox.lsapi.TextDocumentPositionParams;
+import io.typefox.lsapi.TextDocumentSyncKind;
 import io.typefox.lsapi.TextEdit;
 import io.typefox.lsapi.TextEditImpl;
 import io.typefox.lsapi.VersionedTextDocumentIdentifier;
@@ -165,7 +167,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
       it.setReferencesProvider(Boolean.valueOf(true));
       it.setDocumentSymbolProvider(Boolean.valueOf(true));
       it.setWorkspaceSymbolProvider(Boolean.valueOf(true));
-      it.setTextDocumentSync(Integer.valueOf(ServerCapabilities.SYNC_INCREMENTAL));
+      it.setTextDocumentSync(TextDocumentSyncKind.Incremental);
       CompletionOptionsImpl _completionOptionsImpl = new CompletionOptionsImpl();
       final Procedure1<CompletionOptionsImpl> _function_1 = (CompletionOptionsImpl it_1) -> {
         it_1.setResolveProvider(false);
@@ -319,8 +321,8 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
       final ArrayList<URI> deletedFiles = CollectionLiterals.<URI>newArrayList();
       List<? extends FileEvent> _changes = params.getChanges();
       for (final FileEvent fileEvent : _changes) {
-        int _type = fileEvent.getType();
-        boolean _tripleEquals = (_type == FileEvent.TYPE_DELETED);
+        FileChangeType _type = fileEvent.getType();
+        boolean _tripleEquals = (_type == FileChangeType.Deleted);
         if (_tripleEquals) {
           String _uri = fileEvent.getUri();
           URI _uri_1 = this._uriExtensions.toUri(_uri);
@@ -376,27 +378,27 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
     final Procedure1<DiagnosticImpl> _function = (DiagnosticImpl it) -> {
       String _code = issue.getCode();
       it.setCode(_code);
-      int _switchResult = (int) 0;
+      DiagnosticSeverity _switchResult = null;
       Severity _severity = issue.getSeverity();
       if (_severity != null) {
         switch (_severity) {
           case ERROR:
-            _switchResult = Diagnostic.SEVERITY_ERROR;
+            _switchResult = DiagnosticSeverity.Error;
             break;
           case WARNING:
-            _switchResult = Diagnostic.SEVERITY_WARNING;
+            _switchResult = DiagnosticSeverity.Warning;
             break;
           case INFO:
-            _switchResult = Diagnostic.SEVERITY_INFO;
+            _switchResult = DiagnosticSeverity.Information;
             break;
           default:
-            _switchResult = Diagnostic.SEVERITY_HINT;
+            _switchResult = DiagnosticSeverity.Hint;
             break;
         }
       } else {
-        _switchResult = Diagnostic.SEVERITY_HINT;
+        _switchResult = DiagnosticSeverity.Hint;
       }
-      it.setSeverity(Integer.valueOf(_switchResult));
+      it.setSeverity(_switchResult);
       String _message = issue.getMessage();
       it.setMessage(_message);
       Integer _elvis = null;
@@ -504,71 +506,71 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
       String _proposal_2 = entry.getProposal();
       completionItem.setInsertText(_proposal_2);
     }
-    int _translateKind = this.translateKind(entry);
-    completionItem.setKind(Integer.valueOf(_translateKind));
+    CompletionItemKind _translateKind = this.translateKind(entry);
+    completionItem.setKind(_translateKind);
     return completionItem;
   }
   
-  protected int translateKind(final ContentAssistEntry entry) {
-    int _switchResult = (int) 0;
+  protected CompletionItemKind translateKind(final ContentAssistEntry entry) {
+    CompletionItemKind _switchResult = null;
     String _kind = entry.getKind();
     switch (_kind) {
       case ContentAssistEntry.KIND_CLASS:
-        _switchResult = CompletionItem.KIND_CLASS;
+        _switchResult = CompletionItemKind.Class;
         break;
       case ContentAssistEntry.KIND_COLOR:
-        _switchResult = CompletionItem.KIND_COLOR;
+        _switchResult = CompletionItemKind.Color;
         break;
       case ContentAssistEntry.KIND_CONSTRUCTOR:
-        _switchResult = CompletionItem.KIND_CONSTRUCTOR;
+        _switchResult = CompletionItemKind.Constructor;
         break;
       case ContentAssistEntry.KIND_ENUM:
-        _switchResult = CompletionItem.KIND_ENUM;
+        _switchResult = CompletionItemKind.Enum;
         break;
       case ContentAssistEntry.KIND_FIELD:
-        _switchResult = CompletionItem.KIND_FIELD;
+        _switchResult = CompletionItemKind.Field;
         break;
       case ContentAssistEntry.KIND_FILE:
-        _switchResult = CompletionItem.KIND_FILE;
+        _switchResult = CompletionItemKind.File;
         break;
       case ContentAssistEntry.KIND_FUNCTION:
-        _switchResult = CompletionItem.KIND_FUNCTION;
+        _switchResult = CompletionItemKind.Function;
         break;
       case ContentAssistEntry.KIND_INTERFACE:
-        _switchResult = CompletionItem.KIND_INTERFACE;
+        _switchResult = CompletionItemKind.Interface;
         break;
       case ContentAssistEntry.KIND_KEYWORD:
-        _switchResult = CompletionItem.KIND_KEYWORD;
+        _switchResult = CompletionItemKind.Keyword;
         break;
       case ContentAssistEntry.KIND_METHOD:
-        _switchResult = CompletionItem.KIND_METHOD;
+        _switchResult = CompletionItemKind.Method;
         break;
       case ContentAssistEntry.KIND_MODULE:
-        _switchResult = CompletionItem.KIND_MODULE;
+        _switchResult = CompletionItemKind.Module;
         break;
       case ContentAssistEntry.KIND_PROPERTY:
-        _switchResult = CompletionItem.KIND_PROPERTY;
+        _switchResult = CompletionItemKind.Property;
         break;
       case ContentAssistEntry.KIND_REFERENCE:
-        _switchResult = CompletionItem.KIND_REFERENCE;
+        _switchResult = CompletionItemKind.Reference;
         break;
       case ContentAssistEntry.KIND_SNIPPET:
-        _switchResult = CompletionItem.KIND_SNIPPET;
+        _switchResult = CompletionItemKind.Snippet;
         break;
       case ContentAssistEntry.KIND_TEXT:
-        _switchResult = CompletionItem.KIND_TEXT;
+        _switchResult = CompletionItemKind.Text;
         break;
       case ContentAssistEntry.KIND_UNIT:
-        _switchResult = CompletionItem.KIND_UNIT;
+        _switchResult = CompletionItemKind.Unit;
         break;
       case ContentAssistEntry.KIND_VALUE:
-        _switchResult = CompletionItem.KIND_VALUE;
+        _switchResult = CompletionItemKind.Value;
         break;
       case ContentAssistEntry.KIND_VARIABLE:
-        _switchResult = CompletionItem.KIND_VARIABLE;
+        _switchResult = CompletionItemKind.Variable;
         break;
       default:
-        _switchResult = CompletionItem.KIND_VALUE;
+        _switchResult = CompletionItemKind.Value;
         break;
     }
     return _switchResult;

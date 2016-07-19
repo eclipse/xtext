@@ -28,19 +28,19 @@ class WorkspaceSymbolTest extends AbstractTestLangLanguageServerTest {
 			query = 'F'
 			expectedSymbols = '''
 				symbol "Foo" {
-					kind: 0
+					kind: 7
 					location: MyModel.testlang [[0, 5] .. [0, 8]]
 				}
 				symbol "Foo.bar" {
-					kind: 0
+					kind: 7
 					location: MyModel.testlang [[1, 5] .. [1, 8]]
 				}
 				symbol "Foo.bar.int" {
-					kind: 0
+					kind: 7
 					location: MyModel.testlang [[1, 1] .. [1, 4]]
 				}
 				symbol "Bar.foo" {
-					kind: 0
+					kind: 7
 					location: MyModel.testlang [[4, 5] .. [4, 8]]
 				}
 			'''
@@ -61,19 +61,19 @@ class WorkspaceSymbolTest extends AbstractTestLangLanguageServerTest {
 			query = 'oO'
 			expectedSymbols = '''
 				symbol "Foo" {
-					kind: 0
+					kind: 7
 					location: MyModel.testlang [[0, 5] .. [0, 8]]
 				}
 				symbol "Foo.bar" {
-					kind: 0
+					kind: 7
 					location: MyModel.testlang [[1, 5] .. [1, 8]]
 				}
 				symbol "Foo.bar.int" {
-					kind: 0
+					kind: 7
 					location: MyModel.testlang [[1, 1] .. [1, 4]]
 				}
 				symbol "Bar.foo" {
-					kind: 0
+					kind: 7
 					location: MyModel.testlang [[4, 5] .. [4, 8]]
 				}
 			'''

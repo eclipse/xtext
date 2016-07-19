@@ -42,7 +42,7 @@ public class WorkspaceSymbolTest extends AbstractTestLangLanguageServerTest {
       _builder_1.append("symbol \"Foo\" {");
       _builder_1.newLine();
       _builder_1.append("\t");
-      _builder_1.append("kind: 0");
+      _builder_1.append("kind: 7");
       _builder_1.newLine();
       _builder_1.append("\t");
       _builder_1.append("location: MyModel.testlang [[0, 5] .. [0, 8]]");
@@ -52,7 +52,7 @@ public class WorkspaceSymbolTest extends AbstractTestLangLanguageServerTest {
       _builder_1.append("symbol \"Foo.bar\" {");
       _builder_1.newLine();
       _builder_1.append("\t");
-      _builder_1.append("kind: 0");
+      _builder_1.append("kind: 7");
       _builder_1.newLine();
       _builder_1.append("\t");
       _builder_1.append("location: MyModel.testlang [[1, 5] .. [1, 8]]");
@@ -62,7 +62,7 @@ public class WorkspaceSymbolTest extends AbstractTestLangLanguageServerTest {
       _builder_1.append("symbol \"Foo.bar.int\" {");
       _builder_1.newLine();
       _builder_1.append("\t");
-      _builder_1.append("kind: 0");
+      _builder_1.append("kind: 7");
       _builder_1.newLine();
       _builder_1.append("\t");
       _builder_1.append("location: MyModel.testlang [[1, 1] .. [1, 4]]");
@@ -72,7 +72,7 @@ public class WorkspaceSymbolTest extends AbstractTestLangLanguageServerTest {
       _builder_1.append("symbol \"Bar.foo\" {");
       _builder_1.newLine();
       _builder_1.append("\t");
-      _builder_1.append("kind: 0");
+      _builder_1.append("kind: 7");
       _builder_1.newLine();
       _builder_1.append("\t");
       _builder_1.append("location: MyModel.testlang [[4, 5] .. [4, 8]]");
@@ -108,7 +108,7 @@ public class WorkspaceSymbolTest extends AbstractTestLangLanguageServerTest {
       _builder_1.append("symbol \"Foo\" {");
       _builder_1.newLine();
       _builder_1.append("\t");
-      _builder_1.append("kind: 0");
+      _builder_1.append("kind: 7");
       _builder_1.newLine();
       _builder_1.append("\t");
       _builder_1.append("location: MyModel.testlang [[0, 5] .. [0, 8]]");
@@ -118,7 +118,7 @@ public class WorkspaceSymbolTest extends AbstractTestLangLanguageServerTest {
       _builder_1.append("symbol \"Foo.bar\" {");
       _builder_1.newLine();
       _builder_1.append("\t");
-      _builder_1.append("kind: 0");
+      _builder_1.append("kind: 7");
       _builder_1.newLine();
       _builder_1.append("\t");
       _builder_1.append("location: MyModel.testlang [[1, 5] .. [1, 8]]");
@@ -128,7 +128,7 @@ public class WorkspaceSymbolTest extends AbstractTestLangLanguageServerTest {
       _builder_1.append("symbol \"Foo.bar.int\" {");
       _builder_1.newLine();
       _builder_1.append("\t");
-      _builder_1.append("kind: 0");
+      _builder_1.append("kind: 7");
       _builder_1.newLine();
       _builder_1.append("\t");
       _builder_1.append("location: MyModel.testlang [[1, 1] .. [1, 4]]");
@@ -138,7 +138,7 @@ public class WorkspaceSymbolTest extends AbstractTestLangLanguageServerTest {
       _builder_1.append("symbol \"Bar.foo\" {");
       _builder_1.newLine();
       _builder_1.append("\t");
-      _builder_1.append("kind: 0");
+      _builder_1.append("kind: 7");
       _builder_1.newLine();
       _builder_1.append("\t");
       _builder_1.append("location: MyModel.testlang [[4, 5] .. [4, 8]]");

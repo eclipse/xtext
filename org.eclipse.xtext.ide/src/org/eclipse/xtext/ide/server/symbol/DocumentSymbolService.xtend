@@ -36,6 +36,7 @@ import org.eclipse.xtext.service.OperationCanceledManager
 import org.eclipse.xtext.util.CancelIndicator
 
 import static extension org.eclipse.emf.ecore.util.EcoreUtil.*
+import io.typefox.lsapi.SymbolKind
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -161,7 +162,7 @@ class DocumentSymbolService {
 		return object.fullyQualifiedName.symbolName
 	}
 
-	protected def int getSymbolKind(EObject object) {
+	protected def SymbolKind getSymbolKind(EObject object) {
 		return object.eClass.symbolKind
 	}
 
@@ -205,7 +206,7 @@ class DocumentSymbolService {
 		return description.qualifiedName.symbolName
 	}
 
-	protected def int getSymbolKind(IEObjectDescription description) {
+	protected def SymbolKind getSymbolKind(IEObjectDescription description) {
 		return description.EClass.symbolKind
 	}
 
@@ -213,9 +214,9 @@ class DocumentSymbolService {
 		return qualifiedName?.toString
 	}
 
-	protected def int getSymbolKind(EClass type) {
-		return 0
-//		return SymbolInformation.KIND_PROPERTY
+	protected def SymbolKind getSymbolKind(EClass type) {
+		//TODO implement meaningful
+		return SymbolKind.Property
 	}
 
 	protected def void doRead(IResourceAccess resourceAccess, URI objectURI, (EObject)=>void acceptor) {
