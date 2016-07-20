@@ -35,7 +35,7 @@ class SwtBotProjectHelper {
 		val shell = activeShell
 		views.findFirst[title == "Welcome"]?.close
 		perspectiveByLabel('Java').activate
-		menu('File').menu('New').menu('Project...').click
+		fileNew('Project...')
 		shell('New Project').activate
 		tree.expandNode('Java').select('Java Project')
 		button('Next >').click
@@ -62,7 +62,7 @@ class SwtBotProjectHelper {
 	}
 	
 	static def newJavaEditor(SWTWorkbenchBot it, String typeName, String packageName, String sourceFolderPath) {
-		menu('File').menu('New').menu('Class').click
+		fileNew('Class')
 		shell('New Java Class').activate
 		textWithLabel('Source folder:').text = sourceFolderPath
 		textWithLabel('Package:').text = packageName
@@ -79,7 +79,7 @@ class SwtBotProjectHelper {
 	
 	static def newXtendEditor(SWTWorkbenchBot it, String typeName, String packageName, String sourceFolderPath) {
 		try {
-			newXtendClass(it)
+			fileNew('Xtend Class')
 		} catch (WidgetNotFoundException e) {
 			it.shells.forEach[println('''Shell: '«text»', active: «active»''')]
 			SWTUtils.captureScreenshot('''«SWTBotPreferences.SCREENSHOTS_DIR»/MenuFileNotFound«System.currentTimeMillis».«SWTBotPreferences.SCREENSHOT_FORMAT»''',
@@ -94,14 +94,14 @@ class SwtBotProjectHelper {
 		editorByTitle(typeName + '.xtend').toTextEditor
 	}
 	
-	protected def static void newXtendClass(SWTWorkbenchBot it) {
+	protected def static void fileNew(SWTWorkbenchBot it, String newWhat) {
 		// sometimes, both in Eclipse and in Maven, SWTBot fails to find the
 		// File menu, saying widget is disposed.
 		// We try again a few times after sleeping some time
 		var retries = 3
 		for (i : 0..<retries) {
 			try {
-				menu('File').menu('New').menu('Xtend Class').click
+				menu('File').menu('New').menu(newWhat).click
 				return;
 			} catch (WidgetNotFoundException e) {
 				if (i == retries-1)
