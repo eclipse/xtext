@@ -169,7 +169,7 @@ abstract class AbstractLanguageServerTest implements Consumer<PublishDiagnostics
 
     protected def dispatch String toExpectation(SymbolInformation it) '''
         symbol "«name»" {
-            kind: «kind»
+            kind: «kind.value»
             location: «location.toExpectation»
             «IF !container.nullOrEmpty»
                 container: "«container»"

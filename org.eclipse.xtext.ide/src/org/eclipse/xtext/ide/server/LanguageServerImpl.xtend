@@ -73,6 +73,10 @@ import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.eclipse.xtext.validation.Issue
 
 import static extension io.typefox.lsapi.util.LsapiFactories.*
+import io.typefox.lsapi.TextDocumentSyncKind
+import io.typefox.lsapi.FileChangeType
+import io.typefox.lsapi.DiagnosticSeverity
+import io.typefox.lsapi.CompletionItemKind
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -110,7 +114,7 @@ import static extension io.typefox.lsapi.util.LsapiFactories.*
 			referencesProvider = true
 			documentSymbolProvider = true
 			workspaceSymbolProvider = true
-			textDocumentSync = ServerCapabilities.SYNC_INCREMENTAL
+			textDocumentSync = TextDocumentSyncKind.Incremental
 			completionProvider = new CompletionOptionsImpl => [
 				resolveProvider = false
 				triggerCharacters = #["."]
@@ -204,7 +208,7 @@ import static extension io.typefox.lsapi.util.LsapiFactories.*
 			val dirtyFiles = newArrayList
 			val deletedFiles = newArrayList
 			for (fileEvent : params.changes) {
-				if (fileEvent.type === FileEvent.TYPE_DELETED) {
+				if (fileEvent.type === FileChangeType.Deleted) {
 					deletedFiles += toUri(fileEvent.uri)
 				} else {
 					dirtyFiles += toUri(fileEvent.uri)
@@ -244,10 +248,10 @@ import static extension io.typefox.lsapi.util.LsapiFactories.*
 		new DiagnosticImpl => [
 			code = issue.code
 			severity = switch issue.severity {
-				case ERROR: Diagnostic.SEVERITY_ERROR
-				case WARNING: Diagnostic.SEVERITY_WARNING
-				case INFO: Diagnostic.SEVERITY_INFO
-				default: Diagnostic.SEVERITY_HINT
+				case ERROR: DiagnosticSeverity.Error
+				case WARNING: DiagnosticSeverity.Warning
+				case INFO: DiagnosticSeverity.Information
+				default: DiagnosticSeverity.Hint
 			}
 			message = issue.message
             val lineNumber = (issue.lineNumber ?: 1) - 1
@@ -300,25 +304,25 @@ import static extension io.typefox.lsapi.util.LsapiFactories.*
     
     protected def translateKind(ContentAssistEntry entry) {
         switch entry.kind {
-            case ContentAssistEntry.KIND_CLASS : CompletionItem.KIND_CLASS
-            case ContentAssistEntry.KIND_COLOR : CompletionItem.KIND_COLOR
-            case ContentAssistEntry.KIND_CONSTRUCTOR : CompletionItem.KIND_CONSTRUCTOR
-            case ContentAssistEntry.KIND_ENUM : CompletionItem.KIND_ENUM
-            case ContentAssistEntry.KIND_FIELD : CompletionItem.KIND_FIELD
-            case ContentAssistEntry.KIND_FILE : CompletionItem.KIND_FILE
-            case ContentAssistEntry.KIND_FUNCTION : CompletionItem.KIND_FUNCTION
-            case ContentAssistEntry.KIND_INTERFACE : CompletionItem.KIND_INTERFACE
-            case ContentAssistEntry.KIND_KEYWORD : CompletionItem.KIND_KEYWORD
-            case ContentAssistEntry.KIND_METHOD : CompletionItem.KIND_METHOD
-            case ContentAssistEntry.KIND_MODULE : CompletionItem.KIND_MODULE
-            case ContentAssistEntry.KIND_PROPERTY : CompletionItem.KIND_PROPERTY
-            case ContentAssistEntry.KIND_REFERENCE : CompletionItem.KIND_REFERENCE
-            case ContentAssistEntry.KIND_SNIPPET : CompletionItem.KIND_SNIPPET
-            case ContentAssistEntry.KIND_TEXT : CompletionItem.KIND_TEXT
-            case ContentAssistEntry.KIND_UNIT : CompletionItem.KIND_UNIT
-            case ContentAssistEntry.KIND_VALUE : CompletionItem.KIND_VALUE
-            case ContentAssistEntry.KIND_VARIABLE : CompletionItem.KIND_VARIABLE
-            default : CompletionItem.KIND_VALUE
+            case ContentAssistEntry.KIND_CLASS : CompletionItemKind.Class
+            case ContentAssistEntry.KIND_COLOR : CompletionItemKind.Color
+            case ContentAssistEntry.KIND_CONSTRUCTOR : CompletionItemKind.Constructor
+            case ContentAssistEntry.KIND_ENUM : CompletionItemKind.Enum
+            case ContentAssistEntry.KIND_FIELD : CompletionItemKind.Field
+            case ContentAssistEntry.KIND_FILE : CompletionItemKind.File
+            case ContentAssistEntry.KIND_FUNCTION : CompletionItemKind.Function
+            case ContentAssistEntry.KIND_INTERFACE : CompletionItemKind.Interface
+            case ContentAssistEntry.KIND_KEYWORD : CompletionItemKind.Keyword
+            case ContentAssistEntry.KIND_METHOD : CompletionItemKind.Method
+            case ContentAssistEntry.KIND_MODULE : CompletionItemKind.Module
+            case ContentAssistEntry.KIND_PROPERTY : CompletionItemKind.Property
+            case ContentAssistEntry.KIND_REFERENCE : CompletionItemKind.Reference
+            case ContentAssistEntry.KIND_SNIPPET : CompletionItemKind.Snippet
+            case ContentAssistEntry.KIND_TEXT : CompletionItemKind.Text
+            case ContentAssistEntry.KIND_UNIT : CompletionItemKind.Unit
+            case ContentAssistEntry.KIND_VALUE : CompletionItemKind.Value
+            case ContentAssistEntry.KIND_VARIABLE : CompletionItemKind.Variable
+            default : CompletionItemKind.Value
         }
     }
 

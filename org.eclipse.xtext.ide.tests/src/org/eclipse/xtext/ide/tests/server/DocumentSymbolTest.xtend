@@ -27,25 +27,25 @@ class DocumentSymbolTest extends AbstractTestLangLanguageServerTest {
 			'''
 			expectedSymbols = '''
 				symbol "Foo" {
-					kind: 0
+					kind: 7
 					location: MyModel.testlang [[0, 5] .. [0, 8]]
 				}
 				symbol "Foo.bar" {
-					kind: 0
+					kind: 7
 					location: MyModel.testlang [[1, 5] .. [1, 8]]
 					container: "Foo"
 				}
 				symbol "Foo.bar.int" {
-					kind: 0
+					kind: 7
 					location: MyModel.testlang [[1, 1] .. [1, 4]]
 					container: "Foo.bar"
 				}
 				symbol "Bar" {
-					kind: 0
+					kind: 7
 					location: MyModel.testlang [[3, 5] .. [3, 8]]
 				}
 				symbol "Bar.foo" {
-					kind: 0
+					kind: 7
 					location: MyModel.testlang [[4, 5] .. [4, 8]]
 					container: "Bar"
 				}
