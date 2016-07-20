@@ -155,10 +155,7 @@ public class SwtBotProjectHelper {
     SWTBotEclipseEditor _xblockexpression = null;
     {
       try {
-        SWTBotMenu _menu = it.menu("File");
-        SWTBotMenu _menu_1 = _menu.menu("New");
-        SWTBotMenu _menu_2 = _menu_1.menu("Xtend Class");
-        _menu_2.click();
+        SwtBotProjectHelper.newXtendClass(it);
       } catch (final Throwable _t) {
         if (_t instanceof WidgetNotFoundException) {
           final WidgetNotFoundException e = (WidgetNotFoundException)_t;
@@ -208,6 +205,34 @@ public class SwtBotProjectHelper {
       _xblockexpression = _editorByTitle.toTextEditor();
     }
     return _xblockexpression;
+  }
+  
+  protected static void newXtendClass(final SWTWorkbenchBot it) {
+    int retries = 3;
+    ExclusiveRange _doubleDotLessThan = new ExclusiveRange(0, retries, true);
+    for (final Integer i : _doubleDotLessThan) {
+      try {
+        SWTBotMenu _menu = it.menu("File");
+        SWTBotMenu _menu_1 = _menu.menu("New");
+        SWTBotMenu _menu_2 = _menu_1.menu("Xtend Class");
+        _menu_2.click();
+        return;
+      } catch (final Throwable _t) {
+        if (_t instanceof WidgetNotFoundException) {
+          final WidgetNotFoundException e = (WidgetNotFoundException)_t;
+          if (((i).intValue() == (retries - 1))) {
+            throw e;
+          }
+          String _message = e.getMessage();
+          String _plus = ("failed: " + _message);
+          InputOutput.<String>println(_plus);
+          InputOutput.<String>println("retrying...");
+          it.sleep(1000);
+        } else {
+          throw Exceptions.sneakyThrow(_t);
+        }
+      }
+    }
   }
   
   public static void closeAllEditors(final SWTWorkbenchBot it) {
