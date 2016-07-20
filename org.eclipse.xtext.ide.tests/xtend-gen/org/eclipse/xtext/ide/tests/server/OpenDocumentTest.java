@@ -10,7 +10,7 @@ package org.eclipse.xtext.ide.tests.server;
 import io.typefox.lsapi.Diagnostic;
 import io.typefox.lsapi.DidChangeTextDocumentParamsImpl;
 import io.typefox.lsapi.DidChangeWatchedFilesParamsImpl;
-import io.typefox.lsapi.FileEvent;
+import io.typefox.lsapi.FileChangeType;
 import io.typefox.lsapi.FileEventImpl;
 import io.typefox.lsapi.PositionImpl;
 import io.typefox.lsapi.RangeImpl;
@@ -54,7 +54,7 @@ public class OpenDocumentTest extends AbstractTestLangLanguageServerTest {
     _builder_1.newLine();
     final String path = this.operator_mappedTo("MyType2.testlang", _builder_1);
     WorkspaceService _workspaceService = this.languageServer.getWorkspaceService();
-    FileEventImpl _newFileEvent = LsapiFactories.newFileEvent(path, FileEvent.TYPE_CREATED);
+    FileEventImpl _newFileEvent = LsapiFactories.newFileEvent(path, FileChangeType.Created);
     DidChangeWatchedFilesParamsImpl _newDidChangeWatchedFilesParams = LsapiFactories.newDidChangeWatchedFilesParams(Collections.<FileEventImpl>unmodifiableList(CollectionLiterals.<FileEventImpl>newArrayList(_newFileEvent)));
     _workspaceService.didChangeWatchedFiles(_newDidChangeWatchedFilesParams);
     List<? extends Diagnostic> _get_1 = this.diagnostics.get(firstFile);

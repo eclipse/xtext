@@ -23,8 +23,8 @@ public class NoJdtTestLanguageFormatter extends AbstractFormatter2 {
   
   protected void _format(final Model model, @Extension final IFormattableDocument document) {
     EList<Greeting> _greetings = model.getGreetings();
-    for (final Greeting greetings : _greetings) {
-      this.format(greetings, document);
+    for (final Greeting greeting : _greetings) {
+      document.<Greeting>format(greeting);
     }
   }
   

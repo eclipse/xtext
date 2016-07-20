@@ -52,7 +52,9 @@ XtextGeneratorLanguage {
 	fragment = generator.GeneratorFragment2 auto-inject {}
 
 	// formatter API
-	fragment = formatting.Formatter2Fragment2 auto-inject {}
+	fragment = formatting.Formatter2Fragment2 auto-inject {
+		generateXtendStub=true
+	}
 
 	// labeling API
 	fragment = ui.labeling.LabelProviderFragment2 auto-inject {}
