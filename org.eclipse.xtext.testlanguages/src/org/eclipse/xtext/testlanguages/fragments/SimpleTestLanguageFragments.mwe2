@@ -50,7 +50,9 @@ XtextGeneratorLanguage {
 	fragment = builder.BuilderIntegrationFragment2 {}
 
 	// formatter API 
-	fragment = formatting.Formatter2Fragment2 {}
+	fragment = formatting.Formatter2Fragment2 {
+		generateXtendStub=true
+	}
 
 	// labeling API 
 	fragment = ui.labeling.LabelProviderFragment2 {}
