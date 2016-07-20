@@ -74,10 +74,7 @@ public class SwtBotProjectHelper {
       }
       SWTBotPerspective _perspectiveByLabel = it.perspectiveByLabel("Java");
       _perspectiveByLabel.activate();
-      SWTBotMenu _menu = it.menu("File");
-      SWTBotMenu _menu_1 = _menu.menu("New");
-      SWTBotMenu _menu_2 = _menu_1.menu("Project...");
-      _menu_2.click();
+      SwtBotProjectHelper.fileNew(it, "Project...");
       SWTBotShell _shell = it.shell("New Project");
       _shell.activate();
       SWTBotTree _tree = it.tree();
@@ -123,10 +120,7 @@ public class SwtBotProjectHelper {
   public static SWTBotEclipseEditor newJavaEditor(final SWTWorkbenchBot it, final String typeName, final String packageName, final String sourceFolderPath) {
     SWTBotEclipseEditor _xblockexpression = null;
     {
-      SWTBotMenu _menu = it.menu("File");
-      SWTBotMenu _menu_1 = _menu.menu("New");
-      SWTBotMenu _menu_2 = _menu_1.menu("Class");
-      _menu_2.click();
+      SwtBotProjectHelper.fileNew(it, "Class");
       SWTBotShell _shell = it.shell("New Java Class");
       _shell.activate();
       SWTBotText _textWithLabel = it.textWithLabel("Source folder:");
@@ -155,10 +149,7 @@ public class SwtBotProjectHelper {
     SWTBotEclipseEditor _xblockexpression = null;
     {
       try {
-        SWTBotMenu _menu = it.menu("File");
-        SWTBotMenu _menu_1 = _menu.menu("New");
-        SWTBotMenu _menu_2 = _menu_1.menu("Xtend Class");
-        _menu_2.click();
+        SwtBotProjectHelper.fileNew(it, "Xtend Class");
       } catch (final Throwable _t) {
         if (_t instanceof WidgetNotFoundException) {
           final WidgetNotFoundException e = (WidgetNotFoundException)_t;
@@ -208,6 +199,34 @@ public class SwtBotProjectHelper {
       _xblockexpression = _editorByTitle.toTextEditor();
     }
     return _xblockexpression;
+  }
+  
+  protected static void fileNew(final SWTWorkbenchBot it, final String newWhat) {
+    int retries = 3;
+    ExclusiveRange _doubleDotLessThan = new ExclusiveRange(0, retries, true);
+    for (final Integer i : _doubleDotLessThan) {
+      try {
+        SWTBotMenu _menu = it.menu("File");
+        SWTBotMenu _menu_1 = _menu.menu("New");
+        SWTBotMenu _menu_2 = _menu_1.menu(newWhat);
+        _menu_2.click();
+        return;
+      } catch (final Throwable _t) {
+        if (_t instanceof WidgetNotFoundException) {
+          final WidgetNotFoundException e = (WidgetNotFoundException)_t;
+          if (((i).intValue() == (retries - 1))) {
+            throw e;
+          }
+          String _message = e.getMessage();
+          String _plus = ("failed: " + _message);
+          InputOutput.<String>println(_plus);
+          InputOutput.<String>println("retrying...");
+          it.sleep(1000);
+        } else {
+          throw Exceptions.sneakyThrow(_t);
+        }
+      }
+    }
   }
   
   public static void closeAllEditors(final SWTWorkbenchBot it) {

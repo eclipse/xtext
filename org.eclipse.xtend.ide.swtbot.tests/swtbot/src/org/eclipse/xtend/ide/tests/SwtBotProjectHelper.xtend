@@ -7,18 +7,18 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.tests
 
+import org.eclipse.core.resources.ResourcesPlugin
 import org.eclipse.swtbot.eclipse.finder.SWTWorkbenchBot
 import org.eclipse.swtbot.eclipse.finder.widgets.SWTBotEclipseEditor
-import org.eclipse.swtbot.swt.finder.finders.ContextMenuHelper
-import org.eclipse.swtbot.swt.finder.widgets.SWTBotMenu
-import org.eclipse.xtext.xbase.lib.Pair
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException
-import org.eclipse.core.resources.ResourcesPlugin
+import org.eclipse.swtbot.swt.finder.finders.ContextMenuHelper
+import org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences
+import org.eclipse.swtbot.swt.finder.utils.SWTUtils
+import org.eclipse.swtbot.swt.finder.widgets.AbstractSWTBot
+import org.eclipse.swtbot.swt.finder.widgets.SWTBotMenu
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotTree
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotTreeItem
-import org.eclipse.swtbot.swt.finder.widgets.AbstractSWTBot
-import org.eclipse.swtbot.swt.finder.utils.SWTUtils
-import org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences
+import org.eclipse.xtext.xbase.lib.Pair
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -35,7 +35,7 @@ class SwtBotProjectHelper {
 		val shell = activeShell
 		views.findFirst[title == "Welcome"]?.close
 		perspectiveByLabel('Java').activate
-		menu('File').menu('New').menu('Project...').click
+		fileNew('Project...')
 		shell('New Project').activate
 		tree.expandNode('Java').select('Java Project')
 		button('Next >').click
@@ -62,7 +62,7 @@ class SwtBotProjectHelper {
 	}
 	
 	static def newJavaEditor(SWTWorkbenchBot it, String typeName, String packageName, String sourceFolderPath) {
-		menu('File').menu('New').menu('Class').click
+		fileNew('Class')
 		shell('New Java Class').activate
 		textWithLabel('Source folder:').text = sourceFolderPath
 		textWithLabel('Package:').text = packageName
@@ -79,7 +79,7 @@ class SwtBotProjectHelper {
 	
 	static def newXtendEditor(SWTWorkbenchBot it, String typeName, String packageName, String sourceFolderPath) {
 		try {
-			menu('File').menu('New').menu('Xtend Class').click
+			fileNew('Xtend Class')
 		} catch (WidgetNotFoundException e) {
 			it.shells.forEach[println('''Shell: '«text»', active: «active»''')]
 			SWTUtils.captureScreenshot('''«SWTBotPreferences.SCREENSHOTS_DIR»/MenuFileNotFound«System.currentTimeMillis».«SWTBotPreferences.SCREENSHOT_FORMAT»''',
@@ -92,6 +92,25 @@ class SwtBotProjectHelper {
 		textWithLabel('Name:').text = typeName
 		button('Finish').click
 		editorByTitle(typeName + '.xtend').toTextEditor
+	}
+	
+	protected def static void fileNew(SWTWorkbenchBot it, String newWhat) {
+		// sometimes, both in Eclipse and in Maven, SWTBot fails to find the
+		// File menu, saying widget is disposed.
+		// We try again a few times after sleeping some time
+		var retries = 3
+		for (i : 0..<retries) {
+			try {
+				menu('File').menu('New').menu(newWhat).click
+				return;
+			} catch (WidgetNotFoundException e) {
+				if (i == retries-1)
+					throw e
+				println("failed: " + e.message)
+				println("retrying...")
+				sleep(1000)
+			}
+		}
 	}
 	
 	static def closeAllEditors(SWTWorkbenchBot it) {
