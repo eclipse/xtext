@@ -13,6 +13,7 @@ import org.junit.Test
 import static org.junit.Assert.*
 
 import static extension io.typefox.lsapi.util.LsapiFactories.*
+import io.typefox.lsapi.FileChangeType
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -61,7 +62,7 @@ class ServerTest extends AbstractTestLangLanguageServerTest {
         '''
         
     	languageServer.getWorkspaceService.didChangeWatchedFiles(
-    		#[newFileEvent(path, FileEvent.TYPE_CREATED)].newDidChangeWatchedFilesParams
+    		#[newFileEvent(path, FileChangeType.Created)].newDidChangeWatchedFilesParams
     	)
     	assertNotNull(diagnostics.get(path))
     	assertTrue(diagnostics.values.join(','), diagnostics.values.forall[empty])

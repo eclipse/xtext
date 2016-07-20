@@ -14,6 +14,7 @@ import io.typefox.lsapi.Location;
 import io.typefox.lsapi.LocationImpl;
 import io.typefox.lsapi.SymbolInformation;
 import io.typefox.lsapi.SymbolInformationImpl;
+import io.typefox.lsapi.SymbolKind;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashMap;
@@ -169,7 +170,7 @@ public class DocumentSymbolService {
     }
     final SymbolInformationImpl symbol = new SymbolInformationImpl();
     symbol.setName(symbolName);
-    int _symbolKind = this.getSymbolKind(object);
+    SymbolKind _symbolKind = this.getSymbolKind(object);
     symbol.setKind(_symbolKind);
     LocationImpl _newLocation = this._documentExtensions.newLocation(object);
     symbol.setLocation(_newLocation);
@@ -181,7 +182,7 @@ public class DocumentSymbolService {
     return this.getSymbolName(_fullyQualifiedName);
   }
   
-  protected int getSymbolKind(final EObject object) {
+  protected SymbolKind getSymbolKind(final EObject object) {
     EClass _eClass = object.eClass();
     return this.getSymbolKind(_eClass);
   }
@@ -225,7 +226,7 @@ public class DocumentSymbolService {
     }
     final SymbolInformationImpl symbol = new SymbolInformationImpl();
     symbol.setName(symbolName);
-    int _symbolKind = this.getSymbolKind(description);
+    SymbolKind _symbolKind = this.getSymbolKind(description);
     symbol.setKind(_symbolKind);
     return symbol;
   }
@@ -235,7 +236,7 @@ public class DocumentSymbolService {
     return this.getSymbolName(_qualifiedName);
   }
   
-  protected int getSymbolKind(final IEObjectDescription description) {
+  protected SymbolKind getSymbolKind(final IEObjectDescription description) {
     EClass _eClass = description.getEClass();
     return this.getSymbolKind(_eClass);
   }
@@ -248,8 +249,8 @@ public class DocumentSymbolService {
     return _string;
   }
   
-  protected int getSymbolKind(final EClass type) {
-    return 0;
+  protected SymbolKind getSymbolKind(final EClass type) {
+    return SymbolKind.Property;
   }
   
   protected void doRead(final IReferenceFinder.IResourceAccess resourceAccess, final URI objectURI, final Procedure1<? super EObject> acceptor) {
