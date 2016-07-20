@@ -26,11 +26,13 @@ import org.eclipse.xtext.resource.impl.ResourceServiceProviderRegistryImpl;
 @Singleton
 @SuppressWarnings("all")
 public class ResourceServiceProviderServiceLoader implements Provider<IResourceServiceProvider.Registry> {
-  private static ServiceLoader<ISetup> setupLoader = ServiceLoader.<ISetup>load(ISetup.class);
+  private ServiceLoader<ISetup> setupLoader = ServiceLoader.<ISetup>load(ISetup.class);
   
-  private static IResourceServiceProvider.Registry loadRegistry() {
+  private IResourceServiceProvider.Registry registry = this.loadRegistry();
+  
+  private IResourceServiceProvider.Registry loadRegistry() {
     final ResourceServiceProviderRegistryImpl registry = new ResourceServiceProviderRegistryImpl();
-    for (final ISetup cp : ResourceServiceProviderServiceLoader.setupLoader) {
+    for (final ISetup cp : this.setupLoader) {
       {
         final Injector injector = cp.createInjectorAndDoEMFRegistration();
         final IResourceServiceProvider resourceServiceProvider = injector.<IResourceServiceProvider>getInstance(IResourceServiceProvider.class);
@@ -56,10 +58,8 @@ public class ResourceServiceProviderServiceLoader implements Provider<IResourceS
     return registry;
   }
   
-  private static IResourceServiceProvider.Registry registry = ResourceServiceProviderServiceLoader.loadRegistry();
-  
   @Override
   public IResourceServiceProvider.Registry get() {
-    return ResourceServiceProviderServiceLoader.registry;
+    return this.registry;
   }
 }
