@@ -1,1 +1,0 @@
-BuilderStateFactoryImpl contains code that is not annotated with @generated!

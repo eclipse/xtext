@@ -1,3 +1,0 @@
-dependencies {
-	ideaProvided project(':org.eclipse.xtext.idea')
-}

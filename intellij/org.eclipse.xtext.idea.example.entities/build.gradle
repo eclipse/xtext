@@ -1,4 +1,0 @@
-dependencies {
-	compile "org.eclipse.xtext:org.eclipse.xtext.xbase:${version}"
-	compile "org.eclipse.xtext:org.eclipse.xtext.ide:${version}"
-}

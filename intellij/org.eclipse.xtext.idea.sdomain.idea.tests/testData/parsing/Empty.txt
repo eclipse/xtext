@@ -1,3 +1,0 @@
-org.eclipse.xtext.idea.sdomain.idea.lang.psi.impl.SDomainFileImpl:Empty.sdomain(0,0)
-  org.eclipse.xtext.psi.impl.PsiEObjectImpl(File_ELEMENT_TYPE)(0,0)
-    <empty list>

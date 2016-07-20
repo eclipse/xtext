@@ -1,4 +1,0 @@
-import "classpath:/org/eclipse/xtext/scoping/index/IndexAwareResourcesetTest.importuritestlanguage"
-
-type C extends B
-type D extends A
