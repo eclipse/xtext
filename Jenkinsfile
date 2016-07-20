@@ -5,7 +5,7 @@ node {
 		checkout scm
 			
 		stage 'Gradle Build'
-		sh "./gradlew cleanLocalMavenRepo clean build createLocalMavenRepo --refresh-dependencies --continue"
+		sh "./gradlew -PuseJenkinsSnapshots=true cleanLocalMavenRepo clean build createLocalMavenRepo --refresh-dependencies --continue"
 		archive 'build/maven-repository/**/*.*'
 		
 		stage 'Maven Build'
