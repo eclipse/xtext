@@ -5,12 +5,13 @@ def jenkinsPipelineRepo = { jobName -> "http://services.typefox.io/open-source/j
 
 repositories {
 	jcenter()
-	if (findProperty('useSonatypeSnapshots') == 'true') {
-		maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
-	} else {
+	if (findProperty('useJenkinsSnapshots') == 'true') {
 		maven { url jenkinsRepo('lsapi') }
 		maven { url jenkinsPipelineRepo('xtext-lib') }
 		maven { url jenkinsPipelineRepo('xtext-core') }
 		maven { url jenkinsPipelineRepo('xtext-extras') }
+	} else {
+		mavenLocal()
+		maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
 	}
 }
