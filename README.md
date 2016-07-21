@@ -20,5 +20,5 @@ Please check the individual repositories for instructions for building and contr
 
 ## Developer Resources
 
- - [CONTRIBUTING.md](https://github.com/eclipse/xtext/blob/master/CONTRIBUTING.md): report bugs, setup your workspace, submit your changes, etc.
- - [QUALITY_GUIDELINES.md](https://github.com/eclipse/xtext/blob/master/QUALITY_GUIDELINES.md): how to craft high-quality code changes, commits and pull-requests.
+ - [Contributing](https://github.com/eclipse/xtext/blob/master/CONTRIBUTING.md): report bugs, setup your workspace, submit your changes, etc.
+ - [Quality Guidelines](https://github.com/eclipse/xtext/blob/master/QUALITY_GUIDELINES.md): how to craft high-quality code changes, commits and pull-requests.
