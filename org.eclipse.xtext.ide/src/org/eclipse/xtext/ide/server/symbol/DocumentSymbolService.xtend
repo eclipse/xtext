@@ -12,7 +12,8 @@ import com.google.inject.Provider
 import com.google.inject.Singleton
 import io.typefox.lsapi.Location
 import io.typefox.lsapi.SymbolInformation
-import io.typefox.lsapi.SymbolInformationImpl
+import io.typefox.lsapi.SymbolKind
+import io.typefox.lsapi.impl.SymbolInformationImpl
 import java.util.List
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.EClass
@@ -36,7 +37,6 @@ import org.eclipse.xtext.service.OperationCanceledManager
 import org.eclipse.xtext.util.CancelIndicator
 
 import static extension org.eclipse.emf.ecore.util.EcoreUtil.*
-import io.typefox.lsapi.SymbolKind
 
 /**
  * @author kosyakov - Initial contribution and API

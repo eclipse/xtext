@@ -9,13 +9,13 @@ package org.eclipse.xtext.ide.tests.server;
 
 import io.typefox.lsapi.Diagnostic;
 import io.typefox.lsapi.DidChangeTextDocumentParams;
-import io.typefox.lsapi.DidChangeWatchedFilesParamsImpl;
 import io.typefox.lsapi.FileChangeType;
-import io.typefox.lsapi.FileEventImpl;
-import io.typefox.lsapi.PositionImpl;
 import io.typefox.lsapi.builders.DidChangeTextDocumentParamsBuilder;
 import io.typefox.lsapi.builders.TextDocumentContentChangeEventBuilder;
 import io.typefox.lsapi.builders.VersionedTextDocumentIdentifierBuilder;
+import io.typefox.lsapi.impl.DidChangeWatchedFilesParamsImpl;
+import io.typefox.lsapi.impl.FileEventImpl;
+import io.typefox.lsapi.impl.PositionImpl;
 import io.typefox.lsapi.services.WorkspaceService;
 import java.util.Collections;
 import java.util.List;

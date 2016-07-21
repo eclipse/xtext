@@ -7,9 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.tests.server
 
-import io.typefox.lsapi.DidChangeWatchedFilesParamsImpl
 import io.typefox.lsapi.FileChangeType
-import io.typefox.lsapi.FileEventImpl
+import io.typefox.lsapi.impl.DidChangeWatchedFilesParamsImpl
+import io.typefox.lsapi.impl.FileEventImpl
 import org.junit.Test
 
 import static org.junit.Assert.*

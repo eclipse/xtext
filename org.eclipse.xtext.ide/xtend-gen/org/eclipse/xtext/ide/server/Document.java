@@ -8,9 +8,9 @@
 package org.eclipse.xtext.ide.server;
 
 import io.typefox.lsapi.Position;
-import io.typefox.lsapi.PositionImpl;
 import io.typefox.lsapi.Range;
 import io.typefox.lsapi.TextEdit;
+import io.typefox.lsapi.impl.PositionImpl;
 import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;

@@ -8,8 +8,8 @@
 package org.eclipse.xtext.ide.tests.server;
 
 import com.google.common.base.Objects;
-import io.typefox.lsapi.InitializeParamsImpl;
 import io.typefox.lsapi.InitializeResult;
+import io.typefox.lsapi.impl.InitializeParamsImpl;
 import io.typefox.lsapi.services.json.JsonBasedLanguageServer;
 import io.typefox.lsapi.services.json.LanguageServerProtocol;
 import java.io.InputStream;

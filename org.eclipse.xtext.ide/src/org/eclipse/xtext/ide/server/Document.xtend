@@ -8,8 +8,8 @@
 package org.eclipse.xtext.ide.server
 
 import io.typefox.lsapi.Position
-import io.typefox.lsapi.PositionImpl
 import io.typefox.lsapi.TextEdit
+import io.typefox.lsapi.impl.PositionImpl
 import org.eclipse.xtend.lib.annotations.Data
 
 /**

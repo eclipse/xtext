@@ -9,9 +9,9 @@ package org.eclipse.xtext.ide.server
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
-import io.typefox.lsapi.LocationImpl
-import io.typefox.lsapi.PositionImpl
-import io.typefox.lsapi.RangeImpl
+import io.typefox.lsapi.impl.LocationImpl
+import io.typefox.lsapi.impl.PositionImpl
+import io.typefox.lsapi.impl.RangeImpl
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.EStructuralFeature
 import org.eclipse.emf.ecore.resource.Resource

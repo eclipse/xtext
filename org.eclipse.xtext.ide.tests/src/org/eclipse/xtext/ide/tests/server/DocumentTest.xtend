@@ -7,9 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.tests.server
 
-import io.typefox.lsapi.PositionImpl
-import io.typefox.lsapi.RangeImpl
-import io.typefox.lsapi.TextEditImpl
+import io.typefox.lsapi.impl.PositionImpl
+import io.typefox.lsapi.impl.RangeImpl
+import io.typefox.lsapi.impl.TextEditImpl
 import org.eclipse.xtext.ide.server.Document
 import org.junit.Test
 

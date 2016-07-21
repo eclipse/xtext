@@ -8,11 +8,11 @@
 package org.eclipse.xtext.ide.tests.server;
 
 import io.typefox.lsapi.Diagnostic;
-import io.typefox.lsapi.DidChangeWatchedFilesParamsImpl;
 import io.typefox.lsapi.FileChangeType;
-import io.typefox.lsapi.FileEventImpl;
 import io.typefox.lsapi.Position;
 import io.typefox.lsapi.Range;
+import io.typefox.lsapi.impl.DidChangeWatchedFilesParamsImpl;
+import io.typefox.lsapi.impl.FileEventImpl;
 import io.typefox.lsapi.services.WorkspaceService;
 import java.util.Collection;
 import java.util.Collections;

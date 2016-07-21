@@ -10,8 +10,8 @@ package org.eclipse.xtext.ide.server.hover
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import io.typefox.lsapi.Hover
-import io.typefox.lsapi.HoverImpl
-import io.typefox.lsapi.MarkedStringImpl
+import io.typefox.lsapi.impl.HoverImpl
+import io.typefox.lsapi.impl.MarkedStringImpl
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider
 import org.eclipse.xtext.ide.server.DocumentExtensions
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper
