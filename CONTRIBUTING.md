@@ -7,7 +7,7 @@ This page explains common tasks related to working with Xtext's source code.
 (explanation may be repository specific)
 
 ## Contribute via Fork
-All you need is a gihub account.
+All you need is a Github account.
  1. make sure there is a Github issue for what you want to work on
  2. announce in the comments section that you want to work on the issue. Also describe the solution you want to implement. To improve the chances for your contribution to be accepted, you'll want to wait for the feedback of the committers. 
  3. Implement your change
