@@ -26,7 +26,7 @@ class IdeContentProposalCreator {
 	 * Returns an entry with the given proposal and the prefix from the context, or null if the proposal is not valid.
 	 */
 	def ContentAssistEntry createProposal(String proposal, ContentAssistContext context) {
-		createProposal(proposal, context.prefix, context, ContentAssistEntry.KIND_UNKOWN, null)
+		createProposal(proposal, context.prefix, context, ContentAssistEntry.KIND_UNKNOWN, null)
 	}
 	
 	/**
@@ -34,7 +34,7 @@ class IdeContentProposalCreator {
 	 * If it is valid, the initializer function is applied to it.
 	 */
 	def ContentAssistEntry createProposal(String proposal, ContentAssistContext context, (ContentAssistEntry)=>void init) {
-		createProposal(proposal, context.prefix, context, ContentAssistEntry.KIND_UNKOWN, init)
+		createProposal(proposal, context.prefix, context, ContentAssistEntry.KIND_UNKNOWN, init)
 	}
 	
 	/**

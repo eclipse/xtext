@@ -72,8 +72,9 @@ class ContentAssistEntry {
 	
 	/**
 	 * The kind of element that is proposed. Could be one of the constants below something specific a concrete client understands.
+	 * not null
 	 */
-	String kind
+	String kind = org.eclipse.xtext.ide.editor.contentassist.ContentAssistEntry.KIND_UNKNOWN
 	
 	public static val KIND_TEXT = "TEXT"
     public static val KIND_METHOD = "METHOD"
@@ -93,6 +94,6 @@ class ContentAssistEntry {
     public static val KIND_COLOR = "COLOR"
     public static val KIND_FILE = "FILE"
     public static val KIND_REFERENCE = "REFERENCE"
-    public static val KIND_UNKOWN = "UNKOWN"
+    public static val KIND_UNKNOWN = "UNKOWN"
     
 }

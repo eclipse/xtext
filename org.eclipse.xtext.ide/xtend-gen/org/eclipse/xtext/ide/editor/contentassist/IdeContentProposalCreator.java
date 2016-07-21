@@ -35,7 +35,7 @@ public class IdeContentProposalCreator {
    */
   public ContentAssistEntry createProposal(final String proposal, final ContentAssistContext context) {
     String _prefix = context.getPrefix();
-    return this.createProposal(proposal, _prefix, context, ContentAssistEntry.KIND_UNKOWN, null);
+    return this.createProposal(proposal, _prefix, context, ContentAssistEntry.KIND_UNKNOWN, null);
   }
   
   /**
@@ -44,7 +44,7 @@ public class IdeContentProposalCreator {
    */
   public ContentAssistEntry createProposal(final String proposal, final ContentAssistContext context, final Procedure1<? super ContentAssistEntry> init) {
     String _prefix = context.getPrefix();
-    return this.createProposal(proposal, _prefix, context, ContentAssistEntry.KIND_UNKOWN, init);
+    return this.createProposal(proposal, _prefix, context, ContentAssistEntry.KIND_UNKNOWN, init);
   }
   
   /**

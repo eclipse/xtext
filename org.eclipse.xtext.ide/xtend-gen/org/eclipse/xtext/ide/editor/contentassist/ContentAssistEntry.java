@@ -74,8 +74,9 @@ public class ContentAssistEntry {
   
   /**
    * The kind of element that is proposed. Could be one of the constants below something specific a concrete client understands.
+   * not null
    */
-  private String kind;
+  private String kind = ContentAssistEntry.KIND_UNKNOWN;
   
   public final static String KIND_TEXT = "TEXT";
   
@@ -113,7 +114,7 @@ public class ContentAssistEntry {
   
   public final static String KIND_REFERENCE = "REFERENCE";
   
-  public final static String KIND_UNKOWN = "UNKOWN";
+  public final static String KIND_UNKNOWN = "UNKOWN";
   
   @Pure
   public String getPrefix() {
