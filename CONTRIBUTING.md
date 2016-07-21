@@ -14,7 +14,7 @@ All you need is a Github account.
  4. Run the Maven/Gradle build locally to see if everything compiles and all tests pass
  5. create a pull request
 
-## Contribute for Committers
+## Contributing for Committers
 You're a committer if you have write-access to the Xtext git-repositories.
  1. make sure there is a Github issue for what you want to work on
  2. assign the issue to you
