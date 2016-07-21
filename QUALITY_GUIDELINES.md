@@ -1,6 +1,6 @@
 This page lists criteria that code, commits and pull requests should fulfill.
 
-## Commits and Pull Request
+## Commits and Pull Requests
  1. Commit messages should have a short message and a description. The description should explain: (a) what's changed. (b) What problem is fixed or what feature does work now (c) What alternative solutions were discarded and why.
  2. Commit messages should refer to the Github Issue, if there is one
  3. Pull Requests must have a cleaned-up sequence of commits. Do not put unrelated changes in the same commit. Squash commits if they contribute to the same logical change.
