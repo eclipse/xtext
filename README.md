@@ -18,7 +18,7 @@ This is an umbrella repository for the following modules.
 
 Please check the individual repositories for instructions for building and contributing.
 
-## Issues
+## Developer Resources
 
-This project doesn't have 'Issues' enabled. Please add any issues on the individual projects (see above).
-When in doubt, use [xtext-core](https://github.com/eclipse/xtext-core/issues).
+ - [CONTRIBUTING.md](https://github.com/eclipse/xtext/blob/master/CONTRIBUTING.md): report bugs, setup your workspace, submit your changes, etc.
+ - [QUALITY_GUIDELINES.md](https://github.com/eclipse/xtext/blob/master/QUALITY_GUIDELINES.md): how to craft high-quality code changes, commits and pull-requests.
