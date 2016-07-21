@@ -8,21 +8,22 @@
 package org.eclipse.xtext.ide.tests.server;
 
 import io.typefox.lsapi.Diagnostic;
-import io.typefox.lsapi.DidChangeTextDocumentParamsImpl;
+import io.typefox.lsapi.DidChangeTextDocumentParams;
 import io.typefox.lsapi.DidChangeWatchedFilesParamsImpl;
 import io.typefox.lsapi.FileChangeType;
 import io.typefox.lsapi.FileEventImpl;
 import io.typefox.lsapi.PositionImpl;
-import io.typefox.lsapi.RangeImpl;
-import io.typefox.lsapi.TextDocumentContentChangeEventImpl;
+import io.typefox.lsapi.builders.DidChangeTextDocumentParamsBuilder;
+import io.typefox.lsapi.builders.TextDocumentContentChangeEventBuilder;
+import io.typefox.lsapi.builders.VersionedTextDocumentIdentifierBuilder;
 import io.typefox.lsapi.services.WorkspaceService;
-import io.typefox.lsapi.util.LsapiFactories;
 import java.util.Collections;
 import java.util.List;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.ide.tests.server.AbstractTestLangLanguageServerTest;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -54,9 +55,10 @@ public class OpenDocumentTest extends AbstractTestLangLanguageServerTest {
     _builder_1.newLine();
     final String path = this.operator_mappedTo("MyType2.testlang", _builder_1);
     WorkspaceService _workspaceService = this.languageServer.getWorkspaceService();
-    FileEventImpl _newFileEvent = LsapiFactories.newFileEvent(path, FileChangeType.Created);
-    DidChangeWatchedFilesParamsImpl _newDidChangeWatchedFilesParams = LsapiFactories.newDidChangeWatchedFilesParams(Collections.<FileEventImpl>unmodifiableList(CollectionLiterals.<FileEventImpl>newArrayList(_newFileEvent)));
-    _workspaceService.didChangeWatchedFiles(_newDidChangeWatchedFilesParams);
+    FileEventImpl _fileEventImpl = new FileEventImpl(path, FileChangeType.Created);
+    DidChangeWatchedFilesParamsImpl _didChangeWatchedFilesParamsImpl = new DidChangeWatchedFilesParamsImpl(
+      Collections.<FileEventImpl>unmodifiableList(CollectionLiterals.<FileEventImpl>newArrayList(_fileEventImpl)));
+    _workspaceService.didChangeWatchedFiles(_didChangeWatchedFilesParamsImpl);
     List<? extends Diagnostic> _get_1 = this.diagnostics.get(firstFile);
     Diagnostic _head_1 = IterableExtensions.head(_get_1);
     String _message_1 = _head_1.getMessage();
@@ -106,12 +108,23 @@ public class OpenDocumentTest extends AbstractTestLangLanguageServerTest {
     Diagnostic _head_1 = IterableExtensions.head(_get_1);
     String _message_1 = _head_1.getMessage();
     this.assertEquals("Couldn\'t resolve reference to TypeDeclaration \'NonExisting\'.", _message_1);
-    PositionImpl _newPosition = LsapiFactories.newPosition(1, 4);
-    PositionImpl _newPosition_1 = LsapiFactories.newPosition(1, 15);
-    RangeImpl _newRange = LsapiFactories.newRange(_newPosition, _newPosition_1);
-    TextDocumentContentChangeEventImpl _newTextDocumentContentChangeEvent = LsapiFactories.newTextDocumentContentChangeEvent(_newRange, null, "Test");
-    DidChangeTextDocumentParamsImpl _newDidChangeTextDocumentParamsImpl = LsapiFactories.newDidChangeTextDocumentParamsImpl(firstFile, 2, Collections.<TextDocumentContentChangeEventImpl>unmodifiableList(CollectionLiterals.<TextDocumentContentChangeEventImpl>newArrayList(_newTextDocumentContentChangeEvent)));
-    this.languageServer.didChange(_newDidChangeTextDocumentParamsImpl);
+    final Procedure1<DidChangeTextDocumentParamsBuilder> _function = (DidChangeTextDocumentParamsBuilder it) -> {
+      final Procedure1<VersionedTextDocumentIdentifierBuilder> _function_1 = (VersionedTextDocumentIdentifierBuilder it_1) -> {
+        it_1.uri(firstFile);
+        it_1.version(2);
+      };
+      it.textDocument(_function_1);
+      final Procedure1<TextDocumentContentChangeEventBuilder> _function_2 = (TextDocumentContentChangeEventBuilder it_1) -> {
+        PositionImpl _positionImpl = new PositionImpl(1, 4);
+        PositionImpl _positionImpl_1 = new PositionImpl(1, 15);
+        it_1.range(_positionImpl, _positionImpl_1);
+        it_1.text("Test");
+      };
+      it.contentChange(_function_2);
+    };
+    DidChangeTextDocumentParamsBuilder _didChangeTextDocumentParamsBuilder = new DidChangeTextDocumentParamsBuilder(_function);
+    DidChangeTextDocumentParams _build = _didChangeTextDocumentParamsBuilder.build();
+    this.languageServer.didChange(_build);
     List<? extends Diagnostic> _get_2 = this.diagnostics.get(firstFile);
     Diagnostic _head_2 = IterableExtensions.head(_get_2);
     Assert.assertNull(_head_2);

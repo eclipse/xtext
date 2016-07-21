@@ -10,13 +10,13 @@ package org.eclipse.xtext.ide.server.hover
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import io.typefox.lsapi.Hover
+import io.typefox.lsapi.HoverImpl
+import io.typefox.lsapi.MarkedStringImpl
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider
 import org.eclipse.xtext.ide.server.DocumentExtensions
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper
 import org.eclipse.xtext.resource.ILocationInFileProvider
 import org.eclipse.xtext.resource.XtextResource
-
-import static io.typefox.lsapi.util.LsapiFactories.*
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -40,24 +40,24 @@ class HoverService {
 	def Hover hover(XtextResource resource, int offset) {
 		val element = resource.resolveElementAt(offset)
 		if (element === null)
-			return emptyHover
+			return new HoverImpl(emptyList, null)
 
 		val documentation = element.documentation
 		if (documentation === null)
-			return emptyHover
+			return new HoverImpl(emptyList, null)
 
-		val contents = #[newMarkedString(documentation, null)]
+		val contents = #[new MarkedStringImpl(null, documentation)]
 		
 		val containedElement = resource.resolveContainedElementAt(offset)
 		val textRegion = containedElement.significantTextRegion
 		if (textRegion === null)
-			return newHover(contents, null)
+			return new HoverImpl(contents, null)
 
 		if (!textRegion.contains(offset))
-			return emptyHover
+			return new HoverImpl(emptyList, null)
 
 		val range = resource.newRange(textRegion)
-		return newHover(contents, range)
+		return new HoverImpl(contents, range)
 	}
 
 }

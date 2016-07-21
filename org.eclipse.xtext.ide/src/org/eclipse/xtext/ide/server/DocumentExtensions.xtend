@@ -19,8 +19,6 @@ import org.eclipse.xtext.resource.ILocationInFileProvider
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.util.ITextRegion
 
-import static io.typefox.lsapi.util.LsapiFactories.*
-
 import static extension org.eclipse.xtext.nodemodel.util.NodeModelUtils.*
 
 /**
@@ -40,7 +38,7 @@ class DocumentExtensions {
 		if (resource instanceof XtextResource) {
 			val rootNode = resource.parseResult.rootNode
 			val lineAndColumn = rootNode.getLineAndColumn(offset)
-			return newPosition(lineAndColumn.line - 1, lineAndColumn.column - 1)
+			return new PositionImpl(lineAndColumn.line - 1, lineAndColumn.column - 1)
 		}
 		return null
 	}
@@ -48,7 +46,7 @@ class DocumentExtensions {
 	def RangeImpl newRange(Resource resource, int startOffset, int endOffset) {
 		val startPosition = resource.newPosition(startOffset)
 		val endPosition = resource.newPosition(endOffset)
-		return newRange(startPosition, endPosition)
+		return new RangeImpl(startPosition, endPosition)
 	}
 
 	def RangeImpl newRange(Resource resource, ITextRegion region) {

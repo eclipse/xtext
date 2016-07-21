@@ -10,9 +10,9 @@ package org.eclipse.xtext.ide.server.hover;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import io.typefox.lsapi.Hover;
+import io.typefox.lsapi.HoverImpl;
 import io.typefox.lsapi.MarkedStringImpl;
 import io.typefox.lsapi.RangeImpl;
-import io.typefox.lsapi.util.LsapiFactories;
 import java.util.Collections;
 import java.util.List;
 import org.eclipse.emf.ecore.EObject;
@@ -51,25 +51,28 @@ public class HoverService {
   public Hover hover(final XtextResource resource, final int offset) {
     final EObject element = this._eObjectAtOffsetHelper.resolveElementAt(resource, offset);
     if ((element == null)) {
-      return LsapiFactories.emptyHover();
+      List<MarkedStringImpl> _emptyList = CollectionLiterals.<MarkedStringImpl>emptyList();
+      return new HoverImpl(_emptyList, null);
     }
     final String documentation = this._iEObjectDocumentationProvider.getDocumentation(element);
     if ((documentation == null)) {
-      return LsapiFactories.emptyHover();
+      List<MarkedStringImpl> _emptyList_1 = CollectionLiterals.<MarkedStringImpl>emptyList();
+      return new HoverImpl(_emptyList_1, null);
     }
-    MarkedStringImpl _newMarkedString = LsapiFactories.newMarkedString(documentation, null);
-    final List<MarkedStringImpl> contents = Collections.<MarkedStringImpl>unmodifiableList(CollectionLiterals.<MarkedStringImpl>newArrayList(_newMarkedString));
+    MarkedStringImpl _markedStringImpl = new MarkedStringImpl(null, documentation);
+    final List<MarkedStringImpl> contents = Collections.<MarkedStringImpl>unmodifiableList(CollectionLiterals.<MarkedStringImpl>newArrayList(_markedStringImpl));
     final EObject containedElement = this._eObjectAtOffsetHelper.resolveContainedElementAt(resource, offset);
     final ITextRegion textRegion = this._iLocationInFileProvider.getSignificantTextRegion(containedElement);
     if ((textRegion == null)) {
-      return LsapiFactories.newHover(contents, null);
+      return new HoverImpl(contents, null);
     }
     boolean _contains = textRegion.contains(offset);
     boolean _not = (!_contains);
     if (_not) {
-      return LsapiFactories.emptyHover();
+      List<MarkedStringImpl> _emptyList_2 = CollectionLiterals.<MarkedStringImpl>emptyList();
+      return new HoverImpl(_emptyList_2, null);
     }
     final RangeImpl range = this._documentExtensions.newRange(resource, textRegion);
-    return LsapiFactories.newHover(contents, range);
+    return new HoverImpl(contents, range);
   }
 }

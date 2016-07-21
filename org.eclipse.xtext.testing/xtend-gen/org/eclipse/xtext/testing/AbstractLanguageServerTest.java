@@ -17,10 +17,11 @@ import com.google.inject.binder.AnnotatedBindingBuilder;
 import io.typefox.lsapi.CompletionItem;
 import io.typefox.lsapi.CompletionList;
 import io.typefox.lsapi.Diagnostic;
-import io.typefox.lsapi.DidCloseTextDocumentParamsImpl;
-import io.typefox.lsapi.DidOpenTextDocumentParamsImpl;
+import io.typefox.lsapi.DidCloseTextDocumentParams;
+import io.typefox.lsapi.DidOpenTextDocumentParams;
 import io.typefox.lsapi.DocumentSymbolParamsImpl;
 import io.typefox.lsapi.Hover;
+import io.typefox.lsapi.InitializeParams;
 import io.typefox.lsapi.InitializeParamsImpl;
 import io.typefox.lsapi.InitializeResult;
 import io.typefox.lsapi.Location;
@@ -28,15 +29,20 @@ import io.typefox.lsapi.MarkedString;
 import io.typefox.lsapi.Position;
 import io.typefox.lsapi.PublishDiagnosticsParams;
 import io.typefox.lsapi.Range;
-import io.typefox.lsapi.ReferenceContextImpl;
-import io.typefox.lsapi.ReferenceParamsImpl;
+import io.typefox.lsapi.ReferenceParams;
 import io.typefox.lsapi.SymbolInformation;
 import io.typefox.lsapi.SymbolKind;
-import io.typefox.lsapi.TextDocumentPositionParamsImpl;
+import io.typefox.lsapi.TextDocumentIdentifierImpl;
+import io.typefox.lsapi.TextDocumentPositionParams;
 import io.typefox.lsapi.TextEdit;
 import io.typefox.lsapi.WorkspaceSymbolParamsImpl;
+import io.typefox.lsapi.builders.DidCloseTextDocumentParamsBuilder;
+import io.typefox.lsapi.builders.DidOpenTextDocumentParamsBuilder;
+import io.typefox.lsapi.builders.InitializeParamsBuilder;
+import io.typefox.lsapi.builders.ReferenceParamsBuilder;
+import io.typefox.lsapi.builders.TextDocumentItemBuilder;
+import io.typefox.lsapi.builders.TextDocumentPositionParamsBuilder;
 import io.typefox.lsapi.services.TextDocumentService;
-import io.typefox.lsapi.util.LsapiFactories;
 import java.io.File;
 import java.io.FileWriter;
 import java.net.URI;
@@ -173,11 +179,16 @@ public abstract class AbstractLanguageServerTest implements Consumer<PublishDiag
   
   protected InitializeResult initialize(final Procedure1<? super InitializeParamsImpl> initializer) {
     try {
-      Path _rootPath = this.getRootPath();
-      String _string = _rootPath.toString();
-      final InitializeParamsImpl params = LsapiFactories.newInitializeParams(1, _string);
+      final Procedure1<InitializeParamsBuilder> _function = (InitializeParamsBuilder it) -> {
+        it.processId(Integer.valueOf(1));
+        Path _rootPath = this.getRootPath();
+        String _string = _rootPath.toString();
+        it.rootPath(_string);
+      };
+      InitializeParamsBuilder _initializeParamsBuilder = new InitializeParamsBuilder(_function);
+      final InitializeParams params = _initializeParamsBuilder.build();
       if (initializer!=null) {
-        initializer.apply(params);
+        initializer.apply(((InitializeParamsImpl) params));
       }
       CompletableFuture<InitializeResult> _initialize = this.languageServer.initialize(params);
       return _initialize.get();
@@ -192,13 +203,28 @@ public abstract class AbstractLanguageServerTest implements Consumer<PublishDiag
   }
   
   protected void open(final String fileUri, final String langaugeId, final String model) {
-    DidOpenTextDocumentParamsImpl _newDidOpenTextDocumentParams = LsapiFactories.newDidOpenTextDocumentParams(fileUri, langaugeId, 1, model);
-    this.languageServer.didOpen(_newDidOpenTextDocumentParams);
+    final Procedure1<DidOpenTextDocumentParamsBuilder> _function = (DidOpenTextDocumentParamsBuilder it) -> {
+      it.uri(fileUri);
+      final Procedure1<TextDocumentItemBuilder> _function_1 = (TextDocumentItemBuilder it_1) -> {
+        it_1.uri(fileUri);
+        it_1.languageId(langaugeId);
+        it_1.version(1);
+        it_1.text(model);
+      };
+      it.textDocument(_function_1);
+    };
+    DidOpenTextDocumentParamsBuilder _didOpenTextDocumentParamsBuilder = new DidOpenTextDocumentParamsBuilder(_function);
+    DidOpenTextDocumentParams _build = _didOpenTextDocumentParamsBuilder.build();
+    this.languageServer.didOpen(_build);
   }
   
   protected void close(final String fileUri) {
-    DidCloseTextDocumentParamsImpl _newDidCloseTextDocumentParams = LsapiFactories.newDidCloseTextDocumentParams(fileUri);
-    this.languageServer.didClose(_newDidCloseTextDocumentParams);
+    final Procedure1<DidCloseTextDocumentParamsBuilder> _function = (DidCloseTextDocumentParamsBuilder it) -> {
+      it.textDocument(fileUri);
+    };
+    DidCloseTextDocumentParamsBuilder _didCloseTextDocumentParamsBuilder = new DidCloseTextDocumentParamsBuilder(_function);
+    DidCloseTextDocumentParams _build = _didCloseTextDocumentParamsBuilder.build();
+    this.languageServer.didClose(_build);
   }
   
   public String operator_mappedTo(final String path, final CharSequence contents) {
@@ -410,10 +436,15 @@ public abstract class AbstractLanguageServerTest implements Consumer<PublishDiag
       this.initialize();
       String _model_1 = configuration.getModel();
       this.open(fileUri, _model_1);
-      int _line = configuration.getLine();
-      int _column = configuration.getColumn();
-      TextDocumentPositionParamsImpl _newTextDocumentPositionParams = LsapiFactories.newTextDocumentPositionParams(fileUri, _line, _column);
-      final CompletableFuture<CompletionList> completionItems = this.languageServer.completion(_newTextDocumentPositionParams);
+      final Procedure1<TextDocumentPositionParamsBuilder> _function = (TextDocumentPositionParamsBuilder it) -> {
+        it.textDocument(fileUri);
+        int _line = configuration.getLine();
+        int _column = configuration.getColumn();
+        it.position(_line, _column);
+      };
+      TextDocumentPositionParamsBuilder _textDocumentPositionParamsBuilder = new TextDocumentPositionParamsBuilder(_function);
+      TextDocumentPositionParams _build = _textDocumentPositionParamsBuilder.build();
+      final CompletableFuture<CompletionList> completionItems = this.languageServer.completion(_build);
       CompletionList _get = completionItems.get();
       List<? extends CompletionItem> _items = _get.getItems();
       final String actualCompletionItems = this.toExpectation(_items);
@@ -436,10 +467,15 @@ public abstract class AbstractLanguageServerTest implements Consumer<PublishDiag
       this.initialize();
       String _model_1 = configuration.getModel();
       this.open(fileUri, _model_1);
-      int _line = configuration.getLine();
-      int _column = configuration.getColumn();
-      TextDocumentPositionParamsImpl _newTextDocumentPositionParams = LsapiFactories.newTextDocumentPositionParams(fileUri, _line, _column);
-      final CompletableFuture<List<? extends Location>> definitions = this.languageServer.definition(_newTextDocumentPositionParams);
+      final Procedure1<TextDocumentPositionParamsBuilder> _function = (TextDocumentPositionParamsBuilder it) -> {
+        it.textDocument(fileUri);
+        int _line = configuration.getLine();
+        int _column = configuration.getColumn();
+        it.position(_line, _column);
+      };
+      TextDocumentPositionParamsBuilder _textDocumentPositionParamsBuilder = new TextDocumentPositionParamsBuilder(_function);
+      TextDocumentPositionParams _build = _textDocumentPositionParamsBuilder.build();
+      final CompletableFuture<List<? extends Location>> definitions = this.languageServer.definition(_build);
       List<? extends Location> _get = definitions.get();
       final String actualDefinitions = this.toExpectation(_get);
       String _expectedDefinitions = configuration.getExpectedDefinitions();
@@ -461,10 +497,15 @@ public abstract class AbstractLanguageServerTest implements Consumer<PublishDiag
       this.initialize();
       String _model_1 = configuration.getModel();
       this.open(fileUri, _model_1);
-      int _line = configuration.getLine();
-      int _column = configuration.getColumn();
-      TextDocumentPositionParamsImpl _newTextDocumentPositionParams = LsapiFactories.newTextDocumentPositionParams(fileUri, _line, _column);
-      final CompletableFuture<Hover> hover = this.languageServer.hover(_newTextDocumentPositionParams);
+      final Procedure1<TextDocumentPositionParamsBuilder> _function = (TextDocumentPositionParamsBuilder it) -> {
+        it.textDocument(fileUri);
+        int _line = configuration.getLine();
+        int _column = configuration.getColumn();
+        it.position(_line, _column);
+      };
+      TextDocumentPositionParamsBuilder _textDocumentPositionParamsBuilder = new TextDocumentPositionParamsBuilder(_function);
+      TextDocumentPositionParams _build = _textDocumentPositionParamsBuilder.build();
+      final CompletableFuture<Hover> hover = this.languageServer.hover(_build);
       Hover _get = hover.get();
       final String actualHover = this.toExpectation(_get);
       String _expectedHover = configuration.getExpectedHover();
@@ -486,8 +527,9 @@ public abstract class AbstractLanguageServerTest implements Consumer<PublishDiag
       this.initialize();
       String _model_1 = configuration.getModel();
       this.open(fileUri, _model_1);
-      DocumentSymbolParamsImpl _newDocumentSymbolParams = LsapiFactories.newDocumentSymbolParams(fileUri);
-      final CompletableFuture<List<? extends SymbolInformation>> symbols = this.languageServer.documentSymbol(_newDocumentSymbolParams);
+      TextDocumentIdentifierImpl _textDocumentIdentifierImpl = new TextDocumentIdentifierImpl(fileUri);
+      DocumentSymbolParamsImpl _documentSymbolParamsImpl = new DocumentSymbolParamsImpl(_textDocumentIdentifierImpl);
+      final CompletableFuture<List<? extends SymbolInformation>> symbols = this.languageServer.documentSymbol(_documentSymbolParamsImpl);
       List<? extends SymbolInformation> _get = symbols.get();
       final String actualSymbols = this.toExpectation(_get);
       String _expectedSymbols = configuration.getExpectedSymbols();
@@ -510,8 +552,8 @@ public abstract class AbstractLanguageServerTest implements Consumer<PublishDiag
       String _model_1 = configuration.getModel();
       this.open(fileUri, _model_1);
       String _query = configuration.getQuery();
-      WorkspaceSymbolParamsImpl _newWorkspaceSymbolParams = LsapiFactories.newWorkspaceSymbolParams(_query);
-      CompletableFuture<List<? extends SymbolInformation>> _symbol = this.languageServer.symbol(_newWorkspaceSymbolParams);
+      WorkspaceSymbolParamsImpl _workspaceSymbolParamsImpl = new WorkspaceSymbolParamsImpl(_query);
+      CompletableFuture<List<? extends SymbolInformation>> _symbol = this.languageServer.symbol(_workspaceSymbolParamsImpl);
       final List<? extends SymbolInformation> symbols = _symbol.get();
       final String actualSymbols = this.toExpectation(symbols);
       String _expectedSymbols = configuration.getExpectedSymbols();
@@ -533,13 +575,17 @@ public abstract class AbstractLanguageServerTest implements Consumer<PublishDiag
       this.initialize();
       String _model_1 = configuration.getModel();
       this.open(fileUri, _model_1);
-      final ReferenceContextImpl referenceContext = new ReferenceContextImpl();
-      boolean _isIncludeDeclaration = configuration.isIncludeDeclaration();
-      referenceContext.setIncludeDeclaration(_isIncludeDeclaration);
-      int _line = configuration.getLine();
-      int _column = configuration.getColumn();
-      ReferenceParamsImpl _newReferenceParams = LsapiFactories.newReferenceParams(fileUri, _line, _column, referenceContext);
-      final CompletableFuture<List<? extends Location>> definitions = this.languageServer.references(_newReferenceParams);
+      final Procedure1<ReferenceParamsBuilder> _function = (ReferenceParamsBuilder it) -> {
+        it.textDocument(fileUri);
+        int _line = configuration.getLine();
+        int _column = configuration.getColumn();
+        it.position(_line, _column);
+        boolean _isIncludeDeclaration = configuration.isIncludeDeclaration();
+        it.context(_isIncludeDeclaration);
+      };
+      ReferenceParamsBuilder _referenceParamsBuilder = new ReferenceParamsBuilder(_function);
+      ReferenceParams _build = _referenceParamsBuilder.build();
+      final CompletableFuture<List<? extends Location>> definitions = this.languageServer.references(_build);
       List<? extends Location> _get = definitions.get();
       final String actualDefinitions = this.toExpectation(_get);
       String _expectedReferences = configuration.getExpectedReferences();

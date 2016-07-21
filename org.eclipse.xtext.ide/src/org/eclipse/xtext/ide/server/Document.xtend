@@ -12,8 +12,6 @@ import io.typefox.lsapi.PositionImpl
 import io.typefox.lsapi.TextEdit
 import org.eclipse.xtend.lib.annotations.Data
 
-import static io.typefox.lsapi.util.LsapiFactories.*
-
 /**
  * @author Sven Efftinge - Initial contribution and API
  * @since 2.11
@@ -57,7 +55,7 @@ import static io.typefox.lsapi.util.LsapiFactories.*
         for (var i = 0; i < l; i++) {
             val ch = contents.charAt(i)
             if (i === offset) {
-                return newPosition(line, column)
+                return new PositionImpl(line, column)
             }
             if (ch === NL) {
                 line++
@@ -66,7 +64,7 @@ import static io.typefox.lsapi.util.LsapiFactories.*
                 column++
             }
         }
-        return newPosition(line, column)
+        return new PositionImpl(line, column)
     }
 
     def Document applyChanges(Iterable<? extends TextEdit> changes) {

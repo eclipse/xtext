@@ -12,6 +12,7 @@ import com.google.inject.Guice
 import com.google.inject.Inject
 import io.typefox.lsapi.CompletionItem
 import io.typefox.lsapi.Diagnostic
+import io.typefox.lsapi.DocumentSymbolParamsImpl
 import io.typefox.lsapi.Hover
 import io.typefox.lsapi.InitializeParamsImpl
 import io.typefox.lsapi.InitializeResult
@@ -20,9 +21,15 @@ import io.typefox.lsapi.MarkedString
 import io.typefox.lsapi.Position
 import io.typefox.lsapi.PublishDiagnosticsParams
 import io.typefox.lsapi.Range
-import io.typefox.lsapi.ReferenceContextImpl
 import io.typefox.lsapi.SymbolInformation
+import io.typefox.lsapi.TextDocumentIdentifierImpl
 import io.typefox.lsapi.TextEdit
+import io.typefox.lsapi.WorkspaceSymbolParamsImpl
+import io.typefox.lsapi.builders.DidCloseTextDocumentParamsBuilder
+import io.typefox.lsapi.builders.DidOpenTextDocumentParamsBuilder
+import io.typefox.lsapi.builders.InitializeParamsBuilder
+import io.typefox.lsapi.builders.ReferenceParamsBuilder
+import io.typefox.lsapi.builders.TextDocumentPositionParamsBuilder
 import java.io.File
 import java.io.FileWriter
 import java.net.URI
@@ -45,8 +52,6 @@ import org.eclipse.xtext.util.Files
 import org.eclipse.xtext.util.Modules2
 import org.junit.Assert
 import org.junit.Before
-
-import static extension io.typefox.lsapi.util.LsapiFactories.*
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -120,8 +125,11 @@ abstract class AbstractLanguageServerTest implements Consumer<PublishDiagnostics
     }
 
     protected def InitializeResult initialize((InitializeParamsImpl)=>void initializer) {
-        val params = newInitializeParams(1, rootPath.toString)
-        initializer?.apply(params)
+        val params = new InitializeParamsBuilder[
+        	processId(1)
+        	rootPath(rootPath.toString)
+    	].build
+        initializer?.apply(params as InitializeParamsImpl)
         return languageServer.initialize(params).get
     }
 
@@ -130,11 +138,21 @@ abstract class AbstractLanguageServerTest implements Consumer<PublishDiagnostics
     }
 
     protected def void open(String fileUri, String langaugeId, String model) {
-        languageServer.didOpen(newDidOpenTextDocumentParams(fileUri, langaugeId, 1, model))
+        languageServer.didOpen(new DidOpenTextDocumentParamsBuilder[
+        	uri(fileUri)
+        	textDocument[
+        		uri(fileUri)
+        		languageId(langaugeId)
+        		version(1)
+        		text(model)
+    		]
+        ].build)
     }
 
     protected def void close(String fileUri) {
-        languageServer.didClose(newDidCloseTextDocumentParams(fileUri))
+        languageServer.didClose(new DidCloseTextDocumentParamsBuilder[
+        	textDocument(fileUri)
+        ].build)
     }
 
     def String ->(String path, CharSequence contents) {
@@ -207,7 +225,10 @@ abstract class AbstractLanguageServerTest implements Consumer<PublishDiagnostics
         initialize
         open(fileUri, model)
 
-        val completionItems = languageServer.completion(newTextDocumentPositionParams(fileUri, line, column))
+        val completionItems = languageServer.completion(new TextDocumentPositionParamsBuilder[
+        	textDocument(fileUri)
+        	position(line, column)
+        ].build)
 
         val actualCompletionItems = completionItems.get.items.toExpectation
         assertEquals(expectedCompletionItems, actualCompletionItems)
@@ -223,7 +244,10 @@ abstract class AbstractLanguageServerTest implements Consumer<PublishDiagnostics
         initialize
         open(fileUri, model)
 
-        val definitions = languageServer.definition(newTextDocumentPositionParams(fileUri, line, column))
+        val definitions = languageServer.definition(new TextDocumentPositionParamsBuilder[
+        	textDocument(fileUri)
+        	position(line, column)
+        ].build)
         val actualDefinitions = definitions.get.toExpectation
         assertEquals(expectedDefinitions, actualDefinitions)
     }
@@ -238,7 +262,10 @@ abstract class AbstractLanguageServerTest implements Consumer<PublishDiagnostics
         initialize
         open(fileUri, model)
 
-        val hover = languageServer.hover(newTextDocumentPositionParams(fileUri, line, column))
+        val hover = languageServer.hover(new TextDocumentPositionParamsBuilder[
+        	textDocument(fileUri)
+        	position(line, column)
+        ].build)
         val actualHover = hover.get.toExpectation
         assertEquals(expectedHover, actualHover)
     }
@@ -252,7 +279,7 @@ abstract class AbstractLanguageServerTest implements Consumer<PublishDiagnostics
         initialize
         open(fileUri, model)
 
-        val symbols = languageServer.documentSymbol(fileUri.newDocumentSymbolParams)
+        val symbols = languageServer.documentSymbol(new DocumentSymbolParamsImpl(new TextDocumentIdentifierImpl(fileUri)))
         val String actualSymbols = symbols.get.toExpectation
         assertEquals(expectedSymbols, actualSymbols)
     }
@@ -266,7 +293,7 @@ abstract class AbstractLanguageServerTest implements Consumer<PublishDiagnostics
         initialize
         open(fileUri, model)
 
-        val symbols = languageServer.symbol(query.newWorkspaceSymbolParams).get
+        val symbols = languageServer.symbol(new WorkspaceSymbolParamsImpl(query)).get
         val String actualSymbols = symbols.toExpectation
         assertEquals(expectedSymbols, actualSymbols)
     }
@@ -281,9 +308,11 @@ abstract class AbstractLanguageServerTest implements Consumer<PublishDiagnostics
         initialize
         open(fileUri, model)
 
-        val referenceContext = new ReferenceContextImpl
-        referenceContext.includeDeclaration = includeDeclaration
-        val definitions = languageServer.references(newReferenceParams(fileUri, line, column, referenceContext))
+        val definitions = languageServer.references(new ReferenceParamsBuilder[
+        	textDocument(fileUri)
+        	position(line, column)
+        	context(includeDeclaration)
+    	].build)
         val actualDefinitions = definitions.get.toExpectation
         assertEquals(expectedReferences, actualDefinitions)
     }

@@ -11,7 +11,6 @@ import io.typefox.lsapi.Position;
 import io.typefox.lsapi.PositionImpl;
 import io.typefox.lsapi.Range;
 import io.typefox.lsapi.TextEdit;
-import io.typefox.lsapi.util.LsapiFactories;
 import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
@@ -69,7 +68,7 @@ public class Document {
       {
         final char ch = this.contents.charAt(i);
         if ((i == offset)) {
-          return LsapiFactories.newPosition(line, column);
+          return new PositionImpl(line, column);
         }
         if ((ch == NL)) {
           line++;
@@ -79,7 +78,7 @@ public class Document {
         }
       }
     }
-    return LsapiFactories.newPosition(line, column);
+    return new PositionImpl(line, column);
   }
   
   public Document applyChanges(final Iterable<? extends TextEdit> changes) {

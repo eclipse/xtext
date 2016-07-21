@@ -7,13 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.tests.server
 
-import io.typefox.lsapi.FileEvent
+import io.typefox.lsapi.DidChangeWatchedFilesParamsImpl
+import io.typefox.lsapi.FileChangeType
+import io.typefox.lsapi.FileEventImpl
 import org.junit.Test
 
 import static org.junit.Assert.*
-
-import static extension io.typefox.lsapi.util.LsapiFactories.*
-import io.typefox.lsapi.FileChangeType
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -62,7 +61,7 @@ class ServerTest extends AbstractTestLangLanguageServerTest {
         '''
         
     	languageServer.getWorkspaceService.didChangeWatchedFiles(
-    		#[newFileEvent(path, FileChangeType.Created)].newDidChangeWatchedFilesParams
+    		new DidChangeWatchedFilesParamsImpl(#[new FileEventImpl(path, FileChangeType.Created)])
     	)
     	assertNotNull(diagnostics.get(path))
     	assertTrue(diagnostics.values.join(','), diagnostics.values.forall[empty])

@@ -12,7 +12,6 @@ import com.google.inject.Singleton;
 import io.typefox.lsapi.LocationImpl;
 import io.typefox.lsapi.PositionImpl;
 import io.typefox.lsapi.RangeImpl;
-import io.typefox.lsapi.util.LsapiFactories;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -50,7 +49,7 @@ public class DocumentExtensions {
       int _minus = (_line - 1);
       int _column = lineAndColumn.getColumn();
       int _minus_1 = (_column - 1);
-      return LsapiFactories.newPosition(_minus, _minus_1);
+      return new PositionImpl(_minus, _minus_1);
     }
     return null;
   }
@@ -58,7 +57,7 @@ public class DocumentExtensions {
   public RangeImpl newRange(final Resource resource, final int startOffset, final int endOffset) {
     final PositionImpl startPosition = this.newPosition(resource, startOffset);
     final PositionImpl endPosition = this.newPosition(resource, endOffset);
-    return LsapiFactories.newRange(startPosition, endPosition);
+    return new RangeImpl(startPosition, endPosition);
   }
   
   public RangeImpl newRange(final Resource resource, final ITextRegion region) {

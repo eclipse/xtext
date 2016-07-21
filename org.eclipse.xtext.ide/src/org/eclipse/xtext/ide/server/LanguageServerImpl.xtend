@@ -14,11 +14,12 @@ import io.typefox.lsapi.CodeLens
 import io.typefox.lsapi.CodeLensParams
 import io.typefox.lsapi.CompletionItem
 import io.typefox.lsapi.CompletionItemImpl
+import io.typefox.lsapi.CompletionItemKind
 import io.typefox.lsapi.CompletionList
 import io.typefox.lsapi.CompletionListImpl
 import io.typefox.lsapi.CompletionOptionsImpl
-import io.typefox.lsapi.Diagnostic
 import io.typefox.lsapi.DiagnosticImpl
+import io.typefox.lsapi.DiagnosticSeverity
 import io.typefox.lsapi.DidChangeConfigurationParams
 import io.typefox.lsapi.DidChangeTextDocumentParams
 import io.typefox.lsapi.DidChangeWatchedFilesParams
@@ -29,7 +30,8 @@ import io.typefox.lsapi.DocumentFormattingParams
 import io.typefox.lsapi.DocumentOnTypeFormattingParams
 import io.typefox.lsapi.DocumentRangeFormattingParams
 import io.typefox.lsapi.DocumentSymbolParams
-import io.typefox.lsapi.FileEvent
+import io.typefox.lsapi.FileChangeType
+import io.typefox.lsapi.HoverImpl
 import io.typefox.lsapi.InitializeParams
 import io.typefox.lsapi.InitializeResult
 import io.typefox.lsapi.InitializeResultImpl
@@ -42,11 +44,12 @@ import io.typefox.lsapi.PublishDiagnosticsParamsImpl
 import io.typefox.lsapi.RangeImpl
 import io.typefox.lsapi.ReferenceParams
 import io.typefox.lsapi.RenameParams
-import io.typefox.lsapi.ServerCapabilities
 import io.typefox.lsapi.ServerCapabilitiesImpl
 import io.typefox.lsapi.ShowMessageRequestParams
 import io.typefox.lsapi.SymbolInformation
 import io.typefox.lsapi.TextDocumentPositionParams
+import io.typefox.lsapi.TextDocumentSyncKind
+import io.typefox.lsapi.TextEditImpl
 import io.typefox.lsapi.WorkspaceSymbolParams
 import io.typefox.lsapi.services.LanguageServer
 import io.typefox.lsapi.services.TextDocumentService
@@ -71,12 +74,6 @@ import org.eclipse.xtext.resource.FileExtensionProvider
 import org.eclipse.xtext.resource.IMimeTypeProvider
 import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.eclipse.xtext.validation.Issue
-
-import static extension io.typefox.lsapi.util.LsapiFactories.*
-import io.typefox.lsapi.TextDocumentSyncKind
-import io.typefox.lsapi.FileChangeType
-import io.typefox.lsapi.DiagnosticSeverity
-import io.typefox.lsapi.CompletionItemKind
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -186,7 +183,7 @@ import io.typefox.lsapi.CompletionItemKind
 	override didChange(DidChangeTextDocumentParams params) {
 		requestManager.runWrite [ cancelIndicator |
 			workspaceManager.didChange(params.textDocument.uri.toUri, params.textDocument.version, params.contentChanges.map [ event |
-				newTextEdit(event.range as RangeImpl, event.text)
+				new TextEditImpl(event.range as RangeImpl, event.text)
 			], cancelIndicator)
 		]
 	}
@@ -257,9 +254,9 @@ import io.typefox.lsapi.CompletionItemKind
             val lineNumber = (issue.lineNumber ?: 1) - 1
             val column = (issue.column ?: 1) - 1
             val length = (issue.length ?: 0)
-			range = newRange(
-				newPosition(lineNumber, column),
-				newPosition(lineNumber, column + length)
+			range = new RangeImpl(
+				new PositionImpl(lineNumber, column),
+				new PositionImpl(lineNumber, column + length)
 			)
 		]
 	}
@@ -279,7 +276,7 @@ import io.typefox.lsapi.CompletionItemKind
                 val caretOffset = document.getOffSet(params.position)
                 val entries = contentAssistService.createProposals(document.contents, caretOffset, resource, cancelIndicator)
                 return [|
-                    val caretPosition = params.position.copyPosition
+                    val caretPosition = new PositionImpl(params.position as PositionImpl)
                     entries.map[toCompletionItem(caretOffset, caretPosition, document)].toList
                 ]
             ].apply
@@ -294,7 +291,7 @@ import io.typefox.lsapi.CompletionItemKind
 		if (!entry.prefix.nullOrEmpty) {
 		    val prefixOffset = caretOffset - entry.prefix.length
 		    val prefixPosition = document.getPosition(prefixOffset)
-		    completionItem.textEdit = newTextEdit(newRange(prefixPosition, caretPosition), entry.proposal) 
+		    completionItem.textEdit = new TextEditImpl(new RangeImpl(prefixPosition, caretPosition), entry.proposal) 
 		} else {
 		  completionItem.insertText = entry.proposal
 		}
@@ -399,12 +396,12 @@ import io.typefox.lsapi.CompletionItemKind
 			val resourceServiceProvider = uri.resourceServiceProvider
 			val hoverService = resourceServiceProvider?.get(HoverService)
 			if (hoverService === null)
-				return emptyHover
+				return new HoverImpl(emptyList, null)
 
 			return workspaceManager.doRead(uri) [ document, resource |
 				val offset = document.getOffSet(params.position)
 				return hoverService.hover(resource, offset)
-			]  
+			]
 		]
 	}
 	

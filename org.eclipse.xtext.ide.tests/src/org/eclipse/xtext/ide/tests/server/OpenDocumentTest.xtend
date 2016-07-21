@@ -7,13 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.tests.server
 
-import io.typefox.lsapi.FileEvent
+import io.typefox.lsapi.DidChangeWatchedFilesParamsImpl
+import io.typefox.lsapi.FileChangeType
+import io.typefox.lsapi.FileEventImpl
+import io.typefox.lsapi.PositionImpl
+import io.typefox.lsapi.builders.DidChangeTextDocumentParamsBuilder
 import org.junit.Test
 
 import static org.junit.Assert.*
-
-import static extension io.typefox.lsapi.util.LsapiFactories.*
-import io.typefox.lsapi.FileChangeType
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -36,9 +37,9 @@ class OpenDocumentTest extends AbstractTestLangLanguageServerTest {
             }
         '''
         languageServer.getWorkspaceService.didChangeWatchedFiles(
-			#[
-				newFileEvent(path, FileChangeType.Created)
-			].newDidChangeWatchedFilesParams
+			new DidChangeWatchedFilesParamsImpl(#[
+				new FileEventImpl(path, FileChangeType.Created)
+			])
 		)
         
         // still erroneous
@@ -75,9 +76,16 @@ class OpenDocumentTest extends AbstractTestLangLanguageServerTest {
 		''')
         assertEquals("Couldn't resolve reference to TypeDeclaration 'NonExisting'.", diagnostics.get(firstFile).head.message)
         
-        languageServer.didChange(newDidChangeTextDocumentParamsImpl(firstFile, 2, #[
-			newTextDocumentContentChangeEvent(newRange(newPosition(1, 4), newPosition(1, 15)), null, "Test")
-		]))
+        languageServer.didChange(new DidChangeTextDocumentParamsBuilder() [
+        	textDocument[
+        		uri(firstFile)
+        		version(2)
+        	]
+        	contentChange[
+				range(new PositionImpl(1, 4), new PositionImpl(1, 15))
+				text("Test")
+			]
+		].build)
         assertNull(diagnostics.get(firstFile).head)
     }
 }

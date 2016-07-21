@@ -36,11 +36,13 @@ import io.typefox.lsapi.DocumentSymbolParams;
 import io.typefox.lsapi.FileChangeType;
 import io.typefox.lsapi.FileEvent;
 import io.typefox.lsapi.Hover;
+import io.typefox.lsapi.HoverImpl;
 import io.typefox.lsapi.InitializeParams;
 import io.typefox.lsapi.InitializeResult;
 import io.typefox.lsapi.InitializeResultImpl;
 import io.typefox.lsapi.LanguageDescriptionImpl;
 import io.typefox.lsapi.Location;
+import io.typefox.lsapi.MarkedStringImpl;
 import io.typefox.lsapi.MessageParams;
 import io.typefox.lsapi.Position;
 import io.typefox.lsapi.PositionImpl;
@@ -69,7 +71,6 @@ import io.typefox.lsapi.services.LanguageServer;
 import io.typefox.lsapi.services.TextDocumentService;
 import io.typefox.lsapi.services.WindowService;
 import io.typefox.lsapi.services.WorkspaceService;
-import io.typefox.lsapi.util.LsapiFactories;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -284,7 +285,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
       final Function1<TextDocumentContentChangeEvent, TextEdit> _function_1 = (TextDocumentContentChangeEvent event) -> {
         Range _range = event.getRange();
         String _text = event.getText();
-        return LsapiFactories.newTextEdit(((RangeImpl) _range), _text);
+        return new TextEditImpl(((RangeImpl) _range), _text);
       };
       List<TextEdit> _map = ListExtensions.map(_contentChanges, _function_1);
       this.workspaceManager.didChange(_uri_1, _version, _map, cancelIndicator);
@@ -425,10 +426,10 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
         _elvis_2 = Integer.valueOf(0);
       }
       final Integer length = _elvis_2;
-      PositionImpl _newPosition = LsapiFactories.newPosition(lineNumber, column);
-      PositionImpl _newPosition_1 = LsapiFactories.newPosition(lineNumber, (column + (length).intValue()));
-      RangeImpl _newRange = LsapiFactories.newRange(_newPosition, _newPosition_1);
-      it.setRange(_newRange);
+      PositionImpl _positionImpl = new PositionImpl(lineNumber, column);
+      PositionImpl _positionImpl_1 = new PositionImpl(lineNumber, (column + (length).intValue()));
+      RangeImpl _rangeImpl = new RangeImpl(_positionImpl, _positionImpl_1);
+      it.setRange(_rangeImpl);
     };
     return ObjectExtensions.<DiagnosticImpl>operator_doubleArrow(_diagnosticImpl, _function);
   }
@@ -458,7 +459,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
           List<CompletionItemImpl> _xblockexpression = null;
           {
             Position _position_1 = params.getPosition();
-            final PositionImpl caretPosition = LsapiFactories.copyPosition(_position_1);
+            final PositionImpl caretPosition = new PositionImpl(((PositionImpl) _position_1));
             final Function1<ContentAssistEntry, CompletionItemImpl> _function_3 = (ContentAssistEntry it) -> {
               return this.toCompletionItem(it, caretOffset, caretPosition, document);
             };
@@ -498,10 +499,10 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
       int _length = _prefix_1.length();
       final int prefixOffset = (caretOffset - _length);
       final PositionImpl prefixPosition = document.getPosition(prefixOffset);
-      RangeImpl _newRange = LsapiFactories.newRange(prefixPosition, caretPosition);
+      RangeImpl _rangeImpl = new RangeImpl(prefixPosition, caretPosition);
       String _proposal_1 = entry.getProposal();
-      TextEditImpl _newTextEdit = LsapiFactories.newTextEdit(_newRange, _proposal_1);
-      completionItem.setTextEdit(_newTextEdit);
+      TextEditImpl _textEditImpl = new TextEditImpl(_rangeImpl, _proposal_1);
+      completionItem.setTextEdit(_textEditImpl);
     } else {
       String _proposal_2 = entry.getProposal();
       completionItem.setInsertText(_proposal_2);
@@ -685,7 +686,8 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
       }
       final HoverService hoverService = _get;
       if ((hoverService == null)) {
-        return LsapiFactories.emptyHover();
+        List<MarkedStringImpl> _emptyList = CollectionLiterals.<MarkedStringImpl>emptyList();
+        return new HoverImpl(_emptyList, null);
       }
       final Function2<Document, XtextResource, Hover> _function_1 = (Document document, XtextResource resource) -> {
         Position _position = params.getPosition();
