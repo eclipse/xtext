@@ -18,6 +18,11 @@ This is an umbrella repository for the following modules.
 
 Please check the individual repositories for instructions for building and contributing.
 
+## Quick Access
+- [All Open Pull Requests](https://github.com/search?utf8=✓&q=is%3Aissue+is%3Apr+is%3Aopen+repo%3Aeclipse%2Fxtext+repo%3Aeclipse%2Fxtext-core+repo%3Aeclipse%2Fxtext-lib+repo%3Aeclipse%2Fxtext-extras+repo%3Aeclipse%2Fxtext-eclipse+repo%3Aeclipse%2Fxtext-idea+repo%3Aeclipse%2Fxtext-web+repo%3Aeclipse%2Fxtext-maven+repo%3Aeclipse%2Fxtext-xtend&type=Issues&ref=searchresults)
+- [All Open Issues](https://github.com/search?utf8=✓&q=is%3Aissue+is%3Aissue+is%3Aopen+repo%3Aeclipse%2Fxtext+repo%3Aeclipse%2Fxtext-core+repo%3Aeclipse%2Fxtext-lib+repo%3Aeclipse%2Fxtext-extras+repo%3Aeclipse%2Fxtext-eclipse+repo%3Aeclipse%2Fxtext-idea+repo%3Aeclipse%2Fxtext-web+repo%3Aeclipse%2Fxtext-maven+repo%3Aeclipse%2Fxtext-xtend&type=Issues&ref=searchresults)
+- [All Open Restructuring Issues](https://github.com/search?utf8=✓&q=is%3Aissue+is%3Aissue+label%3Arestructuring+is%3Aopen+repo%3Aeclipse%2Fxtext+repo%3Aeclipse%2Fxtext-core+repo%3Aeclipse%2Fxtext-lib+repo%3Aeclipse%2Fxtext-extras+repo%3Aeclipse%2Fxtext-eclipse+repo%3Aeclipse%2Fxtext-idea+repo%3Aeclipse%2Fxtext-web+repo%3Aeclipse%2Fxtext-maven+repo%3Aeclipse%2Fxtext-xtend&type=Issues&ref=searchresults)
+
 ## Developer Resources
 
  - [Contributing](https://github.com/eclipse/xtext/blob/master/CONTRIBUTING.md): report bugs, setup your workspace, submit your changes, etc.
