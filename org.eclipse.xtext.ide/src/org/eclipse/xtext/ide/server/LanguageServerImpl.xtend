@@ -158,8 +158,12 @@ import org.eclipse.xtext.validation.Issue
 	override WindowService getWindowService() {
 		return this
 	}
-
+	
 	// notification callbacks
+	override onTelemetryEvent(Consumer<Object> callback) {
+		// TODO: auto-generated method stub
+	}
+
 	override onShowMessage(Consumer<MessageParams> callback) {
 		// TODO: auto-generated method stub
 	}

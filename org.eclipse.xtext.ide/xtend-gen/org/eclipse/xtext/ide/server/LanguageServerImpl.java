@@ -247,6 +247,10 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
   }
   
   @Override
+  public void onTelemetryEvent(final Consumer<Object> callback) {
+  }
+  
+  @Override
   public void onShowMessage(final Consumer<MessageParams> callback) {
   }
   
