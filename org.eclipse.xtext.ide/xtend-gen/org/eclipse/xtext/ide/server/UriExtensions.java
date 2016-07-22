@@ -20,9 +20,9 @@ import org.eclipse.emf.common.util.URI;
 @SuppressWarnings("all")
 public class UriExtensions {
   public URI toUri(final String path) {
-    Path _get = Paths.get(path);
-    String _string = _get.toString();
-    return URI.createURI(_string);
+    java.net.URI _create = java.net.URI.create(path);
+    String _path = this.toPath(_create);
+    return URI.createURI(_path);
   }
   
   public String toPath(final URI uri) {

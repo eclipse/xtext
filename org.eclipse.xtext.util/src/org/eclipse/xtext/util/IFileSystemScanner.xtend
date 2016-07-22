@@ -7,10 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.util
 
-import org.eclipse.xtext.util.IAcceptor
-import org.eclipse.emf.common.util.URI
 import com.google.inject.ImplementedBy
 import java.io.File
+import java.nio.file.Paths
+import org.eclipse.emf.common.util.URI
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -29,7 +29,12 @@ interface IFileSystemScanner {
         }
         
         def void scanRec(File file, IAcceptor<URI> acceptor) {
-            acceptor.accept(URI.createFileURI(file.absolutePath))
+            // we need to convert the given file to a decoded emf file uri
+            // e.g. file:///Users/x/y/z
+            // or file:///C:/x/y/z
+            val path = Paths.get(file.absoluteFile.toURI)
+            val uri = URI.createURI(path.toUri.toString)
+            acceptor.accept(uri)
             if (file.isDirectory) {
                 for (f : file.listFiles) {
                     scanRec(f, acceptor)
@@ -38,4 +43,5 @@ interface IFileSystemScanner {
         }
         
     }
+
 }

@@ -19,7 +19,7 @@ import org.eclipse.emf.common.util.URI
 class UriExtensions {
 
 	def URI toUri(String path) {
-		return URI.createURI(Paths.get(path).toString)
+		return URI.createURI(java.net.URI.create(path).toPath)
 	}
 
 	def String toPath(URI uri) {
