@@ -286,16 +286,7 @@ public class XtendImportedNamespaceScopeProvider extends XImportSectionNamespace
 					QualifiedName qualifiedImportedNamespace = qualifiedNameConverter.toQualifiedName(importedNamespace);
 					wildcardImports.add(AbstractNestedTypeAwareImportNormalizer.createNestedTypeAwareImportNormalizer(qualifiedImportedNamespace, true, false));
 				} else {
-					JvmDeclaredType importedType = null;
-					if (compilerPhases.isIndexing(importSection)) {
-						EObject proxy = (EObject) importDeclaration.eGet(XtypePackage.Literals.XIMPORT_DECLARATION__IMPORTED_TYPE, false);
-						if (proxy.eIsProxy()) {
-							URI uri = ((InternalEObject)proxy).eProxyURI();
-							importedType = (JvmDeclaredType) importSection.eResource().getResourceSet().getEObject(uri, true);
-						} 
-					} else {
-						importedType = importDeclaration.getImportedType();
-					}
+					JvmDeclaredType importedType = importDeclaration.getImportedType();
 					if (importedType != null && !importedType.eIsProxy()) {
 						if (concreteImports == null || importedNames == null /* to make JDT happy */) {
 							concreteImports = Lists.newArrayListWithCapacity(10);

@@ -288,4 +288,116 @@ class XtendIncrementalBuilderTest extends AbstractIncrementalBuilderTest {
 		build(buildRequest)
 		assertTrue(issues.toString, issues.isEmpty)
 	}
+	
+	/*
+	 * tests https://github.com/eclipse/xtext-core/issues/52
+	 */
+	@Test def void testIssue52() {
+		build(newBuildRequest [
+			
+			dirtyFiles = #[
+				'src/a/A.xtend' - '''
+					package a
+					
+					import b.B
+					import org.eclipse.xtend.lib.annotations.Accessors
+					
+					class A {
+						
+						@Accessors String version
+						
+						new (String x, B b) {
+							
+						}
+						
+						new() {
+						}
+						
+					}
+					
+					@Accessors
+					class A1 {
+						
+						var String a
+						
+					}
+				''',
+				'src/b/B.xtend' - '''
+					package b
+					
+					import a.A
+					import org.eclipse.xtend.lib.annotations.Accessors
+					
+					class B {
+						
+						@Accessors String version
+						
+						def doSth() {
+							val a = new A
+							a.toString
+						}
+						
+						def doSomethingElse(String a) {
+							a.length + 1
+						}
+						
+					}
+				'''
+			]
+		])
+		assertTrue(issues.toString, issues.isEmpty)
+		build(newBuildRequest [
+			
+			dirtyFiles = #[
+				'src/a/A.xtend' - '''
+					package a
+					
+					import b.B
+					import org.eclipse.xtend.lib.annotations.Accessors
+					
+					class A {
+						
+						@Accessors String version
+						
+						new (String x, B b) {
+							
+						}
+						
+						new() {
+						}
+						
+					}
+					
+					@Accessors
+					class A1 {
+						
+						var String a
+						
+					}
+				''',
+				'src/b/B.xtend' - '''
+					package b
+					
+					import a.A
+					import org.eclipse.xtend.lib.annotations.Accessors
+					
+					class B {
+						
+						@Accessors String version
+						
+						def doSth() {
+							val a = new A
+							a.toString
+						}
+						
+						def doSomethingElse(String a) {
+							a.length + 1
+						}
+						
+					}
+				'''
+			]
+		])
+		assertTrue(issues.toString, issues.isEmpty)
+	}
 }
