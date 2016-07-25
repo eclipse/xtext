@@ -46,7 +46,7 @@ import org.eclipse.xtend.lib.annotations.Data
 
     def PositionImpl getPosition(int offset) {
         val l = contents.length
-        if (offset < 0 || offset >= l)
+        if (offset < 0 || offset > l)
             throw new IndexOutOfBoundsException(offset + " text was : " + contents)
 
         val char NL = '\n'

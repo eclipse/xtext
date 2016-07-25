@@ -55,6 +55,7 @@ import io.typefox.lsapi.services.LanguageServer
 import io.typefox.lsapi.services.TextDocumentService
 import io.typefox.lsapi.services.WindowService
 import io.typefox.lsapi.services.WorkspaceService
+import java.util.Collections
 import java.util.List
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
@@ -74,6 +75,7 @@ import org.eclipse.xtext.resource.FileExtensionProvider
 import org.eclipse.xtext.resource.IMimeTypeProvider
 import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.eclipse.xtext.validation.Issue
+import org.eclipse.xtext.ide.server.formatting.FormattingService
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -116,6 +118,8 @@ import org.eclipse.xtext.validation.Issue
 				resolveProvider = false
 				triggerCharacters = #["."]
 			]
+			documentFormattingProvider = true
+			documentRangeFormattingProvider = true
 		]
 		result.supportedLanguages = newArrayList()
 		for (serviceProvider : languagesRegistry.extensionToFactoryMap.values.filter(IResourceServiceProvider).toSet) {
@@ -436,11 +440,35 @@ import org.eclipse.xtext.validation.Issue
 	}
 
 	override formatting(DocumentFormattingParams params) {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+		return requestManager.runRead[ cancelIndicator |
+			val uri = params.textDocument.uri.toUri
+			val resourceServiceProvider = uri.resourceServiceProvider
+			val formatterService = resourceServiceProvider?.get(FormattingService)
+			if (formatterService === null)
+				return Collections.emptyList
+
+			return workspaceManager.doRead(uri) [ document, resource |
+				val offset = 0
+				val length = document.contents.length
+				return formatterService.format(resource, document, offset, length)
+			]  
+		]
 	}
 
 	override rangeFormatting(DocumentRangeFormattingParams params) {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+		return requestManager.runRead[ cancelIndicator |
+			val uri = params.textDocument.uri.toUri
+			val resourceServiceProvider = uri.resourceServiceProvider
+			val formatterService = resourceServiceProvider?.get(FormattingService)
+			if (formatterService === null)
+				return Collections.emptyList
+
+			return workspaceManager.doRead(uri) [ document, resource |
+				val offset = document.getOffSet(params.range.start)
+				val length = document.getOffSet(params.range.end) - offset
+				return formatterService.format(resource, document, offset, length)
+			]  
+		]
 	}
 
 	override onTypeFormatting(DocumentOnTypeFormattingParams params) {
