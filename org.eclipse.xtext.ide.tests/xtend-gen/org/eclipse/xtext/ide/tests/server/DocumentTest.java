@@ -35,7 +35,8 @@ public class DocumentTest {
     _builder.newLine();
     _builder.append("bar");
     _builder.newLine();
-    Document _document = new Document(1, _builder.toString());
+    String _normalize = this.normalize(_builder);
+    Document _document = new Document(1, _normalize);
     final Procedure1<Document> _function = (Document it) -> {
       PositionImpl _position = this.position(0, 0);
       int _offSet = it.getOffSet(_position);
@@ -104,21 +105,22 @@ public class DocumentTest {
     _builder.newLine();
     _builder.append("bar");
     _builder.newLine();
-    Document _document = new Document(1, _builder.toString());
+    String _normalize = this.normalize(_builder);
+    Document _document = new Document(1, _normalize);
     final Procedure1<Document> _function = (Document it) -> {
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("hello world");
       _builder_1.newLine();
       _builder_1.append("bar");
       _builder_1.newLine();
-      String _string = _builder_1.toString();
+      String _normalize_1 = this.normalize(_builder_1);
       PositionImpl _position = this.position(1, 0);
       PositionImpl _position_1 = this.position(2, 0);
       TextEditImpl _change = this.change(_position, _position_1, "");
       Document _applyChanges = it.applyChanges(
         Collections.<TextEdit>unmodifiableList(CollectionLiterals.<TextEdit>newArrayList(_change)));
       String _contents = _applyChanges.getContents();
-      Assert.assertEquals(_string, _contents);
+      Assert.assertEquals(_normalize_1, _contents);
     };
     ObjectExtensions.<Document>operator_doubleArrow(_document, _function);
   }
@@ -132,7 +134,8 @@ public class DocumentTest {
     _builder.newLine();
     _builder.append("bar");
     _builder.newLine();
-    Document _document = new Document(1, _builder.toString());
+    String _normalize = this.normalize(_builder);
+    Document _document = new Document(1, _normalize);
     final Procedure1<Document> _function = (Document it) -> {
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("hello world");
@@ -141,14 +144,14 @@ public class DocumentTest {
       _builder_1.newLine();
       _builder_1.append("bar");
       _builder_1.newLine();
-      String _string = _builder_1.toString();
+      String _normalize_1 = this.normalize(_builder_1);
       PositionImpl _position = this.position(1, 1);
       PositionImpl _position_1 = this.position(1, 3);
       TextEditImpl _change = this.change(_position, _position_1, "uture");
       Document _applyChanges = it.applyChanges(
         Collections.<TextEdit>unmodifiableList(CollectionLiterals.<TextEdit>newArrayList(_change)));
       String _contents = _applyChanges.getContents();
-      Assert.assertEquals(_string, _contents);
+      Assert.assertEquals(_normalize_1, _contents);
     };
     ObjectExtensions.<Document>operator_doubleArrow(_document, _function);
   }
@@ -161,7 +164,8 @@ public class DocumentTest {
     _builder.append("foo");
     _builder.newLine();
     _builder.append("bar");
-    Document _document = new Document(1, _builder.toString());
+    String _normalize = this.normalize(_builder);
+    Document _document = new Document(1, _normalize);
     final Procedure1<Document> _function = (Document it) -> {
       PositionImpl _position = this.position(0, 0);
       PositionImpl _position_1 = this.position(2, 3);
@@ -182,7 +186,8 @@ public class DocumentTest {
     _builder.append("foo");
     _builder.newLine();
     _builder.append("bar");
-    Document _document = new Document(1, _builder.toString());
+    String _normalize = this.normalize(_builder);
+    Document _document = new Document(1, _normalize);
     final Procedure1<Document> _function = (Document it) -> {
       TextEditImpl _change = this.change(null, null, " foo ");
       Document _applyChanges = it.applyChanges(
@@ -208,6 +213,11 @@ public class DocumentTest {
       it.setNewText(newText);
     };
     return ObjectExtensions.<TextEditImpl>operator_doubleArrow(_textEditImpl, _function);
+  }
+  
+  private String normalize(final CharSequence s) {
+    String _string = s.toString();
+    return _string.replaceAll("\r", "");
   }
   
   private PositionImpl position(final int l, final int c) {

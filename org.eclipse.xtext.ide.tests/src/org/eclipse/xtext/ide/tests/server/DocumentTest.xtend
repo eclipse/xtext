@@ -25,7 +25,7 @@ class DocumentTest {
             hello world
             foo
             bar
-        ''') => [
+        '''.normalize) => [
             assertEquals(0, getOffSet(position(0,0)))
             assertEquals(11, getOffSet(position(0,11)))
             try {
@@ -59,11 +59,11 @@ class DocumentTest {
             hello world
             foo
             bar
-        ''') => [
+        '''.normalize) => [
             assertEquals('''
                 hello world
                 bar
-            '''.toString, applyChanges(#[
+            '''.normalize, applyChanges(#[
                 change(position(1,0), position(2,0), "")
             ]).contents)
         ]
@@ -74,12 +74,12 @@ class DocumentTest {
             hello world
             foo
             bar
-        ''') => [
+        '''.normalize) => [
             assertEquals('''
                 hello world
                 future
                 bar
-            '''.toString, applyChanges(#[
+            '''.normalize, applyChanges(#[
                 change(position(1,1), position(1,3), "uture")
             ]).contents)
         ]
@@ -89,7 +89,7 @@ class DocumentTest {
         new Document(1, '''
             hello world
             foo
-            bar''') => [
+            bar'''.normalize) => [
             assertEquals('', applyChanges(#[
                 change(position(0,0), position(2,3), "")
             ]).contents)
@@ -100,7 +100,7 @@ class DocumentTest {
         new Document(1, '''
             hello world
             foo
-            bar''') => [
+            bar'''.normalize) => [
             assertEquals(' foo ', applyChanges(#[
                 change(null, null, " foo ")
             ]).contents)
@@ -117,6 +117,10 @@ class DocumentTest {
               }
               it.newText = newText
             ]
+    }
+    
+    private def normalize(CharSequence s) {
+        return s.toString.replaceAll("\r", "")
     }
     
     private def position(int l, int c) {

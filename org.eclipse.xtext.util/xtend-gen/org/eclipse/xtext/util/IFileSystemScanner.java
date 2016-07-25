@@ -9,6 +9,8 @@ package org.eclipse.xtext.util;
 
 import com.google.inject.ImplementedBy;
 import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.util.IAcceptor;
 
@@ -28,9 +30,13 @@ public interface IFileSystemScanner {
     }
     
     public void scanRec(final File file, final IAcceptor<URI> acceptor) {
-      String _absolutePath = file.getAbsolutePath();
-      URI _createFileURI = URI.createFileURI(_absolutePath);
-      acceptor.accept(_createFileURI);
+      File _absoluteFile = file.getAbsoluteFile();
+      java.net.URI _uRI = _absoluteFile.toURI();
+      final Path path = Paths.get(_uRI);
+      java.net.URI _uri = path.toUri();
+      String _string = _uri.toString();
+      final URI uri = URI.createURI(_string);
+      acceptor.accept(uri);
       boolean _isDirectory = file.isDirectory();
       if (_isDirectory) {
         File[] _listFiles = file.listFiles();
