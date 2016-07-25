@@ -57,258 +57,234 @@ public class RuleEngineJvmModelInferrer extends AbstractModelInferrer {
     URI _trimFileExtension = _uRI.trimFileExtension();
     final String className = _trimFileExtension.lastSegment();
     JvmGenericType _class = this._jvmTypesBuilder.toClass(element, className);
-    final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
-      @Override
-      public void apply(final JvmGenericType it) {
-        EList<Declaration> _declarations = element.getDeclarations();
-        Iterable<Rule> _filter = Iterables.<Rule>filter(_declarations, Rule.class);
-        for (final Rule device : _filter) {
-          EList<JvmMember> _members = it.getMembers();
-          String _ruleMethodName = RuleEngineJvmModelInferrer.getRuleMethodName(device);
-          JvmTypeReference _typeRef = RuleEngineJvmModelInferrer.this._typeReferenceBuilder.typeRef(void.class);
-          final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
-            @Override
-            public void apply(final JvmOperation it) {
-              it.setStatic(true);
-              XExpression _thenPart = device.getThenPart();
-              RuleEngineJvmModelInferrer.this._jvmTypesBuilder.setBody(it, _thenPart);
-            }
-          };
-          JvmOperation _method = RuleEngineJvmModelInferrer.this._jvmTypesBuilder.toMethod(device, _ruleMethodName, _typeRef, _function);
-          RuleEngineJvmModelInferrer.this._jvmTypesBuilder.<JvmOperation>operator_add(_members, _method);
-        }
-        EList<JvmMember> _members_1 = it.getMembers();
-        JvmTypeReference _typeRef_1 = RuleEngineJvmModelInferrer.this._typeReferenceBuilder.typeRef(void.class);
-        final Procedure1<JvmOperation> _function_1 = new Procedure1<JvmOperation>() {
+    final Procedure1<JvmGenericType> _function = (JvmGenericType it) -> {
+      EList<Declaration> _declarations = element.getDeclarations();
+      Iterable<Rule> _filter = Iterables.<Rule>filter(_declarations, Rule.class);
+      for (final Rule device : _filter) {
+        EList<JvmMember> _members = it.getMembers();
+        String _ruleMethodName = RuleEngineJvmModelInferrer.getRuleMethodName(device);
+        JvmTypeReference _typeRef = this._typeReferenceBuilder.typeRef(void.class);
+        final Procedure1<JvmOperation> _function_1 = (JvmOperation it_1) -> {
+          it_1.setStatic(true);
+          XExpression _thenPart = device.getThenPart();
+          this._jvmTypesBuilder.setBody(it_1, _thenPart);
+        };
+        JvmOperation _method = this._jvmTypesBuilder.toMethod(device, _ruleMethodName, _typeRef, _function_1);
+        this._jvmTypesBuilder.<JvmOperation>operator_add(_members, _method);
+      }
+      EList<JvmMember> _members_1 = it.getMembers();
+      JvmTypeReference _typeRef_1 = this._typeReferenceBuilder.typeRef(void.class);
+      final Procedure1<JvmOperation> _function_2 = (JvmOperation it_1) -> {
+        it_1.setStatic(true);
+        EList<JvmFormalParameter> _parameters = it_1.getParameters();
+        JvmTypeReference _typeRef_2 = this._typeReferenceBuilder.typeRef(Object.class);
+        JvmFormalParameter _parameter = this._jvmTypesBuilder.toParameter(element, "event", _typeRef_2);
+        this._jvmTypesBuilder.<JvmFormalParameter>operator_add(_parameters, _parameter);
+        StringConcatenationClient _client = new StringConcatenationClient() {
           @Override
-          public void apply(final JvmOperation it) {
-            it.setStatic(true);
-            EList<JvmFormalParameter> _parameters = it.getParameters();
-            JvmTypeReference _typeRef = RuleEngineJvmModelInferrer.this._typeReferenceBuilder.typeRef(Object.class);
-            JvmFormalParameter _parameter = RuleEngineJvmModelInferrer.this._jvmTypesBuilder.toParameter(element, "event", _typeRef);
-            RuleEngineJvmModelInferrer.this._jvmTypesBuilder.<JvmFormalParameter>operator_add(_parameters, _parameter);
-            StringConcatenationClient _client = new StringConcatenationClient() {
-              @Override
-              protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+          protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+            {
+              EList<Declaration> _declarations = element.getDeclarations();
+              Iterable<Device> _filter = Iterables.<Device>filter(_declarations, Device.class);
+              for(final Device device : _filter) {
                 {
-                  EList<Declaration> _declarations = element.getDeclarations();
-                  Iterable<Device> _filter = Iterables.<Device>filter(_declarations, Device.class);
-                  for(final Device device : _filter) {
-                    {
-                      EList<State> _states = device.getStates();
-                      for(final State state : _states) {
-                        _builder.append("if (event == ");
-                        String _qualifiedJavaName = RuleEngineJvmModelInferrer.this.getQualifiedJavaName(state);
-                        _builder.append(_qualifiedJavaName, "");
-                        _builder.append(") {");
-                        _builder.newLineIfNotEmpty();
-                        _builder.append("\t");
-                        _builder.append("System.out.println(\"");
-                        String _name = device.getName();
-                        _builder.append(_name, "\t");
-                        _builder.append(" is now ");
-                        String _name_1 = state.getName();
-                        _builder.append(_name_1, "\t");
-                        _builder.append("!\");");
-                        _builder.newLineIfNotEmpty();
-                        _builder.append("}");
-                        _builder.newLine();
-                      }
-                    }
-                  }
-                }
-                {
-                  EList<Declaration> _declarations_1 = element.getDeclarations();
-                  Iterable<Rule> _filter_1 = Iterables.<Rule>filter(_declarations_1, Rule.class);
-                  for(final Rule rule : _filter_1) {
+                  EList<State> _states = device.getStates();
+                  for(final State state : _states) {
                     _builder.append("if (event == ");
-                    State _deviceState = rule.getDeviceState();
-                    String _qualifiedJavaName_1 = RuleEngineJvmModelInferrer.this.getQualifiedJavaName(_deviceState);
-                    _builder.append(_qualifiedJavaName_1, "");
+                    String _qualifiedJavaName = RuleEngineJvmModelInferrer.this.getQualifiedJavaName(state);
+                    _builder.append(_qualifiedJavaName, "");
                     _builder.append(") {");
                     _builder.newLineIfNotEmpty();
                     _builder.append("\t");
-                    String _ruleMethodName = RuleEngineJvmModelInferrer.getRuleMethodName(rule);
-                    _builder.append(_ruleMethodName, "\t");
-                    _builder.append("();");
+                    _builder.append("System.out.println(\"");
+                    String _name = device.getName();
+                    _builder.append(_name, "\t");
+                    _builder.append(" is now ");
+                    String _name_1 = state.getName();
+                    _builder.append(_name_1, "\t");
+                    _builder.append("!\");");
                     _builder.newLineIfNotEmpty();
                     _builder.append("}");
                     _builder.newLine();
                   }
                 }
               }
-            };
-            RuleEngineJvmModelInferrer.this._jvmTypesBuilder.setBody(it, _client);
+            }
+            {
+              EList<Declaration> _declarations_1 = element.getDeclarations();
+              Iterable<Rule> _filter_1 = Iterables.<Rule>filter(_declarations_1, Rule.class);
+              for(final Rule rule : _filter_1) {
+                _builder.append("if (event == ");
+                State _deviceState = rule.getDeviceState();
+                String _qualifiedJavaName_1 = RuleEngineJvmModelInferrer.this.getQualifiedJavaName(_deviceState);
+                _builder.append(_qualifiedJavaName_1, "");
+                _builder.append(") {");
+                _builder.newLineIfNotEmpty();
+                _builder.append("\t");
+                String _ruleMethodName = RuleEngineJvmModelInferrer.getRuleMethodName(rule);
+                _builder.append(_ruleMethodName, "\t");
+                _builder.append("();");
+                _builder.newLineIfNotEmpty();
+                _builder.append("}");
+                _builder.newLine();
+              }
+            }
           }
         };
-        JvmOperation _method_1 = RuleEngineJvmModelInferrer.this._jvmTypesBuilder.toMethod(element, "fire", _typeRef_1, _function_1);
-        RuleEngineJvmModelInferrer.this._jvmTypesBuilder.<JvmOperation>operator_add(_members_1, _method_1);
-        EList<JvmMember> _members_2 = it.getMembers();
-        JvmTypeReference _typeRef_2 = RuleEngineJvmModelInferrer.this._typeReferenceBuilder.typeRef(void.class);
-        final Procedure1<JvmOperation> _function_2 = new Procedure1<JvmOperation>() {
+        this._jvmTypesBuilder.setBody(it_1, _client);
+      };
+      JvmOperation _method_1 = this._jvmTypesBuilder.toMethod(element, "fire", _typeRef_1, _function_2);
+      this._jvmTypesBuilder.<JvmOperation>operator_add(_members_1, _method_1);
+      EList<JvmMember> _members_2 = it.getMembers();
+      JvmTypeReference _typeRef_2 = this._typeReferenceBuilder.typeRef(void.class);
+      final Procedure1<JvmOperation> _function_3 = (JvmOperation it_1) -> {
+        it_1.setStatic(true);
+        EList<JvmFormalParameter> _parameters = it_1.getParameters();
+        JvmTypeReference _typeRef_3 = this._typeReferenceBuilder.typeRef(String.class);
+        JvmTypeReference _addArrayTypeDimension = this._jvmTypesBuilder.addArrayTypeDimension(_typeRef_3);
+        JvmFormalParameter _parameter = this._jvmTypesBuilder.toParameter(element, "args", _addArrayTypeDimension);
+        this._jvmTypesBuilder.<JvmFormalParameter>operator_add(_parameters, _parameter);
+        StringConcatenationClient _client = new StringConcatenationClient() {
           @Override
-          public void apply(final JvmOperation it) {
-            it.setStatic(true);
-            EList<JvmFormalParameter> _parameters = it.getParameters();
-            JvmTypeReference _typeRef = RuleEngineJvmModelInferrer.this._typeReferenceBuilder.typeRef(String.class);
-            JvmTypeReference _addArrayTypeDimension = RuleEngineJvmModelInferrer.this._jvmTypesBuilder.addArrayTypeDimension(_typeRef);
-            JvmFormalParameter _parameter = RuleEngineJvmModelInferrer.this._jvmTypesBuilder.toParameter(element, "args", _addArrayTypeDimension);
-            RuleEngineJvmModelInferrer.this._jvmTypesBuilder.<JvmFormalParameter>operator_add(_parameters, _parameter);
-            StringConcatenationClient _client = new StringConcatenationClient() {
-              @Override
-              protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-                _builder.append(Scanner.class, "");
-                _builder.append(" scanner = new Scanner(System.in);");
-                _builder.newLineIfNotEmpty();
-                _builder.append("System.out.println(\"Welcome home!\");");
-                _builder.newLine();
-                _builder.append("System.out.println(\"Available commands : \");");
-                _builder.newLine();
+          protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+            _builder.append(Scanner.class, "");
+            _builder.append(" scanner = new Scanner(System.in);");
+            _builder.newLineIfNotEmpty();
+            _builder.append("System.out.println(\"Welcome home!\");");
+            _builder.newLine();
+            _builder.append("System.out.println(\"Available commands : \");");
+            _builder.newLine();
+            {
+              EList<Declaration> _declarations = element.getDeclarations();
+              Iterable<Device> _filter = Iterables.<Device>filter(_declarations, Device.class);
+              for(final Device device : _filter) {
                 {
-                  EList<Declaration> _declarations = element.getDeclarations();
-                  Iterable<Device> _filter = Iterables.<Device>filter(_declarations, Device.class);
-                  for(final Device device : _filter) {
-                    {
-                      EList<State> _states = device.getStates();
-                      for(final State state : _states) {
-                        _builder.append("System.out.println(\"  ");
-                        String _name = device.getName();
-                        _builder.append(_name, "");
-                        _builder.append(" ");
-                        String _name_1 = state.getName();
-                        _builder.append(_name_1, "");
-                        _builder.append("\" );");
-                        _builder.newLineIfNotEmpty();
-                      }
-                    }
+                  EList<State> _states = device.getStates();
+                  for(final State state : _states) {
+                    _builder.append("System.out.println(\"  ");
+                    String _name = device.getName();
+                    _builder.append(_name, "");
+                    _builder.append(" ");
+                    String _name_1 = state.getName();
+                    _builder.append(_name_1, "");
+                    _builder.append("\" );");
+                    _builder.newLineIfNotEmpty();
                   }
                 }
-                _builder.append("System.out.println(\"Have fun!\");");
-                _builder.newLine();
-                _builder.append("while(true) {");
-                _builder.newLine();
+              }
+            }
+            _builder.append("System.out.println(\"Have fun!\");");
+            _builder.newLine();
+            _builder.append("while(true) {");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("String command = scanner.next();");
+            _builder.newLine();
+            {
+              EList<Declaration> _declarations_1 = element.getDeclarations();
+              Iterable<Device> _filter_1 = Iterables.<Device>filter(_declarations_1, Device.class);
+              for(final Device device_1 : _filter_1) {
                 _builder.append("\t");
-                _builder.append("String command = scanner.next();");
+                _builder.append("if (command.equalsIgnoreCase(\"");
+                String _name_2 = device_1.getName();
+                _builder.append(_name_2, "\t");
+                _builder.append("\")) {");
+                _builder.newLineIfNotEmpty();
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append("String secondaryCommand = scanner.next();");
                 _builder.newLine();
                 {
-                  EList<Declaration> _declarations_1 = element.getDeclarations();
-                  Iterable<Device> _filter_1 = Iterables.<Device>filter(_declarations_1, Device.class);
-                  for(final Device device_1 : _filter_1) {
+                  EList<State> _states_1 = device_1.getStates();
+                  for(final State state_1 : _states_1) {
                     _builder.append("\t");
-                    _builder.append("if (command.equalsIgnoreCase(\"");
-                    String _name_2 = device_1.getName();
-                    _builder.append(_name_2, "\t");
+                    _builder.append("\t");
+                    _builder.append("if (secondaryCommand.equalsIgnoreCase(\"");
+                    String _name_3 = state_1.getName();
+                    _builder.append(_name_3, "\t\t");
                     _builder.append("\")) {");
                     _builder.newLineIfNotEmpty();
                     _builder.append("\t");
                     _builder.append("\t");
-                    _builder.append("String secondaryCommand = scanner.next();");
-                    _builder.newLine();
-                    {
-                      EList<State> _states_1 = device_1.getStates();
-                      for(final State state_1 : _states_1) {
-                        _builder.append("\t");
-                        _builder.append("\t");
-                        _builder.append("if (secondaryCommand.equalsIgnoreCase(\"");
-                        String _name_3 = state_1.getName();
-                        _builder.append(_name_3, "\t\t");
-                        _builder.append("\")) {");
-                        _builder.newLineIfNotEmpty();
-                        _builder.append("\t");
-                        _builder.append("\t");
-                        _builder.append("\t");
-                        _builder.append("fire(");
-                        String _qualifiedJavaName = RuleEngineJvmModelInferrer.this.getQualifiedJavaName(state_1);
-                        _builder.append(_qualifiedJavaName, "\t\t\t");
-                        _builder.append(");");
-                        _builder.newLineIfNotEmpty();
-                        _builder.append("\t");
-                        _builder.append("\t");
-                        _builder.append("} else ");
-                        _builder.newLine();
-                      }
-                    }
                     _builder.append("\t");
-                    _builder.append("\t");
-                    _builder.append("{");
-                    _builder.newLine();
-                    _builder.append("\t");
-                    _builder.append("\t\t");
-                    _builder.append("System.out.println(\"");
-                    String _name_4 = device_1.getName();
-                    _builder.append(_name_4, "\t\t\t");
-                    _builder.append(" can only have the following states: ");
-                    EList<State> _states_2 = device_1.getStates();
-                    final Function1<State, String> _function = new Function1<State, String>() {
-                      @Override
-                      public String apply(final State it) {
-                        return it.getName();
-                      }
-                    };
-                    List<String> _map = ListExtensions.<State, String>map(_states_2, _function);
-                    String _join = IterableExtensions.join(_map, ",");
-                    _builder.append(_join, "\t\t\t");
-                    _builder.append(".\");");
+                    _builder.append("fire(");
+                    String _qualifiedJavaName = RuleEngineJvmModelInferrer.this.getQualifiedJavaName(state_1);
+                    _builder.append(_qualifiedJavaName, "\t\t\t");
+                    _builder.append(");");
                     _builder.newLineIfNotEmpty();
                     _builder.append("\t");
                     _builder.append("\t");
-                    _builder.append("}");
-                    _builder.newLine();
-                    _builder.append("\t");
-                    _builder.append("}");
+                    _builder.append("} else ");
                     _builder.newLine();
                   }
                 }
                 _builder.append("\t");
-                _builder.append("if (command.equalsIgnoreCase(\"bye\")) {");
+                _builder.append("\t");
+                _builder.append("{");
                 _builder.newLine();
+                _builder.append("\t");
                 _builder.append("\t\t");
-                _builder.append("System.out.println(\"Ciao!\");");
-                _builder.newLine();
-                _builder.append("\t\t");
-                _builder.append("break;");
+                _builder.append("System.out.println(\"");
+                String _name_4 = device_1.getName();
+                _builder.append(_name_4, "\t\t\t");
+                _builder.append(" can only have the following states: ");
+                EList<State> _states_2 = device_1.getStates();
+                final Function1<State, String> _function = (State it_2) -> {
+                  return it_2.getName();
+                };
+                List<String> _map = ListExtensions.<State, String>map(_states_2, _function);
+                String _join = IterableExtensions.join(_map, ",");
+                _builder.append(_join, "\t\t\t");
+                _builder.append(".\");");
+                _builder.newLineIfNotEmpty();
+                _builder.append("\t");
+                _builder.append("\t");
+                _builder.append("}");
                 _builder.newLine();
                 _builder.append("\t");
                 _builder.append("}");
                 _builder.newLine();
-                _builder.append("}");
-                _builder.newLine();
               }
-            };
-            RuleEngineJvmModelInferrer.this._jvmTypesBuilder.setBody(it, _client);
+            }
+            _builder.append("\t");
+            _builder.append("if (command.equalsIgnoreCase(\"bye\")) {");
+            _builder.newLine();
+            _builder.append("\t\t");
+            _builder.append("System.out.println(\"Ciao!\");");
+            _builder.newLine();
+            _builder.append("\t\t");
+            _builder.append("break;");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("}");
+            _builder.newLine();
+            _builder.append("}");
+            _builder.newLine();
           }
         };
-        JvmOperation _method_2 = RuleEngineJvmModelInferrer.this._jvmTypesBuilder.toMethod(element, "main", _typeRef_2, _function_2);
-        RuleEngineJvmModelInferrer.this._jvmTypesBuilder.<JvmOperation>operator_add(_members_2, _method_2);
-      }
+        this._jvmTypesBuilder.setBody(it_1, _client);
+      };
+      JvmOperation _method_2 = this._jvmTypesBuilder.toMethod(element, "main", _typeRef_2, _function_3);
+      this._jvmTypesBuilder.<JvmOperation>operator_add(_members_2, _method_2);
     };
     acceptor.<JvmGenericType>accept(_class, _function);
     EList<Declaration> _declarations = element.getDeclarations();
     Iterable<Device> _filter = Iterables.<Device>filter(_declarations, Device.class);
     for (final Device device : _filter) {
       String _name = device.getName();
-      final Procedure1<JvmEnumerationType> _function_1 = new Procedure1<JvmEnumerationType>() {
-        @Override
-        public void apply(final JvmEnumerationType it) {
-        }
+      final Procedure1<JvmEnumerationType> _function_1 = (JvmEnumerationType it) -> {
       };
       JvmEnumerationType _enumerationType = this._jvmTypesBuilder.toEnumerationType(device, _name, _function_1);
-      final Procedure1<JvmEnumerationType> _function_2 = new Procedure1<JvmEnumerationType>() {
-        @Override
-        public void apply(final JvmEnumerationType it) {
-          EList<State> _states = device.getStates();
-          for (final State state : _states) {
-            EList<JvmMember> _members = it.getMembers();
-            String _name = state.getName();
-            final Procedure1<JvmEnumerationLiteral> _function = new Procedure1<JvmEnumerationLiteral>() {
-              @Override
-              public void apply(final JvmEnumerationLiteral it) {
-                it.setVisibility(JvmVisibility.PUBLIC);
-              }
-            };
-            JvmEnumerationLiteral _enumerationLiteral = RuleEngineJvmModelInferrer.this._jvmTypesBuilder.toEnumerationLiteral(state, _name, _function);
-            RuleEngineJvmModelInferrer.this._jvmTypesBuilder.<JvmEnumerationLiteral>operator_add(_members, _enumerationLiteral);
-          }
+      final Procedure1<JvmEnumerationType> _function_2 = (JvmEnumerationType it) -> {
+        EList<State> _states = device.getStates();
+        for (final State state : _states) {
+          EList<JvmMember> _members = it.getMembers();
+          String _name_1 = state.getName();
+          final Procedure1<JvmEnumerationLiteral> _function_3 = (JvmEnumerationLiteral it_1) -> {
+            it_1.setVisibility(JvmVisibility.PUBLIC);
+          };
+          JvmEnumerationLiteral _enumerationLiteral = this._jvmTypesBuilder.toEnumerationLiteral(state, _name_1, _function_3);
+          this._jvmTypesBuilder.<JvmEnumerationLiteral>operator_add(_members, _enumerationLiteral);
         }
       };
       acceptor.<JvmEnumerationType>accept(_enumerationType, _function_2);

@@ -15,11 +15,8 @@ public class FormatterTest extends AbstractTest {
   
   @Override
   protected void test(final CharSequence document) {
-    final Procedure1<FormatterTestRequest> _function = new Procedure1<FormatterTestRequest>() {
-      @Override
-      public void apply(final FormatterTestRequest it) {
-        it.setToBeFormatted(document);
-      }
+    final Procedure1<FormatterTestRequest> _function = (FormatterTestRequest it) -> {
+      it.setToBeFormatted(document);
     };
     this._formatterTester.assertFormatted(_function);
   }
