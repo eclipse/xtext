@@ -98,6 +98,9 @@ public class ContentAssistTest extends AbstractWebServerTest {
     _builder.append("      ");
     _builder.append(")");
     _builder.newLine();
+    _builder.append("      ");
+    _builder.append("kind = \"UNKOWN\"");
+    _builder.newLine();
     _builder.append("    ");
     _builder.append("],");
     _builder.newLine();
@@ -251,6 +254,9 @@ public class ContentAssistTest extends AbstractWebServerTest {
     _builder.append("      ");
     _builder.append(")");
     _builder.newLine();
+    _builder.append("      ");
+    _builder.append("kind = \"UNKOWN\"");
+    _builder.newLine();
     _builder.append("    ");
     _builder.append("]");
     _builder.newLine();
@@ -307,6 +313,9 @@ public class ContentAssistTest extends AbstractWebServerTest {
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append(")");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("kind = \"UNKOWN\"");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("]");

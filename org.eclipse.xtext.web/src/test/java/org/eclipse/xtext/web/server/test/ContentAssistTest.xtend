@@ -52,6 +52,7 @@ class ContentAssistTest extends AbstractWebServerTest {
 			      editPositions = ArrayList (
 			        [16:4]
 			      )
+			      kind = "UNKOWN"
 			    ],
 			    ContentAssistEntry [
 			      prefix = ""
@@ -109,6 +110,7 @@ class ContentAssistTest extends AbstractWebServerTest {
 			      editPositions = ArrayList (
 			        [20:4]
 			      )
+			      kind = "UNKOWN"
 			    ]
 			  )
 			]''')
@@ -132,6 +134,7 @@ class ContentAssistTest extends AbstractWebServerTest {
 			      editPositions = ArrayList (
 			        [21:4]
 			      )
+			      kind = "UNKOWN"
 			    ]
 			  )
 			]''')
