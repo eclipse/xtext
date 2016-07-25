@@ -172,7 +172,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
       it.setTextDocumentSync(TextDocumentSyncKind.Incremental);
       CompletionOptionsImpl _completionOptionsImpl = new CompletionOptionsImpl();
       final Procedure1<CompletionOptionsImpl> _function_1 = (CompletionOptionsImpl it_1) -> {
-        it_1.setResolveProvider(false);
+        it_1.setResolveProvider(Boolean.valueOf(false));
         it_1.setTriggerCharacters(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList(".")));
       };
       CompletionOptionsImpl _doubleArrow = ObjectExtensions.<CompletionOptionsImpl>operator_doubleArrow(_completionOptionsImpl, _function_1);

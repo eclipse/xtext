@@ -151,7 +151,7 @@ public class DocumentSymbolService {
           if (containerSymbol!=null) {
             _name=containerSymbol.getName();
           }
-          symbol.setContainer(_name);
+          symbol.setContainerName(_name);
         }
       }
     }

@@ -137,7 +137,7 @@ class DocumentSymbolService {
 
 				val container = obj.container
 				val containerSymbol = symbols.get(container)
-				symbol.container = containerSymbol?.name
+				symbol.containerName = containerSymbol?.name
 			}
 		}
 		return symbols.values.toList

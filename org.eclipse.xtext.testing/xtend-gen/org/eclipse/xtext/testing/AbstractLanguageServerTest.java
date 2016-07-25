@@ -336,14 +336,14 @@ public abstract class AbstractLanguageServerTest implements Consumer<PublishDiag
     _builder.append(_expectation, "    ");
     _builder.newLineIfNotEmpty();
     {
-      String _container = it.getContainer();
-      boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(_container);
+      String _containerName = it.getContainerName();
+      boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(_containerName);
       boolean _not = (!_isNullOrEmpty);
       if (_not) {
         _builder.append("    ");
         _builder.append("container: \"");
-        String _container_1 = it.getContainer();
-        _builder.append(_container_1, "    ");
+        String _containerName_1 = it.getContainerName();
+        _builder.append(_containerName_1, "    ");
         _builder.append("\"");
         _builder.newLineIfNotEmpty();
       }

@@ -194,8 +194,8 @@ abstract class AbstractLanguageServerTest implements Consumer<PublishDiagnostics
         symbol "«name»" {
             kind: «kind.value»
             location: «location.toExpectation»
-            «IF !container.nullOrEmpty»
-                container: "«container»"
+            «IF !containerName.nullOrEmpty»
+                container: "«containerName»"
             «ENDIF»
         }
     '''
