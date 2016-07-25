@@ -10,7 +10,8 @@ Require-Bundle: org.eclipse.xtext.example.homeautomation,
  org.eclipse.xtext.junit4,
  org.eclipse.xtext.xbase.junit,
  org.objectweb.asm;bundle-version="[5.0.1,6.0.0)";resolution:=optional,
- org.eclipse.xtext.xbase.lib
+ org.eclipse.xtext.xbase.lib,
+ org.eclipse.xtext.testing
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Export-Package: org.eclipse.xtext.example.homeautomation.tests
 Import-Package: org.junit.runners;version="4.5.0",

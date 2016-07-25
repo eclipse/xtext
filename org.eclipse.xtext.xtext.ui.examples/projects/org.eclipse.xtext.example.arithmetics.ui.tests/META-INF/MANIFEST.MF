@@ -10,7 +10,8 @@ Require-Bundle: org.eclipse.xtext.example.arithmetics.ui,
  org.eclipse.xtext.junit4,
  org.eclipse.xtext.xbase.junit,
  org.eclipse.core.runtime,
- org.eclipse.ui.workbench;resolution:=optional
+ org.eclipse.ui.workbench;resolution:=optional,
+ org.eclipse.xtext.testing
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.eclipse.xtext.example.arithmetics.ui.tests
 Import-Package: org.hamcrest.core,

@@ -12,9 +12,9 @@ import org.eclipse.xtext.example.arithmetics.arithmetics.Expression
 import org.eclipse.xtext.example.arithmetics.arithmetics.Module
 import org.eclipse.xtext.example.arithmetics.interpreter.Calculator
 import org.eclipse.xtext.example.arithmetics.tests.ArithmeticsInjectorProvider
-import org.eclipse.xtext.junit4.InjectWith
-import org.eclipse.xtext.junit4.XtextRunner
-import org.eclipse.xtext.junit4.util.ParseHelper
+import org.eclipse.xtext.testing.InjectWith
+import org.eclipse.xtext.testing.XtextRunner
+import org.eclipse.xtext.testing.util.ParseHelper
 import org.junit.Test
 import org.junit.runner.RunWith
 
