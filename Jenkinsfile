@@ -7,6 +7,7 @@ node {
 		stage 'Gradle Build'
 		sh "./gradlew -PuseJenkinsSnapshots=true cleanLocalMavenRepo clean build createLocalMavenRepo --refresh-dependencies --continue"
 		archive 'build/maven-repository/**/*.*'
+		step([$class: 'JUnitResultArchiver', testResults: '**/build/test-results/*.xml'])
 		
 		stage 'Maven Build'
 		def mvnHome = tool 'M3'
@@ -23,4 +24,4 @@ node {
 	} finally {
 		step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/*.xml'])
 	}
-}  
+}
