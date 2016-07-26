@@ -26,7 +26,21 @@ public class RuleEngineParsingTest {
   public void loadModel() {
     try {
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("Hello Xtext!");
+      _builder.append("Device Window can be open, closed");
+      _builder.newLine();
+      _builder.append(" ");
+      _builder.newLine();
+      _builder.append("Device Heater can be on, off, error");
+      _builder.newLine();
+      _builder.append(" ");
+      _builder.newLine();
+      _builder.append("Rule \'Save energy\' when Window.open then");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("fire(Heater.off)");
+      _builder.newLine();
+      _builder.append("    ");
+      _builder.append("println(\'Another penny to the piggy bank!\')");
       _builder.newLine();
       final Model result = this.parseHelper.parse(_builder);
       Assert.assertNotNull(result);
