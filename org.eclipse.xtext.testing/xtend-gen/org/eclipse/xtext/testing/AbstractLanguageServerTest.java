@@ -85,6 +85,7 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure0;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
@@ -505,6 +506,10 @@ public abstract class AbstractLanguageServerTest implements Consumer<PublishDiag
       String _model = configuration.getModel();
       final String fileUri = this.operator_mappedTo(_filePath, _model);
       this.initialize();
+      Procedure0 _referencedModels = configuration.getReferencedModels();
+      if (_referencedModels!=null) {
+        _referencedModels.apply();
+      }
       String _model_1 = configuration.getModel();
       this.open(fileUri, _model_1);
       final Procedure1<TextDocumentPositionParamsBuilder> _function = (TextDocumentPositionParamsBuilder it) -> {

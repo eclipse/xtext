@@ -36,6 +36,7 @@ import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.TypeDeclaration;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.TypeDeclarationImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.TypeDeclarationImpl#getSuperType <em>Super Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.TypeDeclarationImpl#getProperties <em>Properties</em>}</li>
  * </ul>
  *
@@ -62,6 +63,16 @@ public class TypeDeclarationImpl extends MinimalEObjectImpl.Container implements
    * @ordered
    */
   protected String name = NAME_EDEFAULT;
+
+  /**
+   * The cached value of the '{@link #getSuperType() <em>Super Type</em>}' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getSuperType()
+   * @generated
+   * @ordered
+   */
+  protected TypeDeclaration superType;
 
   /**
    * The cached value of the '{@link #getProperties() <em>Properties</em>}' containment reference list.
@@ -122,6 +133,49 @@ public class TypeDeclarationImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
+  public TypeDeclaration getSuperType()
+  {
+    if (superType != null && superType.eIsProxy())
+    {
+      InternalEObject oldSuperType = (InternalEObject)superType;
+      superType = (TypeDeclaration)eResolveProxy(oldSuperType);
+      if (superType != oldSuperType)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, TestLanguagePackage.TYPE_DECLARATION__SUPER_TYPE, oldSuperType, superType));
+      }
+    }
+    return superType;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public TypeDeclaration basicGetSuperType()
+  {
+    return superType;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setSuperType(TypeDeclaration newSuperType)
+  {
+    TypeDeclaration oldSuperType = superType;
+    superType = newSuperType;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, TestLanguagePackage.TYPE_DECLARATION__SUPER_TYPE, oldSuperType, superType));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EList<Property> getProperties()
   {
     if (properties == null)
@@ -159,6 +213,9 @@ public class TypeDeclarationImpl extends MinimalEObjectImpl.Container implements
     {
       case TestLanguagePackage.TYPE_DECLARATION__NAME:
         return getName();
+      case TestLanguagePackage.TYPE_DECLARATION__SUPER_TYPE:
+        if (resolve) return getSuperType();
+        return basicGetSuperType();
       case TestLanguagePackage.TYPE_DECLARATION__PROPERTIES:
         return getProperties();
     }
@@ -178,6 +235,9 @@ public class TypeDeclarationImpl extends MinimalEObjectImpl.Container implements
     {
       case TestLanguagePackage.TYPE_DECLARATION__NAME:
         setName((String)newValue);
+        return;
+      case TestLanguagePackage.TYPE_DECLARATION__SUPER_TYPE:
+        setSuperType((TypeDeclaration)newValue);
         return;
       case TestLanguagePackage.TYPE_DECLARATION__PROPERTIES:
         getProperties().clear();
@@ -200,6 +260,9 @@ public class TypeDeclarationImpl extends MinimalEObjectImpl.Container implements
       case TestLanguagePackage.TYPE_DECLARATION__NAME:
         setName(NAME_EDEFAULT);
         return;
+      case TestLanguagePackage.TYPE_DECLARATION__SUPER_TYPE:
+        setSuperType((TypeDeclaration)null);
+        return;
       case TestLanguagePackage.TYPE_DECLARATION__PROPERTIES:
         getProperties().clear();
         return;
@@ -219,6 +282,8 @@ public class TypeDeclarationImpl extends MinimalEObjectImpl.Container implements
     {
       case TestLanguagePackage.TYPE_DECLARATION__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+      case TestLanguagePackage.TYPE_DECLARATION__SUPER_TYPE:
+        return superType != null;
       case TestLanguagePackage.TYPE_DECLARATION__PROPERTIES:
         return properties != null && !properties.isEmpty();
     }

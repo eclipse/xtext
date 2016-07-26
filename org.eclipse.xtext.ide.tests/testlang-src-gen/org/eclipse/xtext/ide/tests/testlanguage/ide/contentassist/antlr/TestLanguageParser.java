@@ -42,12 +42,14 @@ public class TestLanguageParser extends AbstractContentAssistParser {
 					put(grammarAccess.getTypeAccess().getAlternatives_0(), "rule__Type__Alternatives_0");
 					put(grammarAccess.getPrimitiveTypeAccess().getNameAlternatives_0(), "rule__PrimitiveType__NameAlternatives_0");
 					put(grammarAccess.getTypeDeclarationAccess().getGroup(), "rule__TypeDeclaration__Group__0");
+					put(grammarAccess.getTypeDeclarationAccess().getGroup_2(), "rule__TypeDeclaration__Group_2__0");
 					put(grammarAccess.getPropertyAccess().getGroup(), "rule__Property__Group__0");
 					put(grammarAccess.getTypeAccess().getGroup(), "rule__Type__Group__0");
 					put(grammarAccess.getTypeAccess().getGroup_1(), "rule__Type__Group_1__0");
 					put(grammarAccess.getModelAccess().getTypesAssignment(), "rule__Model__TypesAssignment");
 					put(grammarAccess.getTypeDeclarationAccess().getNameAssignment_1(), "rule__TypeDeclaration__NameAssignment_1");
-					put(grammarAccess.getTypeDeclarationAccess().getPropertiesAssignment_3(), "rule__TypeDeclaration__PropertiesAssignment_3");
+					put(grammarAccess.getTypeDeclarationAccess().getSuperTypeAssignment_2_1(), "rule__TypeDeclaration__SuperTypeAssignment_2_1");
+					put(grammarAccess.getTypeDeclarationAccess().getPropertiesAssignment_4(), "rule__TypeDeclaration__PropertiesAssignment_4");
 					put(grammarAccess.getPropertyAccess().getTypeAssignment_0(), "rule__Property__TypeAssignment_0");
 					put(grammarAccess.getPropertyAccess().getNameAssignment_1(), "rule__Property__NameAssignment_1");
 					put(grammarAccess.getTypeAccess().getArrayDiemensionsAssignment_1_0(), "rule__Type__ArrayDiemensionsAssignment_1_0");

@@ -12,11 +12,18 @@ import com.google.inject.Singleton
 import io.typefox.lsapi.Hover
 import io.typefox.lsapi.impl.HoverImpl
 import io.typefox.lsapi.impl.MarkedStringImpl
+import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider
 import org.eclipse.xtext.ide.server.DocumentExtensions
+import org.eclipse.xtext.nodemodel.ILeafNode
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils
+import org.eclipse.xtext.parser.IParseResult
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper
 import org.eclipse.xtext.resource.ILocationInFileProvider
 import org.eclipse.xtext.resource.XtextResource
+import org.eclipse.xtext.util.ITextRegion
+import org.eclipse.xtext.util.Pair
+import org.eclipse.xtext.util.Tuples
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -38,7 +45,11 @@ class HoverService {
 	extension IEObjectDocumentationProvider
 
 	def Hover hover(XtextResource resource, int offset) {
-		val element = resource.resolveElementAt(offset)
+		val pair = resource.getXtextElementAt(offset)
+		if (pair === null || pair.first === null || pair.second === null) {
+			return new HoverImpl(emptyList, null)
+		}
+		val element = pair.first
 		if (element === null)
 			return new HoverImpl(emptyList, null)
 
@@ -48,16 +59,40 @@ class HoverService {
 
 		val contents = #[new MarkedStringImpl(null, documentation)]
 		
-		val containedElement = resource.resolveContainedElementAt(offset)
-		val textRegion = containedElement.significantTextRegion
-		if (textRegion === null)
-			return new HoverImpl(contents, null)
+		val ITextRegion textRegion = pair.second
 
 		if (!textRegion.contains(offset))
 			return new HoverImpl(emptyList, null)
 
 		val range = resource.newRange(textRegion)
 		return new HoverImpl(contents, range)
+	}
+
+	protected def Pair<EObject, ITextRegion> getXtextElementAt(XtextResource resource, int offset) {
+		// check for cross reference
+		val EObject crossLinkedEObject = resolveCrossReferencedElementAt(resource, offset);
+		if (crossLinkedEObject != null) {
+			if (!crossLinkedEObject.eIsProxy()) {
+				val IParseResult parseResult = resource.getParseResult();
+				if (parseResult != null) {
+					var ILeafNode leafNode = NodeModelUtils.findLeafNodeAtOffset(parseResult.getRootNode(), offset);
+					if(leafNode != null && leafNode.isHidden() && leafNode.getOffset() == offset) {
+						leafNode = NodeModelUtils.findLeafNodeAtOffset(parseResult.getRootNode(), offset - 1);
+					}
+					if (leafNode != null) {
+						val ITextRegion leafRegion = leafNode.getTextRegion();
+						return Tuples.create(crossLinkedEObject, leafRegion);
+					}
+				}
+			}
+		} else {
+			val EObject o = resource.resolveElementAt(offset);
+			if (o != null) {
+				val ITextRegion region = o.getSignificantTextRegion();
+				return Tuples.create(o, region);
+			}
+		}
+		return null;
 	}
 
 }

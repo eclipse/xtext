@@ -30,11 +30,11 @@ class TestLanguageFormatter extends AbstractFormatter2 {
 	
 	def dispatch void format(TypeDeclaration type, extension IFormattableDocument document) {
 		//type.regionFor.keyword(typeDeclarationAccess.leftCurlyBracketKeyword_2).prepend[oneSpace]
-		type.regionFor.keyword(typeDeclarationAccess.leftCurlyBracketKeyword_2).append[newLine]
-		type.regionFor.keyword(typeDeclarationAccess.rightCurlyBracketKeyword_4).prepend[newLine].append[newLine]
+		type.regionFor.keyword(typeDeclarationAccess.leftCurlyBracketKeyword_3).append[newLine]
+		type.regionFor.keyword(typeDeclarationAccess.rightCurlyBracketKeyword_5).prepend[newLine].append[newLine]
 		interior(
-			type.regionFor.keyword(typeDeclarationAccess.leftCurlyBracketKeyword_2),
-			type.regionFor.keyword(typeDeclarationAccess.rightCurlyBracketKeyword_4)
+			type.regionFor.keyword(typeDeclarationAccess.leftCurlyBracketKeyword_3),
+			type.regionFor.keyword(typeDeclarationAccess.rightCurlyBracketKeyword_5)
 		) [indent]
 		for (property : type.properties) {
 			property.format

@@ -181,9 +181,19 @@ public class TestLanguagePackageImpl extends EPackageImpl implements TestLanguag
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getTypeDeclaration_Properties()
+  public EReference getTypeDeclaration_SuperType()
   {
     return (EReference)typeDeclarationEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getTypeDeclaration_Properties()
+  {
+    return (EReference)typeDeclarationEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -311,6 +321,7 @@ public class TestLanguagePackageImpl extends EPackageImpl implements TestLanguag
 
     typeDeclarationEClass = createEClass(TYPE_DECLARATION);
     createEAttribute(typeDeclarationEClass, TYPE_DECLARATION__NAME);
+    createEReference(typeDeclarationEClass, TYPE_DECLARATION__SUPER_TYPE);
     createEReference(typeDeclarationEClass, TYPE_DECLARATION__PROPERTIES);
 
     propertyEClass = createEClass(PROPERTY);
@@ -365,6 +376,7 @@ public class TestLanguagePackageImpl extends EPackageImpl implements TestLanguag
 
     initEClass(typeDeclarationEClass, TypeDeclaration.class, "TypeDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getTypeDeclaration_Name(), ecorePackage.getEString(), "name", null, 0, 1, TypeDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getTypeDeclaration_SuperType(), this.getTypeDeclaration(), null, "superType", null, 0, 1, TypeDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getTypeDeclaration_Properties(), this.getProperty(), null, "properties", null, 0, -1, TypeDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(propertyEClass, Property.class, "Property", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

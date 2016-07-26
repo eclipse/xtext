@@ -136,7 +136,7 @@ public class TestLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 	 *     TypeDeclaration returns TypeDeclaration
 	 *
 	 * Constraint:
-	 *     (name=ID properties+=Property*)
+	 *     (name=ID superType=[TypeDeclaration|ID]? properties+=Property*)
 	 */
 	protected void sequence_TypeDeclaration(ISerializationContext context, TypeDeclaration semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

@@ -44,16 +44,16 @@ public class TestLanguageFormatter extends AbstractFormatter2 {
   protected void _format(final TypeDeclaration type, @Extension final IFormattableDocument document) {
     ISemanticRegionsFinder _regionFor = this.textRegionExtensions.regionFor(type);
     TestLanguageGrammarAccess.TypeDeclarationElements _typeDeclarationAccess = this._testLanguageGrammarAccess.getTypeDeclarationAccess();
-    Keyword _leftCurlyBracketKeyword_2 = _typeDeclarationAccess.getLeftCurlyBracketKeyword_2();
-    ISemanticRegion _keyword = _regionFor.keyword(_leftCurlyBracketKeyword_2);
+    Keyword _leftCurlyBracketKeyword_3 = _typeDeclarationAccess.getLeftCurlyBracketKeyword_3();
+    ISemanticRegion _keyword = _regionFor.keyword(_leftCurlyBracketKeyword_3);
     final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
       it.newLine();
     };
     document.append(_keyword, _function);
     ISemanticRegionsFinder _regionFor_1 = this.textRegionExtensions.regionFor(type);
     TestLanguageGrammarAccess.TypeDeclarationElements _typeDeclarationAccess_1 = this._testLanguageGrammarAccess.getTypeDeclarationAccess();
-    Keyword _rightCurlyBracketKeyword_4 = _typeDeclarationAccess_1.getRightCurlyBracketKeyword_4();
-    ISemanticRegion _keyword_1 = _regionFor_1.keyword(_rightCurlyBracketKeyword_4);
+    Keyword _rightCurlyBracketKeyword_5 = _typeDeclarationAccess_1.getRightCurlyBracketKeyword_5();
+    ISemanticRegion _keyword_1 = _regionFor_1.keyword(_rightCurlyBracketKeyword_5);
     final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
       it.newLine();
     };
@@ -64,12 +64,12 @@ public class TestLanguageFormatter extends AbstractFormatter2 {
     document.append(_prepend, _function_2);
     ISemanticRegionsFinder _regionFor_2 = this.textRegionExtensions.regionFor(type);
     TestLanguageGrammarAccess.TypeDeclarationElements _typeDeclarationAccess_2 = this._testLanguageGrammarAccess.getTypeDeclarationAccess();
-    Keyword _leftCurlyBracketKeyword_2_1 = _typeDeclarationAccess_2.getLeftCurlyBracketKeyword_2();
-    ISemanticRegion _keyword_2 = _regionFor_2.keyword(_leftCurlyBracketKeyword_2_1);
+    Keyword _leftCurlyBracketKeyword_3_1 = _typeDeclarationAccess_2.getLeftCurlyBracketKeyword_3();
+    ISemanticRegion _keyword_2 = _regionFor_2.keyword(_leftCurlyBracketKeyword_3_1);
     ISemanticRegionsFinder _regionFor_3 = this.textRegionExtensions.regionFor(type);
     TestLanguageGrammarAccess.TypeDeclarationElements _typeDeclarationAccess_3 = this._testLanguageGrammarAccess.getTypeDeclarationAccess();
-    Keyword _rightCurlyBracketKeyword_4_1 = _typeDeclarationAccess_3.getRightCurlyBracketKeyword_4();
-    ISemanticRegion _keyword_3 = _regionFor_3.keyword(_rightCurlyBracketKeyword_4_1);
+    Keyword _rightCurlyBracketKeyword_5_1 = _typeDeclarationAccess_3.getRightCurlyBracketKeyword_5();
+    ISemanticRegion _keyword_3 = _regionFor_3.keyword(_rightCurlyBracketKeyword_5_1);
     final Procedure1<IHiddenRegionFormatter> _function_3 = (IHiddenRegionFormatter it) -> {
       it.indent();
     };

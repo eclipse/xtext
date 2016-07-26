@@ -109,13 +109,22 @@ public interface TestLanguagePackage extends EPackage
   int TYPE_DECLARATION__NAME = 0;
 
   /**
+   * The feature id for the '<em><b>Super Type</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TYPE_DECLARATION__SUPER_TYPE = 1;
+
+  /**
    * The feature id for the '<em><b>Properties</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int TYPE_DECLARATION__PROPERTIES = 1;
+  int TYPE_DECLARATION__PROPERTIES = 2;
 
   /**
    * The number of structural features of the '<em>Type Declaration</em>' class.
@@ -124,7 +133,7 @@ public interface TestLanguagePackage extends EPackage
    * @generated
    * @ordered
    */
-  int TYPE_DECLARATION_FEATURE_COUNT = 2;
+  int TYPE_DECLARATION_FEATURE_COUNT = 3;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.PropertyImpl <em>Property</em>}' class.
@@ -309,6 +318,17 @@ public interface TestLanguagePackage extends EPackage
   EAttribute getTypeDeclaration_Name();
 
   /**
+   * Returns the meta object for the reference '{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.TypeDeclaration#getSuperType <em>Super Type</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Super Type</em>'.
+   * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.TypeDeclaration#getSuperType()
+   * @see #getTypeDeclaration()
+   * @generated
+   */
+  EReference getTypeDeclaration_SuperType();
+
+  /**
    * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.TypeDeclaration#getProperties <em>Properties</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -472,6 +492,14 @@ public interface TestLanguagePackage extends EPackage
      * @generated
      */
     EAttribute TYPE_DECLARATION__NAME = eINSTANCE.getTypeDeclaration_Name();
+
+    /**
+     * The meta object literal for the '<em><b>Super Type</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference TYPE_DECLARATION__SUPER_TYPE = eINSTANCE.getTypeDeclaration_SuperType();
 
     /**
      * The meta object literal for the '<em><b>Properties</b></em>' containment reference list feature.
