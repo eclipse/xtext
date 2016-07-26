@@ -9,7 +9,6 @@ package org.eclipse.xtext.ide.tests.server
 
 import io.typefox.lsapi.builders.RangeBuilder
 import org.eclipse.xtext.ide.server.formatting.FormattingService
-import org.eclipse.xtext.testing.AbstractLanguageServerTest
 import org.junit.Test
 
 /**

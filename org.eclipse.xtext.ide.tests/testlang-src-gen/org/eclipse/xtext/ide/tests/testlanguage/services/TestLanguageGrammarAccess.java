@@ -48,18 +48,23 @@ public class TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cTypeKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
-		private final Keyword cLeftCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cPropertiesAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cPropertiesPropertyParserRuleCall_3_0 = (RuleCall)cPropertiesAssignment_3.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
+		private final Keyword cExtendsKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
+		private final Assignment cSuperTypeAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
+		private final CrossReference cSuperTypeTypeDeclarationCrossReference_2_1_0 = (CrossReference)cSuperTypeAssignment_2_1.eContents().get(0);
+		private final RuleCall cSuperTypeTypeDeclarationIDTerminalRuleCall_2_1_0_1 = (RuleCall)cSuperTypeTypeDeclarationCrossReference_2_1_0.eContents().get(1);
+		private final Keyword cLeftCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cPropertiesAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cPropertiesPropertyParserRuleCall_4_0 = (RuleCall)cPropertiesAssignment_4.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//TypeDeclaration:
-		//	'type' name=ID '{'
+		//	'type' name=ID ('extends' superType=[TypeDeclaration])? '{'
 		//	properties+=Property*
 		//	'}';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'type' name=ID '{' properties+=Property* '}'
+		//'type' name=ID ('extends' superType=[TypeDeclaration])? '{' properties+=Property* '}'
 		public Group getGroup() { return cGroup; }
 		
 		//'type'
@@ -71,17 +76,32 @@ public class TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 		
+		//('extends' superType=[TypeDeclaration])?
+		public Group getGroup_2() { return cGroup_2; }
+		
+		//'extends'
+		public Keyword getExtendsKeyword_2_0() { return cExtendsKeyword_2_0; }
+		
+		//superType=[TypeDeclaration]
+		public Assignment getSuperTypeAssignment_2_1() { return cSuperTypeAssignment_2_1; }
+		
+		//[TypeDeclaration]
+		public CrossReference getSuperTypeTypeDeclarationCrossReference_2_1_0() { return cSuperTypeTypeDeclarationCrossReference_2_1_0; }
+		
+		//ID
+		public RuleCall getSuperTypeTypeDeclarationIDTerminalRuleCall_2_1_0_1() { return cSuperTypeTypeDeclarationIDTerminalRuleCall_2_1_0_1; }
+		
 		//'{'
-		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
+		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
 		
 		//properties+=Property*
-		public Assignment getPropertiesAssignment_3() { return cPropertiesAssignment_3; }
+		public Assignment getPropertiesAssignment_4() { return cPropertiesAssignment_4; }
 		
 		//Property
-		public RuleCall getPropertiesPropertyParserRuleCall_3_0() { return cPropertiesPropertyParserRuleCall_3_0; }
+		public RuleCall getPropertiesPropertyParserRuleCall_4_0() { return cPropertiesPropertyParserRuleCall_4_0; }
 		
 		//'}'
-		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
+		public Keyword getRightCurlyBracketKeyword_5() { return cRightCurlyBracketKeyword_5; }
 	}
 	public class PropertyElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ide.tests.testlanguage.TestLanguage.Property");
@@ -259,7 +279,7 @@ public class TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//TypeDeclaration:
-	//	'type' name=ID '{'
+	//	'type' name=ID ('extends' superType=[TypeDeclaration])? '{'
 	//	properties+=Property*
 	//	'}';
 	public TypeDeclarationElements getTypeDeclarationAccess() {

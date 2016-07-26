@@ -13,7 +13,7 @@ Model:
 	types+=TypeDeclaration*;
 	
 TypeDeclaration:
-	'type' name=ID '{'
+	'type' name=ID ('extends' superType=[TypeDeclaration])? '{'
 	   properties+=Property*
 	'}';
 

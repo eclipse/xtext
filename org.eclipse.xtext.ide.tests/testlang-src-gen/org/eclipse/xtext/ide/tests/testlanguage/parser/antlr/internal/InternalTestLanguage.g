@@ -138,16 +138,35 @@ ruleTypeDeclaration returns [EObject current=null]
 				}
 			)
 		)
-		otherlv_2='{'
+		(
+			otherlv_2='extends'
+			{
+				newLeafNode(otherlv_2, grammarAccess.getTypeDeclarationAccess().getExtendsKeyword_2_0());
+			}
+			(
+				(
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getTypeDeclarationRule());
+						}
+					}
+					otherlv_3=RULE_ID
+					{
+						newLeafNode(otherlv_3, grammarAccess.getTypeDeclarationAccess().getSuperTypeTypeDeclarationCrossReference_2_1_0());
+					}
+				)
+			)
+		)?
+		otherlv_4='{'
 		{
-			newLeafNode(otherlv_2, grammarAccess.getTypeDeclarationAccess().getLeftCurlyBracketKeyword_2());
+			newLeafNode(otherlv_4, grammarAccess.getTypeDeclarationAccess().getLeftCurlyBracketKeyword_3());
 		}
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getTypeDeclarationAccess().getPropertiesPropertyParserRuleCall_3_0());
+					newCompositeNode(grammarAccess.getTypeDeclarationAccess().getPropertiesPropertyParserRuleCall_4_0());
 				}
-				lv_properties_3_0=ruleProperty
+				lv_properties_5_0=ruleProperty
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getTypeDeclarationRule());
@@ -155,15 +174,15 @@ ruleTypeDeclaration returns [EObject current=null]
 					add(
 						$current,
 						"properties",
-						lv_properties_3_0,
+						lv_properties_5_0,
 						"org.eclipse.xtext.ide.tests.testlanguage.TestLanguage.Property");
 					afterParserOrEnumRuleCall();
 				}
 			)
 		)*
-		otherlv_4='}'
+		otherlv_6='}'
 		{
-			newLeafNode(otherlv_4, grammarAccess.getTypeDeclarationAccess().getRightCurlyBracketKeyword_4());
+			newLeafNode(otherlv_6, grammarAccess.getTypeDeclarationAccess().getRightCurlyBracketKeyword_5());
 		}
 	)
 ;

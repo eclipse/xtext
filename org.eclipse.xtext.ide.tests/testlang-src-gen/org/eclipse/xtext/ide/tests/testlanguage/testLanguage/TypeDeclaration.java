@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.TypeDeclaration#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.TypeDeclaration#getSuperType <em>Super Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.TypeDeclaration#getProperties <em>Properties</em>}</li>
  * </ul>
  *
@@ -55,6 +56,32 @@ public interface TypeDeclaration extends EObject
    * @generated
    */
   void setName(String value);
+
+  /**
+   * Returns the value of the '<em><b>Super Type</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Super Type</em>' reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Super Type</em>' reference.
+   * @see #setSuperType(TypeDeclaration)
+   * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.TestLanguagePackage#getTypeDeclaration_SuperType()
+   * @model
+   * @generated
+   */
+  TypeDeclaration getSuperType();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.TypeDeclaration#getSuperType <em>Super Type</em>}' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Super Type</em>' reference.
+   * @see #getSuperType()
+   * @generated
+   */
+  void setSuperType(TypeDeclaration value);
 
   /**
    * Returns the value of the '<em><b>Properties</b></em>' containment reference list.
