@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtext.ide.server.hover;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import io.typefox.lsapi.Hover;
@@ -18,10 +19,16 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
 import org.eclipse.xtext.ide.server.DocumentExtensions;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.ILeafNode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.ITextRegion;
+import org.eclipse.xtext.util.Pair;
+import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
 
@@ -49,30 +56,66 @@ public class HoverService {
   private IEObjectDocumentationProvider _iEObjectDocumentationProvider;
   
   public Hover hover(final XtextResource resource, final int offset) {
-    final EObject element = this._eObjectAtOffsetHelper.resolveElementAt(resource, offset);
-    if ((element == null)) {
+    final Pair<EObject, ITextRegion> pair = this.getXtextElementAt(resource, offset);
+    if ((((pair == null) || (pair.getFirst() == null)) || (pair.getSecond() == null))) {
       List<MarkedStringImpl> _emptyList = CollectionLiterals.<MarkedStringImpl>emptyList();
       return new HoverImpl(_emptyList, null);
     }
-    final String documentation = this._iEObjectDocumentationProvider.getDocumentation(element);
-    if ((documentation == null)) {
+    final EObject element = pair.getFirst();
+    if ((element == null)) {
       List<MarkedStringImpl> _emptyList_1 = CollectionLiterals.<MarkedStringImpl>emptyList();
       return new HoverImpl(_emptyList_1, null);
     }
-    MarkedStringImpl _markedStringImpl = new MarkedStringImpl(null, documentation);
-    final List<MarkedStringImpl> contents = Collections.<MarkedStringImpl>unmodifiableList(CollectionLiterals.<MarkedStringImpl>newArrayList(_markedStringImpl));
-    final EObject containedElement = this._eObjectAtOffsetHelper.resolveContainedElementAt(resource, offset);
-    final ITextRegion textRegion = this._iLocationInFileProvider.getSignificantTextRegion(containedElement);
-    if ((textRegion == null)) {
-      return new HoverImpl(contents, null);
-    }
-    boolean _contains = textRegion.contains(offset);
-    boolean _not = (!_contains);
-    if (_not) {
+    final String documentation = this._iEObjectDocumentationProvider.getDocumentation(element);
+    if ((documentation == null)) {
       List<MarkedStringImpl> _emptyList_2 = CollectionLiterals.<MarkedStringImpl>emptyList();
       return new HoverImpl(_emptyList_2, null);
     }
+    MarkedStringImpl _markedStringImpl = new MarkedStringImpl(null, documentation);
+    final List<MarkedStringImpl> contents = Collections.<MarkedStringImpl>unmodifiableList(CollectionLiterals.<MarkedStringImpl>newArrayList(_markedStringImpl));
+    final ITextRegion textRegion = pair.getSecond();
+    boolean _contains = textRegion.contains(offset);
+    boolean _not = (!_contains);
+    if (_not) {
+      List<MarkedStringImpl> _emptyList_3 = CollectionLiterals.<MarkedStringImpl>emptyList();
+      return new HoverImpl(_emptyList_3, null);
+    }
     final RangeImpl range = this._documentExtensions.newRange(resource, textRegion);
     return new HoverImpl(contents, range);
+  }
+  
+  protected Pair<EObject, ITextRegion> getXtextElementAt(final XtextResource resource, final int offset) {
+    final EObject crossLinkedEObject = this._eObjectAtOffsetHelper.resolveCrossReferencedElementAt(resource, offset);
+    boolean _notEquals = (!Objects.equal(crossLinkedEObject, null));
+    if (_notEquals) {
+      boolean _eIsProxy = crossLinkedEObject.eIsProxy();
+      boolean _not = (!_eIsProxy);
+      if (_not) {
+        final IParseResult parseResult = resource.getParseResult();
+        boolean _notEquals_1 = (!Objects.equal(parseResult, null));
+        if (_notEquals_1) {
+          ICompositeNode _rootNode = parseResult.getRootNode();
+          ILeafNode leafNode = NodeModelUtils.findLeafNodeAtOffset(_rootNode, offset);
+          if ((((!Objects.equal(leafNode, null)) && leafNode.isHidden()) && (leafNode.getOffset() == offset))) {
+            ICompositeNode _rootNode_1 = parseResult.getRootNode();
+            ILeafNode _findLeafNodeAtOffset = NodeModelUtils.findLeafNodeAtOffset(_rootNode_1, (offset - 1));
+            leafNode = _findLeafNodeAtOffset;
+          }
+          boolean _notEquals_2 = (!Objects.equal(leafNode, null));
+          if (_notEquals_2) {
+            final ITextRegion leafRegion = leafNode.getTextRegion();
+            return Tuples.<EObject, ITextRegion>create(crossLinkedEObject, leafRegion);
+          }
+        }
+      }
+    } else {
+      final EObject o = this._eObjectAtOffsetHelper.resolveElementAt(resource, offset);
+      boolean _notEquals_3 = (!Objects.equal(o, null));
+      if (_notEquals_3) {
+        final ITextRegion region = this._iLocationInFileProvider.getSignificantTextRegion(o);
+        return Tuples.<EObject, ITextRegion>create(o, region);
+      }
+    }
+    return null;
   }
 }

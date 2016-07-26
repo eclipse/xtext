@@ -9,12 +9,16 @@ package org.eclipse.xtext.testing;
 
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.testing.TextDocumentPositionConfiguration;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure0;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 @Accessors
 @SuppressWarnings("all")
 public class HoverTestConfiguration extends TextDocumentPositionConfiguration {
   private String expectedHover = "";
+  
+  private Procedure0 referencedModels = ((Procedure0) () -> {
+  });
   
   @Pure
   public String getExpectedHover() {
@@ -23,5 +27,14 @@ public class HoverTestConfiguration extends TextDocumentPositionConfiguration {
   
   public void setExpectedHover(final String expectedHover) {
     this.expectedHover = expectedHover;
+  }
+  
+  @Pure
+  public Procedure0 getReferencedModels() {
+    return this.referencedModels;
+  }
+  
+  public void setReferencedModels(final Procedure0 referencedModels) {
+    this.referencedModels = referencedModels;
   }
 }

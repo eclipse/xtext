@@ -265,8 +265,8 @@ abstract class AbstractLanguageServerTest implements Consumer<PublishDiagnostics
         val fileUri = filePath -> model
 
         initialize
+		configuration.referencedModels?.apply
         open(fileUri, model)
-
         val hover = languageServer.hover(new TextDocumentPositionParamsBuilder[
         	textDocument(fileUri)
         	position(line, column)
@@ -376,6 +376,7 @@ class DefinitionTestConfiguration extends TextDocumentPositionConfiguration {
 @Accessors
 class HoverTestConfiguration extends TextDocumentPositionConfiguration {
     String expectedHover = ''
+    Procedures.Procedure0 referencedModels = []
 }
 
 @Accessors

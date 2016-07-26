@@ -67,4 +67,51 @@ class HoverTest extends AbstractTestLangLanguageServerTest {
 		]
 	}
 
+	@Test
+	def void testHover_04() {
+		testHover[
+			model = '''
+				/**
+				 * Some documentation.
+				 */
+				type Foo {
+				}
+				type Bar extends Foo {
+				}
+			'''
+			line = 5
+			column = 'type Bar extends F'.length
+			expectedHover = '''
+				[[5, 17] .. [5, 20]]
+				Some documentation.
+			'''
+		]
+	}
+
+	@Test
+	def void testHover_05() {
+		testHover[
+			referencedModels = [
+				val referenceModel = '''
+					/**
+					 * Some documentation.
+					 */
+					type Foo {
+					}
+				'''
+				val fileUri = 'MyModel2.' + fileExtension -> referenceModel
+				open(fileUri, referenceModel)
+			]
+			model = '''
+				type Bar extends Foo {
+				}
+			'''
+			column = 'type Bar extends F'.length
+			expectedHover = '''
+				[[0, 17] .. [0, 20]]
+				Some documentation.
+			'''
+		]
+	}
+
 }
