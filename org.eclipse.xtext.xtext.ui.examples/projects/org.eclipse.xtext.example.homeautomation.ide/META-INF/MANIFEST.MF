@@ -7,7 +7,8 @@ Bundle-SymbolicName: org.eclipse.xtext.example.homeautomation.ide; singleton:=tr
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext.example.homeautomation,
  org.eclipse.xtext.ide,
- org.eclipse.xtext.xbase.ide
+ org.eclipse.xtext.xbase.ide,
+ org.antlr.runtime
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Export-Package: org.eclipse.xtext.example.homeautomation.ide.contentassist.antlr,
  org.eclipse.xtext.example.homeautomation.ide.contentassist.antlr.internal,
