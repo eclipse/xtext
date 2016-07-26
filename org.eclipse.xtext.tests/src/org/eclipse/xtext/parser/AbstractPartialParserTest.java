@@ -54,6 +54,7 @@ public abstract class AbstractPartialParserTest extends AbstractXtextTests {
 			assertTrue(secondIter.hasNext());
 			INode firstNext = firstIter.next();
 			INode secondNext = secondIter.next();
+			assertEquals(firstNext.getGrammarElement(), secondNext.getGrammarElement());
 			assertEquals(firstNext.getClass(), secondNext.getClass());
 			assertEquals(firstNext.getTotalOffset(), secondNext.getTotalOffset());
 			assertEquals(firstNext.getTotalLength(), secondNext.getTotalLength());
