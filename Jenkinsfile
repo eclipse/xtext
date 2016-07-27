@@ -11,6 +11,7 @@ node {
 		
 		stage 'Maven Build'
 		def mvnHome = tool 'M3'
+		env.M2_HOME = "${mvnHome}"
 		wrap([$class:'Xvnc', useXauthority: true]) {
 			sh "${mvnHome}/bin/mvn --batch-mode --update-snapshots -fae -Dmaven.repo.local=build/maven-repository/ clean install"
 		}

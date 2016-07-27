@@ -15,7 +15,7 @@ import org.eclipse.xtext.generator.trace.ITraceToBytecodeInstaller;
 import org.eclipse.xtext.generator.trace.TraceAsPrimarySourceInstaller;
 import org.eclipse.xtext.generator.trace.TraceFileNameProvider;
 import org.eclipse.xtext.generator.trace.TraceRegionSerializer;
-//import org.eclipse.xtext.smap.TraceAsSmapInstaller;
+import org.eclipse.xtext.smap.TraceAsSmapInstaller;
 import org.eclipse.xtext.util.Strings;
 
 import com.google.common.collect.LinkedHashMultimap;
@@ -46,8 +46,8 @@ public abstract class AbstractXtendInstallDebugInfoMojo extends AbstractXtendMoj
 	@Inject
 	private Provider<TraceAsPrimarySourceInstaller> traceAsPrimarySourceInstallerProvider;
 
-//	@Inject
-//	private Provider<TraceAsSmapInstaller> traceAsSmapInstaller;
+	@Inject
+	private Provider<TraceAsSmapInstaller> traceAsSmapInstaller;
 
 	@Inject
 	private TraceFileNameProvider traceFileNameProvider;
@@ -88,9 +88,9 @@ public abstract class AbstractXtendInstallDebugInfoMojo extends AbstractXtendMoj
 			installer.setHideSyntheticVariables(hideSyntheticVariables);
 			return installer;
 		} else {
-//			TraceAsSmapInstaller installer = traceAsSmapInstaller.get();
-//			return installer;
-			return null;
+			TraceAsSmapInstaller installer = traceAsSmapInstaller.get();
+			return installer;
+//			return null;
 		}
 	}
 
