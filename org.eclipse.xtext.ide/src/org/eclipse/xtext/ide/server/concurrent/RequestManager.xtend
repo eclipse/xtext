@@ -15,6 +15,7 @@ import java.util.concurrent.ExecutorService
 import java.util.concurrent.LinkedBlockingQueue
 import java.util.concurrent.Semaphore
 import org.eclipse.xtext.util.CancelIndicator
+import org.apache.log4j.Logger
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -22,6 +23,8 @@ import org.eclipse.xtext.util.CancelIndicator
  */
 @Singleton
 class RequestManager {
+    
+    static val LOGGER = Logger.getLogger(RequestManager)
 
 	public static val READ_EXECUTOR_SERVICE = 'org.eclipse.xtext.ide.server.concurrent.RequestManager.readExecutorService'
 	public static val WRITE_EXECUTOR_SERVICE = 'org.eclipse.xtext.ide.server.concurrent.RequestManager.writeExecutorService'
@@ -74,9 +77,12 @@ class RequestManager {
 			} finally {
 				semaphore.release(MAX_PERMITS)
 			}
-		], writeExecutorService).whenComplete [
+		], writeExecutorService).whenComplete [ result, throwable |
 			if (cancelIndicator instanceof CancellableIndicator)
 				cancelIndicators -= cancelIndicator
+			
+			if (throwable !== null)
+                LOGGER.error('Request fails: ' + throwable.message, throwable)
 		]
 	}
 
@@ -108,9 +114,12 @@ class RequestManager {
 			} finally {
 				semaphore.release(1)
 			}
-		], readExecutorService).whenComplete [
+		], readExecutorService).whenComplete [ result, throwable |
 			if (cancelIndicator instanceof CancellableIndicator)
 				cancelIndicators -= cancelIndicator
+            
+            if (throwable !== null)
+                LOGGER.error('Request fails: ' + throwable.message, throwable)
 		]
 	}
 

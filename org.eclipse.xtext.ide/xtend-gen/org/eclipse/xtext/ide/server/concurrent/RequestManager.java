@@ -17,6 +17,7 @@ import java.util.concurrent.Semaphore;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
+import org.apache.log4j.Logger;
 import org.eclipse.xtext.ide.server.concurrent.CancellableIndicator;
 import org.eclipse.xtext.ide.server.concurrent.RequestCancelIndicator;
 import org.eclipse.xtext.util.CancelIndicator;
@@ -31,6 +32,8 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 @Singleton
 @SuppressWarnings("all")
 public class RequestManager {
+  private final static Logger LOGGER = Logger.getLogger(RequestManager.class);
+  
   public final static String READ_EXECUTOR_SERVICE = "org.eclipse.xtext.ide.server.concurrent.RequestManager.readExecutorService";
   
   public final static String WRITE_EXECUTOR_SERVICE = "org.eclipse.xtext.ide.server.concurrent.RequestManager.writeExecutorService";
@@ -89,9 +92,14 @@ public class RequestManager {
         }
       };
       CompletableFuture<Void> _runAsync = CompletableFuture.runAsync(_function_1, this.writeExecutorService);
-      final BiConsumer<Void, Throwable> _function_2 = (Void $0, Throwable $1) -> {
+      final BiConsumer<Void, Throwable> _function_2 = (Void result, Throwable throwable) -> {
         if ((cancelIndicator instanceof CancellableIndicator)) {
           this.cancelIndicators.remove(((CancellableIndicator)cancelIndicator));
+        }
+        if ((throwable != null)) {
+          String _message = throwable.getMessage();
+          String _plus = ("Request fails: " + _message);
+          RequestManager.LOGGER.error(_plus, throwable);
         }
       };
       return _runAsync.whenComplete(_function_2);
@@ -132,9 +140,14 @@ public class RequestManager {
         }
       };
       CompletableFuture<V> _supplyAsync = CompletableFuture.<V>supplyAsync(_function, this.readExecutorService);
-      final BiConsumer<V, Throwable> _function_1 = (V $0, Throwable $1) -> {
+      final BiConsumer<V, Throwable> _function_1 = (V result, Throwable throwable) -> {
         if ((cancelIndicator instanceof CancellableIndicator)) {
           this.cancelIndicators.remove(((CancellableIndicator)cancelIndicator));
+        }
+        if ((throwable != null)) {
+          String _message = throwable.getMessage();
+          String _plus = ("Request fails: " + _message);
+          RequestManager.LOGGER.error(_plus, throwable);
         }
       };
       return _supplyAsync.whenComplete(_function_1);
