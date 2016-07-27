@@ -9,6 +9,10 @@ dependencies {
 	mwe2Runtime "org.eclipse.emf:org.eclipse.emf.mwe2.launch:$versions.emfMwe2"
 }
 
+configurations {
+    compile.exclude module: 'jsr305'
+}
+
 sourceSets.test.java {
 	srcDir 'tests'
 	srcDir 'suites'
