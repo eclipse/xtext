@@ -7,23 +7,17 @@
  *******************************************************************************/
 module org.eclipse.xtext.ui.tests.TestLanguagesFragmentsBuilder
 
-import org.eclipse.xtext.generator.*
+import org.eclipse.xtext.xtext.generator.*
 import org.eclipse.xtext.ui.tests.*
 
-var genModels =""
-var genModel = ""
-var basePackage = ""
-var javaModelDirectory = ""
-var xmiModelDirectory = ""
-var file.extensions = ""
 var classSplitting = true
 var skipGenerate = false
 var backtrack = false
 var memoize = false
 var emfRuntimeVersion = "2.9"
 
-CompositeGeneratorFragment {
+CompositeGeneratorFragment2 {
 	fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments auto-inject {}
-	fragment = validation.JavaValidatorFragment {}
-	fragment = builder.BuilderIntegrationFragment {}
+	fragment = validation.ValidatorFragment2 {}
+	fragment = builder.BuilderIntegrationFragment2 {}
 }
