@@ -13,15 +13,15 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalFoldingTestLanguageLexer extends Lexer {
     public static final int RULE_ID=4;
-    public static final int RULE_STRING=6;
-    public static final int T__12=12;
-    public static final int T__11=11;
-    public static final int RULE_ANY_OTHER=10;
-    public static final int RULE_INT=5;
     public static final int RULE_WS=9;
+    public static final int RULE_STRING=6;
+    public static final int RULE_ANY_OTHER=10;
     public static final int RULE_SL_COMMENT=8;
-    public static final int EOF=-1;
+    public static final int RULE_INT=5;
+    public static final int T__11=11;
     public static final int RULE_ML_COMMENT=7;
+    public static final int T__12=12;
+    public static final int EOF=-1;
 
     // delegates
     // delegators
@@ -83,10 +83,10 @@ public class InternalFoldingTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalFoldingTestLanguage.g:170:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // InternalFoldingTestLanguage.g:170:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalFoldingTestLanguage.g:163:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // InternalFoldingTestLanguage.g:163:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // InternalFoldingTestLanguage.g:170:11: ( '^' )?
+            // InternalFoldingTestLanguage.g:163:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -95,7 +95,7 @@ public class InternalFoldingTestLanguageLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // InternalFoldingTestLanguage.g:170:11: '^'
+                    // InternalFoldingTestLanguage.g:163:11: '^'
                     {
                     match('^'); 
 
@@ -113,7 +113,7 @@ public class InternalFoldingTestLanguageLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // InternalFoldingTestLanguage.g:170:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalFoldingTestLanguage.g:163:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -162,10 +162,10 @@ public class InternalFoldingTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalFoldingTestLanguage.g:172:10: ( ( '0' .. '9' )+ )
-            // InternalFoldingTestLanguage.g:172:12: ( '0' .. '9' )+
+            // InternalFoldingTestLanguage.g:165:10: ( ( '0' .. '9' )+ )
+            // InternalFoldingTestLanguage.g:165:12: ( '0' .. '9' )+
             {
-            // InternalFoldingTestLanguage.g:172:12: ( '0' .. '9' )+
+            // InternalFoldingTestLanguage.g:165:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -179,7 +179,7 @@ public class InternalFoldingTestLanguageLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // InternalFoldingTestLanguage.g:172:13: '0' .. '9'
+            	    // InternalFoldingTestLanguage.g:165:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -211,10 +211,10 @@ public class InternalFoldingTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalFoldingTestLanguage.g:174:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // InternalFoldingTestLanguage.g:174:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalFoldingTestLanguage.g:167:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // InternalFoldingTestLanguage.g:167:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // InternalFoldingTestLanguage.g:174:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalFoldingTestLanguage.g:167:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -232,10 +232,10 @@ public class InternalFoldingTestLanguageLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // InternalFoldingTestLanguage.g:174:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // InternalFoldingTestLanguage.g:167:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // InternalFoldingTestLanguage.g:174:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // InternalFoldingTestLanguage.g:167:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -251,7 +251,7 @@ public class InternalFoldingTestLanguageLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // InternalFoldingTestLanguage.g:174:21: '\\\\' .
+                    	    // InternalFoldingTestLanguage.g:167:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -259,7 +259,7 @@ public class InternalFoldingTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalFoldingTestLanguage.g:174:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // InternalFoldingTestLanguage.g:167:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -284,10 +284,10 @@ public class InternalFoldingTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalFoldingTestLanguage.g:174:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // InternalFoldingTestLanguage.g:167:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // InternalFoldingTestLanguage.g:174:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // InternalFoldingTestLanguage.g:167:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -303,7 +303,7 @@ public class InternalFoldingTestLanguageLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // InternalFoldingTestLanguage.g:174:54: '\\\\' .
+                    	    // InternalFoldingTestLanguage.g:167:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -311,7 +311,7 @@ public class InternalFoldingTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalFoldingTestLanguage.g:174:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // InternalFoldingTestLanguage.g:167:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -354,12 +354,12 @@ public class InternalFoldingTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalFoldingTestLanguage.g:176:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // InternalFoldingTestLanguage.g:176:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // InternalFoldingTestLanguage.g:169:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // InternalFoldingTestLanguage.g:169:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // InternalFoldingTestLanguage.g:176:24: ( options {greedy=false; } : . )*
+            // InternalFoldingTestLanguage.g:169:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -384,7 +384,7 @@ public class InternalFoldingTestLanguageLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // InternalFoldingTestLanguage.g:176:52: .
+            	    // InternalFoldingTestLanguage.g:169:52: .
             	    {
             	    matchAny(); 
 
@@ -414,12 +414,12 @@ public class InternalFoldingTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalFoldingTestLanguage.g:178:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // InternalFoldingTestLanguage.g:178:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // InternalFoldingTestLanguage.g:171:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // InternalFoldingTestLanguage.g:171:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // InternalFoldingTestLanguage.g:178:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalFoldingTestLanguage.g:171:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -432,7 +432,7 @@ public class InternalFoldingTestLanguageLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // InternalFoldingTestLanguage.g:178:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalFoldingTestLanguage.g:171:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -452,7 +452,7 @@ public class InternalFoldingTestLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // InternalFoldingTestLanguage.g:178:40: ( ( '\\r' )? '\\n' )?
+            // InternalFoldingTestLanguage.g:171:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -461,9 +461,9 @@ public class InternalFoldingTestLanguageLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // InternalFoldingTestLanguage.g:178:41: ( '\\r' )? '\\n'
+                    // InternalFoldingTestLanguage.g:171:41: ( '\\r' )? '\\n'
                     {
-                    // InternalFoldingTestLanguage.g:178:41: ( '\\r' )?
+                    // InternalFoldingTestLanguage.g:171:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -472,7 +472,7 @@ public class InternalFoldingTestLanguageLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // InternalFoldingTestLanguage.g:178:41: '\\r'
+                            // InternalFoldingTestLanguage.g:171:41: '\\r'
                             {
                             match('\r'); 
 
@@ -504,10 +504,10 @@ public class InternalFoldingTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalFoldingTestLanguage.g:180:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // InternalFoldingTestLanguage.g:180:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalFoldingTestLanguage.g:173:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalFoldingTestLanguage.g:173:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // InternalFoldingTestLanguage.g:180:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalFoldingTestLanguage.g:173:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -561,8 +561,8 @@ public class InternalFoldingTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalFoldingTestLanguage.g:182:16: ( . )
-            // InternalFoldingTestLanguage.g:182:18: .
+            // InternalFoldingTestLanguage.g:175:16: ( . )
+            // InternalFoldingTestLanguage.g:175:18: .
             {
             matchAny(); 
 
@@ -662,7 +662,7 @@ public class InternalFoldingTestLanguageLexer extends Lexer {
     static final String DFA12_acceptS =
         "\3\uffff\1\3\1\4\3\uffff\1\10\1\11\2\uffff\1\3\1\4\1\5\1\6\1\7\1\10\3\uffff\1\2\3\uffff\1\1";
     static final String DFA12_specialS =
-        "\1\0\4\uffff\1\1\1\2\23\uffff}>";
+        "\1\1\4\uffff\1\0\1\2\23\uffff}>";
     static final String[] DFA12_transitionS = {
             "\11\11\2\10\2\11\1\10\22\11\1\10\1\11\1\5\4\11\1\6\7\11\1\7\12\4\7\11\32\3\3\11\1\2\1\3\1\11\4\3\1\1\25\3\uff85\11",
             "\1\12\1\uffff\1\13",
@@ -729,6 +729,16 @@ public class InternalFoldingTestLanguageLexer extends Lexer {
         	int _s = s;
             switch ( s ) {
                     case 0 : 
+                        int LA12_5 = input.LA(1);
+
+                        s = -1;
+                        if ( ((LA12_5>='\u0000' && LA12_5<='\uFFFF')) ) {s = 14;}
+
+                        else s = 9;
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 1 : 
                         int LA12_0 = input.LA(1);
 
                         s = -1;
@@ -749,16 +759,6 @@ public class InternalFoldingTestLanguageLexer extends Lexer {
                         else if ( ((LA12_0>='\t' && LA12_0<='\n')||LA12_0=='\r'||LA12_0==' ') ) {s = 8;}
 
                         else if ( ((LA12_0>='\u0000' && LA12_0<='\b')||(LA12_0>='\u000B' && LA12_0<='\f')||(LA12_0>='\u000E' && LA12_0<='\u001F')||LA12_0=='!'||(LA12_0>='#' && LA12_0<='&')||(LA12_0>='(' && LA12_0<='.')||(LA12_0>=':' && LA12_0<='@')||(LA12_0>='[' && LA12_0<=']')||LA12_0=='`'||(LA12_0>='{' && LA12_0<='\uFFFF')) ) {s = 9;}
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 1 : 
-                        int LA12_5 = input.LA(1);
-
-                        s = -1;
-                        if ( ((LA12_5>='\u0000' && LA12_5<='\uFFFF')) ) {s = 14;}
-
-                        else s = 9;
 
                         if ( s>=0 ) return s;
                         break;

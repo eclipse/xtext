@@ -4,36 +4,37 @@
 package org.eclipse.xtext.ui.tests.refactoring.parser.antlr;
 
 import com.google.inject.Inject;
-
+import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.ui.tests.refactoring.parser.antlr.internal.InternalReferringTestLanguageParser;
 import org.eclipse.xtext.ui.tests.refactoring.services.ReferringTestLanguageGrammarAccess;
 
-public class ReferringTestLanguageParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {
-	
+public class ReferringTestLanguageParser extends AbstractAntlrParser {
+
 	@Inject
 	private ReferringTestLanguageGrammarAccess grammarAccess;
-	
+
 	@Override
 	protected void setInitialHiddenTokens(XtextTokenStream tokenStream) {
 		tokenStream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
 	}
 	
+
 	@Override
-	protected org.eclipse.xtext.ui.tests.refactoring.parser.antlr.internal.InternalReferringTestLanguageParser createParser(XtextTokenStream stream) {
-		return new org.eclipse.xtext.ui.tests.refactoring.parser.antlr.internal.InternalReferringTestLanguageParser(stream, getGrammarAccess());
+	protected InternalReferringTestLanguageParser createParser(XtextTokenStream stream) {
+		return new InternalReferringTestLanguageParser(stream, getGrammarAccess());
 	}
-	
+
 	@Override 
 	protected String getDefaultRuleName() {
 		return "Main";
 	}
-	
+
 	public ReferringTestLanguageGrammarAccess getGrammarAccess() {
 		return this.grammarAccess;
 	}
-	
+
 	public void setGrammarAccess(ReferringTestLanguageGrammarAccess grammarAccess) {
 		this.grammarAccess = grammarAccess;
 	}
-	
 }

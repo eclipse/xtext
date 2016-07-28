@@ -4,36 +4,37 @@
 package org.eclipse.xtext.ui.tests.editor.outline.parser.antlr;
 
 import com.google.inject.Inject;
-
+import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.ui.tests.editor.outline.parser.antlr.internal.InternalOutlineTestLanguageParser;
 import org.eclipse.xtext.ui.tests.editor.outline.services.OutlineTestLanguageGrammarAccess;
 
-public class OutlineTestLanguageParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {
-	
+public class OutlineTestLanguageParser extends AbstractAntlrParser {
+
 	@Inject
 	private OutlineTestLanguageGrammarAccess grammarAccess;
-	
+
 	@Override
 	protected void setInitialHiddenTokens(XtextTokenStream tokenStream) {
 		tokenStream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
 	}
 	
+
 	@Override
-	protected org.eclipse.xtext.ui.tests.editor.outline.parser.antlr.internal.InternalOutlineTestLanguageParser createParser(XtextTokenStream stream) {
-		return new org.eclipse.xtext.ui.tests.editor.outline.parser.antlr.internal.InternalOutlineTestLanguageParser(stream, getGrammarAccess());
+	protected InternalOutlineTestLanguageParser createParser(XtextTokenStream stream) {
+		return new InternalOutlineTestLanguageParser(stream, getGrammarAccess());
 	}
-	
+
 	@Override 
 	protected String getDefaultRuleName() {
 		return "Model";
 	}
-	
+
 	public OutlineTestLanguageGrammarAccess getGrammarAccess() {
 		return this.grammarAccess;
 	}
-	
+
 	public void setGrammarAccess(OutlineTestLanguageGrammarAccess grammarAccess) {
 		this.grammarAccess = grammarAccess;
 	}
-	
 }

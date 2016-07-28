@@ -13,15 +13,15 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalReferringTestLanguageLexer extends Lexer {
     public static final int RULE_ID=4;
-    public static final int RULE_STRING=6;
-    public static final int T__12=12;
-    public static final int T__11=11;
-    public static final int RULE_ANY_OTHER=10;
-    public static final int RULE_INT=5;
     public static final int RULE_WS=9;
+    public static final int RULE_STRING=6;
+    public static final int RULE_ANY_OTHER=10;
     public static final int RULE_SL_COMMENT=8;
-    public static final int EOF=-1;
+    public static final int RULE_INT=5;
+    public static final int T__11=11;
     public static final int RULE_ML_COMMENT=7;
+    public static final int T__12=12;
+    public static final int EOF=-1;
 
     // delegates
     // delegators
@@ -82,10 +82,10 @@ public class InternalReferringTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalReferringTestLanguage.g:186:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // InternalReferringTestLanguage.g:186:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalReferringTestLanguage.g:178:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // InternalReferringTestLanguage.g:178:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // InternalReferringTestLanguage.g:186:11: ( '^' )?
+            // InternalReferringTestLanguage.g:178:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -94,7 +94,7 @@ public class InternalReferringTestLanguageLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // InternalReferringTestLanguage.g:186:11: '^'
+                    // InternalReferringTestLanguage.g:178:11: '^'
                     {
                     match('^'); 
 
@@ -112,7 +112,7 @@ public class InternalReferringTestLanguageLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // InternalReferringTestLanguage.g:186:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalReferringTestLanguage.g:178:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -161,10 +161,10 @@ public class InternalReferringTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalReferringTestLanguage.g:188:10: ( ( '0' .. '9' )+ )
-            // InternalReferringTestLanguage.g:188:12: ( '0' .. '9' )+
+            // InternalReferringTestLanguage.g:180:10: ( ( '0' .. '9' )+ )
+            // InternalReferringTestLanguage.g:180:12: ( '0' .. '9' )+
             {
-            // InternalReferringTestLanguage.g:188:12: ( '0' .. '9' )+
+            // InternalReferringTestLanguage.g:180:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -178,7 +178,7 @@ public class InternalReferringTestLanguageLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // InternalReferringTestLanguage.g:188:13: '0' .. '9'
+            	    // InternalReferringTestLanguage.g:180:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -210,10 +210,10 @@ public class InternalReferringTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalReferringTestLanguage.g:190:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // InternalReferringTestLanguage.g:190:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalReferringTestLanguage.g:182:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // InternalReferringTestLanguage.g:182:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // InternalReferringTestLanguage.g:190:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalReferringTestLanguage.g:182:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -231,10 +231,10 @@ public class InternalReferringTestLanguageLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // InternalReferringTestLanguage.g:190:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // InternalReferringTestLanguage.g:182:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // InternalReferringTestLanguage.g:190:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // InternalReferringTestLanguage.g:182:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -250,7 +250,7 @@ public class InternalReferringTestLanguageLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // InternalReferringTestLanguage.g:190:21: '\\\\' .
+                    	    // InternalReferringTestLanguage.g:182:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -258,7 +258,7 @@ public class InternalReferringTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalReferringTestLanguage.g:190:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // InternalReferringTestLanguage.g:182:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -283,10 +283,10 @@ public class InternalReferringTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalReferringTestLanguage.g:190:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // InternalReferringTestLanguage.g:182:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // InternalReferringTestLanguage.g:190:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // InternalReferringTestLanguage.g:182:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -302,7 +302,7 @@ public class InternalReferringTestLanguageLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // InternalReferringTestLanguage.g:190:54: '\\\\' .
+                    	    // InternalReferringTestLanguage.g:182:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -310,7 +310,7 @@ public class InternalReferringTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalReferringTestLanguage.g:190:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // InternalReferringTestLanguage.g:182:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -353,12 +353,12 @@ public class InternalReferringTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalReferringTestLanguage.g:192:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // InternalReferringTestLanguage.g:192:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // InternalReferringTestLanguage.g:184:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // InternalReferringTestLanguage.g:184:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // InternalReferringTestLanguage.g:192:24: ( options {greedy=false; } : . )*
+            // InternalReferringTestLanguage.g:184:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -383,7 +383,7 @@ public class InternalReferringTestLanguageLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // InternalReferringTestLanguage.g:192:52: .
+            	    // InternalReferringTestLanguage.g:184:52: .
             	    {
             	    matchAny(); 
 
@@ -413,12 +413,12 @@ public class InternalReferringTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalReferringTestLanguage.g:194:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // InternalReferringTestLanguage.g:194:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // InternalReferringTestLanguage.g:186:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // InternalReferringTestLanguage.g:186:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // InternalReferringTestLanguage.g:194:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalReferringTestLanguage.g:186:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -431,7 +431,7 @@ public class InternalReferringTestLanguageLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // InternalReferringTestLanguage.g:194:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalReferringTestLanguage.g:186:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -451,7 +451,7 @@ public class InternalReferringTestLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // InternalReferringTestLanguage.g:194:40: ( ( '\\r' )? '\\n' )?
+            // InternalReferringTestLanguage.g:186:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -460,9 +460,9 @@ public class InternalReferringTestLanguageLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // InternalReferringTestLanguage.g:194:41: ( '\\r' )? '\\n'
+                    // InternalReferringTestLanguage.g:186:41: ( '\\r' )? '\\n'
                     {
-                    // InternalReferringTestLanguage.g:194:41: ( '\\r' )?
+                    // InternalReferringTestLanguage.g:186:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -471,7 +471,7 @@ public class InternalReferringTestLanguageLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // InternalReferringTestLanguage.g:194:41: '\\r'
+                            // InternalReferringTestLanguage.g:186:41: '\\r'
                             {
                             match('\r'); 
 
@@ -503,10 +503,10 @@ public class InternalReferringTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalReferringTestLanguage.g:196:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // InternalReferringTestLanguage.g:196:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalReferringTestLanguage.g:188:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalReferringTestLanguage.g:188:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // InternalReferringTestLanguage.g:196:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalReferringTestLanguage.g:188:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -560,8 +560,8 @@ public class InternalReferringTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalReferringTestLanguage.g:198:16: ( . )
-            // InternalReferringTestLanguage.g:198:18: .
+            // InternalReferringTestLanguage.g:190:16: ( . )
+            // InternalReferringTestLanguage.g:190:18: .
             {
             matchAny(); 
 
@@ -661,7 +661,7 @@ public class InternalReferringTestLanguageLexer extends Lexer {
     static final String DFA12_acceptS =
         "\2\uffff\1\2\1\uffff\1\3\1\4\3\uffff\1\10\1\11\1\uffff\1\3\1\2\1\4\1\5\1\6\1\7\1\10\1\uffff\1\1";
     static final String DFA12_specialS =
-        "\1\1\5\uffff\1\2\1\0\15\uffff}>";
+        "\1\0\5\uffff\1\1\1\2\15\uffff}>";
     static final String[] DFA12_transitionS = {
             "\11\12\2\11\2\12\1\11\22\12\1\11\1\12\1\6\4\12\1\7\6\12\1\2\1\10\12\5\7\12\32\4\3\12\1\3\1\4\1\12\21\4\1\1\10\4\uff85\12",
             "\1\13",
@@ -723,16 +723,6 @@ public class InternalReferringTestLanguageLexer extends Lexer {
         	int _s = s;
             switch ( s ) {
                     case 0 : 
-                        int LA12_7 = input.LA(1);
-
-                        s = -1;
-                        if ( ((LA12_7>='\u0000' && LA12_7<='\uFFFF')) ) {s = 15;}
-
-                        else s = 10;
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 1 : 
                         int LA12_0 = input.LA(1);
 
                         s = -1;
@@ -758,11 +748,21 @@ public class InternalReferringTestLanguageLexer extends Lexer {
 
                         if ( s>=0 ) return s;
                         break;
-                    case 2 : 
+                    case 1 : 
                         int LA12_6 = input.LA(1);
 
                         s = -1;
                         if ( ((LA12_6>='\u0000' && LA12_6<='\uFFFF')) ) {s = 15;}
+
+                        else s = 10;
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 2 : 
+                        int LA12_7 = input.LA(1);
+
+                        s = -1;
+                        if ( ((LA12_7>='\u0000' && LA12_7<='\uFFFF')) ) {s = 15;}
 
                         else s = 10;
 

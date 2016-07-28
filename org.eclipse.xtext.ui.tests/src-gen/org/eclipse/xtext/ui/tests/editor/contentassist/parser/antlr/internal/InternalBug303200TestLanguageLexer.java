@@ -12,20 +12,20 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class InternalBug303200TestLanguageLexer extends Lexer {
-    public static final int RULE_ID=5;
-    public static final int T__16=16;
-    public static final int T__15=15;
-    public static final int T__12=12;
-    public static final int T__11=11;
-    public static final int T__14=14;
-    public static final int T__13=13;
-    public static final int T__10=10;
-    public static final int RULE_WS=6;
-    public static final int EOF=-1;
     public static final int T__9=9;
     public static final int T__8=8;
     public static final int T__7=7;
+    public static final int RULE_ID=5;
+    public static final int RULE_WS=6;
     public static final int RULE_LT=4;
+    public static final int T__15=15;
+    public static final int T__16=16;
+    public static final int T__11=11;
+    public static final int T__12=12;
+    public static final int T__13=13;
+    public static final int T__14=14;
+    public static final int EOF=-1;
+    public static final int T__10=10;
 
     // delegates
     // delegators
@@ -246,10 +246,10 @@ public class InternalBug303200TestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBug303200TestLanguage.g:963:9: ( ( 'a' .. 'z' | 'A' .. 'Z' )+ )
-            // InternalBug303200TestLanguage.g:963:11: ( 'a' .. 'z' | 'A' .. 'Z' )+
+            // InternalBug303200TestLanguage.g:1037:9: ( ( 'a' .. 'z' | 'A' .. 'Z' )+ )
+            // InternalBug303200TestLanguage.g:1037:11: ( 'a' .. 'z' | 'A' .. 'Z' )+
             {
-            // InternalBug303200TestLanguage.g:963:11: ( 'a' .. 'z' | 'A' .. 'Z' )+
+            // InternalBug303200TestLanguage.g:1037:11: ( 'a' .. 'z' | 'A' .. 'Z' )+
             int cnt1=0;
             loop1:
             do {
@@ -303,10 +303,10 @@ public class InternalBug303200TestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBug303200TestLanguage.g:965:9: ( ( ' ' | '\\t' )+ )
-            // InternalBug303200TestLanguage.g:965:11: ( ' ' | '\\t' )+
+            // InternalBug303200TestLanguage.g:1039:9: ( ( ' ' | '\\t' )+ )
+            // InternalBug303200TestLanguage.g:1039:11: ( ' ' | '\\t' )+
             {
-            // InternalBug303200TestLanguage.g:965:11: ( ' ' | '\\t' )+
+            // InternalBug303200TestLanguage.g:1039:11: ( ' ' | '\\t' )+
             int cnt2=0;
             loop2:
             do {
@@ -360,8 +360,8 @@ public class InternalBug303200TestLanguageLexer extends Lexer {
         try {
             int _type = RULE_LT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBug303200TestLanguage.g:967:9: ( ( '\\r' | '\\n' ) )
-            // InternalBug303200TestLanguage.g:967:11: ( '\\r' | '\\n' )
+            // InternalBug303200TestLanguage.g:1041:9: ( ( '\\r' | '\\n' ) )
+            // InternalBug303200TestLanguage.g:1041:11: ( '\\r' | '\\n' )
             {
             if ( input.LA(1)=='\n'||input.LA(1)=='\r' ) {
                 input.consume();

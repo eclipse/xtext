@@ -4,18 +4,18 @@
 package org.eclipse.xtext.ui.tests.editor.contentassist.ui.contentassist;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.*;
-import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
+import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 
 /**
- * Represents a generated, default implementation of superclass {@link org.eclipse.xtext.ui.tests.editor.contentassist.ui.contentassist.ParametersTestLanguageProposalProvider}.
+ * Represents a generated, default implementation of superclass {@link ParametersTestLanguageProposalProvider}.
  * Methods are dynamically dispatched on the first parameter, i.e., you can override them 
  * with a more concrete subtype. 
  */
-@SuppressWarnings("all")
-public class AbstractTwoParametersTestLanguageProposalProvider extends org.eclipse.xtext.ui.tests.editor.contentassist.ui.contentassist.ParametersTestLanguageProposalProvider {
-		
+public abstract class AbstractTwoParametersTestLanguageProposalProvider extends ParametersTestLanguageProposalProvider {
+
 	public void completeScenario6_First(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		completeRuleCall(((RuleCall)assignment.getTerminal()), context, acceptor);
 	}
@@ -40,7 +40,7 @@ public class AbstractTwoParametersTestLanguageProposalProvider extends org.eclip
 	public void completeScenario10_Second(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		completeRuleCall(((RuleCall)assignment.getTerminal()), context, acceptor);
 	}
-    
+
 	public void complete_Scenario6(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		// subclasses may override
 	}
