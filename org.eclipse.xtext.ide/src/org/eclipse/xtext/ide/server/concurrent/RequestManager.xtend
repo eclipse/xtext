@@ -16,6 +16,7 @@ import java.util.concurrent.LinkedBlockingQueue
 import java.util.concurrent.Semaphore
 import org.eclipse.xtext.util.CancelIndicator
 import org.apache.log4j.Logger
+import org.eclipse.xtext.service.OperationCanceledManager
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -38,6 +39,9 @@ class RequestManager {
 	@Inject
 	@Named(WRITE_EXECUTOR_SERVICE)
 	ExecutorService writeExecutorService
+	
+	@Inject
+	OperationCanceledManager operationCanceledManager
 
 	val cancelIndicators = new LinkedBlockingQueue<CancellableIndicator>
 
@@ -80,9 +84,8 @@ class RequestManager {
 		], writeExecutorService).whenComplete [ result, throwable |
 			if (cancelIndicator instanceof CancellableIndicator)
 				cancelIndicators -= cancelIndicator
-			
-			if (throwable !== null)
-                LOGGER.error('Request fails: ' + throwable.message, throwable)
+            
+            handleError(throwable)
 		]
 	}
 
@@ -118,9 +121,17 @@ class RequestManager {
 			if (cancelIndicator instanceof CancellableIndicator)
 				cancelIndicators -= cancelIndicator
             
-            if (throwable !== null)
-                LOGGER.error('Request fails: ' + throwable.message, throwable)
+            handleError(throwable)
 		]
 	}
+	
+	protected def void handleError(Throwable t) {
+        if(t === null) return;
+        if (operationCanceledManager.isOperationCanceledException(t)) {
+            LOGGER.trace('Request has been canceled.')
+        } else {
+            LOGGER.error('Request fails: ' + t.message, t)
+        }
+    }
 
 }

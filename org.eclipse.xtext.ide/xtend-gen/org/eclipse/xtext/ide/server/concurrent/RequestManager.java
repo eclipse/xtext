@@ -20,6 +20,7 @@ import java.util.function.Supplier;
 import org.apache.log4j.Logger;
 import org.eclipse.xtext.ide.server.concurrent.CancellableIndicator;
 import org.eclipse.xtext.ide.server.concurrent.RequestCancelIndicator;
+import org.eclipse.xtext.service.OperationCanceledManager;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -47,6 +48,9 @@ public class RequestManager {
   @Inject
   @Named(RequestManager.WRITE_EXECUTOR_SERVICE)
   private ExecutorService writeExecutorService;
+  
+  @Inject
+  private OperationCanceledManager operationCanceledManager;
   
   private final LinkedBlockingQueue<CancellableIndicator> cancelIndicators = new LinkedBlockingQueue<CancellableIndicator>();
   
@@ -96,11 +100,7 @@ public class RequestManager {
         if ((cancelIndicator instanceof CancellableIndicator)) {
           this.cancelIndicators.remove(((CancellableIndicator)cancelIndicator));
         }
-        if ((throwable != null)) {
-          String _message = throwable.getMessage();
-          String _plus = ("Request fails: " + _message);
-          RequestManager.LOGGER.error(_plus, throwable);
-        }
+        this.handleError(throwable);
       };
       return _runAsync.whenComplete(_function_2);
     } catch (Throwable _e) {
@@ -144,15 +144,25 @@ public class RequestManager {
         if ((cancelIndicator instanceof CancellableIndicator)) {
           this.cancelIndicators.remove(((CancellableIndicator)cancelIndicator));
         }
-        if ((throwable != null)) {
-          String _message = throwable.getMessage();
-          String _plus = ("Request fails: " + _message);
-          RequestManager.LOGGER.error(_plus, throwable);
-        }
+        this.handleError(throwable);
       };
       return _supplyAsync.whenComplete(_function_1);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  protected void handleError(final Throwable t) {
+    if ((t == null)) {
+      return;
+    }
+    boolean _isOperationCanceledException = this.operationCanceledManager.isOperationCanceledException(t);
+    if (_isOperationCanceledException) {
+      RequestManager.LOGGER.trace("Request has been canceled.");
+    } else {
+      String _message = t.getMessage();
+      String _plus = ("Request fails: " + _message);
+      RequestManager.LOGGER.error(_plus, t);
     }
   }
 }
