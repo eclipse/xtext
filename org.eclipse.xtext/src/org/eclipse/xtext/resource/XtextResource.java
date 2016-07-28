@@ -27,10 +27,12 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.xtext.Constants;
+import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.SyntaxErrorMessage;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
@@ -84,6 +86,8 @@ public class XtextResource extends ResourceImpl {
 	protected volatile boolean isUpdating = false;
 
 	private IParser parser;
+	
+	private ParserRule entryPoint;
 
 	@Inject
 	private ILinker linker;
@@ -163,11 +167,16 @@ public class XtextResource extends ResourceImpl {
 	public IParseResult getParseResult() {
 		return parseResult;
 	}
-
+	
 	@Override
 	protected void doLoad(InputStream inputStream, Map<?, ?> options) throws IOException {
 		setEncodingFromOptions(options);
-		IParseResult result = parser.parse(createReader(inputStream));
+		IParseResult result;
+		if (entryPoint == null) {
+			result = parser.parse(createReader(inputStream));
+		} else {
+			result = parser.parse(entryPoint, createReader(inputStream));
+		}
 		updateInternalState(this.parseResult, result);
 	}
 	
@@ -250,7 +259,15 @@ public class XtextResource extends ResourceImpl {
 			isUpdating = true;
 			IParseResult oldParseResult = parseResult;
 			ReplaceRegion replaceRegion = new ReplaceRegion(new TextRegion(offset, replacedTextLength), newText);
-			IParseResult newParseResult = parser.reparse(oldParseResult, replaceRegion);
+			IParseResult newParseResult;
+			ParserRule oldEntryPoint = NodeModelUtils.getEntryParserRule(oldParseResult.getRootNode());
+			if (entryPoint == null || entryPoint == oldEntryPoint) {
+				newParseResult = parser.reparse(oldParseResult, replaceRegion);
+			} else {
+				StringBuilder builder = new StringBuilder(oldParseResult.getRootNode().getText());
+				replaceRegion.applyTo(builder);
+				newParseResult = parser.parse(entryPoint, new StringReader(builder.toString()));
+			}
 			updateInternalState(oldParseResult, newParseResult);
 		} finally {
 			isUpdating = false;
@@ -404,13 +421,24 @@ public class XtextResource extends ResourceImpl {
 		}
 		diagnostics.add(new XtextSyntaxDiagnostic(error));
 	}
-
+	
 	public IParser getParser() {
 		return parser;
 	}
 
 	public void setParser(IParser parser) {
 		this.parser = parser;
+	}
+	
+	public ParserRule getEntryPoint() {
+		if (entryPoint == null && parseResult != null) {
+			entryPoint = NodeModelUtils.getEntryParserRule(parseResult.getRootNode());
+		}
+		return entryPoint;
+	}
+	
+	public void setEntryPoint(ParserRule parserRule) {
+		this.entryPoint = parserRule;
 	}
 
 	public IConcreteSyntaxValidator getConcreteSyntaxValidator() {
