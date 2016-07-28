@@ -23,7 +23,7 @@ import static extension org.eclipse.ui.texteditor.MarkerUtilities.*
 /**
  * @author Anton Kosyakov - Initial contribution and API
  */
-class ResolvingCrossReferenceDuringIndexing extends AbstractXtendUITestCase {
+class ResolvingCrossReferenceDuringIndexingTest extends AbstractXtendUITestCase {
 
 	@After override void tearDown() {
 		cleanWorkspace
