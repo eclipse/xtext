@@ -3,20 +3,28 @@
  */
 package org.eclipse.xtext.ui.tests.editor.contentassist.services;
 
-import com.google.inject.Singleton;
 import com.google.inject.Inject;
-
+import com.google.inject.Singleton;
 import java.util.List;
-
-import org.eclipse.xtext.*;
-import org.eclipse.xtext.service.GrammarProvider;
-import org.eclipse.xtext.service.AbstractElementFinder.*;
-
+import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Alternatives;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.EnumLiteralDeclaration;
+import org.eclipse.xtext.EnumRule;
+import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.Group;
+import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
+import org.eclipse.xtext.service.AbstractElementFinder.AbstractEnumRuleElementFinder;
+import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder;
+import org.eclipse.xtext.service.GrammarProvider;
 
 @Singleton
 public class Bug286935TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
-	
 	
 	public class StateElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug286935TestLanguage.State");
@@ -54,88 +62,87 @@ public class Bug286935TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//	stateName=ID?
 		//	label=STRING?;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//{State} (isInitial?='init' | isFinal?='final' | stateKind=StateType | isInitial?='init' stateKind=StateType |
 		//isInitial?='init' stateKind=StateType isFinal?='final')? 'state'? stateName=ID? label=STRING?
 		public Group getGroup() { return cGroup; }
-
+		
 		//{State}
 		public Action getStateAction_0() { return cStateAction_0; }
-
+		
 		//(isInitial?='init' | isFinal?='final' | stateKind=StateType | isInitial?='init' stateKind=StateType | isInitial?='init'
 		//stateKind=StateType isFinal?='final')?
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
-
+		
 		//isInitial?='init'
 		public Assignment getIsInitialAssignment_1_0() { return cIsInitialAssignment_1_0; }
-
+		
 		//'init'
 		public Keyword getIsInitialInitKeyword_1_0_0() { return cIsInitialInitKeyword_1_0_0; }
-
+		
 		//isFinal?='final'
 		public Assignment getIsFinalAssignment_1_1() { return cIsFinalAssignment_1_1; }
-
+		
 		//'final'
 		public Keyword getIsFinalFinalKeyword_1_1_0() { return cIsFinalFinalKeyword_1_1_0; }
-
+		
 		//stateKind=StateType
 		public Assignment getStateKindAssignment_1_2() { return cStateKindAssignment_1_2; }
-
+		
 		//StateType
 		public RuleCall getStateKindStateTypeEnumRuleCall_1_2_0() { return cStateKindStateTypeEnumRuleCall_1_2_0; }
-
+		
 		//isInitial?='init' stateKind=StateType
 		public Group getGroup_1_3() { return cGroup_1_3; }
-
+		
 		//isInitial?='init'
 		public Assignment getIsInitialAssignment_1_3_0() { return cIsInitialAssignment_1_3_0; }
-
+		
 		//'init'
 		public Keyword getIsInitialInitKeyword_1_3_0_0() { return cIsInitialInitKeyword_1_3_0_0; }
-
+		
 		//stateKind=StateType
 		public Assignment getStateKindAssignment_1_3_1() { return cStateKindAssignment_1_3_1; }
-
+		
 		//StateType
 		public RuleCall getStateKindStateTypeEnumRuleCall_1_3_1_0() { return cStateKindStateTypeEnumRuleCall_1_3_1_0; }
-
+		
 		//isInitial?='init' stateKind=StateType isFinal?='final'
 		public Group getGroup_1_4() { return cGroup_1_4; }
-
+		
 		//isInitial?='init'
 		public Assignment getIsInitialAssignment_1_4_0() { return cIsInitialAssignment_1_4_0; }
-
+		
 		//'init'
 		public Keyword getIsInitialInitKeyword_1_4_0_0() { return cIsInitialInitKeyword_1_4_0_0; }
-
+		
 		//stateKind=StateType
 		public Assignment getStateKindAssignment_1_4_1() { return cStateKindAssignment_1_4_1; }
-
+		
 		//StateType
 		public RuleCall getStateKindStateTypeEnumRuleCall_1_4_1_0() { return cStateKindStateTypeEnumRuleCall_1_4_1_0; }
-
+		
 		//isFinal?='final'
 		public Assignment getIsFinalAssignment_1_4_2() { return cIsFinalAssignment_1_4_2; }
-
+		
 		//'final'
 		public Keyword getIsFinalFinalKeyword_1_4_2_0() { return cIsFinalFinalKeyword_1_4_2_0; }
-
+		
 		//'state'?
 		public Keyword getStateKeyword_2() { return cStateKeyword_2; }
-
+		
 		//stateName=ID?
 		public Assignment getStateNameAssignment_3() { return cStateNameAssignment_3; }
-
+		
 		//ID
 		public RuleCall getStateNameIDTerminalRuleCall_3_0() { return cStateNameIDTerminalRuleCall_3_0; }
-
+		
 		//label=STRING?
 		public Assignment getLabelAssignment_4() { return cLabelAssignment_4; }
-
+		
 		//STRING
 		public RuleCall getLabelSTRINGTerminalRuleCall_4_0() { return cLabelSTRINGTerminalRuleCall_4_0; }
 	}
-	
 	
 	public class StateTypeElements extends AbstractEnumRuleElementFinder {
 		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug286935TestLanguage.StateType");
@@ -152,31 +159,31 @@ public class Bug286935TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//enum StateType:
 		//	NORMAL | PSEUDO='cond' | REFERENCE='reference' | TEXTUAL='textual';
 		public EnumRule getRule() { return rule; }
-
+		
 		//NORMAL | PSEUDO='cond' | REFERENCE='reference' | TEXTUAL='textual'
 		public Alternatives getAlternatives() { return cAlternatives; }
-
+		
 		//NORMAL
 		public EnumLiteralDeclaration getNORMALEnumLiteralDeclaration_0() { return cNORMALEnumLiteralDeclaration_0; }
-
+		
 		//"NORMAL"
 		public Keyword getNORMALNORMALKeyword_0_0() { return cNORMALNORMALKeyword_0_0; }
-
+		
 		//PSEUDO='cond'
 		public EnumLiteralDeclaration getPSEUDOEnumLiteralDeclaration_1() { return cPSEUDOEnumLiteralDeclaration_1; }
-
+		
 		//'cond'
 		public Keyword getPSEUDOCondKeyword_1_0() { return cPSEUDOCondKeyword_1_0; }
-
+		
 		//REFERENCE='reference'
 		public EnumLiteralDeclaration getREFERENCEEnumLiteralDeclaration_2() { return cREFERENCEEnumLiteralDeclaration_2; }
-
+		
 		//'reference'
 		public Keyword getREFERENCEReferenceKeyword_2_0() { return cREFERENCEReferenceKeyword_2_0; }
-
+		
 		//TEXTUAL='textual'
 		public EnumLiteralDeclaration getTEXTUALEnumLiteralDeclaration_3() { return cTEXTUALEnumLiteralDeclaration_3; }
-
+		
 		//'textual'
 		public Keyword getTEXTUALTextualKeyword_3_0() { return cTEXTUALTextualKeyword_3_0; }
 	}
@@ -185,12 +192,12 @@ public class Bug286935TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	private final StateTypeElements eStateType;
 	
 	private final Grammar grammar;
-
+	
 	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public Bug286935TestLanguageGrammarAccess(GrammarProvider grammarProvider,
-		TerminalsGrammarAccess gaTerminals) {
+			TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
 		this.pState = new StateElements();
@@ -218,7 +225,7 @@ public class Bug286935TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return grammar;
 	}
 	
-
+	
 	public TerminalsGrammarAccess getTerminalsGrammarAccess() {
 		return gaTerminals;
 	}
@@ -237,7 +244,7 @@ public class Bug286935TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getStateRule() {
 		return getStateAccess().getRule();
 	}
-
+	
 	//enum StateType:
 	//	NORMAL | PSEUDO='cond' | REFERENCE='reference' | TEXTUAL='textual';
 	public StateTypeElements getStateTypeAccess() {
@@ -247,47 +254,47 @@ public class Bug286935TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public EnumRule getStateTypeRule() {
 		return getStateTypeAccess().getRule();
 	}
-
+	
 	//terminal ID:
 	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
-	} 
-
+	}
+	
 	//terminal INT returns ecore::EInt:
 	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
-	} 
-
+	}
+	
 	//terminal STRING:
 	//	'"' ('\\' . | !('\\' | '"'))* '"' |
 	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
-	} 
-
+	}
+	
 	//terminal ML_COMMENT:
 	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal SL_COMMENT:
 	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal WS:
 	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
-	} 
-
+	}
+	
 	//terminal ANY_OTHER:
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
-	} 
+	}
 }

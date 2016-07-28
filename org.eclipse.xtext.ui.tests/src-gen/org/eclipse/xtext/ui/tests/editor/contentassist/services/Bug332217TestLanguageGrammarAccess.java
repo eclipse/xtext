@@ -3,20 +3,30 @@
  */
 package org.eclipse.xtext.ui.tests.editor.contentassist.services;
 
-import com.google.inject.Singleton;
 import com.google.inject.Inject;
-
+import com.google.inject.Singleton;
 import java.util.List;
-
-import org.eclipse.xtext.*;
-import org.eclipse.xtext.service.GrammarProvider;
-import org.eclipse.xtext.service.AbstractElementFinder.*;
-
+import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Alternatives;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.EnumLiteralDeclaration;
+import org.eclipse.xtext.EnumRule;
+import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.Group;
+import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TerminalRule;
+import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
+import org.eclipse.xtext.service.AbstractElementFinder.AbstractEnumRuleElementFinder;
+import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder;
+import org.eclipse.xtext.service.GrammarProvider;
 
 @Singleton
 public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
-	
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug332217TestLanguage.Model");
@@ -26,14 +36,13 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//Model:
 		//	elements+=TableView*;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//elements+=TableView*
 		public Assignment getElementsAssignment() { return cElementsAssignment; }
-
+		
 		//TableView
 		public RuleCall getElementsTableViewParserRuleCall_0() { return cElementsTableViewParserRuleCall_0; }
 	}
-
 	public class PropertyPathPartElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug332217TestLanguage.PropertyPathPart");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -46,17 +55,16 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//PropertyPathPart:
 		//	Parameter | CollectionIterator;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//Parameter | CollectionIterator
 		public Alternatives getAlternatives() { return cAlternatives; }
-
+		
 		//Parameter
 		public RuleCall getParameterParserRuleCall_0() { return cParameterParserRuleCall_0; }
-
+		
 		//CollectionIterator
 		public RuleCall getCollectionIteratorParserRuleCall_1() { return cCollectionIteratorParserRuleCall_1; }
 	}
-
 	public class TypeDescriptionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug332217TestLanguage.TypeDescription");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -68,23 +76,22 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//TypeDescription:
 		//	type=ID many?='[]'?;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//type=ID many?='[]'?
 		public Group getGroup() { return cGroup; }
-
+		
 		//type=ID
 		public Assignment getTypeAssignment_0() { return cTypeAssignment_0; }
-
+		
 		//ID
 		public RuleCall getTypeIDTerminalRuleCall_0_0() { return cTypeIDTerminalRuleCall_0_0; }
-
+		
 		//many?='[]'?
 		public Assignment getManyAssignment_1() { return cManyAssignment_1; }
-
+		
 		//'[]'
 		public Keyword getManyLeftSquareBracketRightSquareBracketKeyword_1_0() { return cManyLeftSquareBracketRightSquareBracketKeyword_1_0; }
 	}
-
 	public class ParameterElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug332217TestLanguage.Parameter");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -96,23 +103,22 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//Parameter:
 		//	description=TypeDescription name=ID;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//description=TypeDescription name=ID
 		public Group getGroup() { return cGroup; }
-
+		
 		//description=TypeDescription
 		public Assignment getDescriptionAssignment_0() { return cDescriptionAssignment_0; }
-
+		
 		//TypeDescription
 		public RuleCall getDescriptionTypeDescriptionParserRuleCall_0_0() { return cDescriptionTypeDescriptionParserRuleCall_0_0; }
-
+		
 		//name=ID
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
-
+		
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 	}
-
 	public class ObjectReferenceElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug332217TestLanguage.ObjectReference");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -125,26 +131,25 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//ObjectReference:
 		//	object=[PropertyPathPart] tail=NestedObjectReference?;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//object=[PropertyPathPart] tail=NestedObjectReference?
 		public Group getGroup() { return cGroup; }
-
+		
 		//object=[PropertyPathPart]
 		public Assignment getObjectAssignment_0() { return cObjectAssignment_0; }
-
+		
 		//[PropertyPathPart]
 		public CrossReference getObjectPropertyPathPartCrossReference_0_0() { return cObjectPropertyPathPartCrossReference_0_0; }
-
+		
 		//ID
 		public RuleCall getObjectPropertyPathPartIDTerminalRuleCall_0_0_1() { return cObjectPropertyPathPartIDTerminalRuleCall_0_0_1; }
-
+		
 		//tail=NestedObjectReference?
 		public Assignment getTailAssignment_1() { return cTailAssignment_1; }
-
+		
 		//NestedObjectReference
 		public RuleCall getTailNestedObjectReferenceParserRuleCall_1_0() { return cTailNestedObjectReferenceParserRuleCall_1_0; }
 	}
-
 	public class NestedObjectReferenceElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug332217TestLanguage.NestedObjectReference");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -162,29 +167,28 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//NestedObjectReference ObjectReference:
 		//	'.' object=[PropertyPathPart] tail=NestedObjectReference?
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'.' object=[PropertyPathPart] tail=NestedObjectReference?
 		public Group getGroup() { return cGroup; }
-
+		
 		//'.'
 		public Keyword getFullStopKeyword_0() { return cFullStopKeyword_0; }
-
+		
 		//object=[PropertyPathPart]
 		public Assignment getObjectAssignment_1() { return cObjectAssignment_1; }
-
+		
 		//[PropertyPathPart]
 		public CrossReference getObjectPropertyPathPartCrossReference_1_0() { return cObjectPropertyPathPartCrossReference_1_0; }
-
+		
 		//ID
 		public RuleCall getObjectPropertyPathPartIDTerminalRuleCall_1_0_1() { return cObjectPropertyPathPartIDTerminalRuleCall_1_0_1; }
-
+		
 		//tail=NestedObjectReference?
 		public Assignment getTailAssignment_2() { return cTailAssignment_2; }
-
+		
 		//NestedObjectReference
 		public RuleCall getTailNestedObjectReferenceParserRuleCall_2_0() { return cTailNestedObjectReferenceParserRuleCall_2_0; }
 	}
-
 	public class ExpressionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug332217TestLanguage.Expression");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -198,26 +202,25 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//Expression:
 		//	StringLiteral | StringFunction | CollectionLiteral | CollectionFunction | ObjectReference;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//StringLiteral | StringFunction | CollectionLiteral | CollectionFunction | ObjectReference
 		public Alternatives getAlternatives() { return cAlternatives; }
-
+		
 		//StringLiteral
 		public RuleCall getStringLiteralParserRuleCall_0() { return cStringLiteralParserRuleCall_0; }
-
+		
 		//StringFunction
 		public RuleCall getStringFunctionParserRuleCall_1() { return cStringFunctionParserRuleCall_1; }
-
+		
 		//CollectionLiteral
 		public RuleCall getCollectionLiteralParserRuleCall_2() { return cCollectionLiteralParserRuleCall_2; }
-
+		
 		//CollectionFunction
 		public RuleCall getCollectionFunctionParserRuleCall_3() { return cCollectionFunctionParserRuleCall_3; }
-
+		
 		//ObjectReference
 		public RuleCall getObjectReferenceParserRuleCall_4() { return cObjectReferenceParserRuleCall_4; }
 	}
-
 	public class ImageExpressionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug332217TestLanguage.ImageExpression");
 		private final RuleCall cScalarExpressionParserRuleCall = (RuleCall)rule.eContents().get(1);
@@ -225,11 +228,10 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//ImageExpression ScalarExpression:
 		//	ScalarExpression
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//ScalarExpression
 		public RuleCall getScalarExpressionParserRuleCall() { return cScalarExpressionParserRuleCall; }
 	}
-
 	public class ScalarExpressionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug332217TestLanguage.ScalarExpression");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -240,20 +242,19 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//ScalarExpression:
 		//	StringLiteral | StringFunction | ObjectReference;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//StringLiteral | StringFunction | ObjectReference
 		public Alternatives getAlternatives() { return cAlternatives; }
-
+		
 		//StringLiteral
 		public RuleCall getStringLiteralParserRuleCall_0() { return cStringLiteralParserRuleCall_0; }
-
+		
 		//StringFunction
 		public RuleCall getStringFunctionParserRuleCall_1() { return cStringFunctionParserRuleCall_1; }
-
+		
 		//ObjectReference
 		public RuleCall getObjectReferenceParserRuleCall_2() { return cObjectReferenceParserRuleCall_2; }
 	}
-
 	public class CollectionExpressionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug332217TestLanguage.CollectionExpression");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -264,20 +265,19 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//CollectionExpression:
 		//	CollectionLiteral | CollectionFunction | ObjectReference;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//CollectionLiteral | CollectionFunction | ObjectReference
 		public Alternatives getAlternatives() { return cAlternatives; }
-
+		
 		//CollectionLiteral
 		public RuleCall getCollectionLiteralParserRuleCall_0() { return cCollectionLiteralParserRuleCall_0; }
-
+		
 		//CollectionFunction
 		public RuleCall getCollectionFunctionParserRuleCall_1() { return cCollectionFunctionParserRuleCall_1; }
-
+		
 		//ObjectReference
 		public RuleCall getObjectReferenceParserRuleCall_2() { return cObjectReferenceParserRuleCall_2; }
 	}
-
 	public class StringLiteralElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug332217TestLanguage.StringLiteral");
 		private final Assignment cValueAssignment = (Assignment)rule.eContents().get(1);
@@ -286,14 +286,13 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//StringLiteral:
 		//	value=STRING;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//value=STRING
 		public Assignment getValueAssignment() { return cValueAssignment; }
-
+		
 		//STRING
 		public RuleCall getValueSTRINGTerminalRuleCall_0() { return cValueSTRINGTerminalRuleCall_0; }
 	}
-
 	public class StringFunctionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug332217TestLanguage.StringFunction");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -327,85 +326,84 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//	match=ScalarExpression ',' replacement=ScalarExpression ')' | {StringUrlConform} 'urlconform(' value=ScalarExpression
 		//	')';
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//{StringConcat} '(' values+=ScalarExpression+ ')' | {StringReplace} 'replace(' value=ScalarExpression ','
 		//match=ScalarExpression ',' replacement=ScalarExpression ')' | {StringUrlConform} 'urlconform(' value=ScalarExpression
 		//')'
 		public Alternatives getAlternatives() { return cAlternatives; }
-
+		
 		//{StringConcat} '(' values+=ScalarExpression+ ')'
 		public Group getGroup_0() { return cGroup_0; }
-
+		
 		//{StringConcat}
 		public Action getStringConcatAction_0_0() { return cStringConcatAction_0_0; }
-
+		
 		//'('
 		public Keyword getLeftParenthesisKeyword_0_1() { return cLeftParenthesisKeyword_0_1; }
-
+		
 		//values+=ScalarExpression+
 		public Assignment getValuesAssignment_0_2() { return cValuesAssignment_0_2; }
-
+		
 		//ScalarExpression
 		public RuleCall getValuesScalarExpressionParserRuleCall_0_2_0() { return cValuesScalarExpressionParserRuleCall_0_2_0; }
-
+		
 		//')'
 		public Keyword getRightParenthesisKeyword_0_3() { return cRightParenthesisKeyword_0_3; }
-
+		
 		//{StringReplace} 'replace(' value=ScalarExpression ',' match=ScalarExpression ',' replacement=ScalarExpression ')'
 		public Group getGroup_1() { return cGroup_1; }
-
+		
 		//{StringReplace}
 		public Action getStringReplaceAction_1_0() { return cStringReplaceAction_1_0; }
-
+		
 		//'replace('
 		public Keyword getReplaceKeyword_1_1() { return cReplaceKeyword_1_1; }
-
+		
 		//value=ScalarExpression
 		public Assignment getValueAssignment_1_2() { return cValueAssignment_1_2; }
-
+		
 		//ScalarExpression
 		public RuleCall getValueScalarExpressionParserRuleCall_1_2_0() { return cValueScalarExpressionParserRuleCall_1_2_0; }
-
+		
 		//','
 		public Keyword getCommaKeyword_1_3() { return cCommaKeyword_1_3; }
-
+		
 		//match=ScalarExpression
 		public Assignment getMatchAssignment_1_4() { return cMatchAssignment_1_4; }
-
+		
 		//ScalarExpression
 		public RuleCall getMatchScalarExpressionParserRuleCall_1_4_0() { return cMatchScalarExpressionParserRuleCall_1_4_0; }
-
+		
 		//','
 		public Keyword getCommaKeyword_1_5() { return cCommaKeyword_1_5; }
-
+		
 		//replacement=ScalarExpression
 		public Assignment getReplacementAssignment_1_6() { return cReplacementAssignment_1_6; }
-
+		
 		//ScalarExpression
 		public RuleCall getReplacementScalarExpressionParserRuleCall_1_6_0() { return cReplacementScalarExpressionParserRuleCall_1_6_0; }
-
+		
 		//')'
 		public Keyword getRightParenthesisKeyword_1_7() { return cRightParenthesisKeyword_1_7; }
-
+		
 		//{StringUrlConform} 'urlconform(' value=ScalarExpression ')'
 		public Group getGroup_2() { return cGroup_2; }
-
+		
 		//{StringUrlConform}
 		public Action getStringUrlConformAction_2_0() { return cStringUrlConformAction_2_0; }
-
+		
 		//'urlconform('
 		public Keyword getUrlconformKeyword_2_1() { return cUrlconformKeyword_2_1; }
-
+		
 		//value=ScalarExpression
 		public Assignment getValueAssignment_2_2() { return cValueAssignment_2_2; }
-
+		
 		//ScalarExpression
 		public RuleCall getValueScalarExpressionParserRuleCall_2_2_0() { return cValueScalarExpressionParserRuleCall_2_2_0; }
-
+		
 		//')'
 		public Keyword getRightParenthesisKeyword_2_3() { return cRightParenthesisKeyword_2_3; }
 	}
-
 	public class CollectionLiteralElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug332217TestLanguage.CollectionLiteral");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -421,35 +419,34 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//CollectionLiteral:
 		//	'[' items+=ScalarExpression (',' items+=ScalarExpression)* ']';
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'[' items+=ScalarExpression (',' items+=ScalarExpression)* ']'
 		public Group getGroup() { return cGroup; }
-
+		
 		//'['
 		public Keyword getLeftSquareBracketKeyword_0() { return cLeftSquareBracketKeyword_0; }
-
+		
 		//items+=ScalarExpression
 		public Assignment getItemsAssignment_1() { return cItemsAssignment_1; }
-
+		
 		//ScalarExpression
 		public RuleCall getItemsScalarExpressionParserRuleCall_1_0() { return cItemsScalarExpressionParserRuleCall_1_0; }
-
+		
 		//(',' items+=ScalarExpression)*
 		public Group getGroup_2() { return cGroup_2; }
-
+		
 		//','
 		public Keyword getCommaKeyword_2_0() { return cCommaKeyword_2_0; }
-
+		
 		//items+=ScalarExpression
 		public Assignment getItemsAssignment_2_1() { return cItemsAssignment_2_1; }
-
+		
 		//ScalarExpression
 		public RuleCall getItemsScalarExpressionParserRuleCall_2_1_0() { return cItemsScalarExpressionParserRuleCall_2_1_0; }
-
+		
 		//']'
 		public Keyword getRightSquareBracketKeyword_3() { return cRightSquareBracketKeyword_3; }
 	}
-
 	public class CollectionFunctionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug332217TestLanguage.CollectionFunction");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -465,35 +462,34 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//CollectionFunction:
 		//	{StringSplit} 'split(' value=ScalarExpression ',' delimiter=ScalarExpression ')';
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//{StringSplit} 'split(' value=ScalarExpression ',' delimiter=ScalarExpression ')'
 		public Group getGroup() { return cGroup; }
-
+		
 		//{StringSplit}
 		public Action getStringSplitAction_0() { return cStringSplitAction_0; }
-
+		
 		//'split('
 		public Keyword getSplitKeyword_1() { return cSplitKeyword_1; }
-
+		
 		//value=ScalarExpression
 		public Assignment getValueAssignment_2() { return cValueAssignment_2; }
-
+		
 		//ScalarExpression
 		public RuleCall getValueScalarExpressionParserRuleCall_2_0() { return cValueScalarExpressionParserRuleCall_2_0; }
-
+		
 		//','
 		public Keyword getCommaKeyword_3() { return cCommaKeyword_3; }
-
+		
 		//delimiter=ScalarExpression
 		public Assignment getDelimiterAssignment_4() { return cDelimiterAssignment_4; }
-
+		
 		//ScalarExpression
 		public RuleCall getDelimiterScalarExpressionParserRuleCall_4_0() { return cDelimiterScalarExpressionParserRuleCall_4_0; }
-
+		
 		//')'
 		public Keyword getRightParenthesisKeyword_5() { return cRightParenthesisKeyword_5; }
 	}
-
 	public class TableViewElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug332217TestLanguage.TableView");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -529,87 +525,86 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//	& ('style:' style=TableViewStyle)?) sections+=Section*
 		//	'}';
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'tableview' name=ID ('(' content=Parameter ')')? '{' (('title:' title=ScalarExpression)? & ('titleImage:'
 		//titleImage=ImageExpression)? & ('style:' style=TableViewStyle)?) sections+=Section* '}'
 		public Group getGroup() { return cGroup; }
-
+		
 		//'tableview'
 		public Keyword getTableviewKeyword_0() { return cTableviewKeyword_0; }
-
+		
 		//name=ID
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
-
+		
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
-
+		
 		//('(' content=Parameter ')')?
 		public Group getGroup_2() { return cGroup_2; }
-
+		
 		//'('
 		public Keyword getLeftParenthesisKeyword_2_0() { return cLeftParenthesisKeyword_2_0; }
-
+		
 		//content=Parameter
 		public Assignment getContentAssignment_2_1() { return cContentAssignment_2_1; }
-
+		
 		//Parameter
 		public RuleCall getContentParameterParserRuleCall_2_1_0() { return cContentParameterParserRuleCall_2_1_0; }
-
+		
 		//')'
 		public Keyword getRightParenthesisKeyword_2_2() { return cRightParenthesisKeyword_2_2; }
-
+		
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
-
-		//('title:' title=ScalarExpression)? & ('titleImage:' titleImage=ImageExpression)? & ('style:' style=TableViewStyle)?
+		
+		//(('title:' title=ScalarExpression)? & ('titleImage:' titleImage=ImageExpression)? & ('style:' style=TableViewStyle)?)
 		public UnorderedGroup getUnorderedGroup_4() { return cUnorderedGroup_4; }
-
+		
 		//('title:' title=ScalarExpression)?
 		public Group getGroup_4_0() { return cGroup_4_0; }
-
+		
 		//'title:'
 		public Keyword getTitleKeyword_4_0_0() { return cTitleKeyword_4_0_0; }
-
+		
 		//title=ScalarExpression
 		public Assignment getTitleAssignment_4_0_1() { return cTitleAssignment_4_0_1; }
-
+		
 		//ScalarExpression
 		public RuleCall getTitleScalarExpressionParserRuleCall_4_0_1_0() { return cTitleScalarExpressionParserRuleCall_4_0_1_0; }
-
+		
 		//('titleImage:' titleImage=ImageExpression)?
 		public Group getGroup_4_1() { return cGroup_4_1; }
-
+		
 		//'titleImage:'
 		public Keyword getTitleImageKeyword_4_1_0() { return cTitleImageKeyword_4_1_0; }
-
+		
 		//titleImage=ImageExpression
 		public Assignment getTitleImageAssignment_4_1_1() { return cTitleImageAssignment_4_1_1; }
-
+		
 		//ImageExpression
 		public RuleCall getTitleImageImageExpressionParserRuleCall_4_1_1_0() { return cTitleImageImageExpressionParserRuleCall_4_1_1_0; }
-
+		
 		//('style:' style=TableViewStyle)?
 		public Group getGroup_4_2() { return cGroup_4_2; }
-
+		
 		//'style:'
 		public Keyword getStyleKeyword_4_2_0() { return cStyleKeyword_4_2_0; }
-
+		
 		//style=TableViewStyle
 		public Assignment getStyleAssignment_4_2_1() { return cStyleAssignment_4_2_1; }
-
+		
 		//TableViewStyle
 		public RuleCall getStyleTableViewStyleEnumRuleCall_4_2_1_0() { return cStyleTableViewStyleEnumRuleCall_4_2_1_0; }
-
+		
 		//sections+=Section*
 		public Assignment getSectionsAssignment_5() { return cSectionsAssignment_5; }
-
+		
 		//Section
 		public RuleCall getSectionsSectionParserRuleCall_5_0() { return cSectionsSectionParserRuleCall_5_0; }
-
+		
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_6() { return cRightCurlyBracketKeyword_6; }
 	}
-
 	public class ViewContentElementElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug332217TestLanguage.ViewContentElement");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -619,17 +614,16 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//ViewContentElement:
 		//	Section | Cell;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//Section | Cell
 		public Alternatives getAlternatives() { return cAlternatives; }
-
+		
 		//Section
 		public RuleCall getSectionParserRuleCall_0() { return cSectionParserRuleCall_0; }
-
+		
 		//Cell
 		public RuleCall getCellParserRuleCall_1() { return cCellParserRuleCall_1; }
 	}
-
 	public class SectionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug332217TestLanguage.Section");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -650,44 +644,43 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//	cells+=Cell+
 		//	'}';
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'section' iterator=CollectionIterator? '{' ('title:' title=ScalarExpression)? cells+=Cell+ '}'
 		public Group getGroup() { return cGroup; }
-
+		
 		//'section'
 		public Keyword getSectionKeyword_0() { return cSectionKeyword_0; }
-
+		
 		//iterator=CollectionIterator?
 		public Assignment getIteratorAssignment_1() { return cIteratorAssignment_1; }
-
+		
 		//CollectionIterator
 		public RuleCall getIteratorCollectionIteratorParserRuleCall_1_0() { return cIteratorCollectionIteratorParserRuleCall_1_0; }
-
+		
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
-
+		
 		//('title:' title=ScalarExpression)?
 		public Group getGroup_3() { return cGroup_3; }
-
+		
 		//'title:'
 		public Keyword getTitleKeyword_3_0() { return cTitleKeyword_3_0; }
-
+		
 		//title=ScalarExpression
 		public Assignment getTitleAssignment_3_1() { return cTitleAssignment_3_1; }
-
+		
 		//ScalarExpression
 		public RuleCall getTitleScalarExpressionParserRuleCall_3_1_0() { return cTitleScalarExpressionParserRuleCall_3_1_0; }
-
+		
 		//cells+=Cell+
 		public Assignment getCellsAssignment_4() { return cCellsAssignment_4; }
-
+		
 		//Cell
 		public RuleCall getCellsCellParserRuleCall_4_0() { return cCellsCellParserRuleCall_4_0; }
-
+		
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_5() { return cRightCurlyBracketKeyword_5; }
 	}
-
 	public class CellElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug332217TestLanguage.Cell");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -728,98 +721,97 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//	& ('accessory:' accessory=CellAccessory)?)
 		//	'}';
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'cell' type=CellType iterator=CollectionIterator? '{' (('text:' text=ScalarExpression)? & ('details:'
 		//details=ScalarExpression)? & ('image:' image=ScalarExpression)? & ('action:' action=ViewAction)? & ('accessory:'
 		//accessory=CellAccessory)?) '}'
 		public Group getGroup() { return cGroup; }
-
+		
 		//'cell'
 		public Keyword getCellKeyword_0() { return cCellKeyword_0; }
-
+		
 		//type=CellType
 		public Assignment getTypeAssignment_1() { return cTypeAssignment_1; }
-
+		
 		//CellType
 		public RuleCall getTypeCellTypeEnumRuleCall_1_0() { return cTypeCellTypeEnumRuleCall_1_0; }
-
+		
 		//iterator=CollectionIterator?
 		public Assignment getIteratorAssignment_2() { return cIteratorAssignment_2; }
-
+		
 		//CollectionIterator
 		public RuleCall getIteratorCollectionIteratorParserRuleCall_2_0() { return cIteratorCollectionIteratorParserRuleCall_2_0; }
-
+		
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
-
-		//('text:' text=ScalarExpression)? & ('details:' details=ScalarExpression)? & ('image:' image=ScalarExpression)? &
-		//('action:' action=ViewAction)? & ('accessory:' accessory=CellAccessory)?
+		
+		//(('text:' text=ScalarExpression)? & ('details:' details=ScalarExpression)? & ('image:' image=ScalarExpression)? &
+		//('action:' action=ViewAction)? & ('accessory:' accessory=CellAccessory)?)
 		public UnorderedGroup getUnorderedGroup_4() { return cUnorderedGroup_4; }
-
+		
 		//('text:' text=ScalarExpression)?
 		public Group getGroup_4_0() { return cGroup_4_0; }
-
+		
 		//'text:'
 		public Keyword getTextKeyword_4_0_0() { return cTextKeyword_4_0_0; }
-
+		
 		//text=ScalarExpression
 		public Assignment getTextAssignment_4_0_1() { return cTextAssignment_4_0_1; }
-
+		
 		//ScalarExpression
 		public RuleCall getTextScalarExpressionParserRuleCall_4_0_1_0() { return cTextScalarExpressionParserRuleCall_4_0_1_0; }
-
+		
 		//('details:' details=ScalarExpression)?
 		public Group getGroup_4_1() { return cGroup_4_1; }
-
+		
 		//'details:'
 		public Keyword getDetailsKeyword_4_1_0() { return cDetailsKeyword_4_1_0; }
-
+		
 		//details=ScalarExpression
 		public Assignment getDetailsAssignment_4_1_1() { return cDetailsAssignment_4_1_1; }
-
+		
 		//ScalarExpression
 		public RuleCall getDetailsScalarExpressionParserRuleCall_4_1_1_0() { return cDetailsScalarExpressionParserRuleCall_4_1_1_0; }
-
+		
 		//('image:' image=ScalarExpression)?
 		public Group getGroup_4_2() { return cGroup_4_2; }
-
+		
 		//'image:'
 		public Keyword getImageKeyword_4_2_0() { return cImageKeyword_4_2_0; }
-
+		
 		//image=ScalarExpression
 		public Assignment getImageAssignment_4_2_1() { return cImageAssignment_4_2_1; }
-
+		
 		//ScalarExpression
 		public RuleCall getImageScalarExpressionParserRuleCall_4_2_1_0() { return cImageScalarExpressionParserRuleCall_4_2_1_0; }
-
+		
 		//('action:' action=ViewAction)?
 		public Group getGroup_4_3() { return cGroup_4_3; }
-
+		
 		//'action:'
 		public Keyword getActionKeyword_4_3_0() { return cActionKeyword_4_3_0; }
-
+		
 		//action=ViewAction
 		public Assignment getActionAssignment_4_3_1() { return cActionAssignment_4_3_1; }
-
+		
 		//ViewAction
 		public RuleCall getActionViewActionParserRuleCall_4_3_1_0() { return cActionViewActionParserRuleCall_4_3_1_0; }
-
+		
 		//('accessory:' accessory=CellAccessory)?
 		public Group getGroup_4_4() { return cGroup_4_4; }
-
+		
 		//'accessory:'
 		public Keyword getAccessoryKeyword_4_4_0() { return cAccessoryKeyword_4_4_0; }
-
+		
 		//accessory=CellAccessory
 		public Assignment getAccessoryAssignment_4_4_1() { return cAccessoryAssignment_4_4_1; }
-
+		
 		//CellAccessory
 		public RuleCall getAccessoryCellAccessoryEnumRuleCall_4_4_1_0() { return cAccessoryCellAccessoryEnumRuleCall_4_4_1_0; }
-
+		
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_5() { return cRightCurlyBracketKeyword_5; }
 	}
-
 	public class CollectionIteratorElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug332217TestLanguage.CollectionIterator");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -833,29 +825,28 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//CollectionIterator:
 		//	'for' name=ID 'in' collection=CollectionExpression;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'for' name=ID 'in' collection=CollectionExpression
 		public Group getGroup() { return cGroup; }
-
+		
 		//'for'
 		public Keyword getForKeyword_0() { return cForKeyword_0; }
-
+		
 		//name=ID
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
-
+		
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
-
+		
 		//'in'
 		public Keyword getInKeyword_2() { return cInKeyword_2; }
-
+		
 		//collection=CollectionExpression
 		public Assignment getCollectionAssignment_3() { return cCollectionAssignment_3; }
-
+		
 		//CollectionExpression
 		public RuleCall getCollectionCollectionExpressionParserRuleCall_3_0() { return cCollectionCollectionExpressionParserRuleCall_3_0; }
 	}
-
 	public class ViewActionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug332217TestLanguage.ViewAction");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -865,17 +856,16 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//ViewAction:
 		//	ExternalOpen | Selector;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//ExternalOpen | Selector
 		public Alternatives getAlternatives() { return cAlternatives; }
-
+		
 		//ExternalOpen
 		public RuleCall getExternalOpenParserRuleCall_0() { return cExternalOpenParserRuleCall_0; }
-
+		
 		//Selector
 		public RuleCall getSelectorParserRuleCall_1() { return cSelectorParserRuleCall_1; }
 	}
-
 	public class SelectorNameElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug332217TestLanguage.SelectorName");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -888,26 +878,25 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//SelectorName:
 		//	ID (':' ID)* ':'?;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//ID (':' ID)* ':'?
 		public Group getGroup() { return cGroup; }
-
+		
 		//ID
 		public RuleCall getIDTerminalRuleCall_0() { return cIDTerminalRuleCall_0; }
-
+		
 		//(':' ID)*
 		public Group getGroup_1() { return cGroup_1; }
-
+		
 		//':'
 		public Keyword getColonKeyword_1_0() { return cColonKeyword_1_0; }
-
+		
 		//ID
 		public RuleCall getIDTerminalRuleCall_1_1() { return cIDTerminalRuleCall_1_1; }
-
+		
 		//':'?
 		public Keyword getColonKeyword_2() { return cColonKeyword_2; }
 	}
-
 	public class SelectorElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug332217TestLanguage.Selector");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -920,26 +909,25 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//Selector:
 		//	'@selector' '(' name=SelectorName ')';
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'@selector' '(' name=SelectorName ')'
 		public Group getGroup() { return cGroup; }
-
+		
 		//'@selector'
 		public Keyword getSelectorKeyword_0() { return cSelectorKeyword_0; }
-
+		
 		//'('
 		public Keyword getLeftParenthesisKeyword_1() { return cLeftParenthesisKeyword_1; }
-
+		
 		//name=SelectorName
 		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
-
+		
 		//SelectorName
 		public RuleCall getNameSelectorNameParserRuleCall_2_0() { return cNameSelectorNameParserRuleCall_2_0; }
-
+		
 		//')'
 		public Keyword getRightParenthesisKeyword_3() { return cRightParenthesisKeyword_3; }
 	}
-
 	public class ExternalOpenElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug332217TestLanguage.ExternalOpen");
 		private final Assignment cUrlAssignment = (Assignment)rule.eContents().get(1);
@@ -948,14 +936,13 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//ExternalOpen:
 		//	url=ScalarExpression;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//url=ScalarExpression
 		public Assignment getUrlAssignment() { return cUrlAssignment; }
-
+		
 		//ScalarExpression
 		public RuleCall getUrlScalarExpressionParserRuleCall_0() { return cUrlScalarExpressionParserRuleCall_0; }
 	}
-	
 	
 	public class TableViewStyleElements extends AbstractEnumRuleElementFinder {
 		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug332217TestLanguage.TableViewStyle");
@@ -968,23 +955,22 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//enum TableViewStyle:
 		//	Plain | Grouped;
 		public EnumRule getRule() { return rule; }
-
+		
 		//Plain | Grouped
 		public Alternatives getAlternatives() { return cAlternatives; }
-
+		
 		//Plain
 		public EnumLiteralDeclaration getPlainEnumLiteralDeclaration_0() { return cPlainEnumLiteralDeclaration_0; }
-
+		
 		//"Plain"
 		public Keyword getPlainPlainKeyword_0_0() { return cPlainPlainKeyword_0_0; }
-
+		
 		//Grouped
 		public EnumLiteralDeclaration getGroupedEnumLiteralDeclaration_1() { return cGroupedEnumLiteralDeclaration_1; }
-
+		
 		//"Grouped"
 		public Keyword getGroupedGroupedKeyword_1_0() { return cGroupedGroupedKeyword_1_0; }
 	}
-
 	public class CellTypeElements extends AbstractEnumRuleElementFinder {
 		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug332217TestLanguage.CellType");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -1003,35 +989,34 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//	value2='Value2' |
 		//	subtitle='Subtitle';
 		public EnumRule getRule() { return rule; }
-
+		
 		//default='Default' | value1='Value1' | value2='Value2' | subtitle='Subtitle'
 		public Alternatives getAlternatives() { return cAlternatives; }
-
+		
 		//default='Default'
 		public EnumLiteralDeclaration getDefaultEnumLiteralDeclaration_0() { return cDefaultEnumLiteralDeclaration_0; }
-
+		
 		//'Default'
 		public Keyword getDefaultDefaultKeyword_0_0() { return cDefaultDefaultKeyword_0_0; }
-
+		
 		//value1='Value1'
 		public EnumLiteralDeclaration getValue1EnumLiteralDeclaration_1() { return cValue1EnumLiteralDeclaration_1; }
-
+		
 		//'Value1'
 		public Keyword getValue1Value1Keyword_1_0() { return cValue1Value1Keyword_1_0; }
-
+		
 		//value2='Value2'
 		public EnumLiteralDeclaration getValue2EnumLiteralDeclaration_2() { return cValue2EnumLiteralDeclaration_2; }
-
+		
 		//'Value2'
 		public Keyword getValue2Value2Keyword_2_0() { return cValue2Value2Keyword_2_0; }
-
+		
 		//subtitle='Subtitle'
 		public EnumLiteralDeclaration getSubtitleEnumLiteralDeclaration_3() { return cSubtitleEnumLiteralDeclaration_3; }
-
+		
 		//'Subtitle'
 		public Keyword getSubtitleSubtitleKeyword_3_0() { return cSubtitleSubtitleKeyword_3_0; }
 	}
-
 	public class CellAccessoryElements extends AbstractEnumRuleElementFinder {
 		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug332217TestLanguage.CellAccessory");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -1047,31 +1032,31 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//enum CellAccessory:
 		//	None | Link | Detail | Check;
 		public EnumRule getRule() { return rule; }
-
+		
 		//None | Link | Detail | Check
 		public Alternatives getAlternatives() { return cAlternatives; }
-
+		
 		//None
 		public EnumLiteralDeclaration getNoneEnumLiteralDeclaration_0() { return cNoneEnumLiteralDeclaration_0; }
-
+		
 		//"None"
 		public Keyword getNoneNoneKeyword_0_0() { return cNoneNoneKeyword_0_0; }
-
+		
 		//Link
 		public EnumLiteralDeclaration getLinkEnumLiteralDeclaration_1() { return cLinkEnumLiteralDeclaration_1; }
-
+		
 		//"Link"
 		public Keyword getLinkLinkKeyword_1_0() { return cLinkLinkKeyword_1_0; }
-
+		
 		//Detail
 		public EnumLiteralDeclaration getDetailEnumLiteralDeclaration_2() { return cDetailEnumLiteralDeclaration_2; }
-
+		
 		//"Detail"
 		public Keyword getDetailDetailKeyword_2_0() { return cDetailDetailKeyword_2_0; }
-
+		
 		//Check
 		public EnumLiteralDeclaration getCheckEnumLiteralDeclaration_3() { return cCheckEnumLiteralDeclaration_3; }
-
+		
 		//"Check"
 		public Keyword getCheckCheckKeyword_3_0() { return cCheckCheckKeyword_3_0; }
 	}
@@ -1104,12 +1089,12 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	private final ExternalOpenElements pExternalOpen;
 	
 	private final Grammar grammar;
-
+	
 	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public Bug332217TestLanguageGrammarAccess(GrammarProvider grammarProvider,
-		TerminalsGrammarAccess gaTerminals) {
+			TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
 		this.pModel = new ModelElements();
@@ -1161,7 +1146,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return grammar;
 	}
 	
-
+	
 	public TerminalsGrammarAccess getTerminalsGrammarAccess() {
 		return gaTerminals;
 	}
@@ -1176,7 +1161,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getModelRule() {
 		return getModelAccess().getRule();
 	}
-
+	
 	//// -------------------------------------------
 	//// General
 	//// common supertype to allow variableReferences
@@ -1189,7 +1174,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getPropertyPathPartRule() {
 		return getPropertyPathPartAccess().getRule();
 	}
-
+	
 	//TypeDescription:
 	//	type=ID many?='[]'?;
 	public TypeDescriptionElements getTypeDescriptionAccess() {
@@ -1199,7 +1184,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getTypeDescriptionRule() {
 		return getTypeDescriptionAccess().getRule();
 	}
-
+	
 	//Parameter:
 	//	description=TypeDescription name=ID;
 	public ParameterElements getParameterAccess() {
@@ -1209,7 +1194,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getParameterRule() {
 		return getParameterAccess().getRule();
 	}
-
+	
 	//ObjectReference:
 	//	object=[PropertyPathPart] tail=NestedObjectReference?;
 	public ObjectReferenceElements getObjectReferenceAccess() {
@@ -1219,7 +1204,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getObjectReferenceRule() {
 		return getObjectReferenceAccess().getRule();
 	}
-
+	
 	////workaround: NestedObjectReference as separate rule to guide the content 
 	////   assist parser technically could have been include in ObjectReference like
 	////   ObjectReference:
@@ -1233,7 +1218,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getNestedObjectReferenceRule() {
 		return getNestedObjectReferenceAccess().getRule();
 	}
-
+	
 	////TODO: could this be ScalarExpression | CollectionExpression? and simplify rootParameter extension
 	//Expression:
 	//	StringLiteral | StringFunction | CollectionLiteral | CollectionFunction | ObjectReference;
@@ -1244,7 +1229,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getExpressionRule() {
 		return getExpressionAccess().getRule();
 	}
-
+	
 	//ImageExpression ScalarExpression:
 	//	ScalarExpression
 	public ImageExpressionElements getImageExpressionAccess() {
@@ -1254,7 +1239,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getImageExpressionRule() {
 		return getImageExpressionAccess().getRule();
 	}
-
+	
 	//ScalarExpression:
 	//	StringLiteral | StringFunction | ObjectReference;
 	public ScalarExpressionElements getScalarExpressionAccess() {
@@ -1264,7 +1249,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getScalarExpressionRule() {
 		return getScalarExpressionAccess().getRule();
 	}
-
+	
 	//CollectionExpression:
 	//	CollectionLiteral | CollectionFunction | ObjectReference;
 	public CollectionExpressionElements getCollectionExpressionAccess() {
@@ -1274,7 +1259,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getCollectionExpressionRule() {
 		return getCollectionExpressionAccess().getRule();
 	}
-
+	
 	//StringLiteral:
 	//	value=STRING;
 	public StringLiteralElements getStringLiteralAccess() {
@@ -1284,7 +1269,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getStringLiteralRule() {
 		return getStringLiteralAccess().getRule();
 	}
-
+	
 	//StringFunction:
 	//	{StringConcat} '(' values+=ScalarExpression+ ')' | {StringReplace} 'replace(' value=ScalarExpression ','
 	//	match=ScalarExpression ',' replacement=ScalarExpression ')' | {StringUrlConform} 'urlconform(' value=ScalarExpression
@@ -1296,7 +1281,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getStringFunctionRule() {
 		return getStringFunctionAccess().getRule();
 	}
-
+	
 	//CollectionLiteral:
 	//	'[' items+=ScalarExpression (',' items+=ScalarExpression)* ']';
 	public CollectionLiteralElements getCollectionLiteralAccess() {
@@ -1306,7 +1291,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getCollectionLiteralRule() {
 		return getCollectionLiteralAccess().getRule();
 	}
-
+	
 	//CollectionFunction:
 	//	{StringSplit} 'split(' value=ScalarExpression ',' delimiter=ScalarExpression ')';
 	public CollectionFunctionElements getCollectionFunctionAccess() {
@@ -1316,7 +1301,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getCollectionFunctionRule() {
 		return getCollectionFunctionAccess().getRule();
 	}
-
+	
 	//enum TableViewStyle:
 	//	Plain | Grouped;
 	public TableViewStyleElements getTableViewStyleAccess() {
@@ -1326,7 +1311,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public EnumRule getTableViewStyleRule() {
 		return getTableViewStyleAccess().getRule();
 	}
-
+	
 	//TableView:
 	//	'tableview' name=ID ('(' content=Parameter ')')? '{' (('title:' title=ScalarExpression)?
 	//	& ('titleImage:' titleImage=ImageExpression)?
@@ -1339,7 +1324,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getTableViewRule() {
 		return getTableViewAccess().getRule();
 	}
-
+	
 	//ViewContentElement:
 	//	Section | Cell;
 	public ViewContentElementElements getViewContentElementAccess() {
@@ -1349,7 +1334,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getViewContentElementRule() {
 		return getViewContentElementAccess().getRule();
 	}
-
+	
 	//Section:
 	//	'section' iterator=CollectionIterator? '{' ('title:' title=ScalarExpression)?
 	//	cells+=Cell+
@@ -1361,7 +1346,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getSectionRule() {
 		return getSectionAccess().getRule();
 	}
-
+	
 	//Cell:
 	//	'cell' type=CellType iterator=CollectionIterator? '{' (('text:' text=ScalarExpression)?
 	//	& ('details:' details=ScalarExpression)?
@@ -1376,7 +1361,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getCellRule() {
 		return getCellAccess().getRule();
 	}
-
+	
 	//enum CellType:
 	//	default='Default' |
 	//	value1='Value1' |
@@ -1389,7 +1374,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public EnumRule getCellTypeRule() {
 		return getCellTypeAccess().getRule();
 	}
-
+	
 	//enum CellAccessory:
 	//	None | Link | Detail | Check;
 	public CellAccessoryElements getCellAccessoryAccess() {
@@ -1399,7 +1384,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public EnumRule getCellAccessoryRule() {
 		return getCellAccessoryAccess().getRule();
 	}
-
+	
 	//CollectionIterator:
 	//	'for' name=ID 'in' collection=CollectionExpression;
 	public CollectionIteratorElements getCollectionIteratorAccess() {
@@ -1409,7 +1394,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getCollectionIteratorRule() {
 		return getCollectionIteratorAccess().getRule();
 	}
-
+	
 	//ViewAction:
 	//	ExternalOpen | Selector;
 	public ViewActionElements getViewActionAccess() {
@@ -1419,7 +1404,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getViewActionRule() {
 		return getViewActionAccess().getRule();
 	}
-
+	
 	//SelectorName:
 	//	ID (':' ID)* ':'?;
 	public SelectorNameElements getSelectorNameAccess() {
@@ -1429,7 +1414,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getSelectorNameRule() {
 		return getSelectorNameAccess().getRule();
 	}
-
+	
 	//Selector:
 	//	'@selector' '(' name=SelectorName ')';
 	public SelectorElements getSelectorAccess() {
@@ -1439,7 +1424,7 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getSelectorRule() {
 		return getSelectorAccess().getRule();
 	}
-
+	
 	//ExternalOpen:
 	//	url=ScalarExpression;
 	public ExternalOpenElements getExternalOpenAccess() {
@@ -1449,47 +1434,47 @@ public class Bug332217TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getExternalOpenRule() {
 		return getExternalOpenAccess().getRule();
 	}
-
+	
 	//terminal ID:
 	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
-	} 
-
+	}
+	
 	//terminal INT returns ecore::EInt:
 	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
-	} 
-
+	}
+	
 	//terminal STRING:
 	//	'"' ('\\' . | !('\\' | '"'))* '"' |
 	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
-	} 
-
+	}
+	
 	//terminal ML_COMMENT:
 	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal SL_COMMENT:
 	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal WS:
 	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
-	} 
-
+	}
+	
 	//terminal ANY_OTHER:
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
-	} 
+	}
 }

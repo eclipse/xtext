@@ -3,20 +3,24 @@
  */
 package org.eclipse.xtext.ui.tests.editor.contentassist.services;
 
-import com.google.inject.Singleton;
 import com.google.inject.Inject;
-
+import com.google.inject.Singleton;
 import java.util.List;
-
-import org.eclipse.xtext.*;
-import org.eclipse.xtext.service.GrammarProvider;
-import org.eclipse.xtext.service.AbstractElementFinder.*;
-
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.Group;
+import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
+import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder;
+import org.eclipse.xtext.service.GrammarProvider;
 
 @Singleton
 public class CrossReferenceProposalTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
-	
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.CrossReferenceProposalTestLanguage.Model");
@@ -26,14 +30,13 @@ public class CrossReferenceProposalTestLanguageGrammarAccess extends AbstractGra
 		//Model:
 		//	elements+=Class*;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//elements+=Class*
 		public Assignment getElementsAssignment() { return cElementsAssignment; }
-
+		
 		//Class
 		public RuleCall getElementsClassParserRuleCall_0() { return cElementsClassParserRuleCall_0; }
 	}
-
 	public class ClassElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.CrossReferenceProposalTestLanguage.Class");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -51,34 +54,34 @@ public class CrossReferenceProposalTestLanguageGrammarAccess extends AbstractGra
 		//	(superClass=[Class] '<-')? name=ID '{'
 		//	'}';
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//(superClass=[Class] '<-')? name=ID '{' '}'
 		public Group getGroup() { return cGroup; }
-
+		
 		//(superClass=[Class] '<-')?
 		public Group getGroup_0() { return cGroup_0; }
-
+		
 		//superClass=[Class]
 		public Assignment getSuperClassAssignment_0_0() { return cSuperClassAssignment_0_0; }
-
+		
 		//[Class]
 		public CrossReference getSuperClassClassCrossReference_0_0_0() { return cSuperClassClassCrossReference_0_0_0; }
-
+		
 		//ID
 		public RuleCall getSuperClassClassIDTerminalRuleCall_0_0_0_1() { return cSuperClassClassIDTerminalRuleCall_0_0_0_1; }
-
+		
 		//'<-'
 		public Keyword getLessThanSignHyphenMinusKeyword_0_1() { return cLessThanSignHyphenMinusKeyword_0_1; }
-
+		
 		//name=ID
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
-
+		
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
-
+		
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
-
+		
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_3() { return cRightCurlyBracketKeyword_3; }
 	}
@@ -88,12 +91,12 @@ public class CrossReferenceProposalTestLanguageGrammarAccess extends AbstractGra
 	private final ClassElements pClass;
 	
 	private final Grammar grammar;
-
+	
 	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public CrossReferenceProposalTestLanguageGrammarAccess(GrammarProvider grammarProvider,
-		TerminalsGrammarAccess gaTerminals) {
+			TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
 		this.pModel = new ModelElements();
@@ -121,7 +124,7 @@ public class CrossReferenceProposalTestLanguageGrammarAccess extends AbstractGra
 		return grammar;
 	}
 	
-
+	
 	public TerminalsGrammarAccess getTerminalsGrammarAccess() {
 		return gaTerminals;
 	}
@@ -136,7 +139,7 @@ public class CrossReferenceProposalTestLanguageGrammarAccess extends AbstractGra
 	public ParserRule getModelRule() {
 		return getModelAccess().getRule();
 	}
-
+	
 	//Class:
 	//	(superClass=[Class] '<-')? name=ID '{'
 	//	'}';
@@ -147,47 +150,47 @@ public class CrossReferenceProposalTestLanguageGrammarAccess extends AbstractGra
 	public ParserRule getClassRule() {
 		return getClassAccess().getRule();
 	}
-
+	
 	//terminal ID:
 	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
-	} 
-
+	}
+	
 	//terminal INT returns ecore::EInt:
 	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
-	} 
-
+	}
+	
 	//terminal STRING:
 	//	'"' ('\\' . | !('\\' | '"'))* '"' |
 	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
-	} 
-
+	}
+	
 	//terminal ML_COMMENT:
 	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal SL_COMMENT:
 	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal WS:
 	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
-	} 
-
+	}
+	
 	//terminal ANY_OTHER:
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
-	} 
+	}
 }
