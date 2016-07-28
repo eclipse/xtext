@@ -25,7 +25,7 @@ import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionProvider;
 import org.eclipse.xtext.ui.editor.validation.AnnotationIssueProcessor;
 import org.eclipse.xtext.ui.editor.validation.MarkerCreator;
 import org.eclipse.xtext.ui.editor.validation.XtextAnnotation;
-import org.eclipse.xtext.ui.tests.quickfix.validation.QuickfixCrossrefTestLanguageJavaValidator;
+import org.eclipse.xtext.ui.tests.quickfix.validation.QuickfixCrossrefTestLanguageValidator;
 import org.eclipse.xtext.ui.util.IssueUtil;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.validation.Issue;
@@ -41,7 +41,7 @@ public class IssueDataTest extends AbstractQuickfixTest {
 	private static final String PROJECT_NAME = "quickfixtest";
 	private static final String MODEL_FILE = "test.quickfixcrossreftestlanguage";
 	private static final String PREFIX = "//irrelevant\n\t\t";
-	private static final String MODEL_WITH_LINKING_ERROR = PREFIX + QuickfixCrossrefTestLanguageJavaValidator.TRIGGER_VALIDATION_ISSUE + "{}";
+	private static final String MODEL_WITH_LINKING_ERROR = PREFIX + QuickfixCrossrefTestLanguageValidator.TRIGGER_VALIDATION_ISSUE + "{}";
 
 
 	@Test public void testIssueData() throws Exception {
@@ -54,9 +54,9 @@ public class IssueDataTest extends AbstractQuickfixTest {
 		assertEquals(2, issue.getLineNumber().intValue());
 		assertEquals(3, issue.getColumn().intValue());
 		assertEquals(PREFIX.length(), issue.getOffset().intValue());
-		assertEquals(QuickfixCrossrefTestLanguageJavaValidator.TRIGGER_VALIDATION_ISSUE.length(), issue.getLength().intValue());
-		String[] expectedIssueData = new String[]{ QuickfixCrossrefTestLanguageJavaValidator.ISSUE_DATA_0,
-			QuickfixCrossrefTestLanguageJavaValidator.ISSUE_DATA_1};
+		assertEquals(QuickfixCrossrefTestLanguageValidator.TRIGGER_VALIDATION_ISSUE.length(), issue.getLength().intValue());
+		String[] expectedIssueData = new String[]{ QuickfixCrossrefTestLanguageValidator.ISSUE_DATA_0,
+			QuickfixCrossrefTestLanguageValidator.ISSUE_DATA_1};
 		assertTrue(Arrays.equals(expectedIssueData, issue.getData()));
 		Thread.sleep(1000);
 		

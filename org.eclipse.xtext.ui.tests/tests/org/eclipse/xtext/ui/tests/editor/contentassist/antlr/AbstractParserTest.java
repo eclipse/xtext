@@ -12,14 +12,14 @@ import java.util.Set;
 
 import org.antlr.runtime.RecognitionException;
 import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.ide.editor.contentassist.antlr.FollowElement;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
-import org.eclipse.xtext.ui.editor.contentassist.antlr.FollowElement;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
-import org.eclipse.xtext.ui.tests.ui.internal.TestsActivator;
 import org.eclipse.xtext.ui.tests.XtextGrammarUiTestLanguageRuntimeModule;
 import org.eclipse.xtext.ui.tests.XtextGrammarUiTestLanguageStandaloneSetup;
 import org.eclipse.xtext.ui.tests.services.XtextGrammarUiTestLanguageGrammarAccess;
 import org.eclipse.xtext.ui.tests.ui.XtextGrammarUiTestLanguageUiModule;
+import org.eclipse.xtext.ui.tests.ui.internal.TestsActivator;
 import org.eclipse.xtext.util.Modules2;
 import org.junit.Test;
 

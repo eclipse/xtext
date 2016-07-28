@@ -11,16 +11,16 @@ import java.util.Collection;
 import java.util.Set;
 
 import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.ide.editor.contentassist.antlr.AbstractContentAssistParser;
+import org.eclipse.xtext.ide.editor.contentassist.antlr.FollowElement;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
-import org.eclipse.xtext.ui.editor.contentassist.antlr.AbstractContentAssistParser;
-import org.eclipse.xtext.ui.editor.contentassist.antlr.FollowElement;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
-import org.eclipse.xtext.ui.tests.ui.internal.TestsActivator;
 import org.eclipse.xtext.ui.tests.editor.contentassist.DatatypeRuleTestLanguageRuntimeModule;
 import org.eclipse.xtext.ui.tests.editor.contentassist.DatatypeRuleTestLanguageStandaloneSetup;
+import org.eclipse.xtext.ui.tests.editor.contentassist.ide.contentassist.antlr.DatatypeRuleTestLanguageParser;
 import org.eclipse.xtext.ui.tests.editor.contentassist.services.DatatypeRuleTestLanguageGrammarAccess;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.DatatypeRuleTestLanguageUiModule;
-import org.eclipse.xtext.ui.tests.editor.contentassist.ui.contentassist.antlr.DatatypeRuleTestLanguageParser;
+import org.eclipse.xtext.ui.tests.ui.internal.TestsActivator;
 import org.eclipse.xtext.util.Modules2;
 import org.junit.Test;
 
