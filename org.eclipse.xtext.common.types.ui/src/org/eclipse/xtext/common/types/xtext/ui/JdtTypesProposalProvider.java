@@ -38,12 +38,18 @@ import org.eclipse.jdt.internal.ui.viewsupport.JavaElementImageProvider;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.xtext.common.types.JvmAnnotationType;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmEnumerationType;
+import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider;
 import org.eclipse.xtext.common.types.access.jdt.IJdtTypeProvider;
 import org.eclipse.xtext.common.types.access.jdt.JdtTypeProviderFactory;
+import org.eclipse.xtext.common.types.util.DeprecationUtil;
 import org.eclipse.xtext.common.types.util.RawSuperTypes;
 import org.eclipse.xtext.conversion.IValueConverter;
 import org.eclipse.xtext.conversion.ValueConverterException;
@@ -78,6 +84,7 @@ import com.google.inject.Provider;
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author Jan Koehnlein - introduced QualifiedName
  * @author Christoph Kulla - added support for hovers
+ * @author Stephane Galland - added function for retreiving dirty state modifiers
  */
 public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 
@@ -400,12 +407,75 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 			Iterable<IEObjectDescription> allDirtyTypes = dirtyStateManager.getExportedObjectsByType(TypesPackage.Literals.JVM_TYPE);
 			for(IEObjectDescription description: allDirtyTypes) {
 				QualifiedName qualifiedName = description.getQualifiedName();
-				if (filter.accept(Flags.AccPublic, qualifiedName.skipLast(1).toString().toCharArray(), qualifiedName.getLastSegment().toCharArray(), new char[0][0], description.getEObjectURI().toPlatformString(true))) {
+				final int modifiers = getDirtyStateModifiers(context, description);
+				if (filter.accept(modifiers, qualifiedName.skipLast(1).toString().toCharArray(), qualifiedName.getLastSegment().toCharArray(), new char[0][0], description.getEObjectURI().toPlatformString(true))) {
 					String fqName = description.getQualifiedName().toString();
-					createTypeProposal(fqName, Flags.AccPublic, fqName.indexOf('$') > 0, proposalFactory, myContext, scopeAware, jvmTypeProvider, valueConverter);
+					createTypeProposal(fqName, modifiers, fqName.indexOf('$') > 0, proposalFactory, myContext, scopeAware, jvmTypeProvider, valueConverter);
 				}
 			}
 		}
+	}
+	
+	/**
+	 * Compute the JVM modifiers that corresponds to the given description.
+	 *
+	 * <p>This function fixes the issue related to the missed modifiers given to the content assist.
+	 *
+	 * @param context the current content assist context.
+	 * @param description the description.
+	 * @return the JVM modifiers.
+	 * @since 2.11
+	 */
+	protected int getDirtyStateModifiers(ContentAssistContext context, IEObjectDescription description) {
+		EObject eobject = description.getEObjectOrProxy();
+		if (eobject.eIsProxy()) {
+			eobject = EcoreUtil.resolve(eobject, context.getResource().getResourceSet());
+		}
+		int accessModifiers = Flags.AccPublic;
+		int otherModifiers = 0;
+		if (eobject instanceof JvmMember) {
+			final JvmMember member = (JvmMember) eobject;
+			switch (member.getVisibility()) {
+			case PUBLIC:
+				accessModifiers = Flags.AccPublic;
+				break;
+			case PRIVATE:
+				accessModifiers = Flags.AccPrivate;
+				break;
+			case PROTECTED:
+				accessModifiers = Flags.AccProtected;
+				break;
+			case DEFAULT:
+			default:
+				accessModifiers = Flags.AccDefault;
+				break;
+			}
+			if (DeprecationUtil.isDeprecated(member)) {
+				otherModifiers |= Flags.AccDeprecated;
+			}
+			if (eobject instanceof JvmDeclaredType) {
+				final JvmDeclaredType type = (JvmDeclaredType) eobject;
+				if (type.isFinal()) {
+					otherModifiers |= Flags.AccFinal;
+				}
+				if (type.isAbstract()) {
+					otherModifiers |= Flags.AccAbstract;
+				}
+				if (type.isStatic()) {
+					otherModifiers |= Flags.AccStatic;
+				}
+				if (type instanceof JvmEnumerationType) {
+	                otherModifiers |= Flags.AccEnum;
+	            } else  if (type instanceof JvmAnnotationType) {
+	                otherModifiers |= Flags.AccAnnotation;
+	            } else if (type instanceof JvmGenericType) {
+	                if (((JvmGenericType) type).isInterface()) {
+	                    otherModifiers |= Flags.AccInterface;
+	                }
+	            }
+			}
+		}
+		return accessModifiers | otherModifiers;
 	}
 	
 	/**
