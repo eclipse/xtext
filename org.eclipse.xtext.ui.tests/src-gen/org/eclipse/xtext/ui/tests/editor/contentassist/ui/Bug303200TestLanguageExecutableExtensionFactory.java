@@ -3,12 +3,10 @@
  */
 package org.eclipse.xtext.ui.tests.editor.contentassist.ui;
 
-import org.eclipse.xtext.ui.guice.AbstractGuiceAwareExecutableExtensionFactory;
-import org.osgi.framework.Bundle;
-
 import com.google.inject.Injector;
-
-import org.eclipse.xtext.ui.tests.Activator;
+import org.eclipse.xtext.ui.guice.AbstractGuiceAwareExecutableExtensionFactory;
+import org.eclipse.xtext.ui.tests.ui.internal.TestsActivator;
+import org.osgi.framework.Bundle;
 
 /**
  * This class was generated. Customizations should only happen in a newly
@@ -18,12 +16,12 @@ public class Bug303200TestLanguageExecutableExtensionFactory extends AbstractGui
 
 	@Override
 	protected Bundle getBundle() {
-		return Activator.getInstance().getBundle();
+		return TestsActivator.getInstance().getBundle();
 	}
 	
 	@Override
 	protected Injector getInjector() {
-		return Activator.getInstance().getInjector(Activator.ORG_ECLIPSE_XTEXT_UI_TESTS_EDITOR_CONTENTASSIST_BUG303200TESTLANGUAGE);
+		return TestsActivator.getInstance().getInjector(TestsActivator.ORG_ECLIPSE_XTEXT_UI_TESTS_EDITOR_CONTENTASSIST_BUG303200TESTLANGUAGE);
 	}
 	
 }
