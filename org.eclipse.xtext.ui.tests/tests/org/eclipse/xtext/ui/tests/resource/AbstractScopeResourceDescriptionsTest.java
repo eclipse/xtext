@@ -32,7 +32,7 @@ import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.IDirtyResource;
 import org.eclipse.xtext.ui.editor.IDirtyStateManager;
-import org.eclipse.xtext.ui.tests.Activator;
+import org.eclipse.xtext.ui.tests.ui.internal.TestsActivator;
 import org.eclipse.xtext.ui.tests.foo.File;
 import org.eclipse.xtext.ui.tests.foo.Stuff;
 import org.eclipse.xtext.util.StringInputStream;
@@ -161,7 +161,7 @@ public abstract class AbstractScopeResourceDescriptionsTest {
 
 	@Before
 	public void setUp() throws Exception {
-		Activator.getInstance().getInjector(Activator.ORG_ECLIPSE_XTEXT_UI_TESTS_TESTLANGUAGE).injectMembers(this);
+		TestsActivator.getInstance().getInjector(TestsActivator.ORG_ECLIPSE_XTEXT_UI_TESTS_TESTLANGUAGE).injectMembers(this);
 		IProject project = createProject("test");
 		addNature(project, XtextProjectHelper.NATURE_ID);
 		resourceSet = createResourceSet(workspace.getRoot().getProject("test"));

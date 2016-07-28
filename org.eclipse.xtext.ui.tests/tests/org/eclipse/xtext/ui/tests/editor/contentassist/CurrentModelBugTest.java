@@ -17,7 +17,7 @@ import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.ui.editor.contentassist.IContentProposalProvider;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
-import org.eclipse.xtext.ui.tests.Activator;
+import org.eclipse.xtext.ui.tests.ui.internal.TestsActivator;
 import org.eclipse.xtext.ui.tests.editor.contentassist.domainModelTest.DomainModelTestPackage;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.DomainModelTestLanguageUiModule;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.contentassist.DomainModelTestLanguageProposalProvider;
@@ -48,7 +48,7 @@ public class CurrentModelBugTest extends AbstractXtextTests {
 		return new DomainModelTestLanguageStandaloneSetup() {
 			@Override
 			public Injector createInjector() {
-				return Guice.createInjector(Modules2.mixin(new DomainModelTestLanguageRuntimeModule(), new DomainModelTestLanguageUiModule(Activator.getInstance()){
+				return Guice.createInjector(Modules2.mixin(new DomainModelTestLanguageRuntimeModule(), new DomainModelTestLanguageUiModule(TestsActivator.getInstance()){
 
 					@Override
 					public Class<? extends IContentProposalProvider> bindIContentProposalProvider() {

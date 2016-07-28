@@ -16,7 +16,7 @@ import org.eclipse.xtext.junit4.ui.AbstractEditorTest;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.findrefs.OpenDocumentTracker;
-import org.eclipse.xtext.ui.tests.Activator;
+import org.eclipse.xtext.ui.tests.ui.internal.TestsActivator;
 import org.eclipse.xtext.util.StringInputStream;
 import org.junit.Test;
 
@@ -37,7 +37,7 @@ public class OpenDocumentTrackerTests extends AbstractEditorTest {
 	@Override
 	public void setUp() throws Exception {
 		super.setUp();
-		tracker = Activator.getInstance().getInjector(getEditorId()).getInstance(OpenDocumentTracker.class);
+		tracker = TestsActivator.getInstance().getInjector(getEditorId()).getInstance(OpenDocumentTracker.class);
 		IProject project = IResourcesSetupUtil.createProject("test");
 		file = project.getFile("test.testlanguage");
 		file.create(new StringInputStream("dummdidumm"), true, null);

@@ -38,7 +38,7 @@ import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.refactoring.impl.RenameElementProcessor;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
-import org.eclipse.xtext.ui.tests.Activator;
+import org.eclipse.xtext.ui.tests.ui.internal.TestsActivator;
 import org.eclipse.xtext.ui.tests.refactoring.refactoring.RefactoringPackage;
 import org.eclipse.xtext.ui.tests.refactoring.referring.Reference;
 import org.eclipse.xtext.ui.tests.refactoring.referring.ReferringFactory;
@@ -78,7 +78,7 @@ public class RenameRefactoringIntegrationTest extends AbstractEditorTest {
 		project = createProject(TEST_PROJECT);
 		IJavaProject javaProject = makeJavaProject(project);
 		addNature(javaProject.getProject(), XtextProjectHelper.NATURE_ID);
-		Injector injector = Activator.getInstance().getInjector(getEditorId());
+		Injector injector = TestsActivator.getInstance().getInjector(getEditorId());
 		injector.injectMembers(this);
 		fragmentProvider.setUseNames(true);
 		initialModel0 = "B A { ref B }";

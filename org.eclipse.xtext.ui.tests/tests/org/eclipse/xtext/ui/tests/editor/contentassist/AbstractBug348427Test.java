@@ -11,7 +11,7 @@ import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.junit4.ui.AbstractContentAssistProcessorTest;
 import org.eclipse.xtext.junit4.ui.ContentAssistProcessorTestBuilder;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
-import org.eclipse.xtext.ui.tests.Activator;
+import org.eclipse.xtext.ui.tests.ui.internal.TestsActivator;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug348427TestLanguageUiModule;
 import org.eclipse.xtext.util.Modules2;
 import org.junit.Test;
@@ -29,7 +29,7 @@ public abstract class AbstractBug348427Test extends AbstractContentAssistProcess
 		return new Bug348427TestLanguageStandaloneSetup() {
 			@Override
 			public Injector createInjector() {
-				return Guice.createInjector(Modules2.mixin(new Bug348427TestLanguageRuntimeModule(), new Bug348427TestLanguageUiModule(Activator
+				return Guice.createInjector(Modules2.mixin(new Bug348427TestLanguageRuntimeModule(), new Bug348427TestLanguageUiModule(TestsActivator
 						.getInstance()), new SharedStateModule()));
 			}
 		};

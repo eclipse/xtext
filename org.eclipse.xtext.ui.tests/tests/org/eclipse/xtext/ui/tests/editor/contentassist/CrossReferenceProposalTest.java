@@ -36,7 +36,7 @@ import org.eclipse.xtext.ui.editor.contentassist.IProposalConflictHelper;
 import org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher;
 import org.eclipse.xtext.ui.editor.contentassist.XtextContentAssistProcessor;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
-import org.eclipse.xtext.ui.tests.Activator;
+import org.eclipse.xtext.ui.tests.ui.internal.TestsActivator;
 import org.eclipse.xtext.ui.tests.editor.contentassist.crossReferenceProposalTest.Class;
 import org.eclipse.xtext.ui.tests.editor.contentassist.crossReferenceProposalTest.CrossReferenceProposalTestFactory;
 import org.eclipse.xtext.ui.tests.editor.contentassist.crossReferenceProposalTest.CrossReferenceProposalTestPackage;
@@ -66,7 +66,7 @@ public class CrossReferenceProposalTest extends AbstractContentAssistProcessorTe
 				return Guice.createInjector(Modules2.mixin(
 						new CrossReferenceProposalTestLanguageRuntimeModule(),
 						new CrossReferenceProposalTestLanguageUiModule(
-						Activator.getInstance()),
+						TestsActivator.getInstance()),
 						new SharedStateModule()));
 			}
 		};

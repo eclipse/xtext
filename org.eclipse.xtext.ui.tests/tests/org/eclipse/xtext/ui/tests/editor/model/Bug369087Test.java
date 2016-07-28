@@ -25,7 +25,7 @@ import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil;
-import org.eclipse.xtext.ui.tests.Activator;
+import org.eclipse.xtext.ui.tests.ui.internal.TestsActivator;
 import org.eclipse.xtext.ui.util.JREContainerProvider;
 import org.eclipse.xtext.ui.util.PluginProjectFactory;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
@@ -50,7 +50,7 @@ public class Bug369087Test extends AbstractAutoEditTest {
 	}
 	
 	protected static IProject createPluginProject(String name) throws CoreException {
-		Injector injector = Activator.getInstance().getInjector(Activator.ORG_ECLIPSE_XTEXT_UI_TESTS_XTEXTGRAMMARUITESTLANGUAGE);
+		Injector injector = TestsActivator.getInstance().getInjector(TestsActivator.ORG_ECLIPSE_XTEXT_UI_TESTS_XTEXTGRAMMARUITESTLANGUAGE);
 		PluginProjectFactory projectFactory = injector.getInstance(PluginProjectFactory.class);
 		projectFactory.setBreeToUse(JREContainerProvider.PREFERRED_BREE);
 		projectFactory.setProjectName(name);

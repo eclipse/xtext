@@ -25,7 +25,7 @@ import org.eclipse.xtext.ui.editor.hover.AnnotationWithQuickFixesHover;
 import org.eclipse.xtext.ui.editor.hover.AnnotationWithQuickFixesHover.AnnotationInfo;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.validation.MarkerCreator;
-import org.eclipse.xtext.ui.tests.Activator;
+import org.eclipse.xtext.ui.tests.ui.internal.TestsActivator;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.Issue;
@@ -51,7 +51,7 @@ public class AnnotationWithQuickFixesHoverTest extends AbstractEditorTest {
 		IFile file = IResourcesSetupUtil.createFile("test/test.testlanguage", modelAsText);
 		editor = openEditor(file);
 		document = editor.getDocument();
-		hover = Activator.getInstance().getInjector(getEditorId()).getInstance(AnnotationWithQuickFixesHover.class);
+		hover = TestsActivator.getInstance().getInjector(getEditorId()).getInstance(AnnotationWithQuickFixesHover.class);
 		hover.setSourceViewer(editor.getInternalSourceViewer());
 		List<Issue> issues = document.readOnly(new IUnitOfWork<List<Issue>, XtextResource>() {
 			@Override
@@ -60,7 +60,7 @@ public class AnnotationWithQuickFixesHoverTest extends AbstractEditorTest {
 			}
 		});
 		assertEquals(2, issues.size());
-		MarkerCreator markerCreator = Activator.getInstance().getInjector(getEditorId())
+		MarkerCreator markerCreator = TestsActivator.getInstance().getInjector(getEditorId())
 				.getInstance(MarkerCreator.class);
 		for (Issue issue : issues) {
 			markerCreator.createMarker(issue, file, MarkerTypes.forCheckType(issue.getType()));

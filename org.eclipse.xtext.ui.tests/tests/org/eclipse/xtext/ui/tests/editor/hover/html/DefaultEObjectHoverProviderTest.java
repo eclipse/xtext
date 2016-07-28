@@ -18,7 +18,7 @@ import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.ui.editor.hover.html.DefaultEObjectHoverProvider;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
-import org.eclipse.xtext.ui.tests.Activator;
+import org.eclipse.xtext.ui.tests.ui.internal.TestsActivator;
 import org.eclipse.xtext.ui.tests.TestLanguageRuntimeModule;
 import org.eclipse.xtext.ui.tests.foo.File;
 import org.eclipse.xtext.ui.tests.parser.keywords.KeywordsUiTestLanguageStandaloneSetup;
@@ -40,7 +40,7 @@ public class DefaultEObjectHoverProviderTest extends AbstractXtextTests {
 			public Injector createInjector() {
 				return Guice.createInjector(Modules2.mixin(
 						new TestLanguageRuntimeModule(),
-						new TestModule(Activator.getInstance(),ieObjectDocumentationProvider),
+						new TestModule(TestsActivator.getInstance(),ieObjectDocumentationProvider),
 						new SharedStateModule()));
 			}
 		};

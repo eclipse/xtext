@@ -9,7 +9,7 @@ package org.eclipse.xtext.ui.tests.editor.contentassist;
 
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
-import org.eclipse.xtext.ui.tests.Activator;
+import org.eclipse.xtext.ui.tests.ui.internal.TestsActivator;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.TwoParametersTestLanguageUiModule;
 import org.eclipse.xtext.util.Modules2;
 
@@ -27,7 +27,7 @@ public class TwoParametersContentAssistTest extends AbstractParametersContentAss
 			@Override
 			public Injector createInjector() {
 				return Guice.createInjector(Modules2.mixin(new TwoParametersTestLanguageRuntimeModule(),
-						new TwoParametersTestLanguageUiModule(Activator.getInstance()), new SharedStateModule()));
+						new TwoParametersTestLanguageUiModule(TestsActivator.getInstance()), new SharedStateModule()));
 			}
 		};
 	}

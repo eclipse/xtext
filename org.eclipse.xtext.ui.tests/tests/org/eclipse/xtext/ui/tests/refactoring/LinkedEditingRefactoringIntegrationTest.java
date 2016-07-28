@@ -29,7 +29,7 @@ import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
 import org.eclipse.xtext.ui.refactoring.ui.RenameRefactoringController;
-import org.eclipse.xtext.ui.tests.Activator;
+import org.eclipse.xtext.ui.tests.ui.internal.TestsActivator;
 import org.eclipse.xtext.ui.tests.refactoring.referring.Reference;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.junit.Test;
@@ -59,7 +59,7 @@ public class LinkedEditingRefactoringIntegrationTest extends AbstractLinkedEditi
 		project = createProject(TEST_PROJECT);
 		IJavaProject javaProject = makeJavaProject(project);
 		addNature(javaProject.getProject(), XtextProjectHelper.NATURE_ID);
-		Activator.getInstance().getInjector(getEditorId()).injectMembers(this);
+		TestsActivator.getInstance().getInjector(getEditorId()).injectMembers(this);
 	}
 	
 	@Test public void testTwice() throws Exception {

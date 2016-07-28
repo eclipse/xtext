@@ -21,7 +21,7 @@ import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.ui.editor.contentassist.IContentProposalProvider;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
-import org.eclipse.xtext.ui.tests.Activator;
+import org.eclipse.xtext.ui.tests.ui.internal.TestsActivator;
 import org.eclipse.xtext.util.Modules2;
 
 import com.google.inject.Guice;
@@ -85,7 +85,7 @@ public abstract class AbstractBug326948Test extends AbstractContentAssistProcess
 				return Guice.createInjector(
 						Modules2.mixin(
 								new BeeLangTestLanguageRuntimeModule(), 
-								new BeeLangTestLanguageUiModule(Activator.getInstance()) {
+								new BeeLangTestLanguageUiModule(TestsActivator.getInstance()) {
 									@Override
 									public Class<? extends IContentProposalProvider> bindIContentProposalProvider() {
 										return ProposalProvider.class;

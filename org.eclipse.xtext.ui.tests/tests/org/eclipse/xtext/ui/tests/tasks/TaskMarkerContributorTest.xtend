@@ -17,7 +17,7 @@ import org.eclipse.xtext.junit4.AbstractXtextTests
 import org.eclipse.xtext.junit4.internal.LineDelimiters
 import org.eclipse.xtext.ui.tasks.TaskMarkerContributor
 import org.eclipse.xtext.ui.tasks.TaskMarkerTypeProvider
-import org.eclipse.xtext.ui.tests.Activator
+import org.eclipse.xtext.ui.tests.ui.internal.TestsActivator
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -34,8 +34,8 @@ class TaskMarkerContributorTest extends AbstractXtextTests {
 
 	@Before
 	def void setup() {
-		injector = Activator.getInstance.getInjector(
-			Activator.ORG_ECLIPSE_XTEXT_UI_TESTS_EDITOR_CONTENTASSIST_DOMAINMODELTESTLANGUAGE)
+		injector = TestsActivator.getInstance.getInjector(
+			TestsActivator.ORG_ECLIPSE_XTEXT_UI_TESTS_EDITOR_CONTENTASSIST_DOMAINMODELTESTLANGUAGE)
 		injectMembers(this)
 	}
 

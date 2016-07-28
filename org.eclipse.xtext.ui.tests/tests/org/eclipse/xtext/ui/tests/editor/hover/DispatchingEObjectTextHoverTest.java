@@ -21,7 +21,7 @@ import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.hover.DispatchingEObjectTextHover;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
-import org.eclipse.xtext.ui.tests.Activator;
+import org.eclipse.xtext.ui.tests.ui.internal.TestsActivator;
 import org.junit.Test;
 
 /**
@@ -44,7 +44,7 @@ public class DispatchingEObjectTextHoverTest extends AbstractEditorTest {
 		IFile file = IResourcesSetupUtil.createFile("test/test.testlanguage", modelAsText);
 		editor = openEditor(file);
 		document = editor.getDocument();
-		hover = Activator.getInstance().getInjector(getEditorId()).getInstance(MockHover.class);
+		hover = TestsActivator.getInstance().getInjector(getEditorId()).getInstance(MockHover.class);
 	}
 
 	@Override

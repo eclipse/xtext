@@ -16,7 +16,7 @@ import org.eclipse.xtext.resource.containers.IAllContainersState
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider
 import org.eclipse.xtext.ui.XtextProjectHelper
 import org.eclipse.xtext.ui.resource.XtextLiveScopeResourceSetProvider
-import org.eclipse.xtext.ui.tests.Activator
+import org.eclipse.xtext.ui.tests.ui.internal.TestsActivator
 import org.eclipse.xtext.util.StringInputStream
 import org.junit.After
 import org.junit.Before
@@ -38,7 +38,7 @@ class LiveShadowedAllContainerStateTest {
 
 	@Before
 	def setUp() throws Exception {
-		Activator.getInstance().getInjector(Activator.ORG_ECLIPSE_XTEXT_UI_TESTS_TESTLANGUAGE).injectMembers(this);
+		TestsActivator.getInstance().getInjector(TestsActivator.ORG_ECLIPSE_XTEXT_UI_TESTS_TESTLANGUAGE).injectMembers(this);
 	}
 
 	@After

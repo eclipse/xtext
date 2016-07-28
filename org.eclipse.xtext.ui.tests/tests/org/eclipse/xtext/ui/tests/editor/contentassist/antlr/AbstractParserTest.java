@@ -15,7 +15,7 @@ import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.FollowElement;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
-import org.eclipse.xtext.ui.tests.Activator;
+import org.eclipse.xtext.ui.tests.ui.internal.TestsActivator;
 import org.eclipse.xtext.ui.tests.XtextGrammarUiTestLanguageRuntimeModule;
 import org.eclipse.xtext.ui.tests.XtextGrammarUiTestLanguageStandaloneSetup;
 import org.eclipse.xtext.ui.tests.services.XtextGrammarUiTestLanguageGrammarAccess;
@@ -45,7 +45,7 @@ public abstract class AbstractParserTest extends AbstractXtextTests {
 			@Override
 			public Injector createInjector() {
 				return Guice.createInjector(Modules2.mixin(new XtextGrammarUiTestLanguageRuntimeModule(),
-						new XtextGrammarUiTestLanguageUiModule(Activator.getInstance()),
+						new XtextGrammarUiTestLanguageUiModule(TestsActivator.getInstance()),
 						new SharedStateModule()));
 			}
 		});

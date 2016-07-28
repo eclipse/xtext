@@ -10,7 +10,7 @@ package org.eclipse.xtext.ui.tests.editor.contentassist;
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.junit4.ui.AbstractContentAssistProcessorTest;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
-import org.eclipse.xtext.ui.tests.Activator;
+import org.eclipse.xtext.ui.tests.ui.internal.TestsActivator;
 import org.eclipse.xtext.ui.tests.parser.keywords.KeywordsUiTestLanguageRuntimeModule;
 import org.eclipse.xtext.ui.tests.parser.keywords.KeywordsUiTestLanguageStandaloneSetup;
 import org.eclipse.xtext.ui.tests.parser.keywords.ui.KeywordsUiTestLanguageUiModule;
@@ -32,7 +32,7 @@ public class KeywordContentAssistTest extends AbstractContentAssistProcessorTest
 			public Injector createInjector() {
 				return Guice.createInjector(Modules2.mixin(
 						new KeywordsUiTestLanguageRuntimeModule(),
-						new KeywordsUiTestLanguageUiModule(Activator.getInstance()),
+						new KeywordsUiTestLanguageUiModule(TestsActivator.getInstance()),
 						new SharedStateModule()));
 			}
 		};

@@ -22,7 +22,7 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
-import org.eclipse.xtext.ui.tests.Activator;
+import org.eclipse.xtext.ui.tests.ui.internal.TestsActivator;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.junit.Test;
 
@@ -39,7 +39,7 @@ public class SimpleEditorTest extends AbstractEditorTest {
 		super.setUp();
 
 		// listen to CoreLog use RuntimeLog to hear more
-		Activator.getInstance().getLog().addLogListener(new ILogListener() {
+		TestsActivator.getInstance().getLog().addLogListener(new ILogListener() {
 			@Override
 			public void logging(IStatus status, String plugin) {
 				if (IStatus.ERROR == status.getSeverity()) {

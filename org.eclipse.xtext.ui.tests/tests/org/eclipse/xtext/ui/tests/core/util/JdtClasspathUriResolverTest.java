@@ -6,7 +6,7 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.junit4.ui.util.PluginUtil;
 import org.eclipse.xtext.resource.IClasspathUriResolver;
-import org.eclipse.xtext.ui.tests.Activator;
+import org.eclipse.xtext.ui.tests.ui.internal.TestsActivator;
 import org.eclipse.xtext.ui.util.JdtClasspathUriResolver;
 import org.junit.Before;
 import org.junit.Test;
@@ -32,7 +32,7 @@ public class JdtClasspathUriResolverTest extends AbstractClasspathUriResolverTes
 	@Test public void testClasspathUriForFileInWorkspace() throws Exception {
 		_javaProject = JavaProjectSetupUtil.createJavaProject(TEST_PROJECT_NAME);
 		_project = _javaProject.getProject();
-		PluginUtil.copyFileToWorkspace(Activator.getInstance(), "/testfiles/" + MODEL_FILE, _project, "src/"
+		PluginUtil.copyFileToWorkspace(TestsActivator.getInstance(), "/testfiles/" + MODEL_FILE, _project, "src/"
 				+ MODEL_FILE);
 		URI classpathUri = URI.createURI("classpath:/" + MODEL_FILE);
 		String expectedUri = "platform:/resource/" + TEST_PROJECT_NAME + "/src/" + MODEL_FILE;
@@ -43,7 +43,7 @@ public class JdtClasspathUriResolverTest extends AbstractClasspathUriResolverTes
 	@Test public void testClasspathUriForFileInWorkspaceWithFragment() throws Exception {
 		_javaProject = JavaProjectSetupUtil.createJavaProject(TEST_PROJECT_NAME);
 		_project = _javaProject.getProject();
-		PluginUtil.copyFileToWorkspace(Activator.getInstance(), "/testfiles/" + MODEL_FILE, _project, "src/"
+		PluginUtil.copyFileToWorkspace(TestsActivator.getInstance(), "/testfiles/" + MODEL_FILE, _project, "src/"
 				+ MODEL_FILE);
 		URI classpathUri = URI.createURI("classpath:/" + MODEL_FILE + "#/");
 		String expectedUri = "platform:/resource/" + TEST_PROJECT_NAME + "/src/" + MODEL_FILE + "#/";
@@ -55,7 +55,7 @@ public class JdtClasspathUriResolverTest extends AbstractClasspathUriResolverTes
 		_javaProject = JavaProjectSetupUtil.createJavaProject(TEST_PROJECT_NAME);
 		_project = _javaProject.getProject();
 		_project.getFolder("model").create(true, true, null);
-		PluginUtil.copyFileToWorkspace(Activator.getInstance(), "/testfiles/" + MODEL_FILE, _project, "model/"
+		PluginUtil.copyFileToWorkspace(TestsActivator.getInstance(), "/testfiles/" + MODEL_FILE, _project, "model/"
 				+ MODEL_FILE);
 		URI classpathUri = URI.createURI("classpath:/model/" + MODEL_FILE + "#/");
 		String expectedUri = "platform:/resource/" + TEST_PROJECT_NAME + "/model/" + MODEL_FILE + "#/";
@@ -70,7 +70,7 @@ public class JdtClasspathUriResolverTest extends AbstractClasspathUriResolverTes
 			JavaProjectSetupUtil.addProjectReference(_javaProject, otherProject);
 			_project = otherProject.getProject();
 			_project.getFolder("model").create(true, true, null);
-			PluginUtil.copyFileToWorkspace(Activator.getInstance(), "/testfiles/" + MODEL_FILE, _project, "model/"
+			PluginUtil.copyFileToWorkspace(TestsActivator.getInstance(), "/testfiles/" + MODEL_FILE, _project, "model/"
 					+ MODEL_FILE);
 			URI classpathUri = URI.createURI("classpath:/model/" + MODEL_FILE + "#/");
 			String expectedUri = "platform:/resource/" + TEST_PROJECT_NAME + "2/model/" + MODEL_FILE + "#/";
@@ -84,7 +84,7 @@ public class JdtClasspathUriResolverTest extends AbstractClasspathUriResolverTes
 	@Test public void testClasspathUriForFileInJarInWorkspace() throws Exception {
 		_javaProject = JavaProjectSetupUtil.createJavaProject(TEST_PROJECT_NAME);
 		_project = _javaProject.getProject();
-		IFile jarFile = PluginUtil.copyFileToWorkspace(Activator.getInstance(), "/testfiles/" + JAR_FILE, _project, "/"
+		IFile jarFile = PluginUtil.copyFileToWorkspace(TestsActivator.getInstance(), "/testfiles/" + JAR_FILE, _project, "/"
 				+ JAR_FILE);
 		JavaProjectSetupUtil.addJarToClasspath(_javaProject, jarFile);
 		URI classpathUri = URI.createURI("classpath:/model/" + MODEL_FILE);
@@ -96,7 +96,7 @@ public class JdtClasspathUriResolverTest extends AbstractClasspathUriResolverTes
 	@Test public void testClasspathUriForFileInJarInWorkspaceWithFragment() throws Exception {
 		_javaProject = JavaProjectSetupUtil.createJavaProject(TEST_PROJECT_NAME);
 		_project = _javaProject.getProject();
-		IFile jarFile = PluginUtil.copyFileToWorkspace(Activator.getInstance(), "/testfiles/" + JAR_FILE, _project, "/"
+		IFile jarFile = PluginUtil.copyFileToWorkspace(TestsActivator.getInstance(), "/testfiles/" + JAR_FILE, _project, "/"
 				+ JAR_FILE);
 		JavaProjectSetupUtil.addJarToClasspath(_javaProject, jarFile);
 		URI classpathUri = URI.createURI("classpath:/model/" + MODEL_FILE + "#/");
@@ -108,7 +108,7 @@ public class JdtClasspathUriResolverTest extends AbstractClasspathUriResolverTes
 	@Test public void testClasspathUriForFileInRootInJarInWorkspaceWithFragment() throws Exception {
 		_javaProject = JavaProjectSetupUtil.createJavaProject(TEST_PROJECT_NAME);
 		_project = _javaProject.getProject();
-		IFile jarFile = PluginUtil.copyFileToWorkspace(Activator.getInstance(), "/testfiles/" + JAR_FILE2, _project, "/"
+		IFile jarFile = PluginUtil.copyFileToWorkspace(TestsActivator.getInstance(), "/testfiles/" + JAR_FILE2, _project, "/"
 				+ JAR_FILE2);
 		JavaProjectSetupUtil.addJarToClasspath(_javaProject, jarFile);
 		URI classpathUri = URI.createURI("classpath:/" + MODEL_FILE + "#/");

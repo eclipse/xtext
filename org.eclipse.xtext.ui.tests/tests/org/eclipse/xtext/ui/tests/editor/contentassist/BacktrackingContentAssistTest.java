@@ -10,7 +10,7 @@ package org.eclipse.xtext.ui.tests.editor.contentassist;
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.junit4.ui.AbstractContentAssistProcessorTest;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
-import org.eclipse.xtext.ui.tests.Activator;
+import org.eclipse.xtext.ui.tests.ui.internal.TestsActivator;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.BacktrackingContentAssistTestLanguageUiModule;
 import org.eclipse.xtext.util.Modules2;
 import org.junit.Test;
@@ -30,7 +30,7 @@ public class BacktrackingContentAssistTest extends AbstractContentAssistProcesso
 			public Injector createInjector() {
 				return Guice.createInjector(Modules2.mixin(
 						new BacktrackingContentAssistTestLanguageRuntimeModule(),
-						new BacktrackingContentAssistTestLanguageUiModule(Activator.getInstance()),
+						new BacktrackingContentAssistTestLanguageUiModule(TestsActivator.getInstance()),
 						new SharedStateModule()));
 			}
 		};

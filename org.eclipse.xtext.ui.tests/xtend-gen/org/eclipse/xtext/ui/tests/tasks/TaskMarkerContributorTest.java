@@ -23,7 +23,7 @@ import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.tasks.TaskMarkerContributor;
 import org.eclipse.xtext.ui.tasks.TaskMarkerTypeProvider;
-import org.eclipse.xtext.ui.tests.Activator;
+import org.eclipse.xtext.ui.tests.ui.internal.TestsActivator;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -42,9 +42,9 @@ public class TaskMarkerContributorTest extends AbstractXtextTests {
   
   @Before
   public void setup() {
-    Activator _instance = Activator.getInstance();
+    TestsActivator _instance = TestsActivator.getInstance();
     Injector _injector = _instance.getInjector(
-      Activator.ORG_ECLIPSE_XTEXT_UI_TESTS_EDITOR_CONTENTASSIST_DOMAINMODELTESTLANGUAGE);
+      TestsActivator.ORG_ECLIPSE_XTEXT_UI_TESTS_EDITOR_CONTENTASSIST_DOMAINMODELTESTLANGUAGE);
     this.setInjector(_injector);
     this.injectMembers(this);
   }

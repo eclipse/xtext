@@ -28,7 +28,7 @@ Require-Bundle: org.eclipse.xtext.ui,
  org.antlr.runtime,
  org.junit;bundle-version="4.5.0";resolution:=optional,
  org.eclipse.core.expressions;bundle-version="3.4.0"
-Bundle-Activator: org.eclipse.xtext.ui.tests.Activator
+Bundle-Activator: org.eclipse.xtext.ui.tests.ui.internal.TestsActivator
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: Eclipse Xtext
 Import-Package: org.apache.log4j;version="1.2.15",

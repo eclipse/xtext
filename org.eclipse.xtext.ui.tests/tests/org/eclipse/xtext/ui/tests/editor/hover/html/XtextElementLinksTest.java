@@ -24,7 +24,7 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.hover.html.XtextElementLinks;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
-import org.eclipse.xtext.ui.tests.Activator;
+import org.eclipse.xtext.ui.tests.ui.internal.TestsActivator;
 import org.eclipse.xtext.ui.tests.foo.File;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.junit.Test;
@@ -51,7 +51,7 @@ public class XtextElementLinksTest extends AbstractEditorTest {
 		IFile file = IResourcesSetupUtil.createFile("test/test.testlanguage", modelAsText);
 		editor = openEditor(file);
 		document = editor.getDocument();
-		elementLinks = Activator.getInstance().getInjector(getEditorId()).getInstance (XtextElementLinks.class);
+		elementLinks = TestsActivator.getInstance().getInjector(getEditorId()).getInstance (XtextElementLinks.class);
 		f = document.readOnly(new IUnitOfWork<File, XtextResource>() {
 			@Override
 			public File exec(XtextResource state) throws Exception {
