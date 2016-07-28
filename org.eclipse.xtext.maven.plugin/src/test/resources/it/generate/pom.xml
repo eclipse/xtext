@@ -21,7 +21,7 @@
 		</repository>
 		<repository>
 			<id>xtext-extras-from-jenkins</id>
-			<url>http://services.typefox.io/open-source/jenkins/job/xtext-extras/job/cd_issue22/lastStableBuild/artifact/build/maven-repository/</url>
+			<url>http://services.typefox.io/open-source/jenkins/job/xtext-extras/job/master/lastStableBuild/artifact/build/maven-repository/</url>
 		</repository>
 		<repository>
 			<id>central snapshots</id>
@@ -43,7 +43,7 @@
 		</pluginRepository>
 		<pluginRepository>
 			<id>xtext-extras-from-jenkins</id>
-			<url>http://services.typefox.io/open-source/jenkins/job/xtext-extras/job/cd_issue22/lastStableBuild/artifact/build/maven-repository/</url>
+			<url>http://services.typefox.io/open-source/jenkins/job/xtext-extras/job/master/lastStableBuild/artifact/build/maven-repository/</url>
 		</pluginRepository>
 		<pluginRepository>
 			<id>central snapshots</id>
