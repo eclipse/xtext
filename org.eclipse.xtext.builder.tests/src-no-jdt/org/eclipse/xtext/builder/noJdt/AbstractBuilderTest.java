@@ -22,12 +22,14 @@ import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.intro.IIntroManager;
+import org.eclipse.xtext.junit4.ui.util.TargetPlatformUtil;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Event;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.BeforeClass;
 
 import com.google.common.collect.Lists;
 
@@ -37,6 +39,11 @@ import com.google.common.collect.Lists;
 public abstract class AbstractBuilderTest extends Assert implements IResourceDescription.Event.Listener {
 	public final String F_EXT = ".nojdt";
 	private volatile List<Event> events = Lists.newArrayList();
+
+	@BeforeClass
+	public static void setupTargetPlatform() throws Exception {
+		TargetPlatformUtil.setTargetPlatform();
+	}
 
 	@Before
 	public void setUp() throws Exception {
@@ -59,7 +66,7 @@ public abstract class AbstractBuilderTest extends Assert implements IResourceDes
 	@After
 	public void tearDown() throws Exception {
 		cleanWorkspace();
-		waitForBuild();
+		reallyWaitForAutoBuild();
 		events.clear();
 		getBuilderState().removeListener(this);
 		assertEquals(0, countResourcesInIndex());
