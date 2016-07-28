@@ -10,11 +10,9 @@ package org.eclipse.xtext.xtext.generator.parser.antlr
 import com.google.inject.Inject
 import com.google.inject.name.Names
 import java.io.InputStream
-import java.util.Collection
 import java.util.HashMap
 import java.util.Map
 import org.antlr.runtime.CharStream
-import org.antlr.runtime.RecognitionException
 import org.antlr.runtime.Token
 import org.antlr.runtime.TokenSource
 import org.eclipse.xtend.lib.annotations.Accessors
@@ -38,6 +36,7 @@ import org.eclipse.xtext.parser.antlr.UnorderedGroupHelper
 import org.eclipse.xtext.parser.antlr.XtextTokenStream
 import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer
 import org.eclipse.xtext.parsetree.reconstr.impl.IgnoreCaseKeywordSerializer
+import org.eclipse.xtext.serializer.tokens.IKeywordSerializer
 import org.eclipse.xtext.xtext.generator.Issues
 import org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessExtensions
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory
@@ -51,7 +50,6 @@ import org.eclipse.xtext.xtext.generator.util.SyntheticTerminalDetector
 import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 import static extension org.eclipse.xtext.xtext.generator.parser.antlr.AntlrGrammarGenUtil.*
-import org.eclipse.xtext.serializer.tokens.IKeywordSerializer
 
 class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 	
@@ -340,18 +338,7 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 					}
 					return nameMappings.get(element);
 				}
-			
-				@Override
-				protected «Collection»<«"org.eclipse.xtext.ide.editor.contentassist.antlr.FollowElement".typeRef»> getFollowElements(«grammar.internalParserSuperClass» parser) {
-					try {
-						«grammar.internalParserClass» typedParser = («grammar.internalParserClass») parser;
-						typedParser.«grammar.allParserRules.head.originalElement.entryRuleName»();
-						return typedParser.getFollowElements();
-					} catch(«RecognitionException» ex) {
-						throw new RuntimeException(ex);
-					}
-				}
-			
+						
 				@Override
 				protected String[] getInitialHiddenTokens() {
 					return new String[] { «FOR hidden : grammar.initialHiddenTokens SEPARATOR ", "»"«hidden»"«ENDFOR» };
