@@ -427,5 +427,20 @@ public class NodeModelUtils extends InternalNodeModelUtils {
 			return builder.toString();
 		}
 	}
+	
+	public static ParserRule getEntryParserRule(INode node) {
+		ICompositeNode root = node.getRootNode();
+		EObject ge1 = root.getGrammarElement();
+		if (ge1 instanceof ParserRule) {
+			return (ParserRule) ge1;
+		} else if (ge1 instanceof Action) {
+			INode firstChild = root.getFirstChild();
+			EObject ge2 = firstChild.getGrammarElement();
+			if (ge2 instanceof ParserRule) {
+				return (ParserRule) ge2;
+			}
+		}
+		throw new IllegalStateException("No Root Parser Rule found; The Node Model is broken.");
+	}
 
 }
