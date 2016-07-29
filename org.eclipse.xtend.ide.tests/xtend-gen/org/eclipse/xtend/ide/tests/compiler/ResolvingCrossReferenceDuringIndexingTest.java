@@ -28,7 +28,7 @@ import org.junit.Test;
  * @author Anton Kosyakov - Initial contribution and API
  */
 @SuppressWarnings("all")
-public class ResolvingCrossReferenceDuringIndexing extends AbstractXtendUITestCase {
+public class ResolvingCrossReferenceDuringIndexingTest extends AbstractXtendUITestCase {
   @After
   @Override
   public void tearDown() {

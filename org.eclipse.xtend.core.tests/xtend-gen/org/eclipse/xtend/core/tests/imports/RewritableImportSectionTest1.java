@@ -6,7 +6,7 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.Conversions;
 
 @SuppressWarnings("all")
-public class RewritableImportSectionTest_1 extends AbstractRewritableImportSectionTest {
+public class RewritableImportSectionTest1 extends AbstractRewritableImportSectionTest {
   @Override
   protected CharSequence getModel(final boolean isStatic, final Class<?>[] types) {
     StringConcatenation _builder = new StringConcatenation();

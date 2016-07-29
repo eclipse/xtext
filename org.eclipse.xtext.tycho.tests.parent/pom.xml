@@ -117,6 +117,13 @@
 						<useUIHarness>true</useUIHarness>
 						<useUIThread>true</useUIThread>
 						<argLine>${memory-settings} ${os-jvm-flags}</argLine>
+						<includes>
+							<include>**/Test*.java</include>
+							<include>**/*Test.java</include>
+							<include>**/*TestCase.java</include>
+							<!-- matches *Tests.java as well as *Test<n>.java -->
+							<include>**/*Test?.java</include>
+						</includes>
 					</configuration>
 				</plugin>
 			</plugins>
