@@ -20,12 +20,15 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.util.StringInputStream;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  * @author Sebastian Zarnekow
  */
+//FIXME https://github.com/eclipse/xtext-eclipse/issues/31
+@Ignore("https://github.com/eclipse/xtext-eclipse/issues/31")
 public class TwoProjectsTest extends AbstractBuilderTest {
 
 	private IProject first;
