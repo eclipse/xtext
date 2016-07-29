@@ -1097,4 +1097,35 @@ class XbaseValidationTest extends AbstractXbaseTestCase {
 		'''.expression.assertNoIssue(XbasePackage.Literals.XCASE_PART, IssueCodes.REDUNDANT_CASE)
 	}
 
+	@Test def void testSetLiteralTypeMismatchBug498779() {
+		'''
+			{
+				val java.util.Set<String> set = #[""]
+			}
+		'''.expression.assertError(XbasePackage.Literals.XLIST_LITERAL, IssueCodes.INCOMPATIBLE_TYPES)
+	}
+
+	@Test def void testListLiteralTypeMismatchBug498779() {
+		'''
+			{
+				val java.util.List<String> list = #{""}
+			}
+		'''.expression.assertError(XbasePackage.Literals.XSET_LITERAL, IssueCodes.INCOMPATIBLE_TYPES)
+	}
+
+	@Test def void testSetLiteralAssignedToCollectionBug498779() {
+		'''
+			{
+				val java.util.Collection<String> set = #{""}
+			}
+		'''.expression.assertNoErrors
+	}
+
+	@Test def void testListLiteralAssignedToCollectionBug498779() {
+		'''
+			{
+				val java.util.Collection<String> list = #[""]
+			}
+		'''.expression.assertNoErrors
+	}
 }

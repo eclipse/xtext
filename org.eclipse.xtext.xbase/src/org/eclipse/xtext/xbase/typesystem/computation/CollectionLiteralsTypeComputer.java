@@ -242,9 +242,14 @@ public class CollectionLiteralsTypeComputer extends AbstractTypeComputer {
 		ParameterizedTypeReference result = new ParameterizedTypeReference(owner, collectionType);
 		result.addTypeArgument(elementType);
 		if (isIterableExpectation(expectedType) && !expectedType.isAssignableFrom(result)) {
-			LightweightTypeReference expectedElementType = getElementOrComponentType(expectedType, owner);
-			if (matchesExpectation(elementType, expectedElementType)) {
-				return expectedType;
+			// avoid to assign a set literal to a list and viceversa:
+			// at least the raw types must be assignable
+			// https://bugs.eclipse.org/bugs/show_bug.cgi?id=498779
+			if (expectedType.getRawTypeReference().isAssignableFrom(result.getRawTypeReference())) {
+				LightweightTypeReference expectedElementType = getElementOrComponentType(expectedType, owner);
+				if (matchesExpectation(elementType, expectedElementType)) {
+					return expectedType;
+				}
 			}
 		}
 		return result;
