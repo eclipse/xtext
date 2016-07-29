@@ -13,7 +13,7 @@ import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 /**
  * Exposes additional information about the linked feature if the to-be-linked
  * instance is an {@link XAbstractFeatureCall}.
- * A feature call an be linked to a {@link #isStatic() static} {@link JvmFeature feature},
+ * A feature call can be linked to a {@link #isStatic() static} {@link JvmFeature feature},
  * it can be an {@link #isExtension() extension}, or a {@link #isTypeLiteral() type literal}. 
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
