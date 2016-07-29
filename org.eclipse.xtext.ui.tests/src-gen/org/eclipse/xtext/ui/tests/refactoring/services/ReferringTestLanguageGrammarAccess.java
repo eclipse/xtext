@@ -3,20 +3,24 @@
  */
 package org.eclipse.xtext.ui.tests.refactoring.services;
 
-import com.google.inject.Singleton;
 import com.google.inject.Inject;
-
+import com.google.inject.Singleton;
 import java.util.List;
-
-import org.eclipse.xtext.*;
-import org.eclipse.xtext.service.GrammarProvider;
-import org.eclipse.xtext.service.AbstractElementFinder.*;
-
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.Group;
+import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
+import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder;
+import org.eclipse.xtext.service.GrammarProvider;
 
 @Singleton
 public class ReferringTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
-	
 	
 	public class MainElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.refactoring.ReferringTestLanguage.Main");
@@ -26,14 +30,13 @@ public class ReferringTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//Main:
 		//	referenced+=Reference*;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//referenced+=Reference*
 		public Assignment getReferencedAssignment() { return cReferencedAssignment; }
-
+		
 		//Reference
 		public RuleCall getReferencedReferenceParserRuleCall_0() { return cReferencedReferenceParserRuleCall_0; }
 	}
-
 	public class ReferenceElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.refactoring.ReferringTestLanguage.Reference");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -45,23 +48,22 @@ public class ReferringTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//Reference:
 		//	'ref' referenced=[ecore::EObject|FQN];
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'ref' referenced=[ecore::EObject|FQN]
 		public Group getGroup() { return cGroup; }
-
+		
 		//'ref'
 		public Keyword getRefKeyword_0() { return cRefKeyword_0; }
-
+		
 		//referenced=[ecore::EObject|FQN]
 		public Assignment getReferencedAssignment_1() { return cReferencedAssignment_1; }
-
+		
 		//[ecore::EObject|FQN]
 		public CrossReference getReferencedEObjectCrossReference_1_0() { return cReferencedEObjectCrossReference_1_0; }
-
+		
 		//FQN
 		public RuleCall getReferencedEObjectFQNParserRuleCall_1_0_1() { return cReferencedEObjectFQNParserRuleCall_1_0_1; }
 	}
-
 	public class FQNElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.refactoring.ReferringTestLanguage.FQN");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -73,19 +75,19 @@ public class ReferringTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//FQN:
 		//	ID ('.' ID)*;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//ID ('.' ID)*
 		public Group getGroup() { return cGroup; }
-
+		
 		//ID
 		public RuleCall getIDTerminalRuleCall_0() { return cIDTerminalRuleCall_0; }
-
+		
 		//('.' ID)*
 		public Group getGroup_1() { return cGroup_1; }
-
+		
 		//'.'
 		public Keyword getFullStopKeyword_1_0() { return cFullStopKeyword_1_0; }
-
+		
 		//ID
 		public RuleCall getIDTerminalRuleCall_1_1() { return cIDTerminalRuleCall_1_1; }
 	}
@@ -96,12 +98,12 @@ public class ReferringTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	private final FQNElements pFQN;
 	
 	private final Grammar grammar;
-
+	
 	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public ReferringTestLanguageGrammarAccess(GrammarProvider grammarProvider,
-		TerminalsGrammarAccess gaTerminals) {
+			TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
 		this.pMain = new MainElements();
@@ -130,7 +132,7 @@ public class ReferringTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return grammar;
 	}
 	
-
+	
 	public TerminalsGrammarAccess getTerminalsGrammarAccess() {
 		return gaTerminals;
 	}
@@ -145,7 +147,7 @@ public class ReferringTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getMainRule() {
 		return getMainAccess().getRule();
 	}
-
+	
 	//Reference:
 	//	'ref' referenced=[ecore::EObject|FQN];
 	public ReferenceElements getReferenceAccess() {
@@ -155,7 +157,7 @@ public class ReferringTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getReferenceRule() {
 		return getReferenceAccess().getRule();
 	}
-
+	
 	//FQN:
 	//	ID ('.' ID)*;
 	public FQNElements getFQNAccess() {
@@ -165,47 +167,47 @@ public class ReferringTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public ParserRule getFQNRule() {
 		return getFQNAccess().getRule();
 	}
-
+	
 	//terminal ID:
 	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
-	} 
-
+	}
+	
 	//terminal INT returns ecore::EInt:
 	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
-	} 
-
+	}
+	
 	//terminal STRING:
 	//	'"' ('\\' . | !('\\' | '"'))* '"' |
 	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
-	} 
-
+	}
+	
 	//terminal ML_COMMENT:
 	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal SL_COMMENT:
 	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal WS:
 	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
-	} 
-
+	}
+	
 	//terminal ANY_OTHER:
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
-	} 
+	}
 }

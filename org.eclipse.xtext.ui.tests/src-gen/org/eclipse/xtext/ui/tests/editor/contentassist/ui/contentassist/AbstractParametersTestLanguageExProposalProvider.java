@@ -3,18 +3,12 @@
  */
 package org.eclipse.xtext.ui.tests.editor.contentassist.ui.contentassist;
 
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.*;
-import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
-import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 
 /**
- * Represents a generated, default implementation of superclass {@link org.eclipse.xtext.ui.tests.editor.contentassist.ui.contentassist.ParametersTestLanguageProposalProvider}.
+ * Represents a generated, default implementation of superclass {@link ParametersTestLanguageProposalProvider}.
  * Methods are dynamically dispatched on the first parameter, i.e., you can override them 
  * with a more concrete subtype. 
  */
-@SuppressWarnings("all")
-public class AbstractParametersTestLanguageExProposalProvider extends org.eclipse.xtext.ui.tests.editor.contentassist.ui.contentassist.ParametersTestLanguageProposalProvider {
-		
-    
+public abstract class AbstractParametersTestLanguageExProposalProvider extends ParametersTestLanguageProposalProvider {
+
 }

@@ -1,4 +1,4 @@
-package org.eclipse.xtext.ui.tests.parser.antlr.internal; 
+package org.eclipse.xtext.ui.tests.parser.antlr.internal;
 
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
@@ -24,15 +24,15 @@ public class InternalFoldingTestLanguageParser extends AbstractInternalAntlrPars
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'element'", "'end'"
     };
     public static final int RULE_ID=4;
-    public static final int RULE_STRING=6;
-    public static final int T__12=12;
-    public static final int T__11=11;
-    public static final int RULE_ANY_OTHER=10;
-    public static final int RULE_INT=5;
     public static final int RULE_WS=9;
+    public static final int RULE_STRING=6;
+    public static final int RULE_ANY_OTHER=10;
     public static final int RULE_SL_COMMENT=8;
-    public static final int EOF=-1;
+    public static final int RULE_INT=5;
+    public static final int T__11=11;
     public static final int RULE_ML_COMMENT=7;
+    public static final int T__12=12;
+    public static final int EOF=-1;
 
     // delegates
     // delegators
@@ -53,18 +53,18 @@ public class InternalFoldingTestLanguageParser extends AbstractInternalAntlrPars
 
 
      	private FoldingTestLanguageGrammarAccess grammarAccess;
-     	
+
         public InternalFoldingTestLanguageParser(TokenStream input, FoldingTestLanguageGrammarAccess grammarAccess) {
             this(input);
             this.grammarAccess = grammarAccess;
             registerRules(grammarAccess.getGrammar());
         }
-        
+
         @Override
         protected String getFirstRuleName() {
-        	return "FoldingModel";	
+        	return "FoldingModel";
        	}
-       	
+
        	@Override
        	protected FoldingTestLanguageGrammarAccess getGrammarAccess() {
        		return grammarAccess;
@@ -72,8 +72,9 @@ public class InternalFoldingTestLanguageParser extends AbstractInternalAntlrPars
 
 
 
+
     // $ANTLR start "entryRuleFoldingModel"
-    // InternalFoldingTestLanguage.g:67:1: entryRuleFoldingModel returns [EObject current=null] : iv_ruleFoldingModel= ruleFoldingModel EOF ;
+    // InternalFoldingTestLanguage.g:64:1: entryRuleFoldingModel returns [EObject current=null] : iv_ruleFoldingModel= ruleFoldingModel EOF ;
     public final EObject entryRuleFoldingModel() throws RecognitionException {
         EObject current = null;
 
@@ -81,8 +82,8 @@ public class InternalFoldingTestLanguageParser extends AbstractInternalAntlrPars
 
 
         try {
-            // InternalFoldingTestLanguage.g:68:2: (iv_ruleFoldingModel= ruleFoldingModel EOF )
-            // InternalFoldingTestLanguage.g:69:2: iv_ruleFoldingModel= ruleFoldingModel EOF
+            // InternalFoldingTestLanguage.g:64:53: (iv_ruleFoldingModel= ruleFoldingModel EOF )
+            // InternalFoldingTestLanguage.g:65:2: iv_ruleFoldingModel= ruleFoldingModel EOF
             {
              newCompositeNode(grammarAccess.getFoldingModelRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -96,11 +97,11 @@ public class InternalFoldingTestLanguageParser extends AbstractInternalAntlrPars
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -109,20 +110,21 @@ public class InternalFoldingTestLanguageParser extends AbstractInternalAntlrPars
 
 
     // $ANTLR start "ruleFoldingModel"
-    // InternalFoldingTestLanguage.g:76:1: ruleFoldingModel returns [EObject current=null] : ( (lv_elements_0_0= ruleElement ) )* ;
+    // InternalFoldingTestLanguage.g:71:1: ruleFoldingModel returns [EObject current=null] : ( (lv_elements_0_0= ruleElement ) )* ;
     public final EObject ruleFoldingModel() throws RecognitionException {
         EObject current = null;
 
         EObject lv_elements_0_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalFoldingTestLanguage.g:79:28: ( ( (lv_elements_0_0= ruleElement ) )* )
-            // InternalFoldingTestLanguage.g:80:1: ( (lv_elements_0_0= ruleElement ) )*
+            // InternalFoldingTestLanguage.g:77:2: ( ( (lv_elements_0_0= ruleElement ) )* )
+            // InternalFoldingTestLanguage.g:78:2: ( (lv_elements_0_0= ruleElement ) )*
             {
-            // InternalFoldingTestLanguage.g:80:1: ( (lv_elements_0_0= ruleElement ) )*
+            // InternalFoldingTestLanguage.g:78:2: ( (lv_elements_0_0= ruleElement ) )*
             loop1:
             do {
                 int alt1=2;
@@ -135,30 +137,30 @@ public class InternalFoldingTestLanguageParser extends AbstractInternalAntlrPars
 
                 switch (alt1) {
             	case 1 :
-            	    // InternalFoldingTestLanguage.g:81:1: (lv_elements_0_0= ruleElement )
+            	    // InternalFoldingTestLanguage.g:79:3: (lv_elements_0_0= ruleElement )
             	    {
-            	    // InternalFoldingTestLanguage.g:81:1: (lv_elements_0_0= ruleElement )
-            	    // InternalFoldingTestLanguage.g:82:3: lv_elements_0_0= ruleElement
+            	    // InternalFoldingTestLanguage.g:79:3: (lv_elements_0_0= ruleElement )
+            	    // InternalFoldingTestLanguage.g:80:4: lv_elements_0_0= ruleElement
             	    {
-            	     
-            	    	        newCompositeNode(grammarAccess.getFoldingModelAccess().getElementsElementParserRuleCall_0()); 
-            	    	    
+
+            	    				newCompositeNode(grammarAccess.getFoldingModelAccess().getElementsElementParserRuleCall_0());
+            	    			
             	    pushFollow(FollowSets000.FOLLOW_3);
             	    lv_elements_0_0=ruleElement();
 
             	    state._fsp--;
 
 
-            	    	        if (current==null) {
-            	    	            current = createModelElementForParent(grammarAccess.getFoldingModelRule());
-            	    	        }
-            	           		add(
-            	           			current, 
-            	           			"elements",
-            	            		lv_elements_0_0, 
-            	            		"org.eclipse.xtext.ui.tests.FoldingTestLanguage.Element");
-            	    	        afterParserOrEnumRuleCall();
-            	    	    
+            	    				if (current==null) {
+            	    					current = createModelElementForParent(grammarAccess.getFoldingModelRule());
+            	    				}
+            	    				add(
+            	    					current,
+            	    					"elements",
+            	    					lv_elements_0_0,
+            	    					"org.eclipse.xtext.ui.tests.FoldingTestLanguage.Element");
+            	    				afterParserOrEnumRuleCall();
+            	    			
 
             	    }
 
@@ -174,13 +176,15 @@ public class InternalFoldingTestLanguageParser extends AbstractInternalAntlrPars
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -189,7 +193,7 @@ public class InternalFoldingTestLanguageParser extends AbstractInternalAntlrPars
 
 
     // $ANTLR start "entryRuleElement"
-    // InternalFoldingTestLanguage.g:106:1: entryRuleElement returns [EObject current=null] : iv_ruleElement= ruleElement EOF ;
+    // InternalFoldingTestLanguage.g:100:1: entryRuleElement returns [EObject current=null] : iv_ruleElement= ruleElement EOF ;
     public final EObject entryRuleElement() throws RecognitionException {
         EObject current = null;
 
@@ -197,8 +201,8 @@ public class InternalFoldingTestLanguageParser extends AbstractInternalAntlrPars
 
 
         try {
-            // InternalFoldingTestLanguage.g:107:2: (iv_ruleElement= ruleElement EOF )
-            // InternalFoldingTestLanguage.g:108:2: iv_ruleElement= ruleElement EOF
+            // InternalFoldingTestLanguage.g:100:48: (iv_ruleElement= ruleElement EOF )
+            // InternalFoldingTestLanguage.g:101:2: iv_ruleElement= ruleElement EOF
             {
              newCompositeNode(grammarAccess.getElementRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -212,11 +216,11 @@ public class InternalFoldingTestLanguageParser extends AbstractInternalAntlrPars
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -225,7 +229,7 @@ public class InternalFoldingTestLanguageParser extends AbstractInternalAntlrPars
 
 
     // $ANTLR start "ruleElement"
-    // InternalFoldingTestLanguage.g:115:1: ruleElement returns [EObject current=null] : (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) ( (lv_subelements_2_0= ruleElement ) )* otherlv_3= 'end' ) ;
+    // InternalFoldingTestLanguage.g:107:1: ruleElement returns [EObject current=null] : (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) ( (lv_subelements_2_0= ruleElement ) )* otherlv_3= 'end' ) ;
     public final EObject ruleElement() throws RecognitionException {
         EObject current = null;
 
@@ -235,46 +239,47 @@ public class InternalFoldingTestLanguageParser extends AbstractInternalAntlrPars
         EObject lv_subelements_2_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalFoldingTestLanguage.g:118:28: ( (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) ( (lv_subelements_2_0= ruleElement ) )* otherlv_3= 'end' ) )
-            // InternalFoldingTestLanguage.g:119:1: (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) ( (lv_subelements_2_0= ruleElement ) )* otherlv_3= 'end' )
+            // InternalFoldingTestLanguage.g:113:2: ( (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) ( (lv_subelements_2_0= ruleElement ) )* otherlv_3= 'end' ) )
+            // InternalFoldingTestLanguage.g:114:2: (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) ( (lv_subelements_2_0= ruleElement ) )* otherlv_3= 'end' )
             {
-            // InternalFoldingTestLanguage.g:119:1: (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) ( (lv_subelements_2_0= ruleElement ) )* otherlv_3= 'end' )
-            // InternalFoldingTestLanguage.g:119:3: otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) ( (lv_subelements_2_0= ruleElement ) )* otherlv_3= 'end'
+            // InternalFoldingTestLanguage.g:114:2: (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) ( (lv_subelements_2_0= ruleElement ) )* otherlv_3= 'end' )
+            // InternalFoldingTestLanguage.g:115:3: otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) ( (lv_subelements_2_0= ruleElement ) )* otherlv_3= 'end'
             {
             otherlv_0=(Token)match(input,11,FollowSets000.FOLLOW_4); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getElementAccess().getElementKeyword_0());
-                
-            // InternalFoldingTestLanguage.g:123:1: ( (lv_name_1_0= RULE_ID ) )
-            // InternalFoldingTestLanguage.g:124:1: (lv_name_1_0= RULE_ID )
+            			newLeafNode(otherlv_0, grammarAccess.getElementAccess().getElementKeyword_0());
+            		
+            // InternalFoldingTestLanguage.g:119:3: ( (lv_name_1_0= RULE_ID ) )
+            // InternalFoldingTestLanguage.g:120:4: (lv_name_1_0= RULE_ID )
             {
-            // InternalFoldingTestLanguage.g:124:1: (lv_name_1_0= RULE_ID )
-            // InternalFoldingTestLanguage.g:125:3: lv_name_1_0= RULE_ID
+            // InternalFoldingTestLanguage.g:120:4: (lv_name_1_0= RULE_ID )
+            // InternalFoldingTestLanguage.g:121:5: lv_name_1_0= RULE_ID
             {
             lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_5); 
 
-            			newLeafNode(lv_name_1_0, grammarAccess.getElementAccess().getNameIDTerminalRuleCall_1_0()); 
-            		
+            					newLeafNode(lv_name_1_0, grammarAccess.getElementAccess().getNameIDTerminalRuleCall_1_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getElementRule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"name",
-                    		lv_name_1_0, 
-                    		"org.eclipse.xtext.common.Terminals.ID");
-            	    
-
-            }
-
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getElementRule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"name",
+            						lv_name_1_0,
+            						"org.eclipse.xtext.common.Terminals.ID");
+            				
 
             }
 
-            // InternalFoldingTestLanguage.g:141:2: ( (lv_subelements_2_0= ruleElement ) )*
+
+            }
+
+            // InternalFoldingTestLanguage.g:137:3: ( (lv_subelements_2_0= ruleElement ) )*
             loop2:
             do {
                 int alt2=2;
@@ -287,30 +292,30 @@ public class InternalFoldingTestLanguageParser extends AbstractInternalAntlrPars
 
                 switch (alt2) {
             	case 1 :
-            	    // InternalFoldingTestLanguage.g:142:1: (lv_subelements_2_0= ruleElement )
+            	    // InternalFoldingTestLanguage.g:138:4: (lv_subelements_2_0= ruleElement )
             	    {
-            	    // InternalFoldingTestLanguage.g:142:1: (lv_subelements_2_0= ruleElement )
-            	    // InternalFoldingTestLanguage.g:143:3: lv_subelements_2_0= ruleElement
+            	    // InternalFoldingTestLanguage.g:138:4: (lv_subelements_2_0= ruleElement )
+            	    // InternalFoldingTestLanguage.g:139:5: lv_subelements_2_0= ruleElement
             	    {
-            	     
-            	    	        newCompositeNode(grammarAccess.getElementAccess().getSubelementsElementParserRuleCall_2_0()); 
-            	    	    
+
+            	    					newCompositeNode(grammarAccess.getElementAccess().getSubelementsElementParserRuleCall_2_0());
+            	    				
             	    pushFollow(FollowSets000.FOLLOW_5);
             	    lv_subelements_2_0=ruleElement();
 
             	    state._fsp--;
 
 
-            	    	        if (current==null) {
-            	    	            current = createModelElementForParent(grammarAccess.getElementRule());
-            	    	        }
-            	           		add(
-            	           			current, 
-            	           			"subelements",
-            	            		lv_subelements_2_0, 
-            	            		"org.eclipse.xtext.ui.tests.FoldingTestLanguage.Element");
-            	    	        afterParserOrEnumRuleCall();
-            	    	    
+            	    					if (current==null) {
+            	    						current = createModelElementForParent(grammarAccess.getElementRule());
+            	    					}
+            	    					add(
+            	    						current,
+            	    						"subelements",
+            	    						lv_subelements_2_0,
+            	    						"org.eclipse.xtext.ui.tests.FoldingTestLanguage.Element");
+            	    					afterParserOrEnumRuleCall();
+            	    				
 
             	    }
 
@@ -325,21 +330,23 @@ public class InternalFoldingTestLanguageParser extends AbstractInternalAntlrPars
 
             otherlv_3=(Token)match(input,12,FollowSets000.FOLLOW_2); 
 
-                	newLeafNode(otherlv_3, grammarAccess.getElementAccess().getEndKeyword_3());
-                
+            			newLeafNode(otherlv_3, grammarAccess.getElementAccess().getEndKeyword_3());
+            		
 
             }
 
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;

@@ -10,7 +10,7 @@ package org.eclipse.xtext.ui.tests.editor.contentassist;
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.junit4.ui.AbstractContentAssistProcessorTest;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
-import org.eclipse.xtext.ui.tests.Activator;
+import org.eclipse.xtext.ui.tests.ui.internal.TestsActivator;
 import org.eclipse.xtext.ui.tests.XtextGrammarUiTestLanguageRuntimeModule;
 import org.eclipse.xtext.ui.tests.XtextGrammarUiTestLanguageStandaloneSetup;
 import org.eclipse.xtext.ui.tests.ui.XtextGrammarUiTestLanguageUiModule;
@@ -31,7 +31,7 @@ public class XtextGrammarUiContentAssistTest extends AbstractContentAssistProces
 			@Override
 			public Injector createInjector() {
 				return Guice.createInjector(Modules2.mixin(new XtextGrammarUiTestLanguageRuntimeModule(),
-						new XtextGrammarUiTestLanguageUiModule(Activator.getInstance()), new SharedStateModule()));
+						new XtextGrammarUiTestLanguageUiModule(TestsActivator.getInstance()), new SharedStateModule()));
 			}
 		};
 	}

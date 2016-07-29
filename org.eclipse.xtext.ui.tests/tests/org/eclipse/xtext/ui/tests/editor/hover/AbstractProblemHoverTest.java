@@ -24,7 +24,7 @@ import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.hover.AbstractProblemHover;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.validation.MarkerCreator;
-import org.eclipse.xtext.ui.tests.Activator;
+import org.eclipse.xtext.ui.tests.ui.internal.TestsActivator;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.Issue;
@@ -50,7 +50,7 @@ public class AbstractProblemHoverTest extends AbstractEditorTest {
 		IFile file = IResourcesSetupUtil.createFile("test/test.testlanguage", modelAsText);
 		editor = openEditor(file);
 		document = editor.getDocument();
-		hover = Activator.getInstance().getInjector(getEditorId()).getInstance(MockHover.class);
+		hover = TestsActivator.getInstance().getInjector(getEditorId()).getInstance(MockHover.class);
 		hover.setSourceViewer(editor.getInternalSourceViewer());
 		List<Issue> issues = document.readOnly(new IUnitOfWork<List<Issue>, XtextResource>() {
 			@Override
@@ -58,7 +58,7 @@ public class AbstractProblemHoverTest extends AbstractEditorTest {
 				return state.getResourceServiceProvider().getResourceValidator().validate(state, CheckMode.ALL, null);
 			}	
 		});
-		MarkerCreator markerCreator =  Activator.getInstance().getInjector(getEditorId()).getInstance(MarkerCreator.class);
+		MarkerCreator markerCreator =  TestsActivator.getInstance().getInjector(getEditorId()).getInstance(MarkerCreator.class);
 		for (Issue issue : issues) {
 			markerCreator.createMarker(issue, file, MarkerTypes.forCheckType(issue.getType()));
 		}

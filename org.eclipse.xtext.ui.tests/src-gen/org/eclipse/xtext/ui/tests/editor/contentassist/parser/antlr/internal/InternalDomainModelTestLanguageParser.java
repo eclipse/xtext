@@ -1,4 +1,4 @@
-package org.eclipse.xtext.ui.tests.editor.contentassist.parser.antlr.internal; 
+package org.eclipse.xtext.ui.tests.editor.contentassist.parser.antlr.internal;
 
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
@@ -23,24 +23,24 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalAntlr
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_STRING", "RULE_ID", "RULE_INT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'import'", "'datatype'", "';'", "'class'", "'extends'", "'{'", "'}'", "'attr'", "':'", "'ref'"
     };
-    public static final int T__19=19;
-    public static final int RULE_ID=5;
     public static final int RULE_STRING=4;
-    public static final int T__16=16;
-    public static final int T__15=15;
-    public static final int T__18=18;
-    public static final int T__17=17;
-    public static final int T__12=12;
-    public static final int T__11=11;
-    public static final int T__14=14;
-    public static final int T__13=13;
-    public static final int RULE_ANY_OTHER=10;
-    public static final int T__20=20;
-    public static final int RULE_INT=6;
-    public static final int RULE_WS=9;
     public static final int RULE_SL_COMMENT=8;
+    public static final int T__19=19;
+    public static final int T__15=15;
+    public static final int T__16=16;
+    public static final int T__17=17;
+    public static final int T__18=18;
+    public static final int T__11=11;
+    public static final int T__12=12;
+    public static final int T__13=13;
+    public static final int T__14=14;
     public static final int EOF=-1;
+    public static final int RULE_ID=5;
+    public static final int RULE_WS=9;
+    public static final int RULE_ANY_OTHER=10;
+    public static final int RULE_INT=6;
     public static final int RULE_ML_COMMENT=7;
+    public static final int T__20=20;
 
     // delegates
     // delegators
@@ -61,18 +61,18 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalAntlr
 
 
      	private DomainModelTestLanguageGrammarAccess grammarAccess;
-     	
+
         public InternalDomainModelTestLanguageParser(TokenStream input, DomainModelTestLanguageGrammarAccess grammarAccess) {
             this(input);
             this.grammarAccess = grammarAccess;
             registerRules(grammarAccess.getGrammar());
         }
-        
+
         @Override
         protected String getFirstRuleName() {
-        	return "Model";	
+        	return "Model";
        	}
-       	
+
        	@Override
        	protected DomainModelTestLanguageGrammarAccess getGrammarAccess() {
        		return grammarAccess;
@@ -80,8 +80,9 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalAntlr
 
 
 
+
     // $ANTLR start "entryRuleModel"
-    // InternalDomainModelTestLanguage.g:67:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
+    // InternalDomainModelTestLanguage.g:64:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
     public final EObject entryRuleModel() throws RecognitionException {
         EObject current = null;
 
@@ -89,8 +90,8 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalAntlr
 
 
         try {
-            // InternalDomainModelTestLanguage.g:68:2: (iv_ruleModel= ruleModel EOF )
-            // InternalDomainModelTestLanguage.g:69:2: iv_ruleModel= ruleModel EOF
+            // InternalDomainModelTestLanguage.g:64:46: (iv_ruleModel= ruleModel EOF )
+            // InternalDomainModelTestLanguage.g:65:2: iv_ruleModel= ruleModel EOF
             {
              newCompositeNode(grammarAccess.getModelRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -104,11 +105,11 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalAntlr
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -117,7 +118,7 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalAntlr
 
 
     // $ANTLR start "ruleModel"
-    // InternalDomainModelTestLanguage.g:76:1: ruleModel returns [EObject current=null] : ( ( (lv_imports_0_0= ruleImport ) )* ( (lv_elements_1_0= ruleType ) )* ) ;
+    // InternalDomainModelTestLanguage.g:71:1: ruleModel returns [EObject current=null] : ( ( (lv_imports_0_0= ruleImport ) )* ( (lv_elements_1_0= ruleType ) )* ) ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
@@ -126,16 +127,17 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalAntlr
         EObject lv_elements_1_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalDomainModelTestLanguage.g:79:28: ( ( ( (lv_imports_0_0= ruleImport ) )* ( (lv_elements_1_0= ruleType ) )* ) )
-            // InternalDomainModelTestLanguage.g:80:1: ( ( (lv_imports_0_0= ruleImport ) )* ( (lv_elements_1_0= ruleType ) )* )
+            // InternalDomainModelTestLanguage.g:77:2: ( ( ( (lv_imports_0_0= ruleImport ) )* ( (lv_elements_1_0= ruleType ) )* ) )
+            // InternalDomainModelTestLanguage.g:78:2: ( ( (lv_imports_0_0= ruleImport ) )* ( (lv_elements_1_0= ruleType ) )* )
             {
-            // InternalDomainModelTestLanguage.g:80:1: ( ( (lv_imports_0_0= ruleImport ) )* ( (lv_elements_1_0= ruleType ) )* )
-            // InternalDomainModelTestLanguage.g:80:2: ( (lv_imports_0_0= ruleImport ) )* ( (lv_elements_1_0= ruleType ) )*
+            // InternalDomainModelTestLanguage.g:78:2: ( ( (lv_imports_0_0= ruleImport ) )* ( (lv_elements_1_0= ruleType ) )* )
+            // InternalDomainModelTestLanguage.g:79:3: ( (lv_imports_0_0= ruleImport ) )* ( (lv_elements_1_0= ruleType ) )*
             {
-            // InternalDomainModelTestLanguage.g:80:2: ( (lv_imports_0_0= ruleImport ) )*
+            // InternalDomainModelTestLanguage.g:79:3: ( (lv_imports_0_0= ruleImport ) )*
             loop1:
             do {
                 int alt1=2;
@@ -148,30 +150,30 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalAntlr
 
                 switch (alt1) {
             	case 1 :
-            	    // InternalDomainModelTestLanguage.g:81:1: (lv_imports_0_0= ruleImport )
+            	    // InternalDomainModelTestLanguage.g:80:4: (lv_imports_0_0= ruleImport )
             	    {
-            	    // InternalDomainModelTestLanguage.g:81:1: (lv_imports_0_0= ruleImport )
-            	    // InternalDomainModelTestLanguage.g:82:3: lv_imports_0_0= ruleImport
+            	    // InternalDomainModelTestLanguage.g:80:4: (lv_imports_0_0= ruleImport )
+            	    // InternalDomainModelTestLanguage.g:81:5: lv_imports_0_0= ruleImport
             	    {
-            	     
-            	    	        newCompositeNode(grammarAccess.getModelAccess().getImportsImportParserRuleCall_0_0()); 
-            	    	    
+
+            	    					newCompositeNode(grammarAccess.getModelAccess().getImportsImportParserRuleCall_0_0());
+            	    				
             	    pushFollow(FollowSets000.FOLLOW_3);
             	    lv_imports_0_0=ruleImport();
 
             	    state._fsp--;
 
 
-            	    	        if (current==null) {
-            	    	            current = createModelElementForParent(grammarAccess.getModelRule());
-            	    	        }
-            	           		add(
-            	           			current, 
-            	           			"imports",
-            	            		lv_imports_0_0, 
-            	            		"org.eclipse.xtext.ui.tests.editor.contentassist.DomainModelTestLanguage.Import");
-            	    	        afterParserOrEnumRuleCall();
-            	    	    
+            	    					if (current==null) {
+            	    						current = createModelElementForParent(grammarAccess.getModelRule());
+            	    					}
+            	    					add(
+            	    						current,
+            	    						"imports",
+            	    						lv_imports_0_0,
+            	    						"org.eclipse.xtext.ui.tests.editor.contentassist.DomainModelTestLanguage.Import");
+            	    					afterParserOrEnumRuleCall();
+            	    				
 
             	    }
 
@@ -197,30 +199,30 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalAntlr
 
                 switch (alt2) {
             	case 1 :
-            	    // InternalDomainModelTestLanguage.g:99:1: (lv_elements_1_0= ruleType )
+            	    // InternalDomainModelTestLanguage.g:99:4: (lv_elements_1_0= ruleType )
             	    {
-            	    // InternalDomainModelTestLanguage.g:99:1: (lv_elements_1_0= ruleType )
-            	    // InternalDomainModelTestLanguage.g:100:3: lv_elements_1_0= ruleType
+            	    // InternalDomainModelTestLanguage.g:99:4: (lv_elements_1_0= ruleType )
+            	    // InternalDomainModelTestLanguage.g:100:5: lv_elements_1_0= ruleType
             	    {
-            	     
-            	    	        newCompositeNode(grammarAccess.getModelAccess().getElementsTypeParserRuleCall_1_0()); 
-            	    	    
+
+            	    					newCompositeNode(grammarAccess.getModelAccess().getElementsTypeParserRuleCall_1_0());
+            	    				
             	    pushFollow(FollowSets000.FOLLOW_4);
             	    lv_elements_1_0=ruleType();
 
             	    state._fsp--;
 
 
-            	    	        if (current==null) {
-            	    	            current = createModelElementForParent(grammarAccess.getModelRule());
-            	    	        }
-            	           		add(
-            	           			current, 
-            	           			"elements",
-            	            		lv_elements_1_0, 
-            	            		"org.eclipse.xtext.ui.tests.editor.contentassist.DomainModelTestLanguage.Type");
-            	    	        afterParserOrEnumRuleCall();
-            	    	    
+            	    					if (current==null) {
+            	    						current = createModelElementForParent(grammarAccess.getModelRule());
+            	    					}
+            	    					add(
+            	    						current,
+            	    						"elements",
+            	    						lv_elements_1_0,
+            	    						"org.eclipse.xtext.ui.tests.editor.contentassist.DomainModelTestLanguage.Type");
+            	    					afterParserOrEnumRuleCall();
+            	    				
 
             	    }
 
@@ -239,13 +241,15 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalAntlr
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -254,7 +258,7 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalAntlr
 
 
     // $ANTLR start "entryRuleImport"
-    // InternalDomainModelTestLanguage.g:124:1: entryRuleImport returns [EObject current=null] : iv_ruleImport= ruleImport EOF ;
+    // InternalDomainModelTestLanguage.g:121:1: entryRuleImport returns [EObject current=null] : iv_ruleImport= ruleImport EOF ;
     public final EObject entryRuleImport() throws RecognitionException {
         EObject current = null;
 
@@ -262,8 +266,8 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalAntlr
 
 
         try {
-            // InternalDomainModelTestLanguage.g:125:2: (iv_ruleImport= ruleImport EOF )
-            // InternalDomainModelTestLanguage.g:126:2: iv_ruleImport= ruleImport EOF
+            // InternalDomainModelTestLanguage.g:121:47: (iv_ruleImport= ruleImport EOF )
+            // InternalDomainModelTestLanguage.g:122:2: iv_ruleImport= ruleImport EOF
             {
              newCompositeNode(grammarAccess.getImportRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -277,11 +281,11 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalAntlr
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -290,49 +294,47 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalAntlr
 
 
     // $ANTLR start "ruleImport"
-    // InternalDomainModelTestLanguage.g:133:1: ruleImport returns [EObject current=null] : (otherlv_0= 'import' ( (lv_importURI_1_0= RULE_STRING ) ) ) ;
+    // InternalDomainModelTestLanguage.g:128:1: ruleImport returns [EObject current=null] : (otherlv_0= 'import' ( (lv_importURI_1_0= RULE_STRING ) ) ) ;
     public final EObject ruleImport() throws RecognitionException {
         EObject current = null;
 
         Token otherlv_0=null;
         Token lv_importURI_1_0=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalDomainModelTestLanguage.g:136:28: ( (otherlv_0= 'import' ( (lv_importURI_1_0= RULE_STRING ) ) ) )
-            // InternalDomainModelTestLanguage.g:137:1: (otherlv_0= 'import' ( (lv_importURI_1_0= RULE_STRING ) ) )
+            // InternalDomainModelTestLanguage.g:134:2: ( (otherlv_0= 'import' ( (lv_importURI_1_0= RULE_STRING ) ) ) )
+            // InternalDomainModelTestLanguage.g:135:2: (otherlv_0= 'import' ( (lv_importURI_1_0= RULE_STRING ) ) )
             {
-            // InternalDomainModelTestLanguage.g:137:1: (otherlv_0= 'import' ( (lv_importURI_1_0= RULE_STRING ) ) )
-            // InternalDomainModelTestLanguage.g:137:3: otherlv_0= 'import' ( (lv_importURI_1_0= RULE_STRING ) )
+            // InternalDomainModelTestLanguage.g:135:2: (otherlv_0= 'import' ( (lv_importURI_1_0= RULE_STRING ) ) )
+            // InternalDomainModelTestLanguage.g:136:3: otherlv_0= 'import' ( (lv_importURI_1_0= RULE_STRING ) )
             {
             otherlv_0=(Token)match(input,11,FollowSets000.FOLLOW_5); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getImportAccess().getImportKeyword_0());
-                
-            // InternalDomainModelTestLanguage.g:141:1: ( (lv_importURI_1_0= RULE_STRING ) )
-            // InternalDomainModelTestLanguage.g:142:1: (lv_importURI_1_0= RULE_STRING )
+            			newLeafNode(otherlv_0, grammarAccess.getImportAccess().getImportKeyword_0());
+            		
+            // InternalDomainModelTestLanguage.g:140:3: ( (lv_importURI_1_0= RULE_STRING ) )
+            // InternalDomainModelTestLanguage.g:141:4: (lv_importURI_1_0= RULE_STRING )
             {
-            // InternalDomainModelTestLanguage.g:142:1: (lv_importURI_1_0= RULE_STRING )
-            // InternalDomainModelTestLanguage.g:143:3: lv_importURI_1_0= RULE_STRING
+            // InternalDomainModelTestLanguage.g:141:4: (lv_importURI_1_0= RULE_STRING )
+            // InternalDomainModelTestLanguage.g:142:5: lv_importURI_1_0= RULE_STRING
             {
             lv_importURI_1_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_2); 
 
-            			newLeafNode(lv_importURI_1_0, grammarAccess.getImportAccess().getImportURISTRINGTerminalRuleCall_1_0()); 
-            		
+            					newLeafNode(lv_importURI_1_0, grammarAccess.getImportAccess().getImportURISTRINGTerminalRuleCall_1_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getImportRule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"importURI",
-                    		lv_importURI_1_0, 
-                    		"org.eclipse.xtext.common.Terminals.STRING");
-            	    
-
-            }
-
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getImportRule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"importURI",
+            						lv_importURI_1_0,
+            						"org.eclipse.xtext.common.Terminals.STRING");
+            				
 
             }
 
@@ -342,13 +344,18 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalAntlr
 
             }
 
-             leaveRule(); 
+
+            }
+
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -357,7 +364,7 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalAntlr
 
 
     // $ANTLR start "entryRuleType"
-    // InternalDomainModelTestLanguage.g:167:1: entryRuleType returns [EObject current=null] : iv_ruleType= ruleType EOF ;
+    // InternalDomainModelTestLanguage.g:162:1: entryRuleType returns [EObject current=null] : iv_ruleType= ruleType EOF ;
     public final EObject entryRuleType() throws RecognitionException {
         EObject current = null;
 
@@ -365,8 +372,8 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalAntlr
 
 
         try {
-            // InternalDomainModelTestLanguage.g:168:2: (iv_ruleType= ruleType EOF )
-            // InternalDomainModelTestLanguage.g:169:2: iv_ruleType= ruleType EOF
+            // InternalDomainModelTestLanguage.g:162:45: (iv_ruleType= ruleType EOF )
+            // InternalDomainModelTestLanguage.g:163:2: iv_ruleType= ruleType EOF
             {
              newCompositeNode(grammarAccess.getTypeRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -380,11 +387,11 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalAntlr
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -393,7 +400,7 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalAntlr
 
 
     // $ANTLR start "ruleType"
-    // InternalDomainModelTestLanguage.g:176:1: ruleType returns [EObject current=null] : (this_DataType_0= ruleDataType | this_Class_1= ruleClass ) ;
+    // InternalDomainModelTestLanguage.g:169:1: ruleType returns [EObject current=null] : (this_DataType_0= ruleDataType | this_Class_1= ruleClass ) ;
     public final EObject ruleType() throws RecognitionException {
         EObject current = null;
 
@@ -402,13 +409,14 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalAntlr
         EObject this_Class_1 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalDomainModelTestLanguage.g:179:28: ( (this_DataType_0= ruleDataType | this_Class_1= ruleClass ) )
-            // InternalDomainModelTestLanguage.g:180:1: (this_DataType_0= ruleDataType | this_Class_1= ruleClass )
+            // InternalDomainModelTestLanguage.g:175:2: ( (this_DataType_0= ruleDataType | this_Class_1= ruleClass ) )
+            // InternalDomainModelTestLanguage.g:176:2: (this_DataType_0= ruleDataType | this_Class_1= ruleClass )
             {
-            // InternalDomainModelTestLanguage.g:180:1: (this_DataType_0= ruleDataType | this_Class_1= ruleClass )
+            // InternalDomainModelTestLanguage.g:176:2: (this_DataType_0= ruleDataType | this_Class_1= ruleClass )
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -426,38 +434,38 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalAntlr
             }
             switch (alt3) {
                 case 1 :
-                    // InternalDomainModelTestLanguage.g:181:5: this_DataType_0= ruleDataType
+                    // InternalDomainModelTestLanguage.g:177:3: this_DataType_0= ruleDataType
                     {
-                     
-                            newCompositeNode(grammarAccess.getTypeAccess().getDataTypeParserRuleCall_0()); 
-                        
+
+                    			newCompositeNode(grammarAccess.getTypeAccess().getDataTypeParserRuleCall_0());
+                    		
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_DataType_0=ruleDataType();
 
                     state._fsp--;
 
-                     
-                            current = this_DataType_0; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    			current = this_DataType_0;
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
                 case 2 :
-                    // InternalDomainModelTestLanguage.g:191:5: this_Class_1= ruleClass
+                    // InternalDomainModelTestLanguage.g:186:3: this_Class_1= ruleClass
                     {
-                     
-                            newCompositeNode(grammarAccess.getTypeAccess().getClassParserRuleCall_1()); 
-                        
+
+                    			newCompositeNode(grammarAccess.getTypeAccess().getClassParserRuleCall_1());
+                    		
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_Class_1=ruleClass();
 
                     state._fsp--;
 
-                     
-                            current = this_Class_1; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    			current = this_Class_1;
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
@@ -467,13 +475,15 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalAntlr
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -482,7 +492,7 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalAntlr
 
 
     // $ANTLR start "entryRuleDataType"
-    // InternalDomainModelTestLanguage.g:207:1: entryRuleDataType returns [EObject current=null] : iv_ruleDataType= ruleDataType EOF ;
+    // InternalDomainModelTestLanguage.g:198:1: entryRuleDataType returns [EObject current=null] : iv_ruleDataType= ruleDataType EOF ;
     public final EObject entryRuleDataType() throws RecognitionException {
         EObject current = null;
 
@@ -490,8 +500,8 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalAntlr
 
 
         try {
-            // InternalDomainModelTestLanguage.g:208:2: (iv_ruleDataType= ruleDataType EOF )
-            // InternalDomainModelTestLanguage.g:209:2: iv_ruleDataType= ruleDataType EOF
+            // InternalDomainModelTestLanguage.g:198:49: (iv_ruleDataType= ruleDataType EOF )
+            // InternalDomainModelTestLanguage.g:199:2: iv_ruleDataType= ruleDataType EOF
             {
              newCompositeNode(grammarAccess.getDataTypeRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -505,11 +515,11 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalAntlr
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -518,7 +528,7 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalAntlr
 
 
     // $ANTLR start "ruleDataType"
-    // InternalDomainModelTestLanguage.g:216:1: ruleDataType returns [EObject current=null] : (otherlv_0= 'datatype' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= ';' )? ) ;
+    // InternalDomainModelTestLanguage.g:205:1: ruleDataType returns [EObject current=null] : (otherlv_0= 'datatype' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= ';' )? ) ;
     public final EObject ruleDataType() throws RecognitionException {
         EObject current = null;
 
@@ -526,46 +536,47 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalAntlr
         Token lv_name_1_0=null;
         Token otherlv_2=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalDomainModelTestLanguage.g:219:28: ( (otherlv_0= 'datatype' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= ';' )? ) )
-            // InternalDomainModelTestLanguage.g:220:1: (otherlv_0= 'datatype' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= ';' )? )
+            // InternalDomainModelTestLanguage.g:211:2: ( (otherlv_0= 'datatype' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= ';' )? ) )
+            // InternalDomainModelTestLanguage.g:212:2: (otherlv_0= 'datatype' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= ';' )? )
             {
-            // InternalDomainModelTestLanguage.g:220:1: (otherlv_0= 'datatype' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= ';' )? )
-            // InternalDomainModelTestLanguage.g:220:3: otherlv_0= 'datatype' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= ';' )?
+            // InternalDomainModelTestLanguage.g:212:2: (otherlv_0= 'datatype' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= ';' )? )
+            // InternalDomainModelTestLanguage.g:213:3: otherlv_0= 'datatype' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= ';' )?
             {
             otherlv_0=(Token)match(input,12,FollowSets000.FOLLOW_6); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getDataTypeAccess().getDatatypeKeyword_0());
-                
-            // InternalDomainModelTestLanguage.g:224:1: ( (lv_name_1_0= RULE_ID ) )
-            // InternalDomainModelTestLanguage.g:225:1: (lv_name_1_0= RULE_ID )
+            			newLeafNode(otherlv_0, grammarAccess.getDataTypeAccess().getDatatypeKeyword_0());
+            		
+            // InternalDomainModelTestLanguage.g:217:3: ( (lv_name_1_0= RULE_ID ) )
+            // InternalDomainModelTestLanguage.g:218:4: (lv_name_1_0= RULE_ID )
             {
-            // InternalDomainModelTestLanguage.g:225:1: (lv_name_1_0= RULE_ID )
-            // InternalDomainModelTestLanguage.g:226:3: lv_name_1_0= RULE_ID
+            // InternalDomainModelTestLanguage.g:218:4: (lv_name_1_0= RULE_ID )
+            // InternalDomainModelTestLanguage.g:219:5: lv_name_1_0= RULE_ID
             {
             lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_7); 
 
-            			newLeafNode(lv_name_1_0, grammarAccess.getDataTypeAccess().getNameIDTerminalRuleCall_1_0()); 
-            		
+            					newLeafNode(lv_name_1_0, grammarAccess.getDataTypeAccess().getNameIDTerminalRuleCall_1_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getDataTypeRule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"name",
-                    		lv_name_1_0, 
-                    		"org.eclipse.xtext.common.Terminals.ID");
-            	    
-
-            }
-
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getDataTypeRule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"name",
+            						lv_name_1_0,
+            						"org.eclipse.xtext.common.Terminals.ID");
+            				
 
             }
 
-            // InternalDomainModelTestLanguage.g:242:2: (otherlv_2= ';' )?
+
+            }
+
+            // InternalDomainModelTestLanguage.g:235:3: (otherlv_2= ';' )?
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -574,12 +585,12 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalAntlr
             }
             switch (alt4) {
                 case 1 :
-                    // InternalDomainModelTestLanguage.g:242:4: otherlv_2= ';'
+                    // InternalDomainModelTestLanguage.g:236:4: otherlv_2= ';'
                     {
                     otherlv_2=(Token)match(input,13,FollowSets000.FOLLOW_2); 
 
-                        	newLeafNode(otherlv_2, grammarAccess.getDataTypeAccess().getSemicolonKeyword_2());
-                        
+                    				newLeafNode(otherlv_2, grammarAccess.getDataTypeAccess().getSemicolonKeyword_2());
+                    			
 
                     }
                     break;
@@ -592,13 +603,15 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalAntlr
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -607,7 +620,7 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalAntlr
 
 
     // $ANTLR start "entryRuleClass"
-    // InternalDomainModelTestLanguage.g:254:1: entryRuleClass returns [EObject current=null] : iv_ruleClass= ruleClass EOF ;
+    // InternalDomainModelTestLanguage.g:245:1: entryRuleClass returns [EObject current=null] : iv_ruleClass= ruleClass EOF ;
     public final EObject entryRuleClass() throws RecognitionException {
         EObject current = null;
 
@@ -615,8 +628,8 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalAntlr
 
 
         try {
-            // InternalDomainModelTestLanguage.g:255:2: (iv_ruleClass= ruleClass EOF )
-            // InternalDomainModelTestLanguage.g:256:2: iv_ruleClass= ruleClass EOF
+            // InternalDomainModelTestLanguage.g:245:46: (iv_ruleClass= ruleClass EOF )
+            // InternalDomainModelTestLanguage.g:246:2: iv_ruleClass= ruleClass EOF
             {
              newCompositeNode(grammarAccess.getClassRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -630,11 +643,11 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalAntlr
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -643,7 +656,7 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalAntlr
 
 
     // $ANTLR start "ruleClass"
-    // InternalDomainModelTestLanguage.g:263:1: ruleClass returns [EObject current=null] : (otherlv_0= 'class' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) )? otherlv_4= '{' ( (lv_properties_5_0= ruleProperty ) )* ( (lv_subClasses_6_0= ruleClass ) )* otherlv_7= '}' ) ;
+    // InternalDomainModelTestLanguage.g:252:1: ruleClass returns [EObject current=null] : (otherlv_0= 'class' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) )? otherlv_4= '{' ( (lv_properties_5_0= ruleProperty ) )* ( (lv_subClasses_6_0= ruleClass ) )* otherlv_7= '}' ) ;
     public final EObject ruleClass() throws RecognitionException {
         EObject current = null;
 
@@ -658,46 +671,47 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalAntlr
         EObject lv_subClasses_6_0 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalDomainModelTestLanguage.g:266:28: ( (otherlv_0= 'class' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) )? otherlv_4= '{' ( (lv_properties_5_0= ruleProperty ) )* ( (lv_subClasses_6_0= ruleClass ) )* otherlv_7= '}' ) )
-            // InternalDomainModelTestLanguage.g:267:1: (otherlv_0= 'class' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) )? otherlv_4= '{' ( (lv_properties_5_0= ruleProperty ) )* ( (lv_subClasses_6_0= ruleClass ) )* otherlv_7= '}' )
+            // InternalDomainModelTestLanguage.g:258:2: ( (otherlv_0= 'class' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) )? otherlv_4= '{' ( (lv_properties_5_0= ruleProperty ) )* ( (lv_subClasses_6_0= ruleClass ) )* otherlv_7= '}' ) )
+            // InternalDomainModelTestLanguage.g:259:2: (otherlv_0= 'class' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) )? otherlv_4= '{' ( (lv_properties_5_0= ruleProperty ) )* ( (lv_subClasses_6_0= ruleClass ) )* otherlv_7= '}' )
             {
-            // InternalDomainModelTestLanguage.g:267:1: (otherlv_0= 'class' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) )? otherlv_4= '{' ( (lv_properties_5_0= ruleProperty ) )* ( (lv_subClasses_6_0= ruleClass ) )* otherlv_7= '}' )
-            // InternalDomainModelTestLanguage.g:267:3: otherlv_0= 'class' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) )? otherlv_4= '{' ( (lv_properties_5_0= ruleProperty ) )* ( (lv_subClasses_6_0= ruleClass ) )* otherlv_7= '}'
+            // InternalDomainModelTestLanguage.g:259:2: (otherlv_0= 'class' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) )? otherlv_4= '{' ( (lv_properties_5_0= ruleProperty ) )* ( (lv_subClasses_6_0= ruleClass ) )* otherlv_7= '}' )
+            // InternalDomainModelTestLanguage.g:260:3: otherlv_0= 'class' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) )? otherlv_4= '{' ( (lv_properties_5_0= ruleProperty ) )* ( (lv_subClasses_6_0= ruleClass ) )* otherlv_7= '}'
             {
             otherlv_0=(Token)match(input,14,FollowSets000.FOLLOW_6); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getClassAccess().getClassKeyword_0());
-                
-            // InternalDomainModelTestLanguage.g:271:1: ( (lv_name_1_0= RULE_ID ) )
-            // InternalDomainModelTestLanguage.g:272:1: (lv_name_1_0= RULE_ID )
+            			newLeafNode(otherlv_0, grammarAccess.getClassAccess().getClassKeyword_0());
+            		
+            // InternalDomainModelTestLanguage.g:264:3: ( (lv_name_1_0= RULE_ID ) )
+            // InternalDomainModelTestLanguage.g:265:4: (lv_name_1_0= RULE_ID )
             {
-            // InternalDomainModelTestLanguage.g:272:1: (lv_name_1_0= RULE_ID )
-            // InternalDomainModelTestLanguage.g:273:3: lv_name_1_0= RULE_ID
+            // InternalDomainModelTestLanguage.g:265:4: (lv_name_1_0= RULE_ID )
+            // InternalDomainModelTestLanguage.g:266:5: lv_name_1_0= RULE_ID
             {
             lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_8); 
 
-            			newLeafNode(lv_name_1_0, grammarAccess.getClassAccess().getNameIDTerminalRuleCall_1_0()); 
-            		
+            					newLeafNode(lv_name_1_0, grammarAccess.getClassAccess().getNameIDTerminalRuleCall_1_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getClassRule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"name",
-                    		lv_name_1_0, 
-                    		"org.eclipse.xtext.common.Terminals.ID");
-            	    
-
-            }
-
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getClassRule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"name",
+            						lv_name_1_0,
+            						"org.eclipse.xtext.common.Terminals.ID");
+            				
 
             }
 
-            // InternalDomainModelTestLanguage.g:289:2: (otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) )?
+
+            }
+
+            // InternalDomainModelTestLanguage.g:282:3: (otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) ) )?
             int alt5=2;
             int LA5_0 = input.LA(1);
 
@@ -706,27 +720,27 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalAntlr
             }
             switch (alt5) {
                 case 1 :
-                    // InternalDomainModelTestLanguage.g:289:4: otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) )
+                    // InternalDomainModelTestLanguage.g:283:4: otherlv_2= 'extends' ( (otherlv_3= RULE_ID ) )
                     {
                     otherlv_2=(Token)match(input,15,FollowSets000.FOLLOW_6); 
 
-                        	newLeafNode(otherlv_2, grammarAccess.getClassAccess().getExtendsKeyword_2_0());
-                        
-                    // InternalDomainModelTestLanguage.g:293:1: ( (otherlv_3= RULE_ID ) )
-                    // InternalDomainModelTestLanguage.g:294:1: (otherlv_3= RULE_ID )
+                    				newLeafNode(otherlv_2, grammarAccess.getClassAccess().getExtendsKeyword_2_0());
+                    			
+                    // InternalDomainModelTestLanguage.g:287:4: ( (otherlv_3= RULE_ID ) )
+                    // InternalDomainModelTestLanguage.g:288:5: (otherlv_3= RULE_ID )
                     {
-                    // InternalDomainModelTestLanguage.g:294:1: (otherlv_3= RULE_ID )
-                    // InternalDomainModelTestLanguage.g:295:3: otherlv_3= RULE_ID
+                    // InternalDomainModelTestLanguage.g:288:5: (otherlv_3= RULE_ID )
+                    // InternalDomainModelTestLanguage.g:289:6: otherlv_3= RULE_ID
                     {
 
-                    			if (current==null) {
-                    	            current = createModelElement(grammarAccess.getClassRule());
-                    	        }
-                            
+                    						if (current==null) {
+                    							current = createModelElement(grammarAccess.getClassRule());
+                    						}
+                    					
                     otherlv_3=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_9); 
 
-                    		newLeafNode(otherlv_3, grammarAccess.getClassAccess().getSuperClassClassCrossReference_2_1_0()); 
-                    	
+                    						newLeafNode(otherlv_3, grammarAccess.getClassAccess().getSuperClassClassCrossReference_2_1_0());
+                    					
 
                     }
 
@@ -741,9 +755,9 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalAntlr
 
             otherlv_4=(Token)match(input,16,FollowSets000.FOLLOW_10); 
 
-                	newLeafNode(otherlv_4, grammarAccess.getClassAccess().getLeftCurlyBracketKeyword_3());
-                
-            // InternalDomainModelTestLanguage.g:310:1: ( (lv_properties_5_0= ruleProperty ) )*
+            			newLeafNode(otherlv_4, grammarAccess.getClassAccess().getLeftCurlyBracketKeyword_3());
+            		
+            // InternalDomainModelTestLanguage.g:305:3: ( (lv_properties_5_0= ruleProperty ) )*
             loop6:
             do {
                 int alt6=2;
@@ -756,30 +770,30 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalAntlr
 
                 switch (alt6) {
             	case 1 :
-            	    // InternalDomainModelTestLanguage.g:311:1: (lv_properties_5_0= ruleProperty )
+            	    // InternalDomainModelTestLanguage.g:306:4: (lv_properties_5_0= ruleProperty )
             	    {
-            	    // InternalDomainModelTestLanguage.g:311:1: (lv_properties_5_0= ruleProperty )
-            	    // InternalDomainModelTestLanguage.g:312:3: lv_properties_5_0= ruleProperty
+            	    // InternalDomainModelTestLanguage.g:306:4: (lv_properties_5_0= ruleProperty )
+            	    // InternalDomainModelTestLanguage.g:307:5: lv_properties_5_0= ruleProperty
             	    {
-            	     
-            	    	        newCompositeNode(grammarAccess.getClassAccess().getPropertiesPropertyParserRuleCall_4_0()); 
-            	    	    
+
+            	    					newCompositeNode(grammarAccess.getClassAccess().getPropertiesPropertyParserRuleCall_4_0());
+            	    				
             	    pushFollow(FollowSets000.FOLLOW_10);
             	    lv_properties_5_0=ruleProperty();
 
             	    state._fsp--;
 
 
-            	    	        if (current==null) {
-            	    	            current = createModelElementForParent(grammarAccess.getClassRule());
-            	    	        }
-            	           		add(
-            	           			current, 
-            	           			"properties",
-            	            		lv_properties_5_0, 
-            	            		"org.eclipse.xtext.ui.tests.editor.contentassist.DomainModelTestLanguage.Property");
-            	    	        afterParserOrEnumRuleCall();
-            	    	    
+            	    					if (current==null) {
+            	    						current = createModelElementForParent(grammarAccess.getClassRule());
+            	    					}
+            	    					add(
+            	    						current,
+            	    						"properties",
+            	    						lv_properties_5_0,
+            	    						"org.eclipse.xtext.ui.tests.editor.contentassist.DomainModelTestLanguage.Property");
+            	    					afterParserOrEnumRuleCall();
+            	    				
 
             	    }
 
@@ -792,7 +806,7 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalAntlr
                 }
             } while (true);
 
-            // InternalDomainModelTestLanguage.g:328:3: ( (lv_subClasses_6_0= ruleClass ) )*
+            // InternalDomainModelTestLanguage.g:324:3: ( (lv_subClasses_6_0= ruleClass ) )*
             loop7:
             do {
                 int alt7=2;
@@ -805,30 +819,30 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalAntlr
 
                 switch (alt7) {
             	case 1 :
-            	    // InternalDomainModelTestLanguage.g:329:1: (lv_subClasses_6_0= ruleClass )
+            	    // InternalDomainModelTestLanguage.g:325:4: (lv_subClasses_6_0= ruleClass )
             	    {
-            	    // InternalDomainModelTestLanguage.g:329:1: (lv_subClasses_6_0= ruleClass )
-            	    // InternalDomainModelTestLanguage.g:330:3: lv_subClasses_6_0= ruleClass
+            	    // InternalDomainModelTestLanguage.g:325:4: (lv_subClasses_6_0= ruleClass )
+            	    // InternalDomainModelTestLanguage.g:326:5: lv_subClasses_6_0= ruleClass
             	    {
-            	     
-            	    	        newCompositeNode(grammarAccess.getClassAccess().getSubClassesClassParserRuleCall_5_0()); 
-            	    	    
+
+            	    					newCompositeNode(grammarAccess.getClassAccess().getSubClassesClassParserRuleCall_5_0());
+            	    				
             	    pushFollow(FollowSets000.FOLLOW_11);
             	    lv_subClasses_6_0=ruleClass();
 
             	    state._fsp--;
 
 
-            	    	        if (current==null) {
-            	    	            current = createModelElementForParent(grammarAccess.getClassRule());
-            	    	        }
-            	           		add(
-            	           			current, 
-            	           			"subClasses",
-            	            		lv_subClasses_6_0, 
-            	            		"org.eclipse.xtext.ui.tests.editor.contentassist.DomainModelTestLanguage.Class");
-            	    	        afterParserOrEnumRuleCall();
-            	    	    
+            	    					if (current==null) {
+            	    						current = createModelElementForParent(grammarAccess.getClassRule());
+            	    					}
+            	    					add(
+            	    						current,
+            	    						"subClasses",
+            	    						lv_subClasses_6_0,
+            	    						"org.eclipse.xtext.ui.tests.editor.contentassist.DomainModelTestLanguage.Class");
+            	    					afterParserOrEnumRuleCall();
+            	    				
 
             	    }
 
@@ -843,21 +857,23 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalAntlr
 
             otherlv_7=(Token)match(input,17,FollowSets000.FOLLOW_2); 
 
-                	newLeafNode(otherlv_7, grammarAccess.getClassAccess().getRightCurlyBracketKeyword_6());
-                
+            			newLeafNode(otherlv_7, grammarAccess.getClassAccess().getRightCurlyBracketKeyword_6());
+            		
 
             }
 
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -866,7 +882,7 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalAntlr
 
 
     // $ANTLR start "entryRuleProperty"
-    // InternalDomainModelTestLanguage.g:358:1: entryRuleProperty returns [EObject current=null] : iv_ruleProperty= ruleProperty EOF ;
+    // InternalDomainModelTestLanguage.g:351:1: entryRuleProperty returns [EObject current=null] : iv_ruleProperty= ruleProperty EOF ;
     public final EObject entryRuleProperty() throws RecognitionException {
         EObject current = null;
 
@@ -874,8 +890,8 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalAntlr
 
 
         try {
-            // InternalDomainModelTestLanguage.g:359:2: (iv_ruleProperty= ruleProperty EOF )
-            // InternalDomainModelTestLanguage.g:360:2: iv_ruleProperty= ruleProperty EOF
+            // InternalDomainModelTestLanguage.g:351:49: (iv_ruleProperty= ruleProperty EOF )
+            // InternalDomainModelTestLanguage.g:352:2: iv_ruleProperty= ruleProperty EOF
             {
              newCompositeNode(grammarAccess.getPropertyRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -889,11 +905,11 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalAntlr
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -902,7 +918,7 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalAntlr
 
 
     // $ANTLR start "ruleProperty"
-    // InternalDomainModelTestLanguage.g:367:1: ruleProperty returns [EObject current=null] : (this_Attribute_0= ruleAttribute | this_Reference_1= ruleReference ) ;
+    // InternalDomainModelTestLanguage.g:358:1: ruleProperty returns [EObject current=null] : (this_Attribute_0= ruleAttribute | this_Reference_1= ruleReference ) ;
     public final EObject ruleProperty() throws RecognitionException {
         EObject current = null;
 
@@ -911,13 +927,14 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalAntlr
         EObject this_Reference_1 = null;
 
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalDomainModelTestLanguage.g:370:28: ( (this_Attribute_0= ruleAttribute | this_Reference_1= ruleReference ) )
-            // InternalDomainModelTestLanguage.g:371:1: (this_Attribute_0= ruleAttribute | this_Reference_1= ruleReference )
+            // InternalDomainModelTestLanguage.g:364:2: ( (this_Attribute_0= ruleAttribute | this_Reference_1= ruleReference ) )
+            // InternalDomainModelTestLanguage.g:365:2: (this_Attribute_0= ruleAttribute | this_Reference_1= ruleReference )
             {
-            // InternalDomainModelTestLanguage.g:371:1: (this_Attribute_0= ruleAttribute | this_Reference_1= ruleReference )
+            // InternalDomainModelTestLanguage.g:365:2: (this_Attribute_0= ruleAttribute | this_Reference_1= ruleReference )
             int alt8=2;
             int LA8_0 = input.LA(1);
 
@@ -935,38 +952,38 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalAntlr
             }
             switch (alt8) {
                 case 1 :
-                    // InternalDomainModelTestLanguage.g:372:5: this_Attribute_0= ruleAttribute
+                    // InternalDomainModelTestLanguage.g:366:3: this_Attribute_0= ruleAttribute
                     {
-                     
-                            newCompositeNode(grammarAccess.getPropertyAccess().getAttributeParserRuleCall_0()); 
-                        
+
+                    			newCompositeNode(grammarAccess.getPropertyAccess().getAttributeParserRuleCall_0());
+                    		
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_Attribute_0=ruleAttribute();
 
                     state._fsp--;
 
-                     
-                            current = this_Attribute_0; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    			current = this_Attribute_0;
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
                 case 2 :
-                    // InternalDomainModelTestLanguage.g:382:5: this_Reference_1= ruleReference
+                    // InternalDomainModelTestLanguage.g:375:3: this_Reference_1= ruleReference
                     {
-                     
-                            newCompositeNode(grammarAccess.getPropertyAccess().getReferenceParserRuleCall_1()); 
-                        
+
+                    			newCompositeNode(grammarAccess.getPropertyAccess().getReferenceParserRuleCall_1());
+                    		
                     pushFollow(FollowSets000.FOLLOW_2);
                     this_Reference_1=ruleReference();
 
                     state._fsp--;
 
-                     
-                            current = this_Reference_1; 
-                            afterParserOrEnumRuleCall();
-                        
+
+                    			current = this_Reference_1;
+                    			afterParserOrEnumRuleCall();
+                    		
 
                     }
                     break;
@@ -976,13 +993,15 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalAntlr
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -991,7 +1010,7 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalAntlr
 
 
     // $ANTLR start "entryRuleAttribute"
-    // InternalDomainModelTestLanguage.g:398:1: entryRuleAttribute returns [EObject current=null] : iv_ruleAttribute= ruleAttribute EOF ;
+    // InternalDomainModelTestLanguage.g:387:1: entryRuleAttribute returns [EObject current=null] : iv_ruleAttribute= ruleAttribute EOF ;
     public final EObject entryRuleAttribute() throws RecognitionException {
         EObject current = null;
 
@@ -999,8 +1018,8 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalAntlr
 
 
         try {
-            // InternalDomainModelTestLanguage.g:399:2: (iv_ruleAttribute= ruleAttribute EOF )
-            // InternalDomainModelTestLanguage.g:400:2: iv_ruleAttribute= ruleAttribute EOF
+            // InternalDomainModelTestLanguage.g:387:50: (iv_ruleAttribute= ruleAttribute EOF )
+            // InternalDomainModelTestLanguage.g:388:2: iv_ruleAttribute= ruleAttribute EOF
             {
              newCompositeNode(grammarAccess.getAttributeRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -1014,11 +1033,11 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalAntlr
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1027,7 +1046,7 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalAntlr
 
 
     // $ANTLR start "ruleAttribute"
-    // InternalDomainModelTestLanguage.g:407:1: ruleAttribute returns [EObject current=null] : (otherlv_0= 'attr' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ':' ( (otherlv_3= RULE_ID ) ) (otherlv_4= ';' )? ) ;
+    // InternalDomainModelTestLanguage.g:394:1: ruleAttribute returns [EObject current=null] : (otherlv_0= 'attr' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ':' ( (otherlv_3= RULE_ID ) ) (otherlv_4= ';' )? ) ;
     public final EObject ruleAttribute() throws RecognitionException {
         EObject current = null;
 
@@ -1037,39 +1056,40 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalAntlr
         Token otherlv_3=null;
         Token otherlv_4=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalDomainModelTestLanguage.g:410:28: ( (otherlv_0= 'attr' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ':' ( (otherlv_3= RULE_ID ) ) (otherlv_4= ';' )? ) )
-            // InternalDomainModelTestLanguage.g:411:1: (otherlv_0= 'attr' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ':' ( (otherlv_3= RULE_ID ) ) (otherlv_4= ';' )? )
+            // InternalDomainModelTestLanguage.g:400:2: ( (otherlv_0= 'attr' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ':' ( (otherlv_3= RULE_ID ) ) (otherlv_4= ';' )? ) )
+            // InternalDomainModelTestLanguage.g:401:2: (otherlv_0= 'attr' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ':' ( (otherlv_3= RULE_ID ) ) (otherlv_4= ';' )? )
             {
-            // InternalDomainModelTestLanguage.g:411:1: (otherlv_0= 'attr' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ':' ( (otherlv_3= RULE_ID ) ) (otherlv_4= ';' )? )
-            // InternalDomainModelTestLanguage.g:411:3: otherlv_0= 'attr' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ':' ( (otherlv_3= RULE_ID ) ) (otherlv_4= ';' )?
+            // InternalDomainModelTestLanguage.g:401:2: (otherlv_0= 'attr' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ':' ( (otherlv_3= RULE_ID ) ) (otherlv_4= ';' )? )
+            // InternalDomainModelTestLanguage.g:402:3: otherlv_0= 'attr' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ':' ( (otherlv_3= RULE_ID ) ) (otherlv_4= ';' )?
             {
             otherlv_0=(Token)match(input,18,FollowSets000.FOLLOW_6); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getAttributeAccess().getAttrKeyword_0());
-                
-            // InternalDomainModelTestLanguage.g:415:1: ( (lv_name_1_0= RULE_ID ) )
-            // InternalDomainModelTestLanguage.g:416:1: (lv_name_1_0= RULE_ID )
+            			newLeafNode(otherlv_0, grammarAccess.getAttributeAccess().getAttrKeyword_0());
+            		
+            // InternalDomainModelTestLanguage.g:406:3: ( (lv_name_1_0= RULE_ID ) )
+            // InternalDomainModelTestLanguage.g:407:4: (lv_name_1_0= RULE_ID )
             {
-            // InternalDomainModelTestLanguage.g:416:1: (lv_name_1_0= RULE_ID )
-            // InternalDomainModelTestLanguage.g:417:3: lv_name_1_0= RULE_ID
+            // InternalDomainModelTestLanguage.g:407:4: (lv_name_1_0= RULE_ID )
+            // InternalDomainModelTestLanguage.g:408:5: lv_name_1_0= RULE_ID
             {
             lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_12); 
 
-            			newLeafNode(lv_name_1_0, grammarAccess.getAttributeAccess().getNameIDTerminalRuleCall_1_0()); 
-            		
+            					newLeafNode(lv_name_1_0, grammarAccess.getAttributeAccess().getNameIDTerminalRuleCall_1_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getAttributeRule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"name",
-                    		lv_name_1_0, 
-                    		"org.eclipse.xtext.common.Terminals.ID");
-            	    
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getAttributeRule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"name",
+            						lv_name_1_0,
+            						"org.eclipse.xtext.common.Terminals.ID");
+            				
 
             }
 
@@ -1078,30 +1098,30 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalAntlr
 
             otherlv_2=(Token)match(input,19,FollowSets000.FOLLOW_6); 
 
-                	newLeafNode(otherlv_2, grammarAccess.getAttributeAccess().getColonKeyword_2());
-                
-            // InternalDomainModelTestLanguage.g:437:1: ( (otherlv_3= RULE_ID ) )
-            // InternalDomainModelTestLanguage.g:438:1: (otherlv_3= RULE_ID )
+            			newLeafNode(otherlv_2, grammarAccess.getAttributeAccess().getColonKeyword_2());
+            		
+            // InternalDomainModelTestLanguage.g:428:3: ( (otherlv_3= RULE_ID ) )
+            // InternalDomainModelTestLanguage.g:429:4: (otherlv_3= RULE_ID )
             {
-            // InternalDomainModelTestLanguage.g:438:1: (otherlv_3= RULE_ID )
-            // InternalDomainModelTestLanguage.g:439:3: otherlv_3= RULE_ID
+            // InternalDomainModelTestLanguage.g:429:4: (otherlv_3= RULE_ID )
+            // InternalDomainModelTestLanguage.g:430:5: otherlv_3= RULE_ID
             {
 
-            			if (current==null) {
-            	            current = createModelElement(grammarAccess.getAttributeRule());
-            	        }
-                    
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getAttributeRule());
+            					}
+            				
             otherlv_3=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_7); 
 
-            		newLeafNode(otherlv_3, grammarAccess.getAttributeAccess().getTypeDataTypeCrossReference_3_0()); 
-            	
+            					newLeafNode(otherlv_3, grammarAccess.getAttributeAccess().getTypeDataTypeCrossReference_3_0());
+            				
 
             }
 
 
             }
 
-            // InternalDomainModelTestLanguage.g:450:2: (otherlv_4= ';' )?
+            // InternalDomainModelTestLanguage.g:441:3: (otherlv_4= ';' )?
             int alt9=2;
             int LA9_0 = input.LA(1);
 
@@ -1110,12 +1130,12 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalAntlr
             }
             switch (alt9) {
                 case 1 :
-                    // InternalDomainModelTestLanguage.g:450:4: otherlv_4= ';'
+                    // InternalDomainModelTestLanguage.g:442:4: otherlv_4= ';'
                     {
                     otherlv_4=(Token)match(input,13,FollowSets000.FOLLOW_2); 
 
-                        	newLeafNode(otherlv_4, grammarAccess.getAttributeAccess().getSemicolonKeyword_4());
-                        
+                    				newLeafNode(otherlv_4, grammarAccess.getAttributeAccess().getSemicolonKeyword_4());
+                    			
 
                     }
                     break;
@@ -1128,13 +1148,15 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalAntlr
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1143,7 +1165,7 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalAntlr
 
 
     // $ANTLR start "entryRuleReference"
-    // InternalDomainModelTestLanguage.g:462:1: entryRuleReference returns [EObject current=null] : iv_ruleReference= ruleReference EOF ;
+    // InternalDomainModelTestLanguage.g:451:1: entryRuleReference returns [EObject current=null] : iv_ruleReference= ruleReference EOF ;
     public final EObject entryRuleReference() throws RecognitionException {
         EObject current = null;
 
@@ -1151,8 +1173,8 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalAntlr
 
 
         try {
-            // InternalDomainModelTestLanguage.g:463:2: (iv_ruleReference= ruleReference EOF )
-            // InternalDomainModelTestLanguage.g:464:2: iv_ruleReference= ruleReference EOF
+            // InternalDomainModelTestLanguage.g:451:50: (iv_ruleReference= ruleReference EOF )
+            // InternalDomainModelTestLanguage.g:452:2: iv_ruleReference= ruleReference EOF
             {
              newCompositeNode(grammarAccess.getReferenceRule()); 
             pushFollow(FollowSets000.FOLLOW_1);
@@ -1166,11 +1188,11 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalAntlr
             }
 
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;
@@ -1179,7 +1201,7 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalAntlr
 
 
     // $ANTLR start "ruleReference"
-    // InternalDomainModelTestLanguage.g:471:1: ruleReference returns [EObject current=null] : (otherlv_0= 'ref' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ':' ( (otherlv_3= RULE_ID ) ) (otherlv_4= ';' )? ) ;
+    // InternalDomainModelTestLanguage.g:458:1: ruleReference returns [EObject current=null] : (otherlv_0= 'ref' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ':' ( (otherlv_3= RULE_ID ) ) (otherlv_4= ';' )? ) ;
     public final EObject ruleReference() throws RecognitionException {
         EObject current = null;
 
@@ -1189,39 +1211,40 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalAntlr
         Token otherlv_3=null;
         Token otherlv_4=null;
 
-         enterRule(); 
-            
+
+        	enterRule();
+
         try {
-            // InternalDomainModelTestLanguage.g:474:28: ( (otherlv_0= 'ref' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ':' ( (otherlv_3= RULE_ID ) ) (otherlv_4= ';' )? ) )
-            // InternalDomainModelTestLanguage.g:475:1: (otherlv_0= 'ref' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ':' ( (otherlv_3= RULE_ID ) ) (otherlv_4= ';' )? )
+            // InternalDomainModelTestLanguage.g:464:2: ( (otherlv_0= 'ref' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ':' ( (otherlv_3= RULE_ID ) ) (otherlv_4= ';' )? ) )
+            // InternalDomainModelTestLanguage.g:465:2: (otherlv_0= 'ref' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ':' ( (otherlv_3= RULE_ID ) ) (otherlv_4= ';' )? )
             {
-            // InternalDomainModelTestLanguage.g:475:1: (otherlv_0= 'ref' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ':' ( (otherlv_3= RULE_ID ) ) (otherlv_4= ';' )? )
-            // InternalDomainModelTestLanguage.g:475:3: otherlv_0= 'ref' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ':' ( (otherlv_3= RULE_ID ) ) (otherlv_4= ';' )?
+            // InternalDomainModelTestLanguage.g:465:2: (otherlv_0= 'ref' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ':' ( (otherlv_3= RULE_ID ) ) (otherlv_4= ';' )? )
+            // InternalDomainModelTestLanguage.g:466:3: otherlv_0= 'ref' ( (lv_name_1_0= RULE_ID ) ) otherlv_2= ':' ( (otherlv_3= RULE_ID ) ) (otherlv_4= ';' )?
             {
             otherlv_0=(Token)match(input,20,FollowSets000.FOLLOW_6); 
 
-                	newLeafNode(otherlv_0, grammarAccess.getReferenceAccess().getRefKeyword_0());
-                
-            // InternalDomainModelTestLanguage.g:479:1: ( (lv_name_1_0= RULE_ID ) )
-            // InternalDomainModelTestLanguage.g:480:1: (lv_name_1_0= RULE_ID )
+            			newLeafNode(otherlv_0, grammarAccess.getReferenceAccess().getRefKeyword_0());
+            		
+            // InternalDomainModelTestLanguage.g:470:3: ( (lv_name_1_0= RULE_ID ) )
+            // InternalDomainModelTestLanguage.g:471:4: (lv_name_1_0= RULE_ID )
             {
-            // InternalDomainModelTestLanguage.g:480:1: (lv_name_1_0= RULE_ID )
-            // InternalDomainModelTestLanguage.g:481:3: lv_name_1_0= RULE_ID
+            // InternalDomainModelTestLanguage.g:471:4: (lv_name_1_0= RULE_ID )
+            // InternalDomainModelTestLanguage.g:472:5: lv_name_1_0= RULE_ID
             {
             lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_12); 
 
-            			newLeafNode(lv_name_1_0, grammarAccess.getReferenceAccess().getNameIDTerminalRuleCall_1_0()); 
-            		
+            					newLeafNode(lv_name_1_0, grammarAccess.getReferenceAccess().getNameIDTerminalRuleCall_1_0());
+            				
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getReferenceRule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"name",
-                    		lv_name_1_0, 
-                    		"org.eclipse.xtext.common.Terminals.ID");
-            	    
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getReferenceRule());
+            					}
+            					setWithLastConsumed(
+            						current,
+            						"name",
+            						lv_name_1_0,
+            						"org.eclipse.xtext.common.Terminals.ID");
+            				
 
             }
 
@@ -1230,30 +1253,30 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalAntlr
 
             otherlv_2=(Token)match(input,19,FollowSets000.FOLLOW_6); 
 
-                	newLeafNode(otherlv_2, grammarAccess.getReferenceAccess().getColonKeyword_2());
-                
-            // InternalDomainModelTestLanguage.g:501:1: ( (otherlv_3= RULE_ID ) )
-            // InternalDomainModelTestLanguage.g:502:1: (otherlv_3= RULE_ID )
+            			newLeafNode(otherlv_2, grammarAccess.getReferenceAccess().getColonKeyword_2());
+            		
+            // InternalDomainModelTestLanguage.g:492:3: ( (otherlv_3= RULE_ID ) )
+            // InternalDomainModelTestLanguage.g:493:4: (otherlv_3= RULE_ID )
             {
-            // InternalDomainModelTestLanguage.g:502:1: (otherlv_3= RULE_ID )
-            // InternalDomainModelTestLanguage.g:503:3: otherlv_3= RULE_ID
+            // InternalDomainModelTestLanguage.g:493:4: (otherlv_3= RULE_ID )
+            // InternalDomainModelTestLanguage.g:494:5: otherlv_3= RULE_ID
             {
 
-            			if (current==null) {
-            	            current = createModelElement(grammarAccess.getReferenceRule());
-            	        }
-                    
+            					if (current==null) {
+            						current = createModelElement(grammarAccess.getReferenceRule());
+            					}
+            				
             otherlv_3=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_7); 
 
-            		newLeafNode(otherlv_3, grammarAccess.getReferenceAccess().getTypeClassCrossReference_3_0()); 
-            	
+            					newLeafNode(otherlv_3, grammarAccess.getReferenceAccess().getTypeClassCrossReference_3_0());
+            				
 
             }
 
 
             }
 
-            // InternalDomainModelTestLanguage.g:514:2: (otherlv_4= ';' )?
+            // InternalDomainModelTestLanguage.g:505:3: (otherlv_4= ';' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -1262,12 +1285,12 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalAntlr
             }
             switch (alt10) {
                 case 1 :
-                    // InternalDomainModelTestLanguage.g:514:4: otherlv_4= ';'
+                    // InternalDomainModelTestLanguage.g:506:4: otherlv_4= ';'
                     {
                     otherlv_4=(Token)match(input,13,FollowSets000.FOLLOW_2); 
 
-                        	newLeafNode(otherlv_4, grammarAccess.getReferenceAccess().getSemicolonKeyword_4());
-                        
+                    				newLeafNode(otherlv_4, grammarAccess.getReferenceAccess().getSemicolonKeyword_4());
+                    			
 
                     }
                     break;
@@ -1280,13 +1303,15 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalAntlr
 
             }
 
-             leaveRule(); 
+
+            	leaveRule();
+
         }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
+
+            catch (RecognitionException re) {
+                recover(input,re);
                 appendSkippedTokens();
-            } 
+            }
         finally {
         }
         return current;

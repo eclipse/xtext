@@ -4,36 +4,37 @@
 package org.eclipse.xtext.ui.tests.enumrules.parser.antlr;
 
 import com.google.inject.Inject;
-
+import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.ui.tests.enumrules.parser.antlr.internal.InternalEnumRulesUiTestLanguageParser;
 import org.eclipse.xtext.ui.tests.enumrules.services.EnumRulesUiTestLanguageGrammarAccess;
 
-public class EnumRulesUiTestLanguageParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {
-	
+public class EnumRulesUiTestLanguageParser extends AbstractAntlrParser {
+
 	@Inject
 	private EnumRulesUiTestLanguageGrammarAccess grammarAccess;
-	
+
 	@Override
 	protected void setInitialHiddenTokens(XtextTokenStream tokenStream) {
 		tokenStream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
 	}
 	
+
 	@Override
-	protected org.eclipse.xtext.ui.tests.enumrules.parser.antlr.internal.InternalEnumRulesUiTestLanguageParser createParser(XtextTokenStream stream) {
-		return new org.eclipse.xtext.ui.tests.enumrules.parser.antlr.internal.InternalEnumRulesUiTestLanguageParser(stream, getGrammarAccess());
+	protected InternalEnumRulesUiTestLanguageParser createParser(XtextTokenStream stream) {
+		return new InternalEnumRulesUiTestLanguageParser(stream, getGrammarAccess());
 	}
-	
+
 	@Override 
 	protected String getDefaultRuleName() {
 		return "Model";
 	}
-	
+
 	public EnumRulesUiTestLanguageGrammarAccess getGrammarAccess() {
 		return this.grammarAccess;
 	}
-	
+
 	public void setGrammarAccess(EnumRulesUiTestLanguageGrammarAccess grammarAccess) {
 		this.grammarAccess = grammarAccess;
 	}
-	
 }

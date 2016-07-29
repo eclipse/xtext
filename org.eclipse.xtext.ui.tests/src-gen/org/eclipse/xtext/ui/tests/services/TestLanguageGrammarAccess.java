@@ -3,20 +3,24 @@
  */
 package org.eclipse.xtext.ui.tests.services;
 
-import com.google.inject.Singleton;
 import com.google.inject.Inject;
-
+import com.google.inject.Singleton;
 import java.util.List;
-
-import org.eclipse.xtext.*;
-import org.eclipse.xtext.service.GrammarProvider;
-import org.eclipse.xtext.service.AbstractElementFinder.*;
-
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.Group;
+import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
+import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder;
+import org.eclipse.xtext.service.GrammarProvider;
 
 @Singleton
 public class TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
-	
 	
 	public class FileElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.TestLanguage.File");
@@ -26,14 +30,13 @@ public class TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		//File:
 		//	stuff+=Stuff*;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//stuff+=Stuff*
 		public Assignment getStuffAssignment() { return cStuffAssignment; }
-
+		
 		//Stuff
 		public RuleCall getStuffStuffParserRuleCall_0() { return cStuffStuffParserRuleCall_0; }
 	}
-
 	public class StuffElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.TestLanguage.Stuff");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -49,31 +52,31 @@ public class TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		//Stuff:
 		//	"stuff" name=ID ("refs" refs=[Stuff])?;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//"stuff" name=ID ("refs" refs=[Stuff])?
 		public Group getGroup() { return cGroup; }
-
+		
 		//"stuff"
 		public Keyword getStuffKeyword_0() { return cStuffKeyword_0; }
-
+		
 		//name=ID
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
-
+		
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
-
+		
 		//("refs" refs=[Stuff])?
 		public Group getGroup_2() { return cGroup_2; }
-
+		
 		//"refs"
 		public Keyword getRefsKeyword_2_0() { return cRefsKeyword_2_0; }
-
+		
 		//refs=[Stuff]
 		public Assignment getRefsAssignment_2_1() { return cRefsAssignment_2_1; }
-
+		
 		//[Stuff]
 		public CrossReference getRefsStuffCrossReference_2_1_0() { return cRefsStuffCrossReference_2_1_0; }
-
+		
 		//ID
 		public RuleCall getRefsStuffIDTerminalRuleCall_2_1_0_1() { return cRefsStuffIDTerminalRuleCall_2_1_0_1; }
 	}
@@ -83,12 +86,12 @@ public class TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	private final StuffElements pStuff;
 	
 	private final Grammar grammar;
-
+	
 	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public TestLanguageGrammarAccess(GrammarProvider grammarProvider,
-		TerminalsGrammarAccess gaTerminals) {
+			TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
 		this.pFile = new FileElements();
@@ -116,7 +119,7 @@ public class TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		return grammar;
 	}
 	
-
+	
 	public TerminalsGrammarAccess getTerminalsGrammarAccess() {
 		return gaTerminals;
 	}
@@ -131,7 +134,7 @@ public class TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getFileRule() {
 		return getFileAccess().getRule();
 	}
-
+	
 	//Stuff:
 	//	"stuff" name=ID ("refs" refs=[Stuff])?;
 	public StuffElements getStuffAccess() {
@@ -141,47 +144,47 @@ public class TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	public ParserRule getStuffRule() {
 		return getStuffAccess().getRule();
 	}
-
+	
 	//terminal ID:
 	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
-	} 
-
+	}
+	
 	//terminal INT returns ecore::EInt:
 	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
-	} 
-
+	}
+	
 	//terminal STRING:
 	//	'"' ('\\' . | !('\\' | '"'))* '"' |
 	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
-	} 
-
+	}
+	
 	//terminal ML_COMMENT:
 	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal SL_COMMENT:
 	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal WS:
 	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
-	} 
-
+	}
+	
 	//terminal ANY_OTHER:
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
-	} 
+	}
 }

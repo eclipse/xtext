@@ -53,7 +53,7 @@ public class MultiPageEditor extends MultiPageEditorPart {
 	
 	void createXtextPage() {
 		try {
-			Injector injector = org.eclipse.xtext.ui.tests.Activator.getInstance().getInjector("org.eclipse.xtext.ui.tests.TestLanguage");
+			Injector injector = org.eclipse.xtext.ui.tests.ui.internal.TestsActivator.getInstance().getInjector("org.eclipse.xtext.ui.tests.TestLanguage");
 			editor = injector.getInstance(XtextEditor.class);
 			int index = addPage(editor, getEditorInput());
 			setPageText(index, editor.getTitle());

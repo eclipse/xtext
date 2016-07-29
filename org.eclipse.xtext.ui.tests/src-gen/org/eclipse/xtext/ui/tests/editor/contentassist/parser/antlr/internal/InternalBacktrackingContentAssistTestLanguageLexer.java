@@ -12,85 +12,85 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
-    public static final int T__68=68;
-    public static final int T__69=69;
-    public static final int T__66=66;
-    public static final int RULE_ID=5;
-    public static final int T__67=67;
-    public static final int T__29=29;
-    public static final int T__64=64;
-    public static final int T__28=28;
-    public static final int T__65=65;
-    public static final int T__27=27;
-    public static final int T__62=62;
-    public static final int T__26=26;
-    public static final int T__63=63;
-    public static final int T__25=25;
-    public static final int T__24=24;
-    public static final int T__23=23;
-    public static final int T__22=22;
-    public static final int RULE_ANY_OTHER=10;
-    public static final int T__21=21;
-    public static final int T__20=20;
-    public static final int T__61=61;
-    public static final int EOF=-1;
-    public static final int T__60=60;
-    public static final int T__55=55;
-    public static final int T__56=56;
+    public static final int T__50=50;
     public static final int T__19=19;
+    public static final int T__15=15;
+    public static final int T__59=59;
+    public static final int T__16=16;
+    public static final int T__17=17;
+    public static final int T__18=18;
+    public static final int T__11=11;
+    public static final int T__55=55;
+    public static final int T__12=12;
+    public static final int T__56=56;
+    public static final int T__13=13;
     public static final int T__57=57;
+    public static final int T__14=14;
     public static final int T__58=58;
     public static final int T__51=51;
-    public static final int T__16=16;
     public static final int T__52=52;
-    public static final int T__15=15;
     public static final int T__53=53;
-    public static final int T__18=18;
     public static final int T__54=54;
-    public static final int T__17=17;
-    public static final int T__12=12;
-    public static final int T__11=11;
-    public static final int T__14=14;
-    public static final int T__13=13;
-    public static final int T__59=59;
+    public static final int T__60=60;
+    public static final int T__61=61;
+    public static final int RULE_ID=5;
+    public static final int T__26=26;
+    public static final int T__27=27;
+    public static final int T__28=28;
     public static final int RULE_INT=4;
-    public static final int T__50=50;
-    public static final int T__42=42;
-    public static final int T__43=43;
-    public static final int T__40=40;
-    public static final int T__41=41;
-    public static final int T__46=46;
-    public static final int T__80=80;
-    public static final int T__47=47;
-    public static final int T__81=81;
-    public static final int T__44=44;
-    public static final int T__45=45;
-    public static final int T__48=48;
-    public static final int T__49=49;
-    public static final int RULE_SL_COMMENT=8;
+    public static final int T__29=29;
+    public static final int T__22=22;
+    public static final int T__66=66;
     public static final int RULE_ML_COMMENT=7;
-    public static final int T__30=30;
-    public static final int T__31=31;
-    public static final int T__32=32;
-    public static final int RULE_STRING=6;
-    public static final int T__33=33;
-    public static final int T__71=71;
-    public static final int T__34=34;
-    public static final int T__72=72;
-    public static final int T__35=35;
-    public static final int T__36=36;
+    public static final int T__23=23;
+    public static final int T__67=67;
+    public static final int T__24=24;
+    public static final int T__68=68;
+    public static final int T__25=25;
+    public static final int T__69=69;
+    public static final int T__62=62;
+    public static final int T__63=63;
+    public static final int T__20=20;
+    public static final int T__64=64;
+    public static final int T__21=21;
+    public static final int T__65=65;
     public static final int T__70=70;
+    public static final int T__71=71;
+    public static final int T__72=72;
+    public static final int RULE_STRING=6;
+    public static final int RULE_SL_COMMENT=8;
     public static final int T__37=37;
     public static final int T__38=38;
     public static final int T__39=39;
-    public static final int T__76=76;
-    public static final int RULE_WS=9;
-    public static final int T__75=75;
-    public static final int T__74=74;
-    public static final int T__73=73;
-    public static final int T__79=79;
-    public static final int T__78=78;
+    public static final int T__33=33;
     public static final int T__77=77;
+    public static final int T__34=34;
+    public static final int T__78=78;
+    public static final int T__35=35;
+    public static final int T__79=79;
+    public static final int T__36=36;
+    public static final int T__73=73;
+    public static final int EOF=-1;
+    public static final int T__30=30;
+    public static final int T__74=74;
+    public static final int T__31=31;
+    public static final int T__75=75;
+    public static final int T__32=32;
+    public static final int T__76=76;
+    public static final int T__80=80;
+    public static final int T__81=81;
+    public static final int RULE_WS=9;
+    public static final int RULE_ANY_OTHER=10;
+    public static final int T__48=48;
+    public static final int T__49=49;
+    public static final int T__44=44;
+    public static final int T__45=45;
+    public static final int T__46=46;
+    public static final int T__47=47;
+    public static final int T__40=40;
+    public static final int T__41=41;
+    public static final int T__42=42;
+    public static final int T__43=43;
 
     // delegates
     // delegators
@@ -1578,10 +1578,10 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBacktrackingContentAssistTestLanguage.g:5675:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // InternalBacktrackingContentAssistTestLanguage.g:5675:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalBacktrackingContentAssistTestLanguage.g:5646:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // InternalBacktrackingContentAssistTestLanguage.g:5646:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // InternalBacktrackingContentAssistTestLanguage.g:5675:11: ( '^' )?
+            // InternalBacktrackingContentAssistTestLanguage.g:5646:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -1590,7 +1590,7 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // InternalBacktrackingContentAssistTestLanguage.g:5675:11: '^'
+                    // InternalBacktrackingContentAssistTestLanguage.g:5646:11: '^'
                     {
                     match('^'); 
 
@@ -1608,7 +1608,7 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // InternalBacktrackingContentAssistTestLanguage.g:5675:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalBacktrackingContentAssistTestLanguage.g:5646:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -1657,10 +1657,10 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBacktrackingContentAssistTestLanguage.g:5677:10: ( ( '0' .. '9' )+ )
-            // InternalBacktrackingContentAssistTestLanguage.g:5677:12: ( '0' .. '9' )+
+            // InternalBacktrackingContentAssistTestLanguage.g:5648:10: ( ( '0' .. '9' )+ )
+            // InternalBacktrackingContentAssistTestLanguage.g:5648:12: ( '0' .. '9' )+
             {
-            // InternalBacktrackingContentAssistTestLanguage.g:5677:12: ( '0' .. '9' )+
+            // InternalBacktrackingContentAssistTestLanguage.g:5648:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -1674,7 +1674,7 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // InternalBacktrackingContentAssistTestLanguage.g:5677:13: '0' .. '9'
+            	    // InternalBacktrackingContentAssistTestLanguage.g:5648:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -1706,10 +1706,10 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBacktrackingContentAssistTestLanguage.g:5679:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // InternalBacktrackingContentAssistTestLanguage.g:5679:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalBacktrackingContentAssistTestLanguage.g:5650:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // InternalBacktrackingContentAssistTestLanguage.g:5650:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // InternalBacktrackingContentAssistTestLanguage.g:5679:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalBacktrackingContentAssistTestLanguage.g:5650:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -1727,10 +1727,10 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // InternalBacktrackingContentAssistTestLanguage.g:5679:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // InternalBacktrackingContentAssistTestLanguage.g:5650:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // InternalBacktrackingContentAssistTestLanguage.g:5679:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // InternalBacktrackingContentAssistTestLanguage.g:5650:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -1746,7 +1746,7 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // InternalBacktrackingContentAssistTestLanguage.g:5679:21: '\\\\' .
+                    	    // InternalBacktrackingContentAssistTestLanguage.g:5650:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -1754,7 +1754,7 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalBacktrackingContentAssistTestLanguage.g:5679:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // InternalBacktrackingContentAssistTestLanguage.g:5650:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -1779,10 +1779,10 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalBacktrackingContentAssistTestLanguage.g:5679:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // InternalBacktrackingContentAssistTestLanguage.g:5650:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // InternalBacktrackingContentAssistTestLanguage.g:5679:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // InternalBacktrackingContentAssistTestLanguage.g:5650:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -1798,7 +1798,7 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // InternalBacktrackingContentAssistTestLanguage.g:5679:54: '\\\\' .
+                    	    // InternalBacktrackingContentAssistTestLanguage.g:5650:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -1806,7 +1806,7 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalBacktrackingContentAssistTestLanguage.g:5679:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // InternalBacktrackingContentAssistTestLanguage.g:5650:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -1849,12 +1849,12 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBacktrackingContentAssistTestLanguage.g:5681:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // InternalBacktrackingContentAssistTestLanguage.g:5681:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // InternalBacktrackingContentAssistTestLanguage.g:5652:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // InternalBacktrackingContentAssistTestLanguage.g:5652:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // InternalBacktrackingContentAssistTestLanguage.g:5681:24: ( options {greedy=false; } : . )*
+            // InternalBacktrackingContentAssistTestLanguage.g:5652:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -1879,7 +1879,7 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // InternalBacktrackingContentAssistTestLanguage.g:5681:52: .
+            	    // InternalBacktrackingContentAssistTestLanguage.g:5652:52: .
             	    {
             	    matchAny(); 
 
@@ -1909,12 +1909,12 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBacktrackingContentAssistTestLanguage.g:5683:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // InternalBacktrackingContentAssistTestLanguage.g:5683:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // InternalBacktrackingContentAssistTestLanguage.g:5654:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // InternalBacktrackingContentAssistTestLanguage.g:5654:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // InternalBacktrackingContentAssistTestLanguage.g:5683:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalBacktrackingContentAssistTestLanguage.g:5654:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -1927,7 +1927,7 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // InternalBacktrackingContentAssistTestLanguage.g:5683:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalBacktrackingContentAssistTestLanguage.g:5654:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -1947,7 +1947,7 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // InternalBacktrackingContentAssistTestLanguage.g:5683:40: ( ( '\\r' )? '\\n' )?
+            // InternalBacktrackingContentAssistTestLanguage.g:5654:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -1956,9 +1956,9 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // InternalBacktrackingContentAssistTestLanguage.g:5683:41: ( '\\r' )? '\\n'
+                    // InternalBacktrackingContentAssistTestLanguage.g:5654:41: ( '\\r' )? '\\n'
                     {
-                    // InternalBacktrackingContentAssistTestLanguage.g:5683:41: ( '\\r' )?
+                    // InternalBacktrackingContentAssistTestLanguage.g:5654:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -1967,7 +1967,7 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // InternalBacktrackingContentAssistTestLanguage.g:5683:41: '\\r'
+                            // InternalBacktrackingContentAssistTestLanguage.g:5654:41: '\\r'
                             {
                             match('\r'); 
 
@@ -1999,10 +1999,10 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBacktrackingContentAssistTestLanguage.g:5685:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // InternalBacktrackingContentAssistTestLanguage.g:5685:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalBacktrackingContentAssistTestLanguage.g:5656:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalBacktrackingContentAssistTestLanguage.g:5656:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // InternalBacktrackingContentAssistTestLanguage.g:5685:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalBacktrackingContentAssistTestLanguage.g:5656:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -2056,8 +2056,8 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBacktrackingContentAssistTestLanguage.g:5687:16: ( . )
-            // InternalBacktrackingContentAssistTestLanguage.g:5687:18: .
+            // InternalBacktrackingContentAssistTestLanguage.g:5658:16: ( . )
+            // InternalBacktrackingContentAssistTestLanguage.g:5658:18: .
             {
             matchAny(); 
 
@@ -2640,7 +2640,7 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
     static final String DFA12_acceptS =
         "\6\uffff\1\6\1\7\1\10\1\11\6\uffff\1\26\1\uffff\1\31\10\uffff\1\51\1\52\10\uffff\1\71\1\uffff\1\74\1\75\1\76\1\77\1\100\1\uffff\1\110\1\111\2\uffff\1\115\1\116\1\uffff\1\110\1\21\1\2\4\uffff\1\6\1\7\1\10\1\11\10\uffff\1\27\1\53\1\22\1\23\1\32\1\24\1\25\1\26\1\30\1\31\13\uffff\1\51\1\52\10\uffff\1\64\1\70\1\66\1\67\1\65\1\71\1\113\1\114\1\72\1\74\1\75\1\76\1\77\1\100\1\uffff\1\111\1\112\1\115\10\uffff\1\107\1\uffff\1\102\27\uffff\1\62\6\uffff\1\5\3\uffff\1\14\3\uffff\1\20\4\uffff\1\44\3\uffff\1\43\14\uffff\1\73\1\61\1\63\1\106\1\1\2\uffff\1\101\1\uffff\1\13\3\uffff\1\17\2\uffff\1\104\2\uffff\1\35\11\uffff\1\54\1\103\1\uffff\1\57\7\uffff\1\105\12\uffff\1\50\1\55\1\uffff\1\4\1\12\6\uffff\1\36\2\uffff\1\40\4\uffff\1\3\1\56\1\60\1\15\1\uffff\1\33\1\34\3\uffff\1\42\3\uffff\1\45\11\uffff\1\16\1\uffff\1\41\1\47\1\46\5\uffff\1\37";
     static final String DFA12_specialS =
-        "\1\0\56\uffff\1\1\1\2\u00f7\uffff}>";
+        "\1\2\56\uffff\1\0\1\1\u00f7\uffff}>";
     static final String[] DFA12_transitionS = {
             "\11\62\2\61\2\62\1\61\22\62\1\61\1\62\1\57\4\62\1\60\1\6\1\10\1\45\1\22\1\7\1\16\1\15\1\46\12\56\1\2\1\50\1\43\1\11\1\44\1\20\1\47\1\55\1\23\1\31\1\55\1\21\3\55\1\24\5\55\1\30\2\55\1\25\1\26\1\32\1\27\5\55\1\52\1\62\1\53\1\17\1\55\1\62\1\42\1\1\1\3\1\5\1\14\1\36\2\55\1\12\2\55\1\54\1\55\1\37\1\41\1\13\2\55\1\4\1\35\3\55\1\40\2\55\1\33\1\51\1\34\uff82\62",
             "\1\63",
@@ -2977,6 +2977,26 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         	int _s = s;
             switch ( s ) {
                     case 0 : 
+                        int LA12_47 = input.LA(1);
+
+                        s = -1;
+                        if ( ((LA12_47>='\u0000' && LA12_47<='\uFFFF')) ) {s = 118;}
+
+                        else s = 50;
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 1 : 
+                        int LA12_48 = input.LA(1);
+
+                        s = -1;
+                        if ( ((LA12_48>='\u0000' && LA12_48<='\uFFFF')) ) {s = 118;}
+
+                        else s = 50;
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 2 : 
                         int LA12_0 = input.LA(1);
 
                         s = -1;
@@ -3079,26 +3099,6 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
                         else if ( ((LA12_0>='\t' && LA12_0<='\n')||LA12_0=='\r'||LA12_0==' ') ) {s = 49;}
 
                         else if ( ((LA12_0>='\u0000' && LA12_0<='\b')||(LA12_0>='\u000B' && LA12_0<='\f')||(LA12_0>='\u000E' && LA12_0<='\u001F')||LA12_0=='!'||(LA12_0>='#' && LA12_0<='&')||LA12_0=='\\'||LA12_0=='`'||(LA12_0>='~' && LA12_0<='\uFFFF')) ) {s = 50;}
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 1 : 
-                        int LA12_47 = input.LA(1);
-
-                        s = -1;
-                        if ( ((LA12_47>='\u0000' && LA12_47<='\uFFFF')) ) {s = 118;}
-
-                        else s = 50;
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 2 : 
-                        int LA12_48 = input.LA(1);
-
-                        s = -1;
-                        if ( ((LA12_48>='\u0000' && LA12_48<='\uFFFF')) ) {s = 118;}
-
-                        else s = 50;
 
                         if ( s>=0 ) return s;
                         break;

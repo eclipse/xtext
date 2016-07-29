@@ -28,7 +28,7 @@ import org.eclipse.xtext.ui.editor.contentassist.ITemplateProposalProvider;
 import org.eclipse.xtext.ui.editor.templates.ContextTypeIdHelper;
 import org.eclipse.xtext.ui.editor.templates.DefaultTemplateProposalProvider;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
-import org.eclipse.xtext.ui.tests.Activator;
+import org.eclipse.xtext.ui.tests.ui.internal.TestsActivator;
 import org.eclipse.xtext.ui.tests.editor.contentassist.services.ContentAssistCustomizingTestLanguageGrammarAccess;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.ContentAssistCustomizingTestLanguageUiModule;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.contentassist.ContentAssistCustomizingTestLanguageProposalProvider;
@@ -153,7 +153,7 @@ public class ContentAssistCustomizingTest extends AbstractContentAssistProcessor
 			public Injector createInjector() {
 				return Guice.createInjector(Modules2.mixin(
 						new ContentAssistCustomizingTestLanguageRuntimeModule(),
-						new ContentAssistCustomizingTestLanguageUiModule(Activator.getInstance()) {
+						new ContentAssistCustomizingTestLanguageUiModule(TestsActivator.getInstance()) {
 							@Override
 							public Class<? extends IContentProposalProvider> bindIContentProposalProvider() {
 								return TestableProposalProvider.class;

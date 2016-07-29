@@ -3,20 +3,23 @@
  */
 package org.eclipse.xtext.ui.tests.services;
 
-import com.google.inject.Singleton;
 import com.google.inject.Inject;
-
+import com.google.inject.Singleton;
 import java.util.List;
-
-import org.eclipse.xtext.*;
-import org.eclipse.xtext.service.GrammarProvider;
-import org.eclipse.xtext.service.AbstractElementFinder.*;
-
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.Group;
+import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
+import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder;
+import org.eclipse.xtext.service.GrammarProvider;
 
 @Singleton
 public class FoldingTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
-	
 	
 	public class FoldingModelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.FoldingTestLanguage.FoldingModel");
@@ -26,14 +29,13 @@ public class FoldingTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		//FoldingModel:
 		//	elements+=Element*;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//elements+=Element*
 		public Assignment getElementsAssignment() { return cElementsAssignment; }
-
+		
 		//Element
 		public RuleCall getElementsElementParserRuleCall_0() { return cElementsElementParserRuleCall_0; }
 	}
-
 	public class ElementElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.FoldingTestLanguage.Element");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -49,25 +51,25 @@ public class FoldingTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		//	subelements+=Element*
 		//	'end';
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'element' name=ID subelements+=Element* 'end'
 		public Group getGroup() { return cGroup; }
-
+		
 		//'element'
 		public Keyword getElementKeyword_0() { return cElementKeyword_0; }
-
+		
 		//name=ID
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
-
+		
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
-
+		
 		//subelements+=Element*
 		public Assignment getSubelementsAssignment_2() { return cSubelementsAssignment_2; }
-
+		
 		//Element
 		public RuleCall getSubelementsElementParserRuleCall_2_0() { return cSubelementsElementParserRuleCall_2_0; }
-
+		
 		//'end'
 		public Keyword getEndKeyword_3() { return cEndKeyword_3; }
 	}
@@ -77,12 +79,12 @@ public class FoldingTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	private final ElementElements pElement;
 	
 	private final Grammar grammar;
-
+	
 	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public FoldingTestLanguageGrammarAccess(GrammarProvider grammarProvider,
-		TerminalsGrammarAccess gaTerminals) {
+			TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
 		this.pFoldingModel = new FoldingModelElements();
@@ -110,7 +112,7 @@ public class FoldingTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		return grammar;
 	}
 	
-
+	
 	public TerminalsGrammarAccess getTerminalsGrammarAccess() {
 		return gaTerminals;
 	}
@@ -125,7 +127,7 @@ public class FoldingTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	public ParserRule getFoldingModelRule() {
 		return getFoldingModelAccess().getRule();
 	}
-
+	
 	//Element:
 	//	'element' name=ID
 	//	subelements+=Element*
@@ -137,47 +139,47 @@ public class FoldingTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	public ParserRule getElementRule() {
 		return getElementAccess().getRule();
 	}
-
+	
 	//terminal ID:
 	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
-	} 
-
+	}
+	
 	//terminal INT returns ecore::EInt:
 	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
-	} 
-
+	}
+	
 	//terminal STRING:
 	//	'"' ('\\' . | !('\\' | '"'))* '"' |
 	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
-	} 
-
+	}
+	
 	//terminal ML_COMMENT:
 	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal SL_COMMENT:
 	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal WS:
 	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
-	} 
-
+	}
+	
 	//terminal ANY_OTHER:
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
-	} 
+	}
 }

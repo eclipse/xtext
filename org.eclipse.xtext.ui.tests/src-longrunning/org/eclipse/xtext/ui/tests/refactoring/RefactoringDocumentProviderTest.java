@@ -29,7 +29,7 @@ import org.eclipse.xtext.ui.refactoring.impl.DefaultRefactoringDocumentProvider.
 import org.eclipse.xtext.ui.refactoring.impl.EditorDocumentChange;
 import org.eclipse.xtext.ui.refactoring.impl.IRefactoringDocument;
 import org.eclipse.xtext.ui.refactoring.impl.StatusWrapper;
-import org.eclipse.xtext.ui.tests.Activator;
+import org.eclipse.xtext.ui.tests.ui.internal.TestsActivator;
 import org.junit.Test;
 
 import com.google.inject.Inject;
@@ -66,7 +66,7 @@ public class RefactoringDocumentProviderTest extends AbstractEditorTest {
 		super.setUp();
 		IJavaProject project = JavaProjectSetupUtil.createJavaProject(TEST_PROJECT);
 		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
-		Injector injector = Activator.getInstance().getInjector(getEditorId());
+		Injector injector = TestsActivator.getInstance().getInjector(getEditorId());
 		injector.injectMembers(this);
 		testFile = IResourcesSetupUtil.createFile(TEST_FILE_PATH, TEST_FILE_CONTENT);
 		textEdit = new ReplaceEdit(0, 1, "C");

@@ -32,7 +32,7 @@ import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.occurrences.IOccurrenceComputer;
 import org.eclipse.xtext.ui.editor.occurrences.MarkOccurrenceActionContributor;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
-import org.eclipse.xtext.ui.tests.Activator;
+import org.eclipse.xtext.ui.tests.ui.internal.TestsActivator;
 import org.eclipse.xtext.ui.tests.editor.outline.DisplaySafeSyncer;
 import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.util.Tuples;
@@ -65,7 +65,7 @@ public class MarkOccurrencesTest extends AbstractEditorTest {
 	@Override
 	public void setUp() throws Exception {
 		super.setUp();
-		Activator.getInstance().getInjector(getEditorId()).injectMembers(this);
+		TestsActivator.getInstance().getInjector(getEditorId()).injectMembers(this);
 		IJavaProject project = JavaProjectSetupUtil.createJavaProject("test");
 		IResourcesSetupUtil.addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
 		setMarkOccurrences(false);

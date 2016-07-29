@@ -5,7 +5,6 @@ grammar InternalEncodingUiTestLanguage;
 
 options {
 	superClass=AbstractInternalAntlrParser;
-	
 }
 
 @lexer::header {
@@ -17,7 +16,7 @@ import org.eclipse.xtext.parser.antlr.Lexer;
 }
 
 @parser::header {
-package org.eclipse.xtext.ui.tests.editor.encoding.parser.antlr.internal; 
+package org.eclipse.xtext.ui.tests.editor.encoding.parser.antlr.internal;
 
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
@@ -35,116 +34,105 @@ import org.eclipse.xtext.ui.tests.editor.encoding.services.EncodingUiTestLanguag
 @parser::members {
 
  	private EncodingUiTestLanguageGrammarAccess grammarAccess;
- 	
+
     public InternalEncodingUiTestLanguageParser(TokenStream input, EncodingUiTestLanguageGrammarAccess grammarAccess) {
         this(input);
         this.grammarAccess = grammarAccess;
         registerRules(grammarAccess.getGrammar());
     }
-    
+
     @Override
     protected String getFirstRuleName() {
-    	return "Model";	
+    	return "Model";
    	}
-   	
+
    	@Override
    	protected EncodingUiTestLanguageGrammarAccess getGrammarAccess() {
    		return grammarAccess;
    	}
+
 }
 
-@rulecatch { 
-    catch (RecognitionException re) { 
-        recover(input,re); 
+@rulecatch {
+    catch (RecognitionException re) {
+        recover(input,re);
         appendSkippedTokens();
-    } 
+    }
 }
-
-
-
 
 // Entry rule entryRuleModel
-entryRuleModel returns [EObject current=null] 
-	:
+entryRuleModel returns [EObject current=null]:
 	{ newCompositeNode(grammarAccess.getModelRule()); }
-	 iv_ruleModel=ruleModel 
-	 { $current=$iv_ruleModel.current; } 
-	 EOF 
-;
+	iv_ruleModel=ruleModel
+	{ $current=$iv_ruleModel.current; }
+	EOF;
 
 // Rule Model
-ruleModel returns [EObject current=null] 
-    @init { enterRule(); 
-    }
-    @after { leaveRule(); }:
-(
-(
-		{ 
-	        newCompositeNode(grammarAccess.getModelAccess().getWordsWordParserRuleCall_0()); 
-	    }
-		lv_words_0_0=ruleWord		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getModelRule());
-	        }
-       		add(
-       			$current, 
-       			"words",
-        		lv_words_0_0, 
-        		"org.eclipse.xtext.ui.tests.editor.encoding.EncodingUiTestLanguage.Word");
-	        afterParserOrEnumRuleCall();
-	    }
-
-)
-)*
+ruleModel returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			{
+				newCompositeNode(grammarAccess.getModelAccess().getWordsWordParserRuleCall_0());
+			}
+			lv_words_0_0=ruleWord
+			{
+				if ($current==null) {
+					$current = createModelElementForParent(grammarAccess.getModelRule());
+				}
+				add(
+					$current,
+					"words",
+					lv_words_0_0,
+					"org.eclipse.xtext.ui.tests.editor.encoding.EncodingUiTestLanguage.Word");
+				afterParserOrEnumRuleCall();
+			}
+		)
+	)*
 ;
-
-
-
-
 
 // Entry rule entryRuleWord
-entryRuleWord returns [EObject current=null] 
-	:
+entryRuleWord returns [EObject current=null]:
 	{ newCompositeNode(grammarAccess.getWordRule()); }
-	 iv_ruleWord=ruleWord 
-	 { $current=$iv_ruleWord.current; } 
-	 EOF 
-;
+	iv_ruleWord=ruleWord
+	{ $current=$iv_ruleWord.current; }
+	EOF;
 
 // Rule Word
-ruleWord returns [EObject current=null] 
-    @init { enterRule(); 
-    }
-    @after { leaveRule(); }:
-(
-(
-		lv_value_0_0=RULE_LEXEME
-		{
-			newLeafNode(lv_value_0_0, grammarAccess.getWordAccess().getValueLEXEMETerminalRuleCall_0()); 
-		}
-		{
-	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getWordRule());
-	        }
-       		setWithLastConsumed(
-       			$current, 
-       			"value",
-        		lv_value_0_0, 
-        		"org.eclipse.xtext.ui.tests.editor.encoding.EncodingUiTestLanguage.LEXEME");
-	    }
-
-)
-)
+ruleWord returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			lv_value_0_0=RULE_LEXEME
+			{
+				newLeafNode(lv_value_0_0, grammarAccess.getWordAccess().getValueLEXEMETerminalRuleCall_0());
+			}
+			{
+				if ($current==null) {
+					$current = createModelElement(grammarAccess.getWordRule());
+				}
+				setWithLastConsumed(
+					$current,
+					"value",
+					lv_value_0_0,
+					"org.eclipse.xtext.ui.tests.editor.encoding.EncodingUiTestLanguage.LEXEME");
+			}
+		)
+	)
 ;
-
-
-
-
 
 RULE_LEXEME : ('a'..'z'|'A'..'Z'|'0'..'9'|'\u00E4'|'\u00F6'|'\u00FC'|'\u00DF'|'\u00C4'|'\u00D6'|'\u00DC')*;
 
 RULE_WS : (' '|'\t'|'\r'|'\n')+;
 
 RULE_ANY_OTHER : .;
-
-

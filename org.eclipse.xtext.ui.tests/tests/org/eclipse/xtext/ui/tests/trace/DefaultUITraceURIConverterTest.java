@@ -17,7 +17,7 @@ import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.generator.trace.AbsoluteURI;
 import org.eclipse.xtext.generator.trace.ITraceURIConverter;
 import org.eclipse.xtext.generator.trace.SourceRelativeURI;
-import org.eclipse.xtext.ui.tests.Activator;
+import org.eclipse.xtext.ui.tests.ui.internal.TestsActivator;
 import org.eclipse.xtext.ui.workspace.EclipseProjectConfigProvider;
 import org.eclipse.xtext.workspace.IProjectConfig;
 import org.junit.AfterClass;
@@ -59,7 +59,7 @@ public class DefaultUITraceURIConverterTest extends Assert {
 	private String ext;
 
 	public DefaultUITraceURIConverterTest() {
-		Activator.getInstance().getInjector(Activator.ORG_ECLIPSE_XTEXT_UI_TESTS_TESTLANGUAGE).injectMembers(this);
+		TestsActivator.getInstance().getInjector(TestsActivator.ORG_ECLIPSE_XTEXT_UI_TESTS_TESTLANGUAGE).injectMembers(this);
 	}
 
 	private void assertConversion(String expected, IFile source) {

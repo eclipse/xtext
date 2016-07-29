@@ -12,7 +12,7 @@ import static com.google.inject.util.Modules.*;
 
 import org.eclipse.xtext.ui.guice.AbstractGuiceAwareExecutableExtensionFactory;
 import org.eclipse.xtext.ui.resource.generic.EmfUiModule;
-import org.eclipse.xtext.ui.tests.Activator;
+import org.eclipse.xtext.ui.tests.ui.internal.TestsActivator;
 import org.eclipse.xtext.ui.tests.refactoring.ReferringXmiResourceModule;
 import org.osgi.framework.Bundle;
 
@@ -25,14 +25,14 @@ public class ReferringXmiExecutableExtensionFactory extends AbstractGuiceAwareEx
 
 	@Override
 	protected Bundle getBundle() {
-		return Activator.getInstance().getBundle();
+		return TestsActivator.getInstance().getBundle();
 	}
 
 	@Override
 	protected Injector getInjector() {
 		return createInjector(override(
 				override(new ReferringXmiResourceModule()).with(new org.eclipse.xtext.ui.shared.SharedStateModule()))
-				.with(new EmfUiModule(Activator.getInstance())));
+				.with(new EmfUiModule(TestsActivator.getInstance())));
 	}
 
 }

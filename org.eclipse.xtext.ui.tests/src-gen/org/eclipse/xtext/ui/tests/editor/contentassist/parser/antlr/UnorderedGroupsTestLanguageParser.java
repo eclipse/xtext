@@ -4,36 +4,37 @@
 package org.eclipse.xtext.ui.tests.editor.contentassist.parser.antlr;
 
 import com.google.inject.Inject;
-
+import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.ui.tests.editor.contentassist.parser.antlr.internal.InternalUnorderedGroupsTestLanguageParser;
 import org.eclipse.xtext.ui.tests.editor.contentassist.services.UnorderedGroupsTestLanguageGrammarAccess;
 
-public class UnorderedGroupsTestLanguageParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {
-	
+public class UnorderedGroupsTestLanguageParser extends AbstractAntlrParser {
+
 	@Inject
 	private UnorderedGroupsTestLanguageGrammarAccess grammarAccess;
-	
+
 	@Override
 	protected void setInitialHiddenTokens(XtextTokenStream tokenStream) {
 		tokenStream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
 	}
 	
+
 	@Override
-	protected org.eclipse.xtext.ui.tests.editor.contentassist.parser.antlr.internal.InternalUnorderedGroupsTestLanguageParser createParser(XtextTokenStream stream) {
-		return new org.eclipse.xtext.ui.tests.editor.contentassist.parser.antlr.internal.InternalUnorderedGroupsTestLanguageParser(stream, getGrammarAccess());
+	protected InternalUnorderedGroupsTestLanguageParser createParser(XtextTokenStream stream) {
+		return new InternalUnorderedGroupsTestLanguageParser(stream, getGrammarAccess());
 	}
-	
+
 	@Override 
 	protected String getDefaultRuleName() {
 		return "Model";
 	}
-	
+
 	public UnorderedGroupsTestLanguageGrammarAccess getGrammarAccess() {
 		return this.grammarAccess;
 	}
-	
+
 	public void setGrammarAccess(UnorderedGroupsTestLanguageGrammarAccess grammarAccess) {
 		this.grammarAccess = grammarAccess;
 	}
-	
 }

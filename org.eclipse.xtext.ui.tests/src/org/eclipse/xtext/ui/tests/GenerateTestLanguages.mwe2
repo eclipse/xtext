@@ -9,228 +9,260 @@ module org.eclipse.xtext.ui.tests.GenerateTestLanguages
 
 import org.eclipse.emf.mwe2.runtime.workflow.Workflow
 import org.eclipse.emf.mwe.utils.*
-import org.eclipse.xtext.generator.*
-import org.eclipse.xtext.ui.generator.*
+
+import org.eclipse.emf.mwe2.runtime.workflow.Workflow
+import org.eclipse.emf.mwe.utils.*
+import org.eclipse.xtext.xtext.generator.*
+import org.eclipse.xtext.xtext.generator.ui.*
 
 var projectName = "org.eclipse.xtext.ui.tests"
 var runtimeProject = "../${projectName}"
 var lineDelimiter = '\n'
 
 Workflow {
-	bean = StandaloneSetup {
-		ignoreBrokenProjectFiles = true
-		platformUri = "${runtimeProject}/../.."
-	} 
-	
-	component = DirectoryCleaner {
-		directory="${runtimeProject}/src-gen"
-	} 
-	
-	component = Generator auto-inject {
-		pathRtProject = "${runtimeProject}"
-		pathUiProject = "${runtimeProject}"
-		projectNameRt = "${projectName}"
-		activator = "org.eclipse.xtext.ui.tests.Activator"
+	component = XtextGenerator {
+		configuration = {
+			project = model.project.StandardProjectConfig {
+				baseName = projectName
+				rootPath = ".."
+				runtime = {
+					manifest = {
+						merge = false
+					}
+				}
+				runtimeTest = {
+					enabled = true
+					manifest = {
+						merge = false
+					}
+					root = runtimeProject
+					src = "${runtimeProject}/src"
+					srcGen = "${runtimeProject}/src-gen"
+				}
+				genericIde = {
+					enabled = true
+					root = runtimeProject
+					src = "${runtimeProject}/src"
+					srcGen = "${runtimeProject}/src-gen"
+				}
+				eclipsePlugin = {
+					enabled = true
+					root = runtimeProject
+					src = "${runtimeProject}/src"
+					srcGen = "${runtimeProject}/src-gen"
+				}
+				eclipsePluginTest = {
+					enabled = true
+					root = runtimeProject
+					src = "${runtimeProject}/src"
+					srcGen = "${runtimeProject}/src-gen"
+				}
+			}
+			code = {
+				encoding = 'ISO-8859-1'
+				lineDelimiter = lineDelimiter
+				preferXtendStubs = false
+			}
+		}
 		
 		language = { 
-			uri="classpath:/org/eclipse/xtext/ui/tests/XtextGrammarUiTestLanguage.xtext"
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/XtextGrammarUiTestLanguage.xtext"
 			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
 		}
 		language = { 
-			uri="classpath:/org/eclipse/xtext/ui/tests/linking/ImportUriUiTestLanguage.xtext"
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/linking/ImportUriUiTestLanguage.xtext"
 			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
 		}
 		language = { 
-			uri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/TwoContextsTestLanguage.xtext"
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/TwoContextsTestLanguage.xtext"
 			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
 		}
 		language = { 
-			uri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/Bug286935TestLanguage.xtext"
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/Bug286935TestLanguage.xtext"
 			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
 		}
 		language = { 
-			uri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/Bug287941TestLanguage.xtext"
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/Bug287941TestLanguage.xtext"
 			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
 		}
 		language = { 
-			uri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/Bug288734TestLanguage.xtext"
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/Bug288734TestLanguage.xtext"
 			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
 		}
 		language = { 
-			uri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/Bug288760TestLanguage.xtext"
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/Bug288760TestLanguage.xtext"
 			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
 		}
 		language = { 
-			uri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/Bug289187TestLanguage.xtext"
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/Bug289187TestLanguage.xtext"
 			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
 		}
 		language = { 
-			uri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/Bug291022TestLanguage.xtext"
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/Bug291022TestLanguage.xtext"
 			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
 		}
 		language = { 
-			uri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/Bug303200TestLanguage.xtext"
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/Bug303200TestLanguage.xtext"
 			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {
 				backtrack=true
 			}
 		}
 		language = { 
-			uri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/Bug304681TestLanguage.xtext"
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/Bug304681TestLanguage.xtext"
 			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {
 				backtrack = true
 			}
 		}
 		language = { 
-			uri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/Bug307519TestLanguage.xtext"
-			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragmentsAntlrCA {}
-		}
-		language = { 
-			uri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/Bug309949TestLanguage.xtext"
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/Bug307519TestLanguage.xtext"
 			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
 		}
 		language = { 
-			uri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/Bug332217TestLanguage.xtext"
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/Bug309949TestLanguage.xtext"
 			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
 		}
 		language = { 
-			uri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/Bug348427TestLanguage.xtext"
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/Bug332217TestLanguage.xtext"
 			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
 		}
 		language = { 
-			uri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/Bug348199TestLanguage.xtext"
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/Bug348427TestLanguage.xtext"
 			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
 		}
 		language = { 
-			uri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/Bug360834TestLanguage.xtext"
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/Bug348199TestLanguage.xtext"
 			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
 		}
 		language = { 
-			uri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/Bug347012TestLanguage.xtext"
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/Bug360834TestLanguage.xtext"
 			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
 		}
 		language = { 
-			uri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/Bug381381TestLanguage.xtext"
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/Bug347012TestLanguage.xtext"
 			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
 		}
 		language = { 
-			uri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/BacktrackingContentAssistTestLanguage.xtext"
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/Bug381381TestLanguage.xtext"
+			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
+		}
+		language = { 
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/BacktrackingContentAssistTestLanguage.xtext"
 			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragmentsWithConversionTimeout {
 				backtrack=true
 			}
 		}
 		language = { 
-			uri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/ContentAssistContextTestLanguage.xtext"
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/ContentAssistContextTestLanguage.xtext"
 			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
 		}
 		language = { 
-			uri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/ContentAssistCustomizingTestLanguage.xtext"
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/ContentAssistCustomizingTestLanguage.xtext"
 			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
 		}
 		language = { 
-			uri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/CrossReferenceProposalTestLanguage.xtext"
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/CrossReferenceProposalTestLanguage.xtext"
 			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
 		}
 		language = { 
-			uri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/DatatypeRuleTestLanguage.xtext"
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/DatatypeRuleTestLanguage.xtext"
 			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
 		}
 		language = { 
-			uri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/LookAheadContentAssistTestLanguage.xtext"
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/LookAheadContentAssistTestLanguage.xtext"
 			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
 		}
 		language = { 
-			uri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/DomainModelTestLanguage.xtext"
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/DomainModelTestLanguage.xtext"
 			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
 		}
 		language = { 
-			uri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/UnorderedGroupsTestLanguage.xtext"
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/UnorderedGroupsTestLanguage.xtext"
 			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
 		}
 		language = { 
-			uri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/ParametersTestLanguage.xtext"
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/ParametersTestLanguage.xtext"
 			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
 		}
 		language = { 
-			uri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/ParametersTestLanguageEx.xtext"
-			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragmentsAntlrCA {}
-		}
-		language = { 
-			uri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/TwoParametersTestLanguage.xtext"
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/ParametersTestLanguageEx.xtext"
 			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
 		}
 		language = { 
-			uri="classpath:/org/eclipse/xtext/ui/tests/editor/outline/OutlineTestLanguage.xtext"
-			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
-			fragment = builder.BuilderIntegrationFragment {}
-			fragment = scoping.ImportNamespacesScopingFragment {}
-		}
-		language = { 
-			uri="classpath:/org/eclipse/xtext/ui/tests/parser/keywords/KeywordsUiTestLanguage.xtext"
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/TwoParametersTestLanguage.xtext"
 			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
 		}
 		language = { 
-			uri="classpath:/org/eclipse/xtext/ui/tests/testlanguages/ContentAssistTestLanguage.xtext"
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/editor/outline/OutlineTestLanguage.xtext"
+			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
+			fragment = builder.BuilderIntegrationFragment2 {}
+			fragment = scoping.ImportNamespacesScopingFragment2 {}
+		}
+		language = { 
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/parser/keywords/KeywordsUiTestLanguage.xtext"
 			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
 		}
 		language = { 
-			uri="classpath:/org/eclipse/xtext/ui/tests/testlanguages/ReferenceGrammarUiTestLanguage.xtext"
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/testlanguages/ContentAssistTestLanguage.xtext"
 			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
 		}
 		language = { 
-			uri="classpath:/org/eclipse/xtext/ui/tests/editor/encoding/EncodingUiTestLanguage.xtext" 
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/testlanguages/ReferenceGrammarUiTestLanguage.xtext"
 			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
 		}
 		language = { 
-			uri="classpath:/org/eclipse/xtext/ui/tests/enumrules/EnumRulesUiTestLanguage.xtext"
-			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {
-				genModels = "platform:/resource/org.eclipse.xtext.ui.tests/src/org/eclipse/xtext/ui/tests/enumrules/enumsUi.genmodel"
-			}
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/editor/encoding/EncodingUiTestLanguage.xtext" 
+			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
 		}
 		language = { 
-			uri="classpath:/org/eclipse/xtext/ui/tests/TestLanguage.xtext"
-			fragment = CompositeGeneratorFragment {
+			referencedResource = "platform:/resource/org.eclipse.xtext.ui.tests/src/org/eclipse/xtext/ui/tests/enumrules/enumsUi.genmodel"
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/enumrules/EnumRulesUiTestLanguage.xtext"
+			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
+		}
+		language = { 
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/TestLanguage.xtext"
+			fragment = CompositeGeneratorFragment2 {
 				fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragmentsBuilder auto-inject {}
-				fragment = scoping.ImportNamespacesScopingFragment {}
-				fragment = exporting.QualifiedNamesFragment {}
+				fragment = scoping.ImportNamespacesScopingFragment2 {}
+				fragment = exporting.QualifiedNamesFragment2 {}
 			}
 		}
 		language = { 
-			uri="classpath:/org/eclipse/xtext/ui/tests/FoldingTestLanguage.xtext"
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/FoldingTestLanguage.xtext"
 			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragmentsBuilder {}
 		}
 		language = {
-			uri="classpath:/org/eclipse/xtext/ui/tests/editor/bracketmatching/BmTestLanguage.xtext"
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/editor/bracketmatching/BmTestLanguage.xtext"
 			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragmentsBuilder {}
 		}
 		language = { 
-			uri="classpath:/org/eclipse/xtext/ui/tests/quickfix/QuickfixCrossrefTestLanguage.xtext"
-			fragment = CompositeGeneratorFragment {
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/quickfix/QuickfixCrossrefTestLanguage.xtext"
+			fragment = CompositeGeneratorFragment2 {
 				fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
-				fragment = validation.JavaValidatorFragment {}
-				fragment = quickfix.QuickfixProviderFragment {}
+				fragment = validation.ValidatorFragment2 {}
+				fragment = quickfix.QuickfixProviderFragment2 {}
 			}
 		}
 		language = {
-			uri="classpath:/org/eclipse/xtext/ui/tests/refactoring/RefactoringTestLanguage.xtext"
-			fragment = CompositeGeneratorFragment {
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/refactoring/RefactoringTestLanguage.xtext"
+			fragment = CompositeGeneratorFragment2 {
 				fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragmentsBuilder auto-inject {}
-				fragment = scoping.ImportNamespacesScopingFragment {}
-				fragment = exporting.QualifiedNamesFragment {}
-				fragment = refactoring.RefactorElementNameFragment {}
+				fragment = scoping.ImportNamespacesScopingFragment2 {}
+				fragment = exporting.QualifiedNamesFragment2 {}
+				fragment = ui.refactoring.RefactorElementNameFragment2 {}
 			}
 		}
 		language = {
-			uri="classpath:/org/eclipse/xtext/ui/tests/refactoring/ReferringTestLanguage.xtext"
-			fragment = CompositeGeneratorFragment {
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/refactoring/ReferringTestLanguage.xtext"
+			fragment = CompositeGeneratorFragment2 {
 				fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragmentsBuilder auto-inject {}
-				fragment = scoping.ImportNamespacesScopingFragment {}
-				fragment = exporting.QualifiedNamesFragment {}
-				fragment = refactoring.RefactorElementNameFragment {}
+				fragment = scoping.ImportNamespacesScopingFragment2 {}
+				fragment = exporting.QualifiedNamesFragment2 {}
+				fragment = refactoring.RefactorElementNameFragment2 {}
 			}
 		}
 		language = {
-			uri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/Bug377311TestLanguage.xtext"
+			grammarUri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/Bug377311TestLanguage.xtext"
 			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
-		}
+		}  
 	}
 }

@@ -4,36 +4,37 @@
 package org.eclipse.xtext.ui.tests.editor.contentassist.parser.antlr;
 
 import com.google.inject.Inject;
-
+import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.ui.tests.editor.contentassist.parser.antlr.internal.InternalCrossReferenceProposalTestLanguageParser;
 import org.eclipse.xtext.ui.tests.editor.contentassist.services.CrossReferenceProposalTestLanguageGrammarAccess;
 
-public class CrossReferenceProposalTestLanguageParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {
-	
+public class CrossReferenceProposalTestLanguageParser extends AbstractAntlrParser {
+
 	@Inject
 	private CrossReferenceProposalTestLanguageGrammarAccess grammarAccess;
-	
+
 	@Override
 	protected void setInitialHiddenTokens(XtextTokenStream tokenStream) {
 		tokenStream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
 	}
 	
+
 	@Override
-	protected org.eclipse.xtext.ui.tests.editor.contentassist.parser.antlr.internal.InternalCrossReferenceProposalTestLanguageParser createParser(XtextTokenStream stream) {
-		return new org.eclipse.xtext.ui.tests.editor.contentassist.parser.antlr.internal.InternalCrossReferenceProposalTestLanguageParser(stream, getGrammarAccess());
+	protected InternalCrossReferenceProposalTestLanguageParser createParser(XtextTokenStream stream) {
+		return new InternalCrossReferenceProposalTestLanguageParser(stream, getGrammarAccess());
 	}
-	
+
 	@Override 
 	protected String getDefaultRuleName() {
 		return "Model";
 	}
-	
+
 	public CrossReferenceProposalTestLanguageGrammarAccess getGrammarAccess() {
 		return this.grammarAccess;
 	}
-	
+
 	public void setGrammarAccess(CrossReferenceProposalTestLanguageGrammarAccess grammarAccess) {
 		this.grammarAccess = grammarAccess;
 	}
-	
 }

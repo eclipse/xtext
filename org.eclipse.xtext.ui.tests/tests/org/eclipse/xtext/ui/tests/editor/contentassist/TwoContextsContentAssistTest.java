@@ -17,7 +17,7 @@ import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.ui.editor.contentassist.IContentProposalProvider;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
-import org.eclipse.xtext.ui.tests.Activator;
+import org.eclipse.xtext.ui.tests.ui.internal.TestsActivator;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.TwoContextsTestLanguageUiModule;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.contentassist.AbstractTwoContextsTestLanguageProposalProvider;
 import org.eclipse.xtext.util.Modules2;
@@ -46,7 +46,7 @@ public class TwoContextsContentAssistTest extends AbstractXtextTests {
 			public Injector createInjector() {
 				return Guice.createInjector(Modules2.mixin(
 						new TwoContextsTestLanguageRuntimeModule(),
-						new TwoContextsTestLanguageUiModule(Activator.getInstance()){
+						new TwoContextsTestLanguageUiModule(TestsActivator.getInstance()){
 					@Override
 					public Class<? extends IContentProposalProvider> bindIContentProposalProvider() {
 						return TwoContextsTestLanguageTestProposals.class;

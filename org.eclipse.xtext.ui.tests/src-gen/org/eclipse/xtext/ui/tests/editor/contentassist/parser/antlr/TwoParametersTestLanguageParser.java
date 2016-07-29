@@ -4,36 +4,37 @@
 package org.eclipse.xtext.ui.tests.editor.contentassist.parser.antlr;
 
 import com.google.inject.Inject;
-
+import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.ui.tests.editor.contentassist.parser.antlr.internal.InternalTwoParametersTestLanguageParser;
 import org.eclipse.xtext.ui.tests.editor.contentassist.services.TwoParametersTestLanguageGrammarAccess;
 
-public class TwoParametersTestLanguageParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {
-	
+public class TwoParametersTestLanguageParser extends AbstractAntlrParser {
+
 	@Inject
 	private TwoParametersTestLanguageGrammarAccess grammarAccess;
-	
+
 	@Override
 	protected void setInitialHiddenTokens(XtextTokenStream tokenStream) {
 		tokenStream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
 	}
 	
+
 	@Override
-	protected org.eclipse.xtext.ui.tests.editor.contentassist.parser.antlr.internal.InternalTwoParametersTestLanguageParser createParser(XtextTokenStream stream) {
-		return new org.eclipse.xtext.ui.tests.editor.contentassist.parser.antlr.internal.InternalTwoParametersTestLanguageParser(stream, getGrammarAccess());
+	protected InternalTwoParametersTestLanguageParser createParser(XtextTokenStream stream) {
+		return new InternalTwoParametersTestLanguageParser(stream, getGrammarAccess());
 	}
-	
+
 	@Override 
 	protected String getDefaultRuleName() {
 		return "ParserRuleParameters";
 	}
-	
+
 	public TwoParametersTestLanguageGrammarAccess getGrammarAccess() {
 		return this.grammarAccess;
 	}
-	
+
 	public void setGrammarAccess(TwoParametersTestLanguageGrammarAccess grammarAccess) {
 		this.grammarAccess = grammarAccess;
 	}
-	
 }

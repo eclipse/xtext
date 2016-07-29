@@ -7,39 +7,27 @@
  *******************************************************************************/
 module org.eclipse.xtext.ui.tests.TestLanguagesFragmentsWithConversionTimeout
 
-import org.eclipse.xtext.generator.*
-import org.eclipse.xtext.ui.generator.*
+import org.eclipse.xtext.xtext.generator.*
+import org.eclipse.xtext.xtext.generator.ui.*
 import de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
 import de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment
 
-var genModels =""
-var genModel = ""
-var basePackage = ""
-var javaModelDirectory = ""
-var xmiModelDirectory = ""
-var file.extensions = ""
 var classSplitting = true
 var skipGenerate = false
 var backtrack = false
 var memoize = false
 var emfRuntimeVersion = "2.9"
 
-CompositeGeneratorFragment {
-	fragment = ecore.EcoreGeneratorFragment auto-inject {}
-	fragment = grammarAccess.GrammarAccessFragment auto-inject {}
-	fragment = resourceFactory.ResourceFactoryFragment { 
-		fileExtensions = file.extensions
-	}
-	fragment = parser.antlr.XtextAntlrGeneratorFragment auto-inject {
+CompositeGeneratorFragment2 {
+	fragment = ecore.EMFGeneratorFragment2 auto-inject {}
+	fragment = grammarAccess.GrammarAccessFragment2 auto-inject {}
+	fragment = resourceFactory.ResourceFactoryFragment2 {}
+	fragment = parser.antlr.XtextAntlrGeneratorFragment2 auto-inject {
 		antlrParam = "-Xconversiontimeout" antlrParam = "10000"
 		options = auto-inject {}
 	}
-	fragment = serializer.SerializerFragment auto-inject {
-		srcGenOnly = true
+	fragment = serializer.SerializerFragment2 auto-inject {
+		generateStub = false
 	}
-	fragment = contentAssist.JavaBasedContentAssistFragment {}
-	fragment = parser.antlr.XtextAntlrUiGeneratorFragment auto-inject {
-		antlrParam = "-Xconversiontimeout" antlrParam = "10000"
-		options = auto-inject {}
-	}
+	fragment = contentAssist.ContentAssistFragment2 {}
 }

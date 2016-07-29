@@ -34,7 +34,7 @@ import org.eclipse.xtext.resource.containers.IAllContainersState;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.resource.XtextLiveScopeResourceSetProvider;
-import org.eclipse.xtext.ui.tests.Activator;
+import org.eclipse.xtext.ui.tests.ui.internal.TestsActivator;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
@@ -68,8 +68,8 @@ public class LiveShadowedAllContainerStateTest {
   
   @Before
   public void setUp() throws Exception {
-    Activator _instance = Activator.getInstance();
-    Injector _injector = _instance.getInjector(Activator.ORG_ECLIPSE_XTEXT_UI_TESTS_TESTLANGUAGE);
+    TestsActivator _instance = TestsActivator.getInstance();
+    Injector _injector = _instance.getInjector(TestsActivator.ORG_ECLIPSE_XTEXT_UI_TESTS_TESTLANGUAGE);
     _injector.injectMembers(this);
   }
   

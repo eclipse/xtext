@@ -3,20 +3,26 @@
  */
 package org.eclipse.xtext.ui.tests.editor.contentassist.services;
 
-import com.google.inject.Singleton;
 import com.google.inject.Inject;
-
+import com.google.inject.Singleton;
 import java.util.List;
-
-import org.eclipse.xtext.*;
-import org.eclipse.xtext.service.GrammarProvider;
-import org.eclipse.xtext.service.AbstractElementFinder.*;
-
+import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Alternatives;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.Group;
+import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
+import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder;
+import org.eclipse.xtext.service.GrammarProvider;
 
 @Singleton
 public class DatatypeRuleTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
-	
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.DatatypeRuleTestLanguage.Model");
@@ -25,11 +31,10 @@ public class DatatypeRuleTestLanguageGrammarAccess extends AbstractGrammarElemen
 		//Model:
 		//	Types;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//Types
 		public RuleCall getTypesParserRuleCall() { return cTypesParserRuleCall; }
 	}
-
 	public class TypesElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.DatatypeRuleTestLanguage.Types");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -43,23 +48,22 @@ public class DatatypeRuleTestLanguageGrammarAccess extends AbstractGrammarElemen
 		//	'Types'
 		//	types+=Type*;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//{Types} 'Types' types+=Type*
 		public Group getGroup() { return cGroup; }
-
+		
 		//{Types}
 		public Action getTypesAction_0() { return cTypesAction_0; }
-
+		
 		//'Types'
 		public Keyword getTypesKeyword_1() { return cTypesKeyword_1; }
-
+		
 		//types+=Type*
 		public Assignment getTypesAssignment_2() { return cTypesAssignment_2; }
-
+		
 		//Type
 		public RuleCall getTypesTypeParserRuleCall_2_0() { return cTypesTypeParserRuleCall_2_0; }
 	}
-
 	public class TypeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.DatatypeRuleTestLanguage.Type");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -69,17 +73,16 @@ public class DatatypeRuleTestLanguageGrammarAccess extends AbstractGrammarElemen
 		//Type:
 		//	SimpleType | CompositeType;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//SimpleType | CompositeType
 		public Alternatives getAlternatives() { return cAlternatives; }
-
+		
 		//SimpleType
 		public RuleCall getSimpleTypeParserRuleCall_0() { return cSimpleTypeParserRuleCall_0; }
-
+		
 		//CompositeType
 		public RuleCall getCompositeTypeParserRuleCall_1() { return cCompositeTypeParserRuleCall_1; }
 	}
-
 	public class SimpleTypeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.DatatypeRuleTestLanguage.SimpleType");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -91,23 +94,22 @@ public class DatatypeRuleTestLanguageGrammarAccess extends AbstractGrammarElemen
 		//SimpleType:
 		//	'Type' name=ID ';';
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'Type' name=ID ';'
 		public Group getGroup() { return cGroup; }
-
+		
 		//'Type'
 		public Keyword getTypeKeyword_0() { return cTypeKeyword_0; }
-
+		
 		//name=ID
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
-
+		
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
-
+		
 		//';'
 		public Keyword getSemicolonKeyword_2() { return cSemicolonKeyword_2; }
 	}
-
 	public class CompositeTypeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.DatatypeRuleTestLanguage.CompositeType");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -123,32 +125,31 @@ public class DatatypeRuleTestLanguageGrammarAccess extends AbstractGrammarElemen
 		//	'Composite' name=ID
 		//	'base' baseType=CompositeTypeEntry ';';
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//'Composite' name=ID 'base' baseType=CompositeTypeEntry ';'
 		public Group getGroup() { return cGroup; }
-
+		
 		//'Composite'
 		public Keyword getCompositeKeyword_0() { return cCompositeKeyword_0; }
-
+		
 		//name=ID
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
-
+		
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
-
+		
 		//'base'
 		public Keyword getBaseKeyword_2() { return cBaseKeyword_2; }
-
+		
 		//baseType=CompositeTypeEntry
 		public Assignment getBaseTypeAssignment_3() { return cBaseTypeAssignment_3; }
-
+		
 		//CompositeTypeEntry
 		public RuleCall getBaseTypeCompositeTypeEntryParserRuleCall_3_0() { return cBaseTypeCompositeTypeEntryParserRuleCall_3_0; }
-
+		
 		//';'
 		public Keyword getSemicolonKeyword_4() { return cSemicolonKeyword_4; }
 	}
-
 	public class CompositeTypeEntryElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.DatatypeRuleTestLanguage.CompositeTypeEntry");
 		private final Assignment cDataTypeAssignment = (Assignment)rule.eContents().get(1);
@@ -158,17 +159,16 @@ public class DatatypeRuleTestLanguageGrammarAccess extends AbstractGrammarElemen
 		//CompositeTypeEntry:
 		//	dataType=[Type|TypeId];
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//dataType=[Type|TypeId]
 		public Assignment getDataTypeAssignment() { return cDataTypeAssignment; }
-
+		
 		//[Type|TypeId]
 		public CrossReference getDataTypeTypeCrossReference_0() { return cDataTypeTypeCrossReference_0; }
-
+		
 		//TypeId
 		public RuleCall getDataTypeTypeTypeIdParserRuleCall_0_1() { return cDataTypeTypeTypeIdParserRuleCall_0_1; }
 	}
-
 	public class TypeIdElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.DatatypeRuleTestLanguage.TypeId");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -184,31 +184,31 @@ public class DatatypeRuleTestLanguageGrammarAccess extends AbstractGrammarElemen
 		//TypeId:
 		//	ID ('<' TypeId (',' TypeId)* '>')?;
 		@Override public ParserRule getRule() { return rule; }
-
+		
 		//ID ('<' TypeId (',' TypeId)* '>')?
 		public Group getGroup() { return cGroup; }
-
+		
 		//ID
 		public RuleCall getIDTerminalRuleCall_0() { return cIDTerminalRuleCall_0; }
-
+		
 		//('<' TypeId (',' TypeId)* '>')?
 		public Group getGroup_1() { return cGroup_1; }
-
+		
 		//'<'
 		public Keyword getLessThanSignKeyword_1_0() { return cLessThanSignKeyword_1_0; }
-
+		
 		//TypeId
 		public RuleCall getTypeIdParserRuleCall_1_1() { return cTypeIdParserRuleCall_1_1; }
-
+		
 		//(',' TypeId)*
 		public Group getGroup_1_2() { return cGroup_1_2; }
-
+		
 		//','
 		public Keyword getCommaKeyword_1_2_0() { return cCommaKeyword_1_2_0; }
-
+		
 		//TypeId
 		public RuleCall getTypeIdParserRuleCall_1_2_1() { return cTypeIdParserRuleCall_1_2_1; }
-
+		
 		//'>'
 		public Keyword getGreaterThanSignKeyword_1_3() { return cGreaterThanSignKeyword_1_3; }
 	}
@@ -223,12 +223,12 @@ public class DatatypeRuleTestLanguageGrammarAccess extends AbstractGrammarElemen
 	private final TypeIdElements pTypeId;
 	
 	private final Grammar grammar;
-
+	
 	private final TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public DatatypeRuleTestLanguageGrammarAccess(GrammarProvider grammarProvider,
-		TerminalsGrammarAccess gaTerminals) {
+			TerminalsGrammarAccess gaTerminals) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
 		this.pModel = new ModelElements();
@@ -261,7 +261,7 @@ public class DatatypeRuleTestLanguageGrammarAccess extends AbstractGrammarElemen
 		return grammar;
 	}
 	
-
+	
 	public TerminalsGrammarAccess getTerminalsGrammarAccess() {
 		return gaTerminals;
 	}
@@ -276,7 +276,7 @@ public class DatatypeRuleTestLanguageGrammarAccess extends AbstractGrammarElemen
 	public ParserRule getModelRule() {
 		return getModelAccess().getRule();
 	}
-
+	
 	//Types:
 	//	{Types}
 	//	'Types'
@@ -288,7 +288,7 @@ public class DatatypeRuleTestLanguageGrammarAccess extends AbstractGrammarElemen
 	public ParserRule getTypesRule() {
 		return getTypesAccess().getRule();
 	}
-
+	
 	//Type:
 	//	SimpleType | CompositeType;
 	public TypeElements getTypeAccess() {
@@ -298,7 +298,7 @@ public class DatatypeRuleTestLanguageGrammarAccess extends AbstractGrammarElemen
 	public ParserRule getTypeRule() {
 		return getTypeAccess().getRule();
 	}
-
+	
 	//SimpleType:
 	//	'Type' name=ID ';';
 	public SimpleTypeElements getSimpleTypeAccess() {
@@ -308,7 +308,7 @@ public class DatatypeRuleTestLanguageGrammarAccess extends AbstractGrammarElemen
 	public ParserRule getSimpleTypeRule() {
 		return getSimpleTypeAccess().getRule();
 	}
-
+	
 	//CompositeType:
 	//	'Composite' name=ID
 	//	'base' baseType=CompositeTypeEntry ';';
@@ -319,7 +319,7 @@ public class DatatypeRuleTestLanguageGrammarAccess extends AbstractGrammarElemen
 	public ParserRule getCompositeTypeRule() {
 		return getCompositeTypeAccess().getRule();
 	}
-
+	
 	//CompositeTypeEntry:
 	//	dataType=[Type|TypeId];
 	public CompositeTypeEntryElements getCompositeTypeEntryAccess() {
@@ -329,7 +329,7 @@ public class DatatypeRuleTestLanguageGrammarAccess extends AbstractGrammarElemen
 	public ParserRule getCompositeTypeEntryRule() {
 		return getCompositeTypeEntryAccess().getRule();
 	}
-
+	
 	//TypeId:
 	//	ID ('<' TypeId (',' TypeId)* '>')?;
 	public TypeIdElements getTypeIdAccess() {
@@ -339,47 +339,47 @@ public class DatatypeRuleTestLanguageGrammarAccess extends AbstractGrammarElemen
 	public ParserRule getTypeIdRule() {
 		return getTypeIdAccess().getRule();
 	}
-
+	
 	//terminal ID:
 	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
-	} 
-
+	}
+	
 	//terminal INT returns ecore::EInt:
 	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
-	} 
-
+	}
+	
 	//terminal STRING:
 	//	'"' ('\\' . | !('\\' | '"'))* '"' |
 	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
-	} 
-
+	}
+	
 	//terminal ML_COMMENT:
 	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal SL_COMMENT:
 	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
-	} 
-
+	}
+	
 	//terminal WS:
 	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
-	} 
-
+	}
+	
 	//terminal ANY_OTHER:
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();
-	} 
+	}
 }

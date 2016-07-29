@@ -4,36 +4,37 @@
 package org.eclipse.xtext.ui.tests.editor.bracketmatching.parser.antlr;
 
 import com.google.inject.Inject;
-
+import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.ui.tests.editor.bracketmatching.parser.antlr.internal.InternalBmTestLanguageParser;
 import org.eclipse.xtext.ui.tests.editor.bracketmatching.services.BmTestLanguageGrammarAccess;
 
-public class BmTestLanguageParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {
-	
+public class BmTestLanguageParser extends AbstractAntlrParser {
+
 	@Inject
 	private BmTestLanguageGrammarAccess grammarAccess;
-	
+
 	@Override
 	protected void setInitialHiddenTokens(XtextTokenStream tokenStream) {
 		tokenStream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
 	}
 	
+
 	@Override
-	protected org.eclipse.xtext.ui.tests.editor.bracketmatching.parser.antlr.internal.InternalBmTestLanguageParser createParser(XtextTokenStream stream) {
-		return new org.eclipse.xtext.ui.tests.editor.bracketmatching.parser.antlr.internal.InternalBmTestLanguageParser(stream, getGrammarAccess());
+	protected InternalBmTestLanguageParser createParser(XtextTokenStream stream) {
+		return new InternalBmTestLanguageParser(stream, getGrammarAccess());
 	}
-	
+
 	@Override 
 	protected String getDefaultRuleName() {
 		return "File";
 	}
-	
+
 	public BmTestLanguageGrammarAccess getGrammarAccess() {
 		return this.grammarAccess;
 	}
-	
+
 	public void setGrammarAccess(BmTestLanguageGrammarAccess grammarAccess) {
 		this.grammarAccess = grammarAccess;
 	}
-	
 }

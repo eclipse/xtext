@@ -20,7 +20,7 @@ import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
-import org.eclipse.xtext.ui.tests.Activator;
+import org.eclipse.xtext.ui.tests.ui.internal.TestsActivator;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.validation.CheckMode;
@@ -46,7 +46,7 @@ public abstract class AbstractQuickfixTest extends AbstractWorkbenchTest {
 	}
 
 	protected Injector getInjector() {
-		return Activator.getInstance().getInjector("org.eclipse.xtext.ui.tests.quickfix.QuickfixCrossrefTestLanguage");
+		return TestsActivator.getInstance().getInjector("org.eclipse.xtext.ui.tests.quickfix.QuickfixCrossrefTestLanguage");
 	}
 
 	protected List<Issue> getIssues(IXtextDocument document) {

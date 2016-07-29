@@ -26,7 +26,7 @@ import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.refactoring.ui.DefaultRenameElementHandler;
 import org.eclipse.xtext.ui.refactoring.ui.RefactoringPreferences;
-import org.eclipse.xtext.ui.tests.Activator;
+import org.eclipse.xtext.ui.tests.ui.internal.TestsActivator;
 import org.junit.Test;
 
 import com.google.inject.Inject;
@@ -53,7 +53,7 @@ public class ToSaveOrNotToSaveTest extends AbstractLinkedEditingIntegrationTest 
 		super.setUp();
 		IJavaProject project = JavaProjectSetupUtil.createJavaProject(TEST_PROJECT);
 		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
-		Injector injector = Activator.getInstance().getInjector(getEditorId());
+		Injector injector = TestsActivator.getInstance().getInjector(getEditorId());
 		injector.injectMembers(this);
 		IFile fooFile = IResourcesSetupUtil.createFile(TEST_PROJECT + "/foo.refactoringtestlanguage", "foo");
 		IFile barFile = IResourcesSetupUtil

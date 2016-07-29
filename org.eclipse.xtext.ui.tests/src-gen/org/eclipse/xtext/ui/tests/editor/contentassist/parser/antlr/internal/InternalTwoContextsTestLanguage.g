@@ -5,7 +5,6 @@ grammar InternalTwoContextsTestLanguage;
 
 options {
 	superClass=AbstractInternalAntlrParser;
-	
 }
 
 @lexer::header {
@@ -17,7 +16,7 @@ import org.eclipse.xtext.parser.antlr.Lexer;
 }
 
 @parser::header {
-package org.eclipse.xtext.ui.tests.editor.contentassist.parser.antlr.internal; 
+package org.eclipse.xtext.ui.tests.editor.contentassist.parser.antlr.internal;
 
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
@@ -35,132 +34,127 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.services.TwoContextsTestL
 @parser::members {
 
  	private TwoContextsTestLanguageGrammarAccess grammarAccess;
- 	
+
     public InternalTwoContextsTestLanguageParser(TokenStream input, TwoContextsTestLanguageGrammarAccess grammarAccess) {
         this(input);
         this.grammarAccess = grammarAccess;
         registerRules(grammarAccess.getGrammar());
     }
-    
+
     @Override
     protected String getFirstRuleName() {
-    	return "MainModel";	
+    	return "MainModel";
    	}
-   	
+
    	@Override
    	protected TwoContextsTestLanguageGrammarAccess getGrammarAccess() {
    		return grammarAccess;
    	}
+
 }
 
-@rulecatch { 
-    catch (RecognitionException re) { 
-        recover(input,re); 
+@rulecatch {
+    catch (RecognitionException re) {
+        recover(input,re);
         appendSkippedTokens();
-    } 
+    }
 }
-
-
-
 
 // Entry rule entryRuleMainModel
-entryRuleMainModel returns [EObject current=null] 
-	:
+entryRuleMainModel returns [EObject current=null]:
 	{ newCompositeNode(grammarAccess.getMainModelRule()); }
-	 iv_ruleMainModel=ruleMainModel 
-	 { $current=$iv_ruleMainModel.current; } 
-	 EOF 
-;
+	iv_ruleMainModel=ruleMainModel
+	{ $current=$iv_ruleMainModel.current; }
+	EOF;
 
 // Rule MainModel
-ruleMainModel returns [EObject current=null] 
-    @init { enterRule(); 
-    }
-    @after { leaveRule(); }:
-(
-(
-		{ 
-	        newCompositeNode(grammarAccess.getMainModelAccess().getElementsAnElementParserRuleCall_0()); 
-	    }
-		lv_elements_0_0=ruleAnElement		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getMainModelRule());
-	        }
-       		add(
-       			$current, 
-       			"elements",
-        		lv_elements_0_0, 
-        		"org.eclipse.xtext.ui.tests.editor.contentassist.TwoContextsTestLanguage.AnElement");
-	        afterParserOrEnumRuleCall();
-	    }
-
-)
-)*
+ruleMainModel returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			{
+				newCompositeNode(grammarAccess.getMainModelAccess().getElementsAnElementParserRuleCall_0());
+			}
+			lv_elements_0_0=ruleAnElement
+			{
+				if ($current==null) {
+					$current = createModelElementForParent(grammarAccess.getMainModelRule());
+				}
+				add(
+					$current,
+					"elements",
+					lv_elements_0_0,
+					"org.eclipse.xtext.ui.tests.editor.contentassist.TwoContextsTestLanguage.AnElement");
+				afterParserOrEnumRuleCall();
+			}
+		)
+	)*
 ;
-
-
-
-
 
 // Entry rule entryRuleAnElement
-entryRuleAnElement returns [EObject current=null] 
-	:
+entryRuleAnElement returns [EObject current=null]:
 	{ newCompositeNode(grammarAccess.getAnElementRule()); }
-	 iv_ruleAnElement=ruleAnElement 
-	 { $current=$iv_ruleAnElement.current; } 
-	 EOF 
-;
+	iv_ruleAnElement=ruleAnElement
+	{ $current=$iv_ruleAnElement.current; }
+	EOF;
 
 // Rule AnElement
-ruleAnElement returns [EObject current=null] 
-    @init { enterRule(); 
-    }
-    @after { leaveRule(); }:
-((
-(
-		lv_name_0_0=RULE_ID
+ruleAnElement returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			(
+				lv_name_0_0=RULE_ID
+				{
+					newLeafNode(lv_name_0_0, grammarAccess.getAnElementAccess().getNameIDTerminalRuleCall_0_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getAnElementRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"name",
+						lv_name_0_0,
+						"org.eclipse.xtext.common.Terminals.ID");
+				}
+			)
+		)
+		(
+			otherlv_1='refersTo'
+			{
+				newLeafNode(otherlv_1, grammarAccess.getAnElementAccess().getRefersToKeyword_1_0());
+			}
+			(
+				(
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getAnElementRule());
+						}
+					}
+					otherlv_2=RULE_ID
+					{
+						newLeafNode(otherlv_2, grammarAccess.getAnElementAccess().getReferredAnElementCrossReference_1_1_0());
+					}
+				)
+			)
+		)?
+		otherlv_3=';'
 		{
-			newLeafNode(lv_name_0_0, grammarAccess.getAnElementAccess().getNameIDTerminalRuleCall_0_0()); 
+			newLeafNode(otherlv_3, grammarAccess.getAnElementAccess().getSemicolonKeyword_2());
 		}
-		{
-	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getAnElementRule());
-	        }
-       		setWithLastConsumed(
-       			$current, 
-       			"name",
-        		lv_name_0_0, 
-        		"org.eclipse.xtext.common.Terminals.ID");
-	    }
-
-)
-)(	otherlv_1='refersTo' 
-    {
-    	newLeafNode(otherlv_1, grammarAccess.getAnElementAccess().getRefersToKeyword_1_0());
-    }
-(
-(
-		{
-			if ($current==null) {
-	            $current = createModelElement(grammarAccess.getAnElementRule());
-	        }
-        }
-	otherlv_2=RULE_ID
-	{
-		newLeafNode(otherlv_2, grammarAccess.getAnElementAccess().getReferredAnElementCrossReference_1_1_0()); 
-	}
-
-)
-))?	otherlv_3=';' 
-    {
-    	newLeafNode(otherlv_3, grammarAccess.getAnElementAccess().getSemicolonKeyword_2());
-    }
-)
+	)
 ;
-
-
-
-
 
 RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
@@ -175,5 +169,3 @@ RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
 RULE_WS : (' '|'\t'|'\r'|'\n')+;
 
 RULE_ANY_OTHER : .;
-
-

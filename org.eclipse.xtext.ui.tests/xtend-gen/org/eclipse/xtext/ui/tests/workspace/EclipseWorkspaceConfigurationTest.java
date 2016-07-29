@@ -16,7 +16,7 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil;
-import org.eclipse.xtext.ui.tests.Activator;
+import org.eclipse.xtext.ui.tests.ui.internal.TestsActivator;
 import org.eclipse.xtext.ui.workspace.EclipseProjectConfig;
 import org.eclipse.xtext.ui.workspace.EclipseProjectConfigProvider;
 import org.eclipse.xtext.workspace.IProjectConfig;
@@ -34,9 +34,9 @@ public class EclipseWorkspaceConfigurationTest {
   
   @Before
   public void setup() {
-    Activator _instance = Activator.getInstance();
+    TestsActivator _instance = TestsActivator.getInstance();
     final Injector injector = _instance.getInjector(
-      Activator.ORG_ECLIPSE_XTEXT_UI_TESTS_EDITOR_CONTENTASSIST_DOMAINMODELTESTLANGUAGE);
+      TestsActivator.ORG_ECLIPSE_XTEXT_UI_TESTS_EDITOR_CONTENTASSIST_DOMAINMODELTESTLANGUAGE);
     injector.injectMembers(this);
   }
   

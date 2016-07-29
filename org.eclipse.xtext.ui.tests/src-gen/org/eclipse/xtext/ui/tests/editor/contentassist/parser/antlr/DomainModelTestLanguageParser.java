@@ -4,36 +4,37 @@
 package org.eclipse.xtext.ui.tests.editor.contentassist.parser.antlr;
 
 import com.google.inject.Inject;
-
+import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.ui.tests.editor.contentassist.parser.antlr.internal.InternalDomainModelTestLanguageParser;
 import org.eclipse.xtext.ui.tests.editor.contentassist.services.DomainModelTestLanguageGrammarAccess;
 
-public class DomainModelTestLanguageParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {
-	
+public class DomainModelTestLanguageParser extends AbstractAntlrParser {
+
 	@Inject
 	private DomainModelTestLanguageGrammarAccess grammarAccess;
-	
+
 	@Override
 	protected void setInitialHiddenTokens(XtextTokenStream tokenStream) {
 		tokenStream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
 	}
 	
+
 	@Override
-	protected org.eclipse.xtext.ui.tests.editor.contentassist.parser.antlr.internal.InternalDomainModelTestLanguageParser createParser(XtextTokenStream stream) {
-		return new org.eclipse.xtext.ui.tests.editor.contentassist.parser.antlr.internal.InternalDomainModelTestLanguageParser(stream, getGrammarAccess());
+	protected InternalDomainModelTestLanguageParser createParser(XtextTokenStream stream) {
+		return new InternalDomainModelTestLanguageParser(stream, getGrammarAccess());
 	}
-	
+
 	@Override 
 	protected String getDefaultRuleName() {
 		return "Model";
 	}
-	
+
 	public DomainModelTestLanguageGrammarAccess getGrammarAccess() {
 		return this.grammarAccess;
 	}
-	
+
 	public void setGrammarAccess(DomainModelTestLanguageGrammarAccess grammarAccess) {
 		this.grammarAccess = grammarAccess;
 	}
-	
 }

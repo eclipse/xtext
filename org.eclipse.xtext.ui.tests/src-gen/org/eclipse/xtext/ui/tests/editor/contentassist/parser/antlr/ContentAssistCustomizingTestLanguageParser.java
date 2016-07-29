@@ -4,36 +4,37 @@
 package org.eclipse.xtext.ui.tests.editor.contentassist.parser.antlr;
 
 import com.google.inject.Inject;
-
+import org.eclipse.xtext.parser.antlr.AbstractAntlrParser;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.ui.tests.editor.contentassist.parser.antlr.internal.InternalContentAssistCustomizingTestLanguageParser;
 import org.eclipse.xtext.ui.tests.editor.contentassist.services.ContentAssistCustomizingTestLanguageGrammarAccess;
 
-public class ContentAssistCustomizingTestLanguageParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {
-	
+public class ContentAssistCustomizingTestLanguageParser extends AbstractAntlrParser {
+
 	@Inject
 	private ContentAssistCustomizingTestLanguageGrammarAccess grammarAccess;
-	
+
 	@Override
 	protected void setInitialHiddenTokens(XtextTokenStream tokenStream) {
 		tokenStream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
 	}
 	
+
 	@Override
-	protected org.eclipse.xtext.ui.tests.editor.contentassist.parser.antlr.internal.InternalContentAssistCustomizingTestLanguageParser createParser(XtextTokenStream stream) {
-		return new org.eclipse.xtext.ui.tests.editor.contentassist.parser.antlr.internal.InternalContentAssistCustomizingTestLanguageParser(stream, getGrammarAccess());
+	protected InternalContentAssistCustomizingTestLanguageParser createParser(XtextTokenStream stream) {
+		return new InternalContentAssistCustomizingTestLanguageParser(stream, getGrammarAccess());
 	}
-	
+
 	@Override 
 	protected String getDefaultRuleName() {
 		return "Model";
 	}
-	
+
 	public ContentAssistCustomizingTestLanguageGrammarAccess getGrammarAccess() {
 		return this.grammarAccess;
 	}
-	
+
 	public void setGrammarAccess(ContentAssistCustomizingTestLanguageGrammarAccess grammarAccess) {
 		this.grammarAccess = grammarAccess;
 	}
-	
 }

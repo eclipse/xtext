@@ -27,7 +27,7 @@ import org.eclipse.xtext.ui.editor.model.XtextDocument;
 import org.eclipse.xtext.ui.editor.reconciler.ReconcilerReplaceRegion;
 import org.eclipse.xtext.ui.editor.reconciler.XtextDocumentReconcileStrategy;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
-import org.eclipse.xtext.ui.tests.Activator;
+import org.eclipse.xtext.ui.tests.ui.internal.TestsActivator;
 import org.eclipse.xtext.ui.tests.testlanguages.ContentAssistTestLanguageRuntimeModule;
 import org.eclipse.xtext.ui.tests.testlanguages.ContentAssistTestLanguageStandaloneSetup;
 import org.eclipse.xtext.ui.tests.testlanguages.services.ContentAssistTestLanguageGrammarAccess;
@@ -49,7 +49,7 @@ public class Bug297909Test extends AbstractContentAssistProcessorTest {
 		return new ContentAssistTestLanguageStandaloneSetup() {
 			@Override
 			public Injector createInjector() {
-				return Guice.createInjector(Modules2.mixin(new ContentAssistTestLanguageRuntimeModule(), new ContentAssistTestLanguageUiModule(Activator
+				return Guice.createInjector(Modules2.mixin(new ContentAssistTestLanguageRuntimeModule(), new ContentAssistTestLanguageUiModule(TestsActivator
 						.getInstance()), new SharedStateModule()));
 			}
 			

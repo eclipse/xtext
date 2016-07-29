@@ -20,7 +20,7 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
 import org.eclipse.xtext.ui.refactoring.IRenamedElementTracker;
 import org.eclipse.xtext.ui.refactoring.impl.RenamedElementTracker;
-import org.eclipse.xtext.ui.tests.Activator;
+import org.eclipse.xtext.ui.tests.ui.internal.TestsActivator;
 import org.eclipse.xtext.ui.tests.refactoring.refactoring.Element;
 import org.eclipse.xtext.ui.tests.refactoring.resource.RefactoringTestLanguageFragmentProvider;
 import org.junit.Test;
@@ -38,7 +38,7 @@ public class RenamedElementTrackerTest extends AbstractXtextTests {
 	@Override
 	public void setUp() throws Exception {
 		super.setUp();
-		setInjector(Activator.getInstance().getInjector("org.eclipse.xtext.ui.tests.refactoring.RefactoringTestLanguage"));
+		setInjector(TestsActivator.getInstance().getInjector("org.eclipse.xtext.ui.tests.refactoring.RefactoringTestLanguage"));
 		getInjector().injectMembers(this);
 		fragmentProvider.setUseNames(true);
 	}

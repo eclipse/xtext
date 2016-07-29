@@ -3,18 +3,38 @@
  */
 package org.eclipse.xtext.ui.tests.parser.keywords;
 
-import java.util.Properties;
-
-import org.eclipse.xtext.Constants;
-
 import com.google.inject.Binder;
+import com.google.inject.Provider;
 import com.google.inject.name.Names;
+import java.util.Properties;
+import org.eclipse.xtext.Constants;
+import org.eclipse.xtext.IGrammarAccess;
+import org.eclipse.xtext.parser.IParser;
+import org.eclipse.xtext.parser.ITokenToStringConverter;
+import org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider;
+import org.eclipse.xtext.parser.antlr.AntlrTokenToStringConverter;
+import org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider;
+import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
+import org.eclipse.xtext.parser.antlr.Lexer;
+import org.eclipse.xtext.parser.antlr.LexerBindings;
+import org.eclipse.xtext.parser.antlr.LexerProvider;
+import org.eclipse.xtext.serializer.ISerializer;
+import org.eclipse.xtext.serializer.impl.Serializer;
+import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
+import org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer;
+import org.eclipse.xtext.service.DefaultRuntimeModule;
+import org.eclipse.xtext.ui.tests.parser.keywords.parser.antlr.KeywordsUiTestLanguageAntlrTokenFileProvider;
+import org.eclipse.xtext.ui.tests.parser.keywords.parser.antlr.KeywordsUiTestLanguageParser;
+import org.eclipse.xtext.ui.tests.parser.keywords.parser.antlr.internal.InternalKeywordsUiTestLanguageLexer;
+import org.eclipse.xtext.ui.tests.parser.keywords.serializer.KeywordsUiTestLanguageSemanticSequencer;
+import org.eclipse.xtext.ui.tests.parser.keywords.serializer.KeywordsUiTestLanguageSyntacticSequencer;
+import org.eclipse.xtext.ui.tests.parser.keywords.services.KeywordsUiTestLanguageGrammarAccess;
 
 /**
- * Manual modifications go to {org.eclipse.xtext.ui.tests.parser.keywords.KeywordsUiTestLanguageRuntimeModule}
+ * Manual modifications go to {@link KeywordsUiTestLanguageRuntimeModule}.
  */
 @SuppressWarnings("all")
-public abstract class AbstractKeywordsUiTestLanguageRuntimeModule extends org.eclipse.xtext.service.DefaultRuntimeModule {
+public abstract class AbstractKeywordsUiTestLanguageRuntimeModule extends DefaultRuntimeModule {
 
 	protected Properties properties = null;
 
@@ -33,64 +53,66 @@ public abstract class AbstractKeywordsUiTestLanguageRuntimeModule extends org.ec
 			binder.bind(String.class).annotatedWith(Names.named(Constants.FILE_EXTENSIONS)).toInstance("keywordsuitestlanguage");
 	}
 	
-	// contributed by org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment
-	public java.lang.ClassLoader bindClassLoaderToInstance() {
+	// contributed by org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessFragment2
+	public ClassLoader bindClassLoaderToInstance() {
 		return getClass().getClassLoader();
 	}
-
-	// contributed by org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment
-	public Class<? extends org.eclipse.xtext.IGrammarAccess> bindIGrammarAccess() {
-		return org.eclipse.xtext.ui.tests.parser.keywords.services.KeywordsUiTestLanguageGrammarAccess.class;
+	
+	// contributed by org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessFragment2
+	public Class<? extends IGrammarAccess> bindIGrammarAccess() {
+		return KeywordsUiTestLanguageGrammarAccess.class;
 	}
-
-	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
-	public Class<? extends org.eclipse.xtext.parser.IParser> bindIParser() {
-		return org.eclipse.xtext.ui.tests.parser.keywords.parser.antlr.KeywordsUiTestLanguageParser.class;
+	
+	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
+	public Class<? extends IParser> bindIParser() {
+		return KeywordsUiTestLanguageParser.class;
 	}
-
-	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
-	public Class<? extends org.eclipse.xtext.parser.ITokenToStringConverter> bindITokenToStringConverter() {
-		return org.eclipse.xtext.parser.antlr.AntlrTokenToStringConverter.class;
+	
+	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
+	public Class<? extends ITokenToStringConverter> bindITokenToStringConverter() {
+		return AntlrTokenToStringConverter.class;
 	}
-
-	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
-	public Class<? extends org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider> bindIAntlrTokenFileProvider() {
-		return org.eclipse.xtext.ui.tests.parser.keywords.parser.antlr.KeywordsUiTestLanguageAntlrTokenFileProvider.class;
+	
+	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
+	public Class<? extends IAntlrTokenFileProvider> bindIAntlrTokenFileProvider() {
+		return KeywordsUiTestLanguageAntlrTokenFileProvider.class;
 	}
-
-	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
-	public Class<? extends org.eclipse.xtext.parser.antlr.Lexer> bindLexer() {
-		return org.eclipse.xtext.ui.tests.parser.keywords.parser.antlr.internal.InternalKeywordsUiTestLanguageLexer.class;
+	
+	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
+	public Class<? extends Lexer> bindLexer() {
+		return InternalKeywordsUiTestLanguageLexer.class;
 	}
-
-	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
-	public com.google.inject.Provider<org.eclipse.xtext.ui.tests.parser.keywords.parser.antlr.internal.InternalKeywordsUiTestLanguageLexer> provideInternalKeywordsUiTestLanguageLexer() {
-		return org.eclipse.xtext.parser.antlr.LexerProvider.create(org.eclipse.xtext.ui.tests.parser.keywords.parser.antlr.internal.InternalKeywordsUiTestLanguageLexer.class);
+	
+	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
+	public Class<? extends ITokenDefProvider> bindITokenDefProvider() {
+		return AntlrTokenDefProvider.class;
 	}
-
-	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
-	public void configureRuntimeLexer(com.google.inject.Binder binder) {
-		binder.bind(org.eclipse.xtext.parser.antlr.Lexer.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.parser.antlr.LexerBindings.RUNTIME)).to(org.eclipse.xtext.ui.tests.parser.keywords.parser.antlr.internal.InternalKeywordsUiTestLanguageLexer.class);
+	
+	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
+	public Provider<InternalKeywordsUiTestLanguageLexer> provideInternalKeywordsUiTestLanguageLexer() {
+		return LexerProvider.create(InternalKeywordsUiTestLanguageLexer.class);
 	}
-
-	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
-	public Class<? extends org.eclipse.xtext.parser.antlr.ITokenDefProvider> bindITokenDefProvider() {
-		return org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider.class;
+	
+	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
+	public void configureRuntimeLexer(Binder binder) {
+		binder.bind(Lexer.class)
+			.annotatedWith(Names.named(LexerBindings.RUNTIME))
+			.to(InternalKeywordsUiTestLanguageLexer.class);
 	}
-
-	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
-	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
-		return org.eclipse.xtext.ui.tests.parser.keywords.serializer.KeywordsUiTestLanguageSemanticSequencer.class;
+	
+	// contributed by org.eclipse.xtext.xtext.generator.serializer.SerializerFragment2
+	public Class<? extends ISemanticSequencer> bindISemanticSequencer() {
+		return KeywordsUiTestLanguageSemanticSequencer.class;
 	}
-
-	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
-	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer> bindISyntacticSequencer() {
-		return org.eclipse.xtext.ui.tests.parser.keywords.serializer.KeywordsUiTestLanguageSyntacticSequencer.class;
+	
+	// contributed by org.eclipse.xtext.xtext.generator.serializer.SerializerFragment2
+	public Class<? extends ISyntacticSequencer> bindISyntacticSequencer() {
+		return KeywordsUiTestLanguageSyntacticSequencer.class;
 	}
-
-	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
-	public Class<? extends org.eclipse.xtext.serializer.ISerializer> bindISerializer() {
-		return org.eclipse.xtext.serializer.impl.Serializer.class;
+	
+	// contributed by org.eclipse.xtext.xtext.generator.serializer.SerializerFragment2
+	public Class<? extends ISerializer> bindISerializer() {
+		return Serializer.class;
 	}
-
+	
 }

@@ -5,7 +5,6 @@ grammar InternalBug377311TestLanguage;
 
 options {
 	superClass=AbstractInternalAntlrParser;
-	
 }
 
 @lexer::header {
@@ -17,7 +16,7 @@ import org.eclipse.xtext.parser.antlr.Lexer;
 }
 
 @parser::header {
-package org.eclipse.xtext.ui.tests.editor.contentassist.parser.antlr.internal; 
+package org.eclipse.xtext.ui.tests.editor.contentassist.parser.antlr.internal;
 
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
@@ -35,125 +34,117 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.services.Bug377311TestLan
 @parser::members {
 
  	private Bug377311TestLanguageGrammarAccess grammarAccess;
- 	
+
     public InternalBug377311TestLanguageParser(TokenStream input, Bug377311TestLanguageGrammarAccess grammarAccess) {
         this(input);
         this.grammarAccess = grammarAccess;
         registerRules(grammarAccess.getGrammar());
     }
-    
+
     @Override
     protected String getFirstRuleName() {
-    	return "Root";	
+    	return "Root";
    	}
-   	
+
    	@Override
    	protected Bug377311TestLanguageGrammarAccess getGrammarAccess() {
    		return grammarAccess;
    	}
+
 }
 
-@rulecatch { 
-    catch (RecognitionException re) { 
-        recover(input,re); 
+@rulecatch {
+    catch (RecognitionException re) {
+        recover(input,re);
         appendSkippedTokens();
-    } 
+    }
 }
-
-
-
 
 // Entry rule entryRuleRoot
-entryRuleRoot returns [EObject current=null] 
-	:
+entryRuleRoot returns [EObject current=null]:
 	{ newCompositeNode(grammarAccess.getRootRule()); }
-	 iv_ruleRoot=ruleRoot 
-	 { $current=$iv_ruleRoot.current; } 
-	 EOF 
-;
+	iv_ruleRoot=ruleRoot
+	{ $current=$iv_ruleRoot.current; }
+	EOF;
 
 // Rule Root
-ruleRoot returns [EObject current=null] 
-    @init { enterRule(); 
-    }
-    @after { leaveRule(); }:
-(
-(
-		{ 
-	        newCompositeNode(grammarAccess.getRootAccess().getChildsChildParserRuleCall_0()); 
-	    }
-		lv_childs_0_0=ruleChild		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getRootRule());
-	        }
-       		add(
-       			$current, 
-       			"childs",
-        		lv_childs_0_0, 
-        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug377311TestLanguage.Child");
-	        afterParserOrEnumRuleCall();
-	    }
-
-)
-)*
+ruleRoot returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			{
+				newCompositeNode(grammarAccess.getRootAccess().getChildsChildParserRuleCall_0());
+			}
+			lv_childs_0_0=ruleChild
+			{
+				if ($current==null) {
+					$current = createModelElementForParent(grammarAccess.getRootRule());
+				}
+				add(
+					$current,
+					"childs",
+					lv_childs_0_0,
+					"org.eclipse.xtext.ui.tests.editor.contentassist.Bug377311TestLanguage.Child");
+				afterParserOrEnumRuleCall();
+			}
+		)
+	)*
 ;
-
-
-
-
 
 // Entry rule entryRuleChild
-entryRuleChild returns [EObject current=null] 
-	@init { 
-		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS", "RULE_ID");
-	}
-	:
+entryRuleChild returns [EObject current=null]@init {
+	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS", "RULE_ID");
+}:
 	{ newCompositeNode(grammarAccess.getChildRule()); }
-	 iv_ruleChild=ruleChild 
-	 { $current=$iv_ruleChild.current; } 
-	 EOF 
-;
+	iv_ruleChild=ruleChild
+	{ $current=$iv_ruleChild.current; }
+	EOF;
 finally {
 	myHiddenTokenState.restore();
 }
 
 // Rule Child
-ruleChild returns [EObject current=null] 
-    @init { enterRule(); 
-		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS", "RULE_ID");
-    }
-    @after { leaveRule(); }:
-(	otherlv_0='child' 
-    {
-    	newLeafNode(otherlv_0, grammarAccess.getChildAccess().getChildKeyword_0());
-    }
-(
-(
-		lv_name_1_0=RULE_STRING
+ruleChild returns [EObject current=null]
+@init {
+	enterRule();
+	HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS", "RULE_ID");
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0='child'
 		{
-			newLeafNode(lv_name_1_0, grammarAccess.getChildAccess().getNameSTRINGTerminalRuleCall_1_0()); 
+			newLeafNode(otherlv_0, grammarAccess.getChildAccess().getChildKeyword_0());
 		}
-		{
-	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getChildRule());
-	        }
-       		setWithLastConsumed(
-       			$current, 
-       			"name",
-        		lv_name_1_0, 
-        		"org.eclipse.xtext.common.Terminals.STRING");
-	    }
-
-)
-))
+		(
+			(
+				lv_name_1_0=RULE_STRING
+				{
+					newLeafNode(lv_name_1_0, grammarAccess.getChildAccess().getNameSTRINGTerminalRuleCall_1_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getChildRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"name",
+						lv_name_1_0,
+						"org.eclipse.xtext.common.Terminals.STRING");
+				}
+			)
+		)
+	)
 ;
 finally {
 	myHiddenTokenState.restore();
 }
-
-
-
-
 
 RULE_WS : (' '|'\t')+;
 
@@ -170,5 +161,3 @@ RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )*'*/';
 RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
 
 RULE_ANY_OTHER : .;
-
-

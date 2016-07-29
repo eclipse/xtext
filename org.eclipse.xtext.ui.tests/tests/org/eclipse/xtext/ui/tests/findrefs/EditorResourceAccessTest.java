@@ -17,7 +17,7 @@ import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.findrefs.EditorResourceAccess;
-import org.eclipse.xtext.ui.tests.Activator;
+import org.eclipse.xtext.ui.tests.ui.internal.TestsActivator;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.junit.Test;
@@ -46,7 +46,7 @@ public class EditorResourceAccessTest extends AbstractEditorTest {
 	}
 
 	@Test public void testAccess() throws Exception {
-		EditorResourceAccess access = Activator.getInstance().getInjector(getEditorId())
+		EditorResourceAccess access = TestsActivator.getInstance().getInjector(getEditorId())
 				.getInstance(EditorResourceAccess.class);
 		IUnitOfWork<Boolean, ResourceSet> isEmpty = new IUnitOfWork<Boolean, ResourceSet>(){
 			@Override

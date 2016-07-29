@@ -13,16 +13,16 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalQuickfixCrossrefTestLanguageLexer extends Lexer {
     public static final int RULE_ID=5;
-    public static final int RULE_STRING=4;
-    public static final int T__12=12;
-    public static final int T__11=11;
-    public static final int T__13=13;
-    public static final int RULE_ANY_OTHER=10;
-    public static final int RULE_INT=6;
     public static final int RULE_WS=9;
+    public static final int RULE_STRING=4;
+    public static final int RULE_ANY_OTHER=10;
     public static final int RULE_SL_COMMENT=8;
-    public static final int EOF=-1;
+    public static final int RULE_INT=6;
+    public static final int T__11=11;
     public static final int RULE_ML_COMMENT=7;
+    public static final int T__12=12;
+    public static final int T__13=13;
+    public static final int EOF=-1;
 
     // delegates
     // delegators
@@ -103,10 +103,10 @@ public class InternalQuickfixCrossrefTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalQuickfixCrossrefTestLanguage.g:205:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // InternalQuickfixCrossrefTestLanguage.g:205:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalQuickfixCrossrefTestLanguage.g:200:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // InternalQuickfixCrossrefTestLanguage.g:200:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // InternalQuickfixCrossrefTestLanguage.g:205:11: ( '^' )?
+            // InternalQuickfixCrossrefTestLanguage.g:200:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -115,7 +115,7 @@ public class InternalQuickfixCrossrefTestLanguageLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // InternalQuickfixCrossrefTestLanguage.g:205:11: '^'
+                    // InternalQuickfixCrossrefTestLanguage.g:200:11: '^'
                     {
                     match('^'); 
 
@@ -133,7 +133,7 @@ public class InternalQuickfixCrossrefTestLanguageLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // InternalQuickfixCrossrefTestLanguage.g:205:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalQuickfixCrossrefTestLanguage.g:200:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -182,10 +182,10 @@ public class InternalQuickfixCrossrefTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalQuickfixCrossrefTestLanguage.g:207:10: ( ( '0' .. '9' )+ )
-            // InternalQuickfixCrossrefTestLanguage.g:207:12: ( '0' .. '9' )+
+            // InternalQuickfixCrossrefTestLanguage.g:202:10: ( ( '0' .. '9' )+ )
+            // InternalQuickfixCrossrefTestLanguage.g:202:12: ( '0' .. '9' )+
             {
-            // InternalQuickfixCrossrefTestLanguage.g:207:12: ( '0' .. '9' )+
+            // InternalQuickfixCrossrefTestLanguage.g:202:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -199,7 +199,7 @@ public class InternalQuickfixCrossrefTestLanguageLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // InternalQuickfixCrossrefTestLanguage.g:207:13: '0' .. '9'
+            	    // InternalQuickfixCrossrefTestLanguage.g:202:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -231,10 +231,10 @@ public class InternalQuickfixCrossrefTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalQuickfixCrossrefTestLanguage.g:209:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // InternalQuickfixCrossrefTestLanguage.g:209:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalQuickfixCrossrefTestLanguage.g:204:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // InternalQuickfixCrossrefTestLanguage.g:204:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // InternalQuickfixCrossrefTestLanguage.g:209:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalQuickfixCrossrefTestLanguage.g:204:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -252,10 +252,10 @@ public class InternalQuickfixCrossrefTestLanguageLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // InternalQuickfixCrossrefTestLanguage.g:209:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // InternalQuickfixCrossrefTestLanguage.g:204:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // InternalQuickfixCrossrefTestLanguage.g:209:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // InternalQuickfixCrossrefTestLanguage.g:204:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -271,7 +271,7 @@ public class InternalQuickfixCrossrefTestLanguageLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // InternalQuickfixCrossrefTestLanguage.g:209:21: '\\\\' .
+                    	    // InternalQuickfixCrossrefTestLanguage.g:204:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -279,7 +279,7 @@ public class InternalQuickfixCrossrefTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalQuickfixCrossrefTestLanguage.g:209:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // InternalQuickfixCrossrefTestLanguage.g:204:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -304,10 +304,10 @@ public class InternalQuickfixCrossrefTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalQuickfixCrossrefTestLanguage.g:209:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // InternalQuickfixCrossrefTestLanguage.g:204:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // InternalQuickfixCrossrefTestLanguage.g:209:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // InternalQuickfixCrossrefTestLanguage.g:204:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -323,7 +323,7 @@ public class InternalQuickfixCrossrefTestLanguageLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // InternalQuickfixCrossrefTestLanguage.g:209:54: '\\\\' .
+                    	    // InternalQuickfixCrossrefTestLanguage.g:204:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -331,7 +331,7 @@ public class InternalQuickfixCrossrefTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalQuickfixCrossrefTestLanguage.g:209:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // InternalQuickfixCrossrefTestLanguage.g:204:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -374,12 +374,12 @@ public class InternalQuickfixCrossrefTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalQuickfixCrossrefTestLanguage.g:211:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // InternalQuickfixCrossrefTestLanguage.g:211:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // InternalQuickfixCrossrefTestLanguage.g:206:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // InternalQuickfixCrossrefTestLanguage.g:206:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // InternalQuickfixCrossrefTestLanguage.g:211:24: ( options {greedy=false; } : . )*
+            // InternalQuickfixCrossrefTestLanguage.g:206:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -404,7 +404,7 @@ public class InternalQuickfixCrossrefTestLanguageLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // InternalQuickfixCrossrefTestLanguage.g:211:52: .
+            	    // InternalQuickfixCrossrefTestLanguage.g:206:52: .
             	    {
             	    matchAny(); 
 
@@ -434,12 +434,12 @@ public class InternalQuickfixCrossrefTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalQuickfixCrossrefTestLanguage.g:213:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // InternalQuickfixCrossrefTestLanguage.g:213:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // InternalQuickfixCrossrefTestLanguage.g:208:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // InternalQuickfixCrossrefTestLanguage.g:208:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // InternalQuickfixCrossrefTestLanguage.g:213:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalQuickfixCrossrefTestLanguage.g:208:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -452,7 +452,7 @@ public class InternalQuickfixCrossrefTestLanguageLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // InternalQuickfixCrossrefTestLanguage.g:213:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalQuickfixCrossrefTestLanguage.g:208:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -472,7 +472,7 @@ public class InternalQuickfixCrossrefTestLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // InternalQuickfixCrossrefTestLanguage.g:213:40: ( ( '\\r' )? '\\n' )?
+            // InternalQuickfixCrossrefTestLanguage.g:208:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -481,9 +481,9 @@ public class InternalQuickfixCrossrefTestLanguageLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // InternalQuickfixCrossrefTestLanguage.g:213:41: ( '\\r' )? '\\n'
+                    // InternalQuickfixCrossrefTestLanguage.g:208:41: ( '\\r' )? '\\n'
                     {
-                    // InternalQuickfixCrossrefTestLanguage.g:213:41: ( '\\r' )?
+                    // InternalQuickfixCrossrefTestLanguage.g:208:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -492,7 +492,7 @@ public class InternalQuickfixCrossrefTestLanguageLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // InternalQuickfixCrossrefTestLanguage.g:213:41: '\\r'
+                            // InternalQuickfixCrossrefTestLanguage.g:208:41: '\\r'
                             {
                             match('\r'); 
 
@@ -524,10 +524,10 @@ public class InternalQuickfixCrossrefTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalQuickfixCrossrefTestLanguage.g:215:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // InternalQuickfixCrossrefTestLanguage.g:215:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalQuickfixCrossrefTestLanguage.g:210:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalQuickfixCrossrefTestLanguage.g:210:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // InternalQuickfixCrossrefTestLanguage.g:215:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalQuickfixCrossrefTestLanguage.g:210:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -581,8 +581,8 @@ public class InternalQuickfixCrossrefTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalQuickfixCrossrefTestLanguage.g:217:16: ( . )
-            // InternalQuickfixCrossrefTestLanguage.g:217:18: .
+            // InternalQuickfixCrossrefTestLanguage.g:212:16: ( . )
+            // InternalQuickfixCrossrefTestLanguage.g:212:18: .
             {
             matchAny(); 
 
@@ -689,7 +689,7 @@ public class InternalQuickfixCrossrefTestLanguageLexer extends Lexer {
     static final String DFA12_acceptS =
         "\1\uffff\1\1\1\uffff\1\3\1\uffff\1\4\1\5\3\uffff\1\11\1\12\1\1\1\uffff\1\4\1\3\1\5\1\6\1\7\1\10\1\11\1\uffff\1\2";
     static final String DFA12_specialS =
-        "\1\2\6\uffff\1\0\1\1\16\uffff}>";
+        "\1\0\6\uffff\1\1\1\2\16\uffff}>";
     static final String[] DFA12_transitionS = {
             "\11\13\2\12\2\13\1\12\22\13\1\12\1\13\1\7\4\13\1\10\7\13\1\11\12\6\7\13\32\5\3\13\1\4\1\5\1\13\21\5\1\2\10\5\1\1\1\13\1\3\uff82\13",
             "",
@@ -753,26 +753,6 @@ public class InternalQuickfixCrossrefTestLanguageLexer extends Lexer {
         	int _s = s;
             switch ( s ) {
                     case 0 : 
-                        int LA12_7 = input.LA(1);
-
-                        s = -1;
-                        if ( ((LA12_7>='\u0000' && LA12_7<='\uFFFF')) ) {s = 17;}
-
-                        else s = 11;
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 1 : 
-                        int LA12_8 = input.LA(1);
-
-                        s = -1;
-                        if ( ((LA12_8>='\u0000' && LA12_8<='\uFFFF')) ) {s = 17;}
-
-                        else s = 11;
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 2 : 
                         int LA12_0 = input.LA(1);
 
                         s = -1;
@@ -797,6 +777,26 @@ public class InternalQuickfixCrossrefTestLanguageLexer extends Lexer {
                         else if ( ((LA12_0>='\t' && LA12_0<='\n')||LA12_0=='\r'||LA12_0==' ') ) {s = 10;}
 
                         else if ( ((LA12_0>='\u0000' && LA12_0<='\b')||(LA12_0>='\u000B' && LA12_0<='\f')||(LA12_0>='\u000E' && LA12_0<='\u001F')||LA12_0=='!'||(LA12_0>='#' && LA12_0<='&')||(LA12_0>='(' && LA12_0<='.')||(LA12_0>=':' && LA12_0<='@')||(LA12_0>='[' && LA12_0<=']')||LA12_0=='`'||LA12_0=='|'||(LA12_0>='~' && LA12_0<='\uFFFF')) ) {s = 11;}
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 1 : 
+                        int LA12_7 = input.LA(1);
+
+                        s = -1;
+                        if ( ((LA12_7>='\u0000' && LA12_7<='\uFFFF')) ) {s = 17;}
+
+                        else s = 11;
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 2 : 
+                        int LA12_8 = input.LA(1);
+
+                        s = -1;
+                        if ( ((LA12_8>='\u0000' && LA12_8<='\uFFFF')) ) {s = 17;}
+
+                        else s = 11;
 
                         if ( s>=0 ) return s;
                         break;

@@ -5,7 +5,6 @@ grammar InternalQuickfixCrossrefTestLanguage;
 
 options {
 	superClass=AbstractInternalAntlrParser;
-	
 }
 
 @lexer::header {
@@ -17,7 +16,7 @@ import org.eclipse.xtext.parser.antlr.Lexer;
 }
 
 @parser::header {
-package org.eclipse.xtext.ui.tests.quickfix.parser.antlr.internal; 
+package org.eclipse.xtext.ui.tests.quickfix.parser.antlr.internal;
 
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
@@ -35,172 +34,168 @@ import org.eclipse.xtext.ui.tests.quickfix.services.QuickfixCrossrefTestLanguage
 @parser::members {
 
  	private QuickfixCrossrefTestLanguageGrammarAccess grammarAccess;
- 	
+
     public InternalQuickfixCrossrefTestLanguageParser(TokenStream input, QuickfixCrossrefTestLanguageGrammarAccess grammarAccess) {
         this(input);
         this.grammarAccess = grammarAccess;
         registerRules(grammarAccess.getGrammar());
     }
-    
+
     @Override
     protected String getFirstRuleName() {
-    	return "Main";	
+    	return "Main";
    	}
-   	
+
    	@Override
    	protected QuickfixCrossrefTestLanguageGrammarAccess getGrammarAccess() {
    		return grammarAccess;
    	}
+
 }
 
-@rulecatch { 
-    catch (RecognitionException re) { 
-        recover(input,re); 
+@rulecatch {
+    catch (RecognitionException re) {
+        recover(input,re);
         appendSkippedTokens();
-    } 
+    }
 }
-
-
-
 
 // Entry rule entryRuleMain
-entryRuleMain returns [EObject current=null] 
-	:
+entryRuleMain returns [EObject current=null]:
 	{ newCompositeNode(grammarAccess.getMainRule()); }
-	 iv_ruleMain=ruleMain 
-	 { $current=$iv_ruleMain.current; } 
-	 EOF 
-;
+	iv_ruleMain=ruleMain
+	{ $current=$iv_ruleMain.current; }
+	EOF;
 
 // Rule Main
-ruleMain returns [EObject current=null] 
-    @init { enterRule(); 
-    }
-    @after { leaveRule(); }:
-(
-(
-		{ 
-	        newCompositeNode(grammarAccess.getMainAccess().getElementsElementParserRuleCall_0()); 
-	    }
-		lv_elements_0_0=ruleElement		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getMainRule());
-	        }
-       		add(
-       			$current, 
-       			"elements",
-        		lv_elements_0_0, 
-        		"org.eclipse.xtext.ui.tests.quickfix.QuickfixCrossrefTestLanguage.Element");
-	        afterParserOrEnumRuleCall();
-	    }
-
-)
-)*
+ruleMain returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			{
+				newCompositeNode(grammarAccess.getMainAccess().getElementsElementParserRuleCall_0());
+			}
+			lv_elements_0_0=ruleElement
+			{
+				if ($current==null) {
+					$current = createModelElementForParent(grammarAccess.getMainRule());
+				}
+				add(
+					$current,
+					"elements",
+					lv_elements_0_0,
+					"org.eclipse.xtext.ui.tests.quickfix.QuickfixCrossrefTestLanguage.Element");
+				afterParserOrEnumRuleCall();
+			}
+		)
+	)*
 ;
-
-
-
-
 
 // Entry rule entryRuleElement
-entryRuleElement returns [EObject current=null] 
-	:
+entryRuleElement returns [EObject current=null]:
 	{ newCompositeNode(grammarAccess.getElementRule()); }
-	 iv_ruleElement=ruleElement 
-	 { $current=$iv_ruleElement.current; } 
-	 EOF 
-;
+	iv_ruleElement=ruleElement
+	{ $current=$iv_ruleElement.current; }
+	EOF;
 
 // Rule Element
-ruleElement returns [EObject current=null] 
-    @init { enterRule(); 
-    }
-    @after { leaveRule(); }:
-((
-(
-		lv_doc_0_0=RULE_STRING
+ruleElement returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			(
+				lv_doc_0_0=RULE_STRING
+				{
+					newLeafNode(lv_doc_0_0, grammarAccess.getElementAccess().getDocSTRINGTerminalRuleCall_0_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getElementRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"doc",
+						lv_doc_0_0,
+						"org.eclipse.xtext.common.Terminals.STRING");
+				}
+			)
+		)?
+		(
+			(
+				lv_name_1_0=RULE_ID
+				{
+					newLeafNode(lv_name_1_0, grammarAccess.getElementAccess().getNameIDTerminalRuleCall_1_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getElementRule());
+					}
+					setWithLastConsumed(
+						$current,
+						"name",
+						lv_name_1_0,
+						"org.eclipse.xtext.common.Terminals.ID");
+				}
+			)
+		)
+		otherlv_2='{'
 		{
-			newLeafNode(lv_doc_0_0, grammarAccess.getElementAccess().getDocSTRINGTerminalRuleCall_0_0()); 
+			newLeafNode(otherlv_2, grammarAccess.getElementAccess().getLeftCurlyBracketKeyword_2());
 		}
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getElementAccess().getContainedElementParserRuleCall_3_0());
+				}
+				lv_contained_3_0=ruleElement
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getElementRule());
+					}
+					add(
+						$current,
+						"contained",
+						lv_contained_3_0,
+						"org.eclipse.xtext.ui.tests.quickfix.QuickfixCrossrefTestLanguage.Element");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)*
+		(
+			otherlv_4='ref'
+			{
+				newLeafNode(otherlv_4, grammarAccess.getElementAccess().getRefKeyword_4_0());
+			}
+			(
+				(
+					{
+						if ($current==null) {
+							$current = createModelElement(grammarAccess.getElementRule());
+						}
+					}
+					otherlv_5=RULE_ID
+					{
+						newLeafNode(otherlv_5, grammarAccess.getElementAccess().getReferencedElementCrossReference_4_1_0());
+					}
+				)
+			)
+		)*
+		otherlv_6='}'
 		{
-	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getElementRule());
-	        }
-       		setWithLastConsumed(
-       			$current, 
-       			"doc",
-        		lv_doc_0_0, 
-        		"org.eclipse.xtext.common.Terminals.STRING");
-	    }
-
-)
-)?(
-(
-		lv_name_1_0=RULE_ID
-		{
-			newLeafNode(lv_name_1_0, grammarAccess.getElementAccess().getNameIDTerminalRuleCall_1_0()); 
+			newLeafNode(otherlv_6, grammarAccess.getElementAccess().getRightCurlyBracketKeyword_5());
 		}
-		{
-	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getElementRule());
-	        }
-       		setWithLastConsumed(
-       			$current, 
-       			"name",
-        		lv_name_1_0, 
-        		"org.eclipse.xtext.common.Terminals.ID");
-	    }
-
-)
-)	otherlv_2='{' 
-    {
-    	newLeafNode(otherlv_2, grammarAccess.getElementAccess().getLeftCurlyBracketKeyword_2());
-    }
-(
-(
-		{ 
-	        newCompositeNode(grammarAccess.getElementAccess().getContainedElementParserRuleCall_3_0()); 
-	    }
-		lv_contained_3_0=ruleElement		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getElementRule());
-	        }
-       		add(
-       			$current, 
-       			"contained",
-        		lv_contained_3_0, 
-        		"org.eclipse.xtext.ui.tests.quickfix.QuickfixCrossrefTestLanguage.Element");
-	        afterParserOrEnumRuleCall();
-	    }
-
-)
-)*(	otherlv_4='ref' 
-    {
-    	newLeafNode(otherlv_4, grammarAccess.getElementAccess().getRefKeyword_4_0());
-    }
-(
-(
-		{
-			if ($current==null) {
-	            $current = createModelElement(grammarAccess.getElementRule());
-	        }
-        }
-	otherlv_5=RULE_ID
-	{
-		newLeafNode(otherlv_5, grammarAccess.getElementAccess().getReferencedElementCrossReference_4_1_0()); 
-	}
-
-)
-))*	otherlv_6='}' 
-    {
-    	newLeafNode(otherlv_6, grammarAccess.getElementAccess().getRightCurlyBracketKeyword_5());
-    }
-)
+	)
 ;
-
-
-
-
 
 RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
@@ -215,5 +210,3 @@ RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
 RULE_WS : (' '|'\t'|'\r'|'\n')+;
 
 RULE_ANY_OTHER : .;
-
-

@@ -10,7 +10,7 @@ package org.eclipse.xtext.ui.tests.workspace
 import com.google.inject.Inject
 import org.eclipse.core.resources.ResourcesPlugin
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil
-import org.eclipse.xtext.ui.tests.Activator
+import org.eclipse.xtext.ui.tests.ui.internal.TestsActivator
 import org.eclipse.xtext.ui.workspace.EclipseProjectConfigProvider
 import org.junit.After
 import org.junit.Before
@@ -25,8 +25,8 @@ class EclipseWorkspaceConfigurationTest {
 	
 	@Before
 	def void setup() {
-		val injector = Activator.getInstance.getInjector(
-			Activator.ORG_ECLIPSE_XTEXT_UI_TESTS_EDITOR_CONTENTASSIST_DOMAINMODELTESTLANGUAGE)
+		val injector = TestsActivator.getInstance.getInjector(
+			TestsActivator.ORG_ECLIPSE_XTEXT_UI_TESTS_EDITOR_CONTENTASSIST_DOMAINMODELTESTLANGUAGE)
 		injector.injectMembers(this)
 	}
 	
