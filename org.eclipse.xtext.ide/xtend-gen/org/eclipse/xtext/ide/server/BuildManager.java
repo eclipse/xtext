@@ -11,13 +11,14 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import com.google.inject.Singleton;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.xtend.lib.annotations.AccessorType;
+import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtext.build.IncrementalBuilder;
 import org.eclipse.xtext.diagnostics.Severity;
@@ -39,7 +40,6 @@ import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
  * @author Jan Koehnlein - Initial contribution and API
  * @since 2.11
  */
-@Singleton
 @SuppressWarnings("all")
 public class BuildManager {
   @Data
@@ -109,7 +109,7 @@ public class BuildManager {
   
   public final static String CYCLIC_PROJECT_DEPENDENCIES = (BuildManager.class.getCanonicalName() + ".cyclicProjectDependencies");
   
-  @Inject
+  @Accessors(AccessorType.PUBLIC_SETTER)
   private WorkspaceManager workspaceManager;
   
   @Inject
@@ -195,5 +195,9 @@ public class BuildManager {
   
   protected void reportDependencyCycle(final ProjectManager manager) {
     manager.reportProjectIssue("Project has cyclic dependencies", BuildManager.CYCLIC_PROJECT_DEPENDENCIES, Severity.ERROR);
+  }
+  
+  public void setWorkspaceManager(final WorkspaceManager workspaceManager) {
+    this.workspaceManager = workspaceManager;
   }
 }

@@ -54,7 +54,6 @@ public class WorkspaceManager {
   @Inject
   private IProjectDescriptionFactory projectDescriptionFactory;
   
-  @Inject
   private BuildManager buildManager;
   
   private Map<String, ProjectManager> projectName2ProjectManager = CollectionLiterals.<String, ProjectManager>newHashMap();
@@ -90,6 +89,12 @@ public class WorkspaceManager {
       return WorkspaceManager.this.openDocuments.containsKey(uri);
     }
   };
+  
+  @Inject
+  public void setBuildManager(final BuildManager buildManager) {
+    buildManager.setWorkspaceManager(this);
+    this.buildManager = buildManager;
+  }
   
   public void initialize(final URI baseDir, final Procedure2<? super URI, ? super Iterable<Issue>> issueAcceptor, final CancelIndicator cancelIndicator) {
     this.baseDir = baseDir;

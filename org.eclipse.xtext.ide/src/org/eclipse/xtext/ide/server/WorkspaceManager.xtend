@@ -32,7 +32,7 @@ class WorkspaceManager {
     @Inject Provider<ProjectManager> projectManagerProvider
     @Inject IWorkspaceConfigFactory workspaceConfigFactory
     @Inject IProjectDescriptionFactory projectDescriptionFactory
-    @Inject BuildManager buildManager
+    BuildManager buildManager
     
     Map<String, ProjectManager> projectName2ProjectManager = newHashMap
 
@@ -57,6 +57,12 @@ class WorkspaceManager {
             openDocuments.containsKey(uri)
         }
     };
+    
+    @Inject
+    def void setBuildManager(BuildManager buildManager) {
+        buildManager.workspaceManager = this
+        this.buildManager = buildManager
+    }
     
     def void initialize(URI baseDir, (URI, Iterable<Issue>)=>void issueAcceptor, CancelIndicator cancelIndicator) {
         this.baseDir = baseDir

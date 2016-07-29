@@ -10,7 +10,6 @@ package org.eclipse.xtext.ide.server
 import com.google.common.collect.HashMultimap
 import com.google.inject.Inject
 import com.google.inject.Provider
-import com.google.inject.Singleton
 import java.util.ArrayList
 import java.util.Collection
 import java.util.List
@@ -20,17 +19,18 @@ import org.eclipse.xtend.lib.annotations.Data
 import org.eclipse.xtext.diagnostics.Severity
 import org.eclipse.xtext.resource.impl.ProjectDescription
 import org.eclipse.xtext.util.CancelIndicator
+import org.eclipse.xtend.lib.annotations.Accessors
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  * @since 2.11
  */
-@Singleton
 class BuildManager {
     
     public static val CYCLIC_PROJECT_DEPENDENCIES = BuildManager.canonicalName + '.cyclicProjectDependencies'
 
-    @Inject WorkspaceManager workspaceManager
+    @Accessors(PUBLIC_SETTER)
+    WorkspaceManager workspaceManager
     @Inject Provider<TopologicalSorter> sorterProvider
 
     val dirtyFiles = <URI>newLinkedHashSet
