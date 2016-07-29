@@ -55,7 +55,7 @@ public class ResourceLoadTest extends AbstractXtextTests {
 		List<Object[]> result = Lists.newArrayList();
 		try {
 			String mweFile = staticReadFileIntoString("org/eclipse/xtext/GenerateAllTestLanguages.mwe2");
-			Pattern pattern = Pattern.compile("uri\\s*=\\s*\"([^\"]*)\"");
+			Pattern pattern = Pattern.compile("grammarUri\\s*=\\s*\"([^\"]*)\"");
 			Matcher matcher = pattern.matcher(mweFile);
 			while (matcher.find()) {
 				String grammarURI = matcher.group(1);
