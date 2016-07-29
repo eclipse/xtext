@@ -61,7 +61,7 @@ public class MergeableManifest extends Manifest {
     public static String make512Safe(StringBuffer lines) {
         if (lines.length() > 512) {
         	StringBuilder result = new StringBuilder(lines.length());
-        	String[] splitted = lines.toString().split("\\r\\n");
+        	String[] splitted = lines.toString().split("\\r?\\n");
         	for(String string: splitted) {
         		if (string.length() > 512) {
         			int idx = 510;
