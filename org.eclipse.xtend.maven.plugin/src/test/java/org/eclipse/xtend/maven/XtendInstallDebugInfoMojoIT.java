@@ -249,6 +249,9 @@ public class XtendInstallDebugInfoMojoIT {
 
 	private Verifier newVerifier(String pathToTestProject) throws IOException, VerificationException {
 		File testDir = ResourceExtractor.simpleExtractResources(getClass(), pathToTestProject);
-		return new Verifier(testDir.getAbsolutePath());
+		Verifier verifier = new Verifier(testDir.getAbsolutePath());
+		String localRepo = new File("../build/maven-repository/").getAbsolutePath();
+		verifier.setLocalRepo(localRepo);
+		return verifier;
 	}
 }
