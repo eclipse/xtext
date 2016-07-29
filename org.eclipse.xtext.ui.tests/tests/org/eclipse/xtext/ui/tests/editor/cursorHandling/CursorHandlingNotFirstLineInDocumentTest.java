@@ -12,7 +12,7 @@ import org.eclipse.xtext.ui.editor.XtextEditor;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class CursorHandlingTestNotFirstLineInDocument extends CursorHandlingTest {
+public class CursorHandlingNotFirstLineInDocumentTest extends CursorHandlingTest {
 
 	@Override
 	protected XtextEditor openEditor(String content) throws Exception {

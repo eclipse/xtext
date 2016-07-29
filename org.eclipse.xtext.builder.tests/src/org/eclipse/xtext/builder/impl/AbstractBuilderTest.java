@@ -16,11 +16,13 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.intro.IIntroManager;
 import org.eclipse.xtext.builder.tests.Activator;
+import org.eclipse.xtext.junit4.ui.util.TargetPlatformUtil;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Event;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.BeforeClass;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Injector;
@@ -31,6 +33,11 @@ import com.google.inject.Injector;
 public abstract class AbstractBuilderTest extends Assert implements IResourceDescription.Event.Listener {
 	public final String F_EXT = ".buildertestlanguage";
 	private volatile List<Event> events = Lists.newArrayList();
+
+	@BeforeClass
+	public static void setupTargetPlatform() throws Exception {
+		TargetPlatformUtil.setTargetPlatform();
+	}
 
 	@Before
 	public void setUp() throws Exception {
