@@ -44,7 +44,7 @@ public class HiddenTokenSequencerTestLanguageGrammarAccess extends AbstractGramm
 		private final RuleCall cEntitiesEntityParserRuleCall_1_0 = (RuleCall)cEntitiesAssignment_1.eContents().get(0);
 		private final Keyword cEndKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
-		/// * SuppressWarnings[noInstantiation] * / DomainModel:
+		///* SuppressWarnings[noInstantiation] */ DomainModel:
 		//	'entities'
 		//	entities+=Entity*
 		//	'end';
@@ -150,7 +150,7 @@ public class HiddenTokenSequencerTestLanguageGrammarAccess extends AbstractGramm
 		return getModelAccess().getRule();
 	}
 	
-	/// * SuppressWarnings[noInstantiation] * / DomainModel:
+	///* SuppressWarnings[noInstantiation] */ DomainModel:
 	//	'entities'
 	//	entities+=Entity*
 	//	'end';
@@ -193,7 +193,7 @@ public class HiddenTokenSequencerTestLanguageGrammarAccess extends AbstractGramm
 	}
 	
 	//terminal ML_COMMENT:
-	//	'/ *'->'* /';
+	//	'/*'->'*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}

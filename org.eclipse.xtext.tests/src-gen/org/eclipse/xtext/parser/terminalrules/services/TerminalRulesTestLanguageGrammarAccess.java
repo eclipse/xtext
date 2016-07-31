@@ -200,7 +200,7 @@ public class TerminalRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 	}
 	
 	//terminal ML_COMMENT:
-	//	'/ *'->'* /';
+	//	'/*'->'*/';
 	public TerminalRule getML_COMMENTRule() {
 		return tML_COMMENT;
 	}

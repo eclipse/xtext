@@ -238,7 +238,7 @@ public class Bug289524ExTestLanguageGrammarAccess extends AbstractGrammarElement
 	}
 	
 	//terminal ML_COMMENT:
-	//	'/ *'->'* /';
+	//	'/*'->'*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}

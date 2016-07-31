@@ -795,7 +795,7 @@ public class NoParametersTestLanguageGrammarAccess extends AbstractGrammarElemen
 	}
 	
 	//terminal ML_COMMENT:
-	//	'/ *'->'* /';
+	//	'/*'->'*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}

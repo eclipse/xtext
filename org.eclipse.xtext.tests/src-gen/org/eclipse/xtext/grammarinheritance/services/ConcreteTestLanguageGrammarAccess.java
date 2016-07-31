@@ -483,7 +483,7 @@ public class ConcreteTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		return getInheritedParserRuleAccess().getRule();
 	}
 	
-	/// * SuppressWarnings[noInstantiation] * / AbstractCallOverridenParserRule mm::AModel:
+	///* SuppressWarnings[noInstantiation] */ AbstractCallOverridenParserRule mm::AModel:
 	//	'overridemodel' elements+=super::OverridableParserRule*
 	public AbstractTestLanguageGrammarAccess.AbstractCallOverridenParserRuleElements getAbstractCallOverridenParserRuleAccess() {
 		return gaAbstractTestLanguage.getAbstractCallOverridenParserRuleAccess();
@@ -493,7 +493,7 @@ public class ConcreteTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		return getAbstractCallOverridenParserRuleAccess().getRule();
 	}
 	
-	/// * SuppressWarnings[noInstantiation] * / AbstractCallExtendedParserRule mm::AModel:
+	///* SuppressWarnings[noInstantiation] */ AbstractCallExtendedParserRule mm::AModel:
 	//	'extendedmodel' elements+=super::ExtendableParserRule*
 	public AbstractTestLanguageGrammarAccess.AbstractCallExtendedParserRuleElements getAbstractCallExtendedParserRuleAccess() {
 		return gaAbstractTestLanguage.getAbstractCallExtendedParserRuleAccess();
@@ -529,7 +529,7 @@ public class ConcreteTestLanguageGrammarAccess extends AbstractGrammarElementFin
 	}
 	
 	//terminal ML_COMMENT:
-	//	'/ *'->'* /';
+	//	'/*'->'*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}

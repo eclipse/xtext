@@ -29,6 +29,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.Model#getX13 <em>X13</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.Model#getX14 <em>X14</em>}</li>
  *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.Model#getX15 <em>X15</em>}</li>
+ *   <li>{@link org.eclipse.xtext.serializer.syntacticsequencertest.Model#getX16 <em>X16</em>}</li>
  * </ul>
  *
  * @see org.eclipse.xtext.serializer.syntacticsequencertest.SyntacticsequencertestPackage#getModel()
@@ -426,5 +427,31 @@ public interface Model extends EObject
    * @generated
    */
   void setX15(FragmentCallerType value);
+
+  /**
+   * Returns the value of the '<em><b>X16</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>X16</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>X16</em>' containment reference.
+   * @see #setX16(Bug398890)
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.SyntacticsequencertestPackage#getModel_X16()
+   * @model containment="true"
+   * @generated
+   */
+  Bug398890 getX16();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.xtext.serializer.syntacticsequencertest.Model#getX16 <em>X16</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>X16</em>' containment reference.
+   * @see #getX16()
+   * @generated
+   */
+  void setX16(Bug398890 value);
 
 } // Model

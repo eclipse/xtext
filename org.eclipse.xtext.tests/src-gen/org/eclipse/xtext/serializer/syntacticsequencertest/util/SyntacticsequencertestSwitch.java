@@ -192,6 +192,13 @@ public class SyntacticsequencertestSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case SyntacticsequencertestPackage.BUG398890:
+      {
+        Bug398890 bug398890 = (Bug398890)theEObject;
+        T result = caseBug398890(bug398890);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case SyntacticsequencertestPackage.ADD0:
       {
         Add0 add0 = (Add0)theEObject;
@@ -520,6 +527,22 @@ public class SyntacticsequencertestSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseFragmentCallerType(FragmentCallerType object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Bug398890</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Bug398890</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseBug398890(Bug398890 object)
   {
     return null;
   }

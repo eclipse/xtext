@@ -36,7 +36,7 @@ public class FowlerDslTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Assignment cStatesAssignment_6 = (Assignment)cGroup.eContents().get(6);
 		private final RuleCall cStatesStateParserRuleCall_6_0 = (RuleCall)cStatesAssignment_6.eContents().get(0);
 		
-		/// * SuppressWarnings[noInstantiation] * / Statemachine:
+		///* SuppressWarnings[noInstantiation] */ Statemachine:
 		//	'events'
 		//	events+=Event*
 		//	'end'
@@ -296,7 +296,7 @@ public class FowlerDslTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	
-	/// * SuppressWarnings[noInstantiation] * / Statemachine:
+	///* SuppressWarnings[noInstantiation] */ Statemachine:
 	//	'events'
 	//	events+=Event*
 	//	'end'
@@ -374,7 +374,7 @@ public class FowlerDslTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 	
 	//terminal ML_COMMENT:
-	//	'/ *'->'* /';
+	//	'/*'->'*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}

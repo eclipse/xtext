@@ -35,7 +35,7 @@ public class Bug296889TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Assignment cValuesAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
 		private final RuleCall cValuesDataTypeExpressionParserRuleCall_1_1_0 = (RuleCall)cValuesAssignment_1_1.eContents().get(0);
 		
-		/// * SuppressWarnings[noInstantiation] * / Model:
+		///* SuppressWarnings[noInstantiation] */ Model:
 		//	"Model" expressions+=Expression* | "DataType" values+=DataTypeExpression*;
 		@Override public ParserRule getRule() { return rule; }
 		
@@ -297,7 +297,7 @@ public class Bug296889TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	
-	/// * SuppressWarnings[noInstantiation] * / Model:
+	///* SuppressWarnings[noInstantiation] */ Model:
 	//	"Model" expressions+=Expression* | "DataType" values+=DataTypeExpression*;
 	public ModelElements getModelAccess() {
 		return pModel;
@@ -407,7 +407,7 @@ public class Bug296889TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 	
 	//terminal ML_COMMENT:
-	//	'/ *'->'* /';
+	//	'/*'->'*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}

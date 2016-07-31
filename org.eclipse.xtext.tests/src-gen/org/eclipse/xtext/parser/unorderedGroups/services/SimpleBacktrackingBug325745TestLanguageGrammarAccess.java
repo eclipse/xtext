@@ -166,7 +166,7 @@ public class SimpleBacktrackingBug325745TestLanguageGrammarAccess extends Abstra
 	}
 	
 	//terminal ML_COMMENT:
-	//	'/ *'->'* /';
+	//	'/*'->'*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}

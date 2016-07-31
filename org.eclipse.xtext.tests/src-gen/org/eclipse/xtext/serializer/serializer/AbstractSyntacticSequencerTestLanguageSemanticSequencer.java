@@ -23,6 +23,7 @@ import org.eclipse.xtext.serializer.syntacticsequencertest.AlternativeTransition
 import org.eclipse.xtext.serializer.syntacticsequencertest.BooleanAlternative;
 import org.eclipse.xtext.serializer.syntacticsequencertest.BooleanAlternativeLiteral;
 import org.eclipse.xtext.serializer.syntacticsequencertest.BooleanValues;
+import org.eclipse.xtext.serializer.syntacticsequencertest.Bug398890;
 import org.eclipse.xtext.serializer.syntacticsequencertest.FragmentCallerType;
 import org.eclipse.xtext.serializer.syntacticsequencertest.LongAlternative;
 import org.eclipse.xtext.serializer.syntacticsequencertest.MandatoryKeywords;
@@ -75,6 +76,9 @@ public abstract class AbstractSyntacticSequencerTestLanguageSemanticSequencer ex
 				return; 
 			case SyntacticsequencertestPackage.BOOLEAN_VALUES:
 				sequence_BooleanValues(context, (BooleanValues) semanticObject); 
+				return; 
+			case SyntacticsequencertestPackage.BUG398890:
+				sequence_Bug398890(context, (Bug398890) semanticObject); 
 				return; 
 			case SyntacticsequencertestPackage.FRAGMENT_CALLER_TYPE:
 				sequence_Fragment1_FragmentCaller(context, (FragmentCallerType) semanticObject); 
@@ -267,6 +271,24 @@ public abstract class AbstractSyntacticSequencerTestLanguageSemanticSequencer ex
 	
 	/**
 	 * Contexts:
+	 *     Bug398890 returns Bug398890
+	 *
+	 * Constraint:
+	 *     name=ID
+	 */
+	protected void sequence_Bug398890(ISerializationContext context, Bug398890 semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, SyntacticsequencertestPackage.Literals.BUG398890__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SyntacticsequencertestPackage.Literals.BUG398890__NAME));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getBug398890Access().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     FragmentCaller returns FragmentCallerType
 	 *
 	 * Constraint:
@@ -375,7 +397,8 @@ public abstract class AbstractSyntacticSequencerTestLanguageSemanticSequencer ex
 	 *         x12=BooleanValues | 
 	 *         x13=LongAlternative | 
 	 *         x14=ActionOnly | 
-	 *         x15=FragmentCaller
+	 *         x15=FragmentCaller | 
+	 *         x16=Bug398890
 	 *     )
 	 */
 	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
