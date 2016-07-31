@@ -68,10 +68,10 @@ public class LazyLinkingTestLanguageGrammarAccess extends AbstractGrammarElement
 		private final RuleCall cUnresolvedProxyPropertyUnresolvedProxyPropertyParserRuleCall_6_0 = (RuleCall)cUnresolvedProxyPropertyAssignment_6.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_7 = (Keyword)cGroup.eContents().get(7);
 		
-		/// * 
+		///* 
 		// * SuppressWarnings[BidirectionalReference]
 		// * SuppressWarnings[potentialOverride]
-		// * / Type:
+		// */ Type:
 		//	'type' name=ID ('extends' ^extends=[Type] '.' parentId=[Property])? ('for' parentId=[Property] 'in' ^extends=[Type])?
 		//	'{'
 		//	properties+=Property*
@@ -297,10 +297,10 @@ public class LazyLinkingTestLanguageGrammarAccess extends AbstractGrammarElement
 		return getModelAccess().getRule();
 	}
 	
-	/// * 
+	///* 
 	// * SuppressWarnings[BidirectionalReference]
 	// * SuppressWarnings[potentialOverride]
-	// * / Type:
+	// */ Type:
 	//	'type' name=ID ('extends' ^extends=[Type] '.' parentId=[Property])? ('for' parentId=[Property] 'in' ^extends=[Type])?
 	//	'{'
 	//	properties+=Property*
@@ -354,7 +354,7 @@ public class LazyLinkingTestLanguageGrammarAccess extends AbstractGrammarElement
 	}
 	
 	//terminal ML_COMMENT:
-	//	'/ *'->'* /';
+	//	'/*'->'*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}

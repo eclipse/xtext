@@ -161,6 +161,11 @@ public class SyntacticsequencertestAdapterFactory extends AdapterFactoryImpl
         return createFragmentCallerTypeAdapter();
       }
       @Override
+      public Adapter caseBug398890(Bug398890 object)
+      {
+        return createBug398890Adapter();
+      }
+      @Override
       public Adapter caseAdd0(Add0 object)
       {
         return createAdd0Adapter();
@@ -468,6 +473,21 @@ public class SyntacticsequencertestAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createFragmentCallerTypeAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.serializer.syntacticsequencertest.Bug398890 <em>Bug398890</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.Bug398890
+   * @generated
+   */
+  public Adapter createBug398890Adapter()
   {
     return null;
   }

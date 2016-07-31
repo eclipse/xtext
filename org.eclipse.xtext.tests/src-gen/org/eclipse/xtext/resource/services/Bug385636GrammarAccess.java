@@ -465,7 +465,7 @@ public class Bug385636GrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//terminal ML_COMMENT:
-	//	'/ *'->'* /';
+	//	'/*'->'*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}

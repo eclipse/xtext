@@ -203,13 +203,22 @@ public interface SyntacticsequencertestPackage extends EPackage
   int MODEL__X15 = 14;
 
   /**
+   * The feature id for the '<em><b>X16</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MODEL__X16 = 15;
+
+  /**
    * The number of structural features of the '<em>Model</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MODEL_FEATURE_COUNT = 15;
+  int MODEL_FEATURE_COUNT = 16;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.MandatoryKeywordsImpl <em>Mandatory Keywords</em>}' class.
@@ -786,6 +795,34 @@ public interface SyntacticsequencertestPackage extends EPackage
   int FRAGMENT_CALLER_TYPE_FEATURE_COUNT = 3;
 
   /**
+   * The meta object id for the '{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.Bug398890Impl <em>Bug398890</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.Bug398890Impl
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getBug398890()
+   * @generated
+   */
+  int BUG398890 = 17;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int BUG398890__NAME = 0;
+
+  /**
+   * The number of structural features of the '<em>Bug398890</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int BUG398890_FEATURE_COUNT = 1;
+
+  /**
    * The meta object id for the '{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.Add0Impl <em>Add0</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -793,7 +830,7 @@ public interface SyntacticsequencertestPackage extends EPackage
    * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getAdd0()
    * @generated
    */
-  int ADD0 = 17;
+  int ADD0 = 18;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -830,7 +867,7 @@ public interface SyntacticsequencertestPackage extends EPackage
    * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getVal0()
    * @generated
    */
-  int VAL0 = 18;
+  int VAL0 = 19;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -858,7 +895,7 @@ public interface SyntacticsequencertestPackage extends EPackage
    * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getAdd1()
    * @generated
    */
-  int ADD1 = 19;
+  int ADD1 = 20;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -895,7 +932,7 @@ public interface SyntacticsequencertestPackage extends EPackage
    * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getVal1()
    * @generated
    */
-  int VAL1 = 20;
+  int VAL1 = 21;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -923,7 +960,7 @@ public interface SyntacticsequencertestPackage extends EPackage
    * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getAdd2()
    * @generated
    */
-  int ADD2 = 21;
+  int ADD2 = 22;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -960,7 +997,7 @@ public interface SyntacticsequencertestPackage extends EPackage
    * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getMult2()
    * @generated
    */
-  int MULT2 = 22;
+  int MULT2 = 23;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -997,7 +1034,7 @@ public interface SyntacticsequencertestPackage extends EPackage
    * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getVal2()
    * @generated
    */
-  int VAL2 = 23;
+  int VAL2 = 24;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1192,6 +1229,17 @@ public interface SyntacticsequencertestPackage extends EPackage
    * @generated
    */
   EReference getModel_X15();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.serializer.syntacticsequencertest.Model#getX16 <em>X16</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>X16</em>'.
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.Model#getX16()
+   * @see #getModel()
+   * @generated
+   */
+  EReference getModel_X16();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.serializer.syntacticsequencertest.MandatoryKeywords <em>Mandatory Keywords</em>}'.
@@ -1684,6 +1732,27 @@ public interface SyntacticsequencertestPackage extends EPackage
   EAttribute getFragmentCallerType_FragVal();
 
   /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.serializer.syntacticsequencertest.Bug398890 <em>Bug398890</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Bug398890</em>'.
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.Bug398890
+   * @generated
+   */
+  EClass getBug398890();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.serializer.syntacticsequencertest.Bug398890#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.eclipse.xtext.serializer.syntacticsequencertest.Bug398890#getName()
+   * @see #getBug398890()
+   * @generated
+   */
+  EAttribute getBug398890_Name();
+
+  /**
    * Returns the meta object for class '{@link org.eclipse.xtext.serializer.syntacticsequencertest.Add0 <em>Add0</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -2026,6 +2095,14 @@ public interface SyntacticsequencertestPackage extends EPackage
      * @generated
      */
     EReference MODEL__X15 = eINSTANCE.getModel_X15();
+
+    /**
+     * The meta object literal for the '<em><b>X16</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MODEL__X16 = eINSTANCE.getModel_X16();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.MandatoryKeywordsImpl <em>Mandatory Keywords</em>}' class.
@@ -2426,6 +2503,24 @@ public interface SyntacticsequencertestPackage extends EPackage
      * @generated
      */
     EAttribute FRAGMENT_CALLER_TYPE__FRAG_VAL = eINSTANCE.getFragmentCallerType_FragVal();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.Bug398890Impl <em>Bug398890</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.Bug398890Impl
+     * @see org.eclipse.xtext.serializer.syntacticsequencertest.impl.SyntacticsequencertestPackageImpl#getBug398890()
+     * @generated
+     */
+    EClass BUG398890 = eINSTANCE.getBug398890();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute BUG398890__NAME = eINSTANCE.getBug398890_Name();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.serializer.syntacticsequencertest.impl.Add0Impl <em>Add0</em>}' class.

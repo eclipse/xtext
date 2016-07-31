@@ -375,6 +375,26 @@ ruleModel returns [EObject current=null]
 				}
 			)
 		)
+		    |
+		(
+			(
+				{
+					newCompositeNode(grammarAccess.getModelAccess().getX16Bug398890ParserRuleCall_15_0());
+				}
+				lv_x16_15_0=ruleBug398890
+				{
+					if ($current==null) {
+						$current = createModelElementForParent(grammarAccess.getModelRule());
+					}
+					set(
+						$current,
+						"x16",
+						lv_x16_15_0,
+						"org.eclipse.xtext.serializer.SyntacticSequencerTestLanguage.Bug398890");
+					afterParserOrEnumRuleCall();
+				}
+			)
+		)
 	)
 ;
 
@@ -2023,9 +2043,52 @@ ruleFragment1[EObject in_current]  returns [EObject current=in_current]
 	)
 ;
 
+// Entry rule entryRuleBug398890
+entryRuleBug398890 returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getBug398890Rule()); }
+	iv_ruleBug398890=ruleBug398890
+	{ $current=$iv_ruleBug398890.current; }
+	EOF;
+
+// Rule Bug398890
+ruleBug398890 returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		this_C_COMMENT_END_0=RULE_C_COMMENT_END
+		{
+			newLeafNode(this_C_COMMENT_END_0, grammarAccess.getBug398890Access().getC_COMMENT_ENDTerminalRuleCall_0());
+		}
+		(
+			(
+				lv_name_1_0=RULE_ID
+				{
+					newLeafNode(lv_name_1_0, grammarAccess.getBug398890Access().getNameIDTerminalRuleCall_1_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getBug398890Rule());
+					}
+					setWithLastConsumed(
+						$current,
+						"name",
+						lv_name_1_0,
+						"org.eclipse.xtext.common.Terminals.ID");
+				}
+			)
+		)
+	)
+;
+
 RULE_TERMINAL_ID : '$1' RULE_ID;
 
 RULE_BOOLEAN_TERMINAL_ID : '%1' RULE_ID;
+
+RULE_C_COMMENT_END : '*/';
 
 RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 

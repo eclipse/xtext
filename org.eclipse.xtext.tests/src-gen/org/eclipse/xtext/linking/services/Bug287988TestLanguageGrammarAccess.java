@@ -52,7 +52,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Assignment cAttributesAssignment_5_1 = (Assignment)cGroup_5.eContents().get(1);
 		private final RuleCall cAttributesActionAttributeParserRuleCall_5_1_0 = (RuleCall)cAttributesAssignment_5_1.eContents().get(0);
 		
-		/// * SuppressWarnings[noInstantiation] * / Model:
+		///* SuppressWarnings[noInstantiation] */ Model:
 		//	'actions' attributes+=BaseAttribute* | 'simple' attributes+=SimpleAttribute* | 'rulecall'
 		//	attributes+=RuleCallAttribute* | 'rulecall2' attributes+=RuleCallAttribute2* | 'rulecall3'
 		//	attributes+=RuleCallAttribute3* | 'inlinedActions' attributes+=ActionAttribute*;
@@ -666,7 +666,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	
-	/// * SuppressWarnings[noInstantiation] * / Model:
+	///* SuppressWarnings[noInstantiation] */ Model:
 	//	'actions' attributes+=BaseAttribute* | 'simple' attributes+=SimpleAttribute* | 'rulecall'
 	//	attributes+=RuleCallAttribute* | 'rulecall2' attributes+=RuleCallAttribute2* | 'rulecall3'
 	//	attributes+=RuleCallAttribute3* | 'inlinedActions' attributes+=ActionAttribute*;
@@ -818,7 +818,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 	
 	//terminal ML_COMMENT:
-	//	'/ *'->'* /';
+	//	'/*'->'*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}

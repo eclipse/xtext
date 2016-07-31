@@ -761,7 +761,7 @@ public class XtextGrammarTestLanguageGrammarAccess extends AbstractGrammarElemen
 		private final RuleCall cAbstractTerminalParserRuleCall_0_1 = (RuleCall)cAlternatives_0.eContents().get(1);
 		private final RuleCall cCardinalitiesParserRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
 		
-		/// * SuppressWarnings[potentialOverride]: Handled in CardinalityAwareEcoreFactory * / AbstractTokenWithCardinality
+		///* SuppressWarnings[potentialOverride]: Handled in CardinalityAwareEcoreFactory */ AbstractTokenWithCardinality
 		//AbstractElement:
 		//	(Assignment | AbstractTerminal) Cardinalities?
 		@Override public ParserRule getRule() { return rule; }
@@ -1622,7 +1622,7 @@ public class XtextGrammarTestLanguageGrammarAccess extends AbstractGrammarElemen
 		private final RuleCall cTerminalTokenElementParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final RuleCall cCardinalitiesParserRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
 		
-		/// * SuppressWarnings[potentialOverride]: Handled in CardinalityAwareEcoreFactory * / TerminalToken AbstractElement:
+		///* SuppressWarnings[potentialOverride]: Handled in CardinalityAwareEcoreFactory */ TerminalToken AbstractElement:
 		//	TerminalTokenElement Cardinalities?
 		@Override public ParserRule getRule() { return rule; }
 		
@@ -2284,7 +2284,7 @@ public class XtextGrammarTestLanguageGrammarAccess extends AbstractGrammarElemen
 		return getAbstractTokenAccess().getRule();
 	}
 	
-	/// * SuppressWarnings[potentialOverride]: Handled in CardinalityAwareEcoreFactory * / AbstractTokenWithCardinality
+	///* SuppressWarnings[potentialOverride]: Handled in CardinalityAwareEcoreFactory */ AbstractTokenWithCardinality
 	//AbstractElement:
 	//	(Assignment | AbstractTerminal) Cardinalities?
 	public AbstractTokenWithCardinalityElements getAbstractTokenWithCardinalityAccess() {
@@ -2537,7 +2537,7 @@ public class XtextGrammarTestLanguageGrammarAccess extends AbstractGrammarElemen
 		return getTerminalGroupAccess().getRule();
 	}
 	
-	/// * SuppressWarnings[potentialOverride]: Handled in CardinalityAwareEcoreFactory * / TerminalToken AbstractElement:
+	///* SuppressWarnings[potentialOverride]: Handled in CardinalityAwareEcoreFactory */ TerminalToken AbstractElement:
 	//	TerminalTokenElement Cardinalities?
 	public TerminalTokenElements getTerminalTokenAccess() {
 		return pTerminalToken;
@@ -2679,7 +2679,7 @@ public class XtextGrammarTestLanguageGrammarAccess extends AbstractGrammarElemen
 	}
 	
 	//terminal ML_COMMENT:
-	//	'/ *'->'* /';
+	//	'/*'->'*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}

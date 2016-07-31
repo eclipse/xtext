@@ -585,7 +585,7 @@ public class XtextTerminalsTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final Keyword cCardinalityAsteriskKeyword_1_0_1 = (Keyword)cCardinalityAlternatives_1_0.eContents().get(1);
 		private final Keyword cCardinalityPlusSignKeyword_1_0_2 = (Keyword)cCardinalityAlternatives_1_0.eContents().get(2);
 		
-		/// * SuppressWarnings[potentialOverride] * / AbstractTokenWithCardinality AbstractElement:
+		///* SuppressWarnings[potentialOverride] */ AbstractTokenWithCardinality AbstractElement:
 		//	(Assignment | AbstractTerminal) cardinality=('?' | '*' | '+')?
 		@Override public ParserRule getRule() { return rule; }
 		
@@ -1094,7 +1094,7 @@ public class XtextTerminalsTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final Keyword cCardinalityAsteriskKeyword_1_0_1 = (Keyword)cCardinalityAlternatives_1_0.eContents().get(1);
 		private final Keyword cCardinalityPlusSignKeyword_1_0_2 = (Keyword)cCardinalityAlternatives_1_0.eContents().get(2);
 		
-		/// * SuppressWarnings[potentialOverride] * / TerminalToken AbstractElement:
+		///* SuppressWarnings[potentialOverride] */ TerminalToken AbstractElement:
 		//	TerminalTokenElement cardinality=('?' | '*' | '+')?
 		@Override public ParserRule getRule() { return rule; }
 		
@@ -1668,7 +1668,7 @@ public class XtextTerminalsTestLanguageGrammarAccess extends AbstractGrammarElem
 		return getAbstractTokenAccess().getRule();
 	}
 	
-	/// * SuppressWarnings[potentialOverride] * / AbstractTokenWithCardinality AbstractElement:
+	///* SuppressWarnings[potentialOverride] */ AbstractTokenWithCardinality AbstractElement:
 	//	(Assignment | AbstractTerminal) cardinality=('?' | '*' | '+')?
 	public AbstractTokenWithCardinalityElements getAbstractTokenWithCardinalityAccess() {
 		return pAbstractTokenWithCardinality;
@@ -1820,7 +1820,7 @@ public class XtextTerminalsTestLanguageGrammarAccess extends AbstractGrammarElem
 		return getTerminalGroupAccess().getRule();
 	}
 	
-	/// * SuppressWarnings[potentialOverride] * / TerminalToken AbstractElement:
+	///* SuppressWarnings[potentialOverride] */ TerminalToken AbstractElement:
 	//	TerminalTokenElement cardinality=('?' | '*' | '+')?
 	public TerminalTokenElements getTerminalTokenAccess() {
 		return pTerminalToken;
@@ -1952,7 +1952,7 @@ public class XtextTerminalsTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 	
 	//terminal ML_COMMENT:
-	//	'/ *'->'* /';
+	//	'/*'->'*/';
 	public TerminalRule getML_COMMENTRule() {
 		return tML_COMMENT;
 	}

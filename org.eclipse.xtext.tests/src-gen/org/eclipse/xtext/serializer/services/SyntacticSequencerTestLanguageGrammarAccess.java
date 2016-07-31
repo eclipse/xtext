@@ -57,16 +57,20 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		private final RuleCall cX14ActionOnlyParserRuleCall_13_0 = (RuleCall)cX14Assignment_13.eContents().get(0);
 		private final Assignment cX15Assignment_14 = (Assignment)cAlternatives.eContents().get(14);
 		private final RuleCall cX15FragmentCallerParserRuleCall_14_0 = (RuleCall)cX15Assignment_14.eContents().get(0);
+		private final Assignment cX16Assignment_15 = (Assignment)cAlternatives.eContents().get(15);
+		private final RuleCall cX16Bug398890ParserRuleCall_15_0 = (RuleCall)cX16Assignment_15.eContents().get(0);
 		
 		//Model:
 		//	x1=MandatoryKeywords | x2=Exp0 | x3=Exp1 | x4=Exp2 | x5=SingleCrossReference | x6=BooleanAlternative |
 		//	x7=UnassignedDatatype | x8=OptionalSingleTransition | x9=OptionalManyTransition | x10=MandatoryManyTransition |
-		//	x11=AlternativeTransition | x12=BooleanValues | x13=LongAlternative | x14=ActionOnly | x15=FragmentCaller;
+		//	x11=AlternativeTransition | x12=BooleanValues | x13=LongAlternative | x14=ActionOnly | x15=FragmentCaller |
+		//	x16=Bug398890;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//x1=MandatoryKeywords | x2=Exp0 | x3=Exp1 | x4=Exp2 | x5=SingleCrossReference | x6=BooleanAlternative |
 		//x7=UnassignedDatatype | x8=OptionalSingleTransition | x9=OptionalManyTransition | x10=MandatoryManyTransition |
-		//x11=AlternativeTransition | x12=BooleanValues | x13=LongAlternative | x14=ActionOnly | x15=FragmentCaller
+		//x11=AlternativeTransition | x12=BooleanValues | x13=LongAlternative | x14=ActionOnly | x15=FragmentCaller |
+		//x16=Bug398890
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//x1=MandatoryKeywords
@@ -158,6 +162,12 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		
 		//FragmentCaller
 		public RuleCall getX15FragmentCallerParserRuleCall_14_0() { return cX15FragmentCallerParserRuleCall_14_0; }
+		
+		//x16=Bug398890
+		public Assignment getX16Assignment_15() { return cX16Assignment_15; }
+		
+		//Bug398890
+		public RuleCall getX16Bug398890ParserRuleCall_15_0() { return cX16Bug398890ParserRuleCall_15_0; }
 	}
 	public class MandatoryKeywordsElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SyntacticSequencerTestLanguage.MandatoryKeywords");
@@ -1176,6 +1186,29 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		//ID
 		public RuleCall getFragValIDTerminalRuleCall_0() { return cFragValIDTerminalRuleCall_0; }
 	}
+	public class Bug398890Elements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SyntacticSequencerTestLanguage.Bug398890");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final RuleCall cC_COMMENT_ENDTerminalRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		
+		//Bug398890:
+		//	C_COMMENT_END name=ID;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//C_COMMENT_END name=ID
+		public Group getGroup() { return cGroup; }
+		
+		//C_COMMENT_END
+		public RuleCall getC_COMMENT_ENDTerminalRuleCall_0() { return cC_COMMENT_ENDTerminalRuleCall_0; }
+		
+		//name=ID
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+		
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
+	}
 	
 	
 	private final ModelElements pModel;
@@ -1208,6 +1241,8 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	private final ActionOnlyElements pActionOnly;
 	private final FragmentCallerElements pFragmentCaller;
 	private final Fragment1Elements pFragment1;
+	private final Bug398890Elements pBug398890;
+	private final TerminalRule tC_COMMENT_END;
 	
 	private final Grammar grammar;
 	
@@ -1248,6 +1283,8 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		this.pActionOnly = new ActionOnlyElements();
 		this.pFragmentCaller = new FragmentCallerElements();
 		this.pFragment1 = new Fragment1Elements();
+		this.pBug398890 = new Bug398890Elements();
+		this.tC_COMMENT_END = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SyntacticSequencerTestLanguage.C_COMMENT_END");
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -1280,7 +1317,8 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	//Model:
 	//	x1=MandatoryKeywords | x2=Exp0 | x3=Exp1 | x4=Exp2 | x5=SingleCrossReference | x6=BooleanAlternative |
 	//	x7=UnassignedDatatype | x8=OptionalSingleTransition | x9=OptionalManyTransition | x10=MandatoryManyTransition |
-	//	x11=AlternativeTransition | x12=BooleanValues | x13=LongAlternative | x14=ActionOnly | x15=FragmentCaller;
+	//	x11=AlternativeTransition | x12=BooleanValues | x13=LongAlternative | x14=ActionOnly | x15=FragmentCaller |
+	//	x16=Bug398890;
 	public ModelElements getModelAccess() {
 		return pModel;
 	}
@@ -1580,6 +1618,22 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		return getFragment1Access().getRule();
 	}
 	
+	//Bug398890:
+	//	C_COMMENT_END name=ID;
+	public Bug398890Elements getBug398890Access() {
+		return pBug398890;
+	}
+	
+	public ParserRule getBug398890Rule() {
+		return getBug398890Access().getRule();
+	}
+	
+	//terminal C_COMMENT_END:
+	//	'*/';
+	public TerminalRule getC_COMMENT_ENDRule() {
+		return tC_COMMENT_END;
+	}
+	
 	//terminal ID:
 	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
@@ -1600,7 +1654,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	}
 	
 	//terminal ML_COMMENT:
-	//	'/ *'->'* /';
+	//	'/*'->'*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}

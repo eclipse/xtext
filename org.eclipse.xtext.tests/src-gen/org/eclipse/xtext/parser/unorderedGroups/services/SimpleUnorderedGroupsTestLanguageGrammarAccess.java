@@ -137,7 +137,7 @@ public class SimpleUnorderedGroupsTestLanguageGrammarAccess extends AbstractGram
 		return getUnorderedDatatypeAccess().getRule();
 	}
 	
-	/// * SuppressWarnings[potentialOverride] * / UnorderedSerialization:
+	///* SuppressWarnings[potentialOverride] */ UnorderedSerialization:
 	//	{UnorderedSerialization} ('1' first?='a'? & second?='b'? & third?='c'? & forth?='d'?
 	//	| '2' (firstAsList+='a' & secondAsList+='b')*
 	//	| '3' (firstAsList+='a'+ & second?='b')*);
@@ -169,7 +169,7 @@ public class SimpleUnorderedGroupsTestLanguageGrammarAccess extends AbstractGram
 	}
 	
 	//terminal ML_COMMENT:
-	//	'/ *'->'* /';
+	//	'/*'->'*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}

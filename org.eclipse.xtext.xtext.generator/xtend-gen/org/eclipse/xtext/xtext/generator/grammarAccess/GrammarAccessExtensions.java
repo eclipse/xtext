@@ -655,9 +655,7 @@ public class GrammarAccessExtensions {
     }
     String _trim = s.trim();
     String _replaceAll = _trim.replaceAll("(\\r?\\n)", ("$1" + prefix));
-    String _replaceAll_1 = _replaceAll.replaceAll("/\\*", "/ *");
-    String _replaceAll_2 = _replaceAll_1.replaceAll("\\*/", "* /");
-    String _replace = _replaceAll_2.replace("\\u", "\\\\u");
+    String _replace = _replaceAll.replace("\\u", "\\\\u");
     String _plus = (prefix + _replace);
     s = _plus;
     return s;

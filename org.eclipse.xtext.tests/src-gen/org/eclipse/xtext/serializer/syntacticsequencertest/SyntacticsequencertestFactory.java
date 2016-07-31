@@ -177,6 +177,15 @@ public interface SyntacticsequencertestFactory extends EFactory
   FragmentCallerType createFragmentCallerType();
 
   /**
+   * Returns a new object of class '<em>Bug398890</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Bug398890</em>'.
+   * @generated
+   */
+  Bug398890 createBug398890();
+
+  /**
    * Returns a new object of class '<em>Add0</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

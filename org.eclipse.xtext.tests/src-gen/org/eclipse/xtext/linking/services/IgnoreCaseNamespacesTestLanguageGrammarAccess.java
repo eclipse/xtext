@@ -169,7 +169,7 @@ public class IgnoreCaseNamespacesTestLanguageGrammarAccess extends AbstractGramm
 	}
 	
 	//terminal ML_COMMENT:
-	//	'/ *'->'* /';
+	//	'/*'->'*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}

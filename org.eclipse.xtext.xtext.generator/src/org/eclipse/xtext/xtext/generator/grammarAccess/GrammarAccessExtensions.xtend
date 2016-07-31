@@ -400,7 +400,7 @@ class GrammarAccessExtensions {
 		} catch (Exception e) {
 			s = e.toString
 		}
-		s = prefix + s.trim.replaceAll('(\\r?\\n)', '$1' + prefix).replaceAll('/\\*', '/ *').replaceAll('\\*/', '* /').replace("\\u", "\\\\u")
+		s = prefix + s.trim.replaceAll('(\\r?\\n)', '$1' + prefix).replace("\\u", "\\\\u")
 		return s
 	}
 	

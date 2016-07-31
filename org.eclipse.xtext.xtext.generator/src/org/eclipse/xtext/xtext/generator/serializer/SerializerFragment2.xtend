@@ -534,7 +534,7 @@ import org.eclipse.xtext.util.internal.Log
 		}
 		return '''
 			/**
-			 * «NodeModelUtils.getNode(rule).textWithoutComments.trim.replace('\n', '\n* ')»
+			 * «NodeModelUtils.getNode(rule).textWithoutComments.trim.replace('\n', '\n* ').replace('*/','*&#47;')»
 			 */
 			protected String «rule.unassignedCalledTokenRuleName»(«EObject» semanticObject, «RuleCall» ruleCall, «INode» node) {
 				if (node != null)

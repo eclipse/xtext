@@ -76,6 +76,8 @@ public abstract class AbstractSyntacticSequencerTestLanguageSyntacticSequencer e
 			return getBOOLEAN_TERMINAL_IDToken(semanticObject, ruleCall, node);
 		else if (ruleCall.getRule() == grammarAccess.getBooleanDatatypeIDRule())
 			return getBooleanDatatypeIDToken(semanticObject, ruleCall, node);
+		else if (ruleCall.getRule() == grammarAccess.getC_COMMENT_ENDRule())
+			return getC_COMMENT_ENDToken(semanticObject, ruleCall, node);
 		else if (ruleCall.getRule() == grammarAccess.getIDRule())
 			return getIDToken(semanticObject, ruleCall, node);
 		else if (ruleCall.getRule() == grammarAccess.getKW1Rule())
@@ -101,6 +103,15 @@ public abstract class AbstractSyntacticSequencerTestLanguageSyntacticSequencer e
 		if (node != null)
 			return getTokenText(node);
 		return "";
+	}
+	
+	/**
+	 * terminal C_COMMENT_END: '*&#47;';
+	 */
+	protected String getC_COMMENT_ENDToken(EObject semanticObject, RuleCall ruleCall, INode node) {
+		if (node != null)
+			return getTokenText(node);
+		return "*/";
 	}
 	
 	/**

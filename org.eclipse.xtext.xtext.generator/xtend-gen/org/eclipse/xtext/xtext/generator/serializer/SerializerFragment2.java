@@ -1725,7 +1725,8 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
         String _textWithoutComments = SerializerFragment2.this.textWithoutComments(_node);
         String _trim = _textWithoutComments.trim();
         String _replace = _trim.replace("\n", "\n* ");
-        _builder.append(_replace, " ");
+        String _replace_1 = _replace.replace("*/", "*&#47;");
+        _builder.append(_replace_1, " ");
         _builder.newLineIfNotEmpty();
         _builder.append(" ");
         _builder.append("*/");

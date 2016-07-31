@@ -12,8 +12,8 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class InternalSyntacticSequencerTestLanguageLexer extends Lexer {
-    public static final int RULE_STRING=8;
-    public static final int RULE_SL_COMMENT=10;
+    public static final int RULE_STRING=9;
+    public static final int RULE_SL_COMMENT=11;
     public static final int T__19=19;
     public static final int T__15=15;
     public static final int T__37=37;
@@ -24,32 +24,33 @@ public class InternalSyntacticSequencerTestLanguageLexer extends Lexer {
     public static final int T__18=18;
     public static final int T__33=33;
     public static final int T__34=34;
-    public static final int T__13=13;
     public static final int T__35=35;
     public static final int T__14=14;
     public static final int T__36=36;
+    public static final int RULE_C_COMMENT_END=8;
     public static final int EOF=-1;
     public static final int T__30=30;
     public static final int T__31=31;
     public static final int T__32=32;
     public static final int RULE_ID=4;
     public static final int RULE_BOOLEAN_TERMINAL_ID=7;
-    public static final int RULE_WS=11;
+    public static final int RULE_WS=12;
     public static final int RULE_TERMINAL_ID=5;
-    public static final int RULE_ANY_OTHER=12;
+    public static final int RULE_ANY_OTHER=13;
     public static final int T__26=26;
     public static final int T__27=27;
     public static final int T__28=28;
     public static final int RULE_INT=6;
     public static final int T__29=29;
     public static final int T__22=22;
-    public static final int RULE_ML_COMMENT=9;
+    public static final int RULE_ML_COMMENT=10;
     public static final int T__23=23;
     public static final int T__24=24;
     public static final int T__25=25;
     public static final int T__40=40;
     public static final int T__41=41;
     public static final int T__20=20;
+    public static final int T__42=42;
     public static final int T__21=21;
 
     // delegates
@@ -65,36 +66,15 @@ public class InternalSyntacticSequencerTestLanguageLexer extends Lexer {
     }
     public String getGrammarFileName() { return "InternalSyntacticSequencerTestLanguage.g"; }
 
-    // $ANTLR start "T__13"
-    public final void mT__13() throws RecognitionException {
-        try {
-            int _type = T__13;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSyntacticSequencerTestLanguage.g:11:7: ( '#1' )
-            // InternalSyntacticSequencerTestLanguage.g:11:9: '#1'
-            {
-            match("#1"); 
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        }
-    }
-    // $ANTLR end "T__13"
-
     // $ANTLR start "T__14"
     public final void mT__14() throws RecognitionException {
         try {
             int _type = T__14;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSyntacticSequencerTestLanguage.g:12:7: ( 'kw1' )
-            // InternalSyntacticSequencerTestLanguage.g:12:9: 'kw1'
+            // InternalSyntacticSequencerTestLanguage.g:11:7: ( '#1' )
+            // InternalSyntacticSequencerTestLanguage.g:11:9: '#1'
             {
-            match("kw1"); 
+            match("#1"); 
 
 
             }
@@ -112,10 +92,10 @@ public class InternalSyntacticSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = T__15;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSyntacticSequencerTestLanguage.g:13:7: ( 'kw2' )
-            // InternalSyntacticSequencerTestLanguage.g:13:9: 'kw2'
+            // InternalSyntacticSequencerTestLanguage.g:12:7: ( 'kw1' )
+            // InternalSyntacticSequencerTestLanguage.g:12:9: 'kw1'
             {
-            match("kw2"); 
+            match("kw1"); 
 
 
             }
@@ -133,10 +113,10 @@ public class InternalSyntacticSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = T__16;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSyntacticSequencerTestLanguage.g:14:7: ( 'kw3' )
-            // InternalSyntacticSequencerTestLanguage.g:14:9: 'kw3'
+            // InternalSyntacticSequencerTestLanguage.g:13:7: ( 'kw2' )
+            // InternalSyntacticSequencerTestLanguage.g:13:9: 'kw2'
             {
-            match("kw3"); 
+            match("kw2"); 
 
 
             }
@@ -154,10 +134,10 @@ public class InternalSyntacticSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = T__17;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSyntacticSequencerTestLanguage.g:15:7: ( 'kw4' )
-            // InternalSyntacticSequencerTestLanguage.g:15:9: 'kw4'
+            // InternalSyntacticSequencerTestLanguage.g:14:7: ( 'kw3' )
+            // InternalSyntacticSequencerTestLanguage.g:14:9: 'kw3'
             {
-            match("kw4"); 
+            match("kw3"); 
 
 
             }
@@ -175,10 +155,10 @@ public class InternalSyntacticSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = T__18;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSyntacticSequencerTestLanguage.g:16:7: ( '#2' )
-            // InternalSyntacticSequencerTestLanguage.g:16:9: '#2'
+            // InternalSyntacticSequencerTestLanguage.g:15:7: ( 'kw4' )
+            // InternalSyntacticSequencerTestLanguage.g:15:9: 'kw4'
             {
-            match("#2"); 
+            match("kw4"); 
 
 
             }
@@ -196,10 +176,11 @@ public class InternalSyntacticSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = T__19;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSyntacticSequencerTestLanguage.g:17:7: ( '+' )
-            // InternalSyntacticSequencerTestLanguage.g:17:9: '+'
+            // InternalSyntacticSequencerTestLanguage.g:16:7: ( '#2' )
+            // InternalSyntacticSequencerTestLanguage.g:16:9: '#2'
             {
-            match('+'); 
+            match("#2"); 
+
 
             }
 
@@ -216,11 +197,10 @@ public class InternalSyntacticSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = T__20;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSyntacticSequencerTestLanguage.g:18:7: ( '#3' )
-            // InternalSyntacticSequencerTestLanguage.g:18:9: '#3'
+            // InternalSyntacticSequencerTestLanguage.g:17:7: ( '+' )
+            // InternalSyntacticSequencerTestLanguage.g:17:9: '+'
             {
-            match("#3"); 
-
+            match('+'); 
 
             }
 
@@ -237,10 +217,11 @@ public class InternalSyntacticSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = T__21;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSyntacticSequencerTestLanguage.g:19:7: ( '(' )
-            // InternalSyntacticSequencerTestLanguage.g:19:9: '('
+            // InternalSyntacticSequencerTestLanguage.g:18:7: ( '#3' )
+            // InternalSyntacticSequencerTestLanguage.g:18:9: '#3'
             {
-            match('('); 
+            match("#3"); 
+
 
             }
 
@@ -257,10 +238,10 @@ public class InternalSyntacticSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = T__22;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSyntacticSequencerTestLanguage.g:20:7: ( ')' )
-            // InternalSyntacticSequencerTestLanguage.g:20:9: ')'
+            // InternalSyntacticSequencerTestLanguage.g:19:7: ( '(' )
+            // InternalSyntacticSequencerTestLanguage.g:19:9: '('
             {
-            match(')'); 
+            match('('); 
 
             }
 
@@ -277,11 +258,10 @@ public class InternalSyntacticSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = T__23;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSyntacticSequencerTestLanguage.g:21:7: ( '#4' )
-            // InternalSyntacticSequencerTestLanguage.g:21:9: '#4'
+            // InternalSyntacticSequencerTestLanguage.g:20:7: ( ')' )
+            // InternalSyntacticSequencerTestLanguage.g:20:9: ')'
             {
-            match("#4"); 
-
+            match(')'); 
 
             }
 
@@ -298,10 +278,11 @@ public class InternalSyntacticSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = T__24;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSyntacticSequencerTestLanguage.g:22:7: ( '*' )
-            // InternalSyntacticSequencerTestLanguage.g:22:9: '*'
+            // InternalSyntacticSequencerTestLanguage.g:21:7: ( '#4' )
+            // InternalSyntacticSequencerTestLanguage.g:21:9: '#4'
             {
-            match('*'); 
+            match("#4"); 
+
 
             }
 
@@ -318,11 +299,10 @@ public class InternalSyntacticSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = T__25;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSyntacticSequencerTestLanguage.g:23:7: ( '#5' )
-            // InternalSyntacticSequencerTestLanguage.g:23:9: '#5'
+            // InternalSyntacticSequencerTestLanguage.g:22:7: ( '*' )
+            // InternalSyntacticSequencerTestLanguage.g:22:9: '*'
             {
-            match("#5"); 
-
+            match('*'); 
 
             }
 
@@ -339,10 +319,10 @@ public class InternalSyntacticSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = T__26;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSyntacticSequencerTestLanguage.g:24:7: ( '#6' )
-            // InternalSyntacticSequencerTestLanguage.g:24:9: '#6'
+            // InternalSyntacticSequencerTestLanguage.g:23:7: ( '#5' )
+            // InternalSyntacticSequencerTestLanguage.g:23:9: '#5'
             {
-            match("#6"); 
+            match("#5"); 
 
 
             }
@@ -360,10 +340,10 @@ public class InternalSyntacticSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = T__27;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSyntacticSequencerTestLanguage.g:25:7: ( '#7' )
-            // InternalSyntacticSequencerTestLanguage.g:25:9: '#7'
+            // InternalSyntacticSequencerTestLanguage.g:24:7: ( '#6' )
+            // InternalSyntacticSequencerTestLanguage.g:24:9: '#6'
             {
-            match("#7"); 
+            match("#6"); 
 
 
             }
@@ -381,10 +361,10 @@ public class InternalSyntacticSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = T__28;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSyntacticSequencerTestLanguage.g:26:7: ( 'matched' )
-            // InternalSyntacticSequencerTestLanguage.g:26:9: 'matched'
+            // InternalSyntacticSequencerTestLanguage.g:25:7: ( '#7' )
+            // InternalSyntacticSequencerTestLanguage.g:25:9: '#7'
             {
-            match("matched"); 
+            match("#7"); 
 
 
             }
@@ -402,10 +382,10 @@ public class InternalSyntacticSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = T__29;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSyntacticSequencerTestLanguage.g:27:7: ( '#8' )
-            // InternalSyntacticSequencerTestLanguage.g:27:9: '#8'
+            // InternalSyntacticSequencerTestLanguage.g:26:7: ( 'matched' )
+            // InternalSyntacticSequencerTestLanguage.g:26:9: 'matched'
             {
-            match("#8"); 
+            match("matched"); 
 
 
             }
@@ -423,10 +403,10 @@ public class InternalSyntacticSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = T__30;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSyntacticSequencerTestLanguage.g:28:7: ( '#9' )
-            // InternalSyntacticSequencerTestLanguage.g:28:9: '#9'
+            // InternalSyntacticSequencerTestLanguage.g:27:7: ( '#8' )
+            // InternalSyntacticSequencerTestLanguage.g:27:9: '#8'
             {
-            match("#9"); 
+            match("#8"); 
 
 
             }
@@ -444,10 +424,10 @@ public class InternalSyntacticSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = T__31;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSyntacticSequencerTestLanguage.g:29:7: ( '#10' )
-            // InternalSyntacticSequencerTestLanguage.g:29:9: '#10'
+            // InternalSyntacticSequencerTestLanguage.g:28:7: ( '#9' )
+            // InternalSyntacticSequencerTestLanguage.g:28:9: '#9'
             {
-            match("#10"); 
+            match("#9"); 
 
 
             }
@@ -465,10 +445,10 @@ public class InternalSyntacticSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = T__32;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSyntacticSequencerTestLanguage.g:30:7: ( '#11' )
-            // InternalSyntacticSequencerTestLanguage.g:30:9: '#11'
+            // InternalSyntacticSequencerTestLanguage.g:29:7: ( '#10' )
+            // InternalSyntacticSequencerTestLanguage.g:29:9: '#10'
             {
-            match("#11"); 
+            match("#10"); 
 
 
             }
@@ -486,10 +466,10 @@ public class InternalSyntacticSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = T__33;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSyntacticSequencerTestLanguage.g:31:7: ( '#12' )
-            // InternalSyntacticSequencerTestLanguage.g:31:9: '#12'
+            // InternalSyntacticSequencerTestLanguage.g:30:7: ( '#11' )
+            // InternalSyntacticSequencerTestLanguage.g:30:9: '#11'
             {
-            match("#12"); 
+            match("#11"); 
 
 
             }
@@ -507,10 +487,10 @@ public class InternalSyntacticSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = T__34;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSyntacticSequencerTestLanguage.g:32:7: ( '#13' )
-            // InternalSyntacticSequencerTestLanguage.g:32:9: '#13'
+            // InternalSyntacticSequencerTestLanguage.g:31:7: ( '#12' )
+            // InternalSyntacticSequencerTestLanguage.g:31:9: '#12'
             {
-            match("#13"); 
+            match("#12"); 
 
 
             }
@@ -528,10 +508,10 @@ public class InternalSyntacticSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = T__35;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSyntacticSequencerTestLanguage.g:33:7: ( 'kw5' )
-            // InternalSyntacticSequencerTestLanguage.g:33:9: 'kw5'
+            // InternalSyntacticSequencerTestLanguage.g:32:7: ( '#13' )
+            // InternalSyntacticSequencerTestLanguage.g:32:9: '#13'
             {
-            match("kw5"); 
+            match("#13"); 
 
 
             }
@@ -549,10 +529,10 @@ public class InternalSyntacticSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = T__36;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSyntacticSequencerTestLanguage.g:34:7: ( 'kw6' )
-            // InternalSyntacticSequencerTestLanguage.g:34:9: 'kw6'
+            // InternalSyntacticSequencerTestLanguage.g:33:7: ( 'kw5' )
+            // InternalSyntacticSequencerTestLanguage.g:33:9: 'kw5'
             {
-            match("kw6"); 
+            match("kw5"); 
 
 
             }
@@ -570,10 +550,10 @@ public class InternalSyntacticSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = T__37;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSyntacticSequencerTestLanguage.g:35:7: ( 'kw7' )
-            // InternalSyntacticSequencerTestLanguage.g:35:9: 'kw7'
+            // InternalSyntacticSequencerTestLanguage.g:34:7: ( 'kw6' )
+            // InternalSyntacticSequencerTestLanguage.g:34:9: 'kw6'
             {
-            match("kw7"); 
+            match("kw6"); 
 
 
             }
@@ -591,10 +571,10 @@ public class InternalSyntacticSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = T__38;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSyntacticSequencerTestLanguage.g:36:7: ( 'kw8' )
-            // InternalSyntacticSequencerTestLanguage.g:36:9: 'kw8'
+            // InternalSyntacticSequencerTestLanguage.g:35:7: ( 'kw7' )
+            // InternalSyntacticSequencerTestLanguage.g:35:9: 'kw7'
             {
-            match("kw8"); 
+            match("kw7"); 
 
 
             }
@@ -612,10 +592,11 @@ public class InternalSyntacticSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = T__39;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSyntacticSequencerTestLanguage.g:37:7: ( '!' )
-            // InternalSyntacticSequencerTestLanguage.g:37:9: '!'
+            // InternalSyntacticSequencerTestLanguage.g:36:7: ( 'kw8' )
+            // InternalSyntacticSequencerTestLanguage.g:36:9: 'kw8'
             {
-            match('!'); 
+            match("kw8"); 
+
 
             }
 
@@ -632,11 +613,10 @@ public class InternalSyntacticSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = T__40;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSyntacticSequencerTestLanguage.g:38:7: ( '#14' )
-            // InternalSyntacticSequencerTestLanguage.g:38:9: '#14'
+            // InternalSyntacticSequencerTestLanguage.g:37:7: ( '!' )
+            // InternalSyntacticSequencerTestLanguage.g:37:9: '!'
             {
-            match("#14"); 
-
+            match('!'); 
 
             }
 
@@ -653,6 +633,27 @@ public class InternalSyntacticSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = T__41;
             int _channel = DEFAULT_TOKEN_CHANNEL;
+            // InternalSyntacticSequencerTestLanguage.g:38:7: ( '#14' )
+            // InternalSyntacticSequencerTestLanguage.g:38:9: '#14'
+            {
+            match("#14"); 
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "T__41"
+
+    // $ANTLR start "T__42"
+    public final void mT__42() throws RecognitionException {
+        try {
+            int _type = T__42;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
             // InternalSyntacticSequencerTestLanguage.g:39:7: ( '#15' )
             // InternalSyntacticSequencerTestLanguage.g:39:9: '#15'
             {
@@ -667,15 +668,15 @@ public class InternalSyntacticSequencerTestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__41"
+    // $ANTLR end "T__42"
 
     // $ANTLR start "RULE_TERMINAL_ID"
     public final void mRULE_TERMINAL_ID() throws RecognitionException {
         try {
             int _type = RULE_TERMINAL_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSyntacticSequencerTestLanguage.g:2026:18: ( '$1' RULE_ID )
-            // InternalSyntacticSequencerTestLanguage.g:2026:20: '$1' RULE_ID
+            // InternalSyntacticSequencerTestLanguage.g:2087:18: ( '$1' RULE_ID )
+            // InternalSyntacticSequencerTestLanguage.g:2087:20: '$1' RULE_ID
             {
             match("$1"); 
 
@@ -696,8 +697,8 @@ public class InternalSyntacticSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_BOOLEAN_TERMINAL_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSyntacticSequencerTestLanguage.g:2028:26: ( '%1' RULE_ID )
-            // InternalSyntacticSequencerTestLanguage.g:2028:28: '%1' RULE_ID
+            // InternalSyntacticSequencerTestLanguage.g:2089:26: ( '%1' RULE_ID )
+            // InternalSyntacticSequencerTestLanguage.g:2089:28: '%1' RULE_ID
             {
             match("%1"); 
 
@@ -713,15 +714,36 @@ public class InternalSyntacticSequencerTestLanguageLexer extends Lexer {
     }
     // $ANTLR end "RULE_BOOLEAN_TERMINAL_ID"
 
+    // $ANTLR start "RULE_C_COMMENT_END"
+    public final void mRULE_C_COMMENT_END() throws RecognitionException {
+        try {
+            int _type = RULE_C_COMMENT_END;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // InternalSyntacticSequencerTestLanguage.g:2091:20: ( '*/' )
+            // InternalSyntacticSequencerTestLanguage.g:2091:22: '*/'
+            {
+            match("*/"); 
+
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "RULE_C_COMMENT_END"
+
     // $ANTLR start "RULE_ID"
     public final void mRULE_ID() throws RecognitionException {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSyntacticSequencerTestLanguage.g:2030:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // InternalSyntacticSequencerTestLanguage.g:2030:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalSyntacticSequencerTestLanguage.g:2093:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // InternalSyntacticSequencerTestLanguage.g:2093:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // InternalSyntacticSequencerTestLanguage.g:2030:11: ( '^' )?
+            // InternalSyntacticSequencerTestLanguage.g:2093:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -730,7 +752,7 @@ public class InternalSyntacticSequencerTestLanguageLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // InternalSyntacticSequencerTestLanguage.g:2030:11: '^'
+                    // InternalSyntacticSequencerTestLanguage.g:2093:11: '^'
                     {
                     match('^'); 
 
@@ -748,7 +770,7 @@ public class InternalSyntacticSequencerTestLanguageLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // InternalSyntacticSequencerTestLanguage.g:2030:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalSyntacticSequencerTestLanguage.g:2093:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -797,10 +819,10 @@ public class InternalSyntacticSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSyntacticSequencerTestLanguage.g:2032:10: ( ( '0' .. '9' )+ )
-            // InternalSyntacticSequencerTestLanguage.g:2032:12: ( '0' .. '9' )+
+            // InternalSyntacticSequencerTestLanguage.g:2095:10: ( ( '0' .. '9' )+ )
+            // InternalSyntacticSequencerTestLanguage.g:2095:12: ( '0' .. '9' )+
             {
-            // InternalSyntacticSequencerTestLanguage.g:2032:12: ( '0' .. '9' )+
+            // InternalSyntacticSequencerTestLanguage.g:2095:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -814,7 +836,7 @@ public class InternalSyntacticSequencerTestLanguageLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // InternalSyntacticSequencerTestLanguage.g:2032:13: '0' .. '9'
+            	    // InternalSyntacticSequencerTestLanguage.g:2095:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -846,10 +868,10 @@ public class InternalSyntacticSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSyntacticSequencerTestLanguage.g:2034:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // InternalSyntacticSequencerTestLanguage.g:2034:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalSyntacticSequencerTestLanguage.g:2097:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // InternalSyntacticSequencerTestLanguage.g:2097:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // InternalSyntacticSequencerTestLanguage.g:2034:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalSyntacticSequencerTestLanguage.g:2097:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -867,10 +889,10 @@ public class InternalSyntacticSequencerTestLanguageLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // InternalSyntacticSequencerTestLanguage.g:2034:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // InternalSyntacticSequencerTestLanguage.g:2097:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // InternalSyntacticSequencerTestLanguage.g:2034:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // InternalSyntacticSequencerTestLanguage.g:2097:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -886,7 +908,7 @@ public class InternalSyntacticSequencerTestLanguageLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // InternalSyntacticSequencerTestLanguage.g:2034:21: '\\\\' .
+                    	    // InternalSyntacticSequencerTestLanguage.g:2097:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -894,7 +916,7 @@ public class InternalSyntacticSequencerTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalSyntacticSequencerTestLanguage.g:2034:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // InternalSyntacticSequencerTestLanguage.g:2097:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -919,10 +941,10 @@ public class InternalSyntacticSequencerTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalSyntacticSequencerTestLanguage.g:2034:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // InternalSyntacticSequencerTestLanguage.g:2097:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // InternalSyntacticSequencerTestLanguage.g:2034:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // InternalSyntacticSequencerTestLanguage.g:2097:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -938,7 +960,7 @@ public class InternalSyntacticSequencerTestLanguageLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // InternalSyntacticSequencerTestLanguage.g:2034:54: '\\\\' .
+                    	    // InternalSyntacticSequencerTestLanguage.g:2097:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -946,7 +968,7 @@ public class InternalSyntacticSequencerTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalSyntacticSequencerTestLanguage.g:2034:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // InternalSyntacticSequencerTestLanguage.g:2097:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -989,12 +1011,12 @@ public class InternalSyntacticSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSyntacticSequencerTestLanguage.g:2036:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // InternalSyntacticSequencerTestLanguage.g:2036:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // InternalSyntacticSequencerTestLanguage.g:2099:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // InternalSyntacticSequencerTestLanguage.g:2099:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // InternalSyntacticSequencerTestLanguage.g:2036:24: ( options {greedy=false; } : . )*
+            // InternalSyntacticSequencerTestLanguage.g:2099:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -1019,7 +1041,7 @@ public class InternalSyntacticSequencerTestLanguageLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // InternalSyntacticSequencerTestLanguage.g:2036:52: .
+            	    // InternalSyntacticSequencerTestLanguage.g:2099:52: .
             	    {
             	    matchAny(); 
 
@@ -1049,12 +1071,12 @@ public class InternalSyntacticSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSyntacticSequencerTestLanguage.g:2038:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // InternalSyntacticSequencerTestLanguage.g:2038:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // InternalSyntacticSequencerTestLanguage.g:2101:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // InternalSyntacticSequencerTestLanguage.g:2101:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // InternalSyntacticSequencerTestLanguage.g:2038:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalSyntacticSequencerTestLanguage.g:2101:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -1067,7 +1089,7 @@ public class InternalSyntacticSequencerTestLanguageLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // InternalSyntacticSequencerTestLanguage.g:2038:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalSyntacticSequencerTestLanguage.g:2101:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -1087,7 +1109,7 @@ public class InternalSyntacticSequencerTestLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // InternalSyntacticSequencerTestLanguage.g:2038:40: ( ( '\\r' )? '\\n' )?
+            // InternalSyntacticSequencerTestLanguage.g:2101:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -1096,9 +1118,9 @@ public class InternalSyntacticSequencerTestLanguageLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // InternalSyntacticSequencerTestLanguage.g:2038:41: ( '\\r' )? '\\n'
+                    // InternalSyntacticSequencerTestLanguage.g:2101:41: ( '\\r' )? '\\n'
                     {
-                    // InternalSyntacticSequencerTestLanguage.g:2038:41: ( '\\r' )?
+                    // InternalSyntacticSequencerTestLanguage.g:2101:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -1107,7 +1129,7 @@ public class InternalSyntacticSequencerTestLanguageLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // InternalSyntacticSequencerTestLanguage.g:2038:41: '\\r'
+                            // InternalSyntacticSequencerTestLanguage.g:2101:41: '\\r'
                             {
                             match('\r'); 
 
@@ -1139,10 +1161,10 @@ public class InternalSyntacticSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSyntacticSequencerTestLanguage.g:2040:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // InternalSyntacticSequencerTestLanguage.g:2040:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalSyntacticSequencerTestLanguage.g:2103:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalSyntacticSequencerTestLanguage.g:2103:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // InternalSyntacticSequencerTestLanguage.g:2040:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalSyntacticSequencerTestLanguage.g:2103:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -1196,8 +1218,8 @@ public class InternalSyntacticSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalSyntacticSequencerTestLanguage.g:2042:16: ( . )
-            // InternalSyntacticSequencerTestLanguage.g:2042:18: .
+            // InternalSyntacticSequencerTestLanguage.g:2105:16: ( . )
+            // InternalSyntacticSequencerTestLanguage.g:2105:18: .
             {
             matchAny(); 
 
@@ -1212,210 +1234,210 @@ public class InternalSyntacticSequencerTestLanguageLexer extends Lexer {
     // $ANTLR end "RULE_ANY_OTHER"
 
     public void mTokens() throws RecognitionException {
-        // InternalSyntacticSequencerTestLanguage.g:1:8: ( T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | T__39 | T__40 | T__41 | RULE_TERMINAL_ID | RULE_BOOLEAN_TERMINAL_ID | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
-        int alt12=38;
+        // InternalSyntacticSequencerTestLanguage.g:1:8: ( T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | T__39 | T__40 | T__41 | T__42 | RULE_TERMINAL_ID | RULE_BOOLEAN_TERMINAL_ID | RULE_C_COMMENT_END | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
+        int alt12=39;
         alt12 = dfa12.predict(input);
         switch (alt12) {
             case 1 :
-                // InternalSyntacticSequencerTestLanguage.g:1:10: T__13
-                {
-                mT__13(); 
-
-                }
-                break;
-            case 2 :
-                // InternalSyntacticSequencerTestLanguage.g:1:16: T__14
+                // InternalSyntacticSequencerTestLanguage.g:1:10: T__14
                 {
                 mT__14(); 
 
                 }
                 break;
-            case 3 :
-                // InternalSyntacticSequencerTestLanguage.g:1:22: T__15
+            case 2 :
+                // InternalSyntacticSequencerTestLanguage.g:1:16: T__15
                 {
                 mT__15(); 
 
                 }
                 break;
-            case 4 :
-                // InternalSyntacticSequencerTestLanguage.g:1:28: T__16
+            case 3 :
+                // InternalSyntacticSequencerTestLanguage.g:1:22: T__16
                 {
                 mT__16(); 
 
                 }
                 break;
-            case 5 :
-                // InternalSyntacticSequencerTestLanguage.g:1:34: T__17
+            case 4 :
+                // InternalSyntacticSequencerTestLanguage.g:1:28: T__17
                 {
                 mT__17(); 
 
                 }
                 break;
-            case 6 :
-                // InternalSyntacticSequencerTestLanguage.g:1:40: T__18
+            case 5 :
+                // InternalSyntacticSequencerTestLanguage.g:1:34: T__18
                 {
                 mT__18(); 
 
                 }
                 break;
-            case 7 :
-                // InternalSyntacticSequencerTestLanguage.g:1:46: T__19
+            case 6 :
+                // InternalSyntacticSequencerTestLanguage.g:1:40: T__19
                 {
                 mT__19(); 
 
                 }
                 break;
-            case 8 :
-                // InternalSyntacticSequencerTestLanguage.g:1:52: T__20
+            case 7 :
+                // InternalSyntacticSequencerTestLanguage.g:1:46: T__20
                 {
                 mT__20(); 
 
                 }
                 break;
-            case 9 :
-                // InternalSyntacticSequencerTestLanguage.g:1:58: T__21
+            case 8 :
+                // InternalSyntacticSequencerTestLanguage.g:1:52: T__21
                 {
                 mT__21(); 
 
                 }
                 break;
-            case 10 :
-                // InternalSyntacticSequencerTestLanguage.g:1:64: T__22
+            case 9 :
+                // InternalSyntacticSequencerTestLanguage.g:1:58: T__22
                 {
                 mT__22(); 
 
                 }
                 break;
-            case 11 :
-                // InternalSyntacticSequencerTestLanguage.g:1:70: T__23
+            case 10 :
+                // InternalSyntacticSequencerTestLanguage.g:1:64: T__23
                 {
                 mT__23(); 
 
                 }
                 break;
-            case 12 :
-                // InternalSyntacticSequencerTestLanguage.g:1:76: T__24
+            case 11 :
+                // InternalSyntacticSequencerTestLanguage.g:1:70: T__24
                 {
                 mT__24(); 
 
                 }
                 break;
-            case 13 :
-                // InternalSyntacticSequencerTestLanguage.g:1:82: T__25
+            case 12 :
+                // InternalSyntacticSequencerTestLanguage.g:1:76: T__25
                 {
                 mT__25(); 
 
                 }
                 break;
-            case 14 :
-                // InternalSyntacticSequencerTestLanguage.g:1:88: T__26
+            case 13 :
+                // InternalSyntacticSequencerTestLanguage.g:1:82: T__26
                 {
                 mT__26(); 
 
                 }
                 break;
-            case 15 :
-                // InternalSyntacticSequencerTestLanguage.g:1:94: T__27
+            case 14 :
+                // InternalSyntacticSequencerTestLanguage.g:1:88: T__27
                 {
                 mT__27(); 
 
                 }
                 break;
-            case 16 :
-                // InternalSyntacticSequencerTestLanguage.g:1:100: T__28
+            case 15 :
+                // InternalSyntacticSequencerTestLanguage.g:1:94: T__28
                 {
                 mT__28(); 
 
                 }
                 break;
-            case 17 :
-                // InternalSyntacticSequencerTestLanguage.g:1:106: T__29
+            case 16 :
+                // InternalSyntacticSequencerTestLanguage.g:1:100: T__29
                 {
                 mT__29(); 
 
                 }
                 break;
-            case 18 :
-                // InternalSyntacticSequencerTestLanguage.g:1:112: T__30
+            case 17 :
+                // InternalSyntacticSequencerTestLanguage.g:1:106: T__30
                 {
                 mT__30(); 
 
                 }
                 break;
-            case 19 :
-                // InternalSyntacticSequencerTestLanguage.g:1:118: T__31
+            case 18 :
+                // InternalSyntacticSequencerTestLanguage.g:1:112: T__31
                 {
                 mT__31(); 
 
                 }
                 break;
-            case 20 :
-                // InternalSyntacticSequencerTestLanguage.g:1:124: T__32
+            case 19 :
+                // InternalSyntacticSequencerTestLanguage.g:1:118: T__32
                 {
                 mT__32(); 
 
                 }
                 break;
-            case 21 :
-                // InternalSyntacticSequencerTestLanguage.g:1:130: T__33
+            case 20 :
+                // InternalSyntacticSequencerTestLanguage.g:1:124: T__33
                 {
                 mT__33(); 
 
                 }
                 break;
-            case 22 :
-                // InternalSyntacticSequencerTestLanguage.g:1:136: T__34
+            case 21 :
+                // InternalSyntacticSequencerTestLanguage.g:1:130: T__34
                 {
                 mT__34(); 
 
                 }
                 break;
-            case 23 :
-                // InternalSyntacticSequencerTestLanguage.g:1:142: T__35
+            case 22 :
+                // InternalSyntacticSequencerTestLanguage.g:1:136: T__35
                 {
                 mT__35(); 
 
                 }
                 break;
-            case 24 :
-                // InternalSyntacticSequencerTestLanguage.g:1:148: T__36
+            case 23 :
+                // InternalSyntacticSequencerTestLanguage.g:1:142: T__36
                 {
                 mT__36(); 
 
                 }
                 break;
-            case 25 :
-                // InternalSyntacticSequencerTestLanguage.g:1:154: T__37
+            case 24 :
+                // InternalSyntacticSequencerTestLanguage.g:1:148: T__37
                 {
                 mT__37(); 
 
                 }
                 break;
-            case 26 :
-                // InternalSyntacticSequencerTestLanguage.g:1:160: T__38
+            case 25 :
+                // InternalSyntacticSequencerTestLanguage.g:1:154: T__38
                 {
                 mT__38(); 
 
                 }
                 break;
-            case 27 :
-                // InternalSyntacticSequencerTestLanguage.g:1:166: T__39
+            case 26 :
+                // InternalSyntacticSequencerTestLanguage.g:1:160: T__39
                 {
                 mT__39(); 
 
                 }
                 break;
-            case 28 :
-                // InternalSyntacticSequencerTestLanguage.g:1:172: T__40
+            case 27 :
+                // InternalSyntacticSequencerTestLanguage.g:1:166: T__40
                 {
                 mT__40(); 
 
                 }
                 break;
-            case 29 :
-                // InternalSyntacticSequencerTestLanguage.g:1:178: T__41
+            case 28 :
+                // InternalSyntacticSequencerTestLanguage.g:1:172: T__41
                 {
                 mT__41(); 
+
+                }
+                break;
+            case 29 :
+                // InternalSyntacticSequencerTestLanguage.g:1:178: T__42
+                {
+                mT__42(); 
 
                 }
                 break;
@@ -1434,49 +1456,56 @@ public class InternalSyntacticSequencerTestLanguageLexer extends Lexer {
                 }
                 break;
             case 32 :
-                // InternalSyntacticSequencerTestLanguage.g:1:226: RULE_ID
+                // InternalSyntacticSequencerTestLanguage.g:1:226: RULE_C_COMMENT_END
+                {
+                mRULE_C_COMMENT_END(); 
+
+                }
+                break;
+            case 33 :
+                // InternalSyntacticSequencerTestLanguage.g:1:245: RULE_ID
                 {
                 mRULE_ID(); 
 
                 }
                 break;
-            case 33 :
-                // InternalSyntacticSequencerTestLanguage.g:1:234: RULE_INT
+            case 34 :
+                // InternalSyntacticSequencerTestLanguage.g:1:253: RULE_INT
                 {
                 mRULE_INT(); 
 
                 }
                 break;
-            case 34 :
-                // InternalSyntacticSequencerTestLanguage.g:1:243: RULE_STRING
+            case 35 :
+                // InternalSyntacticSequencerTestLanguage.g:1:262: RULE_STRING
                 {
                 mRULE_STRING(); 
 
                 }
                 break;
-            case 35 :
-                // InternalSyntacticSequencerTestLanguage.g:1:255: RULE_ML_COMMENT
+            case 36 :
+                // InternalSyntacticSequencerTestLanguage.g:1:274: RULE_ML_COMMENT
                 {
                 mRULE_ML_COMMENT(); 
 
                 }
                 break;
-            case 36 :
-                // InternalSyntacticSequencerTestLanguage.g:1:271: RULE_SL_COMMENT
+            case 37 :
+                // InternalSyntacticSequencerTestLanguage.g:1:290: RULE_SL_COMMENT
                 {
                 mRULE_SL_COMMENT(); 
 
                 }
                 break;
-            case 37 :
-                // InternalSyntacticSequencerTestLanguage.g:1:287: RULE_WS
+            case 38 :
+                // InternalSyntacticSequencerTestLanguage.g:1:306: RULE_WS
                 {
                 mRULE_WS(); 
 
                 }
                 break;
-            case 38 :
-                // InternalSyntacticSequencerTestLanguage.g:1:295: RULE_ANY_OTHER
+            case 39 :
+                // InternalSyntacticSequencerTestLanguage.g:1:314: RULE_ANY_OTHER
                 {
                 mRULE_ANY_OTHER(); 
 
@@ -1490,17 +1519,17 @@ public class InternalSyntacticSequencerTestLanguageLexer extends Lexer {
 
     protected DFA12 dfa12 = new DFA12(this);
     static final String DFA12_eotS =
-        "\1\uffff\1\22\1\35\4\uffff\1\35\1\uffff\3\22\2\uffff\3\22\2\uffff\1\61\10\uffff\1\35\5\uffff\1\35\17\uffff\1\73\1\74\1\75\1\76\1\77\1\100\1\101\1\102\1\35\10\uffff\3\35\1\107\1\uffff";
+        "\1\uffff\1\22\1\35\3\uffff\1\42\1\35\1\uffff\3\22\2\uffff\3\22\2\uffff\1\62\10\uffff\1\35\6\uffff\1\35\17\uffff\1\74\1\75\1\76\1\77\1\100\1\101\1\102\1\103\1\35\10\uffff\3\35\1\110\1\uffff";
     static final String DFA12_eofS =
-        "\110\uffff";
+        "\111\uffff";
     static final String DFA12_minS =
-        "\1\0\1\61\1\167\4\uffff\1\141\1\uffff\2\61\1\101\2\uffff\2\0\1\52\2\uffff\1\60\10\uffff\1\61\5\uffff\1\164\17\uffff\10\60\1\143\10\uffff\1\150\1\145\1\144\1\60\1\uffff";
+        "\1\0\1\61\1\167\3\uffff\1\57\1\141\1\uffff\2\61\1\101\2\uffff\2\0\1\52\2\uffff\1\60\10\uffff\1\61\6\uffff\1\164\17\uffff\10\60\1\143\10\uffff\1\150\1\145\1\144\1\60\1\uffff";
     static final String DFA12_maxS =
-        "\1\uffff\1\71\1\167\4\uffff\1\141\1\uffff\2\61\1\172\2\uffff\2\uffff\1\57\2\uffff\1\65\10\uffff\1\70\5\uffff\1\164\17\uffff\10\172\1\143\10\uffff\1\150\1\145\1\144\1\172\1\uffff";
+        "\1\uffff\1\71\1\167\3\uffff\1\57\1\141\1\uffff\2\61\1\172\2\uffff\2\uffff\1\57\2\uffff\1\65\10\uffff\1\70\6\uffff\1\164\17\uffff\10\172\1\143\10\uffff\1\150\1\145\1\144\1\172\1\uffff";
     static final String DFA12_acceptS =
-        "\3\uffff\1\7\1\11\1\12\1\14\1\uffff\1\33\3\uffff\1\40\1\41\3\uffff\1\45\1\46\1\uffff\1\6\1\10\1\13\1\15\1\16\1\17\1\21\1\22\1\uffff\1\40\1\7\1\11\1\12\1\14\1\uffff\1\33\1\36\1\37\1\41\1\42\1\43\1\44\1\45\1\23\1\24\1\25\1\26\1\34\1\35\1\1\11\uffff\1\2\1\3\1\4\1\5\1\27\1\30\1\31\1\32\4\uffff\1\20";
+        "\3\uffff\1\7\1\11\1\12\2\uffff\1\33\3\uffff\1\41\1\42\3\uffff\1\46\1\47\1\uffff\1\6\1\10\1\13\1\15\1\16\1\17\1\21\1\22\1\uffff\1\41\1\7\1\11\1\12\1\40\1\14\1\uffff\1\33\1\36\1\37\1\42\1\43\1\44\1\45\1\46\1\23\1\24\1\25\1\26\1\34\1\35\1\1\11\uffff\1\2\1\3\1\4\1\5\1\27\1\30\1\31\1\32\4\uffff\1\20";
     static final String DFA12_specialS =
-        "\1\0\15\uffff\1\1\1\2\70\uffff}>";
+        "\1\2\15\uffff\1\0\1\1\71\uffff}>";
     static final String[] DFA12_transitionS = {
             "\11\22\2\21\2\22\1\21\22\22\1\21\1\10\1\16\1\1\1\11\1\12\1\22\1\17\1\4\1\5\1\6\1\3\3\22\1\20\12\15\7\22\32\14\3\22\1\13\1\14\1\22\12\14\1\2\1\14\1\7\15\14\uff85\22",
             "\1\23\1\24\1\25\1\26\1\27\1\30\1\31\1\32\1\33",
@@ -1508,35 +1537,36 @@ public class InternalSyntacticSequencerTestLanguageLexer extends Lexer {
             "",
             "",
             "",
+            "\1\41",
+            "\1\43",
             "",
-            "\1\42",
-            "",
-            "\1\44",
             "\1\45",
+            "\1\46",
             "\32\35\4\uffff\1\35\1\uffff\32\35",
             "",
             "",
-            "\0\47",
-            "\0\47",
-            "\1\50\4\uffff\1\51",
+            "\0\50",
+            "\0\50",
+            "\1\51\4\uffff\1\52",
             "",
             "",
-            "\1\53\1\54\1\55\1\56\1\57\1\60",
-            "",
-            "",
-            "",
+            "\1\54\1\55\1\56\1\57\1\60\1\61",
             "",
             "",
             "",
             "",
             "",
-            "\1\62\1\63\1\64\1\65\1\66\1\67\1\70\1\71",
+            "",
+            "",
+            "",
+            "\1\63\1\64\1\65\1\66\1\67\1\70\1\71\1\72",
             "",
             "",
             "",
             "",
             "",
-            "\1\72",
+            "",
+            "\1\73",
             "",
             "",
             "",
@@ -1560,18 +1590,18 @@ public class InternalSyntacticSequencerTestLanguageLexer extends Lexer {
             "\12\35\7\uffff\32\35\4\uffff\1\35\1\uffff\32\35",
             "\12\35\7\uffff\32\35\4\uffff\1\35\1\uffff\32\35",
             "\12\35\7\uffff\32\35\4\uffff\1\35\1\uffff\32\35",
-            "\1\103",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
             "\1\104",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
             "\1\105",
             "\1\106",
+            "\1\107",
             "\12\35\7\uffff\32\35\4\uffff\1\35\1\uffff\32\35",
             ""
     };
@@ -1606,13 +1636,33 @@ public class InternalSyntacticSequencerTestLanguageLexer extends Lexer {
             this.transition = DFA12_transition;
         }
         public String getDescription() {
-            return "1:1: Tokens : ( T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | T__39 | T__40 | T__41 | RULE_TERMINAL_ID | RULE_BOOLEAN_TERMINAL_ID | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );";
+            return "1:1: Tokens : ( T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | T__39 | T__40 | T__41 | T__42 | RULE_TERMINAL_ID | RULE_BOOLEAN_TERMINAL_ID | RULE_C_COMMENT_END | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             IntStream input = _input;
         	int _s = s;
             switch ( s ) {
                     case 0 : 
+                        int LA12_14 = input.LA(1);
+
+                        s = -1;
+                        if ( ((LA12_14>='\u0000' && LA12_14<='\uFFFF')) ) {s = 40;}
+
+                        else s = 18;
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 1 : 
+                        int LA12_15 = input.LA(1);
+
+                        s = -1;
+                        if ( ((LA12_15>='\u0000' && LA12_15<='\uFFFF')) ) {s = 40;}
+
+                        else s = 18;
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 2 : 
                         int LA12_0 = input.LA(1);
 
                         s = -1;
@@ -1651,26 +1701,6 @@ public class InternalSyntacticSequencerTestLanguageLexer extends Lexer {
                         else if ( ((LA12_0>='\t' && LA12_0<='\n')||LA12_0=='\r'||LA12_0==' ') ) {s = 17;}
 
                         else if ( ((LA12_0>='\u0000' && LA12_0<='\b')||(LA12_0>='\u000B' && LA12_0<='\f')||(LA12_0>='\u000E' && LA12_0<='\u001F')||LA12_0=='&'||(LA12_0>=',' && LA12_0<='.')||(LA12_0>=':' && LA12_0<='@')||(LA12_0>='[' && LA12_0<=']')||LA12_0=='`'||(LA12_0>='{' && LA12_0<='\uFFFF')) ) {s = 18;}
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 1 : 
-                        int LA12_14 = input.LA(1);
-
-                        s = -1;
-                        if ( ((LA12_14>='\u0000' && LA12_14<='\uFFFF')) ) {s = 39;}
-
-                        else s = 18;
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 2 : 
-                        int LA12_15 = input.LA(1);
-
-                        s = -1;
-                        if ( ((LA12_15>='\u0000' && LA12_15<='\uFFFF')) ) {s = 39;}
-
-                        else s = 18;
 
                         if ( s>=0 ) return s;
                         break;
