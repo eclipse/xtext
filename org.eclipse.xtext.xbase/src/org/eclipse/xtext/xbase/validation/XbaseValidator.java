@@ -401,24 +401,29 @@ public class XbaseValidator extends AbstractXbaseValidator {
 	
 	@Check
 	public void checkReturn(XReturnExpression expr) {
+		XExpression returnedExpression = expr.getExpression();
+		if (returnedExpression instanceof XReturnExpression) {
+			error("Return cannot be nested.", expr, null,
+					ValidationMessageAcceptor.INSIGNIFICANT_INDEX, INVALID_RETURN);
+		}
 		IResolvedTypes resolvedTypes = typeResolver.resolveTypes(expr);
 		LightweightTypeReference expectedReturnType = resolvedTypes.getExpectedReturnType(expr);
 		if (expectedReturnType == null) {
 			return;
 		}
 		if (expectedReturnType.isPrimitiveVoid()) {
-			if (expr.getExpression() != null)
+			if (returnedExpression != null)
 				error("Void functions cannot return a value.", expr, null,
 						ValidationMessageAcceptor.INSIGNIFICANT_INDEX, INVALID_RETURN);
 		} else {
-			if (expr.getExpression() == null)
+			if (returnedExpression == null)
 				error("The function must return a result of type " + expectedReturnType.getHumanReadableName() + ".", expr, null,
 						ValidationMessageAcceptor.INSIGNIFICANT_INDEX, INVALID_RETURN);
 			else {
-				LightweightTypeReference expressionType = getActualType(expr.getExpression());
+				LightweightTypeReference expressionType = getActualType(returnedExpression);
 				if (expressionType.isPrimitiveVoid()) {
 					error("Incompatible types. Expected " + getNameOfTypes(expectedReturnType) + " but was "
-							+ canonicalName(expressionType), expr.getExpression(), null,
+							+ canonicalName(expressionType), returnedExpression, null,
 							ValidationMessageAcceptor.INSIGNIFICANT_INDEX, INCOMPATIBLE_TYPES);
 				}
 			}

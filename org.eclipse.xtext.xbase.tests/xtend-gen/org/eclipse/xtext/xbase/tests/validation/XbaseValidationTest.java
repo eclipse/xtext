@@ -2656,7 +2656,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
   }
   
   @Test
-  public void testInvalidReturnBug406762() {
+  public void testInvalidNestedReturnBug406762() {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("{");
@@ -2667,7 +2667,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.append("}");
       _builder.newLine();
       XExpression _expression = this.expression(_builder);
-      this._validationTestHelper.assertNoErrors(_expression);
+      this._validationTestHelper.assertError(_expression, XbasePackage.Literals.XRETURN_EXPRESSION, IssueCodes.INVALID_RETURN);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
