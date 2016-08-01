@@ -123,6 +123,9 @@
             lightweight="true"
             location="TOP_RIGHT"
             state="true">
+         <description>
+            %XtextNature.description
+         </description>
          <enablement>
          	<and>
 		     	<objectClass
