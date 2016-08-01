@@ -3982,7 +3982,9 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
       _builder.append("}");
       _builder.newLine();
       StringConcatenation _builder_1 = new StringConcatenation();
-      _builder_1.append("\t\t\t");
+      _builder_1.append("return 0;");
+      _builder_1.newLine();
+      _builder_1.append("return error - couldn\'t compile nested return;");
       _builder_1.newLine();
       this.compilesTo(_builder, _builder_1);
     } catch (Throwable _e) {
