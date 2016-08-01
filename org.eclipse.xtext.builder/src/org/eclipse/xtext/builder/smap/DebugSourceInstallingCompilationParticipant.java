@@ -33,7 +33,7 @@ import org.eclipse.xtext.generator.trace.ITrace;
 import org.eclipse.xtext.generator.trace.ITraceToBytecodeInstaller;
 import org.eclipse.xtext.generator.trace.SourceRelativeURI;
 import org.eclipse.xtext.generator.trace.TraceAsPrimarySourceInstaller;
-//import org.eclipse.xtext.smap.TraceAsSmapInstaller;
+import org.eclipse.xtext.smap.TraceAsSmapInstaller;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.generator.trace.AbstractEclipseTrace;
@@ -60,8 +60,8 @@ public class DebugSourceInstallingCompilationParticipant extends CompilationPart
 	@Inject
 	private IResourceServiceProvider.Registry serviceProviderRegistry;
 
-//	@Inject
-//	private Provider<TraceAsSmapInstaller> traceAsSmapInstaller;
+	@Inject
+	private Provider<TraceAsSmapInstaller> traceAsSmapInstaller;
 
 	@Inject
 	private Provider<TraceAsPrimarySourceInstaller> traceAsPrimarySourceInstallerProvider;
@@ -100,9 +100,8 @@ public class DebugSourceInstallingCompilationParticipant extends CompilationPart
 			installer.setHideSyntheticVariables(config.isHideSyntheticLocalVariables());
 			return installer;
 		} else {
-//			TraceAsSmapInstaller installer = traceAsSmapInstaller.get();
-//			return installer;
-			return null;
+			TraceAsSmapInstaller installer = traceAsSmapInstaller.get();
+			return installer;
 		}
 	}
 
