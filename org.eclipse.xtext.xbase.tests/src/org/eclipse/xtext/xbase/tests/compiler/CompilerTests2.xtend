@@ -1865,7 +1865,7 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		'''.compilesTo('''
 			return 0;
 			return error - couldn't compile nested return;
-		''')
+		''', false)
 	}
 
 }

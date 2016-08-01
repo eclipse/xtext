@@ -3986,7 +3986,7 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
       _builder_1.newLine();
       _builder_1.append("return error - couldn\'t compile nested return;");
       _builder_1.newLine();
-      this.compilesTo(_builder, _builder_1);
+      this.compilesTo(_builder, _builder_1, false);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
