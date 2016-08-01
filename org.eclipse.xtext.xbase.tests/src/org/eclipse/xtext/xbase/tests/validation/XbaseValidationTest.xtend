@@ -1128,4 +1128,12 @@ class XbaseValidationTest extends AbstractXbaseTestCase {
 			}
 		'''.expression.assertNoErrors
 	}
+
+	@Test def void testInvalidReturnBug406762() {
+		'''
+			{
+				return return 0
+			}
+		'''.expression.assertNoErrors
+	}
 }

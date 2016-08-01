@@ -1856,4 +1856,15 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		''')
 	}
 
+	@Test def void test406762_NestedReturn() {
+		// this requires argument preparation
+		'''
+			{
+				return return 0
+			}
+		'''.compilesTo('''
+			
+		''')
+	}
+
 }
