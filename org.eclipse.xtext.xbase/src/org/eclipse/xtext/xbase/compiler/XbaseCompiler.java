@@ -1645,7 +1645,6 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		return b.decreaseIndentation().newLine().append("}");
 	}
 	
-	@SuppressWarnings("unused")
 	protected boolean needSyntheticSelfVariable(XClosure closure, LightweightTypeReference typeRef) {
 		return false;
 	}
