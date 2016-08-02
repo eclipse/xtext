@@ -45,6 +45,13 @@ class ResourceStorageTest extends AbstractXtendTestCase {
 			 */
 			def dispatch myMethod(CharSequence cs) {}
 		}
+		class Foo {
+			def dispatch other(String it) {
+				var x = ""
+				x = length.toString
+				println(x)
+			}
+		}
 		'''
 		val file = file(contents)
 		
@@ -71,7 +78,7 @@ class ResourceStorageTest extends AbstractXtendTestCase {
 		
 		// check resource description
 		assertEquals(resource.URI, resource.resourceDescription.URI)
-		assertEquals(1, resource.resourceDescription.exportedObjects.size)
+		assertEquals(2, resource.resourceDescription.exportedObjects.size)
 		assertEquals("foo.Bar", resource.resourceDescription.exportedObjects.head.qualifiedName.toString)
 		
 		// check node model
