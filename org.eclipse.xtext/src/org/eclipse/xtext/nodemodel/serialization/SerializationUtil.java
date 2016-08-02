@@ -48,12 +48,13 @@ public class SerializationUtil {
 	}
 
 	public static void fillIdToEObjectMap(EObject eObject, List<EObject> map) {
-		map.add(eObject);
+		if (eObject.eContainingFeature() == null || !eObject.eContainingFeature().isTransient()) {
+			map.add(eObject);
+			EList<EObject> eContents = eObject.eContents();
 
-		EList<EObject> eContents = eObject.eContents();
-
-		for (EObject child : eContents) {
-			fillIdToEObjectMap(child, map);
+			for (EObject child : eContents) {
+				fillIdToEObjectMap(child, map);
+			}
 		}
 	}
 
