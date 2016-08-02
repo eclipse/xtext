@@ -155,7 +155,7 @@ class XtextGeneratorTemplates {
 		«ELSEIF value.statements.isEmpty»
 			// contributed by «contributedBy»
 			«IF key.singleton»@«SingletonBinding»«IF key.eagerSingleton»(eager=true)«ENDIF»«ENDIF»
-			public «IF value.expression==null»Class<? extends «Provider»<«key.type»>>«ELSE»«Provider»<«key.type»>«ENDIF» «bindMethodName»() {
+			public «IF value.expression==null»Class<? extends «Provider»<? extends «key.type»>>«ELSE»«Provider»<? extends «key.type»>«ENDIF» «bindMethodName»() {
 				return «IF value.expression!=null»«value.expression»«ELSE»«value.type».class«ENDIF»;
 			}
 		«ELSE»
