@@ -490,14 +490,14 @@ public class XtextGeneratorTemplates {
                 if (_equals) {
                   _builder.append("Class<? extends ");
                   _builder.append(Provider.class, "");
-                  _builder.append("<");
+                  _builder.append("<? extends ");
                   GuiceModuleAccess.BindKey _key_6 = it.getKey();
                   TypeReference _type_3 = _key_6.getType();
                   _builder.append(_type_3, "");
                   _builder.append(">>");
                 } else {
                   _builder.append(Provider.class, "");
-                  _builder.append("<");
+                  _builder.append("<? extends ");
                   GuiceModuleAccess.BindKey _key_7 = it.getKey();
                   TypeReference _type_4 = _key_7.getType();
                   _builder.append(_type_4, "");
