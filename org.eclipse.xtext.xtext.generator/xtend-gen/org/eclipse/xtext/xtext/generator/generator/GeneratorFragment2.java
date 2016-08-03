@@ -290,7 +290,7 @@ public class GeneratorFragment2 extends AbstractStubGeneratingFragment {
         _builder.newLine();
         _builder.append("//\t\t\tresource.allContents");
         _builder.newLine();
-        _builder.append("//\t\t\t\t.filter(typeof(Greeting))");
+        _builder.append("//\t\t\t\t.filter(Greeting)");
         _builder.newLine();
         _builder.append("//\t\t\t\t.map[name]");
         _builder.newLine();

@@ -152,7 +152,7 @@ class GeneratorFragment2 extends AbstractStubGeneratingFragment {
 				override void doGenerate(«Resource» resource, «IFileSystemAccess2» fsa, «IGeneratorContext» context) {
 			//		fsa.generateFile('greetings.txt', 'People to greet: ' + 
 			//			resource.allContents
-			//				.filter(typeof(Greeting))
+			//				.filter(Greeting)
 			//				.map[name]
 			//				.join(', '))
 				}
