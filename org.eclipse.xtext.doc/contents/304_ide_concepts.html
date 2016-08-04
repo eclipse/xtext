@@ -399,12 +399,12 @@ protected TextStyle getTypeTextStyle() {
     action.setText("Hide operations");
     action.setDescription("Hide operations");
     action.setToolTipText("Hide operations");
-    action.setImageDescriptor(getImageDescriptor());
+    action.setImageDescriptor(getImageDescriptor("Operation.gif"));
   }
 
   protected ImageDescriptor getImageDescriptor(String imagePath) {
     return ImageDescriptor.createFromImage(
-      imageHelper.getImage("Operation.gif"));
+      imageHelper.getImage(imagePath));
   }
 
   
