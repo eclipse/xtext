@@ -46,6 +46,9 @@ public class IndexedJvmTypeAccess {
 	@Inject
 	private CompilerPhases compilerPhases;
 	
+	@Inject
+	InnerClassNameVariants innerClassNameVariants;
+
 	public boolean isIndexingPhase(Notifier notifier) {
 		return compilerPhases.isIndexing(notifier);
 	}
@@ -80,9 +83,15 @@ public class IndexedJvmTypeAccess {
 				}
 			}
 			String fqn = withoutFragment.segment(withoutFragment.segmentCount() - 1);
-			List<String> fqnSegments = Strings.split(fqn, '.');
-			QualifiedName qualifiedName = QualifiedName.create(fqnSegments);
-			return getIndexedJvmType(qualifiedName, javaObjectURI.fragment(), resourceSet, throwShadowedException);
+			Iterator<String> variants = innerClassNameVariants.variantsFor(fqn);
+			EObject jvmType = null;
+			while (jvmType == null && variants.hasNext()) {
+				fqn = variants.next();
+				List<String> fqnSegments = Strings.split(fqn, '.');
+				QualifiedName qualifiedName = QualifiedName.create(fqnSegments);
+				jvmType = getIndexedJvmType(qualifiedName, javaObjectURI.fragment(), resourceSet, throwShadowedException);
+			}
+			return jvmType;
 		}
 		return null;
 	}
