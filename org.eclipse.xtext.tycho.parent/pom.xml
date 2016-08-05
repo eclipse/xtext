@@ -57,7 +57,7 @@
 		</repository>
 		<repository>
 			<id>xtext-extras-from-jenkins</id>
-			<url>http://services.typefox.io/open-source/jenkins//job/xtext-extras/job/master/lastStableBuild/artifact/build/maven-repository/</url>
+			<url>http://services.typefox.io/open-source/jenkins/job/xtext-extras/job/master/lastStableBuild/artifact/build/maven-repository/</url>
 		</repository>
 	</repositories>
 

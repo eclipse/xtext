@@ -734,4 +734,166 @@ public class XtendIncrementalBuilderTest extends AbstractIncrementalBuilderTest 
     boolean _isEmpty_1 = this.issues.isEmpty();
     Assert.assertTrue(_string_1, _isEmpty_1);
   }
+  
+  @Test
+  public void testGrammarAccessproblem() {
+    final Procedure1<BuildRequest> _function = (BuildRequest it) -> {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package mypack;");
+      _builder.newLine();
+      _builder.append("public class FakeIssue60GrammarAccess {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("private final GreetingElements pGreeting;");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("public FakeIssue60GrammarAccess() {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("this.pGreeting = new GreetingElements();");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("public class GreetingElements {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("public String getHelloKeyword_0() { return null; }");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("public GreetingElements getGreetingAccess() {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("return pGreeting;");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      URI _minus = this.operator_minus(
+        "src/mypack/FakeIssue60GrammarAccess.java", _builder.toString());
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("package mypack");
+      _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("import mypack.FakeIssue60GrammarAccess$GreetingElements");
+      _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("class Demo {");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.append("extension mypack.FakeIssue60GrammarAccess");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.append("GreetingElements elements");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.append("def void format() {");
+      _builder_1.newLine();
+      _builder_1.append("\t\t");
+      _builder_1.append("greetingAccess.helloKeyword_0");
+      _builder_1.newLine();
+      _builder_1.append("\t\t");
+      _builder_1.append("println(elements)");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      URI _minus_1 = this.operator_minus(
+        "src/mypack/Demo.xtend", _builder_1.toString());
+      it.setDirtyFiles(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(_minus, _minus_1)));
+    };
+    final BuildRequest buildRequest = this.newBuildRequest(_function);
+    this.build(buildRequest);
+    String _string = this.issues.toString();
+    boolean _isEmpty = this.issues.isEmpty();
+    Assert.assertTrue(_string, _isEmpty);
+    int _size = this.generated.size();
+    Assert.assertEquals(2, _size);
+  }
+  
+  @Test
+  public void testInnerClassEnumProblem() {
+    final Procedure1<BuildRequest> _function = (BuildRequest it) -> {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package mypack;");
+      _builder.newLine();
+      _builder.append("public class EnumTest {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("public enum AB {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("A,");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("B");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.newLine();
+      URI _minus = this.operator_minus(
+        "src/mypack/EnumTest.java", _builder.toString());
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("package mypack");
+      _builder_1.newLine();
+      _builder_1.append("class Demo {");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.append("def void format() {");
+      _builder_1.newLine();
+      _builder_1.append("\t\t");
+      _builder_1.append("var EnumTest.AB x = EnumTest.AB.A");
+      _builder_1.newLine();
+      _builder_1.append("\t\t");
+      _builder_1.append("println(x)");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      URI _minus_1 = this.operator_minus(
+        "src/mypack/Demo.xtend", _builder_1.toString());
+      it.setDirtyFiles(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(_minus, _minus_1)));
+    };
+    final BuildRequest buildRequest = this.newBuildRequest(_function);
+    this.build(buildRequest);
+    String _string = this.issues.toString();
+    boolean _isEmpty = this.issues.isEmpty();
+    Assert.assertTrue(_string, _isEmpty);
+    int _size = this.generated.size();
+    Assert.assertEquals(2, _size);
+  }
 }
