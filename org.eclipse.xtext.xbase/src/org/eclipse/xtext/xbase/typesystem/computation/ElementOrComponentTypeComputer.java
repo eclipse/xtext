@@ -13,6 +13,7 @@ import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -90,6 +91,18 @@ public class ElementOrComponentTypeComputer extends TypeReferenceVisitorWithResu
 		return null;
 	}
 	
+	@Override
+	protected LightweightTypeReference doVisitCompoundTypeReference(CompoundTypeReference reference) {
+		if (reference.isArray()) {
+		    for (LightweightTypeReference componentType : reference.getMultiTypeComponents()) {
+		        if (componentType.isArray()) {
+		            return componentType.getComponentType();
+		        }
+		    }
+		}
+		return super.doVisitCompoundTypeReference(reference);
+	}
+
 	protected ITypeReferenceOwner getOwner() {
 		return owner;
 	}

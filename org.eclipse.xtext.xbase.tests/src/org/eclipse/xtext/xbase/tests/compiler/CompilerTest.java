@@ -711,18 +711,62 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 				"final java.beans.VetoableChangeListener x = _function;",
 				"{val java.beans.VetoableChangeListener x = []}");
 	}
-	
+
 	@Test public void testArrayLiteralInForLoop() throws Exception {
 		assertCompilesTo(
 				"for (final String i : new String[] { \"a\", \"b\", \"c\" }) {\n" +
 				"  org.eclipse.xtext.xbase.lib.InputOutput.<String>println(i);\n}",
 				"for (String i : #['a','b','c']) { println(i) }");
 	}
-	
+
 	@Test public void testArrayLiteralInForLoop2() throws Exception {
 		assertCompilesTo(
 				"for (final String i : java.util.Collections.<String>unmodifiableList(org.eclipse.xtext.xbase.lib.CollectionLiterals.<String>newArrayList(\"a\", \"b\", \"c\"))) {\n" +
 						"  org.eclipse.xtext.xbase.lib.InputOutput.<String>println(i);\n}",
 				"for (i : #['a','b','c']) { println(i) }");
+	}
+
+	@Test
+	public void testArrayLiteralInForLoop3() throws Exception {
+		assertCompilesTo(
+				"org.eclipse.xtext.xbase.lib.IntegerRange _upTo = new org.eclipse.xtext.xbase.lib.IntegerRange(1, 2);\n"
+				+ "for (final org.eclipse.xtext.xbase.lib.IntegerRange i : "
+				+ "java.util.Collections.<org.eclipse.xtext.xbase.lib.IntegerRange>unmodifiableList("
+				+ "org.eclipse.xtext.xbase.lib.CollectionLiterals.<org.eclipse.xtext.xbase.lib.IntegerRange>newArrayList(_upTo))) {\n}",
+				"for (i : #[1..2]) {}");
+	}
+
+	@Test public void testArrayLiteralInForLoop4() throws Exception {
+		assertCompilesTo("org.eclipse.xtext.xbase.lib.IntegerRange _upTo = new org.eclipse.xtext.xbase.lib.IntegerRange(1, 2);\n"
+				+ "for (final org.eclipse.xtext.xbase.lib.IntegerRange i : new org.eclipse.xtext.xbase.lib.IntegerRange[] { _upTo }) {\n"
+				+ "}", "for (IntegerRange i : #[1..2]) {}");
+	}
+
+	@Test
+	public void testArrayLiteralInForLoop5() throws Exception {
+		assertCompilesTo("org.eclipse.xtext.xbase.lib.IntegerRange _upTo = new org.eclipse.xtext.xbase.lib.IntegerRange(1, 2);\n"
+				+ "for (final Iterable<Integer> i : new Iterable[] { _upTo }) {\n" + "}", "for (Iterable<Integer> i : #[1..2]) {}");
+	}
+
+	@Test
+	public void testSetLiteralInForLoop1() throws Exception {
+		assertCompilesTo(
+				"org.eclipse.xtext.xbase.lib.IntegerRange _upTo = new org.eclipse.xtext.xbase.lib.IntegerRange(1, 2);\n"
+						+ "for (final org.eclipse.xtext.xbase.lib.IntegerRange i : java.util.Collections.<org.eclipse.xtext.xbase.lib.IntegerRange>unmodifiableSet(org.eclipse.xtext.xbase.lib.CollectionLiterals.<org.eclipse.xtext.xbase.lib.IntegerRange>newHashSet(_upTo))) {\n}",
+				"for (i : #{1..2}) {}");
+	}
+
+	@Test
+	public void testSetLiteralInForLoop2() throws Exception {
+		assertCompilesTo("org.eclipse.xtext.xbase.lib.IntegerRange _upTo = new org.eclipse.xtext.xbase.lib.IntegerRange(1, 2);\n"
+				+ "for (final org.eclipse.xtext.xbase.lib.IntegerRange i : java.util.Collections.<org.eclipse.xtext.xbase.lib.IntegerRange>unmodifiableSet(org.eclipse.xtext.xbase.lib.CollectionLiterals.<org.eclipse.xtext.xbase.lib.IntegerRange>newHashSet(_upTo))) {\n"
+				+ "}", "for (IntegerRange i : #{1..2}) {}");
+	}
+
+	@Test
+	public void testSetLiteralInForLoop3() throws Exception {
+		assertCompilesTo("org.eclipse.xtext.xbase.lib.IntegerRange _upTo = new org.eclipse.xtext.xbase.lib.IntegerRange(1, 2);\n"
+				+ "for (final Iterable<Integer> i : java.util.Collections.<Iterable<Integer>>unmodifiableSet(org.eclipse.xtext.xbase.lib.CollectionLiterals.<Iterable<Integer>>newHashSet(_upTo))) {\n"
+				+ "}", "for (Iterable<Integer> i : #{1..2}) {}");
 	}
 }
