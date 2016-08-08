@@ -210,6 +210,12 @@ public class WizardNewXtextProjectCreationPage extends WizardNewProjectCreationP
 			setErrorMessage(Messages.WizardNewXtextProjectCreationPage_ErrorMessageLanguageName + status.getMessage());
 			return false;
 		}
+		
+		if(!languageNameField.getText().contains(".")) {
+			setErrorMessage(Messages.WizardNewXtextProjectCreationPage_ErrorMessageLanguageNameWithoutPackage);
+			return false;
+		}
+		
 		if (extensionsField.getText().length() == 0)
 			return false;
 		if (!Sets.newHashSet(JREContainerProvider.getConfiguredBREEs()).contains(breeCombo.getText())) {
