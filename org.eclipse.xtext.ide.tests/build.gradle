@@ -1,6 +1,8 @@
 dependencies {
 	compile project(':org.eclipse.xtext.ide')
 	compile project(':org.eclipse.xtext.testing')
+	compile project(':org.eclipse.xtext.testlanguages')
+	compile project(':org.eclipse.xtext.testlanguages.ide')
 	compile "junit:junit:$versions.junit"
 	compile "io.typefox.lsapi:io.typefox.lsapi.services:$versions.lsapi"
 	mwe2Compile project(':org.eclipse.xtext.xtext.generator')
