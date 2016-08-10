@@ -2,3 +2,4 @@ org.eclipse.xtext.testlanguages.backtracking.ide.BeeLangTestLanguageIdeSetup
 org.eclipse.xtext.testlanguages.backtracking.ide.SimpleBeeLangTestLanguageIdeSetup
 org.eclipse.xtext.testlanguages.backtracking.ide.ExBeeLangTestLanguageIdeSetup
 org.eclipse.xtext.testlanguages.noJdt.ide.NoJdtTestLanguageIdeSetup
+org.eclipse.xtext.testlanguages.xtextgrammar.ide.XtextGrammarTestLanguageIdeSetup

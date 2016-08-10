@@ -129,7 +129,7 @@ public abstract class AbstractSimpleBeeLangTestLanguageRuntimeModule extends Def
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalSimpleBeeLangTestLanguageLexer> provideInternalSimpleBeeLangTestLanguageLexer() {
+	public Provider<? extends InternalSimpleBeeLangTestLanguageLexer> provideInternalSimpleBeeLangTestLanguageLexer() {
 		return LexerProvider.create(InternalSimpleBeeLangTestLanguageLexer.class);
 	}
 	

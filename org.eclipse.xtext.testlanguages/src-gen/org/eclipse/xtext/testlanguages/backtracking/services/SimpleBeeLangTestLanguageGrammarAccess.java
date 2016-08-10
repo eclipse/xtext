@@ -716,7 +716,7 @@ public class SimpleBeeLangTestLanguageGrammarAccess extends AbstractGrammarEleme
 	}
 	
 	//terminal DOCUMENTATION:
-	//	'/ **'->'* /';
+	//	'/**'->'*/';
 	public TerminalRule getDOCUMENTATIONRule() {
 		return gaBeeLangTestLanguage.getDOCUMENTATIONRule();
 	}
@@ -747,7 +747,7 @@ public class SimpleBeeLangTestLanguageGrammarAccess extends AbstractGrammarEleme
 	}
 	
 	//terminal ML_COMMENT:
-	//	'/ *'->'* /';
+	//	'/*'->'*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}

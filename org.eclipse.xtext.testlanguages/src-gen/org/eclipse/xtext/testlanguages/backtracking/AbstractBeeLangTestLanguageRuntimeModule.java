@@ -129,7 +129,7 @@ public abstract class AbstractBeeLangTestLanguageRuntimeModule extends DefaultRu
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalBeeLangTestLanguageLexer> provideInternalBeeLangTestLanguageLexer() {
+	public Provider<? extends InternalBeeLangTestLanguageLexer> provideInternalBeeLangTestLanguageLexer() {
 		return LexerProvider.create(InternalBeeLangTestLanguageLexer.class);
 	}
 	

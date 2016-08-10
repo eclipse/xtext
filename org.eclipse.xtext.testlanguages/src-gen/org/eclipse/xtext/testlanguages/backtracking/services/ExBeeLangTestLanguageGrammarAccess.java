@@ -716,7 +716,7 @@ public class ExBeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 	
 	//terminal DOCUMENTATION:
-	//	'/ **'->'* /';
+	//	'/**'->'*/';
 	public TerminalRule getDOCUMENTATIONRule() {
 		return gaBeeLangTestLanguage.getDOCUMENTATIONRule();
 	}
@@ -747,7 +747,7 @@ public class ExBeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 	
 	//terminal ML_COMMENT:
-	//	'/ *'->'* /';
+	//	'/*'->'*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}

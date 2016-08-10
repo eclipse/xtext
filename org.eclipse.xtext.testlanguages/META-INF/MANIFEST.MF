@@ -16,8 +16,16 @@ Require-Bundle: org.eclipse.xtext,
  org.eclipse.emf.common;bundle-version="2.10.1",
  org.antlr.runtime,
  org.eclipse.xtext.xbase.lib,
- org.eclipse.xtend.lib
-Import-Package: org.apache.log4j;version="1.2.15"
+ org.eclipse.xtend.lib,
+ org.eclipse.xtext.testing;bundle-version="2.10.2"
+Import-Package: org.apache.log4j;version="1.2.15",
+ org.hamcrest.core,
+ org.junit;version="4.5.0",
+ org.junit.runners.model;version="4.5.0",
+ org.junit.runner;version="4.5.0",
+ org.junit.runners;version="4.5.0",
+ org.junit.runner.manipulation;version="4.5.0",
+ org.junit.runner.notification;version="4.5.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.eclipse.xtext.testlanguages.backtracking,
  org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage,
@@ -43,5 +51,16 @@ Export-Package: org.eclipse.xtext.testlanguages.backtracking,
  org.eclipse.xtext.testlanguages.noJdt.scoping,
  org.eclipse.xtext.testlanguages.noJdt.serializer,
  org.eclipse.xtext.testlanguages.noJdt.services,
- org.eclipse.xtext.testlanguages.noJdt.validation
+ org.eclipse.xtext.testlanguages.noJdt.validation,
+ org.eclipse.xtext.testlanguages.xtextgrammar,
+ org.eclipse.xtext.testlanguages.xtextgrammar.parser.antlr,
+ org.eclipse.xtext.testlanguages.xtextgrammar.parser.antlr.internal,
+ org.eclipse.xtext.testlanguages.xtextgrammar.scoping,
+ org.eclipse.xtext.testlanguages.xtextgrammar.serializer,
+ org.eclipse.xtext.testlanguages.xtextgrammar.services,
+ org.eclipse.xtext.testlanguages.xtextgrammar.tests,
+ org.eclipse.xtext.testlanguages.xtextgrammar.validation,
+ org.eclipse.xtext.testlanguages.xtextgrammar.xtextGrammarTest,
+ org.eclipse.xtext.testlanguages.xtextgrammar.xtextGrammarTest.impl,
+ org.eclipse.xtext.testlanguages.xtextgrammar.xtextGrammarTest.util
 

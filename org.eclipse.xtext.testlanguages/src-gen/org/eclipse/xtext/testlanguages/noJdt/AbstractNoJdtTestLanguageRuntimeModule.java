@@ -129,7 +129,7 @@ public abstract class AbstractNoJdtTestLanguageRuntimeModule extends DefaultRunt
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalNoJdtTestLanguageLexer> provideInternalNoJdtTestLanguageLexer() {
+	public Provider<? extends InternalNoJdtTestLanguageLexer> provideInternalNoJdtTestLanguageLexer() {
 		return LexerProvider.create(InternalNoJdtTestLanguageLexer.class);
 	}
 	

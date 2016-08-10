@@ -3862,7 +3862,7 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	}
 	
 	//terminal DOCUMENTATION:
-	//	'/ **'->'* /';
+	//	'/**'->'*/';
 	public TerminalRule getDOCUMENTATIONRule() {
 		return tDOCUMENTATION;
 	}
@@ -3893,7 +3893,7 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	}
 	
 	//terminal ML_COMMENT:
-	//	'/ *'->'* /';
+	//	'/*'->'*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}
