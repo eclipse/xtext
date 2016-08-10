@@ -129,7 +129,7 @@ public abstract class AbstractExBeeLangTestLanguageRuntimeModule extends Default
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalExBeeLangTestLanguageLexer> provideInternalExBeeLangTestLanguageLexer() {
+	public Provider<? extends InternalExBeeLangTestLanguageLexer> provideInternalExBeeLangTestLanguageLexer() {
 		return LexerProvider.create(InternalExBeeLangTestLanguageLexer.class);
 	}
 	

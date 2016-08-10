@@ -12,8 +12,17 @@ Workflow {
 			project = model.project.StandardProjectConfig {
 				baseName = "org.eclipse.xtext.testlanguages"
 				rootPath = rootPath
+				
+				runtimeTest = {
+					enabled = true
+					root = "${rootPath}/org.eclipse.xtext.testlanguages"	
+				}
 
 				eclipsePlugin = {
+					enabled = true
+					root = "${rootPath}/../xtext-eclipse/org.eclipse.xtext.testlanguages.ui"	
+				}
+				eclipsePluginTest = {
 					enabled = true
 					root = "${rootPath}/../xtext-eclipse/org.eclipse.xtext.testlanguages.ui"	
 				}
@@ -34,5 +43,6 @@ Workflow {
 		language = @backtracking.SimpleBeeLangTestLanguage {}
 		language = @backtracking.ExBeeLangTestLanguage {}
 		language = @noJdt.NoJdtTestLanguage {}
+		language = @xtextgrammar.XtextGrammarTestLanguage {}
 	}
 }

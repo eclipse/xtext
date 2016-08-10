@@ -1,5 +1,6 @@
 dependencies {
 	compile project(':org.eclipse.xtext')
+	compile project(':org.eclipse.xtext.testing')
 	compile "org.eclipse.core:org.eclipse.core.runtime:$versions.eclipseCore"
 	mwe2Compile project(':org.eclipse.xtext.xtext.generator')
 	mwe2Compile "org.eclipse.xtext:org.eclipse.xtext.common.types:$versions.xtext_bootstrap"
