@@ -298,6 +298,22 @@ import com.google.common.collect.Sets;
 	}
 
 	/**
+	 * Returns the elements of {@code unfiltered} that do not satisfy a predicate. The resulting iterator does not
+	 * support {@code remove()}. The returned iterator is a view on the original elements. Changes in the unfiltered
+	 * original are reflected in the view.
+	 *
+	 * @param unfiltered
+	 *            the unfiltered iterator. May not be <code>null</code>.
+	 * @param predicate
+	 *            the predicate. May not be <code>null</code>.
+	 * @return an iterator that contains only the elements that do not fulfill the predicate. Never <code>null</code>.
+	 */
+	@Pure
+	public static <T> Iterator<T> reject(Iterator<T> unfiltered, Function1<? super T, Boolean> predicate) {
+		return Iterators.filter(unfiltered, Predicates.not(new BooleanFunctionDelegate<T>(predicate)));
+	}
+
+	/**
 	 * Returns all instances of class {@code type} in {@code unfiltered}. The returned iterator has elements whose class
 	 * is {@code type} or a subclass of {@code type}. The returned iterator does not support {@code remove()}.
 	 * The returned iterator is a view on the original elements. Changes in the unfiltered original are reflected in

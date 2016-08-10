@@ -254,6 +254,24 @@ public class IterableExtensions {
 	}
 
 	/**
+	 * Returns the elements of {@code unfiltered} that do not satisfy a predicate. The resulting iterable's iterator does not
+	 * support {@code remove()}. The returned iterable is a view on the original elements. Changes in the unfiltered
+	 * original are reflected in the view.
+	 *
+	 * @param unfiltered
+	 *            the unfiltered iterable. May not be <code>null</code>.
+	 * @param predicate
+	 *            the predicate. May not be <code>null</code>.
+	 * @return an iterable that contains only the elements that do not fulfill the predicate. Never <code>null</code>.
+	 *
+	 * @since 2.11
+	 */
+	@Pure
+	public static <T> Iterable<T> reject(Iterable<T> unfiltered, Function1<? super T, Boolean> predicate) {
+		return Iterables.filter(unfiltered, Predicates.not(new BooleanFunctionDelegate<T>(predicate)));
+	}
+
+	/**
 	 * Returns all instances of class {@code type} in {@code unfiltered}. The returned iterable has elements whose class
 	 * is {@code type} or a subclass of {@code type}. The returned iterable's iterator does not support {@code remove()}
 	 * . The returned iterable is a view on the original elements. Changes in the unfiltered original are reflected in
