@@ -34,7 +34,7 @@ class Junit4Fragment2 extends AbstractStubGeneratingFragment {
 					testingPackage,
 					"org.eclipse.xtext.xbase.lib"
 				)
-				exportedPackages.add(grammar.runtimeTestBasePackage)
+				exportedPackages.add(grammar.runtimeTestBasePackage+";x-internal=true")
 			]
 		}
 		if (projectConfig.eclipsePluginTest.manifest != null) {
@@ -43,7 +43,7 @@ class Junit4Fragment2 extends AbstractStubGeneratingFragment {
 					"org.eclipse.core.runtime",
 					"org.eclipse.ui.workbench;resolution:=optional"
 				)
-				exportedPackages.add(grammar.eclipsePluginTestBasePackage)
+				exportedPackages.add(grammar.eclipsePluginTestBasePackage+";x-internal=true")
 			]
 		}
 		if (projectConfig.eclipsePlugin.manifest != null) {
