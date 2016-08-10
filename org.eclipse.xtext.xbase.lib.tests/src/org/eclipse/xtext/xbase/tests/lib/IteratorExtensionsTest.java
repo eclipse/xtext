@@ -312,5 +312,46 @@ public class IteratorExtensionsTest extends BaseIterablesIteratorsTest<Iterator<
 		List<Pair<Integer, String>> pairs = new ArrayList<Pair<Integer, String>>();
 		Function1<Pair<Integer, String>, Integer> computeKeys = null;
 		IteratorExtensions.groupBy(pairs.iterator(), computeKeys);
-	}	
+	}
+
+	@Test public void testReject() {
+		Function1<Integer, Boolean> function = new Function1<Integer, Boolean>() {
+			@Override
+			public Boolean apply(Integer p) {
+				return p % 2 == 0;
+			}
+		};
+		assertEquals(newArrayList(1,3,5),newArrayList(IteratorExtensions.reject(newArrayList(1,2,3,4,5).iterator(), function)));
+		Function1<Integer, Boolean> functionNullSafe = new Function1<Integer, Boolean>() {
+			@Override
+			public Boolean apply(Integer p) {
+				return p == null || p % 2 == 0;
+			}
+		};
+		assertEquals(newArrayList(1,5),newArrayList(IteratorExtensions.reject(newArrayList(1,2,null,4,5).iterator(), functionNullSafe)));
+		try {
+			newArrayList(IteratorExtensions.reject(null, function));
+			fail("NullPointerException expected");
+		} catch (NullPointerException e) {
+			// expected NPE
+		}
+		try {
+			newArrayList(IteratorExtensions.reject(newArrayList(1,2,3).iterator(), null));
+			fail("NullPointerException expected");
+		} catch (NullPointerException e) {
+			// expected NPE
+		}
+		Function1<Integer, Boolean> brokenFunction = new Function1<Integer, Boolean>() {
+			@Override
+			public Boolean apply(Integer p) {
+				return null;
+			}
+		};
+		try {
+			newArrayList(IteratorExtensions.reject(newArrayList(1,2,3).iterator(), brokenFunction));
+			fail("NullPointerException expected");
+		} catch (NullPointerException e) {
+			// expected NPE
+		}
+	}
 }

@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.tests.lib;
 
 import static com.google.common.collect.Lists.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -194,6 +195,46 @@ public class IterableExtensionsTest extends BaseIterablesIteratorsTest<Iterable<
 		assertEquals(new Pair<Integer, String>(1, "bar"), result.next());
 		assertFalse(result.hasNext());
 	}
-
 	
+	@Test public void testReject() {
+		Function1<Integer, Boolean> function = new Function1<Integer, Boolean>() {
+			@Override
+			public Boolean apply(Integer p) {
+				return p % 2 == 0;
+			}
+		};
+		assertEquals(newArrayList(1,3,5),newArrayList(IterableExtensions.reject(newArrayList(1,2,3,4,5), function)));
+		Function1<Integer, Boolean> functionNullSafe = new Function1<Integer, Boolean>() {
+			@Override
+			public Boolean apply(Integer p) {
+				return p == null || p % 2 == 0;
+			}
+		};
+		assertEquals(newArrayList(1,5),newArrayList(IterableExtensions.reject(newArrayList(1,2,null,4,5), functionNullSafe)));
+		try {
+			newArrayList(IterableExtensions.reject(null, function));
+			fail("NullPointerException expected");
+		} catch (NullPointerException e) {
+			// expected NPE
+		}
+		try {
+			newArrayList(IterableExtensions.reject(newArrayList(1,2,3), null));
+			fail("NullPointerException expected");
+		} catch (NullPointerException e) {
+			// expected NPE
+		}
+		Function1<Integer, Boolean> brokenFunction = new Function1<Integer, Boolean>() {
+			@Override
+			public Boolean apply(Integer p) {
+				return null;
+			}
+		};
+		try {
+			newArrayList(IterableExtensions.reject(newArrayList(1,2,3), brokenFunction));
+			fail("NullPointerException expected");
+		} catch (NullPointerException e) {
+			// expected NPE
+		}
+	}
+
 }
