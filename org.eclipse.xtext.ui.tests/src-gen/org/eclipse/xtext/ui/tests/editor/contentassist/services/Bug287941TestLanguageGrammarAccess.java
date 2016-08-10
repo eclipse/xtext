@@ -1630,7 +1630,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 	
 	//terminal ML_COMMENT:
-	//	'/ *'->'* /';
+	//	'/*'->'*/';
 	public TerminalRule getML_COMMENTRule() {
 		return tML_COMMENT;
 	}

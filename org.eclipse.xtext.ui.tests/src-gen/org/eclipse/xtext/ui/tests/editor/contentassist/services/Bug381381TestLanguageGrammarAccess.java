@@ -232,7 +232,7 @@ public class Bug381381TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 	
 	//terminal ML_COMMENT:
-	//	'/ *'->'* /';
+	//	'/*'->'*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}

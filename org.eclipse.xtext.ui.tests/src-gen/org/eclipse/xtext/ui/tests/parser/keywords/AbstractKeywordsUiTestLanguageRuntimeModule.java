@@ -89,7 +89,7 @@ public abstract class AbstractKeywordsUiTestLanguageRuntimeModule extends Defaul
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalKeywordsUiTestLanguageLexer> provideInternalKeywordsUiTestLanguageLexer() {
+	public Provider<? extends InternalKeywordsUiTestLanguageLexer> provideInternalKeywordsUiTestLanguageLexer() {
 		return LexerProvider.create(InternalKeywordsUiTestLanguageLexer.class);
 	}
 	

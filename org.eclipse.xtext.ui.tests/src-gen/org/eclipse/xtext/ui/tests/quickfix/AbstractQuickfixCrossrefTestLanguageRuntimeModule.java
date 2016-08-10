@@ -91,7 +91,7 @@ public abstract class AbstractQuickfixCrossrefTestLanguageRuntimeModule extends 
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalQuickfixCrossrefTestLanguageLexer> provideInternalQuickfixCrossrefTestLanguageLexer() {
+	public Provider<? extends InternalQuickfixCrossrefTestLanguageLexer> provideInternalQuickfixCrossrefTestLanguageLexer() {
 		return LexerProvider.create(InternalQuickfixCrossrefTestLanguageLexer.class);
 	}
 	

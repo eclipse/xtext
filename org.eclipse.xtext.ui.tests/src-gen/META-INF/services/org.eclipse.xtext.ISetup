@@ -1,4 +1,3 @@
-org.eclipse.xtext.ui.tests.ide.XtextGrammarUiTestLanguageIdeSetup
 org.eclipse.xtext.ui.tests.linking.ide.ImportUriUiTestLanguageIdeSetup
 org.eclipse.xtext.ui.tests.editor.contentassist.ide.TwoContextsTestLanguageIdeSetup
 org.eclipse.xtext.ui.tests.editor.contentassist.ide.Bug286935TestLanguageIdeSetup

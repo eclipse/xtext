@@ -4135,7 +4135,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 	
 	//terminal ML_COMMENT:
-	//	'/ *'->'* /';
+	//	'/*'->'*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}

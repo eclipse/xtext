@@ -66,10 +66,6 @@ Workflow {
 		}
 		
 		language = { 
-			grammarUri="classpath:/org/eclipse/xtext/ui/tests/XtextGrammarUiTestLanguage.xtext"
-			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
-		}
-		language = { 
 			grammarUri="classpath:/org/eclipse/xtext/ui/tests/linking/ImportUriUiTestLanguage.xtext"
 			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
 		}

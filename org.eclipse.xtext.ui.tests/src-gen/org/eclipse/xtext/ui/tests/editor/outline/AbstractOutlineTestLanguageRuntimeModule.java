@@ -103,7 +103,7 @@ public abstract class AbstractOutlineTestLanguageRuntimeModule extends DefaultRu
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalOutlineTestLanguageLexer> provideInternalOutlineTestLanguageLexer() {
+	public Provider<? extends InternalOutlineTestLanguageLexer> provideInternalOutlineTestLanguageLexer() {
 		return LexerProvider.create(InternalOutlineTestLanguageLexer.class);
 	}
 	

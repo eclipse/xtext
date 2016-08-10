@@ -98,7 +98,7 @@ public abstract class AbstractBmTestLanguageRuntimeModule extends DefaultRuntime
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalBmTestLanguageLexer> provideInternalBmTestLanguageLexer() {
+	public Provider<? extends InternalBmTestLanguageLexer> provideInternalBmTestLanguageLexer() {
 		return LexerProvider.create(InternalBmTestLanguageLexer.class);
 	}
 	

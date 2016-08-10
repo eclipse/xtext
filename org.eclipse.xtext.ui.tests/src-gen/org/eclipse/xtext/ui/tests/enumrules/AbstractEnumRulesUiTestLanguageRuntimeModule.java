@@ -89,7 +89,7 @@ public abstract class AbstractEnumRulesUiTestLanguageRuntimeModule extends Defau
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalEnumRulesUiTestLanguageLexer> provideInternalEnumRulesUiTestLanguageLexer() {
+	public Provider<? extends InternalEnumRulesUiTestLanguageLexer> provideInternalEnumRulesUiTestLanguageLexer() {
 		return LexerProvider.create(InternalEnumRulesUiTestLanguageLexer.class);
 	}
 	

@@ -89,7 +89,7 @@ public abstract class AbstractImportUriUiTestLanguageRuntimeModule extends Defau
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalImportUriUiTestLanguageLexer> provideInternalImportUriUiTestLanguageLexer() {
+	public Provider<? extends InternalImportUriUiTestLanguageLexer> provideInternalImportUriUiTestLanguageLexer() {
 		return LexerProvider.create(InternalImportUriUiTestLanguageLexer.class);
 	}
 	

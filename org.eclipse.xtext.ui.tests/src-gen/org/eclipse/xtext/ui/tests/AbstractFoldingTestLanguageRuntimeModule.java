@@ -98,7 +98,7 @@ public abstract class AbstractFoldingTestLanguageRuntimeModule extends DefaultRu
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalFoldingTestLanguageLexer> provideInternalFoldingTestLanguageLexer() {
+	public Provider<? extends InternalFoldingTestLanguageLexer> provideInternalFoldingTestLanguageLexer() {
 		return LexerProvider.create(InternalFoldingTestLanguageLexer.class);
 	}
 	

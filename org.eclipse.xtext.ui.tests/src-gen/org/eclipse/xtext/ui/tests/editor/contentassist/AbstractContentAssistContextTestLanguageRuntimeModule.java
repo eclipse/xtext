@@ -89,7 +89,7 @@ public abstract class AbstractContentAssistContextTestLanguageRuntimeModule exte
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalContentAssistContextTestLanguageLexer> provideInternalContentAssistContextTestLanguageLexer() {
+	public Provider<? extends InternalContentAssistContextTestLanguageLexer> provideInternalContentAssistContextTestLanguageLexer() {
 		return LexerProvider.create(InternalContentAssistContextTestLanguageLexer.class);
 	}
 	
