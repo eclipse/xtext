@@ -1487,6 +1487,11 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
     Grammar _grammar = this.getGrammar();
     TypeReference _parserClass = naming.getParserClass(_grammar);
     final GuiceModuleAccess.BindingFactory rtBindings = _addConfiguredBinding.addTypeToType(_typeRef, _parserClass);
+    if (this.partialParsing) {
+      TypeReference _typeRef_1 = TypeReference.typeRef("org.eclipse.xtext.ide.editor.contentassist.antlr.ContentAssistContextFactory");
+      TypeReference _typeRef_2 = TypeReference.typeRef("org.eclipse.xtext.ide.editor.contentassist.antlr.PartialContentAssistContextFactory");
+      rtBindings.addTypeToType(_typeRef_1, _typeRef_2);
+    }
     IXtextGeneratorLanguage _language = this.getLanguage();
     GuiceModuleAccess _ideGenModule = _language.getIdeGenModule();
     rtBindings.contributeTo(_ideGenModule);
@@ -1616,11 +1621,6 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
       }
     };
     final GuiceModuleAccess.BindingFactory uiBindings = _addTypeToType_2.addConfiguredBinding("ContentAssistLexerProvider", _client_3);
-    if (this.partialParsing) {
-      TypeReference _typeRef_4 = TypeReference.typeRef("org.eclipse.xtext.ide.editor.contentassist.antlr.ContentAssistContextFactory");
-      TypeReference _typeRef_5 = TypeReference.typeRef("org.eclipse.xtext.ide.editor.contentassist.antlr.PartialContentAssistContextFactory");
-      uiBindings.addTypeToType(_typeRef_4, _typeRef_5);
-    }
     IXtextGeneratorLanguage _language = this.getLanguage();
     GuiceModuleAccess _eclipsePluginGenModule = _language.getEclipsePluginGenModule();
     uiBindings.contributeTo(_eclipsePluginGenModule);

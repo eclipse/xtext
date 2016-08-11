@@ -489,6 +489,12 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 					.to(«grammar.lexerClass».class);
 			''')
 			.addTypeToType('org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser'.typeRef, grammar.parserClass)
+		if (partialParsing) {
+			rtBindings.addTypeToType(
+				"org.eclipse.xtext.ide.editor.contentassist.antlr.ContentAssistContextFactory".typeRef, 
+				"org.eclipse.xtext.ide.editor.contentassist.antlr.PartialContentAssistContextFactory".typeRef
+			)
+		}
 		rtBindings.contributeTo(language.ideGenModule)
 	}
 	
@@ -539,12 +545,6 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 			.addConfiguredBinding("ContentAssistLexerProvider", '''
 				binder.bind(«caLexerClass».class).toProvider(«LexerProvider».create(«caLexerClass».class));
 			''')
-		if (partialParsing) {
-			uiBindings.addTypeToType(
-				"org.eclipse.xtext.ide.editor.contentassist.antlr.ContentAssistContextFactory".typeRef, 
-				"org.eclipse.xtext.ide.editor.contentassist.antlr.PartialContentAssistContextFactory".typeRef
-			)
-		}
 		uiBindings.contributeTo(language.eclipsePluginGenModule)
 	}
 	
