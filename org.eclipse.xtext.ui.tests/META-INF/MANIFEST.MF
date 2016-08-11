@@ -227,8 +227,5 @@ Export-Package: org.eclipse.xtext.ui.tests,
  org.eclipse.xtext.ui.tests.testlanguages.services,
  org.eclipse.xtext.ui.tests.testlanguages.ui.contentassist,
  org.eclipse.xtext.ui.tests.ui.contentassist,
- org.eclipse.xtext.ui.tests.validation,
- org.eclipse.xtext.ui.tests.xtextUiTest,
- org.eclipse.xtext.ui.tests.xtextUiTest.impl,
- org.eclipse.xtext.ui.tests.xtextUiTest.util
+ org.eclipse.xtext.ui.tests.validation
 

@@ -89,7 +89,7 @@ public abstract class AbstractLookAheadContentAssistTestLanguageRuntimeModule ex
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalLookAheadContentAssistTestLanguageLexer> provideInternalLookAheadContentAssistTestLanguageLexer() {
+	public Provider<? extends InternalLookAheadContentAssistTestLanguageLexer> provideInternalLookAheadContentAssistTestLanguageLexer() {
 		return LexerProvider.create(InternalLookAheadContentAssistTestLanguageLexer.class);
 	}
 	

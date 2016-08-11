@@ -19,6 +19,8 @@ import org.eclipse.xtext.testlanguages.backtracking.ui.ExBeeLangTestLanguageUiMo
 import org.eclipse.xtext.testlanguages.backtracking.ui.SimpleBeeLangTestLanguageUiModule;
 import org.eclipse.xtext.testlanguages.noJdt.NoJdtTestLanguageRuntimeModule;
 import org.eclipse.xtext.testlanguages.noJdt.ui.NoJdtTestLanguageUiModule;
+import org.eclipse.xtext.testlanguages.xtextgrammar.XtextGrammarTestLanguageRuntimeModule;
+import org.eclipse.xtext.testlanguages.xtextgrammar.ui.XtextGrammarTestLanguageUiModule;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.eclipse.xtext.util.Modules2;
 import org.osgi.framework.BundleContext;
@@ -33,6 +35,7 @@ public class TestlanguagesActivator extends AbstractUIPlugin {
 	public static final String ORG_ECLIPSE_XTEXT_TESTLANGUAGES_BACKTRACKING_SIMPLEBEELANGTESTLANGUAGE = "org.eclipse.xtext.testlanguages.backtracking.SimpleBeeLangTestLanguage";
 	public static final String ORG_ECLIPSE_XTEXT_TESTLANGUAGES_BACKTRACKING_EXBEELANGTESTLANGUAGE = "org.eclipse.xtext.testlanguages.backtracking.ExBeeLangTestLanguage";
 	public static final String ORG_ECLIPSE_XTEXT_TESTLANGUAGES_NOJDT_NOJDTTESTLANGUAGE = "org.eclipse.xtext.testlanguages.noJdt.NoJdtTestLanguage";
+	public static final String ORG_ECLIPSE_XTEXT_TESTLANGUAGES_XTEXTGRAMMAR_XTEXTGRAMMARTESTLANGUAGE = "org.eclipse.xtext.testlanguages.xtextgrammar.XtextGrammarTestLanguage";
 	
 	private static final Logger logger = Logger.getLogger(TestlanguagesActivator.class);
 	
@@ -94,6 +97,9 @@ public class TestlanguagesActivator extends AbstractUIPlugin {
 		if (ORG_ECLIPSE_XTEXT_TESTLANGUAGES_NOJDT_NOJDTTESTLANGUAGE.equals(grammar)) {
 			return new NoJdtTestLanguageRuntimeModule();
 		}
+		if (ORG_ECLIPSE_XTEXT_TESTLANGUAGES_XTEXTGRAMMAR_XTEXTGRAMMARTESTLANGUAGE.equals(grammar)) {
+			return new XtextGrammarTestLanguageRuntimeModule();
+		}
 		throw new IllegalArgumentException(grammar);
 	}
 	
@@ -109,6 +115,9 @@ public class TestlanguagesActivator extends AbstractUIPlugin {
 		}
 		if (ORG_ECLIPSE_XTEXT_TESTLANGUAGES_NOJDT_NOJDTTESTLANGUAGE.equals(grammar)) {
 			return new NoJdtTestLanguageUiModule(this);
+		}
+		if (ORG_ECLIPSE_XTEXT_TESTLANGUAGES_XTEXTGRAMMAR_XTEXTGRAMMARTESTLANGUAGE.equals(grammar)) {
+			return new XtextGrammarTestLanguageUiModule(this);
 		}
 		throw new IllegalArgumentException(grammar);
 	}

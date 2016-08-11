@@ -9,11 +9,11 @@ package org.eclipse.xtext.ui.tests.editor.contentassist;
 
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.junit4.ui.AbstractContentAssistProcessorTest;
+import org.eclipse.xtext.testlanguages.ui.internal.TestlanguagesActivator;
+import org.eclipse.xtext.testlanguages.xtextgrammar.XtextGrammarTestLanguageRuntimeModule;
+import org.eclipse.xtext.testlanguages.xtextgrammar.XtextGrammarTestLanguageStandaloneSetup;
+import org.eclipse.xtext.testlanguages.xtextgrammar.ui.XtextGrammarTestLanguageUiModule;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
-import org.eclipse.xtext.ui.tests.ui.internal.TestsActivator;
-import org.eclipse.xtext.ui.tests.XtextGrammarUiTestLanguageRuntimeModule;
-import org.eclipse.xtext.ui.tests.XtextGrammarUiTestLanguageStandaloneSetup;
-import org.eclipse.xtext.ui.tests.ui.XtextGrammarUiTestLanguageUiModule;
 import org.eclipse.xtext.util.Modules2;
 import org.junit.Test;
 
@@ -27,11 +27,11 @@ public class XtextGrammarUiContentAssistTest extends AbstractContentAssistProces
 
 	@Override
 	public ISetup doGetSetup() {
-		return new XtextGrammarUiTestLanguageStandaloneSetup() {
+		return new XtextGrammarTestLanguageStandaloneSetup() {
 			@Override
 			public Injector createInjector() {
-				return Guice.createInjector(Modules2.mixin(new XtextGrammarUiTestLanguageRuntimeModule(),
-						new XtextGrammarUiTestLanguageUiModule(TestsActivator.getInstance()), new SharedStateModule()));
+				return Guice.createInjector(Modules2.mixin(new XtextGrammarTestLanguageRuntimeModule(),
+						new XtextGrammarTestLanguageUiModule(TestlanguagesActivator.getInstance()), new SharedStateModule()));
 			}
 		};
 	}

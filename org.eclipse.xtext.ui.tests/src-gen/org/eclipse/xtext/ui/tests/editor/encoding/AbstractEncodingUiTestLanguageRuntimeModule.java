@@ -89,7 +89,7 @@ public abstract class AbstractEncodingUiTestLanguageRuntimeModule extends Defaul
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalEncodingUiTestLanguageLexer> provideInternalEncodingUiTestLanguageLexer() {
+	public Provider<? extends InternalEncodingUiTestLanguageLexer> provideInternalEncodingUiTestLanguageLexer() {
 		return LexerProvider.create(InternalEncodingUiTestLanguageLexer.class);
 	}
 	

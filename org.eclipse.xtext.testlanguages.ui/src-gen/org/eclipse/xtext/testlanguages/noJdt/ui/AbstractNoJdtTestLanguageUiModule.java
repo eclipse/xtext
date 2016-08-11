@@ -89,7 +89,7 @@ public abstract class AbstractNoJdtTestLanguageUiModule extends DefaultUiModule 
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.ImplicitFragment
-	public Provider<IAllContainersState> provideIAllContainersState() {
+	public Provider<? extends IAllContainersState> provideIAllContainersState() {
 		return Access.getJavaProjectsState();
 	}
 	
@@ -249,12 +249,12 @@ public abstract class AbstractNoJdtTestLanguageUiModule extends DefaultUiModule 
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.ui.templates.CodetemplatesGeneratorFragment2
-	public Provider<TemplatesLanguageConfiguration> provideTemplatesLanguageConfiguration() {
+	public Provider<? extends TemplatesLanguageConfiguration> provideTemplatesLanguageConfiguration() {
 		return AccessibleCodetemplatesActivator.getTemplatesLanguageConfigurationProvider();
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.ui.templates.CodetemplatesGeneratorFragment2
-	public Provider<LanguageRegistry> provideLanguageRegistry() {
+	public Provider<? extends LanguageRegistry> provideLanguageRegistry() {
 		return AccessibleCodetemplatesActivator.getLanguageRegistry();
 	}
 	

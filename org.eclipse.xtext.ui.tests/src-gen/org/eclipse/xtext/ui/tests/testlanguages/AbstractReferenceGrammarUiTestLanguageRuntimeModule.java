@@ -89,7 +89,7 @@ public abstract class AbstractReferenceGrammarUiTestLanguageRuntimeModule extend
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalReferenceGrammarUiTestLanguageLexer> provideInternalReferenceGrammarUiTestLanguageLexer() {
+	public Provider<? extends InternalReferenceGrammarUiTestLanguageLexer> provideInternalReferenceGrammarUiTestLanguageLexer() {
 		return LexerProvider.create(InternalReferenceGrammarUiTestLanguageLexer.class);
 	}
 	

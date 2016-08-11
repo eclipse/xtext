@@ -89,7 +89,7 @@ public abstract class AbstractDomainModelTestLanguageRuntimeModule extends Defau
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalDomainModelTestLanguageLexer> provideInternalDomainModelTestLanguageLexer() {
+	public Provider<? extends InternalDomainModelTestLanguageLexer> provideInternalDomainModelTestLanguageLexer() {
 		return LexerProvider.create(InternalDomainModelTestLanguageLexer.class);
 	}
 	

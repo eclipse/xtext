@@ -89,7 +89,7 @@ public abstract class AbstractBug286935TestLanguageRuntimeModule extends Default
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalBug286935TestLanguageLexer> provideInternalBug286935TestLanguageLexer() {
+	public Provider<? extends InternalBug286935TestLanguageLexer> provideInternalBug286935TestLanguageLexer() {
 		return LexerProvider.create(InternalBug286935TestLanguageLexer.class);
 	}
 	

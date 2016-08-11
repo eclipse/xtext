@@ -89,7 +89,7 @@ public abstract class AbstractTwoContextsTestLanguageRuntimeModule extends Defau
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalTwoContextsTestLanguageLexer> provideInternalTwoContextsTestLanguageLexer() {
+	public Provider<? extends InternalTwoContextsTestLanguageLexer> provideInternalTwoContextsTestLanguageLexer() {
 		return LexerProvider.create(InternalTwoContextsTestLanguageLexer.class);
 	}
 	

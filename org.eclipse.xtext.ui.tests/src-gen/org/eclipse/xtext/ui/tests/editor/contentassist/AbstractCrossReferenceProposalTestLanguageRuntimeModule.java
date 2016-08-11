@@ -89,7 +89,7 @@ public abstract class AbstractCrossReferenceProposalTestLanguageRuntimeModule ex
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalCrossReferenceProposalTestLanguageLexer> provideInternalCrossReferenceProposalTestLanguageLexer() {
+	public Provider<? extends InternalCrossReferenceProposalTestLanguageLexer> provideInternalCrossReferenceProposalTestLanguageLexer() {
 		return LexerProvider.create(InternalCrossReferenceProposalTestLanguageLexer.class);
 	}
 	

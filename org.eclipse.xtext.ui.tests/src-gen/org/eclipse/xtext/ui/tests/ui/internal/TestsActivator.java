@@ -14,7 +14,6 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.eclipse.xtext.ui.tests.FoldingTestLanguageRuntimeModule;
 import org.eclipse.xtext.ui.tests.TestLanguageRuntimeModule;
-import org.eclipse.xtext.ui.tests.XtextGrammarUiTestLanguageRuntimeModule;
 import org.eclipse.xtext.ui.tests.editor.bracketmatching.BmTestLanguageRuntimeModule;
 import org.eclipse.xtext.ui.tests.editor.bracketmatching.ui.BmTestLanguageUiModule;
 import org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguageRuntimeModule;
@@ -97,7 +96,6 @@ import org.eclipse.xtext.ui.tests.testlanguages.ui.ContentAssistTestLanguageUiMo
 import org.eclipse.xtext.ui.tests.testlanguages.ui.ReferenceGrammarUiTestLanguageUiModule;
 import org.eclipse.xtext.ui.tests.ui.FoldingTestLanguageUiModule;
 import org.eclipse.xtext.ui.tests.ui.TestLanguageUiModule;
-import org.eclipse.xtext.ui.tests.ui.XtextGrammarUiTestLanguageUiModule;
 import org.eclipse.xtext.util.Modules2;
 import org.osgi.framework.BundleContext;
 
@@ -107,7 +105,6 @@ import org.osgi.framework.BundleContext;
  */
 public class TestsActivator extends AbstractUIPlugin {
 
-	public static final String ORG_ECLIPSE_XTEXT_UI_TESTS_XTEXTGRAMMARUITESTLANGUAGE = "org.eclipse.xtext.ui.tests.XtextGrammarUiTestLanguage";
 	public static final String ORG_ECLIPSE_XTEXT_UI_TESTS_LINKING_IMPORTURIUITESTLANGUAGE = "org.eclipse.xtext.ui.tests.linking.ImportUriUiTestLanguage";
 	public static final String ORG_ECLIPSE_XTEXT_UI_TESTS_EDITOR_CONTENTASSIST_TWOCONTEXTSTESTLANGUAGE = "org.eclipse.xtext.ui.tests.editor.contentassist.TwoContextsTestLanguage";
 	public static final String ORG_ECLIPSE_XTEXT_UI_TESTS_EDITOR_CONTENTASSIST_BUG286935TESTLANGUAGE = "org.eclipse.xtext.ui.tests.editor.contentassist.Bug286935TestLanguage";
@@ -199,9 +196,6 @@ public class TestsActivator extends AbstractUIPlugin {
 	}
 	
 	protected Module getRuntimeModule(String grammar) {
-		if (ORG_ECLIPSE_XTEXT_UI_TESTS_XTEXTGRAMMARUITESTLANGUAGE.equals(grammar)) {
-			return new XtextGrammarUiTestLanguageRuntimeModule();
-		}
 		if (ORG_ECLIPSE_XTEXT_UI_TESTS_LINKING_IMPORTURIUITESTLANGUAGE.equals(grammar)) {
 			return new ImportUriUiTestLanguageRuntimeModule();
 		}
@@ -332,9 +326,6 @@ public class TestsActivator extends AbstractUIPlugin {
 	}
 	
 	protected Module getUiModule(String grammar) {
-		if (ORG_ECLIPSE_XTEXT_UI_TESTS_XTEXTGRAMMARUITESTLANGUAGE.equals(grammar)) {
-			return new XtextGrammarUiTestLanguageUiModule(this);
-		}
 		if (ORG_ECLIPSE_XTEXT_UI_TESTS_LINKING_IMPORTURIUITESTLANGUAGE.equals(grammar)) {
 			return new ImportUriUiTestLanguageUiModule(this);
 		}

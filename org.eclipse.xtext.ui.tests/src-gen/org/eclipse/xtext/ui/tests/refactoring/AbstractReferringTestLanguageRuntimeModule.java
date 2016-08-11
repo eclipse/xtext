@@ -107,7 +107,7 @@ public abstract class AbstractReferringTestLanguageRuntimeModule extends Default
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalReferringTestLanguageLexer> provideInternalReferringTestLanguageLexer() {
+	public Provider<? extends InternalReferringTestLanguageLexer> provideInternalReferringTestLanguageLexer() {
 		return LexerProvider.create(InternalReferringTestLanguageLexer.class);
 	}
 	

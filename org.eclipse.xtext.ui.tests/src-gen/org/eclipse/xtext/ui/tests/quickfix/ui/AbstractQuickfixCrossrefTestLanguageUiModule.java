@@ -38,7 +38,7 @@ public abstract class AbstractQuickfixCrossrefTestLanguageUiModule extends Defau
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.ImplicitFragment
-	public Provider<IAllContainersState> provideIAllContainersState() {
+	public Provider<? extends IAllContainersState> provideIAllContainersState() {
 		return Access.getJavaProjectsState();
 	}
 	

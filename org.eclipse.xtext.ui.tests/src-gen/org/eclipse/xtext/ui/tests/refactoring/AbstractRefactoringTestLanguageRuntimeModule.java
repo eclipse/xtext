@@ -107,7 +107,7 @@ public abstract class AbstractRefactoringTestLanguageRuntimeModule extends Defau
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalRefactoringTestLanguageLexer> provideInternalRefactoringTestLanguageLexer() {
+	public Provider<? extends InternalRefactoringTestLanguageLexer> provideInternalRefactoringTestLanguageLexer() {
 		return LexerProvider.create(InternalRefactoringTestLanguageLexer.class);
 	}
 	
