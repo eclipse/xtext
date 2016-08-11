@@ -20,13 +20,19 @@ Workflow {
 			project = StandardProjectConfig {
 				baseName = baseName
 				rootPath = rootPath
-				genericIde = {
-					enabled = true
+				runtime = {
 				    src = "${rootPath}/${baseName}/testlang-src"
 				    srcGen = "${rootPath}/${baseName}/testlang-src-gen"
-				    name = baseName
 				}
-				runtime = {
+				runtimeTest = {
+					enabled = true
+					name = baseName
+				    src = "${rootPath}/${baseName}/testlang-src"
+				    srcGen = "${rootPath}/${baseName}/testlang-src-gen"
+				}
+				genericIde = {
+					enabled = true
+				    name = baseName
 				    src = "${rootPath}/${baseName}/testlang-src"
 				    srcGen = "${rootPath}/${baseName}/testlang-src-gen"
 				}
@@ -54,6 +60,9 @@ Workflow {
 			}
 			validator = {
 				// composedCheck = "org.eclipse.xtext.validation.NamesAreUniqueValidator"
+			}
+			junitSupport = {
+				generateStub = false
 			}
 		}
 	}
