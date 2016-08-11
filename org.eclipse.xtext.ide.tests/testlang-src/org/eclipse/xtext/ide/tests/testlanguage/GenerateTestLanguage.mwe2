@@ -65,5 +65,21 @@ Workflow {
 				generateStub = false
 			}
 		}
+		language = StandardLanguage {
+			name = "org.eclipse.xtext.ide.tests.testlanguage.PartialContentAssistTestLanguage"
+			fileExtensions = "partialcontentassisttestlang"
+			serializer = {
+				generateStub = false
+			}
+			validator = {
+			// composedCheck = "org.eclipse.xtext.validation.NamesAreUniqueValidator"
+			}
+			junitSupport = {
+				generateStub = false
+			}
+			parserGenerator = {
+				partialParsing = true
+			}
+		}
 	}
 }
