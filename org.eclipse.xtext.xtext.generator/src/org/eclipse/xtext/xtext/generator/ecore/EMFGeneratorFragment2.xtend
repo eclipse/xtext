@@ -37,6 +37,7 @@ import org.eclipse.emf.common.util.BasicMonitor
 import org.eclipse.emf.common.util.Diagnostic
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.EClassifier
+import org.eclipse.emf.ecore.EFactory
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.EPackage
 import org.eclipse.emf.ecore.EReference
@@ -66,10 +67,12 @@ import org.eclipse.xtext.util.Strings
 import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment
 import org.eclipse.xtext.xtext.generator.CodeConfig
+import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
 import org.eclipse.xtext.xtext.generator.model.TypeReference
 
 import static org.eclipse.xtext.GrammarUtil.*
 
+import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 import static extension org.eclipse.xtext.xtext.generator.util.GenModelUtil2.*
 
 @Log
@@ -196,6 +199,16 @@ class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
 			LOG.warn('Illegal JDK level: ' + jdkLevel)
 	}
 	
+	boolean bindEPackageAndEFactory = false
+	
+	/**
+	 * If set generated {@link EPackage} and {@link EFactory} interfaces are bound to their <code>eINSTANCE</code> instance.
+	 * @since 2.11
+	 */
+	public def void setBindEPackageAndEFactory (boolean bindEPackageAndEFactory) {
+		this.bindEPackageAndEFactory = bindEPackageAndEFactory
+	}
+	
 	protected def String getModelPluginID() {
 		modelPluginID ?: projectConfig.runtime.name
 	}
@@ -320,6 +333,18 @@ class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
 					doGenerate(genModel)
 					
 					addProjectContributions(clonedGrammar, generatedPackages, workingResourceSet)
+					
+					// Register generated EPackage and EFactory instances in the runtime module
+					if (bindEPackageAndEFactory) {
+						for (pkg: generatedPackages) {
+							val genPkg = getGenPackage(pkg, genModel.eResource.resourceSet)
+							
+							new GuiceModuleAccess.BindingFactory()
+								.addTypeToInstance(genPkg.qualifiedPackageInterfaceName.typeRef, '''«genPkg.packageInterfaceName».eINSTANCE''')
+								.addTypeToInstance(genPkg.qualifiedFactoryInterfaceName.typeRef, '''«genPkg.factoryInterfaceName».eINSTANCE''')
+								.contributeTo(language.runtimeGenModule)
+						}
+					}
 				}
 				
 				// Finally save the ecore packages to the file system
