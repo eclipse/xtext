@@ -47,6 +47,7 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -76,11 +77,14 @@ import org.eclipse.xtext.GeneratedMetamodel;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.generator.AbstractGeneratorFragment;
+import org.eclipse.xtext.generator.BindFactory;
+import org.eclipse.xtext.generator.Binding;
 import org.eclipse.xtext.generator.GenModelAccess;
 import org.eclipse.xtext.generator.IGeneratorFragment;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.util.Strings;
+import org.eclipse.xtext.xtext.generator.util.GenModelUtil2;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -140,6 +144,8 @@ public class EMFGeneratorFragment extends AbstractGeneratorFragment {
 	private boolean suppressLoadInitialization = false;
 	
 	private GenJDKLevel jdkLevel = GenJDKLevel.JDK60_LITERAL;
+	
+	private boolean bindEPackageAndEFactory = false;
 	
 	private String getLineDelimiter() {
 		return getNaming().getLineDelimiter();
@@ -1016,5 +1022,41 @@ public class EMFGeneratorFragment extends AbstractGeneratorFragment {
 	public String getJdkLevel() {
 		return jdkLevel.getName();
 	}
+
+	/**
+	 * If set generated {@link EPackage} and {@link EFactory} interfaces are bound to their <code>eINSTANCE</code> instance.
+	 * @since 2.11
+	 */
+	public void setBindEPackageAndEFactory(boolean bindEPackageAndEFactory) {
+		this.bindEPackageAndEFactory = bindEPackageAndEFactory;
+	}
+
+	/**
+	 * @since 2.11
+	 */
+	public boolean isBindEPackageAndEFactory() {
+		return bindEPackageAndEFactory;
+	}
+
+	/**
+	 * @since 2.11
+	 */
+	@Override
+	public Set<Binding> getGuiceBindingsRt(Grammar grammar) {
+		if (isBindEPackageAndEFactory()) {
+			BindFactory bindFactory = new BindFactory();
+			// Register generated EPackage and EFactory instances in the runtime module
+			for (EPackage pkg: getGeneratedEPackages(grammar)) {
+				GenPackage genPkg = GenModelUtil2.getGenPackage(pkg, grammar.eResource().getResourceSet());
+				bindFactory
+					.addTypeToInstance(genPkg.getQualifiedPackageInterfaceName(), genPkg.getQualifiedPackageInterfaceName()+".eINSTANCE")
+					.addTypeToInstance(genPkg.getQualifiedFactoryInterfaceName(), genPkg.getQualifiedFactoryInterfaceName()+".eINSTANCE");
+			}
+			return bindFactory.getBindings();
+		} else {
+			return Collections.emptySet();
+		}
+	}	
+	
 	
 }
