@@ -121,7 +121,7 @@ import java.util.concurrent.RejectedExecutionException
 	protected def <T> T doAccess(CancelableUnitOfWork<T, IXtextWebDocument> synchronousWork, boolean priority,
 			boolean modify, CancelableUnitOfWork<?, IXtextWebDocument> asynchronousWork) {
 		val synchronizer = document.synchronizer
-		val documentAccess = if (modify) document else new ReadAccess(document)
+		val documentAccess = if (modify) document else createReadAccess(document)
 		var currentThreadOwnsLock = true
 		var T result
 		try {
@@ -199,6 +199,13 @@ import java.util.concurrent.RejectedExecutionException
 			else 
 				return service.compute(document, cancelIndicator)
 		]
+	}
+
+	/**
+	 * @since 2.11
+	 */
+	protected def IXtextWebDocument createReadAccess(XtextWebDocument document) {
+		return new ReadAccess(document)
 	}
 
 	@FinalFieldsConstructor protected static class ReadAccess implements IXtextWebDocument {
