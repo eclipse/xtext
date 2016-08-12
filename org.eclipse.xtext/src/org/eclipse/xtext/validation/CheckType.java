@@ -9,15 +9,20 @@
 package org.eclipse.xtext.validation;
 
 /**
+ * CheckType is used to determine when @{@link Check}-annotated validation Methods are executed.
+ *
  * @author Sven Efftinge - Initial contribution and API
  *
  */
 public enum CheckType {
 	
+	/** Check is executed on editing, save/build and on request. */
 	FAST,
 	
+	/** Check is executed on save/build and request only. */
 	NORMAL,
 	
+	/** Check is executed on request (right click in the editor -&gt; validate) only. */
 	EXPENSIVE; 
 	
 }
