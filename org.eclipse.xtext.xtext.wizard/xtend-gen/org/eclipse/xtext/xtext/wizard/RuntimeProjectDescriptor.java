@@ -1560,6 +1560,14 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     return _builder;
   }
   
+  /**
+   * @since 2.11
+   */
+  @Override
+  public Set<String> getBinExcludes() {
+    return Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet("**/*.xtend", "**/*.mwe2"));
+  }
+  
   @Pure
   public boolean isWithPluginXml() {
     return this.withPluginXml;

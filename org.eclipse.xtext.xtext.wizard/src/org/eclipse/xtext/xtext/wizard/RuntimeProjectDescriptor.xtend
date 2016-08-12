@@ -520,4 +520,12 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 			</fileSets>
 		</assembly>
 	'''
+	
+	/**
+	 * @since 2.11
+	 */
+	override getBinExcludes() {
+		#{"**/*.xtend","**/*.mwe2"}
+	}
+	
 }

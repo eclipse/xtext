@@ -138,9 +138,13 @@ public abstract class ProjectDescriptor {
     String _buildPropertiesEntry_1 = this.buildPropertiesEntry("bin.includes", _binIncludes);
     _builder.append(_buildPropertiesEntry_1, "");
     _builder.newLineIfNotEmpty();
-    Set<String> _developmentBundles = this.getDevelopmentBundles();
-    String _buildPropertiesEntry_2 = this.buildPropertiesEntry("additional.bundles", _developmentBundles);
+    Set<String> _binExcludes = this.getBinExcludes();
+    String _buildPropertiesEntry_2 = this.buildPropertiesEntry("bin.excludes", _binExcludes);
     _builder.append(_buildPropertiesEntry_2, "");
+    _builder.newLineIfNotEmpty();
+    Set<String> _developmentBundles = this.getDevelopmentBundles();
+    String _buildPropertiesEntry_3 = this.buildPropertiesEntry("additional.bundles", _developmentBundles);
+    _builder.append(_buildPropertiesEntry_3, "");
     _builder.newLineIfNotEmpty();
     return _builder;
   }
@@ -151,6 +155,13 @@ public abstract class ProjectDescriptor {
     _builder.append(_sourceFolder, "");
     _builder.append("/");
     return CollectionLiterals.<String>newLinkedHashSet(".", _builder.toString());
+  }
+  
+  /**
+   * @since 2.11
+   */
+  public Set<String> getBinExcludes() {
+    return CollectionLiterals.<String>newLinkedHashSet("**/*.xtend");
   }
   
   public Set<String> getDevelopmentBundles() {

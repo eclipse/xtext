@@ -89,6 +89,14 @@ public class SdkFeatureProject extends ProjectDescriptor {
     return Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet("feature.xml"));
   }
   
+  /**
+   * @since 2.11
+   */
+  @Override
+  public Set<String> getBinExcludes() {
+    return Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet());
+  }
+  
   public CharSequence featureXml() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
