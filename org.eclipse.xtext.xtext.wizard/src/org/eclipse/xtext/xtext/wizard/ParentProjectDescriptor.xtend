@@ -209,7 +209,7 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 			buildSection = '''
 				<properties>
 					«IF config.needsTychoBuild»
-						<tycho-version>0.23.1</tycho-version>
+						<tycho-version>0.25.0</tycho-version>
 					«ENDIF»
 					<xtextVersion>«config.xtextVersion»</xtextVersion>
 					<project.build.sourceEncoding>«config.encoding»</project.build.sourceEncoding>
