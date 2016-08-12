@@ -33,6 +33,7 @@ import org.eclipse.xtext.ide.LexerIdeBindings;
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext.Builder;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer;
+import org.eclipse.xtext.ide.editor.partialEditing.IPartialEditingContentAssistParser;
 import org.eclipse.xtext.nodemodel.BidiTreeIterator;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
@@ -186,6 +187,9 @@ public class ContentAssistContextFactory implements Function<ContentAssistContex
 
 	protected void initializeNodeAndModelData() {
 		rootNode = parseResult.getRootNode();
+		if (parser instanceof IPartialEditingContentAssistParser) {
+			((IPartialEditingContentAssistParser) parser).initializeFor(resource.getEntryPoint());
+		}
 		lastCompleteNode = new LeafNodeFinder(completionOffset, true).searchIn(rootNode);
 		if (lastCompleteNode == null)
 			lastCompleteNode = rootNode;

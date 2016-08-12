@@ -20,13 +20,19 @@ Workflow {
 			project = StandardProjectConfig {
 				baseName = baseName
 				rootPath = rootPath
-				genericIde = {
-					enabled = true
+				runtime = {
 				    src = "${rootPath}/${baseName}/testlang-src"
 				    srcGen = "${rootPath}/${baseName}/testlang-src-gen"
-				    name = baseName
 				}
-				runtime = {
+				runtimeTest = {
+					enabled = true
+					name = baseName
+				    src = "${rootPath}/${baseName}/testlang-src"
+				    srcGen = "${rootPath}/${baseName}/testlang-src-gen"
+				}
+				genericIde = {
+					enabled = true
+				    name = baseName
 				    src = "${rootPath}/${baseName}/testlang-src"
 				    srcGen = "${rootPath}/${baseName}/testlang-src-gen"
 				}
@@ -54,6 +60,25 @@ Workflow {
 			}
 			validator = {
 				// composedCheck = "org.eclipse.xtext.validation.NamesAreUniqueValidator"
+			}
+			junitSupport = {
+				generateStub = false
+			}
+		}
+		language = StandardLanguage {
+			name = "org.eclipse.xtext.ide.tests.testlanguage.PartialContentAssistTestLanguage"
+			fileExtensions = "partialcontentassisttestlang"
+			serializer = {
+				generateStub = false
+			}
+			validator = {
+			// composedCheck = "org.eclipse.xtext.validation.NamesAreUniqueValidator"
+			}
+			junitSupport = {
+				generateStub = false
+			}
+			parserGenerator = {
+				partialParsing = true
 			}
 		}
 	}

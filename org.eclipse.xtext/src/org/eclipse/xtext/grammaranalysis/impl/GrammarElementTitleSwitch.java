@@ -104,6 +104,8 @@ public class GrammarElementTitleSwitch extends XtextSwitch<String> implements Fu
 		if (!showQualified && !showRule)
 			return result;
 		AbstractRule rule = GrammarUtil.containingRule(ele);
+		if (rule == null)
+			return "<AbstractElement not contained in AbstractRule!>:" + result;
 		if (!showQualified)
 			return result + ":" + rule.getName();
 		GrammarElementTitleSwitch others = copy();

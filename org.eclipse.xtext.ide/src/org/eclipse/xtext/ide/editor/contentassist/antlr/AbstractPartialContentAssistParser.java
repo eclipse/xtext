@@ -7,10 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.editor.contentassist.antlr;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.Collection;
-import java.util.Set;
 
 import org.antlr.runtime.TokenSource;
 import org.eclipse.emf.ecore.EObject;
@@ -26,6 +23,7 @@ import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.InfiniteRecursi
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.antlr.IUnorderedGroupHelper;
 import org.eclipse.xtext.xtext.RuleNames;
@@ -70,6 +68,7 @@ public abstract class AbstractPartialContentAssistParser extends AbstractContent
 		} else {
 			String text = parseResult.getRootNode().getText();
 			String parseMe = text.substring(0, offset);
+			initializeFor(NodeModelUtils.getEntryParserRule(parseResult.getRootNode()));
 			Collection<FollowElement> followElements = getFollowElements(parseMe, strict);
 			return followElements;
 		}
@@ -141,8 +140,7 @@ public abstract class AbstractPartialContentAssistParser extends AbstractContent
 		return null;
 	}
 
-	protected Collection<FollowElement> getFollowElements(
-			AbstractInternalContentAssistParser parser,
+	protected Collection<FollowElement> getFollowElements(AbstractInternalContentAssistParser parser,
 			AbstractElement entryPoint) {
 		String ruleName = getRuleName(entryPoint);
 		if (ruleName == null) {
@@ -157,27 +155,6 @@ public abstract class AbstractPartialContentAssistParser extends AbstractContent
 		if (ruleName == null) {
 			throw new IllegalStateException("entryPoint: " + entryPoint);
 		}
-		try {
-			Method method = parser.getClass().getMethod(ruleName);
-			method.setAccessible(true);
-			try {
-				method.invoke(parser);
-			} catch (InvocationTargetException targetException) {
-				if ((targetException.getCause() instanceof InfiniteRecursion)) {
-					throw (InfiniteRecursion) targetException.getCause();
-				}
-				throw new RuntimeException(targetException);
-			}
-			Set<FollowElement> result = parser.getFollowElements();
-			return result;
-		} catch (IllegalAccessException e) {
-			throw new RuntimeException(e);
-		} catch (IllegalArgumentException e) {
-			throw new RuntimeException(e);
-		} catch (NoSuchMethodException e) {
-			throw new RuntimeException(e);
-		} catch (SecurityException e) {
-			throw new RuntimeException(e);
-		}
+		return getFollowElements(parser, ruleName);
 	}
 }

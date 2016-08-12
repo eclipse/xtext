@@ -12,6 +12,7 @@ import java.io.StringReader;
 import java.util.Iterator;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.nodemodel.BidiTreeIterator;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
@@ -23,7 +24,10 @@ import org.eclipse.xtext.serializer.impl.Serializer;
 import org.eclipse.xtext.testlanguages.LookaheadTestLanguageStandaloneSetup;
 import org.eclipse.xtext.testlanguages.PartialParserTestLanguageStandaloneSetup;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
+import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetupGenerated;
 import org.eclipse.xtext.testlanguages.SimpleExpressionsTestLanguageStandaloneSetup;
+import org.eclipse.xtext.testlanguages.services.ReferenceGrammarTestLanguageGrammarAccess;
+import org.eclipse.xtext.testlanguages.services.SimpleExpressionsTestLanguageGrammarAccess;
 import org.junit.Test;
 
 import com.google.common.collect.Iterables;
@@ -408,6 +412,30 @@ public class PartialParserTest extends AbstractPartialParserTest {
 		XtextResource resource = getResourceFromString(model);
 		resource.update(1, 2, "");
 		assertEquals("t", resource.getParseResult().getRootNode().getText());
+	}
+	
+	@Test
+	public void preserveEntryParserRuleOnFullyReparse1() throws Exception {
+		with(ReferenceGrammarTestLanguageStandaloneSetupGenerated.class);
+		ParserRule rule = get(ReferenceGrammarTestLanguageGrammarAccess.class).getKindRule();
+		String model = "kind (Fritz 12)";
+		checkFullReparse(rule, model);
+	}
+	
+	@Test
+	public void preserveEntryParserRuleOnFullyReparse2() throws Exception {
+		with(SimpleExpressionsTestLanguageStandaloneSetup.class);
+		ParserRule rule = get(SimpleExpressionsTestLanguageGrammarAccess.class).getMultiplicationRule();
+		String model = "1 * 2";
+		checkFullReparse(rule, model);
+	}
+
+	private void checkFullReparse(ParserRule rule, String model) {
+		IParseResult oldParseResult = getParser().parse(rule, new StringReader(model));
+		IParseResult partialParseResult = reparse(oldParseResult, 0, model.length(), " " + model + " ");
+		String oldNodeModel = NodeModelUtils.compactDump(oldParseResult.getRootNode(), false);
+		String partialNodeModel = NodeModelUtils.compactDump(partialParseResult.getRootNode(), false);
+		assertEquals(oldNodeModel, partialNodeModel);
 	}
 
 }

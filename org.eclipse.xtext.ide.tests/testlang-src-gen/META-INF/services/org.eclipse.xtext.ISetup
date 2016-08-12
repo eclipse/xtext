@@ -1,1 +1,2 @@
 org.eclipse.xtext.ide.tests.testlanguage.ide.TestLanguageIdeSetup
+org.eclipse.xtext.ide.tests.testlanguage.ide.PartialContentAssistTestLanguageIdeSetup
