@@ -61,11 +61,11 @@ class TargetPlatformProject extends ProjectDescriptor {
 		<unit id="org.eclipse.xpand" version="0.0.0"/>
 		<unit id="org.eclipse.xtend" version="0.0.0"/>
 		<unit id="org.eclipse.xtend.typesystem.emf" version="0.0.0"/>
-		<repository location="http://download.eclipse.org/releases/mars/201506241002/"/>
+		<repository location="http://download.eclipse.org/releases/neon/201606221000/"/>
 		</location>
 		<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 		<unit id="org.eclipse.emf.mwe2.launcher.feature.group" version="0.0.0"/>
-		<repository location="http://download.eclipse.org/modeling/emft/mwe/updates/releases/2.8.1/"/>
+		<repository location="http://download.eclipse.org/modeling/emft/mwe/updates/releases/2.9.0/"/>
 		</location>
 		<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 		<unit id="org.eclipse.xtext.sdk.feature.group" version="0.0.0"/>
