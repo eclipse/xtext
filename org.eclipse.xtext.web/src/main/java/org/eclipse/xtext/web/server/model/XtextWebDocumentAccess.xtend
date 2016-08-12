@@ -201,6 +201,9 @@ import java.util.concurrent.RejectedExecutionException
 		]
 	}
 
+	/**
+	 * @since 2.11
+	 */
 	protected def IXtextWebDocument createReadAccess(XtextWebDocument document) {
 		return new ReadAccess(document)
 	}

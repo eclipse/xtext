@@ -315,6 +315,9 @@ public class XtextWebDocumentAccess {
     return this.<T>readOnly(_function);
   }
   
+  /**
+   * @since 2.11
+   */
   protected IXtextWebDocument createReadAccess(final XtextWebDocument document) {
     return new XtextWebDocumentAccess.ReadAccess(document);
   }
