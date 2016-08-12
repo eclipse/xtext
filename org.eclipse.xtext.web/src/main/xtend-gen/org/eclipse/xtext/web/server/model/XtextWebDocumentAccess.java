@@ -193,7 +193,7 @@ public class XtextWebDocumentAccess {
       if (modify) {
         _xifexpression = this.document;
       } else {
-        _xifexpression = new XtextWebDocumentAccess.ReadAccess(this.document);
+        _xifexpression = this.createReadAccess(this.document);
       }
       final IXtextWebDocument documentAccess = _xifexpression;
       boolean currentThreadOwnsLock = true;
@@ -313,6 +313,10 @@ public class XtextWebDocumentAccess {
       }
     };
     return this.<T>readOnly(_function);
+  }
+  
+  protected IXtextWebDocument createReadAccess(final XtextWebDocument document) {
+    return new XtextWebDocumentAccess.ReadAccess(document);
   }
   
   private final static Logger LOG = Logger.getLogger(XtextWebDocumentAccess.class);
