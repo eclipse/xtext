@@ -798,4 +798,25 @@ public class WizardConfigurationTest {
     WebProjectDescriptor _webProject = this.config.getWebProject();
     return Collections.<ProjectDescriptor>unmodifiableList(CollectionLiterals.<ProjectDescriptor>newArrayList(_runtimeProject, _testProject, _uiProject, _testProject_1, _ideProject, _intellijProject, _webProject));
   }
+  
+  @Test
+  public void binExcludes() {
+    RuntimeProjectDescriptor _runtimeProject = this.config.getRuntimeProject();
+    Set<String> _binExcludes = _runtimeProject.getBinExcludes();
+    Assert.assertEquals(Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet("**/*.mwe2", "**/*.xtend")), _binExcludes);
+    RuntimeProjectDescriptor _runtimeProject_1 = this.config.getRuntimeProject();
+    TestProjectDescriptor _testProject = _runtimeProject_1.getTestProject();
+    Set<String> _binExcludes_1 = _testProject.getBinExcludes();
+    Assert.assertEquals(Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet("**/*.xtend")), _binExcludes_1);
+    UiProjectDescriptor _uiProject = this.config.getUiProject();
+    Set<String> _binExcludes_2 = _uiProject.getBinExcludes();
+    Assert.assertEquals(Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet("**/*.xtend")), _binExcludes_2);
+    UiProjectDescriptor _uiProject_1 = this.config.getUiProject();
+    TestProjectDescriptor _testProject_1 = _uiProject_1.getTestProject();
+    Set<String> _binExcludes_3 = _testProject_1.getBinExcludes();
+    Assert.assertEquals(Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet("**/*.xtend")), _binExcludes_3);
+    SdkFeatureProject _sdkProject = this.config.getSdkProject();
+    Set<String> _binExcludes_4 = _sdkProject.getBinExcludes();
+    Assert.assertEquals(Collections.<Object>unmodifiableSet(CollectionLiterals.<Object>newHashSet()), _binExcludes_4);
+  }
 }

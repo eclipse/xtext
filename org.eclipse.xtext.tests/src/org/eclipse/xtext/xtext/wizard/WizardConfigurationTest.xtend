@@ -378,4 +378,13 @@ class WizardConfigurationTest {
 			config.webProject
 		]
 	}
+	
+	@Test
+	def void binExcludes () {
+		assertEquals(#{"**/*.mwe2","**/*.xtend"}, config.runtimeProject.binExcludes)
+		assertEquals(#{"**/*.xtend"}, config.runtimeProject.testProject.binExcludes)
+		assertEquals(#{"**/*.xtend"}, config.uiProject.binExcludes)
+		assertEquals(#{"**/*.xtend"}, config.uiProject.testProject.binExcludes)
+		assertEquals(#{}, config.sdkProject.binExcludes)
+	}
 }

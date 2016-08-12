@@ -55,6 +55,13 @@ class SdkFeatureProject extends ProjectDescriptor {
 	override getBinIncludes() {
 		#{"feature.xml"}
 	}
+	
+	/**
+	 * @since 2.11
+	 */
+	override getBinExcludes() {
+		#{}
+	}
 
 	def featureXml() '''
 		<?xml version="1.0" encoding="UTF-8"?>

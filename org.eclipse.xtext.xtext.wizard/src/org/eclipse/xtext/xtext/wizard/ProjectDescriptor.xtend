@@ -8,11 +8,11 @@
 package org.eclipse.xtext.xtext.wizard
 
 import com.google.common.base.Strings
+import java.net.URL
 import java.util.List
 import java.util.Set
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
-import java.net.URL
 
 @FinalFieldsConstructor
 @Accessors
@@ -73,11 +73,19 @@ abstract class ProjectDescriptor {
 	def CharSequence buildProperties() '''
 		«buildPropertiesEntry("source..", sourceFolders.map[it + "/"])»
 		«buildPropertiesEntry("bin.includes", binIncludes)»
+		«buildPropertiesEntry("bin.excludes", binExcludes)»
 		«buildPropertiesEntry("additional.bundles", developmentBundles)»
 	'''
 	
 	def Set<String> getBinIncludes() {
 		newLinkedHashSet(".", '''«Outlet.META_INF.sourceFolder»/''')	
+	}
+	
+	/**
+	 * @since 2.11
+	 */
+	def Set<String> getBinExcludes() {
+		newLinkedHashSet("**/*.xtend")
 	}
 	
 	def Set<String> getDevelopmentBundles() {
