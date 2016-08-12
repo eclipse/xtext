@@ -1597,6 +1597,14 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 				+ "}");
 	}
 	
+	@Test public void testAssignment_41() throws Exception {
+		assertEvaluatesTo(2,
+			"{"
+			+ "interpreter.Foo.BAR = 2"
+			+ "interpreter.Foo.BAR"
+			+ "}");
+	}
+
 	@Test public void testAssignmentInBlock_01() throws Exception {
 		assertEvaluatesTo("newValue", "{var x = 'literal' { x = 'newValue' } x }");
 	}
