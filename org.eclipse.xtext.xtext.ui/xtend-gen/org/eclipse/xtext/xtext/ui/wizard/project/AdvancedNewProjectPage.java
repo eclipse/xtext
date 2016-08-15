@@ -291,9 +291,9 @@ public class AdvancedNewProjectPage extends WizardPage {
           StringConcatenation _builder_3 = new StringConcatenation();
           _builder_3.append("Maven/Gradle source layout is only supported when using Maven or Gradle build system.");
           _builder_3.newLine();
-          _builder_3.append("You need to choose maven or gradle build system.");
+          _builder_3.append("You need to choose Maven or Gradle build system.");
           _builder_3.newLine();
-          _builder_3.append("Select <a>gradle</a> build.");
+          _builder_3.append("Select <a>Gradle</a> build.");
           final Procedure0 _function_3 = () -> {
             this.select(this.preferredBuildSystem, BuildSystem.GRADLE);
           };
@@ -321,9 +321,9 @@ public class AdvancedNewProjectPage extends WizardPage {
           _builder_5.append("To build the \'");
           String _text_5 = this.createWebProject.getText();
           _builder_5.append(_text_5, "");
-          _builder_5.append("\' project, you need to choose maven or gradle build system.");
+          _builder_5.append("\' project, you need to choose Maven or Gradle build system.");
           _builder_5.newLineIfNotEmpty();
-          _builder_5.append("Select <a>gradle</a> build.");
+          _builder_5.append("Select <a>Gradle</a> build.");
           final Procedure0 _function_5 = () -> {
             this.select(this.preferredBuildSystem, BuildSystem.GRADLE);
           };

@@ -188,8 +188,8 @@ class AdvancedNewProjectPage extends WizardPage {
 			} else {
 				reportIssue(ERROR, '''
 				Maven/Gradle source layout is only supported when using Maven or Gradle build system.
-				You need to choose maven or gradle build system.
-				Select <a>gradle</a> build.''', [
+				You need to choose Maven or Gradle build system.
+				Select <a>Gradle</a> build.''', [
 					preferredBuildSystem.select(BuildSystem.GRADLE)
 				])
 			}
@@ -204,8 +204,8 @@ class AdvancedNewProjectPage extends WizardPage {
 				])
 			} else {
 				reportIssue(ERROR, '''
-				To build the '«createWebProject.text»' project, you need to choose maven or gradle build system.
-				Select <a>gradle</a> build.''', [
+				To build the '«createWebProject.text»' project, you need to choose Maven or Gradle build system.
+				Select <a>Gradle</a> build.''', [
 					preferredBuildSystem.select(BuildSystem.GRADLE)
 				])
 			}
