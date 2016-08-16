@@ -262,6 +262,11 @@ entity Person {
 
 <h3 id="making-your-grammar-refer-to-xbase">Making Your Grammar Refer To Xbase</h3>
 
+<p>To use Xbase expression let your Grammar extend the Xbase grammar.</p>
+
+<pre><code class="language-xtext">grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.xbase.Xbase
+</code></pre>
+
 <p>If you want to refer to <a href="https://github.com/eclipse/emf/blob/R2_9_0/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClassifier.java">EClassifiers</a> from the Xbase model, you need to import Xbase first:</p>
 
 <pre><code class="language-xtext">import "http://www.eclipse.org/xtext/xbase/Xbase" as xbase
