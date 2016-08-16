@@ -164,7 +164,7 @@ public class NodeModelUtils extends InternalNodeModelUtils {
 	/* @NonNull */
 	public static List<INode> findNodesForFeature(EObject semanticObject, EStructuralFeature structuralFeature) {
 		ICompositeNode node = findActualNodeFor(semanticObject);
-		if (node != null) {
+		if (node != null && structuralFeature != null) {
 			return findNodesForFeature(semanticObject, node, structuralFeature);
 		}
 		return Collections.emptyList();
