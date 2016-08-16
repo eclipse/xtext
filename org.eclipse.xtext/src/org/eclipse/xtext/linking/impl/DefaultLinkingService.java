@@ -105,27 +105,29 @@ public class DefaultLinkingService extends AbstractLinkingService {
 	 *         {@link INode node}
 	 */
 	@Override
-	public List<EObject> getLinkedObjects(EObject context, EReference ref, INode node)
-			throws IllegalNodeException {
+	public List<EObject> getLinkedObjects(EObject context, EReference ref, INode node) throws IllegalNodeException {
 		final EClass requiredType = ref.getEReferenceType();
-		if (requiredType == null)
-			return Collections.<EObject> emptyList();
-
-		final String crossRefString = getCrossRefNodeAsString(node);
-		if (crossRefString != null && !crossRefString.equals("")) {
-			if (logger.isDebugEnabled()) {
-				logger.debug("before getLinkedObjects: node: '" + crossRefString + "'");
-			}
-			final IScope scope = getScope(context, ref);
-			QualifiedName qualifiedLinkName =  qualifiedNameConverter.toQualifiedName(crossRefString);
-			IEObjectDescription eObjectDescription = scope.getSingleElement(qualifiedLinkName);
-			if (logger.isDebugEnabled()) {
-				logger.debug("after getLinkedObjects: node: '" + crossRefString + "' result: " + eObjectDescription);
-			}
-			if (eObjectDescription != null) 
-				return Collections.singletonList(eObjectDescription.getEObjectOrProxy());
+		if (requiredType == null) {
+			return Collections.<EObject>emptyList();
 		}
-		return Collections.emptyList();
+		final String crossRefString = getCrossRefNodeAsString(node);
+		if (crossRefString == null || crossRefString.equals("")) {
+			return Collections.<EObject>emptyList();
+		}
+		if (logger.isDebugEnabled()) {
+			logger.debug("before getLinkedObjects: node: '" + crossRefString + "'");
+		}
+		final IScope scope = getScope(context, ref);
+		final QualifiedName qualifiedLinkName = qualifiedNameConverter.toQualifiedName(crossRefString);
+		final IEObjectDescription eObjectDescription = scope.getSingleElement(qualifiedLinkName);
+		if (logger.isDebugEnabled()) {
+			logger.debug("after getLinkedObjects: node: '" + crossRefString + "' result: " + eObjectDescription);
+		}
+		if (eObjectDescription == null) {
+			return Collections.emptyList();
+		}
+		final EObject result = eObjectDescription.getEObjectOrProxy();
+		return Collections.singletonList(result);
 	}
 	
 	public String getCrossRefNodeAsString(INode node) throws IllegalNodeException {
