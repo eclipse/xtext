@@ -1367,6 +1367,8 @@ public class XbaseValidator extends AbstractXbaseValidator {
 			        // when the feature call does not call itself or the call is from another function, then it is locally used
 			        if (fc.getFeature() != target || !EcoreUtil.isAncestor(targetSourceElem, fc))
 			            return true;
+			    } else {
+			    	return true;
 			    }
 			}
 			return false;
