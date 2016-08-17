@@ -250,7 +250,9 @@ public class XtendHighlightingCalculator extends XbaseHighlightingCalculator imp
 				}
 			} else {
 				EStructuralFeature nameFeature = target.eClass().getEStructuralFeature("name");
-				highlightFeature(acceptor, target, nameFeature, XbaseHighlightingStyles.DEPRECATED_MEMBERS);
+				if (nameFeature!=null) {
+					highlightFeature(acceptor, target, nameFeature, XbaseHighlightingStyles.DEPRECATED_MEMBERS);
+				}
 			}
 		}
 	}
