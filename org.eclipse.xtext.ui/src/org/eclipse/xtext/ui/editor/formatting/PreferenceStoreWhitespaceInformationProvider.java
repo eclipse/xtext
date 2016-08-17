@@ -14,9 +14,11 @@ import java.io.Reader;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResourceStatus;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ProjectScope;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.preferences.IScopeContext;
@@ -115,6 +117,10 @@ public class PreferenceStoreWhitespaceInformationProvider implements IWhitespace
 				}
 				if (rFound) {
 					return "\r";
+				}
+			} catch (CoreException e) {
+				if (e.getStatus().getCode()!=IResourceStatus.RESOURCE_NOT_FOUND) {
+					throw new RuntimeIOException(e);
 				}
 			} catch (Exception e) {
 				throw new RuntimeIOException(e);
