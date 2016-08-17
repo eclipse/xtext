@@ -54,6 +54,9 @@ public class NodeModelUtilsTest extends AbstractXtextTests {
 		nodes = NodeModelUtils.findNodesForFeature(declaration, XtextPackage.eINSTANCE.getGeneratedMetamodel_Name());
 		assertEquals(1, nodes.size());
 		assertEquals("foo", nodes.get(0).getText().trim());
+		
+		nodes = NodeModelUtils.findNodesForFeature(declaration, null);
+		assertEquals(0, nodes.size());
 	}
 	
 	@Test public void testFindNodesForFeature_MultipleFeature() throws Exception {
