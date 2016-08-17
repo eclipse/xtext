@@ -1464,6 +1464,11 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 		helper.assertWarning(clazz, XTEND_FUNCTION, UNUSED_PRIVATE_MEMBER, "method","foo(String, Integer)","never", "used");
 	}
 	
+	@Test public void testUnusedFunction_1() throws Exception {
+		XtendClass clazz = clazz("class X { def private void foo(String a, Integer b) {foo(a,b)} }");
+		helper.assertWarning(clazz, XTEND_FUNCTION, UNUSED_PRIVATE_MEMBER, "method","foo(String, Integer)","never", "used");
+	}
+	
 	@Test public void testSyntheticallyUsedFunction() throws Exception {
 		XtendClass clazz = clazz("class X { def private String foo() {} def bar(){}}");
 		JvmDeclaredType jvmType = (JvmDeclaredType) clazz.eResource().getContents().get(1);
