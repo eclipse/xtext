@@ -30,8 +30,7 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 				"\n" + 
 				"try {\n" + 
 				"  Class<?> clazz = Class.forName(\"java.lang.String\");\n" + 
-				"  Class<?> _superclass = clazz.getSuperclass();\n" + 
-				"  org.eclipse.xtext.xbase.lib.InputOutput.<Class<?>>println(_superclass);\n" + 
+				"  org.eclipse.xtext.xbase.lib.InputOutput.<Class<?>>println(clazz.getSuperclass());\n" + 
 				"} catch (Throwable _e) {\n" + 
 				"  throw org.eclipse.xtext.xbase.lib.Exceptions.sneakyThrow(_e);\n" + 
 				"}", 
@@ -179,8 +178,7 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 		assertCompilesTo(
 				"final java.util.function.Consumer<String[]> _function = new java.util.function.Consumer<String[]>() {\n" + 
 				"  public void accept(final String[] it) {\n" + 
-				"    int _length = it.length;\n" +
-				"    org.eclipse.xtext.xbase.lib.InputOutput.<Integer>println(Integer.valueOf(_length));\n" + 
+				"    org.eclipse.xtext.xbase.lib.InputOutput.<Integer>println(Integer.valueOf(it.length));\n" + 
 				"  }\n" + 
 				"};\n" + 
 				"((Iterable<String[]>) null).forEach(_function);", 
@@ -224,8 +222,7 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 		assertCompilesTo(
 				"final java.util.function.Consumer<String[]> _function = new java.util.function.Consumer<String[]>() {\n" + 
 				"  public void accept(final String[] it) {\n" + 
-				"    int _length = it.length;\n" +
-				"    org.eclipse.xtext.xbase.lib.InputOutput.<Integer>println(Integer.valueOf(_length));\n" + 
+				"    org.eclipse.xtext.xbase.lib.InputOutput.<Integer>println(Integer.valueOf(it.length));\n" + 
 				"  }\n" + 
 				"};\n" + 
 				"((Iterable<String[]>) null).forEach(_function);", 
