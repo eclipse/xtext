@@ -16,10 +16,10 @@ import java.util.Set
 import org.apache.log4j.Level
 import org.eclipse.xtend.core.compiler.batch.XtendBatchCompiler
 import org.eclipse.xtend.core.tests.RuntimeInjectorProvider
-import org.eclipse.xtext.junit4.InjectWith
-import org.eclipse.xtext.junit4.XtextRunner
-import org.eclipse.xtext.junit4.logging.LoggingTester
-import org.eclipse.xtext.junit4.smoketest.IgnoredBySmokeTest
+import org.eclipse.xtext.testing.InjectWith
+import org.eclipse.xtext.testing.XtextRunner
+import org.eclipse.xtext.testing.logging.LoggingTester
+import org.eclipse.xtext.testing.smoketest.IgnoredBySmokeTest
 import org.junit.After
 import org.junit.AfterClass
 import org.junit.Before

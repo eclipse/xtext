@@ -8,7 +8,7 @@
 package org.eclipse.xtend.core.tests.serializer;
 
 import org.eclipse.xtend.core.xtend.XtendFile;
-import org.eclipse.xtext.junit4.serializer.SerializerTester;
+import org.eclipse.xtext.testing.serializer.SerializerTestHelper;
 
 import com.google.inject.Inject;
 
@@ -18,7 +18,7 @@ import com.google.inject.Inject;
 public class XtendSerializerWithoutNodeModelTest extends AbstractXtendTestData {
 
 	@Inject
-	private SerializerTester tester;
+	private SerializerTestHelper tester;
 
 	@Override
 	protected void doTest(String fileContents) throws Exception {

@@ -12,8 +12,8 @@ import org.eclipse.jdt.core.dom.ASTNode
 import org.eclipse.jdt.core.dom.ASTParser
 import org.eclipse.xtend.core.javaconverter.JavaCodeAnalyzer
 import org.eclipse.xtend.core.tests.RuntimeInjectorProvider
-import org.eclipse.xtext.junit4.InjectWith
-import org.eclipse.xtext.junit4.XtextRunner
+import org.eclipse.xtext.testing.InjectWith
+import org.eclipse.xtext.testing.XtextRunner
 import org.junit.Test
 import org.junit.runner.RunWith
 

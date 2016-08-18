@@ -12,8 +12,8 @@ import org.eclipse.xtend.core.tests.AbstractXtendTestCase
 import org.eclipse.xtend.core.validation.IssueCodes
 import org.eclipse.xtend.core.xtend.XtendFile
 import org.eclipse.xtend.core.xtend.XtendPackage
-import org.eclipse.xtext.junit4.util.ParseHelper
-import org.eclipse.xtext.junit4.validation.ValidationTestHelper
+import org.eclipse.xtext.testing.util.ParseHelper
+import org.eclipse.xtext.testing.validation.ValidationTestHelper
 import org.junit.Test
 
 /**

@@ -9,7 +9,7 @@ package org.eclipse.xtend.core.tests.validation
 
 import com.google.inject.Inject
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase
-import org.eclipse.xtext.junit4.validation.ValidationTestHelper
+import org.eclipse.xtext.testing.validation.ValidationTestHelper
 import org.junit.Ignore
 import org.junit.Test
 

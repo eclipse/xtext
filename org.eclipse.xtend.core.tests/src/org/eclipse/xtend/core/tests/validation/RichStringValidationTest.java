@@ -11,7 +11,7 @@ import org.eclipse.xtend.core.tests.richstring.AbstractRichStringTest;
 import org.eclipse.xtend.core.validation.IssueCodes;
 import org.eclipse.xtend.core.xtend.RichString;
 import org.eclipse.xtend.core.xtend.XtendPackage;
-import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
+import org.eclipse.xtext.testing.validation.ValidationTestHelper;
 import org.junit.Test;
 
 import com.google.inject.Inject;

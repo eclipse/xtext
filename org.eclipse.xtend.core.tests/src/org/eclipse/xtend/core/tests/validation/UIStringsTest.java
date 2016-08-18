@@ -15,7 +15,7 @@ import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
+import org.eclipse.xtext.testing.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XVariableDeclaration;

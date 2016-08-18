@@ -14,10 +14,10 @@ import org.eclipse.xtend.core.validation.IssueCodes
 import org.eclipse.xtend.core.xtend.XtendFile
 import org.eclipse.xtend.core.xtend.XtendPackage
 import org.eclipse.xtext.diagnostics.Severity
-import org.eclipse.xtext.junit4.InjectWith
+import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.junit4.TemporaryFolder
-import org.eclipse.xtext.junit4.XtextRunner
-import org.eclipse.xtext.junit4.validation.ValidationTestHelper
+import org.eclipse.xtext.testing.XtextRunner
+import org.eclipse.xtext.testing.validation.ValidationTestHelper
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.util.CancelIndicator

@@ -9,7 +9,7 @@ package org.eclipse.xtend.core.tests.typesystem
 
 import com.google.inject.Inject
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
-import org.eclipse.xtext.junit4.InjectWith
+import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.xbase.typesystem.computation.SynonymTypesProvider
 import org.junit.Test
 

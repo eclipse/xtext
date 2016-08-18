@@ -17,7 +17,7 @@ import org.eclipse.xtend.lib.macro.CodeGenerationContext
 import org.eclipse.xtend.lib.macro.TransformationContext
 import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
-import org.eclipse.xtext.junit4.TemporaryFolder
+import org.eclipse.xtext.xbase.testing.TemporaryFolder
 import org.eclipse.xtext.xbase.compiler.CompilationTestHelper
 import org.junit.Rule
 import org.junit.Test

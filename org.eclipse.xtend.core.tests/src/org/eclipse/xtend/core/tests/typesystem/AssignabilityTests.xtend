@@ -10,7 +10,7 @@ package org.eclipse.xtend.core.tests.typesystem
 import com.google.inject.Inject
 import java.util.Map
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
-import org.eclipse.xtext.junit4.InjectWith
+import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceFlags
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputationArgument
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference

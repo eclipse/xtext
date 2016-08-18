@@ -235,7 +235,7 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 	@Test public void testParameterizedExtension_01() throws Exception {
 		XtendFile file = file(
 				"package testPackage\n" +
-				"import org.eclipse.xtext.junit4.util.ParseHelper\n" +
+				"import org.eclipse.xtext.testing.util.ParseHelper\n" +
 				"import org.eclipse.xtend.core.xtend.XtendFile\n" + 
 				"class C {\n" + 
 				"	extension ParseHelper<XtendFile>\n" +
@@ -252,7 +252,7 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 	@Test public void testParameterizedExtension_02() throws Exception {
 		XtendFile file = file(
 				"package testPackage\n" +
-				"import org.eclipse.xtext.junit4.util.ParseHelper\n" +
+				"import org.eclipse.xtext.testing.util.ParseHelper\n" +
 				"import org.eclipse.xtend.core.xtend.XtendFile\n" + 
 				"class C<T extends ParseHelper<XtendFile>> {\n" + 
 				"	extension T\n" +
@@ -269,7 +269,7 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 	@Test public void testParameterizedExtension_03() throws Exception {
 		XtendFile file = file(
 				"package testPackage\n" +
-				"import org.eclipse.xtext.junit4.util.ParseHelper\n" +
+				"import org.eclipse.xtext.testing.util.ParseHelper\n" +
 				"import org.eclipse.xtend.core.xtend.XtendFile\n" + 
 				"class C<T extends XtendFile> {\n" + 
 				"	extension ParseHelper<T>\n" +
@@ -286,7 +286,7 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 	@Test public void testParameterizedExtension_04() throws Exception {
 		XtendFile file = file(
 				"package testPackage\n" +
-				"import org.eclipse.xtext.junit4.util.ParseHelper\n" +
+				"import org.eclipse.xtext.testing.util.ParseHelper\n" +
 				"import org.eclipse.xtend.core.xtend.XtendFile\n" + 
 				"class C<F extends XtendFile, T extends ParseHelper<F>> {\n" + 
 				"	extension T\n" +
@@ -303,7 +303,7 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 	@Test public void testParameterizedExtension_05() throws Exception {
 		XtendFile file = file(
 				"package testPackage\n" +
-				"import org.eclipse.xtext.junit4.util.ParseHelper\n" +
+				"import org.eclipse.xtext.testing.util.ParseHelper\n" +
 				"import org.eclipse.xtend.core.xtend.XtendFile\n" + 
 				"class C<F extends XtendFile> extends ParseHelper<F> {\n" + 
 				"	def m() {" +
@@ -319,7 +319,7 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 	@Test public void testParameterizedExtension_06() throws Exception {
 		XtendFile file = file(
 				"package testPackage\n" +
-				"import org.eclipse.xtext.junit4.util.ParseHelper\n" +
+				"import org.eclipse.xtext.testing.util.ParseHelper\n" +
 				"import org.eclipse.xtend.core.xtend.XtendFile\n" + 
 				"class C extends ParseHelper<XtendFile> {\n" + 
 				"	def m() {" +
@@ -336,7 +336,7 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 	@Test public void testParameterizedExtension_07() throws Exception {
 		XtendFile file = file(
 				"package testPackage\n" +
-				"import org.eclipse.xtext.junit4.util.ParseHelper\n" +
+				"import org.eclipse.xtext.testing.util.ParseHelper\n" +
 				"import org.eclipse.xtend.core.xtend.XtendFile\n" + 
 				"class C<F extends XtendFile> extends ParseHelper<F> {\n" + 
 				"	def m() {" +
@@ -352,7 +352,7 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 	@Test public void testParameterizedExtension_08() throws Exception {
 		XtendFile file = file(
 				"package testPackage\n" +
-				"import org.eclipse.xtext.junit4.util.ParseHelper\n" +
+				"import org.eclipse.xtext.testing.util.ParseHelper\n" +
 				"import org.eclipse.xtend.core.xtend.XtendFile\n" + 
 				"class C extends ParseHelper<XtendFile> {\n" + 
 				"	def m() {" +
@@ -369,7 +369,7 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 	@Test public void testParameterizedExtension_09() throws Exception {
 		XtendFile file = file(
 				"package testPackage\n" +
-				"import org.eclipse.xtext.junit4.util.ParseHelper\n" +
+				"import org.eclipse.xtext.testing.util.ParseHelper\n" +
 				"import org.eclipse.xtend.core.xtend.XtendFile\n" + 
 				"class C {\n" + 
 				"	extension ParseHelper<XtendFile>\n" +
@@ -386,7 +386,7 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 	@Test public void testParameterizedExtension_10() throws Exception {
 		XtendFile file = file(
 				"package testPackage\n" +
-				"import org.eclipse.xtext.junit4.util.ParseHelper\n" +
+				"import org.eclipse.xtext.testing.util.ParseHelper\n" +
 				"import org.eclipse.xtend.core.xtend.XtendFile\n" + 
 				"class C<T extends ParseHelper<XtendFile>> {\n" + 
 				"	extension T\n" +
@@ -403,7 +403,7 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 	@Test public void testParameterizedExtension_11() throws Exception {
 		XtendFile file = file(
 				"package testPackage\n" +
-				"import org.eclipse.xtext.junit4.util.ParseHelper\n" +
+				"import org.eclipse.xtext.testing.util.ParseHelper\n" +
 				"import org.eclipse.xtend.core.xtend.XtendFile\n" + 
 				"class C<T extends XtendFile> {\n" + 
 				"	extension ParseHelper<T>\n" +
@@ -420,7 +420,7 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 	@Test public void testParameterizedExtension_12() throws Exception {
 		XtendFile file = file(
 				"package testPackage\n" +
-				"import org.eclipse.xtext.junit4.util.ParseHelper\n" +
+				"import org.eclipse.xtext.testing.util.ParseHelper\n" +
 				"import org.eclipse.xtend.core.xtend.XtendFile\n" + 
 				"class C<F extends XtendFile, T extends ParseHelper<F>> {\n" + 
 				"	extension T\n" +

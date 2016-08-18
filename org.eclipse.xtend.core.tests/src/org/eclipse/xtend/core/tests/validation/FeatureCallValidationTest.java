@@ -16,7 +16,7 @@ import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.diagnostics.Diagnostic;
-import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
+import org.eclipse.xtext.testing.validation.ValidationTestHelper;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.annotations.validation.UnresolvedFeatureCallTypeAwareMessageProvider;

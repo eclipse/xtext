@@ -3,9 +3,9 @@ package org.eclipse.xtend.core.tests.formatting
 import com.google.inject.Inject
 import org.eclipse.xtend.core.formatting2.XtendFormatterPreferenceKeys
 import org.eclipse.xtend.core.tests.RuntimeInjectorProvider
-import org.eclipse.xtext.junit4.InjectWith
-import org.eclipse.xtext.junit4.XtextRunner
-import org.eclipse.xtext.junit4.formatter.FormatterTester
+import org.eclipse.xtext.testing.InjectWith
+import org.eclipse.xtext.testing.XtextRunner
+import org.eclipse.xtext.testing.formatter.FormatterTestHelper
 import org.eclipse.xtext.preferences.MapBasedPreferenceValues
 import org.eclipse.xtext.util.TextRegion
 import org.junit.runner.RunWith
@@ -15,7 +15,7 @@ import static org.eclipse.xtext.formatting2.FormatterPreferenceKeys.*
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(RuntimeInjectorProvider))
 abstract class AbstractXtendFormatterTest {
-	@Inject protected FormatterTester tester
+	@Inject protected FormatterTestHelper tester
 
 	def assertFormatted(CharSequence toBeFormatted) {
 		assertFormatted(toBeFormatted, toBeFormatted/* .parse.flattenWhitespace  */)
