@@ -9,6 +9,7 @@
 
 	<modules>
 		<module>org.eclipse.xtext.parent</module>
+		<module>org.eclipse.xtext.xtext</module>
 		<module>org.eclipse.xtext.maven.plugin</module>
 	</modules>
 
