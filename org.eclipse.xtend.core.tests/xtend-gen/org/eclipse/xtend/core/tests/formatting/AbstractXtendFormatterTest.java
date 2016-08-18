@@ -7,11 +7,11 @@ import org.eclipse.xtend.core.tests.RuntimeInjectorProvider;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.formatting2.FormatterPreferenceKeys;
 import org.eclipse.xtext.formatting2.FormatterRequest;
-import org.eclipse.xtext.junit4.InjectWith;
-import org.eclipse.xtext.junit4.XtextRunner;
-import org.eclipse.xtext.junit4.formatter.FormatterTestRequest;
-import org.eclipse.xtext.junit4.formatter.FormatterTester;
 import org.eclipse.xtext.preferences.MapBasedPreferenceValues;
+import org.eclipse.xtext.testing.InjectWith;
+import org.eclipse.xtext.testing.XtextRunner;
+import org.eclipse.xtext.testing.formatter.FormatterTestHelper;
+import org.eclipse.xtext.testing.formatter.FormatterTestRequest;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -22,7 +22,7 @@ import org.junit.runner.RunWith;
 @SuppressWarnings("all")
 public abstract class AbstractXtendFormatterTest {
   @Inject
-  protected FormatterTester tester;
+  protected FormatterTestHelper tester;
   
   public void assertFormatted(final CharSequence toBeFormatted) {
     this.assertFormatted(toBeFormatted, toBeFormatted);
