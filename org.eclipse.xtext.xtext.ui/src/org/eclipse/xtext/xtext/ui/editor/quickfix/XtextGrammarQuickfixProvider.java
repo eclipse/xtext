@@ -142,11 +142,10 @@ public class XtextGrammarQuickfixProvider extends DefaultQuickfixProvider {
 	public void fixInvalidMetaModelName(final Issue issue, IssueResolutionAcceptor acceptor) {
 		final String metaModelName = issue.getData()[0];
 		acceptor.accept(issue, "Fix metamodel name '" + metaModelName + "'", "Fix metamodel name '" + metaModelName
-				+ "'", NULL_QUICKFIX_IMAGE, new ISemanticModification() {
+				+ "'", NULL_QUICKFIX_IMAGE, new IModification() {
 			@Override
-			public void apply(final EObject element, IModificationContext context) {
-				GeneratedMetamodel generatedMetamodel = (GeneratedMetamodel) element;
-				generatedMetamodel.setName(Strings.toFirstLower(generatedMetamodel.getName()));
+			public void apply(IModificationContext context) throws Exception {
+				context.getXtextDocument().replace(issue.getOffset(), issue.getLength(), Strings.toFirstLower(metaModelName));
 			}
 		});
 	}
