@@ -199,7 +199,7 @@ public abstract class AbstractFormatter2 implements IFormatter2 {
 		List<EObject> contents = resource.getContents();
 		if (!contents.isEmpty()) {
 			EObject model = contents.get(0);
-			format(model, document);
+			document.format(model);
 		}
 	}
 

@@ -19,6 +19,9 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 import static org.eclipse.xtext.formatting2.FormatterPreferenceKeys.*
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.xtext.formatting2.regionaccess.ITextRegionExtensions
+import org.eclipse.xtext.formatting2.IFormattableDocument
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -148,6 +151,40 @@ class FormattableDocumentTest {
 				model.regionFor.keyword("idlist").surround[space = "!"]
 			]
 			expectation = '''!idlist!'''
+		]
+	}
+	
+	// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=482110
+	@Test def void shouldFormat() {
+		assertFormatted[
+			request.regions += new TextRegion(0, 6)
+			toBeFormatted = '''idlist'''
+			formatter = new GenericFormatter {
+				override protected format(EObject model, ITextRegionExtensions regionAccess, IFormattableDocument document) {
+					throw new IllegalStateException("this method should never be called")
+				}
+				override shouldFormat(Object obj, IFormattableDocument document) {
+					false
+				}
+			}
+			expectation = '''idlist'''
+		]
+	}
+	
+	// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=482110
+	@Test(expected=IllegalStateException) def void shouldFormat_02() {
+		assertFormatted[
+			request.regions += new TextRegion(0, 6)
+			toBeFormatted = '''idlist'''
+			formatter = new GenericFormatter {
+				override protected format(EObject model, ITextRegionExtensions regionAccess, IFormattableDocument document) {
+					throw new IllegalStateException("this method should never be called")
+				}
+				override shouldFormat(Object obj, IFormattableDocument document) {
+					true
+				}
+			}
+			expectation = '''idlist'''
 		]
 	}
 }
