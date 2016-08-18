@@ -11,6 +11,7 @@ import com.google.inject.Inject;
 import java.util.Collection;
 import java.util.List;
 import java.util.function.Consumer;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.formatting2.FormatterPreferenceKeys;
@@ -325,6 +326,62 @@ public class FormattableDocumentTest {
       it.setFormatter(_function_1);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("!idlist!");
+      it.setExpectation(_builder_1);
+    };
+    this._genericFormatterTester.assertFormatted(_function);
+  }
+  
+  @Test
+  public void shouldFormat() {
+    final Procedure1<GenericFormatterTestRequest> _function = (GenericFormatterTestRequest it) -> {
+      FormatterRequest _request = it.getRequest();
+      Collection<ITextRegion> _regions = _request.getRegions();
+      TextRegion _textRegion = new TextRegion(0, 6);
+      _regions.add(_textRegion);
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("idlist");
+      it.setToBeFormatted(_builder);
+      it.setFormatter(new GenericFormatter() {
+        @Override
+        protected void format(final EObject model, final ITextRegionExtensions regionAccess, final IFormattableDocument document) {
+          throw new IllegalStateException("this method should never be called");
+        }
+        
+        @Override
+        public boolean shouldFormat(final Object obj, final IFormattableDocument document) {
+          return false;
+        }
+      });
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("idlist");
+      it.setExpectation(_builder_1);
+    };
+    this._genericFormatterTester.assertFormatted(_function);
+  }
+  
+  @Test(expected = IllegalStateException.class)
+  public void shouldFormat_02() {
+    final Procedure1<GenericFormatterTestRequest> _function = (GenericFormatterTestRequest it) -> {
+      FormatterRequest _request = it.getRequest();
+      Collection<ITextRegion> _regions = _request.getRegions();
+      TextRegion _textRegion = new TextRegion(0, 6);
+      _regions.add(_textRegion);
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("idlist");
+      it.setToBeFormatted(_builder);
+      it.setFormatter(new GenericFormatter() {
+        @Override
+        protected void format(final EObject model, final ITextRegionExtensions regionAccess, final IFormattableDocument document) {
+          throw new IllegalStateException("this method should never be called");
+        }
+        
+        @Override
+        public boolean shouldFormat(final Object obj, final IFormattableDocument document) {
+          return true;
+        }
+      });
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("idlist");
       it.setExpectation(_builder_1);
     };
     this._genericFormatterTester.assertFormatted(_function);
