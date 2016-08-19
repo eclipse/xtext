@@ -190,6 +190,11 @@
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext.xbase.testing</artifactId>
+			<version>2.11.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.testlanguages.ide</artifactId>
 			<version>2.11.0-SNAPSHOT</version>
 		</dependency>
@@ -319,12 +324,14 @@
 								<plugin id="org.eclipse.xtext.builder.standalone" />
 								<plugin id="org.eclipse.xtext.java" />
 								<plugin id="org.eclipse.xtext.ide" />
+								<plugin id="org.eclipse.xtext.testing" />
 								<plugin id="org.antlr.runtime" />
 								<plugin id="org.apache.log4j" />
 								<plugin id="org.apache.commons.lang" />
 								<plugin id="org.eclipse.xtext.doc" />
 								<plugin id="org.eclipse.xtext.xbase" />
 								<plugin id="org.eclipse.xtext.xbase.ide" />
+								<plugin id="org.eclipse.xtext.xbase.testing" />
 								<plugin id="org.eclipse.xtext.purexbase" />
 								<plugin id="org.eclipse.xtend.lib" />
 								<plugin id="org.eclipse.xtend.lib.macro" />
