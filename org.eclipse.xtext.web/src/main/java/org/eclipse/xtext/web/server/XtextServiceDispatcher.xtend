@@ -96,7 +96,7 @@ class XtextServiceDispatcher {
 	}
 	
 	
-	@Inject
+	@Inject(optional = true)
 	@FormatterPreferences
 	IPreferenceValuesProvider formatterPreferencesProvider
 	
@@ -408,7 +408,7 @@ class XtextServiceDispatcher {
 		val indentationLength = context.getInt('indentationLength', Optional.of(4))
 		val maxLineWidth = context.getInt('maxLineWidth', Optional.of(120))
 		
-		val formatterPreferences = document.readOnly [ formatterPreferencesProvider.getPreferenceValues($0.resource) ]
+		val formatterPreferences = document.readOnly [ formatterPreferencesProvider?.getPreferenceValues($0.resource) ]
 		val preferences = new MapBasedPreferenceValues(formatterPreferences, newLinkedHashMap)
 		preferences.put(FormatterPreferenceKeys.lineSeparator, lineSeparator)
 		preferences.put(FormatterPreferenceKeys.indentation, indentation)

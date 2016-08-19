@@ -170,7 +170,7 @@ public class XtextServiceDispatcher {
     }
   }
   
-  @Inject
+  @Inject(optional = true)
   @FormatterPreferences
   private IPreferenceValuesProvider formatterPreferencesProvider;
   
@@ -731,8 +731,12 @@ public class XtextServiceDispatcher {
       final CancelableUnitOfWork<IPreferenceValues, IXtextWebDocument> _function = new CancelableUnitOfWork<IPreferenceValues, IXtextWebDocument>() {
         @Override
         public IPreferenceValues exec(final IXtextWebDocument $0, final CancelIndicator $1) throws Exception {
-          XtextResource _resource = $0.getResource();
-          return XtextServiceDispatcher.this.formatterPreferencesProvider.getPreferenceValues(_resource);
+          IPreferenceValues _preferenceValues = null;
+          if (XtextServiceDispatcher.this.formatterPreferencesProvider!=null) {
+            XtextResource _resource = $0.getResource();
+            _preferenceValues=XtextServiceDispatcher.this.formatterPreferencesProvider.getPreferenceValues(_resource);
+          }
+          return _preferenceValues;
         }
       };
       final IPreferenceValues formatterPreferences = document.<IPreferenceValues>readOnly(_function);
