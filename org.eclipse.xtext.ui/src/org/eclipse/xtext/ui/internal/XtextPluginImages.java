@@ -81,7 +81,7 @@ public class XtextPluginImages {
 	/**
 	 * @since 2.3
 	 */
-	public static final ImageDescriptor DESC_FIXABLE_INFO = create(PATH_OBJ, "quickfix_info_obj.gif"); //$NON-NLS-1$
+	public static final ImageDescriptor DESC_FIXABLE_INFO = create(PATH_OBJ, "quickfix_info_obj.png"); //$NON-NLS-1$
 
 	/**
 	 * OVR16
