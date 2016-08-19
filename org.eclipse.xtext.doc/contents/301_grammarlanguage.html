@@ -606,7 +606,7 @@ MyOtherRule returns TypeB :
 <p>Instead one has to rewrite such things by “left-factoring” it:</p>
 
 <pre><code class="language-xtext">Expression :
-  TerminalExpression ('+' TerminalExpression)?
+  TerminalExpression ('+' TerminalExpression)*
 ;
  
 TerminalExpression :
@@ -618,7 +618,7 @@ TerminalExpression :
 <p>In practice this is always the same pattern and therefore not too difficult. However, by simply applying the Xtext AST construction features we’ve covered so far, a grammar …</p>
 
 <pre><code class="language-xtext">Expression :
-  {Operation} left=TerminalExpression (op='+' right=TerminalExpression)?
+  {Operation} left=TerminalExpression (ops+='+' rights+=TerminalExpression)*
 ;
  
 TerminalExpression returns Expression:
@@ -644,7 +644,7 @@ TerminalExpression returns Expression:
 
 <pre><code class="language-xtext">Expression :
   TerminalExpression ({Operation.left=current} 
-    op='+' right=Expression)?
+    op='+' right=TerminalExpression)*
 ;
  
 TerminalExpression returns Expression:
