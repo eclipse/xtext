@@ -11,6 +11,8 @@ Export-Package: org.eclipse.xtext.testing,
  org.eclipse.xtext.testing.formatter,
  org.eclipse.xtext.testing.logging,
  org.eclipse.xtext.testing.serializer,
+ org.eclipse.xtext.testing.smoketest,
+ org.eclipse.xtext.testing.smoketest.processors,
  org.eclipse.xtext.testing.util,
  org.eclipse.xtext.testing.validation
 Require-Bundle: org.eclipse.xtext;visibility:=reexport,
