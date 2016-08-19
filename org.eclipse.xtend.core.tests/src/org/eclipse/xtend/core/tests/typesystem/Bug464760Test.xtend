@@ -13,10 +13,10 @@ import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.xtend.core.tests.RuntimeInjectorProvider
 import org.eclipse.xtend.core.xtend.XtendFile
 import org.eclipse.xtend.core.xtend.XtendFunction
-import org.eclipse.xtext.junit4.InjectWith
-import org.eclipse.xtext.junit4.XtextRunner
-import org.eclipse.xtext.junit4.logging.LoggingTester
-import org.eclipse.xtext.junit4.util.ResourceHelper
+import org.eclipse.xtext.testing.InjectWith
+import org.eclipse.xtext.testing.XtextRunner
+import org.eclipse.xtext.testing.logging.LoggingTester
+import org.eclipse.xtext.testing.util.ResourceHelper
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.xbase.resource.BatchLinkableResource
 import org.junit.Test

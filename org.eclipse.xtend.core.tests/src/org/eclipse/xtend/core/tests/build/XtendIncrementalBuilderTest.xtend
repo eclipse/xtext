@@ -11,9 +11,9 @@ import com.google.inject.Inject
 import java.util.concurrent.atomic.AtomicBoolean
 import org.eclipse.xtend.core.tests.RuntimeInjectorProvider
 import org.eclipse.xtext.java.JavaSourceLanguageSetup
-import org.eclipse.xtext.junit4.InjectWith
-import org.eclipse.xtext.junit4.XtextRunner
-import org.eclipse.xtext.junit4.build.AbstractIncrementalBuilderTest
+import org.eclipse.xtext.testing.InjectWith
+import org.eclipse.xtext.testing.XtextRunner
+import org.eclipse.xtext.testing.builder.AbstractIncrementalBuilderTest
 import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.junit.Test
 import org.junit.runner.RunWith

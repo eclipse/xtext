@@ -11,7 +11,7 @@ import com.google.inject.Inject
 import java.lang.reflect.Modifier
 import org.eclipse.xtend.core.validation.IssueCodes
 import org.eclipse.xtend.core.xtend.XtendPackage
-import org.eclipse.xtext.junit4.validation.ValidationTestHelper
+import org.eclipse.xtext.testing.validation.ValidationTestHelper
 import org.junit.Test
 
 class AccessorsCompilerTest extends AbstractXtendCompilerTest {

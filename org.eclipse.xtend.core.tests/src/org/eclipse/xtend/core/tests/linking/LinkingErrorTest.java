@@ -264,10 +264,10 @@ public class LinkingErrorTest extends AbstractXtendTestCase {
 				"\n" + 
 				"import static org.junit.Assert.*\n" + 
 				"import org.junit.runner.RunWith\n" + 
-				"import org.eclipse.xtext.junit4.XtextRunner\n" + 
-				"import org.eclipse.xtext.junit4.InjectWith\n" + 
+				"import org.eclipse.xtext.testing.XtextRunner\n" + 
+				"import org.eclipse.xtext.testing.InjectWith\n" + 
 				"import com.google.inject.Inject\n" + 
-				"import org.eclipse.xtext.junit4.util.ParseHelper\n" + 
+				"import org.eclipse.xtext.testing.util.ParseHelper\n" + 
 				"import org.eclipse.emf.ecore.EObject\n" + 
 				"import org.eclipse.xtext.naming.IQualifiedNameProvider\n" + 
 				"\n" + 
