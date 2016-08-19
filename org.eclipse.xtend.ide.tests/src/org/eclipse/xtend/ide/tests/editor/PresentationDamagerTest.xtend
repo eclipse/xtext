@@ -7,10 +7,10 @@ import org.eclipse.xtend.core.parser.antlr.internal.FlexerFactory
 import org.eclipse.xtend.core.parser.antlr.internal.InternalXtendLexer
 import org.eclipse.xtend.core.tests.RuntimeInjectorProvider
 import org.eclipse.xtend.ide.editor.model.XtendDocumentTokenSource
-import org.eclipse.xtext.junit4.InjectWith
-import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.junit4.ui.AbstractDamagerRepairerTest
 import org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider
+import org.eclipse.xtext.testing.InjectWith
+import org.eclipse.xtext.testing.XtextRunner
 import org.eclipse.xtext.ui.editor.model.XtextDocument
 import org.junit.Test
 import org.junit.runner.RunWith

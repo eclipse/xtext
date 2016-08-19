@@ -8,17 +8,17 @@
 package org.eclipse.xtend.core.tests.java8
 
 import com.google.inject.Inject
+import org.eclipse.xtend.core.xtend.XtendFile
 import org.eclipse.xtext.common.types.JvmGenericType
 import org.eclipse.xtext.common.types.JvmOperation
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider
-import org.eclipse.xtext.junit4.InjectWith
-import org.eclipse.xtext.junit4.XtextRunner
+import org.eclipse.xtext.testing.InjectWith
+import org.eclipse.xtext.testing.XtextRunner
+import org.eclipse.xtext.testing.util.ParseHelper
 import org.junit.Test
 import org.junit.runner.RunWith
 
 import static org.junit.Assert.*
-import org.eclipse.xtext.junit4.util.ParseHelper
-import org.eclipse.xtend.core.xtend.XtendFile
 
 /**
  * @author koehnlein - Initial contribution and API

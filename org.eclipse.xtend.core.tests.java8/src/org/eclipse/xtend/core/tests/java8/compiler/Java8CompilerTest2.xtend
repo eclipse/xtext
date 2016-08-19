@@ -9,7 +9,7 @@ package org.eclipse.xtend.core.tests.java8.compiler
 
 import org.eclipse.xtend.core.tests.compiler.XtendCompilerTest
 import org.eclipse.xtend.core.tests.java8.Java8RuntimeInjectorProvider
-import org.eclipse.xtext.junit4.InjectWith
+import org.eclipse.xtext.testing.InjectWith
 import org.junit.Test
 
 /**
