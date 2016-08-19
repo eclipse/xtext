@@ -245,7 +245,7 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 				"}\n"); 
 		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
 		XAbstractFeatureCall parse = findSingleFeatureCall(c);
-		assertEquals("org.eclipse.xtext.junit4.util.ParseHelper.parse(java.lang.CharSequence)", parse.getFeature().getIdentifier());
+		assertEquals("org.eclipse.xtext.testing.util.ParseHelper.parse(java.lang.CharSequence)", parse.getFeature().getIdentifier());
 		assertEquals("XtendFile", getType(parse).getSimpleName());
 	}
 	
@@ -262,7 +262,7 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 				"}\n"); 
 		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
 		XAbstractFeatureCall parse = findSingleFeatureCall(c);
-		assertEquals("org.eclipse.xtext.junit4.util.ParseHelper.parse(java.lang.CharSequence)", parse.getFeature().getIdentifier());
+		assertEquals("org.eclipse.xtext.testing.util.ParseHelper.parse(java.lang.CharSequence)", parse.getFeature().getIdentifier());
 		assertEquals("XtendFile", getType(parse).getSimpleName());
 	}
 	
@@ -279,7 +279,7 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 				"}\n"); 
 		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
 		XAbstractFeatureCall parse = findSingleFeatureCall(c);
-		assertEquals("org.eclipse.xtext.junit4.util.ParseHelper.parse(java.lang.CharSequence)", parse.getFeature().getIdentifier());
+		assertEquals("org.eclipse.xtext.testing.util.ParseHelper.parse(java.lang.CharSequence)", parse.getFeature().getIdentifier());
 		assertEquals("T", getType(parse).getSimpleName());
 	}
 	
@@ -296,7 +296,7 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 				"}\n"); 
 		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
 		XAbstractFeatureCall parse = findSingleFeatureCall(c);
-		assertEquals("org.eclipse.xtext.junit4.util.ParseHelper.parse(java.lang.CharSequence)", parse.getFeature().getIdentifier());
+		assertEquals("org.eclipse.xtext.testing.util.ParseHelper.parse(java.lang.CharSequence)", parse.getFeature().getIdentifier());
 		assertEquals("F", getType(parse).getSimpleName());
 	}
 	
@@ -312,7 +312,7 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 				"}\n"); 
 		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
 		XAbstractFeatureCall parse = findSingleFeatureCall(c);
-		assertEquals("org.eclipse.xtext.junit4.util.ParseHelper.parse(java.lang.CharSequence)", parse.getFeature().getIdentifier());
+		assertEquals("org.eclipse.xtext.testing.util.ParseHelper.parse(java.lang.CharSequence)", parse.getFeature().getIdentifier());
 		assertEquals("F", getType(parse).getSimpleName());
 	}
 	
@@ -328,7 +328,7 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 				"}\n"); 
 		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
 		XAbstractFeatureCall parse = findSingleFeatureCall(c);
-		assertEquals("org.eclipse.xtext.junit4.util.ParseHelper.parse(java.lang.CharSequence)", parse.getFeature().getIdentifier());
+		assertEquals("org.eclipse.xtext.testing.util.ParseHelper.parse(java.lang.CharSequence)", parse.getFeature().getIdentifier());
 		assertEquals("XtendFile", getType(parse).getSimpleName());
 	}
 	
@@ -345,7 +345,7 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 				"}\n"); 
 		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
 		XAbstractFeatureCall parse = findSingleFeatureCall(c);
-		assertEquals("org.eclipse.xtext.junit4.util.ParseHelper.parse(java.lang.CharSequence)", parse.getFeature().getIdentifier());
+		assertEquals("org.eclipse.xtext.testing.util.ParseHelper.parse(java.lang.CharSequence)", parse.getFeature().getIdentifier());
 		assertEquals("F", getType(parse).getSimpleName());
 	}
 	
@@ -361,7 +361,7 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 				"}\n"); 
 		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
 		XAbstractFeatureCall parse = findSingleFeatureCall(c);
-		assertEquals("org.eclipse.xtext.junit4.util.ParseHelper.parse(java.lang.CharSequence)", parse.getFeature().getIdentifier());
+		assertEquals("org.eclipse.xtext.testing.util.ParseHelper.parse(java.lang.CharSequence)", parse.getFeature().getIdentifier());
 		assertEquals("XtendFile", getType(parse).getSimpleName());
 	}
 	
@@ -379,7 +379,7 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 				"}\n"); 
 		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
 		XAbstractFeatureCall parse = findSingleFeatureCall(c);
-		assertEquals("org.eclipse.xtext.junit4.util.ParseHelper.parse(java.lang.CharSequence)", parse.getFeature().getIdentifier());
+		assertEquals("org.eclipse.xtext.testing.util.ParseHelper.parse(java.lang.CharSequence)", parse.getFeature().getIdentifier());
 		assertEquals("XtendFile", getType(parse).getSimpleName());
 	}
 	
@@ -396,7 +396,7 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 				"}\n"); 
 		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
 		XAbstractFeatureCall parse = findSingleFeatureCall(c);
-		assertEquals("org.eclipse.xtext.junit4.util.ParseHelper.parse(java.lang.CharSequence)", parse.getFeature().getIdentifier());
+		assertEquals("org.eclipse.xtext.testing.util.ParseHelper.parse(java.lang.CharSequence)", parse.getFeature().getIdentifier());
 		assertEquals("XtendFile", getType(parse).getSimpleName());
 	}
 	
@@ -413,7 +413,7 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 				"}\n"); 
 		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
 		XAbstractFeatureCall parse = findSingleFeatureCall(c);
-		assertEquals("org.eclipse.xtext.junit4.util.ParseHelper.parse(java.lang.CharSequence)", parse.getFeature().getIdentifier());
+		assertEquals("org.eclipse.xtext.testing.util.ParseHelper.parse(java.lang.CharSequence)", parse.getFeature().getIdentifier());
 		assertEquals("T", getType(parse).getSimpleName());
 	}
 	
@@ -430,7 +430,7 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 				"}\n"); 
 		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
 		XAbstractFeatureCall parse = findSingleFeatureCall(c);
-		assertEquals("org.eclipse.xtext.junit4.util.ParseHelper.parse(java.lang.CharSequence)", parse.getFeature().getIdentifier());
+		assertEquals("org.eclipse.xtext.testing.util.ParseHelper.parse(java.lang.CharSequence)", parse.getFeature().getIdentifier());
 		assertEquals("F", getType(parse).getSimpleName());
 	}
 	
