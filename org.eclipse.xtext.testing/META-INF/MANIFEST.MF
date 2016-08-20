@@ -20,7 +20,7 @@ Require-Bundle: org.eclipse.xtext;visibility:=reexport,
  io.typefox.lsapi;resolution:=optional,
  io.typefox.lsapi.services;resolution:=optional,
  org.junit;bundle-version="4.11.0",
- org.eclipse.xtext.xbase.lib
+ org.eclipse.xtend.lib
 Import-Package: org.apache.log4j;version="1.2.15",
  org.apache.log4j.spi;version="1.2.15"
 Bundle-ActivationPolicy: lazy
