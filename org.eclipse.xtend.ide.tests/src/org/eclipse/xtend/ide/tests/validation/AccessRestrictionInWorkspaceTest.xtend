@@ -17,7 +17,7 @@ import org.eclipse.jdt.core.JavaCore
 import org.eclipse.xtend.core.xtend.XtendClass
 import org.eclipse.xtend.core.xtend.XtendFile
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase
-import org.eclipse.xtext.junit4.validation.ValidationTestHelper
+import org.eclipse.xtext.testing.validation.ValidationTestHelper
 import org.eclipse.xtext.ui.resource.IResourceSetProvider
 import org.eclipse.xtext.util.MergeableManifest
 import org.junit.After

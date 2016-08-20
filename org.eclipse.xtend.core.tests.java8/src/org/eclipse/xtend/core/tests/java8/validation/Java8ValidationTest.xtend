@@ -11,8 +11,8 @@ import com.google.inject.Inject
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase
 import org.eclipse.xtend.core.tests.java8.Java8RuntimeInjectorProvider
 import org.eclipse.xtext.diagnostics.Severity
-import org.eclipse.xtext.junit4.InjectWith
-import org.eclipse.xtext.junit4.validation.ValidationTestHelper
+import org.eclipse.xtext.testing.InjectWith
+import org.eclipse.xtext.testing.validation.ValidationTestHelper
 import org.junit.Test
 
 import static org.eclipse.xtend.core.validation.IssueCodes.*
@@ -23,7 +23,7 @@ import static org.eclipse.xtext.xbase.validation.IssueCodes.*
 /**
  * @author Miro Spoenemann - Initial contribution and API
  */
-@InjectWith(Java8RuntimeInjectorProvider)
+@InjectWith(Java8RuntimeInjectorProvider) 
 class Java8ValidationTest extends AbstractXtendTestCase {
 	
 	@Inject extension ValidationTestHelper

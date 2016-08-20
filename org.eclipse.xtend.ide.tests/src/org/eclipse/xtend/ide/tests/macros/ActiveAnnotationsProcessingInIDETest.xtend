@@ -16,8 +16,8 @@ import org.eclipse.xtend.core.xtend.XtendField
 import org.eclipse.xtend.core.xtend.XtendFile
 import org.eclipse.xtend.ide.tests.XtendIDEInjectorProvider
 import org.eclipse.xtext.EcoreUtil2
-import org.eclipse.xtext.junit4.InjectWith
-import org.eclipse.xtext.junit4.XtextRunner
+import org.eclipse.xtext.testing.InjectWith
+import org.eclipse.xtext.testing.XtextRunner
 import org.eclipse.xtext.junit4.internal.StopwatchRule
 import org.eclipse.xtext.ui.editor.hover.html.IEObjectHoverDocumentationProvider
 import org.eclipse.xtext.ui.resource.XtextResourceSetProvider
@@ -36,6 +36,7 @@ import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
 import static org.junit.Assert.*
 
 import static extension org.eclipse.xtend.ide.tests.WorkbenchTestHelper.*
+import org.eclipse.xtext.junit4.ui.util.TargetPlatformUtil
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(XtendIDEInjectorProvider))
@@ -115,6 +116,7 @@ class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActiveAnnotat
 	
 	@BeforeClass
 	static def void createProjects() {
+		TargetPlatformUtil.setTargetPlatform
 		macroProject = JavaCore.create(createPluginProject("macroProject"))
 		userProject = JavaCore::create(
 			createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib",

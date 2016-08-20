@@ -18,7 +18,7 @@ import org.eclipse.xtext.ui.editor.hover.html.XtextBrowserInformationControlInpu
 import org.eclipse.xtext.ui.refactoring.ui.SyncUtil
 import org.junit.After
 import org.junit.Test
-import org.eclipse.xtext.junit4.logging.LoggingTester
+import org.eclipse.xtext.testing.logging.LoggingTester
 import org.eclipse.xtext.xbase.typesystem.internal.AbstractBatchTypeResolver
 import org.apache.log4j.Level
 

@@ -9,7 +9,7 @@ import org.eclipse.xtend.core.xtend.XtendFunction
 import org.eclipse.xtend.ide.hover.XtendHoverSignatureProvider
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
-import org.eclipse.xtext.junit4.util.ParseHelper
+import org.eclipse.xtext.testing.util.ParseHelper
 import org.eclipse.xtext.ui.resource.IResourceSetProvider
 import org.eclipse.xtext.xbase.XBlockExpression
 import org.eclipse.xtext.xbase.XClosure

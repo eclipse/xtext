@@ -12,7 +12,7 @@ import org.eclipse.xtend.core.tests.javaconverter.JavaConverterTest;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendInterface;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.junit4.InjectWith;
+import org.eclipse.xtext.testing.InjectWith;
 import org.junit.Assert;
 import org.junit.Test;
 

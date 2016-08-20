@@ -29,10 +29,11 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.junit4.InjectWith;
-import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.junit4.internal.StopwatchRule;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
+import org.eclipse.xtext.junit4.ui.util.TargetPlatformUtil;
+import org.eclipse.xtext.testing.InjectWith;
+import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.ui.editor.hover.html.IEObjectHoverDocumentationProvider;
 import org.eclipse.xtext.ui.resource.XtextResourceSetProvider;
 import org.eclipse.xtext.util.CancelIndicator;
@@ -203,6 +204,7 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
   @BeforeClass
   public static void createProjects() {
     try {
+      TargetPlatformUtil.setTargetPlatform();
       IProject _createPluginProject = WorkbenchTestHelper.createPluginProject("macroProject");
       IJavaProject _create = JavaCore.create(_createPluginProject);
       ActiveAnnotationsProcessingInIDETest.macroProject = _create;
