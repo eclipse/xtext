@@ -18,7 +18,7 @@ import org.eclipse.xtend.ide.macro.EclipseFileSystemSupportImpl
 import org.eclipse.xtend.ide.tests.XtendIDEInjectorProvider
 import org.eclipse.xtend.lib.macro.file.Path
 import org.eclipse.xtext.testing.InjectWith
-import org.eclipse.xtext.junit4.XtextRunner
+import org.eclipse.xtext.testing.XtextRunner
 import org.eclipse.xtext.ui.resource.IResourceSetProvider
 import org.junit.After
 import org.junit.Before

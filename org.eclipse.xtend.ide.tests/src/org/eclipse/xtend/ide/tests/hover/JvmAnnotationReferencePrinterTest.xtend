@@ -12,7 +12,7 @@ import org.eclipse.xtend.core.xtend.XtendFile
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
 import org.eclipse.xtext.common.types.JvmGenericType
-import org.eclipse.xtext.junit4.util.ParseHelper
+import org.eclipse.xtext.testing.util.ParseHelper
 import org.junit.Assert
 import org.junit.Test
 import org.eclipse.xtext.ui.resource.IResourceSetProvider

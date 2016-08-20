@@ -2,7 +2,7 @@ package org.eclipse.xtend.ide.tests.codebuilder
 
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase
 import com.google.inject.Inject
-import org.eclipse.xtext.junit4.util.ParseHelper
+import org.eclipse.xtext.testing.util.ParseHelper
 import org.eclipse.xtend.core.xtend.XtendFile
 import org.junit.Test
 import org.eclipse.xtend.ide.codebuilder.InsertionOffsets

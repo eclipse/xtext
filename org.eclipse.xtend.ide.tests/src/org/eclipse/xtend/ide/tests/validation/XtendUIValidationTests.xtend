@@ -12,7 +12,7 @@ import org.eclipse.xtend.core.xtend.XtendPackage
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference
-import org.eclipse.xtext.junit4.validation.ValidationTestHelper
+import org.eclipse.xtext.testing.validation.ValidationTestHelper
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess
 import org.junit.Ignore
 import org.junit.Test
