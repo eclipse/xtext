@@ -36,6 +36,7 @@ import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
 import static org.junit.Assert.*
 
 import static extension org.eclipse.xtend.ide.tests.WorkbenchTestHelper.*
+import org.eclipse.xtext.junit4.ui.util.TargetPlatformUtil
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(XtendIDEInjectorProvider))
@@ -115,6 +116,7 @@ class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActiveAnnotat
 	
 	@BeforeClass
 	static def void createProjects() {
+		TargetPlatformUtil.setTargetPlatform
 		macroProject = JavaCore.create(createPluginProject("macroProject"))
 		userProject = JavaCore::create(
 			createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib",
