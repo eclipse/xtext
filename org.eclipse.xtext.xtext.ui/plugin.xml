@@ -434,7 +434,8 @@
           icon="icons/editor.gif"
           id="org.eclipse.xtext.ui.XtextCallHierarchy"
           name="%CallHierarchy"
-          restorable="true">
+          restorable="true"
+          category="org.eclipse.xtext.viewCategory">
     </view>
  </extension>
  <extension
