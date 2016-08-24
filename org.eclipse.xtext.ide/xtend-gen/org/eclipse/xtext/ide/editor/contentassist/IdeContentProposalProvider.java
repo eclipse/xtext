@@ -179,9 +179,9 @@ public class IdeContentProposalProvider {
     final EClassifier type = this._currentTypeFinder.findCurrentTypeAfter(reference);
     if ((type instanceof EClass)) {
       final EReference ereference = GrammarUtil.getReference(reference, ((EClass)type));
-      if ((ereference != null)) {
-        EObject _currentModel = context.getCurrentModel();
-        final IScope scope = this.scopeProvider.getScope(_currentModel, ereference);
+      final EObject currentModel = context.getCurrentModel();
+      if (((ereference != null) && (currentModel != null))) {
+        final IScope scope = this.scopeProvider.getScope(currentModel, ereference);
         Predicate<IEObjectDescription> _crossrefFilter = this.getCrossrefFilter(reference, context);
         this.crossrefProposalProvider.lookupCrossReference(scope, reference, context, acceptor, _crossrefFilter);
       }

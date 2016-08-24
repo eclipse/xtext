@@ -127,8 +127,9 @@ class IdeContentProposalProvider {
 		val type = findCurrentTypeAfter(reference)
 		if (type instanceof EClass) {
 			val ereference = GrammarUtil.getReference(reference, type)
-			if (ereference !== null) {
-				val scope = scopeProvider.getScope(context.currentModel, ereference)
+			val currentModel = context.currentModel
+			if (ereference !== null && currentModel !== null) {
+				val scope = scopeProvider.getScope(currentModel, ereference)
 				crossrefProposalProvider.lookupCrossReference(scope, reference, context, acceptor,
 					getCrossrefFilter(reference, context))
 			}
