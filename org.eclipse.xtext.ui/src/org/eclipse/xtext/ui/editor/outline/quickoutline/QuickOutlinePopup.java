@@ -11,7 +11,9 @@ import java.util.List;
 
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.Separator;
+import org.eclipse.jface.bindings.keys.KeySequence;
 import org.eclipse.jface.bindings.keys.KeyStroke;
+import org.eclipse.jface.bindings.keys.SWTKeySupport;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.IDialogSettings;
 import org.eclipse.jface.dialogs.PopupDialog;
@@ -133,6 +135,8 @@ public class QuickOutlinePopup extends PopupDialog implements DisposeListener {
 
 	private KeyStroke invokingKeystroke;
 
+	private String invokingKeystrokeFormatted;
+
 	public QuickOutlinePopup() {
 		this(null);
 	}
@@ -186,11 +190,12 @@ public class QuickOutlinePopup extends PopupDialog implements DisposeListener {
 	 * @since 2.2
 	 */
 	protected void setInfoText() {
-		if (treeProvider instanceof IOutlineTreeProvider.ModeAware)
-			setInfoText("Press " + invokingKeystroke + " to "
+		if (treeProvider instanceof IOutlineTreeProvider.ModeAware) {
+			setInfoText("Press '" + invokingKeystrokeFormatted + "' to "
 					+ ((IOutlineTreeProvider.ModeAware) treeProvider).getNextMode().getDescription());
-		else
+		} else {
 			setInfoText(Messages.QuickOutlinePopup_pressESC);
+		}
 	}
 
 	protected TreeViewer createTreeViewer(Composite parent, int style) {
@@ -412,6 +417,9 @@ public class QuickOutlinePopup extends PopupDialog implements DisposeListener {
 	 * @since 2.2
 	 */
 	public void setEvent(Event event) {
+		this.invokingKeystrokeFormatted = KeySequence
+				.getInstance(SWTKeySupport.convertAcceleratorToKeyStroke(SWTKeySupport.convertEventToUnmodifiedAccelerator(event)))
+				.format();
 		this.invokingKeystroke = KeyStroke.getInstance(event.stateMask, event.keyCode);
 	}
 
