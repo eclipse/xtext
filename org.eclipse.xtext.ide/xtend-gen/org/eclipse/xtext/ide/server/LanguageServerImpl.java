@@ -457,28 +457,28 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
       if ((contentAssistService == null)) {
         return result;
       }
-      final Function2<Document, XtextResource, Function0<List<CompletionItemImpl>>> _function_1 = (Document document, XtextResource resource) -> {
+      final Function2<Document, XtextResource, Function0<ArrayList<CompletionItemImpl>>> _function_1 = (Document document, XtextResource resource) -> {
         Position _position = params.getPosition();
         final int caretOffset = document.getOffSet(_position);
         String _contents = document.getContents();
         final Iterable<ContentAssistEntry> entries = contentAssistService.createProposals(_contents, caretOffset, resource, cancelIndicator);
-        final Function0<List<CompletionItemImpl>> _function_2 = () -> {
-          List<CompletionItemImpl> _xblockexpression = null;
-          {
-            Position _position_1 = params.getPosition();
-            final PositionImpl caretPosition = new PositionImpl(((PositionImpl) _position_1));
-            final Function1<ContentAssistEntry, CompletionItemImpl> _function_3 = (ContentAssistEntry it) -> {
-              return this.toCompletionItem(it, caretOffset, caretPosition, document);
-            };
-            Iterable<CompletionItemImpl> _map = IterableExtensions.<ContentAssistEntry, CompletionItemImpl>map(entries, _function_3);
-            _xblockexpression = IterableExtensions.<CompletionItemImpl>toList(_map);
-          }
-          return _xblockexpression;
+        final Function0<ArrayList<CompletionItemImpl>> _function_2 = () -> {
+          Position _position_1 = params.getPosition();
+          final PositionImpl caretPosition = new PositionImpl(((PositionImpl) _position_1));
+          final ArrayList<CompletionItemImpl> completionItems = CollectionLiterals.<CompletionItemImpl>newArrayList();
+          final Procedure2<ContentAssistEntry, Integer> _function_3 = (ContentAssistEntry entry, Integer idx) -> {
+            final CompletionItemImpl item = this.toCompletionItem(entry, caretOffset, caretPosition, document);
+            String _string = idx.toString();
+            item.setSortText(_string);
+            completionItems.add(item);
+          };
+          IterableExtensions.<ContentAssistEntry>forEach(entries, _function_3);
+          return completionItems;
         };
         return _function_2;
       };
-      Function0<List<CompletionItemImpl>> _doRead = this.workspaceManager.<Function0<List<CompletionItemImpl>>>doRead(uri, _function_1);
-      List<CompletionItemImpl> _apply = _doRead.apply();
+      Function0<ArrayList<CompletionItemImpl>> _doRead = this.workspaceManager.<Function0<ArrayList<CompletionItemImpl>>>doRead(uri, _function_1);
+      ArrayList<CompletionItemImpl> _apply = _doRead.apply();
       result.setItems(_apply);
       return result;
     };

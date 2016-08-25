@@ -285,7 +285,13 @@ import org.eclipse.xtext.ide.server.formatting.FormattingService
                 val entries = contentAssistService.createProposals(document.contents, caretOffset, resource, cancelIndicator)
                 return [|
                     val caretPosition = new PositionImpl(params.position as PositionImpl)
-                    entries.map[toCompletionItem(caretOffset, caretPosition, document)].toList
+                    val completionItems = newArrayList
+                    entries.forEach[entry, idx|
+                        val item = entry.toCompletionItem(caretOffset, caretPosition, document)
+                        item.sortText = idx.toString
+                        completionItems += item                        
+                    ]
+                    return completionItems
                 ]
             ].apply
             return result
@@ -301,7 +307,7 @@ import org.eclipse.xtext.ide.server.formatting.FormattingService
 		    val prefixPosition = document.getPosition(prefixOffset)
 		    completionItem.textEdit = new TextEditImpl(new RangeImpl(prefixPosition, caretPosition), entry.proposal) 
 		} else {
-		  completionItem.insertText = entry.proposal
+		    completionItem.insertText = entry.proposal
 		}
 		completionItem.kind = translateKind(entry)
 		return completionItem
