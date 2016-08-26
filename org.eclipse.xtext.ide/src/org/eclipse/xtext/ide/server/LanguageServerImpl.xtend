@@ -302,13 +302,9 @@ import org.eclipse.xtext.ide.server.formatting.FormattingService
 		val completionItem = new CompletionItemImpl
 		completionItem.label = entry.label ?: entry.proposal
 		completionItem.detail = entry.description
-		if (!entry.prefix.nullOrEmpty) {
-		    val prefixOffset = caretOffset - entry.prefix.length
-		    val prefixPosition = document.getPosition(prefixOffset)
-		    completionItem.textEdit = new TextEditImpl(new RangeImpl(prefixPosition, caretPosition), entry.proposal) 
-		} else {
-		    completionItem.insertText = entry.proposal
-		}
+	    val prefixOffset = caretOffset - (entry.prefix?:'').length
+	    val prefixPosition = document.getPosition(prefixOffset)
+	    completionItem.textEdit = new TextEditImpl(new RangeImpl(prefixPosition, caretPosition), entry.proposal) 
 		completionItem.kind = translateKind(entry)
 		return completionItem
 	}

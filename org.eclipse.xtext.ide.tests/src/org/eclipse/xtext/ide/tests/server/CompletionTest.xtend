@@ -18,7 +18,7 @@ class CompletionTest extends AbstractTestLangLanguageServerTest {
 	def void testCompletion_01() {
 		testCompletion [
 			expectedCompletionItems = '''
-				type
+				type -> type [[0, 0] .. [0, 0]]
 			'''
 		]
 	}
@@ -29,7 +29,7 @@ class CompletionTest extends AbstractTestLangLanguageServerTest {
 			model = 'type '
 			column = 5
 			expectedCompletionItems = '''
-				name (ID)
+				name (ID) -> name [[0, 5] .. [0, 5]]
 			'''
 		]
 	}
@@ -44,12 +44,12 @@ class CompletionTest extends AbstractTestLangLanguageServerTest {
 			line = 1
 			column = 'type Bar {'.length
 			expectedCompletionItems = '''
-				Bar (TypeDeclaration)
-				Foo (TypeDeclaration)
-				boolean
-				int
-				string
-				}
+				Bar (TypeDeclaration) -> Bar [[1, 10] .. [1, 10]]
+				Foo (TypeDeclaration) -> Foo [[1, 10] .. [1, 10]]
+				boolean -> boolean [[1, 10] .. [1, 10]]
+				int -> int [[1, 10] .. [1, 10]]
+				string -> string [[1, 10] .. [1, 10]]
+				} -> } [[1, 10] .. [1, 10]]
 				{ -> { [[1, 9] .. [1, 10]]
 			'''
 		]
@@ -67,8 +67,8 @@ class CompletionTest extends AbstractTestLangLanguageServerTest {
             column = '    Fo'.length
             expectedCompletionItems = '''
                 Foo (TypeDeclaration) -> Foo [[1, 4] .. [1, 6]]
-                name (ID)
-                [
+                name (ID) -> name [[1, 6] .. [1, 6]]
+                [ -> [ [[1, 6] .. [1, 6]]
             '''
         ]
     }

@@ -114,7 +114,6 @@ import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 import org.eclipse.xtext.xbase.lib.Pure;
-import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -500,22 +499,20 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
     completionItem.setLabel(_elvis);
     String _description = entry.getDescription();
     completionItem.setDetail(_description);
+    String _elvis_1 = null;
     String _prefix = entry.getPrefix();
-    boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(_prefix);
-    boolean _not = (!_isNullOrEmpty);
-    if (_not) {
-      String _prefix_1 = entry.getPrefix();
-      int _length = _prefix_1.length();
-      final int prefixOffset = (caretOffset - _length);
-      final PositionImpl prefixPosition = document.getPosition(prefixOffset);
-      RangeImpl _rangeImpl = new RangeImpl(prefixPosition, caretPosition);
-      String _proposal_1 = entry.getProposal();
-      TextEditImpl _textEditImpl = new TextEditImpl(_rangeImpl, _proposal_1);
-      completionItem.setTextEdit(_textEditImpl);
+    if (_prefix != null) {
+      _elvis_1 = _prefix;
     } else {
-      String _proposal_2 = entry.getProposal();
-      completionItem.setInsertText(_proposal_2);
+      _elvis_1 = "";
     }
+    int _length = _elvis_1.length();
+    final int prefixOffset = (caretOffset - _length);
+    final PositionImpl prefixPosition = document.getPosition(prefixOffset);
+    RangeImpl _rangeImpl = new RangeImpl(prefixPosition, caretPosition);
+    String _proposal_1 = entry.getProposal();
+    TextEditImpl _textEditImpl = new TextEditImpl(_rangeImpl, _proposal_1);
+    completionItem.setTextEdit(_textEditImpl);
     CompletionItemKind _translateKind = this.translateKind(entry);
     completionItem.setKind(_translateKind);
     return completionItem;
