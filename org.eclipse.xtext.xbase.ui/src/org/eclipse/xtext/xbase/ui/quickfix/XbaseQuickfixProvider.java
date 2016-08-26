@@ -87,6 +87,23 @@ public class XbaseQuickfixProvider extends DefaultQuickfixProvider {
 		organizeImports(issue, acceptor);
 	}
 
+	@Fix(IssueCodes.EQUALS_WITH_NULL)
+	public void fixEqualsWithNull(final Issue issue, IssueResolutionAcceptor acceptor) {
+		String[] data = issue.getData();
+		if (data == null || data.length == 0) {
+			return;
+		}
+		String operator = data[0];
+		String message = "Replace '" + operator + "' with '" + operator + "='";
+		acceptor.accept(issue, message, message, null, new IModification() {
+			@Override
+			public void apply(IModificationContext context) throws Exception {
+				IXtextDocument document = context.getXtextDocument();
+				document.replace(issue.getOffset(), issue.getLength(), operator + "=");
+			}
+		});
+	}
+
 	@Fix(IssueCodes.OPERATION_WITHOUT_PARENTHESES)
 	public void fixMissingParentheses(final Issue issue, IssueResolutionAcceptor acceptor) {
 		acceptor.accept(issue, "Add parentheses", "Add parentheses", null, new ISemanticModification() {
