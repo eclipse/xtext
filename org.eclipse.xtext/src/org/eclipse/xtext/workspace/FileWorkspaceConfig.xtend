@@ -16,19 +16,22 @@ import static extension org.eclipse.xtext.util.UriUtil.*
 import org.eclipse.xtext.util.UriUtil
 import org.eclipse.xtend.lib.annotations.Data
 
-@FinalFieldsConstructor
 class FileProjectConfig implements IProjectConfig {
 	val URI path
 	val String name
 	val Set<FileSourceFolder> sourceFolders = newHashSet
 	
 	new (URI path) {
-		this.path = path
-		this.name = path.lastSegment
+		this(path, path.lastSegment)
 	}
 	
-	new (File root) {
-		this(UriUtil.createFolderURI(root))
+	new (URI path, String name) {
+		this.path = path
+		this.name = name
+	}
+	
+	new (File root, String name) {
+		this(UriUtil.createFolderURI(root), name)
 	}
 
 	def FileSourceFolder addSourceFolder(String relativePath) {

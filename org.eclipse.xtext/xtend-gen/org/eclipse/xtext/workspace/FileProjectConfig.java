@@ -11,7 +11,6 @@ import com.google.common.base.Objects;
 import java.io.File;
 import java.util.Set;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.util.UriUtil;
 import org.eclipse.xtext.workspace.FileSourceFolder;
@@ -22,7 +21,6 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
-@FinalFieldsConstructor
 @SuppressWarnings("all")
 public class FileProjectConfig implements IProjectConfig {
   private final URI path;
@@ -32,13 +30,16 @@ public class FileProjectConfig implements IProjectConfig {
   private final Set<FileSourceFolder> sourceFolders = CollectionLiterals.<FileSourceFolder>newHashSet();
   
   public FileProjectConfig(final URI path) {
-    this.path = path;
-    String _lastSegment = path.lastSegment();
-    this.name = _lastSegment;
+    this(path, path.lastSegment());
   }
   
-  public FileProjectConfig(final File root) {
-    this(UriUtil.createFolderURI(root));
+  public FileProjectConfig(final URI path, final String name) {
+    this.path = path;
+    this.name = name;
+  }
+  
+  public FileProjectConfig(final File root, final String name) {
+    this(UriUtil.createFolderURI(root), name);
   }
   
   public FileSourceFolder addSourceFolder(final String relativePath) {
@@ -102,11 +103,5 @@ public class FileProjectConfig implements IProjectConfig {
   @Override
   public IWorkspaceConfig getWorkspaceConfig() {
     return new SingleProjectWorkspaceConfig(this);
-  }
-  
-  public FileProjectConfig(final URI path, final String name) {
-    super();
-    this.path = path;
-    this.name = name;
   }
 }
