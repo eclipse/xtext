@@ -216,7 +216,9 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
     }
     final Procedure1<CancelIndicator> _function_1 = (CancelIndicator cancelIndicator) -> {
       String _rootPath_1 = params.getRootPath();
-      final URI rootURI = URI.createFileURI(_rootPath_1);
+      URI _createFileURI = URI.createFileURI(_rootPath_1);
+      String _path = this._uriExtensions.toPath(_createFileURI);
+      final URI rootURI = this._uriExtensions.toUri(_path);
       final Procedure2<URI, Iterable<Issue>> _function_2 = (URI $0, Iterable<Issue> $1) -> {
         this.publishDiagnostics($0, $1);
       };

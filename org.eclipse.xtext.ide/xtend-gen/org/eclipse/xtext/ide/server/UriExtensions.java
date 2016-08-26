@@ -19,8 +19,8 @@ import org.eclipse.emf.common.util.URI;
 @Singleton
 @SuppressWarnings("all")
 public class UriExtensions {
-  public URI toUri(final String path) {
-    java.net.URI _create = java.net.URI.create(path);
+  public URI toUri(final String pathWithScheme) {
+    java.net.URI _create = java.net.URI.create(pathWithScheme);
     String _path = this.toPath(_create);
     return URI.createURI(_path);
   }

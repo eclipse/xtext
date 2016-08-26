@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.server
 
-import java.io.File
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtext.workspace.FileProjectConfig
 import org.eclipse.xtext.workspace.FileSourceFolder
@@ -31,14 +30,11 @@ interface IWorkspaceConfigFactory {
  */
 class ProjectWorkspaceConfigFactory implements IWorkspaceConfigFactory {
     
+    
     override getWorkspaceConfig(URI workspaceBaseURI) {
-        val baseFile = new File(workspaceBaseURI.toFileString)
-        if(baseFile.isDirectory) {
-            val projectConfig = new FileProjectConfig(baseFile)
-            projectConfig.sourceFolders += new FileSourceFolder(projectConfig, '.')
-            return projectConfig.workspaceConfig
-        }
-        return null
+        val projectConfig = new FileProjectConfig(workspaceBaseURI)
+        projectConfig.sourceFolders += new FileSourceFolder(projectConfig, '.')
+        return projectConfig.workspaceConfig
     }
 }
 

@@ -18,8 +18,8 @@ import org.eclipse.emf.common.util.URI
 @Singleton
 class UriExtensions {
 
-	def URI toUri(String path) {
-		return URI.createURI(java.net.URI.create(path).toPath)
+	def URI toUri(String pathWithScheme) {
+		return URI.createURI(java.net.URI.create(pathWithScheme).toPath)
 	}
 
 	def String toPath(URI uri) {

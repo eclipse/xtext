@@ -138,7 +138,7 @@ import org.eclipse.xtext.ide.server.formatting.FormattingService
 		}
 
 		requestManager.runWrite([ cancelIndicator |
-			val rootURI = URI.createFileURI(params.rootPath)
+			val rootURI = URI.createFileURI(params.rootPath).toPath.toUri
 			workspaceManager.initialize(rootURI, [this.publishDiagnostics($0, $1)], cancelIndicator)
 		], CancellableIndicator.NullImpl)
 

@@ -132,8 +132,8 @@ public class BuildManager {
   
   public void doInitialBuild(final List<ProjectDescription> projects, final CancelIndicator indicator) {
     final List<ProjectDescription> sortedDescriptions = this.sortByDependencies(projects);
-    for (final ProjectDescription it : sortedDescriptions) {
-      String _name = it.getName();
+    for (final ProjectDescription description : sortedDescriptions) {
+      String _name = description.getName();
       ProjectManager _projectManager = this.workspaceManager.getProjectManager(_name);
       _projectManager.doInitialBuild(indicator);
     }

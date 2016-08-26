@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.ide.server;
 
-import java.io.File;
 import java.util.Set;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.ide.server.IWorkspaceConfigFactory;
@@ -25,16 +24,10 @@ import org.eclipse.xtext.workspace.IWorkspaceConfig;
 public class ProjectWorkspaceConfigFactory implements IWorkspaceConfigFactory {
   @Override
   public IWorkspaceConfig getWorkspaceConfig(final URI workspaceBaseURI) {
-    String _fileString = workspaceBaseURI.toFileString();
-    final File baseFile = new File(_fileString);
-    boolean _isDirectory = baseFile.isDirectory();
-    if (_isDirectory) {
-      final FileProjectConfig projectConfig = new FileProjectConfig(baseFile);
-      Set<FileSourceFolder> _sourceFolders = projectConfig.getSourceFolders();
-      FileSourceFolder _fileSourceFolder = new FileSourceFolder(projectConfig, ".");
-      _sourceFolders.add(_fileSourceFolder);
-      return projectConfig.getWorkspaceConfig();
-    }
-    return null;
+    final FileProjectConfig projectConfig = new FileProjectConfig(workspaceBaseURI);
+    Set<FileSourceFolder> _sourceFolders = projectConfig.getSourceFolders();
+    FileSourceFolder _fileSourceFolder = new FileSourceFolder(projectConfig, ".");
+    _sourceFolders.add(_fileSourceFolder);
+    return projectConfig.getWorkspaceConfig();
   }
 }

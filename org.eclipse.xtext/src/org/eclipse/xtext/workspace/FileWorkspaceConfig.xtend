@@ -18,13 +18,17 @@ import org.eclipse.xtend.lib.annotations.Data
 
 @FinalFieldsConstructor
 class FileProjectConfig implements IProjectConfig {
-	val File root
+	val URI path
 	val String name
 	val Set<FileSourceFolder> sourceFolders = newHashSet
 	
-	new (File file) {
-		this.root = file
-		this.name = root.name
+	new (URI path) {
+		this.path = path
+		this.name = path.lastSegment
+	}
+	
+	new (File root) {
+		this(UriUtil.createFolderURI(root))
 	}
 
 	def FileSourceFolder addSourceFolder(String relativePath) {
@@ -42,7 +46,7 @@ class FileProjectConfig implements IProjectConfig {
 	}
 
 	override getPath() {
-		UriUtil.createFolderURI(root)
+		path
 	}
 
 	override Set<FileSourceFolder> getSourceFolders() {
@@ -80,7 +84,12 @@ class FileSourceFolder implements ISourceFolder {
 	}
 
 	override getPath() {
-		URI.createFileURI(name).resolve(parent.path).appendSegment("")
+		val result = URI.createFileURI(name).resolve(parent.path)
+		if (result.hasTrailingPathSeparator) {
+		    return result
+		} else {
+		    return result.appendSegment("")
+		}
 	}
 
 	override equals(Object obj) {

@@ -25,16 +25,20 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 @FinalFieldsConstructor
 @SuppressWarnings("all")
 public class FileProjectConfig implements IProjectConfig {
-  private final File root;
+  private final URI path;
   
   private final String name;
   
   private final Set<FileSourceFolder> sourceFolders = CollectionLiterals.<FileSourceFolder>newHashSet();
   
-  public FileProjectConfig(final File file) {
-    this.root = file;
-    String _name = this.root.getName();
-    this.name = _name;
+  public FileProjectConfig(final URI path) {
+    this.path = path;
+    String _lastSegment = path.lastSegment();
+    this.name = _lastSegment;
+  }
+  
+  public FileProjectConfig(final File root) {
+    this(UriUtil.createFolderURI(root));
   }
   
   public FileSourceFolder addSourceFolder(final String relativePath) {
@@ -63,7 +67,7 @@ public class FileProjectConfig implements IProjectConfig {
   
   @Override
   public URI getPath() {
-    return UriUtil.createFolderURI(this.root);
+    return this.path;
   }
   
   @Override
@@ -74,17 +78,14 @@ public class FileProjectConfig implements IProjectConfig {
   @Override
   public boolean equals(final Object obj) {
     if ((obj instanceof FileProjectConfig)) {
-      URI _path = this.getPath();
-      URI _path_1 = ((FileProjectConfig)obj).getPath();
-      return Objects.equal(_path, _path_1);
+      return Objects.equal(this.path, ((FileProjectConfig)obj).path);
     }
     return false;
   }
   
   @Override
   public int hashCode() {
-    URI _path = this.getPath();
-    return _path.hashCode();
+    return this.path.hashCode();
   }
   
   @Override
@@ -93,8 +94,7 @@ public class FileProjectConfig implements IProjectConfig {
     _builder.append("Project ");
     _builder.append(this.name, "");
     _builder.append(" (");
-    URI _path = this.getPath();
-    _builder.append(_path, "");
+    _builder.append(this.path, "");
     _builder.append(")");
     return _builder.toString();
   }
@@ -104,9 +104,9 @@ public class FileProjectConfig implements IProjectConfig {
     return new SingleProjectWorkspaceConfig(this);
   }
   
-  public FileProjectConfig(final File root, final String name) {
+  public FileProjectConfig(final URI path, final String name) {
     super();
-    this.root = root;
+    this.path = path;
     this.name = name;
   }
 }

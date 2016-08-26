@@ -30,8 +30,13 @@ public class FileSourceFolder implements ISourceFolder {
   public URI getPath() {
     URI _createFileURI = URI.createFileURI(this.name);
     URI _path = this.parent.getPath();
-    URI _resolve = _createFileURI.resolve(_path);
-    return _resolve.appendSegment("");
+    final URI result = _createFileURI.resolve(_path);
+    boolean _hasTrailingPathSeparator = result.hasTrailingPathSeparator();
+    if (_hasTrailingPathSeparator) {
+      return result;
+    } else {
+      return result.appendSegment("");
+    }
   }
   
   @Override

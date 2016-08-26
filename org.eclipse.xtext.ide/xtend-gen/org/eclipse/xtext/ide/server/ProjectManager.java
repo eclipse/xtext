@@ -36,6 +36,7 @@ import org.eclipse.xtext.util.IFileSystemScanner;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.workspace.IProjectConfig;
 import org.eclipse.xtext.workspace.ISourceFolder;
+import org.eclipse.xtext.workspace.ProjectConfigAdapter;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -156,6 +157,7 @@ public class ProjectManager {
     XtextResourceSet _get = this.resourceSetProvider.get();
     final Procedure1<XtextResourceSet> _function = (XtextResourceSet it) -> {
       this.projectDescription.attachToEmfObject(it);
+      ProjectConfigAdapter.install(it, this.projectConfig);
       Map<String, ResourceDescriptionsData> _get_1 = this.indexProvider.get();
       final ChunkedResourceDescriptions index = new ChunkedResourceDescriptions(_get_1, it);
       String _name = this.projectDescription.getName();

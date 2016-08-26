@@ -19,12 +19,14 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.ide.server.Document;
 import org.eclipse.xtext.ide.server.ServerModule;
+import org.eclipse.xtext.ide.server.UriExtensions;
 import org.eclipse.xtext.ide.server.WorkspaceManager;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.Files;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -72,6 +74,10 @@ public class WorkspaceManagerTest {
   @Inject
   protected WorkspaceManager workspaceManger;
   
+  @Inject
+  @Extension
+  protected UriExtensions uriExtensions;
+  
   @Before
   public void setup() {
     try {
@@ -88,11 +94,13 @@ public class WorkspaceManagerTest {
       this.root.deleteOnExit();
       String _absolutePath = this.root.getAbsolutePath();
       URI _createFileURI = URI.createFileURI(_absolutePath);
+      String _path = this.uriExtensions.toPath(_createFileURI);
+      URI _uri = this.uriExtensions.toUri(_path);
       final Procedure2<URI, Iterable<Issue>> _function = (URI $0, Iterable<Issue> $1) -> {
         List<Issue> _list = IterableExtensions.<Issue>toList($1);
         this.diagnostics.put($0, _list);
       };
-      this.workspaceManger.initialize(_createFileURI, _function, null);
+      this.workspaceManger.initialize(_uri, _function, null);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

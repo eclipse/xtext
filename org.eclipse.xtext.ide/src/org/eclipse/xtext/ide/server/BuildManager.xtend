@@ -49,8 +49,8 @@ class BuildManager {
 
     def void doInitialBuild(List<ProjectDescription> projects, CancelIndicator indicator) {
         val sortedDescriptions = sortByDependencies(projects)
-        for(it: sortedDescriptions) {
-            workspaceManager.getProjectManager(name).doInitialBuild(indicator)
+        for(description : sortedDescriptions) {
+            workspaceManager.getProjectManager(description.name).doInitialBuild(indicator)
         }
     }
 

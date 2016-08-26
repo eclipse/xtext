@@ -21,6 +21,7 @@ import org.eclipse.xtext.validation.Issue
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
+import org.eclipse.xtext.ide.server.UriExtensions
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -48,6 +49,7 @@ class WorkspaceManagerTest {
     }
 
     @Inject protected WorkspaceManager workspaceManger
+    @Inject extension protected UriExtensions uriExtensions
 
     @Before
     def void setup() {
@@ -60,7 +62,7 @@ class WorkspaceManagerTest {
             Files.cleanFolder(root, null, true, false)
         }
         root.deleteOnExit
-        workspaceManger.initialize(URI.createFileURI(root.absolutePath), [diagnostics.put($0, $1.toList)], null)
+        workspaceManger.initialize(URI.createFileURI(root.absolutePath).toPath.toUri, [diagnostics.put($0, $1.toList)], null)
     }
 
     protected Map<URI, List<Issue>> diagnostics = newHashMap()

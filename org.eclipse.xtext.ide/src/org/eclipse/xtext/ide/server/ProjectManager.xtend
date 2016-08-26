@@ -30,6 +30,7 @@ import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.util.IFileSystemScanner
 import org.eclipse.xtext.validation.Issue
 import org.eclipse.xtext.workspace.IProjectConfig
+import org.eclipse.xtext.workspace.ProjectConfigAdapter
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -106,6 +107,7 @@ class ProjectManager {
     protected def XtextResourceSet createFreshResourceSet(ResourceDescriptionsData newIndex) {
         resourceSetProvider.get => [
             projectDescription.attachToEmfObject(it)
+            ProjectConfigAdapter.install(it, projectConfig)
             val index = new ChunkedResourceDescriptions(indexProvider.get, it)
             index.setContainer(projectDescription.name, newIndex)
             externalContentSupport.configureResourceSet(it, openedDocumentsContentProvider)
