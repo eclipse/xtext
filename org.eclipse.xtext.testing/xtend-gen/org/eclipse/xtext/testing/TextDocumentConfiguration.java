@@ -7,15 +7,28 @@
  */
 package org.eclipse.xtext.testing;
 
+import java.util.Map;
 import org.eclipse.xtend.lib.annotations.Accessors;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 @Accessors
 @SuppressWarnings("all")
 public class TextDocumentConfiguration {
+  private Map<String, CharSequence> filesInScope = CollectionLiterals.<String, CharSequence>emptyMap();
+  
   private String model = "";
   
   private String filePath;
+  
+  @Pure
+  public Map<String, CharSequence> getFilesInScope() {
+    return this.filesInScope;
+  }
+  
+  public void setFilesInScope(final Map<String, CharSequence> filesInScope) {
+    this.filesInScope = filesInScope;
+  }
   
   @Pure
   public String getModel() {

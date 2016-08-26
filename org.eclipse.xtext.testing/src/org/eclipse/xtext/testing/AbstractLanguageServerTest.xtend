@@ -23,11 +23,15 @@ import io.typefox.lsapi.SymbolInformation
 import io.typefox.lsapi.TextEdit
 import io.typefox.lsapi.builders.DidCloseTextDocumentParamsBuilder
 import io.typefox.lsapi.builders.DidOpenTextDocumentParamsBuilder
+import io.typefox.lsapi.builders.DocumentFormattingParamsBuilder
+import io.typefox.lsapi.builders.DocumentRangeFormattingParamsBuilder
 import io.typefox.lsapi.builders.InitializeParamsBuilder
 import io.typefox.lsapi.builders.ReferenceParamsBuilder
 import io.typefox.lsapi.builders.TextDocumentPositionParamsBuilder
 import io.typefox.lsapi.impl.DocumentSymbolParamsImpl
 import io.typefox.lsapi.impl.InitializeParamsImpl
+import io.typefox.lsapi.impl.PositionImpl
+import io.typefox.lsapi.impl.RangeImpl
 import io.typefox.lsapi.impl.TextDocumentIdentifierImpl
 import io.typefox.lsapi.impl.WorkspaceSymbolParamsImpl
 import java.io.File
@@ -42,6 +46,7 @@ import java.util.function.Consumer
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.LanguageInfo
+import org.eclipse.xtext.ide.server.Document
 import org.eclipse.xtext.ide.server.LanguageServerImpl
 import org.eclipse.xtext.ide.server.ServerModule
 import org.eclipse.xtext.ide.server.UriExtensions
@@ -52,11 +57,6 @@ import org.eclipse.xtext.util.Files
 import org.eclipse.xtext.util.Modules2
 import org.junit.Assert
 import org.junit.Before
-import io.typefox.lsapi.impl.RangeImpl
-import io.typefox.lsapi.impl.PositionImpl
-import io.typefox.lsapi.builders.DocumentFormattingParamsBuilder
-import org.eclipse.xtext.ide.server.Document
-import io.typefox.lsapi.builders.DocumentRangeFormattingParamsBuilder
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -160,7 +160,7 @@ abstract class AbstractLanguageServerTest implements Consumer<PublishDiagnostics
         ].build)
     }
 
-    def String ->(String path, CharSequence contents) {
+    def String writeFile(String path, CharSequence contents) {
         val file = new File(root, path)
         file.parentFile.mkdirs
         file.createNewFile
@@ -225,10 +225,7 @@ abstract class AbstractLanguageServerTest implements Consumer<PublishDiagnostics
         configuration.filePath = 'MyModel.' + fileExtension
         configurator.apply(configuration)
 
-        val fileUri = filePath -> model
-
-        initialize
-        open(fileUri, model)
+        val fileUri = initializeContext(configuration)
 
         val completionItems = languageServer.completion(new TextDocumentPositionParamsBuilder[
         	textDocument(fileUri)
@@ -238,16 +235,24 @@ abstract class AbstractLanguageServerTest implements Consumer<PublishDiagnostics
         val actualCompletionItems = completionItems.get.items.toExpectation
         assertEquals(expectedCompletionItems, actualCompletionItems)
     }
+    
+    protected def String initializeContext(TextDocumentConfiguration configuration) {
+        initialize
+        for (e : configuration.filesInScope.entrySet) {
+            val filePath = e.key.writeFile(e.value.toString)
+            open(filePath, e.value.toString)
+        }
+        val filePath = configuration.filePath.writeFile(configuration.model)
+        open(filePath, configuration.model)
+        return filePath
+    }
 
     protected def void testDefinition((DefinitionTestConfiguration)=>void configurator) {
         val extension configuration = new DefinitionTestConfiguration
         configuration.filePath = 'MyModel.' + fileExtension
         configurator.apply(configuration)
 
-        val fileUri = filePath -> model
-
-        initialize
-        open(fileUri, model)
+        val fileUri = initializeContext(configuration)
 
         val definitions = languageServer.definition(new TextDocumentPositionParamsBuilder[
         	textDocument(fileUri)
@@ -262,11 +267,8 @@ abstract class AbstractLanguageServerTest implements Consumer<PublishDiagnostics
         configuration.filePath = 'MyModel.' + fileExtension
         configurator.apply(configuration)
 
-        val fileUri = filePath -> model
-
-        initialize
-		configuration.referencedModels?.apply
-        open(fileUri, model)
+        val fileUri = initializeContext(configuration)
+        
         val hover = languageServer.hover(new TextDocumentPositionParamsBuilder[
         	textDocument(fileUri)
         	position(line, column)
@@ -279,10 +281,8 @@ abstract class AbstractLanguageServerTest implements Consumer<PublishDiagnostics
         val extension configuration = new DocumentSymbolConfiguraiton
         configuration.filePath = 'MyModel.' + fileExtension
         configurator.apply(configuration)
-        val fileUri = filePath -> model
-
-        initialize
-        open(fileUri, model)
+        
+        val fileUri = initializeContext(configuration)
 
         val symbols = languageServer.documentSymbol(new DocumentSymbolParamsImpl(new TextDocumentIdentifierImpl(fileUri)))
         val String actualSymbols = symbols.get.toExpectation
@@ -293,10 +293,8 @@ abstract class AbstractLanguageServerTest implements Consumer<PublishDiagnostics
         val extension configuration = new WorkspaceSymbolConfiguraiton
         configuration.filePath = 'MyModel.' + fileExtension
         configurator.apply(configuration)
-        val fileUri = filePath -> model
-
-        initialize
-        open(fileUri, model)
+        
+        initializeContext(configuration)
 
         val symbols = languageServer.symbol(new WorkspaceSymbolParamsImpl(query)).get
         val String actualSymbols = symbols.toExpectation
@@ -308,10 +306,7 @@ abstract class AbstractLanguageServerTest implements Consumer<PublishDiagnostics
         configuration.filePath = 'MyModel.' + fileExtension
         configurator.apply(configuration)
 
-        val fileUri = filePath -> model
-
-        initialize
-        open(fileUri, model)
+        val fileUri = initializeContext(configuration)
 
         val definitions = languageServer.references(new ReferenceParamsBuilder[
         	textDocument(fileUri)
@@ -332,10 +327,8 @@ abstract class AbstractLanguageServerTest implements Consumer<PublishDiagnostics
         configuration.filePath = 'MyModel.' + fileExtension
         configurator.apply(configuration)
 
-        val fileUri = filePath -> model
-
-        initialize
-        open(fileUri, model)
+        val fileUri = initializeContext(configuration)
+        
         val changes = languageServer.formatting(new DocumentFormattingParamsBuilder [
             textDocument(fileUri)
         ].build)
@@ -348,10 +341,9 @@ abstract class AbstractLanguageServerTest implements Consumer<PublishDiagnostics
         val extension configuration = new RangeFormattingConfiguration
         configuration.filePath = 'MyModel.' + fileExtension
         configurator.apply(configuration)
-        val fileUri = filePath -> model
-
-        initialize
-        open(fileUri, model)
+        
+        val fileUri = initializeContext(configuration)
+        
         val changes = languageServer.rangeFormatting(new DocumentRangeFormattingParamsBuilder [
             textDocument(fileUri)
             range(configuration.range)
@@ -376,7 +368,6 @@ class DefinitionTestConfiguration extends TextDocumentPositionConfiguration {
 @Accessors
 class HoverTestConfiguration extends TextDocumentPositionConfiguration {
     String expectedHover = ''
-    Procedures.Procedure0 referencedModels = []
 }
 
 @Accessors
@@ -404,6 +395,7 @@ class TextDocumentPositionConfiguration extends TextDocumentConfiguration {
 
 @Accessors
 class TextDocumentConfiguration {
+    Map<String,CharSequence> filesInScope = emptyMap
     String model = ''
     String filePath
 }

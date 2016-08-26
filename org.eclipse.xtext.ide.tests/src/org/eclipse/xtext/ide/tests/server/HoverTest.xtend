@@ -91,17 +91,15 @@ class HoverTest extends AbstractTestLangLanguageServerTest {
 	@Test
 	def void testHover_05() {
 		testHover[
-			referencedModels = [
-				val referenceModel = '''
+			filesInScope = #{
+				('MyModel2.' + fileExtension) -> '''
 					/**
 					 * Some documentation.
 					 */
 					type Foo {
 					}
 				'''
-				val fileUri = 'MyModel2.' + fileExtension -> referenceModel
-				open(fileUri, referenceModel)
-			]
+			}
 			model = '''
 				type Bar extends Foo {
 				}

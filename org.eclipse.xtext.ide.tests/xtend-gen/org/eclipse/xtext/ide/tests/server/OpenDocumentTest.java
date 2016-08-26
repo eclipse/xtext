@@ -42,7 +42,7 @@ public class OpenDocumentTest extends AbstractTestLangLanguageServerTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    final String firstFile = this.operator_mappedTo("MyType1.testlang", _builder);
+    final String firstFile = this.writeFile("MyType1.testlang", _builder);
     this.initialize();
     List<? extends Diagnostic> _get = this.diagnostics.get(firstFile);
     Diagnostic _head = IterableExtensions.head(_get);
@@ -53,7 +53,7 @@ public class OpenDocumentTest extends AbstractTestLangLanguageServerTest {
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    final String path = this.operator_mappedTo("MyType2.testlang", _builder_1);
+    final String path = this.writeFile("MyType2.testlang", _builder_1);
     WorkspaceService _workspaceService = this.languageServer.getWorkspaceService();
     FileEventImpl _fileEventImpl = new FileEventImpl(path, FileChangeType.Created);
     DidChangeWatchedFilesParamsImpl _didChangeWatchedFilesParamsImpl = new DidChangeWatchedFilesParamsImpl(
@@ -89,7 +89,7 @@ public class OpenDocumentTest extends AbstractTestLangLanguageServerTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    final String firstFile = this.operator_mappedTo("MyType1.testlang", _builder);
+    final String firstFile = this.writeFile("MyType1.testlang", _builder);
     this.initialize();
     List<? extends Diagnostic> _get = this.diagnostics.get(firstFile);
     Diagnostic _head = IterableExtensions.head(_get);

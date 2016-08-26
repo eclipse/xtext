@@ -42,8 +42,7 @@ public class ServerTest extends AbstractTestLangLanguageServerTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this.operator_mappedTo(
-      "MyType1.testlang", _builder);
+    this.writeFile("MyType1.testlang", _builder);
     this.initialize();
     Set<Map.Entry<String, List<? extends Diagnostic>>> _entrySet = this.diagnostics.entrySet();
     String _join = IterableExtensions.join(_entrySet, ",");
@@ -63,8 +62,7 @@ public class ServerTest extends AbstractTestLangLanguageServerTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this.operator_mappedTo(
-      "MyType1.testlang", _builder);
+    this.writeFile("MyType1.testlang", _builder);
     this.initialize();
     Collection<List<? extends Diagnostic>> _values = this.diagnostics.values();
     List<? extends Diagnostic> _head = IterableExtensions.<List<? extends Diagnostic>>head(_values);
@@ -114,8 +112,7 @@ public class ServerTest extends AbstractTestLangLanguageServerTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this.operator_mappedTo(
-      "MyType1.testlang", _builder);
+    this.writeFile("MyType1.testlang", _builder);
     this.initialize();
     Collection<List<? extends Diagnostic>> _values = this.diagnostics.values();
     List<? extends Diagnostic> _head = IterableExtensions.<List<? extends Diagnostic>>head(_values);
@@ -127,7 +124,7 @@ public class ServerTest extends AbstractTestLangLanguageServerTest {
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    final String path = this.operator_mappedTo("MyType2.testlang", _builder_1);
+    final String path = this.writeFile("MyType2.testlang", _builder_1);
     WorkspaceService _workspaceService = this.languageServer.getWorkspaceService();
     FileEventImpl _fileEventImpl = new FileEventImpl(path, FileChangeType.Created);
     DidChangeWatchedFilesParamsImpl _didChangeWatchedFilesParamsImpl = new DidChangeWatchedFilesParamsImpl(Collections.<FileEventImpl>unmodifiableList(CollectionLiterals.<FileEventImpl>newArrayList(_fileEventImpl)));

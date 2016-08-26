@@ -23,19 +23,19 @@ class OpenDocumentTest extends AbstractTestLangLanguageServerTest {
     
     @Test
     def void testOpenedDocumentShadowsPersistedFile() {
-        val firstFile = 'MyType1.testlang' -> '''
+        val firstFile = 'MyType1.testlang' .writeFile( '''
             type Test {
                 NonExisting foo
             }
-        '''
+        ''')
         initialize
         
         assertEquals("Couldn't resolve reference to TypeDeclaration 'NonExisting'.", diagnostics.get(firstFile).head.message)
         
-        val path = 'MyType2.testlang' -> '''
+        val path = 'MyType2.testlang' .writeFile( '''
             type Foo {
             }
-        '''
+        ''')
         languageServer.getWorkspaceService.didChangeWatchedFiles(
 			new DidChangeWatchedFilesParamsImpl(#[
 				new FileEventImpl(path, FileChangeType.Created)
@@ -60,11 +60,11 @@ class OpenDocumentTest extends AbstractTestLangLanguageServerTest {
     
      @Test
     def void testDidChange() {
-        val firstFile = 'MyType1.testlang' -> '''
+        val firstFile = 'MyType1.testlang' .writeFile( '''
             type Test {
                 NonExisting foo
             }
-        '''
+        ''')
         initialize
         
         assertEquals("Couldn't resolve reference to TypeDeclaration 'NonExisting'.", diagnostics.get(firstFile).head.message)

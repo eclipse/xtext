@@ -21,22 +21,22 @@ class ServerTest extends AbstractTestLangLanguageServerTest {
     
     @Test
     def void testInitializeBuild() {
-        'MyType1.testlang' -> '''
+        'MyType1.testlang'.writeFile('''
             type Test {
                 string foo
             }
-        '''
+        ''')
     	initialize
     	assertTrue(diagnostics.entrySet.join(','), diagnostics.values.head.empty)
     }
     
     @Test
     def void testInitializeBuildWithError() {
-        'MyType1.testlang' -> '''
+        'MyType1.testlang'.writeFile( '''
             type Test {
                 NonExisting foo
             }
-        '''
+        ''')
     	initialize
     	assertEquals("Couldn't resolve reference to TypeDeclaration 'NonExisting'.", diagnostics.values.head.head?.message)
     	assertEquals(1, diagnostics.values.head.head.range.start.line)
@@ -47,18 +47,18 @@ class ServerTest extends AbstractTestLangLanguageServerTest {
     
     @Test
     def void testIncrementalBuildWithError() {
-        'MyType1.testlang' -> '''
+        'MyType1.testlang'.writeFile( '''
             type Test {
                 NonExisting foo
             }
-        '''
+        ''')
     	initialize
     	assertEquals("Couldn't resolve reference to TypeDeclaration 'NonExisting'.", diagnostics.values.head.head.message)
     	
-        val path = 'MyType2.testlang' -> '''
+        val path = 'MyType2.testlang'.writeFile('''
             type NonExisting {
             }
-        '''
+        ''')
         
     	languageServer.getWorkspaceService.didChangeWatchedFiles(
     		new DidChangeWatchedFilesParamsImpl(#[new FileEventImpl(path, FileChangeType.Created)])

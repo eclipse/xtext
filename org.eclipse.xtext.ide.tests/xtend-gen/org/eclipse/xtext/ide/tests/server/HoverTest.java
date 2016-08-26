@@ -7,10 +7,12 @@
  */
 package org.eclipse.xtext.ide.tests.server;
 
+import java.util.Collections;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.ide.tests.server.AbstractTestLangLanguageServerTest;
 import org.eclipse.xtext.testing.HoverTestConfiguration;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure0;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Test;
 
@@ -141,39 +143,35 @@ public class HoverTest extends AbstractTestLangLanguageServerTest {
   @Test
   public void testHover_05() {
     final Procedure1<HoverTestConfiguration> _function = (HoverTestConfiguration it) -> {
-      final Procedure0 _function_1 = () -> {
-        StringConcatenation _builder = new StringConcatenation();
-        _builder.append("/**");
-        _builder.newLine();
-        _builder.append(" ");
-        _builder.append("* Some documentation.");
-        _builder.newLine();
-        _builder.append(" ");
-        _builder.append("*/");
-        _builder.newLine();
-        _builder.append("type Foo {");
-        _builder.newLine();
-        _builder.append("}");
-        _builder.newLine();
-        final String referenceModel = _builder.toString();
-        final String fileUri = this.operator_mappedTo(("MyModel2." + this.fileExtension), referenceModel);
-        this.open(fileUri, referenceModel);
-      };
-      it.setReferencedModels(_function_1);
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("type Bar extends Foo {");
+      _builder.append("/**");
+      _builder.newLine();
+      _builder.append(" ");
+      _builder.append("* Some documentation.");
+      _builder.newLine();
+      _builder.append(" ");
+      _builder.append("*/");
+      _builder.newLine();
+      _builder.append("type Foo {");
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      it.setModel(_builder.toString());
+      Pair<String, String> _mappedTo = Pair.<String, String>of(("MyModel2." + this.fileExtension), _builder.toString());
+      it.setFilesInScope(Collections.<String, CharSequence>unmodifiableMap(CollectionLiterals.<String, CharSequence>newHashMap(_mappedTo)));
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("type Bar extends Foo {");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      it.setModel(_builder_1.toString());
       int _length = "type Bar extends F".length();
       it.setColumn(_length);
-      StringConcatenation _builder_1 = new StringConcatenation();
-      _builder_1.append("[[0, 17] .. [0, 20]]");
-      _builder_1.newLine();
-      _builder_1.append("Some documentation.");
-      _builder_1.newLine();
-      it.setExpectedHover(_builder_1.toString());
+      StringConcatenation _builder_2 = new StringConcatenation();
+      _builder_2.append("[[0, 17] .. [0, 20]]");
+      _builder_2.newLine();
+      _builder_2.append("Some documentation.");
+      _builder_2.newLine();
+      it.setExpectedHover(_builder_2.toString());
     };
     this.testHover(_function);
   }
