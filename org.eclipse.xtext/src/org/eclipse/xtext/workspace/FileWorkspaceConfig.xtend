@@ -33,6 +33,10 @@ class FileProjectConfig implements IProjectConfig {
 	new (File root, String name) {
 		this(UriUtil.createFolderURI(root), name)
 	}
+	
+	new (File root) {
+		this(UriUtil.createFolderURI(root))
+	}
 
 	def FileSourceFolder addSourceFolder(String relativePath) {
 		val sourceFolder = new FileSourceFolder(this, relativePath)

@@ -42,6 +42,10 @@ public class FileProjectConfig implements IProjectConfig {
     this(UriUtil.createFolderURI(root), name);
   }
   
+  public FileProjectConfig(final File root) {
+    this(UriUtil.createFolderURI(root));
+  }
+  
   public FileSourceFolder addSourceFolder(final String relativePath) {
     FileSourceFolder _xblockexpression = null;
     {
