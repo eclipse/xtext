@@ -43,7 +43,7 @@ public class FileProjectConfig implements IProjectConfig {
   }
   
   public FileProjectConfig(final File root) {
-    this(UriUtil.createFolderURI(root));
+    this(UriUtil.createFolderURI(root), root.getName());
   }
   
   public FileSourceFolder addSourceFolder(final String relativePath) {

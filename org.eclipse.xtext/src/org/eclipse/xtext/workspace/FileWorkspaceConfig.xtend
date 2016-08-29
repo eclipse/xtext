@@ -35,7 +35,7 @@ class FileProjectConfig implements IProjectConfig {
 	}
 	
 	new (File root) {
-		this(UriUtil.createFolderURI(root))
+		this(UriUtil.createFolderURI(root), root.name)
 	}
 
 	def FileSourceFolder addSourceFolder(String relativePath) {
