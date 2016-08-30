@@ -44,7 +44,7 @@ public interface IJvmModelAssociations {
 	EObject getPrimarySourceElement(EObject jvmElement);
 
 	/**
-	 * @return the primary {@link JvmElementsProxifyingUnloader} element for the given source element.
+	 * @return the primary JVM element for the given source element.
 	 */
 	EObject getPrimaryJvmElement(EObject sourceElement);
 

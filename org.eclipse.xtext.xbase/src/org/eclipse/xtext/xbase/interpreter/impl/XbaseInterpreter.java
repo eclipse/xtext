@@ -1244,16 +1244,16 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	protected Object _assignValueTo(JvmField jvmField, XAbstractFeatureCall assignment, Object value,
 			IEvaluationContext context, CancelIndicator indicator) {
 		Object receiver = getReceiver(assignment, context, indicator);
-		if (receiver == null)
-			throw new EvaluationException(new NullPointerException("Cannot assign value to field: "
-					+ jvmField.getIdentifier() + " on null instance"));
-		JvmTypeReference type = jvmField.getType();
-		Object coerced = coerceArgumentType(value, type);
 		Field field = javaReflectAccess.getField(jvmField);
 		try {
 			if (field == null) {
 				throw new NoSuchFieldException("Could not find field " + jvmField.getIdentifier());
 			}
+			if (!Modifier.isStatic(field.getModifiers()) && receiver == null)
+				throw new EvaluationException(new NullPointerException("Cannot assign value to field: "
+						+ jvmField.getIdentifier() + " on null instance"));
+			JvmTypeReference type = jvmField.getType();
+			Object coerced = coerceArgumentType(value, type);
 			field.setAccessible(true);
 			field.set(receiver, coerced);
 			return value;
