@@ -191,7 +191,7 @@
     context="org.eclipse.xtext.xbase.Xbase.XExpression"
     enabled="true"
     autoinsert="false">var ${name} = ${cursor}</template>
-<!--
+
 <template
     name="test"
     description="JUnit test method"
@@ -202,6 +202,7 @@
 def void ${testName}() {
 	${cursor}
 }</template>
+
 <template
     name="inject"
     description="Guice injected field"
@@ -209,7 +210,7 @@ def void ${testName}() {
     context="org.eclipse.xtend.core.Xtend.Member"
     enabled="true"
     autoinsert="false">${Inject:Import(com.google.inject.Inject)}@Inject ${type:CrossReference(JvmParameterizedTypeReference.type)} ${name}</template>
--->
+
 <template
     name="IF"
     description="template condition"
