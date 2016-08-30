@@ -170,10 +170,11 @@ public class ReferenceFinder implements IReferenceFinder {
 	public void findAllReferences(TargetURIs targetURIs, IResourceAccess resourceAccess,
 			IResourceDescriptions indexData, Acceptor acceptor, IProgressMonitor monitor) {
 		if (!targetURIs.isEmpty()) {
-			SubMonitor subMonitor = SubMonitor.convert(monitor, size(indexData.getAllResourceDescriptions()) / MONITOR_CHUNK_SIZE + 1);
+			Iterable<IResourceDescription> allResourceDescriptions = indexData.getAllResourceDescriptions();
+			SubMonitor subMonitor = SubMonitor.convert(monitor, size(allResourceDescriptions) / MONITOR_CHUNK_SIZE + 1);
 			IProgressMonitor useMe = subMonitor.newChild(1);
 			int i = 0;
-			for (IResourceDescription resourceDescription : indexData.getAllResourceDescriptions()) {
+			for (IResourceDescription resourceDescription : allResourceDescriptions) {
 				if (subMonitor.isCanceled())
 					throw new OperationCanceledException();
 				IReferenceFinder languageSpecific = getLanguageSpecificReferenceFinder(resourceDescription.getURI());

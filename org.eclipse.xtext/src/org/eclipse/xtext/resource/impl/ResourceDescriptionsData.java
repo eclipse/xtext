@@ -10,6 +10,7 @@ package org.eclipse.xtext.resource.impl;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -94,12 +95,12 @@ import com.google.common.collect.Sets;
 		if (descriptions instanceof Collection) {
 			expectedSize = ((Collection<?>) descriptions).size();
 		}
-		resourceDescriptionMap = Maps.newHashMapWithExpectedSize(expectedSize);
+		resourceDescriptionMap = new LinkedHashMap<>(expectedSize);
 		for (IResourceDescription desc : descriptions) {
 			resourceDescriptionMap.put(desc.getURI(), desc);
 		}
 		// magic number - it is assumend that we export at least 2 entries per resource description
-		lookupMap = Maps.newHashMapWithExpectedSize(resourceDescriptionMap.size() * 2);
+		lookupMap = new LinkedHashMap<>(resourceDescriptionMap.size() * 2);
 	    for (IResourceDescription description: descriptions) {
 	    	registerDescription(description, lookupMap);
 	    }
