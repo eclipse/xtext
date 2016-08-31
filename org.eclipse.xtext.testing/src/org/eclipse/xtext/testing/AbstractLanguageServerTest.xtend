@@ -171,6 +171,11 @@ abstract class AbstractLanguageServerTest implements Consumer<PublishDiagnostics
 
         return file.toURI.normalize.toPath
     }
+    
+    def String getVirtualFile(String path) {
+        val file = new File(root, path)
+        return file.toURI.normalize.toPath
+    }
 
     override accept(PublishDiagnosticsParams t) {
         diagnostics.put(t.uri, t.diagnostics)

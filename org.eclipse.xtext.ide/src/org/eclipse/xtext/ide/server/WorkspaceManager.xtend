@@ -131,7 +131,15 @@ class WorkspaceManager {
     
     def didClose(URI uri, CancelIndicator cancelIndicator) {
         openDocuments.remove(uri)
-        doBuild(#[uri], newArrayList, cancelIndicator)    
+        if (exists(uri)) {
+            doBuild(#[uri], newArrayList, cancelIndicator)
+        } else {
+            doBuild(newArrayList, #[uri], cancelIndicator)
+        }
+    }
+    
+    protected def boolean exists(URI uri) {
+        getProjectManager(uri).resourceSet.URIConverter.exists(uri, null)
     }
     
     def didSave(URI uri, CancelIndicator cancelIndicator) {

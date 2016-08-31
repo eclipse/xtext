@@ -20,6 +20,7 @@ import java.util.Set;
 import java.util.function.Consumer;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.xtext.ide.server.BuildManager;
 import org.eclipse.xtext.ide.server.Document;
 import org.eclipse.xtext.ide.server.IProjectDescriptionFactory;
@@ -28,6 +29,7 @@ import org.eclipse.xtext.ide.server.ProjectManager;
 import org.eclipse.xtext.resource.IExternalContentSupport;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.resource.impl.ChunkedResourceDescriptions;
 import org.eclipse.xtext.resource.impl.ProjectDescription;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData;
@@ -186,8 +188,21 @@ public class WorkspaceManager {
   
   public void didClose(final URI uri, final CancelIndicator cancelIndicator) {
     this.openDocuments.remove(uri);
-    ArrayList<URI> _newArrayList = CollectionLiterals.<URI>newArrayList();
-    this.doBuild(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(uri)), _newArrayList, cancelIndicator);
+    boolean _exists = this.exists(uri);
+    if (_exists) {
+      ArrayList<URI> _newArrayList = CollectionLiterals.<URI>newArrayList();
+      this.doBuild(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(uri)), _newArrayList, cancelIndicator);
+    } else {
+      ArrayList<URI> _newArrayList_1 = CollectionLiterals.<URI>newArrayList();
+      this.doBuild(_newArrayList_1, Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(uri)), cancelIndicator);
+    }
+  }
+  
+  protected boolean exists(final URI uri) {
+    ProjectManager _projectManager = this.getProjectManager(uri);
+    XtextResourceSet _resourceSet = _projectManager.getResourceSet();
+    URIConverter _uRIConverter = _resourceSet.getURIConverter();
+    return _uRIConverter.exists(uri, null);
   }
   
   public Object didSave(final URI uri, final CancelIndicator cancelIndicator) {

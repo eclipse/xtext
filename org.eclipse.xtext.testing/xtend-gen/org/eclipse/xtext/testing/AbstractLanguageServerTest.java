@@ -257,6 +257,13 @@ public abstract class AbstractLanguageServerTest implements Consumer<PublishDiag
     }
   }
   
+  public String getVirtualFile(final String path) {
+    final File file = new File(this.root, path);
+    URI _uRI = file.toURI();
+    URI _normalize = _uRI.normalize();
+    return this._uriExtensions.toPath(_normalize);
+  }
+  
   @Override
   public void accept(final PublishDiagnosticsParams t) {
     String _uri = t.getUri();

@@ -129,4 +129,55 @@ public class OpenDocumentTest extends AbstractTestLangLanguageServerTest {
     Diagnostic _head_2 = IterableExtensions.head(_get_2);
     Assert.assertNull(_head_2);
   }
+  
+  @Test
+  public void testDidClose() {
+    final String fileURI = this.writeFile("Foo.testlang", "");
+    this.initialize();
+    final String referencingFileURI = this.getVirtualFile("Bar.testlang");
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("type Bar {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("Foo foo");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.open(referencingFileURI, _builder.toString());
+    List<? extends Diagnostic> _get = this.diagnostics.get(referencingFileURI);
+    boolean _isEmpty = _get.isEmpty();
+    Assert.assertFalse(_isEmpty);
+    this.open(fileURI, "type Foo {}");
+    List<? extends Diagnostic> _get_1 = this.diagnostics.get(referencingFileURI);
+    boolean _isEmpty_1 = _get_1.isEmpty();
+    Assert.assertTrue(_isEmpty_1);
+    this.close(fileURI);
+    List<? extends Diagnostic> _get_2 = this.diagnostics.get(referencingFileURI);
+    boolean _isEmpty_2 = _get_2.isEmpty();
+    Assert.assertFalse(_isEmpty_2);
+  }
+  
+  @Test
+  public void testDidCloseInMemory() {
+    this.initialize();
+    final String fileURI = this.getVirtualFile("Foo.testlang");
+    this.open(fileURI, "type Foo {}");
+    final String referencingFileURI = this.getVirtualFile("Bar.testlang");
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("type Bar {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("Foo foo");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.open(referencingFileURI, _builder.toString());
+    List<? extends Diagnostic> _get = this.diagnostics.get(referencingFileURI);
+    boolean _isEmpty = _get.isEmpty();
+    Assert.assertTrue(_isEmpty);
+    this.close(fileURI);
+    List<? extends Diagnostic> _get_1 = this.diagnostics.get(referencingFileURI);
+    boolean _isEmpty_1 = _get_1.isEmpty();
+    Assert.assertFalse(_isEmpty_1);
+  }
 }

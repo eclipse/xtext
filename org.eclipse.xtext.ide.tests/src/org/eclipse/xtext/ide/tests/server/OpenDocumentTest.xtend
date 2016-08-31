@@ -23,7 +23,7 @@ class OpenDocumentTest extends AbstractTestLangLanguageServerTest {
     
     @Test
     def void testOpenedDocumentShadowsPersistedFile() {
-        val firstFile = 'MyType1.testlang' .writeFile( '''
+        val firstFile = 'MyType1.testlang'.writeFile( '''
             type Test {
                 NonExisting foo
             }
@@ -32,7 +32,7 @@ class OpenDocumentTest extends AbstractTestLangLanguageServerTest {
         
         assertEquals("Couldn't resolve reference to TypeDeclaration 'NonExisting'.", diagnostics.get(firstFile).head.message)
         
-        val path = 'MyType2.testlang' .writeFile( '''
+        val path = 'MyType2.testlang'.writeFile( '''
             type Foo {
             }
         ''')
@@ -57,10 +57,9 @@ class OpenDocumentTest extends AbstractTestLangLanguageServerTest {
         assertEquals("Couldn't resolve reference to TypeDeclaration 'NonExisting'.", diagnostics.get(firstFile).head.message)
     }
     
-    
-     @Test
+    @Test
     def void testDidChange() {
-        val firstFile = 'MyType1.testlang' .writeFile( '''
+        val firstFile = 'MyType1.testlang'.writeFile( '''
             type Test {
                 NonExisting foo
             }
@@ -87,5 +86,45 @@ class OpenDocumentTest extends AbstractTestLangLanguageServerTest {
 			]
 		].build)
         assertNull(diagnostics.get(firstFile).head)
+    }
+
+    @Test
+    def void testDidClose() {
+        val fileURI = 'Foo.testlang'.writeFile('')
+        initialize
+        
+        val referencingFileURI = 'Bar.testlang'.virtualFile
+        referencingFileURI.open('''
+            type Bar {
+                Foo foo
+            }
+        ''')
+        assertFalse(diagnostics.get(referencingFileURI).empty)
+        
+        
+        fileURI.open('type Foo {}')
+        assertTrue(diagnostics.get(referencingFileURI).empty)
+        
+        close(fileURI);
+        assertFalse(diagnostics.get(referencingFileURI).empty)
+    }
+
+    @Test
+    def void testDidCloseInMemory() {
+        initialize
+
+        val fileURI = 'Foo.testlang'.virtualFile 
+        fileURI.open('type Foo {}')
+        
+        val referencingFileURI = 'Bar.testlang'.virtualFile
+        referencingFileURI.open('''
+            type Bar {
+                Foo foo
+            }
+        ''') 
+        assertTrue(diagnostics.get(referencingFileURI).empty)
+        
+        close(fileURI);
+        assertFalse(diagnostics.get(referencingFileURI).empty)
     }
 }
