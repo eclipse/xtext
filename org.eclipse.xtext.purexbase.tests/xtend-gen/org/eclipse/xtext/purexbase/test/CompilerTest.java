@@ -614,6 +614,9 @@ public class CompilerTest {
       _builder_1.append("final Function1<String, String> _function = new Function1<String, String>() {");
       _builder_1.newLine();
       _builder_1.append("        ");
+      _builder_1.append("@Override");
+      _builder_1.newLine();
+      _builder_1.append("        ");
       _builder_1.append("public String apply(final String e) {");
       _builder_1.newLine();
       _builder_1.append("          ");
@@ -638,6 +641,9 @@ public class CompilerTest {
       _builder_1.append("final Function1<String, String> _function_1 = new Function1<String, String>() {");
       _builder_1.newLine();
       _builder_1.append("        ");
+      _builder_1.append("@Override");
+      _builder_1.newLine();
+      _builder_1.append("        ");
       _builder_1.append("public String apply(final String e) {");
       _builder_1.newLine();
       _builder_1.append("          ");
@@ -654,6 +660,9 @@ public class CompilerTest {
       _builder_1.newLine();
       _builder_1.append("      ");
       _builder_1.append("final Function1<String, String> _function_2 = new Function1<String, String>() {");
+      _builder_1.newLine();
+      _builder_1.append("        ");
+      _builder_1.append("@Override");
       _builder_1.newLine();
       _builder_1.append("        ");
       _builder_1.append("public String apply(final String e) {");
@@ -1424,6 +1433,9 @@ public class CompilerTest {
       _builder_1.append("final Function1<Shape, String> _function = new Function1<Shape, String>() {");
       _builder_1.newLine();
       _builder_1.append("        ");
+      _builder_1.append("@Override");
+      _builder_1.newLine();
+      _builder_1.append("        ");
       _builder_1.append("public String apply(final Shape shape) {");
       _builder_1.newLine();
       _builder_1.append("          ");
@@ -1655,6 +1667,9 @@ public class CompilerTest {
       _builder_1.newLine();
       _builder_1.append("    ");
       _builder_1.append("final Comparator<String> _function = new Comparator<String>() {");
+      _builder_1.newLine();
+      _builder_1.append("      ");
+      _builder_1.append("@Override");
       _builder_1.newLine();
       _builder_1.append("      ");
       _builder_1.append("public int compare(final String a, final String b) {");
