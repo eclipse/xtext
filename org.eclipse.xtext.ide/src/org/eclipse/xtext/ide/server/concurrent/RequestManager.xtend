@@ -17,6 +17,7 @@ import java.util.concurrent.Semaphore
 import org.eclipse.xtext.util.CancelIndicator
 import org.apache.log4j.Logger
 import org.eclipse.xtext.service.OperationCanceledManager
+import java.util.concurrent.CompletionException
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -127,7 +128,8 @@ class RequestManager {
 	
 	protected def void handleError(Throwable t) {
         if(t === null) return;
-        if (operationCanceledManager.isOperationCanceledException(t)) {
+        val cause = if (t instanceof CompletionException) t.cause else t
+        if (operationCanceledManager.isOperationCanceledException(cause)) {
             LOGGER.trace('Request has been canceled.')
         } else {
             LOGGER.error('Request fails: ' + t.message, t)

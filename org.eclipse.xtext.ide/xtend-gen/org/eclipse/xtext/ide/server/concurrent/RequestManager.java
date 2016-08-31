@@ -11,6 +11,7 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.google.inject.name.Named;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.Semaphore;
@@ -156,7 +157,14 @@ public class RequestManager {
     if ((t == null)) {
       return;
     }
-    boolean _isOperationCanceledException = this.operationCanceledManager.isOperationCanceledException(t);
+    Throwable _xifexpression = null;
+    if ((t instanceof CompletionException)) {
+      _xifexpression = ((CompletionException)t).getCause();
+    } else {
+      _xifexpression = t;
+    }
+    final Throwable cause = _xifexpression;
+    boolean _isOperationCanceledException = this.operationCanceledManager.isOperationCanceledException(cause);
     if (_isOperationCanceledException) {
       RequestManager.LOGGER.trace("Request has been canceled.");
     } else {
