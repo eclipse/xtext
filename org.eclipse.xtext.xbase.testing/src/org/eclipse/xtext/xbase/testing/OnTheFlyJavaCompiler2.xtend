@@ -16,6 +16,7 @@ import org.eclipse.xtext.xbase.testing.InMemoryJavaCompiler.Result
 @Singleton
 class OnTheFlyJavaCompiler2 {
 	InMemoryJavaCompiler inMemoryCompiler
+	JavaVersion javaVersion
 
 	/**
 	 * Creates a new OnTheFlyCompiler that accepts Java6 compliant code.
@@ -27,6 +28,22 @@ class OnTheFlyJavaCompiler2 {
 	
 	new(ClassLoader scope, JavaVersion version) {
 		inMemoryCompiler = new InMemoryJavaCompiler(scope, version)
+		javaVersion = version
+	}
+
+	/**
+	 * @since 2.11
+	 */
+	def void setJavaVersion(JavaVersion version) {
+		inMemoryCompiler.setJavaVersion(version)
+		javaVersion = version
+	}
+
+	/**
+	 * @since 2.11
+	 */
+	def JavaVersion getJavaVersion() {
+		return javaVersion
 	}
 	
 	def Class<?> compileToClass(String classname, String code) {

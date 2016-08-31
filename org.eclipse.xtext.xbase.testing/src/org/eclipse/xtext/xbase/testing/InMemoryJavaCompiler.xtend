@@ -130,10 +130,7 @@ class InMemoryJavaCompiler {
 		nameEnv = new ClassLoaderBasedNameEnvironment(parent)
 		parentClassLoader = parent
 		compilerOptions = new CompilerOptions
-		val classFmt = javaVersion.toClassFmt
-		sourceLevel = classFmt
-		complianceLevel = classFmt
-		compilerOptions.targetJDK = classFmt
+		setJavaVersion(javaVersion)
 		compilerOptions.inlineJsrBytecode = true
 		compilerOptions.preserveAllLocalVariables = true
 	}
@@ -142,6 +139,16 @@ class InMemoryJavaCompiler {
 		nameEnv = new ClassLoaderBasedNameEnvironment(parent)
 		parentClassLoader = parent
 		this.compilerOptions = new CompilerOptions(compilerOptions.map)
+	}
+
+	/**
+	 * @since 2.11
+	 */
+	def setJavaVersion(JavaVersion javaVersion) {
+		val classFmt = javaVersion.toClassFmt
+		sourceLevel = classFmt
+		complianceLevel = classFmt
+		compilerOptions.targetJDK = classFmt
 	}
 	
 	private def long toClassFmt(JavaVersion version) {
