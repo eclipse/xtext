@@ -71,9 +71,16 @@ public class XbaseTemplateContext extends XtextTemplateContext {
 	}
 
 	@Override
+	public TemplateBuffer evaluateForDisplay(Template template) throws BadLocationException, TemplateException {
+		// Ensure clean state before evaluation starts
+		imports.clear();
+		return super.evaluateForDisplay(template);
+	}
+
+	@Override
 	public TemplateBuffer evaluate(Template template) throws BadLocationException, TemplateException {
 		XtextDocument xDocument = (XtextDocument) getDocument();
-		// Injure clean state before evaluation starts
+		// Ensure clean state before evaluation starts
 		imports.clear();
 		TemplateBuffer resolvedContent = super.evaluate(template);
 
