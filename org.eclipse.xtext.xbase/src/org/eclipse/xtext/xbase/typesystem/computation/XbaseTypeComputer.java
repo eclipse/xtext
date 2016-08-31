@@ -974,11 +974,28 @@ public class XbaseTypeComputer extends AbstractTypeComputer implements ITypeComp
 		ITypeComputationState expressionState = state.withReturnExpectation();
 		LightweightTypeReference primitiveVoid = getPrimitiveVoid(state);
 		if (returnValue != null) {
-			expressionState.computeTypes(returnValue);
+			checkValidReturnValue(returnValue, expressionState);
 			state.acceptActualType(primitiveVoid, ConformanceFlags.NO_IMPLICIT_RETURN);
 		} else {
 			state.acceptActualType(primitiveVoid, ConformanceFlags.EXPLICIT_VOID_RETURN);
 			state.acceptActualType(primitiveVoid, ConformanceFlags.NO_IMPLICIT_RETURN);
+		}
+	}
+
+	protected void checkValidReturnValue(XExpression returnValue, ITypeComputationState expressionState) {
+		ITypeComputationResult result = expressionState.computeTypes(returnValue);
+		LightweightTypeReference actualType = result.getActualExpressionType();
+		int conformanceFlags = result.getConformanceFlags();
+		if (actualType.isPrimitiveVoid() && (conformanceFlags & ConformanceFlags.NO_IMPLICIT_RETURN) != 0) {
+			expressionState.addDiagnostic(new EObjectDiagnosticImpl(
+					Severity.ERROR,
+					IssueCodes.INVALID_RETURN,
+					"Return cannot be nested.",
+					returnValue,
+					null,
+					-1,
+					new String[] { 
+					}));
 		}
 	}
 	

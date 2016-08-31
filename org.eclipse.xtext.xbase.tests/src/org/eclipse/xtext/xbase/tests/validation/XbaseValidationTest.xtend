@@ -14,6 +14,7 @@ import org.eclipse.xtext.xbase.XbasePackage
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
 import org.eclipse.xtext.xbase.validation.IssueCodes
 import org.junit.Test
+import org.eclipse.emf.ecore.EClass
 
 /**
  * @author Anton Kosyakov - Initial contribution and API
@@ -1134,6 +1135,52 @@ class XbaseValidationTest extends AbstractXbaseTestCase {
 			{
 				return return 0
 			}
-		'''.expression.assertError(XbasePackage.Literals.XRETURN_EXPRESSION, IssueCodes.INVALID_RETURN)
+		'''.assertNestedReturn(XbasePackage.Literals.XRETURN_EXPRESSION)
+	}
+
+	@Test def void testInvalidNestedReturnBug406762_1() {
+		'''
+			{
+				return {
+					return 0
+				}
+			}
+		'''.assertNestedReturn(XbasePackage.Literals.XBLOCK_EXPRESSION)
+	}
+
+	@Test def void testInvalidNestedReturnBug406762_2() {
+		'''
+			{
+				return {
+					if (true) return 0 else return 1
+				}
+			}
+		'''.assertNestedReturn(XbasePackage.Literals.XBLOCK_EXPRESSION)
+	}
+
+	@Test def void testInvalidNestedReturnBug406762_3() {
+		'''
+			{
+				return 
+					if (true) return 0 else return 1
+			}
+		'''.assertNestedReturn(XbasePackage.Literals.XIF_EXPRESSION)
+	}
+
+	@Test def void testInvalidNestedReturnBug406762_4() {
+		'''
+			{
+				return 
+					throw return new RuntimeException()
+			}
+		'''.assertNestedReturn(XbasePackage.Literals.XTHROW_EXPRESSION)
+	}
+
+	def private assertNestedReturn(CharSequence input, EClass objectType) {
+		input.expression.assertError(
+			objectType,
+			IssueCodes.INVALID_RETURN,
+			"Return cannot be nested"
+		)
 	}
 }

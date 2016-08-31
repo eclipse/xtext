@@ -1564,7 +1564,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	}
 
 	protected void _toJavaExpression(XReturnExpression returnExpression, ITreeAppendable b) {
-		b.append("error - couldn't compile nested return");
+		b.append("/* error - couldn't compile nested return */");
 	}
 
 	protected void _toJavaStatement(final XClosure closure, final ITreeAppendable b, boolean isReferenced) {

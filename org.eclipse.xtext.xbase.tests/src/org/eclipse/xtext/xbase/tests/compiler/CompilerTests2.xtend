@@ -1857,14 +1857,61 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 	}
 
 	@Test def void test406762_NestedReturn() {
-		// this requires argument preparation
 		'''
 			{
 				return return 0
 			}
 		'''.compilesTo('''
 			return 0;
-			return error - couldn't compile nested return;
+			return /* error - couldn't compile nested return */;
+		''', false)
+	}
+
+	@Test def void test406762_NestedReturn2() {
+		'''
+			{
+				return { 
+					return 0
+				}
+			}
+		'''.compilesTo('''
+			return 0;
+			return /* error - couldn't compile nested return */;
+		''', false)
+	}
+
+	@Test def void test406762_NestedReturn3() {
+		'''
+			{
+				return { 
+					if (true) return 0 else return 1
+				}
+			}
+		'''.compilesTo('''
+			int _xifexpression = (int) 0;
+			if (true) {
+			  return 0;
+			} else {
+			  return 1;
+			}
+			return _xifexpression;
+		''', false)
+	}
+
+	@Test def void test406762_NestedReturn4() {
+		'''
+			{
+				return 
+					if (true) return 0 else return 1
+			}
+		'''.compilesTo('''
+			int _xifexpression = (int) 0;
+			if (true) {
+			  return 0;
+			} else {
+			  return 1;
+			}
+			return _xifexpression;
 		''', false)
 	}
 

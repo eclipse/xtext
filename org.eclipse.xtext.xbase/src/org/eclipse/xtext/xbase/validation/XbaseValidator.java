@@ -402,10 +402,6 @@ public class XbaseValidator extends AbstractXbaseValidator {
 	@Check
 	public void checkReturn(XReturnExpression expr) {
 		XExpression returnedExpression = expr.getExpression();
-		if (returnedExpression instanceof XReturnExpression) {
-			error("Return cannot be nested.", expr, null,
-					ValidationMessageAcceptor.INSIGNIFICANT_INDEX, INVALID_RETURN);
-		}
 		IResolvedTypes resolvedTypes = typeResolver.resolveTypes(expr);
 		LightweightTypeReference expectedReturnType = resolvedTypes.getExpectedReturnType(expr);
 		if (expectedReturnType == null) {
