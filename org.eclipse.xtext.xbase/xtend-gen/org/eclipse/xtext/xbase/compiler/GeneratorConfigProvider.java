@@ -101,12 +101,13 @@ public class GeneratorConfigProvider implements IGeneratorConfigProvider {
       _elvis = _findInEmfObject;
     } else {
       GeneratorConfigProvider.GeneratorConfigAdapter _generatorConfigAdapter = new GeneratorConfigProvider.GeneratorConfigAdapter();
-      _elvis = _generatorConfigAdapter;
+      final Procedure1<GeneratorConfigProvider.GeneratorConfigAdapter> _function = (GeneratorConfigProvider.GeneratorConfigAdapter it) -> {
+        it.attachToEmfObject(resourceSet);
+      };
+      GeneratorConfigProvider.GeneratorConfigAdapter _doubleArrow = ObjectExtensions.<GeneratorConfigProvider.GeneratorConfigAdapter>operator_doubleArrow(_generatorConfigAdapter, _function);
+      _elvis = _doubleArrow;
     }
-    final Procedure1<GeneratorConfigProvider.GeneratorConfigAdapter> _function = (GeneratorConfigProvider.GeneratorConfigAdapter it) -> {
-      it.attachToEmfObject(resourceSet);
-    };
-    final GeneratorConfigProvider.GeneratorConfigAdapter adapter = ObjectExtensions.<GeneratorConfigProvider.GeneratorConfigAdapter>operator_doubleArrow(_elvis, _function);
+    final GeneratorConfigProvider.GeneratorConfigAdapter adapter = _elvis;
     return adapter.language2GeneratorConfig.put(this.languageId, config);
   }
   
