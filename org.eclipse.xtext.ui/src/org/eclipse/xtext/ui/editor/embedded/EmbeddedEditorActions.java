@@ -324,7 +324,7 @@ public class EmbeddedEditorActions {
 		action.setActionDefinitionId(ITextEditorActionDefinitionIds.CONTENT_ASSIST_PROPOSALS);
 		setAction(ITextEditorActionConstants.CONTENT_ASSIST, action);
 		
-		action = new TextViewerOperationAction(EmbeddedEditorMessages.getBundleForConstructedKeys(), "Editor.SelectAll.", viewer, ITextOperationTarget.SELECT_ALL);
+		action = new TextViewerOperationAction(EmbeddedEditorMessages.getBundleForConstructedKeys(), "Editor.SelectAll.", viewer, ITextOperationTarget.SELECT_ALL, true);
 		action.setActionDefinitionId(IWorkbenchCommandConstants.EDIT_SELECT_ALL);
 		setAction(ITextEditorActionConstants.SELECT_ALL, action);
 		
