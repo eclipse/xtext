@@ -9,8 +9,8 @@ package org.eclipse.xtext.resource.impl;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -113,17 +113,17 @@ import com.google.common.collect.Sets;
 	
 	public ResourceDescriptionsData copy() {
 		return new ResourceDescriptionsData(
-				Maps.newHashMap(resourceDescriptionMap),
+				Maps.newLinkedHashMap(resourceDescriptionMap),
 				copyLookupMap());
 	}
 	
 	protected Map<QualifiedName, Object> copyLookupMap() {
-		Map<QualifiedName, Object> result = Maps.newHashMap(lookupMap);
+		Map<QualifiedName, Object> result = Maps.newLinkedHashMap(lookupMap);
 		for(Map.Entry<QualifiedName, Object> entry: result.entrySet()) {
 			Object value = entry.getValue();
 			if (value instanceof Set<?>) {
 				@SuppressWarnings("unchecked")
-				Set<IResourceDescription> copiedValue = new HashSet<IResourceDescription>((Set<? extends IResourceDescription>) value);
+				Set<IResourceDescription> copiedValue = new LinkedHashSet<IResourceDescription>((Set<? extends IResourceDescription>) value);
 				if (copiedValue.size() <= 1)
 					throw new IllegalStateException("Unexpected number of elements in the value set: " + copiedValue.size() + " for " + entry.getKey());
 				entry.setValue(copiedValue);
@@ -219,7 +219,7 @@ import com.google.common.collect.Sets;
 			if (existing != null && existing != description) {
 				Set<IResourceDescription> set = null;
 				if (existing instanceof IResourceDescription) {
-					set = Sets.newHashSetWithExpectedSize(2);
+					set = Sets.newLinkedHashSetWithExpectedSize(2);
 					set.add((IResourceDescription)existing);
 				} else {
 					set = (Set<IResourceDescription>) existing;
