@@ -10,8 +10,11 @@ package org.eclipse.xtext.ide.server.hover
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import io.typefox.lsapi.Hover
+import io.typefox.lsapi.MarkedString
+import io.typefox.lsapi.builders.HoverBuilder
 import io.typefox.lsapi.impl.HoverImpl
 import io.typefox.lsapi.impl.MarkedStringImpl
+import java.util.List
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider
 import org.eclipse.xtext.ide.server.DocumentExtensions
@@ -24,6 +27,8 @@ import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.util.ITextRegion
 import org.eclipse.xtext.util.Pair
 import org.eclipse.xtext.util.Tuples
+
+import static java.util.Collections.*
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -50,22 +55,29 @@ class HoverService {
 			return new HoverImpl(emptyList, null)
 		}
 		val element = pair.first
-		if (element === null)
-			return new HoverImpl(emptyList, null)
-
-		val documentation = element.documentation
-		if (documentation === null)
-			return new HoverImpl(emptyList, null)
-
-		val contents = #[new MarkedStringImpl(null, documentation)]
 		
+		val contents = getContents(element)
+		if (contents === null)
+			return new HoverImpl(emptyList, null)
+
 		val ITextRegion textRegion = pair.second
 
 		if (!textRegion.contains(offset))
 			return new HoverImpl(emptyList, null)
 
 		val range = resource.newRange(textRegion)
-		return new HoverImpl(contents, range)
+		return new HoverBuilder() [ b |
+    		b.range(range)
+		    contents.forEach[b.content(it)]   
+		].build
+	}
+	
+	protected def List<? extends MarkedString> getContents(EObject element) {
+	    val documentation = element.documentation
+        if (documentation === null)
+            return emptyList
+        else
+            #[new MarkedStringImpl(null, documentation)]
 	}
 
 	protected def Pair<EObject, ITextRegion> getXtextElementAt(XtextResource resource, int offset) {

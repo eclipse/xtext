@@ -11,11 +11,14 @@ import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import io.typefox.lsapi.Hover;
+import io.typefox.lsapi.MarkedString;
+import io.typefox.lsapi.builders.HoverBuilder;
 import io.typefox.lsapi.impl.HoverImpl;
 import io.typefox.lsapi.impl.MarkedStringImpl;
 import io.typefox.lsapi.impl.RangeImpl;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Consumer;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
 import org.eclipse.xtext.ide.server.DocumentExtensions;
@@ -31,6 +34,7 @@ import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -58,30 +62,48 @@ public class HoverService {
   public Hover hover(final XtextResource resource, final int offset) {
     final Pair<EObject, ITextRegion> pair = this.getXtextElementAt(resource, offset);
     if ((((pair == null) || (pair.getFirst() == null)) || (pair.getSecond() == null))) {
-      List<MarkedStringImpl> _emptyList = CollectionLiterals.<MarkedStringImpl>emptyList();
+      List<MarkedStringImpl> _emptyList = Collections.<MarkedStringImpl>emptyList();
       return new HoverImpl(_emptyList, null);
     }
     final EObject element = pair.getFirst();
-    if ((element == null)) {
-      List<MarkedStringImpl> _emptyList_1 = CollectionLiterals.<MarkedStringImpl>emptyList();
+    final List<? extends MarkedString> contents = this.getContents(element);
+    if ((contents == null)) {
+      List<MarkedStringImpl> _emptyList_1 = Collections.<MarkedStringImpl>emptyList();
       return new HoverImpl(_emptyList_1, null);
     }
-    final String documentation = this._iEObjectDocumentationProvider.getDocumentation(element);
-    if ((documentation == null)) {
-      List<MarkedStringImpl> _emptyList_2 = CollectionLiterals.<MarkedStringImpl>emptyList();
-      return new HoverImpl(_emptyList_2, null);
-    }
-    MarkedStringImpl _markedStringImpl = new MarkedStringImpl(null, documentation);
-    final List<MarkedStringImpl> contents = Collections.<MarkedStringImpl>unmodifiableList(CollectionLiterals.<MarkedStringImpl>newArrayList(_markedStringImpl));
     final ITextRegion textRegion = pair.getSecond();
     boolean _contains = textRegion.contains(offset);
     boolean _not = (!_contains);
     if (_not) {
-      List<MarkedStringImpl> _emptyList_3 = CollectionLiterals.<MarkedStringImpl>emptyList();
-      return new HoverImpl(_emptyList_3, null);
+      List<MarkedStringImpl> _emptyList_2 = Collections.<MarkedStringImpl>emptyList();
+      return new HoverImpl(_emptyList_2, null);
     }
     final RangeImpl range = this._documentExtensions.newRange(resource, textRegion);
-    return new HoverImpl(contents, range);
+    final Procedure1<HoverBuilder> _function = (HoverBuilder b) -> {
+      b.range(range);
+      final Consumer<MarkedString> _function_1 = (MarkedString it) -> {
+        b.content(it);
+      };
+      contents.forEach(_function_1);
+    };
+    HoverBuilder _hoverBuilder = new HoverBuilder(_function);
+    return _hoverBuilder.build();
+  }
+  
+  protected List<? extends MarkedString> getContents(final EObject element) {
+    List<MarkedString> _xblockexpression = null;
+    {
+      final String documentation = this._iEObjectDocumentationProvider.getDocumentation(element);
+      List<MarkedString> _xifexpression = null;
+      if ((documentation == null)) {
+        return Collections.<MarkedString>emptyList();
+      } else {
+        MarkedStringImpl _markedStringImpl = new MarkedStringImpl(null, documentation);
+        _xifexpression = Collections.<MarkedString>unmodifiableList(CollectionLiterals.<MarkedString>newArrayList(_markedStringImpl));
+      }
+      _xblockexpression = _xifexpression;
+    }
+    return _xblockexpression;
   }
   
   protected Pair<EObject, ITextRegion> getXtextElementAt(final XtextResource resource, final int offset) {
