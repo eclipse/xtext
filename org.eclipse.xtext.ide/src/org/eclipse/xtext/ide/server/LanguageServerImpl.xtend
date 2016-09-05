@@ -45,7 +45,6 @@ import io.typefox.lsapi.impl.CompletionOptionsImpl
 import io.typefox.lsapi.impl.DiagnosticImpl
 import io.typefox.lsapi.impl.HoverImpl
 import io.typefox.lsapi.impl.InitializeResultImpl
-import io.typefox.lsapi.impl.LanguageDescriptionImpl
 import io.typefox.lsapi.impl.PositionImpl
 import io.typefox.lsapi.impl.PublishDiagnosticsParamsImpl
 import io.typefox.lsapi.impl.RangeImpl
@@ -61,21 +60,17 @@ import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtend.lib.annotations.Accessors
-import org.eclipse.xtext.LanguageInfo
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistEntry
-import org.eclipse.xtext.ide.editor.syntaxcoloring.IEditorHighlightingConfigurationProvider
 import org.eclipse.xtext.ide.server.concurrent.CancellableIndicator
 import org.eclipse.xtext.ide.server.concurrent.RequestManager
 import org.eclipse.xtext.ide.server.contentassist.ContentAssistService
 import org.eclipse.xtext.ide.server.findReferences.WorkspaceResourceAccess
+import org.eclipse.xtext.ide.server.formatting.FormattingService
 import org.eclipse.xtext.ide.server.hover.HoverService
 import org.eclipse.xtext.ide.server.symbol.DocumentSymbolService
 import org.eclipse.xtext.ide.server.symbol.WorkspaceSymbolService
-import org.eclipse.xtext.resource.FileExtensionProvider
-import org.eclipse.xtext.resource.IMimeTypeProvider
 import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.eclipse.xtext.validation.Issue
-import org.eclipse.xtext.ide.server.formatting.FormattingService
 
 /**
  * @author Sven Efftinge - Initial contribution and API
