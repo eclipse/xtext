@@ -121,21 +121,6 @@ import org.eclipse.xtext.ide.server.formatting.FormattingService
 			documentFormattingProvider = true
 			documentRangeFormattingProvider = true
 		]
-		result.supportedLanguages = newArrayList()
-		for (serviceProvider : languagesRegistry.extensionToFactoryMap.values.filter(IResourceServiceProvider).toSet) {
-		    val extensionProvider = serviceProvider.get(FileExtensionProvider)
-		    val mimeTypesProvider = serviceProvider.get(IMimeTypeProvider)
-		    val langInfo = serviceProvider.get(LanguageInfo)
-		    val highlightingProvider = serviceProvider.get(IEditorHighlightingConfigurationProvider)
-		    val language = new LanguageDescriptionImpl => [
-		        fileExtensions = extensionProvider.fileExtensions.toList
-		        languageId = langInfo.languageName
-		        mimeTypes = mimeTypesProvider.mimeTypes
-		        if (highlightingProvider !== null)
-		          highlightingConfiguration = highlightingProvider.getConfiguration(params.clientName)
-		    ]
-		    result.supportedLanguages.add(language)
-		}
 
 		requestManager.runWrite([ cancelIndicator |
 			val rootURI = URI.createFileURI(params.rootPath).toPath.toUri
