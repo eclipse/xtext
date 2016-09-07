@@ -127,7 +127,10 @@ public class XtextQuickAssistProcessor extends AbstractIssueResolutionProviderAd
     	for(Annotation annotation : applicableAnnotations) {
 			if (annotation instanceof SpellingAnnotation) {
 				SpellingProblem spellingProblem = ((SpellingAnnotation) annotation).getSpellingProblem();
-				result.addAll(asList(spellingProblem.getProposals()));
+				ICompletionProposal[] proposals = spellingProblem.getProposals();
+				if (proposals != null) {
+					result.addAll(asList(proposals));
+				}
 			} else {
 				final Issue issue = issueUtil.getIssueFromAnnotation(annotation);
 				if (issue != null) {
