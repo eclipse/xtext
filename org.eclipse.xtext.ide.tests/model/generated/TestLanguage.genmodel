@@ -12,14 +12,29 @@
     <genClasses ecoreClass="TestLanguage.ecore#//TypeDeclaration">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TestLanguage.ecore#//TypeDeclaration/name"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference TestLanguage.ecore#//TypeDeclaration/superType"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TestLanguage.ecore#//TypeDeclaration/properties"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TestLanguage.ecore#//TypeDeclaration/members"/>
+    </genClasses>
+    <genClasses ecoreClass="TestLanguage.ecore#//Member">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TestLanguage.ecore#//Member/name"/>
     </genClasses>
     <genClasses ecoreClass="TestLanguage.ecore#//Property">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TestLanguage.ecore#//Property/type"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TestLanguage.ecore#//Property/name"/>
     </genClasses>
     <genClasses ecoreClass="TestLanguage.ecore#//Type">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TestLanguage.ecore#//Type/arrayDiemensions"/>
+    </genClasses>
+    <genClasses ecoreClass="TestLanguage.ecore#//Operation">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TestLanguage.ecore#//Operation/params"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TestLanguage.ecore#//Operation/returnType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TestLanguage.ecore#//Operation/operationCall"/>
+    </genClasses>
+    <genClasses ecoreClass="TestLanguage.ecore#//OperationCall">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference TestLanguage.ecore#//OperationCall/operation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TestLanguage.ecore#//OperationCall/params"/>
+    </genClasses>
+    <genClasses ecoreClass="TestLanguage.ecore#//Parameter">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TestLanguage.ecore#//Parameter/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TestLanguage.ecore#//Parameter/type"/>
     </genClasses>
     <genClasses ecoreClass="TestLanguage.ecore#//TypeReference">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference TestLanguage.ecore#//TypeReference/typeRef"/>

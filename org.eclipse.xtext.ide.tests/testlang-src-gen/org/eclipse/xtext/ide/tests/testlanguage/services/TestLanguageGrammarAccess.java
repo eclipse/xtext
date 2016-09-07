@@ -10,6 +10,7 @@ package org.eclipse.xtext.ide.tests.testlanguage.services;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.List;
+import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
@@ -54,17 +55,17 @@ public class TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		private final CrossReference cSuperTypeTypeDeclarationCrossReference_2_1_0 = (CrossReference)cSuperTypeAssignment_2_1.eContents().get(0);
 		private final RuleCall cSuperTypeTypeDeclarationIDTerminalRuleCall_2_1_0_1 = (RuleCall)cSuperTypeTypeDeclarationCrossReference_2_1_0.eContents().get(1);
 		private final Keyword cLeftCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
-		private final Assignment cPropertiesAssignment_4 = (Assignment)cGroup.eContents().get(4);
-		private final RuleCall cPropertiesPropertyParserRuleCall_4_0 = (RuleCall)cPropertiesAssignment_4.eContents().get(0);
+		private final Assignment cMembersAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cMembersMemberParserRuleCall_4_0 = (RuleCall)cMembersAssignment_4.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//TypeDeclaration:
 		//	'type' name=ID ('extends' superType=[TypeDeclaration])? '{'
-		//	properties+=Property*
+		//	members+=Member*
 		//	'}';
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'type' name=ID ('extends' superType=[TypeDeclaration])? '{' properties+=Property* '}'
+		//'type' name=ID ('extends' superType=[TypeDeclaration])? '{' members+=Member* '}'
 		public Group getGroup() { return cGroup; }
 		
 		//'type'
@@ -94,14 +95,33 @@ public class TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
 		
-		//properties+=Property*
-		public Assignment getPropertiesAssignment_4() { return cPropertiesAssignment_4; }
+		//members+=Member*
+		public Assignment getMembersAssignment_4() { return cMembersAssignment_4; }
 		
-		//Property
-		public RuleCall getPropertiesPropertyParserRuleCall_4_0() { return cPropertiesPropertyParserRuleCall_4_0; }
+		//Member
+		public RuleCall getMembersMemberParserRuleCall_4_0() { return cMembersMemberParserRuleCall_4_0; }
 		
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_5() { return cRightCurlyBracketKeyword_5; }
+	}
+	public class MemberElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ide.tests.testlanguage.TestLanguage.Member");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cPropertyParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cOperationParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		
+		//Member:
+		//	Property | Operation;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//Property | Operation
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//Property
+		public RuleCall getPropertyParserRuleCall_0() { return cPropertyParserRuleCall_0; }
+		
+		//Operation
+		public RuleCall getOperationParserRuleCall_1() { return cOperationParserRuleCall_1; }
 	}
 	public class PropertyElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ide.tests.testlanguage.TestLanguage.Property");
@@ -169,6 +189,198 @@ public class TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		//']'
 		public Keyword getRightSquareBracketKeyword_1_1() { return cRightSquareBracketKeyword_1_1; }
 	}
+	public class OperationElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ide.tests.testlanguage.TestLanguage.Operation");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cOperationAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cOpKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
+		private final Keyword cLeftParenthesisKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
+		private final Assignment cParamsAssignment_4_0 = (Assignment)cGroup_4.eContents().get(0);
+		private final RuleCall cParamsParameterParserRuleCall_4_0_0 = (RuleCall)cParamsAssignment_4_0.eContents().get(0);
+		private final Group cGroup_4_1 = (Group)cGroup_4.eContents().get(1);
+		private final Keyword cCommaKeyword_4_1_0 = (Keyword)cGroup_4_1.eContents().get(0);
+		private final Assignment cParamsAssignment_4_1_1 = (Assignment)cGroup_4_1.eContents().get(1);
+		private final RuleCall cParamsParameterParserRuleCall_4_1_1_0 = (RuleCall)cParamsAssignment_4_1_1.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		private final Group cGroup_6 = (Group)cGroup.eContents().get(6);
+		private final Keyword cColonKeyword_6_0 = (Keyword)cGroup_6.eContents().get(0);
+		private final Assignment cReturnTypeAssignment_6_1 = (Assignment)cGroup_6.eContents().get(1);
+		private final RuleCall cReturnTypeTypeParserRuleCall_6_1_0 = (RuleCall)cReturnTypeAssignment_6_1.eContents().get(0);
+		private final Keyword cLeftCurlyBracketKeyword_7 = (Keyword)cGroup.eContents().get(7);
+		private final Assignment cOperationCallAssignment_8 = (Assignment)cGroup.eContents().get(8);
+		private final RuleCall cOperationCallOperationCallParserRuleCall_8_0 = (RuleCall)cOperationCallAssignment_8.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_9 = (Keyword)cGroup.eContents().get(9);
+		
+		//Operation:
+		//	{Operation} 'op' name=ID '(' (params+=Parameter (',' params+=Parameter)*)? ')' (':' returnType=Type)? '{'
+		//	operationCall=OperationCall?
+		//	'}';
+		@Override public ParserRule getRule() { return rule; }
+		
+		//{Operation} 'op' name=ID '(' (params+=Parameter (',' params+=Parameter)*)? ')' (':' returnType=Type)? '{'
+		//operationCall=OperationCall? '}'
+		public Group getGroup() { return cGroup; }
+		
+		//{Operation}
+		public Action getOperationAction_0() { return cOperationAction_0; }
+		
+		//'op'
+		public Keyword getOpKeyword_1() { return cOpKeyword_1; }
+		
+		//name=ID
+		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
+		
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
+		
+		//'('
+		public Keyword getLeftParenthesisKeyword_3() { return cLeftParenthesisKeyword_3; }
+		
+		//(params+=Parameter (',' params+=Parameter)*)?
+		public Group getGroup_4() { return cGroup_4; }
+		
+		//params+=Parameter
+		public Assignment getParamsAssignment_4_0() { return cParamsAssignment_4_0; }
+		
+		//Parameter
+		public RuleCall getParamsParameterParserRuleCall_4_0_0() { return cParamsParameterParserRuleCall_4_0_0; }
+		
+		//(',' params+=Parameter)*
+		public Group getGroup_4_1() { return cGroup_4_1; }
+		
+		//','
+		public Keyword getCommaKeyword_4_1_0() { return cCommaKeyword_4_1_0; }
+		
+		//params+=Parameter
+		public Assignment getParamsAssignment_4_1_1() { return cParamsAssignment_4_1_1; }
+		
+		//Parameter
+		public RuleCall getParamsParameterParserRuleCall_4_1_1_0() { return cParamsParameterParserRuleCall_4_1_1_0; }
+		
+		//')'
+		public Keyword getRightParenthesisKeyword_5() { return cRightParenthesisKeyword_5; }
+		
+		//(':' returnType=Type)?
+		public Group getGroup_6() { return cGroup_6; }
+		
+		//':'
+		public Keyword getColonKeyword_6_0() { return cColonKeyword_6_0; }
+		
+		//returnType=Type
+		public Assignment getReturnTypeAssignment_6_1() { return cReturnTypeAssignment_6_1; }
+		
+		//Type
+		public RuleCall getReturnTypeTypeParserRuleCall_6_1_0() { return cReturnTypeTypeParserRuleCall_6_1_0; }
+		
+		//'{'
+		public Keyword getLeftCurlyBracketKeyword_7() { return cLeftCurlyBracketKeyword_7; }
+		
+		//operationCall=OperationCall?
+		public Assignment getOperationCallAssignment_8() { return cOperationCallAssignment_8; }
+		
+		//OperationCall
+		public RuleCall getOperationCallOperationCallParserRuleCall_8_0() { return cOperationCallOperationCallParserRuleCall_8_0; }
+		
+		//'}'
+		public Keyword getRightCurlyBracketKeyword_9() { return cRightCurlyBracketKeyword_9; }
+	}
+	public class OperationCallElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ide.tests.testlanguage.TestLanguage.OperationCall");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cOperationAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final CrossReference cOperationOperationCrossReference_0_0 = (CrossReference)cOperationAssignment_0.eContents().get(0);
+		private final RuleCall cOperationOperationIDTerminalRuleCall_0_0_1 = (RuleCall)cOperationOperationCrossReference_0_0.eContents().get(1);
+		private final Keyword cLeftParenthesisKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
+		private final Assignment cParamsAssignment_2_0 = (Assignment)cGroup_2.eContents().get(0);
+		private final RuleCall cParamsINTTerminalRuleCall_2_0_0 = (RuleCall)cParamsAssignment_2_0.eContents().get(0);
+		private final Group cGroup_2_1 = (Group)cGroup_2.eContents().get(1);
+		private final Keyword cCommaKeyword_2_1_0 = (Keyword)cGroup_2_1.eContents().get(0);
+		private final Assignment cParamsAssignment_2_1_1 = (Assignment)cGroup_2_1.eContents().get(1);
+		private final RuleCall cParamsINTTerminalRuleCall_2_1_1_0 = (RuleCall)cParamsAssignment_2_1_1.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		
+		//OperationCall:
+		//	operation=[Operation] '(' (params+=INT (',' params+=INT)*)? ')';
+		@Override public ParserRule getRule() { return rule; }
+		
+		//operation=[Operation] '(' (params+=INT (',' params+=INT)*)? ')'
+		public Group getGroup() { return cGroup; }
+		
+		//operation=[Operation]
+		public Assignment getOperationAssignment_0() { return cOperationAssignment_0; }
+		
+		//[Operation]
+		public CrossReference getOperationOperationCrossReference_0_0() { return cOperationOperationCrossReference_0_0; }
+		
+		//ID
+		public RuleCall getOperationOperationIDTerminalRuleCall_0_0_1() { return cOperationOperationIDTerminalRuleCall_0_0_1; }
+		
+		//'('
+		public Keyword getLeftParenthesisKeyword_1() { return cLeftParenthesisKeyword_1; }
+		
+		//(params+=INT (',' params+=INT)*)?
+		public Group getGroup_2() { return cGroup_2; }
+		
+		//params+=INT
+		public Assignment getParamsAssignment_2_0() { return cParamsAssignment_2_0; }
+		
+		//INT
+		public RuleCall getParamsINTTerminalRuleCall_2_0_0() { return cParamsINTTerminalRuleCall_2_0_0; }
+		
+		//(',' params+=INT)*
+		public Group getGroup_2_1() { return cGroup_2_1; }
+		
+		//','
+		public Keyword getCommaKeyword_2_1_0() { return cCommaKeyword_2_1_0; }
+		
+		//params+=INT
+		public Assignment getParamsAssignment_2_1_1() { return cParamsAssignment_2_1_1; }
+		
+		//INT
+		public RuleCall getParamsINTTerminalRuleCall_2_1_1_0() { return cParamsINTTerminalRuleCall_2_1_1_0; }
+		
+		//')'
+		public Keyword getRightParenthesisKeyword_3() { return cRightParenthesisKeyword_3; }
+	}
+	public class ParameterElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ide.tests.testlanguage.TestLanguage.Parameter");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cParameterAction_0 = (Action)cGroup.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final Keyword cColonKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cTypeAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cTypeTypeParserRuleCall_3_0 = (RuleCall)cTypeAssignment_3.eContents().get(0);
+		
+		//Parameter:
+		//	{Parameter} name=ID ':' type=Type;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//{Parameter} name=ID ':' type=Type
+		public Group getGroup() { return cGroup; }
+		
+		//{Parameter}
+		public Action getParameterAction_0() { return cParameterAction_0; }
+		
+		//name=ID
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+		
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
+		
+		//':'
+		public Keyword getColonKeyword_2() { return cColonKeyword_2; }
+		
+		//type=Type
+		public Assignment getTypeAssignment_3() { return cTypeAssignment_3; }
+		
+		//Type
+		public RuleCall getTypeTypeParserRuleCall_3_0() { return cTypeTypeParserRuleCall_3_0; }
+	}
 	public class TypeReferenceElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ide.tests.testlanguage.TestLanguage.TypeReference");
 		private final Assignment cTypeRefAssignment = (Assignment)rule.eContents().get(1);
@@ -195,15 +407,16 @@ public class TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cNameStringKeyword_0_0 = (Keyword)cNameAlternatives_0.eContents().get(0);
 		private final Keyword cNameIntKeyword_0_1 = (Keyword)cNameAlternatives_0.eContents().get(1);
 		private final Keyword cNameBooleanKeyword_0_2 = (Keyword)cNameAlternatives_0.eContents().get(2);
+		private final Keyword cNameVoidKeyword_0_3 = (Keyword)cNameAlternatives_0.eContents().get(3);
 		
 		//PrimitiveType:
-		//	name=('string' | 'int' | 'boolean');
+		//	name=('string' | 'int' | 'boolean' | 'void');
 		@Override public ParserRule getRule() { return rule; }
 		
-		//name=('string' | 'int' | 'boolean')
+		//name=('string' | 'int' | 'boolean' | 'void')
 		public Assignment getNameAssignment() { return cNameAssignment; }
 		
-		//('string' | 'int' | 'boolean')
+		//('string' | 'int' | 'boolean' | 'void')
 		public Alternatives getNameAlternatives_0() { return cNameAlternatives_0; }
 		
 		//'string'
@@ -214,13 +427,20 @@ public class TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//'boolean'
 		public Keyword getNameBooleanKeyword_0_2() { return cNameBooleanKeyword_0_2; }
+		
+		//'void'
+		public Keyword getNameVoidKeyword_0_3() { return cNameVoidKeyword_0_3; }
 	}
 	
 	
 	private final ModelElements pModel;
 	private final TypeDeclarationElements pTypeDeclaration;
+	private final MemberElements pMember;
 	private final PropertyElements pProperty;
 	private final TypeElements pType;
+	private final OperationElements pOperation;
+	private final OperationCallElements pOperationCall;
+	private final ParameterElements pParameter;
 	private final TypeReferenceElements pTypeReference;
 	private final PrimitiveTypeElements pPrimitiveType;
 	
@@ -235,8 +455,12 @@ public class TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		this.gaTerminals = gaTerminals;
 		this.pModel = new ModelElements();
 		this.pTypeDeclaration = new TypeDeclarationElements();
+		this.pMember = new MemberElements();
 		this.pProperty = new PropertyElements();
 		this.pType = new TypeElements();
+		this.pOperation = new OperationElements();
+		this.pOperationCall = new OperationCallElements();
+		this.pParameter = new ParameterElements();
 		this.pTypeReference = new TypeReferenceElements();
 		this.pPrimitiveType = new PrimitiveTypeElements();
 	}
@@ -280,7 +504,7 @@ public class TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	
 	//TypeDeclaration:
 	//	'type' name=ID ('extends' superType=[TypeDeclaration])? '{'
-	//	properties+=Property*
+	//	members+=Member*
 	//	'}';
 	public TypeDeclarationElements getTypeDeclarationAccess() {
 		return pTypeDeclaration;
@@ -288,6 +512,16 @@ public class TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getTypeDeclarationRule() {
 		return getTypeDeclarationAccess().getRule();
+	}
+	
+	//Member:
+	//	Property | Operation;
+	public MemberElements getMemberAccess() {
+		return pMember;
+	}
+	
+	public ParserRule getMemberRule() {
+		return getMemberAccess().getRule();
 	}
 	
 	//Property:
@@ -310,6 +544,38 @@ public class TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		return getTypeAccess().getRule();
 	}
 	
+	//Operation:
+	//	{Operation} 'op' name=ID '(' (params+=Parameter (',' params+=Parameter)*)? ')' (':' returnType=Type)? '{'
+	//	operationCall=OperationCall?
+	//	'}';
+	public OperationElements getOperationAccess() {
+		return pOperation;
+	}
+	
+	public ParserRule getOperationRule() {
+		return getOperationAccess().getRule();
+	}
+	
+	//OperationCall:
+	//	operation=[Operation] '(' (params+=INT (',' params+=INT)*)? ')';
+	public OperationCallElements getOperationCallAccess() {
+		return pOperationCall;
+	}
+	
+	public ParserRule getOperationCallRule() {
+		return getOperationCallAccess().getRule();
+	}
+	
+	//Parameter:
+	//	{Parameter} name=ID ':' type=Type;
+	public ParameterElements getParameterAccess() {
+		return pParameter;
+	}
+	
+	public ParserRule getParameterRule() {
+		return getParameterAccess().getRule();
+	}
+	
 	//TypeReference:
 	//	typeRef=[TypeDeclaration];
 	public TypeReferenceElements getTypeReferenceAccess() {
@@ -321,7 +587,7 @@ public class TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//PrimitiveType:
-	//	name=('string' | 'int' | 'boolean');
+	//	name=('string' | 'int' | 'boolean' | 'void');
 	public PrimitiveTypeElements getPrimitiveTypeAccess() {
 		return pPrimitiveType;
 	}

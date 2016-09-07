@@ -49,6 +49,8 @@ import io.typefox.lsapi.impl.PositionImpl
 import io.typefox.lsapi.impl.PublishDiagnosticsParamsImpl
 import io.typefox.lsapi.impl.RangeImpl
 import io.typefox.lsapi.impl.ServerCapabilitiesImpl
+import io.typefox.lsapi.impl.SignatureHelpImpl
+import io.typefox.lsapi.impl.SignatureHelpOptionsImpl
 import io.typefox.lsapi.impl.TextEditImpl
 import io.typefox.lsapi.services.LanguageServer
 import io.typefox.lsapi.services.TextDocumentService
@@ -67,6 +69,7 @@ import org.eclipse.xtext.ide.server.contentassist.ContentAssistService
 import org.eclipse.xtext.ide.server.findReferences.WorkspaceResourceAccess
 import org.eclipse.xtext.ide.server.formatting.FormattingService
 import org.eclipse.xtext.ide.server.hover.HoverService
+import org.eclipse.xtext.ide.server.signatureHelp.SignatureHelpService
 import org.eclipse.xtext.ide.server.symbol.DocumentSymbolService
 import org.eclipse.xtext.ide.server.symbol.WorkspaceSymbolService
 import org.eclipse.xtext.resource.IResourceServiceProvider
@@ -108,6 +111,8 @@ import org.eclipse.xtext.validation.Issue
 			referencesProvider = true
 			documentSymbolProvider = true
 			workspaceSymbolProvider = true
+            //TODO make this language specific
+            signatureHelpProvider = new SignatureHelpOptionsImpl(#['(', ','])
 			textDocumentSync = TextDocumentSyncKind.Incremental
 			completionProvider = new CompletionOptionsImpl => [
 				resolveProvider = false
@@ -402,7 +407,19 @@ import org.eclipse.xtext.validation.Issue
 	}
 
 	override signatureHelp(TextDocumentPositionParams position) {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+		return requestManager.runRead [ cancelIndicator |
+            val uri = position.textDocument.uri.toUri;
+            val serviceProvider = uri.resourceServiceProvider;
+            val helper = serviceProvider?.get(SignatureHelpService);
+            if (helper === null) {
+                return new SignatureHelpImpl(); 
+            }
+            
+            return workspaceManager.doRead(uri, [doc, resource |
+                val offset = doc.getOffSet(position.position);
+                return helper.getSignatureHelp(resource, offset);
+            ]);
+        ];
 	}
 
 	override documentHighlight(TextDocumentPositionParams position) {

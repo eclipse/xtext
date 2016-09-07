@@ -26,10 +26,13 @@ import io.typefox.lsapi.InitializeParams;
 import io.typefox.lsapi.InitializeResult;
 import io.typefox.lsapi.Location;
 import io.typefox.lsapi.MarkedString;
+import io.typefox.lsapi.ParameterInformation;
 import io.typefox.lsapi.Position;
 import io.typefox.lsapi.PublishDiagnosticsParams;
 import io.typefox.lsapi.Range;
 import io.typefox.lsapi.ReferenceParams;
+import io.typefox.lsapi.SignatureHelp;
+import io.typefox.lsapi.SignatureInformation;
 import io.typefox.lsapi.SymbolInformation;
 import io.typefox.lsapi.SymbolKind;
 import io.typefox.lsapi.TextDocumentPositionParams;
@@ -75,6 +78,7 @@ import org.eclipse.xtext.testing.FormattingConfiguration;
 import org.eclipse.xtext.testing.HoverTestConfiguration;
 import org.eclipse.xtext.testing.RangeFormattingConfiguration;
 import org.eclipse.xtext.testing.ReferenceTestConfiguration;
+import org.eclipse.xtext.testing.SignatureHelpConfiguration;
 import org.eclipse.xtext.testing.TestCompletionConfiguration;
 import org.eclipse.xtext.testing.TextDocumentConfiguration;
 import org.eclipse.xtext.testing.WorkspaceSymbolConfiguraiton;
@@ -86,6 +90,7 @@ import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
@@ -443,6 +448,54 @@ public abstract class AbstractLanguageServerTest implements Consumer<PublishDiag
     return _builder.toString();
   }
   
+  protected String _toExpectation(final SignatureHelp it) {
+    String _xblockexpression = null;
+    {
+      List<? extends SignatureInformation> _signatures = it.getSignatures();
+      int _size = _signatures.size();
+      boolean _tripleEquals = (_size == 0);
+      if (_tripleEquals) {
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("Signature index is expected to be null when no signatures are available. Was: ");
+        Integer _activeSignature = it.getActiveSignature();
+        _builder.append(_activeSignature, "");
+        _builder.append(".");
+        Integer _activeSignature_1 = it.getActiveSignature();
+        Assert.assertNull(_builder.toString(), _activeSignature_1);
+        return "<empty>";
+      }
+      Integer _activeSignature_2 = it.getActiveSignature();
+      Assert.assertNotNull("Active signature index must not be null when signatures are available.", _activeSignature_2);
+      String _xifexpression = null;
+      Integer _activeParameter = it.getActiveParameter();
+      boolean _tripleEquals_1 = (_activeParameter == null);
+      if (_tripleEquals_1) {
+        _xifexpression = "<empty>";
+      } else {
+        List<? extends SignatureInformation> _signatures_1 = it.getSignatures();
+        Integer _activeSignature_3 = it.getActiveSignature();
+        SignatureInformation _get = _signatures_1.get((_activeSignature_3).intValue());
+        List<? extends ParameterInformation> _parameters = _get.getParameters();
+        Integer _activeParameter_1 = it.getActiveParameter();
+        ParameterInformation _get_1 = _parameters.get((_activeParameter_1).intValue());
+        _xifexpression = _get_1.getLabel();
+      }
+      final String param = _xifexpression;
+      StringConcatenation _builder_1 = new StringConcatenation();
+      List<? extends SignatureInformation> _signatures_2 = it.getSignatures();
+      final Function1<SignatureInformation, String> _function = (SignatureInformation it_1) -> {
+        return it_1.getLabel();
+      };
+      List<String> _map = ListExtensions.map(_signatures_2, _function);
+      String _join = IterableExtensions.join(_map, " | ");
+      _builder_1.append(_join, "");
+      _builder_1.append(" | ");
+      _builder_1.append(param, "");
+      _xblockexpression = _builder_1.toString();
+    }
+    return _xblockexpression;
+  }
+  
   protected void testCompletion(final Procedure1<? super TestCompletionConfiguration> configurator) {
     try {
       @Extension
@@ -537,6 +590,31 @@ public abstract class AbstractLanguageServerTest implements Consumer<PublishDiag
       final String actualHover = this.toExpectation(_get);
       String _expectedHover = configuration.getExpectedHover();
       this.assertEquals(_expectedHover, actualHover);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  protected void testSignatureHelp(final Procedure1<? super SignatureHelpConfiguration> configurator) {
+    try {
+      @Extension
+      final SignatureHelpConfiguration configuration = new SignatureHelpConfiguration();
+      configuration.setFilePath(("MyModel." + this.fileExtension));
+      configurator.apply(configuration);
+      final String fileUri = this.initializeContext(configuration);
+      final Procedure1<TextDocumentPositionParamsBuilder> _function = (TextDocumentPositionParamsBuilder it) -> {
+        it.textDocument(fileUri);
+        int _line = configuration.getLine();
+        int _column = configuration.getColumn();
+        it.position(_line, _column);
+      };
+      TextDocumentPositionParamsBuilder _textDocumentPositionParamsBuilder = new TextDocumentPositionParamsBuilder(_function);
+      TextDocumentPositionParams _build = _textDocumentPositionParamsBuilder.build();
+      final CompletableFuture<SignatureHelp> signatureHelps = this.languageServer.signatureHelp(_build);
+      SignatureHelp _get = signatureHelps.get();
+      final String actualHover = this.toExpectation(_get);
+      String _expectedSignatureHelp = configuration.getExpectedSignatureHelp();
+      this.assertEquals(_expectedSignatureHelp, actualHover);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -684,6 +762,8 @@ public abstract class AbstractLanguageServerTest implements Consumer<PublishDiag
       return _toExpectation((Position)elements);
     } else if (elements instanceof Range) {
       return _toExpectation((Range)elements);
+    } else if (elements instanceof SignatureHelp) {
+      return _toExpectation((SignatureHelp)elements);
     } else if (elements instanceof SymbolInformation) {
       return _toExpectation((SymbolInformation)elements);
     } else if (elements instanceof TextEdit) {

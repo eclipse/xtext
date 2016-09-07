@@ -35,6 +35,7 @@ public class TestLanguageParser extends AbstractContentAssistParser {
 			nameMappings = new HashMap<AbstractElement, String>() {
 				private static final long serialVersionUID = 1L;
 				{
+					put(grammarAccess.getMemberAccess().getAlternatives(), "rule__Member__Alternatives");
 					put(grammarAccess.getTypeAccess().getAlternatives_0(), "rule__Type__Alternatives_0");
 					put(grammarAccess.getPrimitiveTypeAccess().getNameAlternatives_0(), "rule__PrimitiveType__NameAlternatives_0");
 					put(grammarAccess.getTypeDeclarationAccess().getGroup(), "rule__TypeDeclaration__Group__0");
@@ -42,13 +43,31 @@ public class TestLanguageParser extends AbstractContentAssistParser {
 					put(grammarAccess.getPropertyAccess().getGroup(), "rule__Property__Group__0");
 					put(grammarAccess.getTypeAccess().getGroup(), "rule__Type__Group__0");
 					put(grammarAccess.getTypeAccess().getGroup_1(), "rule__Type__Group_1__0");
+					put(grammarAccess.getOperationAccess().getGroup(), "rule__Operation__Group__0");
+					put(grammarAccess.getOperationAccess().getGroup_4(), "rule__Operation__Group_4__0");
+					put(grammarAccess.getOperationAccess().getGroup_4_1(), "rule__Operation__Group_4_1__0");
+					put(grammarAccess.getOperationAccess().getGroup_6(), "rule__Operation__Group_6__0");
+					put(grammarAccess.getOperationCallAccess().getGroup(), "rule__OperationCall__Group__0");
+					put(grammarAccess.getOperationCallAccess().getGroup_2(), "rule__OperationCall__Group_2__0");
+					put(grammarAccess.getOperationCallAccess().getGroup_2_1(), "rule__OperationCall__Group_2_1__0");
+					put(grammarAccess.getParameterAccess().getGroup(), "rule__Parameter__Group__0");
 					put(grammarAccess.getModelAccess().getTypesAssignment(), "rule__Model__TypesAssignment");
 					put(grammarAccess.getTypeDeclarationAccess().getNameAssignment_1(), "rule__TypeDeclaration__NameAssignment_1");
 					put(grammarAccess.getTypeDeclarationAccess().getSuperTypeAssignment_2_1(), "rule__TypeDeclaration__SuperTypeAssignment_2_1");
-					put(grammarAccess.getTypeDeclarationAccess().getPropertiesAssignment_4(), "rule__TypeDeclaration__PropertiesAssignment_4");
+					put(grammarAccess.getTypeDeclarationAccess().getMembersAssignment_4(), "rule__TypeDeclaration__MembersAssignment_4");
 					put(grammarAccess.getPropertyAccess().getTypeAssignment_0(), "rule__Property__TypeAssignment_0");
 					put(grammarAccess.getPropertyAccess().getNameAssignment_1(), "rule__Property__NameAssignment_1");
 					put(grammarAccess.getTypeAccess().getArrayDiemensionsAssignment_1_0(), "rule__Type__ArrayDiemensionsAssignment_1_0");
+					put(grammarAccess.getOperationAccess().getNameAssignment_2(), "rule__Operation__NameAssignment_2");
+					put(grammarAccess.getOperationAccess().getParamsAssignment_4_0(), "rule__Operation__ParamsAssignment_4_0");
+					put(grammarAccess.getOperationAccess().getParamsAssignment_4_1_1(), "rule__Operation__ParamsAssignment_4_1_1");
+					put(grammarAccess.getOperationAccess().getReturnTypeAssignment_6_1(), "rule__Operation__ReturnTypeAssignment_6_1");
+					put(grammarAccess.getOperationAccess().getOperationCallAssignment_8(), "rule__Operation__OperationCallAssignment_8");
+					put(grammarAccess.getOperationCallAccess().getOperationAssignment_0(), "rule__OperationCall__OperationAssignment_0");
+					put(grammarAccess.getOperationCallAccess().getParamsAssignment_2_0(), "rule__OperationCall__ParamsAssignment_2_0");
+					put(grammarAccess.getOperationCallAccess().getParamsAssignment_2_1_1(), "rule__OperationCall__ParamsAssignment_2_1_1");
+					put(grammarAccess.getParameterAccess().getNameAssignment_1(), "rule__Parameter__NameAssignment_1");
+					put(grammarAccess.getParameterAccess().getTypeAssignment_3(), "rule__Parameter__TypeAssignment_3");
 					put(grammarAccess.getTypeReferenceAccess().getTypeRefAssignment(), "rule__TypeReference__TypeRefAssignment");
 					put(grammarAccess.getPrimitiveTypeAccess().getNameAssignment(), "rule__PrimitiveType__NameAssignment");
 				}

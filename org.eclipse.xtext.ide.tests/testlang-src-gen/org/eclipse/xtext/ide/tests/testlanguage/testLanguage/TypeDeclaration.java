@@ -22,7 +22,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.TypeDeclaration#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.TypeDeclaration#getSuperType <em>Super Type</em>}</li>
- *   <li>{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.TypeDeclaration#getProperties <em>Properties</em>}</li>
+ *   <li>{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.TypeDeclaration#getMembers <em>Members</em>}</li>
  * </ul>
  *
  * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.TestLanguagePackage#getTypeDeclaration()
@@ -84,19 +84,19 @@ public interface TypeDeclaration extends EObject
   void setSuperType(TypeDeclaration value);
 
   /**
-   * Returns the value of the '<em><b>Properties</b></em>' containment reference list.
-   * The list contents are of type {@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Property}.
+   * Returns the value of the '<em><b>Members</b></em>' containment reference list.
+   * The list contents are of type {@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Member}.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Properties</em>' containment reference list isn't clear,
+   * If the meaning of the '<em>Members</em>' containment reference list isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Properties</em>' containment reference list.
-   * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.TestLanguagePackage#getTypeDeclaration_Properties()
+   * @return the value of the '<em>Members</em>' containment reference list.
+   * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.TestLanguagePackage#getTypeDeclaration_Members()
    * @model containment="true"
    * @generated
    */
-  EList<Property> getProperties();
+  EList<Member> getMembers();
 
 } // TypeDeclaration

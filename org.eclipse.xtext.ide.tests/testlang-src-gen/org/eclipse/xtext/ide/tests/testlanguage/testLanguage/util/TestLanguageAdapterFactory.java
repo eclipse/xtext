@@ -90,6 +90,11 @@ public class TestLanguageAdapterFactory extends AdapterFactoryImpl
         return createTypeDeclarationAdapter();
       }
       @Override
+      public Adapter caseMember(Member object)
+      {
+        return createMemberAdapter();
+      }
+      @Override
       public Adapter caseProperty(Property object)
       {
         return createPropertyAdapter();
@@ -98,6 +103,21 @@ public class TestLanguageAdapterFactory extends AdapterFactoryImpl
       public Adapter caseType(Type object)
       {
         return createTypeAdapter();
+      }
+      @Override
+      public Adapter caseOperation(Operation object)
+      {
+        return createOperationAdapter();
+      }
+      @Override
+      public Adapter caseOperationCall(OperationCall object)
+      {
+        return createOperationCallAdapter();
+      }
+      @Override
+      public Adapter caseParameter(Parameter object)
+      {
+        return createParameterAdapter();
       }
       @Override
       public Adapter caseTypeReference(TypeReference object)
@@ -162,6 +182,21 @@ public class TestLanguageAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Member <em>Member</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Member
+   * @generated
+   */
+  public Adapter createMemberAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Property <em>Property</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -187,6 +222,51 @@ public class TestLanguageAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createTypeAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Operation <em>Operation</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Operation
+   * @generated
+   */
+  public Adapter createOperationAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.OperationCall <em>Operation Call</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.OperationCall
+   * @generated
+   */
+  public Adapter createOperationCallAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Parameter <em>Parameter</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Parameter
+   * @generated
+   */
+  public Adapter createParameterAdapter()
   {
     return null;
   }

@@ -10,12 +10,17 @@ grammar org.eclipse.xtext.ide.tests.testlanguage.TestLanguage with org.eclipse.x
 generate testLanguage "http://www.eclipse.org/xtext/ide/tests/testlanguage/TestLanguage"
 
 Model:
-	types+=TypeDeclaration*;
-	
+    types+=TypeDeclaration*;
+    
 TypeDeclaration:
-	'type' name=ID ('extends' superType=[TypeDeclaration])? '{'
-	   properties+=Property*
-	'}';
+    'type' name=ID ('extends' superType=[TypeDeclaration])? '{'
+       members += Member*
+    '}';
+
+Member returns Member:
+    Property |
+    Operation
+;
 
 Property:
     type=Type name=ID
@@ -26,10 +31,24 @@ Type :
     PrimitiveType) (arrayDiemensions+='['']')*
 ;
 
+Operation returns Operation:
+    {Operation} 'op' name=ID '(' (params+=Parameter (',' params+=Parameter)*)? ')' (':' returnType=Type)? '{'
+        (operationCall=OperationCall)?
+    '}'
+;
+
+OperationCall:
+       operation = [Operation|ID] '(' (params+=INT (',' params+=INT)*)? ')'
+;
+
+Parameter returns Parameter:
+    {Parameter} name=ID ':' type=Type
+;
+
 TypeReference:
     typeRef=[TypeDeclaration]
 ;
 
 PrimitiveType:
-    name=('string'|'int'|'boolean')    
+    name=('string'|'int'|'boolean'|'void')
 ;
