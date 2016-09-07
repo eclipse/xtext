@@ -60,6 +60,7 @@ import org.eclipse.xtext.xbase.compiler.CompilationStrategyAdapter;
 import org.eclipse.xtext.xbase.compiler.CompilationTemplateAdapter;
 import org.eclipse.xtext.xbase.compiler.DocumentationAdapter;
 import org.eclipse.xtext.xbase.compiler.FileHeaderAdapter;
+import org.eclipse.xtext.xbase.compiler.JavaKeywords;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Procedures;
@@ -113,6 +114,9 @@ public class JvmTypesBuilder {
 	
 	@Inject
 	private AnnotationLookup annotationLookup;
+	
+	@Inject
+	private JavaKeywords javaKeywords;
 	
 	/**
 	 * Overrides  the default <code>operator_add()</code> to ignore <code>null</code> elements.
@@ -748,7 +752,7 @@ public class JvmTypesBuilder {
 				if(p != null) {
 					p = p.trace(sourceElement);
 					p.append("return this.");
-					p.append(fieldName);
+					p.append(javaKeywords.isJavaKeyword(fieldName) ? fieldName+"_" : fieldName);
 					p.append(";");
 				}
 			}
@@ -806,9 +810,9 @@ public class JvmTypesBuilder {
 				if(p != null) {
 					p = p.trace(sourceElement);
 					p.append("this.");
-					p.append(fieldName);
+					p.append(javaKeywords.isJavaKeyword(fieldName) ? fieldName+"_" : fieldName);
 					p.append(" = ");
-					p.append(propertyName);
+					p.append(javaKeywords.isJavaKeyword(propertyName) ? propertyName+"_" : propertyName);
 					p.append(";");
 				}
 			}
