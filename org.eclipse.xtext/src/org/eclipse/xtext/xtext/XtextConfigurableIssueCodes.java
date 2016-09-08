@@ -43,6 +43,7 @@ public class XtextConfigurableIssueCodes extends ConfigurableIssueCodesProvider 
 	public static final String DISCOURAGED_RULE_NAME = ISSUE_CODE_PREFIX + "DiscouragedName";
 	public static final String DUPLICATE_ENUM_LITERAL = ISSUE_CODE_PREFIX + "DuplicateEnumLiteral";
 	public static final String BIDIRECTIONAL_REFERENCE = ISSUE_CODE_PREFIX + "BidirectionalReference";
+	public static final String CROSS_REFERENCE_IN_ALTERNATIVES = ISSUE_CODE_PREFIX + "CrossReferenceInAlternatives";
 	
 	private Map<String, PreferenceKey> issueCodes;
 
@@ -65,6 +66,7 @@ public class XtextConfigurableIssueCodes extends ConfigurableIssueCodesProvider 
 		acceptor.accept(create(INVALID_HIDDEN_TOKEN, SeverityConverter.SEVERITY_ERROR));
 		acceptor.accept(create(INVALID_HIDDEN_TOKEN_FRAGMENT, SeverityConverter.SEVERITY_ERROR));
 		acceptor.accept(create(INVALID_PACKAGE_REFERENCE_INHERITED, SeverityConverter.SEVERITY_ERROR));
+		acceptor.accept(create(CROSS_REFERENCE_IN_ALTERNATIVES, SeverityConverter.SEVERITY_ERROR));
 		
 		acceptor.accept(create(INVALID_METAMODEL_NAME, SeverityConverter.SEVERITY_WARNING));
 		acceptor.accept(create(INVALID_PACKAGE_REFERENCE_EXTERNAL, SeverityConverter.SEVERITY_WARNING));

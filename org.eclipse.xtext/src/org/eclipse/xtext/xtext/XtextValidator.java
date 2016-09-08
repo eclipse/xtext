@@ -81,6 +81,7 @@ import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
 import org.eclipse.xtext.validation.AbstractValidationMessageAcceptor;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xtext.ecoreInference.SourceAdapter;
 
 import com.google.common.base.Function;
@@ -1131,6 +1132,16 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 	@Check
 	public void checkCrossReferenceType(CrossReference reference) {
 		checkTypeIsEClass(reference.getType());
+	}
+
+	@Check
+	public void checkCrossReferenceNotInAlternatives(Alternatives alternatives) {
+		int numOfCrossRefs = IterableExtensions.size(IterableExtensions.filter(alternatives.getElements(), CrossReference.class));
+		if (numOfCrossRefs > 1) {
+			String errorMessage = "Cross references using the pattern 'feature=([SomeClass|ID] | [SomeClass|STRING])' are not allowed."
+					+ " Use the pattern '(feature=[SomeClass|ID] | feature=[SomeClass|STRING])' instead.";
+			error(errorMessage, alternatives, null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, CROSS_REFERENCE_IN_ALTERNATIVES);
+		}
 	}
 
 	private void checkTypeIsEClass(TypeRef type) {
