@@ -7,7 +7,7 @@ node {
 		stage 'Maven Build'
 		def mvnHome = tool 'M3'
 		env.M2_HOME = "${mvnHome}"
-		sh "rm -r target/maven-repository/"
+		sh "rm -rf target/maven-repository/"
 		sh "${mvnHome}/bin/mvn clean install --update-snapshots -PuseJenkinsSnapshots -Dmaven.repo.local=target/maven-repository/"
 		archive '**/target/**/*.jar'
 				
