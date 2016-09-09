@@ -54,7 +54,7 @@ class CompletionTest extends AbstractTestLangLanguageServerTest {
 			'''
 		]
 	}
-
+	
     @Test
     def void testCompletion_04() {
         testCompletion [
@@ -73,4 +73,28 @@ class CompletionTest extends AbstractTestLangLanguageServerTest {
         ]
     }
 
+    @Test
+    def void testCompletion_05() {
+        testCompletion [
+            model = '''
+                type Foo {}
+                type foo {}
+                type Boo {}
+                type boo {}
+            '''
+            line = 1
+            column = 'type Bar {'.length
+            expectedCompletionItems = '''
+                Boo (TypeDeclaration) -> Boo [[1, 10] .. [1, 10]]
+                boo (TypeDeclaration) -> boo [[1, 10] .. [1, 10]]
+                Foo (TypeDeclaration) -> Foo [[1, 10] .. [1, 10]]
+                foo (TypeDeclaration) -> foo [[1, 10] .. [1, 10]]
+                boolean -> boolean [[1, 10] .. [1, 10]]
+                int -> int [[1, 10] .. [1, 10]]
+                string -> string [[1, 10] .. [1, 10]]
+                } -> } [[1, 10] .. [1, 10]]
+                { -> { [[1, 9] .. [1, 10]]
+            '''
+        ]
+    }
 }

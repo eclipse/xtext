@@ -88,7 +88,11 @@ public class ContentAssistService {
         _elvis_1 = _proposal_1;
       }
       final String s2 = _elvis_1;
-      return s1.compareTo(s2);
+      final int ignoreCase = s1.compareToIgnoreCase(s2);
+      if ((ignoreCase == 0)) {
+        return s1.compareTo(s2);
+      }
+      return ignoreCase;
     };
     final TreeSet<Pair<Integer, ContentAssistEntry>> entries = new TreeSet<Pair<Integer, ContentAssistEntry>>(_function);
     final IIdeContentProposalAcceptor acceptor = new IIdeContentProposalAcceptor() {
