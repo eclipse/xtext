@@ -819,6 +819,7 @@ public class XbaseValidator extends AbstractXbaseValidator {
 
 	@Check
 	public void checkCasts(XCastedExpression cast) {
+		if (cast.getType() == null) return;
 		LightweightTypeReference toType = toLightweightTypeReference(cast.getType());
 		LightweightTypeReference fromType = getActualType(cast.getTarget());
 		checkCast(cast.getType(), toType, fromType);
