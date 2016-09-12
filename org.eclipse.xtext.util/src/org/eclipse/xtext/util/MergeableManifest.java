@@ -50,38 +50,51 @@ public class MergeableManifest extends Manifest {
 	public static final Attributes.Name BUNDLE_LOCALIZATION = new Attributes.Name("Bundle-Localization");
 	public static final Attributes.Name BUNDLE_ACTIVATOR = new Attributes.Name("Bundle-Activator");
 
-	private static final String LINEBREAK = "\r\n";
+	/**
+	 * @deprecated Is only used in deprecated static methods.
+	 */
+	@Deprecated
+	private static final String LINEBREAK = Strings.newLine();
 
 	/*
 	 * java.util.Manifest throws an exception if line exceeds 512 chars
 	 */
 	/**
+	 * @deprecated Use {@link #make512Safe(StringBuffer, String)} instead
 	 * @since 2.9
 	 */
-    public static String make512Safe(StringBuffer lines) {
-        if (lines.length() > 512) {
-        	StringBuilder result = new StringBuilder(lines.length());
-        	String[] splitted = lines.toString().split("\\r?\\n");
-        	for(String string: splitted) {
-        		if (string.length() > 512) {
-        			int idx = 510;
-        			StringBuilder temp = new StringBuilder(string);
-        			int length = temp.length();
-        			while (idx < length - 2) {
-                        temp.insert(idx, LINEBREAK+" ");
-                        idx += 512;
-                        length += 3;
-                    }
-        			result.append(temp.toString());
-        		} else {
-        			result.append(string);
-        		}
-        		result.append(LINEBREAK);
-        	}
-        	return result.toString();
-        }
-        return lines.toString();
-    }
+	@Deprecated
+	public static String make512Safe(StringBuffer lines) {
+		return make512Safe(lines, LINEBREAK);
+	}
+
+	/**
+	 * @since 2.11
+	 */
+	public static String make512Safe(StringBuffer lines, String lineDelimiter) {
+		if (lines.length() > 512) {
+			StringBuilder result = new StringBuilder(lines.length());
+			String[] splitted = lines.toString().split("\\r?\\n");
+			for (String string : splitted) {
+				if (string.length() > 512) {
+					int idx = 510;
+					StringBuilder temp = new StringBuilder(string);
+					int length = temp.length();
+					while (idx < length - 2) {
+						temp.insert(idx, lineDelimiter + " ");
+						idx += 512;
+						length += 3;
+					}
+					result.append(temp.toString());
+				} else {
+					result.append(string);
+				}
+				result.append(lineDelimiter);
+			}
+			return result.toString();
+		}
+		return lines.toString();
+	}
 
 	public class OrderAwareAttributes extends Attributes {
 
@@ -118,7 +131,7 @@ public class MergeableManifest extends Manifest {
 			}
 
 			if (version != null) {
-				out.writeBytes(vername + ": " + version + LINEBREAK);
+				out.writeBytes(vername + ": " + version + lineDelimiter);
 			}
 
 			// write out all attributes except for the version
@@ -137,17 +150,17 @@ public class MergeableManifest extends Manifest {
 						value = new String(vb, 0, 0, vb.length);
 						buffer.append(value);
 						if (it.hasNext())
-							buffer.append(LINEBREAK);
-						out.writeBytes(make512Safe(buffer));
+							buffer.append(lineDelimiter);
+						out.writeBytes(make512Safe(buffer, lineDelimiter));
 					}
 				}
 			}
-			out.writeBytes(LINEBREAK);
+			out.writeBytes(lineDelimiter);
 		}
 
 		/*
 		 * Copied from base class, but omitted call to make72Safe(buffer)
-         * and does not write empty values
+		 * and does not write empty values
 		 */
 		@SuppressWarnings("deprecation")
 		public void myWrite(DataOutputStream out) throws IOException {
@@ -163,17 +176,18 @@ public class MergeableManifest extends Manifest {
 					value = new String(vb, 0, 0, vb.length);
 					buffer.append(value);
 					if (it.hasNext())
-						buffer.append(LINEBREAK);
-					out.writeBytes(make512Safe(buffer));
+						buffer.append(lineDelimiter);
+					out.writeBytes(make512Safe(buffer, lineDelimiter));
 				}
 			}
-			out.writeBytes(LINEBREAK);
+			out.writeBytes(lineDelimiter);
 		}
 	}
 
 	private boolean modified = false;
 
 	private String projectName;
+	private String lineDelimiter = Strings.newLine();
 
 	public MergeableManifest(InputStream in) throws IOException {
 		try {
@@ -222,7 +236,7 @@ public class MergeableManifest extends Manifest {
 		}
 		String s = (String) getMainAttributes().get(REQUIRE_BUNDLE);
 		Wrapper<Boolean> modified = Wrapper.wrap(this.modified);
-		String result = mergeIntoCommaSeparatedList(s, bundlesToMerge, modified);
+		String result = mergeIntoCommaSeparatedList(s, bundlesToMerge, modified, lineDelimiter);
 		this.modified = modified.get();
 		getMainAttributes().put(REQUIRE_BUNDLE, result);
 	}
@@ -265,6 +279,14 @@ public class MergeableManifest extends Manifest {
 		this.modified = true;
 	}
 	
+	/**
+	 * @since 2.11
+	 */
+	public void setLineDelimiter (String delimiter) {
+		this.lineDelimiter = delimiter;
+		
+	}
+	
 	public boolean isModified() {
 		return modified;
 	}
@@ -289,8 +311,8 @@ public class MergeableManifest extends Manifest {
 				value = new String(vb, 0, 0, vb.length);
 			}
 			buffer.append(value);
-			buffer.append(LINEBREAK);
-			dos.writeBytes(make512Safe(buffer));
+			buffer.append(lineDelimiter);
+			dos.writeBytes(make512Safe(buffer, lineDelimiter));
 			((OrderAwareAttributes) e.getValue()).myWrite(dos);
 		}
 		dos.flush();
@@ -305,7 +327,7 @@ public class MergeableManifest extends Manifest {
 	public void addExportedPackages(Set<String> packages) {
 		String s = (String) getMainAttributes().get(EXPORT_PACKAGE);
 		Wrapper<Boolean> modified = Wrapper.wrap(this.modified);
-		String result = mergeIntoCommaSeparatedList(s, packages, modified);
+		String result = mergeIntoCommaSeparatedList(s, packages, modified, lineDelimiter);
 		this.modified = modified.get();
 		getMainAttributes().put(EXPORT_PACKAGE, result);
 	}
@@ -325,7 +347,7 @@ public class MergeableManifest extends Manifest {
 	public void addImportedPackages(Set<String> packages) {
 		String s = (String) getMainAttributes().get(IMPORT_PACKAGE);
 		Wrapper<Boolean> modified = Wrapper.wrap(this.modified);
-		String result = mergeIntoCommaSeparatedList(s, packages, modified);
+		String result = mergeIntoCommaSeparatedList(s, packages, modified, lineDelimiter);
 		this.modified = modified.get();
 		getMainAttributes().put(IMPORT_PACKAGE, result);
 	}
@@ -355,7 +377,18 @@ public class MergeableManifest extends Manifest {
 		return resultArray;
 	}
 
+	/**
+	 * @deprecated Use {@link #mergeIntoCommaSeparatedList(String, Set, Wrapper, String)} instead.
+	 */
+	@Deprecated
 	public static String mergeIntoCommaSeparatedList(String currentString, Set<String> toMergeIn, Wrapper<Boolean> modified) {
+		return mergeIntoCommaSeparatedList(currentString, toMergeIn, modified, LINEBREAK);
+	}
+	
+	/**
+	 * @since 2.11
+	 */
+	public static String mergeIntoCommaSeparatedList(String currentString, Set<String> toMergeIn, Wrapper<Boolean> modified, String lineDelimiter) {
 		String string = currentString == null ? "" : currentString;
 		String[] split = splitQuoteAware(string);
 		Map<String, String> name2parameters = new LinkedHashMap<String, String>();
@@ -389,7 +422,7 @@ public class MergeableManifest extends Manifest {
 				buff.append(";").append(entry.getValue());
 			}
 			if (iterator.hasNext())
-				buff.append(","+LINEBREAK+" ");
+				buff.append(","+lineDelimiter+" ");
 		}
 		String result = buff.toString();
 		return result;

@@ -13,11 +13,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
+import javax.inject.Inject;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
+import org.eclipse.xtext.xtext.generator.CodeConfig;
 import org.eclipse.xtext.xtext.generator.Issues;
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess;
@@ -47,6 +51,9 @@ public class XtextProjectConfig implements IXtextProjectConfig {
   private SubProjectConfig ideaPlugin = new SubProjectConfig();
   
   private WebProjectConfig web = new WebProjectConfig();
+  
+  @Inject
+  private CodeConfig codeConfig;
   
   public void checkConfiguration(final Issues issues) {
     List<? extends SubProjectConfig> _enabledProjects = this.getEnabledProjects();
@@ -116,7 +123,12 @@ public class XtextProjectConfig implements IXtextProjectConfig {
   }
   
   protected ManifestAccess newManifestAccess() {
-    return new ManifestAccess();
+    ManifestAccess _manifestAccess = new ManifestAccess();
+    final Procedure1<ManifestAccess> _function = (ManifestAccess it) -> {
+      String _lineDelimiter = this.codeConfig.getLineDelimiter();
+      it.setLineDelimiter(_lineDelimiter);
+    };
+    return ObjectExtensions.<ManifestAccess>operator_doubleArrow(_manifestAccess, _function);
   }
   
   protected PluginXmlAccess newPluginXmlAccess() {
@@ -188,5 +200,14 @@ public class XtextProjectConfig implements IXtextProjectConfig {
   
   public void setWeb(final WebProjectConfig web) {
     this.web = web;
+  }
+  
+  @Pure
+  public CodeConfig getCodeConfig() {
+    return this.codeConfig;
+  }
+  
+  public void setCodeConfig(final CodeConfig codeConfig) {
+    this.codeConfig = codeConfig;
   }
 }

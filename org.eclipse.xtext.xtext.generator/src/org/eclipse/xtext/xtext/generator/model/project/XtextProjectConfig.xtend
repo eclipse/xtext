@@ -9,7 +9,9 @@ package org.eclipse.xtext.xtext.generator.model.project
 
 import com.google.inject.Injector
 import java.util.List
+import javax.inject.Inject
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtext.xtext.generator.CodeConfig
 import org.eclipse.xtext.xtext.generator.Issues
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess
 import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess
@@ -27,6 +29,8 @@ class XtextProjectConfig implements IXtextProjectConfig {
 	BundleProjectConfig eclipsePluginTest = new BundleProjectConfig
 	SubProjectConfig ideaPlugin = new SubProjectConfig
 	WebProjectConfig web = new WebProjectConfig
+	
+	@Inject CodeConfig codeConfig
 	
 	def void checkConfiguration(Issues issues) {
 		enabledProjects.forEach[checkConfiguration(issues)]
@@ -74,7 +78,7 @@ class XtextProjectConfig implements IXtextProjectConfig {
 	}
 	
 	protected def newManifestAccess() {
-		new ManifestAccess
+		new ManifestAccess => [lineDelimiter = codeConfig.lineDelimiter]
 	}
 	
 	protected def newPluginXmlAccess() {

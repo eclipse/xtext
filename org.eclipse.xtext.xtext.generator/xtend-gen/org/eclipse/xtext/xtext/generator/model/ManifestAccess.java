@@ -19,6 +19,7 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.util.MergeableManifest;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.internal.Log;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -49,6 +50,8 @@ public class ManifestAccess extends TextFileAccess implements IGuiceAwareGenerat
   private final Set<String> importedPackages = CollectionLiterals.<String>newHashSet();
   
   private TypeReference activator;
+  
+  private String lineDelimiter = Strings.newLine();
   
   public ManifestAccess() {
     this.setPath("MANIFEST.MF");
@@ -251,10 +254,11 @@ public class ManifestAccess extends TextFileAccess implements IGuiceAwareGenerat
       if (_notEquals) {
         CharSequence _content = this.getContent();
         StringBuffer _stringBuffer = new StringBuffer(_content);
-        final String contentToWrite = MergeableManifest.make512Safe(_stringBuffer);
+        final String contentToWrite = MergeableManifest.make512Safe(_stringBuffer, this.lineDelimiter);
         byte[] _bytes = contentToWrite.getBytes("UTF-8");
         ByteArrayInputStream _byteArrayInputStream = new ByteArrayInputStream(_bytes);
         final MergeableManifest mergableManifest = new MergeableManifest(_byteArrayInputStream);
+        mergableManifest.setLineDelimiter(this.lineDelimiter);
         ByteArrayOutputStream bout = new ByteArrayOutputStream();
         mergableManifest.write(bout);
         String _path = this.getPath();
@@ -332,5 +336,14 @@ public class ManifestAccess extends TextFileAccess implements IGuiceAwareGenerat
   
   public void setActivator(final TypeReference activator) {
     this.activator = activator;
+  }
+  
+  @Pure
+  public String getLineDelimiter() {
+    return this.lineDelimiter;
+  }
+  
+  public void setLineDelimiter(final String lineDelimiter) {
+    this.lineDelimiter = lineDelimiter;
   }
 }
