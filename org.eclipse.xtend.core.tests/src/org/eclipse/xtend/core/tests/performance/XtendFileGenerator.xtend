@@ -180,7 +180,7 @@ class XtendFileGenerator {
 			 * if expressions look exactly like Java's if statements.
 			 */
 			def «IF conf.noTypeInference»int «ENDIF»ifExpression(String param) {
-				if (param!=null) {
+				if (param!==null) {
 					param.length
 				} else {
 					0

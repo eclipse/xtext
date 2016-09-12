@@ -678,7 +678,7 @@ public class XtendFileGenerator {
     _builder.append("ifExpression(String param) {");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t");
-    _builder.append("if (param!=null) {");
+    _builder.append("if (param!==null) {");
     _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("param.length");
