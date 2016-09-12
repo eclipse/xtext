@@ -27,66 +27,7 @@ import com.google.inject.name.Named;
  */
 public class InnerClassNameVariants {
 
-	public static final String ARRAY_BASED = "InnerClassNameVariants.ARRAY_BASED";
-
-	@Inject(optional = true)
-	@Named(ARRAY_BASED)
-	private boolean arrayBased;
-
 	public Iterator<String> variantsFor(final String base) {
-		if (arrayBased) {
-			return variantsForArrayBased(base);
-		} else {
-			return variantsForStreamBased(base);
-		}
-	}
-
-	public Iterator<String> variantsForArrayBased(final String base) {
-		int[] positionsOfDollar = getPositionsOfDollar(base);
-		if (positionsOfDollar.length == 0) {
-			return Iterators.singletonIterator(base);
-		}
-
-		int numberPositionsOfDollar = positionsOfDollar.length;
-		int numberOfCombinations = (int) Math.pow(2, numberPositionsOfDollar);
-		int[] iteratordata = new int[numberOfCombinations*numberPositionsOfDollar];
-		for (int value = 0; value < numberOfCombinations; value++) {
-			int valueCopy = value;
-
-			for (int c = 0; c < numberPositionsOfDollar; c++) {
-				if (valueCopy % 2 == 1) {
-					iteratordata[c + value * numberPositionsOfDollar] = 1;
-				}
-				valueCopy = valueCopy / 2;
-			}
-		}
-
-		return new Iterator<String>() {
-
-			int position = 0;
-
-			@Override
-			public boolean hasNext() {
-				return position < numberOfCombinations;
-			}
-
-			@Override
-			public String next() {
-				StringBuilder baseAsBuilder = new StringBuilder(base);
-
-				for (int c = 0; c < numberPositionsOfDollar; c++) {
-					int p = iteratordata[c + position * numberPositionsOfDollar];
-					if (p > 0) {
-						baseAsBuilder.setCharAt(positionsOfDollar[c], '.');
-					}
-				}
-				position = position + 1;
-				return baseAsBuilder.toString();
-			}
-		};
-	}
-
-	public Iterator<String> variantsForStreamBased(final String base) {
 		//if (1==1) return Lists.newArrayList(base).iterator();
 		// System.out.println("xxxxxx yyyy " + base);
 		int[] positionsOfDollar = getPositionsOfDollar(base);

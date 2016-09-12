@@ -83,7 +83,8 @@ public class IndexedJvmTypeAccess {
 				}
 			}
 			String fqn = withoutFragment.segment(withoutFragment.segmentCount() - 1);
-			Iterator<String> variants = innerClassNameVariants.variantsFor(fqn);
+			final String base = fqn;
+			Iterator<String> variants = innerClassNameVariants.variantsFor(base);
 			EObject jvmType = null;
 			while (jvmType == null && variants.hasNext()) {
 				fqn = variants.next();

@@ -55,7 +55,8 @@ public class InnerClassNameVariantsTest {
 		private String base;
 
 		public void are(String... expected) {
-			Iterator<String> variants = innerClassNameVariants.variantsFor(base);
+			final String base1 = base;
+			Iterator<String> variants = innerClassNameVariants.variantsFor(base1);
 			String[] actual = Iterators.toArray(variants, String.class);
 			assertArrayEquals(expected, actual);
 		}
