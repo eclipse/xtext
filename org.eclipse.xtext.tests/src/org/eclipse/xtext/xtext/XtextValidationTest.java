@@ -29,6 +29,7 @@ import org.eclipse.emf.ecore.util.EcoreValidator;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CompoundElement;
 import org.eclipse.xtext.CrossReference;
@@ -1875,6 +1876,22 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		validator.checkKeywordNoSpaces((Keyword) grammar.getRules().get(2).getAlternatives());
 		messageAcceptor.validate();
 
+	}
+
+	@Test public void testCrossReferenceNotInAlternatives() throws Exception {
+		String grammarAsText =
+				"grammar test with org.eclipse.xtext.common.Terminals\n" +
+				"generate test 'http://test'\n" +
+				"A: foo=([A|ID]|[A|STRING]);";
+		Grammar grammar = (Grammar) getModel(grammarAsText);
+		XtextValidator validator = get(XtextValidator.class);
+		ValidatingMessageAcceptor messageAcceptor = new ValidatingMessageAcceptor(null, true, false);
+		Assignment assignment = (Assignment) grammar.getRules().get(0).getAlternatives();
+		Alternatives alternatives = (Alternatives) assignment.getTerminal();
+		messageAcceptor.expectedContext(alternatives);
+		configureValidator(validator, messageAcceptor, alternatives);
+		validator.checkCrossReferenceNotInAlternatives(alternatives);
+		messageAcceptor.validate();
 	}
 	
 	public class ValidatingMessageAcceptor extends AbstractValidationMessageAcceptor {

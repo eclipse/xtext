@@ -100,4 +100,44 @@ public class CompletionTest extends AbstractTestLangLanguageServerTest {
     };
     this.testCompletion(_function);
   }
+  
+  @Test
+  public void testCompletion_05() {
+    final Procedure1<TestCompletionConfiguration> _function = (TestCompletionConfiguration it) -> {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("type Foo {}");
+      _builder.newLine();
+      _builder.append("type foo {}");
+      _builder.newLine();
+      _builder.append("type Boo {}");
+      _builder.newLine();
+      _builder.append("type boo {}");
+      _builder.newLine();
+      it.setModel(_builder.toString());
+      it.setLine(1);
+      int _length = "type Bar {".length();
+      it.setColumn(_length);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("Boo (TypeDeclaration) -> Boo [[1, 10] .. [1, 10]]");
+      _builder_1.newLine();
+      _builder_1.append("boo (TypeDeclaration) -> boo [[1, 10] .. [1, 10]]");
+      _builder_1.newLine();
+      _builder_1.append("Foo (TypeDeclaration) -> Foo [[1, 10] .. [1, 10]]");
+      _builder_1.newLine();
+      _builder_1.append("foo (TypeDeclaration) -> foo [[1, 10] .. [1, 10]]");
+      _builder_1.newLine();
+      _builder_1.append("boolean -> boolean [[1, 10] .. [1, 10]]");
+      _builder_1.newLine();
+      _builder_1.append("int -> int [[1, 10] .. [1, 10]]");
+      _builder_1.newLine();
+      _builder_1.append("string -> string [[1, 10] .. [1, 10]]");
+      _builder_1.newLine();
+      _builder_1.append("} -> } [[1, 10] .. [1, 10]]");
+      _builder_1.newLine();
+      _builder_1.append("{ -> { [[1, 9] .. [1, 10]]");
+      _builder_1.newLine();
+      it.setExpectedCompletionItems(_builder_1.toString());
+    };
+    this.testCompletion(_function);
+  }
 }

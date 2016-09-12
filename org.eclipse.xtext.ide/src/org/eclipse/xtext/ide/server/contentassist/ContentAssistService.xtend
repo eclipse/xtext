@@ -72,7 +72,11 @@ class ContentAssistService {
 				return prioResult
 			val s1 = p1.value.label ?: p1.value.proposal
 			val s2 = p2.value.label ?: p2.value.proposal
-			return s1.compareTo(s2)
+			val ignoreCase = s1.compareToIgnoreCase(s2)
+			if (ignoreCase === 0) {
+			    return s1.compareTo(s2)
+			}
+			return ignoreCase
 		]
 		val acceptor = new IIdeContentProposalAcceptor {
 
