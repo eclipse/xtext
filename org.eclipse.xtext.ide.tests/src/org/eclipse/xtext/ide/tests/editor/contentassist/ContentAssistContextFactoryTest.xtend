@@ -51,8 +51,9 @@ class ContentAssistContextFactoryTest {
 		'''
 		'''
 			context0 {
-				Assignment: TypeDeclaration:properties+= *
-				RuleCall: TypeDeclaration:properties+=Property
+				Assignment: TypeDeclaration:members+= *
+				RuleCall: TypeDeclaration:members+=Member
+				RuleCall: Member:Property
 				Assignment: Property:type= 
 				RuleCall: Property:type=Type
 				RuleCall: Type:TypeReference
@@ -62,6 +63,9 @@ class ContentAssistContextFactoryTest {
 				Keyword: PrimitiveType:name='string'
 				Keyword: PrimitiveType:name='int'
 				Keyword: PrimitiveType:name='boolean'
+				Keyword: PrimitiveType:name='void'
+				RuleCall: Member:Operation
+				Keyword: Operation:'op'
 				Keyword: TypeDeclaration:'}'
 			}
 		'''.toString.assertEquals(factory.firstSetGrammarElementsToString)
@@ -114,6 +118,7 @@ class ContentAssistContextFactoryTest {
 				Keyword: PrimitiveType:name='string'
 				Keyword: PrimitiveType:name='int'
 				Keyword: PrimitiveType:name='boolean'
+				Keyword: PrimitiveType:name='void'
 				RuleCall: <AbstractElement not contained in AbstractRule!>:Type
 			}
 		'''.toString.assertEquals(factory.firstSetGrammarElementsToString)

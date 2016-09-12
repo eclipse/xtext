@@ -20,8 +20,6 @@ import io.typefox.lsapi.impl.SignatureInformationImpl;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.function.Consumer;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -47,10 +45,8 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
-import org.eclipse.xtext.util.ITextRegion;
-import org.eclipse.xtext.util.Pair;
-import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -127,142 +123,128 @@ public class SignatureHelpServiceImpl implements SignatureHelpService {
       boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(operationName);
       boolean _not = (!_isNullOrEmpty);
       if (_not) {
-        EList<Integer> _params = ((OperationCall)object).getParams();
-        final int currentParamCount = _params.size();
-        final Pair<Boolean, Integer> currentParamIndexPair = this.getCurrentParamInfo(((OperationCall)object), offset);
-        final Boolean incomplete = currentParamIndexPair.getFirst();
-        final Integer currentParamIndex = currentParamIndexPair.getSecond();
-        Iterable<Operation> _visibleOperationsWithName = this.getVisibleOperationsWithName(object, operationName);
-        final Function1<Operation, Boolean> _function = (Operation it) -> {
-          boolean _xifexpression = false;
-          if ((incomplete).booleanValue()) {
-            EList<Parameter> _params_1 = it.getParams();
-            int _size = _params_1.size();
-            _xifexpression = ((currentParamIndex).intValue() < _size);
-          } else {
-            EList<Parameter> _params_2 = it.getParams();
-            int _size_1 = _params_2.size();
-            _xifexpression = (currentParamCount <= _size_1);
-          }
-          return Boolean.valueOf(_xifexpression);
-        };
-        Iterable<Operation> _filter = IterableExtensions.<Operation>filter(_visibleOperationsWithName, _function);
-        final List<Operation> visibleOperations = IterableExtensions.<Operation>toList(_filter);
-        boolean _isNullOrEmpty_1 = IterableExtensions.isNullOrEmpty(visibleOperations);
-        if (_isNullOrEmpty_1) {
-          return SignatureHelpService.EMPTY;
-        }
-        SignatureHelpImpl _signatureHelpImpl = new SignatureHelpImpl();
-        final Procedure1<SignatureHelpImpl> _function_1 = (SignatureHelpImpl it) -> {
-          Integer _xifexpression = null;
-          if ((currentParamCount == 0)) {
-            _xifexpression = null;
-          } else {
-            _xifexpression = currentParamIndex;
-          }
-          it.setActiveParameter(_xifexpression);
-          it.setActiveSignature(Integer.valueOf(0));
-          final Function1<Operation, SignatureInformationImpl> _function_2 = (Operation operation) -> {
-            SignatureInformationImpl _signatureInformationImpl = new SignatureInformationImpl();
-            final Procedure1<SignatureInformationImpl> _function_3 = (SignatureInformationImpl it_1) -> {
-              String _label = this.getLabel(operation);
-              it_1.setLabel(_label);
-              EList<Parameter> _params_1 = operation.getParams();
-              final Function1<Parameter, ParameterInformationImpl> _function_4 = (Parameter param) -> {
-                ParameterInformationImpl _parameterInformationImpl = new ParameterInformationImpl();
-                final Procedure1<ParameterInformationImpl> _function_5 = (ParameterInformationImpl it_2) -> {
-                  StringConcatenation _builder = new StringConcatenation();
-                  String _name = param.getName();
-                  _builder.append(_name, "");
-                  _builder.append(": ");
-                  Type _type = param.getType();
-                  String _label_1 = this.getLabel(_type);
-                  _builder.append(_label_1, "");
-                  it_2.setLabel(_builder.toString());
-                };
-                return ObjectExtensions.<ParameterInformationImpl>operator_doubleArrow(_parameterInformationImpl, _function_5);
-              };
-              List<ParameterInformationImpl> _map = ListExtensions.<Parameter, ParameterInformationImpl>map(_params_1, _function_4);
-              it_1.setParameters(_map);
-            };
-            return ObjectExtensions.<SignatureInformationImpl>operator_doubleArrow(_signatureInformationImpl, _function_3);
-          };
-          List<SignatureInformationImpl> _map = ListExtensions.<Operation, SignatureInformationImpl>map(visibleOperations, _function_2);
-          List<SignatureInformationImpl> _list = IterableExtensions.<SignatureInformationImpl>toList(_map);
-          List<SignatureInformationImpl> _sortWith = IterableExtensions.<SignatureInformationImpl>sortWith(_list, SignatureHelpServiceImpl.SIGNATURE_INFO_ORDERING);
-          it.setSignatures(_sortWith);
-        };
-        return ObjectExtensions.<SignatureHelpImpl>operator_doubleArrow(_signatureHelpImpl, _function_1);
+        return this.getSignatureHelp(((OperationCall)object), operationName, offset);
       }
     }
     return SignatureHelpService.EMPTY;
   }
   
-  private Pair<Boolean, Integer> getCurrentParamInfo(final OperationCall operationCall, final int offset) {
-    EList<Integer> _params = operationCall.getParams();
-    final int paramSize = _params.size();
-    if ((paramSize == 0)) {
-      return Tuples.<Boolean, Integer>pair(Boolean.valueOf(false), Integer.valueOf(0));
-    }
-    final AtomicInteger openinIndex = new AtomicInteger((-1));
-    final AtomicInteger closingIndex = new AtomicInteger((-1));
+  private SignatureHelp getSignatureHelp(final OperationCall call, final String operationName, final int offset) {
     final List<Integer> separatorIndices = CollectionLiterals.<Integer>newArrayList();
-    ICompositeNode _node = NodeModelUtils.getNode(operationCall);
+    ICompositeNode _node = NodeModelUtils.getNode(call);
     BidiIterable<INode> _children = _node.getChildren();
-    final Consumer<INode> _function = (INode it) -> {
-      if ((Objects.equal(SignatureHelpServiceImpl.OPENING_CHAR, it.getText()) && (openinIndex.get() == (-1)))) {
-        ITextRegion _textRegion = it.getTextRegion();
-        int _offset = _textRegion.getOffset();
-        openinIndex.set(_offset);
-      } else {
-        if ((Objects.equal(SignatureHelpServiceImpl.CLOSING_CHAR, it.getText()) && (closingIndex.get() == (-1)))) {
-          ITextRegion _textRegion_1 = it.getTextRegion();
-          int _offset_1 = _textRegion_1.getOffset();
-          closingIndex.set(_offset_1);
+    for (final INode node : _children) {
+      {
+        final String text = node.getText();
+        if ((Objects.equal(SignatureHelpServiceImpl.OPENING_CHAR, text) && (node.getOffset() >= offset))) {
+          return SignatureHelpService.EMPTY;
         } else {
-          String _text = it.getText();
-          boolean _equals = Objects.equal(SignatureHelpServiceImpl.SEPARATOR_CHAR, _text);
-          if (_equals) {
-            ITextRegion _textRegion_2 = it.getTextRegion();
-            int _offset_2 = _textRegion_2.getOffset();
-            separatorIndices.add(Integer.valueOf(_offset_2));
+          if ((Objects.equal(SignatureHelpServiceImpl.CLOSING_CHAR, text) && (node.getOffset() < offset))) {
+            return SignatureHelpService.EMPTY;
+          } else {
+            boolean _equals = Objects.equal(SignatureHelpServiceImpl.SEPARATOR_CHAR, text);
+            if (_equals) {
+              int _offset = node.getOffset();
+              separatorIndices.add(Integer.valueOf(_offset));
+            }
           }
         }
       }
-    };
-    _children.forEach(_function);
-    int _get = openinIndex.get();
-    boolean _greaterEqualsThan = (_get >= offset);
-    if (_greaterEqualsThan) {
-      return Tuples.<Boolean, Integer>pair(Boolean.valueOf(true), Integer.valueOf(Integer.MAX_VALUE));
     }
-    if (((closingIndex.get() != (-1)) && (closingIndex.get() < offset))) {
-      return Tuples.<Boolean, Integer>pair(Boolean.valueOf(true), Integer.valueOf(Integer.MAX_VALUE));
-    }
-    int _get_1 = openinIndex.get();
-    boolean _greaterEqualsThan_1 = (_get_1 >= 0);
-    if (_greaterEqualsThan_1) {
-      int i = 0;
-      int size = separatorIndices.size();
-      boolean _while = (i < size);
-      while (_while) {
-        Integer _get_2 = separatorIndices.get(i);
-        boolean _greaterThan = ((_get_2).intValue() > (offset - 1));
-        if (_greaterThan) {
-          return Tuples.<Boolean, Integer>pair(Boolean.valueOf(false), Integer.valueOf(i));
+    EList<Integer> _params = call.getParams();
+    final int paramCount = _params.size();
+    final int separatorCount = separatorIndices.size();
+    if ((((separatorCount + 1) == paramCount) || (separatorCount == paramCount))) {
+      EReference _operation_Params = this._testLanguagePackage.getOperation_Params();
+      final List<INode> paramNodes = NodeModelUtils.findNodesForFeature(call, _operation_Params);
+      for (int i = 0; (i < separatorCount); i++) {
+        {
+          final INode paramNode = paramNodes.get(i);
+          int _offset = paramNode.getOffset();
+          int _length = paramNode.getLength();
+          int _plus = (_offset + _length);
+          Integer _get = separatorIndices.get(i);
+          boolean _greaterThan = (_plus > (_get).intValue());
+          if (_greaterThan) {
+            return SignatureHelpService.EMPTY;
+          }
         }
-        i++;
-        _while = (i < size);
       }
-    }
-    int _size = separatorIndices.size();
-    boolean _greaterEqualsThan_2 = (_size >= paramSize);
-    if (_greaterEqualsThan_2) {
-      int _size_1 = separatorIndices.size();
-      return Tuples.<Boolean, Integer>pair(Boolean.valueOf(true), Integer.valueOf(_size_1));
     } else {
-      return Tuples.<Boolean, Integer>pair(Boolean.valueOf(false), Integer.valueOf((paramSize - 1)));
+      return SignatureHelpService.EMPTY;
     }
+    int _xifexpression = (int) 0;
+    if ((paramCount == 0)) {
+      _xifexpression = 0;
+    } else {
+      int _xifexpression_1 = (int) 0;
+      boolean _contains = separatorIndices.contains(Integer.valueOf(offset));
+      if (_contains) {
+        int _indexOf = separatorIndices.indexOf(Integer.valueOf(offset));
+        _xifexpression_1 = (_indexOf + 2);
+      } else {
+        int _binarySearch = Arrays.binarySearch(((int[])Conversions.unwrapArray(separatorIndices, int.class)), offset);
+        _xifexpression_1 = (-_binarySearch);
+      }
+      _xifexpression = _xifexpression_1;
+    }
+    final int currentParameter = _xifexpression;
+    Iterable<Operation> _visibleOperationsWithName = this.getVisibleOperationsWithName(call, operationName);
+    final Function1<Operation, Boolean> _function = (Operation it) -> {
+      EList<Parameter> _params_1 = it.getParams();
+      int _size = _params_1.size();
+      return Boolean.valueOf((currentParameter <= _size));
+    };
+    final Iterable<Operation> visibleOperations = IterableExtensions.<Operation>filter(_visibleOperationsWithName, _function);
+    int _xifexpression_2 = (int) 0;
+    boolean _contains_1 = separatorIndices.contains(Integer.valueOf(offset));
+    if (_contains_1) {
+      _xifexpression_2 = 2;
+    } else {
+      _xifexpression_2 = 1;
+    }
+    final int paramOffset = _xifexpression_2;
+    SignatureHelpImpl _signatureHelpImpl = new SignatureHelpImpl();
+    final Procedure1<SignatureHelpImpl> _function_1 = (SignatureHelpImpl it) -> {
+      Integer _xifexpression_3 = null;
+      if ((paramCount == 0)) {
+        _xifexpression_3 = null;
+      } else {
+        _xifexpression_3 = Integer.valueOf((currentParameter - paramOffset));
+      }
+      it.setActiveParameter(_xifexpression_3);
+      it.setActiveSignature(Integer.valueOf(0));
+      final Function1<Operation, SignatureInformationImpl> _function_2 = (Operation operation) -> {
+        SignatureInformationImpl _signatureInformationImpl = new SignatureInformationImpl();
+        final Procedure1<SignatureInformationImpl> _function_3 = (SignatureInformationImpl it_1) -> {
+          String _label = this.getLabel(operation);
+          it_1.setLabel(_label);
+          EList<Parameter> _params_1 = operation.getParams();
+          final Function1<Parameter, ParameterInformationImpl> _function_4 = (Parameter param) -> {
+            ParameterInformationImpl _parameterInformationImpl = new ParameterInformationImpl();
+            final Procedure1<ParameterInformationImpl> _function_5 = (ParameterInformationImpl it_2) -> {
+              StringConcatenation _builder = new StringConcatenation();
+              String _name = param.getName();
+              _builder.append(_name, "");
+              _builder.append(": ");
+              Type _type = param.getType();
+              String _label_1 = this.getLabel(_type);
+              _builder.append(_label_1, "");
+              it_2.setLabel(_builder.toString());
+            };
+            return ObjectExtensions.<ParameterInformationImpl>operator_doubleArrow(_parameterInformationImpl, _function_5);
+          };
+          List<ParameterInformationImpl> _map = ListExtensions.<Parameter, ParameterInformationImpl>map(_params_1, _function_4);
+          it_1.setParameters(_map);
+        };
+        return ObjectExtensions.<SignatureInformationImpl>operator_doubleArrow(_signatureInformationImpl, _function_3);
+      };
+      Iterable<SignatureInformationImpl> _map = IterableExtensions.<Operation, SignatureInformationImpl>map(visibleOperations, _function_2);
+      List<SignatureInformationImpl> _list = IterableExtensions.<SignatureInformationImpl>toList(_map);
+      List<SignatureInformationImpl> _sortWith = IterableExtensions.<SignatureInformationImpl>sortWith(_list, SignatureHelpServiceImpl.SIGNATURE_INFO_ORDERING);
+      it.setSignatures(_sortWith);
+    };
+    return ObjectExtensions.<SignatureHelpImpl>operator_doubleArrow(_signatureHelpImpl, _function_1);
   }
   
   private Iterable<Operation> getVisibleOperationsWithName(final EObject object, final String name) {

@@ -13,9 +13,9 @@ import io.typefox.lsapi.SignatureInformation
 import io.typefox.lsapi.impl.ParameterInformationImpl
 import io.typefox.lsapi.impl.SignatureHelpImpl
 import io.typefox.lsapi.impl.SignatureInformationImpl
+import java.util.Arrays
 import java.util.Comparator
 import java.util.List
-import java.util.concurrent.atomic.AtomicInteger
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.ide.server.signatureHelp.SignatureHelpService
@@ -25,11 +25,11 @@ import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.PrimitiveType
 import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.TestLanguagePackage
 import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.TypeDeclaration
 import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.TypeReference
+import org.eclipse.xtext.nodemodel.INode
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.scoping.IScopeProvider
-import org.eclipse.xtext.util.Tuples
 
 /**
  * Signature help service implementation for the test language.
@@ -79,23 +79,70 @@ class SignatureHelpServiceImpl implements SignatureHelpService {
         if (object instanceof OperationCall) {
             val operationName = object.operationName;
             if (!operationName.nullOrEmpty) {
+				return getSignatureHelp(object, operationName, offset);
+            }
+        }
 
-                // Collect all visible operations with the matching name
-                // Also filter those operations that have less number of formal parameters than our call requires
-                val currentParamCount = object.params.size;
-                val currentParamIndexPair = object.getCurrentParamInfo(offset);
-                val incomplete = currentParamIndexPair.first;
-                val currentParamIndex = currentParamIndexPair.second;
-                val visibleOperations = object.getVisibleOperationsWithName(operationName).filter [
-                    if (incomplete) currentParamIndex < params.size else currentParamCount <= params.size
-                ].toList;
+        return EMPTY;
+    }
+	
+	private def getSignatureHelp(OperationCall call, String operationName, int offset) {
 
-                if (visibleOperations.nullOrEmpty) {
-                    return EMPTY;
-                }
+		// If the offset exceeds either the opening or the closing characters' offset we should not 
+		// provide signature help at all.
+		val List<Integer> separatorIndices = newArrayList();
 
-                return new SignatureHelpImpl => [
-                    activeParameter = if (currentParamCount === 0) null else currentParamIndex;
+		for (INode node : NodeModelUtils.getNode(call).getChildren()) {
+			val text = node.text;
+			if (OPENING_CHAR == text && node.offset >= offset) {
+				return EMPTY;
+			} else if (CLOSING_CHAR == text && node.offset < offset) {
+				return EMPTY;
+			} else if (SEPARATOR_CHAR == text) {
+				separatorIndices.add(node.offset);
+			}
+		}		
+						
+		// Here we will distinguish between three different AST states:
+		// 1. Valid state: when the number of parameter separators equals with the number of (parameters - 1) 
+		// and each separator is surrounded by two parameters.
+		// 2. Broken recoverable state: the number of parameters equals with the number of separators and the 
+		//last separator offset is greater than the last parameter (offset + length) and each separator is 
+		// surrounded by two parameters. Expect the last separator.
+		// 3. Broken inconsistent state: non of the above cases.
+		val paramCount = call.params.size;
+		val separatorCount = separatorIndices.size;
+
+		if ((separatorCount + 1) === paramCount || separatorCount === paramCount) {
+			val paramNodes = NodeModelUtils.findNodesForFeature(call, operation_Params);
+			// Parameter count could be greater than separator count.
+			for (var i = 0; i < separatorCount; i++) {
+				val paramNode = paramNodes.get(i);
+				// If separator is not after a parameter, signature help should not be provided.
+				if (paramNode.offset + paramNode.length > separatorIndices.get(i)) {
+					return EMPTY;
+				}
+			}			
+		} else {
+			return EMPTY;
+		}
+		
+		val currentParameter = if (paramCount === 0) {
+			0;
+		} else if (separatorIndices.contains(offset)) {
+			separatorIndices.indexOf(offset) + 2
+		} else {
+			// Here we can execute a binary search for sure, because the nodes where visited in order. 
+			-Arrays.binarySearch(separatorIndices, offset);
+		}
+		
+		val visibleOperations = call.getVisibleOperationsWithName(operationName).filter [
+			currentParameter <= params.size
+		]
+		
+		val paramOffset = if (separatorIndices.contains(offset)) 2 else 1;
+		return new SignatureHelpImpl => [
+                    activeParameter = if (paramCount === 0) null else currentParameter - paramOffset;
                     activeSignature = 0;
                     signatures = visibleOperations.map [ operation |
                         new SignatureInformationImpl() => [
@@ -108,61 +155,7 @@ class SignatureHelpServiceImpl implements SignatureHelpService {
                         ];
                     ].toList.sortWith(SIGNATURE_INFO_ORDERING);
                 ]
-
-            }
-        }
-
-        return EMPTY;
-    }
-
-    private def getCurrentParamInfo(OperationCall operationCall, int offset) {
-
-        // Handling case when no parameters are defined at all
-        val paramSize = operationCall.params.size;
-        if (paramSize == 0) {
-            return Tuples.pair(false, 0);
-        }
-
-        // Case for handling leading and trailing whitespaces properly
-        val openinIndex = new AtomicInteger(-1);
-        val closingIndex = new AtomicInteger(-1);
-        val List<Integer> separatorIndices = newArrayList();
-        
-        NodeModelUtils.getNode(operationCall).getChildren().forEach [
-            if (OPENING_CHAR == text && openinIndex.get === -1) {
-                openinIndex.set(textRegion.offset);
-            } else if (CLOSING_CHAR == text && closingIndex.get === -1) {
-                closingIndex.set(textRegion.offset);    
-            } else if (SEPARATOR_CHAR == text) {
-                separatorIndices.add(textRegion.offset);
-            }
-        ];
-        
-        // Offset is before the operation parameters
-        if (openinIndex.get >= offset) {
-            return Tuples.pair(true, Integer.MAX_VALUE); 
-        }
-        
-        // Offset exceeds the operation parameters
-        if (closingIndex.get !== -1 && closingIndex.get < offset) {
-            return Tuples.pair(true, Integer.MAX_VALUE);
-        }
-
-        if (openinIndex.get >= 0) {
-            for (var i = 0, var size = separatorIndices.size; i < size; i++) {
-                if (separatorIndices.get(i) > offset - 1) {
-                    return Tuples.pair(false, i);
-                }
-            }
-        }
-        
-        // Assuming broken AST
-        if (separatorIndices.size >= paramSize) {
-            return Tuples.pair(true, separatorIndices.size);
-        } else {
-            return Tuples.pair(false, paramSize - 1);
-        }
-    }
+	}
 
     private def getVisibleOperationsWithName(EObject object, String name) {
         return scopeProvider.getScope(object, operationCall_Operation)

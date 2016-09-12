@@ -14,6 +14,7 @@ import org.eclipse.xtext.generator.IGeneratorContext
 import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.PrimitiveType
 import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.TypeDeclaration
 import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.TypeReference
+import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Property
 
 /**
  * Generates code from your model files on save.
@@ -26,7 +27,7 @@ class TestLanguageGenerator extends AbstractGenerator {
 		for (type : resource.allContents.filter(TypeDeclaration).toList) {
 			fsa.generateFile(type.name+".java", '''
 			public class «type.name» {
-				«FOR p : type.properties»
+				«FOR p : type.members.filter(Property)»
 					private «p.type.toJava» «p.name»;
 					
 					public void set«p.name.toFirstUpper»(«p.type.toJava» «p.name») {

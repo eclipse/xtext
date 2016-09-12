@@ -36,7 +36,7 @@ class TestLanguageFormatter extends AbstractFormatter2 {
 			type.regionFor.keyword(typeDeclarationAccess.leftCurlyBracketKeyword_3),
 			type.regionFor.keyword(typeDeclarationAccess.rightCurlyBracketKeyword_5)
 		) [indent]
-		for (property : type.properties) {
+		for (property : type.members.filter(Property)) {
 			property.format
 		}	
 	}
