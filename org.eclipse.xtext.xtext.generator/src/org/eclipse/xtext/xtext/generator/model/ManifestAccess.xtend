@@ -17,6 +17,7 @@ import org.eclipse.xtext.util.MergeableManifest
 import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.xtext.generator.IGuiceAwareGeneratorComponent
 import com.google.inject.Injector
+import org.eclipse.xtext.util.Strings
 
 @Log
 @Accessors
@@ -37,6 +38,8 @@ class ManifestAccess extends TextFileAccess implements IGuiceAwareGeneratorCompo
 	val Set<String> importedPackages = newHashSet
 	
 	TypeReference activator
+	
+	String lineDelimiter = Strings.newLine();
 	
 	new() {
 		path = 'MANIFEST.MF'
@@ -122,9 +125,10 @@ class ManifestAccess extends TextFileAccess implements IGuiceAwareGeneratorCompo
 	
 	override void writeTo(IFileSystemAccess2 fileSystemAccess) {
 		if (fileSystemAccess != null) {
-			val contentToWrite = MergeableManifest.make512Safe(new StringBuffer(content))
+			val contentToWrite = MergeableManifest.make512Safe(new StringBuffer(content), lineDelimiter)
 			// make sure all the constraints for the manifest are respected
 			val mergableManifest = new MergeableManifest(new ByteArrayInputStream(contentToWrite.getBytes("UTF-8")))
+			mergableManifest.lineDelimiter = lineDelimiter
 			var bout = new ByteArrayOutputStream()
 			mergableManifest.write(bout)
 			fileSystemAccess.generateFile(path, new ByteArrayInputStream(bout.toByteArray))

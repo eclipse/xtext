@@ -112,6 +112,9 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
   @Inject
   private XtextGeneratorNaming naming;
   
+  @Inject
+  private CodeConfig codeConfig;
+  
   public XtextGenerator() {
     XtextStandaloneSetup _xtextStandaloneSetup = new XtextStandaloneSetup();
     _xtextStandaloneSetup.createInjectorAndDoEMFRegistration();
@@ -427,6 +430,8 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
       in = _readBinaryFile;
       String _bundleName = manifest.getBundleName();
       final MergeableManifest merge = new MergeableManifest(in, _bundleName);
+      String _lineDelimiter = this.codeConfig.getLineDelimiter();
+      merge.setLineDelimiter(_lineDelimiter);
       Set<String> _exportedPackages = manifest.getExportedPackages();
       merge.addExportedPackages(_exportedPackages);
       Set<String> _requiredBundles = manifest.getRequiredBundles();

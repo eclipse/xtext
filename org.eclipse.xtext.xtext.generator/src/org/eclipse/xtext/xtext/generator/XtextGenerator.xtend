@@ -71,6 +71,8 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 	
 	@Inject XtextGeneratorNaming naming
 	
+	@Inject CodeConfig codeConfig
+	
 	new() {
 		new XtextStandaloneSetup().createInjectorAndDoEMFRegistration()
 	}
@@ -251,6 +253,7 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 		try {
 			in = metaInf.readBinaryFile(manifest.path)
 			val merge = new MergeableManifest(in, manifest.bundleName)
+			merge.lineDelimiter = codeConfig.lineDelimiter
 			merge.addExportedPackages(manifest.exportedPackages)
 			merge.addRequiredBundles(manifest.requiredBundles)
 			merge.addImportedPackages(manifest.importedPackages)
