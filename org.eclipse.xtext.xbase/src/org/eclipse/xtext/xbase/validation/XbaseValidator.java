@@ -1320,7 +1320,7 @@ public class XbaseValidator extends AbstractXbaseValidator {
 						if (leftType.isPrimitive()) { 
 							error("The operator '" + operatorSymbol + "' is undefined for the argument types " + leftType.getHumanReadableName() + " and null", binaryOperation, null, PRIMITIVE_COMPARED_TO_NULL);
 						} else if (equalsComparison) {
-							addIssue("The operator '" + operatorSymbol + "' should be replaced by '" + operatorSymbol + "=' when null is one of the arguments.", binaryOperation, EQUALS_WITH_NULL);
+							addIssue("The operator '" + operatorSymbol + "' should be replaced by '" + operatorSymbol + "=' when null is one of the arguments.", binaryOperation, XbasePackage.eINSTANCE.getXAbstractFeatureCall_Feature(), EQUALS_WITH_NULL, operatorSymbol);
 						}
 					}
 				}
@@ -1330,7 +1330,7 @@ public class XbaseValidator extends AbstractXbaseValidator {
 						if (rightType.isPrimitive()) { 
 							error("The operator '" + operatorSymbol + "' is undefined for the argument types null and " + rightType.getHumanReadableName(), binaryOperation, null, PRIMITIVE_COMPARED_TO_NULL);
 						} else if (equalsComparison && !(right instanceof XNullLiteral)) {
-							addIssue("The operator '" + operatorSymbol + "' should be replaced by '" + operatorSymbol + "=' when null is one of the arguments.", binaryOperation, EQUALS_WITH_NULL);
+							addIssue("The operator '" + operatorSymbol + "' should be replaced by '" + operatorSymbol + "=' when null is one of the arguments.", binaryOperation, XbasePackage.eINSTANCE.getXAbstractFeatureCall_Feature(), EQUALS_WITH_NULL, operatorSymbol);
 						}
 					}
 				}
