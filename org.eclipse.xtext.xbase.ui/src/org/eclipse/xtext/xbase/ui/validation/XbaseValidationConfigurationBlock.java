@@ -64,6 +64,7 @@ public class XbaseValidationConfigurationBlock extends AbstractValidatorConfigur
 	}
 	
 	protected void fillCodingStyleSection(ComboBoxBuilder comboBoxBuilder) {
+		comboBoxBuilder.addJavaDelegatingComboBox(IssueCodes.INSTANCE_ACCESS_TO_STATIC_MEMBER, "Non-static access to static member:");
 		comboBoxBuilder.addComboBox(IssueCodes.OPERATION_WITHOUT_PARENTHESES, "Method/Constructor call without parentheses:");
 	}
 
