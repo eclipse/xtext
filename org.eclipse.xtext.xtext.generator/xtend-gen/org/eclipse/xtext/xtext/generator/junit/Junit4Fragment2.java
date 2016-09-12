@@ -74,7 +74,8 @@ public class Junit4Fragment2 extends AbstractStubGeneratingFragment {
         Set<String> _exportedPackages = it.getExportedPackages();
         Grammar _grammar = this.getGrammar();
         String _runtimeTestBasePackage = this._xtextGeneratorNaming.getRuntimeTestBasePackage(_grammar);
-        _exportedPackages.add(_runtimeTestBasePackage);
+        String _plus = (_runtimeTestBasePackage + ";x-internal=true");
+        _exportedPackages.add(_plus);
       };
       ObjectExtensions.<ManifestAccess>operator_doubleArrow(_manifest_1, _function);
     }
@@ -94,7 +95,8 @@ public class Junit4Fragment2 extends AbstractStubGeneratingFragment {
         Set<String> _exportedPackages = it.getExportedPackages();
         Grammar _grammar = this.getGrammar();
         String _eclipsePluginTestBasePackage = this._xtextGeneratorNaming.getEclipsePluginTestBasePackage(_grammar);
-        _exportedPackages.add(_eclipsePluginTestBasePackage);
+        String _plus = (_eclipsePluginTestBasePackage + ";x-internal=true");
+        _exportedPackages.add(_plus);
       };
       ObjectExtensions.<ManifestAccess>operator_doubleArrow(_manifest_3, _function_1);
     }
