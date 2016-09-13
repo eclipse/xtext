@@ -1180,6 +1180,15 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 	}
 
 	@Test
+	public void testRenamePrivateXtendMethod() throws Exception {
+		String xtendModel = "class XtendClass { def private void foo() {} def private void bar() {foo()} }";
+		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
+		final XtextEditor editor = openEditorSafely(xtendClass);
+		renameXtendElement(editor, xtendModel.indexOf("foo"), "baz");
+		assertDocumentContains(editor, xtendModel.replace("foo", "baz"));
+	}
+
+	@Test
 	// https://bugs.eclipse.org/bugs/show_bug.cgi?id=383102
 	public void testRenameExtensionMethodFromSuper() throws Exception {
 		String superModel = "public class Super { public void foo(String it) {} }";
@@ -1358,6 +1367,7 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 			protected void execute(IProgressMonitor monitor) throws CoreException, InvocationTargetException,
 					InterruptedException {
 				ProcessorBasedRefactoring renameRefactoring = createXtendRenameRefactoring(editor, offset, newName);
+				assertTrue("Refactoring not applicable", renameRefactoring.isApplicable());
 				RefactoringStatus status = renameRefactoring.checkAllConditions(new NullProgressMonitor());
 				assertTrue(status.toString(), status.getSeverity() <= allowedSeverity);
 				Change change = renameRefactoring.createChange(new NullProgressMonitor());
