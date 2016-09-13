@@ -19,6 +19,7 @@ import io.typefox.lsapi.MarkedString
 import io.typefox.lsapi.Position
 import io.typefox.lsapi.PublishDiagnosticsParams
 import io.typefox.lsapi.Range
+import io.typefox.lsapi.SignatureHelp
 import io.typefox.lsapi.SymbolInformation
 import io.typefox.lsapi.TextEdit
 import io.typefox.lsapi.builders.DidCloseTextDocumentParamsBuilder
@@ -224,6 +225,16 @@ abstract class AbstractLanguageServerTest implements Consumer<PublishDiagnostics
     protected dispatch def String toExpectation(
         MarkedString it
     ) '''«IF !language.nullOrEmpty»«language» -> «ENDIF»«value»'''
+    
+    protected dispatch def String toExpectation(SignatureHelp it) {
+        if (signatures.size === 0) {
+            Assert.assertNull('''Signature index is expected to be null when no signatures are available. Was: «activeSignature».''', activeSignature);
+            return '<empty>';
+        }
+        Assert.assertNotNull('Active signature index must not be null when signatures are available.', activeSignature);
+        val param = if (activeParameter === null) '<empty>' else signatures.get(activeSignature).parameters.get(activeParameter).label;
+        '''«signatures.map[label].join(' | ')» | «param»''';
+    }
 
     protected def void testCompletion((TestCompletionConfiguration)=>void configurator) {
         val extension configuration = new TestCompletionConfiguration
@@ -280,6 +291,22 @@ abstract class AbstractLanguageServerTest implements Consumer<PublishDiagnostics
         ].build)
         val actualHover = hover.get.toExpectation
         assertEquals(expectedHover, actualHover)
+    }
+    
+    protected def testSignatureHelp((SignatureHelpConfiguration) => void configurator) {
+        val extension configuration = new SignatureHelpConfiguration;
+        configuration.filePath = 'MyModel.' + fileExtension;
+        configurator.apply(configuration);
+        
+        val fileUri = initializeContext(configuration);
+        
+        val signatureHelps = languageServer.signatureHelp(new TextDocumentPositionParamsBuilder[
+            textDocument(fileUri);
+            position(line, column);
+        ].build);
+        
+        val actualHover = signatureHelps.get.toExpectation
+        assertEquals(expectedSignatureHelp, actualHover)
     }
 
     protected def void testDocumentSymbol((DocumentSymbolConfiguraiton)=>void configurator) {
@@ -373,6 +400,11 @@ class DefinitionTestConfiguration extends TextDocumentPositionConfiguration {
 @Accessors
 class HoverTestConfiguration extends TextDocumentPositionConfiguration {
     String expectedHover = ''
+}
+
+@Accessors
+class SignatureHelpConfiguration extends TextDocumentPositionConfiguration {
+    String expectedSignatureHelp = ''
 }
 
 @Accessors

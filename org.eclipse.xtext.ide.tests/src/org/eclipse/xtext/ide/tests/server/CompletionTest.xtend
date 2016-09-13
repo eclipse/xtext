@@ -48,7 +48,9 @@ class CompletionTest extends AbstractTestLangLanguageServerTest {
 				Foo (TypeDeclaration) -> Foo [[1, 10] .. [1, 10]]
 				boolean -> boolean [[1, 10] .. [1, 10]]
 				int -> int [[1, 10] .. [1, 10]]
+				op -> op [[1, 10] .. [1, 10]]
 				string -> string [[1, 10] .. [1, 10]]
+				void -> void [[1, 10] .. [1, 10]]
 				} -> } [[1, 10] .. [1, 10]]
 				{ -> { [[1, 9] .. [1, 10]]
 			'''
@@ -91,7 +93,9 @@ class CompletionTest extends AbstractTestLangLanguageServerTest {
                 foo (TypeDeclaration) -> foo [[1, 10] .. [1, 10]]
                 boolean -> boolean [[1, 10] .. [1, 10]]
                 int -> int [[1, 10] .. [1, 10]]
+                op -> op [[1, 10] .. [1, 10]]
                 string -> string [[1, 10] .. [1, 10]]
+                void -> void [[1, 10] .. [1, 10]]
                 } -> } [[1, 10] .. [1, 10]]
                 { -> { [[1, 9] .. [1, 10]]
             '''

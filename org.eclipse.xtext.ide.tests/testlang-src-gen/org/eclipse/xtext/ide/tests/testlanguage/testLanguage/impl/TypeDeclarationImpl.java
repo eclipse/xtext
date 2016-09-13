@@ -23,7 +23,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Property;
+import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Member;
 import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.TestLanguagePackage;
 import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.TypeDeclaration;
 
@@ -37,7 +37,7 @@ import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.TypeDeclaration;
  * <ul>
  *   <li>{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.TypeDeclarationImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.TypeDeclarationImpl#getSuperType <em>Super Type</em>}</li>
- *   <li>{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.TypeDeclarationImpl#getProperties <em>Properties</em>}</li>
+ *   <li>{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.TypeDeclarationImpl#getMembers <em>Members</em>}</li>
  * </ul>
  *
  * @generated
@@ -75,14 +75,14 @@ public class TypeDeclarationImpl extends MinimalEObjectImpl.Container implements
   protected TypeDeclaration superType;
 
   /**
-   * The cached value of the '{@link #getProperties() <em>Properties</em>}' containment reference list.
+   * The cached value of the '{@link #getMembers() <em>Members</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getProperties()
+   * @see #getMembers()
    * @generated
    * @ordered
    */
-  protected EList<Property> properties;
+  protected EList<Member> members;
 
   /**
    * <!-- begin-user-doc -->
@@ -176,13 +176,13 @@ public class TypeDeclarationImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<Property> getProperties()
+  public EList<Member> getMembers()
   {
-    if (properties == null)
+    if (members == null)
     {
-      properties = new EObjectContainmentEList<Property>(Property.class, this, TestLanguagePackage.TYPE_DECLARATION__PROPERTIES);
+      members = new EObjectContainmentEList<Member>(Member.class, this, TestLanguagePackage.TYPE_DECLARATION__MEMBERS);
     }
-    return properties;
+    return members;
   }
 
   /**
@@ -195,8 +195,8 @@ public class TypeDeclarationImpl extends MinimalEObjectImpl.Container implements
   {
     switch (featureID)
     {
-      case TestLanguagePackage.TYPE_DECLARATION__PROPERTIES:
-        return ((InternalEList<?>)getProperties()).basicRemove(otherEnd, msgs);
+      case TestLanguagePackage.TYPE_DECLARATION__MEMBERS:
+        return ((InternalEList<?>)getMembers()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -216,8 +216,8 @@ public class TypeDeclarationImpl extends MinimalEObjectImpl.Container implements
       case TestLanguagePackage.TYPE_DECLARATION__SUPER_TYPE:
         if (resolve) return getSuperType();
         return basicGetSuperType();
-      case TestLanguagePackage.TYPE_DECLARATION__PROPERTIES:
-        return getProperties();
+      case TestLanguagePackage.TYPE_DECLARATION__MEMBERS:
+        return getMembers();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -239,9 +239,9 @@ public class TypeDeclarationImpl extends MinimalEObjectImpl.Container implements
       case TestLanguagePackage.TYPE_DECLARATION__SUPER_TYPE:
         setSuperType((TypeDeclaration)newValue);
         return;
-      case TestLanguagePackage.TYPE_DECLARATION__PROPERTIES:
-        getProperties().clear();
-        getProperties().addAll((Collection<? extends Property>)newValue);
+      case TestLanguagePackage.TYPE_DECLARATION__MEMBERS:
+        getMembers().clear();
+        getMembers().addAll((Collection<? extends Member>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -263,8 +263,8 @@ public class TypeDeclarationImpl extends MinimalEObjectImpl.Container implements
       case TestLanguagePackage.TYPE_DECLARATION__SUPER_TYPE:
         setSuperType((TypeDeclaration)null);
         return;
-      case TestLanguagePackage.TYPE_DECLARATION__PROPERTIES:
-        getProperties().clear();
+      case TestLanguagePackage.TYPE_DECLARATION__MEMBERS:
+        getMembers().clear();
         return;
     }
     super.eUnset(featureID);
@@ -284,8 +284,8 @@ public class TypeDeclarationImpl extends MinimalEObjectImpl.Container implements
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case TestLanguagePackage.TYPE_DECLARATION__SUPER_TYPE:
         return superType != null;
-      case TestLanguagePackage.TYPE_DECLARATION__PROPERTIES:
-        return properties != null && !properties.isEmpty();
+      case TestLanguagePackage.TYPE_DECLARATION__MEMBERS:
+        return members != null && !members.isEmpty();
     }
     return super.eIsSet(featureID);
   }

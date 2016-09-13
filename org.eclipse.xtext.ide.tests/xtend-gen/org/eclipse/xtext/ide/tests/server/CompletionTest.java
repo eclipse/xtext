@@ -63,7 +63,11 @@ public class CompletionTest extends AbstractTestLangLanguageServerTest {
       _builder_1.newLine();
       _builder_1.append("int -> int [[1, 10] .. [1, 10]]");
       _builder_1.newLine();
+      _builder_1.append("op -> op [[1, 10] .. [1, 10]]");
+      _builder_1.newLine();
       _builder_1.append("string -> string [[1, 10] .. [1, 10]]");
+      _builder_1.newLine();
+      _builder_1.append("void -> void [[1, 10] .. [1, 10]]");
       _builder_1.newLine();
       _builder_1.append("} -> } [[1, 10] .. [1, 10]]");
       _builder_1.newLine();
@@ -130,7 +134,11 @@ public class CompletionTest extends AbstractTestLangLanguageServerTest {
       _builder_1.newLine();
       _builder_1.append("int -> int [[1, 10] .. [1, 10]]");
       _builder_1.newLine();
+      _builder_1.append("op -> op [[1, 10] .. [1, 10]]");
+      _builder_1.newLine();
       _builder_1.append("string -> string [[1, 10] .. [1, 10]]");
+      _builder_1.newLine();
+      _builder_1.append("void -> void [[1, 10] .. [1, 10]]");
       _builder_1.newLine();
       _builder_1.append("} -> } [[1, 10] .. [1, 10]]");
       _builder_1.newLine();

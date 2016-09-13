@@ -16,6 +16,8 @@ import org.eclipse.xtext.Parameter;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.ide.tests.testlanguage.services.TestLanguageGrammarAccess;
 import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Model;
+import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Operation;
+import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.OperationCall;
 import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.PrimitiveType;
 import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Property;
 import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.TestLanguagePackage;
@@ -42,6 +44,15 @@ public class TestLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 			switch (semanticObject.eClass().getClassifierID()) {
 			case TestLanguagePackage.MODEL:
 				sequence_Model(context, (Model) semanticObject); 
+				return; 
+			case TestLanguagePackage.OPERATION:
+				sequence_Operation(context, (Operation) semanticObject); 
+				return; 
+			case TestLanguagePackage.OPERATION_CALL:
+				sequence_OperationCall(context, (OperationCall) semanticObject); 
+				return; 
+			case TestLanguagePackage.PARAMETER:
+				sequence_Parameter(context, (org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Parameter) semanticObject); 
 				return; 
 			case TestLanguagePackage.PRIMITIVE_TYPE:
 				if (rule == grammarAccess.getPrimitiveTypeRule()) {
@@ -88,10 +99,56 @@ public class TestLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 	
 	/**
 	 * Contexts:
+	 *     OperationCall returns OperationCall
+	 *
+	 * Constraint:
+	 *     (operation=[Operation|ID] (params+=INT params+=INT*)?)
+	 */
+	protected void sequence_OperationCall(ISerializationContext context, OperationCall semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Member returns Operation
+	 *     Operation returns Operation
+	 *
+	 * Constraint:
+	 *     (name=ID (params+=Parameter params+=Parameter*)? returnType=Type? operationCall=OperationCall?)
+	 */
+	protected void sequence_Operation(ISerializationContext context, Operation semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     Parameter returns Parameter
+	 *
+	 * Constraint:
+	 *     (name=ID type=Type)
+	 */
+	protected void sequence_Parameter(ISerializationContext context, org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Parameter semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, TestLanguagePackage.Literals.PARAMETER__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, TestLanguagePackage.Literals.PARAMETER__NAME));
+			if (transientValues.isValueTransient(semanticObject, TestLanguagePackage.Literals.PARAMETER__TYPE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, TestLanguagePackage.Literals.PARAMETER__TYPE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getParameterAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getParameterAccess().getTypeTypeParserRuleCall_3_0(), semanticObject.getType());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     PrimitiveType returns PrimitiveType
 	 *
 	 * Constraint:
-	 *     (name='string' | name='int' | name='boolean')
+	 *     (name='string' | name='int' | name='boolean' | name='void')
 	 */
 	protected void sequence_PrimitiveType(ISerializationContext context, PrimitiveType semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -103,7 +160,7 @@ public class TestLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 	 *     Type returns PrimitiveType
 	 *
 	 * Constraint:
-	 *     ((name='string' | name='int' | name='boolean') arrayDiemensions+='['*)
+	 *     ((name='string' | name='int' | name='boolean' | name='void') arrayDiemensions+='['*)
 	 */
 	protected void sequence_PrimitiveType_Type(ISerializationContext context, PrimitiveType semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -112,6 +169,7 @@ public class TestLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 	
 	/**
 	 * Contexts:
+	 *     Member returns Property
 	 *     Property returns Property
 	 *
 	 * Constraint:
@@ -121,8 +179,8 @@ public class TestLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 		if (errorAcceptor != null) {
 			if (transientValues.isValueTransient(semanticObject, TestLanguagePackage.Literals.PROPERTY__TYPE) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, TestLanguagePackage.Literals.PROPERTY__TYPE));
-			if (transientValues.isValueTransient(semanticObject, TestLanguagePackage.Literals.PROPERTY__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, TestLanguagePackage.Literals.PROPERTY__NAME));
+			if (transientValues.isValueTransient(semanticObject, TestLanguagePackage.Literals.MEMBER__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, TestLanguagePackage.Literals.MEMBER__NAME));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getPropertyAccess().getTypeTypeParserRuleCall_0_0(), semanticObject.getType());
@@ -136,7 +194,7 @@ public class TestLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 	 *     TypeDeclaration returns TypeDeclaration
 	 *
 	 * Constraint:
-	 *     (name=ID superType=[TypeDeclaration|ID]? properties+=Property*)
+	 *     (name=ID superType=[TypeDeclaration|ID]? members+=Member*)
 	 */
 	protected void sequence_TypeDeclaration(ISerializationContext context, TypeDeclaration semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

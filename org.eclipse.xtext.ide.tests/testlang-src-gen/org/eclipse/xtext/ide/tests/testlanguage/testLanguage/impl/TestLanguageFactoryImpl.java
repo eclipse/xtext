@@ -71,8 +71,12 @@ public class TestLanguageFactoryImpl extends EFactoryImpl implements TestLanguag
     {
       case TestLanguagePackage.MODEL: return createModel();
       case TestLanguagePackage.TYPE_DECLARATION: return createTypeDeclaration();
+      case TestLanguagePackage.MEMBER: return createMember();
       case TestLanguagePackage.PROPERTY: return createProperty();
       case TestLanguagePackage.TYPE: return createType();
+      case TestLanguagePackage.OPERATION: return createOperation();
+      case TestLanguagePackage.OPERATION_CALL: return createOperationCall();
+      case TestLanguagePackage.PARAMETER: return createParameter();
       case TestLanguagePackage.TYPE_REFERENCE: return createTypeReference();
       case TestLanguagePackage.PRIMITIVE_TYPE: return createPrimitiveType();
       default:
@@ -107,6 +111,17 @@ public class TestLanguageFactoryImpl extends EFactoryImpl implements TestLanguag
    * <!-- end-user-doc -->
    * @generated
    */
+  public Member createMember()
+  {
+    MemberImpl member = new MemberImpl();
+    return member;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public Property createProperty()
   {
     PropertyImpl property = new PropertyImpl();
@@ -122,6 +137,39 @@ public class TestLanguageFactoryImpl extends EFactoryImpl implements TestLanguag
   {
     TypeImpl type = new TypeImpl();
     return type;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Operation createOperation()
+  {
+    OperationImpl operation = new OperationImpl();
+    return operation;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public OperationCall createOperationCall()
+  {
+    OperationCallImpl operationCall = new OperationCallImpl();
+    return operationCall;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Parameter createParameter()
+  {
+    ParameterImpl parameter = new ParameterImpl();
+    return parameter;
   }
 
   /**

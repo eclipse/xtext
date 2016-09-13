@@ -8,7 +8,9 @@
 package org.eclipse.xtext.ide.tests.testlanguage
 
 import org.eclipse.xtext.formatting2.IFormatter2
+import org.eclipse.xtext.ide.server.signatureHelp.SignatureHelpService
 import org.eclipse.xtext.ide.tests.testlanguage.formatting2.TestLanguageFormatter
+import org.eclipse.xtext.ide.tests.testlanguage.signatureHelp.SignatureHelpServiceImpl
 
 /**
  * Use this class to register components to be used at runtime / without the Equinox extension registry.
@@ -18,5 +20,9 @@ class TestLanguageRuntimeModule extends AbstractTestLanguageRuntimeModule {
 	def Class<? extends IFormatter2> bindIFormatter2() {
 		return TestLanguageFormatter;
 	}
+	
+    def Class<? extends SignatureHelpService> bindSignatureHelpService() {
+        return SignatureHelpServiceImpl;
+    }
 
 }

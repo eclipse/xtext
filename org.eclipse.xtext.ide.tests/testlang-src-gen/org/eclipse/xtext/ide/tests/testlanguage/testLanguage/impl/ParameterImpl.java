@@ -14,26 +14,48 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Property;
+import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Parameter;
 import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.TestLanguagePackage;
 import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Type;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Property</b></em>'.
+ * An implementation of the model object '<em><b>Parameter</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.PropertyImpl#getType <em>Type</em>}</li>
+ *   <li>{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.ParameterImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.ParameterImpl#getType <em>Type</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class PropertyImpl extends MemberImpl implements Property
+public class ParameterImpl extends MinimalEObjectImpl.Container implements Parameter
 {
+  /**
+   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getName()
+   * @generated
+   * @ordered
+   */
+  protected static final String NAME_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getName()
+   * @generated
+   * @ordered
+   */
+  protected String name = NAME_EDEFAULT;
+
   /**
    * The cached value of the '{@link #getType() <em>Type</em>}' containment reference.
    * <!-- begin-user-doc -->
@@ -49,7 +71,7 @@ public class PropertyImpl extends MemberImpl implements Property
    * <!-- end-user-doc -->
    * @generated
    */
-  protected PropertyImpl()
+  protected ParameterImpl()
   {
     super();
   }
@@ -62,7 +84,30 @@ public class PropertyImpl extends MemberImpl implements Property
   @Override
   protected EClass eStaticClass()
   {
-    return TestLanguagePackage.Literals.PROPERTY;
+    return TestLanguagePackage.Literals.PARAMETER;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public String getName()
+  {
+    return name;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setName(String newName)
+  {
+    String oldName = name;
+    name = newName;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, TestLanguagePackage.PARAMETER__NAME, oldName, name));
   }
 
   /**
@@ -86,7 +131,7 @@ public class PropertyImpl extends MemberImpl implements Property
     type = newType;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, TestLanguagePackage.PROPERTY__TYPE, oldType, newType);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, TestLanguagePackage.PARAMETER__TYPE, oldType, newType);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -103,14 +148,14 @@ public class PropertyImpl extends MemberImpl implements Property
     {
       NotificationChain msgs = null;
       if (type != null)
-        msgs = ((InternalEObject)type).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TestLanguagePackage.PROPERTY__TYPE, null, msgs);
+        msgs = ((InternalEObject)type).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TestLanguagePackage.PARAMETER__TYPE, null, msgs);
       if (newType != null)
-        msgs = ((InternalEObject)newType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - TestLanguagePackage.PROPERTY__TYPE, null, msgs);
+        msgs = ((InternalEObject)newType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - TestLanguagePackage.PARAMETER__TYPE, null, msgs);
       msgs = basicSetType(newType, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, TestLanguagePackage.PROPERTY__TYPE, newType, newType));
+      eNotify(new ENotificationImpl(this, Notification.SET, TestLanguagePackage.PARAMETER__TYPE, newType, newType));
   }
 
   /**
@@ -123,7 +168,7 @@ public class PropertyImpl extends MemberImpl implements Property
   {
     switch (featureID)
     {
-      case TestLanguagePackage.PROPERTY__TYPE:
+      case TestLanguagePackage.PARAMETER__TYPE:
         return basicSetType(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -139,7 +184,9 @@ public class PropertyImpl extends MemberImpl implements Property
   {
     switch (featureID)
     {
-      case TestLanguagePackage.PROPERTY__TYPE:
+      case TestLanguagePackage.PARAMETER__NAME:
+        return getName();
+      case TestLanguagePackage.PARAMETER__TYPE:
         return getType();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -155,7 +202,10 @@ public class PropertyImpl extends MemberImpl implements Property
   {
     switch (featureID)
     {
-      case TestLanguagePackage.PROPERTY__TYPE:
+      case TestLanguagePackage.PARAMETER__NAME:
+        setName((String)newValue);
+        return;
+      case TestLanguagePackage.PARAMETER__TYPE:
         setType((Type)newValue);
         return;
     }
@@ -172,7 +222,10 @@ public class PropertyImpl extends MemberImpl implements Property
   {
     switch (featureID)
     {
-      case TestLanguagePackage.PROPERTY__TYPE:
+      case TestLanguagePackage.PARAMETER__NAME:
+        setName(NAME_EDEFAULT);
+        return;
+      case TestLanguagePackage.PARAMETER__TYPE:
         setType((Type)null);
         return;
     }
@@ -189,10 +242,29 @@ public class PropertyImpl extends MemberImpl implements Property
   {
     switch (featureID)
     {
-      case TestLanguagePackage.PROPERTY__TYPE:
+      case TestLanguagePackage.PARAMETER__NAME:
+        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+      case TestLanguagePackage.PARAMETER__TYPE:
         return type != null;
     }
     return super.eIsSet(featureID);
   }
 
-} //PropertyImpl
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuffer result = new StringBuffer(super.toString());
+    result.append(" (name: ");
+    result.append(name);
+    result.append(')');
+    return result.toString();
+  }
+
+} //ParameterImpl

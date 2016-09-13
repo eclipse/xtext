@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtext.ide.tests.testlanguage.formatting2;
 
+import com.google.common.collect.Iterables;
 import java.util.Arrays;
 import javax.inject.Inject;
 import org.eclipse.emf.common.util.EList;
@@ -18,6 +19,7 @@ import org.eclipse.xtext.formatting2.IHiddenRegionFormatter;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegion;
 import org.eclipse.xtext.formatting2.regionaccess.ISemanticRegionsFinder;
 import org.eclipse.xtext.ide.tests.testlanguage.services.TestLanguageGrammarAccess;
+import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Member;
 import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Model;
 import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Property;
 import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.TypeDeclaration;
@@ -74,8 +76,9 @@ public class TestLanguageFormatter extends AbstractFormatter2 {
       it.indent();
     };
     document.<ISemanticRegion, ISemanticRegion>interior(_keyword_2, _keyword_3, _function_3);
-    EList<Property> _properties = type.getProperties();
-    for (final Property property : _properties) {
+    EList<Member> _members = type.getMembers();
+    Iterable<Property> _filter = Iterables.<Property>filter(_members, Property.class);
+    for (final Property property : _filter) {
       document.<Property>format(property);
     }
   }
@@ -87,31 +90,31 @@ public class TestLanguageFormatter extends AbstractFormatter2 {
     document.<Property>append(property, _function);
   }
   
-  public void format(final Object model, final IFormattableDocument document) {
-    if (model instanceof XtextResource) {
-      _format((XtextResource)model, document);
+  public void format(final Object property, final IFormattableDocument document) {
+    if (property instanceof XtextResource) {
+      _format((XtextResource)property, document);
       return;
-    } else if (model instanceof Model) {
-      _format((Model)model, document);
+    } else if (property instanceof Property) {
+      _format((Property)property, document);
       return;
-    } else if (model instanceof Property) {
-      _format((Property)model, document);
+    } else if (property instanceof Model) {
+      _format((Model)property, document);
       return;
-    } else if (model instanceof TypeDeclaration) {
-      _format((TypeDeclaration)model, document);
+    } else if (property instanceof TypeDeclaration) {
+      _format((TypeDeclaration)property, document);
       return;
-    } else if (model instanceof EObject) {
-      _format((EObject)model, document);
+    } else if (property instanceof EObject) {
+      _format((EObject)property, document);
       return;
-    } else if (model == null) {
+    } else if (property == null) {
       _format((Void)null, document);
       return;
-    } else if (model != null) {
-      _format(model, document);
+    } else if (property != null) {
+      _format(property, document);
       return;
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
-        Arrays.<Object>asList(model, document).toString());
+        Arrays.<Object>asList(property, document).toString());
     }
   }
 }

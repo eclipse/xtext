@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtext.ide.tests.testlanguage.generator;
 
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Iterators;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -19,6 +20,7 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.AbstractGenerator;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.generator.IGeneratorContext;
+import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Member;
 import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.PrimitiveType;
 import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Property;
 import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Type;
@@ -52,8 +54,9 @@ public class TestLanguageGenerator extends AbstractGenerator {
       _builder.append(" {");
       _builder.newLineIfNotEmpty();
       {
-        EList<Property> _properties = type.getProperties();
-        for(final Property p : _properties) {
+        EList<Member> _members = type.getMembers();
+        Iterable<Property> _filter_1 = Iterables.<Property>filter(_members, Property.class);
+        for(final Property p : _filter_1) {
           _builder.append("\t");
           _builder.append("private ");
           Type _type = p.getType();

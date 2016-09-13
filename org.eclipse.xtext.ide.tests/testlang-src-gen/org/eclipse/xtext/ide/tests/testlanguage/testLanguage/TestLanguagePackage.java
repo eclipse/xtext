@@ -118,13 +118,13 @@ public interface TestLanguagePackage extends EPackage
   int TYPE_DECLARATION__SUPER_TYPE = 1;
 
   /**
-   * The feature id for the '<em><b>Properties</b></em>' containment reference list.
+   * The feature id for the '<em><b>Members</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int TYPE_DECLARATION__PROPERTIES = 2;
+  int TYPE_DECLARATION__MEMBERS = 2;
 
   /**
    * The number of structural features of the '<em>Type Declaration</em>' class.
@@ -136,23 +136,14 @@ public interface TestLanguagePackage extends EPackage
   int TYPE_DECLARATION_FEATURE_COUNT = 3;
 
   /**
-   * The meta object id for the '{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.PropertyImpl <em>Property</em>}' class.
+   * The meta object id for the '{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.MemberImpl <em>Member</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.PropertyImpl
-   * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.TestLanguagePackageImpl#getProperty()
+   * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.MemberImpl
+   * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.TestLanguagePackageImpl#getMember()
    * @generated
    */
-  int PROPERTY = 2;
-
-  /**
-   * The feature id for the '<em><b>Type</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int PROPERTY__TYPE = 0;
+  int MEMBER = 2;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -161,7 +152,44 @@ public interface TestLanguagePackage extends EPackage
    * @generated
    * @ordered
    */
-  int PROPERTY__NAME = 1;
+  int MEMBER__NAME = 0;
+
+  /**
+   * The number of structural features of the '<em>Member</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MEMBER_FEATURE_COUNT = 1;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.PropertyImpl <em>Property</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.PropertyImpl
+   * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.TestLanguagePackageImpl#getProperty()
+   * @generated
+   */
+  int PROPERTY = 3;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PROPERTY__NAME = MEMBER__NAME;
+
+  /**
+   * The feature id for the '<em><b>Type</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PROPERTY__TYPE = MEMBER_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>Property</em>' class.
@@ -170,7 +198,7 @@ public interface TestLanguagePackage extends EPackage
    * @generated
    * @ordered
    */
-  int PROPERTY_FEATURE_COUNT = 2;
+  int PROPERTY_FEATURE_COUNT = MEMBER_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.TypeImpl <em>Type</em>}' class.
@@ -180,7 +208,7 @@ public interface TestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.TestLanguagePackageImpl#getType()
    * @generated
    */
-  int TYPE = 3;
+  int TYPE = 4;
 
   /**
    * The feature id for the '<em><b>Array Diemensions</b></em>' attribute list.
@@ -201,6 +229,135 @@ public interface TestLanguagePackage extends EPackage
   int TYPE_FEATURE_COUNT = 1;
 
   /**
+   * The meta object id for the '{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.OperationImpl <em>Operation</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.OperationImpl
+   * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.TestLanguagePackageImpl#getOperation()
+   * @generated
+   */
+  int OPERATION = 5;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int OPERATION__NAME = MEMBER__NAME;
+
+  /**
+   * The feature id for the '<em><b>Params</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int OPERATION__PARAMS = MEMBER_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Return Type</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int OPERATION__RETURN_TYPE = MEMBER_FEATURE_COUNT + 1;
+
+  /**
+   * The feature id for the '<em><b>Operation Call</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int OPERATION__OPERATION_CALL = MEMBER_FEATURE_COUNT + 2;
+
+  /**
+   * The number of structural features of the '<em>Operation</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int OPERATION_FEATURE_COUNT = MEMBER_FEATURE_COUNT + 3;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.OperationCallImpl <em>Operation Call</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.OperationCallImpl
+   * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.TestLanguagePackageImpl#getOperationCall()
+   * @generated
+   */
+  int OPERATION_CALL = 6;
+
+  /**
+   * The feature id for the '<em><b>Operation</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int OPERATION_CALL__OPERATION = 0;
+
+  /**
+   * The feature id for the '<em><b>Params</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int OPERATION_CALL__PARAMS = 1;
+
+  /**
+   * The number of structural features of the '<em>Operation Call</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int OPERATION_CALL_FEATURE_COUNT = 2;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.ParameterImpl <em>Parameter</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.ParameterImpl
+   * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.TestLanguagePackageImpl#getParameter()
+   * @generated
+   */
+  int PARAMETER = 7;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PARAMETER__NAME = 0;
+
+  /**
+   * The feature id for the '<em><b>Type</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PARAMETER__TYPE = 1;
+
+  /**
+   * The number of structural features of the '<em>Parameter</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PARAMETER_FEATURE_COUNT = 2;
+
+  /**
    * The meta object id for the '{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.TypeReferenceImpl <em>Type Reference</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -208,7 +365,7 @@ public interface TestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.TestLanguagePackageImpl#getTypeReference()
    * @generated
    */
-  int TYPE_REFERENCE = 4;
+  int TYPE_REFERENCE = 8;
 
   /**
    * The feature id for the '<em><b>Array Diemensions</b></em>' attribute list.
@@ -245,7 +402,7 @@ public interface TestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.TestLanguagePackageImpl#getPrimitiveType()
    * @generated
    */
-  int PRIMITIVE_TYPE = 5;
+  int PRIMITIVE_TYPE = 9;
 
   /**
    * The feature id for the '<em><b>Array Diemensions</b></em>' attribute list.
@@ -329,15 +486,36 @@ public interface TestLanguagePackage extends EPackage
   EReference getTypeDeclaration_SuperType();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.TypeDeclaration#getProperties <em>Properties</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.TypeDeclaration#getMembers <em>Members</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Properties</em>'.
-   * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.TypeDeclaration#getProperties()
+   * @return the meta object for the containment reference list '<em>Members</em>'.
+   * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.TypeDeclaration#getMembers()
    * @see #getTypeDeclaration()
    * @generated
    */
-  EReference getTypeDeclaration_Properties();
+  EReference getTypeDeclaration_Members();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Member <em>Member</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Member</em>'.
+   * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Member
+   * @generated
+   */
+  EClass getMember();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Member#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Member#getName()
+   * @see #getMember()
+   * @generated
+   */
+  EAttribute getMember_Name();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Property <em>Property</em>}'.
@@ -361,17 +539,6 @@ public interface TestLanguagePackage extends EPackage
   EReference getProperty_Type();
 
   /**
-   * Returns the meta object for the attribute '{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Property#getName <em>Name</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Name</em>'.
-   * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Property#getName()
-   * @see #getProperty()
-   * @generated
-   */
-  EAttribute getProperty_Name();
-
-  /**
    * Returns the meta object for class '{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Type <em>Type</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -391,6 +558,113 @@ public interface TestLanguagePackage extends EPackage
    * @generated
    */
   EAttribute getType_ArrayDiemensions();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Operation <em>Operation</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Operation</em>'.
+   * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Operation
+   * @generated
+   */
+  EClass getOperation();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Operation#getParams <em>Params</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Params</em>'.
+   * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Operation#getParams()
+   * @see #getOperation()
+   * @generated
+   */
+  EReference getOperation_Params();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Operation#getReturnType <em>Return Type</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Return Type</em>'.
+   * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Operation#getReturnType()
+   * @see #getOperation()
+   * @generated
+   */
+  EReference getOperation_ReturnType();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Operation#getOperationCall <em>Operation Call</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Operation Call</em>'.
+   * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Operation#getOperationCall()
+   * @see #getOperation()
+   * @generated
+   */
+  EReference getOperation_OperationCall();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.OperationCall <em>Operation Call</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Operation Call</em>'.
+   * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.OperationCall
+   * @generated
+   */
+  EClass getOperationCall();
+
+  /**
+   * Returns the meta object for the reference '{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.OperationCall#getOperation <em>Operation</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Operation</em>'.
+   * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.OperationCall#getOperation()
+   * @see #getOperationCall()
+   * @generated
+   */
+  EReference getOperationCall_Operation();
+
+  /**
+   * Returns the meta object for the attribute list '{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.OperationCall#getParams <em>Params</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute list '<em>Params</em>'.
+   * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.OperationCall#getParams()
+   * @see #getOperationCall()
+   * @generated
+   */
+  EAttribute getOperationCall_Params();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Parameter <em>Parameter</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Parameter</em>'.
+   * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Parameter
+   * @generated
+   */
+  EClass getParameter();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Parameter#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Parameter#getName()
+   * @see #getParameter()
+   * @generated
+   */
+  EAttribute getParameter_Name();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Parameter#getType <em>Type</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Type</em>'.
+   * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Parameter#getType()
+   * @see #getParameter()
+   * @generated
+   */
+  EReference getParameter_Type();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.TypeReference <em>Type Reference</em>}'.
@@ -502,12 +776,30 @@ public interface TestLanguagePackage extends EPackage
     EReference TYPE_DECLARATION__SUPER_TYPE = eINSTANCE.getTypeDeclaration_SuperType();
 
     /**
-     * The meta object literal for the '<em><b>Properties</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Members</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference TYPE_DECLARATION__PROPERTIES = eINSTANCE.getTypeDeclaration_Properties();
+    EReference TYPE_DECLARATION__MEMBERS = eINSTANCE.getTypeDeclaration_Members();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.MemberImpl <em>Member</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.MemberImpl
+     * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.TestLanguagePackageImpl#getMember()
+     * @generated
+     */
+    EClass MEMBER = eINSTANCE.getMember();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute MEMBER__NAME = eINSTANCE.getMember_Name();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.PropertyImpl <em>Property</em>}' class.
@@ -528,14 +820,6 @@ public interface TestLanguagePackage extends EPackage
     EReference PROPERTY__TYPE = eINSTANCE.getProperty_Type();
 
     /**
-     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute PROPERTY__NAME = eINSTANCE.getProperty_Name();
-
-    /**
      * The meta object literal for the '{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.TypeImpl <em>Type</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -552,6 +836,92 @@ public interface TestLanguagePackage extends EPackage
      * @generated
      */
     EAttribute TYPE__ARRAY_DIEMENSIONS = eINSTANCE.getType_ArrayDiemensions();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.OperationImpl <em>Operation</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.OperationImpl
+     * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.TestLanguagePackageImpl#getOperation()
+     * @generated
+     */
+    EClass OPERATION = eINSTANCE.getOperation();
+
+    /**
+     * The meta object literal for the '<em><b>Params</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference OPERATION__PARAMS = eINSTANCE.getOperation_Params();
+
+    /**
+     * The meta object literal for the '<em><b>Return Type</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference OPERATION__RETURN_TYPE = eINSTANCE.getOperation_ReturnType();
+
+    /**
+     * The meta object literal for the '<em><b>Operation Call</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference OPERATION__OPERATION_CALL = eINSTANCE.getOperation_OperationCall();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.OperationCallImpl <em>Operation Call</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.OperationCallImpl
+     * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.TestLanguagePackageImpl#getOperationCall()
+     * @generated
+     */
+    EClass OPERATION_CALL = eINSTANCE.getOperationCall();
+
+    /**
+     * The meta object literal for the '<em><b>Operation</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference OPERATION_CALL__OPERATION = eINSTANCE.getOperationCall_Operation();
+
+    /**
+     * The meta object literal for the '<em><b>Params</b></em>' attribute list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute OPERATION_CALL__PARAMS = eINSTANCE.getOperationCall_Params();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.ParameterImpl <em>Parameter</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.ParameterImpl
+     * @see org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.TestLanguagePackageImpl#getParameter()
+     * @generated
+     */
+    EClass PARAMETER = eINSTANCE.getParameter();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute PARAMETER__NAME = eINSTANCE.getParameter_Name();
+
+    /**
+     * The meta object literal for the '<em><b>Type</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference PARAMETER__TYPE = eINSTANCE.getParameter_Type();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.ide.tests.testlanguage.testLanguage.impl.TypeReferenceImpl <em>Type Reference</em>}' class.

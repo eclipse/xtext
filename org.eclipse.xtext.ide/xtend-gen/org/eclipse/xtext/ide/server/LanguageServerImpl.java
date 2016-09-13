@@ -65,6 +65,8 @@ import io.typefox.lsapi.impl.PositionImpl;
 import io.typefox.lsapi.impl.PublishDiagnosticsParamsImpl;
 import io.typefox.lsapi.impl.RangeImpl;
 import io.typefox.lsapi.impl.ServerCapabilitiesImpl;
+import io.typefox.lsapi.impl.SignatureHelpImpl;
+import io.typefox.lsapi.impl.SignatureHelpOptionsImpl;
 import io.typefox.lsapi.impl.TextEditImpl;
 import io.typefox.lsapi.services.LanguageServer;
 import io.typefox.lsapi.services.TextDocumentService;
@@ -89,6 +91,7 @@ import org.eclipse.xtext.ide.server.contentassist.ContentAssistService;
 import org.eclipse.xtext.ide.server.findReferences.WorkspaceResourceAccess;
 import org.eclipse.xtext.ide.server.formatting.FormattingService;
 import org.eclipse.xtext.ide.server.hover.HoverService;
+import org.eclipse.xtext.ide.server.signatureHelp.SignatureHelpService;
 import org.eclipse.xtext.ide.server.symbol.DocumentSymbolService;
 import org.eclipse.xtext.ide.server.symbol.WorkspaceSymbolService;
 import org.eclipse.xtext.resource.IResourceDescriptions;
@@ -161,6 +164,8 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
       it.setReferencesProvider(Boolean.valueOf(true));
       it.setDocumentSymbolProvider(Boolean.valueOf(true));
       it.setWorkspaceSymbolProvider(Boolean.valueOf(true));
+      SignatureHelpOptionsImpl _signatureHelpOptionsImpl = new SignatureHelpOptionsImpl(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("(", ",")));
+      it.setSignatureHelpProvider(_signatureHelpOptionsImpl);
       it.setTextDocumentSync(TextDocumentSyncKind.Incremental);
       CompletionOptionsImpl _completionOptionsImpl = new CompletionOptionsImpl();
       final Procedure1<CompletionOptionsImpl> _function_1 = (CompletionOptionsImpl it_1) -> {
@@ -673,7 +678,27 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
   
   @Override
   public CompletableFuture<SignatureHelp> signatureHelp(final TextDocumentPositionParams position) {
-    throw new UnsupportedOperationException("TODO: auto-generated method stub");
+    final Function1<CancelIndicator, SignatureHelp> _function = (CancelIndicator cancelIndicator) -> {
+      TextDocumentIdentifier _textDocument = position.getTextDocument();
+      String _uri = _textDocument.getUri();
+      final URI uri = this._uriExtensions.toUri(_uri);
+      final IResourceServiceProvider serviceProvider = this.languagesRegistry.getResourceServiceProvider(uri);
+      SignatureHelpService _get = null;
+      if (serviceProvider!=null) {
+        _get=serviceProvider.<SignatureHelpService>get(SignatureHelpService.class);
+      }
+      final SignatureHelpService helper = _get;
+      if ((helper == null)) {
+        return new SignatureHelpImpl();
+      }
+      final Function2<Document, XtextResource, SignatureHelp> _function_1 = (Document doc, XtextResource resource) -> {
+        Position _position = position.getPosition();
+        final int offset = doc.getOffSet(_position);
+        return helper.getSignatureHelp(resource, offset);
+      };
+      return this.workspaceManager.<SignatureHelp>doRead(uri, _function_1);
+    };
+    return this.requestManager.<SignatureHelp>runRead(_function);
   }
   
   @Override
