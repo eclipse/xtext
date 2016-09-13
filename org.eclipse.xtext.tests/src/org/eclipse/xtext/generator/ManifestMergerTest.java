@@ -18,6 +18,7 @@ import java.util.jar.Manifest;
 
 import org.eclipse.xtext.util.MergeableManifest;
 import org.eclipse.xtext.util.StringInputStream;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.Wrapper;
 import org.junit.Assert;
 import org.junit.Test;
@@ -68,9 +69,11 @@ public class ManifestMergerTest extends Assert {
 		int idx = result.indexOf(lookup);
 		assertTrue(idx != -1);
 		idx += lookup.length();
-		assertEquals(result, '\r', result.charAt(idx));
-		assertEquals(result, '\n', result.charAt(idx + 1));
-		assertEquals(result, ' ', result.charAt(idx + 2));
+		String lineDelimiter = Strings.newLine();
+		for (int i=0; i< lineDelimiter.length(); i++) {
+			assertEquals(result, lineDelimiter.charAt(i), result.charAt(idx+i));
+		}
+		assertEquals(result, ' ', result.charAt(idx + lineDelimiter.length()));
 	}
 
 	@Test public void testSplit512Length() throws Exception {
