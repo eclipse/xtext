@@ -154,13 +154,19 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
                 _builder.newLine();
               }
             }
-            TypeReference _newWildCardSelfTypeReference = Util.this.newWildCardSelfTypeReference(cls);
-            _builder.append(_newWildCardSelfTypeReference, "");
-            _builder.append(" other = (");
-            TypeReference _newWildCardSelfTypeReference_1 = Util.this.newWildCardSelfTypeReference(cls);
-            _builder.append(_newWildCardSelfTypeReference_1, "");
-            _builder.append(") obj;");
-            _builder.newLineIfNotEmpty();
+            {
+              int _size = IterableExtensions.size(includedFields);
+              boolean _greaterThan = (_size > 0);
+              if (_greaterThan) {
+                TypeReference _newWildCardSelfTypeReference = Util.this.newWildCardSelfTypeReference(cls);
+                _builder.append(_newWildCardSelfTypeReference, "");
+                _builder.append(" other = (");
+                TypeReference _newWildCardSelfTypeReference_1 = Util.this.newWildCardSelfTypeReference(cls);
+                _builder.append(_newWildCardSelfTypeReference_1, "");
+                _builder.append(") obj;");
+                _builder.newLineIfNotEmpty();
+              }
+            }
             {
               for(final FieldDeclaration field : includedFields) {
                 StringConcatenationClient _contributeToEquals = Util.this.contributeToEquals(field);
@@ -405,8 +411,14 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
         StringConcatenationClient _client = new StringConcatenationClient() {
           @Override
           protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-            _builder.append("final int prime = 31;");
-            _builder.newLine();
+            {
+              int _size = IterableExtensions.size(includedFields);
+              boolean _greaterThan = (_size > 0);
+              if (_greaterThan) {
+                _builder.append("final int prime = 31;");
+                _builder.newLine();
+              }
+            }
             _builder.append("int result = ");
             {
               if (includeSuper) {

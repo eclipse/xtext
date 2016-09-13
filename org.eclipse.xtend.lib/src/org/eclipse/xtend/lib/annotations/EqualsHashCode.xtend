@@ -118,7 +118,9 @@ class EqualsHashCodeProcessor extends AbstractClassProcessor {
 						if (!super.equals(obj))
 						  return false;
 					«ENDIF»
-					«cls.newWildCardSelfTypeReference» other = («cls.newWildCardSelfTypeReference») obj;
+					«IF includedFields.size>0»
+						«cls.newWildCardSelfTypeReference» other = («cls.newWildCardSelfTypeReference») obj;
+					«ENDIF»
 					«FOR field : includedFields»
 						«field.contributeToEquals»
 					«ENDFOR»
@@ -180,7 +182,9 @@ class EqualsHashCodeProcessor extends AbstractClassProcessor {
 				addAnnotation(newAnnotationReference(Override))
 				addAnnotation(newAnnotationReference(Pure))
 				body = '''
-					final int prime = 31;
+					«IF includedFields.size > 0»
+						final int prime = 31;
+					«ENDIF»
 					int result = «IF includeSuper»super.hashCode()«ELSE»1«ENDIF»;
 					«FOR field : includedFields»
 						«field.contributeToHashCode»
