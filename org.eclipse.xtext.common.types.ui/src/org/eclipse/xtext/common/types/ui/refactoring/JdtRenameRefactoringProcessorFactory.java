@@ -17,6 +17,7 @@ import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.ITypeParameter;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.internal.corext.refactoring.rename.JavaRenameProcessor;
+import org.eclipse.jdt.internal.corext.refactoring.rename.RenameEnumConstProcessor;
 import org.eclipse.jdt.internal.corext.refactoring.rename.RenameFieldProcessor;
 import org.eclipse.jdt.internal.corext.refactoring.rename.RenameLocalVariableProcessor;
 import org.eclipse.jdt.internal.corext.refactoring.rename.RenameNonVirtualMethodProcessor;
@@ -36,11 +37,14 @@ public class JdtRenameRefactoringProcessorFactory {
 				case IJavaElement.TYPE:
 					return new RenameTypeProcessor((IType) element);
 				case IJavaElement.FIELD:
-					return new RenameFieldProcessor((IField) element);
+					if (((IField) element).getDeclaringType().isEnum())
+						return new RenameEnumConstProcessor((IField) element);
+					else
+						return new RenameFieldProcessor((IField) element);
 				case IJavaElement.METHOD:
 					if(((IMethod)element).isConstructor()) 
 						break;
-					if (Flags.isStatic(((IMethod) element).getFlags()))
+					if (Flags.isStatic(((IMethod) element).getFlags()) || Flags.isPrivate(((IMethod) element).getFlags()))
 						return new RenameNonVirtualMethodProcessor((IMethod) element);
 					else
 						return new RenameVirtualMethodProcessor((IMethod) element);
