@@ -63,7 +63,7 @@ import static com.google.common.collect.Sets.*;
 	 * @see #addAll(Collection, Iterable)
 	 */
 	@Inline(value="$3.$4addAll($1, $2)", imported=Iterables.class)
-	public static <E> boolean operator_add(Collection<E> collection, Iterable<? extends E> newElements) {
+	public static <E> boolean operator_add(Collection<? super E> collection, Iterable<? extends E> newElements) {
 		return addAll(collection, newElements);
 	}
 
@@ -98,7 +98,7 @@ import static com.google.common.collect.Sets.*;
 	 * @since 2.4
 	 */
 	@Inline(value="$3.removeAll($1, $2)", imported=Iterables.class)
-	public static <E> boolean operator_remove(Collection<E> collection, Collection<? extends E> newElements) {
+	public static <E> boolean operator_remove(Collection<? super E> collection, Collection<? extends E> newElements) {
 		return removeAll(collection, newElements);
 	}
 
