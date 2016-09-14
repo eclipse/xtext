@@ -34,15 +34,21 @@ import org.eclipse.jdt.ui.text.IJavaPartitions;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.preference.PreferenceConverter;
+import org.eclipse.jface.text.DefaultInformationControl;
 import org.eclipse.jface.text.IDocument;
+import org.eclipse.jface.text.IInformationControl;
+import org.eclipse.jface.text.IInformationControlCreator;
 import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.jface.text.Position;
 import org.eclipse.jface.text.source.Annotation;
 import org.eclipse.jface.text.source.AnnotationModel;
 import org.eclipse.jface.text.source.AnnotationRulerColumn;
 import org.eclipse.jface.text.source.CompositeRuler;
+import org.eclipse.jface.text.source.DefaultAnnotationHover;
+import org.eclipse.jface.text.source.IAnnotationHover;
 import org.eclipse.jface.text.source.IAnnotationModel;
 import org.eclipse.jface.text.source.IOverviewRuler;
+import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.text.source.LineNumberRulerColumn;
 import org.eclipse.jface.text.source.OverviewRuler;
 import org.eclipse.jface.text.source.SourceViewer;
@@ -52,6 +58,7 @@ import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.IWorkbenchPartReference;
 import org.eclipse.ui.internal.editors.text.EditorsPlugin;
@@ -166,9 +173,24 @@ public class DerivedSourceView extends AbstractSourceView implements IResourceCh
 		javaSourceViewer = new JavaSourceViewer(parent, compositeRuler, overviewRuler, true, SWT.V_SCROLL
 				| SWT.H_SCROLL, store);
 		javaSourceViewerConfiguration = new SimpleJavaSourceViewerConfiguration(JavaPlugin.getDefault()
-				.getJavaTextTools().getColorManager(), store, null, IJavaPartitions.JAVA_PARTITIONING, true);
+				.getJavaTextTools().getColorManager(), store, null, IJavaPartitions.JAVA_PARTITIONING, true) {
+			@Override
+			public IInformationControlCreator getInformationControlCreator(ISourceViewer sourceViewer) {
+				return new IInformationControlCreator() {
+					@Override
+					public IInformationControl createInformationControl(final Shell parent) {
+						return new DefaultInformationControl(parent, true);
+					}
+				};
+			}
+			@Override
+			public IAnnotationHover getAnnotationHover(ISourceViewer sourceViewer) {
+				return new DefaultAnnotationHover();
+			}
+		};
 		javaSourceViewer.configure(javaSourceViewerConfiguration);
 		javaSourceViewer.setEditable(false);
+		javaSourceViewer.showAnnotations(true);
 		sourceViewerDecorationSupport = new SourceViewerDecorationSupport(javaSourceViewer, overviewRuler,
 				defaultMarkerAnnotationAccess, getSharedTextColors());
 		for (AnnotationPreference annotationPreference : annotationPreferences) {
