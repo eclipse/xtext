@@ -1,11 +1,11 @@
 apply from: "${rootDir}/gradle/default-project-layout.gradle"
 
 dependencies {
-    compile project(':org.eclipse.xtext.web')
-    compile "org.eclipse.xtext:org.eclipse.xtext.xbase.ide:$versions.xtext"
-    testCompile "junit:junit:$versions.junit"
-    testCompile "org.eclipse.xtext:org.eclipse.xtext.testing:$versions.xtext"
-    testCompile project(':org.eclipse.xtext.web.example.entities.ide')
+	compile project(':org.eclipse.xtext.web')
+	compile "org.eclipse.xtext:org.eclipse.xtext.xbase.ide:$versions.xtext"
+	testCompile "junit:junit:$versions.junit"
+	testCompile "org.eclipse.xtext:org.eclipse.xtext.testing:$versions.xtext"
+	testCompile project(':org.eclipse.xtext.web.example.entities.ide')
 }
 
 jar.manifest {

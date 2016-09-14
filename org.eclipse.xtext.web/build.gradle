@@ -5,11 +5,11 @@ plugins {
 apply from: "${rootDir}/gradle/default-project-layout.gradle"
 
 dependencies {
-    compile "org.eclipse.xtext:org.eclipse.xtext.ide:$versions.xtext"
-    compile "org.eclipse.xtext:org.eclipse.xtext.common.types:$versions.xtext"
-    testCompile "junit:junit:$versions.junit"
-    testCompile "org.eclipse.xtext:org.eclipse.xtext.testing:$versions.xtext"
-    testCompile project(':org.eclipse.xtext.web.example.statemachine.ide')
+	compile "org.eclipse.xtext:org.eclipse.xtext.ide:$versions.xtext"
+	compile "org.eclipse.xtext:org.eclipse.xtext.common.types:$versions.xtext"
+	testCompile "junit:junit:$versions.junit"
+	testCompile "org.eclipse.xtext:org.eclipse.xtext.testing:$versions.xtext"
+	testCompile project(':org.eclipse.xtext.web.example.statemachine.ide')
 }
 
 jar.manifest {
@@ -74,7 +74,7 @@ class OptimizationTask extends com.moowork.gradle.node.task.NodeTask {
 ['Orion', 'Ace', 'CodeMirror'].each { Framework ->
 	def framework = Framework.toLowerCase()
 	
-    task "optimize${Framework}Js" (type: OptimizationTask) {
+	task "optimize${Framework}Js" (type: OptimizationTask) {
 		buildProfile = file("src/main/js/requirejs-${framework}-config.js")
 		output = file(optResources.path + "/xtext-${framework}.js")
 		optimize = 'none'

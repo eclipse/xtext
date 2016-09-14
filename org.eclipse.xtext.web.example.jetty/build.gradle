@@ -4,7 +4,7 @@ apply plugin: 'war'
 
 dependencies {
 	compile project(':org.eclipse.xtext.web.servlet')
-    compile project(':org.eclipse.xtext.web.example.statemachine.ide')
+	compile project(':org.eclipse.xtext.web.example.statemachine.ide')
 	compile project(':org.eclipse.xtext.xbase.web')
 	compile project(':org.eclipse.xtext.web.example.entities.ide')
 	compile group: 'org.webjars', name: 'requirejs', version: '2.2.0'
