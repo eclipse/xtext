@@ -5,7 +5,7 @@ dependencies {
 }
 
 jar {
-    from('.') {
-        include 'about_org.eclipse.xtend.lib.macro.html'
-    }
+	from('.') {
+		include 'about_org.eclipse.xtend.lib.macro.html'
+	}
 }

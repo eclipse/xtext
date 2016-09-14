@@ -5,7 +5,7 @@ dependencies {
 }
 
 jar {
-    from('.') {
-        include 'OSGI-INF/**'
-    }
+	from('.') {
+		include 'OSGI-INF/**'
+	}
 }
