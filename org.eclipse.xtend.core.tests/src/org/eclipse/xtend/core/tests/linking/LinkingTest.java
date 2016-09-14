@@ -9,6 +9,7 @@ package org.eclipse.xtend.core.tests.linking;
 
 import static com.google.common.collect.Iterables.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -131,8 +132,12 @@ public class LinkingTest extends AbstractXtendTestCase {
 		assertNull(featureCall.getImplicitReceiver());
 		assertNull(featureCall.getImplicitFirstArgument());
 		List<Diagnostic> errors = c.eResource().getErrors();
-		assertEquals(1, errors.size());
-		assertEquals("Type mismatch: cannot convert from List<CharSequence> to Iterable<? extends String>", errors.get(0).getMessage());
+		assertEquals(2, errors.size());
+		List<String> messages = new ArrayList<String>();
+		messages.add(errors.get(0).getMessage());
+		messages.add(errors.get(1).getMessage());
+		assertTrue(messages.contains("Type mismatch: cannot convert from List<String> to Collection<? super CharSequence>"));
+		assertTrue(messages.contains("Type mismatch: cannot convert from List<CharSequence> to Iterable<? extends CharSequence>"));
 	}
 	
 	@Test public void testOverloadStaticInstance_01() throws Exception {
