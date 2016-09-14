@@ -9,11 +9,14 @@ package org.eclipse.xtext.ide.tests.server;
 
 import io.typefox.lsapi.Range;
 import io.typefox.lsapi.builders.RangeBuilder;
+import java.util.Collections;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.ide.server.formatting.FormattingService;
 import org.eclipse.xtext.ide.tests.server.AbstractTestLangLanguageServerTest;
 import org.eclipse.xtext.testing.FormattingConfiguration;
 import org.eclipse.xtext.testing.RangeFormattingConfiguration;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Test;
 
@@ -30,6 +33,33 @@ public class FormattingTest extends AbstractTestLangLanguageServerTest {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("type Foo{int bar} type Bar{Foo foo}");
       it.setModel(_builder.toString());
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("type Foo{");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.append("int bar");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("type Bar{");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.append("Foo foo");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      it.setExpectedText(_builder_1.toString());
+    };
+    this.testFormatting(_function);
+  }
+  
+  @Test
+  public void testFormattingClosedFile() {
+    final Procedure1<FormattingConfiguration> _function = (FormattingConfiguration it) -> {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("type Foo{int bar} type Bar{Foo foo}");
+      Pair<String, String> _mappedTo = Pair.<String, String>of("foo.testlang", _builder.toString());
+      it.setFilesInScope(Collections.<String, CharSequence>unmodifiableMap(CollectionLiterals.<String, CharSequence>newHashMap(_mappedTo)));
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("type Foo{");
       _builder_1.newLine();

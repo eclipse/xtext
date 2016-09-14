@@ -32,6 +32,22 @@ class FormattingTest extends AbstractTestLangLanguageServerTest {
 		]
 	}
 	
+	@Test def void testFormattingClosedFile() {
+		testFormatting [
+		    it.filesInScope = #{
+		        'foo.testlang' -> '''type Foo{int bar} type Bar{Foo foo}'''
+		    }
+			expectedText = '''
+			type Foo{
+				int bar
+			}
+			type Bar{
+				Foo foo
+			}
+			'''
+		]
+	}
+	
 	@Test def void testRangeFormattingService() {
 		testRangeFormatting [
 			model = '''type Foo{int bar} type Bar{Foo foo}'''

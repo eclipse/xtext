@@ -26,6 +26,8 @@ import org.eclipse.xtext.ide.server.Document;
 import org.eclipse.xtext.ide.server.IProjectDescriptionFactory;
 import org.eclipse.xtext.ide.server.IWorkspaceConfigFactory;
 import org.eclipse.xtext.ide.server.ProjectManager;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.IExternalContentSupport;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.XtextResource;
@@ -212,9 +214,27 @@ public class WorkspaceManager {
   public <T extends Object> T doRead(final URI uri, final Function2<? super Document, ? super XtextResource, ? extends T> work) {
     final URI resourceURI = uri.trimFragment();
     final ProjectManager projectMnr = this.getProjectManager(resourceURI);
-    final Document doc = this.openDocuments.get(resourceURI);
     Resource _resource = projectMnr.getResource(resourceURI);
-    return work.apply(doc, ((XtextResource) _resource));
+    final XtextResource resource = ((XtextResource) _resource);
+    Document doc = this.getDocument(resource);
+    Resource _resource_1 = projectMnr.getResource(resourceURI);
+    return work.apply(doc, ((XtextResource) _resource_1));
+  }
+  
+  protected Document getDocument(final XtextResource resource) {
+    Document _elvis = null;
+    URI _uRI = resource.getURI();
+    Document _get = this.openDocuments.get(_uRI);
+    if (_get != null) {
+      _elvis = _get;
+    } else {
+      IParseResult _parseResult = resource.getParseResult();
+      ICompositeNode _rootNode = _parseResult.getRootNode();
+      String _text = _rootNode.getText();
+      Document _document = new Document(1, _text);
+      _elvis = _document;
+    }
+    return _elvis;
   }
   
   public <T extends Object> void doWrite(final URI uri, final Function2<? super Document, ? super XtextResource, ? extends T> work) {

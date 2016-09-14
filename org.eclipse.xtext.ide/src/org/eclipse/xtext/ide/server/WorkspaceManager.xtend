@@ -149,8 +149,15 @@ class WorkspaceManager {
     def <T> T doRead(URI uri, (Document, XtextResource)=>T work) {
     	val resourceURI = uri.trimFragment
     	val projectMnr = getProjectManager(resourceURI)
-        val doc = openDocuments.get(resourceURI)
+        val resource = projectMnr.getResource(resourceURI) as XtextResource
+        var doc = getDocument(resource)
         return work.apply(doc, projectMnr.getResource(resourceURI) as XtextResource)
+    }
+    
+    protected def Document getDocument(XtextResource resource) {
+        return openDocuments.get(resource.URI) 
+            // lets create a transient document, in case a document is not open (e.g. formatting is called just by uri)
+            ?: new Document(1, resource.parseResult.rootNode.text)
     }
     
     def <T> void doWrite(URI uri, (Document, XtextResource)=>T work) {

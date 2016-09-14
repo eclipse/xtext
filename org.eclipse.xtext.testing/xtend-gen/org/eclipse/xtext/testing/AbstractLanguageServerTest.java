@@ -17,10 +17,12 @@ import com.google.inject.binder.AnnotatedBindingBuilder;
 import io.typefox.lsapi.CompletionItem;
 import io.typefox.lsapi.CompletionList;
 import io.typefox.lsapi.Diagnostic;
+import io.typefox.lsapi.DidChangeWatchedFilesParams;
 import io.typefox.lsapi.DidCloseTextDocumentParams;
 import io.typefox.lsapi.DidOpenTextDocumentParams;
 import io.typefox.lsapi.DocumentFormattingParams;
 import io.typefox.lsapi.DocumentRangeFormattingParams;
+import io.typefox.lsapi.FileChangeType;
 import io.typefox.lsapi.Hover;
 import io.typefox.lsapi.InitializeParams;
 import io.typefox.lsapi.InitializeResult;
@@ -37,10 +39,12 @@ import io.typefox.lsapi.SymbolInformation;
 import io.typefox.lsapi.SymbolKind;
 import io.typefox.lsapi.TextDocumentPositionParams;
 import io.typefox.lsapi.TextEdit;
+import io.typefox.lsapi.builders.DidChangeWatchedFilesParamsBuilder;
 import io.typefox.lsapi.builders.DidCloseTextDocumentParamsBuilder;
 import io.typefox.lsapi.builders.DidOpenTextDocumentParamsBuilder;
 import io.typefox.lsapi.builders.DocumentFormattingParamsBuilder;
 import io.typefox.lsapi.builders.DocumentRangeFormattingParamsBuilder;
+import io.typefox.lsapi.builders.FileEventBuilder;
 import io.typefox.lsapi.builders.InitializeParamsBuilder;
 import io.typefox.lsapi.builders.ReferenceParamsBuilder;
 import io.typefox.lsapi.builders.TextDocumentItemBuilder;
@@ -74,6 +78,7 @@ import org.eclipse.xtext.ide.server.concurrent.RequestManager;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.testing.DefinitionTestConfiguration;
 import org.eclipse.xtext.testing.DocumentSymbolConfiguraiton;
+import org.eclipse.xtext.testing.FileInfo;
 import org.eclipse.xtext.testing.FormattingConfiguration;
 import org.eclipse.xtext.testing.HoverTestConfiguration;
 import org.eclipse.xtext.testing.RangeFormattingConfiguration;
@@ -233,6 +238,21 @@ public abstract class AbstractLanguageServerTest implements Consumer<PublishDiag
     DidOpenTextDocumentParamsBuilder _didOpenTextDocumentParamsBuilder = new DidOpenTextDocumentParamsBuilder(_function);
     DidOpenTextDocumentParams _build = _didOpenTextDocumentParamsBuilder.build();
     this.languageServer.didOpen(_build);
+  }
+  
+  protected void didCreateWatchedFiles(final String... fileUris) {
+    final Procedure1<DidChangeWatchedFilesParamsBuilder> _function = (DidChangeWatchedFilesParamsBuilder it) -> {
+      for (final String fileUri : fileUris) {
+        final Procedure1<FileEventBuilder> _function_1 = (FileEventBuilder it_1) -> {
+          it_1.uri(fileUri);
+          it_1.type(FileChangeType.Created);
+        };
+        it.change(_function_1);
+      }
+    };
+    DidChangeWatchedFilesParamsBuilder _didChangeWatchedFilesParamsBuilder = new DidChangeWatchedFilesParamsBuilder(_function);
+    DidChangeWatchedFilesParams _build = _didChangeWatchedFilesParamsBuilder.build();
+    this.languageServer.didChangeWatchedFiles(_build);
   }
   
   protected void close(final String fileUri) {
@@ -502,9 +522,10 @@ public abstract class AbstractLanguageServerTest implements Consumer<PublishDiag
       final TestCompletionConfiguration configuration = new TestCompletionConfiguration();
       configuration.setFilePath(("MyModel." + this.fileExtension));
       configurator.apply(configuration);
-      final String fileUri = this.initializeContext(configuration);
+      FileInfo _initializeContext = this.initializeContext(configuration);
+      final String filePath = _initializeContext.getUri();
       final Procedure1<TextDocumentPositionParamsBuilder> _function = (TextDocumentPositionParamsBuilder it) -> {
-        it.textDocument(fileUri);
+        it.textDocument(filePath);
         int _line = configuration.getLine();
         int _column = configuration.getColumn();
         it.position(_line, _column);
@@ -522,27 +543,43 @@ public abstract class AbstractLanguageServerTest implements Consumer<PublishDiag
     }
   }
   
-  protected String initializeContext(final TextDocumentConfiguration configuration) {
+  protected FileInfo initializeContext(final TextDocumentConfiguration configuration) {
     this.initialize();
     Map<String, CharSequence> _filesInScope = configuration.getFilesInScope();
-    Set<Map.Entry<String, CharSequence>> _entrySet = _filesInScope.entrySet();
-    for (final Map.Entry<String, CharSequence> e : _entrySet) {
-      {
-        String _key = e.getKey();
-        CharSequence _value = e.getValue();
+    boolean _isEmpty = _filesInScope.isEmpty();
+    boolean _not = (!_isEmpty);
+    if (_not) {
+      Map<String, CharSequence> _filesInScope_1 = configuration.getFilesInScope();
+      Set<Map.Entry<String, CharSequence>> _entrySet = _filesInScope_1.entrySet();
+      final Function1<Map.Entry<String, CharSequence>, String> _function = (Map.Entry<String, CharSequence> it) -> {
+        String _key = it.getKey();
+        CharSequence _value = it.getValue();
         String _string = _value.toString();
-        final String filePath = this.writeFile(_key, _string);
-        CharSequence _value_1 = e.getValue();
-        String _string_1 = _value_1.toString();
-        this.open(filePath, _string_1);
+        return this.writeFile(_key, _string);
+      };
+      final Iterable<String> createdFiles = IterableExtensions.<Map.Entry<String, CharSequence>, String>map(_entrySet, _function);
+      this.didCreateWatchedFiles(((String[])Conversions.unwrapArray(createdFiles, String.class)));
+      String _model = configuration.getModel();
+      boolean _tripleEquals = (_model == null);
+      if (_tripleEquals) {
+        String _head = IterableExtensions.<String>head(createdFiles);
+        Map<String, CharSequence> _filesInScope_2 = configuration.getFilesInScope();
+        Set<Map.Entry<String, CharSequence>> _entrySet_1 = _filesInScope_2.entrySet();
+        Map.Entry<String, CharSequence> _head_1 = IterableExtensions.<Map.Entry<String, CharSequence>>head(_entrySet_1);
+        CharSequence _value = _head_1.getValue();
+        String _string = _value.toString();
+        return new FileInfo(_head, _string);
       }
     }
-    String _filePath = configuration.getFilePath();
-    String _model = configuration.getModel();
-    final String filePath = this.writeFile(_filePath, _model);
     String _model_1 = configuration.getModel();
-    this.open(filePath, _model_1);
-    return filePath;
+    Assert.assertNotNull(_model_1);
+    String _filePath = configuration.getFilePath();
+    String _model_2 = configuration.getModel();
+    final String filePath = this.writeFile(_filePath, _model_2);
+    String _model_3 = configuration.getModel();
+    this.open(filePath, _model_3);
+    String _model_4 = configuration.getModel();
+    return new FileInfo(filePath, _model_4);
   }
   
   protected void testDefinition(final Procedure1<? super DefinitionTestConfiguration> configurator) {
@@ -551,7 +588,8 @@ public abstract class AbstractLanguageServerTest implements Consumer<PublishDiag
       final DefinitionTestConfiguration configuration = new DefinitionTestConfiguration();
       configuration.setFilePath(("MyModel." + this.fileExtension));
       configurator.apply(configuration);
-      final String fileUri = this.initializeContext(configuration);
+      FileInfo _initializeContext = this.initializeContext(configuration);
+      final String fileUri = _initializeContext.getUri();
       final Procedure1<TextDocumentPositionParamsBuilder> _function = (TextDocumentPositionParamsBuilder it) -> {
         it.textDocument(fileUri);
         int _line = configuration.getLine();
@@ -576,7 +614,8 @@ public abstract class AbstractLanguageServerTest implements Consumer<PublishDiag
       final HoverTestConfiguration configuration = new HoverTestConfiguration();
       configuration.setFilePath(("MyModel." + this.fileExtension));
       configurator.apply(configuration);
-      final String fileUri = this.initializeContext(configuration);
+      FileInfo _initializeContext = this.initializeContext(configuration);
+      final String fileUri = _initializeContext.getUri();
       final Procedure1<TextDocumentPositionParamsBuilder> _function = (TextDocumentPositionParamsBuilder it) -> {
         it.textDocument(fileUri);
         int _line = configuration.getLine();
@@ -601,7 +640,8 @@ public abstract class AbstractLanguageServerTest implements Consumer<PublishDiag
       final SignatureHelpConfiguration configuration = new SignatureHelpConfiguration();
       configuration.setFilePath(("MyModel." + this.fileExtension));
       configurator.apply(configuration);
-      final String fileUri = this.initializeContext(configuration);
+      FileInfo _initializeContext = this.initializeContext(configuration);
+      final String fileUri = _initializeContext.getUri();
       final Procedure1<TextDocumentPositionParamsBuilder> _function = (TextDocumentPositionParamsBuilder it) -> {
         it.textDocument(fileUri);
         int _line = configuration.getLine();
@@ -612,9 +652,9 @@ public abstract class AbstractLanguageServerTest implements Consumer<PublishDiag
       TextDocumentPositionParams _build = _textDocumentPositionParamsBuilder.build();
       final CompletableFuture<SignatureHelp> signatureHelps = this.languageServer.signatureHelp(_build);
       SignatureHelp _get = signatureHelps.get();
-      final String actualHover = this.toExpectation(_get);
+      final String actualSignatureHelp = this.toExpectation(_get);
       String _expectedSignatureHelp = configuration.getExpectedSignatureHelp();
-      this.assertEquals(_expectedSignatureHelp, actualHover);
+      this.assertEquals(_expectedSignatureHelp, actualSignatureHelp);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -626,7 +666,8 @@ public abstract class AbstractLanguageServerTest implements Consumer<PublishDiag
       final DocumentSymbolConfiguraiton configuration = new DocumentSymbolConfiguraiton();
       configuration.setFilePath(("MyModel." + this.fileExtension));
       configurator.apply(configuration);
-      final String fileUri = this.initializeContext(configuration);
+      FileInfo _initializeContext = this.initializeContext(configuration);
+      final String fileUri = _initializeContext.getUri();
       TextDocumentIdentifierImpl _textDocumentIdentifierImpl = new TextDocumentIdentifierImpl(fileUri);
       DocumentSymbolParamsImpl _documentSymbolParamsImpl = new DocumentSymbolParamsImpl(_textDocumentIdentifierImpl);
       final CompletableFuture<List<? extends SymbolInformation>> symbols = this.languageServer.documentSymbol(_documentSymbolParamsImpl);
@@ -664,7 +705,8 @@ public abstract class AbstractLanguageServerTest implements Consumer<PublishDiag
       final ReferenceTestConfiguration configuration = new ReferenceTestConfiguration();
       configuration.setFilePath(("MyModel." + this.fileExtension));
       configurator.apply(configuration);
-      final String fileUri = this.initializeContext(configuration);
+      FileInfo _initializeContext = this.initializeContext(configuration);
+      final String fileUri = _initializeContext.getUri();
       final Procedure1<ReferenceParamsBuilder> _function = (ReferenceParamsBuilder it) -> {
         it.textDocument(fileUri);
         int _line = configuration.getLine();
@@ -697,22 +739,23 @@ public abstract class AbstractLanguageServerTest implements Consumer<PublishDiag
       final FormattingConfiguration configuration = new FormattingConfiguration();
       configuration.setFilePath(("MyModel." + this.fileExtension));
       configurator.apply(configuration);
-      final String fileUri = this.initializeContext(configuration);
+      final FileInfo fileInfo = this.initializeContext(configuration);
       final Procedure1<DocumentFormattingParamsBuilder> _function = (DocumentFormattingParamsBuilder it) -> {
-        it.textDocument(fileUri);
+        String _uri = fileInfo.getUri();
+        it.textDocument(_uri);
       };
       DocumentFormattingParamsBuilder _documentFormattingParamsBuilder = new DocumentFormattingParamsBuilder(_function);
       DocumentFormattingParams _build = _documentFormattingParamsBuilder.build();
       final CompletableFuture<List<? extends TextEdit>> changes = this.languageServer.formatting(_build);
-      String _model = configuration.getModel();
-      Document _document = new Document(1, _model);
+      String _contents = fileInfo.getContents();
+      Document _document = new Document(1, _contents);
       List<? extends TextEdit> _get = changes.get();
       ArrayList<TextEdit> _newArrayList = CollectionLiterals.<TextEdit>newArrayList(((TextEdit[])Conversions.unwrapArray(_get, TextEdit.class)));
       List<TextEdit> _reverse = ListExtensions.<TextEdit>reverse(_newArrayList);
       final Document result = _document.applyChanges(_reverse);
       String _expectedText = configuration.getExpectedText();
-      String _contents = result.getContents();
-      this.assertEquals(_expectedText, _contents);
+      String _contents_1 = result.getContents();
+      this.assertEquals(_expectedText, _contents_1);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -724,24 +767,25 @@ public abstract class AbstractLanguageServerTest implements Consumer<PublishDiag
       final RangeFormattingConfiguration configuration = new RangeFormattingConfiguration();
       configuration.setFilePath(("MyModel." + this.fileExtension));
       configurator.apply(configuration);
-      final String fileUri = this.initializeContext(configuration);
+      final FileInfo fileInfo = this.initializeContext(configuration);
       final Procedure1<DocumentRangeFormattingParamsBuilder> _function = (DocumentRangeFormattingParamsBuilder it) -> {
-        it.textDocument(fileUri);
+        String _uri = fileInfo.getUri();
+        it.textDocument(_uri);
         Range _range = configuration.getRange();
         it.range(_range);
       };
       DocumentRangeFormattingParamsBuilder _documentRangeFormattingParamsBuilder = new DocumentRangeFormattingParamsBuilder(_function);
       DocumentRangeFormattingParams _build = _documentRangeFormattingParamsBuilder.build();
       final CompletableFuture<List<? extends TextEdit>> changes = this.languageServer.rangeFormatting(_build);
-      String _model = configuration.getModel();
-      Document _document = new Document(1, _model);
+      String _contents = fileInfo.getContents();
+      Document _document = new Document(1, _contents);
       List<? extends TextEdit> _get = changes.get();
       ArrayList<TextEdit> _newArrayList = CollectionLiterals.<TextEdit>newArrayList(((TextEdit[])Conversions.unwrapArray(_get, TextEdit.class)));
       List<TextEdit> _reverse = ListExtensions.<TextEdit>reverse(_newArrayList);
       final Document result = _document.applyChanges(_reverse);
       String _expectedText = configuration.getExpectedText();
-      String _contents = result.getContents();
-      this.assertEquals(_expectedText, _contents);
+      String _contents_1 = result.getContents();
+      this.assertEquals(_expectedText, _contents_1);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

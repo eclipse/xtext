@@ -21,6 +21,7 @@ public class CompletionTest extends AbstractTestLangLanguageServerTest {
   @Test
   public void testCompletion_01() {
     final Procedure1<TestCompletionConfiguration> _function = (TestCompletionConfiguration it) -> {
+      it.setModel("");
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("type -> type [[0, 0] .. [0, 0]]");
       _builder.newLine();

@@ -17,6 +17,7 @@ class CompletionTest extends AbstractTestLangLanguageServerTest {
 	@Test
 	def void testCompletion_01() {
 		testCompletion [
+		    model = ''
 			expectedCompletionItems = '''
 				type -> type [[0, 0] .. [0, 0]]
 			'''

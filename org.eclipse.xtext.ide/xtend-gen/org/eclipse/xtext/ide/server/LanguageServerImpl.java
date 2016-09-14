@@ -740,6 +740,9 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
         final int offset = 0;
         String _contents = document.getContents();
         final int length = _contents.length();
+        if (((length == 0) || resource.getContents().isEmpty())) {
+          return CollectionLiterals.<TextEdit>emptyList();
+        }
         return formatterService.format(resource, document, offset, length);
       };
       return this.workspaceManager.<List<? extends TextEdit>>doRead(uri, _function_1);

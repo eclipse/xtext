@@ -449,6 +449,9 @@ import org.eclipse.xtext.validation.Issue
 			return workspaceManager.doRead(uri) [ document, resource |
 				val offset = 0
 				val length = document.contents.length
+				if (length === 0 || resource.contents.isEmpty) {
+				    return emptyList
+				}
 				return formatterService.format(resource, document, offset, length)
 			]  
 		]

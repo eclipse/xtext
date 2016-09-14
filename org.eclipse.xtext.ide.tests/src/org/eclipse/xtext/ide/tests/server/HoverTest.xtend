@@ -8,7 +8,6 @@
 package org.eclipse.xtext.ide.tests.server
 
 import org.junit.Test
-import static io.typefox.lsapi.MarkedString.*
 
 /**
  * @author kosyakov - Initial contribution and API

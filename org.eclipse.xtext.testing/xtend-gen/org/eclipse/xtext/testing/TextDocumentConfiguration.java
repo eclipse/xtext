@@ -17,7 +17,7 @@ import org.eclipse.xtext.xbase.lib.Pure;
 public class TextDocumentConfiguration {
   private Map<String, CharSequence> filesInScope = CollectionLiterals.<String, CharSequence>emptyMap();
   
-  private String model = "";
+  private String model;
   
   private String filePath;
   
