@@ -23,7 +23,7 @@ class Bug450911Test extends AbstractXtendContentAssistBugTest {
 				}
 			}
 		''')
-			.assertTextAtCursorPosition('println', 1, 'println', 'print()', 'println()')
+			.assertTextAtCursorPosition('println', 1, 'println', 'print()', 'print()', 'print()', 'print()', 'print()', 'print()', 'print()', 'print()', 'print()', 'println()', 'println()', 'println()', 'println()', 'println()', 'println()', 'println()', 'println()', 'println()')
 	}
 	
 }
