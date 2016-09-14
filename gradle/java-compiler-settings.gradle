@@ -13,26 +13,26 @@ tasks.withType(Javadoc) {
 }
 
 sourceSets {
-    mwe2 {
-        java {
-            compileClasspath += main.output
-            runtimeClasspath += main.output
-        }
-    }
+	mwe2 {
+		java {
+			compileClasspath += main.output
+			runtimeClasspath += main.output
+		}
+	}
 }
 
 configurations {
-    optional {
-    	description 'Dependencies required at build time, but not exported into meta data'
-        extendsFrom compile
-    }
+	optional {
+		description 'Dependencies required at build time, but not exported into meta data'
+		extendsFrom compile
+	}
 	mwe2Compile.extendsFrom mainCompile
 	mwe2Runtime.extendsFrom mainRuntime
-    
+	
 	/*
 	 * Put any unwanted transitive dependencies here, they will be excluded from all projects
 	 */
-    all {
+	all {
 		exclude group: 'org.antlr', module: 'stringtemplate'
 		exclude module: 'cglib'
 	}
