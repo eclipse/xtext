@@ -1318,7 +1318,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			  public void grammar(final String it) {
 			    char[] _charArray = it.toCharArray();
 			    for (final char it_1 : _charArray) {
-			      InputOutput.println(it_1);
+			      InputOutput.<Character>println(Character.valueOf(it_1));
 			    }
 			  }
 			}

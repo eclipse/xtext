@@ -466,7 +466,7 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			public class Bar {
 			  private final Runnable r = new Runnable() {
 			    public void run() {
-			      InputOutput.println(Bar.this.x);
+			      InputOutput.<Integer>println(Integer.valueOf(Bar.this.x));
 			    }
 			  };
 			  
@@ -2305,7 +2305,7 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			        x = y;
 			      }
 			      public void bar() {
-			        InputOutput.println(this.x);
+			        InputOutput.<Integer>println(Integer.valueOf(this.x));
 			      }
 			    };
 			  }
@@ -2342,7 +2342,7 @@ class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
 			    final int y = 1;
 			    new __Foo_1() {
 			      public void bar() {
-			        InputOutput.println(__Foo_1.x);
+			        InputOutput.<Integer>println(Integer.valueOf(__Foo_1.x));
 			      }
 			    };
 			  }

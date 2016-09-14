@@ -207,7 +207,7 @@ public class CompilerBug406425Test extends AbstractXtendCompilerTest {
     _builder_1.append("int _length = it.length();");
     _builder_1.newLine();
     _builder_1.append("        ");
-    _builder_1.append("InputOutput.println(_length);");
+    _builder_1.append("InputOutput.<Integer>println(Integer.valueOf(_length));");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("}");
@@ -302,7 +302,7 @@ public class CompilerBug406425Test extends AbstractXtendCompilerTest {
     _builder_1.append("int _length = it.length();");
     _builder_1.newLine();
     _builder_1.append("        ");
-    _builder_1.append("InputOutput.println(_length);");
+    _builder_1.append("InputOutput.<Integer>println(Integer.valueOf(_length));");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("}");
@@ -397,7 +397,7 @@ public class CompilerBug406425Test extends AbstractXtendCompilerTest {
     _builder_1.append("int _length = it.length();");
     _builder_1.newLine();
     _builder_1.append("        ");
-    _builder_1.append("InputOutput.println(_length);");
+    _builder_1.append("InputOutput.<Integer>println(Integer.valueOf(_length));");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("}");
@@ -492,7 +492,7 @@ public class CompilerBug406425Test extends AbstractXtendCompilerTest {
     _builder_1.append("int _length = it.length();");
     _builder_1.newLine();
     _builder_1.append("        ");
-    _builder_1.append("InputOutput.println(_length);");
+    _builder_1.append("InputOutput.<Integer>println(Integer.valueOf(_length));");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("}");
@@ -592,7 +592,7 @@ public class CompilerBug406425Test extends AbstractXtendCompilerTest {
     _builder_1.append("int _length = it.length();");
     _builder_1.newLine();
     _builder_1.append("        ");
-    _builder_1.append("InputOutput.println(_length);");
+    _builder_1.append("InputOutput.<Integer>println(Integer.valueOf(_length));");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("}");
@@ -687,7 +687,7 @@ public class CompilerBug406425Test extends AbstractXtendCompilerTest {
     _builder_1.append("int _length = it.length();");
     _builder_1.newLine();
     _builder_1.append("        ");
-    _builder_1.append("InputOutput.println(_length);");
+    _builder_1.append("InputOutput.<Integer>println(Integer.valueOf(_length));");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("}");
@@ -782,7 +782,7 @@ public class CompilerBug406425Test extends AbstractXtendCompilerTest {
     _builder_1.append("int _length = it.length();");
     _builder_1.newLine();
     _builder_1.append("        ");
-    _builder_1.append("InputOutput.println(_length);");
+    _builder_1.append("InputOutput.<Integer>println(Integer.valueOf(_length));");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("}");
@@ -885,7 +885,7 @@ public class CompilerBug406425Test extends AbstractXtendCompilerTest {
     _builder_1.append("int _length = it.length();");
     _builder_1.newLine();
     _builder_1.append("        ");
-    _builder_1.append("InputOutput.println(_length);");
+    _builder_1.append("InputOutput.<Integer>println(Integer.valueOf(_length));");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("}");
@@ -988,7 +988,7 @@ public class CompilerBug406425Test extends AbstractXtendCompilerTest {
     _builder_1.append("int _length = it.length();");
     _builder_1.newLine();
     _builder_1.append("        ");
-    _builder_1.append("InputOutput.println(_length);");
+    _builder_1.append("InputOutput.<Integer>println(Integer.valueOf(_length));");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("}");
@@ -1088,7 +1088,7 @@ public class CompilerBug406425Test extends AbstractXtendCompilerTest {
     _builder_1.append("int _length = it.length();");
     _builder_1.newLine();
     _builder_1.append("        ");
-    _builder_1.append("InputOutput.println(_length);");
+    _builder_1.append("InputOutput.<Integer>println(Integer.valueOf(_length));");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("}");

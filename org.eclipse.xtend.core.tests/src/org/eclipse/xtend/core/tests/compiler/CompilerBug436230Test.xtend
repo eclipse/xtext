@@ -115,8 +115,8 @@ class CompilerBug436230Test extends AbstractXtendCompilerTest {
 			          return "";
 			        }
 			      };
-			      Iterable<String> _map = IterableExtensions.map(obj, _function);
-			      _xblockexpression = Iterables.<CharSequence>addAll(res, _map);
+			      Iterable<? extends CharSequence> _map = IterableExtensions.map(obj, _function);
+			      _xblockexpression = Iterables.addAll(res, _map);
 			    }
 			    return _xblockexpression;
 			  }

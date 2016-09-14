@@ -1107,7 +1107,7 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("public void run() {");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("InputOutput.println(Bar.this.x);");
+    _builder_1.append("InputOutput.<Integer>println(Integer.valueOf(Bar.this.x));");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("}");
@@ -5457,7 +5457,7 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("public void bar() {");
     _builder_1.newLine();
     _builder_1.append("        ");
-    _builder_1.append("InputOutput.println(this.x);");
+    _builder_1.append("InputOutput.<Integer>println(Integer.valueOf(this.x));");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("}");
@@ -5544,7 +5544,7 @@ public class AnonymousClassCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("public void bar() {");
     _builder_1.newLine();
     _builder_1.append("        ");
-    _builder_1.append("InputOutput.println(__Foo_1.x);");
+    _builder_1.append("InputOutput.<Integer>println(Integer.valueOf(__Foo_1.x));");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("}");

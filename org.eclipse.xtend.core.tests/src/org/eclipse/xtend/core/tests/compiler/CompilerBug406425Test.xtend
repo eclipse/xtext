@@ -95,7 +95,7 @@ class CompilerBug406425Test extends AbstractXtendCompilerTest {
 			        Long _long = new Long(0);
 			        _test.m(it, _long);
 			        int _length = it.length();
-			        InputOutput.println(_length);
+			        InputOutput.<Integer>println(Integer.valueOf(_length));
 			      }
 			    };
 			    return ObjectExtensions.<StringBuilder>operator_doubleArrow(_stringBuilder, _function);
@@ -136,7 +136,7 @@ class CompilerBug406425Test extends AbstractXtendCompilerTest {
 			        Long _long = new Long(0);
 			        Test.this.<Serializable>m(it, _long);
 			        int _length = it.length();
-			        InputOutput.println(_length);
+			        InputOutput.<Integer>println(Integer.valueOf(_length));
 			      }
 			    };
 			    return ObjectExtensions.<StringBuilder>operator_doubleArrow(_stringBuilder, _function);
@@ -177,7 +177,7 @@ class CompilerBug406425Test extends AbstractXtendCompilerTest {
 			        Long _long = new Long(0);
 			        Test.this.<Serializable>m(it, _long);
 			        int _length = it.length();
-			        InputOutput.println(_length);
+			        InputOutput.<Integer>println(Integer.valueOf(_length));
 			      }
 			    };
 			    return ObjectExtensions.<StringBuilder>operator_doubleArrow(_stringBuilder, _function);
@@ -218,7 +218,7 @@ class CompilerBug406425Test extends AbstractXtendCompilerTest {
 			        Long _long = new Long(0);
 			        Test.this.<Serializable>m(it, _long);
 			        int _length = it.length();
-			        InputOutput.println(_length);
+			        InputOutput.<Integer>println(Integer.valueOf(_length));
 			      }
 			    };
 			    return ObjectExtensions.<StringBuilder>operator_doubleArrow(_stringBuilder, _function);
@@ -261,7 +261,7 @@ class CompilerBug406425Test extends AbstractXtendCompilerTest {
 			        Long _long = new Long(0);
 			        Test.this.<Serializable>m(it, _long);
 			        int _length = it.length();
-			        InputOutput.println(_length);
+			        InputOutput.<Integer>println(Integer.valueOf(_length));
 			      }
 			    };
 			    _newArrayList.forEach(_function);
@@ -302,7 +302,7 @@ class CompilerBug406425Test extends AbstractXtendCompilerTest {
 			        Long _long = new Long(0);
 			        Test.<Serializable>m(it, _long);
 			        int _length = it.length();
-			        InputOutput.println(_length);
+			        InputOutput.<Integer>println(Integer.valueOf(_length));
 			      }
 			    };
 			    return ObjectExtensions.<StringBuilder>operator_doubleArrow(_stringBuilder, _function);
@@ -343,7 +343,7 @@ class CompilerBug406425Test extends AbstractXtendCompilerTest {
 			        Long _long = new Long(0);
 			        Test.<Serializable>m(it, _long);
 			        int _length = it.length();
-			        InputOutput.println(_length);
+			        InputOutput.<Integer>println(Integer.valueOf(_length));
 			      }
 			    };
 			    return ObjectExtensions.<StringBuilder>operator_doubleArrow(_stringBuilder, _function);
@@ -387,7 +387,7 @@ class CompilerBug406425Test extends AbstractXtendCompilerTest {
 			        Long _long = new Long(0);
 			        _test.<Serializable>m(it, _long);
 			        int _length = it.length();
-			        InputOutput.println(_length);
+			        InputOutput.<Integer>println(Integer.valueOf(_length));
 			      }
 			    };
 			    _newArrayList.forEach(_function);
@@ -431,7 +431,7 @@ class CompilerBug406425Test extends AbstractXtendCompilerTest {
 			        Long _long = new Long(0);
 			        _test.m(it, _long);
 			        int _length = it.length();
-			        InputOutput.println(_length);
+			        InputOutput.<Integer>println(Integer.valueOf(_length));
 			      }
 			    };
 			    _newArrayList.forEach(_function);
@@ -474,7 +474,7 @@ class CompilerBug406425Test extends AbstractXtendCompilerTest {
 			        Long _long = new Long(0);
 			        Test.<Serializable>m(it, _long);
 			        int _length = it.length();
-			        InputOutput.println(_length);
+			        InputOutput.<Integer>println(Integer.valueOf(_length));
 			      }
 			    };
 			    _newArrayList.forEach(_function);
