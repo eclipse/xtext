@@ -2786,7 +2786,6 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  @Override
 			  @Pure
 			  public int hashCode() {
-			    final int prime = 31;
 			    int result = 1;
 			    return result;
 			  }
@@ -2800,7 +2799,6 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			      return false;
 			    if (getClass() != obj.getClass())
 			      return false;
-			    Foo other = (Foo) obj;
 			    return true;
 			  }
 			  
