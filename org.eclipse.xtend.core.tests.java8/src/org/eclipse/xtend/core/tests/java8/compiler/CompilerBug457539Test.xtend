@@ -361,7 +361,7 @@ class CompilerBug457539Test extends org.eclipse.xtend.core.tests.compiler.Compil
 			      Long _long = new Long(0);
 			      this.<Serializable>m(it, _long);
 			      int _length = it.length();
-			      InputOutput.<Integer>println(Integer.valueOf(_length));
+			      InputOutput.println(_length);
 			    };
 			    _newIterable.forEach2(_function);
 			  }
