@@ -1,7 +1,7 @@
 repositories {
-   flatDir {
-       dirs 'lib'
-   }
+	flatDir {
+		dirs 'lib'
+	}
 }
 
 dependencies {
