@@ -1,7 +1,7 @@
 repositories {
-   flatDir {
-       dirs 'lib'
-   }
+	flatDir {
+		dirs 'lib'
+	}
 }
 
 dependencies {
@@ -13,7 +13,7 @@ dependencies {
 	compile "org.eclipse.emf:org.eclipse.emf.common:$versions.emfCommon"
 	compile "org.eclipse.emf:org.eclipse.emf.ecore.xmi:$versions.emfEcore"
 	// From the 'lib' folder
-    optional name: 'simple'
+	optional name: 'simple'
 	mwe2Runtime "org.eclipse.emf:org.eclipse.emf.mwe2.launch:$versions.emfMwe2"
 }
 
@@ -22,8 +22,8 @@ sourceSets.test.java {
 }
 
 sourceSets.mwe2.java {
-    srcDir 'generator/src'
-    srcDir 'generator/xtend-gen'
+	srcDir 'generator/src'
+	srcDir 'generator/xtend-gen'
 }
 
 test {
