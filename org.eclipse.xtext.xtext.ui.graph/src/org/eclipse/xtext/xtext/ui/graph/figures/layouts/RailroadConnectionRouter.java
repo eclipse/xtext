@@ -98,4 +98,9 @@ public class RailroadConnectionRouter extends AbstractRouter {
 		return constraints.get(connection);
 	}
 
+	@Override
+	public void remove(Connection connection) {
+		constraints.remove(connection);
+	}
+
 }
