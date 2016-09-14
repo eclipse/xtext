@@ -1,5 +1,5 @@
 dependencies {
-    compile project(':org.eclipse.xtext')
+	compile project(':org.eclipse.xtext')
 	compile project(':org.eclipse.xtext.ide')
 	compile "io.typefox.lsapi:io.typefox.lsapi.services:$versions.lsapi"
 	optional "junit:junit:$versions.junit"
