@@ -68,7 +68,7 @@ public class CompilerBug491931Test extends AbstractXtendCompilerTest {
     _builder_1.append("final boolean x4 = (a && b);");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("InputOutput.<Boolean>println(Boolean.valueOf((((x1 || x2) || x3) || x4)));");
+    _builder_1.append("InputOutput.println((((x1 || x2) || x3) || x4));");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");

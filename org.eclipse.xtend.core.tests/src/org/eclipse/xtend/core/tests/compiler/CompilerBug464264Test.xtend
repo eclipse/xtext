@@ -84,8 +84,8 @@ class CompilerBug464264Test extends AbstractXtendCompilerTest {
 			        return "";
 			      }
 			    };
-			    Iterable<? extends CharSequence> _map = IterableExtensions.map(obj, _function);
-			    return Iterables.addAll(res, _map);
+			    Iterable<String> _map = IterableExtensions.map(obj, _function);
+			    return Iterables.<CharSequence>addAll(res, _map);
 			  }
 			}
 		''')

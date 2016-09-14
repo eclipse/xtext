@@ -247,10 +247,10 @@ public class CompilerBug436230Test extends AbstractXtendCompilerTest {
     _builder_1.append("};");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("Iterable<? extends CharSequence> _map = IterableExtensions.map(obj, _function);");
+    _builder_1.append("Iterable<String> _map = IterableExtensions.map(obj, _function);");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("_xblockexpression = Iterables.addAll(res, _map);");
+    _builder_1.append("_xblockexpression = Iterables.<CharSequence>addAll(res, _map);");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("}");

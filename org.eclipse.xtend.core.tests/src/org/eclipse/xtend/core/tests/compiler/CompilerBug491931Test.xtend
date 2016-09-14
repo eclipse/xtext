@@ -35,7 +35,7 @@ class CompilerBug491931Test extends AbstractXtendCompilerTest {
 			    final boolean x2 = (a && (!b));
 			    final boolean x3 = ((!a) && b);
 			    final boolean x4 = (a && b);
-			    InputOutput.<Boolean>println(Boolean.valueOf((((x1 || x2) || x3) || x4)));
+			    InputOutput.println((((x1 || x2) || x3) || x4));
 			  }
 			}
 		''')
