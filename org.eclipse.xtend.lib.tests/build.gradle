@@ -7,7 +7,7 @@ dependencies {
 }
 
 jar {
-    from('.') {
-        include 'about_org.eclipse.xtend.lib.html'
-    }
+	from('.') {
+		include 'about_org.eclipse.xtend.lib.html'
+	}
 }
