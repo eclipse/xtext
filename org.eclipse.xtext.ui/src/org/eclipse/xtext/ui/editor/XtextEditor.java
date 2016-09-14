@@ -710,7 +710,7 @@ public class XtextEditor extends TextEditor implements IDirtyStateEditorSupportC
 	@SuppressWarnings("rawtypes")
 	private Annotation getAnnotation(final int offset, final int length) {
 		final IAnnotationModel model = getDocumentProvider().getAnnotationModel(getEditorInput());
-		if (model == null)
+		if (model == null || length < 0)
 			return null;
 
 		Iterator iterator;
