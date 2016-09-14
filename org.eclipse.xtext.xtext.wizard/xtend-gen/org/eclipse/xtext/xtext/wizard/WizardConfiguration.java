@@ -15,6 +15,7 @@ import java.util.Collections;
 import java.util.Set;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.util.JavaVersion;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.XtextVersion;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -50,6 +51,8 @@ public class WizardConfiguration {
   private final Ecore2XtextConfiguration ecore2Xtext = new Ecore2XtextConfiguration();
   
   private Charset encoding = Charset.defaultCharset();
+  
+  private String lineDelimiter = Strings.newLine();
   
   private BuildSystem preferredBuildSystem = BuildSystem.NONE;
   
@@ -158,6 +161,15 @@ public class WizardConfiguration {
   
   public void setEncoding(final Charset encoding) {
     this.encoding = encoding;
+  }
+  
+  @Pure
+  public String getLineDelimiter() {
+    return this.lineDelimiter;
+  }
+  
+  public void setLineDelimiter(final String lineDelimiter) {
+    this.lineDelimiter = lineDelimiter;
   }
   
   @Pure
