@@ -406,7 +406,7 @@ define([
 		var editorViewer = this.viewer;
 		var services = this.services;
 		services.validate().done(function(result) {
-			editorViewer.editor.showProblems(result.issues.map(function(entry) {
+			editorViewer.editor.getEditorContext().showMarkers(result.issues.map(function(entry) {
 				return {
 					description: entry.description,
 					start: entry.offset,
