@@ -12,6 +12,17 @@ import org.eclipse.xtext.xtext.wizard.ecore2xtext.Ecore2XtextGrammarCreator
 
 import static org.eclipse.xtext.xtext.wizard.ExternalDependency.*
 
+/**
+ * @author Dennis Huebner - Initial contribution and API
+ * @author Sven Efftinge
+ * @author Miro Spoenemann
+ * @author Stefan Oehme
+ * @author Christian Schneider
+ * @author Moritz Eysholdt
+ * @author Lorenzo Bettini - bug#494176
+ * @author Karsten Thoms - bug#484500, issue#108
+ * @since 2.9
+ */
 class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 
 	val grammarCreator = new Ecore2XtextGrammarCreator
@@ -229,8 +240,8 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 							
 							fragment = ecore2xtext.Ecore2XtextValueConverterServiceFragment2 auto-inject {}
 
-							fragment = org.eclipse.xtext.generator.adapter.FragmentAdapter {
-								fragment = org.eclipse.xtext.generator.ecore2xtext.FormatterFragment {}
+							formatter = {
+								generateStub = true
 							}
 						«ENDIF»
 
