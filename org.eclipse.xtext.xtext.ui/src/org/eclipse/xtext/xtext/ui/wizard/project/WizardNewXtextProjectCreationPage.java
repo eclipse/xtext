@@ -12,6 +12,7 @@ package org.eclipse.xtext.xtext.ui.wizard.project;
 
 import java.util.Arrays;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IStatus;
@@ -49,6 +50,7 @@ import com.google.common.collect.Sets;
  * @author Sebastian Zarnekow
  */
 public class WizardNewXtextProjectCreationPage extends WizardNewProjectCreationPage {
+	private static final Pattern PATTERN_EXTENSIONS = Pattern.compile("\\w+(?:,\\s*\\w+)*"); //$NON-NLS-1$
 	private Text languageNameField;
 	private final IStructuredSelection selection;
 	private Text extensionsField;
@@ -132,7 +134,6 @@ public class WizardNewXtextProjectCreationPage extends WizardNewProjectCreationP
 		});
 	}
 
-	@SuppressWarnings("unchecked")
 	protected void fillBreeCombo(Combo comboToFill) {
 		Set<String> brees = Sets.newHashSet(JREContainerProvider.getDefaultBREE());
 		Set<String> availableBrees = Sets.newHashSet();
@@ -211,13 +212,17 @@ public class WizardNewXtextProjectCreationPage extends WizardNewProjectCreationP
 			return false;
 		}
 		
-		if(!languageNameField.getText().contains(".")) {
+		if(!languageNameField.getText().contains(".")) { //$NON-NLS-1$
 			setErrorMessage(Messages.WizardNewXtextProjectCreationPage_ErrorMessageLanguageNameWithoutPackage);
 			return false;
 		}
 		
 		if (extensionsField.getText().length() == 0)
 			return false;
+		if (!PATTERN_EXTENSIONS.matcher(extensionsField.getText()).matches()) {
+			setErrorMessage(Messages.WizardNewXtextProjectCreationPage_ErrorMessageExtensions);
+			return false;
+		}
 		if (!Sets.newHashSet(JREContainerProvider.getConfiguredBREEs()).contains(breeCombo.getText())) {
 			setMessage(Messages.WizardNewXtextProjectCreationPage_eeInfo_0 + breeCombo.getText()
 					+ Messages.WizardNewXtextProjectCreationPage_eeInfo_1, IMessageProvider.INFORMATION);
