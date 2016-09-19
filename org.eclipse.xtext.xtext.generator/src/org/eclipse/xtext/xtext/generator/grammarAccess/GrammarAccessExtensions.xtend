@@ -54,9 +54,18 @@ import org.eclipse.xtext.Parameter
  * This API can be used by other templates to generate code
  * that has hard references to grammar rules/elements 
  * @author Moritz Eysholdt
+ * @author Karsten Thoms - bug#406914
  */
 class GrammarAccessExtensions {
-	
+	// see http://userguide.icu-project.org/strings/unicodeset BACKSLASH ESCAPES
+	static Map<String,String> SPECIAL_CHARS = #{
+		"\b" -> "backspace",
+		"\f" -> "formFeed",
+		"\n" -> "lineFeed",
+		"\r" -> "carriageReturn",
+		"\t" -> "tab",
+		"\\" -> "backslash"
+	};
 	val Map<String, ISerializer> xtextSerializerByLineDelimiter = Maps.newHashMapWithExpectedSize(2)
 	
 	val transliterator = Transliterator.getInstance('Any-Name')
@@ -107,6 +116,11 @@ class GrammarAccessExtensions {
 	}
 
 	private def String toJavaIdentifierSegment(String text, boolean isFirst, boolean uppercaseFirst) {
+		val special = SPECIAL_CHARS.get(text);
+		if (special != null) {
+			return if (uppercaseFirst) special.toFirstUpper else special
+		}
+		
 		val r = toJavaIdentifierSegmentInt(text, isFirst, uppercaseFirst)
 		if (r.length > 0) {
 			return r
@@ -181,7 +195,7 @@ class GrammarAccessExtensions {
 		
 	/**
 	 * Creates an identifier for an AbstractElement which is a valid Java identifier and
-	 * which is unique whithin the element's rule. The identifier tries to be as 
+	 * which is unique within the element's rule. The identifier tries to be as 
 	 * human-readable as possible.
 	 */
 	def String gaElementIdentifier(AbstractElement element) {

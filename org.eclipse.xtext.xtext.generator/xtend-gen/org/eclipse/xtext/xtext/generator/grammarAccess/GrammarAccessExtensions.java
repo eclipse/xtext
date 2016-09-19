@@ -17,6 +17,7 @@ import com.google.inject.Injector;
 import com.ibm.icu.text.Transliterator;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -57,6 +58,7 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
+import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtext.RuleNames;
 import org.eclipse.xtext.xtext.generator.CodeConfig;
@@ -69,6 +71,7 @@ import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrOptions;
  * This API can be used by other templates to generate code
  * that has hard references to grammar rules/elements
  * @author Moritz Eysholdt
+ * @author Karsten Thoms - bug#406914
  */
 @SuppressWarnings("all")
 public class GrammarAccessExtensions {
@@ -91,6 +94,8 @@ public class GrammarAccessExtensions {
       this.lineSeparatorInformation = lineSeparatorInformation;
     }
   }
+  
+  private static Map<String, String> SPECIAL_CHARS = Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(Pair.<String, String>of("\b", "backspace"), Pair.<String, String>of("\f", "formFeed"), Pair.<String, String>of("\n", "lineFeed"), Pair.<String, String>of("\r", "carriageReturn"), Pair.<String, String>of("\t", "tab"), Pair.<String, String>of("\\", "backslash")));
   
   private final Map<String, ISerializer> xtextSerializerByLineDelimiter = Maps.<String, ISerializer>newHashMapWithExpectedSize(2);
   
@@ -170,6 +175,17 @@ public class GrammarAccessExtensions {
   }
   
   private String toJavaIdentifierSegment(final String text, final boolean isFirst, final boolean uppercaseFirst) {
+    final String special = GrammarAccessExtensions.SPECIAL_CHARS.get(text);
+    boolean _notEquals = (!Objects.equal(special, null));
+    if (_notEquals) {
+      String _xifexpression = null;
+      if (uppercaseFirst) {
+        _xifexpression = StringExtensions.toFirstUpper(special);
+      } else {
+        _xifexpression = special;
+      }
+      return _xifexpression;
+    }
     final String r = this.toJavaIdentifierSegmentInt(text, isFirst, uppercaseFirst);
     int _length = r.length();
     boolean _greaterThan = (_length > 0);
@@ -181,8 +197,8 @@ public class GrammarAccessExtensions {
     for (final char c : _charArray) {
       {
         final String n = this.getUnicodeName(c);
-        boolean _notEquals = (!Objects.equal(n, null));
-        if (_notEquals) {
+        boolean _notEquals_1 = (!Objects.equal(n, null));
+        if (_notEquals_1) {
           builder.append((n + " "));
         }
       }
@@ -278,7 +294,7 @@ public class GrammarAccessExtensions {
   
   /**
    * Creates an identifier for an AbstractElement which is a valid Java identifier and
-   * which is unique whithin the element's rule. The identifier tries to be as
+   * which is unique within the element's rule. The identifier tries to be as
    * human-readable as possible.
    */
   public String gaElementIdentifier(final AbstractElement element) {
