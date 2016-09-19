@@ -15,6 +15,7 @@ import java.util.Set;
 
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.jdt.core.JavaConventions;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.launching.JavaRuntime;
@@ -38,6 +39,7 @@ import org.eclipse.ui.dialogs.PreferencesUtil;
 import org.eclipse.ui.dialogs.WizardNewProjectCreationPage;
 import org.eclipse.xtext.ui.util.JREContainerProvider;
 import org.eclipse.xtext.util.JavaVersion;
+import org.eclipse.xtext.xtext.ui.internal.Activator;
 
 import com.google.common.collect.Sets;
 
@@ -195,9 +197,9 @@ public class WizardNewXtextProjectCreationPage extends WizardNewProjectCreationP
 	protected boolean validatePage() {
 		if (!super.validatePage())
 			return false;
-		IStatus status = JavaConventions.validatePackageName(getProjectName(), JavaCore.VERSION_1_5, JavaCore.VERSION_1_5);
+		IStatus status = validateProjectName();
 		if (!status.isOK()) {
-			setErrorMessage(Messages.WizardNewXtextProjectCreationPage_ErrorMessageProjectName + status.getMessage());
+			setErrorMessage(status.getMessage());
 			return false;
 		}
 		if (languageNameField == null) // See the comment in createControl
@@ -226,6 +228,19 @@ public class WizardNewXtextProjectCreationPage extends WizardNewProjectCreationP
 		setErrorMessage(null);
 		setMessage(null);
 		return true;
+	}
+
+	private IStatus validateProjectName() {
+		String projectName = getProjectName();
+		IStatus status = JavaConventions.validatePackageName(projectName, JavaCore.VERSION_1_5, JavaCore.VERSION_1_5);
+		if (status.isOK()) {
+			// https://docs.oracle.com/javase/specs/jls/se8/html/jls-3.html#jls-3.8
+			// for historical reasons only underscore and $ are accepted as package name, but not for Xtext projects  
+			if (projectName.contains("$")) {
+				status = new Status(IStatus.ERROR, Activator.getInstance().getBundle().getSymbolicName(), -1, Messages.WizardNewXtextProjectCreationPage_ErrorMessageProjectName, null);
+			}
+		}
+		return status;
 	}
 
 	protected void createLanguageSelectionGroup(Composite parent) {
