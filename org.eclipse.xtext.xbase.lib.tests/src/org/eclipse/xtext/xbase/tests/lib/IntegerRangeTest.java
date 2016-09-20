@@ -17,6 +17,7 @@ import org.junit.Test;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
+ * @author Karsten Thoms - Bug#381140
  */
 public class IntegerRangeTest {
 
@@ -30,6 +31,9 @@ public class IntegerRangeTest {
 		new IntegerRange(2, 0, -1);
 		new IntegerRange(2, -1, -1);
 		new IntegerRange(-1, -2, -1);
+		new IntegerRange(-2, 0, 1);
+		new IntegerRange(Integer.MIN_VALUE, 0, 1);
+		new IntegerRange(Integer.MAX_VALUE, 0, -1);
 
 		assertInvalid(0, 1, 0);
 		assertInvalid(0, 2, -1);
