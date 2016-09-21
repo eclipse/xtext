@@ -58,11 +58,14 @@ import io.typefox.lsapi.services.WindowService
 import io.typefox.lsapi.services.WorkspaceService
 import java.util.Collections
 import java.util.List
+import java.util.TreeSet
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistEntry
+import org.eclipse.xtext.ide.editor.contentassist.IIdeContentProposalAcceptor
 import org.eclipse.xtext.ide.server.concurrent.CancellableIndicator
 import org.eclipse.xtext.ide.server.concurrent.RequestManager
 import org.eclipse.xtext.ide.server.contentassist.ContentAssistService
@@ -73,6 +76,8 @@ import org.eclipse.xtext.ide.server.signatureHelp.SignatureHelpService
 import org.eclipse.xtext.ide.server.symbol.DocumentSymbolService
 import org.eclipse.xtext.ide.server.symbol.WorkspaceSymbolService
 import org.eclipse.xtext.resource.IResourceServiceProvider
+import org.eclipse.xtext.service.OperationCanceledManager
+import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.validation.Issue
 
 /**
@@ -92,6 +97,7 @@ import org.eclipse.xtext.validation.Issue
 	WorkspaceManager workspaceManager
 	@Inject extension UriExtensions
 	@Inject extension IResourceServiceProvider.Registry languagesRegistry
+	@Inject OperationCanceledManager operationCanceledManager
 
 	override CompletableFuture<InitializeResult> initialize(InitializeParams params) {
 		if (params.rootPath === null) {
@@ -253,11 +259,28 @@ import org.eclipse.xtext.validation.Issue
 			)
 		]
 	}
-
 	// end validation stuff
+	
+	@FinalFieldsConstructor
+	static class BufferedCancelIndicator implements CancelIndicator {
+	    
+	    val CancelIndicator delegate;
+	    Long canceledSince
+    
+        override isCanceled() {
+            if (canceledSince === null && delegate.canceled) {
+                canceledSince = System.currentTimeMillis
+                return false
+            }
+            return canceledSince !== null && System.currentTimeMillis > canceledSince + 1000
+        }
+	    
+	}
 	// completion stuff
 	override CompletableFuture<CompletionList> completion(TextDocumentPositionParams params) {
-		return requestManager.runRead[ cancelIndicator |
+		return requestManager.runRead[ origialCancelIndicator |
+		    
+		    val cancelIndicator = new BufferedCancelIndicator(origialCancelIndicator)
 			val uri = params.textDocument.uri.toUri
 			val resourceServiceProvider = uri.resourceServiceProvider
 			val contentAssistService = resourceServiceProvider?.get(ContentAssistService)
@@ -266,19 +289,53 @@ import org.eclipse.xtext.validation.Issue
 				return result
             
             result.items = workspaceManager.doRead(uri) [ document, resource |
-                val caretOffset = document.getOffSet(params.position)
-                val entries = contentAssistService.createProposals(document.contents, caretOffset, resource, cancelIndicator)
-                return [|
-                    val caretPosition = new PositionImpl(params.position as PositionImpl)
-                    val completionItems = newArrayList
-                    entries.forEach[entry, idx|
-                        val item = entry.toCompletionItem(caretOffset, caretPosition, document)
-                        item.sortText = idx.toString
-                        completionItems += item                        
-                    ]
-                    return completionItems
+                val entries = new TreeSet<Pair<Integer, ContentAssistEntry>> [ p1, p2 |
+                    val prioResult = p2.key.compareTo(p1.key)
+                    if (prioResult != 0)
+                        return prioResult
+                    val s1 = p1.value.label ?: p1.value.proposal
+                    val s2 = p2.value.label ?: p2.value.proposal
+                    val ignoreCase = s1.compareToIgnoreCase(s2)
+                    if (ignoreCase === 0) {
+                        return s1.compareTo(s2)
+                    }
+                    return ignoreCase
                 ]
-            ].apply
+                val acceptor = new IIdeContentProposalAcceptor {
+        
+                    override accept(ContentAssistEntry entry, int priority) {
+                        if (entry !== null) {
+                            if (entry.proposal === null)
+                                throw new IllegalArgumentException('proposal must not be null.')
+                            entries.add(priority -> entry)
+                        }
+                        operationCanceledManager.checkCanceled(cancelIndicator)
+                    }
+        
+                    override canAcceptMoreProposals() {
+                        entries.size < 100
+                    }
+        
+                }
+                val caretOffset = document.getOffSet(params.position)
+                val caretPosition = new PositionImpl(params.position as PositionImpl)
+                try {
+                    contentAssistService.createProposals(document.contents, caretOffset, resource, acceptor, cancelIndicator)
+                } catch (Throwable t) {
+                    if (!operationCanceledManager.isOperationCanceledException(t)) {
+                        throw t
+                    } else {
+                        result.setIncomplete(true)
+                    }
+                }
+                val completionItems = newArrayList
+                entries.forEach[it|
+                    val item = value.toCompletionItem(caretOffset, caretPosition, document)
+                    item.sortText = key.toString
+                    completionItems += item                        
+                ]
+                return completionItems
+            ]
             return result
 		]
 	}

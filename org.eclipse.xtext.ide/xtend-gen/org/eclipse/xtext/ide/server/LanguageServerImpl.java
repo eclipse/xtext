@@ -74,14 +74,18 @@ import io.typefox.lsapi.services.WindowService;
 import io.typefox.lsapi.services.WorkspaceService;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeSet;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend.lib.annotations.Accessors;
+import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistEntry;
+import org.eclipse.xtext.ide.editor.contentassist.IIdeContentProposalAcceptor;
 import org.eclipse.xtext.ide.server.Document;
 import org.eclipse.xtext.ide.server.UriExtensions;
 import org.eclipse.xtext.ide.server.WorkspaceManager;
@@ -97,16 +101,18 @@ import org.eclipse.xtext.ide.server.symbol.WorkspaceSymbolService;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.service.OperationCanceledManager;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 import org.eclipse.xtext.xbase.lib.Pure;
@@ -118,6 +124,28 @@ import org.eclipse.xtext.xbase.lib.Pure;
 @Accessors
 @SuppressWarnings("all")
 public class LanguageServerImpl implements LanguageServer, WorkspaceService, WindowService, TextDocumentService {
+  @FinalFieldsConstructor
+  public static class BufferedCancelIndicator implements CancelIndicator {
+    private final CancelIndicator delegate;
+    
+    private Long canceledSince;
+    
+    @Override
+    public boolean isCanceled() {
+      if (((this.canceledSince == null) && this.delegate.isCanceled())) {
+        long _currentTimeMillis = System.currentTimeMillis();
+        this.canceledSince = Long.valueOf(_currentTimeMillis);
+        return false;
+      }
+      return ((this.canceledSince != null) && (System.currentTimeMillis() > ((this.canceledSince).longValue() + 1000)));
+    }
+    
+    public BufferedCancelIndicator(final CancelIndicator delegate) {
+      super();
+      this.delegate = delegate;
+    }
+  }
+  
   @Inject
   private RequestManager requestManager;
   
@@ -138,6 +166,9 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
   @Inject
   @Extension
   private IResourceServiceProvider.Registry languagesRegistry;
+  
+  @Inject
+  private OperationCanceledManager operationCanceledManager;
   
   @Override
   public CompletableFuture<InitializeResult> initialize(final InitializeParams params) {
@@ -410,7 +441,8 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
   
   @Override
   public CompletableFuture<CompletionList> completion(final TextDocumentPositionParams params) {
-    final Function1<CancelIndicator, CompletionList> _function = (CancelIndicator cancelIndicator) -> {
+    final Function1<CancelIndicator, CompletionList> _function = (CancelIndicator origialCancelIndicator) -> {
+      final LanguageServerImpl.BufferedCancelIndicator cancelIndicator = new LanguageServerImpl.BufferedCancelIndicator(origialCancelIndicator);
       TextDocumentIdentifier _textDocument = params.getTextDocument();
       String _uri = _textDocument.getUri();
       final URI uri = this._uriExtensions.toUri(_uri);
@@ -424,29 +456,103 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
       if ((contentAssistService == null)) {
         return result;
       }
-      final Function2<Document, XtextResource, Function0<ArrayList<CompletionItemImpl>>> _function_1 = (Document document, XtextResource resource) -> {
-        Position _position = params.getPosition();
-        final int caretOffset = document.getOffSet(_position);
-        String _contents = document.getContents();
-        final Iterable<ContentAssistEntry> entries = contentAssistService.createProposals(_contents, caretOffset, resource, cancelIndicator);
-        final Function0<ArrayList<CompletionItemImpl>> _function_2 = () -> {
+      final Function2<Document, XtextResource, ArrayList<CompletionItemImpl>> _function_1 = (Document document, XtextResource resource) -> {
+        try {
+          final Comparator<Pair<Integer, ContentAssistEntry>> _function_2 = (Pair<Integer, ContentAssistEntry> p1, Pair<Integer, ContentAssistEntry> p2) -> {
+            Integer _key = p2.getKey();
+            Integer _key_1 = p1.getKey();
+            final int prioResult = _key.compareTo(_key_1);
+            if ((prioResult != 0)) {
+              return prioResult;
+            }
+            String _elvis = null;
+            ContentAssistEntry _value = p1.getValue();
+            String _label = _value.getLabel();
+            if (_label != null) {
+              _elvis = _label;
+            } else {
+              ContentAssistEntry _value_1 = p1.getValue();
+              String _proposal = _value_1.getProposal();
+              _elvis = _proposal;
+            }
+            final String s1 = _elvis;
+            String _elvis_1 = null;
+            ContentAssistEntry _value_2 = p2.getValue();
+            String _label_1 = _value_2.getLabel();
+            if (_label_1 != null) {
+              _elvis_1 = _label_1;
+            } else {
+              ContentAssistEntry _value_3 = p2.getValue();
+              String _proposal_1 = _value_3.getProposal();
+              _elvis_1 = _proposal_1;
+            }
+            final String s2 = _elvis_1;
+            final int ignoreCase = s1.compareToIgnoreCase(s2);
+            if ((ignoreCase == 0)) {
+              return s1.compareTo(s2);
+            }
+            return ignoreCase;
+          };
+          final TreeSet<Pair<Integer, ContentAssistEntry>> entries = new TreeSet<Pair<Integer, ContentAssistEntry>>(_function_2);
+          final IIdeContentProposalAcceptor acceptor = new IIdeContentProposalAcceptor() {
+            @Override
+            public void accept(final ContentAssistEntry entry, final int priority) {
+              if ((entry != null)) {
+                String _proposal = entry.getProposal();
+                boolean _tripleEquals = (_proposal == null);
+                if (_tripleEquals) {
+                  throw new IllegalArgumentException("proposal must not be null.");
+                }
+                Pair<Integer, ContentAssistEntry> _mappedTo = Pair.<Integer, ContentAssistEntry>of(Integer.valueOf(priority), entry);
+                entries.add(_mappedTo);
+              }
+              LanguageServerImpl.this.operationCanceledManager.checkCanceled(cancelIndicator);
+            }
+            
+            @Override
+            public boolean canAcceptMoreProposals() {
+              int _size = entries.size();
+              return (_size < 100);
+            }
+          };
+          Position _position = params.getPosition();
+          final int caretOffset = document.getOffSet(_position);
           Position _position_1 = params.getPosition();
           final PositionImpl caretPosition = new PositionImpl(((PositionImpl) _position_1));
+          try {
+            String _contents = document.getContents();
+            contentAssistService.createProposals(_contents, caretOffset, resource, acceptor, cancelIndicator);
+          } catch (final Throwable _t) {
+            if (_t instanceof Throwable) {
+              final Throwable t = (Throwable)_t;
+              boolean _isOperationCanceledException = this.operationCanceledManager.isOperationCanceledException(t);
+              boolean _not = (!_isOperationCanceledException);
+              if (_not) {
+                throw t;
+              } else {
+                result.setIncomplete(true);
+              }
+            } else {
+              throw Exceptions.sneakyThrow(_t);
+            }
+          }
           final ArrayList<CompletionItemImpl> completionItems = CollectionLiterals.<CompletionItemImpl>newArrayList();
-          final Procedure2<ContentAssistEntry, Integer> _function_3 = (ContentAssistEntry entry, Integer idx) -> {
-            final CompletionItemImpl item = this.toCompletionItem(entry, caretOffset, caretPosition, document);
-            String _string = idx.toString();
+          final Consumer<Pair<Integer, ContentAssistEntry>> _function_3 = (Pair<Integer, ContentAssistEntry> it) -> {
+            ContentAssistEntry _value = it.getValue();
+            final CompletionItemImpl item = this.toCompletionItem(_value, caretOffset, caretPosition, document);
+            Integer _key = it.getKey();
+            String _string = _key.toString();
             item.setSortText(_string);
             completionItems.add(item);
           };
-          IterableExtensions.<ContentAssistEntry>forEach(entries, _function_3);
+          entries.forEach(_function_3);
           return completionItems;
-        };
-        return _function_2;
+        } catch (Throwable _e) {
+          throw Exceptions.sneakyThrow(_e);
+        }
       };
-      Function0<ArrayList<CompletionItemImpl>> _doRead = this.workspaceManager.<Function0<ArrayList<CompletionItemImpl>>>doRead(uri, _function_1);
-      ArrayList<CompletionItemImpl> _apply = _doRead.apply();
-      result.setItems(_apply);
+      ArrayList<CompletionItemImpl> _doRead = this.workspaceManager.<ArrayList<CompletionItemImpl>>doRead(uri, _function_1);
+      result.setItems(_doRead);
       return result;
     };
     return this.requestManager.<CompletionList>runRead(_function);
@@ -851,6 +957,15 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
   
   public void setLanguagesRegistry(final IResourceServiceProvider.Registry languagesRegistry) {
     this.languagesRegistry = languagesRegistry;
+  }
+  
+  @Pure
+  public OperationCanceledManager getOperationCanceledManager() {
+    return this.operationCanceledManager;
+  }
+  
+  public void setOperationCanceledManager(final OperationCanceledManager operationCanceledManager) {
+    this.operationCanceledManager = operationCanceledManager;
   }
   
   @Pure
