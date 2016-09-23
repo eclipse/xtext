@@ -7,11 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.wizard
 
+import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.xtext.wizard.ecore2xtext.Ecore2XtextGrammarCreator
 
 import static org.eclipse.xtext.xtext.wizard.ExternalDependency.*
-
-import org.eclipse.xtend.lib.annotations.Accessors
 
 class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 
@@ -113,6 +112,10 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 		files += super.files
 		files += grammarFile
 		files += file(Outlet.MAIN_JAVA, workflowFilePath, workflow)
+		files += workflowLaunchConfigFile
+		if (config.runtimeProject.isEclipsePluginProject) {
+			files += launchConfigFile
+		}
 		if (isPlainMavenBuild) {
 			files += file(Outlet.ROOT, "jar-with-ecore-model.xml", jarDescriptor)
 		}
@@ -528,4 +531,130 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 		#{"**/*.xtend","**/*.mwe2"}
 	}
 	
+	/**
+	 * @since 2.11
+	 */
+	def private getWorkflowLaunchConfigFile() {
+		file(Outlet.ROOT, '''.launch/Generate «config.language.simpleName» («config.language.fileExtensions.head») Language Infrastructure.launch'''.toString, workflowLaunchConfig)
+	}
+
+	/**
+	 * @since 2.11
+	 */
+	def private workflowLaunchConfig() {
+		var projectsToRefresh = newArrayList
+		
+		projectsToRefresh += config.enabledProjects
+		if (config.runtimeProject.testProject.enabled)
+			projectsToRefresh += config.runtimeProject.testProject
+		if (config.uiProject.testProject.enabled)
+			projectsToRefresh += config.uiProject.testProject
+		
+		val refreshAttr = '''${working_set:&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#10;&lt;resources&gt;&#10;«FOR it: projectsToRefresh»&lt;item path=&quot;/«name»&quot; type=&quot;4&quot;/&gt;&#10;«ENDFOR»;&lt;/resources&gt;}'''
+
+		'''
+			<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+			«IF config.runtimeProject.isEclipsePluginProject»
+			<launchConfiguration type="org.eclipse.emf.mwe2.launch.Mwe2LaunchConfigurationType">
+			<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
+			<listEntry value="/«config.runtimeProject.name»"/>
+			</listAttribute>
+			<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
+			<listEntry value="4"/>
+			</listAttribute>
+			<listAttribute key="org.eclipse.debug.ui.favoriteGroups">
+			<listEntry value="org.eclipse.debug.ui.launchGroup.debug"/>
+			<listEntry value="org.eclipse.debug.ui.launchGroup.run"/>
+			</listAttribute>
+			<stringAttribute key="org.eclipse.debug.core.ATTR_REFRESH_SCOPE" value="«refreshAttr»"/>
+			<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher"/>
+			<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="«(config.language.basePackagePath+"/Generate"+config.language.simpleName).replaceAll("/", ".")»"/>
+			<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="«config.runtimeProject.name»"/>
+			<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Xmx512m"/>
+			</launchConfiguration>
+			«ELSEIF config.preferredBuildSystem == BuildSystem.MAVEN»
+			<launchConfiguration type="org.eclipse.m2e.Maven2LaunchConfigurationType">
+			<booleanAttribute key="M2_DEBUG_OUTPUT" value="false"/>
+			<stringAttribute key="M2_GOALS" value="clean generate-sources"/>
+			<booleanAttribute key="M2_NON_RECURSIVE" value="false"/>
+			<booleanAttribute key="M2_OFFLINE" value="false"/>
+			<stringAttribute key="M2_PROFILES" value=""/>
+			<listAttribute key="M2_PROPERTIES"/>
+			<stringAttribute key="M2_RUNTIME" value="EMBEDDED"/>
+			<booleanAttribute key="M2_SKIP_TESTS" value="false"/>
+			<intAttribute key="M2_THREADS" value="1"/>
+			<booleanAttribute key="M2_UPDATE_SNAPSHOTS" value="false"/>
+			<stringAttribute key="M2_USER_SETTINGS" value=""/>
+			<booleanAttribute key="M2_WORKSPACE_RESOLUTION" value="true"/>
+			<stringAttribute key="org.eclipse.debug.core.ATTR_REFRESH_SCOPE" value="«refreshAttr»"/>
+			<booleanAttribute key="org.eclipse.jdt.launching.ATTR_USE_START_ON_FIRST_THREAD" value="true"/>
+			<stringAttribute key="org.eclipse.jdt.launching.WORKING_DIRECTORY" value="${workspace_loc:/«config.runtimeProject.name»}"/>
+			</launchConfiguration>
+			«ELSEIF config.preferredBuildSystem == BuildSystem.GRADLE»
+			<launchConfiguration type="org.eclipse.buildship.core.launch.runconfiguration">
+			<listAttribute key="arguments"/>
+			<stringAttribute key="gradle_distribution" value="GRADLE_DISTRIBUTION(WRAPPER)"/>
+			<listAttribute key="jvm_arguments"/>
+			<booleanAttribute key="show_console_view" value="true"/>
+			<booleanAttribute key="show_execution_view" value="true"/>
+			<listAttribute key="tasks">
+			<listEntry value="build"/>
+			</listAttribute>
+			<stringAttribute key="org.eclipse.debug.core.ATTR_REFRESH_SCOPE" value="«refreshAttr»"/>
+			<booleanAttribute key="org.eclipse.jdt.launching.ATTR_USE_START_ON_FIRST_THREAD" value="true"/>
+			<stringAttribute key="org.eclipse.jdt.launching.WORKING_DIRECTORY" value="${workspace_loc:/«config.runtimeProject.name»}"/>
+			</launchConfiguration>
+			«ENDIF»
+		'''
+	}
+
+	/**
+	 * @since 2.11
+	 */
+	def private getLaunchConfigFile() {
+		file(Outlet.ROOT, ".launch/Launch Runtime Eclipse.launch", launchConfig)
+	}
+
+	/**
+	 * @since 2.11
+	 */
+	def private launchConfig() {
+		'''
+			<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+			<launchConfiguration type="org.eclipse.pde.ui.RuntimeWorkbench">
+			<booleanAttribute key="append.args" value="true"/>
+			<booleanAttribute key="askclear" value="true"/>
+			<booleanAttribute key="automaticAdd" value="true"/>
+			<booleanAttribute key="automaticValidate" value="false"/>
+			<stringAttribute key="bad_container_name" value="/«config.runtimeProject.name»/.launch/"/>
+			<stringAttribute key="bootstrap" value=""/>
+			<stringAttribute key="checked" value="[NONE]"/>
+			<booleanAttribute key="clearConfig" value="false"/>
+			<booleanAttribute key="clearws" value="false"/>
+			<booleanAttribute key="clearwslog" value="false"/>
+			<stringAttribute key="configLocation" value="${workspace_loc}/.metadata/.plugins/org.eclipse.pde.core/Launch Runtime Eclipse"/>
+			<booleanAttribute key="default" value="true"/>
+			<booleanAttribute key="includeOptional" value="true"/>
+			<stringAttribute key="location" value="${workspace_loc}/../runtime-EclipseXtext"/>
+			<listAttribute key="org.eclipse.debug.ui.favoriteGroups">
+			<listEntry value="org.eclipse.debug.ui.launchGroup.debug"/>
+			<listEntry value="org.eclipse.debug.ui.launchGroup.run"/>
+			</listAttribute>
+			<stringAttribute key="org.eclipse.jdt.launching.JRE_CONTAINER" value="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.8"/>
+			<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="-os ${target.os} -ws ${target.ws} -arch ${target.arch} -nl ${target.nl}"/>
+			<stringAttribute key="org.eclipse.jdt.launching.SOURCE_PATH_PROVIDER" value="org.eclipse.pde.ui.workbenchClasspathProvider"/>
+			<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Xms40m -Xmx512m"/>
+			<stringAttribute key="pde.version" value="3.3"/>
+			<stringAttribute key="product" value="org.eclipse.platform.ide"/>
+			<booleanAttribute key="show_selected_only" value="false"/>
+			<stringAttribute key="templateConfig" value="${target_home}/configuration/config.ini"/>
+			<booleanAttribute key="tracing" value="false"/>
+			<booleanAttribute key="useDefaultConfig" value="true"/>
+			<booleanAttribute key="useDefaultConfigArea" value="true"/>
+			<booleanAttribute key="useProduct" value="true"/>
+			<booleanAttribute key="usefeatures" value="false"/>
+			</launchConfiguration>
+		'''
+	}
+		
 }

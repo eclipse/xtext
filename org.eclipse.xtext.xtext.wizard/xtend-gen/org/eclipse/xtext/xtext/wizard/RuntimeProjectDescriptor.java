@@ -203,6 +203,15 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     CharSequence _workflow = this.workflow();
     PlainTextFile _file = this.file(Outlet.MAIN_JAVA, _workflowFilePath, _workflow);
     files.add(_file);
+    PlainTextFile _workflowLaunchConfigFile = this.getWorkflowLaunchConfigFile();
+    files.add(_workflowLaunchConfigFile);
+    WizardConfiguration _config = this.getConfig();
+    RuntimeProjectDescriptor _runtimeProject = _config.getRuntimeProject();
+    boolean _isEclipsePluginProject = _runtimeProject.isEclipsePluginProject();
+    if (_isEclipsePluginProject) {
+      PlainTextFile _launchConfigFile = this.getLaunchConfigFile();
+      files.add(_launchConfigFile);
+    }
     boolean _isPlainMavenBuild = this.isPlainMavenBuild();
     if (_isPlainMavenBuild) {
       CharSequence _jarDescriptor = this.jarDescriptor();
@@ -1566,6 +1575,315 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
   @Override
   public Set<String> getBinExcludes() {
     return Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet("**/*.xtend", "**/*.mwe2"));
+  }
+  
+  /**
+   * @since 2.11
+   */
+  private PlainTextFile getWorkflowLaunchConfigFile() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append(".launch/Generate ");
+    WizardConfiguration _config = this.getConfig();
+    LanguageDescriptor _language = _config.getLanguage();
+    String _simpleName = _language.getSimpleName();
+    _builder.append(_simpleName, "");
+    _builder.append(" (");
+    WizardConfiguration _config_1 = this.getConfig();
+    LanguageDescriptor _language_1 = _config_1.getLanguage();
+    LanguageDescriptor.FileExtensions _fileExtensions = _language_1.getFileExtensions();
+    String _head = IterableExtensions.<String>head(_fileExtensions);
+    _builder.append(_head, "");
+    _builder.append(") Language Infrastructure.launch");
+    String _string = _builder.toString();
+    CharSequence _workflowLaunchConfig = this.workflowLaunchConfig();
+    return this.file(Outlet.ROOT, _string, _workflowLaunchConfig);
+  }
+  
+  /**
+   * @since 2.11
+   */
+  private CharSequence workflowLaunchConfig() {
+    CharSequence _xblockexpression = null;
+    {
+      ArrayList<ProjectDescriptor> projectsToRefresh = CollectionLiterals.<ProjectDescriptor>newArrayList();
+      WizardConfiguration _config = this.getConfig();
+      Set<ProjectDescriptor> _enabledProjects = _config.getEnabledProjects();
+      Iterables.<ProjectDescriptor>addAll(projectsToRefresh, _enabledProjects);
+      WizardConfiguration _config_1 = this.getConfig();
+      RuntimeProjectDescriptor _runtimeProject = _config_1.getRuntimeProject();
+      boolean _isEnabled = _runtimeProject.testProject.isEnabled();
+      if (_isEnabled) {
+        WizardConfiguration _config_2 = this.getConfig();
+        RuntimeProjectDescriptor _runtimeProject_1 = _config_2.getRuntimeProject();
+        projectsToRefresh.add(_runtimeProject_1.testProject);
+      }
+      WizardConfiguration _config_3 = this.getConfig();
+      UiProjectDescriptor _uiProject = _config_3.getUiProject();
+      TestProjectDescriptor _testProject = _uiProject.getTestProject();
+      boolean _isEnabled_1 = _testProject.isEnabled();
+      if (_isEnabled_1) {
+        WizardConfiguration _config_4 = this.getConfig();
+        UiProjectDescriptor _uiProject_1 = _config_4.getUiProject();
+        TestProjectDescriptor _testProject_1 = _uiProject_1.getTestProject();
+        projectsToRefresh.add(_testProject_1);
+      }
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("${working_set:&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#10;&lt;resources&gt;&#10;");
+      {
+        for(final ProjectDescriptor it : projectsToRefresh) {
+          _builder.append("&lt;item path=&quot;/");
+          String _name = it.getName();
+          _builder.append(_name, "");
+          _builder.append("&quot; type=&quot;4&quot;/&gt;&#10;");
+        }
+      }
+      _builder.append(";&lt;/resources&gt;}");
+      final String refreshAttr = _builder.toString();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>");
+      _builder_1.newLine();
+      {
+        WizardConfiguration _config_5 = this.getConfig();
+        RuntimeProjectDescriptor _runtimeProject_2 = _config_5.getRuntimeProject();
+        boolean _isEclipsePluginProject = _runtimeProject_2.isEclipsePluginProject();
+        if (_isEclipsePluginProject) {
+          _builder_1.append("<launchConfiguration type=\"org.eclipse.emf.mwe2.launch.Mwe2LaunchConfigurationType\">");
+          _builder_1.newLine();
+          _builder_1.append("<listAttribute key=\"org.eclipse.debug.core.MAPPED_RESOURCE_PATHS\">");
+          _builder_1.newLine();
+          _builder_1.append("<listEntry value=\"/");
+          WizardConfiguration _config_6 = this.getConfig();
+          RuntimeProjectDescriptor _runtimeProject_3 = _config_6.getRuntimeProject();
+          String _name_1 = _runtimeProject_3.getName();
+          _builder_1.append(_name_1, "");
+          _builder_1.append("\"/>");
+          _builder_1.newLineIfNotEmpty();
+          _builder_1.append("</listAttribute>");
+          _builder_1.newLine();
+          _builder_1.append("<listAttribute key=\"org.eclipse.debug.core.MAPPED_RESOURCE_TYPES\">");
+          _builder_1.newLine();
+          _builder_1.append("<listEntry value=\"4\"/>");
+          _builder_1.newLine();
+          _builder_1.append("</listAttribute>");
+          _builder_1.newLine();
+          _builder_1.append("<listAttribute key=\"org.eclipse.debug.ui.favoriteGroups\">");
+          _builder_1.newLine();
+          _builder_1.append("<listEntry value=\"org.eclipse.debug.ui.launchGroup.debug\"/>");
+          _builder_1.newLine();
+          _builder_1.append("<listEntry value=\"org.eclipse.debug.ui.launchGroup.run\"/>");
+          _builder_1.newLine();
+          _builder_1.append("</listAttribute>");
+          _builder_1.newLine();
+          _builder_1.append("<stringAttribute key=\"org.eclipse.debug.core.ATTR_REFRESH_SCOPE\" value=\"");
+          _builder_1.append(refreshAttr, "");
+          _builder_1.append("\"/>");
+          _builder_1.newLineIfNotEmpty();
+          _builder_1.append("<stringAttribute key=\"org.eclipse.jdt.launching.MAIN_TYPE\" value=\"org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher\"/>");
+          _builder_1.newLine();
+          _builder_1.append("<stringAttribute key=\"org.eclipse.jdt.launching.PROGRAM_ARGUMENTS\" value=\"");
+          WizardConfiguration _config_7 = this.getConfig();
+          LanguageDescriptor _language = _config_7.getLanguage();
+          String _basePackagePath = _language.getBasePackagePath();
+          String _plus = (_basePackagePath + "/Generate");
+          WizardConfiguration _config_8 = this.getConfig();
+          LanguageDescriptor _language_1 = _config_8.getLanguage();
+          String _simpleName = _language_1.getSimpleName();
+          String _plus_1 = (_plus + _simpleName);
+          String _replaceAll = _plus_1.replaceAll("/", ".");
+          _builder_1.append(_replaceAll, "");
+          _builder_1.append("\"/>");
+          _builder_1.newLineIfNotEmpty();
+          _builder_1.append("<stringAttribute key=\"org.eclipse.jdt.launching.PROJECT_ATTR\" value=\"");
+          WizardConfiguration _config_9 = this.getConfig();
+          RuntimeProjectDescriptor _runtimeProject_4 = _config_9.getRuntimeProject();
+          String _name_2 = _runtimeProject_4.getName();
+          _builder_1.append(_name_2, "");
+          _builder_1.append("\"/>");
+          _builder_1.newLineIfNotEmpty();
+          _builder_1.append("<stringAttribute key=\"org.eclipse.jdt.launching.VM_ARGUMENTS\" value=\"-Xmx512m\"/>");
+          _builder_1.newLine();
+          _builder_1.append("</launchConfiguration>");
+          _builder_1.newLine();
+        } else {
+          WizardConfiguration _config_10 = this.getConfig();
+          BuildSystem _preferredBuildSystem = _config_10.getPreferredBuildSystem();
+          boolean _equals = Objects.equal(_preferredBuildSystem, BuildSystem.MAVEN);
+          if (_equals) {
+            _builder_1.append("<launchConfiguration type=\"org.eclipse.m2e.Maven2LaunchConfigurationType\">");
+            _builder_1.newLine();
+            _builder_1.append("<booleanAttribute key=\"M2_DEBUG_OUTPUT\" value=\"false\"/>");
+            _builder_1.newLine();
+            _builder_1.append("<stringAttribute key=\"M2_GOALS\" value=\"clean generate-sources\"/>");
+            _builder_1.newLine();
+            _builder_1.append("<booleanAttribute key=\"M2_NON_RECURSIVE\" value=\"false\"/>");
+            _builder_1.newLine();
+            _builder_1.append("<booleanAttribute key=\"M2_OFFLINE\" value=\"false\"/>");
+            _builder_1.newLine();
+            _builder_1.append("<stringAttribute key=\"M2_PROFILES\" value=\"\"/>");
+            _builder_1.newLine();
+            _builder_1.append("<listAttribute key=\"M2_PROPERTIES\"/>");
+            _builder_1.newLine();
+            _builder_1.append("<stringAttribute key=\"M2_RUNTIME\" value=\"EMBEDDED\"/>");
+            _builder_1.newLine();
+            _builder_1.append("<booleanAttribute key=\"M2_SKIP_TESTS\" value=\"false\"/>");
+            _builder_1.newLine();
+            _builder_1.append("<intAttribute key=\"M2_THREADS\" value=\"1\"/>");
+            _builder_1.newLine();
+            _builder_1.append("<booleanAttribute key=\"M2_UPDATE_SNAPSHOTS\" value=\"false\"/>");
+            _builder_1.newLine();
+            _builder_1.append("<stringAttribute key=\"M2_USER_SETTINGS\" value=\"\"/>");
+            _builder_1.newLine();
+            _builder_1.append("<booleanAttribute key=\"M2_WORKSPACE_RESOLUTION\" value=\"true\"/>");
+            _builder_1.newLine();
+            _builder_1.append("<stringAttribute key=\"org.eclipse.debug.core.ATTR_REFRESH_SCOPE\" value=\"");
+            _builder_1.append(refreshAttr, "");
+            _builder_1.append("\"/>");
+            _builder_1.newLineIfNotEmpty();
+            _builder_1.append("<booleanAttribute key=\"org.eclipse.jdt.launching.ATTR_USE_START_ON_FIRST_THREAD\" value=\"true\"/>");
+            _builder_1.newLine();
+            _builder_1.append("<stringAttribute key=\"org.eclipse.jdt.launching.WORKING_DIRECTORY\" value=\"${workspace_loc:/");
+            WizardConfiguration _config_11 = this.getConfig();
+            RuntimeProjectDescriptor _runtimeProject_5 = _config_11.getRuntimeProject();
+            String _name_3 = _runtimeProject_5.getName();
+            _builder_1.append(_name_3, "");
+            _builder_1.append("}\"/>");
+            _builder_1.newLineIfNotEmpty();
+            _builder_1.append("</launchConfiguration>");
+            _builder_1.newLine();
+          } else {
+            WizardConfiguration _config_12 = this.getConfig();
+            BuildSystem _preferredBuildSystem_1 = _config_12.getPreferredBuildSystem();
+            boolean _equals_1 = Objects.equal(_preferredBuildSystem_1, BuildSystem.GRADLE);
+            if (_equals_1) {
+              _builder_1.append("<launchConfiguration type=\"org.eclipse.buildship.core.launch.runconfiguration\">");
+              _builder_1.newLine();
+              _builder_1.append("<listAttribute key=\"arguments\"/>");
+              _builder_1.newLine();
+              _builder_1.append("<stringAttribute key=\"gradle_distribution\" value=\"GRADLE_DISTRIBUTION(WRAPPER)\"/>");
+              _builder_1.newLine();
+              _builder_1.append("<listAttribute key=\"jvm_arguments\"/>");
+              _builder_1.newLine();
+              _builder_1.append("<booleanAttribute key=\"show_console_view\" value=\"true\"/>");
+              _builder_1.newLine();
+              _builder_1.append("<booleanAttribute key=\"show_execution_view\" value=\"true\"/>");
+              _builder_1.newLine();
+              _builder_1.append("<listAttribute key=\"tasks\">");
+              _builder_1.newLine();
+              _builder_1.append("<listEntry value=\"build\"/>");
+              _builder_1.newLine();
+              _builder_1.append("</listAttribute>");
+              _builder_1.newLine();
+              _builder_1.append("<stringAttribute key=\"org.eclipse.debug.core.ATTR_REFRESH_SCOPE\" value=\"");
+              _builder_1.append(refreshAttr, "");
+              _builder_1.append("\"/>");
+              _builder_1.newLineIfNotEmpty();
+              _builder_1.append("<booleanAttribute key=\"org.eclipse.jdt.launching.ATTR_USE_START_ON_FIRST_THREAD\" value=\"true\"/>");
+              _builder_1.newLine();
+              _builder_1.append("<stringAttribute key=\"org.eclipse.jdt.launching.WORKING_DIRECTORY\" value=\"${workspace_loc:/");
+              WizardConfiguration _config_13 = this.getConfig();
+              RuntimeProjectDescriptor _runtimeProject_6 = _config_13.getRuntimeProject();
+              String _name_4 = _runtimeProject_6.getName();
+              _builder_1.append(_name_4, "");
+              _builder_1.append("}\"/>");
+              _builder_1.newLineIfNotEmpty();
+              _builder_1.append("</launchConfiguration>");
+              _builder_1.newLine();
+            }
+          }
+        }
+      }
+      _xblockexpression = _builder_1;
+    }
+    return _xblockexpression;
+  }
+  
+  /**
+   * @since 2.11
+   */
+  private PlainTextFile getLaunchConfigFile() {
+    CharSequence _launchConfig = this.launchConfig();
+    return this.file(Outlet.ROOT, ".launch/Launch Runtime Eclipse.launch", _launchConfig);
+  }
+  
+  /**
+   * @since 2.11
+   */
+  private CharSequence launchConfig() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>");
+    _builder.newLine();
+    _builder.append("<launchConfiguration type=\"org.eclipse.pde.ui.RuntimeWorkbench\">");
+    _builder.newLine();
+    _builder.append("<booleanAttribute key=\"append.args\" value=\"true\"/>");
+    _builder.newLine();
+    _builder.append("<booleanAttribute key=\"askclear\" value=\"true\"/>");
+    _builder.newLine();
+    _builder.append("<booleanAttribute key=\"automaticAdd\" value=\"true\"/>");
+    _builder.newLine();
+    _builder.append("<booleanAttribute key=\"automaticValidate\" value=\"false\"/>");
+    _builder.newLine();
+    _builder.append("<stringAttribute key=\"bad_container_name\" value=\"/");
+    WizardConfiguration _config = this.getConfig();
+    RuntimeProjectDescriptor _runtimeProject = _config.getRuntimeProject();
+    String _name = _runtimeProject.getName();
+    _builder.append(_name, "");
+    _builder.append("/.launch/\"/>");
+    _builder.newLineIfNotEmpty();
+    _builder.append("<stringAttribute key=\"bootstrap\" value=\"\"/>");
+    _builder.newLine();
+    _builder.append("<stringAttribute key=\"checked\" value=\"[NONE]\"/>");
+    _builder.newLine();
+    _builder.append("<booleanAttribute key=\"clearConfig\" value=\"false\"/>");
+    _builder.newLine();
+    _builder.append("<booleanAttribute key=\"clearws\" value=\"false\"/>");
+    _builder.newLine();
+    _builder.append("<booleanAttribute key=\"clearwslog\" value=\"false\"/>");
+    _builder.newLine();
+    _builder.append("<stringAttribute key=\"configLocation\" value=\"${workspace_loc}/.metadata/.plugins/org.eclipse.pde.core/Launch Runtime Eclipse\"/>");
+    _builder.newLine();
+    _builder.append("<booleanAttribute key=\"default\" value=\"true\"/>");
+    _builder.newLine();
+    _builder.append("<booleanAttribute key=\"includeOptional\" value=\"true\"/>");
+    _builder.newLine();
+    _builder.append("<stringAttribute key=\"location\" value=\"${workspace_loc}/../runtime-EclipseXtext\"/>");
+    _builder.newLine();
+    _builder.append("<listAttribute key=\"org.eclipse.debug.ui.favoriteGroups\">");
+    _builder.newLine();
+    _builder.append("<listEntry value=\"org.eclipse.debug.ui.launchGroup.debug\"/>");
+    _builder.newLine();
+    _builder.append("<listEntry value=\"org.eclipse.debug.ui.launchGroup.run\"/>");
+    _builder.newLine();
+    _builder.append("</listAttribute>");
+    _builder.newLine();
+    _builder.append("<stringAttribute key=\"org.eclipse.jdt.launching.JRE_CONTAINER\" value=\"org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.8\"/>");
+    _builder.newLine();
+    _builder.append("<stringAttribute key=\"org.eclipse.jdt.launching.PROGRAM_ARGUMENTS\" value=\"-os ${target.os} -ws ${target.ws} -arch ${target.arch} -nl ${target.nl}\"/>");
+    _builder.newLine();
+    _builder.append("<stringAttribute key=\"org.eclipse.jdt.launching.SOURCE_PATH_PROVIDER\" value=\"org.eclipse.pde.ui.workbenchClasspathProvider\"/>");
+    _builder.newLine();
+    _builder.append("<stringAttribute key=\"org.eclipse.jdt.launching.VM_ARGUMENTS\" value=\"-Xms40m -Xmx512m\"/>");
+    _builder.newLine();
+    _builder.append("<stringAttribute key=\"pde.version\" value=\"3.3\"/>");
+    _builder.newLine();
+    _builder.append("<stringAttribute key=\"product\" value=\"org.eclipse.platform.ide\"/>");
+    _builder.newLine();
+    _builder.append("<booleanAttribute key=\"show_selected_only\" value=\"false\"/>");
+    _builder.newLine();
+    _builder.append("<stringAttribute key=\"templateConfig\" value=\"${target_home}/configuration/config.ini\"/>");
+    _builder.newLine();
+    _builder.append("<booleanAttribute key=\"tracing\" value=\"false\"/>");
+    _builder.newLine();
+    _builder.append("<booleanAttribute key=\"useDefaultConfig\" value=\"true\"/>");
+    _builder.newLine();
+    _builder.append("<booleanAttribute key=\"useDefaultConfigArea\" value=\"true\"/>");
+    _builder.newLine();
+    _builder.append("<booleanAttribute key=\"useProduct\" value=\"true\"/>");
+    _builder.newLine();
+    _builder.append("<booleanAttribute key=\"usefeatures\" value=\"false\"/>");
+    _builder.newLine();
+    _builder.append("</launchConfiguration>");
+    _builder.newLine();
+    return _builder;
   }
   
   @Pure
