@@ -123,6 +123,94 @@ public class FormattableDocumentTest {
   }
   
   @Test
+  public void autowrapNotInPreviousLineBetweenFormattedRegions() {
+    final Procedure1<GenericFormatterTestRequest> _function = (GenericFormatterTestRequest it) -> {
+      final Procedure1<MapBasedPreferenceValues> _function_1 = (MapBasedPreferenceValues it_1) -> {
+        it_1.<Integer>put(FormatterPreferenceKeys.maxLineWidth, Integer.valueOf(5));
+      };
+      it.preferences(_function_1);
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("kwlist kw1");
+      _builder.newLine();
+      _builder.append("kw2 kw3 kw4  kw5");
+      _builder.newLine();
+      it.setToBeFormatted(_builder);
+      final GenericFormatter<KWList> _function_2 = new GenericFormatter<KWList>() {
+        @Override
+        protected void format(final KWList model, @Extension final ITextRegionExtensions regions, @Extension final IFormattableDocument document) {
+          ISemanticRegionsFinder _regionFor = regions.regionFor(model);
+          ISemanticRegion _keyword = _regionFor.keyword("kwlist");
+          final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it_1) -> {
+            it_1.autowrap();
+            it_1.oneSpace();
+          };
+          document.append(_keyword, _function);
+          ISemanticRegionsFinder _regionFor_1 = regions.regionFor(model);
+          ISemanticRegion _keyword_1 = _regionFor_1.keyword("kw4");
+          final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it_1) -> {
+            it_1.oneSpace();
+          };
+          document.append(_keyword_1, _function_1);
+        }
+      };
+      it.setFormatter(_function_2);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("kwlist kw1");
+      _builder_1.newLine();
+      _builder_1.append("kw2 kw3 kw4 kw5");
+      _builder_1.newLine();
+      it.setExpectation(_builder_1);
+    };
+    this._genericFormatterTester.assertFormatted(_function);
+  }
+  
+  @Test
+  public void autowrapNotInPreviousLineInFormattedRegion() {
+    final Procedure1<GenericFormatterTestRequest> _function = (GenericFormatterTestRequest it) -> {
+      final Procedure1<MapBasedPreferenceValues> _function_1 = (MapBasedPreferenceValues it_1) -> {
+        it_1.<Integer>put(FormatterPreferenceKeys.maxLineWidth, Integer.valueOf(10));
+      };
+      it.preferences(_function_1);
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("kwlist kw1 kw2 kw3 kw4  kw5");
+      _builder.newLine();
+      it.setToBeFormatted(_builder);
+      final GenericFormatter<KWList> _function_2 = new GenericFormatter<KWList>() {
+        @Override
+        protected void format(final KWList model, @Extension final ITextRegionExtensions regions, @Extension final IFormattableDocument document) {
+          ISemanticRegionsFinder _regionFor = regions.regionFor(model);
+          ISemanticRegion _keyword = _regionFor.keyword("kwlist");
+          final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it_1) -> {
+            it_1.autowrap();
+            it_1.oneSpace();
+          };
+          document.append(_keyword, _function);
+          ISemanticRegionsFinder _regionFor_1 = regions.regionFor(model);
+          ISemanticRegion _keyword_1 = _regionFor_1.keyword("kw1");
+          final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it_1) -> {
+            it_1.newLine();
+          };
+          document.append(_keyword_1, _function_1);
+          ISemanticRegionsFinder _regionFor_2 = regions.regionFor(model);
+          ISemanticRegion _keyword_2 = _regionFor_2.keyword("kw4");
+          final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it_1) -> {
+            it_1.oneSpace();
+          };
+          document.append(_keyword_2, _function_2);
+        }
+      };
+      it.setFormatter(_function_2);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("kwlist kw1");
+      _builder_1.newLine();
+      _builder_1.append("kw2 kw3 kw4 kw5");
+      _builder_1.newLine();
+      it.setExpectation(_builder_1);
+    };
+    this._genericFormatterTester.assertFormatted(_function);
+  }
+  
+  @Test
   public void autoWrapWithSpan() {
     final Procedure1<GenericFormatterTestRequest> _function = (GenericFormatterTestRequest it) -> {
       final Procedure1<MapBasedPreferenceValues> _function_1 = (MapBasedPreferenceValues it_1) -> {

@@ -64,6 +64,46 @@ class FormattableDocumentTest {
 			'''
 		]
 	}
+	
+	@Test def void autowrapNotInPreviousLineBetweenFormattedRegions() {
+		assertFormatted[
+			preferences[
+				put(maxLineWidth, 5)
+			]
+			toBeFormatted = '''
+				kwlist kw1
+				kw2 kw3 kw4  kw5
+			'''
+			formatter = [ KWList model, extension regions, extension document |
+				model.regionFor.keyword("kwlist").append[autowrap; oneSpace]
+				model.regionFor.keyword("kw4").append[oneSpace]
+			]
+			expectation = '''
+				kwlist kw1
+				kw2 kw3 kw4 kw5
+			'''
+		]
+	}
+	
+	@Test def void autowrapNotInPreviousLineInFormattedRegion() {
+		assertFormatted[
+			preferences[
+				put(maxLineWidth, 10)
+			]
+			toBeFormatted = '''
+				kwlist kw1 kw2 kw3 kw4  kw5
+			'''
+			formatter = [ KWList model, extension regions, extension document |
+				model.regionFor.keyword("kwlist").append[autowrap; oneSpace]
+				model.regionFor.keyword("kw1").append[newLine]
+				model.regionFor.keyword("kw4").append[oneSpace]
+			]
+			expectation = '''
+				kwlist kw1
+				kw2 kw3 kw4 kw5
+			'''
+		]
+	}
 
 	@Test def void autoWrapWithSpan() {
 		assertFormatted[
