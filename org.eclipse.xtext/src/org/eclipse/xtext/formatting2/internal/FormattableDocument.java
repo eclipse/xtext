@@ -122,13 +122,18 @@ public abstract class FormattableDocument implements IFormattableDocument {
 		ITextReplacerContext wrappable = null;
 		Set<ITextReplacer> wrapped = Sets.newHashSet();
 		LinkedList<ITextReplacer> queue = new LinkedList<ITextReplacer>();
-		for (ITextReplacer replacer : replacers)
+		for (ITextReplacer replacer : replacers) {
 			queue.add(replacer);
+		}
 		while (!queue.isEmpty()) {
 			ITextReplacer replacer = queue.poll();
 			context = context.withReplacer(replacer);
+			if (wrappable != null && context.isWrapSincePrevious()) {
+				wrappable = null;
+			}
 			if (wrappable != null && needsAutowrap(wrappable, context, maxLineWidth)) {
-				// TODO: raise report if replacer claims it can do autowrap but then doesn't
+				// TODO: raise report if replacer claims it can do autowrap but
+				// then doesn't
 				while (context != wrappable) {
 					ITextReplacer r = context.getReplacer();
 					if (r != null && replacers.get(r) == r) {
@@ -141,17 +146,22 @@ public abstract class FormattableDocument implements IFormattableDocument {
 				wrappable = null;
 			}
 			ITextReplacerContext nextContext = replacer.createReplacements(context);
-			Integer canAutowrap = context.canAutowrap();
-			if (canAutowrap != null && canAutowrap >= 0 && !context.isAutowrap() && !wrapped.contains(replacer)) {
-				boolean can = true;
-				if (wrappable != null) {
-					int lastEndOffset = wrappable.canAutowrap() + wrappable.getReplacer().getRegion().getEndOffset();
-					int thisEndOffset = canAutowrap + context.getReplacer().getRegion().getEndOffset();
-					can = lastEndOffset < thisEndOffset;
-				}
-				if (can) {
-					wrappable = context;
-					wrapped.add(replacer);
+			if (wrappable != null && context.isWrapInRegion()) {
+				wrappable = null;
+			} else {
+				Integer canAutowrap = context.canAutowrap();
+				if (canAutowrap != null && canAutowrap >= 0 && !context.isAutowrap() && !wrapped.contains(replacer)) {
+					boolean can = true;
+					if (wrappable != null) {
+						int lastEndOffset = wrappable.canAutowrap()
+								+ wrappable.getReplacer().getRegion().getEndOffset();
+						int thisEndOffset = canAutowrap + context.getReplacer().getRegion().getEndOffset();
+						can = lastEndOffset < thisEndOffset;
+					}
+					if (can) {
+						wrappable = context;
+						wrapped.add(replacer);
+					}
 				}
 			}
 			context = nextContext;

@@ -55,6 +55,10 @@ public interface ITextReplacerContext {
 
 	boolean isAutowrap();
 
+	boolean isWrapInRegion();
+
+	boolean isWrapSincePrevious();
+
 	boolean isInsideFormattedRegion();
 
 	void setAutowrap(boolean value);

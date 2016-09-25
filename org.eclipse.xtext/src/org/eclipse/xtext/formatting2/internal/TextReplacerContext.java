@@ -43,7 +43,8 @@ public class TextReplacerContext implements ITextReplacerContext {
 		this(document, null, 0, null);
 	}
 
-	protected TextReplacerContext(IFormattableDocument document, ITextReplacerContext previous, int indentation, ITextReplacer replacer) {
+	protected TextReplacerContext(IFormattableDocument document, ITextReplacerContext previous, int indentation,
+			ITextReplacer replacer) {
 		super();
 		this.document = document;
 		this.indentation = indentation;
@@ -58,7 +59,7 @@ public class TextReplacerContext implements ITextReplacerContext {
 	}
 
 	protected TextSegmentSet<ITextReplacement> createTextReplacementsSet() {
-		return new ArrayListTextSegmentSet<ITextReplacement>(Functions.<ITextReplacement> identity(),
+		return new ArrayListTextSegmentSet<ITextReplacement>(Functions.<ITextReplacement>identity(),
 				new Function<ITextReplacement, String>() {
 					@Override
 					public String apply(ITextReplacement input) {
@@ -105,7 +106,7 @@ public class TextReplacerContext implements ITextReplacerContext {
 				ITextReplacement rep = localReplacements.get(i);
 				int endOffset = rep.getEndOffset();
 				if (endOffset > lastOffset) {
-					//					System.out.println("error");
+					// System.out.println("error");
 					continue;
 				}
 				String between = access.textForOffset(endOffset, lastOffset - endOffset);
@@ -135,7 +136,7 @@ public class TextReplacerContext implements ITextReplacerContext {
 		if (replacements != null)
 			return replacements;
 		else
-			return Collections.<ITextReplacement> emptyList();
+			return Collections.<ITextReplacement>emptyList();
 	}
 
 	@Override
@@ -182,7 +183,8 @@ public class TextReplacerContext implements ITextReplacerContext {
 		if (regions.isEmpty())
 			return true;
 		for (org.eclipse.xtext.util.ITextRegion region : regions)
-			if (region.getOffset() <= repl.getOffset() && region.getOffset() + region.getLength() >= repl.getEndOffset())
+			if (region.getOffset() <= repl.getOffset()
+					&& region.getOffset() + region.getLength() >= repl.getEndOffset())
 				return true;
 		return false;
 	}
@@ -283,8 +285,8 @@ public class TextReplacerContext implements ITextReplacerContext {
 			items.add("canAutowrap");
 		if (replacer != null) {
 			ITextSegment region = replacer.getRegion();
-			items.add(format("replacer=[%d-%d-%s|%s]", region.getOffset(), region.getLength(), replacer.getClass().getSimpleName(),
-					replacer.toString()));
+			items.add(format("replacer=[%d-%d-%s|%s]", region.getOffset(), region.getLength(),
+					replacer.getClass().getSimpleName(), replacer.toString()));
 		}
 		if (replacements != null)
 			for (ITextReplacement r : replacements) {
@@ -316,13 +318,64 @@ public class TextReplacerContext implements ITextReplacerContext {
 				if (nextReplacerIsChild) {
 					Preconditions.checkArgument(lastReplacer.getRegion().contains(replacer.getRegion()));
 				} else {
-					Preconditions.checkArgument(lastReplacer.getRegion().getEndOffset() <= replacer.getRegion().getOffset());
+					Preconditions
+							.checkArgument(lastReplacer.getRegion().getEndOffset() <= replacer.getRegion().getOffset());
 				}
 				break;
 			}
 			current = current.getPreviousContext();
 		}
 		return new TextReplacerContext(document, this, indentation, replacer);
+	}
+
+	protected ITextSegment getRegion(int index) {
+		ITextReplacerContext current = this;
+		while (current != null) {
+			ITextReplacer replacer2 = current.getReplacer();
+			if (replacer2 != null) {
+				if (index == 0) {
+					return replacer2.getRegion();
+				} else
+					index--;
+			}
+			current = current.getPreviousContext();
+		}
+		return null;
+	}
+
+	@Override
+	public boolean isWrapInRegion() {
+		ITextRegionAccess access = getDocument().getRequest().getTextRegionAccess();
+		ITextSegment region = getReplacer().getRegion();
+		int lastOffset = region.getOffset();
+		for (ITextReplacement rep : this.getLocalReplacements()) {
+			int endOffset = rep.getOffset();
+			String between = access.textForOffset(lastOffset, endOffset - lastOffset);
+			if (between.contains("\n") || rep.getReplacementText().contains("\n")) {
+				return true;
+			}
+			lastOffset = rep.getEndOffset();
+		}
+		String rest = access.textForOffset(lastOffset, region.getEndOffset() - lastOffset);
+		if (rest.contains("\n")) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean isWrapSincePrevious() {
+		ITextRegionAccess access = getDocument().getRequest().getTextRegionAccess();
+		ITextSegment region = getRegion(0);
+		ITextSegment previousRegion = getRegion(1);
+		if (previousRegion != null) {
+			int offset = previousRegion.getEndOffset();
+			String between = access.textForOffset(offset, region.getOffset() - offset);
+			if (between.contains("\n")) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 }
