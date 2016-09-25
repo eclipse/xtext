@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.eclipse.xtext.formatting2.AbstractFormatter2;
 import org.eclipse.xtext.formatting2.FormatterPreferenceKeys;
+import org.eclipse.xtext.formatting2.FormatterRequest;
 import org.eclipse.xtext.formatting2.IFormattableDocument;
 import org.eclipse.xtext.formatting2.ITextReplacer;
 import org.eclipse.xtext.formatting2.ITextReplacerContext;
@@ -217,6 +218,7 @@ public class TextReplacerContext implements ITextReplacerContext {
 	public void addReplacement(ITextReplacement replacement) {
 		Preconditions.checkNotNull(replacer);
 		ITextSegment replacerRegion = replacer.getRegion();
+		FormatterRequest request = document.getRequest();
 		if (!replacerRegion.contains(replacement)) {
 			String frameTitle = replacer.getClass().getSimpleName();
 			ITextSegment frameRegion = replacer.getRegion();
@@ -224,13 +226,16 @@ public class TextReplacerContext implements ITextReplacerContext {
 			@SuppressWarnings("unchecked")
 			RegionsOutsideFrameException exception = new RegionsOutsideFrameException(frameTitle, frameRegion,
 					Tuples.create(replacerTitle, (ITextSegment) replacement));
-			document.getRequest().getExceptionHandler().accept(exception);
+			request.getExceptionHandler().accept(exception);
 			return;
 		}
 		if (!isInRequestedRange(replacement)) {
 			return;
 		}
-		if (document.getRequest().isFormatUndefinedHiddenRegionsOnly()) {
+		if (!request.allowIdentityEdits() && isIdentityEdit(replacement)) {
+			return;
+		}
+		if (request.isFormatUndefinedHiddenRegionsOnly()) {
 			IHiddenRegion hidden = null;
 			if (replacerRegion instanceof IHiddenRegionPart)
 				hidden = ((IHiddenRegionPart) replacerRegion).getHiddenRegion();
@@ -242,8 +247,12 @@ public class TextReplacerContext implements ITextReplacerContext {
 		try {
 			replacements.add(replacement);
 		} catch (ConflictingRegionsException e) {
-			document.getRequest().getExceptionHandler().accept(e);
+			request.getExceptionHandler().accept(e);
 		}
+	}
+
+	protected boolean isIdentityEdit(ITextReplacement replacement) {
+		return replacement.getText().equals(replacement.getReplacementText());
 	}
 
 	@Override
