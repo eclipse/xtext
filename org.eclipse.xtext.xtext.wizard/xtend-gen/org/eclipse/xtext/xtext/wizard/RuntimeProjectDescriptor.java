@@ -47,6 +47,17 @@ import org.eclipse.xtext.xtext.wizard.WebProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.WizardConfiguration;
 import org.eclipse.xtext.xtext.wizard.ecore2xtext.Ecore2XtextGrammarCreator;
 
+/**
+ * @author Dennis Huebner - Initial contribution and API
+ * @author Sven Efftinge
+ * @author Miro Spoenemann
+ * @author Stefan Oehme
+ * @author Christian Schneider
+ * @author Moritz Eysholdt
+ * @author Lorenzo Bettini - bug#494176
+ * @author Karsten Thoms - bug#484500, issue#108
+ * @since 2.9
+ */
 @SuppressWarnings("all")
 public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
   private final Ecore2XtextGrammarCreator grammarCreator = new Ecore2XtextGrammarCreator();
@@ -553,11 +564,11 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
         _builder.newLine();
         _builder.newLine();
         _builder.append("\t\t\t");
-        _builder.append("fragment = org.eclipse.xtext.generator.adapter.FragmentAdapter {");
+        _builder.append("formatter = {");
         _builder.newLine();
         _builder.append("\t\t\t");
         _builder.append("\t");
-        _builder.append("fragment = org.eclipse.xtext.generator.ecore2xtext.FormatterFragment {}");
+        _builder.append("generateStub = true");
         _builder.newLine();
         _builder.append("\t\t\t");
         _builder.append("}");
