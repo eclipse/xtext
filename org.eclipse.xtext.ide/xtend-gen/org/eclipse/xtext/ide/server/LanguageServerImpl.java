@@ -537,15 +537,13 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
             }
           }
           final ArrayList<CompletionItemImpl> completionItems = CollectionLiterals.<CompletionItemImpl>newArrayList();
-          final Consumer<Pair<Integer, ContentAssistEntry>> _function_3 = (Pair<Integer, ContentAssistEntry> it) -> {
+          final Procedure2<Pair<Integer, ContentAssistEntry>, Integer> _function_3 = (Pair<Integer, ContentAssistEntry> it, Integer idx) -> {
             ContentAssistEntry _value = it.getValue();
             final CompletionItemImpl item = this.toCompletionItem(_value, caretOffset, caretPosition, document);
-            Integer _key = it.getKey();
-            String _string = _key.toString();
-            item.setSortText(_string);
+            item.setSortText(("" + idx));
             completionItems.add(item);
           };
-          entries.forEach(_function_3);
+          IterableExtensions.<Pair<Integer, ContentAssistEntry>>forEach(entries, _function_3);
           return completionItems;
         } catch (Throwable _e) {
           throw Exceptions.sneakyThrow(_e);

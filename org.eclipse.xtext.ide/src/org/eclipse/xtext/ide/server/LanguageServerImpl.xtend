@@ -329,10 +329,10 @@ import org.eclipse.xtext.validation.Issue
                     }
                 }
                 val completionItems = newArrayList
-                entries.forEach[it|
+                entries.forEach[it, idx|
                     val item = value.toCompletionItem(caretOffset, caretPosition, document)
-                    item.sortText = key.toString
-                    completionItems += item                        
+                    item.sortText = ''+idx
+                    completionItems += item
                 ]
                 return completionItems
             ]
