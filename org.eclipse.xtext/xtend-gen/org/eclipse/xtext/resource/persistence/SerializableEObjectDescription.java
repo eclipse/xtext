@@ -22,6 +22,7 @@ import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.resource.persistence.SerializableEObjectDescriptionProvider;
 import org.eclipse.xtext.resource.persistence.SerializationExtensions;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Pure;
@@ -31,17 +32,17 @@ import org.eclipse.xtext.xbase.lib.Pure;
  */
 @Accessors
 @SuppressWarnings("all")
-public class SerializableEObjectDescription implements IEObjectDescription, Externalizable {
-  private URI eObjectURI;
+public class SerializableEObjectDescription implements IEObjectDescription, Externalizable, SerializableEObjectDescriptionProvider {
+  protected URI eObjectURI;
   
-  private EClass eClass;
+  protected EClass eClass;
   
-  private QualifiedName qualifiedName;
+  protected QualifiedName qualifiedName;
   
-  private HashMap<String, String> userData;
+  protected HashMap<String, String> userData;
   
   @Accessors(AccessorType.NONE)
-  private transient EObject eObjectOrProxy;
+  protected transient EObject eObjectOrProxy;
   
   public void updateResourceURI(final URI uri) {
     String _fragment = this.eObjectURI.fragment();
@@ -94,6 +95,11 @@ public class SerializableEObjectDescription implements IEObjectDescription, Exte
     SerializationExtensions.writeURI(out, _uRI);
     SerializationExtensions.writeQualifiedName(out, this.qualifiedName);
     out.writeObject(this.userData);
+  }
+  
+  @Override
+  public SerializableEObjectDescription toSerializableEObjectDescription() {
+    return this;
   }
   
   @Pure

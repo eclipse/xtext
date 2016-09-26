@@ -45,6 +45,7 @@ import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.resource.impl.AbstractResourceDescription;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionDelta;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData;
+import org.eclipse.xtext.resource.persistence.SerializableEObjectDescriptionProvider;
 import org.eclipse.xtext.service.OperationCanceledManager;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.internal.Log;
@@ -140,6 +141,9 @@ public class Indexer {
       this.URI = _uRI;
       Iterable<IEObjectDescription> _exportedObjects = original.getExportedObjects();
       final Function1<IEObjectDescription, IEObjectDescription> _function = (IEObjectDescription from) -> {
+        if ((from instanceof SerializableEObjectDescriptionProvider)) {
+          return ((SerializableEObjectDescriptionProvider)from).toSerializableEObjectDescription();
+        }
         EObject _eObjectOrProxy = from.getEObjectOrProxy();
         boolean _eIsProxy = _eObjectOrProxy.eIsProxy();
         if (_eIsProxy) {

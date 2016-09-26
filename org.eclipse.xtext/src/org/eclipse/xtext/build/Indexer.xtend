@@ -33,6 +33,7 @@ import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionDelta
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData
 import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.service.OperationCanceledManager
+import org.eclipse.xtext.resource.persistence.SerializableEObjectDescriptionProvider
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -148,6 +149,9 @@ import org.eclipse.xtext.service.OperationCanceledManager
 			this.URI = original.getURI
 			this.exported = ImmutableList.copyOf(
 				original.exportedObjects.map [ IEObjectDescription from |
+				    if (from instanceof SerializableEObjectDescriptionProvider) {
+				        return from.toSerializableEObjectDescription()
+				    }
 					if (from.getEObjectOrProxy.eIsProxy)
 						return from
 					var result = EcoreUtil.create(from.getEClass()) as InternalEObject

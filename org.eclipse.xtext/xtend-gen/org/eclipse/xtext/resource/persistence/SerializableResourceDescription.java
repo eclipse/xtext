@@ -24,6 +24,7 @@ import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.impl.AbstractResourceDescription;
 import org.eclipse.xtext.resource.persistence.SerializableEObjectDescription;
+import org.eclipse.xtext.resource.persistence.SerializableEObjectDescriptionProvider;
 import org.eclipse.xtext.resource.persistence.SerializableReferenceDescription;
 import org.eclipse.xtext.resource.persistence.SerializationExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -70,6 +71,9 @@ public class SerializableResourceDescription extends AbstractResourceDescription
   }
   
   private static SerializableEObjectDescription createCopy(final IEObjectDescription desc) {
+    if ((desc instanceof SerializableEObjectDescriptionProvider)) {
+      return ((SerializableEObjectDescriptionProvider)desc).toSerializableEObjectDescription();
+    }
     SerializableEObjectDescription _serializableEObjectDescription = new SerializableEObjectDescription();
     final Procedure1<SerializableEObjectDescription> _function = (SerializableEObjectDescription it) -> {
       EClass _eClass = desc.getEClass();
@@ -77,16 +81,15 @@ public class SerializableResourceDescription extends AbstractResourceDescription
       URI _eObjectURI = desc.getEObjectURI();
       it.setEObjectURI(_eObjectURI);
       QualifiedName _qualifiedName = desc.getQualifiedName();
-      it.setQualifiedName(_qualifiedName);
+      it.qualifiedName = _qualifiedName;
       String[] _userDataKeys = desc.getUserDataKeys();
       int _size = ((List<String>)Conversions.doWrapArray(_userDataKeys)).size();
       HashMap<String, String> _hashMap = new HashMap<String, String>(_size);
-      it.setUserData(_hashMap);
+      it.userData = _hashMap;
       String[] _userDataKeys_1 = desc.getUserDataKeys();
       for (final String key : _userDataKeys_1) {
-        HashMap<String, String> _userData = it.getUserData();
-        String _userData_1 = desc.getUserData(key);
-        _userData.put(key, _userData_1);
+        String _userData = desc.getUserData(key);
+        it.userData.put(key, _userData);
       }
     };
     return ObjectExtensions.<SerializableEObjectDescription>operator_doubleArrow(_serializableEObjectDescription, _function);

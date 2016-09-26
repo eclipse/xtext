@@ -48,7 +48,10 @@ import static extension org.eclipse.xtext.resource.persistence.SerializationExte
 	}
 	
 	private def static SerializableEObjectDescription createCopy(IEObjectDescription desc) {
-		new SerializableEObjectDescription => [
+	    if (desc instanceof SerializableEObjectDescriptionProvider) {
+	        return desc.toSerializableEObjectDescription()
+	    }
+		return new SerializableEObjectDescription => [
 			EClass = desc.EClass
 			EObjectURI = desc.EObjectURI
 			qualifiedName = desc.qualifiedName
@@ -134,15 +137,22 @@ import static extension org.eclipse.xtext.resource.persistence.SerializationExte
 }
 
 /**
+ * @since 2.11
+ */
+interface SerializableEObjectDescriptionProvider {
+    def SerializableEObjectDescription toSerializableEObjectDescription();
+}
+
+/**
  * @since 2.8
  */
-@Accessors class SerializableEObjectDescription implements IEObjectDescription, Externalizable {
+@Accessors class SerializableEObjectDescription implements IEObjectDescription, Externalizable, SerializableEObjectDescriptionProvider {
 	
-	URI eObjectURI
-	EClass eClass
-	QualifiedName qualifiedName
-	HashMap<String,String> userData
-	@Accessors(NONE) transient EObject eObjectOrProxy
+	protected URI eObjectURI
+	protected EClass eClass
+	protected QualifiedName qualifiedName
+	protected HashMap<String,String> userData
+	@Accessors(NONE) protected transient EObject eObjectOrProxy
 	
 	def void updateResourceURI(URI uri) {
 		eObjectURI = uri.appendFragment(eObjectURI.fragment)
@@ -182,7 +192,11 @@ import static extension org.eclipse.xtext.resource.persistence.SerializationExte
 		out.writeQualifiedName(qualifiedName)
 		out.writeObject(userData)
 	}
-	
+
+    override toSerializableEObjectDescription() {
+        return this
+    }
+
 } 
 
 /**

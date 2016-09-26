@@ -58,14 +58,13 @@ import io.typefox.lsapi.services.WindowService
 import io.typefox.lsapi.services.WorkspaceService
 import java.util.Collections
 import java.util.List
-import java.util.TreeSet
 import java.util.concurrent.CompletableFuture
 import java.util.function.Consumer
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistEntry
-import org.eclipse.xtext.ide.editor.contentassist.IIdeContentProposalAcceptor
+import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalAcceptor
 import org.eclipse.xtext.ide.server.concurrent.CancellableIndicator
 import org.eclipse.xtext.ide.server.concurrent.RequestManager
 import org.eclipse.xtext.ide.server.contentassist.ContentAssistService
@@ -289,34 +288,7 @@ import org.eclipse.xtext.validation.Issue
 				return result
             
             result.items = workspaceManager.doRead(uri) [ document, resource |
-                val entries = new TreeSet<Pair<Integer, ContentAssistEntry>> [ p1, p2 |
-                    val prioResult = p2.key.compareTo(p1.key)
-                    if (prioResult != 0)
-                        return prioResult
-                    val s1 = p1.value.label ?: p1.value.proposal
-                    val s2 = p2.value.label ?: p2.value.proposal
-                    val ignoreCase = s1.compareToIgnoreCase(s2)
-                    if (ignoreCase === 0) {
-                        return s1.compareTo(s2)
-                    }
-                    return ignoreCase
-                ]
-                val acceptor = new IIdeContentProposalAcceptor {
-        
-                    override accept(ContentAssistEntry entry, int priority) {
-                        if (entry !== null) {
-                            if (entry.proposal === null)
-                                throw new IllegalArgumentException('proposal must not be null.')
-                            entries.add(priority -> entry)
-                        }
-                        operationCanceledManager.checkCanceled(cancelIndicator)
-                    }
-        
-                    override canAcceptMoreProposals() {
-                        entries.size < 100
-                    }
-        
-                }
+                val acceptor = resource.resourceServiceProvider.get(IdeContentProposalAcceptor)
                 val caretOffset = document.getOffSet(params.position)
                 val caretPosition = new PositionImpl(params.position as PositionImpl)
                 try {
@@ -329,8 +301,8 @@ import org.eclipse.xtext.validation.Issue
                     }
                 }
                 val completionItems = newArrayList
-                entries.forEach[it, idx|
-                    val item = value.toCompletionItem(caretOffset, caretPosition, document)
+                acceptor.getEntries().forEach[it, idx|
+                    val item = toCompletionItem(caretOffset, caretPosition, document)
                     item.sortText = ''+idx
                     completionItems += item
                 ]
