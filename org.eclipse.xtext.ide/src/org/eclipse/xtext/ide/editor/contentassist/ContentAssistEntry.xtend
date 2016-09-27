@@ -44,6 +44,12 @@ class ContentAssistEntry {
 	String description
 	
 	/**
+     * Documentation for the proposal proposals.
+     * <p>This property may not be supported by all editor frameworks.</p>
+     */
+    String documentation
+	
+	/**
 	 * The absolute cursor position to apply after the proposal has been inserted.
 	 * If omitted, the cursor it set to the end of the inserted proposal.
 	 * <p>This property may not be supported by all editor frameworks.</p>

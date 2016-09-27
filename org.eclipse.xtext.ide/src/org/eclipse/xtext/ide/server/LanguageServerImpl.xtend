@@ -78,6 +78,7 @@ import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.eclipse.xtext.service.OperationCanceledManager
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.validation.Issue
+import com.google.common.base.Strings
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -303,7 +304,7 @@ import org.eclipse.xtext.validation.Issue
                 val completionItems = newArrayList
                 acceptor.getEntries().forEach[it, idx|
                     val item = toCompletionItem(caretOffset, caretPosition, document)
-                    item.sortText = ''+idx
+                    item.sortText = Strings.padStart(''+idx, 5, "0")
                     completionItems += item
                 ]
                 return completionItems
@@ -316,6 +317,7 @@ import org.eclipse.xtext.validation.Issue
 		val completionItem = new CompletionItemImpl
 		completionItem.label = entry.label ?: entry.proposal
 		completionItem.detail = entry.description
+		completionItem.documentation = entry.documentation
 	    val prefixOffset = caretOffset - (entry.prefix?:'').length
 	    val prefixPosition = document.getPosition(prefixOffset)
 	    completionItem.textEdit = new TextEditImpl(new RangeImpl(prefixPosition, caretPosition), entry.proposal) 

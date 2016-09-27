@@ -46,6 +46,12 @@ public class ContentAssistEntry {
   private String description;
   
   /**
+   * Documentation for the proposal proposals.
+   * <p>This property may not be supported by all editor frameworks.</p>
+   */
+  private String documentation;
+  
+  /**
    * The absolute cursor position to apply after the proposal has been inserted.
    * If omitted, the cursor it set to the end of the inserted proposal.
    * <p>This property may not be supported by all editor frameworks.</p>
@@ -153,6 +159,15 @@ public class ContentAssistEntry {
   }
   
   @Pure
+  public String getDocumentation() {
+    return this.documentation;
+  }
+  
+  public void setDocumentation(final String documentation) {
+    this.documentation = documentation;
+  }
+  
+  @Pure
   public Integer getEscapePosition() {
     return this.escapePosition;
   }
@@ -198,6 +213,7 @@ public class ContentAssistEntry {
     b.add("proposal", this.proposal);
     b.add("label", this.label);
     b.add("description", this.description);
+    b.add("documentation", this.documentation);
     b.add("escapePosition", this.escapePosition);
     b.add("textReplacements", this.textReplacements);
     b.add("editPositions", this.editPositions);
@@ -235,6 +251,11 @@ public class ContentAssistEntry {
         return false;
     } else if (!this.description.equals(other.description))
       return false;
+    if (this.documentation == null) {
+      if (other.documentation != null)
+        return false;
+    } else if (!this.documentation.equals(other.documentation))
+      return false;
     if (this.escapePosition == null) {
       if (other.escapePosition != null)
         return false;
@@ -267,6 +288,7 @@ public class ContentAssistEntry {
     result = prime * result + ((this.proposal== null) ? 0 : this.proposal.hashCode());
     result = prime * result + ((this.label== null) ? 0 : this.label.hashCode());
     result = prime * result + ((this.description== null) ? 0 : this.description.hashCode());
+    result = prime * result + ((this.documentation== null) ? 0 : this.documentation.hashCode());
     result = prime * result + ((this.escapePosition== null) ? 0 : this.escapePosition.hashCode());
     result = prime * result + ((this.textReplacements== null) ? 0 : this.textReplacements.hashCode());
     result = prime * result + ((this.editPositions== null) ? 0 : this.editPositions.hashCode());

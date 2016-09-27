@@ -533,9 +533,17 @@ public abstract class AbstractLanguageServerTest implements Consumer<PublishDiag
       TextDocumentPositionParamsBuilder _textDocumentPositionParamsBuilder = new TextDocumentPositionParamsBuilder(_function);
       TextDocumentPositionParams _build = _textDocumentPositionParamsBuilder.build();
       final CompletableFuture<CompletionList> completionItems = this.languageServer.completion(_build);
-      CompletionList _get = completionItems.get();
-      List<? extends CompletionItem> _items = _get.getItems();
-      final String actualCompletionItems = this.toExpectation(_items);
+      final CompletionList list = completionItems.get();
+      List<? extends CompletionItem> _items = list.getItems();
+      List<? extends CompletionItem> _items_1 = list.getItems();
+      final Function1<CompletionItem, String> _function_1 = (CompletionItem it) -> {
+        return it.getSortText();
+      };
+      List<? extends CompletionItem> _sortBy = IterableExtensions.sortBy(_items_1, _function_1);
+      List<? extends CompletionItem> _list = IterableExtensions.toList(_sortBy);
+      Assert.assertEquals(_items, _list);
+      List<? extends CompletionItem> _items_2 = list.getItems();
+      final String actualCompletionItems = this.toExpectation(_items_2);
       String _expectedCompletionItems = configuration.getExpectedCompletionItems();
       this.assertEquals(_expectedCompletionItems, actualCompletionItems);
     } catch (Throwable _e) {

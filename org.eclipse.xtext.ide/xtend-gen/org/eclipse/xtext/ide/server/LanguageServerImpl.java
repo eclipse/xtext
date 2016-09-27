@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtext.ide.server;
 
+import com.google.common.base.Strings;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -482,7 +483,8 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
           Iterable<ContentAssistEntry> _entries = acceptor.getEntries();
           final Procedure2<ContentAssistEntry, Integer> _function_2 = (ContentAssistEntry it, Integer idx) -> {
             final CompletionItemImpl item = this.toCompletionItem(it, caretOffset, caretPosition, document);
-            item.setSortText(("" + idx));
+            String _padStart = Strings.padStart(("" + idx), 5, '0');
+            item.setSortText(_padStart);
             completionItems.add(item);
           };
           IterableExtensions.<ContentAssistEntry>forEach(_entries, _function_2);
@@ -511,6 +513,8 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
     completionItem.setLabel(_elvis);
     String _description = entry.getDescription();
     completionItem.setDetail(_description);
+    String _documentation = entry.getDocumentation();
+    completionItem.setDocumentation(_documentation);
     String _elvis_1 = null;
     String _prefix = entry.getPrefix();
     if (_prefix != null) {

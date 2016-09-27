@@ -261,8 +261,12 @@ abstract class AbstractLanguageServerTest implements Consumer<PublishDiagnostics
         	textDocument(filePath)
         	position(line, column)
         ].build)
+        
+        // assert ordered by sortText
+        val list = completionItems.get
+        Assert.assertEquals(list.items, list.items.sortBy[sortText].toList)
 
-        val actualCompletionItems = completionItems.get.items.toExpectation
+        val actualCompletionItems = list.items.toExpectation
         assertEquals(expectedCompletionItems, actualCompletionItems)
     }
     
