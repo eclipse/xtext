@@ -12,6 +12,7 @@ import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.DocumentCommand;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
+import org.eclipse.jface.text.ITypedRegion;
 import org.eclipse.jface.text.TextUtilities;
 import org.eclipse.xtext.formatting.IIndentationInformation;
 import org.eclipse.xtext.util.Strings;
@@ -85,7 +86,7 @@ public class MultiLineTerminalsEditStrategy extends AbstractTerminalsEditStrateg
 				while(stopTerminal != null && previousStart != null && previousStop != null) {
 					previousStart = findStartTerminal(document, previousStart.getOffset());
 					if (previousStart != null) {
-						previousStop = findStopTerminal(document, previousStop.getOffset() + 1);
+						previousStop = findStopTerminal(document, findOffsetOfNextDftlContentPartition(document, previousStop.getOffset() + 1));
 						if (previousStop == null) {
 							stopTerminal = null;
 						}
@@ -210,6 +211,22 @@ public class MultiLineTerminalsEditStrategy extends AbstractTerminalsEditStrateg
 	protected boolean atEndOfLineInput(IDocument document, int offset) throws BadLocationException {
 		IRegion line = document.getLineInformation(document.getLineOfOffset(offset));
 		return document.get(offset, line.getOffset() + line.getLength() - offset).trim().length() == 0;
+	}
+	
+	/**
+	 * determines the offset of the next ITypedRegion of type {@link IDocument#DEFAULT_CONTENT_TYPE} starting from the given offset  
+	 * Fix for bug 403812.  
+	 */
+	private int findOffsetOfNextDftlContentPartition(IDocument document, int startOffset) throws BadLocationException{
+		if (startOffset >= document.getLength()) {
+			return startOffset;
+		}
+		ITypedRegion partition = document.getPartition(startOffset);
+		if(IDocument.DEFAULT_CONTENT_TYPE.equals(partition.getType())){
+			return startOffset;
+		}else{
+			return findOffsetOfNextDftlContentPartition(document,partition.getOffset()+partition.getLength());
+		}
 	}
 
 }
