@@ -19,6 +19,7 @@ import com.google.common.annotations.GwtCompatible;
  * The <code>step</code> can be positive or negative, but never 0. It must have the same signum as of <code>end-start</code>.
  * 
  * @author Jan Koehnlein - Initial contribution and API
+ * @author Karsten Thoms - Bug#381140
  * @since 2.3
  */
 @GwtCompatible public class IntegerRange implements Iterable<Integer> {
@@ -62,7 +63,7 @@ import com.google.common.annotations.GwtCompatible;
 	 */
 	@Pure
 	public IntegerRange(int start, int end, int step) {
-		if ((end - start) * step < 0)
+		if ((start < end) && step < 0 || (start > end) && step > 0)
 			throw new IllegalArgumentException("The step of an IntegerRange must have the correct sign.");
 		if (step == 0)
 			throw new IllegalArgumentException("The step of an IntegerRange must not be 0");
