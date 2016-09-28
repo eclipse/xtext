@@ -8,7 +8,11 @@
 package org.eclipse.xtext.xbase.tests.compiler;
 
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.util.JavaVersion;
+import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.tests.compiler.AbstractOutputComparingCompilerTests;
 import org.junit.Test;
 
@@ -1993,6 +1997,64 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
       _builder_1.append("return _switchResult;");
       _builder_1.newLine();
       this.compilesTo(_builder, _builder_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testEmptySwitch_11() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val String x = null");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("switch (x) {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("Object _xblockexpression = null;");
+      _builder_1.newLine();
+      _builder_1.append("{");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("final String x = null;");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("Object _switchResult = null;");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("if (x != null) {");
+      _builder_1.newLine();
+      _builder_1.append("    ");
+      _builder_1.append("switch (x) {");
+      _builder_1.newLine();
+      _builder_1.append("    ");
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("_xblockexpression = _switchResult;");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("return _xblockexpression;");
+      _builder_1.newLine();
+      GeneratorConfig _generatorConfig = new GeneratorConfig();
+      final Procedure1<GeneratorConfig> _function = (GeneratorConfig it) -> {
+        it.setJavaSourceVersion(JavaVersion.JAVA8);
+      };
+      GeneratorConfig _doubleArrow = ObjectExtensions.<GeneratorConfig>operator_doubleArrow(_generatorConfig, _function);
+      this.compilesTo(_builder, _builder_1, _doubleArrow);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
