@@ -7,11 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.serializer;
 
-import java.io.IOException;
+import javax.inject.Inject;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.serializer.ISerializer;
+import org.eclipse.xtext.testing.util.ParseHelper;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XCastedExpression;
 import org.eclipse.xtext.xbase.XClosure;
@@ -26,8 +27,9 @@ import org.junit.Test;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class SerializerTest extends AbstractXbaseTestCase {
+	@Inject private ParseHelper<XInstanceOfExpression> parseHelper;
 	
-	@Test public void testSerialize_01() throws IOException {
+	@Test public void testSerialize_01() throws Exception {
 		Resource resource = newResource("'foo' as String");
 		XCastedExpression casted = (XCastedExpression) resource.getContents().get(0);
 		
@@ -46,10 +48,13 @@ public class SerializerTest extends AbstractXbaseTestCase {
 		resource.getContents().add(instanceOfExpression);
 		ISerializer serializer = get(ISerializer.class);
 		String string = serializer.serialize(instanceOfExpression);
-		assertEquals("[|\"value\"] instanceof String", string);
+		assertEquals("[ | \"value\" ] instanceof String", string);
+		
+		XInstanceOfExpression parsedExpression = parseHelper.parse(string);
+		assertTrue(EcoreUtil.equals(instanceOfExpression, parsedExpression));
 	}
 	
-	@Test public void testSerialize_02() throws IOException {
+	@Test public void testSerialize_02() throws Exception {
 		Resource resource = newResource("'foo' as String");
 		XCastedExpression casted = (XCastedExpression) resource.getContents().get(0);
 		
@@ -67,7 +72,10 @@ public class SerializerTest extends AbstractXbaseTestCase {
 		ISerializer serializer = get(ISerializer.class);
 		String string = serializer.serialize(instanceOfExpression);
 		// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=464846
-		assertEquals("( if(false) \"value\" ) instanceof String", string);
+		assertEquals("( if ( false ) \"value\" ) instanceof String", string);
+		
+		XInstanceOfExpression parsedExpression = parseHelper.parse(string);
+		assertTrue(EcoreUtil.equals(instanceOfExpression, parsedExpression));
 	}
 
 }
