@@ -35,7 +35,7 @@
 </location>
 
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.emf.mwe2.language.sdk.feature.group" version="2.9.0.201608050851"/>
+<unit id="org.eclipse.emf.mwe2.language.sdk.feature.group" version="2.9.0.201609180213"/>
 <repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/latest/"/>
 </location>
 
