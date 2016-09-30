@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Xtend Tutorial
 Bundle-SymbolicName: xtend-examples
 Bundle-Version: 2.11.0.qualifier
-Bundle-Vendor: Eclipse Tools Project
+Bundle-Vendor: Eclipse Xtend
 Require-Bundle: org.eclipse.xtext.xbase.lib,
  org.eclipse.xtend.lib,
  org.junit;bundle-version="4.5.0"

@@ -8,4 +8,5 @@ Require-Bundle: org.eclipse.xtend.lib,
  com.google.guava;bundle-version="[14.0.0,19.0.0)",
  org.eclipse.xtext.xbase.lib,
  xtend-annotation-examples;bundle-version="2.4.3"
+Bundle-Vendor: Eclipse Xtend
 
