@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: org.eclipse.xtext.example.fowlerdsl
-Bundle-Vendor: My Company
+Bundle-Name: Xtext Fowler DSL Example - Runtime
+Bundle-Vendor: Eclipse Xtext
 Bundle-Version: 2.11.0.qualifier
 Bundle-SymbolicName: org.eclipse.xtext.example.fowlerdsl; singleton:=true
 Bundle-ActivationPolicy: lazy

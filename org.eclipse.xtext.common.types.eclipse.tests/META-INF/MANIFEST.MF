@@ -1,10 +1,11 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: org.eclipse.xtext.common.types.eclipse.tests
+Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.xtext.common.types.eclipse.tests;singleton:=true
 Bundle-Version: 2.11.0.qualifier
-Bundle-Vendor: Eclipse Xtext
+Bundle-Vendor: %providerName
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-Localization: plugin
 Require-Bundle: org.eclipse.xtext.junit4,
  org.eclipse.xtext.util,
  org.eclipse.xtext.common.types,
