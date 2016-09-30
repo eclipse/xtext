@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Idea Entity Example
+Bundle-Name: Web Entity Example
 Bundle-Vendor: Eclipse Xtext
 Bundle-Version: 2.11.0.qualifier
-Bundle-SymbolicName: org.eclipse.xtext.idea.example.entities; singleton:=true
+Bundle-SymbolicName: org.eclipse.xtext.web.example.entities;singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext;visibility:=reexport,
  org.eclipse.xtext.xbase;visibility:=reexport,
