@@ -662,7 +662,9 @@ public abstract class AbstractLanguageServerTest implements Consumer<PublishDiag
       SignatureHelp _get = signatureHelps.get();
       final String actualSignatureHelp = this.toExpectation(_get);
       String _expectedSignatureHelp = configuration.getExpectedSignatureHelp();
-      this.assertEquals(_expectedSignatureHelp, actualSignatureHelp);
+      String _trim = _expectedSignatureHelp.trim();
+      String _trim_1 = actualSignatureHelp.trim();
+      this.assertEquals(_trim, _trim_1);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

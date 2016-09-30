@@ -7,18 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.server.signatureHelp;
 
-import static java.util.Collections.*;
-
-import java.util.List;
-
 import org.eclipse.xtext.resource.XtextResource;
 
 import com.google.inject.ImplementedBy;
 import com.google.inject.Singleton;
 
 import io.typefox.lsapi.SignatureHelp;
-import io.typefox.lsapi.impl.SignatureHelpImpl;
-import io.typefox.lsapi.impl.SignatureInformationImpl;
+import io.typefox.lsapi.builders.SignatureHelpBuilder;
 
 /**
  * Representation of a service for getting the {@link SignatureHelp signature
@@ -32,14 +27,7 @@ public interface SignatureHelpService {
 	/**
 	 * Shared, immutable empty instance. 
 	 */
-	SignatureHelp EMPTY = new SignatureHelpImpl() {
-
-		@Override
-		public List<SignatureInformationImpl> getSignatures() {
-			return emptyList();
-		}
-
-	};
+	SignatureHelp EMPTY = new SignatureHelpBuilder().build();
 	
 	/**
 	 * Returns with a {@link SignatureHelp signature help} instance for a

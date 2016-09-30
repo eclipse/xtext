@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Consumer;
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.URIConverter;
@@ -36,6 +37,7 @@ import org.eclipse.xtext.resource.impl.ChunkedResourceDescriptions;
 import org.eclipse.xtext.resource.impl.ProjectDescription;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData;
 import org.eclipse.xtext.util.CancelIndicator;
+import org.eclipse.xtext.util.internal.Log;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.workspace.IProjectConfig;
 import org.eclipse.xtext.workspace.IWorkspaceConfig;
@@ -47,6 +49,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
  * @author Sven Efftinge - Initial contribution and API
  * @since 2.11
  */
+@Log
 @SuppressWarnings("all")
 public class WorkspaceManager {
   @Inject
@@ -174,6 +177,12 @@ public class WorkspaceManager {
   }
   
   public void didChange(final URI uri, final int version, final Iterable<TextEdit> changes, final CancelIndicator cancelIndicator) {
+    boolean _containsKey = this.openDocuments.containsKey(uri);
+    boolean _not = (!_containsKey);
+    if (_not) {
+      WorkspaceManager.LOG.error((("The document " + uri) + " has not been opened."));
+      return;
+    }
     final Document contents = this.openDocuments.get(uri);
     Document _applyChanges = contents.applyChanges(changes);
     this.openDocuments.put(uri, _applyChanges);
@@ -239,4 +248,6 @@ public class WorkspaceManager {
   
   public <T extends Object> void doWrite(final URI uri, final Function2<? super Document, ? super XtextResource, ? extends T> work) {
   }
+  
+  private final static Logger LOG = Logger.getLogger(WorkspaceManager.class);
 }

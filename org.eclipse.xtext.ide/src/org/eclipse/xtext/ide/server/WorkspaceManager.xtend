@@ -22,12 +22,13 @@ import org.eclipse.xtext.resource.impl.ResourceDescriptionsData
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.validation.Issue
 import org.eclipse.xtext.workspace.IWorkspaceConfig
+import org.eclipse.xtext.util.internal.Log
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  * @since 2.11
  */
-class WorkspaceManager {
+@Log class WorkspaceManager {
 
     @Inject Provider<ProjectManager> projectManagerProvider
     @Inject IWorkspaceConfigFactory workspaceConfigFactory
@@ -119,6 +120,10 @@ class WorkspaceManager {
     }
 
     def didChange(URI uri, int version, Iterable<TextEdit> changes, CancelIndicator cancelIndicator) {
+        if (!openDocuments.containsKey(uri)) {
+            LOG.error("The document "+uri+" has not been opened.")
+            return;
+        }
         val contents = openDocuments.get(uri)
         openDocuments.put(uri, contents.applyChanges(changes))
         doBuild(#[uri], newArrayList, cancelIndicator)

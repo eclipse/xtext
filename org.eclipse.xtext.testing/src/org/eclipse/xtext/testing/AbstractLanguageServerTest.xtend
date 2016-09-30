@@ -330,7 +330,7 @@ abstract class AbstractLanguageServerTest implements Consumer<PublishDiagnostics
         ].build);
         
         val actualSignatureHelp = signatureHelps.get.toExpectation
-        assertEquals(expectedSignatureHelp, actualSignatureHelp)
+        assertEquals(expectedSignatureHelp.trim, actualSignatureHelp.trim)
     }
 
     protected def void testDocumentSymbol((DocumentSymbolConfiguraiton)=>void configurator) {
