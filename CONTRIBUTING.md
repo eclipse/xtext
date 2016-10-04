@@ -6,6 +6,41 @@ Please create any new issue in the most appropriate repository (see full list on
 
 Eclipse Bugzilla issues are deprecated for Xtext. However, we still accept them.
 
+### Milestones
+
+We have one milestone for each Xtext release. Fixed issues should be assigned to the milestone of the nearest release in which the fix will be included. For example, if an issue is fixed on the `maintenance` branch, the corresponding milestone is the next service release (increasing the third version component). If an issue is fixed on the `master` branch, the next major or minor release should be assigned.
+
+It is possible to assign issues to a milestone before they are fixed, which can be useful for planning. However, make sure someone will actually work on that issue when you do that!
+
+The list of issues assigned to a milestone will give a nice overview of new features and fixed bugs after a release has been done, facilitating the creation of release notes and helping users to know when a fix will be available.
+
+### Issue Labels
+
+Issue labels can serve several purposes:
+
+* Indicate the issue type: `bug`, `enhancement`, `new feature`, `question`
+* Communicate the current status of an issue: `confirmed`, `help wanted`, `needs review`
+* Communicate why an issue has not been fixed: `duplicate`, `invalid`, `wontfix`
+* Categorize issues for better overview, e.g. to assign an issue to a specific part of the software. Committers may add categorization labels as required.
+
+In general we want to keep the number of labels as low as possible in order to avoid contributors to be overwhelmed and to make sure they are actually used. A label is not useful if it's assigned only to a fraction of the issues it belongs to, so it's important for all contributors to use the existing labels consistently.
+
+### Workflow
+
+All committers should feel responsible to read incoming issues. When you read a new issue, you should take an action:
+
+* If possible, assign a type and a status and describe the next required action with a comment.
+* If appropriate, close the issue and explain why it won't be fixed.
+* If you are not familiar enough with the topic of the issue, find someone who is and delegate the action.
+
+The next required action can be that
+
+* someone confirms the problem,
+* someone helps in identifying the cause of the problem,
+* someone fixes the problem,
+* someone implements the new feature, or
+* someone reviews the fix or implementation.
+
 ## Set up your Eclipse Workspace
 1. Download and start the [Eclipse Installer](https://wiki.eclipse.org/Eclipse_Oomph_Installer).
 2. On the initial page, click on the *Switch to Advanced Mode* button in the top right.
