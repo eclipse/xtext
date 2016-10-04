@@ -18,8 +18,8 @@ The list of issues assigned to a milestone will give a nice overview of new feat
 
 Issue labels can serve several purposes:
 
-* Indicate the issue type: `bug`, `enhancement`, `new feature`, `question`
-* Communicate the current status of an issue: `confirmed`, `help wanted`, `needs review`
+* Indicate the issue type: `bug`, `enhancement`, `new_feature`, `question`
+* Communicate the current status of an issue: `confirmed`, `help_wanted`
 * Communicate why an issue has not been fixed: `duplicate`, `invalid`, `wontfix`
 * Categorize issues for better overview, e.g. to assign an issue to a specific part of the software. Committers may add categorization labels as required.
 
