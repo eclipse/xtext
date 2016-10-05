@@ -77,10 +77,10 @@ class ContentAssistEntry {
 	transient Object source
 	
 	/**
-	 * The kind of element that is proposed. Could be one of the constants below something specific a concrete client understands.
-	 * not null
+	 * The kind of element that is proposed. Could be one of the constants below or something specific a concrete client understands.
+	 * Must not be null.
 	 */
-	String kind = org.eclipse.xtext.ide.editor.contentassist.ContentAssistEntry.KIND_UNKNOWN
+	String kind = KIND_UNKNOWN
 	
 	public static val KIND_TEXT = "TEXT"
     public static val KIND_METHOD = "METHOD"
@@ -100,6 +100,6 @@ class ContentAssistEntry {
     public static val KIND_COLOR = "COLOR"
     public static val KIND_FILE = "FILE"
     public static val KIND_REFERENCE = "REFERENCE"
-    public static val KIND_UNKNOWN = "UNKOWN"
+    public static val KIND_UNKNOWN = "UNKNOWN"
     
 }

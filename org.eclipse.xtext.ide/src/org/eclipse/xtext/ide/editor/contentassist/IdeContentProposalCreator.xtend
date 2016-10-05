@@ -55,7 +55,8 @@ class IdeContentProposalCreator {
 			val result = new ContentAssistEntry
 			result.proposal = proposal
 			result.prefix = prefix
-			result.kind = kind
+			if (kind !== null)
+				result.kind = kind
 			if (init !== null)
 				init.apply(result)
 			return result

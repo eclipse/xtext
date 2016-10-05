@@ -66,7 +66,9 @@ public class IdeContentProposalCreator {
       final ContentAssistEntry result = new ContentAssistEntry();
       result.setProposal(proposal);
       result.setPrefix(prefix);
-      result.setKind(kind);
+      if ((kind != null)) {
+        result.setKind(kind);
+      }
       if ((init != null)) {
         init.apply(result);
       }
