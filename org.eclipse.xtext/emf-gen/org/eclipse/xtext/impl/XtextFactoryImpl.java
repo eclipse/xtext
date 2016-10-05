@@ -94,6 +94,7 @@ public class XtextFactoryImpl extends EFactoryImpl implements XtextFactory {
 			case XtextPackage.COMPOSITE_CONDITION: return createCompositeCondition();
 			case XtextPackage.PARAMETER_REFERENCE: return createParameterReference();
 			case XtextPackage.LITERAL_CONDITION: return createLiteralCondition();
+			case XtextPackage.ANNOTATION: return createAnnotation();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -449,6 +450,16 @@ public class XtextFactoryImpl extends EFactoryImpl implements XtextFactory {
 	public LiteralCondition createLiteralCondition() {
 		LiteralConditionImpl literalCondition = new LiteralConditionImpl();
 		return literalCondition;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Annotation createAnnotation() {
+		AnnotationImpl annotation = new AnnotationImpl();
+		return annotation;
 	}
 
 	/**

@@ -702,7 +702,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 
 		Diagnostic diag = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
 		assertNotNull("diag", diag);
-		assertEquals(diag.getChildren().toString(), 1, diag.getChildren().size());
+		assertEquals(diag.getChildren().toString(), 2, diag.getChildren().size());
 		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
 		ReferencedMetamodel metamodel = (ReferencedMetamodel) diag.getChildren().get(0).getData().get(0);
 		assertNotNull(metamodel);
@@ -712,6 +712,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		XtextResource resource = getResourceFromString(
 				"grammar org.foo.Bar with org.eclipse.xtext.Xtext\n" +
 				"import 'http://www.eclipse.org/2008/Xtext' as xtext\n" +
+				"@Override\n" +
 				"ParserRule returns xtext::ParserRule: name = ID;");
 		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
 		assertTrue(resource.getWarnings().toString(), resource.getWarnings().isEmpty());
@@ -1047,7 +1048,7 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		Diagnostic diag = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
 		assertNotNull("diag", diag);
 		assertEquals(diag.getSeverity(), Diagnostic.ERROR);
-		assertEquals(diag.getChildren().toString(), 1, diag.getChildren().size());
+		assertEquals(diag.getChildren().toString(), 2, diag.getChildren().size());
 	}
 	
 	@Test public void testBug_293110() throws Exception {

@@ -21,6 +21,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xtext.ecore#//AbstractRule/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xtext.ecore#//AbstractRule/type"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xtext.ecore#//AbstractRule/alternatives"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xtext.ecore#//AbstractRule/annotations"/>
     </genClasses>
     <genClasses ecoreClass="Xtext.ecore#//AbstractMetamodelDeclaration">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Xtext.ecore#//AbstractMetamodelDeclaration/ePackage"/>
@@ -118,6 +119,9 @@
     </genClasses>
     <genClasses ecoreClass="Xtext.ecore#//LiteralCondition">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xtext.ecore#//LiteralCondition/true"/>
+    </genClasses>
+    <genClasses ecoreClass="Xtext.ecore#//Annotation">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xtext.ecore#//Annotation/name"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

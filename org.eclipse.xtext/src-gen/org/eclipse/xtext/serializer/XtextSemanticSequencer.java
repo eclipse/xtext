@@ -9,6 +9,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Alternatives;
+import org.eclipse.xtext.Annotation;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CharacterRange;
 import org.eclipse.xtext.Conjunction;
@@ -112,6 +113,9 @@ public class XtextSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 					return; 
 				}
 				else break;
+			case XtextPackage.ANNOTATION:
+				sequence_Annotation(context, (Annotation) semanticObject); 
+				return; 
 			case XtextPackage.ASSIGNMENT:
 				if (rule == grammarAccess.getAlternativesRule()
 						|| action == grammarAccess.getAlternativesAccess().getAlternativesElementsAction_1_0()
@@ -571,6 +575,24 @@ public class XtextSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	
 	/**
 	 * Contexts:
+	 *     Annotation returns Annotation
+	 *
+	 * Constraint:
+	 *     name=ID
+	 */
+	protected void sequence_Annotation(ISerializationContext context, Annotation semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, XtextPackage.Literals.ANNOTATION__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, XtextPackage.Literals.ANNOTATION__NAME));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getAnnotationAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
 	 *     AssignableTerminal returns Alternatives
 	 *     ParenthesizedAssignableElement returns Alternatives
 	 *     AssignableAlternatives returns Alternatives
@@ -767,7 +789,7 @@ public class XtextSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *     EnumRule returns EnumRule
 	 *
 	 * Constraint:
-	 *     (name=ValidID type=TypeRef? alternatives=EnumLiterals)
+	 *     (annotations+=Annotation? name=ValidID type=TypeRef? alternatives=EnumLiterals)
 	 */
 	protected void sequence_EnumRule(ISerializationContext context, EnumRule semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -990,6 +1012,7 @@ public class XtextSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *
 	 * Constraint:
 	 *     (
+	 *         annotations+=Annotation? 
 	 *         fragment?='fragment'? 
 	 *         name=ValidID 
 	 *         (parameters+=Parameter parameters+=Parameter*)? 
@@ -1147,7 +1170,7 @@ public class XtextSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *     TerminalRule returns TerminalRule
 	 *
 	 * Constraint:
-	 *     (((fragment?='fragment' name=ValidID) | (name=ValidID type=TypeRef?)) alternatives=TerminalAlternatives)
+	 *     (annotations+=Annotation? ((fragment?='fragment' name=ValidID) | (name=ValidID type=TypeRef?)) alternatives=TerminalAlternatives)
 	 */
 	protected void sequence_TerminalRule(ISerializationContext context, TerminalRule semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

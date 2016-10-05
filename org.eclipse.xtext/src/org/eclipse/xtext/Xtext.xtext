@@ -39,7 +39,12 @@ ReferencedMetamodel :
 //	'as' alias=ValidID
 //;
 
+Annotation returns Annotation:
+	'@' name = ID
+;
+
 ParserRule :
+	(annotations += Annotation)?
 	(
 	  ^fragment?='fragment' RuleNameAndParams (wildcard?='*' | ('returns' type=TypeRef)?) 
 	| RuleNameAndParams ('returns' type=TypeRef)?
@@ -200,6 +205,7 @@ PredicatedGroup returns Group:
 ;
 
 TerminalRule :
+	(annotations += Annotation)?
 	'terminal' (^fragment?='fragment' name=ValidID | name=ValidID ('returns' type=TypeRef)?) ':'
 		alternatives=TerminalAlternatives
 	';'
@@ -251,6 +257,7 @@ CharacterRange returns AbstractElement:
 ;
 
 EnumRule:
+	(annotations += Annotation)?
     'enum' name=ValidID ('returns' type=TypeRef)? ':' 
     	alternatives=EnumLiterals   
     ';'

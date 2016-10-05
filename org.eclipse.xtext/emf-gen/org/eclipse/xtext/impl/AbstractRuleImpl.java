@@ -2,17 +2,22 @@
  */
 package org.eclipse.xtext.impl;
 
+import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.Annotation;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.XtextPackage;
 
@@ -27,6 +32,7 @@ import org.eclipse.xtext.XtextPackage;
  *   <li>{@link org.eclipse.xtext.impl.AbstractRuleImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.impl.AbstractRuleImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.impl.AbstractRuleImpl#getAlternatives <em>Alternatives</em>}</li>
+ *   <li>{@link org.eclipse.xtext.impl.AbstractRuleImpl#getAnnotations <em>Annotations</em>}</li>
  * </ul>
  *
  * @generated
@@ -71,6 +77,16 @@ public class AbstractRuleImpl extends MinimalEObjectImpl.Container implements Ab
 	 * @ordered
 	 */
 	protected AbstractElement alternatives;
+
+	/**
+	 * The cached value of the '{@link #getAnnotations() <em>Annotations</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAnnotations()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Annotation> annotations;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -203,6 +219,18 @@ public class AbstractRuleImpl extends MinimalEObjectImpl.Container implements Ab
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Annotation> getAnnotations() {
+		if (annotations == null) {
+			annotations = new EObjectContainmentEList<Annotation>(Annotation.class, this, XtextPackage.ABSTRACT_RULE__ANNOTATIONS);
+		}
+		return annotations;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -210,6 +238,8 @@ public class AbstractRuleImpl extends MinimalEObjectImpl.Container implements Ab
 				return basicSetType(null, msgs);
 			case XtextPackage.ABSTRACT_RULE__ALTERNATIVES:
 				return basicSetAlternatives(null, msgs);
+			case XtextPackage.ABSTRACT_RULE__ANNOTATIONS:
+				return ((InternalEList<?>)getAnnotations()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -228,6 +258,8 @@ public class AbstractRuleImpl extends MinimalEObjectImpl.Container implements Ab
 				return getType();
 			case XtextPackage.ABSTRACT_RULE__ALTERNATIVES:
 				return getAlternatives();
+			case XtextPackage.ABSTRACT_RULE__ANNOTATIONS:
+				return getAnnotations();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -237,6 +269,7 @@ public class AbstractRuleImpl extends MinimalEObjectImpl.Container implements Ab
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -248,6 +281,10 @@ public class AbstractRuleImpl extends MinimalEObjectImpl.Container implements Ab
 				return;
 			case XtextPackage.ABSTRACT_RULE__ALTERNATIVES:
 				setAlternatives((AbstractElement)newValue);
+				return;
+			case XtextPackage.ABSTRACT_RULE__ANNOTATIONS:
+				getAnnotations().clear();
+				getAnnotations().addAll((Collection<? extends Annotation>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -270,6 +307,9 @@ public class AbstractRuleImpl extends MinimalEObjectImpl.Container implements Ab
 			case XtextPackage.ABSTRACT_RULE__ALTERNATIVES:
 				setAlternatives((AbstractElement)null);
 				return;
+			case XtextPackage.ABSTRACT_RULE__ANNOTATIONS:
+				getAnnotations().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -288,6 +328,8 @@ public class AbstractRuleImpl extends MinimalEObjectImpl.Container implements Ab
 				return type != null;
 			case XtextPackage.ABSTRACT_RULE__ALTERNATIVES:
 				return alternatives != null;
+			case XtextPackage.ABSTRACT_RULE__ANNOTATIONS:
+				return annotations != null && !annotations.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

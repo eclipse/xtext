@@ -2,6 +2,7 @@
  */
 package org.eclipse.xtext;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -16,6 +17,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.xtext.AbstractRule#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.AbstractRule#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.AbstractRule#getAlternatives <em>Alternatives</em>}</li>
+ *   <li>{@link org.eclipse.xtext.AbstractRule#getAnnotations <em>Annotations</em>}</li>
  * </ul>
  *
  * @see org.eclipse.xtext.XtextPackage#getAbstractRule()
@@ -100,5 +102,22 @@ public interface AbstractRule extends EObject {
 	 * @generated
 	 */
 	void setAlternatives(AbstractElement value);
+
+	/**
+	 * Returns the value of the '<em><b>Annotations</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.xtext.Annotation}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Annotations</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Annotations</em>' containment reference list.
+	 * @see org.eclipse.xtext.XtextPackage#getAbstractRule_Annotations()
+	 * @model containment="true"
+	 * @generated
+	 * @since 2.11
+	 */
+	EList<Annotation> getAnnotations();
 
 } // AbstractRule

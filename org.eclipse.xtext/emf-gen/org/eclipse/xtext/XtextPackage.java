@@ -168,13 +168,22 @@ public interface XtextPackage extends EPackage {
 	int ABSTRACT_RULE__ALTERNATIVES = 2;
 
 	/**
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_RULE__ANNOTATIONS = 3;
+
+	/**
 	 * The number of structural features of the '<em>Abstract Rule</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_RULE_FEATURE_COUNT = 3;
+	int ABSTRACT_RULE_FEATURE_COUNT = 4;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.impl.AbstractMetamodelDeclarationImpl <em>Abstract Metamodel Declaration</em>}' class.
@@ -332,6 +341,15 @@ public interface XtextPackage extends EPackage {
 	 * @ordered
 	 */
 	int PARSER_RULE__ALTERNATIVES = ABSTRACT_RULE__ALTERNATIVES;
+
+	/**
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARSER_RULE__ANNOTATIONS = ABSTRACT_RULE__ANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Defines Hidden Tokens</b></em>' attribute.
@@ -859,6 +877,15 @@ public interface XtextPackage extends EPackage {
 	int TERMINAL_RULE__ALTERNATIVES = ABSTRACT_RULE__ALTERNATIVES;
 
 	/**
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TERMINAL_RULE__ANNOTATIONS = ABSTRACT_RULE__ANNOTATIONS;
+
+	/**
 	 * The feature id for the '<em><b>Fragment</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1127,6 +1154,15 @@ public interface XtextPackage extends EPackage {
 	 * @ordered
 	 */
 	int ENUM_RULE__ALTERNATIVES = ABSTRACT_RULE__ALTERNATIVES;
+
+	/**
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUM_RULE__ANNOTATIONS = ABSTRACT_RULE__ANNOTATIONS;
 
 	/**
 	 * The number of structural features of the '<em>Enum Rule</em>' class.
@@ -1870,6 +1906,34 @@ public interface XtextPackage extends EPackage {
 	int LITERAL_CONDITION_FEATURE_COUNT = CONDITION_FEATURE_COUNT + 1;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.impl.AnnotationImpl <em>Annotation</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.impl.AnnotationImpl
+	 * @see org.eclipse.xtext.impl.XtextPackageImpl#getAnnotation()
+	 * @generated
+	 */
+	int ANNOTATION = 35;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANNOTATION__NAME = 0;
+
+	/**
+	 * The number of structural features of the '<em>Annotation</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ANNOTATION_FEATURE_COUNT = 1;
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.Grammar <em>Grammar</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1987,6 +2051,17 @@ public interface XtextPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getAbstractRule_Alternatives();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.AbstractRule#getAnnotations <em>Annotations</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Annotations</em>'.
+	 * @see org.eclipse.xtext.AbstractRule#getAnnotations()
+	 * @see #getAbstractRule()
+	 * @generated
+	 */
+	EReference getAbstractRule_Annotations();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.AbstractMetamodelDeclaration <em>Abstract Metamodel Declaration</em>}'.
@@ -2806,6 +2881,27 @@ public interface XtextPackage extends EPackage {
 	EAttribute getLiteralCondition_True();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.Annotation <em>Annotation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Annotation</em>'.
+	 * @see org.eclipse.xtext.Annotation
+	 * @generated
+	 */
+	EClass getAnnotation();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.Annotation#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see org.eclipse.xtext.Annotation#getName()
+	 * @see #getAnnotation()
+	 * @generated
+	 */
+	EAttribute getAnnotation_Name();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2825,8 +2921,6 @@ public interface XtextPackage extends EPackage {
 	 * </ul>
 	 * <!-- end-user-doc -->
 	 * @generated
-	 * @noextend This interface is not intended to be extended by clients.
-	 * @noimplement This interface is not intended to be implemented by clients.
 	 */
 	interface Literals {
 		/**
@@ -2920,6 +3014,14 @@ public interface XtextPackage extends EPackage {
 		 * @generated
 		 */
 		EReference ABSTRACT_RULE__ALTERNATIVES = eINSTANCE.getAbstractRule_Alternatives();
+
+		/**
+		 * The meta object literal for the '<em><b>Annotations</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ABSTRACT_RULE__ANNOTATIONS = eINSTANCE.getAbstractRule_Annotations();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.impl.AbstractMetamodelDeclarationImpl <em>Abstract Metamodel Declaration</em>}' class.
@@ -3611,6 +3713,24 @@ public interface XtextPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute LITERAL_CONDITION__TRUE = eINSTANCE.getLiteralCondition_True();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.impl.AnnotationImpl <em>Annotation</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.impl.AnnotationImpl
+		 * @see org.eclipse.xtext.impl.XtextPackageImpl#getAnnotation()
+		 * @generated
+		 */
+		EClass ANNOTATION = eINSTANCE.getAnnotation();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ANNOTATION__NAME = eINSTANCE.getAnnotation_Name();
 
 	}
 
