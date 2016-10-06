@@ -21,25 +21,18 @@ Issue labels can serve several purposes:
 * Indicate the issue type: `bug`, `enhancement`, `new_feature`, `question`
 * Communicate the current status of an issue: `confirmed`, `help_wanted`
 * Communicate why an issue has not been fixed: `duplicate`, `invalid`, `wontfix`
-* Categorize issues for better overview, e.g. to assign an issue to a specific part of the software. Committers may add categorization labels as required.
+* Categorize issues for better overview, e.g. to assign an issue to a specific part of the software. Committers may add categorization labels as required. However, in most cases the `[category]` prefixing in the issue title should be sufficient.
 
 In general we want to keep the number of labels as low as possible in order to avoid contributors to be overwhelmed and to make sure they are actually used. A label is not useful if it's assigned only to a fraction of the issues it belongs to, so it's important for all contributors to use the existing labels consistently.
 
 ### Workflow
 
-All committers should feel responsible to read incoming issues. When you read a new issue, you should take an action:
+All committers should feel responsible to read incoming issues. When you read a new issue, please think about an appropriate reaction:
 
-* If possible, assign a type and a status and describe the next required action with a comment.
+* If possible, assign a type and a status.
 * If appropriate, close the issue and explain why it won't be fixed.
-* If you are not familiar enough with the topic of the issue, find someone who is and delegate the action.
-
-The next required action can be that
-
-* someone confirms the problem,
-* someone helps in identifying the cause of the problem,
-* someone fixes the problem,
-* someone implements the new feature, or
-* someone reviews the fix or implementation.
+* If the report seems reasonable, a comment with some feedback to the reporter would be nice (e.g. describe wich action is required next, such as to confirm the issue or find a solution for it), especially if the reporter is not a committer.
+* If you are not familiar enough with the topic of the issue, you might find someone who is and delegate the action.
 
 ## Set up your Eclipse Workspace
 1. Download and start the [Eclipse Installer](https://wiki.eclipse.org/Eclipse_Oomph_Installer).
