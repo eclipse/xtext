@@ -75,6 +75,7 @@ import org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultHighlightingConfiguration;
 import org.eclipse.xtext.ui.label.StylerFactory;
 import org.eclipse.xtext.util.Strings;
+import org.eclipse.xtext.xtext.AnnotationNames;
 import org.eclipse.xtext.xtext.UsedRulesFinder;
 import org.eclipse.xtext.xtext.ui.editor.syntaxcoloring.SemanticHighlightingCalculator;
 import org.eclipse.xtext.xtext.ui.editor.syntaxcoloring.SemanticHighlightingConfiguration;
@@ -330,6 +331,27 @@ public class XtextProposalProvider extends AbstractXtextProposalProvider {
 		}
 		return super.getDisplayString(element, proposal, shortName);
 	}
+
+
+	@Override
+	public void complete_Annotation(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		createAnnotationProposals(acceptor, context, true);
+		super.complete_Annotation(model, ruleCall, context, acceptor);
+	}
+
+	@Override
+	public void completeAnnotation_Name(EObject model, Assignment assignment, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		createAnnotationProposals(acceptor, context, false);
+	}
+
+	protected void createAnnotationProposals(ICompletionProposalAcceptor acceptor, ContentAssistContext context, boolean withPrefix) {
+		for (String name : AnnotationNames.VALID_ANNOTATIONS_NAMES) {
+			final String proposal = withPrefix ? "@" + name : name;
+			acceptor.accept(createCompletionProposal(proposal, "@" + name, null, context));
+		}
+	}
+
 
 	/**
 	 * Not a full featured solution for the computation of available structural features, but it is sufficient for some

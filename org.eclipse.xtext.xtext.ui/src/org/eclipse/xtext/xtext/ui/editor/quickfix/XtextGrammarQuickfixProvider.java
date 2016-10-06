@@ -47,7 +47,6 @@ import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.EnumLiteralDeclaration;
-import org.eclipse.xtext.GeneratedMetamodel;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
@@ -55,6 +54,7 @@ import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.XtextFactory;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.conversion.IValueConverterService;
+import org.eclipse.xtext.formatting.ILineSeparatorInformation;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
@@ -117,6 +117,9 @@ public class XtextGrammarQuickfixProvider extends DefaultQuickfixProvider {
 	
 	@Inject(optional=true)
 	private IWorkbench workbench;
+	
+	@Inject
+	private ILineSeparatorInformation separatorInfo;
 	
 	@Fix(XtextLinkingDiagnosticMessageProvider.UNRESOLVED_RULE)
 	public void fixUnresolvedRule(final Issue issue, IssueResolutionAcceptor acceptor) {
@@ -440,5 +443,38 @@ public class XtextGrammarQuickfixProvider extends DefaultQuickfixProvider {
 				}
 			});
 		}
+	}
+	
+	@Fix(EXPLICIT_OVERRIDE_MISSING)
+	public void addOverrideTag(final Issue issue, IssueResolutionAcceptor acceptor) {
+		acceptor.accept(issue, "Add missing @Override annotation", "Inserts the missing @Override annotation.", null, new IModification() {
+			
+			@Override
+			public void apply(IModificationContext context) throws Exception {
+				final URI uri= issue.getUriToProblem();
+				final IXtextDocument document = context.getXtextDocument(uri);
+				
+				if (document == null) {
+					return;
+				}
+				
+				final Integer offset = document.readOnly(new IUnitOfWork<Integer, XtextResource>() {
+					
+					@Override
+					public Integer exec(XtextResource state) throws Exception {
+						final EObject eObject = state.getEObject(uri.fragment());
+						if (eObject == null) {
+							return null;
+						} else {
+							return NodeModelUtils.findActualNodeFor(eObject).getOffset();
+						}
+					}
+				});
+				
+				if (offset != null) {
+					document.replace(offset.intValue(), 0, "@Override " + separatorInfo.getLineSeparator());
+				}
+			}
+		});
 	}
 }
