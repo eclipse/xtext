@@ -45,6 +45,9 @@ public class XtextConfigurableIssueCodes extends ConfigurableIssueCodesProvider 
 	public static final String BIDIRECTIONAL_REFERENCE = ISSUE_CODE_PREFIX + "BidirectionalReference";
 	public static final String CROSS_REFERENCE_IN_ALTERNATIVES = ISSUE_CODE_PREFIX + "CrossReferenceInAlternatives";
 	
+	public static final String EXPLICIT_OVERRIDE_MISSING = ISSUE_CODE_PREFIX + "ExplicitOverrideMissing";
+	public static final String EXPLICIT_OVERRIDE_INVALID = ISSUE_CODE_PREFIX + "ExplicitOverrideInvalid";
+	
 	private Map<String, PreferenceKey> issueCodes;
 
 	public XtextConfigurableIssueCodes() {

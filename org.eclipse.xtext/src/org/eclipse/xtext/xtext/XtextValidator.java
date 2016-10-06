@@ -1235,4 +1235,46 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 		}
 	}
 
+// deactivated as demanded in https://github.com/eclipse/xtext-core/pull/126
+//	@Check
+//	public void checkAnnotations(AbstractRule rule) {
+//		final List<String> validNames = AnnotationNames.VALID_ANNOTATIONS_NAMES;
+//		for (Annotation a : rule.getAnnotations()) {
+//			if (!validNames.contains(a.getName())) {
+//				error("This annotation type is not supported.", a, XtextPackage.Literals.ANNOTATION__NAME);
+//			}
+//		}
+//	}
+	
+	@Check
+	public void checkOverridingRule(AbstractRule rule) {
+		final String name = rule.getName();
+		
+		final boolean isOverride =
+				rule.getAnnotations().stream().anyMatch(e -> AnnotationNames.OVERRIDE.equals(e.getName()));
+		
+		for (Grammar g : GrammarUtil.getGrammar(rule).getUsedGrammars()) {
+			final AbstractRule r = GrammarUtil.findRuleForName(g, rule.getName());
+			
+			if (r != null) {
+				if (!isOverride) {
+					warning("This rule overrides " + name + " in " + GrammarUtil.getGrammar(r).getName() + 
+								" and thus should be annotated with @Override.", rule,
+							XtextPackage.Literals.ABSTRACT_RULE__NAME, XtextConfigurableIssueCodes.EXPLICIT_OVERRIDE_MISSING);
+					break;
+					
+				} else {
+					// type compatibility checking is currently done in 'Xtext2EcoreTransformer' being called during linking
+					//  so it's omitted here
+				}
+				
+			} else {
+				if (isOverride) {
+					error("The rule " + name + " does not override a rule from a super grammar.", rule,
+							XtextPackage.Literals.ABSTRACT_RULE__NAME, XtextConfigurableIssueCodes.EXPLICIT_OVERRIDE_INVALID);
+					break;
+				}
+			}
+		}
+	}
 }

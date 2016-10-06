@@ -102,6 +102,53 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		assertSame(grammar.getRules().get(1), ruleCall.getRule());
 	}
 	
+	
+	@Test public void testExplicitOverride01() throws Exception {
+		IResourceValidator validator = get(IResourceValidator.class);
+		
+		XtextResource resource = getResourceFromString(
+				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
+				"terminal ID_2: ('a'..'z'|'A'..'Z'|'_');");
+		List<Issue> issues = validator.validate(resource, CheckMode.FAST_ONLY, CancelIndicator.NullImpl);
+		assertEquals(issues.toString(), 0, issues.size());
+		
+	}
+	
+	@Test public void testExplicitOverride02() throws Exception {
+		XtextResource resource = getResourceFromString(
+				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
+				"terminal ID: ('a'..'z'|'A'..'Z'|'_');");
+		Diagnostic diag = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
+		List<Diagnostic> issues = diag.getChildren();
+		assertEquals(issues.toString(), 1, issues.size());
+		assertEquals("This rule overrides ID in org.eclipse.xtext.common.Terminals and thus should be annotated with @Override.", issues.get(0).getMessage());
+		assertEquals("diag.isWarning", diag.getSeverity(), Diagnostic.WARNING);
+	}
+	
+	@Test public void testExplicitOverride03() throws Exception {
+		XtextResource resource = getResourceFromString(
+				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
+				"@Override\n" +
+				"terminal ID_2: ('a'..'z'|'A'..'Z'|'_');");
+		Diagnostic diag = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
+		List<Diagnostic> issues = diag.getChildren();
+		assertEquals(issues.toString(), 1, issues.size());
+		assertEquals("The rule ID_2 does not override a rule from a super grammar.", issues.get(0).getMessage());
+		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
+		
+	}
+	
+	@Test public void testExplicitOverride04() throws Exception {
+		IResourceValidator validator = get(IResourceValidator.class);
+		XtextResource resource = getResourceFromString(
+				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
+				"@Override\n" +
+				"terminal ID: ('a'..'z'|'A'..'Z'|'_');");
+		List<Issue> issues = validator.validate(resource, CheckMode.FAST_ONLY, CancelIndicator.NullImpl);
+		assertEquals(issues.toString(), 0, issues.size());
+	}
+	
+	
 	@Test public void testMissingArgument() throws Exception {
 		XtextResource resource = getResourceFromString(
 				"grammar com.acme.Bar with org.eclipse.xtext.common.Terminals\n" +
