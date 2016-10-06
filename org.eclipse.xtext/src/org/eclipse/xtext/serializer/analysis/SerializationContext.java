@@ -363,13 +363,13 @@ public abstract class SerializationContext implements ISerializationContext {
 		EClass type = getType();
 		int result = 1;
 		if (rule != null)
-			result *= rule.hashCode();
+			result = 31 * result + rule.hashCode();
 		if (action != null)
-			result *= action.hashCode() * 7;
+			result = 31 * result + action.hashCode();
 		if (type != null)
-			result *= type.hashCode() * 19;
+			result = 31 * result + type.hashCode();
 		if (parameterValues != null)
-			result *= parameterValues.hashCode() * 31;
+			result = 31 * result + parameterValues.hashCode();
 		return result;
 	}
 
