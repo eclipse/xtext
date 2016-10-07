@@ -226,10 +226,7 @@ public class InMemoryJavaCompiler {
     this.parentClassLoader = parent;
     CompilerOptions _compilerOptions = new CompilerOptions();
     this.compilerOptions = _compilerOptions;
-    final long classFmt = this.toClassFmt(javaVersion);
-    this.setSourceLevel(classFmt);
-    this.setComplianceLevel(classFmt);
-    this.compilerOptions.targetJDK = classFmt;
+    this.setJavaVersion(javaVersion);
     this.compilerOptions.inlineJsrBytecode = true;
     this.compilerOptions.preserveAllLocalVariables = true;
   }
@@ -241,6 +238,20 @@ public class InMemoryJavaCompiler {
     Map _map = compilerOptions.getMap();
     CompilerOptions _compilerOptions = new CompilerOptions(_map);
     this.compilerOptions = _compilerOptions;
+  }
+  
+  /**
+   * @since 2.11
+   */
+  public long setJavaVersion(final JavaVersion javaVersion) {
+    long _xblockexpression = (long) 0;
+    {
+      final long classFmt = this.toClassFmt(javaVersion);
+      this.setSourceLevel(classFmt);
+      this.setComplianceLevel(classFmt);
+      _xblockexpression = this.compilerOptions.targetJDK = classFmt;
+    }
+    return _xblockexpression;
   }
   
   private long toClassFmt(final JavaVersion version) {

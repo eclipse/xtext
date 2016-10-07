@@ -30,7 +30,8 @@ class GeneratorConfigProvider implements IGeneratorConfigProvider {
 
 	def GeneratorConfig install(ResourceSet resourceSet, GeneratorConfig config) {
 		val adapter = GeneratorConfigAdapter.findInEmfObject(resourceSet) 
-					  ?: new GeneratorConfigAdapter() => [ attachToEmfObject(resourceSet) ]
+					  ?: 
+					  (new GeneratorConfigAdapter() => [ attachToEmfObject(resourceSet) ])
 		return adapter.language2GeneratorConfig.put(languageId, config)
 	}
 

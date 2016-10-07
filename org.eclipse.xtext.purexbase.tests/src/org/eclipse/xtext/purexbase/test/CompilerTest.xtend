@@ -283,6 +283,7 @@ class CompilerTest {
 			    {
 			      final String x = "Hello ";
 			      final Function1<String, String> _function = new Function1<String, String>() {
+			        @Override
 			        public String apply(final String e) {
 			          return (x + e);
 			        }
@@ -291,12 +292,14 @@ class CompilerTest {
 			      f.apply("World!");
 			      final ArrayList<String> list = CollectionLiterals.<String>newArrayList("a", "b", "c");
 			      final Function1<String, String> _function_1 = new Function1<String, String>() {
+			        @Override
 			        public String apply(final String e) {
 			          return e.toUpperCase();
 			        }
 			      };
 			      /* ListExtensions.<String, String>map(list, _function_1); */
 			      final Function1<String, String> _function_2 = new Function1<String, String>() {
+			        @Override
 			        public String apply(final String e) {
 			          return e.toUpperCase();
 			        }
@@ -605,6 +608,7 @@ class CompilerTest {
 			      Rectangle _rectangle_1 = new Rectangle(6, 8);
 			      final ArrayList<Shape> list2 = CollectionLiterals.<Shape>newArrayList(_rectangle, _circle, _rectangle_1);
 			      final Function1<Shape, String> _function = new Function1<Shape, String>() {
+			        @Override
 			        public String apply(final Shape shape) {
 			          String _switchResult = null;
 			          boolean _matched = false;
@@ -701,6 +705,7 @@ class CompilerTest {
 			    char[] _charArray = "string".toCharArray();
 			    /* _charArray[3]; */
 			    final Comparator<String> _function = new Comparator<String>() {
+			      @Override
 			      public int compare(final String a, final String b) {
 			        int _length = a.length();
 			        int _length_1 = b.length();

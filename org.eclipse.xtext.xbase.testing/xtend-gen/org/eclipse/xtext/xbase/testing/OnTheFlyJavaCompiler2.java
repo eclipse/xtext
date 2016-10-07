@@ -28,6 +28,8 @@ import org.eclipse.xtext.xbase.testing.JavaSource;
 public class OnTheFlyJavaCompiler2 {
   private InMemoryJavaCompiler inMemoryCompiler;
   
+  private JavaVersion javaVersion;
+  
   /**
    * Creates a new OnTheFlyCompiler that accepts Java6 compliant code.
    */
@@ -39,6 +41,22 @@ public class OnTheFlyJavaCompiler2 {
   public OnTheFlyJavaCompiler2(final ClassLoader scope, final JavaVersion version) {
     InMemoryJavaCompiler _inMemoryJavaCompiler = new InMemoryJavaCompiler(scope, version);
     this.inMemoryCompiler = _inMemoryJavaCompiler;
+    this.javaVersion = version;
+  }
+  
+  /**
+   * @since 2.11
+   */
+  public void setJavaVersion(final JavaVersion version) {
+    this.inMemoryCompiler.setJavaVersion(version);
+    this.javaVersion = version;
+  }
+  
+  /**
+   * @since 2.11
+   */
+  public JavaVersion getJavaVersion() {
+    return this.javaVersion;
   }
   
   public Class<?> compileToClass(final String classname, final String code) {

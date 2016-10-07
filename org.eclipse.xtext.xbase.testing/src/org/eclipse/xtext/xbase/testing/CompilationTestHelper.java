@@ -38,10 +38,13 @@ import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.Exceptions;
 import org.eclipse.xtext.util.Files;
 import org.eclipse.xtext.util.IAcceptor;
+import org.eclipse.xtext.util.JavaVersion;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.workspace.FileProjectConfig;
 import org.eclipse.xtext.workspace.ProjectConfigAdapter;
+import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
+import org.eclipse.xtext.xbase.compiler.GeneratorConfigProvider;
 import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -147,6 +150,16 @@ public class CompilationTestHelper {
 		this.javaCompiler = new OnTheFlyJavaCompiler2(classLoader, generatorConfigProvider.get(null).getJavaSourceVersion());
 		this.classpathUriContext = classLoader;
 	}
+
+	/**
+	 * Sets the Java version both for the DSL generator, for example, Xbase
+	 * compiler, and for the Java compiler.
+	 * 
+	 * @since 2.11
+	 */
+	public void setJavaVersion(JavaVersion javaVersion) {
+		this.javaCompiler.setJavaVersion(javaVersion);
+	}
 	
 	/**
 	 * Asserts that the expected code is generated for the given source.
@@ -212,6 +225,16 @@ public class CompilationTestHelper {
 	public void compile(final ResourceSet resourceSet, IAcceptor<Result> acceptor) {
 		try {
 			List<Resource> resourcesToCheck = newArrayList(resourceSet.getResources());
+			if (generatorConfigProvider instanceof GeneratorConfigProvider) {
+				GeneratorConfigProvider configProvider = (GeneratorConfigProvider) generatorConfigProvider;
+				GeneratorConfig config = generatorConfigProvider.get(null);
+				config.setJavaSourceVersion(javaCompiler.getJavaVersion());
+				GeneratorConfig existent = configProvider.install(resourceSet, config);
+				if (existent != null) {
+					existent.setJavaSourceVersion(javaCompiler.getJavaVersion());
+					configProvider.install(resourceSet, existent);
+				}
+			}
 			Result result = resultProvider.get();
 			result.setJavaCompiler(javaCompiler);
 			result.setCheckMode(getCheckMode());
