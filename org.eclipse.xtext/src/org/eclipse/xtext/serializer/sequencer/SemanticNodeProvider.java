@@ -14,8 +14,10 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.nodemodel.BidiTreeIterator;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
@@ -30,11 +32,45 @@ import com.google.common.collect.Maps;
  */
 public class SemanticNodeProvider implements ISemanticNodeProvider {
 
+	public static class SemanticNode implements ISemanticNode {
+		private final INode node;
+		private final AbstractElement grammarElement;
+		private SemanticNode follower = null;
+
+		public SemanticNode(INode node) {
+			this.node = node;
+			EObject ge = node.getGrammarElement();
+			if (ge instanceof CrossReference)
+				this.grammarElement = ((CrossReference) ge).getTerminal();
+			else if (ge instanceof AbstractElement)
+				this.grammarElement = (AbstractElement) ge;
+			else
+				this.grammarElement = null;
+		}
+
+		@Override
+		public INode getNode() {
+			return node;
+		}
+
+		@Override
+		public ISemanticNode getFollower() {
+			return follower;
+		}
+
+		@Override
+		public AbstractElement getGrammarElement() {
+			return grammarElement;
+		}
+	}
+
 	public static class NodesForEObjectProvider implements INodesForEObjectProvider {
 
 		protected final Object[] childrenByFeatureIDAndIndex;
 
-		protected Map<EObject, INode> childrenBySemanticChild = null;
+		protected Map<EObject, SemanticNode> childrenBySemanticChild = null;
+
+		protected SemanticNode first = null;
 
 		protected final ICompositeNode node;
 
@@ -48,22 +84,29 @@ public class SemanticNodeProvider implements ISemanticNodeProvider {
 			collectNodesForFeatures();
 		}
 
-		protected void add(String featureName, INode child) {
+		protected SemanticNode add(String featureName, INode child, SemanticNode last) {
 			if (featureName == null)
-				return;
+				return last;
 			EClass eClass = this.semanticObject.eClass();
 			EStructuralFeature feature = eClass.getEStructuralFeature(featureName);
 			if (feature == null)
-				return;
+				return last;
+			SemanticNode sem = new SemanticNode(child);
+			if (last != null) {
+				last.follower = sem;
+			}
+			if (this.first == null) {
+				this.first = sem;
+			}
 			int id = eClass.getFeatureID(feature);
 			if (feature.isMany()) {
 				@SuppressWarnings("unchecked")
-				List<INode> nodes = (List<INode>) childrenByFeatureIDAndIndex[id];
+				List<SemanticNode> nodes = (List<SemanticNode>) childrenByFeatureIDAndIndex[id];
 				if (nodes == null)
-					childrenByFeatureIDAndIndex[id] = nodes = Lists.<INode> newArrayList();
-				nodes.add(child);
+					childrenByFeatureIDAndIndex[id] = nodes = Lists.<SemanticNode>newArrayList();
+				nodes.add(sem);
 			} else {
-				childrenByFeatureIDAndIndex[id] = child;
+				childrenByFeatureIDAndIndex[id] = sem;
 			}
 			if (feature instanceof EReference) {
 				EReference reference = (EReference) feature;
@@ -72,15 +115,18 @@ public class SemanticNodeProvider implements ISemanticNodeProvider {
 					if (semanitcChild != null) {
 						if (this.childrenBySemanticChild == null)
 							this.childrenBySemanticChild = Maps.newHashMap();
-						this.childrenBySemanticChild.put(semanitcChild, child);
+						this.childrenBySemanticChild.put(semanitcChild, sem);
 					}
 				}
 			}
+			return sem;
 		}
 
-		// this implementation should be synonym to 
-		// org.eclipse.xtext.nodemodel.util.NodeModelUtils.findNodesForFeature(EObject, INode, EStructuralFeature)
+		// this implementation should be synonym to
+		// org.eclipse.xtext.nodemodel.util.NodeModelUtils.findNodesForFeature(EObject,
+		// INode, EStructuralFeature)
 		protected void collectNodesForFeatures() {
+			SemanticNode last = null;
 			BidiTreeIterator<INode> iterator = node.getAsTreeIterable().iterator();
 			while (iterator.hasNext()) {
 				INode child = iterator.next();
@@ -90,11 +136,14 @@ public class SemanticNodeProvider implements ISemanticNodeProvider {
 						Action action = (Action) grammarElement;
 						if (child.getSemanticElement() == this.semanticObject) {
 							child = iterator.next();
-							add(action.getFeature(), child);
+							last = add(action.getFeature(), child, last);
 						} else {
-							// navigate the action's left side (first child) until we find an assignment (a rule call)
-							// the assignment will tell us about the feature to which we assigned
-							// the semantic object that has been created by the action
+							// navigate the action's left side (first child)
+							// until we find an assignment (a rule call)
+							// the assignment will tell us about the feature to
+							// which we assigned
+							// the semantic object that has been created by the
+							// action
 							INode firstChild = ((ICompositeNode) child).getFirstChild();
 							while (firstChild.getGrammarElement() instanceof Action) {
 								firstChild = ((ICompositeNode) firstChild).getFirstChild();
@@ -102,13 +151,13 @@ public class SemanticNodeProvider implements ISemanticNodeProvider {
 							EObject firstChildGrammarElement = firstChild.getGrammarElement();
 							Assignment assignment = GrammarUtil.containingAssignment(firstChildGrammarElement);
 							if (assignment != null)
-								add(assignment.getFeature(), child);
+								last = add(assignment.getFeature(), child, last);
 						}
 						iterator.prune();
 					} else if (child != node) {
 						Assignment assignment = GrammarUtil.containingAssignment(grammarElement);
 						if (assignment != null) {
-							add(assignment.getFeature(), child);
+							last = add(assignment.getFeature(), child, last);
 							iterator.prune();
 						}
 					}
@@ -117,26 +166,27 @@ public class SemanticNodeProvider implements ISemanticNodeProvider {
 		}
 
 		@Override
-		public INode getNodeForMultiValue(EStructuralFeature feat, int indexInFeat, int indexInNonTransient, Object val) {
+		public SemanticNode getSemanticNodeForMultiValue(EStructuralFeature feat, int indexInFeat,
+				int indexInNonTransient, Object val) {
 			if (childrenBySemanticChild != null && feat instanceof EReference && ((EReference) feat).isContainment()) {
-				INode candiadate = this.childrenBySemanticChild.get(val);
+				SemanticNode candiadate = this.childrenBySemanticChild.get(val);
 				if (candiadate != null)
 					return candiadate;
 			}
 			Object object = this.childrenByFeatureIDAndIndex[semanticObject.eClass().getFeatureID(feat)];
 			if (feat.isMany() && object instanceof List<?>) {
 				@SuppressWarnings("unchecked")
-				List<INode> nodes = (List<INode>) object;
+				List<SemanticNode> nodes = (List<SemanticNode>) object;
 				if (indexInNonTransient >= 0 && indexInNonTransient < nodes.size())
 					return nodes.get(indexInNonTransient);
-			} else if (object instanceof INode)
-				return (INode) object;
+			} else if (object instanceof SemanticNode)
+				return (SemanticNode) object;
 			return null;
 		}
 
 		@Override
-		public INode getNodeForSingelValue(EStructuralFeature feature, Object value) {
-			return getNodeForMultiValue(feature, 0, 0, value);
+		public SemanticNode getSemanticNodeForSingelValue(EStructuralFeature feature, Object value) {
+			return getSemanticNodeForMultiValue(feature, 0, 0, value);
 		}
 
 		protected EObject getSemanticChild(INode node) {
@@ -151,6 +201,29 @@ public class SemanticNodeProvider implements ISemanticNodeProvider {
 			}
 			return null;
 		}
+
+		@Override
+		public INode getNodeForMultiValue(EStructuralFeature feature, int indexInFeature, int indexInNonTransient,
+				Object value) {
+			SemanticNode semantic = getSemanticNodeForMultiValue(feature, indexInFeature, indexInNonTransient, value);
+			if (semantic == null)
+				return null;
+			return semantic.getNode();
+		}
+
+		@Override
+		public INode getNodeForSingelValue(EStructuralFeature feature, Object value) {
+			SemanticNode semantic = getSemanticNodeForSingelValue(feature, value);
+			if (semantic == null)
+				return null;
+			return semantic.getNode();
+		}
+
+		@Override
+		public ISemanticNode getFirstSemanticNode() {
+			return first;
+		}
+
 	}
 
 	protected NodesForEObjectProvider createNodesForEObjectProvider(EObject semanticObject, ICompositeNode node) {
@@ -158,7 +231,8 @@ public class SemanticNodeProvider implements ISemanticNodeProvider {
 	}
 
 	@Override
-	public INodesForEObjectProvider getNodesForSemanticObject(EObject semanticObject, ICompositeNode suggestedComposite) {
+	public INodesForEObjectProvider getNodesForSemanticObject(EObject semanticObject,
+			ICompositeNode suggestedComposite) {
 		if (suggestedComposite != null)
 			return createNodesForEObjectProvider(semanticObject, suggestedComposite);
 		ICompositeNode actualComposite = NodeModelUtils.findActualNodeFor(semanticObject);

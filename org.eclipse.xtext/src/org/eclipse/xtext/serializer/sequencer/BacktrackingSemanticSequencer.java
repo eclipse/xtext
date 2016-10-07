@@ -9,7 +9,6 @@ package org.eclipse.xtext.serializer.sequencer;
 
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -34,9 +33,9 @@ import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstra
 import org.eclipse.xtext.serializer.analysis.ISemanticSequencerNfaProvider.ISemState;
 import org.eclipse.xtext.serializer.analysis.SerializationContext;
 import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider;
+import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.ISemanticNode;
 import org.eclipse.xtext.util.EmfFormatter;
 import org.eclipse.xtext.util.Pair;
-import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.util.formallang.Nfa;
 import org.eclipse.xtext.util.formallang.NfaUtil;
@@ -101,16 +100,19 @@ public class BacktrackingSemanticSequencer extends AbstractSemanticSequencer {
 	public class SerializableObject {
 		protected final EObject eObject;
 		protected final ISerializationContext context;
-		protected List<INode>[] nodes;
+		protected List<ISemanticNode>[] nodes;
+		protected final ISemanticNode firstNode;
 		protected boolean[] optional;
 		protected Map<Pair<AbstractElement, Integer>, Boolean> valid = Maps.newHashMap();
 		protected Object[] values;
 
 		@SuppressWarnings("unchecked")
-		public SerializableObject(ISerializationContext context, EObject eObject, INodesForEObjectProvider nodeProvider) {
+		public SerializableObject(ISerializationContext context, EObject eObject,
+				INodesForEObjectProvider nodeProvider) {
 			super();
 			this.eObject = eObject;
 			this.context = context;
+			this.firstNode = nodeProvider.getFirstSemanticNode();
 			EClass clazz = eObject.eClass();
 			values = new Object[clazz.getFeatureCount()];
 			nodes = new List[clazz.getFeatureCount()];
@@ -119,8 +121,8 @@ public class BacktrackingSemanticSequencer extends AbstractSemanticSequencer {
 				int featureID = eObject.eClass().getFeatureID(feature);
 				if (feature.isMany())
 					switch (transientValues.isListTransient(eObject, feature)) {
-						case NO:
-						List<INode> nodes1 = Lists.newArrayList();
+					case NO:
+						List<ISemanticNode> nodes1 = Lists.newArrayList();
 						List<?> values1;
 						if (feature instanceof EReference && ((EReference) feature).isResolveProxies()) {
 							values1 = ((InternalEList<?>) eObject.eGet(feature)).basicList();
@@ -128,49 +130,49 @@ public class BacktrackingSemanticSequencer extends AbstractSemanticSequencer {
 							values1 = (List<?>) eObject.eGet(feature);
 						}
 						for (int i = 0; i < values1.size(); i++)
-							nodes1.add(nodeProvider.getNodeForMultiValue(feature, i, i, values1.get(i)));
+							nodes1.add(nodeProvider.getSemanticNodeForMultiValue(feature, i, i, values1.get(i)));
 						values[featureID] = values1;
 						nodes[featureID] = nodes1;
 						break;
-						case SOME:
-							List<INode> nodes2 = Lists.newArrayList();
-							List<?> values2;
-							if (feature instanceof EReference && ((EReference) feature).isResolveProxies()) {
-								values2 = ((InternalEList<?>) eObject.eGet(feature)).basicList();
-							} else {
-								values2 = (List<?>) eObject.eGet(feature);
+					case SOME:
+						List<ISemanticNode> nodes2 = Lists.newArrayList();
+						List<?> values2;
+						if (feature instanceof EReference && ((EReference) feature).isResolveProxies()) {
+							values2 = ((InternalEList<?>) eObject.eGet(feature)).basicList();
+						} else {
+							values2 = (List<?>) eObject.eGet(feature);
+						}
+						List<Object> values3 = Lists.newArrayList();
+						for (int i = 0, j = 0; i < values2.size(); i++)
+							if (!transientValues.isValueInListTransient(eObject, i, feature)) {
+								Object value = values2.get(i);
+								ISemanticNode node = nodeProvider.getSemanticNodeForMultiValue(feature, i, j++, value);
+								values3.add(value);
+								nodes2.add(node);
 							}
-							List<Object> values3 = Lists.newArrayList();
-							for (int i = 0, j = 0; i < values2.size(); i++)
-								if (!transientValues.isValueInListTransient(eObject, i, feature)) {
-									Object value = values2.get(i);
-									INode node = nodeProvider.getNodeForMultiValue(feature, i, j++, value);
-									values3.add(value);
-									nodes2.add(node);
-								}
-							values[featureID] = values3;
-							nodes[featureID] = nodes2;
-							break;
-						case YES:
-							values[featureID] = INVALID;
+						values[featureID] = values3;
+						nodes[featureID] = nodes2;
+						break;
+					case YES:
+						values[featureID] = INVALID;
 					}
 				else
 					switch (transientValues.isValueTransient(eObject, feature)) {
-						case PREFERABLY:
-							optional[featureID] = true;
-							Object value1 = eObject.eGet(feature, false);
-							values[featureID] = value1;
-							nodes[featureID] = Collections
-									.singletonList(nodeProvider.getNodeForSingelValue(feature, value1));
-							break;
-						case NO:
-							Object value2 = eObject.eGet(feature, false);
-							values[featureID] = value2;
-							nodes[featureID] = Collections
-									.singletonList(nodeProvider.getNodeForSingelValue(feature, value2));
-							break;
-						case YES:
-							values[featureID] = INVALID;
+					case PREFERABLY:
+						optional[featureID] = true;
+						Object value1 = eObject.eGet(feature, false);
+						values[featureID] = value1;
+						nodes[featureID] = Collections
+								.singletonList(nodeProvider.getSemanticNodeForSingelValue(feature, value1));
+						break;
+					case NO:
+						Object value2 = eObject.eGet(feature, false);
+						values[featureID] = value2;
+						nodes[featureID] = Collections
+								.singletonList(nodeProvider.getSemanticNodeForSingelValue(feature, value2));
+						break;
+					case YES:
+						values[featureID] = INVALID;
 					}
 			}
 		}
@@ -179,8 +181,12 @@ public class BacktrackingSemanticSequencer extends AbstractSemanticSequencer {
 			return eObject;
 		}
 
-		public INode getNode(int featureID, int index) {
-			List<INode> featureNodes = nodes[featureID];
+		public ISemanticNode getFirstNode() {
+			return firstNode;
+		}
+
+		public ISemanticNode getNode(int featureID, int index) {
+			List<ISemanticNode> featureNodes = nodes[featureID];
 			if (featureNodes != null && index >= 0 && index < featureNodes.size())
 				return featureNodes.get(index);
 			return null;
@@ -234,7 +240,8 @@ public class BacktrackingSemanticSequencer extends AbstractSemanticSequencer {
 			if (valid.get(key) == Boolean.TRUE)
 				return true;
 
-			INode node = getNode(state.getFeatureID(), index);
+			ISemanticNode semanticNode = getNode(state.getFeatureID(), index);
+			INode node = semanticNode == null ? null : semanticNode.getNode();
 			Multimap<AbstractElement, ISerializationContext> assignments = ArrayListMultimap.create();
 			for (AbstractElement ele : candidates)
 				assignments.put(ele, context);
@@ -269,7 +276,7 @@ public class BacktrackingSemanticSequencer extends AbstractSemanticSequencer {
 	protected static class TraceItem {
 		protected int index;
 		protected int[] nextIndex;
-		protected INode node;
+		protected ISemanticNode node;
 		protected SerializableObject obj;
 		protected TraceItem parent;
 		protected ISemState state;
@@ -335,20 +342,22 @@ public class BacktrackingSemanticSequencer extends AbstractSemanticSequencer {
 		}
 
 		public AbstractElement getNextGrammarElement() {
-			Iterator<Triple<INode, AbstractElement, EObject>> it;
-			if (obj != null && (parent == null || parent.parent == null))
-				it = new SemanticNodeIterator(obj.getEObject());
-			else if (node == null)
-				return null;
-			else
-				it = new SemanticNodeIterator(node);
-			if (it.hasNext())
-				return it.next().getSecond();
+			ISemanticNode sem = null;
+			if (obj != null && (parent == null || parent.parent == null)) {
+				sem = obj.getFirstNode();
+			} else if (node != null) {
+				sem = node.getFollower();
+			}
+			if (sem != null) {
+				return sem.getGrammarElement();
+			}
 			return null;
 		}
 
 		public INode getNode() {
-			return node;
+			if (node == null)
+				return null;
+			return node.getNode();
 		}
 
 		public SerializableObject getObj() {
@@ -483,7 +492,8 @@ public class BacktrackingSemanticSequencer extends AbstractSemanticSequencer {
 				return r;
 			}
 		});
-		SequenceFeeder feeder = feederProvider.create(context, obj, nodes, masterSequencer, sequenceAcceptor, errorAcceptor);
+		SequenceFeeder feeder = feederProvider.create(context, obj, nodes, masterSequencer, sequenceAcceptor,
+				errorAcceptor);
 		if (trace != null) {
 			for (TraceItem ti : trace)
 				if (ti.getState() != null && ti.getState().getFeature() != null)
