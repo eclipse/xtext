@@ -1176,11 +1176,55 @@ class XbaseValidationTest extends AbstractXbaseTestCase {
 		'''.assertNestedReturn(XbasePackage.Literals.XTHROW_EXPRESSION)
 	}
 
+	@Test def void testInvalidReturnInThrowBug406762() {
+		'''
+			{
+				throw return new RuntimeException()
+			}
+		'''.assertInvalidReturnInsideThrow
+	}
+
+	@Test def void testInvalidReturnInThrowBug406762_1() {
+		'''
+			{
+				throw {
+					return new RuntimeException()
+				}
+			}
+		'''.assertInvalidReturnInsideThrow
+	}
+
+	@Test def void testInvalidReturnInThrowBug406762_2() {
+		'''
+			{
+				throw return
+			}
+		'''.assertInvalidReturnInsideThrow
+	}
+
+	@Test def void testInvalidReturnInThrowBug406762_3() {
+		'''
+			{
+				throw {
+					return
+				}
+			}
+		'''.assertInvalidReturnInsideThrow
+	}
+
 	def private assertNestedReturn(CharSequence input, EClass objectType) {
 		input.expression.assertError(
 			objectType,
 			IssueCodes.INVALID_RETURN,
 			"Return cannot be nested"
+		)
+	}
+
+	def private assertInvalidReturnInsideThrow(CharSequence input) {
+		input.expression.assertError(
+			XbasePackage.Literals.XRETURN_EXPRESSION,
+			IssueCodes.INVALID_RETURN,
+			"Invalid return inside throw."
 		)
 	}
 }
