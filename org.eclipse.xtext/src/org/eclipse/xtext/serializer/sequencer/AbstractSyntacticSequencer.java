@@ -252,14 +252,16 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 	protected void acceptNodes(ISynNavigable fromState, INode fromNode, INode toNode) {
 		RuleCallStack stack = contexts.peek().stack.clone();
 		List<INode> nodes = collectNodes(fromNode, toNode);
-		for (INode next : nodes) {
-			List<ISynState> path = fromState.getShortestPathTo((AbstractElement) next.getGrammarElement(), stack);
-			if (path != null) {
-				if (path.get(path.size() - 1) instanceof ISynEmitterState)
-					fromState = (ISynEmitterState) path.get(path.size() - 1);
-				else
-					return;
-				acceptNode(next);
+		if (nodes != null) {
+			for (INode next : nodes) {
+				List<ISynState> path = fromState.getShortestPathTo((AbstractElement) next.getGrammarElement(), stack);
+				if (path != null) {
+					if (path.get(path.size() - 1) instanceof ISynEmitterState)
+						fromState = (ISynEmitterState) path.get(path.size() - 1);
+					else
+						return;
+					acceptNode(next);
+				}
 			}
 		}
 	}
