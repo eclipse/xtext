@@ -202,10 +202,11 @@ class XtextGeneratorLanguage extends CompositeGeneratorFragment2 implements IXte
 
 				override add(Diagnostic diagnostic) {
 					if (diagnostic.severity == Diagnostic.ERROR) {
+						val grammarName = "Validation Error in " + grammar.name + ": "
 						if (diagnostic.exception == null)
-							throw new IllegalStateException(diagnostic.message)
+							throw new IllegalStateException(grammarName + diagnostic.message)
 						else
-							throw new IllegalStateException(diagnostic.message, diagnostic.exception)
+							throw new IllegalStateException(grammarName + diagnostic.message, diagnostic.exception)
 					}
 				}
 

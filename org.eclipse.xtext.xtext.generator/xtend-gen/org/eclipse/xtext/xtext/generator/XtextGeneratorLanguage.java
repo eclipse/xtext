@@ -331,15 +331,20 @@ public class XtextGeneratorLanguage extends CompositeGeneratorFragment2 implemen
           int _severity = diagnostic.getSeverity();
           boolean _equals = (_severity == Diagnostic.ERROR);
           if (_equals) {
+            String _name = grammar.getName();
+            String _plus = ("Validation Error in " + _name);
+            final String grammarName = (_plus + ": ");
             Throwable _exception = diagnostic.getException();
             boolean _equals_1 = Objects.equal(_exception, null);
             if (_equals_1) {
               String _message = diagnostic.getMessage();
-              throw new IllegalStateException(_message);
+              String _plus_1 = (grammarName + _message);
+              throw new IllegalStateException(_plus_1);
             } else {
               String _message_1 = diagnostic.getMessage();
+              String _plus_2 = (grammarName + _message_1);
               Throwable _exception_1 = diagnostic.getException();
-              throw new IllegalStateException(_message_1, _exception_1);
+              throw new IllegalStateException(_plus_2, _exception_1);
             }
           }
         }
