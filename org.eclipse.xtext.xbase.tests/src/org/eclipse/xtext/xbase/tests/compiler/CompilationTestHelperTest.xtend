@@ -87,13 +87,17 @@ class CompilationTestHelperTest extends AbstractJvmModelTest {
 			    {
 			      final String s_1 = "";
 			      String _switchResult = null;
-			      switch (s_1) {
-			        case "foo":
-			          _switchResult = "foo";
-			          break;
-			        default:
-			          _switchResult = "bar";
-			          break;
+			      if (s_1 != null) {
+			        switch (s_1) {
+			          case "foo":
+			            _switchResult = "foo";
+			            break;
+			          default:
+			            _switchResult = "bar";
+			            break;
+			        }
+			      } else {
+			        _switchResult = "bar";
 			      }
 			      _xblockexpression = _switchResult;
 			    }
