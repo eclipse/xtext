@@ -18,8 +18,7 @@ Model:    ('1'? value = ('mykeyword1' | STRING | NestedDatatype | Datatype | ID 
 		| ('4' value = NestedDatatype)
 		| ('4+' multiValue += NestedDatatype)
 		|
-		  ('content' children = Child)
-		  ('ref' ref = ([Child1|STRING] | [Child2|ID]))?;
+		  ('content' children = Child);
 
 Datatype: ID '-' ID;
 
