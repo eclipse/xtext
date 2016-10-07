@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Xbase runtime tests
+Bundle-Name: Xbase Runtime Tests
 Bundle-SymbolicName: org.eclipse.xtext.xbase.tests;singleton:=true
 Bundle-Version: 2.11.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
@@ -19,7 +19,7 @@ Require-Bundle: org.eclipse.xtext.xbase,
  org.apache.log4j;bundle-version="1.2.15",
  org.eclipse.xtext.xbase.testlanguages,
  org.eclipse.xtext.xbase.testlanguages.ui
-Bundle-Vendor: Eclipse Modeling
+Bundle-Vendor: Eclipse Xtext
 Export-Package: org.eclipse.xtext.xbase.tests,
  org.eclipse.xtext.xbase.tests.interpreter
 Import-Package: javax.inject;version="1.0.0",
