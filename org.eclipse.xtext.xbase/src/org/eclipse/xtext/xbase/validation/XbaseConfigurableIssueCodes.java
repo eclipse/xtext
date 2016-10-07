@@ -36,7 +36,8 @@ public class XbaseConfigurableIssueCodes extends ConfigurableIssueCodesProvider 
 	public static final String COMPILER_PB_UNNECESSARY_TYPE_CHECK = JDT_CORE_PLUGIN_ID + ".compiler.problem.unnecessaryTypeCheck"; //$NON-NLS-1$
 	public static final String COMPILER_PB_UNUSED_IMPORT = JDT_CORE_PLUGIN_ID + ".compiler.problem.unusedImport"; //$NON-NLS-1$
 	public static final String COMPILER_PB_UNUSED_LOCAL = JDT_CORE_PLUGIN_ID + ".compiler.problem.unusedLocal"; //$NON-NLS-1$
-	public static final String COMPILER_PB_DEPRECATION = JDT_CORE_PLUGIN_ID + ".compiler.problem.deprecation"; //$NON-NLS-1$ 
+	public static final String COMPILER_PB_DEPRECATION = JDT_CORE_PLUGIN_ID + ".compiler.problem.deprecation"; //$NON-NLS-1$
+	public static final String COMPILER_PB_STATIC_ACCESS_RECEIVER = JDT_CORE_PLUGIN_ID + ".compiler.problem.staticAccessReceiver"; //$NON-NLS-1$
 
 	private Map<String, PreferenceKey> issueCodes;
 
@@ -54,8 +55,9 @@ public class XbaseConfigurableIssueCodes extends ConfigurableIssueCodesProvider 
 
 	protected void initialize(IAcceptor<PreferenceKey> iAcceptor) {
 		iAcceptor.accept(create(IssueCodes.NULL_SAFE_FEATURE_CALL_OF_PRIMITIVE_VALUED_FEATURE, SeverityConverter.SEVERITY_WARNING));
+		iAcceptor.accept(createDelegate(IssueCodes.INSTANCE_ACCESS_TO_STATIC_MEMBER, COMPILER_PB_STATIC_ACCESS_RECEIVER));
 		iAcceptor.accept(create(IssueCodes.UNHANDLED_EXCEPTION, SeverityConverter.SEVERITY_IGNORE));
-		iAcceptor.accept(create(IssueCodes.EQUALS_WITH_NULL, SeverityConverter.SEVERITY_IGNORE));
+		iAcceptor.accept(create(IssueCodes.EQUALS_WITH_NULL, SeverityConverter.SEVERITY_WARNING));
 
 		iAcceptor.accept(createDelegate(IssueCodes.FORBIDDEN_REFERENCE, COMPILER_PB_FORBIDDEN_REFERENCE));
 		iAcceptor.accept(createDelegate(IssueCodes.DISCOURAGED_REFERENCE, COMPILER_PB_DISCOURAGED_REFERENCE));

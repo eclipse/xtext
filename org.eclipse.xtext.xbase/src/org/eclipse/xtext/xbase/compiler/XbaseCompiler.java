@@ -97,6 +97,15 @@ import com.google.inject.Inject;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * @author Sebastian Zarnekow
+ * @author Jan Koehnlein
+ * @author Anton Kosyakov
+ * @author Miro Spoenemann
+ * @author Moritz Eysholdt
+ * @author Dennis Huebner
+ * @author Lorenzo Bettini
+ * @author Christian Dientrich - bug#493900
+ * @author Karsten Thoms - bug#501975
  */
 public class XbaseCompiler extends FeatureCallCompiler {
 	
@@ -1095,7 +1104,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	protected void _toJavaSwitchStatement(XSwitchExpression expr, ITreeAppendable b, boolean isReferenced) {
 		final LightweightTypeReference switchType = batchTypeResolver.resolveTypes(expr).getActualType(expr.getSwitch());
 		final boolean enumeration = switchType.isSubtypeOf(Enum.class);
-		final boolean needNullCheck = enumeration || switchType.isWrapper();
+		final boolean needNullCheck = !switchType.isPrimitive();
 		
 		final String switchResultName = declareSwitchResultVariable(expr, b, isReferenced);
 		internalToJavaStatement(expr.getSwitch(), b, true);

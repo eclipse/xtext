@@ -9,5 +9,5 @@ dependencies {
 }
 
 configurations {
-    compile.exclude module: 'jsr305'
+	compile.exclude module: 'jsr305'
 }

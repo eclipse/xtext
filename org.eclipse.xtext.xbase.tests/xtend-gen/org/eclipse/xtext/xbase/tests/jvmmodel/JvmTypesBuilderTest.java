@@ -1,5 +1,6 @@
 package org.eclipse.xtext.xbase.tests.jvmmodel;
 
+import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 import foo.TestAnnotation3;
@@ -20,7 +21,9 @@ import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmCustomAnnotationValue;
 import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
 import org.eclipse.xtext.common.types.JvmEnumerationType;
+import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmField;
+import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
@@ -41,6 +44,8 @@ import org.eclipse.xtext.xbase.XbaseFactory;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValuePair;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsFactory;
+import org.eclipse.xtext.xbase.compiler.CompilationStrategyAdapter;
+import org.eclipse.xtext.xbase.compiler.output.FakeTreeAppendable;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeReferenceBuilder;
@@ -502,11 +507,68 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
     Assert.assertTrue(_isEmpty);
   }
   
+  /**
+   * Invokes an executable's compilation strategy and check against the expected string
+   */
+  protected void expectBody(final JvmExecutable executable, final CharSequence expectedBody) {
+    EList<Adapter> _eAdapters = executable.eAdapters();
+    Iterable<CompilationStrategyAdapter> _filter = Iterables.<CompilationStrategyAdapter>filter(_eAdapters, CompilationStrategyAdapter.class);
+    final CompilationStrategyAdapter adapter = IterableExtensions.<CompilationStrategyAdapter>head(_filter);
+    final FakeTreeAppendable appendable = new FakeTreeAppendable();
+    Procedure1<ITreeAppendable> _compilationStrategy = adapter.getCompilationStrategy();
+    _compilationStrategy.apply(appendable);
+    String _string = expectedBody.toString();
+    String _string_1 = appendable.toString();
+    Assert.assertEquals(_string, _string_1);
+  }
+  
   @Test
   public void testToGetterWithNullTypeRef() {
     try {
       final XExpression e = this.expression("\'\'");
-      this._jvmTypesBuilder.toGetter(e, "foo", null);
+      final JvmOperation getter = this._jvmTypesBuilder.toGetter(e, "foo", null);
+      this.expectBody(getter, "return this.foo;");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testToFieldWithKeywordCollision() {
+    try {
+      final XExpression e = this.expression("\'\'");
+      JvmTypeReference _typeRef = this._jvmTypeReferenceBuilder.typeRef(String.class);
+      final JvmField field = this._jvmTypesBuilder.toField(e, "package", _typeRef);
+      String _simpleName = field.getSimpleName();
+      Assert.assertEquals("package", _simpleName);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testToGetterWithKeywordCollision() {
+    try {
+      final XExpression e = this.expression("\'\'");
+      JvmTypeReference _typeRef = this._jvmTypeReferenceBuilder.typeRef(String.class);
+      final JvmOperation getter = this._jvmTypesBuilder.toGetter(e, "package", _typeRef);
+      this.expectBody(getter, "return this.package_;");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testToSetterWithKeywordCollision() {
+    try {
+      final XExpression e = this.expression("\'\'");
+      JvmTypeReference _typeRef = this._jvmTypeReferenceBuilder.typeRef(String.class);
+      final JvmOperation setter = this._jvmTypesBuilder.toSetter(e, "package", _typeRef);
+      EList<JvmFormalParameter> _parameters = setter.getParameters();
+      JvmFormalParameter _head = IterableExtensions.<JvmFormalParameter>head(_parameters);
+      String _simpleName = _head.getSimpleName();
+      Assert.assertEquals("package", _simpleName);
+      this.expectBody(setter, "this.package_ = package_;");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

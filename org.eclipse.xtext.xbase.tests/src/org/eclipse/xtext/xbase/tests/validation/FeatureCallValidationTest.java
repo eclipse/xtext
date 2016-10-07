@@ -128,7 +128,7 @@ public class FeatureCallValidationTest extends AbstractXbaseTestCase {
 
 	@Test public void testAssignmentToStaticField() throws Exception {
 		XExpression expression = expression("new testdata.FieldAccess().staticField = 'foo'");
-		helper.assertError(expression, XASSIGNMENT, INSTANCE_ACCESS_TO_STATIC_MEMBER);
+		helper.assertWarning(expression, XASSIGNMENT, INSTANCE_ACCESS_TO_STATIC_MEMBER);
 	}
 
 	@Test public void testField_0() throws Exception {
@@ -143,12 +143,12 @@ public class FeatureCallValidationTest extends AbstractXbaseTestCase {
 
 	@Test public void testField_2() throws Exception {
 		XExpression expression = expression("new testdata.FieldAccess().staticField");
-		helper.assertError(expression, XMEMBER_FEATURE_CALL, INSTANCE_ACCESS_TO_STATIC_MEMBER);
+		helper.assertWarning(expression, XMEMBER_FEATURE_CALL, INSTANCE_ACCESS_TO_STATIC_MEMBER);
 	}
 
 	@Test public void testField_3() throws Exception {
 		XExpression expression = expression("{ var this = new testdata.FieldAccess() staticField }");
-		helper.assertError(((XBlockExpression) expression).getExpressions().get(1), XFEATURE_CALL,
+		helper.assertWarning(((XBlockExpression) expression).getExpressions().get(1), XFEATURE_CALL,
 				INSTANCE_ACCESS_TO_STATIC_MEMBER);
 	}
 
@@ -160,13 +160,13 @@ public class FeatureCallValidationTest extends AbstractXbaseTestCase {
 	
 	@Test public void testField_5() throws Exception {
 		XExpression expression = expression("{ var it = new testdata.FieldAccess() staticField }");
-		helper.assertError(((XBlockExpression) expression).getExpressions().get(1), XFEATURE_CALL,
+		helper.assertWarning(((XBlockExpression) expression).getExpressions().get(1), XFEATURE_CALL,
 				INSTANCE_ACCESS_TO_STATIC_MEMBER);
 	}
 
 	@Test public void testOperationMemberFeatureCall_0() throws Exception {
 		XExpression expression = expression("new testdata.Methods().staticMethod()");
-		helper.assertError(expression, XMEMBER_FEATURE_CALL, INSTANCE_ACCESS_TO_STATIC_MEMBER);
+		helper.assertWarning(expression, XMEMBER_FEATURE_CALL, INSTANCE_ACCESS_TO_STATIC_MEMBER);
 	}
 
 	@Test public void testOperationMemberFeatureCall_1() throws Exception {
@@ -196,7 +196,7 @@ public class FeatureCallValidationTest extends AbstractXbaseTestCase {
 
 	@Test public void testOperationFeatureCall_0() throws Exception {
 		XExpression expression = expression("{ var this = new testdata.Methods() staticMethod() }");
-		helper.assertError(((XBlockExpression) expression).getExpressions().get(1), XFEATURE_CALL, INSTANCE_ACCESS_TO_STATIC_MEMBER);
+		helper.assertWarning(((XBlockExpression) expression).getExpressions().get(1), XFEATURE_CALL, INSTANCE_ACCESS_TO_STATIC_MEMBER);
 	}
 
 	@Test public void testOperationFeatureCall_1() throws Exception {
@@ -294,7 +294,7 @@ public class FeatureCallValidationTest extends AbstractXbaseTestCase {
 	
 	@Test public void testStaticFeatureAccess_2() throws Exception {
 		XExpression expression = expression("''.valueOf('')");
-		helper.assertError(expression, XABSTRACT_FEATURE_CALL, INSTANCE_ACCESS_TO_STATIC_MEMBER);
+		helper.assertWarning(expression, XABSTRACT_FEATURE_CALL, INSTANCE_ACCESS_TO_STATIC_MEMBER);
 	}
 	
 	@Test public void testNullSafeOnPrimitiveReveiver() throws Exception {
@@ -334,22 +334,22 @@ public class FeatureCallValidationTest extends AbstractXbaseTestCase {
 	
 	@Test public void testObjectEqualsNull_01() throws Exception {
 		XExpression expression = expression("{ val Object x = null x==null");
-		helper.assertNoIssue(expression, XBINARY_OPERATION, EQUALS_WITH_NULL);
+		helper.assertWarning(expression, XBINARY_OPERATION, EQUALS_WITH_NULL);
 	}
 	
 	@Test public void testObjectEqualsNull_02() throws Exception {
 		XExpression expression = expression("{ val Object x = null x!=null");
-		helper.assertNoIssue(expression, XBINARY_OPERATION, EQUALS_WITH_NULL);
+		helper.assertWarning(expression, XBINARY_OPERATION, EQUALS_WITH_NULL);
 	}
 	
 	@Test public void testObjectEqualsNull_03() throws Exception {
 		XExpression expression = expression("{ val Object x = null x==null");
-		helper.assertNoIssue(expression, XBINARY_OPERATION, EQUALS_WITH_NULL);
+		helper.assertWarning(expression, XBINARY_OPERATION, EQUALS_WITH_NULL);
 	}
 	
 	@Test public void testObjectEqualsNull_04() throws Exception {
 		XExpression expression = expression("{ val Object x = null x!=null");
-		helper.assertNoIssue(expression, XBINARY_OPERATION, EQUALS_WITH_NULL);
+		helper.assertWarning(expression, XBINARY_OPERATION, EQUALS_WITH_NULL);
 	}
 	
 	/**

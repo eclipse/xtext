@@ -163,15 +163,20 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 			}
 		}
 		if (isInvalidStaticSyntax()) {
-			String message = String.format("The static %1$s %2$s%3$s should be accessed in a static way",
-					getFeatureTypeName(),
-					getFeature().getSimpleName(),
-					getFeatureParameterTypesAsString());
-			AbstractDiagnostic diagnostic = new EObjectDiagnosticImpl(Severity.ERROR,
-					IssueCodes.INSTANCE_ACCESS_TO_STATIC_MEMBER, message, getExpression(),
-					XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, -1, null);
-			result.accept(diagnostic);
-			return false;
+			Severity severity = getSeverity(IssueCodes.INSTANCE_ACCESS_TO_STATIC_MEMBER);
+			if (severity != Severity.IGNORE) {
+				String message = String.format("The static %1$s %2$s%3$s should be accessed in a static way",
+						getFeatureTypeName(),
+						getFeature().getSimpleName(),
+						getFeatureParameterTypesAsString());
+				AbstractDiagnostic diagnostic = new EObjectDiagnosticImpl(severity,
+						IssueCodes.INSTANCE_ACCESS_TO_STATIC_MEMBER, message, getExpression(),
+						XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, -1, null);
+				result.accept(diagnostic);
+				return false;
+			} else {
+				return true;
+			}
 		} else if (!isStatic() && isStaticAccessSyntax()) {
 			EObject featureOwner = getFeature().eContainer();
 			String message = String.format("Cannot make a static reference to the non-static %1$s %2$s%3$s",
