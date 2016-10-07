@@ -41,20 +41,24 @@ class NewLanguageFeaturesCompilerTest extends AbstractOutputComparingCompilerTes
 				}
 			}
 		'''.compilesTo('''
-		    int _switchResult = (int) 0;
-		    final String _switchValue = "foo";
-		    switch (_switchValue) {
-		      case "a":
-		        _switchResult = 1;
-		        break;
-		      case ("b" + "c"):
-		        _switchResult = 2;
-		        break;
-		      default:
-		        _switchResult = 3;
-		        break;
-		    }
-		    final int x = _switchResult;
+			int _switchResult = (int) 0;
+			final String _switchValue = "foo";
+			if (_switchValue != null) {
+			  switch (_switchValue) {
+			    case "a":
+			      _switchResult = 1;
+			      break;
+			    case ("b" + "c"):
+			      _switchResult = 2;
+			      break;
+			    default:
+			      _switchResult = 3;
+			      break;
+			  }
+			} else {
+			  _switchResult = 3;
+			}
+			final int x = _switchResult;
 		''', JAVA7 -> JAVA8)
 	}
 	

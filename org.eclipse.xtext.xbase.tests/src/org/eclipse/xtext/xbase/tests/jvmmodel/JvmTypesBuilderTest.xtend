@@ -4,32 +4,35 @@ import com.google.inject.Inject
 import com.google.inject.name.Named
 import foo.TestAnnotation3
 import java.util.List
+import org.apache.log4j.Level
 import org.eclipse.emf.common.util.BasicEList
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.common.types.JvmAnnotationType
 import org.eclipse.xtext.common.types.JvmConstructor
 import org.eclipse.xtext.common.types.JvmCustomAnnotationValue
 import org.eclipse.xtext.common.types.JvmEnumerationType
+import org.eclipse.xtext.common.types.JvmExecutable
 import org.eclipse.xtext.common.types.JvmField
 import org.eclipse.xtext.common.types.JvmGenericType
 import org.eclipse.xtext.common.types.JvmOperation
 import org.eclipse.xtext.common.types.TypesFactory
 import org.eclipse.xtext.common.types.util.TypeReferences
-import org.eclipse.xtext.testing.logging.LoggingTester
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.resource.XtextResourceSet
+import org.eclipse.xtext.testing.logging.LoggingTester
 import org.eclipse.xtext.util.Wrapper
 import org.eclipse.xtext.xbase.XNumberLiteral
 import org.eclipse.xtext.xbase.XStringLiteral
 import org.eclipse.xtext.xbase.XbaseFactory
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsFactory
+import org.eclipse.xtext.xbase.compiler.CompilationStrategyAdapter
+import org.eclipse.xtext.xbase.compiler.output.FakeTreeAppendable
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeReferenceBuilder
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
-import org.junit.Test
-import org.apache.log4j.Level
 import org.junit.Ignore
+import org.junit.Test
 
 class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 	
@@ -258,12 +261,43 @@ class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 		list += otherList
 		assertTrue(list.empty)
 	}
+	
+	/** Invokes an executable's compilation strategy and check against the expected string */
+	def protected expectBody (JvmExecutable executable, CharSequence expectedBody) {
+		val adapter = executable.eAdapters.filter(CompilationStrategyAdapter).head
+		val appendable = new FakeTreeAppendable();
+		adapter.compilationStrategy.apply(appendable)
+		assertEquals (expectedBody.toString, appendable.toString)
+	}
 
 	@Test
 	def void testToGetterWithNullTypeRef() {
 		val e = expression("''")
 		// there should be no NPE
-		e.toGetter("foo", null)
+		val getter = e.toGetter("foo", null)
+		getter.expectBody("return this.foo;")
+	}
+
+	@Test
+	def void testToFieldWithKeywordCollision() {
+		val e = expression("''")
+		val field = e.toField("package", String.typeRef)
+		assertEquals("package", field.simpleName)
+	}
+
+	@Test
+	def void testToGetterWithKeywordCollision() {
+		val e = expression("''")
+		val getter = e.toGetter("package", String.typeRef)
+		getter.expectBody("return this.package_;")
+	}
+
+	@Test
+	def void testToSetterWithKeywordCollision() {
+		val e = expression("''")
+		val setter = e.toSetter("package", String.typeRef)
+		assertEquals("package", setter.parameters.head.simpleName)
+		setter.expectBody("this.package_ = package_;")
 	}
 
 	@Test

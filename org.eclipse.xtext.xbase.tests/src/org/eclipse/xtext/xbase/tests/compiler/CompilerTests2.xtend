@@ -8,6 +8,8 @@
 package org.eclipse.xtext.xbase.tests.compiler
 
 import org.junit.Test
+import org.eclipse.xtext.xbase.compiler.GeneratorConfig
+import org.eclipse.xtext.util.JavaVersion
 
 class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 
@@ -955,6 +957,30 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 			}
 			return _switchResult;
 		'''
+		)
+	}
+	
+	@Test def void testEmptySwitch_11() {
+		'''
+			{
+				val String x = null
+				switch (x) {
+				}
+			}
+		'''.compilesTo(
+		'''
+			Object _xblockexpression = null;
+			{
+			  final String x = null;
+			  Object _switchResult = null;
+			  if (x != null) {
+			    switch (x) {
+			    }
+			  }
+			  _xblockexpression = _switchResult;
+			}
+			return _xblockexpression;
+		''', new GeneratorConfig=>[javaSourceVersion=JavaVersion.JAVA8]
 		)
 	}
 	
