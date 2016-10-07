@@ -1941,4 +1941,36 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		''', false)
 	}
 
+	@Test def void test406762_ReturnInThrow() {
+		'''
+			{
+				throw return
+			}
+		'''.compilesTo('''
+			try {
+			  return;
+			  throw /* error - couldn't compile nested return */;
+			} catch (Throwable _e) {
+			  throw org.eclipse.xtext.xbase.lib.Exceptions.sneakyThrow(_e);
+			}
+		''', false)
+	}
+
+	@Test def void test406762_ReturnInThrow2() {
+		'''
+			{
+				throw {
+					return
+				}
+			}
+		'''.compilesTo('''
+			try {
+			  return;
+			  throw /* error - couldn't compile nested return */;
+			} catch (Throwable _e) {
+			  throw org.eclipse.xtext.xbase.lib.Exceptions.sneakyThrow(_e);
+			}
+		''', false)
+	}
+
 }

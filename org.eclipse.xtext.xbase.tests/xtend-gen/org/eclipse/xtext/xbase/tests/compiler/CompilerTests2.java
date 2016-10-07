@@ -4158,4 +4158,76 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
       throw Exceptions.sneakyThrow(_e);
     }
   }
+  
+  @Test
+  public void test406762_ReturnInThrow() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("throw return");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("try {");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("return;");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("throw /* error - couldn\'t compile nested return */;");
+      _builder_1.newLine();
+      _builder_1.append("} catch (Throwable _e) {");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("throw org.eclipse.xtext.xbase.lib.Exceptions.sneakyThrow(_e);");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      this.compilesTo(_builder, _builder_1, false);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void test406762_ReturnInThrow2() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("throw {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("return");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("try {");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("return;");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("throw /* error - couldn\'t compile nested return */;");
+      _builder_1.newLine();
+      _builder_1.append("} catch (Throwable _e) {");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("throw org.eclipse.xtext.xbase.lib.Exceptions.sneakyThrow(_e);");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      this.compilesTo(_builder, _builder_1, false);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
 }
