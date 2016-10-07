@@ -16,7 +16,9 @@ import java.util.Set;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.IGrammarAccess;
@@ -118,16 +120,26 @@ public class BacktrackingSemanticSequencer extends AbstractSemanticSequencer {
 				if (feature.isMany())
 					switch (transientValues.isListTransient(eObject, feature)) {
 						case NO:
-							List<INode> nodes1 = Lists.newArrayList();
-							List<?> values1 = (List<?>) eObject.eGet(feature);
-							for (int i = 0; i < values1.size(); i++)
-								nodes1.add(nodeProvider.getNodeForMultiValue(feature, i, i, values1.get(i)));
-							values[featureID] = values1;
-							nodes[featureID] = nodes1;
-							break;
+						List<INode> nodes1 = Lists.newArrayList();
+						List<?> values1;
+						if (feature instanceof EReference && ((EReference) feature).isResolveProxies()) {
+							values1 = ((InternalEList<?>) eObject.eGet(feature)).basicList();
+						} else {
+							values1 = (List<?>) eObject.eGet(feature);
+						}
+						for (int i = 0; i < values1.size(); i++)
+							nodes1.add(nodeProvider.getNodeForMultiValue(feature, i, i, values1.get(i)));
+						values[featureID] = values1;
+						nodes[featureID] = nodes1;
+						break;
 						case SOME:
 							List<INode> nodes2 = Lists.newArrayList();
-							List<?> values2 = (List<?>) eObject.eGet(feature);
+							List<?> values2;
+							if (feature instanceof EReference && ((EReference) feature).isResolveProxies()) {
+								values2 = ((InternalEList<?>) eObject.eGet(feature)).basicList();
+							} else {
+								values2 = (List<?>) eObject.eGet(feature);
+							}
 							List<Object> values3 = Lists.newArrayList();
 							for (int i = 0, j = 0; i < values2.size(); i++)
 								if (!transientValues.isValueInListTransient(eObject, i, feature)) {
@@ -146,13 +158,13 @@ public class BacktrackingSemanticSequencer extends AbstractSemanticSequencer {
 					switch (transientValues.isValueTransient(eObject, feature)) {
 						case PREFERABLY:
 							optional[featureID] = true;
-							Object value1 = eObject.eGet(feature);
+							Object value1 = eObject.eGet(feature, false);
 							values[featureID] = value1;
 							nodes[featureID] = Collections
 									.singletonList(nodeProvider.getNodeForSingelValue(feature, value1));
 							break;
 						case NO:
-							Object value2 = eObject.eGet(feature);
+							Object value2 = eObject.eGet(feature, false);
 							values[featureID] = value2;
 							nodes[featureID] = Collections
 									.singletonList(nodeProvider.getNodeForSingelValue(feature, value2));

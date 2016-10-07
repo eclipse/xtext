@@ -244,7 +244,11 @@ public class GenModelUtil2 {
   }
   
   public static String getFeatureLiteral(final EStructuralFeature feature, final ResourceSet resourceSet) {
-    final GenFeature genFeature = GenModelUtil2.getGenFeature(feature, resourceSet);
+    GenFeature _genFeature = GenModelUtil2.getGenFeature(feature, resourceSet);
+    return GenModelUtil2.getFeatureLiteral(_genFeature, resourceSet);
+  }
+  
+  public static String getFeatureLiteral(final GenFeature genFeature, final ResourceSet resourceSet) {
     GenPackage _genPackage = genFeature.getGenPackage();
     boolean _isLiteralsInterface = _genPackage.isLiteralsInterface();
     if (_isLiteralsInterface) {
@@ -268,7 +272,11 @@ public class GenModelUtil2 {
   }
   
   public static String getGetAccessor(final EStructuralFeature feature, final ResourceSet resourceSet) {
-    final GenFeature genFeature = GenModelUtil2.getGenFeature(feature, resourceSet);
+    GenFeature _genFeature = GenModelUtil2.getGenFeature(feature, resourceSet);
+    return GenModelUtil2.getGetAccessor(_genFeature, resourceSet);
+  }
+  
+  public static String getGetAccessor(final GenFeature genFeature, final ResourceSet resourceSet) {
     final GenClass genClass = genFeature.getGenClass();
     boolean _isMapEntry = genClass.isMapEntry();
     if (_isMapEntry) {
