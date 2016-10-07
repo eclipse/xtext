@@ -27,9 +27,10 @@ public class EmitterNodeUtil {
 	public static List<INode> collectEmitterNodes(INode from, INode to) {
 		List<INode> actual = collectEmitterNodesInternal(from, to);
 		// helpful code to test this implementation
-		List<INode> expected = Lists.newArrayList(new EmitterNodeIterator(from, to, false, false));
-		if (!expected.equals(actual))
-			throw new IllegalStateException();
+		// List<INode> expected = Lists.newArrayList(new
+		// EmitterNodeIterator(from, to, false, false));
+		// if (!expected.equals(actual))
+		// throw new IllegalStateException();
 		return actual;
 	}
 
