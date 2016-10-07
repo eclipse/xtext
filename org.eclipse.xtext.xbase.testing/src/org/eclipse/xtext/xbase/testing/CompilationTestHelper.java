@@ -159,7 +159,6 @@ public class CompilationTestHelper {
 	 */
 	public void setJavaVersion(JavaVersion javaVersion) {
 		this.javaCompiler.setJavaVersion(javaVersion);
-		generatorConfigProvider.get(null).setJavaSourceVersion(javaVersion);
 	}
 	
 	/**
