@@ -398,7 +398,7 @@ public class ContextFinderTestLanguageSemanticSequencer extends AbstractDelegati
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ContextFinderTestPackage.Literals.NODE_EXCLUSION__REF));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getNodeExclusion1Access().getRefModelIDTerminalRuleCall_0_1(), semanticObject.getRef());
+		feeder.accept(grammarAccess.getNodeExclusion1Access().getRefModelIDTerminalRuleCall_0_1(), semanticObject.eGet(ContextFinderTestPackage.Literals.NODE_EXCLUSION__REF, false));
 		feeder.finish();
 	}
 	
@@ -428,7 +428,7 @@ public class ContextFinderTestLanguageSemanticSequencer extends AbstractDelegati
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, ContextFinderTestPackage.Literals.NODE_EXCLUSION__REF));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getNodeExclusion2Access().getRefModelSTRINGTerminalRuleCall_0_1(), semanticObject.getRef());
+		feeder.accept(grammarAccess.getNodeExclusion2Access().getRefModelSTRINGTerminalRuleCall_0_1(), semanticObject.eGet(ContextFinderTestPackage.Literals.NODE_EXCLUSION__REF, false));
 		feeder.finish();
 	}
 	

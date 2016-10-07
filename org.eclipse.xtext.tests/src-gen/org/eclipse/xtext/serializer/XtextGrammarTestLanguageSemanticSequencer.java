@@ -1065,7 +1065,7 @@ public class XtextGrammarTestLanguageSemanticSequencer extends AbstractDelegatin
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, XtextTestPackage.Literals.RULE_CALL__RULE));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getTerminalRuleCallAccess().getRuleAbstractRuleRuleIDParserRuleCall_0_1(), semanticObject.getRule());
+		feeder.accept(grammarAccess.getTerminalRuleCallAccess().getRuleAbstractRuleRuleIDParserRuleCall_0_1(), semanticObject.eGet(XtextTestPackage.Literals.RULE_CALL__RULE, false));
 		feeder.finish();
 	}
 	

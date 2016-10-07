@@ -134,7 +134,7 @@ public abstract class AbstractFragmentTestLanguageSemanticSequencer extends Abst
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FragmentTestLanguagePackage.Literals.PRF_NAMED__NAME));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getPRFNamedRefFirstAccess().getRefPRFNamedIDTerminalRuleCall_0_0_1(), semanticObject.getRef());
+		feeder.accept(grammarAccess.getPRFNamedRefFirstAccess().getRefPRFNamedIDTerminalRuleCall_0_0_1(), semanticObject.eGet(FragmentTestLanguagePackage.Literals.PRF_NAMED__REF, false));
 		feeder.accept(grammarAccess.getPRFNamedFragmentAccess().getNameIDTerminalRuleCall_0(), semanticObject.getName());
 		feeder.finish();
 	}

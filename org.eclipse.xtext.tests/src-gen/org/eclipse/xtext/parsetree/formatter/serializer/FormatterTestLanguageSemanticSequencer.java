@@ -197,7 +197,7 @@ public class FormatterTestLanguageSemanticSequencer extends AbstractDelegatingSe
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FormattertestlanguagePackage.Literals.FQN_REF__REF));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getFqnRefAccess().getRefFqnObjFQNParserRuleCall_1_0_1(), semanticObject.getRef());
+		feeder.accept(grammarAccess.getFqnRefAccess().getRefFqnObjFQNParserRuleCall_1_0_1(), semanticObject.eGet(FormattertestlanguagePackage.Literals.FQN_REF__REF, false));
 		feeder.finish();
 	}
 	

@@ -94,7 +94,7 @@ public class MetamodelRefTestLanguageSemanticSequencer extends AbstractDelegatin
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, XtextPackage.Literals.RULE_CALL__RULE));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getNameRefAccess().getRuleParserRuleIDTerminalRuleCall_0_1(), semanticObject.getRule());
+		feeder.accept(grammarAccess.getNameRefAccess().getRuleParserRuleIDTerminalRuleCall_0_1(), semanticObject.eGet(XtextPackage.Literals.RULE_CALL__RULE, false));
 		feeder.finish();
 	}
 	
