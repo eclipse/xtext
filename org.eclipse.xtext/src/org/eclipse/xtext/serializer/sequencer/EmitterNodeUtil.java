@@ -10,14 +10,12 @@ package org.eclipse.xtext.serializer.sequencer;
 import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
-import org.eclipse.xtext.parsetree.reconstr.impl.NodeIterator;
 
 import com.google.common.collect.Lists;
 
@@ -25,6 +23,75 @@ import com.google.common.collect.Lists;
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public class EmitterNodeUtil {
+
+	public static List<INode> collectEmitterNodes(INode from, INode to) {
+		List<INode> actual = collectEmitterNodesInternal(from, to);
+		// helpful code to test this implementation
+		List<INode> expected = Lists.newArrayList(new EmitterNodeIterator(from, to, false, false));
+		if (!expected.equals(actual))
+			throw new IllegalStateException();
+		return actual;
+	}
+
+	private static List<INode> collectEmitterNodesInternal(INode from, INode to) {
+		if (from == null) {
+			return Collections.emptyList();
+		}
+		INode current = findNext(from, to);
+		List<INode> result = null;
+		while (current != null) {
+			if (current == to)
+				break;
+			EObject grammarElement = current.getGrammarElement();
+			if (isEmitter(current, grammarElement)) {
+				if (isAbsorber(grammarElement))
+					break;
+				if (result == null) {
+					result = Lists.newArrayList();
+				}
+				result.add(current);
+				current = findNextSibling(current, to);
+			} else {
+				current = findNext(current, to);
+			}
+		}
+		if (result == null) {
+			return Collections.emptyList();
+		}
+		return result;
+	}
+
+	private static INode findNext(INode node, INode to) {
+		if (node instanceof ICompositeNode) {
+			INode firstChild = ((ICompositeNode) node).getFirstChild();
+			if (firstChild != null) {
+				if (firstChild == to) {
+					return null;
+				}
+				return firstChild;
+			}
+		}
+		return findNextSibling(node, to);
+	}
+
+	private static INode findNextSibling(INode node, INode to) {
+		INode successor = node.getNextSibling();
+		if (successor != null) {
+			if (successor == to) {
+				return null;
+			}
+			return successor;
+		}
+		ICompositeNode parent = node.getParent();
+		if (parent == null || parent == to) {
+			return null;
+		}
+		return findNextSibling(parent, to);
+	}
+
+	private static boolean isAbsorber(EObject grammarElement) {
+		return grammarElement != null && GrammarUtil.isAssigned(grammarElement);
+	}
 
 	private static boolean isEmitter(INode node, EObject grammarElement) {
 		if (node instanceof ILeafNode) {
@@ -36,43 +103,6 @@ public class EmitterNodeUtil {
 			return GrammarUtil.isDatatypeRuleCall(grammarElement) || grammarElement instanceof CrossReference;
 		}
 		return false;
-	}
-
-	private static boolean isAbsorber(EObject grammarElement) {
-		return grammarElement != null && GrammarUtil.isAssigned(grammarElement);
-	}
-
-	public static List<INode> collectEmitterNodes(INode from, INode to) {
-		if (from == null) {
-			return Collections.emptyList();
-		}
-		TreeIterator<INode> iterator;
-		if (from == to) {
-			iterator = from.getAsTreeIterable().iterator();
-			iterator.next();
-		} else {
-			iterator = new NodeIterator(from);
-		}
-		List<INode> result = null;
-		while (iterator.hasNext()) {
-			INode next = iterator.next();
-			if (next == to)
-				break;
-			EObject grammarElement = next.getGrammarElement();
-			if (isEmitter(next, grammarElement)) {
-				if (isAbsorber(grammarElement))
-					break;
-				iterator.prune();
-				if (result == null) {
-					result = Lists.newArrayList();
-				}
-				result.add(next);
-			}
-		}
-		if (result == null) {
-			return Collections.emptyList();
-		}
-		return result;
 	}
 
 }
