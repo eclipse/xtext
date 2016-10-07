@@ -2816,6 +2816,64 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
     this.assertInvalidReturnExpression(_builder, XbasePackage.Literals.XTHROW_EXPRESSION);
   }
   
+  @Test
+  public void testInvalidReturnThrowBug406762_1() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("{");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("val b = true");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("return if (b) throw new RuntimeException() else throw new RuntimeException()");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertInvalidReturnExpression(_builder, XbasePackage.Literals.XIF_EXPRESSION);
+  }
+  
+  @Test
+  public void testValidReturnThrowBug406762() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val b = true");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("return if (b) throw new RuntimeException() else 42");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XExpression _expression = this.expression(_builder);
+      this._validationTestHelper.assertNoErrors(_expression);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testValidReturnThrowBug406762_1() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val b = true");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("return if (b) 42 else throw new RuntimeException()");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XExpression _expression = this.expression(_builder);
+      this._validationTestHelper.assertNoErrors(_expression);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
   private void assertNestedReturn(final CharSequence input, final EClass objectType) {
     try {
       XExpression _expression = this.expression(input);

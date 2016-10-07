@@ -4263,4 +4263,121 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
       throw Exceptions.sneakyThrow(_e);
     }
   }
+  
+  @Test
+  public void test406762_ValidThrowInSingleIfBranch() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val b = true");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("return if (b) throw new RuntimeException() else 42");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("final boolean b = true;");
+      _builder_1.newLine();
+      _builder_1.append("int _xifexpression = (int) 0;");
+      _builder_1.newLine();
+      _builder_1.append("if (b) {");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("throw new RuntimeException();");
+      _builder_1.newLine();
+      _builder_1.append("} else {");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("_xifexpression = 42;");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("return _xifexpression;");
+      _builder_1.newLine();
+      this.compilesTo(_builder, _builder_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void test406762_ValidThrowInSingleIfBranch_1() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val b = true");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("return if (b) 42 else throw new RuntimeException()");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("final boolean b = true;");
+      _builder_1.newLine();
+      _builder_1.append("int _xifexpression = (int) 0;");
+      _builder_1.newLine();
+      _builder_1.append("if (b) {");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("_xifexpression = 42;");
+      _builder_1.newLine();
+      _builder_1.append("} else {");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("throw new RuntimeException();");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("return _xifexpression;");
+      _builder_1.newLine();
+      this.compilesTo(_builder, _builder_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void test406762_InvalidThrowInBothIfBranches() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val b = true");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("return if (b) throw new RuntimeException() else throw new RuntimeException()");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("final boolean b = true;");
+      _builder_1.newLine();
+      _builder_1.append("void _xifexpression = null;");
+      _builder_1.newLine();
+      _builder_1.append("if (b) {");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("throw new RuntimeException();");
+      _builder_1.newLine();
+      _builder_1.append("} else {");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("throw new RuntimeException();");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("return _xifexpression;");
+      _builder_1.newLine();
+      this.compilesTo(_builder, _builder_1, false);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
 }

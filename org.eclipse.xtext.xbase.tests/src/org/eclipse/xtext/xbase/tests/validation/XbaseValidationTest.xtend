@@ -1220,6 +1220,33 @@ class XbaseValidationTest extends AbstractXbaseTestCase {
 		'''.assertInvalidReturnExpression(XbasePackage.Literals.XTHROW_EXPRESSION)
 	}
 
+	@Test def void testInvalidReturnThrowBug406762_1() {
+		'''
+			{
+				val b = true
+				return if (b) throw new RuntimeException() else throw new RuntimeException()
+			}
+		'''.assertInvalidReturnExpression(XbasePackage.Literals.XIF_EXPRESSION)
+	}
+
+	@Test def void testValidReturnThrowBug406762() {
+		'''
+			{
+				val b = true
+				return if (b) throw new RuntimeException() else 42
+			}
+		'''.expression.assertNoErrors
+	}
+
+	@Test def void testValidReturnThrowBug406762_1() {
+		'''
+			{
+				val b = true
+				return if (b) 42 else throw new RuntimeException()
+			}
+		'''.expression.assertNoErrors
+	}
+
 	def private assertNestedReturn(CharSequence input, EClass objectType) {
 		input.expression.assertError(
 			objectType,

@@ -1988,4 +1988,58 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		''', false)
 	}
 
+	@Test def void test406762_ValidThrowInSingleIfBranch() {
+		'''
+			{
+				val b = true
+				return if (b) throw new RuntimeException() else 42
+			}
+		'''.compilesTo('''
+			final boolean b = true;
+			int _xifexpression = (int) 0;
+			if (b) {
+			  throw new RuntimeException();
+			} else {
+			  _xifexpression = 42;
+			}
+			return _xifexpression;
+		''')
+	}
+
+	@Test def void test406762_ValidThrowInSingleIfBranch_1() {
+		'''
+			{
+				val b = true
+				return if (b) 42 else throw new RuntimeException()
+			}
+		'''.compilesTo('''
+			final boolean b = true;
+			int _xifexpression = (int) 0;
+			if (b) {
+			  _xifexpression = 42;
+			} else {
+			  throw new RuntimeException();
+			}
+			return _xifexpression;
+		''')
+	}
+
+	@Test def void test406762_InvalidThrowInBothIfBranches() {
+		'''
+			{
+				val b = true
+				return if (b) throw new RuntimeException() else throw new RuntimeException()
+			}
+		'''.compilesTo('''
+			final boolean b = true;
+			void _xifexpression = null;
+			if (b) {
+			  throw new RuntimeException();
+			} else {
+			  throw new RuntimeException();
+			}
+			return _xifexpression;
+		''', false)
+	}
+
 }
