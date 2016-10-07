@@ -79,7 +79,7 @@ public abstract class AbstractEnumRulesTestLanguageRuntimeModule extends Default
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalEnumRulesTestLanguageLexer> provideInternalEnumRulesTestLanguageLexer() {
+	public Provider<? extends InternalEnumRulesTestLanguageLexer> provideInternalEnumRulesTestLanguageLexer() {
 		return LexerProvider.create(InternalEnumRulesTestLanguageLexer.class);
 	}
 	

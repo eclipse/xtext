@@ -79,7 +79,7 @@ public abstract class AbstractDatatypeRulesTestLanguageRuntimeModule extends Def
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalDatatypeRulesTestLanguageLexer> provideInternalDatatypeRulesTestLanguageLexer() {
+	public Provider<? extends InternalDatatypeRulesTestLanguageLexer> provideInternalDatatypeRulesTestLanguageLexer() {
 		return LexerProvider.create(InternalDatatypeRulesTestLanguageLexer.class);
 	}
 	

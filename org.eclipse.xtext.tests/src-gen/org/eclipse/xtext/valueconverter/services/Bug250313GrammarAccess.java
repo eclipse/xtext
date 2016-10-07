@@ -8,7 +8,6 @@ import com.google.inject.Singleton;
 import java.util.List;
 import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Assignment;
-import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Group;
@@ -69,30 +68,19 @@ public class Bug250313GrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cMultiValueAssignment_7_1 = (Assignment)cGroup_7.eContents().get(1);
 		private final RuleCall cMultiValueNestedDatatypeParserRuleCall_7_1_0 = (RuleCall)cMultiValueAssignment_7_1.eContents().get(0);
 		private final Group cGroup_8 = (Group)cAlternatives.eContents().get(8);
-		private final Group cGroup_8_0 = (Group)cGroup_8.eContents().get(0);
-		private final Keyword cContentKeyword_8_0_0 = (Keyword)cGroup_8_0.eContents().get(0);
-		private final Assignment cChildrenAssignment_8_0_1 = (Assignment)cGroup_8_0.eContents().get(1);
-		private final RuleCall cChildrenChildParserRuleCall_8_0_1_0 = (RuleCall)cChildrenAssignment_8_0_1.eContents().get(0);
-		private final Group cGroup_8_1 = (Group)cGroup_8.eContents().get(1);
-		private final Keyword cRefKeyword_8_1_0 = (Keyword)cGroup_8_1.eContents().get(0);
-		private final Assignment cRefAssignment_8_1_1 = (Assignment)cGroup_8_1.eContents().get(1);
-		private final Alternatives cRefAlternatives_8_1_1_0 = (Alternatives)cRefAssignment_8_1_1.eContents().get(0);
-		private final CrossReference cRefChild1CrossReference_8_1_1_0_0 = (CrossReference)cRefAlternatives_8_1_1_0.eContents().get(0);
-		private final RuleCall cRefChild1STRINGTerminalRuleCall_8_1_1_0_0_1 = (RuleCall)cRefChild1CrossReference_8_1_1_0_0.eContents().get(1);
-		private final CrossReference cRefChild2CrossReference_8_1_1_0_1 = (CrossReference)cRefAlternatives_8_1_1_0.eContents().get(1);
-		private final RuleCall cRefChild2IDTerminalRuleCall_8_1_1_0_1_1 = (RuleCall)cRefChild2CrossReference_8_1_1_0_1.eContents().get(1);
+		private final Keyword cContentKeyword_8_0 = (Keyword)cGroup_8.eContents().get(0);
+		private final Assignment cChildrenAssignment_8_1 = (Assignment)cGroup_8.eContents().get(1);
+		private final RuleCall cChildrenChildParserRuleCall_8_1_0 = (RuleCall)cChildrenAssignment_8_1.eContents().get(0);
 		
 		//Model:
 		//	'1'? value=('mykeyword1' | STRING | NestedDatatype | Datatype | ID) | '1+' multiValue+=('mykeyword1' | STRING |
 		//	NestedDatatype | Datatype | ID) | '2' value=STRING | '2+' multiValue+=STRING | '3' value=Datatype | '3+'
-		//	multiValue+=Datatype | '4' value=NestedDatatype | '4+' multiValue+=NestedDatatype | ('content' children=Child) ('ref'
-		//	ref=([Child1|STRING] | [Child2]))?;
+		//	multiValue+=Datatype | '4' value=NestedDatatype | '4+' multiValue+=NestedDatatype | 'content' children=Child;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'1'? value=('mykeyword1' | STRING | NestedDatatype | Datatype | ID) | '1+' multiValue+=('mykeyword1' | STRING |
 		//NestedDatatype | Datatype | ID) | '2' value=STRING | '2+' multiValue+=STRING | '3' value=Datatype | '3+'
-		//multiValue+=Datatype | '4' value=NestedDatatype | '4+' multiValue+=NestedDatatype | ('content' children=Child) ('ref'
-		//ref=([Child1|STRING] | [Child2]))?
+		//multiValue+=Datatype | '4' value=NestedDatatype | '4+' multiValue+=NestedDatatype | 'content' children=Child
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//'1'? value=('mykeyword1' | STRING | NestedDatatype | Datatype | ID)
@@ -221,44 +209,17 @@ public class Bug250313GrammarAccess extends AbstractGrammarElementFinder {
 		//NestedDatatype
 		public RuleCall getMultiValueNestedDatatypeParserRuleCall_7_1_0() { return cMultiValueNestedDatatypeParserRuleCall_7_1_0; }
 		
-		//('content' children=Child) ('ref' ref=([Child1|STRING] | [Child2]))?
+		//'content' children=Child
 		public Group getGroup_8() { return cGroup_8; }
 		
-		//('content' children=Child)
-		public Group getGroup_8_0() { return cGroup_8_0; }
-		
 		//'content'
-		public Keyword getContentKeyword_8_0_0() { return cContentKeyword_8_0_0; }
+		public Keyword getContentKeyword_8_0() { return cContentKeyword_8_0; }
 		
 		//children=Child
-		public Assignment getChildrenAssignment_8_0_1() { return cChildrenAssignment_8_0_1; }
+		public Assignment getChildrenAssignment_8_1() { return cChildrenAssignment_8_1; }
 		
 		//Child
-		public RuleCall getChildrenChildParserRuleCall_8_0_1_0() { return cChildrenChildParserRuleCall_8_0_1_0; }
-		
-		//('ref' ref=([Child1|STRING] | [Child2]))?
-		public Group getGroup_8_1() { return cGroup_8_1; }
-		
-		//'ref'
-		public Keyword getRefKeyword_8_1_0() { return cRefKeyword_8_1_0; }
-		
-		//ref=([Child1|STRING] | [Child2])
-		public Assignment getRefAssignment_8_1_1() { return cRefAssignment_8_1_1; }
-		
-		//([Child1|STRING] | [Child2])
-		public Alternatives getRefAlternatives_8_1_1_0() { return cRefAlternatives_8_1_1_0; }
-		
-		//[Child1|STRING]
-		public CrossReference getRefChild1CrossReference_8_1_1_0_0() { return cRefChild1CrossReference_8_1_1_0_0; }
-		
-		//STRING
-		public RuleCall getRefChild1STRINGTerminalRuleCall_8_1_1_0_0_1() { return cRefChild1STRINGTerminalRuleCall_8_1_1_0_0_1; }
-		
-		//[Child2]
-		public CrossReference getRefChild2CrossReference_8_1_1_0_1() { return cRefChild2CrossReference_8_1_1_0_1; }
-		
-		//ID
-		public RuleCall getRefChild2IDTerminalRuleCall_8_1_1_0_1_1() { return cRefChild2IDTerminalRuleCall_8_1_1_0_1_1; }
+		public RuleCall getChildrenChildParserRuleCall_8_1_0() { return cChildrenChildParserRuleCall_8_1_0; }
 	}
 	public class DatatypeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.valueconverter.Bug250313.Datatype");
@@ -411,8 +372,7 @@ public class Bug250313GrammarAccess extends AbstractGrammarElementFinder {
 	//Model:
 	//	'1'? value=('mykeyword1' | STRING | NestedDatatype | Datatype | ID) | '1+' multiValue+=('mykeyword1' | STRING |
 	//	NestedDatatype | Datatype | ID) | '2' value=STRING | '2+' multiValue+=STRING | '3' value=Datatype | '3+'
-	//	multiValue+=Datatype | '4' value=NestedDatatype | '4+' multiValue+=NestedDatatype | ('content' children=Child) ('ref'
-	//	ref=([Child1|STRING] | [Child2]))?;
+	//	multiValue+=Datatype | '4' value=NestedDatatype | '4+' multiValue+=NestedDatatype | 'content' children=Child;
 	public ModelElements getModelAccess() {
 		return pModel;
 	}

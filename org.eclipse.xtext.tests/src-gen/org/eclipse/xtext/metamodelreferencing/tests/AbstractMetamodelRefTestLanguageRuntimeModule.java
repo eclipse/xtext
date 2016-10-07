@@ -79,7 +79,7 @@ public abstract class AbstractMetamodelRefTestLanguageRuntimeModule extends Defa
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalMetamodelRefTestLanguageLexer> provideInternalMetamodelRefTestLanguageLexer() {
+	public Provider<? extends InternalMetamodelRefTestLanguageLexer> provideInternalMetamodelRefTestLanguageLexer() {
 		return LexerProvider.create(InternalMetamodelRefTestLanguageLexer.class);
 	}
 	

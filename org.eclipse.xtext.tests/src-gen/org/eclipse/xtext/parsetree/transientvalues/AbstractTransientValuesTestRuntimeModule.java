@@ -79,7 +79,7 @@ public abstract class AbstractTransientValuesTestRuntimeModule extends DefaultRu
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalTransientValuesTestLexer> provideInternalTransientValuesTestLexer() {
+	public Provider<? extends InternalTransientValuesTestLexer> provideInternalTransientValuesTestLexer() {
 		return LexerProvider.create(InternalTransientValuesTestLexer.class);
 	}
 	

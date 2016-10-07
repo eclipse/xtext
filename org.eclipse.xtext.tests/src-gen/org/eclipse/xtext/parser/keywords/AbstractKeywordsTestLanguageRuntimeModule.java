@@ -79,7 +79,7 @@ public abstract class AbstractKeywordsTestLanguageRuntimeModule extends DefaultR
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalKeywordsTestLanguageLexer> provideInternalKeywordsTestLanguageLexer() {
+	public Provider<? extends InternalKeywordsTestLanguageLexer> provideInternalKeywordsTestLanguageLexer() {
 		return LexerProvider.create(InternalKeywordsTestLanguageLexer.class);
 	}
 	

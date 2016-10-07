@@ -79,7 +79,7 @@ public abstract class AbstractEpatchTestLanguageRuntimeModule extends DefaultRun
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalEpatchTestLanguageLexer> provideInternalEpatchTestLanguageLexer() {
+	public Provider<? extends InternalEpatchTestLanguageLexer> provideInternalEpatchTestLanguageLexer() {
 		return LexerProvider.create(InternalEpatchTestLanguageLexer.class);
 	}
 	

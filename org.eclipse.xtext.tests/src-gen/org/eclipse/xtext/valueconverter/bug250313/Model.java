@@ -19,7 +19,6 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.xtext.valueconverter.bug250313.Model#getValue <em>Value</em>}</li>
  *   <li>{@link org.eclipse.xtext.valueconverter.bug250313.Model#getMultiValue <em>Multi Value</em>}</li>
  *   <li>{@link org.eclipse.xtext.valueconverter.bug250313.Model#getChildren <em>Children</em>}</li>
- *   <li>{@link org.eclipse.xtext.valueconverter.bug250313.Model#getRef <em>Ref</em>}</li>
  * </ul>
  *
  * @see org.eclipse.xtext.valueconverter.bug250313.Bug250313Package#getModel()
@@ -95,31 +94,5 @@ public interface Model extends EObject
    * @generated
    */
   void setChildren(Child value);
-
-  /**
-   * Returns the value of the '<em><b>Ref</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Ref</em>' reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Ref</em>' reference.
-   * @see #setRef(Child)
-   * @see org.eclipse.xtext.valueconverter.bug250313.Bug250313Package#getModel_Ref()
-   * @model
-   * @generated
-   */
-  Child getRef();
-
-  /**
-   * Sets the value of the '{@link org.eclipse.xtext.valueconverter.bug250313.Model#getRef <em>Ref</em>}' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Ref</em>' reference.
-   * @see #getRef()
-   * @generated
-   */
-  void setRef(Child value);
 
 } // Model

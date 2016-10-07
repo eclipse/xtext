@@ -79,7 +79,7 @@ public abstract class AbstractUnassignedRuleCallTestLanguageRuntimeModule extend
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalUnassignedRuleCallTestLanguageLexer> provideInternalUnassignedRuleCallTestLanguageLexer() {
+	public Provider<? extends InternalUnassignedRuleCallTestLanguageLexer> provideInternalUnassignedRuleCallTestLanguageLexer() {
 		return LexerProvider.create(InternalUnassignedRuleCallTestLanguageLexer.class);
 	}
 	

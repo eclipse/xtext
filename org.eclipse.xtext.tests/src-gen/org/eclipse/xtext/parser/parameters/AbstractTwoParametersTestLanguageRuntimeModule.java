@@ -79,7 +79,7 @@ public abstract class AbstractTwoParametersTestLanguageRuntimeModule extends Def
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalTwoParametersTestLanguageLexer> provideInternalTwoParametersTestLanguageLexer() {
+	public Provider<? extends InternalTwoParametersTestLanguageLexer> provideInternalTwoParametersTestLanguageLexer() {
 		return LexerProvider.create(InternalTwoParametersTestLanguageLexer.class);
 	}
 	

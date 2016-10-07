@@ -79,7 +79,7 @@ public abstract class AbstractMultiRuleEnumTestLanguageRuntimeModule extends Def
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalMultiRuleEnumTestLanguageLexer> provideInternalMultiRuleEnumTestLanguageLexer() {
+	public Provider<? extends InternalMultiRuleEnumTestLanguageLexer> provideInternalMultiRuleEnumTestLanguageLexer() {
 		return LexerProvider.create(InternalMultiRuleEnumTestLanguageLexer.class);
 	}
 	

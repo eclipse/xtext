@@ -79,7 +79,7 @@ public abstract class AbstractEncodingTestLanguageRuntimeModule extends DefaultR
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalEncodingTestLanguageLexer> provideInternalEncodingTestLanguageLexer() {
+	public Provider<? extends InternalEncodingTestLanguageLexer> provideInternalEncodingTestLanguageLexer() {
 		return LexerProvider.create(InternalEncodingTestLanguageLexer.class);
 	}
 	

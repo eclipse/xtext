@@ -78,7 +78,7 @@ public abstract class AbstractContextFinderTestLanguageRuntimeModule extends Def
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalContextFinderTestLanguageLexer> provideInternalContextFinderTestLanguageLexer() {
+	public Provider<? extends InternalContextFinderTestLanguageLexer> provideInternalContextFinderTestLanguageLexer() {
 		return LexerProvider.create(InternalContextFinderTestLanguageLexer.class);
 	}
 	

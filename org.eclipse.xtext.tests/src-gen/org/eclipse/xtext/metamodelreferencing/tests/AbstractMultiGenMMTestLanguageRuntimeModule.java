@@ -79,7 +79,7 @@ public abstract class AbstractMultiGenMMTestLanguageRuntimeModule extends Defaul
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalMultiGenMMTestLanguageLexer> provideInternalMultiGenMMTestLanguageLexer() {
+	public Provider<? extends InternalMultiGenMMTestLanguageLexer> provideInternalMultiGenMMTestLanguageLexer() {
 		return LexerProvider.create(InternalMultiGenMMTestLanguageLexer.class);
 	}
 	

@@ -79,7 +79,7 @@ public abstract class AbstractLiveContainerTestLanguageRuntimeModule extends Def
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalLiveContainerTestLanguageLexer> provideInternalLiveContainerTestLanguageLexer() {
+	public Provider<? extends InternalLiveContainerTestLanguageLexer> provideInternalLiveContainerTestLanguageLexer() {
 		return LexerProvider.create(InternalLiveContainerTestLanguageLexer.class);
 	}
 	

@@ -79,7 +79,7 @@ public abstract class AbstractActionTestLanguageRuntimeModule extends DefaultRun
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalActionTestLanguageLexer> provideInternalActionTestLanguageLexer() {
+	public Provider<? extends InternalActionTestLanguageLexer> provideInternalActionTestLanguageLexer() {
 		return LexerProvider.create(InternalActionTestLanguageLexer.class);
 	}
 	

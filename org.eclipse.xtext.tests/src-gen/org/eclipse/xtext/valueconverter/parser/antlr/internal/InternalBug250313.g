@@ -403,62 +403,29 @@ ruleModel returns [EObject current=null]
 		)
 		    |
 		(
+			otherlv_16='content'
+			{
+				newLeafNode(otherlv_16, grammarAccess.getModelAccess().getContentKeyword_8_0());
+			}
 			(
-				otherlv_16='content'
-				{
-					newLeafNode(otherlv_16, grammarAccess.getModelAccess().getContentKeyword_8_0_0());
-				}
 				(
-					(
-						{
-							newCompositeNode(grammarAccess.getModelAccess().getChildrenChildParserRuleCall_8_0_1_0());
+					{
+						newCompositeNode(grammarAccess.getModelAccess().getChildrenChildParserRuleCall_8_1_0());
+					}
+					lv_children_17_0=ruleChild
+					{
+						if ($current==null) {
+							$current = createModelElementForParent(grammarAccess.getModelRule());
 						}
-						lv_children_17_0=ruleChild
-						{
-							if ($current==null) {
-								$current = createModelElementForParent(grammarAccess.getModelRule());
-							}
-							set(
-								$current,
-								"children",
-								lv_children_17_0,
-								"org.eclipse.xtext.valueconverter.Bug250313.Child");
-							afterParserOrEnumRuleCall();
-						}
-					)
+						set(
+							$current,
+							"children",
+							lv_children_17_0,
+							"org.eclipse.xtext.valueconverter.Bug250313.Child");
+						afterParserOrEnumRuleCall();
+					}
 				)
 			)
-			(
-				otherlv_18='ref'
-				{
-					newLeafNode(otherlv_18, grammarAccess.getModelAccess().getRefKeyword_8_1_0());
-				}
-				(
-					(
-						(
-							{
-								if ($current==null) {
-									$current = createModelElement(grammarAccess.getModelRule());
-								}
-							}
-							otherlv_19=RULE_STRING
-							{
-								newLeafNode(otherlv_19, grammarAccess.getModelAccess().getRefChild1CrossReference_8_1_1_0_0());
-							}
-							    |
-							{
-								if ($current==null) {
-									$current = createModelElement(grammarAccess.getModelRule());
-								}
-							}
-							otherlv_19=RULE_ID
-							{
-								newLeafNode(otherlv_19, grammarAccess.getModelAccess().getRefChild2CrossReference_8_1_1_0_1());
-							}
-						)
-					)
-				)
-			)?
 		)
 	)
 ;

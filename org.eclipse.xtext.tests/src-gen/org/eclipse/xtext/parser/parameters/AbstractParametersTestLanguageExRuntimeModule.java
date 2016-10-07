@@ -79,7 +79,7 @@ public abstract class AbstractParametersTestLanguageExRuntimeModule extends Defa
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalParametersTestLanguageExLexer> provideInternalParametersTestLanguageExLexer() {
+	public Provider<? extends InternalParametersTestLanguageExLexer> provideInternalParametersTestLanguageExLexer() {
 		return LexerProvider.create(InternalParametersTestLanguageExLexer.class);
 	}
 	

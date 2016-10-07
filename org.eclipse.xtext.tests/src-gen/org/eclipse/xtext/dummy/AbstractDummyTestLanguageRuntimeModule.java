@@ -79,7 +79,7 @@ public abstract class AbstractDummyTestLanguageRuntimeModule extends DefaultRunt
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalDummyTestLanguageLexer> provideInternalDummyTestLanguageLexer() {
+	public Provider<? extends InternalDummyTestLanguageLexer> provideInternalDummyTestLanguageLexer() {
 		return LexerProvider.create(InternalDummyTestLanguageLexer.class);
 	}
 	

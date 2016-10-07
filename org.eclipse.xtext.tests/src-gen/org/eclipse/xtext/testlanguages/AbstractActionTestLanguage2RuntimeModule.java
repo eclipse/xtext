@@ -79,7 +79,7 @@ public abstract class AbstractActionTestLanguage2RuntimeModule extends DefaultRu
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalActionTestLanguage2Lexer> provideInternalActionTestLanguage2Lexer() {
+	public Provider<? extends InternalActionTestLanguage2Lexer> provideInternalActionTestLanguage2Lexer() {
 		return LexerProvider.create(InternalActionTestLanguage2Lexer.class);
 	}
 	

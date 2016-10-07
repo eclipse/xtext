@@ -79,7 +79,7 @@ public abstract class AbstractEObjectAtOffsetTestLanguageRuntimeModule extends D
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalEObjectAtOffsetTestLanguageLexer> provideInternalEObjectAtOffsetTestLanguageLexer() {
+	public Provider<? extends InternalEObjectAtOffsetTestLanguageLexer> provideInternalEObjectAtOffsetTestLanguageLexer() {
 		return LexerProvider.create(InternalEObjectAtOffsetTestLanguageLexer.class);
 	}
 	
