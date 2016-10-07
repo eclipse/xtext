@@ -1973,4 +1973,19 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		''', false)
 	}
 
+	@Test def void test406762_ReturnThrow() {
+		'''
+			{
+				return throw new Exception()
+			}
+		'''.compilesTo('''
+			try {
+			  throw new Exception();
+			  return /* error - couldn't compile invalid throw */;
+			} catch (Throwable _e) {
+			  throw org.eclipse.xtext.xbase.lib.Exceptions.sneakyThrow(_e);
+			}
+		''', false)
+	}
+
 }

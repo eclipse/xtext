@@ -336,6 +336,8 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			_toJavaExpression((XSynchronizedExpression) obj, appendable);
 		} else if (obj instanceof XReturnExpression) {
 			_toJavaExpression((XReturnExpression) obj, appendable);
+		} else if (obj instanceof XThrowExpression) {
+			_toJavaExpression((XThrowExpression) obj, appendable);
 		} else {
 			super.internalToConvertedExpression(obj, appendable);
 		}
@@ -1574,6 +1576,10 @@ public class XbaseCompiler extends FeatureCallCompiler {
 
 	protected void _toJavaExpression(XReturnExpression returnExpression, ITreeAppendable b) {
 		b.append("/* error - couldn't compile nested return */");
+	}
+
+	protected void _toJavaExpression(XThrowExpression throwExpression, ITreeAppendable b) {
+		b.append("/* error - couldn't compile invalid throw */");
 	}
 
 	protected void _toJavaStatement(final XClosure closure, final ITreeAppendable b, boolean isReferenced) {

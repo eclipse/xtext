@@ -4230,4 +4230,37 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
       throw Exceptions.sneakyThrow(_e);
     }
   }
+  
+  @Test
+  public void test406762_ReturnThrow() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("return throw new Exception()");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("try {");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("throw new Exception();");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("return /* error - couldn\'t compile invalid throw */;");
+      _builder_1.newLine();
+      _builder_1.append("} catch (Throwable _e) {");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("throw org.eclipse.xtext.xbase.lib.Exceptions.sneakyThrow(_e);");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      this.compilesTo(_builder, _builder_1, false);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
 }
