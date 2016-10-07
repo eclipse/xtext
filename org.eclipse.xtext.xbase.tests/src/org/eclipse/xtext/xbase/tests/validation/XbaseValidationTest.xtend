@@ -1145,7 +1145,7 @@ class XbaseValidationTest extends AbstractXbaseTestCase {
 					return 0
 				}
 			}
-		'''.assertNestedReturn(XbasePackage.Literals.XBLOCK_EXPRESSION)
+		'''.assertInvalidReturnExpression(XbasePackage.Literals.XBLOCK_EXPRESSION)
 	}
 
 	@Test def void testInvalidNestedReturnBug406762_2() {
@@ -1155,7 +1155,7 @@ class XbaseValidationTest extends AbstractXbaseTestCase {
 					if (true) return 0 else return 1
 				}
 			}
-		'''.assertNestedReturn(XbasePackage.Literals.XBLOCK_EXPRESSION)
+		'''.assertInvalidReturnExpression(XbasePackage.Literals.XBLOCK_EXPRESSION)
 	}
 
 	@Test def void testInvalidNestedReturnBug406762_3() {
@@ -1164,7 +1164,7 @@ class XbaseValidationTest extends AbstractXbaseTestCase {
 				return 
 					if (true) return 0 else return 1
 			}
-		'''.assertNestedReturn(XbasePackage.Literals.XIF_EXPRESSION)
+		'''.assertInvalidReturnExpression(XbasePackage.Literals.XIF_EXPRESSION)
 	}
 
 	@Test def void testInvalidNestedReturnBug406762_4() {
@@ -1173,7 +1173,7 @@ class XbaseValidationTest extends AbstractXbaseTestCase {
 				return 
 					throw return new RuntimeException()
 			}
-		'''.assertNestedReturn(XbasePackage.Literals.XTHROW_EXPRESSION)
+		'''.assertInvalidReturnExpression(XbasePackage.Literals.XTHROW_EXPRESSION)
 	}
 
 	@Test def void testInvalidReturnInThrowBug406762() {
@@ -1212,11 +1212,19 @@ class XbaseValidationTest extends AbstractXbaseTestCase {
 		'''.assertInvalidReturnInsideThrow
 	}
 
+	@Test def void testInvalidReturnThrowBug406762() {
+		'''
+			{
+				return throw new RuntimeException()
+			}
+		'''.assertInvalidReturnExpression(XbasePackage.Literals.XTHROW_EXPRESSION)
+	}
+
 	def private assertNestedReturn(CharSequence input, EClass objectType) {
 		input.expression.assertError(
 			objectType,
 			IssueCodes.INVALID_RETURN,
-			"Return cannot be nested"
+			"Return cannot be nested."
 		)
 	}
 
@@ -1225,6 +1233,14 @@ class XbaseValidationTest extends AbstractXbaseTestCase {
 			XbasePackage.Literals.XRETURN_EXPRESSION,
 			IssueCodes.INVALID_RETURN,
 			"Invalid return inside throw."
+		)
+	}
+
+	def private assertInvalidReturnExpression(CharSequence input, EClass objectType) {
+		input.expression.assertError(
+			objectType,
+			IssueCodes.INVALID_RETURN,
+			"Invalid return's expression."
 		)
 	}
 }

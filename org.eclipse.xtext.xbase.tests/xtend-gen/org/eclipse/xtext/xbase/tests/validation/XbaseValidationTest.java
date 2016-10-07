@@ -2685,7 +2685,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this.assertNestedReturn(_builder, XbasePackage.Literals.XBLOCK_EXPRESSION);
+    this.assertInvalidReturnExpression(_builder, XbasePackage.Literals.XBLOCK_EXPRESSION);
   }
   
   @Test
@@ -2704,7 +2704,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this.assertNestedReturn(_builder, XbasePackage.Literals.XBLOCK_EXPRESSION);
+    this.assertInvalidReturnExpression(_builder, XbasePackage.Literals.XBLOCK_EXPRESSION);
   }
   
   @Test
@@ -2720,7 +2720,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this.assertNestedReturn(_builder, XbasePackage.Literals.XIF_EXPRESSION);
+    this.assertInvalidReturnExpression(_builder, XbasePackage.Literals.XIF_EXPRESSION);
   }
   
   @Test
@@ -2736,7 +2736,7 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    this.assertNestedReturn(_builder, XbasePackage.Literals.XTHROW_EXPRESSION);
+    this.assertInvalidReturnExpression(_builder, XbasePackage.Literals.XTHROW_EXPRESSION);
   }
   
   @Test
@@ -2803,12 +2803,25 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
     this.assertInvalidReturnInsideThrow(_builder);
   }
   
+  @Test
+  public void testInvalidReturnThrowBug406762() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("{");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("return throw new RuntimeException()");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertInvalidReturnExpression(_builder, XbasePackage.Literals.XTHROW_EXPRESSION);
+  }
+  
   private void assertNestedReturn(final CharSequence input, final EClass objectType) {
     try {
       XExpression _expression = this.expression(input);
       this._validationTestHelper.assertError(_expression, objectType, 
         IssueCodes.INVALID_RETURN, 
-        "Return cannot be nested");
+        "Return cannot be nested.");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -2821,6 +2834,17 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
         XbasePackage.Literals.XRETURN_EXPRESSION, 
         IssueCodes.INVALID_RETURN, 
         "Invalid return inside throw.");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  private void assertInvalidReturnExpression(final CharSequence input, final EClass objectType) {
+    try {
+      XExpression _expression = this.expression(input);
+      this._validationTestHelper.assertError(_expression, objectType, 
+        IssueCodes.INVALID_RETURN, 
+        "Invalid return\'s expression.");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

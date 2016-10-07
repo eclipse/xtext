@@ -980,7 +980,7 @@ public class XbaseTypeComputer extends AbstractTypeComputer implements ITypeComp
 		
 		LightweightTypeReference primitiveVoid = getPrimitiveVoid(state);
 		if (returnValue != null) {
-			checkNestedReturn(returnValue, expressionState);
+			checkValidReturnExpression(returnValue, expressionState);
 			state.acceptActualType(primitiveVoid, ConformanceFlags.NO_IMPLICIT_RETURN);
 		} else {
 			state.acceptActualType(primitiveVoid, ConformanceFlags.EXPLICIT_VOID_RETURN);
@@ -1012,15 +1012,21 @@ public class XbaseTypeComputer extends AbstractTypeComputer implements ITypeComp
 		return false;
 	}
 
-	protected void checkNestedReturn(XExpression returnValue, ITypeComputationState expressionState) {
+	protected void checkValidReturnExpression(XExpression returnValue, ITypeComputationState expressionState) {
 		ITypeComputationResult result = expressionState.computeTypes(returnValue);
 		LightweightTypeReference actualType = result.getActualExpressionType();
 		int conformanceFlags = result.getConformanceFlags();
 		if (actualType.isPrimitiveVoid() && (conformanceFlags & ConformanceFlags.NO_IMPLICIT_RETURN) != 0) {
+			String message = "Invalid return's expression.";
+			if (returnValue instanceof XReturnExpression) {
+				// when the return's expression is directory a return
+				// we provide a more detailed error
+				message = "Return cannot be nested.";
+			}
 			expressionState.addDiagnostic(new EObjectDiagnosticImpl(
 					Severity.ERROR,
 					IssueCodes.INVALID_RETURN,
-					"Return cannot be nested.",
+					message,
 					returnValue,
 					null,
 					-1,
