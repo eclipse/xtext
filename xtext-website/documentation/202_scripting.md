@@ -52,10 +52,10 @@ import "http://www.eclipse.org/xtext/xbase/Xbase"
 
 Script returns XBlockExpression:
 	{Script}
-	(expressions+=XExpressionInsideBlock ';'?)*;
+	(expressions+=XExpressionOrVarDeclaration ';'?)*;
 ```
 
-The main rule *Script* is defined to produce an object of type `Script`, which is a subtype of `XBlockExpression`. A block expression simply contains any number of expressions. The rule `XExpressionInsideBlock` is defined in the Xbase grammar. Usually block expressions are surrounded by curly braces, but of course we do not want to force anybody to write curly braces at the beginning and the end of a simple script.
+The main rule *Script* is defined to produce an object of type `Script`, which is a subtype of `XBlockExpression`. A block expression simply contains any number of expressions. The rule `XExpressionOrVarDeclaration` is defined in the Xbase grammar. Usually block expressions are surrounded by curly braces, but of course we do not want to force anybody to write curly braces at the beginning and the end of a simple script.
 
 ## Translation to Java {#scripting-inferrer}
 

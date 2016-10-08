@@ -414,7 +414,7 @@ Instead one has to rewrite such left-recursive rules by "left-factoring" them:
 
 ```xtext
 Expression:
-    TerminalExpression ('+' TerminalExpression)?;
+    TerminalExpression ('+' TerminalExpression)*;
  
 TerminalExpression:
     '(' Expression ')' |
@@ -425,7 +425,7 @@ In practice this is always the same pattern and therefore not too difficult. How
 
 ```xtext
 Expression:
-    {Operation} left=TerminalExpression (op='+' right=TerminalExpression)?;
+    {Operation} left=TerminalExpression (ops+='+' rights+=TerminalExpression)*
  
 TerminalExpression returns Expression:
     '(' Expression ')' |
@@ -449,7 +449,7 @@ Typically one would only want to have one instance of *IntLiteral* instead. This
 ```xtext
 Expression:
     TerminalExpression ({Operation.left=current} 
-    op='+' right=Expression)?;
+    op='+' right=TerminalExpression)*
  
 TerminalExpression returns Expression:
     '(' Expression ')' |

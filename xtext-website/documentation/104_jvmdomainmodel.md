@@ -276,7 +276,7 @@ Let's go through the code to get an idea of what is going on. (Please also refer
 
 1.  ```xtend
     def dispatch void infer(Entity element, 
-            IAcceptor<JvmDeclaredType> acceptor, 
+            IJvmDeclaredTypeAcceptor acceptor, 
             boolean isPrelinkingPhase) {
     ```
 

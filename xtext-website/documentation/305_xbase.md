@@ -233,6 +233,12 @@ Xbase ships with an interpreter and a compiler that produces Java code. Thus, it
 
 ### Making Your Grammar Refer To Xbase
 
+To use Xbase expressions let your Grammar extend the Xbase grammar.
+
+```xtext
+grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.xbase.Xbase
+```
+
 If you want to refer to [EClassifiers]({{site.src.emf}}/plugins/org.eclipse.emf.ecore/src/org/eclipse/emf/ecore/EClassifier.java) from the Xbase model, you need to import Xbase first:
 
 ```xtext

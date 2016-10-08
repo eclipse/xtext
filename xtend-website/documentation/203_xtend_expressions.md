@@ -689,7 +689,7 @@ Checked exceptions that are thrown in the body of a lambda expression but not de
 
 ## Anonymous Classes {#anonymous-classes}
 
-An anonymous class in Xtend has the very same semantics as in Java (see [Java Language Sepcification](http://docs.oracle.com/javase/specs/jls/se7/html/jls-15.html#jls-15.9.5)). Here's an example:
+An anonymous class in Xtend has the very same semantics as in Java (see [Java Language Specification](http://docs.oracle.com/javase/specs/jls/se7/html/jls-15.html#jls-15.9.5)). Here's an example:
 
 ```xtend
 val tabListener = new ActionBar.TabListener() {

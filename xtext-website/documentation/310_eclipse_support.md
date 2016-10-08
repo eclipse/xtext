@@ -117,21 +117,21 @@ It is important to know that, for a given offset in a model file, many possible 
 
 To provide a dummy proposal for the code of an `event` instance, you may introduce a specialization of the generated method and implement it as follows. This will propose `ZonkID` for an event with the name `Zonk`.
 
-```java
-public void completeEvent_Code(
+```xtend
+override void completeEvent_Code(
   Event event, Assignment assignment, 
   ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
   // call implementation of superclass
-  super.completeEvent_Code(model, assignment, context, acceptor);
+  super.completeEvent_Code(model, assignment, context, acceptor)
 
   // compute the plain proposal
-  String proposal = event.getName() + "ID";
+  val String proposal = event.getName() + "ID"
 
   // Create and register the completion proposal:
   // The proposal may be null as the createCompletionProposal(..) 
   // methods check for valid prefixes and terminal token conflicts.
   // The acceptor handles null-values gracefully.
-  acceptor.accept(createCompletionProposal(proposal, context));
+  acceptor.accept(createCompletionProposal(proposal, context))
 }
 ```
 
@@ -399,12 +399,12 @@ public class FilterOperationsContribution
     action.setText("Hide operations");
     action.setDescription("Hide operations");
     action.setToolTipText("Hide operations");
-    action.setImageDescriptor(getImageDescriptor());
+    action.setImageDescriptor(getImageDescriptor("Operation.gif"));
   }
 
   protected ImageDescriptor getImageDescriptor(String imagePath) {
     return ImageDescriptor.createFromImage(
-      imageHelper.getImage("Operation.gif"));
+      imageHelper.getImage(imagePath));
   }
 
   
