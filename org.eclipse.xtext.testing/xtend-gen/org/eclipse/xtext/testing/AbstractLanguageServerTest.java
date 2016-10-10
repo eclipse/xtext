@@ -555,8 +555,8 @@ public abstract class AbstractLanguageServerTest implements Consumer<PublishDiag
     return _xblockexpression;
   }
   
-  protected String _toExpectation(final DocumentHighlightKind it) {
-    String _string = it.toString();
+  protected String _toExpectation(final DocumentHighlightKind kind) {
+    String _string = kind.toString();
     String _substring = _string.substring(0, 1);
     return _substring.toUpperCase();
   }
@@ -587,10 +587,17 @@ public abstract class AbstractLanguageServerTest implements Consumer<PublishDiag
       List<? extends CompletionItem> _sortBy = IterableExtensions.sortBy(_items_1, _function_1);
       List<? extends CompletionItem> _list = IterableExtensions.toList(_sortBy);
       Assert.assertEquals(_items, _list);
-      List<? extends CompletionItem> _items_2 = list.getItems();
-      final String actualCompletionItems = this.toExpectation(_items_2);
-      String _expectedCompletionItems = configuration.getExpectedCompletionItems();
-      this.assertEquals(_expectedCompletionItems, actualCompletionItems);
+      Procedure1<? super CompletionList> _assertCompletionList = configuration.getAssertCompletionList();
+      boolean _tripleNotEquals = (_assertCompletionList != null);
+      if (_tripleNotEquals) {
+        Procedure1<? super CompletionList> _assertCompletionList_1 = configuration.getAssertCompletionList();
+        _assertCompletionList_1.apply(list);
+      } else {
+        List<? extends CompletionItem> _items_2 = list.getItems();
+        final String actualCompletionItems = this.toExpectation(_items_2);
+        String _expectedCompletionItems = configuration.getExpectedCompletionItems();
+        this.assertEquals(_expectedCompletionItems, actualCompletionItems);
+      }
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -651,11 +658,18 @@ public abstract class AbstractLanguageServerTest implements Consumer<PublishDiag
       };
       TextDocumentPositionParamsBuilder _textDocumentPositionParamsBuilder = new TextDocumentPositionParamsBuilder(_function);
       TextDocumentPositionParams _build = _textDocumentPositionParamsBuilder.build();
-      final CompletableFuture<List<? extends Location>> definitions = this.languageServer.definition(_build);
-      List<? extends Location> _get = definitions.get();
-      final String actualDefinitions = this.toExpectation(_get);
-      String _expectedDefinitions = configuration.getExpectedDefinitions();
-      this.assertEquals(_expectedDefinitions, actualDefinitions);
+      final CompletableFuture<List<? extends Location>> definitionsFuture = this.languageServer.definition(_build);
+      final List<? extends Location> definitions = definitionsFuture.get();
+      Procedure1<? super List<? extends Location>> _assertDefinitions = configuration.getAssertDefinitions();
+      boolean _tripleNotEquals = (_assertDefinitions != null);
+      if (_tripleNotEquals) {
+        Procedure1<? super List<? extends Location>> _assertDefinitions_1 = configuration.getAssertDefinitions();
+        _assertDefinitions_1.apply(definitions);
+      } else {
+        final String actualDefinitions = this.toExpectation(definitions);
+        String _expectedDefinitions = configuration.getExpectedDefinitions();
+        this.assertEquals(_expectedDefinitions, actualDefinitions);
+      }
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -677,11 +691,18 @@ public abstract class AbstractLanguageServerTest implements Consumer<PublishDiag
       };
       TextDocumentPositionParamsBuilder _textDocumentPositionParamsBuilder = new TextDocumentPositionParamsBuilder(_function);
       TextDocumentPositionParams _build = _textDocumentPositionParamsBuilder.build();
-      final CompletableFuture<Hover> hover = this.languageServer.hover(_build);
-      Hover _get = hover.get();
-      final String actualHover = this.toExpectation(_get);
-      String _expectedHover = configuration.getExpectedHover();
-      this.assertEquals(_expectedHover, actualHover);
+      final CompletableFuture<Hover> hoverFuture = this.languageServer.hover(_build);
+      final Hover hover = hoverFuture.get();
+      Procedure1<? super Hover> _assertHover = configuration.getAssertHover();
+      boolean _tripleNotEquals = (_assertHover != null);
+      if (_tripleNotEquals) {
+        Procedure1<? super Hover> _assertHover_1 = configuration.getAssertHover();
+        _assertHover_1.apply(hover);
+      } else {
+        final String actualHover = this.toExpectation(hover);
+        String _expectedHover = configuration.getExpectedHover();
+        this.assertEquals(_expectedHover, actualHover);
+      }
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -703,13 +724,20 @@ public abstract class AbstractLanguageServerTest implements Consumer<PublishDiag
       };
       TextDocumentPositionParamsBuilder _textDocumentPositionParamsBuilder = new TextDocumentPositionParamsBuilder(_function);
       TextDocumentPositionParams _build = _textDocumentPositionParamsBuilder.build();
-      final CompletableFuture<SignatureHelp> signatureHelps = this.languageServer.signatureHelp(_build);
-      SignatureHelp _get = signatureHelps.get();
-      final String actualSignatureHelp = this.toExpectation(_get);
-      String _expectedSignatureHelp = configuration.getExpectedSignatureHelp();
-      String _trim = _expectedSignatureHelp.trim();
-      String _trim_1 = actualSignatureHelp.trim();
-      this.assertEquals(_trim, _trim_1);
+      final CompletableFuture<SignatureHelp> signatureHelpFuture = this.languageServer.signatureHelp(_build);
+      final SignatureHelp signatureHelp = signatureHelpFuture.get();
+      Procedure1<? super SignatureHelp> _assertSignatureHelp = configuration.getAssertSignatureHelp();
+      boolean _tripleNotEquals = (_assertSignatureHelp != null);
+      if (_tripleNotEquals) {
+        Procedure1<? super SignatureHelp> _assertSignatureHelp_1 = configuration.getAssertSignatureHelp();
+        _assertSignatureHelp_1.apply(signatureHelp);
+      } else {
+        final String actualSignatureHelp = this.toExpectation(signatureHelp);
+        String _expectedSignatureHelp = configuration.getExpectedSignatureHelp();
+        String _trim = _expectedSignatureHelp.trim();
+        String _trim_1 = actualSignatureHelp.trim();
+        this.assertEquals(_trim, _trim_1);
+      }
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -761,11 +789,18 @@ public abstract class AbstractLanguageServerTest implements Consumer<PublishDiag
       final String fileUri = _initializeContext.getUri();
       TextDocumentIdentifierImpl _textDocumentIdentifierImpl = new TextDocumentIdentifierImpl(fileUri);
       DocumentSymbolParamsImpl _documentSymbolParamsImpl = new DocumentSymbolParamsImpl(_textDocumentIdentifierImpl);
-      final CompletableFuture<List<? extends SymbolInformation>> symbols = this.languageServer.documentSymbol(_documentSymbolParamsImpl);
-      List<? extends SymbolInformation> _get = symbols.get();
-      final String actualSymbols = this.toExpectation(_get);
-      String _expectedSymbols = configuration.getExpectedSymbols();
-      this.assertEquals(_expectedSymbols, actualSymbols);
+      final CompletableFuture<List<? extends SymbolInformation>> symbolsFuture = this.languageServer.documentSymbol(_documentSymbolParamsImpl);
+      final List<? extends SymbolInformation> symbols = symbolsFuture.get();
+      Procedure1<? super List<? extends SymbolInformation>> _assertSymbols = configuration.getAssertSymbols();
+      boolean _tripleNotEquals = (_assertSymbols != null);
+      if (_tripleNotEquals) {
+        Procedure1<? super List<? extends SymbolInformation>> _assertSymbols_1 = configuration.getAssertSymbols();
+        _assertSymbols_1.apply(symbols);
+      } else {
+        final String actualSymbols = this.toExpectation(symbols);
+        String _expectedSymbols = configuration.getExpectedSymbols();
+        this.assertEquals(_expectedSymbols, actualSymbols);
+      }
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -782,9 +817,16 @@ public abstract class AbstractLanguageServerTest implements Consumer<PublishDiag
       WorkspaceSymbolParamsImpl _workspaceSymbolParamsImpl = new WorkspaceSymbolParamsImpl(_query);
       CompletableFuture<List<? extends SymbolInformation>> _symbol = this.languageServer.symbol(_workspaceSymbolParamsImpl);
       final List<? extends SymbolInformation> symbols = _symbol.get();
-      final String actualSymbols = this.toExpectation(symbols);
-      String _expectedSymbols = configuration.getExpectedSymbols();
-      this.assertEquals(_expectedSymbols, actualSymbols);
+      Procedure1<? super List<? extends SymbolInformation>> _assertSymbols = configuration.getAssertSymbols();
+      boolean _tripleNotEquals = (_assertSymbols != null);
+      if (_tripleNotEquals) {
+        Procedure1<? super List<? extends SymbolInformation>> _assertSymbols_1 = configuration.getAssertSymbols();
+        _assertSymbols_1.apply(symbols);
+      } else {
+        final String actualSymbols = this.toExpectation(symbols);
+        String _expectedSymbols = configuration.getExpectedSymbols();
+        this.assertEquals(_expectedSymbols, actualSymbols);
+      }
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -808,11 +850,18 @@ public abstract class AbstractLanguageServerTest implements Consumer<PublishDiag
       };
       ReferenceParamsBuilder _referenceParamsBuilder = new ReferenceParamsBuilder(_function);
       ReferenceParams _build = _referenceParamsBuilder.build();
-      final CompletableFuture<List<? extends Location>> definitions = this.languageServer.references(_build);
-      List<? extends Location> _get = definitions.get();
-      final String actualDefinitions = this.toExpectation(_get);
-      String _expectedReferences = configuration.getExpectedReferences();
-      this.assertEquals(_expectedReferences, actualDefinitions);
+      final CompletableFuture<List<? extends Location>> referencesFuture = this.languageServer.references(_build);
+      final List<? extends Location> references = referencesFuture.get();
+      Procedure1<? super List<? extends Location>> _assertReferences = configuration.getAssertReferences();
+      boolean _tripleNotEquals = (_assertReferences != null);
+      if (_tripleNotEquals) {
+        Procedure1<? super List<? extends Location>> _assertReferences_1 = configuration.getAssertReferences();
+        _assertReferences_1.apply(references);
+      } else {
+        final String actualReferences = this.toExpectation(references);
+        String _expectedReferences = configuration.getExpectedReferences();
+        this.assertEquals(_expectedReferences, actualReferences);
+      }
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -882,36 +931,36 @@ public abstract class AbstractLanguageServerTest implements Consumer<PublishDiag
     }
   }
   
-  protected String toExpectation(final Object it) {
-    if (it instanceof DocumentHighlightKind) {
-      return _toExpectation((DocumentHighlightKind)it);
-    } else if (it instanceof List) {
-      return _toExpectation((List<?>)it);
-    } else if (it instanceof CompletionItem) {
-      return _toExpectation((CompletionItem)it);
-    } else if (it instanceof DocumentHighlight) {
-      return _toExpectation((DocumentHighlight)it);
-    } else if (it instanceof Hover) {
-      return _toExpectation((Hover)it);
-    } else if (it instanceof Location) {
-      return _toExpectation((Location)it);
-    } else if (it instanceof MarkedString) {
-      return _toExpectation((MarkedString)it);
-    } else if (it instanceof Position) {
-      return _toExpectation((Position)it);
-    } else if (it instanceof Range) {
-      return _toExpectation((Range)it);
-    } else if (it instanceof SignatureHelp) {
-      return _toExpectation((SignatureHelp)it);
-    } else if (it instanceof SymbolInformation) {
-      return _toExpectation((SymbolInformation)it);
-    } else if (it instanceof TextEdit) {
-      return _toExpectation((TextEdit)it);
-    } else if (it == null) {
+  protected String toExpectation(final Object kind) {
+    if (kind instanceof DocumentHighlightKind) {
+      return _toExpectation((DocumentHighlightKind)kind);
+    } else if (kind instanceof List) {
+      return _toExpectation((List<?>)kind);
+    } else if (kind instanceof CompletionItem) {
+      return _toExpectation((CompletionItem)kind);
+    } else if (kind instanceof DocumentHighlight) {
+      return _toExpectation((DocumentHighlight)kind);
+    } else if (kind instanceof Hover) {
+      return _toExpectation((Hover)kind);
+    } else if (kind instanceof Location) {
+      return _toExpectation((Location)kind);
+    } else if (kind instanceof MarkedString) {
+      return _toExpectation((MarkedString)kind);
+    } else if (kind instanceof Position) {
+      return _toExpectation((Position)kind);
+    } else if (kind instanceof Range) {
+      return _toExpectation((Range)kind);
+    } else if (kind instanceof SignatureHelp) {
+      return _toExpectation((SignatureHelp)kind);
+    } else if (kind instanceof SymbolInformation) {
+      return _toExpectation((SymbolInformation)kind);
+    } else if (kind instanceof TextEdit) {
+      return _toExpectation((TextEdit)kind);
+    } else if (kind == null) {
       return _toExpectation((Void)null);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
-        Arrays.<Object>asList(it).toString());
+        Arrays.<Object>asList(kind).toString());
     }
   }
   

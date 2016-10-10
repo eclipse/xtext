@@ -451,7 +451,7 @@ public class EpatchTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, EpatchTestLanguagePackage.Literals.OBJECT_COPY__FRAGMENT));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getObjectCopyAccess().getResourceNamedResourceIDTerminalRuleCall_1_0_1(), semanticObject.getResource());
+		feeder.accept(grammarAccess.getObjectCopyAccess().getResourceNamedResourceIDTerminalRuleCall_1_0_1(), semanticObject.eGet(EpatchTestLanguagePackage.Literals.OBJECT_COPY__RESOURCE, false));
 		feeder.accept(grammarAccess.getObjectCopyAccess().getFragmentFRAGMENTTerminalRuleCall_2_0(), semanticObject.getFragment());
 		feeder.finish();
 	}
@@ -472,7 +472,7 @@ public class EpatchTestLanguageSemanticSequencer extends AbstractDelegatingSeman
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, EpatchTestLanguagePackage.Literals.OBJECT_NEW__IMP_FRAG));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getObjectNewAccess().getImportImportIDTerminalRuleCall_1_0_1(), semanticObject.getImport());
+		feeder.accept(grammarAccess.getObjectNewAccess().getImportImportIDTerminalRuleCall_1_0_1(), semanticObject.eGet(EpatchTestLanguagePackage.Literals.OBJECT_NEW__IMPORT, false));
 		feeder.accept(grammarAccess.getObjectNewAccess().getImpFragFRAGMENTTerminalRuleCall_2_0(), semanticObject.getImpFrag());
 		feeder.finish();
 	}

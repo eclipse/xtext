@@ -139,7 +139,10 @@ class GenModelUtil2 {
 	}
 
 	def static String getFeatureLiteral(EStructuralFeature feature, ResourceSet resourceSet) {
-		val genFeature = getGenFeature(feature, resourceSet)
+		return getFeatureLiteral(getGenFeature(feature, resourceSet), resourceSet)
+	}
+	
+	def static String getFeatureLiteral(GenFeature genFeature, ResourceSet resourceSet) {
 		if (genFeature.genPackage.isLiteralsInterface)
 			return 'Literals.' + genFeature.genClass.getFeatureID(genFeature)
 		else
@@ -155,7 +158,10 @@ class GenModelUtil2 {
 	}
 	
 	def static String getGetAccessor(EStructuralFeature feature, ResourceSet resourceSet) {
-		val genFeature = getGenFeature(feature, resourceSet)
+		return getGetAccessor(getGenFeature(feature, resourceSet), resourceSet)
+	}
+	
+	def static String getGetAccessor(GenFeature genFeature, ResourceSet resourceSet) {
 		val genClass = genFeature.genClass
 		if (genClass.isMapEntry) {
 			if (genFeature == genClass.mapEntryKeyFeature)

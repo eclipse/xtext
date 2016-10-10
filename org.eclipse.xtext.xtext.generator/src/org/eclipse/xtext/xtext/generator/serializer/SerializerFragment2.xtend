@@ -17,6 +17,8 @@ import java.util.Set
 import org.eclipse.emf.ecore.EClass
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.EPackage
+import org.eclipse.emf.ecore.EStructuralFeature
+import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend2.lib.StringConcatenationClient
 import org.eclipse.xtext.AbstractElement
@@ -53,6 +55,7 @@ import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer
 import org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService
 import org.eclipse.xtext.util.Strings
+import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.xtext.generator.AbstractStubGeneratingFragment
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
 import org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessExtensions
@@ -66,7 +69,6 @@ import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.serializer.analysis.SerializationContext.*
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 import static extension org.eclipse.xtext.xtext.generator.util.GenModelUtil2.*
-import org.eclipse.xtext.util.internal.Log
 
 @Log class SerializerFragment2 extends AbstractStubGeneratingFragment {
 	
@@ -409,7 +411,7 @@ import org.eclipse.xtext.util.internal.Log
 					}
 					«SequenceFeeder» feeder = createSequencerFeeder(context, «cast»semanticObject);
 					«FOR f: states»
-						feeder.accept(grammarAccess.«f.assignedGrammarElement.gaAccessor()», semanticObject.«f.feature.getGetAccessor(rs)»());
+						feeder.accept(grammarAccess.«f.assignedGrammarElement.gaAccessor()», semanticObject.«f.feature.getUnresolvingGetAccessor(rs)»);
 					«ENDFOR»
 					feeder.finish();
 				«ELSE»
@@ -424,6 +426,15 @@ import org.eclipse.xtext.util.internal.Log
 				}
 			«ENDIF»
 		'''
+	}
+	
+	def private StringConcatenationClient getUnresolvingGetAccessor(EStructuralFeature feature, ResourceSet resourceSet) {
+		val genFeature = getGenFeature(feature, resourceSet)
+		if(genFeature.isResolveProxies) {
+			return '''eGet(«genFeature.genPackage.getEcorePackage».«getFeatureLiteral(genFeature, resourceSet)», false)'''
+		} else {
+			return '''«getGetAccessor(genFeature, resourceSet)»()'''
+		}
 	}
 	
 	protected def generateAbstractSyntacticSequencer() {

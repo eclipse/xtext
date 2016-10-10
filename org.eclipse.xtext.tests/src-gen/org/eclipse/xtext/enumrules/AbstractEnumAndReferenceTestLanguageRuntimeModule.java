@@ -79,7 +79,7 @@ public abstract class AbstractEnumAndReferenceTestLanguageRuntimeModule extends 
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalEnumAndReferenceTestLanguageLexer> provideInternalEnumAndReferenceTestLanguageLexer() {
+	public Provider<? extends InternalEnumAndReferenceTestLanguageLexer> provideInternalEnumAndReferenceTestLanguageLexer() {
 		return LexerProvider.create(InternalEnumAndReferenceTestLanguageLexer.class);
 	}
 	

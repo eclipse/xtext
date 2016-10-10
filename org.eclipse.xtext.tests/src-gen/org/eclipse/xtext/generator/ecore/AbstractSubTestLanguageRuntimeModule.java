@@ -79,7 +79,7 @@ public abstract class AbstractSubTestLanguageRuntimeModule extends DefaultRuntim
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalSubTestLanguageLexer> provideInternalSubTestLanguageLexer() {
+	public Provider<? extends InternalSubTestLanguageLexer> provideInternalSubTestLanguageLexer() {
 		return LexerProvider.create(InternalSubTestLanguageLexer.class);
 	}
 	

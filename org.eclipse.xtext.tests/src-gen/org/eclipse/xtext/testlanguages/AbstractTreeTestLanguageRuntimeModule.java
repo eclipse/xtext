@@ -79,7 +79,7 @@ public abstract class AbstractTreeTestLanguageRuntimeModule extends DefaultRunti
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalTreeTestLanguageLexer> provideInternalTreeTestLanguageLexer() {
+	public Provider<? extends InternalTreeTestLanguageLexer> provideInternalTreeTestLanguageLexer() {
 		return LexerProvider.create(InternalTreeTestLanguageLexer.class);
 	}
 	

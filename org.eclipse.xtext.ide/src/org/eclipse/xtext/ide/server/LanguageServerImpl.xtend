@@ -306,7 +306,7 @@ import org.eclipse.xtext.ide.server.occurrences.IDocumentHighlightService
                 val completionItems = newArrayList
                 acceptor.getEntries().forEach[it, idx|
                     val item = toCompletionItem(caretOffset, caretPosition, document)
-                    item.sortText = Strings.padStart(''+idx, 5, "0")
+                    item.sortText = Strings.padStart(Integer.toString(idx), 5, "0")
                     completionItems += item
                 ]
                 return completionItems

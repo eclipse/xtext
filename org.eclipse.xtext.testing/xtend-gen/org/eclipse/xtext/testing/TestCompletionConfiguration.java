@@ -7,14 +7,18 @@
  */
 package org.eclipse.xtext.testing;
 
+import io.typefox.lsapi.CompletionList;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.testing.TextDocumentPositionConfiguration;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 @Accessors
 @SuppressWarnings("all")
 public class TestCompletionConfiguration extends TextDocumentPositionConfiguration {
   private String expectedCompletionItems = "";
+  
+  private Procedure1<? super CompletionList> assertCompletionList = null;
   
   @Pure
   public String getExpectedCompletionItems() {
@@ -23,5 +27,14 @@ public class TestCompletionConfiguration extends TextDocumentPositionConfigurati
   
   public void setExpectedCompletionItems(final String expectedCompletionItems) {
     this.expectedCompletionItems = expectedCompletionItems;
+  }
+  
+  @Pure
+  public Procedure1<? super CompletionList> getAssertCompletionList() {
+    return this.assertCompletionList;
+  }
+  
+  public void setAssertCompletionList(final Procedure1<? super CompletionList> assertCompletionList) {
+    this.assertCompletionList = assertCompletionList;
   }
 }

@@ -79,7 +79,7 @@ public abstract class AbstractBaseInheritanceTestLanguageRuntimeModule extends D
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalBaseInheritanceTestLanguageLexer> provideInternalBaseInheritanceTestLanguageLexer() {
+	public Provider<? extends InternalBaseInheritanceTestLanguageLexer> provideInternalBaseInheritanceTestLanguageLexer() {
 		return LexerProvider.create(InternalBaseInheritanceTestLanguageLexer.class);
 	}
 	

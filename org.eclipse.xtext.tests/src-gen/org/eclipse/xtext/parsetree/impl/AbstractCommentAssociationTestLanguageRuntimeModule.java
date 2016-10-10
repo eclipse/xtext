@@ -79,7 +79,7 @@ public abstract class AbstractCommentAssociationTestLanguageRuntimeModule extend
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalCommentAssociationTestLanguageLexer> provideInternalCommentAssociationTestLanguageLexer() {
+	public Provider<? extends InternalCommentAssociationTestLanguageLexer> provideInternalCommentAssociationTestLanguageLexer() {
 		return LexerProvider.create(InternalCommentAssociationTestLanguageLexer.class);
 	}
 	

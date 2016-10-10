@@ -79,7 +79,7 @@ public abstract class AbstractGrammarAccessTestLanguageRuntimeModule extends Def
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalGrammarAccessTestLanguageLexer> provideInternalGrammarAccessTestLanguageLexer() {
+	public Provider<? extends InternalGrammarAccessTestLanguageLexer> provideInternalGrammarAccessTestLanguageLexer() {
 		return LexerProvider.create(InternalGrammarAccessTestLanguageLexer.class);
 	}
 	

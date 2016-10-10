@@ -79,7 +79,7 @@ public abstract class AbstractSerializationErrorTestLanguageRuntimeModule extend
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalSerializationErrorTestLanguageLexer> provideInternalSerializationErrorTestLanguageLexer() {
+	public Provider<? extends InternalSerializationErrorTestLanguageLexer> provideInternalSerializationErrorTestLanguageLexer() {
 		return LexerProvider.create(InternalSerializationErrorTestLanguageLexer.class);
 	}
 	

@@ -86,7 +86,7 @@ public abstract class AbstractIgnoreCaseNamespacesTestLanguageRuntimeModule exte
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalIgnoreCaseNamespacesTestLanguageLexer> provideInternalIgnoreCaseNamespacesTestLanguageLexer() {
+	public Provider<? extends InternalIgnoreCaseNamespacesTestLanguageLexer> provideInternalIgnoreCaseNamespacesTestLanguageLexer() {
 		return LexerProvider.create(InternalIgnoreCaseNamespacesTestLanguageLexer.class);
 	}
 	

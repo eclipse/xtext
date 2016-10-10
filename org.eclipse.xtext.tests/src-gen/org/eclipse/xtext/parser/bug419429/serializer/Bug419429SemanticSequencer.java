@@ -53,7 +53,7 @@ public class Bug419429SemanticSequencer extends AbstractDelegatingSemanticSequen
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, EcorePackage.Literals.ETYPED_ELEMENT__ETYPE));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getEReferenceAccess().getETypeEClassifierIDTerminalRuleCall_0_1(), semanticObject.getEType());
+		feeder.accept(grammarAccess.getEReferenceAccess().getETypeEClassifierIDTerminalRuleCall_0_1(), semanticObject.eGet(EcorePackage.Literals.ETYPED_ELEMENT__ETYPE, false));
 		feeder.finish();
 	}
 	

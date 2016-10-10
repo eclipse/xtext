@@ -79,7 +79,7 @@ public abstract class AbstractIndentationAwareTestLanguageRuntimeModule extends 
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalIndentationAwareTestLanguageLexer> provideInternalIndentationAwareTestLanguageLexer() {
+	public Provider<? extends InternalIndentationAwareTestLanguageLexer> provideInternalIndentationAwareTestLanguageLexer() {
 		return LexerProvider.create(InternalIndentationAwareTestLanguageLexer.class);
 	}
 	

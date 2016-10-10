@@ -80,7 +80,7 @@ public abstract class AbstractSequencerTestLanguageRuntimeModule extends Default
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalSequencerTestLanguageLexer> provideInternalSequencerTestLanguageLexer() {
+	public Provider<? extends InternalSequencerTestLanguageLexer> provideInternalSequencerTestLanguageLexer() {
 		return LexerProvider.create(InternalSequencerTestLanguageLexer.class);
 	}
 	

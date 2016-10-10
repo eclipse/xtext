@@ -21,7 +21,10 @@ import com.google.common.collect.Lists;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
+ * 
+ * @deprecated use {@link org.eclipse.xtext.serializer.sequencer.EmitterNodeUtil}
  */
+@Deprecated
 public class EmitterNodeIterator implements Iterator<INode> {
 
 	protected NodeIterator iterator;

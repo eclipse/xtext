@@ -79,7 +79,7 @@ public abstract class AbstractImportUriTestLanguageRuntimeModule extends Default
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalImportUriTestLanguageLexer> provideInternalImportUriTestLanguageLexer() {
+	public Provider<? extends InternalImportUriTestLanguageLexer> provideInternalImportUriTestLanguageLexer() {
 		return LexerProvider.create(InternalImportUriTestLanguageLexer.class);
 	}
 	

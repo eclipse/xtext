@@ -10,7 +10,6 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug250313.ecore#//Model/value"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug250313.ecore#//Model/multiValue"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug250313.ecore#//Model/children"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Bug250313.ecore#//Model/ref"/>
     </genClasses>
     <genClasses ecoreClass="Bug250313.ecore#//Child">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug250313.ecore#//Child/name"/>

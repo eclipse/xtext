@@ -108,7 +108,7 @@ public class Bug250313SemanticSequencer extends AbstractDelegatingSemanticSequen
 	 *         multiValue+=Datatype | 
 	 *         value=NestedDatatype | 
 	 *         multiValue+=NestedDatatype | 
-	 *         (children=Child (ref=[Child1|STRING] | ref=[Child2|ID])?)
+	 *         children=Child
 	 *     )
 	 */
 	protected void sequence_Model(ISerializationContext context, Model semanticObject) {

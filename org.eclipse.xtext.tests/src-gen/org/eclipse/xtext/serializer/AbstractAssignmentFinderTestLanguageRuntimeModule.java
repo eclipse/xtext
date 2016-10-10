@@ -78,7 +78,7 @@ public abstract class AbstractAssignmentFinderTestLanguageRuntimeModule extends 
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalAssignmentFinderTestLanguageLexer> provideInternalAssignmentFinderTestLanguageLexer() {
+	public Provider<? extends InternalAssignmentFinderTestLanguageLexer> provideInternalAssignmentFinderTestLanguageLexer() {
 		return LexerProvider.create(InternalAssignmentFinderTestLanguageLexer.class);
 	}
 	

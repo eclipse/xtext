@@ -485,7 +485,8 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
           Iterable<ContentAssistEntry> _entries = acceptor.getEntries();
           final Procedure2<ContentAssistEntry, Integer> _function_2 = (ContentAssistEntry it, Integer idx) -> {
             final CompletionItemImpl item = this.toCompletionItem(it, caretOffset, caretPosition, document);
-            String _padStart = Strings.padStart(("" + idx), 5, '0');
+            String _string = Integer.toString((idx).intValue());
+            String _padStart = Strings.padStart(_string, 5, '0');
             item.setSortText(_padStart);
             completionItems.add(item);
           };

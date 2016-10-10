@@ -79,7 +79,7 @@ public abstract class AbstractTerminalRulesTestLanguageRuntimeModule extends Def
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalTerminalRulesTestLanguageLexer> provideInternalTerminalRulesTestLanguageLexer() {
+	public Provider<? extends InternalTerminalRulesTestLanguageLexer> provideInternalTerminalRulesTestLanguageLexer() {
 		return LexerProvider.create(InternalTerminalRulesTestLanguageLexer.class);
 	}
 	

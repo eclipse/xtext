@@ -81,7 +81,7 @@ public abstract class AbstractExBacktrackingBug325745TestLanguageRuntimeModule e
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalExBacktrackingBug325745TestLanguageLexer> provideInternalExBacktrackingBug325745TestLanguageLexer() {
+	public Provider<? extends InternalExBacktrackingBug325745TestLanguageLexer> provideInternalExBacktrackingBug325745TestLanguageLexer() {
 		return LexerProvider.create(InternalExBacktrackingBug325745TestLanguageLexer.class);
 	}
 	

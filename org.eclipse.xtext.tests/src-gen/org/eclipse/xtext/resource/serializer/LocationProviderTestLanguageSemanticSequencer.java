@@ -226,8 +226,8 @@ public class LocationProviderTestLanguageSemanticSequencer extends AbstractDeleg
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getTransitionAccess().getNameIDTerminalRuleCall_0_0(), semanticObject.getName());
-		feeder.accept(grammarAccess.getTransitionAccess().getSourceModeIDTerminalRuleCall_2_0_1(), semanticObject.getSource());
-		feeder.accept(grammarAccess.getTransitionAccess().getDestinationModeIDTerminalRuleCall_4_0_1(), semanticObject.getDestination());
+		feeder.accept(grammarAccess.getTransitionAccess().getSourceModeIDTerminalRuleCall_2_0_1(), semanticObject.eGet(LocationprovidertestPackage.Literals.TRANSITION__SOURCE, false));
+		feeder.accept(grammarAccess.getTransitionAccess().getDestinationModeIDTerminalRuleCall_4_0_1(), semanticObject.eGet(LocationprovidertestPackage.Literals.TRANSITION__DESTINATION, false));
 		feeder.finish();
 	}
 	

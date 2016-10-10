@@ -79,7 +79,7 @@ public abstract class AbstractRegionAccessTestLanguageRuntimeModule extends Defa
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalRegionAccessTestLanguageLexer> provideInternalRegionAccessTestLanguageLexer() {
+	public Provider<? extends InternalRegionAccessTestLanguageLexer> provideInternalRegionAccessTestLanguageLexer() {
 		return LexerProvider.create(InternalRegionAccessTestLanguageLexer.class);
 	}
 	

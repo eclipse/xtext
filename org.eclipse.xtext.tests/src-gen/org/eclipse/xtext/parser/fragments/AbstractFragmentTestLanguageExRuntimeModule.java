@@ -79,7 +79,7 @@ public abstract class AbstractFragmentTestLanguageExRuntimeModule extends Defaul
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalFragmentTestLanguageExLexer> provideInternalFragmentTestLanguageExLexer() {
+	public Provider<? extends InternalFragmentTestLanguageExLexer> provideInternalFragmentTestLanguageExLexer() {
 		return LexerProvider.create(InternalFragmentTestLanguageExLexer.class);
 	}
 	

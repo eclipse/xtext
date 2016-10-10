@@ -79,7 +79,7 @@ public abstract class AbstractUnicodeTestLanguageRuntimeModule extends DefaultRu
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalUnicodeTestLanguageLexer> provideInternalUnicodeTestLanguageLexer() {
+	public Provider<? extends InternalUnicodeTestLanguageLexer> provideInternalUnicodeTestLanguageLexer() {
 		return LexerProvider.create(InternalUnicodeTestLanguageLexer.class);
 	}
 	

@@ -11,7 +11,10 @@ import com.google.inject.AbstractModule
 import com.google.inject.Guice
 import com.google.inject.Inject
 import io.typefox.lsapi.CompletionItem
+import io.typefox.lsapi.CompletionList
 import io.typefox.lsapi.Diagnostic
+import io.typefox.lsapi.DocumentHighlight
+import io.typefox.lsapi.DocumentHighlightKind
 import io.typefox.lsapi.FileChangeType
 import io.typefox.lsapi.Hover
 import io.typefox.lsapi.InitializeResult
@@ -61,8 +64,6 @@ import org.eclipse.xtext.util.Files
 import org.eclipse.xtext.util.Modules2
 import org.junit.Assert
 import org.junit.Before
-import io.typefox.lsapi.DocumentHighlight
-import io.typefox.lsapi.DocumentHighlightKind
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -252,33 +253,34 @@ abstract class AbstractLanguageServerTest implements Consumer<PublishDiagnostics
         '''«signatures.map[label].join(' | ')» | «param»''';
     }
     
-    protected dispatch def String toExpectation(DocumentHighlight it) {
+	protected dispatch def String toExpectation(DocumentHighlight it) {
     	val rangeString = '''«IF range === null»[NaN, NaN]:[NaN, NaN]«ELSE»«range.toExpectation»«ENDIF»''';
     	'''«IF kind === null»NaN«ELSE»«kind.toExpectation»«ENDIF» «rangeString»'''
     }
     
-    protected dispatch def String toExpectation(DocumentHighlightKind it) {
-    	it.toString.substring(0, 1).toUpperCase
+    protected dispatch def String toExpectation(DocumentHighlightKind kind) {
+    	return kind.toString.substring(0, 1).toUpperCase;
     }
 
     protected def void testCompletion((TestCompletionConfiguration)=>void configurator) {
         val extension configuration = new TestCompletionConfiguration
         configuration.filePath = 'MyModel.' + fileExtension
         configurator.apply(configuration)
-
         val filePath = initializeContext(configuration).uri
-
         val completionItems = languageServer.completion(new TextDocumentPositionParamsBuilder[
         	textDocument(filePath)
         	position(line, column)
         ].build)
         
-        // assert ordered by sortText
         val list = completionItems.get
+        // assert ordered by sortText
         Assert.assertEquals(list.items, list.items.sortBy[sortText].toList)
-
-        val actualCompletionItems = list.items.toExpectation
-        assertEquals(expectedCompletionItems, actualCompletionItems)
+        if (configuration.assertCompletionList !== null) {
+            configuration.assertCompletionList.apply(list)
+        } else {
+            val actualCompletionItems = list.items.toExpectation
+            assertEquals(expectedCompletionItems, actualCompletionItems)
+        }
     }
     
     protected def FileInfo initializeContext(TextDocumentConfiguration configuration) {
@@ -302,30 +304,37 @@ abstract class AbstractLanguageServerTest implements Consumer<PublishDiagnostics
         val extension configuration = new DefinitionTestConfiguration
         configuration.filePath = 'MyModel.' + fileExtension
         configurator.apply(configuration)
-
         val fileUri = initializeContext(configuration).uri
-
-        val definitions = languageServer.definition(new TextDocumentPositionParamsBuilder[
+        val definitionsFuture = languageServer.definition(new TextDocumentPositionParamsBuilder[
         	textDocument(fileUri)
         	position(line, column)
         ].build)
-        val actualDefinitions = definitions.get.toExpectation
-        assertEquals(expectedDefinitions, actualDefinitions)
+        val definitions = definitionsFuture.get
+        if (configuration.assertDefinitions !== null) {
+            configuration.assertDefinitions.apply(definitions)
+        } else {
+            val actualDefinitions = definitions.toExpectation
+            assertEquals(expectedDefinitions, actualDefinitions)
+        }
     }
 
     protected def void testHover((HoverTestConfiguration)=>void configurator) {
         val extension configuration = new HoverTestConfiguration
         configuration.filePath = 'MyModel.' + fileExtension
         configurator.apply(configuration)
-
         val fileUri = initializeContext(configuration).uri
         
-        val hover = languageServer.hover(new TextDocumentPositionParamsBuilder[
+        val hoverFuture = languageServer.hover(new TextDocumentPositionParamsBuilder[
         	textDocument(fileUri)
         	position(line, column)
         ].build)
-        val actualHover = hover.get.toExpectation
-        assertEquals(expectedHover, actualHover)
+        val hover = hoverFuture.get
+        if (configuration.assertHover !== null) {
+            configuration.assertHover.apply(hover)
+        } else {
+            val actualHover = hover.toExpectation
+            assertEquals(expectedHover, actualHover)
+        }
     }
     
     protected def testSignatureHelp((SignatureHelpConfiguration) => void configurator) {
@@ -335,13 +344,17 @@ abstract class AbstractLanguageServerTest implements Consumer<PublishDiagnostics
         
         val fileUri = initializeContext(configuration).uri
         
-        val signatureHelps = languageServer.signatureHelp(new TextDocumentPositionParamsBuilder[
+        val signatureHelpFuture = languageServer.signatureHelp(new TextDocumentPositionParamsBuilder[
             textDocument(fileUri);
             position(line, column);
         ].build);
-        
-        val actualSignatureHelp = signatureHelps.get.toExpectation
-        assertEquals(expectedSignatureHelp.trim, actualSignatureHelp.trim)
+        val signatureHelp = signatureHelpFuture.get
+        if (configuration.assertSignatureHelp !== null) {
+            configuration.assertSignatureHelp.apply(signatureHelp)
+        } else {
+            val actualSignatureHelp = signatureHelp.toExpectation
+            assertEquals(expectedSignatureHelp.trim, actualSignatureHelp.trim)
+        }
     }
     
     protected def testDocumentHighlight((DocumentHighlightConfiguration) => void configurator) {
@@ -366,10 +379,14 @@ abstract class AbstractLanguageServerTest implements Consumer<PublishDiagnostics
         configurator.apply(configuration)
         
         val fileUri = initializeContext(configuration).uri
-
-        val symbols = languageServer.documentSymbol(new DocumentSymbolParamsImpl(new TextDocumentIdentifierImpl(fileUri)))
-        val String actualSymbols = symbols.get.toExpectation
-        assertEquals(expectedSymbols, actualSymbols)
+        val symbolsFuture = languageServer.documentSymbol(new DocumentSymbolParamsImpl(new TextDocumentIdentifierImpl(fileUri)))
+        val symbols = symbolsFuture.get
+        if (configuration.assertSymbols !== null) {
+            configuration.assertSymbols.apply(symbols)
+        } else {
+            val String actualSymbols = symbols.toExpectation
+            assertEquals(expectedSymbols, actualSymbols)
+        }
     }
 
     protected def void testSymbol((WorkspaceSymbolConfiguraiton)=>void configurator) {
@@ -378,38 +395,42 @@ abstract class AbstractLanguageServerTest implements Consumer<PublishDiagnostics
         configurator.apply(configuration)
         
         initializeContext(configuration)
-
         val symbols = languageServer.symbol(new WorkspaceSymbolParamsImpl(query)).get
-        val String actualSymbols = symbols.toExpectation
-        assertEquals(expectedSymbols, actualSymbols)
+        if (configuration.assertSymbols !== null) {
+            configuration.assertSymbols.apply(symbols)
+        } else {
+            val String actualSymbols = symbols.toExpectation
+            assertEquals(expectedSymbols, actualSymbols)
+        }
     }
 
     protected def void testReferences((ReferenceTestConfiguration)=>void configurator) {
         val extension configuration = new ReferenceTestConfiguration
         configuration.filePath = 'MyModel.' + fileExtension
         configurator.apply(configuration)
-
         val fileUri = initializeContext(configuration).uri
-
-        val definitions = languageServer.references(new ReferenceParamsBuilder[
+        val referencesFuture = languageServer.references(new ReferenceParamsBuilder[
         	textDocument(fileUri)
         	position(line, column)
         	context(includeDeclaration)
     	].build)
-        val actualDefinitions = definitions.get.toExpectation
-        assertEquals(expectedReferences, actualDefinitions)
+    	val references = referencesFuture.get
+    	if (configuration.assertReferences !== null) {
+    	    configuration.assertReferences.apply(references)
+    	} else {
+            val actualReferences = references.toExpectation
+            assertEquals(expectedReferences, actualReferences)
+    	}
     }
 
     def void assertEquals(String expected, String actual) {
         Assert.assertEquals(expected.replace('\t', '    '), actual.replace('\t', '    '))
     }
 
-
     protected def testFormatting((FormattingConfiguration)=>void configurator) {
         val extension configuration = new FormattingConfiguration
         configuration.filePath = 'MyModel.' + fileExtension
         configurator.apply(configuration)
-
         val fileInfo = initializeContext(configuration)
         
         val changes = languageServer.formatting(new DocumentFormattingParamsBuilder [
@@ -417,7 +438,6 @@ abstract class AbstractLanguageServerTest implements Consumer<PublishDiagnostics
         ].build)
         val result = new Document(1, fileInfo.contents).applyChanges(<TextEdit>newArrayList(changes.get()).reverse)
         assertEquals(configuration.expectedText, result.contents)
-
     }
 
     protected def testRangeFormatting((RangeFormattingConfiguration)=>void configurator) {
@@ -434,7 +454,6 @@ abstract class AbstractLanguageServerTest implements Consumer<PublishDiagnostics
         val result = new Document(1, fileInfo.contents).applyChanges(<TextEdit>newArrayList(changes.get()).reverse)
         assertEquals(configuration.expectedText, result.contents)
     }
-
 }
 
 @Data class FileInfo {
@@ -445,21 +464,25 @@ abstract class AbstractLanguageServerTest implements Consumer<PublishDiagnostics
 @Accessors
 class TestCompletionConfiguration extends TextDocumentPositionConfiguration {
     String expectedCompletionItems = ''
+    (CompletionList)=>void assertCompletionList = null
 }
 
 @Accessors
 class DefinitionTestConfiguration extends TextDocumentPositionConfiguration {
     String expectedDefinitions = ''
+    (List<? extends Location>)=>void assertDefinitions = null
 }
 
 @Accessors
 class HoverTestConfiguration extends TextDocumentPositionConfiguration {
     String expectedHover = ''
+    (Hover)=>void assertHover = null
 }
 
 @Accessors
 class SignatureHelpConfiguration extends TextDocumentPositionConfiguration {
     String expectedSignatureHelp = ''
+    (SignatureHelp)=>void assertSignatureHelp = null
 }
 
 @Accessors
@@ -470,18 +493,21 @@ class DocumentHighlightConfiguration extends TextDocumentPositionConfiguration {
 @Accessors
 class DocumentSymbolConfiguraiton extends TextDocumentConfiguration {
     String expectedSymbols = ''
+    (List<? extends SymbolInformation>)=>void assertSymbols = null
 }
 
 @Accessors
 class ReferenceTestConfiguration extends TextDocumentPositionConfiguration {
     boolean includeDeclaration = false
     String expectedReferences = ''
+    (List<? extends Location>)=>void assertReferences = null
 }
 
 @Accessors
 class WorkspaceSymbolConfiguraiton extends TextDocumentConfiguration {
     String query = ''
     String expectedSymbols = ''
+    (List<? extends SymbolInformation>)=>void assertSymbols = null
 }
 
 @Accessors

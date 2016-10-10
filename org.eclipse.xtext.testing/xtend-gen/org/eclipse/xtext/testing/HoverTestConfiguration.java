@@ -7,14 +7,18 @@
  */
 package org.eclipse.xtext.testing;
 
+import io.typefox.lsapi.Hover;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.testing.TextDocumentPositionConfiguration;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 @Accessors
 @SuppressWarnings("all")
 public class HoverTestConfiguration extends TextDocumentPositionConfiguration {
   private String expectedHover = "";
+  
+  private Procedure1<? super Hover> assertHover = null;
   
   @Pure
   public String getExpectedHover() {
@@ -23,5 +27,14 @@ public class HoverTestConfiguration extends TextDocumentPositionConfiguration {
   
   public void setExpectedHover(final String expectedHover) {
     this.expectedHover = expectedHover;
+  }
+  
+  @Pure
+  public Procedure1<? super Hover> getAssertHover() {
+    return this.assertHover;
+  }
+  
+  public void setAssertHover(final Procedure1<? super Hover> assertHover) {
+    this.assertHover = assertHover;
   }
 }

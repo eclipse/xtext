@@ -79,7 +79,7 @@ public abstract class AbstractSimpleExpressionsTestLanguageRuntimeModule extends
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalSimpleExpressionsTestLanguageLexer> provideInternalSimpleExpressionsTestLanguageLexer() {
+	public Provider<? extends InternalSimpleExpressionsTestLanguageLexer> provideInternalSimpleExpressionsTestLanguageLexer() {
 		return LexerProvider.create(InternalSimpleExpressionsTestLanguageLexer.class);
 	}
 	

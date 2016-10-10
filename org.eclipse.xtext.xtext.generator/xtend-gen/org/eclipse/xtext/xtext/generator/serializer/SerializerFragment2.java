@@ -22,6 +22,8 @@ import java.util.Set;
 import java.util.function.Consumer;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.codegen.ecore.genmodel.GenClass;
+import org.eclipse.emf.codegen.ecore.genmodel.GenFeature;
+import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -1233,9 +1235,9 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
                   _builder.append(_gaAccessor, "\t");
                   _builder.append(", semanticObject.");
                   EStructuralFeature _feature_4 = f.getFeature();
-                  String _getAccessor = GenModelUtil2.getGetAccessor(_feature_4, rs);
-                  _builder.append(_getAccessor, "\t");
-                  _builder.append("());");
+                  StringConcatenationClient _unresolvingGetAccessor = SerializerFragment2.this.getUnresolvingGetAccessor(_feature_4, rs);
+                  _builder.append(_unresolvingGetAccessor, "\t");
+                  _builder.append(");");
                   _builder.newLineIfNotEmpty();
                 }
               }
@@ -1282,6 +1284,37 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
       _xblockexpression = _client_2;
     }
     return _xblockexpression;
+  }
+  
+  private StringConcatenationClient getUnresolvingGetAccessor(final EStructuralFeature feature, final ResourceSet resourceSet) {
+    final GenFeature genFeature = GenModelUtil2.getGenFeature(feature, resourceSet);
+    boolean _isResolveProxies = genFeature.isResolveProxies();
+    if (_isResolveProxies) {
+      StringConcatenationClient _client = new StringConcatenationClient() {
+        @Override
+        protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+          _builder.append("eGet(");
+          GenPackage _genPackage = genFeature.getGenPackage();
+          EPackage _ecorePackage = _genPackage.getEcorePackage();
+          _builder.append(_ecorePackage, "");
+          _builder.append(".");
+          String _featureLiteral = GenModelUtil2.getFeatureLiteral(genFeature, resourceSet);
+          _builder.append(_featureLiteral, "");
+          _builder.append(", false)");
+        }
+      };
+      return _client;
+    } else {
+      StringConcatenationClient _client_1 = new StringConcatenationClient() {
+        @Override
+        protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+          String _getAccessor = GenModelUtil2.getGetAccessor(genFeature, resourceSet);
+          _builder.append(_getAccessor, "");
+          _builder.append("()");
+        }
+      };
+      return _client_1;
+    }
   }
   
   protected void generateAbstractSyntacticSequencer() {

@@ -81,7 +81,7 @@ public abstract class AbstractSimpleUnorderedGroupsTestLanguageRuntimeModule ext
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalSimpleUnorderedGroupsTestLanguageLexer> provideInternalSimpleUnorderedGroupsTestLanguageLexer() {
+	public Provider<? extends InternalSimpleUnorderedGroupsTestLanguageLexer> provideInternalSimpleUnorderedGroupsTestLanguageLexer() {
 		return LexerProvider.create(InternalSimpleUnorderedGroupsTestLanguageLexer.class);
 	}
 	

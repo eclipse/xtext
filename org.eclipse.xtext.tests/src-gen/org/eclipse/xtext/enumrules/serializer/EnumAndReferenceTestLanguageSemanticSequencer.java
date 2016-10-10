@@ -59,7 +59,7 @@ public class EnumAndReferenceTestLanguageSemanticSequencer extends AbstractDeleg
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getEntityWithEnumAndReferenceAccess().getTypeKindOfKeywordEnumRuleCall_0_0(), semanticObject.getType());
 		feeder.accept(grammarAccess.getEntityWithEnumAndReferenceAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
-		feeder.accept(grammarAccess.getEntityWithEnumAndReferenceAccess().getRefEntityWithEnumAndReferenceIDTerminalRuleCall_3_0_1(), semanticObject.getRef());
+		feeder.accept(grammarAccess.getEntityWithEnumAndReferenceAccess().getRefEntityWithEnumAndReferenceIDTerminalRuleCall_3_0_1(), semanticObject.eGet(EnumAndReferenceTestLanguagePackage.Literals.ENTITY_WITH_ENUM_AND_REFERENCE__REF, false));
 		feeder.finish();
 	}
 	
