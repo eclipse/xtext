@@ -79,6 +79,7 @@ import org.eclipse.xtext.service.OperationCanceledManager
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.validation.Issue
 import com.google.common.base.Strings
+import org.eclipse.xtext.ide.server.occurrences.IDocumentHighlightService
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -126,6 +127,7 @@ import com.google.common.base.Strings
 			]
 			documentFormattingProvider = true
 			documentRangeFormattingProvider = true
+			documentHighlightProvider = true
 		]
 
 		requestManager.runWrite([ cancelIndicator |
@@ -454,7 +456,19 @@ import com.google.common.base.Strings
 	}
 
 	override documentHighlight(TextDocumentPositionParams position) {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+		return requestManager.runRead [ cancelIndicator |
+			val uri = position.textDocument.uri.toUri;
+			val serviceProvider = uri.resourceServiceProvider;
+			val service =  serviceProvider?.get(IDocumentHighlightService);
+			if (service === null) {
+				return emptyList;
+			}
+			
+			return workspaceManager.doRead(uri, [doc, resource |
+				val offset = doc.getOffSet(position.position);
+				return service.getDocumentHighlights(resource, offset);
+			]);
+		];
 	}
 
 	override codeAction(CodeActionParams params) {

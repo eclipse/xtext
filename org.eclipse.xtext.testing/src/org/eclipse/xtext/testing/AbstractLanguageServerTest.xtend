@@ -61,6 +61,8 @@ import org.eclipse.xtext.util.Files
 import org.eclipse.xtext.util.Modules2
 import org.junit.Assert
 import org.junit.Before
+import io.typefox.lsapi.DocumentHighlight
+import io.typefox.lsapi.DocumentHighlightKind
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -249,6 +251,15 @@ abstract class AbstractLanguageServerTest implements Consumer<PublishDiagnostics
         val param = if (activeParameter === null) '<empty>' else signatures.get(activeSignature).parameters.get(activeParameter).label;
         '''«signatures.map[label].join(' | ')» | «param»''';
     }
+    
+    protected dispatch def String toExpectation(DocumentHighlight it) {
+    	val rangeString = '''«IF range === null»[NaN, NaN]:[NaN, NaN]«ELSE»«range.toExpectation»«ENDIF»''';
+    	'''«IF kind === null»NaN«ELSE»«kind.toExpectation»«ENDIF» «rangeString»'''
+    }
+    
+    protected dispatch def String toExpectation(DocumentHighlightKind it) {
+    	it.toString.substring(0, 1).toUpperCase
+    }
 
     protected def void testCompletion((TestCompletionConfiguration)=>void configurator) {
         val extension configuration = new TestCompletionConfiguration
@@ -331,6 +342,22 @@ abstract class AbstractLanguageServerTest implements Consumer<PublishDiagnostics
         
         val actualSignatureHelp = signatureHelps.get.toExpectation
         assertEquals(expectedSignatureHelp.trim, actualSignatureHelp.trim)
+    }
+    
+    protected def testDocumentHighlight((DocumentHighlightConfiguration) => void configurator) {
+    	val extension configuration = new DocumentHighlightConfiguration => [
+    		filePath = '''MyModel.«fileExtension»''';
+    	];
+    	configurator.apply(configuration);
+    	
+    	val fileUri = initializeContext(configuration).uri;
+    	val highlights = languageServer.documentHighlight(new TextDocumentPositionParamsBuilder[
+    		textDocument(fileUri);
+    		position(line, column);
+    	].build);
+    	
+    	val actualDocumentHighlight = highlights.get.map[toExpectation].join(' | ');
+    	assertEquals(expectedDocumentHighlight, actualDocumentHighlight);
     }
 
     protected def void testDocumentSymbol((DocumentSymbolConfiguraiton)=>void configurator) {
@@ -433,6 +460,11 @@ class HoverTestConfiguration extends TextDocumentPositionConfiguration {
 @Accessors
 class SignatureHelpConfiguration extends TextDocumentPositionConfiguration {
     String expectedSignatureHelp = ''
+}
+
+@Accessors
+class DocumentHighlightConfiguration extends TextDocumentPositionConfiguration {
+	String expectedDocumentHighlight = ''
 }
 
 @Accessors
