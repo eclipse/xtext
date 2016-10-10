@@ -752,7 +752,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
   }
   
   @Override
-  public CompletableFuture<DocumentHighlight> documentHighlight(final TextDocumentPositionParams position) {
+  public CompletableFuture<List<? extends DocumentHighlight>> documentHighlight(final TextDocumentPositionParams position) {
     throw new UnsupportedOperationException("TODO: auto-generated method stub");
   }
   
