@@ -9,6 +9,7 @@ package org.eclipse.xtext.serializer.sequencer;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 
@@ -20,7 +21,21 @@ import com.google.inject.ImplementedBy;
 @ImplementedBy(SemanticNodeProvider.class)
 public interface ISemanticNodeProvider {
 
+	public interface ISemanticNode {
+		INode getNode();
+
+		ISemanticNode getFollower();
+
+		AbstractElement getGrammarElement();
+	}
+
 	public interface INodesForEObjectProvider {
+		ISemanticNode getSemanticNodeForMultiValue(EStructuralFeature feature, int indexInFeature, int indexInNonTransient, Object value);
+
+		ISemanticNode getSemanticNodeForSingelValue(EStructuralFeature feature, Object value);
+
+		ISemanticNode getFirstSemanticNode();
+
 		INode getNodeForMultiValue(EStructuralFeature feature, int indexInFeature, int indexInNonTransient, Object value);
 
 		INode getNodeForSingelValue(EStructuralFeature feature, Object value);
@@ -35,6 +50,22 @@ public interface ISemanticNodeProvider {
 
 		@Override
 		public INode getNodeForSingelValue(EStructuralFeature feature, Object value) {
+			return null;
+		}
+
+		@Override
+		public ISemanticNode getSemanticNodeForMultiValue(EStructuralFeature feature, int indexInFeature,
+				int indexInNonTransient, Object value) {
+			return null;
+		}
+
+		@Override
+		public ISemanticNode getSemanticNodeForSingelValue(EStructuralFeature feature, Object value) {
+			return null;
+		}
+
+		@Override
+		public ISemanticNode getFirstSemanticNode() {
 			return null;
 		}
 	}

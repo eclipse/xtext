@@ -79,7 +79,7 @@ public abstract class AbstractInheritanceTestLanguageRuntimeModule extends Defau
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalInheritanceTestLanguageLexer> provideInternalInheritanceTestLanguageLexer() {
+	public Provider<? extends InternalInheritanceTestLanguageLexer> provideInternalInheritanceTestLanguageLexer() {
 		return LexerProvider.create(InternalInheritanceTestLanguageLexer.class);
 	}
 	

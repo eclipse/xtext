@@ -79,7 +79,7 @@ public abstract class AbstractConcreteTestLanguageRuntimeModule extends DefaultR
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalConcreteTestLanguageLexer> provideInternalConcreteTestLanguageLexer() {
+	public Provider<? extends InternalConcreteTestLanguageLexer> provideInternalConcreteTestLanguageLexer() {
 		return LexerProvider.create(InternalConcreteTestLanguageLexer.class);
 	}
 	

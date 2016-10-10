@@ -79,7 +79,7 @@ public abstract class AbstractQualifiedNameTestLanguageRuntimeModule extends Def
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalQualifiedNameTestLanguageLexer> provideInternalQualifiedNameTestLanguageLexer() {
+	public Provider<? extends InternalQualifiedNameTestLanguageLexer> provideInternalQualifiedNameTestLanguageLexer() {
 		return LexerProvider.create(InternalQualifiedNameTestLanguageLexer.class);
 	}
 	

@@ -79,7 +79,7 @@ public abstract class AbstractConcreteSyntaxValidationTestLanguageRuntimeModule 
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalConcreteSyntaxValidationTestLanguageLexer> provideInternalConcreteSyntaxValidationTestLanguageLexer() {
+	public Provider<? extends InternalConcreteSyntaxValidationTestLanguageLexer> provideInternalConcreteSyntaxValidationTestLanguageLexer() {
 		return LexerProvider.create(InternalConcreteSyntaxValidationTestLanguageLexer.class);
 	}
 	

@@ -153,7 +153,7 @@ public class Bug385636SemanticSequencer extends AbstractDelegatingSemanticSequen
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Bug385636Package.Literals.NVARIABLE_ACCESS__VARIABLE));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getNVariableAccessAccess().getVariableDefineVariableIDTerminalRuleCall_0_1(), semanticObject.getVariable());
+		feeder.accept(grammarAccess.getNVariableAccessAccess().getVariableDefineVariableIDTerminalRuleCall_0_1(), semanticObject.eGet(Bug385636Package.Literals.NVARIABLE_ACCESS__VARIABLE, false));
 		feeder.finish();
 	}
 	

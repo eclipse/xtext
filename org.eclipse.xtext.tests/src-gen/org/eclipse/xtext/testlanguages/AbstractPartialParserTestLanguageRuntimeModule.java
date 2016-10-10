@@ -79,7 +79,7 @@ public abstract class AbstractPartialParserTestLanguageRuntimeModule extends Def
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalPartialParserTestLanguageLexer> provideInternalPartialParserTestLanguageLexer() {
+	public Provider<? extends InternalPartialParserTestLanguageLexer> provideInternalPartialParserTestLanguageLexer() {
 		return LexerProvider.create(InternalPartialParserTestLanguageLexer.class);
 	}
 	

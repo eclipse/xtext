@@ -7,8 +7,11 @@
  */
 package org.eclipse.xtext.testing;
 
+import io.typefox.lsapi.SymbolInformation;
+import java.util.List;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.testing.TextDocumentConfiguration;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 @Accessors
@@ -17,6 +20,8 @@ public class WorkspaceSymbolConfiguraiton extends TextDocumentConfiguration {
   private String query = "";
   
   private String expectedSymbols = "";
+  
+  private Procedure1<? super List<? extends SymbolInformation>> assertSymbols = null;
   
   @Pure
   public String getQuery() {
@@ -34,5 +39,14 @@ public class WorkspaceSymbolConfiguraiton extends TextDocumentConfiguration {
   
   public void setExpectedSymbols(final String expectedSymbols) {
     this.expectedSymbols = expectedSymbols;
+  }
+  
+  @Pure
+  public Procedure1<? super List<? extends SymbolInformation>> getAssertSymbols() {
+    return this.assertSymbols;
+  }
+  
+  public void setAssertSymbols(final Procedure1<? super List<? extends SymbolInformation>> assertSymbols) {
+    this.assertSymbols = assertSymbols;
   }
 }

@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.serializer.sequencer;
 
+import java.util.List;
+
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.nodemodel.INode;
 
@@ -15,20 +17,24 @@ import org.eclipse.xtext.nodemodel.INode;
  */
 public class EmitterNodeFinder {
 
+	@Deprecated
 	protected INode toNode;
+	private List<INode> emitters;
+	private int index;
 
 	public EmitterNodeFinder(INode node) {
 		this.toNode = node;
+		this.emitters = EmitterNodeUtil.collectEmitterNodes(node, null);
+		this.index = 0;
 	}
 
 	public INode next(AbstractElement grammarElement) {
-		if (toNode == null)
-			return null;
-		EmitterNodeIterator ni = new EmitterNodeIterator(toNode, null, false, false);
-		while (ni.hasNext()) {
-			INode next = ni.next();
-			if (next.getGrammarElement() == grammarElement)
+		for (int i = index; i < emitters.size(); i++) {
+			INode next = emitters.get(i);
+			if (next.getGrammarElement() == grammarElement) {
+				index = i + 1;
 				return toNode = next;
+			}
 		}
 		return null;
 	}

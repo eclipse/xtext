@@ -81,7 +81,7 @@ public abstract class AbstractUnorderedGroupsTestLanguageRuntimeModule extends D
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalUnorderedGroupsTestLanguageLexer> provideInternalUnorderedGroupsTestLanguageLexer() {
+	public Provider<? extends InternalUnorderedGroupsTestLanguageLexer> provideInternalUnorderedGroupsTestLanguageLexer() {
 		return LexerProvider.create(InternalUnorderedGroupsTestLanguageLexer.class);
 	}
 	

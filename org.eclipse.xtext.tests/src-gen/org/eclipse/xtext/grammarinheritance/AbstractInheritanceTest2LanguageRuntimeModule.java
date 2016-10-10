@@ -79,7 +79,7 @@ public abstract class AbstractInheritanceTest2LanguageRuntimeModule extends Defa
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalInheritanceTest2LanguageLexer> provideInternalInheritanceTest2LanguageLexer() {
+	public Provider<? extends InternalInheritanceTest2LanguageLexer> provideInternalInheritanceTest2LanguageLexer() {
 		return LexerProvider.create(InternalInheritanceTest2LanguageLexer.class);
 	}
 	

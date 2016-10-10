@@ -79,7 +79,7 @@ public abstract class AbstractMultiValueFeatureTestLanguageRuntimeModule extends
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalMultiValueFeatureTestLanguageLexer> provideInternalMultiValueFeatureTestLanguageLexer() {
+	public Provider<? extends InternalMultiValueFeatureTestLanguageLexer> provideInternalMultiValueFeatureTestLanguageLexer() {
 		return LexerProvider.create(InternalMultiValueFeatureTestLanguageLexer.class);
 	}
 	

@@ -79,7 +79,7 @@ public abstract class AbstractOptionalEmptyTestLanguageRuntimeModule extends Def
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalOptionalEmptyTestLanguageLexer> provideInternalOptionalEmptyTestLanguageLexer() {
+	public Provider<? extends InternalOptionalEmptyTestLanguageLexer> provideInternalOptionalEmptyTestLanguageLexer() {
 		return LexerProvider.create(InternalOptionalEmptyTestLanguageLexer.class);
 	}
 	

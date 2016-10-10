@@ -56,7 +56,7 @@ public class EcoreFragmentTestLanguageSemanticSequencer extends AbstractDelegati
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getSecondAccess().getNameIDTerminalRuleCall_0_0(), semanticObject.getName());
-		feeder.accept(grammarAccess.getSecondAccess().getFirstFirstIDTerminalRuleCall_2_0_1(), semanticObject.getFirst());
+		feeder.accept(grammarAccess.getSecondAccess().getFirstFirstIDTerminalRuleCall_2_0_1(), semanticObject.eGet(SecondPackage.Literals.SECOND__FIRST, false));
 		feeder.finish();
 	}
 	

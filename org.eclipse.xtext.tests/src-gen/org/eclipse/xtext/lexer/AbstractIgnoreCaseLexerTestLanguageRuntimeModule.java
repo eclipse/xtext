@@ -84,7 +84,7 @@ public abstract class AbstractIgnoreCaseLexerTestLanguageRuntimeModule extends D
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalIgnoreCaseLexerTestLanguageLexer> provideInternalIgnoreCaseLexerTestLanguageLexer() {
+	public Provider<? extends InternalIgnoreCaseLexerTestLanguageLexer> provideInternalIgnoreCaseLexerTestLanguageLexer() {
 		return LexerProvider.create(InternalIgnoreCaseLexerTestLanguageLexer.class);
 	}
 	

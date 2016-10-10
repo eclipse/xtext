@@ -79,7 +79,7 @@ public abstract class AbstractHiddenTerminalsTestLanguageRuntimeModule extends D
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalHiddenTerminalsTestLanguageLexer> provideInternalHiddenTerminalsTestLanguageLexer() {
+	public Provider<? extends InternalHiddenTerminalsTestLanguageLexer> provideInternalHiddenTerminalsTestLanguageLexer() {
 		return LexerProvider.create(InternalHiddenTerminalsTestLanguageLexer.class);
 	}
 	

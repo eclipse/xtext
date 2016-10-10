@@ -28,6 +28,7 @@ import org.junit.Test;
  *
  */
 public class ManifestMergerTest extends Assert {
+	private static final String NL = Strings.newLine();
 
 	@Test public void testMergeRequiredBundles() throws Exception {
 		String packageName = getClass().getPackage().getName().replace('.', '/');
@@ -111,11 +112,11 @@ public class ManifestMergerTest extends Assert {
 		toMerge.add("bar");
 		toMerge.add("baz");
 
-		assertEquals("bar,foo,baz", removeWS(MergeableManifest.mergeIntoCommaSeparatedList("bar", toMerge, Wrapper.wrap(false))));
-		assertEquals("bar,x,foo,baz", removeWS(MergeableManifest.mergeIntoCommaSeparatedList("bar ,    x", toMerge, Wrapper.wrap(false))));
-		assertEquals("baz,bar,foo", removeWS(MergeableManifest.mergeIntoCommaSeparatedList("baz,bar,foo", toMerge, Wrapper.wrap(false))));
-		assertEquals("foo,bar,baz", removeWS(MergeableManifest.mergeIntoCommaSeparatedList("", toMerge, Wrapper.wrap(false))));
-		assertEquals("foo,bar,baz", removeWS(MergeableManifest.mergeIntoCommaSeparatedList(null, toMerge, Wrapper.wrap(false))));
+		assertEquals("bar,foo,baz", removeWS(MergeableManifest.mergeIntoCommaSeparatedList("bar", toMerge, Wrapper.wrap(false), NL)));
+		assertEquals("bar,x,foo,baz", removeWS(MergeableManifest.mergeIntoCommaSeparatedList("bar ,    x", toMerge, Wrapper.wrap(false), NL)));
+		assertEquals("baz,bar,foo", removeWS(MergeableManifest.mergeIntoCommaSeparatedList("baz,bar,foo", toMerge, Wrapper.wrap(false), NL)));
+		assertEquals("foo,bar,baz", removeWS(MergeableManifest.mergeIntoCommaSeparatedList("", toMerge, Wrapper.wrap(false), NL)));
+		assertEquals("foo,bar,baz", removeWS(MergeableManifest.mergeIntoCommaSeparatedList(null, toMerge, Wrapper.wrap(false), NL)));
 	}
 
 	/**
@@ -133,9 +134,9 @@ public class ManifestMergerTest extends Assert {
 		toMerge.add("baz");
 
 		assertEquals("bar;version=\"0.7.0\",foo,baz", removeWS(MergeableManifest.mergeIntoCommaSeparatedList(
-				"bar;version=\"0.7.0\"", toMerge, Wrapper.wrap(false))));
+				"bar;version=\"0.7.0\"", toMerge, Wrapper.wrap(false), NL)));
 		assertEquals("bar;special=foo,x,foo,baz", removeWS(MergeableManifest.mergeIntoCommaSeparatedList(
-				"bar;special=foo ,    x", toMerge, Wrapper.wrap(false))));
+				"bar;special=foo ,    x", toMerge, Wrapper.wrap(false), NL)));
 	}
 	
 	@Test public void testMergeIntoCommaSeparatedListWithCommaSeparatedParams() throws Exception {
@@ -145,28 +146,28 @@ public class ManifestMergerTest extends Assert {
 		toMerge.add("baz");
 		
 		assertEquals("bar;x-friends=\"xxx,foo,bar,zzz\",foo,baz", removeWS(MergeableManifest.mergeIntoCommaSeparatedList(
-				"bar;x-friends=\"xxx,foo,bar,zzz\"", toMerge, Wrapper.wrap(false))));
+				"bar;x-friends=\"xxx,foo,bar,zzz\"", toMerge, Wrapper.wrap(false), NL)));
 	}
 
 	@Test public void testMergeIntoCommaSeparatedListValidParam() throws Exception {
 		LinkedHashSet<String> toMerge = new LinkedHashSet<String>();
 		toMerge.add("foo;foo=version");
 		assertEquals("bar,foo;foo=version", removeWS(MergeableManifest.mergeIntoCommaSeparatedList(
-				"bar", toMerge, Wrapper.wrap(false))));
+				"bar", toMerge, Wrapper.wrap(false), NL)));
 	}
 
 	@Test public void testMergeIntoCommaSeparatedListSkipWhenParamExists() throws Exception {
 		LinkedHashSet<String> toMerge = new LinkedHashSet<String>();
 		toMerge.add("foo;foo=other");
 		assertEquals("foo;version=\"0.7.0\"", removeWS(MergeableManifest.mergeIntoCommaSeparatedList(
-				"foo;version=\"0.7.0\"", toMerge, Wrapper.wrap(false))));
+				"foo;version=\"0.7.0\"", toMerge, Wrapper.wrap(false), NL)));
 	}
 
 	@Test public void testMergeIntoCommaSeparatedListAddParam() throws Exception {
 		LinkedHashSet<String> toMerge = new LinkedHashSet<String>();
 		toMerge.add("foo;version=\"0.7.0\"");
 		assertEquals("foo;version=\"0.7.0\"", removeWS(MergeableManifest.mergeIntoCommaSeparatedList(
-				"foo", toMerge, Wrapper.wrap(false))));
+				"foo", toMerge, Wrapper.wrap(false), NL)));
 	}
 
 }

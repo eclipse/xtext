@@ -7,14 +7,18 @@
  */
 package org.eclipse.xtext.testing;
 
+import io.typefox.lsapi.SignatureHelp;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.testing.TextDocumentPositionConfiguration;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 @Accessors
 @SuppressWarnings("all")
 public class SignatureHelpConfiguration extends TextDocumentPositionConfiguration {
   private String expectedSignatureHelp = "";
+  
+  private Procedure1<? super SignatureHelp> assertSignatureHelp = null;
   
   @Pure
   public String getExpectedSignatureHelp() {
@@ -23,5 +27,14 @@ public class SignatureHelpConfiguration extends TextDocumentPositionConfiguratio
   
   public void setExpectedSignatureHelp(final String expectedSignatureHelp) {
     this.expectedSignatureHelp = expectedSignatureHelp;
+  }
+  
+  @Pure
+  public Procedure1<? super SignatureHelp> getAssertSignatureHelp() {
+    return this.assertSignatureHelp;
+  }
+  
+  public void setAssertSignatureHelp(final Procedure1<? super SignatureHelp> assertSignatureHelp) {
+    this.assertSignatureHelp = assertSignatureHelp;
   }
 }

@@ -79,7 +79,7 @@ public abstract class AbstractXtextTerminalsTestLanguageRuntimeModule extends De
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalXtextTerminalsTestLanguageLexer> provideInternalXtextTerminalsTestLanguageLexer() {
+	public Provider<? extends InternalXtextTerminalsTestLanguageLexer> provideInternalXtextTerminalsTestLanguageLexer() {
 		return LexerProvider.create(InternalXtextTerminalsTestLanguageLexer.class);
 	}
 	

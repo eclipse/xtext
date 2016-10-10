@@ -165,16 +165,6 @@ public class Bug250313PackageImpl extends EPackageImpl implements Bug250313Packa
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getModel_Ref()
-  {
-    return (EReference)modelEClass.getEStructuralFeatures().get(3);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EClass getChild()
   {
     return childEClass;
@@ -244,7 +234,6 @@ public class Bug250313PackageImpl extends EPackageImpl implements Bug250313Packa
     createEAttribute(modelEClass, MODEL__VALUE);
     createEAttribute(modelEClass, MODEL__MULTI_VALUE);
     createEReference(modelEClass, MODEL__CHILDREN);
-    createEReference(modelEClass, MODEL__REF);
 
     childEClass = createEClass(CHILD);
     createEAttribute(childEClass, CHILD__NAME);
@@ -294,7 +283,6 @@ public class Bug250313PackageImpl extends EPackageImpl implements Bug250313Packa
     initEAttribute(getModel_Value(), theEcorePackage.getEString(), "value", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getModel_MultiValue(), theEcorePackage.getEString(), "multiValue", null, 0, -1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getModel_Children(), this.getChild(), null, "children", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getModel_Ref(), this.getChild(), null, "ref", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(childEClass, Child.class, "Child", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getChild_Name(), theEcorePackage.getEString(), "name", null, 0, 1, Child.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

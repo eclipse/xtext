@@ -33,7 +33,6 @@ import org.eclipse.xtext.valueconverter.bug250313.Model;
  *   <li>{@link org.eclipse.xtext.valueconverter.bug250313.impl.ModelImpl#getValue <em>Value</em>}</li>
  *   <li>{@link org.eclipse.xtext.valueconverter.bug250313.impl.ModelImpl#getMultiValue <em>Multi Value</em>}</li>
  *   <li>{@link org.eclipse.xtext.valueconverter.bug250313.impl.ModelImpl#getChildren <em>Children</em>}</li>
- *   <li>{@link org.eclipse.xtext.valueconverter.bug250313.impl.ModelImpl#getRef <em>Ref</em>}</li>
  * </ul>
  *
  * @generated
@@ -79,16 +78,6 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * @ordered
    */
   protected Child children;
-
-  /**
-   * The cached value of the '{@link #getRef() <em>Ref</em>}' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getRef()
-   * @generated
-   * @ordered
-   */
-  protected Child ref;
 
   /**
    * <!-- begin-user-doc -->
@@ -201,49 +190,6 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
-  public Child getRef()
-  {
-    if (ref != null && ref.eIsProxy())
-    {
-      InternalEObject oldRef = (InternalEObject)ref;
-      ref = (Child)eResolveProxy(oldRef);
-      if (ref != oldRef)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, Bug250313Package.MODEL__REF, oldRef, ref));
-      }
-    }
-    return ref;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Child basicGetRef()
-  {
-    return ref;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setRef(Child newRef)
-  {
-    Child oldRef = ref;
-    ref = newRef;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, Bug250313Package.MODEL__REF, oldRef, ref));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
@@ -271,9 +217,6 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return getMultiValue();
       case Bug250313Package.MODEL__CHILDREN:
         return getChildren();
-      case Bug250313Package.MODEL__REF:
-        if (resolve) return getRef();
-        return basicGetRef();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -299,9 +242,6 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
       case Bug250313Package.MODEL__CHILDREN:
         setChildren((Child)newValue);
         return;
-      case Bug250313Package.MODEL__REF:
-        setRef((Child)newValue);
-        return;
     }
     super.eSet(featureID, newValue);
   }
@@ -325,9 +265,6 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
       case Bug250313Package.MODEL__CHILDREN:
         setChildren((Child)null);
         return;
-      case Bug250313Package.MODEL__REF:
-        setRef((Child)null);
-        return;
     }
     super.eUnset(featureID);
   }
@@ -348,8 +285,6 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return multiValue != null && !multiValue.isEmpty();
       case Bug250313Package.MODEL__CHILDREN:
         return children != null;
-      case Bug250313Package.MODEL__REF:
-        return ref != null;
     }
     return super.eIsSet(featureID);
   }

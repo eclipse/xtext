@@ -72,7 +72,7 @@ public abstract class AbstractBug289524ExTestLanguageRuntimeModule extends Defau
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalBug289524ExTestLanguageLexer> provideInternalBug289524ExTestLanguageLexer() {
+	public Provider<? extends InternalBug289524ExTestLanguageLexer> provideInternalBug289524ExTestLanguageLexer() {
 		return LexerProvider.create(InternalBug289524ExTestLanguageLexer.class);
 	}
 	

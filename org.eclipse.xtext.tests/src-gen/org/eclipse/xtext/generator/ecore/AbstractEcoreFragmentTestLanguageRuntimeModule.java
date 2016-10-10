@@ -79,7 +79,7 @@ public abstract class AbstractEcoreFragmentTestLanguageRuntimeModule extends Def
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalEcoreFragmentTestLanguageLexer> provideInternalEcoreFragmentTestLanguageLexer() {
+	public Provider<? extends InternalEcoreFragmentTestLanguageLexer> provideInternalEcoreFragmentTestLanguageLexer() {
 		return LexerProvider.create(InternalEcoreFragmentTestLanguageLexer.class);
 	}
 	

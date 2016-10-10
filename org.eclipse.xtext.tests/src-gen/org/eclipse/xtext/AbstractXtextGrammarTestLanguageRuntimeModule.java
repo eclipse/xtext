@@ -77,7 +77,7 @@ public abstract class AbstractXtextGrammarTestLanguageRuntimeModule extends Defa
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalXtextGrammarTestLanguageLexer> provideInternalXtextGrammarTestLanguageLexer() {
+	public Provider<? extends InternalXtextGrammarTestLanguageLexer> provideInternalXtextGrammarTestLanguageLexer() {
 		return LexerProvider.create(InternalXtextGrammarTestLanguageLexer.class);
 	}
 	

@@ -79,7 +79,7 @@ public abstract class AbstractComplexReconstrTestLanguageRuntimeModule extends D
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalComplexReconstrTestLanguageLexer> provideInternalComplexReconstrTestLanguageLexer() {
+	public Provider<? extends InternalComplexReconstrTestLanguageLexer> provideInternalComplexReconstrTestLanguageLexer() {
 		return LexerProvider.create(InternalComplexReconstrTestLanguageLexer.class);
 	}
 	

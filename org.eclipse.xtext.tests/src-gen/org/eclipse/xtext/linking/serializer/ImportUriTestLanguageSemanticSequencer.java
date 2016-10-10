@@ -94,7 +94,7 @@ public class ImportUriTestLanguageSemanticSequencer extends AbstractDelegatingSe
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getTypeAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
-		feeder.accept(grammarAccess.getTypeAccess().getExtendsTypeIDTerminalRuleCall_3_0_1(), semanticObject.getExtends());
+		feeder.accept(grammarAccess.getTypeAccess().getExtendsTypeIDTerminalRuleCall_3_0_1(), semanticObject.eGet(ImportedURIPackage.Literals.TYPE__EXTENDS, false));
 		feeder.finish();
 	}
 	

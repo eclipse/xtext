@@ -7,8 +7,11 @@
  */
 package org.eclipse.xtext.testing;
 
+import io.typefox.lsapi.Location;
+import java.util.List;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.testing.TextDocumentPositionConfiguration;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 @Accessors
@@ -17,6 +20,8 @@ public class ReferenceTestConfiguration extends TextDocumentPositionConfiguratio
   private boolean includeDeclaration = false;
   
   private String expectedReferences = "";
+  
+  private Procedure1<? super List<? extends Location>> assertReferences = null;
   
   @Pure
   public boolean isIncludeDeclaration() {
@@ -34,5 +39,14 @@ public class ReferenceTestConfiguration extends TextDocumentPositionConfiguratio
   
   public void setExpectedReferences(final String expectedReferences) {
     this.expectedReferences = expectedReferences;
+  }
+  
+  @Pure
+  public Procedure1<? super List<? extends Location>> getAssertReferences() {
+    return this.assertReferences;
+  }
+  
+  public void setAssertReferences(final Procedure1<? super List<? extends Location>> assertReferences) {
+    this.assertReferences = assertReferences;
   }
 }

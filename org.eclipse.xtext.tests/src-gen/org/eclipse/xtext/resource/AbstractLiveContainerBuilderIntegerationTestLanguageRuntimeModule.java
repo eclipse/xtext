@@ -84,7 +84,7 @@ public abstract class AbstractLiveContainerBuilderIntegerationTestLanguageRuntim
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalLiveContainerBuilderIntegerationTestLanguageLexer> provideInternalLiveContainerBuilderIntegerationTestLanguageLexer() {
+	public Provider<? extends InternalLiveContainerBuilderIntegerationTestLanguageLexer> provideInternalLiveContainerBuilderIntegerationTestLanguageLexer() {
 		return LexerProvider.create(InternalLiveContainerBuilderIntegerationTestLanguageLexer.class);
 	}
 	

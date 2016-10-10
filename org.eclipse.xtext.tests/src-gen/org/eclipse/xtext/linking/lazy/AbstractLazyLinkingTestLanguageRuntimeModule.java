@@ -79,7 +79,7 @@ public abstract class AbstractLazyLinkingTestLanguageRuntimeModule extends Defau
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalLazyLinkingTestLanguageLexer> provideInternalLazyLinkingTestLanguageLexer() {
+	public Provider<? extends InternalLazyLinkingTestLanguageLexer> provideInternalLazyLinkingTestLanguageLexer() {
 		return LexerProvider.create(InternalLazyLinkingTestLanguageLexer.class);
 	}
 	

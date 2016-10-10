@@ -95,22 +95,13 @@ public interface Bug250313Package extends EPackage
   int MODEL__CHILDREN = 2;
 
   /**
-   * The feature id for the '<em><b>Ref</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int MODEL__REF = 3;
-
-  /**
    * The number of structural features of the '<em>Model</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MODEL_FEATURE_COUNT = 4;
+  int MODEL_FEATURE_COUNT = 3;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.valueconverter.bug250313.impl.ChildImpl <em>Child</em>}' class.
@@ -241,17 +232,6 @@ public interface Bug250313Package extends EPackage
   EReference getModel_Children();
 
   /**
-   * Returns the meta object for the reference '{@link org.eclipse.xtext.valueconverter.bug250313.Model#getRef <em>Ref</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Ref</em>'.
-   * @see org.eclipse.xtext.valueconverter.bug250313.Model#getRef()
-   * @see #getModel()
-   * @generated
-   */
-  EReference getModel_Ref();
-
-  /**
    * Returns the meta object for class '{@link org.eclipse.xtext.valueconverter.bug250313.Child <em>Child</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -348,14 +328,6 @@ public interface Bug250313Package extends EPackage
      * @generated
      */
     EReference MODEL__CHILDREN = eINSTANCE.getModel_Children();
-
-    /**
-     * The meta object literal for the '<em><b>Ref</b></em>' reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference MODEL__REF = eINSTANCE.getModel_Ref();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.valueconverter.bug250313.impl.ChildImpl <em>Child</em>}' class.

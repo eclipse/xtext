@@ -388,18 +388,4 @@ public class Bug250313Test extends AbstractXtextTests {
 		// if this is a bug, all assertions 'assertEquals(1, convertCallCount)' have to be increased
 		assertEquals(lexerRule, 0, convertCallCount);
 	}
-
-	@Test public void testChild1_01() throws Exception {
-		// tests only, if crossrefs in alternatives work
-		Model model = (Model) getModel("content str ref 'str'");
-		assertEquals("str", model.getRef().getName());
-		assertEquals(lexerRule, 2, convertCallCount);
-	}
-
-	@Test public void testChild2_01() throws Exception {
-		// tests only, if crossrefs in alternatives work
-		Model model = (Model) getModel("content 'str' ref str");
-		assertEquals("str", model.getRef().getName());
-		assertEquals(lexerRule, 2, convertCallCount);
-	}
 }

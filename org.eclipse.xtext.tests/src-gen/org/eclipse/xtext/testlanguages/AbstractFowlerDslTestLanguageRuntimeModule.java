@@ -79,7 +79,7 @@ public abstract class AbstractFowlerDslTestLanguageRuntimeModule extends Default
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalFowlerDslTestLanguageLexer> provideInternalFowlerDslTestLanguageLexer() {
+	public Provider<? extends InternalFowlerDslTestLanguageLexer> provideInternalFowlerDslTestLanguageLexer() {
 		return LexerProvider.create(InternalFowlerDslTestLanguageLexer.class);
 	}
 	

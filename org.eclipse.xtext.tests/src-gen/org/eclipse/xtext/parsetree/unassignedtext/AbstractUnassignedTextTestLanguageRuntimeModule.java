@@ -79,7 +79,7 @@ public abstract class AbstractUnassignedTextTestLanguageRuntimeModule extends De
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalUnassignedTextTestLanguageLexer> provideInternalUnassignedTextTestLanguageLexer() {
+	public Provider<? extends InternalUnassignedTextTestLanguageLexer> provideInternalUnassignedTextTestLanguageLexer() {
 		return LexerProvider.create(InternalUnassignedTextTestLanguageLexer.class);
 	}
 	

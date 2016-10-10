@@ -136,7 +136,7 @@ public class Bug288432TestLanguageSemanticSequencer extends AbstractDelegatingSe
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Bug288432TestPackage.Literals.PARAMETER_REF__PARAMETER));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getParameterRefAccess().getParameterParameterIDTerminalRuleCall_0_1(), semanticObject.getParameter());
+		feeder.accept(grammarAccess.getParameterRefAccess().getParameterParameterIDTerminalRuleCall_0_1(), semanticObject.eGet(Bug288432TestPackage.Literals.PARAMETER_REF__PARAMETER, false));
 		feeder.finish();
 	}
 	

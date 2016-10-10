@@ -109,7 +109,7 @@ public class Bug311337TestLanguageSemanticSequencer extends AbstractDelegatingSe
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getReferenceAccess().getNestedRefLeftAction_2_1(), semanticObject.getLeft());
-		feeder.accept(grammarAccess.getReferenceAccess().getRefChildChildIDTerminalRuleCall_2_2_0_1(), semanticObject.getRefChild());
+		feeder.accept(grammarAccess.getReferenceAccess().getRefChildChildIDTerminalRuleCall_2_2_0_1(), semanticObject.eGet(Bug311337Package.Literals.REFERENCE__REF_CHILD, false));
 		feeder.finish();
 	}
 	
@@ -128,7 +128,7 @@ public class Bug311337TestLanguageSemanticSequencer extends AbstractDelegatingSe
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Bug311337Package.Literals.REFERENCE__REF_CHILD));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getReferenceAccess().getRefChildChildIDTerminalRuleCall_1_0_1(), semanticObject.getRefChild());
+		feeder.accept(grammarAccess.getReferenceAccess().getRefChildChildIDTerminalRuleCall_1_0_1(), semanticObject.eGet(Bug311337Package.Literals.REFERENCE__REF_CHILD, false));
 		feeder.finish();
 	}
 	

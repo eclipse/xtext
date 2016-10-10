@@ -79,7 +79,7 @@ public abstract class AbstractBug362902RuntimeModule extends DefaultRuntimeModul
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalBug362902Lexer> provideInternalBug362902Lexer() {
+	public Provider<? extends InternalBug362902Lexer> provideInternalBug362902Lexer() {
 		return LexerProvider.create(InternalBug362902Lexer.class);
 	}
 	

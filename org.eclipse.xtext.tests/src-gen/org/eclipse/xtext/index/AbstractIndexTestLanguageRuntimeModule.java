@@ -86,7 +86,7 @@ public abstract class AbstractIndexTestLanguageRuntimeModule extends DefaultRunt
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalIndexTestLanguageLexer> provideInternalIndexTestLanguageLexer() {
+	public Provider<? extends InternalIndexTestLanguageLexer> provideInternalIndexTestLanguageLexer() {
 		return LexerProvider.create(InternalIndexTestLanguageLexer.class);
 	}
 	

@@ -7,14 +7,19 @@
  */
 package org.eclipse.xtext.testing;
 
+import io.typefox.lsapi.Location;
+import java.util.List;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.testing.TextDocumentPositionConfiguration;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 @Accessors
 @SuppressWarnings("all")
 public class DefinitionTestConfiguration extends TextDocumentPositionConfiguration {
   private String expectedDefinitions = "";
+  
+  private Procedure1<? super List<? extends Location>> assertDefinitions = null;
   
   @Pure
   public String getExpectedDefinitions() {
@@ -23,5 +28,14 @@ public class DefinitionTestConfiguration extends TextDocumentPositionConfigurati
   
   public void setExpectedDefinitions(final String expectedDefinitions) {
     this.expectedDefinitions = expectedDefinitions;
+  }
+  
+  @Pure
+  public Procedure1<? super List<? extends Location>> getAssertDefinitions() {
+    return this.assertDefinitions;
+  }
+  
+  public void setAssertDefinitions(final Procedure1<? super List<? extends Location>> assertDefinitions) {
+    this.assertDefinitions = assertDefinitions;
   }
 }

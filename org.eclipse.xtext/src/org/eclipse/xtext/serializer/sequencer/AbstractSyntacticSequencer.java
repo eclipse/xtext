@@ -251,16 +251,17 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 
 	protected void acceptNodes(ISynNavigable fromState, INode fromNode, INode toNode) {
 		RuleCallStack stack = contexts.peek().stack.clone();
-		EmitterNodeIterator ni = new EmitterNodeIterator(fromNode, toNode, false, false);
-		while (ni.hasNext()) {
-			INode next = ni.next();
-			List<ISynState> path = fromState.getShortestPathTo((AbstractElement) next.getGrammarElement(), stack);
-			if (path != null) {
-				if (path.get(path.size() - 1) instanceof ISynEmitterState)
-					fromState = (ISynEmitterState) path.get(path.size() - 1);
-				else
-					return;
-				acceptNode(next);
+		List<INode> nodes = collectNodes(fromNode, toNode);
+		if (nodes != null) {
+			for (INode next : nodes) {
+				List<ISynState> path = fromState.getShortestPathTo((AbstractElement) next.getGrammarElement(), stack);
+				if (path != null) {
+					if (path.get(path.size() - 1) instanceof ISynEmitterState)
+						fromState = (ISynEmitterState) path.get(path.size() - 1);
+					else
+						return;
+					acceptNode(next);
+				}
 			}
 		}
 	}
@@ -319,7 +320,7 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 	protected List<INode> collectNodes(INode fromNode, INode toNode) {
 		if (fromNode == null)
 			return null;
-		return Lists.newArrayList(new EmitterNodeIterator(fromNode, toNode, false, false));
+		return EmitterNodeUtil.collectEmitterNodes(fromNode, toNode);
 	}
 
 	protected abstract void emitUnassignedTokens(EObject semanticObject, ISynTransition transition, INode fromNode,

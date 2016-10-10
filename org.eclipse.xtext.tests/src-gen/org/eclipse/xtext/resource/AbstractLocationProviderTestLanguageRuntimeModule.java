@@ -79,7 +79,7 @@ public abstract class AbstractLocationProviderTestLanguageRuntimeModule extends 
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalLocationProviderTestLanguageLexer> provideInternalLocationProviderTestLanguageLexer() {
+	public Provider<? extends InternalLocationProviderTestLanguageLexer> provideInternalLocationProviderTestLanguageLexer() {
 		return LexerProvider.create(InternalLocationProviderTestLanguageLexer.class);
 	}
 	

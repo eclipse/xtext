@@ -13,6 +13,7 @@ import java.util.Set
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.util.XtextVersion
 import org.eclipse.xtext.util.JavaVersion
+import org.eclipse.xtext.util.Strings
 
 @Accessors
 class WizardConfiguration {
@@ -22,6 +23,7 @@ class WizardConfiguration {
 	val Ecore2XtextConfiguration ecore2Xtext = new Ecore2XtextConfiguration
 
 	Charset encoding = Charset.defaultCharset
+	String lineDelimiter = Strings.newLine
 	BuildSystem preferredBuildSystem = BuildSystem.NONE
 	
 	SourceLayout sourceLayout = SourceLayout.PLAIN

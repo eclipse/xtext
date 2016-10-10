@@ -153,7 +153,7 @@ public abstract class AbstractIndexTestLanguageSemanticSequencer extends Abstrac
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, IndexTestLanguagePackage.Literals.PROPERTY__NAME));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getPropertyAccess().getTypeTypeQualifiedNameParserRuleCall_0_0_1(), semanticObject.getType());
+		feeder.accept(grammarAccess.getPropertyAccess().getTypeTypeQualifiedNameParserRuleCall_0_0_1(), semanticObject.eGet(IndexTestLanguagePackage.Literals.PROPERTY__TYPE, false));
 		feeder.accept(grammarAccess.getPropertyAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
 		feeder.finish();
 	}

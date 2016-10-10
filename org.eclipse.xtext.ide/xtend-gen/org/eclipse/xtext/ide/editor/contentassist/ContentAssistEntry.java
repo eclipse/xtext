@@ -79,8 +79,8 @@ public class ContentAssistEntry {
   private transient Object source;
   
   /**
-   * The kind of element that is proposed. Could be one of the constants below something specific a concrete client understands.
-   * not null
+   * The kind of element that is proposed. Could be one of the constants below or something specific a concrete client understands.
+   * Must not be null.
    */
   private String kind = ContentAssistEntry.KIND_UNKNOWN;
   
@@ -120,7 +120,7 @@ public class ContentAssistEntry {
   
   public final static String KIND_REFERENCE = "REFERENCE";
   
-  public final static String KIND_UNKNOWN = "UNKOWN";
+  public final static String KIND_UNKNOWN = "UNKNOWN";
   
   @Pure
   public String getPrefix() {

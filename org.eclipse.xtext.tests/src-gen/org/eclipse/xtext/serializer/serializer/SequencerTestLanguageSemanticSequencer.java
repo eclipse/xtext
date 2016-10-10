@@ -565,7 +565,7 @@ public class SequencerTestLanguageSemanticSequencer extends AbstractDelegatingSe
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SequencertestPackage.Literals.NULL_CROSS_REF__REF));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getNullCrossRefGeneratedAccess().getRefEObjectIDTerminalRuleCall_1_0_1(), semanticObject.getRef());
+		feeder.accept(grammarAccess.getNullCrossRefGeneratedAccess().getRefEObjectIDTerminalRuleCall_1_0_1(), semanticObject.eGet(SequencertestPackage.Literals.NULL_CROSS_REF__REF, false));
 		feeder.finish();
 	}
 	

@@ -78,7 +78,7 @@ public abstract class AbstractHiddenTokenSequencerTestLanguageRuntimeModule exte
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalHiddenTokenSequencerTestLanguageLexer> provideInternalHiddenTokenSequencerTestLanguageLexer() {
+	public Provider<? extends InternalHiddenTokenSequencerTestLanguageLexer> provideInternalHiddenTokenSequencerTestLanguageLexer() {
 		return LexerProvider.create(InternalHiddenTokenSequencerTestLanguageLexer.class);
 	}
 	

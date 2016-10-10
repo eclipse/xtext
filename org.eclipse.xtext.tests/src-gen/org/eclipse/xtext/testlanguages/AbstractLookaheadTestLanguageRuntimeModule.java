@@ -79,7 +79,7 @@ public abstract class AbstractLookaheadTestLanguageRuntimeModule extends Default
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalLookaheadTestLanguageLexer> provideInternalLookaheadTestLanguageLexer() {
+	public Provider<? extends InternalLookaheadTestLanguageLexer> provideInternalLookaheadTestLanguageLexer() {
 		return LexerProvider.create(InternalLookaheadTestLanguageLexer.class);
 	}
 	
