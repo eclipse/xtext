@@ -18,6 +18,8 @@ import org.eclipse.xtext.grammaranalysis.impl.GrammarElementTitleSwitch;
 import org.eclipse.xtext.serializer.analysis.IContextTypePDAProvider;
 import org.eclipse.xtext.serializer.analysis.ISerState;
 import org.eclipse.xtext.serializer.analysis.SerializationContext;
+import org.eclipse.xtext.serializer.analysis.SerializationContextMap;
+import org.eclipse.xtext.serializer.analysis.SerializationContextMap.Entry;
 import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.formallang.Pda;
@@ -55,18 +57,17 @@ public class ContextTypePDAProviderTest extends AbstractXtextTests {
 
 	protected String getParserRule(String body) throws Exception {
 		Grammar grammar = (Grammar) getModel(HEADER + body);
-		//		drawGrammar("pdf/" + getName(), grammar);
+		// drawGrammar("pdf/" + getName(), grammar);
 		List<String> result = Lists.newArrayList();
 		PdaListFormatter<ISerState, RuleCall> formatter = new PdaListFormatter<ISerState, RuleCall>();
 		formatter.setStateFormatter(new ToStr());
 		formatter.setStackitemFormatter(new GrammarElementTitleSwitch().showAssignments().hideCardinality());
 		formatter.sortFollowers();
 		IContextTypePDAProvider typePDAProvider = get(IContextTypePDAProvider.class);
-		Map<ISerializationContext, Pda<ISerState, RuleCall>> pdas = typePDAProvider.getContextTypePDAs(grammar);
-		List<Pair<List<ISerializationContext>, Pda<ISerState, RuleCall>>> items = SerializationContext.groupByEqualityAndSort(pdas);
-		for (Pair<List<ISerializationContext>, Pda<ISerState, RuleCall>> ctx : items) {
-			result.add(ctx.getFirst() + ":");
-			result.add("  " + formatter.format(ctx.getSecond()).replace("\n", "\n  "));
+		SerializationContextMap<Pda<ISerState, RuleCall>> pdas = typePDAProvider.getContextTypePDAs(grammar);
+		for (Entry<Pda<ISerState, RuleCall>> ctx : pdas.sortedCopy().values()) {
+			result.add(Joiner.on(", ").join(ctx.getContexts()) + ":");
+			result.add("  " + formatter.format(ctx.getValue()).replace("\n", "\n  "));
 		}
 		return Joiner.on("\n").join(result);
 	}

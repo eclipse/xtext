@@ -18,6 +18,8 @@ import org.eclipse.xtext.grammaranalysis.impl.GrammarElementTitleSwitch;
 import org.eclipse.xtext.serializer.analysis.IContextPDAProvider;
 import org.eclipse.xtext.serializer.analysis.ISerState;
 import org.eclipse.xtext.serializer.analysis.SerializationContext;
+import org.eclipse.xtext.serializer.analysis.SerializationContextMap;
+import org.eclipse.xtext.serializer.analysis.SerializationContextMap.Entry;
 import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.formallang.Pda;
@@ -60,11 +62,10 @@ public class ContextPDAProviderTest extends AbstractXtextTests {
 		formatter.setStackitemFormatter(new GrammarElementTitleSwitch().showAssignments().hideCardinality());
 		formatter.sortFollowers();
 		IContextPDAProvider pdaProvider = get(IContextPDAProvider.class);
-		Map<ISerializationContext, Pda<ISerState, RuleCall>> pdas = pdaProvider.getContextPDAs(grammar);
-		List<Pair<List<ISerializationContext>, Pda<ISerState, RuleCall>>> items = SerializationContext.groupByEqualityAndSort(pdas);
-		for (Pair<List<ISerializationContext>, Pda<ISerState, RuleCall>> ctx : items) {
-			result.add(ctx.getFirst() + ":");
-			Pda<ISerState, RuleCall> pda = ctx.getSecond();
+		SerializationContextMap<Pda<ISerState, RuleCall>> pdas = pdaProvider.getContextPDAs(grammar);
+		for (Entry<Pda<ISerState, RuleCall>> ctx : pdas.sortedCopy().values()) {
+			result.add(Joiner.on(", ").join(ctx.getContexts()) + ":");
+			Pda<ISerState, RuleCall> pda = ctx.getValue();
 			result.add("  " + formatter.format(pda).replace("\n", "\n  "));
 
 			// StackTraceElement ele = Thread.currentThread().getStackTrace()[2];

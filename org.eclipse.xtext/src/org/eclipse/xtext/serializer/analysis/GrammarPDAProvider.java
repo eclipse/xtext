@@ -23,6 +23,7 @@ import org.eclipse.xtext.grammaranalysis.impl.GrammarElementTitleSwitch;
 import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.analysis.SerializationContext.ParameterValueContext;
 import org.eclipse.xtext.serializer.analysis.SerializationContext.RuleContext;
+import org.eclipse.xtext.serializer.analysis.SerializationContextMap.Builder;
 import org.eclipse.xtext.serializer.analysis.SerializerPDA.SerializerPDAElementFactory;
 import org.eclipse.xtext.util.formallang.FollowerFunctionImpl;
 import org.eclipse.xtext.util.formallang.Pda;
@@ -167,19 +168,19 @@ public class GrammarPDAProvider implements IGrammarPDAProvider {
 		SerializerParserRuleCfg cfg = new SerializerParserRuleCfg(flattened, entryRule);
 		SerializerParserRuleFollowerFunction ff = new SerializerParserRuleFollowerFunction(cfg);
 		SerializerPDA pda = pdaUtil.create(cfg, ff, new ToOriginal(factory));
-		//		SerializerPDA pda = pdaUtil.create(cfg, ff, factory);
+		// SerializerPDA pda = pdaUtil.create(cfg, ff, factory);
 		return pda;
 	}
 
 	@Override
-	public Map<ISerializationContext, Pda<ISerState, RuleCall>> getGrammarPDAs(Grammar grammar) {
+	public SerializationContextMap<Pda<ISerState, RuleCall>> getGrammarPDAs(Grammar grammar) {
 		RuleNames names = RuleNames.getRuleNames(grammar, true);
 		RuleFilter filter = new RuleFilter();
 		filter.setDiscardTerminalRules(true);
 		filter.setDiscardUnreachableRules(false);
 		filter.setDiscardRuleTypeRef(false);
 		Grammar flattened = new FlattenedGrammarAccess(names, filter).getFlattenedGrammar();
-		Map<ISerializationContext, Pda<ISerState, RuleCall>> result = Maps.newLinkedHashMap();
+		Builder<Pda<ISerState, RuleCall>> result = SerializationContextMap.<Pda<ISerState, RuleCall>>builder();
 		for (ParserRule rule : GrammarUtil.allParserRules(flattened)) {
 			RuleWithParameterValues withParams = RuleWithParameterValues.findInEmfObject(rule);
 			AbstractRule original = withParams.getOriginal();
@@ -193,7 +194,7 @@ public class GrammarPDAProvider implements IGrammarPDAProvider {
 				}
 			}
 		}
-		return result;
+		return result.create();
 	}
 
 	protected boolean isValidRule(ParserRule rule) {

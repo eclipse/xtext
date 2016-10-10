@@ -9,7 +9,6 @@ package org.eclipse.xtext.serializer;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.xtext.AbstractElement;
@@ -21,9 +20,9 @@ import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynAbsorberState;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynState;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynTransition;
-import org.eclipse.xtext.serializer.analysis.SerializationContext;
+import org.eclipse.xtext.serializer.analysis.SerializationContextMap;
+import org.eclipse.xtext.serializer.analysis.SerializationContextMap.Entry;
 import org.eclipse.xtext.tests.AbstractXtextTests;
-import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.formallang.NfaToProduction;
 import org.eclipse.xtext.util.formallang.ProductionStringFactory;
 import org.junit.Test;
@@ -78,15 +77,14 @@ public class SyntacticSequencerPDAProviderTest extends AbstractXtextTests {
 
 	protected String getParserRule(String body) throws Exception {
 		Grammar grammar = (Grammar) getModel(HEADER + body);
-		//		StackTraceElement ele = Thread.currentThread().getStackTrace()[2];
-		//		drawGrammar("pdf/" + ele.getMethodName(), grammar);
+		// StackTraceElement ele = Thread.currentThread().getStackTrace()[2];
+		// drawGrammar("pdf/" + ele.getMethodName(), grammar);
 		ISyntacticSequencerPDAProvider pdaProvider = get(ISyntacticSequencerPDAProvider.class);
-		Map<ISerializationContext, ISynAbsorberState> pdas = pdaProvider.getSyntacticSequencerPDAs(grammar);
-		List<Pair<List<ISerializationContext>, ISynAbsorberState>> grouped = SerializationContext.groupByEqualityAndSort(pdas);
+		SerializationContextMap<ISynAbsorberState> pdas = pdaProvider.getSyntacticSequencerPDAs(grammar);
 		List<String> result = Lists.newArrayList();
-		for (Pair<List<ISerializationContext>, ISynAbsorberState> e : grouped) {
-			result.add(e.getFirst() + ":");
-			result.addAll(pda2lines2(e.getSecond()));
+		for (Entry<ISynAbsorberState> e : pdas.sortedCopy().values()) {
+			result.add(Joiner.on(", ").join(e.getContexts()) + ":");
+			result.addAll(pda2lines2(e.getValue()));
 		}
 		return Joiner.on("\n").join(result);
 	}

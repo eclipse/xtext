@@ -10,7 +10,6 @@ package org.eclipse.xtext.serializer.analysis;
 import static org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.ConstraintElementType.*;
 import static org.eclipse.xtext.serializer.analysis.ISemanticSequencerNfaProvider.*;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -33,8 +32,7 @@ import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.grammaranalysis.impl.GrammarElementTitleSwitch;
 import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.analysis.ISemanticSequencerNfaProvider.ISemState;
-import org.eclipse.xtext.util.Pair;
-import org.eclipse.xtext.util.Tuples;
+import org.eclipse.xtext.serializer.analysis.SerializationContextMap.Entry;
 import org.eclipse.xtext.util.formallang.Nfa;
 import org.eclipse.xtext.util.formallang.NfaToProduction;
 import org.eclipse.xtext.util.formallang.NfaUtil;
@@ -407,7 +405,7 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 
 	private final static IConstraintElement UNINITIALIZED = new ConstraintElement(null, null, (AbstractElement) null, false, false);
 
-	private Map<Grammar, Map<ISerializationContext, IConstraint>> cache = Maps.newHashMap();
+	private Map<Grammar, SerializationContextMap<IConstraint>> cache = Maps.newHashMap();
 
 	@Inject
 	protected Context2NameFunction context2Name;
@@ -436,7 +434,7 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 		return values;
 	}
 
-	protected String findBestConstraintName(Grammar grammar, Map<ISerializationContext, Pda<ISerState, RuleCall>> typePDAs,
+	protected String findBestConstraintName(Grammar grammar, SerializationContextMap<Pda<ISerState, RuleCall>> typePDAs,
 			IConstraint constraint) {
 		Set<ParserRule> relevantRules = Sets.newLinkedHashSet();
 		Set<Action> relevantActions = Sets.newLinkedHashSet();
@@ -509,32 +507,29 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 	}
 
 	@Override
-	public Map<ISerializationContext, IConstraint> getConstraints(Grammar grammar) {
-		Map<ISerializationContext, IConstraint> result = cache.get(grammar);
-		if (result != null)
-			return result;
-		result = Maps.newLinkedHashMap();
-		cache.put(grammar, result);
+	public SerializationContextMap<IConstraint> getConstraints(Grammar grammar) {
+		SerializationContextMap<IConstraint> cached = cache.get(grammar);
+		if (cached != null)
+			return cached;
+		SerializationContextMap.Builder<IConstraint> builder = SerializationContextMap.builder();
 		GrammarElementDeclarationOrder.get(grammar);
-		Map<ISerializationContext, Nfa<ISemState>> nfas = nfaProvider.getSemanticSequencerNFAs(grammar);
-		ArrayList<ISerializationContext> contexts = Lists.newArrayList(nfas.keySet());
-		Collections.sort(contexts);
-		Map<Pair<EClass, Nfa<ISemState>>, Constraint> constraints = Maps.newLinkedHashMap();
-		for (ISerializationContext context : contexts) {
-			Nfa<ISemState> nfa = nfas.get(context);
-			EClass type = context.getType();
-			Pair<EClass, Nfa<ISemState>> key = Tuples.create(type, nfa);
-			Constraint constraint = constraints.get(key);
-			if (constraint == null) {
-				constraint = new Constraint(grammar, type, nfa);
-				constraints.put(key, constraint);
+		SerializationContextMap<Nfa<ISemState>> nfas = nfaProvider.getSemanticSequencerNFAs(grammar);
+		for (Entry<Nfa<ISemState>> e : nfas.values()) {
+			Nfa<ISemState> nfa = e.getValue();
+			for (EClass type : e.getTypes()) {
+				Constraint constraint = new Constraint(grammar, type, nfa);
+				List<ISerializationContext> contexts = e.getContexts(type);
+				constraint.contexts.addAll(contexts);
+				builder.put(contexts, constraint);
 			}
-			constraint.contexts.add(context);
-			result.put(context, constraint);
 		}
-		Map<ISerializationContext, Pda<ISerState, RuleCall>> typePDAs = typeProvider.getContextTypePDAs(grammar);
-		for (Constraint constraint : constraints.values())
+		SerializationContextMap<IConstraint> result = builder.create();
+		SerializationContextMap<Pda<ISerState, RuleCall>> typePDAs = typeProvider.getContextTypePDAs(grammar);
+		for (Entry<IConstraint> e : result.values()) {
+			Constraint constraint = (Constraint) e.getValue();
 			constraint.setName(findBestConstraintName(grammar, typePDAs, constraint));
+		}
+		cache.put(grammar, result);
 		return result;
 	}
 

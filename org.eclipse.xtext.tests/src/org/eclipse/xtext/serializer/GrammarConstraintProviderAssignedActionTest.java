@@ -8,23 +8,18 @@
 package org.eclipse.xtext.serializer;
 
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraint;
-import org.eclipse.xtext.serializer.analysis.SerializationContext;
+import org.eclipse.xtext.serializer.analysis.SerializationContextMap;
 import org.eclipse.xtext.tests.AbstractXtextTests;
-import org.eclipse.xtext.util.Pair;
 import org.junit.Test;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -82,19 +77,18 @@ public class GrammarConstraintProviderAssignedActionTest extends AbstractXtextTe
 		Grammar grammar = (Grammar) getModel(HEADER + body);
 		IGrammarConstraintProvider gcp = get(IGrammarConstraintProvider.class);
 
-		//		try {
-		//			new ActionFilter2Dot().draw(grammar, getName() + ".pdf", "-T pdf");
-		//		} catch (IOException e) {
-		//			if (log.isDebugEnabled())
-		//				log.debug(e.getMessage(), e);
-		//		}
+		// try {
+		// new ActionFilter2Dot().draw(grammar, getName() + ".pdf", "-T pdf");
+		// } catch (IOException e) {
+		// if (log.isDebugEnabled())
+		// log.debug(e.getMessage(), e);
+		// }
 
-		Map<ISerializationContext, IConstraint> constraints = gcp.getConstraints(grammar);
+		SerializationContextMap<IConstraint> constraints = gcp.getConstraints(grammar);
 		List<String> result = Lists.newArrayList();
-		List<Pair<List<ISerializationContext>, IConstraint>> groups = SerializationContext.groupByEqualityAndSort(constraints);
-		for (Pair<List<ISerializationContext>, IConstraint> r : groups) {
-			result.add(r.getFirst() + ":");
-			result.add("  " + r.getSecond());
+		for (SerializationContextMap.Entry<IConstraint> r : constraints.sortedCopy().values()) {
+			result.add(Joiner.on(", ").join(r.getContexts()) + ":");
+			result.add("  " + r.getValue());
 		}
 		return Joiner.on("\n").join(result);
 	}
@@ -103,23 +97,26 @@ public class GrammarConstraintProviderAssignedActionTest extends AbstractXtextTe
 	public void testXtext() {
 		IGrammarConstraintProvider gcp = get(IGrammarConstraintProvider.class);
 		Grammar grammar = getGrammarAccess().getGrammar();
-		//		try {
-		//			new ActionFilter2Dot().draw(getGrammarAccess().getGrammar(), getName() + ".pdf", "-T pdf");
-		//		} catch (IOException e) {
-		//			if (log.isDebugEnabled())
-		//				log.debug(e.getMessage(), e);
-		//		}
-		Map<ISerializationContext, IConstraint> constraints = gcp.getConstraints(grammar);
-		List<String> result = Lists.newArrayList();
-		Set<IConstraint> visited = Sets.newHashSet();
-		for (Entry<ISerializationContext, IConstraint> r : constraints.entrySet()) {
-			ISerializationContext context = r.getKey();
-			IConstraint constraint = r.getValue();
-			result.add(context.toString());
-			if (visited.add(constraint))
-				result.add("  " + constraint.toString());
-		}
-		//		System.out.println(Joiner.on("\n").join(result));
+		// try {
+		// new ActionFilter2Dot().draw(getGrammarAccess().getGrammar(),
+		// getName() + ".pdf", "-T pdf");
+		// } catch (IOException e) {
+		// if (log.isDebugEnabled())
+		// log.debug(e.getMessage(), e);
+		// }
+		// SerializationContextMap<IConstraint> constraints =
+		gcp.getConstraints(grammar);
+		// List<String> result = Lists.newArrayList();
+		// Set<IConstraint> visited = Sets.newHashSet();
+		// for (Entry<ISerializationContext, IConstraint> r :
+		// constraints.entrySet()) {
+		// ISerializationContext context = r.getKey();
+		// IConstraint constraint = r.getValue();
+		// result.add(context.toString());
+		// if (visited.add(constraint))
+		// result.add(" " + constraint.toString());
+		// }
+		// System.out.println(Joiner.on("\n").join(result));
 	}
 
 	@Test

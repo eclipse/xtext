@@ -2,7 +2,6 @@ package org.eclipse.xtext.serializer.analysis;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -244,6 +243,6 @@ public interface IGrammarConstraintProvider {
 	 * Returns all constraints form this grammar. If a constraint belongs to multiple ConstraintContexts, it is
 	 * important to call this method to ensure there is inly one instance fo this constraint.
 	 */
-	public Map<ISerializationContext, IConstraint> getConstraints(Grammar context);
+	public SerializationContextMap<IConstraint> getConstraints(Grammar context);
 
 }

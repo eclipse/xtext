@@ -8,10 +8,9 @@
 package org.eclipse.xtext.serializer;
 
 import com.google.common.base.Function;
+import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
-import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.function.Consumer;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -23,6 +22,7 @@ import org.eclipse.xtext.grammaranalysis.impl.GrammarElementTitleSwitch;
 import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.analysis.IGrammarPDAProvider;
 import org.eclipse.xtext.serializer.analysis.ISerState;
+import org.eclipse.xtext.serializer.analysis.SerializationContextMap;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.testing.util.ParseHelper;
@@ -940,15 +940,21 @@ public class GrammarPDAProviderTest {
       _builder.newLineIfNotEmpty();
       final Grammar grammar = this.parser.parse(_builder);
       this.validator.assertNoErrors(grammar);
-      final Map<ISerializationContext, Pda<ISerState, RuleCall>> pdas = this.pdaProvider.getGrammarPDAs(grammar);
-      Collection<Pda<ISerState, RuleCall>> _values = pdas.values();
-      final Consumer<Pda<ISerState, RuleCall>> _function = (Pda<ISerState, RuleCall> it) -> {
-        this.assertNoLeakedGrammarElements(grammar, it);
+      final SerializationContextMap<Pda<ISerState, RuleCall>> pdas = this.pdaProvider.getGrammarPDAs(grammar);
+      List<SerializationContextMap.Entry<Pda<ISerState, RuleCall>>> _values = pdas.values();
+      final Consumer<SerializationContextMap.Entry<Pda<ISerState, RuleCall>>> _function = (SerializationContextMap.Entry<Pda<ISerState, RuleCall>> it) -> {
+        Pda<ISerState, RuleCall> _value = it.getValue();
+        this.assertNoLeakedGrammarElements(grammar, _value);
       };
       _values.forEach(_function);
-      Set<ISerializationContext> _keySet = pdas.keySet();
-      List<ISerializationContext> _sort = IterableExtensions.<ISerializationContext>sort(_keySet);
-      final Function1<ISerializationContext, String> _function_1 = (ISerializationContext it) -> {
+      List<SerializationContextMap.Entry<Pda<ISerState, RuleCall>>> _values_1 = pdas.values();
+      final Function1<SerializationContextMap.Entry<Pda<ISerState, RuleCall>>, List<ISerializationContext>> _function_1 = (SerializationContextMap.Entry<Pda<ISerState, RuleCall>> it) -> {
+        return it.getContexts();
+      };
+      List<List<ISerializationContext>> _map = ListExtensions.<SerializationContextMap.Entry<Pda<ISerState, RuleCall>>, List<ISerializationContext>>map(_values_1, _function_1);
+      Iterable<ISerializationContext> _flatten = Iterables.<ISerializationContext>concat(_map);
+      List<ISerializationContext> _sort = IterableExtensions.<ISerializationContext>sort(_flatten);
+      final Function1<ISerializationContext, String> _function_2 = (ISerializationContext it) -> {
         StringConcatenation _builder_1 = new StringConcatenation();
         _builder_1.append(it, "");
         _builder_1.append(":");
@@ -960,8 +966,8 @@ public class GrammarPDAProviderTest {
         _builder_1.newLineIfNotEmpty();
         return _builder_1.toString();
       };
-      List<String> _map = ListExtensions.<ISerializationContext, String>map(_sort, _function_1);
-      return IterableExtensions.join(_map);
+      List<String> _map_1 = ListExtensions.<ISerializationContext, String>map(_sort, _function_2);
+      return IterableExtensions.join(_map_1);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

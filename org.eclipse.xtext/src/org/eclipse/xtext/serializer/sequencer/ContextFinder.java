@@ -13,7 +13,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
@@ -31,6 +30,7 @@ import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstra
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraintElement;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IFeatureInfo;
 import org.eclipse.xtext.serializer.analysis.SerializationContext;
+import org.eclipse.xtext.serializer.analysis.SerializationContextMap;
 import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 import org.eclipse.xtext.xtext.RuleNames;
@@ -38,7 +38,6 @@ import org.eclipse.xtext.xtext.RuleNames;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
@@ -53,7 +52,7 @@ public class ContextFinder implements IContextFinder {
 	@Inject
 	protected IAssignmentFinder assignmentFinder;
 
-	protected Map<ISerializationContext, IConstraint> constraints;
+	protected SerializationContextMap<IConstraint> constraints;
 
 	@Inject
 	protected IGrammarConstraintProvider grammarConstraintProvider;
@@ -234,11 +233,12 @@ public class ContextFinder implements IContextFinder {
 	protected Multimap<IConstraint, ISerializationContext> getConstraints(EObject sem) {
 		EClass type = sem == null ? null : sem.eClass();
 		Multimap<IConstraint, ISerializationContext> result = ArrayListMultimap.create();
-		for (Entry<ISerializationContext, IConstraint> e : constraints.entrySet()) {
-			ISerializationContext context = e.getKey();
+		for (SerializationContextMap.Entry<IConstraint> e : constraints.values()) {
 			IConstraint constraint = e.getValue();
-			if (constraint.getType() == type) {
-				result.put(constraint, context);
+			for (ISerializationContext context : e.getContexts()) {
+				if (constraint.getType() == type) {
+					result.put(constraint, context);
+				}
 			}
 		}
 		return result;
@@ -265,7 +265,6 @@ public class ContextFinder implements IContextFinder {
 
 	protected void initConstraints() {
 		if (constraints == null) {
-			constraints = Maps.newLinkedHashMap();
 			constraints = grammarConstraintProvider.getConstraints(ruleNames.getContextGrammar());
 		}
 	}

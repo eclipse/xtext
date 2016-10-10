@@ -7,8 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.serializer.analysis;
 
+import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
@@ -221,7 +221,7 @@ public class ContextTypePDAProvider implements IContextTypePDAProvider {
 
 	private static Logger LOG = Logger.getLogger(ContextTypePDAProvider.class);
 
-	private Map<Grammar, Map<ISerializationContext, Pda<ISerState, RuleCall>>> cache = Maps.newHashMap();
+	private Map<Grammar, SerializationContextMap<Pda<ISerState, RuleCall>>> cache = Maps.newHashMap();
 
 	@Inject
 	protected SerializerPDACloneFactory factory;
@@ -245,32 +245,38 @@ public class ContextTypePDAProvider implements IContextTypePDAProvider {
 	}
 
 	@Override
-	public Map<ISerializationContext, Pda<ISerState, RuleCall>> getContextTypePDAs(Grammar grammar) {
-		Map<ISerializationContext, Pda<ISerState, RuleCall>> result = cache.get(grammar);
-		if (result != null)
-			return result;
-		result = Maps.newLinkedHashMap();
-		cache.put(grammar, result);
-		Map<ISerializationContext, Pda<ISerState, RuleCall>> contextPDAs = pdaProvider.getContextPDAs(grammar);
-		for (Entry<ISerializationContext, Pda<ISerState, RuleCall>> e : contextPDAs.entrySet()) {
-			ISerializationContext parent = e.getKey();
+	public SerializationContextMap<Pda<ISerState, RuleCall>> getContextTypePDAs(Grammar grammar) {
+		SerializationContextMap<Pda<ISerState, RuleCall>> cached = cache.get(grammar);
+		if (cached != null)
+			return cached;
+		SerializationContextMap.Builder<Pda<ISerState, RuleCall>> builder = SerializationContextMap.builder();
+
+		SerializationContextMap<Pda<ISerState, RuleCall>> contextPDAs = pdaProvider.getContextPDAs(grammar);
+		for (SerializationContextMap.Entry<Pda<ISerState, RuleCall>> e : contextPDAs.values()) {
+			List<ISerializationContext> parents = e.getContexts();
 			Pda<ISerState, RuleCall> contextPDA = e.getValue();
 			try {
 				Set<EClass> types = collectTypes(contextPDA);
 				if (types.size() == 1) {
-					TypeContext ctx = new TypeContext(parent, types.iterator().next());
-					result.put(ctx, contextPDA);
+					for (ISerializationContext parent : parents) {
+						TypeContext ctx = new TypeContext(parent, types.iterator().next());
+						builder.put(ctx, contextPDA);
+					}
 				} else {
 					for (EClass type : types) {
-						TypeContext typeContext = new TypeContext(parent, type);
 						Pda<ISerState, RuleCall> filtered = filterByType(contextPDA, type);
-						result.put(typeContext, filtered);
+						for (ISerializationContext parent : parents) {
+							TypeContext typeContext = new TypeContext(parent, type);
+							builder.put(typeContext, filtered);
+						}
 					}
 				}
 			} catch (Exception x) {
-				LOG.error("Error extracting PDAs for types for context '" + parent + "': " + x.getMessage(), x);
+				LOG.error("Error extracting PDAs for types for context '" + parents + "': " + x.getMessage(), x);
 			}
 		}
+		SerializationContextMap<Pda<ISerState, RuleCall>> result = builder.create();
+		cache.put(grammar, result);
 		return result;
 	}
 

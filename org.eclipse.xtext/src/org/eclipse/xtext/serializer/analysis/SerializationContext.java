@@ -7,13 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.serializer.analysis;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
@@ -28,18 +23,13 @@ import org.eclipse.xtext.Parameter;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.serializer.ISerializationContext;
-import org.eclipse.xtext.util.Pair;
-import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xtext.ConditionEvaluator;
 
 import com.google.common.base.Joiner;
 import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
-import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Multimaps;
-import com.google.common.collect.SetMultimap;
 import com.google.common.collect.Sets;
 
 /**
@@ -185,33 +175,6 @@ public abstract class SerializationContext implements ISerializationContext {
 		List<EObject> result = Lists.newArrayList();
 		for (ISerializationContext ctx : ctxs)
 			result.add(((SerializationContext) ctx).getActionOrRule());
-		return result;
-	}
-
-	public static <T> List<Pair<List<ISerializationContext>, T>> groupByEqualityAndSort(Map<ISerializationContext, T> items) {
-		SetMultimap<ISerializationContext, T> byContext = Multimaps.forMap(items);
-		ArrayListMultimap<T, ISerializationContext> byT = Multimaps.invertFrom(byContext,
-				ArrayListMultimap.<T, ISerializationContext> create());
-		List<Pair<List<ISerializationContext>, T>> result = Lists.newArrayList();
-		for (Entry<T, Collection<ISerializationContext>> e : byT.asMap().entrySet()) {
-			T t = e.getKey();
-			@SuppressWarnings("serial")
-			List<ISerializationContext> contexts = new ArrayList<ISerializationContext>() {
-				@Override
-				public String toString() {
-					return Joiner.on(", ").join(this);
-				}
-			};
-			contexts.addAll(e.getValue());
-			Collections.sort(contexts);
-			result.add(Tuples.create(contexts, t));
-		}
-		Collections.sort(result, new Comparator<Pair<List<ISerializationContext>, T>>() {
-			@Override
-			public int compare(Pair<List<ISerializationContext>, T> o1, Pair<List<ISerializationContext>, T> o2) {
-				return o1.getFirst().get(0).compareTo(o2.getFirst().get(0));
-			}
-		});
 		return result;
 	}
 

@@ -8,7 +8,6 @@
 package org.eclipse.xtext.serializer.diagnostic;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EClass;
@@ -21,6 +20,8 @@ import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraint;
 import org.eclipse.xtext.serializer.analysis.ISemanticSequencerNfaProvider.ISemState;
 import org.eclipse.xtext.serializer.analysis.SerializationContext;
+import org.eclipse.xtext.serializer.analysis.SerializationContextMap;
+import org.eclipse.xtext.serializer.analysis.SerializationContextMap.Entry;
 import org.eclipse.xtext.serializer.sequencer.BacktrackingSemanticSequencer.SerializableObject;
 import org.eclipse.xtext.serializer.sequencer.IContextFinder;
 import org.eclipse.xtext.util.formallang.Nfa;
@@ -59,7 +60,7 @@ public class SequencerDiagnosticProvider implements ISemanticSequencerDiagnostic
 	public ISerializationDiagnostic createBacktrackingFailedDiagnostic(SerializableObject semanticObject, EObject context,
 			Nfa<ISemState> nfa) {
 		ISerializationContext ctx = SerializationContext.fromEObject(context, semanticObject.getEObject());
-		Map<ISerializationContext, IConstraint> constraints = grammarConstraints.getConstraints(grammarAccess.getGrammar());
+		SerializationContextMap<IConstraint> constraints = grammarConstraints.getConstraints(grammarAccess.getGrammar());
 		return createBacktrackingFailedDiagnostic(semanticObject, ctx, constraints.get(ctx));
 	}
 
@@ -111,20 +112,24 @@ public class SequencerDiagnosticProvider implements ISemanticSequencerDiagnostic
 
 	protected List<ISerializationContext> getValidContexts(EClass clazz) {
 		List<ISerializationContext> result = Lists.newArrayList();
-		Map<ISerializationContext, IConstraint> constraints = grammarConstraints.getConstraints(grammarAccess.getGrammar());
-		for (ISerializationContext ctx : constraints.keySet())
-			if (ctx.getType() == clazz)
-				result.add(ctx);
+		SerializationContextMap<IConstraint> constraints = grammarConstraints.getConstraints(grammarAccess.getGrammar());
+		for (Entry<IConstraint> ctx : constraints.values())
+			for (EClass type : ctx.getTypes()) {
+				if (type == clazz)
+					result.addAll(ctx.getContexts(type));
+			}
 		return result;
 	}
 
 	protected Set<EClass> getValidTypes(ISerializationContext context) {
-		Map<ISerializationContext, IConstraint> constraints = grammarConstraints.getConstraints(grammarAccess.getGrammar());
+		SerializationContextMap<IConstraint> constraints = grammarConstraints.getConstraints(grammarAccess.getGrammar());
 		Set<EClass> result = Sets.newLinkedHashSet();
-		for (ISerializationContext ctx : constraints.keySet())
-			if (((SerializationContext) ctx).getActionOrRule() == ((SerializationContext) context).getActionOrRule()) {
-				result.add(ctx.getType());
-			}
+		for (Entry<IConstraint> ctx : constraints.values())
+			for (ISerializationContext c : ctx.getContexts())
+				if (((SerializationContext) c).getActionOrRule() == ((SerializationContext) context)
+						.getActionOrRule()) {
+					result.add(c.getType());
+				}
 		return result;
 	}
 

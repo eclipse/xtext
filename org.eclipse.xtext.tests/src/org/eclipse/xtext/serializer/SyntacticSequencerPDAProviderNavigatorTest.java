@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.serializer;
 
-import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EClass;
@@ -22,6 +20,7 @@ import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISyn
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynFollowerOwner;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynState;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynTransition;
+import org.eclipse.xtext.serializer.analysis.SerializationContextMap;
 import org.eclipse.xtext.serializer.sequencer.RuleCallStack;
 import org.eclipse.xtext.tests.AbstractXtextTests;
 import org.junit.Test;
@@ -49,22 +48,25 @@ public class SyntacticSequencerPDAProviderNavigatorTest extends AbstractXtextTes
 
 	protected ISynAbsorberState getParserRule(String body, String name, String typeName) throws Exception {
 		Grammar grammar = (Grammar) getModel(HEADER + body);
-		//		SyntacticSequencerPDA2SimpleDot.drawGrammar("pdf/" + getName(), grammar);
-		//		SyntacticSequencerPDA2ExtendedDot.drawGrammar(createSequenceParserPDAProvider(), "pdf/" + getName(), grammar);
+		// SyntacticSequencerPDA2SimpleDot.drawGrammar("pdf/" + getName(),
+		// grammar);
+		// SyntacticSequencerPDA2ExtendedDot.drawGrammar(createSequenceParserPDAProvider(),
+		// "pdf/" + getName(), grammar);
 
 		ISyntacticSequencerPDAProvider pdaProvider = get(ISyntacticSequencerPDAProvider.class);
-		Map<ISerializationContext, ISynAbsorberState> pdas = pdaProvider.getSyntacticSequencerPDAs(grammar);
-		for (Entry<ISerializationContext, ISynAbsorberState> s : pdas.entrySet()) {
-			ISerializationContext context = s.getKey();
-			if (context.getAssignedAction() != null)
-				continue;
-			ISynAbsorberState pda = s.getValue();
-			ParserRule rule = context.getParserRule();
-			EClass type = context.getType();
-			boolean nameMatches = rule == null || name == null || rule.getName().equals(name);
-			boolean typeMatches = type == null || typeName == null || typeName.equals(type.getName());
-			if (nameMatches && typeMatches)
-				return pda;
+		SerializationContextMap<ISynAbsorberState> pdas = pdaProvider.getSyntacticSequencerPDAs(grammar);
+		for (SerializationContextMap.Entry<ISynAbsorberState> e : pdas.sortedCopy().values()) {
+			for (ISerializationContext context : e.getContexts()) {
+				if (context.getAssignedAction() != null)
+					continue;
+				ISynAbsorberState pda = e.getValue();
+				ParserRule rule = context.getParserRule();
+				EClass type = context.getType();
+				boolean nameMatches = rule == null || name == null || rule.getName().equals(name);
+				boolean typeMatches = type == null || typeName == null || typeName.equals(type.getName());
+				if (nameMatches && typeMatches)
+					return pda;
+			}
 		}
 		throw new IllegalStateException();
 	}

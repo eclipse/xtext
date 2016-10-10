@@ -8,15 +8,14 @@
 package org.eclipse.xtext.serializer;
 
 import java.util.List;
-import java.util.Map;
 
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraint;
-import org.eclipse.xtext.serializer.analysis.SerializationContext;
+import org.eclipse.xtext.serializer.analysis.SerializationContextMap;
+import org.eclipse.xtext.serializer.analysis.SerializationContextMap.Entry;
 import org.eclipse.xtext.tests.AbstractXtextTests;
-import org.eclipse.xtext.util.Pair;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -42,12 +41,11 @@ public class GrammarConstraintProviderTest extends AbstractXtextTests {
 		Grammar grammar = (Grammar) getModel(HEADER + body);
 		IGrammarConstraintProvider gcp = get(IGrammarConstraintProvider.class);
 
-		Map<ISerializationContext, IConstraint> constraints = gcp.getConstraints(grammar);
-		List<Pair<List<ISerializationContext>, IConstraint>> grouped = SerializationContext.groupByEqualityAndSort(constraints);
+		SerializationContextMap<IConstraint> constraints = gcp.getConstraints(grammar);
 		List<String> result = Lists.newArrayList();
-		for (Pair<List<ISerializationContext>, IConstraint> r : grouped) {
-			result.add(r.getFirst() + ":");
-			result.add("  " + r.getSecond());
+		for (Entry<IConstraint> r : constraints.sortedCopy().values()) {
+			result.add(Joiner.on(", ").join(r.getContexts()) + ":");
+			result.add("  " + r.getValue());
 		}
 		return Joiner.on("\n").join(result);
 	}
