@@ -242,11 +242,9 @@ public class ContextTypePDAProvider implements IContextTypePDAProvider {
 		return collector.getTypes();
 	}
 
-	protected Pda<ISerState, RuleCall> filterByType(Grammar grammar, Pda<ISerState, RuleCall> contextPda, EClass type,
-			Map<ISerState, Integer> distances) {
+	protected Pda<ISerState, RuleCall> filterByType(Pda<ISerState, RuleCall> contextPda, EClass type, Map<ISerState, Integer> distances) {
 		TypeFilter typeFilter = newTypeFilter(type);
 		SerializerPDA pda = pdaUtil.filterEdges(contextPda, typeFilter, distances, factory);
-		pda.setGrammar(grammar);
 		return pda;
 	}
 
@@ -271,7 +269,7 @@ public class ContextTypePDAProvider implements IContextTypePDAProvider {
 					}
 				} else {
 					for (EClass type : types) {
-						Pda<ISerState, RuleCall> filtered = filterByType(grammar, contextPDA, type, distances);
+						Pda<ISerState, RuleCall> filtered = filterByType(contextPDA, type, distances);
 						for (ISerializationContext parent : parents) {
 							TypeContext typeContext = new TypeContext(parent, type);
 							builder.put(typeContext, filtered);
