@@ -208,10 +208,12 @@ public class ContextPDAProvider implements IContextPDAProvider {
 			} else {
 				try {
 					SerializerPDA rulePda = extract(pda.getStop());
+					rulePda.setGrammar(grammar);
 					result.put(contexts, rulePda);
 					for (ISerState state : actions) {
 						Action action = (Action) state.getGrammarElement();
 						SerializerPDA actionPda = extract(state);
+						actionPda.setGrammar(grammar);
 						actionPdas.put(action, actionPda);
 						actionContexts.putAll(action, contexts);
 					}
@@ -221,7 +223,7 @@ public class ContextPDAProvider implements IContextPDAProvider {
 			}
 		}
 		for (Map.Entry<Action, Collection<SerializerPDA>> action : actionPdas.asMap().entrySet()) {
-			SerializerPDA merged = merge(new ActionContext(null, action.getKey()), action.getValue());
+			SerializerPDA merged = merge(grammar, new ActionContext(null, action.getKey()), action.getValue());
 			Set<Set<Parameter>> parameterPermutations = Sets.newLinkedHashSet();
 			for (ISerializationContext container : actionContexts.get(action.getKey())) {
 				parameterPermutations.add(container.getEnabledBooleanParameters());
@@ -238,12 +240,13 @@ public class ContextPDAProvider implements IContextPDAProvider {
 		return result.create();
 	}
 
-	protected SerializerPDA merge(ISerializationContext context, Collection<SerializerPDA> pdas) {
+	protected SerializerPDA merge(Grammar grammar, ISerializationContext context, Collection<SerializerPDA> pdas) {
 		if (pdas.isEmpty())
 			throw new IllegalStateException();
 		if (pdas.size() == 1)
 			return pdas.iterator().next();
 		SerializerPDA merged = factory.create(null, null);
+		merged.setGrammar(grammar);
 		Map<ISerState, SerializerPDAState> oldToNew = Maps.newHashMap();
 		for (Pda<ISerState, RuleCall> pda : pdas) {
 			oldToNew.put(pda.getStop(), merged.getStop());

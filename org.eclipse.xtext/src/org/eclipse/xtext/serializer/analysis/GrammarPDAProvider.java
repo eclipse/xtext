@@ -168,6 +168,7 @@ public class GrammarPDAProvider implements IGrammarPDAProvider {
 		SerializerParserRuleCfg cfg = new SerializerParserRuleCfg(flattened, entryRule);
 		SerializerParserRuleFollowerFunction ff = new SerializerParserRuleFollowerFunction(cfg);
 		SerializerPDA pda = pdaUtil.create(cfg, ff, new ToOriginal(factory));
+		pda.setGrammar(flattened);
 		// SerializerPDA pda = pdaUtil.create(cfg, ff, factory);
 		return pda;
 	}

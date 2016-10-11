@@ -10,6 +10,7 @@ package org.eclipse.xtext.serializer.analysis;
 import java.util.List;
 
 import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.grammaranalysis.impl.GrammarElementTitleSwitch;
@@ -147,7 +148,7 @@ public class SerializerPDA implements Pda<ISerState, RuleCall> {
 
 		@Override
 		public int hashCode() {
-			return (grammarElement != null ? grammarElement.hashCode() : 1) * type.hashCode();
+			return (grammarElement != null ? grammarElement.hashCode() : 1) + type.ordinal();
 		}
 
 		@Override
@@ -182,6 +183,8 @@ public class SerializerPDA implements Pda<ISerState, RuleCall> {
 
 	protected SerializerPDA.SerializerPDAState start;
 	protected SerializerPDA.SerializerPDAState stop;
+	private String identity = null;
+	private Grammar grammar = null;
 
 	public SerializerPDA(SerializerPDA.SerializerPDAState start, SerializerPDA.SerializerPDAState stop) {
 		super();
@@ -193,7 +196,8 @@ public class SerializerPDA implements Pda<ISerState, RuleCall> {
 	public boolean equals(Object obj) {
 		if (obj == null || obj.getClass() != getClass())
 			return false;
-		return new NfaUtil().equalsIgnoreOrder(this, (SerializerPDA) obj);
+		SerializerPDA other = (SerializerPDA) obj;
+		return getIdentity().equals(other.getIdentity());
 	}
 
 	@Override
@@ -222,15 +226,39 @@ public class SerializerPDA implements Pda<ISerState, RuleCall> {
 	public SerializerPDAState getStop() {
 		return stop;
 	}
+	
+	public Grammar getGrammar() {
+		return grammar;
+	}
+
+	public void setGrammar(Grammar grammar) {
+		this.grammar = grammar;
+	}
+
+	protected String getIdentity() {
+		if (identity != null) {
+			return identity;
+		}
+		if (grammar == null) {
+			throw new IllegalStateException();
+		}
+		final GrammarElementDeclarationOrder order = GrammarElementDeclarationOrder.get(grammar);
+		identity = new NfaUtil().identityString(this, new Function<ISerState, String>() {
+			@Override
+			public String apply(ISerState input) {
+				AbstractElement grammarElement = input.getGrammarElement();
+				if (grammarElement != null) {
+					return order.getElementID(grammarElement) + "_" + input.getType().name();
+				}
+				return input.getType().name();
+			}
+		});
+		return identity;
+	}
 
 	@Override
 	public int hashCode() {
-		int r = 0;
-		if (start != null && start.followers != null)
-			for (ISerState s : start.followers)
-				if (s != null)
-					r += s.hashCode();
-		return r;
+		return getIdentity().hashCode();
 	}
 
 	@Override
