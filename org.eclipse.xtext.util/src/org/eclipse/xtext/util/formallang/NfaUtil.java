@@ -590,5 +590,55 @@ public class NfaUtil {
 	public <S, COMP extends Comparable<COMP>> Nfa<S> sort(Nfa<S> nfa, Map<S, COMP> comparator) {
 		return sort(nfa, new MappedComparator<S, COMP>(comparator));
 	}
+	
+	/**
+	 * A cycle is represented by the set of all nodes on that cycle. The return value maps each node that is on a cycle
+	 * to the corresponding set. Multiple cycles that are connected via a node are treated as a single cycle.
+	 */
+	public <S> Map<S, Set<S>> findCycles(Nfa<S> nfa) {
+		Map<S, Set<S>> cycles = Maps.newLinkedHashMap();
+		findCycles(nfa, nfa.getStart(), cycles, Maps.newHashMap(), Lists.newLinkedList());
+		return cycles;
+	}
+	
+	private static final int DFS_VISITED = 1;
+	private static final int DFS_ON_STACK = 2;
+	
+	/**
+	 * Finding cycles is done with a depth-first search.
+	 */
+	protected <S> void findCycles(Nfa<S> nfa, S node, Map<S, Set<S>> cycles, Map<S, Integer> dfsMark, LinkedList<S> dfsStack) {
+		dfsStack.push(node);
+		dfsMark.put(node, DFS_ON_STACK);
+		for (S follower : nfa.getFollowers(node)) {
+			Integer followerMark = dfsMark.get(follower);
+			if (followerMark == null) {
+				// The follower is not visited yet, so go deeper.
+				findCycles(nfa, follower, cycles, dfsMark, dfsStack);
+			} else if (followerMark == DFS_ON_STACK) {
+				// If the follower is on the stack that means we have a cycle that includes all nodes between
+				// the follower node and the current node.
+				Set<S> cycle = Sets.newHashSet();
+				Iterator<S> stackIter = dfsStack.iterator();
+				S cycleNode;
+				do {
+					cycleNode = stackIter.next();
+					Set<S> existingCycle = cycles.get(cycleNode);
+					if (existingCycle == null) {
+						cycle.add(cycleNode);
+					} else if (existingCycle != cycle) {
+						// We have two cycles that are connected via at least one node. Treat them as one cycle.
+						existingCycle.addAll(cycle);
+						cycle = existingCycle;
+					}
+				} while (cycleNode != follower && stackIter.hasNext());
+				for (S n : cycle) {
+					cycles.put(n, cycle);
+				}
+			}
+		}
+		dfsStack.pop();
+		dfsMark.put(node, DFS_VISITED);
+	}
 
 }

@@ -103,6 +103,73 @@ class GrammarConstraintProviderFeatureTest {
 		'''
 		Assert.assertEquals(expected, actual)
 	}
+	
+	@Test def void zeroToThree() {
+		val actual = '''
+			Rule: (val1+=ID | val2+=ID | val3+=ID) (val1+=ID | val2+=ID) val1+=ID; 
+		'''.toFeatureInfo
+		val expected = '''
+			Rule_Rule{
+			  val1[1,3]
+			  val2[0,2]
+			  val3[0,1]
+			}
+		'''
+		Assert.assertEquals(expected, actual)
+	}
+	
+	@Test def void unordered() {
+		val actual = '''
+			Rule: val1+=ID & val2+=ID; 
+		'''.toFeatureInfo
+		val expected = '''
+			Rule_Rule{
+			  val1[0,*]
+			  val2[0,*]
+			}
+		'''
+		Assert.assertEquals(expected, actual)
+	}
+	
+	@Test def void complex1() {
+		val actual = '''
+			Rule: 'a' val1+=ID 'b'
+			  (
+			    ('c' val2+=ID)?
+			    & ('d' val3+=ID)?
+			    & ('e' val4+=ID)?
+			  )
+			  ('f' val5+=ID*)?
+			  ('g' val6+=ID*)?
+			  'h';
+		'''.toFeatureInfo
+		val expected = '''
+			Rule_Rule{
+			  val1[1,1]
+			  val2[0,*]
+			  val3[0,*]
+			  val4[0,*]
+			  val5[0,*]
+			  val6[0,*]
+			}
+		'''
+		Assert.assertEquals(expected, actual)
+	}
+	
+	@Test def void complex2() {
+		val actual = '''
+			Rule: {Rule} (val1+=ID | 'a')
+			  (val2+=ID & 'b')
+			  ('c' | val1+=ID);
+		'''.toFeatureInfo
+		val expected = '''
+			Rule_Rule{
+			  val1[0,2]
+			  val2[0,*]
+			}
+		'''
+		Assert.assertEquals(expected, actual)
+	}
 
 	def String toFeatureInfo(CharSequence grammarString) {
 		val grammar = parser.parse('''
