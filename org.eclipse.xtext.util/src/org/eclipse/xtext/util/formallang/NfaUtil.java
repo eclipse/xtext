@@ -397,7 +397,7 @@ public class NfaUtil {
 		Collections.sort(sorted);
 		for (int i = 0; i < sorted.size(); i++)
 			ids.put(names.get(sorted.get(i)), i);
-		List<String> result = Lists.newArrayListWithExpectedSize(sorted.size());
+		StringBuilder result = new StringBuilder();
 		for (String name : sorted) {
 			S state = names.get(name);
 			Integer id = ids.get(state);
@@ -405,9 +405,19 @@ public class NfaUtil {
 			for (S f : nfa.getFollowers(state))
 				followers.add(ids.get(f));
 			Collections.sort(followers);
-			result.add(id + ":" + name + "->" + Joiner.on(",").join(followers));
+			result.append(id);
+			result.append(":");
+			result.append(name);
+			result.append(":");
+			for (int i = 0; i < followers.size(); i++) {
+				if (i != 0) {
+					result.append(",");
+				}
+				result.append(followers.get(i));
+			}
+			result.append("\n");
 		}
-		return Joiner.on("\n").join(result);
+		return result.toString();
 	}
 
 	public <S> Nfa<S> filter(final Nfa<S> nfa, final Predicate<S> filter) {
