@@ -309,13 +309,6 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
   
   @Override
   public void didSave(final DidSaveTextDocumentParams params) {
-    final Procedure1<CancelIndicator> _function = (CancelIndicator cancelIndicator) -> {
-      TextDocumentIdentifier _textDocument = params.getTextDocument();
-      String _uri = _textDocument.getUri();
-      URI _uri_1 = this._uriExtensions.toUri(_uri);
-      this.workspaceManager.didSave(_uri_1, cancelIndicator);
-    };
-    this.requestManager.runWrite(_function);
   }
   
   @Override

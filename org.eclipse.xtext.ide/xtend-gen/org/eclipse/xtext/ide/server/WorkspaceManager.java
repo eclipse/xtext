@@ -216,10 +216,6 @@ public class WorkspaceManager {
     return _uRIConverter.exists(uri, null);
   }
   
-  public Object didSave(final URI uri, final CancelIndicator cancelIndicator) {
-    return null;
-  }
-  
   public <T extends Object> T doRead(final URI uri, final Function2<? super Document, ? super XtextResource, ? extends T> work) {
     final URI resourceURI = uri.trimFragment();
     final ProjectManager projectMnr = this.getProjectManager(resourceURI);
@@ -244,9 +240,6 @@ public class WorkspaceManager {
       _elvis = _document;
     }
     return _elvis;
-  }
-  
-  public <T extends Object> void doWrite(final URI uri, final Function2<? super Document, ? super XtextResource, ? extends T> work) {
   }
   
   private final static Logger LOG = Logger.getLogger(WorkspaceManager.class);

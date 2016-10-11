@@ -194,9 +194,8 @@ import com.google.common.base.Strings
 	}
 
 	override didSave(DidSaveTextDocumentParams params) {
-		requestManager.runWrite [ cancelIndicator |
-			workspaceManager.didSave(params.textDocument.uri.toUri, cancelIndicator)
-		]
+	    // the document's content is in sync with the file system
+		// doesn't matter to us, so do nothing
 	}
 
 	override didChangeWatchedFiles(DidChangeWatchedFilesParams params) {

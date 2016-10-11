@@ -147,10 +147,6 @@ import org.eclipse.xtext.util.internal.Log
         getProjectManager(uri).resourceSet.URIConverter.exists(uri, null)
     }
     
-    def didSave(URI uri, CancelIndicator cancelIndicator) {
-        // do nothing for now
-    }
-    
     def <T> T doRead(URI uri, (Document, XtextResource)=>T work) {
     	val resourceURI = uri.trimFragment
     	val projectMnr = getProjectManager(resourceURI)
@@ -163,10 +159,6 @@ import org.eclipse.xtext.util.internal.Log
         return openDocuments.get(resource.URI) 
             // lets create a transient document, in case a document is not open (e.g. formatting is called just by uri)
             ?: new Document(1, resource.parseResult.rootNode.text)
-    }
-    
-    def <T> void doWrite(URI uri, (Document, XtextResource)=>T work) {
-        
     }
 
 }
