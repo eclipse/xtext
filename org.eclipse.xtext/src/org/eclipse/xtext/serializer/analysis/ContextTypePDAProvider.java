@@ -23,6 +23,7 @@ import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.analysis.SerializationContext.TypeContext;
 import org.eclipse.xtext.serializer.analysis.SerializerPDA.SerializerPDACloneFactory;
+import org.eclipse.xtext.util.formallang.NfaUtil;
 import org.eclipse.xtext.util.formallang.Pda;
 import org.eclipse.xtext.util.formallang.PdaUtil;
 import org.eclipse.xtext.util.formallang.Traverser;
@@ -232,15 +233,19 @@ public class ContextTypePDAProvider implements IContextTypePDAProvider {
 	@Inject
 	protected PdaUtil pdaUtil;
 
-	protected Set<EClass> collectTypes(Pda<ISerState, RuleCall> contextPda) {
+	@Inject
+	protected NfaUtil nfaUtil;
+
+	protected Set<EClass> collectTypes(Pda<ISerState, RuleCall> contextPda, Map<ISerState, Integer> distances) {
 		TypeCollector collector = newTypeCollector();
-		pdaUtil.filterEdges(contextPda, collector, null);
+		pdaUtil.filterEdges(contextPda, collector, distances, null);
 		return collector.getTypes();
 	}
 
-	protected Pda<ISerState, RuleCall> filterByType(Grammar grammar, Pda<ISerState, RuleCall> contextPda, EClass type) {
+	protected Pda<ISerState, RuleCall> filterByType(Grammar grammar, Pda<ISerState, RuleCall> contextPda, EClass type,
+			Map<ISerState, Integer> distances) {
 		TypeFilter typeFilter = newTypeFilter(type);
-		SerializerPDA pda = pdaUtil.filterEdges(contextPda, typeFilter, factory);
+		SerializerPDA pda = pdaUtil.filterEdges(contextPda, typeFilter, distances, factory);
 		pda.setGrammar(grammar);
 		return pda;
 	}
@@ -257,7 +262,8 @@ public class ContextTypePDAProvider implements IContextTypePDAProvider {
 			List<ISerializationContext> parents = e.getContexts();
 			Pda<ISerState, RuleCall> contextPDA = e.getValue();
 			try {
-				Set<EClass> types = collectTypes(contextPDA);
+				Map<ISerState, Integer> distances = nfaUtil.distanceToFinalStateMap(contextPDA);
+				Set<EClass> types = collectTypes(contextPDA, distances);
 				if (types.size() == 1) {
 					for (ISerializationContext parent : parents) {
 						TypeContext ctx = new TypeContext(parent, types.iterator().next());
@@ -265,7 +271,7 @@ public class ContextTypePDAProvider implements IContextTypePDAProvider {
 					}
 				} else {
 					for (EClass type : types) {
-						Pda<ISerState, RuleCall> filtered = filterByType(grammar, contextPDA, type);
+						Pda<ISerState, RuleCall> filtered = filterByType(grammar, contextPDA, type, distances);
 						for (ISerializationContext parent : parents) {
 							TypeContext typeContext = new TypeContext(parent, type);
 							builder.put(typeContext, filtered);

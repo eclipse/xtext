@@ -416,11 +416,16 @@ public class PdaUtil {
 
 	public <S, P, R, D extends Pda<S, P>> D filterEdges(Pda<S, P> pda, Traverser<? super Pda<S, P>, S, R> traverser,
 			PdaFactory<D, S, P, S> factory) {
+		Map<S, Integer> distances = new NfaUtil().distanceToFinalStateMap(pda);
+		return filterEdges(pda, traverser, distances, factory);
+	}
+
+	public <S, P, R, D extends Pda<S, P>> D filterEdges(Pda<S, P> pda, Traverser<? super Pda<S, P>, S, R> traverser,
+			Map<S, Integer> distances, PdaFactory<D, S, P, S> factory) {
 		HashStack<TraversalItem<S, R>> trace = new HashStack<TraversalItem<S, R>>();
 		R previous = traverser.enter(pda, pda.getStart(), null);
 		if (previous == null)
 			return factory == null ? null : factory.create(pda.getStart(), pda.getStop());
-		Map<S, Integer> distances = new NfaUtil().distanceToFinalStateMap(pda);
 		MappedComparator<S, Integer> distanceComp = new MappedComparator<S, Integer>(distances);
 		trace.push(newItem(pda, distanceComp, distances, pda.getStart(), previous));
 		Multimap<S, S> edges = LinkedHashMultimap.create();
