@@ -155,6 +155,135 @@ public class GrammarConstraintProviderFeatureTest {
     Assert.assertEquals(expected, actual);
   }
   
+  @Test
+  public void zeroToThree() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("Rule: (val1+=ID | val2+=ID | val3+=ID) (val1+=ID | val2+=ID) val1+=ID; ");
+    _builder.newLine();
+    final String actual = this.toFeatureInfo(_builder);
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("Rule_Rule{");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("val1[1,3]");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("val2[0,2]");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("val3[0,1]");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    final String expected = _builder_1.toString();
+    Assert.assertEquals(expected, actual);
+  }
+  
+  @Test
+  public void unordered() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("Rule: val1+=ID & val2+=ID; ");
+    _builder.newLine();
+    final String actual = this.toFeatureInfo(_builder);
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("Rule_Rule{");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("val1[0,*]");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("val2[0,*]");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    final String expected = _builder_1.toString();
+    Assert.assertEquals(expected, actual);
+  }
+  
+  @Test
+  public void complex1() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("Rule: \'a\' val1+=ID \'b\'");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("(");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("(\'c\' val2+=ID)?");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("& (\'d\' val3+=ID)?");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("& (\'e\' val4+=ID)?");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append(")");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("(\'f\' val5+=ID*)?");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("(\'g\' val6+=ID*)?");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("\'h\';");
+    _builder.newLine();
+    final String actual = this.toFeatureInfo(_builder);
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("Rule_Rule{");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("val1[1,1]");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("val2[0,*]");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("val3[0,*]");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("val4[0,*]");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("val5[0,*]");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("val6[0,*]");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    final String expected = _builder_1.toString();
+    Assert.assertEquals(expected, actual);
+  }
+  
+  @Test
+  public void complex2() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("Rule: {Rule} (val1+=ID | \'a\')");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("(val2+=ID & \'b\')");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("(\'c\' | val1+=ID);");
+    _builder.newLine();
+    final String actual = this.toFeatureInfo(_builder);
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("Rule_Rule{");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("val1[0,2]");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("val2[0,*]");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    final String expected = _builder_1.toString();
+    Assert.assertEquals(expected, actual);
+  }
+  
   public String toFeatureInfo(final CharSequence grammarString) {
     try {
       StringConcatenation _builder = new StringConcatenation();
