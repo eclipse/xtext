@@ -70,7 +70,6 @@ class CompletionTest extends AbstractTestLangLanguageServerTest {
             column = '    Fo'.length
             expectedCompletionItems = '''
                 Foo (TypeDeclaration) -> Foo [[1, 4] .. [1, 6]]
-                name (ID) -> name [[1, 6] .. [1, 6]]
                 [ -> [ [[1, 6] .. [1, 6]]
             '''
         ]

@@ -7,6 +7,8 @@
  */
 package org.eclipse.xtext.ide.tests.testlanguage.ide;
 
+import com.google.inject.Provider;
+import java.util.concurrent.ExecutorService;
 import org.eclipse.xtext.ide.tests.testlanguage.ide.AbstractTestLanguageIdeModule;
 
 /**
@@ -14,4 +16,11 @@ import org.eclipse.xtext.ide.tests.testlanguage.ide.AbstractTestLanguageIdeModul
  */
 @SuppressWarnings("all")
 public class TestLanguageIdeModule extends AbstractTestLanguageIdeModule {
+  public TestLanguageIdeModule() {
+    super();
+  }
+  
+  public TestLanguageIdeModule(final Provider<ExecutorService> executorServiceProvider) {
+    super(executorServiceProvider);
+  }
 }

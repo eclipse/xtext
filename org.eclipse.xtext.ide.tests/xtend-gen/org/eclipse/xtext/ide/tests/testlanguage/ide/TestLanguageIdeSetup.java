@@ -9,12 +9,14 @@ package org.eclipse.xtext.ide.tests.testlanguage.ide;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.google.inject.Module;
 import org.eclipse.xtext.ide.tests.testlanguage.TestLanguageRuntimeModule;
 import org.eclipse.xtext.ide.tests.testlanguage.TestLanguageStandaloneSetup;
 import org.eclipse.xtext.ide.tests.testlanguage.ide.TestLanguageIdeModule;
+import org.eclipse.xtext.util.Modules2;
 
 /**
- * Initialization support for running Xtext languages without Equinox extension registry.
+ * Initialization support for running Xtext languages as language servers.
  */
 @SuppressWarnings("all")
 public class TestLanguageIdeSetup extends TestLanguageStandaloneSetup {
@@ -22,6 +24,7 @@ public class TestLanguageIdeSetup extends TestLanguageStandaloneSetup {
   public Injector createInjector() {
     TestLanguageRuntimeModule _testLanguageRuntimeModule = new TestLanguageRuntimeModule();
     TestLanguageIdeModule _testLanguageIdeModule = new TestLanguageIdeModule();
-    return Guice.createInjector(_testLanguageRuntimeModule, _testLanguageIdeModule);
+    Module _mixin = Modules2.mixin(_testLanguageRuntimeModule, _testLanguageIdeModule);
+    return Guice.createInjector(_mixin);
   }
 }
