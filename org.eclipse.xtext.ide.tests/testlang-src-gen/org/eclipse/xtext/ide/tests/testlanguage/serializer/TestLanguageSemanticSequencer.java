@@ -214,7 +214,7 @@ public class TestLanguageSemanticSequencer extends AbstractDelegatingSemanticSeq
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, TestLanguagePackage.Literals.TYPE_REFERENCE__TYPE_REF));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getTypeReferenceAccess().getTypeRefTypeDeclarationIDTerminalRuleCall_0_1(), semanticObject.getTypeRef());
+		feeder.accept(grammarAccess.getTypeReferenceAccess().getTypeRefTypeDeclarationIDTerminalRuleCall_0_1(), semanticObject.eGet(TestLanguagePackage.Literals.TYPE_REFERENCE__TYPE_REF, false));
 		feeder.finish();
 	}
 	
