@@ -12,7 +12,6 @@ import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Module;
 import com.google.inject.Provider;
-import com.google.inject.util.Modules;
 import java.io.File;
 import java.io.FileWriter;
 import java.util.HashMap;
@@ -22,8 +21,10 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.function.Consumer;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.xtext.util.Modules2;
 import org.eclipse.xtext.web.example.entities.EntitiesRuntimeModule;
 import org.eclipse.xtext.web.example.entities.EntitiesStandaloneSetup;
+import org.eclipse.xtext.web.example.entities.ide.EntitiesIdeModule;
 import org.eclipse.xtext.web.example.entities.tests.EntitiesInjectorProvider;
 import org.eclipse.xtext.web.server.ISession;
 import org.eclipse.xtext.web.server.XtextServiceDispatcher;
@@ -62,12 +63,13 @@ public abstract class AbstractXbaseWebTest {
             };
             return ObjectExtensions.<ExecutorService>operator_doubleArrow(_newCachedThreadPool, _function_1);
           };
-          final EntitiesWebModule webModule = new EntitiesWebModule(_function);
+          final Provider<ExecutorService> executorServiceProvider = _function;
+          final EntitiesWebModule webModule = new EntitiesWebModule(executorServiceProvider);
+          final EntitiesIdeModule ideModule = new EntitiesIdeModule(executorServiceProvider);
           webModule.setResourceBaseProvider(AbstractXbaseWebTest.this.resourceBaseProvider);
           Module _runtimeModule = AbstractXbaseWebTest.this.getRuntimeModule();
-          Modules.OverriddenModuleBuilder _override = Modules.override(_runtimeModule);
-          Module _with = _override.with(webModule);
-          return Guice.createInjector(_with);
+          Module _mixin = Modules2.mixin(_runtimeModule, ideModule, webModule);
+          return Guice.createInjector(_mixin);
         }
       }.createInjectorAndDoEMFRegistration();
     }

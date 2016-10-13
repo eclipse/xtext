@@ -14,6 +14,7 @@ import com.google.inject.binder.LinkedBindingBuilder;
 import com.google.inject.name.Named;
 import com.google.inject.name.Names;
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import org.eclipse.xtext.service.AbstractGenericModule;
 import org.eclipse.xtext.web.server.generator.DefaultContentTypeProvider;
 import org.eclipse.xtext.web.server.generator.IContentTypeProvider;
@@ -26,30 +27,35 @@ import org.eclipse.xtext.web.server.generator.IContentTypeProvider;
  */
 @SuppressWarnings("all")
 public class DefaultWebModule extends AbstractGenericModule {
-  private final ExecutorService executorService;
+  private final Provider<ExecutorService> executorServiceProvider;
   
-  private final ExecutorService executorServiceWithDocumentLock;
+  public DefaultWebModule() {
+    final Provider<ExecutorService> _function = () -> {
+      return Executors.newCachedThreadPool();
+    };
+    this.executorServiceProvider = _function;
+  }
   
   public DefaultWebModule(final Provider<ExecutorService> executorServiceProvider) {
-    ExecutorService _get = executorServiceProvider.get();
-    this.executorService = _get;
-    ExecutorService _get_1 = executorServiceProvider.get();
-    this.executorServiceWithDocumentLock = _get_1;
+    this.executorServiceProvider = executorServiceProvider;
   }
   
   public Class<? extends IContentTypeProvider> bindIContentTypeProvider() {
     return DefaultContentTypeProvider.class;
   }
   
+  /**
+   * @deprecated The normal executor service is now configured in the {@link DefaultIdeModule}.
+   */
+  @Deprecated
   public void configureExecutorService(final Binder binder) {
-    AnnotatedBindingBuilder<ExecutorService> _bind = binder.<ExecutorService>bind(ExecutorService.class);
-    _bind.toInstance(this.executorService);
   }
   
   public void configureExecutorServiceWithDocumentLock(final Binder binder) {
     AnnotatedBindingBuilder<ExecutorService> _bind = binder.<ExecutorService>bind(ExecutorService.class);
     Named _named = Names.named("withDocumentLock");
     LinkedBindingBuilder<ExecutorService> _annotatedWith = _bind.annotatedWith(_named);
-    _annotatedWith.toInstance(this.executorServiceWithDocumentLock);
+    ExecutorService _get = this.executorServiceProvider.get();
+    _annotatedWith.toInstance(_get);
   }
 }

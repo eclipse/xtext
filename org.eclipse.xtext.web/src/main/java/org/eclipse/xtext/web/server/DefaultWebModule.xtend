@@ -11,6 +11,7 @@ import com.google.inject.Binder
 import com.google.inject.Provider
 import com.google.inject.name.Names
 import java.util.concurrent.ExecutorService
+import java.util.concurrent.Executors
 import org.eclipse.xtext.service.AbstractGenericModule
 import org.eclipse.xtext.web.server.generator.DefaultContentTypeProvider
 import org.eclipse.xtext.web.server.generator.IContentTypeProvider
@@ -23,24 +24,29 @@ import org.eclipse.xtext.web.server.generator.IContentTypeProvider
  */
 class DefaultWebModule extends AbstractGenericModule {
 	
-	val ExecutorService executorService
-	val ExecutorService executorServiceWithDocumentLock
+	val Provider<ExecutorService> executorServiceProvider
+	
+	new() {
+		executorServiceProvider = [Executors.newCachedThreadPool]
+	}
 	
 	new(Provider<ExecutorService> executorServiceProvider) {
-		executorService = executorServiceProvider.get()
-		executorServiceWithDocumentLock = executorServiceProvider.get()
+		this.executorServiceProvider = executorServiceProvider
 	}
 	
 	def Class<? extends IContentTypeProvider> bindIContentTypeProvider() {
 		DefaultContentTypeProvider
 	}
 	
-	def configureExecutorService(Binder binder) {
-		binder.bind(ExecutorService).toInstance(executorService)
+	/**
+	 * @deprecated The normal executor service is now configured in the {@link DefaultIdeModule}.
+	 */
+	@Deprecated
+	def void configureExecutorService(Binder binder) {
 	}
 	
-	def configureExecutorServiceWithDocumentLock(Binder binder) {
-		binder.bind(ExecutorService).annotatedWith(Names.named("withDocumentLock")).toInstance(executorServiceWithDocumentLock)
+	def void configureExecutorServiceWithDocumentLock(Binder binder) {
+		binder.bind(ExecutorService).annotatedWith(Names.named("withDocumentLock")).toInstance(executorServiceProvider.get)
 	}
 	
 }

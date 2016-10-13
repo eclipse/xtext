@@ -77,7 +77,7 @@ public class StatemachineGrammarAccess extends AbstractGrammarElementFinder {
 		//(InputSignal | OutputSignal) 'signal' name=ID
 		public Group getGroup() { return cGroup; }
 		
-		//(InputSignal | OutputSignal)
+		//InputSignal | OutputSignal
 		public Alternatives getAlternatives_0() { return cAlternatives_0; }
 		
 		//InputSignal
@@ -561,7 +561,7 @@ public class StatemachineGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//terminal ML_COMMENT:
-	//	'/ *'->'* /';
+	//	'/*'->'*/';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	}

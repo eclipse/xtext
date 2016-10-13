@@ -137,7 +137,7 @@ public abstract class AbstractEntitiesRuntimeModule extends DefaultXbaseRuntimeM
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalEntitiesLexer> provideInternalEntitiesLexer() {
+	public Provider<? extends InternalEntitiesLexer> provideInternalEntitiesLexer() {
 		return LexerProvider.create(InternalEntitiesLexer.class);
 	}
 	

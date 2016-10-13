@@ -7,9 +7,20 @@
  *******************************************************************************/
 package org.eclipse.xtext.web.example.entities.ide
 
+import com.google.inject.Provider
+import java.util.concurrent.ExecutorService
 
 /**
  * Use this class to register ide components.
  */
 class EntitiesIdeModule extends AbstractEntitiesIdeModule {
+
+	new() {
+		super()
+	}
+
+	new(Provider<ExecutorService> executorServiceProvider) {
+		super(executorServiceProvider)
+	}
+	
 }

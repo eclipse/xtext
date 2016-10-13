@@ -10,26 +10,8 @@ package org.eclipse.xtext.web.server.test.languages;
 import com.google.inject.Binder;
 import com.google.inject.Provider;
 import com.google.inject.binder.AnnotatedBindingBuilder;
-import com.google.inject.binder.LinkedBindingBuilder;
-import com.google.inject.name.Named;
-import com.google.inject.name.Names;
 import java.util.concurrent.ExecutorService;
 import org.eclipse.xtend.lib.annotations.Accessors;
-import org.eclipse.xtext.ide.LexerIdeBindings;
-import org.eclipse.xtext.ide.editor.contentassist.FQNPrefixMatcher;
-import org.eclipse.xtext.ide.editor.contentassist.IPrefixMatcher;
-import org.eclipse.xtext.ide.editor.contentassist.IProposalConflictHelper;
-import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalProvider;
-import org.eclipse.xtext.ide.editor.contentassist.antlr.AntlrProposalConflictHelper;
-import org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser;
-import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer;
-import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator;
-import org.eclipse.xtext.ide.labels.IImageDescriptionProvider;
-import org.eclipse.xtext.web.example.statemachine.ide.StatemachineImageDescriptionProvider;
-import org.eclipse.xtext.web.example.statemachine.ide.StatemachineSemanticHighlightingCalculator;
-import org.eclipse.xtext.web.example.statemachine.ide.StatemachineWebContentProposalProvider;
-import org.eclipse.xtext.web.example.statemachine.ide.contentassist.antlr.StatemachineParser;
-import org.eclipse.xtext.web.example.statemachine.ide.contentassist.antlr.internal.InternalStatemachineLexer;
 import org.eclipse.xtext.web.server.DefaultWebModule;
 import org.eclipse.xtext.web.server.persistence.FileResourceHandler;
 import org.eclipse.xtext.web.server.persistence.IResourceBaseProvider;
@@ -45,29 +27,6 @@ public class StatemachineWebModule extends DefaultWebModule {
     super(executorServiceProvider);
   }
   
-  public void configureContentAssistLexer(final Binder binder) {
-    AnnotatedBindingBuilder<Lexer> _bind = binder.<Lexer>bind(Lexer.class);
-    Named _named = Names.named(LexerIdeBindings.CONTENT_ASSIST);
-    LinkedBindingBuilder<Lexer> _annotatedWith = _bind.annotatedWith(_named);
-    _annotatedWith.to(InternalStatemachineLexer.class);
-  }
-  
-  public Class<? extends IContentAssistParser> bindIContentAssistParser() {
-    return StatemachineParser.class;
-  }
-  
-  public Class<? extends IProposalConflictHelper> bindIProposalConflictHelper() {
-    return AntlrProposalConflictHelper.class;
-  }
-  
-  public Class<? extends IPrefixMatcher> bindIPrefixMatcher() {
-    return FQNPrefixMatcher.class;
-  }
-  
-  public Class<? extends IdeContentProposalProvider> bindIdeContentProposalProvider() {
-    return StatemachineWebContentProposalProvider.class;
-  }
-  
   public Class<? extends IServerResourceHandler> bindIServerResourceHandler() {
     return FileResourceHandler.class;
   }
@@ -77,14 +36,6 @@ public class StatemachineWebModule extends DefaultWebModule {
       AnnotatedBindingBuilder<IResourceBaseProvider> _bind = binder.<IResourceBaseProvider>bind(IResourceBaseProvider.class);
       _bind.toInstance(this.resourceBaseProvider);
     }
-  }
-  
-  public Class<? extends IImageDescriptionProvider> bindIImageDescriptionProvider() {
-    return StatemachineImageDescriptionProvider.class;
-  }
-  
-  public Class<? extends ISemanticHighlightingCalculator> bindSemanticHighlightingCalculator() {
-    return StatemachineSemanticHighlightingCalculator.class;
   }
   
   @Pure

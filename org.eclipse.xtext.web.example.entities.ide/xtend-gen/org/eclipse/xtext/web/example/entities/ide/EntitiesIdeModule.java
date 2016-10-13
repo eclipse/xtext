@@ -7,6 +7,8 @@
  */
 package org.eclipse.xtext.web.example.entities.ide;
 
+import com.google.inject.Provider;
+import java.util.concurrent.ExecutorService;
 import org.eclipse.xtext.web.example.entities.ide.AbstractEntitiesIdeModule;
 
 /**
@@ -14,4 +16,11 @@ import org.eclipse.xtext.web.example.entities.ide.AbstractEntitiesIdeModule;
  */
 @SuppressWarnings("all")
 public class EntitiesIdeModule extends AbstractEntitiesIdeModule {
+  public EntitiesIdeModule() {
+    super();
+  }
+  
+  public EntitiesIdeModule(final Provider<ExecutorService> executorServiceProvider) {
+    super(executorServiceProvider);
+  }
 }

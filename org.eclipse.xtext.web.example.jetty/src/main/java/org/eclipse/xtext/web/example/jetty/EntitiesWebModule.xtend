@@ -7,8 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.web.example.jetty
 
-import com.google.inject.Binder
-import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
+import com.google.inject.Provider
+import java.util.concurrent.ExecutorService
 import org.eclipse.xtext.web.server.persistence.FileResourceHandler
 import org.eclipse.xtext.web.server.persistence.IResourceBaseProvider
 import org.eclipse.xtext.web.server.persistence.IServerResourceHandler
@@ -16,13 +16,13 @@ import org.eclipse.xtext.web.server.persistence.IServerResourceHandler
 /**
  * Use this class to register additional components to be used within the web application.
  */
-@FinalFieldsConstructor
 class EntitiesWebModule extends AbstractEntitiesWebModule {
 	
 	val IResourceBaseProvider resourceBaseProvider
 
-	def void configureResourceBaseProvider(Binder binder) {
-		if (resourceBaseProvider !== null) binder.bind(IResourceBaseProvider).toInstance(resourceBaseProvider)
+	new(Provider<ExecutorService> executorServiceProvider, IResourceBaseProvider resourceBaseProvider) {
+		super(executorServiceProvider)
+		this.resourceBaseProvider = resourceBaseProvider
 	}
 
 	def Class<? extends IServerResourceHandler> bindIServerResourceHandler() {

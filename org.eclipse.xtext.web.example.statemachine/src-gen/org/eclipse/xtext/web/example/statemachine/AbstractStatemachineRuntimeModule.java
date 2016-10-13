@@ -126,7 +126,7 @@ public abstract class AbstractStatemachineRuntimeModule extends DefaultRuntimeMo
 	}
 	
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
-	public Provider<InternalStatemachineLexer> provideInternalStatemachineLexer() {
+	public Provider<? extends InternalStatemachineLexer> provideInternalStatemachineLexer() {
 		return LexerProvider.create(InternalStatemachineLexer.class);
 	}
 	

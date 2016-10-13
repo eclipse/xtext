@@ -10,11 +10,12 @@ package org.eclipse.xtext.web.example.jetty
 import com.google.inject.Guice
 import com.google.inject.Injector
 import com.google.inject.Provider
-import com.google.inject.util.Modules
 import java.util.concurrent.ExecutorService
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
+import org.eclipse.xtext.util.Modules2
 import org.eclipse.xtext.web.example.entities.EntitiesRuntimeModule
 import org.eclipse.xtext.web.example.entities.EntitiesStandaloneSetup
+import org.eclipse.xtext.web.example.entities.ide.EntitiesIdeModule
 import org.eclipse.xtext.web.server.persistence.IResourceBaseProvider
 
 /**
@@ -28,8 +29,9 @@ class EntitiesWebSetup extends EntitiesStandaloneSetup {
 	
 	override Injector createInjector() {
 		val runtimeModule = new EntitiesRuntimeModule()
+		val ideModule = new EntitiesIdeModule(executorServiceProvider)
 		val webModule = new EntitiesWebModule(executorServiceProvider, resourceBaseProvider)
-		return Guice.createInjector(Modules.override(runtimeModule).with(webModule))
+		return Guice.createInjector(Modules2.mixin(runtimeModule, ideModule, webModule))
 	}
 	
 }
