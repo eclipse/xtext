@@ -263,7 +263,7 @@ public class ContextFinder implements IContextFinder {
 		throw new RuntimeException("There is no parser rule in the grammar.");
 	}
 
-	protected void initConstraints() {
+	public void initConstraints() {
 		if (constraints == null) {
 			constraints = grammarConstraintProvider.getConstraints(ruleNames.getContextGrammar());
 		}

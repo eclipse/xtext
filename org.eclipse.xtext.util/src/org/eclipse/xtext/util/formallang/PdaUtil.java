@@ -745,4 +745,49 @@ public class PdaUtil {
 		}
 		return result;
 	}
+
+	public <S, P, D extends Pda<S, P>> D filter(Pda<S, P> pda, Predicate<S> filter,
+			PdaFactory<D, S, P, ? super S> fact) {
+		D result = fact.create(pda.getStart(), pda.getStop());
+		Map<S, S> orig2copy = Maps.newLinkedHashMap();
+		S start = pda.getStart();
+		S stop = pda.getStop();
+		orig2copy.put(start, result.getStart());
+		orig2copy.put(stop, result.getStop());
+		for (S orig : new NfaUtil().collect(pda)) {
+			if (orig != start && orig != stop && filter.apply(orig)) {
+				if (pda.getPop(orig) != null) {
+					orig2copy.put(orig, fact.createPop(result, orig));
+				} else if (pda.getPush(orig) != null) {
+					orig2copy.put(orig, fact.createPush(result, orig));
+				} else {
+					orig2copy.put(orig, fact.createState(result, orig));
+				}
+			}
+		}
+		for (Map.Entry<S, S> e : orig2copy.entrySet()) {
+			S orig = e.getKey();
+			S copy = e.getValue();
+			LinkedList<S> todo = Lists.newLinkedList();
+			todo.add(orig);
+			Set<S> visited = Sets.newHashSet();
+			Set<S> folowers = Sets.newHashSet();
+			while (!todo.isEmpty()) {
+				S o = todo.pop();
+				if (visited.add(o)) {
+					for (S s : pda.getFollowers(o)) {
+						S f = orig2copy.get(s);
+						if (f != null) {
+							folowers.add(f);
+						} else {
+							todo.add(s);
+						}
+					}
+				}
+			}
+			fact.setFollowers(result, copy, folowers);
+		}
+		return result;
+	}
+
 }

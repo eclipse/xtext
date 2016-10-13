@@ -10,6 +10,7 @@ package org.eclipse.xtext.serializer.analysis;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.IdentityHashMap;
+import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -18,6 +19,7 @@ import java.util.Set;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
@@ -28,14 +30,17 @@ import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.analysis.ISerState.SerStateType;
 import org.eclipse.xtext.serializer.analysis.SerializationContext.ActionContext;
 import org.eclipse.xtext.serializer.analysis.SerializationContextMap.Builder;
+import org.eclipse.xtext.serializer.analysis.SerializerPDA.SerializerPDACloneFactory;
 import org.eclipse.xtext.serializer.analysis.SerializerPDA.SerializerPDAElementFactory;
 import org.eclipse.xtext.serializer.analysis.SerializerPDA.SerializerPDAState;
+import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.util.formallang.NfaUtil;
 import org.eclipse.xtext.util.formallang.Pda;
 import org.eclipse.xtext.util.formallang.PdaUtil;
 
+import com.google.common.base.Predicate;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Lists;
@@ -91,31 +96,32 @@ public class ContextPDAProvider implements IContextPDAProvider {
 	protected PdaUtil pdaUtil;
 
 	protected void collectExtracted(ISerState orig, Collection<? extends ISerState> precedents, SerializerPDAState copy,
-			Map<Pair<AbstractElement, SerStateType>, SerializerPDAState> oldToNew, final CallStack inTop, SerializerPDAState start) {
+			Map<Pair<AbstractElement, SerStateType>, SerializerPDAState> oldToNew, final CallStack inTop,
+			SerializerPDAState start) {
 		for (ISerState pre : precedents) {
 			CallStack top = inTop;
 			AbstractElement element = pre.getGrammarElement();
 			switch (pre.getType()) {
-				case START:
-					if (top.call == null)
-						connect(start, copy);
+			case START:
+				if (top.call == null)
+					connect(start, copy);
+				continue;
+			case POP:
+				top = new CallStack(top, (RuleCall) element);
+				if (top.isLoop())
 					continue;
-				case POP:
-					top = new CallStack(top, (RuleCall) element);
-					if (top.isLoop())
-						continue;
-					break;
-				case PUSH:
-					if (top.call == null) {
-						connect(start, copy);
-						continue;
-					} else if (top.call == element) {
-						top = top.parent;
-					} else {
-						continue;
-					}
-				default:
-					break;
+				break;
+			case PUSH:
+				if (top.call == null) {
+					connect(start, copy);
+					continue;
+				} else if (top.call == element) {
+					top = top.parent;
+				} else {
+					continue;
+				}
+			default:
+				break;
 			}
 			Pair<AbstractElement, SerStateType> key = Tuples.create(element, pre.getType());
 			SerializerPDAState pre2 = oldToNew.get(key);
@@ -123,7 +129,8 @@ public class ContextPDAProvider implements IContextPDAProvider {
 				pre2 = new SerializerPDAState(element, pre.getType());
 				oldToNew.put(key, pre2);
 			}
-			if (GrammarUtil.isAssignedAction(pre.getGrammarElement()) /* && pre.getType() != STOP */) {
+			if (GrammarUtil.isAssignedAction(
+					pre.getGrammarElement()) /* && pre.getType() != STOP */) {
 				Set<ISerState> entries = collectPushForAction(pre);
 				collectExtracted(pre, entries, pre2, oldToNew, top, start);
 			} else {
@@ -136,26 +143,27 @@ public class ContextPDAProvider implements IContextPDAProvider {
 
 	protected Set<ISerState> collectPushForAction(ISerState action) {
 		ParserRule rule = GrammarUtil.containingParserRule(action.getGrammarElement());
-		LinkedHashSet<ISerState> result = Sets.<ISerState> newLinkedHashSet();
-		collectPushForAction(action, rule, result, Sets.<ISerState> newHashSet());
+		LinkedHashSet<ISerState> result = Sets.<ISerState>newLinkedHashSet();
+		collectPushForAction(action, rule, result, Sets.<ISerState>newHashSet());
 		return result;
 	}
 
-	protected void collectPushForAction(ISerState state, ParserRule rule, Set<ISerState> result, Set<ISerState> visited) {
+	protected void collectPushForAction(ISerState state, ParserRule rule, Set<ISerState> result,
+			Set<ISerState> visited) {
 		if (!visited.add(state))
 			return;
 		switch (state.getType()) {
-			case START:
+		case START:
+			result.add(state);
+			return;
+		case PUSH:
+			AbstractElement element = state.getGrammarElement();
+			if (element instanceof RuleCall && ((RuleCall) element).getRule() == rule) {
 				result.add(state);
 				return;
-			case PUSH:
-				AbstractElement element = state.getGrammarElement();
-				if (element instanceof RuleCall && ((RuleCall) element).getRule() == rule) {
-					result.add(state);
-					return;
-				}
-			default:
-				break;
+			}
+		default:
+			break;
 		}
 		List<? extends ISerState> precedents = state.getPrecedents();
 		for (ISerState pre : precedents)
@@ -188,12 +196,98 @@ public class ContextPDAProvider implements IContextPDAProvider {
 		return null;
 	}
 
+	protected ParserRule getFilterableRule(ISerState state) {
+		if (state.getType() == SerStateType.PUSH) {
+			RuleCall rc = (RuleCall) state.getGrammarElement();
+			AbstractRule rule = rc.getRule();
+			if (rule instanceof ParserRule) {
+				ParserRule pr = (ParserRule) rule;
+				if (pr.isFragment()) {
+					return null;
+				}
+				if (pr.isDefinesHiddenTokens()) {
+					return null;
+				}
+				return pr;
+			}
+		}
+		return null;
+	}
+
+	protected Pda<ISerState, RuleCall> filterUnneededUnassignedRuleCalls(Pda<ISerState, RuleCall> pda,
+			Map<ParserRule, Integer> indexedRules) {
+		Set<ParserRule> exclude = findRuleCallsToExclude(pda, indexedRules);
+		if (exclude.isEmpty())
+			return pda;
+		SerializerPDA filtered = pdaUtil.filter(pda, new Predicate<ISerState>() {
+			@Override
+			public boolean apply(ISerState input) {
+				SerStateType type = input.getType();
+				if (type == SerStateType.PUSH || type == SerStateType.POP) {
+					AbstractRule rule = ((RuleCall) input.getGrammarElement()).getRule();
+					return !exclude.contains(rule);
+				}
+				return true;
+			}
+		}, new SerializerPDACloneFactory());
+		return filtered;
+	}
+
+	protected Set<ParserRule> findRuleCallsToExclude(Pda<ISerState, RuleCall> pda,
+			Map<ParserRule, Integer> indexedRules) {
+		Map<ParserRule, Integer> result = Maps.newLinkedHashMap();
+		for (ISerState s : nfaUtil.collect(pda)) {
+			ParserRule pr = getFilterableRule(s);
+			if (pr != null) {
+				Integer integer = result.get(pr);
+				result.put(pr, integer == null ? 1 : integer + 1);
+			}
+		}
+		Iterator<Integer> it = result.values().iterator();
+		while (it.hasNext()) {
+			if (it.next() > 1) {
+				it.remove();
+			}
+		}
+		nfaUtil.findCycles(pda, new IAcceptor<List<ISerState>>() {
+			@Override
+			public void accept(List<ISerState> states) {
+				ParserRule candidate = null;
+				Integer candiateIndex = Integer.MAX_VALUE;
+				for (ISerState state : states) {
+					ParserRule rule = getFilterableRule(state);
+					if (rule != null) {
+						Integer index = indexedRules.get(rule);
+						if (candiateIndex > index) {
+							candidate = rule;
+							candiateIndex = index;
+						}
+					}
+				}
+				if (candidate != null) {
+					result.remove(candidate);
+				}
+			}
+		});
+		return result.keySet();
+	}
+
+	protected Map<ParserRule, Integer> indexRules(Grammar grammar) {
+		List<ParserRule> rules = GrammarUtil.allParserRules(grammar);
+		Map<ParserRule, Integer> map = Maps.newHashMap();
+		for (int i = 0; i < rules.size(); i++) {
+			map.put(rules.get(i), i);
+		}
+		return map;
+	}
+
 	@Override
 	public SerializationContextMap<Pda<ISerState, RuleCall>> getContextPDAs(Grammar grammar) {
 		Builder<Pda<ISerState, RuleCall>> result = SerializationContextMap.<Pda<ISerState, RuleCall>>builder();
 		SerializationContextMap<Pda<ISerState, RuleCall>> grammarPDAs = grammarPdaProvider.getGrammarPDAs(grammar);
 		Multimap<Action, SerializerPDA> actionPdas = ArrayListMultimap.create();
 		Multimap<Action, ISerializationContext> actionContexts = LinkedHashMultimap.create();
+		Map<ParserRule, Integer> indexedRules = indexRules(grammar);
 		for (SerializationContextMap.Entry<Pda<ISerState, RuleCall>> e : grammarPDAs.values()) {
 			List<ISerializationContext> contexts = e.getContexts();
 			Pda<ISerState, RuleCall> pda = e.getValue();
@@ -204,11 +298,13 @@ public class ContextPDAProvider implements IContextPDAProvider {
 				}
 			}
 			if (actions.isEmpty()) {
-				result.put(contexts, pda);
+				Pda<ISerState, RuleCall> filtered = filterUnneededUnassignedRuleCalls(pda, indexedRules);
+				result.put(contexts, filtered);
 			} else {
 				try {
 					SerializerPDA rulePda = extract(pda.getStop());
-					result.put(contexts, rulePda);
+					Pda<ISerState, RuleCall> filtered = filterUnneededUnassignedRuleCalls(rulePda, indexedRules);
+					result.put(contexts, filtered);
 					for (ISerState state : actions) {
 						Action action = (Action) state.getGrammarElement();
 						SerializerPDA actionPda = extract(state);
@@ -231,7 +327,8 @@ public class ContextPDAProvider implements IContextPDAProvider {
 				ISerializationContext context = new ActionContext( /* container */ null, action.getKey());
 				if (!parameters.isEmpty())
 					context = new SerializationContext.ParameterValueContext(context, parameters);
-				result.put(context, merged);
+				Pda<ISerState, RuleCall> filtered = filterUnneededUnassignedRuleCalls(merged, indexedRules);
+				result.put(context, filtered);
 			}
 			// }
 		}

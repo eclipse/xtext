@@ -118,6 +118,7 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 			accept(emitter, nodes.next(emitter.getGrammarElement()), stack);
 	}
 
+	@SuppressWarnings("deprecation")
 	protected void accept(ISynState emitter, INode node, RuleCallStack stack) {
 		switch (emitter.getType()) {
 			case UNASSIGNED_PARSER_RULE_ENTER:

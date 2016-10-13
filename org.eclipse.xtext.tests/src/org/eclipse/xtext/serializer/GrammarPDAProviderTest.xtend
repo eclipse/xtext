@@ -491,7 +491,7 @@ class GrammarPDAProviderTest {
 		val pdas = pdaProvider.getGrammarPDAs(grammar)
 		pdas.values.forEach[assertNoLeakedGrammarElements(grammar, value)]
 
-//		pdas.forEach[p1, p2|p2.toDot(p1.name)]
+		// pdas.values.forEach[value.toDot(it.contexts.join("-"))]
 		return pdas.values.map[contexts].flatten.sort.map [
 			'''
 				«it»:

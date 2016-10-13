@@ -17,9 +17,10 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
 
+import org.eclipse.xtext.util.IAcceptor;
+
 import com.google.common.base.Function;
 import com.google.common.base.Functions;
-import com.google.common.base.Joiner;
 import com.google.common.base.Objects;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
@@ -597,44 +598,51 @@ public class NfaUtil {
 	 */
 	public <S> Map<S, Set<S>> findCycles(Nfa<S> nfa) {
 		Map<S, Set<S>> cycles = Maps.newLinkedHashMap();
-		findCycles(nfa, nfa.getStart(), cycles, Maps.newHashMap(), Lists.newLinkedList());
+		findCycles(nfa, nfa.getStart(), (List<S> t) -> {
+			Set<S> cycle = Sets.newHashSet(t);
+			for (S cycleNode : t) {
+				// We have two cycles that are connected via at least
+				// one node. Treat them as one cycle.
+				Set<S> existingCycle = cycles.get(cycleNode);
+				if (existingCycle != null) {
+					cycle.addAll(existingCycle);
+				}
+			}
+			for (S n : cycle) {
+				cycles.put(n, cycle);
+			}
+		}, Maps.newHashMap(), Lists.newLinkedList());
 		return cycles;
+	}
+	
+	public <S> void findCycles(Nfa<S> nfa, IAcceptor<List<S>> cycleAcceptor) {
+		findCycles(nfa, nfa.getStart(), cycleAcceptor, Maps.newHashMap(), Lists.newLinkedList());
 	}
 	
 	private static final int DFS_VISITED = 1;
 	private static final int DFS_ON_STACK = 2;
 	
-	/**
-	 * Finding cycles is done with a depth-first search.
-	 */
-	protected <S> void findCycles(Nfa<S> nfa, S node, Map<S, Set<S>> cycles, Map<S, Integer> dfsMark, LinkedList<S> dfsStack) {
+	protected <S> void findCycles(Nfa<S> nfa, S node, IAcceptor<List<S>> cycleAcceptor, Map<S, Integer> dfsMark,
+			LinkedList<S> dfsStack) {
 		dfsStack.push(node);
 		dfsMark.put(node, DFS_ON_STACK);
 		for (S follower : nfa.getFollowers(node)) {
 			Integer followerMark = dfsMark.get(follower);
 			if (followerMark == null) {
 				// The follower is not visited yet, so go deeper.
-				findCycles(nfa, follower, cycles, dfsMark, dfsStack);
+				findCycles(nfa, follower, cycleAcceptor, dfsMark, dfsStack);
 			} else if (followerMark == DFS_ON_STACK) {
-				// If the follower is on the stack that means we have a cycle that includes all nodes between
+				// If the follower is on the stack that means we have a cycle
+				// that includes all nodes between
 				// the follower node and the current node.
-				Set<S> cycle = Sets.newHashSet();
+				LinkedList<S> cycle = Lists.newLinkedList();
 				Iterator<S> stackIter = dfsStack.iterator();
 				S cycleNode;
 				do {
 					cycleNode = stackIter.next();
-					Set<S> existingCycle = cycles.get(cycleNode);
-					if (existingCycle == null) {
-						cycle.add(cycleNode);
-					} else if (existingCycle != cycle) {
-						// We have two cycles that are connected via at least one node. Treat them as one cycle.
-						existingCycle.addAll(cycle);
-						cycle = existingCycle;
-					}
+					cycle.addFirst(cycleNode);
 				} while (cycleNode != follower && stackIter.hasNext());
-				for (S n : cycle) {
-					cycles.put(n, cycle);
-				}
+				cycleAcceptor.accept(cycle);
 			}
 		}
 		dfsStack.pop();

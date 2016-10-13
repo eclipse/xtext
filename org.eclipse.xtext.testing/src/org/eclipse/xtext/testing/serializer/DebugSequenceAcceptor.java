@@ -196,6 +196,7 @@ public class DebugSequenceAcceptor extends DelegatingSequenceAcceptor {
 	}
 
 	@Override
+	@Deprecated
 	public void enterUnassignedParserRuleCall(RuleCall rc) {
 		add(titles.doSwitch(rc) + " {", "", "", -1, NO_NODE);
 		indentation++;
@@ -255,6 +256,7 @@ public class DebugSequenceAcceptor extends DelegatingSequenceAcceptor {
 	}
 
 	@Override
+	@Deprecated
 	public void leaveUnssignedParserRuleCall(RuleCall rc) {
 		indentation--;
 		add("}", "", "", -1, NO_NODE);

@@ -206,11 +206,11 @@ public class SyntacticSequencerPDAProviderNavigatorTest extends AbstractXtextTes
 		//		assertEquals(0, trans2.getDistanceWithStackToAbsorber(stack2));
 		assertEquals("[]", trans2.getShortestPathToAbsorber(stack2).toString());
 
-		RuleCallStack stack3 = newStack(trans1, ">>Addition", ">>Prim");
-		ISynTransition trans3 = findTransition(start, "name=ID", "stop");
-		assertFalse(trans3.involvesUnassignedTokenRuleCalls());
-		assertFalse(trans3.isSyntacticallyAmbiguous());
-		//		assertEquals(3, trans3.getDistanceWithStackToAbsorber(stack3));
-		assertEquals("[<<Prim, <<Addition, ')']", trans3.getShortestStackpruningPathToAbsorber(stack3).toString());
+//		RuleCallStack stack3 = newStack(trans1, ">>Addition", ">>Prim");
+//		ISynTransition trans3 = findTransition(start, "name=ID", "stop");
+//		assertFalse(trans3.involvesUnassignedTokenRuleCalls());
+//		assertFalse(trans3.isSyntacticallyAmbiguous());
+//		//		assertEquals(3, trans3.getDistanceWithStackToAbsorber(stack3));
+//		assertEquals("[<<Prim, <<Addition, ')']", trans3.getShortestStackpruningPathToAbsorber(stack3).toString());
 	}
 }

@@ -115,6 +115,7 @@ public class WhitespaceAddingSequenceAcceptor extends DelegatingSequenceAcceptor
 	}
 
 	@Override
+	@Deprecated
 	public void enterUnassignedParserRuleCall(RuleCall rc) {
 		ruleCalls.push(rc);
 		super.enterUnassignedParserRuleCall(rc);
@@ -158,6 +159,7 @@ public class WhitespaceAddingSequenceAcceptor extends DelegatingSequenceAcceptor
 	}
 
 	@Override
+	@Deprecated
 	public void leaveUnssignedParserRuleCall(RuleCall rc) {
 		ruleCalls.pop();
 		super.leaveUnssignedParserRuleCall(rc);

@@ -11,8 +11,10 @@ import org.eclipse.xtext.nodemodel.ILeafNode;
  */
 public interface ISyntacticSequenceAcceptor extends ISemanticSequenceAcceptor {
 
+	@Deprecated // no longer supported
 	void enterUnassignedParserRuleCall(RuleCall rc);
 
+	@Deprecated // no longer supported
 	void leaveUnssignedParserRuleCall(RuleCall rc);
 
 	void acceptUnassignedAction(Action action);

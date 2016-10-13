@@ -183,6 +183,7 @@ public class HiddenTokenSequencer implements IHiddenTokenSequencer, ISyntacticSe
 	}
 
 	@Override
+	@Deprecated
 	public void enterUnassignedParserRuleCall(RuleCall rc) {
 		delegate.enterUnassignedParserRuleCall(rc);
 	}
@@ -461,6 +462,7 @@ public class HiddenTokenSequencer implements IHiddenTokenSequencer, ISyntacticSe
 	}
 
 	@Override
+	@Deprecated
 	public void leaveUnssignedParserRuleCall(RuleCall rc) {
 		delegate.leaveUnssignedParserRuleCall(rc);
 	}

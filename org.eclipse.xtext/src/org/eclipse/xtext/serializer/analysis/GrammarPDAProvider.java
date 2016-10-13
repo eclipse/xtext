@@ -72,7 +72,8 @@ public class GrammarPDAProvider implements IGrammarPDAProvider {
 
 	}
 
-	protected static class SerializerParserRuleFollowerFunction extends FollowerFunctionImpl<AbstractElement, AbstractElement> {
+	protected static class SerializerParserRuleFollowerFunction
+			extends FollowerFunctionImpl<AbstractElement, AbstractElement> {
 
 		public SerializerParserRuleFollowerFunction(Production<AbstractElement, AbstractElement> production) {
 			super(production);
