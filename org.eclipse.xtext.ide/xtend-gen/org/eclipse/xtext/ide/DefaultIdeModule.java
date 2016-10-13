@@ -19,11 +19,22 @@ import org.eclipse.xtext.service.AbstractGenericModule;
  */
 @SuppressWarnings("all")
 public class DefaultIdeModule extends AbstractGenericModule {
-  public void configureExecutorService(final Binder binder) {
-    AnnotatedBindingBuilder<ExecutorService> _bind = binder.<ExecutorService>bind(ExecutorService.class);
+  private final Provider<ExecutorService> executorServiceProvider;
+  
+  public DefaultIdeModule() {
     final Provider<ExecutorService> _function = () -> {
       return Executors.newCachedThreadPool();
     };
-    _bind.toProvider(_function);
+    this.executorServiceProvider = _function;
+  }
+  
+  public DefaultIdeModule(final Provider<ExecutorService> executorServiceProvider) {
+    this.executorServiceProvider = executorServiceProvider;
+  }
+  
+  public void configureExecutorService(final Binder binder) {
+    AnnotatedBindingBuilder<ExecutorService> _bind = binder.<ExecutorService>bind(ExecutorService.class);
+    ExecutorService _get = this.executorServiceProvider.get();
+    _bind.toInstance(_get);
   }
 }

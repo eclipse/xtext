@@ -8,6 +8,7 @@
 package org.eclipse.xtext.ide
 
 import com.google.inject.Binder
+import com.google.inject.Provider
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import org.eclipse.xtext.service.AbstractGenericModule
@@ -17,8 +18,18 @@ import org.eclipse.xtext.service.AbstractGenericModule
  */
 class DefaultIdeModule extends AbstractGenericModule {
 	
+	val Provider<ExecutorService> executorServiceProvider
+	
+	new() {
+		executorServiceProvider = [Executors.newCachedThreadPool]
+	}
+	
+	new(Provider<ExecutorService> executorServiceProvider) {
+		this.executorServiceProvider = executorServiceProvider
+	}
+	
 	def void configureExecutorService(Binder binder) {
-		binder.bind(ExecutorService).toProvider[Executors.newCachedThreadPool]
+		binder.bind(ExecutorService).toInstance(executorServiceProvider.get)
 	}
 	
 }

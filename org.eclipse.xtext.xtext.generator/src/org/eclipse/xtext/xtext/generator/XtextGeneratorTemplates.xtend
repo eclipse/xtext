@@ -16,7 +16,6 @@ import com.google.inject.Module
 import com.google.inject.Provider
 import com.google.inject.Singleton
 import com.google.inject.name.Names
-import com.google.inject.util.Modules
 import java.util.Collections
 import java.util.List
 import java.util.Map
@@ -240,6 +239,15 @@ class XtextGeneratorTemplates {
 				 * Use this class to register ide components.
 				 */
 				class «ideModule.simpleName» extends «ideGenModule» {
+				
+					new() {
+						super()
+					}
+				
+					new(«Provider»<«ExecutorService»> executorServiceProvider) {
+						super(executorServiceProvider)
+					}
+					
 				}
 			''')
 		} else {
@@ -248,6 +256,15 @@ class XtextGeneratorTemplates {
 				 * Use this class to register ide components.
 				 */
 				public class «ideModule.simpleName» extends «ideGenModule» {
+				
+					public «ideModule.simpleName»() {
+						super();
+					}
+				
+					public «ideModule.simpleName»(«Provider»<«ExecutorService»> executorServiceProvider) {
+						super(executorServiceProvider);
+					}
+					
 				}
 			''')
 		}
@@ -268,6 +285,14 @@ class XtextGeneratorTemplates {
 		file.content = '''
 			public abstract class «ideGenModule.simpleName» extends «superClass» {
 			
+				public «ideGenModule.simpleName»() {
+					super();
+				}
+			
+				public «ideGenModule.simpleName»(«Provider»<«ExecutorService»> executorServiceProvider) {
+					super(executorServiceProvider);
+				}
+			
 				«FOR binding : langConfig.ideGenModule.bindings»
 					«binding.createBindingMethod»
 					
@@ -283,26 +308,28 @@ class XtextGeneratorTemplates {
 		if (langConfig.generateXtendStubs) {
 			return fileAccessFactory.createXtendFile(ideSetup,'''
 				/**
-				 * Initialization support for running Xtext languages without Equinox extension registry.
+				 * Initialization support for running Xtext languages as language servers.
 				 */
 				class «ideSetup.simpleName» extends «runtimeSetup» {
 				
 					override createInjector() {
-						«Guice».createInjector(new «runtimeModule», new «ideModule»)
+						«Guice».createInjector(«Modules2».mixin(new «runtimeModule», new «ideModule»))
 					}
+					
 				}
 		 	''')
 		} else {
 			return fileAccessFactory.createJavaFile(ideSetup,'''
 				/**
-				 * Initialization support for running Xtext languages without Equinox extension registry.
+				 * Initialization support for running Xtext languages as language servers.
 				 */
 				public class «ideSetup.simpleName» extends «runtimeSetup» {
 				
 					@Override
 					public «Injector» createInjector() {
-						return «Guice».createInjector(new «runtimeModule»(), new «ideModule»());
+						return «Guice».createInjector(«Modules2».mixin(new «runtimeModule»(), new «ideModule»()));
 					}
+					
 				}
 		 	''')
 		}
@@ -416,8 +443,16 @@ class XtextGeneratorTemplates {
 				/**
 				 * Use this class to register additional components to be used within the web application.
 				 */
-				@«FinalFieldsConstructor»
 				class «webModule.simpleName» extends «webGenModule» {
+				
+					new() {
+						super()
+					}
+				
+					new(«Provider»<«ExecutorService»> executorServiceProvider) {
+						super(executorServiceProvider)
+					}
+					
 				}
 			''')
 		} else {
@@ -426,10 +461,15 @@ class XtextGeneratorTemplates {
 				 * Use this class to register additional components to be used within the web application.
 				 */
 				public class «webModule.simpleName» extends «webGenModule» {
-
+				
+					public «webModule.simpleName»() {
+						super();
+					}
+				
 					public «webModule.simpleName»(«Provider»<«ExecutorService»> executorServiceProvider) {
 						super(executorServiceProvider);
 					}
+					
 				}
 			''')
 		}
@@ -448,6 +488,10 @@ class XtextGeneratorTemplates {
 		file.annotations += new SuppressWarningsAnnotation
 		file.content = '''
 			public abstract class «webGenModule.simpleName» extends «superClass» {
+			
+				public «webGenModule.simpleName»() {
+					super();
+				}
 			
 				public «webGenModule.simpleName»(«Provider»<«ExecutorService»> executorServiceProvider) {
 					super(executorServiceProvider);
@@ -477,8 +521,9 @@ class XtextGeneratorTemplates {
 					
 					override «Injector» createInjector() {
 						val runtimeModule = new «runtimeModule»()
+						val ideModule = new «ideModule»(executorServiceProvider)
 						val webModule = new «webModule»(executorServiceProvider)
-						return «Guice».createInjector(«Modules».override(runtimeModule).with(webModule))
+						return «Guice».createInjector(«Modules2».mixin(runtimeModule, ideModule, webModule))
 					}
 					
 				}
@@ -499,8 +544,9 @@ class XtextGeneratorTemplates {
 					@Override
 					public «Injector» createInjector() {
 						«runtimeModule» runtimeModule = new «runtimeModule»();
+						«ideModule» ideModule = new «ideModule»(executorServiceProvider);
 						«webModule» webModule = new «webModule»(executorServiceProvider);
-						return «Guice».createInjector(«Modules».override(runtimeModule).with(webModule));
+						return «Guice».createInjector(«Modules2».mixin(runtimeModule, ideModule, webModule));
 					}
 					
 				}

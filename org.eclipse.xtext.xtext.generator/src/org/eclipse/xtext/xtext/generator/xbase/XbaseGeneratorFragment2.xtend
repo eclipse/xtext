@@ -76,6 +76,7 @@ class XbaseGeneratorFragment2 extends AbstractXtextGeneratorFragment {
 			])
 		}
 		
+		language.ideGenModule.superClass = 'org.eclipse.xtext.xbase.ide.DefaultXbaseIdeModule'.typeRef
 		language.webGenModule.superClass = 'org.eclipse.xtext.xbase.web.DefaultXbaseWebModule'.typeRef
 	}
 	

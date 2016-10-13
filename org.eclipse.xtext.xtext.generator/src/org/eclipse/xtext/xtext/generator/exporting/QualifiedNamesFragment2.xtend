@@ -31,7 +31,7 @@ class QualifiedNamesFragment2 extends AbstractXtextGeneratorFragment {
 		new GuiceModuleAccess.BindingFactory()
 			.addTypeToType('org.eclipse.xtext.ide.editor.contentassist.IPrefixMatcher'.typeRef,
 					'org.eclipse.xtext.ide.editor.contentassist.FQNPrefixMatcher'.typeRef)
-			.contributeTo(language.webGenModule)
+			.contributeTo(language.ideGenModule)
 	}
 	
 }

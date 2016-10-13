@@ -139,9 +139,13 @@ public class XbaseGeneratorFragment2 extends AbstractXtextGeneratorFragment {
         Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("org.eclipse.xtext.xbase.ui", "org.eclipse.jdt.debug.ui")));
     }
     IXtextGeneratorLanguage _language = this.getLanguage();
-    GuiceModuleAccess _webGenModule = _language.getWebGenModule();
-    TypeReference _typeRef = TypeReference.typeRef("org.eclipse.xtext.xbase.web.DefaultXbaseWebModule");
-    _webGenModule.setSuperClass(_typeRef);
+    GuiceModuleAccess _ideGenModule = _language.getIdeGenModule();
+    TypeReference _typeRef = TypeReference.typeRef("org.eclipse.xtext.xbase.ide.DefaultXbaseIdeModule");
+    _ideGenModule.setSuperClass(_typeRef);
+    IXtextGeneratorLanguage _language_1 = this.getLanguage();
+    GuiceModuleAccess _webGenModule = _language_1.getWebGenModule();
+    TypeReference _typeRef_1 = TypeReference.typeRef("org.eclipse.xtext.xbase.web.DefaultXbaseWebModule");
+    _webGenModule.setSuperClass(_typeRef_1);
   }
   
   protected void contributeRuntimeGuiceBindings() {
