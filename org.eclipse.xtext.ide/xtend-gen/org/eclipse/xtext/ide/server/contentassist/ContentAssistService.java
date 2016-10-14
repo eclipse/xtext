@@ -65,7 +65,7 @@ public class ContentAssistService {
   public CompletionList createCompletionList(final Document document, final XtextResource resource, final TextDocumentPositionParams params, final CancelIndicator cancelIndicator) {
     try {
       final CompletionListBuilder result = new CompletionListBuilder();
-      result.incomplete(true);
+      result.isIncomplete(true);
       final IdeContentProposalAcceptor acceptor = this.proposalAcceptorProvider.get();
       Position _position = params.getPosition();
       final int caretOffset = document.getOffSet(_position);

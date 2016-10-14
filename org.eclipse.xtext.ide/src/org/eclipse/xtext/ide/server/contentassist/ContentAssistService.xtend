@@ -54,7 +54,7 @@ class ContentAssistService {
         TextDocumentPositionParams params, CancelIndicator cancelIndicator) {
         val result = new CompletionListBuilder()
         // we set isInComplete to true, so we get asked always, which is the best match to the expected behavior in Xtext
-        result.incomplete(true);
+        result.isIncomplete(true);
 
         val acceptor = proposalAcceptorProvider.get
         val caretOffset = document.getOffSet(params.position)
