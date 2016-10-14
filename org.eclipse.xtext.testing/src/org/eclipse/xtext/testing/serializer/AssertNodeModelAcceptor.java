@@ -151,6 +151,7 @@ public class AssertNodeModelAcceptor extends DelegatingSequenceAcceptor {
 	}
 
 	@Override
+	@Deprecated
 	public void enterUnassignedParserRuleCall(RuleCall rc) {
 		super.enterUnassignedParserRuleCall(rc);
 	}
@@ -171,6 +172,7 @@ public class AssertNodeModelAcceptor extends DelegatingSequenceAcceptor {
 	}
 
 	@Override
+	@Deprecated
 	public void leaveUnssignedParserRuleCall(RuleCall rc) {
 		super.leaveUnssignedParserRuleCall(rc);
 	}

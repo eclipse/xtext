@@ -36,8 +36,7 @@ class SemanticSequencerExtensions {
 	def Map<IConstraint, List<ISerializationContext>> getGrammarConstraints(Grammar grammar, EClass clazz) {
 		val Map<IConstraint, List<ISerializationContext>> result = newLinkedHashMap
 		val constraints = gcp.getConstraints(grammar)
-		for (e : constraints.entrySet) {
-			val context = e.key
+		for (e : constraints.values) {
 			val constraint = e.value
 			if (constraint.type === clazz) {
 				var contexts = result.get(constraint)
@@ -45,7 +44,7 @@ class SemanticSequencerExtensions {
 					contexts = newArrayList
 					result.put(constraint, contexts)
 				}
-				contexts.add(context)
+				contexts.addAll(e.getContexts(clazz))
 			}
 		}
 		return result
@@ -95,7 +94,7 @@ class SemanticSequencerExtensions {
 	def Collection<IConstraint> getGrammarConstraints(Grammar grammar) {
 		if (grammar === null)
 			return emptySet
-		return gcp.getConstraints(grammar).values
+		return gcp.getConstraints(grammar).values.map[value]
 	}
 
 	def List<ISemState> getLinearListOfMandatoryAssignments(IConstraint constraint) {

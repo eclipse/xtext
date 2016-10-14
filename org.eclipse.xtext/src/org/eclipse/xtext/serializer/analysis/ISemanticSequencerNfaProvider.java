@@ -9,12 +9,10 @@ package org.eclipse.xtext.serializer.analysis;
 
 import java.util.BitSet;
 import java.util.List;
-import java.util.Map;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.util.formallang.Nfa;
 
 import com.google.common.base.Function;
@@ -51,5 +49,5 @@ public interface ISemanticSequencerNfaProvider {
 		boolean isBooleanAssignment();
 	}
 
-	Map<ISerializationContext, Nfa<ISemState>> getSemanticSequencerNFAs(Grammar grammar);
+	SerializationContextMap<Nfa<ISemState>> getSemanticSequencerNFAs(Grammar grammar);
 }

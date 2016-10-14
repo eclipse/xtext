@@ -11,7 +11,6 @@ import com.google.common.base.Throwables
 import com.google.inject.Inject
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.GrammarUtil
-import org.eclipse.xtext.serializer.ISerializationContext
 import org.eclipse.xtext.serializer.analysis.IContextPDAProvider
 import org.eclipse.xtext.serializer.analysis.IContextTypePDAProvider
 import org.eclipse.xtext.serializer.analysis.ISemanticSequencerNfaProvider
@@ -36,17 +35,28 @@ class DebugGraphGenerator {
 
 	def Iterable<Pair<String, String>> generateDebugGraphs() {
 		val result = <Pair<String, String>>newArrayList
-		for (e : contextPDAProvider.getContextPDAs(grammar).entrySet) {
-			result.add(file('context', e.key) -> pdaToDot.drawSafe(e.key, e.value))
+		val extension names = new NamedSerializationContextProvider(grammar)
+		
+		val dir_context = directory('context')
+		val dir_context_type = directory('context_type')
+		val dir_syntactic_sequencer = directory('syntactic_sequencer')
+		val dir_semantic_sequencer = directory('semantic_sequencer')
+
+		for (e : contextPDAProvider.getContextPDAs(grammar).namedContexts) {
+			result.add(dir_context + e.name + ".dot" -> pdaToDot.drawSafe(e.value))
+			result.add(dir_context + e.name + ".txt" -> e.contexts.join("\n"))
 		}
-		for (e : contextTypePDAProvider.getContextTypePDAs(grammar).entrySet) {
-			result.add(file('context_type', e.key) -> pdaToDot.drawSafe(e.key, e.value))
+		for (e : contextTypePDAProvider.getContextTypePDAs(grammar).namedContexts) {
+			result.add(dir_context_type + e.name + ".dot" -> pdaToDot.drawSafe(e.value))
+			result.add(dir_context_type + e.name + ".txt" -> e.contexts.join("\n"))
 		}
-		for (e : syntacticSequencerPDAProvider.getSyntacticSequencerPDAs(grammar).entrySet) {
-			result.add(file('syntactic_sequencer', e.key) -> syntacticSequencerPDA2Dot.drawSafe(e.key, e.value))
+		for (e : syntacticSequencerPDAProvider.getSyntacticSequencerPDAs(grammar).namedContexts) {
+			result.add(dir_syntactic_sequencer + e.name + ".dot" -> syntacticSequencerPDA2Dot.drawSafe(e.value))
+			result.add(dir_syntactic_sequencer + e.name + ".txt" -> e.contexts.join("\n"))
 		}
-		for (e : semanticSequencerNFAProvider.getSemanticSequencerNFAs(grammar).entrySet) {
-			result.add(file('semantic_sequencer', e.key) -> nfaToDot.drawSafe(e.key, e.value))
+		for (e : semanticSequencerNFAProvider.getSemanticSequencerNFAs(grammar).namedContexts) {
+			result.add(dir_semantic_sequencer + e.name + ".dot" -> nfaToDot.drawSafe(e.value))
+			result.add(dir_semantic_sequencer + e.name + ".txt" -> e.contexts.join("\n"))
 		}
 
 		try {
@@ -79,12 +89,12 @@ class DebugGraphGenerator {
 		}
 		return result
 	}
-
-	private def String drawSafe(GraphvizDotBuilder builder, ISerializationContext context, Object graph) {
+	
+	private def String drawSafe(GraphvizDotBuilder builder, Object graph) {
 		try {
 			builder.draw(graph)
 		} catch (Exception e) {
-			println("Error rendering " + context)
+			println("Error rendering")
 			e.printStackTrace
 			return Throwables.getStackTraceAsString(e)
 		}
@@ -95,8 +105,4 @@ class DebugGraphGenerator {
 			'_' + name + '/'
 	}
 
-	private def String file(String name, ISerializationContext contexts) {
-		directory(name) + contexts + '.dot';
-	}
 }
-					

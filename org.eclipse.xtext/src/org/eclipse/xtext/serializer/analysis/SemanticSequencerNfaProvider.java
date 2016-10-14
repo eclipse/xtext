@@ -13,7 +13,6 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
@@ -199,7 +198,7 @@ public class SemanticSequencerNfaProvider implements ISemanticSequencerNfaProvid
 
 	private static Logger LOG = Logger.getLogger(SemanticSequencerNfaProvider.class);
 
-	protected Map<Grammar, Map<ISerializationContext, Nfa<ISemState>>> cache = Maps.newHashMap();
+	protected Map<Grammar, SerializationContextMap<Nfa<ISemState>>> cache = Maps.newHashMap();
 
 	@Inject
 	protected ISyntacticSequencerPDAProvider pdaProvider;
@@ -217,39 +216,41 @@ public class SemanticSequencerNfaProvider implements ISemanticSequencerNfaProvid
 		return true;
 	}
 
-	protected SemNfa createNfa(Grammar grammar, ISynAbsorberState synState, ISerializationContext context) {
-		EClass type = context.getType();
+	protected SemNfa createNfa(Grammar grammar, ISynAbsorberState synState, EClass type) {
 		SynAbsorberNfaAdapter synNfa = new SynAbsorberNfaAdapter(synState);
-		//		System.out.println(new NfaFormatter().format(synNfa));
+		// System.out.println(new NfaFormatter().format(synNfa));
 		Map<ISynAbsorberState, Integer> distanceMap = util.distanceToFinalStateMap(synNfa);
 		SemNfa nfa = util.create(util.sort(synNfa, distanceMap), new SemStateFactory());
-		//		util.sortInplace(nfa, distanceMap);
+		// util.sortInplace(nfa, distanceMap);
 		if (type != null)
 			initContentValidationNeeded(type, nfa);
-		initRemainingFeatures(nfa.getStop(), util.inverse(nfa), Sets.<ISemState> newHashSet());
+		initRemainingFeatures(nfa.getStop(), util.inverse(nfa), Sets.<ISemState>newHashSet());
 		initOrderIDs(grammar, nfa);
-		//		System.out.println(new NfaFormatter().format(nfa));
+		// System.out.println(new NfaFormatter().format(nfa));
 		return nfa;
 	}
 
 	@Override
-	public Map<ISerializationContext, Nfa<ISemState>> getSemanticSequencerNFAs(Grammar grammar) {
-		Map<ISerializationContext, Nfa<ISemState>> result = cache.get(grammar);
-		if (result != null)
-			return result;
-		result = Maps.newLinkedHashMap();
-		cache.put(grammar, result);
-		Map<ISerializationContext, ISynAbsorberState> PDAs = pdaProvider.getSyntacticSequencerPDAs(grammar);
-		for (Entry<ISerializationContext, ISynAbsorberState> e : PDAs.entrySet()) {
+	public SerializationContextMap<Nfa<ISemState>> getSemanticSequencerNFAs(Grammar grammar) {
+		SerializationContextMap<Nfa<ISemState>> cached = cache.get(grammar);
+		if (cached != null)
+			return cached;
+		SerializationContextMap.Builder<Nfa<ISemState>> builder = SerializationContextMap.builder();
+		SerializationContextMap<ISynAbsorberState> PDAs = pdaProvider.getSyntacticSequencerPDAs(grammar);
+		for (SerializationContextMap.Entry<ISynAbsorberState> e : PDAs.values()) {
 			ISynAbsorberState synState = e.getValue();
-			ISerializationContext context = e.getKey();
-			try {
-				SemNfa nfa = createNfa(grammar, synState, context);
-				result.put(context, nfa);
-			} catch (Exception x) {
-				LOG.error("Error during static analysis of context '" + context + "': " + x.getMessage(), x);
+			for (EClass type : e.getTypes()) {
+				List<ISerializationContext> contexts = e.getContexts(type);
+				try {
+					SemNfa nfa = createNfa(grammar, synState, type);
+					builder.put(contexts, nfa);
+				} catch (Exception x) {
+					LOG.error("Error during static analysis of context '" + contexts + "': " + x.getMessage(), x);
+				}
 			}
 		}
+		SerializationContextMap<Nfa<ISemState>> result = builder.create();
+		cache.put(grammar, result);
 		return result;
 	}
 

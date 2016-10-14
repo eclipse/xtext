@@ -9,12 +9,9 @@ package org.eclipse.xtext.serializer.impl;
 
 import java.io.IOException;
 import java.io.Writer;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.formatting.IFormatter;
@@ -119,17 +116,6 @@ public class Serializer implements ISerializer {
 	}
 
 	protected void serialize(EObject obj, ITokenStream tokenStream, SaveOptions options) throws IOException {
-
-		// use the CSV as long as there are cases where is provides better messages than the serializer itself.
-		if (options.isValidating()) {
-			List<Diagnostic> diagnostics = new ArrayList<Diagnostic>();
-			validator.validateRecursive(obj, new IConcreteSyntaxValidator.DiagnosticListAcceptor(diagnostics),
-					new HashMap<Object, Object>());
-			if (!diagnostics.isEmpty())
-				throw new IConcreteSyntaxValidator.InvalidConcreteSyntaxException(
-						"These errors need to be fixed before the model can be serialized.", diagnostics);
-		}
-
 		ISerializationDiagnostic.Acceptor errors = ISerializationDiagnostic.EXCEPTION_THROWING_ACCEPTOR;
 		ITokenStream formatterTokenStream;
 		if (formatter instanceof IFormatterExtension)

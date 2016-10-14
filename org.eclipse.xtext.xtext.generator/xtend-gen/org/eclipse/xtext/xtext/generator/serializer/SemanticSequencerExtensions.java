@@ -35,9 +35,12 @@ import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider;
 import org.eclipse.xtext.serializer.analysis.ISemanticSequencerNfaProvider;
+import org.eclipse.xtext.serializer.analysis.SerializationContextMap;
 import org.eclipse.xtext.util.formallang.Nfa;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 @SuppressWarnings("all")
@@ -68,11 +71,10 @@ public class SemanticSequencerExtensions {
   
   public Map<IGrammarConstraintProvider.IConstraint, List<ISerializationContext>> getGrammarConstraints(final Grammar grammar, final EClass clazz) {
     final Map<IGrammarConstraintProvider.IConstraint, List<ISerializationContext>> result = CollectionLiterals.<IGrammarConstraintProvider.IConstraint, List<ISerializationContext>>newLinkedHashMap();
-    final Map<ISerializationContext, IGrammarConstraintProvider.IConstraint> constraints = this.gcp.getConstraints(grammar);
-    Set<Map.Entry<ISerializationContext, IGrammarConstraintProvider.IConstraint>> _entrySet = constraints.entrySet();
-    for (final Map.Entry<ISerializationContext, IGrammarConstraintProvider.IConstraint> e : _entrySet) {
+    final SerializationContextMap<IGrammarConstraintProvider.IConstraint> constraints = this.gcp.getConstraints(grammar);
+    List<SerializationContextMap.Entry<IGrammarConstraintProvider.IConstraint>> _values = constraints.values();
+    for (final SerializationContextMap.Entry<IGrammarConstraintProvider.IConstraint> e : _values) {
       {
-        final ISerializationContext context = e.getKey();
         final IGrammarConstraintProvider.IConstraint constraint = e.getValue();
         EClass _type = constraint.getType();
         boolean _tripleEquals = (_type == clazz);
@@ -83,7 +85,8 @@ public class SemanticSequencerExtensions {
             contexts = _newArrayList;
             result.put(constraint, contexts);
           }
-          contexts.add(context);
+          List<ISerializationContext> _contexts = e.getContexts(clazz);
+          contexts.addAll(_contexts);
         }
       }
     }
@@ -139,8 +142,12 @@ public class SemanticSequencerExtensions {
     if ((grammar == null)) {
       return CollectionLiterals.<IGrammarConstraintProvider.IConstraint>emptySet();
     }
-    Map<ISerializationContext, IGrammarConstraintProvider.IConstraint> _constraints = this.gcp.getConstraints(grammar);
-    return _constraints.values();
+    SerializationContextMap<IGrammarConstraintProvider.IConstraint> _constraints = this.gcp.getConstraints(grammar);
+    List<SerializationContextMap.Entry<IGrammarConstraintProvider.IConstraint>> _values = _constraints.values();
+    final Function1<SerializationContextMap.Entry<IGrammarConstraintProvider.IConstraint>, IGrammarConstraintProvider.IConstraint> _function = (SerializationContextMap.Entry<IGrammarConstraintProvider.IConstraint> it) -> {
+      return it.getValue();
+    };
+    return ListExtensions.<SerializationContextMap.Entry<IGrammarConstraintProvider.IConstraint>, IGrammarConstraintProvider.IConstraint>map(_values, _function);
   }
   
   public List<ISemanticSequencerNfaProvider.ISemState> getLinearListOfMandatoryAssignments(final IGrammarConstraintProvider.IConstraint constraint) {

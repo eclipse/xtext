@@ -129,6 +129,7 @@ public class DelegatingSequenceAcceptor implements ISequenceAcceptor {
 	}
 
 	@Override
+	@Deprecated
 	public void enterUnassignedParserRuleCall(RuleCall rc) {
 		if (delegate != null)
 			((ISyntacticSequenceAcceptor) delegate).enterUnassignedParserRuleCall(rc);
@@ -157,6 +158,7 @@ public class DelegatingSequenceAcceptor implements ISequenceAcceptor {
 	}
 
 	@Override
+	@Deprecated
 	public void leaveUnssignedParserRuleCall(RuleCall rc) {
 		if (delegate != null)
 			((ISyntacticSequenceAcceptor) delegate).leaveUnssignedParserRuleCall(rc);

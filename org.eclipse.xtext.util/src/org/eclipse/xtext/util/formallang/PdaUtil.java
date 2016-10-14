@@ -416,11 +416,16 @@ public class PdaUtil {
 
 	public <S, P, R, D extends Pda<S, P>> D filterEdges(Pda<S, P> pda, Traverser<? super Pda<S, P>, S, R> traverser,
 			PdaFactory<D, S, P, S> factory) {
+		Map<S, Integer> distances = new NfaUtil().distanceToFinalStateMap(pda);
+		return filterEdges(pda, traverser, distances, factory);
+	}
+
+	public <S, P, R, D extends Pda<S, P>> D filterEdges(Pda<S, P> pda, Traverser<? super Pda<S, P>, S, R> traverser,
+			Map<S, Integer> distances, PdaFactory<D, S, P, S> factory) {
 		HashStack<TraversalItem<S, R>> trace = new HashStack<TraversalItem<S, R>>();
 		R previous = traverser.enter(pda, pda.getStart(), null);
 		if (previous == null)
 			return factory == null ? null : factory.create(pda.getStart(), pda.getStop());
-		Map<S, Integer> distances = new NfaUtil().distanceToFinalStateMap(pda);
 		MappedComparator<S, Integer> distanceComp = new MappedComparator<S, Integer>(distances);
 		trace.push(newItem(pda, distanceComp, distances, pda.getStart(), previous));
 		Multimap<S, S> edges = LinkedHashMultimap.create();
@@ -740,4 +745,49 @@ public class PdaUtil {
 		}
 		return result;
 	}
+
+	public <S, P, D extends Pda<S, P>> D filter(Pda<S, P> pda, Predicate<S> filter,
+			PdaFactory<D, S, P, ? super S> fact) {
+		D result = fact.create(pda.getStart(), pda.getStop());
+		Map<S, S> orig2copy = Maps.newLinkedHashMap();
+		S start = pda.getStart();
+		S stop = pda.getStop();
+		orig2copy.put(start, result.getStart());
+		orig2copy.put(stop, result.getStop());
+		for (S orig : new NfaUtil().collect(pda)) {
+			if (orig != start && orig != stop && filter.apply(orig)) {
+				if (pda.getPop(orig) != null) {
+					orig2copy.put(orig, fact.createPop(result, orig));
+				} else if (pda.getPush(orig) != null) {
+					orig2copy.put(orig, fact.createPush(result, orig));
+				} else {
+					orig2copy.put(orig, fact.createState(result, orig));
+				}
+			}
+		}
+		for (Map.Entry<S, S> e : orig2copy.entrySet()) {
+			S orig = e.getKey();
+			S copy = e.getValue();
+			LinkedList<S> todo = Lists.newLinkedList();
+			todo.add(orig);
+			Set<S> visited = Sets.newHashSet();
+			Set<S> folowers = Sets.newHashSet();
+			while (!todo.isEmpty()) {
+				S o = todo.pop();
+				if (visited.add(o)) {
+					for (S s : pda.getFollowers(o)) {
+						S f = orig2copy.get(s);
+						if (f != null) {
+							folowers.add(f);
+						} else {
+							todo.add(s);
+						}
+					}
+				}
+			}
+			fact.setFollowers(result, copy, folowers);
+		}
+		return result;
+	}
+
 }

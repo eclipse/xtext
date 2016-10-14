@@ -8,7 +8,6 @@
 package org.eclipse.xtext.serializer.sequencer;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
 
@@ -42,6 +41,7 @@ import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISyn
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynState;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynTransition;
 import org.eclipse.xtext.serializer.analysis.SerializationContext;
+import org.eclipse.xtext.serializer.analysis.SerializationContextMap;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
 import org.eclipse.xtext.serializer.diagnostic.ISyntacticSequencerDiagnosticProvider;
@@ -118,6 +118,7 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 			accept(emitter, nodes.next(emitter.getGrammarElement()), stack);
 	}
 
+	@SuppressWarnings("deprecation")
 	protected void accept(ISynState emitter, INode node, RuleCallStack stack) {
 		switch (emitter.getType()) {
 			case UNASSIGNED_PARSER_RULE_ENTER:
@@ -430,7 +431,7 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 	@Inject
 	private IGrammarAccess grammar;
 
-	private Map<ISerializationContext, ISynAbsorberState> syntacticSequencerPDAs;
+	private SerializationContextMap<ISynAbsorberState> syntacticSequencerPDAs;
 
 	@Override
 	public void init(ISerializationContext context, EObject semanticObject, ISyntacticSequenceAcceptor sequenceAcceptor,

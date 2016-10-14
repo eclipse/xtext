@@ -25,7 +25,7 @@ import com.google.inject.ImplementedBy;
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author Jan Koehnlein
  */
-@ImplementedBy(IReferableElementsUnloader.NullUnloader.class)
+@ImplementedBy(IReferableElementsUnloader.GenericUnloader.class)
 public interface IReferableElementsUnloader {
 
 	void unloadRoot(EObject root);

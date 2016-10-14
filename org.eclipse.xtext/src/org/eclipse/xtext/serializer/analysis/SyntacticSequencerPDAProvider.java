@@ -33,8 +33,8 @@ import org.eclipse.xtext.serializer.analysis.GrammarAlias.AlternativeAlias;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.GrammarAliasFactory;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.GroupAlias;
 import org.eclipse.xtext.serializer.analysis.ISerState.SerStateType;
+import org.eclipse.xtext.serializer.analysis.SerializationContextMap.Entry;
 import org.eclipse.xtext.serializer.sequencer.RuleCallStack;
-import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.formallang.Nfa;
 import org.eclipse.xtext.util.formallang.NfaToProduction;
 import org.eclipse.xtext.util.formallang.NfaUtil;
@@ -495,7 +495,7 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 
 	private static Logger LOG = Logger.getLogger(SyntacticSequencerPDAProvider.class);
 
-	protected Map<Grammar, Map<ISerializationContext, ISynAbsorberState>> cache = Maps.newHashMap();
+	protected Map<Grammar, SerializationContextMap<ISynAbsorberState>> cache = Maps.newHashMap();
 
 	//	protected SequencerPDAProvider pdaProvider = createSequencerPDAProvider();
 	@Inject
@@ -588,30 +588,28 @@ public class SyntacticSequencerPDAProvider implements ISyntacticSequencerPDAProv
 	}
 
 	@Override
-	public Map<ISerializationContext, ISynAbsorberState> getSyntacticSequencerPDAs(Grammar grammar) {
-		Map<ISerializationContext, ISynAbsorberState> result = cache.get(grammar);
-		if (result != null)
-			return result;
-		result = Maps.newLinkedHashMap();
-		cache.put(grammar, result);
-		Map<ISerializationContext, Pda<ISerState, RuleCall>> typePDAs = pdaProvider.getContextTypePDAs(grammar);
-		List<Pair<List<ISerializationContext>, Pda<ISerState, RuleCall>>> grouped = SerializationContext.groupByEqualityAndSort(typePDAs);
-		for (Pair<List<ISerializationContext>, Pda<ISerState, RuleCall>> e : grouped) {
-			Pda<ISerState, RuleCall> pda = e.getSecond();
-			List<ISerializationContext> contexts = e.getFirst();
+	public SerializationContextMap<ISynAbsorberState> getSyntacticSequencerPDAs(Grammar grammar) {
+		SerializationContextMap<ISynAbsorberState> cached = cache.get(grammar);
+		if (cached != null)
+			return cached;
+		SerializationContextMap.Builder<ISynAbsorberState> builder = SerializationContextMap.builder();
+		SerializationContextMap<Pda<ISerState, RuleCall>> typePDAs = pdaProvider.getContextTypePDAs(grammar);
+		for (Entry<Pda<ISerState, RuleCall>> e : typePDAs.values()) {
+			Pda<ISerState, RuleCall> pda = e.getValue();
+			List<ISerializationContext> contexts = e.getContexts();
 			try {
 				EClass type = contexts.get(0).getType();
 				Map<ISerState, SynAbsorberState> absorbers = Maps.newLinkedHashMap();
 				Map<SynAbsorberState, Map<ISerState, SynState>> emitters = Maps.newLinkedHashMap();
 				SynAbsorberState state = createAbsorberState(pda.getStart(), absorbers, emitters, type);
-				for (ISerializationContext ctx : contexts) {
-					result.put(ctx, state);
-				}
+				builder.put(contexts, state);
 			} catch (Exception x) {
 				String ctxs = Joiner.on(", ").join(contexts);
 				LOG.error("Error creating PDA for syntactic sequencer for contexts: " + ctxs + ": " + x.getMessage(), x);
 			}
 		}
+		SerializationContextMap<ISynAbsorberState> result = builder.create();
+		cache.put(grammar, result);
 		return result;
 	}
 
