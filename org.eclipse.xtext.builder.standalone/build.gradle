@@ -1,4 +1,5 @@
 dependencies {
+	compile project(':org.eclipse.xtext.xbase')
 	compile project(':org.eclipse.xtext.common.types')
-	optional "org.eclipse.jdt:org.eclipse.jdt.core:$versions.jdtCore"
+	compile "org.eclipse.jdt:org.eclipse.jdt.core:$versions.jdtCore"
 }
