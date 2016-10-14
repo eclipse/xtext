@@ -18,6 +18,7 @@ import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraint;
+import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IFeatureInfo;
 import org.eclipse.xtext.serializer.analysis.ISemanticSequencerNfaProvider.ISemState;
 import org.eclipse.xtext.serializer.analysis.SerializationContext;
 import org.eclipse.xtext.serializer.analysis.SerializationContextMap;
@@ -65,13 +66,45 @@ public class SequencerDiagnosticProvider implements ISemanticSequencerDiagnostic
 	}
 
 	@Override
-	public ISerializationDiagnostic createBacktrackingFailedDiagnostic(SerializableObject sem, ISerializationContext ctx,
-			IConstraint constraint) {
-		StringBuilder msg = new StringBuilder();
-		msg.append("Could not serialize EObject via backtracking.\n");
-		msg.append("Constraint: " + constraint + "\n");
-		msg.append(sem.getValuesString());
-		return new SerializationDiagnostic(BACKTRACKING_FAILED, sem.getEObject(), ctx, grammarAccess.getGrammar(), msg.toString());
+	public ISerializationDiagnostic createBacktrackingFailedDiagnostic(SerializableObject sem,
+			ISerializationContext ctx, IConstraint constraint) {
+		EClass type = constraint.getType();
+		List<String> hints = Lists.newArrayList();
+		for (IFeatureInfo feature : constraint.getFeatures()) {
+			int featureID = type.getFeatureID(feature.getFeature());
+			int count = sem.getValueCount(featureID);
+			String name = feature.getFeature().getEContainingClass().getName() + "." + feature.getFeature().getName();
+			if (!sem.isOptional(featureID)) {
+				int upperBound = feature.getUpperBound();
+				if (count > upperBound) {
+					if (feature.getFeature().isMany()) {
+						hints.add(name + " violates the upper bound: It holds " + count + " values, but only " + upperBound + " are allowed.");
+					} else {
+						hints.add(name + " is not allowed to have a value, but it does.");
+					}
+				}
+			}
+			int lowerBound = feature.getLowerBound();
+			if (count < lowerBound) {
+				if (feature.getFeature().isMany()) {
+					hints.add(name + " violates the lower bound: It holds " + count + " values, but at least " + lowerBound + " are required.");
+				} else {
+					hints.add(name + " is required to have a value, but it does not.");
+				}
+			}
+		}
+		if (!hints.isEmpty()) {
+			StringBuilder msg = new StringBuilder();
+			msg.append("Could not serialize " + type.getName() + ":\n");
+			msg.append(Joiner.on("\n").join(hints));
+			return new SerializationDiagnostic(BACKTRACKING_FAILED, sem.getEObject(), ctx, grammarAccess.getGrammar(), msg.toString());
+		} else {
+			StringBuilder msg = new StringBuilder();
+			msg.append("Could not serialize " + type.getName() + " via backtracking.\n");
+			msg.append("Constraint: " + constraint + "\n");
+			msg.append(sem.getValuesString());
+			return new SerializationDiagnostic(BACKTRACKING_FAILED, sem.getEObject(), ctx, grammarAccess.getGrammar(), msg.toString());
+		}
 	}
 
 	@Override
