@@ -9,14 +9,15 @@ package org.eclipse.xtext.testing.serializer;
 
 import java.util.Stack;
 
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
-import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.grammaranalysis.impl.GrammarElementTitleSwitch;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.serializer.acceptor.DelegatingSequenceAcceptor;
@@ -27,7 +28,7 @@ import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
  */
 public class AssertStructureAcceptor extends DelegatingSequenceAcceptor {
 
-	protected Stack<RuleCall> stack = new Stack<RuleCall>();
+	protected Stack<EObject> stack = new Stack<EObject>();
 
 	public AssertStructureAcceptor() {
 		this(null);
@@ -45,7 +46,8 @@ public class AssertStructureAcceptor extends DelegatingSequenceAcceptor {
 	}
 
 	@Override
-	public void acceptAssignedCrossRefEnum(RuleCall enumRC, String token, EObject value, int index, ICompositeNode node) {
+	public void acceptAssignedCrossRefEnum(RuleCall enumRC, String token, EObject value, int index,
+			ICompositeNode node) {
 		assertElement(enumRC);
 		super.acceptAssignedCrossRefEnum(enumRC, token, value, index, node);
 	}
@@ -64,7 +66,8 @@ public class AssertStructureAcceptor extends DelegatingSequenceAcceptor {
 	}
 
 	@Override
-	public void acceptAssignedDatatype(RuleCall datatypeRC, String token, Object value, int index, ICompositeNode node) {
+	public void acceptAssignedDatatype(RuleCall datatypeRC, String token, Object value, int index,
+			ICompositeNode node) {
 		assertElement(datatypeRC);
 		super.acceptAssignedDatatype(datatypeRC, token, value, index, node);
 	}
@@ -137,54 +140,46 @@ public class AssertStructureAcceptor extends DelegatingSequenceAcceptor {
 		super.acceptWhitespace(rule, token, node);
 	}
 
-	protected void assertElement(AbstractElement element) {
-		AbstractRule expectedRule = null;
-		if (stack.isEmpty()) {
-			// FIXME: this doesn't work if the serialized EObject is not the model's root. 
-			// expectedRule = EcoreUtil2.getContainerOfType(element, Grammar.class).getRules().get(0);
+	protected void assertElement(String name) {
+		if (stack.isEmpty())
 			return;
-		} else
-			expectedRule = stack.peek().getRule();
-		AbstractRule actualRule = EcoreUtil2.getContainerOfType(element, AbstractRule.class);
-		if (expectedRule != actualRule) {
-			GrammarElementTitleSwitch formatter = new GrammarElementTitleSwitch().showQualified().showRule();
-			String elementName = formatter.apply(element);
-			String expName = expectedRule.getName();
-			String actualName = actualRule.getName();
-			String msg = "Element " + elementName + " should be in rule " + expName + " but it is in " + actualName;
-			throw new IllegalStateException(msg);
+		EClass type = stack.peek().eClass();
+		if (type.getEStructuralFeature(name) == null) {
+			throw new IllegalStateException("No feature '" + name + "' in EClass " + type.getName());
 		}
 	}
 
-	protected void assertPop(RuleCall call) {
-		RuleCall expected = stack.pop();
-		if (call != expected) {
-			GrammarElementTitleSwitch formatter = new GrammarElementTitleSwitch().showQualified().showRule();
-			String expectedName = formatter.apply(expected);
-			String actualName = formatter.apply(call);
-			throw new IllegalStateException("Expected rule call " + expectedName + " but got " + actualName);
+	protected void assertElement(AbstractElement element) {
+		Assignment assignment = GrammarUtil.containingAssignment(element);
+		if (assignment != null) {
+			assertElement(assignment.getFeature());
 		}
 	}
 
-	protected void assertPush(RuleCall call) {
-		assertElement(call);
-		stack.push(call);
+	protected void assertPop(EObject object) {
+		EObject expected = stack.pop();
+		if (object != expected) {
+			throw new IllegalStateException("Expected child " + expected + " but got " + object);
+		}
 	}
 
 	@Override
 	public boolean enterAssignedAction(Action action, EObject semanticChild, ICompositeNode node) {
+		assertElement(action.getFeature());
+		stack.push(semanticChild);
 		return super.enterAssignedAction(action, semanticChild, node);
 	}
 
 	@Override
 	public boolean enterAssignedParserRuleCall(RuleCall rc, EObject semanticChild, ICompositeNode node) {
-		assertPush(rc);
+		assertElement(rc);
+		stack.push(semanticChild);
 		return super.enterAssignedParserRuleCall(rc, semanticChild, node);
 	}
 
 	@Override
+	@Deprecated
 	public void enterUnassignedParserRuleCall(RuleCall rc) {
-		assertPush(rc);
 		super.enterUnassignedParserRuleCall(rc);
 	}
 
@@ -195,18 +190,21 @@ public class AssertStructureAcceptor extends DelegatingSequenceAcceptor {
 
 	@Override
 	public void leaveAssignedAction(Action action, EObject semanticChild) {
+		assertPop(semanticChild);
+		assertElement(action.getFeature());
 		super.leaveAssignedAction(action, semanticChild);
 	}
 
 	@Override
 	public void leaveAssignedParserRuleCall(RuleCall rc, EObject semanticChild) {
-		assertPop(rc);
+		assertPop(semanticChild);
+		assertElement(rc);
 		super.leaveAssignedParserRuleCall(rc, semanticChild);
 	}
 
 	@Override
+	@Deprecated
 	public void leaveUnssignedParserRuleCall(RuleCall rc) {
-		assertPop(rc);
 		super.leaveUnssignedParserRuleCall(rc);
 	}
 

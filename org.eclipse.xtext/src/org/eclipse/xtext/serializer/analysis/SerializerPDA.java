@@ -53,6 +53,10 @@ public class SerializerPDA implements Pda<ISerState, RuleCall> {
 		@Override
 		public void setFollowers(SerializerPDA nfa, ISerState owner, Iterable<ISerState> followers) {
 			((SerializerPDA.SerializerPDAState) owner).followers = Lists.newArrayList(followers);
+			for (ISerState follower : followers) {
+				Preconditions.checkNotNull(follower);
+				((SerializerPDA.SerializerPDAState) follower).precedents.add(owner);
+			}
 		}
 	}
 

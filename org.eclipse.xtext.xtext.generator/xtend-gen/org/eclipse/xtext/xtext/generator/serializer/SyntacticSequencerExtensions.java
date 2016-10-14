@@ -20,9 +20,9 @@ import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider;
+import org.eclipse.xtext.serializer.analysis.SerializationContextMap;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -51,9 +51,13 @@ public class SyntacticSequencerExtensions {
   private List<EqualAmbiguousTransitions> ambiguousTransitions;
   
   protected List<ISyntacticSequencerPDAProvider.ISynAbsorberState> getAllPDAs() {
-    Map<ISerializationContext, ISyntacticSequencerPDAProvider.ISynAbsorberState> _syntacticSequencerPDAs = this.pdaProvider.getSyntacticSequencerPDAs(this.grammar);
-    Collection<ISyntacticSequencerPDAProvider.ISynAbsorberState> _values = _syntacticSequencerPDAs.values();
-    return CollectionLiterals.<ISyntacticSequencerPDAProvider.ISynAbsorberState>newArrayList(((ISyntacticSequencerPDAProvider.ISynAbsorberState[])Conversions.unwrapArray(_values, ISyntacticSequencerPDAProvider.ISynAbsorberState.class)));
+    SerializationContextMap<ISyntacticSequencerPDAProvider.ISynAbsorberState> _syntacticSequencerPDAs = this.pdaProvider.getSyntacticSequencerPDAs(this.grammar);
+    List<SerializationContextMap.Entry<ISyntacticSequencerPDAProvider.ISynAbsorberState>> _values = _syntacticSequencerPDAs.values();
+    final Function1<SerializationContextMap.Entry<ISyntacticSequencerPDAProvider.ISynAbsorberState>, ISyntacticSequencerPDAProvider.ISynAbsorberState> _function = (SerializationContextMap.Entry<ISyntacticSequencerPDAProvider.ISynAbsorberState> it) -> {
+      return it.getValue();
+    };
+    List<ISyntacticSequencerPDAProvider.ISynAbsorberState> _map = ListExtensions.<SerializationContextMap.Entry<ISyntacticSequencerPDAProvider.ISynAbsorberState>, ISyntacticSequencerPDAProvider.ISynAbsorberState>map(_values, _function);
+    return CollectionLiterals.<ISyntacticSequencerPDAProvider.ISynAbsorberState>newArrayList(((ISyntacticSequencerPDAProvider.ISynAbsorberState[])Conversions.unwrapArray(_map, ISyntacticSequencerPDAProvider.ISynAbsorberState.class)));
   }
   
   protected void collectAllAmbiguousTransitions(final ISyntacticSequencerPDAProvider.ISynFollowerOwner state, final Set<ISyntacticSequencerPDAProvider.ISynTransition> result, final Set<Object> visited) {

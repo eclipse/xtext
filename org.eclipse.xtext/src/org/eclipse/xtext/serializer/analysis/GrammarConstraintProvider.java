@@ -10,14 +10,15 @@ package org.eclipse.xtext.serializer.analysis;
 import static org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.ConstraintElementType.*;
 import static org.eclipse.xtext.serializer.analysis.ISemanticSequencerNfaProvider.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.NavigableSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -33,8 +34,7 @@ import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.grammaranalysis.impl.GrammarElementTitleSwitch;
 import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.analysis.ISemanticSequencerNfaProvider.ISemState;
-import org.eclipse.xtext.util.Pair;
-import org.eclipse.xtext.util.Tuples;
+import org.eclipse.xtext.serializer.analysis.SerializationContextMap.Entry;
 import org.eclipse.xtext.util.formallang.Nfa;
 import org.eclipse.xtext.util.formallang.NfaToProduction;
 import org.eclipse.xtext.util.formallang.NfaUtil;
@@ -82,36 +82,144 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 			this.type = type;
 			this.nfa = nfa;
 		}
-
-		protected void collectBounds(ISemState state, int[] current, Set<ISemState> visited, int[] min, int[] max) {
-			int featureID = state.getFeatureID();
-			int previousValue = -1;
-			boolean newVisit = false;
-			if (featureID >= 0) {
-				if (current[featureID] == IGrammarConstraintProvider.MAX)
-					return;
-				previousValue = current[featureID];
-				newVisit = visited.add(state);
-				if (newVisit)
-					current[featureID]++;
-				else
-					current[featureID] = IGrammarConstraintProvider.MAX;
-			} else if (state.getFollowers().isEmpty()) {
-				for (int i = 0; i < current.length; i++) {
-					max[i] = Math.max(current[i], max[i]);
-					min[i] = Math.min(current[i], min[i]);
-				}
-				return;
+		
+		protected int[] computeLowerBounds() {
+			int[] bounds = new int[type.getFeatureCount()];
+			for (int i = 0; i < bounds.length; i++) {
+				bounds[i] = computeLowerBound(i);
 			}
-			for (ISemState follower : state.getFollowers()) {
-				collectBounds(follower, current, visited, min, max);
-			}
-			if (previousValue >= 0)
-				current[featureID] = previousValue;
-			if (newVisit)
-				visited.remove(state);
+			return bounds;
 		}
-
+		
+		private static class DijkstraNode {
+			/** Used to make sure all nodes are unique in the comparator function below. */
+			int id;
+			/** The tentative distance according to Dijkstra's algorithm. */
+			int distance;
+		}
+		
+		/**
+		 * Computing the lower bound for a given feature is equivalent to the shortest path problem in the
+		 * corresponding automaton graph. Dijkstra's algorithm solves this in quadratic time to the number
+		 * of nodes.
+		 */
+		private int computeLowerBound(int featureId) {
+			ISemState currentNode = nfa.getStart();
+			final ISemState stopNode = nfa.getStop();
+			final Map<ISemState, DijkstraNode> idAndDistance = Maps.newHashMap();
+			idAndDistance.put(currentNode, new DijkstraNode());
+			// The unvisited nodes are sorted by their tentative distance.
+			// Nodes with equal distance still have to be separated, which is achieved with the id value. 
+			NavigableSet<ISemState> unvisited = new TreeSet<>(Comparator.comparing((s) -> {
+				return idAndDistance.get(s).distance;
+			}).thenComparing((s) -> {
+				return idAndDistance.get(s).id;
+			}));
+			int nextStateId = 1;
+			do {
+				int currentDistance = idAndDistance.get(currentNode).distance;
+				if (currentNode == stopNode) {
+					// We have reached the stop node and thus know the shortest path from start to stop.
+					return currentDistance;
+				}
+				for (ISemState follower : currentNode.getFollowers()) {
+					DijkstraNode fdn = idAndDistance.get(follower);
+					// The cost of proceeding to this follower is 1 iff it has the correct feature id.
+					int increment = follower.getFeatureID() == featureId ? 1 : 0;
+					if (fdn == null) {
+						// We haven't reached this node before. Assign a new id and distance and mark as unvisited.
+						fdn = new DijkstraNode();
+						fdn.id = nextStateId++;
+						fdn.distance = currentDistance + increment;
+						idAndDistance.put(follower, fdn);
+						unvisited.add(follower);
+					} else {
+						// This follower node has already been reached.
+						fdn.distance = Math.min(fdn.distance, currentDistance + increment);
+						if (unvisited.remove(follower)) {
+							// The position of the follower in the sorted set must be updated.
+							unvisited.add(follower);
+						}
+					}
+				}
+				unvisited.remove(currentNode);
+				// Choose the unvisited node with the lowest tentative distance.
+				currentNode = unvisited.pollFirst();
+			} while (currentNode != null);
+			// If we get to this point, the stop state is not reachable from the start.
+			throw new AssertionError("Stop state is not reachable.");
+		}
+		
+		/**
+		 * Computing the upper bounds is equivalent to the longest path problem. While this is NP-hard if
+		 * constrained to simple paths, it becomes easily solvable in our case since we include infinite paths.
+		 * All features that are assigned inside a cycle have infinity as upper bound. For the remaining features
+		 * we can handle each cycle as if it was a single node because it is not relevant where we enter the
+		 * cycle and where we exit it (traversing the cycle has zero weight). The resulting simplified graph
+		 * is acyclic, and in such graphs the longest path can be computed in linear time with a simple recursive
+		 * algorithm.
+		 */
+		protected int[] computeUpperBounds() {
+			// Assign an infinite upper bound to all features that are on a cycle.
+			NfaUtil nfaUtil = new NfaUtil();
+			Map<ISemState, Set<ISemState>> cycles = nfaUtil.findCycles(nfa);
+			int[] bounds = new int[type.getFeatureCount()];
+			for (Set<ISemState> cycle : cycles.values()) {
+				for (ISemState node : cycle) {
+					int featureId = node.getFeatureID();
+					if (featureId >= 0) {
+						bounds[featureId] = IGrammarConstraintProvider.MAX;
+					}
+				}
+			}
+			
+			// Handle the remaining features with the linear-time longest path algorithm.
+			for (int i = 0; i < bounds.length; i++) {
+				if (bounds[i] != IGrammarConstraintProvider.MAX) {
+					bounds[i] = computeUpperBound(i, nfa.getStart(), cycles, Maps.newHashMap());
+				}
+			}
+			return bounds;
+		}
+		
+		/**
+		 * This longest path algorithm runs in linear time because each cycle is treated as a single node.
+		 */
+		private int computeUpperBound(int featureId, ISemState node, Map<ISemState, Set<ISemState>> cycles,
+				Map<ISemState, Integer> computedDistances) {
+			Integer distance = computedDistances.get(node);
+			if (distance != null) {
+				// We have already visited the given node.
+				return distance;
+			} else if (cycles.containsKey(node)) {
+				// Same procedure as for regular nodes, but consider all outgoing edges of all nodes in the cycle.
+				Set<ISemState> cycle = cycles.get(node);
+				int maxDistance = 0;
+				for (ISemState cycleNode : cycle) {
+					for (ISemState follower : cycleNode.getFollowers()) {
+						if (!cycle.contains(follower)) {
+							int followerDistance = computeUpperBound(featureId, follower, cycles, computedDistances);
+							maxDistance = Math.max(maxDistance, followerDistance);
+						}
+					}
+				}
+				for (ISemState cycleNode : cycle) {
+					computedDistances.put(cycleNode, maxDistance);
+				}
+				return maxDistance;
+			} else {
+				// Compute the maximum of all longest paths from any follower to the stop node.
+				int increment = node.getFeatureID() == featureId ? 1 : 0;
+				int maxDistance = 0;
+				for (ISemState follower : node.getFollowers()) {
+					int followerDistance = computeUpperBound(featureId, follower, cycles, computedDistances);
+					maxDistance = Math.max(maxDistance, followerDistance + increment);
+				}
+				computedDistances.put(node, maxDistance);
+				return maxDistance;
+			}
+		}
+		
 		@Override
 		public int compareTo(IConstraint o) {
 			return getName().compareTo(o.getName());
@@ -154,16 +262,11 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 				} else {
 					int count = type.getFeatureCount();
 					features = new IFeatureInfo[count];
-					int[] current = new int[count];
-					int[] min = new int[count];
-					int[] max = new int[count];
-					Arrays.fill(current, 0);
-					Arrays.fill(min, IGrammarConstraintProvider.MAX);
-					Arrays.fill(max, -1);
-					collectBounds(nfa.getStart(), current, Sets.<ISemState> newHashSet(), min, max);
+					int[] lowerBounds = computeLowerBounds();
+					int[] upperBounds = computeUpperBounds();
 					for (int i = 0; i < count; i++) {
 						EStructuralFeature feature = type.getEStructuralFeature(i);
-						features[i] = new FeatureInfo(this, feature, max[i], min[i]);
+						features[i] = new FeatureInfo(this, feature, upperBounds[i], lowerBounds[i]);
 					}
 				}
 			}
@@ -407,7 +510,7 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 
 	private final static IConstraintElement UNINITIALIZED = new ConstraintElement(null, null, (AbstractElement) null, false, false);
 
-	private Map<Grammar, Map<ISerializationContext, IConstraint>> cache = Maps.newHashMap();
+	private Map<Grammar, SerializationContextMap<IConstraint>> cache = Maps.newHashMap();
 
 	@Inject
 	protected Context2NameFunction context2Name;
@@ -436,7 +539,7 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 		return values;
 	}
 
-	protected String findBestConstraintName(Grammar grammar, Map<ISerializationContext, Pda<ISerState, RuleCall>> typePDAs,
+	protected String findBestConstraintName(Grammar grammar, SerializationContextMap<Pda<ISerState, RuleCall>> typePDAs,
 			IConstraint constraint) {
 		Set<ParserRule> relevantRules = Sets.newLinkedHashSet();
 		Set<Action> relevantActions = Sets.newLinkedHashSet();
@@ -509,32 +612,29 @@ public class GrammarConstraintProvider implements IGrammarConstraintProvider {
 	}
 
 	@Override
-	public Map<ISerializationContext, IConstraint> getConstraints(Grammar grammar) {
-		Map<ISerializationContext, IConstraint> result = cache.get(grammar);
-		if (result != null)
-			return result;
-		result = Maps.newLinkedHashMap();
-		cache.put(grammar, result);
+	public SerializationContextMap<IConstraint> getConstraints(Grammar grammar) {
+		SerializationContextMap<IConstraint> cached = cache.get(grammar);
+		if (cached != null)
+			return cached;
+		SerializationContextMap.Builder<IConstraint> builder = SerializationContextMap.builder();
 		GrammarElementDeclarationOrder.get(grammar);
-		Map<ISerializationContext, Nfa<ISemState>> nfas = nfaProvider.getSemanticSequencerNFAs(grammar);
-		ArrayList<ISerializationContext> contexts = Lists.newArrayList(nfas.keySet());
-		Collections.sort(contexts);
-		Map<Pair<EClass, Nfa<ISemState>>, Constraint> constraints = Maps.newLinkedHashMap();
-		for (ISerializationContext context : contexts) {
-			Nfa<ISemState> nfa = nfas.get(context);
-			EClass type = context.getType();
-			Pair<EClass, Nfa<ISemState>> key = Tuples.create(type, nfa);
-			Constraint constraint = constraints.get(key);
-			if (constraint == null) {
-				constraint = new Constraint(grammar, type, nfa);
-				constraints.put(key, constraint);
+		SerializationContextMap<Nfa<ISemState>> nfas = nfaProvider.getSemanticSequencerNFAs(grammar);
+		for (Entry<Nfa<ISemState>> e : nfas.values()) {
+			Nfa<ISemState> nfa = e.getValue();
+			for (EClass type : e.getTypes()) {
+				Constraint constraint = new Constraint(grammar, type, nfa);
+				List<ISerializationContext> contexts = e.getContexts(type);
+				constraint.contexts.addAll(contexts);
+				builder.put(contexts, constraint);
 			}
-			constraint.contexts.add(context);
-			result.put(context, constraint);
 		}
-		Map<ISerializationContext, Pda<ISerState, RuleCall>> typePDAs = typeProvider.getContextTypePDAs(grammar);
-		for (Constraint constraint : constraints.values())
+		SerializationContextMap<IConstraint> result = builder.create();
+		SerializationContextMap<Pda<ISerState, RuleCall>> typePDAs = typeProvider.getContextTypePDAs(grammar);
+		for (Entry<IConstraint> e : result.values()) {
+			Constraint constraint = (Constraint) e.getValue();
 			constraint.setName(findBestConstraintName(grammar, typePDAs, constraint));
+		}
+		cache.put(grammar, result);
 		return result;
 	}
 

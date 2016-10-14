@@ -120,7 +120,26 @@ public class GrammarUtil {
 	}
 
 	public static Assignment containingAssignment(EObject e) {
-		return getContainerOfType(e, Assignment.class);
+		EObject current = e;
+		while (current != null) {
+			switch (current.eClass().getClassifierID()) {
+			case XtextPackage.ASSIGNMENT:
+				return (Assignment) current;
+			case XtextPackage.GROUP:
+			case XtextPackage.UNORDERED_GROUP:
+			case XtextPackage.PARSER_RULE:
+			case XtextPackage.TERMINAL_RULE:
+			case XtextPackage.ENUM_RULE:
+				return null;
+			case XtextPackage.ALTERNATIVES:
+				if (((Alternatives) current).getCardinality() != null) {
+					return null;
+				}
+			default:
+				current = current.eContainer();
+			}
+		}
+		return null;
 	}
 
 	public static Group containingGroup(EObject e) {
@@ -132,7 +151,23 @@ public class GrammarUtil {
 	}
 
 	public static CrossReference containingCrossReference(EObject e) {
-		return getContainerOfType(e, CrossReference.class);
+		EObject current = e;
+		while (current != null) {
+			switch (current.eClass().getClassifierID()) {
+			case XtextPackage.CROSS_REFERENCE:
+				return (CrossReference) current;
+			case XtextPackage.GROUP:
+			case XtextPackage.UNORDERED_GROUP:
+			case XtextPackage.ALTERNATIVES:
+			case XtextPackage.PARSER_RULE:
+			case XtextPackage.TERMINAL_RULE:
+			case XtextPackage.ENUM_RULE:
+				return null;
+			default:
+				current = current.eContainer();
+			}
+		}
+		return null;
 	}
 
 	public static List<Action> containedActions(EObject e) {

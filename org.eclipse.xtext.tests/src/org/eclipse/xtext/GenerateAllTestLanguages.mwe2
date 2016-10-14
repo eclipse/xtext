@@ -467,6 +467,9 @@ Workflow {
 		language = { 
 			grammarUri = "classpath:/org/eclipse/xtext/serializer/SequencerTestLanguage.xtext"
 			fragment = @TestLanguagesFragments {}
+			fragment = junit.Junit4Fragment2 {
+				generateStub = false
+			}
 		}
 		language = {
 			grammarUri = "classpath:/org/eclipse/xtext/serializer/SyntacticSequencerTestLanguage.xtext"

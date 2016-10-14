@@ -27,6 +27,8 @@ public class SaveOptions {
 	protected static final String KEY = SaveOptions.class.getName();
 	
 	private final boolean formatting;
+	
+	@Deprecated // see https://github.com/eclipse/xtext-core/issues/48
 	private final boolean validating;
 
 	protected SaveOptions(boolean formatting, boolean validating) {
@@ -76,6 +78,7 @@ public class SaveOptions {
 		return formatting;
 	}
 
+	@Deprecated // see https://github.com/eclipse/xtext-core/issues/48
 	public boolean isValidating() {
 		return validating;
 	}
@@ -141,6 +144,7 @@ public class SaveOptions {
 			return this;
 		}
 		
+		@Deprecated // see https://github.com/eclipse/xtext-core/issues/48
 		public Builder noValidation() {
 			this.validating = false;
 			return this;

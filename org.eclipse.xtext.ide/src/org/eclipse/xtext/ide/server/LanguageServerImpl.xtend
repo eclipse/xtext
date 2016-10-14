@@ -13,7 +13,6 @@ import io.typefox.lsapi.CodeActionParams
 import io.typefox.lsapi.CodeLens
 import io.typefox.lsapi.CodeLensParams
 import io.typefox.lsapi.CompletionItem
-import io.typefox.lsapi.CompletionItemKind
 import io.typefox.lsapi.CompletionList
 import io.typefox.lsapi.DiagnosticSeverity
 import io.typefox.lsapi.DidChangeConfigurationParams
@@ -39,8 +38,7 @@ import io.typefox.lsapi.SymbolInformation
 import io.typefox.lsapi.TextDocumentPositionParams
 import io.typefox.lsapi.TextDocumentSyncKind
 import io.typefox.lsapi.WorkspaceSymbolParams
-import io.typefox.lsapi.impl.CompletionItemImpl
-import io.typefox.lsapi.impl.CompletionListImpl
+import io.typefox.lsapi.builders.CompletionListBuilder
 import io.typefox.lsapi.impl.CompletionOptionsImpl
 import io.typefox.lsapi.impl.DiagnosticImpl
 import io.typefox.lsapi.impl.HoverImpl
@@ -63,8 +61,6 @@ import java.util.function.Consumer
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
-import org.eclipse.xtext.ide.editor.contentassist.ContentAssistEntry
-import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalAcceptor
 import org.eclipse.xtext.ide.server.concurrent.CancellableIndicator
 import org.eclipse.xtext.ide.server.concurrent.RequestManager
 import org.eclipse.xtext.ide.server.contentassist.ContentAssistService
@@ -78,7 +74,6 @@ import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.eclipse.xtext.service.OperationCanceledManager
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.validation.Issue
-import com.google.common.base.Strings
 import org.eclipse.xtext.ide.server.occurrences.IDocumentHighlightService
 
 /**
@@ -196,9 +191,8 @@ import org.eclipse.xtext.ide.server.occurrences.IDocumentHighlightService
 	}
 
 	override didSave(DidSaveTextDocumentParams params) {
-		requestManager.runWrite [ cancelIndicator |
-			workspaceManager.didSave(params.textDocument.uri.toUri, cancelIndicator)
-		]
+	    // the document's content is in sync with the file system
+		// doesn't matter to us, so do nothing
 	}
 
 	override didChangeWatchedFiles(DidChangeWatchedFilesParams params) {
@@ -286,70 +280,15 @@ import org.eclipse.xtext.ide.server.occurrences.IDocumentHighlightService
 			val uri = params.textDocument.uri.toUri
 			val resourceServiceProvider = uri.resourceServiceProvider
 			val contentAssistService = resourceServiceProvider?.get(ContentAssistService)
-			val result = new CompletionListImpl
 			if (contentAssistService === null)
-				return result
+				return new CompletionListBuilder().build();
             
-            result.items = workspaceManager.doRead(uri) [ document, resource |
-                val acceptor = resource.resourceServiceProvider.get(IdeContentProposalAcceptor)
-                val caretOffset = document.getOffSet(params.position)
-                val caretPosition = new PositionImpl(params.position as PositionImpl)
-                try {
-                    contentAssistService.createProposals(document.contents, caretOffset, resource, acceptor, cancelIndicator)
-                } catch (Throwable t) {
-                    if (!operationCanceledManager.isOperationCanceledException(t)) {
-                        throw t
-                    } else {
-                        result.setIncomplete(true)
-                    }
-                }
-                val completionItems = newArrayList
-                acceptor.getEntries().forEach[it, idx|
-                    val item = toCompletionItem(caretOffset, caretPosition, document)
-                    item.sortText = Strings.padStart(Integer.toString(idx), 5, "0")
-                    completionItems += item
-                ]
-                return completionItems
+            val result = workspaceManager.doRead(uri) [ document, resource |
+                return contentAssistService.createCompletionList(document, resource, params, cancelIndicator)
             ]
             return result
 		]
 	}
-
-	protected def CompletionItemImpl toCompletionItem(ContentAssistEntry entry, int caretOffset, PositionImpl caretPosition, Document document) {
-		val completionItem = new CompletionItemImpl
-		completionItem.label = entry.label ?: entry.proposal
-		completionItem.detail = entry.description
-		completionItem.documentation = entry.documentation
-	    val prefixOffset = caretOffset - (entry.prefix?:'').length
-	    val prefixPosition = document.getPosition(prefixOffset)
-	    completionItem.textEdit = new TextEditImpl(new RangeImpl(prefixPosition, caretPosition), entry.proposal) 
-		completionItem.kind = translateKind(entry)
-		return completionItem
-	}
-    
-    protected def translateKind(ContentAssistEntry entry) {
-        switch entry.kind {
-            case ContentAssistEntry.KIND_CLASS : CompletionItemKind.Class
-            case ContentAssistEntry.KIND_COLOR : CompletionItemKind.Color
-            case ContentAssistEntry.KIND_CONSTRUCTOR : CompletionItemKind.Constructor
-            case ContentAssistEntry.KIND_ENUM : CompletionItemKind.Enum
-            case ContentAssistEntry.KIND_FIELD : CompletionItemKind.Field
-            case ContentAssistEntry.KIND_FILE : CompletionItemKind.File
-            case ContentAssistEntry.KIND_FUNCTION : CompletionItemKind.Function
-            case ContentAssistEntry.KIND_INTERFACE : CompletionItemKind.Interface
-            case ContentAssistEntry.KIND_KEYWORD : CompletionItemKind.Keyword
-            case ContentAssistEntry.KIND_METHOD : CompletionItemKind.Method
-            case ContentAssistEntry.KIND_MODULE : CompletionItemKind.Module
-            case ContentAssistEntry.KIND_PROPERTY : CompletionItemKind.Property
-            case ContentAssistEntry.KIND_REFERENCE : CompletionItemKind.Reference
-            case ContentAssistEntry.KIND_SNIPPET : CompletionItemKind.Snippet
-            case ContentAssistEntry.KIND_TEXT : CompletionItemKind.Text
-            case ContentAssistEntry.KIND_UNIT : CompletionItemKind.Unit
-            case ContentAssistEntry.KIND_VALUE : CompletionItemKind.Value
-            case ContentAssistEntry.KIND_VARIABLE : CompletionItemKind.Variable
-            default : CompletionItemKind.Value
-        }
-    }
 
 	// end completion stuff
 	// symbols

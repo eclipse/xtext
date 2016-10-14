@@ -61,6 +61,7 @@ import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider;
 import org.eclipse.xtext.serializer.analysis.ISemanticSequencerNfaProvider;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider;
 import org.eclipse.xtext.serializer.analysis.SerializationContext;
+import org.eclipse.xtext.serializer.analysis.SerializationContextMap;
 import org.eclipse.xtext.serializer.impl.Serializer;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
@@ -1890,28 +1891,30 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         {
           Grammar _grammar = SerializerFragment2.this.getGrammar();
-          Map<ISerializationContext, IGrammarConstraintProvider.IConstraint> _constraints = SerializerFragment2.this._iGrammarConstraintProvider.getConstraints(_grammar);
-          List<org.eclipse.xtext.util.Pair<List<ISerializationContext>, IGrammarConstraintProvider.IConstraint>> _groupByEqualityAndSort = SerializationContext.<IGrammarConstraintProvider.IConstraint>groupByEqualityAndSort(_constraints);
+          SerializationContextMap<IGrammarConstraintProvider.IConstraint> _constraints = SerializerFragment2.this._iGrammarConstraintProvider.getConstraints(_grammar);
+          SerializationContextMap<IGrammarConstraintProvider.IConstraint> _sortedCopy = _constraints.sortedCopy();
+          List<SerializationContextMap.Entry<IGrammarConstraintProvider.IConstraint>> _values = _sortedCopy.values();
           boolean _hasElements = false;
-          for(final org.eclipse.xtext.util.Pair<List<ISerializationContext>, IGrammarConstraintProvider.IConstraint> e : _groupByEqualityAndSort) {
+          for(final SerializationContextMap.Entry<IGrammarConstraintProvider.IConstraint> e : _values) {
             if (!_hasElements) {
               _hasElements = true;
             } else {
               _builder.appendImmediate("\n", "");
             }
-            List<ISerializationContext> _first = e.getFirst();
-            _builder.append(_first, "");
+            List<ISerializationContext> _contexts = e.getContexts();
+            String _join = IterableExtensions.join(_contexts, ", ");
+            _builder.append(_join, "");
             _builder.append(":");
             _builder.newLineIfNotEmpty();
             {
-              IGrammarConstraintProvider.IConstraint _second = e.getSecond();
-              IGrammarConstraintProvider.IConstraintElement _body = _second.getBody();
+              IGrammarConstraintProvider.IConstraint _value = e.getValue();
+              IGrammarConstraintProvider.IConstraintElement _body = _value.getBody();
               boolean _equals = Objects.equal(_body, null);
               if (_equals) {
                 _builder.append("\t");
                 _builder.append("{");
-                IGrammarConstraintProvider.IConstraint _second_1 = e.getSecond();
-                EClass _type = _second_1.getType();
+                IGrammarConstraintProvider.IConstraint _value_1 = e.getValue();
+                EClass _type = _value_1.getType();
                 String _name = null;
                 if (_type!=null) {
                   _name=_type.getName();
@@ -1921,8 +1924,8 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
                 _builder.newLineIfNotEmpty();
               } else {
                 _builder.append("\t");
-                IGrammarConstraintProvider.IConstraint _second_2 = e.getSecond();
-                IGrammarConstraintProvider.IConstraintElement _body_1 = _second_2.getBody();
+                IGrammarConstraintProvider.IConstraint _value_2 = e.getValue();
+                IGrammarConstraintProvider.IConstraintElement _body_1 = _value_2.getBody();
                 _builder.append(_body_1, "\t");
                 _builder.append(";");
                 _builder.newLineIfNotEmpty();

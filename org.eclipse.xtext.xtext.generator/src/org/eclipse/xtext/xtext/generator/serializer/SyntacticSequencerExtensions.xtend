@@ -34,7 +34,7 @@ class SyntacticSequencerExtensions {
 	List<EqualAmbiguousTransitions> ambiguousTransitions
 
 	def protected List<ISynAbsorberState> getAllPDAs() {
-		return newArrayList(pdaProvider.getSyntacticSequencerPDAs(grammar).values)
+		return newArrayList(pdaProvider.getSyntacticSequencerPDAs(grammar).values.map[value])
 	}
 
 	def protected void collectAllAmbiguousTransitions(ISynFollowerOwner state, Set<ISynTransition> result,

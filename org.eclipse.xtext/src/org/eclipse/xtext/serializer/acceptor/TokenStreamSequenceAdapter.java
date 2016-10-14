@@ -127,6 +127,7 @@ public class TokenStreamSequenceAdapter implements ISequenceAcceptor {
 	}
 
 	@Override
+	@Deprecated
 	public void enterUnassignedParserRuleCall(RuleCall rc) {
 	}
 
@@ -171,6 +172,7 @@ public class TokenStreamSequenceAdapter implements ISequenceAcceptor {
 	}
 
 	@Override
+	@Deprecated
 	public void leaveUnssignedParserRuleCall(RuleCall rc) {
 	}
 

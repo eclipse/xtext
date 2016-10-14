@@ -66,7 +66,6 @@ import org.eclipse.xtext.xtext.generator.model.annotations.SuppressWarningsAnnot
 import org.eclipse.xtext.xtext.generator.util.SyntheticTerminalDetector
 
 import static extension org.eclipse.xtext.GrammarUtil.*
-import static extension org.eclipse.xtext.serializer.analysis.SerializationContext.*
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 import static extension org.eclipse.xtext.xtext.generator.util.GenModelUtil2.*
 
@@ -573,12 +572,12 @@ import static extension org.eclipse.xtext.xtext.generator.util.GenModelUtil2.*
 	
 	protected def generateGrammarConstraints() {
 		fileAccessFactory.createTextFile(grammar.grammarConstraintsPath, '''
-			«FOR e : grammar.constraints.groupByEqualityAndSort SEPARATOR '\n'»
-				«e.first»:
-					«IF e.second.body == null»
-						{«e.second.type?.name»};
+			«FOR e : grammar.constraints.sortedCopy.values SEPARATOR '\n'»
+				«e.contexts.join(", ")»:
+					«IF e.value.body == null»
+						{«e.value.type?.name»};
 					«ELSE»
-						«e.second.body»;
+						«e.value.body»;
 					«ENDIF»
 			«ENDFOR»
 		''').writeTo(projectConfig.runtime.srcGen)

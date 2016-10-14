@@ -17,9 +17,10 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
 
+import org.eclipse.xtext.util.IAcceptor;
+
 import com.google.common.base.Function;
 import com.google.common.base.Functions;
-import com.google.common.base.Joiner;
 import com.google.common.base.Objects;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
@@ -397,7 +398,7 @@ public class NfaUtil {
 		Collections.sort(sorted);
 		for (int i = 0; i < sorted.size(); i++)
 			ids.put(names.get(sorted.get(i)), i);
-		List<String> result = Lists.newArrayListWithExpectedSize(sorted.size());
+		StringBuilder result = new StringBuilder();
 		for (String name : sorted) {
 			S state = names.get(name);
 			Integer id = ids.get(state);
@@ -405,9 +406,19 @@ public class NfaUtil {
 			for (S f : nfa.getFollowers(state))
 				followers.add(ids.get(f));
 			Collections.sort(followers);
-			result.add(id + ":" + name + "->" + Joiner.on(",").join(followers));
+			result.append(id);
+			result.append(":");
+			result.append(name);
+			result.append(":");
+			for (int i = 0; i < followers.size(); i++) {
+				if (i != 0) {
+					result.append(",");
+				}
+				result.append(followers.get(i));
+			}
+			result.append("\n");
 		}
-		return Joiner.on("\n").join(result);
+		return result.toString();
 	}
 
 	public <S> Nfa<S> filter(final Nfa<S> nfa, final Predicate<S> filter) {
@@ -579,6 +590,63 @@ public class NfaUtil {
 
 	public <S, COMP extends Comparable<COMP>> Nfa<S> sort(Nfa<S> nfa, Map<S, COMP> comparator) {
 		return sort(nfa, new MappedComparator<S, COMP>(comparator));
+	}
+	
+	/**
+	 * A cycle is represented by the set of all nodes on that cycle. The return value maps each node that is on a cycle
+	 * to the corresponding set. Multiple cycles that are connected via a node are treated as a single cycle.
+	 */
+	public <S> Map<S, Set<S>> findCycles(Nfa<S> nfa) {
+		Map<S, Set<S>> cycles = Maps.newLinkedHashMap();
+		findCycles(nfa, nfa.getStart(), (List<S> t) -> {
+			Set<S> cycle = Sets.newHashSet(t);
+			for (S cycleNode : t) {
+				// We have two cycles that are connected via at least
+				// one node. Treat them as one cycle.
+				Set<S> existingCycle = cycles.get(cycleNode);
+				if (existingCycle != null) {
+					cycle.addAll(existingCycle);
+				}
+			}
+			for (S n : cycle) {
+				cycles.put(n, cycle);
+			}
+		}, Maps.newHashMap(), Lists.newLinkedList());
+		return cycles;
+	}
+	
+	public <S> void findCycles(Nfa<S> nfa, IAcceptor<List<S>> cycleAcceptor) {
+		findCycles(nfa, nfa.getStart(), cycleAcceptor, Maps.newHashMap(), Lists.newLinkedList());
+	}
+	
+	private static final int DFS_VISITED = 1;
+	private static final int DFS_ON_STACK = 2;
+	
+	protected <S> void findCycles(Nfa<S> nfa, S node, IAcceptor<List<S>> cycleAcceptor, Map<S, Integer> dfsMark,
+			LinkedList<S> dfsStack) {
+		dfsStack.push(node);
+		dfsMark.put(node, DFS_ON_STACK);
+		for (S follower : nfa.getFollowers(node)) {
+			Integer followerMark = dfsMark.get(follower);
+			if (followerMark == null) {
+				// The follower is not visited yet, so go deeper.
+				findCycles(nfa, follower, cycleAcceptor, dfsMark, dfsStack);
+			} else if (followerMark == DFS_ON_STACK) {
+				// If the follower is on the stack that means we have a cycle
+				// that includes all nodes between
+				// the follower node and the current node.
+				LinkedList<S> cycle = Lists.newLinkedList();
+				Iterator<S> stackIter = dfsStack.iterator();
+				S cycleNode;
+				do {
+					cycleNode = stackIter.next();
+					cycle.addFirst(cycleNode);
+				} while (cycleNode != follower && stackIter.hasNext());
+				cycleAcceptor.accept(cycle);
+			}
+		}
+		dfsStack.pop();
+		dfsMark.put(node, DFS_VISITED);
 	}
 
 }

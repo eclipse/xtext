@@ -164,6 +164,7 @@ public class TextRegionAccessBuildingSequencer implements ISequenceAcceptor {
 	}
 
 	@Override
+	@Deprecated
 	public void enterUnassignedParserRuleCall(RuleCall rc) {
 		// not relevant
 	}
@@ -194,6 +195,7 @@ public class TextRegionAccessBuildingSequencer implements ISequenceAcceptor {
 	}
 
 	@Override
+	@Deprecated
 	public void leaveUnssignedParserRuleCall(RuleCall rc) {
 		// not relevant
 	}

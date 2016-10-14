@@ -32,6 +32,7 @@ import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraint;
 import org.eclipse.xtext.serializer.analysis.ISemanticSequencerNfaProvider.ISemState;
 import org.eclipse.xtext.serializer.analysis.SerializationContext;
+import org.eclipse.xtext.serializer.analysis.SerializationContextMap;
 import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider;
 import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.ISemanticNode;
 import org.eclipse.xtext.util.EmfFormatter;
@@ -461,7 +462,7 @@ public class BacktrackingSemanticSequencer extends AbstractSemanticSequencer {
 	@Override
 	public void createSequence(ISerializationContext context, EObject obj) {
 		INodesForEObjectProvider nodes = nodeProvider.getNodesForSemanticObject(obj, null);
-		Map<ISerializationContext, IConstraint> constraints = constraintProvider.getConstraints(grammar.getGrammar());
+		SerializationContextMap<IConstraint> constraints = constraintProvider.getConstraints(grammar.getGrammar());
 		IConstraint constraint = constraints.get(context);
 		if (constraint == null)
 			throw new IllegalStateException("Invalid context: " + context);

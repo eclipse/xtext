@@ -16,7 +16,6 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.grammaranalysis.IPDAState;
 import org.eclipse.xtext.grammaranalysis.IPDAState.PDAStateType;
-import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.AbstractElementAlias;
 import org.eclipse.xtext.serializer.sequencer.RuleCallStack;
 import org.eclipse.xtext.util.formallang.Nfa;
@@ -262,5 +261,5 @@ public interface ISyntacticSequencerPDAProvider {
 
 	}
 
-	Map<ISerializationContext, ISynAbsorberState> getSyntacticSequencerPDAs(Grammar grammar);
+	SerializationContextMap<ISynAbsorberState> getSyntacticSequencerPDAs(Grammar grammar);
 }
