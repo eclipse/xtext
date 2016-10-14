@@ -89,6 +89,7 @@ import org.eclipse.xtext.ide.server.contentassist.ContentAssistService;
 import org.eclipse.xtext.ide.server.findReferences.WorkspaceResourceAccess;
 import org.eclipse.xtext.ide.server.formatting.FormattingService;
 import org.eclipse.xtext.ide.server.hover.HoverService;
+import org.eclipse.xtext.ide.server.occurrences.IDocumentHighlightService;
 import org.eclipse.xtext.ide.server.signatureHelp.SignatureHelpService;
 import org.eclipse.xtext.ide.server.symbol.DocumentSymbolService;
 import org.eclipse.xtext.ide.server.symbol.WorkspaceSymbolService;
@@ -199,6 +200,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
       it.setCompletionProvider(_doubleArrow);
       it.setDocumentFormattingProvider(Boolean.valueOf(true));
       it.setDocumentRangeFormattingProvider(Boolean.valueOf(true));
+      it.setDocumentHighlightProvider(Boolean.valueOf(true));
     };
     ServerCapabilitiesImpl _doubleArrow = ObjectExtensions.<ServerCapabilitiesImpl>operator_doubleArrow(_serverCapabilitiesImpl, _function);
     result.setCapabilities(_doubleArrow);
@@ -603,8 +605,28 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
   }
   
   @Override
-  public CompletableFuture<DocumentHighlight> documentHighlight(final TextDocumentPositionParams position) {
-    throw new UnsupportedOperationException("TODO: auto-generated method stub");
+  public CompletableFuture<List<? extends DocumentHighlight>> documentHighlight(final TextDocumentPositionParams position) {
+    final Function1<CancelIndicator, List<? extends DocumentHighlight>> _function = (CancelIndicator cancelIndicator) -> {
+      TextDocumentIdentifier _textDocument = position.getTextDocument();
+      String _uri = _textDocument.getUri();
+      final URI uri = this._uriExtensions.toUri(_uri);
+      final IResourceServiceProvider serviceProvider = this.languagesRegistry.getResourceServiceProvider(uri);
+      IDocumentHighlightService _get = null;
+      if (serviceProvider!=null) {
+        _get=serviceProvider.<IDocumentHighlightService>get(IDocumentHighlightService.class);
+      }
+      final IDocumentHighlightService service = _get;
+      if ((service == null)) {
+        return CollectionLiterals.<DocumentHighlight>emptyList();
+      }
+      final Function2<Document, XtextResource, List<? extends DocumentHighlight>> _function_1 = (Document doc, XtextResource resource) -> {
+        Position _position = position.getPosition();
+        final int offset = doc.getOffSet(_position);
+        return service.getDocumentHighlights(resource, offset);
+      };
+      return this.workspaceManager.<List<? extends DocumentHighlight>>doRead(uri, _function_1);
+    };
+    return this.requestManager.<List<? extends DocumentHighlight>>runRead(_function);
   }
   
   @Override

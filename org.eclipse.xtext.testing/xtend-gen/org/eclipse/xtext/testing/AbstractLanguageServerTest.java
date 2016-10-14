@@ -21,6 +21,8 @@ import io.typefox.lsapi.DidChangeWatchedFilesParams;
 import io.typefox.lsapi.DidCloseTextDocumentParams;
 import io.typefox.lsapi.DidOpenTextDocumentParams;
 import io.typefox.lsapi.DocumentFormattingParams;
+import io.typefox.lsapi.DocumentHighlight;
+import io.typefox.lsapi.DocumentHighlightKind;
 import io.typefox.lsapi.DocumentRangeFormattingParams;
 import io.typefox.lsapi.FileChangeType;
 import io.typefox.lsapi.Hover;
@@ -77,6 +79,7 @@ import org.eclipse.xtext.ide.server.UriExtensions;
 import org.eclipse.xtext.ide.server.concurrent.RequestManager;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.testing.DefinitionTestConfiguration;
+import org.eclipse.xtext.testing.DocumentHighlightConfiguration;
 import org.eclipse.xtext.testing.DocumentSymbolConfiguraiton;
 import org.eclipse.xtext.testing.FileInfo;
 import org.eclipse.xtext.testing.FormattingConfiguration;
@@ -97,6 +100,7 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
@@ -516,6 +520,47 @@ public abstract class AbstractLanguageServerTest implements Consumer<PublishDiag
     return _xblockexpression;
   }
   
+  protected String _toExpectation(final DocumentHighlight it) {
+    String _xblockexpression = null;
+    {
+      StringConcatenation _builder = new StringConcatenation();
+      {
+        Range _range = it.getRange();
+        boolean _tripleEquals = (_range == null);
+        if (_tripleEquals) {
+          _builder.append("[NaN, NaN]:[NaN, NaN]");
+        } else {
+          Range _range_1 = it.getRange();
+          String _expectation = this.toExpectation(_range_1);
+          _builder.append(_expectation, "");
+        }
+      }
+      final String rangeString = _builder.toString();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      {
+        DocumentHighlightKind _kind = it.getKind();
+        boolean _tripleEquals_1 = (_kind == null);
+        if (_tripleEquals_1) {
+          _builder_1.append("NaN");
+        } else {
+          DocumentHighlightKind _kind_1 = it.getKind();
+          String _expectation_1 = this.toExpectation(_kind_1);
+          _builder_1.append(_expectation_1, "");
+        }
+      }
+      _builder_1.append(" ");
+      _builder_1.append(rangeString, "");
+      _xblockexpression = _builder_1.toString();
+    }
+    return _xblockexpression;
+  }
+  
+  protected String _toExpectation(final DocumentHighlightKind kind) {
+    String _string = kind.toString();
+    String _substring = _string.substring(0, 1);
+    return _substring.toUpperCase();
+  }
+  
   protected void testCompletion(final Procedure1<? super TestCompletionConfiguration> configurator) {
     try {
       @Extension
@@ -698,6 +743,42 @@ public abstract class AbstractLanguageServerTest implements Consumer<PublishDiag
     }
   }
   
+  protected void testDocumentHighlight(final Procedure1<? super DocumentHighlightConfiguration> configurator) {
+    try {
+      DocumentHighlightConfiguration _documentHighlightConfiguration = new DocumentHighlightConfiguration();
+      final Procedure1<DocumentHighlightConfiguration> _function = (DocumentHighlightConfiguration it) -> {
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("MyModel.");
+        _builder.append(this.fileExtension, "");
+        it.setFilePath(_builder.toString());
+      };
+      @Extension
+      final DocumentHighlightConfiguration configuration = ObjectExtensions.<DocumentHighlightConfiguration>operator_doubleArrow(_documentHighlightConfiguration, _function);
+      configurator.apply(configuration);
+      FileInfo _initializeContext = this.initializeContext(configuration);
+      final String fileUri = _initializeContext.getUri();
+      final Procedure1<TextDocumentPositionParamsBuilder> _function_1 = (TextDocumentPositionParamsBuilder it) -> {
+        it.textDocument(fileUri);
+        int _line = configuration.getLine();
+        int _column = configuration.getColumn();
+        it.position(_line, _column);
+      };
+      TextDocumentPositionParamsBuilder _textDocumentPositionParamsBuilder = new TextDocumentPositionParamsBuilder(_function_1);
+      TextDocumentPositionParams _build = _textDocumentPositionParamsBuilder.build();
+      final CompletableFuture<List<? extends DocumentHighlight>> highlights = this.languageServer.documentHighlight(_build);
+      List<? extends DocumentHighlight> _get = highlights.get();
+      final Function1<DocumentHighlight, String> _function_2 = (DocumentHighlight it) -> {
+        return this.toExpectation(it);
+      };
+      List<String> _map = ListExtensions.map(_get, _function_2);
+      final String actualDocumentHighlight = IterableExtensions.join(_map, " | ");
+      String _expectedDocumentHighlight = configuration.getExpectedDocumentHighlight();
+      this.assertEquals(_expectedDocumentHighlight, actualDocumentHighlight);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
   protected void testDocumentSymbol(final Procedure1<? super DocumentSymbolConfiguraiton> configurator) {
     try {
       @Extension
@@ -850,32 +931,36 @@ public abstract class AbstractLanguageServerTest implements Consumer<PublishDiag
     }
   }
   
-  protected String toExpectation(final Object elements) {
-    if (elements instanceof List) {
-      return _toExpectation((List<?>)elements);
-    } else if (elements instanceof CompletionItem) {
-      return _toExpectation((CompletionItem)elements);
-    } else if (elements instanceof Hover) {
-      return _toExpectation((Hover)elements);
-    } else if (elements instanceof Location) {
-      return _toExpectation((Location)elements);
-    } else if (elements instanceof MarkedString) {
-      return _toExpectation((MarkedString)elements);
-    } else if (elements instanceof Position) {
-      return _toExpectation((Position)elements);
-    } else if (elements instanceof Range) {
-      return _toExpectation((Range)elements);
-    } else if (elements instanceof SignatureHelp) {
-      return _toExpectation((SignatureHelp)elements);
-    } else if (elements instanceof SymbolInformation) {
-      return _toExpectation((SymbolInformation)elements);
-    } else if (elements instanceof TextEdit) {
-      return _toExpectation((TextEdit)elements);
-    } else if (elements == null) {
+  protected String toExpectation(final Object kind) {
+    if (kind instanceof DocumentHighlightKind) {
+      return _toExpectation((DocumentHighlightKind)kind);
+    } else if (kind instanceof List) {
+      return _toExpectation((List<?>)kind);
+    } else if (kind instanceof CompletionItem) {
+      return _toExpectation((CompletionItem)kind);
+    } else if (kind instanceof DocumentHighlight) {
+      return _toExpectation((DocumentHighlight)kind);
+    } else if (kind instanceof Hover) {
+      return _toExpectation((Hover)kind);
+    } else if (kind instanceof Location) {
+      return _toExpectation((Location)kind);
+    } else if (kind instanceof MarkedString) {
+      return _toExpectation((MarkedString)kind);
+    } else if (kind instanceof Position) {
+      return _toExpectation((Position)kind);
+    } else if (kind instanceof Range) {
+      return _toExpectation((Range)kind);
+    } else if (kind instanceof SignatureHelp) {
+      return _toExpectation((SignatureHelp)kind);
+    } else if (kind instanceof SymbolInformation) {
+      return _toExpectation((SymbolInformation)kind);
+    } else if (kind instanceof TextEdit) {
+      return _toExpectation((TextEdit)kind);
+    } else if (kind == null) {
       return _toExpectation((Void)null);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
-        Arrays.<Object>asList(elements).toString());
+        Arrays.<Object>asList(kind).toString());
     }
   }
   
