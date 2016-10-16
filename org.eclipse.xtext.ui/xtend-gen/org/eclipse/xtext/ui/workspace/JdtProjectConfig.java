@@ -69,7 +69,6 @@ public class JdtProjectConfig extends EclipseProjectConfig {
   @Override
   @Pure
   public int hashCode() {
-    final int prime = 31;
     int result = super.hashCode();
     return result;
   }
@@ -85,7 +84,6 @@ public class JdtProjectConfig extends EclipseProjectConfig {
       return false;
     if (!super.equals(obj))
       return false;
-    JdtProjectConfig other = (JdtProjectConfig) obj;
     return true;
   }
   
