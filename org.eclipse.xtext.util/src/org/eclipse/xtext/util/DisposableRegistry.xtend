@@ -5,19 +5,27 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ide
+package org.eclipse.xtext.util
 
-import com.google.inject.Binder
-import java.util.concurrent.ExecutorService
-import org.eclipse.xtext.service.AbstractGenericModule
+import com.google.inject.Singleton
+import java.util.List
 
 /**
- * Default Guice bindings for the generic IDE features of Xtext.
+ * A compound disposable that serves as a registry. Call this one at the end of the lifecycle of your injector.
  */
-class DefaultIdeModule extends AbstractGenericModule {
+@Singleton
+class DisposableRegistry implements IDisposable {
 	
-	def void configureExecutorService(Binder binder) {
-		binder.bind(ExecutorService).toProvider(ExecutorServiceProvider)
+	val List<IDisposable> disposables = newArrayList
+	
+	def void register(IDisposable disposable) {
+		disposables += disposable
+	}
+	
+	override dispose() {
+		for (d : disposables) {
+			d.dispose()
+		}
 	}
 	
 }

@@ -10,20 +10,18 @@ package org.eclipse.xtext.xtext.generator.web
 import com.google.common.collect.LinkedHashMultimap
 import com.google.common.collect.Multimap
 import com.google.inject.Inject
-import com.google.inject.Provider
 import java.util.ArrayList
 import java.util.Collection
 import java.util.Collections
 import java.util.HashSet
 import java.util.List
 import java.util.Set
-import java.util.concurrent.ExecutorService
-import java.util.concurrent.Executors
 import java.util.regex.Pattern
 import org.eclipse.emf.mwe2.runtime.Mandatory
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.GrammarUtil
+import org.eclipse.xtext.util.DisposableRegistry
 import org.eclipse.xtext.xtext.generator.AbstractXtextGeneratorFragment
 import org.eclipse.xtext.xtext.generator.CodeConfig
 import org.eclipse.xtext.xtext.generator.Issues
@@ -730,17 +728,19 @@ class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
 			«ENDIF»
 			class «grammar.servletClass.simpleName» extends «'org.eclipse.xtext.web.servlet.XtextServlet'.typeRef» {
 				
-				val «List»<«ExecutorService»> executorServices = newArrayList
+				«DisposableRegistry» disposableRegistry
 				
 				override init() {
 					super.init()
-					val «Provider»<«ExecutorService»> executorServiceProvider = [«Executors».newCachedThreadPool => [executorServices += it]]
-					new «grammar.webSetup»(executorServiceProvider).createInjectorAndDoEMFRegistration()
+					val injector = new «grammar.webSetup»().createInjectorAndDoEMFRegistration()
+					disposableRegistry = injector.getInstance(«DisposableRegistry»)
 				}
 				
 				override destroy() {
-					executorServices.forEach[shutdown()]
-					executorServices.clear()
+					if (disposableRegistry !== null) {
+						disposableRegistry.dispose()
+						disposableRegistry = null
+					}
 					super.destroy()
 				}
 				

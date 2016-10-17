@@ -5,19 +5,13 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ide
-
-import com.google.inject.Binder
-import java.util.concurrent.ExecutorService
-import org.eclipse.xtext.service.AbstractGenericModule
+package org.eclipse.xtext.util
 
 /**
- * Default Guice bindings for the generic IDE features of Xtext.
+ * Interface for things that can be disposed.
  */
-class DefaultIdeModule extends AbstractGenericModule {
+interface IDisposable {
 	
-	def void configureExecutorService(Binder binder) {
-		binder.bind(ExecutorService).toProvider(ExecutorServiceProvider)
-	}
+	def void dispose()
 	
 }

@@ -20,7 +20,6 @@ import java.util.Collections
 import java.util.List
 import java.util.Map
 import java.util.Properties
-import java.util.concurrent.ExecutorService
 import org.apache.log4j.Logger
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtend2.lib.StringConcatenationClient
@@ -239,15 +238,6 @@ class XtextGeneratorTemplates {
 				 * Use this class to register ide components.
 				 */
 				class «ideModule.simpleName» extends «ideGenModule» {
-				
-					new() {
-						super()
-					}
-				
-					new(«Provider»<«ExecutorService»> executorServiceProvider) {
-						super(executorServiceProvider)
-					}
-					
 				}
 			''')
 		} else {
@@ -256,15 +246,6 @@ class XtextGeneratorTemplates {
 				 * Use this class to register ide components.
 				 */
 				public class «ideModule.simpleName» extends «ideGenModule» {
-				
-					public «ideModule.simpleName»() {
-						super();
-					}
-				
-					public «ideModule.simpleName»(«Provider»<«ExecutorService»> executorServiceProvider) {
-						super(executorServiceProvider);
-					}
-					
 				}
 			''')
 		}
@@ -284,14 +265,6 @@ class XtextGeneratorTemplates {
 		file.annotations += new SuppressWarningsAnnotation
 		file.content = '''
 			public abstract class «ideGenModule.simpleName» extends «superClass» {
-			
-				public «ideGenModule.simpleName»() {
-					super();
-				}
-			
-				public «ideGenModule.simpleName»(«Provider»<«ExecutorService»> executorServiceProvider) {
-					super(executorServiceProvider);
-				}
 			
 				«FOR binding : langConfig.ideGenModule.bindings»
 					«binding.createBindingMethod»
@@ -444,15 +417,6 @@ class XtextGeneratorTemplates {
 				 * Use this class to register additional components to be used within the web application.
 				 */
 				class «webModule.simpleName» extends «webGenModule» {
-				
-					new() {
-						super()
-					}
-				
-					new(«Provider»<«ExecutorService»> executorServiceProvider) {
-						super(executorServiceProvider)
-					}
-					
 				}
 			''')
 		} else {
@@ -461,15 +425,6 @@ class XtextGeneratorTemplates {
 				 * Use this class to register additional components to be used within the web application.
 				 */
 				public class «webModule.simpleName» extends «webGenModule» {
-				
-					public «webModule.simpleName»() {
-						super();
-					}
-				
-					public «webModule.simpleName»(«Provider»<«ExecutorService»> executorServiceProvider) {
-						super(executorServiceProvider);
-					}
-					
 				}
 			''')
 		}
@@ -489,14 +444,6 @@ class XtextGeneratorTemplates {
 		file.content = '''
 			public abstract class «webGenModule.simpleName» extends «superClass» {
 			
-				public «webGenModule.simpleName»() {
-					super();
-				}
-			
-				public «webGenModule.simpleName»(«Provider»<«ExecutorService»> executorServiceProvider) {
-					super(executorServiceProvider);
-				}
-				
 				«FOR binding : langConfig.webGenModule.bindings»
 					«binding.createBindingMethod»
 					
@@ -514,16 +461,10 @@ class XtextGeneratorTemplates {
 				/**
 				 * Initialization support for running Xtext languages in web applications.
 				 */
-				@«FinalFieldsConstructor»
 				class «webSetup.simpleName» extends «runtimeSetup» {
 					
-					val «Provider»<«ExecutorService»> executorServiceProvider;
-					
 					override «Injector» createInjector() {
-						val runtimeModule = new «runtimeModule»()
-						val ideModule = new «ideModule»(executorServiceProvider)
-						val webModule = new «webModule»(executorServiceProvider)
-						return «Guice».createInjector(«Modules2».mixin(runtimeModule, ideModule, webModule))
+						return «Guice».createInjector(«Modules2».mixin(new «runtimeModule», new «ideModule», new «webModule»))
 					}
 					
 				}
@@ -535,18 +476,9 @@ class XtextGeneratorTemplates {
 				 */
 				public class «webSetup.simpleName» extends «runtimeSetup» {
 					
-					private final «Provider»<«ExecutorService»> executorServiceProvider;
-					
-					«webSetup.simpleName»(«Provider»<«ExecutorService»> executorServiceProvider) {
-						this.executorServiceProvider = executorServiceProvider;
-					}
-					
 					@Override
 					public «Injector» createInjector() {
-						«runtimeModule» runtimeModule = new «runtimeModule»();
-						«ideModule» ideModule = new «ideModule»(executorServiceProvider);
-						«webModule» webModule = new «webModule»(executorServiceProvider);
-						return «Guice».createInjector(«Modules2».mixin(runtimeModule, ideModule, webModule));
+						return «Guice».createInjector(«Modules2».mixin(new «runtimeModule»(), new «ideModule»(), new «webModule»()));
 					}
 					
 				}
