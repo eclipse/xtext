@@ -18,11 +18,11 @@ import org.eclipse.xtext.ide.tests.testlanguage.signatureHelp.SignatureHelpServi
 class TestLanguageRuntimeModule extends AbstractTestLanguageRuntimeModule {
 	
 	def Class<? extends IFormatter2> bindIFormatter2() {
-		return TestLanguageFormatter;
+		return TestLanguageFormatter
 	}
 	
     def Class<? extends SignatureHelpService> bindSignatureHelpService() {
-        return SignatureHelpServiceImpl;
+        return SignatureHelpServiceImpl
     }
 
 }

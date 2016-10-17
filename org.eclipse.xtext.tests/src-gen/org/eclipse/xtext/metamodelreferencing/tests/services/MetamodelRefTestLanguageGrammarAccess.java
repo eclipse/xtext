@@ -55,7 +55,7 @@ public class MetamodelRefTestLanguageGrammarAccess extends AbstractGrammarElemen
 		private final RuleCall cRuleParserRuleIDTerminalRuleCall_0_1 = (RuleCall)cRuleParserRuleCrossReference_0.eContents().get(1);
 		
 		//NameRef xtext::RuleCall:
-		//	rule=[xtext::ParserRule]
+		//	rule=[xtext::ParserRule];
 		@Override public ParserRule getRule() { return rule; }
 		
 		//rule=[xtext::ParserRule]
@@ -73,7 +73,7 @@ public class MetamodelRefTestLanguageGrammarAccess extends AbstractGrammarElemen
 		private final RuleCall cNameIDTerminalRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
 		
 		//MyRule xtext::ParserRule:
-		//	name=ID
+		//	name=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//name=ID
@@ -140,7 +140,7 @@ public class MetamodelRefTestLanguageGrammarAccess extends AbstractGrammarElemen
 	}
 	
 	//NameRef xtext::RuleCall:
-	//	rule=[xtext::ParserRule]
+	//	rule=[xtext::ParserRule];
 	public NameRefElements getNameRefAccess() {
 		return pNameRef;
 	}
@@ -150,7 +150,7 @@ public class MetamodelRefTestLanguageGrammarAccess extends AbstractGrammarElemen
 	}
 	
 	//MyRule xtext::ParserRule:
-	//	name=ID
+	//	name=ID;
 	public MyRuleElements getMyRuleAccess() {
 		return pMyRule;
 	}

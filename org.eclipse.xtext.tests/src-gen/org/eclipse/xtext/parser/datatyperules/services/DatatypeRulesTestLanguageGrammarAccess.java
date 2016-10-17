@@ -179,7 +179,7 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 		private final RuleCall cINTTerminalRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
 		
 		//Fraction ecore::EBigDecimal:
-		//	INT ('/' INT)?
+		//	INT ('/' INT)?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//INT ('/' INT)?
@@ -264,7 +264,7 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 		private final RuleCall cINTTerminalRuleCall_4_2 = (RuleCall)cGroup_4.eContents().get(2);
 		
 		//Double ecore::EDouble:
-		//	'-'? INT? '.' INT ('E' '-'? INT)?
+		//	'-'? INT? '.' INT ('E' '-'? INT)?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'-'? INT? '.' INT ('E' '-'? INT)?
@@ -392,7 +392,7 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 	}
 	
 	//Fraction ecore::EBigDecimal:
-	//	INT ('/' INT)?
+	//	INT ('/' INT)?;
 	public FractionElements getFractionAccess() {
 		return pFraction;
 	}
@@ -422,7 +422,7 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 	}
 	
 	//Double ecore::EDouble:
-	//	'-'? INT? '.' INT ('E' '-'? INT)?
+	//	'-'? INT? '.' INT ('E' '-'? INT)?;
 	public DoubleElements getDoubleAccess() {
 		return pDouble;
 	}

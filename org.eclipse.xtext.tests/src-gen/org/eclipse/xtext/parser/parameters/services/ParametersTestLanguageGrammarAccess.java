@@ -349,7 +349,7 @@ public class ParametersTestLanguageGrammarAccess extends AbstractGrammarElementF
 		
 		//Scenario1 <Param Scenario:
 		//	<Param> first=ID
-		//	| <!Param> second=ID
+		//	| <!Param> second=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//<Param> first=ID | <!Param> second=ID
@@ -379,7 +379,7 @@ public class ParametersTestLanguageGrammarAccess extends AbstractGrammarElementF
 		private final RuleCall cFirstIdOrKeywordParserRuleCall_0 = (RuleCall)cFirstAssignment.eContents().get(0);
 		
 		//Scenario2 <AllowKeyword Scenario:
-		//	first=IdOrKeyword<AllowKeyword>
+		//	first=IdOrKeyword<AllowKeyword>;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//first=IdOrKeyword<AllowKeyword>
@@ -397,7 +397,7 @@ public class ParametersTestLanguageGrammarAccess extends AbstractGrammarElementF
 		private final Keyword cSecondKeywordKeyword_1_0 = (Keyword)cSecondAssignment_1.eContents().get(0);
 		
 		//Scenario3 <AllowKeyword Scenario:
-		//	=> first=IdOrKeyword<AllowKeyword> | second='keyword'
+		//	=> first=IdOrKeyword<AllowKeyword> | second='keyword';
 		@Override public ParserRule getRule() { return rule; }
 		
 		//=> first=IdOrKeyword<AllowKeyword> | second='keyword'
@@ -423,7 +423,7 @@ public class ParametersTestLanguageGrammarAccess extends AbstractGrammarElementF
 		private final Keyword cKeywordKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		
 		//Scenario4 <AllowKeyword Scenario:
-		//	=> second=IdOrKeyword<AllowKeyword> 'keyword'
+		//	=> second=IdOrKeyword<AllowKeyword> 'keyword';
 		@Override public ParserRule getRule() { return rule; }
 		
 		//=> second=IdOrKeyword<AllowKeyword> 'keyword'
@@ -532,7 +532,7 @@ public class ParametersTestLanguageGrammarAccess extends AbstractGrammarElementF
 	
 	//Scenario1 <Param Scenario:
 	//	<Param> first=ID
-	//	| <!Param> second=ID
+	//	| <!Param> second=ID;
 	public Scenario1Elements getScenario1Access() {
 		return pScenario1;
 	}
@@ -542,7 +542,7 @@ public class ParametersTestLanguageGrammarAccess extends AbstractGrammarElementF
 	}
 	
 	//Scenario2 <AllowKeyword Scenario:
-	//	first=IdOrKeyword<AllowKeyword>
+	//	first=IdOrKeyword<AllowKeyword>;
 	public Scenario2Elements getScenario2Access() {
 		return pScenario2;
 	}
@@ -552,7 +552,7 @@ public class ParametersTestLanguageGrammarAccess extends AbstractGrammarElementF
 	}
 	
 	//Scenario3 <AllowKeyword Scenario:
-	//	=> first=IdOrKeyword<AllowKeyword> | second='keyword'
+	//	=> first=IdOrKeyword<AllowKeyword> | second='keyword';
 	public Scenario3Elements getScenario3Access() {
 		return pScenario3;
 	}
@@ -562,7 +562,7 @@ public class ParametersTestLanguageGrammarAccess extends AbstractGrammarElementF
 	}
 	
 	//Scenario4 <AllowKeyword Scenario:
-	//	=> second=IdOrKeyword<AllowKeyword> 'keyword'
+	//	=> second=IdOrKeyword<AllowKeyword> 'keyword';
 	public Scenario4Elements getScenario4Access() {
 		return pScenario4;
 	}

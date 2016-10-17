@@ -349,7 +349,7 @@ public class TwoParametersTestLanguageGrammarAccess extends AbstractGrammarEleme
 		
 		//Scenario5 <A, B Scenario:
 		//	<A & B> first=ID
-		//	| <!A | !B> second=ID
+		//	| <!A | !B> second=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//<A & B> first=ID | <!A | !B> second=ID
@@ -379,7 +379,7 @@ public class TwoParametersTestLanguageGrammarAccess extends AbstractGrammarEleme
 		private final RuleCall cFirstIdOrKeyword2ParserRuleCall_0 = (RuleCall)cFirstAssignment.eContents().get(0);
 		
 		//Scenario6 <A, B Scenario:
-		//	first=IdOrKeyword2<A,B,A & B>
+		//	first=IdOrKeyword2<A,B,A & B>;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//first=IdOrKeyword2<A,B,A & B>
@@ -397,7 +397,7 @@ public class TwoParametersTestLanguageGrammarAccess extends AbstractGrammarEleme
 		private final Keyword cSecondKeywordKeyword_1_0 = (Keyword)cSecondAssignment_1.eContents().get(0);
 		
 		//Scenario7 <A, B Scenario:
-		//	=> first=IdOrKeyword2<A,B,A & B> | second='keyword'
+		//	=> first=IdOrKeyword2<A,B,A & B> | second='keyword';
 		@Override public ParserRule getRule() { return rule; }
 		
 		//=> first=IdOrKeyword2<A,B,A & B> | second='keyword'
@@ -423,7 +423,7 @@ public class TwoParametersTestLanguageGrammarAccess extends AbstractGrammarEleme
 		private final Keyword cKeywordKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		
 		//Scenario8 <A, B Scenario:
-		//	=> second=IdOrKeyword2<A,B,A | B> 'keyword'
+		//	=> second=IdOrKeyword2<A,B,A | B> 'keyword';
 		@Override public ParserRule getRule() { return rule; }
 		
 		//=> second=IdOrKeyword2<A,B,A | B> 'keyword'
@@ -540,7 +540,7 @@ public class TwoParametersTestLanguageGrammarAccess extends AbstractGrammarEleme
 	
 	//Scenario5 <A, B Scenario:
 	//	<A & B> first=ID
-	//	| <!A | !B> second=ID
+	//	| <!A | !B> second=ID;
 	public Scenario5Elements getScenario5Access() {
 		return pScenario5;
 	}
@@ -550,7 +550,7 @@ public class TwoParametersTestLanguageGrammarAccess extends AbstractGrammarEleme
 	}
 	
 	//Scenario6 <A, B Scenario:
-	//	first=IdOrKeyword2<A,B,A & B>
+	//	first=IdOrKeyword2<A,B,A & B>;
 	public Scenario6Elements getScenario6Access() {
 		return pScenario6;
 	}
@@ -560,7 +560,7 @@ public class TwoParametersTestLanguageGrammarAccess extends AbstractGrammarEleme
 	}
 	
 	//Scenario7 <A, B Scenario:
-	//	=> first=IdOrKeyword2<A,B,A & B> | second='keyword'
+	//	=> first=IdOrKeyword2<A,B,A & B> | second='keyword';
 	public Scenario7Elements getScenario7Access() {
 		return pScenario7;
 	}
@@ -570,7 +570,7 @@ public class TwoParametersTestLanguageGrammarAccess extends AbstractGrammarEleme
 	}
 	
 	//Scenario8 <A, B Scenario:
-	//	=> second=IdOrKeyword2<A,B,A | B> 'keyword'
+	//	=> second=IdOrKeyword2<A,B,A | B> 'keyword';
 	public Scenario8Elements getScenario8Access() {
 		return pScenario8;
 	}
@@ -592,7 +592,7 @@ public class TwoParametersTestLanguageGrammarAccess extends AbstractGrammarEleme
 	
 	//Scenario1 <Param Scenario:
 	//	<Param> first=ID
-	//	| <!Param> second=ID
+	//	| <!Param> second=ID;
 	public ParametersTestLanguageGrammarAccess.Scenario1Elements getScenario1Access() {
 		return gaParametersTestLanguage.getScenario1Access();
 	}
@@ -602,7 +602,7 @@ public class TwoParametersTestLanguageGrammarAccess extends AbstractGrammarEleme
 	}
 	
 	//Scenario2 <AllowKeyword Scenario:
-	//	first=IdOrKeyword<AllowKeyword>
+	//	first=IdOrKeyword<AllowKeyword>;
 	public ParametersTestLanguageGrammarAccess.Scenario2Elements getScenario2Access() {
 		return gaParametersTestLanguage.getScenario2Access();
 	}
@@ -612,7 +612,7 @@ public class TwoParametersTestLanguageGrammarAccess extends AbstractGrammarEleme
 	}
 	
 	//Scenario3 <AllowKeyword Scenario:
-	//	=> first=IdOrKeyword<AllowKeyword> | second='keyword'
+	//	=> first=IdOrKeyword<AllowKeyword> | second='keyword';
 	public ParametersTestLanguageGrammarAccess.Scenario3Elements getScenario3Access() {
 		return gaParametersTestLanguage.getScenario3Access();
 	}
@@ -622,7 +622,7 @@ public class TwoParametersTestLanguageGrammarAccess extends AbstractGrammarEleme
 	}
 	
 	//Scenario4 <AllowKeyword Scenario:
-	//	=> second=IdOrKeyword<AllowKeyword> 'keyword'
+	//	=> second=IdOrKeyword<AllowKeyword> 'keyword';
 	public ParametersTestLanguageGrammarAccess.Scenario4Elements getScenario4Access() {
 		return gaParametersTestLanguage.getScenario4Access();
 	}

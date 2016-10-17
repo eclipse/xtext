@@ -275,7 +275,7 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractGrammarElemen
 		private final RuleCall cParenthesizedParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//Primary Expression:
-		//	{Named} name=ID | Parenthesized
+		//	{Named} name=ID | Parenthesized;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{Named} name=ID | Parenthesized
@@ -304,7 +304,7 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractGrammarElemen
 		private final Keyword cRightParenthesisKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//Parenthesized Expression:
-		//	"(" Expression ")"
+		//	"(" Expression ")";
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"(" Expression ")"
@@ -734,7 +734,7 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractGrammarElemen
 	}
 	
 	//Primary Expression:
-	//	{Named} name=ID | Parenthesized
+	//	{Named} name=ID | Parenthesized;
 	public PrimaryElements getPrimaryAccess() {
 		return pPrimary;
 	}
@@ -744,7 +744,7 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractGrammarElemen
 	}
 	
 	//Parenthesized Expression:
-	//	"(" Expression ")"
+	//	"(" Expression ")";
 	public ParenthesizedElements getParenthesizedAccess() {
 		return pParenthesized;
 	}

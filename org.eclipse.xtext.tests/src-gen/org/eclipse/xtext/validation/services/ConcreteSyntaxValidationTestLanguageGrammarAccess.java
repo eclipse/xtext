@@ -663,7 +663,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		private final RuleCall cVal2IDTerminalRuleCall_3_0 = (RuleCall)cVal2Assignment_3.eContents().get(0);
 		
 		//AssignedActionSecond AssignedAction:
-		//	"#7" val1=ID "kw1" val2=ID
+		//	"#7" val1=ID "kw1" val2=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"#7" val1=ID "kw1" val2=ID
@@ -1782,7 +1782,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		private final RuleCall cVersion1IDTerminalRuleCall_5_0 = (RuleCall)cVersion1Assignment_5.eContents().get(0);
 		
 		//TwoVersionNo1 TwoVersion:
-		//	shared1=ID? shared2=ID "short" (shared3+=ID shared3+=ID*)? "one" version1=ID?
+		//	shared1=ID? shared2=ID "short" (shared3+=ID shared3+=ID*)? "one" version1=ID?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//shared1=ID? shared2=ID "short" (shared3+=ID shared3+=ID*)? "one" version1=ID?
@@ -1856,7 +1856,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		
 		//TwoVersionNo2 TwoVersion:
 		//	shared1=ID? shared2=ID "long" (shared3+=ID shared3+=ID*)?
-		//	"extra" extra1=ID? (extra2=ID extra3=ID | "two" extra4=ID)?
+		//	"extra" extra1=ID? (extra2=ID extra3=ID | "two" extra4=ID)?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//shared1=ID? shared2=ID "long" (shared3+=ID shared3+=ID*)? "extra" extra1=ID? (extra2=ID extra3=ID | "two" extra4=ID)?
@@ -2232,7 +2232,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	}
 	
 	//AssignedActionSecond AssignedAction:
-	//	"#7" val1=ID "kw1" val2=ID
+	//	"#7" val1=ID "kw1" val2=ID;
 	public AssignedActionSecondElements getAssignedActionSecondAccess() {
 		return pAssignedActionSecond;
 	}
@@ -2482,7 +2482,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	}
 	
 	//TwoVersionNo1 TwoVersion:
-	//	shared1=ID? shared2=ID "short" (shared3+=ID shared3+=ID*)? "one" version1=ID?
+	//	shared1=ID? shared2=ID "short" (shared3+=ID shared3+=ID*)? "one" version1=ID?;
 	public TwoVersionNo1Elements getTwoVersionNo1Access() {
 		return pTwoVersionNo1;
 	}
@@ -2493,7 +2493,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	
 	//TwoVersionNo2 TwoVersion:
 	//	shared1=ID? shared2=ID "long" (shared3+=ID shared3+=ID*)?
-	//	"extra" extra1=ID? (extra2=ID extra3=ID | "two" extra4=ID)?
+	//	"extra" extra1=ID? (extra2=ID extra3=ID | "two" extra4=ID)?;
 	public TwoVersionNo2Elements getTwoVersionNo2Access() {
 		return pTwoVersionNo2;
 	}

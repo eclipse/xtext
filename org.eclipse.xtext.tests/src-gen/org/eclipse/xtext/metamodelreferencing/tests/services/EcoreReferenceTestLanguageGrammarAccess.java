@@ -558,7 +558,7 @@ public class EcoreReferenceTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cNameValidIDParserRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
 		//Unused_01 ExtendsNsURIEObject:
-		//	{MyNamedElement_01} name=ValidID
+		//	{MyNamedElement_01} name=ValidID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{MyNamedElement_01} name=ValidID
@@ -581,7 +581,7 @@ public class EcoreReferenceTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cNameValidIDParserRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
 		//Unused_02 ExtendsResourceEObject:
-		//	{MyNamedElement_02} name=ValidID
+		//	{MyNamedElement_02} name=ValidID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{MyNamedElement_02} name=ValidID
@@ -604,7 +604,7 @@ public class EcoreReferenceTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cNameValidIDParserRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
 		//Unused_03 ExtendsPluginEObject:
-		//	{MyNamedElement_03} name=ValidID
+		//	{MyNamedElement_03} name=ValidID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{MyNamedElement_03} name=ValidID
@@ -1002,7 +1002,7 @@ public class EcoreReferenceTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 	
 	//Unused_01 ExtendsNsURIEObject:
-	//	{MyNamedElement_01} name=ValidID
+	//	{MyNamedElement_01} name=ValidID;
 	public Unused_01Elements getUnused_01Access() {
 		return pUnused_01;
 	}
@@ -1012,7 +1012,7 @@ public class EcoreReferenceTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 	
 	//Unused_02 ExtendsResourceEObject:
-	//	{MyNamedElement_02} name=ValidID
+	//	{MyNamedElement_02} name=ValidID;
 	public Unused_02Elements getUnused_02Access() {
 		return pUnused_02;
 	}
@@ -1022,7 +1022,7 @@ public class EcoreReferenceTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 	
 	//Unused_03 ExtendsPluginEObject:
-	//	{MyNamedElement_03} name=ValidID
+	//	{MyNamedElement_03} name=ValidID;
 	public Unused_03Elements getUnused_03Access() {
 		return pUnused_03;
 	}

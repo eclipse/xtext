@@ -497,7 +497,7 @@ public class XtextGrammarTestLanguageGrammarAccess extends AbstractGrammarElemen
 		private final RuleCall cGroupsGroupParserRuleCall_1_1_1_0 = (RuleCall)cGroupsAssignment_1_1_1.eContents().get(0);
 		
 		//Alternatives AbstractElement:
-		//	Group ({Alternatives.groups+=current} ('|' groups+=Group)+)?
+		//	Group ({Alternatives.groups+=current} ('|' groups+=Group)+)?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//Group ({Alternatives.groups+=current} ('|' groups+=Group)+)?
@@ -534,7 +534,7 @@ public class XtextGrammarTestLanguageGrammarAccess extends AbstractGrammarElemen
 		private final RuleCall cTokensAbstractTokenParserRuleCall_1_1_0 = (RuleCall)cTokensAssignment_1_1.eContents().get(0);
 		
 		//Group AbstractElement:
-		//	AbstractToken ({Group.tokens+=current} tokens+=AbstractToken+)?
+		//	AbstractToken ({Group.tokens+=current} tokens+=AbstractToken+)?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//AbstractToken ({Group.tokens+=current} tokens+=AbstractToken+)?
@@ -562,7 +562,7 @@ public class XtextGrammarTestLanguageGrammarAccess extends AbstractGrammarElemen
 		private final RuleCall cActionParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//AbstractToken AbstractElement:
-		//	AbstractTokenWithCardinality | Action
+		//	AbstractTokenWithCardinality | Action;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//AbstractTokenWithCardinality | Action
@@ -587,7 +587,7 @@ public class XtextGrammarTestLanguageGrammarAccess extends AbstractGrammarElemen
 		private final Keyword cCardinalityPlusSignKeyword_1_0_2 = (Keyword)cCardinalityAlternatives_1_0.eContents().get(2);
 		
 		///* SuppressWarnings[potentialOverride] */ AbstractTokenWithCardinality AbstractElement:
-		//	(Assignment | AbstractTerminal) cardinality=('?' | '*' | '+')?
+		//	(Assignment | AbstractTerminal) cardinality=('?' | '*' | '+')?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//(Assignment | AbstractTerminal) cardinality=('?' | '*' | '+')?
@@ -688,7 +688,7 @@ public class XtextGrammarTestLanguageGrammarAccess extends AbstractGrammarElemen
 		private final RuleCall cParenthesizedElementParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
 		//AbstractTerminal AbstractElement:
-		//	Keyword | RuleCall | ParenthesizedElement
+		//	Keyword | RuleCall | ParenthesizedElement;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//Keyword | RuleCall | ParenthesizedElement
@@ -793,7 +793,7 @@ public class XtextGrammarTestLanguageGrammarAccess extends AbstractGrammarElemen
 		private final RuleCall cCrossReferenceParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
 		
 		//AssignableTerminal AbstractElement:
-		//	Keyword | RuleCall | ParenthesizedAssignableElement | CrossReference
+		//	Keyword | RuleCall | ParenthesizedAssignableElement | CrossReference;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//Keyword | RuleCall | ParenthesizedAssignableElement | CrossReference
@@ -819,7 +819,7 @@ public class XtextGrammarTestLanguageGrammarAccess extends AbstractGrammarElemen
 		private final Keyword cRightParenthesisKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//ParenthesizedAssignableElement AbstractElement:
-		//	'(' AssignableAlternatives ')'
+		//	'(' AssignableAlternatives ')';
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'(' AssignableAlternatives ')'
@@ -846,7 +846,7 @@ public class XtextGrammarTestLanguageGrammarAccess extends AbstractGrammarElemen
 		private final RuleCall cGroupsAssignableTerminalParserRuleCall_1_1_1_0 = (RuleCall)cGroupsAssignment_1_1_1.eContents().get(0);
 		
 		//AssignableAlternatives AbstractElement:
-		//	AssignableTerminal ({Alternatives.groups+=current} ('|' groups+=AssignableTerminal)+)?
+		//	AssignableTerminal ({Alternatives.groups+=current} ('|' groups+=AssignableTerminal)+)?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//AssignableTerminal ({Alternatives.groups+=current} ('|' groups+=AssignableTerminal)+)?
@@ -924,7 +924,7 @@ public class XtextGrammarTestLanguageGrammarAccess extends AbstractGrammarElemen
 		private final RuleCall cParenthesizedCrossReferenceableElementParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
 		//CrossReferenceableTerminal AbstractElement:
-		//	Keyword | RuleCall | ParenthesizedCrossReferenceableElement
+		//	Keyword | RuleCall | ParenthesizedCrossReferenceableElement;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//Keyword | RuleCall | ParenthesizedCrossReferenceableElement
@@ -947,7 +947,7 @@ public class XtextGrammarTestLanguageGrammarAccess extends AbstractGrammarElemen
 		private final Keyword cRightParenthesisKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//ParenthesizedCrossReferenceableElement AbstractElement:
-		//	'(' CrossReferenceableAlternatives ')'
+		//	'(' CrossReferenceableAlternatives ')';
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'(' CrossReferenceableAlternatives ')'
@@ -974,7 +974,7 @@ public class XtextGrammarTestLanguageGrammarAccess extends AbstractGrammarElemen
 		private final RuleCall cGroupsCrossReferenceableTerminalParserRuleCall_1_1_1_0 = (RuleCall)cGroupsAssignment_1_1_1.eContents().get(0);
 		
 		//CrossReferenceableAlternatives AbstractElement:
-		//	CrossReferenceableTerminal ({Alternatives.groups+=current} ('|' groups+=CrossReferenceableTerminal)+)?
+		//	CrossReferenceableTerminal ({Alternatives.groups+=current} ('|' groups+=CrossReferenceableTerminal)+)?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//CrossReferenceableTerminal ({Alternatives.groups+=current} ('|' groups+=CrossReferenceableTerminal)+)?
@@ -1009,7 +1009,7 @@ public class XtextGrammarTestLanguageGrammarAccess extends AbstractGrammarElemen
 		private final Keyword cRightParenthesisKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//ParenthesizedElement AbstractElement:
-		//	'(' Alternatives ')'
+		//	'(' Alternatives ')';
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'(' Alternatives ')'
@@ -1093,7 +1093,7 @@ public class XtextGrammarTestLanguageGrammarAccess extends AbstractGrammarElemen
 		private final RuleCall cGroupsTerminalGroupParserRuleCall_1_1_1_0 = (RuleCall)cGroupsAssignment_1_1_1.eContents().get(0);
 		
 		//TerminalAlternatives AbstractElement:
-		//	TerminalGroup ({Alternatives.groups+=current} ('|' groups+=TerminalGroup)+)?
+		//	TerminalGroup ({Alternatives.groups+=current} ('|' groups+=TerminalGroup)+)?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//TerminalGroup ({Alternatives.groups+=current} ('|' groups+=TerminalGroup)+)?
@@ -1130,7 +1130,7 @@ public class XtextGrammarTestLanguageGrammarAccess extends AbstractGrammarElemen
 		private final RuleCall cTokensTerminalTokenParserRuleCall_1_1_0 = (RuleCall)cTokensAssignment_1_1.eContents().get(0);
 		
 		//TerminalGroup AbstractElement:
-		//	TerminalToken ({Group.tokens+=current} tokens+=TerminalToken+)?
+		//	TerminalToken ({Group.tokens+=current} tokens+=TerminalToken+)?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//TerminalToken ({Group.tokens+=current} tokens+=TerminalToken+)?
@@ -1162,7 +1162,7 @@ public class XtextGrammarTestLanguageGrammarAccess extends AbstractGrammarElemen
 		private final Keyword cCardinalityPlusSignKeyword_1_0_2 = (Keyword)cCardinalityAlternatives_1_0.eContents().get(2);
 		
 		///* SuppressWarnings[potentialOverride] */ TerminalToken AbstractElement:
-		//	TerminalTokenElement cardinality=('?' | '*' | '+')?
+		//	TerminalTokenElement cardinality=('?' | '*' | '+')?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//TerminalTokenElement cardinality=('?' | '*' | '+')?
@@ -1196,7 +1196,7 @@ public class XtextGrammarTestLanguageGrammarAccess extends AbstractGrammarElemen
 		private final RuleCall cWildcardParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
 		
 		//TerminalTokenElement AbstractElement:
-		//	CharacterRange | RuleCall | ParenthesizedTerminalElement | AbstractNegatedToken | Wildcard
+		//	CharacterRange | RuleCall | ParenthesizedTerminalElement | AbstractNegatedToken | Wildcard;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//CharacterRange | RuleCall | ParenthesizedTerminalElement | AbstractNegatedToken | Wildcard
@@ -1225,7 +1225,7 @@ public class XtextGrammarTestLanguageGrammarAccess extends AbstractGrammarElemen
 		private final Keyword cRightParenthesisKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//ParenthesizedTerminalElement AbstractElement:
-		//	'(' TerminalAlternatives ')'
+		//	'(' TerminalAlternatives ')';
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'(' TerminalAlternatives ')'
@@ -1335,7 +1335,7 @@ public class XtextGrammarTestLanguageGrammarAccess extends AbstractGrammarElemen
 		private final RuleCall cRightKeywordParserRuleCall_1_2_0 = (RuleCall)cRightAssignment_1_2.eContents().get(0);
 		
 		//CharacterRange AbstractElement:
-		//	Keyword ({CharacterRange.left=current} '..' right=Keyword)?
+		//	Keyword ({CharacterRange.left=current} '..' right=Keyword)?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//Keyword ({CharacterRange.left=current} '..' right=Keyword)?
@@ -1428,7 +1428,7 @@ public class XtextGrammarTestLanguageGrammarAccess extends AbstractGrammarElemen
 		private final RuleCall cGroupsEnumLiteralDeclarationParserRuleCall_1_1_1_0 = (RuleCall)cGroupsAssignment_1_1_1.eContents().get(0);
 		
 		//EnumLiterals AbstractElement:
-		//	EnumLiteralDeclaration ({Alternatives.groups+=current} ('|' groups+=EnumLiteralDeclaration)+)?
+		//	EnumLiteralDeclaration ({Alternatives.groups+=current} ('|' groups+=EnumLiteralDeclaration)+)?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//EnumLiteralDeclaration ({Alternatives.groups+=current} ('|' groups+=EnumLiteralDeclaration)+)?
@@ -1704,7 +1704,7 @@ public class XtextGrammarTestLanguageGrammarAccess extends AbstractGrammarElemen
 	}
 	
 	//Alternatives AbstractElement:
-	//	Group ({Alternatives.groups+=current} ('|' groups+=Group)+)?
+	//	Group ({Alternatives.groups+=current} ('|' groups+=Group)+)?;
 	public AlternativesElements getAlternativesAccess() {
 		return pAlternatives;
 	}
@@ -1714,7 +1714,7 @@ public class XtextGrammarTestLanguageGrammarAccess extends AbstractGrammarElemen
 	}
 	
 	//Group AbstractElement:
-	//	AbstractToken ({Group.tokens+=current} tokens+=AbstractToken+)?
+	//	AbstractToken ({Group.tokens+=current} tokens+=AbstractToken+)?;
 	public GroupElements getGroupAccess() {
 		return pGroup;
 	}
@@ -1724,7 +1724,7 @@ public class XtextGrammarTestLanguageGrammarAccess extends AbstractGrammarElemen
 	}
 	
 	//AbstractToken AbstractElement:
-	//	AbstractTokenWithCardinality | Action
+	//	AbstractTokenWithCardinality | Action;
 	public AbstractTokenElements getAbstractTokenAccess() {
 		return pAbstractToken;
 	}
@@ -1734,7 +1734,7 @@ public class XtextGrammarTestLanguageGrammarAccess extends AbstractGrammarElemen
 	}
 	
 	///* SuppressWarnings[potentialOverride] */ AbstractTokenWithCardinality AbstractElement:
-	//	(Assignment | AbstractTerminal) cardinality=('?' | '*' | '+')?
+	//	(Assignment | AbstractTerminal) cardinality=('?' | '*' | '+')?;
 	public AbstractTokenWithCardinalityElements getAbstractTokenWithCardinalityAccess() {
 		return pAbstractTokenWithCardinality;
 	}
@@ -1754,7 +1754,7 @@ public class XtextGrammarTestLanguageGrammarAccess extends AbstractGrammarElemen
 	}
 	
 	//AbstractTerminal AbstractElement:
-	//	Keyword | RuleCall | ParenthesizedElement
+	//	Keyword | RuleCall | ParenthesizedElement;
 	public AbstractTerminalElements getAbstractTerminalAccess() {
 		return pAbstractTerminal;
 	}
@@ -1794,7 +1794,7 @@ public class XtextGrammarTestLanguageGrammarAccess extends AbstractGrammarElemen
 	}
 	
 	//AssignableTerminal AbstractElement:
-	//	Keyword | RuleCall | ParenthesizedAssignableElement | CrossReference
+	//	Keyword | RuleCall | ParenthesizedAssignableElement | CrossReference;
 	public AssignableTerminalElements getAssignableTerminalAccess() {
 		return pAssignableTerminal;
 	}
@@ -1804,7 +1804,7 @@ public class XtextGrammarTestLanguageGrammarAccess extends AbstractGrammarElemen
 	}
 	
 	//ParenthesizedAssignableElement AbstractElement:
-	//	'(' AssignableAlternatives ')'
+	//	'(' AssignableAlternatives ')';
 	public ParenthesizedAssignableElementElements getParenthesizedAssignableElementAccess() {
 		return pParenthesizedAssignableElement;
 	}
@@ -1814,7 +1814,7 @@ public class XtextGrammarTestLanguageGrammarAccess extends AbstractGrammarElemen
 	}
 	
 	//AssignableAlternatives AbstractElement:
-	//	AssignableTerminal ({Alternatives.groups+=current} ('|' groups+=AssignableTerminal)+)?
+	//	AssignableTerminal ({Alternatives.groups+=current} ('|' groups+=AssignableTerminal)+)?;
 	public AssignableAlternativesElements getAssignableAlternativesAccess() {
 		return pAssignableAlternatives;
 	}
@@ -1834,7 +1834,7 @@ public class XtextGrammarTestLanguageGrammarAccess extends AbstractGrammarElemen
 	}
 	
 	//CrossReferenceableTerminal AbstractElement:
-	//	Keyword | RuleCall | ParenthesizedCrossReferenceableElement
+	//	Keyword | RuleCall | ParenthesizedCrossReferenceableElement;
 	public CrossReferenceableTerminalElements getCrossReferenceableTerminalAccess() {
 		return pCrossReferenceableTerminal;
 	}
@@ -1844,7 +1844,7 @@ public class XtextGrammarTestLanguageGrammarAccess extends AbstractGrammarElemen
 	}
 	
 	//ParenthesizedCrossReferenceableElement AbstractElement:
-	//	'(' CrossReferenceableAlternatives ')'
+	//	'(' CrossReferenceableAlternatives ')';
 	public ParenthesizedCrossReferenceableElementElements getParenthesizedCrossReferenceableElementAccess() {
 		return pParenthesizedCrossReferenceableElement;
 	}
@@ -1854,7 +1854,7 @@ public class XtextGrammarTestLanguageGrammarAccess extends AbstractGrammarElemen
 	}
 	
 	//CrossReferenceableAlternatives AbstractElement:
-	//	CrossReferenceableTerminal ({Alternatives.groups+=current} ('|' groups+=CrossReferenceableTerminal)+)?
+	//	CrossReferenceableTerminal ({Alternatives.groups+=current} ('|' groups+=CrossReferenceableTerminal)+)?;
 	public CrossReferenceableAlternativesElements getCrossReferenceableAlternativesAccess() {
 		return pCrossReferenceableAlternatives;
 	}
@@ -1864,7 +1864,7 @@ public class XtextGrammarTestLanguageGrammarAccess extends AbstractGrammarElemen
 	}
 	
 	//ParenthesizedElement AbstractElement:
-	//	'(' Alternatives ')'
+	//	'(' Alternatives ')';
 	public ParenthesizedElementElements getParenthesizedElementAccess() {
 		return pParenthesizedElement;
 	}
@@ -1886,7 +1886,7 @@ public class XtextGrammarTestLanguageGrammarAccess extends AbstractGrammarElemen
 	}
 	
 	//TerminalAlternatives AbstractElement:
-	//	TerminalGroup ({Alternatives.groups+=current} ('|' groups+=TerminalGroup)+)?
+	//	TerminalGroup ({Alternatives.groups+=current} ('|' groups+=TerminalGroup)+)?;
 	public TerminalAlternativesElements getTerminalAlternativesAccess() {
 		return pTerminalAlternatives;
 	}
@@ -1896,7 +1896,7 @@ public class XtextGrammarTestLanguageGrammarAccess extends AbstractGrammarElemen
 	}
 	
 	//TerminalGroup AbstractElement:
-	//	TerminalToken ({Group.tokens+=current} tokens+=TerminalToken+)?
+	//	TerminalToken ({Group.tokens+=current} tokens+=TerminalToken+)?;
 	public TerminalGroupElements getTerminalGroupAccess() {
 		return pTerminalGroup;
 	}
@@ -1906,7 +1906,7 @@ public class XtextGrammarTestLanguageGrammarAccess extends AbstractGrammarElemen
 	}
 	
 	///* SuppressWarnings[potentialOverride] */ TerminalToken AbstractElement:
-	//	TerminalTokenElement cardinality=('?' | '*' | '+')?
+	//	TerminalTokenElement cardinality=('?' | '*' | '+')?;
 	public TerminalTokenElements getTerminalTokenAccess() {
 		return pTerminalToken;
 	}
@@ -1916,7 +1916,7 @@ public class XtextGrammarTestLanguageGrammarAccess extends AbstractGrammarElemen
 	}
 	
 	//TerminalTokenElement AbstractElement:
-	//	CharacterRange | RuleCall | ParenthesizedTerminalElement | AbstractNegatedToken | Wildcard
+	//	CharacterRange | RuleCall | ParenthesizedTerminalElement | AbstractNegatedToken | Wildcard;
 	public TerminalTokenElementElements getTerminalTokenElementAccess() {
 		return pTerminalTokenElement;
 	}
@@ -1926,7 +1926,7 @@ public class XtextGrammarTestLanguageGrammarAccess extends AbstractGrammarElemen
 	}
 	
 	//ParenthesizedTerminalElement AbstractElement:
-	//	'(' TerminalAlternatives ')'
+	//	'(' TerminalAlternatives ')';
 	public ParenthesizedTerminalElementElements getParenthesizedTerminalElementAccess() {
 		return pParenthesizedTerminalElement;
 	}
@@ -1976,7 +1976,7 @@ public class XtextGrammarTestLanguageGrammarAccess extends AbstractGrammarElemen
 	}
 	
 	//CharacterRange AbstractElement:
-	//	Keyword ({CharacterRange.left=current} '..' right=Keyword)?
+	//	Keyword ({CharacterRange.left=current} '..' right=Keyword)?;
 	public CharacterRangeElements getCharacterRangeAccess() {
 		return pCharacterRange;
 	}
@@ -1998,7 +1998,7 @@ public class XtextGrammarTestLanguageGrammarAccess extends AbstractGrammarElemen
 	}
 	
 	//EnumLiterals AbstractElement:
-	//	EnumLiteralDeclaration ({Alternatives.groups+=current} ('|' groups+=EnumLiteralDeclaration)+)?
+	//	EnumLiteralDeclaration ({Alternatives.groups+=current} ('|' groups+=EnumLiteralDeclaration)+)?;
 	public EnumLiteralsElements getEnumLiteralsAccess() {
 		return pEnumLiterals;
 	}

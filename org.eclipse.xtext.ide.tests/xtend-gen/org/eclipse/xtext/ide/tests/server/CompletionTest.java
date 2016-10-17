@@ -97,8 +97,6 @@ public class CompletionTest extends AbstractTestLangLanguageServerTest {
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("Foo (TypeDeclaration) -> Foo [[1, 4] .. [1, 6]]");
       _builder_1.newLine();
-      _builder_1.append("name (ID) -> name [[1, 6] .. [1, 6]]");
-      _builder_1.newLine();
       _builder_1.append("[ -> [ [[1, 6] .. [1, 6]]");
       _builder_1.newLine();
       it.setExpectedCompletionItems(_builder_1.toString());

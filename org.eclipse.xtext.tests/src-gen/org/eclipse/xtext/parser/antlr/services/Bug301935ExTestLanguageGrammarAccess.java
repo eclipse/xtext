@@ -22,7 +22,7 @@ public class Bug301935ExTestLanguageGrammarAccess extends AbstractGrammarElement
 		private final RuleCall cModelParserRuleCall = (RuleCall)rule.eContents().get(1);
 		
 		//DelegateModel Model:
-		//	Model
+		//	Model;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//Model
@@ -72,7 +72,7 @@ public class Bug301935ExTestLanguageGrammarAccess extends AbstractGrammarElement
 
 	
 	//DelegateModel Model:
-	//	Model
+	//	Model;
 	public DelegateModelElements getDelegateModelAccess() {
 		return pDelegateModel;
 	}

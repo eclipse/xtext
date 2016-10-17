@@ -34,7 +34,7 @@ public class ParametersTestLanguageExGrammarAccess extends AbstractGrammarElemen
 		private final RuleCall cScenario1ParserRuleCall = (RuleCall)rule.eContents().get(1);
 		
 		//Scenario1 <Param Scenario:
-		//	super::Scenario1<Param>
+		//	super::Scenario1<Param>;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//super::Scenario1<Param>
@@ -104,7 +104,7 @@ public class ParametersTestLanguageExGrammarAccess extends AbstractGrammarElemen
 	}
 	
 	//Scenario1 <Param Scenario:
-	//	super::Scenario1<Param>
+	//	super::Scenario1<Param>;
 	public Scenario1Elements getScenario1Access() {
 		return pScenario1;
 	}
@@ -130,7 +130,7 @@ public class ParametersTestLanguageExGrammarAccess extends AbstractGrammarElemen
 	
 	//Scenario1 <Param Scenario:
 	//	<Param> first=ID
-	//	| <!Param> second=ID
+	//	| <!Param> second=ID;
 	public ParametersTestLanguageGrammarAccess.Scenario1Elements getParametersTestLanguageScenario1Access() {
 		return gaParametersTestLanguage.getScenario1Access();
 	}
@@ -140,7 +140,7 @@ public class ParametersTestLanguageExGrammarAccess extends AbstractGrammarElemen
 	}
 	
 	//Scenario2 <AllowKeyword Scenario:
-	//	first=IdOrKeyword<AllowKeyword>
+	//	first=IdOrKeyword<AllowKeyword>;
 	public ParametersTestLanguageGrammarAccess.Scenario2Elements getScenario2Access() {
 		return gaParametersTestLanguage.getScenario2Access();
 	}
@@ -150,7 +150,7 @@ public class ParametersTestLanguageExGrammarAccess extends AbstractGrammarElemen
 	}
 	
 	//Scenario3 <AllowKeyword Scenario:
-	//	=> first=IdOrKeyword<AllowKeyword> | second='keyword'
+	//	=> first=IdOrKeyword<AllowKeyword> | second='keyword';
 	public ParametersTestLanguageGrammarAccess.Scenario3Elements getScenario3Access() {
 		return gaParametersTestLanguage.getScenario3Access();
 	}
@@ -160,7 +160,7 @@ public class ParametersTestLanguageExGrammarAccess extends AbstractGrammarElemen
 	}
 	
 	//Scenario4 <AllowKeyword Scenario:
-	//	=> second=IdOrKeyword<AllowKeyword> 'keyword'
+	//	=> second=IdOrKeyword<AllowKeyword> 'keyword';
 	public ParametersTestLanguageGrammarAccess.Scenario4Elements getScenario4Access() {
 		return gaParametersTestLanguage.getScenario4Access();
 	}

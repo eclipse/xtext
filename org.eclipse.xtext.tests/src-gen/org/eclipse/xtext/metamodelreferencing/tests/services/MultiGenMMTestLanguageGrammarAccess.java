@@ -53,7 +53,7 @@ public class MultiGenMMTestLanguageGrammarAccess extends AbstractGrammarElementF
 		private final RuleCall cNameSTRINGTerminalRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
 		
 		//NameRef other::FooBar:
-		//	name=STRING
+		//	name=STRING;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//name=STRING
@@ -118,7 +118,7 @@ public class MultiGenMMTestLanguageGrammarAccess extends AbstractGrammarElementF
 	}
 	
 	//NameRef other::FooBar:
-	//	name=STRING
+	//	name=STRING;
 	public NameRefElements getNameRefAccess() {
 		return pNameRef;
 	}

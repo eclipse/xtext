@@ -29,7 +29,7 @@ public class AbstractTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
 		//InheritedParserRule mm::AType:
-		//	'element' name=ID
+		//	'element' name=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'element' name=ID
@@ -52,7 +52,7 @@ public class AbstractTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		private final RuleCall cElementsOverridableParserRuleParserRuleCall_1_0 = (RuleCall)cElementsAssignment_1.eContents().get(0);
 		
 		///* SuppressWarnings[noInstantiation] */ AbstractCallOverridenParserRule mm::AModel:
-		//	'overridemodel' elements+=OverridableParserRule*
+		//	'overridemodel' elements+=OverridableParserRule*;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'overridemodel' elements+=OverridableParserRule*
@@ -75,7 +75,7 @@ public class AbstractTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
 		//OverridableParserRule mm::AType:
-		//	'element' name=ID
+		//	'element' name=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'element' name=ID
@@ -98,7 +98,7 @@ public class AbstractTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		private final RuleCall cNameSTRINGTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
 		//OverridableParserRule2 mm::AType:
-		//	'other element' name=STRING
+		//	'other element' name=STRING;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'other element' name=STRING
@@ -121,7 +121,7 @@ public class AbstractTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		private final RuleCall cElementsExtendableParserRuleParserRuleCall_1_0 = (RuleCall)cElementsAssignment_1.eContents().get(0);
 		
 		///* SuppressWarnings[noInstantiation] */ AbstractCallExtendedParserRule mm::AModel:
-		//	'extendedmodel' elements+=ExtendableParserRule*
+		//	'extendedmodel' elements+=ExtendableParserRule*;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'extendedmodel' elements+=ExtendableParserRule*
@@ -144,7 +144,7 @@ public class AbstractTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
 		//ExtendableParserRule mm::AType:
-		//	'element' name=ID
+		//	'element' name=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'element' name=ID
@@ -217,7 +217,7 @@ public class AbstractTestLanguageGrammarAccess extends AbstractGrammarElementFin
 
 	
 	//InheritedParserRule mm::AType:
-	//	'element' name=ID
+	//	'element' name=ID;
 	public InheritedParserRuleElements getInheritedParserRuleAccess() {
 		return pInheritedParserRule;
 	}
@@ -227,7 +227,7 @@ public class AbstractTestLanguageGrammarAccess extends AbstractGrammarElementFin
 	}
 	
 	///* SuppressWarnings[noInstantiation] */ AbstractCallOverridenParserRule mm::AModel:
-	//	'overridemodel' elements+=OverridableParserRule*
+	//	'overridemodel' elements+=OverridableParserRule*;
 	public AbstractCallOverridenParserRuleElements getAbstractCallOverridenParserRuleAccess() {
 		return pAbstractCallOverridenParserRule;
 	}
@@ -237,7 +237,7 @@ public class AbstractTestLanguageGrammarAccess extends AbstractGrammarElementFin
 	}
 	
 	//OverridableParserRule mm::AType:
-	//	'element' name=ID
+	//	'element' name=ID;
 	public OverridableParserRuleElements getOverridableParserRuleAccess() {
 		return pOverridableParserRule;
 	}
@@ -247,7 +247,7 @@ public class AbstractTestLanguageGrammarAccess extends AbstractGrammarElementFin
 	}
 	
 	//OverridableParserRule2 mm::AType:
-	//	'other element' name=STRING
+	//	'other element' name=STRING;
 	public OverridableParserRule2Elements getOverridableParserRule2Access() {
 		return pOverridableParserRule2;
 	}
@@ -257,7 +257,7 @@ public class AbstractTestLanguageGrammarAccess extends AbstractGrammarElementFin
 	}
 	
 	///* SuppressWarnings[noInstantiation] */ AbstractCallExtendedParserRule mm::AModel:
-	//	'extendedmodel' elements+=ExtendableParserRule*
+	//	'extendedmodel' elements+=ExtendableParserRule*;
 	public AbstractCallExtendedParserRuleElements getAbstractCallExtendedParserRuleAccess() {
 		return pAbstractCallExtendedParserRule;
 	}
@@ -267,7 +267,7 @@ public class AbstractTestLanguageGrammarAccess extends AbstractGrammarElementFin
 	}
 	
 	//ExtendableParserRule mm::AType:
-	//	'element' name=ID
+	//	'element' name=ID;
 	public ExtendableParserRuleElements getExtendableParserRuleAccess() {
 		return pExtendableParserRule;
 	}

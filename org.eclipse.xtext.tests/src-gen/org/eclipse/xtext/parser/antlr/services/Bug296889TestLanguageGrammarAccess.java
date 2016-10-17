@@ -95,7 +95,7 @@ public class Bug296889TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cExprVariableParserRuleCall_2_0 = (RuleCall)cExprAssignment_2.eContents().get(0);
 		
 		//Preop Expression:
-		//	{Preop} functionName="--" expr=Variable
+		//	{Preop} functionName="--" expr=Variable;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{Preop} functionName="--" expr=Variable
@@ -126,7 +126,7 @@ public class Bug296889TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cFunctionNameHyphenMinusHyphenMinusKeyword_1_1_0 = (Keyword)cFunctionNameAssignment_1_1.eContents().get(0);
 		
 		//Postop Expression:
-		//	Variable ({Postop.expr=current} functionName="--")?
+		//	Variable ({Postop.expr=current} functionName="--")?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//Variable ({Postop.expr=current} functionName="--")?
@@ -155,7 +155,7 @@ public class Bug296889TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
 		//Variable Expression:
-		//	{Variable} name=ID
+		//	{Variable} name=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{Variable} name=ID
@@ -318,7 +318,7 @@ public class Bug296889TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 	
 	//Preop Expression:
-	//	{Preop} functionName="--" expr=Variable
+	//	{Preop} functionName="--" expr=Variable;
 	public PreopElements getPreopAccess() {
 		return pPreop;
 	}
@@ -328,7 +328,7 @@ public class Bug296889TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 	
 	//Postop Expression:
-	//	Variable ({Postop.expr=current} functionName="--")?
+	//	Variable ({Postop.expr=current} functionName="--")?;
 	public PostopElements getPostopAccess() {
 		return pPostop;
 	}
@@ -338,7 +338,7 @@ public class Bug296889TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 	
 	//Variable Expression:
-	//	{Variable} name=ID
+	//	{Variable} name=ID;
 	public VariableElements getVariableAccess() {
 		return pVariable;
 	}

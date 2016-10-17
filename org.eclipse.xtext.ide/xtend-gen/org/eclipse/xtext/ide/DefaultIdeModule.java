@@ -8,22 +8,18 @@
 package org.eclipse.xtext.ide;
 
 import com.google.inject.Binder;
-import com.google.inject.Provider;
 import com.google.inject.binder.AnnotatedBindingBuilder;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import org.eclipse.xtext.ide.ExecutorServiceProvider;
 import org.eclipse.xtext.service.AbstractGenericModule;
 
 /**
- * @author Sven Efftinge - Initial contribution and API
+ * Default Guice bindings for the generic IDE features of Xtext.
  */
 @SuppressWarnings("all")
 public class DefaultIdeModule extends AbstractGenericModule {
   public void configureExecutorService(final Binder binder) {
     AnnotatedBindingBuilder<ExecutorService> _bind = binder.<ExecutorService>bind(ExecutorService.class);
-    final Provider<ExecutorService> _function = () -> {
-      return Executors.newCachedThreadPool();
-    };
-    _bind.toProvider(_function);
+    _bind.toProvider(ExecutorServiceProvider.class);
   }
 }

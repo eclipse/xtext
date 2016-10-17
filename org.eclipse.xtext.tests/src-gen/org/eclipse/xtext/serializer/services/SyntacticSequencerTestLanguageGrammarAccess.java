@@ -254,7 +254,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		private final RuleCall cRightPrim0ParserRuleCall_1_2_0 = (RuleCall)cRightAssignment_1_2.eContents().get(0);
 		
 		//Addition0 Exp0:
-		//	Prim0 ({Add0.left=current} '+' right=Prim0)*
+		//	Prim0 ({Add0.left=current} '+' right=Prim0)*;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//Prim0 ({Add0.left=current} '+' right=Prim0)*
@@ -286,7 +286,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
 		//Prim0 Exp0:
-		//	{Val0} name=ID
+		//	{Val0} name=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{Val0} name=ID
@@ -331,7 +331,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		private final RuleCall cRightPrim1ParserRuleCall_1_2_0 = (RuleCall)cRightAssignment_1_2.eContents().get(0);
 		
 		//Addition1 Exp1:
-		//	Prim1 ({Add1.left=current} '+' right=Prim1)*
+		//	Prim1 ({Add1.left=current} '+' right=Prim1)*;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//Prim1 ({Add1.left=current} '+' right=Prim1)*
@@ -368,7 +368,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		private final Keyword cRightParenthesisKeyword_1_2 = (Keyword)cGroup_1.eContents().get(2);
 		
 		//Prim1 Exp1:
-		//	{Val1} name=ID | '(' Addition1 ')'
+		//	{Val1} name=ID | '(' Addition1 ')';
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{Val1} name=ID | '(' Addition1 ')'
@@ -428,7 +428,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		private final RuleCall cRightMultiplication2ParserRuleCall_1_2_0 = (RuleCall)cRightAssignment_1_2.eContents().get(0);
 		
 		//Addition2 Exp2:
-		//	Multiplication2 ({Add2.left=current} '+' right=Multiplication2)*
+		//	Multiplication2 ({Add2.left=current} '+' right=Multiplication2)*;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//Multiplication2 ({Add2.left=current} '+' right=Multiplication2)*
@@ -463,7 +463,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		private final RuleCall cRightPrim2ParserRuleCall_1_2_0 = (RuleCall)cRightAssignment_1_2.eContents().get(0);
 		
 		//Multiplication2 Exp2:
-		//	Prim2 ({Mult2.left=current} '*' right=Prim2)*
+		//	Prim2 ({Mult2.left=current} '*' right=Prim2)*;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//Prim2 ({Mult2.left=current} '*' right=Prim2)*
@@ -500,7 +500,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		private final Keyword cRightParenthesisKeyword_1_2 = (Keyword)cGroup_1.eContents().get(2);
 		
 		//Prim2 Exp2:
-		//	{Val2} name=ID | '(' Addition2 ')'
+		//	{Val2} name=ID | '(' Addition2 ')';
 		@Override public ParserRule getRule() { return rule; }
 		
 		//{Val2} name=ID | '(' Addition2 ')'
@@ -1147,7 +1147,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		private final RuleCall cValIDTerminalRuleCall_3_0 = (RuleCall)cValAssignment_3.eContents().get(0);
 		
 		//FragmentCaller FragmentCallerType:
-		//	"#15" val1=ID Fragment1 val=ID
+		//	"#15" val1=ID Fragment1 val=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"#15" val1=ID Fragment1 val=ID
@@ -1348,7 +1348,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	}
 	
 	//Addition0 Exp0:
-	//	Prim0 ({Add0.left=current} '+' right=Prim0)*
+	//	Prim0 ({Add0.left=current} '+' right=Prim0)*;
 	public Addition0Elements getAddition0Access() {
 		return pAddition0;
 	}
@@ -1358,7 +1358,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	}
 	
 	//Prim0 Exp0:
-	//	{Val0} name=ID
+	//	{Val0} name=ID;
 	public Prim0Elements getPrim0Access() {
 		return pPrim0;
 	}
@@ -1378,7 +1378,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	}
 	
 	//Addition1 Exp1:
-	//	Prim1 ({Add1.left=current} '+' right=Prim1)*
+	//	Prim1 ({Add1.left=current} '+' right=Prim1)*;
 	public Addition1Elements getAddition1Access() {
 		return pAddition1;
 	}
@@ -1388,7 +1388,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	}
 	
 	//Prim1 Exp1:
-	//	{Val1} name=ID | '(' Addition1 ')'
+	//	{Val1} name=ID | '(' Addition1 ')';
 	public Prim1Elements getPrim1Access() {
 		return pPrim1;
 	}
@@ -1408,7 +1408,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	}
 	
 	//Addition2 Exp2:
-	//	Multiplication2 ({Add2.left=current} '+' right=Multiplication2)*
+	//	Multiplication2 ({Add2.left=current} '+' right=Multiplication2)*;
 	public Addition2Elements getAddition2Access() {
 		return pAddition2;
 	}
@@ -1418,7 +1418,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	}
 	
 	//Multiplication2 Exp2:
-	//	Prim2 ({Mult2.left=current} '*' right=Prim2)*
+	//	Prim2 ({Mult2.left=current} '*' right=Prim2)*;
 	public Multiplication2Elements getMultiplication2Access() {
 		return pMultiplication2;
 	}
@@ -1428,7 +1428,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	}
 	
 	//Prim2 Exp2:
-	//	{Val2} name=ID | '(' Addition2 ')'
+	//	{Val2} name=ID | '(' Addition2 ')';
 	public Prim2Elements getPrim2Access() {
 		return pPrim2;
 	}
@@ -1599,7 +1599,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	}
 	
 	//FragmentCaller FragmentCallerType:
-	//	"#15" val1=ID Fragment1 val=ID
+	//	"#15" val1=ID Fragment1 val=ID;
 	public FragmentCallerElements getFragmentCallerAccess() {
 		return pFragmentCaller;
 	}

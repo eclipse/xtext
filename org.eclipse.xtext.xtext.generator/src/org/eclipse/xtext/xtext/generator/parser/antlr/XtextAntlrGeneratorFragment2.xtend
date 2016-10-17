@@ -110,7 +110,6 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 		addRuntimeBindingsAndImports()
 		addIdeBindingsAndImports()
 		addUiBindingsAndImports()
-		addWebBindings()
 	}
 	
 	def void setLookaheadThreshold(String lookaheadThreshold) {
@@ -469,20 +468,24 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 				requiredBundles += "org.antlr.runtime"
 			]
 		}
-		val rtBindings = new GuiceModuleAccess.BindingFactory()
+		val ideBindings = new GuiceModuleAccess.BindingFactory()
 			.addConfiguredBinding("ContentAssistLexer", '''
 				binder.bind(«grammar.lexerSuperClass».class)
 					.annotatedWith(«Names».named(«"org.eclipse.xtext.ide.LexerIdeBindings".typeRef».CONTENT_ASSIST))
 					.to(«grammar.lexerClass».class);
 			''')
 			.addTypeToType('org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser'.typeRef, grammar.parserClass)
+			.addTypeToType(
+				"org.eclipse.xtext.ide.editor.contentassist.IProposalConflictHelper".typeRef,
+				"org.eclipse.xtext.ide.editor.contentassist.antlr.AntlrProposalConflictHelper".typeRef
+			)
 		if (partialParsing) {
-			rtBindings.addTypeToType(
+			ideBindings.addTypeToType(
 				"org.eclipse.xtext.ide.editor.contentassist.antlr.ContentAssistContextFactory".typeRef, 
 				"org.eclipse.xtext.ide.editor.contentassist.antlr.PartialContentAssistContextFactory".typeRef
 			)
 		}
-		rtBindings.contributeTo(language.ideGenModule)
+		ideBindings.contributeTo(language.ideGenModule)
 	}
 	
 	def protected addUiBindingsAndImports() {
@@ -533,25 +536,6 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 				binder.bind(«caLexerClass».class).toProvider(«LexerProvider».create(«caLexerClass».class));
 			''')
 		uiBindings.contributeTo(language.eclipsePluginGenModule)
-	}
-	
-	def protected addWebBindings() {
-		val extension naming = contentAssistNaming
-		val webBindings = new GuiceModuleAccess.BindingFactory()
-			.addTypeToType(
-				"org.eclipse.xtext.ide.editor.contentassist.IProposalConflictHelper".typeRef,
-				"org.eclipse.xtext.ide.editor.contentassist.antlr.AntlrProposalConflictHelper".typeRef
-			)
-			.addConfiguredBinding("ContentAssistLexer", '''
-				binder.bind(«grammar.lexerSuperClass».class)
-					.annotatedWith(«Names».named(«"org.eclipse.xtext.ide.LexerIdeBindings".typeRef».CONTENT_ASSIST))
-					.to(«grammar.lexerClass».class);
-			''')
-			.addTypeToType(
-				"org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser".typeRef,
-				grammar.parserClass
-			)
-		webBindings.contributeTo(language.webGenModule)
 	}
 
 }

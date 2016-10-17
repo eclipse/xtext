@@ -59,7 +59,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 		private final RuleCall cMinusOperandsTermParserRuleCall_1_1_2_0 = (RuleCall)cMinusOperandsAssignment_1_1_2.eContents().get(0);
 		
 		//Op Expression:
-		//	Term ({Add.addOperands+=current} '+' addOperands+=Term | {Minus.minusOperands+=current} '-' minusOperands+=Term)*
+		//	Term ({Add.addOperands+=current} '+' addOperands+=Term | {Minus.minusOperands+=current} '-' minusOperands+=Term)*;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//Term ({Add.addOperands+=current} '+' addOperands+=Term | {Minus.minusOperands+=current} '-' minusOperands+=Term)*
@@ -108,7 +108,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 		private final RuleCall cParensParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//Term Expression:
-		//	Atom | Parens
+		//	Atom | Parens;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//Atom | Parens
@@ -145,7 +145,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 		private final Keyword cEmExclamationMarkKeyword_3_0 = (Keyword)cEmAssignment_3.eContents().get(0);
 		
 		///* SuppressWarnings[potentialOverride] */ Parens Expression:
-		//	'(' Op ')' em='!'?
+		//	'(' Op ')' em='!'?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'(' Op ')' em='!'?
@@ -640,7 +640,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 	}
 	
 	//Op Expression:
-	//	Term ({Add.addOperands+=current} '+' addOperands+=Term | {Minus.minusOperands+=current} '-' minusOperands+=Term)*
+	//	Term ({Add.addOperands+=current} '+' addOperands+=Term | {Minus.minusOperands+=current} '-' minusOperands+=Term)*;
 	public OpElements getOpAccess() {
 		return pOp;
 	}
@@ -650,7 +650,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 	}
 	
 	//Term Expression:
-	//	Atom | Parens
+	//	Atom | Parens;
 	public TermElements getTermAccess() {
 		return pTerm;
 	}
@@ -670,7 +670,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 	}
 	
 	///* SuppressWarnings[potentialOverride] */ Parens Expression:
-	//	'(' Op ')' em='!'?
+	//	'(' Op ')' em='!'?;
 	public ParensElements getParensAccess() {
 		return pParens;
 	}
