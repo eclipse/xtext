@@ -8,6 +8,7 @@
 	<packaging>pom</packaging>
 
 	<properties>
+		<upstreamVersion>2.11.0-SNAPSHOT</upstreamVersion>
 		<mavenVersion>3.2.5</mavenVersion>
 		<tycho-version>0.25.0</tycho-version>
 		<emf.version>(2.8,3.0)</emf.version>
@@ -74,52 +75,106 @@
 		<dependency>
 			<groupId>org.eclipse.xtend</groupId>
 			<artifactId>org.eclipse.xtend.lib</artifactId>
-			<version>2.11.0-SNAPSHOT</version>
+			<version>${upstreamVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.xtend</groupId>
+			<artifactId>org.eclipse.xtend.lib</artifactId>
+			<version>${upstreamVersion}</version>
+			<classifier>sources</classifier>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtend</groupId>
 			<artifactId>org.eclipse.xtend.lib.gwt</artifactId>
-			<version>2.11.0-SNAPSHOT</version>
+			<version>${upstreamVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.xtend</groupId>
+			<artifactId>org.eclipse.xtend.lib.gwt</artifactId>
+			<version>${upstreamVersion}</version>
+			<classifier>sources</classifier>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtend</groupId>
 			<artifactId>org.eclipse.xtend.lib.macro</artifactId>
-			<version>2.11.0-SNAPSHOT</version>
+			<version>${upstreamVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.xtend</groupId>
+			<artifactId>org.eclipse.xtend.lib.macro</artifactId>
+			<version>${upstreamVersion}</version>
+			<classifier>sources</classifier>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.xbase.lib</artifactId>
-			<version>2.11.0-SNAPSHOT</version>
+			<version>${upstreamVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext.xbase.lib</artifactId>
+			<version>${upstreamVersion}</version>
+			<classifier>sources</classifier>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.xbase.lib.gwt</artifactId>
-			<version>2.11.0-SNAPSHOT</version>
+			<version>${upstreamVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext.xbase.lib.gwt</artifactId>
+			<version>${upstreamVersion}</version>
+			<classifier>sources</classifier>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext</artifactId>
-			<version>2.11.0-SNAPSHOT</version>
+			<version>${upstreamVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext</artifactId>
+			<version>${upstreamVersion}</version>
+			<classifier>sources</classifier>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.ide</artifactId>
-			<version>2.11.0-SNAPSHOT</version>
+			<version>${upstreamVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext.ide</artifactId>
+			<version>${upstreamVersion}</version>
+			<classifier>sources</classifier>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.smap</artifactId>
-			<version>2.11.0-SNAPSHOT</version>
+			<version>${upstreamVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext.smap</artifactId>
+			<version>${upstreamVersion}</version>
+			<classifier>sources</classifier>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.util</artifactId>
-			<version>2.11.0-SNAPSHOT</version>
+			<version>${upstreamVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext.util</artifactId>
+			<version>${upstreamVersion}</version>
+			<classifier>sources</classifier>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.xtext.generator</artifactId>
-			<version>2.11.0-SNAPSHOT</version>
+			<version>${upstreamVersion}</version>
 			<exclusions>
 				<exclusion>
 					<!-- TODO: this should not be necessary -->
@@ -130,78 +185,156 @@
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext.xtext.generator</artifactId>
+			<version>${upstreamVersion}</version>
+			<classifier>sources</classifier>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.xtext.wizard</artifactId>
-			<version>2.11.0-SNAPSHOT</version>
+			<version>${upstreamVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext.xtext.wizard</artifactId>
+			<version>${upstreamVersion}</version>
+			<classifier>sources</classifier>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.builder.standalone</artifactId>
-			<version>2.11.0-SNAPSHOT</version>
+			<version>${upstreamVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext.builder.standalone</artifactId>
+			<version>${upstreamVersion}</version>
+			<classifier>sources</classifier>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.common.types</artifactId>
-			<version>2.11.0-SNAPSHOT</version>
+			<version>${upstreamVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext.common.types</artifactId>
+			<version>${upstreamVersion}</version>
+			<classifier>sources</classifier>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.ecore</artifactId>
-			<version>2.11.0-SNAPSHOT</version>
+			<version>${upstreamVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext.ecore</artifactId>
+			<version>${upstreamVersion}</version>
+			<classifier>sources</classifier>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.generator</artifactId>
-			<version>2.11.0-SNAPSHOT</version>
+			<version>${upstreamVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext.generator</artifactId>
+			<version>${upstreamVersion}</version>
+			<classifier>sources</classifier>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.java</artifactId>
-			<version>2.11.0-SNAPSHOT</version>
+			<version>${upstreamVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext.java</artifactId>
+			<version>${upstreamVersion}</version>
+			<classifier>sources</classifier>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.purexbase</artifactId>
-			<version>2.11.0-SNAPSHOT</version>
+			<version>${upstreamVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext.purexbase</artifactId>
+			<version>${upstreamVersion}</version>
+			<classifier>sources</classifier>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.xbase</artifactId>
-			<version>2.11.0-SNAPSHOT</version>
+			<version>${upstreamVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext.xbase</artifactId>
+			<version>${upstreamVersion}</version>
+			<classifier>sources</classifier>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.xbase.ide</artifactId>
-			<version>2.11.0-SNAPSHOT</version>
+			<version>${upstreamVersion}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
-			<artifactId>org.eclipse.xtext.testlanguages</artifactId>
-			<version>2.11.0-SNAPSHOT</version>
+			<artifactId>org.eclipse.xtext.xbase.ide</artifactId>
+			<version>${upstreamVersion}</version>
+			<classifier>sources</classifier>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.tests</artifactId>
-			<version>2.11.0-SNAPSHOT</version>
+			<version>${upstreamVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext.tests</artifactId>
+			<version>${upstreamVersion}</version>
+			<classifier>sources</classifier>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.testing</artifactId>
-			<version>2.11.0-SNAPSHOT</version>
+			<version>${upstreamVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext.testing</artifactId>
+			<version>${upstreamVersion}</version>
+			<classifier>sources</classifier>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.xbase.testing</artifactId>
-			<version>2.11.0-SNAPSHOT</version>
+			<version>${upstreamVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext.xbase.testing</artifactId>
+			<version>${upstreamVersion}</version>
+			<classifier>sources</classifier>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext.testlanguages</artifactId>
+			<version>${upstreamVersion}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.testlanguages.ide</artifactId>
-			<version>2.11.0-SNAPSHOT</version>
+			<version>${upstreamVersion}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
 			<artifactId>org.eclipse.xtext.xbase.testlanguages</artifactId>
-			<version>2.11.0-SNAPSHOT</version>
+			<version>${upstreamVersion}</version>
 		</dependency>
 	</dependencies>
 
@@ -309,44 +442,11 @@
 						</goals>
 						<configuration>
 							<excludes>
-								<plugin id="org.eclipse.xtext.xbase.lib" />
-								<plugin id="org.eclipse.xtext.xbase.lib.gwt" />
-								<plugin id="org.eclipse.xtext" />
-								<plugin id="org.eclipse.xtext.generator" />
-								<plugin id="org.eclipse.xtext.xtext.generator" />
-								<plugin id="org.eclipse.xtext.util" />
-								<plugin id="org.eclipse.xtext.logging" />
-								<plugin id="org.eclipse.xtext.common.types" />
-								<plugin id="org.eclipse.xtext.builder" />
-								<plugin id="org.eclipse.xtext.ecore" />
-								<plugin id="org.eclipse.xtext.smap" />
-								<plugin id="org.eclipse.xtext.xtext.wizard" />
-								<plugin id="org.eclipse.xtext.builder.standalone" />
-								<plugin id="org.eclipse.xtext.java" />
-								<plugin id="org.eclipse.xtext.ide" />
-								<plugin id="org.eclipse.xtext.testing" />
 								<plugin id="org.antlr.runtime" />
 								<plugin id="org.apache.log4j" />
 								<plugin id="org.apache.commons.lang" />
 								<plugin id="org.eclipse.xtext.doc" />
-								<plugin id="org.eclipse.xtext.xbase" />
-								<plugin id="org.eclipse.xtext.xbase.ide" />
-								<plugin id="org.eclipse.xtext.xbase.testing" />
-								<plugin id="org.eclipse.xtext.purexbase" />
-								<plugin id="org.eclipse.xtend.lib" />
-								<plugin id="org.eclipse.xtend.lib.macro" />
-								<plugin id="org.eclipse.xtend2.lib" />
-								<plugin id="org.eclipse.xtend.examples" />
-								<plugin id="org.eclipse.xtend.doc" />
-								<plugin id="org.eclipse.xtend.lib.gwt" />
-								<feature id="org.eclipse.xtext.runtime" />
-								<feature id="org.eclipse.xtext.xbase.lib" />
-								<feature id="org.eclipse.xtext.xbase" />
-								<feature id="org.eclipse.xtext.ui" />
-								<feature id="org.eclipse.xtext.examples" />
 								<feature id="org.eclipse.xtext.docs" />
-								<feature id="org.eclipse.xtext.xtext.ui" />
-								<feature id="org.eclipse.xtext.gwt" />
 							</excludes>
 						</configuration>
 					</execution>

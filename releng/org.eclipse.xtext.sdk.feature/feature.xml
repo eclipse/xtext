@@ -43,6 +43,18 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
          version="0.0.0"/>
 
    <includes
+         id="org.eclipse.xtext.runtime.source"
+         version="0.0.0"/>
+
+   <includes
+         id="org.eclipse.xtext.ui.source"
+         version="0.0.0"/>
+
+   <includes
+         id="org.eclipse.xtext.examples.source"
+         version="0.0.0"/>
+
+   <includes
          id="org.eclipse.xtext.docs"
          version="0.0.0"/>
 
@@ -51,12 +63,22 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
          version="0.0.0"/>
 
    <includes
+         id="org.eclipse.xtext.xbase.source"
+         version="0.0.0"/>
+
+   <includes
          id="org.eclipse.xtext.xtext.ui"
+         version="0.0.0"/>
+
+   <includes
+         id="org.eclipse.xtext.xtext.ui.source"
          version="0.0.0"/>
 
    <requires>
       <import plugin="org.eclipse.emf.ecore" version="2.10.2" match="greaterOrEqual"/>
       <import plugin="org.eclipse.emf.common" version="2.10.1" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.ecore.source" version="2.10.2" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.common.source" version="2.10.1" match="greaterOrEqual"/>
    </requires>
 
    <plugin
@@ -96,6 +118,27 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
 
    <plugin
          id="org.eclipse.xtext.purexbase.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.xtext.junit4.source"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.xtext.purexbase.source"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.xtext.purexbase.ui.source"
          download-size="0"
          install-size="0"
          version="0.0.0"
