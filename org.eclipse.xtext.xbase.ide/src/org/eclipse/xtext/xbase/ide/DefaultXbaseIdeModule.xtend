@@ -8,8 +8,6 @@
 package org.eclipse.xtext.xbase.ide
 
 import com.google.inject.Binder
-import com.google.inject.Provider
-import java.util.concurrent.ExecutorService
 import org.eclipse.xtext.ide.DefaultIdeModule
 import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalPriorities
 import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalProvider
@@ -31,14 +29,6 @@ import org.eclipse.xtext.xbase.typesystem.internal.OptimizingFeatureScopeTracker
 class DefaultXbaseIdeModule extends DefaultIdeModule {
 	
 	protected static val classpathScanner = new ClasspathScanner
-	
-	new() {
-		super()
-	}
-	
-	new(Provider<ExecutorService> executorServiceProvider) {
-		super(executorServiceProvider)
-	}
 	
 	def void configureClasspathScanner(Binder binder) {
 		binder.bind(ClasspathScanner).toInstance(classpathScanner)
