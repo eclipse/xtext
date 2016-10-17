@@ -10,6 +10,8 @@
 	<modules>
 		<module>releng/org.eclipse.xtext.target</module>
 		<module>releng/org.eclipse.xtext.tycho.parent</module>
+		<module>releng/org.eclipse.xtext.tycho.plugin.parent</module>
+		<module>releng/org.eclipse.xtext.tycho.feature.parent</module>
 		<module>releng/org.eclipse.xtext.tycho.tests.parent</module>
 		<module>releng/org.eclipse.xtext.p2-repository</module>
 
