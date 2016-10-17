@@ -184,9 +184,6 @@ public abstract class AbstractAntlrGrammarGenerator {
     CharSequence _compileKeywordRules = this.compileKeywordRules(it, options);
     _builder.append(_compileKeywordRules, "");
     _builder.newLineIfNotEmpty();
-    _builder.newLine();
-    _builder.append("// Rules duplicated to allow inter-rule references");
-    _builder.newLine();
     CharSequence _compileTerminalRules = this.compileTerminalRules(it, options);
     _builder.append(_compileTerminalRules, "");
     _builder.newLineIfNotEmpty();
@@ -533,6 +530,14 @@ public abstract class AbstractAntlrGrammarGenerator {
   
   protected CharSequence compileTerminalRules(final Grammar it, final AntlrOptions options) {
     StringConcatenation _builder = new StringConcatenation();
+    {
+      boolean _isBacktrackLexer = options.isBacktrackLexer();
+      if (_isBacktrackLexer) {
+        _builder.newLine();
+        _builder.append("// Rules duplicated to allow inter-rule references");
+        _builder.newLine();
+      }
+    }
     {
       List<TerminalRule> _allTerminalRules = GrammarUtil.allTerminalRules(it);
       for(final TerminalRule rule : _allTerminalRules) {

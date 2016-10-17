@@ -94,8 +94,6 @@ abstract class AbstractAntlrGrammarGenerator {
 		«compileTokens(options)»
 		«compileLexerHeader(options)»
 		«compileKeywordRules(options)»
-		
-		// Rules duplicated to allow inter-rule references
 		«compileTerminalRules(options)»
 	'''
 	
@@ -231,6 +229,10 @@ abstract class AbstractAntlrGrammarGenerator {
 	}
 	
 	protected def compileTerminalRules(Grammar it, AntlrOptions options) '''
+		«IF options.isBacktrackLexer»
+
+			// Rules duplicated to allow inter-rule references
+		«ENDIF»
 		«FOR rule:allTerminalRules»
 			
 			«rule.compileRule(it, options)»
