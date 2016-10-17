@@ -2013,7 +2013,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cINTTerminalRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
 		
 		//DOUBLE ecore::EDouble:
-		//	INT ("." INT)?
+		//	INT ("." INT)?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//INT ("." INT)?
@@ -2039,7 +2039,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cValueNULL_STRINGParserRuleCall_1_0 = (RuleCall)cValueAssignment_1.eContents().get(0);
 		
 		//NullValueGenerated NullValue:
-		//	"#29" value=NULL_STRING
+		//	"#29" value=NULL_STRING;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"#29" value=NULL_STRING
@@ -2064,7 +2064,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cFooIDTerminalRuleCall_2_0 = (RuleCall)cFooAssignment_2.eContents().get(0);
 		
 		//NullValueInterpreted NullValue:
-		//	"#30" value=NULL_STRING foo=ID?
+		//	"#30" value=NULL_STRING foo=ID?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"#30" value=NULL_STRING foo=ID?
@@ -2105,7 +2105,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cRefEObjectIDTerminalRuleCall_1_0_1 = (RuleCall)cRefEObjectCrossReference_1_0.eContents().get(1);
 		
 		//NullCrossRefGenerated NullCrossRef:
-		//	"#31" ref=[ecore::EObject]
+		//	"#31" ref=[ecore::EObject];
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"#31" ref=[ecore::EObject]
@@ -2134,7 +2134,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cFooIDTerminalRuleCall_2_0 = (RuleCall)cFooAssignment_2.eContents().get(0);
 		
 		//NullCrossRefInterpreted NullCrossRef:
-		//	"#32" ref=[ecore::EObject] foo=ID?
+		//	"#32" ref=[ecore::EObject] foo=ID?;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"#32" ref=[ecore::EObject] foo=ID?
@@ -2169,7 +2169,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cValIDTerminalRuleCall_3_0 = (RuleCall)cValAssignment_3.eContents().get(0);
 		
 		//FragmentCaller FragmentCallerType:
-		//	"#33" val1=ID Fragment1 val=ID
+		//	"#33" val1=ID Fragment1 val=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"#33" val1=ID Fragment1 val=ID
@@ -3112,7 +3112,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 	
 	//DOUBLE ecore::EDouble:
-	//	INT ("." INT)?
+	//	INT ("." INT)?;
 	public DOUBLEElements getDOUBLEAccess() {
 		return pDOUBLE;
 	}
@@ -3122,7 +3122,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 	
 	//NullValueGenerated NullValue:
-	//	"#29" value=NULL_STRING
+	//	"#29" value=NULL_STRING;
 	public NullValueGeneratedElements getNullValueGeneratedAccess() {
 		return pNullValueGenerated;
 	}
@@ -3132,7 +3132,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 	
 	//NullValueInterpreted NullValue:
-	//	"#30" value=NULL_STRING foo=ID?
+	//	"#30" value=NULL_STRING foo=ID?;
 	public NullValueInterpretedElements getNullValueInterpretedAccess() {
 		return pNullValueInterpreted;
 	}
@@ -3152,7 +3152,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 	
 	//NullCrossRefGenerated NullCrossRef:
-	//	"#31" ref=[ecore::EObject]
+	//	"#31" ref=[ecore::EObject];
 	public NullCrossRefGeneratedElements getNullCrossRefGeneratedAccess() {
 		return pNullCrossRefGenerated;
 	}
@@ -3162,7 +3162,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 	
 	//NullCrossRefInterpreted NullCrossRef:
-	//	"#32" ref=[ecore::EObject] foo=ID?
+	//	"#32" ref=[ecore::EObject] foo=ID?;
 	public NullCrossRefInterpretedElements getNullCrossRefInterpretedAccess() {
 		return pNullCrossRefInterpreted;
 	}
@@ -3172,7 +3172,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 	
 	//FragmentCaller FragmentCallerType:
-	//	"#33" val1=ID Fragment1 val=ID
+	//	"#33" val1=ID Fragment1 val=ID;
 	public FragmentCallerElements getFragmentCallerAccess() {
 		return pFragmentCaller;
 	}

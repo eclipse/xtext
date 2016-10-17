@@ -4,9 +4,7 @@
 package org.eclipse.xtext.testlanguages.backtracking.ide;
 
 import com.google.inject.Binder;
-import com.google.inject.Provider;
 import com.google.inject.name.Names;
-import java.util.concurrent.ExecutorService;
 import org.eclipse.xtext.ide.DefaultIdeModule;
 import org.eclipse.xtext.ide.LexerIdeBindings;
 import org.eclipse.xtext.ide.editor.contentassist.FQNPrefixMatcher;
@@ -23,14 +21,6 @@ import org.eclipse.xtext.testlanguages.backtracking.ide.contentassist.antlr.inte
  */
 @SuppressWarnings("all")
 public abstract class AbstractBeeLangTestLanguageIdeModule extends DefaultIdeModule {
-
-	public AbstractBeeLangTestLanguageIdeModule() {
-		super();
-	}
-
-	public AbstractBeeLangTestLanguageIdeModule(Provider<ExecutorService> executorServiceProvider) {
-		super(executorServiceProvider);
-	}
 
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
 	public void configureContentAssistLexer(Binder binder) {

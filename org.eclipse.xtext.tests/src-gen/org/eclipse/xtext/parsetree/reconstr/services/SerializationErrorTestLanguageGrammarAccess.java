@@ -57,7 +57,7 @@ public class SerializationErrorTestLanguageGrammarAccess extends AbstractGrammar
 		private final Keyword cRightParenthesisKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//Parenthesis Test:
-		//	"(" Test ")"
+		//	"(" Test ")";
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"(" Test ")"
@@ -284,7 +284,7 @@ public class SerializationErrorTestLanguageGrammarAccess extends AbstractGrammar
 	}
 	
 	//Parenthesis Test:
-	//	"(" Test ")"
+	//	"(" Test ")";
 	public ParenthesisElements getParenthesisAccess() {
 		return pParenthesis;
 	}

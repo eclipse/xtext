@@ -7,20 +7,9 @@
  */
 package org.eclipse.xtext.ide.tests.testlanguage.ide
 
-import com.google.inject.Provider
-import java.util.concurrent.ExecutorService
 
 /**
  * Use this class to register ide components.
  */
 class TestLanguageIdeModule extends AbstractTestLanguageIdeModule {
-
-	new() {
-		super()
-	}
-
-	new(Provider<ExecutorService> executorServiceProvider) {
-		super(executorServiceProvider)
-	}
-	
 }

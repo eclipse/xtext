@@ -618,7 +618,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 		private final Keyword cSemicolonKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//BiSingleAssignment SingleAssignment:
-		//	feature=ID "=" leftValue=SingleAssignmentValue "|" rightValue=SingleAssignmentValue ";"
+		//	feature=ID "=" leftValue=SingleAssignmentValue "|" rightValue=SingleAssignmentValue ";";
 		@Override public ParserRule getRule() { return rule; }
 		
 		//feature=ID "=" leftValue=SingleAssignmentValue "|" rightValue=SingleAssignmentValue ";"
@@ -678,7 +678,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 		
 		//BiListAssignment ListAssignment:
 		//	feature=ID "=" "[" (leftValues+=ListAssignmentValue ("," leftValues+=ListAssignmentValue)*)? "|"
-		//	(rightValues+=ListAssignmentValue ("," rightValues+=ListAssignmentValue)*)? "]" ";"
+		//	(rightValues+=ListAssignmentValue ("," rightValues+=ListAssignmentValue)*)? "]" ";";
 		@Override public ParserRule getRule() { return rule; }
 		
 		//feature=ID "=" "[" (leftValues+=ListAssignmentValue ("," leftValues+=ListAssignmentValue)*)? "|"
@@ -759,7 +759,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 		private final Keyword cSemicolonKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//MonoSingleAssignment SingleAssignment:
-		//	feature=ID "=" leftValue=SingleAssignmentValue ";"
+		//	feature=ID "=" leftValue=SingleAssignmentValue ";";
 		@Override public ParserRule getRule() { return rule; }
 		
 		//feature=ID "=" leftValue=SingleAssignmentValue ";"
@@ -801,7 +801,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 		private final Keyword cSemicolonKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//MonoListAssignment ListAssignment:
-		//	feature=ID "=" "[" (leftValues+=AssignmentValue ("," leftValues+=AssignmentValue)*)? "]" ";"
+		//	feature=ID "=" "[" (leftValues+=AssignmentValue ("," leftValues+=AssignmentValue)*)? "]" ";";
 		@Override public ParserRule getRule() { return rule; }
 		
 		//feature=ID "=" "[" (leftValues+=AssignmentValue ("," leftValues+=AssignmentValue)*)? "]" ";"
@@ -989,7 +989,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 		
 		//ListAssignmentValue AssignmentValue:
 		//	index=INT ":" ("[" refIndex=INT "]" | value=STRING | refObject=[NamedObject] ("." refFeature=ID ("[" refIndex=INT
-		//	"]")?)? | newObject=CreatedObject | ^import=[Import] impFrag=FRAGMENT)
+		//	"]")?)? | newObject=CreatedObject | ^import=[Import] impFrag=FRAGMENT);
 		@Override public ParserRule getRule() { return rule; }
 		
 		//index=INT ":" ("[" refIndex=INT "]" | value=STRING | refObject=[NamedObject] ("." refFeature=ID ("[" refIndex=INT
@@ -1124,7 +1124,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 		
 		//SingleAssignmentValue AssignmentValue:
 		//	keyword="null" | value=STRING | refObject=[NamedObject] ("." refFeature=ID ("[" refIndex=INT "]")?)? |
-		//	newObject=CreatedObject | ^import=[Import] impFrag=FRAGMENT
+		//	newObject=CreatedObject | ^import=[Import] impFrag=FRAGMENT;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//keyword="null" | value=STRING | refObject=[NamedObject] ("." refFeature=ID ("[" refIndex=INT "]")?)? |
@@ -1694,7 +1694,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 	}
 	
 	//BiSingleAssignment SingleAssignment:
-	//	feature=ID "=" leftValue=SingleAssignmentValue "|" rightValue=SingleAssignmentValue ";"
+	//	feature=ID "=" leftValue=SingleAssignmentValue "|" rightValue=SingleAssignmentValue ";";
 	public BiSingleAssignmentElements getBiSingleAssignmentAccess() {
 		return pBiSingleAssignment;
 	}
@@ -1705,7 +1705,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 	
 	//BiListAssignment ListAssignment:
 	//	feature=ID "=" "[" (leftValues+=ListAssignmentValue ("," leftValues+=ListAssignmentValue)*)? "|"
-	//	(rightValues+=ListAssignmentValue ("," rightValues+=ListAssignmentValue)*)? "]" ";"
+	//	(rightValues+=ListAssignmentValue ("," rightValues+=ListAssignmentValue)*)? "]" ";";
 	public BiListAssignmentElements getBiListAssignmentAccess() {
 		return pBiListAssignment;
 	}
@@ -1715,7 +1715,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 	}
 	
 	//MonoSingleAssignment SingleAssignment:
-	//	feature=ID "=" leftValue=SingleAssignmentValue ";"
+	//	feature=ID "=" leftValue=SingleAssignmentValue ";";
 	public MonoSingleAssignmentElements getMonoSingleAssignmentAccess() {
 		return pMonoSingleAssignment;
 	}
@@ -1725,7 +1725,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 	}
 	
 	//MonoListAssignment ListAssignment:
-	//	feature=ID "=" "[" (leftValues+=AssignmentValue ("," leftValues+=AssignmentValue)*)? "]" ";"
+	//	feature=ID "=" "[" (leftValues+=AssignmentValue ("," leftValues+=AssignmentValue)*)? "]" ";";
 	public MonoListAssignmentElements getMonoListAssignmentAccess() {
 		return pMonoListAssignment;
 	}
@@ -1747,7 +1747,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 	
 	//ListAssignmentValue AssignmentValue:
 	//	index=INT ":" ("[" refIndex=INT "]" | value=STRING | refObject=[NamedObject] ("." refFeature=ID ("[" refIndex=INT
-	//	"]")?)? | newObject=CreatedObject | ^import=[Import] impFrag=FRAGMENT)
+	//	"]")?)? | newObject=CreatedObject | ^import=[Import] impFrag=FRAGMENT);
 	public ListAssignmentValueElements getListAssignmentValueAccess() {
 		return pListAssignmentValue;
 	}
@@ -1758,7 +1758,7 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 	
 	//SingleAssignmentValue AssignmentValue:
 	//	keyword="null" | value=STRING | refObject=[NamedObject] ("." refFeature=ID ("[" refIndex=INT "]")?)? |
-	//	newObject=CreatedObject | ^import=[Import] impFrag=FRAGMENT
+	//	newObject=CreatedObject | ^import=[Import] impFrag=FRAGMENT;
 	public SingleAssignmentValueElements getSingleAssignmentValueAccess() {
 		return pSingleAssignmentValue;
 	}

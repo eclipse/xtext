@@ -269,7 +269,7 @@ public class AssignmentsTestLanguageGrammarAccess extends AbstractGrammarElement
 		
 		//SingleDatatype SingleValue:
 		//	"datatypeid" value=IdDatatype
-		//	| "datatypealternative" value=(IdDatatype | StringDatatype) | "datatypestring" value=StringDatatype
+		//	| "datatypealternative" value=(IdDatatype | StringDatatype) | "datatypestring" value=StringDatatype;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"datatypeid" value=IdDatatype | "datatypealternative" value=(IdDatatype | StringDatatype) | "datatypestring"
@@ -338,7 +338,7 @@ public class AssignmentsTestLanguageGrammarAccess extends AbstractGrammarElement
 		
 		//MultiDatatype MultiValue:
 		//	"datatypeids" value+=IdDatatype
-		//	| "datatypealternatives" value+=(IdDatatype | StringDatatype) | "datatypestrings" value+=StringDatatype
+		//	| "datatypealternatives" value+=(IdDatatype | StringDatatype) | "datatypestrings" value+=StringDatatype;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"datatypeids" value+=IdDatatype | "datatypealternatives" value+=(IdDatatype | StringDatatype) | "datatypestrings"
@@ -501,7 +501,7 @@ public class AssignmentsTestLanguageGrammarAccess extends AbstractGrammarElement
 	
 	//SingleDatatype SingleValue:
 	//	"datatypeid" value=IdDatatype
-	//	| "datatypealternative" value=(IdDatatype | StringDatatype) | "datatypestring" value=StringDatatype
+	//	| "datatypealternative" value=(IdDatatype | StringDatatype) | "datatypestring" value=StringDatatype;
 	public SingleDatatypeElements getSingleDatatypeAccess() {
 		return pSingleDatatype;
 	}
@@ -512,7 +512,7 @@ public class AssignmentsTestLanguageGrammarAccess extends AbstractGrammarElement
 	
 	//MultiDatatype MultiValue:
 	//	"datatypeids" value+=IdDatatype
-	//	| "datatypealternatives" value+=(IdDatatype | StringDatatype) | "datatypestrings" value+=StringDatatype
+	//	| "datatypealternatives" value+=(IdDatatype | StringDatatype) | "datatypestrings" value+=StringDatatype;
 	public MultiDatatypeElements getMultiDatatypeAccess() {
 		return pMultiDatatype;
 	}

@@ -29,7 +29,7 @@ public class GrammarAccessTestLanguageGrammarAccess extends AbstractGrammarEleme
 		private final RuleCall cElementsTypeParserRuleCall_0 = (RuleCall)cElementsAssignment.eContents().get(0);
 		
 		//Root root::AModel:
-		//	elements+=Type*
+		//	elements+=Type*;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//elements+=Type*
@@ -45,7 +45,7 @@ public class GrammarAccessTestLanguageGrammarAccess extends AbstractGrammarEleme
 		private final RuleCall cAnotherTypeParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//Type root::AType:
-		//	AType | AnotherType
+		//	AType | AnotherType;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//AType | AnotherType
@@ -64,7 +64,7 @@ public class GrammarAccessTestLanguageGrammarAccess extends AbstractGrammarEleme
 		private final Action cATypeAction_1 = (Action)cGroup.eContents().get(1);
 		
 		//AType root::AType:
-		//	'foo' {root::AType}
+		//	'foo' {root::AType};
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'foo' {root::AType}
@@ -83,7 +83,7 @@ public class GrammarAccessTestLanguageGrammarAccess extends AbstractGrammarEleme
 		private final Action cAnotherTypeAction_1 = (Action)cGroup.eContents().get(1);
 		
 		//AnotherType sub::AnotherType:
-		//	'bar' {sub::AnotherType}
+		//	'bar' {sub::AnotherType};
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'bar' {sub::AnotherType}
@@ -145,7 +145,7 @@ public class GrammarAccessTestLanguageGrammarAccess extends AbstractGrammarEleme
 
 	
 	//Root root::AModel:
-	//	elements+=Type*
+	//	elements+=Type*;
 	public RootElements getRootAccess() {
 		return pRoot;
 	}
@@ -155,7 +155,7 @@ public class GrammarAccessTestLanguageGrammarAccess extends AbstractGrammarEleme
 	}
 	
 	//Type root::AType:
-	//	AType | AnotherType
+	//	AType | AnotherType;
 	public TypeElements getTypeAccess() {
 		return pType;
 	}
@@ -165,7 +165,7 @@ public class GrammarAccessTestLanguageGrammarAccess extends AbstractGrammarEleme
 	}
 	
 	//AType root::AType:
-	//	'foo' {root::AType}
+	//	'foo' {root::AType};
 	public ATypeElements getATypeAccess() {
 		return pAType;
 	}
@@ -175,7 +175,7 @@ public class GrammarAccessTestLanguageGrammarAccess extends AbstractGrammarEleme
 	}
 	
 	//AnotherType sub::AnotherType:
-	//	'bar' {sub::AnotherType}
+	//	'bar' {sub::AnotherType};
 	public AnotherTypeElements getAnotherTypeAccess() {
 		return pAnotherType;
 	}

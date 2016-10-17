@@ -175,7 +175,7 @@ public class Bug385636GrammarAccess extends AbstractGrammarElementFinder {
 		//	{Expression_Smaller.left=current} right=Expression_VariableName | 'C3' {Expression_Smaller_Equal.left=current}
 		//	right=Expression_VariableName | 'C4' {Expression_Equal.left=current} right=Expression_VariableName | 'C5'
 		//	{Expression_Not_Equal.left=current} right=Expression_VariableName | ('C6' 'C7') {Expression_Not_Less.left=current}
-		//	right=Expression_VariableName | ('C6' 'C8') {Expression_Not_Greater.left=current} right=Expression_VariableName)*
+		//	right=Expression_VariableName | ('C6' 'C8') {Expression_Not_Greater.left=current} right=Expression_VariableName)*;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//Expression_VariableName ('C1' {Expression_Larger_Equal.left=current} right=Expression_VariableName | 'C2'
@@ -426,7 +426,7 @@ public class Bug385636GrammarAccess extends AbstractGrammarElementFinder {
 	//	{Expression_Smaller.left=current} right=Expression_VariableName | 'C3' {Expression_Smaller_Equal.left=current}
 	//	right=Expression_VariableName | 'C4' {Expression_Equal.left=current} right=Expression_VariableName | 'C5'
 	//	{Expression_Not_Equal.left=current} right=Expression_VariableName | ('C6' 'C7') {Expression_Not_Less.left=current}
-	//	right=Expression_VariableName | ('C6' 'C8') {Expression_Not_Greater.left=current} right=Expression_VariableName)*
+	//	right=Expression_VariableName | ('C6' 'C8') {Expression_Not_Greater.left=current} right=Expression_VariableName)*;
 	public StatementElements getStatementAccess() {
 		return pStatement;
 	}

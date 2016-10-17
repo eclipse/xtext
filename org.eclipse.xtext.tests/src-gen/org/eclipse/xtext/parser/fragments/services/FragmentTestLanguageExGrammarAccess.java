@@ -23,7 +23,7 @@ public class FragmentTestLanguageExGrammarAccess extends AbstractGrammarElementF
 		private final RuleCall cParserRuleFragmentsParserRuleCall = (RuleCall)rule.eContents().get(1);
 		
 		//ParserRuleFragmentsEx ParserRuleFragments:
-		//	ParserRuleFragments
+		//	ParserRuleFragments;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//ParserRuleFragments
@@ -81,7 +81,7 @@ public class FragmentTestLanguageExGrammarAccess extends AbstractGrammarElementF
 
 	
 	//ParserRuleFragmentsEx ParserRuleFragments:
-	//	ParserRuleFragments
+	//	ParserRuleFragments;
 	public ParserRuleFragmentsExElements getParserRuleFragmentsExAccess() {
 		return pParserRuleFragmentsEx;
 	}
@@ -120,7 +120,7 @@ public class FragmentTestLanguageExGrammarAccess extends AbstractGrammarElementF
 	}
 	
 	//PRFNamedRecursive PRFNamedWithAction:
-	//	name=ID RecursiveFromFragment
+	//	name=ID RecursiveFromFragment;
 	public FragmentTestLanguageGrammarAccess.PRFNamedRecursiveElements getPRFNamedRecursiveAccess() {
 		return gaFragmentTestLanguage.getPRFNamedRecursiveAccess();
 	}
@@ -130,7 +130,7 @@ public class FragmentTestLanguageExGrammarAccess extends AbstractGrammarElementF
 	}
 	
 	//PRFNamedRecursiveFragment PRFNamedWithAction:
-	//	name=ID RecursiveFragment
+	//	name=ID RecursiveFragment;
 	public FragmentTestLanguageGrammarAccess.PRFNamedRecursiveFragmentElements getPRFNamedRecursiveFragmentAccess() {
 		return gaFragmentTestLanguage.getPRFNamedRecursiveFragmentAccess();
 	}
@@ -140,7 +140,7 @@ public class FragmentTestLanguageExGrammarAccess extends AbstractGrammarElementF
 	}
 	
 	//PRFNamedRefFirst PRFNamed:
-	//	ref=[PRFNamed] '<-' PRFNamedFragment
+	//	ref=[PRFNamed] '<-' PRFNamedFragment;
 	public FragmentTestLanguageGrammarAccess.PRFNamedRefFirstElements getPRFNamedRefFirstAccess() {
 		return gaFragmentTestLanguage.getPRFNamedRefFirstAccess();
 	}
@@ -150,7 +150,7 @@ public class FragmentTestLanguageExGrammarAccess extends AbstractGrammarElementF
 	}
 	
 	//PRFNamedWithAction PRFNamed:
-	//	PRFNamed {PRFNamedWithAction.prev=current} name=ID (ref=[PRFNamed] ref2=[PRFNamed])?
+	//	PRFNamed {PRFNamedWithAction.prev=current} name=ID (ref=[PRFNamed] ref2=[PRFNamed])?;
 	public FragmentTestLanguageGrammarAccess.PRFNamedWithActionElements getPRFNamedWithActionAccess() {
 		return gaFragmentTestLanguage.getPRFNamedWithActionAccess();
 	}
@@ -171,7 +171,7 @@ public class FragmentTestLanguageExGrammarAccess extends AbstractGrammarElementF
 	////	FragmentWithAction3 ('-' ref=[PRFNamed])?
 	////;
 	//PRFNamedWithFQN PRFNamed:
-	//	name=FQN ('-' ref=[PRFNamed|FQN2])?
+	//	name=FQN ('-' ref=[PRFNamed|FQN2])?;
 	public FragmentTestLanguageGrammarAccess.PRFNamedWithFQNElements getPRFNamedWithFQNAccess() {
 		return gaFragmentTestLanguage.getPRFNamedWithFQNAccess();
 	}
@@ -181,7 +181,7 @@ public class FragmentTestLanguageExGrammarAccess extends AbstractGrammarElementF
 	}
 	
 	//PRFWithPredicate PRFNamed:
-	//	PRFNamedFragment => ('-' PRFNamedRef)?
+	//	PRFNamedFragment => ('-' PRFNamedRef)?;
 	public FragmentTestLanguageGrammarAccess.PRFWithPredicateElements getPRFWithPredicateAccess() {
 		return gaFragmentTestLanguage.getPRFWithPredicateAccess();
 	}
@@ -272,7 +272,7 @@ public class FragmentTestLanguageExGrammarAccess extends AbstractGrammarElementF
 	}
 	
 	//NamedInParentheses PRFNamed:
-	//	'(' NamedInParentheses ')' | {PRFNamed} name=ID
+	//	'(' NamedInParentheses ')' | {PRFNamed} name=ID;
 	public FragmentTestLanguageGrammarAccess.NamedInParenthesesElements getNamedInParenthesesAccess() {
 		return gaFragmentTestLanguage.getNamedInParenthesesAccess();
 	}
@@ -292,7 +292,7 @@ public class FragmentTestLanguageExGrammarAccess extends AbstractGrammarElementF
 	}
 	
 	//NamedByAction PRFNamed:
-	//	{PRFNamed} name=ID
+	//	{PRFNamed} name=ID;
 	public FragmentTestLanguageGrammarAccess.NamedByActionElements getNamedByActionAccess() {
 		return gaFragmentTestLanguage.getNamedByActionAccess();
 	}

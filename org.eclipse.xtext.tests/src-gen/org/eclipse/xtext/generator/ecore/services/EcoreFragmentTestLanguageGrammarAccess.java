@@ -33,7 +33,7 @@ public class EcoreFragmentTestLanguageGrammarAccess extends AbstractGrammarEleme
 		private final RuleCall cFirstFirstIDTerminalRuleCall_2_0_1 = (RuleCall)cFirstFirstCrossReference_2_0.eContents().get(1);
 		
 		//Second second::Second:
-		//	name=ID 'first' first=[first::First]
+		//	name=ID 'first' first=[first::First];
 		@Override public ParserRule getRule() { return rule; }
 		
 		//name=ID 'first' first=[first::First]
@@ -101,7 +101,7 @@ public class EcoreFragmentTestLanguageGrammarAccess extends AbstractGrammarEleme
 
 	
 	//Second second::Second:
-	//	name=ID 'first' first=[first::First]
+	//	name=ID 'first' first=[first::First];
 	public SecondElements getSecondAccess() {
 		return pSecond;
 	}

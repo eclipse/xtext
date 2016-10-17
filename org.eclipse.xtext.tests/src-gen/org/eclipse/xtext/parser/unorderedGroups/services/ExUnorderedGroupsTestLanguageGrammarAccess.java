@@ -23,7 +23,7 @@ public class ExUnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarE
 		private final RuleCall cModelParserRuleCall = (RuleCall)rule.eContents().get(1);
 		
 		//DelegateModel Model:
-		//	Model
+		//	Model;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//Model
@@ -81,7 +81,7 @@ public class ExUnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarE
 
 	
 	//DelegateModel Model:
-	//	Model
+	//	Model;
 	public DelegateModelElements getDelegateModelAccess() {
 		return pDelegateModel;
 	}

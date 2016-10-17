@@ -94,7 +94,7 @@ public class ConcreteTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		
 		//// override OverridableParserRule and call it
 		//OverridableParserRule mm::AType:
-		//	'overriddenelement' name=ID
+		//	'overriddenelement' name=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'overriddenelement' name=ID
@@ -136,7 +136,7 @@ public class ConcreteTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		
 		//// override parser rule and change return type
 		//OverridableParserRule2 AType2:
-		//	'overridden other element' name=ID '-' age=INT
+		//	'overridden other element' name=ID '-' age=INT;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//'overridden other element' name=ID '-' age=INT
@@ -169,7 +169,7 @@ public class ConcreteTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		
 		//// override and extend ExtendableParserRule and call it
 		//ExtendableParserRule mm::AType:
-		//	Subrule1 | Subrule2 | Subrule3
+		//	Subrule1 | Subrule2 | Subrule3;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//Subrule1 | Subrule2 | Subrule3
@@ -386,7 +386,7 @@ public class ConcreteTestLanguageGrammarAccess extends AbstractGrammarElementFin
 	
 	//// override OverridableParserRule and call it
 	//OverridableParserRule mm::AType:
-	//	'overriddenelement' name=ID
+	//	'overriddenelement' name=ID;
 	public OverridableParserRuleElements getOverridableParserRuleAccess() {
 		return pOverridableParserRule;
 	}
@@ -407,7 +407,7 @@ public class ConcreteTestLanguageGrammarAccess extends AbstractGrammarElementFin
 	
 	//// override parser rule and change return type
 	//OverridableParserRule2 AType2:
-	//	'overridden other element' name=ID '-' age=INT
+	//	'overridden other element' name=ID '-' age=INT;
 	public OverridableParserRule2Elements getOverridableParserRule2Access() {
 		return pOverridableParserRule2;
 	}
@@ -418,7 +418,7 @@ public class ConcreteTestLanguageGrammarAccess extends AbstractGrammarElementFin
 	
 	//// override and extend ExtendableParserRule and call it
 	//ExtendableParserRule mm::AType:
-	//	Subrule1 | Subrule2 | Subrule3
+	//	Subrule1 | Subrule2 | Subrule3;
 	public ExtendableParserRuleElements getExtendableParserRuleAccess() {
 		return pExtendableParserRule;
 	}
@@ -474,7 +474,7 @@ public class ConcreteTestLanguageGrammarAccess extends AbstractGrammarElementFin
 	}
 	
 	//InheritedParserRule mm::AType:
-	//	'element' name=super::ID
+	//	'element' name=super::ID;
 	public AbstractTestLanguageGrammarAccess.InheritedParserRuleElements getInheritedParserRuleAccess() {
 		return gaAbstractTestLanguage.getInheritedParserRuleAccess();
 	}
@@ -484,7 +484,7 @@ public class ConcreteTestLanguageGrammarAccess extends AbstractGrammarElementFin
 	}
 	
 	///* SuppressWarnings[noInstantiation] */ AbstractCallOverridenParserRule mm::AModel:
-	//	'overridemodel' elements+=super::OverridableParserRule*
+	//	'overridemodel' elements+=super::OverridableParserRule*;
 	public AbstractTestLanguageGrammarAccess.AbstractCallOverridenParserRuleElements getAbstractCallOverridenParserRuleAccess() {
 		return gaAbstractTestLanguage.getAbstractCallOverridenParserRuleAccess();
 	}
@@ -494,7 +494,7 @@ public class ConcreteTestLanguageGrammarAccess extends AbstractGrammarElementFin
 	}
 	
 	///* SuppressWarnings[noInstantiation] */ AbstractCallExtendedParserRule mm::AModel:
-	//	'extendedmodel' elements+=super::ExtendableParserRule*
+	//	'extendedmodel' elements+=super::ExtendableParserRule*;
 	public AbstractTestLanguageGrammarAccess.AbstractCallExtendedParserRuleElements getAbstractCallExtendedParserRuleAccess() {
 		return gaAbstractTestLanguage.getAbstractCallExtendedParserRuleAccess();
 	}

@@ -263,7 +263,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cSemicolonKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//ActionAttribute BaseAttribute:
-		//	({Attribute} "attribute" | {Master} "master") ("ref" typeRef=[BaseAttribute] | type=ID) name=ID ";"
+		//	({Attribute} "attribute" | {Master} "master") ("ref" typeRef=[BaseAttribute] | type=ID) name=ID ";";
 		@Override public ParserRule getRule() { return rule; }
 		
 		//({Attribute} "attribute" | {Master} "master") ("ref" typeRef=[BaseAttribute] | type=ID) name=ID ";"
@@ -339,7 +339,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cSemicolonKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//SimpleAttribute Attribute:
-		//	("ref" typeRef=[BaseAttribute] | type=ID) name=ID ";"
+		//	("ref" typeRef=[BaseAttribute] | type=ID) name=ID ";";
 		@Override public ParserRule getRule() { return rule; }
 		
 		//("ref" typeRef=[BaseAttribute] | type=ID) name=ID ";"
@@ -387,7 +387,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cSemicolonKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//RuleCallAttribute Attribute:
-		//	CallMe name=ID ";"
+		//	CallMe name=ID ";";
 		@Override public ParserRule getRule() { return rule; }
 		
 		//CallMe name=ID ";"
@@ -417,7 +417,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cTypeIDTerminalRuleCall_1_0 = (RuleCall)cTypeAssignment_1.eContents().get(0);
 		
 		//CallMe Attribute:
-		//	"ref" typeRef=[BaseAttribute] | type=ID
+		//	"ref" typeRef=[BaseAttribute] | type=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"ref" typeRef=[BaseAttribute] | type=ID
@@ -459,7 +459,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cSemicolonKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//RuleCallAttribute2 Attribute:
-		//	CallMe2 ("ref" typeRef=[BaseAttribute] | type=ID) ";"
+		//	CallMe2 ("ref" typeRef=[BaseAttribute] | type=ID) ";";
 		@Override public ParserRule getRule() { return rule; }
 		
 		//CallMe2 ("ref" typeRef=[BaseAttribute] | type=ID) ";"
@@ -501,7 +501,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cNameIDTerminalRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
 		
 		//CallMe2 Attribute:
-		//	name=ID
+		//	name=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//name=ID
@@ -525,7 +525,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cSemicolonKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//RuleCallAttribute3 Attribute:
-		//	CallMe3 ("ref" typeRef=[BaseAttribute] | type=ID) ";"
+		//	CallMe3 ("ref" typeRef=[BaseAttribute] | type=ID) ";";
 		@Override public ParserRule getRule() { return rule; }
 		
 		//CallMe3 ("ref" typeRef=[BaseAttribute] | type=ID) ";"
@@ -569,7 +569,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cCallMe4ParserRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
 		
 		//CallMe3 Attribute:
-		//	"call" "me" CallMe4
+		//	"call" "me" CallMe4;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"call" "me" CallMe4
@@ -590,7 +590,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cNameIDTerminalRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
 		
 		//CallMe4 Attribute:
-		//	name=ID
+		//	name=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//name=ID
@@ -709,7 +709,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 	
 	//ActionAttribute BaseAttribute:
-	//	({Attribute} "attribute" | {Master} "master") ("ref" typeRef=[BaseAttribute] | type=ID) name=ID ";"
+	//	({Attribute} "attribute" | {Master} "master") ("ref" typeRef=[BaseAttribute] | type=ID) name=ID ";";
 	public ActionAttributeElements getActionAttributeAccess() {
 		return pActionAttribute;
 	}
@@ -719,7 +719,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 	
 	//SimpleAttribute Attribute:
-	//	("ref" typeRef=[BaseAttribute] | type=ID) name=ID ";"
+	//	("ref" typeRef=[BaseAttribute] | type=ID) name=ID ";";
 	public SimpleAttributeElements getSimpleAttributeAccess() {
 		return pSimpleAttribute;
 	}
@@ -729,7 +729,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 	
 	//RuleCallAttribute Attribute:
-	//	CallMe name=ID ";"
+	//	CallMe name=ID ";";
 	public RuleCallAttributeElements getRuleCallAttributeAccess() {
 		return pRuleCallAttribute;
 	}
@@ -739,7 +739,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 	
 	//CallMe Attribute:
-	//	"ref" typeRef=[BaseAttribute] | type=ID
+	//	"ref" typeRef=[BaseAttribute] | type=ID;
 	public CallMeElements getCallMeAccess() {
 		return pCallMe;
 	}
@@ -749,7 +749,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 	
 	//RuleCallAttribute2 Attribute:
-	//	CallMe2 ("ref" typeRef=[BaseAttribute] | type=ID) ";"
+	//	CallMe2 ("ref" typeRef=[BaseAttribute] | type=ID) ";";
 	public RuleCallAttribute2Elements getRuleCallAttribute2Access() {
 		return pRuleCallAttribute2;
 	}
@@ -759,7 +759,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 	
 	//CallMe2 Attribute:
-	//	name=ID
+	//	name=ID;
 	public CallMe2Elements getCallMe2Access() {
 		return pCallMe2;
 	}
@@ -769,7 +769,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 	
 	//RuleCallAttribute3 Attribute:
-	//	CallMe3 ("ref" typeRef=[BaseAttribute] | type=ID) ";"
+	//	CallMe3 ("ref" typeRef=[BaseAttribute] | type=ID) ";";
 	public RuleCallAttribute3Elements getRuleCallAttribute3Access() {
 		return pRuleCallAttribute3;
 	}
@@ -779,7 +779,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 	
 	//CallMe3 Attribute:
-	//	"call" "me" CallMe4
+	//	"call" "me" CallMe4;
 	public CallMe3Elements getCallMe3Access() {
 		return pCallMe3;
 	}
@@ -789,7 +789,7 @@ public class Bug287988TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 	
 	//CallMe4 Attribute:
-	//	name=ID
+	//	name=ID;
 	public CallMe4Elements getCallMe4Access() {
 		return pCallMe4;
 	}

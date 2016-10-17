@@ -413,7 +413,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractGrammarEl
 		private final Keyword cFalseKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
 		
 		//Boolean ecore::EBoolean:
-		//	"true" | "false"
+		//	"true" | "false";
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"true" | "false"
@@ -457,7 +457,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractGrammarEl
 		private final Keyword cLit3Keyword = (Keyword)rule.eContents().get(1);
 		
 		//DatEnum TestEnum:
-		//	"lit3"
+		//	"lit3";
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"lit3"
@@ -498,7 +498,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractGrammarEl
 		private final RuleCall cVal1IDTerminalRuleCall_1_0 = (RuleCall)cVal1Assignment_1.eContents().get(0);
 		
 		//ContainmentRef1 ContainmentRefN:
-		//	"kw1" val1=ID
+		//	"kw1" val1=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"kw1" val1=ID
@@ -521,7 +521,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractGrammarEl
 		private final RuleCall cVal2IDTerminalRuleCall_1_0 = (RuleCall)cVal2Assignment_1.eContents().get(0);
 		
 		//ContainmentRef2 ContainmentRefN:
-		//	"kw2" val2=ID
+		//	"kw2" val2=ID;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"kw2" val2=ID
@@ -842,7 +842,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractGrammarEl
 	}
 	
 	//Boolean ecore::EBoolean:
-	//	"true" | "false"
+	//	"true" | "false";
 	public BooleanElements getBooleanAccess() {
 		return pBoolean;
 	}
@@ -862,7 +862,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractGrammarEl
 	}
 	
 	//DatEnum TestEnum:
-	//	"lit3"
+	//	"lit3";
 	public DatEnumElements getDatEnumAccess() {
 		return pDatEnum;
 	}
@@ -882,7 +882,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractGrammarEl
 	}
 	
 	//ContainmentRef1 ContainmentRefN:
-	//	"kw1" val1=ID
+	//	"kw1" val1=ID;
 	public ContainmentRef1Elements getContainmentRef1Access() {
 		return pContainmentRef1;
 	}
@@ -892,7 +892,7 @@ public class AssignmentFinderTestLanguageGrammarAccess extends AbstractGrammarEl
 	}
 	
 	//ContainmentRef2 ContainmentRefN:
-	//	"kw2" val2=ID
+	//	"kw2" val2=ID;
 	public ContainmentRef2Elements getContainmentRef2Access() {
 		return pContainmentRef2;
 	}
