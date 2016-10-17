@@ -2,24 +2,6 @@ def baseVersion = project.version
 if (baseVersion.endsWith('-SNAPSHOT'))
 	baseVersion = baseVersion.substring(0, baseVersion.length() - 9)
 
-def limitLineLength = { line, output ->
-	def firstLine = true
-	while (line.length() > 70) {
-		if (firstLine) {
-			output.println(line.substring(0, 70))
-			line = line.substring(70)
-			firstLine = false
-		} else {
-			output.println(' ' + line.substring(0, 69))
-			line = line.substring(69)
-		}
-	}
-	if (firstLine)
-		output.println(line)
-	else
-		output.println(' ' + line)
-}
-
 //------------------------------------------------------
 // Copy the existing manifest and insert the qualifier
 
@@ -54,13 +36,13 @@ task genSourcesManifest << {
 	def f = new File(sourcesManifestFile)
 	f.parentFile.mkdirs()
 	def writer = new PrintWriter(f)
-	limitLineLength('Manifest-Version: 1.0', writer)
-	limitLineLength('Bundle-ManifestVersion: 2', writer)
-	limitLineLength('Bundle-SymbolicName: ' + project.name + '.source', writer)
-	limitLineLength('Bundle-Version: ' + baseVersion + '.' + buildTime, writer)
-	limitLineLength('Bundle-Name: Sources', writer)
-	limitLineLength('Bundle-Vendor: Eclipse Xtext', writer)
-	limitLineLength('Eclipse-SourceBundle: ' + project.name + ';version="' + baseVersion + '.' + buildTime + '"', writer)
+	writer.println('Manifest-Version: 1.0')
+	writer.println('Bundle-ManifestVersion: 2')
+	writer.println('Bundle-SymbolicName: ' + project.name + '.source')
+	writer.println('Bundle-Version: ' + baseVersion + '.' + buildTime)
+	writer.println('Bundle-Name: Sources')
+	writer.println('Bundle-Vendor: Eclipse Xtext')
+	writer.println('Eclipse-SourceBundle: ' + project.name + ';version="' + baseVersion + '.' + buildTime + '"')
 	writer.close()
 }
 genSourcesManifest.outputs.file(sourcesManifestFile)
