@@ -7,9 +7,6 @@ task sourcesJar(type: Jar, dependsOn: classes) {
 	from ('.') {
 		include 'schema/**', 'model/**'
 	}
-	metaInf {
-		from 'META-INF'
-	}
 }
 
 task javadocJar(type: Jar, dependsOn: javadoc) {

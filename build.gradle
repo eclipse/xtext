@@ -1,3 +1,5 @@
+ext.buildTime = new java.text.SimpleDateFormat('yyyyMMddHHmm').format(new Date())
+
 subprojects {
 	repositories {
 		jcenter()
@@ -11,6 +13,7 @@ subprojects {
 	apply from: "${rootDir}/gradle/eclipse-project-layout.gradle"
 	apply from: "${rootDir}/gradle/java-compiler-settings.gradle"
 	apply from: "${rootDir}/gradle/maven-deployment.gradle"
+	apply from: "${rootDir}/gradle/manifest-gen.gradle"
 }
 
 task cleanLocalMavenRepo(type: Delete) {

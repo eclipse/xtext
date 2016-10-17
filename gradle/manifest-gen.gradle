@@ -1,0 +1,56 @@
+def baseVersion = project.version
+if (baseVersion.endsWith('-SNAPSHOT'))
+	baseVersion = baseVersion.substring(0, baseVersion.length() - 9)
+
+//------------------------------------------------------
+// Copy the existing manifest and insert the qualifier
+
+def manifestFile = "$buildDir/tmp/jar/MANIFEST.MF"
+
+task genManifest(type: Copy) {
+    from "META-INF/MANIFEST.MF"
+    into "$buildDir/tmp/jar/"
+    doLast {
+    	def f = new File(manifestFile)
+    	def modifiedText = f.text.replace(baseVersion + '.qualifier', baseVersion + '.' + buildTime)
+    	def writer = new PrintWriter(f)
+    	writer.print(modifiedText)
+    	writer.close()
+    }
+}
+
+jar {
+	dependsOn genManifest
+	inputs.file(manifestFile)
+	manifest {
+		from manifestFile
+	}
+}
+
+//------------------------------------------------------
+// Generate a manifest for the source bundle
+
+def sourcesManifestFile = "$buildDir/tmp/sourcesJar/MANIFEST.MF"
+
+task genSourcesManifest << {
+	def f = new File(sourcesManifestFile)
+	f.parentFile.mkdirs()
+	def writer = new PrintWriter(f)
+	writer.println('Manifest-Version: 1.0')
+	writer.println('Bundle-ManifestVersion: 2')
+	writer.println('Bundle-SymbolicName: ' + project.name + '.source')
+	writer.println('Bundle-Version: ' + baseVersion + '.' + buildTime)
+	writer.println('Bundle-Name: Sources')
+	writer.println('Bundle-Vendor: Eclipse Xtext')
+	writer.println('Eclipse-SourceBundle: ' + project.name + ';version="' + baseVersion + '.' + buildTime + '"')
+	writer.close()
+}
+genSourcesManifest.outputs.file(sourcesManifestFile)
+
+sourcesJar {
+	dependsOn genSourcesManifest
+	inputs.file(sourcesManifestFile)
+	manifest {
+		from sourcesManifestFile
+	}
+}
