@@ -89,7 +89,8 @@ public class Junit4Fragment2 extends AbstractStubGeneratingFragment {
       ManifestAccess _manifest_3 = _eclipsePluginTest_1.getManifest();
       final Procedure1<ManifestAccess> _function_1 = (ManifestAccess it) -> {
         Set<String> _requiredBundles = it.getRequiredBundles();
-        CollectionExtensions.<String>addAll(_requiredBundles, 
+        String _testingPackage = this.getTestingPackage();
+        CollectionExtensions.<String>addAll(_requiredBundles, _testingPackage, 
           "org.eclipse.core.runtime", 
           "org.eclipse.ui.workbench;resolution:=optional");
         Set<String> _exportedPackages = it.getExportedPackages();

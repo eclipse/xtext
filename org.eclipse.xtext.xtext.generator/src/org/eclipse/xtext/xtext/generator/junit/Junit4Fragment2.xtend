@@ -40,6 +40,7 @@ class Junit4Fragment2 extends AbstractStubGeneratingFragment {
 		if (projectConfig.eclipsePluginTest.manifest != null) {
 			projectConfig.eclipsePluginTest.manifest => [
 				requiredBundles.addAll(
+					testingPackage,
 					"org.eclipse.core.runtime",
 					"org.eclipse.ui.workbench;resolution:=optional"
 				)
