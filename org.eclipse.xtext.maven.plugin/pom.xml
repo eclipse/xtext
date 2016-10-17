@@ -194,6 +194,9 @@
 							<includes>
 								<include>**/*IT.java</include>
 							</includes>
+							<systemPropertyVariables>
+								<testProjectDir>${project.build.directory}</testProjectDir>
+							</systemPropertyVariables>
 						</configuration>
 					</execution>
 				</executions>
