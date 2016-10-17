@@ -10,13 +10,13 @@ package org.eclipse.xtext.web.server.model;
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import com.google.inject.name.Named;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.RejectedExecutionException;
 import org.apache.log4j.Logger;
 import org.eclipse.xtend.lib.annotations.Delegate;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.ide.ExecutorServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.service.OperationCanceledManager;
 import org.eclipse.xtext.util.CancelIndicator;
@@ -111,30 +111,37 @@ public class XtextWebDocumentAccess {
     }
   }
   
+  private final static String DOCUMENT_LOCK_EXECUTOR = "withDocumentLock";
+  
   @Inject
   private PrecomputedServiceRegistry preComputedServiceRegistry;
+  
+  @Inject
+  private OperationCanceledManager operationCanceledManager;
   
   /**
    * Executor service for runnables that are run when the lock is already acquired
    */
-  @Inject
-  @Named("withDocumentLock")
   private ExecutorService executorService1;
   
   /**
    * A second executor service for runnables that aquire the document lock themselves
    */
-  @Inject
   private ExecutorService executorService2;
-  
-  @Inject
-  private OperationCanceledManager operationCanceledManager;
   
   private XtextWebDocument document;
   
   private String requiredStateId;
   
   private boolean skipAsyncWork;
+  
+  @Inject
+  protected void setExecutorServiceProvider(final ExecutorServiceProvider executorServiceProvider) {
+    ExecutorService _get = executorServiceProvider.get(XtextWebDocumentAccess.DOCUMENT_LOCK_EXECUTOR);
+    this.executorService1 = _get;
+    ExecutorService _get_1 = executorServiceProvider.get();
+    this.executorService2 = _get_1;
+  }
   
   protected void init(final XtextWebDocument document, final String requiredStateId, final boolean skipAsyncWork) {
     this.document = document;

@@ -8,23 +8,8 @@
 package org.eclipse.xtext.xbase.web.test.languages;
 
 import com.google.inject.Binder;
-import com.google.inject.Provider;
 import com.google.inject.binder.AnnotatedBindingBuilder;
-import com.google.inject.binder.LinkedBindingBuilder;
-import com.google.inject.binder.ScopedBindingBuilder;
-import com.google.inject.name.Named;
-import com.google.inject.name.Names;
-import java.util.concurrent.ExecutorService;
 import org.eclipse.xtend.lib.annotations.Accessors;
-import org.eclipse.xtext.ide.LexerIdeBindings;
-import org.eclipse.xtext.ide.editor.contentassist.FQNPrefixMatcher;
-import org.eclipse.xtext.ide.editor.contentassist.IPrefixMatcher;
-import org.eclipse.xtext.ide.editor.contentassist.IProposalConflictHelper;
-import org.eclipse.xtext.ide.editor.contentassist.antlr.AntlrProposalConflictHelper;
-import org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser;
-import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer;
-import org.eclipse.xtext.web.example.entities.ide.contentassist.antlr.EntitiesParser;
-import org.eclipse.xtext.web.example.entities.ide.contentassist.antlr.internal.InternalEntitiesLexer;
 import org.eclipse.xtext.web.server.persistence.FileResourceHandler;
 import org.eclipse.xtext.web.server.persistence.IResourceBaseProvider;
 import org.eclipse.xtext.web.server.persistence.IServerResourceHandler;
@@ -35,29 +20,6 @@ import org.eclipse.xtext.xbase.web.DefaultXbaseWebModule;
 @SuppressWarnings("all")
 public class EntitiesWebModule extends DefaultXbaseWebModule {
   private IResourceBaseProvider resourceBaseProvider;
-  
-  public EntitiesWebModule(final Provider<ExecutorService> executorServiceProvider) {
-    super(executorServiceProvider);
-  }
-  
-  public ScopedBindingBuilder configureContentAssistLexer(final Binder binder) {
-    AnnotatedBindingBuilder<Lexer> _bind = binder.<Lexer>bind(Lexer.class);
-    Named _named = Names.named(LexerIdeBindings.CONTENT_ASSIST);
-    LinkedBindingBuilder<Lexer> _annotatedWith = _bind.annotatedWith(_named);
-    return _annotatedWith.to(InternalEntitiesLexer.class);
-  }
-  
-  public Class<? extends IContentAssistParser> bindIContentAssistParser() {
-    return EntitiesParser.class;
-  }
-  
-  public Class<? extends IProposalConflictHelper> bindIProposalConflictHelper() {
-    return AntlrProposalConflictHelper.class;
-  }
-  
-  public Class<? extends IPrefixMatcher> bindIPrefixMatcher() {
-    return FQNPrefixMatcher.class;
-  }
   
   public Class<? extends IServerResourceHandler> bindIServerResourceHandler() {
     return FileResourceHandler.class;

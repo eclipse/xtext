@@ -9,12 +9,14 @@ package org.eclipse.xtext.web.example.entities.ide;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.google.inject.Module;
+import org.eclipse.xtext.util.Modules2;
 import org.eclipse.xtext.web.example.entities.EntitiesRuntimeModule;
 import org.eclipse.xtext.web.example.entities.EntitiesStandaloneSetup;
 import org.eclipse.xtext.web.example.entities.ide.EntitiesIdeModule;
 
 /**
- * Initialization support for running Xtext languages without Equinox extension registry.
+ * Initialization support for running Xtext languages as language servers.
  */
 @SuppressWarnings("all")
 public class EntitiesIdeSetup extends EntitiesStandaloneSetup {
@@ -22,6 +24,7 @@ public class EntitiesIdeSetup extends EntitiesStandaloneSetup {
   public Injector createInjector() {
     EntitiesRuntimeModule _entitiesRuntimeModule = new EntitiesRuntimeModule();
     EntitiesIdeModule _entitiesIdeModule = new EntitiesIdeModule();
-    return Guice.createInjector(_entitiesRuntimeModule, _entitiesIdeModule);
+    Module _mixin = Modules2.mixin(_entitiesRuntimeModule, _entitiesIdeModule);
+    return Guice.createInjector(_mixin);
   }
 }

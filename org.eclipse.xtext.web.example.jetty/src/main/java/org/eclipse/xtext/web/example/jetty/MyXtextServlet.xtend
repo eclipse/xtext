@@ -7,30 +7,28 @@
  *******************************************************************************/
 package org.eclipse.xtext.web.example.jetty
 
-import com.google.inject.Provider
-import java.util.List
-import java.util.concurrent.ExecutorService
-import java.util.concurrent.Executors
 import javax.servlet.annotation.WebServlet
+import org.eclipse.xtext.util.DisposableRegistry
 import org.eclipse.xtext.web.server.persistence.ResourceBaseProviderImpl
 import org.eclipse.xtext.web.servlet.XtextServlet
 
 @WebServlet(name = "Xtext Services", urlPatterns = "/xtext-service/*")
 class MyXtextServlet extends XtextServlet {
 	
-	val List<ExecutorService> executorServices = newArrayList
+	DisposableRegistry disposableRegistry
 
 	override init() {
 		super.init()
-		val Provider<ExecutorService> executorServiceProvider = [Executors.newCachedThreadPool => [executorServices += it]]
 		val resourceBaseProvider = new ResourceBaseProviderImpl('./test-files')
-		new StatemachineWebSetup(executorServiceProvider, resourceBaseProvider).createInjectorAndDoEMFRegistration
-		new EntitiesWebSetup(executorServiceProvider, resourceBaseProvider).createInjectorAndDoEMFRegistration
+		new StatemachineWebSetup(resourceBaseProvider).createInjectorAndDoEMFRegistration
+		new EntitiesWebSetup(resourceBaseProvider).createInjectorAndDoEMFRegistration
 	}
 	
 	override destroy() {
-		executorServices.forEach[shutdown()]
-		executorServices.clear()
+		if (disposableRegistry !== null) {
+			disposableRegistry.dispose()
+			disposableRegistry = null
+		}
 		super.destroy()
 	}
 

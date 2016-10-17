@@ -10,17 +10,16 @@ package org.eclipse.xtext.web.server.test
 import com.google.inject.Guice
 import com.google.inject.Inject
 import com.google.inject.Module
-import com.google.inject.util.Modules
 import java.io.File
 import java.io.FileWriter
 import java.util.HashMap
-import java.util.List
 import java.util.Map
-import java.util.concurrent.ExecutorService
-import java.util.concurrent.Executors
 import org.eclipse.emf.common.util.URI
+import org.eclipse.xtext.util.DisposableRegistry
+import org.eclipse.xtext.util.Modules2
 import org.eclipse.xtext.web.example.statemachine.StatemachineRuntimeModule
 import org.eclipse.xtext.web.example.statemachine.StatemachineStandaloneSetup
+import org.eclipse.xtext.web.example.statemachine.ide.StatemachineIdeModule
 import org.eclipse.xtext.web.example.statemachine.tests.StatemachineInjectorProvider
 import org.eclipse.xtext.web.server.ISession
 import org.eclipse.xtext.web.server.XtextServiceDispatcher
@@ -43,17 +42,18 @@ abstract class AbstractWebServerTest {
 		override protected internalCreateInjector() {
 			new StatemachineStandaloneSetup {
 				override createInjector() {
-					val webModule = new StatemachineWebModule[Executors.newCachedThreadPool => [executorServices += it]]
+					val ideModule = new StatemachineIdeModule
+					val webModule = new StatemachineWebModule
 					webModule.resourceBaseProvider = resourceBaseProvider
-					return Guice.createInjector(Modules.override(runtimeModule).with(webModule))
+					return Guice.createInjector(Modules2.mixin(runtimeModule, ideModule, webModule))
 				}
 			}.createInjectorAndDoEMFRegistration()
 		}
 	}
 	
-	val List<ExecutorService> executorServices = newArrayList
-	
 	TestResourceBaseProvider resourceBaseProvider
+	
+	@Inject DisposableRegistry disposableRegistry
 	
 	@Inject XtextServiceDispatcher dispatcher
 	
@@ -71,8 +71,7 @@ abstract class AbstractWebServerTest {
 	
 	@After
 	def void teardown() {
-		executorServices.forEach[shutdown()]
-		executorServices.clear()
+		disposableRegistry.dispose()
 		resourceBaseProvider.testFiles.clear()
 		injectorProvider.restoreRegistry()
 	}

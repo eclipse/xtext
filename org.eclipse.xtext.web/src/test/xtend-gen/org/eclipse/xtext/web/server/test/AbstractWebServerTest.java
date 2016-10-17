@@ -11,19 +11,16 @@ import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Module;
-import com.google.inject.Provider;
-import com.google.inject.util.Modules;
 import java.io.File;
 import java.io.FileWriter;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.function.Consumer;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.xtext.util.DisposableRegistry;
+import org.eclipse.xtext.util.Modules2;
 import org.eclipse.xtext.web.example.statemachine.StatemachineRuntimeModule;
 import org.eclipse.xtext.web.example.statemachine.StatemachineStandaloneSetup;
+import org.eclipse.xtext.web.example.statemachine.ide.StatemachineIdeModule;
 import org.eclipse.xtext.web.example.statemachine.tests.StatemachineInjectorProvider;
 import org.eclipse.xtext.web.server.ISession;
 import org.eclipse.xtext.web.server.XtextServiceDispatcher;
@@ -31,10 +28,7 @@ import org.eclipse.xtext.web.server.persistence.IResourceBaseProvider;
 import org.eclipse.xtext.web.server.test.HashMapSession;
 import org.eclipse.xtext.web.server.test.MockServiceContext;
 import org.eclipse.xtext.web.server.test.languages.StatemachineWebModule;
-import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.After;
 import org.junit.Before;
 
@@ -55,27 +49,21 @@ public abstract class AbstractWebServerTest {
       return new StatemachineStandaloneSetup() {
         @Override
         public Injector createInjector() {
-          final Provider<ExecutorService> _function = () -> {
-            ExecutorService _newCachedThreadPool = Executors.newCachedThreadPool();
-            final Procedure1<ExecutorService> _function_1 = (ExecutorService it) -> {
-              AbstractWebServerTest.this.executorServices.add(it);
-            };
-            return ObjectExtensions.<ExecutorService>operator_doubleArrow(_newCachedThreadPool, _function_1);
-          };
-          final StatemachineWebModule webModule = new StatemachineWebModule(_function);
+          final StatemachineIdeModule ideModule = new StatemachineIdeModule();
+          final StatemachineWebModule webModule = new StatemachineWebModule();
           webModule.setResourceBaseProvider(AbstractWebServerTest.this.resourceBaseProvider);
           Module _runtimeModule = AbstractWebServerTest.this.getRuntimeModule();
-          Modules.OverriddenModuleBuilder _override = Modules.override(_runtimeModule);
-          Module _with = _override.with(webModule);
-          return Guice.createInjector(_with);
+          Module _mixin = Modules2.mixin(_runtimeModule, ideModule, webModule);
+          return Guice.createInjector(_mixin);
         }
       }.createInjectorAndDoEMFRegistration();
     }
   };
   
-  private final List<ExecutorService> executorServices = CollectionLiterals.<ExecutorService>newArrayList();
-  
   private AbstractWebServerTest.TestResourceBaseProvider resourceBaseProvider;
+  
+  @Inject
+  private DisposableRegistry disposableRegistry;
   
   @Inject
   private XtextServiceDispatcher dispatcher;
@@ -95,11 +83,7 @@ public abstract class AbstractWebServerTest {
   
   @After
   public void teardown() {
-    final Consumer<ExecutorService> _function = (ExecutorService it) -> {
-      it.shutdown();
-    };
-    this.executorServices.forEach(_function);
-    this.executorServices.clear();
+    this.disposableRegistry.dispose();
     this.resourceBaseProvider.testFiles.clear();
     this.injectorProvider.restoreRegistry();
   }

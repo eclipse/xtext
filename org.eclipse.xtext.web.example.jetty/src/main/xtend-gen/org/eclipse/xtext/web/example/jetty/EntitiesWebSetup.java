@@ -10,12 +10,11 @@ package org.eclipse.xtext.web.example.jetty;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
-import com.google.inject.Provider;
-import com.google.inject.util.Modules;
-import java.util.concurrent.ExecutorService;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
+import org.eclipse.xtext.util.Modules2;
 import org.eclipse.xtext.web.example.entities.EntitiesRuntimeModule;
 import org.eclipse.xtext.web.example.entities.EntitiesStandaloneSetup;
+import org.eclipse.xtext.web.example.entities.ide.EntitiesIdeModule;
 import org.eclipse.xtext.web.example.jetty.EntitiesWebModule;
 import org.eclipse.xtext.web.server.persistence.IResourceBaseProvider;
 
@@ -25,22 +24,19 @@ import org.eclipse.xtext.web.server.persistence.IResourceBaseProvider;
 @FinalFieldsConstructor
 @SuppressWarnings("all")
 public class EntitiesWebSetup extends EntitiesStandaloneSetup {
-  private final Provider<ExecutorService> executorServiceProvider;
-  
   private final IResourceBaseProvider resourceBaseProvider;
   
   @Override
   public Injector createInjector() {
-    final EntitiesRuntimeModule runtimeModule = new EntitiesRuntimeModule();
-    final EntitiesWebModule webModule = new EntitiesWebModule(this.executorServiceProvider, this.resourceBaseProvider);
-    Modules.OverriddenModuleBuilder _override = Modules.override(runtimeModule);
-    Module _with = _override.with(webModule);
-    return Guice.createInjector(_with);
+    final EntitiesWebModule webModule = new EntitiesWebModule(this.resourceBaseProvider);
+    EntitiesRuntimeModule _entitiesRuntimeModule = new EntitiesRuntimeModule();
+    EntitiesIdeModule _entitiesIdeModule = new EntitiesIdeModule();
+    Module _mixin = Modules2.mixin(_entitiesRuntimeModule, _entitiesIdeModule, webModule);
+    return Guice.createInjector(_mixin);
   }
   
-  public EntitiesWebSetup(final Provider<ExecutorService> executorServiceProvider, final IResourceBaseProvider resourceBaseProvider) {
+  public EntitiesWebSetup(final IResourceBaseProvider resourceBaseProvider) {
     super();
-    this.executorServiceProvider = executorServiceProvider;
     this.resourceBaseProvider = resourceBaseProvider;
   }
 }
