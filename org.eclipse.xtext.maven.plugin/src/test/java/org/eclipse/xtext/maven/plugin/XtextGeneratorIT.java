@@ -1,5 +1,7 @@
 package org.eclipse.xtext.maven.plugin;
 
+import static org.junit.Assert.assertEquals;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -131,6 +133,9 @@ public class XtextGeneratorIT {
 			throw new IllegalArgumentException("You need to pass at least one goal to verify log");
 		}
 		Verifier verifier = newVerifier(pathToTestProject);
+		String localRepo = new File(System.getProperty("testProjectDir")+"/../../build/maven-repository/").getAbsoluteFile().getAbsolutePath();
+		verifier.setLocalRepo(localRepo);
+		
 		if(updateSnapshots) {
 			verifier.addCliOption("-U");
 		}
@@ -148,7 +153,8 @@ public class XtextGeneratorIT {
 
 	private Verifier newVerifier(String pathToTestProject) throws IOException, VerificationException {
 		File testDir = ResourceExtractor.simpleExtractResources(getClass(), pathToTestProject);
-		Verifier verifier = new Verifier(testDir.getAbsolutePath(), debug);
+		Verifier verifier = new Verifier(testDir.getAbsolutePath(), true);
+//		verifier.addCliOption("-o");
 		// verifier.setForkJvm(!debug);
 		String mvnOpts = CommandLineUtils.getSystemEnvVars().getProperty("MAVEN_OPTS");
 		String modMvnOpts = (mvnOpts != null ? mvnOpts + " " : "") + "-Xmx1g -XX:MaxPermSize=256m";
