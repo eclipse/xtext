@@ -9,18 +9,18 @@ package org.eclipse.xtext.web.server.model
 
 import com.google.inject.Inject
 import com.google.inject.Provider
-import com.google.inject.name.Named
 import java.util.concurrent.ExecutorService
+import java.util.concurrent.RejectedExecutionException
 import org.eclipse.xtend.lib.annotations.Delegate
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.EcoreUtil2
+import org.eclipse.xtext.ide.ExecutorServiceProvider
 import org.eclipse.xtext.service.OperationCanceledManager
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.util.concurrent.CancelableUnitOfWork
 import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.web.server.IServiceResult
 import org.eclipse.xtext.web.server.InvalidRequestException.InvalidDocumentStateException
-import java.util.concurrent.RejectedExecutionException
 
 /** 
  * Accessor class for documents. Use {@link #readOnly(CancelableUnitOfWork)} to
@@ -31,18 +31,22 @@ import java.util.concurrent.RejectedExecutionException
  * throw an exception if it does not match.
  */
 @Log class XtextWebDocumentAccess {
+	
+	static val DOCUMENT_LOCK_EXECUTOR = 'withDocumentLock'
 
 	@Inject PrecomputedServiceRegistry preComputedServiceRegistry
+	
+	@Inject OperationCanceledManager operationCanceledManager
+
 	/** 
 	 * Executor service for runnables that are run when the lock is already acquired 
 	 */
-	@Inject @Named('withDocumentLock') ExecutorService executorService1
+	ExecutorService executorService1
 	/** 
 	 * A second executor service for runnables that aquire the document lock themselves 
 	 */
-	@Inject ExecutorService executorService2
-	@Inject OperationCanceledManager operationCanceledManager
-
+	ExecutorService executorService2
+	
 	XtextWebDocument document
 
 	String requiredStateId
@@ -65,6 +69,12 @@ import java.util.concurrent.RejectedExecutionException
 			return docAccess
 		}
 
+	}
+	
+	@Inject
+	protected def void setExecutorServiceProvider(ExecutorServiceProvider executorServiceProvider) {
+		executorService1 = executorServiceProvider.get(DOCUMENT_LOCK_EXECUTOR)
+		executorService2 = executorServiceProvider.get
 	}
 
 	protected def void init(XtextWebDocument document, String requiredStateId, boolean skipAsyncWork) {

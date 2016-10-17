@@ -7,8 +7,6 @@
  */
 package org.eclipse.xtext.xbase.web;
 
-import com.google.inject.Provider;
-import java.util.concurrent.ExecutorService;
 import org.eclipse.xtext.web.server.DefaultWebModule;
 
 /**
@@ -16,11 +14,4 @@ import org.eclipse.xtext.web.server.DefaultWebModule;
  */
 @SuppressWarnings("all")
 public class DefaultXbaseWebModule extends DefaultWebModule {
-  public DefaultXbaseWebModule() {
-    super();
-  }
-  
-  public DefaultXbaseWebModule(final Provider<ExecutorService> executorServiceProvider) {
-    super(executorServiceProvider);
-  }
 }

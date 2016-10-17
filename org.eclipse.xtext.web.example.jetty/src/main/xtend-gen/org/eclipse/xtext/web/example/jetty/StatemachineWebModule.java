@@ -8,9 +8,8 @@
 package org.eclipse.xtext.web.example.jetty;
 
 import com.google.inject.Binder;
-import com.google.inject.Provider;
 import com.google.inject.binder.AnnotatedBindingBuilder;
-import java.util.concurrent.ExecutorService;
+import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.web.example.jetty.AbstractStatemachineWebModule;
 import org.eclipse.xtext.web.example.jetty.resource.StatemachineContentTypeProvider;
 import org.eclipse.xtext.web.example.jetty.resource.StatemachineResourceSetProvider;
@@ -21,16 +20,12 @@ import org.eclipse.xtext.web.server.persistence.IResourceBaseProvider;
 import org.eclipse.xtext.web.server.persistence.IServerResourceHandler;
 
 /**
- * Use this class to register components to be used within the web application.
+ * Use this class to register additional components to be used within the web application.
  */
+@FinalFieldsConstructor
 @SuppressWarnings("all")
 public class StatemachineWebModule extends AbstractStatemachineWebModule {
   private final IResourceBaseProvider resourceBaseProvider;
-  
-  public StatemachineWebModule(final Provider<ExecutorService> executorServiceProvider, final IResourceBaseProvider resourceBaseProvider) {
-    super(executorServiceProvider);
-    this.resourceBaseProvider = resourceBaseProvider;
-  }
   
   @Override
   public Class<? extends IContentTypeProvider> bindIContentTypeProvider() {
@@ -50,5 +45,10 @@ public class StatemachineWebModule extends AbstractStatemachineWebModule {
   
   public Class<? extends IServerResourceHandler> bindIServerResourceHandler() {
     return FileResourceHandler.class;
+  }
+  
+  public StatemachineWebModule(final IResourceBaseProvider resourceBaseProvider) {
+    super();
+    this.resourceBaseProvider = resourceBaseProvider;
   }
 }

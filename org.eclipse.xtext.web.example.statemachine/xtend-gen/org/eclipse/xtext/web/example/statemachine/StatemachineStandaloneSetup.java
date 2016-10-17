@@ -10,8 +10,7 @@ package org.eclipse.xtext.web.example.statemachine;
 import org.eclipse.xtext.web.example.statemachine.StatemachineStandaloneSetupGenerated;
 
 /**
- * Initialization support for running Xtext languages
- * without equinox extension registry
+ * Initialization support for running Xtext languages without Equinox extension registry.
  */
 @SuppressWarnings("all")
 public class StatemachineStandaloneSetup extends StatemachineStandaloneSetupGenerated {

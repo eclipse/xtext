@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.web.example.jetty;
 
-import com.google.inject.Provider;
-import java.util.concurrent.ExecutorService;
 import org.eclipse.xtext.web.server.DefaultWebModule;
 
 /**
@@ -17,12 +15,4 @@ import org.eclipse.xtext.web.server.DefaultWebModule;
 @SuppressWarnings("all")
 public abstract class AbstractStatemachineWebModule extends DefaultWebModule {
 
-	public AbstractStatemachineWebModule() {
-		super();
-	}
-
-	public AbstractStatemachineWebModule(Provider<ExecutorService> executorServiceProvider) {
-		super(executorServiceProvider);
-	}
-	
 }

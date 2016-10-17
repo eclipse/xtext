@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.web.example.statemachine.ide
 
-import com.google.inject.Provider
-import java.util.concurrent.ExecutorService
 import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalProvider
 import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator
 import org.eclipse.xtext.ide.labels.IImageDescriptionProvider
@@ -17,14 +15,6 @@ import org.eclipse.xtext.ide.labels.IImageDescriptionProvider
  * Use this class to register ide components.
  */
 class StatemachineIdeModule extends AbstractStatemachineIdeModule {
-
-	new() {
-		super()
-	}
-
-	new(Provider<ExecutorService> executorServiceProvider) {
-		super(executorServiceProvider)
-	}
 	
 	def Class<? extends IdeContentProposalProvider> bindIdeContentProposalProvider() {
 		return StatemachineWebContentProposalProvider

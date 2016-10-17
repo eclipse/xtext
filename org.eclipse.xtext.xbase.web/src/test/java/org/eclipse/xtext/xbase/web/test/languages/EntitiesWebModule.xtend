@@ -8,8 +8,6 @@
 package org.eclipse.xtext.xbase.web.test.languages
 
 import com.google.inject.Binder
-import com.google.inject.Provider
-import java.util.concurrent.ExecutorService
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.web.server.persistence.FileResourceHandler
 import org.eclipse.xtext.web.server.persistence.IResourceBaseProvider
@@ -20,10 +18,6 @@ import org.eclipse.xtext.xbase.web.DefaultXbaseWebModule
 class EntitiesWebModule extends DefaultXbaseWebModule {
 	
 	IResourceBaseProvider resourceBaseProvider
-	
-	new(Provider<ExecutorService> executorServiceProvider) {
-		super(executorServiceProvider)
-	}
 	
 	def Class<? extends IServerResourceHandler> bindIServerResourceHandler() {
 		FileResourceHandler

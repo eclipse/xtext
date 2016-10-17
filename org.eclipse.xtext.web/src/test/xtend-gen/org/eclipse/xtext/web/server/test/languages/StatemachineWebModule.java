@@ -8,9 +8,7 @@
 package org.eclipse.xtext.web.server.test.languages;
 
 import com.google.inject.Binder;
-import com.google.inject.Provider;
 import com.google.inject.binder.AnnotatedBindingBuilder;
-import java.util.concurrent.ExecutorService;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.web.server.DefaultWebModule;
 import org.eclipse.xtext.web.server.persistence.FileResourceHandler;
@@ -22,10 +20,6 @@ import org.eclipse.xtext.xbase.lib.Pure;
 @SuppressWarnings("all")
 public class StatemachineWebModule extends DefaultWebModule {
   private IResourceBaseProvider resourceBaseProvider;
-  
-  public StatemachineWebModule(final Provider<ExecutorService> executorServiceProvider) {
-    super(executorServiceProvider);
-  }
   
   public Class<? extends IServerResourceHandler> bindIServerResourceHandler() {
     return FileResourceHandler.class;

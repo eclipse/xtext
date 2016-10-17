@@ -10,8 +10,6 @@ package org.eclipse.xtext.web.example.jetty;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
-import com.google.inject.Provider;
-import java.util.concurrent.ExecutorService;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.util.Modules2;
 import org.eclipse.xtext.web.example.jetty.StatemachineWebModule;
@@ -26,22 +24,19 @@ import org.eclipse.xtext.web.server.persistence.IResourceBaseProvider;
 @FinalFieldsConstructor
 @SuppressWarnings("all")
 public class StatemachineWebSetup extends StatemachineStandaloneSetup {
-  private final Provider<ExecutorService> executorServiceProvider;
-  
   private final IResourceBaseProvider resourceBaseProvider;
   
   @Override
   public Injector createInjector() {
-    final StatemachineRuntimeModule runtimeModule = new StatemachineRuntimeModule();
-    final StatemachineIdeModule ideModule = new StatemachineIdeModule(this.executorServiceProvider);
-    final StatemachineWebModule webModule = new StatemachineWebModule(this.executorServiceProvider, this.resourceBaseProvider);
-    Module _mixin = Modules2.mixin(runtimeModule, ideModule, webModule);
+    final StatemachineWebModule webModule = new StatemachineWebModule(this.resourceBaseProvider);
+    StatemachineRuntimeModule _statemachineRuntimeModule = new StatemachineRuntimeModule();
+    StatemachineIdeModule _statemachineIdeModule = new StatemachineIdeModule();
+    Module _mixin = Modules2.mixin(_statemachineRuntimeModule, _statemachineIdeModule, webModule);
     return Guice.createInjector(_mixin);
   }
   
-  public StatemachineWebSetup(final Provider<ExecutorService> executorServiceProvider, final IResourceBaseProvider resourceBaseProvider) {
+  public StatemachineWebSetup(final IResourceBaseProvider resourceBaseProvider) {
     super();
-    this.executorServiceProvider = executorServiceProvider;
     this.resourceBaseProvider = resourceBaseProvider;
   }
 }

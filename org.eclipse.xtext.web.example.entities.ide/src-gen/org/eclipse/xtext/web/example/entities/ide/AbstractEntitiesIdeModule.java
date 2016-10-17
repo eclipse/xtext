@@ -8,9 +8,7 @@
 package org.eclipse.xtext.web.example.entities.ide;
 
 import com.google.inject.Binder;
-import com.google.inject.Provider;
 import com.google.inject.name.Names;
-import java.util.concurrent.ExecutorService;
 import org.eclipse.xtext.ide.LexerIdeBindings;
 import org.eclipse.xtext.ide.editor.contentassist.FQNPrefixMatcher;
 import org.eclipse.xtext.ide.editor.contentassist.IPrefixMatcher;
@@ -27,14 +25,6 @@ import org.eclipse.xtext.xbase.ide.DefaultXbaseIdeModule;
  */
 @SuppressWarnings("all")
 public abstract class AbstractEntitiesIdeModule extends DefaultXbaseIdeModule {
-
-	public AbstractEntitiesIdeModule() {
-		super();
-	}
-
-	public AbstractEntitiesIdeModule(Provider<ExecutorService> executorServiceProvider) {
-		super(executorServiceProvider);
-	}
 
 	// contributed by org.eclipse.xtext.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment2
 	public void configureContentAssistLexer(Binder binder) {

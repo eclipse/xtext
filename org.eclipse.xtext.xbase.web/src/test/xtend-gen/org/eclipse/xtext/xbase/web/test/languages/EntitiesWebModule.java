@@ -8,9 +8,7 @@
 package org.eclipse.xtext.xbase.web.test.languages;
 
 import com.google.inject.Binder;
-import com.google.inject.Provider;
 import com.google.inject.binder.AnnotatedBindingBuilder;
-import java.util.concurrent.ExecutorService;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.web.server.persistence.FileResourceHandler;
 import org.eclipse.xtext.web.server.persistence.IResourceBaseProvider;
@@ -22,10 +20,6 @@ import org.eclipse.xtext.xbase.web.DefaultXbaseWebModule;
 @SuppressWarnings("all")
 public class EntitiesWebModule extends DefaultXbaseWebModule {
   private IResourceBaseProvider resourceBaseProvider;
-  
-  public EntitiesWebModule(final Provider<ExecutorService> executorServiceProvider) {
-    super(executorServiceProvider);
-  }
   
   public Class<? extends IServerResourceHandler> bindIServerResourceHandler() {
     return FileResourceHandler.class;

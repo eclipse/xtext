@@ -10,8 +10,6 @@ package org.eclipse.xtext.web.example.jetty;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
-import com.google.inject.Provider;
-import java.util.concurrent.ExecutorService;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.util.Modules2;
 import org.eclipse.xtext.web.example.entities.EntitiesRuntimeModule;
@@ -26,22 +24,19 @@ import org.eclipse.xtext.web.server.persistence.IResourceBaseProvider;
 @FinalFieldsConstructor
 @SuppressWarnings("all")
 public class EntitiesWebSetup extends EntitiesStandaloneSetup {
-  private final Provider<ExecutorService> executorServiceProvider;
-  
   private final IResourceBaseProvider resourceBaseProvider;
   
   @Override
   public Injector createInjector() {
-    final EntitiesRuntimeModule runtimeModule = new EntitiesRuntimeModule();
-    final EntitiesIdeModule ideModule = new EntitiesIdeModule(this.executorServiceProvider);
-    final EntitiesWebModule webModule = new EntitiesWebModule(this.executorServiceProvider, this.resourceBaseProvider);
-    Module _mixin = Modules2.mixin(runtimeModule, ideModule, webModule);
+    final EntitiesWebModule webModule = new EntitiesWebModule(this.resourceBaseProvider);
+    EntitiesRuntimeModule _entitiesRuntimeModule = new EntitiesRuntimeModule();
+    EntitiesIdeModule _entitiesIdeModule = new EntitiesIdeModule();
+    Module _mixin = Modules2.mixin(_entitiesRuntimeModule, _entitiesIdeModule, webModule);
     return Guice.createInjector(_mixin);
   }
   
-  public EntitiesWebSetup(final Provider<ExecutorService> executorServiceProvider, final IResourceBaseProvider resourceBaseProvider) {
+  public EntitiesWebSetup(final IResourceBaseProvider resourceBaseProvider) {
     super();
-    this.executorServiceProvider = executorServiceProvider;
     this.resourceBaseProvider = resourceBaseProvider;
   }
 }
