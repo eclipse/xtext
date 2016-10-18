@@ -8,7 +8,7 @@ node {
 		def mvnHome = tool 'M3'
 		env.M2_HOME = "${mvnHome}"
 		sh "rm -rf build/maven-repository/"
-		sh "${mvnHome}/bin/mvn clean install --update-snapshots -PuseJenkinsSnapshots -Dmaven.repo.local=build/maven-repository/"
+		sh "${mvnHome}/bin/mvn clean deploy --update-snapshots -PuseJenkinsSnapshots -Dmaven.repo.local=local-maven-repository/"
 		archive 'build/maven-repository/**/*.*'
 				
 		slackSend "Build Succeeded - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
