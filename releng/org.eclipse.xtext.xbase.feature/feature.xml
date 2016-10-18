@@ -20,9 +20,9 @@ v1.0 which accompanies this distribution, and is available at
 http://www.eclipse.org/legal/epl-v10.html Description here.
    </copyright>
 
-   <includes
-         id="org.eclipse.xtext.xbase.lib"
-         version="0.0.0"/>
+   <requires>
+      <import feature="org.eclipse.xtext.xbase.lib" version="2.11.0" match="equivalent"/>
+   </requires>
 
    <plugin
          id="org.eclipse.xtext.xbase"
