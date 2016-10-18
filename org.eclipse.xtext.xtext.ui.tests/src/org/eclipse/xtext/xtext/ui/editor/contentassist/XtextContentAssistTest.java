@@ -193,7 +193,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
     @Test public void testCompleteAfterGrammarName_02() throws Exception {
     	newBuilder()
         .append("grammar org.foo.bar ")
-        .assertText("with", "Name", "enum", "terminal", "fragment", "hidden", "generate", "import");
+        .assertText("with", "Name", "enum", "terminal", "fragment", "hidden", "generate", "import", "@", "@Override");
     }
     
     @Test public void testCompleteAfterGenerateName_01() throws Exception {

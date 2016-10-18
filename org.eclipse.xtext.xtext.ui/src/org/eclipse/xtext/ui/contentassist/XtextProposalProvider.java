@@ -62,6 +62,7 @@ import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
+import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.ForwardingEObjectDescription;
@@ -179,6 +180,15 @@ public class XtextProposalProvider extends AbstractXtextProposalProvider {
 		if (keyword == grammarAccess.getGrammarAccess().getCommaKeyword_2_2_0()) {
 			// don't propose the comma after the used grammar
 			return;
+			
+		} else if (keyword == grammarAccess.getAnnotationAccess().getCommercialAtKeyword_0()) {
+			// don't propose the annotation's '@' within grammar ids
+			final Object ge = contentAssistContext.getCurrentNode().getGrammarElement();
+			if (ge == grammarAccess.getGrammarAccess().getNameGrammarIDParserRuleCall_1_0()
+					|| ge == grammarAccess.getGrammarAccess().getUsedGrammarsAssignment_2_1()
+					|| ge == grammarAccess.getGrammarAccess().getUsedGrammarsGrammarCrossReference_2_1_0()) {
+				return;
+			}
 		}
 		super.completeKeyword(keyword, contentAssistContext, acceptor);
 	}
@@ -336,7 +346,6 @@ public class XtextProposalProvider extends AbstractXtextProposalProvider {
 	@Override
 	public void complete_Annotation(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		createAnnotationProposals(acceptor, context, true);
-		super.complete_Annotation(model, ruleCall, context, acceptor);
 	}
 
 	@Override
@@ -346,6 +355,19 @@ public class XtextProposalProvider extends AbstractXtextProposalProvider {
 	}
 
 	protected void createAnnotationProposals(ICompletionProposalAcceptor acceptor, ContentAssistContext context, boolean withPrefix) {
+		final INode node = context.getCurrentNode();
+		if (node == null) {
+			return;
+		}
+		
+		final Object o = context.getCurrentNode().getGrammarElement();
+		if (o == grammarAccess.getGrammarAccess().getNameGrammarIDParserRuleCall_1_0()
+				|| o == grammarAccess.getGrammarAccess().getUsedGrammarsGrammarCrossReference_2_1_0()
+				|| o == grammarAccess.getGrammarAccess().getUsedGrammarsAssignment_2_1()) {
+			// don't propose annotations within grammarIds
+			return;
+		}
+		
 		for (String name : AnnotationNames.VALID_ANNOTATIONS_NAMES) {
 			final String proposal = withPrefix ? "@" + name : name;
 			acceptor.accept(createCompletionProposal(proposal, "@" + name, null, context));
