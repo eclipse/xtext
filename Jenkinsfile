@@ -9,7 +9,7 @@ node {
 		env.M2_HOME = "${mvnHome}"
 		sh "rm -rf build/maven-repository/"
 		sh "${mvnHome}/bin/mvn clean install --update-snapshots -PuseJenkinsSnapshots -Dmaven.repo.local=build/maven-repository/"
-		archive '**/target/**/*.jar'
+		archive 'build/maven-repository/**/*.*'
 				
 		slackSend "Build Succeeded - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
 		
