@@ -389,16 +389,14 @@
 		</profile>
 	</profiles>
 	<distributionManagement>
-		<snapshotRepository>
-			<id>ossrh</id>
-			<name>Sonatype Nexus Snapshots</name>
-			<url>${sonatypeOssDistMgmtSnapshotsUrl}</url>
-		</snapshotRepository>
 		<repository>
-			<id>ossrh</id>
-			<name>Nexus Release Repository</name>
-			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+			<id>local.release.repo</id>
+			<url>file:${basedir}/../build/maven-repository</url>
 		</repository>
+		<snapshotRepository>
+			<id>local.release.repo</id>
+			<url>file:${basedir}/../build/maven-repository</url>
+		</snapshotRepository>
 	</distributionManagement>
 	<url>https://www.eclipse.org/Xtext/</url>
 	<description>Xtext is a framework for development of programming languages and domain-specific languages. With Xtext you define your language using a powerful grammar language. As a result you get a full infrastructure, including parser, linker, typechecker, compiler as well as editing support for Eclipse, IntelliJ IDEA and your favorite web browser. 
