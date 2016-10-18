@@ -3,6 +3,10 @@ node {
 	try {
 		stage 'Checkout'
 		checkout scm
+		
+		dir('build') {
+    		deleteDir()
+		}
 			
 		stage 'Gradle Build'
 		sh "./gradlew -PuseJenkinsSnapshots=true cleanLocalMavenRepo clean build createLocalMavenRepo --refresh-dependencies --continue"
