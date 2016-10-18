@@ -1,6 +1,7 @@
 def baseVersion = project.version
 if (baseVersion.endsWith('-SNAPSHOT'))
 	baseVersion = baseVersion.substring(0, baseVersion.length() - 9)
+def qualifiedVersion = baseVersion + '.v' + buildTime
 
 //------------------------------------------------------
 // Copy the existing manifest and insert the qualifier
@@ -12,7 +13,7 @@ task genManifest(type: Copy) {
     into "$buildDir/tmp/jar/"
     doLast {
     	def f = new File(manifestFile)
-    	def modifiedText = f.text.replace(baseVersion + '.qualifier', baseVersion + '.' + buildTime)
+    	def modifiedText = f.text.replace(baseVersion + '.qualifier', qualifiedVersion)
     	def writer = new PrintWriter(f)
     	writer.print(modifiedText)
     	writer.close()
@@ -39,10 +40,10 @@ task genSourcesManifest << {
 	writer.println('Manifest-Version: 1.0')
 	writer.println('Bundle-ManifestVersion: 2')
 	writer.println('Bundle-SymbolicName: ' + project.name + '.source')
-	writer.println('Bundle-Version: ' + baseVersion + '.' + buildTime)
+	writer.println('Bundle-Version: ' + qualifiedVersion)
 	writer.println('Bundle-Name: Sources')
 	writer.println('Bundle-Vendor: Eclipse Xtext')
-	writer.println('Eclipse-SourceBundle: ' + project.name + ';version="' + baseVersion + '.' + buildTime + '"')
+	writer.println('Eclipse-SourceBundle: ' + project.name + ';version="' + qualifiedVersion + '"')
 	writer.close()
 }
 genSourcesManifest.outputs.file(sourcesManifestFile)
