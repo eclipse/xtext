@@ -11,19 +11,4 @@
 	<groupId>org.eclipse.xtext.feature</groupId> <!-- TODO: hack! -->
 	<artifactId>org.eclipse.xtext.runtime</artifactId>
 
-	<!-- <build>
-		<plugins>
-			<plugin>
-				<groupId>org.eclipse.tycho</groupId>
-				<artifactId>tycho-source-plugin</artifactId>
-				<version>${tycho-version}</version>
-				<executions>
-					<execution>
-						<phase>pre-integration-test</phase>
-					</execution>
-				</executions>
-
-			</plugin>
-		</plugins>
-	</build> -->
 </project>

@@ -11,32 +11,4 @@
 	<groupId>org.eclipse.xtext.feature</groupId> <!-- TODO: hack! -->
 	<artifactId>org.eclipse.xtext.ui</artifactId>
 	
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.eclipse.tycho.extras</groupId>
-				<artifactId>tycho-source-feature-plugin</artifactId>
-				<version>${tycho-version}</version>
-				<executions>
-					<execution>
-						<id>source-feature</id>
-						<phase>package</phase>
-						<goals>
-							<goal>source-feature</goal>
-						</goals>
-						<configuration>
-							<excludes>
-								<plugin id="org.antlr.runtime" />
-								<plugin id="org.apache.log4j" />
-								<plugin id="org.apache.commons.lang" />
-								<plugin id="org.eclipse.xtext.doc" />
-								<feature id="org.eclipse.xtext.docs" />
-								<feature id="org.eclipse.xtext.runtime" />
-							</excludes>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-	</build>
 </project>
