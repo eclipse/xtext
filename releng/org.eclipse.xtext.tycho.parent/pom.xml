@@ -65,6 +65,17 @@
 			<url>http://services.typefox.io/open-source/jenkins//job/xtext-extras/job/master/lastStableBuild/artifact/build/maven-repository/</url>
 		</repository>
 	</repositories>
+	
+	<distributionManagement>
+		<repository>
+			<id>local.release.repo</id>
+			<url>file:${basedir}/../../build/maven-repository</url>
+		</repository>
+		<snapshotRepository>
+			<id>local.release.repo</id>
+			<url>file:${basedir}/../../build/maven-repository</url>
+		</snapshotRepository>
+	</distributionManagement>
 
 	<dependencies>
 		<dependency>
