@@ -21,11 +21,8 @@ v1.0 which accompanies this distribution, and is available at
 http://www.eclipse.org/legal/epl-v10.html Description here.
    </copyright>
 
-   <includes
-         id="org.eclipse.xtext.gwt"
-         version="0.0.0"/>
-
    <requires>
+      <import feature="org.eclipse.xtext.gwt" version="2.11.0" match="equivalent"/>
       <import plugin="org.eclipse.xtend.lib" version="2.11.0" match="equivalent"/>
    </requires>
 
