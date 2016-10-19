@@ -14,3 +14,6 @@ sourceSets {
 	mwe2.java.srcDir 'generator'
 	mwe2.java.srcDir 'generator-xtend-gen'
 }
+
+// https://github.com/eclipse/xtext-xtend/issues/57
+javadocJar.enabled = false
