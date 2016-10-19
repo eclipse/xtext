@@ -15,8 +15,6 @@ sourceSets {
 	mwe2.java.srcDir 'generator-xtend-gen'
 }
 
-// https://github.com/eclipse/xtext-xtend/issues/57
-tasks.withType(Javadoc) {
-	enabled = false
+artifacts {
+	archives javadocJar
 }
-javadocJar.enabled = false

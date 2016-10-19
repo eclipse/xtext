@@ -17,7 +17,7 @@ node {
 		def mvnHome = tool 'M3'
 		env.M2_HOME = "${mvnHome}"
 		wrap([$class:'Xvnc', useXauthority: true]) {
-			sh "${mvnHome}/bin/mvn --batch-mode --update-snapshots -fae -Dmaven.repo.local=local-maven-repository/ clean deploy"
+			sh "${mvnHome}/bin/mvn --batch-mode --update-snapshots -fae -Dmaven.repo.local=local-maven-repository/ clean install"
 		}
 		archive 'build/**/*.*'
 				
