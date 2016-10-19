@@ -15,13 +15,7 @@
 	<version>2.11.0-SNAPSHOT</version>
 
 	<modules>
-		<module>releng/org.eclipse.xtext.target</module>
-		<module>releng/org.eclipse.xtext.tycho.parent</module>
-		<module>releng/org.eclipse.xtext.tycho.plugin.parent</module>
-		<module>releng/org.eclipse.xtext.tycho.feature.parent</module>
-		<module>releng/org.eclipse.xtext.tycho.tests.parent</module>
-		<module>releng/org.eclipse.xtext.p2-repository</module>
-
+		<module>releng</module>
 		<module>org.eclipse.xtext.logging</module>
 		<module>org.eclipse.xtext.activities</module>
 		<module>org.eclipse.xtext.builder</module>
@@ -55,17 +49,6 @@
 		<module>org.eclipse.xtext.xbase.ui.tests</module>
 		<module>org.eclipse.xtext.xtext.ui.graph.tests</module>
 		<module>org.eclipse.xtext.xtext.ui.tests</module>
-		<module>releng/org.eclipse.xtext.sdk.feature</module>
-		<module>releng/org.eclipse.xtext.gwt.feature</module>
-		<module>releng/org.eclipse.xtext.docs.feature</module>
-		<module>releng/org.eclipse.xtext.examples.feature</module>
-		<module>releng/org.eclipse.xtext.license.feature</module>
-		<module>releng/org.eclipse.xtext.redist.feature</module>
-		<module>releng/org.eclipse.xtext.runtime.feature</module>
-		<module>releng/org.eclipse.xtext.ui.feature</module>
-		<module>releng/org.eclipse.xtext.xbase.feature</module>
-		<module>releng/org.eclipse.xtext.xbase.lib.feature</module>
-		<module>releng/org.eclipse.xtext.xtext.ui.feature</module>
 		<!-- <module>org.eclipse.xtext.build.feature</module> -->
 	</modules>
 

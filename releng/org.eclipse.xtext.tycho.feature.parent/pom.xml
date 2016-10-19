@@ -10,7 +10,7 @@
 	<artifactId>org.eclipse.xtext.tycho.feature.parent</artifactId>
 	<packaging>pom</packaging>
 
-	<build>
+	<!-- <build>
 		<plugins>
 			<plugin>
 				<groupId>org.eclipse.tycho.extras</groupId>
@@ -36,5 +36,5 @@
 				</executions>
 			</plugin>
 		</plugins>
-	</build>
+	</build> -->
 </project>
