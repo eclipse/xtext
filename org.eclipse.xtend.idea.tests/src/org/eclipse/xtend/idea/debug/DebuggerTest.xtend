@@ -29,7 +29,8 @@ import org.eclipse.xtext.util.internal.Log
 		LightToolingTest.addFacetToModule(module, XtendLanguage.INSTANCE.ID)
 	}
 	
-	def void testSimpleDebug() {
+	// TODO https://github.com/eclipse/xtext-xtend/issues/11
+	def void ignoreSimpleDebug() {
 		val file = addFile("MyClass.xtend" -> '''
 				class MyClass {
 					def static void main(String[] args) {
