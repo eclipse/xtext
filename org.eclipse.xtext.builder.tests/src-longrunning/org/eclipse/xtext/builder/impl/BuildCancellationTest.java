@@ -24,6 +24,7 @@ import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.util.StringInputStream;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.osgi.framework.Version;
 
@@ -72,7 +73,7 @@ public class BuildCancellationTest extends AbstractParticipatingBuilderTest {
 	/**
 	 * @see https://bugs.eclipse.org/bugs/show_bug.cgi?id=455022  
 	 */
-	@Test 
+	@Test @Ignore
 	public void testInterruptionTriggersIncrementalBuild() throws Exception {
 		IJavaProject project = createJavaProject("foo");
 		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
