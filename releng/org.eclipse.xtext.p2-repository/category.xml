@@ -9,9 +9,6 @@
    <feature url="features/org.eclipse.xtext.gwt_2.11.0.qualifier.jar" id="org.eclipse.xtext.gwt" version="2.11.0.qualifier">
       <category name="Xtext"/>
    </feature>
-   <feature url="features/org.eclipse.xtext.license_2.6.0.qualifier.jar" id="org.eclipse.xtext.license" version="2.6.0.qualifier">
-      <category name="Xtext"/>
-   </feature>
    <feature url="features/org.eclipse.xtext.redist_2.11.0.qualifier.jar" id="org.eclipse.xtext.redist" version="2.11.0.qualifier">
       <category name="Xtext"/>
    </feature>
