@@ -18,9 +18,6 @@
    <feature url="features/org.eclipse.xtext.runtime_2.11.0.qualifier.jar" id="org.eclipse.xtext.runtime" version="2.11.0.qualifier">
       <category name="Xtext"/>
    </feature>
-   <feature url="features/org.eclipse.xtext.sdk_2.11.0.qualifier.jar" id="org.eclipse.xtext.sdk" version="2.11.0.qualifier">
-      <category name="Xtext"/>
-   </feature>
    <feature url="features/org.eclipse.xtext.ui_2.11.0.qualifier.jar" id="org.eclipse.xtext.ui" version="2.11.0.qualifier">
       <category name="Xtext"/>
    </feature>
@@ -33,5 +30,53 @@
    <feature url="features/org.eclipse.xtext.xtext.ui_2.11.0.qualifier.jar" id="org.eclipse.xtext.xtext.ui" version="2.11.0.qualifier">
       <category name="Xtext"/>
    </feature>
+   <bundle id="org.eclipse.xtext.testing" version="2.11.0.qualifier">
+      <category name="Xtext"/>
+   </bundle>
+   <bundle id="org.eclipse.xtext.testing.source" version="2.11.0.qualifier">
+      <category name="Xtext"/>
+   </bundle>
+   <bundle id="org.eclipse.xtext.junit4" version="2.11.0.qualifier">
+      <category name="Xtext"/>
+   </bundle>
+   <bundle id="org.eclipse.xtext.junit4.source" version="2.11.0.qualifier">
+      <category name="Xtext"/>
+   </bundle>
+   <bundle id="org.eclipse.xtext.xbase.junit" version="2.11.0.qualifier">
+      <category name="Xtext"/>
+   </bundle>
+   <bundle id="org.eclipse.xtext.xbase.junit.source" version="2.11.0.qualifier">
+      <category name="Xtext"/>
+   </bundle>
+   <bundle id="org.eclipse.xtext.xbase.testing" version="2.11.0.qualifier">
+      <category name="Xtext"/>
+   </bundle>
+   <bundle id="org.eclipse.xtext.xbase.testing.source" version="2.11.0.qualifier">
+      <category name="Xtext"/>
+   </bundle>
+   <bundle id="org.eclipse.xtext.purexbase" version="2.11.0.qualifier">
+      <category name="Xtext"/>
+   </bundle>
+   <bundle id="org.eclipse.xtext.purexbase.source" version="2.11.0.qualifier">
+      <category name="Xtext"/>
+   </bundle>
+   <bundle id="org.eclipse.xtext.purexbase.ui" version="2.11.0.qualifier">
+      <category name="Xtext"/>
+   </bundle>
+   <bundle id="org.eclipse.xtext.purexbase.ui.source" version="2.11.0.qualifier">
+      <category name="Xtext"/>
+   </bundle>
+   <bundle id="org.eclipse.xtext.m2e" version="2.11.0.qualifier">
+      <category name="Xtext"/>
+   </bundle>
+   <bundle id="org.eclipse.xtext.m2e.source" version="2.11.0.qualifier">
+      <category name="Xtext"/>
+   </bundle>
+   <bundle id="org.eclipse.xtext.idea.generator" version="2.11.0.qualifier">
+      <category name="Xtext"/>
+   </bundle>
+   <bundle id="org.eclipse.xtext.idea.generator.source" version="2.11.0.qualifier">
+      <category name="Xtext"/>
+   </bundle>
    <category-def name="Xtext" label="Xtext"/>
 </site>

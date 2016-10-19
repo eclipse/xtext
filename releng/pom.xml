@@ -21,7 +21,6 @@
 		<module>org.eclipse.xtext.tycho.feature.parent</module>
 		<module>org.eclipse.xtext.tycho.tests.parent</module>
 		<module>org.eclipse.xtext.p2-repository</module>
-		<module>org.eclipse.xtext.sdk.feature</module>
 		<module>org.eclipse.xtext.gwt.feature</module>
 		<module>org.eclipse.xtext.docs.feature</module>
 		<module>org.eclipse.xtext.examples.feature</module>
