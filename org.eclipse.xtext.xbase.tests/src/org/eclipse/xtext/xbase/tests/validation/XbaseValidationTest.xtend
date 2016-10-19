@@ -1246,6 +1246,105 @@ class XbaseValidationTest extends AbstractXbaseTestCase {
 			}
 		'''.expression.assertNoErrors
 	}
+	
+	@Test def void testRangeLiteralInForLoopBug440006_01() {
+		'''
+			for (int i : #[1..2]) {
+			}
+		'''.expression.assertError(XbasePackage.Literals.XBINARY_OPERATION, IssueCodes.INCOMPATIBLE_TYPES)
+	}
+
+	@Test def void testRangeLiteralInForLoopBug440006_02() {
+		'''
+			for (Integer i : #[1..2]) {
+			}
+		'''.expression.assertError(XbasePackage.Literals.XBINARY_OPERATION, IssueCodes.INCOMPATIBLE_TYPES)
+	}
+
+	@Test def void testRangeLiteralInForLoopBug440006_03() {
+		'''
+			for (Number i : #[1..2]) {
+			}
+		'''.expression.assertError(XbasePackage.Literals.XBINARY_OPERATION, IssueCodes.INCOMPATIBLE_TYPES)
+	}
+
+	@Test def void testRangeLiteralInForLoopBug440006_04() {
+		'''
+			for (i : #[1..2]) {
+			}
+		'''.expression.assertNoErrors
+	}
+
+	@Test def void testRangeLiteralInForLoopBug440006_05() {
+		'''
+			for (IntegerRange i : #[1..2]) {
+			}
+		'''.expression.assertNoErrors
+	}
+
+	@Test def void testRangeLiteralInForLoopBug440006_06() {
+		'''
+			for (Iterable<Integer> i : #[1..2]) {
+			}
+		'''.expression.assertNoErrors
+	}
+
+	@Test def void testRangeLiteralInForLoopBug440006_07() {
+		'''
+			for (int i : #[1..2].flatten) {
+			}
+		'''.expression.assertNoErrors
+	}
+
+	@Test def void testRangeLiteralInForLoopBug440006_01b() {
+		'''
+			for (int i : #{1..2}) {
+			}
+		'''.expression.assertError(XbasePackage.Literals.XSET_LITERAL, IssueCodes.INCOMPATIBLE_TYPES)
+	}
+
+	@Test def void testRangeLiteralInForLoopBug440006_02b() {
+		'''
+			for (Integer i : #{1..2}) {
+			}
+		'''.expression.assertError(XbasePackage.Literals.XSET_LITERAL, IssueCodes.INCOMPATIBLE_TYPES)
+	}
+
+
+	@Test def void testRangeLiteralInForLoopBug440006_03b() {
+		'''
+			for (Number i : #{1..2}) {
+			}
+		'''.expression.assertError(XbasePackage.Literals.XSET_LITERAL, IssueCodes.INCOMPATIBLE_TYPES)
+	}
+
+	@Test def void testRangeLiteralInForLoopBug440006_04b() {
+		'''
+			for (i : #{1..2}) {
+			}
+		'''.expression.assertNoErrors
+	}
+
+	@Test def void testRangeLiteralInForLoopBug440006_05b() {
+		'''
+			for (IntegerRange i : #{1..2}) {
+			}
+		'''.expression.assertNoErrors
+	}
+
+	@Test def void testRangeLiteralInForLoopBug440006_06b() {
+		'''
+			for (Iterable<Integer> i : #{1..2}) {
+			}
+		'''.expression.assertNoErrors
+	}
+
+	@Test def void testRangeLiteralInForLoopBug440006_07b() {
+		'''
+			for (int i : #{1..2}.flatten) {
+			}
+		'''.expression.assertNoErrors
+	}
 
 	def private assertNestedReturn(CharSequence input, EClass objectType) {
 		input.expression.assertError(

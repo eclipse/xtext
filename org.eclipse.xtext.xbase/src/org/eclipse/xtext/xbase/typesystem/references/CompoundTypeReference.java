@@ -113,6 +113,17 @@ public class CompoundTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
+	public LightweightTypeReference getComponentType() {
+		if (components != null) {
+			for(LightweightTypeReference component: components) {
+				if (component.isArray())
+					return component.getComponentType();
+			}
+		}
+		return super.getComponentType();
+	}
+	
+	@Override
 	public boolean isAny() {
 		for(LightweightTypeReference component: expose(components)) {
 			if (component.isAny())

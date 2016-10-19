@@ -2874,6 +2874,216 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
     }
   }
   
+  @Test
+  public void testRangeLiteralInForLoopBug440006_01() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("for (int i : #[1..2]) {");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XExpression _expression = this.expression(_builder);
+      this._validationTestHelper.assertError(_expression, XbasePackage.Literals.XBINARY_OPERATION, IssueCodes.INCOMPATIBLE_TYPES);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testRangeLiteralInForLoopBug440006_02() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("for (Integer i : #[1..2]) {");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XExpression _expression = this.expression(_builder);
+      this._validationTestHelper.assertError(_expression, XbasePackage.Literals.XBINARY_OPERATION, IssueCodes.INCOMPATIBLE_TYPES);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testRangeLiteralInForLoopBug440006_03() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("for (Number i : #[1..2]) {");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XExpression _expression = this.expression(_builder);
+      this._validationTestHelper.assertError(_expression, XbasePackage.Literals.XBINARY_OPERATION, IssueCodes.INCOMPATIBLE_TYPES);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testRangeLiteralInForLoopBug440006_04() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("for (i : #[1..2]) {");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XExpression _expression = this.expression(_builder);
+      this._validationTestHelper.assertNoErrors(_expression);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testRangeLiteralInForLoopBug440006_05() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("for (IntegerRange i : #[1..2]) {");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XExpression _expression = this.expression(_builder);
+      this._validationTestHelper.assertNoErrors(_expression);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testRangeLiteralInForLoopBug440006_06() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("for (Iterable<Integer> i : #[1..2]) {");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XExpression _expression = this.expression(_builder);
+      this._validationTestHelper.assertNoErrors(_expression);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testRangeLiteralInForLoopBug440006_07() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("for (int i : #[1..2].flatten) {");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XExpression _expression = this.expression(_builder);
+      this._validationTestHelper.assertNoErrors(_expression);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testRangeLiteralInForLoopBug440006_01b() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("for (int i : #{1..2}) {");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XExpression _expression = this.expression(_builder);
+      this._validationTestHelper.assertError(_expression, XbasePackage.Literals.XSET_LITERAL, IssueCodes.INCOMPATIBLE_TYPES);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testRangeLiteralInForLoopBug440006_02b() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("for (Integer i : #{1..2}) {");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XExpression _expression = this.expression(_builder);
+      this._validationTestHelper.assertError(_expression, XbasePackage.Literals.XSET_LITERAL, IssueCodes.INCOMPATIBLE_TYPES);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testRangeLiteralInForLoopBug440006_03b() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("for (Number i : #{1..2}) {");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XExpression _expression = this.expression(_builder);
+      this._validationTestHelper.assertError(_expression, XbasePackage.Literals.XSET_LITERAL, IssueCodes.INCOMPATIBLE_TYPES);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testRangeLiteralInForLoopBug440006_04b() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("for (i : #{1..2}) {");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XExpression _expression = this.expression(_builder);
+      this._validationTestHelper.assertNoErrors(_expression);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testRangeLiteralInForLoopBug440006_05b() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("for (IntegerRange i : #{1..2}) {");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XExpression _expression = this.expression(_builder);
+      this._validationTestHelper.assertNoErrors(_expression);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testRangeLiteralInForLoopBug440006_06b() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("for (Iterable<Integer> i : #{1..2}) {");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XExpression _expression = this.expression(_builder);
+      this._validationTestHelper.assertNoErrors(_expression);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testRangeLiteralInForLoopBug440006_07b() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("for (int i : #{1..2}.flatten) {");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XExpression _expression = this.expression(_builder);
+      this._validationTestHelper.assertNoErrors(_expression);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
   private void assertNestedReturn(final CharSequence input, final EClass objectType) {
     try {
       XExpression _expression = this.expression(input);

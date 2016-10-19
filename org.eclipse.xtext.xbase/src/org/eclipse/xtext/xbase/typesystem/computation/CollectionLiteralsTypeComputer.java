@@ -176,7 +176,7 @@ public class CollectionLiteralsTypeComputer extends AbstractTypeComputer {
 
 	protected void computeArrayLiteralType(XListLiteral literal, LightweightTypeReference expectedArrayType, ITypeExpectation expectation,
 			ITypeComputationState state) {
-		LightweightTypeReference elementTypeExpectation = expectedArrayType.getComponentType();
+		LightweightTypeReference elementTypeExpectation = getElementOrComponentType(expectedArrayType, state);
 		int allFlags = 0;
 		for(XExpression element: literal.getElements()) {
 			ITypeComputationResult elementTypeResult = computeTypes(element, elementTypeExpectation, state);
