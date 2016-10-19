@@ -1209,7 +1209,12 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 	
 	@Test public void testRichStringForLoop() throws Exception {
 		assertNoConformanceError("'''«FOR i: 1..10»«ENDFOR»'''");
+		assertNoConformanceError("'''«FOR i: #[1..10]»«ENDFOR»'''");
+		assertNoConformanceError("'''«FOR i: #{1..10}»«ENDFOR»'''");
+		assertNoConformanceError("'''«FOR IntegerRange i: #[1..10]»«ENDFOR»'''");
+		assertNoConformanceError("'''«FOR IntegerRange  i: #{1..10}»«ENDFOR»'''");
 		assertNoConformanceError("'''«FOR i: 1..10 BEFORE 'a' SEPARATOR 1 AFTER true»«ENDFOR»'''");
+		assertConformanceError("'''«FOR int i: #[1..10]»«ENDFOR»'''", XbasePackage.Literals.XBINARY_OPERATION, "Type mismatch: cannot convert from IntegerRange to int");
 		assertConformanceError(
 				"'''«FOR i: 1..10 BEFORE while(true) null SEPARATOR 'b' AFTER 'c'»«ENDFOR»'''", 
 				XWHILE_EXPRESSION, "Type mismatch: type void is not applicable at this location");

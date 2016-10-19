@@ -69,4 +69,22 @@ public class RichStringCompilerTest extends AbstractRichStringEvaluationTest {
 				"        «ENDFOR»\n" + 
 				"'''");
 	}
+	
+	@Test public void testBug440006() throws Exception {
+		assertOutput("1,2\n",
+				"''' \n" + 
+						"        «FOR i:#[1..2]»\n" + 
+						"            «FOR j:i SEPARATOR ','»«j»«ENDFOR»\n" + 
+						"        «ENDFOR»\n" + 
+				"'''");
+	}
+	
+	@Test public void testBug440006b() throws Exception {
+		assertOutput("1,2\n",
+				"''' \n" + 
+						"        «FOR i:#{1..2}»\n" + 
+						"            «FOR j:i SEPARATOR ','»«j»«ENDFOR»\n" + 
+						"        «ENDFOR»\n" + 
+				"'''");
+	}
 }
