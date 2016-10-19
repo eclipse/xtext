@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: org.eclipse.xtext.example.arithmetics
-Bundle-Vendor: itemis AG
+Bundle-Name: Xtext Arithmetics Example - Runtime
+Bundle-Vendor: Eclipse Xtext
 Bundle-Version: 2.11.0.qualifier
 Bundle-SymbolicName: org.eclipse.xtext.example.arithmetics; singleton:=true
 Bundle-ActivationPolicy: lazy
