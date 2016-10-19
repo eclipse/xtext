@@ -215,7 +215,7 @@ public class XtendCompilerMojoIT {
 	private Verifier newVerifier(String pathToTestProject) throws IOException, VerificationException {
 		File testDir = ResourceExtractor.simpleExtractResources(getClass(), pathToTestProject);
 		Verifier verifier = new Verifier(testDir.getAbsolutePath());
-		String localRepo = new File("../build/maven-repository/").getAbsolutePath();
+		String localRepo = new File("../local-maven-repository/").getAbsolutePath();
 		verifier.setLocalRepo(localRepo);
 		verifier.setDebug(true);
 		// verifier.setDebugJvm(true);
