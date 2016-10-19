@@ -29,7 +29,7 @@
 
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.xtext.redist.feature.group" version="0.0.0"/>
-<unit id="org.eclipse.xtext.runtime.group" version="0.0.0"/>
+<unit id="org.eclipse.xtext.runtime.feature.group" version="0.0.0"/>
 <unit id="org.eclipse.xtext.gwt.feature.group" version="0.0.0"/>
 <unit id="org.eclipse.xtext.ui.feature.group" version="0.0.0"/>
 <unit id="org.eclipse.xtext.xbase.feature.group" version="0.0.0"/>
