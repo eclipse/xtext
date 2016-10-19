@@ -93,14 +93,7 @@ public class ElementOrComponentTypeComputer extends TypeReferenceVisitorWithResu
 	
 	@Override
 	protected LightweightTypeReference doVisitCompoundTypeReference(CompoundTypeReference reference) {
-		if (reference.isArray()) {
-		    for (LightweightTypeReference componentType : reference.getMultiTypeComponents()) {
-		        if (componentType.isArray()) {
-		            return componentType.getComponentType();
-		        }
-		    }
-		}
-		return super.doVisitCompoundTypeReference(reference);
+		return reference.getComponentType();
 	}
 
 	protected ITypeReferenceOwner getOwner() {
