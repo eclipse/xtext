@@ -20,12 +20,15 @@ v1.0 which accompanies this distribution, and is available at
 http://www.eclipse.org/legal/epl-v10.html Description here.
    </copyright>
 
+   <includes
+         id="org.eclipse.xtext.xbase"
+         version="0.0.0"/>
+
    <requires>
       <import plugin="com.google.guava" version="14.0.0" match="greaterOrEqual"/>
       <import plugin="com.google.inject" version="3.0.0" match="greaterOrEqual"/>
       <import plugin="org.objectweb.asm" version="5.0.1" match="compatible"/>
       <import plugin="javax.inject" version="1.0.0" match="greaterOrEqual"/>
-      <import feature="org.eclipse.xtext.xbase"  version="2.11.0" match="equivalent"/>
    </requires>
 
    <plugin
@@ -34,7 +37,7 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-         
+
    <plugin
          id="org.eclipse.xtext.source"
          download-size="0"
@@ -48,7 +51,7 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-         
+
    <plugin
          id="org.eclipse.xtext.util.source"
          download-size="0"
@@ -62,13 +65,6 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-         
-   <!-- <plugin
-         id="org.antlr.runtime.source"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/> -->
 
    <plugin
          id="org.apache.commons.lang"
@@ -76,13 +72,6 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-         
-   <!-- <plugin
-         id="org.apache.commons.lang.source"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/> -->
 
    <plugin
          id="org.apache.log4j"
@@ -90,13 +79,6 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-         
-   <!-- <plugin
-         id="org.apache.log4j.source"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/> -->
 
    <plugin
          id="org.eclipse.xtext.logging"
@@ -105,7 +87,7 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
          version="0.0.0"
          fragment="true"
          unpack="false"/>
-         
+
    <plugin
          id="org.eclipse.xtext.logging.source"
          download-size="0"
@@ -120,7 +102,7 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-         
+
    <plugin
          id="org.eclipse.xtext.common.types.source"
          download-size="0"
@@ -134,7 +116,7 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-         
+
    <plugin
          id="org.eclipse.xtext.builder.source"
          download-size="0"
@@ -148,7 +130,7 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-         
+
    <plugin
          id="org.eclipse.xtext.ecore.source"
          download-size="0"
@@ -162,7 +144,7 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-         
+
    <plugin
          id="org.eclipse.xtext.smap.source"
          download-size="0"
@@ -190,7 +172,7 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-         
+
    <plugin
          id="org.eclipse.xtext.common.types.ui.source"
          download-size="0"
@@ -204,7 +186,7 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-         
+
    <plugin
          id="org.eclipse.xtext.common.types.shared.source"
          download-size="0"
@@ -219,7 +201,7 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
          version="0.0.0"
          fragment="true"
          unpack="false"/>
-         
+
    <plugin
          id="org.eclipse.xtext.common.types.shared.jdt38.source"
          download-size="0"
@@ -234,7 +216,7 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-         
+
    <plugin
          id="org.eclipse.xtext.ui.shared.source"
          download-size="0"
@@ -248,7 +230,7 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-         
+
    <plugin
          id="org.eclipse.xtext.ui.codetemplates.source"
          download-size="0"
@@ -262,7 +244,7 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-         
+
    <plugin
          id="org.eclipse.xtext.ui.codetemplates.ui.source"
          download-size="0"
@@ -276,7 +258,7 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-         
+
    <plugin
          id="org.eclipse.xtext.common.types.edit.source"
          download-size="0"
@@ -290,7 +272,7 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-         
+
    <plugin
          id="org.eclipse.xtend.lib.source"
          download-size="0"
@@ -304,7 +286,7 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-         
+
    <plugin
          id="org.eclipse.xtext.ide.source"
          download-size="0"
