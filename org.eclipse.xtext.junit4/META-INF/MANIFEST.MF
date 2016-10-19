@@ -40,4 +40,4 @@ Require-Bundle: org.eclipse.xtext,
  org.eclipse.xtend.lib;resolution:=optional,
  org.eclipse.xtext.builder.standalone,
  org.eclipse.emf.codegen.ecore;bundle-version="2.10.2";resolution:=optional,
- org.eclipse.pde.core
+ org.eclipse.pde.core;resolution:=optional
