@@ -364,7 +364,7 @@ public class DebuggerTest extends AbstractDebuggerTestCase {
     }
   }
   
-  public void testLambda() {
+  public void ignoreLambda() {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("class MyClass {");

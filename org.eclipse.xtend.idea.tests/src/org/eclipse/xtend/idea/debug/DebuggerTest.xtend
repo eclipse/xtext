@@ -237,7 +237,8 @@ import org.eclipse.xtext.util.internal.Log
 		stepOver(3) // back to main
 	}
 	
-	def void testLambda() {
+	// TODO https://github.com/eclipse/xtext-xtend/issues/11
+	def void ignoreLambda() {
 		val file = addFile("MyClass.xtend" -> '''
 			class MyClass {
 				def static void main(String[] args) {
