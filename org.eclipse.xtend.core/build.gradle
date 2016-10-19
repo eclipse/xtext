@@ -16,4 +16,7 @@ sourceSets {
 }
 
 // https://github.com/eclipse/xtext-xtend/issues/57
+tasks.withType(Javadoc) {
+	enabled = false
+}
 javadocJar.enabled = false
