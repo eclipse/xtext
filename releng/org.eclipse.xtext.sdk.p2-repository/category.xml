@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/org.eclipse.xtext.sdk_2.11.0.qualifier.jar" id="org.eclipse.xtext.sdk" version="2.11.0.qualifier">
+      <category name="Xtext"/>
+   </feature>
+   <feature url="features/org.eclipse.xtend.sdk_2.11.0.qualifier.jar" id="org.eclipse.xtend.sdk" version="2.11.0.qualifier">
+      <category name="Xtext"/>
+   </feature>
+   <category-def name="Xtext" label="Xtext"/>
+</site>
