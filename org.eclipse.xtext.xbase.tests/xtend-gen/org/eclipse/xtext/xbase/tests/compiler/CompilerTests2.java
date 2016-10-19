@@ -4031,4 +4031,353 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
       throw Exceptions.sneakyThrow(_e);
     }
   }
+  
+  @Test
+  public void test406762_NestedReturn() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("return return 0");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("return 0;");
+      _builder_1.newLine();
+      _builder_1.append("return /* error - couldn\'t compile nested return */;");
+      _builder_1.newLine();
+      this.compilesTo(_builder, _builder_1, false);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void test406762_NestedReturn2() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("return { ");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("return 0");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("return 0;");
+      _builder_1.newLine();
+      _builder_1.append("return /* error - couldn\'t compile nested return */;");
+      _builder_1.newLine();
+      this.compilesTo(_builder, _builder_1, false);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void test406762_NestedReturn3() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("return { ");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("if (true) return 0 else return 1");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("int _xifexpression = (int) 0;");
+      _builder_1.newLine();
+      _builder_1.append("if (true) {");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("return 0;");
+      _builder_1.newLine();
+      _builder_1.append("} else {");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("return 1;");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("return _xifexpression;");
+      _builder_1.newLine();
+      this.compilesTo(_builder, _builder_1, false);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void test406762_NestedReturn4() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("return ");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("if (true) return 0 else return 1");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("int _xifexpression = (int) 0;");
+      _builder_1.newLine();
+      _builder_1.append("if (true) {");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("return 0;");
+      _builder_1.newLine();
+      _builder_1.append("} else {");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("return 1;");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("return _xifexpression;");
+      _builder_1.newLine();
+      this.compilesTo(_builder, _builder_1, false);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void test406762_ReturnInThrow() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("throw return");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("try {");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("return;");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("throw /* error - couldn\'t compile nested return */;");
+      _builder_1.newLine();
+      _builder_1.append("} catch (Throwable _e) {");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("throw org.eclipse.xtext.xbase.lib.Exceptions.sneakyThrow(_e);");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      this.compilesTo(_builder, _builder_1, false);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void test406762_ReturnInThrow2() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("throw {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("return");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("try {");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("return;");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("throw /* error - couldn\'t compile nested return */;");
+      _builder_1.newLine();
+      _builder_1.append("} catch (Throwable _e) {");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("throw org.eclipse.xtext.xbase.lib.Exceptions.sneakyThrow(_e);");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      this.compilesTo(_builder, _builder_1, false);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void test406762_ReturnThrow() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("return throw new Exception()");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("try {");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("throw new Exception();");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("return /* error - couldn\'t compile invalid throw */;");
+      _builder_1.newLine();
+      _builder_1.append("} catch (Throwable _e) {");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("throw org.eclipse.xtext.xbase.lib.Exceptions.sneakyThrow(_e);");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      this.compilesTo(_builder, _builder_1, false);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void test406762_ValidThrowInSingleIfBranch() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val b = true");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("return if (b) throw new RuntimeException() else 42");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("final boolean b = true;");
+      _builder_1.newLine();
+      _builder_1.append("int _xifexpression = (int) 0;");
+      _builder_1.newLine();
+      _builder_1.append("if (b) {");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("throw new RuntimeException();");
+      _builder_1.newLine();
+      _builder_1.append("} else {");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("_xifexpression = 42;");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("return _xifexpression;");
+      _builder_1.newLine();
+      this.compilesTo(_builder, _builder_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void test406762_ValidThrowInSingleIfBranch_1() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val b = true");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("return if (b) 42 else throw new RuntimeException()");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("final boolean b = true;");
+      _builder_1.newLine();
+      _builder_1.append("int _xifexpression = (int) 0;");
+      _builder_1.newLine();
+      _builder_1.append("if (b) {");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("_xifexpression = 42;");
+      _builder_1.newLine();
+      _builder_1.append("} else {");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("throw new RuntimeException();");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("return _xifexpression;");
+      _builder_1.newLine();
+      this.compilesTo(_builder, _builder_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void test406762_InvalidThrowInBothIfBranches() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val b = true");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("return if (b) throw new RuntimeException() else throw new RuntimeException()");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("final boolean b = true;");
+      _builder_1.newLine();
+      _builder_1.append("void _xifexpression = null;");
+      _builder_1.newLine();
+      _builder_1.append("if (b) {");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("throw new RuntimeException();");
+      _builder_1.newLine();
+      _builder_1.append("} else {");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("throw new RuntimeException();");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("return _xifexpression;");
+      _builder_1.newLine();
+      this.compilesTo(_builder, _builder_1, false);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
 }

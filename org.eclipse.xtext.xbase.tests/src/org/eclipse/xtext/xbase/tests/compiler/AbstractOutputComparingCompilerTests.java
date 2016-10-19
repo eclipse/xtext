@@ -40,17 +40,26 @@ public abstract class AbstractOutputComparingCompilerTests extends AbstractXbase
 	protected void assertCompilesTo(final CharSequence expectedJavaCode, final CharSequence xbaseCode) throws Exception {
 		assertCompilesTo(expectedJavaCode, xbaseCode, generatorConfigProvider.get(null));
 	}
-	
+
+	protected void assertCompilesTo(final CharSequence expectedJavaCode, final CharSequence xbaseCode, boolean resolve) throws Exception {
+		assertCompilesTo(expectedJavaCode, xbaseCode, generatorConfigProvider.get(null), resolve);
+	}
+
 	protected void assertCompilesTo(final CharSequence expectedJavaCode, final CharSequence xbaseCode,
 			JavaVersion javaVersion) throws Exception {
 		GeneratorConfig generatorConfig = generatorConfigProvider.get(null);
 		generatorConfig.setJavaSourceVersion(javaVersion);
 		assertCompilesTo(expectedJavaCode, xbaseCode, generatorConfig);
 	}
-	
+
 	protected void assertCompilesTo(final CharSequence expectedJavaCode, final CharSequence xbaseCode,
 			GeneratorConfig generatorConfig) throws Exception {
-		XExpression model = expression(xbaseCode.toString(),true);
+		assertCompilesTo(expectedJavaCode, xbaseCode, generatorConfig, true);
+	}
+
+	protected void assertCompilesTo(final CharSequence expectedJavaCode, final CharSequence xbaseCode,
+			GeneratorConfig generatorConfig, boolean resolve) throws Exception {
+		XExpression model = expression(xbaseCode.toString(), resolve);
 		XbaseCompiler compiler = get(XbaseCompiler.class);
 		FakeTreeAppendable tracing = new FakeTreeAppendable();
 		tracing.setGeneratorConfig(generatorConfig);
@@ -73,9 +82,13 @@ public abstract class AbstractOutputComparingCompilerTests extends AbstractXbase
 	}
 	
 	protected void compilesTo(final CharSequence xbaseCode, final CharSequence result) throws Exception {
-		assertCompilesTo(result, xbaseCode);
+		compilesTo(xbaseCode, result, true);
 	}
-	
+
+	protected void compilesTo(final CharSequence xbaseCode, final CharSequence result, boolean resolve) throws Exception {
+		assertCompilesTo(result, xbaseCode, resolve);
+	}
+
 	protected void compilesTo(final CharSequence xbaseCode, final CharSequence result,
 			JavaVersion javaVersion) throws Exception {
 		assertCompilesTo(result, xbaseCode, javaVersion);

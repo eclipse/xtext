@@ -1882,4 +1882,164 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		''')
 	}
 
+	@Test def void test406762_NestedReturn() {
+		'''
+			{
+				return return 0
+			}
+		'''.compilesTo('''
+			return 0;
+			return /* error - couldn't compile nested return */;
+		''', false)
+	}
+
+	@Test def void test406762_NestedReturn2() {
+		'''
+			{
+				return { 
+					return 0
+				}
+			}
+		'''.compilesTo('''
+			return 0;
+			return /* error - couldn't compile nested return */;
+		''', false)
+	}
+
+	@Test def void test406762_NestedReturn3() {
+		'''
+			{
+				return { 
+					if (true) return 0 else return 1
+				}
+			}
+		'''.compilesTo('''
+			int _xifexpression = (int) 0;
+			if (true) {
+			  return 0;
+			} else {
+			  return 1;
+			}
+			return _xifexpression;
+		''', false)
+	}
+
+	@Test def void test406762_NestedReturn4() {
+		'''
+			{
+				return 
+					if (true) return 0 else return 1
+			}
+		'''.compilesTo('''
+			int _xifexpression = (int) 0;
+			if (true) {
+			  return 0;
+			} else {
+			  return 1;
+			}
+			return _xifexpression;
+		''', false)
+	}
+
+	@Test def void test406762_ReturnInThrow() {
+		'''
+			{
+				throw return
+			}
+		'''.compilesTo('''
+			try {
+			  return;
+			  throw /* error - couldn't compile nested return */;
+			} catch (Throwable _e) {
+			  throw org.eclipse.xtext.xbase.lib.Exceptions.sneakyThrow(_e);
+			}
+		''', false)
+	}
+
+	@Test def void test406762_ReturnInThrow2() {
+		'''
+			{
+				throw {
+					return
+				}
+			}
+		'''.compilesTo('''
+			try {
+			  return;
+			  throw /* error - couldn't compile nested return */;
+			} catch (Throwable _e) {
+			  throw org.eclipse.xtext.xbase.lib.Exceptions.sneakyThrow(_e);
+			}
+		''', false)
+	}
+
+	@Test def void test406762_ReturnThrow() {
+		'''
+			{
+				return throw new Exception()
+			}
+		'''.compilesTo('''
+			try {
+			  throw new Exception();
+			  return /* error - couldn't compile invalid throw */;
+			} catch (Throwable _e) {
+			  throw org.eclipse.xtext.xbase.lib.Exceptions.sneakyThrow(_e);
+			}
+		''', false)
+	}
+
+	@Test def void test406762_ValidThrowInSingleIfBranch() {
+		'''
+			{
+				val b = true
+				return if (b) throw new RuntimeException() else 42
+			}
+		'''.compilesTo('''
+			final boolean b = true;
+			int _xifexpression = (int) 0;
+			if (b) {
+			  throw new RuntimeException();
+			} else {
+			  _xifexpression = 42;
+			}
+			return _xifexpression;
+		''')
+	}
+
+	@Test def void test406762_ValidThrowInSingleIfBranch_1() {
+		'''
+			{
+				val b = true
+				return if (b) 42 else throw new RuntimeException()
+			}
+		'''.compilesTo('''
+			final boolean b = true;
+			int _xifexpression = (int) 0;
+			if (b) {
+			  _xifexpression = 42;
+			} else {
+			  throw new RuntimeException();
+			}
+			return _xifexpression;
+		''')
+	}
+
+	@Test def void test406762_InvalidThrowInBothIfBranches() {
+		'''
+			{
+				val b = true
+				return if (b) throw new RuntimeException() else throw new RuntimeException()
+			}
+		'''.compilesTo('''
+			final boolean b = true;
+			void _xifexpression = null;
+			if (b) {
+			  throw new RuntimeException();
+			} else {
+			  throw new RuntimeException();
+			}
+			return _xifexpression;
+		''', false)
+	}
+
 }

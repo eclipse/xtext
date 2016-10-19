@@ -334,6 +334,10 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			_toJavaExpression((XSetLiteral) obj, appendable);
 		} else if (obj instanceof XSynchronizedExpression) {
 			_toJavaExpression((XSynchronizedExpression) obj, appendable);
+		} else if (obj instanceof XReturnExpression) {
+			_toJavaExpression((XReturnExpression) obj, appendable);
+		} else if (obj instanceof XThrowExpression) {
+			_toJavaExpression((XThrowExpression) obj, appendable);
 		} else {
 			super.internalToConvertedExpression(obj, appendable);
 		}
@@ -1570,6 +1574,14 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		b.trace(synchronizedExpression, false).append(getVarName(synchronizedExpression, b));
 	}
 
+	protected void _toJavaExpression(XReturnExpression returnExpression, ITreeAppendable b) {
+		b.append("/* error - couldn't compile nested return */");
+	}
+
+	protected void _toJavaExpression(XThrowExpression throwExpression, ITreeAppendable b) {
+		b.append("/* error - couldn't compile invalid throw */");
+	}
+
 	protected void _toJavaStatement(final XClosure closure, final ITreeAppendable b, boolean isReferenced) {
 		if (!isReferenced)
 			throw new IllegalArgumentException("a closure definition does not cause any side-effects");
@@ -1648,7 +1660,6 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		return b.decreaseIndentation().newLine().append("}");
 	}
 	
-	@SuppressWarnings("unused")
 	protected boolean needSyntheticSelfVariable(XClosure closure, LightweightTypeReference typeRef) {
 		return false;
 	}

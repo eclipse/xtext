@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.tests.validation;
 
 import com.google.inject.Inject;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.testing.validation.ValidationTestHelper;
@@ -2650,6 +2651,258 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
       _builder.newLine();
       XExpression _expression = this.expression(_builder);
       this._validationTestHelper.assertNoErrors(_expression);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testInvalidNestedReturnBug406762() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("{");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("return return 0");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertNestedReturn(_builder, XbasePackage.Literals.XRETURN_EXPRESSION);
+  }
+  
+  @Test
+  public void testInvalidNestedReturnBug406762_1() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("{");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("return {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("return 0");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertInvalidReturnExpression(_builder, XbasePackage.Literals.XBLOCK_EXPRESSION);
+  }
+  
+  @Test
+  public void testInvalidNestedReturnBug406762_2() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("{");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("return {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("if (true) return 0 else return 1");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertInvalidReturnExpression(_builder, XbasePackage.Literals.XBLOCK_EXPRESSION);
+  }
+  
+  @Test
+  public void testInvalidNestedReturnBug406762_3() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("{");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("return ");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("if (true) return 0 else return 1");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertInvalidReturnExpression(_builder, XbasePackage.Literals.XIF_EXPRESSION);
+  }
+  
+  @Test
+  public void testInvalidNestedReturnBug406762_4() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("{");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("return ");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("throw return new RuntimeException()");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertInvalidReturnExpression(_builder, XbasePackage.Literals.XTHROW_EXPRESSION);
+  }
+  
+  @Test
+  public void testInvalidReturnInThrowBug406762() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("{");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("throw return new RuntimeException()");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertInvalidReturnInsideThrow(_builder);
+  }
+  
+  @Test
+  public void testInvalidReturnInThrowBug406762_1() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("{");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("throw {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("return new RuntimeException()");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertInvalidReturnInsideThrow(_builder);
+  }
+  
+  @Test
+  public void testInvalidReturnInThrowBug406762_2() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("{");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("throw return");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertInvalidReturnInsideThrow(_builder);
+  }
+  
+  @Test
+  public void testInvalidReturnInThrowBug406762_3() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("{");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("throw {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("return");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertInvalidReturnInsideThrow(_builder);
+  }
+  
+  @Test
+  public void testInvalidReturnThrowBug406762() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("{");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("return throw new RuntimeException()");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertInvalidReturnExpression(_builder, XbasePackage.Literals.XTHROW_EXPRESSION);
+  }
+  
+  @Test
+  public void testInvalidReturnThrowBug406762_1() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("{");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("val b = true");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("return if (b) throw new RuntimeException() else throw new RuntimeException()");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertInvalidReturnExpression(_builder, XbasePackage.Literals.XIF_EXPRESSION);
+  }
+  
+  @Test
+  public void testValidReturnThrowBug406762() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val b = true");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("return if (b) throw new RuntimeException() else 42");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XExpression _expression = this.expression(_builder);
+      this._validationTestHelper.assertNoErrors(_expression);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testValidReturnThrowBug406762_1() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("{");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val b = true");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("return if (b) 42 else throw new RuntimeException()");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XExpression _expression = this.expression(_builder);
+      this._validationTestHelper.assertNoErrors(_expression);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  private void assertNestedReturn(final CharSequence input, final EClass objectType) {
+    try {
+      XExpression _expression = this.expression(input);
+      this._validationTestHelper.assertError(_expression, objectType, 
+        IssueCodes.INVALID_RETURN, 
+        "Return cannot be nested.");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  private void assertInvalidReturnInsideThrow(final CharSequence input) {
+    try {
+      XExpression _expression = this.expression(input);
+      this._validationTestHelper.assertError(_expression, 
+        XbasePackage.Literals.XRETURN_EXPRESSION, 
+        IssueCodes.INVALID_RETURN, 
+        "Invalid return inside throw.");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  private void assertInvalidReturnExpression(final CharSequence input, final EClass objectType) {
+    try {
+      XExpression _expression = this.expression(input);
+      this._validationTestHelper.assertError(_expression, objectType, 
+        IssueCodes.INVALID_RETURN, 
+        "Invalid return\'s expression.");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

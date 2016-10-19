@@ -7,6 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.computation;
 
+import static com.google.common.collect.Iterables.*;
+import static org.eclipse.xtext.xbase.lib.IterableExtensions.*;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -972,13 +975,63 @@ public class XbaseTypeComputer extends AbstractTypeComputer implements ITypeComp
 	protected void _computeTypes(XReturnExpression object, ITypeComputationState state) {
 		XExpression returnValue = object.getExpression();
 		ITypeComputationState expressionState = state.withReturnExpectation();
+
+		checkValidReturn(object, state);
+		
 		LightweightTypeReference primitiveVoid = getPrimitiveVoid(state);
 		if (returnValue != null) {
-			expressionState.computeTypes(returnValue);
+			checkValidReturnExpression(returnValue, expressionState);
 			state.acceptActualType(primitiveVoid, ConformanceFlags.NO_IMPLICIT_RETURN);
 		} else {
 			state.acceptActualType(primitiveVoid, ConformanceFlags.EXPLICIT_VOID_RETURN);
 			state.acceptActualType(primitiveVoid, ConformanceFlags.NO_IMPLICIT_RETURN);
+		}
+	}
+
+	protected void checkValidReturn(XReturnExpression object, ITypeComputationState state) {
+		if (hasThrowableExpectation(state)) {
+			state.addDiagnostic(new EObjectDiagnosticImpl(
+					Severity.ERROR,
+					IssueCodes.INVALID_RETURN,
+					"Invalid return inside throw.",
+					object,
+					null,
+					-1,
+					new String[] { 
+					}));
+		}
+	}
+
+	protected boolean hasThrowableExpectation(ITypeComputationState state) {
+		List<? extends ITypeExpectation> expectations = state.getExpectations();
+		for (ITypeExpectation typeExpectation : expectations) {
+			LightweightTypeReference expected = typeExpectation.getExpectedType();
+			if (expected != null && expected.isType(Throwable.class))
+				return true;
+		}
+		return false;
+	}
+
+	protected void checkValidReturnExpression(XExpression returnValue, ITypeComputationState expressionState) {
+		ITypeComputationResult result = expressionState.computeTypes(returnValue);
+		LightweightTypeReference actualType = result.getActualExpressionType();
+		int conformanceFlags = result.getConformanceFlags();
+		if (actualType.isPrimitiveVoid() && (conformanceFlags & ConformanceFlags.NO_IMPLICIT_RETURN) != 0) {
+			String message = "Invalid return's expression.";
+			if (returnValue instanceof XReturnExpression) {
+				// when the return's expression is directory a return
+				// we provide a more detailed error
+				message = "Return cannot be nested.";
+			}
+			expressionState.addDiagnostic(new EObjectDiagnosticImpl(
+					Severity.ERROR,
+					IssueCodes.INVALID_RETURN,
+					message,
+					returnValue,
+					null,
+					-1,
+					new String[] { 
+					}));
 		}
 	}
 	

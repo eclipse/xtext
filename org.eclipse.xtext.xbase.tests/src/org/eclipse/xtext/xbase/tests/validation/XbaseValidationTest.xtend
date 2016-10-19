@@ -14,6 +14,7 @@ import org.eclipse.xtext.xbase.XbasePackage
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
 import org.eclipse.xtext.xbase.validation.IssueCodes
 import org.junit.Test
+import org.eclipse.emf.ecore.EClass
 
 /**
  * @author Anton Kosyakov - Initial contribution and API
@@ -1127,5 +1128,146 @@ class XbaseValidationTest extends AbstractXbaseTestCase {
 				val java.util.Collection<String> list = #[""]
 			}
 		'''.expression.assertNoErrors
+	}
+
+	@Test def void testInvalidNestedReturnBug406762() {
+		'''
+			{
+				return return 0
+			}
+		'''.assertNestedReturn(XbasePackage.Literals.XRETURN_EXPRESSION)
+	}
+
+	@Test def void testInvalidNestedReturnBug406762_1() {
+		'''
+			{
+				return {
+					return 0
+				}
+			}
+		'''.assertInvalidReturnExpression(XbasePackage.Literals.XBLOCK_EXPRESSION)
+	}
+
+	@Test def void testInvalidNestedReturnBug406762_2() {
+		'''
+			{
+				return {
+					if (true) return 0 else return 1
+				}
+			}
+		'''.assertInvalidReturnExpression(XbasePackage.Literals.XBLOCK_EXPRESSION)
+	}
+
+	@Test def void testInvalidNestedReturnBug406762_3() {
+		'''
+			{
+				return 
+					if (true) return 0 else return 1
+			}
+		'''.assertInvalidReturnExpression(XbasePackage.Literals.XIF_EXPRESSION)
+	}
+
+	@Test def void testInvalidNestedReturnBug406762_4() {
+		'''
+			{
+				return 
+					throw return new RuntimeException()
+			}
+		'''.assertInvalidReturnExpression(XbasePackage.Literals.XTHROW_EXPRESSION)
+	}
+
+	@Test def void testInvalidReturnInThrowBug406762() {
+		'''
+			{
+				throw return new RuntimeException()
+			}
+		'''.assertInvalidReturnInsideThrow
+	}
+
+	@Test def void testInvalidReturnInThrowBug406762_1() {
+		'''
+			{
+				throw {
+					return new RuntimeException()
+				}
+			}
+		'''.assertInvalidReturnInsideThrow
+	}
+
+	@Test def void testInvalidReturnInThrowBug406762_2() {
+		'''
+			{
+				throw return
+			}
+		'''.assertInvalidReturnInsideThrow
+	}
+
+	@Test def void testInvalidReturnInThrowBug406762_3() {
+		'''
+			{
+				throw {
+					return
+				}
+			}
+		'''.assertInvalidReturnInsideThrow
+	}
+
+	@Test def void testInvalidReturnThrowBug406762() {
+		'''
+			{
+				return throw new RuntimeException()
+			}
+		'''.assertInvalidReturnExpression(XbasePackage.Literals.XTHROW_EXPRESSION)
+	}
+
+	@Test def void testInvalidReturnThrowBug406762_1() {
+		'''
+			{
+				val b = true
+				return if (b) throw new RuntimeException() else throw new RuntimeException()
+			}
+		'''.assertInvalidReturnExpression(XbasePackage.Literals.XIF_EXPRESSION)
+	}
+
+	@Test def void testValidReturnThrowBug406762() {
+		'''
+			{
+				val b = true
+				return if (b) throw new RuntimeException() else 42
+			}
+		'''.expression.assertNoErrors
+	}
+
+	@Test def void testValidReturnThrowBug406762_1() {
+		'''
+			{
+				val b = true
+				return if (b) 42 else throw new RuntimeException()
+			}
+		'''.expression.assertNoErrors
+	}
+
+	def private assertNestedReturn(CharSequence input, EClass objectType) {
+		input.expression.assertError(
+			objectType,
+			IssueCodes.INVALID_RETURN,
+			"Return cannot be nested."
+		)
+	}
+
+	def private assertInvalidReturnInsideThrow(CharSequence input) {
+		input.expression.assertError(
+			XbasePackage.Literals.XRETURN_EXPRESSION,
+			IssueCodes.INVALID_RETURN,
+			"Invalid return inside throw."
+		)
+	}
+
+	def private assertInvalidReturnExpression(CharSequence input, EClass objectType) {
+		input.expression.assertError(
+			objectType,
+			IssueCodes.INVALID_RETURN,
+			"Invalid return's expression."
+		)
 	}
 }
