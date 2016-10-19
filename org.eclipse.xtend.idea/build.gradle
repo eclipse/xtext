@@ -15,3 +15,7 @@ ideaDevelopment {
 		id 'org.eclipse.xtext.idea'
 	}
 }
+
+artifacts {
+	archives javadocJar
+}

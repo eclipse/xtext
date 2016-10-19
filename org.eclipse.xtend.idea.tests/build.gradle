@@ -16,3 +16,8 @@ ideaDevelopment {
 		project ':org.eclipse.xtend.idea'
 	}
 }
+
+tasks.withType(Javadoc) {
+	enabled = false
+}
+javadocJar.enabled = false
