@@ -210,7 +210,7 @@ import org.eclipse.xtext.ide.server.occurrences.IDocumentHighlightService
 		]
 	}
 	
-	override didChangeConfiguraton(DidChangeConfigurationParams params) {
+	override didChangeConfiguration(DidChangeConfigurationParams params) {
         requestManager.runWrite [ cancelIndicator |
             workspaceManager.refreshWorkspaceConfig(cancelIndicator)
         ]

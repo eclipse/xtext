@@ -332,7 +332,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
   }
   
   @Override
-  public void didChangeConfiguraton(final DidChangeConfigurationParams params) {
+  public void didChangeConfiguration(final DidChangeConfigurationParams params) {
     final Procedure1<CancelIndicator> _function = (CancelIndicator cancelIndicator) -> {
       this.workspaceManager.refreshWorkspaceConfig(cancelIndicator);
     };
