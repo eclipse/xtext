@@ -1,6 +1,8 @@
 def baseVersion = project.version
 if (baseVersion.endsWith('-SNAPSHOT'))
 	baseVersion = baseVersion.substring(0, baseVersion.length() - 9)
+else if (baseVersion.split('\\.').length == 4)
+	baseVersion = baseVersion.substring(0, baseVersion.lastIndexOf('.'))
 def qualifiedVersion = baseVersion + '.v' + buildTime
 
 //------------------------------------------------------
