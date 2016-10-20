@@ -23,7 +23,7 @@ sourceSets {
 
 jar {
 	from ('.') {
-		include 'about*.*', 'plugin.xml', 'schema/**', 'model/**'
+		include 'about*.*', 'plugin.xml', 'schema/**', 'model/**', 'plugin.properties'
 	}
 }
 
