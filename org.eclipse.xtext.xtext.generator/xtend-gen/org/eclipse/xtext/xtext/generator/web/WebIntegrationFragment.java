@@ -67,13 +67,13 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
     CODEMIRROR;
   }
   
-  private final static String REQUIREJS_VERSION = "2.2.0";
+  private final static String REQUIREJS_VERSION = "2.3.2";
   
   private final static String REQUIREJS_TEXT_VERSION = "2.0.15";
   
-  private final static String JQUERY_VERSION = "2.2.3";
+  private final static String JQUERY_VERSION = "2.2.4";
   
-  private final static String ACE_VERSION = "1.2.2";
+  private final static String ACE_VERSION = "1.2.3";
   
   private final static String CODEMIRROR_VERSION = "5.13.2";
   
