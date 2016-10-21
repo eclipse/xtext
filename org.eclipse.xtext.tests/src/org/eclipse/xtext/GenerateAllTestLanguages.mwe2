@@ -84,6 +84,7 @@ Workflow {
 			}
 		}
 		
+		/*
 		language = {
 			grammarUri = "classpath:/org/eclipse/xtext/generator/ecore/SuperTestLanguage.xtext"
 			fragment = @TestLanguagesFragments {
@@ -282,12 +283,15 @@ Workflow {
 				ignoreCase = true
 			}
 		}
+	
+		*/
 		language = { 
 			grammarUri = "classpath:/org/eclipse/xtext/parser/antlr/Bug301935TestLanguage.xtext"
 			fragment = @TestLanguagesFragments {
 				generateStub = true
 			}
 		}
+		/*
 		language = {
 			grammarUri = "classpath:/org/eclipse/xtext/parser/antlr/Bug378967TestLanguage.xtext"
 			fragment = @TestLanguagesFragments {}
@@ -620,6 +624,7 @@ Workflow {
 			grammarUri = "classpath:/org/eclipse/xtext/parsetree/reconstr/SerializationErrorTestLanguage.xtext"
 			fragment = @TestLanguagesFragments auto-inject {}
 		}
+		*/
 	}
 }
 
