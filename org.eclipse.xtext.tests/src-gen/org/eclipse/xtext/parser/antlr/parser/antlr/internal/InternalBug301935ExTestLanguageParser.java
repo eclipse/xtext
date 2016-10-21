@@ -21,14 +21,14 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalBug301935ExTestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "Control000a", "Control000d", "RULE_ID", "RULE_WS", "RULE_ANY_OTHER"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "LineFeed", "CarriageReturn", "RULE_ID", "RULE_WS", "RULE_ANY_OTHER"
     };
     public static final int RULE_ID=6;
     public static final int RULE_WS=7;
-    public static final int Control000d=5;
     public static final int RULE_ANY_OTHER=8;
-    public static final int Control000a=4;
+    public static final int CarriageReturn=5;
     public static final int EOF=-1;
+    public static final int LineFeed=4;
 
     // delegates
     // delegators
@@ -364,7 +364,7 @@ public class InternalBug301935ExTestLanguageParser extends AbstractInternalAntlr
 
 
     // $ANTLR start "ruleNL"
-    // InternalBug301935ExTestLanguageParser.g:177:1: ruleNL returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : ( (this_WS_0= RULE_WS )* ( (kw= Control000d )? kw= Control000a ) (this_WS_3= RULE_WS )* ) ;
+    // InternalBug301935ExTestLanguageParser.g:177:1: ruleNL returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : ( (this_WS_0= RULE_WS )* ( (kw= CarriageReturn )? kw= LineFeed ) (this_WS_3= RULE_WS )* ) ;
     public final AntlrDatatypeRuleToken ruleNL() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -376,11 +376,11 @@ public class InternalBug301935ExTestLanguageParser extends AbstractInternalAntlr
         	enterRule();
 
         try {
-            // InternalBug301935ExTestLanguageParser.g:183:2: ( ( (this_WS_0= RULE_WS )* ( (kw= Control000d )? kw= Control000a ) (this_WS_3= RULE_WS )* ) )
-            // InternalBug301935ExTestLanguageParser.g:184:2: ( (this_WS_0= RULE_WS )* ( (kw= Control000d )? kw= Control000a ) (this_WS_3= RULE_WS )* )
+            // InternalBug301935ExTestLanguageParser.g:183:2: ( ( (this_WS_0= RULE_WS )* ( (kw= CarriageReturn )? kw= LineFeed ) (this_WS_3= RULE_WS )* ) )
+            // InternalBug301935ExTestLanguageParser.g:184:2: ( (this_WS_0= RULE_WS )* ( (kw= CarriageReturn )? kw= LineFeed ) (this_WS_3= RULE_WS )* )
             {
-            // InternalBug301935ExTestLanguageParser.g:184:2: ( (this_WS_0= RULE_WS )* ( (kw= Control000d )? kw= Control000a ) (this_WS_3= RULE_WS )* )
-            // InternalBug301935ExTestLanguageParser.g:185:3: (this_WS_0= RULE_WS )* ( (kw= Control000d )? kw= Control000a ) (this_WS_3= RULE_WS )*
+            // InternalBug301935ExTestLanguageParser.g:184:2: ( (this_WS_0= RULE_WS )* ( (kw= CarriageReturn )? kw= LineFeed ) (this_WS_3= RULE_WS )* )
+            // InternalBug301935ExTestLanguageParser.g:185:3: (this_WS_0= RULE_WS )* ( (kw= CarriageReturn )? kw= LineFeed ) (this_WS_3= RULE_WS )*
             {
             // InternalBug301935ExTestLanguageParser.g:185:3: (this_WS_0= RULE_WS )*
             loop1:
@@ -413,24 +413,24 @@ public class InternalBug301935ExTestLanguageParser extends AbstractInternalAntlr
                 }
             } while (true);
 
-            // InternalBug301935ExTestLanguageParser.g:194:3: ( (kw= Control000d )? kw= Control000a )
-            // InternalBug301935ExTestLanguageParser.g:195:4: (kw= Control000d )? kw= Control000a
+            // InternalBug301935ExTestLanguageParser.g:194:3: ( (kw= CarriageReturn )? kw= LineFeed )
+            // InternalBug301935ExTestLanguageParser.g:195:4: (kw= CarriageReturn )? kw= LineFeed
             {
-            // InternalBug301935ExTestLanguageParser.g:195:4: (kw= Control000d )?
+            // InternalBug301935ExTestLanguageParser.g:195:4: (kw= CarriageReturn )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
-            if ( (LA2_0==Control000d) ) {
+            if ( (LA2_0==CarriageReturn) ) {
                 alt2=1;
             }
             switch (alt2) {
                 case 1 :
-                    // InternalBug301935ExTestLanguageParser.g:196:5: kw= Control000d
+                    // InternalBug301935ExTestLanguageParser.g:196:5: kw= CarriageReturn
                     {
-                    kw=(Token)match(input,Control000d,FollowSets000.FOLLOW_6); 
+                    kw=(Token)match(input,CarriageReturn,FollowSets000.FOLLOW_6); 
 
                     					current.merge(kw);
-                    					newLeafNode(kw, grammarAccess.getNLAccess().getControl000dKeyword_1_0());
+                    					newLeafNode(kw, grammarAccess.getNLAccess().getCarriageReturnKeyword_1_0());
                     				
 
                     }
@@ -438,10 +438,10 @@ public class InternalBug301935ExTestLanguageParser extends AbstractInternalAntlr
 
             }
 
-            kw=(Token)match(input,Control000a,FollowSets000.FOLLOW_7); 
+            kw=(Token)match(input,LineFeed,FollowSets000.FOLLOW_7); 
 
             				current.merge(kw);
-            				newLeafNode(kw, grammarAccess.getNLAccess().getControl000aKeyword_1_1());
+            				newLeafNode(kw, grammarAccess.getNLAccess().getLineFeedKeyword_1_1());
             			
 
             }

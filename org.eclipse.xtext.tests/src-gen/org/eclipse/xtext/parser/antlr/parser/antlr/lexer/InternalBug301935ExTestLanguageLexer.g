@@ -11,9 +11,9 @@ package org.eclipse.xtext.parser.antlr.parser.antlr.lexer;
 import org.eclipse.xtext.parser.antlr.Lexer;
 }
 
-Control000a : '\n';
+LineFeed : '\n';
 
-Control000d : '\r';
+CarriageReturn : '\r';
 
 // Rules duplicated to allow inter-rule references
 
