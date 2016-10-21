@@ -61,7 +61,10 @@ import org.eclipse.xtext.resource.IResourceDescriptions
 	}
 
 	override isPackage(char[][] parentPackageName, char[] packageName) {
-		// Working hack
+		if (packageName === null || packageName.length == 0) {
+			return false;
+		}
+		// Mostly working hack
 		return Character.isLowerCase(packageName.head)
 	}
 }	

@@ -108,6 +108,9 @@ public class IndexAwareNameEnvironment implements INameEnvironment {
   
   @Override
   public boolean isPackage(final char[][] parentPackageName, final char[] packageName) {
+    if (((packageName == null) || (packageName.length == 0))) {
+      return false;
+    }
     Character _head = IterableExtensions.<Character>head(((Iterable<Character>)Conversions.doWrapArray(packageName)));
     return Character.isLowerCase((_head).charValue());
   }
