@@ -1,4 +1,6 @@
 group = 'org.eclipse.xtend'
+ext.title = 'Eclipse Xtend Active Annotations Library'
+description = 'The active annotations library for the Xtend programming language.'
 
 dependencies {
 	compile project(':org.eclipse.xtext.xbase.lib')

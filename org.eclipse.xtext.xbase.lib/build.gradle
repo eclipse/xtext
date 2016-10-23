@@ -1,4 +1,6 @@
 group = 'org.eclipse.xtext'
+ext.title = 'Eclipse Xbase Runtime Library'
+description = 'The runtime library for Xbase languages.'
 
 dependencies {
 	compile "com.google.guava:guava:$versions.guava"

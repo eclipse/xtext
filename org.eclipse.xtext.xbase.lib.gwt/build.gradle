@@ -1,4 +1,6 @@
 group = 'org.eclipse.xtext'
+ext.title = 'Eclipse Xbase GWT Library'
+description = 'The runtime library for Xbase languages for use with GWT.'
 
 dependencies {
 	compile project(':org.eclipse.xtext.xbase.lib')

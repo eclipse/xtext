@@ -1,4 +1,6 @@
 group = 'org.eclipse.xtend'
+ext.title = 'Eclipse Xtend Runtime Library'
+description = 'The runtime library for the Xtend programming language.'
 
 dependencies {
 	compile project(':org.eclipse.xtext.xbase.lib')
