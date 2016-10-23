@@ -10,9 +10,9 @@ subprojects {
 	apply plugin: 'maven'
 	
 	apply from: "${rootDir}/gradle/versions.gradle"
-	apply from: "${rootDir}/gradle/eclipse-project-layout.gradle"
 	apply from: "${rootDir}/gradle/java-compiler-settings.gradle"
 	apply from: "${rootDir}/gradle/maven-deployment.gradle"
+	apply from: "${rootDir}/gradle/eclipse-project-layout.gradle"
 	apply from: "${rootDir}/gradle/manifest-gen.gradle"
 }
 

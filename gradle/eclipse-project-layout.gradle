@@ -25,14 +25,16 @@ jar {
 	from ('.') {
 		include 'about*.*', 'plugin.xml', 'schema/**', 'model/**', 'plugin.properties'
 	}
+	if (isTestProject)
+		from(sourceSets.test.output)
 }
 
-if (isTestProject)
-	uploadArchives.enabled = false
-
-eclipse {
-	project {
-		natures 'org.eclipse.xtext.ui.shared.xtextNature'
-		buildCommand 'org.eclipse.xtext.ui.shared.xtextBuilder'
+if (isTestProject || name.contains('testlanguage')) {
+	tasks.withType(Javadoc) {
+		enabled = false
 	}
+	javadocJar.enabled = false
+	uploadArchives.enabled = false
+} else {
+	artifacts.archives javadocJar
 }
