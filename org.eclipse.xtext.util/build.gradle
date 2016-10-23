@@ -1,3 +1,6 @@
+ext.title = 'Xtext Utilities'
+description = 'Utility classes used throughout Xtext.'
+
 dependencies {
 	compile "org.eclipse.xtend:org.eclipse.xtend.lib:$versions.xtext"
 	compile "log4j:log4j:$versions.log4j"

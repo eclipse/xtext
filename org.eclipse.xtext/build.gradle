@@ -1,3 +1,6 @@
+ext.title = 'Xtext Runtime Bundle'
+description = 'Core component of Xtext.'
+
 dependencies {
 	compile project(':org.eclipse.xtext.util')
 	compile "org.eclipse.xtend:org.eclipse.xtend.lib:$versions.xtext"

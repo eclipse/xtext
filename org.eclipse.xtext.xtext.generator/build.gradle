@@ -1,3 +1,6 @@
+ext.title = 'Xtext Generator'
+description = 'Generator for infrastructure of Xtext languages (supersedes org.eclipse.xtext.generator).'
+
 dependencies {
 	compile project(':org.eclipse.xtext')
 	compile "org.eclipse.emf:org.eclipse.emf.codegen:$versions.emfEcore"

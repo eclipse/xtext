@@ -1,3 +1,6 @@
+ext.title = 'Xtext Wizard'
+description = 'Platform-independent component for creating new Xtext projects.'
+
 dependencies {
 	compile project(':org.eclipse.xtext')
 }

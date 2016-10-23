@@ -1,3 +1,6 @@
+ext.title = 'Xtext Testing Library'
+description = 'Infrastructure for testing Xtext languages (supersedes org.eclipse.xtext.junit4).'
+
 dependencies {
 	compile project(':org.eclipse.xtext')
 	compile project(':org.eclipse.xtext.ide')
