@@ -1,3 +1,7 @@
+/*
+ * Root project for xtext-extras.
+ */
+
 ext.buildTime = new java.text.SimpleDateFormat('yyyyMMdd-HHmm').format(new Date())
 
 subprojects {

@@ -1,5 +1,6 @@
-//------------------------------------------------------
-// Create additional sources and Javadoc artifacts
+/*
+ * Configuration of artifacts to be deployed in Maven repositories.
+ */
 
 task sourcesJar(type: Jar, dependsOn: classes) {
 	classifier = 'sources'
@@ -15,23 +16,7 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
 	from javadoc.destinationDir
 }
 
-//------------------------------------------------------
-// Sign the artifacts if the signing info is complete
-
-apply plugin: 'signing'
-signing {
-	required { gradle.taskGraph.hasTask('uploadArchives') }
-	sign configurations.archives
-}
-if (!project.hasProperty('signing.secretKeyRingFile') || !project.property('signing.secretKeyRingFile')
-		|| !project.hasProperty('signing.keyId') || !project.property('signing.keyId')
-		|| !project.hasProperty('signing.password') || !project.property('signing.password')) {
-	signArchives.enabled = false
-}
-
-//------------------------------------------------------
 // Configuration function for generated POMs
-
 def configurePom = { pom ->
 	pom.project {
 		if (project.hasProperty('title')) {
@@ -59,9 +44,6 @@ def configurePom = { pom ->
 // so we can use the title and description settings for setting up Maven publishing.
 afterEvaluate {
 	
-	//------------------------------------------------------
-	// Task for copying to a local Maven repository
-	
 	task createLocalMavenRepo(type: Upload) {
 		group = 'Upload'
 		description = 'Create or update the local Maven repository'
@@ -72,22 +54,4 @@ afterEvaluate {
 		}
 	}
 	
-	//------------------------------------------------------
-	// Task for uploading to a remote Maven repository
-	
-	uploadArchives.repositories.mavenDeployer {
-		beforeDeployment { deployment -> signing.signPom(deployment) }
-		repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
-			if (project.hasProperty('sonatypeUserName') && project.hasProperty('sonatypePassword')) {
-				authentication(userName: sonatypeUserName, password: sonatypePassword)
-			}
-		}
-		snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
-			if (project.hasProperty('sonatypeUserName') && project.hasProperty('sonatypePassword')) {
-				authentication(userName: sonatypeUserName, password: sonatypePassword)
-			}
-		}
-		configurePom(pom)
-	}
-
 }
