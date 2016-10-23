@@ -17,7 +17,3 @@ sourceSets {
 	mwe2.java.srcDir 'generator'
 	mwe2.java.srcDir 'generator-xtend-gen'
 }
-
-artifacts {
-	archives javadocJar
-}

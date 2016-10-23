@@ -1,3 +1,9 @@
+/*
+ * Root project for xtext-xtend. This Gradle build is required for the Xtend IDEA plugin,
+ * so it build only the bundles that are necessary for this plugin. The other bundles
+ * are built with Tycho.
+ */
+
 ext.buildTime = new java.text.SimpleDateFormat('yyyyMMdd-HHmm').format(new Date())
 
 subprojects {
@@ -7,9 +13,9 @@ subprojects {
 	
 	apply from: "${rootDir}/gradle/upstream-repositories.gradle"
 	apply from: "${rootDir}/gradle/versions.gradle"
-	apply from: "${rootDir}/gradle/eclipse-project-layout.gradle"
 	apply from: "${rootDir}/gradle/java-compiler-settings.gradle"
 	apply from: "${rootDir}/gradle/maven-deployment.gradle"
+	apply from: "${rootDir}/gradle/eclipse-project-layout.gradle"
 	apply from: "${rootDir}/gradle/manifest-gen.gradle"
 	
 	group = 'org.eclipse.xtend'

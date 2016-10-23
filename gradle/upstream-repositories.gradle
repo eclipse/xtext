@@ -1,3 +1,10 @@
+/*
+ * The build uses either public snapshots or branch-specific repositories on the Jenkins
+ * build server as upstream repositories. Use the argument '-PuseJenkinsSnapshots=true'
+ * to enable the Jenkins repositories. In this case you can select an upstream branch
+ * with the argument '-PupstreamBranch=<branch name>'.
+ */
+
 if (!hasProperty('upstreamBranch'))
 	ext.upstreamBranch = 'master'
 def jenkinsRepo = { jobName -> "http://services.typefox.io/open-source/jenkins/job/$jobName/lastStableBuild/artifact/build/maven-repository/" }

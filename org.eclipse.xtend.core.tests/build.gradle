@@ -16,8 +16,3 @@ sourceSets.test {
 
 // The tests have to be executed as Eclipse plug-in tests, so disable them in the Gradle build
 test.enabled = false
-
-tasks.withType(Javadoc) {
-	enabled = false
-}
-javadocJar.enabled = false
