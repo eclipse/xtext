@@ -1,3 +1,6 @@
+ext.title = 'Common Types Runtime Library'
+description = 'JVM type model used by Xbase and other languages.'
+
 dependencies {
 	compile "org.eclipse.xtext:org.eclipse.xtext:$versions.xtext"
 	compile "org.ow2.asm:asm-commons:$versions.asm"

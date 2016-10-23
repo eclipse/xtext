@@ -1,3 +1,6 @@
+ext.title = 'Xbase Testing Library'
+description = 'Infrastructure for testing Xbase languages.'
+
 dependencies {
 	compile project(':org.eclipse.xtext.xbase')
 	compile "junit:junit:$versions.junit"

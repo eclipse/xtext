@@ -1,3 +1,6 @@
+ext.title = 'Xtext Standalone Builder'
+description = 'Builder infrastructure for Xtext.'
+
 dependencies {
 	compile project(':org.eclipse.xtext.xbase')
 	compile project(':org.eclipse.xtext.common.types')

@@ -1,3 +1,6 @@
+ext.title = 'Xbase Runtime Library'
+description = 'Reusable expression language that interoperates with Java.'
+
 dependencies {
 	compile project(':org.eclipse.xtext.common.types')
 	mwe2Compile project(':org.eclipse.xtext.generator')

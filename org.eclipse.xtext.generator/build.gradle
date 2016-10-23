@@ -1,3 +1,6 @@
+ext.title = 'Xtext Generator'
+description = 'Generator for Xtext (superseded by org.eclipse.xtext.xtext.generator).'
+
 dependencies {
 	compile project(':org.eclipse.xtext.ecore')
 	compile "org.eclipse.xtext:org.eclipse.xtext.xtext.generator:$versions.xtext"

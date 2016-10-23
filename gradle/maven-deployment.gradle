@@ -37,6 +37,10 @@ if (!project.hasProperty('signing.secretKeyRingFile') || !project.property('sign
 
 def configurePom = { pom ->
 	pom.project {
+		if (project.hasProperty('title')) {
+			name = project.title
+			description = project.description
+		}
 		packaging 'jar'
 		url 'https://www.eclipse.org/Xtext/'
 		licenses {
@@ -54,33 +58,39 @@ def configurePom = { pom ->
 	apply from: "${rootDir}/gradle/developers.gradle", to: pom
 }
 
-//------------------------------------------------------
-// Task for copying to a local Maven repository
-
-task createLocalMavenRepo(type: Upload) {
-	group = 'Upload'
-	description = 'Create or update the local Maven repository'
-	configuration = configurations.archives
-	repositories.mavenDeployer {
-		repository(url: "file:" + file("../build/maven-repository"))
+// We need to wait until the project's own build file has been executed
+// so we can use the title and description settings for setting up Maven publishing.
+afterEvaluate {
+	
+	//------------------------------------------------------
+	// Task for copying to a local Maven repository
+	
+	task createLocalMavenRepo(type: Upload) {
+		group = 'Upload'
+		description = 'Create or update the local Maven repository'
+		configuration = configurations.archives
+		repositories.mavenDeployer {
+			repository(url: "file:" + file("../build/maven-repository"))
+			configurePom(pom)
+		}
+	}
+	
+	//------------------------------------------------------
+	// Task for uploading to a remote Maven repository
+	
+	uploadArchives.repositories.mavenDeployer {
+		beforeDeployment { deployment -> signing.signPom(deployment) }
+		repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+			if (project.hasProperty('sonatypeUserName') && project.hasProperty('sonatypePassword')) {
+				authentication(userName: sonatypeUserName, password: sonatypePassword)
+			}
+		}
+		snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+			if (project.hasProperty('sonatypeUserName') && project.hasProperty('sonatypePassword')) {
+				authentication(userName: sonatypeUserName, password: sonatypePassword)
+			}
+		}
 		configurePom(pom)
 	}
-}
 
-//------------------------------------------------------
-// Task for uploading to a remote Maven repository
-
-uploadArchives.repositories.mavenDeployer {
-	beforeDeployment { deployment -> signing.signPom(deployment) }
-	repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
-		if (project.hasProperty('sonatypeUserName') && project.hasProperty('sonatypePassword')) {
-			authentication(userName: sonatypeUserName, password: sonatypePassword)
-		}
-	}
-	snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
-		if (project.hasProperty('sonatypeUserName') && project.hasProperty('sonatypePassword')) {
-			authentication(userName: sonatypeUserName, password: sonatypePassword)
-		}
-	}
-	configurePom(pom)
 }
