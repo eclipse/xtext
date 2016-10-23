@@ -15,6 +15,8 @@ def qualifiedVersion = baseVersion + '.v' + buildTime
 //------------------------------------------------------
 // Copy the existing manifest and insert the qualifier
 
+ext.manifestReplacements = new HashMap()
+manifestReplacements.put(baseVersion + '.qualifier', qualifiedVersion)
 def manifestFile = "$buildDir/tmp/jar/MANIFEST.MF"
 
 task genManifest(type: Copy) {
@@ -22,9 +24,12 @@ task genManifest(type: Copy) {
     into "$buildDir/tmp/jar/"
     doLast {
     	def f = new File(manifestFile)
-    	def modifiedText = f.text.replace(baseVersion + '.qualifier', qualifiedVersion)
+    	def text = f.text
+    	for (e in manifestReplacements.entrySet()) {
+    		text = text.replace(e.key, e.value)
+    	}
     	def writer = new PrintWriter(f)
-    	writer.print(modifiedText)
+    	writer.print(text)
     	writer.close()
     }
 }

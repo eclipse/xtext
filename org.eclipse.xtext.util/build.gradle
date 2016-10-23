@@ -8,3 +8,6 @@ dependencies {
 	compile "org.eclipse.emf:org.eclipse.emf.ecore:$versions.emfEcore"
 	compile "com.google.inject:guice:$versions.guice"
 }
+
+// Set the value of the Maven-Version attribute
+manifestReplacements.put('unspecified', version)
