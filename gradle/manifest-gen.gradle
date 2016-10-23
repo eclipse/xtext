@@ -1,3 +1,8 @@
+/*
+ * The MANIFEST.MF files of this project are generated. For main bundles we use the osgi
+ * plugin, while for source bundles we generate the content ourselves.
+ */
+
 apply plugin: 'osgi'
 
 def baseVersion = project.version
