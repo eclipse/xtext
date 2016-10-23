@@ -1,8 +1,11 @@
 plugins {
-	id 'com.moowork.node' version "0.10"
+	id 'com.moowork.node' version '0.13'
 }
 
 apply from: "${rootDir}/gradle/default-project-layout.gradle"
+
+ext.title = 'Xtext Web API'
+description = 'API for integrating Xtext editors in web pages.'
 
 dependencies {
 	compile "org.eclipse.xtext:org.eclipse.xtext.ide:$versions.xtext"
