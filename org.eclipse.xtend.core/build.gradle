@@ -1,3 +1,6 @@
+ext.title = 'Xtend Core Library'
+description = 'Core language services for Xtend.'
+
 dependencies {
 	compile "org.eclipse.xtext:org.eclipse.xtext.xbase:$versions.xtext"
 	compile "org.eclipse.jdt:org.eclipse.jdt.core:$versions.jdtCore"
