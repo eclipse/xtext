@@ -8,14 +8,11 @@ task sourcesJar(type: Jar, dependsOn: classes) {
 		include 'schema/**', 'model/**'
 	}
 }
+artifacts.archives sourcesJar
 
 task javadocJar(type: Jar, dependsOn: javadoc) {
 	classifier = 'javadoc'
 	from javadoc.destinationDir
-}
-
-artifacts {
-	archives sourcesJar, javadocJar
 }
 
 //------------------------------------------------------
