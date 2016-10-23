@@ -1,3 +1,7 @@
+/*
+ * Configuration of Java compiler, Javadoc, and additional dependency configurations.
+ */
+
 plugins.withType(JavaBasePlugin) {
 	sourceCompatibility = '1.8'
 }
