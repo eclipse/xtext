@@ -4,3 +4,13 @@ sourceSets {
 	test.java.srcDir 'src/test/xtend-gen'
 	test.java.srcDir 'src/test/xtext-gen'
 }
+
+if (name.contains('example')) {
+	tasks.withType(Javadoc) {
+		enabled = false
+	}
+	javadocJar.enabled = false
+	uploadArchives.enabled = false
+} else {
+	artifacts.archives javadocJar
+}
