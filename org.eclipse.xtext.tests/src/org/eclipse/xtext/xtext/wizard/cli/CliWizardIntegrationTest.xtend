@@ -127,7 +127,7 @@ class CliWizardIntegrationTest {
 
 	private static def newProjectConfig() {
 		new WizardConfiguration => [
-			xtextVersion = new XtextVersion("2.11.0-SNAPSHOT")
+			xtextVersion = new XtextVersion("unspecified")
 			encoding = Charsets.UTF_8
 			language => [
 				name = "org.xtext.example.mydsl.MyDsl"

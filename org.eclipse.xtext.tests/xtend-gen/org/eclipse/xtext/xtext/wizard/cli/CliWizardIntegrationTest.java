@@ -272,7 +272,7 @@ public class CliWizardIntegrationTest {
   private static WizardConfiguration newProjectConfig() {
     WizardConfiguration _wizardConfiguration = new WizardConfiguration();
     final Procedure1<WizardConfiguration> _function = (WizardConfiguration it) -> {
-      XtextVersion _xtextVersion = new XtextVersion("2.11.0-SNAPSHOT");
+      XtextVersion _xtextVersion = new XtextVersion("unspecified");
       it.setXtextVersion(_xtextVersion);
       it.setEncoding(Charsets.UTF_8);
       LanguageDescriptor _language = it.getLanguage();

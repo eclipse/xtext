@@ -19,7 +19,7 @@
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.xtext.sdk.feature.group" version="0.0.0"/>
-<repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/nightly/"/>
+<repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/milestones/"/>
 </location>
 </locations>
 </target>

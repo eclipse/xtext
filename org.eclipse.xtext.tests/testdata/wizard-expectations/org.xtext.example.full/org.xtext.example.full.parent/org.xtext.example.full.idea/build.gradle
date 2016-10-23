@@ -10,7 +10,7 @@ dependencies {
 ideaDevelopment {
 	ideaVersion = '143.381.42'
 	pluginRepositories {
-		url "https://hudson.eclipse.org/xtext/job/xtext-intellij/lastSuccessfulBuild/artifact/git-repo/intellij/build/ideaRepository/updatePlugins.xml"
+		url "http://download.eclipse.org/modeling/tmf/xtext/idea/${xtextVersion}/updatePlugins.xml"
 	}
 	pluginDependencies {
 		id 'org.eclipse.xtext.idea' version xtextVersion
