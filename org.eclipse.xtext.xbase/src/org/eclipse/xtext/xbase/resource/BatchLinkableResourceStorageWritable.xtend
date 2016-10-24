@@ -98,7 +98,7 @@ import java.io.IOException
 		val objOut = new ObjectOutputStream(zipOut);
 		try {
 			// logicalMap
-			val logicalMap = newHashMap()
+			val logicalMap = newLinkedHashMap()
 			for (entry : adapter.logicalContainerMap.entrySet) {
 				if (entry.key.eResource != resource) {
 					LOG.info("entry "+entry+" not from resource "+resource.URI + " but from "+entry.key.eResource?.URI)
@@ -109,23 +109,23 @@ import java.io.IOException
 			objOut.writeObject(logicalMap)
 			
 			// sourceToTarget
-			val sourceToTarget = newHashMap()
+			val sourceToTarget = newLinkedHashMap()
 			for (entry : adapter.sourceToTargetMap.entrySet) {
 				if (entry.key.eResource != resource) {
 					LOG.info("entry not from resource "+resource.URI + " but from "+entry.key.eResource?.URI)
 				} else {
-					sourceToTarget.put(entry.key.fragment, Sets.newHashSet(entry.value.map[fragment]))
+					sourceToTarget.put(entry.key.fragment, Sets.newLinkedHashSet(entry.value.map[fragment]))
 				}
 			}
 			objOut.writeObject(sourceToTarget)
 			
 			// targetToSource
-			val targetToSource = newHashMap()
+			val targetToSource = newLinkedHashMap()
 			for (entry : adapter.targetToSourceMap.entrySet) {
 				if (entry.key.eResource != resource) {
 					LOG.info("entry not from resource "+resource.URI + " but from "+entry.key.eResource?.URI)
 				} else {
-					targetToSource.put(entry.key.fragment, Sets.newHashSet(entry.value.map[fragment]))
+					targetToSource.put(entry.key.fragment, Sets.newLinkedHashSet(entry.value.map[fragment]))
 				}
 			}
 			objOut.writeObject(targetToSource)
