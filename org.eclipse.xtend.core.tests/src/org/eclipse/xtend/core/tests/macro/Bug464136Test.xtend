@@ -11,11 +11,8 @@ import org.eclipse.xtend.lib.macro.AbstractClassProcessor
 import org.eclipse.xtend.lib.macro.Active
 import org.eclipse.xtend.lib.macro.TransformationContext
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
-import org.junit.Ignore
 import org.junit.Test
 
-//FIXME https://github.com/eclipse/xtext-xtend/issues/6
-@Ignore("https://github.com/eclipse/xtext-xtend/issues/6")
 class Bug464136Test extends AbstractActiveAnnotationTest {
 	
 	@Test def void testThrownErrorInPreValidation() {
@@ -27,7 +24,7 @@ class Bug464136Test extends AbstractActiveAnnotationTest {
 			assertEquals('''
 				Error during annotation processing:
 				java.lang.LinkageError: Just a test :-/
-					at org.eclipse.xtend.core.tests.macro.Bug464136Processor$1.apply(Bug464136Processor.java:23)
+					at org.eclipse.xtend.core.tests.macro.Bug464136Processor.lambda$0(Bug464136Processor.java:21)
 			'''.toString, problems.head.message)
 		]
 	}

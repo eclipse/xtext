@@ -7,14 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.tests.compiler
 
-import org.junit.Ignore
 import org.junit.Test
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-//FIXME https://github.com/eclipse/xtext-xtend/issues/6
-@Ignore("https://github.com/eclipse/xtext-xtend/issues/6")
 class CompilerBug457346Test extends AbstractXtendCompilerTest {
 	
 	@Test
@@ -23,7 +20,7 @@ class CompilerBug457346Test extends AbstractXtendCompilerTest {
 			import com.google.common.collect.Ordering
 			class C {
 				def m() {
-					#['a', 'aa', 'aaa'].sort(Ordering.natural.onResultOf [ String s| s.length ].onResultOf[])
+					#['a', 'aa', 'aaa'].sortWith(Ordering.natural.onResultOf [ String s| s.length ].onResultOf[])
 				}
 			}
 		''', '''
@@ -106,15 +103,15 @@ class CompilerBug457346Test extends AbstractXtendCompilerTest {
 			import java.util.Comparator
 			class C {
 				def m(Sortable<String> sortMe) {
-					sortMe.sort(MyComparator.comparingInt [String s| s.length].thenComparing[String s | s])
+					sortMe.sort(MyComparator.comparingInt2 [String s| s.length].thenComparing2[String s | s])
 				}
 				
 				interface Sortable<T> extends Iterable<T> {
 					def void sort(java.util.Comparator<? super T> c)
 				}
 				static abstract class MyComparator<T> implements Comparator<T> {
-					def static <T> MyComparator<T> comparingInt(ToIntFunction<? super T> fun) {}
-					def <U extends Comparable<? super U>> MyComparator<T> thenComparing((T)=>U f) {}
+					def static <T> MyComparator<T> comparingInt2(ToIntFunction<? super T> fun) {}
+					def <U extends Comparable<? super U>> MyComparator<T> thenComparing2((T)=>U f) {}
 				}
 				interface ToIntFunction<T> {
 					def int apply(T t)
@@ -131,11 +128,11 @@ class CompilerBug457346Test extends AbstractXtendCompilerTest {
 			  }
 			  
 			  public static abstract class MyComparator<T extends Object> implements Comparator<T> {
-			    public static <T extends Object> C.MyComparator<T> comparingInt(final C.ToIntFunction<? super T> fun) {
+			    public static <T extends Object> C.MyComparator<T> comparingInt2(final C.ToIntFunction<? super T> fun) {
 			      return null;
 			    }
 			    
-			    public <U extends Comparable<? super U>> C.MyComparator<T> thenComparing(final Function1<? super T, ? extends U> f) {
+			    public <U extends Comparable<? super U>> C.MyComparator<T> thenComparing2(final Function1<? super T, ? extends U> f) {
 			      return null;
 			    }
 			  }
@@ -150,14 +147,14 @@ class CompilerBug457346Test extends AbstractXtendCompilerTest {
 			        return s.length();
 			      }
 			    };
-			    C.MyComparator<String> _comparingInt = C.MyComparator.<String>comparingInt(_function);
+			    C.MyComparator<String> _comparingInt2 = C.MyComparator.<String>comparingInt2(_function);
 			    final Function1<String, String> _function_1 = new Function1<String, String>() {
 			      public String apply(final String s) {
 			        return s;
 			      }
 			    };
-			    C.MyComparator<String> _thenComparing = _comparingInt.<String>thenComparing(_function_1);
-			    sortMe.sort(_thenComparing);
+			    C.MyComparator<String> _thenComparing2 = _comparingInt2.<String>thenComparing2(_function_1);
+			    sortMe.sort(_thenComparing2);
 			  }
 			}
 		''')
@@ -169,15 +166,15 @@ class CompilerBug457346Test extends AbstractXtendCompilerTest {
 			import java.util.Comparator
 			class C {
 				def m(Sortable<String> sortMe) {
-					sortMe.sort(MyComparator.comparingInt [String s| s.length].thenComparing[toUpperCase])
+					sortMe.sort(MyComparator.comparingInt2 [String s| s.length].thenComparing2[toUpperCase])
 				}
 				
 				interface Sortable<T> extends Iterable<T> {
 					def void sort(java.util.Comparator<? super T> c)
 				}
 				static abstract class MyComparator<T> implements Comparator<T> {
-					def static <T> MyComparator<T> comparingInt(ToIntFunction<? super T> fun) {}
-					def <U extends Comparable<? super U>> MyComparator<T> thenComparing((T)=>U f) {}
+					def static <T> MyComparator<T> comparingInt2(ToIntFunction<? super T> fun) {}
+					def <U extends Comparable<? super U>> MyComparator<T> thenComparing2((T)=>U f) {}
 				}
 				interface ToIntFunction<T> {
 					def int apply(T t)
@@ -194,11 +191,11 @@ class CompilerBug457346Test extends AbstractXtendCompilerTest {
 			  }
 			  
 			  public static abstract class MyComparator<T extends Object> implements Comparator<T> {
-			    public static <T extends Object> C.MyComparator<T> comparingInt(final C.ToIntFunction<? super T> fun) {
+			    public static <T extends Object> C.MyComparator<T> comparingInt2(final C.ToIntFunction<? super T> fun) {
 			      return null;
 			    }
 			    
-			    public <U extends Comparable<? super U>> C.MyComparator<T> thenComparing(final Function1<? super T, ? extends U> f) {
+			    public <U extends Comparable<? super U>> C.MyComparator<T> thenComparing2(final Function1<? super T, ? extends U> f) {
 			      return null;
 			    }
 			  }
@@ -213,14 +210,14 @@ class CompilerBug457346Test extends AbstractXtendCompilerTest {
 			        return s.length();
 			      }
 			    };
-			    C.MyComparator<String> _comparingInt = C.MyComparator.<String>comparingInt(_function);
+			    C.MyComparator<String> _comparingInt2 = C.MyComparator.<String>comparingInt2(_function);
 			    final Function1<String, String> _function_1 = new Function1<String, String>() {
 			      public String apply(final String it) {
 			        return it.toUpperCase();
 			      }
 			    };
-			    C.MyComparator<String> _thenComparing = _comparingInt.<String>thenComparing(_function_1);
-			    sortMe.sort(_thenComparing);
+			    C.MyComparator<String> _thenComparing2 = _comparingInt2.<String>thenComparing2(_function_1);
+			    sortMe.sort(_thenComparing2);
 			  }
 			}
 		''')
@@ -232,15 +229,15 @@ class CompilerBug457346Test extends AbstractXtendCompilerTest {
 			import java.util.Comparator
 			class C {
 				def m(Sortable<String> sortMe) {
-					sortMe.sort(MyComparator.comparingInt [String s| s.length].thenComparing[it])
+					sortMe.sort(MyComparator.comparingInt2 [String s| s.length].thenComparing2[it])
 				}
 				
 				interface Sortable<T> extends Iterable<T> {
 					def void sort(java.util.Comparator<? super T> c)
 				}
 				static abstract class MyComparator<T> implements Comparator<T> {
-					def static <T> MyComparator<T> comparingInt(ToIntFunction<? super T> fun) {}
-					def <U extends Comparable<? super U>> MyComparator<T> thenComparing((T)=>U f) {}
+					def static <T> MyComparator<T> comparingInt2(ToIntFunction<? super T> fun) {}
+					def <U extends Comparable<? super U>> MyComparator<T> thenComparing2((T)=>U f) {}
 				}
 				interface ToIntFunction<T> {
 					def int apply(T t)
@@ -257,11 +254,11 @@ class CompilerBug457346Test extends AbstractXtendCompilerTest {
 			  }
 			  
 			  public static abstract class MyComparator<T extends Object> implements Comparator<T> {
-			    public static <T extends Object> C.MyComparator<T> comparingInt(final C.ToIntFunction<? super T> fun) {
+			    public static <T extends Object> C.MyComparator<T> comparingInt2(final C.ToIntFunction<? super T> fun) {
 			      return null;
 			    }
 			    
-			    public <U extends Comparable<? super U>> C.MyComparator<T> thenComparing(final Function1<? super T, ? extends U> f) {
+			    public <U extends Comparable<? super U>> C.MyComparator<T> thenComparing2(final Function1<? super T, ? extends U> f) {
 			      return null;
 			    }
 			  }
@@ -276,14 +273,14 @@ class CompilerBug457346Test extends AbstractXtendCompilerTest {
 			        return s.length();
 			      }
 			    };
-			    C.MyComparator<String> _comparingInt = C.MyComparator.<String>comparingInt(_function);
+			    C.MyComparator<String> _comparingInt2 = C.MyComparator.<String>comparingInt2(_function);
 			    final Function1<String, String> _function_1 = new Function1<String, String>() {
 			      public String apply(final String it) {
 			        return it;
 			      }
 			    };
-			    C.MyComparator<String> _thenComparing = _comparingInt.<String>thenComparing(_function_1);
-			    sortMe.sort(_thenComparing);
+			    C.MyComparator<String> _thenComparing2 = _comparingInt2.<String>thenComparing2(_function_1);
+			    sortMe.sort(_thenComparing2);
 			  }
 			}
 		''')

@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.tests.compiler
 
-import org.junit.Ignore
 import org.junit.Test
 
 /**
@@ -48,19 +47,17 @@ class OverloadedExtensionCompilerTest extends AbstractXtendCompilerTest {
 		''')
 	}
 	
-	//FIXME https://github.com/eclipse/xtext-xtend/issues/6
-	@Ignore("https://github.com/eclipse/xtext-xtend/issues/6")
 	@Test
 	def test_02() {
 		assertCompilesTo('''
 			class C {
 				def method(MyIterable<? extends Number> list) {
-			        list.forEach[ process ]
+			        list.forEach2[ process ]
 			    }
 			    def void process(Number value) {}
 			}
 			interface MyIterable<T> extends Iterable<T> {
-				def void forEach(Consumer<? super T> c)
+				def void forEach2(Consumer<? super T> c)
 			}
 			interface Consumer<T> {
 				def void consume(T t)
@@ -74,7 +71,7 @@ class OverloadedExtensionCompilerTest extends AbstractXtendCompilerTest {
 			        C.this.process(it);
 			      }
 			    };
-			    list.forEach(_function);
+			    list.forEach2(_function);
 			  }
 			  
 			  public void process(final Number value) {

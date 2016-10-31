@@ -7,14 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.tests.compiler
 
-import org.junit.Ignore
 import org.junit.Test
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-//FIXME https://github.com/eclipse/xtext-xtend/issues/6
-@Ignore("https://github.com/eclipse/xtext-xtend/issues/6")
 class CompilerBug440906Test extends AbstractXtendCompilerTest {
 	
 	@Test
@@ -26,7 +23,7 @@ class CompilerBug440906Test extends AbstractXtendCompilerTest {
 				}
 				
 				def m2() {
-					#[].sort(m)
+					#[].sortWith(m)
 				}
 			}
 		''', '''
@@ -70,7 +67,7 @@ class CompilerBug440906Test extends AbstractXtendCompilerTest {
 				}
 				
 				def m2() {
-					#[].sort({toString m})
+					#[].sortWith({toString m})
 				}
 			}
 		''', '''
