@@ -6,7 +6,7 @@
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
        uri = "http://www.xtext.org/example/Entities" 
-       class = "org.eclipse.xtext.idea.example.entities.domainmodel.DomainmodelPackage"
+       class = "org.eclipse.xtext.web.example.entities.domainmodel.DomainmodelPackage"
        genModel = "model/generated/Entities.genmodel" /> 
 	
   </extension>
