@@ -61,6 +61,17 @@
 		</repository>
 	</repositories>
 
+	<distributionManagement>
+		<repository>
+			<id>local.release.repo</id>
+			<url>file:${user.dir}/build/maven-repository</url>
+		</repository>
+		<snapshotRepository>
+			<id>local.release.repo</id>
+			<url>file:${user.dir}/build/maven-repository</url>
+		</snapshotRepository>
+	</distributionManagement>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.eclipse.xtend</groupId>
