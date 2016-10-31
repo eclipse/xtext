@@ -13,7 +13,8 @@ node {
 			sh "./gradlew -PuseJenkinsSnapshots=true cleanLocalMavenRepo clean build createLocalMavenRepo --refresh-dependencies --continue"
 			archive 'build/maven-repository/**/*.*'
 		} finally {
-			step([$class: 'JUnitResultArchiver', testResults: '**/build/test-results/*.xml'])
+			//https://github.com/eclipse/xtext-xtend/issues/62
+			//step([$class: 'JUnitResultArchiver', testResults: '**/build/test-results/*.xml'])
 		}
 		
 		stage 'Maven Build'
