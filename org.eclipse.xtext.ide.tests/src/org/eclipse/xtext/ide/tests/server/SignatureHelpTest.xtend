@@ -7,9 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.tests.server
 
-import org.eclipse.xtext.ide.server.signatureHelp.SignatureHelpService
-import org.junit.Test
 import org.eclipse.xtext.ide.tests.testlanguage.signatureHelp.SignatureHelpServiceImpl
+import org.junit.Test
 
 /**
  * Class for testing the the {@link SignatureHelpService signature help service} implementation.
@@ -20,6 +19,16 @@ import org.eclipse.xtext.ide.tests.testlanguage.signatureHelp.SignatureHelpServi
 class SignatureHelpTest extends AbstractTestLangLanguageServerTest {
 
     static val LINE_NUMBER = 12;
+
+    @Test
+    def void singleArgsExactMatchAfterTriggerChar() {
+        testSignatureHelp[
+            model = '''type A { op foo(a: A) { } } type Main { op main() { foo() } }'''
+            line = 0;
+            column = '''type A { op foo(a: A) { } } type Main { op main() { foo('''.length;
+            expectedSignatureHelp = 'A.foo(a: A): void | a: A'
+        ];
+    }
 
     @Test
     def void noArgsExactMatch() {

@@ -67,7 +67,6 @@ import org.eclipse.xtext.ide.server.contentassist.ContentAssistService
 import org.eclipse.xtext.ide.server.findReferences.WorkspaceResourceAccess
 import org.eclipse.xtext.ide.server.formatting.FormattingService
 import org.eclipse.xtext.ide.server.hover.HoverService
-import org.eclipse.xtext.ide.server.signatureHelp.SignatureHelpService
 import org.eclipse.xtext.ide.server.symbol.DocumentSymbolService
 import org.eclipse.xtext.ide.server.symbol.WorkspaceSymbolService
 import org.eclipse.xtext.resource.IResourceServiceProvider
@@ -75,6 +74,7 @@ import org.eclipse.xtext.service.OperationCanceledManager
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.validation.Issue
 import org.eclipse.xtext.ide.server.occurrences.IDocumentHighlightService
+import org.eclipse.xtext.ide.server.signatureHelp.ISignatureHelpService
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -382,7 +382,7 @@ import org.eclipse.xtext.ide.server.occurrences.IDocumentHighlightService
 		return requestManager.runRead [ cancelIndicator |
             val uri = position.textDocument.uri.toUri;
             val serviceProvider = uri.resourceServiceProvider;
-            val helper = serviceProvider?.get(SignatureHelpService);
+            val helper = serviceProvider?.get(ISignatureHelpService);
             if (helper === null) {
                 return new SignatureHelpImpl(); 
             }

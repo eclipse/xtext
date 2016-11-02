@@ -21,8 +21,8 @@ import io.typefox.lsapi.builders.SignatureHelpBuilder;
  * 
  * @author akos.kitta - Initial contribution and API
  */
-@ImplementedBy(SignatureHelpService.Noop.class)
-public interface SignatureHelpService {
+@ImplementedBy(ISignatureHelpService.Noop.class)
+public interface ISignatureHelpService {
 
 	/**
 	 * Shared, immutable empty instance. 
@@ -44,12 +44,12 @@ public interface SignatureHelpService {
 	SignatureHelp getSignatureHelp(final XtextResource resource, final int offset);
 
 	/**
-	 * NOOP {@link SignatureHelpService signature help service} implementation.
+	 * NOOP {@link ISignatureHelpService signature help service} implementation.
 	 * 
 	 * @author akos.kitta - Initial contribution and API
 	 */
 	@Singleton
-	public static class Noop implements SignatureHelpService {
+	public static class Noop implements ISignatureHelpService {
 		
 		@Override
 		public SignatureHelp getSignatureHelp(final XtextResource resource, final int offset) {
