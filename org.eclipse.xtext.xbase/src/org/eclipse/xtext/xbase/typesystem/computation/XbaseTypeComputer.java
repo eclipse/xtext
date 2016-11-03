@@ -16,6 +16,7 @@ import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
 import org.eclipse.xtext.common.types.JvmEnumerationType;
@@ -989,7 +990,11 @@ public class XbaseTypeComputer extends AbstractTypeComputer implements ITypeComp
 	}
 
 	protected void checkValidReturn(XReturnExpression object, ITypeComputationState state) {
-		if (hasThrowableExpectation(state)) {
+		// if the expectation comes from a method's return type
+		// then it is legal, thus we must check if the return is
+		// contained in a throw expression
+		if (hasThrowableExpectation(state) &&
+				EcoreUtil2.getContainerOfType(object, XThrowExpression.class) != null) {
 			state.addDiagnostic(new EObjectDiagnosticImpl(
 					Severity.ERROR,
 					IssueCodes.INVALID_RETURN,
