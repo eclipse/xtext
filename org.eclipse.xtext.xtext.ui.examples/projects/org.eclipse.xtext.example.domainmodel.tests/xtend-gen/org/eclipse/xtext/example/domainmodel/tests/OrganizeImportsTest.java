@@ -236,7 +236,7 @@ public class OrganizeImportsTest {
     _builder.append("val x = newArrayList(\'foo\',\'bar\')");
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("Collections::sort(x)");
+    _builder.append("Collections.sort(x)");
     _builder.newLine();
     _builder.append("  ");
     _builder.append("}");
@@ -258,7 +258,7 @@ public class OrganizeImportsTest {
     _builder_1.append("val x = newArrayList(\'foo\',\'bar\')");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("Collections::sort(x)");
+    _builder_1.append("Collections.sort(x)");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");

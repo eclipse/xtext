@@ -135,7 +135,7 @@ class OrganizeImportsTest {
 			entity Foo {
 			  op test(List<String> s) : void{
 			    val x = newArrayList('foo','bar')
-			    Collections::sort(x)
+			    Collections.sort(x)
 			  }
 			}
 		'''.assertIsOrganizedTo('''
@@ -145,7 +145,7 @@ class OrganizeImportsTest {
 			entity Foo {
 			  op test(List<String> s) : void{
 			    val x = newArrayList('foo','bar')
-			    Collections::sort(x)
+			    Collections.sort(x)
 			  }
 			}
 		''')
