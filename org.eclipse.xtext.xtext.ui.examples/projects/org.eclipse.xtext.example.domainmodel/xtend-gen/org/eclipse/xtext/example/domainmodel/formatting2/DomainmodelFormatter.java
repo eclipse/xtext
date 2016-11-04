@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.example.domainmodel.formatting2;
 
-import com.google.common.base.Objects;
 import java.util.Arrays;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
@@ -207,8 +206,8 @@ public class DomainmodelFormatter extends XbaseFormatter {
       document.prepend(_keyword_2, _function_4);
     }
     JvmTypeReference _type = operation.getType();
-    boolean _notEquals = (!Objects.equal(_type, null));
-    if (_notEquals) {
+    boolean _tripleNotEquals = (_type != null);
+    if (_tripleNotEquals) {
       ISemanticRegionsFinder _regionFor_4 = this.textRegionExtensions.regionFor(operation);
       ISemanticRegion _keyword_3 = _regionFor_4.keyword(")");
       final Procedure1<IHiddenRegionFormatter> _function_5 = (IHiddenRegionFormatter it) -> {

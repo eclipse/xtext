@@ -1,24 +1,23 @@
 package org.eclipse.xtext.example.domainmodel.tests
 
 import com.google.inject.Inject
-import org.eclipse.xtext.example.domainmodel.DomainmodelInjectorProvider
 import org.eclipse.xtext.example.domainmodel.domainmodel.DomainModel
-import org.eclipse.xtext.junit4.InjectWith
-import org.eclipse.xtext.junit4.XtextRunner
-import org.eclipse.xtext.junit4.util.ParseHelper
 import org.eclipse.xtext.resource.XtextResource
+import org.eclipse.xtext.testing.InjectWith
+import org.eclipse.xtext.testing.XtextRunner
+import org.eclipse.xtext.testing.util.ParseHelper
+import org.eclipse.xtext.util.ReplaceRegion
 import org.eclipse.xtext.xbase.imports.ImportOrganizer
 import org.junit.Test
 import org.junit.runner.RunWith
 
 import static org.junit.Assert.*
-import org.eclipse.xtext.util.ReplaceRegion
 
 /**
  * @author Jan Koehnlein - copied and adapted from Xtend
  */
-@RunWith(typeof(XtextRunner))
-@InjectWith(typeof(DomainmodelInjectorProvider))
+@RunWith(XtextRunner)
+@InjectWith(DomainmodelInjectorProvider)
 class OrganizeImportsTest {
 	
 	@Inject extension ParseHelper<DomainModel> 
@@ -31,7 +30,7 @@ class OrganizeImportsTest {
 		val sortedChanges= changes.sortBy[offset]
 		var ReplaceRegion lastChange = null
 		for(it: sortedChanges) {
-			if(lastChange != null && lastChange.endOffset > offset)
+			if(lastChange !== null && lastChange.endOffset > offset)
 				fail("Overlapping text edits: " + lastChange + ' and ' +it)
 			lastChange = it
 		}

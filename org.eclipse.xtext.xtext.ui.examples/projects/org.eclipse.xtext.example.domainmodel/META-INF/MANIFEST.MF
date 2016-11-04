@@ -1,8 +1,8 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Xtext Domainmodel Example - Runtime
+Bundle-Name: Xtext Domainmodel Example
 Bundle-Vendor: Eclipse Xtext
-Bundle-Version: 2.11.0.qualifier
+Bundle-Version: 2.10.0.qualifier
 Bundle-SymbolicName: org.eclipse.xtext.example.domainmodel; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext;visibility:=reexport,
@@ -16,7 +16,8 @@ Require-Bundle: org.eclipse.xtext;visibility:=reexport,
  org.eclipse.xtext.xbase.lib;visibility:=reexport,
  org.eclipse.xtext.ui.codetemplates,
  org.objectweb.asm;bundle-version="[5.0.1,6.0.0)";resolution:=optional,
- org.eclipse.equinox.common
+ org.eclipse.equinox.common,
+ org.eclipse.xtend.lib
 Export-Package: org.eclipse.xtext.example.domainmodel,
  org.eclipse.xtext.example.domainmodel.domainmodel,
  org.eclipse.xtext.example.domainmodel.domainmodel.impl,
@@ -27,6 +28,7 @@ Export-Package: org.eclipse.xtext.example.domainmodel,
  org.eclipse.xtext.example.domainmodel.parser.antlr.internal,
  org.eclipse.xtext.example.domainmodel.services,
  org.eclipse.xtext.example.domainmodel.validation,
- org.eclipse.xtext.example.domainmodel.serializer
+ org.eclipse.xtext.example.domainmodel.serializer,
+ org.eclipse.xtext.example.domainmodel.scoping
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Import-Package: org.apache.log4j;version="1.2.15"

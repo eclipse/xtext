@@ -1,16 +1,15 @@
 package org.eclipse.xtext.example.domainmodel.tests;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.List;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.example.domainmodel.DomainmodelInjectorProvider;
 import org.eclipse.xtext.example.domainmodel.domainmodel.DomainModel;
-import org.eclipse.xtext.junit4.InjectWith;
-import org.eclipse.xtext.junit4.XtextRunner;
-import org.eclipse.xtext.junit4.util.ParseHelper;
+import org.eclipse.xtext.example.domainmodel.tests.DomainmodelInjectorProvider;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.testing.InjectWith;
+import org.eclipse.xtext.testing.XtextRunner;
+import org.eclipse.xtext.testing.util.ParseHelper;
 import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.xbase.imports.ImportOrganizer;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -50,7 +49,7 @@ public class OrganizeImportsTest {
       ReplaceRegion lastChange = null;
       for (final ReplaceRegion it : sortedChanges) {
         {
-          if (((!Objects.equal(lastChange, null)) && (lastChange.getEndOffset() > it.getOffset()))) {
+          if (((lastChange != null) && (lastChange.getEndOffset() > it.getOffset()))) {
             Assert.fail(((("Overlapping text edits: " + lastChange) + " and ") + it));
           }
           lastChange = it;
