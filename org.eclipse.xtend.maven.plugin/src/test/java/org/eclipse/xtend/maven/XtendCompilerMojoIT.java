@@ -74,7 +74,7 @@ public class XtendCompilerMojoIT {
 		String gen = verifier.getBasedir() + "/src/main/generated-sources/xtend/test/XtendA.java";
 		assertFileContainsUTF16(verifier, gen, "Mühlheim-Kärlicher Bürger");
 		assertFileContainsUTF16(verifier, gen, "_builder.append(\"möchte meine \");");
-		assertFileContainsUTF16(verifier, gen, "_builder.append(\"tür ölen\", \"\");");
+		assertFileContainsUTF16(verifier, gen, "_builder.append(\"tür ölen\");");
 	}
 
 	@Test

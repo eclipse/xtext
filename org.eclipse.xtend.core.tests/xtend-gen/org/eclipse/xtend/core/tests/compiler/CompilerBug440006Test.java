@@ -63,7 +63,7 @@ public class CompilerBug440006Test extends AbstractXtendCompilerTest {
     _builder_1.append("for(final IntegerRange i : Collections.<IntegerRange>unmodifiableSet(CollectionLiterals.<IntegerRange>newHashSet(_upTo))) {");
     _builder_1.newLine();
     _builder_1.append("        ");
-    _builder_1.append("_builder.append(i, \"\");");
+    _builder_1.append("_builder.append(i);");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("}");
@@ -129,7 +129,7 @@ public class CompilerBug440006Test extends AbstractXtendCompilerTest {
     _builder_1.append("for(final IntegerRange i : Collections.<IntegerRange>unmodifiableList(CollectionLiterals.<IntegerRange>newArrayList(_upTo))) {");
     _builder_1.newLine();
     _builder_1.append("        ");
-    _builder_1.append("_builder.append(i, \"\");");
+    _builder_1.append("_builder.append(i);");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("}");

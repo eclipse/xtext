@@ -36,7 +36,7 @@ class CompilerBug440006Test extends AbstractXtendCompilerTest {
 			    {
 			      IntegerRange _upTo = new IntegerRange(1, 2);
 			      for(final IntegerRange i : Collections.<IntegerRange>unmodifiableSet(CollectionLiterals.<IntegerRange>newHashSet(_upTo))) {
-			        _builder.append(i, "");
+			        _builder.append(i);
 			      }
 			    }
 			    return _builder;
@@ -67,7 +67,7 @@ class CompilerBug440006Test extends AbstractXtendCompilerTest {
 			    {
 			      IntegerRange _upTo = new IntegerRange(1, 2);
 			      for(final IntegerRange i : Collections.<IntegerRange>unmodifiableList(CollectionLiterals.<IntegerRange>newArrayList(_upTo))) {
-			        _builder.append(i, "");
+			        _builder.append(i);
 			      }
 			    }
 			    return _builder;

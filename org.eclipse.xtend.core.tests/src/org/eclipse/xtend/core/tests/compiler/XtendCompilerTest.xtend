@@ -1347,7 +1347,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			    {
 			      char[] _charArray = it.toCharArray();
 			      for(final char it_1 : _charArray) {
-			        _builder.append(it_1, "");
+			        _builder.append(it_1);
 			        _builder.newLineIfNotEmpty();
 			      }
 			    }
