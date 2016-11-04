@@ -11,6 +11,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
 
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.junit.Test;
 
 public class StringConcatenationTest {
@@ -44,11 +45,38 @@ public class StringConcatenationTest {
     }
 
     @Test
-    public void testAppendNull() {
+    public void testAppendObjectNull() {
         final StringConcatenation c = new StringConcatenation();
-        c.append(null);
-        c.append(null, "");
-        c.append(null, " ");
+        c.append((Object)null);
+        c.append((Object)null, "");
+        c.append((Object)null, " ");
+        assertEquals("", c.toString());
+    }
+
+    @Test
+    public void testAppendStringNull() {
+        final StringConcatenation c = new StringConcatenation();
+        c.append((String)null);
+        c.append((String)null, "");
+        c.append((String)null, " ");
+        assertEquals("", c.toString());
+    }
+
+    @Test
+    public void testAppendStringConcatNull() {
+        final StringConcatenation c = new StringConcatenation();
+        c.append((StringConcatenation)null);
+        c.append((StringConcatenation)null, "");
+        c.append((StringConcatenation)null, " ");
+        assertEquals("", c.toString());
+    }
+
+    @Test
+    public void testAppendStringConcatClientNull() {
+        final StringConcatenation c = new StringConcatenation();
+        c.append((StringConcatenationClient)null);
+        c.append((StringConcatenationClient)null, "");
+        c.append((StringConcatenationClient)null, " ");
         assertEquals("", c.toString());
     }
 
@@ -70,7 +98,7 @@ public class StringConcatenationTest {
     @Test(expected=NullPointerException.class)
     public void testAppendNullWithNullIndent() {
         final StringConcatenation c = new StringConcatenation();
-        c.append(null, null);
+        c.append((Object)null, null);
     }
 
     @Test
@@ -79,6 +107,15 @@ public class StringConcatenationTest {
         c.append("a");
         c.append("b");
         c.append("c");
+        assertEquals("abc", c.toString());
+    }
+
+    @Test
+    public void testMaskedStringConcat() {
+        final StringConcatenation c = new StringConcatenation();
+        c.append((Object)"a");
+        c.append((Object)"b");
+        c.append((Object)"c");
         assertEquals("abc", c.toString());
     }
 
@@ -120,6 +157,15 @@ public class StringConcatenationTest {
         c.append("a\n", " ");
         c.append("b\r", "  ");
         c.append("c\nd", "   ");
+        assertEquals("a\n b\n  c\n   d", c.toString());
+    }
+
+    @Test
+    public void testMaskedIndentConcat() {
+        final StringConcatenation c = new StringConcatenation();
+        c.append((Object)"a\n", " ");
+        c.append((Object)"b\r", "  ");
+        c.append((Object)"c\nd", "   ");
         assertEquals("a\n b\n  c\n   d", c.toString());
     }
 
@@ -200,6 +246,28 @@ public class StringConcatenationTest {
         final StringConcatenation c = new StringConcatenation();
         c.append(new StringConcatenation("\t"));
         assertEquals("", c.toString());
+    }
+
+    @Test
+    public void testAppendMaskedConcat() {
+        final StringConcatenation toAppend = new StringConcatenation();
+        toAppend.append("a\n");
+        toAppend.append("b");
+
+        final StringConcatenation c = new StringConcatenation();
+        c.append((Object)toAppend);
+        assertEquals("a\nb", c.toString());
+    }
+
+    @Test
+    public void testAppendMaskedIndentConcat() {
+        final StringConcatenation toAppend = new StringConcatenation();
+        toAppend.append("a\n");
+        toAppend.append("b");
+
+        final StringConcatenation c = new StringConcatenation();
+        c.append((Object)toAppend, " ");
+        assertEquals("a\n b", c.toString());
     }
 
     @Test
