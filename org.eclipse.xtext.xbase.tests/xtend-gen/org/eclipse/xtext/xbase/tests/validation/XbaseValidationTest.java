@@ -2875,6 +2875,48 @@ public class XbaseValidationTest extends AbstractXbaseTestCase {
   }
   
   @Test
+  public void test406762_ValidReturnInLambdaContainedInThrow() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("throw {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val foo = [|return \"foo\"]");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("new Exception(foo.apply)");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XExpression _expression = this.expression(_builder);
+      this._validationTestHelper.assertNoErrors(_expression);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void test406762_ValidReturnInLambdaContainedInThrow_1() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("throw {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val ()=>Exception foo = [|return new Exception]");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("foo.apply");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      XExpression _expression = this.expression(_builder);
+      this._validationTestHelper.assertNoErrors(_expression);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
   public void testRangeLiteralInForLoopBug440006_01() {
     try {
       StringConcatenation _builder = new StringConcatenation();

@@ -4380,4 +4380,133 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
       throw Exceptions.sneakyThrow(_e);
     }
   }
+  
+  @Test
+  public void test406762_ValidReturnInLambdaContainedInThrow() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("throw {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val foo = [|return \"foo\"]");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("new Exception(foo.apply)");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("try {");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("Exception _xblockexpression = null;");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("{");
+      _builder_1.newLine();
+      _builder_1.append("    ");
+      _builder_1.append("final org.eclipse.xtext.xbase.lib.Functions.Function0<String> _function = new org.eclipse.xtext.xbase.lib.Functions.Function0<String>() {");
+      _builder_1.newLine();
+      _builder_1.append("      ");
+      _builder_1.append("public String apply() {");
+      _builder_1.newLine();
+      _builder_1.append("        ");
+      _builder_1.append("return \"foo\";");
+      _builder_1.newLine();
+      _builder_1.append("      ");
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("    ");
+      _builder_1.append("};");
+      _builder_1.newLine();
+      _builder_1.append("    ");
+      _builder_1.append("final org.eclipse.xtext.xbase.lib.Functions.Function0<String> foo = _function;");
+      _builder_1.newLine();
+      _builder_1.append("    ");
+      _builder_1.append("String _apply = foo.apply();");
+      _builder_1.newLine();
+      _builder_1.append("    ");
+      _builder_1.append("_xblockexpression = new Exception(_apply);");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("throw _xblockexpression;");
+      _builder_1.newLine();
+      _builder_1.append("} catch (Throwable _e) {");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("throw org.eclipse.xtext.xbase.lib.Exceptions.sneakyThrow(_e);");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      this.compilesTo(_builder, _builder_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void test406762_ValidReturnInLambdaContainedInThrow_1() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("throw {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val ()=>Exception foo = [|return new Exception]");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("foo.apply");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("try {");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("Exception _xblockexpression = null;");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("{");
+      _builder_1.newLine();
+      _builder_1.append("    ");
+      _builder_1.append("final org.eclipse.xtext.xbase.lib.Functions.Function0<Exception> _function = new org.eclipse.xtext.xbase.lib.Functions.Function0<Exception>() {");
+      _builder_1.newLine();
+      _builder_1.append("      ");
+      _builder_1.append("public Exception apply() {");
+      _builder_1.newLine();
+      _builder_1.append("        ");
+      _builder_1.append("return new Exception();");
+      _builder_1.newLine();
+      _builder_1.append("      ");
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("    ");
+      _builder_1.append("};");
+      _builder_1.newLine();
+      _builder_1.append("    ");
+      _builder_1.append("final org.eclipse.xtext.xbase.lib.Functions.Function0<? extends Exception> foo = _function;");
+      _builder_1.newLine();
+      _builder_1.append("    ");
+      _builder_1.append("_xblockexpression = foo.apply();");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("throw _xblockexpression;");
+      _builder_1.newLine();
+      _builder_1.append("} catch (Throwable _e) {");
+      _builder_1.newLine();
+      _builder_1.append("  ");
+      _builder_1.append("throw org.eclipse.xtext.xbase.lib.Exceptions.sneakyThrow(_e);");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      this.compilesTo(_builder, _builder_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
 }
