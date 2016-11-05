@@ -10,11 +10,6 @@ package org.eclipse.xtext.ide.server.symbol;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
-import io.typefox.lsapi.Location;
-import io.typefox.lsapi.SymbolInformation;
-import io.typefox.lsapi.SymbolKind;
-import io.typefox.lsapi.impl.LocationImpl;
-import io.typefox.lsapi.impl.SymbolInformationImpl;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashMap;
@@ -27,6 +22,9 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.lsp4j.Location;
+import org.eclipse.lsp4j.SymbolInformation;
+import org.eclipse.lsp4j.SymbolKind;
 import org.eclipse.xtext.findReferences.IReferenceFinder;
 import org.eclipse.xtext.findReferences.ReferenceAcceptor;
 import org.eclipse.xtext.findReferences.TargetURICollector;
@@ -90,13 +88,13 @@ public class DocumentSymbolService {
     if ((element == null)) {
       return CollectionLiterals.<Location>emptyList();
     }
-    final ArrayList<LocationImpl> locations = CollectionLiterals.<LocationImpl>newArrayList();
+    final ArrayList<Location> locations = CollectionLiterals.<Location>newArrayList();
     final TargetURIs targetURIs = this.collectTargetURIs(element);
     for (final URI targetURI : targetURIs) {
       {
         this.operationCanceledManager.checkCanceled(cancelIndicator);
         final Procedure1<EObject> _function = (EObject obj) -> {
-          LocationImpl _newLocation = this._documentExtensions.newLocation(obj);
+          Location _newLocation = this._documentExtensions.newLocation(obj);
           locations.add(_newLocation);
         };
         this.doRead(resourceAccess, targetURI, _function);
@@ -110,14 +108,14 @@ public class DocumentSymbolService {
     if ((element == null)) {
       return CollectionLiterals.<Location>emptyList();
     }
-    final ArrayList<LocationImpl> locations = CollectionLiterals.<LocationImpl>newArrayList();
+    final ArrayList<Location> locations = CollectionLiterals.<Location>newArrayList();
     final TargetURIs targetURIs = this.collectTargetURIs(element);
     final IAcceptor<IReferenceDescription> _function = (IReferenceDescription reference) -> {
       URI _sourceEObjectUri = reference.getSourceEObjectUri();
       final Procedure1<EObject> _function_1 = (EObject obj) -> {
         EReference _eReference = reference.getEReference();
         int _indexInList = reference.getIndexInList();
-        LocationImpl _newLocation = this._documentExtensions.newLocation(obj, _eReference, _indexInList);
+        Location _newLocation = this._documentExtensions.newLocation(obj, _eReference, _indexInList);
         locations.add(_newLocation);
       };
       this.doRead(resourceAccess, _sourceEObjectUri, _function_1);
@@ -135,18 +133,18 @@ public class DocumentSymbolService {
   }
   
   public List<? extends SymbolInformation> getSymbols(final XtextResource resource, final CancelIndicator cancelIndicator) {
-    final LinkedHashMap<EObject, SymbolInformationImpl> symbols = CollectionLiterals.<EObject, SymbolInformationImpl>newLinkedHashMap();
+    final LinkedHashMap<EObject, SymbolInformation> symbols = CollectionLiterals.<EObject, SymbolInformation>newLinkedHashMap();
     final TreeIterator<Object> contents = EcoreUtil.<Object>getAllProperContents(resource, true);
     while (contents.hasNext()) {
       {
         this.operationCanceledManager.checkCanceled(cancelIndicator);
         Object _next = contents.next();
         final EObject obj = ((EObject) _next);
-        final SymbolInformationImpl symbol = this.createSymbol(obj);
+        final SymbolInformation symbol = this.createSymbol(obj);
         if ((symbol != null)) {
           symbols.put(obj, symbol);
           final EObject container = this.getContainer(obj);
-          final SymbolInformationImpl containerSymbol = symbols.get(container);
+          final SymbolInformation containerSymbol = symbols.get(container);
           String _name = null;
           if (containerSymbol!=null) {
             _name=containerSymbol.getName();
@@ -155,24 +153,24 @@ public class DocumentSymbolService {
         }
       }
     }
-    Collection<SymbolInformationImpl> _values = symbols.values();
-    return IterableExtensions.<SymbolInformationImpl>toList(_values);
+    Collection<SymbolInformation> _values = symbols.values();
+    return IterableExtensions.<SymbolInformation>toList(_values);
   }
   
   protected EObject getContainer(final EObject obj) {
     return obj.eContainer();
   }
   
-  protected SymbolInformationImpl createSymbol(final EObject object) {
+  protected SymbolInformation createSymbol(final EObject object) {
     final String symbolName = this.getSymbolName(object);
     if ((symbolName == null)) {
       return null;
     }
-    final SymbolInformationImpl symbol = new SymbolInformationImpl();
+    final SymbolInformation symbol = new SymbolInformation();
     symbol.setName(symbolName);
     SymbolKind _symbolKind = this.getSymbolKind(object);
     symbol.setKind(_symbolKind);
-    LocationImpl _newLocation = this._documentExtensions.newLocation(object);
+    Location _newLocation = this._documentExtensions.newLocation(object);
     symbol.setLocation(_newLocation);
     return symbol;
   }
@@ -188,19 +186,19 @@ public class DocumentSymbolService {
   }
   
   public List<? extends SymbolInformation> getSymbols(final IResourceDescription resourceDescription, final String query, final IReferenceFinder.IResourceAccess resourceAccess, final CancelIndicator cancelIndicator) {
-    final LinkedList<SymbolInformationImpl> symbols = CollectionLiterals.<SymbolInformationImpl>newLinkedList();
+    final LinkedList<SymbolInformation> symbols = CollectionLiterals.<SymbolInformation>newLinkedList();
     Iterable<IEObjectDescription> _exportedObjects = resourceDescription.getExportedObjects();
     for (final IEObjectDescription description : _exportedObjects) {
       {
         this.operationCanceledManager.checkCanceled(cancelIndicator);
         boolean _filter = this.filter(description, query);
         if (_filter) {
-          final SymbolInformationImpl symbol = this.createSymbol(description);
+          final SymbolInformation symbol = this.createSymbol(description);
           if ((symbol != null)) {
             symbols.add(symbol);
             URI _eObjectURI = description.getEObjectURI();
             final Procedure1<EObject> _function = (EObject obj) -> {
-              LocationImpl _newLocation = this._documentExtensions.newLocation(obj);
+              Location _newLocation = this._documentExtensions.newLocation(obj);
               symbol.setLocation(_newLocation);
             };
             this.doRead(resourceAccess, _eObjectURI, _function);
@@ -219,12 +217,12 @@ public class DocumentSymbolService {
     return _string.contains(_lowerCase_1);
   }
   
-  protected SymbolInformationImpl createSymbol(final IEObjectDescription description) {
+  protected SymbolInformation createSymbol(final IEObjectDescription description) {
     final String symbolName = this.getSymbolName(description);
     if ((symbolName == null)) {
       return null;
     }
-    final SymbolInformationImpl symbol = new SymbolInformationImpl();
+    final SymbolInformation symbol = new SymbolInformation();
     symbol.setName(symbolName);
     SymbolKind _symbolKind = this.getSymbolKind(description);
     symbol.setKind(_symbolKind);

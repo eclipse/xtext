@@ -9,7 +9,6 @@ package org.eclipse.xtext.ide.server;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import io.typefox.lsapi.TextEdit;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -22,6 +21,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.URIConverter;
+import org.eclipse.lsp4j.TextEdit;
 import org.eclipse.xtext.ide.server.BuildManager;
 import org.eclipse.xtext.ide.server.Document;
 import org.eclipse.xtext.ide.server.IProjectDescriptionFactory;

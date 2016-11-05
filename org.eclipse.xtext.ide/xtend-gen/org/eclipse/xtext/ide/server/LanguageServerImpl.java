@@ -10,73 +10,62 @@ package org.eclipse.xtext.ide.server;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import io.typefox.lsapi.CodeActionParams;
-import io.typefox.lsapi.CodeLens;
-import io.typefox.lsapi.CodeLensParams;
-import io.typefox.lsapi.Command;
-import io.typefox.lsapi.CompletionItem;
-import io.typefox.lsapi.CompletionList;
-import io.typefox.lsapi.DiagnosticSeverity;
-import io.typefox.lsapi.DidChangeConfigurationParams;
-import io.typefox.lsapi.DidChangeTextDocumentParams;
-import io.typefox.lsapi.DidChangeWatchedFilesParams;
-import io.typefox.lsapi.DidCloseTextDocumentParams;
-import io.typefox.lsapi.DidOpenTextDocumentParams;
-import io.typefox.lsapi.DidSaveTextDocumentParams;
-import io.typefox.lsapi.DocumentFormattingParams;
-import io.typefox.lsapi.DocumentHighlight;
-import io.typefox.lsapi.DocumentOnTypeFormattingParams;
-import io.typefox.lsapi.DocumentRangeFormattingParams;
-import io.typefox.lsapi.DocumentSymbolParams;
-import io.typefox.lsapi.FileChangeType;
-import io.typefox.lsapi.FileEvent;
-import io.typefox.lsapi.Hover;
-import io.typefox.lsapi.InitializeParams;
-import io.typefox.lsapi.InitializeResult;
-import io.typefox.lsapi.Location;
-import io.typefox.lsapi.MessageParams;
-import io.typefox.lsapi.Position;
-import io.typefox.lsapi.PublishDiagnosticsParams;
-import io.typefox.lsapi.Range;
-import io.typefox.lsapi.ReferenceContext;
-import io.typefox.lsapi.ReferenceParams;
-import io.typefox.lsapi.RenameParams;
-import io.typefox.lsapi.ShowMessageRequestParams;
-import io.typefox.lsapi.SignatureHelp;
-import io.typefox.lsapi.SymbolInformation;
-import io.typefox.lsapi.TextDocumentContentChangeEvent;
-import io.typefox.lsapi.TextDocumentIdentifier;
-import io.typefox.lsapi.TextDocumentItem;
-import io.typefox.lsapi.TextDocumentPositionParams;
-import io.typefox.lsapi.TextDocumentSyncKind;
-import io.typefox.lsapi.TextEdit;
-import io.typefox.lsapi.VersionedTextDocumentIdentifier;
-import io.typefox.lsapi.WorkspaceEdit;
-import io.typefox.lsapi.WorkspaceSymbolParams;
-import io.typefox.lsapi.builders.CompletionListBuilder;
-import io.typefox.lsapi.impl.CompletionOptionsImpl;
-import io.typefox.lsapi.impl.DiagnosticImpl;
-import io.typefox.lsapi.impl.HoverImpl;
-import io.typefox.lsapi.impl.InitializeResultImpl;
-import io.typefox.lsapi.impl.MarkedStringImpl;
-import io.typefox.lsapi.impl.PositionImpl;
-import io.typefox.lsapi.impl.PublishDiagnosticsParamsImpl;
-import io.typefox.lsapi.impl.RangeImpl;
-import io.typefox.lsapi.impl.ServerCapabilitiesImpl;
-import io.typefox.lsapi.impl.SignatureHelpImpl;
-import io.typefox.lsapi.impl.SignatureHelpOptionsImpl;
-import io.typefox.lsapi.impl.TextEditImpl;
-import io.typefox.lsapi.services.LanguageServer;
-import io.typefox.lsapi.services.TextDocumentService;
-import io.typefox.lsapi.services.WindowService;
-import io.typefox.lsapi.services.WorkspaceService;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
-import java.util.function.Consumer;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.lsp4j.CodeActionParams;
+import org.eclipse.lsp4j.CodeLens;
+import org.eclipse.lsp4j.CodeLensParams;
+import org.eclipse.lsp4j.Command;
+import org.eclipse.lsp4j.CompletionItem;
+import org.eclipse.lsp4j.CompletionList;
+import org.eclipse.lsp4j.CompletionOptions;
+import org.eclipse.lsp4j.Diagnostic;
+import org.eclipse.lsp4j.DiagnosticSeverity;
+import org.eclipse.lsp4j.DidChangeConfigurationParams;
+import org.eclipse.lsp4j.DidChangeTextDocumentParams;
+import org.eclipse.lsp4j.DidChangeWatchedFilesParams;
+import org.eclipse.lsp4j.DidCloseTextDocumentParams;
+import org.eclipse.lsp4j.DidOpenTextDocumentParams;
+import org.eclipse.lsp4j.DidSaveTextDocumentParams;
+import org.eclipse.lsp4j.DocumentFormattingParams;
+import org.eclipse.lsp4j.DocumentHighlight;
+import org.eclipse.lsp4j.DocumentOnTypeFormattingParams;
+import org.eclipse.lsp4j.DocumentRangeFormattingParams;
+import org.eclipse.lsp4j.DocumentSymbolParams;
+import org.eclipse.lsp4j.FileChangeType;
+import org.eclipse.lsp4j.FileEvent;
+import org.eclipse.lsp4j.Hover;
+import org.eclipse.lsp4j.InitializeParams;
+import org.eclipse.lsp4j.InitializeResult;
+import org.eclipse.lsp4j.Location;
+import org.eclipse.lsp4j.Position;
+import org.eclipse.lsp4j.PublishDiagnosticsParams;
+import org.eclipse.lsp4j.Range;
+import org.eclipse.lsp4j.ReferenceContext;
+import org.eclipse.lsp4j.ReferenceParams;
+import org.eclipse.lsp4j.RenameParams;
+import org.eclipse.lsp4j.ServerCapabilities;
+import org.eclipse.lsp4j.SignatureHelp;
+import org.eclipse.lsp4j.SignatureHelpOptions;
+import org.eclipse.lsp4j.SymbolInformation;
+import org.eclipse.lsp4j.TextDocumentContentChangeEvent;
+import org.eclipse.lsp4j.TextDocumentIdentifier;
+import org.eclipse.lsp4j.TextDocumentItem;
+import org.eclipse.lsp4j.TextDocumentPositionParams;
+import org.eclipse.lsp4j.TextDocumentSyncKind;
+import org.eclipse.lsp4j.TextEdit;
+import org.eclipse.lsp4j.VersionedTextDocumentIdentifier;
+import org.eclipse.lsp4j.WorkspaceEdit;
+import org.eclipse.lsp4j.WorkspaceSymbolParams;
+import org.eclipse.lsp4j.services.LanguageClient;
+import org.eclipse.lsp4j.services.LanguageClientAware;
+import org.eclipse.lsp4j.services.LanguageServer;
+import org.eclipse.lsp4j.services.TextDocumentService;
+import org.eclipse.lsp4j.services.WorkspaceService;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.diagnostics.Severity;
@@ -116,7 +105,7 @@ import org.eclipse.xtext.xbase.lib.Pure;
  */
 @Accessors
 @SuppressWarnings("all")
-public class LanguageServerImpl implements LanguageServer, WorkspaceService, WindowService, TextDocumentService {
+public class LanguageServerImpl implements LanguageServer, WorkspaceService, TextDocumentService, LanguageClientAware {
   @FinalFieldsConstructor
   public static class BufferedCancelIndicator implements CancelIndicator {
     private final CancelIndicator delegate;
@@ -180,29 +169,29 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
     this.workspaceManager = _get;
     WorkspaceResourceAccess _workspaceResourceAccess = new WorkspaceResourceAccess(this.workspaceManager);
     this.resourceAccess = _workspaceResourceAccess;
-    final InitializeResultImpl result = new InitializeResultImpl();
-    ServerCapabilitiesImpl _serverCapabilitiesImpl = new ServerCapabilitiesImpl();
-    final Procedure1<ServerCapabilitiesImpl> _function = (ServerCapabilitiesImpl it) -> {
+    final InitializeResult result = new InitializeResult();
+    ServerCapabilities _serverCapabilities = new ServerCapabilities();
+    final Procedure1<ServerCapabilities> _function = (ServerCapabilities it) -> {
       it.setHoverProvider(Boolean.valueOf(true));
       it.setDefinitionProvider(Boolean.valueOf(true));
       it.setReferencesProvider(Boolean.valueOf(true));
       it.setDocumentSymbolProvider(Boolean.valueOf(true));
       it.setWorkspaceSymbolProvider(Boolean.valueOf(true));
-      SignatureHelpOptionsImpl _signatureHelpOptionsImpl = new SignatureHelpOptionsImpl(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("(", ",")));
-      it.setSignatureHelpProvider(_signatureHelpOptionsImpl);
+      SignatureHelpOptions _signatureHelpOptions = new SignatureHelpOptions(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("(", ",")));
+      it.setSignatureHelpProvider(_signatureHelpOptions);
       it.setTextDocumentSync(TextDocumentSyncKind.Incremental);
-      CompletionOptionsImpl _completionOptionsImpl = new CompletionOptionsImpl();
-      final Procedure1<CompletionOptionsImpl> _function_1 = (CompletionOptionsImpl it_1) -> {
+      CompletionOptions _completionOptions = new CompletionOptions();
+      final Procedure1<CompletionOptions> _function_1 = (CompletionOptions it_1) -> {
         it_1.setResolveProvider(Boolean.valueOf(false));
         it_1.setTriggerCharacters(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList(".")));
       };
-      CompletionOptionsImpl _doubleArrow = ObjectExtensions.<CompletionOptionsImpl>operator_doubleArrow(_completionOptionsImpl, _function_1);
+      CompletionOptions _doubleArrow = ObjectExtensions.<CompletionOptions>operator_doubleArrow(_completionOptions, _function_1);
       it.setCompletionProvider(_doubleArrow);
       it.setDocumentFormattingProvider(Boolean.valueOf(true));
       it.setDocumentRangeFormattingProvider(Boolean.valueOf(true));
       it.setDocumentHighlightProvider(Boolean.valueOf(true));
     };
-    ServerCapabilitiesImpl _doubleArrow = ObjectExtensions.<ServerCapabilitiesImpl>operator_doubleArrow(_serverCapabilitiesImpl, _function);
+    ServerCapabilities _doubleArrow = ObjectExtensions.<ServerCapabilities>operator_doubleArrow(_serverCapabilities, _function);
     result.setCapabilities(_doubleArrow);
     final Procedure1<CancelIndicator> _function_1 = (CancelIndicator cancelIndicator) -> {
       String _rootPath_1 = params.getRootPath();
@@ -219,11 +208,17 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
   }
   
   @Override
+  public void connect(final LanguageClient client) {
+    this.client = client;
+  }
+  
+  @Override
   public void exit() {
   }
   
   @Override
-  public void shutdown() {
+  public CompletableFuture<Void> shutdown() {
+    return null;
   }
   
   @Override
@@ -234,27 +229,6 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
   @Override
   public WorkspaceService getWorkspaceService() {
     return this;
-  }
-  
-  @Override
-  public WindowService getWindowService() {
-    return this;
-  }
-  
-  @Override
-  public void onTelemetryEvent(final Consumer<Object> callback) {
-  }
-  
-  @Override
-  public void onShowMessage(final Consumer<MessageParams> callback) {
-  }
-  
-  @Override
-  public void onShowMessageRequest(final Consumer<ShowMessageRequestParams> callback) {
-  }
-  
-  @Override
-  public void onLogMessage(final Consumer<MessageParams> callback) {
   }
   
   @Override
@@ -280,13 +254,13 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
       URI _uri_1 = this._uriExtensions.toUri(_uri);
       VersionedTextDocumentIdentifier _textDocument_1 = params.getTextDocument();
       int _version = _textDocument_1.getVersion();
-      List<? extends TextDocumentContentChangeEvent> _contentChanges = params.getContentChanges();
+      List<TextDocumentContentChangeEvent> _contentChanges = params.getContentChanges();
       final Function1<TextDocumentContentChangeEvent, TextEdit> _function_1 = (TextDocumentContentChangeEvent event) -> {
         Range _range = event.getRange();
         String _text = event.getText();
-        return new TextEditImpl(((RangeImpl) _range), _text);
+        return new TextEdit(_range, _text);
       };
-      List<TextEdit> _map = ListExtensions.map(_contentChanges, _function_1);
+      List<TextEdit> _map = ListExtensions.<TextDocumentContentChangeEvent, TextEdit>map(_contentChanges, _function_1);
       this.workspaceManager.didChange(_uri_1, _version, _map, cancelIndicator);
     };
     this.requestManager.runWrite(_function);
@@ -312,7 +286,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
     final Procedure1<CancelIndicator> _function = (CancelIndicator cancelIndicator) -> {
       final ArrayList<URI> dirtyFiles = CollectionLiterals.<URI>newArrayList();
       final ArrayList<URI> deletedFiles = CollectionLiterals.<URI>newArrayList();
-      List<? extends FileEvent> _changes = params.getChanges();
+      List<FileEvent> _changes = params.getChanges();
       for (final FileEvent fileEvent : _changes) {
         FileChangeType _type = fileEvent.getType();
         boolean _tripleEquals = (_type == FileChangeType.Deleted);
@@ -339,36 +313,29 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
     this.requestManager.runWrite(_function);
   }
   
-  private List<Consumer<PublishDiagnosticsParams>> diagnosticListeners = CollectionLiterals.<Consumer<PublishDiagnosticsParams>>newArrayList();
-  
   private WorkspaceResourceAccess resourceAccess;
   
-  @Override
-  public void onPublishDiagnostics(final Consumer<PublishDiagnosticsParams> callback) {
-    this.diagnosticListeners.add(callback);
-  }
+  private LanguageClient client;
   
   private void publishDiagnostics(final URI uri, final Iterable<? extends Issue> issues) {
-    PublishDiagnosticsParamsImpl _publishDiagnosticsParamsImpl = new PublishDiagnosticsParamsImpl();
-    final Procedure1<PublishDiagnosticsParamsImpl> _function = (PublishDiagnosticsParamsImpl it) -> {
+    PublishDiagnosticsParams _publishDiagnosticsParams = new PublishDiagnosticsParams();
+    final Procedure1<PublishDiagnosticsParams> _function = (PublishDiagnosticsParams it) -> {
       String _path = this._uriExtensions.toPath(uri);
       it.setUri(_path);
-      final Function1<Issue, DiagnosticImpl> _function_1 = (Issue it_1) -> {
+      final Function1<Issue, Diagnostic> _function_1 = (Issue it_1) -> {
         return this.toDiagnostic(it_1);
       };
-      Iterable<DiagnosticImpl> _map = IterableExtensions.map(issues, _function_1);
-      List<DiagnosticImpl> _list = IterableExtensions.<DiagnosticImpl>toList(_map);
+      Iterable<Diagnostic> _map = IterableExtensions.map(issues, _function_1);
+      List<Diagnostic> _list = IterableExtensions.<Diagnostic>toList(_map);
       it.setDiagnostics(_list);
     };
-    final PublishDiagnosticsParamsImpl diagnostics = ObjectExtensions.<PublishDiagnosticsParamsImpl>operator_doubleArrow(_publishDiagnosticsParamsImpl, _function);
-    for (final Consumer<PublishDiagnosticsParams> diagnosticsCallback : this.diagnosticListeners) {
-      diagnosticsCallback.accept(diagnostics);
-    }
+    final PublishDiagnosticsParams diagnostics = ObjectExtensions.<PublishDiagnosticsParams>operator_doubleArrow(_publishDiagnosticsParams, _function);
+    this.client.publishDiagnostics(diagnostics);
   }
   
-  private DiagnosticImpl toDiagnostic(final Issue issue) {
-    DiagnosticImpl _diagnosticImpl = new DiagnosticImpl();
-    final Procedure1<DiagnosticImpl> _function = (DiagnosticImpl it) -> {
+  private Diagnostic toDiagnostic(final Issue issue) {
+    Diagnostic _diagnostic = new Diagnostic();
+    final Procedure1<Diagnostic> _function = (Diagnostic it) -> {
       String _code = issue.getCode();
       it.setCode(_code);
       DiagnosticSeverity _switchResult = null;
@@ -418,12 +385,12 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
         _elvis_2 = Integer.valueOf(0);
       }
       final Integer length = _elvis_2;
-      PositionImpl _positionImpl = new PositionImpl(lineNumber, column);
-      PositionImpl _positionImpl_1 = new PositionImpl(lineNumber, (column + (length).intValue()));
-      RangeImpl _rangeImpl = new RangeImpl(_positionImpl, _positionImpl_1);
-      it.setRange(_rangeImpl);
+      Position _position = new Position(lineNumber, column);
+      Position _position_1 = new Position(lineNumber, (column + (length).intValue()));
+      Range _range = new Range(_position, _position_1);
+      it.setRange(_range);
     };
-    return ObjectExtensions.<DiagnosticImpl>operator_doubleArrow(_diagnosticImpl, _function);
+    return ObjectExtensions.<Diagnostic>operator_doubleArrow(_diagnostic, _function);
   }
   
   @Override
@@ -440,8 +407,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
       }
       final ContentAssistService contentAssistService = _get;
       if ((contentAssistService == null)) {
-        CompletionListBuilder _completionListBuilder = new CompletionListBuilder();
-        return _completionListBuilder.build();
+        return new CompletionList();
       }
       final Function2<Document, XtextResource, CompletionList> _function_1 = (Document document, XtextResource resource) -> {
         return contentAssistService.createCompletionList(document, resource, params, cancelIndicator);
@@ -561,8 +527,8 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
       }
       final HoverService hoverService = _get;
       if ((hoverService == null)) {
-        List<MarkedStringImpl> _emptyList = CollectionLiterals.<MarkedStringImpl>emptyList();
-        return new HoverImpl(_emptyList, null);
+        List<String> _emptyList = CollectionLiterals.<String>emptyList();
+        return new Hover(_emptyList, null);
       }
       final Function2<Document, XtextResource, Hover> _function_1 = (Document document, XtextResource resource) -> {
         Position _position = params.getPosition();
@@ -592,7 +558,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
       }
       final SignatureHelpService helper = _get;
       if ((helper == null)) {
-        return new SignatureHelpImpl();
+        return new SignatureHelp();
       }
       final Function2<Document, XtextResource, SignatureHelp> _function_1 = (Document doc, XtextResource resource) -> {
         Position _position = position.getPosition();
@@ -786,20 +752,20 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
   }
   
   @Pure
-  public List<Consumer<PublishDiagnosticsParams>> getDiagnosticListeners() {
-    return this.diagnosticListeners;
-  }
-  
-  public void setDiagnosticListeners(final List<Consumer<PublishDiagnosticsParams>> diagnosticListeners) {
-    this.diagnosticListeners = diagnosticListeners;
-  }
-  
-  @Pure
   public WorkspaceResourceAccess getResourceAccess() {
     return this.resourceAccess;
   }
   
   public void setResourceAccess(final WorkspaceResourceAccess resourceAccess) {
     this.resourceAccess = resourceAccess;
+  }
+  
+  @Pure
+  public LanguageClient getClient() {
+    return this.client;
+  }
+  
+  public void setClient(final LanguageClient client) {
+    this.client = client;
   }
 }

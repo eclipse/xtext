@@ -7,15 +7,16 @@
  */
 package org.eclipse.xtext.ide.tests.server;
 
-import io.typefox.lsapi.Range;
-import io.typefox.lsapi.builders.RangeBuilder;
 import java.util.Collections;
+import org.eclipse.lsp4j.Position;
+import org.eclipse.lsp4j.Range;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.ide.server.formatting.FormattingService;
 import org.eclipse.xtext.ide.tests.server.AbstractTestLangLanguageServerTest;
 import org.eclipse.xtext.testing.FormattingConfiguration;
 import org.eclipse.xtext.testing.RangeFormattingConfiguration;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Test;
@@ -86,13 +87,15 @@ public class FormattingTest extends AbstractTestLangLanguageServerTest {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("type Foo{int bar} type Bar{Foo foo}");
       it.setModel(_builder.toString());
-      final Procedure1<RangeBuilder> _function_1 = (RangeBuilder it_1) -> {
-        it_1.start(0, 0);
-        it_1.end(0, 17);
+      Range _range = new Range();
+      final Procedure1<Range> _function_1 = (Range it_1) -> {
+        Position _position = new Position(0, 0);
+        it_1.setStart(_position);
+        Position _position_1 = new Position(0, 17);
+        it_1.setEnd(_position_1);
       };
-      RangeBuilder _rangeBuilder = new RangeBuilder(_function_1);
-      Range _build = _rangeBuilder.build();
-      it.setRange(_build);
+      Range _doubleArrow = ObjectExtensions.<Range>operator_doubleArrow(_range, _function_1);
+      it.setRange(_doubleArrow);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("type Foo{");
       _builder_1.newLine();

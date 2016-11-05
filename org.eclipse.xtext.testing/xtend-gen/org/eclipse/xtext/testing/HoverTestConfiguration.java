@@ -7,7 +7,7 @@
  */
 package org.eclipse.xtext.testing;
 
-import io.typefox.lsapi.Hover;
+import org.eclipse.lsp4j.Hover;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.testing.TextDocumentPositionConfiguration;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;

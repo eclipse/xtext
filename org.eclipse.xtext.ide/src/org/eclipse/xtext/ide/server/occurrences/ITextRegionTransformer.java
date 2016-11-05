@@ -7,6 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.server.occurrences;
 
+import org.eclipse.lsp4j.DocumentHighlight;
+import org.eclipse.lsp4j.DocumentHighlightKind;
+import org.eclipse.lsp4j.Position;
+import org.eclipse.lsp4j.Range;
 import org.eclipse.xtext.ide.server.Document;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.ITextRegionWithLineInformation;
@@ -14,12 +18,6 @@ import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 import com.google.common.base.Preconditions;
 import com.google.inject.ImplementedBy;
 import com.google.inject.Singleton;
-
-import io.typefox.lsapi.DocumentHighlight;
-import io.typefox.lsapi.DocumentHighlightKind;
-import io.typefox.lsapi.impl.DocumentHighlightImpl;
-import io.typefox.lsapi.impl.PositionImpl;
-import io.typefox.lsapi.impl.RangeImpl;
 
 /**
  * Representation of a transformer function that creates document
@@ -76,10 +74,10 @@ public interface ITextRegionTransformer {
 			Preconditions.checkNotNull(kind, "kind");
 
 			final int offset = region.getOffset();
-			final PositionImpl start = document.getPosition(offset);
-			final PositionImpl end = document.getPosition(offset + region.getLength());
+			final Position start = document.getPosition(offset);
+			final Position end = document.getPosition(offset + region.getLength());
 
-			return new DocumentHighlightImpl(new RangeImpl(start, end), kind);
+			return new DocumentHighlight(new Range(start, end), kind);
 		}
 
 	}

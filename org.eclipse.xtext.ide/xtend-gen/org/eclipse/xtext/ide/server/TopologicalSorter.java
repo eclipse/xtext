@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.ide.server;
 
-import com.google.common.base.Objects;
 import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -92,7 +91,7 @@ public class TopologicalSorter {
       for (final String it : _dependencies) {
         {
           final TopologicalSorter.Entry depEntry = this.name2entry.get(it);
-          if (((!Objects.equal(depEntry, null)) && (!this.visit(depEntry)))) {
+          if (((depEntry != null) && (!this.visit(depEntry)))) {
             this.markCyclic(current);
             return false;
           }

@@ -11,9 +11,6 @@ import com.google.common.base.Objects;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
-import io.typefox.lsapi.services.json.LanguageServerProtocol;
-import io.typefox.lsapi.services.json.LanguageServerToJsonAdapter;
-import io.typefox.lsapi.services.json.LoggingJsonAdapter;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
@@ -22,15 +19,15 @@ import java.io.OutputStream;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.sql.Timestamp;
+import java.util.concurrent.Future;
+import org.eclipse.lsp4j.jsonrpc.Launcher;
+import org.eclipse.lsp4j.services.LanguageClient;
 import org.eclipse.xtext.ide.server.LanguageServerImpl;
 import org.eclipse.xtext.ide.server.ServerModule;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -61,32 +58,13 @@ public class ServerLauncher {
   public void start(final InputStream in, final OutputStream out) {
     try {
       System.err.println("Starting Xtext Language Server.");
-      LanguageServerToJsonAdapter _xifexpression = null;
-      if (ServerLauncher.IS_DEBUG) {
-        LoggingJsonAdapter _loggingJsonAdapter = new LoggingJsonAdapter(this.languageServer);
-        final Procedure1<LoggingJsonAdapter> _function = (LoggingJsonAdapter it) -> {
-          PrintWriter _printWriter = new PrintWriter(System.err);
-          it.setErrorLog(_printWriter);
-          PrintWriter _printWriter_1 = new PrintWriter(System.out);
-          it.setMessageLog(_printWriter_1);
-        };
-        _xifexpression = ObjectExtensions.<LoggingJsonAdapter>operator_doubleArrow(_loggingJsonAdapter, _function);
-      } else {
-        LanguageServerToJsonAdapter _languageServerToJsonAdapter = new LanguageServerToJsonAdapter(this.languageServer);
-        final Procedure1<LanguageServerToJsonAdapter> _function_1 = (LanguageServerToJsonAdapter it) -> {
-          LanguageServerProtocol _protocol = it.getProtocol();
-          final Procedure2<String, Throwable> _function_2 = (String p1, Throwable p2) -> {
-            p2.printStackTrace(System.err);
-          };
-          _protocol.addErrorListener(_function_2);
-        };
-        _xifexpression = ObjectExtensions.<LanguageServerToJsonAdapter>operator_doubleArrow(_languageServerToJsonAdapter, _function_1);
-      }
-      final LanguageServerToJsonAdapter messageAcceptor = _xifexpression;
-      messageAcceptor.connect(in, out);
+      PrintWriter _printWriter = new PrintWriter(System.out);
+      final Launcher<LanguageClient> launcher = Launcher.<LanguageClient>createLauncher(this.languageServer, LanguageClient.class, in, out, true, _printWriter);
+      LanguageClient _remoteProxy = launcher.getRemoteProxy();
+      this.languageServer.connect(_remoteProxy);
+      final Future<?> future = launcher.startListening();
       System.err.println("started.");
-      messageAcceptor.join();
-      while (true) {
+      while ((!future.isDone())) {
         Thread.sleep(10_000l);
       }
     } catch (Throwable _e) {

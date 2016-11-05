@@ -11,17 +11,16 @@ import com.google.common.base.Strings;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
-import io.typefox.lsapi.CompletionItemKind;
-import io.typefox.lsapi.CompletionList;
-import io.typefox.lsapi.Position;
-import io.typefox.lsapi.TextDocumentPositionParams;
-import io.typefox.lsapi.builders.CompletionListBuilder;
-import io.typefox.lsapi.impl.CompletionItemImpl;
-import io.typefox.lsapi.impl.PositionImpl;
-import io.typefox.lsapi.impl.RangeImpl;
-import io.typefox.lsapi.impl.TextEditImpl;
 import java.util.Collection;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
+import org.eclipse.lsp4j.CompletionItem;
+import org.eclipse.lsp4j.CompletionItemKind;
+import org.eclipse.lsp4j.CompletionList;
+import org.eclipse.lsp4j.Position;
+import org.eclipse.lsp4j.Range;
+import org.eclipse.lsp4j.TextDocumentPositionParams;
+import org.eclipse.lsp4j.TextEdit;
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistEntry;
 import org.eclipse.xtext.ide.editor.contentassist.IIdeContentProposalAcceptor;
@@ -64,13 +63,12 @@ public class ContentAssistService {
   
   public CompletionList createCompletionList(final Document document, final XtextResource resource, final TextDocumentPositionParams params, final CancelIndicator cancelIndicator) {
     try {
-      final CompletionListBuilder result = new CompletionListBuilder();
-      result.isIncomplete(true);
+      final CompletionList result = new CompletionList();
+      result.setIsIncomplete(true);
       final IdeContentProposalAcceptor acceptor = this.proposalAcceptorProvider.get();
       Position _position = params.getPosition();
       final int caretOffset = document.getOffSet(_position);
-      Position _position_1 = params.getPosition();
-      final PositionImpl caretPosition = new PositionImpl(((PositionImpl) _position_1));
+      final Position caretPosition = params.getPosition();
       final TextRegion position = new TextRegion(caretOffset, 0);
       try {
         String _contents = document.getContents();
@@ -89,14 +87,15 @@ public class ContentAssistService {
       }
       Iterable<ContentAssistEntry> _entries = acceptor.getEntries();
       final Procedure2<ContentAssistEntry, Integer> _function = (ContentAssistEntry it, Integer idx) -> {
-        final CompletionItemImpl item = this.toCompletionItem(it, caretOffset, caretPosition, document);
+        final CompletionItem item = this.toCompletionItem(it, caretOffset, caretPosition, document);
         String _string = Integer.toString((idx).intValue());
         String _padStart = Strings.padStart(_string, 5, '0');
         item.setSortText(_padStart);
-        result.item(item);
+        List<CompletionItem> _items = result.getItems();
+        _items.add(item);
       };
       IterableExtensions.<ContentAssistEntry>forEach(_entries, _function);
-      return result.build();
+      return result;
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -114,8 +113,8 @@ public class ContentAssistService {
     this.proposalProvider.createProposals(((Collection<ContentAssistContext>)Conversions.doWrapArray(contexts)), acceptor);
   }
   
-  protected CompletionItemImpl toCompletionItem(final ContentAssistEntry entry, final int caretOffset, final PositionImpl caretPosition, final Document document) {
-    final CompletionItemImpl completionItem = new CompletionItemImpl();
+  protected CompletionItem toCompletionItem(final ContentAssistEntry entry, final int caretOffset, final Position caretPosition, final Document document) {
+    final CompletionItem completionItem = new CompletionItem();
     String _elvis = null;
     String _label = entry.getLabel();
     if (_label != null) {
@@ -138,11 +137,11 @@ public class ContentAssistService {
     }
     int _length = _elvis_1.length();
     final int prefixOffset = (caretOffset - _length);
-    final PositionImpl prefixPosition = document.getPosition(prefixOffset);
-    RangeImpl _rangeImpl = new RangeImpl(prefixPosition, caretPosition);
+    final Position prefixPosition = document.getPosition(prefixOffset);
+    Range _range = new Range(prefixPosition, caretPosition);
     String _proposal_1 = entry.getProposal();
-    TextEditImpl _textEditImpl = new TextEditImpl(_rangeImpl, _proposal_1);
-    completionItem.setTextEdit(_textEditImpl);
+    TextEdit _textEdit = new TextEdit(_range, _proposal_1);
+    completionItem.setTextEdit(_textEdit);
     CompletionItemKind _translateKind = this.translateKind(entry);
     completionItem.setKind(_translateKind);
     return completionItem;
@@ -151,64 +150,68 @@ public class ContentAssistService {
   protected CompletionItemKind translateKind(final ContentAssistEntry entry) {
     CompletionItemKind _switchResult = null;
     String _kind = entry.getKind();
-    switch (_kind) {
-      case ContentAssistEntry.KIND_CLASS:
-        _switchResult = CompletionItemKind.Class;
-        break;
-      case ContentAssistEntry.KIND_COLOR:
-        _switchResult = CompletionItemKind.Color;
-        break;
-      case ContentAssistEntry.KIND_CONSTRUCTOR:
-        _switchResult = CompletionItemKind.Constructor;
-        break;
-      case ContentAssistEntry.KIND_ENUM:
-        _switchResult = CompletionItemKind.Enum;
-        break;
-      case ContentAssistEntry.KIND_FIELD:
-        _switchResult = CompletionItemKind.Field;
-        break;
-      case ContentAssistEntry.KIND_FILE:
-        _switchResult = CompletionItemKind.File;
-        break;
-      case ContentAssistEntry.KIND_FUNCTION:
-        _switchResult = CompletionItemKind.Function;
-        break;
-      case ContentAssistEntry.KIND_INTERFACE:
-        _switchResult = CompletionItemKind.Interface;
-        break;
-      case ContentAssistEntry.KIND_KEYWORD:
-        _switchResult = CompletionItemKind.Keyword;
-        break;
-      case ContentAssistEntry.KIND_METHOD:
-        _switchResult = CompletionItemKind.Method;
-        break;
-      case ContentAssistEntry.KIND_MODULE:
-        _switchResult = CompletionItemKind.Module;
-        break;
-      case ContentAssistEntry.KIND_PROPERTY:
-        _switchResult = CompletionItemKind.Property;
-        break;
-      case ContentAssistEntry.KIND_REFERENCE:
-        _switchResult = CompletionItemKind.Reference;
-        break;
-      case ContentAssistEntry.KIND_SNIPPET:
-        _switchResult = CompletionItemKind.Snippet;
-        break;
-      case ContentAssistEntry.KIND_TEXT:
-        _switchResult = CompletionItemKind.Text;
-        break;
-      case ContentAssistEntry.KIND_UNIT:
-        _switchResult = CompletionItemKind.Unit;
-        break;
-      case ContentAssistEntry.KIND_VALUE:
-        _switchResult = CompletionItemKind.Value;
-        break;
-      case ContentAssistEntry.KIND_VARIABLE:
-        _switchResult = CompletionItemKind.Variable;
-        break;
-      default:
-        _switchResult = CompletionItemKind.Value;
-        break;
+    if (_kind != null) {
+      switch (_kind) {
+        case ContentAssistEntry.KIND_CLASS:
+          _switchResult = CompletionItemKind.Class;
+          break;
+        case ContentAssistEntry.KIND_COLOR:
+          _switchResult = CompletionItemKind.Color;
+          break;
+        case ContentAssistEntry.KIND_CONSTRUCTOR:
+          _switchResult = CompletionItemKind.Constructor;
+          break;
+        case ContentAssistEntry.KIND_ENUM:
+          _switchResult = CompletionItemKind.Enum;
+          break;
+        case ContentAssistEntry.KIND_FIELD:
+          _switchResult = CompletionItemKind.Field;
+          break;
+        case ContentAssistEntry.KIND_FILE:
+          _switchResult = CompletionItemKind.File;
+          break;
+        case ContentAssistEntry.KIND_FUNCTION:
+          _switchResult = CompletionItemKind.Function;
+          break;
+        case ContentAssistEntry.KIND_INTERFACE:
+          _switchResult = CompletionItemKind.Interface;
+          break;
+        case ContentAssistEntry.KIND_KEYWORD:
+          _switchResult = CompletionItemKind.Keyword;
+          break;
+        case ContentAssistEntry.KIND_METHOD:
+          _switchResult = CompletionItemKind.Method;
+          break;
+        case ContentAssistEntry.KIND_MODULE:
+          _switchResult = CompletionItemKind.Module;
+          break;
+        case ContentAssistEntry.KIND_PROPERTY:
+          _switchResult = CompletionItemKind.Property;
+          break;
+        case ContentAssistEntry.KIND_REFERENCE:
+          _switchResult = CompletionItemKind.Reference;
+          break;
+        case ContentAssistEntry.KIND_SNIPPET:
+          _switchResult = CompletionItemKind.Snippet;
+          break;
+        case ContentAssistEntry.KIND_TEXT:
+          _switchResult = CompletionItemKind.Text;
+          break;
+        case ContentAssistEntry.KIND_UNIT:
+          _switchResult = CompletionItemKind.Unit;
+          break;
+        case ContentAssistEntry.KIND_VALUE:
+          _switchResult = CompletionItemKind.Value;
+          break;
+        case ContentAssistEntry.KIND_VARIABLE:
+          _switchResult = CompletionItemKind.Variable;
+          break;
+        default:
+          _switchResult = CompletionItemKind.Value;
+          break;
+      }
+    } else {
+      _switchResult = CompletionItemKind.Value;
     }
     return _switchResult;
   }

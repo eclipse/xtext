@@ -9,10 +9,20 @@ package org.eclipse.xtext.ide.tests.testlanguage.server;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import io.typefox.lsapi.services.LanguageServer;
-import io.typefox.lsapi.services.json.LanguageServerLauncher;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.net.InetSocketAddress;
+import java.nio.channels.Channels;
+import java.nio.channels.ServerSocketChannel;
+import java.nio.channels.SocketChannel;
+import java.util.concurrent.Future;
+import org.eclipse.lsp4j.jsonrpc.Launcher;
+import org.eclipse.lsp4j.launch.LSPLauncher;
+import org.eclipse.lsp4j.services.LanguageClient;
+import org.eclipse.lsp4j.services.LanguageServer;
 import org.eclipse.xtext.ide.server.ServerModule;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -20,11 +30,22 @@ import org.eclipse.xtext.ide.server.ServerModule;
 @SuppressWarnings("all")
 public class SocketServerLauncher {
   public static void main(final String[] args) {
-    ServerModule _serverModule = new ServerModule();
-    final Injector injector = Guice.createInjector(_serverModule);
-    final LanguageServer languageServer = injector.<LanguageServer>getInstance(LanguageServer.class);
-    InetSocketAddress _inetSocketAddress = new InetSocketAddress("localhost", 5007);
-    final LanguageServerLauncher launcher = LanguageServerLauncher.newLoggingLauncher(languageServer, _inetSocketAddress);
-    launcher.launch();
+    try {
+      ServerModule _serverModule = new ServerModule();
+      final Injector injector = Guice.createInjector(_serverModule);
+      final LanguageServer languageServer = injector.<LanguageServer>getInstance(LanguageServer.class);
+      final ServerSocketChannel serverSocket = ServerSocketChannel.open();
+      InetSocketAddress _inetSocketAddress = new InetSocketAddress("localhost", 5007);
+      serverSocket.bind(_inetSocketAddress);
+      final SocketChannel socketChannel = serverSocket.accept();
+      InputStream _newInputStream = Channels.newInputStream(socketChannel);
+      OutputStream _newOutputStream = Channels.newOutputStream(socketChannel);
+      PrintWriter _printWriter = new PrintWriter(System.out);
+      final Launcher<LanguageClient> launcher = LSPLauncher.createServerLauncher(languageServer, _newInputStream, _newOutputStream, true, _printWriter);
+      Future<?> _startListening = launcher.startListening();
+      _startListening.get();
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
 }

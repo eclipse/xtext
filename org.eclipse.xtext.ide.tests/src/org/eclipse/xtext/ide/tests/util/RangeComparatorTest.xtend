@@ -8,10 +8,9 @@
 package org.eclipse.xtext.ide.tests.util
 
 import com.google.inject.Inject
-import io.typefox.lsapi.Range
-import io.typefox.lsapi.impl.PositionImpl
-import io.typefox.lsapi.impl.RangeImpl
 import java.util.List
+import org.eclipse.lsp4j.Position
+import org.eclipse.lsp4j.Range
 import org.eclipse.xtext.ide.tests.testlanguage.TestLanguageIdeInjectorProvider
 import org.eclipse.xtext.ide.util.RangeComparator
 import org.eclipse.xtext.testing.InjectWith
@@ -81,11 +80,7 @@ class RangeComparatorTest extends Assert {
 	}
 
 	private def newRange(int startLine, int startChar, int endLine, int endChar) {
-		return new RangeImpl(newPosition(startLine, startChar), newPosition(endLine, endChar));
-	}
-
-	private def newPosition(int line, int character) {
-		return new PositionImpl(line, character);
+		return new Range(new Position(startLine, startChar), new Position(endLine, endChar));
 	}
 
 	private def sort(List<? extends Range> toSort) {

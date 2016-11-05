@@ -9,20 +9,20 @@ package org.eclipse.xtext.ide.server
 
 import com.google.inject.Inject
 import com.google.inject.Provider
-import io.typefox.lsapi.TextEdit
 import java.util.ArrayList
 import java.util.List
 import java.util.Map
 import org.eclipse.emf.common.util.URI
+import org.eclipse.lsp4j.TextEdit
 import org.eclipse.xtext.resource.IExternalContentSupport.IExternalContentProvider
 import org.eclipse.xtext.resource.IResourceDescriptions
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.resource.impl.ChunkedResourceDescriptions
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData
 import org.eclipse.xtext.util.CancelIndicator
+import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.validation.Issue
 import org.eclipse.xtext.workspace.IWorkspaceConfig
-import org.eclipse.xtext.util.internal.Log
 
 /**
  * @author Sven Efftinge - Initial contribution and API
