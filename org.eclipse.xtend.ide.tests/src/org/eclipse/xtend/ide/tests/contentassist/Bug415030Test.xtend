@@ -18,7 +18,7 @@ class Bug415030Test extends AbstractXtendContentAssistBugTest {
 		newBuilder.append('''
 			class A {
 
-				t''')
+				to''')
 			.assertText("\n\toverride toString() {\n\t\tsuper.toString()\n\t}")
 			.applyProposal
 			.expectContent('''
@@ -33,9 +33,9 @@ class Bug415030Test extends AbstractXtendContentAssistBugTest {
 		newBuilder.append('''
 			class A {
 
-				t''')
+				to''')
 			.assertText("\n\toverride toString() {\n\t\tsuper.toString()\n\t}")
-			.appendAndApplyProposal("oStr")
+			.appendAndApplyProposal("Str")
 			.expectContent('''
 			class A {
 
