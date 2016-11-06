@@ -140,6 +140,7 @@ public abstract class AbstractLanguageServerTest implements LanguageClient {
         this.languageInfo = _get;
       }
       this.languageServer.connect(this);
+      this.languageServer.supportedMethods();
       File _file = new File("./test-data/test-project");
       this.root = _file;
       boolean _mkdirs = this.root.mkdirs();

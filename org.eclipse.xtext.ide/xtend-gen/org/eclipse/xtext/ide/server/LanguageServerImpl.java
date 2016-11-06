@@ -7,14 +7,21 @@
  */
 package org.eclipse.xtext.ide.server;
 
+import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.LinkedListMultimap;
+import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.CompletableFuture;
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.lsp4j.CodeActionParams;
 import org.eclipse.lsp4j.CodeLens;
@@ -61,6 +68,10 @@ import org.eclipse.lsp4j.TextEdit;
 import org.eclipse.lsp4j.VersionedTextDocumentIdentifier;
 import org.eclipse.lsp4j.WorkspaceEdit;
 import org.eclipse.lsp4j.WorkspaceSymbolParams;
+import org.eclipse.lsp4j.jsonrpc.Endpoint;
+import org.eclipse.lsp4j.jsonrpc.json.JsonRpcMethod;
+import org.eclipse.lsp4j.jsonrpc.json.JsonRpcMethodProvider;
+import org.eclipse.lsp4j.jsonrpc.services.ServiceEndpoints;
 import org.eclipse.lsp4j.services.LanguageClient;
 import org.eclipse.lsp4j.services.LanguageClientAware;
 import org.eclipse.lsp4j.services.LanguageServer;
@@ -70,6 +81,7 @@ import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.ide.server.Document;
+import org.eclipse.xtext.ide.server.LanguageServerExtension;
 import org.eclipse.xtext.ide.server.UriExtensions;
 import org.eclipse.xtext.ide.server.WorkspaceManager;
 import org.eclipse.xtext.ide.server.concurrent.CancellableIndicator;
@@ -87,8 +99,10 @@ import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.service.OperationCanceledManager;
 import org.eclipse.xtext.util.CancelIndicator;
+import org.eclipse.xtext.util.internal.Log;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
@@ -103,9 +117,9 @@ import org.eclipse.xtext.xbase.lib.Pure;
  * @author Sven Efftinge - Initial contribution and API
  * @since 2.11
  */
-@Accessors
+@Log
 @SuppressWarnings("all")
-public class LanguageServerImpl implements LanguageServer, WorkspaceService, TextDocumentService, LanguageClientAware {
+public class LanguageServerImpl implements LanguageServer, WorkspaceService, TextDocumentService, LanguageClientAware, Endpoint, JsonRpcMethodProvider {
   @FinalFieldsConstructor
   public static class BufferedCancelIndicator implements CancelIndicator {
     private final CancelIndicator delegate;
@@ -128,27 +142,35 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
     }
   }
   
+  @Accessors
   @Inject
   private RequestManager requestManager;
   
+  @Accessors
   @Inject
   private WorkspaceSymbolService workspaceSymbolService;
   
+  @Accessors
   private InitializeParams params;
   
+  @Accessors
   @Inject
   private Provider<WorkspaceManager> workspaceManagerProvider;
   
+  @Accessors
   private WorkspaceManager workspaceManager;
   
+  @Accessors
   @Inject
   @Extension
   private UriExtensions _uriExtensions;
   
+  @Accessors
   @Inject
   @Extension
   private IResourceServiceProvider.Registry languagesRegistry;
   
+  @Accessors
   @Inject
   private OperationCanceledManager operationCanceledManager;
   
@@ -679,6 +701,119 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
     throw new UnsupportedOperationException("TODO: auto-generated method stub");
   }
   
+  @Override
+  public void notify(final String method, final Object parameter) {
+    Collection<Endpoint> _get = this.extensionProviders.get(method);
+    for (final Endpoint endpoint : _get) {
+      try {
+        endpoint.notify(method, parameter);
+      } catch (final Throwable _t) {
+        if (_t instanceof UnsupportedOperationException) {
+          final UnsupportedOperationException e = (UnsupportedOperationException)_t;
+          if ((e != LanguageServerExtension.NOT_HANDLED_EXCEPTION)) {
+            throw e;
+          }
+        } else {
+          throw Exceptions.sneakyThrow(_t);
+        }
+      }
+    }
+  }
+  
+  @Override
+  public CompletableFuture<?> request(final String method, final Object parameter) {
+    boolean _containsKey = this.extensionProviders.containsKey(method);
+    boolean _not = (!_containsKey);
+    if (_not) {
+      throw new UnsupportedOperationException((("The json request \'" + method) + "\' is unknown."));
+    }
+    Collection<Endpoint> _get = this.extensionProviders.get(method);
+    for (final Endpoint endpoint : _get) {
+      try {
+        return endpoint.request(method, parameter);
+      } catch (final Throwable _t) {
+        if (_t instanceof UnsupportedOperationException) {
+          final UnsupportedOperationException e = (UnsupportedOperationException)_t;
+          if ((e != LanguageServerExtension.NOT_HANDLED_EXCEPTION)) {
+            throw e;
+          }
+        } else {
+          throw Exceptions.sneakyThrow(_t);
+        }
+      }
+    }
+    return null;
+  }
+  
+  private Map<String, JsonRpcMethod> supportedMethods = null;
+  
+  private Multimap<String, Endpoint> extensionProviders = LinkedListMultimap.<String, Endpoint>create();
+  
+  @Override
+  public Map<String, JsonRpcMethod> supportedMethods() {
+    if ((this.supportedMethods != null)) {
+      return this.supportedMethods;
+    }
+    synchronized (this.extensionProviders) {
+      final LinkedHashMap<String, JsonRpcMethod> supportedMethods = CollectionLiterals.<String, JsonRpcMethod>newLinkedHashMap();
+      Class<? extends LanguageServerImpl> _class = this.getClass();
+      Map<String, JsonRpcMethod> _supportedMethods = ServiceEndpoints.getSupportedMethods(_class);
+      supportedMethods.putAll(_supportedMethods);
+      final LinkedHashMap<String, JsonRpcMethod> extensions = CollectionLiterals.<String, JsonRpcMethod>newLinkedHashMap();
+      Map<String, Object> _extensionToFactoryMap = this.languagesRegistry.getExtensionToFactoryMap();
+      Collection<Object> _values = _extensionToFactoryMap.values();
+      Set<Object> _set = IterableExtensions.<Object>toSet(_values);
+      Iterable<IResourceServiceProvider> _filter = Iterables.<IResourceServiceProvider>filter(_set, IResourceServiceProvider.class);
+      for (final IResourceServiceProvider resourceServiceProvider : _filter) {
+        {
+          final LanguageServerExtension ext = resourceServiceProvider.<LanguageServerExtension>get(LanguageServerExtension.class);
+          if ((ext != null)) {
+            Class<? extends LanguageServerExtension> _class_1 = ext.getClass();
+            final Map<String, JsonRpcMethod> supportedExtensions = ServiceEndpoints.getSupportedMethods(_class_1);
+            Set<Map.Entry<String, JsonRpcMethod>> _entrySet = supportedExtensions.entrySet();
+            for (final Map.Entry<String, JsonRpcMethod> entry : _entrySet) {
+              String _key = entry.getKey();
+              boolean _containsKey = supportedMethods.containsKey(_key);
+              if (_containsKey) {
+                String _key_1 = entry.getKey();
+                String _plus = ("The json rpc method \'" + _key_1);
+                String _plus_1 = (_plus + "\' can not be an extension as it is already defined in the LSP standard.");
+                LanguageServerImpl.LOG.error(_plus_1);
+              } else {
+                String _key_2 = entry.getKey();
+                JsonRpcMethod _value = entry.getValue();
+                final JsonRpcMethod existing = extensions.put(_key_2, _value);
+                if (((existing != null) && (!Objects.equal(existing, entry.getValue())))) {
+                  String _key_3 = entry.getKey();
+                  String _plus_2 = ("An incompatible LSP extension \'" + _key_3);
+                  String _plus_3 = (_plus_2 + "\' has already been registered. Using 1 ignoring 2. \n1 : ");
+                  String _plus_4 = (_plus_3 + existing);
+                  String _plus_5 = (_plus_4 + " \n2 : ");
+                  JsonRpcMethod _value_1 = entry.getValue();
+                  String _plus_6 = (_plus_5 + _value_1);
+                  LanguageServerImpl.LOG.error(_plus_6);
+                  String _key_4 = entry.getKey();
+                  extensions.put(_key_4, existing);
+                } else {
+                  final Endpoint endpoint = ServiceEndpoints.toEndpoint(ext);
+                  String _key_5 = entry.getKey();
+                  this.extensionProviders.put(_key_5, endpoint);
+                  String _key_6 = entry.getKey();
+                  JsonRpcMethod _value_2 = entry.getValue();
+                  supportedMethods.put(_key_6, _value_2);
+                }
+              }
+            }
+          }
+        }
+      }
+      this.supportedMethods = supportedMethods;
+      return supportedMethods;
+    }
+  }
+  
+  private final static Logger LOG = Logger.getLogger(LanguageServerImpl.class);
+  
   @Pure
   public RequestManager getRequestManager() {
     return this.requestManager;
@@ -749,23 +884,5 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
   
   public void setOperationCanceledManager(final OperationCanceledManager operationCanceledManager) {
     this.operationCanceledManager = operationCanceledManager;
-  }
-  
-  @Pure
-  public WorkspaceResourceAccess getResourceAccess() {
-    return this.resourceAccess;
-  }
-  
-  public void setResourceAccess(final WorkspaceResourceAccess resourceAccess) {
-    this.resourceAccess = resourceAccess;
-  }
-  
-  @Pure
-  public LanguageClient getClient() {
-    return this.client;
-  }
-  
-  public void setClient(final LanguageClient client) {
-    this.client = client;
   }
 }

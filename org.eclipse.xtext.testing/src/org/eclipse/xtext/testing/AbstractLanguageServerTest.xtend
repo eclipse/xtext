@@ -105,6 +105,8 @@ abstract class AbstractLanguageServerTest implements LanguageClient {
 
 		// register notification callbacks
 		languageServer.connect(this)
+		// initialize
+		languageServer.supportedMethods()
 
 		// create workingdir
 		root = new File("./test-data/test-project")

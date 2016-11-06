@@ -7,10 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.server
 
+import com.google.common.collect.LinkedListMultimap
+import com.google.common.collect.Multimap
 import com.google.inject.Inject
 import com.google.inject.Provider
 import java.util.Collections
 import java.util.List
+import java.util.Map
 import java.util.concurrent.CompletableFuture
 import org.eclipse.emf.common.util.URI
 import org.eclipse.lsp4j.CodeActionParams
@@ -49,6 +52,10 @@ import org.eclipse.lsp4j.TextDocumentPositionParams
 import org.eclipse.lsp4j.TextDocumentSyncKind
 import org.eclipse.lsp4j.TextEdit
 import org.eclipse.lsp4j.WorkspaceSymbolParams
+import org.eclipse.lsp4j.jsonrpc.Endpoint
+import org.eclipse.lsp4j.jsonrpc.json.JsonRpcMethod
+import org.eclipse.lsp4j.jsonrpc.json.JsonRpcMethodProvider
+import org.eclipse.lsp4j.jsonrpc.services.ServiceEndpoints
 import org.eclipse.lsp4j.services.LanguageClient
 import org.eclipse.lsp4j.services.LanguageClientAware
 import org.eclipse.lsp4j.services.LanguageServer
@@ -69,25 +76,34 @@ import org.eclipse.xtext.ide.server.symbol.WorkspaceSymbolService
 import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.eclipse.xtext.service.OperationCanceledManager
 import org.eclipse.xtext.util.CancelIndicator
+import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.validation.Issue
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  * @since 2.11
  */
-@Accessors class LanguageServerImpl implements LanguageServer, WorkspaceService, TextDocumentService, LanguageClientAware {
+@Log class LanguageServerImpl implements LanguageServer, WorkspaceService, TextDocumentService, LanguageClientAware, Endpoint, JsonRpcMethodProvider {
 
+	@Accessors 
 	@Inject
 	RequestManager requestManager
 	
+	@Accessors 
 	@Inject
 	WorkspaceSymbolService workspaceSymbolService
 
+	@Accessors 
 	InitializeParams params
+	@Accessors 
 	@Inject Provider<WorkspaceManager> workspaceManagerProvider
+	@Accessors 
 	WorkspaceManager workspaceManager
+	@Accessors 
 	@Inject extension UriExtensions
+	@Accessors 
 	@Inject extension IResourceServiceProvider.Registry languagesRegistry
+	@Accessors 
 	@Inject OperationCanceledManager operationCanceledManager
 
 	override CompletableFuture<InitializeResult> initialize(InitializeParams params) {
@@ -435,6 +451,71 @@ import org.eclipse.xtext.validation.Issue
 
 	override rename(RenameParams params) {
 		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+	}
+	
+	override notify(String method, Object parameter) {
+		for (endpoint : extensionProviders.get(method)) {
+			try {
+				endpoint.notify(method, parameter)
+			} catch (UnsupportedOperationException e) {
+				if (e !== LanguageServerExtension.NOT_HANDLED_EXCEPTION) {
+					throw e
+				}
+			}
+		}
+	}
+	
+	override request(String method, Object parameter) {
+		if (!extensionProviders.containsKey(method)) {
+			throw new UnsupportedOperationException("The json request '"+method+"' is unknown.")
+		}
+		for (endpoint : extensionProviders.get(method)) {
+			try {
+				return endpoint.request(method, parameter)
+			} catch (UnsupportedOperationException e) {
+				if (e !== LanguageServerExtension.NOT_HANDLED_EXCEPTION) {
+					throw e
+				}
+			}
+		}
+	}
+	
+	
+	private Map<String, JsonRpcMethod> supportedMethods = null
+	private Multimap<String, Endpoint> extensionProviders = LinkedListMultimap.create
+	
+	override supportedMethods() {
+		if (this.supportedMethods !== null) {
+			return this.supportedMethods
+		}
+		synchronized (extensionProviders) {
+			val supportedMethods = <String,JsonRpcMethod>newLinkedHashMap()
+			supportedMethods.putAll(ServiceEndpoints.getSupportedMethods(class))
+			val extensions = <String,JsonRpcMethod>newLinkedHashMap()
+			for (resourceServiceProvider : languagesRegistry.extensionToFactoryMap.values.toSet.filter(IResourceServiceProvider)) {
+				val ext = resourceServiceProvider.get(LanguageServerExtension)
+				if (ext !== null) {
+					val supportedExtensions = ServiceEndpoints.getSupportedMethods(ext.class)
+					for (entry : supportedExtensions.entrySet) {
+						if (supportedMethods.containsKey(entry.key)) {
+							LOG.error("The json rpc method '"+entry.key+"' can not be an extension as it is already defined in the LSP standard.")
+						} else {
+							val existing = extensions.put(entry.key, entry.value)
+							if (existing !== null && existing != entry.value) {
+								LOG.error("An incompatible LSP extension '"+entry.key+"' has already been registered. Using 1 ignoring 2. \n1 : "+existing+" \n2 : "+entry.value)
+								extensions.put(entry.key, existing)
+							} else {
+								val endpoint = ServiceEndpoints.toEndpoint(ext)
+								extensionProviders.put(entry.key, endpoint)
+								supportedMethods.put(entry.key, entry.value)
+							}
+						}
+					}
+				}
+			}
+			this.supportedMethods = supportedMethods
+			return supportedMethods
+		}
 	}
 
 
