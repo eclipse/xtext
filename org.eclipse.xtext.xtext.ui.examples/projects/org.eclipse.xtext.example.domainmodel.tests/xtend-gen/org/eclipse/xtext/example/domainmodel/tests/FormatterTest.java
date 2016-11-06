@@ -2,13 +2,13 @@ package org.eclipse.xtext.example.domainmodel.tests;
 
 import com.google.inject.Inject;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.example.domainmodel.DomainmodelInjectorProvider;
+import org.eclipse.xtext.example.domainmodel.tests.DomainmodelInjectorProvider;
 import org.eclipse.xtext.formatting2.FormatterPreferenceKeys;
-import org.eclipse.xtext.junit4.InjectWith;
-import org.eclipse.xtext.junit4.XtextRunner;
-import org.eclipse.xtext.junit4.formatter.FormatterTestRequest;
-import org.eclipse.xtext.junit4.formatter.FormatterTester;
 import org.eclipse.xtext.preferences.MapBasedPreferenceValues;
+import org.eclipse.xtext.testing.InjectWith;
+import org.eclipse.xtext.testing.XtextRunner;
+import org.eclipse.xtext.testing.formatter.FormatterTestHelper;
+import org.eclipse.xtext.testing.formatter.FormatterTestRequest;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Test;
@@ -20,7 +20,7 @@ import org.junit.runner.RunWith;
 public class FormatterTest {
   @Inject
   @Extension
-  private FormatterTester _formatterTester;
+  private FormatterTestHelper _formatterTestHelper;
   
   /**
    * This example tests if the formatted document equals the unformatted document.
@@ -64,7 +64,7 @@ public class FormatterTest {
       _builder.newLine();
       it.setToBeFormatted(_builder);
     };
-    this._formatterTester.assertFormatted(_function);
+    this._formatterTestHelper.assertFormatted(_function);
   }
   
   /**
@@ -96,7 +96,7 @@ public class FormatterTest {
       _builder_1.newLine();
       it.setToBeFormatted(_builder_1);
     };
-    this._formatterTester.assertFormatted(_function);
+    this._formatterTestHelper.assertFormatted(_function);
   }
   
   /**
@@ -140,6 +140,6 @@ public class FormatterTest {
       _builder_1.newLine();
       it.setToBeFormatted(_builder_1);
     };
-    this._formatterTester.assertFormatted(_function);
+    this._formatterTestHelper.assertFormatted(_function);
   }
 }

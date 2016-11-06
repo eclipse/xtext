@@ -54,8 +54,10 @@
 		<zip_example name="org.eclipse.xtext.example.arithmetics.ui" />
 		<zip_example name="org.eclipse.xtext.example.arithmetics.ui.tests" />
 		<zip_example name="org.eclipse.xtext.example.domainmodel" />
+		<zip_example name="org.eclipse.xtext.example.domainmodel.ide" />
 		<zip_example name="org.eclipse.xtext.example.domainmodel.tests" />
 		<zip_example name="org.eclipse.xtext.example.domainmodel.ui" />
+		<zip_example name="org.eclipse.xtext.example.domainmodel.ui.tests" />
 		<zip_example name="org.eclipse.xtext.example.fowlerdsl" />
 		<zip_example name="org.eclipse.xtext.example.fowlerdsl.ui" />
 		<zip_example name="org.eclipse.xtext.example.homeautomation" />
