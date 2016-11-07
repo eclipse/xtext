@@ -8,7 +8,7 @@
 package org.eclipse.xtext.ide.server
 
 /**
- * Marker interface for language specific extensions to the LSP.
+ * Interface for language specific extensions to the LSP.
  * Implementors should use {link JsonRpcNotification} and {link JsonRpcRequest} annotations.
  * 
  * @author Sven Efftinge - Initial contribution and API
@@ -22,4 +22,9 @@ interface LanguageServerExtension {
 	 * To indicate that a request is not handled, this exception should be thrown by the service.
 	 */
 	static RuntimeException NOT_HANDLED_EXCEPTION = new UnsupportedOperationException("not handled");
+	
+	/**
+	 * the language server provides a DocumentAccess object to allow accessing language server documents and resources in a save way.
+	 */
+	def void initialize(DocumentAccess access);
 }

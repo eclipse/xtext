@@ -10,10 +10,10 @@ package org.eclipse.xtext.ide.tests.testlanguage.ide;
 import com.google.inject.ImplementedBy;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Function;
-import org.eclipse.lsp4j.jsonrpc.CancelIndicator;
-import org.eclipse.lsp4j.jsonrpc.CompletableFutures;
-import org.eclipse.lsp4j.jsonrpc.services.JsonNotification;
+import org.eclipse.lsp4j.Position;
 import org.eclipse.lsp4j.jsonrpc.services.JsonRequest;
+import org.eclipse.xtext.ide.server.Document;
+import org.eclipse.xtext.ide.server.DocumentAccess;
 import org.eclipse.xtext.ide.server.LanguageServerExtension;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -24,40 +24,47 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 @ImplementedBy(TestLangLSPExtension.Impl.class)
 @SuppressWarnings("all")
 public interface TestLangLSPExtension extends LanguageServerExtension {
-  public static class Text {
+  public static class TextOfLineResult {
     public String text;
   }
   
+  public static class TextOfLineParam {
+    public String uri;
+    
+    public int line;
+  }
+  
   public static class Impl implements LanguageServerExtension, TestLangLSPExtension {
-    private String text = "";
+    private DocumentAccess access;
     
     @Override
-    public void sayHello() {
-      int _length = this.text.length();
-      boolean _greaterThan = (_length > 0);
-      if (_greaterThan) {
-        throw LanguageServerExtension.NOT_HANDLED_EXCEPTION;
-      }
-      String _text = this.text;
-      this.text = (_text + "Hello ");
+    public CompletableFuture<TestLangLSPExtension.TextOfLineResult> getTextOfLine(final TestLangLSPExtension.TextOfLineParam param) {
+      final Function<DocumentAccess.Context, TestLangLSPExtension.TextOfLineResult> _function = (DocumentAccess.Context ctx) -> {
+        Document _document = ctx.getDocument();
+        Position _position = new Position(param.line, 0);
+        final int start = _document.getOffSet(_position);
+        Document _document_1 = ctx.getDocument();
+        Position _position_1 = new Position((param.line + 1), 0);
+        int _offSet = _document_1.getOffSet(_position_1);
+        final int end = (_offSet - 1);
+        TestLangLSPExtension.TextOfLineResult _textOfLineResult = new TestLangLSPExtension.TextOfLineResult();
+        final Procedure1<TestLangLSPExtension.TextOfLineResult> _function_1 = (TestLangLSPExtension.TextOfLineResult it) -> {
+          Document _document_2 = ctx.getDocument();
+          String _contents = _document_2.getContents();
+          String _substring = _contents.substring(start, end);
+          it.text = _substring;
+        };
+        return ObjectExtensions.<TestLangLSPExtension.TextOfLineResult>operator_doubleArrow(_textOfLineResult, _function_1);
+      };
+      return this.access.<TestLangLSPExtension.TextOfLineResult>doRead(param.uri, _function);
     }
     
     @Override
-    public CompletableFuture<TestLangLSPExtension.Text> getFullText(final TestLangLSPExtension.Text param) {
-      final Function<CancelIndicator, TestLangLSPExtension.Text> _function = (CancelIndicator it) -> {
-        TestLangLSPExtension.Text _text = new TestLangLSPExtension.Text();
-        final Procedure1<TestLangLSPExtension.Text> _function_1 = (TestLangLSPExtension.Text it_1) -> {
-          it_1.text = (this.text + param.text);
-        };
-        return ObjectExtensions.<TestLangLSPExtension.Text>operator_doubleArrow(_text, _function_1);
-      };
-      return CompletableFutures.<TestLangLSPExtension.Text>computeAsync(_function);
+    public void initialize(final DocumentAccess access) {
+      this.access = access;
     }
   }
   
-  @JsonNotification
-  public abstract void sayHello();
-  
   @JsonRequest
-  public abstract CompletableFuture<TestLangLSPExtension.Text> getFullText(final TestLangLSPExtension.Text param);
+  public abstract CompletableFuture<TestLangLSPExtension.TextOfLineResult> getTextOfLine(final TestLangLSPExtension.TextOfLineParam param);
 }

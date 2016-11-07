@@ -82,13 +82,12 @@ abstract class AbstractLanguageServerTest implements LanguageClient {
 			override protected configure() {
 				bind(RequestManager).toInstance(new RequestManager() {
 
-					override runWrite((CancelIndicator)=>void writeRequest, CancelIndicator cancelIndicator) {
-						writeRequest.apply(cancelIndicator)
-						return CompletableFuture.completedFuture(null)
+					override <V> runWrite((CancelIndicator)=>V writeRequest) {
+						return CompletableFuture.completedFuture(writeRequest.apply [ false ])
 					}
 
-					override <V> runRead((CancelIndicator)=>V readRequest, CancelIndicator cancelIndicator) {
-						return CompletableFuture.completedFuture(readRequest.apply(cancelIndicator))
+					override <V> runRead((CancelIndicator)=>V readRequest) {
+						return CompletableFuture.completedFuture(readRequest.apply [ false ])
 					}
 
 				})

@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
+import java.util.function.Supplier;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.lsp4j.CodeActionParams;
@@ -81,10 +82,10 @@ import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.ide.server.Document;
+import org.eclipse.xtext.ide.server.DocumentAccess;
 import org.eclipse.xtext.ide.server.LanguageServerExtension;
 import org.eclipse.xtext.ide.server.UriExtensions;
 import org.eclipse.xtext.ide.server.WorkspaceManager;
-import org.eclipse.xtext.ide.server.concurrent.CancellableIndicator;
 import org.eclipse.xtext.ide.server.concurrent.RequestManager;
 import org.eclipse.xtext.ide.server.contentassist.ContentAssistService;
 import org.eclipse.xtext.ide.server.findReferences.WorkspaceResourceAccess;
@@ -215,7 +216,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
     };
     ServerCapabilities _doubleArrow = ObjectExtensions.<ServerCapabilities>operator_doubleArrow(_serverCapabilities, _function);
     result.setCapabilities(_doubleArrow);
-    final Procedure1<CancelIndicator> _function_1 = (CancelIndicator cancelIndicator) -> {
+    final Function1<CancelIndicator, Object> _function_1 = (CancelIndicator cancelIndicator) -> {
       String _rootPath_1 = params.getRootPath();
       URI _createFileURI = URI.createFileURI(_rootPath_1);
       String _path = this._uriExtensions.toPath(_createFileURI);
@@ -224,8 +225,9 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
         this.publishDiagnostics($0, $1);
       };
       this.workspaceManager.initialize(rootURI, _function_2, cancelIndicator);
+      return null;
     };
-    this.requestManager.runWrite(_function_1, CancellableIndicator.NullImpl);
+    this.requestManager.<Object>runWrite(_function_1);
     return CompletableFuture.<InitializeResult>completedFuture(result);
   }
   
@@ -255,7 +257,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
   
   @Override
   public void didOpen(final DidOpenTextDocumentParams params) {
-    final Procedure1<CancelIndicator> _function = (CancelIndicator cancelIndicator) -> {
+    final Function1<CancelIndicator, Object> _function = (CancelIndicator cancelIndicator) -> {
       TextDocumentItem _textDocument = params.getTextDocument();
       String _uri = _textDocument.getUri();
       URI _uri_1 = this._uriExtensions.toUri(_uri);
@@ -264,13 +266,14 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
       TextDocumentItem _textDocument_2 = params.getTextDocument();
       String _text = _textDocument_2.getText();
       this.workspaceManager.didOpen(_uri_1, _version, _text, cancelIndicator);
+      return null;
     };
-    this.requestManager.runWrite(_function);
+    this.requestManager.<Object>runWrite(_function);
   }
   
   @Override
   public void didChange(final DidChangeTextDocumentParams params) {
-    final Procedure1<CancelIndicator> _function = (CancelIndicator cancelIndicator) -> {
+    final Function1<CancelIndicator, Object> _function = (CancelIndicator cancelIndicator) -> {
       VersionedTextDocumentIdentifier _textDocument = params.getTextDocument();
       String _uri = _textDocument.getUri();
       URI _uri_1 = this._uriExtensions.toUri(_uri);
@@ -284,19 +287,21 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
       };
       List<TextEdit> _map = ListExtensions.<TextDocumentContentChangeEvent, TextEdit>map(_contentChanges, _function_1);
       this.workspaceManager.didChange(_uri_1, _version, _map, cancelIndicator);
+      return null;
     };
-    this.requestManager.runWrite(_function);
+    this.requestManager.<Object>runWrite(_function);
   }
   
   @Override
   public void didClose(final DidCloseTextDocumentParams params) {
-    final Procedure1<CancelIndicator> _function = (CancelIndicator cancelIndicator) -> {
+    final Function1<CancelIndicator, Object> _function = (CancelIndicator cancelIndicator) -> {
       TextDocumentIdentifier _textDocument = params.getTextDocument();
       String _uri = _textDocument.getUri();
       URI _uri_1 = this._uriExtensions.toUri(_uri);
       this.workspaceManager.didClose(_uri_1, cancelIndicator);
+      return null;
     };
-    this.requestManager.runWrite(_function);
+    this.requestManager.<Object>runWrite(_function);
   }
   
   @Override
@@ -305,7 +310,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
   
   @Override
   public void didChangeWatchedFiles(final DidChangeWatchedFilesParams params) {
-    final Procedure1<CancelIndicator> _function = (CancelIndicator cancelIndicator) -> {
+    final Function1<CancelIndicator, Object> _function = (CancelIndicator cancelIndicator) -> {
       final ArrayList<URI> dirtyFiles = CollectionLiterals.<URI>newArrayList();
       final ArrayList<URI> deletedFiles = CollectionLiterals.<URI>newArrayList();
       List<FileEvent> _changes = params.getChanges();
@@ -323,16 +328,18 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
         }
       }
       this.workspaceManager.doBuild(dirtyFiles, deletedFiles, cancelIndicator);
+      return null;
     };
-    this.requestManager.runWrite(_function);
+    this.requestManager.<Object>runWrite(_function);
   }
   
   @Override
   public void didChangeConfiguration(final DidChangeConfigurationParams params) {
-    final Procedure1<CancelIndicator> _function = (CancelIndicator cancelIndicator) -> {
+    final Function1<CancelIndicator, Object> _function = (CancelIndicator cancelIndicator) -> {
       this.workspaceManager.refreshWorkspaceConfig(cancelIndicator);
+      return null;
     };
-    this.requestManager.runWrite(_function);
+    this.requestManager.<Object>runWrite(_function);
   }
   
   private WorkspaceResourceAccess resourceAccess;
@@ -795,6 +802,17 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
                   String _key_4 = entry.getKey();
                   extensions.put(_key_4, existing);
                 } else {
+                  final Supplier<RequestManager> _function = () -> {
+                    return this.requestManager;
+                  };
+                  final Supplier<WorkspaceManager> _function_1 = () -> {
+                    return this.workspaceManager;
+                  };
+                  final Function1<String, URI> _function_2 = (String it) -> {
+                    return this._uriExtensions.toUri(it);
+                  };
+                  DocumentAccess _create = DocumentAccess.create(_function, _function_1, _function_2);
+                  ext.initialize(_create);
                   final Endpoint endpoint = ServiceEndpoints.toEndpoint(ext);
                   String _key_5 = entry.getKey();
                   this.extensionProviders.put(_key_5, endpoint);

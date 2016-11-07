@@ -7,19 +7,37 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.server.concurrent
 
+import java.util.concurrent.CancellationException
+import org.eclipse.lsp4j.jsonrpc.CancelIndicator
 import org.eclipse.xtend.lib.annotations.Accessors
 
 /**
  * @author kosyakov - Initial contribution and API
  * @since 2.11
  */
-class RequestCancelIndicator implements CancellableIndicator {
+class RequestCancelIndicator implements CancelIndicator, Cancellable {
 
 	@Accessors(PUBLIC_GETTER)
 	volatile boolean canceled
+	
+	CancelIndicator delegate
+	
+	new () {}
+	new (CancelIndicator delegate) {
+		this.delegate = delegate
+	}
 
 	override cancel() {
 		canceled = true
+	}
+	
+	override checkCanceled() {
+		if (delegate !== null) {
+			delegate.checkCanceled
+		}
+		if (canceled) {
+			throw new CancellationException("process canceled")
+		}
 	}
 
 }

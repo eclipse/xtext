@@ -63,7 +63,6 @@ import org.eclipse.lsp4j.services.TextDocumentService
 import org.eclipse.lsp4j.services.WorkspaceService
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
-import org.eclipse.xtext.ide.server.concurrent.CancellableIndicator
 import org.eclipse.xtext.ide.server.concurrent.RequestManager
 import org.eclipse.xtext.ide.server.contentassist.ContentAssistService
 import org.eclipse.xtext.ide.server.findReferences.WorkspaceResourceAccess
@@ -136,10 +135,11 @@ import org.eclipse.xtext.validation.Issue
 			documentHighlightProvider = true
 		]
 
-		requestManager.runWrite([ cancelIndicator |
+		requestManager.runWrite [ cancelIndicator |
 			val rootURI = URI.createFileURI(params.rootPath).toPath.toUri
 			workspaceManager.initialize(rootURI, [this.publishDiagnostics($0, $1)], cancelIndicator)
-		], CancellableIndicator.NullImpl)
+			return null
+		]
 
 		return CompletableFuture.completedFuture(result)
 	}
@@ -167,6 +167,7 @@ import org.eclipse.xtext.validation.Issue
 	override didOpen(DidOpenTextDocumentParams params) {
 		requestManager.runWrite [ cancelIndicator |
 			workspaceManager.didOpen(params.textDocument.uri.toUri, params.textDocument.version, params.textDocument.text, cancelIndicator)
+			return null
 		]
 	}
 
@@ -175,12 +176,14 @@ import org.eclipse.xtext.validation.Issue
 			workspaceManager.didChange(params.textDocument.uri.toUri, params.textDocument.version, params.contentChanges.map [ event |
 				new TextEdit(event.range, event.text)
 			], cancelIndicator)
+			return null
 		]
 	}
 
 	override didClose(DidCloseTextDocumentParams params) {
 		requestManager.runWrite [ cancelIndicator |
 			workspaceManager.didClose(params.textDocument.uri.toUri, cancelIndicator)
+			return null
 		]
 	}
 
@@ -201,12 +204,14 @@ import org.eclipse.xtext.validation.Issue
 				}
 			}
 			workspaceManager.doBuild(dirtyFiles, deletedFiles, cancelIndicator)
+			return null
 		]
 	}
 	
 	override didChangeConfiguration(DidChangeConfigurationParams params) {
         requestManager.runWrite [ cancelIndicator |
             workspaceManager.refreshWorkspaceConfig(cancelIndicator)
+            return null
         ]
     }
 
@@ -505,6 +510,7 @@ import org.eclipse.xtext.validation.Issue
 								LOG.error("An incompatible LSP extension '"+entry.key+"' has already been registered. Using 1 ignoring 2. \n1 : "+existing+" \n2 : "+entry.value)
 								extensions.put(entry.key, existing)
 							} else {
+								ext.initialize(DocumentAccess.create([this.requestManager], [this.workspaceManager], [toUri]))
 								val endpoint = ServiceEndpoints.toEndpoint(ext)
 								extensionProviders.put(entry.key, endpoint)
 								supportedMethods.put(entry.key, entry.value)

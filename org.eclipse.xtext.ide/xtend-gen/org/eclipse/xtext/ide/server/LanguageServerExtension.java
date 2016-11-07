@@ -7,8 +7,10 @@
  */
 package org.eclipse.xtext.ide.server;
 
+import org.eclipse.xtext.ide.server.DocumentAccess;
+
 /**
- * Marker interface for language specific extensions to the LSP.
+ * Interface for language specific extensions to the LSP.
  * Implementors should use {link JsonRpcNotification} and {link JsonRpcRequest} annotations.
  * 
  * @author Sven Efftinge - Initial contribution and API
@@ -22,4 +24,9 @@ public interface LanguageServerExtension {
    * To indicate that a request is not handled, this exception should be thrown by the service.
    */
   public final static RuntimeException NOT_HANDLED_EXCEPTION = new UnsupportedOperationException("not handled");
+  
+  /**
+   * the language server provides a DocumentAccess object to allow accessing language server documents and resources in a save way.
+   */
+  public abstract void initialize(final DocumentAccess access);
 }

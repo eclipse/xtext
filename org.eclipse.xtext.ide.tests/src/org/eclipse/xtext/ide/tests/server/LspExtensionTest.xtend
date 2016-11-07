@@ -9,6 +9,7 @@ package org.eclipse.xtext.ide.tests.server
 
 import org.eclipse.lsp4j.jsonrpc.services.ServiceEndpoints
 import org.eclipse.xtext.ide.tests.testlanguage.ide.TestLangLSPExtension
+import org.eclipse.xtext.ide.tests.testlanguage.ide.TestLangLSPExtension.TextOfLineParam
 import org.junit.Assert
 import org.junit.Test
 
@@ -18,15 +19,17 @@ import org.junit.Test
 class LspExtensionTest extends AbstractTestLangLanguageServerTest {
 	
 	@Test def void testExtension() {
+		initialize
 		val ext = ServiceEndpoints.toServiceObject(languageServer, TestLangLSPExtension)
-		ext.sayHello
-		try {
-			ext.sayHello
-			Assert.fail("Expected exception on second call.")
-		} catch (RuntimeException e) {
-			// expected
-		}
-		val result = ext.getFullText(new TestLangLSPExtension.Text => [ text = "World!"])
-		Assert.assertEquals("Hello World!", result.get.text)
+		val fileURI = "mydoc.testlang".writeFile('''
+			foo bar
+			baz test
+				bla blubb
+		''')
+		val result = ext.getTextOfLine(new TextOfLineParam => [
+			uri = fileURI
+			line = 1
+		]).get
+		Assert.assertEquals("baz test", result.text)
 	}
 }

@@ -119,14 +119,20 @@ public class MultiProjectTest {
         AnnotatedBindingBuilder<RequestManager> _bind_1 = this.<RequestManager>bind(RequestManager.class);
         _bind_1.toInstance(new RequestManager() {
           @Override
-          public CompletableFuture<Void> runWrite(final Procedure1<? super CancelIndicator> writeRequest, final CancelIndicator cancelIndicator) {
-            writeRequest.apply(cancelIndicator);
-            return CompletableFuture.<Void>completedFuture(null);
+          public <V extends Object> CompletableFuture<V> runWrite(final Function1<? super CancelIndicator, ? extends V> writeRequest) {
+            final CancelIndicator _function = () -> {
+              return false;
+            };
+            V _apply = writeRequest.apply(_function);
+            return CompletableFuture.<V>completedFuture(_apply);
           }
           
           @Override
-          public <V extends Object> CompletableFuture<V> runRead(final Function1<? super CancelIndicator, ? extends V> readRequest, final CancelIndicator cancelIndicator) {
-            V _apply = readRequest.apply(cancelIndicator);
+          public <V extends Object> CompletableFuture<V> runRead(final Function1<? super CancelIndicator, ? extends V> readRequest) {
+            final CancelIndicator _function = () -> {
+              return false;
+            };
+            V _apply = readRequest.apply(_function);
             return CompletableFuture.<V>completedFuture(_apply);
           }
         });

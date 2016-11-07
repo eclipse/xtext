@@ -62,7 +62,7 @@ class MultiProjectWorkspaceConfig implements IWorkspaceConfig {
     
     override findProjectContaining(URI member) {
         name2config.values.filter[
-            findSourceFolderContaining(member) != null
+            findSourceFolderContaining(member) !== null
         ].maxBy[path.segmentCount]
     }
 }

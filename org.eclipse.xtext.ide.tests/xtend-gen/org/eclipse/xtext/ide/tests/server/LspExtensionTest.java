@@ -9,6 +9,7 @@ package org.eclipse.xtext.ide.tests.server;
 
 import java.util.concurrent.CompletableFuture;
 import org.eclipse.lsp4j.jsonrpc.services.ServiceEndpoints;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.ide.tests.server.AbstractTestLangLanguageServerTest;
 import org.eclipse.xtext.ide.tests.testlanguage.ide.TestLangLSPExtension;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -25,26 +26,26 @@ public class LspExtensionTest extends AbstractTestLangLanguageServerTest {
   @Test
   public void testExtension() {
     try {
+      this.initialize();
       final TestLangLSPExtension ext = ServiceEndpoints.<TestLangLSPExtension>toServiceObject(this.languageServer, TestLangLSPExtension.class);
-      ext.sayHello();
-      try {
-        ext.sayHello();
-        Assert.fail("Expected exception on second call.");
-      } catch (final Throwable _t) {
-        if (_t instanceof RuntimeException) {
-          final RuntimeException e = (RuntimeException)_t;
-        } else {
-          throw Exceptions.sneakyThrow(_t);
-        }
-      }
-      TestLangLSPExtension.Text _text = new TestLangLSPExtension.Text();
-      final Procedure1<TestLangLSPExtension.Text> _function = (TestLangLSPExtension.Text it) -> {
-        it.text = "World!";
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("foo bar");
+      _builder.newLine();
+      _builder.append("baz test");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("bla blubb");
+      _builder.newLine();
+      final String fileURI = this.writeFile("mydoc.testlang", _builder);
+      TestLangLSPExtension.TextOfLineParam _textOfLineParam = new TestLangLSPExtension.TextOfLineParam();
+      final Procedure1<TestLangLSPExtension.TextOfLineParam> _function = (TestLangLSPExtension.TextOfLineParam it) -> {
+        it.uri = fileURI;
+        it.line = 1;
       };
-      TestLangLSPExtension.Text _doubleArrow = ObjectExtensions.<TestLangLSPExtension.Text>operator_doubleArrow(_text, _function);
-      final CompletableFuture<TestLangLSPExtension.Text> result = ext.getFullText(_doubleArrow);
-      TestLangLSPExtension.Text _get = result.get();
-      Assert.assertEquals("Hello World!", _get.text);
+      TestLangLSPExtension.TextOfLineParam _doubleArrow = ObjectExtensions.<TestLangLSPExtension.TextOfLineParam>operator_doubleArrow(_textOfLineParam, _function);
+      CompletableFuture<TestLangLSPExtension.TextOfLineResult> _textOfLine = ext.getTextOfLine(_doubleArrow);
+      final TestLangLSPExtension.TextOfLineResult result = _textOfLine.get();
+      Assert.assertEquals("baz test", result.text);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

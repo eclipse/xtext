@@ -7,45 +7,47 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.tests.testlanguage.ide
 
-import java.util.concurrent.CompletableFuture
-import org.eclipse.lsp4j.jsonrpc.services.JsonNotification
-import org.eclipse.lsp4j.jsonrpc.services.JsonRequest
 import com.google.inject.ImplementedBy
+import java.util.concurrent.CompletableFuture
+import org.eclipse.lsp4j.Position
+import org.eclipse.lsp4j.jsonrpc.services.JsonRequest
+import org.eclipse.xtext.ide.server.DocumentAccess
 import org.eclipse.xtext.ide.server.LanguageServerExtension
-import org.eclipse.lsp4j.jsonrpc.CompletableFutures
 
 /**
  * @author efftinge - Initial contribution and API
  */
 @ImplementedBy(TestLangLSPExtension.Impl)
 interface TestLangLSPExtension extends LanguageServerExtension {
-	@JsonNotification
-	def void sayHello()
-
+	
 	@JsonRequest
-	def CompletableFuture<Text> getFullText(Text param)
+	def CompletableFuture<TextOfLineResult> getTextOfLine(TextOfLineParam param)
 
-	static class Text {
+	static class TextOfLineResult {
 		public String text
+	}
+	static class TextOfLineParam {
+		public String uri
+		public int line
 	}
 	
 	static class Impl implements LanguageServerExtension, TestLangLSPExtension {
 
-		private String text = ""
+		DocumentAccess access
 	
-		override sayHello() {
-			if (text.length > 0) {
-				throw LanguageServerExtension.NOT_HANDLED_EXCEPTION
-			}
-			text += "Hello "
-		}
-	
-		override getFullText(Text param) {
-			CompletableFutures.computeAsync [
-				return new Text => [
-					text = this.text + param.text
+		override getTextOfLine(TextOfLineParam param) {
+			return access.doRead(param.uri) [ ctx |
+				val start = ctx.document.getOffSet(new Position(param.line, 0 ))
+				val end = ctx.document.getOffSet(new Position(param.line + 1, 0 )) -1
+				return new TextOfLineResult => [
+					text = ctx.document.contents.substring(start, end)
 				]
 			]
 		}
+		
+		override initialize(DocumentAccess access) {
+			this.access = access
+		}
+		
 	}
 }
