@@ -6,9 +6,3 @@ dependencies {
 	compile project(':org.eclipse.xtext.xbase.lib')
 	compile project(':org.eclipse.xtend.lib.macro')
 }
-
-jar {
-	from('.') {
-		include 'about_org.eclipse.xtend.lib.html'
-	}
-}
