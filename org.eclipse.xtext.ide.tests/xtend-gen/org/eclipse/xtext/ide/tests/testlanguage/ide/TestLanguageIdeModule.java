@@ -7,7 +7,7 @@
  */
 package org.eclipse.xtext.ide.tests.testlanguage.ide;
 
-import org.eclipse.xtext.ide.server.LanguageServerExtension;
+import org.eclipse.xtext.ide.server.ILanguageServerExtension;
 import org.eclipse.xtext.ide.tests.testlanguage.ide.AbstractTestLanguageIdeModule;
 import org.eclipse.xtext.ide.tests.testlanguage.ide.TestLangLSPExtension;
 
@@ -16,7 +16,7 @@ import org.eclipse.xtext.ide.tests.testlanguage.ide.TestLangLSPExtension;
  */
 @SuppressWarnings("all")
 public class TestLanguageIdeModule extends AbstractTestLanguageIdeModule {
-  public Class<? extends LanguageServerExtension> bindLanguageServerExtension() {
+  public Class<? extends ILanguageServerExtension> bindLanguageServerExtension() {
     return TestLangLSPExtension.class;
   }
 }

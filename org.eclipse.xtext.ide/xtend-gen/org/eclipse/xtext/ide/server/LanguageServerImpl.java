@@ -12,7 +12,6 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.LinkedListMultimap;
 import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -21,7 +20,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
-import java.util.function.Supplier;
+import java.util.function.Function;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.lsp4j.CodeActionParams;
@@ -78,12 +77,11 @@ import org.eclipse.lsp4j.services.LanguageClientAware;
 import org.eclipse.lsp4j.services.LanguageServer;
 import org.eclipse.lsp4j.services.TextDocumentService;
 import org.eclipse.lsp4j.services.WorkspaceService;
-import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.ide.server.Document;
-import org.eclipse.xtext.ide.server.DocumentAccess;
-import org.eclipse.xtext.ide.server.LanguageServerExtension;
+import org.eclipse.xtext.ide.server.ILanguageServerAccess;
+import org.eclipse.xtext.ide.server.ILanguageServerExtension;
 import org.eclipse.xtext.ide.server.UriExtensions;
 import org.eclipse.xtext.ide.server.WorkspaceManager;
 import org.eclipse.xtext.ide.server.concurrent.RequestManager;
@@ -98,7 +96,6 @@ import org.eclipse.xtext.ide.server.symbol.WorkspaceSymbolService;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.service.OperationCanceledManager;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.internal.Log;
 import org.eclipse.xtext.validation.Issue;
@@ -112,7 +109,6 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
-import org.eclipse.xtext.xbase.lib.Pure;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -143,40 +139,36 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
     }
   }
   
-  @Accessors
   @Inject
   private RequestManager requestManager;
   
-  @Accessors
   @Inject
   private WorkspaceSymbolService workspaceSymbolService;
   
-  @Accessors
-  private InitializeParams params;
-  
-  @Accessors
-  @Inject
-  private Provider<WorkspaceManager> workspaceManagerProvider;
-  
-  @Accessors
-  private WorkspaceManager workspaceManager;
-  
-  @Accessors
   @Inject
   @Extension
   private UriExtensions _uriExtensions;
   
-  @Accessors
   @Inject
   @Extension
   private IResourceServiceProvider.Registry languagesRegistry;
   
-  @Accessors
+  private WorkspaceManager workspaceManager;
+  
+  private InitializeParams params;
+  
   @Inject
-  private OperationCanceledManager operationCanceledManager;
+  public void setWorkspaceManager(final WorkspaceManager manager) {
+    this.workspaceManager = manager;
+    WorkspaceResourceAccess _workspaceResourceAccess = new WorkspaceResourceAccess(this.workspaceManager);
+    this.resourceAccess = _workspaceResourceAccess;
+  }
   
   @Override
   public CompletableFuture<InitializeResult> initialize(final InitializeParams params) {
+    if ((this.params != null)) {
+      throw new IllegalStateException("This language server has already been initialized.");
+    }
     String _rootPath = params.getRootPath();
     boolean _tripleEquals = (_rootPath == null);
     if (_tripleEquals) {
@@ -188,10 +180,6 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
       throw new IllegalStateException("No Xtext languages have been registered. Please make sure you have added the languages\'s setup class in \'/META-INF/services/org.eclipse.xtext.ISetup\'");
     }
     this.params = params;
-    WorkspaceManager _get = this.workspaceManagerProvider.get();
-    this.workspaceManager = _get;
-    WorkspaceResourceAccess _workspaceResourceAccess = new WorkspaceResourceAccess(this.workspaceManager);
-    this.resourceAccess = _workspaceResourceAccess;
     final InitializeResult result = new InitializeResult();
     ServerCapabilities _serverCapabilities = new ServerCapabilities();
     final Procedure1<ServerCapabilities> _function = (ServerCapabilities it) -> {
@@ -717,7 +705,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
       } catch (final Throwable _t) {
         if (_t instanceof UnsupportedOperationException) {
           final UnsupportedOperationException e = (UnsupportedOperationException)_t;
-          if ((e != LanguageServerExtension.NOT_HANDLED_EXCEPTION)) {
+          if ((e != ILanguageServerExtension.NOT_HANDLED_EXCEPTION)) {
             throw e;
           }
         } else {
@@ -741,7 +729,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
       } catch (final Throwable _t) {
         if (_t instanceof UnsupportedOperationException) {
           final UnsupportedOperationException e = (UnsupportedOperationException)_t;
-          if ((e != LanguageServerExtension.NOT_HANDLED_EXCEPTION)) {
+          if ((e != ILanguageServerExtension.NOT_HANDLED_EXCEPTION)) {
             throw e;
           }
         } else {
@@ -773,10 +761,17 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
       Iterable<IResourceServiceProvider> _filter = Iterables.<IResourceServiceProvider>filter(_set, IResourceServiceProvider.class);
       for (final IResourceServiceProvider resourceServiceProvider : _filter) {
         {
-          final LanguageServerExtension ext = resourceServiceProvider.<LanguageServerExtension>get(LanguageServerExtension.class);
+          final ILanguageServerExtension ext = resourceServiceProvider.<ILanguageServerExtension>get(ILanguageServerExtension.class);
           if ((ext != null)) {
-            Class<? extends LanguageServerExtension> _class_1 = ext.getClass();
-            final Map<String, JsonRpcMethod> supportedExtensions = ServiceEndpoints.getSupportedMethods(_class_1);
+            ext.initialize(this.access);
+            Map<String, JsonRpcMethod> _xifexpression = null;
+            if ((ext instanceof JsonRpcMethodProvider)) {
+              _xifexpression = ((JsonRpcMethodProvider)ext).supportedMethods();
+            } else {
+              Class<? extends ILanguageServerExtension> _class_1 = ext.getClass();
+              _xifexpression = ServiceEndpoints.getSupportedMethods(_class_1);
+            }
+            final Map<String, JsonRpcMethod> supportedExtensions = _xifexpression;
             Set<Map.Entry<String, JsonRpcMethod>> _entrySet = supportedExtensions.entrySet();
             for (final Map.Entry<String, JsonRpcMethod> entry : _entrySet) {
               String _key = entry.getKey();
@@ -802,17 +797,6 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
                   String _key_4 = entry.getKey();
                   extensions.put(_key_4, existing);
                 } else {
-                  final Supplier<RequestManager> _function = () -> {
-                    return this.requestManager;
-                  };
-                  final Supplier<WorkspaceManager> _function_1 = () -> {
-                    return this.workspaceManager;
-                  };
-                  final Function1<String, URI> _function_2 = (String it) -> {
-                    return this._uriExtensions.toUri(it);
-                  };
-                  DocumentAccess _create = DocumentAccess.create(_function, _function_1, _function_2);
-                  ext.initialize(_create);
                   final Endpoint endpoint = ServiceEndpoints.toEndpoint(ext);
                   String _key_5 = entry.getKey();
                   this.extensionProviders.put(_key_5, endpoint);
@@ -830,77 +814,30 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
     }
   }
   
+  private ILanguageServerAccess access = new ILanguageServerAccess() {
+    @Override
+    public <T extends Object> CompletableFuture<T> doRead(final String uri, final Function<ILanguageServerAccess.Context, T> function) {
+      final Function1<CancelIndicator, T> _function = (CancelIndicator cancelIndicator) -> {
+        URI _uri = LanguageServerImpl.this._uriExtensions.toUri(uri);
+        final Function2<Document, XtextResource, T> _function_1 = (Document document, XtextResource resource) -> {
+          final ILanguageServerAccess.Context ctx = new ILanguageServerAccess.Context(resource, document, cancelIndicator);
+          return function.apply(ctx);
+        };
+        return LanguageServerImpl.this.workspaceManager.<T>doRead(_uri, _function_1);
+      };
+      return LanguageServerImpl.this.requestManager.<T>runRead(_function);
+    }
+    
+    @Override
+    public void addBuildListener(final ILanguageServerAccess.IBuildListener listener) {
+      LanguageServerImpl.this.workspaceManager.addBuildListener(listener);
+    }
+    
+    @Override
+    public LanguageClient getLanguageClient() {
+      return LanguageServerImpl.this.client;
+    }
+  };
+  
   private final static Logger LOG = Logger.getLogger(LanguageServerImpl.class);
-  
-  @Pure
-  public RequestManager getRequestManager() {
-    return this.requestManager;
-  }
-  
-  public void setRequestManager(final RequestManager requestManager) {
-    this.requestManager = requestManager;
-  }
-  
-  @Pure
-  public WorkspaceSymbolService getWorkspaceSymbolService() {
-    return this.workspaceSymbolService;
-  }
-  
-  public void setWorkspaceSymbolService(final WorkspaceSymbolService workspaceSymbolService) {
-    this.workspaceSymbolService = workspaceSymbolService;
-  }
-  
-  @Pure
-  public InitializeParams getParams() {
-    return this.params;
-  }
-  
-  public void setParams(final InitializeParams params) {
-    this.params = params;
-  }
-  
-  @Pure
-  public Provider<WorkspaceManager> getWorkspaceManagerProvider() {
-    return this.workspaceManagerProvider;
-  }
-  
-  public void setWorkspaceManagerProvider(final Provider<WorkspaceManager> workspaceManagerProvider) {
-    this.workspaceManagerProvider = workspaceManagerProvider;
-  }
-  
-  @Pure
-  public WorkspaceManager getWorkspaceManager() {
-    return this.workspaceManager;
-  }
-  
-  public void setWorkspaceManager(final WorkspaceManager workspaceManager) {
-    this.workspaceManager = workspaceManager;
-  }
-  
-  @Pure
-  public UriExtensions get_uriExtensions() {
-    return this._uriExtensions;
-  }
-  
-  public void set_uriExtensions(final UriExtensions _uriExtensions) {
-    this._uriExtensions = _uriExtensions;
-  }
-  
-  @Pure
-  public IResourceServiceProvider.Registry getLanguagesRegistry() {
-    return this.languagesRegistry;
-  }
-  
-  public void setLanguagesRegistry(final IResourceServiceProvider.Registry languagesRegistry) {
-    this.languagesRegistry = languagesRegistry;
-  }
-  
-  @Pure
-  public OperationCanceledManager getOperationCanceledManager() {
-    return this.operationCanceledManager;
-  }
-  
-  public void setOperationCanceledManager(final OperationCanceledManager operationCanceledManager) {
-    this.operationCanceledManager = operationCanceledManager;
-  }
 }

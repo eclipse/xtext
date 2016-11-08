@@ -13,7 +13,7 @@ package org.eclipse.xtext.ide.server
  * 
  * @author Sven Efftinge - Initial contribution and API
  */
-interface LanguageServerExtension {
+interface ILanguageServerExtension {
 	
 	/**
 	 * The same jsonrpc method might be supported by multiple languages and only the actual invocation
@@ -24,7 +24,7 @@ interface LanguageServerExtension {
 	static RuntimeException NOT_HANDLED_EXCEPTION = new UnsupportedOperationException("not handled");
 	
 	/**
-	 * the language server provides a DocumentAccess object to allow accessing language server documents and resources in a save way.
+	 * the language server provides a access to language server documents, resources and build events.
 	 */
-	def void initialize(DocumentAccess access);
+	def void initialize(ILanguageServerAccess access);
 }

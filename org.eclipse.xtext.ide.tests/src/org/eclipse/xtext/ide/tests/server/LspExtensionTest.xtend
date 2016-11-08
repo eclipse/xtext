@@ -7,11 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.tests.server
 
+import org.eclipse.lsp4j.DidOpenTextDocumentParams
+import org.eclipse.lsp4j.TextDocumentItem
 import org.eclipse.lsp4j.jsonrpc.services.ServiceEndpoints
 import org.eclipse.xtext.ide.tests.testlanguage.ide.TestLangLSPExtension
 import org.eclipse.xtext.ide.tests.testlanguage.ide.TestLangLSPExtension.TextOfLineParam
 import org.junit.Assert
 import org.junit.Test
+import org.eclipse.xtext.ide.tests.testlanguage.ide.TestLangLSPExtension.BuildNotification
 
 /**
  * @author efftinge - Initial contribution and API
@@ -19,17 +22,30 @@ import org.junit.Test
 class LspExtensionTest extends AbstractTestLangLanguageServerTest {
 	
 	@Test def void testExtension() {
+		val fileURI = "mydoc.testlang".writeFile("")
 		initialize
 		val ext = ServiceEndpoints.toServiceObject(languageServer, TestLangLSPExtension)
-		val fileURI = "mydoc.testlang".writeFile('''
-			foo bar
-			baz test
-				bla blubb
-		''')
+		languageServer.didOpen(new DidOpenTextDocumentParams => [
+			it.textDocument = new TextDocumentItem => [
+				uri = fileURI
+				text = '''
+					foo bar
+					baz test
+						bla blubb
+				'''
+			]
+		])
 		val result = ext.getTextOfLine(new TextOfLineParam => [
 			uri = fileURI
 			line = 1
 		]).get
 		Assert.assertEquals("baz test", result.text)
+		Assert.assertEquals('''
+			BuildNotification [
+			  message = "Built file:///Users/efftinge/Documents/Eclipse/xtext-master/git/xtext-core/org.eclipse.xtext.ide.tests/test-data/test-project/mydoc.testlang"
+			],BuildNotification [
+			  message = "Built file:///Users/efftinge/Documents/Eclipse/xtext-master/git/xtext-core/org.eclipse.xtext.ide.tests/test-data/test-project/mydoc.testlang"
+			]'''.toString, notifications.map[value].filter(BuildNotification).join(","))
 	}
+	
 }

@@ -7,27 +7,25 @@
  */
 package org.eclipse.xtext.ide.server;
 
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Function;
-import java.util.function.Supplier;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.lsp4j.services.LanguageClient;
 import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtext.ide.server.Document;
-import org.eclipse.xtext.ide.server.WorkspaceManager;
-import org.eclipse.xtext.ide.server.concurrent.RequestManager;
-import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.util.CancelIndicator;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
 /**
+ * API for interacting with a running language server.
+ * 
  * @author Sven Efftinge - Initial contribution and API
  */
 @SuppressWarnings("all")
-public interface DocumentAccess {
+public interface ILanguageServerAccess {
   @Data
   public static class Context {
     private final Resource resource;
@@ -63,7 +61,7 @@ public interface DocumentAccess {
         return false;
       if (getClass() != obj.getClass())
         return false;
-      DocumentAccess.Context other = (DocumentAccess.Context) obj;
+      ILanguageServerAccess.Context other = (ILanguageServerAccess.Context) obj;
       if (this.resource == null) {
         if (other.resource != null)
           return false;
@@ -108,24 +106,23 @@ public interface DocumentAccess {
     }
   }
   
-  public abstract <T extends Object> CompletableFuture<T> doRead(final String uri, final Function<DocumentAccess.Context, T> function);
-  
-  public static DocumentAccess create(final Supplier<RequestManager> requestManagerSupplier, final Supplier<WorkspaceManager> workspaceManagerSupplier, final Function1<? super String, ? extends URI> uriFactory) {
-    return new DocumentAccess() {
-      @Override
-      public <T extends Object> CompletableFuture<T> doRead(final String uri, final Function<DocumentAccess.Context, T> function) {
-        RequestManager _get = requestManagerSupplier.get();
-        final Function1<CancelIndicator, T> _function = (CancelIndicator cancelIndicator) -> {
-          WorkspaceManager _get_1 = workspaceManagerSupplier.get();
-          URI _apply = uriFactory.apply(uri);
-          final Function2<Document, XtextResource, T> _function_1 = (Document document, XtextResource resource) -> {
-            final DocumentAccess.Context ctx = new DocumentAccess.Context(resource, document, cancelIndicator);
-            return function.apply(ctx);
-          };
-          return _get_1.<T>doRead(_apply, _function_1);
-        };
-        return _get.<T>runRead(_function);
-      }
-    };
+  public interface IBuildListener {
+    public abstract void afterBuild(final List<IResourceDescription.Delta> deltas);
   }
+  
+  /**
+   * provides read access to a fully resolved resource and Document.
+   */
+  public abstract <T extends Object> CompletableFuture<T> doRead(final String uri, final Function<ILanguageServerAccess.Context, T> function);
+  
+  /**
+   * registers a build listener on the this language server
+   */
+  public abstract void addBuildListener(final ILanguageServerAccess.IBuildListener listener);
+  
+  /**
+   * returns the language client facade. It usually also implements Endpoint, which can be used to
+   * call non-standard extensions to the LSP.
+   */
+  public abstract LanguageClient getLanguageClient();
 }

@@ -7,14 +7,14 @@
  */
 package org.eclipse.xtext.ide.tests.testlanguage.ide
 
-import org.eclipse.xtext.ide.server.LanguageServerExtension
+import org.eclipse.xtext.ide.server.ILanguageServerExtension
 
 /**
  * Use this class to register ide components.
  */
 class TestLanguageIdeModule extends AbstractTestLanguageIdeModule {
 	
-	def Class<? extends LanguageServerExtension> bindLanguageServerExtension() {
+	def Class<? extends ILanguageServerExtension> bindLanguageServerExtension() {
 		TestLangLSPExtension
 	}
 	

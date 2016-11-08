@@ -7,21 +7,21 @@
  */
 package org.eclipse.xtext.testing;
 
-import org.eclipse.xtend.lib.annotations.Data;
+import org.eclipse.xtend.lib.Data;
 import org.eclipse.xtext.xbase.lib.Pure;
-import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
+import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 
 @Data
 @SuppressWarnings("all")
 public class FileInfo {
-  private final String uri;
+  private final String _uri;
   
-  private final String contents;
+  private final String _contents;
   
   public FileInfo(final String uri, final String contents) {
     super();
-    this.uri = uri;
-    this.contents = contents;
+    this._uri = uri;
+    this._contents = contents;
   }
   
   @Override
@@ -29,8 +29,8 @@ public class FileInfo {
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + ((this.uri== null) ? 0 : this.uri.hashCode());
-    result = prime * result + ((this.contents== null) ? 0 : this.contents.hashCode());
+    result = prime * result + ((this._uri== null) ? 0 : this._uri.hashCode());
+    result = prime * result + ((this._contents== null) ? 0 : this._contents.hashCode());
     return result;
   }
   
@@ -44,15 +44,15 @@ public class FileInfo {
     if (getClass() != obj.getClass())
       return false;
     FileInfo other = (FileInfo) obj;
-    if (this.uri == null) {
-      if (other.uri != null)
+    if (this._uri == null) {
+      if (other._uri != null)
         return false;
-    } else if (!this.uri.equals(other.uri))
+    } else if (!this._uri.equals(other._uri))
       return false;
-    if (this.contents == null) {
-      if (other.contents != null)
+    if (this._contents == null) {
+      if (other._contents != null)
         return false;
-    } else if (!this.contents.equals(other.contents))
+    } else if (!this._contents.equals(other._contents))
       return false;
     return true;
   }
@@ -60,19 +60,17 @@ public class FileInfo {
   @Override
   @Pure
   public String toString() {
-    ToStringBuilder b = new ToStringBuilder(this);
-    b.add("uri", this.uri);
-    b.add("contents", this.contents);
-    return b.toString();
+    String result = new ToStringHelper().toString(this);
+    return result;
   }
   
   @Pure
   public String getUri() {
-    return this.uri;
+    return this._uri;
   }
   
   @Pure
   public String getContents() {
-    return this.contents;
+    return this._contents;
   }
 }

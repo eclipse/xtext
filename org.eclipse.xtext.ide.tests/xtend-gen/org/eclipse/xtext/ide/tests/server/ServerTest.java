@@ -44,10 +44,12 @@ public class ServerTest extends AbstractTestLangLanguageServerTest {
     _builder.newLine();
     this.writeFile("MyType1.testlang", _builder);
     this.initialize();
-    Set<Map.Entry<String, List<? extends Diagnostic>>> _entrySet = this.diagnostics.entrySet();
+    Map<String, List<Diagnostic>> _diagnostics = this.getDiagnostics();
+    Set<Map.Entry<String, List<Diagnostic>>> _entrySet = _diagnostics.entrySet();
     String _join = IterableExtensions.join(_entrySet, ",");
-    Collection<List<? extends Diagnostic>> _values = this.diagnostics.values();
-    List<? extends Diagnostic> _head = IterableExtensions.<List<? extends Diagnostic>>head(_values);
+    Map<String, List<Diagnostic>> _diagnostics_1 = this.getDiagnostics();
+    Collection<List<Diagnostic>> _values = _diagnostics_1.values();
+    List<Diagnostic> _head = IterableExtensions.<List<Diagnostic>>head(_values);
     boolean _isEmpty = _head.isEmpty();
     Assert.assertTrue(_join, _isEmpty);
   }
@@ -64,38 +66,43 @@ public class ServerTest extends AbstractTestLangLanguageServerTest {
     _builder.newLine();
     this.writeFile("MyType1.testlang", _builder);
     this.initialize();
-    Collection<List<? extends Diagnostic>> _values = this.diagnostics.values();
-    List<? extends Diagnostic> _head = IterableExtensions.<List<? extends Diagnostic>>head(_values);
-    Diagnostic _head_1 = IterableExtensions.head(_head);
+    Map<String, List<Diagnostic>> _diagnostics = this.getDiagnostics();
+    Collection<List<Diagnostic>> _values = _diagnostics.values();
+    List<Diagnostic> _head = IterableExtensions.<List<Diagnostic>>head(_values);
+    Diagnostic _head_1 = IterableExtensions.<Diagnostic>head(_head);
     String _message = null;
     if (_head_1!=null) {
       _message=_head_1.getMessage();
     }
     this.assertEquals("Couldn\'t resolve reference to TypeDeclaration \'NonExisting\'.", _message);
-    Collection<List<? extends Diagnostic>> _values_1 = this.diagnostics.values();
-    List<? extends Diagnostic> _head_2 = IterableExtensions.<List<? extends Diagnostic>>head(_values_1);
-    Diagnostic _head_3 = IterableExtensions.head(_head_2);
+    Map<String, List<Diagnostic>> _diagnostics_1 = this.getDiagnostics();
+    Collection<List<Diagnostic>> _values_1 = _diagnostics_1.values();
+    List<Diagnostic> _head_2 = IterableExtensions.<List<Diagnostic>>head(_values_1);
+    Diagnostic _head_3 = IterableExtensions.<Diagnostic>head(_head_2);
     Range _range = _head_3.getRange();
     Position _start = _range.getStart();
     int _line = _start.getLine();
     Assert.assertEquals(1, _line);
-    Collection<List<? extends Diagnostic>> _values_2 = this.diagnostics.values();
-    List<? extends Diagnostic> _head_4 = IterableExtensions.<List<? extends Diagnostic>>head(_values_2);
-    Diagnostic _head_5 = IterableExtensions.head(_head_4);
+    Map<String, List<Diagnostic>> _diagnostics_2 = this.getDiagnostics();
+    Collection<List<Diagnostic>> _values_2 = _diagnostics_2.values();
+    List<Diagnostic> _head_4 = IterableExtensions.<List<Diagnostic>>head(_values_2);
+    Diagnostic _head_5 = IterableExtensions.<Diagnostic>head(_head_4);
     Range _range_1 = _head_5.getRange();
     Position _start_1 = _range_1.getStart();
     int _character = _start_1.getCharacter();
     Assert.assertEquals(4, _character);
-    Collection<List<? extends Diagnostic>> _values_3 = this.diagnostics.values();
-    List<? extends Diagnostic> _head_6 = IterableExtensions.<List<? extends Diagnostic>>head(_values_3);
-    Diagnostic _head_7 = IterableExtensions.head(_head_6);
+    Map<String, List<Diagnostic>> _diagnostics_3 = this.getDiagnostics();
+    Collection<List<Diagnostic>> _values_3 = _diagnostics_3.values();
+    List<Diagnostic> _head_6 = IterableExtensions.<List<Diagnostic>>head(_values_3);
+    Diagnostic _head_7 = IterableExtensions.<Diagnostic>head(_head_6);
     Range _range_2 = _head_7.getRange();
     Position _end = _range_2.getEnd();
     int _line_1 = _end.getLine();
     Assert.assertEquals(1, _line_1);
-    Collection<List<? extends Diagnostic>> _values_4 = this.diagnostics.values();
-    List<? extends Diagnostic> _head_8 = IterableExtensions.<List<? extends Diagnostic>>head(_values_4);
-    Diagnostic _head_9 = IterableExtensions.head(_head_8);
+    Map<String, List<Diagnostic>> _diagnostics_4 = this.getDiagnostics();
+    Collection<List<Diagnostic>> _values_4 = _diagnostics_4.values();
+    List<Diagnostic> _head_8 = IterableExtensions.<List<Diagnostic>>head(_values_4);
+    Diagnostic _head_9 = IterableExtensions.<Diagnostic>head(_head_8);
     Range _range_3 = _head_9.getRange();
     Position _end_1 = _range_3.getEnd();
     int _character_1 = _end_1.getCharacter();
@@ -114,9 +121,10 @@ public class ServerTest extends AbstractTestLangLanguageServerTest {
     _builder.newLine();
     this.writeFile("MyType1.testlang", _builder);
     this.initialize();
-    Collection<List<? extends Diagnostic>> _values = this.diagnostics.values();
-    List<? extends Diagnostic> _head = IterableExtensions.<List<? extends Diagnostic>>head(_values);
-    Diagnostic _head_1 = IterableExtensions.head(_head);
+    Map<String, List<Diagnostic>> _diagnostics = this.getDiagnostics();
+    Collection<List<Diagnostic>> _values = _diagnostics.values();
+    List<Diagnostic> _head = IterableExtensions.<List<Diagnostic>>head(_values);
+    Diagnostic _head_1 = IterableExtensions.<Diagnostic>head(_head);
     String _message = _head_1.getMessage();
     this.assertEquals("Couldn\'t resolve reference to TypeDeclaration \'NonExisting\'.", _message);
     StringConcatenation _builder_1 = new StringConcatenation();
@@ -129,15 +137,18 @@ public class ServerTest extends AbstractTestLangLanguageServerTest {
     FileEvent _fileEvent = new FileEvent(path, FileChangeType.Created);
     DidChangeWatchedFilesParams _didChangeWatchedFilesParams = new DidChangeWatchedFilesParams(Collections.<FileEvent>unmodifiableList(CollectionLiterals.<FileEvent>newArrayList(_fileEvent)));
     _workspaceService.didChangeWatchedFiles(_didChangeWatchedFilesParams);
-    List<? extends Diagnostic> _get = this.diagnostics.get(path);
+    Map<String, List<Diagnostic>> _diagnostics_1 = this.getDiagnostics();
+    List<Diagnostic> _get = _diagnostics_1.get(path);
     Assert.assertNotNull(_get);
-    Collection<List<? extends Diagnostic>> _values_1 = this.diagnostics.values();
+    Map<String, List<Diagnostic>> _diagnostics_2 = this.getDiagnostics();
+    Collection<List<Diagnostic>> _values_1 = _diagnostics_2.values();
     String _join = IterableExtensions.join(_values_1, ",");
-    Collection<List<? extends Diagnostic>> _values_2 = this.diagnostics.values();
-    final Function1<List<? extends Diagnostic>, Boolean> _function = (List<? extends Diagnostic> it) -> {
+    Map<String, List<Diagnostic>> _diagnostics_3 = this.getDiagnostics();
+    Collection<List<Diagnostic>> _values_2 = _diagnostics_3.values();
+    final Function1<List<Diagnostic>, Boolean> _function = (List<Diagnostic> it) -> {
       return Boolean.valueOf(it.isEmpty());
     };
-    boolean _forall = IterableExtensions.<List<? extends Diagnostic>>forall(_values_2, _function);
+    boolean _forall = IterableExtensions.<List<Diagnostic>>forall(_values_2, _function);
     Assert.assertTrue(_join, _forall);
   }
 }

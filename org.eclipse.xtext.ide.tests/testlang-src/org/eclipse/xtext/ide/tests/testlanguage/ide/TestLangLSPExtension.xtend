@@ -8,17 +8,25 @@
 package org.eclipse.xtext.ide.tests.testlanguage.ide
 
 import com.google.inject.ImplementedBy
+import java.util.List
 import java.util.concurrent.CompletableFuture
 import org.eclipse.lsp4j.Position
+import org.eclipse.lsp4j.jsonrpc.Endpoint
+import org.eclipse.lsp4j.jsonrpc.json.JsonRpcMethodProvider
+import org.eclipse.lsp4j.jsonrpc.services.JsonNotification
 import org.eclipse.lsp4j.jsonrpc.services.JsonRequest
-import org.eclipse.xtext.ide.server.DocumentAccess
-import org.eclipse.xtext.ide.server.LanguageServerExtension
+import org.eclipse.lsp4j.jsonrpc.services.ServiceEndpoints
+import org.eclipse.xtext.ide.server.ILanguageServerAccess
+import org.eclipse.xtext.ide.server.ILanguageServerAccess.IBuildListener
+import org.eclipse.xtext.ide.server.ILanguageServerExtension
+import org.eclipse.xtext.resource.IResourceDescription.Delta
+import org.eclipse.xtend.lib.annotations.ToString
 
 /**
  * @author efftinge - Initial contribution and API
  */
 @ImplementedBy(TestLangLSPExtension.Impl)
-interface TestLangLSPExtension extends LanguageServerExtension {
+interface TestLangLSPExtension extends ILanguageServerExtension {
 	
 	@JsonRequest
 	def CompletableFuture<TextOfLineResult> getTextOfLine(TextOfLineParam param)
@@ -31,9 +39,21 @@ interface TestLangLSPExtension extends LanguageServerExtension {
 		public int line
 	}
 	
-	static class Impl implements LanguageServerExtension, TestLangLSPExtension {
+	@ToString
+	static class BuildNotification {
+		public String message
+	}
+	
+	static interface CustomClient {
+		@JsonNotification
+		def void buildHappened(BuildNotification notification)
+	}
+	
+	static class Impl implements ILanguageServerExtension, TestLangLSPExtension, IBuildListener, JsonRpcMethodProvider {
 
-		DocumentAccess access
+		ILanguageServerAccess access
+	
+	CustomClient client
 	
 		override getTextOfLine(TextOfLineParam param) {
 			return access.doRead(param.uri) [ ctx |
@@ -45,8 +65,24 @@ interface TestLangLSPExtension extends LanguageServerExtension {
 			]
 		}
 		
-		override initialize(DocumentAccess access) {
+		override initialize(ILanguageServerAccess access) {
 			this.access = access
+			this.access.addBuildListener(this)
+			this.client = ServiceEndpoints.toServiceObject(access.languageClient as Endpoint, CustomClient)
+		}
+		
+		override afterBuild(List<Delta> deltas) {
+			client.buildHappened(new BuildNotification => [
+				message = "Built "+deltas.map[uri.toString].join(', ')
+			]) 
+		}
+		
+		override supportedMethods() {
+			val result = newHashMap
+			result.putAll(ServiceEndpoints.getSupportedMethods(this.getClass))
+			// register client side
+			result.putAll(ServiceEndpoints.getSupportedMethods(CustomClient))
+			return result
 		}
 		
 	}

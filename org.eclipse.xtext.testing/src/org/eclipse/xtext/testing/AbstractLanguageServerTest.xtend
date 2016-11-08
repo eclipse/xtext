@@ -19,7 +19,6 @@ import java.util.List
 import java.util.Map
 import java.util.concurrent.CompletableFuture
 import org.eclipse.lsp4j.CompletionItem
-import org.eclipse.lsp4j.CompletionList
 import org.eclipse.lsp4j.Diagnostic
 import org.eclipse.lsp4j.DidChangeWatchedFilesParams
 import org.eclipse.lsp4j.DidCloseTextDocumentParams
@@ -46,9 +45,10 @@ import org.eclipse.lsp4j.TextDocumentItem
 import org.eclipse.lsp4j.TextDocumentPositionParams
 import org.eclipse.lsp4j.TextEdit
 import org.eclipse.lsp4j.WorkspaceSymbolParams
+import org.eclipse.lsp4j.jsonrpc.Endpoint
+import org.eclipse.lsp4j.jsonrpc.services.ServiceEndpoints
 import org.eclipse.lsp4j.services.LanguageClient
 import org.eclipse.xtend.lib.annotations.Accessors
-import org.eclipse.xtend.lib.annotations.Data
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.LanguageInfo
 import org.eclipse.xtext.ide.server.Document
@@ -62,15 +62,14 @@ import org.eclipse.xtext.util.Files
 import org.eclipse.xtext.util.Modules2
 import org.junit.Assert
 import org.junit.Before
-import org.eclipse.lsp4j.MessageParams
 import org.eclipse.lsp4j.PublishDiagnosticsParams
-import org.eclipse.lsp4j.ShowMessageRequestParams
+import org.eclipse.lsp4j.CompletionList
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 @FinalFieldsConstructor
-abstract class AbstractLanguageServerTest implements LanguageClient {
+abstract class AbstractLanguageServerTest implements Endpoint {
 
 	@Accessors
 	protected val String fileExtension
@@ -103,7 +102,7 @@ abstract class AbstractLanguageServerTest implements LanguageClient {
 			languageInfo = resourceServiceProvider.get(LanguageInfo)
 
 		// register notification callbacks
-		languageServer.connect(this)
+		languageServer.connect(ServiceEndpoints.toServiceObject(this, LanguageClient))
 		// initialize
 		languageServer.supportedMethods()
 
@@ -120,8 +119,8 @@ abstract class AbstractLanguageServerTest implements LanguageClient {
 
 	@Inject extension UriExtensions
 	@Inject protected LanguageServerImpl languageServer
-	protected Map<String, List<? extends Diagnostic>> diagnostics = newHashMap()
 
+	protected List<Pair<String, Object>> notifications = newArrayList()
 	protected File root
 	protected LanguageInfo languageInfo
 
@@ -451,26 +450,21 @@ abstract class AbstractLanguageServerTest implements LanguageClient {
 		assertEquals(configuration.expectedText, result.contents)
 	}
 
-	override logMessage(MessageParams message) {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+	override notify(String method, Object parameter) {
+		this.notifications.add(method -> parameter)
 	}
-
-	override publishDiagnostics(PublishDiagnosticsParams diagnostics) {
-		this.diagnostics.put(diagnostics.uri, diagnostics.diagnostics)
+	
+	override request(String method, Object parameter) {
+		return CompletableFuture.completedFuture(null)
 	}
-
-	override showMessage(MessageParams messageParams) {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+	
+	protected def Map<String, List<Diagnostic>> getDiagnostics() {
+		val result = <String, List<Diagnostic>>newHashMap
+		for (diagnostic : notifications.map[value].filter(PublishDiagnosticsParams)) {
+			result.put(diagnostic.uri, diagnostic.diagnostics)
+		}
+		return result 
 	}
-
-	override showMessageRequest(ShowMessageRequestParams requestParams) {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
-	}
-
-	override telemetryEvent(Object object) {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
-	}
-
 }
 
 @Data class FileInfo {

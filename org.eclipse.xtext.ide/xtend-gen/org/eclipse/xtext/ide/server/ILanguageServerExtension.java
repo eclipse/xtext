@@ -7,7 +7,7 @@
  */
 package org.eclipse.xtext.ide.server;
 
-import org.eclipse.xtext.ide.server.DocumentAccess;
+import org.eclipse.xtext.ide.server.ILanguageServerAccess;
 
 /**
  * Interface for language specific extensions to the LSP.
@@ -16,7 +16,7 @@ import org.eclipse.xtext.ide.server.DocumentAccess;
  * @author Sven Efftinge - Initial contribution and API
  */
 @SuppressWarnings("all")
-public interface LanguageServerExtension {
+public interface ILanguageServerExtension {
   /**
    * The same jsonrpc method might be supported by multiple languages and only the actual invocation
    * might reveal is a language wants to handle it, based on e.g. a uri in the parameter.
@@ -26,7 +26,7 @@ public interface LanguageServerExtension {
   public final static RuntimeException NOT_HANDLED_EXCEPTION = new UnsupportedOperationException("not handled");
   
   /**
-   * the language server provides a DocumentAccess object to allow accessing language server documents and resources in a save way.
+   * the language server provides a access to language server documents, resources and build events.
    */
-  public abstract void initialize(final DocumentAccess access);
+  public abstract void initialize(final ILanguageServerAccess access);
 }

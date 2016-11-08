@@ -10,11 +10,11 @@ package org.eclipse.xtext.ide.server
 import com.google.common.collect.LinkedListMultimap
 import com.google.common.collect.Multimap
 import com.google.inject.Inject
-import com.google.inject.Provider
 import java.util.Collections
 import java.util.List
 import java.util.Map
 import java.util.concurrent.CompletableFuture
+import java.util.function.Function
 import org.eclipse.emf.common.util.URI
 import org.eclipse.lsp4j.CodeActionParams
 import org.eclipse.lsp4j.CodeLens
@@ -61,7 +61,6 @@ import org.eclipse.lsp4j.services.LanguageClientAware
 import org.eclipse.lsp4j.services.LanguageServer
 import org.eclipse.lsp4j.services.TextDocumentService
 import org.eclipse.lsp4j.services.WorkspaceService
-import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.ide.server.concurrent.RequestManager
 import org.eclipse.xtext.ide.server.contentassist.ContentAssistService
@@ -73,7 +72,6 @@ import org.eclipse.xtext.ide.server.signatureHelp.SignatureHelpService
 import org.eclipse.xtext.ide.server.symbol.DocumentSymbolService
 import org.eclipse.xtext.ide.server.symbol.WorkspaceSymbolService
 import org.eclipse.xtext.resource.IResourceServiceProvider
-import org.eclipse.xtext.service.OperationCanceledManager
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.validation.Issue
@@ -84,28 +82,25 @@ import org.eclipse.xtext.validation.Issue
  */
 @Log class LanguageServerImpl implements LanguageServer, WorkspaceService, TextDocumentService, LanguageClientAware, Endpoint, JsonRpcMethodProvider {
 
-	@Accessors 
-	@Inject
-	RequestManager requestManager
-	
-	@Accessors 
-	@Inject
-	WorkspaceSymbolService workspaceSymbolService
-
-	@Accessors 
-	InitializeParams params
-	@Accessors 
-	@Inject Provider<WorkspaceManager> workspaceManagerProvider
-	@Accessors 
-	WorkspaceManager workspaceManager
-	@Accessors 
+	@Inject RequestManager requestManager
+	@Inject WorkspaceSymbolService workspaceSymbolService
 	@Inject extension UriExtensions
-	@Accessors 
 	@Inject extension IResourceServiceProvider.Registry languagesRegistry
-	@Accessors 
-	@Inject OperationCanceledManager operationCanceledManager
+
+	// injected below
+	WorkspaceManager workspaceManager
+	InitializeParams params
+	
+	@Inject
+	def void setWorkspaceManager(WorkspaceManager manager) {
+		this.workspaceManager = manager
+		resourceAccess = new WorkspaceResourceAccess(workspaceManager)
+	}
 
 	override CompletableFuture<InitializeResult> initialize(InitializeParams params) {
+		if (this.params !== null) {
+			throw new IllegalStateException("This language server has already been initialized.")
+		}
 		if (params.rootPath === null) {
 			throw new IllegalArgumentException("Bad initialization request. rootPath must not be null.")
 		}
@@ -113,9 +108,6 @@ import org.eclipse.xtext.validation.Issue
 			throw new IllegalStateException("No Xtext languages have been registered. Please make sure you have added the languages's setup class in '/META-INF/services/org.eclipse.xtext.ISetup'")
 		}
 		this.params = params
-		workspaceManager = workspaceManagerProvider.get
-		resourceAccess = new WorkspaceResourceAccess(workspaceManager)
-
 		val result = new InitializeResult
 		result.capabilities = new ServerCapabilities => [
 			hoverProvider = true
@@ -463,7 +455,7 @@ import org.eclipse.xtext.validation.Issue
 			try {
 				endpoint.notify(method, parameter)
 			} catch (UnsupportedOperationException e) {
-				if (e !== LanguageServerExtension.NOT_HANDLED_EXCEPTION) {
+				if (e !== ILanguageServerExtension.NOT_HANDLED_EXCEPTION) {
 					throw e
 				}
 			}
@@ -478,7 +470,7 @@ import org.eclipse.xtext.validation.Issue
 			try {
 				return endpoint.request(method, parameter)
 			} catch (UnsupportedOperationException e) {
-				if (e !== LanguageServerExtension.NOT_HANDLED_EXCEPTION) {
+				if (e !== ILanguageServerExtension.NOT_HANDLED_EXCEPTION) {
 					throw e
 				}
 			}
@@ -498,9 +490,14 @@ import org.eclipse.xtext.validation.Issue
 			supportedMethods.putAll(ServiceEndpoints.getSupportedMethods(class))
 			val extensions = <String,JsonRpcMethod>newLinkedHashMap()
 			for (resourceServiceProvider : languagesRegistry.extensionToFactoryMap.values.toSet.filter(IResourceServiceProvider)) {
-				val ext = resourceServiceProvider.get(LanguageServerExtension)
+				val ext = resourceServiceProvider.get(ILanguageServerExtension)
 				if (ext !== null) {
-					val supportedExtensions = ServiceEndpoints.getSupportedMethods(ext.class)
+					ext.initialize(access)
+					val supportedExtensions = if (ext instanceof JsonRpcMethodProvider) {
+						ext.supportedMethods
+					} else {
+						ServiceEndpoints.getSupportedMethods(ext.class)
+					}
 					for (entry : supportedExtensions.entrySet) {
 						if (supportedMethods.containsKey(entry.key)) {
 							LOG.error("The json rpc method '"+entry.key+"' can not be an extension as it is already defined in the LSP standard.")
@@ -510,7 +507,6 @@ import org.eclipse.xtext.validation.Issue
 								LOG.error("An incompatible LSP extension '"+entry.key+"' has already been registered. Using 1 ignoring 2. \n1 : "+existing+" \n2 : "+entry.value)
 								extensions.put(entry.key, existing)
 							} else {
-								ext.initialize(DocumentAccess.create([this.requestManager], [this.workspaceManager], [toUri]))
 								val endpoint = ServiceEndpoints.toEndpoint(ext)
 								extensionProviders.put(entry.key, endpoint)
 								supportedMethods.put(entry.key, entry.value)
@@ -523,6 +519,26 @@ import org.eclipse.xtext.validation.Issue
 			return supportedMethods
 		}
 	}
-
+	
+	ILanguageServerAccess access = new ILanguageServerAccess () {
+		
+		override <T> doRead(String uri, Function<Context, T> function) {
+				requestManager.runRead [ cancelIndicator |
+					workspaceManager.doRead(uri.toUri) [ document, resource |
+						val ctx = new Context(resource, document, cancelIndicator)
+						return function.apply(ctx)
+					]
+				]
+		}
+		
+		override addBuildListener(IBuildListener listener) {
+			workspaceManager.addBuildListener(listener)
+		}
+		
+		override getLanguageClient() {
+			client
+		}
+		
+	}
 
 }

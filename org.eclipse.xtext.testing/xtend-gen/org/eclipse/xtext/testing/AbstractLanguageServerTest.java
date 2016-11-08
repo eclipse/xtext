@@ -8,6 +8,7 @@
 package org.eclipse.xtext.testing;
 
 import com.google.common.base.Objects;
+import com.google.common.collect.Iterables;
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
@@ -21,6 +22,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -42,14 +44,12 @@ import org.eclipse.lsp4j.Hover;
 import org.eclipse.lsp4j.InitializeParams;
 import org.eclipse.lsp4j.InitializeResult;
 import org.eclipse.lsp4j.Location;
-import org.eclipse.lsp4j.MessageParams;
 import org.eclipse.lsp4j.ParameterInformation;
 import org.eclipse.lsp4j.Position;
 import org.eclipse.lsp4j.PublishDiagnosticsParams;
 import org.eclipse.lsp4j.Range;
 import org.eclipse.lsp4j.ReferenceContext;
 import org.eclipse.lsp4j.ReferenceParams;
-import org.eclipse.lsp4j.ShowMessageRequestParams;
 import org.eclipse.lsp4j.SignatureHelp;
 import org.eclipse.lsp4j.SignatureInformation;
 import org.eclipse.lsp4j.SymbolInformation;
@@ -59,6 +59,8 @@ import org.eclipse.lsp4j.TextDocumentItem;
 import org.eclipse.lsp4j.TextDocumentPositionParams;
 import org.eclipse.lsp4j.TextEdit;
 import org.eclipse.lsp4j.WorkspaceSymbolParams;
+import org.eclipse.lsp4j.jsonrpc.Endpoint;
+import org.eclipse.lsp4j.jsonrpc.services.ServiceEndpoints;
 import org.eclipse.lsp4j.services.LanguageClient;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
@@ -93,6 +95,7 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
@@ -104,7 +107,7 @@ import org.junit.Before;
  */
 @FinalFieldsConstructor
 @SuppressWarnings("all")
-public abstract class AbstractLanguageServerTest implements LanguageClient {
+public abstract class AbstractLanguageServerTest implements Endpoint {
   @Accessors
   protected final String fileExtension;
   
@@ -145,7 +148,8 @@ public abstract class AbstractLanguageServerTest implements LanguageClient {
         LanguageInfo _get = ((IResourceServiceProvider)resourceServiceProvider).<LanguageInfo>get(LanguageInfo.class);
         this.languageInfo = _get;
       }
-      this.languageServer.connect(this);
+      LanguageClient _serviceObject = ServiceEndpoints.<LanguageClient>toServiceObject(this, LanguageClient.class);
+      this.languageServer.connect(_serviceObject);
       this.languageServer.supportedMethods();
       File _file = new File("./test-data/test-project");
       this.root = _file;
@@ -170,7 +174,7 @@ public abstract class AbstractLanguageServerTest implements LanguageClient {
   @Inject
   protected LanguageServerImpl languageServer;
   
-  protected Map<String, List<? extends Diagnostic>> diagnostics = CollectionLiterals.<String, List<? extends Diagnostic>>newHashMap();
+  protected List<Pair<String, Object>> notifications = CollectionLiterals.<Pair<String, Object>>newArrayList();
   
   protected File root;
   
@@ -931,30 +935,29 @@ public abstract class AbstractLanguageServerTest implements LanguageClient {
   }
   
   @Override
-  public void logMessage(final MessageParams message) {
-    throw new UnsupportedOperationException("TODO: auto-generated method stub");
+  public void notify(final String method, final Object parameter) {
+    Pair<String, Object> _mappedTo = Pair.<String, Object>of(method, parameter);
+    this.notifications.add(_mappedTo);
   }
   
   @Override
-  public void publishDiagnostics(final PublishDiagnosticsParams diagnostics) {
-    String _uri = diagnostics.getUri();
-    List<Diagnostic> _diagnostics = diagnostics.getDiagnostics();
-    this.diagnostics.put(_uri, _diagnostics);
+  public CompletableFuture<?> request(final String method, final Object parameter) {
+    return CompletableFuture.<Object>completedFuture(null);
   }
   
-  @Override
-  public void showMessage(final MessageParams messageParams) {
-    throw new UnsupportedOperationException("TODO: auto-generated method stub");
-  }
-  
-  @Override
-  public CompletableFuture<Void> showMessageRequest(final ShowMessageRequestParams requestParams) {
-    throw new UnsupportedOperationException("TODO: auto-generated method stub");
-  }
-  
-  @Override
-  public void telemetryEvent(final Object object) {
-    throw new UnsupportedOperationException("TODO: auto-generated method stub");
+  protected Map<String, List<Diagnostic>> getDiagnostics() {
+    final HashMap<String, List<Diagnostic>> result = CollectionLiterals.<String, List<Diagnostic>>newHashMap();
+    final Function1<Pair<String, Object>, Object> _function = (Pair<String, Object> it) -> {
+      return it.getValue();
+    };
+    List<Object> _map = ListExtensions.<Pair<String, Object>, Object>map(this.notifications, _function);
+    Iterable<PublishDiagnosticsParams> _filter = Iterables.<PublishDiagnosticsParams>filter(_map, PublishDiagnosticsParams.class);
+    for (final PublishDiagnosticsParams diagnostic : _filter) {
+      String _uri = diagnostic.getUri();
+      List<Diagnostic> _diagnostics = diagnostic.getDiagnostics();
+      result.put(_uri, _diagnostics);
+    }
+    return result;
   }
   
   protected String toExpectation(final Object elements) {
