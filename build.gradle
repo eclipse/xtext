@@ -18,6 +18,7 @@ subprojects {
 	apply from: "${rootDir}/gradle/maven-deployment.gradle"
 	apply from: "${rootDir}/gradle/eclipse-project-layout.gradle"
 	apply from: "${rootDir}/gradle/manifest-gen.gradle"
+	apply from: "${rootDir}/gradle/validation.gradle"
 }
 
 task cleanLocalMavenRepo(type: Delete) {
