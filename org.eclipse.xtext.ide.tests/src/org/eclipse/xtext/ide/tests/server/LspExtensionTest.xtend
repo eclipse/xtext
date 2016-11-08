@@ -40,12 +40,7 @@ class LspExtensionTest extends AbstractTestLangLanguageServerTest {
 			line = 1
 		]).get
 		Assert.assertEquals("baz test", result.text)
-		Assert.assertEquals('''
-			BuildNotification [
-			  message = "Built file:///Users/efftinge/Documents/Eclipse/xtext-master/git/xtext-core/org.eclipse.xtext.ide.tests/test-data/test-project/mydoc.testlang"
-			],BuildNotification [
-			  message = "Built file:///Users/efftinge/Documents/Eclipse/xtext-master/git/xtext-core/org.eclipse.xtext.ide.tests/test-data/test-project/mydoc.testlang"
-			]'''.toString, notifications.map[value].filter(BuildNotification).join(","))
+		Assert.assertEquals(2, notifications.map[value].filter(BuildNotification).size)
 	}
 	
 }

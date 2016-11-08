@@ -53,7 +53,7 @@ interface TestLangLSPExtension extends ILanguageServerExtension {
 
 		ILanguageServerAccess access
 	
-	CustomClient client
+		CustomClient client
 	
 		override getTextOfLine(TextOfLineParam param) {
 			return access.doRead(param.uri) [ ctx |

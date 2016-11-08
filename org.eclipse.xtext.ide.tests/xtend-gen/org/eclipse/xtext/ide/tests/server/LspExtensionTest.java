@@ -66,26 +66,13 @@ public class LspExtensionTest extends AbstractTestLangLanguageServerTest {
       CompletableFuture<TestLangLSPExtension.TextOfLineResult> _textOfLine = ext.getTextOfLine(_doubleArrow_1);
       final TestLangLSPExtension.TextOfLineResult result = _textOfLine.get();
       Assert.assertEquals("baz test", result.text);
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("BuildNotification [");
-      _builder.newLine();
-      _builder.append("  ");
-      _builder.append("message = \"Built file:///Users/efftinge/Documents/Eclipse/xtext-master/git/xtext-core/org.eclipse.xtext.ide.tests/test-data/test-project/mydoc.testlang\"");
-      _builder.newLine();
-      _builder.append("],BuildNotification [");
-      _builder.newLine();
-      _builder.append("  ");
-      _builder.append("message = \"Built file:///Users/efftinge/Documents/Eclipse/xtext-master/git/xtext-core/org.eclipse.xtext.ide.tests/test-data/test-project/mydoc.testlang\"");
-      _builder.newLine();
-      _builder.append("]");
-      String _string = _builder.toString();
       final Function1<Pair<String, Object>, Object> _function_2 = (Pair<String, Object> it) -> {
         return it.getValue();
       };
       List<Object> _map = ListExtensions.<Pair<String, Object>, Object>map(this.notifications, _function_2);
       Iterable<TestLangLSPExtension.BuildNotification> _filter = Iterables.<TestLangLSPExtension.BuildNotification>filter(_map, TestLangLSPExtension.BuildNotification.class);
-      String _join = IterableExtensions.join(_filter, ",");
-      Assert.assertEquals(_string, _join);
+      int _size = IterableExtensions.size(_filter);
+      Assert.assertEquals(2, _size);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
