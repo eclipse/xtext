@@ -14,7 +14,7 @@ repositories {
 	jcenter()
 	// Artifacts of xtext-idea are not available as public snapshots, so Jenkins snapshots are the default
 	if (!hasProperty('useJenkinsSnapshots') || findProperty('useJenkinsSnapshots') == 'true') {
-		maven { url jenkinsRepo('lsapi') }
+		maven { url jenkinsRepo('lsp4j') }
 		maven { url jenkinsPipelineRepo('xtext-lib') }
 		maven { url jenkinsPipelineRepo('xtext-core') }
 		maven { url jenkinsPipelineRepo('xtext-extras') }
