@@ -8,7 +8,7 @@
 package org.eclipse.xtext.ide.server.concurrent;
 
 import java.util.concurrent.CancellationException;
-import org.eclipse.lsp4j.jsonrpc.CancelIndicator;
+import org.eclipse.lsp4j.jsonrpc.CancelChecker;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.ide.server.concurrent.Cancellable;
@@ -19,16 +19,16 @@ import org.eclipse.xtext.xbase.lib.Pure;
  * @since 2.11
  */
 @SuppressWarnings("all")
-public class RequestCancelIndicator implements CancelIndicator, Cancellable {
+public class RequestCancelIndicator implements CancelChecker, Cancellable {
   @Accessors(AccessorType.PUBLIC_GETTER)
   private volatile boolean canceled;
   
-  private CancelIndicator delegate;
+  private CancelChecker delegate;
   
   public RequestCancelIndicator() {
   }
   
-  public RequestCancelIndicator(final CancelIndicator delegate) {
+  public RequestCancelIndicator(final CancelChecker delegate) {
     this.delegate = delegate;
   }
   

@@ -8,22 +8,22 @@
 package org.eclipse.xtext.ide.server.concurrent
 
 import java.util.concurrent.CancellationException
-import org.eclipse.lsp4j.jsonrpc.CancelIndicator
+import org.eclipse.lsp4j.jsonrpc.CancelChecker
 import org.eclipse.xtend.lib.annotations.Accessors
 
 /**
  * @author kosyakov - Initial contribution and API
  * @since 2.11
  */
-class RequestCancelIndicator implements CancelIndicator, Cancellable {
+class RequestCancelIndicator implements CancelChecker, Cancellable {
 
 	@Accessors(PUBLIC_GETTER)
 	volatile boolean canceled
 	
-	CancelIndicator delegate
+	CancelChecker delegate
 	
 	new () {}
-	new (CancelIndicator delegate) {
+	new (CancelChecker delegate) {
 		this.delegate = delegate
 	}
 

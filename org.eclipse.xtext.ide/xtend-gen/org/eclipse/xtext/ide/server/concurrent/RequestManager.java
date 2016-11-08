@@ -18,6 +18,7 @@ import java.util.concurrent.Semaphore;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import org.apache.log4j.Logger;
+import org.eclipse.lsp4j.jsonrpc.CancelChecker;
 import org.eclipse.lsp4j.jsonrpc.CompletableFutures;
 import org.eclipse.xtext.ide.server.concurrent.Cancellable;
 import org.eclipse.xtext.ide.server.concurrent.RequestCancelIndicator;
@@ -64,7 +65,7 @@ public class RequestManager {
    * </p>
    */
   public <V extends Object> CompletableFuture<V> runWrite(final Function1<? super CancelIndicator, ? extends V> writeRequest) {
-    final Function<org.eclipse.lsp4j.jsonrpc.CancelIndicator, V> _function = (org.eclipse.lsp4j.jsonrpc.CancelIndicator it) -> {
+    final Function<CancelChecker, V> _function = (CancelChecker it) -> {
       try {
         final Consumer<Cancellable> _function_1 = (Cancellable it_1) -> {
           it_1.cancel();
@@ -114,7 +115,7 @@ public class RequestManager {
    * </p>
    */
   public <V extends Object> CompletableFuture<V> runRead(final Function1<? super CancelIndicator, ? extends V> readRequest) {
-    final Function<org.eclipse.lsp4j.jsonrpc.CancelIndicator, V> _function = (org.eclipse.lsp4j.jsonrpc.CancelIndicator it) -> {
+    final Function<CancelChecker, V> _function = (CancelChecker it) -> {
       try {
         final RequestCancelIndicator cancelIndicator = new RequestCancelIndicator(it);
         this.cancelIndicators.add(cancelIndicator);
