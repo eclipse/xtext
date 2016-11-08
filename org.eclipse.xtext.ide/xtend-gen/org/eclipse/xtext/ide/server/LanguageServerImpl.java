@@ -7,83 +7,85 @@
  */
 package org.eclipse.xtext.ide.server;
 
+import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.LinkedListMultimap;
+import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import io.typefox.lsapi.CodeActionParams;
-import io.typefox.lsapi.CodeLens;
-import io.typefox.lsapi.CodeLensParams;
-import io.typefox.lsapi.Command;
-import io.typefox.lsapi.CompletionItem;
-import io.typefox.lsapi.CompletionList;
-import io.typefox.lsapi.DiagnosticSeverity;
-import io.typefox.lsapi.DidChangeConfigurationParams;
-import io.typefox.lsapi.DidChangeTextDocumentParams;
-import io.typefox.lsapi.DidChangeWatchedFilesParams;
-import io.typefox.lsapi.DidCloseTextDocumentParams;
-import io.typefox.lsapi.DidOpenTextDocumentParams;
-import io.typefox.lsapi.DidSaveTextDocumentParams;
-import io.typefox.lsapi.DocumentFormattingParams;
-import io.typefox.lsapi.DocumentHighlight;
-import io.typefox.lsapi.DocumentOnTypeFormattingParams;
-import io.typefox.lsapi.DocumentRangeFormattingParams;
-import io.typefox.lsapi.DocumentSymbolParams;
-import io.typefox.lsapi.FileChangeType;
-import io.typefox.lsapi.FileEvent;
-import io.typefox.lsapi.Hover;
-import io.typefox.lsapi.InitializeParams;
-import io.typefox.lsapi.InitializeResult;
-import io.typefox.lsapi.Location;
-import io.typefox.lsapi.MessageParams;
-import io.typefox.lsapi.Position;
-import io.typefox.lsapi.PublishDiagnosticsParams;
-import io.typefox.lsapi.Range;
-import io.typefox.lsapi.ReferenceContext;
-import io.typefox.lsapi.ReferenceParams;
-import io.typefox.lsapi.RenameParams;
-import io.typefox.lsapi.ShowMessageRequestParams;
-import io.typefox.lsapi.SignatureHelp;
-import io.typefox.lsapi.SymbolInformation;
-import io.typefox.lsapi.TextDocumentContentChangeEvent;
-import io.typefox.lsapi.TextDocumentIdentifier;
-import io.typefox.lsapi.TextDocumentItem;
-import io.typefox.lsapi.TextDocumentPositionParams;
-import io.typefox.lsapi.TextDocumentSyncKind;
-import io.typefox.lsapi.TextEdit;
-import io.typefox.lsapi.VersionedTextDocumentIdentifier;
-import io.typefox.lsapi.WorkspaceEdit;
-import io.typefox.lsapi.WorkspaceSymbolParams;
-import io.typefox.lsapi.builders.CompletionListBuilder;
-import io.typefox.lsapi.impl.CompletionOptionsImpl;
-import io.typefox.lsapi.impl.DiagnosticImpl;
-import io.typefox.lsapi.impl.HoverImpl;
-import io.typefox.lsapi.impl.InitializeResultImpl;
-import io.typefox.lsapi.impl.MarkedStringImpl;
-import io.typefox.lsapi.impl.PositionImpl;
-import io.typefox.lsapi.impl.PublishDiagnosticsParamsImpl;
-import io.typefox.lsapi.impl.RangeImpl;
-import io.typefox.lsapi.impl.ServerCapabilitiesImpl;
-import io.typefox.lsapi.impl.SignatureHelpImpl;
-import io.typefox.lsapi.impl.SignatureHelpOptionsImpl;
-import io.typefox.lsapi.impl.TextEditImpl;
-import io.typefox.lsapi.services.LanguageServer;
-import io.typefox.lsapi.services.TextDocumentService;
-import io.typefox.lsapi.services.WindowService;
-import io.typefox.lsapi.services.WorkspaceService;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.CompletableFuture;
-import java.util.function.Consumer;
+import java.util.function.Supplier;
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.lsp4j.CodeActionParams;
+import org.eclipse.lsp4j.CodeLens;
+import org.eclipse.lsp4j.CodeLensParams;
+import org.eclipse.lsp4j.Command;
+import org.eclipse.lsp4j.CompletionItem;
+import org.eclipse.lsp4j.CompletionList;
+import org.eclipse.lsp4j.CompletionOptions;
+import org.eclipse.lsp4j.Diagnostic;
+import org.eclipse.lsp4j.DiagnosticSeverity;
+import org.eclipse.lsp4j.DidChangeConfigurationParams;
+import org.eclipse.lsp4j.DidChangeTextDocumentParams;
+import org.eclipse.lsp4j.DidChangeWatchedFilesParams;
+import org.eclipse.lsp4j.DidCloseTextDocumentParams;
+import org.eclipse.lsp4j.DidOpenTextDocumentParams;
+import org.eclipse.lsp4j.DidSaveTextDocumentParams;
+import org.eclipse.lsp4j.DocumentFormattingParams;
+import org.eclipse.lsp4j.DocumentHighlight;
+import org.eclipse.lsp4j.DocumentOnTypeFormattingParams;
+import org.eclipse.lsp4j.DocumentRangeFormattingParams;
+import org.eclipse.lsp4j.DocumentSymbolParams;
+import org.eclipse.lsp4j.FileChangeType;
+import org.eclipse.lsp4j.FileEvent;
+import org.eclipse.lsp4j.Hover;
+import org.eclipse.lsp4j.InitializeParams;
+import org.eclipse.lsp4j.InitializeResult;
+import org.eclipse.lsp4j.Location;
+import org.eclipse.lsp4j.Position;
+import org.eclipse.lsp4j.PublishDiagnosticsParams;
+import org.eclipse.lsp4j.Range;
+import org.eclipse.lsp4j.ReferenceContext;
+import org.eclipse.lsp4j.ReferenceParams;
+import org.eclipse.lsp4j.RenameParams;
+import org.eclipse.lsp4j.ServerCapabilities;
+import org.eclipse.lsp4j.SignatureHelp;
+import org.eclipse.lsp4j.SignatureHelpOptions;
+import org.eclipse.lsp4j.SymbolInformation;
+import org.eclipse.lsp4j.TextDocumentContentChangeEvent;
+import org.eclipse.lsp4j.TextDocumentIdentifier;
+import org.eclipse.lsp4j.TextDocumentItem;
+import org.eclipse.lsp4j.TextDocumentPositionParams;
+import org.eclipse.lsp4j.TextDocumentSyncKind;
+import org.eclipse.lsp4j.TextEdit;
+import org.eclipse.lsp4j.VersionedTextDocumentIdentifier;
+import org.eclipse.lsp4j.WorkspaceEdit;
+import org.eclipse.lsp4j.WorkspaceSymbolParams;
+import org.eclipse.lsp4j.jsonrpc.Endpoint;
+import org.eclipse.lsp4j.jsonrpc.json.JsonRpcMethod;
+import org.eclipse.lsp4j.jsonrpc.json.JsonRpcMethodProvider;
+import org.eclipse.lsp4j.jsonrpc.services.ServiceEndpoints;
+import org.eclipse.lsp4j.services.LanguageClient;
+import org.eclipse.lsp4j.services.LanguageClientAware;
+import org.eclipse.lsp4j.services.LanguageServer;
+import org.eclipse.lsp4j.services.TextDocumentService;
+import org.eclipse.lsp4j.services.WorkspaceService;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.ide.server.Document;
+import org.eclipse.xtext.ide.server.DocumentAccess;
+import org.eclipse.xtext.ide.server.LanguageServerExtension;
 import org.eclipse.xtext.ide.server.UriExtensions;
 import org.eclipse.xtext.ide.server.WorkspaceManager;
-import org.eclipse.xtext.ide.server.concurrent.CancellableIndicator;
 import org.eclipse.xtext.ide.server.concurrent.RequestManager;
 import org.eclipse.xtext.ide.server.contentassist.ContentAssistService;
 import org.eclipse.xtext.ide.server.findReferences.WorkspaceResourceAccess;
@@ -98,8 +100,10 @@ import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.service.OperationCanceledManager;
 import org.eclipse.xtext.util.CancelIndicator;
+import org.eclipse.xtext.util.internal.Log;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
@@ -114,9 +118,9 @@ import org.eclipse.xtext.xbase.lib.Pure;
  * @author Sven Efftinge - Initial contribution and API
  * @since 2.11
  */
-@Accessors
+@Log
 @SuppressWarnings("all")
-public class LanguageServerImpl implements LanguageServer, WorkspaceService, WindowService, TextDocumentService {
+public class LanguageServerImpl implements LanguageServer, WorkspaceService, TextDocumentService, LanguageClientAware, Endpoint, JsonRpcMethodProvider {
   @FinalFieldsConstructor
   public static class BufferedCancelIndicator implements CancelIndicator {
     private final CancelIndicator delegate;
@@ -139,27 +143,35 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
     }
   }
   
+  @Accessors
   @Inject
   private RequestManager requestManager;
   
+  @Accessors
   @Inject
   private WorkspaceSymbolService workspaceSymbolService;
   
+  @Accessors
   private InitializeParams params;
   
+  @Accessors
   @Inject
   private Provider<WorkspaceManager> workspaceManagerProvider;
   
+  @Accessors
   private WorkspaceManager workspaceManager;
   
+  @Accessors
   @Inject
   @Extension
   private UriExtensions _uriExtensions;
   
+  @Accessors
   @Inject
   @Extension
   private IResourceServiceProvider.Registry languagesRegistry;
   
+  @Accessors
   @Inject
   private OperationCanceledManager operationCanceledManager;
   
@@ -180,31 +192,31 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
     this.workspaceManager = _get;
     WorkspaceResourceAccess _workspaceResourceAccess = new WorkspaceResourceAccess(this.workspaceManager);
     this.resourceAccess = _workspaceResourceAccess;
-    final InitializeResultImpl result = new InitializeResultImpl();
-    ServerCapabilitiesImpl _serverCapabilitiesImpl = new ServerCapabilitiesImpl();
-    final Procedure1<ServerCapabilitiesImpl> _function = (ServerCapabilitiesImpl it) -> {
+    final InitializeResult result = new InitializeResult();
+    ServerCapabilities _serverCapabilities = new ServerCapabilities();
+    final Procedure1<ServerCapabilities> _function = (ServerCapabilities it) -> {
       it.setHoverProvider(Boolean.valueOf(true));
       it.setDefinitionProvider(Boolean.valueOf(true));
       it.setReferencesProvider(Boolean.valueOf(true));
       it.setDocumentSymbolProvider(Boolean.valueOf(true));
       it.setWorkspaceSymbolProvider(Boolean.valueOf(true));
-      SignatureHelpOptionsImpl _signatureHelpOptionsImpl = new SignatureHelpOptionsImpl(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("(", ",")));
-      it.setSignatureHelpProvider(_signatureHelpOptionsImpl);
+      SignatureHelpOptions _signatureHelpOptions = new SignatureHelpOptions(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList("(", ",")));
+      it.setSignatureHelpProvider(_signatureHelpOptions);
       it.setTextDocumentSync(TextDocumentSyncKind.Incremental);
-      CompletionOptionsImpl _completionOptionsImpl = new CompletionOptionsImpl();
-      final Procedure1<CompletionOptionsImpl> _function_1 = (CompletionOptionsImpl it_1) -> {
+      CompletionOptions _completionOptions = new CompletionOptions();
+      final Procedure1<CompletionOptions> _function_1 = (CompletionOptions it_1) -> {
         it_1.setResolveProvider(Boolean.valueOf(false));
         it_1.setTriggerCharacters(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList(".")));
       };
-      CompletionOptionsImpl _doubleArrow = ObjectExtensions.<CompletionOptionsImpl>operator_doubleArrow(_completionOptionsImpl, _function_1);
+      CompletionOptions _doubleArrow = ObjectExtensions.<CompletionOptions>operator_doubleArrow(_completionOptions, _function_1);
       it.setCompletionProvider(_doubleArrow);
       it.setDocumentFormattingProvider(Boolean.valueOf(true));
       it.setDocumentRangeFormattingProvider(Boolean.valueOf(true));
       it.setDocumentHighlightProvider(Boolean.valueOf(true));
     };
-    ServerCapabilitiesImpl _doubleArrow = ObjectExtensions.<ServerCapabilitiesImpl>operator_doubleArrow(_serverCapabilitiesImpl, _function);
+    ServerCapabilities _doubleArrow = ObjectExtensions.<ServerCapabilities>operator_doubleArrow(_serverCapabilities, _function);
     result.setCapabilities(_doubleArrow);
-    final Procedure1<CancelIndicator> _function_1 = (CancelIndicator cancelIndicator) -> {
+    final Function1<CancelIndicator, Object> _function_1 = (CancelIndicator cancelIndicator) -> {
       String _rootPath_1 = params.getRootPath();
       URI _createFileURI = URI.createFileURI(_rootPath_1);
       String _path = this._uriExtensions.toPath(_createFileURI);
@@ -213,9 +225,15 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
         this.publishDiagnostics($0, $1);
       };
       this.workspaceManager.initialize(rootURI, _function_2, cancelIndicator);
+      return null;
     };
-    this.requestManager.runWrite(_function_1, CancellableIndicator.NullImpl);
+    this.requestManager.<Object>runWrite(_function_1);
     return CompletableFuture.<InitializeResult>completedFuture(result);
+  }
+  
+  @Override
+  public void connect(final LanguageClient client) {
+    this.client = client;
   }
   
   @Override
@@ -223,7 +241,8 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
   }
   
   @Override
-  public void shutdown() {
+  public CompletableFuture<Void> shutdown() {
+    return null;
   }
   
   @Override
@@ -237,29 +256,8 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
   }
   
   @Override
-  public WindowService getWindowService() {
-    return this;
-  }
-  
-  @Override
-  public void onTelemetryEvent(final Consumer<Object> callback) {
-  }
-  
-  @Override
-  public void onShowMessage(final Consumer<MessageParams> callback) {
-  }
-  
-  @Override
-  public void onShowMessageRequest(final Consumer<ShowMessageRequestParams> callback) {
-  }
-  
-  @Override
-  public void onLogMessage(final Consumer<MessageParams> callback) {
-  }
-  
-  @Override
   public void didOpen(final DidOpenTextDocumentParams params) {
-    final Procedure1<CancelIndicator> _function = (CancelIndicator cancelIndicator) -> {
+    final Function1<CancelIndicator, Object> _function = (CancelIndicator cancelIndicator) -> {
       TextDocumentItem _textDocument = params.getTextDocument();
       String _uri = _textDocument.getUri();
       URI _uri_1 = this._uriExtensions.toUri(_uri);
@@ -268,39 +266,42 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
       TextDocumentItem _textDocument_2 = params.getTextDocument();
       String _text = _textDocument_2.getText();
       this.workspaceManager.didOpen(_uri_1, _version, _text, cancelIndicator);
+      return null;
     };
-    this.requestManager.runWrite(_function);
+    this.requestManager.<Object>runWrite(_function);
   }
   
   @Override
   public void didChange(final DidChangeTextDocumentParams params) {
-    final Procedure1<CancelIndicator> _function = (CancelIndicator cancelIndicator) -> {
+    final Function1<CancelIndicator, Object> _function = (CancelIndicator cancelIndicator) -> {
       VersionedTextDocumentIdentifier _textDocument = params.getTextDocument();
       String _uri = _textDocument.getUri();
       URI _uri_1 = this._uriExtensions.toUri(_uri);
       VersionedTextDocumentIdentifier _textDocument_1 = params.getTextDocument();
       int _version = _textDocument_1.getVersion();
-      List<? extends TextDocumentContentChangeEvent> _contentChanges = params.getContentChanges();
+      List<TextDocumentContentChangeEvent> _contentChanges = params.getContentChanges();
       final Function1<TextDocumentContentChangeEvent, TextEdit> _function_1 = (TextDocumentContentChangeEvent event) -> {
         Range _range = event.getRange();
         String _text = event.getText();
-        return new TextEditImpl(((RangeImpl) _range), _text);
+        return new TextEdit(_range, _text);
       };
-      List<TextEdit> _map = ListExtensions.map(_contentChanges, _function_1);
+      List<TextEdit> _map = ListExtensions.<TextDocumentContentChangeEvent, TextEdit>map(_contentChanges, _function_1);
       this.workspaceManager.didChange(_uri_1, _version, _map, cancelIndicator);
+      return null;
     };
-    this.requestManager.runWrite(_function);
+    this.requestManager.<Object>runWrite(_function);
   }
   
   @Override
   public void didClose(final DidCloseTextDocumentParams params) {
-    final Procedure1<CancelIndicator> _function = (CancelIndicator cancelIndicator) -> {
+    final Function1<CancelIndicator, Object> _function = (CancelIndicator cancelIndicator) -> {
       TextDocumentIdentifier _textDocument = params.getTextDocument();
       String _uri = _textDocument.getUri();
       URI _uri_1 = this._uriExtensions.toUri(_uri);
       this.workspaceManager.didClose(_uri_1, cancelIndicator);
+      return null;
     };
-    this.requestManager.runWrite(_function);
+    this.requestManager.<Object>runWrite(_function);
   }
   
   @Override
@@ -309,10 +310,10 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
   
   @Override
   public void didChangeWatchedFiles(final DidChangeWatchedFilesParams params) {
-    final Procedure1<CancelIndicator> _function = (CancelIndicator cancelIndicator) -> {
+    final Function1<CancelIndicator, Object> _function = (CancelIndicator cancelIndicator) -> {
       final ArrayList<URI> dirtyFiles = CollectionLiterals.<URI>newArrayList();
       final ArrayList<URI> deletedFiles = CollectionLiterals.<URI>newArrayList();
-      List<? extends FileEvent> _changes = params.getChanges();
+      List<FileEvent> _changes = params.getChanges();
       for (final FileEvent fileEvent : _changes) {
         FileChangeType _type = fileEvent.getType();
         boolean _tripleEquals = (_type == FileChangeType.Deleted);
@@ -327,48 +328,43 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
         }
       }
       this.workspaceManager.doBuild(dirtyFiles, deletedFiles, cancelIndicator);
+      return null;
     };
-    this.requestManager.runWrite(_function);
+    this.requestManager.<Object>runWrite(_function);
   }
   
   @Override
   public void didChangeConfiguration(final DidChangeConfigurationParams params) {
-    final Procedure1<CancelIndicator> _function = (CancelIndicator cancelIndicator) -> {
+    final Function1<CancelIndicator, Object> _function = (CancelIndicator cancelIndicator) -> {
       this.workspaceManager.refreshWorkspaceConfig(cancelIndicator);
+      return null;
     };
-    this.requestManager.runWrite(_function);
+    this.requestManager.<Object>runWrite(_function);
   }
-  
-  private List<Consumer<PublishDiagnosticsParams>> diagnosticListeners = CollectionLiterals.<Consumer<PublishDiagnosticsParams>>newArrayList();
   
   private WorkspaceResourceAccess resourceAccess;
   
-  @Override
-  public void onPublishDiagnostics(final Consumer<PublishDiagnosticsParams> callback) {
-    this.diagnosticListeners.add(callback);
-  }
+  private LanguageClient client;
   
   private void publishDiagnostics(final URI uri, final Iterable<? extends Issue> issues) {
-    PublishDiagnosticsParamsImpl _publishDiagnosticsParamsImpl = new PublishDiagnosticsParamsImpl();
-    final Procedure1<PublishDiagnosticsParamsImpl> _function = (PublishDiagnosticsParamsImpl it) -> {
+    PublishDiagnosticsParams _publishDiagnosticsParams = new PublishDiagnosticsParams();
+    final Procedure1<PublishDiagnosticsParams> _function = (PublishDiagnosticsParams it) -> {
       String _path = this._uriExtensions.toPath(uri);
       it.setUri(_path);
-      final Function1<Issue, DiagnosticImpl> _function_1 = (Issue it_1) -> {
+      final Function1<Issue, Diagnostic> _function_1 = (Issue it_1) -> {
         return this.toDiagnostic(it_1);
       };
-      Iterable<DiagnosticImpl> _map = IterableExtensions.map(issues, _function_1);
-      List<DiagnosticImpl> _list = IterableExtensions.<DiagnosticImpl>toList(_map);
+      Iterable<Diagnostic> _map = IterableExtensions.map(issues, _function_1);
+      List<Diagnostic> _list = IterableExtensions.<Diagnostic>toList(_map);
       it.setDiagnostics(_list);
     };
-    final PublishDiagnosticsParamsImpl diagnostics = ObjectExtensions.<PublishDiagnosticsParamsImpl>operator_doubleArrow(_publishDiagnosticsParamsImpl, _function);
-    for (final Consumer<PublishDiagnosticsParams> diagnosticsCallback : this.diagnosticListeners) {
-      diagnosticsCallback.accept(diagnostics);
-    }
+    final PublishDiagnosticsParams diagnostics = ObjectExtensions.<PublishDiagnosticsParams>operator_doubleArrow(_publishDiagnosticsParams, _function);
+    this.client.publishDiagnostics(diagnostics);
   }
   
-  private DiagnosticImpl toDiagnostic(final Issue issue) {
-    DiagnosticImpl _diagnosticImpl = new DiagnosticImpl();
-    final Procedure1<DiagnosticImpl> _function = (DiagnosticImpl it) -> {
+  private Diagnostic toDiagnostic(final Issue issue) {
+    Diagnostic _diagnostic = new Diagnostic();
+    final Procedure1<Diagnostic> _function = (Diagnostic it) -> {
       String _code = issue.getCode();
       it.setCode(_code);
       DiagnosticSeverity _switchResult = null;
@@ -418,12 +414,12 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
         _elvis_2 = Integer.valueOf(0);
       }
       final Integer length = _elvis_2;
-      PositionImpl _positionImpl = new PositionImpl(lineNumber, column);
-      PositionImpl _positionImpl_1 = new PositionImpl(lineNumber, (column + (length).intValue()));
-      RangeImpl _rangeImpl = new RangeImpl(_positionImpl, _positionImpl_1);
-      it.setRange(_rangeImpl);
+      Position _position = new Position(lineNumber, column);
+      Position _position_1 = new Position(lineNumber, (column + (length).intValue()));
+      Range _range = new Range(_position, _position_1);
+      it.setRange(_range);
     };
-    return ObjectExtensions.<DiagnosticImpl>operator_doubleArrow(_diagnosticImpl, _function);
+    return ObjectExtensions.<Diagnostic>operator_doubleArrow(_diagnostic, _function);
   }
   
   @Override
@@ -440,8 +436,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
       }
       final ContentAssistService contentAssistService = _get;
       if ((contentAssistService == null)) {
-        CompletionListBuilder _completionListBuilder = new CompletionListBuilder();
-        return _completionListBuilder.build();
+        return new CompletionList();
       }
       final Function2<Document, XtextResource, CompletionList> _function_1 = (Document document, XtextResource resource) -> {
         return contentAssistService.createCompletionList(document, resource, params, cancelIndicator);
@@ -561,8 +556,8 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
       }
       final HoverService hoverService = _get;
       if ((hoverService == null)) {
-        List<MarkedStringImpl> _emptyList = CollectionLiterals.<MarkedStringImpl>emptyList();
-        return new HoverImpl(_emptyList, null);
+        List<String> _emptyList = CollectionLiterals.<String>emptyList();
+        return new Hover(_emptyList, null);
       }
       final Function2<Document, XtextResource, Hover> _function_1 = (Document document, XtextResource resource) -> {
         Position _position = params.getPosition();
@@ -592,7 +587,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
       }
       final SignatureHelpService helper = _get;
       if ((helper == null)) {
-        return new SignatureHelpImpl();
+        return new SignatureHelp();
       }
       final Function2<Document, XtextResource, SignatureHelp> _function_1 = (Document doc, XtextResource resource) -> {
         Position _position = position.getPosition();
@@ -713,6 +708,130 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
     throw new UnsupportedOperationException("TODO: auto-generated method stub");
   }
   
+  @Override
+  public void notify(final String method, final Object parameter) {
+    Collection<Endpoint> _get = this.extensionProviders.get(method);
+    for (final Endpoint endpoint : _get) {
+      try {
+        endpoint.notify(method, parameter);
+      } catch (final Throwable _t) {
+        if (_t instanceof UnsupportedOperationException) {
+          final UnsupportedOperationException e = (UnsupportedOperationException)_t;
+          if ((e != LanguageServerExtension.NOT_HANDLED_EXCEPTION)) {
+            throw e;
+          }
+        } else {
+          throw Exceptions.sneakyThrow(_t);
+        }
+      }
+    }
+  }
+  
+  @Override
+  public CompletableFuture<?> request(final String method, final Object parameter) {
+    boolean _containsKey = this.extensionProviders.containsKey(method);
+    boolean _not = (!_containsKey);
+    if (_not) {
+      throw new UnsupportedOperationException((("The json request \'" + method) + "\' is unknown."));
+    }
+    Collection<Endpoint> _get = this.extensionProviders.get(method);
+    for (final Endpoint endpoint : _get) {
+      try {
+        return endpoint.request(method, parameter);
+      } catch (final Throwable _t) {
+        if (_t instanceof UnsupportedOperationException) {
+          final UnsupportedOperationException e = (UnsupportedOperationException)_t;
+          if ((e != LanguageServerExtension.NOT_HANDLED_EXCEPTION)) {
+            throw e;
+          }
+        } else {
+          throw Exceptions.sneakyThrow(_t);
+        }
+      }
+    }
+    return null;
+  }
+  
+  private Map<String, JsonRpcMethod> supportedMethods = null;
+  
+  private Multimap<String, Endpoint> extensionProviders = LinkedListMultimap.<String, Endpoint>create();
+  
+  @Override
+  public Map<String, JsonRpcMethod> supportedMethods() {
+    if ((this.supportedMethods != null)) {
+      return this.supportedMethods;
+    }
+    synchronized (this.extensionProviders) {
+      final LinkedHashMap<String, JsonRpcMethod> supportedMethods = CollectionLiterals.<String, JsonRpcMethod>newLinkedHashMap();
+      Class<? extends LanguageServerImpl> _class = this.getClass();
+      Map<String, JsonRpcMethod> _supportedMethods = ServiceEndpoints.getSupportedMethods(_class);
+      supportedMethods.putAll(_supportedMethods);
+      final LinkedHashMap<String, JsonRpcMethod> extensions = CollectionLiterals.<String, JsonRpcMethod>newLinkedHashMap();
+      Map<String, Object> _extensionToFactoryMap = this.languagesRegistry.getExtensionToFactoryMap();
+      Collection<Object> _values = _extensionToFactoryMap.values();
+      Set<Object> _set = IterableExtensions.<Object>toSet(_values);
+      Iterable<IResourceServiceProvider> _filter = Iterables.<IResourceServiceProvider>filter(_set, IResourceServiceProvider.class);
+      for (final IResourceServiceProvider resourceServiceProvider : _filter) {
+        {
+          final LanguageServerExtension ext = resourceServiceProvider.<LanguageServerExtension>get(LanguageServerExtension.class);
+          if ((ext != null)) {
+            Class<? extends LanguageServerExtension> _class_1 = ext.getClass();
+            final Map<String, JsonRpcMethod> supportedExtensions = ServiceEndpoints.getSupportedMethods(_class_1);
+            Set<Map.Entry<String, JsonRpcMethod>> _entrySet = supportedExtensions.entrySet();
+            for (final Map.Entry<String, JsonRpcMethod> entry : _entrySet) {
+              String _key = entry.getKey();
+              boolean _containsKey = supportedMethods.containsKey(_key);
+              if (_containsKey) {
+                String _key_1 = entry.getKey();
+                String _plus = ("The json rpc method \'" + _key_1);
+                String _plus_1 = (_plus + "\' can not be an extension as it is already defined in the LSP standard.");
+                LanguageServerImpl.LOG.error(_plus_1);
+              } else {
+                String _key_2 = entry.getKey();
+                JsonRpcMethod _value = entry.getValue();
+                final JsonRpcMethod existing = extensions.put(_key_2, _value);
+                if (((existing != null) && (!Objects.equal(existing, entry.getValue())))) {
+                  String _key_3 = entry.getKey();
+                  String _plus_2 = ("An incompatible LSP extension \'" + _key_3);
+                  String _plus_3 = (_plus_2 + "\' has already been registered. Using 1 ignoring 2. \n1 : ");
+                  String _plus_4 = (_plus_3 + existing);
+                  String _plus_5 = (_plus_4 + " \n2 : ");
+                  JsonRpcMethod _value_1 = entry.getValue();
+                  String _plus_6 = (_plus_5 + _value_1);
+                  LanguageServerImpl.LOG.error(_plus_6);
+                  String _key_4 = entry.getKey();
+                  extensions.put(_key_4, existing);
+                } else {
+                  final Supplier<RequestManager> _function = () -> {
+                    return this.requestManager;
+                  };
+                  final Supplier<WorkspaceManager> _function_1 = () -> {
+                    return this.workspaceManager;
+                  };
+                  final Function1<String, URI> _function_2 = (String it) -> {
+                    return this._uriExtensions.toUri(it);
+                  };
+                  DocumentAccess _create = DocumentAccess.create(_function, _function_1, _function_2);
+                  ext.initialize(_create);
+                  final Endpoint endpoint = ServiceEndpoints.toEndpoint(ext);
+                  String _key_5 = entry.getKey();
+                  this.extensionProviders.put(_key_5, endpoint);
+                  String _key_6 = entry.getKey();
+                  JsonRpcMethod _value_2 = entry.getValue();
+                  supportedMethods.put(_key_6, _value_2);
+                }
+              }
+            }
+          }
+        }
+      }
+      this.supportedMethods = supportedMethods;
+      return supportedMethods;
+    }
+  }
+  
+  private final static Logger LOG = Logger.getLogger(LanguageServerImpl.class);
+  
   @Pure
   public RequestManager getRequestManager() {
     return this.requestManager;
@@ -783,23 +902,5 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Win
   
   public void setOperationCanceledManager(final OperationCanceledManager operationCanceledManager) {
     this.operationCanceledManager = operationCanceledManager;
-  }
-  
-  @Pure
-  public List<Consumer<PublishDiagnosticsParams>> getDiagnosticListeners() {
-    return this.diagnosticListeners;
-  }
-  
-  public void setDiagnosticListeners(final List<Consumer<PublishDiagnosticsParams>> diagnosticListeners) {
-    this.diagnosticListeners = diagnosticListeners;
-  }
-  
-  @Pure
-  public WorkspaceResourceAccess getResourceAccess() {
-    return this.resourceAccess;
-  }
-  
-  public void setResourceAccess(final WorkspaceResourceAccess resourceAccess) {
-    this.resourceAccess = resourceAccess;
   }
 }

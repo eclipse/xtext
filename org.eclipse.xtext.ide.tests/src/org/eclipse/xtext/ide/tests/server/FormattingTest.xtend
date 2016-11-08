@@ -7,9 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.tests.server
 
-import io.typefox.lsapi.builders.RangeBuilder
 import org.eclipse.xtext.ide.server.formatting.FormattingService
 import org.junit.Test
+import org.eclipse.lsp4j.Range
+import org.eclipse.lsp4j.Position
 
 /**
  * Tests for {@link FormattingService}
@@ -51,10 +52,10 @@ class FormattingTest extends AbstractTestLangLanguageServerTest {
 	@Test def void testRangeFormattingService() {
 		testRangeFormatting [
 			model = '''type Foo{int bar} type Bar{Foo foo}'''
-			range = new RangeBuilder[
-				start(0,0)
-				end(0,17)
-			].build
+			range = new Range => [
+				start = new Position(0,0)
+				end = new Position(0,17)
+			]
 			expectedText = '''
 			type Foo{
 				int bar

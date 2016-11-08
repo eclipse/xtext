@@ -7,9 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.server
 
-import io.typefox.lsapi.Position
-import io.typefox.lsapi.TextEdit
-import io.typefox.lsapi.impl.PositionImpl
+import org.eclipse.lsp4j.Position
+import org.eclipse.lsp4j.TextEdit
 import org.eclipse.xtend.lib.annotations.Data
 
 /**
@@ -44,7 +43,7 @@ import org.eclipse.xtend.lib.annotations.Data
         throw new IndexOutOfBoundsException(position.toString + " text was : " + contents)
     }
 
-    def PositionImpl getPosition(int offset) {
+    def Position getPosition(int offset) {
         val l = contents.length
         if (offset < 0 || offset > l)
             throw new IndexOutOfBoundsException(offset + " text was : " + contents)
@@ -55,7 +54,7 @@ import org.eclipse.xtend.lib.annotations.Data
         for (var i = 0; i < l; i++) {
             val ch = contents.charAt(i)
             if (i === offset) {
-                return new PositionImpl(line, column)
+                return new Position(line, column)
             }
             if (ch === NL) {
                 line++
@@ -64,7 +63,7 @@ import org.eclipse.xtend.lib.annotations.Data
                 column++
             }
         }
-        return new PositionImpl(line, column)
+        return new Position(line, column)
     }
 
     def Document applyChanges(Iterable<? extends TextEdit> changes) {

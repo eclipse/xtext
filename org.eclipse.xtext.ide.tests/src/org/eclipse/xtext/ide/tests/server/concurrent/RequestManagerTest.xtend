@@ -9,10 +9,13 @@ package org.eclipse.xtext.ide.tests.server.concurrent
 
 import com.google.inject.Guice
 import com.google.inject.Inject
+import java.util.concurrent.CancellationException
+import java.util.concurrent.ExecutionException
 import java.util.concurrent.atomic.AtomicInteger
 import org.eclipse.xtext.ide.server.ServerModule
 import org.eclipse.xtext.ide.server.concurrent.RequestManager
 import org.junit.After
+import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 
@@ -88,7 +91,7 @@ class RequestManagerTest {
 		]
 		requestManager.runWrite [
 			if (sharedState.get != 0)
-				sharedState.incrementAndGet
+				sharedState.incrementAndGet as Integer
 		].join
 		assertEquals(2, sharedState.get)
 	}
@@ -115,7 +118,7 @@ class RequestManagerTest {
 		requestManager.runWrite [
 			sharedState.incrementAndGet
 		].join
-		assertEquals(2, sharedState.get)
+		assertEquals(1, sharedState.get)
 	}
 
 	@Test
@@ -128,8 +131,15 @@ class RequestManagerTest {
 		]
 		requestManager.runWrite [
 			sharedState.set(0)
+			return null
 		].join
-		assertEquals(1, future.get)
+		try {
+			future.get
+			Assert.fail("cancellation exception expected")
+		} catch (ExecutionException e) {
+			// expected
+			Assert.assertTrue(e.cause instanceof CancellationException);
+		}
 	}
 
 }

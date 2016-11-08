@@ -269,69 +269,75 @@ public class Ecore2XtextExtensions {
   public static String dataTypeRuleBody(final EDataType it) {
     String _switchResult = null;
     String _name = it.getName();
-    switch (_name) {
-      case "EBigDecimal":
-        _switchResult = "INT? \'.\' INT";
-        break;
-      case "EBigInteger":
-        _switchResult = Ecore2XtextExtensions.intRuleBody();
-        break;
-      case "EBoolean":
-        _switchResult = Ecore2XtextExtensions.booleanRuleBody();
-        break;
-      case "EBooleanObject":
-        _switchResult = Ecore2XtextExtensions.booleanRuleBody();
-        break;
-      case "EByte":
-        _switchResult = Ecore2XtextExtensions.intRuleBody();
-        break;
-      case "EByteObject":
-        _switchResult = Ecore2XtextExtensions.intRuleBody();
-        break;
-      case "EChar":
-        _switchResult = Ecore2XtextExtensions.intRuleBody();
-        break;
-      case "ECharObject":
-        _switchResult = Ecore2XtextExtensions.intRuleBody();
-        break;
-      case "EDouble":
-        _switchResult = Ecore2XtextExtensions.decimalRuleBody();
-        break;
-      case "EDoubleObject":
-        _switchResult = Ecore2XtextExtensions.decimalRuleBody();
-        break;
-      case "EFloat":
-        _switchResult = Ecore2XtextExtensions.decimalRuleBody();
-        break;
-      case "EFloatObject":
-        _switchResult = Ecore2XtextExtensions.decimalRuleBody();
-        break;
-      case "EInt":
-        _switchResult = Ecore2XtextExtensions.intRuleBody();
-        break;
-      case "EIntegerObject":
-        _switchResult = Ecore2XtextExtensions.intRuleBody();
-        break;
-      case "ELong":
-        _switchResult = Ecore2XtextExtensions.intRuleBody();
-        break;
-      case "ELongObject":
-        _switchResult = Ecore2XtextExtensions.intRuleBody();
-        break;
-      case "EShort":
-        _switchResult = Ecore2XtextExtensions.intRuleBody();
-        break;
-      case "EShortObject":
-        _switchResult = Ecore2XtextExtensions.intRuleBody();
-        break;
-      case "EString":
-        _switchResult = "STRING | ID";
-        break;
-      default:
-        String _name_1 = it.getName();
-        String _plus = ("\'" + _name_1);
-        _switchResult = (_plus + "\' /* TODO: implement this rule and an appropriate IValueConverter */");
-        break;
+    if (_name != null) {
+      switch (_name) {
+        case "EBigDecimal":
+          _switchResult = "INT? \'.\' INT";
+          break;
+        case "EBigInteger":
+          _switchResult = Ecore2XtextExtensions.intRuleBody();
+          break;
+        case "EBoolean":
+          _switchResult = Ecore2XtextExtensions.booleanRuleBody();
+          break;
+        case "EBooleanObject":
+          _switchResult = Ecore2XtextExtensions.booleanRuleBody();
+          break;
+        case "EByte":
+          _switchResult = Ecore2XtextExtensions.intRuleBody();
+          break;
+        case "EByteObject":
+          _switchResult = Ecore2XtextExtensions.intRuleBody();
+          break;
+        case "EChar":
+          _switchResult = Ecore2XtextExtensions.intRuleBody();
+          break;
+        case "ECharObject":
+          _switchResult = Ecore2XtextExtensions.intRuleBody();
+          break;
+        case "EDouble":
+          _switchResult = Ecore2XtextExtensions.decimalRuleBody();
+          break;
+        case "EDoubleObject":
+          _switchResult = Ecore2XtextExtensions.decimalRuleBody();
+          break;
+        case "EFloat":
+          _switchResult = Ecore2XtextExtensions.decimalRuleBody();
+          break;
+        case "EFloatObject":
+          _switchResult = Ecore2XtextExtensions.decimalRuleBody();
+          break;
+        case "EInt":
+          _switchResult = Ecore2XtextExtensions.intRuleBody();
+          break;
+        case "EIntegerObject":
+          _switchResult = Ecore2XtextExtensions.intRuleBody();
+          break;
+        case "ELong":
+          _switchResult = Ecore2XtextExtensions.intRuleBody();
+          break;
+        case "ELongObject":
+          _switchResult = Ecore2XtextExtensions.intRuleBody();
+          break;
+        case "EShort":
+          _switchResult = Ecore2XtextExtensions.intRuleBody();
+          break;
+        case "EShortObject":
+          _switchResult = Ecore2XtextExtensions.intRuleBody();
+          break;
+        case "EString":
+          _switchResult = "STRING | ID";
+          break;
+        default:
+          String _name_1 = it.getName();
+          String _plus = ("\'" + _name_1);
+          _switchResult = (_plus + "\' /* TODO: implement this rule and an appropriate IValueConverter */");
+          break;
+      }
+    } else {
+      String _name_1 = it.getName();
+      String _plus = ("\'" + _name_1);
+      _switchResult = (_plus + "\' /* TODO: implement this rule and an appropriate IValueConverter */");
     }
     return _switchResult;
   }

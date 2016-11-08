@@ -8,15 +8,12 @@
 package org.eclipse.xtext.ide.tests.util;
 
 import com.google.inject.Inject;
-import io.typefox.lsapi.DocumentHighlight;
-import io.typefox.lsapi.DocumentHighlightKind;
-import io.typefox.lsapi.Position;
-import io.typefox.lsapi.Range;
-import io.typefox.lsapi.impl.DocumentHighlightImpl;
-import io.typefox.lsapi.impl.PositionImpl;
-import io.typefox.lsapi.impl.RangeImpl;
 import java.util.ArrayList;
 import java.util.List;
+import org.eclipse.lsp4j.DocumentHighlight;
+import org.eclipse.lsp4j.DocumentHighlightKind;
+import org.eclipse.lsp4j.Position;
+import org.eclipse.lsp4j.Range;
 import org.eclipse.xtext.ide.tests.testlanguage.TestLanguageIdeInjectorProvider;
 import org.eclipse.xtext.ide.util.DocumentHighlightComparator;
 import org.eclipse.xtext.testing.InjectWith;
@@ -45,19 +42,19 @@ public class DocumentHighlightComparatorTest extends Assert {
   
   @Test
   public void withoutNull() {
-    RangeImpl _newRange = this.newRange(2, 2, 2, 2);
-    DocumentHighlightImpl _newHighlight = this.newHighlight(DocumentHighlightKind.Text, _newRange);
-    RangeImpl _newRange_1 = this.newRange(1, 1, 1, 1);
-    DocumentHighlightImpl _newHighlight_1 = this.newHighlight(DocumentHighlightKind.Text, _newRange_1);
-    RangeImpl _newRange_2 = this.newRange(2, 2, 2, 2);
-    DocumentHighlightImpl _newHighlight_2 = this.newHighlight(DocumentHighlightKind.Write, _newRange_2);
-    RangeImpl _newRange_3 = this.newRange(1, 1, 1, 1);
-    DocumentHighlightImpl _newHighlight_3 = this.newHighlight(DocumentHighlightKind.Write, _newRange_3);
-    RangeImpl _newRange_4 = this.newRange(2, 2, 2, 2);
-    DocumentHighlightImpl _newHighlight_4 = this.newHighlight(DocumentHighlightKind.Read, _newRange_4);
-    RangeImpl _newRange_5 = this.newRange(1, 1, 1, 1);
-    DocumentHighlightImpl _newHighlight_5 = this.newHighlight(DocumentHighlightKind.Read, _newRange_5);
-    ArrayList<DocumentHighlightImpl> _newArrayList = CollectionLiterals.<DocumentHighlightImpl>newArrayList(_newHighlight, _newHighlight_1, _newHighlight_2, _newHighlight_3, _newHighlight_4, _newHighlight_5);
+    Range _newRange = this.newRange(2, 2, 2, 2);
+    DocumentHighlight _newHighlight = this.newHighlight(DocumentHighlightKind.Text, _newRange);
+    Range _newRange_1 = this.newRange(1, 1, 1, 1);
+    DocumentHighlight _newHighlight_1 = this.newHighlight(DocumentHighlightKind.Text, _newRange_1);
+    Range _newRange_2 = this.newRange(2, 2, 2, 2);
+    DocumentHighlight _newHighlight_2 = this.newHighlight(DocumentHighlightKind.Write, _newRange_2);
+    Range _newRange_3 = this.newRange(1, 1, 1, 1);
+    DocumentHighlight _newHighlight_3 = this.newHighlight(DocumentHighlightKind.Write, _newRange_3);
+    Range _newRange_4 = this.newRange(2, 2, 2, 2);
+    DocumentHighlight _newHighlight_4 = this.newHighlight(DocumentHighlightKind.Read, _newRange_4);
+    Range _newRange_5 = this.newRange(1, 1, 1, 1);
+    DocumentHighlight _newHighlight_5 = this.newHighlight(DocumentHighlightKind.Read, _newRange_5);
+    ArrayList<DocumentHighlight> _newArrayList = CollectionLiterals.<DocumentHighlight>newArrayList(_newHighlight, _newHighlight_1, _newHighlight_2, _newHighlight_3, _newHighlight_4, _newHighlight_5);
     final List<? extends DocumentHighlight> input = this.sort(_newArrayList);
     DocumentHighlight _get = input.get(0);
     Range _range = _get.getRange();
@@ -201,13 +198,13 @@ public class DocumentHighlightComparatorTest extends Assert {
   
   @Test
   public void withNull() {
-    RangeImpl _newRange = this.newRange(1, 1, 1, 1);
-    DocumentHighlightImpl _newHighlight = this.newHighlight(DocumentHighlightKind.Text, _newRange);
-    RangeImpl _newRange_1 = this.newRange(1, 1, 1, 1);
-    DocumentHighlightImpl _newHighlight_1 = this.newHighlight(DocumentHighlightKind.Write, _newRange_1);
-    RangeImpl _newRange_2 = this.newRange(1, 1, 1, 1);
-    DocumentHighlightImpl _newHighlight_2 = this.newHighlight(DocumentHighlightKind.Read, _newRange_2);
-    ArrayList<DocumentHighlightImpl> _newArrayList = CollectionLiterals.<DocumentHighlightImpl>newArrayList(null, _newHighlight, _newHighlight_1, _newHighlight_2);
+    Range _newRange = this.newRange(1, 1, 1, 1);
+    DocumentHighlight _newHighlight = this.newHighlight(DocumentHighlightKind.Text, _newRange);
+    Range _newRange_1 = this.newRange(1, 1, 1, 1);
+    DocumentHighlight _newHighlight_1 = this.newHighlight(DocumentHighlightKind.Write, _newRange_1);
+    Range _newRange_2 = this.newRange(1, 1, 1, 1);
+    DocumentHighlight _newHighlight_2 = this.newHighlight(DocumentHighlightKind.Read, _newRange_2);
+    ArrayList<DocumentHighlight> _newArrayList = CollectionLiterals.<DocumentHighlight>newArrayList(null, _newHighlight, _newHighlight_1, _newHighlight_2);
     final List<? extends DocumentHighlight> input = this.sort(_newArrayList);
     DocumentHighlight _get = input.get(0);
     Range _range = _get.getRange();
@@ -282,19 +279,14 @@ public class DocumentHighlightComparatorTest extends Assert {
     Assert.assertNull(_last);
   }
   
-  private DocumentHighlightImpl newHighlight(final DocumentHighlightKind kind, final RangeImpl range) {
-    return new DocumentHighlightImpl(range, kind);
+  private DocumentHighlight newHighlight(final DocumentHighlightKind kind, final Range range) {
+    return new DocumentHighlight(range, kind);
   }
   
-  private RangeImpl newRange(final int startLine, final int startChar, final int endLine, final int endChar) {
-    PositionImpl _newPosition = this.newPosition(startLine, startChar);
-    PositionImpl _newPosition_1 = this.newPosition(endLine, endChar);
-    return new RangeImpl(_newPosition, _newPosition_1);
-  }
-  
-  private PositionImpl newPosition(final int line, final int character) {
-    new PositionImpl(line, character);
-    return new PositionImpl(line, character);
+  private Range newRange(final int startLine, final int startChar, final int endLine, final int endChar) {
+    Position _position = new Position(startLine, startChar);
+    Position _position_1 = new Position(endLine, endChar);
+    return new Range(_position, _position_1);
   }
   
   private List<? extends DocumentHighlight> sort(final List<? extends DocumentHighlight> toSort) {

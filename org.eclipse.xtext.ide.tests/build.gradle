@@ -4,7 +4,7 @@ dependencies {
 	compile project(':org.eclipse.xtext.testlanguages')
 	compile project(':org.eclipse.xtext.testlanguages.ide')
 	compile "junit:junit:$versions.junit"
-	compile "io.typefox.lsapi:io.typefox.lsapi.services:$versions.lsapi"
+	compile "org.eclipse.lsp4j:org.eclipse.lsp4j:$versions.lsp4j"
 	mwe2Compile project(':org.eclipse.xtext.xtext.generator')
 	mwe2Compile "org.eclipse.xtext:org.eclipse.xtext.common.types:$versions.xtext_bootstrap"
 	mwe2Runtime "org.eclipse.emf:org.eclipse.emf.mwe2.launch:$versions.emfMwe2"

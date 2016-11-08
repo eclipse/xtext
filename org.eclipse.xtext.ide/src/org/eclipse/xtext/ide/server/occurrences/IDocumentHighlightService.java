@@ -9,11 +9,10 @@ package org.eclipse.xtext.ide.server.occurrences;
 
 import java.util.List;
 
+import org.eclipse.lsp4j.DocumentHighlight;
 import org.eclipse.xtext.resource.XtextResource;
 
 import com.google.inject.ImplementedBy;
-
-import io.typefox.lsapi.DocumentHighlight;
 
 /**
  * Representation of a document highlight service. This service can be used to

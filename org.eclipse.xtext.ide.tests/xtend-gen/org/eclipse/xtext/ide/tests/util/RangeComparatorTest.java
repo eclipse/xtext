@@ -8,12 +8,10 @@
 package org.eclipse.xtext.ide.tests.util;
 
 import com.google.inject.Inject;
-import io.typefox.lsapi.Position;
-import io.typefox.lsapi.Range;
-import io.typefox.lsapi.impl.PositionImpl;
-import io.typefox.lsapi.impl.RangeImpl;
 import java.util.ArrayList;
 import java.util.List;
+import org.eclipse.lsp4j.Position;
+import org.eclipse.lsp4j.Range;
 import org.eclipse.xtext.ide.tests.testlanguage.TestLanguageIdeInjectorProvider;
 import org.eclipse.xtext.ide.util.RangeComparator;
 import org.eclipse.xtext.testing.InjectWith;
@@ -38,12 +36,12 @@ public class RangeComparatorTest extends Assert {
   
   @Test
   public void withoutNull() {
-    RangeImpl _newRange = this.newRange(1, 2, 1, 2);
-    RangeImpl _newRange_1 = this.newRange(1, 1, 2, 1);
-    RangeImpl _newRange_2 = this.newRange(1, 1, 1, 2);
-    RangeImpl _newRange_3 = this.newRange(1, 1, 1, 1);
-    RangeImpl _newRange_4 = this.newRange(2, 2, 2, 3);
-    ArrayList<RangeImpl> _newArrayList = CollectionLiterals.<RangeImpl>newArrayList(_newRange, _newRange_1, _newRange_2, _newRange_3, _newRange_4);
+    Range _newRange = this.newRange(1, 2, 1, 2);
+    Range _newRange_1 = this.newRange(1, 1, 2, 1);
+    Range _newRange_2 = this.newRange(1, 1, 1, 2);
+    Range _newRange_3 = this.newRange(1, 1, 1, 1);
+    Range _newRange_4 = this.newRange(2, 2, 2, 3);
+    ArrayList<Range> _newArrayList = CollectionLiterals.<Range>newArrayList(_newRange, _newRange_1, _newRange_2, _newRange_3, _newRange_4);
     final List<? extends Range> input = this.sort(_newArrayList);
     Range _get = input.get(0);
     Position _start = _get.getStart();
@@ -129,9 +127,9 @@ public class RangeComparatorTest extends Assert {
   
   @Test
   public void withNull() {
-    RangeImpl _newRange = this.newRange(2, 2, 2, 3);
-    RangeImpl _newRange_1 = this.newRange(1, 1, 1, 1);
-    ArrayList<RangeImpl> _newArrayList = CollectionLiterals.<RangeImpl>newArrayList(_newRange, null, _newRange_1);
+    Range _newRange = this.newRange(2, 2, 2, 3);
+    Range _newRange_1 = this.newRange(1, 1, 1, 1);
+    ArrayList<Range> _newArrayList = CollectionLiterals.<Range>newArrayList(_newRange, null, _newRange_1);
     final List<? extends Range> input = this.sort(_newArrayList);
     Range _get = input.get(0);
     Position _start = _get.getStart();
@@ -169,14 +167,10 @@ public class RangeComparatorTest extends Assert {
     Assert.assertNull(_last);
   }
   
-  private RangeImpl newRange(final int startLine, final int startChar, final int endLine, final int endChar) {
-    PositionImpl _newPosition = this.newPosition(startLine, startChar);
-    PositionImpl _newPosition_1 = this.newPosition(endLine, endChar);
-    return new RangeImpl(_newPosition, _newPosition_1);
-  }
-  
-  private PositionImpl newPosition(final int line, final int character) {
-    return new PositionImpl(line, character);
+  private Range newRange(final int startLine, final int startChar, final int endLine, final int endChar) {
+    Position _position = new Position(startLine, startChar);
+    Position _position_1 = new Position(endLine, endChar);
+    return new Range(_position, _position_1);
   }
   
   private List<? extends Range> sort(final List<? extends Range> toSort) {

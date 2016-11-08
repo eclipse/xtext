@@ -7,11 +7,10 @@
  */
 package org.eclipse.xtext.ide.tests.util;
 
-import io.typefox.lsapi.Position;
-import io.typefox.lsapi.impl.PositionImpl;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
+import org.eclipse.lsp4j.Position;
 import org.eclipse.xtext.ide.tests.testlanguage.TestLanguageIdeInjectorProvider;
 import org.eclipse.xtext.ide.util.PositionComparator;
 import org.eclipse.xtext.testing.InjectWith;
@@ -36,11 +35,11 @@ public class PositionComparatorTest extends Assert {
   
   @Test
   public void withoutNull() {
-    PositionImpl _newPosition = this.newPosition(2, 2);
-    PositionImpl _newPosition_1 = this.newPosition(2, 1);
-    PositionImpl _newPosition_2 = this.newPosition(1, 2);
-    PositionImpl _newPosition_3 = this.newPosition(1, 1);
-    ArrayList<PositionImpl> _newArrayList = CollectionLiterals.<PositionImpl>newArrayList(_newPosition, _newPosition_1, _newPosition_2, _newPosition_3);
+    Position _position = new Position(2, 2);
+    Position _position_1 = new Position(2, 1);
+    Position _position_2 = new Position(1, 2);
+    Position _position_3 = new Position(1, 1);
+    ArrayList<Position> _newArrayList = CollectionLiterals.<Position>newArrayList(_position, _position_1, _position_2, _position_3);
     final List<? extends Position> input = this.sort(_newArrayList);
     Position _get = input.get(0);
     int _line = _get.getLine();
@@ -70,9 +69,9 @@ public class PositionComparatorTest extends Assert {
   
   @Test
   public void withNull() {
-    PositionImpl _newPosition = this.newPosition(2, 2);
-    PositionImpl _newPosition_1 = this.newPosition(1, 1);
-    ArrayList<PositionImpl> _newArrayList = CollectionLiterals.<PositionImpl>newArrayList(_newPosition, null, _newPosition_1);
+    Position _position = new Position(2, 2);
+    Position _position_1 = new Position(1, 1);
+    ArrayList<Position> _newArrayList = CollectionLiterals.<Position>newArrayList(_position, null, _position_1);
     final List<? extends Position> input = this.sort(_newArrayList);
     Position _get = input.get(0);
     int _line = _get.getLine();
@@ -88,10 +87,6 @@ public class PositionComparatorTest extends Assert {
     Assert.assertEquals(2, _character_1);
     Position _last = IterableExtensions.last(input);
     Assert.assertNull(_last);
-  }
-  
-  private PositionImpl newPosition(final int line, final int character) {
-    return new PositionImpl(line, character);
   }
   
   private List<? extends Position> sort(final List<? extends Position> toSort) {

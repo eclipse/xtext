@@ -8,21 +8,20 @@
 package org.eclipse.xtext.ide.tests.util
 
 import com.google.inject.Inject
-import io.typefox.lsapi.DocumentHighlight
-import io.typefox.lsapi.DocumentHighlightKind
-import io.typefox.lsapi.impl.DocumentHighlightImpl
-import io.typefox.lsapi.impl.PositionImpl
-import io.typefox.lsapi.impl.RangeImpl
 import java.util.List
+import org.eclipse.lsp4j.DocumentHighlight
+import org.eclipse.lsp4j.DocumentHighlightKind
+import org.eclipse.lsp4j.Position
+import org.eclipse.lsp4j.Range
 import org.eclipse.xtext.ide.tests.testlanguage.TestLanguageIdeInjectorProvider
 import org.eclipse.xtext.ide.util.DocumentHighlightComparator
 import org.eclipse.xtext.testing.InjectWith
 import org.eclipse.xtext.testing.XtextRunner
 import org.junit.Assert
-import org.junit.runner.RunWith
 import org.junit.Test
+import org.junit.runner.RunWith
 
-import static io.typefox.lsapi.DocumentHighlightKind.*
+import static org.eclipse.lsp4j.DocumentHighlightKind.*
 
 /**
  * Test for the null-safe {@link DocumentHighlightComparator}.
@@ -109,17 +108,12 @@ class DocumentHighlightComparatorTest extends Assert {
 		assertNull(input.last);
 	}
 
-	private def newHighlight(DocumentHighlightKind kind, RangeImpl range) {
-		new DocumentHighlightImpl(range, kind);
+	private def newHighlight(DocumentHighlightKind kind, Range range) {
+		new DocumentHighlight(range, kind);
 	}
 
 	private def newRange(int startLine, int startChar, int endLine, int endChar) {
-		return new RangeImpl(newPosition(startLine, startChar), newPosition(endLine, endChar));
-	}
-
-	private def newPosition(int line, int character) {
-		new PositionImpl(line, character);
-		return new PositionImpl(line, character);
+		return new Range(new Position(startLine, startChar), new Position(endLine, endChar));
 	}
 
 	private def sort(List<? extends DocumentHighlight> toSort) {

@@ -7,13 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.server.signatureHelp;
 
+import org.eclipse.lsp4j.SignatureHelp;
 import org.eclipse.xtext.resource.XtextResource;
 
 import com.google.inject.ImplementedBy;
 import com.google.inject.Singleton;
-
-import io.typefox.lsapi.SignatureHelp;
-import io.typefox.lsapi.builders.SignatureHelpBuilder;
 
 /**
  * Representation of a service for getting the {@link SignatureHelp signature
@@ -27,7 +25,7 @@ public interface SignatureHelpService {
 	/**
 	 * Shared, immutable empty instance. 
 	 */
-	SignatureHelp EMPTY = new SignatureHelpBuilder().build();
+	SignatureHelp EMPTY = new SignatureHelp();
 	
 	/**
 	 * Returns with a {@link SignatureHelp signature help} instance for a

@@ -11,12 +11,6 @@ import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
-import io.typefox.lsapi.ParameterInformation;
-import io.typefox.lsapi.SignatureHelp;
-import io.typefox.lsapi.SignatureInformation;
-import io.typefox.lsapi.impl.ParameterInformationImpl;
-import io.typefox.lsapi.impl.SignatureHelpImpl;
-import io.typefox.lsapi.impl.SignatureInformationImpl;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
@@ -24,6 +18,9 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.lsp4j.ParameterInformation;
+import org.eclipse.lsp4j.SignatureHelp;
+import org.eclipse.lsp4j.SignatureInformation;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.ide.server.signatureHelp.SignatureHelpService;
@@ -73,22 +70,22 @@ public class SignatureHelpServiceImpl implements SignatureHelpService {
    * based on the number of parameters first, then the parameter labels lexicographically.
    */
   private final static Comparator<SignatureInformation> SIGNATURE_INFO_ORDERING = ((Comparator<SignatureInformation>) (SignatureInformation left, SignatureInformation right) -> {
-    List<? extends ParameterInformation> _parameters = left.getParameters();
+    List<ParameterInformation> _parameters = left.getParameters();
     int _size = _parameters.size();
-    List<? extends ParameterInformation> _parameters_1 = right.getParameters();
+    List<ParameterInformation> _parameters_1 = right.getParameters();
     int _size_1 = _parameters_1.size();
     int result = (_size - _size_1);
     if ((result == 0)) {
       int i = 0;
-      List<? extends ParameterInformation> _parameters_2 = left.getParameters();
+      List<ParameterInformation> _parameters_2 = left.getParameters();
       int size = _parameters_2.size();
       boolean _while = (i < size);
       while (_while) {
         {
-          List<? extends ParameterInformation> _parameters_3 = left.getParameters();
+          List<ParameterInformation> _parameters_3 = left.getParameters();
           ParameterInformation _get = _parameters_3.get(i);
           String _label = _get.getLabel();
-          List<? extends ParameterInformation> _parameters_4 = right.getParameters();
+          List<ParameterInformation> _parameters_4 = right.getParameters();
           ParameterInformation _get_1 = _parameters_4.get(i);
           String _label_1 = _get_1.getLabel();
           int _compareTo = _label.compareTo(_label_1);
@@ -204,8 +201,8 @@ public class SignatureHelpServiceImpl implements SignatureHelpService {
       _xifexpression_2 = 1;
     }
     final int paramOffset = _xifexpression_2;
-    SignatureHelpImpl _signatureHelpImpl = new SignatureHelpImpl();
-    final Procedure1<SignatureHelpImpl> _function_1 = (SignatureHelpImpl it) -> {
+    SignatureHelp _signatureHelp = new SignatureHelp();
+    final Procedure1<SignatureHelp> _function_1 = (SignatureHelp it) -> {
       Integer _xifexpression_3 = null;
       if ((paramCount == 0)) {
         _xifexpression_3 = null;
@@ -214,15 +211,15 @@ public class SignatureHelpServiceImpl implements SignatureHelpService {
       }
       it.setActiveParameter(_xifexpression_3);
       it.setActiveSignature(Integer.valueOf(0));
-      final Function1<Operation, SignatureInformationImpl> _function_2 = (Operation operation) -> {
-        SignatureInformationImpl _signatureInformationImpl = new SignatureInformationImpl();
-        final Procedure1<SignatureInformationImpl> _function_3 = (SignatureInformationImpl it_1) -> {
+      final Function1<Operation, SignatureInformation> _function_2 = (Operation operation) -> {
+        SignatureInformation _signatureInformation = new SignatureInformation();
+        final Procedure1<SignatureInformation> _function_3 = (SignatureInformation it_1) -> {
           String _label = this.getLabel(operation);
           it_1.setLabel(_label);
           EList<Parameter> _params_1 = operation.getParams();
-          final Function1<Parameter, ParameterInformationImpl> _function_4 = (Parameter param) -> {
-            ParameterInformationImpl _parameterInformationImpl = new ParameterInformationImpl();
-            final Procedure1<ParameterInformationImpl> _function_5 = (ParameterInformationImpl it_2) -> {
+          final Function1<Parameter, ParameterInformation> _function_4 = (Parameter param) -> {
+            ParameterInformation _parameterInformation = new ParameterInformation();
+            final Procedure1<ParameterInformation> _function_5 = (ParameterInformation it_2) -> {
               StringConcatenation _builder = new StringConcatenation();
               String _name = param.getName();
               _builder.append(_name, "");
@@ -232,19 +229,19 @@ public class SignatureHelpServiceImpl implements SignatureHelpService {
               _builder.append(_label_1, "");
               it_2.setLabel(_builder.toString());
             };
-            return ObjectExtensions.<ParameterInformationImpl>operator_doubleArrow(_parameterInformationImpl, _function_5);
+            return ObjectExtensions.<ParameterInformation>operator_doubleArrow(_parameterInformation, _function_5);
           };
-          List<ParameterInformationImpl> _map = ListExtensions.<Parameter, ParameterInformationImpl>map(_params_1, _function_4);
+          List<ParameterInformation> _map = ListExtensions.<Parameter, ParameterInformation>map(_params_1, _function_4);
           it_1.setParameters(_map);
         };
-        return ObjectExtensions.<SignatureInformationImpl>operator_doubleArrow(_signatureInformationImpl, _function_3);
+        return ObjectExtensions.<SignatureInformation>operator_doubleArrow(_signatureInformation, _function_3);
       };
-      Iterable<SignatureInformationImpl> _map = IterableExtensions.<Operation, SignatureInformationImpl>map(visibleOperations, _function_2);
-      List<SignatureInformationImpl> _list = IterableExtensions.<SignatureInformationImpl>toList(_map);
-      List<SignatureInformationImpl> _sortWith = IterableExtensions.<SignatureInformationImpl>sortWith(_list, SignatureHelpServiceImpl.SIGNATURE_INFO_ORDERING);
+      Iterable<SignatureInformation> _map = IterableExtensions.<Operation, SignatureInformation>map(visibleOperations, _function_2);
+      List<SignatureInformation> _list = IterableExtensions.<SignatureInformation>toList(_map);
+      List<SignatureInformation> _sortWith = IterableExtensions.<SignatureInformation>sortWith(_list, SignatureHelpServiceImpl.SIGNATURE_INFO_ORDERING);
       it.setSignatures(_sortWith);
     };
-    return ObjectExtensions.<SignatureHelpImpl>operator_doubleArrow(_signatureHelpImpl, _function_1);
+    return ObjectExtensions.<SignatureHelp>operator_doubleArrow(_signatureHelp, _function_1);
   }
   
   private Iterable<Operation> getVisibleOperationsWithName(final EObject object, final String name) {

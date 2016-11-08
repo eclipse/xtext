@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.ide.server;
 
-import com.google.common.base.Objects;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Map;
@@ -41,7 +40,7 @@ public class MultiProjectWorkspaceConfig implements IWorkspaceConfig {
     Collection<IProjectConfig> _values = this.name2config.values();
     final Function1<IProjectConfig, Boolean> _function = (IProjectConfig it) -> {
       ISourceFolder _findSourceFolderContaining = it.findSourceFolderContaining(member);
-      return Boolean.valueOf((!Objects.equal(_findSourceFolderContaining, null)));
+      return Boolean.valueOf((_findSourceFolderContaining != null));
     };
     Iterable<IProjectConfig> _filter = IterableExtensions.<IProjectConfig>filter(_values, _function);
     final Function1<IProjectConfig, Integer> _function_1 = (IProjectConfig it) -> {

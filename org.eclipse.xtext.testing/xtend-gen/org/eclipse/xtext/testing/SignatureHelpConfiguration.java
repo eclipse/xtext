@@ -7,7 +7,7 @@
  */
 package org.eclipse.xtext.testing;
 
-import io.typefox.lsapi.SignatureHelp;
+import org.eclipse.lsp4j.SignatureHelp;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.testing.TextDocumentPositionConfiguration;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;

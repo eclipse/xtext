@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.server.occurrences;
 
-import static io.typefox.lsapi.DocumentHighlightKind.*;
 import static java.util.Collections.*;
 import static org.eclipse.xtext.util.ITextRegionWithLineInformation.*;
 
@@ -17,6 +16,8 @@ import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.lsp4j.DocumentHighlight;
+import org.eclipse.lsp4j.DocumentHighlightKind;
 import org.eclipse.xtext.findReferences.IReferenceFinder;
 import org.eclipse.xtext.findReferences.IReferenceFinder.Acceptor;
 import org.eclipse.xtext.findReferences.TargetURICollector;
@@ -41,8 +42,6 @@ import com.google.common.collect.ImmutableList.Builder;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
-
-import io.typefox.lsapi.DocumentHighlight;
 
 /**
  * Default implementation of the {@link IDocumentHighlightService document
@@ -141,7 +140,7 @@ public class DefaultDocumentHighlightService implements IDocumentHighlightServic
 		final Acceptor acceptor = (Acceptor2) (source, sourceURI, eReference, index, targetOrProxy, targetURI) -> {
 			final ITextRegion region = locationInFileProvider.getSignificantTextRegion(source, eReference, index);
 			if (!isNullOrEmpty(region)) {
-				resultBuilder.add(textRegionTransformer.apply(docSupplier.get(), region, Read));
+				resultBuilder.add(textRegionTransformer.apply(docSupplier.get(), region, DocumentHighlightKind.Read));
 			}
 		};
 		referenceFinder.findReferences((TargetURIs) targetURIs, resource, acceptor, new NullProgressMonitor());
@@ -149,7 +148,7 @@ public class DefaultDocumentHighlightService implements IDocumentHighlightServic
 		if (resource.equals(selectedElemnt.eResource())) {
 			final ITextRegion region = locationInFileProvider.getSignificantTextRegion(selectedElemnt);
 			if (!isNullOrEmpty(region)) {
-				resultBuilder.add(textRegionTransformer.apply(docSupplier.get(), region, Write));
+				resultBuilder.add(textRegionTransformer.apply(docSupplier.get(), region, DocumentHighlightKind.Write));
 			}
 		}
 

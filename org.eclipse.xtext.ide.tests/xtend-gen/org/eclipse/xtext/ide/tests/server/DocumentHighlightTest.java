@@ -7,9 +7,9 @@
  */
 package org.eclipse.xtext.ide.tests.server;
 
-import io.typefox.lsapi.DocumentHighlight;
-import io.typefox.lsapi.DocumentHighlightKind;
-import io.typefox.lsapi.Position;
+import org.eclipse.lsp4j.DocumentHighlight;
+import org.eclipse.lsp4j.DocumentHighlightKind;
+import org.eclipse.lsp4j.Position;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.ide.server.occurrences.IDocumentHighlightService;
 import org.eclipse.xtext.ide.tests.server.AbstractTestLangLanguageServerTest;

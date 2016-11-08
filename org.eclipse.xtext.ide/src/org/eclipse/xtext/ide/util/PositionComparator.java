@@ -7,14 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.util;
 
-import static com.google.common.collect.ComparisonChain.*;
-
 import java.util.Comparator;
+
+import org.eclipse.lsp4j.Position;
 
 import com.google.common.collect.Ordering;
 import com.google.inject.Singleton;
 
-import io.typefox.lsapi.Position;
+import static com.google.common.collect.ComparisonChain.*;
 
 /**
  * Null-safe comparator for {@link Position position} instances.

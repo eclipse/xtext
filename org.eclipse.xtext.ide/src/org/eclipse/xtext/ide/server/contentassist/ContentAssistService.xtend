@@ -11,15 +11,14 @@ import com.google.common.base.Strings
 import com.google.inject.Inject
 import com.google.inject.Provider
 import com.google.inject.Singleton
-import io.typefox.lsapi.CompletionItemKind
-import io.typefox.lsapi.CompletionList
-import io.typefox.lsapi.TextDocumentPositionParams
-import io.typefox.lsapi.builders.CompletionListBuilder
-import io.typefox.lsapi.impl.CompletionItemImpl
-import io.typefox.lsapi.impl.PositionImpl
-import io.typefox.lsapi.impl.RangeImpl
-import io.typefox.lsapi.impl.TextEditImpl
 import java.util.concurrent.ExecutorService
+import org.eclipse.lsp4j.CompletionItem
+import org.eclipse.lsp4j.CompletionItemKind
+import org.eclipse.lsp4j.CompletionList
+import org.eclipse.lsp4j.Position
+import org.eclipse.lsp4j.Range
+import org.eclipse.lsp4j.TextDocumentPositionParams
+import org.eclipse.lsp4j.TextEdit
 import org.eclipse.xtext.ide.editor.contentassist.ContentAssistEntry
 import org.eclipse.xtext.ide.editor.contentassist.IIdeContentProposalAcceptor
 import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalAcceptor
@@ -52,13 +51,13 @@ class ContentAssistService {
 
     def CompletionList createCompletionList(Document document, XtextResource resource,
         TextDocumentPositionParams params, CancelIndicator cancelIndicator) {
-        val result = new CompletionListBuilder()
+        val result = new CompletionList
         // we set isInComplete to true, so we get asked always, which is the best match to the expected behavior in Xtext
-        result.isIncomplete(true);
+        result.setIsIncomplete(true);
 
         val acceptor = proposalAcceptorProvider.get
         val caretOffset = document.getOffSet(params.position)
-        val caretPosition = new PositionImpl(params.position as PositionImpl)
+        val caretPosition = params.position
         val position = new TextRegion(caretOffset, 0)
         try {
             createProposals(document.contents, position, caretOffset, resource, acceptor)
@@ -70,9 +69,9 @@ class ContentAssistService {
         acceptor.getEntries().forEach [ it, idx |
             val item = toCompletionItem(caretOffset, caretPosition, document)
             item.sortText = Strings.padStart(Integer.toString(idx), 5, "0")
-            result.item(item)
+            result.items += item
         ]
-        return result.build
+        return result
     }
 
     protected def void createProposals(String document, TextRegion selection, int caretOffset, XtextResource resource, IIdeContentProposalAcceptor acceptor) {
@@ -84,15 +83,15 @@ class ContentAssistService {
         proposalProvider.createProposals(contexts, acceptor)
     }
 
-    protected def CompletionItemImpl toCompletionItem(ContentAssistEntry entry, int caretOffset,
-        PositionImpl caretPosition, Document document) {
-        val completionItem = new CompletionItemImpl
+    protected def CompletionItem toCompletionItem(ContentAssistEntry entry, int caretOffset,
+        Position caretPosition, Document document) {
+        val completionItem = new CompletionItem
         completionItem.label = entry.label ?: entry.proposal
         completionItem.detail = entry.description
         completionItem.documentation = entry.documentation
         val prefixOffset = caretOffset - (entry.prefix ?: '').length
         val prefixPosition = document.getPosition(prefixOffset)
-        completionItem.textEdit = new TextEditImpl(new RangeImpl(prefixPosition, caretPosition), entry.proposal)
+        completionItem.textEdit = new TextEdit(new Range(prefixPosition, caretPosition), entry.proposal)
         completionItem.kind = translateKind(entry)
         return completionItem
     }

@@ -7,18 +7,18 @@
  */
 package org.eclipse.xtext.ide.tests.server;
 
-import io.typefox.lsapi.Diagnostic;
-import io.typefox.lsapi.FileChangeType;
-import io.typefox.lsapi.Position;
-import io.typefox.lsapi.Range;
-import io.typefox.lsapi.impl.DidChangeWatchedFilesParamsImpl;
-import io.typefox.lsapi.impl.FileEventImpl;
-import io.typefox.lsapi.services.WorkspaceService;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import org.eclipse.lsp4j.Diagnostic;
+import org.eclipse.lsp4j.DidChangeWatchedFilesParams;
+import org.eclipse.lsp4j.FileChangeType;
+import org.eclipse.lsp4j.FileEvent;
+import org.eclipse.lsp4j.Position;
+import org.eclipse.lsp4j.Range;
+import org.eclipse.lsp4j.services.WorkspaceService;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.ide.tests.server.AbstractTestLangLanguageServerTest;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -126,9 +126,9 @@ public class ServerTest extends AbstractTestLangLanguageServerTest {
     _builder_1.newLine();
     final String path = this.writeFile("MyType2.testlang", _builder_1);
     WorkspaceService _workspaceService = this.languageServer.getWorkspaceService();
-    FileEventImpl _fileEventImpl = new FileEventImpl(path, FileChangeType.Created);
-    DidChangeWatchedFilesParamsImpl _didChangeWatchedFilesParamsImpl = new DidChangeWatchedFilesParamsImpl(Collections.<FileEventImpl>unmodifiableList(CollectionLiterals.<FileEventImpl>newArrayList(_fileEventImpl)));
-    _workspaceService.didChangeWatchedFiles(_didChangeWatchedFilesParamsImpl);
+    FileEvent _fileEvent = new FileEvent(path, FileChangeType.Created);
+    DidChangeWatchedFilesParams _didChangeWatchedFilesParams = new DidChangeWatchedFilesParams(Collections.<FileEvent>unmodifiableList(CollectionLiterals.<FileEvent>newArrayList(_fileEvent)));
+    _workspaceService.didChangeWatchedFiles(_didChangeWatchedFilesParams);
     List<? extends Diagnostic> _get = this.diagnostics.get(path);
     Assert.assertNotNull(_get);
     Collection<List<? extends Diagnostic>> _values_1 = this.diagnostics.values();

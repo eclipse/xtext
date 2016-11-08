@@ -9,13 +9,9 @@ package org.eclipse.xtext.ide.server.hover
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
-import io.typefox.lsapi.Hover
-import io.typefox.lsapi.MarkedString
-import io.typefox.lsapi.builders.HoverBuilder
-import io.typefox.lsapi.impl.HoverImpl
-import io.typefox.lsapi.impl.MarkedStringImpl
 import java.util.List
 import org.eclipse.emf.ecore.EObject
+import org.eclipse.lsp4j.Hover
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider
 import org.eclipse.xtext.ide.server.DocumentExtensions
 import org.eclipse.xtext.nodemodel.ILeafNode
@@ -52,46 +48,46 @@ class HoverService {
 	def Hover hover(XtextResource resource, int offset) {
 		val pair = resource.getXtextElementAt(offset)
 		if (pair === null || pair.first === null || pair.second === null) {
-			return new HoverImpl(emptyList, null)
+			return new Hover(emptyList, null)
 		}
 		val element = pair.first
 		
 		val contents = getContents(element)
 		if (contents === null)
-			return new HoverImpl(emptyList, null)
+			return new Hover(emptyList, null)
 
 		val ITextRegion textRegion = pair.second
 
 		if (!textRegion.contains(offset))
-			return new HoverImpl(emptyList, null)
+			return new Hover(emptyList, null)
 
 		val range = resource.newRange(textRegion)
-		return new HoverBuilder() [ b |
-    		b.range(range)
-		    contents.forEach[b.content(it)]   
-		].build
+		return new Hover() => [ b |
+    		b.range = range
+		    b.contents = contents.map[it]
+		]
 	}
 	
-	protected def List<? extends MarkedString> getContents(EObject element) {
+	protected def List<? extends String> getContents(EObject element) {
 	    val documentation = element.documentation
         if (documentation === null)
             return emptyList
         else
-            #[new MarkedStringImpl(null, documentation)]
+            #[documentation]
 	}
 
 	protected def Pair<EObject, ITextRegion> getXtextElementAt(XtextResource resource, int offset) {
 		// check for cross reference
 		val EObject crossLinkedEObject = resolveCrossReferencedElementAt(resource, offset);
-		if (crossLinkedEObject != null) {
+		if (crossLinkedEObject !== null) {
 			if (!crossLinkedEObject.eIsProxy()) {
 				val IParseResult parseResult = resource.getParseResult();
-				if (parseResult != null) {
+				if (parseResult !== null) {
 					var ILeafNode leafNode = NodeModelUtils.findLeafNodeAtOffset(parseResult.getRootNode(), offset);
-					if(leafNode != null && leafNode.isHidden() && leafNode.getOffset() == offset) {
+					if(leafNode !== null && leafNode.isHidden() && leafNode.getOffset() == offset) {
 						leafNode = NodeModelUtils.findLeafNodeAtOffset(parseResult.getRootNode(), offset - 1);
 					}
-					if (leafNode != null) {
+					if (leafNode !== null) {
 						val ITextRegion leafRegion = leafNode.getTextRegion();
 						return Tuples.create(crossLinkedEObject, leafRegion);
 					}
@@ -99,7 +95,7 @@ class HoverService {
 			}
 		} else {
 			val EObject o = resource.resolveElementAt(offset);
-			if (o != null) {
+			if (o !== null) {
 				val ITextRegion region = o.getSignificantTextRegion();
 				return Tuples.create(o, region);
 			}

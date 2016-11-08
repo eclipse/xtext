@@ -10,14 +10,13 @@ package org.eclipse.xtext.ide.server.symbol
 import com.google.inject.Inject
 import com.google.inject.Provider
 import com.google.inject.Singleton
-import io.typefox.lsapi.Location
-import io.typefox.lsapi.SymbolInformation
-import io.typefox.lsapi.SymbolKind
-import io.typefox.lsapi.impl.SymbolInformationImpl
 import java.util.List
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.EClass
 import org.eclipse.emf.ecore.EObject
+import org.eclipse.lsp4j.Location
+import org.eclipse.lsp4j.SymbolInformation
+import org.eclipse.lsp4j.SymbolKind
 import org.eclipse.xtext.findReferences.IReferenceFinder
 import org.eclipse.xtext.findReferences.IReferenceFinder.IResourceAccess
 import org.eclipse.xtext.findReferences.ReferenceAcceptor
@@ -147,11 +146,11 @@ class DocumentSymbolService {
 		return obj.eContainer
 	}
 
-	protected def SymbolInformationImpl createSymbol(EObject object) {
+	protected def SymbolInformation createSymbol(EObject object) {
 		val symbolName = object.symbolName
 		if(symbolName === null) return null
 
-		val symbol = new SymbolInformationImpl
+		val symbol = new SymbolInformation
 		symbol.name = symbolName
 		symbol.kind = object.symbolKind
 		symbol.location = object.newLocation
@@ -192,11 +191,11 @@ class DocumentSymbolService {
 		return description.qualifiedName.toLowerCase.toString.contains(query.toLowerCase)
 	}
 
-	protected def SymbolInformationImpl createSymbol(IEObjectDescription description) {
+	protected def SymbolInformation createSymbol(IEObjectDescription description) {
 		val symbolName = description.symbolName
 		if(symbolName === null) return null
 
-		val symbol = new SymbolInformationImpl
+		val symbol = new SymbolInformation
 		symbol.name = symbolName
 		symbol.kind = description.symbolKind
 		return symbol

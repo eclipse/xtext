@@ -9,10 +9,8 @@ package org.eclipse.xtext.ide.server.formatting
 
 import com.google.inject.Inject
 import com.google.inject.Provider
-import io.typefox.lsapi.TextEdit
-import io.typefox.lsapi.impl.RangeImpl
-import io.typefox.lsapi.impl.TextEditImpl
 import java.util.List
+import org.eclipse.lsp4j.TextEdit
 import org.eclipse.xtext.formatting2.FormatterRequest
 import org.eclipse.xtext.formatting2.IFormatter2
 import org.eclipse.xtext.formatting2.regionaccess.TextRegionAccessBuilder
@@ -21,6 +19,7 @@ import org.eclipse.xtext.preferences.ITypedPreferenceValues
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.util.ITextRegion
 import org.eclipse.xtext.util.TextRegion
+import org.eclipse.lsp4j.Range
 
 /**
  * Language Service Implementation for Formatting and Range-Formatting
@@ -49,9 +48,9 @@ class FormattingService {
 	}
 	
 	protected def TextEdit toTextEdit(Document document, String formattedText, int startOffset, int length) {
-		new TextEditImpl => [
+		new TextEdit => [
 			newText = formattedText
-			range = new RangeImpl => [
+			range = new Range => [
 				start = document.getPosition(startOffset)
 				end = document.getPosition(startOffset+length)
 			]

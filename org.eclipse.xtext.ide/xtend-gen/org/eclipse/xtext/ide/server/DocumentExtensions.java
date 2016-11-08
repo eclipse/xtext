@@ -9,13 +9,13 @@ package org.eclipse.xtext.ide.server;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import io.typefox.lsapi.impl.LocationImpl;
-import io.typefox.lsapi.impl.PositionImpl;
-import io.typefox.lsapi.impl.RangeImpl;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.lsp4j.Location;
+import org.eclipse.lsp4j.Position;
+import org.eclipse.lsp4j.Range;
 import org.eclipse.xtext.ide.server.UriExtensions;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
@@ -40,7 +40,7 @@ public class DocumentExtensions {
   @Inject
   private ILocationInFileProvider locationInFileProvider;
   
-  public PositionImpl newPosition(final Resource resource, final int offset) {
+  public Position newPosition(final Resource resource, final int offset) {
     if ((resource instanceof XtextResource)) {
       IParseResult _parseResult = ((XtextResource)resource).getParseResult();
       final ICompositeNode rootNode = _parseResult.getRootNode();
@@ -49,18 +49,18 @@ public class DocumentExtensions {
       int _minus = (_line - 1);
       int _column = lineAndColumn.getColumn();
       int _minus_1 = (_column - 1);
-      return new PositionImpl(_minus, _minus_1);
+      return new Position(_minus, _minus_1);
     }
     return null;
   }
   
-  public RangeImpl newRange(final Resource resource, final int startOffset, final int endOffset) {
-    final PositionImpl startPosition = this.newPosition(resource, startOffset);
-    final PositionImpl endPosition = this.newPosition(resource, endOffset);
-    return new RangeImpl(startPosition, endPosition);
+  public Range newRange(final Resource resource, final int startOffset, final int endOffset) {
+    final Position startPosition = this.newPosition(resource, startOffset);
+    final Position endPosition = this.newPosition(resource, endOffset);
+    return new Range(startPosition, endPosition);
   }
   
-  public RangeImpl newRange(final Resource resource, final ITextRegion region) {
+  public Range newRange(final Resource resource, final ITextRegion region) {
     if ((region == null)) {
       return null;
     }
@@ -71,23 +71,23 @@ public class DocumentExtensions {
     return this.newRange(resource, _offset, _plus);
   }
   
-  public LocationImpl newLocation(final Resource resource, final ITextRegion textRegion) {
-    final LocationImpl location = new LocationImpl();
+  public Location newLocation(final Resource resource, final ITextRegion textRegion) {
+    final Location location = new Location();
     URI _uRI = resource.getURI();
     String _path = this._uriExtensions.toPath(_uRI);
     location.setUri(_path);
-    RangeImpl _newRange = this.newRange(resource, textRegion);
+    Range _newRange = this.newRange(resource, textRegion);
     location.setRange(_newRange);
     return location;
   }
   
-  public LocationImpl newLocation(final EObject object) {
+  public Location newLocation(final EObject object) {
     final Resource resource = object.eResource();
     final ITextRegion textRegion = this.locationInFileProvider.getSignificantTextRegion(object);
     return this.newLocation(resource, textRegion);
   }
   
-  public LocationImpl newLocation(final EObject owner, final EStructuralFeature feature, final int indexInList) {
+  public Location newLocation(final EObject owner, final EStructuralFeature feature, final int indexInList) {
     final Resource resource = owner.eResource();
     final ITextRegion textRegion = this.locationInFileProvider.getSignificantTextRegion(owner, feature, indexInList);
     return this.newLocation(resource, textRegion);

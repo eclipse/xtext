@@ -7,11 +7,16 @@
  */
 package org.eclipse.xtext.ide.tests.testlanguage.ide;
 
+import org.eclipse.xtext.ide.server.LanguageServerExtension;
 import org.eclipse.xtext.ide.tests.testlanguage.ide.AbstractTestLanguageIdeModule;
+import org.eclipse.xtext.ide.tests.testlanguage.ide.TestLangLSPExtension;
 
 /**
  * Use this class to register ide components.
  */
 @SuppressWarnings("all")
 public class TestLanguageIdeModule extends AbstractTestLanguageIdeModule {
+  public Class<? extends LanguageServerExtension> bindLanguageServerExtension() {
+    return TestLangLSPExtension.class;
+  }
 }
