@@ -59,7 +59,6 @@ class RequestManager {
 	 */
 	def <V> CompletableFuture<V> runWrite((CancelIndicator)=>V writeRequest) {
 		return CompletableFutures.computeAsync(executorService) [
-			cancelIndicators.forEach[cancel]
 			val cancelIndicator = new RequestCancelIndicator(it)
 			cancelIndicators += cancelIndicator
 	

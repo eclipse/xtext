@@ -15,7 +15,6 @@ import java.util.concurrent.CompletionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.Semaphore;
-import java.util.function.Consumer;
 import java.util.function.Function;
 import org.apache.log4j.Logger;
 import org.eclipse.lsp4j.jsonrpc.CancelChecker;
@@ -67,19 +66,15 @@ public class RequestManager {
   public <V extends Object> CompletableFuture<V> runWrite(final Function1<? super CancelIndicator, ? extends V> writeRequest) {
     final Function<CancelChecker, V> _function = (CancelChecker it) -> {
       try {
-        final Consumer<Cancellable> _function_1 = (Cancellable it_1) -> {
-          it_1.cancel();
-        };
-        this.cancelIndicators.forEach(_function_1);
         final RequestCancelIndicator cancelIndicator = new RequestCancelIndicator(it);
         this.cancelIndicators.add(cancelIndicator);
         this.semaphore.acquire(this.MAX_PERMITS);
         try {
-          final CancelIndicator _function_2 = () -> {
+          final CancelIndicator _function_1 = () -> {
             cancelIndicator.checkCanceled();
             return false;
           };
-          return writeRequest.apply(_function_2);
+          return writeRequest.apply(_function_1);
         } catch (final Throwable _t) {
           if (_t instanceof Throwable) {
             final Throwable t = (Throwable)_t;
