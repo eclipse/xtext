@@ -49,8 +49,8 @@
 
 	<repositories>
 		<repository>
-			<id>lsapi-from-jenkins</id>
-			<url>http://services.typefox.io/open-source/jenkins/job/lsapi/lastStableBuild/artifact/build/maven-repository/</url>
+			<id>lsp4j-from-jenkins</id>
+			<url>http://services.typefox.io/open-source/jenkins/job/lsp4j/lastStableBuild/artifact/build/maven-repository/</url>
 		</repository>
 		<repository>
 			<id>xtext-lib-from-jenkins</id>
@@ -79,9 +79,9 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>io.typefox.lsapi</groupId>
-			<artifactId>io.typefox.lsapi.services</artifactId>
-			<version>0.4.0-SNAPSHOT</version>
+			<groupId>org.eclipse.lsp4j</groupId>
+			<artifactId>org.eclipse.lsp4j</artifactId>
+			<version>0.1.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtend</groupId>
