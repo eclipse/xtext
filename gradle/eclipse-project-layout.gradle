@@ -31,6 +31,12 @@ jar {
 		from(sourceSets.test.output)
 }
 
+sourcesJar {
+	from ('.') {
+		include 'about*.*'
+	}
+}
+
 if (isTestProject || name.contains('example')) {
 	tasks.withType(Javadoc) {
 		enabled = false
