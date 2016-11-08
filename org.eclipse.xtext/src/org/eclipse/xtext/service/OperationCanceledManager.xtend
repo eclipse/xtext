@@ -29,7 +29,7 @@ class OperationCanceledManager {
 	}
 	
 	def isOperationCanceledException(Throwable t) {
-		t.platformOperationCanceledException != null
+		t.platformOperationCanceledException !== null
 	}
 	
 	/**
@@ -58,7 +58,7 @@ class OperationCanceledManager {
 			return throwable
 		}
 		val platform = getPlatformOperationCanceledException(throwable)
-		if (platform != null) {
+		if (platform !== null) {
 			return new OperationCanceledError(platform)
 		}
 		return null
@@ -73,7 +73,7 @@ class OperationCanceledManager {
 	}
 	
 	def void checkCanceled(CancelIndicator indicator) {
-		if (indicator != null && indicator.isCanceled) {
+		if (indicator !== null && indicator.isCanceled) {
 			throwOperationCanceledException
 		}
 	}

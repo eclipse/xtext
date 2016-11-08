@@ -39,7 +39,7 @@ class ResourceStorageFacade implements IResourceStorageFacade {
 	 */
 	override boolean shouldLoadFromStorage(StorageAwareResource resource) {
 		val adapter = SourceLevelURIsAdapter.findInstalledAdapter(resource.resourceSet)
-		if (adapter == null) {
+		if (adapter === null) {
 			return false;
 		} else {
 			if (adapter.sourceLevelURIs.contains(resource.URI))
@@ -57,9 +57,9 @@ class ResourceStorageFacade implements IResourceStorageFacade {
 	 */
 	override ResourceStorageLoadable getOrCreateResourceStorageLoadable(StorageAwareResource resource) {
 		val stateProvider = resource.resourceSet.eAdapters.filter(ResourceStorageProviderAdapter).head
-		if (stateProvider != null) {
+		if (stateProvider !== null) {
 			val inputStream = stateProvider.getResourceStorageLoadable(resource)
-			if (inputStream != null)
+			if (inputStream !== null)
 				return inputStream
 		}
 		val inputStream = if (resource.resourceSet.URIConverter.exists(resource.URI.getBinaryStorageURI, emptyMap)) {
@@ -99,7 +99,7 @@ class ResourceStorageFacade implements IResourceStorageFacade {
 	 */
 	protected def doesStorageExist(StorageAwareResource resource) {
 		val stateProvider = resource.resourceSet.eAdapters.filter(ResourceStorageProviderAdapter).head
-		if (stateProvider!=null && stateProvider.getResourceStorageLoadable(resource) != null)
+		if (stateProvider !== null && stateProvider.getResourceStorageLoadable(resource) !== null)
 			return true;
 		// check for next to original location, i.e. jars
 		if (resource.resourceSet.URIConverter.exists(resource.URI.getBinaryStorageURI, emptyMap)) {

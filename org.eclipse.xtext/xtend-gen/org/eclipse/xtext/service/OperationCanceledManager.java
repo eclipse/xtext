@@ -53,7 +53,7 @@ public class OperationCanceledManager {
   
   public boolean isOperationCanceledException(final Throwable t) {
     RuntimeException _platformOperationCanceledException = this.getPlatformOperationCanceledException(t);
-    return (!Objects.equal(_platformOperationCanceledException, null));
+    return (_platformOperationCanceledException != null);
   }
   
   /**
@@ -84,8 +84,7 @@ public class OperationCanceledManager {
       return ((Error)throwable);
     }
     final RuntimeException platform = this.getPlatformOperationCanceledException(throwable);
-    boolean _notEquals = (!Objects.equal(platform, null));
-    if (_notEquals) {
+    if ((platform != null)) {
       return new OperationCanceledError(platform);
     }
     return null;
@@ -101,7 +100,7 @@ public class OperationCanceledManager {
   }
   
   public void checkCanceled(final CancelIndicator indicator) {
-    if (((!Objects.equal(indicator, null)) && indicator.isCanceled())) {
+    if (((indicator != null) && indicator.isCanceled())) {
       this.throwOperationCanceledException();
     }
   }

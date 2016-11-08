@@ -68,8 +68,7 @@ class SerializationExtensions {
   }
   
   public static void writeURI(final ObjectOutput out, final URI uri) throws IOException {
-    boolean _equals = Objects.equal(uri, null);
-    if (_equals) {
+    if ((uri == null)) {
       out.writeUTF("NULL");
     } else {
       String _string = uri.toString();

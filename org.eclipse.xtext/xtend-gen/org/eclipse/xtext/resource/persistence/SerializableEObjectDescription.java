@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.resource.persistence;
 
-import com.google.common.base.Objects;
 import java.io.Externalizable;
 import java.io.IOException;
 import java.io.ObjectInput;
@@ -52,8 +51,7 @@ public class SerializableEObjectDescription implements IEObjectDescription, Exte
   
   @Override
   public EObject getEObjectOrProxy() {
-    boolean _equals = Objects.equal(this.eObjectOrProxy, null);
-    if (_equals) {
+    if ((this.eObjectOrProxy == null)) {
       final EObject proxy = EcoreUtil.create(this.eClass);
       ((InternalEObject) proxy).eSetProxyURI(this.eObjectURI);
       this.eObjectOrProxy = proxy;

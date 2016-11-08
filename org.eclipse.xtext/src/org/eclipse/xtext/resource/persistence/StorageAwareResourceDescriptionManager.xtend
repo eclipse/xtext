@@ -20,7 +20,7 @@ class StorageAwareResourceDescriptionManager extends DefaultResourceDescriptionM
 	
 	override getResourceDescription(Resource resource) {
 		switch resource {
-			StorageAwareResource case resource.resourceDescription != null 
+			StorageAwareResource case resource.resourceDescription !== null 
 				    : resource.resourceDescription
 			default :  super.getResourceDescription(resource)
 		}

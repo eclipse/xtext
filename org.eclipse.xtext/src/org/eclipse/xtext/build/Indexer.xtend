@@ -89,10 +89,10 @@ import org.eclipse.xtext.resource.persistence.SerializableEObjectDescriptionProv
 	protected def List<Delta> getDeltasForDeletedResources(BuildRequest request, ResourceDescriptionsData oldIndex,
 		extension BuildContext context) {
 		val deltas = <Delta>newArrayList()
-		request.deletedFiles.filter[context.getResourceServiceProvider(it) != null].forEach [
+		request.deletedFiles.filter[context.getResourceServiceProvider(it) !== null].forEach [
 			context.cancelIndicator.checkCanceled
 			val IResourceDescription oldDescription = oldIndex?.getResourceDescription(it)
-			if (oldDescription != null) {
+			if (oldDescription !== null) {
 				val delta = new DefaultResourceDescriptionDelta(oldDescription, null)
 				deltas += delta
 			}
@@ -158,7 +158,7 @@ import org.eclipse.xtext.resource.persistence.SerializableEObjectDescriptionProv
 					result.eSetProxyURI(from.getEObjectURI)
 					var Map<String, String> userData = null
 					for (key : from.userDataKeys) {
-						if (userData == null)
+						if (userData === null)
 							userData = Maps.newHashMapWithExpectedSize(2)
 						userData.put(key, from.getUserData(key))
 					}

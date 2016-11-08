@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.build;
 
-import com.google.common.base.Objects;
 import java.io.File;
 import java.util.List;
 import org.apache.log4j.Logger;
@@ -80,8 +79,7 @@ public class BuildRequest {
   private URI baseDir;
   
   public URI getBaseDir() {
-    boolean _equals = Objects.equal(this.baseDir, null);
-    if (_equals) {
+    if ((this.baseDir == null)) {
       final String userDir = System.getProperty("user.dir");
       File _file = new File(userDir);
       URI _createFolderURI = UriUtil.createFolderURI(_file);

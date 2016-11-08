@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.resource.persistence;
 
-import com.google.common.base.Objects;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionManager;
@@ -26,8 +25,8 @@ public class StorageAwareResourceDescriptionManager extends DefaultResourceDescr
     boolean _matched = false;
     if (resource instanceof StorageAwareResource) {
       IResourceDescription _resourceDescription = ((StorageAwareResource)resource).getResourceDescription();
-      boolean _notEquals = (!Objects.equal(_resourceDescription, null));
-      if (_notEquals) {
+      boolean _tripleNotEquals = (_resourceDescription != null);
+      if (_tripleNotEquals) {
         _matched=true;
         _switchResult = ((StorageAwareResource)resource).getResourceDescription();
       }

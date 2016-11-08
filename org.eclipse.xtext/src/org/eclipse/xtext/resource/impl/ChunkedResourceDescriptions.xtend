@@ -66,11 +66,11 @@ import org.eclipse.xtext.util.internal.EmfAdaptable
 	}
 	
 	protected def void setResourceSet(ResourceSet resourceSet) {
-		if (this.resourceSet != null) {
+		if (this.resourceSet !== null) {
 			throw new IllegalStateException("This "+class.name+" is already associated with a different resource set.")
 		}
 		val index = findInEmfObject(resourceSet)
-		if (index != null) {
+		if (index !== null) {
 			throw new IllegalStateException("There is already a different "+class.name+" installed in the given resource set.")
 		}
 		this.resourceSet = resourceSet
@@ -96,7 +96,7 @@ import org.eclipse.xtext.util.internal.EmfAdaptable
 	override getResourceDescription(URI uri) {
 		for (selectable : chunk2resourceDescriptions.values) {
 			val result = selectable.getResourceDescription(uri)
-			if (result != null)
+			if (result !== null)
 				return result
 		}
 		return null
@@ -105,7 +105,7 @@ import org.eclipse.xtext.util.internal.EmfAdaptable
 	def ResourceDescriptionsData getContainer(URI uri) {
 		for (container : chunk2resourceDescriptions.values) {
 			val result = container.getResourceDescription(uri)
-			if (result != null)
+			if (result !== null)
 				return container
 		}
 		return null

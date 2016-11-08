@@ -34,7 +34,7 @@ class StorageAwareResource extends LazyLinkingResource {
 	@Accessors IResourceDescription resourceDescription = null;
 	
 	override load(Map<?, ?> options) throws IOException {
-		if (!isLoaded && !isLoading && resourceStorageFacade!=null && resourceStorageFacade.shouldLoadFromStorage(this)) {
+		if (!isLoaded && !isLoading && resourceStorageFacade !== null && resourceStorageFacade.shouldLoadFromStorage(this)) {
 			if (LOG.isDebugEnabled) {
 				LOG.debug("Loading "+URI+" from storage.")
 			}
@@ -53,7 +53,7 @@ class StorageAwareResource extends LazyLinkingResource {
 	}
 	
 	def void loadFromStorage(ResourceStorageLoadable storageInputStream) throws IOException {
-		if (storageInputStream == null) {
+		if (storageInputStream === null) {
 			throw new NullPointerException('storageInputStream')
 		}
 		val task = Stopwatches.forTask("Loading from storage")

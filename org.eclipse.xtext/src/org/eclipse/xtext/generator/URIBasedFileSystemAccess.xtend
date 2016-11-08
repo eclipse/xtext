@@ -61,10 +61,10 @@ class URIBasedFileSystemAccess extends AbstractFileSystemAccess2 {
 
 	override getURI(String path, String outputConfiguration) {
 		val outlet = pathes.get(outputConfiguration)
-		if (outlet == null)
+		if (outlet === null)
 			throw new IllegalArgumentException("A slot with name '" + outputConfiguration + "' has not been configured.");
 		val uri = URI.createFileURI(outlet + File.separator + path)
-		if (baseDir != null) {
+		if (baseDir !== null) {
 			val resolved = uri.resolve(baseDir);
 			return resolved
 		} else {
