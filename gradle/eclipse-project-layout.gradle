@@ -8,10 +8,13 @@ def sourceDirs = ['src', 'xtend-gen', 'src-gen', 'emf-gen']
 
 sourceSets {
 	configure(isTestProject? test : main) {
-		java.srcDirs = sourceDirs
+		java {
+			srcDirs = sourceDirs
+			include '**/*.java', '**/*.xtend'
+		}
 		resources {
 			srcDirs = sourceDirs
-			exclude '**/*.java', '**/*.xtendbin', '**/*.xtend', '**/*._trace'
+			exclude '**/*.java', '**/*.xtend', '**/*.xtendbin', '**/*._trace'
 		}
 	}
 	configure(isTestProject? main : test) {
