@@ -27,7 +27,7 @@ public abstract class AbstractEObjectRegion extends AbstractTextSegment implemen
 	private EObject grammarElement;
 	private IHiddenRegion nextHidden;
 	private IHiddenRegion previousHidden;
-	private EObject semantcElement;
+	private EObject semanticElement;
 	private final List<ISemanticRegion> semanticRegions = Lists.newArrayList();
 
 	public AbstractEObjectRegion(AbstractRegionAccess access) {
@@ -76,7 +76,7 @@ public abstract class AbstractEObjectRegion extends AbstractTextSegment implemen
 
 	@Override
 	public EObject getSemanticElement() {
-		return semantcElement;
+		return semanticElement;
 	}
 
 	@Override
@@ -128,8 +128,8 @@ public abstract class AbstractEObjectRegion extends AbstractTextSegment implemen
 		this.previousHidden = leading;
 	}
 
-	protected void setSemantcElement(EObject semantcElement) {
-		this.semantcElement = semantcElement;
+	protected void setSemanticElement(EObject semanticElement) {
+		this.semanticElement = semanticElement;
 	}
 
 	protected void setTrailingHiddenRegion(IHiddenRegion trailing) {
