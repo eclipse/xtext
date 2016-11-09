@@ -23,7 +23,7 @@ import org.eclipse.lsp4j.SignatureHelp;
 import org.eclipse.lsp4j.SignatureInformation;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.EcoreUtil2;
-import org.eclipse.xtext.ide.server.signatureHelp.SignatureHelpService;
+import org.eclipse.xtext.ide.server.signatureHelp.ISignatureHelpService;
 import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Operation;
 import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.OperationCall;
 import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Parameter;
@@ -58,7 +58,7 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
  * @author akos.kitta - Initial contribution and API
  */
 @SuppressWarnings("all")
-public class SignatureHelpServiceImpl implements SignatureHelpService {
+public class SignatureHelpServiceImpl implements ISignatureHelpService {
   private final static String OPENING_CHAR = "(";
   
   private final static String CLOSING_CHAR = ")";
@@ -123,7 +123,7 @@ public class SignatureHelpServiceImpl implements SignatureHelpService {
         return this.getSignatureHelp(((OperationCall)object), operationName, offset);
       }
     }
-    return SignatureHelpService.EMPTY;
+    return ISignatureHelpService.EMPTY;
   }
   
   private SignatureHelp getSignatureHelp(final OperationCall call, final String operationName, final int offset) {
@@ -134,10 +134,10 @@ public class SignatureHelpServiceImpl implements SignatureHelpService {
       {
         final String text = node.getText();
         if ((Objects.equal(SignatureHelpServiceImpl.OPENING_CHAR, text) && (node.getOffset() >= offset))) {
-          return SignatureHelpService.EMPTY;
+          return ISignatureHelpService.EMPTY;
         } else {
           if ((Objects.equal(SignatureHelpServiceImpl.CLOSING_CHAR, text) && (node.getOffset() < offset))) {
-            return SignatureHelpService.EMPTY;
+            return ISignatureHelpService.EMPTY;
           } else {
             boolean _equals = Objects.equal(SignatureHelpServiceImpl.SEPARATOR_CHAR, text);
             if (_equals) {
@@ -163,12 +163,12 @@ public class SignatureHelpServiceImpl implements SignatureHelpService {
           Integer _get = separatorIndices.get(i);
           boolean _greaterThan = (_plus > (_get).intValue());
           if (_greaterThan) {
-            return SignatureHelpService.EMPTY;
+            return ISignatureHelpService.EMPTY;
           }
         }
       }
     } else {
-      return SignatureHelpService.EMPTY;
+      return ISignatureHelpService.EMPTY;
     }
     int _xifexpression = (int) 0;
     if ((paramCount == 0)) {
@@ -201,15 +201,37 @@ public class SignatureHelpServiceImpl implements SignatureHelpService {
       _xifexpression_2 = 1;
     }
     final int paramOffset = _xifexpression_2;
+    Integer _xifexpression_3 = null;
+    if ((paramCount == 0)) {
+      Integer _xblockexpression = null;
+      {
+        final Function1<Operation, Integer> _function_1 = (Operation it) -> {
+          EList<Parameter> _params_1 = it.getParams();
+          return Integer.valueOf(_params_1.size());
+        };
+        final Iterable<Integer> paramSize = IterableExtensions.<Operation, Integer>map(visibleOperations, _function_1);
+        Integer _xifexpression_4 = null;
+        if (((!IterableExtensions.<Integer>exists(paramSize, ((Function1<Integer, Boolean>) (Integer it) -> {
+          return Boolean.valueOf(((it).intValue() == 0));
+        }))) && IterableExtensions.<Operation>exists(visibleOperations, ((Function1<Operation, Boolean>) (Operation it) -> {
+          EList<Parameter> _params_1 = it.getParams();
+          boolean _isEmpty = _params_1.isEmpty();
+          return Boolean.valueOf((!_isEmpty));
+        })))) {
+          _xifexpression_4 = Integer.valueOf(0);
+        } else {
+          _xifexpression_4 = null;
+        }
+        _xblockexpression = _xifexpression_4;
+      }
+      _xifexpression_3 = _xblockexpression;
+    } else {
+      _xifexpression_3 = Integer.valueOf((currentParameter - paramOffset));
+    }
+    final Integer activeParamIndex = _xifexpression_3;
     SignatureHelp _signatureHelp = new SignatureHelp();
     final Procedure1<SignatureHelp> _function_1 = (SignatureHelp it) -> {
-      Integer _xifexpression_3 = null;
-      if ((paramCount == 0)) {
-        _xifexpression_3 = null;
-      } else {
-        _xifexpression_3 = Integer.valueOf((currentParameter - paramOffset));
-      }
-      it.setActiveParameter(_xifexpression_3);
+      it.setActiveParameter(activeParamIndex);
       it.setActiveSignature(Integer.valueOf(0));
       final Function1<Operation, SignatureInformation> _function_2 = (Operation operation) -> {
         SignatureInformation _signatureInformation = new SignatureInformation();

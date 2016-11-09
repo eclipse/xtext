@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.server.signatureHelp;
 
+import static java.util.Collections.*;
+
 import org.eclipse.lsp4j.SignatureHelp;
 import org.eclipse.xtext.resource.XtextResource;
 
@@ -19,13 +21,13 @@ import com.google.inject.Singleton;
  * 
  * @author akos.kitta - Initial contribution and API
  */
-@ImplementedBy(SignatureHelpService.Noop.class)
-public interface SignatureHelpService {
+@ImplementedBy(ISignatureHelpService.Noop.class)
+public interface ISignatureHelpService {
 
 	/**
 	 * Shared, immutable empty instance. 
 	 */
-	SignatureHelp EMPTY = new SignatureHelp();
+	SignatureHelp EMPTY = new SignatureHelp(emptyList(), null, null);
 	
 	/**
 	 * Returns with a {@link SignatureHelp signature help} instance for a
@@ -42,12 +44,12 @@ public interface SignatureHelpService {
 	SignatureHelp getSignatureHelp(final XtextResource resource, final int offset);
 
 	/**
-	 * NOOP {@link SignatureHelpService signature help service} implementation.
+	 * NOOP {@link ISignatureHelpService signature help service} implementation.
 	 * 
 	 * @author akos.kitta - Initial contribution and API
 	 */
 	@Singleton
-	public static class Noop implements SignatureHelpService {
+	public static class Noop implements ISignatureHelpService {
 		
 		@Override
 		public SignatureHelp getSignatureHelp(final XtextResource resource, final int offset) {

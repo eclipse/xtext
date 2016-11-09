@@ -8,7 +8,7 @@
 package org.eclipse.xtext.ide.tests.testlanguage;
 
 import org.eclipse.xtext.formatting2.IFormatter2;
-import org.eclipse.xtext.ide.server.signatureHelp.SignatureHelpService;
+import org.eclipse.xtext.ide.server.signatureHelp.ISignatureHelpService;
 import org.eclipse.xtext.ide.tests.testlanguage.AbstractTestLanguageRuntimeModule;
 import org.eclipse.xtext.ide.tests.testlanguage.formatting2.TestLanguageFormatter;
 import org.eclipse.xtext.ide.tests.testlanguage.signatureHelp.SignatureHelpServiceImpl;
@@ -22,7 +22,7 @@ public class TestLanguageRuntimeModule extends AbstractTestLanguageRuntimeModule
     return TestLanguageFormatter.class;
   }
   
-  public Class<? extends SignatureHelpService> bindSignatureHelpService() {
+  public Class<? extends ISignatureHelpService> bindSignatureHelpService() {
     return SignatureHelpServiceImpl.class;
   }
 }

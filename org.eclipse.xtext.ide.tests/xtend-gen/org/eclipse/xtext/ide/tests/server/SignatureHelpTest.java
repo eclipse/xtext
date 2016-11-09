@@ -8,7 +8,6 @@
 package org.eclipse.xtext.ide.tests.server;
 
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.ide.server.signatureHelp.SignatureHelpService;
 import org.eclipse.xtext.ide.tests.server.AbstractTestLangLanguageServerTest;
 import org.eclipse.xtext.ide.tests.testlanguage.signatureHelp.SignatureHelpServiceImpl;
 import org.eclipse.xtext.testing.SignatureHelpConfiguration;
@@ -24,6 +23,22 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class SignatureHelpTest extends AbstractTestLangLanguageServerTest {
   private final static int LINE_NUMBER = 12;
+  
+  @Test
+  public void singleArgsExactMatchAfterTriggerChar() {
+    final Procedure1<SignatureHelpConfiguration> _function = (SignatureHelpConfiguration it) -> {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("type A { op foo(a: A) { } } type Main { op main() { foo() } }");
+      it.setModel(_builder.toString());
+      it.setLine(0);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("type A { op foo(a: A) { } } type Main { op main() { foo(");
+      int _length = _builder_1.length();
+      it.setColumn(_length);
+      it.setExpectedSignatureHelp("A.foo(a: A): void | a: A");
+    };
+    this.testSignatureHelp(_function);
+  }
   
   @Test
   public void noArgsExactMatch() {

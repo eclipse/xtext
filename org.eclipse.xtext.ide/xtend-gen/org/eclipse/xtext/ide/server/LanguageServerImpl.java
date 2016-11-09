@@ -90,7 +90,7 @@ import org.eclipse.xtext.ide.server.findReferences.WorkspaceResourceAccess;
 import org.eclipse.xtext.ide.server.formatting.FormattingService;
 import org.eclipse.xtext.ide.server.hover.HoverService;
 import org.eclipse.xtext.ide.server.occurrences.IDocumentHighlightService;
-import org.eclipse.xtext.ide.server.signatureHelp.SignatureHelpService;
+import org.eclipse.xtext.ide.server.signatureHelp.ISignatureHelpService;
 import org.eclipse.xtext.ide.server.symbol.DocumentSymbolService;
 import org.eclipse.xtext.ide.server.symbol.WorkspaceSymbolService;
 import org.eclipse.xtext.resource.IResourceDescriptions;
@@ -569,11 +569,11 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
       String _uri = _textDocument.getUri();
       final URI uri = this._uriExtensions.toUri(_uri);
       final IResourceServiceProvider serviceProvider = this.languagesRegistry.getResourceServiceProvider(uri);
-      SignatureHelpService _get = null;
+      ISignatureHelpService _get = null;
       if (serviceProvider!=null) {
-        _get=serviceProvider.<SignatureHelpService>get(SignatureHelpService.class);
+        _get=serviceProvider.<ISignatureHelpService>get(ISignatureHelpService.class);
       }
-      final SignatureHelpService helper = _get;
+      final ISignatureHelpService helper = _get;
       if ((helper == null)) {
         return new SignatureHelp();
       }

@@ -13,9 +13,11 @@ import java.util.Arrays
 import java.util.Comparator
 import java.util.List
 import org.eclipse.emf.ecore.EObject
+import org.eclipse.lsp4j.ParameterInformation
+import org.eclipse.lsp4j.SignatureHelp
 import org.eclipse.lsp4j.SignatureInformation
 import org.eclipse.xtext.EcoreUtil2
-import org.eclipse.xtext.ide.server.signatureHelp.SignatureHelpService
+import org.eclipse.xtext.ide.server.signatureHelp.ISignatureHelpService
 import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Operation
 import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.OperationCall
 import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.PrimitiveType
@@ -27,15 +29,13 @@ import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.scoping.IScopeProvider
-import org.eclipse.lsp4j.SignatureHelp
-import org.eclipse.lsp4j.ParameterInformation
 
 /**
  * Signature help service implementation for the test language.
  * 
  * @author akos.kitta - Initial contribution and API
  */
-class SignatureHelpServiceImpl implements SignatureHelpService {
+class SignatureHelpServiceImpl implements ISignatureHelpService {
 
     private static val OPENING_CHAR = '(';
     
@@ -140,8 +140,15 @@ class SignatureHelpServiceImpl implements SignatureHelpService {
 		]
 		
 		val paramOffset = if (separatorIndices.contains(offset)) 2 else 1;
+		val Integer activeParamIndex = if (paramCount === 0) {
+			val paramSize = visibleOperations.map[params.size];
+			// If on declaration-side no no-args exists, propose the first parameter on use-side.
+			if (!paramSize.exists[it === 0] && visibleOperations.exists[!params.empty]) 0 else null;
+		} else {
+			currentParameter - paramOffset
+		}
 		return new SignatureHelp => [
-                    activeParameter = if (paramCount === 0) null else currentParameter - paramOffset;
+                    activeParameter = activeParamIndex
                     activeSignature = 0;
                     signatures = visibleOperations.map [ operation |
                         new SignatureInformation => [
