@@ -9,23 +9,22 @@ package org.eclipse.xtext.ide.server.concurrent;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import com.google.inject.name.Named;
+import java.util.concurrent.CancellationException;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.Semaphore;
-import java.util.function.BiConsumer;
-import java.util.function.Consumer;
-import java.util.function.Supplier;
+import java.util.function.Function;
 import org.apache.log4j.Logger;
-import org.eclipse.xtext.ide.server.concurrent.CancellableIndicator;
+import org.eclipse.lsp4j.jsonrpc.CancelChecker;
+import org.eclipse.lsp4j.jsonrpc.CompletableFutures;
+import org.eclipse.xtext.ide.server.concurrent.Cancellable;
 import org.eclipse.xtext.ide.server.concurrent.RequestCancelIndicator;
 import org.eclipse.xtext.service.OperationCanceledManager;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -36,35 +35,20 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 public class RequestManager {
   private final static Logger LOGGER = Logger.getLogger(RequestManager.class);
   
-  public final static String READ_EXECUTOR_SERVICE = "org.eclipse.xtext.ide.server.concurrent.RequestManager.readExecutorService";
-  
-  public final static String WRITE_EXECUTOR_SERVICE = "org.eclipse.xtext.ide.server.concurrent.RequestManager.writeExecutorService";
-  
   private final int MAX_PERMITS = Integer.MAX_VALUE;
   
   @Inject
-  @Named(RequestManager.READ_EXECUTOR_SERVICE)
-  private ExecutorService readExecutorService;
-  
-  @Inject
-  @Named(RequestManager.WRITE_EXECUTOR_SERVICE)
-  private ExecutorService writeExecutorService;
+  private ExecutorService executorService;
   
   @Inject
   private OperationCanceledManager operationCanceledManager;
   
-  private final LinkedBlockingQueue<CancellableIndicator> cancelIndicators = new LinkedBlockingQueue<CancellableIndicator>();
+  private final LinkedBlockingQueue<Cancellable> cancelIndicators = new LinkedBlockingQueue<Cancellable>();
   
   private final Semaphore semaphore = new Semaphore(this.MAX_PERMITS);
   
   public void shutdown() {
-    this.readExecutorService.shutdown();
-    this.writeExecutorService.shutdown();
-  }
-  
-  public CompletableFuture<Void> runWrite(final Procedure1<? super CancelIndicator> writeRequest) {
-    RequestCancelIndicator _requestCancelIndicator = new RequestCancelIndicator();
-    return this.runWrite(writeRequest, _requestCancelIndicator);
+    this.executorService.shutdown();
   }
   
   /**
@@ -75,43 +59,43 @@ public class RequestManager {
    * Currently <i>running requests</i> will be cancelled.
    * </p>
    * <p>
-   * A provided cancel indicator should implement {@link org.eclipse.xtext.ide.server.concurrent.CancellableIndicator CancellableIndicator}
+   * A provided cancel indicator should implement {@link CancellableIndicator CancellableIndicator}
    * to let the given request to be cancelled by a write request.
    * </p>
    */
-  public CompletableFuture<Void> runWrite(final Procedure1<? super CancelIndicator> writeRequest, final CancelIndicator cancelIndicator) {
-    try {
-      final Consumer<CancellableIndicator> _function = (CancellableIndicator it) -> {
-        it.cancel();
-      };
-      this.cancelIndicators.forEach(_function);
-      if ((cancelIndicator instanceof CancellableIndicator)) {
-        this.cancelIndicators.add(((CancellableIndicator)cancelIndicator));
-      }
-      this.semaphore.acquire(this.MAX_PERMITS);
-      final Runnable _function_1 = () -> {
+  public <V extends Object> CompletableFuture<V> runWrite(final Function1<? super CancelIndicator, ? extends V> writeRequest) {
+    final Function<CancelChecker, V> _function = (CancelChecker it) -> {
+      try {
+        final RequestCancelIndicator cancelIndicator = new RequestCancelIndicator(it);
+        this.cancelIndicators.add(cancelIndicator);
+        this.semaphore.acquire(this.MAX_PERMITS);
         try {
-          writeRequest.apply(cancelIndicator);
+          final CancelIndicator _function_1 = () -> {
+            cancelIndicator.checkCanceled();
+            return false;
+          };
+          return writeRequest.apply(_function_1);
+        } catch (final Throwable _t) {
+          if (_t instanceof Throwable) {
+            final Throwable t = (Throwable)_t;
+            boolean _isCancelException = this.isCancelException(t);
+            if (_isCancelException) {
+              RequestManager.LOGGER.info("request cancelled.");
+              throw new CancellationException();
+            }
+            throw t;
+          } else {
+            throw Exceptions.sneakyThrow(_t);
+          }
         } finally {
+          this.cancelIndicators.remove(cancelIndicator);
           this.semaphore.release(this.MAX_PERMITS);
         }
-      };
-      CompletableFuture<Void> _runAsync = CompletableFuture.runAsync(_function_1, this.writeExecutorService);
-      final BiConsumer<Void, Throwable> _function_2 = (Void result, Throwable throwable) -> {
-        if ((cancelIndicator instanceof CancellableIndicator)) {
-          this.cancelIndicators.remove(((CancellableIndicator)cancelIndicator));
-        }
-        this.handleError(throwable);
-      };
-      return _runAsync.whenComplete(_function_2);
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
-  }
-  
-  public <V extends Object> CompletableFuture<V> runRead(final Function1<? super CancelIndicator, ? extends V> readRequest) {
-    RequestCancelIndicator _requestCancelIndicator = new RequestCancelIndicator();
-    return this.<V>runRead(readRequest, _requestCancelIndicator);
+      } catch (Throwable _e) {
+        throw Exceptions.sneakyThrow(_e);
+      }
+    };
+    return CompletableFutures.<V>computeAsync(this.executorService, _function);
   }
   
   /**
@@ -123,39 +107,46 @@ public class RequestManager {
    * </ul>
    * </p>
    * <p>
-   * A provided cancel indicator should implement {@link org.eclipse.xtext.ide.server.concurrent.CancellableIndicator CancellableIndicator}
-   * to let the given request to be cancelled by a write request.
    * </p>
    */
-  public <V extends Object> CompletableFuture<V> runRead(final Function1<? super CancelIndicator, ? extends V> readRequest, final CancelIndicator cancelIndicator) {
-    try {
-      if ((cancelIndicator instanceof CancellableIndicator)) {
-        this.cancelIndicators.add(((CancellableIndicator)cancelIndicator));
-      }
-      this.semaphore.acquire(1);
-      final Supplier<V> _function = () -> {
+  public <V extends Object> CompletableFuture<V> runRead(final Function1<? super CancelIndicator, ? extends V> readRequest) {
+    final Function<CancelChecker, V> _function = (CancelChecker it) -> {
+      try {
+        final RequestCancelIndicator cancelIndicator = new RequestCancelIndicator(it);
+        this.cancelIndicators.add(cancelIndicator);
+        this.semaphore.acquire(1);
         try {
-          return readRequest.apply(cancelIndicator);
+          final CancelIndicator _function_1 = () -> {
+            cancelIndicator.checkCanceled();
+            return false;
+          };
+          return readRequest.apply(_function_1);
+        } catch (final Throwable _t) {
+          if (_t instanceof Throwable) {
+            final Throwable t = (Throwable)_t;
+            boolean _isCancelException = this.isCancelException(t);
+            if (_isCancelException) {
+              RequestManager.LOGGER.info("request cancelled.");
+              throw new CancellationException();
+            }
+            throw t;
+          } else {
+            throw Exceptions.sneakyThrow(_t);
+          }
         } finally {
+          this.cancelIndicators.remove(cancelIndicator);
           this.semaphore.release(1);
         }
-      };
-      CompletableFuture<V> _supplyAsync = CompletableFuture.<V>supplyAsync(_function, this.readExecutorService);
-      final BiConsumer<V, Throwable> _function_1 = (V result, Throwable throwable) -> {
-        if ((cancelIndicator instanceof CancellableIndicator)) {
-          this.cancelIndicators.remove(((CancellableIndicator)cancelIndicator));
-        }
-        this.handleError(throwable);
-      };
-      return _supplyAsync.whenComplete(_function_1);
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+      } catch (Throwable _e) {
+        throw Exceptions.sneakyThrow(_e);
+      }
+    };
+    return CompletableFutures.<V>computeAsync(this.executorService, _function);
   }
   
-  protected void handleError(final Throwable t) {
+  protected boolean isCancelException(final Throwable t) {
     if ((t == null)) {
-      return;
+      return false;
     }
     Throwable _xifexpression = null;
     if ((t instanceof CompletionException)) {
@@ -164,13 +155,6 @@ public class RequestManager {
       _xifexpression = t;
     }
     final Throwable cause = _xifexpression;
-    boolean _isOperationCanceledException = this.operationCanceledManager.isOperationCanceledException(cause);
-    if (_isOperationCanceledException) {
-      RequestManager.LOGGER.trace("Request has been canceled.");
-    } else {
-      String _message = t.getMessage();
-      String _plus = ("Request fails: " + _message);
-      RequestManager.LOGGER.error(_plus, t);
-    }
+    return this.operationCanceledManager.isOperationCanceledException(cause);
   }
 }

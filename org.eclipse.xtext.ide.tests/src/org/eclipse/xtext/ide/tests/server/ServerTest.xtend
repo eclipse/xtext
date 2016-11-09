@@ -7,9 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.tests.server
 
-import io.typefox.lsapi.FileChangeType
-import io.typefox.lsapi.impl.DidChangeWatchedFilesParamsImpl
-import io.typefox.lsapi.impl.FileEventImpl
+import org.eclipse.lsp4j.DidChangeWatchedFilesParams
+import org.eclipse.lsp4j.FileChangeType
+import org.eclipse.lsp4j.FileEvent
 import org.junit.Test
 
 import static org.junit.Assert.*
@@ -61,7 +61,7 @@ class ServerTest extends AbstractTestLangLanguageServerTest {
         ''')
         
     	languageServer.getWorkspaceService.didChangeWatchedFiles(
-    		new DidChangeWatchedFilesParamsImpl(#[new FileEventImpl(path, FileChangeType.Created)])
+    		new DidChangeWatchedFilesParams(#[new FileEvent(path, FileChangeType.Created)])
     	)
     	assertNotNull(diagnostics.get(path))
     	assertTrue(diagnostics.values.join(','), diagnostics.values.forall[empty])

@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.build;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
 import com.google.inject.Inject;
@@ -158,8 +157,7 @@ public class Indexer {
         String[] _userDataKeys = from.getUserDataKeys();
         for (final String key : _userDataKeys) {
           {
-            boolean _equals = Objects.equal(userData, null);
-            if (_equals) {
+            if ((userData == null)) {
               HashMap<String, String> _newHashMapWithExpectedSize = Maps.<String, String>newHashMapWithExpectedSize(2);
               userData = _newHashMapWithExpectedSize;
             }
@@ -285,7 +283,7 @@ public class Indexer {
     List<URI> _deletedFiles = request.getDeletedFiles();
     final Function1<URI, Boolean> _function = (URI it) -> {
       IResourceServiceProvider _resourceServiceProvider = context.getResourceServiceProvider(it);
-      return Boolean.valueOf((!Objects.equal(_resourceServiceProvider, null)));
+      return Boolean.valueOf((_resourceServiceProvider != null));
     };
     Iterable<URI> _filter = IterableExtensions.<URI>filter(_deletedFiles, _function);
     final Consumer<URI> _function_1 = (URI it) -> {
@@ -296,8 +294,7 @@ public class Indexer {
         _resourceDescription=oldIndex.getResourceDescription(it);
       }
       final IResourceDescription oldDescription = _resourceDescription;
-      boolean _notEquals = (!Objects.equal(oldDescription, null));
-      if (_notEquals) {
+      if ((oldDescription != null)) {
         final DefaultResourceDescriptionDelta delta = new DefaultResourceDescriptionDelta(oldDescription, null);
         deltas.add(delta);
       }

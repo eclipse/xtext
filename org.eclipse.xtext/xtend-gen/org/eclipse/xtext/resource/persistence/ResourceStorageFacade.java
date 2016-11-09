@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.resource.persistence;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
@@ -77,8 +76,7 @@ public class ResourceStorageFacade implements IResourceStorageFacade {
   public boolean shouldLoadFromStorage(final StorageAwareResource resource) {
     ResourceSet _resourceSet = resource.getResourceSet();
     final SourceLevelURIsAdapter adapter = SourceLevelURIsAdapter.findInstalledAdapter(_resourceSet);
-    boolean _equals = Objects.equal(adapter, null);
-    if (_equals) {
+    if ((adapter == null)) {
       return false;
     } else {
       ImmutableSet<URI> _sourceLevelURIs = adapter.getSourceLevelURIs();
@@ -105,11 +103,9 @@ public class ResourceStorageFacade implements IResourceStorageFacade {
       EList<Adapter> _eAdapters = _resourceSet.eAdapters();
       Iterable<ResourceStorageProviderAdapter> _filter = Iterables.<ResourceStorageProviderAdapter>filter(_eAdapters, ResourceStorageProviderAdapter.class);
       final ResourceStorageProviderAdapter stateProvider = IterableExtensions.<ResourceStorageProviderAdapter>head(_filter);
-      boolean _notEquals = (!Objects.equal(stateProvider, null));
-      if (_notEquals) {
+      if ((stateProvider != null)) {
         final ResourceStorageLoadable inputStream = stateProvider.getResourceStorageLoadable(resource);
-        boolean _notEquals_1 = (!Objects.equal(inputStream, null));
-        if (_notEquals_1) {
+        if ((inputStream != null)) {
           return inputStream;
         }
       }
@@ -186,7 +182,7 @@ public class ResourceStorageFacade implements IResourceStorageFacade {
     EList<Adapter> _eAdapters = _resourceSet.eAdapters();
     Iterable<ResourceStorageProviderAdapter> _filter = Iterables.<ResourceStorageProviderAdapter>filter(_eAdapters, ResourceStorageProviderAdapter.class);
     final ResourceStorageProviderAdapter stateProvider = IterableExtensions.<ResourceStorageProviderAdapter>head(_filter);
-    if (((!Objects.equal(stateProvider, null)) && (!Objects.equal(stateProvider.getResourceStorageLoadable(resource), null)))) {
+    if (((stateProvider != null) && (stateProvider.getResourceStorageLoadable(resource) != null))) {
       return true;
     }
     ResourceSet _resourceSet_1 = resource.getResourceSet();

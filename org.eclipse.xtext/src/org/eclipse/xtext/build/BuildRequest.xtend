@@ -27,7 +27,7 @@ class BuildRequest {
 	
 	URI baseDir
 	def URI getBaseDir() {
-		if (baseDir == null) {
+		if (baseDir === null) {
 			val userDir = System.getProperty('user.dir')
 			baseDir = UriUtil.createFolderURI(new File(userDir)) 
 		}

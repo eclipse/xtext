@@ -7,8 +7,8 @@
  */
 package org.eclipse.xtext.testing;
 
-import io.typefox.lsapi.SymbolInformation;
 import java.util.List;
+import org.eclipse.lsp4j.SymbolInformation;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.testing.TextDocumentConfiguration;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;

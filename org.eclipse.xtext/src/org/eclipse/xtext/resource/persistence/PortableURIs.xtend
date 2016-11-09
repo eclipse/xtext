@@ -69,7 +69,7 @@ class PortableURIs {
 		mock.EType = desc.descriptionEClass
 		val scope = globalScopeProvider.getScope(resource, mock, Predicates.alwaysTrue)
 		val description = scope.getElements(desc.descriptionQualifiedName).head
-		if (description == null) {
+		if (description === null) {
 			return null
 		}
 		val container = EcoreUtil.resolve(description.EObjectOrProxy, resource)
@@ -89,9 +89,9 @@ class PortableURIs {
 	def URI toPortableURI(StorageAwareResource sourceResource, URI targetURI) {
 		val to = sourceResource.resourceSet.getResource(targetURI.trimFragment, false)?.getEObject(targetURI.fragment)
 		// if it points to some registered ecore, there's no resourceSet and the result is not portable 
-		if (to == null || to.eResource?.resourceSet != null) {
+		if (to === null || to.eResource?.resourceSet !== null) {
 			val result = toPortableURI(sourceResource, to);
-			if (result != null) {
+			if (result !== null) {
 				return result
 			}
 		}
@@ -109,11 +109,11 @@ class PortableURIs {
 	 * @return a portable URI or <code>null</code> 
 	 */
 	def URI toPortableURI(StorageAwareResource sourceResource, EObject targetObject) {
-		if (targetObject == null || targetObject.eIsProxy) {
+		if (targetObject === null || targetObject.eIsProxy) {
 			return sourceResource.URI.appendFragment(StorageAwareResource.UNRESOLVABLE_FRAGMENT)
 		}
 		val portableFragment = getPortableURIFragment(targetObject)
-		if (portableFragment != null) {
+		if (portableFragment !== null) {
 			return sourceResource.URI.appendFragment(portableFragment)
 		}
 		return null
@@ -125,14 +125,14 @@ class PortableURIs {
 	protected def String getPortableURIFragment(EObject obj) {
 		val descriptions = resourceDescriptionsProvider.getResourceDescriptions(obj.eResource)
 		val desc = descriptions.getResourceDescription(obj.eResource.URI)
-		if (desc == null) {
+		if (desc === null) {
 			return null
 		}
 		val containerDesc = desc.exportedObjects.findFirst [
 			val possibleContainer = EcoreUtil.resolve(EObjectOrProxy, obj.eResource)
 			obj==possibleContainer || EcoreUtil.isAncestor(obj, possibleContainer)
 		]
-		if (containerDesc != null) {
+		if (containerDesc !== null) {
 			val fragmentDescription = createPortableFragmentDescription(containerDesc, obj)
 			return toFragmentString(fragmentDescription)
 		}
@@ -149,7 +149,7 @@ class PortableURIs {
 		val eclassUriAsString = URI.encodeFragment(EcoreUtil.getURI(desc.descriptionEClass).toString, false)
 		val segments = desc.descriptionQualifiedName.segments
 		var uriFragment = PORTABLE_SCHEME + '#' + eclassUriAsString + '#'+ URI.encodeFragment(segments.join(':'), false)
-		if (desc.descriptionRelativeFragment != null) {
+		if (desc.descriptionRelativeFragment !== null) {
 			uriFragment += '#' + URI.encodeFragment(desc.descriptionRelativeFragment, false)
 		}
 		return uriFragment
@@ -184,10 +184,10 @@ class PortableURIs {
 		var lastChild = toChild as InternalEObject
 		var lastContainer = lastChild.eInternalContainer
 		var result = lastContainer.eURIFragmentSegment(lastChild.eContainingFeature, lastChild)
-		while (lastContainer != null && fromContainer != lastContainer) {
+		while (lastContainer !== null && fromContainer != lastContainer) {
 			lastChild = lastContainer
 			lastContainer = lastContainer.eInternalContainer
-			if (lastContainer == null) {
+			if (lastContainer === null) {
 				throw new IllegalStateException("No more containers for element "+lastChild)
 			}
 			result = lastContainer.eURIFragmentSegment(lastChild.eContainingFeature, lastChild)+'/'+result
@@ -204,7 +204,7 @@ class PortableURIs {
 	 * @return the resolved EObject based. If the given fragment is <code>null</null>, the given EObject itself will be returned.
 	 */
 	public def EObject getEObject(EObject from, String toFragment) {
-		if (toFragment == null)
+		if (toFragment === null)
 			return from
 		val splitted = Splitter.on("/").split(toFragment)
 		return splitted.fold(from) [ 

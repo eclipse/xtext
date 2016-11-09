@@ -7,95 +7,100 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.server
 
+import com.google.common.collect.LinkedListMultimap
+import com.google.common.collect.Multimap
 import com.google.inject.Inject
-import com.google.inject.Provider
-import io.typefox.lsapi.CodeActionParams
-import io.typefox.lsapi.CodeLens
-import io.typefox.lsapi.CodeLensParams
-import io.typefox.lsapi.CompletionItem
-import io.typefox.lsapi.CompletionList
-import io.typefox.lsapi.DiagnosticSeverity
-import io.typefox.lsapi.DidChangeConfigurationParams
-import io.typefox.lsapi.DidChangeTextDocumentParams
-import io.typefox.lsapi.DidChangeWatchedFilesParams
-import io.typefox.lsapi.DidCloseTextDocumentParams
-import io.typefox.lsapi.DidOpenTextDocumentParams
-import io.typefox.lsapi.DidSaveTextDocumentParams
-import io.typefox.lsapi.DocumentFormattingParams
-import io.typefox.lsapi.DocumentOnTypeFormattingParams
-import io.typefox.lsapi.DocumentRangeFormattingParams
-import io.typefox.lsapi.DocumentSymbolParams
-import io.typefox.lsapi.FileChangeType
-import io.typefox.lsapi.InitializeParams
-import io.typefox.lsapi.InitializeResult
-import io.typefox.lsapi.Location
-import io.typefox.lsapi.MessageParams
-import io.typefox.lsapi.PublishDiagnosticsParams
-import io.typefox.lsapi.ReferenceParams
-import io.typefox.lsapi.RenameParams
-import io.typefox.lsapi.ShowMessageRequestParams
-import io.typefox.lsapi.SymbolInformation
-import io.typefox.lsapi.TextDocumentPositionParams
-import io.typefox.lsapi.TextDocumentSyncKind
-import io.typefox.lsapi.WorkspaceSymbolParams
-import io.typefox.lsapi.builders.CompletionListBuilder
-import io.typefox.lsapi.impl.CompletionOptionsImpl
-import io.typefox.lsapi.impl.DiagnosticImpl
-import io.typefox.lsapi.impl.HoverImpl
-import io.typefox.lsapi.impl.InitializeResultImpl
-import io.typefox.lsapi.impl.PositionImpl
-import io.typefox.lsapi.impl.PublishDiagnosticsParamsImpl
-import io.typefox.lsapi.impl.RangeImpl
-import io.typefox.lsapi.impl.ServerCapabilitiesImpl
-import io.typefox.lsapi.impl.SignatureHelpImpl
-import io.typefox.lsapi.impl.SignatureHelpOptionsImpl
-import io.typefox.lsapi.impl.TextEditImpl
-import io.typefox.lsapi.services.LanguageServer
-import io.typefox.lsapi.services.TextDocumentService
-import io.typefox.lsapi.services.WindowService
-import io.typefox.lsapi.services.WorkspaceService
 import java.util.Collections
 import java.util.List
+import java.util.Map
 import java.util.concurrent.CompletableFuture
-import java.util.function.Consumer
+import java.util.function.Function
 import org.eclipse.emf.common.util.URI
-import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.lsp4j.CodeActionParams
+import org.eclipse.lsp4j.CodeLens
+import org.eclipse.lsp4j.CodeLensParams
+import org.eclipse.lsp4j.CompletionItem
+import org.eclipse.lsp4j.CompletionList
+import org.eclipse.lsp4j.CompletionOptions
+import org.eclipse.lsp4j.Diagnostic
+import org.eclipse.lsp4j.DiagnosticSeverity
+import org.eclipse.lsp4j.DidChangeConfigurationParams
+import org.eclipse.lsp4j.DidChangeTextDocumentParams
+import org.eclipse.lsp4j.DidChangeWatchedFilesParams
+import org.eclipse.lsp4j.DidCloseTextDocumentParams
+import org.eclipse.lsp4j.DidOpenTextDocumentParams
+import org.eclipse.lsp4j.DidSaveTextDocumentParams
+import org.eclipse.lsp4j.DocumentFormattingParams
+import org.eclipse.lsp4j.DocumentOnTypeFormattingParams
+import org.eclipse.lsp4j.DocumentRangeFormattingParams
+import org.eclipse.lsp4j.DocumentSymbolParams
+import org.eclipse.lsp4j.FileChangeType
+import org.eclipse.lsp4j.Hover
+import org.eclipse.lsp4j.InitializeParams
+import org.eclipse.lsp4j.InitializeResult
+import org.eclipse.lsp4j.Location
+import org.eclipse.lsp4j.Position
+import org.eclipse.lsp4j.PublishDiagnosticsParams
+import org.eclipse.lsp4j.Range
+import org.eclipse.lsp4j.ReferenceParams
+import org.eclipse.lsp4j.RenameParams
+import org.eclipse.lsp4j.ServerCapabilities
+import org.eclipse.lsp4j.SignatureHelp
+import org.eclipse.lsp4j.SignatureHelpOptions
+import org.eclipse.lsp4j.SymbolInformation
+import org.eclipse.lsp4j.TextDocumentPositionParams
+import org.eclipse.lsp4j.TextDocumentSyncKind
+import org.eclipse.lsp4j.TextEdit
+import org.eclipse.lsp4j.WorkspaceSymbolParams
+import org.eclipse.lsp4j.jsonrpc.Endpoint
+import org.eclipse.lsp4j.jsonrpc.json.JsonRpcMethod
+import org.eclipse.lsp4j.jsonrpc.json.JsonRpcMethodProvider
+import org.eclipse.lsp4j.jsonrpc.services.ServiceEndpoints
+import org.eclipse.lsp4j.services.LanguageClient
+import org.eclipse.lsp4j.services.LanguageClientAware
+import org.eclipse.lsp4j.services.LanguageServer
+import org.eclipse.lsp4j.services.TextDocumentService
+import org.eclipse.lsp4j.services.WorkspaceService
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
-import org.eclipse.xtext.ide.server.concurrent.CancellableIndicator
 import org.eclipse.xtext.ide.server.concurrent.RequestManager
 import org.eclipse.xtext.ide.server.contentassist.ContentAssistService
 import org.eclipse.xtext.ide.server.findReferences.WorkspaceResourceAccess
 import org.eclipse.xtext.ide.server.formatting.FormattingService
 import org.eclipse.xtext.ide.server.hover.HoverService
+import org.eclipse.xtext.ide.server.occurrences.IDocumentHighlightService
 import org.eclipse.xtext.ide.server.symbol.DocumentSymbolService
 import org.eclipse.xtext.ide.server.symbol.WorkspaceSymbolService
 import org.eclipse.xtext.resource.IResourceServiceProvider
-import org.eclipse.xtext.service.OperationCanceledManager
 import org.eclipse.xtext.util.CancelIndicator
+import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.validation.Issue
-import org.eclipse.xtext.ide.server.occurrences.IDocumentHighlightService
 import org.eclipse.xtext.ide.server.signatureHelp.ISignatureHelpService
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  * @since 2.11
  */
-@Accessors class LanguageServerImpl implements LanguageServer, WorkspaceService, WindowService, TextDocumentService {
+@Log class LanguageServerImpl implements LanguageServer, WorkspaceService, TextDocumentService, LanguageClientAware, Endpoint, JsonRpcMethodProvider {
 
-	@Inject
-	RequestManager requestManager
-	
-	@Inject
-	WorkspaceSymbolService workspaceSymbolService
-
-	InitializeParams params
-	@Inject Provider<WorkspaceManager> workspaceManagerProvider
-	WorkspaceManager workspaceManager
+	@Inject RequestManager requestManager
+	@Inject WorkspaceSymbolService workspaceSymbolService
 	@Inject extension UriExtensions
 	@Inject extension IResourceServiceProvider.Registry languagesRegistry
-	@Inject OperationCanceledManager operationCanceledManager
+
+	// injected below
+	WorkspaceManager workspaceManager
+	InitializeParams params
+	
+	@Inject
+	def void setWorkspaceManager(WorkspaceManager manager) {
+		this.workspaceManager = manager
+		resourceAccess = new WorkspaceResourceAccess(workspaceManager)
+	}
 
 	override CompletableFuture<InitializeResult> initialize(InitializeParams params) {
+		if (this.params !== null) {
+			throw new IllegalStateException("This language server has already been initialized.")
+		}
 		if (params.rootPath === null) {
 			throw new IllegalArgumentException("Bad initialization request. rootPath must not be null.")
 		}
@@ -103,20 +108,17 @@ import org.eclipse.xtext.ide.server.signatureHelp.ISignatureHelpService
 			throw new IllegalStateException("No Xtext languages have been registered. Please make sure you have added the languages's setup class in '/META-INF/services/org.eclipse.xtext.ISetup'")
 		}
 		this.params = params
-		workspaceManager = workspaceManagerProvider.get
-		resourceAccess = new WorkspaceResourceAccess(workspaceManager)
-
-		val result = new InitializeResultImpl
-		result.capabilities = new ServerCapabilitiesImpl => [
+		val result = new InitializeResult
+		result.capabilities = new ServerCapabilities => [
 			hoverProvider = true
 			definitionProvider = true
 			referencesProvider = true
 			documentSymbolProvider = true
 			workspaceSymbolProvider = true
             //TODO make this language specific
-            signatureHelpProvider = new SignatureHelpOptionsImpl(#['(', ','])
+            signatureHelpProvider = new SignatureHelpOptions(#['(', ','])
 			textDocumentSync = TextDocumentSyncKind.Incremental
-			completionProvider = new CompletionOptionsImpl => [
+			completionProvider = new CompletionOptions => [
 				resolveProvider = false
 				triggerCharacters = #["."]
 			]
@@ -125,18 +127,23 @@ import org.eclipse.xtext.ide.server.signatureHelp.ISignatureHelpService
 			documentHighlightProvider = true
 		]
 
-		requestManager.runWrite([ cancelIndicator |
+		requestManager.runWrite [ cancelIndicator |
 			val rootURI = URI.createFileURI(params.rootPath).toPath.toUri
 			workspaceManager.initialize(rootURI, [this.publishDiagnostics($0, $1)], cancelIndicator)
-		], CancellableIndicator.NullImpl)
+			return null
+		]
 
 		return CompletableFuture.completedFuture(result)
+	}
+	
+	override connect(LanguageClient client) {
+		this.client = client
 	}
 
 	override exit() {
 	}
 
-	override void shutdown() {
+	override CompletableFuture<Void> shutdown() {
 	}
 
 	override TextDocumentService getTextDocumentService() {
@@ -147,46 +154,28 @@ import org.eclipse.xtext.ide.server.signatureHelp.ISignatureHelpService
 		return this
 	}
 
-	override WindowService getWindowService() {
-		return this
-	}
-	
-	// notification callbacks
-	override onTelemetryEvent(Consumer<Object> callback) {
-		// TODO: auto-generated method stub
-	}
-
-	override onShowMessage(Consumer<MessageParams> callback) {
-		// TODO: auto-generated method stub
-	}
-
-	override onShowMessageRequest(Consumer<ShowMessageRequestParams> callback) {
-		// TODO: auto-generated method stub
-	}
-
-	override onLogMessage(Consumer<MessageParams> callback) {
-		// TODO: auto-generated method stub
-	}
-
 	// end notification callbacks
 	// file/content change events
 	override didOpen(DidOpenTextDocumentParams params) {
 		requestManager.runWrite [ cancelIndicator |
 			workspaceManager.didOpen(params.textDocument.uri.toUri, params.textDocument.version, params.textDocument.text, cancelIndicator)
+			return null
 		]
 	}
 
 	override didChange(DidChangeTextDocumentParams params) {
 		requestManager.runWrite [ cancelIndicator |
 			workspaceManager.didChange(params.textDocument.uri.toUri, params.textDocument.version, params.contentChanges.map [ event |
-				new TextEditImpl(event.range as RangeImpl, event.text)
+				new TextEdit(event.range, event.text)
 			], cancelIndicator)
+			return null
 		]
 	}
 
 	override didClose(DidCloseTextDocumentParams params) {
 		requestManager.runWrite [ cancelIndicator |
 			workspaceManager.didClose(params.textDocument.uri.toUri, cancelIndicator)
+			return null
 		]
 	}
 
@@ -207,37 +196,33 @@ import org.eclipse.xtext.ide.server.signatureHelp.ISignatureHelpService
 				}
 			}
 			workspaceManager.doBuild(dirtyFiles, deletedFiles, cancelIndicator)
+			return null
 		]
 	}
 	
 	override didChangeConfiguration(DidChangeConfigurationParams params) {
         requestManager.runWrite [ cancelIndicator |
             workspaceManager.refreshWorkspaceConfig(cancelIndicator)
+            return null
         ]
     }
 
 	// end file/content change events
-	// validation stuff
-	private List<Consumer<PublishDiagnosticsParams>> diagnosticListeners = newArrayList()
     
     WorkspaceResourceAccess resourceAccess
-
-	override onPublishDiagnostics(Consumer<PublishDiagnosticsParams> callback) {
-		diagnosticListeners.add(callback)
-	}
+	
+	LanguageClient client
 
 	private def void publishDiagnostics(URI uri, Iterable<? extends Issue> issues) {
-		val diagnostics = new PublishDiagnosticsParamsImpl => [
+		val diagnostics = new PublishDiagnosticsParams => [
 			it.uri = toPath(uri)
 			it.diagnostics = issues.map[toDiagnostic].toList
 		]
-		for (diagnosticsCallback : diagnosticListeners) {
-			diagnosticsCallback.accept(diagnostics)
-		}
+		client.publishDiagnostics(diagnostics)
 	}
 
-	private def DiagnosticImpl toDiagnostic(Issue issue) {
-		new DiagnosticImpl => [
+	private def Diagnostic toDiagnostic(Issue issue) {
+		new Diagnostic => [
 			code = issue.code
 			severity = switch issue.severity {
 				case ERROR: DiagnosticSeverity.Error
@@ -249,9 +234,9 @@ import org.eclipse.xtext.ide.server.signatureHelp.ISignatureHelpService
             val lineNumber = (issue.lineNumber ?: 1) - 1
             val column = (issue.column ?: 1) - 1
             val length = (issue.length ?: 0)
-			range = new RangeImpl(
-				new PositionImpl(lineNumber, column),
-				new PositionImpl(lineNumber, column + length)
+			range = new Range(
+				new Position(lineNumber, column),
+				new Position(lineNumber, column + length)
 			)
 		]
 	}
@@ -281,7 +266,7 @@ import org.eclipse.xtext.ide.server.signatureHelp.ISignatureHelpService
 			val resourceServiceProvider = uri.resourceServiceProvider
 			val contentAssistService = resourceServiceProvider?.get(ContentAssistService)
 			if (contentAssistService === null)
-				return new CompletionListBuilder().build();
+				return new CompletionList();
             
             val result = workspaceManager.doRead(uri) [ document, resource |
                 return contentAssistService.createCompletionList(document, resource, params, cancelIndicator)
@@ -363,7 +348,7 @@ import org.eclipse.xtext.ide.server.signatureHelp.ISignatureHelpService
 			val resourceServiceProvider = uri.resourceServiceProvider
 			val hoverService = resourceServiceProvider?.get(HoverService)
 			if (hoverService === null)
-				return new HoverImpl(emptyList, null)
+				return new Hover(emptyList, null)
 
 			return workspaceManager.doRead(uri) [ document, resource |
 				val offset = document.getOffSet(params.position)
@@ -384,7 +369,7 @@ import org.eclipse.xtext.ide.server.signatureHelp.ISignatureHelpService
             val serviceProvider = uri.resourceServiceProvider;
             val helper = serviceProvider?.get(ISignatureHelpService);
             if (helper === null) {
-                return new SignatureHelpImpl(); 
+                return new SignatureHelp(); 
             }
             
             return workspaceManager.doRead(uri, [doc, resource |
@@ -463,6 +448,97 @@ import org.eclipse.xtext.ide.server.signatureHelp.ISignatureHelpService
 
 	override rename(RenameParams params) {
 		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+	}
+	
+	override notify(String method, Object parameter) {
+		for (endpoint : extensionProviders.get(method)) {
+			try {
+				endpoint.notify(method, parameter)
+			} catch (UnsupportedOperationException e) {
+				if (e !== ILanguageServerExtension.NOT_HANDLED_EXCEPTION) {
+					throw e
+				}
+			}
+		}
+	}
+	
+	override request(String method, Object parameter) {
+		if (!extensionProviders.containsKey(method)) {
+			throw new UnsupportedOperationException("The json request '"+method+"' is unknown.")
+		}
+		for (endpoint : extensionProviders.get(method)) {
+			try {
+				return endpoint.request(method, parameter)
+			} catch (UnsupportedOperationException e) {
+				if (e !== ILanguageServerExtension.NOT_HANDLED_EXCEPTION) {
+					throw e
+				}
+			}
+		}
+	}
+	
+	
+	private Map<String, JsonRpcMethod> supportedMethods = null
+	private Multimap<String, Endpoint> extensionProviders = LinkedListMultimap.create
+	
+	override supportedMethods() {
+		if (this.supportedMethods !== null) {
+			return this.supportedMethods
+		}
+		synchronized (extensionProviders) {
+			val supportedMethods = <String,JsonRpcMethod>newLinkedHashMap()
+			supportedMethods.putAll(ServiceEndpoints.getSupportedMethods(class))
+			val extensions = <String,JsonRpcMethod>newLinkedHashMap()
+			for (resourceServiceProvider : languagesRegistry.extensionToFactoryMap.values.toSet.filter(IResourceServiceProvider)) {
+				val ext = resourceServiceProvider.get(ILanguageServerExtension)
+				if (ext !== null) {
+					ext.initialize(access)
+					val supportedExtensions = if (ext instanceof JsonRpcMethodProvider) {
+						ext.supportedMethods
+					} else {
+						ServiceEndpoints.getSupportedMethods(ext.class)
+					}
+					for (entry : supportedExtensions.entrySet) {
+						if (supportedMethods.containsKey(entry.key)) {
+							LOG.error("The json rpc method '"+entry.key+"' can not be an extension as it is already defined in the LSP standard.")
+						} else {
+							val existing = extensions.put(entry.key, entry.value)
+							if (existing !== null && existing != entry.value) {
+								LOG.error("An incompatible LSP extension '"+entry.key+"' has already been registered. Using 1 ignoring 2. \n1 : "+existing+" \n2 : "+entry.value)
+								extensions.put(entry.key, existing)
+							} else {
+								val endpoint = ServiceEndpoints.toEndpoint(ext)
+								extensionProviders.put(entry.key, endpoint)
+								supportedMethods.put(entry.key, entry.value)
+							}
+						}
+					}
+				}
+			}
+			this.supportedMethods = supportedMethods
+			return supportedMethods
+		}
+	}
+	
+	ILanguageServerAccess access = new ILanguageServerAccess () {
+		
+		override <T> doRead(String uri, Function<Context, T> function) {
+				requestManager.runRead [ cancelIndicator |
+					workspaceManager.doRead(uri.toUri) [ document, resource |
+						val ctx = new Context(resource, document, workspaceManager.isDocumentOpen(resource.URI), cancelIndicator)
+						return function.apply(ctx)
+					]
+				]
+		}
+		
+		override addBuildListener(IBuildListener listener) {
+			workspaceManager.addBuildListener(listener)
+		}
+		
+		override getLanguageClient() {
+			client
+		}
+		
 	}
 
 }

@@ -7,8 +7,8 @@
  */
 package org.eclipse.xtext.testing;
 
-import io.typefox.lsapi.Location;
 import java.util.List;
+import org.eclipse.lsp4j.Location;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.testing.TextDocumentPositionConfiguration;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;

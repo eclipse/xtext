@@ -9,15 +9,16 @@ package org.eclipse.xtext.ide.server.concurrent
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
-import com.google.inject.name.Named
+import java.util.concurrent.CancellationException
 import java.util.concurrent.CompletableFuture
+import java.util.concurrent.CompletionException
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.LinkedBlockingQueue
 import java.util.concurrent.Semaphore
-import org.eclipse.xtext.util.CancelIndicator
 import org.apache.log4j.Logger
+import org.eclipse.xtext.util.CancelIndicator
+import org.eclipse.lsp4j.jsonrpc.CompletableFutures
 import org.eclipse.xtext.service.OperationCanceledManager
-import java.util.concurrent.CompletionException
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -28,33 +29,20 @@ class RequestManager {
     
     static val LOGGER = Logger.getLogger(RequestManager)
 
-	public static val READ_EXECUTOR_SERVICE = 'org.eclipse.xtext.ide.server.concurrent.RequestManager.readExecutorService'
-	public static val WRITE_EXECUTOR_SERVICE = 'org.eclipse.xtext.ide.server.concurrent.RequestManager.writeExecutorService'
-
 	val final MAX_PERMITS = Integer.MAX_VALUE
 
 	@Inject
-	@Named(READ_EXECUTOR_SERVICE)
-	ExecutorService readExecutorService
+	ExecutorService executorService
 
-	@Inject
-	@Named(WRITE_EXECUTOR_SERVICE)
-	ExecutorService writeExecutorService
-	
 	@Inject
 	OperationCanceledManager operationCanceledManager
 
-	val cancelIndicators = new LinkedBlockingQueue<CancellableIndicator>
+	val cancelIndicators = new LinkedBlockingQueue<Cancellable>
 
 	val semaphore = new Semaphore(MAX_PERMITS)
 
 	def void shutdown() {
-		readExecutorService.shutdown()
-		writeExecutorService.shutdown()
-	}
-
-	def CompletableFuture<Void> runWrite((CancelIndicator)=>void writeRequest) {
-		return runWrite(writeRequest, new RequestCancelIndicator)
+		executorService.shutdown()
 	}
 
 	/**
@@ -65,34 +53,34 @@ class RequestManager {
 	 * Currently <i>running requests</i> will be cancelled.
 	 * </p>
 	 * <p>
-	 * A provided cancel indicator should implement {@link org.eclipse.xtext.ide.server.concurrent.CancellableIndicator CancellableIndicator} 
+	 * A provided cancel indicator should implement {@link CancellableIndicator CancellableIndicator} 
 	 * to let the given request to be cancelled by a write request.
 	 * </p>
 	 */
-	def CompletableFuture<Void> runWrite((CancelIndicator)=>void writeRequest, CancelIndicator cancelIndicator) {
-		cancelIndicators.forEach[cancel]
-
-		if (cancelIndicator instanceof CancellableIndicator)
+	def <V> CompletableFuture<V> runWrite((CancelIndicator)=>V writeRequest) {
+		return CompletableFutures.computeAsync(executorService) [
+			val cancelIndicator = new RequestCancelIndicator(it)
 			cancelIndicators += cancelIndicator
-
-		semaphore.acquire(MAX_PERMITS)
-		return CompletableFuture.runAsync([
+	
+			semaphore.acquire(MAX_PERMITS)
 			try {
-				writeRequest.apply(cancelIndicator)
+				return writeRequest.apply([
+					cancelIndicator.checkCanceled
+					return false
+				])
+			} catch (Throwable t) {
+	            if (isCancelException(t)) {
+	            	LOGGER.info("request cancelled.")
+	            	throw new CancellationException()
+	            }
+	            throw t
 			} finally {
+				cancelIndicators -= cancelIndicator
 				semaphore.release(MAX_PERMITS)
 			}
-		], writeExecutorService).whenComplete [ result, throwable |
-			if (cancelIndicator instanceof CancellableIndicator)
-				cancelIndicators -= cancelIndicator
-            
-            handleError(throwable)
 		]
 	}
 
-	def <V> CompletableFuture<V> runRead((CancelIndicator)=>V readRequest) {
-		return runRead(readRequest, new RequestCancelIndicator)
-	}
 
 	/**
 	 * <p>
@@ -103,37 +91,35 @@ class RequestManager {
 	 * </ul>
 	 * </p>
 	 * <p>
-	 * A provided cancel indicator should implement {@link org.eclipse.xtext.ide.server.concurrent.CancellableIndicator CancellableIndicator} 
-	 * to let the given request to be cancelled by a write request.
 	 * </p>
 	 */
-	def <V> CompletableFuture<V> runRead((CancelIndicator)=>V readRequest, CancelIndicator cancelIndicator) {
-		if (cancelIndicator instanceof CancellableIndicator)
+	def <V> CompletableFuture<V> runRead((CancelIndicator)=>V readRequest) {
+		return CompletableFutures.computeAsync(executorService) [
+			val cancelIndicator = new RequestCancelIndicator(it)
 			cancelIndicators += cancelIndicator
-
-		semaphore.acquire(1)
-		return CompletableFuture.supplyAsync([
+			semaphore.acquire(1)
 			try {
-				return readRequest.apply(cancelIndicator)
+				return readRequest.apply [
+					cancelIndicator.checkCanceled
+					return false
+				]
+			} catch (Throwable t) {
+	            if (isCancelException(t)) {
+	            	LOGGER.info("request cancelled.")
+	            	throw new CancellationException()
+	            }
+	            throw t
 			} finally {
+				cancelIndicators -= cancelIndicator
 				semaphore.release(1)
 			}
-		], readExecutorService).whenComplete [ result, throwable |
-			if (cancelIndicator instanceof CancellableIndicator)
-				cancelIndicators -= cancelIndicator
-            
-            handleError(throwable)
 		]
 	}
 	
-	protected def void handleError(Throwable t) {
-        if(t === null) return;
+	protected def boolean isCancelException(Throwable t) {
+        if(t === null) return false;
         val cause = if (t instanceof CompletionException) t.cause else t
-        if (operationCanceledManager.isOperationCanceledException(cause)) {
-            LOGGER.trace('Request has been canceled.')
-        } else {
-            LOGGER.error('Request fails: ' + t.message, t)
-        }
+        return operationCanceledManager.isOperationCanceledException(cause);
     }
 
 }

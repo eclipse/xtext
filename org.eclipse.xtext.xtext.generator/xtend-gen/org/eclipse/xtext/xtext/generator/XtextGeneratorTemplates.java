@@ -139,7 +139,7 @@ public class XtextGeneratorTemplates {
           _builder.append("().createInjectorAndDoEMFRegistration();");
           _builder.newLineIfNotEmpty();
           _builder.append("\t");
-          _builder.append("}\t\t\t\t");
+          _builder.append("}");
           _builder.newLine();
           _builder.append("}");
           _builder.newLine();

@@ -9,7 +9,6 @@ package org.eclipse.xtext.ide.server;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import io.typefox.lsapi.TextEdit;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -22,14 +21,17 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.URIConverter;
+import org.eclipse.lsp4j.TextEdit;
 import org.eclipse.xtext.ide.server.BuildManager;
 import org.eclipse.xtext.ide.server.Document;
+import org.eclipse.xtext.ide.server.ILanguageServerAccess;
 import org.eclipse.xtext.ide.server.IProjectDescriptionFactory;
 import org.eclipse.xtext.ide.server.IWorkspaceConfigFactory;
 import org.eclipse.xtext.ide.server.ProjectManager;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.IExternalContentSupport;
+import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
@@ -70,6 +72,12 @@ public class WorkspaceManager {
   private Procedure2<? super URI, ? super Iterable<Issue>> issueAcceptor;
   
   private IWorkspaceConfig workspaceConfig;
+  
+  private List<ILanguageServerAccess.IBuildListener> buildListeners = CollectionLiterals.<ILanguageServerAccess.IBuildListener>newArrayList();
+  
+  public void addBuildListener(final ILanguageServerAccess.IBuildListener listener) {
+    this.buildListeners.add(listener);
+  }
   
   private Map<String, ResourceDescriptionsData> fullIndex = CollectionLiterals.<String, ResourceDescriptionsData>newHashMap();
   
@@ -141,11 +149,20 @@ public class WorkspaceManager {
         this.fullIndex.remove(deletedProject);
       }
     }
-    this.buildManager.doInitialBuild(newProjects, cancelIndicator);
+    final List<IResourceDescription.Delta> result = this.buildManager.doInitialBuild(newProjects, cancelIndicator);
+    this.afterBuild(result);
   }
   
-  public void doBuild(final List<URI> dirtyFiles, final List<URI> deletedFiles, final CancelIndicator cancelIndicator) {
-    this.buildManager.doBuild(dirtyFiles, deletedFiles, cancelIndicator);
+  protected void afterBuild(final List<IResourceDescription.Delta> deltas) {
+    for (final ILanguageServerAccess.IBuildListener listener : this.buildListeners) {
+      listener.afterBuild(deltas);
+    }
+  }
+  
+  public List<IResourceDescription.Delta> doBuild(final List<URI> dirtyFiles, final List<URI> deletedFiles, final CancelIndicator cancelIndicator) {
+    final List<IResourceDescription.Delta> doBuild = this.buildManager.doBuild(dirtyFiles, deletedFiles, cancelIndicator);
+    this.afterBuild(doBuild);
+    return doBuild;
   }
   
   public IResourceDescriptions getIndex() {
@@ -190,23 +207,33 @@ public class WorkspaceManager {
     this.doBuild(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(uri)), _newArrayList, cancelIndicator);
   }
   
-  public void didOpen(final URI uri, final int version, final String contents, final CancelIndicator cancelIndicator) {
-    Document _document = new Document(version, contents);
-    this.openDocuments.put(uri, _document);
-    ArrayList<URI> _newArrayList = CollectionLiterals.<URI>newArrayList();
-    this.doBuild(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(uri)), _newArrayList, cancelIndicator);
+  public List<IResourceDescription.Delta> didOpen(final URI uri, final int version, final String contents, final CancelIndicator cancelIndicator) {
+    List<IResourceDescription.Delta> _xblockexpression = null;
+    {
+      Document _document = new Document(version, contents);
+      this.openDocuments.put(uri, _document);
+      ArrayList<URI> _newArrayList = CollectionLiterals.<URI>newArrayList();
+      _xblockexpression = this.doBuild(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(uri)), _newArrayList, cancelIndicator);
+    }
+    return _xblockexpression;
   }
   
-  public void didClose(final URI uri, final CancelIndicator cancelIndicator) {
-    this.openDocuments.remove(uri);
-    boolean _exists = this.exists(uri);
-    if (_exists) {
-      ArrayList<URI> _newArrayList = CollectionLiterals.<URI>newArrayList();
-      this.doBuild(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(uri)), _newArrayList, cancelIndicator);
-    } else {
-      ArrayList<URI> _newArrayList_1 = CollectionLiterals.<URI>newArrayList();
-      this.doBuild(_newArrayList_1, Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(uri)), cancelIndicator);
+  public List<IResourceDescription.Delta> didClose(final URI uri, final CancelIndicator cancelIndicator) {
+    List<IResourceDescription.Delta> _xblockexpression = null;
+    {
+      this.openDocuments.remove(uri);
+      List<IResourceDescription.Delta> _xifexpression = null;
+      boolean _exists = this.exists(uri);
+      if (_exists) {
+        ArrayList<URI> _newArrayList = CollectionLiterals.<URI>newArrayList();
+        _xifexpression = this.doBuild(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(uri)), _newArrayList, cancelIndicator);
+      } else {
+        ArrayList<URI> _newArrayList_1 = CollectionLiterals.<URI>newArrayList();
+        _xifexpression = this.doBuild(_newArrayList_1, Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(uri)), cancelIndicator);
+      }
+      _xblockexpression = _xifexpression;
     }
+    return _xblockexpression;
   }
   
   protected boolean exists(final URI uri) {
@@ -240,6 +267,10 @@ public class WorkspaceManager {
       _elvis = _document;
     }
     return _elvis;
+  }
+  
+  public boolean isDocumentOpen(final URI uri) {
+    return this.openDocuments.containsKey(uri);
   }
   
   private final static Logger LOG = Logger.getLogger(WorkspaceManager.class);

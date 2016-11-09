@@ -9,27 +9,30 @@ package org.eclipse.xtext.ide.server
 
 import com.google.inject.Inject
 import com.google.inject.Provider
-import io.typefox.lsapi.TextEdit
 import java.util.ArrayList
 import java.util.List
 import java.util.Map
 import org.eclipse.emf.common.util.URI
+import org.eclipse.lsp4j.TextEdit
+import org.eclipse.xtext.ide.server.ILanguageServerAccess.IBuildListener
 import org.eclipse.xtext.resource.IExternalContentSupport.IExternalContentProvider
+import org.eclipse.xtext.resource.IResourceDescription
+import org.eclipse.xtext.resource.IResourceDescription.Delta
 import org.eclipse.xtext.resource.IResourceDescriptions
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.resource.impl.ChunkedResourceDescriptions
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData
 import org.eclipse.xtext.util.CancelIndicator
+import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.validation.Issue
 import org.eclipse.xtext.workspace.IWorkspaceConfig
-import org.eclipse.xtext.util.internal.Log
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  * @since 2.11
  */
 @Log class WorkspaceManager {
-
+	
     @Inject Provider<ProjectManager> projectManagerProvider
     @Inject IWorkspaceConfigFactory workspaceConfigFactory
     @Inject IProjectDescriptionFactory projectDescriptionFactory
@@ -41,9 +44,16 @@ import org.eclipse.xtext.util.internal.Log
     (URI, Iterable<Issue>)=>void issueAcceptor
     IWorkspaceConfig workspaceConfig
     
+    List<IBuildListener> buildListeners = newArrayList
+    
+    def void addBuildListener(IBuildListener listener) {
+    	this.buildListeners += listener	
+    }
+    
     Map<String, ResourceDescriptionsData> fullIndex = newHashMap()
     
     Map<URI, Document> openDocuments = newHashMap()
+    
     val openedDocumentsContentProvider = new IExternalContentProvider() {
 
         override getActualContentProvider() {
@@ -90,11 +100,20 @@ import org.eclipse.xtext.util.internal.Log
             projectName2ProjectManager.remove(deletedProject)
             fullIndex.remove(deletedProject)
         }
-        buildManager.doInitialBuild(newProjects, cancelIndicator)
+        val result = buildManager.doInitialBuild(newProjects, cancelIndicator)
+        afterBuild(result)
     }
+	
+	protected def afterBuild(List<Delta> deltas) {
+		for (listener : buildListeners) {
+			listener.afterBuild(deltas)
+		}
+	}
 
-    def void doBuild(List<URI> dirtyFiles, List<URI> deletedFiles, CancelIndicator cancelIndicator) {
-    	buildManager.doBuild(dirtyFiles, deletedFiles, cancelIndicator)
+    def List<IResourceDescription.Delta> doBuild(List<URI> dirtyFiles, List<URI> deletedFiles, CancelIndicator cancelIndicator) {
+    	val doBuild = buildManager.doBuild(dirtyFiles, deletedFiles, cancelIndicator)
+    	afterBuild(doBuild)
+		return doBuild
     }
     
     def IResourceDescriptions getIndex() {
@@ -161,4 +180,7 @@ import org.eclipse.xtext.util.internal.Log
             ?: new Document(1, resource.parseResult.rootNode.text)
     }
 
+	public def boolean isDocumentOpen(URI uri) {
+		return openDocuments.containsKey(uri)
+	}
 }

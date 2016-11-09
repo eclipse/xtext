@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.build;
 
-import com.google.common.base.Objects;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.lib.annotations.Accessors;
@@ -46,8 +45,7 @@ public class BuildContext {
   private ClusteringStorageAwareResourceLoader loader;
   
   public <T extends Object> Iterable<T> executeClustered(final Iterable<URI> uri, final Function1<? super Resource, ? extends T> operation) {
-    boolean _equals = Objects.equal(this.loader, null);
-    if (_equals) {
+    if ((this.loader == null)) {
       ClusteringStorageAwareResourceLoader _clusteringStorageAwareResourceLoader = new ClusteringStorageAwareResourceLoader(this);
       this.loader = _clusteringStorageAwareResourceLoader;
     }

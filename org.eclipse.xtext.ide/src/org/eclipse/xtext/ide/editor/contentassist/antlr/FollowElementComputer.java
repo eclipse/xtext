@@ -32,6 +32,7 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * @since 2.9
@@ -39,6 +40,11 @@ import com.google.inject.Inject;
 public class FollowElementComputer {
 	
 	@Inject IContentAssistParser parser;
+	
+	/**
+	 * @since 2.11
+	 */
+	@Inject Provider<FollowElementCalculator> feCalculatorProvider;
 	
 	public void collectAbstractElements(Grammar grammar, EStructuralFeature feature, IFollowElementAcceptor followElementAcceptor) {
 		for (Grammar superGrammar : grammar.getUsedGrammars()) {
@@ -59,7 +65,7 @@ public class FollowElementComputer {
 	}
 	
 	public void computeFollowElements(Collection<FollowElement> followElements, final IFollowElementAcceptor followElementAcceptor) {
-		FollowElementCalculator calculator = new FollowElementCalculator();
+		FollowElementCalculator calculator = feCalculatorProvider.get();
 		calculator.acceptor = new IFollowElementAcceptor(){
 			@Override
 			public void accept(AbstractElement element) {

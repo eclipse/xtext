@@ -181,7 +181,7 @@ public class IncrementalBuilder {
               return Boolean.valueOf(Objects.equal(_name, configName));
             };
             final OutputConfiguration config = IterableExtensions.<OutputConfiguration>findFirst(configs, _function_2);
-            if (((!Objects.equal(config, null)) && config.isCleanUpDerivedResources())) {
+            if (((config != null) && config.isCleanUpDerivedResources())) {
               XtextResourceSet _resourceSet_1 = this.context.getResourceSet();
               URIConverter _uRIConverter = _resourceSet_1.getURIConverter();
               Map<Object, Object> _emptyMap = CollectionLiterals.<Object, Object>emptyMap();
@@ -203,14 +203,14 @@ public class IncrementalBuilder {
       List<IResourceDescription.Delta> _resourceDeltas = result.getResourceDeltas();
       final Function1<IResourceDescription.Delta, Boolean> _function_1 = (IResourceDescription.Delta it) -> {
         IResourceDescription _new = it.getNew();
-        return Boolean.valueOf(Objects.equal(_new, null));
+        return Boolean.valueOf((_new == null));
       };
       Iterable<IResourceDescription.Delta> _filter = IterableExtensions.<IResourceDescription.Delta>filter(_resourceDeltas, _function_1);
       Iterables.<IResourceDescription.Delta>addAll(resolvedDeltas, _filter);
       List<IResourceDescription.Delta> _resourceDeltas_1 = result.getResourceDeltas();
       final Function1<IResourceDescription.Delta, Boolean> _function_2 = (IResourceDescription.Delta it) -> {
         IResourceDescription _new = it.getNew();
-        return Boolean.valueOf((!Objects.equal(_new, null)));
+        return Boolean.valueOf((_new != null));
       };
       Iterable<IResourceDescription.Delta> _filter_1 = IterableExtensions.<IResourceDescription.Delta>filter(_resourceDeltas_1, _function_2);
       final Function1<IResourceDescription.Delta, URI> _function_3 = (IResourceDescription.Delta it) -> {
@@ -255,8 +255,7 @@ public class IncrementalBuilder {
       URI _uRI = resource.getURI();
       IResourceServiceProvider _resourceServiceProvider = this.context.getResourceServiceProvider(_uRI);
       final IResourceValidator resourceValidator = _resourceServiceProvider.getResourceValidator();
-      boolean _equals = Objects.equal(resourceValidator, null);
-      if (_equals) {
+      if ((resourceValidator == null)) {
         return true;
       }
       URI _uRI_1 = resource.getURI();
@@ -274,8 +273,7 @@ public class IncrementalBuilder {
       URI _uRI = resource.getURI();
       final IResourceServiceProvider serviceProvider = this.context.getResourceServiceProvider(_uRI);
       final GeneratorDelegate generator = serviceProvider.<GeneratorDelegate>get(GeneratorDelegate.class);
-      boolean _equals = Objects.equal(generator, null);
-      if (_equals) {
+      if ((generator == null)) {
         return;
       }
       URI _uRI_1 = resource.getURI();
@@ -307,8 +305,8 @@ public class IncrementalBuilder {
         boolean _matched = false;
         if (resource instanceof StorageAwareResource) {
           IResourceStorageFacade _resourceStorageFacade = ((StorageAwareResource)resource).getResourceStorageFacade();
-          boolean _notEquals = (!Objects.equal(_resourceStorageFacade, null));
-          if (_notEquals) {
+          boolean _tripleNotEquals = (_resourceStorageFacade != null);
+          if (_tripleNotEquals) {
             _matched=true;
             IResourceStorageFacade _resourceStorageFacade_1 = ((StorageAwareResource)resource).getResourceStorageFacade();
             _resourceStorageFacade_1.saveResource(((StorageAwareResource)resource), fileSystemAccess);
@@ -363,8 +361,7 @@ public class IncrementalBuilder {
           IFilePostProcessor _get = serviceProvider.<IFilePostProcessor>get(IFilePostProcessor.class);
           it.setPostProcessor(_get);
           final IEncodingProvider newEncodingProvider = serviceProvider.<IEncodingProvider>get(IEncodingProvider.class);
-          boolean _notEquals = (!Objects.equal(newEncodingProvider, null));
-          if (_notEquals) {
+          if ((newEncodingProvider != null)) {
             it.setEncodingProvider(newEncodingProvider);
           }
           TraceFileNameProvider _get_1 = serviceProvider.<TraceFileNameProvider>get(TraceFileNameProvider.class);

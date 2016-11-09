@@ -20,6 +20,7 @@ import org.eclipse.xtext.diagnostics.Severity
 import org.eclipse.xtext.resource.impl.ProjectDescription
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtext.resource.IResourceDescription
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -36,10 +37,10 @@ class BuildManager {
     val dirtyFiles = <URI>newLinkedHashSet
     val deletedFiles = <URI>newLinkedHashSet
 
-    def void doBuild(List<URI> dirtyFiles, List<URI> deletedFiles, CancelIndicator cancelIndicator) {
+    def List<IResourceDescription.Delta> doBuild(List<URI> dirtyFiles, List<URI> deletedFiles, CancelIndicator cancelIndicator) {
         queue(this.dirtyFiles, deletedFiles, dirtyFiles)
         queue(this.deletedFiles, dirtyFiles, deletedFiles)
-        internalBuild(cancelIndicator)
+        return internalBuild(cancelIndicator)
     }
     
     protected def void queue(Set<URI> files, Collection<URI> toRemove, Collection<URI> toAdd) {
@@ -47,14 +48,17 @@ class BuildManager {
         files += toAdd
     }
 
-    def void doInitialBuild(List<ProjectDescription> projects, CancelIndicator indicator) {
+    def List<IResourceDescription.Delta> doInitialBuild(List<ProjectDescription> projects, CancelIndicator indicator) {
         val sortedDescriptions = sortByDependencies(projects)
+        val result = newArrayList
         for(description : sortedDescriptions) {
-            workspaceManager.getProjectManager(description.name).doInitialBuild(indicator)
+            val partialresult = workspaceManager.getProjectManager(description.name).doInitialBuild(indicator)
+            result.addAll(partialresult.affectedResources)
         }
+        return result
     }
 
-    protected def void internalBuild(CancelIndicator cancelIndicator) {
+    protected def List<IResourceDescription.Delta> internalBuild(CancelIndicator cancelIndicator) {
         val allDirty = new ArrayList(dirtyFiles)
         val project2dirty = HashMultimap.<ProjectDescription, URI>create 
         for(URI dirty: allDirty) {
@@ -67,13 +71,16 @@ class BuildManager {
             project2deleted.put(projectManager, deleted)
         }
         val sortedDescriptions = sortByDependencies(project2dirty.keySet + project2deleted.keySet)
+        val result = newArrayList()
         for(ProjectDescription it: sortedDescriptions) {
             val projectManager = workspaceManager.getProjectManager(name)
-            val result = projectManager.doBuild(project2dirty.get(it).toList, project2deleted.get(it).toList, cancelIndicator)
-            allDirty.addAll(result.affectedResources.map[uri])
+            val partialResult = projectManager.doBuild(project2dirty.get(it).toList, project2deleted.get(it).toList, cancelIndicator)
+            allDirty.addAll(partialResult.affectedResources.map[uri])
             this.dirtyFiles -= dirtyFiles
             this.deletedFiles -= deletedFiles
-        }        
+            result.addAll(partialResult.affectedResources)
+        }
+        return result
     }
     
     protected def sortByDependencies(Iterable<ProjectDescription> projectDescriptions) {

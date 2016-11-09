@@ -66,7 +66,7 @@ import org.eclipse.xtext.generator.GeneratorContext
 					val configs = serviceProvider.get(IContextualOutputConfigurationProvider2).getOutputConfigurations(request.resourceSet)
 					val configName = newSource2GeneratedMapping.getOutputConfigName(generated)
 					val config = configs.findFirst[name == configName]
-					if (config!=null && config.isCleanUpDerivedResources) {
+					if (config !== null && config.isCleanUpDerivedResources) {
 						context.resourceSet.getURIConverter.delete(generated, emptyMap)
 						request.afterDeleteFile.apply(generated)
 					}
@@ -76,9 +76,9 @@ import org.eclipse.xtext.generator.GeneratorContext
 			request.cancelIndicator.checkCanceled
 			val resolvedDeltas = newArrayList
 			// add deleted deltas
-			resolvedDeltas += result.resourceDeltas.filter[getNew == null]
+			resolvedDeltas += result.resourceDeltas.filter[getNew === null]
 			// add changed and added as fully resolved
-			resolvedDeltas += result.resourceDeltas.filter[getNew != null].map[uri]
+			resolvedDeltas += result.resourceDeltas.filter[getNew !== null].map[uri]
 				.executeClustered [
 					Resource resource |
 					request.cancelIndicator.checkCanceled
@@ -106,7 +106,7 @@ import org.eclipse.xtext.generator.GeneratorContext
 		
 		def protected boolean validate(Resource resource) {
 			val resourceValidator = getResourceServiceProvider(resource.getURI).getResourceValidator();
-			if (resourceValidator == null) {
+			if (resourceValidator === null) {
 				return true
 			}
 			LOG.info("Starting validation for input: '" + resource.getURI.lastSegment + "'");
@@ -117,7 +117,7 @@ import org.eclipse.xtext.generator.GeneratorContext
 		protected def void generate(Resource resource, BuildRequest request, Source2GeneratedMapping newMappings) {
 			val serviceProvider = resource.getURI.getResourceServiceProvider
 			val generator = serviceProvider.get(GeneratorDelegate)
-			if (generator == null) {
+			if (generator === null) {
 				return;
 			}
 			val previous = newMappings.deleteSource(resource.getURI)
@@ -137,7 +137,7 @@ import org.eclipse.xtext.generator.GeneratorContext
 			fileSystemAccess.context = resource
 			if (request.isWriteStorageResources) {
 				switch resource {
-					StorageAwareResource case resource.resourceStorageFacade != null: {
+					StorageAwareResource case resource.resourceStorageFacade !== null: {
 						resource.resourceStorageFacade.saveResource(resource, fileSystemAccess)
 					}
 				}
@@ -163,7 +163,7 @@ import org.eclipse.xtext.generator.GeneratorContext
 				
 				postProcessor = serviceProvider.get(IFilePostProcessor)
 				val newEncodingProvider = serviceProvider.get(IEncodingProvider)
-				if (newEncodingProvider != null)
+				if (newEncodingProvider !== null)
 					encodingProvider = newEncodingProvider
 				traceFileNameProvider = serviceProvider.get(TraceFileNameProvider)
 				traceRegionSerializer = serviceProvider.get(TraceRegionSerializer)

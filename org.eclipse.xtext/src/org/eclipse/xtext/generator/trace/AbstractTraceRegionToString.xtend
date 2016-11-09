@@ -81,7 +81,7 @@ import static extension com.google.common.collect.Multimaps.*
 
 	def protected boolean shouldInclude(AbstractTraceRegion region) {
 		val frame = getLocalFrame()
-		if (frame == null)
+		if (frame === null)
 			return true
 		else
 			return frame.contains(region.myRegion)
@@ -89,7 +89,7 @@ import static extension com.google.common.collect.Multimaps.*
 
 	def protected boolean shouldInclude(AbstractTraceRegion region, ILocationData location) {
 		val frame = getRemoteFrame(location.srcRelativePath ?: region.associatedSrcRelativePath)
-		if (frame == null)
+		if (frame === null)
 			return true
 		else
 			return frame.contains(location)
@@ -139,7 +139,7 @@ import static extension com.google.common.collect.Multimaps.*
 
 	def protected int sortKey(Insert it) {
 		val base = (region.id * Short.MAX_VALUE)
-		return if(location != null && location.id >= 0) base + location.id else base
+		return if(location !== null && location.id >= 0) base + location.id else base
 	}
 
 	def protected String render(Collection<Insert> inserts, int width) {
@@ -151,8 +151,8 @@ import static extension com.google.common.collect.Multimaps.*
 	}
 
 	def protected List<String> render(File file, int width) {
-		val text = if(file.uri == null) localText else file.uri.remoteText
-		val frame = (if(file.uri == null) localFrame else file.uri.remoteFrame) ?: new TextRegion(0, text.length)
+		val text = if(file.uri === null) localText else file.uri.remoteText
+		val frame = (if(file.uri === null) localFrame else file.uri.remoteFrame) ?: new TextRegion(0, text.length)
 		val inframe = file.inserts.filter[offset >= frame.offset && offset <= frame.offset + frame.length]
 		val offsets = inframe.index[offset].asMap.entrySet.toList.sortBy[key]
 		var last = frame.offset

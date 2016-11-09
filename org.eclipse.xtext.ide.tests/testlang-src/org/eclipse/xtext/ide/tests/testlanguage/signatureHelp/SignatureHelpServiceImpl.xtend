@@ -9,14 +9,13 @@ package org.eclipse.xtext.ide.tests.testlanguage.signatureHelp
 
 import com.google.common.base.Preconditions
 import com.google.inject.Inject
-import io.typefox.lsapi.SignatureInformation
-import io.typefox.lsapi.impl.ParameterInformationImpl
-import io.typefox.lsapi.impl.SignatureHelpImpl
-import io.typefox.lsapi.impl.SignatureInformationImpl
 import java.util.Arrays
 import java.util.Comparator
 import java.util.List
 import org.eclipse.emf.ecore.EObject
+import org.eclipse.lsp4j.ParameterInformation
+import org.eclipse.lsp4j.SignatureHelp
+import org.eclipse.lsp4j.SignatureInformation
 import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.ide.server.signatureHelp.ISignatureHelpService
 import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Operation
@@ -148,14 +147,14 @@ class SignatureHelpServiceImpl implements ISignatureHelpService {
 		} else {
 			currentParameter - paramOffset
 		}
-		return new SignatureHelpImpl => [
+		return new SignatureHelp => [
                     activeParameter = activeParamIndex
                     activeSignature = 0;
                     signatures = visibleOperations.map [ operation |
-                        new SignatureInformationImpl() => [
+                        new SignatureInformation => [
                             label = operation.label;
                             parameters = operation.params.map [ param |
-                                new ParameterInformationImpl() => [
+                                new ParameterInformation => [
                                     label = '''«param.name»: «param.type.label»'''
                                 ];
                             ];

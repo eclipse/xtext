@@ -159,7 +159,7 @@ interface SerializableEObjectDescriptionProvider {
 	}
 	
 	override getEObjectOrProxy() {
-		if (eObjectOrProxy == null) {
+		if (eObjectOrProxy === null) {
 			val proxy = EcoreUtil.create(eClass)
 			(proxy as InternalEObject).eSetProxyURI(eObjectURI)
 			eObjectOrProxy = proxy
@@ -264,7 +264,7 @@ package class SerializationExtensions {
 	}
 	
 	def static void writeURI(ObjectOutput out, URI uri) throws IOException {
-		if (uri == null) {
+		if (uri === null) {
 			out.writeUTF("NULL")
 		} else {
 			out.writeUTF(uri.toString)

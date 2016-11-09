@@ -7,10 +7,9 @@
  */
 package org.eclipse.xtext.ide.server;
 
-import io.typefox.lsapi.Position;
-import io.typefox.lsapi.Range;
-import io.typefox.lsapi.TextEdit;
-import io.typefox.lsapi.impl.PositionImpl;
+import org.eclipse.lsp4j.Position;
+import org.eclipse.lsp4j.Range;
+import org.eclipse.lsp4j.TextEdit;
 import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
@@ -54,7 +53,7 @@ public class Document {
     throw new IndexOutOfBoundsException(_plus_1);
   }
   
-  public PositionImpl getPosition(final int offset) {
+  public Position getPosition(final int offset) {
     final int l = this.contents.length();
     if (((offset < 0) || (offset > l))) {
       String _plus = (Integer.valueOf(offset) + " text was : ");
@@ -68,7 +67,7 @@ public class Document {
       {
         final char ch = this.contents.charAt(i);
         if ((i == offset)) {
-          return new PositionImpl(line, column);
+          return new Position(line, column);
         }
         if ((ch == NL)) {
           line++;
@@ -78,7 +77,7 @@ public class Document {
         }
       }
     }
-    return new PositionImpl(line, column);
+    return new Position(line, column);
   }
   
   public Document applyChanges(final Iterable<? extends TextEdit> changes) {

@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.resource.persistence;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.io.IOException;
 import java.util.Collections;
@@ -55,7 +54,7 @@ public class StorageAwareResource extends LazyLinkingResource {
   
   @Override
   public void load(final Map<?, ?> options) throws IOException {
-    if (((((!this.isLoaded) && (!this.isLoading)) && (!Objects.equal(this.resourceStorageFacade, null))) && this.resourceStorageFacade.shouldLoadFromStorage(this))) {
+    if (((((!this.isLoaded) && (!this.isLoading)) && (this.resourceStorageFacade != null)) && this.resourceStorageFacade.shouldLoadFromStorage(this))) {
       boolean _isDebugEnabled = StorageAwareResource.LOG.isDebugEnabled();
       if (_isDebugEnabled) {
         URI _uRI = this.getURI();
@@ -82,8 +81,7 @@ public class StorageAwareResource extends LazyLinkingResource {
   }
   
   public void loadFromStorage(final ResourceStorageLoadable storageInputStream) throws IOException {
-    boolean _equals = Objects.equal(storageInputStream, null);
-    if (_equals) {
+    if ((storageInputStream == null)) {
       throw new NullPointerException("storageInputStream");
     }
     final Stopwatches.StoppedTask task = Stopwatches.forTask("Loading from storage");

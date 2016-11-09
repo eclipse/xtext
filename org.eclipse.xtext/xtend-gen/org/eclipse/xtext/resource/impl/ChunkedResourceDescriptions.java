@@ -8,7 +8,6 @@
 package org.eclipse.xtext.resource.impl;
 
 import com.google.common.annotations.Beta;
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.io.Externalizable;
 import java.io.IOException;
@@ -102,8 +101,7 @@ public class ChunkedResourceDescriptions extends AbstractCompoundSelectable impl
   }
   
   protected void setResourceSet(final ResourceSet resourceSet) {
-    boolean _notEquals = (!Objects.equal(this.resourceSet, null));
-    if (_notEquals) {
+    if ((this.resourceSet != null)) {
       Class<? extends ChunkedResourceDescriptions> _class = this.getClass();
       String _name = _class.getName();
       String _plus = ("This " + _name);
@@ -111,8 +109,7 @@ public class ChunkedResourceDescriptions extends AbstractCompoundSelectable impl
       throw new IllegalStateException(_plus_1);
     }
     final ChunkedResourceDescriptions index = ChunkedResourceDescriptions.findInEmfObject(resourceSet);
-    boolean _notEquals_1 = (!Objects.equal(index, null));
-    if (_notEquals_1) {
+    if ((index != null)) {
       Class<? extends ChunkedResourceDescriptions> _class_1 = this.getClass();
       String _name_1 = _class_1.getName();
       String _plus_2 = ("There is already a different " + _name_1);
@@ -152,8 +149,7 @@ public class ChunkedResourceDescriptions extends AbstractCompoundSelectable impl
     for (final ResourceDescriptionsData selectable : _values) {
       {
         final IResourceDescription result = selectable.getResourceDescription(uri);
-        boolean _notEquals = (!Objects.equal(result, null));
-        if (_notEquals) {
+        if ((result != null)) {
           return result;
         }
       }
@@ -166,8 +162,7 @@ public class ChunkedResourceDescriptions extends AbstractCompoundSelectable impl
     for (final ResourceDescriptionsData container : _values) {
       {
         final IResourceDescription result = container.getResourceDescription(uri);
-        boolean _notEquals = (!Objects.equal(result, null));
-        if (_notEquals) {
+        if ((result != null)) {
           return container;
         }
       }

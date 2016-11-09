@@ -119,10 +119,10 @@ public class BuildManager {
   
   private final LinkedHashSet<URI> deletedFiles = CollectionLiterals.<URI>newLinkedHashSet();
   
-  public void doBuild(final List<URI> dirtyFiles, final List<URI> deletedFiles, final CancelIndicator cancelIndicator) {
+  public List<IResourceDescription.Delta> doBuild(final List<URI> dirtyFiles, final List<URI> deletedFiles, final CancelIndicator cancelIndicator) {
     this.queue(this.dirtyFiles, deletedFiles, dirtyFiles);
     this.queue(this.deletedFiles, dirtyFiles, deletedFiles);
-    this.internalBuild(cancelIndicator);
+    return this.internalBuild(cancelIndicator);
   }
   
   protected void queue(final Set<URI> files, final Collection<URI> toRemove, final Collection<URI> toAdd) {
@@ -130,16 +130,22 @@ public class BuildManager {
     Iterables.<URI>addAll(files, toAdd);
   }
   
-  public void doInitialBuild(final List<ProjectDescription> projects, final CancelIndicator indicator) {
+  public List<IResourceDescription.Delta> doInitialBuild(final List<ProjectDescription> projects, final CancelIndicator indicator) {
     final List<ProjectDescription> sortedDescriptions = this.sortByDependencies(projects);
+    final ArrayList<IResourceDescription.Delta> result = CollectionLiterals.<IResourceDescription.Delta>newArrayList();
     for (final ProjectDescription description : sortedDescriptions) {
-      String _name = description.getName();
-      ProjectManager _projectManager = this.workspaceManager.getProjectManager(_name);
-      _projectManager.doInitialBuild(indicator);
+      {
+        String _name = description.getName();
+        ProjectManager _projectManager = this.workspaceManager.getProjectManager(_name);
+        final IncrementalBuilder.Result partialresult = _projectManager.doInitialBuild(indicator);
+        List<IResourceDescription.Delta> _affectedResources = partialresult.getAffectedResources();
+        result.addAll(_affectedResources);
+      }
     }
+    return result;
   }
   
-  protected void internalBuild(final CancelIndicator cancelIndicator) {
+  protected List<IResourceDescription.Delta> internalBuild(final CancelIndicator cancelIndicator) {
     final ArrayList<URI> allDirty = new ArrayList<URI>(this.dirtyFiles);
     final HashMultimap<ProjectDescription, URI> project2dirty = HashMultimap.<ProjectDescription, URI>create();
     for (final URI dirty : allDirty) {
@@ -161,6 +167,7 @@ public class BuildManager {
     Set<ProjectDescription> _keySet_1 = project2deleted.keySet();
     Iterable<ProjectDescription> _plus = Iterables.<ProjectDescription>concat(_keySet, _keySet_1);
     final List<ProjectDescription> sortedDescriptions = this.sortByDependencies(_plus);
+    final ArrayList<IResourceDescription.Delta> result = CollectionLiterals.<IResourceDescription.Delta>newArrayList();
     for (final ProjectDescription it : sortedDescriptions) {
       {
         String _name = it.getName();
@@ -169,8 +176,8 @@ public class BuildManager {
         List<URI> _list = IterableExtensions.<URI>toList(_get);
         Set<URI> _get_1 = project2deleted.get(it);
         List<URI> _list_1 = IterableExtensions.<URI>toList(_get_1);
-        final IncrementalBuilder.Result result = projectManager.doBuild(_list, _list_1, cancelIndicator);
-        List<IResourceDescription.Delta> _affectedResources = result.getAffectedResources();
+        final IncrementalBuilder.Result partialResult = projectManager.doBuild(_list, _list_1, cancelIndicator);
+        List<IResourceDescription.Delta> _affectedResources = partialResult.getAffectedResources();
         final Function1<IResourceDescription.Delta, URI> _function = (IResourceDescription.Delta it_1) -> {
           return it_1.getUri();
         };
@@ -178,8 +185,11 @@ public class BuildManager {
         allDirty.addAll(_map);
         Iterables.removeAll(this.dirtyFiles, this.dirtyFiles);
         Iterables.removeAll(this.deletedFiles, this.deletedFiles);
+        List<IResourceDescription.Delta> _affectedResources_1 = partialResult.getAffectedResources();
+        result.addAll(_affectedResources_1);
       }
     }
+    return result;
   }
   
   protected List<ProjectDescription> sortByDependencies(final Iterable<ProjectDescription> projectDescriptions) {

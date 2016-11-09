@@ -8,7 +8,6 @@
 package org.eclipse.xtext.resource.containers;
 
 import com.google.common.annotations.Beta;
-import com.google.common.base.Objects;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -34,8 +33,8 @@ public class ProjectDescriptionBasedContainerManager implements IContainer.Manag
     if ((resourceDescriptions instanceof ChunkedResourceDescriptions)) {
       ResourceSet _resourceSet = ((ChunkedResourceDescriptions)resourceDescriptions).getResourceSet();
       ProjectDescription _findInEmfObject = ProjectDescription.findInEmfObject(_resourceSet);
-      boolean _notEquals = (!Objects.equal(_findInEmfObject, null));
-      if (_notEquals) {
+      boolean _tripleNotEquals = (_findInEmfObject != null);
+      if (_tripleNotEquals) {
         return true;
       }
     }

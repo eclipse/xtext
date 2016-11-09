@@ -9,12 +9,11 @@ package org.eclipse.xtext.ide.server.formatting;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import io.typefox.lsapi.TextEdit;
-import io.typefox.lsapi.impl.PositionImpl;
-import io.typefox.lsapi.impl.RangeImpl;
-import io.typefox.lsapi.impl.TextEditImpl;
 import java.util.Collections;
 import java.util.List;
+import org.eclipse.lsp4j.Position;
+import org.eclipse.lsp4j.Range;
+import org.eclipse.lsp4j.TextEdit;
 import org.eclipse.xtext.formatting2.FormatterRequest;
 import org.eclipse.xtext.formatting2.IFormatter2;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
@@ -67,20 +66,20 @@ public class FormattingService {
   }
   
   protected TextEdit toTextEdit(final Document document, final String formattedText, final int startOffset, final int length) {
-    TextEditImpl _textEditImpl = new TextEditImpl();
-    final Procedure1<TextEditImpl> _function = (TextEditImpl it) -> {
+    TextEdit _textEdit = new TextEdit();
+    final Procedure1<TextEdit> _function = (TextEdit it) -> {
       it.setNewText(formattedText);
-      RangeImpl _rangeImpl = new RangeImpl();
-      final Procedure1<RangeImpl> _function_1 = (RangeImpl it_1) -> {
-        PositionImpl _position = document.getPosition(startOffset);
+      Range _range = new Range();
+      final Procedure1<Range> _function_1 = (Range it_1) -> {
+        Position _position = document.getPosition(startOffset);
         it_1.setStart(_position);
-        PositionImpl _position_1 = document.getPosition((startOffset + length));
+        Position _position_1 = document.getPosition((startOffset + length));
         it_1.setEnd(_position_1);
       };
-      RangeImpl _doubleArrow = ObjectExtensions.<RangeImpl>operator_doubleArrow(_rangeImpl, _function_1);
+      Range _doubleArrow = ObjectExtensions.<Range>operator_doubleArrow(_range, _function_1);
       it.setRange(_doubleArrow);
     };
-    return ObjectExtensions.<TextEditImpl>operator_doubleArrow(_textEditImpl, _function);
+    return ObjectExtensions.<TextEdit>operator_doubleArrow(_textEdit, _function);
   }
   
   protected List<ITextReplacement> format2(final XtextResource resource, final ITextRegion selection, final ITypedPreferenceValues preferences) {

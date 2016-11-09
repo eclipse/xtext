@@ -7,9 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.tests.server
 
-import io.typefox.lsapi.impl.PositionImpl
-import io.typefox.lsapi.impl.RangeImpl
-import io.typefox.lsapi.impl.TextEditImpl
+import org.eclipse.lsp4j.Position
+import org.eclipse.lsp4j.Range
+import org.eclipse.lsp4j.TextEdit
 import org.eclipse.xtext.ide.server.Document
 import org.junit.Test
 
@@ -107,10 +107,10 @@ class DocumentTest {
         ]
     }
     
-    private def change(PositionImpl startPos, PositionImpl endPos, String newText) {
-        new TextEditImpl => [
+    private def change(Position startPos, Position endPos, String newText) {
+        new TextEdit => [
               if (startPos !== null) {
-                  range = new RangeImpl => [
+                  range = new Range => [
                       start = startPos
                       end = endPos
                   ]
@@ -124,7 +124,7 @@ class DocumentTest {
     }
     
     private def position(int l, int c) {
-        new PositionImpl => [line=l character=c]
+        new Position => [line=l character=c]
     }
     
 }

@@ -5,14 +5,16 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ide.server.concurrent
+package org.eclipse.xtext.ide.server
 
-import org.eclipse.xtext.util.CancelIndicator
+import org.eclipse.xtext.resource.IResourceDescription
+import java.util.List
 
 /**
- * @author kosyakov - Initial contribution and API
- * @since 2.11
+ * @author Sven Efftinge - Initial contribution and API
  */
-interface CancellableIndicator extends CancelIndicator {
-	def void cancel()
+interface BuildListener {
+	
+	def void afterBuild(List<IResourceDescription.Delta> deltas)
+	
 }

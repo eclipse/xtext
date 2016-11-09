@@ -70,7 +70,7 @@ class XtextGeneratorTemplates {
 				
 					public static void doSetup() {
 						new «runtimeSetup.simpleName»().createInjectorAndDoEMFRegistration();
-					}				
+					}
 				}
 		 	''')
 		}

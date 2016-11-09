@@ -32,7 +32,6 @@ public class DefaultHiddenTokenHelper extends AbstractHiddenTokenHelper {
 	}
 
 	@Override
-	@SuppressWarnings("deprecation")
 	public AbstractRule getWhitespaceRuleFor(String whitespace) {
 		return wsRule;
 	}

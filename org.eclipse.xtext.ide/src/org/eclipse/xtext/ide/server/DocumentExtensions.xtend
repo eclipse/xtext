@@ -9,12 +9,12 @@ package org.eclipse.xtext.ide.server
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
-import io.typefox.lsapi.impl.LocationImpl
-import io.typefox.lsapi.impl.PositionImpl
-import io.typefox.lsapi.impl.RangeImpl
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.EStructuralFeature
 import org.eclipse.emf.ecore.resource.Resource
+import org.eclipse.lsp4j.Location
+import org.eclipse.lsp4j.Position
+import org.eclipse.lsp4j.Range
 import org.eclipse.xtext.resource.ILocationInFileProvider
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.util.ITextRegion
@@ -34,40 +34,40 @@ class DocumentExtensions {
 	@Inject
 	ILocationInFileProvider locationInFileProvider
 
-	def PositionImpl newPosition(Resource resource, int offset) {
+	def Position newPosition(Resource resource, int offset) {
 		if (resource instanceof XtextResource) {
 			val rootNode = resource.parseResult.rootNode
 			val lineAndColumn = rootNode.getLineAndColumn(offset)
-			return new PositionImpl(lineAndColumn.line - 1, lineAndColumn.column - 1)
+			return new Position(lineAndColumn.line - 1, lineAndColumn.column - 1)
 		}
 		return null
 	}
 
-	def RangeImpl newRange(Resource resource, int startOffset, int endOffset) {
+	def Range newRange(Resource resource, int startOffset, int endOffset) {
 		val startPosition = resource.newPosition(startOffset)
 		val endPosition = resource.newPosition(endOffset)
-		return new RangeImpl(startPosition, endPosition)
+		return new Range(startPosition, endPosition)
 	}
 
-	def RangeImpl newRange(Resource resource, ITextRegion region) {
+	def Range newRange(Resource resource, ITextRegion region) {
 		if (region === null) return null
 		return resource.newRange(region.offset, region.offset + region.length)
 	}
 
-	def LocationImpl newLocation(Resource resource, ITextRegion textRegion) {
-		val location = new LocationImpl
+	def Location newLocation(Resource resource, ITextRegion textRegion) {
+		val location = new Location
 		location.uri = resource.URI.toPath
 		location.range = resource.newRange(textRegion)
 		return location
 	}
 
-	def LocationImpl newLocation(EObject object) {
+	def Location newLocation(EObject object) {
 		val resource = object.eResource
 		val textRegion = locationInFileProvider.getSignificantTextRegion(object)
 		return resource.newLocation(textRegion)
 	}
 
-	def LocationImpl newLocation(EObject owner, EStructuralFeature feature, int indexInList) {
+	def Location newLocation(EObject owner, EStructuralFeature feature, int indexInList) {
 		val resource = owner.eResource
 		val textRegion = locationInFileProvider.getSignificantTextRegion(owner, feature, indexInList)
 		return resource.newLocation(textRegion)

@@ -115,7 +115,6 @@ public class NodeModelSemanticSequencer extends AbstractSemanticSequencer {
 	}
 
 	@Override
-	@SuppressWarnings("deprecation")
 	public void createSequence(EObject context, EObject semanticObject) {
 		createSequence(SerializationContext.fromEObject(context, semanticObject), semanticObject);
 	}

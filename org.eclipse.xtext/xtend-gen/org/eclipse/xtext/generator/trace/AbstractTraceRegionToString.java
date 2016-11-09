@@ -8,7 +8,6 @@
 package org.eclipse.xtext.generator.trace;
 
 import com.google.common.base.Function;
-import com.google.common.base.Objects;
 import com.google.common.base.Strings;
 import com.google.common.base.Throwables;
 import com.google.common.collect.ImmutableListMultimap;
@@ -214,8 +213,7 @@ public abstract class AbstractTraceRegionToString {
   
   protected boolean shouldInclude(final AbstractTraceRegion region) {
     final ITextRegion frame = this.getLocalFrame();
-    boolean _equals = Objects.equal(frame, null);
-    if (_equals) {
+    if ((frame == null)) {
       return true;
     } else {
       ITextRegionWithLineInformation _myRegion = region.getMyRegion();
@@ -233,8 +231,7 @@ public abstract class AbstractTraceRegionToString {
       _elvis = _associatedSrcRelativePath;
     }
     final ITextRegion frame = this.getRemoteFrame(_elvis);
-    boolean _equals = Objects.equal(frame, null);
-    if (_equals) {
+    if ((frame == null)) {
       return true;
     } else {
       return frame.contains(location);
@@ -329,7 +326,7 @@ public abstract class AbstractTraceRegionToString {
   protected int sortKey(final AbstractTraceRegionToString.Insert it) {
     final int base = (it.region.id * Short.MAX_VALUE);
     int _xifexpression = (int) 0;
-    if (((!Objects.equal(it.location, null)) && (it.location.id >= 0))) {
+    if (((it.location != null) && (it.location.id >= 0))) {
       _xifexpression = (base + it.location.id);
     } else {
       _xifexpression = base;
@@ -387,8 +384,7 @@ public abstract class AbstractTraceRegionToString {
   protected List<String> render(final AbstractTraceRegionToString.File file, final int width) {
     try {
       String _xifexpression = null;
-      boolean _equals = Objects.equal(file.uri, null);
-      if (_equals) {
+      if ((file.uri == null)) {
         _xifexpression = this.getLocalText();
       } else {
         _xifexpression = this.getRemoteText(file.uri);
@@ -396,8 +392,7 @@ public abstract class AbstractTraceRegionToString {
       final String text = _xifexpression;
       ITextRegion _elvis = null;
       ITextRegion _xifexpression_1 = null;
-      boolean _equals_1 = Objects.equal(file.uri, null);
-      if (_equals_1) {
+      if ((file.uri == null)) {
         _xifexpression_1 = this.getLocalFrame();
       } else {
         _xifexpression_1 = this.getRemoteFrame(file.uri);

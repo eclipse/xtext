@@ -43,7 +43,7 @@ class TopologicalSorter {
             current.marked = true
             for(it: current.description.dependencies) {
                 val depEntry = name2entry.get(it)
-                if(depEntry != null && !depEntry.visit) {
+                if(depEntry !== null && !depEntry.visit) {
                     current.markCyclic     
                     return false
                 }

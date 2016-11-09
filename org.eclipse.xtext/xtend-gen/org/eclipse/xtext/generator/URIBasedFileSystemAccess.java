@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.generator;
 
-import com.google.common.base.Objects;
 import com.google.common.io.ByteStreams;
 import com.google.common.io.CharStreams;
 import java.io.ByteArrayInputStream;
@@ -95,13 +94,11 @@ public class URIBasedFileSystemAccess extends AbstractFileSystemAccess2 {
   public URI getURI(final String path, final String outputConfiguration) {
     Map<String, String> _pathes = this.getPathes();
     final String outlet = _pathes.get(outputConfiguration);
-    boolean _equals = Objects.equal(outlet, null);
-    if (_equals) {
+    if ((outlet == null)) {
       throw new IllegalArgumentException((("A slot with name \'" + outputConfiguration) + "\' has not been configured."));
     }
     final URI uri = URI.createFileURI(((outlet + File.separator) + path));
-    boolean _notEquals = (!Objects.equal(this.baseDir, null));
-    if (_notEquals) {
+    if ((this.baseDir != null)) {
       final URI resolved = uri.resolve(this.baseDir);
       return resolved;
     } else {

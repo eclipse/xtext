@@ -7,11 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.tests.server
 
-import io.typefox.lsapi.FileChangeType
-import io.typefox.lsapi.builders.DidChangeTextDocumentParamsBuilder
-import io.typefox.lsapi.impl.DidChangeWatchedFilesParamsImpl
-import io.typefox.lsapi.impl.FileEventImpl
-import io.typefox.lsapi.impl.PositionImpl
+import org.eclipse.lsp4j.DidChangeTextDocumentParams
+import org.eclipse.lsp4j.DidChangeWatchedFilesParams
+import org.eclipse.lsp4j.FileChangeType
+import org.eclipse.lsp4j.FileEvent
+import org.eclipse.lsp4j.Position
+import org.eclipse.lsp4j.Range
+import org.eclipse.lsp4j.TextDocumentContentChangeEvent
+import org.eclipse.lsp4j.VersionedTextDocumentIdentifier
 import org.junit.Test
 
 import static org.junit.Assert.*
@@ -37,8 +40,8 @@ class OpenDocumentTest extends AbstractTestLangLanguageServerTest {
             }
         ''')
         languageServer.getWorkspaceService.didChangeWatchedFiles(
-			new DidChangeWatchedFilesParamsImpl(#[
-				new FileEventImpl(path, FileChangeType.Created)
+			new DidChangeWatchedFilesParams(#[
+				new FileEvent(path, FileChangeType.Created)
 			])
 		)
         
@@ -75,16 +78,18 @@ class OpenDocumentTest extends AbstractTestLangLanguageServerTest {
 		''')
         assertEquals("Couldn't resolve reference to TypeDeclaration 'NonExisting'.", diagnostics.get(firstFile).head.message)
         
-        languageServer.didChange(new DidChangeTextDocumentParamsBuilder() [
-        	textDocument[
-        		uri(firstFile)
-        		version(2)
+        languageServer.didChange(new DidChangeTextDocumentParams => [
+        	textDocument = new VersionedTextDocumentIdentifier => [
+        		uri = firstFile
+        		version = 2
         	]
-        	contentChange[
-				range(new PositionImpl(1, 4), new PositionImpl(1, 15))
-				text("Test")
+        	contentChanges = #[
+        		new TextDocumentContentChangeEvent => [
+					range = new Range(new Position(1, 4), new Position(1, 15))
+					text = "Test"
+        		]
 			]
-		].build)
+		])
         assertNull(diagnostics.get(firstFile).head)
     }
 

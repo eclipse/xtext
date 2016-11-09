@@ -8,14 +8,12 @@
 package org.eclipse.xtext.ide.server
 
 import com.google.inject.AbstractModule
-import com.google.inject.name.Names
-import io.typefox.lsapi.services.LanguageServer
 import java.util.concurrent.ExecutorService
-import java.util.concurrent.Executors
-import org.eclipse.xtext.ide.server.concurrent.RequestManager
+import org.eclipse.lsp4j.services.LanguageServer
+import org.eclipse.xtext.ide.ExecutorServiceProvider
+import org.eclipse.xtext.resource.IContainer
 import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.eclipse.xtext.resource.ResourceServiceProviderServiceLoader
-import org.eclipse.xtext.resource.IContainer
 import org.eclipse.xtext.resource.containers.ProjectDescriptionBasedContainerManager
 
 /**
@@ -25,11 +23,7 @@ import org.eclipse.xtext.resource.containers.ProjectDescriptionBasedContainerMan
 class ServerModule extends AbstractModule {
     
     override protected configure() {
-		val readExecutorService = Executors.newCachedThreadPool
-		bind(ExecutorService).annotatedWith(Names.named(RequestManager.READ_EXECUTOR_SERVICE)).toInstance(readExecutorService)
-		
-		val writeExecutorService = Executors.newSingleThreadExecutor
-		bind(ExecutorService).annotatedWith(Names.named(RequestManager.WRITE_EXECUTOR_SERVICE)).toInstance(writeExecutorService)
+		binder.bind(ExecutorService).toProvider(ExecutorServiceProvider)
 		
     	bind(LanguageServer).to(LanguageServerImpl)
         bind(IResourceServiceProvider.Registry).toProvider(ResourceServiceProviderServiceLoader)

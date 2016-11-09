@@ -8,54 +8,13 @@
 package org.eclipse.xtext.testing;
 
 import com.google.common.base.Objects;
+import com.google.common.collect.Iterables;
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Module;
 import com.google.inject.binder.AnnotatedBindingBuilder;
-import io.typefox.lsapi.CompletionItem;
-import io.typefox.lsapi.CompletionList;
-import io.typefox.lsapi.Diagnostic;
-import io.typefox.lsapi.DidChangeWatchedFilesParams;
-import io.typefox.lsapi.DidCloseTextDocumentParams;
-import io.typefox.lsapi.DidOpenTextDocumentParams;
-import io.typefox.lsapi.DocumentFormattingParams;
-import io.typefox.lsapi.DocumentHighlight;
-import io.typefox.lsapi.DocumentHighlightKind;
-import io.typefox.lsapi.DocumentRangeFormattingParams;
-import io.typefox.lsapi.FileChangeType;
-import io.typefox.lsapi.Hover;
-import io.typefox.lsapi.InitializeParams;
-import io.typefox.lsapi.InitializeResult;
-import io.typefox.lsapi.Location;
-import io.typefox.lsapi.MarkedString;
-import io.typefox.lsapi.ParameterInformation;
-import io.typefox.lsapi.Position;
-import io.typefox.lsapi.PublishDiagnosticsParams;
-import io.typefox.lsapi.Range;
-import io.typefox.lsapi.ReferenceParams;
-import io.typefox.lsapi.SignatureHelp;
-import io.typefox.lsapi.SignatureInformation;
-import io.typefox.lsapi.SymbolInformation;
-import io.typefox.lsapi.SymbolKind;
-import io.typefox.lsapi.TextDocumentPositionParams;
-import io.typefox.lsapi.TextEdit;
-import io.typefox.lsapi.builders.DidChangeWatchedFilesParamsBuilder;
-import io.typefox.lsapi.builders.DidCloseTextDocumentParamsBuilder;
-import io.typefox.lsapi.builders.DidOpenTextDocumentParamsBuilder;
-import io.typefox.lsapi.builders.DocumentFormattingParamsBuilder;
-import io.typefox.lsapi.builders.DocumentRangeFormattingParamsBuilder;
-import io.typefox.lsapi.builders.FileEventBuilder;
-import io.typefox.lsapi.builders.InitializeParamsBuilder;
-import io.typefox.lsapi.builders.ReferenceParamsBuilder;
-import io.typefox.lsapi.builders.TextDocumentItemBuilder;
-import io.typefox.lsapi.builders.TextDocumentPositionParamsBuilder;
-import io.typefox.lsapi.impl.DocumentSymbolParamsImpl;
-import io.typefox.lsapi.impl.InitializeParamsImpl;
-import io.typefox.lsapi.impl.TextDocumentIdentifierImpl;
-import io.typefox.lsapi.impl.WorkspaceSymbolParamsImpl;
-import io.typefox.lsapi.services.TextDocumentService;
 import java.io.File;
 import java.io.FileWriter;
 import java.net.URI;
@@ -63,11 +22,46 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
-import java.util.function.Consumer;
+import org.eclipse.lsp4j.CompletionItem;
+import org.eclipse.lsp4j.CompletionList;
+import org.eclipse.lsp4j.Diagnostic;
+import org.eclipse.lsp4j.DidChangeWatchedFilesParams;
+import org.eclipse.lsp4j.DidCloseTextDocumentParams;
+import org.eclipse.lsp4j.DidOpenTextDocumentParams;
+import org.eclipse.lsp4j.DocumentFormattingParams;
+import org.eclipse.lsp4j.DocumentHighlight;
+import org.eclipse.lsp4j.DocumentHighlightKind;
+import org.eclipse.lsp4j.DocumentRangeFormattingParams;
+import org.eclipse.lsp4j.DocumentSymbolParams;
+import org.eclipse.lsp4j.FileChangeType;
+import org.eclipse.lsp4j.FileEvent;
+import org.eclipse.lsp4j.Hover;
+import org.eclipse.lsp4j.InitializeParams;
+import org.eclipse.lsp4j.InitializeResult;
+import org.eclipse.lsp4j.Location;
+import org.eclipse.lsp4j.ParameterInformation;
+import org.eclipse.lsp4j.Position;
+import org.eclipse.lsp4j.PublishDiagnosticsParams;
+import org.eclipse.lsp4j.Range;
+import org.eclipse.lsp4j.ReferenceContext;
+import org.eclipse.lsp4j.ReferenceParams;
+import org.eclipse.lsp4j.SignatureHelp;
+import org.eclipse.lsp4j.SignatureInformation;
+import org.eclipse.lsp4j.SymbolInformation;
+import org.eclipse.lsp4j.SymbolKind;
+import org.eclipse.lsp4j.TextDocumentIdentifier;
+import org.eclipse.lsp4j.TextDocumentItem;
+import org.eclipse.lsp4j.TextDocumentPositionParams;
+import org.eclipse.lsp4j.TextEdit;
+import org.eclipse.lsp4j.WorkspaceSymbolParams;
+import org.eclipse.lsp4j.jsonrpc.Endpoint;
+import org.eclipse.lsp4j.jsonrpc.services.ServiceEndpoints;
+import org.eclipse.lsp4j.services.LanguageClient;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -101,6 +95,7 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
@@ -112,7 +107,7 @@ import org.junit.Before;
  */
 @FinalFieldsConstructor
 @SuppressWarnings("all")
-public abstract class AbstractLanguageServerTest implements Consumer<PublishDiagnosticsParams> {
+public abstract class AbstractLanguageServerTest implements Endpoint {
   @Accessors
   protected final String fileExtension;
   
@@ -126,14 +121,20 @@ public abstract class AbstractLanguageServerTest implements Consumer<PublishDiag
           AnnotatedBindingBuilder<RequestManager> _bind = this.<RequestManager>bind(RequestManager.class);
           _bind.toInstance(new RequestManager() {
             @Override
-            public CompletableFuture<Void> runWrite(final Procedure1<? super CancelIndicator> writeRequest, final CancelIndicator cancelIndicator) {
-              writeRequest.apply(cancelIndicator);
-              return CompletableFuture.<Void>completedFuture(null);
+            public <V extends Object> CompletableFuture<V> runWrite(final Function1<? super CancelIndicator, ? extends V> writeRequest) {
+              final CancelIndicator _function = () -> {
+                return false;
+              };
+              V _apply = writeRequest.apply(_function);
+              return CompletableFuture.<V>completedFuture(_apply);
             }
             
             @Override
-            public <V extends Object> CompletableFuture<V> runRead(final Function1<? super CancelIndicator, ? extends V> readRequest, final CancelIndicator cancelIndicator) {
-              V _apply = readRequest.apply(cancelIndicator);
+            public <V extends Object> CompletableFuture<V> runRead(final Function1<? super CancelIndicator, ? extends V> readRequest) {
+              final CancelIndicator _function = () -> {
+                return false;
+              };
+              V _apply = readRequest.apply(_function);
               return CompletableFuture.<V>completedFuture(_apply);
             }
           });
@@ -147,8 +148,9 @@ public abstract class AbstractLanguageServerTest implements Consumer<PublishDiag
         LanguageInfo _get = ((IResourceServiceProvider)resourceServiceProvider).<LanguageInfo>get(LanguageInfo.class);
         this.languageInfo = _get;
       }
-      TextDocumentService _textDocumentService = this.languageServer.getTextDocumentService();
-      _textDocumentService.onPublishDiagnostics(this);
+      LanguageClient _serviceObject = ServiceEndpoints.<LanguageClient>toServiceObject(this, LanguageClient.class);
+      this.languageServer.connect(_serviceObject);
+      this.languageServer.supportedMethods();
       File _file = new File("./test-data/test-project");
       this.root = _file;
       boolean _mkdirs = this.root.mkdirs();
@@ -172,13 +174,13 @@ public abstract class AbstractLanguageServerTest implements Consumer<PublishDiag
   @Inject
   protected LanguageServerImpl languageServer;
   
-  protected Map<String, List<? extends Diagnostic>> diagnostics = CollectionLiterals.<String, List<? extends Diagnostic>>newHashMap();
+  protected List<Pair<String, Object>> notifications = CollectionLiterals.<Pair<String, Object>>newArrayList();
   
   protected File root;
   
   protected LanguageInfo languageInfo;
   
-  protected Path getRootPath() {
+  protected Path getTestRootPath() {
     Path _path = this.root.toPath();
     Path _absolutePath = _path.toAbsolutePath();
     return _absolutePath.normalize();
@@ -190,8 +192,8 @@ public abstract class AbstractLanguageServerTest implements Consumer<PublishDiag
       {
         URI _uRI = new URI(uri);
         final Path path = Paths.get(_uRI);
-        Path _rootPath = this.getRootPath();
-        _xblockexpression = _rootPath.relativize(path);
+        Path _testRootPath = this.getTestRootPath();
+        _xblockexpression = _testRootPath.relativize(path);
       }
       return _xblockexpression;
     } catch (Throwable _e) {
@@ -203,18 +205,18 @@ public abstract class AbstractLanguageServerTest implements Consumer<PublishDiag
     return this.initialize(null);
   }
   
-  protected InitializeResult initialize(final Procedure1<? super InitializeParamsImpl> initializer) {
+  protected InitializeResult initialize(final Procedure1<? super InitializeParams> initializer) {
     try {
-      final Procedure1<InitializeParamsBuilder> _function = (InitializeParamsBuilder it) -> {
-        it.processId(Integer.valueOf(1));
-        Path _rootPath = this.getRootPath();
-        String _string = _rootPath.toString();
-        it.rootPath(_string);
+      InitializeParams _initializeParams = new InitializeParams();
+      final Procedure1<InitializeParams> _function = (InitializeParams it) -> {
+        it.setProcessId(Integer.valueOf(1));
+        Path _testRootPath = this.getTestRootPath();
+        String _string = _testRootPath.toString();
+        it.setRootPath(_string);
       };
-      InitializeParamsBuilder _initializeParamsBuilder = new InitializeParamsBuilder(_function);
-      final InitializeParams params = _initializeParamsBuilder.build();
+      final InitializeParams params = ObjectExtensions.<InitializeParams>operator_doubleArrow(_initializeParams, _function);
       if (initializer!=null) {
-        initializer.apply(((InitializeParamsImpl) params));
+        initializer.apply(((InitializeParams) params));
       }
       CompletableFuture<InitializeResult> _initialize = this.languageServer.initialize(params);
       return _initialize.get();
@@ -229,43 +231,49 @@ public abstract class AbstractLanguageServerTest implements Consumer<PublishDiag
   }
   
   protected void open(final String fileUri, final String langaugeId, final String model) {
-    final Procedure1<DidOpenTextDocumentParamsBuilder> _function = (DidOpenTextDocumentParamsBuilder it) -> {
-      it.uri(fileUri);
-      final Procedure1<TextDocumentItemBuilder> _function_1 = (TextDocumentItemBuilder it_1) -> {
-        it_1.uri(fileUri);
-        it_1.languageId(langaugeId);
-        it_1.version(1);
-        it_1.text(model);
+    DidOpenTextDocumentParams _didOpenTextDocumentParams = new DidOpenTextDocumentParams();
+    final Procedure1<DidOpenTextDocumentParams> _function = (DidOpenTextDocumentParams it) -> {
+      it.setUri(fileUri);
+      TextDocumentItem _textDocumentItem = new TextDocumentItem();
+      final Procedure1<TextDocumentItem> _function_1 = (TextDocumentItem it_1) -> {
+        it_1.setUri(fileUri);
+        it_1.setLanguageId(langaugeId);
+        it_1.setVersion(1);
+        it_1.setText(model);
       };
-      it.textDocument(_function_1);
+      TextDocumentItem _doubleArrow = ObjectExtensions.<TextDocumentItem>operator_doubleArrow(_textDocumentItem, _function_1);
+      it.setTextDocument(_doubleArrow);
     };
-    DidOpenTextDocumentParamsBuilder _didOpenTextDocumentParamsBuilder = new DidOpenTextDocumentParamsBuilder(_function);
-    DidOpenTextDocumentParams _build = _didOpenTextDocumentParamsBuilder.build();
-    this.languageServer.didOpen(_build);
+    DidOpenTextDocumentParams _doubleArrow = ObjectExtensions.<DidOpenTextDocumentParams>operator_doubleArrow(_didOpenTextDocumentParams, _function);
+    this.languageServer.didOpen(_doubleArrow);
   }
   
   protected void didCreateWatchedFiles(final String... fileUris) {
-    final Procedure1<DidChangeWatchedFilesParamsBuilder> _function = (DidChangeWatchedFilesParamsBuilder it) -> {
+    DidChangeWatchedFilesParams _didChangeWatchedFilesParams = new DidChangeWatchedFilesParams();
+    final Procedure1<DidChangeWatchedFilesParams> _function = (DidChangeWatchedFilesParams it) -> {
       for (final String fileUri : fileUris) {
-        final Procedure1<FileEventBuilder> _function_1 = (FileEventBuilder it_1) -> {
-          it_1.uri(fileUri);
-          it_1.type(FileChangeType.Created);
+        List<FileEvent> _changes = it.getChanges();
+        FileEvent _fileEvent = new FileEvent();
+        final Procedure1<FileEvent> _function_1 = (FileEvent it_1) -> {
+          it_1.setUri(fileUri);
+          it_1.setType(FileChangeType.Created);
         };
-        it.change(_function_1);
+        FileEvent _doubleArrow = ObjectExtensions.<FileEvent>operator_doubleArrow(_fileEvent, _function_1);
+        _changes.add(_doubleArrow);
       }
     };
-    DidChangeWatchedFilesParamsBuilder _didChangeWatchedFilesParamsBuilder = new DidChangeWatchedFilesParamsBuilder(_function);
-    DidChangeWatchedFilesParams _build = _didChangeWatchedFilesParamsBuilder.build();
-    this.languageServer.didChangeWatchedFiles(_build);
+    DidChangeWatchedFilesParams _doubleArrow = ObjectExtensions.<DidChangeWatchedFilesParams>operator_doubleArrow(_didChangeWatchedFilesParams, _function);
+    this.languageServer.didChangeWatchedFiles(_doubleArrow);
   }
   
   protected void close(final String fileUri) {
-    final Procedure1<DidCloseTextDocumentParamsBuilder> _function = (DidCloseTextDocumentParamsBuilder it) -> {
-      it.textDocument(fileUri);
+    DidCloseTextDocumentParams _didCloseTextDocumentParams = new DidCloseTextDocumentParams();
+    final Procedure1<DidCloseTextDocumentParams> _function = (DidCloseTextDocumentParams it) -> {
+      TextDocumentIdentifier _textDocumentIdentifier = new TextDocumentIdentifier(fileUri);
+      it.setTextDocument(_textDocumentIdentifier);
     };
-    DidCloseTextDocumentParamsBuilder _didCloseTextDocumentParamsBuilder = new DidCloseTextDocumentParamsBuilder(_function);
-    DidCloseTextDocumentParams _build = _didCloseTextDocumentParamsBuilder.build();
-    this.languageServer.didClose(_build);
+    DidCloseTextDocumentParams _doubleArrow = ObjectExtensions.<DidCloseTextDocumentParams>operator_doubleArrow(_didCloseTextDocumentParams, _function);
+    this.languageServer.didClose(_doubleArrow);
   }
   
   public String writeFile(final String path, final CharSequence contents) {
@@ -293,13 +301,6 @@ public abstract class AbstractLanguageServerTest implements Consumer<PublishDiag
     return this._uriExtensions.toPath(_normalize);
   }
   
-  @Override
-  public void accept(final PublishDiagnosticsParams t) {
-    String _uri = t.getUri();
-    List<? extends Diagnostic> _diagnostics = t.getDiagnostics();
-    this.diagnostics.put(_uri, _diagnostics);
-  }
-  
   protected String _toExpectation(final List<?> elements) {
     StringConcatenation _builder = new StringConcatenation();
     {
@@ -310,6 +311,10 @@ public abstract class AbstractLanguageServerTest implements Consumer<PublishDiag
       }
     }
     return _builder.toString();
+  }
+  
+  protected String _toExpectation(final String it) {
+    return it;
   }
   
   protected String _toExpectation(final Void it) {
@@ -445,8 +450,8 @@ public abstract class AbstractLanguageServerTest implements Consumer<PublishDiag
     _builder.append(_expectation, "");
     _builder.newLineIfNotEmpty();
     {
-      List<? extends MarkedString> _contents = it.getContents();
-      for(final MarkedString content : _contents) {
+      List<String> _contents = it.getContents();
+      for(final String content : _contents) {
         String _expectation_1 = this.toExpectation(content);
         _builder.append(_expectation_1, "");
         _builder.newLineIfNotEmpty();
@@ -455,27 +460,10 @@ public abstract class AbstractLanguageServerTest implements Consumer<PublishDiag
     return _builder.toString();
   }
   
-  protected String _toExpectation(final MarkedString it) {
-    StringConcatenation _builder = new StringConcatenation();
-    {
-      String _language = it.getLanguage();
-      boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(_language);
-      boolean _not = (!_isNullOrEmpty);
-      if (_not) {
-        String _language_1 = it.getLanguage();
-        _builder.append(_language_1, "");
-        _builder.append(" -> ");
-      }
-    }
-    String _value = it.getValue();
-    _builder.append(_value, "");
-    return _builder.toString();
-  }
-  
   protected String _toExpectation(final SignatureHelp it) {
     String _xblockexpression = null;
     {
-      List<? extends SignatureInformation> _signatures = it.getSignatures();
+      List<SignatureInformation> _signatures = it.getSignatures();
       int _size = _signatures.size();
       boolean _tripleEquals = (_size == 0);
       if (_tripleEquals) {
@@ -496,21 +484,21 @@ public abstract class AbstractLanguageServerTest implements Consumer<PublishDiag
       if (_tripleEquals_1) {
         _xifexpression = "<empty>";
       } else {
-        List<? extends SignatureInformation> _signatures_1 = it.getSignatures();
+        List<SignatureInformation> _signatures_1 = it.getSignatures();
         Integer _activeSignature_3 = it.getActiveSignature();
         SignatureInformation _get = _signatures_1.get((_activeSignature_3).intValue());
-        List<? extends ParameterInformation> _parameters = _get.getParameters();
+        List<ParameterInformation> _parameters = _get.getParameters();
         Integer _activeParameter_1 = it.getActiveParameter();
         ParameterInformation _get_1 = _parameters.get((_activeParameter_1).intValue());
         _xifexpression = _get_1.getLabel();
       }
       final String param = _xifexpression;
       StringConcatenation _builder_1 = new StringConcatenation();
-      List<? extends SignatureInformation> _signatures_2 = it.getSignatures();
+      List<SignatureInformation> _signatures_2 = it.getSignatures();
       final Function1<SignatureInformation, String> _function = (SignatureInformation it_1) -> {
         return it_1.getLabel();
       };
-      List<String> _map = ListExtensions.map(_signatures_2, _function);
+      List<String> _map = ListExtensions.<SignatureInformation, String>map(_signatures_2, _function);
       String _join = IterableExtensions.join(_map, " | ");
       _builder_1.append(_join, "");
       _builder_1.append(" | ");
@@ -569,23 +557,25 @@ public abstract class AbstractLanguageServerTest implements Consumer<PublishDiag
       configurator.apply(configuration);
       FileInfo _initializeContext = this.initializeContext(configuration);
       final String filePath = _initializeContext.getUri();
-      final Procedure1<TextDocumentPositionParamsBuilder> _function = (TextDocumentPositionParamsBuilder it) -> {
-        it.textDocument(filePath);
+      TextDocumentPositionParams _textDocumentPositionParams = new TextDocumentPositionParams();
+      final Procedure1<TextDocumentPositionParams> _function = (TextDocumentPositionParams it) -> {
+        TextDocumentIdentifier _textDocumentIdentifier = new TextDocumentIdentifier(filePath);
+        it.setTextDocument(_textDocumentIdentifier);
         int _line = configuration.getLine();
         int _column = configuration.getColumn();
-        it.position(_line, _column);
+        Position _position = new Position(_line, _column);
+        it.setPosition(_position);
       };
-      TextDocumentPositionParamsBuilder _textDocumentPositionParamsBuilder = new TextDocumentPositionParamsBuilder(_function);
-      TextDocumentPositionParams _build = _textDocumentPositionParamsBuilder.build();
-      final CompletableFuture<CompletionList> completionItems = this.languageServer.completion(_build);
+      TextDocumentPositionParams _doubleArrow = ObjectExtensions.<TextDocumentPositionParams>operator_doubleArrow(_textDocumentPositionParams, _function);
+      final CompletableFuture<CompletionList> completionItems = this.languageServer.completion(_doubleArrow);
       final CompletionList list = completionItems.get();
-      List<? extends CompletionItem> _items = list.getItems();
-      List<? extends CompletionItem> _items_1 = list.getItems();
+      List<CompletionItem> _items = list.getItems();
+      List<CompletionItem> _items_1 = list.getItems();
       final Function1<CompletionItem, String> _function_1 = (CompletionItem it) -> {
         return it.getSortText();
       };
-      List<? extends CompletionItem> _sortBy = IterableExtensions.sortBy(_items_1, _function_1);
-      List<? extends CompletionItem> _list = IterableExtensions.toList(_sortBy);
+      List<CompletionItem> _sortBy = IterableExtensions.<CompletionItem, String>sortBy(_items_1, _function_1);
+      List<CompletionItem> _list = IterableExtensions.<CompletionItem>toList(_sortBy);
       Assert.assertEquals(_items, _list);
       Procedure1<? super CompletionList> _assertCompletionList = configuration.getAssertCompletionList();
       boolean _tripleNotEquals = (_assertCompletionList != null);
@@ -593,7 +583,7 @@ public abstract class AbstractLanguageServerTest implements Consumer<PublishDiag
         Procedure1<? super CompletionList> _assertCompletionList_1 = configuration.getAssertCompletionList();
         _assertCompletionList_1.apply(list);
       } else {
-        List<? extends CompletionItem> _items_2 = list.getItems();
+        List<CompletionItem> _items_2 = list.getItems();
         final String actualCompletionItems = this.toExpectation(_items_2);
         String _expectedCompletionItems = configuration.getExpectedCompletionItems();
         this.assertEquals(_expectedCompletionItems, actualCompletionItems);
@@ -650,15 +640,17 @@ public abstract class AbstractLanguageServerTest implements Consumer<PublishDiag
       configurator.apply(configuration);
       FileInfo _initializeContext = this.initializeContext(configuration);
       final String fileUri = _initializeContext.getUri();
-      final Procedure1<TextDocumentPositionParamsBuilder> _function = (TextDocumentPositionParamsBuilder it) -> {
-        it.textDocument(fileUri);
+      TextDocumentPositionParams _textDocumentPositionParams = new TextDocumentPositionParams();
+      final Procedure1<TextDocumentPositionParams> _function = (TextDocumentPositionParams it) -> {
+        TextDocumentIdentifier _textDocumentIdentifier = new TextDocumentIdentifier(fileUri);
+        it.setTextDocument(_textDocumentIdentifier);
         int _line = configuration.getLine();
         int _column = configuration.getColumn();
-        it.position(_line, _column);
+        Position _position = new Position(_line, _column);
+        it.setPosition(_position);
       };
-      TextDocumentPositionParamsBuilder _textDocumentPositionParamsBuilder = new TextDocumentPositionParamsBuilder(_function);
-      TextDocumentPositionParams _build = _textDocumentPositionParamsBuilder.build();
-      final CompletableFuture<List<? extends Location>> definitionsFuture = this.languageServer.definition(_build);
+      TextDocumentPositionParams _doubleArrow = ObjectExtensions.<TextDocumentPositionParams>operator_doubleArrow(_textDocumentPositionParams, _function);
+      final CompletableFuture<List<? extends Location>> definitionsFuture = this.languageServer.definition(_doubleArrow);
       final List<? extends Location> definitions = definitionsFuture.get();
       Procedure1<? super List<? extends Location>> _assertDefinitions = configuration.getAssertDefinitions();
       boolean _tripleNotEquals = (_assertDefinitions != null);
@@ -683,15 +675,17 @@ public abstract class AbstractLanguageServerTest implements Consumer<PublishDiag
       configurator.apply(configuration);
       FileInfo _initializeContext = this.initializeContext(configuration);
       final String fileUri = _initializeContext.getUri();
-      final Procedure1<TextDocumentPositionParamsBuilder> _function = (TextDocumentPositionParamsBuilder it) -> {
-        it.textDocument(fileUri);
+      TextDocumentPositionParams _textDocumentPositionParams = new TextDocumentPositionParams();
+      final Procedure1<TextDocumentPositionParams> _function = (TextDocumentPositionParams it) -> {
+        TextDocumentIdentifier _textDocumentIdentifier = new TextDocumentIdentifier(fileUri);
+        it.setTextDocument(_textDocumentIdentifier);
         int _line = configuration.getLine();
         int _column = configuration.getColumn();
-        it.position(_line, _column);
+        Position _position = new Position(_line, _column);
+        it.setPosition(_position);
       };
-      TextDocumentPositionParamsBuilder _textDocumentPositionParamsBuilder = new TextDocumentPositionParamsBuilder(_function);
-      TextDocumentPositionParams _build = _textDocumentPositionParamsBuilder.build();
-      final CompletableFuture<Hover> hoverFuture = this.languageServer.hover(_build);
+      TextDocumentPositionParams _doubleArrow = ObjectExtensions.<TextDocumentPositionParams>operator_doubleArrow(_textDocumentPositionParams, _function);
+      final CompletableFuture<Hover> hoverFuture = this.languageServer.hover(_doubleArrow);
       final Hover hover = hoverFuture.get();
       Procedure1<? super Hover> _assertHover = configuration.getAssertHover();
       boolean _tripleNotEquals = (_assertHover != null);
@@ -716,15 +710,17 @@ public abstract class AbstractLanguageServerTest implements Consumer<PublishDiag
       configurator.apply(configuration);
       FileInfo _initializeContext = this.initializeContext(configuration);
       final String fileUri = _initializeContext.getUri();
-      final Procedure1<TextDocumentPositionParamsBuilder> _function = (TextDocumentPositionParamsBuilder it) -> {
-        it.textDocument(fileUri);
+      TextDocumentPositionParams _textDocumentPositionParams = new TextDocumentPositionParams();
+      final Procedure1<TextDocumentPositionParams> _function = (TextDocumentPositionParams it) -> {
+        TextDocumentIdentifier _textDocumentIdentifier = new TextDocumentIdentifier(fileUri);
+        it.setTextDocument(_textDocumentIdentifier);
         int _line = configuration.getLine();
         int _column = configuration.getColumn();
-        it.position(_line, _column);
+        Position _position = new Position(_line, _column);
+        it.setPosition(_position);
       };
-      TextDocumentPositionParamsBuilder _textDocumentPositionParamsBuilder = new TextDocumentPositionParamsBuilder(_function);
-      TextDocumentPositionParams _build = _textDocumentPositionParamsBuilder.build();
-      final CompletableFuture<SignatureHelp> signatureHelpFuture = this.languageServer.signatureHelp(_build);
+      TextDocumentPositionParams _doubleArrow = ObjectExtensions.<TextDocumentPositionParams>operator_doubleArrow(_textDocumentPositionParams, _function);
+      final CompletableFuture<SignatureHelp> signatureHelpFuture = this.languageServer.signatureHelp(_doubleArrow);
       final SignatureHelp signatureHelp = signatureHelpFuture.get();
       Procedure1<? super SignatureHelp> _assertSignatureHelp = configuration.getAssertSignatureHelp();
       boolean _tripleNotEquals = (_assertSignatureHelp != null);
@@ -757,15 +753,17 @@ public abstract class AbstractLanguageServerTest implements Consumer<PublishDiag
       configurator.apply(configuration);
       FileInfo _initializeContext = this.initializeContext(configuration);
       final String fileUri = _initializeContext.getUri();
-      final Procedure1<TextDocumentPositionParamsBuilder> _function_1 = (TextDocumentPositionParamsBuilder it) -> {
-        it.textDocument(fileUri);
+      TextDocumentPositionParams _textDocumentPositionParams = new TextDocumentPositionParams();
+      final Procedure1<TextDocumentPositionParams> _function_1 = (TextDocumentPositionParams it) -> {
+        TextDocumentIdentifier _textDocumentIdentifier = new TextDocumentIdentifier(fileUri);
+        it.setTextDocument(_textDocumentIdentifier);
         int _line = configuration.getLine();
         int _column = configuration.getColumn();
-        it.position(_line, _column);
+        Position _position = new Position(_line, _column);
+        it.setPosition(_position);
       };
-      TextDocumentPositionParamsBuilder _textDocumentPositionParamsBuilder = new TextDocumentPositionParamsBuilder(_function_1);
-      TextDocumentPositionParams _build = _textDocumentPositionParamsBuilder.build();
-      final CompletableFuture<List<? extends DocumentHighlight>> highlights = this.languageServer.documentHighlight(_build);
+      TextDocumentPositionParams _doubleArrow = ObjectExtensions.<TextDocumentPositionParams>operator_doubleArrow(_textDocumentPositionParams, _function_1);
+      final CompletableFuture<List<? extends DocumentHighlight>> highlights = this.languageServer.documentHighlight(_doubleArrow);
       List<? extends DocumentHighlight> _get = highlights.get();
       final Function1<DocumentHighlight, String> _function_2 = (DocumentHighlight it) -> {
         return this.toExpectation(it);
@@ -787,9 +785,9 @@ public abstract class AbstractLanguageServerTest implements Consumer<PublishDiag
       configurator.apply(configuration);
       FileInfo _initializeContext = this.initializeContext(configuration);
       final String fileUri = _initializeContext.getUri();
-      TextDocumentIdentifierImpl _textDocumentIdentifierImpl = new TextDocumentIdentifierImpl(fileUri);
-      DocumentSymbolParamsImpl _documentSymbolParamsImpl = new DocumentSymbolParamsImpl(_textDocumentIdentifierImpl);
-      final CompletableFuture<List<? extends SymbolInformation>> symbolsFuture = this.languageServer.documentSymbol(_documentSymbolParamsImpl);
+      TextDocumentIdentifier _textDocumentIdentifier = new TextDocumentIdentifier(fileUri);
+      DocumentSymbolParams _documentSymbolParams = new DocumentSymbolParams(_textDocumentIdentifier);
+      final CompletableFuture<List<? extends SymbolInformation>> symbolsFuture = this.languageServer.documentSymbol(_documentSymbolParams);
       final List<? extends SymbolInformation> symbols = symbolsFuture.get();
       Procedure1<? super List<? extends SymbolInformation>> _assertSymbols = configuration.getAssertSymbols();
       boolean _tripleNotEquals = (_assertSymbols != null);
@@ -814,8 +812,8 @@ public abstract class AbstractLanguageServerTest implements Consumer<PublishDiag
       configurator.apply(configuration);
       this.initializeContext(configuration);
       String _query = configuration.getQuery();
-      WorkspaceSymbolParamsImpl _workspaceSymbolParamsImpl = new WorkspaceSymbolParamsImpl(_query);
-      CompletableFuture<List<? extends SymbolInformation>> _symbol = this.languageServer.symbol(_workspaceSymbolParamsImpl);
+      WorkspaceSymbolParams _workspaceSymbolParams = new WorkspaceSymbolParams(_query);
+      CompletableFuture<List<? extends SymbolInformation>> _symbol = this.languageServer.symbol(_workspaceSymbolParams);
       final List<? extends SymbolInformation> symbols = _symbol.get();
       Procedure1<? super List<? extends SymbolInformation>> _assertSymbols = configuration.getAssertSymbols();
       boolean _tripleNotEquals = (_assertSymbols != null);
@@ -840,17 +838,20 @@ public abstract class AbstractLanguageServerTest implements Consumer<PublishDiag
       configurator.apply(configuration);
       FileInfo _initializeContext = this.initializeContext(configuration);
       final String fileUri = _initializeContext.getUri();
-      final Procedure1<ReferenceParamsBuilder> _function = (ReferenceParamsBuilder it) -> {
-        it.textDocument(fileUri);
+      ReferenceParams _referenceParams = new ReferenceParams();
+      final Procedure1<ReferenceParams> _function = (ReferenceParams it) -> {
+        TextDocumentIdentifier _textDocumentIdentifier = new TextDocumentIdentifier(fileUri);
+        it.setTextDocument(_textDocumentIdentifier);
         int _line = configuration.getLine();
         int _column = configuration.getColumn();
-        it.position(_line, _column);
+        Position _position = new Position(_line, _column);
+        it.setPosition(_position);
         boolean _isIncludeDeclaration = configuration.isIncludeDeclaration();
-        it.context(_isIncludeDeclaration);
+        ReferenceContext _referenceContext = new ReferenceContext(_isIncludeDeclaration);
+        it.setContext(_referenceContext);
       };
-      ReferenceParamsBuilder _referenceParamsBuilder = new ReferenceParamsBuilder(_function);
-      ReferenceParams _build = _referenceParamsBuilder.build();
-      final CompletableFuture<List<? extends Location>> referencesFuture = this.languageServer.references(_build);
+      ReferenceParams _doubleArrow = ObjectExtensions.<ReferenceParams>operator_doubleArrow(_referenceParams, _function);
+      final CompletableFuture<List<? extends Location>> referencesFuture = this.languageServer.references(_doubleArrow);
       final List<? extends Location> references = referencesFuture.get();
       Procedure1<? super List<? extends Location>> _assertReferences = configuration.getAssertReferences();
       boolean _tripleNotEquals = (_assertReferences != null);
@@ -880,13 +881,14 @@ public abstract class AbstractLanguageServerTest implements Consumer<PublishDiag
       configuration.setFilePath(("MyModel." + this.fileExtension));
       configurator.apply(configuration);
       final FileInfo fileInfo = this.initializeContext(configuration);
-      final Procedure1<DocumentFormattingParamsBuilder> _function = (DocumentFormattingParamsBuilder it) -> {
+      DocumentFormattingParams _documentFormattingParams = new DocumentFormattingParams();
+      final Procedure1<DocumentFormattingParams> _function = (DocumentFormattingParams it) -> {
         String _uri = fileInfo.getUri();
-        it.textDocument(_uri);
+        TextDocumentIdentifier _textDocumentIdentifier = new TextDocumentIdentifier(_uri);
+        it.setTextDocument(_textDocumentIdentifier);
       };
-      DocumentFormattingParamsBuilder _documentFormattingParamsBuilder = new DocumentFormattingParamsBuilder(_function);
-      DocumentFormattingParams _build = _documentFormattingParamsBuilder.build();
-      final CompletableFuture<List<? extends TextEdit>> changes = this.languageServer.formatting(_build);
+      DocumentFormattingParams _doubleArrow = ObjectExtensions.<DocumentFormattingParams>operator_doubleArrow(_documentFormattingParams, _function);
+      final CompletableFuture<List<? extends TextEdit>> changes = this.languageServer.formatting(_doubleArrow);
       String _contents = fileInfo.getContents();
       Document _document = new Document(1, _contents);
       List<? extends TextEdit> _get = changes.get();
@@ -908,15 +910,16 @@ public abstract class AbstractLanguageServerTest implements Consumer<PublishDiag
       configuration.setFilePath(("MyModel." + this.fileExtension));
       configurator.apply(configuration);
       final FileInfo fileInfo = this.initializeContext(configuration);
-      final Procedure1<DocumentRangeFormattingParamsBuilder> _function = (DocumentRangeFormattingParamsBuilder it) -> {
+      DocumentRangeFormattingParams _documentRangeFormattingParams = new DocumentRangeFormattingParams();
+      final Procedure1<DocumentRangeFormattingParams> _function = (DocumentRangeFormattingParams it) -> {
         String _uri = fileInfo.getUri();
-        it.textDocument(_uri);
+        TextDocumentIdentifier _textDocumentIdentifier = new TextDocumentIdentifier(_uri);
+        it.setTextDocument(_textDocumentIdentifier);
         Range _range = configuration.getRange();
-        it.range(_range);
+        it.setRange(_range);
       };
-      DocumentRangeFormattingParamsBuilder _documentRangeFormattingParamsBuilder = new DocumentRangeFormattingParamsBuilder(_function);
-      DocumentRangeFormattingParams _build = _documentRangeFormattingParamsBuilder.build();
-      final CompletableFuture<List<? extends TextEdit>> changes = this.languageServer.rangeFormatting(_build);
+      DocumentRangeFormattingParams _doubleArrow = ObjectExtensions.<DocumentRangeFormattingParams>operator_doubleArrow(_documentRangeFormattingParams, _function);
+      final CompletableFuture<List<? extends TextEdit>> changes = this.languageServer.rangeFormatting(_doubleArrow);
       String _contents = fileInfo.getContents();
       Document _document = new Document(1, _contents);
       List<? extends TextEdit> _get = changes.get();
@@ -931,36 +934,62 @@ public abstract class AbstractLanguageServerTest implements Consumer<PublishDiag
     }
   }
   
-  protected String toExpectation(final Object kind) {
-    if (kind instanceof DocumentHighlightKind) {
-      return _toExpectation((DocumentHighlightKind)kind);
-    } else if (kind instanceof List) {
-      return _toExpectation((List<?>)kind);
-    } else if (kind instanceof CompletionItem) {
-      return _toExpectation((CompletionItem)kind);
-    } else if (kind instanceof DocumentHighlight) {
-      return _toExpectation((DocumentHighlight)kind);
-    } else if (kind instanceof Hover) {
-      return _toExpectation((Hover)kind);
-    } else if (kind instanceof Location) {
-      return _toExpectation((Location)kind);
-    } else if (kind instanceof MarkedString) {
-      return _toExpectation((MarkedString)kind);
-    } else if (kind instanceof Position) {
-      return _toExpectation((Position)kind);
-    } else if (kind instanceof Range) {
-      return _toExpectation((Range)kind);
-    } else if (kind instanceof SignatureHelp) {
-      return _toExpectation((SignatureHelp)kind);
-    } else if (kind instanceof SymbolInformation) {
-      return _toExpectation((SymbolInformation)kind);
-    } else if (kind instanceof TextEdit) {
-      return _toExpectation((TextEdit)kind);
-    } else if (kind == null) {
+  @Override
+  public void notify(final String method, final Object parameter) {
+    Pair<String, Object> _mappedTo = Pair.<String, Object>of(method, parameter);
+    this.notifications.add(_mappedTo);
+  }
+  
+  @Override
+  public CompletableFuture<?> request(final String method, final Object parameter) {
+    return CompletableFuture.<Object>completedFuture(null);
+  }
+  
+  protected Map<String, List<Diagnostic>> getDiagnostics() {
+    final HashMap<String, List<Diagnostic>> result = CollectionLiterals.<String, List<Diagnostic>>newHashMap();
+    final Function1<Pair<String, Object>, Object> _function = (Pair<String, Object> it) -> {
+      return it.getValue();
+    };
+    List<Object> _map = ListExtensions.<Pair<String, Object>, Object>map(this.notifications, _function);
+    Iterable<PublishDiagnosticsParams> _filter = Iterables.<PublishDiagnosticsParams>filter(_map, PublishDiagnosticsParams.class);
+    for (final PublishDiagnosticsParams diagnostic : _filter) {
+      String _uri = diagnostic.getUri();
+      List<Diagnostic> _diagnostics = diagnostic.getDiagnostics();
+      result.put(_uri, _diagnostics);
+    }
+    return result;
+  }
+  
+  protected String toExpectation(final Object elements) {
+    if (elements instanceof List) {
+      return _toExpectation((List<?>)elements);
+    } else if (elements instanceof DocumentHighlightKind) {
+      return _toExpectation((DocumentHighlightKind)elements);
+    } else if (elements instanceof String) {
+      return _toExpectation((String)elements);
+    } else if (elements == null) {
       return _toExpectation((Void)null);
+    } else if (elements instanceof CompletionItem) {
+      return _toExpectation((CompletionItem)elements);
+    } else if (elements instanceof DocumentHighlight) {
+      return _toExpectation((DocumentHighlight)elements);
+    } else if (elements instanceof Hover) {
+      return _toExpectation((Hover)elements);
+    } else if (elements instanceof Location) {
+      return _toExpectation((Location)elements);
+    } else if (elements instanceof Position) {
+      return _toExpectation((Position)elements);
+    } else if (elements instanceof Range) {
+      return _toExpectation((Range)elements);
+    } else if (elements instanceof SignatureHelp) {
+      return _toExpectation((SignatureHelp)elements);
+    } else if (elements instanceof SymbolInformation) {
+      return _toExpectation((SymbolInformation)elements);
+    } else if (elements instanceof TextEdit) {
+      return _toExpectation((TextEdit)elements);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
-        Arrays.<Object>asList(kind).toString());
+        Arrays.<Object>asList(elements).toString());
     }
   }
   

@@ -26,7 +26,7 @@ class ProjectDescriptionBasedContainerManager implements IContainer.Manager {
 	
 	public def boolean shouldUseProjectDescriptionBasedContainers(IResourceDescriptions resourceDescriptions) {
 		if (resourceDescriptions instanceof ChunkedResourceDescriptions) {
-			if (ProjectDescription.findInEmfObject(resourceDescriptions.resourceSet) != null) {
+			if (ProjectDescription.findInEmfObject(resourceDescriptions.resourceSet) !== null) {
 				return true
 			}
 		}

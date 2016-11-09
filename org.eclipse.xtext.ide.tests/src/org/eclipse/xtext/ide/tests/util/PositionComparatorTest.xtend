@@ -7,8 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.tests.util
 
-import io.typefox.lsapi.impl.PositionImpl
+import java.util.List
 import javax.inject.Inject
+import org.eclipse.lsp4j.Position
 import org.eclipse.xtext.ide.tests.testlanguage.TestLanguageIdeInjectorProvider
 import org.eclipse.xtext.ide.util.PositionComparator
 import org.eclipse.xtext.testing.InjectWith
@@ -16,8 +17,6 @@ import org.eclipse.xtext.testing.XtextRunner
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
-import java.util.List
-import io.typefox.lsapi.Position
 
 /**
  * Test for the null-safe {@link PositionComparator}.
@@ -33,7 +32,7 @@ class PositionComparatorTest extends Assert {
 
 	@Test
 	def void withoutNull() {
-		val input = newArrayList(newPosition(2, 2), newPosition(2, 1), newPosition(1, 2), newPosition(1, 1)).sort;
+		val input = newArrayList(new Position(2, 2), new Position(2, 1), new Position(1, 2), new Position(1, 1)).sort;
 
 		assertEquals(1, input.get(0).line);
 		assertEquals(1, input.get(0).character);
@@ -50,7 +49,7 @@ class PositionComparatorTest extends Assert {
 
 	@Test
 	def void withNull() {
-		val input = newArrayList(newPosition(2, 2), null, newPosition(1, 1)).sort;
+		val input = newArrayList(new Position(2, 2), null, new Position(1, 1)).sort;
 
 		assertEquals(1, input.get(0).line);
 		assertEquals(1, input.get(0).character);
@@ -59,10 +58,6 @@ class PositionComparatorTest extends Assert {
 		assertEquals(2, input.get(1).character);
 
 		assertNull(input.last)
-	}
-
-	private def newPosition(int line, int character) {
-		return new PositionImpl(line, character);
 	}
 
 	private def sort(List<? extends Position> toSort) {

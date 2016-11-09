@@ -8,9 +8,12 @@
 package org.eclipse.xtext.ide.tests.testlanguage.server
 
 import com.google.inject.Guice
-import io.typefox.lsapi.services.LanguageServer
-import io.typefox.lsapi.services.json.LanguageServerLauncher
+import java.io.PrintWriter
 import java.net.InetSocketAddress
+import java.nio.channels.Channels
+import java.nio.channels.ServerSocketChannel
+import org.eclipse.lsp4j.launch.LSPLauncher
+import org.eclipse.lsp4j.services.LanguageServer
 import org.eclipse.xtext.ide.server.ServerModule
 
 /**
@@ -21,11 +24,11 @@ class SocketServerLauncher {
 	def static void main(String[] args) {
 		val injector = Guice.createInjector(new ServerModule)
 		val languageServer = injector.getInstance(LanguageServer)
-		val launcher = LanguageServerLauncher.newLoggingLauncher(
-			languageServer,
-			new InetSocketAddress('localhost', 5007)
-		)
-		launcher.launch
+		val serverSocket = ServerSocketChannel.open()
+		serverSocket.bind(new InetSocketAddress('localhost', 5007));
+		val socketChannel = serverSocket.accept()
+		val launcher = LSPLauncher.createServerLauncher(languageServer, Channels.newInputStream(socketChannel), Channels.newOutputStream(socketChannel), true, new PrintWriter(System.out));
+		launcher.startListening.get
 	}
 
 }

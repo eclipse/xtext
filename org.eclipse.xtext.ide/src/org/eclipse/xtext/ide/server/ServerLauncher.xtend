@@ -9,8 +9,6 @@ package org.eclipse.xtext.ide.server
 
 import com.google.inject.Guice
 import com.google.inject.Inject
-import io.typefox.lsapi.services.json.LanguageServerToJsonAdapter
-import io.typefox.lsapi.services.json.LoggingJsonAdapter
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
 import java.io.FileOutputStream
@@ -19,6 +17,8 @@ import java.io.OutputStream
 import java.io.PrintStream
 import java.io.PrintWriter
 import java.sql.Timestamp
+import org.eclipse.lsp4j.jsonrpc.Launcher
+import org.eclipse.lsp4j.services.LanguageClient
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -41,23 +41,11 @@ class ServerLauncher {
 
 	def void start(InputStream in, OutputStream out) {
 		System.err.println("Starting Xtext Language Server.")
-
-		val messageAcceptor = if (IS_DEBUG) {
-				new LoggingJsonAdapter(languageServer) => [
-					errorLog = new PrintWriter(System.err)
-					messageLog = new PrintWriter(System.out)
-				]
-			} else {
-				new LanguageServerToJsonAdapter(languageServer) => [
-					protocol.addErrorListener [ p1, p2 |
-						p2.printStackTrace(System.err)
-					]
-				]
-			}
-		messageAcceptor.connect(in, out)
+		val launcher = Launcher.createLauncher(languageServer, LanguageClient, in, out, true, new PrintWriter(System.out))
+		languageServer.connect(launcher.remoteProxy)
+		val future = launcher.startListening
 		System.err.println("started.")
-		messageAcceptor.join
-		while (true) {
+		while (!future.done) {
 			Thread.sleep(10_000l)
 		}
 	}

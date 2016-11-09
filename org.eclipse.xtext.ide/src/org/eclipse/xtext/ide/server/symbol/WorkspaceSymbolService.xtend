@@ -9,8 +9,8 @@ package org.eclipse.xtext.ide.server.symbol
 
 import com.google.inject.Inject
 import com.google.inject.Singleton
-import io.typefox.lsapi.SymbolInformation
 import java.util.List
+import org.eclipse.lsp4j.SymbolInformation
 import org.eclipse.xtext.findReferences.IReferenceFinder.IResourceAccess
 import org.eclipse.xtext.resource.IResourceDescriptions
 import org.eclipse.xtext.resource.IResourceServiceProvider
