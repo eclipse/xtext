@@ -66,7 +66,7 @@ public abstract class AbstractProjectAwareResourceDescriptionsProvider extends R
 	}
 	
 	/**
-	 * @singe 2.9
+	 * @since 2.9
 	 */
 	protected boolean isProjectLocal(URI uri, final String encodedProjectName) {
 		if (uri == null || uri.segmentCount() < 2 || !uri.isPlatformResource())
