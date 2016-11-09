@@ -16,6 +16,7 @@ import org.eclipse.xtext.util.Strings;
 /**
  * @author Holger Schill - Initial contribution and API
  * @author Anton Kosyakov - https://bugs.eclipse.org/bugs/show_bug.cgi?id=379220
+ * @author Karsten Thoms - bug#378821
  */
 public class XtendTypeCreatorUtil {
 
@@ -68,8 +69,8 @@ public class XtendTypeCreatorUtil {
 		return sb.toString();
 	}
 
-	public static String createClassContent(String typeName, String superClass, 
-			@SuppressWarnings("rawtypes") List superInterfaces, String indentation, String lineSeparator) {
+	public static String createClassContent(String typeName, String superClass, @SuppressWarnings("rawtypes") List superInterfaces,
+			String indentation, String lineSeparator, boolean createMain) {
 		StringBuffer sb = new StringBuffer();
 		sb.append("class ");
 		sb.append(typeName);
@@ -90,6 +91,15 @@ public class XtendTypeCreatorUtil {
 		sb.append(" {");
 		sb.append(lineSeparator);
 		sb.append(indentation);
+		if (createMain) {
+			sb.append("def static void main(String[] args) {");
+			sb.append(lineSeparator);
+			sb.append(indentation);
+			sb.append(indentation);
+			sb.append(lineSeparator);
+			sb.append(indentation);
+			sb.append("}");
+		}
 		sb.append(lineSeparator);
 		sb.append("}");
 		return sb.toString();
