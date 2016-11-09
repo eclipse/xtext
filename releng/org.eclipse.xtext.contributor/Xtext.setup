@@ -5,6 +5,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:git="http://www.eclipse.org/oomph/setup/git/1.0"
     xmlns:jdt="http://www.eclipse.org/oomph/setup/jdt/1.0"
+    xmlns:launching="http://www.eclipse.org/oomph/setup/launching/1.0"
     xmlns:mylyn="http://www.eclipse.org/oomph/setup/mylyn/1.0"
     xmlns:pde="http://www.eclipse.org/oomph/setup/pde/1.0"
     xmlns:predicates="http://www.eclipse.org/oomph/predicates/1.0"
@@ -14,7 +15,7 @@
     xmlns:setup.targlets="http://www.eclipse.org/oomph/setup/targlets/1.0"
     xmlns:setup.workingsets="http://www.eclipse.org/oomph/setup/workingsets/1.0"
     xmlns:workingsets="http://www.eclipse.org/oomph/workingsets/1.0"
-    xsi:schemaLocation="http://www.eclipse.org/oomph/setup/git/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Git.ecore http://www.eclipse.org/oomph/setup/jdt/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/JDT.ecore http://www.eclipse.org/oomph/setup/mylyn/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Mylyn.ecore http://www.eclipse.org/oomph/setup/pde/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/PDE.ecore http://www.eclipse.org/oomph/predicates/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Predicates.ecore http://www.eclipse.org/oomph/setup/projects/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Projects.ecore http://www.eclipse.org/oomph/setup/targlets/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/SetupTarglets.ecore http://www.eclipse.org/oomph/setup/workingsets/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/SetupWorkingSets.ecore http://www.eclipse.org/oomph/workingsets/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/WorkingSets.ecore"
+    xsi:schemaLocation="http://www.eclipse.org/oomph/setup/git/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Git.ecore http://www.eclipse.org/oomph/setup/jdt/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/JDT.ecore http://www.eclipse.org/oomph/setup/launching/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Launching.ecore http://www.eclipse.org/oomph/setup/mylyn/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Mylyn.ecore http://www.eclipse.org/oomph/setup/pde/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/PDE.ecore http://www.eclipse.org/oomph/predicates/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Predicates.ecore http://www.eclipse.org/oomph/setup/projects/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Projects.ecore http://www.eclipse.org/oomph/setup/targlets/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/SetupTarglets.ecore http://www.eclipse.org/oomph/setup/workingsets/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/SetupWorkingSets.ecore http://www.eclipse.org/oomph/workingsets/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/WorkingSets.ecore"
     name="xtext"
     label="Xtext">
   <setupTask
@@ -308,6 +309,51 @@
             pattern="xtext-eclipse"/>
       </predicate>
     </workingSet>
+    <workingSet
+        name="Releng">
+      <predicate
+          xsi:type="predicates:AndPredicate">
+        <operand
+            xsi:type="predicates:RepositoryPredicate"
+            project="org.eclipse.xtext.tycho.parent"/>
+      </predicate>
+    </workingSet>
+  </setupTask>
+  <setupTask
+      xsi:type="git:GitCloneTask"
+      id="git.clone.xtext.umbrella"
+      remoteURI="eclipse/xtext-umbrella"
+      pushURI=""
+      checkoutBranch="${xtext.git.branch}">
+    <annotation
+        source="http://www.eclipse.org/oomph/setup/InducedChoices">
+      <detail
+          key="inherit">
+        <value>github.remoteURIs</value>
+      </detail>
+      <detail
+          key="label">
+        <value>Github Repository</value>
+      </detail>
+      <detail
+          key="target">
+        <value>remoteURI</value>
+      </detail>
+    </annotation>
+    <description>${scope.project.label}</description>
+  </setupTask>
+  <setupTask
+      xsi:type="setup:StringSubstitutionTask"
+      name="git.xtext.umbrella.location"
+      value="${git.clone.xtext.umbrella.location}">
+    <description></description>
+  </setupTask>
+  <setupTask
+      xsi:type="projects:ProjectsImportTask">
+    <sourceLocator
+        rootFolder="${git.clone.xtext.umbrella.location}"
+        locateNestedProjects="true"/>
+    <description>Import projects from umbrella repository</description>
   </setupTask>
   <project name="core"
       label="Xtext Core">
@@ -338,6 +384,10 @@
         xsi:type="setup:StringSubstitutionTask"
         name="git.xtext.core.location"
         value="${git.clone.xtext.core.location}"/>
+    <setupTask
+        xsi:type="launching:LaunchTask"
+        id="buildship.xtext-core"
+        launcher="GenerateBuildshipPreferences"/>
     <setupTask
         xsi:type="projects:ProjectsImportTask">
       <sourceLocator
@@ -410,6 +460,10 @@
       <description></description>
     </setupTask>
     <setupTask
+        xsi:type="launching:LaunchTask"
+        id="buildship.xtext-lib"
+        launcher="GenerateBuildshipPreferences"/>
+    <setupTask
         xsi:type="projects:ProjectsImportTask">
       <sourceLocator
           rootFolder="${git.clone.xtext.lib.location}"
@@ -457,6 +511,7 @@
         xsi:type="git:GitCloneTask"
         id="git.clone.xtext.extras"
         remoteURI="eclipse/xtext-extras"
+        pushURI=""
         checkoutBranch="${xtext.git.branch}">
       <annotation
           source="http://www.eclipse.org/oomph/setup/InducedChoices">
@@ -479,6 +534,10 @@
         xsi:type="setup:StringSubstitutionTask"
         name="git.xtext.extras.location"
         value="${git.clone.xtext.extras.location}"/>
+    <setupTask
+        xsi:type="launching:LaunchTask"
+        id="buildship.xtext-extras"
+        launcher="GenerateBuildshipPreferences"/>
     <setupTask
         xsi:type="projects:ProjectsImportTask">
       <sourceLocator
@@ -799,6 +858,11 @@
         </predicate>
       </workingSet>
     </setupTask>
+    <setupTask
+        xsi:type="setup:EclipseIniTask"
+        option="-Doomph.redirection.xtext"
+        value="=https://raw.githubusercontent.com/eclipse/xtext-eclipse/${xtext.git.branch}/->${git.clone.xtext.eclipse.location|uri}/"
+        vm="true"/>
     <stream
         name="master">
       <setupTask
@@ -861,6 +925,10 @@
         value="${git.clone.xtext.idea.location}">
       <description></description>
     </setupTask>
+    <setupTask
+        xsi:type="launching:LaunchTask"
+        id="buildship.xtext-idea"
+        launcher="GenerateBuildshipPreferences"/>
     <setupTask
         xsi:type="projects:ProjectsImportTask">
       <sourceLocator
@@ -933,6 +1001,10 @@
         value="${git.clone.xtext.web.location}">
       <description></description>
     </setupTask>
+    <setupTask
+        xsi:type="launching:LaunchTask"
+        id="buildship.xtext-web"
+        launcher="GenerateBuildshipPreferences"/>
     <setupTask
         xsi:type="projects:ProjectsImportTask">
       <sourceLocator
@@ -1077,6 +1149,12 @@
       <description></description>
     </setupTask>
     <setupTask
+        xsi:type="launching:LaunchTask"
+        id="buildship.xtext-xtend"
+        launcher="GenerateBuildshipPreferences">
+      <description></description>
+    </setupTask>
+    <setupTask
         xsi:type="setup.p2:P2Task"
         id="p2.swtbot"
         label="SWTBot"
@@ -1211,6 +1289,34 @@
       <setupTask
           xsi:type="mylyn:MylynQueriesTask"
           connectorKind="github"
+          repositoryURL="https://github.com/eclipse/xtext-umbrella"
+          userID="${github.user.id}"
+          password="${github.user.password}">
+        <query
+            summary="Xtext-Umbrella Issues"
+            url="">
+          <attribute
+              key="state"
+              value="open::"/>
+        </query>
+      </setupTask>
+      <setupTask
+          xsi:type="mylyn:MylynQueriesTask"
+          connectorKind="github"
+          repositoryURL="https://github.com/eclipse/xtext"
+          userID="${github.user.id}"
+          password="${github.user.password}">
+        <query
+            summary="Xtext-Umbrella (old) Issues"
+            url="">
+          <attribute
+              key="state"
+              value="open::"/>
+        </query>
+      </setupTask>
+      <setupTask
+          xsi:type="mylyn:MylynQueriesTask"
+          connectorKind="github"
           repositoryURL="https://github.com/eclipse/xtext-core"
           userID="${github.user.id}"
           password="${github.user.password}">
@@ -1324,6 +1430,34 @@
     <stream
         name="github"
         label="GitHub Issues (all)">
+      <setupTask
+          xsi:type="mylyn:MylynQueriesTask"
+          connectorKind="github"
+          repositoryURL="https://github.com/eclipse/xtext-umbrella"
+          userID="${github.user.id}"
+          password="${github.user.password}">
+        <query
+            summary="Xtext-Umbrella Issues"
+            url="">
+          <attribute
+              key="state"
+              value="open::"/>
+        </query>
+      </setupTask>
+      <setupTask
+          xsi:type="mylyn:MylynQueriesTask"
+          connectorKind="github"
+          repositoryURL="https://github.com/eclipse/xtext"
+          userID="${github.user.id}"
+          password="${github.user.password}">
+        <query
+            summary="Xtext-Umbrella (old) Issues"
+            url="">
+          <attribute
+              key="state"
+              value="open::"/>
+        </query>
+      </setupTask>
       <setupTask
           xsi:type="mylyn:MylynQueriesTask"
           connectorKind="github"
@@ -1590,6 +1724,38 @@
           password="${github.user.password}">
         <query
             summary="Xtext-Xtend Issues"
+            url="">
+          <attribute
+              key="state"
+              value="open::"/>
+        </query>
+      </setupTask>
+    </stream>
+    <stream
+        name="xtext-umbrella"
+        label="Xtend Umbrella Issues">
+      <setupTask
+          xsi:type="mylyn:MylynQueriesTask"
+          connectorKind="github"
+          repositoryURL="https://github.com/eclipse/xtext-umbrella"
+          userID="${github.user.id}"
+          password="${github.user.password}">
+        <query
+            summary="Xtext-Umbrella Issues"
+            url="">
+          <attribute
+              key="state"
+              value="open::"/>
+        </query>
+      </setupTask>
+      <setupTask
+          xsi:type="mylyn:MylynQueriesTask"
+          connectorKind="github"
+          repositoryURL="https://github.com/eclipse/xtext"
+          userID="${github.user.id}"
+          password="${github.user.password}">
+        <query
+            summary="Xtext-Umbrella (old) Issues"
             url="">
           <attribute
               key="state"
