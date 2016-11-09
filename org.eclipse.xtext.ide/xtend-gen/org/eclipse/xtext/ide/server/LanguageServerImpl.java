@@ -820,7 +820,9 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
       final Function1<CancelIndicator, T> _function = (CancelIndicator cancelIndicator) -> {
         URI _uri = LanguageServerImpl.this._uriExtensions.toUri(uri);
         final Function2<Document, XtextResource, T> _function_1 = (Document document, XtextResource resource) -> {
-          final ILanguageServerAccess.Context ctx = new ILanguageServerAccess.Context(resource, document, cancelIndicator);
+          URI _uRI = resource.getURI();
+          boolean _isDocumentOpen = LanguageServerImpl.this.workspaceManager.isDocumentOpen(_uRI);
+          final ILanguageServerAccess.Context ctx = new ILanguageServerAccess.Context(resource, document, _isDocumentOpen, cancelIndicator);
           return function.apply(ctx);
         };
         return LanguageServerImpl.this.workspaceManager.<T>doRead(_uri, _function_1);

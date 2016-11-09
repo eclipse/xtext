@@ -269,5 +269,9 @@ public class WorkspaceManager {
     return _elvis;
   }
   
+  public boolean isDocumentOpen(final URI uri) {
+    return this.openDocuments.containsKey(uri);
+  }
+  
   private final static Logger LOG = Logger.getLogger(WorkspaceManager.class);
 }

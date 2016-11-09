@@ -28,6 +28,7 @@ interface ILanguageServerAccess {
 	static class Context {
 		Resource resource
 		Document document
+		boolean isDocumentOpen
 		CancelIndicator cancelChecker
 	}
 

@@ -525,7 +525,7 @@ import org.eclipse.xtext.validation.Issue
 		override <T> doRead(String uri, Function<Context, T> function) {
 				requestManager.runRead [ cancelIndicator |
 					workspaceManager.doRead(uri.toUri) [ document, resource |
-						val ctx = new Context(resource, document, cancelIndicator)
+						val ctx = new Context(resource, document, workspaceManager.isDocumentOpen(resource.URI), cancelIndicator)
 						return function.apply(ctx)
 					]
 				]

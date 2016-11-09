@@ -32,12 +32,15 @@ public interface ILanguageServerAccess {
     
     private final Document document;
     
+    private final boolean isDocumentOpen;
+    
     private final CancelIndicator cancelChecker;
     
-    public Context(final Resource resource, final Document document, final CancelIndicator cancelChecker) {
+    public Context(final Resource resource, final Document document, final boolean isDocumentOpen, final CancelIndicator cancelChecker) {
       super();
       this.resource = resource;
       this.document = document;
+      this.isDocumentOpen = isDocumentOpen;
       this.cancelChecker = cancelChecker;
     }
     
@@ -48,6 +51,7 @@ public interface ILanguageServerAccess {
       int result = 1;
       result = prime * result + ((this.resource== null) ? 0 : this.resource.hashCode());
       result = prime * result + ((this.document== null) ? 0 : this.document.hashCode());
+      result = prime * result + (this.isDocumentOpen ? 1231 : 1237);
       result = prime * result + ((this.cancelChecker== null) ? 0 : this.cancelChecker.hashCode());
       return result;
     }
@@ -72,6 +76,8 @@ public interface ILanguageServerAccess {
           return false;
       } else if (!this.document.equals(other.document))
         return false;
+      if (other.isDocumentOpen != this.isDocumentOpen)
+        return false;
       if (this.cancelChecker == null) {
         if (other.cancelChecker != null)
           return false;
@@ -86,6 +92,7 @@ public interface ILanguageServerAccess {
       ToStringBuilder b = new ToStringBuilder(this);
       b.add("resource", this.resource);
       b.add("document", this.document);
+      b.add("isDocumentOpen", this.isDocumentOpen);
       b.add("cancelChecker", this.cancelChecker);
       return b.toString();
     }
@@ -98,6 +105,11 @@ public interface ILanguageServerAccess {
     @Pure
     public Document getDocument() {
       return this.document;
+    }
+    
+    @Pure
+    public boolean isDocumentOpen() {
+      return this.isDocumentOpen;
     }
     
     @Pure
