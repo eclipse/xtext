@@ -43,7 +43,7 @@ class RequestManagerTest {
 		sharedState = null
 	}
 
-	@Test
+	@Test(timeout = 1000)
 	def void testRunRead() {
 		val future = requestManager.runRead [
 			'Foo'
@@ -51,7 +51,7 @@ class RequestManagerTest {
 		assertEquals('Foo', future.get)
 	}
 
-	@Test
+	@Test(timeout = 1000)
 	def void testRunReadConcurrent() {
 		val future = requestManager.runRead [
 			while (sharedState.get == 0) {
@@ -65,7 +65,7 @@ class RequestManagerTest {
 		assertEquals(2, sharedState.get)
 	}
 
-	@Test
+	@Test(timeout = 1000)
 	def void testRunReadAfterWrite() {
 		requestManager.runWrite [
     		sharedState.incrementAndGet
@@ -76,7 +76,7 @@ class RequestManagerTest {
 		assertEquals(1, future.get)
 	}
 
-	@Test
+	@Test(timeout = 1000)
 	def void testRunWrite() {
 		requestManager.runWrite [
 			sharedState.incrementAndGet
@@ -84,7 +84,7 @@ class RequestManagerTest {
 		assertEquals(1, sharedState.get)
 	}
 
-	@Test
+	@Test(timeout = 1000)
 	def void testRunWriteAfterWrite() {
 		requestManager.runWrite [
 			sharedState.incrementAndGet
@@ -96,7 +96,7 @@ class RequestManagerTest {
 		assertEquals(2, sharedState.get)
 	}
 
-	@Test
+	@Test(timeout = 1000)
 	def void testRunWriteAfterRead() {
 		requestManager.runRead [
 			sharedState.incrementAndGet
@@ -108,37 +108,53 @@ class RequestManagerTest {
 		assertEquals(2, sharedState.get)
 	}
 
-	@Test
+	@Test(timeout = 1000)
 	def void testCancelWrite() {
-		requestManager.runWrite [ cancelIndicator |
-			while (!cancelIndicator.canceled) {
+		val future = requestManager.runWrite [ cancelIndicator |
+			try {
+				sharedState.incrementAndGet
+				while (!cancelIndicator.isCanceled) {
+				}
+				return sharedState.get
+			} catch (CancellationException e) {
+				return sharedState.incrementAndGet
 			}
-			sharedState.incrementAndGet
 		]
-		requestManager.runWrite [
-			sharedState.incrementAndGet
-		].join
-		assertEquals(1, sharedState.get)
-	}
-
-	@Test
-	def void testCancelRead() {
-		sharedState.incrementAndGet
-		val future = requestManager.runRead [ cancelIndicator |
-			while (!cancelIndicator.canceled) {
-			}
-			sharedState.get
-		]
-		requestManager.runWrite [
-			sharedState.set(0)
-			return null
-		].join
+		while (sharedState.get == 0) {
+			Thread.sleep(10)
+		}
+		future.cancel(true)
 		try {
 			future.get
 			Assert.fail("cancellation exception expected")
-		} catch (ExecutionException e) {
+		} catch (CancellationException e) {
 			// expected
-			Assert.assertTrue(e.cause instanceof CancellationException);
+			Assert.assertEquals(1, sharedState.get)
+		}
+	}
+
+	@Test(timeout = 1000)
+	def void testCancelRead() {
+		val future = requestManager.runRead [ cancelIndicator |
+			try {
+				sharedState.incrementAndGet
+				while (!cancelIndicator.isCanceled) {
+				}
+				return sharedState.get
+			} catch (CancellationException e) {
+				return sharedState.incrementAndGet
+			}
+		]
+		while (sharedState.get == 0) {
+			Thread.sleep(10)
+		}
+		future.cancel(true)
+		try {
+			future.get
+			Assert.fail("cancellation exception expected")
+		} catch (CancellationException e) {
+			// expected
+			Assert.assertEquals(1, sharedState.get)
 		}
 	}
 
