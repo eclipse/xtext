@@ -850,10 +850,10 @@ class QuickfixTest extends AbstractXtendUITestCase {
 		''')
 		.assertModelAfterQuickfix("Create static field 'bar'", '''
 			class Foo {
-				static Object foo = bar
 				
 				static Object bar
 				
+				static Object foo = bar
 			}
 		''')
 	}
@@ -889,10 +889,10 @@ class QuickfixTest extends AbstractXtendUITestCase {
 		''')
 		.assertModelAfterQuickfix("Create field 'bar'", '''
 			class Foo {
-				Object foo = bar
 				
 				Object bar
 				
+				Object foo = bar
 			}
 		''')
 	}

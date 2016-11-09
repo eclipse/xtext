@@ -39,6 +39,10 @@ public class InsertionOffsets {
     if (_isEmpty) {
       return this.inEmpty(ownerType);
     }
+    final XtendField callingMember = EcoreUtil2.<XtendField>getContainerOfType(call, XtendField.class);
+    if (((!Objects.equal(callingMember, null)) && ownerType.getMembers().contains(callingMember))) {
+      return this.before(callingMember);
+    }
     EList<XtendMember> _members_1 = ownerType.getMembers();
     Iterable<XtendField> _filter = Iterables.<XtendField>filter(_members_1, XtendField.class);
     final XtendField lastDefinedField = IterableExtensions.<XtendField>last(_filter);
