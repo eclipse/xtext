@@ -47,11 +47,11 @@
   <setupTask
       xsi:type="setup:VariableTask"
       name="xtext.nightly.composite"
-      value="http://services.typefox.io/open-source/jenkins/job/xtext/job/master/lastStableBuild/artifact/build/p2-repository/"/>
+      value="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/latest/"/>
   <setupTask
       xsi:type="setup:VariableTask"
       name="mwe2.update.site"
-      value="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/maintenance/nightly/"/>
+      value="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/latest/"/>
   <setupTask
       xsi:type="setup:VariableTask"
       name="emf.update.site"
