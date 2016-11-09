@@ -17,6 +17,6 @@ public class StringEObjectRegion extends AbstractEObjectRegion {
 	public StringEObjectRegion(StringBasedRegionAccess access, EObject grammarElement, EObject semanticElement) {
 		super(access);
 		this.setGrammarElement(grammarElement);
-		this.setSemantcElement(semanticElement);
+		this.setSemanticElement(semanticElement);
 	}
 }
