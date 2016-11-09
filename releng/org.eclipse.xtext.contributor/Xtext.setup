@@ -764,7 +764,7 @@
             xsi:type="predicates:AndPredicate">
           <operand
               xsi:type="predicates:RepositoryPredicate"
-              project="org.eclipse.xtext.sdk.feature"/>
+              project="org.eclipse.xtext.tycho.parent"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
               excludedWorkingSet="//@setupTasks.15/@workingSets.0 //@projects[name='eclipse']/@setupTasks.4/@workingSets.2 //@projects[name='eclipse']/@setupTasks.4/@workingSets.1"/>
@@ -776,19 +776,13 @@
             xsi:type="predicates:AndPredicate">
           <operand
               xsi:type="predicates:RepositoryPredicate"
-              project="org.eclipse.xtext.sdk.feature"/>
+              project="org.eclipse.xtext.tycho.parent"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
               excludedWorkingSet="//@setupTasks.15/@workingSets.0 //@projects[name='eclipse']/@setupTasks.4/@workingSets.2"/>
           <operand
-              xsi:type="predicates:OrPredicate">
-            <operand
-                xsi:type="predicates:NaturePredicate"
-                nature="org.eclipse.pde.FeatureNature"/>
-            <operand
-                xsi:type="predicates:NaturePredicate"
-                nature="org.eclipse.xtext.build.feature"/>
-          </operand>
+              xsi:type="predicates:NaturePredicate"
+              nature="org.eclipse.pde.FeatureNature"/>
         </predicate>
       </workingSet>
       <workingSet
@@ -797,7 +791,7 @@
             xsi:type="predicates:AndPredicate">
           <operand
               xsi:type="predicates:RepositoryPredicate"
-              project="org.eclipse.xtext.sdk.feature"/>
+              project="org.eclipse.xtext.tycho.parent"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
               excludedWorkingSet="//@setupTasks.15/@workingSets.0"/>
