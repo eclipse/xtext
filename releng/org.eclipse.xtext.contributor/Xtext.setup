@@ -47,11 +47,7 @@
   <setupTask
       xsi:type="setup:VariableTask"
       name="xtext.nightly.composite"
-      value="http://services.typefox.io/open-source/jenkins/job/xtext-eclipse/job/master/lastStableBuild/artifact/build/p2-repository/"/>
-  <setupTask
-      xsi:type="setup:VariableTask"
-      name="xtend.nightly.composite"
-      value="http://services.typefox.io/open-source/jenkins/job/xtext-xtend/job/master/lastSuccessfulBuild/artifact/build/p2-repository/"/>
+      value="http://services.typefox.io/open-source/jenkins/job/xtext/job/master/lastStableBuild/artifact/build/p2-repository/"/>
   <setupTask
       xsi:type="setup:VariableTask"
       name="mwe2.update.site"
@@ -263,8 +259,6 @@
     <repository
         url="${xtext.nightly.composite}"/>
     <repository
-        url="${xtend.nightly.composite}"/>
-    <repository
         url="${mwe2.update.site}"/>
   </setupTask>
   <setupTask
@@ -362,7 +356,7 @@
               project="org.eclipse.xtext"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.15/@workingSets.0"/>
+              excludedWorkingSet="//@setupTasks.14/@workingSets.0"/>
         </predicate>
       </workingSet>
     </setupTask>
@@ -434,7 +428,7 @@
               project="org.eclipse.xtext.xbase.lib"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.15/@workingSets.0"/>
+              excludedWorkingSet="//@setupTasks.14/@workingSets.0"/>
         </predicate>
       </workingSet>
     </setupTask>
@@ -503,7 +497,7 @@
               project="org.eclipse.xtext.xbase"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.15/@workingSets.0"/>
+              excludedWorkingSet="//@setupTasks.14/@workingSets.0"/>
         </predicate>
       </workingSet>
     </setupTask>
@@ -771,7 +765,7 @@
               project="org.eclipse.xtext.tycho.parent"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.15/@workingSets.0 //@projects[name='eclipse']/@setupTasks.4/@workingSets.2 //@projects[name='eclipse']/@setupTasks.4/@workingSets.1"/>
+              excludedWorkingSet="//@setupTasks.14/@workingSets.0 //@projects[name='eclipse']/@setupTasks.4/@workingSets.2 //@projects[name='eclipse']/@setupTasks.4/@workingSets.1"/>
         </predicate>
       </workingSet>
       <workingSet
@@ -783,7 +777,7 @@
               project="org.eclipse.xtext.tycho.parent"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.15/@workingSets.0 //@projects[name='eclipse']/@setupTasks.4/@workingSets.2"/>
+              excludedWorkingSet="//@setupTasks.14/@workingSets.0 //@projects[name='eclipse']/@setupTasks.4/@workingSets.2"/>
           <operand
               xsi:type="predicates:NaturePredicate"
               nature="org.eclipse.pde.FeatureNature"/>
@@ -798,7 +792,7 @@
               project="org.eclipse.xtext.tycho.parent"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.15/@workingSets.0"/>
+              excludedWorkingSet="//@setupTasks.14/@workingSets.0"/>
           <operand
               xsi:type="predicates:NamePredicate"
               pattern=".*\.example\..*"/>
@@ -886,7 +880,7 @@
               project="org.eclipse.xtext.core.idea.tests"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.15/@workingSets.0"/>
+              excludedWorkingSet="//@setupTasks.14/@workingSets.0"/>
         </predicate>
       </workingSet>
     </setupTask>
@@ -958,7 +952,7 @@
               project="org.eclipse.xtext.web"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.15/@workingSets.0"/>
+              excludedWorkingSet="//@setupTasks.14/@workingSets.0"/>
         </predicate>
       </workingSet>
     </setupTask>
@@ -1029,7 +1023,7 @@
               project="org.eclipse.xtext.maven.plugin"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.15/@workingSets.0"/>
+              excludedWorkingSet="//@setupTasks.14/@workingSets.0"/>
         </predicate>
       </workingSet>
     </setupTask>
@@ -1115,7 +1109,7 @@
               project="org.eclipse.xtend.core"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@setupTasks.15/@workingSets.0"/>
+              excludedWorkingSet="//@setupTasks.14/@workingSets.0"/>
         </predicate>
       </workingSet>
     </setupTask>
