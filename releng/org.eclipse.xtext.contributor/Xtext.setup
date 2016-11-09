@@ -237,6 +237,10 @@
           xsi:type="setup:PreferenceTask"
           key="/instance/org.eclipse.core.resources/description.disableLinking"
           value="false"/>
+      <setupTask
+          xsi:type="setup:PreferenceTask"
+          key="/instance/org.eclipse.core.resources/encoding"
+          value="UTF-8"/>
     </setupTask>
   </setupTask>
   <setupTask
