@@ -19,6 +19,7 @@ import org.eclipse.emf.common.util.URI
 import org.eclipse.lsp4j.CodeActionParams
 import org.eclipse.lsp4j.CodeLens
 import org.eclipse.lsp4j.CodeLensParams
+import org.eclipse.lsp4j.ColoringParams
 import org.eclipse.lsp4j.CompletionItem
 import org.eclipse.lsp4j.CompletionList
 import org.eclipse.lsp4j.CompletionOptions
@@ -80,8 +81,6 @@ import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.validation.Issue
-
-import static extension org.eclipse.xtext.ide.server.coloring.ColoringParamsExtensions.*
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -552,7 +551,7 @@ import static extension org.eclipse.xtext.ide.server.coloring.ColoringParamsExte
 	
 	override afterBuild(List<Delta> deltas) {
 		if (client instanceof LanguageClientExtensions) {
-			deltas.map[uri.toString].forEach [
+		deltas.filter[^new !== null].map[uri.toString].forEach [
 				access.<Void>doRead(it) [ ctx |
 					if (ctx.documentOpen) {
 						if (ctx.resource instanceof XtextResource) {
@@ -562,9 +561,10 @@ import static extension org.eclipse.xtext.ide.server.coloring.ColoringParamsExte
 							val coloringService = serviceProvider?.get(IColoringService);
 							if (coloringService !== null) {
 								val doc = ctx.document;
-								val coloringParams = coloringService.getColoring(resource, doc);
-								if (!coloringParams.empty) {
-									client.updateColoring(coloringParams);
+								val coloringInfos = coloringService.getColoring(resource, doc);
+								if (!coloringInfos.nullOrEmpty) {
+									val uri = resource.URI.toString;
+									client.updateColoring(new ColoringParams(uri, coloringInfos));
 								}
 							}
 						}

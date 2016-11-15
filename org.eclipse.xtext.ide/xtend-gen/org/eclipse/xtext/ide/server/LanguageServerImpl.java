@@ -28,6 +28,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.lsp4j.CodeActionParams;
 import org.eclipse.lsp4j.CodeLens;
 import org.eclipse.lsp4j.CodeLensParams;
+import org.eclipse.lsp4j.ColoringInformation;
 import org.eclipse.lsp4j.ColoringParams;
 import org.eclipse.lsp4j.Command;
 import org.eclipse.lsp4j.CompletionItem;
@@ -88,7 +89,6 @@ import org.eclipse.xtext.ide.server.ILanguageServerAccess;
 import org.eclipse.xtext.ide.server.ILanguageServerExtension;
 import org.eclipse.xtext.ide.server.UriExtensions;
 import org.eclipse.xtext.ide.server.WorkspaceManager;
-import org.eclipse.xtext.ide.server.coloring.ColoringParamsExtensions;
 import org.eclipse.xtext.ide.server.coloring.IColoringService;
 import org.eclipse.xtext.ide.server.concurrent.RequestManager;
 import org.eclipse.xtext.ide.server.contentassist.ContentAssistService;
@@ -852,13 +852,18 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
   @Override
   public void afterBuild(final List<IResourceDescription.Delta> deltas) {
     if ((this.client instanceof LanguageClientExtensions)) {
-      final Function1<IResourceDescription.Delta, String> _function = (IResourceDescription.Delta it) -> {
+      final Function1<IResourceDescription.Delta, Boolean> _function = (IResourceDescription.Delta it) -> {
+        IResourceDescription _new = it.getNew();
+        return Boolean.valueOf((_new != null));
+      };
+      Iterable<IResourceDescription.Delta> _filter = IterableExtensions.<IResourceDescription.Delta>filter(deltas, _function);
+      final Function1<IResourceDescription.Delta, String> _function_1 = (IResourceDescription.Delta it) -> {
         URI _uri = it.getUri();
         return _uri.toString();
       };
-      List<String> _map = ListExtensions.<IResourceDescription.Delta, String>map(deltas, _function);
-      final Consumer<String> _function_1 = (String it) -> {
-        final Function<ILanguageServerAccess.Context, Void> _function_2 = (ILanguageServerAccess.Context ctx) -> {
+      Iterable<String> _map = IterableExtensions.<IResourceDescription.Delta, String>map(_filter, _function_1);
+      final Consumer<String> _function_2 = (String it) -> {
+        final Function<ILanguageServerAccess.Context, Void> _function_3 = (ILanguageServerAccess.Context ctx) -> {
           boolean _isDocumentOpen = ctx.isDocumentOpen();
           if (_isDocumentOpen) {
             Resource _resource = ctx.getResource();
@@ -874,11 +879,14 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
               final IColoringService coloringService = _get;
               if ((coloringService != null)) {
                 final Document doc = ctx.getDocument();
-                final ColoringParams coloringParams = coloringService.getColoring(resource, doc);
-                boolean _isEmpty = ColoringParamsExtensions.isEmpty(coloringParams);
-                boolean _not = (!_isEmpty);
+                final List<? extends ColoringInformation> coloringInfos = coloringService.getColoring(resource, doc);
+                boolean _isNullOrEmpty = IterableExtensions.isNullOrEmpty(coloringInfos);
+                boolean _not = (!_isNullOrEmpty);
                 if (_not) {
-                  ((LanguageClientExtensions)this.client).updateColoring(coloringParams);
+                  URI _uRI_1 = resource.getURI();
+                  final String uri = _uRI_1.toString();
+                  ColoringParams _coloringParams = new ColoringParams(uri, coloringInfos);
+                  ((LanguageClientExtensions)this.client).updateColoring(_coloringParams);
                 }
               }
             }
@@ -886,9 +894,9 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
           }
           return null;
         };
-        this.access.<Void>doRead(it, _function_2);
+        this.access.<Void>doRead(it, _function_3);
       };
-      _map.forEach(_function_1);
+      _map.forEach(_function_2);
     }
   }
   

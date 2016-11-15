@@ -11,7 +11,6 @@ import com.google.common.collect.ImmutableList
 import java.util.Collections
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.lsp4j.ColoringInformation
-import org.eclipse.lsp4j.ColoringParams
 import org.eclipse.lsp4j.ColoringStyle
 import org.eclipse.lsp4j.Range
 import org.eclipse.xtext.ide.server.Document
@@ -21,7 +20,6 @@ import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Property
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 import org.eclipse.xtext.resource.XtextResource
 
-import static org.eclipse.xtext.ide.server.coloring.ColoringParamsExtensions.*
 import static org.eclipse.xtext.ide.tests.testlanguage.testLanguage.TestLanguagePackage.Literals.MEMBER__NAME
 
 /**
@@ -37,7 +35,7 @@ class ColoringServiceImpl implements IColoringService {
 	@Override
 	override getColoring(XtextResource resource, Document document) {
 		if (resource === null) {
-			return emptyColoringParams;
+			return emptyList;
 		}
 		val builder = ImmutableList.builder;
 		EcoreUtil.getAllContents(resource, true).forEach [
@@ -55,7 +53,7 @@ class ColoringServiceImpl implements IColoringService {
 				builder.add(new ColoringInformation(range, STYLE_IDS));
 			]
 		];
-		return new ColoringParams('''«resource.URI»''', builder.build);
+		return builder.build;
 	}
 
 }

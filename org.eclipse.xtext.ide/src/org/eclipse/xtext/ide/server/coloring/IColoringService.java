@@ -7,7 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.server.coloring;
 
-import org.eclipse.lsp4j.ColoringParams;
+import static java.util.Collections.*;
+
+import java.util.List;
+
+import org.eclipse.lsp4j.ColoringInformation;
 import org.eclipse.xtext.ide.server.Document;
 import org.eclipse.xtext.resource.XtextResource;
 
@@ -24,7 +28,7 @@ import com.google.inject.ImplementedBy;
 public interface IColoringService {
 
 	/**
-	 * Provides all available coloring information for the resource.
+	 * Provides a list of all available coloring information for the resource.
 	 * 
 	 * @param resource
 	 *            the resource that will be highlighted. May be {@code null} in
@@ -32,9 +36,11 @@ public interface IColoringService {
 	 * @param document
 	 *            the IDE and Xtext independent document that can be used to
 	 *            convert the document based offsets to line based positions.
-	 * @return the coloring and highlighting proposal for the resource.
+	 * @return a list of all the coloring and highlighting information for the
+	 *         resource. Must not return with {@code null}, but an empty list
+	 *         instead.
 	 */
-	ColoringParams getColoring(XtextResource resource, Document document);
+	List<? extends ColoringInformation> getColoring(XtextResource resource, Document document);
 
 	/**
 	 * NOOP {@link IColoringService coloring service} implementation. Always
@@ -45,8 +51,8 @@ public interface IColoringService {
 	public static class Noop implements IColoringService {
 
 		@Override
-		public ColoringParams getColoring(final XtextResource resource, final Document document) {
-			return ColoringParamsExtensions.emptyColoringParams(resource);
+		public List<? extends ColoringInformation> getColoring(XtextResource resource, Document document) {
+			return emptyList();
 		}
 
 	}

@@ -12,17 +12,13 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
 import org.eclipse.emf.common.util.TreeIterator;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.lsp4j.ColoringInformation;
-import org.eclipse.lsp4j.ColoringParams;
 import org.eclipse.lsp4j.ColoringStyle;
 import org.eclipse.lsp4j.Position;
 import org.eclipse.lsp4j.Range;
-import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.ide.server.Document;
-import org.eclipse.xtext.ide.server.coloring.ColoringParamsExtensions;
 import org.eclipse.xtext.ide.server.coloring.IColoringService;
 import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Operation;
 import org.eclipse.xtext.ide.tests.testlanguage.testLanguage.Property;
@@ -45,9 +41,9 @@ public class ColoringServiceImpl implements IColoringService {
   private final static List<Integer> STYLE_IDS = Collections.<Integer>singletonList(Integer.valueOf(ColoringStyle.Identifier));
   
   @Override
-  public ColoringParams getColoring(final XtextResource resource, final Document document) {
+  public List<? extends ColoringInformation> getColoring(final XtextResource resource, final Document document) {
     if ((resource == null)) {
-      return ColoringParamsExtensions.emptyColoringParams();
+      return CollectionLiterals.<ColoringInformation>emptyList();
     }
     final ImmutableList.Builder<ColoringInformation> builder = ImmutableList.<ColoringInformation>builder();
     TreeIterator<Object> _allContents = EcoreUtil.<Object>getAllContents(resource, true);
@@ -79,10 +75,6 @@ public class ColoringServiceImpl implements IColoringService {
       nodes.forEach(_function_1);
     };
     IteratorExtensions.<Object>forEach(_allContents, _function);
-    StringConcatenation _builder = new StringConcatenation();
-    URI _uRI = resource.getURI();
-    _builder.append(_uRI, "");
-    ImmutableList<ColoringInformation> _build = builder.build();
-    return new ColoringParams(_builder.toString(), _build);
+    return builder.build();
   }
 }
