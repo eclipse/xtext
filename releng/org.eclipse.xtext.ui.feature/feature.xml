@@ -164,9 +164,16 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-
+  
    <plugin
          id="org.eclipse.xtext.ide.source"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+         
+    <plugin
+         id="org.eclipse.lsp4j"
          download-size="0"
          install-size="0"
          version="0.0.0"
