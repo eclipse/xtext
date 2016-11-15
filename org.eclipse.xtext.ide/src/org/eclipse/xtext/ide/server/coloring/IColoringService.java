@@ -44,7 +44,7 @@ public interface IColoringService {
 
 	/**
 	 * NOOP {@link IColoringService coloring service} implementation. Always
-	 * provides an {@link IColoringService#EMPTY empty} instance.
+	 * provides an empty list of coloring information.
 	 * 
 	 * @author akos.kitta - Initial contribution and API
 	 */
