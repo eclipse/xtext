@@ -8,8 +8,10 @@
 package org.eclipse.xtext.ide.tests.testlanguage;
 
 import org.eclipse.xtext.formatting2.IFormatter2;
+import org.eclipse.xtext.ide.server.coloring.IColoringService;
 import org.eclipse.xtext.ide.server.signatureHelp.ISignatureHelpService;
 import org.eclipse.xtext.ide.tests.testlanguage.AbstractTestLanguageRuntimeModule;
+import org.eclipse.xtext.ide.tests.testlanguage.coloring.ColoringServiceImpl;
 import org.eclipse.xtext.ide.tests.testlanguage.formatting2.TestLanguageFormatter;
 import org.eclipse.xtext.ide.tests.testlanguage.signatureHelp.SignatureHelpServiceImpl;
 
@@ -24,5 +26,9 @@ public class TestLanguageRuntimeModule extends AbstractTestLanguageRuntimeModule
   
   public Class<? extends ISignatureHelpService> bindSignatureHelpService() {
     return SignatureHelpServiceImpl.class;
+  }
+  
+  public Class<? extends IColoringService> bindIColoringService() {
+    return ColoringServiceImpl.class;
   }
 }

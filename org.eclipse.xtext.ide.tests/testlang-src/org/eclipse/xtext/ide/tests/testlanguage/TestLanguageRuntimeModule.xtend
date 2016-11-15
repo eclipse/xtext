@@ -8,7 +8,9 @@
 package org.eclipse.xtext.ide.tests.testlanguage
 
 import org.eclipse.xtext.formatting2.IFormatter2
+import org.eclipse.xtext.ide.server.coloring.IColoringService
 import org.eclipse.xtext.ide.server.signatureHelp.ISignatureHelpService
+import org.eclipse.xtext.ide.tests.testlanguage.coloring.ColoringServiceImpl
 import org.eclipse.xtext.ide.tests.testlanguage.formatting2.TestLanguageFormatter
 import org.eclipse.xtext.ide.tests.testlanguage.signatureHelp.SignatureHelpServiceImpl
 
@@ -18,11 +20,15 @@ import org.eclipse.xtext.ide.tests.testlanguage.signatureHelp.SignatureHelpServi
 class TestLanguageRuntimeModule extends AbstractTestLanguageRuntimeModule {
 	
 	def Class<? extends IFormatter2> bindIFormatter2() {
-		return TestLanguageFormatter
+		return TestLanguageFormatter;
 	}
 	
     def Class<? extends ISignatureHelpService> bindSignatureHelpService() {
-        return SignatureHelpServiceImpl
+        return SignatureHelpServiceImpl;
+    }
+    
+    def Class<? extends IColoringService> bindIColoringService() {
+    	return ColoringServiceImpl;
     }
 
 }

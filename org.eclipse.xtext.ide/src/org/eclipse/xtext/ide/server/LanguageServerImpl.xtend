@@ -58,29 +58,36 @@ import org.eclipse.lsp4j.jsonrpc.json.JsonRpcMethodProvider
 import org.eclipse.lsp4j.jsonrpc.services.ServiceEndpoints
 import org.eclipse.lsp4j.services.LanguageClient
 import org.eclipse.lsp4j.services.LanguageClientAware
+import org.eclipse.lsp4j.services.LanguageClientExtensions
 import org.eclipse.lsp4j.services.LanguageServer
 import org.eclipse.lsp4j.services.TextDocumentService
 import org.eclipse.lsp4j.services.WorkspaceService
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
+import org.eclipse.xtext.ide.server.ILanguageServerAccess.IBuildListener
+import org.eclipse.xtext.ide.server.coloring.IColoringService
 import org.eclipse.xtext.ide.server.concurrent.RequestManager
 import org.eclipse.xtext.ide.server.contentassist.ContentAssistService
 import org.eclipse.xtext.ide.server.findReferences.WorkspaceResourceAccess
 import org.eclipse.xtext.ide.server.formatting.FormattingService
 import org.eclipse.xtext.ide.server.hover.HoverService
 import org.eclipse.xtext.ide.server.occurrences.IDocumentHighlightService
+import org.eclipse.xtext.ide.server.signatureHelp.ISignatureHelpService
 import org.eclipse.xtext.ide.server.symbol.DocumentSymbolService
 import org.eclipse.xtext.ide.server.symbol.WorkspaceSymbolService
+import org.eclipse.xtext.resource.IResourceDescription.Delta
 import org.eclipse.xtext.resource.IResourceServiceProvider
+import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.validation.Issue
-import org.eclipse.xtext.ide.server.signatureHelp.ISignatureHelpService
+
+import static extension org.eclipse.xtext.ide.server.coloring.ColoringParamsExtensions.*
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  * @since 2.11
  */
-@Log class LanguageServerImpl implements LanguageServer, WorkspaceService, TextDocumentService, LanguageClientAware, Endpoint, JsonRpcMethodProvider {
+@Log class LanguageServerImpl implements LanguageServer, WorkspaceService, TextDocumentService, LanguageClientAware, Endpoint, JsonRpcMethodProvider, IBuildListener {
 
 	@Inject RequestManager requestManager
 	@Inject WorkspaceSymbolService workspaceSymbolService
@@ -132,6 +139,8 @@ import org.eclipse.xtext.ide.server.signatureHelp.ISignatureHelpService
 			workspaceManager.initialize(rootURI, [this.publishDiagnostics($0, $1)], cancelIndicator)
 			return null
 		]
+
+		access.addBuildListener(this);
 
 		return CompletableFuture.completedFuture(result)
 	}
@@ -539,6 +548,31 @@ import org.eclipse.xtext.ide.server.signatureHelp.ISignatureHelpService
 			client
 		}
 		
+	}
+	
+	override afterBuild(List<Delta> deltas) {
+		if (client instanceof LanguageClientExtensions) {
+			deltas.map[uri.toString].forEach [
+				access.<Void>doRead(it) [ ctx |
+					if (ctx.documentOpen) {
+						if (ctx.resource instanceof XtextResource) {
+							// XXX Do the coloring update iff the resource has no syntax errors?
+							val resource = ctx.resource as XtextResource;
+							val serviceProvider = resource.URI.resourceServiceProvider;
+							val coloringService = serviceProvider?.get(IColoringService);
+							if (coloringService !== null) {
+								val doc = ctx.document;
+								val coloringParams = coloringService.getColoring(resource, doc);
+								if (!coloringParams.empty) {
+									client.updateColoring(coloringParams);
+								}
+							}
+						}
+						return /*void*/ null;
+					}
+				];
+			];
+		}
 	}
 
 }

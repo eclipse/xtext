@@ -18,6 +18,8 @@ import java.nio.file.Paths
 import java.util.List
 import java.util.Map
 import java.util.concurrent.CompletableFuture
+import org.eclipse.lsp4j.ColoringInformation
+import org.eclipse.lsp4j.ColoringParams
 import org.eclipse.lsp4j.CompletionItem
 import org.eclipse.lsp4j.CompletionList
 import org.eclipse.lsp4j.Diagnostic
@@ -49,7 +51,6 @@ import org.eclipse.lsp4j.TextEdit
 import org.eclipse.lsp4j.WorkspaceSymbolParams
 import org.eclipse.lsp4j.jsonrpc.Endpoint
 import org.eclipse.lsp4j.jsonrpc.services.ServiceEndpoints
-import org.eclipse.lsp4j.services.LanguageClient
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.LanguageInfo
@@ -57,7 +58,6 @@ import org.eclipse.xtext.ide.server.Document
 import org.eclipse.xtext.ide.server.LanguageServerImpl
 import org.eclipse.xtext.ide.server.ServerModule
 import org.eclipse.xtext.ide.server.UriExtensions
-import org.eclipse.xtext.ide.server.coloring.ColoringParams
 import org.eclipse.xtext.ide.server.concurrent.RequestManager
 import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.eclipse.xtext.util.CancelIndicator
@@ -65,7 +65,8 @@ import org.eclipse.xtext.util.Files
 import org.eclipse.xtext.util.Modules2
 import org.junit.Assert
 import org.junit.Before
-import org.eclipse.xtext.ide.server.coloring.ColoringInformation
+import org.eclipse.lsp4j.services.LanguageClientExtensions
+import org.eclipse.xtend.lib.annotations.Data
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -104,7 +105,7 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 			languageInfo = resourceServiceProvider.get(LanguageInfo)
 
 		// register notification callbacks
-		languageServer.connect(ServiceEndpoints.toServiceObject(this, LanguageClient))
+		languageServer.connect(ServiceEndpoints.toServiceObject(this, LanguageClientExtensions))
 		// initialize
 		languageServer.supportedMethods()
 
@@ -204,6 +205,9 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 		«ENDFOR»
 	'''
 	protected def dispatch String toExpectation(String it) { it }
+	
+	protected def dispatch String toExpectation(Integer it) { '''«it»''' }
+	
 	protected def dispatch String toExpectation(Void it) { '' }
 
 	protected def dispatch String toExpectation(Location it) '''«uri.relativize» «range.toExpectation»'''
@@ -260,11 +264,28 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 	}
 	
 	protected dispatch def String toExpectation(Map<Object, Object> it) {
-		return '''«FOR entry : entrySet SEPARATOR '\n'»«entry.key.toExpectation» -> «IF entry.value instanceof Iterable<?>»«FOR item : (entry.value as Iterable<?>)»«"\n * "»«item.toExpectation»«ENDFOR»«ELSE»«entry.value.toExpectation»«ENDIF»«ENDFOR»''';
+		val sb = new StringBuilder;
+		entrySet.forEach[
+			if (sb.length > 0) {
+				sb.append('\n');
+			}
+			sb.append(key.toExpectation);
+			sb.append(' ->');
+			if (value instanceof Iterable<?>) {
+				(value as Iterable<?>).forEach[
+					sb.append('\n * ');
+					sb.append(toExpectation);
+				]
+			} else {
+				sb.append(' ');
+				sb.append(value.toExpectation);
+			}
+ 		];
+		return sb.toString;
 	}
 	
 	protected dispatch def String toExpectation(ColoringInformation it) {
-		return '''«range.toExpectation» -> [«ids.join(', ')»]''';
+		return '''«range.toExpectation» -> [«styles.join(', ')»]''';
 	}
 
 	protected def void testCompletion((TestCompletionConfiguration)=>void configurator) {

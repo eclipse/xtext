@@ -7,10 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ide.server.coloring;
 
-import static java.util.Collections.*;
-
+import org.eclipse.lsp4j.ColoringParams;
 import org.eclipse.xtext.ide.server.Document;
-import org.eclipse.xtext.ide.server.coloring.ColoringParams;
 import org.eclipse.xtext.resource.XtextResource;
 
 import com.google.inject.ImplementedBy;
@@ -48,7 +46,7 @@ public interface IColoringService {
 
 		@Override
 		public ColoringParams getColoring(final XtextResource resource, final Document document) {
-			return new ColoringParams(resource.getURI().toString(), emptyList());
+			return ColoringParamsExtensions.emptyColoringParams(resource);
 		}
 
 	}
