@@ -5,30 +5,30 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ide.server.syntaxColoring;
+package org.eclipse.xtext.ide.server.coloring;
 
 import org.eclipse.lsp4j.jsonrpc.services.JsonNotification;
 import org.eclipse.xtext.ide.server.ILanguageServerExtension;
 
 /**
  * Representation of a language-server client that can receive
- * {@link SemanticHighlight semantic highlight} push notifications from the
+ * {@link ColoringParams coloring parameters} as push notifications from the
  * language-server as part of the
  * <a href="https://github.com/Microsoft/language-server-protocol">Language
  * Server Protocol</a> {@link ILanguageServerExtension extension}.
  * 
  * @author akos.kitta - Initial contribution and API
  */
-public interface ISemanticHighlightClient {
+public interface IColoringClient {
 
 	/**
-	 * Pushes the {@link SemanticHighlight semantic highlight} to the client.
+	 * Pushes the {@link ColoringParams coloring parameter} to the client.
 	 * 
-	 * @param highlight
-	 *            the information that should be pushed to the client side. Must
-	 *            not be {@code null}.
+	 * @param params
+	 *            the information that should be pushed to the client side for
+	 *            coloring purposes. Must not be {@code null}.
 	 */
-	@JsonNotification("lsp4j/pushSemanticHighlight")
-	void pushSemanticHighlight(SemanticHighlight highlight);
+	@JsonNotification("textDocument/updateColoring")
+	void updateColoring(ColoringParams params);
 
 }

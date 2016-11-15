@@ -70,6 +70,8 @@ import org.eclipse.xtext.ide.server.Document;
 import org.eclipse.xtext.ide.server.LanguageServerImpl;
 import org.eclipse.xtext.ide.server.ServerModule;
 import org.eclipse.xtext.ide.server.UriExtensions;
+import org.eclipse.xtext.ide.server.coloring.ColoringInformation;
+import org.eclipse.xtext.ide.server.coloring.ColoringParams;
 import org.eclipse.xtext.ide.server.concurrent.RequestManager;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.testing.DefinitionTestConfiguration;
@@ -151,8 +153,10 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       LanguageClient _serviceObject = ServiceEndpoints.<LanguageClient>toServiceObject(this, LanguageClient.class);
       this.languageServer.connect(_serviceObject);
       this.languageServer.supportedMethods();
-      File _file = new File("./test-data/test-project");
-      this.root = _file;
+      File _file = new File("");
+      File _absoluteFile = _file.getAbsoluteFile();
+      File _file_1 = new File(_absoluteFile, "/test-data/test-project");
+      this.root = _file_1;
       boolean _mkdirs = this.root.mkdirs();
       boolean _not = (!_mkdirs);
       if (_not) {
@@ -547,6 +551,56 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     String _string = kind.toString();
     String _substring = _string.substring(0, 1);
     return _substring.toUpperCase();
+  }
+  
+  protected String _toExpectation(final Map<Object, Object> it) {
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      Set<Map.Entry<Object, Object>> _entrySet = it.entrySet();
+      boolean _hasElements = false;
+      for(final Map.Entry<Object, Object> entry : _entrySet) {
+        if (!_hasElements) {
+          _hasElements = true;
+        } else {
+          _builder.appendImmediate("\n", "");
+        }
+        Object _key = entry.getKey();
+        String _expectation = this.toExpectation(_key);
+        _builder.append(_expectation, "");
+        _builder.append(" -> ");
+        {
+          Object _value = entry.getValue();
+          if ((_value instanceof Iterable<?>)) {
+            {
+              Object _value_1 = entry.getValue();
+              for(final Object item : ((Iterable<?>) _value_1)) {
+                _builder.append("\n * ", "");
+                String _expectation_1 = this.toExpectation(item);
+                _builder.append(_expectation_1, "");
+              }
+            }
+          } else {
+            Object _value_2 = entry.getValue();
+            String _expectation_2 = this.toExpectation(_value_2);
+            _builder.append(_expectation_2, "");
+          }
+        }
+      }
+    }
+    return _builder.toString();
+  }
+  
+  protected String _toExpectation(final ColoringInformation it) {
+    StringConcatenation _builder = new StringConcatenation();
+    Range _range = it.getRange();
+    String _expectation = this.toExpectation(_range);
+    _builder.append(_expectation, "");
+    _builder.append(" -> [");
+    List<String> _ids = it.getIds();
+    String _join = IterableExtensions.join(_ids, ", ");
+    _builder.append(_join, "");
+    _builder.append("]");
+    return _builder.toString();
   }
   
   protected void testCompletion(final Procedure1<? super TestCompletionConfiguration> configurator) {
@@ -960,6 +1014,21 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     return result;
   }
   
+  protected Map<String, List<? extends ColoringInformation>> getColoringParams() {
+    final Function1<Pair<String, Object>, Object> _function = (Pair<String, Object> it) -> {
+      return it.getValue();
+    };
+    List<Object> _map = ListExtensions.<Pair<String, Object>, Object>map(this.notifications, _function);
+    Iterable<ColoringParams> _filter = Iterables.<ColoringParams>filter(_map, ColoringParams.class);
+    final Function1<ColoringParams, String> _function_1 = (ColoringParams it) -> {
+      return it.getUri();
+    };
+    final Function1<ColoringParams, List<? extends ColoringInformation>> _function_2 = (ColoringParams it) -> {
+      return it.getInfos();
+    };
+    return IterableExtensions.<ColoringParams, String, List<? extends ColoringInformation>>toMap(_filter, _function_1, _function_2);
+  }
+  
   protected String toExpectation(final Object elements) {
     if (elements instanceof List) {
       return _toExpectation((List<?>)elements);
@@ -969,6 +1038,8 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       return _toExpectation((String)elements);
     } else if (elements == null) {
       return _toExpectation((Void)null);
+    } else if (elements instanceof Map) {
+      return _toExpectation((Map<Object, Object>)elements);
     } else if (elements instanceof CompletionItem) {
       return _toExpectation((CompletionItem)elements);
     } else if (elements instanceof DocumentHighlight) {
@@ -987,6 +1058,8 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       return _toExpectation((SymbolInformation)elements);
     } else if (elements instanceof TextEdit) {
       return _toExpectation((TextEdit)elements);
+    } else if (elements instanceof ColoringInformation) {
+      return _toExpectation((ColoringInformation)elements);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(elements).toString());

@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package org.eclipse.xtext.ide.server.syntaxColoring;
+package org.eclipse.xtext.ide.server.coloring;
 
 import java.util.List;
 import org.eclipse.lsp4j.Range;
@@ -14,12 +14,12 @@ import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
 /**
  * Representation of a range and highlighting style identifiers that should be
- * highlighted based on semantic information of the underlying model.
+ * highlighted based on the underlying model.
  * 
  * @author akos.kitta - Initial contribution and API
  */
 @SuppressWarnings("all")
-public class SemanticHighlightInformation {
+public class ColoringInformation {
   /**
    * The range that should be highlighted on the client-side.
    */
@@ -66,11 +66,11 @@ public class SemanticHighlightInformation {
     this.ids = ids;
   }
   
-  public SemanticHighlightInformation() {
+  public ColoringInformation() {
     
   }
   
-  public SemanticHighlightInformation(final Range range, final List<String> ids) {
+  public ColoringInformation(final Range range, final List<String> ids) {
     this.range = range;
     this.ids = ids;
   }
@@ -95,7 +95,7 @@ public class SemanticHighlightInformation {
       return false;
     if (!super.equals(obj))
       return false;
-    SemanticHighlightInformation other = (SemanticHighlightInformation) obj;
+    ColoringInformation other = (ColoringInformation) obj;
     if (this.range == null) {
       if (other.range != null)
         return false;

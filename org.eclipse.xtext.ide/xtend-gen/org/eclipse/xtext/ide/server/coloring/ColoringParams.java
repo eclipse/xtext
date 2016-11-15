@@ -5,10 +5,11 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package org.eclipse.xtext.ide.server.syntaxColoring;
+package org.eclipse.xtext.ide.server.coloring;
 
 import java.util.List;
-import org.eclipse.xtext.ide.server.syntaxColoring.SemanticHighlightInformation;
+import org.eclipse.lsp4j.jsonrpc.validation.NonNull;
+import org.eclipse.xtext.ide.server.coloring.ColoringInformation;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
@@ -19,32 +20,54 @@ import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
  * @author akos.kitta - Initial contribution and API
  */
 @SuppressWarnings("all")
-public class SemanticHighlight {
+public class ColoringParams {
   /**
-   * A list of semantic highlight information.
+   * The URI for which coloring information is reported.
    */
-  private List<? extends SemanticHighlightInformation> infos;
+  @NonNull
+  private String uri;
   
   /**
-   * A list of semantic highlight information.
+   * A list of coloring information instances.
+   */
+  private List<? extends ColoringInformation> infos;
+  
+  /**
+   * The URI for which coloring information is reported.
    */
   @Pure
-  public List<? extends SemanticHighlightInformation> getInfos() {
+  public String getUri() {
+    return this.uri;
+  }
+  
+  /**
+   * The URI for which coloring information is reported.
+   */
+  public void setUri(final String uri) {
+    this.uri = uri;
+  }
+  
+  /**
+   * A list of coloring information instances.
+   */
+  @Pure
+  public List<? extends ColoringInformation> getInfos() {
     return this.infos;
   }
   
   /**
-   * A list of semantic highlight information.
+   * A list of coloring information instances.
    */
-  public void setInfos(final List<? extends SemanticHighlightInformation> infos) {
+  public void setInfos(final List<? extends ColoringInformation> infos) {
     this.infos = infos;
   }
   
-  public SemanticHighlight() {
+  public ColoringParams() {
     
   }
   
-  public SemanticHighlight(final List<? extends SemanticHighlightInformation> infos) {
+  public ColoringParams(final String uri, final List<? extends ColoringInformation> infos) {
+    this.uri = uri;
     this.infos = infos;
   }
   
@@ -52,6 +75,7 @@ public class SemanticHighlight {
   @Pure
   public String toString() {
     ToStringBuilder b = new ToStringBuilder(this);
+    b.add("uri", this.uri);
     b.add("infos", this.infos);
     return b.toString();
   }
@@ -67,7 +91,12 @@ public class SemanticHighlight {
       return false;
     if (!super.equals(obj))
       return false;
-    SemanticHighlight other = (SemanticHighlight) obj;
+    ColoringParams other = (ColoringParams) obj;
+    if (this.uri == null) {
+      if (other.uri != null)
+        return false;
+    } else if (!this.uri.equals(other.uri))
+      return false;
     if (this.infos == null) {
       if (other.infos != null)
         return false;
@@ -81,6 +110,7 @@ public class SemanticHighlight {
   public int hashCode() {
     final int prime = 31;
     int result = super.hashCode();
+    result = prime * result + ((this.uri== null) ? 0 : this.uri.hashCode());
     result = prime * result + ((this.infos== null) ? 0 : this.infos.hashCode());
     return result;
   }

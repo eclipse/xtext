@@ -5,33 +5,28 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ide.server.syntaxColoring;
+package org.eclipse.xtext.ide.server.coloring;
 
 import static java.util.Collections.*;
 
 import org.eclipse.xtext.ide.server.Document;
+import org.eclipse.xtext.ide.server.coloring.ColoringParams;
 import org.eclipse.xtext.resource.XtextResource;
 
 import com.google.inject.ImplementedBy;
 
 /**
- * Representation of a generic, IDE independent semantic highlighting service.
- * Provides coloring and semantic highlighting information for clients based on
- * the underlying model.
+ * Representation of a generic, IDE independent coloring service. Provides
+ * coloring and highlighting information for clients based on the underlying
+ * model.
  * 
  * @author akos.kitta - Initial contribution and API
  */
-@ImplementedBy(ISemanticHighlightService.Noop.class)
-public interface ISemanticHighlightService {
+@ImplementedBy(IColoringService.Noop.class)
+public interface IColoringService {
 
 	/**
-	 * Shared, immutable empty instance.
-	 */
-	SemanticHighlight EMPTY = new SemanticHighlight(emptyList());
-
-	/**
-	 * Provides semantic highlighting information based on the offset in the
-	 * document.
+	 * Provides all available coloring information for the resource.
 	 * 
 	 * @param resource
 	 *            the resource that will be highlighted. May be {@code null} in
@@ -39,22 +34,21 @@ public interface ISemanticHighlightService {
 	 * @param document
 	 *            the IDE and Xtext independent document that can be used to
 	 *            convert the document based offsets to line based positions.
-	 * @return the semantic highlight proposal for the resource.
+	 * @return the coloring and highlighting proposal for the resource.
 	 */
-	SemanticHighlight getSemanticHighlight(XtextResource resource, Document document);
+	ColoringParams getColoring(XtextResource resource, Document document);
 
 	/**
-	 * NOOP {@link ISemanticHighlightService semantic highlighting service}
-	 * implementation. Always provides an {@link ISemanticHighlightService#EMPTY
-	 * empty} instance.
+	 * NOOP {@link IColoringService coloring service} implementation. Always
+	 * provides an {@link IColoringService#EMPTY empty} instance.
 	 * 
 	 * @author akos.kitta - Initial contribution and API
 	 */
-	public static class Noop implements ISemanticHighlightService {
+	public static class Noop implements IColoringService {
 
 		@Override
-		public SemanticHighlight getSemanticHighlight(final XtextResource resource, final Document document) {
-			return EMPTY;
+		public ColoringParams getColoring(final XtextResource resource, final Document document) {
+			return new ColoringParams(resource.getURI().toString(), emptyList());
 		}
 
 	}

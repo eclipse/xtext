@@ -5,31 +5,30 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ide.server.syntaxColoring
+package org.eclipse.xtext.ide.server.coloring
 
 import java.util.List
-import org.eclipse.lsp4j.Range
-import org.eclipse.lsp4j.annotations.LanguageServerAPI
+import org.eclipse.lsp4j.generator.LanguageServerAPI
+import org.eclipse.lsp4j.jsonrpc.validation.NonNull
 
 /**
- * Representation of a range and highlighting style identifiers that should be
- * highlighted based on semantic information of the underlying model.
+ * Representation of a computed mapping from ranges to the appropriate
+ * highlighting style.
  * 
  * @author akos.kitta - Initial contribution and API
  */
 @LanguageServerAPI
-class SemanticHighlightInformation {
+class ColoringParams {
 
 	/**
-	 * The range that should be highlighted on the client-side.
+	 * The URI for which coloring information is reported.
 	 */
-	Range range;
+	@NonNull
+	String uri;
 
 	/**
-	 * A list of highlighting style identifiers, that should be applied on
-	 * the range. Several styles could be merged on the client-side by 
-	 * applying all styles on the range. 
+	 * A list of coloring information instances.
 	 */
-	List<String> ids;
+	List<? extends ColoringInformation> infos;
 
 }

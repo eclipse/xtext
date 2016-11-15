@@ -19,6 +19,7 @@ import java.util.List
 import java.util.Map
 import java.util.concurrent.CompletableFuture
 import org.eclipse.lsp4j.CompletionItem
+import org.eclipse.lsp4j.CompletionList
 import org.eclipse.lsp4j.Diagnostic
 import org.eclipse.lsp4j.DidChangeWatchedFilesParams
 import org.eclipse.lsp4j.DidCloseTextDocumentParams
@@ -35,6 +36,7 @@ import org.eclipse.lsp4j.InitializeParams
 import org.eclipse.lsp4j.InitializeResult
 import org.eclipse.lsp4j.Location
 import org.eclipse.lsp4j.Position
+import org.eclipse.lsp4j.PublishDiagnosticsParams
 import org.eclipse.lsp4j.Range
 import org.eclipse.lsp4j.ReferenceContext
 import org.eclipse.lsp4j.ReferenceParams
@@ -55,6 +57,7 @@ import org.eclipse.xtext.ide.server.Document
 import org.eclipse.xtext.ide.server.LanguageServerImpl
 import org.eclipse.xtext.ide.server.ServerModule
 import org.eclipse.xtext.ide.server.UriExtensions
+import org.eclipse.xtext.ide.server.coloring.ColoringParams
 import org.eclipse.xtext.ide.server.concurrent.RequestManager
 import org.eclipse.xtext.resource.IResourceServiceProvider
 import org.eclipse.xtext.util.CancelIndicator
@@ -62,8 +65,7 @@ import org.eclipse.xtext.util.Files
 import org.eclipse.xtext.util.Modules2
 import org.junit.Assert
 import org.junit.Before
-import org.eclipse.lsp4j.PublishDiagnosticsParams
-import org.eclipse.lsp4j.CompletionList
+import org.eclipse.xtext.ide.server.coloring.ColoringInformation
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -107,7 +109,7 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 		languageServer.supportedMethods()
 
 		// create workingdir
-		root = new File("./test-data/test-project")
+		root = new File(new File("").absoluteFile, "/test-data/test-project")
 		if (!root.mkdirs) {
 			Files.cleanFolder(root, null, true, false)
 		}
@@ -255,6 +257,14 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 
 	protected dispatch def String toExpectation(DocumentHighlightKind kind) {
 		return kind.toString.substring(0, 1).toUpperCase;
+	}
+	
+	protected dispatch def String toExpectation(Map<Object, Object> it) {
+		return '''«FOR entry : entrySet SEPARATOR '\n'»«entry.key.toExpectation» -> «IF entry.value instanceof Iterable<?>»«FOR item : (entry.value as Iterable<?>)»«"\n * "»«item.toExpectation»«ENDFOR»«ELSE»«entry.value.toExpectation»«ENDIF»«ENDFOR»''';
+	}
+	
+	protected dispatch def String toExpectation(ColoringInformation it) {
+		return '''«range.toExpectation» -> [«ids.join(', ')»]''';
 	}
 
 	protected def void testCompletion((TestCompletionConfiguration)=>void configurator) {
@@ -465,6 +475,10 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 		}
 		return result 
 	}
+	
+	protected def getColoringParams() {
+		return notifications.map[value].filter(ColoringParams).toMap([uri], [infos]);
+	}
 }
 
 @Data class FileInfo {
@@ -537,6 +551,11 @@ class TextDocumentConfiguration {
 @Accessors
 class FormattingConfiguration extends TextDocumentConfiguration {
 	String expectedText = ''
+}
+
+@Accessors
+class ColoringConfiguration extends TextDocumentConfiguration {
+	String expectedColoredRangesWithStyles = '';
 }
 
 @Accessors
