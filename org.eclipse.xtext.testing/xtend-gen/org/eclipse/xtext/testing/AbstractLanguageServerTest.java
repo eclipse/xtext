@@ -27,6 +27,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
+import java.util.function.Consumer;
+import org.eclipse.lsp4j.ColoringInformation;
+import org.eclipse.lsp4j.ColoringParams;
 import org.eclipse.lsp4j.CompletionItem;
 import org.eclipse.lsp4j.CompletionList;
 import org.eclipse.lsp4j.Diagnostic;
@@ -61,7 +64,7 @@ import org.eclipse.lsp4j.TextEdit;
 import org.eclipse.lsp4j.WorkspaceSymbolParams;
 import org.eclipse.lsp4j.jsonrpc.Endpoint;
 import org.eclipse.lsp4j.jsonrpc.services.ServiceEndpoints;
-import org.eclipse.lsp4j.services.LanguageClient;
+import org.eclipse.lsp4j.services.LanguageClientExtensions;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -148,11 +151,13 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
         LanguageInfo _get = ((IResourceServiceProvider)resourceServiceProvider).<LanguageInfo>get(LanguageInfo.class);
         this.languageInfo = _get;
       }
-      LanguageClient _serviceObject = ServiceEndpoints.<LanguageClient>toServiceObject(this, LanguageClient.class);
+      LanguageClientExtensions _serviceObject = ServiceEndpoints.<LanguageClientExtensions>toServiceObject(this, LanguageClientExtensions.class);
       this.languageServer.connect(_serviceObject);
       this.languageServer.supportedMethods();
-      File _file = new File("./test-data/test-project");
-      this.root = _file;
+      File _file = new File("");
+      File _absoluteFile = _file.getAbsoluteFile();
+      File _file_1 = new File(_absoluteFile, "/test-data/test-project");
+      this.root = _file_1;
       boolean _mkdirs = this.root.mkdirs();
       boolean _not = (!_mkdirs);
       if (_not) {
@@ -315,6 +320,12 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
   
   protected String _toExpectation(final String it) {
     return it;
+  }
+  
+  protected String _toExpectation(final Integer it) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append(it, "");
+    return _builder.toString();
   }
   
   protected String _toExpectation(final Void it) {
@@ -547,6 +558,52 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     String _string = kind.toString();
     String _substring = _string.substring(0, 1);
     return _substring.toUpperCase();
+  }
+  
+  protected String _toExpectation(final Map<Object, Object> it) {
+    final StringBuilder sb = new StringBuilder();
+    Set<Map.Entry<Object, Object>> _entrySet = it.entrySet();
+    final Consumer<Map.Entry<Object, Object>> _function = (Map.Entry<Object, Object> it_1) -> {
+      int _length = sb.length();
+      boolean _greaterThan = (_length > 0);
+      if (_greaterThan) {
+        sb.append("\n");
+      }
+      Object _key = it_1.getKey();
+      String _expectation = this.toExpectation(_key);
+      sb.append(_expectation);
+      sb.append(" ->");
+      Object _value = it_1.getValue();
+      if ((_value instanceof Iterable<?>)) {
+        Object _value_1 = it_1.getValue();
+        final Consumer<Object> _function_1 = (Object it_2) -> {
+          sb.append("\n * ");
+          String _expectation_1 = this.toExpectation(it_2);
+          sb.append(_expectation_1);
+        };
+        ((Iterable<?>) _value_1).forEach(_function_1);
+      } else {
+        sb.append(" ");
+        Object _value_2 = it_1.getValue();
+        String _expectation_1 = this.toExpectation(_value_2);
+        sb.append(_expectation_1);
+      }
+    };
+    _entrySet.forEach(_function);
+    return sb.toString();
+  }
+  
+  protected String _toExpectation(final ColoringInformation it) {
+    StringConcatenation _builder = new StringConcatenation();
+    Range _range = it.getRange();
+    String _expectation = this.toExpectation(_range);
+    _builder.append(_expectation, "");
+    _builder.append(" -> [");
+    List<Integer> _styles = it.getStyles();
+    String _join = IterableExtensions.join(_styles, ", ");
+    _builder.append(_join, "");
+    _builder.append("]");
+    return _builder.toString();
   }
   
   protected void testCompletion(final Procedure1<? super TestCompletionConfiguration> configurator) {
@@ -960,36 +1017,57 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     return result;
   }
   
-  protected String toExpectation(final Object elements) {
-    if (elements instanceof List) {
-      return _toExpectation((List<?>)elements);
-    } else if (elements instanceof DocumentHighlightKind) {
-      return _toExpectation((DocumentHighlightKind)elements);
-    } else if (elements instanceof String) {
-      return _toExpectation((String)elements);
-    } else if (elements == null) {
+  protected Map<String, List<? extends ColoringInformation>> getColoringParams() {
+    final Function1<Pair<String, Object>, Object> _function = (Pair<String, Object> it) -> {
+      return it.getValue();
+    };
+    List<Object> _map = ListExtensions.<Pair<String, Object>, Object>map(this.notifications, _function);
+    Iterable<ColoringParams> _filter = Iterables.<ColoringParams>filter(_map, ColoringParams.class);
+    final Function1<ColoringParams, String> _function_1 = (ColoringParams it) -> {
+      return it.getUri();
+    };
+    final Function1<ColoringParams, List<? extends ColoringInformation>> _function_2 = (ColoringParams it) -> {
+      return it.getInfos();
+    };
+    return IterableExtensions.<ColoringParams, String, List<? extends ColoringInformation>>toMap(_filter, _function_1, _function_2);
+  }
+  
+  protected String toExpectation(final Object it) {
+    if (it instanceof Integer) {
+      return _toExpectation((Integer)it);
+    } else if (it instanceof List) {
+      return _toExpectation((List<?>)it);
+    } else if (it instanceof DocumentHighlightKind) {
+      return _toExpectation((DocumentHighlightKind)it);
+    } else if (it instanceof String) {
+      return _toExpectation((String)it);
+    } else if (it == null) {
       return _toExpectation((Void)null);
-    } else if (elements instanceof CompletionItem) {
-      return _toExpectation((CompletionItem)elements);
-    } else if (elements instanceof DocumentHighlight) {
-      return _toExpectation((DocumentHighlight)elements);
-    } else if (elements instanceof Hover) {
-      return _toExpectation((Hover)elements);
-    } else if (elements instanceof Location) {
-      return _toExpectation((Location)elements);
-    } else if (elements instanceof Position) {
-      return _toExpectation((Position)elements);
-    } else if (elements instanceof Range) {
-      return _toExpectation((Range)elements);
-    } else if (elements instanceof SignatureHelp) {
-      return _toExpectation((SignatureHelp)elements);
-    } else if (elements instanceof SymbolInformation) {
-      return _toExpectation((SymbolInformation)elements);
-    } else if (elements instanceof TextEdit) {
-      return _toExpectation((TextEdit)elements);
+    } else if (it instanceof Map) {
+      return _toExpectation((Map<Object, Object>)it);
+    } else if (it instanceof ColoringInformation) {
+      return _toExpectation((ColoringInformation)it);
+    } else if (it instanceof CompletionItem) {
+      return _toExpectation((CompletionItem)it);
+    } else if (it instanceof DocumentHighlight) {
+      return _toExpectation((DocumentHighlight)it);
+    } else if (it instanceof Hover) {
+      return _toExpectation((Hover)it);
+    } else if (it instanceof Location) {
+      return _toExpectation((Location)it);
+    } else if (it instanceof Position) {
+      return _toExpectation((Position)it);
+    } else if (it instanceof Range) {
+      return _toExpectation((Range)it);
+    } else if (it instanceof SignatureHelp) {
+      return _toExpectation((SignatureHelp)it);
+    } else if (it instanceof SymbolInformation) {
+      return _toExpectation((SymbolInformation)it);
+    } else if (it instanceof TextEdit) {
+      return _toExpectation((TextEdit)it);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
-        Arrays.<Object>asList(elements).toString());
+        Arrays.<Object>asList(it).toString());
     }
   }
   

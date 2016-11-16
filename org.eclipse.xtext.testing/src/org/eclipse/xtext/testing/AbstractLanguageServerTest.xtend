@@ -18,7 +18,10 @@ import java.nio.file.Paths
 import java.util.List
 import java.util.Map
 import java.util.concurrent.CompletableFuture
+import org.eclipse.lsp4j.ColoringInformation
+import org.eclipse.lsp4j.ColoringParams
 import org.eclipse.lsp4j.CompletionItem
+import org.eclipse.lsp4j.CompletionList
 import org.eclipse.lsp4j.Diagnostic
 import org.eclipse.lsp4j.DidChangeWatchedFilesParams
 import org.eclipse.lsp4j.DidCloseTextDocumentParams
@@ -35,6 +38,7 @@ import org.eclipse.lsp4j.InitializeParams
 import org.eclipse.lsp4j.InitializeResult
 import org.eclipse.lsp4j.Location
 import org.eclipse.lsp4j.Position
+import org.eclipse.lsp4j.PublishDiagnosticsParams
 import org.eclipse.lsp4j.Range
 import org.eclipse.lsp4j.ReferenceContext
 import org.eclipse.lsp4j.ReferenceParams
@@ -47,7 +51,6 @@ import org.eclipse.lsp4j.TextEdit
 import org.eclipse.lsp4j.WorkspaceSymbolParams
 import org.eclipse.lsp4j.jsonrpc.Endpoint
 import org.eclipse.lsp4j.jsonrpc.services.ServiceEndpoints
-import org.eclipse.lsp4j.services.LanguageClient
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.LanguageInfo
@@ -62,8 +65,8 @@ import org.eclipse.xtext.util.Files
 import org.eclipse.xtext.util.Modules2
 import org.junit.Assert
 import org.junit.Before
-import org.eclipse.lsp4j.PublishDiagnosticsParams
-import org.eclipse.lsp4j.CompletionList
+import org.eclipse.lsp4j.services.LanguageClientExtensions
+import org.eclipse.xtend.lib.annotations.Data
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -102,12 +105,12 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 			languageInfo = resourceServiceProvider.get(LanguageInfo)
 
 		// register notification callbacks
-		languageServer.connect(ServiceEndpoints.toServiceObject(this, LanguageClient))
+		languageServer.connect(ServiceEndpoints.toServiceObject(this, LanguageClientExtensions))
 		// initialize
 		languageServer.supportedMethods()
 
 		// create workingdir
-		root = new File("./test-data/test-project")
+		root = new File(new File("").absoluteFile, "/test-data/test-project")
 		if (!root.mkdirs) {
 			Files.cleanFolder(root, null, true, false)
 		}
@@ -202,6 +205,9 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 		«ENDFOR»
 	'''
 	protected def dispatch String toExpectation(String it) { it }
+	
+	protected def dispatch String toExpectation(Integer it) { '''«it»''' }
+	
 	protected def dispatch String toExpectation(Void it) { '' }
 
 	protected def dispatch String toExpectation(Location it) '''«uri.relativize» «range.toExpectation»'''
@@ -255,6 +261,31 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 
 	protected dispatch def String toExpectation(DocumentHighlightKind kind) {
 		return kind.toString.substring(0, 1).toUpperCase;
+	}
+	
+	protected dispatch def String toExpectation(Map<Object, Object> it) {
+		val sb = new StringBuilder;
+		entrySet.forEach[
+			if (sb.length > 0) {
+				sb.append('\n');
+			}
+			sb.append(key.toExpectation);
+			sb.append(' ->');
+			if (value instanceof Iterable<?>) {
+				(value as Iterable<?>).forEach[
+					sb.append('\n * ');
+					sb.append(toExpectation);
+				]
+			} else {
+				sb.append(' ');
+				sb.append(value.toExpectation);
+			}
+ 		];
+		return sb.toString;
+	}
+	
+	protected dispatch def String toExpectation(ColoringInformation it) {
+		return '''«range.toExpectation» -> [«styles.join(', ')»]''';
 	}
 
 	protected def void testCompletion((TestCompletionConfiguration)=>void configurator) {
@@ -465,6 +496,10 @@ abstract class AbstractLanguageServerTest implements Endpoint {
 		}
 		return result 
 	}
+	
+	protected def getColoringParams() {
+		return notifications.map[value].filter(ColoringParams).toMap([uri], [infos]);
+	}
 }
 
 @Data class FileInfo {
@@ -537,6 +572,11 @@ class TextDocumentConfiguration {
 @Accessors
 class FormattingConfiguration extends TextDocumentConfiguration {
 	String expectedText = ''
+}
+
+@Accessors
+class ColoringConfiguration extends TextDocumentConfiguration {
+	String expectedColoredRangesWithStyles = '';
 }
 
 @Accessors

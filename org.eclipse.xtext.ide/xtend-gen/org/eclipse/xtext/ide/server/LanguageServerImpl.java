@@ -20,12 +20,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.lsp4j.CodeActionParams;
 import org.eclipse.lsp4j.CodeLens;
 import org.eclipse.lsp4j.CodeLensParams;
+import org.eclipse.lsp4j.ColoringInformation;
+import org.eclipse.lsp4j.ColoringParams;
 import org.eclipse.lsp4j.Command;
 import org.eclipse.lsp4j.CompletionItem;
 import org.eclipse.lsp4j.CompletionList;
@@ -74,6 +78,7 @@ import org.eclipse.lsp4j.jsonrpc.json.JsonRpcMethodProvider;
 import org.eclipse.lsp4j.jsonrpc.services.ServiceEndpoints;
 import org.eclipse.lsp4j.services.LanguageClient;
 import org.eclipse.lsp4j.services.LanguageClientAware;
+import org.eclipse.lsp4j.services.LanguageClientExtensions;
 import org.eclipse.lsp4j.services.LanguageServer;
 import org.eclipse.lsp4j.services.TextDocumentService;
 import org.eclipse.lsp4j.services.WorkspaceService;
@@ -84,6 +89,7 @@ import org.eclipse.xtext.ide.server.ILanguageServerAccess;
 import org.eclipse.xtext.ide.server.ILanguageServerExtension;
 import org.eclipse.xtext.ide.server.UriExtensions;
 import org.eclipse.xtext.ide.server.WorkspaceManager;
+import org.eclipse.xtext.ide.server.coloring.IColoringService;
 import org.eclipse.xtext.ide.server.concurrent.RequestManager;
 import org.eclipse.xtext.ide.server.contentassist.ContentAssistService;
 import org.eclipse.xtext.ide.server.findReferences.WorkspaceResourceAccess;
@@ -93,6 +99,7 @@ import org.eclipse.xtext.ide.server.occurrences.IDocumentHighlightService;
 import org.eclipse.xtext.ide.server.signatureHelp.ISignatureHelpService;
 import org.eclipse.xtext.ide.server.symbol.DocumentSymbolService;
 import org.eclipse.xtext.ide.server.symbol.WorkspaceSymbolService;
+import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
@@ -116,7 +123,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
  */
 @Log
 @SuppressWarnings("all")
-public class LanguageServerImpl implements LanguageServer, WorkspaceService, TextDocumentService, LanguageClientAware, Endpoint, JsonRpcMethodProvider {
+public class LanguageServerImpl implements LanguageServer, WorkspaceService, TextDocumentService, LanguageClientAware, Endpoint, JsonRpcMethodProvider, ILanguageServerAccess.IBuildListener {
   @FinalFieldsConstructor
   public static class BufferedCancelIndicator implements CancelIndicator {
     private final CancelIndicator delegate;
@@ -216,6 +223,7 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
       return null;
     };
     this.requestManager.<Object>runWrite(_function_1);
+    this.access.addBuildListener(this);
     return CompletableFuture.<InitializeResult>completedFuture(result);
   }
   
@@ -840,6 +848,57 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
       return LanguageServerImpl.this.client;
     }
   };
+  
+  @Override
+  public void afterBuild(final List<IResourceDescription.Delta> deltas) {
+    if ((this.client instanceof LanguageClientExtensions)) {
+      final Function1<IResourceDescription.Delta, Boolean> _function = (IResourceDescription.Delta it) -> {
+        IResourceDescription _new = it.getNew();
+        return Boolean.valueOf((_new != null));
+      };
+      Iterable<IResourceDescription.Delta> _filter = IterableExtensions.<IResourceDescription.Delta>filter(deltas, _function);
+      final Function1<IResourceDescription.Delta, String> _function_1 = (IResourceDescription.Delta it) -> {
+        URI _uri = it.getUri();
+        return _uri.toString();
+      };
+      Iterable<String> _map = IterableExtensions.<IResourceDescription.Delta, String>map(_filter, _function_1);
+      final Consumer<String> _function_2 = (String it) -> {
+        final Function<ILanguageServerAccess.Context, Void> _function_3 = (ILanguageServerAccess.Context ctx) -> {
+          boolean _isDocumentOpen = ctx.isDocumentOpen();
+          if (_isDocumentOpen) {
+            Resource _resource = ctx.getResource();
+            if ((_resource instanceof XtextResource)) {
+              Resource _resource_1 = ctx.getResource();
+              final XtextResource resource = ((XtextResource) _resource_1);
+              URI _uRI = resource.getURI();
+              final IResourceServiceProvider serviceProvider = this.languagesRegistry.getResourceServiceProvider(_uRI);
+              IColoringService _get = null;
+              if (serviceProvider!=null) {
+                _get=serviceProvider.<IColoringService>get(IColoringService.class);
+              }
+              final IColoringService coloringService = _get;
+              if ((coloringService != null)) {
+                final Document doc = ctx.getDocument();
+                final List<? extends ColoringInformation> coloringInfos = coloringService.getColoring(resource, doc);
+                boolean _isNullOrEmpty = IterableExtensions.isNullOrEmpty(coloringInfos);
+                boolean _not = (!_isNullOrEmpty);
+                if (_not) {
+                  URI _uRI_1 = resource.getURI();
+                  final String uri = _uRI_1.toString();
+                  ColoringParams _coloringParams = new ColoringParams(uri, coloringInfos);
+                  ((LanguageClientExtensions)this.client).updateColoring(_coloringParams);
+                }
+              }
+            }
+            return null;
+          }
+          return null;
+        };
+        this.access.<Void>doRead(it, _function_3);
+      };
+      _map.forEach(_function_2);
+    }
+  }
   
   private final static Logger LOG = Logger.getLogger(LanguageServerImpl.class);
 }
