@@ -187,7 +187,7 @@ public class AdvancedNewProjectPage extends WizardPage {
       }
     });
     this.sourceLayout.addSelectionListener(selectionControl);
-    this.createWebProject.addSelectionListener(selectionControl);
+    this.createTestProject.addSelectionListener(selectionControl);
     this.preferredBuildSystem.addSelectionListener(selectionControl);
     this.createUiProject.addSelectionListener(selectionControl);
     this.createIdeaProject.addSelectionListener(selectionControl);
