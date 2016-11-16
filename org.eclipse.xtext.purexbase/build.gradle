@@ -1,3 +1,5 @@
+ext.title = 'Pure Xbase Runtime'
+
 dependencies {
 	compile project(':org.eclipse.xtext.xbase')
 	mwe2Compile project(':org.eclipse.xtext.generator')
