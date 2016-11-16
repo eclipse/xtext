@@ -120,9 +120,7 @@ public class StringConcatenation implements CharSequence {
 	protected void append(Object object, int index) {
 		if (object == null)
 			return;
-		if (object instanceof String) {
-			append((String)object, index);
-		} else if (object instanceof StringConcatenation) {
+		if (object instanceof StringConcatenation) {
 			StringConcatenation other = (StringConcatenation) object;
 			appendSegments(index, other.getSignificantContent(), other.lineDelimiter);
 			return;
@@ -132,7 +130,8 @@ public class StringConcatenation implements CharSequence {
 			return;
 		} else {
 			String value = getStringRepresentation(object);
-			append(value, index);
+			List<String> newSegments = splitLinesAndNewLines(value);
+			appendSegments(index, newSegments, lineDelimiter);
 		}
 	}
 
@@ -167,9 +166,7 @@ public class StringConcatenation implements CharSequence {
 		}
 		if (object == null)
 			return;
-		if (object instanceof String) {
-			append((String)object,index);
-		} else if (object instanceof StringConcatenation) {
+		if (object instanceof StringConcatenation) {
 			StringConcatenation other = (StringConcatenation) object;
 			List<String> otherSegments = other.getSignificantContent();
 			appendSegments(indentation, index, otherSegments, other.lineDelimiter);
@@ -178,17 +175,8 @@ public class StringConcatenation implements CharSequence {
 			other.appendTo(new IndentedTarget(this, indentation, index));
 		} else {
 			String value = getStringRepresentation(object);
-			append(value,index);
-		}
-	}
-
-	private void append(String value, int index) {
-		int initial = initialSegmentSize(value);
-		if (initial != value.length()) {
-			List<String> newSegments = continueSplitting(value, initial, value.length());
-			appendSegments(index, newSegments, lineDelimiter);
-		} else {
-			appendSegment(index, value, lineDelimiter);
+			List<String> newSegments = splitLinesAndNewLines(value);
+			appendSegments(indentation, index, newSegments, lineDelimiter);
 		}
 	}
 
@@ -247,49 +235,14 @@ public class StringConcatenation implements CharSequence {
 			return;
 		}
 		for (String otherSegment : otherSegments) {
-			index = appendSegment(indentation, index, otherSegment, otherDelimiter);
-		}
-		cachedToString = null;
-	}
-
-	private int appendSegment(String indentation, int index, String otherSegment, String otherDelimiter) {
-		if (otherDelimiter.equals(otherSegment)) {
-			if (index != segments.size()) {
+			if (otherDelimiter.equals(otherSegment)) {
 				segments.add(index++, lineDelimiter);
 				segments.add(index++, indentation);
 			} else {
-				segments.add(lineDelimiter);
-				segments.add(indentation);
-				index = index + 2;
-			}
-		} else {
-			if (index != segments.size()) {
 				segments.add(index++, otherSegment);
-			} else {
-				segments.add(otherSegment);
-				index++;
 			}
 		}
 		cachedToString = null;
-		return index;
-	}
-
-	private void appendSegment(int index, String otherSegment) {
-		segments.add(index, otherSegment);
-		cachedToString = null;
-	}
-
-	private void appendSegment(int index, String otherSegment, String otherDelimiter) {
-		if (otherDelimiter.equals(lineDelimiter)) {
-			appendSegment(index, otherSegment);
-		} else {
-			if (otherDelimiter.equals(otherSegment)) {
-				segments.add(index++, lineDelimiter);
-			} else {
-				segments.add(index++, otherSegment);
-			}
-			cachedToString = null;
-		}
 	}
 	
 	/**
@@ -314,19 +267,9 @@ public class StringConcatenation implements CharSequence {
 			segments.ensureCapacity(index + otherSegments.size());
 			for (String otherSegment : otherSegments) {
 				if (otherDelimiter.equals(otherSegment)) {
-					if (index != segments.size()) {
-						segments.add(index++, lineDelimiter);
-					} else {
-						segments.add(lineDelimiter);
-						index++;
-					}
+					segments.add(index++, lineDelimiter);
 				} else {
-					if (index != segments.size()) {
-						segments.add(index++, otherSegment);
-					} else {
-						segments.add(otherSegment);
-						index++;
-					}
+					segments.add(index++, otherSegment);
 				}
 			}
 			cachedToString = null;
@@ -416,11 +359,7 @@ public class StringConcatenation implements CharSequence {
 		for (int i = segments.size() - 1; i >= 0; i--) {
 			String segment = segments.get(i);
 			if (lineDelimiter.equals(segment)) {
-				int toIndex = i + 1;
-				if (toIndex == segments.size())
-					return segments;
-				else
-					return segments.subList(0, toIndex);
+				return segments.subList(0, i + 1);
 			}
 			for (int j = 0; j < segment.length(); j++) {
 				if (!WhitespaceMatcher.isWhitespace(segment.charAt(j))) {
@@ -477,8 +416,20 @@ public class StringConcatenation implements CharSequence {
 		return toString().subSequence(start, end);
 	}
 
-	private int initialSegmentSize(String text) {
+	/**
+	 * Return a list of segments where each segment is either the content of a line in the given text or a line-break
+	 * according to the configured delimiter. Existing line-breaks in the text will be replaced by this's
+	 * instances delimiter.
+	 * 
+	 * @param text
+	 *            the to-be-splitted text. May be <code>null</code>.
+	 * @return a list of segments. Is never <code>null</code>.
+	 */
+	protected List<String> splitLinesAndNewLines(String text) {
+		if (text == null)
+			return Collections.emptyList();
 		int length = text.length();
+		int nextLineOffset = 0;
 		int idx = 0;
 		while (idx < length) {
 			char currentChar = text.charAt(idx);
@@ -487,12 +438,9 @@ public class StringConcatenation implements CharSequence {
 			}
 			idx++;
 		}
-
-		return idx;
-	}
-
-	private List<String> continueSplitting(String text, int idx, int length) {
-		int nextLineOffset = 0;
+		if (idx == length) {
+			return Collections.singletonList(text);
+		}
 		List<String> result = new ArrayList<String>(5);
 		while (idx < length) {
 			char currentChar = text.charAt(idx);
@@ -520,27 +468,6 @@ public class StringConcatenation implements CharSequence {
 			result.add(text.substring(nextLineOffset, nextLineOffset + lineLength));
 		}
 		return result;
-	}
-
-	/**
-	 * Return a list of segments where each segment is either the content of a line in the given text or a line-break
-	 * according to the configured delimiter. Existing line-breaks in the text will be replaced by this's
-	 * instances delimiter.
-	 * 
-	 * @param text
-	 *            the to-be-splitted text. May be <code>null</code>.
-	 * @return a list of segments. Is never <code>null</code>.
-	 */
-	protected List<String> splitLinesAndNewLines(String text) {
-		if (text == null) {
-			return Collections.emptyList();
-		}
-		int length = text.length();
-		int idx = initialSegmentSize(text);
-		if (idx == length) {
-			return Collections.singletonList(text);
-		}
-		return continueSplitting(text, idx, length);
 	}
 
 	/**
