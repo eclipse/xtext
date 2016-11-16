@@ -14,8 +14,8 @@ import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.zip.ZipEntry;
@@ -135,7 +135,7 @@ public class BatchLinkableResourceStorageWritable extends ResourceStorageWritabl
     }
     final ObjectOutputStream objOut = new ObjectOutputStream(zipOut);
     try {
-      final HashMap<String, String> logicalMap = CollectionLiterals.<String, String>newHashMap();
+      final LinkedHashMap<String, String> logicalMap = CollectionLiterals.<String, String>newLinkedHashMap();
       Set<Map.Entry<EObject, JvmIdentifiableElement>> _entrySet = adapter.logicalContainerMap.entrySet();
       for (final Map.Entry<EObject, JvmIdentifiableElement> entry : _entrySet) {
         EObject _key = entry.getKey();
@@ -162,7 +162,7 @@ public class BatchLinkableResourceStorageWritable extends ResourceStorageWritabl
         }
       }
       objOut.writeObject(logicalMap);
-      final HashMap<String, HashSet<String>> sourceToTarget = CollectionLiterals.<String, HashSet<String>>newHashMap();
+      final LinkedHashMap<String, LinkedHashSet<String>> sourceToTarget = CollectionLiterals.<String, LinkedHashSet<String>>newLinkedHashMap();
       Set<Map.Entry<EObject, Set<EObject>>> _entrySet_1 = adapter.sourceToTargetMap.entrySet();
       for (final Map.Entry<EObject, Set<EObject>> entry_1 : _entrySet_1) {
         EObject _key_3 = entry_1.getKey();
@@ -188,12 +188,12 @@ public class BatchLinkableResourceStorageWritable extends ResourceStorageWritabl
             return this.getFragment(it);
           };
           Iterable<String> _map = IterableExtensions.<EObject, String>map(_value_1, _function_1);
-          HashSet<String> _newHashSet = Sets.<String>newHashSet(_map);
-          sourceToTarget.put(_fragment_2, _newHashSet);
+          LinkedHashSet<String> _newLinkedHashSet = Sets.<String>newLinkedHashSet(_map);
+          sourceToTarget.put(_fragment_2, _newLinkedHashSet);
         }
       }
       objOut.writeObject(sourceToTarget);
-      final HashMap<String, HashSet<String>> targetToSource = CollectionLiterals.<String, HashSet<String>>newHashMap();
+      final LinkedHashMap<String, LinkedHashSet<String>> targetToSource = CollectionLiterals.<String, LinkedHashSet<String>>newLinkedHashMap();
       Set<Map.Entry<EObject, Set<EObject>>> _entrySet_2 = adapter.targetToSourceMap.entrySet();
       for (final Map.Entry<EObject, Set<EObject>> entry_2 : _entrySet_2) {
         EObject _key_6 = entry_2.getKey();
@@ -219,8 +219,8 @@ public class BatchLinkableResourceStorageWritable extends ResourceStorageWritabl
             return this.getFragment(it);
           };
           Iterable<String> _map_1 = IterableExtensions.<EObject, String>map(_value_2, _function_2);
-          HashSet<String> _newHashSet_1 = Sets.<String>newHashSet(_map_1);
-          targetToSource.put(_fragment_3, _newHashSet_1);
+          LinkedHashSet<String> _newLinkedHashSet_1 = Sets.<String>newLinkedHashSet(_map_1);
+          targetToSource.put(_fragment_3, _newLinkedHashSet_1);
         }
       }
       objOut.writeObject(targetToSource);

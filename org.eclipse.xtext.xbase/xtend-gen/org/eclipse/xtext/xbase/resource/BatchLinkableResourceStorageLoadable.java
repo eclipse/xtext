@@ -12,7 +12,7 @@ import com.google.common.collect.Sets;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Consumer;
@@ -126,8 +126,8 @@ public class BatchLinkableResourceStorageLoadable extends ResourceStorageLoadabl
           return resource.getEObject(it_1);
         };
         Iterable<EObject> _map = IterableExtensions.<String, EObject>map(_value, _function_3);
-        HashSet<EObject> _newHashSet = Sets.<EObject>newHashSet(_map);
-        adapter.sourceToTargetMap.put(_eObject, _newHashSet);
+        LinkedHashSet<EObject> _newLinkedHashSet = Sets.<EObject>newLinkedHashSet(_map);
+        adapter.sourceToTargetMap.put(_eObject, _newLinkedHashSet);
       };
       _entrySet_1.forEach(_function_2);
       Object _readObject_2 = objIn.readObject();
@@ -141,8 +141,8 @@ public class BatchLinkableResourceStorageLoadable extends ResourceStorageLoadabl
           return resource.getEObject(it_1);
         };
         Iterable<EObject> _map = IterableExtensions.<String, EObject>map(_value, _function_4);
-        HashSet<EObject> _newHashSet = Sets.<EObject>newHashSet(_map);
-        adapter.targetToSourceMap.put(_eObject, _newHashSet);
+        LinkedHashSet<EObject> _newLinkedHashSet = Sets.<EObject>newLinkedHashSet(_map);
+        adapter.targetToSourceMap.put(_eObject, _newLinkedHashSet);
       };
       _entrySet_2.forEach(_function_3);
     } catch (Throwable _e) {

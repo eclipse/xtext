@@ -64,11 +64,11 @@ import org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator
 		]
 		val sourceToTargetMap = objIn.readObject as Map<String,Set<String>>
 		sourceToTargetMap.entrySet.forEach [
-			adapter.sourceToTargetMap.put(resource.getEObject(key), Sets.newHashSet(value.map[resource.getEObject(it)]))
+			adapter.sourceToTargetMap.put(resource.getEObject(key), Sets.newLinkedHashSet(value.map[resource.getEObject(it)]))
 		]
 		val targetToSourceMap = objIn.readObject as Map<String,Set<String>>
 		targetToSourceMap.entrySet.forEach [
-			adapter.targetToSourceMap.put(resource.getEObject(key), Sets.newHashSet(value.map[resource.getEObject(it)]))
+			adapter.targetToSourceMap.put(resource.getEObject(key), Sets.newLinkedHashSet(value.map[resource.getEObject(it)]))
 		]
 	}
 	
