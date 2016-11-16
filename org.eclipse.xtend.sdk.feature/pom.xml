@@ -10,4 +10,16 @@
 	<packaging>eclipse-feature</packaging>
 	<groupId>org.eclipse.xtext.feature</groupId> <!-- TODO: hack! -->
 	<artifactId>org.eclipse.xtend.sdk</artifactId>
+	<build>
+        <plugins>
+            <plugin>
+                <groupId>org.eclipse.tycho.extras</groupId>
+                <artifactId>tycho-source-feature-plugin</artifactId>
+                <version>${tycho-version}</version>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

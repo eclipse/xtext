@@ -20,14 +20,9 @@
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>tycho-p2-repository-plugin</artifactId>
 				<version>${tycho-version}</version>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>assemble-repository</goal>
-						</goals>
-					</execution>
-				</executions>
+				<configuration>
+                    <repositoryName>Xtend Repository</repositoryName>
+                </configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
