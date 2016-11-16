@@ -83,19 +83,18 @@ class Junit4Fragment2 extends AbstractStubGeneratingFragment {
 		return fileAccessFactory.createXtendFile(exampleRuntimeTest, '''
 			@«runWith»(«xtextRunner»)
 			@«injectWith»(«injectorProvider»)
-			class «exampleRuntimeTest»{
-			
+			class «exampleRuntimeTest» {
 				@«Inject»
 				«parseHelper»<«rootType»> parseHelper
-			
-				@«test» 
+				
+				@«test»
 				def void loadModel() {
 					val result = parseHelper.parse(''«»'
 						Hello Xtext!
 					''«»')
 					«assert».assertNotNull(result)
+					«assert».assertTrue(result.eResource.errors.isEmpty)
 				}
-			
 			}
 		''')
 	}

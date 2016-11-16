@@ -202,9 +202,8 @@ public class Junit4Fragment2 extends AbstractStubGeneratingFragment {
         _builder.append("class ");
         TypeReference _exampleRuntimeTest = Junit4Fragment2.this.exampleRuntimeTest();
         _builder.append(_exampleRuntimeTest, "");
-        _builder.append("{");
+        _builder.append(" {");
         _builder.newLineIfNotEmpty();
-        _builder.newLine();
         _builder.append("\t");
         _builder.append("@");
         _builder.append(Inject.class, "\t");
@@ -215,11 +214,11 @@ public class Junit4Fragment2 extends AbstractStubGeneratingFragment {
         _builder.append(rootType, "\t");
         _builder.append("> parseHelper");
         _builder.newLineIfNotEmpty();
+        _builder.append("\t");
         _builder.newLine();
         _builder.append("\t");
         _builder.append("@");
         _builder.append(test, "\t");
-        _builder.append(" ");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
         _builder.append("def void loadModel() {");
@@ -239,9 +238,12 @@ public class Junit4Fragment2 extends AbstractStubGeneratingFragment {
         _builder.append(assert_, "\t\t");
         _builder.append(".assertNotNull(result)");
         _builder.newLineIfNotEmpty();
+        _builder.append("\t\t");
+        _builder.append(assert_, "\t\t");
+        _builder.append(".assertTrue(result.eResource.errors.isEmpty)");
+        _builder.newLineIfNotEmpty();
         _builder.append("\t");
         _builder.append("}");
-        _builder.newLine();
         _builder.newLine();
         _builder.append("}");
         _builder.newLine();
