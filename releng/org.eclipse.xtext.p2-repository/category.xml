@@ -75,5 +75,16 @@
    <bundle id="org.eclipse.xtext.idea.generator.source" version="2.11.0.qualifier">
       <category name="Xtext"/>
    </bundle>
+   <bundle id="org.eclipse.lsp4j" version="0.0.0">
+      <category name="Lsp4J"/>
+   </bundle>
+   <bundle id="org.eclipse.lsp4j.jsonrpc" version="0.0.0">
+      <category name="Lsp4J"/>
+   </bundle>
+   <bundle id="com.google.gson" version="0.0.0">
+      <category name="Lsp4J"/>
+   </bundle>
+   
    <category-def name="Xtext" label="Xtext"/>
+   <category-def name="Lsp4J" label="Lsp4J"/>
 </site>
