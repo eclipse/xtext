@@ -46,6 +46,9 @@
 <unit id="org.eclipse.xtext.m2e.source" version="0.0.0"/>
 <unit id="org.eclipse.xtext.idea.generator" version="0.0.0"/>
 <unit id="org.eclipse.xtext.idea.generator.source" version="0.0.0"/>
+<unit id="org.eclipse.lsp4j" version="0.0.0"/>
+<unit id="org.eclipse.lsp4j.jsonrpc" version="0.0.0"/>
+<unit id="com.google.gson" version="0.0.0"/>
 <repository location="http://services.typefox.io/open-source/jenkins/job/xtext-eclipse/job/master/lastSuccessfulBuild/artifact/build/p2-repository/"/>
 </location>
 
