@@ -6,5 +6,15 @@
    <feature url="features/org.eclipse.xtend.sdk_2.11.0.qualifier.jar" id="org.eclipse.xtend.sdk" version="2.11.0.qualifier">
       <category name="Xtext"/>
    </feature>
+   <bundle id="org.eclipse.lsp4j" version="0.0.0">
+      <category name="Xtext"/>
+   </bundle>
+   <bundle id="org.eclipse.lsp4j.jsonrpc" version="0.0.0">
+      <category name="Xtext"/>
+   </bundle>
+   <bundle id="com.google.gson" version="0.0.0">
+      <category name="Xtext"/>
+   </bundle>
+   
    <category-def name="Xtext" label="Xtext"/>
 </site>
