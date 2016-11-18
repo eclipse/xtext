@@ -31,20 +31,25 @@ jar.manifest {
 
 def sourcesManifestFile = "$buildDir/tmp/sourcesJar/MANIFEST.MF"
 
-task genSourcesManifest << {
-	def f = new File(sourcesManifestFile)
-	f.parentFile.mkdirs()
-	def writer = new PrintWriter(f)
-	writer.println('Manifest-Version: 1.0')
-	writer.println('Bundle-ManifestVersion: 2')
-	writer.println('Bundle-SymbolicName: ' + project.name + '.source')
-	writer.println('Bundle-Version: ' + qualifiedVersion)
-	writer.println('Bundle-Name: Sources')
-	writer.println('Bundle-Vendor: Eclipse Xtext')
-	writer.println('Eclipse-SourceBundle: ' + project.name + ';version="' + qualifiedVersion + '"')
-	writer.close()
+task genSourcesManifest {
+	outputs.file(sourcesManifestFile)
+	doLast {
+		def f = new File(sourcesManifestFile)
+		f.parentFile.mkdirs()
+		def writer = new PrintWriter(f)
+		writer.println("Manifest-Version: 1.0")
+		writer.println("Bundle-ManifestVersion: 2")
+		writer.println("Bundle-SymbolicName: ${project.name}.source")
+		writer.println("Bundle-Version: ${qualifiedVersion}")
+		if (project.hasProperty('title'))
+			writer.println("Bundle-Name: ${project.title} Sources")
+		else
+			writer.println("Bundle-Name: Sources")
+		writer.println("Bundle-Vendor: Eclipse Xtext")
+		writer.println("Eclipse-SourceBundle: ${project.name};version=\"${qualifiedVersion}\"")
+		writer.close()
+	}
 }
-genSourcesManifest.outputs.file(sourcesManifestFile)
 
 sourcesJar {
 	dependsOn genSourcesManifest
