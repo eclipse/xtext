@@ -14,7 +14,7 @@ node {
             archive 'build/maven-repository/**/*.*'
         } finally {
             //https://github.com/eclipse/xtext-xtend/issues/62
-            //step([$class: 'JUnitResultArchiver', testResults: '**/build/test-results/*.xml'])
+            //step([$class: 'JUnitResultArchiver', testResults: '**/build/test-results/test/*.xml'])
         }
         
         stage 'Maven Build'
