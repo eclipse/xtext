@@ -15,6 +15,6 @@ node {
 		slackSend color: 'danger', message: "Build Failed - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
 		throw e
 	} finally {
-		step([$class: 'JUnitResultArchiver', testResults: '**/build/test-results/*.xml'])
+		step([$class: 'JUnitResultArchiver', testResults: '**/build/test-results/test/*.xml'])
 	}
 }
