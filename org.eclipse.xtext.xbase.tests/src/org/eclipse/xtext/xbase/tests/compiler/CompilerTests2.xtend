@@ -2042,4 +2042,55 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		''', false)
 	}
 
+	@Test def void test406762_ValidReturnInLambdaContainedInThrow() {
+		'''
+			throw {
+				val foo = [|return "foo"]
+				new Exception(foo.apply)
+			}
+		'''.compilesTo('''
+			try {
+			  Exception _xblockexpression = null;
+			  {
+			    final org.eclipse.xtext.xbase.lib.Functions.Function0<String> _function = new org.eclipse.xtext.xbase.lib.Functions.Function0<String>() {
+			      public String apply() {
+			        return "foo";
+			      }
+			    };
+			    final org.eclipse.xtext.xbase.lib.Functions.Function0<String> foo = _function;
+			    String _apply = foo.apply();
+			    _xblockexpression = new Exception(_apply);
+			  }
+			  throw _xblockexpression;
+			} catch (Throwable _e) {
+			  throw org.eclipse.xtext.xbase.lib.Exceptions.sneakyThrow(_e);
+			}
+		''')
+	}
+
+	@Test def void test406762_ValidReturnInLambdaContainedInThrow_1() {
+		'''
+			throw {
+				val ()=>Exception foo = [|return new Exception]
+				foo.apply
+			}
+		'''.compilesTo('''
+			try {
+			  Exception _xblockexpression = null;
+			  {
+			    final org.eclipse.xtext.xbase.lib.Functions.Function0<Exception> _function = new org.eclipse.xtext.xbase.lib.Functions.Function0<Exception>() {
+			      public Exception apply() {
+			        return new Exception();
+			      }
+			    };
+			    final org.eclipse.xtext.xbase.lib.Functions.Function0<? extends Exception> foo = _function;
+			    _xblockexpression = foo.apply();
+			  }
+			  throw _xblockexpression;
+			} catch (Throwable _e) {
+			  throw org.eclipse.xtext.xbase.lib.Exceptions.sneakyThrow(_e);
+			}
+		''')
+	}
+
 }

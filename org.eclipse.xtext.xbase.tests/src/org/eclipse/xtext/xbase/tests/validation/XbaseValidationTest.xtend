@@ -1246,6 +1246,24 @@ class XbaseValidationTest extends AbstractXbaseTestCase {
 			}
 		'''.expression.assertNoErrors
 	}
+
+	@Test def void test406762_ValidReturnInLambdaContainedInThrow() {
+		'''
+			throw {
+				val foo = [|return "foo"]
+				new Exception(foo.apply)
+			}
+		'''.expression.assertNoErrors
+	}
+
+	@Test def void test406762_ValidReturnInLambdaContainedInThrow_1() {
+		'''
+			throw {
+				val ()=>Exception foo = [|return new Exception]
+				foo.apply
+			}
+		'''.expression.assertNoErrors
+	}
 	
 	@Test def void testRangeLiteralInForLoopBug440006_01() {
 		'''
