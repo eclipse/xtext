@@ -154,7 +154,7 @@ import com.google.common.collect.Lists;
  * 
  * @see #format(Object, IFormattableDocument) The method {@code format(Object, IFormattableDocument)} should be
  *      overridden to implement a formatter
- * @see #initalize(FormatterRequest) The method {@code initalize(FormatterRequest)} should be overridden to set values
+ * @see #initialize(FormatterRequest) The method {@code initialize(FormatterRequest)} should be overridden to set values
  *      of member fields
  * @see #reset() The method {@code reset()} should be overridden to cleanup after execution.
  * 
@@ -263,7 +263,7 @@ public abstract class AbstractFormatter2 implements IFormatter2 {
 	@Override
 	public final List<ITextReplacement> format(FormatterRequest request) {
 		try {
-			initalize(request);
+			initialize(request);
 			IFormattableDocument document = createFormattableRootDocument();
 			XtextResource xtextResource = request.getTextRegionAccess().getResource();
 			format(xtextResource, document);
@@ -314,9 +314,17 @@ public abstract class AbstractFormatter2 implements IFormatter2 {
 	}
 
 	/**
+	 * This method is deprecated, use #initialize(FormatterRequest) instead
+	 */
+	@Deprecated
+	protected void initalize(FormatterRequest request) {
+		initialize(request);
+	}
+	
+	/**
 	 * Overwrite this method to initialize member fields before {@link #format(Object, IFormattableDocument)} is called.
 	 */
-	protected void initalize(FormatterRequest request) {
+	protected void initialize(FormatterRequest request) {
 		this.request = request;
 		this.textRegionExtensions = request.getTextRegionAccess().getExtensions();
 	}
