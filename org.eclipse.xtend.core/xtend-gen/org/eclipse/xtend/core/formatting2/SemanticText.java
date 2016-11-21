@@ -16,21 +16,20 @@ import org.eclipse.xtext.xbase.lib.Pure;
  */
 @Data
 @SuppressWarnings("all")
-public class SemanitcText extends Chunk {
+public class SemanticText extends Chunk {
   @Override
   public String toString() {
     CharSequence _text = this.getText();
     return _text.toString();
   }
   
-  public SemanitcText(final CharSequence text) {
+  public SemanticText(final CharSequence text) {
     super(text);
   }
   
   @Override
   @Pure
   public int hashCode() {
-    final int prime = 31;
     int result = super.hashCode();
     return result;
   }
@@ -46,7 +45,6 @@ public class SemanitcText extends Chunk {
       return false;
     if (!super.equals(obj))
       return false;
-    SemanitcText other = (SemanitcText) obj;
     return true;
   }
 }

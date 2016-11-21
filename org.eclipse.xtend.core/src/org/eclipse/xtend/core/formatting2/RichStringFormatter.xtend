@@ -495,7 +495,7 @@ class LineModel {
 /**
  * @author Moritz Eysholdt - Initial implementation and API
  */
-@Data class SemanitcText extends Chunk {
+@Data class SemanticText extends Chunk {
 	override toString() {
 		text.toString
 	}
