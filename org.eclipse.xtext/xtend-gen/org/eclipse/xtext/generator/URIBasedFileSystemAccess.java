@@ -12,6 +12,7 @@ import com.google.common.io.CharStreams;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -164,9 +165,18 @@ public class URIBasedFileSystemAccess extends AbstractFileSystemAccess2 {
   @Override
   public InputStream readBinaryFile(final String fileName, final String outputCfgName) throws RuntimeIOException {
     try {
-      final URI uri = this.getURI(fileName, outputCfgName);
-      final InputStream input = this.converter.createInputStream(uri);
-      return this.beforeRead.beforeRead(uri, input);
+      try {
+        final URI uri = this.getURI(fileName, outputCfgName);
+        final InputStream input = this.converter.createInputStream(uri);
+        return this.beforeRead.beforeRead(uri, input);
+      } catch (final Throwable _t) {
+        if (_t instanceof FileNotFoundException) {
+          final FileNotFoundException e = (FileNotFoundException)_t;
+          throw new RuntimeIOException(e);
+        } else {
+          throw Exceptions.sneakyThrow(_t);
+        }
+      }
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
