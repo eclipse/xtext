@@ -53,7 +53,7 @@ afterEvaluate {
 		description = 'Create or update the local Maven repository'
 		configuration = configurations.archives
 		repositories.mavenDeployer {
-			repository(url: "file:" + file("../build/maven-repository"))
+			repository(url: "file:" + file("${rootDir}/build/maven-repository"))
 			configurePom(pom)
 		}
 	}

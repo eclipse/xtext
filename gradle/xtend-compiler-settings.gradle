@@ -1,0 +1,7 @@
+/*
+ * Configuration of Xtend compiler.
+ */
+
+xtext.version = versions.xtext_bootstrap
+
+generateXtext.xtextClasspath = rootProject.configurations.getByName('xtendCompiler')
