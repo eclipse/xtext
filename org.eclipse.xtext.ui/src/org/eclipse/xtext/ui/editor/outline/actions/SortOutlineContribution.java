@@ -39,8 +39,14 @@ public class SortOutlineContribution extends AbstractToggleOutlineContribution {
 
 	@Override
 	protected void stateChanged(boolean newState) {
-		if(treeViewer != null && !treeViewer.getTree().isDisposed())
-			treeViewer.refresh();
+		if(treeViewer != null && !treeViewer.getTree().isDisposed()) {
+			treeViewer.getControl().setRedraw(false);
+			try {
+				treeViewer.refresh();
+			} finally {
+				treeViewer.getControl().setRedraw(true);
+			}
+		}
 	}
 
 	public static class DefaultComparator implements IComparator {
