@@ -131,7 +131,7 @@ public class StringConcatenation implements CharSequence {
 		} else {
 			String value = getStringRepresentation(object);
 			List<String> newSegments = splitLinesAndNewLines(value);
-			appendSegments(index, newSegments, lineDelimiter);
+			appendSegments(index, newSegments);
 		}
 	}
 
