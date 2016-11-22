@@ -55,11 +55,27 @@ public class StringConcatenation implements CharSequence {
 	public static final String DEFAULT_LINE_DELIMITER = DefaultLineDelimiter.get();
 
 	/**
+	 * Number of elements to add to {@link #segments} array when we need to grow it. This should be a power-of-two
+	 * so we can perform efficient modulo operation.
+	 */
+	private static final int SEGMENTS_SIZE_INCREMENT = 16;
+
+	/**
+	 * Initial allocation size of the {@link #segments} array.
+	 */
+	private static final int SEGMENTS_INITIAL_SIZE = 3 * SEGMENTS_SIZE_INCREMENT;
+
+	/**
 	 * The complete content of this sequence. It may contain insignificant trailing parts that are not part of the final
 	 * string representation that can be obtained by {@link #toString()}. Insignificant parts will not be considered by
 	 * {@link #length()}, {@link #charAt(int)} or {@link #subSequence(int, int)}.
 	 */
-	private final ArrayList<String> segments;
+	private final ArrayList<String> segments = new ArrayList<>(SEGMENTS_INITIAL_SIZE);
+
+	/**
+	 * Internal hint for the size of segments. We cache this value so we do not have to perform costly calculations. 
+	 */
+	private int lastSegmentsSize = SEGMENTS_INITIAL_SIZE;
 
 	/**
 	 * A cached string representation.
@@ -94,7 +110,21 @@ public class StringConcatenation implements CharSequence {
 		if (lineDelimiter == null || lineDelimiter.length() == 0)
 			throw new IllegalArgumentException("lineDelimiter must not be null or empty");
 		this.lineDelimiter = lineDelimiter;
-		segments = new ArrayList<String>(50);
+	}
+
+	private void growSegments(int increment) {
+		int targetSize = segments.size() + increment;
+		if (targetSize <= lastSegmentsSize) {
+			return;
+		}
+
+		int mod = targetSize % SEGMENTS_SIZE_INCREMENT;
+		if (mod != 0) {
+			targetSize += SEGMENTS_SIZE_INCREMENT - mod;
+		}
+
+		segments.ensureCapacity(targetSize);
+		lastSegmentsSize = targetSize;
 	}
 
 	/**
@@ -347,6 +377,9 @@ public class StringConcatenation implements CharSequence {
 		if (otherSegments.isEmpty()) {
 			return;
 		}
+
+		// This may not be accurate, but it's better than nothing
+		growSegments(otherSegments.size());
 		for (String otherSegment : otherSegments) {
 			if (otherDelimiter.equals(otherSegment)) {
 				segments.add(index++, lineDelimiter);
@@ -377,7 +410,7 @@ public class StringConcatenation implements CharSequence {
 			if (otherSegments.isEmpty()) {
 				return;
 			}
-			segments.ensureCapacity(index + otherSegments.size());
+			growSegments(otherSegments.size());
 			for (String otherSegment : otherSegments) {
 				if (otherDelimiter.equals(otherSegment)) {
 					segments.add(index++, lineDelimiter);
@@ -400,12 +433,14 @@ public class StringConcatenation implements CharSequence {
 	 * @since 2.5
 	 */
 	protected void appendSegments(int index, List<String> otherSegments) {
+		growSegments(otherSegments.size());
 		if (segments.addAll(index, otherSegments)) {
 			cachedToString = null;
 		}
 	}
 
 	private void appendSegment(int index, String segment) {
+		growSegments(1);
 		segments.add(index, segment);
 		cachedToString = null;
 	}
@@ -414,6 +449,7 @@ public class StringConcatenation implements CharSequence {
 	 * Add a newline to this sequence according to the configured lineDelimiter.
 	 */
 	public void newLine() {
+		growSegments(1);
 		segments.add(lineDelimiter);
 		cachedToString = null;
 	}

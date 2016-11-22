@@ -9,6 +9,9 @@ package org.eclipse.xtext.xbase.tests.lib;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
+
+import java.lang.reflect.Field;
 
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
@@ -286,5 +289,44 @@ public class StringConcatenationTest {
         c.append("    ");
         c.appendImmediate("c\nd", "  ");
         assertEquals("a\n b   c\n  d\n", c.toString());
+    }
+
+    @Test
+    public void testGrowInChunks() throws Exception {
+        // This is rather ugly, but gets the job done. It would be much cleaner if this test were in the same
+        // package as the class being tested...
+        final Field lss = StringConcatenation.class.getDeclaredField("lastSegmentsSize");
+        lss.setAccessible(true);
+
+        final StringConcatenation c = new StringConcatenation();
+        final int initialSize = lss.getInt(c);
+        assertTrue(initialSize >= 0);
+
+        for (int i = 0; i < initialSize; ++i) {
+            c.append("a");
+        }
+
+        // No reallocation should happen
+        assertEquals(initialSize, lss.getInt(c));
+
+        // This should trigger pre-allocation
+        c.append("b");
+        final int firstGrown = lss.getInt(c);
+        assertTrue(firstGrown > initialSize);
+
+        // The delta needs to be a power-of-two
+        final int deltaSize = firstGrown - initialSize;
+        assertEquals(1, Integer.bitCount(deltaSize));
+
+        // Now just to make sure, append another set
+        final StringConcatenation batch = new StringConcatenation();
+        for (int i = 1; i < deltaSize * 2; ++i) {
+            batch.newLine();
+        }
+        c.append(batch);
+
+        final int secondGrown = lss.getInt(c);
+        assertTrue(firstGrown < secondGrown);
+        assertEquals(deltaSize, secondGrown - firstGrown);
     }
 }
