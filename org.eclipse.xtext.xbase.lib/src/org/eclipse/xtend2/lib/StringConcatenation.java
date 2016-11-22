@@ -120,27 +120,28 @@ public class StringConcatenation implements CharSequence {
 	protected void append(Object object, int index) {
 		if (object == null)
 			return;
-		if (object instanceof StringConcatenation) {
+		if (object instanceof String) {
+			append((String) object, index);
+		} else if (object instanceof StringConcatenation) {
 			StringConcatenation other = (StringConcatenation) object;
 			appendSegments(index, other.getSignificantContent(), other.lineDelimiter);
-			return;
 		} else if (object instanceof StringConcatenationClient) {
 			StringConcatenationClient other = (StringConcatenationClient) object;
 			other.appendTo(new SimpleTarget(this, index));
-			return;
 		} else {
-			append(getStringRepresentation(object), index);
+			final String text = getStringRepresentation(object);
+			if (text != null) {
+				append(text, index);
+			}
 		}
 	}
 
 	private void append(String text, int index) {
-		if (text != null) {
-			final int initial = initialSegmentSize(text);
-			if (initial == text.length()) {
-				appendSegment(index, text);
-			} else {
-				appendSegments(index, continueSplitting(text, initial));
-			}
+		final int initial = initialSegmentSize(text);
+		if (initial == text.length()) {
+			appendSegment(index, text);
+		} else {
+			appendSegments(index, continueSplitting(text, initial));
 		}
 	}
 
@@ -175,7 +176,9 @@ public class StringConcatenation implements CharSequence {
 		}
 		if (object == null)
 			return;
-		if (object instanceof StringConcatenation) {
+		if (object instanceof String) {
+			append(indentation, (String)object, index);
+		} else if (object instanceof StringConcatenation) {
 			StringConcatenation other = (StringConcatenation) object;
 			List<String> otherSegments = other.getSignificantContent();
 			appendSegments(indentation, index, otherSegments, other.lineDelimiter);
@@ -183,18 +186,19 @@ public class StringConcatenation implements CharSequence {
 			StringConcatenationClient other = (StringConcatenationClient) object;
 			other.appendTo(new IndentedTarget(this, indentation, index));
 		} else {
-			append(indentation, getStringRepresentation(object), index);
+			final String text = getStringRepresentation(object);
+			if (text != null) {
+				append(indentation, text, index);
+			}
 		}
 	}
 
 	private void append(String indentation, String text, int index) {
-		if (text != null) {
-			final int initial = initialSegmentSize(text);
-			if (initial == text.length()) {
-				appendSegment(index, text);
-			} else {
-				appendSegments(indentation, index, continueSplitting(text, initial), lineDelimiter);
-			}
+		final int initial = initialSegmentSize(text);
+		if (initial == text.length()) {
+			appendSegment(index, text);
+		} else {
+			appendSegments(indentation, index, continueSplitting(text, initial), lineDelimiter);
 		}
 	}
 

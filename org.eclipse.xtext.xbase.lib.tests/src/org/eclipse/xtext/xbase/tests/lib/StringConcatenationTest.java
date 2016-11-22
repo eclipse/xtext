@@ -124,6 +124,15 @@ public class StringConcatenationTest {
     }
 
     @Test
+    public void testObjectIndentConcat() {
+        final StringConcatenation c = new StringConcatenation();
+        c.append(new StringObject("a\n"), " ");
+        c.append(new StringObject("b\r"), "  ");
+        c.append(new StringObject("c\nd"), "   ");
+        assertEquals("a\n b\n  c\n   d", c.toString());
+    }
+
+    @Test
     public void testNewLine() {
         final StringConcatenation c = new StringConcatenation();
         c.newLine();
