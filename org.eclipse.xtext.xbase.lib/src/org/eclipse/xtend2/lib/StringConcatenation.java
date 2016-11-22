@@ -129,9 +129,18 @@ public class StringConcatenation implements CharSequence {
 			other.appendTo(new SimpleTarget(this, index));
 			return;
 		} else {
-			String value = getStringRepresentation(object);
-			List<String> newSegments = splitLinesAndNewLines(value);
-			appendSegments(index, newSegments);
+			append(getStringRepresentation(object), index);
+		}
+	}
+
+	private void append(String text, int index) {
+		if (text != null) {
+			final int initial = initialSegmentSize(text);
+			if (initial == text.length()) {
+				appendSegment(index, text);
+			} else {
+				appendSegments(index, continueSplitting(text, initial));
+			}
 		}
 	}
 
@@ -174,9 +183,18 @@ public class StringConcatenation implements CharSequence {
 			StringConcatenationClient other = (StringConcatenationClient) object;
 			other.appendTo(new IndentedTarget(this, indentation, index));
 		} else {
-			String value = getStringRepresentation(object);
-			List<String> newSegments = splitLinesAndNewLines(value);
-			appendSegments(indentation, index, newSegments, lineDelimiter);
+			append(indentation, getStringRepresentation(object), index);
+		}
+	}
+
+	private void append(String indentation, String text, int index) {
+		if (text != null) {
+			final int initial = initialSegmentSize(text);
+			if (initial == text.length()) {
+				appendSegment(index, text);
+			} else {
+				appendSegments(indentation, index, continueSplitting(text, initial), lineDelimiter);
+			}
 		}
 	}
 
@@ -244,7 +262,7 @@ public class StringConcatenation implements CharSequence {
 		}
 		cachedToString = null;
 	}
-	
+
 	/**
 	 * Add the list of segments to this sequence at the given index. The given indentation will be prepended to each
 	 * line except the first one if the object has a multi-line string representation.
@@ -275,7 +293,7 @@ public class StringConcatenation implements CharSequence {
 			cachedToString = null;
 		}
 	}
-	
+
 	/**
 	 * Add the list of segments to this sequence at the given index. The given indentation will be prepended to each
 	 * line except the first one if the object has a multi-line string representation.
@@ -290,6 +308,11 @@ public class StringConcatenation implements CharSequence {
 		if (segments.addAll(index, otherSegments)) {
 			cachedToString = null;
 		}
+	}
+
+	private void appendSegment(int index, String segment) {
+		segments.add(index, segment);
+		cachedToString = null;
 	}
 
 	/**
@@ -335,7 +358,7 @@ public class StringConcatenation implements CharSequence {
 		cachedToString = builder.toString();
 		return cachedToString;
 	}
-	
+
 	/**
 	 * Return the actual content of this sequence, including all trailing whitespace. The return value is unsafe,
 	 * that is modification to this {@link StringConcatenation} will cause changes in a previously obtained
@@ -369,7 +392,7 @@ public class StringConcatenation implements CharSequence {
 		}
 		return segments;
 	}
-	
+
 	/**
 	 * Allows subtypes to access the configured line delimiter.
 
@@ -428,20 +451,33 @@ public class StringConcatenation implements CharSequence {
 	protected List<String> splitLinesAndNewLines(String text) {
 		if (text == null)
 			return Collections.emptyList();
-		int length = text.length();
-		int nextLineOffset = 0;
-		int idx = 0;
-		while (idx < length) {
-			char currentChar = text.charAt(idx);
-			if (currentChar == '\r' || currentChar == '\n') {
-				break;
-			}
-			idx++;
-		}
-		if (idx == length) {
+		int idx = initialSegmentSize(text);
+		if (idx == text.length()) {
 			return Collections.singletonList(text);
 		}
-		List<String> result = new ArrayList<String>(5);
+
+		return continueSplitting(text, idx);
+	}
+
+	private static int initialSegmentSize(String text) {
+		final int length = text.length();
+			int idx = 0;
+			while (idx < length) {
+				char currentChar = text.charAt(idx);
+				if (currentChar == '\r' || currentChar == '\n') {
+					break;
+				}
+				idx++;
+			}
+
+		return idx;
+	}
+
+	private List<String> continueSplitting(String text, int idx) {
+		final int length = text.length();
+		int nextLineOffset = 0;
+
+		final List<String> result = new ArrayList<>(5);
 		while (idx < length) {
 			char currentChar = text.charAt(idx);
 			// check for \r or \r\n
@@ -481,7 +517,7 @@ public class StringConcatenation implements CharSequence {
 
 		private final StringConcatenation target;
 		private final int offsetFixup;
-		
+
 		private SimpleTarget(StringConcatenation target, int index) {
 			this.target = target;
 			this.offsetFixup = target.segments.size() - index;
@@ -529,9 +565,9 @@ public class StringConcatenation implements CharSequence {
 		public void append(Object object) {
 			target.append(object, target.segments.size() - offsetFixup);
 		}
-		
+
 	}
-	
+
 	/**
 	 * Decorates an existing {@link StringConcatenation} as a {@link TargetStringConcatenation}.
 	 * This implementation keeps track of the current indentation at the position where
@@ -548,29 +584,29 @@ public class StringConcatenation implements CharSequence {
 			super(target, index);
 			this.indentation = indentation;
 		}
-		
+
 		@Override
 		public void newLineIfNotEmpty() {
 			super.newLineIfNotEmpty();
 			super.append(indentation);
 		}
-		
+
 		@Override
 		public void newLine() {
 			super.newLine();
 			super.append(indentation);
 		}
-		
+
 		@Override
 		public void appendImmediate(Object object, String indentation) {
 			super.appendImmediate(object, this.indentation + indentation);
 		}
-		
+
 		@Override
 		public void append(Object object, String indentation) {
 			super.append(object, this.indentation + indentation);
 		}
-		
+
 		@Override
 		public void append(Object object) {
 			super.append(object, indentation);
