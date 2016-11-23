@@ -1,0 +1,18 @@
+/*
+ * The p2gen plugin generates a Tycho build that assembles a p2 repository.
+ * The generator task should be rerun whenever necessary, e.g. when the version changes.
+ */
+
+apply plugin: 'io.typefox.p2gen'
+
+group = 'org.eclipse.xtext'
+
+p2gen {
+	exclude 'org.eclipse.xtext.xbase.lib.tests'
+	exclude 'org.eclipse.xtend.lib.tests'
+	exclude 'org.eclipse.xtend.lib.gwt.test'
+	targetRepository {
+		location 'http://download.eclipse.org/releases/luna/201502271000/'
+		unit 'com.google.guava'
+	}
+}

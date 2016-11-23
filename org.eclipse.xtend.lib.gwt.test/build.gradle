@@ -13,9 +13,6 @@ apply plugin: 'gwt'
 
 group = 'org.eclipse.xtend'
 
-install.enabled = false
-uploadArchives.enabled = false
-
 dependencies {
 	compile project(':org.eclipse.xtend.lib.gwt')
 	compile "com.google.gwt:gwt-dev:$versions.gwt"
