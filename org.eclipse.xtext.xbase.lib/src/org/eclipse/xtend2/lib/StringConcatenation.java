@@ -55,11 +55,27 @@ public class StringConcatenation implements CharSequence {
 	public static final String DEFAULT_LINE_DELIMITER = DefaultLineDelimiter.get();
 
 	/**
+	 * Number of elements to add to {@link #segments} array when we need to grow it. This should be a power-of-two
+	 * so we can perform efficient modulo operation.
+	 */
+	private static final int SEGMENTS_SIZE_INCREMENT = 16;
+
+	/**
+	 * Initial allocation size of the {@link #segments} array.
+	 */
+	private static final int SEGMENTS_INITIAL_SIZE = 3 * SEGMENTS_SIZE_INCREMENT;
+
+	/**
 	 * The complete content of this sequence. It may contain insignificant trailing parts that are not part of the final
 	 * string representation that can be obtained by {@link #toString()}. Insignificant parts will not be considered by
 	 * {@link #length()}, {@link #charAt(int)} or {@link #subSequence(int, int)}.
 	 */
-	private final ArrayList<String> segments;
+	private final ArrayList<String> segments = new ArrayList<>(SEGMENTS_INITIAL_SIZE);
+
+	/**
+	 * Internal hint for the size of segments. We cache this value so we do not have to perform costly calculations. 
+	 */
+	private int lastSegmentsSize = SEGMENTS_INITIAL_SIZE;
 
 	/**
 	 * A cached string representation.
@@ -94,7 +110,21 @@ public class StringConcatenation implements CharSequence {
 		if (lineDelimiter == null || lineDelimiter.length() == 0)
 			throw new IllegalArgumentException("lineDelimiter must not be null or empty");
 		this.lineDelimiter = lineDelimiter;
-		segments = new ArrayList<String>(50);
+	}
+
+	private void growSegments(int increment) {
+		int targetSize = segments.size() + increment;
+		if (targetSize <= lastSegmentsSize) {
+			return;
+		}
+
+		int mod = targetSize % SEGMENTS_SIZE_INCREMENT;
+		if (mod != 0) {
+			targetSize += SEGMENTS_SIZE_INCREMENT - mod;
+		}
+
+		segments.ensureCapacity(targetSize);
+		lastSegmentsSize = targetSize;
 	}
 
 	/**
@@ -109,6 +139,44 @@ public class StringConcatenation implements CharSequence {
 	}
 
 	/**
+	 * Append the given string to this sequence. Does nothing if the string is <code>null</code>.
+	 *
+	 * @param str
+	 *            the to-be-appended string.
+	 * @since 2.11
+	 */
+	public void append(String str) {
+		if (str != null)
+			append(str, segments.size());
+	}
+
+	/**
+	 * Append the contents of a given StringConcatenation to this sequence. Does nothing
+	 * if the concatenation is <code>null</code>.
+	 *
+	 * @param concat
+	 *            the to-be-appended StringConcatenation.
+	 * @since 2.11
+	 */
+	public void append(StringConcatenation concat) {
+		if (concat != null)
+			appendSegments(segments.size(), concat.getSignificantContent(), concat.lineDelimiter);
+	}
+
+	/**
+	 * Append the contents of a given StringConcatenationClient to this sequence. Does nothing
+	 * if the argument is <code>null</code>.
+	 *
+	 * @param client
+	 *            the to-be-appended StringConcatenationClient.
+	 * @since 2.11
+	 */
+	public void append(StringConcatenationClient client) {
+		if (client != null)
+			client.appendTo(new SimpleTarget(this, segments.size()));
+	}
+
+	/*
 	 * Add the string representation of the given object to this sequence at the given index. Does nothing if the object
 	 * is <code>null</code>.
 	 * 
@@ -120,18 +188,28 @@ public class StringConcatenation implements CharSequence {
 	protected void append(Object object, int index) {
 		if (object == null)
 			return;
-		if (object instanceof StringConcatenation) {
+		if (object instanceof String) {
+			append((String) object, index);
+		} else if (object instanceof StringConcatenation) {
 			StringConcatenation other = (StringConcatenation) object;
 			appendSegments(index, other.getSignificantContent(), other.lineDelimiter);
-			return;
 		} else if (object instanceof StringConcatenationClient) {
 			StringConcatenationClient other = (StringConcatenationClient) object;
 			other.appendTo(new SimpleTarget(this, index));
-			return;
 		} else {
-			String value = getStringRepresentation(object);
-			List<String> newSegments = splitLinesAndNewLines(value);
-			appendSegments(index, newSegments, lineDelimiter);
+			final String text = getStringRepresentation(object);
+			if (text != null) {
+				append(text, index);
+			}
+		}
+	}
+
+	private void append(String text, int index) {
+		final int initial = initialSegmentSize(text);
+		if (initial == text.length()) {
+			appendSegment(index, text);
+		} else {
+			appendSegments(index, continueSplitting(text, initial));
 		}
 	}
 
@@ -146,6 +224,59 @@ public class StringConcatenation implements CharSequence {
 	 */
 	public void append(Object object, String indentation) {
 		append(object, indentation, segments.size());
+	}
+
+	/**
+	 * Add the given string to this sequence. The given indentation will be prepended to
+	 * each line except the first one if the object has a multi-line string representation.
+	 *
+	 * @param str
+	 *            the appended string.
+	 * @param indentation
+	 *            the indentation string that should be prepended. May not be <code>null</code>.
+	 * @since 2.11
+	 */
+	public void append(String str, String indentation) {
+		if (indentation.isEmpty()) {
+			append(str);
+		} else if (str != null)
+			append(indentation, str, segments.size());
+	}
+
+	/**
+	 * Append the contents of a given StringConcatenation to this sequence. Does nothing
+	 * if the concatenation is <code>null</code>. The given indentation will be prepended to each line except
+	 * the first one.
+	 *
+	 * @param concat
+	 *            the to-be-appended StringConcatenation.
+	 * @param indentation
+	 *            the indentation string that should be prepended. May not be <code>null</code>.
+	 * @since 2.11
+	 */
+	public void append(StringConcatenation concat, String indentation) {
+		if (indentation.isEmpty()) {
+			append(concat);
+		} else if (concat != null)
+			appendSegments(indentation, segments.size(), concat.getSignificantContent(), concat.lineDelimiter);
+	}
+
+	/**
+	 * Append the contents of a given StringConcatenationClient to this sequence. Does nothing
+	 * if that argument is <code>null</code>. The given indentation will be prepended to each line except
+	 * the first one.
+	 *
+	 * @param client
+	 *            the to-be-appended StringConcatenationClient.
+	 * @param indentation
+	 *            the indentation string that should be prepended. May not be <code>null</code>.
+	 * @since 2.11
+	 */
+	public void append(StringConcatenationClient client, String indentation) {
+		if (indentation.isEmpty()) {
+			append(client);
+		} else if (client != null)
+			client.appendTo(new IndentedTarget(this, indentation, segments.size()));
 	}
 
 	/**
@@ -166,7 +297,9 @@ public class StringConcatenation implements CharSequence {
 		}
 		if (object == null)
 			return;
-		if (object instanceof StringConcatenation) {
+		if (object instanceof String) {
+			append(indentation, (String)object, index);
+		} else if (object instanceof StringConcatenation) {
 			StringConcatenation other = (StringConcatenation) object;
 			List<String> otherSegments = other.getSignificantContent();
 			appendSegments(indentation, index, otherSegments, other.lineDelimiter);
@@ -174,9 +307,19 @@ public class StringConcatenation implements CharSequence {
 			StringConcatenationClient other = (StringConcatenationClient) object;
 			other.appendTo(new IndentedTarget(this, indentation, index));
 		} else {
-			String value = getStringRepresentation(object);
-			List<String> newSegments = splitLinesAndNewLines(value);
-			appendSegments(indentation, index, newSegments, lineDelimiter);
+			final String text = getStringRepresentation(object);
+			if (text != null) {
+				append(indentation, text, index);
+			}
+		}
+	}
+
+	private void append(String indentation, String text, int index) {
+		final int initial = initialSegmentSize(text);
+		if (initial == text.length()) {
+			appendSegment(index, text);
+		} else {
+			appendSegments(indentation, index, continueSplitting(text, initial), lineDelimiter);
 		}
 	}
 
@@ -234,6 +377,9 @@ public class StringConcatenation implements CharSequence {
 		if (otherSegments.isEmpty()) {
 			return;
 		}
+
+		// This may not be accurate, but it's better than nothing
+		growSegments(otherSegments.size());
 		for (String otherSegment : otherSegments) {
 			if (otherDelimiter.equals(otherSegment)) {
 				segments.add(index++, lineDelimiter);
@@ -244,7 +390,7 @@ public class StringConcatenation implements CharSequence {
 		}
 		cachedToString = null;
 	}
-	
+
 	/**
 	 * Add the list of segments to this sequence at the given index. The given indentation will be prepended to each
 	 * line except the first one if the object has a multi-line string representation.
@@ -264,7 +410,7 @@ public class StringConcatenation implements CharSequence {
 			if (otherSegments.isEmpty()) {
 				return;
 			}
-			segments.ensureCapacity(index + otherSegments.size());
+			growSegments(otherSegments.size());
 			for (String otherSegment : otherSegments) {
 				if (otherDelimiter.equals(otherSegment)) {
 					segments.add(index++, lineDelimiter);
@@ -275,7 +421,7 @@ public class StringConcatenation implements CharSequence {
 			cachedToString = null;
 		}
 	}
-	
+
 	/**
 	 * Add the list of segments to this sequence at the given index. The given indentation will be prepended to each
 	 * line except the first one if the object has a multi-line string representation.
@@ -287,15 +433,23 @@ public class StringConcatenation implements CharSequence {
 	 * @since 2.5
 	 */
 	protected void appendSegments(int index, List<String> otherSegments) {
+		growSegments(otherSegments.size());
 		if (segments.addAll(index, otherSegments)) {
 			cachedToString = null;
 		}
+	}
+
+	private void appendSegment(int index, String segment) {
+		growSegments(1);
+		segments.add(index, segment);
+		cachedToString = null;
 	}
 
 	/**
 	 * Add a newline to this sequence according to the configured lineDelimiter.
 	 */
 	public void newLine() {
+		growSegments(1);
 		segments.add(lineDelimiter);
 		cachedToString = null;
 	}
@@ -335,7 +489,7 @@ public class StringConcatenation implements CharSequence {
 		cachedToString = builder.toString();
 		return cachedToString;
 	}
-	
+
 	/**
 	 * Return the actual content of this sequence, including all trailing whitespace. The return value is unsafe,
 	 * that is modification to this {@link StringConcatenation} will cause changes in a previously obtained
@@ -369,7 +523,7 @@ public class StringConcatenation implements CharSequence {
 		}
 		return segments;
 	}
-	
+
 	/**
 	 * Allows subtypes to access the configured line delimiter.
 
@@ -428,20 +582,33 @@ public class StringConcatenation implements CharSequence {
 	protected List<String> splitLinesAndNewLines(String text) {
 		if (text == null)
 			return Collections.emptyList();
-		int length = text.length();
-		int nextLineOffset = 0;
-		int idx = 0;
-		while (idx < length) {
-			char currentChar = text.charAt(idx);
-			if (currentChar == '\r' || currentChar == '\n') {
-				break;
-			}
-			idx++;
-		}
-		if (idx == length) {
+		int idx = initialSegmentSize(text);
+		if (idx == text.length()) {
 			return Collections.singletonList(text);
 		}
-		List<String> result = new ArrayList<String>(5);
+
+		return continueSplitting(text, idx);
+	}
+
+	private static int initialSegmentSize(String text) {
+		final int length = text.length();
+			int idx = 0;
+			while (idx < length) {
+				char currentChar = text.charAt(idx);
+				if (currentChar == '\r' || currentChar == '\n') {
+					break;
+				}
+				idx++;
+			}
+
+		return idx;
+	}
+
+	private List<String> continueSplitting(String text, int idx) {
+		final int length = text.length();
+		int nextLineOffset = 0;
+
+		final List<String> result = new ArrayList<>(5);
 		while (idx < length) {
 			char currentChar = text.charAt(idx);
 			// check for \r or \r\n
@@ -481,7 +648,7 @@ public class StringConcatenation implements CharSequence {
 
 		private final StringConcatenation target;
 		private final int offsetFixup;
-		
+
 		private SimpleTarget(StringConcatenation target, int index) {
 			this.target = target;
 			this.offsetFixup = target.segments.size() - index;
@@ -529,9 +696,9 @@ public class StringConcatenation implements CharSequence {
 		public void append(Object object) {
 			target.append(object, target.segments.size() - offsetFixup);
 		}
-		
+
 	}
-	
+
 	/**
 	 * Decorates an existing {@link StringConcatenation} as a {@link TargetStringConcatenation}.
 	 * This implementation keeps track of the current indentation at the position where
@@ -548,29 +715,29 @@ public class StringConcatenation implements CharSequence {
 			super(target, index);
 			this.indentation = indentation;
 		}
-		
+
 		@Override
 		public void newLineIfNotEmpty() {
 			super.newLineIfNotEmpty();
 			super.append(indentation);
 		}
-		
+
 		@Override
 		public void newLine() {
 			super.newLine();
 			super.append(indentation);
 		}
-		
+
 		@Override
 		public void appendImmediate(Object object, String indentation) {
 			super.appendImmediate(object, this.indentation + indentation);
 		}
-		
+
 		@Override
 		public void append(Object object, String indentation) {
 			super.append(object, this.indentation + indentation);
 		}
-		
+
 		@Override
 		public void append(Object object) {
 			super.append(object, indentation);
