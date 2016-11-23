@@ -25,3 +25,9 @@ task cleanLocalMavenRepo(type: Delete) {
 	description = 'Delete the local Maven repository'
 	delete 'build/maven-repository'
 }
+
+task cleanLocalP2Repo(type: Delete) {
+	group 'Build'
+	description 'Deletes the local P2 repository'
+	delete 'build/p2-repository'
+}
