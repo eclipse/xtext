@@ -10,7 +10,9 @@
    <description>
       %description
    </description>
-
+   <license url="http://www.eclipse.org/legal/epl-v10.html">
+      %license
+   </license>
    <copyright>
       Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
 

@@ -75,6 +75,9 @@
    <bundle id="org.eclipse.xtext.idea.generator.source" version="2.11.0.qualifier">
       <category name="Xtext"/>
    </bundle>
+   <bundle id="org.eclipse.xtext.license.feature.group" version="0.0.0">
+      <category name="Xtext"/>
+   </bundle>
    <bundle id="org.eclipse.lsp4j" version="0.0.0">
       <category name="Lsp4J"/>
    </bundle>

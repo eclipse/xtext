@@ -49,7 +49,6 @@
 		<module>org.eclipse.xtext.xbase.ui.tests</module>
 		<module>org.eclipse.xtext.xtext.ui.graph.tests</module>
 		<module>org.eclipse.xtext.xtext.ui.tests</module>
-		<!-- <module>org.eclipse.xtext.build.feature</module> -->
 	</modules>
 
 </project>

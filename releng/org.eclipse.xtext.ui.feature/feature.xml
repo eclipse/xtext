@@ -4,7 +4,7 @@
       label="%featureName"
       version="2.11.0.qualifier"
       license-feature="org.eclipse.xtext.license"
-      license-feature-version="2.6.0.qualifier">
+      license-feature-version="2.6.0">
 
    <description>
       %description
@@ -18,7 +18,11 @@ are made available under the terms of the Eclipse Public License
 v1.0 which accompanies this distribution, and is available at
 http://www.eclipse.org/legal/epl-v10.html Description here.
    </copyright>
-
+   
+   <license url="http://www.eclipse.org/legal/epl-v10.html">
+      %license
+   </license>
+   
    <includes
          id="org.eclipse.xtext.runtime"
          version="0.0.0"/>
@@ -164,12 +168,12 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-  
+
    <plugin
          id="org.eclipse.xtext.ide.source"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-         
+
 </feature>
