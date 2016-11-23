@@ -43,7 +43,7 @@
 						</goals>
 						<configuration>
 							<tasks>
-								<copy todir="${basedir}/../../build/p2-repository">
+								<copy todir="${parent.basedir}/../build/p2-repository">
 									<fileset dir="${basedir}/target/repository/" />
 								</copy>
 							</tasks>

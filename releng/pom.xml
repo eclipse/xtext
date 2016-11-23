@@ -14,7 +14,7 @@
 	<repositories>
 		<repository>
 			<id>local-gradle-result</id>
-			<url>file:${basedir}/../build/maven-repository</url>
+			<url>file:${parent.basedir}/../build/maven-repository</url>
 		</repository>
 		<repository>
 			<snapshots>
