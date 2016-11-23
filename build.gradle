@@ -2,27 +2,37 @@
  * Root project for xtext-core.
  */
 
+buildscript {
+	repositories.mavenLocal()
+	dependencies {
+		classpath 'io.typefox:p2-repo-gen:0.1.0'
+	}
+}
+
+apply from: "${rootDir}/gradle/versions.gradle"
+apply from: "${rootDir}/gradle/p2-deployment.gradle"
+
 ext.buildTime = new java.text.SimpleDateFormat('yyyyMMdd-HHmm').format(new Date())
 
 subprojects {
+	group = 'org.eclipse.xtext'
+	version = rootProject.version
+	
 	apply plugin: 'java'
 	apply plugin: 'eclipse'
 	apply plugin: 'maven'
 	
 	apply from: "${rootDir}/gradle/upstream-repositories.gradle"
-	apply from: "${rootDir}/gradle/versions.gradle"
 	apply from: "${rootDir}/gradle/java-compiler-settings.gradle"
 	apply from: "${rootDir}/gradle/maven-deployment.gradle"
 	apply from: "${rootDir}/gradle/eclipse-project-layout.gradle"
 	apply from: "${rootDir}/gradle/manifest-gen.gradle"
 	apply from: "${rootDir}/gradle/validation.gradle"
-	
-	group = 'org.eclipse.xtext'
 }
 
 task cleanLocalMavenRepo(type: Delete) {
-	group = 'Upload'
-	description = 'Delete the local Maven repository'
+	group 'Build'
+	description 'Deletes the local Maven repository'
 	delete 'build/maven-repository'
 }
 
