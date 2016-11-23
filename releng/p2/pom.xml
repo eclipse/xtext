@@ -14,6 +14,7 @@
 
 	<properties>
 		<tycho-version>0.25.0</tycho-version>
+		<root-dir>${basedir}/../..</root-dir>
 	</properties>
 
 	<build>
@@ -43,7 +44,7 @@
 						</goals>
 						<configuration>
 							<tasks>
-								<copy todir="${basedir}/../../build/p2-repository">
+								<copy todir="${root-dir}/build/p2-repository">
 									<fileset dir="${basedir}/target/repository/" />
 								</copy>
 							</tasks>

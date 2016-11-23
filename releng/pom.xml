@@ -9,12 +9,13 @@
 
 	<properties>
 		<tycho-version>0.25.0</tycho-version>
+		<root-dir>${basedir}/..</root-dir>
 	</properties>
 
 	<repositories>
 		<repository>
 			<id>local-gradle-result</id>
-			<url>file:${basedir}/../build/maven-repository</url>
+			<url>file:${root-dir}/build/maven-repository</url>
 		</repository>
 		<repository>
 			<snapshots>
