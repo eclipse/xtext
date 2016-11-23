@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+	<bundle id="org.eclipse.xtend.lib" version="2.11.0.qualifier">
+		<category name="xtext-lib"/>
+	</bundle>
+	<bundle id="org.eclipse.xtend.lib.source" version="2.11.0.qualifier">
+		<category name="xtext-lib"/>
+	</bundle>
+	<bundle id="org.eclipse.xtend.lib.gwt" version="2.11.0.qualifier">
+		<category name="xtext-lib"/>
+	</bundle>
+	<bundle id="org.eclipse.xtend.lib.gwt.source" version="2.11.0.qualifier">
+		<category name="xtext-lib"/>
+	</bundle>
+	<bundle id="org.eclipse.xtend.lib.macro" version="2.11.0.qualifier">
+		<category name="xtext-lib"/>
+	</bundle>
+	<bundle id="org.eclipse.xtend.lib.macro.source" version="2.11.0.qualifier">
+		<category name="xtext-lib"/>
+	</bundle>
+	<bundle id="org.eclipse.xtext.xbase.lib" version="2.11.0.qualifier">
+		<category name="xtext-lib"/>
+	</bundle>
+	<bundle id="org.eclipse.xtext.xbase.lib.source" version="2.11.0.qualifier">
+		<category name="xtext-lib"/>
+	</bundle>
+	<bundle id="org.eclipse.xtext.xbase.lib.gwt" version="2.11.0.qualifier">
+		<category name="xtext-lib"/>
+	</bundle>
+	<bundle id="org.eclipse.xtext.xbase.lib.gwt.source" version="2.11.0.qualifier">
+		<category name="xtext-lib"/>
+	</bundle>
+   <category-def name="xtext-lib" label="Xtext-lib"/>
+</site>
