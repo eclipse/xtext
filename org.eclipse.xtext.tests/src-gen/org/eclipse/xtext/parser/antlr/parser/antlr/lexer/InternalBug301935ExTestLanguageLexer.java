@@ -14,10 +14,10 @@ import java.util.ArrayList;
 public class InternalBug301935ExTestLanguageLexer extends Lexer {
     public static final int RULE_ID=6;
     public static final int RULE_WS=7;
-    public static final int Control000d=5;
     public static final int RULE_ANY_OTHER=8;
-    public static final int Control000a=4;
+    public static final int CarriageReturn=5;
     public static final int EOF=-1;
+    public static final int LineFeed=4;
 
     // delegates
     // delegators
@@ -32,13 +32,13 @@ public class InternalBug301935ExTestLanguageLexer extends Lexer {
     }
     public String getGrammarFileName() { return "InternalBug301935ExTestLanguageLexer.g"; }
 
-    // $ANTLR start "Control000a"
-    public final void mControl000a() throws RecognitionException {
+    // $ANTLR start "LineFeed"
+    public final void mLineFeed() throws RecognitionException {
         try {
-            int _type = Control000a;
+            int _type = LineFeed;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBug301935ExTestLanguageLexer.g:14:13: ( '\\n' )
-            // InternalBug301935ExTestLanguageLexer.g:14:15: '\\n'
+            // InternalBug301935ExTestLanguageLexer.g:14:10: ( '\\n' )
+            // InternalBug301935ExTestLanguageLexer.g:14:12: '\\n'
             {
             match('\n'); 
 
@@ -50,15 +50,15 @@ public class InternalBug301935ExTestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "Control000a"
+    // $ANTLR end "LineFeed"
 
-    // $ANTLR start "Control000d"
-    public final void mControl000d() throws RecognitionException {
+    // $ANTLR start "CarriageReturn"
+    public final void mCarriageReturn() throws RecognitionException {
         try {
-            int _type = Control000d;
+            int _type = CarriageReturn;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalBug301935ExTestLanguageLexer.g:16:13: ( '\\r' )
-            // InternalBug301935ExTestLanguageLexer.g:16:15: '\\r'
+            // InternalBug301935ExTestLanguageLexer.g:16:16: ( '\\r' )
+            // InternalBug301935ExTestLanguageLexer.g:16:18: '\\r'
             {
             match('\r'); 
 
@@ -70,7 +70,7 @@ public class InternalBug301935ExTestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "Control000d"
+    // $ANTLR end "CarriageReturn"
 
     // $ANTLR start "RULE_ID"
     public final void mRULE_ID() throws RecognitionException {
@@ -229,21 +229,21 @@ public class InternalBug301935ExTestLanguageLexer extends Lexer {
     // $ANTLR end "RULE_ANY_OTHER"
 
     public void mTokens() throws RecognitionException {
-        // InternalBug301935ExTestLanguageLexer.g:1:8: ( Control000a | Control000d | RULE_ID | RULE_WS | RULE_ANY_OTHER )
+        // InternalBug301935ExTestLanguageLexer.g:1:8: ( LineFeed | CarriageReturn | RULE_ID | RULE_WS | RULE_ANY_OTHER )
         int alt4=5;
         alt4 = dfa4.predict(input);
         switch (alt4) {
             case 1 :
-                // InternalBug301935ExTestLanguageLexer.g:1:10: Control000a
+                // InternalBug301935ExTestLanguageLexer.g:1:10: LineFeed
                 {
-                mControl000a(); 
+                mLineFeed(); 
 
                 }
                 break;
             case 2 :
-                // InternalBug301935ExTestLanguageLexer.g:1:22: Control000d
+                // InternalBug301935ExTestLanguageLexer.g:1:19: CarriageReturn
                 {
-                mControl000d(); 
+                mCarriageReturn(); 
 
                 }
                 break;
@@ -331,7 +331,7 @@ public class InternalBug301935ExTestLanguageLexer extends Lexer {
             this.transition = DFA4_transition;
         }
         public String getDescription() {
-            return "1:1: Tokens : ( Control000a | Control000d | RULE_ID | RULE_WS | RULE_ANY_OTHER );";
+            return "1:1: Tokens : ( LineFeed | CarriageReturn | RULE_ID | RULE_WS | RULE_ANY_OTHER );";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             IntStream input = _input;

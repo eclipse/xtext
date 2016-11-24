@@ -193,16 +193,16 @@ ruleNL returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
 		)*
 		(
 			(
-				kw=Control000d
+				kw=CarriageReturn
 				{
 					$current.merge(kw);
-					newLeafNode(kw, grammarAccess.getNLAccess().getControl000dKeyword_1_0());
+					newLeafNode(kw, grammarAccess.getNLAccess().getCarriageReturnKeyword_1_0());
 				}
 			)?
-			kw=Control000a
+			kw=LineFeed
 			{
 				$current.merge(kw);
-				newLeafNode(kw, grammarAccess.getNLAccess().getControl000aKeyword_1_1());
+				newLeafNode(kw, grammarAccess.getNLAccess().getLineFeedKeyword_1_1());
 			}
 		)
 		(

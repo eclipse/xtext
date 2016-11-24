@@ -40,7 +40,6 @@ Workflow {
 				preferXtendStubs = false
 			}
 		}
-		
 		language = {
 			grammarUri = "classpath:/org/eclipse/xtext/parser/antlr/Bug289515TestLanguage.xtext"
 			fragment = @TestLanguagesFragments {}
@@ -92,6 +91,10 @@ Workflow {
 			fragment = @TestLanguagesFragments {
 				ignoreCase = true
 			}
+		}
+		language = {
+			grammarUri = "classpath:/org/eclipse/xtext/parser/antlr/Bug406914TestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
 		}
 	}
 }

@@ -10,19 +10,19 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Parameter;
 import org.eclipse.xtext.ParserRule;
-import org.eclipse.xtext.parser.antlr.bug301935Test.Bug301935TestPackage;
-import org.eclipse.xtext.parser.antlr.bug301935Test.Model;
-import org.eclipse.xtext.parser.antlr.services.Bug301935TestLanguageGrammarAccess;
+import org.eclipse.xtext.parser.antlr.bug406914Test.Bug406914TestPackage;
+import org.eclipse.xtext.parser.antlr.bug406914Test.Model;
+import org.eclipse.xtext.parser.antlr.services.Bug406914TestLanguageGrammarAccess;
 import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 
 @SuppressWarnings("all")
-public abstract class AbstractBug301935TestLanguageSemanticSequencer extends AbstractDelegatingSemanticSequencer {
+public class Bug406914TestLanguageSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 
 	@Inject
-	private Bug301935TestLanguageGrammarAccess grammarAccess;
+	private Bug406914TestLanguageGrammarAccess grammarAccess;
 	
 	@Override
 	public void sequence(ISerializationContext context, EObject semanticObject) {
@@ -30,9 +30,9 @@ public abstract class AbstractBug301935TestLanguageSemanticSequencer extends Abs
 		ParserRule rule = context.getParserRule();
 		Action action = context.getAssignedAction();
 		Set<Parameter> parameters = context.getEnabledBooleanParameters();
-		if (epackage == Bug301935TestPackage.eINSTANCE)
+		if (epackage == Bug406914TestPackage.eINSTANCE)
 			switch (semanticObject.eClass().getClassifierID()) {
-			case Bug301935TestPackage.MODEL:
+			case Bug406914TestPackage.MODEL:
 				sequence_Model(context, (Model) semanticObject); 
 				return; 
 			}
@@ -45,21 +45,15 @@ public abstract class AbstractBug301935TestLanguageSemanticSequencer extends Abs
 	 *     Model returns Model
 	 *
 	 * Constraint:
-	 *     (name=ID value=ID value2=ID)
+	 *     name=ID
 	 */
 	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, Bug301935TestPackage.Literals.MODEL__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Bug301935TestPackage.Literals.MODEL__NAME));
-			if (transientValues.isValueTransient(semanticObject, Bug301935TestPackage.Literals.MODEL__VALUE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Bug301935TestPackage.Literals.MODEL__VALUE));
-			if (transientValues.isValueTransient(semanticObject, Bug301935TestPackage.Literals.MODEL__VALUE2) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Bug301935TestPackage.Literals.MODEL__VALUE2));
+			if (transientValues.isValueTransient(semanticObject, Bug406914TestPackage.Literals.MODEL__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, Bug406914TestPackage.Literals.MODEL__NAME));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getModelAccess().getNameIDTerminalRuleCall_0_0(), semanticObject.getName());
-		feeder.accept(grammarAccess.getModelAccess().getValueIDTerminalRuleCall_2_0(), semanticObject.getValue());
-		feeder.accept(grammarAccess.getModelAccess().getValue2IDTerminalRuleCall_4_0(), semanticObject.getValue2());
 		feeder.finish();
 	}
 	

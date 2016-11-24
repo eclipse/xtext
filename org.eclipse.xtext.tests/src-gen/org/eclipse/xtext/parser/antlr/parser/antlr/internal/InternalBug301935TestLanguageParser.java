@@ -348,7 +348,7 @@ public class InternalBug301935TestLanguageParser extends AbstractInternalAntlrPa
                     kw=(Token)match(input,7,FollowSets000.FOLLOW_6); 
 
                     					current.merge(kw);
-                    					newLeafNode(kw, grammarAccess.getNLAccess().getControl000dKeyword_1_0());
+                    					newLeafNode(kw, grammarAccess.getNLAccess().getCarriageReturnKeyword_1_0());
                     				
 
                     }
@@ -359,7 +359,7 @@ public class InternalBug301935TestLanguageParser extends AbstractInternalAntlrPa
             kw=(Token)match(input,8,FollowSets000.FOLLOW_7); 
 
             				current.merge(kw);
-            				newLeafNode(kw, grammarAccess.getNLAccess().getControl000aKeyword_1_1());
+            				newLeafNode(kw, grammarAccess.getNLAccess().getLineFeedKeyword_1_1());
             			
 
             }
