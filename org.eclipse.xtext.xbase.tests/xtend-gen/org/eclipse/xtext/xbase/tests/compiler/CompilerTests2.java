@@ -4509,4 +4509,68 @@ public class CompilerTests2 extends AbstractOutputComparingCompilerTests {
       throw Exceptions.sneakyThrow(_e);
     }
   }
+  
+  @Test
+  public void testObjectEqualNull() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("\"Foo\" == null");
+      _builder.newLine();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("boolean _equals = com.google.common.base.Objects.equal(\"Foo\", null);");
+      _builder_1.newLine();
+      _builder_1.append("return _equals;");
+      _builder_1.newLine();
+      this.compilesTo(_builder, _builder_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testObjectNotEqualNull() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("\"Foo\" != null");
+      _builder.newLine();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("boolean _notEquals = (!com.google.common.base.Objects.equal(\"Foo\", null));");
+      _builder_1.newLine();
+      _builder_1.append("return _notEquals;");
+      _builder_1.newLine();
+      this.compilesTo(_builder, _builder_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testObjectIdenticalNull() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("\"Foo\" === null");
+      _builder.newLine();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("return (\"Foo\" == null);");
+      _builder_1.newLine();
+      this.compilesTo(_builder, _builder_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testObjectNotIdenticalNull() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("\"Foo\" !== null");
+      _builder.newLine();
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("return (\"Foo\" != null);");
+      _builder_1.newLine();
+      this.compilesTo(_builder, _builder_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
 }

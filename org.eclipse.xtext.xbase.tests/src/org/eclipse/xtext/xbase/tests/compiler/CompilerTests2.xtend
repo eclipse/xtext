@@ -2093,4 +2093,37 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 		''')
 	}
 
+	@Test def void testObjectEqualNull () {
+		'''
+			"Foo" == null
+		'''.compilesTo ('''
+			boolean _equals = com.google.common.base.Objects.equal("Foo", null);
+			return _equals;
+		''')
+	}
+
+	@Test def void testObjectNotEqualNull () {
+		'''
+			"Foo" != null
+		'''.compilesTo ('''
+			boolean _notEquals = (!com.google.common.base.Objects.equal("Foo", null));
+			return _notEquals;
+		''')
+	}
+
+	@Test def void testObjectIdenticalNull () {
+		'''
+			"Foo" === null
+		'''.compilesTo ('''
+			return ("Foo" == null);
+		''')
+	}
+
+	@Test def void testObjectNotIdenticalNull () {
+		'''
+			"Foo" !== null
+		'''.compilesTo ('''
+			return ("Foo" != null);
+		''')
+	}
 }
