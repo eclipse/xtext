@@ -1,0 +1,16 @@
+task('generatePrefs') {
+    doLast {
+        file('../../../').listFiles()
+        .findAll { file ->
+            file.isDirectory() && file.getName().startsWith("xtext-") && !file.getName().startsWith("xtext-umbrella") && new File(file, "settings.gradle").exists()
+        }.each { file -> 
+            fileTree(file).visit { FileVisitDetails details -> 
+                if (details.file.isDirectory() && new File(details.file, "build.gradle").exists() && (new File(details.file, '.settings')).exists()) {
+                    println  "generating buildship prefs for " + details.file.path
+                    (new File(details.file, '.settings/org.eclipse.buildship.core.prefs')).text = "connection.gradle.distribution=GRADLE_DISTRIBUTION(WRAPPER)\nconnection.project.dir=../../xtext-umbrella/releng/gradle-composite\nproject.path=\\:"+details.file.name+"\n"
+                    }
+
+                }
+            }
+    }
+}
