@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <launchConfiguration type="org.eclipse.buildship.core.launch.runconfiguration">
-<listAttribute key="arguments"/>
+<listAttribute key="arguments">
+<listEntry value="-PgeneratePrefs"/>
+</listAttribute>
 <stringAttribute key="gradle_distribution" value="GRADLE_DISTRIBUTION(WRAPPER)"/>
 <listAttribute key="jvm_arguments"/>
 <booleanAttribute key="show_console_view" value="true"/>
