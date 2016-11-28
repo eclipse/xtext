@@ -1,8 +1,10 @@
-(files { file('../../../').listFiles() })
+if (!hasProperty('generatePrefs')) {
+	(files { file('../../../').listFiles() })
 .filter { 
     File it ->
     it.isDirectory() && it.getName().startsWith("xtext-") && !it.getName().startsWith("xtext-umbrella") && new File(it, "settings.gradle").exists()
 }.each {
     File it -> 
     includeBuild it
+}
 }
