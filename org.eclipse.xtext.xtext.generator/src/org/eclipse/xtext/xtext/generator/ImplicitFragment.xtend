@@ -30,7 +30,7 @@ package class ImplicitFragment extends AbstractStubGeneratingFragment {
 			])
 			
 			if (generateXtendStub) {
-				projectConfig.runtime.manifest.requiredBundles += 'org.eclipse.xtend.lib' 
+				projectConfig.runtime.manifest.requiredBundles += 'org.eclipse.xtend.lib'
 			}
 			
 			projectConfig.runtime.manifest.importedPackages.add('org.apache.log4j')
@@ -42,7 +42,7 @@ package class ImplicitFragment extends AbstractStubGeneratingFragment {
 			])
 			
 			if (generateXtendStub) {
-				projectConfig.eclipsePlugin.manifest.requiredBundles += 'org.eclipse.xtend.lib' 
+				projectConfig.eclipsePlugin.manifest.requiredBundles += 'org.eclipse.xtend.lib'
 			}
 			
 			projectConfig.eclipsePlugin.manifest.importedPackages.add('org.apache.log4j')
@@ -127,20 +127,20 @@ package class ImplicitFragment extends AbstractStubGeneratingFragment {
 				<and>
 					<reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
 					<with variable="activeEditor">
-						<test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName" 
-							value="«name»" 
+						<test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName"
+							value="«name»"
 							forcePluginActivation="true"/>
-					</with>		
+					</with>
 				</and>
 			</definition>
 			<definition id="«name».XtextEditor.opened">
 				<and>
 					<reference definitionId="isXtextEditorActive"/>
 					<with variable="activeEditor">
-						<test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName" 
-							value="«name»" 
+						<test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName"
+							value="«name»"
 							forcePluginActivation="true"/>
-					</with>		
+					</with>
 				</and>
 			</definition>
 		</extension>
@@ -223,7 +223,7 @@ package class ImplicitFragment extends AbstractStubGeneratingFragment {
 			</menuContribution>
 			<!-- copy qualified name -->
 			<menuContribution locationURI="popup:#TextEditorContext?after=copy">
-				<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName" 
+				<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.EditorCopyQualifiedName"
 					style="push" tooltip="Copy Qualified Name">
 					<visibleWhen checkEnabled="false">
 						<reference definitionId="«name».Editor.opened" />
@@ -239,7 +239,7 @@ package class ImplicitFragment extends AbstractStubGeneratingFragment {
 				</command>
 			</menuContribution>
 			<menuContribution locationURI="popup:org.eclipse.xtext.ui.outline?after=additions">
-				<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedName" 
+				<command commandId="org.eclipse.xtext.ui.editor.copyqualifiedname.OutlineCopyQualifiedName"
 					style="push" tooltip="Copy Qualified Name">
 					<visibleWhen checkEnabled="false">
 						<and>
