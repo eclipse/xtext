@@ -4,10 +4,19 @@ task('generatePrefs') {
         .findAll { file ->
             file.isDirectory() && XTEXT_GRADLE_PROJECTS.contains(file.getName()) && new File(file, "settings.gradle").exists()
         }.each { file -> 
-            fileTree(file).visit { FileVisitDetails details -> 
-                if (details.file.isDirectory() && new File(details.file, "build.gradle").exists() && (new File(details.file, '.settings')).exists()) {
-                    println  "generating buildship prefs for " + details.file.path
-                    (new File(details.file, '.settings/org.eclipse.buildship.core.prefs')).text = "connection.gradle.distribution=GRADLE_DISTRIBUTION(WRAPPER)\nconnection.project.dir=../../xtext-umbrella/releng/gradle-composite\nproject.path=\\:"+details.file.name+"\n"
+            println  "generating buildship prefs for " + file.path
+            if (!(new File(file, '.settings')).exists()) {
+                new File(file, '.settings').mkdir();
+            }
+            (new File(file, '.settings/org.eclipse.buildship.core.prefs')).text = "connection.gradle.distribution=GRADLE_DISTRIBUTION(WRAPPER)\nconnection.project.dir=../../xtext-umbrella/releng/gradle-composite\nproject.path=\\:"+file.name+"\n"
+                    
+            file.listFiles().each { File fx -> 
+                if (fx.isDirectory() && new File(fx, "build.gradle").exists()) {
+                    println  "generating buildship prefs for " + fx.path
+                    if (!(new File(fx, '.settings')).exists()) {
+                        new File(fx, '.settings').mkdir();
+                    }
+                    (new File(fx, '.settings/org.eclipse.buildship.core.prefs')).text = "connection.gradle.distribution=GRADLE_DISTRIBUTION(WRAPPER)\nconnection.project.dir=../../xtext-umbrella/releng/gradle-composite\nproject.path=\\:"+fx.name+"\n"
                     }
 
                 }
