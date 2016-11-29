@@ -23,6 +23,7 @@ import org.eclipse.xtext.parser.IEncodingProvider
 import org.eclipse.xtext.util.RuntimeIOException
 import java.io.ByteArrayOutputStream
 import java.io.File
+import java.io.FileNotFoundException
 
 /**
  * A file system access implementation that is based on EMF URIs and URIConverter
@@ -110,9 +111,13 @@ class URIBasedFileSystemAccess extends AbstractFileSystemAccess2 {
 	}
 	
 	override readBinaryFile(String fileName, String outputCfgName) throws RuntimeIOException {
-		val uri = getURI(fileName, outputCfgName)
-		val input = converter.createInputStream(uri)
-		return beforeRead.beforeRead(uri, input)
+		try {
+			val uri = getURI(fileName, outputCfgName)
+			val input = converter.createInputStream(uri)
+			return beforeRead.beforeRead(uri, input)
+		} catch (FileNotFoundException e) {
+			throw new RuntimeIOException(e);
+		}
 	}
 	
 	override readTextFile(String fileName, String outputCfgName) throws RuntimeIOException {
