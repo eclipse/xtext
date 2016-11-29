@@ -117,7 +117,7 @@ class AdvancedNewProjectPage extends WizardPage {
 			}
 		})
 		sourceLayout.addSelectionListener(selectionControl)
-		createWebProject.addSelectionListener(selectionControl)
+		createTestProject.addSelectionListener(selectionControl)
 		preferredBuildSystem.addSelectionListener(selectionControl)
 		createUiProject.addSelectionListener(selectionControl)
 		createIdeaProject.addSelectionListener(selectionControl)
