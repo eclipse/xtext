@@ -10,22 +10,22 @@
 			<attribute name="FROM_GRADLE_MODEL" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="src" path="longrunning/src">
+	<classpathentry including="**/*.java|**/*.xtend" kind="src" path="longrunning/src">
 		<attributes>
 			<attribute name="FROM_GRADLE_MODEL" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="src" path="longrunning/xtend-gen">
+	<classpathentry including="**/*.java|**/*.xtend" kind="src" path="longrunning/xtend-gen">
 		<attributes>
 			<attribute name="FROM_GRADLE_MODEL" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="src" path="suites">
+	<classpathentry including="**/*.java|**/*.xtend" kind="src" path="suites">
 		<attributes>
 			<attribute name="FROM_GRADLE_MODEL" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="src" path="smoke-suites">
+	<classpathentry including="**/*.java|**/*.xtend" kind="src" path="smoke-suites">
 		<attributes>
 			<attribute name="FROM_GRADLE_MODEL" value="true"/>
 		</attributes>
