@@ -10,7 +10,7 @@
 			<attribute name="FROM_GRADLE_MODEL" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="src" path="resources">
+	<classpathentry excluding="**/*.java|**/*.xtend|**/*.xtendbin|**/*._trace" kind="src" path="resources">
 		<attributes>
 			<attribute name="FROM_GRADLE_MODEL" value="true"/>
 		</attributes>
