@@ -53,8 +53,7 @@ public class URIBasedFileSystemAccessTest {
   @Inject
   private IOutputConfigurationProvider configProvider;
   
-  @Inject
-  private ExtensibleURIConverterImpl uriConverter;
+  private ExtensibleURIConverterImpl uriConverter = new ExtensibleURIConverterImpl();
   
   @Before
   public void before() {

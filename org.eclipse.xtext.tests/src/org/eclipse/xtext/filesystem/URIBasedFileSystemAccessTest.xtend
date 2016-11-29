@@ -43,8 +43,7 @@ class URIBasedFileSystemAccessTest {
 	@Inject
 	IOutputConfigurationProvider configProvider;
 
-	@Inject
-	ExtensibleURIConverterImpl uriConverter;
+	ExtensibleURIConverterImpl uriConverter = new ExtensibleURIConverterImpl();
 
 	@Before
 	def void before() {
