@@ -5,8 +5,11 @@ task('generatePrefs') {
             file.isDirectory() && XTEXT_GRADLE_PROJECTS.contains(file.getName()) && new File(file, "settings.gradle").exists()
         }.each { file -> 
             fileTree(file).visit { FileVisitDetails details -> 
-                if (details.file.isDirectory() && new File(details.file, "build.gradle").exists() && (new File(details.file, '.settings')).exists()) {
+                if (details.file.isDirectory() && new File(details.file, "build.gradle").exists()) {
                     println  "generating buildship prefs for " + details.file.path
+                    if (!(new File(details.file, '.settings')).exists()) {
+                        new File(details.file, '.settings').mkdir();
+                    }
                     (new File(details.file, '.settings/org.eclipse.buildship.core.prefs')).text = "connection.gradle.distribution=GRADLE_DISTRIBUTION(WRAPPER)\nconnection.project.dir=../../xtext-umbrella/releng/gradle-composite\nproject.path=\\:"+details.file.name+"\n"
                     }
 
