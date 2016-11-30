@@ -5,7 +5,7 @@ buildscript {
 		}
 	}
 	dependencies {
-		classpath 'de.richsource.gradle.plugins:gwt-gradle-plugin:0.1'
+		classpath 'de.richsource.gradle.plugins:gwt-gradle-plugin:0.6'
 	}
 }
 
