@@ -46,3 +46,19 @@ if (isTestProject || name.contains('testlanguage')) {
 } else {
 	artifacts.archives javadocJar
 }
+
+eclipse {
+	classpath {
+		file {
+			whenMerged {
+				entries.each {
+					source ->
+					if (source.kind == 'src' && source.path.endsWith('-gen') && !source.path.endsWith('xtend-gen') ) {
+						source.entryAttributes['ignore_optional_problems'] = 'true'
+					}
+					
+				}
+			}
+		}
+	}
+}
