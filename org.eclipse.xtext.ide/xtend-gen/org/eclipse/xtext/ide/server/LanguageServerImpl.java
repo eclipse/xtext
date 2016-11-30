@@ -237,8 +237,8 @@ public class LanguageServerImpl implements LanguageServer, WorkspaceService, Tex
   }
   
   @Override
-  public CompletableFuture<Void> shutdown() {
-    return null;
+  public CompletableFuture<Object> shutdown() {
+    return CompletableFuture.<Object>completedFuture(null);
   }
   
   @Override
