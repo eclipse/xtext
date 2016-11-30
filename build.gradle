@@ -1,3 +1,9 @@
+/*
+ * Root project for xtext-web.
+ */
+
+ext.buildTime = new java.text.SimpleDateFormat('yyyyMMdd-HHmm').format(new Date())
+
 subprojects {
 	apply plugin: 'java'
 	apply plugin: 'eclipse'
@@ -6,8 +12,8 @@ subprojects {
 	apply from: "${rootDir}/gradle/upstream-repositories.gradle"
 	apply from: "${rootDir}/gradle/versions.gradle"
 	apply from: "${rootDir}/gradle/java-compiler-settings.gradle"
-	apply from: "${rootDir}/gradle/osgi-settings.gradle"
 	apply from: "${rootDir}/gradle/maven-deployment.gradle"
+	apply from: "${rootDir}/gradle/manifest-gen.gradle"
 	
 	group = 'org.eclipse.xtext'
 }

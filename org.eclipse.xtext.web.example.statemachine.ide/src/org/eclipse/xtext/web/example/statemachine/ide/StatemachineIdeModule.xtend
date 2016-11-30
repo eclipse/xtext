@@ -7,9 +7,25 @@
  *******************************************************************************/
 package org.eclipse.xtext.web.example.statemachine.ide
 
+import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalProvider
+import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator
+import org.eclipse.xtext.ide.labels.IImageDescriptionProvider
 
 /**
  * Use this class to register ide components.
  */
 class StatemachineIdeModule extends AbstractStatemachineIdeModule {
+	
+	def Class<? extends IdeContentProposalProvider> bindIdeContentProposalProvider() {
+		return StatemachineWebContentProposalProvider
+	}
+
+	def Class<? extends IImageDescriptionProvider> bindIImageDescriptionProvider() {
+		return StatemachineImageDescriptionProvider
+	}
+
+	def Class<? extends ISemanticHighlightingCalculator> bindISemanticHighlightingCalculator() {
+		return StatemachineSemanticHighlightingCalculator
+	}
+	
 }

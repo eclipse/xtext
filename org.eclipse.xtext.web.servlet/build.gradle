@@ -1,5 +1,8 @@
 apply from: "${rootDir}/gradle/default-project-layout.gradle"
 
+ext.title = 'Xtext Servlet'
+description = 'Servlet for the Xtext Web API.'
+
 configurations { providedCompile }
 sourceSets.all {compileClasspath += configurations.providedCompile}
 eclipse.classpath.plusConfigurations += [configurations.providedCompile]

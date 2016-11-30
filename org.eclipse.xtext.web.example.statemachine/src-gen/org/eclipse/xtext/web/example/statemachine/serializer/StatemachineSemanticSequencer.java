@@ -101,7 +101,7 @@ public class StatemachineSemanticSequencer extends AbstractDelegatingSemanticSeq
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, StatemachinePackage.Literals.COMMAND__NEW_VALUE));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getCommandAccess().getSignalSignalIDTerminalRuleCall_1_0_1(), semanticObject.getSignal());
+		feeder.accept(grammarAccess.getCommandAccess().getSignalSignalIDTerminalRuleCall_1_0_1(), semanticObject.eGet(StatemachinePackage.Literals.COMMAND__SIGNAL, false));
 		feeder.accept(grammarAccess.getCommandAccess().getNewValueBOOLEANTerminalRuleCall_3_0(), semanticObject.isNewValue());
 		feeder.finish();
 	}
@@ -134,7 +134,7 @@ public class StatemachineSemanticSequencer extends AbstractDelegatingSemanticSeq
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, StatemachinePackage.Literals.EVENT__VALUE));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getEventAccess().getSignalSignalIDTerminalRuleCall_0_0_1(), semanticObject.getSignal());
+		feeder.accept(grammarAccess.getEventAccess().getSignalSignalIDTerminalRuleCall_0_0_1(), semanticObject.eGet(StatemachinePackage.Literals.EVENT__SIGNAL, false));
 		feeder.accept(grammarAccess.getEventAccess().getValueBOOLEANTerminalRuleCall_2_0(), semanticObject.isValue());
 		feeder.finish();
 	}
@@ -240,7 +240,7 @@ public class StatemachineSemanticSequencer extends AbstractDelegatingSemanticSeq
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getTransitionAccess().getConditionConditionParserRuleCall_1_0(), semanticObject.getCondition());
-		feeder.accept(grammarAccess.getTransitionAccess().getStateStateQualifiedNameParserRuleCall_3_0_1(), semanticObject.getState());
+		feeder.accept(grammarAccess.getTransitionAccess().getStateStateQualifiedNameParserRuleCall_3_0_1(), semanticObject.eGet(StatemachinePackage.Literals.TRANSITION__STATE, false));
 		feeder.finish();
 	}
 	

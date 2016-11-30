@@ -10,17 +10,16 @@ package org.eclipse.xtext.xbase.web.test
 import com.google.inject.Guice
 import com.google.inject.Inject
 import com.google.inject.Module
-import com.google.inject.util.Modules
 import java.io.File
 import java.io.FileWriter
 import java.util.HashMap
-import java.util.List
 import java.util.Map
-import java.util.concurrent.ExecutorService
-import java.util.concurrent.Executors
 import org.eclipse.emf.common.util.URI
+import org.eclipse.xtext.util.DisposableRegistry
+import org.eclipse.xtext.util.Modules2
 import org.eclipse.xtext.web.example.entities.EntitiesRuntimeModule
 import org.eclipse.xtext.web.example.entities.EntitiesStandaloneSetup
+import org.eclipse.xtext.web.example.entities.ide.EntitiesIdeModule
 import org.eclipse.xtext.web.example.entities.tests.EntitiesInjectorProvider
 import org.eclipse.xtext.web.server.ISession
 import org.eclipse.xtext.web.server.XtextServiceDispatcher
@@ -43,17 +42,18 @@ abstract class AbstractXbaseWebTest {
 		override protected internalCreateInjector() {
 			new EntitiesStandaloneSetup {
 				override createInjector() {
-					val webModule = new EntitiesWebModule[Executors.newCachedThreadPool => [executorServices += it]]
+					val webModule = new EntitiesWebModule
+					val ideModule = new EntitiesIdeModule
 					webModule.resourceBaseProvider = resourceBaseProvider
-					return Guice.createInjector(Modules.override(runtimeModule).with(webModule))
+					return Guice.createInjector(Modules2.mixin(runtimeModule, ideModule, webModule))
 				}
 			}.createInjectorAndDoEMFRegistration()
 		}
 	}
 	
-	val List<ExecutorService> executorServices = newArrayList
-	
 	TestResourceBaseProvider resourceBaseProvider
+	
+	@Inject DisposableRegistry disposableRegistry
 	
 	@Inject XtextServiceDispatcher dispatcher
 	
@@ -71,8 +71,7 @@ abstract class AbstractXbaseWebTest {
 	
 	@After
 	def void teardown() {
-		executorServices.forEach[shutdown()]
-		executorServices.clear()
+		disposableRegistry.dispose()
 		resourceBaseProvider.testFiles.clear()
 		injectorProvider.restoreRegistry()
 	}

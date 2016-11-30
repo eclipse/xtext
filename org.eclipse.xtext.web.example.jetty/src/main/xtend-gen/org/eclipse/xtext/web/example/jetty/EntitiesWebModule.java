@@ -8,9 +8,7 @@
 package org.eclipse.xtext.web.example.jetty;
 
 import com.google.inject.Binder;
-import com.google.inject.Provider;
 import com.google.inject.binder.AnnotatedBindingBuilder;
-import java.util.concurrent.ExecutorService;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.web.example.jetty.AbstractEntitiesWebModule;
 import org.eclipse.xtext.web.server.persistence.FileResourceHandler;
@@ -36,8 +34,8 @@ public class EntitiesWebModule extends AbstractEntitiesWebModule {
     return FileResourceHandler.class;
   }
   
-  public EntitiesWebModule(final Provider<ExecutorService> executorServiceProvider, final IResourceBaseProvider resourceBaseProvider) {
-    super(executorServiceProvider);
+  public EntitiesWebModule(final IResourceBaseProvider resourceBaseProvider) {
+    super();
     this.resourceBaseProvider = resourceBaseProvider;
   }
 }

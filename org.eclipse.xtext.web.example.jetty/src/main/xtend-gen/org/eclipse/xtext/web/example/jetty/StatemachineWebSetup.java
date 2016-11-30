@@ -10,13 +10,12 @@ package org.eclipse.xtext.web.example.jetty;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
-import com.google.inject.Provider;
-import com.google.inject.util.Modules;
-import java.util.concurrent.ExecutorService;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
+import org.eclipse.xtext.util.Modules2;
 import org.eclipse.xtext.web.example.jetty.StatemachineWebModule;
 import org.eclipse.xtext.web.example.statemachine.StatemachineRuntimeModule;
 import org.eclipse.xtext.web.example.statemachine.StatemachineStandaloneSetup;
+import org.eclipse.xtext.web.example.statemachine.ide.StatemachineIdeModule;
 import org.eclipse.xtext.web.server.persistence.IResourceBaseProvider;
 
 /**
@@ -25,22 +24,19 @@ import org.eclipse.xtext.web.server.persistence.IResourceBaseProvider;
 @FinalFieldsConstructor
 @SuppressWarnings("all")
 public class StatemachineWebSetup extends StatemachineStandaloneSetup {
-  private final Provider<ExecutorService> executorServiceProvider;
-  
   private final IResourceBaseProvider resourceBaseProvider;
   
   @Override
   public Injector createInjector() {
-    Module runtimeModule = new StatemachineRuntimeModule();
-    Module webModule = new StatemachineWebModule(this.executorServiceProvider, this.resourceBaseProvider);
-    Modules.OverriddenModuleBuilder _override = Modules.override(runtimeModule);
-    Module _with = _override.with(webModule);
-    return Guice.createInjector(_with);
+    final StatemachineWebModule webModule = new StatemachineWebModule(this.resourceBaseProvider);
+    StatemachineRuntimeModule _statemachineRuntimeModule = new StatemachineRuntimeModule();
+    StatemachineIdeModule _statemachineIdeModule = new StatemachineIdeModule();
+    Module _mixin = Modules2.mixin(_statemachineRuntimeModule, _statemachineIdeModule, webModule);
+    return Guice.createInjector(_mixin);
   }
   
-  public StatemachineWebSetup(final Provider<ExecutorService> executorServiceProvider, final IResourceBaseProvider resourceBaseProvider) {
+  public StatemachineWebSetup(final IResourceBaseProvider resourceBaseProvider) {
     super();
-    this.executorServiceProvider = executorServiceProvider;
     this.resourceBaseProvider = resourceBaseProvider;
   }
 }

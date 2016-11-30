@@ -11,27 +11,21 @@ import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Module;
-import com.google.inject.Provider;
-import com.google.inject.util.Modules;
 import java.io.File;
 import java.io.FileWriter;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.function.Consumer;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.xtext.util.DisposableRegistry;
+import org.eclipse.xtext.util.Modules2;
 import org.eclipse.xtext.web.example.entities.EntitiesRuntimeModule;
 import org.eclipse.xtext.web.example.entities.EntitiesStandaloneSetup;
+import org.eclipse.xtext.web.example.entities.ide.EntitiesIdeModule;
 import org.eclipse.xtext.web.example.entities.tests.EntitiesInjectorProvider;
 import org.eclipse.xtext.web.server.ISession;
 import org.eclipse.xtext.web.server.XtextServiceDispatcher;
 import org.eclipse.xtext.web.server.persistence.IResourceBaseProvider;
-import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.web.test.HashMapSession;
 import org.eclipse.xtext.xbase.web.test.MockServiceContext;
 import org.eclipse.xtext.xbase.web.test.languages.EntitiesWebModule;
@@ -55,27 +49,21 @@ public abstract class AbstractXbaseWebTest {
       return new EntitiesStandaloneSetup() {
         @Override
         public Injector createInjector() {
-          final Provider<ExecutorService> _function = () -> {
-            ExecutorService _newCachedThreadPool = Executors.newCachedThreadPool();
-            final Procedure1<ExecutorService> _function_1 = (ExecutorService it) -> {
-              AbstractXbaseWebTest.this.executorServices.add(it);
-            };
-            return ObjectExtensions.<ExecutorService>operator_doubleArrow(_newCachedThreadPool, _function_1);
-          };
-          final EntitiesWebModule webModule = new EntitiesWebModule(_function);
+          final EntitiesWebModule webModule = new EntitiesWebModule();
+          final EntitiesIdeModule ideModule = new EntitiesIdeModule();
           webModule.setResourceBaseProvider(AbstractXbaseWebTest.this.resourceBaseProvider);
           Module _runtimeModule = AbstractXbaseWebTest.this.getRuntimeModule();
-          Modules.OverriddenModuleBuilder _override = Modules.override(_runtimeModule);
-          Module _with = _override.with(webModule);
-          return Guice.createInjector(_with);
+          Module _mixin = Modules2.mixin(_runtimeModule, ideModule, webModule);
+          return Guice.createInjector(_mixin);
         }
       }.createInjectorAndDoEMFRegistration();
     }
   };
   
-  private final List<ExecutorService> executorServices = CollectionLiterals.<ExecutorService>newArrayList();
-  
   private AbstractXbaseWebTest.TestResourceBaseProvider resourceBaseProvider;
+  
+  @Inject
+  private DisposableRegistry disposableRegistry;
   
   @Inject
   private XtextServiceDispatcher dispatcher;
@@ -95,11 +83,7 @@ public abstract class AbstractXbaseWebTest {
   
   @After
   public void teardown() {
-    final Consumer<ExecutorService> _function = (ExecutorService it) -> {
-      it.shutdown();
-    };
-    this.executorServices.forEach(_function);
-    this.executorServices.clear();
+    this.disposableRegistry.dispose();
     this.resourceBaseProvider.testFiles.clear();
     this.injectorProvider.restoreRegistry();
   }

@@ -52,7 +52,7 @@ class ContentAssistTest extends AbstractWebServerTest {
 			      editPositions = ArrayList (
 			        [16:4]
 			      )
-			      kind = "UNKOWN"
+			      kind = "UNKNOWN"
 			    ],
 			    ContentAssistEntry [
 			      prefix = ""
@@ -110,7 +110,7 @@ class ContentAssistTest extends AbstractWebServerTest {
 			      editPositions = ArrayList (
 			        [20:4]
 			      )
-			      kind = "UNKOWN"
+			      kind = "UNKNOWN"
 			    ]
 			  )
 			]''')
@@ -134,7 +134,7 @@ class ContentAssistTest extends AbstractWebServerTest {
 			      editPositions = ArrayList (
 			        [21:4]
 			      )
-			      kind = "UNKOWN"
+			      kind = "UNKNOWN"
 			    ]
 			  )
 			]''')
@@ -177,7 +177,7 @@ class ContentAssistTest extends AbstractWebServerTest {
 			      description = "State"
 			      textReplacements = ArrayList ()
 			      editPositions = ArrayList ()
-			      kind = "UNKOWN"
+			      kind = "UNKNOWN"
 			    ],
 			    ContentAssistEntry [
 			      prefix = ""
@@ -185,7 +185,7 @@ class ContentAssistTest extends AbstractWebServerTest {
 			      description = "State"
 			      textReplacements = ArrayList ()
 			      editPositions = ArrayList ()
-			      kind = "UNKOWN"
+			      kind = "UNKNOWN"
 			    ]
 			  )
 			]''')
@@ -211,7 +211,7 @@ class ContentAssistTest extends AbstractWebServerTest {
 			      description = "State"
 			      textReplacements = ArrayList ()
 			      editPositions = ArrayList ()
-			      kind = "UNKOWN"
+			      kind = "UNKNOWN"
 			    ],
 			    ContentAssistEntry [
 			      prefix = ""
@@ -219,7 +219,7 @@ class ContentAssistTest extends AbstractWebServerTest {
 			      description = "State"
 			      textReplacements = ArrayList ()
 			      editPositions = ArrayList ()
-			      kind = "UNKOWN"
+			      kind = "UNKNOWN"
 			    ],
 			    ContentAssistEntry [
 			      prefix = ""
@@ -227,7 +227,7 @@ class ContentAssistTest extends AbstractWebServerTest {
 			      description = "State"
 			      textReplacements = ArrayList ()
 			      editPositions = ArrayList ()
-			      kind = "UNKOWN"
+			      kind = "UNKNOWN"
 			    ],
 			    ContentAssistEntry [
 			      prefix = ""
@@ -235,7 +235,7 @@ class ContentAssistTest extends AbstractWebServerTest {
 			      description = "State"
 			      textReplacements = ArrayList ()
 			      editPositions = ArrayList ()
-			      kind = "UNKOWN"
+			      kind = "UNKNOWN"
 			    ]
 			  )
 			]''')
@@ -256,14 +256,14 @@ class ContentAssistTest extends AbstractWebServerTest {
 			      proposal = "false"
 			      textReplacements = ArrayList ()
 			      editPositions = ArrayList ()
-			      kind = "UNKOWN"
+			      kind = "UNKNOWN"
 			    ],
 			    ContentAssistEntry [
 			      prefix = ""
 			      proposal = "true"
 			      textReplacements = ArrayList ()
 			      editPositions = ArrayList ()
-			      kind = "UNKOWN"
+			      kind = "UNKNOWN"
 			    ]
 			  )
 			]''')
@@ -286,7 +286,7 @@ class ContentAssistTest extends AbstractWebServerTest {
 			      description = "input signal"
 			      textReplacements = ArrayList ()
 			      editPositions = ArrayList ()
-			      kind = "UNKOWN"
+			      kind = "UNKNOWN"
 			    ]
 			  )
 			]''')
@@ -310,7 +310,7 @@ class ContentAssistTest extends AbstractWebServerTest {
 			      description = "State"
 			      textReplacements = ArrayList ()
 			      editPositions = ArrayList ()
-			      kind = "UNKOWN"
+			      kind = "UNKNOWN"
 			    ]
 			  )
 			]''')
@@ -334,7 +334,7 @@ class ContentAssistTest extends AbstractWebServerTest {
 			      description = "State"
 			      textReplacements = ArrayList ()
 			      editPositions = ArrayList ()
-			      kind = "UNKOWN"
+			      kind = "UNKNOWN"
 			    ]
 			  )
 			]''')
@@ -360,7 +360,7 @@ class ContentAssistTest extends AbstractWebServerTest {
 			      description = "State"
 			      textReplacements = ArrayList ()
 			      editPositions = ArrayList ()
-			      kind = "UNKOWN"
+			      kind = "UNKNOWN"
 			    ],
 			    ContentAssistEntry [
 			      prefix = "foo."
@@ -368,7 +368,7 @@ class ContentAssistTest extends AbstractWebServerTest {
 			      description = "State"
 			      textReplacements = ArrayList ()
 			      editPositions = ArrayList ()
-			      kind = "UNKOWN"
+			      kind = "UNKNOWN"
 			    ]
 			  )
 			]''')
@@ -394,7 +394,7 @@ class ContentAssistTest extends AbstractWebServerTest {
 			      description = "State"
 			      textReplacements = ArrayList ()
 			      editPositions = ArrayList ()
-			      kind = "UNKOWN"
+			      kind = "UNKNOWN"
 			    ],
 			    ContentAssistEntry [
 			      prefix = "inner"
@@ -402,7 +402,7 @@ class ContentAssistTest extends AbstractWebServerTest {
 			      description = "State"
 			      textReplacements = ArrayList ()
 			      editPositions = ArrayList ()
-			      kind = "UNKOWN"
+			      kind = "UNKNOWN"
 			    ]
 			  )
 			]''')
@@ -430,7 +430,7 @@ class ContentAssistTest extends AbstractWebServerTest {
 			      description = "State"
 			      textReplacements = ArrayList ()
 			      editPositions = ArrayList ()
-			      kind = "UNKOWN"
+			      kind = "UNKNOWN"
 			    ],
 			    ContentAssistEntry [
 			      prefix = "f.i.i"
@@ -438,7 +438,7 @@ class ContentAssistTest extends AbstractWebServerTest {
 			      description = "State"
 			      textReplacements = ArrayList ()
 			      editPositions = ArrayList ()
-			      kind = "UNKOWN"
+			      kind = "UNKNOWN"
 			    ]
 			  )
 			]''')
@@ -469,7 +469,7 @@ class ContentAssistTest extends AbstractWebServerTest {
 			      proposal = "false"
 			      textReplacements = ArrayList ()
 			      editPositions = ArrayList ()
-			      kind = "UNKOWN"
+			      kind = "UNKNOWN"
 			    ]
 			  )
 			]''')

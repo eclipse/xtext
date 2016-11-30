@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Idea Entity Example
+Bundle-Name: Web Entity Example
 Bundle-Vendor: Eclipse Xtext
 Bundle-Version: 2.11.0.qualifier
-Bundle-SymbolicName: org.eclipse.xtext.idea.example.entities; singleton:=true
+Bundle-SymbolicName: org.eclipse.xtext.web.example.entities;singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext;visibility:=reexport,
  org.eclipse.xtext.xbase;visibility:=reexport,
@@ -21,14 +21,14 @@ Require-Bundle: org.eclipse.xtext;visibility:=reexport,
  org.objectweb.asm;bundle-version="[5.0.1,6.0.0)";resolution:=optional
 Import-Package: org.apache.log4j
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Export-Package: org.eclipse.xtext.idea.example.entities,
- org.eclipse.xtext.idea.example.entities.services,
- org.eclipse.xtext.idea.example.entities.domainmodel,
- org.eclipse.xtext.idea.example.entities.domainmodel.impl,
- org.eclipse.xtext.idea.example.entities.domainmodel.util,
- org.eclipse.xtext.idea.example.entities.serializer,
- org.eclipse.xtext.idea.example.entities.parser.antlr,
- org.eclipse.xtext.idea.example.entities.parser.antlr.internal,
- org.eclipse.xtext.idea.example.entities.validation,
- org.eclipse.xtext.idea.example.entities.formatting2,
- org.eclipse.xtext.idea.example.entities.jvmmodel
+Export-Package: org.eclipse.xtext.web.example.entities,
+ org.eclipse.xtext.web.example.entities.services,
+ org.eclipse.xtext.web.example.entities.domainmodel,
+ org.eclipse.xtext.web.example.entities.domainmodel.impl,
+ org.eclipse.xtext.web.example.entities.domainmodel.util,
+ org.eclipse.xtext.web.example.entities.serializer,
+ org.eclipse.xtext.web.example.entities.parser.antlr,
+ org.eclipse.xtext.web.example.entities.parser.antlr.internal,
+ org.eclipse.xtext.web.example.entities.validation,
+ org.eclipse.xtext.web.example.entities.formatting2,
+ org.eclipse.xtext.web.example.entities.jvmmodel

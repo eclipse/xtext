@@ -1,5 +1,8 @@
 apply from: "${rootDir}/gradle/default-project-layout.gradle"
 
+ext.title = 'Xbase Web Integration'
+description = 'Additional services for the web integration of Xbase.'
+
 dependencies {
 	compile project(':org.eclipse.xtext.web')
 	compile "org.eclipse.xtext:org.eclipse.xtext.xbase.ide:$versions.xtext"

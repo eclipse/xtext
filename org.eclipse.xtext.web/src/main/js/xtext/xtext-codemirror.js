@@ -264,12 +264,15 @@ define([
 								displayText = entry.proposal;
 							if (entry.description)
 								displayText += ' (' + entry.description + ')';
+							var prefixLength = 0
+							if (entry.prefix)
+								prefixLength = entry.prefix.length
 			    			return {
 			    				text: entry.proposal,
 			    				displayText: displayText,
 			    				from: {
 			    					line: cursor.line,
-			    					ch: cursor.ch - entry.prefix.length
+			    					ch: cursor.ch - prefixLength
 			    				}
 			    			};
 						}),
