@@ -17,10 +17,8 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 
-@Ignore("https://github.com/eclipse/xtext-xtend/issues/6")
 @SuppressWarnings("all")
 public class Bug464136Test extends AbstractActiveAnnotationTest {
   @Test
@@ -43,7 +41,7 @@ public class Bug464136Test extends AbstractActiveAnnotationTest {
       _builder_1.append("java.lang.LinkageError: Just a test :-/");
       _builder_1.newLine();
       _builder_1.append("\t");
-      _builder_1.append("at org.eclipse.xtend.core.tests.macro.Bug464136Processor$1.apply(Bug464136Processor.java:23)");
+      _builder_1.append("at org.eclipse.xtend.core.tests.macro.Bug464136Processor.lambda$0(Bug464136Processor.java:21)");
       _builder_1.newLine();
       String _string_1 = _builder_1.toString();
       Problem _head = IterableExtensions.head(problems);

@@ -9,7 +9,6 @@ package org.eclipse.xtend.core.tests.compiler;
 
 import org.eclipse.xtend.core.tests.compiler.AbstractXtendCompilerTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -92,7 +91,6 @@ public class OverloadedExtensionCompilerTest extends AbstractXtendCompilerTest {
     this.assertCompilesTo(_builder, _builder_1);
   }
   
-  @Ignore("https://github.com/eclipse/xtext-xtend/issues/6")
   @Test
   public void test_02() {
     StringConcatenation _builder = new StringConcatenation();
@@ -102,7 +100,7 @@ public class OverloadedExtensionCompilerTest extends AbstractXtendCompilerTest {
     _builder.append("def method(MyIterable<? extends Number> list) {");
     _builder.newLine();
     _builder.append("        ");
-    _builder.append("list.forEach[ process ]");
+    _builder.append("list.forEach2[ process ]");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("}");
@@ -115,7 +113,7 @@ public class OverloadedExtensionCompilerTest extends AbstractXtendCompilerTest {
     _builder.append("interface MyIterable<T> extends Iterable<T> {");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("def void forEach(Consumer<? super T> c)");
+    _builder.append("def void forEach2(Consumer<? super T> c)");
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
@@ -150,7 +148,7 @@ public class OverloadedExtensionCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("};");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("list.forEach(_function);");
+    _builder_1.append("list.forEach2(_function);");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");

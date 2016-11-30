@@ -9,13 +9,11 @@ package org.eclipse.xtend.core.tests.compiler;
 
 import org.eclipse.xtend.core.tests.compiler.AbstractXtendCompilerTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@Ignore("https://github.com/eclipse/xtext-xtend/issues/6")
 @SuppressWarnings("all")
 public class CompilerBug457346Test extends AbstractXtendCompilerTest {
   @Test
@@ -29,7 +27,7 @@ public class CompilerBug457346Test extends AbstractXtendCompilerTest {
     _builder.append("def m() {");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("#[\'a\', \'aa\', \'aaa\'].sort(Ordering.natural.onResultOf [ String s| s.length ].onResultOf[])");
+    _builder.append("#[\'a\', \'aa\', \'aaa\'].sortWith(Ordering.natural.onResultOf [ String s| s.length ].onResultOf[])");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("}");
@@ -223,7 +221,7 @@ public class CompilerBug457346Test extends AbstractXtendCompilerTest {
     _builder.append("def m(Sortable<String> sortMe) {");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("sortMe.sort(MyComparator.comparingInt [String s| s.length].thenComparing[String s | s])");
+    _builder.append("sortMe.sort(MyComparator.comparingInt2 [String s| s.length].thenComparing2[String s | s])");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("}");
@@ -243,10 +241,10 @@ public class CompilerBug457346Test extends AbstractXtendCompilerTest {
     _builder.append("static abstract class MyComparator<T> implements Comparator<T> {");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("def static <T> MyComparator<T> comparingInt(ToIntFunction<? super T> fun) {}");
+    _builder.append("def static <T> MyComparator<T> comparingInt2(ToIntFunction<? super T> fun) {}");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("def <U extends Comparable<? super U>> MyComparator<T> thenComparing((T)=>U f) {}");
+    _builder.append("def <U extends Comparable<? super U>> MyComparator<T> thenComparing2((T)=>U f) {}");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("}");
@@ -287,7 +285,7 @@ public class CompilerBug457346Test extends AbstractXtendCompilerTest {
     _builder_1.append("public static abstract class MyComparator<T extends Object> implements Comparator<T> {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("public static <T extends Object> C.MyComparator<T> comparingInt(final C.ToIntFunction<? super T> fun) {");
+    _builder_1.append("public static <T extends Object> C.MyComparator<T> comparingInt2(final C.ToIntFunction<? super T> fun) {");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("return null;");
@@ -298,7 +296,7 @@ public class CompilerBug457346Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("public <U extends Comparable<? super U>> C.MyComparator<T> thenComparing(final Function1<? super T, ? extends U> f) {");
+    _builder_1.append("public <U extends Comparable<? super U>> C.MyComparator<T> thenComparing2(final Function1<? super T, ? extends U> f) {");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("return null;");
@@ -341,7 +339,7 @@ public class CompilerBug457346Test extends AbstractXtendCompilerTest {
     _builder_1.append("};");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("C.MyComparator<String> _comparingInt = C.MyComparator.<String>comparingInt(_function);");
+    _builder_1.append("C.MyComparator<String> _comparingInt2 = C.MyComparator.<String>comparingInt2(_function);");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("final Function1<String, String> _function_1 = new Function1<String, String>() {");
@@ -359,10 +357,10 @@ public class CompilerBug457346Test extends AbstractXtendCompilerTest {
     _builder_1.append("};");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("C.MyComparator<String> _thenComparing = _comparingInt.<String>thenComparing(_function_1);");
+    _builder_1.append("C.MyComparator<String> _thenComparing2 = _comparingInt2.<String>thenComparing2(_function_1);");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("sortMe.sort(_thenComparing);");
+    _builder_1.append("sortMe.sort(_thenComparing2);");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -383,7 +381,7 @@ public class CompilerBug457346Test extends AbstractXtendCompilerTest {
     _builder.append("def m(Sortable<String> sortMe) {");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("sortMe.sort(MyComparator.comparingInt [String s| s.length].thenComparing[toUpperCase])");
+    _builder.append("sortMe.sort(MyComparator.comparingInt2 [String s| s.length].thenComparing2[toUpperCase])");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("}");
@@ -403,10 +401,10 @@ public class CompilerBug457346Test extends AbstractXtendCompilerTest {
     _builder.append("static abstract class MyComparator<T> implements Comparator<T> {");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("def static <T> MyComparator<T> comparingInt(ToIntFunction<? super T> fun) {}");
+    _builder.append("def static <T> MyComparator<T> comparingInt2(ToIntFunction<? super T> fun) {}");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("def <U extends Comparable<? super U>> MyComparator<T> thenComparing((T)=>U f) {}");
+    _builder.append("def <U extends Comparable<? super U>> MyComparator<T> thenComparing2((T)=>U f) {}");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("}");
@@ -447,7 +445,7 @@ public class CompilerBug457346Test extends AbstractXtendCompilerTest {
     _builder_1.append("public static abstract class MyComparator<T extends Object> implements Comparator<T> {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("public static <T extends Object> C.MyComparator<T> comparingInt(final C.ToIntFunction<? super T> fun) {");
+    _builder_1.append("public static <T extends Object> C.MyComparator<T> comparingInt2(final C.ToIntFunction<? super T> fun) {");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("return null;");
@@ -458,7 +456,7 @@ public class CompilerBug457346Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("public <U extends Comparable<? super U>> C.MyComparator<T> thenComparing(final Function1<? super T, ? extends U> f) {");
+    _builder_1.append("public <U extends Comparable<? super U>> C.MyComparator<T> thenComparing2(final Function1<? super T, ? extends U> f) {");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("return null;");
@@ -501,7 +499,7 @@ public class CompilerBug457346Test extends AbstractXtendCompilerTest {
     _builder_1.append("};");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("C.MyComparator<String> _comparingInt = C.MyComparator.<String>comparingInt(_function);");
+    _builder_1.append("C.MyComparator<String> _comparingInt2 = C.MyComparator.<String>comparingInt2(_function);");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("final Function1<String, String> _function_1 = new Function1<String, String>() {");
@@ -519,10 +517,10 @@ public class CompilerBug457346Test extends AbstractXtendCompilerTest {
     _builder_1.append("};");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("C.MyComparator<String> _thenComparing = _comparingInt.<String>thenComparing(_function_1);");
+    _builder_1.append("C.MyComparator<String> _thenComparing2 = _comparingInt2.<String>thenComparing2(_function_1);");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("sortMe.sort(_thenComparing);");
+    _builder_1.append("sortMe.sort(_thenComparing2);");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -543,7 +541,7 @@ public class CompilerBug457346Test extends AbstractXtendCompilerTest {
     _builder.append("def m(Sortable<String> sortMe) {");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("sortMe.sort(MyComparator.comparingInt [String s| s.length].thenComparing[it])");
+    _builder.append("sortMe.sort(MyComparator.comparingInt2 [String s| s.length].thenComparing2[it])");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("}");
@@ -563,10 +561,10 @@ public class CompilerBug457346Test extends AbstractXtendCompilerTest {
     _builder.append("static abstract class MyComparator<T> implements Comparator<T> {");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("def static <T> MyComparator<T> comparingInt(ToIntFunction<? super T> fun) {}");
+    _builder.append("def static <T> MyComparator<T> comparingInt2(ToIntFunction<? super T> fun) {}");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("def <U extends Comparable<? super U>> MyComparator<T> thenComparing((T)=>U f) {}");
+    _builder.append("def <U extends Comparable<? super U>> MyComparator<T> thenComparing2((T)=>U f) {}");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("}");
@@ -607,7 +605,7 @@ public class CompilerBug457346Test extends AbstractXtendCompilerTest {
     _builder_1.append("public static abstract class MyComparator<T extends Object> implements Comparator<T> {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("public static <T extends Object> C.MyComparator<T> comparingInt(final C.ToIntFunction<? super T> fun) {");
+    _builder_1.append("public static <T extends Object> C.MyComparator<T> comparingInt2(final C.ToIntFunction<? super T> fun) {");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("return null;");
@@ -618,7 +616,7 @@ public class CompilerBug457346Test extends AbstractXtendCompilerTest {
     _builder_1.append("    ");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("public <U extends Comparable<? super U>> C.MyComparator<T> thenComparing(final Function1<? super T, ? extends U> f) {");
+    _builder_1.append("public <U extends Comparable<? super U>> C.MyComparator<T> thenComparing2(final Function1<? super T, ? extends U> f) {");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("return null;");
@@ -661,7 +659,7 @@ public class CompilerBug457346Test extends AbstractXtendCompilerTest {
     _builder_1.append("};");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("C.MyComparator<String> _comparingInt = C.MyComparator.<String>comparingInt(_function);");
+    _builder_1.append("C.MyComparator<String> _comparingInt2 = C.MyComparator.<String>comparingInt2(_function);");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("final Function1<String, String> _function_1 = new Function1<String, String>() {");
@@ -679,10 +677,10 @@ public class CompilerBug457346Test extends AbstractXtendCompilerTest {
     _builder_1.append("};");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("C.MyComparator<String> _thenComparing = _comparingInt.<String>thenComparing(_function_1);");
+    _builder_1.append("C.MyComparator<String> _thenComparing2 = _comparingInt2.<String>thenComparing2(_function_1);");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("sortMe.sort(_thenComparing);");
+    _builder_1.append("sortMe.sort(_thenComparing2);");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
