@@ -420,33 +420,37 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
         _matched=true;
         JvmAnnotationValue _switchResult_1 = null;
         String _simpleName = ((JvmPrimitiveType)type).getSimpleName();
-        switch (_simpleName) {
-          case "boolean":
-            _switchResult_1 = TypesFactory.eINSTANCE.createJvmBooleanAnnotationValue();
-            break;
-          case "double":
-            _switchResult_1 = TypesFactory.eINSTANCE.createJvmDoubleAnnotationValue();
-            break;
-          case "float":
-            _switchResult_1 = TypesFactory.eINSTANCE.createJvmFloatAnnotationValue();
-            break;
-          case "long":
-            _switchResult_1 = TypesFactory.eINSTANCE.createJvmLongAnnotationValue();
-            break;
-          case "int":
-            _switchResult_1 = TypesFactory.eINSTANCE.createJvmIntAnnotationValue();
-            break;
-          case "short":
-            _switchResult_1 = TypesFactory.eINSTANCE.createJvmShortAnnotationValue();
-            break;
-          case "char":
-            _switchResult_1 = TypesFactory.eINSTANCE.createJvmCharAnnotationValue();
-            break;
-          case "byte":
-            _switchResult_1 = TypesFactory.eINSTANCE.createJvmByteAnnotationValue();
-            break;
-          default:
-            throw new IllegalStateException(("Unknown type: " + type));
+        if (_simpleName != null) {
+          switch (_simpleName) {
+            case "boolean":
+              _switchResult_1 = TypesFactory.eINSTANCE.createJvmBooleanAnnotationValue();
+              break;
+            case "double":
+              _switchResult_1 = TypesFactory.eINSTANCE.createJvmDoubleAnnotationValue();
+              break;
+            case "float":
+              _switchResult_1 = TypesFactory.eINSTANCE.createJvmFloatAnnotationValue();
+              break;
+            case "long":
+              _switchResult_1 = TypesFactory.eINSTANCE.createJvmLongAnnotationValue();
+              break;
+            case "int":
+              _switchResult_1 = TypesFactory.eINSTANCE.createJvmIntAnnotationValue();
+              break;
+            case "short":
+              _switchResult_1 = TypesFactory.eINSTANCE.createJvmShortAnnotationValue();
+              break;
+            case "char":
+              _switchResult_1 = TypesFactory.eINSTANCE.createJvmCharAnnotationValue();
+              break;
+            case "byte":
+              _switchResult_1 = TypesFactory.eINSTANCE.createJvmByteAnnotationValue();
+              break;
+            default:
+              throw new IllegalStateException(("Unknown type: " + type));
+          }
+        } else {
+          throw new IllegalStateException(("Unknown type: " + type));
         }
         _switchResult = _switchResult_1;
       }
@@ -841,17 +845,21 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
       _identifier=type.getIdentifier();
     }
     final String result = _identifier;
-    switch (result) {
-      case "java.lang.Class":
-        _switchResult = TypeReference.class.getName();
-        break;
-      case "java.lang.Class[]":
-        String _name = TypeReference.class.getName();
-        _switchResult = (_name + "[]");
-        break;
-      default:
-        _switchResult = result;
-        break;
+    if (result != null) {
+      switch (result) {
+        case "java.lang.Class":
+          _switchResult = TypeReference.class.getName();
+          break;
+        case "java.lang.Class[]":
+          String _name = TypeReference.class.getName();
+          _switchResult = (_name + "[]");
+          break;
+        default:
+          _switchResult = result;
+          break;
+      }
+    } else {
+      _switchResult = result;
     }
     return _switchResult;
   }

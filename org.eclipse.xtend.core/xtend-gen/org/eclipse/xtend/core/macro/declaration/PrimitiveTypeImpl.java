@@ -21,31 +21,33 @@ public class PrimitiveTypeImpl extends AbstractElementImpl<JvmPrimitiveType> imp
   public PrimitiveType.Kind getKind() {
     PrimitiveType.Kind _switchResult = null;
     String _simpleName = this.getSimpleName();
-    switch (_simpleName) {
-      case "boolean":
-        _switchResult = PrimitiveType.Kind.BOOLEAN;
-        break;
-      case "int":
-        _switchResult = PrimitiveType.Kind.INT;
-        break;
-      case "char":
-        _switchResult = PrimitiveType.Kind.CHAR;
-        break;
-      case "double":
-        _switchResult = PrimitiveType.Kind.DOUBLE;
-        break;
-      case "long":
-        _switchResult = PrimitiveType.Kind.LONG;
-        break;
-      case "short":
-        _switchResult = PrimitiveType.Kind.SHORT;
-        break;
-      case "float":
-        _switchResult = PrimitiveType.Kind.FLOAT;
-        break;
-      case "byte":
-        _switchResult = PrimitiveType.Kind.BYTE;
-        break;
+    if (_simpleName != null) {
+      switch (_simpleName) {
+        case "boolean":
+          _switchResult = PrimitiveType.Kind.BOOLEAN;
+          break;
+        case "int":
+          _switchResult = PrimitiveType.Kind.INT;
+          break;
+        case "char":
+          _switchResult = PrimitiveType.Kind.CHAR;
+          break;
+        case "double":
+          _switchResult = PrimitiveType.Kind.DOUBLE;
+          break;
+        case "long":
+          _switchResult = PrimitiveType.Kind.LONG;
+          break;
+        case "short":
+          _switchResult = PrimitiveType.Kind.SHORT;
+          break;
+        case "float":
+          _switchResult = PrimitiveType.Kind.FLOAT;
+          break;
+        case "byte":
+          _switchResult = PrimitiveType.Kind.BYTE;
+          break;
+      }
     }
     return _switchResult;
   }
