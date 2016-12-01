@@ -2,7 +2,7 @@ if (!hasProperty('generatePrefs')) {
 	(files { file('../../../').listFiles() })
 .filter { 
     File it ->
-    it.isDirectory() && XTEXT_GRADLE_PROJECTS.contains(it.getName()) && new File(it, "settings.gradle").exists()
+    it.isDirectory() && XTEXT_GRADLE_PROJECTS.any{p->it.name.contains(p)} && new File(it, "settings.gradle").exists()
 }.each {
     File it -> 
     includeBuild it
