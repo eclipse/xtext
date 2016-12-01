@@ -15,16 +15,20 @@ public class Xbase10_Switch {
     {
       final ArrayList<String> list = CollectionLiterals.<String>newArrayList("foo", "bar", "baz");
       String _head = IterableExtensions.<String>head(list);
-      switch (_head) {
-        case "foo":
-          /* "it\'s foo" */
-          break;
-        case "bar":
-          /* "a bar" */
-          break;
-        default:
-          /* "don\'t know" */
-          break;
+      if (_head != null) {
+        switch (_head) {
+          case "foo":
+            /* "it\'s foo" */
+            break;
+          case "bar":
+            /* "a bar" */
+            break;
+          default:
+            /* "don\'t know" */
+            break;
+        }
+      } else {
+        /* "don\'t know" */
       }
       Rectangle _rectangle = new Rectangle(5, 5);
       Circle _circle = new Circle(4);
