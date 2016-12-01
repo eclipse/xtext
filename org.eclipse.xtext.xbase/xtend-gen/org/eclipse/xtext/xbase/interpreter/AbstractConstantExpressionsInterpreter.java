@@ -155,59 +155,63 @@ public class AbstractConstantExpressionsInterpreter {
     {
       final String op = this.getOperator(binaryOperation);
       Object _switchResult = null;
-      switch (op) {
-        case "+":
-          _switchResult = this.constantOperators.plus(left, right);
-          break;
-        case "-":
-          _switchResult = this.constantOperators.minus(left, right);
-          break;
-        case "*":
-          _switchResult = this.constantOperators.multiply(left, right);
-          break;
-        case "/":
-          _switchResult = this.constantOperators.divide(left, right);
-          break;
-        case "%":
-          _switchResult = this.constantOperators.modulo(left, right);
-          break;
-        case "&&":
-          _switchResult = Boolean.valueOf(this.constantOperators.and(left, right));
-          break;
-        case "||":
-          _switchResult = Boolean.valueOf(this.constantOperators.or(left, right));
-          break;
-        case "<<":
-          _switchResult = this.constantOperators.shiftLeft(left, right);
-          break;
-        case ">>":
-          _switchResult = this.constantOperators.shiftRight(left, right);
-          break;
-        case ">>>":
-          _switchResult = this.constantOperators.shiftRightUnsigned(left, right);
-          break;
-        case "<":
-          _switchResult = Boolean.valueOf(this.constantOperators.lessThan(left, right));
-          break;
-        case ">":
-          _switchResult = Boolean.valueOf(this.constantOperators.greaterThan(left, right));
-          break;
-        case "<=":
-          _switchResult = Boolean.valueOf(this.constantOperators.lessEquals(left, right));
-          break;
-        case ">=":
-          _switchResult = Boolean.valueOf(this.constantOperators.greaterEquals(left, right));
-          break;
-        case "==":
-        case "===":
-          _switchResult = Boolean.valueOf(this.constantOperators.same(left, right));
-          break;
-        case "!=":
-        case "!==":
-          _switchResult = Boolean.valueOf(this.constantOperators.notSame(left, right));
-          break;
-        default:
-          throw new ConstantExpressionEvaluationException(((((("Couldn\'t evaluate binary operator \'" + op) + "\' on values ") + left) + " and ") + right));
+      if (op != null) {
+        switch (op) {
+          case "+":
+            _switchResult = this.constantOperators.plus(left, right);
+            break;
+          case "-":
+            _switchResult = this.constantOperators.minus(left, right);
+            break;
+          case "*":
+            _switchResult = this.constantOperators.multiply(left, right);
+            break;
+          case "/":
+            _switchResult = this.constantOperators.divide(left, right);
+            break;
+          case "%":
+            _switchResult = this.constantOperators.modulo(left, right);
+            break;
+          case "&&":
+            _switchResult = Boolean.valueOf(this.constantOperators.and(left, right));
+            break;
+          case "||":
+            _switchResult = Boolean.valueOf(this.constantOperators.or(left, right));
+            break;
+          case "<<":
+            _switchResult = this.constantOperators.shiftLeft(left, right);
+            break;
+          case ">>":
+            _switchResult = this.constantOperators.shiftRight(left, right);
+            break;
+          case ">>>":
+            _switchResult = this.constantOperators.shiftRightUnsigned(left, right);
+            break;
+          case "<":
+            _switchResult = Boolean.valueOf(this.constantOperators.lessThan(left, right));
+            break;
+          case ">":
+            _switchResult = Boolean.valueOf(this.constantOperators.greaterThan(left, right));
+            break;
+          case "<=":
+            _switchResult = Boolean.valueOf(this.constantOperators.lessEquals(left, right));
+            break;
+          case ">=":
+            _switchResult = Boolean.valueOf(this.constantOperators.greaterEquals(left, right));
+            break;
+          case "==":
+          case "===":
+            _switchResult = Boolean.valueOf(this.constantOperators.same(left, right));
+            break;
+          case "!=":
+          case "!==":
+            _switchResult = Boolean.valueOf(this.constantOperators.notSame(left, right));
+            break;
+          default:
+            throw new ConstantExpressionEvaluationException(((((("Couldn\'t evaluate binary operator \'" + op) + "\' on values ") + left) + " and ") + right));
+        }
+      } else {
+        throw new ConstantExpressionEvaluationException(((((("Couldn\'t evaluate binary operator \'" + op) + "\' on values ") + left) + " and ") + right));
       }
       _xblockexpression = _switchResult;
     }
