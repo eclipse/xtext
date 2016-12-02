@@ -36,7 +36,7 @@ class ParallelFileSystemAccess implements IFileSystemAccess2 {
 			if (delegate instanceof EclipseResourceFileSystemAccess2) {
 				delegate.postProcessor = fileCallback
 			}
-			if (sourceFolder != null) {
+			if (sourceFolder !== null) {
 				if (delegate instanceof AbstractFileSystemAccess) {	
 					delegate.currentSource = sourceFolder
 				}

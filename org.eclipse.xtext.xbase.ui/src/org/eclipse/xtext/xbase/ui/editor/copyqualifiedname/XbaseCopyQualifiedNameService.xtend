@@ -65,11 +65,11 @@ class XbaseCopyQualifiedNameService extends DefaultCopyQualifiedNameService {
 	protected def toQualifiedName(XExpression it, IResolvedExecutable resolvedExecutable, JvmExecutable executable,
 		extension IResolvedTypes resolvedTypes, List<XExpression> arguments) {
 		val actualType = actualType
-		if (actualType != null && !actualType.any && !actualType.unknown) {
+		if (actualType !== null && !actualType.any && !actualType.unknown) {
 			return actualType.humanReadableName
 		}
 		val index = arguments.indexOf(it)
-		if (resolvedExecutable == null) {
+		if (resolvedExecutable === null) {
 			return executable.parameters.get(index).parameterType.simpleName
 		}
 		return resolvedExecutable.resolvedParameterTypes.get(index).simpleName

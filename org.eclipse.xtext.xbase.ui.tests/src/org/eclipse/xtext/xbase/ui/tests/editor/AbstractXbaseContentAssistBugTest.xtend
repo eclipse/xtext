@@ -44,7 +44,7 @@ class AbstractXbaseContentAssistBugTest extends AbstractXbaseUITestCase implemen
 	}
 	
 	override void tearDown() throws Exception {
-		if (demandCreateProject != null)
+		if (demandCreateProject !== null)
 			deleteProject(demandCreateProject);
 		super.tearDown();
 	}
@@ -56,7 +56,7 @@ class AbstractXbaseContentAssistBugTest extends AbstractXbaseUITestCase implemen
 	override getJavaProject(ResourceSet resourceSet) {
 		val projectName = getProjectName();
 		var javaProject = findJavaProject(projectName);
-		if (javaProject == null || !javaProject.exists()) {
+		if (javaProject === null || !javaProject.exists()) {
 			try {
 				demandCreateProject = AbstractXbaseUITestCase::createPluginProject(projectName);
 				javaProject = findJavaProject(projectName);

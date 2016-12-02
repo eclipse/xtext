@@ -72,7 +72,7 @@ class RuleEngineValidator extends AbstractRuleEngineValidator {
 	@Check
 	def checkRuleRecursion(XFeatureCall featureCall) {
 		val containingRule = EcoreUtil2.getContainerOfType(featureCall, Rule)
-		if (containingRule != null && featureCall.feature instanceof JvmOperation
+		if (containingRule !== null && featureCall.feature instanceof JvmOperation
 				&& featureCall.concreteSyntaxFeatureName == 'fire'
 				&& featureCall.featureCallArguments.size == 1) {
 			val argument = featureCall.featureCallArguments.head

@@ -50,7 +50,7 @@ class JvmAnnotationReferencePrinter {
 		val uri = EcoreUtil.getURI(reference.getAnnotation());
 		buffer.append(createLinkWithLabel(XtextElementLinks.XTEXTDOC_SCHEME, uri, reference.getAnnotation().getSimpleName()));
 		
-		val needsExplicitProperties = reference.explicitValues.size>1 || (reference.explicitValues.head?.operation != null && reference.explicitValues.head.operation.simpleName!="value")
+		val needsExplicitProperties = reference.explicitValues.size>1 || (reference.explicitValues.head?.operation !== null && reference.explicitValues.head.operation.simpleName!="value")
 		if (reference.getExplicitValues().size() > 0) {
 			buffer.append("(");
 			buffer.append(reference.getExplicitValues().map[
@@ -74,7 +74,7 @@ class JvmAnnotationReferencePrinter {
 		buffer.append("@");
 		val uri = EcoreUtil.getURI(reference.annotationType);
 		buffer.append(createLinkWithLabel(XtextElementLinks.XTEXTDOC_SCHEME, uri, reference.annotationType.getSimpleName()));
-		if (reference.value != null) {
+		if (reference.value !== null) {
 			buffer.append("(")
 			buffer.append(reference.value)
 			buffer.append(")");
@@ -96,7 +96,7 @@ class JvmAnnotationReferencePrinter {
 	
 	protected def dispatch String internalToString(JvmAnnotationValue it) {
 		val ref = eClass.getEStructuralFeature('values')
-		if (ref == null) {
+		if (ref === null) {
 			throw new IllegalStateException("Cannot handle "+it)
 		}
 		val EList<?> values = eGet(ref) as EList<?>
@@ -153,13 +153,13 @@ class JvmAnnotationReferencePrinter {
 	}
 	
 	protected def internalHandleAbstractFeatureCall(String prefix, XAbstractFeatureCall o) {
-		val postfix = if (o.feature != null && ! o.feature.eIsProxy) {
+		val postfix = if (o.feature !== null && ! o.feature.eIsProxy) {
 			val uri = EcoreUtil.getURI(o.feature)
 			createLinkWithLabel(XtextElementLinks.XTEXTDOC_SCHEME,uri,o.concreteSyntaxFeatureName) 
 		} else {
 			o.concreteSyntaxFeatureName
 		}
-		if (prefix == null) {
+		if (prefix === null) {
 			return postfix
 		} else {
 			return prefix + '.' + postfix

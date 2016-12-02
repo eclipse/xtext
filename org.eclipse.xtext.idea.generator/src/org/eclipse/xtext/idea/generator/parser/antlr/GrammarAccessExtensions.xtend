@@ -95,9 +95,9 @@ class GrammarAccessExtensions {
 
 	dispatch def mustBeParenthesized(AbstractElement it) { true }
 
-	dispatch def mustBeParenthesized(Keyword it) { predicated() || firstSetPredicated || cardinality != null }
+	dispatch def mustBeParenthesized(Keyword it) { predicated() || firstSetPredicated || cardinality !== null }
 
-	dispatch def mustBeParenthesized(RuleCall it) { predicated() || firstSetPredicated || cardinality != null }
+	dispatch def mustBeParenthesized(RuleCall it) { predicated() || firstSetPredicated || cardinality !== null }
 	
 	dispatch def boolean predicated(AbstractElement it) {
 		predicated
@@ -169,7 +169,7 @@ class GrammarAccessExtensions {
 
 	def toStringLiteral(AbstractElement it) {
 		switch it {
-			RuleCall case rule != null: '''"«rule.name»"'''
+			RuleCall case rule !== null: '''"«rule.name»"'''
 			Keyword: '''"«value.toStringInAntlrAction»"'''
 			default:
 				"null"

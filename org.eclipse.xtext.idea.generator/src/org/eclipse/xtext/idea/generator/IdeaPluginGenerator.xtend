@@ -368,7 +368,7 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 	}
 	
 	def getEncoding() {
-		if (encoding != null) {
+		if (encoding !== null) {
 			return encoding;
 		}
 		return System::getProperty("file.encoding");
@@ -836,7 +836,7 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 				@SuppressWarnings("rawtypes")
 				public PsiElement createElement(ASTNode node) {
 					Boolean hasSemanticElement = node.getUserData(IASTNodeAwareNodeModelBuilder.HAS_SEMANTIC_ELEMENT_KEY);
-					if (hasSemanticElement != null && hasSemanticElement) {
+					if (hasSemanticElement !== null && hasSemanticElement) {
 						IElementType elementType = node.getElementType();
 						«FOR rule : EObjectRules»
 						if (elementType == elementTypeProvider.get«rule.grammarElementIdentifier»ElementType()) {

@@ -43,7 +43,7 @@ class DefaultCopyQualifiedNameService implements CopyQualifiedNameService {
 	}
 
 	def protected <T> toQualifiedNames(List<T> it, (T)=>String toQualifiedNameFunction) {
-		if (it == null || size == 0) {
+		if (it === null || size == 0) {
 			return ""
 		}
 		'''«FOR element : it SEPARATOR ', '»«toQualifiedNameFunction.apply(element)»«ENDFOR»'''
@@ -57,14 +57,14 @@ class DefaultCopyQualifiedNameService implements CopyQualifiedNameService {
 	}
 
 	def protected getFullyQualifiedName(EObject it) {
-		if (it == null) {
+		if (it === null) {
 			return null
 		}
 		qualifiedNameProvider.getFullyQualifiedName(it)
 	}
 
 	def protected toString(EObject it, QualifiedName fullyQualifiedName) {
-		if (fullyQualifiedName == null) {
+		if (fullyQualifiedName === null) {
 			return null
 		}
 		qualifiedNameConverter.toString(fullyQualifiedName)

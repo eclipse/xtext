@@ -54,7 +54,7 @@ class JavaBuilderState {
 
 	static def getLastBuiltState(IJavaElement it) {
 		val javaProject = javaProject
-		if (javaProject == null) {
+		if (javaProject === null) {
 			return null
 		}
 		javaProject.project.lastBuiltState
@@ -69,34 +69,34 @@ class JavaBuilderState {
 	}
 
 	def getLastStructuralBuildTime() {
-		if (lastStructuralBuildTime != null) {
+		if (lastStructuralBuildTime !== null) {
 			return lastStructuralBuildTime
 		}
-		if (state == null) {
+		if (state === null) {
 			return lastStructuralBuildTime = -1l
 		}
 		lastStructuralBuildTime = state.readField("lastStructuralBuildTime", -1l) as Long
 	}
 
 	def getBuildNumber() {
-		if (buildNumber != null) {
+		if (buildNumber !== null) {
 			return buildNumber
 		}
-		if (state == null) {
+		if (state === null) {
 			return buildNumber = -1
 		}
 		buildNumber = state.readField("buildNumber", -1) as Integer
 	}
 
 	def getStructurallyChangedTypes() {
-		if (structurallyChangedTypes != null) {
+		if (structurallyChangedTypes !== null) {
 			return structurallyChangedTypes
 		}
 		structurallyChangedTypes = newHashSet
 		switch types : state?.readField("structurallyChangedTypes", null) {
 			StringSet: {
 				for (name : types.values) {
-					if (name != null) {
+					if (name !== null) {
 						structurallyChangedTypes += QualifiedName.create(name.split("/"))
 					}
 				}
@@ -113,12 +113,12 @@ class JavaBuilderState {
 	def dispatch TypeNames getQualifiedTypeNames(IPackageFragment it) {
 		val qualifiedTypeNames = new TypeNames(javaProject)
 		val references = getReferences
-		if (references == null) {
+		if (references === null) {
 			return qualifiedTypeNames
 		}
 		val packageName = elementName
 		val resource = it.resource
-		if (resource == null)
+		if (resource === null)
 			return qualifiedTypeNames
 		val packagePath = resource.projectRelativePath
 		val srcPathSegmentCount = packageFragmentRoot.resource.projectRelativePath.segmentCount
@@ -159,7 +159,7 @@ class JavaBuilderState {
 		val qualifiedTypeNames = new TypeNames(project)
 		val primaryTypeFqn = getQualifedTypeName(packageName, simpleName)
 		val typeNames = state?.getDefinedTypeNamesFor(typeLocator)
-		if (typeNames == null) {
+		if (typeNames === null) {
 			return new TypeNames(project) => [addTypeName(primaryTypeFqn, primaryTypeFqn)]
 		}
 		
@@ -171,7 +171,7 @@ class JavaBuilderState {
 	}
 
 	private def String getQualifedTypeName(String packageName, String simpleTypeName) {
-		if (packageName == null) {
+		if (packageName === null) {
 			return simpleTypeName
 		}
 		'''«packageName».«simpleTypeName»'''
@@ -194,10 +194,10 @@ class JavaBuilderState {
 	}
 
 	private def SimpleLookupTable getReferences() {
-		if (references != null) {
+		if (references !== null) {
 			return references
 		}
-		if (state == null) {
+		if (state === null) {
 			return null
 		}
 		references = switch references : state.readField("references", null) {
@@ -211,7 +211,7 @@ class JavaBuilderState {
 			val field = instance.class.getDeclaredField(fieldName)
 			field.accessible = true
 			val value = field.get(instance)
-			if (value != null) {
+			if (value !== null) {
 				return value
 			}
 			return defaultValue

@@ -27,7 +27,7 @@ class InsertionOffsets {
 	def inEmpty(EObject element) {
 		val node = NodeModelUtils.findActualNodeFor(element)
 		val openingBraceNode = node.leafNodes.findFirst[text == "{"]
-		if (openingBraceNode != null)
+		if (openingBraceNode !== null)
 			openingBraceNode.offset + 1
 		else
 			node.endOffset

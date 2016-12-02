@@ -48,9 +48,9 @@ class XbaseImageAdornments {
 			.or(deprecatedMember, DEPRECATED)
 			.or(native, 0x4000) // JavaElementImageDescription.NATIVE not available before 3.7
 			
-		if(eResource?.resourceSet != null) {
+		if(eResource?.resourceSet !== null) {
 			val overriddenOperation = findOverriddenOperation
-			if(overriddenOperation != null) 
+			if(overriddenOperation !== null) 
 				return adornment.bitwiseOr(getOverrideAdornment(overriddenOperation))
 		}
 		return adornment

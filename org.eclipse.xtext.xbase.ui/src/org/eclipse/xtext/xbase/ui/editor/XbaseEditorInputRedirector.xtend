@@ -47,7 +47,7 @@ class XbaseEditorInputRedirector {
 	 */
 	def IEditorInput findOriginalSourceForOuputFolderCopy(IEditorInput input) {
 		val resource = ResourceUtil.getFile(input)
-		if (resource != null) {
+		if (resource !== null) {
 			// if the given resource is already pointing to a language file
 			if (fileExtensionProvider.isValid(resource.fullPath.fileExtension)) {
 				val project = JavaCore.create(resource.project)
@@ -66,7 +66,7 @@ class XbaseEditorInputRedirector {
 					}
 					// check if it's sitting in one of the output folders set on the source folders
 					for (sourceFolder : project.rawClasspath.filter[entryKind == IClasspathEntry.CPE_SOURCE]) {
-						if (sourceFolder.outputLocation != null
+						if (sourceFolder.outputLocation !== null
 							&& sourceFolder.outputLocation.isPrefixOf(resource.fullPath)) {
 								val relative = resource.fullPath.removeFirstSegments(sourceFolder.outputLocation.segmentCount)
 								val source = project.findPackageFragmentRoots(sourceFolder).head
@@ -85,26 +85,26 @@ class XbaseEditorInputRedirector {
 
 	def IEditorInput findOriginalSource(IEditorInput input) {
 		val resource = ResourceUtil.getFile(input)
-		if (resource != null) {
+		if (resource !== null) {
 			val original = findOriginalSourceForOuputFolderCopy(input)
 			if (original !== input)
 				return original
 
 			val trace = traceInformation.getTraceToSource(resource);
-			if (trace == null)
+			if (trace === null)
 				return input;
 			val allLocations = trace.getAllAssociatedLocations().iterator();
 			var ILocationInEclipseResource sourceInformation = null;
-			while (allLocations.hasNext() && sourceInformation == null) {
+			while (allLocations.hasNext() && sourceInformation === null) {
 				val candidate = allLocations.next();
 				if (languageInfo.equals(candidate.getLanguage())) {
 					sourceInformation = candidate;
 				}
 			}
-			if (sourceInformation == null)
+			if (sourceInformation === null)
 				return input;
 			val originalStorage = sourceInformation.platformResource
-			if (originalStorage != null) {
+			if (originalStorage !== null) {
 				return EditorUtils.createEditorInput(originalStorage)
 			}
 		}

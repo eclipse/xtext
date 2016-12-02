@@ -56,7 +56,7 @@ class JdtQueuedBuildData implements IQueuedBuildDataContribution {
 			UnconfirmedStructuralChangesDelta: {
 				val project = delta.project
 				var state = javaBuildState.get(project.name)
-				if (state == null) {
+				if (state === null) {
 					javaBuildState.put(project.name, state = project.lastBuiltState)
 				}
 				delta.buildNumber = state.buildNumber
@@ -72,7 +72,7 @@ class JdtQueuedBuildData implements IQueuedBuildDataContribution {
 		val oldState = javaBuildState.get(name)
 		val newState = lastBuiltState
 		newState.doNeedRebuild(
-			if (oldState == null || oldState.lastStructuralBuildTime != newState.lastStructuralBuildTime) {
+			if (oldState === null || oldState.lastStructuralBuildTime != newState.lastStructuralBuildTime) {
 				[
 					val structurallyChangedTypes = newState.structurallyChangedTypes
 					if (getNew.namesIntersect(structurallyChangedTypes) || old.namesIntersect(structurallyChangedTypes)) {
@@ -90,7 +90,7 @@ class JdtQueuedBuildData implements IQueuedBuildDataContribution {
 			val unconfirmed = i.next
 			if (unconfirmed.buildNumber < buildNumber && unconfirmed.project.equals(project)) {
 				i.remove
-				if (processor != null) {
+				if (processor !== null) {
 					processor.apply(unconfirmed)
 				}
 			}
@@ -99,7 +99,7 @@ class JdtQueuedBuildData implements IQueuedBuildDataContribution {
 	}
 
 	protected def namesIntersect(IResourceDescription resourceDescription, Set<QualifiedName> names) {
-		if (resourceDescription == null) {
+		if (resourceDescription === null) {
 			return false
 		}
 		for (objectDescription : resourceDescription.exportedObjects) {

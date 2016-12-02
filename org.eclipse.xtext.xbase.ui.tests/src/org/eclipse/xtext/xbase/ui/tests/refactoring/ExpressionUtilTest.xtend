@@ -203,7 +203,7 @@ class ExpressionUtilTest extends AbstractXbaseTestCase {
 		val selectedExpression = util.findSelectedExpression(expression.eResource as XtextResource, 
 			new TextSelection(selectionOffset, 0))
 		val successor = util.findSuccessorExpressionForVariableDeclaration(selectedExpression)
-		if(expectedSuccessor == null) 
+		if(expectedSuccessor === null) 
 			assertNull(successor)
 		else {
 			assertNotNull(successor)
