@@ -84,10 +84,6 @@
           xsi:type="setup:PreferenceTask"
           key="/instance/org.eclipse.egit.core/core_autoIgnoreDerivedResources"
           value="false"/>
-      <setupTask
-          xsi:type="setup:PreferenceTask"
-          key="/instance/org.eclipse.egit.ui/resourcehistory_show_relative_date"
-          value="false"/>
     </setupTask>
     <setupTask
         xsi:type="setup:CompoundTask"
@@ -98,6 +94,10 @@
           value="true">
         <description>Insert Signed-off-by Footer</description>
       </setupTask>
+      <setupTask
+          xsi:type="setup:PreferenceTask"
+          key="/instance/org.eclipse.egit.ui/resourcehistory_show_relative_date"
+          value="false"/>
     </setupTask>
     <setupTask
         xsi:type="setup:CompoundTask"
