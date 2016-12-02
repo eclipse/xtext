@@ -431,7 +431,7 @@ public final class ToStringBuilder {
         Class<?> _superclass = current.getSuperclass();
         current = _superclass;
       }
-    } while((!Objects.equal(current, null)));
+    } while((current != null));
     return result;
   }
 }
