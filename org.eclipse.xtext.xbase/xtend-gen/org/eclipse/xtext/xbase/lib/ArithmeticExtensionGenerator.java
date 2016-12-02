@@ -761,33 +761,41 @@ public class ArithmeticExtensionGenerator {
     String _switchResult = null;
     String _lowerCase = it.toLowerCase();
     String _substring = _lowerCase.substring(0, 1);
-    switch (_substring) {
-      case "a":
-      case "e":
-      case "i":
-      case "o":
-      case "u":
-        _switchResult = "an";
-        break;
-      default:
-        _switchResult = "a";
-        break;
+    if (_substring != null) {
+      switch (_substring) {
+        case "a":
+        case "e":
+        case "i":
+        case "o":
+        case "u":
+          _switchResult = "an";
+          break;
+        default:
+          _switchResult = "a";
+          break;
+      }
+    } else {
+      _switchResult = "a";
     }
     return _switchResult;
   }
   
   public String wrapperType(final String it) {
     String _switchResult = null;
-    switch (it) {
-      case "int":
-        _switchResult = "Integer";
-        break;
-      case "char":
-        _switchResult = "Character";
-        break;
-      default:
-        _switchResult = StringExtensions.toFirstUpper(it);
-        break;
+    if (it != null) {
+      switch (it) {
+        case "int":
+          _switchResult = "Integer";
+          break;
+        case "char":
+          _switchResult = "Character";
+          break;
+        default:
+          _switchResult = StringExtensions.toFirstUpper(it);
+          break;
+      }
+    } else {
+      _switchResult = StringExtensions.toFirstUpper(it);
     }
     return _switchResult;
   }

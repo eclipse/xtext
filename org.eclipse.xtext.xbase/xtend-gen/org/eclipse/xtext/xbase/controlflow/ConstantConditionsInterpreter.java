@@ -407,96 +407,100 @@ public class ConstantConditionsInterpreter {
       try {
         final String op = it.getConcreteSyntaxFeatureName();
         Object _switchResult = null;
-        switch (op) {
-          case "+":
-            Object _rawValue = left.getRawValue();
-            Object _rawValue_1 = right.getRawValue();
-            _switchResult = this.constantOperators.plus(_rawValue, _rawValue_1);
-            break;
-          case "-":
-            Object _rawValue_2 = left.getRawValue();
-            Object _rawValue_3 = right.getRawValue();
-            _switchResult = this.constantOperators.minus(_rawValue_2, _rawValue_3);
-            break;
-          case "*":
-            Object _rawValue_4 = left.getRawValue();
-            Object _rawValue_5 = right.getRawValue();
-            _switchResult = this.constantOperators.multiply(_rawValue_4, _rawValue_5);
-            break;
-          case "/":
-            Object _rawValue_6 = left.getRawValue();
-            Object _rawValue_7 = right.getRawValue();
-            _switchResult = this.constantOperators.divide(_rawValue_6, _rawValue_7);
-            break;
-          case "%":
-            Object _rawValue_8 = left.getRawValue();
-            Object _rawValue_9 = right.getRawValue();
-            _switchResult = this.constantOperators.modulo(_rawValue_8, _rawValue_9);
-            break;
-          case "<<":
-            Object _rawValue_10 = left.getRawValue();
-            Object _rawValue_11 = right.getRawValue();
-            _switchResult = this.constantOperators.shiftLeft(_rawValue_10, _rawValue_11);
-            break;
-          case ">>":
-            Object _rawValue_12 = left.getRawValue();
-            Object _rawValue_13 = right.getRawValue();
-            _switchResult = this.constantOperators.shiftRight(_rawValue_12, _rawValue_13);
-            break;
-          case ">>>":
-            Object _rawValue_14 = left.getRawValue();
-            Object _rawValue_15 = right.getRawValue();
-            _switchResult = this.constantOperators.shiftRightUnsigned(_rawValue_14, _rawValue_15);
-            break;
-          case "<":
-            Object _rawValue_16 = left.getRawValue();
-            Object _rawValue_17 = right.getRawValue();
-            _switchResult = Boolean.valueOf(this.constantOperators.lessThan(_rawValue_16, _rawValue_17));
-            break;
-          case ">":
-            Object _rawValue_18 = left.getRawValue();
-            Object _rawValue_19 = right.getRawValue();
-            _switchResult = Boolean.valueOf(this.constantOperators.greaterThan(_rawValue_18, _rawValue_19));
-            break;
-          case "<=":
-            Object _rawValue_20 = left.getRawValue();
-            Object _rawValue_21 = right.getRawValue();
-            _switchResult = Boolean.valueOf(this.constantOperators.lessEquals(_rawValue_20, _rawValue_21));
-            break;
-          case ">=":
-            Object _rawValue_22 = left.getRawValue();
-            Object _rawValue_23 = right.getRawValue();
-            _switchResult = Boolean.valueOf(this.constantOperators.greaterEquals(_rawValue_22, _rawValue_23));
-            break;
-          case "&&":
-            Object _rawValue_24 = left.getRawValue();
-            Object _rawValue_25 = right.getRawValue();
-            return this.internalLogicalAnd(_rawValue_24, _rawValue_25, (left.isCompileTimeConstant() && right.isCompileTimeConstant()));
-          case "||":
-            Object _rawValue_26 = left.getRawValue();
-            Object _rawValue_27 = right.getRawValue();
-            return this.internalLogicalOr(_rawValue_26, _rawValue_27, (left.isCompileTimeConstant() && right.isCompileTimeConstant()));
-          case "==":
-          case "===":
-            if ((left.isNotAConstant() || right.isNotAConstant())) {
+        if (op != null) {
+          switch (op) {
+            case "+":
+              Object _rawValue = left.getRawValue();
+              Object _rawValue_1 = right.getRawValue();
+              _switchResult = this.constantOperators.plus(_rawValue, _rawValue_1);
+              break;
+            case "-":
+              Object _rawValue_2 = left.getRawValue();
+              Object _rawValue_3 = right.getRawValue();
+              _switchResult = this.constantOperators.minus(_rawValue_2, _rawValue_3);
+              break;
+            case "*":
+              Object _rawValue_4 = left.getRawValue();
+              Object _rawValue_5 = right.getRawValue();
+              _switchResult = this.constantOperators.multiply(_rawValue_4, _rawValue_5);
+              break;
+            case "/":
+              Object _rawValue_6 = left.getRawValue();
+              Object _rawValue_7 = right.getRawValue();
+              _switchResult = this.constantOperators.divide(_rawValue_6, _rawValue_7);
+              break;
+            case "%":
+              Object _rawValue_8 = left.getRawValue();
+              Object _rawValue_9 = right.getRawValue();
+              _switchResult = this.constantOperators.modulo(_rawValue_8, _rawValue_9);
+              break;
+            case "<<":
+              Object _rawValue_10 = left.getRawValue();
+              Object _rawValue_11 = right.getRawValue();
+              _switchResult = this.constantOperators.shiftLeft(_rawValue_10, _rawValue_11);
+              break;
+            case ">>":
+              Object _rawValue_12 = left.getRawValue();
+              Object _rawValue_13 = right.getRawValue();
+              _switchResult = this.constantOperators.shiftRight(_rawValue_12, _rawValue_13);
+              break;
+            case ">>>":
+              Object _rawValue_14 = left.getRawValue();
+              Object _rawValue_15 = right.getRawValue();
+              _switchResult = this.constantOperators.shiftRightUnsigned(_rawValue_14, _rawValue_15);
+              break;
+            case "<":
+              Object _rawValue_16 = left.getRawValue();
+              Object _rawValue_17 = right.getRawValue();
+              _switchResult = Boolean.valueOf(this.constantOperators.lessThan(_rawValue_16, _rawValue_17));
+              break;
+            case ">":
+              Object _rawValue_18 = left.getRawValue();
+              Object _rawValue_19 = right.getRawValue();
+              _switchResult = Boolean.valueOf(this.constantOperators.greaterThan(_rawValue_18, _rawValue_19));
+              break;
+            case "<=":
+              Object _rawValue_20 = left.getRawValue();
+              Object _rawValue_21 = right.getRawValue();
+              _switchResult = Boolean.valueOf(this.constantOperators.lessEquals(_rawValue_20, _rawValue_21));
+              break;
+            case ">=":
+              Object _rawValue_22 = left.getRawValue();
+              Object _rawValue_23 = right.getRawValue();
+              _switchResult = Boolean.valueOf(this.constantOperators.greaterEquals(_rawValue_22, _rawValue_23));
+              break;
+            case "&&":
+              Object _rawValue_24 = left.getRawValue();
+              Object _rawValue_25 = right.getRawValue();
+              return this.internalLogicalAnd(_rawValue_24, _rawValue_25, (left.isCompileTimeConstant() && right.isCompileTimeConstant()));
+            case "||":
+              Object _rawValue_26 = left.getRawValue();
+              Object _rawValue_27 = right.getRawValue();
+              return this.internalLogicalOr(_rawValue_26, _rawValue_27, (left.isCompileTimeConstant() && right.isCompileTimeConstant()));
+            case "==":
+            case "===":
+              if ((left.isNotAConstant() || right.isNotAConstant())) {
+                return EvaluationResult.NOT_A_CONSTANT;
+              }
+              Object _equalValue = left.equalValue(right);
+              return new EvaluationResult(_equalValue, (left.isCompileTimeConstant() && right.isCompileTimeConstant()));
+            case "!=":
+            case "!==":
+              if ((left.isNotAConstant() || right.isNotAConstant())) {
+                return EvaluationResult.NOT_A_CONSTANT;
+              }
+              final Object result = left.equalValue(right);
+              boolean _matched = false;
+              if (result instanceof Boolean) {
+                _matched=true;
+                return new EvaluationResult(Boolean.valueOf((!((Boolean) result).booleanValue())), (left.isCompileTimeConstant() && right.isCompileTimeConstant()));
+              }
+              return new EvaluationResult(result, (left.isCompileTimeConstant() && right.isCompileTimeConstant()));
+            default:
               return EvaluationResult.NOT_A_CONSTANT;
-            }
-            Object _equalValue = left.equalValue(right);
-            return new EvaluationResult(_equalValue, (left.isCompileTimeConstant() && right.isCompileTimeConstant()));
-          case "!=":
-          case "!==":
-            if ((left.isNotAConstant() || right.isNotAConstant())) {
-              return EvaluationResult.NOT_A_CONSTANT;
-            }
-            final Object result = left.equalValue(right);
-            boolean _matched = false;
-            if (result instanceof Boolean) {
-              _matched=true;
-              return new EvaluationResult(Boolean.valueOf((!((Boolean) result).booleanValue())), (left.isCompileTimeConstant() && right.isCompileTimeConstant()));
-            }
-            return new EvaluationResult(result, (left.isCompileTimeConstant() && right.isCompileTimeConstant()));
-          default:
-            return EvaluationResult.NOT_A_CONSTANT;
+          }
+        } else {
+          return EvaluationResult.NOT_A_CONSTANT;
         }
         final Object value = _switchResult;
         return new EvaluationResult(value, (left.isCompileTimeConstant() && right.isCompileTimeConstant()));
