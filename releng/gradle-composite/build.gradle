@@ -8,7 +8,7 @@ task('generatePrefs') {
             if (!(new File(file, '.settings')).exists()) {
                 new File(file, '.settings').mkdir();
             }
-            (new File(file, '.settings/org.eclipse.buildship.core.prefs')).text = "connection.gradle.distribution=GRADLE_DISTRIBUTION(WRAPPER)\nconnection.project.dir=../../xtext-umbrella/releng/gradle-composite\nproject.path=\\:"+file.name+"\n"
+            (new File(file, '.settings/org.eclipse.buildship.core.prefs')).text = "connection.gradle.distribution=GRADLE_DISTRIBUTION(WRAPPER)\nconnection.project.dir=../xtext-umbrella/releng/gradle-composite\nproject.path=\\:"+file.name+"\n"
                     
             file.listFiles().each { File fx -> 
                 if (fx.isDirectory() && new File(fx, "build.gradle").exists()) {
