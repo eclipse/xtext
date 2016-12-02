@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xtext.generator;
 
 import com.google.common.base.Joiner;
-import com.google.common.base.Objects;
 import com.google.common.collect.Lists;
 import com.google.inject.Binder;
 import com.google.inject.Inject;
@@ -176,8 +175,7 @@ public class XtextGeneratorLanguage extends CompositeGeneratorFragment2 implemen
   @Override
   public boolean isGenerateXtendStubs() {
     boolean _xifexpression = false;
-    boolean _notEquals = (!Objects.equal(this.generateXtendStubs, null));
-    if (_notEquals) {
+    if ((this.generateXtendStubs != null)) {
       _xifexpression = this.generateXtendStubs.booleanValue();
     } else {
       _xifexpression = this.codeConfig.isPreferXtendStubs();
@@ -240,8 +238,8 @@ public class XtextGeneratorLanguage extends CompositeGeneratorFragment2 implemen
       EcoreUtil.resolveAll(this.resourceSet);
     }
     String _grammarUri = this.getGrammarUri();
-    boolean _equals = Objects.equal(_grammarUri, null);
-    if (_equals) {
+    boolean _tripleEquals = (_grammarUri == null);
+    if (_tripleEquals) {
       throw new IllegalStateException("No grammarUri or language name given");
     }
     String _grammarUri_1 = this.getGrammarUri();
@@ -310,12 +308,10 @@ public class XtextGeneratorLanguage extends CompositeGeneratorFragment2 implemen
   
   private void index(final Resource resource, final org.eclipse.emf.common.util.URI uri, final ResourceDescriptionsData index) {
     final IResourceServiceProvider serviceProvider = IResourceServiceProvider.Registry.INSTANCE.getResourceServiceProvider(uri);
-    boolean _notEquals = (!Objects.equal(serviceProvider, null));
-    if (_notEquals) {
+    if ((serviceProvider != null)) {
       IResourceDescription.Manager _resourceDescriptionManager = serviceProvider.getResourceDescriptionManager();
       final IResourceDescription resourceDescription = _resourceDescriptionManager.getResourceDescription(resource);
-      boolean _notEquals_1 = (!Objects.equal(resourceDescription, null));
-      if (_notEquals_1) {
+      if ((resourceDescription != null)) {
         index.addDescription(uri, resourceDescription);
       }
     }
@@ -335,8 +331,8 @@ public class XtextGeneratorLanguage extends CompositeGeneratorFragment2 implemen
             String _plus = ("Validation Error in " + _name);
             final String grammarName = (_plus + ": ");
             Throwable _exception = diagnostic.getException();
-            boolean _equals_1 = Objects.equal(_exception, null);
-            if (_equals_1) {
+            boolean _tripleEquals = (_exception == null);
+            if (_tripleEquals) {
               String _message = diagnostic.getMessage();
               String _plus_1 = (grammarName + _message);
               throw new IllegalStateException(_plus_1);
@@ -379,7 +375,7 @@ public class XtextGeneratorLanguage extends CompositeGeneratorFragment2 implemen
   }
   
   protected void validateReferencedMetamodel(final ReferencedMetamodel ref) {
-    if (((!Objects.equal(ref.getEPackage(), null)) && (!ref.getEPackage().eIsProxy()))) {
+    if (((ref.getEPackage() != null) && (!ref.getEPackage().eIsProxy()))) {
       return;
     }
     final EReference eref = XtextPackage.Literals.ABSTRACT_METAMODEL_DECLARATION__EPACKAGE;

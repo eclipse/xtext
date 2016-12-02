@@ -742,7 +742,7 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
             }
           }
           _builder.append("\t");
-          _builder.append("if (errorAcceptor != null)");
+          _builder.append("if (errorAcceptor !== null)");
           _builder.newLine();
           _builder.append("\t\t");
           _builder.append("errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));");
@@ -1179,7 +1179,7 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
           {
             if ((states != null)) {
               _builder.append("\t");
-              _builder.append("if (errorAcceptor != null) {");
+              _builder.append("if (errorAcceptor !== null) {");
               _builder.newLine();
               {
                 for(final ISemanticSequencerNfaProvider.ISemState s : states) {
@@ -1559,7 +1559,7 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
       return false;
     }
     final Assignment ass = GrammarUtil.containingAssignment(c);
-    return (Objects.equal(ass, null) || GrammarUtil.isBooleanAssignment(ass));
+    return ((ass == null) || GrammarUtil.isBooleanAssignment(ass));
   }
   
   private String defaultValue(final AbstractElement ele, final Set<AbstractElement> visited) {
@@ -1777,7 +1777,7 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
         _builder.append(" node) {");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
-        _builder.append("if (node != null)");
+        _builder.append("if (node !== null)");
         _builder.newLine();
         _builder.append("\t\t");
         _builder.append("return getTokenText(node);");
@@ -1909,8 +1909,8 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
             {
               IGrammarConstraintProvider.IConstraint _value = e.getValue();
               IGrammarConstraintProvider.IConstraintElement _body = _value.getBody();
-              boolean _equals = Objects.equal(_body, null);
-              if (_equals) {
+              boolean _tripleEquals = (_body == null);
+              if (_tripleEquals) {
                 _builder.append("\t");
                 _builder.append("{");
                 IGrammarConstraintProvider.IConstraint _value_1 = e.getValue();

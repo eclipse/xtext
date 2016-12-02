@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.xtext.generator.ui.templates;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.Collection;
 import java.util.Collections;
@@ -121,8 +120,8 @@ public class CodetemplatesGeneratorFragment2 extends AbstractXtextGeneratorFragm
     if (_genericIde!=null) {
       _srcGen=_genericIde.getSrcGen();
     }
-    boolean _notEquals = (!Objects.equal(_srcGen, null));
-    if (_notEquals) {
+    boolean _tripleNotEquals = (_srcGen != null);
+    if (_tripleNotEquals) {
       Grammar _grammar_1 = this.getGrammar();
       TypeReference _partialContentAssistParserClass_1 = this.getPartialContentAssistParserClass(_grammar_1);
       GeneratedJavaFileAccess _createGeneratedJavaFile = this.fileAccessFactory.createGeneratedJavaFile(_partialContentAssistParserClass_1);
@@ -191,7 +190,7 @@ public class CodetemplatesGeneratorFragment2 extends AbstractXtextGeneratorFragm
         _builder.append(" parser) {");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t");
-        _builder.append("if (rule == null || rule.eIsProxy())");
+        _builder.append("if (rule === null || rule.eIsProxy())");
         _builder.newLine();
         _builder.append("\t\t\t");
         _builder.append("return ");

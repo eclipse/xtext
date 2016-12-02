@@ -2267,7 +2267,7 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
             _builder.newLineIfNotEmpty();
             _builder.append("\t");
             _builder.append("\t");
-            _builder.append("if (hasSemanticElement != null && hasSemanticElement) {");
+            _builder.append("if (hasSemanticElement !== null && hasSemanticElement) {");
             _builder.newLine();
             _builder.append("\t");
             _builder.append("\t\t");
@@ -2455,8 +2455,8 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
         if (_eType!=null) {
           _instanceClass=_eType.getInstanceClass();
         }
-        boolean _notEquals = (!Objects.equal(_instanceClass, null));
-        _and_1 = _notEquals;
+        boolean _tripleNotEquals = (_instanceClass != null);
+        _and_1 = _tripleNotEquals;
       }
       if (!_and_1) {
         _and = false;

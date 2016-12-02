@@ -604,7 +604,7 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
     for (final EPackage pack_1 : generatedPackages) {
       {
         final GenPackage genPackage = GenModelUtil2.getGenPackage(pack_1, rs);
-        if (((this.getProjectConfig().getRuntime().getManifest() != null) && Objects.equal(this.modelPluginID, null))) {
+        if (((this.getProjectConfig().getRuntime().getManifest() != null) && (this.modelPluginID == null))) {
           IXtextProjectConfig _projectConfig_4 = this.getProjectConfig();
           IRuntimeProjectConfig _runtime_4 = _projectConfig_4.getRuntime();
           ManifestAccess _manifest_2 = _runtime_4.getManifest();
@@ -715,8 +715,7 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
     for (final String nsURI : packageNsURIs) {
       {
         final Resource resource = GenModelUtil2.getGenModelResource(null, nsURI, resourceSet);
-        boolean _notEquals = (!Objects.equal(resource, null));
-        if (_notEquals) {
+        if ((resource != null)) {
           EList<EObject> _contents = resource.getContents();
           Iterable<GenModel> _filter = Iterables.<GenModel>filter(_contents, GenModel.class);
           final GenModel loadedGenModel = IterableExtensions.<GenModel>head(_filter);
@@ -1103,8 +1102,7 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
     final Generator generator = new Generator() {
       @Override
       public JControlModel getJControlModel() {
-        boolean _equals = Objects.equal(this.jControlModel, null);
-        if (_equals) {
+        if ((this.jControlModel == null)) {
           JControlModel _jControlModel = new JControlModel();
           this.jControlModel = _jControlModel;
           this.jControlModel.initialize(null, this.options.mergeRulesURI);

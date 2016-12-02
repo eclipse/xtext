@@ -1,6 +1,5 @@
 package org.eclipse.xtext.util;
 
-import com.google.common.base.Objects;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -107,8 +106,7 @@ public class XtextVersion {
         throw Exceptions.sneakyThrow(_t);
       }
     } finally {
-      boolean _notEquals = (!Objects.equal(is, null));
-      if (_notEquals) {
+      if ((is != null)) {
         try {
           is.close();
         } catch (final Throwable _t_1) {

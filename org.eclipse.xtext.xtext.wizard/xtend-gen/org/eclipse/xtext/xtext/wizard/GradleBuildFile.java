@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.xtext.wizard;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.util.Set;
 import org.eclipse.xtend.lib.annotations.Accessors;
@@ -107,7 +106,7 @@ public class GradleBuildFile extends TextFile {
     Iterable<ExternalDependency.MavenCoordinates> _map = IterableExtensions.<ExternalDependency, ExternalDependency.MavenCoordinates>map(_externalDependencies, _function);
     final Function1<ExternalDependency.MavenCoordinates, Boolean> _function_1 = (ExternalDependency.MavenCoordinates it) -> {
       String _artifactId = it.getArtifactId();
-      return Boolean.valueOf((!Objects.equal(_artifactId, null)));
+      return Boolean.valueOf((_artifactId != null));
     };
     return IterableExtensions.<ExternalDependency.MavenCoordinates>filter(_map, _function_1);
   }

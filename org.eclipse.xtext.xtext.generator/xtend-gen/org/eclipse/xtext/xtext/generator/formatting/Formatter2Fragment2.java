@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.xtext.generator.formatting;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
@@ -313,8 +312,7 @@ public class Formatter2Fragment2 extends AbstractStubGeneratingFragment {
     for (final Action action : _containedActions) {
       {
         final String featureName = action.getFeature();
-        boolean _notEquals = (!Objects.equal(featureName, null));
-        if (_notEquals) {
+        if ((featureName != null)) {
           TypeRef _type = action.getType();
           final EClassifier type = _type.getClassifier();
           if ((type instanceof EClass)) {
@@ -345,8 +343,7 @@ public class Formatter2Fragment2 extends AbstractStubGeneratingFragment {
     IXtextGeneratorLanguage _language = this.getLanguage();
     Grammar _grammar = _language.getGrammar();
     final Grammar superGrammar = GrammarUtil2.getNonTerminalsSuperGrammar(_grammar);
-    boolean _notEquals = (!Objects.equal(superGrammar, null));
-    if (_notEquals) {
+    if ((superGrammar != null)) {
       return this.getFormatter2Stub(superGrammar);
     } else {
       return TypeReference.typeRef(AbstractFormatter2.class);

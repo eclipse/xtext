@@ -66,7 +66,7 @@ public class LoggingTester {
     
     public void assertNumberOfLogEntries(final int number, final Level level, final String... messageParts) {
       final Function1<LoggingTester.LogEntry, Boolean> _function = (LoggingTester.LogEntry log) -> {
-        return Boolean.valueOf(((Objects.equal(level, null) || Objects.equal(log.level, level)) && IterableExtensions.<String>forall(((Iterable<String>)Conversions.doWrapArray(messageParts)), ((Function1<String, Boolean>) (String it) -> {
+        return Boolean.valueOf((((level == null) || Objects.equal(log.level, level)) && IterableExtensions.<String>forall(((Iterable<String>)Conversions.doWrapArray(messageParts)), ((Function1<String, Boolean>) (String it) -> {
           return Boolean.valueOf(log.message.contains(it));
         }))));
       };
@@ -92,8 +92,7 @@ public class LoggingTester {
           }
         }
         {
-          boolean _notEquals_1 = (!Objects.equal(level, null));
-          if (_notEquals_1) {
+          if ((level != null)) {
             _builder.append("with ");
             _builder.append(level, "");
             _builder.append(" level");
@@ -378,7 +377,7 @@ public class LoggingTester {
     ArrayList<Appender> _xblockexpression = null;
     {
       final ArrayList<Appender> appenders = CollectionLiterals.<Appender>newArrayList();
-      for (Category current = logger; (!Objects.equal(current, null)); current = current.getParent()) {
+      for (Category current = logger; (current != null); current = current.getParent()) {
         Enumeration _allAppenders = current.getAllAppenders();
         ArrayList<Appender> _list = Collections.<Appender>list(_allAppenders);
         appenders.addAll(_list);
@@ -396,7 +395,7 @@ public class LoggingTester {
       Filter _next = filter.getNext();
       appender.addFilter(_next);
     } else {
-      for (Filter current = appender.getFilter(); (!Objects.equal(current, null)); current = current.getNext()) {
+      for (Filter current = appender.getFilter(); (current != null); current = current.getNext()) {
         Filter _next_1 = current.getNext();
         boolean _equals_1 = Objects.equal(_next_1, filter);
         if (_equals_1) {

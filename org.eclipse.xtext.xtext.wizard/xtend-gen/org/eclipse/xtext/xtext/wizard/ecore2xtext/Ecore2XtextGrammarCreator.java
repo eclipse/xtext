@@ -60,7 +60,7 @@ public class Ecore2XtextGrammarCreator {
           _builder.append(_nsURI, "");
           _builder.append("\" ");
           {
-            if (((!Objects.equal(UniqueNameUtil.uniqueName(it_1), null)) && (!Objects.equal(UniqueNameUtil.uniqueName(it_1), "")))) {
+            if (((UniqueNameUtil.uniqueName(it_1) != null) && (!Objects.equal(UniqueNameUtil.uniqueName(it_1), "")))) {
               _builder.append("as ");
               String _uniqueName = UniqueNameUtil.uniqueName(it_1);
               _builder.append(_uniqueName, "");
@@ -286,7 +286,7 @@ public class Ecore2XtextGrammarCreator {
   
   public CharSequence rules(final EClassifier it) {
     CharSequence _xifexpression = null;
-    if (((!Objects.equal(it, null)) && Ecore2XtextExtensions.needsConcreteRule(it))) {
+    if (((it != null) && Ecore2XtextExtensions.needsConcreteRule(it))) {
       _xifexpression = this.rule(it);
     }
     return _xifexpression;

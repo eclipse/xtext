@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.generator.trace;
 
-import com.google.common.base.Objects;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -91,8 +90,7 @@ public class TraceRegionMergerTest {
       TraceRegion _xblockexpression = null;
       {
         final TraceRegion root = new TraceRegion(offset, length, startLine, endLine, true, 0, 0, 0, 0, this.root, this.uri);
-        boolean _notEquals = (!Objects.equal(init, null));
-        if (_notEquals) {
+        if ((init != null)) {
           final TraceRegionMergerTest.TraceBuilder child = new TraceRegionMergerTest.TraceBuilder(this.testBuilder, this.uri, root);
           init.apply(child);
         }
@@ -159,8 +157,7 @@ public class TraceRegionMergerTest {
           boolean _contains = associatedLocations.contains(_sourceRelativeURI);
           Assert.assertTrue(("Missing " + uri), _contains);
         }
-        boolean _equals = Objects.equal(init, null);
-        if (_equals) {
+        if ((init == null)) {
           List<AbstractTraceRegion> _nestedRegions = head.getNestedRegions();
           boolean _isEmpty = _nestedRegions.isEmpty();
           Assert.assertTrue(_isEmpty);

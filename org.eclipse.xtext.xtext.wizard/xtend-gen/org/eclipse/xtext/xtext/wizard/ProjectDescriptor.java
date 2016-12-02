@@ -205,8 +205,8 @@ public abstract class ProjectDescriptor {
     _builder.newLineIfNotEmpty();
     {
       Object _activatorClassName = this.getActivatorClassName();
-      boolean _notEquals = (!Objects.equal(_activatorClassName, null));
-      if (_notEquals) {
+      boolean _tripleNotEquals = (_activatorClassName != null);
+      if (_tripleNotEquals) {
         _builder.append("Bundle-Activator: ");
         Object _activatorClassName_1 = this.getActivatorClassName();
         _builder.append(_activatorClassName_1, "");
@@ -265,15 +265,15 @@ public abstract class ProjectDescriptor {
       Iterable<ExternalDependency.P2Coordinates> _map_1 = IterableExtensions.<ExternalDependency, ExternalDependency.P2Coordinates>map(_externalDependencies, _function_1);
       final Function1<ExternalDependency.P2Coordinates, Boolean> _function_2 = (ExternalDependency.P2Coordinates it) -> {
         String _bundleId = it.getBundleId();
-        return Boolean.valueOf((!Objects.equal(_bundleId, null)));
+        return Boolean.valueOf((_bundleId != null));
       };
       Iterable<ExternalDependency.P2Coordinates> _filter = IterableExtensions.<ExternalDependency.P2Coordinates>filter(_map_1, _function_2);
       final Function1<ExternalDependency.P2Coordinates, String> _function_3 = (ExternalDependency.P2Coordinates it) -> {
         String _bundleId = it.getBundleId();
         String _xifexpression = null;
         String _version = it.getVersion();
-        boolean _equals = Objects.equal(_version, null);
-        if (_equals) {
+        boolean _tripleEquals = (_version == null);
+        if (_tripleEquals) {
           _xifexpression = "";
         } else {
           String _version_1 = it.getVersion();

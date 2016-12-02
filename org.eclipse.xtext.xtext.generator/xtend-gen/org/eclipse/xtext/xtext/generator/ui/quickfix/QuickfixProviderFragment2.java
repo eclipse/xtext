@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.xtext.generator.ui.quickfix;
 
-import com.google.common.base.Objects;
 import java.util.List;
 import java.util.Set;
 import javax.inject.Inject;
@@ -65,7 +64,7 @@ public class QuickfixProviderFragment2 extends AbstractInheritingFragment {
     {
       final Grammar superGrammar = GrammarUtil2.getNonTerminalsSuperGrammar(g);
       TypeReference _xifexpression = null;
-      if ((this.isInheritImplementation() && (!Objects.equal(superGrammar, null)))) {
+      if ((this.isInheritImplementation() && (superGrammar != null))) {
         _xifexpression = this.getQuickfixProviderClass(superGrammar);
       } else {
         _xifexpression = this.getDefaultQuickfixProviderSuperClass();

@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.xtext.generator;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import java.util.List;
@@ -67,7 +66,7 @@ public class XtextGeneratorStandaloneSetup implements IGuiceAwareGeneratorCompon
   private Iterable<Pair<String, String>> getProjectMappings() {
     List<? extends ISubProjectConfig> _enabledProjects = this.projectConfig.getEnabledProjects();
     final Function1<ISubProjectConfig, Boolean> _function = (ISubProjectConfig it) -> {
-      return Boolean.valueOf(((!Objects.equal(it.getName(), null)) && (!Objects.equal(it.getRoot(), null))));
+      return Boolean.valueOf(((it.getName() != null) && (it.getRoot() != null)));
     };
     Iterable<? extends ISubProjectConfig> _filter = IterableExtensions.filter(_enabledProjects, _function);
     final Function1<ISubProjectConfig, Pair<String, String>> _function_1 = (ISubProjectConfig it) -> {

@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.xtext.generator.ui.compare;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import java.util.Collections;
@@ -69,8 +68,8 @@ public class CompareFragment2 extends AbstractXtextGeneratorFragment {
     if (_eclipsePlugin_2!=null) {
       _pluginXml=_eclipsePlugin_2.getPluginXml();
     }
-    boolean _notEquals = (!Objects.equal(_pluginXml, null));
-    if (_notEquals) {
+    boolean _tripleNotEquals_1 = (_pluginXml != null);
+    if (_tripleNotEquals_1) {
       IXtextProjectConfig _projectConfig_3 = this.getProjectConfig();
       IBundleProjectConfig _eclipsePlugin_3 = _projectConfig_3.getEclipsePlugin();
       PluginXmlAccess _pluginXml_1 = _eclipsePlugin_3.getPluginXml();
