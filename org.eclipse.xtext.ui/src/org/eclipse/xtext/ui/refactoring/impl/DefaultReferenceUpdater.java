@@ -117,20 +117,22 @@ public class DefaultReferenceUpdater extends AbstractReferenceUpdater {
 		if (!transientValueService.isValueInListTransient(referringElement, indexInList, reference)) {
 			ITextRegion referenceTextRegion = locationInFileProvider.getFullTextRegion(referringElement, reference,
 					indexInList);
-			CrossReference crossReference = getCrossReference(referringElement, referenceTextRegion.getOffset());
-			if (crossReference != null) {
-				RefTextEvaluator refTextComparator = getRefTextEvaluator(referringElement, referringResourceURI, reference,
-						indexInList, newTargetElement);
-				String newReferenceText = crossReferenceSerializer.getCrossRefText(referringElement,
-						crossReference, newTargetElement, refTextComparator, referenceTextRegion, updateAcceptor.getRefactoringStatus());
-				if (newReferenceText == null) {
-					newReferenceText = resolveNameConflict(referringElement, reference, newTargetElement, updateAcceptor);
+			if (referenceTextRegion != null) {
+				CrossReference crossReference = getCrossReference(referringElement, referenceTextRegion.getOffset());
+				if (crossReference != null) {
+					RefTextEvaluator refTextComparator = getRefTextEvaluator(referringElement, referringResourceURI, reference,
+							indexInList, newTargetElement);
+					String newReferenceText = crossReferenceSerializer.getCrossRefText(referringElement,
+							crossReference, newTargetElement, refTextComparator, referenceTextRegion, updateAcceptor.getRefactoringStatus());
+					if (newReferenceText == null) {
+						newReferenceText = resolveNameConflict(referringElement, reference, newTargetElement, updateAcceptor);
+					}
+					if (newReferenceText == null) {
+						updateAcceptor.getRefactoringStatus().add(RefactoringStatus.ERROR, "Refactoring introduces a name conflict.", referringElement, referenceTextRegion);
+					}
+					createTextChange(referenceTextRegion, newReferenceText, referringElement, newTargetElement, reference, 
+							referringResourceURI, updateAcceptor);
 				}
-				if (newReferenceText == null) {
-					updateAcceptor.getRefactoringStatus().add(RefactoringStatus.ERROR, "Refactoring introduces a name conflict.", referringElement, referenceTextRegion);
-				}
-				createTextChange(referenceTextRegion, newReferenceText, referringElement, newTargetElement, reference, 
-						referringResourceURI, updateAcceptor);
 			}
 		}
 	}
