@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.xbase.ui.editor;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -68,8 +67,7 @@ public class XbaseEditorInputRedirector {
   public IEditorInput findOriginalSourceForOuputFolderCopy(final IEditorInput input) {
     try {
       final IFile resource = ResourceUtil.getFile(input);
-      boolean _notEquals = (!Objects.equal(resource, null));
-      if (_notEquals) {
+      if ((resource != null)) {
         IPath _fullPath = resource.getFullPath();
         String _fileExtension = _fullPath.getFileExtension();
         boolean _isValid = this.fileExtensionProvider.isValid(_fileExtension);
@@ -117,7 +115,7 @@ public class XbaseEditorInputRedirector {
             };
             Iterable<IClasspathEntry> _filter_1 = IterableExtensions.<IClasspathEntry>filter(((Iterable<IClasspathEntry>)Conversions.doWrapArray(_rawClasspath)), _function_1);
             for (final IClasspathEntry sourceFolder : _filter_1) {
-              if (((!Objects.equal(sourceFolder.getOutputLocation(), null)) && sourceFolder.getOutputLocation().isPrefixOf(resource.getFullPath()))) {
+              if (((sourceFolder.getOutputLocation() != null) && sourceFolder.getOutputLocation().isPrefixOf(resource.getFullPath()))) {
                 IPath _fullPath_3 = resource.getFullPath();
                 IPath _outputLocation_2 = sourceFolder.getOutputLocation();
                 int _segmentCount_1 = _outputLocation_2.segmentCount();
@@ -146,37 +144,33 @@ public class XbaseEditorInputRedirector {
   
   public IEditorInput findOriginalSource(final IEditorInput input) {
     final IFile resource = ResourceUtil.getFile(input);
-    boolean _notEquals = (!Objects.equal(resource, null));
-    if (_notEquals) {
+    if ((resource != null)) {
       final IEditorInput original = this.findOriginalSourceForOuputFolderCopy(input);
       if ((original != input)) {
         return original;
       }
       final IEclipseTrace trace = this.traceInformation.getTraceToSource(resource);
-      boolean _equals = Objects.equal(trace, null);
-      if (_equals) {
+      if ((trace == null)) {
         return input;
       }
       Iterable<? extends ILocationInEclipseResource> _allAssociatedLocations = trace.getAllAssociatedLocations();
       final Iterator<? extends ILocationInEclipseResource> allLocations = _allAssociatedLocations.iterator();
       ILocationInEclipseResource sourceInformation = null;
-      while ((allLocations.hasNext() && Objects.equal(sourceInformation, null))) {
+      while ((allLocations.hasNext() && (sourceInformation == null))) {
         {
           final ILocationInEclipseResource candidate = allLocations.next();
           LanguageInfo _language = candidate.getLanguage();
-          boolean _equals_1 = this.languageInfo.equals(_language);
-          if (_equals_1) {
+          boolean _equals = this.languageInfo.equals(_language);
+          if (_equals) {
             sourceInformation = candidate;
           }
         }
       }
-      boolean _equals_1 = Objects.equal(sourceInformation, null);
-      if (_equals_1) {
+      if ((sourceInformation == null)) {
         return input;
       }
       final IStorage originalStorage = sourceInformation.getPlatformResource();
-      boolean _notEquals_1 = (!Objects.equal(originalStorage, null));
-      if (_notEquals_1) {
+      if ((originalStorage != null)) {
         return EditorUtils.createEditorInput(originalStorage);
       }
     }

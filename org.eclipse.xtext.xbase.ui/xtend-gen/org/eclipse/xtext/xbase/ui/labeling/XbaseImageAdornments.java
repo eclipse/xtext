@@ -1,6 +1,5 @@
 package org.eclipse.xtext.xbase.ui.labeling;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.Arrays;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -69,11 +68,10 @@ public class XbaseImageAdornments {
     if (_eResource!=null) {
       _resourceSet=_eResource.getResourceSet();
     }
-    boolean _notEquals = (!Objects.equal(_resourceSet, null));
-    if (_notEquals) {
+    boolean _tripleNotEquals = (_resourceSet != null);
+    if (_tripleNotEquals) {
       final JvmOperation overriddenOperation = this._overrideHelper.findOverriddenOperation(it);
-      boolean _notEquals_1 = (!Objects.equal(overriddenOperation, null));
-      if (_notEquals_1) {
+      if ((overriddenOperation != null)) {
         int _overrideAdornment = this.getOverrideAdornment(overriddenOperation);
         return (adornment | _overrideAdornment);
       }

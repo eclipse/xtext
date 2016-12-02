@@ -147,11 +147,11 @@ public class GrammarAccessExtensions {
   }
   
   protected boolean _mustBeParenthesized(final Keyword it) {
-    return ((this.predicated(it) || it.isFirstSetPredicated()) || (!Objects.equal(it.getCardinality(), null)));
+    return ((this.predicated(it) || it.isFirstSetPredicated()) || (it.getCardinality() != null));
   }
   
   protected boolean _mustBeParenthesized(final RuleCall it) {
-    return ((this.predicated(it) || it.isFirstSetPredicated()) || (!Objects.equal(it.getCardinality(), null)));
+    return ((this.predicated(it) || it.isFirstSetPredicated()) || (it.getCardinality() != null));
   }
   
   protected boolean _predicated(final AbstractElement it) {
@@ -301,8 +301,8 @@ public class GrammarAccessExtensions {
     boolean _matched = false;
     if (it instanceof RuleCall) {
       AbstractRule _rule = ((RuleCall)it).getRule();
-      boolean _notEquals = (!Objects.equal(_rule, null));
-      if (_notEquals) {
+      boolean _tripleNotEquals = (_rule != null);
+      if (_tripleNotEquals) {
         _matched=true;
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("\"");

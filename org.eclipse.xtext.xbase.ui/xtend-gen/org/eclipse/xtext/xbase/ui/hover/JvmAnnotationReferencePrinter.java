@@ -99,16 +99,16 @@ public class JvmAnnotationReferencePrinter {
       if (_head!=null) {
         _operation=_head.getOperation();
       }
-      boolean _notEquals = (!Objects.equal(_operation, null));
-      if (!_notEquals) {
+      boolean _tripleNotEquals = (_operation != null);
+      if (!_tripleNotEquals) {
         _and = false;
       } else {
         EList<JvmAnnotationValue> _explicitValues_2 = reference.getExplicitValues();
         JvmAnnotationValue _head_1 = IterableExtensions.<JvmAnnotationValue>head(_explicitValues_2);
         JvmOperation _operation_1 = _head_1.getOperation();
         String _simpleName_1 = _operation_1.getSimpleName();
-        boolean _notEquals_1 = (!Objects.equal(_simpleName_1, "value"));
-        _and = _notEquals_1;
+        boolean _notEquals = (!Objects.equal(_simpleName_1, "value"));
+        _and = _notEquals;
       }
       _or = _and;
     }
@@ -165,8 +165,8 @@ public class JvmAnnotationReferencePrinter {
     String _createLinkWithLabel = this.createLinkWithLabel(XtextElementLinks.XTEXTDOC_SCHEME, uri, _simpleName);
     buffer.append(_createLinkWithLabel);
     XExpression _value = reference.getValue();
-    boolean _notEquals = (!Objects.equal(_value, null));
-    if (_notEquals) {
+    boolean _tripleNotEquals = (_value != null);
+    if (_tripleNotEquals) {
       buffer.append("(");
       XExpression _value_1 = reference.getValue();
       buffer.append(_value_1);
@@ -217,8 +217,7 @@ public class JvmAnnotationReferencePrinter {
   protected String _internalToString(final JvmAnnotationValue it) {
     EClass _eClass = it.eClass();
     final EStructuralFeature ref = _eClass.getEStructuralFeature("values");
-    boolean _equals = Objects.equal(ref, null);
-    if (_equals) {
+    if ((ref == null)) {
       throw new IllegalStateException(("Cannot handle " + it));
     }
     Object _eGet = it.eGet(ref);
@@ -315,7 +314,7 @@ public class JvmAnnotationReferencePrinter {
   
   protected String internalHandleAbstractFeatureCall(final String prefix, final XAbstractFeatureCall o) {
     String _xifexpression = null;
-    if (((!Objects.equal(o.getFeature(), null)) && (!o.getFeature().eIsProxy()))) {
+    if (((o.getFeature() != null) && (!o.getFeature().eIsProxy()))) {
       String _xblockexpression = null;
       {
         JvmIdentifiableElement _feature = o.getFeature();
@@ -328,8 +327,7 @@ public class JvmAnnotationReferencePrinter {
       _xifexpression = o.getConcreteSyntaxFeatureName();
     }
     final String postfix = _xifexpression;
-    boolean _equals = Objects.equal(prefix, null);
-    if (_equals) {
+    if ((prefix == null)) {
       return postfix;
     } else {
       return ((prefix + ".") + postfix);

@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.common.types.ui.notification;
 
-import com.google.common.base.Objects;
 import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -71,8 +70,7 @@ public class JavaBuilderState {
     JavaBuilderState _xblockexpression = null;
     {
       final IJavaProject javaProject = it.getJavaProject();
-      boolean _equals = Objects.equal(javaProject, null);
-      if (_equals) {
+      if ((javaProject == null)) {
         return null;
       }
       IProject _project = javaProject.getProject();
@@ -100,12 +98,10 @@ public class JavaBuilderState {
   public Long getLastStructuralBuildTime() {
     Long _xblockexpression = null;
     {
-      boolean _notEquals = (!Objects.equal(this.lastStructuralBuildTime, null));
-      if (_notEquals) {
+      if ((this.lastStructuralBuildTime != null)) {
         return this.lastStructuralBuildTime;
       }
-      boolean _equals = Objects.equal(this.state, null);
-      if (_equals) {
+      if ((this.state == null)) {
         return this.lastStructuralBuildTime = Long.valueOf((-1l));
       }
       Object _readField = this.readField(this.state, "lastStructuralBuildTime", Long.valueOf((-1l)));
@@ -117,12 +113,10 @@ public class JavaBuilderState {
   public Integer getBuildNumber() {
     Integer _xblockexpression = null;
     {
-      boolean _notEquals = (!Objects.equal(this.buildNumber, null));
-      if (_notEquals) {
+      if ((this.buildNumber != null)) {
         return this.buildNumber;
       }
-      boolean _equals = Objects.equal(this.state, null);
-      if (_equals) {
+      if ((this.state == null)) {
         return this.buildNumber = Integer.valueOf((-1));
       }
       Object _readField = this.readField(this.state, "buildNumber", Integer.valueOf((-1)));
@@ -134,8 +128,7 @@ public class JavaBuilderState {
   public Set<QualifiedName> getStructurallyChangedTypes() {
     Set<QualifiedName> _xblockexpression = null;
     {
-      boolean _notEquals = (!Objects.equal(this.structurallyChangedTypes, null));
-      if (_notEquals) {
+      if ((this.structurallyChangedTypes != null)) {
         return this.structurallyChangedTypes;
       }
       HashSet<QualifiedName> _newHashSet = CollectionLiterals.<QualifiedName>newHashSet();
@@ -149,8 +142,7 @@ public class JavaBuilderState {
       if (types instanceof StringSet) {
         _matched=true;
         for (final String name : ((StringSet)types).values) {
-          boolean _notEquals_1 = (!Objects.equal(name, null));
-          if (_notEquals_1) {
+          if ((name != null)) {
             String[] _split = name.split("/");
             QualifiedName _create = QualifiedName.create(_split);
             this.structurallyChangedTypes.add(_create);
@@ -173,14 +165,12 @@ public class JavaBuilderState {
       IJavaProject _javaProject = it.getJavaProject();
       final TypeNames qualifiedTypeNames = new TypeNames(_javaProject);
       final SimpleLookupTable references = this.getReferences();
-      boolean _equals = Objects.equal(references, null);
-      if (_equals) {
+      if ((references == null)) {
         return qualifiedTypeNames;
       }
       final String packageName = it.getElementName();
       final IResource resource = it.getResource();
-      boolean _equals_1 = Objects.equal(resource, null);
-      if (_equals_1) {
+      if ((resource == null)) {
         return qualifiedTypeNames;
       }
       final IPath packagePath = resource.getProjectRelativePath();
@@ -204,8 +194,8 @@ public class JavaBuilderState {
             IPath _removeLastSegments = qualifiedPath.removeLastSegments(1);
             String _string = _removeLastSegments.toString();
             final String typePackageName = _string.replace("/", ".");
-            boolean _equals_2 = packageName.equals(typePackageName);
-            if (_equals_2) {
+            boolean _equals = packageName.equals(typePackageName);
+            if (_equals) {
               String _lastSegment = qualifiedPath.lastSegment();
               final String simpleTypeName = _lastSegment.toString();
               IJavaProject _javaProject_2 = it.getJavaProject();
@@ -258,8 +248,7 @@ public class JavaBuilderState {
         _definedTypeNamesFor=this.state.getDefinedTypeNamesFor(typeLocator);
       }
       final char[][] typeNames = _definedTypeNamesFor;
-      boolean _equals = Objects.equal(typeNames, null);
-      if (_equals) {
+      if ((typeNames == null)) {
         TypeNames _typeNames = new TypeNames(project);
         final Procedure1<TypeNames> _function = (TypeNames it) -> {
           it.addTypeName(primaryTypeFqn, primaryTypeFqn);
@@ -280,8 +269,7 @@ public class JavaBuilderState {
   private String getQualifedTypeName(final String packageName, final String simpleTypeName) {
     String _xblockexpression = null;
     {
-      boolean _equals = Objects.equal(packageName, null);
-      if (_equals) {
+      if ((packageName == null)) {
         return simpleTypeName;
       }
       StringConcatenation _builder = new StringConcatenation();
@@ -338,12 +326,10 @@ public class JavaBuilderState {
   private SimpleLookupTable getReferences() {
     SimpleLookupTable _xblockexpression = null;
     {
-      boolean _notEquals = (!Objects.equal(this.references, null));
-      if (_notEquals) {
+      if ((this.references != null)) {
         return this.references;
       }
-      boolean _equals = Objects.equal(this.state, null);
-      if (_equals) {
+      if ((this.state == null)) {
         return null;
       }
       SimpleLookupTable _switchResult = null;
@@ -368,8 +354,7 @@ public class JavaBuilderState {
       final Field field = _class.getDeclaredField(fieldName);
       field.setAccessible(true);
       final Object value = field.get(instance);
-      boolean _notEquals = (!Objects.equal(value, null));
-      if (_notEquals) {
+      if ((value != null)) {
         return value;
       }
       return defaultValue;

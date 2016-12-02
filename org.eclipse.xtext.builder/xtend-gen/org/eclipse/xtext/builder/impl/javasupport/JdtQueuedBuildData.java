@@ -72,8 +72,7 @@ public class JdtQueuedBuildData implements IQueuedBuildDataContribution {
         final IProject project = ((UnconfirmedStructuralChangesDelta)delta).getProject();
         String _name = project.getName();
         JavaBuilderState state = this.javaBuildState.get(_name);
-        boolean _equals = Objects.equal(state, null);
-        if (_equals) {
+        if ((state == null)) {
           String _name_1 = project.getName();
           JavaBuilderState _lastBuiltState = JavaBuilderState.getLastBuiltState(project);
           JavaBuilderState _state = state = _lastBuiltState;
@@ -100,7 +99,7 @@ public class JdtQueuedBuildData implements IQueuedBuildDataContribution {
       final JavaBuilderState oldState = this.javaBuildState.get(_name);
       final JavaBuilderState newState = JavaBuilderState.getLastBuiltState(it);
       Procedure1<UnconfirmedStructuralChangesDelta> _xifexpression = null;
-      if ((Objects.equal(oldState, null) || (!Objects.equal(oldState.getLastStructuralBuildTime(), newState.getLastStructuralBuildTime())))) {
+      if (((oldState == null) || (!Objects.equal(oldState.getLastStructuralBuildTime(), newState.getLastStructuralBuildTime())))) {
         final Procedure1<UnconfirmedStructuralChangesDelta> _function = (UnconfirmedStructuralChangesDelta it_1) -> {
           final Set<QualifiedName> structurallyChangedTypes = newState.getStructurallyChangedTypes();
           if ((this.namesIntersect(it_1.getNew(), structurallyChangedTypes) || this.namesIntersect(it_1.getOld(), structurallyChangedTypes))) {
@@ -125,8 +124,7 @@ public class JdtQueuedBuildData implements IQueuedBuildDataContribution {
           final UnconfirmedStructuralChangesDelta unconfirmed = i.next();
           if (((unconfirmed.getBuildNumber() < (it.getBuildNumber()).intValue()) && unconfirmed.getProject().equals(it.getProject()))) {
             i.remove();
-            boolean _notEquals = (!Objects.equal(processor, null));
-            if (_notEquals) {
+            if ((processor != null)) {
               processor.apply(unconfirmed);
             }
           }
@@ -141,8 +139,7 @@ public class JdtQueuedBuildData implements IQueuedBuildDataContribution {
   protected boolean namesIntersect(final IResourceDescription resourceDescription, final Set<QualifiedName> names) {
     boolean _xblockexpression = false;
     {
-      boolean _equals = Objects.equal(resourceDescription, null);
-      if (_equals) {
+      if ((resourceDescription == null)) {
         return false;
       }
       Iterable<IEObjectDescription> _exportedObjects = resourceDescription.getExportedObjects();

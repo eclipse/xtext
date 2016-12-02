@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.idea.generator.parser.antlr;
 
-import com.google.common.base.Objects;
 import com.google.inject.Singleton;
 import org.eclipse.xpand2.XpandExecutionContext;
 import org.eclipse.xpand2.output.Outlet;
@@ -39,16 +38,15 @@ public class XtextIDEAGeneratorExtensions {
   
   protected void installOutlet(final Xtend2ExecutionContext it, final String pathIdeaPluginProject, final String outletName, final String projectPath, final String encoding, final boolean overwrite, final String defaultOutletName, final String lineDelimiter) {
     Outlet _outlet = this.getOutlet(it, outletName);
-    boolean _notEquals = (!Objects.equal(_outlet, null));
-    if (_notEquals) {
+    boolean _tripleNotEquals = (_outlet != null);
+    if (_tripleNotEquals) {
       return;
     }
     final Outlet outlet = new Outlet(outletName);
     outlet.setName(outletName);
     outlet.setOverwrite(overwrite);
     String _xifexpression = null;
-    boolean _notEquals_1 = (!Objects.equal(encoding, null));
-    if (_notEquals_1) {
+    if ((encoding != null)) {
       _xifexpression = encoding;
     } else {
       Outlet _outlet_1 = this.getOutlet(it, defaultOutletName);
@@ -56,8 +54,7 @@ public class XtextIDEAGeneratorExtensions {
     }
     outlet.setFileEncoding(_xifexpression);
     String _xifexpression_1 = null;
-    boolean _notEquals_2 = (!Objects.equal(pathIdeaPluginProject, null));
-    if (_notEquals_2) {
+    if ((pathIdeaPluginProject != null)) {
       _xifexpression_1 = (pathIdeaPluginProject + projectPath);
     } else {
       Outlet _outlet_2 = this.getOutlet(it, defaultOutletName);

@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.xbase.ui.tests.editor;
 
-import com.google.common.base.Objects;
 import com.google.inject.Injector;
 import java.io.InputStream;
 import org.eclipse.core.resources.IProject;
@@ -51,8 +50,7 @@ public class AbstractXbaseContentAssistBugTest extends AbstractXbaseUITestCase i
   
   @Override
   public void tearDown() throws Exception {
-    boolean _notEquals = (!Objects.equal(this.demandCreateProject, null));
-    if (_notEquals) {
+    if ((this.demandCreateProject != null)) {
       JavaProjectSetupUtil.deleteProject(this.demandCreateProject);
     }
     super.tearDown();
@@ -67,7 +65,7 @@ public class AbstractXbaseContentAssistBugTest extends AbstractXbaseUITestCase i
   public IJavaProject getJavaProject(final ResourceSet resourceSet) {
     final String projectName = this.getProjectName();
     IJavaProject javaProject = JavaProjectSetupUtil.findJavaProject(projectName);
-    if ((Objects.equal(javaProject, null) || (!javaProject.exists()))) {
+    if (((javaProject == null) || (!javaProject.exists()))) {
       try {
         IProject _createPluginProject = AbstractXbaseUITestCase.createPluginProject(projectName);
         this.demandCreateProject = _createPluginProject;

@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.builder.debug;
 
-import com.google.common.base.Objects;
 import com.google.common.base.Throwables;
 import com.google.common.collect.Iterables;
 import com.google.inject.Singleton;
@@ -44,8 +43,7 @@ public class XtextBuildConsole extends IOConsole {
     
     @Override
     public void log(final Object it) {
-      boolean _notEquals = (!Objects.equal(XtextBuildConsole.Logger.delegate, null));
-      if (_notEquals) {
+      if ((XtextBuildConsole.Logger.delegate != null)) {
         XtextBuildConsole.Logger.delegate.log(it);
       }
       ConsolePlugin _default = ConsolePlugin.getDefault();

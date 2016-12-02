@@ -107,7 +107,7 @@ public class RuleEngineValidator extends AbstractRuleEngineValidator {
   @Check
   public void checkRuleRecursion(final XFeatureCall featureCall) {
     final Rule containingRule = EcoreUtil2.<Rule>getContainerOfType(featureCall, Rule.class);
-    if (((((!Objects.equal(containingRule, null)) && (featureCall.getFeature() instanceof JvmOperation)) && Objects.equal(featureCall.getConcreteSyntaxFeatureName(), "fire")) && (featureCall.getFeatureCallArguments().size() == 1))) {
+    if (((((containingRule != null) && (featureCall.getFeature() instanceof JvmOperation)) && Objects.equal(featureCall.getConcreteSyntaxFeatureName(), "fire")) && (featureCall.getFeatureCallArguments().size() == 1))) {
       EList<XExpression> _featureCallArguments = featureCall.getFeatureCallArguments();
       final XExpression argument = IterableExtensions.<XExpression>head(_featureCallArguments);
       if ((argument instanceof XAbstractFeatureCall)) {

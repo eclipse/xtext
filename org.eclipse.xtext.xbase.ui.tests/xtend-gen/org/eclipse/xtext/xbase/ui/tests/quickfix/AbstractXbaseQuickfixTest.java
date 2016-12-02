@@ -1,6 +1,5 @@
 package org.eclipse.xtext.xbase.ui.tests.quickfix;
 
-import com.google.common.base.Objects;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import java.io.InputStream;
@@ -33,8 +32,7 @@ public abstract class AbstractXbaseQuickfixTest extends AbstractXbaseUITestCase 
   
   @Override
   public void tearDown() throws Exception {
-    boolean _notEquals = (!Objects.equal(this.demandCreateProject, null));
-    if (_notEquals) {
+    if ((this.demandCreateProject != null)) {
       JavaProjectSetupUtil.deleteProject(this.demandCreateProject);
     }
     super.tearDown();
@@ -44,7 +42,7 @@ public abstract class AbstractXbaseQuickfixTest extends AbstractXbaseUITestCase 
   public IJavaProject getJavaProject(final ResourceSet resourceSet) {
     final String projectName = this.getProjectName();
     IJavaProject javaProject = JavaProjectSetupUtil.findJavaProject(projectName);
-    if ((Objects.equal(javaProject, null) || (!javaProject.exists()))) {
+    if (((javaProject == null) || (!javaProject.exists()))) {
       try {
         IProject _createPluginProject = AbstractXbaseUITestCase.createPluginProject(projectName);
         this.demandCreateProject = _createPluginProject;

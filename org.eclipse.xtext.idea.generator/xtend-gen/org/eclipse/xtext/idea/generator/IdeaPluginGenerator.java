@@ -957,8 +957,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
   }
   
   public String getEncoding() {
-    boolean _notEquals = (!Objects.equal(this.encoding, null));
-    if (_notEquals) {
+    if ((this.encoding != null)) {
       return this.encoding;
     }
     return System.getProperty("file.encoding");
@@ -2466,7 +2465,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
           _builder.newLine();
           _builder.append("\t");
           _builder.append("\t");
-          _builder.append("if (hasSemanticElement != null && hasSemanticElement) {");
+          _builder.append("if (hasSemanticElement !== null && hasSemanticElement) {");
           _builder.newLine();
           _builder.append("\t");
           _builder.append("\t\t");

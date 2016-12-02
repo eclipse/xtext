@@ -1,6 +1,5 @@
 package org.eclipse.xtext.builder;
 
-import com.google.common.base.Objects;
 import java.io.InputStream;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
@@ -48,8 +47,7 @@ public class ParallelFileSystemAccess implements IFileSystemAccess2 {
       if ((this.delegate instanceof EclipseResourceFileSystemAccess2)) {
         ((EclipseResourceFileSystemAccess2)this.delegate).setPostProcessor(this.fileCallback);
       }
-      boolean _notEquals = (!Objects.equal(this.sourceFolder, null));
-      if (_notEquals) {
+      if ((this.sourceFolder != null)) {
         if ((this.delegate instanceof AbstractFileSystemAccess)) {
           ((AbstractFileSystemAccess)this.delegate).setCurrentSource(this.sourceFolder);
         }
