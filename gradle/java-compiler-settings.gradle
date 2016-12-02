@@ -54,6 +54,6 @@ eclipse {
 
 	project {
 		natures 'org.eclipse.xtext.ui.shared.xtextNature'
-		buildCommand 'org.eclipse.xtext.ui.shared.xtextBuilder'
+		buildCommands.add(0,new org.gradle.plugins.ide.eclipse.model.BuildCommand('org.eclipse.xtext.ui.shared.xtextBuilder'))
 	}
 }
