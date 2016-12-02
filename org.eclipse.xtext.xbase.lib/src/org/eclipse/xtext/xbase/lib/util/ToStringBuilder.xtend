@@ -271,7 +271,7 @@ final class ToStringBuilder {
 		do {
 			result += current.declaredFields
 			current = current.superclass
-		} while (current != null)
+		} while (current !== null)
 		return result
 	}
 
@@ -335,7 +335,7 @@ package class ToStringContext {
 	}
 
 	def boolean startProcessing(Object obj) {
-		currentlyProcessed.get.put(obj, Boolean.TRUE) == null
+		currentlyProcessed.get.put(obj, Boolean.TRUE) === null
 	}
 
 	def void endProcessing(Object obj) {

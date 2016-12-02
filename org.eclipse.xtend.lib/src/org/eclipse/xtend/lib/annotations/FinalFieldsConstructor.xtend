@@ -88,7 +88,7 @@ class FinalFieldsConstructorProcessor implements TransformationParticipant<Mutab
 		}
 
 		def getFinalFields(MutableTypeDeclaration it) {
-			declaredFields.filter[!static && final == true && initializer == null && thePrimaryGeneratedJavaElement]
+			declaredFields.filter[!static && final == true && initializer === null && thePrimaryGeneratedJavaElement]
 		}
 
 		def needsFinalFieldConstructor(MutableClassDeclaration it) {
@@ -170,7 +170,7 @@ class FinalFieldsConstructorProcessor implements TransformationParticipant<Mutab
 
 		def getSuperConstructor(TypeDeclaration it) {
 			if (it instanceof ClassDeclaration) {
-				if (extendedClass == object || extendedClass == null)
+				if (extendedClass == object || extendedClass === null)
 					return null;
 				return extendedClass.declaredResolvedConstructors.head
 			} else {

@@ -77,7 +77,7 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
     
     public boolean hasValidType(final MemberDeclaration it) {
       boolean _xifexpression = false;
-      if ((Objects.equal(this.getType(it), null) || this.getType(it).isInferred())) {
+      if (((this.getType(it) == null) || this.getType(it).isInferred())) {
         boolean _xblockexpression = false;
         {
           this.context.addError(it, "Cannot use inferred types on delegates");
@@ -328,7 +328,7 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
         };
         Iterable<TypeReference> _map_1 = IterableExtensions.map(_resolvedParameters, _function_2);
         MethodDeclaration _findDeclaredMethod = _declaringType.findDeclaredMethod(_simpleName, ((TypeReference[])Conversions.unwrapArray(_map_1, TypeReference.class)));
-        return Boolean.valueOf(Objects.equal(_findDeclaredMethod, null));
+        return Boolean.valueOf((_findDeclaredMethod == null));
       };
       Iterable<ResolvedMethod> _filter = IterableExtensions.<ResolvedMethod>filter(_flatten, _function_1);
       final Function1<ResolvedMethod, Boolean> _function_2 = (ResolvedMethod it) -> {

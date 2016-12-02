@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xbase.lib.util;
 
 import com.google.common.annotations.GwtCompatible;
-import com.google.common.base.Objects;
 import java.util.IdentityHashMap;
 
 /**
@@ -29,7 +28,7 @@ class ToStringContext {
   public boolean startProcessing(final Object obj) {
     IdentityHashMap<Object, Boolean> _get = ToStringContext.currentlyProcessed.get();
     Boolean _put = _get.put(obj, Boolean.TRUE);
-    return Objects.equal(_put, null);
+    return (_put == null);
   }
   
   public void endProcessing(final Object obj) {

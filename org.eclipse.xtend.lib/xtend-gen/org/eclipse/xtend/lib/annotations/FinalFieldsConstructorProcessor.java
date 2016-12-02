@@ -63,7 +63,7 @@ public class FinalFieldsConstructorProcessor implements TransformationParticipan
     public Iterable<? extends MutableFieldDeclaration> getFinalFields(final MutableTypeDeclaration it) {
       Iterable<? extends MutableFieldDeclaration> _declaredFields = it.getDeclaredFields();
       final Function1<MutableFieldDeclaration, Boolean> _function = (MutableFieldDeclaration it_1) -> {
-        return Boolean.valueOf(((((!it_1.isStatic()) && (it_1.isFinal() == true)) && Objects.equal(it_1.getInitializer(), null)) && this.context.isThePrimaryGeneratedJavaElement(it_1)));
+        return Boolean.valueOf(((((!it_1.isStatic()) && (it_1.isFinal() == true)) && (it_1.getInitializer() == null)) && this.context.isThePrimaryGeneratedJavaElement(it_1)));
       };
       return IterableExtensions.filter(_declaredFields, _function);
     }
@@ -250,7 +250,7 @@ public class FinalFieldsConstructorProcessor implements TransformationParticipan
     
     public ResolvedConstructor getSuperConstructor(final TypeDeclaration it) {
       if ((it instanceof ClassDeclaration)) {
-        if ((Objects.equal(((ClassDeclaration)it).getExtendedClass(), this.context.getObject()) || Objects.equal(((ClassDeclaration)it).getExtendedClass(), null))) {
+        if ((Objects.equal(((ClassDeclaration)it).getExtendedClass(), this.context.getObject()) || (((ClassDeclaration)it).getExtendedClass() == null))) {
           return null;
         }
         TypeReference _extendedClass = ((ClassDeclaration)it).getExtendedClass();

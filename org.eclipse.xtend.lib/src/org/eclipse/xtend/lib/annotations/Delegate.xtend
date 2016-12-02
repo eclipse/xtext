@@ -113,7 +113,7 @@ class DelegateProcessor implements TransformationParticipant<MutableMemberDeclar
 		}
 
 		def hasValidType(MemberDeclaration it) {
-			if (type == null || type.inferred) {
+			if (type === null || type.inferred) {
 				addError("Cannot use inferred types on delegates")
 				false
 			} else {
@@ -216,7 +216,7 @@ class DelegateProcessor implements TransformationParticipant<MutableMemberDeclar
 
 		def getMethodsToImplement(MemberDeclaration delegate) {
 			delegate.delegatedInterfaces.map[declaredResolvedMethods].flatten
-				.filter[delegate.declaringType.findDeclaredMethod(declaration.simpleName, resolvedParameters.map[resolvedType]) == null]
+				.filter[delegate.declaringType.findDeclaredMethod(declaration.simpleName, resolvedParameters.map[resolvedType]) === null]
 				.filter[!isObjectMethod]
 				.groupBy[simpleSignature].values.map[head]
 				.toSet
