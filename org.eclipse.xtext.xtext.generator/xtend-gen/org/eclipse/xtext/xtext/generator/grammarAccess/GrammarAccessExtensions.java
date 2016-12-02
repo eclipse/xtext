@@ -176,8 +176,7 @@ public class GrammarAccessExtensions {
   
   private String toJavaIdentifierSegment(final String text, final boolean isFirst, final boolean uppercaseFirst) {
     final String special = GrammarAccessExtensions.SPECIAL_CHARS.get(text);
-    boolean _notEquals = (!Objects.equal(special, null));
-    if (_notEquals) {
+    if ((special != null)) {
       String _xifexpression = null;
       if (uppercaseFirst) {
         _xifexpression = StringExtensions.toFirstUpper(special);
@@ -197,8 +196,7 @@ public class GrammarAccessExtensions {
     for (final char c : _charArray) {
       {
         final String n = this.getUnicodeName(c);
-        boolean _notEquals_1 = (!Objects.equal(n, null));
-        if (_notEquals_1) {
+        if ((n != null)) {
           builder.append((n + " "));
         }
       }
@@ -917,8 +915,8 @@ public class GrammarAccessExtensions {
     boolean _matched = false;
     if (it instanceof RuleCall) {
       AbstractRule _rule = ((RuleCall)it).getRule();
-      boolean _notEquals = (!Objects.equal(_rule, null));
-      if (_notEquals) {
+      boolean _tripleNotEquals = (_rule != null);
+      if (_tripleNotEquals) {
         _matched=true;
         _switchResult = AntlrGrammarGenUtil.getQualifiedNameAsString(((RuleCall)it));
       }
@@ -944,8 +942,7 @@ public class GrammarAccessExtensions {
   private ISerializer getSerializer() {
     final String delimiter = this.codeConfig.getLineDelimiter();
     ISerializer result = this.xtextSerializerByLineDelimiter.get(delimiter);
-    boolean _notEquals = (!Objects.equal(result, null));
-    if (_notEquals) {
+    if ((result != null)) {
       return result;
     }
     final ILineSeparatorInformation _function = () -> {

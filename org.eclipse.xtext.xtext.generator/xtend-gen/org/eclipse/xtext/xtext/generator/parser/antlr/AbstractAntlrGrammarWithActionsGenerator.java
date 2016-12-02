@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.xtext.generator.parser.antlr;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.util.Arrays;
 import java.util.List;
@@ -629,11 +628,11 @@ public abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractA
   }
   
   protected boolean _mustBeParenthesized(final Keyword it) {
-    return ((this._grammarAccessExtensions.predicated(it) || it.isFirstSetPredicated()) || (!Objects.equal(it.getCardinality(), null)));
+    return ((this._grammarAccessExtensions.predicated(it) || it.isFirstSetPredicated()) || (it.getCardinality() != null));
   }
   
   protected boolean _mustBeParenthesized(final RuleCall it) {
-    return ((this._grammarAccessExtensions.predicated(it) || it.isFirstSetPredicated()) || (!Objects.equal(it.getCardinality(), null)));
+    return ((this._grammarAccessExtensions.predicated(it) || it.isFirstSetPredicated()) || (it.getCardinality() != null));
   }
   
   protected CharSequence compileInitHiddenTokens(final AbstractRule it, final AntlrOptions options) {

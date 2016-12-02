@@ -49,7 +49,7 @@ class PomFile extends TextFile {
 						<version>${project.version}</version>
 					</dependency>
 				«ENDFOR»
-				«FOR dep : project.externalDependencies.map[maven].filter[artifactId != null]»
+				«FOR dep : project.externalDependencies.map[maven].filter[artifactId !== null]»
 					<dependency>
 						<groupId>«dep.groupId»</groupId>
 						<artifactId>«dep.artifactId»</artifactId>

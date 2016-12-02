@@ -21,7 +21,7 @@ import org.eclipse.xtext.xtext.wizard.Ecore2XtextConfiguration
 
 class Ecore2XtextExtensions {
 	def static allConcreteRuleClassifiers(Ecore2XtextConfiguration it) {
-		if (rootElementClass == null) {
+		if (rootElementClass === null) {
 			getEPackageInfos.map([allReferencedClassifiers(getEPackage, false)]).flatten.toSet.filter([
 				needsConcreteRule(it)
 			])
@@ -33,7 +33,7 @@ class Ecore2XtextExtensions {
 	}
 
 	def static Collection<EClass> allDispatcherRuleClasses(Ecore2XtextConfiguration it) {
-		if (rootElementClass == null)
+		if (rootElementClass === null)
 			getEPackageInfos.map([allReferencedClassifiers(getEPackage, false)]).flatten.toSet.filter([c|
 				needsDispatcherRule(c)
 			]).filter(EClass).toSet
@@ -76,7 +76,7 @@ class Ecore2XtextExtensions {
 	}
 
 	def static fqn(EClassifier it) {
-		if (getEPackage?.uniqueName == null)
+		if (getEPackage?.uniqueName === null)
 			quoteIfNeccesary(name)
 		else
 			getEPackage.uniqueName + "::" + quoteIfNeccesary(name)
@@ -177,7 +177,7 @@ class Ecore2XtextExtensions {
 
 	def static idAttribute(EClass it) {
 		val idAttr = idAttributeInternal(it)
-		if (idAttr != null)
+		if (idAttr !== null)
 			idAttr
 		else
 			getEAllAttributes.findFirst([a|
@@ -244,7 +244,7 @@ class Ecore2XtextExtensions {
 	}
 
 	def static subClasses(EClass it) {
-		if (getEPackage == null)
+		if (getEPackage === null)
 			emptyList
 		else
 			getEPackage.getEClassifiers.filter(EClass).filter(c|c.getEAllSuperTypes.contains(it));

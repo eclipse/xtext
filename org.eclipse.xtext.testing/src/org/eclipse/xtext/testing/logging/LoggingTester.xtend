@@ -53,7 +53,7 @@ import org.junit.Assert
 
 		def assertNumberOfLogEntries(int number, Level level, String... messageParts) {
 			val passed = logEntries.filter [ log |
-				(level == null || log.level == level) && messageParts.forall[log.message.contains(it)]
+				(level === null || log.level == level) && messageParts.forall[log.message.contains(it)]
 			]
 			if (passed.size != number) {
 				Assert.fail(
@@ -65,7 +65,7 @@ import org.junit.Assert
 						«ELSE»
 							Expected «number» log entries
 						«ENDIF»
-						«IF level != null»
+						«IF level !== null»
 							with «level» level
 						«ENDIF»
 						containing the phrases «messageParts.join(", ")['"' + it + '"']»
@@ -107,7 +107,7 @@ import org.junit.Assert
 
 	private static def appenderHierarchy(Logger logger) {
 		val appenders = newArrayList
-		for (var Category current = logger; current != null; current = current.parent) {
+		for (var Category current = logger; current !== null; current = current.parent) {
 			appenders.addAll(Collections.<Appender>list(current.allAppenders))
 		}
 		appenders
@@ -118,7 +118,7 @@ import org.junit.Assert
 			appender.clearFilters
 			appender.addFilter(filter.getNext)
 		} else {
-			for (var current = appender.filter; current != null; current = current.getNext) {
+			for (var current = appender.filter; current !== null; current = current.getNext) {
 				if (current.getNext == filter) {
 					current.setNext(filter.getNext)
 					return

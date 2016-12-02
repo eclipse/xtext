@@ -47,7 +47,7 @@ class RefactorElementNameFragment2 extends AbstractXtextGeneratorFragment {
 	}
 
 	override generate() {
-		if (projectConfig.eclipsePlugin?.manifest != null) {
+		if (projectConfig.eclipsePlugin?.manifest !== null) {
 			projectConfig.eclipsePlugin.manifest.requiredBundles += "org.eclipse.xtext.ui"
 		}
 
@@ -108,7 +108,7 @@ class RefactorElementNameFragment2 extends AbstractXtextGeneratorFragment {
 
 		bindings.contributeTo(language.eclipsePluginGenModule);
 		
-		if (projectConfig.eclipsePlugin?.pluginXml != null) {
+		if (projectConfig.eclipsePlugin?.pluginXml !== null) {
 			projectConfig.eclipsePlugin.pluginXml.entries += '''
 				<!-- Rename Refactoring -->
 				<extension point="org.eclipse.ui.handlers">

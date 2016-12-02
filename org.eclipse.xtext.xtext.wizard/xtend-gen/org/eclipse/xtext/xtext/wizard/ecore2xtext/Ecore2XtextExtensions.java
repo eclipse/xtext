@@ -34,8 +34,8 @@ public class Ecore2XtextExtensions {
   public static Iterable<EClassifier> allConcreteRuleClassifiers(final Ecore2XtextConfiguration it) {
     Iterable<EClassifier> _xifexpression = null;
     EClass _rootElementClass = it.getRootElementClass();
-    boolean _equals = Objects.equal(_rootElementClass, null);
-    if (_equals) {
+    boolean _tripleEquals = (_rootElementClass == null);
+    if (_tripleEquals) {
       Set<EPackageInfo> _ePackageInfos = it.getEPackageInfos();
       final Function1<EPackageInfo, Set<EClassifier>> _function = (EPackageInfo it_1) -> {
         EPackage _ePackage = it_1.getEPackage();
@@ -70,8 +70,8 @@ public class Ecore2XtextExtensions {
   public static Collection<EClass> allDispatcherRuleClasses(final Ecore2XtextConfiguration it) {
     Set<EClass> _xifexpression = null;
     EClass _rootElementClass = it.getRootElementClass();
-    boolean _equals = Objects.equal(_rootElementClass, null);
-    if (_equals) {
+    boolean _tripleEquals = (_rootElementClass == null);
+    if (_tripleEquals) {
       Set<EPackageInfo> _ePackageInfos = it.getEPackageInfos();
       final Function1<EPackageInfo, Set<EClassifier>> _function = (EPackageInfo it_1) -> {
         EPackage _ePackage = it_1.getEPackage();
@@ -188,8 +188,8 @@ public class Ecore2XtextExtensions {
     if (_ePackage!=null) {
       _uniqueName=UniqueNameUtil.uniqueName(_ePackage);
     }
-    boolean _equals = Objects.equal(_uniqueName, null);
-    if (_equals) {
+    boolean _tripleEquals = (_uniqueName == null);
+    if (_tripleEquals) {
       String _name = it.getName();
       _xifexpression = Ecore2XtextExtensions.quoteIfNeccesary(_name);
     } else {
@@ -400,8 +400,7 @@ public class Ecore2XtextExtensions {
     {
       final EAttribute idAttr = Ecore2XtextExtensions.idAttributeInternal(it);
       EAttribute _xifexpression = null;
-      boolean _notEquals = (!Objects.equal(idAttr, null));
-      if (_notEquals) {
+      if ((idAttr != null)) {
         _xifexpression = idAttr;
       } else {
         EList<EAttribute> _eAllAttributes = it.getEAllAttributes();
@@ -507,8 +506,8 @@ public class Ecore2XtextExtensions {
   public static Iterable<EClass> subClasses(final EClass it) {
     Iterable<EClass> _xifexpression = null;
     EPackage _ePackage = it.getEPackage();
-    boolean _equals = Objects.equal(_ePackage, null);
-    if (_equals) {
+    boolean _tripleEquals = (_ePackage == null);
+    if (_tripleEquals) {
       _xifexpression = CollectionLiterals.<EClass>emptyList();
     } else {
       EPackage _ePackage_1 = it.getEPackage();

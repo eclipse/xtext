@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.xtext.generator.ui.outline;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.Set;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
@@ -53,8 +52,8 @@ public class OutlineTreeProviderFragment2 extends AbstractStubGeneratingFragment
     IXtextProjectConfig _projectConfig = this.getProjectConfig();
     IBundleProjectConfig _eclipsePlugin = _projectConfig.getEclipsePlugin();
     ManifestAccess _manifest = _eclipsePlugin.getManifest();
-    boolean _notEquals = (!Objects.equal(_manifest, null));
-    if (_notEquals) {
+    boolean _tripleNotEquals = (_manifest != null);
+    if (_tripleNotEquals) {
       IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
       IBundleProjectConfig _eclipsePlugin_1 = _projectConfig_1.getEclipsePlugin();
       ManifestAccess _manifest_1 = _eclipsePlugin_1.getManifest();
@@ -69,8 +68,8 @@ public class OutlineTreeProviderFragment2 extends AbstractStubGeneratingFragment
     IXtextProjectConfig _projectConfig_2 = this.getProjectConfig();
     IBundleProjectConfig _eclipsePlugin_2 = _projectConfig_2.getEclipsePlugin();
     IXtextGeneratorFileSystemAccess _src = _eclipsePlugin_2.getSrc();
-    boolean _tripleNotEquals = (_src != null);
-    if (_tripleNotEquals) {
+    boolean _tripleNotEquals_1 = (_src != null);
+    if (_tripleNotEquals_1) {
       boolean _isGenerateXtendStub = this.isGenerateXtendStub();
       if (_isGenerateXtendStub) {
         this.generateXtendOutlineTreeProvider();

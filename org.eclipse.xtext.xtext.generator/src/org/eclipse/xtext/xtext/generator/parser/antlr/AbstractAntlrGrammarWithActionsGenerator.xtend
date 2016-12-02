@@ -229,11 +229,11 @@ abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractAntlrGra
 	}
 	
 	dispatch def mustBeParenthesized(Keyword it) {
-		predicated() || firstSetPredicated || cardinality != null
+		predicated() || firstSetPredicated || cardinality !== null
 	}
 
 	dispatch def mustBeParenthesized(RuleCall it) {
-		predicated() || firstSetPredicated || cardinality != null
+		predicated() || firstSetPredicated || cardinality !== null
 	}
 	
 }

@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.xtext.generator.ui.labeling;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.Set;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
@@ -110,8 +109,8 @@ public class LabelProviderFragment2 extends AbstractStubGeneratingFragment {
       IXtextProjectConfig _projectConfig = this.getProjectConfig();
       IBundleProjectConfig _eclipsePlugin = _projectConfig.getEclipsePlugin();
       ManifestAccess _manifest = _eclipsePlugin.getManifest();
-      boolean _notEquals = (!Objects.equal(_manifest, null));
-      if (_notEquals) {
+      boolean _tripleNotEquals = (_manifest != null);
+      if (_tripleNotEquals) {
         IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
         IBundleProjectConfig _eclipsePlugin_1 = _projectConfig_1.getEclipsePlugin();
         ManifestAccess _manifest_1 = _eclipsePlugin_1.getManifest();

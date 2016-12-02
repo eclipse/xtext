@@ -113,8 +113,7 @@ public class ManifestAccess extends TextFileAccess implements IGuiceAwareGenerat
       }
       this.exportedPackages.addAll(other.exportedPackages);
       this.requiredBundles.addAll(other.requiredBundles);
-      boolean _notEquals_5 = (!Objects.equal(this.symbolicName, null));
-      if (_notEquals_5) {
+      if ((this.symbolicName != null)) {
         String _effectiveSymbolicName = this.getEffectiveSymbolicName();
         this.requiredBundles.remove(_effectiveSymbolicName);
       }
@@ -250,8 +249,7 @@ public class ManifestAccess extends TextFileAccess implements IGuiceAwareGenerat
   @Override
   public void writeTo(final IFileSystemAccess2 fileSystemAccess) {
     try {
-      boolean _notEquals = (!Objects.equal(fileSystemAccess, null));
-      if (_notEquals) {
+      if ((fileSystemAccess != null)) {
         CharSequence _content = this.getContent();
         StringBuffer _stringBuffer = new StringBuffer(_content);
         final String contentToWrite = MergeableManifest.make512Safe(_stringBuffer, this.lineDelimiter);

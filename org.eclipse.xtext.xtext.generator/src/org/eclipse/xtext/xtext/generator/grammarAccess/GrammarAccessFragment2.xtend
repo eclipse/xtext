@@ -210,7 +210,7 @@ class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
 				
 				protected «Grammar» internalFindGrammar(«GrammarProvider» grammarProvider) {
 					«Grammar» grammar = grammarProvider.getGrammar(this);
-					while (grammar != null) {
+					while (grammar !== null) {
 						if ("«language.grammar.name»".equals(grammar.getName())) {
 							return grammar;
 						}

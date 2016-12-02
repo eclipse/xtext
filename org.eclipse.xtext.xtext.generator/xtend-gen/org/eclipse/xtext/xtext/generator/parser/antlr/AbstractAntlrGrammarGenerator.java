@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.xtext.generator.parser.antlr;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import java.util.ArrayList;
@@ -212,8 +211,8 @@ public abstract class AbstractAntlrGrammarGenerator {
     {
       GrammarNaming _grammarNaming_1 = this.getGrammarNaming();
       TypeReference _internalParserSuperClass = _grammarNaming_1.getInternalParserSuperClass(it);
-      boolean _notEquals = (!Objects.equal(_internalParserSuperClass, null));
-      if (_notEquals) {
+      boolean _tripleNotEquals = (_internalParserSuperClass != null);
+      if (_tripleNotEquals) {
         _builder.append("\t");
         _builder.append("superClass=");
         GrammarNaming _grammarNaming_2 = this.getGrammarNaming();
@@ -1157,7 +1156,7 @@ public abstract class AbstractAntlrGrammarGenerator {
   }
   
   protected boolean _mustBeParenthesized(final Group it) {
-    return ((this._grammarAccessExtensions.predicated(it) || it.isFirstSetPredicated()) || (!Objects.equal(it.getCardinality(), null)));
+    return ((this._grammarAccessExtensions.predicated(it) || it.isFirstSetPredicated()) || (it.getCardinality() != null));
   }
   
   protected boolean _mustBeParenthesized(final Assignment it) {

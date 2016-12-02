@@ -29,7 +29,7 @@ import org.eclipse.xtext.xtext.wizard.WizardConfiguration
 		grammar «config.language.name» with org.eclipse.xtext.common.Terminals
 		
 		«FOR it: allReferencedEPackages»
-		import "«nsURI»" «IF uniqueName != null && uniqueName != ""»as «uniqueName»«ENDIF»
+		import "«nsURI»" «IF uniqueName !== null && uniqueName != ""»as «uniqueName»«ENDIF»
 		«ENDFOR»
 		
 		«rootElementClass.rules»
@@ -97,7 +97,7 @@ import org.eclipse.xtext.xtext.wizard.WizardConfiguration
 	}
 
 	def rules(EClassifier it) {
-		if (it != null && it.needsConcreteRule) {
+		if (it !== null && it.needsConcreteRule) {
 			rule(it)
 		}
 	}

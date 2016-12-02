@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.xtext.generator;
 
-import com.google.common.base.Objects;
 import com.google.inject.Injector;
 import java.nio.charset.Charset;
 import java.text.SimpleDateFormat;
@@ -89,8 +88,7 @@ public class CodeConfig implements IGuiceAwareGeneratorComponent {
       this.lineDelimiter = "\n";
     }
     String fileHeader = this.fileHeaderTemplate;
-    boolean _notEquals = (!Objects.equal(fileHeader, null));
-    if (_notEquals) {
+    if ((fileHeader != null)) {
       boolean _contains = fileHeader.contains(CodeConfig.FILE_HEADER_VAR_TIME);
       if (_contains) {
         final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
@@ -118,8 +116,7 @@ public class CodeConfig implements IGuiceAwareGeneratorComponent {
       boolean _contains_3 = fileHeader.contains(CodeConfig.FILE_HEADER_VAR_USER);
       if (_contains_3) {
         final String user = System.getProperty("user.name");
-        boolean _notEquals_1 = (!Objects.equal(user, null));
-        if (_notEquals_1) {
+        if ((user != null)) {
           String _replace_3 = fileHeader.replace(CodeConfig.FILE_HEADER_VAR_USER, user);
           fileHeader = _replace_3;
         }

@@ -375,7 +375,7 @@ class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
 		}
 		for (pack : generatedPackages) {
 			val genPackage = pack.getGenPackage(rs)
-			if (projectConfig.runtime.manifest !== null && modelPluginID == null) {
+			if (projectConfig.runtime.manifest !== null && modelPluginID === null) {
 				projectConfig.runtime.manifest.exportedPackages.addAll(
 					genPackage.interfacePackageName,
 					genPackage.classPackageName,
@@ -433,7 +433,7 @@ class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
 		val result = <String, EPackage>newHashMap
 		for (nsURI : packageNsURIs) {
 			val resource = getGenModelResource(null, nsURI, resourceSet)
-			if (resource != null) {
+			if (resource !== null) {
 				val loadedGenModel = resource.contents.filter(GenModel).head
 				if (loadedGenModel !== null) {
 					val genPackage = findGenPackageByNsURI(loadedGenModel, nsURI)
@@ -672,7 +672,7 @@ class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
 	protected def void doGenerate(GenModel genModel) {
 		val generator = new Generator {
 			override getJControlModel() {
-				if (jControlModel == null) {
+				if (jControlModel === null) {
 					jControlModel = new JControlModel
 					jControlModel.initialize(null, options.mergeRulesURI)
 				}

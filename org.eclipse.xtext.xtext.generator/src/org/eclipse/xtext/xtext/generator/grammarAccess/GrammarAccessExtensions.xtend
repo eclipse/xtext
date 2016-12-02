@@ -117,7 +117,7 @@ class GrammarAccessExtensions {
 
 	private def String toJavaIdentifierSegment(String text, boolean isFirst, boolean uppercaseFirst) {
 		val special = SPECIAL_CHARS.get(text);
-		if (special != null) {
+		if (special !== null) {
 			return if (uppercaseFirst) special.toFirstUpper else special
 		}
 		
@@ -128,7 +128,7 @@ class GrammarAccessExtensions {
 		val builder = new StringBuilder
 		for (c : text.toCharArray) {
 			val n = getUnicodeName(c)
-			if (n != null)
+			if (n !== null)
 				builder.append(n + ' ')
 		}
 		return toJavaIdentifierSegmentInt(builder.toString.toLowerCase.trim, isFirst, true)
@@ -542,7 +542,7 @@ class GrammarAccessExtensions {
 
 	def toStringLiteral(AbstractElement it) {
 		switch it {
-			RuleCall case rule != null: qualifiedNameAsString
+			RuleCall case rule !== null: qualifiedNameAsString
 			Keyword: '''"«value.toStringInAntlrAction»"'''
 			default:
 				"null"
@@ -552,7 +552,7 @@ class GrammarAccessExtensions {
 	private def ISerializer getSerializer() {
 		val delimiter = codeConfig.lineDelimiter
 		var result = xtextSerializerByLineDelimiter.get(delimiter)
-		if (result != null) {
+		if (result !== null) {
 			return result
 		}
 		val injector = Guice.createInjector(new LineSeparatorModule[delimiter])

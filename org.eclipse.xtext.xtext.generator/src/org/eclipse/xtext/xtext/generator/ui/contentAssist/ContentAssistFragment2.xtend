@@ -55,7 +55,7 @@ class ContentAssistFragment2 extends AbstractInheritingFragment {
 
 	def protected TypeReference getGenProposalProviderSuperClass(Grammar g) {
 		val superGrammar = g.usedGrammars.head
-		if(inheritImplementation && superGrammar != null)
+		if(inheritImplementation && superGrammar !== null)
 			superGrammar.proposalProviderClass
 		else getDefaultGenProposalProviderSuperClass
 	}
@@ -69,7 +69,7 @@ class ContentAssistFragment2 extends AbstractInheritingFragment {
 
 	override generate() {
 		
-		if (projectConfig.eclipsePlugin.manifest != null) {
+		if (projectConfig.eclipsePlugin.manifest !== null) {
 			projectConfig.eclipsePlugin.manifest.requiredBundles += "org.eclipse.xtext.ui"
 		}
 
@@ -84,11 +84,11 @@ class ContentAssistFragment2 extends AbstractInheritingFragment {
 			generateGenJavaProposalProvider
 		}
 
-		if (isGenerateStub && projectConfig.eclipsePlugin.src != null) {
+		if (isGenerateStub && projectConfig.eclipsePlugin.src !== null) {
 			if (generateXtendStub) {
 				generateXtendProposalProviderStub
 
-				if (projectConfig.eclipsePlugin.manifest != null) {
+				if (projectConfig.eclipsePlugin.manifest !== null) {
 					projectConfig.eclipsePlugin.manifest.requiredBundles += "org.eclipse.xtext.xbase.lib"
 					projectConfig.eclipsePlugin.manifest.requiredBundles += "org.eclipse.xtend.lib;resolution:=optional"
 				}
@@ -97,7 +97,7 @@ class ContentAssistFragment2 extends AbstractInheritingFragment {
 			}
 		}
 
-		if (projectConfig.eclipsePlugin.manifest != null) {
+		if (projectConfig.eclipsePlugin.manifest !== null) {
 			projectConfig.eclipsePlugin.manifest.exportedPackages += grammar.proposalProviderClass.packageName
 		}
 	}
@@ -280,7 +280,7 @@ class ContentAssistFragment2 extends AbstractInheritingFragment {
 	}
 
 	def getFQFeatureNamesToExclude(Grammar g) {
-		if (g.nonTerminalsSuperGrammar != null) {
+		if (g.nonTerminalsSuperGrammar !== null) {
 			val thisGrammarFqFeatureNames = g.computeFQFeatureNames.toSet
 			val superGrammarsFqFeatureNames = g.allUsedGrammars.map[
 				computeFQFeatureNames

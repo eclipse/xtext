@@ -30,7 +30,7 @@ class TextFileAccess {
 	}
 
 	def void writeTo(IFileSystemAccess2 fileSystemAccess) {
-		if (fileSystemAccess != null) {
+		if (fileSystemAccess !== null) {
 			fileSystemAccess.generateFile(path, content)
 		}
 	}

@@ -59,7 +59,7 @@ class NamedSerializationContextProvider {
 					pr = GrammarUtil.containingParserRule(action)
 				}
 			}
-			if (pr != null) {
+			if (pr !== null) {
 				val i = rules.get(pr)
 				if (i < index) {
 					index = i

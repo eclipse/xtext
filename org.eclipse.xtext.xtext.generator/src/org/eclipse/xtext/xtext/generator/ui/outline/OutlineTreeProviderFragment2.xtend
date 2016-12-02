@@ -33,7 +33,7 @@ class OutlineTreeProviderFragment2 extends AbstractStubGeneratingFragment {
 	}
 
 	override generate() {
-		if (projectConfig.eclipsePlugin.manifest != null) {
+		if (projectConfig.eclipsePlugin.manifest !== null) {
 			projectConfig.eclipsePlugin.manifest.requiredBundles += "org.eclipse.xtext.ui"
 		}
 		

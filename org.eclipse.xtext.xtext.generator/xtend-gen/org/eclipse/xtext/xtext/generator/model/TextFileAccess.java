@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.xtext.generator.model;
 
-import com.google.common.base.Objects;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
@@ -37,8 +36,7 @@ public class TextFileAccess {
   }
   
   public void writeTo(final IFileSystemAccess2 fileSystemAccess) {
-    boolean _notEquals = (!Objects.equal(fileSystemAccess, null));
-    if (_notEquals) {
+    if ((fileSystemAccess != null)) {
       CharSequence _content = this.getContent();
       fileSystemAccess.generateFile(this.path, _content);
     }

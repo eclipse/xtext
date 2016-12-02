@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.xtext.generator.serializer;
 
-import com.google.common.base.Objects;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -105,8 +104,7 @@ public class NamedSerializationContextProvider {
             pr = _containingParserRule;
           }
         }
-        boolean _notEquals = (!Objects.equal(pr, null));
-        if (_notEquals) {
+        if ((pr != null)) {
           final Integer i = this.rules.get(pr);
           if (((i).intValue() < index)) {
             index = (i).intValue();

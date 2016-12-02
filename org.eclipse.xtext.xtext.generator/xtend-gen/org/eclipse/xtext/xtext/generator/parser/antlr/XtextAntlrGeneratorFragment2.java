@@ -164,8 +164,8 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
     IXtextProjectConfig _projectConfig = this.getProjectConfig();
     IBundleProjectConfig _genericIde = _projectConfig.getGenericIde();
     IXtextGeneratorFileSystemAccess _srcGen = _genericIde.getSrcGen();
-    boolean _notEquals = (!Objects.equal(_srcGen, null));
-    if (_notEquals) {
+    boolean _tripleNotEquals = (_srcGen != null);
+    if (_tripleNotEquals) {
       this.generateContentAssistGrammar();
       this.addIdeBindingsAndImports();
     }
@@ -918,7 +918,7 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
           _builder.append(" element) {");
           _builder.newLineIfNotEmpty();
           _builder.append("\t\t");
-          _builder.append("if (nameMappings == null) {");
+          _builder.append("if (nameMappings === null) {");
           _builder.newLine();
           _builder.append("\t\t\t");
           _builder.append("nameMappings = new ");

@@ -1,6 +1,5 @@
 package org.eclipse.xtext.xtext.generator.junit;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import java.util.Collections;
@@ -61,8 +60,8 @@ public class Junit4Fragment2 extends AbstractStubGeneratingFragment {
     IXtextProjectConfig _projectConfig = this.getProjectConfig();
     IBundleProjectConfig _runtimeTest = _projectConfig.getRuntimeTest();
     ManifestAccess _manifest = _runtimeTest.getManifest();
-    boolean _notEquals = (!Objects.equal(_manifest, null));
-    if (_notEquals) {
+    boolean _tripleNotEquals = (_manifest != null);
+    if (_tripleNotEquals) {
       IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
       IBundleProjectConfig _runtimeTest_1 = _projectConfig_1.getRuntimeTest();
       ManifestAccess _manifest_1 = _runtimeTest_1.getManifest();
@@ -82,8 +81,8 @@ public class Junit4Fragment2 extends AbstractStubGeneratingFragment {
     IXtextProjectConfig _projectConfig_2 = this.getProjectConfig();
     IBundleProjectConfig _eclipsePluginTest = _projectConfig_2.getEclipsePluginTest();
     ManifestAccess _manifest_2 = _eclipsePluginTest.getManifest();
-    boolean _notEquals_1 = (!Objects.equal(_manifest_2, null));
-    if (_notEquals_1) {
+    boolean _tripleNotEquals_1 = (_manifest_2 != null);
+    if (_tripleNotEquals_1) {
       IXtextProjectConfig _projectConfig_3 = this.getProjectConfig();
       IBundleProjectConfig _eclipsePluginTest_1 = _projectConfig_3.getEclipsePluginTest();
       ManifestAccess _manifest_3 = _eclipsePluginTest_1.getManifest();
@@ -104,8 +103,8 @@ public class Junit4Fragment2 extends AbstractStubGeneratingFragment {
     IXtextProjectConfig _projectConfig_4 = this.getProjectConfig();
     IBundleProjectConfig _eclipsePlugin = _projectConfig_4.getEclipsePlugin();
     ManifestAccess _manifest_4 = _eclipsePlugin.getManifest();
-    boolean _notEquals_2 = (!Objects.equal(_manifest_4, null));
-    if (_notEquals_2) {
+    boolean _tripleNotEquals_2 = (_manifest_4 != null);
+    if (_tripleNotEquals_2) {
       IXtextProjectConfig _projectConfig_5 = this.getProjectConfig();
       IBundleProjectConfig _eclipsePlugin_1 = _projectConfig_5.getEclipsePlugin();
       ManifestAccess _manifest_5 = _eclipsePlugin_1.getManifest();
@@ -149,8 +148,8 @@ public class Junit4Fragment2 extends AbstractStubGeneratingFragment {
     IXtextProjectConfig _projectConfig_10 = this.getProjectConfig();
     IBundleProjectConfig _eclipsePlugin_2 = _projectConfig_10.getEclipsePlugin();
     IXtextGeneratorFileSystemAccess _srcGen_1 = _eclipsePlugin_2.getSrcGen();
-    boolean _tripleNotEquals = (_srcGen_1 != null);
-    if (_tripleNotEquals) {
+    boolean _tripleNotEquals_3 = (_srcGen_1 != null);
+    if (_tripleNotEquals_3) {
       JavaFileAccess _generateUiInjectorProvider = this.generateUiInjectorProvider();
       IXtextProjectConfig _projectConfig_11 = this.getProjectConfig();
       IBundleProjectConfig _eclipsePluginTest_3 = _projectConfig_11.getEclipsePluginTest();
@@ -327,7 +326,7 @@ public class Junit4Fragment2 extends AbstractStubGeneratingFragment {
           _builder.append(" getInjector() {");
           _builder.newLineIfNotEmpty();
           _builder.append("\t\t");
-          _builder.append("if (injector == null) {");
+          _builder.append("if (injector === null) {");
           _builder.newLine();
           _builder.append("\t\t\t");
           _builder.append("stateBeforeInjectorCreation = ");

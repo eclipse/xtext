@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.xtext.generator.ui.outline;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.List;
 import java.util.Set;
@@ -38,8 +37,8 @@ public class QuickOutlineFragment2 extends AbstractXtextGeneratorFragment {
     IXtextProjectConfig _projectConfig = this.getProjectConfig();
     IBundleProjectConfig _eclipsePlugin = _projectConfig.getEclipsePlugin();
     ManifestAccess _manifest = _eclipsePlugin.getManifest();
-    boolean _notEquals = (!Objects.equal(_manifest, null));
-    if (_notEquals) {
+    boolean _tripleNotEquals = (_manifest != null);
+    if (_tripleNotEquals) {
       IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
       IBundleProjectConfig _eclipsePlugin_1 = _projectConfig_1.getEclipsePlugin();
       ManifestAccess _manifest_1 = _eclipsePlugin_1.getManifest();
@@ -49,8 +48,8 @@ public class QuickOutlineFragment2 extends AbstractXtextGeneratorFragment {
     IXtextProjectConfig _projectConfig_2 = this.getProjectConfig();
     IBundleProjectConfig _eclipsePlugin_2 = _projectConfig_2.getEclipsePlugin();
     PluginXmlAccess _pluginXml = _eclipsePlugin_2.getPluginXml();
-    boolean _notEquals_1 = (!Objects.equal(_pluginXml, null));
-    if (_notEquals_1) {
+    boolean _tripleNotEquals_1 = (_pluginXml != null);
+    if (_tripleNotEquals_1) {
       IXtextProjectConfig _projectConfig_3 = this.getProjectConfig();
       IBundleProjectConfig _eclipsePlugin_3 = _projectConfig_3.getEclipsePlugin();
       PluginXmlAccess _pluginXml_1 = _eclipsePlugin_3.getPluginXml();

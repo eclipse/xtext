@@ -724,7 +724,7 @@ public class XtextGeneratorTemplates {
         _builder.append(" binder) {");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t");
-        _builder.append("if (properties == null || properties.getProperty(Constants.FILE_EXTENSIONS) == null)");
+        _builder.append("if (properties === null || properties.getProperty(Constants.FILE_EXTENSIONS) === null)");
         _builder.newLine();
         _builder.append("\t\t\t");
         _builder.append("binder.bind(String.class).annotatedWith(");
@@ -1790,7 +1790,7 @@ public class XtextGeneratorTemplates {
         _builder.append(" injector = injectors.get(language);");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t\t");
-        _builder.append("if (injector == null) {");
+        _builder.append("if (injector === null) {");
         _builder.newLine();
         _builder.append("\t\t\t\t");
         _builder.append("injectors.put(language, injector = createInjector(language));");

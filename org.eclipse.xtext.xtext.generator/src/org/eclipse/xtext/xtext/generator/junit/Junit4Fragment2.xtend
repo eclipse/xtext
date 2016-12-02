@@ -28,7 +28,7 @@ class Junit4Fragment2 extends AbstractStubGeneratingFragment {
 	}
 	
 	override generate() {
-		if (projectConfig.runtimeTest.manifest != null) {
+		if (projectConfig.runtimeTest.manifest !== null) {
 			projectConfig.runtimeTest.manifest => [
 				requiredBundles.addAll(
 					testingPackage,
@@ -37,7 +37,7 @@ class Junit4Fragment2 extends AbstractStubGeneratingFragment {
 				exportedPackages.add(grammar.runtimeTestBasePackage+";x-internal=true")
 			]
 		}
-		if (projectConfig.eclipsePluginTest.manifest != null) {
+		if (projectConfig.eclipsePluginTest.manifest !== null) {
 			projectConfig.eclipsePluginTest.manifest => [
 				requiredBundles.addAll(
 					testingPackage,
@@ -47,7 +47,7 @@ class Junit4Fragment2 extends AbstractStubGeneratingFragment {
 				exportedPackages.add(grammar.eclipsePluginTestBasePackage+";x-internal=true")
 			]
 		}
-		if (projectConfig.eclipsePlugin.manifest != null) {
+		if (projectConfig.eclipsePlugin.manifest !== null) {
 			projectConfig.eclipsePlugin.manifest.exportedPackages.add(eclipsePluginActivator.packageName)
 		}
 		
@@ -123,7 +123,7 @@ class Junit4Fragment2 extends AbstractStubGeneratingFragment {
 			
 				@Override
 				public «Injector» getInjector() {
-					if (injector == null) {
+					if (injector === null) {
 						stateBeforeInjectorCreation = «globalRegistries».makeCopyOfGlobalState();
 						this.injector = internalCreateInjector();
 						stateAfterInjectorCreation = «globalRegistries».makeCopyOfGlobalState();

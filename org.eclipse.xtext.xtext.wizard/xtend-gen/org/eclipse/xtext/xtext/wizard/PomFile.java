@@ -183,7 +183,7 @@ public class PomFile extends TextFile {
           Iterable<ExternalDependency.MavenCoordinates> _map = IterableExtensions.<ExternalDependency, ExternalDependency.MavenCoordinates>map(_externalDependencies, _function);
           final Function1<ExternalDependency.MavenCoordinates, Boolean> _function_1 = (ExternalDependency.MavenCoordinates it) -> {
             String _artifactId = it.getArtifactId();
-            return Boolean.valueOf((!Objects.equal(_artifactId, null)));
+            return Boolean.valueOf((_artifactId != null));
           };
           Iterable<ExternalDependency.MavenCoordinates> _filter = IterableExtensions.<ExternalDependency.MavenCoordinates>filter(_map, _function_1);
           for(final ExternalDependency.MavenCoordinates dep : _filter) {

@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.xtext.generator.resourceFactory;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.List;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -84,8 +83,8 @@ public class ResourceFactoryFragment2 extends AbstractXtextGeneratorFragment {
     if (_eclipsePlugin!=null) {
       _pluginXml=_eclipsePlugin.getPluginXml();
     }
-    boolean _notEquals = (!Objects.equal(_pluginXml, null));
-    if (_notEquals) {
+    boolean _tripleNotEquals = (_pluginXml != null);
+    if (_tripleNotEquals) {
       IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
       IBundleProjectConfig _eclipsePlugin_1 = _projectConfig_1.getEclipsePlugin();
       PluginXmlAccess _pluginXml_1 = _eclipsePlugin_1.getPluginXml();

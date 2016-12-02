@@ -127,7 +127,7 @@ import org.eclipse.xtext.util.internal.Log
 		}
 		for (action : grammar.containedActions) {
 			val featureName = action.feature
-			if (featureName != null) {
+			if (featureName !== null) {
 				val type = action.type.classifier
 				if (type instanceof EClass) {
 					val feature = type.getEStructuralFeature(featureName)
@@ -152,7 +152,7 @@ import org.eclipse.xtext.util.internal.Log
 
 	protected def TypeReference getStubSuperClass() {
 		val superGrammar = language.grammar.nonTerminalsSuperGrammar
-		if (superGrammar != null)
+		if (superGrammar !== null)
 			return superGrammar.formatter2Stub
 		else
 			return AbstractFormatter2.typeRef

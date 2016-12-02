@@ -472,7 +472,7 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
         _builder.append(" grammar = grammarProvider.getGrammar(this);");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t");
-        _builder.append("while (grammar != null) {");
+        _builder.append("while (grammar !== null) {");
         _builder.newLine();
         _builder.append("\t\t\t");
         _builder.append("if (\"");

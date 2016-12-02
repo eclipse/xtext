@@ -39,7 +39,7 @@ class InMemoryURIHandler implements URIHandler {
 		}
 
 		def InputStream createInputStream() {
-			if (contents == null || !exists) {
+			if (contents === null || !exists) {
 				throw new IOException("File " + uri + " does not exist.")
 			}
 			return new ByteArrayInputStream(contents)
@@ -83,7 +83,7 @@ class InMemoryURIHandler implements URIHandler {
 
 	protected def getInMemoryFile(URI uri) {
 		var result = files.get(uri)
-		if (result == null) {
+		if (result === null) {
 			result = new InMemFile(uri)
 			files.put(uri, result)
 		}

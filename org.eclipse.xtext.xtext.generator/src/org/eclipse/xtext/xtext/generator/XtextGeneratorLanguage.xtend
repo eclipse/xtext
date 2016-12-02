@@ -125,7 +125,7 @@ class XtextGeneratorLanguage extends CompositeGeneratorFragment2 implements IXte
 	}
 	
 	override isGenerateXtendStubs() {
-		if (generateXtendStubs != null) generateXtendStubs.booleanValue else codeConfig.preferXtendStubs
+		if (generateXtendStubs !== null) generateXtendStubs.booleanValue else codeConfig.preferXtendStubs
 	}
 	
 	override initialize(Injector injector) {
@@ -146,7 +146,7 @@ class XtextGeneratorLanguage extends CompositeGeneratorFragment2 implements IXte
 			}
 			EcoreUtil.resolveAll(resourceSet)
 		}
-		if (getGrammarUri == null) {
+		if (getGrammarUri === null) {
 			throw new IllegalStateException("No grammarUri or language name given")
 		}
 		val resource = resourceSet.getResource(URI.createURI(getGrammarUri), true) as XtextResource
@@ -186,9 +186,9 @@ class XtextGeneratorLanguage extends CompositeGeneratorFragment2 implements IXte
 
 	private def void index(Resource resource, URI uri, ResourceDescriptionsData index) {
 		val serviceProvider = IResourceServiceProvider.Registry.INSTANCE.getResourceServiceProvider(uri)
-		if (serviceProvider != null) {
+		if (serviceProvider !== null) {
 			val resourceDescription = serviceProvider.resourceDescriptionManager.getResourceDescription(resource)
-			if (resourceDescription != null) {
+			if (resourceDescription !== null) {
 				index.addDescription(uri, resourceDescription)
 			}
 		}
@@ -203,7 +203,7 @@ class XtextGeneratorLanguage extends CompositeGeneratorFragment2 implements IXte
 				override add(Diagnostic diagnostic) {
 					if (diagnostic.severity == Diagnostic.ERROR) {
 						val grammarName = "Validation Error in " + grammar.name + ": "
-						if (diagnostic.exception == null)
+						if (diagnostic.exception === null)
 							throw new IllegalStateException(grammarName + diagnostic.message)
 						else
 							throw new IllegalStateException(grammarName + diagnostic.message, diagnostic.exception)
@@ -234,7 +234,7 @@ class XtextGeneratorLanguage extends CompositeGeneratorFragment2 implements IXte
 	}
 
 	protected def void validateReferencedMetamodel(ReferencedMetamodel ref) {
-		if (ref.EPackage != null && !ref.EPackage.eIsProxy) {
+		if (ref.EPackage !== null && !ref.EPackage.eIsProxy) {
 			return
 		}
 		val eref = XtextPackage.Literals.ABSTRACT_METAMODEL_DECLARATION__EPACKAGE

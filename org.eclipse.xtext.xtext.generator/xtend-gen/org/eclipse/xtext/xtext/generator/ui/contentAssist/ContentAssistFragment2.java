@@ -93,7 +93,7 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
       EList<Grammar> _usedGrammars = g.getUsedGrammars();
       final Grammar superGrammar = IterableExtensions.<Grammar>head(_usedGrammars);
       TypeReference _xifexpression = null;
-      if ((this.isInheritImplementation() && (!Objects.equal(superGrammar, null)))) {
+      if ((this.isInheritImplementation() && (superGrammar != null))) {
         _xifexpression = this.getProposalProviderClass(superGrammar);
       } else {
         _xifexpression = this.getDefaultGenProposalProviderSuperClass();
@@ -115,8 +115,8 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
     IXtextProjectConfig _projectConfig = this.getProjectConfig();
     IBundleProjectConfig _eclipsePlugin = _projectConfig.getEclipsePlugin();
     ManifestAccess _manifest = _eclipsePlugin.getManifest();
-    boolean _notEquals = (!Objects.equal(_manifest, null));
-    if (_notEquals) {
+    boolean _tripleNotEquals = (_manifest != null);
+    if (_tripleNotEquals) {
       IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
       IBundleProjectConfig _eclipsePlugin_1 = _projectConfig_1.getEclipsePlugin();
       ManifestAccess _manifest_1 = _eclipsePlugin_1.getManifest();
@@ -134,19 +134,19 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
     IXtextProjectConfig _projectConfig_2 = this.getProjectConfig();
     IBundleProjectConfig _eclipsePlugin_2 = _projectConfig_2.getEclipsePlugin();
     IXtextGeneratorFileSystemAccess _srcGen = _eclipsePlugin_2.getSrcGen();
-    boolean _tripleNotEquals = (_srcGen != null);
-    if (_tripleNotEquals) {
+    boolean _tripleNotEquals_1 = (_srcGen != null);
+    if (_tripleNotEquals_1) {
       this.generateGenJavaProposalProvider();
     }
-    if ((this.isGenerateStub() && (!Objects.equal(this.getProjectConfig().getEclipsePlugin().getSrc(), null)))) {
+    if ((this.isGenerateStub() && (this.getProjectConfig().getEclipsePlugin().getSrc() != null))) {
       boolean _isGenerateXtendStub = this.isGenerateXtendStub();
       if (_isGenerateXtendStub) {
         this.generateXtendProposalProviderStub();
         IXtextProjectConfig _projectConfig_3 = this.getProjectConfig();
         IBundleProjectConfig _eclipsePlugin_3 = _projectConfig_3.getEclipsePlugin();
         ManifestAccess _manifest_2 = _eclipsePlugin_3.getManifest();
-        boolean _notEquals_1 = (!Objects.equal(_manifest_2, null));
-        if (_notEquals_1) {
+        boolean _tripleNotEquals_2 = (_manifest_2 != null);
+        if (_tripleNotEquals_2) {
           IXtextProjectConfig _projectConfig_4 = this.getProjectConfig();
           IBundleProjectConfig _eclipsePlugin_4 = _projectConfig_4.getEclipsePlugin();
           ManifestAccess _manifest_3 = _eclipsePlugin_4.getManifest();
@@ -165,8 +165,8 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
     IXtextProjectConfig _projectConfig_6 = this.getProjectConfig();
     IBundleProjectConfig _eclipsePlugin_6 = _projectConfig_6.getEclipsePlugin();
     ManifestAccess _manifest_5 = _eclipsePlugin_6.getManifest();
-    boolean _notEquals_2 = (!Objects.equal(_manifest_5, null));
-    if (_notEquals_2) {
+    boolean _tripleNotEquals_3 = (_manifest_5 != null);
+    if (_tripleNotEquals_3) {
       IXtextProjectConfig _projectConfig_7 = this.getProjectConfig();
       IBundleProjectConfig _eclipsePlugin_7 = _projectConfig_7.getEclipsePlugin();
       ManifestAccess _manifest_6 = _eclipsePlugin_7.getManifest();
@@ -641,8 +641,8 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
   public Set<String> getFQFeatureNamesToExclude(final Grammar g) {
     Set<String> _xifexpression = null;
     Grammar _nonTerminalsSuperGrammar = GrammarUtil2.getNonTerminalsSuperGrammar(g);
-    boolean _notEquals = (!Objects.equal(_nonTerminalsSuperGrammar, null));
-    if (_notEquals) {
+    boolean _tripleNotEquals = (_nonTerminalsSuperGrammar != null);
+    if (_tripleNotEquals) {
       Sets.SetView<String> _xblockexpression = null;
       {
         Iterable<String> _computeFQFeatureNames = this.computeFQFeatureNames(g);

@@ -72,7 +72,7 @@ class XtextVersion {
 		} catch (Exception e) {
 			return null;
 		} finally {
-			if (is != null) {
+			if (is !== null) {
 				try {
 					is.close()
 				} catch (IOException e) {
