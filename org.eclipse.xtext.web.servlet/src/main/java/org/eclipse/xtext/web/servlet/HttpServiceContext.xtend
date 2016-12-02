@@ -69,7 +69,7 @@ class HttpServiceContext implements IServiceContext {
 	}
 	
 	override getSession() {
-		if (sessionWrapper == null)
+		if (sessionWrapper === null)
 			sessionWrapper = new HttpSessionWrapper(request.getSession(true))
 		return sessionWrapper
 	}

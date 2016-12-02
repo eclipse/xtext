@@ -119,8 +119,7 @@ public class HttpServiceContext implements IServiceContext {
   
   @Override
   public ISession getSession() {
-    boolean _equals = Objects.equal(this.sessionWrapper, null);
-    if (_equals) {
+    if ((this.sessionWrapper == null)) {
       HttpSession _session = this.request.getSession(true);
       HttpSessionWrapper _httpSessionWrapper = new HttpSessionWrapper(_session);
       this.sessionWrapper = _httpSessionWrapper;

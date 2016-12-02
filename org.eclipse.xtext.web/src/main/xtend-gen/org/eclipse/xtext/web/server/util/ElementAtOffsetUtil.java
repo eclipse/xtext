@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.web.server.util;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
@@ -28,13 +27,11 @@ public class ElementAtOffsetUtil {
   
   public EObject getElementAt(final XtextResource resource, final int offset) {
     EObject crossLinkedEObject = this._eObjectAtOffsetHelper.resolveCrossReferencedElementAt(resource, offset);
-    boolean _notEquals = (!Objects.equal(crossLinkedEObject, null));
-    if (_notEquals) {
+    if ((crossLinkedEObject != null)) {
       return crossLinkedEObject;
     } else {
       EObject containedEObject = this._eObjectAtOffsetHelper.resolveContainedElementAt(resource, offset);
-      boolean _notEquals_1 = (!Objects.equal(containedEObject, null));
-      if (_notEquals_1) {
+      if ((containedEObject != null)) {
         final ITextRegion nameRegion = this._iLocationInFileProvider.getSignificantTextRegion(containedEObject);
         boolean _contains = nameRegion.contains(offset);
         if (_contains) {
