@@ -462,7 +462,7 @@ class LoadedByClasspathFromSourceFolderTest extends AbstractURIHandlerWithEcoreT
 	
 	override getPackagedReferencedURI() {
 		var url = classLoader.getResource("org/eclipse/xtext/resource/mydsl.ecore")
-		if (url == null)
+		if (url === null)
 			url = classLoader.getResource("/org/eclipse/xtext/resource/mydsl.ecore")
 		val urlAsString = url.toString
 		return URI.createURI(urlAsString)
@@ -489,7 +489,7 @@ class LoadedByClasspathFromMavenStructureTest extends AbstractURIHandlerWithEcor
 	
 	override getPackagedReferencedURI() {
 		var url = classLoader.getResource("org/eclipse/xtext/resource/mydsl.ecore")
-		if (url == null)
+		if (url === null)
 			url = classLoader.getResource("/org/eclipse/xtext/resource/mydsl.ecore")
 		val urlAsString = url.toString
 		return URI.createURI(urlAsString)
@@ -521,7 +521,7 @@ class LoadedByClasspathBothFromMavenStructureTest extends AbstractURIHandlerWith
 	
 	override getPackagedReferencedURI() {
 		var url = classLoader.getResource("org/eclipse/xtext/resource/mydsl.ecore")
-		if (url == null)
+		if (url === null)
 			url = classLoader.getResource("/org/eclipse/xtext/resource/mydsl.ecore")
 		val urlAsString = url.toString
 		return URI.createURI(urlAsString)

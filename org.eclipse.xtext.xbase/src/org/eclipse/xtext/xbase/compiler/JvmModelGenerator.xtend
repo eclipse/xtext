@@ -126,7 +126,7 @@ class JvmModelGenerator implements IGenerator {
 	def dispatch void internalDoGenerate(JvmDeclaredType type, IFileSystemAccess fsa) {
 		if (DisableCodeGenerationAdapter.isDisabled(type))
 			return;
-		if(type.qualifiedName != null)
+		if(type.qualifiedName !== null)
 			fsa.generateFile(type.qualifiedName.replace('.', '/') + '.java', type.generateType(generatorConfigProvider.get(type)))
 	}
 	
@@ -143,7 +143,7 @@ class JvmModelGenerator implements IGenerator {
 		bodyAppendable.closeScope
 		val importAppendable = createAppendable(type, importManager, config)
         generateFileHeader(type, importAppendable, config)
-		if (type.packageName != null) {
+		if (type.packageName !== null) {
 			importAppendable.append("package ").append(type.packageName).append(";");
 			importAppendable.newLine.newLine
 		}
@@ -197,7 +197,7 @@ class JvmModelGenerator implements IGenerator {
 	def generateAnnotationsWithSyntheticSuppressWarnings(JvmDeclaredType it, ITreeAppendable appendable, GeneratorConfig config) {
 		val noSuppressWarningsFilter = [JvmAnnotationReference it | annotation?.identifier != SuppressWarnings.name]
 		annotations.filter(noSuppressWarningsFilter).generateAnnotations(appendable, true, config)
-		if (it.eContainer == null)
+		if (it.eContainer === null)
 			appendable.append('''@SuppressWarnings("all")''').newLine
 	}
 
@@ -274,25 +274,25 @@ class JvmModelGenerator implements IGenerator {
 	}
 
 	def void generateDefaultExpression(JvmOperation it, ITreeAppendable appendable, GeneratorConfig config) {
-		if (compilationStrategy != null) {
+		if (compilationStrategy !== null) {
 			appendable.append(" default ")
 			appendable.increaseIndentation
 			compilationStrategy.apply(appendable)
 			appendable.decreaseIndentation
-		} else if (compilationTemplate != null) {
+		} else if (compilationTemplate !== null) {
 			appendable.append(" default ").increaseIndentation
 			appendCompilationTemplate(appendable, it)
 			appendable.decreaseIndentation
 		} else if (config.generateExpressions) {
 			val body = associatedExpression
-			if(body != null) {
+			if(body !== null) {
 				if(body.hasErrors()) {
 					appendable.append("/* skipped default expression with errors */")
 				} else {
 					appendable.append(" default ")
 					compiler.compileAsJavaExpression(body, appendable, returnType)
 				}
-			} else if (defaultValue != null) {
+			} else if (defaultValue !== null) {
 				if(defaultValue.hasErrors()) {
 					appendable.append("/* skipped default expression with errors */")
 				} else {
@@ -382,7 +382,7 @@ class JvmModelGenerator implements IGenerator {
 	 * Returns the visibility modifier and a space as suffix if not empty
 	 */
 	def javaName(JvmVisibility visibility) {
-		if (visibility != null)
+		if (visibility !== null)
 			return switch visibility {
 					case JvmVisibility.PRIVATE : 'private '
 					case JvmVisibility.PUBLIC : 'public '
@@ -410,7 +410,7 @@ class JvmModelGenerator implements IGenerator {
 			val withoutObject = superTypes.filter [ typeRef | typeRef.identifier != implicitSuperType ]
 			val superClazz = withoutObject.filter(typeRef | typeRef.type instanceof JvmGenericType && !(typeRef.type as JvmGenericType).isInterface).head
 			val superInterfaces = withoutObject.filter(typeRef | typeRef != superClazz)
-			if (superClazz != null) {
+			if (superClazz !== null) {
 				val hasErrors = superClazz.hasErrors()
 				if(hasErrors) 
 					appendable.append('/* ')
@@ -468,7 +468,7 @@ class JvmModelGenerator implements IGenerator {
 		annotations.generateAnnotations(tracedAppendable, true, config)
 		generateModifier(tracedAppendable, config)
 		generateTypeParameterDeclaration(tracedAppendable, config)
-		if (returnType == null) {
+		if (returnType === null) {
 			tracedAppendable.append("void")
 		} else {
 			returnType.serializeSafely("Object", tracedAppendable)
@@ -509,7 +509,7 @@ class JvmModelGenerator implements IGenerator {
 	}
 	
 	def void generateInitialization(JvmField it, ITreeAppendable appendable, GeneratorConfig config) {
-		if (compilationStrategy != null) {
+		if (compilationStrategy !== null) {
 			val errors = directErrorsOrLogicallyContainedErrors
 			if (errors.isEmpty) {
 				appendable.append(" = ")
@@ -519,7 +519,7 @@ class JvmModelGenerator implements IGenerator {
 			} else {
 				appendable.append(" /* Skipped initializer because of errors */")
 			}
-		} else if (compilationTemplate != null) {
+		} else if (compilationTemplate !== null) {
 			val errors = directErrorsOrLogicallyContainedErrors
 			if (errors.isEmpty) {
 				appendable.append(" = ").increaseIndentation
@@ -530,7 +530,7 @@ class JvmModelGenerator implements IGenerator {
 			}
 		} else {
 			val expression = associatedExpression
-			if (expression != null && config.generateExpressions) {
+			if (expression !== null && config.generateExpressions) {
 				if(expression.hasErrors()) {
 					appendable.append(" /* Skipped initializer because of errors */")
 				} else {
@@ -606,7 +606,7 @@ class JvmModelGenerator implements IGenerator {
 	}
 	
 	def hasBody(JvmExecutable it) {
-		compilationTemplate != null || compilationStrategy != null || associatedExpression != null
+		compilationTemplate !== null || compilationStrategy !== null || associatedExpression !== null
 	}
 	
 	/**
@@ -618,7 +618,7 @@ class JvmModelGenerator implements IGenerator {
 		var errors = feature.errors
 		if(errors.empty) {
 			val expression = feature.associatedExpression
-			if (expression != null) {
+			if (expression !== null) {
 				errors = expression.errors
 			}
 		}
@@ -626,7 +626,7 @@ class JvmModelGenerator implements IGenerator {
 	}
 
 	def void generateExecutableBody(JvmExecutable op, ITreeAppendable appendable, GeneratorConfig config) {
-		if (op.compilationStrategy != null) {
+		if (op.compilationStrategy !== null) {
 			var errors = op.directErrorsOrLogicallyContainedErrors
 			if(errors.empty) {
 				appendable.increaseIndentation.append("{").newLine
@@ -635,7 +635,7 @@ class JvmModelGenerator implements IGenerator {
 			} else {
 				generateBodyWithIssues(appendable, errors)
 			}
-		} else if (op.compilationTemplate != null) {
+		} else if (op.compilationTemplate !== null) {
 			val errors = op.directErrorsOrLogicallyContainedErrors
 			if(errors.empty) {
 				appendable.increaseIndentation.append("{").newLine
@@ -646,7 +646,7 @@ class JvmModelGenerator implements IGenerator {
 			}
 		} else {
 			val expression = op.getAssociatedExpression
-			if (expression != null && config.generateExpressions) {
+			if (expression !== null && config.generateExpressions) {
 				val errors = expression.errors
 				if(errors.empty) {
 					val returnType = switch(op) { 
@@ -716,7 +716,7 @@ class JvmModelGenerator implements IGenerator {
 				}
 			}
 		}
-		if (superType != null)
+		if (superType !== null)
 			b.declareVariable(superType, 'super');
 	}
 	
@@ -732,7 +732,7 @@ class JvmModelGenerator implements IGenerator {
 				}
 			}
 		}
-		if (declaredType != null)
+		if (declaredType !== null)
 			b.declareVariable(declaredType, 'this');
 	}
 
@@ -779,13 +779,13 @@ class JvmModelGenerator implements IGenerator {
 		for(node : documentationNodes){
 			for(region : javaDocTypeReferenceProvider.computeTypeRefRegions(node)) {
 				val text = region.text
-				if(text != null && text.length > 0){
+				if(text !== null && text.length > 0){
 					val fqn = qualifiedNameConverter.toQualifiedName(text)
 					val context = NodeModelUtils.findActualSemanticObjectFor(node)
-					if(fqn.segmentCount == 1 && context != null){
+					if(fqn.segmentCount == 1 && context !== null){
 						val scope = scopeProvider.getScope(context, JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE)
 						val candidate = scope.getSingleElement(fqn)
-						if(candidate != null) {
+						if(candidate !== null) {
 							val jvmType = 	(
 											if(candidate.EObjectOrProxy.eIsProxy)
 												EcoreUtil.resolve(candidate.EObjectOrProxy, context)
@@ -856,8 +856,8 @@ class JvmModelGenerator implements IGenerator {
 	}
 	 
 	def void toJava(JvmAnnotationValue it, ITreeAppendable appendable, GeneratorConfig config) {
-		if (operation != null) {
-			if (operation.simpleName == null) {
+		if (operation !== null) {
+			if (operation.simpleName === null) {
 				return
 			}
 			appendable.append(operation.simpleName);
@@ -981,7 +981,7 @@ class JvmModelGenerator implements IGenerator {
 	}
 	
 	def JvmGenericType containerType(EObject context) {
-		if(context == null) 
+		if(context === null) 
 			null
 		else if(context instanceof JvmGenericType)
 			context
@@ -989,7 +989,7 @@ class JvmModelGenerator implements IGenerator {
 	}
 	
 	def protected String makeJavaIdentifier(String name) {
-		if (name == null) {
+		if (name === null) {
 			return "__unknown__";
 		} else if (keywords.isJavaKeyword(name)) {
 			name+"_"

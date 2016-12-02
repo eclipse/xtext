@@ -59,7 +59,7 @@ import java.util.Set
 
 	def String getStubSuperClassName() {
 		val superGrammar = grammar.nonTerminalsSuperGrammar
-		if (superGrammar != null)
+		if (superGrammar !== null)
 			return service.createGenerator(superGrammar).stubQualifiedName
 		else
 			return AbstractFormatter2.name
@@ -77,7 +77,7 @@ import java.util.Set
 		}
 		for (action : grammar.containedActions) {
 			val featureName = action.feature
-			if (featureName != null) {
+			if (featureName !== null) {
 				val type = action.type.classifier
 				if (type instanceof EClass) {
 					val feature = type.getEStructuralFeature(featureName)

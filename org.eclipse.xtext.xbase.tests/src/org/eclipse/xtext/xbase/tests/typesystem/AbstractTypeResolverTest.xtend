@@ -1991,7 +1991,7 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 	}
 	
 	@Test def void testFeatureCall_08() throws Exception {
-		"newArrayList('').map(s|s != null)".resolvesTo("List<Boolean>")
+		"newArrayList('').map(s|s !== null)".resolvesTo("List<Boolean>")
 	}
 	
 	@Test def void testFeatureCall_09() throws Exception {

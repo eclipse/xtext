@@ -146,11 +146,11 @@ class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
 		val errorHandler = createErrorHandler()
 			
 		var RuntimeException exception = null;
-		if (projectConfig.runtime?.srcGen != null) {
+		if (projectConfig.runtime?.srcGen !== null) {
 			exception = projectConfig.runtime.srcGen.loadAndCompareGrammars(Generator.SRC_GEN, errorHandler)
 		}
 		
-		if ((!failOnError || exception === null) && !skipContentAssistGrammarComparison && projectConfig.genericIde?.srcGen != null) {
+		if ((!failOnError || exception === null) && !skipContentAssistGrammarComparison && projectConfig.genericIde?.srcGen !== null) {
 			exception = projectConfig.genericIde.srcGen.loadAndCompareGrammars(Generator.SRC_GEN_IDE, errorHandler)
 		}
 		
@@ -302,7 +302,7 @@ class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
 		//  in 'AntlrFragmentHelperEx' defined above
 		new CombinedGrammarMarker(combined).attachToEmfObject(flattened)
 		
-		if (outlet == Generator.SRC_GEN && context.output.getOutlet(Generator.SRC_GEN) != null) {
+		if (outlet == Generator.SRC_GEN && context.output.getOutlet(Generator.SRC_GEN) !== null) {
 			
 			if (combined) {
 				template = XtextAntlrGeneratorFragment.name
@@ -314,7 +314,7 @@ class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
 			
 			XpandFacade.create(context).evaluate2(template.replaceAll("\\.", "::") + "::generate", flattened, params);
 			
-		} else if (outlet == Generator.SRC_GEN_IDE && context.output.getOutlet(Generator.SRC_GEN_IDE) != null) {
+		} else if (outlet == Generator.SRC_GEN_IDE && context.output.getOutlet(Generator.SRC_GEN_IDE) !== null) {
 			
 			if (combined) {
 				template = XtextAntlrUiGeneratorFragment.name

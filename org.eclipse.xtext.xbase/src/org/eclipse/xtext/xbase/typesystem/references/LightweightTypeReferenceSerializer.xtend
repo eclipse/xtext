@@ -31,7 +31,7 @@ class LightweightTypeReferenceSerializer extends TypeReferenceVisitor {
 			appender.append('(')
 			appendCommaSeparated(reference.parameterTypes)
 			appender.append(')=>')
-			if(reference.returnType == null)
+			if(reference.returnType === null)
 				appender.append('void')
 			else
 				reference.returnType.accept(this)
@@ -52,7 +52,7 @@ class LightweightTypeReferenceSerializer extends TypeReferenceVisitor {
 			appender.append('(')
 			appendCommaSeparated(reference.parameterTypes)
 			appender.append(')=>')
-			if(reference.returnType == null)
+			if(reference.returnType === null)
 				appender.append('void')
 			else
 				reference.returnType.accept(this)
@@ -93,7 +93,7 @@ class LightweightTypeReferenceSerializer extends TypeReferenceVisitor {
 	
 	override protected doVisitWildcardTypeReference(/* @NonNull */ WildcardTypeReference reference) {
 		appender.append('?')
-		if(reference.lowerBound != null) {
+		if(reference.lowerBound !== null) {
 			appender.append(" super ")
 			reference.lowerBound.accept(this)
 		} else {

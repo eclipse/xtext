@@ -913,7 +913,7 @@ abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test def void testFeatureCall_26() throws Exception {
-		"newArrayList('').map(s|s != null)".bindTypeArgumentsTo("String").and("String", "Boolean").done
+		"newArrayList('').map(s|s !== null)".bindTypeArgumentsTo("String").and("String", "Boolean").done
 	}
 	
 	@Test def void testFeatureCall_27() throws Exception {

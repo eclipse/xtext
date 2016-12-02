@@ -52,7 +52,7 @@ class ReusedTypeProviderTest extends AbstractTypeProviderTest {
 		try {
 			var String line = null;
 			val List<String> result = Lists.newArrayList();
-			while( (line = reader.readLine()) != null) {
+			while( (line = reader.readLine()) !== null) {
 				result.add(line);
 			}
 			return result;
@@ -63,7 +63,7 @@ class ReusedTypeProviderTest extends AbstractTypeProviderTest {
 	
 	override setUp() throws Exception {
 		super.setUp()
-		if (typeProvider == null) {
+		if (typeProvider === null) {
 			val pathToSources = "/org/eclipse/xtext/common/types/testSetups";
 			val files = readResource(pathToSources + "/files.list")
 			val part = new ResourceDescriptionsData(emptySet)

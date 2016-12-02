@@ -147,7 +147,7 @@ class ResourceStorageTest extends AbstractXbaseTestCase {
 			assertSame(orig.grammarElement, rest.grammarElement)
 			
 			assertTrue(orig.semanticElement !== null && rest.semanticElement !== null || orig.semanticElement === null && rest.semanticElement === null)
-			if (orig.semanticElement != null) {
+			if (orig.semanticElement !== null) {
 				assertEquals(file.eResource.getURIFragment(orig.semanticElement),resource.getURIFragment(rest.semanticElement))
 			}
 			

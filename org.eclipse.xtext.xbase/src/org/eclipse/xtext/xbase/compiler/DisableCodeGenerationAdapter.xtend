@@ -18,18 +18,18 @@ class DisableCodeGenerationAdapter extends AdapterImpl {
 	}
 	
 	def static boolean isDisabled(JvmDeclaredType type) { 
-		getAdapter(type) != null
+		getAdapter(type) !== null
 	}
 	
 	def static void disableCodeGeneration(JvmDeclaredType declaredType) {
-		if (getAdapter(declaredType) == null) {
+		if (getAdapter(declaredType) === null) {
 			declaredType.eAdapters.add(new DisableCodeGenerationAdapter)
 		}
 	}
 	
 	def static void enableCodeGeneration(JvmDeclaredType declaredType) {
 		val adapter = getAdapter(declaredType)
-		if (adapter != null) {
+		if (adapter !== null) {
 			declaredType.eAdapters.remove(adapter)
 		}
 	}

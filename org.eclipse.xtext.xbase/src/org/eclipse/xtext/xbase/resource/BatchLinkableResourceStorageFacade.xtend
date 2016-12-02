@@ -35,7 +35,7 @@ class BatchLinkableResourceStorageFacade extends ResourceStorageFacade {
 		if (mainProject !== null) {
 			val project = mainProject.workspaceConfig.findProjectContaining(uri)
 			val sourceFolder = project?.findSourceFolderContaining(uri)
-			if (sourceFolder != null) {
+			if (sourceFolder !== null) {
 				return sourceFolder.path
 			}
 		}

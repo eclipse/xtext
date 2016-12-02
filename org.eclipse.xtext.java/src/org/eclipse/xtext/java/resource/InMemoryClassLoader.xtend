@@ -28,7 +28,7 @@ class InMemoryClassLoader extends ClassLoader {
 		if (path.endsWith(".class")) {
 			val className = pathToClassName(path)
 			val bytes = classMap.get(className)
-			if (bytes != null) {
+			if (bytes !== null) {
 				return new URL("in-memory", null, -1, path, [
 					new URLConnection(it) {
 						override void connect() {}

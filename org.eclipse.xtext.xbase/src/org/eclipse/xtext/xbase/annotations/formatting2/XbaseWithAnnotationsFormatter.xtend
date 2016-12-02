@@ -19,7 +19,7 @@ class XbaseWithAnnotationsFormatter extends XbaseFormatter {
 	def dispatch void format(XAnnotation ann, extension IFormattableDocument document) {
 		ann.regionFor.keyword("@").append[noSpace]
 		ann.regionFor.keyword("(").surround[noSpace]
-		if (ann.value != null) {
+		if (ann.value !== null) {
 			ann.value.format
 			ann.regionFor.keyword(")").prepend[noSpace]
 		} else if (!ann.elementValuePairs.empty) {

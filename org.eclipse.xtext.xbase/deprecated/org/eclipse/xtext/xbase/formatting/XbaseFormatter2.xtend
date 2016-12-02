@@ -75,7 +75,7 @@ import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
 				for (elem : elements) {
 					if (elem == elements.head)
 						format += open.append[newLine; increaseIndentation]
-					else if (comma != null)
+					else if (comma !== null)
 						format += comma.append[newLine]
 					if (elem == elements.last)
 						format += elem.nodeForEObject.append[newLine; decreaseIndentation]
@@ -88,12 +88,12 @@ import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
 			var indented = false
 			for (elem : elements) {
 				if (format.fitsIntoLine(elem)) {
-					if (comma == null)
+					if (comma === null)
 						format += open.append[noSpace]
 					else
 						format += comma.append[oneSpace]
 				} else {
-					val n = if (comma == null) open else comma
+					val n = if (comma === null) open else comma
 					format += n.append[newLine]
 					if (!indented)
 						format += n.append[increaseIndentation]
@@ -117,7 +117,7 @@ import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
 	def protected dispatch void format(XAnnotation ann, FormattableDocument document) {
 		ann.nodeForKeyword("@") => [document += append[noSpace]]
 		ann.nodeForKeyword("(") => [document += prepend[noSpace] document += append[noSpace]]
-		if (ann.value != null) {
+		if (ann.value !== null) {
 			ann.value.format(document)
 			ann.nodeForKeyword(")") => [document += prepend[noSpace]]
 		} else if (!ann.elementValuePairs.empty) {
@@ -209,7 +209,7 @@ import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
 	def protected boolean fitsIntoLine(FormattableDocument fmt, EObject expression) {
 		val node = expression.nodeForEObject
 		val lookahead = fmt.lookahead(expression)
-		if (node == null || lookahead.contains("\n")) {
+		if (node === null || lookahead.contains("\n")) {
 			return false
 		} else {
 			val length = fmt.lineLengthBefore(node.offset) + lookahead.length
@@ -221,7 +221,7 @@ import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
 		val lookahead = new FormattableDocument(fmt)
 		format(expression, lookahead)
 		val node = expression.nodeForEObject
-		if (node != null) {
+		if (node !== null) {
 			val textRegion = node.textRegion
 			lookahead.renderToString(textRegion.offset, textRegion.length)
 		} else {
@@ -250,7 +250,7 @@ import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
 							format += head.prepend[increaseIndentation]
 						indented = true
 					}
-				} else if (node != null) {
+				} else if (node !== null) {
 					if (format.fitsIntoLine(arg)) {
 						format += node.append[oneSpace]
 					} else {
@@ -269,7 +269,7 @@ import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
 			}
 		if (indented)
 			format += explicitParams.last.nodeForEObject.append[decreaseIndentation]
-		if (builder != null) {
+		if (builder !== null) {
 			format += builder.nodeForEObject.prepend [
 				if (builder.isMultilineLambda)
 					oneSpace
@@ -281,7 +281,7 @@ import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
 	}
 
 	def protected XClosure builder(List<XExpression> params) {
-		if (params.last != null){
+		if (params.last !== null){
 			val grammarElement = (params.last.nodeForEObject as ICompositeNode).firstChild.grammarElement
 			if(grammarElement == XMemberFeatureCallAccess.memberCallArgumentsXClosureParserRuleCall_1_1_4_0 || 
 				grammarElement == XFeatureCallAccess.featureCallArgumentsXClosureParserRuleCall_4_0 ||
@@ -293,7 +293,7 @@ import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
 
 	def protected Iterable<XExpression> explicitParams(List<XExpression> params) {
 		val builder = params.builder
-		if (builder != null) params.take(params.size - 1) else params
+		if (builder !== null) params.take(params.size - 1) else params
 	}
 
 	def protected void formatFeatureCallParamsMultiline(INode open, List<XExpression> params, FormattableDocument format) {
@@ -308,7 +308,7 @@ import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
 				if (arg == explicitParams.head) {
 					val head = arg.nodeForEObject
 					format += head.prepend[newLine; increaseIndentation]
-				} else if (node != null)
+				} else if (node !== null)
 					format += node.append[newLine]
 				if (arg == explicitParams.last)
 					format += arg.nodeForEObject.append[newLine; decreaseIndentation]
@@ -316,7 +316,7 @@ import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
 				node = arg.nodeForEObject.immediatelyFollowingKeyword(",")
 				format += node.prepend[noSpace]
 			}
-		if (builder != null) {
+		if (builder !== null) {
 			format += builder.nodeForEObject.prepend [
 				if (builder.isMultilineLambda)
 					oneSpace
@@ -333,7 +333,7 @@ import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
 	 */
 	def protected boolean isMultilineLambda(XClosure closure) {
 		val closingBracket = closure.nodeForKeyword(']')
-		if (closingBracket?.hiddenLeafsBefore != null) {
+		if (closingBracket?.hiddenLeafsBefore !== null) {
 			return closingBracket.hiddenLeafsBefore.newLines > 0
 		}
 		return switch block : closure.expression {
@@ -398,7 +398,7 @@ import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
 
 	def protected dispatch boolean isMultiParamInOwnLine(XMemberFeatureCall fc, FormattableDocument doc) {
 		val closingBracket = fc.nodeForKeyword(')')
-		if (closingBracket?.hiddenLeafsBefore != null) {
+		if (closingBracket?.hiddenLeafsBefore !== null) {
 			return closingBracket.hiddenLeafsBefore.newLines > 0
 		}
 		val params = fc.memberCallArguments.explicitParams
@@ -407,7 +407,7 @@ import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
 
 	def protected dispatch boolean isMultiParamInOwnLine(XFeatureCall fc, FormattableDocument doc) {
 		val closingBracket = fc.nodeForKeyword(')')
-		if (closingBracket?.hiddenLeafsBefore != null) {
+		if (closingBracket?.hiddenLeafsBefore !== null) {
 			return closingBracket.hiddenLeafsBefore.newLines > 0
 		}
 		val params = fc.featureCallArguments.explicitParams
@@ -416,7 +416,7 @@ import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
 
 	def protected dispatch boolean isMultiParamInOwnLine(XConstructorCall fc, FormattableDocument doc) {
 		val closingBracket = fc.nodeForKeyword(')')
-		if (closingBracket?.hiddenLeafsBefore != null) {
+		if (closingBracket?.hiddenLeafsBefore !== null) {
 			return closingBracket.hiddenLeafsBefore.newLines > 0
 		}
 		val params = fc.arguments.explicitParams
@@ -437,7 +437,7 @@ import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
 			formatFeatureCallTypeParameters(call, format)
 			val featureNode = call.nodeForFeature(XABSTRACT_FEATURE_CALL__FEATURE)
 			val targetNode = call.memberCallTarget.nodeForEObject
-			if (targetNode != null) {
+			if (targetNode !== null) {
 				val callOffset = targetNode.endOffset
 				val op = call.nodeForKeyword(switch it: call {
 					case nullSafe: "?."
@@ -507,7 +507,7 @@ import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
 
 	def protected AbstractRule binaryOperationPrecedence(EObject op) {
 		val node = op.nodeForFeature(XABSTRACT_FEATURE_CALL__FEATURE)
-		if (node != null && node.grammarElement instanceof CrossReference) {
+		if (node !== null && node.grammarElement instanceof CrossReference) {
 			val terminal = (node.grammarElement as CrossReference).terminal
 			if (terminal instanceof RuleCall)
 				return terminal.rule
@@ -516,7 +516,7 @@ import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
 
 	def protected boolean isMultiline(XExpression expression, FormattableDocument doc) {
 		val node = expression.nodeForEObject
-		return node != null && {
+		return node !== null && {
 			val textRegion = node.textRegionWithLineInformation
 			textRegion.lineNumber != textRegion.endLineNumber
 		}
@@ -592,15 +592,15 @@ import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
 			format += expr.nodeForKeyword("if").append[cfg(whitespaceBetweenKeywordAndParenthesisSL)]
 		if (expr.then instanceof XBlockExpression) {
 			format += thennode.prepend[cfg(bracesInNewLine)]
-			if (expr.^else != null)
+			if (expr.^else !== null)
 				format += thennode.append[cfg(bracesInNewLine)]
 		} else if (!multiline) {
 			format += thennode.prepend[oneSpace]
-			if (expr.^else != null)
+			if (expr.^else !== null)
 				format += thennode.append[oneSpace]
 		} else {
 			format += thennode.prepend[newLine increaseIndentation]
-			if (expr.^else != null)
+			if (expr.^else !== null)
 				format += thennode.append[newLine; decreaseIndentation]
 			else
 				format += thennode.append[decreaseIndentation]
@@ -615,7 +615,7 @@ import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
 		}
 		expr.^if.format(format)
 		expr.then.format(format)
-		if (expr.^else != null)
+		if (expr.^else !== null)
 			expr.^else.format(format)
 	}
 
@@ -652,7 +652,7 @@ import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
 		}
 		
 		val expression = expr.expression
-		if (expression != null) {
+		if (expression !== null) {
 			previousFormattedNode = expression.nodeForEObject => [format += prepend[oneSpace] format += append[noSpace]]
 			expression.format(format)
 		} else {
@@ -710,10 +710,10 @@ import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
 
 	def protected dispatch void format(XBlockExpression expr, FormattableDocument format) {
 		val open = expr.nodeForKeyword("{")
-		if(expr.eContainer == null)
+		if(expr.eContainer === null)
 			format += open.prepend[noSpace]
 		val close = expr.nodeForKeyword("}")
-		if (open != null && close != null) {
+		if (open !== null && close !== null) {
 			val multiLine = !expr.isSingleLineBlock(format)
 			if (expr.expressions.empty) {
 				if(open.hiddenLeafsAfter.containsComment) {
@@ -733,10 +733,10 @@ import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
 				}
 				for (child : expr.expressions) {
 					child.format(format)
-					if (child != expr.expressions.last || close != null) {
+					if (child != expr.expressions.last || close !== null) {
 						val childNode = child.nodeForEObject
 						val sem = childNode.immediatelyFollowingKeyword(";")
-						if (sem != null) {
+						if (sem !== null) {
 							format += sem.prepend[noSpace]
 							format += sem.append[if (multiLine) cfg(blankLinesAroundExpression) else oneSpace]
 						} else {
@@ -761,12 +761,12 @@ import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
 		format += typeNode.prepend[noSpace]
 		format += typeNode.append[noSpace]
 		var node = typeNode
-		while (node != null) {
+		while (node !== null) {
 			node = node.immediatelyFollowingKeyword("[")
-			if (node != null) {
+			if (node !== null) {
 				format += node.append[noSpace]
 				node = node.immediatelyFollowingKeyword("]")
-				if (node != null) {
+				if (node !== null) {
 					format += node.append[noSpace]
 				}
 			}
@@ -795,14 +795,14 @@ import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
 		expr.expression.format(format)
 		for (cc : expr.catchClauses) {
 			cc.format(format)
-			if (cc != expr.catchClauses.last || expr.finallyExpression != null) {
+			if (cc != expr.catchClauses.last || expr.finallyExpression !== null) {
 				if (cc.expression instanceof XBlockExpression)
 					format += cc.nodeForEObject.append[cfg(bracesInNewLine)]
 				else
 					format += cc.nodeForEObject.append[newLine]
 			}
 		}
-		if (expr.finallyExpression != null) {
+		if (expr.finallyExpression !== null) {
 			val fin = expr.finallyExpression.nodeForEObject
 			if (expr.finallyExpression instanceof XBlockExpression) {
 				format += fin.prepend[cfg(bracesInNewLine)]
@@ -829,7 +829,7 @@ import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
 	}
 
 	def protected dispatch void format(JvmFormalParameter expr, FormattableDocument format) {
-		if (expr.parameterType != null)
+		if (expr.parameterType !== null)
 			format += expr.parameterType.nodeForEObject.append[oneSpace]
 		expr.parameterType.format(format)
 	}
@@ -844,7 +844,7 @@ import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
 	def protected dispatch void format(XSwitchExpression expr, FormattableDocument format) {
 		val containsBlockExpr = expr.cases.exists[then instanceof XBlockExpression]
 		val switchSL = !containsBlockExpr && !expr.nodeForEObject.text.trim.contains("\n")
-		val caseSL = !containsBlockExpr && (!expr.cases.empty || expr.^default != null) && !expr.cases.exists[nodeForEObject.text.trim.contains("\n")] && !expr.^default?.nodeForEObject?.text?.contains("\n")
+		val caseSL = !containsBlockExpr && (!expr.cases.empty || expr.^default !== null) && !expr.cases.exists[nodeForEObject.text.trim.contains("\n")] && !expr.^default?.nodeForEObject?.text?.contains("\n")
 		val open = expr.nodeForKeyword("{")
 		val close = expr.nodeForKeyword("}")
 		format += expr.nodeForKeyword("switch").append[oneSpace]
@@ -852,7 +852,7 @@ import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
 			format += open.prepend[oneSpace]
 			format += open.append[oneSpace]
 			for (c : expr.cases) {
-				if (c.then == null) {
+				if (c.then === null) {
 					format += c.nodeForEObject.append[oneSpace]
 				} else {
 					val cnode = c.then.nodeForEObject
@@ -860,7 +860,7 @@ import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
 					format += cnode.append[oneSpace]
 				}
 			}
-			if(expr.^default != null) {
+			if(expr.^default !== null) {
 				format += expr.nodeForKeyword("default").append[noSpace]
 				format += expr.^default.nodeForEObject.surround[oneSpace]
 			}
@@ -875,7 +875,7 @@ import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
 				if (c != expr.cases.last)
 					format += c.nodeForEObject.append[newLine]
 			}
-			if(expr.^default != null) {
+			if(expr.^default !== null) {
 				format += expr.nodeForKeyword("default").surround([newLine], [noSpace])
 				format += expr.^default.nodeForEObject.prepend[oneSpace]
 			}
@@ -883,14 +883,14 @@ import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
 		} else {
 			format += open.prepend[cfg(bracesInNewLine)]
 			format += open.append[newLine]
-			if (!expr.cases.empty || expr.^default != null) {
+			if (!expr.cases.empty || expr.^default !== null) {
 				format += open.append[increaseIndentation]	
 			}
 			for (c : expr.cases) {
 				val cnode = c.then.nodeForEObject?:c.nodeForFeature(XCASE_PART__FALL_THROUGH)
 				if (c.then instanceof XBlockExpression) {
 					format += cnode.prepend[cfg(bracesInNewLine)]
-					if (expr.^default != null || c != expr.cases.last)
+					if (expr.^default !== null || c != expr.cases.last)
 						format += cnode.append[newLine]
 					else
 						format += cnode.append[newLine; decreaseIndentation]
@@ -900,13 +900,13 @@ import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
 					} else {
 						format += cnode.prepend[newLine; increaseIndentation]
 					}
-					if (expr.^default != null || c != expr.cases.last)
+					if (expr.^default !== null || c != expr.cases.last)
 						format += cnode.append[newLine; decreaseIndentation]
 					else
 						format += cnode.append[newLine; decreaseIndentationChange = -2]
 				}
 			}
-			if(expr.^default != null) {
+			if(expr.^default !== null) {
 				format += expr.nodeForKeyword("default").append[noSpace]
 				if (expr.^default instanceof XBlockExpression) {
 					format += expr.^default.nodeForEObject.surround([cfg(bracesInNewLine)], [newLine; decreaseIndentation])
@@ -916,16 +916,16 @@ import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
 			}
 		}
 		for (c : expr.cases) {
-			if (c.typeGuard != null && c.^case != null) {
+			if (c.typeGuard !== null && c.^case !== null) {
 				val typenode = c.nodeForFeature(XCASE_PART__TYPE_GUARD)
 				val casenode = c.nodeForFeature(XCASE_PART__CASE)
 				format += typenode.append[oneSpace]
 				format += casenode.prepend[oneSpace]
 				format += casenode.append[noSpace]
-			} else if (c.typeGuard != null) {
+			} else if (c.typeGuard !== null) {
 				val typenode = c.nodeForFeature(XCASE_PART__TYPE_GUARD)
 				format += typenode.append[noSpace]
-			} else if (c.^case != null) {
+			} else if (c.^case !== null) {
 				val casenode = c.nodeForFeature(XCASE_PART__CASE)
 				format += casenode.prepend[oneSpace]
 				format += casenode.append[noSpace]
@@ -933,7 +933,7 @@ import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
 			c.^case.format(format)
 			c.then.format(format)
 		}
-		if(expr.^default != null)
+		if(expr.^default !== null)
 			expr.^default.format(format)
 	}
 
@@ -960,7 +960,7 @@ import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
 		FormattableDocument format) {
 		formatClosureParameters(expr, format)
 		val explicit = expr.nodeForFeature(XCLOSURE__EXPLICIT_SYNTAX)
-		if (explicit != null) {
+		if (explicit !== null) {
 			if (expr.declaredFormalParameters.empty) {
 				format += explicit.prepend[noSpace]
 			} else {
@@ -1015,7 +1015,7 @@ import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
 			c.format(format)
 			last = c.nodeForEObject
 			val semicolon = last.immediatelyFollowingKeyword(";")
-			if (semicolon != null) {
+			if (semicolon !== null) {
 				format += semicolon.prepend[noSpace]
 				last = semicolon
 			}

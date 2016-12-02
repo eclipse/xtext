@@ -47,7 +47,7 @@ class UniqueClassNameValidator extends AbstractDeclarativeValidator {
 	
 	@Check
 	def void checkUniqueName(EObject root) {
-		if (root.eContainer == null) {
+		if (root.eContainer === null) {
 			val resource = root.eResource
 			if (resource.contents.head == root) {
 				resource.contents.filter(JvmDeclaredType).forEach[ doCheckUniqueName ]
@@ -56,9 +56,9 @@ class UniqueClassNameValidator extends AbstractDeclarativeValidator {
 	}
 	
 	protected def void doCheckUniqueName(JvmDeclaredType type) {
-		if (type.eContainer == null) { // only check top-level types
+		if (type.eContainer === null) { // only check top-level types
 			val name = qualifiedNameProvider.getFullyQualifiedName(type)
-			if (name != null) {
+			if (name !== null) {
 				doCheckUniqueName(name, type)
 			}
 		}
@@ -81,7 +81,7 @@ class UniqueClassNameValidator extends AbstractDeclarativeValidator {
 	
 	protected def void addIssue(JvmDeclaredType type, String fileName) {
 		val sourceElement = associations.getPrimarySourceElement(type)
-		if (sourceElement == null)
+		if (sourceElement === null)
 			addIssue('''The type «type.simpleName» is already defined in «fileName».''', type, IssueCodes.DUPLICATE_TYPE)
 		else {
 			val feature = sourceElement.eClass.getEStructuralFeature('name')

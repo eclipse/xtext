@@ -119,7 +119,7 @@ class ClasspathScanner {
 	protected def void loadDirectoryDescriptors(File directory, String packageName, List<ITypeDescriptor> descriptors,
 			Collection<String> packagePrefixes) {
 		val children = directory.listFiles
-		if(children == null) {
+		if(children === null) {
 			return
 		}
 		for (file : children) {

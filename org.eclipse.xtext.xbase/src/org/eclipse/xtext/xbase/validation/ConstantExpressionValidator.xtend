@@ -74,13 +74,13 @@ class ConstantExpressionValidator {
 			}
 			JvmOperation : {
 				val annotationReference = expression.findInlineAnnotation
-				if (annotationReference == null) {
+				if (annotationReference === null) {
 					return false
 				}
 				if (annotationReference.values.filter(JvmBooleanAnnotationValue).exists [
 					valueName=='constantExpression' && values.head.booleanValue
 				]) {
-					val receiverConstant = if (expression.actualReceiver == null) {
+					val receiverConstant = if (expression.actualReceiver === null) {
 						true
 					} else {
 						expression.actualReceiver.isConstant

@@ -40,7 +40,7 @@ import org.eclipse.xtext.util.internal.Log
 		val modelsFound = new PathTraverser().resolvePathes(roots.map[toFileString].toList) [ extensions.contains(fileExtension) ]
 		modelsFound.asMap.forEach [ path, resource |
 			val file = new File(path)
-			if (resource != null && !file.directory && file.name.endsWith(".jar")) {
+			if (resource !== null && !file.directory && file.name.endsWith(".jar")) {
 				registerBundle(file)
 			}
 		]
@@ -52,10 +52,10 @@ import org.eclipse.xtext.util.internal.Log
 		try {
 			jarFile = new JarFile(file);
 			val Manifest manifest = jarFile.getManifest();
-			if (manifest == null)
+			if (manifest === null)
 				return;
 			var String name = manifest.getMainAttributes().getValue("Bundle-SymbolicName");
-			if (name != null) {
+			if (name !== null) {
 				val int indexOf = name.indexOf(';');
 				if (indexOf > 0)
 					name = name.substring(0, indexOf);
@@ -70,7 +70,7 @@ import org.eclipse.xtext.util.internal.Log
 			LOG.error(file.absolutePath, e);
 		} finally {
 			try {
-				if (jarFile != null)
+				if (jarFile !== null)
 					jarFile.close();
 			} catch (IOException e) {
 				LOG.error(jarFile, e);

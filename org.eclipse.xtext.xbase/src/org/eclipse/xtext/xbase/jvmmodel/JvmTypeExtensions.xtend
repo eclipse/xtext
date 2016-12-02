@@ -42,9 +42,9 @@ class JvmTypeExtensions {
 	
 	def isSingleSyntheticDefaultConstructor(JvmConstructor it) {
 		return parameters.empty && 
-			associatedExpression == null && 
-			compilationStrategy == null && 
-			compilationTemplate == null &&
+			associatedExpression === null && 
+			compilationStrategy === null && 
+			compilationTemplate === null &&
 			declaringType.members.filter(JvmConstructor).size == 1
 	}
 	
@@ -75,7 +75,7 @@ class JvmTypeExtensions {
 	 */
 	def protected JvmIdentifiableMetaData getMetaData(EObject element) {
 		var metaData = EcoreUtil.getAdapter(element.eAdapters, JvmIdentifiableMetaData) as JvmIdentifiableMetaData
-		if (metaData == null) {
+		if (metaData === null) {
 			metaData = new JvmIdentifiableMetaData
 			element.eAdapters += metaData
 		}

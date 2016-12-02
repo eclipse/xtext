@@ -164,7 +164,7 @@ class XbaseIdeCrossrefProposalProvider extends IdeCrossrefProposalProvider {
 				labelBuilder.append(')')
 			}
 			val returnType = feature.returnType
-			if (returnType != null && returnType.simpleName != null) {
+			if (returnType !== null && returnType.simpleName !== null) {
 				labelBuilder.append(' : ')
 				labelBuilder.append(converter.toLightweightReference(returnType).humanReadableName)
 			}
@@ -176,9 +176,9 @@ class XbaseIdeCrossrefProposalProvider extends IdeCrossrefProposalProvider {
 			}
 		} else if (feature instanceof JvmField) {
 			labelBuilder.append(' : ')
-			if (feature.type != null) {
+			if (feature.type !== null) {
 				val fieldType = converter.toLightweightReference(feature.type).humanReadableName
-				if (fieldType != null)
+				if (fieldType !== null)
 					labelBuilder.append(fieldType)
 			}
 			descriptionBuilder.append(converter.toPlainTypeReference(feature.declaringType).humanReadableName)
@@ -216,9 +216,9 @@ class XbaseIdeCrossrefProposalProvider extends IdeCrossrefProposalProvider {
 				result.append(ownedConverter.toLightweightReference(parameterType.componentType).humanReadableName)
 				result.append('...')
 			} else {
-				if (parameter.parameterType != null) {
+				if (parameter.parameterType !== null) {
 					val simpleName = ownedConverter.toLightweightReference(parameter.parameterType).humanReadableName
-					if (simpleName != null)
+					if (simpleName !== null)
 						result.append(simpleName)
 				}
 			}

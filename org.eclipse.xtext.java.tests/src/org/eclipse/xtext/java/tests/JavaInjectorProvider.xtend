@@ -11,7 +11,7 @@ class JavaInjectorProvider implements IInjectorProvider, IRegistryConfigurator {
 	Injector injector
 	
 	override getInjector() {
-		if (injector == null) {
+		if (injector === null) {
 			this.injector = setup.createInjector
 		}
 		return injector

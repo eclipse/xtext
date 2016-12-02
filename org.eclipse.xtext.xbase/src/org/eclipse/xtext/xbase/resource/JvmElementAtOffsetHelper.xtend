@@ -26,7 +26,7 @@ class JvmElementAtOffsetHelper {
 
 	def JvmIdentifiableElement getJvmIdentifiableElement(XtextResource resource, int offset) {
 		val selectedElement = eObjectAtOffsetHelper.resolveElementAt(resource, offset)
-		if(selectedElement == null)
+		if(selectedElement === null)
 			return null
 		if(selectedElement instanceof JvmIdentifiableElement)
 			return selectedElement

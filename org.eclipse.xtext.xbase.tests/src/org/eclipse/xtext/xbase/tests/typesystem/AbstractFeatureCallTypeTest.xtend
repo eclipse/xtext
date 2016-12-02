@@ -687,7 +687,7 @@ abstract class AbstractFeatureCallTypeTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test def void testFeatureCall_08() throws Exception {
-		"newArrayList('').map(s|s != null)".resolvesFeatureCallsTo("ArrayList<String>", "List<Boolean>", "String", "boolean")
+		"newArrayList('').map(s|s !== null)".resolvesFeatureCallsTo("ArrayList<String>", "List<Boolean>", "String", "boolean")
 	}
 	
 	@Test def void testFeatureCall_11() throws Exception {

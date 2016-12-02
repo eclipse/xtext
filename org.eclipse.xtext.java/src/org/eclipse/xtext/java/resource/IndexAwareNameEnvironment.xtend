@@ -35,14 +35,14 @@ import org.eclipse.xtext.resource.IResourceDescriptions
 		}
 		val candidate = resourceDescriptions.getExportedObjects(TypesPackage.Literals.JVM_DECLARED_TYPE, className, false).head
 		var NameEnvironmentAnswer result = null 
-		if (candidate != null) {
+		if (candidate !== null) {
 			val resourceDescription = resourceDescriptions.getResourceDescription(candidate.EObjectURI.trimFragment)
 			val source = stubGenerator.getJavaStubSource(candidate, resourceDescription)
 			result = new NameEnvironmentAnswer(new CompilationUnit(source.toCharArray, className.toString('/')+'.java', null), null)
 		} else {
 			val fileName = className.toString('/') + ".class"
 			val url = classLoader.getResource(fileName)
-			if (url == null) {
+			if (url === null) {
 				cache.put(className, null)
 				return null;
 			}

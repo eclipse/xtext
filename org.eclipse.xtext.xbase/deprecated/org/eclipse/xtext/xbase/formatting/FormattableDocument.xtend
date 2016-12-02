@@ -35,11 +35,11 @@ class FormattableDocument {
 	}
 	
 	def boolean isDebugConflicts() {
-		rootTrace != null
+		rootTrace !== null
 	}
 	
 	def protected addFormatting(FormattingData data) {
-		if(data != null) {
+		if(data !== null) {
 			if(data.length < 0) {
 				val text = getTextAround(data)
 				log.error('''
@@ -64,8 +64,8 @@ class FormattableDocument {
 				}
 			}
 			val old = formattings.get(data.offset)
-			val newData = if(old == null) data else merge(old, data)
-			if(newData != null)
+			val newData = if(old === null) data else merge(old, data)
+			if(newData !== null)
 				formattings.put(data.offset, newData)
 		}
 	}
@@ -82,7 +82,7 @@ class FormattableDocument {
 			indentationChange = data2.indentationChange + data1.indentationChange
 			old = data2
 		}
-		if(old != null) {
+		if(old !== null) {
 			if(indentationChange > 0)
 				increaseIndentationChange = indentationChange
 			else
@@ -136,12 +136,12 @@ class FormattableDocument {
 	}
 	
 	def operator_add(Iterable<FormattingData> data) {
-		if(data != null)
+		if(data !== null)
 			data.forEach[addFormatting]
 	}
 	
 	def operator_add((FormattableDocument) => Iterable<FormattingData> data) {
-		if(data != null)
+		if(data !== null)
 			operator_add(data.apply(this))
 	}
 	
@@ -159,7 +159,7 @@ class FormattableDocument {
 				val textlength = f.offset - oldOffset
 				switch f {
 					WhitespaceData: {
-						if (f.space != null) {
+						if (f.space !== null) {
 							val replacement = f.space
 							replacements += new TextReplacement(f.offset, f.length, replacement)
 						}
@@ -239,7 +239,7 @@ class FormattableDocument {
 		for(f:formattings.subMap(lastWrap.offset + 1, offset).values) {
 			if(f instanceof WhitespaceData) {
 				val space = f.space
-				val length = if (space == null) 0 else space.length
+				val length = if (space === null) 0 else space.length
 				lengthDiff = lengthDiff + length - f.length
 			}
 		}
@@ -321,7 +321,7 @@ class FormattableDocument {
 	String space
 
 	override isEmpty() {
-		space == null
+		space === null
 	}
 }
 
@@ -332,6 +332,6 @@ class FormattableDocument {
 	Integer newLines
 	
 	override isEmpty() {
-		newLines == null
+		newLines === null
 	}
 }

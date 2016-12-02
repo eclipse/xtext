@@ -75,7 +75,7 @@ class XbaseFormatter extends XtypeFormatter {
 		ISemanticRegion close,
 		extension IFormattableDocument format
 	) {
-		if (close == null || open == null) {
+		if (close === null || open === null) {
 			// broken, do nothing
 		} else if (elements.empty) {
 			open.append[noSpace]
@@ -96,7 +96,7 @@ class XbaseFormatter extends XtypeFormatter {
 			for (ele : items) {
 				val sep = ele.leadingSeparator?.separator
 				if (ele.object.prependNewLineIfMultiline) {
-					if (sep == null)
+					if (sep === null)
 						open.append[noSpace; autowrap(ele.region.length); onAutowrap = indent]
 					else
 						sep.append[oneSpace; autowrap(ele.region.length); onAutowrap = indent]
@@ -155,7 +155,7 @@ class XbaseFormatter extends XtypeFormatter {
 	}
 
 	def protected void formatBuilderWithLeadingGap(XClosure closure, extension IFormattableDocument format) {
-		if (closure != null) {
+		if (closure !== null) {
 			val offset = closure.previousHiddenRegion.offset
 			val length = closure.nextHiddenRegion.offset - offset
 			formatConditionally(offset, length, [ doc |
@@ -170,7 +170,7 @@ class XbaseFormatter extends XtypeFormatter {
 	}
 
 	def protected XClosure builder(List<XExpression> params) {
-		if (params.last != null) {
+		if (params.last !== null) {
 			val grammarElement = params.last.grammarElement
 			if (grammarElement == XMemberFeatureCallAccess.memberCallArgumentsXClosureParserRuleCall_1_1_4_0 ||
 				grammarElement == XFeatureCallAccess.featureCallArgumentsXClosureParserRuleCall_4_0 ||
@@ -181,7 +181,7 @@ class XbaseFormatter extends XtypeFormatter {
 
 	def protected Iterable<XExpression> explicitParams(List<XExpression> params) {
 		val builder = params.builder
-		if(builder != null) params.take(params.size - 1) else params
+		if(builder !== null) params.take(params.size - 1) else params
 	}
 
 	def dispatch void format(XConstructorCall expr, extension IFormattableDocument format) {
@@ -239,7 +239,7 @@ class XbaseFormatter extends XtypeFormatter {
 			val operator = entry.leadingSeparator.separator
 			formatFeatureCallTypeParameters(call, format)
 			val feature = call.regionFor.feature(XABSTRACT_FEATURE_CALL__FEATURE)
-			if (feature != null) {
+			if (feature !== null) {
 				val autowrapLength = Math.min(entry.region.length, feature.length * 2)
 				operator.prepend[noSpace].append[noSpace; autowrap(autowrapLength) onAutowrap = indentOnce]
 				if (call.explicitOperationCall) {
@@ -255,7 +255,7 @@ class XbaseFormatter extends XtypeFormatter {
 
 	def protected AbstractRule binaryOperationPrecedence(EObject op) {
 		val node = op.regionFor.feature(XABSTRACT_FEATURE_CALL__FEATURE)
-		if (node != null && node.grammarElement instanceof RuleCall) {
+		if (node !== null && node.grammarElement instanceof RuleCall) {
 			return (node.grammarElement as RuleCall).rule
 		}
 	}
@@ -317,7 +317,7 @@ class XbaseFormatter extends XtypeFormatter {
 		else
 			expr.regionFor.keyword("if").append(whitespaceBetweenKeywordAndParenthesisSL)
 		expr.^if.format
-		if (expr.^else == null) {
+		if (expr.^else === null) {
 			expr.then.formatBody(multiline, format)
 		} else {
 			expr.then.formatBodyInline(multiline, format)
@@ -366,9 +366,9 @@ class XbaseFormatter extends XtypeFormatter {
 	def dispatch void format(XBlockExpression expr, extension IFormattableDocument format) {
 		val open = expr.regionFor.keyword("{")
 		val close = expr.regionFor.keyword("}")
-		if (expr.eContainer == null)
+		if (expr.eContainer === null)
 			expr.surround[noSpace]
-		if (open != null && close != null) {
+		if (open !== null && close !== null) {
 			if (expr.isSingleLineBlock) {
 				expr.formatConditionally(
 					[ f |
@@ -409,7 +409,7 @@ class XbaseFormatter extends XtypeFormatter {
 		for (cc : expr.catchClauses) {
 			cc.regionFor.keyword("catch").append(whitespaceBetweenKeywordAndParenthesisML)
 			cc.declaredParam.prepend[noSpace].append[noSpace].format
-			if (cc != expr.catchClauses.last || expr.finallyExpression != null)
+			if (cc != expr.catchClauses.last || expr.finallyExpression !== null)
 				cc.expression.formatBodyInline(true, format)
 			else
 				cc.expression.formatBody(true, format)
@@ -432,7 +432,7 @@ class XbaseFormatter extends XtypeFormatter {
 	def dispatch void format(XSwitchExpression expr, extension IFormattableDocument format) {
 		val containsBlockExpr = expr.cases.exists[then instanceof XBlockExpression]
 		val switchSL = !containsBlockExpr && !expr.multiline
-		val caseSL = !containsBlockExpr && (!expr.cases.empty || expr.^default != null) &&
+		val caseSL = !containsBlockExpr && (!expr.cases.empty || expr.^default !== null) &&
 			!expr.cases.exists[multiline] && !expr.^default.multilineOrInNewLine
 		val open = expr.regionFor.keyword("{")
 		val close = expr.regionFor.keyword("}")
@@ -443,13 +443,13 @@ class XbaseFormatter extends XtypeFormatter {
 			for (c : expr.cases) {
 				c.^case.format
 				c.then.format
-				if (c.then == null) {
+				if (c.then === null) {
 					c.append[oneSpace]
 				} else {
 					c.then.prepend[oneSpace].append[oneSpace]
 				}
 			}
-			if (expr.^default != null) {
+			if (expr.^default !== null) {
 				expr.regionFor.keyword("default").append[noSpace]
 				expr.^default.surround[oneSpace].format
 			}
@@ -466,14 +466,14 @@ class XbaseFormatter extends XtypeFormatter {
 				if (c != expr.cases.last)
 					c.append[newLine]
 			}
-			if (expr.^default != null) {
+			if (expr.^default !== null) {
 				expr.regionFor.keyword("default").prepend[newLine].append[noSpace]
 				expr.^default.prepend[oneSpace].format
 			}
 			close.prepend[newLine]
 		} else {
 			open.prepend(bracesInNewLine).append[newLine]
-			if (!expr.cases.empty || expr.^default != null) {
+			if (!expr.cases.empty || expr.^default !== null) {
 				interior(open, close)[indent]
 			}
 			for (c : expr.cases) {
@@ -481,18 +481,18 @@ class XbaseFormatter extends XtypeFormatter {
 				c.then.formatBodyParagraph(format)
 				c.regionFor.feature(XCASE_PART__FALL_THROUGH).prepend[noSpace].append[newLine]
 			}
-			if (expr.^default != null) {
+			if (expr.^default !== null) {
 				expr.regionFor.keyword("default").append[noSpace]
 				expr.^default.formatBodyParagraph(format)
 			}
 		}
 		for (c : expr.cases) {
-			if (c.typeGuard != null && c.^case != null) {
+			if (c.typeGuard !== null && c.^case !== null) {
 				c.typeGuard.append[oneSpace]
 				c.^case.prepend[oneSpace].append[noSpace]
-			} else if (c.typeGuard != null) {
+			} else if (c.typeGuard !== null) {
 				c.typeGuard.append[noSpace]
-			} else if (c.^case != null) {
+			} else if (c.^case !== null) {
 				c.^case.prepend[oneSpace].append[noSpace]
 			}
 		}
@@ -525,7 +525,7 @@ class XbaseFormatter extends XtypeFormatter {
 			XBlockExpression: x.expressions
 			default: newArrayList(x)
 		}
-		if (open == null || close == null) {
+		if (open === null || close === null) {
 			// broken, do nothing
 		} else if (children.empty) {
 			if (open.nextHiddenRegion.containsComment)
@@ -545,7 +545,7 @@ class XbaseFormatter extends XtypeFormatter {
 				for (c : children) {
 					c.format
 					val semicolon = c.immediatelyFollowing.keyword(";")
-					if (semicolon != null)
+					if (semicolon !== null)
 						semicolon.prepend[noSpace].append[if(c == children.last) noSpace else oneSpace]
 					else
 						c.append[if(c == children.last) noSpace else oneSpace]
@@ -558,7 +558,7 @@ class XbaseFormatter extends XtypeFormatter {
 	}
 
 	def protected void formatBody(XExpression expr, boolean forceMultiline, extension IFormattableDocument doc) {
-		if (expr == null)
+		if (expr === null)
 			return;
 		if (expr instanceof XBlockExpression) {
 			expr.prepend(bracesInNewLine)
@@ -571,7 +571,7 @@ class XbaseFormatter extends XtypeFormatter {
 	}
 
 	def protected void formatBodyInline(XExpression expr, boolean forceMultiline, extension IFormattableDocument doc) {
-		if (expr == null)
+		if (expr === null)
 			return;
 		if (expr instanceof XBlockExpression) {
 			expr.prepend(bracesInNewLine).append(bracesInNewLine)
@@ -584,7 +584,7 @@ class XbaseFormatter extends XtypeFormatter {
 	}
 
 	def protected void formatBodyParagraph(XExpression expr, extension IFormattableDocument doc) {
-		if (expr == null)
+		if (expr === null)
 			return;
 		if (expr instanceof XBlockExpression) {
 			expr.prepend(bracesInNewLine).append[newLine]
@@ -621,7 +621,7 @@ class XbaseFormatter extends XtypeFormatter {
 			for (child : expressions) {
 				child.format
 				val sem = child.immediatelyFollowing.keyword(";")
-				if (sem != null)
+				if (sem !== null)
 					sem.prepend[noSpace].append(blankLinesAroundExpression)
 				else
 					child.append(blankLinesAroundExpression)
@@ -638,7 +638,7 @@ class XbaseFormatter extends XtypeFormatter {
 			for (child : expressions) {
 				child.format
 				val sem = child.immediatelyFollowing.keyword(";")
-				if (sem != null)
+				if (sem !== null)
 					sem.prepend[noSpace].append[oneSpace]
 				else
 					child.append[oneSpace]
@@ -647,7 +647,7 @@ class XbaseFormatter extends XtypeFormatter {
 	}
 
 	def protected boolean isMultilineOrInNewLine(EObject obj) {
-		obj != null && (obj.multiline || obj.previousHiddenRegion.multiline)
+		obj !== null && (obj.multiline || obj.previousHiddenRegion.multiline)
 	}
 
 }

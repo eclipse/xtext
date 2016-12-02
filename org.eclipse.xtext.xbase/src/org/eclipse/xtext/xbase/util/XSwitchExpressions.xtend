@@ -31,7 +31,7 @@ class XSwitchExpressions {
 	 */
 	def isJavaSwitchExpression(XSwitchExpression it) {
 		val switchType = switchVariableType
-		if (switchType == null) {
+		if (switchType === null) {
 			return false
 		}
 		if (switchType.isSubtypeOf(Integer.TYPE)) {
@@ -48,7 +48,7 @@ class XSwitchExpressions {
 	 */
 	def isJava7SwitchExpression(XSwitchExpression it) {
 		val switchType = switchVariableType
-		if (switchType == null) {
+		if (switchType === null) {
 			return false
 		}
 		if (switchType.isSubtypeOf(Integer.TYPE)) {
@@ -64,16 +64,16 @@ class XSwitchExpressions {
 	}
 
 	def isJavaCaseExpression(XSwitchExpression it, XCasePart casePart) {
-		if (casePart.typeGuard != null) {
+		if (casePart.typeGuard !== null) {
 			return false
 		}
 		val ^case = casePart.^case
-		if (^case == null) {
+		if (^case === null) {
 			return false
 		}
 		extension val resolvedTypes = resolveTypes
 		val caseType = ^case.actualType
-		if (caseType == null) {
+		if (caseType === null) {
 			return false
 		}
 		val switchType = switchVariableType
@@ -86,7 +86,7 @@ class XSwitchExpressions {
 	def getSwitchVariableType(XSwitchExpression it) {
 		extension val resolvedTypes = resolveTypes
 		val declaredParam = declaredParam
-		if (declaredParam == null) {
+		if (declaredParam === null) {
 			return ^switch.actualType
 		}
 		val paramType = declaredParam.actualType
@@ -95,7 +95,7 @@ class XSwitchExpressions {
 	
 	def isConstant(XCasePart casePart) {
 		val ^case = casePart.^case
-		if (^case == null) {
+		if (^case === null) {
 			return false
 		}
 		try {
@@ -108,7 +108,7 @@ class XSwitchExpressions {
 	
 	def XExpression getThen(XCasePart casePart, XSwitchExpression switchExpression) {
 		val then = casePart.then
-		if (then != null) {
+		if (then !== null) {
 			return then
 		}
 		val casePartIndex = switchExpression.cases.indexOf(casePart)

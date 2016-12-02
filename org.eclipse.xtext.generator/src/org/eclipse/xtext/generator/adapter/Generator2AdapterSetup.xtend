@@ -50,7 +50,7 @@ class Generator2AdapterSetup {
 	}
 	
 	public def getInjector() {
-		if (injector == null) {
+		if (injector === null) {
 			injector = createInjector
 		}
 		injector

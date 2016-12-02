@@ -115,7 +115,7 @@ class ConstantConditionsInterpreter {
 
 	def dispatch EvaluationResult internalEvaluate(XAbstractFeatureCall it, EvaluationContext context) {
 		val feature = getFeature(it, context)
-		if (feature == null || feature.eIsProxy) {
+		if (feature === null || feature.eIsProxy) {
 			return EvaluationResult.NOT_A_CONSTANT
 		}
 		switch feature {
@@ -132,13 +132,13 @@ class ConstantConditionsInterpreter {
 						return new EvaluationResult(feature.constantValue, true)
 					}
 				} else if (feature.final) {
-					if (actualReceiver != null) {
+					if (actualReceiver !== null) {
 						val receiver = doEvaluate(actualReceiver, context)
 						if (receiver.notAConstant) {
 							return receiver
 						}
 						val associatedExpression = feature.associatedExpression
-						if (associatedExpression != null) {
+						if (associatedExpression !== null) {
 							val result = associatedExpression.evaluateAssociatedExpression(context)
 							if (result.rawValue instanceof ThisReference)
 								return EvaluationResult.NOT_A_CONSTANT
@@ -154,7 +154,7 @@ class ConstantConditionsInterpreter {
 						}
 					} else {
 						val associatedExpression = feature.associatedExpression
-						if (associatedExpression != null) {
+						if (associatedExpression !== null) {
 							val result = associatedExpression.evaluateAssociatedExpression(context)
 							return new EvaluationResult(result.rawValue, false)
 						} else {
@@ -163,12 +163,12 @@ class ConstantConditionsInterpreter {
 					}
 				}
 			}
-			XVariableDeclaration case !feature.writeable && feature.right != null: {
+			XVariableDeclaration case !feature.writeable && feature.right !== null: {
 				return feature.right.evaluateAssociatedExpression(context)
 			}
 			JvmFormalParameter: {
 				switch container : feature.eContainer {
-					XSwitchExpression case container.^switch != null: {
+					XSwitchExpression case container.^switch !== null: {
 						return container.^switch.doEvaluate(context)
 					}
 					default: return new EvaluationResult(feature, false)
@@ -180,7 +180,7 @@ class ConstantConditionsInterpreter {
 	
 	def getFeature(XAbstractFeatureCall call, EvaluationContext context) {
 		var feature = call.eGet(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, false) as JvmIdentifiableElement
-		if (feature == null || feature.eIsProxy) {
+		if (feature === null || feature.eIsProxy) {
 			feature = context.resolvedTypes.getLinkedFeature(call)
 		}
 		return feature
@@ -239,7 +239,7 @@ class ConstantConditionsInterpreter {
 	}
 	
 	def dispatch EvaluationResult internalEvaluate(XBinaryOperation it, EvaluationContext context) {
-		if (isFromXbaseLibrary(context) && rightOperand != null) {
+		if (isFromXbaseLibrary(context) && rightOperand !== null) {
 			val left = leftOperand.doEvaluate(context) 
 			val right = rightOperand.doEvaluate(context)
 			try {

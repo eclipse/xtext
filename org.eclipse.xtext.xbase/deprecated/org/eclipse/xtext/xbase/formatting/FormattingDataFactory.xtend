@@ -28,7 +28,7 @@ import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
 		Void key, FormattingDataInit it) {
 		[ FormattableDocument doc |
 			val int newLines2 = newLines ?: 0
-			if ((space == null && newLines == null) || (leafs.newLinesInComments == 0 && (newLines2 == 0 || space == "")))
+			if ((space === null && newLines === null) || (leafs.newLinesInComments == 0 && (newLines2 == 0 || space == "")))
 				return newWhitespaceData(leafs, space, increaseIndentationChange, decreaseIndentationChange, doc.debugConflicts)
 			else
 				return newNewLineData(leafs, newLines2, newLines2, increaseIndentationChange, decreaseIndentationChange, doc.debugConflicts)
@@ -165,7 +165,7 @@ import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
 		INode node,
 		(FormattingDataInit)=>void init
 	) {
-		if (node != null) {
+		if (node !== null) {
 			node.hiddenLeafsAfter.newFormattingData(init)
 		}
 	}
@@ -174,7 +174,7 @@ import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
 		INode node,
 		(FormattingDataInit)=>void init
 	) {
-		if (node != null) {
+		if (node !== null) {
 			node.hiddenLeafsBefore.newFormattingData(init)
 		}
 	}
@@ -185,7 +185,7 @@ import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
 	) {
 		[ FormattableDocument doc |
 			val result = <FormattingData>newArrayList()
-			if (node != null) {
+			if (node !== null) {
 				result += node.hiddenLeafsBefore.newFormattingData(init)?.apply(doc) ?: emptyList
 				result += node.hiddenLeafsAfter.newFormattingData(init)?.apply(doc) ?: emptyList
 			}
@@ -200,7 +200,7 @@ import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
 	) {
 		[ FormattableDocument doc |
 			val result = <FormattingData>newArrayList()
-			if (node != null) {
+			if (node !== null) {
 				result += node.hiddenLeafsBefore.newFormattingData(before)?.apply(doc) ?: emptyList
 				result += node.hiddenLeafsAfter.newFormattingData(after)?.apply(doc) ?: emptyList
 			}

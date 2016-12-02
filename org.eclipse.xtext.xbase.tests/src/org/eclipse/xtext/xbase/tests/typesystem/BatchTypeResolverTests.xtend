@@ -45,7 +45,7 @@ abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolverTest<Li
 			switch(content) {
 				XAbstractFeatureCall: {
 					assertExpressionTypeIsResolved(content, resolvedTypes)
-					if (content.implicitReceiver != null) {
+					if (content.implicitReceiver !== null) {
 						assertExpressionTypeIsResolved(content.implicitReceiver, resolvedTypes)
 					}
 				}
@@ -68,7 +68,7 @@ abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolverTest<Li
 					val feature = content.eGet(XbasePackage.Literals::XABSTRACT_FEATURE_CALL__FEATURE, false) as InternalEObject
 					assertNotNull(content.toString, feature)
 					assertFalse(content.toString, feature.eIsProxy())
-					if (content.implicitReceiver != null) {
+					if (content.implicitReceiver !== null) {
 						val implicitFeature = content.implicitReceiver.eGet(XbasePackage.Literals::XABSTRACT_FEATURE_CALL__FEATURE, false) as InternalEObject
 						assertNotNull(implicitFeature.toString, feature)
 						assertFalse(implicitFeature.toString, feature.eIsProxy())

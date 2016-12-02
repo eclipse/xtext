@@ -87,7 +87,7 @@ class AbstractConstantExpressionsInterpreter {
 	}
 
 	protected def toTypeReference(JvmType type, int arrayDimensions) {
-		if (type == null)
+		if (type === null)
 			return null
 		var JvmTypeReference resultTypeRef = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference => [
 			it.type = type
