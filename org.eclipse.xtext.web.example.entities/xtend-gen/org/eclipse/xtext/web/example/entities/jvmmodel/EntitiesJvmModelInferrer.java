@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.web.example.entities.jvmmodel;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.Arrays;
 import org.eclipse.emf.common.util.EList;
@@ -51,8 +50,8 @@ public class EntitiesJvmModelInferrer extends AbstractModelInferrer {
       String _documentation = this._jvmTypesBuilder.getDocumentation(entity);
       this._jvmTypesBuilder.setDocumentation(it, _documentation);
       JvmParameterizedTypeReference _superType = entity.getSuperType();
-      boolean _notEquals = (!Objects.equal(_superType, null));
-      if (_notEquals) {
+      boolean _tripleNotEquals = (_superType != null);
+      if (_tripleNotEquals) {
         EList<JvmTypeReference> _superTypes = it.getSuperTypes();
         JvmParameterizedTypeReference _superType_1 = entity.getSuperType();
         JvmTypeReference _cloneWithProxies = this._jvmTypesBuilder.cloneWithProxies(_superType_1);
