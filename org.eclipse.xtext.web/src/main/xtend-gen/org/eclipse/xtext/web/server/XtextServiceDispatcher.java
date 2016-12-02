@@ -303,42 +303,46 @@ public class XtextServiceDispatcher {
    */
   protected XtextServiceDispatcher.ServiceDescriptor createServiceDescriptor(final String serviceType, final IServiceContext context) {
     XtextServiceDispatcher.ServiceDescriptor _switchResult = null;
-    switch (serviceType) {
-      case "load":
-        _switchResult = this.getLoadResourceService(false, context);
-        break;
-      case "revert":
-        _switchResult = this.getLoadResourceService(true, context);
-        break;
-      case "save":
-        _switchResult = this.getSaveResourceService(context);
-        break;
-      case "update":
-        _switchResult = this.getUpdateDocumentService(context);
-        break;
-      case "assist":
-        _switchResult = this.getContentAssistService(context);
-        break;
-      case "validate":
-        _switchResult = this.getValidationService(context);
-        break;
-      case "hover":
-        _switchResult = this.getHoverService(context);
-        break;
-      case "highlight":
-        _switchResult = this.getHighlightingService(context);
-        break;
-      case "occurrences":
-        _switchResult = this.getOccurrencesService(context);
-        break;
-      case "format":
-        _switchResult = this.getFormattingService(context);
-        break;
-      case "generate":
-        _switchResult = this.getGeneratorService(context);
-        break;
-      default:
-        throw new InvalidRequestException.InvalidParametersException((("The service type \'" + serviceType) + "\' is not supported."));
+    if (serviceType != null) {
+      switch (serviceType) {
+        case "load":
+          _switchResult = this.getLoadResourceService(false, context);
+          break;
+        case "revert":
+          _switchResult = this.getLoadResourceService(true, context);
+          break;
+        case "save":
+          _switchResult = this.getSaveResourceService(context);
+          break;
+        case "update":
+          _switchResult = this.getUpdateDocumentService(context);
+          break;
+        case "assist":
+          _switchResult = this.getContentAssistService(context);
+          break;
+        case "validate":
+          _switchResult = this.getValidationService(context);
+          break;
+        case "hover":
+          _switchResult = this.getHoverService(context);
+          break;
+        case "highlight":
+          _switchResult = this.getHighlightingService(context);
+          break;
+        case "occurrences":
+          _switchResult = this.getOccurrencesService(context);
+          break;
+        case "format":
+          _switchResult = this.getFormattingService(context);
+          break;
+        case "generate":
+          _switchResult = this.getGeneratorService(context);
+          break;
+        default:
+          throw new InvalidRequestException.InvalidParametersException((("The service type \'" + serviceType) + "\' is not supported."));
+      }
+    } else {
+      throw new InvalidRequestException.InvalidParametersException((("The service type \'" + serviceType) + "\' is not supported."));
     }
     return _switchResult;
   }
@@ -1008,13 +1012,17 @@ public class XtextServiceDispatcher {
       return _get.booleanValue();
     }
     String _lowerCase = stringValue.toLowerCase();
-    switch (_lowerCase) {
-      case "true":
-        return true;
-      case "false":
-        return false;
-      default:
-        throw new InvalidRequestException.InvalidParametersException((("The parameter \'" + key) + "\' must contain a Boolean value."));
+    if (_lowerCase != null) {
+      switch (_lowerCase) {
+        case "true":
+          return true;
+        case "false":
+          return false;
+        default:
+          throw new InvalidRequestException.InvalidParametersException((("The parameter \'" + key) + "\' must contain a Boolean value."));
+      }
+    } else {
+      throw new InvalidRequestException.InvalidParametersException((("The parameter \'" + key) + "\' must contain a Boolean value."));
     }
   }
   
