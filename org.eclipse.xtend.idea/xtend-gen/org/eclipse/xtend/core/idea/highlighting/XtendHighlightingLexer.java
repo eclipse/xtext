@@ -223,39 +223,43 @@ public class XtendHighlightingLexer extends LexerBase {
       it.tokenType = tokenType;
     };
     final XtendHighlightingLexer.RichTextToken result = ObjectExtensions.<XtendHighlightingLexer.RichTextToken>operator_doubleArrow(_richTextToken, _function);
-    switch (id) {
-      case "RULE_RICH_TEXT_START":
-        result.delimiter = false;
-        result.offsets = new int[] { tokenOffset, ((tokenOffset + tokenLength) - 1) };
-        result.lengths = new int[] { (tokenLength - 1), 1 };
-        break;
-      case "RULE_RICH_TEXT_INBETWEEN":
-        result.delimiter = true;
-        if ((tokenLength == 2)) {
-          result.offsets = new int[] { tokenOffset };
-          result.lengths = new int[] { tokenLength };
-        } else {
-          result.offsets = new int[] { tokenOffset, (tokenOffset + 1), ((tokenOffset + tokenLength) - 1) };
-          result.lengths = new int[] { 1, (tokenLength - 2), 1 };
-        }
-        break;
-      case "RULE_RICH_TEXT_END":
-        result.delimiter = true;
-        result.offsets = new int[] { tokenOffset, (tokenOffset + 1) };
-        result.lengths = new int[] { 1, (tokenLength - 1) };
-        break;
-      case "RULE_COMMENT_RICH_TEXT_END":
-        result.delimiter = true;
-        result.offsets = new int[] { tokenOffset, (tokenOffset + 2) };
-        result.lengths = new int[] { 2, (tokenLength - 2) };
-        break;
-      case "RULE_COMMENT_RICH_TEXT_INBETWEEN":
-        result.delimiter = true;
-        result.offsets = new int[] { tokenOffset, (tokenOffset + 2), ((tokenOffset + tokenLength) - 1) };
-        result.lengths = new int[] { 2, (tokenLength - 3), 1 };
-        break;
-      default:
-        throw new IllegalArgumentException(id);
+    if (id != null) {
+      switch (id) {
+        case "RULE_RICH_TEXT_START":
+          result.delimiter = false;
+          result.offsets = new int[] { tokenOffset, ((tokenOffset + tokenLength) - 1) };
+          result.lengths = new int[] { (tokenLength - 1), 1 };
+          break;
+        case "RULE_RICH_TEXT_INBETWEEN":
+          result.delimiter = true;
+          if ((tokenLength == 2)) {
+            result.offsets = new int[] { tokenOffset };
+            result.lengths = new int[] { tokenLength };
+          } else {
+            result.offsets = new int[] { tokenOffset, (tokenOffset + 1), ((tokenOffset + tokenLength) - 1) };
+            result.lengths = new int[] { 1, (tokenLength - 2), 1 };
+          }
+          break;
+        case "RULE_RICH_TEXT_END":
+          result.delimiter = true;
+          result.offsets = new int[] { tokenOffset, (tokenOffset + 1) };
+          result.lengths = new int[] { 1, (tokenLength - 1) };
+          break;
+        case "RULE_COMMENT_RICH_TEXT_END":
+          result.delimiter = true;
+          result.offsets = new int[] { tokenOffset, (tokenOffset + 2) };
+          result.lengths = new int[] { 2, (tokenLength - 2) };
+          break;
+        case "RULE_COMMENT_RICH_TEXT_INBETWEEN":
+          result.delimiter = true;
+          result.offsets = new int[] { tokenOffset, (tokenOffset + 2), ((tokenOffset + tokenLength) - 1) };
+          result.lengths = new int[] { 2, (tokenLength - 3), 1 };
+          break;
+        default:
+          throw new IllegalArgumentException(id);
+      }
+    } else {
+      throw new IllegalArgumentException(id);
     }
     return result;
   }

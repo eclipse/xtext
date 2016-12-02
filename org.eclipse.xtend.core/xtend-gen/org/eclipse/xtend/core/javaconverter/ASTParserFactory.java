@@ -141,16 +141,20 @@ public class ASTParserFactory {
   
   public static int asJLS(final String javaVersion) {
     int _switchResult = (int) 0;
-    switch (javaVersion) {
-      case "1.7":
-        _switchResult = 4;
-        break;
-      case "1.8":
-        _switchResult = 8;
-        break;
-      default:
-        _switchResult = 3;
-        break;
+    if (javaVersion != null) {
+      switch (javaVersion) {
+        case "1.7":
+          _switchResult = 4;
+          break;
+        case "1.8":
+          _switchResult = 8;
+          break;
+        default:
+          _switchResult = 3;
+          break;
+      }
+    } else {
+      _switchResult = 3;
     }
     return _switchResult;
   }
