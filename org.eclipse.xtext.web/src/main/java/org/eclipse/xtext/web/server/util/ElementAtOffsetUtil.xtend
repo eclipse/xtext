@@ -20,11 +20,11 @@ class ElementAtOffsetUtil {
 
 	def EObject getElementAt(XtextResource resource, int offset) {
 		var crossLinkedEObject = resource.resolveCrossReferencedElementAt(offset)
-		if (crossLinkedEObject != null) {
+		if (crossLinkedEObject !== null) {
 			return crossLinkedEObject
 		} else {
 			var containedEObject = resource.resolveContainedElementAt(offset)
-			if (containedEObject != null) {
+			if (containedEObject !== null) {
 				val nameRegion = containedEObject.significantTextRegion
 				if (nameRegion.contains(offset))
 					return containedEObject

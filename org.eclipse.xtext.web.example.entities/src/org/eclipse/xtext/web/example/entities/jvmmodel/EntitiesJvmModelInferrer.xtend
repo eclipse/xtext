@@ -25,7 +25,7 @@ class EntitiesJvmModelInferrer extends AbstractModelInferrer {
 	def dispatch infer(Entity entity, extension IJvmDeclaredTypeAcceptor acceptor, boolean prelinkingPhase) {
 		accept(entity.toClass( entity.fullyQualifiedName )) [
 			documentation = entity.documentation
-			if (entity.superType != null)
+			if (entity.superType !== null)
 				superTypes += entity.superType.cloneWithProxies
 			
 			// let's add a default constructor
