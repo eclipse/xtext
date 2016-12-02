@@ -40,18 +40,18 @@ class XtextIDEAGeneratorExtensions {
 				boolean overwrite,
 				String defaultOutletName,
 				String lineDelimiter) {
-		if (getOutlet(outletName) != null) {
+		if (getOutlet(outletName) !== null) {
 			return
 		}
 		val outlet = new Outlet(outletName)
 		outlet.name = outletName
 		outlet.overwrite = overwrite
-		outlet.fileEncoding = if (encoding != null) {
+		outlet.fileEncoding = if (encoding !== null) {
 			encoding
 		} else {
 			getOutlet(defaultOutletName).fileEncoding
 		}
-		outlet.path = if (pathIdeaPluginProject != null) {
+		outlet.path = if (pathIdeaPluginProject !== null) {
 			pathIdeaPluginProject + projectPath
 		} else {
 			getOutlet(defaultOutletName).path

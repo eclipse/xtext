@@ -45,8 +45,7 @@ public class InsertionOffsets {
       };
       final ILeafNode openingBraceNode = IterableExtensions.<ILeafNode>findFirst(_leafNodes, _function);
       int _xifexpression = (int) 0;
-      boolean _notEquals = (!Objects.equal(openingBraceNode, null));
-      if (_notEquals) {
+      if ((openingBraceNode != null)) {
         int _offset = openingBraceNode.getOffset();
         _xifexpression = (_offset + 1);
       } else {

@@ -1,6 +1,5 @@
 package org.eclipse.xtext.xbase.ui.tests.refactoring;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.List;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -239,8 +238,7 @@ public class ExpressionUtilTest extends AbstractXbaseTestCase {
     TextSelection _textSelection = new TextSelection(selectionOffset, 0);
     final XExpression selectedExpression = this.util.findSelectedExpression(((XtextResource) _eResource), _textSelection);
     final XExpression successor = this.util.findSuccessorExpressionForVariableDeclaration(selectedExpression);
-    boolean _equals = Objects.equal(expectedSuccessor, null);
-    if (_equals) {
+    if ((expectedSuccessor == null)) {
       Assert.assertNull(successor);
     } else {
       Assert.assertNotNull(successor);

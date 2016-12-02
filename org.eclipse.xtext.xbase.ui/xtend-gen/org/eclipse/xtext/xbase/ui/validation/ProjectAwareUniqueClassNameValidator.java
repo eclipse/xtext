@@ -192,8 +192,7 @@ public class ProjectAwareUniqueClassNameValidator extends UniqueClassNameValidat
     }
     final HashSet<String> workingCopyPaths = CollectionLiterals.<String>newHashSet();
     ICompilationUnit[] copies = this.getWorkingCopies(type);
-    boolean _notEquals = (!Objects.equal(copies, null));
-    if (_notEquals) {
+    if ((copies != null)) {
       for (final ICompilationUnit workingCopy : copies) {
         {
           final IPath path = workingCopy.getPath();
@@ -217,8 +216,7 @@ public class ProjectAwareUniqueClassNameValidator extends UniqueClassNameValidat
       }
     }
     char[] _xifexpression = null;
-    boolean _equals = Objects.equal(packageName, null);
-    if (_equals) {
+    if ((packageName == null)) {
       _xifexpression = CharOperation.NO_CHAR;
     } else {
       _xifexpression = packageName.toCharArray();
@@ -286,8 +284,7 @@ public class ProjectAwareUniqueClassNameValidator extends UniqueClassNameValidat
       Map<Object, Object> _context = this.getContext();
       Object _get = _context.get(ProjectAwareUniqueClassNameValidator.OUTPUT_CONFIGS);
       final Collection<OutputConfiguration> outputConfigurations = ((Collection<OutputConfiguration>) _get);
-      boolean _notEquals = (!Objects.equal(outputConfigurations, null));
-      if (_notEquals) {
+      if ((outputConfigurations != null)) {
         final IPath projectRelativePath = resource.getProjectRelativePath();
         for (final OutputConfiguration outputConfiguration : outputConfigurations) {
           Set<String> _outputDirectories = outputConfiguration.getOutputDirectories();

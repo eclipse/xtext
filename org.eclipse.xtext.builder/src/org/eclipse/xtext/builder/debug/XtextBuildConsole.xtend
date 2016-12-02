@@ -45,7 +45,7 @@ class XtextBuildConsole extends IOConsole {
 		static IBuildLogger delegate
 		
 		override log(Object it) {
-			if(delegate != null)
+			if(delegate !== null)
 				delegate.log(it)
 			val consoleManager = ConsolePlugin.getDefault.consoleManager
 			val console = consoleManager.consoles.filter(XtextBuildConsole).head

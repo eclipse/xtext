@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.ui.editor.copyqualifiedname;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.Arrays;
 import java.util.List;
@@ -50,7 +49,7 @@ public class DefaultCopyQualifiedNameService implements CopyQualifiedNameService
   protected <T extends Object> CharSequence toQualifiedNames(final List<T> it, final Function1<? super T, ? extends String> toQualifiedNameFunction) {
     CharSequence _xblockexpression = null;
     {
-      if ((Objects.equal(it, null) || (it.size() == 0))) {
+      if (((it == null) || (it.size() == 0))) {
         return "";
       }
       StringConcatenation _builder = new StringConcatenation();
@@ -87,8 +86,7 @@ public class DefaultCopyQualifiedNameService implements CopyQualifiedNameService
   protected QualifiedName getFullyQualifiedName(final EObject it) {
     QualifiedName _xblockexpression = null;
     {
-      boolean _equals = Objects.equal(it, null);
-      if (_equals) {
+      if ((it == null)) {
         return null;
       }
       _xblockexpression = this.qualifiedNameProvider.getFullyQualifiedName(it);
@@ -99,8 +97,7 @@ public class DefaultCopyQualifiedNameService implements CopyQualifiedNameService
   protected String toString(final EObject it, final QualifiedName fullyQualifiedName) {
     String _xblockexpression = null;
     {
-      boolean _equals = Objects.equal(fullyQualifiedName, null);
-      if (_equals) {
+      if ((fullyQualifiedName == null)) {
         return null;
       }
       _xblockexpression = this.qualifiedNameConverter.toString(fullyQualifiedName);

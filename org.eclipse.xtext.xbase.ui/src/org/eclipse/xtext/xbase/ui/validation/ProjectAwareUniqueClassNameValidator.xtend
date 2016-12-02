@@ -119,7 +119,7 @@ class ProjectAwareUniqueClassNameValidator extends UniqueClassNameValidator {
 		
 		val workingCopyPaths = newHashSet
 		var copies = getWorkingCopies(type)
-		if (copies != null) {
+		if (copies !== null) {
 			for (workingCopy: copies) {
 				val path = workingCopy.path
 				if (javaProject.path.isPrefixOf(path) && !isDerived(workingCopy.resource)) {
@@ -138,7 +138,7 @@ class ProjectAwareUniqueClassNameValidator extends UniqueClassNameValidator {
 		// code below is adapted from BasicSearchEnginge.searchAllSecondaryTypes
 		// index is ready, query it for a secondary type 
 		val pattern = new TypeDeclarationPattern(
-			if(packageName == null) CharOperation.NO_CHAR else packageName.toCharArray(), CharOperation.NO_CHAR_CHAR, // top level type - no enclosing type names
+			if(packageName === null) CharOperation.NO_CHAR else packageName.toCharArray(), CharOperation.NO_CHAR_CHAR, // top level type - no enclosing type names
 			typeName.toCharArray(), IIndexConstants.TYPE_SUFFIX,
 			SearchPattern.R_EXACT_MATCH.bitwiseOr(SearchPattern.R_CASE_SENSITIVE))
 		
@@ -178,7 +178,7 @@ class ProjectAwareUniqueClassNameValidator extends UniqueClassNameValidator {
 				return true
 			}
 			val outputConfigurations = context.get(OUTPUT_CONFIGS) as Collection<OutputConfiguration>
-			if (outputConfigurations != null) {
+			if (outputConfigurations !== null) {
 				val projectRelativePath = resource.projectRelativePath
 				for(outputConfiguration: outputConfigurations) {
 					for(dir: outputConfiguration.outputDirectories) {

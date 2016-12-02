@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xbase.junit.typesystem;
 
 import com.google.common.annotations.Beta;
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.lang.reflect.Method;
@@ -66,8 +65,7 @@ public class Oven extends Assert {
       final EObject file = this._parseHelper.parse(input);
       final IResolvedTypes resolvedTypes = this.typeResolver.resolveTypes(file);
       Assert.assertNotNull(resolvedTypes);
-      boolean _notEquals = (!Objects.equal(file, null));
-      if (_notEquals) {
+      if ((file != null)) {
         TreeIterator<EObject> _eAllContents = file.eAllContents();
         Iterable<EObject> _iterable = IteratorExtensions.<EObject>toIterable(_eAllContents);
         for (final EObject content : _iterable) {
@@ -76,14 +74,14 @@ public class Oven extends Assert {
             _matched=true;
             this.assertExpressionTypeIsResolved(((XExpression)content), resolvedTypes);
             XExpression _implicitReceiver = ((XAbstractFeatureCall)content).getImplicitReceiver();
-            boolean _notEquals_1 = (!Objects.equal(_implicitReceiver, null));
-            if (_notEquals_1) {
+            boolean _tripleNotEquals = (_implicitReceiver != null);
+            if (_tripleNotEquals) {
               XExpression _implicitReceiver_1 = ((XAbstractFeatureCall)content).getImplicitReceiver();
               this.assertExpressionTypeIsResolved(_implicitReceiver_1, resolvedTypes);
             }
             XExpression _implicitFirstArgument = ((XAbstractFeatureCall)content).getImplicitFirstArgument();
-            boolean _notEquals_2 = (!Objects.equal(_implicitFirstArgument, null));
-            if (_notEquals_2) {
+            boolean _tripleNotEquals_1 = (_implicitFirstArgument != null);
+            if (_tripleNotEquals_1) {
               XExpression _implicitFirstArgument_1 = ((XAbstractFeatureCall)content).getImplicitFirstArgument();
               this.assertExpressionTypeIsResolved(_implicitFirstArgument_1, resolvedTypes);
             }
@@ -157,9 +155,9 @@ public class Oven extends Assert {
       String _plus = ("Type is not resolved. Expression: " + _string);
       boolean _xifexpression = false;
       if ((expression instanceof XAbstractFeatureCall)) {
-        _xifexpression = (((XAbstractFeatureCall)expression).isPackageFragment() || (!Objects.equal(type, null)));
+        _xifexpression = (((XAbstractFeatureCall)expression).isPackageFragment() || (type != null));
       } else {
-        _xifexpression = (!Objects.equal(type, null));
+        _xifexpression = (type != null);
       }
       Assert.assertTrue(_plus, _xifexpression);
     } catch (Throwable _e) {
@@ -169,8 +167,8 @@ public class Oven extends Assert {
   
   public void assertIdentifiableTypeIsResolved(final JvmIdentifiableElement identifiable, final IResolvedTypes types) {
     String _simpleName = identifiable.getSimpleName();
-    boolean _equals = Objects.equal(_simpleName, null);
-    if (_equals) {
+    boolean _tripleEquals = (_simpleName == null);
+    if (_tripleEquals) {
       return;
     }
     final LightweightTypeReference type = types.getActualType(identifiable);

@@ -53,7 +53,7 @@ class InMemoryJavaCompiler {
 				return cache.get(fileName)
 			}
 			val url = classLoader.getResource(fileName)
-			if (url == null) {
+			if (url === null) {
 				cache.put(fileName, null)
 				return null;
 			}
@@ -69,7 +69,7 @@ class InMemoryJavaCompiler {
 				return cache.get(fileName)
 			}
 			val url = classLoader.getResource(fileName)
-			if (url == null) {
+			if (url === null) {
 				cache.put(fileName, null)
 				return null;
 			}
@@ -106,7 +106,7 @@ class InMemoryJavaCompiler {
 			if (path.endsWith(".class")) {
 				val className = path.substring(0, path.length-6).replace("/", ".")
 				val bytes = classMap.get(className)
-				if (bytes != null) {
+				if (bytes !== null) {
 					return new URL("in-memory", null, -1, path, [ 
 						new URLConnection(it) {
 							override void connect() {}

@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.idea.generator.parser.antlr;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Singleton;
 import java.util.List;
@@ -599,8 +598,8 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
       _builder.append("$current = forceCreateModelElement");
       {
         String _feature = it.getFeature();
-        boolean _notEquals = (!Objects.equal(_feature, null));
-        if (_notEquals) {
+        boolean _tripleNotEquals = (_feature != null);
+        if (_tripleNotEquals) {
           _builder.append("And");
           String _setOrAdd = this._grammarAccessExtensions.setOrAdd(it);
           String _firstUpper = StringExtensions.toFirstUpper(_setOrAdd);

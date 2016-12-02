@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.xbase.ui.editor.copyqualifiedname;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.Arrays;
 import java.util.List;
@@ -119,12 +118,11 @@ public class XbaseCopyQualifiedNameService extends DefaultCopyQualifiedNameServi
   
   protected String toQualifiedName(final XExpression it, final IResolvedExecutable resolvedExecutable, final JvmExecutable executable, @Extension final IResolvedTypes resolvedTypes, final List<XExpression> arguments) {
     final LightweightTypeReference actualType = resolvedTypes.getActualType(it);
-    if ((((!Objects.equal(actualType, null)) && (!actualType.isAny())) && (!actualType.isUnknown()))) {
+    if ((((actualType != null) && (!actualType.isAny())) && (!actualType.isUnknown()))) {
       return actualType.getHumanReadableName();
     }
     final int index = arguments.indexOf(it);
-    boolean _equals = Objects.equal(resolvedExecutable, null);
-    if (_equals) {
+    if ((resolvedExecutable == null)) {
       EList<JvmFormalParameter> _parameters = executable.getParameters();
       JvmFormalParameter _get = _parameters.get(index);
       JvmTypeReference _parameterType = _get.getParameterType();

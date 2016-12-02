@@ -51,15 +51,15 @@ class Oven extends Assert {
 			val file = input.parse
 			val resolvedTypes = typeResolver.resolveTypes(file)
 			assertNotNull(resolvedTypes)
-			if (file != null) {
+			if (file !== null) {
 				for(content: file.eAllContents.toIterable) {
 					switch(content) {
 						XAbstractFeatureCall: {
 							assertExpressionTypeIsResolved(content, resolvedTypes)
-							if (content.implicitReceiver != null) {
+							if (content.implicitReceiver !== null) {
 								assertExpressionTypeIsResolved(content.implicitReceiver, resolvedTypes)
 							}
-							if (content.implicitFirstArgument != null) {
+							if (content.implicitFirstArgument !== null) {
 								assertExpressionTypeIsResolved(content.implicitFirstArgument, resolvedTypes)
 							}
 						}
@@ -98,11 +98,11 @@ class Oven extends Assert {
 			} 
 			default: internalTypes.invoke("getTypeData", expression, Boolean.FALSE) as TypeData
 		}
-		assertTrue("Type is not resolved. Expression: " + expression.toString, if (expression instanceof XAbstractFeatureCall) expression.packageFragment || type != null else type != null)
+		assertTrue("Type is not resolved. Expression: " + expression.toString, if (expression instanceof XAbstractFeatureCall) expression.packageFragment || type !== null else type !== null)
 	}
 	
 	def void assertIdentifiableTypeIsResolved(JvmIdentifiableElement identifiable, IResolvedTypes types) {
-		if (identifiable.simpleName == null)
+		if (identifiable.simpleName === null)
 			return;
 		val type = types.getActualType(identifiable)
 		assertNotNull(identifiable.toString, type)

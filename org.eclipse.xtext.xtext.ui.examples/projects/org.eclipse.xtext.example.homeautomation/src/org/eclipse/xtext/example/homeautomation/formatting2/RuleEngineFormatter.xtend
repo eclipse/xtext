@@ -44,7 +44,7 @@ class RuleEngineFormatter extends XbaseFormatter {
 		expr.surround[indent]
 		for (child : expr.expressions) {
 			val sem = child.immediatelyFollowing.keyword(";")
-			if (sem != null) {
+			if (sem !== null) {
 				sem.prepend[noSpace]
 				if (child != expr.expressions.last)
 					sem.append[newLine]
@@ -59,29 +59,29 @@ class RuleEngineFormatter extends XbaseFormatter {
 		expr.regionFor.keyword("switch").append[oneSpace]
 		expr.^switch.append[newLine].format
 		for (c : expr.cases) {
-			if (c.typeGuard != null && c.^case != null) {
+			if (c.typeGuard !== null && c.^case !== null) {
 				c.typeGuard.append[oneSpace]
 				c.^case.append[noSpace]
-			} else if (c.typeGuard != null) {
+			} else if (c.typeGuard !== null) {
 				c.typeGuard.append[noSpace]
-			} else if (c.^case != null) {
+			} else if (c.^case !== null) {
 				c.^case.prepend[oneSpace].append[noSpace]
 			}
 			c.regionFor.feature(XCASE_PART__FALL_THROUGH).prepend[noSpace].append[newLine]
 			c.^case.format
-			if (c == expr.cases.last && expr.^default == null)
+			if (c == expr.cases.last && expr.^default === null)
 				c.then.formatBody(true, document)
 			else
 				c.then.formatBodyParagraph(document)
 		}
-		if (expr.^default != null) {
+		if (expr.^default !== null) {
 			expr.regionFor.keyword("default").append[noSpace]
 			expr.^default.formatBody(true, document)
 		}
 	}
 
 	override protected void formatBody(XExpression expr, boolean forceMultiline, extension IFormattableDocument doc) {
-		if (expr == null)
+		if (expr === null)
 			return;
 		if (expr instanceof XBlockExpression) {
 			expr.prepend[newLine]
@@ -95,7 +95,7 @@ class RuleEngineFormatter extends XbaseFormatter {
 
 	override protected void formatBodyInline(XExpression expr, boolean forceMultiline,
 		extension IFormattableDocument doc) {
-		if (expr == null)
+		if (expr === null)
 			return;
 		if (expr instanceof XBlockExpression) {
 			expr.surround[newLine]
@@ -108,7 +108,7 @@ class RuleEngineFormatter extends XbaseFormatter {
 	}
 
 	override protected void formatBodyParagraph(XExpression expr, extension IFormattableDocument doc) {
-		if (expr == null)
+		if (expr === null)
 			return;
 		if (expr instanceof XBlockExpression) {
 			expr.surround[newLine]
