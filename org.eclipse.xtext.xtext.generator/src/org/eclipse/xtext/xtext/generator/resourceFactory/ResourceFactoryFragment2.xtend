@@ -39,7 +39,7 @@ class ResourceFactoryFragment2 extends AbstractXtextGeneratorFragment {
 			«ENDFOR»
 		''')
 
-		if (projectConfig.eclipsePlugin?.pluginXml != null) {
+		if (projectConfig.eclipsePlugin?.pluginXml !== null) {
 			projectConfig.eclipsePlugin.pluginXml.entries += '''
 				<!-- adding resource factories -->
 				«FOR fileExtension : language.fileExtensions»

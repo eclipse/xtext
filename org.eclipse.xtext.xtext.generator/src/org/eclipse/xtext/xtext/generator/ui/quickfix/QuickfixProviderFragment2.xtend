@@ -43,7 +43,7 @@ class QuickfixProviderFragment2 extends AbstractInheritingFragment {
 
 	def protected TypeReference getQuickfixProviderSuperClass(Grammar g) {
 		val superGrammar = g.getNonTerminalsSuperGrammar;
-		if (inheritImplementation && superGrammar != null) 
+		if (inheritImplementation && superGrammar !== null) 
 			superGrammar.quickfixProviderClass
 		else
 			defaultQuickfixProviderSuperClass

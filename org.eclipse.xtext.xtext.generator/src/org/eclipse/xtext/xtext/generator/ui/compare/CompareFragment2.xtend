@@ -38,7 +38,7 @@ class CompareFragment2 extends AbstractXtextGeneratorFragment {
 					new TypeReference("org.eclipse.xtext.ui.compare.DefaultViewerCreator")
 				).contributeTo(language.eclipsePluginGenModule);
 
-		if (projectConfig.eclipsePlugin?.pluginXml != null) {
+		if (projectConfig.eclipsePlugin?.pluginXml !== null) {
 			projectConfig.eclipsePlugin.pluginXml.entries += '''
 			<extension point="org.eclipse.compare.contentViewers">
 				<viewer id="«grammar.name».compare.contentViewers"

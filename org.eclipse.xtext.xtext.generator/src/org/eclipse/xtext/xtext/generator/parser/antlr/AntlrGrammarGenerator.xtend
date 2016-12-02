@@ -212,7 +212,7 @@ class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenerator {
 			}
 			«ENDIF»
 			{
-				$current = forceCreateModelElement«IF feature != null»And«setOrAdd.toFirstUpper»«ENDIF»(
+				$current = forceCreateModelElement«IF feature !== null»And«setOrAdd.toFirstUpper»«ENDIF»(
 					grammarAccess.«originalElement.grammarElementAccess»,
 					$current);
 			}

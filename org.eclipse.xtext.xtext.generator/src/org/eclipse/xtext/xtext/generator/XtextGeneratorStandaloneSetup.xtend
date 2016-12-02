@@ -41,6 +41,6 @@ class XtextGeneratorStandaloneSetup implements IGuiceAwareGeneratorComponent {
 	}
 
 	private def getProjectMappings() {
-		projectConfig.enabledProjects.filter[name != null && root != null].map[name -> root.path]
+		projectConfig.enabledProjects.filter[name !== null && root !== null].map[name -> root.path]
 	}
 }	

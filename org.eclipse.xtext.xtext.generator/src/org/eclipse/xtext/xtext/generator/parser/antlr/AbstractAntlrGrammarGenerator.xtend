@@ -103,7 +103,7 @@ abstract class AbstractAntlrGrammarGenerator {
 			«IF !isCombinedGrammar»
 				tokenVocab=«grammarNaming.getLexerGrammar(it).simpleName»;
 			«ENDIF»
-			«IF grammarNaming.getInternalParserSuperClass(it) != null»
+			«IF grammarNaming.getInternalParserSuperClass(it) !== null»
 				superClass=«grammarNaming.getInternalParserSuperClass(it).simpleName»;
 			«ENDIF»
 			«IF isParserBackTracking(options) || options.memoize || options.k >= 0»
@@ -447,7 +447,7 @@ abstract class AbstractAntlrGrammarGenerator {
 	}
 	
 	def dispatch mustBeParenthesized(Group it) {
-		predicated() || firstSetPredicated || cardinality != null
+		predicated() || firstSetPredicated || cardinality !== null
 	}
 	
 	def dispatch boolean mustBeParenthesized(Assignment it) {

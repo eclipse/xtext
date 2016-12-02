@@ -95,7 +95,7 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 		if (debugGrammar)
 			generateDebugGrammar()
 		generateProductionGrammar()
-		if (projectConfig.genericIde.srcGen != null) {
+		if (projectConfig.genericIde.srcGen !== null) {
 			generateContentAssistGrammar()
 			addIdeBindingsAndImports()
 		}
@@ -325,7 +325,7 @@ class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment2 {
 				«ENDIF»
 				@Override
 				protected String getRuleName(«AbstractElement» element) {
-					if (nameMappings == null) {
+					if (nameMappings === null) {
 						nameMappings = new «HashMap»<«AbstractElement», String>() {
 							private static final long serialVersionUID = 1L;
 							{

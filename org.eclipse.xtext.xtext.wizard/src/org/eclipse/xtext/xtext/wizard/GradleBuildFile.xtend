@@ -41,7 +41,7 @@ class GradleBuildFile extends TextFile {
 	}
 	
 	private def getMavenDependencies() {
-		project.externalDependencies.map[maven].filter[artifactId != null]
+		project.externalDependencies.map[maven].filter[artifactId !== null]
 	}
 	
 	private def getAllDependencies() {

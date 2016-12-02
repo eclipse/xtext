@@ -78,7 +78,7 @@ class ManifestAccess extends TextFileAccess implements IGuiceAwareGeneratorCompo
 		}
 		this.exportedPackages.addAll(other.exportedPackages)
 		this.requiredBundles.addAll(other.requiredBundles)
-		if (symbolicName != null) {
+		if (symbolicName !== null) {
 			this.requiredBundles.remove(effectiveSymbolicName)
 		}
 		this.importedPackages.addAll(other.importedPackages)
@@ -124,7 +124,7 @@ class ManifestAccess extends TextFileAccess implements IGuiceAwareGeneratorCompo
 	'''
 	
 	override void writeTo(IFileSystemAccess2 fileSystemAccess) {
-		if (fileSystemAccess != null) {
+		if (fileSystemAccess !== null) {
 			val contentToWrite = MergeableManifest.make512Safe(new StringBuffer(content), lineDelimiter)
 			// make sure all the constraints for the manifest are respected
 			val mergableManifest = new MergeableManifest(new ByteArrayInputStream(contentToWrite.getBytes("UTF-8")))

@@ -107,7 +107,7 @@ abstract class ProjectDescriptor {
 		Bundle-Vendor: My Company
 		Bundle-Version: 1.0.0.qualifier
 		Bundle-SymbolicName: «name»; singleton:=true
-		«IF activatorClassName != null»
+		«IF activatorClassName !== null»
 			Bundle-Activator: «activatorClassName»
 		«ENDIF»
 		Bundle-ActivationPolicy: lazy
@@ -130,8 +130,8 @@ abstract class ProjectDescriptor {
 	def Set<String> getRequiredBundles() {
 		val bundles = newLinkedHashSet
 		bundles += upstreamProjects.map[name]
-		bundles += externalDependencies.map[p2].filter[bundleId != null]
-			.map[bundleId + if (version == null) "" else ';bundle-version="' +version+ '"']
+		bundles += externalDependencies.map[p2].filter[bundleId !== null]
+			.map[bundleId + if (version === null) "" else ';bundle-version="' +version+ '"']
 		bundles
 	}
 

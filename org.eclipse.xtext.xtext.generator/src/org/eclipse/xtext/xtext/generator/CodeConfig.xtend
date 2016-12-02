@@ -78,7 +78,7 @@ class CodeConfig implements IGuiceAwareGeneratorComponent {
 			lineDelimiter = '\n'
 		
 		var fileHeader = fileHeaderTemplate
-		if (fileHeader != null) {
+		if (fileHeader !== null) {
 			if (fileHeader.contains(FILE_HEADER_VAR_TIME)) {
 				val dateFormat = new SimpleDateFormat('HH:mm:ss')
 				val time = dateFormat.format(new Date)
@@ -96,7 +96,7 @@ class CodeConfig implements IGuiceAwareGeneratorComponent {
 			}
 			if (fileHeader.contains(FILE_HEADER_VAR_USER)) {
 				val user = System.getProperty("user.name")
-				if (user != null) {
+				if (user !== null) {
 					fileHeader = fileHeader.replace(FILE_HEADER_VAR_USER, user)
 				}
 			}

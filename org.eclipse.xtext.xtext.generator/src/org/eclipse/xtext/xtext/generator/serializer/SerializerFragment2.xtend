@@ -270,7 +270,7 @@ import static extension org.eclipse.xtext.xtext.generator.util.GenModelUtil2.*
 						«ENDFOR»
 						}
 				«ENDFOR»
-				if (errorAcceptor != null)
+				if (errorAcceptor !== null)
 					errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 			}
 		'''
@@ -402,7 +402,7 @@ import static extension org.eclipse.xtext.xtext.generator.util.GenModelUtil2.*
 			 */
 			protected void sequence_«c.simpleName»(«ISerializationContext» context, «c.type» semanticObject) {
 				«IF states !== null»
-					if (errorAcceptor != null) {
+					if (errorAcceptor !== null) {
 						«FOR s : states»
 							if (transientValues.isValueTransient(«cast»semanticObject, «s.feature.EContainingClass.EPackage».«s.feature.getFeatureLiteral(rs)») == «ITransientValueService.ValueTransient».YES)
 								errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(«cast»semanticObject, «s.feature.EContainingClass.EPackage».«s.feature.getFeatureLiteral(rs)»));
@@ -496,7 +496,7 @@ import static extension org.eclipse.xtext.xtext.generator.util.GenModelUtil2.*
 		if (c.isEObjectRuleCall)
 			return false
 		val ass = c.containingAssignment
-		return ass == null || ass.isBooleanAssignment
+		return ass === null || ass.isBooleanAssignment
 	}
 
 	private def String defaultValue(AbstractElement ele, Set<AbstractElement> visited) {
@@ -547,7 +547,7 @@ import static extension org.eclipse.xtext.xtext.generator.util.GenModelUtil2.*
 			 * «NodeModelUtils.getNode(rule).textWithoutComments.trim.replace('\n', '\n* ').replace('*/','*&#47;')»
 			 */
 			protected String «rule.unassignedCalledTokenRuleName»(«EObject» semanticObject, «RuleCall» ruleCall, «INode» node) {
-				if (node != null)
+				if (node !== null)
 					return getTokenText(node);
 				return "«Strings.convertToJavaString(rule.alternatives.defaultValue(newHashSet))»";
 			}
@@ -574,7 +574,7 @@ import static extension org.eclipse.xtext.xtext.generator.util.GenModelUtil2.*
 		fileAccessFactory.createTextFile(grammar.grammarConstraintsPath, '''
 			«FOR e : grammar.constraints.sortedCopy.values SEPARATOR '\n'»
 				«e.contexts.join(", ")»:
-					«IF e.value.body == null»
+					«IF e.value.body === null»
 						{«e.value.type?.name»};
 					«ELSE»
 						«e.value.body»;

@@ -54,7 +54,7 @@ class SimpleProjectWizardFragment2 extends AbstractXtextGeneratorFragment {
 			new TypeReference(projectCreatorClassName)
 		).contributeTo(language.eclipsePluginGenModule);
 
-		if (projectConfig.eclipsePlugin?.pluginXml != null) {
+		if (projectConfig.eclipsePlugin?.pluginXml !== null) {
 			projectConfig.eclipsePlugin.pluginXml.entries += '''
 				<extension
 					point="org.eclipse.ui.newWizards">
