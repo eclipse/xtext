@@ -15,17 +15,19 @@ import java.util.Arrays;
 
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.xtext.ui.wizard.IProjectCreator;
 import org.eclipse.xtext.ui.wizard.IProjectInfo;
 import org.eclipse.xtext.ui.wizard.XtextNewProjectWizard;
 import org.eclipse.xtext.util.JavaVersion;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xtext.ui.Activator;
 import org.eclipse.xtext.xtext.wizard.BuildSystem;
 import org.eclipse.xtext.xtext.wizard.LanguageDescriptor;
-import org.eclipse.xtext.xtext.wizard.ProjectLayout;
-import org.eclipse.xtext.xtext.wizard.TestedProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.LanguageDescriptor.FileExtensions;
 import org.eclipse.xtext.xtext.wizard.ProjectDescriptor;
+import org.eclipse.xtext.xtext.wizard.ProjectLayout;
+import org.eclipse.xtext.xtext.wizard.TestedProjectDescriptor;
 
 import com.google.inject.Inject;
 
@@ -73,6 +75,8 @@ public class NewXtextProjectWizard extends XtextNewProjectWizard {
 			encoding = Charset.defaultCharset();
 		}
 		projectInfo.setEncoding(encoding);
+		String lineDelimiter = InstanceScope.INSTANCE.getNode("org.eclipse.core.runtime").get("line.separator", Strings.newLine());
+		projectInfo.setLineDelimiter(lineDelimiter);
 		projectInfo.setWorkbench(getWorkbench());
 		JavaVersion selectedBree = mainPage.getJavaVersion();
 		// Use old default for wizard as fall back, when something goes wrong
