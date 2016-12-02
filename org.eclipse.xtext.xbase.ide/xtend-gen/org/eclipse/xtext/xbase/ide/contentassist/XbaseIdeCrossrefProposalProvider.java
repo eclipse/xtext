@@ -242,7 +242,7 @@ public class XbaseIdeCrossrefProposalProvider extends IdeCrossrefProposalProvide
         labelBuilder.append(")");
       }
       final JvmTypeReference returnType = ((JvmOperation)feature).getReturnType();
-      if (((!Objects.equal(returnType, null)) && (!Objects.equal(returnType.getSimpleName(), null)))) {
+      if (((returnType != null) && (returnType.getSimpleName() != null))) {
         labelBuilder.append(" : ");
         LightweightTypeReference _lightweightReference = converter.toLightweightReference(returnType);
         String _humanReadableName = _lightweightReference.getHumanReadableName();
@@ -262,13 +262,12 @@ public class XbaseIdeCrossrefProposalProvider extends IdeCrossrefProposalProvide
       if ((feature instanceof JvmField)) {
         labelBuilder.append(" : ");
         JvmTypeReference _type = ((JvmField)feature).getType();
-        boolean _notEquals = (!Objects.equal(_type, null));
-        if (_notEquals) {
+        boolean _tripleNotEquals = (_type != null);
+        if (_tripleNotEquals) {
           JvmTypeReference _type_1 = ((JvmField)feature).getType();
           LightweightTypeReference _lightweightReference_1 = converter.toLightweightReference(_type_1);
           final String fieldType = _lightweightReference_1.getHumanReadableName();
-          boolean _notEquals_1 = (!Objects.equal(fieldType, null));
-          if (_notEquals_1) {
+          if ((fieldType != null)) {
             labelBuilder.append(fieldType);
           }
         }
@@ -328,13 +327,12 @@ public class XbaseIdeCrossrefProposalProvider extends IdeCrossrefProposalProvide
           result.append("...");
         } else {
           JvmTypeReference _parameterType_1 = parameter.getParameterType();
-          boolean _notEquals = (!Objects.equal(_parameterType_1, null));
-          if (_notEquals) {
+          boolean _tripleNotEquals = (_parameterType_1 != null);
+          if (_tripleNotEquals) {
             JvmTypeReference _parameterType_2 = parameter.getParameterType();
             LightweightTypeReference _lightweightReference_1 = ownedConverter.toLightweightReference(_parameterType_2);
             final String simpleName = _lightweightReference_1.getHumanReadableName();
-            boolean _notEquals_1 = (!Objects.equal(simpleName, null));
-            if (_notEquals_1) {
+            if ((simpleName != null)) {
               result.append(simpleName);
             }
           }

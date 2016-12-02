@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.xbase.typesystem.util;
 
-import com.google.common.base.Objects;
 import java.util.HashSet;
 import java.util.Set;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
@@ -50,8 +49,7 @@ public class ConstraintVisitingInfo {
   }
   
   public void pushInfo(final JvmTypeParameterDeclarator declarator, final int idx) {
-    boolean _equals = Objects.equal(declarator, null);
-    if (_equals) {
+    if ((declarator == null)) {
       throw new NullPointerException("declarator may not be null");
     }
     this.declarator = declarator;

@@ -211,8 +211,7 @@ public class AntlrGrammarComparator {
    * 			and the referenced grammar (value) for logging purposes
    */
   public AntlrGrammarComparator.ErrorContext compareGrammars(final CharSequence grammar, final CharSequence grammarReference, final AntlrGrammarComparator.IErrorHandler errorHandler) {
-    boolean _equals = Objects.equal(this.errorContext, null);
-    if (_equals) {
+    if ((this.errorContext == null)) {
       AntlrGrammarComparator.ErrorContext _errorContext = new AntlrGrammarComparator.ErrorContext();
       this.errorContext = _errorContext;
     }

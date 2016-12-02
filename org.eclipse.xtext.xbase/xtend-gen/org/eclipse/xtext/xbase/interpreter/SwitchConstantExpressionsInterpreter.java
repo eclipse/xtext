@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.xbase.interpreter;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -112,8 +111,7 @@ public class SwitchConstantExpressionsInterpreter extends AbstractConstantExpres
         } else {
           if ((((JvmField)feature).isFinal() && (((JvmField)feature).isStatic() || ((ctx instanceof SwitchConstantExpressionsInterpreter.SwitchContext) && ((SwitchConstantExpressionsInterpreter.SwitchContext) ctx).validationMode)))) {
             final XExpression associatedExpression = this._iLogicalContainerProvider.getAssociatedExpression(feature);
-            boolean _notEquals = (!Objects.equal(associatedExpression, null));
-            if (_notEquals) {
+            if ((associatedExpression != null)) {
               return this.evaluateAssociatedExpression(associatedExpression, ctx);
             }
           }
@@ -122,7 +120,7 @@ public class SwitchConstantExpressionsInterpreter extends AbstractConstantExpres
     }
     if (!_matched) {
       if (feature instanceof XVariableDeclaration) {
-        if (((!((XVariableDeclaration)feature).isWriteable()) && (!Objects.equal(((XVariableDeclaration)feature).getRight(), null)))) {
+        if (((!((XVariableDeclaration)feature).isWriteable()) && (((XVariableDeclaration)feature).getRight() != null))) {
           _matched=true;
           XExpression _right = ((XVariableDeclaration)feature).getRight();
           return this.evaluateAssociatedExpression(_right, ctx);
@@ -137,8 +135,8 @@ public class SwitchConstantExpressionsInterpreter extends AbstractConstantExpres
         boolean _matched_1 = false;
         if (container instanceof XSwitchExpression) {
           XExpression _switch = ((XSwitchExpression)container).getSwitch();
-          boolean _notEquals = (!Objects.equal(_switch, null));
-          if (_notEquals) {
+          boolean _tripleNotEquals = (_switch != null);
+          if (_tripleNotEquals) {
             _matched_1=true;
             XExpression _switch_1 = ((XSwitchExpression)container).getSwitch();
             return this.evaluate(_switch_1, ctx);

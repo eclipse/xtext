@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.xbase.jvmmodel;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import org.eclipse.emf.common.notify.Adapter;
@@ -63,9 +62,9 @@ public class JvmTypeExtensions {
   
   public boolean isSingleSyntheticDefaultConstructor(final JvmConstructor it) {
     return ((((it.getParameters().isEmpty() && 
-      Objects.equal(this._iLogicalContainerProvider.getAssociatedExpression(it), null)) && 
-      Objects.equal(this.getCompilationStrategy(it), null)) && 
-      Objects.equal(this.getCompilationTemplate(it), null)) && 
+      (this._iLogicalContainerProvider.getAssociatedExpression(it) == null)) && 
+      (this.getCompilationStrategy(it) == null)) && 
+      (this.getCompilationTemplate(it) == null)) && 
       (IterableExtensions.size(Iterables.<JvmConstructor>filter(it.getDeclaringType().getMembers(), JvmConstructor.class)) == 1));
   }
   
@@ -102,8 +101,7 @@ public class JvmTypeExtensions {
     EList<Adapter> _eAdapters = element.eAdapters();
     Adapter _adapter = EcoreUtil.getAdapter(_eAdapters, JvmIdentifiableMetaData.class);
     JvmIdentifiableMetaData metaData = ((JvmIdentifiableMetaData) _adapter);
-    boolean _equals = Objects.equal(metaData, null);
-    if (_equals) {
+    if ((metaData == null)) {
       JvmIdentifiableMetaData _jvmIdentifiableMetaData = new JvmIdentifiableMetaData();
       metaData = _jvmIdentifiableMetaData;
       EList<Adapter> _eAdapters_1 = element.eAdapters();

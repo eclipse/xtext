@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.xbase.tests.interpreter;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -131,8 +130,7 @@ public class SwitchConstantExpressionsInterpreterTest extends AbstractXbaseTestC
       _builder.append("\t");
       _builder.append("val");
       {
-        boolean _notEquals = (!Objects.equal(type, null));
-        if (_notEquals) {
+        if ((type != null)) {
           _builder.append(" ");
           _builder.append(type, "\t");
         }

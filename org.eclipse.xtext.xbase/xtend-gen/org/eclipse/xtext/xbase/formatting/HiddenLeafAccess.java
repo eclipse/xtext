@@ -42,8 +42,7 @@ public class HiddenLeafAccess {
       final ILeafNode start = this._nodeModelAccess.findNextLeaf(node, _function);
       final List<ILeafNode> nodes = this.findPreviousHiddenLeafs(start);
       HiddenLeafs _xifexpression = null;
-      boolean _notEquals = (!Objects.equal(start, null));
-      if (_notEquals) {
+      if ((start != null)) {
         int _xifexpression_1 = (int) 0;
         boolean _isEmpty = nodes.isEmpty();
         if (_isEmpty) {
@@ -157,8 +156,7 @@ public class HiddenLeafAccess {
       };
       final ILeafNode start = this.findPreviousLeaf(node, _function);
       HiddenLeafs _xifexpression = null;
-      boolean _notEquals = (!Objects.equal(start, null));
-      if (_notEquals) {
+      if ((start != null)) {
         int _endOffset = start.getEndOffset();
         List<ILeafNode> _findNextHiddenLeafs = this.findNextHiddenLeafs(start);
         _xifexpression = this.newHiddenLeafs(_endOffset, _findNextHiddenLeafs);
@@ -206,8 +204,7 @@ public class HiddenLeafAccess {
     if (((current instanceof ILeafNode) && (matches.apply(((ILeafNode) current))).booleanValue())) {
       return ((ILeafNode) current);
     }
-    boolean _notEquals = (!Objects.equal(current, null));
-    if (_notEquals) {
+    if ((current != null)) {
       final NodeIterator ni = new NodeIterator(current);
       while (ni.hasPrevious()) {
         {
@@ -230,8 +227,7 @@ public class HiddenLeafAccess {
         current = _lastChild;
       }
       final ArrayList<ILeafNode> result = CollectionLiterals.<ILeafNode>newArrayList();
-      boolean _notEquals = (!Objects.equal(current, null));
-      if (_notEquals) {
+      if ((current != null)) {
         final NodeIterator ni = new NodeIterator(current);
         while (ni.hasPrevious()) {
           {

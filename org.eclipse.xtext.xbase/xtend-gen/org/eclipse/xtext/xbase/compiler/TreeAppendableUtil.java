@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.xbase.compiler;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.generator.trace.LocationData;
@@ -73,7 +72,7 @@ public class TreeAppendableUtil {
         }
         final ITextRegionWithLineInformation it = ((ITextRegionWithLineInformation) _switchResult);
         ITreeAppendable _xifexpression_1 = null;
-        if (((!Objects.equal(it, null)) && (it != ITextRegion.EMPTY_REGION))) {
+        if (((it != null) && (it != ITextRegion.EMPTY_REGION))) {
           int _offset = it.getOffset();
           int _length = it.getLength();
           int _lineNumber = it.getLineNumber();

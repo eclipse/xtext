@@ -1,6 +1,5 @@
 package org.eclipse.xtext.java.resource;
 
-import com.google.common.base.Objects;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -37,8 +36,7 @@ public class InMemoryClassLoader extends ClassLoader {
       if (_endsWith) {
         final String className = this.pathToClassName(path);
         final byte[] bytes = this.classMap.get(className);
-        boolean _notEquals = (!Objects.equal(bytes, null));
-        if (_notEquals) {
+        if ((bytes != null)) {
           final URLStreamHandler _function = new URLStreamHandler() {
             @Override
             protected URLConnection openConnection(final URL it) throws IOException {

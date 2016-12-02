@@ -82,7 +82,7 @@ public class NodeModelAccess {
       };
       final ILeafNode result = this.findNextLeaf(current1, _function);
       ILeafNode _xifexpression = null;
-      if (((!Objects.equal(result, null)) && Objects.equal(result.getText(), kw))) {
+      if (((result != null) && Objects.equal(result.getText(), kw))) {
         _xifexpression = result;
       }
       _xblockexpression = _xifexpression;
@@ -92,8 +92,7 @@ public class NodeModelAccess {
   
   public ILeafNode findNextLeaf(final INode node, final Function1<? super ILeafNode, ? extends Boolean> matches) {
     Object _xifexpression = null;
-    boolean _notEquals = (!Objects.equal(node, null));
-    if (_notEquals) {
+    if ((node != null)) {
       if (((node instanceof ILeafNode) && (matches.apply(((ILeafNode) node))).booleanValue())) {
         return ((ILeafNode) node);
       }

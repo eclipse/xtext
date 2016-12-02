@@ -90,8 +90,7 @@ public class JavaDerivedStateComputer {
     final Parser parser = new Parser(_problemReporter, true);
     final CompilationResult compilationResult = new CompilationResult(compilationUnit, 0, 1, (-1));
     final CompilationUnitDeclaration result = parser.dietParse(compilationUnit, compilationResult);
-    boolean _notEquals = (!Objects.equal(result.types, null));
-    if (_notEquals) {
+    if ((result.types != null)) {
       for (final TypeDeclaration type : result.types) {
         {
           ImportReference _currentPackage = result.currentPackage;
@@ -149,8 +148,7 @@ public class JavaDerivedStateComputer {
     String _valueOf = String.valueOf(type.name);
     jvmType.setSimpleName(_valueOf);
     if ((jvmType instanceof JvmGenericType)) {
-      boolean _notEquals = (!Objects.equal(type.typeParameters, null));
-      if (_notEquals) {
+      if ((type.typeParameters != null)) {
         for (final TypeParameter typeParam : type.typeParameters) {
           {
             final JvmTypeParameter jvmTypeParam = TypesFactory.eINSTANCE.createJvmTypeParameter();
@@ -162,8 +160,7 @@ public class JavaDerivedStateComputer {
         }
       }
     }
-    boolean _notEquals_1 = (!Objects.equal(type.memberTypes, null));
-    if (_notEquals_1) {
+    if ((type.memberTypes != null)) {
       for (final TypeDeclaration nestedType : type.memberTypes) {
         {
           final JvmDeclaredType nested = this.createType(nestedType, null);
@@ -188,16 +185,15 @@ public class JavaDerivedStateComputer {
     final ClassLoader classLoader = this.getClassLoader(resource);
     ResourceSet _resourceSet = resource.getResourceSet();
     final IResourceDescriptions data = this.resourceDescriptionsProvider.getResourceDescriptions(_resourceSet);
-    boolean _equals = Objects.equal(data, null);
-    if (_equals) {
+    if ((data == null)) {
       throw new IllegalStateException("no index installed");
     }
     final IndexAwareNameEnvironment nameEnv = new IndexAwareNameEnvironment(classLoader, data, this.stubGenerator);
     IErrorHandlingPolicy _proceedWithAllProblems = DefaultErrorHandlingPolicies.proceedWithAllProblems();
     CompilerOptions _compilerOptions = this.getCompilerOptions(resource);
     final ICompilerRequestor _function = (CompilationResult it) -> {
-      boolean _equals_1 = Arrays.equals(it.fileName, compilationUnit.fileName);
-      if (_equals_1) {
+      boolean _equals = Arrays.equals(it.fileName, compilationUnit.fileName);
+      if (_equals) {
         final HashMap<String, byte[]> map = CollectionLiterals.<String, byte[]>newHashMap();
         List<String> topLevelTypes = CollectionLiterals.<String>newArrayList();
         ClassFile[] _classFiles = it.getClassFiles();

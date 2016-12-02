@@ -209,8 +209,8 @@ public class JvmModelGenerator implements IGenerator {
       return;
     }
     String _qualifiedName = type.getQualifiedName();
-    boolean _notEquals = (!Objects.equal(_qualifiedName, null));
-    if (_notEquals) {
+    boolean _tripleNotEquals = (_qualifiedName != null);
+    if (_tripleNotEquals) {
       String _qualifiedName_1 = type.getQualifiedName();
       String _replace = _qualifiedName_1.replace(".", "/");
       String _plus = (_replace + ".java");
@@ -234,8 +234,8 @@ public class JvmModelGenerator implements IGenerator {
     final TreeAppendable importAppendable = this.createAppendable(type, importManager, config);
     this.generateFileHeader(type, importAppendable, config);
     String _packageName = type.getPackageName();
-    boolean _notEquals = (!Objects.equal(_packageName, null));
-    if (_notEquals) {
+    boolean _tripleNotEquals = (_packageName != null);
+    if (_tripleNotEquals) {
       ITreeAppendable _append = importAppendable.append("package ");
       String _packageName_1 = type.getPackageName();
       ITreeAppendable _append_1 = _append.append(_packageName_1);
@@ -343,8 +343,8 @@ public class JvmModelGenerator implements IGenerator {
       this.generateAnnotations(_filter, appendable, true, config);
       ITreeAppendable _xifexpression = null;
       EObject _eContainer = it.eContainer();
-      boolean _equals = Objects.equal(_eContainer, null);
-      if (_equals) {
+      boolean _tripleEquals = (_eContainer == null);
+      if (_tripleEquals) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("@SuppressWarnings(\"all\")");
         ITreeAppendable _append = appendable.append(_builder);
@@ -493,8 +493,8 @@ public class JvmModelGenerator implements IGenerator {
   
   public void generateDefaultExpression(final JvmOperation it, final ITreeAppendable appendable, final GeneratorConfig config) {
     Procedure1<? super ITreeAppendable> _compilationStrategy = this._jvmTypeExtensions.getCompilationStrategy(it);
-    boolean _notEquals = (!Objects.equal(_compilationStrategy, null));
-    if (_notEquals) {
+    boolean _tripleNotEquals = (_compilationStrategy != null);
+    if (_tripleNotEquals) {
       appendable.append(" default ");
       appendable.increaseIndentation();
       Procedure1<? super ITreeAppendable> _compilationStrategy_1 = this._jvmTypeExtensions.getCompilationStrategy(it);
@@ -502,8 +502,8 @@ public class JvmModelGenerator implements IGenerator {
       appendable.decreaseIndentation();
     } else {
       StringConcatenationClient _compilationTemplate = this._jvmTypeExtensions.getCompilationTemplate(it);
-      boolean _notEquals_1 = (!Objects.equal(_compilationTemplate, null));
-      if (_notEquals_1) {
+      boolean _tripleNotEquals_1 = (_compilationTemplate != null);
+      if (_tripleNotEquals_1) {
         ITreeAppendable _append = appendable.append(" default ");
         _append.increaseIndentation();
         this.appendCompilationTemplate(appendable, it);
@@ -512,8 +512,7 @@ public class JvmModelGenerator implements IGenerator {
         boolean _isGenerateExpressions = config.isGenerateExpressions();
         if (_isGenerateExpressions) {
           final XExpression body = this._iLogicalContainerProvider.getAssociatedExpression(it);
-          boolean _notEquals_2 = (!Objects.equal(body, null));
-          if (_notEquals_2) {
+          if ((body != null)) {
             boolean _hasErrors = this._errorSafeExtensions.hasErrors(body);
             if (_hasErrors) {
               appendable.append("/* skipped default expression with errors */");
@@ -524,8 +523,8 @@ public class JvmModelGenerator implements IGenerator {
             }
           } else {
             JvmAnnotationValue _defaultValue = it.getDefaultValue();
-            boolean _notEquals_3 = (!Objects.equal(_defaultValue, null));
-            if (_notEquals_3) {
+            boolean _tripleNotEquals_2 = (_defaultValue != null);
+            if (_tripleNotEquals_2) {
               JvmAnnotationValue _defaultValue_1 = it.getDefaultValue();
               boolean _hasErrors_1 = this._errorSafeExtensions.hasErrors(_defaultValue_1);
               if (_hasErrors_1) {
@@ -676,8 +675,7 @@ public class JvmModelGenerator implements IGenerator {
    * Returns the visibility modifier and a space as suffix if not empty
    */
   public String javaName(final JvmVisibility visibility) {
-    boolean _notEquals = (!Objects.equal(visibility, null));
-    if (_notEquals) {
+    if ((visibility != null)) {
       String _switchResult = null;
       if (visibility != null) {
         switch (visibility) {
@@ -757,8 +755,7 @@ public class JvmModelGenerator implements IGenerator {
         return Boolean.valueOf((!Objects.equal(typeRef, superClazz)));
       };
       final Iterable<JvmTypeReference> superInterfaces = IterableExtensions.<JvmTypeReference>filter(withoutObject_1, _function_5);
-      boolean _notEquals = (!Objects.equal(superClazz, null));
-      if (_notEquals) {
+      if ((superClazz != null)) {
         final boolean hasErrors = this._errorSafeExtensions.hasErrors(superClazz);
         if (hasErrors) {
           appendable.append("/* ");
@@ -854,8 +851,8 @@ public class JvmModelGenerator implements IGenerator {
       this.generateModifier(it, tracedAppendable, config);
       this.generateTypeParameterDeclaration(it, tracedAppendable, config);
       JvmTypeReference _returnType = it.getReturnType();
-      boolean _equals = Objects.equal(_returnType, null);
-      if (_equals) {
+      boolean _tripleEquals = (_returnType == null);
+      if (_tripleEquals) {
         tracedAppendable.append("void");
       } else {
         JvmTypeReference _returnType_1 = it.getReturnType();
@@ -911,8 +908,8 @@ public class JvmModelGenerator implements IGenerator {
   
   public void generateInitialization(final JvmField it, final ITreeAppendable appendable, final GeneratorConfig config) {
     Procedure1<? super ITreeAppendable> _compilationStrategy = this._jvmTypeExtensions.getCompilationStrategy(it);
-    boolean _notEquals = (!Objects.equal(_compilationStrategy, null));
-    if (_notEquals) {
+    boolean _tripleNotEquals = (_compilationStrategy != null);
+    if (_tripleNotEquals) {
       final Iterable<Issue> errors = this.getDirectErrorsOrLogicallyContainedErrors(it);
       boolean _isEmpty = IterableExtensions.isEmpty(errors);
       if (_isEmpty) {
@@ -926,8 +923,8 @@ public class JvmModelGenerator implements IGenerator {
       }
     } else {
       StringConcatenationClient _compilationTemplate = this._jvmTypeExtensions.getCompilationTemplate(it);
-      boolean _notEquals_1 = (!Objects.equal(_compilationTemplate, null));
-      if (_notEquals_1) {
+      boolean _tripleNotEquals_1 = (_compilationTemplate != null);
+      if (_tripleNotEquals_1) {
         final Iterable<Issue> errors_1 = this.getDirectErrorsOrLogicallyContainedErrors(it);
         boolean _isEmpty_1 = IterableExtensions.isEmpty(errors_1);
         if (_isEmpty_1) {
@@ -940,7 +937,7 @@ public class JvmModelGenerator implements IGenerator {
         }
       } else {
         final XExpression expression = this._iLogicalContainerProvider.getAssociatedExpression(it);
-        if (((!Objects.equal(expression, null)) && config.isGenerateExpressions())) {
+        if (((expression != null) && config.isGenerateExpressions())) {
           boolean _hasErrors = this._errorSafeExtensions.hasErrors(expression);
           if (_hasErrors) {
             appendable.append(" /* Skipped initializer because of errors */");
@@ -1069,7 +1066,7 @@ public class JvmModelGenerator implements IGenerator {
   }
   
   public boolean hasBody(final JvmExecutable it) {
-    return (((!Objects.equal(this._jvmTypeExtensions.getCompilationTemplate(it), null)) || (!Objects.equal(this._jvmTypeExtensions.getCompilationStrategy(it), null))) || (!Objects.equal(this._iLogicalContainerProvider.getAssociatedExpression(it), null)));
+    return (((this._jvmTypeExtensions.getCompilationTemplate(it) != null) || (this._jvmTypeExtensions.getCompilationStrategy(it) != null)) || (this._iLogicalContainerProvider.getAssociatedExpression(it) != null));
   }
   
   /**
@@ -1082,8 +1079,7 @@ public class JvmModelGenerator implements IGenerator {
     boolean _isEmpty = IterableExtensions.isEmpty(errors);
     if (_isEmpty) {
       final XExpression expression = this._iLogicalContainerProvider.getAssociatedExpression(feature);
-      boolean _notEquals = (!Objects.equal(expression, null));
-      if (_notEquals) {
+      if ((expression != null)) {
         Iterable<Issue> _errors = this._errorSafeExtensions.getErrors(expression);
         errors = _errors;
       }
@@ -1093,8 +1089,8 @@ public class JvmModelGenerator implements IGenerator {
   
   public void generateExecutableBody(final JvmExecutable op, final ITreeAppendable appendable, final GeneratorConfig config) {
     Procedure1<? super ITreeAppendable> _compilationStrategy = this._jvmTypeExtensions.getCompilationStrategy(op);
-    boolean _notEquals = (!Objects.equal(_compilationStrategy, null));
-    if (_notEquals) {
+    boolean _tripleNotEquals = (_compilationStrategy != null);
+    if (_tripleNotEquals) {
       Iterable<Issue> errors = this.getDirectErrorsOrLogicallyContainedErrors(op);
       boolean _isEmpty = IterableExtensions.isEmpty(errors);
       if (_isEmpty) {
@@ -1111,8 +1107,8 @@ public class JvmModelGenerator implements IGenerator {
       }
     } else {
       StringConcatenationClient _compilationTemplate = this._jvmTypeExtensions.getCompilationTemplate(op);
-      boolean _notEquals_1 = (!Objects.equal(_compilationTemplate, null));
-      if (_notEquals_1) {
+      boolean _tripleNotEquals_1 = (_compilationTemplate != null);
+      if (_tripleNotEquals_1) {
         final Iterable<Issue> errors_1 = this.getDirectErrorsOrLogicallyContainedErrors(op);
         boolean _isEmpty_1 = IterableExtensions.isEmpty(errors_1);
         if (_isEmpty_1) {
@@ -1128,7 +1124,7 @@ public class JvmModelGenerator implements IGenerator {
         }
       } else {
         final XExpression expression = this._iLogicalContainerProvider.getAssociatedExpression(op);
-        if (((!Objects.equal(expression, null)) && config.isGenerateExpressions())) {
+        if (((expression != null) && config.isGenerateExpressions())) {
           final Iterable<Issue> errors_2 = this._errorSafeExtensions.getErrors(expression);
           boolean _isEmpty_2 = IterableExtensions.isEmpty(errors_2);
           if (_isEmpty_2) {
@@ -1240,8 +1236,7 @@ public class JvmModelGenerator implements IGenerator {
         }
       }
       String _xifexpression = null;
-      boolean _notEquals = (!Objects.equal(superType, null));
-      if (_notEquals) {
+      if ((superType != null)) {
         _xifexpression = b.declareVariable(superType, "super");
       }
       _xblockexpression = _xifexpression;
@@ -1267,8 +1262,7 @@ public class JvmModelGenerator implements IGenerator {
         }
       }
       String _xifexpression = null;
-      boolean _notEquals = (!Objects.equal(declaredType, null));
-      if (_notEquals) {
+      if ((declaredType != null)) {
         _xifexpression = b.declareVariable(declaredType, "this");
       }
       _xblockexpression = _xifexpression;
@@ -1360,14 +1354,13 @@ public class JvmModelGenerator implements IGenerator {
       for (final ReplaceRegion region : _computeTypeRefRegions) {
         {
           final String text = region.getText();
-          if (((!Objects.equal(text, null)) && (text.length() > 0))) {
+          if (((text != null) && (text.length() > 0))) {
             final QualifiedName fqn = this.qualifiedNameConverter.toQualifiedName(text);
             final EObject context = NodeModelUtils.findActualSemanticObjectFor(node);
-            if (((fqn.getSegmentCount() == 1) && (!Objects.equal(context, null)))) {
+            if (((fqn.getSegmentCount() == 1) && (context != null))) {
               final IScope scope = this.scopeProvider.getScope(context, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
               final IEObjectDescription candidate = scope.getSingleElement(fqn);
-              boolean _notEquals = (!Objects.equal(candidate, null));
-              if (_notEquals) {
+              if ((candidate != null)) {
                 EObject _xifexpression = null;
                 EObject _eObjectOrProxy = candidate.getEObjectOrProxy();
                 boolean _eIsProxy = _eObjectOrProxy.eIsProxy();
@@ -1383,8 +1376,8 @@ public class JvmModelGenerator implements IGenerator {
                   final JvmDeclaredType contextDeclarator = EcoreUtil2.<JvmDeclaredType>getContainerOfType(it, JvmDeclaredType.class);
                   String _packageName = referencedType.getPackageName();
                   String _packageName_1 = contextDeclarator.getPackageName();
-                  boolean _notEquals_1 = (!Objects.equal(_packageName, _packageName_1));
-                  if (_notEquals_1) {
+                  boolean _notEquals = (!Objects.equal(_packageName, _packageName_1));
+                  if (_notEquals) {
                     final ImportManager importManager = this.getImportManager(appendable);
                     importManager.addImportFor(jvmType);
                   }
@@ -1496,12 +1489,12 @@ public class JvmModelGenerator implements IGenerator {
   
   public void toJava(final JvmAnnotationValue it, final ITreeAppendable appendable, final GeneratorConfig config) {
     JvmOperation _operation = it.getOperation();
-    boolean _notEquals = (!Objects.equal(_operation, null));
-    if (_notEquals) {
+    boolean _tripleNotEquals = (_operation != null);
+    if (_tripleNotEquals) {
       JvmOperation _operation_1 = it.getOperation();
       String _simpleName = _operation_1.getSimpleName();
-      boolean _equals = Objects.equal(_simpleName, null);
-      if (_equals) {
+      boolean _tripleEquals = (_simpleName == null);
+      if (_tripleEquals) {
         return;
       }
       JvmOperation _operation_2 = it.getOperation();
@@ -1742,8 +1735,7 @@ public class JvmModelGenerator implements IGenerator {
   
   public JvmGenericType containerType(final EObject context) {
     JvmGenericType _xifexpression = null;
-    boolean _equals = Objects.equal(context, null);
-    if (_equals) {
+    if ((context == null)) {
       _xifexpression = null;
     } else {
       JvmGenericType _xifexpression_1 = null;
@@ -1760,8 +1752,7 @@ public class JvmModelGenerator implements IGenerator {
   
   protected String makeJavaIdentifier(final String name) {
     String _xifexpression = null;
-    boolean _equals = Objects.equal(name, null);
-    if (_equals) {
+    if ((name == null)) {
       return "__unknown__";
     } else {
       String _xifexpression_1 = null;

@@ -117,8 +117,7 @@ public class AbstractConstantExpressionsInterpreter {
   }
   
   protected JvmTypeReference toTypeReference(final JvmType type, final int arrayDimensions) {
-    boolean _equals = Objects.equal(type, null);
-    if (_equals) {
+    if ((type == null)) {
       return null;
     }
     JvmParameterizedTypeReference _createJvmParameterizedTypeReference = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();

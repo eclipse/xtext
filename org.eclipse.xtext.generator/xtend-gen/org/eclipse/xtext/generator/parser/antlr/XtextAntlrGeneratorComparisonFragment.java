@@ -275,8 +275,8 @@ public class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
     if (_runtime!=null) {
       _srcGen=_runtime.getSrcGen();
     }
-    boolean _notEquals = (!Objects.equal(_srcGen, null));
-    if (_notEquals) {
+    boolean _tripleNotEquals = (_srcGen != null);
+    if (_tripleNotEquals) {
       IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
       IRuntimeProjectConfig _runtime_1 = _projectConfig_1.getRuntime();
       IXtextGeneratorFileSystemAccess _srcGen_1 = _runtime_1.getSrcGen();
@@ -293,8 +293,8 @@ public class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
       if (_genericIde!=null) {
         _srcGen_2=_genericIde.getSrcGen();
       }
-      boolean _notEquals_1 = (!Objects.equal(_srcGen_2, null));
-      _and = _notEquals_1;
+      boolean _tripleNotEquals_1 = (_srcGen_2 != null);
+      _and = _tripleNotEquals_1;
     }
     if (_and) {
       IXtextProjectConfig _projectConfig_3 = this.getProjectConfig();
@@ -496,7 +496,7 @@ public class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
     Object[] params = null;
     CombinedGrammarMarker _combinedGrammarMarker = new CombinedGrammarMarker(combined);
     _combinedGrammarMarker.attachToEmfObject(flattened);
-    if ((Objects.equal(outlet, Generator.SRC_GEN) && (!Objects.equal(context.getOutput().getOutlet(Generator.SRC_GEN), null)))) {
+    if ((Objects.equal(outlet, Generator.SRC_GEN) && (context.getOutput().getOutlet(Generator.SRC_GEN) != null))) {
       if (combined) {
         String _name = XtextAntlrGeneratorFragment.class.getName();
         template = _name;
@@ -512,7 +512,7 @@ public class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
       final Object[] _converted_params = (Object[])params;
       _create.evaluate2(_plus, flattened, ((List<Object>)Conversions.doWrapArray(_converted_params)));
     } else {
-      if ((Objects.equal(outlet, Generator.SRC_GEN_IDE) && (!Objects.equal(context.getOutput().getOutlet(Generator.SRC_GEN_IDE), null)))) {
+      if ((Objects.equal(outlet, Generator.SRC_GEN_IDE) && (context.getOutput().getOutlet(Generator.SRC_GEN_IDE) != null))) {
         if (combined) {
           String _name_2 = XtextAntlrUiGeneratorFragment.class.getName();
           template = _name_2;

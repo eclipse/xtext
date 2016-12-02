@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.xbase.formatting2;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.AbstractIterator;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -35,8 +34,7 @@ public class SeparatorRegions<T extends Object, R extends ITextSegment> implemen
   public void prepend(final T object) {
     final ObjectEntry<T, R> newObject = new ObjectEntry<T, R>(this);
     newObject.setObject(object);
-    boolean _equals = Objects.equal(this.first, null);
-    if (_equals) {
+    if ((this.first == null)) {
       this.first = newObject;
     } else {
       SeparatorEntry<T, R> _leadingSeparator = this.first.getLeadingSeparator();
@@ -54,8 +52,7 @@ public class SeparatorRegions<T extends Object, R extends ITextSegment> implemen
     newSeparator.setSeparator(separator);
     newObject.previous = newSeparator;
     newSeparator.next = newObject;
-    boolean _equals = Objects.equal(this.first, null);
-    if (_equals) {
+    if ((this.first == null)) {
       this.first = newObject;
     } else {
       SeparatorEntry<T, R> _leadingSeparator = this.first.getLeadingSeparator();
@@ -69,15 +66,13 @@ public class SeparatorRegions<T extends Object, R extends ITextSegment> implemen
   public void appendWithTrailingSeparator(final T object, final R separator) {
     final ObjectEntry<T, R> newObject = new ObjectEntry<T, R>(this);
     newObject.setObject(object);
-    boolean _notEquals = (!Objects.equal(separator, null));
-    if (_notEquals) {
+    if ((separator != null)) {
       final SeparatorEntry<T, R> newSeparator = new SeparatorEntry<T, R>();
       newSeparator.setSeparator(separator);
       newObject.next = newSeparator;
       newSeparator.previous = newObject;
     }
-    boolean _equals = Objects.equal(this.first, null);
-    if (_equals) {
+    if ((this.first == null)) {
       this.first = newObject;
     } else {
       Iterable<SeparatorEntry<T, R>> _separators = this.separators();
@@ -101,8 +96,7 @@ public class SeparatorRegions<T extends Object, R extends ITextSegment> implemen
       protected ObjectEntry<T, R> computeNext() {
         ObjectEntry<T, R> _xblockexpression = null;
         {
-          boolean _equals = Objects.equal(this.next, null);
-          if (_equals) {
+          if ((this.next == null)) {
             return this.endOfData();
           }
           final ObjectEntry<T, R> current = this.next;
@@ -131,8 +125,7 @@ public class SeparatorRegions<T extends Object, R extends ITextSegment> implemen
           protected SeparatorEntry<T, R> computeNext() {
             SeparatorEntry<T, R> _xblockexpression = null;
             {
-              boolean _equals = Objects.equal(this.next, null);
-              if (_equals) {
+              if ((this.next == null)) {
                 return this.endOfData();
               }
               final SeparatorEntry<T, R> current = this.next;
@@ -150,13 +143,12 @@ public class SeparatorRegions<T extends Object, R extends ITextSegment> implemen
   @Override
   public String toString() {
     String _xifexpression = null;
-    boolean _notEquals = (!Objects.equal(this.first, null));
-    if (_notEquals) {
+    if ((this.first != null)) {
       String _xblockexpression = null;
       {
         final ArrayList<String> list = CollectionLiterals.<String>newArrayList();
         Entry<T, R> current = this.first.getLeadingSeparator();
-        while ((!Objects.equal(current, null))) {
+        while ((current != null)) {
           {
             String _string = current.toString();
             list.add(_string);

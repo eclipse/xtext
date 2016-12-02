@@ -1,6 +1,5 @@
 package org.eclipse.xtext.xbase.formatting;
 
-import com.google.common.base.Objects;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -65,13 +64,12 @@ public class FormattableDocument {
   }
   
   public boolean isDebugConflicts() {
-    return (!Objects.equal(this.rootTrace, null));
+    return (this.rootTrace != null);
   }
   
   protected FormattingData addFormatting(final FormattingData data) {
     FormattingData _xifexpression = null;
-    boolean _notEquals = (!Objects.equal(data, null));
-    if (_notEquals) {
+    if ((data != null)) {
       FormattingData _xblockexpression = null;
       {
         int _length = data.getLength();
@@ -128,16 +126,14 @@ public class FormattableDocument {
         int _offset_2 = data.getOffset();
         final FormattingData old = this.formattings.get(Integer.valueOf(_offset_2));
         FormattingData _xifexpression_1 = null;
-        boolean _equals = Objects.equal(old, null);
-        if (_equals) {
+        if ((old == null)) {
           _xifexpression_1 = data;
         } else {
           _xifexpression_1 = this.merge(old, data);
         }
         final FormattingData newData = _xifexpression_1;
         FormattingData _xifexpression_2 = null;
-        boolean _notEquals_1 = (!Objects.equal(newData, null));
-        if (_notEquals_1) {
+        if ((newData != null)) {
           int _offset_3 = data.getOffset();
           _xifexpression_2 = this.formattings.put(Integer.valueOf(_offset_3), newData);
         }
@@ -173,8 +169,7 @@ public class FormattableDocument {
         }
       }
       FormattingData _xifexpression = null;
-      boolean _notEquals = (!Objects.equal(old, null));
-      if (_notEquals) {
+      if ((old != null)) {
         FormattingData _xblockexpression_1 = null;
         {
           if ((indentationChange > 0)) {
@@ -332,8 +327,7 @@ public class FormattableDocument {
   }
   
   public void operator_add(final Iterable<FormattingData> data) {
-    boolean _notEquals = (!Objects.equal(data, null));
-    if (_notEquals) {
+    if ((data != null)) {
       final Consumer<FormattingData> _function = (FormattingData it) -> {
         this.addFormatting(it);
       };
@@ -342,8 +336,7 @@ public class FormattableDocument {
   }
   
   public void operator_add(final Function1<? super FormattableDocument, ? extends Iterable<FormattingData>> data) {
-    boolean _notEquals = (!Objects.equal(data, null));
-    if (_notEquals) {
+    if ((data != null)) {
       Iterable<FormattingData> _apply = data.apply(this);
       this.operator_add(_apply);
     }
@@ -373,8 +366,8 @@ public class FormattableDocument {
             if (f instanceof WhitespaceData) {
               _matched=true;
               String _space = ((WhitespaceData)f).getSpace();
-              boolean _notEquals = (!Objects.equal(_space, null));
-              if (_notEquals) {
+              boolean _tripleNotEquals = (_space != null);
+              if (_tripleNotEquals) {
                 final String replacement = ((WhitespaceData)f).getSpace();
                 int _offset_1 = ((WhitespaceData)f).getOffset();
                 int _length = ((WhitespaceData)f).getLength();
@@ -516,8 +509,7 @@ public class FormattableDocument {
         if ((f_2 instanceof WhitespaceData)) {
           final String space = ((WhitespaceData)f_2).getSpace();
           int _xifexpression = (int) 0;
-          boolean _equals = Objects.equal(space, null);
-          if (_equals) {
+          if ((space == null)) {
             _xifexpression = 0;
           } else {
             _xifexpression = space.length();

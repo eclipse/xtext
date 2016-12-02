@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.generator.adapter;
 
-import com.google.common.base.Objects;
 import com.google.inject.Binder;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -70,8 +69,7 @@ public class Generator2AdapterSetup {
   public Injector getInjector() {
     Injector _xblockexpression = null;
     {
-      boolean _equals = Objects.equal(this.injector, null);
-      if (_equals) {
+      if ((this.injector == null)) {
         Injector _createInjector = this.createInjector();
         this.injector = _createInjector;
       }

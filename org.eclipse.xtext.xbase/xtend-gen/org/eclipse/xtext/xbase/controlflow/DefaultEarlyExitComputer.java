@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.xbase.controlflow;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -55,13 +54,12 @@ public class DefaultEarlyExitComputer implements IEarlyExitComputer {
   }
   
   protected boolean isNotEmpty(final Collection<IEarlyExitComputer.ExitPoint> exitPoints) {
-    return ((!Objects.equal(exitPoints, null)) && (!exitPoints.isEmpty()));
+    return ((exitPoints != null) && (!exitPoints.isEmpty()));
   }
   
   @Override
   public Collection<IEarlyExitComputer.ExitPoint> getExitPoints(final XExpression expression) {
-    boolean _equals = Objects.equal(expression, null);
-    if (_equals) {
+    if ((expression == null)) {
       return Collections.<IEarlyExitComputer.ExitPoint>emptyList();
     }
     return this.exitPoints(expression);
@@ -115,7 +113,7 @@ public class DefaultEarlyExitComputer implements IEarlyExitComputer {
     if (_isNotEmpty) {
       return exitPoints;
     }
-    if ((Objects.equal(predicate, null) || this.isBooleanConstant(predicate, true))) {
+    if (((predicate == null) || this.isBooleanConstant(predicate, true))) {
       XExpression _eachExpression = expression.getEachExpression();
       Collection<IEarlyExitComputer.ExitPoint> _exitPoints = this.getExitPoints(_eachExpression);
       exitPoints = _exitPoints;
@@ -236,8 +234,7 @@ public class DefaultEarlyExitComputer implements IEarlyExitComputer {
     for (final XCasePart casePart : _cases) {
       {
         XExpression then = casePart.getThen();
-        boolean _notEquals = (!Objects.equal(then, null));
-        if (_notEquals) {
+        if ((then != null)) {
           Collection<IEarlyExitComputer.ExitPoint> caseExit = this.getExitPoints(then);
           boolean _isNotEmpty_1 = this.isNotEmpty(caseExit);
           boolean _not = (!_isNotEmpty_1);

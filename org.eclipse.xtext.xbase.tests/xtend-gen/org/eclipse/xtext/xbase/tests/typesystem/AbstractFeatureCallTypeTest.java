@@ -680,7 +680,7 @@ public abstract class AbstractFeatureCallTypeTest extends AbstractXbaseTestCase 
   
   @Test
   public void testFeatureCall_08() throws Exception {
-    this.resolvesFeatureCallsTo("newArrayList(\'\').map(s|s != null)", "ArrayList<String>", "List<Boolean>", "String", "boolean");
+    this.resolvesFeatureCallsTo("newArrayList(\'\').map(s|s !== null)", "ArrayList<String>", "List<Boolean>", "String", "boolean");
   }
   
   @Test

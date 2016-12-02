@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.xbase.tests.typesystem;
 
-import com.google.common.base.Objects;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
@@ -73,8 +72,8 @@ public abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolver
           _matched=true;
           this.assertExpressionTypeIsResolved(((XExpression)content), resolvedTypes);
           XExpression _implicitReceiver = ((XAbstractFeatureCall)content).getImplicitReceiver();
-          boolean _notEquals = (!Objects.equal(_implicitReceiver, null));
-          if (_notEquals) {
+          boolean _tripleNotEquals = (_implicitReceiver != null);
+          if (_tripleNotEquals) {
             XExpression _implicitReceiver_1 = ((XAbstractFeatureCall)content).getImplicitReceiver();
             this.assertExpressionTypeIsResolved(_implicitReceiver_1, resolvedTypes);
           }
@@ -117,8 +116,8 @@ public abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolver
             boolean _eIsProxy = feature.eIsProxy();
             Assert.assertFalse(_string_3, _eIsProxy);
             XExpression _implicitReceiver = ((XAbstractFeatureCall)content_1).getImplicitReceiver();
-            boolean _notEquals = (!Objects.equal(_implicitReceiver, null));
-            if (_notEquals) {
+            boolean _tripleNotEquals = (_implicitReceiver != null);
+            if (_tripleNotEquals) {
               XExpression _implicitReceiver_1 = ((XAbstractFeatureCall)content_1).getImplicitReceiver();
               Object _eGet_1 = _implicitReceiver_1.eGet(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, false);
               final InternalEObject implicitFeature = ((InternalEObject) _eGet_1);

@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.xbase.tests.typesystem;
 
-import com.google.common.base.Objects;
 import java.util.List;
 import java.util.function.Consumer;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
@@ -58,7 +57,7 @@ public class ValidatingExpressionAwareResolvedTypes extends ExpressionAwareStack
   
   @Override
   public void reassignType(final JvmIdentifiableElement identifiable, final LightweightTypeReference reference) {
-    if (((!Objects.equal(reference, null)) && (!reference.isOwnedBy(this.getReferenceOwner())))) {
+    if (((reference != null) && (!reference.isOwnedBy(this.getReferenceOwner())))) {
       throw new IllegalArgumentException("reference is not owned by this resolved types");
     }
     super.reassignType(identifiable, reference);
@@ -66,7 +65,7 @@ public class ValidatingExpressionAwareResolvedTypes extends ExpressionAwareStack
   
   @Override
   public void acceptHint(final Object handle, final LightweightBoundTypeArgument boundTypeArgument) {
-    if (((!Objects.equal(boundTypeArgument.getTypeReference(), null)) && (!boundTypeArgument.getTypeReference().isOwnedBy(this.getReferenceOwner())))) {
+    if (((boundTypeArgument.getTypeReference() != null) && (!boundTypeArgument.getTypeReference().isOwnedBy(this.getReferenceOwner())))) {
       throw new IllegalArgumentException("reference is not owned by this resolved types");
     }
     super.acceptHint(handle, boundTypeArgument);
@@ -76,7 +75,7 @@ public class ValidatingExpressionAwareResolvedTypes extends ExpressionAwareStack
   protected List<LightweightBoundTypeArgument> getHints(final Object handle) {
     final List<LightweightBoundTypeArgument> result = super.getHints(handle);
     final Consumer<LightweightBoundTypeArgument> _function = (LightweightBoundTypeArgument it) -> {
-      if (((!Objects.equal(it.getTypeReference(), null)) && (!it.getTypeReference().isOwnedBy(this.getReferenceOwner())))) {
+      if (((it.getTypeReference() != null) && (!it.getTypeReference().isOwnedBy(this.getReferenceOwner())))) {
         throw new IllegalArgumentException("reference is not owned by this resolved types");
       }
     };
@@ -109,7 +108,7 @@ public class ValidatingExpressionAwareResolvedTypes extends ExpressionAwareStack
   public List<LightweightBoundTypeArgument> getAllHints(final Object handle) {
     final List<LightweightBoundTypeArgument> result = super.getAllHints(handle);
     final Consumer<LightweightBoundTypeArgument> _function = (LightweightBoundTypeArgument it) -> {
-      if (((!Objects.equal(it.getTypeReference(), null)) && (!it.getTypeReference().isOwnedBy(this.getReferenceOwner())))) {
+      if (((it.getTypeReference() != null) && (!it.getTypeReference().isOwnedBy(this.getReferenceOwner())))) {
         throw new IllegalArgumentException("hint is not owned by this resolved types");
       }
     };
@@ -198,7 +197,7 @@ public class ValidatingExpressionAwareResolvedTypes extends ExpressionAwareStack
     };
     allValues.forEach(_function);
     final TypeData result = super.mergeTypeData(expression, allValues, returnType, nullIfEmpty);
-    if (((!Objects.equal(result, null)) && (!result.isOwnedBy(this.getReferenceOwner())))) {
+    if (((result != null) && (!result.isOwnedBy(this.getReferenceOwner())))) {
       throw new IllegalArgumentException("result is not owned by this resolved types");
     }
     return result;

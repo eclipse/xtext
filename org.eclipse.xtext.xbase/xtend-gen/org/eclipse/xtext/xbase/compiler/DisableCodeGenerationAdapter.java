@@ -24,13 +24,13 @@ public class DisableCodeGenerationAdapter extends AdapterImpl {
   
   public static boolean isDisabled(final JvmDeclaredType type) {
     Adapter _adapter = DisableCodeGenerationAdapter.getAdapter(type);
-    return (!Objects.equal(_adapter, null));
+    return (_adapter != null);
   }
   
   public static void disableCodeGeneration(final JvmDeclaredType declaredType) {
     Adapter _adapter = DisableCodeGenerationAdapter.getAdapter(declaredType);
-    boolean _equals = Objects.equal(_adapter, null);
-    if (_equals) {
+    boolean _tripleEquals = (_adapter == null);
+    if (_tripleEquals) {
       EList<Adapter> _eAdapters = declaredType.eAdapters();
       DisableCodeGenerationAdapter _disableCodeGenerationAdapter = new DisableCodeGenerationAdapter();
       _eAdapters.add(_disableCodeGenerationAdapter);
@@ -39,8 +39,7 @@ public class DisableCodeGenerationAdapter extends AdapterImpl {
   
   public static void enableCodeGeneration(final JvmDeclaredType declaredType) {
     final Adapter adapter = DisableCodeGenerationAdapter.getAdapter(declaredType);
-    boolean _notEquals = (!Objects.equal(adapter, null));
-    if (_notEquals) {
+    if ((adapter != null)) {
       EList<Adapter> _eAdapters = declaredType.eAdapters();
       _eAdapters.remove(adapter);
     }

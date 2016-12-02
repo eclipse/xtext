@@ -75,13 +75,13 @@ public class UniqueClassNameValidator extends AbstractDeclarativeValidator {
   @Check
   public void checkUniqueName(final EObject root) {
     EObject _eContainer = root.eContainer();
-    boolean _equals = Objects.equal(_eContainer, null);
-    if (_equals) {
+    boolean _tripleEquals = (_eContainer == null);
+    if (_tripleEquals) {
       final Resource resource = root.eResource();
       EList<EObject> _contents = resource.getContents();
       EObject _head = IterableExtensions.<EObject>head(_contents);
-      boolean _equals_1 = Objects.equal(_head, root);
-      if (_equals_1) {
+      boolean _equals = Objects.equal(_head, root);
+      if (_equals) {
         EList<EObject> _contents_1 = resource.getContents();
         Iterable<JvmDeclaredType> _filter = Iterables.<JvmDeclaredType>filter(_contents_1, JvmDeclaredType.class);
         final Consumer<JvmDeclaredType> _function = (JvmDeclaredType it) -> {
@@ -94,11 +94,10 @@ public class UniqueClassNameValidator extends AbstractDeclarativeValidator {
   
   protected void doCheckUniqueName(final JvmDeclaredType type) {
     EObject _eContainer = type.eContainer();
-    boolean _equals = Objects.equal(_eContainer, null);
-    if (_equals) {
+    boolean _tripleEquals = (_eContainer == null);
+    if (_tripleEquals) {
       final QualifiedName name = this.qualifiedNameProvider.getFullyQualifiedName(type);
-      boolean _notEquals = (!Objects.equal(name, null));
-      if (_notEquals) {
+      if ((name != null)) {
         this.doCheckUniqueName(name, type);
       }
     }
@@ -137,8 +136,7 @@ public class UniqueClassNameValidator extends AbstractDeclarativeValidator {
   
   protected void addIssue(final JvmDeclaredType type, final String fileName) {
     final EObject sourceElement = this.associations.getPrimarySourceElement(type);
-    boolean _equals = Objects.equal(sourceElement, null);
-    if (_equals) {
+    if ((sourceElement == null)) {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("The type ");
       String _simpleName = type.getSimpleName();

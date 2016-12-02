@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.xbase.formatting2;
 
-import com.google.common.base.Objects;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -34,8 +33,7 @@ public class ObjectEntry<T extends Object, R extends ITextSegment> extends Entry
     final SeparatorEntry<T, R> prev = this.getLeadingSeparator();
     final SeparatorEntry<T, R> trail = this.getTrailingSeparator();
     int _xifexpression = (int) 0;
-    boolean _notEquals = (!Objects.equal(prev, null));
-    if (_notEquals) {
+    if ((prev != null)) {
       R _separator = prev.getSeparator();
       _xifexpression = _separator.getEndOffset();
     } else {
@@ -44,8 +42,7 @@ public class ObjectEntry<T extends Object, R extends ITextSegment> extends Entry
     }
     final int offset = _xifexpression;
     int _xifexpression_1 = (int) 0;
-    boolean _notEquals_1 = (!Objects.equal(trail, null));
-    if (_notEquals_1) {
+    if ((trail != null)) {
       R _separator_1 = trail.getSeparator();
       _xifexpression_1 = _separator_1.getOffset();
     } else {

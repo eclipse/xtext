@@ -1,6 +1,5 @@
 package org.eclipse.xtext.xbase.formatting;
 
-import com.google.common.base.Objects;
 import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtext.formatting2.IHiddenRegionFormatter;
 import org.eclipse.xtext.xbase.formatting.FormattingData;
@@ -18,7 +17,7 @@ public class WhitespaceData extends FormattingData {
   
   @Override
   public boolean isEmpty() {
-    return Objects.equal(this.space, null);
+    return (this.space == null);
   }
   
   public WhitespaceData(final int offset, final int length, final int increaseIndentationChange, final int decreaseIndentationChange, final Throwable trace, final String space) {

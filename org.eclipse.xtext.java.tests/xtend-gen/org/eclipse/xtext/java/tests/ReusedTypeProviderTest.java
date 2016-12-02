@@ -1,6 +1,5 @@
 package org.eclipse.xtext.java.tests;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
@@ -75,7 +74,7 @@ public class ReusedTypeProviderTest extends AbstractTypeProviderTest {
     try {
       String line = null;
       final List<String> result = Lists.<String>newArrayList();
-      while ((!Objects.equal((line = reader.readLine()), null))) {
+      while (((line = reader.readLine()) != null)) {
         result.add(line);
       }
       return result;
@@ -87,8 +86,7 @@ public class ReusedTypeProviderTest extends AbstractTypeProviderTest {
   @Override
   public void setUp() throws Exception {
     super.setUp();
-    boolean _equals = Objects.equal(ReusedTypeProviderTest.typeProvider, null);
-    if (_equals) {
+    if ((ReusedTypeProviderTest.typeProvider == null)) {
       final String pathToSources = "/org/eclipse/xtext/common/types/testSetups";
       final List<String> files = ReusedTypeProviderTest.readResource((pathToSources + "/files.list"));
       Set<IResourceDescription> _emptySet = CollectionLiterals.<IResourceDescription>emptySet();

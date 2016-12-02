@@ -182,8 +182,7 @@ public class ClasspathScanner {
   
   protected void loadDirectoryDescriptors(final File directory, final String packageName, final List<ITypeDescriptor> descriptors, final Collection<String> packagePrefixes) {
     final File[] children = directory.listFiles();
-    boolean _equals = Objects.equal(children, null);
-    if (_equals) {
+    if ((children == null)) {
       return;
     }
     for (final File file : children) {

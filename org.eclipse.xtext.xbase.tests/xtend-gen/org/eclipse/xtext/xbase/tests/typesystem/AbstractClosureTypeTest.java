@@ -1260,7 +1260,7 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
   
   @Test
   public void testFeatureCall_014() throws Exception {
-    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map(s|s != null)", "(String)=>boolean");
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map(s|s !== null)", "(String)=>boolean");
     this.withEquivalents(_resolvesClosuresTo, "Function1<String, Boolean>");
   }
   
@@ -1686,7 +1686,7 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
   
   @Test
   public void testFeatureCall_084() throws Exception {
-    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map(s| return s != null)", "(String)=>boolean");
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map(s| return s !== null)", "(String)=>boolean");
     this.withEquivalents(_resolvesClosuresTo, "Function1<String, Boolean>");
   }
   

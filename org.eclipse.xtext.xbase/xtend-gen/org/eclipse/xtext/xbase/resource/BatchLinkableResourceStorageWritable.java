@@ -104,8 +104,7 @@ public class BatchLinkableResourceStorageWritable extends ResourceStorageWritabl
     } else {
       out.writeBoolean(false);
     }
-    boolean _notEquals_1 = (!Objects.equal(metaDataAdapter, null));
-    if (_notEquals_1) {
+    if ((metaDataAdapter != null)) {
       out.writeBoolean(true);
       boolean _isSynthetic = metaDataAdapter.isSynthetic();
       out.writeBoolean(_isSynthetic);
@@ -232,7 +231,7 @@ public class BatchLinkableResourceStorageWritable extends ResourceStorageWritabl
   protected String getFragment(final EObject obj) {
     String _xblockexpression = null;
     {
-      if (((Objects.equal(obj, null) || obj.eIsProxy()) || Objects.equal(obj.eResource(), null))) {
+      if (((Objects.equal(obj, null) || obj.eIsProxy()) || (obj.eResource() == null))) {
         return "none";
       }
       Resource _eResource = obj.eResource();
