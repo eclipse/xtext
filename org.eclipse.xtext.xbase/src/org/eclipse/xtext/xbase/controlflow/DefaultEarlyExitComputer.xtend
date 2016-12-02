@@ -43,11 +43,11 @@ import org.eclipse.xtext.xbase.XWhileExpression
 	}
 
 	def protected boolean isNotEmpty(Collection<ExitPoint> exitPoints) {
-		return exitPoints != null && !exitPoints.isEmpty()
+		return exitPoints !== null && !exitPoints.isEmpty()
 	}
 
 	@Override override Collection<ExitPoint> getExitPoints(XExpression expression) {
-		if(expression == null) return Collections.emptyList()
+		if(expression === null) return Collections.emptyList()
 		return exitPoints(expression)
 	}
 
@@ -87,7 +87,7 @@ import org.eclipse.xtext.xbase.XWhileExpression
 		if (isNotEmpty(exitPoints)) {
 			return exitPoints
 		}
-		if (predicate == null || isBooleanConstant(predicate, true)) {
+		if (predicate === null || isBooleanConstant(predicate, true)) {
 			exitPoints = getExitPoints(expression.getEachExpression())
 			if(isNotEmpty(exitPoints)) return exitPoints
 			for (XExpression child : expression.getUpdateExpressions()) {
@@ -155,7 +155,7 @@ import org.eclipse.xtext.xbase.XWhileExpression
 		for (XCasePart casePart : expression.getCases()) {
 			// TODO do we have an early exit if the first case condition is an early exit?
 			var XExpression then = casePart.getThen()
-			if (then != null) {
+			if (then !== null) {
 				var Collection<ExitPoint> caseExit = getExitPoints(then)
 				if(!isNotEmpty(caseExit)) return Collections.emptyList() else result.addAll(caseExit)
 			}

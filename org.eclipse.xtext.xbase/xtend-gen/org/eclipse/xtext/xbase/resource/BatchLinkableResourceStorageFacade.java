@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.xbase.resource;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -57,8 +56,7 @@ public class BatchLinkableResourceStorageFacade extends ResourceStorageFacade {
         _findSourceFolderContaining=project.findSourceFolderContaining(uri);
       }
       final ISourceFolder sourceFolder = _findSourceFolderContaining;
-      boolean _notEquals = (!Objects.equal(sourceFolder, null));
-      if (_notEquals) {
+      if ((sourceFolder != null)) {
         return sourceFolder.getPath();
       }
     }

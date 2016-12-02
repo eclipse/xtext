@@ -2130,7 +2130,7 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   
   @Test
   public void testFeatureCall_08() throws Exception {
-    this.resolvesTo("newArrayList(\'\').map(s|s != null)", "List<Boolean>");
+    this.resolvesTo("newArrayList(\'\').map(s|s !== null)", "List<Boolean>");
   }
   
   @Test

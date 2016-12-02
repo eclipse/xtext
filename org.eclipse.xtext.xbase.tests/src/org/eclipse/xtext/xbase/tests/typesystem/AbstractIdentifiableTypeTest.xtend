@@ -48,7 +48,7 @@ abstract class AbstractIdentifiableTypeTest extends AbstractXbaseTestCase {
 				default: #[it] 
 			}
 		].toIterable.flatten.toSet.filter [
-			it != null && switch(it) {
+			it !== null && switch(it) {
 				XVariableDeclaration: true
 				JvmFormalParameter: true
 				default: false
@@ -56,7 +56,7 @@ abstract class AbstractIdentifiableTypeTest extends AbstractXbaseTestCase {
 		].filter(JvmIdentifiableElement).toList
 		return identifiables.sortBy [ 
 			val node = NodeModelUtils::findActualNodeFor(it)
-			if (node != null) 
+			if (node !== null) 
 				node.offset
 			else
 				NodeModelUtils::findActualNodeFor(it.eContainer).offset

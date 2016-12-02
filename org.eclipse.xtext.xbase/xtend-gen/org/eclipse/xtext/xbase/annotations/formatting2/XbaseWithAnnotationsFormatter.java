@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.xbase.annotations.formatting2;
 
-import com.google.common.base.Objects;
 import java.util.Arrays;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -75,8 +74,8 @@ public class XbaseWithAnnotationsFormatter extends XbaseFormatter {
     };
     document.surround(_keyword_1, _function_1);
     XExpression _value = ann.getValue();
-    boolean _notEquals = (!Objects.equal(_value, null));
-    if (_notEquals) {
+    boolean _tripleNotEquals = (_value != null);
+    if (_tripleNotEquals) {
       XExpression _value_1 = ann.getValue();
       document.<XExpression>format(_value_1);
       ISemanticRegionsFinder _regionFor_2 = this.textRegionExtensions.regionFor(ann);

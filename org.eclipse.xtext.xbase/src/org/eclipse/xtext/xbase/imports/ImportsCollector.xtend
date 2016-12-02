@@ -47,7 +47,7 @@ class ImportsCollector {
 			val nodeRegion = node.totalTextRegion
 			if (selectedRegion.contains(nodeRegion)) {
 				val semanticElement = node.semanticElement
-				if (semanticElement != null) {
+				if (semanticElement !== null) {
 					visit(semanticElement, NodeModelUtils.findActualNodeFor(semanticElement), acceptor)
 				}
 			}
@@ -63,7 +63,7 @@ class ImportsCollector {
 		var EObject semanticElementOffset = leafNodeAtOffset.getSemanticElement()
 		var ICompositeNode actualOffsetNode = NodeModelUtils.findActualNodeFor(semanticElementOffset)
 		val endOffset = textRegion.offset + textRegion.length
-		while (actualOffsetNode.getParent() != null && actualOffsetNode.getTotalEndOffset() < endOffset) {
+		while (actualOffsetNode.getParent() !== null && actualOffsetNode.getTotalEndOffset() < endOffset) {
 			actualOffsetNode = actualOffsetNode.getParent()
 		}
 		val actualSemanticObj = actualOffsetNode.semanticElement
@@ -113,20 +113,20 @@ class ImportsCollector {
 	}
 
 	dispatch def void visit(JvmDeclaredType jvmType, INode originNode, ImportsAcceptor acceptor) {
-		if (jvmType.getDeclaringType() == null) {
+		if (jvmType.getDeclaringType() === null) {
 			collectTypeImportFrom(jvmType, acceptor)
 		}
 		val text = NodeModelUtils.getTokenText(originNode);
 		val outerSegment = getFirstNameSegment(text);
 		val outerType = findDeclaringTypeBySimpleName(jvmType, outerSegment);
-		if (outerType == null) {
+		if (outerType === null) {
 			throw new IllegalStateException();
 		}
 		collectTypeImportFrom(outerType, acceptor)
 	}
 
 	def private JvmDeclaredType findDeclaringTypeBySimpleName(JvmDeclaredType referencedType, String outerSegment) {
-		if (referencedType.getDeclaringType() == null || outerSegment.equals(referencedType.getSimpleName())) {
+		if (referencedType.getDeclaringType() === null || outerSegment.equals(referencedType.getSimpleName())) {
 			return referencedType
 		}
 		return findDeclaringTypeBySimpleName(referencedType.getDeclaringType(), outerSegment)
@@ -207,7 +207,7 @@ class ImportsCollector {
 					TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE)
 				var IEObjectDescription singleElement = scope.getSingleElement(QualifiedName.create(docTypeText))
 				var JvmType referencedType = null
-				if (singleElement != null) {
+				if (singleElement !== null) {
 					referencedType = singleElement.getEObjectOrProxy() as JvmType
 				}
 				if (referencedType instanceof JvmDeclaredType && !referencedType.eIsProxy()) {

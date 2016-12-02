@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.builder.standalone.incremental;
 
-import com.google.common.base.Objects;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Multimap;
@@ -75,7 +74,7 @@ public class ResourceURICollector {
     Map<String, Collection<URI>> _asMap = modelsFound.asMap();
     final BiConsumer<String, Collection<URI>> _function_2 = (String path, Collection<URI> resource) -> {
       final File file = new File(path);
-      if ((((!Objects.equal(resource, null)) && (!file.isDirectory())) && file.getName().endsWith(".jar"))) {
+      if ((((resource != null) && (!file.isDirectory())) && file.getName().endsWith(".jar"))) {
         this.registerBundle(file);
       }
     };
@@ -90,14 +89,12 @@ public class ResourceURICollector {
       JarFile _jarFile = new JarFile(file);
       jarFile = _jarFile;
       final Manifest manifest = jarFile.getManifest();
-      boolean _equals = Objects.equal(manifest, null);
-      if (_equals) {
+      if ((manifest == null)) {
         return;
       }
       Attributes _mainAttributes = manifest.getMainAttributes();
       String name = _mainAttributes.getValue("Bundle-SymbolicName");
-      boolean _notEquals = (!Objects.equal(name, null));
-      if (_notEquals) {
+      if ((name != null)) {
         final int indexOf = name.indexOf(";");
         if ((indexOf > 0)) {
           String _substring = name.substring(0, indexOf);
@@ -132,8 +129,7 @@ public class ResourceURICollector {
       }
     } finally {
       try {
-        boolean _notEquals_1 = (!Objects.equal(jarFile, null));
-        if (_notEquals_1) {
+        if ((jarFile != null)) {
           jarFile.close();
         }
       } catch (final Throwable _t_1) {

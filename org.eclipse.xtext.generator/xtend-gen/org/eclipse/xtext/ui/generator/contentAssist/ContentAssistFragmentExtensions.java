@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.ui.generator.contentAssist;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 import java.util.HashSet;
@@ -57,8 +56,7 @@ public class ContentAssistFragmentExtensions {
   public static Set<String> getFqFeatureNamesToExclude(final Grammar grammar) {
     Set<String> toExclude = CollectionLiterals.<String>newHashSet();
     final Grammar superGrammar = ContentAssistFragmentExtensions.getSuperGrammar(grammar);
-    boolean _notEquals = (!Objects.equal(superGrammar, null));
-    if (_notEquals) {
+    if ((superGrammar != null)) {
       final Set<String> superGrammarsFqFeatureNames = ContentAssistFragmentExtensions.computeFqFeatureNamesFromSuperGrammars(grammar);
       Iterable<String> _computeFqFeatureNames = ContentAssistFragmentExtensions.computeFqFeatureNames(grammar);
       final Set<String> thisGrammarFqFeatureNames = IterableExtensions.<String>toSet(_computeFqFeatureNames);

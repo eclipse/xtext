@@ -85,7 +85,7 @@ class UnresolvedFeatureCallTypeAwareMessageProvider extends LinkingDiagnosticMes
 		val orField = !featureCall.isExplicitOperationCallOrBuilderSyntax()
 
 		var msg = '''The method «IF (orField)»or field «linkText»«ELSE»«linkText»(«args»)«ENDIF» is undefined'''
-		if (recieverType != null) {
+		if (recieverType !== null) {
 			msg += ''' for the type «recieverType.humanReadableName»'''
 		}
 		if (featureCall instanceof XFeatureCall && linkText.length() > 0 && Character.isUpperCase(linkText.charAt(0)) &&

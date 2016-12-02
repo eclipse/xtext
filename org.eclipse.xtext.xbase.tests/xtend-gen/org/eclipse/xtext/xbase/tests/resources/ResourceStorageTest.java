@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.xbase.tests.resources;
 
-import com.google.common.base.Objects;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
@@ -227,8 +226,8 @@ public class ResourceStorageTest extends AbstractXbaseTestCase {
           Assert.assertSame(_grammarElement, _grammarElement_1);
           Assert.assertTrue((((orig.getSemanticElement() != null) && (rest.getSemanticElement() != null)) || ((orig.getSemanticElement() == null) && (rest.getSemanticElement() == null))));
           EObject _semanticElement = orig.getSemanticElement();
-          boolean _notEquals = (!Objects.equal(_semanticElement, null));
-          if (_notEquals) {
+          boolean _tripleNotEquals = (_semanticElement != null);
+          if (_tripleNotEquals) {
             Resource _eResource_3 = file.eResource();
             EObject _semanticElement_1 = orig.getSemanticElement();
             String _uRIFragment = _eResource_3.getURIFragment(_semanticElement_1);

@@ -1245,7 +1245,7 @@ abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test def void testFeatureCall_014() throws Exception {
-		"newArrayList('').map(s|s != null)"
+		"newArrayList('').map(s|s !== null)"
 			.resolvesClosuresTo("(String)=>boolean")
 			.withEquivalents("Function1<String, Boolean>")
 	}
@@ -1696,7 +1696,7 @@ abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test def void testFeatureCall_084() throws Exception {
-		"newArrayList('').map(s| return s != null)"
+		"newArrayList('').map(s| return s !== null)"
 			.resolvesClosuresTo("(String)=>boolean")
 			.withEquivalents("Function1<String, Boolean>")
 	}

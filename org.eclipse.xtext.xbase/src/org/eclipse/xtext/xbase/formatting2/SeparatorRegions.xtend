@@ -25,7 +25,7 @@ import org.eclipse.xtext.formatting2.regionaccess.internal.TextSegment
 	def void prepend(T object) {
 		val newObject = new ObjectEntry<T, R>(this)
 		newObject.object = object
-		if (first == null) {
+		if (first === null) {
 			first = newObject
 		} else {
 			newObject.next = first.leadingSeparator
@@ -41,7 +41,7 @@ import org.eclipse.xtext.formatting2.regionaccess.internal.TextSegment
 		newSeparator.separator = separator
 		newObject.previous = newSeparator
 		newSeparator.next = newObject
-		if (first == null) {
+		if (first === null) {
 			first = newObject
 		} else {
 			newObject.next = first.leadingSeparator
@@ -53,13 +53,13 @@ import org.eclipse.xtext.formatting2.regionaccess.internal.TextSegment
 	def void appendWithTrailingSeparator(T object, R separator) {
 		val newObject = new ObjectEntry<T, R>(this)
 		newObject.object = object
-		if (separator != null) {
+		if (separator !== null) {
 			val newSeparator = new SeparatorEntry<T, R>
 			newSeparator.separator = separator
 			newObject.next = newSeparator
 			newSeparator.previous = newObject
 		}
-		if (first == null) {
+		if (first === null) {
 			first = newObject
 		} else {
 			val last = separators.last
@@ -73,7 +73,7 @@ import org.eclipse.xtext.formatting2.regionaccess.internal.TextSegment
 			ObjectEntry<T, R> next = SeparatorRegions.this.first
 
 			override protected computeNext() {
-				if (next == null)
+				if (next === null)
 					return endOfData()
 				val current = next
 				next = next.trailingObject
@@ -89,7 +89,7 @@ import org.eclipse.xtext.formatting2.regionaccess.internal.TextSegment
 					SeparatorEntry<T, R> next = SeparatorRegions.this.first.trailingSeparator
 
 					override protected computeNext() {
-						if (next == null)
+						if (next === null)
 							return endOfData()
 						val current = next
 						next = next.trailingSeparator
@@ -101,10 +101,10 @@ import org.eclipse.xtext.formatting2.regionaccess.internal.TextSegment
 	}
 
 	override toString() {
-		if (first != null) {
+		if (first !== null) {
 			val list = newArrayList()
 			var Entry<T, R> current = first.leadingSeparator
-			while (current != null) {
+			while (current !== null) {
 				list += current.toString
 				current = current.next
 			}
@@ -142,8 +142,8 @@ import org.eclipse.xtext.formatting2.regionaccess.internal.TextSegment
 	def ITextSegment getRegion() {
 		val prev = leadingSeparator
 		val trail = trailingSeparator
-		val offset = if(prev != null) prev.separator.endOffset else list.root.offset
-		val endOffset = if(trail != null) trail.separator.offset else list.root.endOffset
+		val offset = if(prev !== null) prev.separator.endOffset else list.root.offset
+		val endOffset = if(trail !== null) trail.separator.offset else list.root.endOffset
 		return new TextSegment(list.root.textRegionAccess, offset, endOffset - offset)
 	}
 

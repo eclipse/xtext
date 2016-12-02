@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.generator.validation;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -58,7 +57,7 @@ public class ValidatorNaming {
     {
       final Grammar superGrammar = IInheriting.Util.getNonTerminalsSuperGrammar(this.grammar);
       String _xifexpression = null;
-      if ((isInheritImplementation && (!Objects.equal(superGrammar, null)))) {
+      if ((isInheritImplementation && (superGrammar != null))) {
         _xifexpression = this.getValidatorName(superGrammar);
       } else {
         _xifexpression = "org.eclipse.xtext.validation.AbstractDeclarativeValidator";

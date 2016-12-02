@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.xbase.testing;
 
-import com.google.common.base.Objects;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -75,8 +74,7 @@ public class InMemoryJavaCompiler {
           return this.cache.get(fileName);
         }
         final URL url = this.classLoader.getResource(fileName);
-        boolean _equals = Objects.equal(url, null);
-        if (_equals) {
+        if ((url == null)) {
           this.cache.put(fileName, null);
           return null;
         }
@@ -107,8 +105,7 @@ public class InMemoryJavaCompiler {
           return this.cache.get(fileName);
         }
         final URL url = this.classLoader.getResource(fileName);
-        boolean _equals = Objects.equal(url, null);
-        if (_equals) {
+        if ((url == null)) {
           this.cache.put(fileName, null);
           return null;
         }
@@ -163,8 +160,7 @@ public class InMemoryJavaCompiler {
           String _substring = path.substring(0, _minus);
           final String className = _substring.replace("/", ".");
           final byte[] bytes = this.classMap.get(className);
-          boolean _notEquals = (!Objects.equal(bytes, null));
-          if (_notEquals) {
+          if ((bytes != null)) {
             final URLStreamHandler _function = new URLStreamHandler() {
               @Override
               protected URLConnection openConnection(final URL it) throws IOException {

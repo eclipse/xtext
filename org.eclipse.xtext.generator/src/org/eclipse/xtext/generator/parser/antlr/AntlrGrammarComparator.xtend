@@ -122,7 +122,7 @@ class AntlrGrammarComparator {
 	public def compareGrammars(CharSequence grammar, CharSequence grammarReference,
 			IErrorHandler errorHandler) {
 		
-		if (errorContext == null) {			
+		if (errorContext === null) {			
 			errorContext = new ErrorContext()
 		}
 		

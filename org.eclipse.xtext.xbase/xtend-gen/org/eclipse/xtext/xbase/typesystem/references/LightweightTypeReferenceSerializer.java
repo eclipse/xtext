@@ -57,8 +57,8 @@ public class LightweightTypeReferenceSerializer extends TypeReferenceVisitor {
       this.appendCommaSeparated(_parameterTypes);
       this.appender.append(")=>");
       LightweightTypeReference _returnType = reference.getReturnType();
-      boolean _equals = Objects.equal(_returnType, null);
-      if (_equals) {
+      boolean _tripleEquals = (_returnType == null);
+      if (_tripleEquals) {
         this.appender.append("void");
       } else {
         LightweightTypeReference _returnType_1 = reference.getReturnType();
@@ -92,8 +92,8 @@ public class LightweightTypeReferenceSerializer extends TypeReferenceVisitor {
       this.appendCommaSeparated(_parameterTypes);
       this.appender.append(")=>");
       LightweightTypeReference _returnType = reference.getReturnType();
-      boolean _equals = Objects.equal(_returnType, null);
-      if (_equals) {
+      boolean _tripleEquals = (_returnType == null);
+      if (_tripleEquals) {
         this.appender.append("void");
       } else {
         LightweightTypeReference _returnType_1 = reference.getReturnType();
@@ -158,8 +158,8 @@ public class LightweightTypeReferenceSerializer extends TypeReferenceVisitor {
   protected void doVisitWildcardTypeReference(final WildcardTypeReference reference) {
     this.appender.append("?");
     LightweightTypeReference _lowerBound = reference.getLowerBound();
-    boolean _notEquals = (!Objects.equal(_lowerBound, null));
-    if (_notEquals) {
+    boolean _tripleNotEquals = (_lowerBound != null);
+    if (_tripleNotEquals) {
       this.appender.append(" super ");
       LightweightTypeReference _lowerBound_1 = reference.getLowerBound();
       _lowerBound_1.accept(this);

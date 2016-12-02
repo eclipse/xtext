@@ -140,8 +140,7 @@ public class StandaloneBuilder {
   private IJavaCompiler compiler;
   
   public void setTempDir(final String pathAsString) {
-    boolean _notEquals = (!Objects.equal(pathAsString, null));
-    if (_notEquals) {
+    if ((pathAsString != null)) {
       File _file = new File(pathAsString);
       this.tempDir = _file;
     }
@@ -156,8 +155,7 @@ public class StandaloneBuilder {
       return Boolean.valueOf(it.isLinksAgainstJava());
     };
     final boolean needsJava = IterableExtensions.<LanguageAccess>exists(_values, _function);
-    boolean _equals = Objects.equal(this.baseDir, null);
-    if (_equals) {
+    if ((this.baseDir == null)) {
       String _property = System.getProperty("user.dir");
       this.baseDir = _property;
       StandaloneBuilder.LOG.warn((("Property baseDir not set. Using \'" + this.baseDir) + "\'"));
@@ -166,8 +164,7 @@ public class StandaloneBuilder {
       StandaloneBuilder.LOG.info("Using common types.");
     }
     final XtextResourceSet resourceSet = this.resourceSetProvider.get();
-    boolean _notEquals = (!Objects.equal(this.encoding, null));
-    if (_notEquals) {
+    if ((this.encoding != null)) {
       this.forceDebugLog("Setting encoding.");
       Collection<LanguageAccess> _values_1 = this.languages.values();
       this.fileEncodingSetup(_values_1, this.encoding);
@@ -175,8 +172,7 @@ public class StandaloneBuilder {
     StandaloneBuilder.LOG.info("Collecting source models.");
     final long startedAt = System.currentTimeMillis();
     Iterable<String> rootsToTravers = this.classPathEntries;
-    boolean _notEquals_1 = (!Objects.equal(this.classPathLookUpFilter, null));
-    if (_notEquals_1) {
+    if ((this.classPathLookUpFilter != null)) {
       StandaloneBuilder.LOG.info("Class path look up filter is active.");
       final Pattern cpLookUpFilter = Pattern.compile(this.classPathLookUpFilter);
       final Function1<String, Boolean> _function_1 = (String root) -> {
@@ -208,8 +204,7 @@ public class StandaloneBuilder {
       this.installTypeProvider(allClassPathEntries, resourceSet, null);
     }
     IResourceClusteringPolicy _xifexpression = null;
-    boolean _notEquals_2 = (!Objects.equal(this.clusteringConfig, null));
-    if (_notEquals_2) {
+    if ((this.clusteringConfig != null)) {
       DynamicResourceClusteringPolicy _xblockexpression = null;
       {
         StandaloneBuilder.LOG.info("Clustering configured.");
@@ -377,8 +372,7 @@ public class StandaloneBuilder {
     String _absolutePath = stubsDir.getAbsolutePath();
     String _plus = ("Generating stubs into " + _absolutePath);
     StandaloneBuilder.LOG.info(_plus);
-    boolean _notEquals = (!Objects.equal(this.encoding, null));
-    if (_notEquals) {
+    if ((this.encoding != null)) {
       this.encodingProvider.setDefaultEncoding(this.encoding);
     }
     String _absolutePath_1 = stubsDir.getAbsolutePath();
@@ -431,8 +425,8 @@ public class StandaloneBuilder {
           boolean _matched = false;
           if (it instanceof StorageAwareResource) {
             IResourceStorageFacade _resourceStorageFacade = ((StorageAwareResource)it).getResourceStorageFacade();
-            boolean _notEquals = (!Objects.equal(_resourceStorageFacade, null));
-            if (_notEquals) {
+            boolean _tripleNotEquals = (_resourceStorageFacade != null);
+            if (_tripleNotEquals) {
               _matched=true;
               IResourceStorageFacade _resourceStorageFacade_1 = ((StorageAwareResource)it).getResourceStorageFacade();
               _resourceStorageFacade_1.saveResource(((StorageAwareResource)it), fileSystemAccess);
@@ -457,8 +451,7 @@ public class StandaloneBuilder {
       return Boolean.valueOf(UriUtil.isPrefixOf(it, uri));
     };
     final URI absoluteSource = IterableExtensions.<URI>findFirst(_map, _function_1);
-    boolean _equals = Objects.equal(absoluteSource, null);
-    if (_equals) {
+    if ((absoluteSource == null)) {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("Resource ");
       _builder.append(uri, "");
@@ -481,8 +474,8 @@ public class StandaloneBuilder {
             URI _resolve = sourceFolderURI.resolve(projectBaseURI);
             sourceFolderURI = _resolve;
           }
-          boolean _equals_1 = Objects.equal(absoluteSource, sourceFolderURI);
-          if (_equals_1) {
+          boolean _equals = Objects.equal(absoluteSource, sourceFolderURI);
+          if (_equals) {
             fsa.setCurrentSource(sourceFolder);
           }
         }
@@ -494,8 +487,7 @@ public class StandaloneBuilder {
   
   private JavaIoFileSystemAccess getFileSystemAccess(final LanguageAccess language) {
     JavaIoFileSystemAccess fsa = this.configuredFsas.get(language);
-    boolean _equals = Objects.equal(fsa, null);
-    if (_equals) {
+    if ((fsa == null)) {
       File _file = new File(this.baseDir);
       JavaIoFileSystemAccess _createFileSystemAccess = language.createFileSystemAccess(_file);
       fsa = _createFileSystemAccess;
@@ -570,7 +562,7 @@ public class StandaloneBuilder {
     Map<String, Collection<URI>> _asMap = modelsFound.asMap();
     final BiConsumer<String, Collection<URI>> _function_1 = (String uri, Collection<URI> resource) -> {
       final File file = new File(uri);
-      if ((((!Objects.equal(resource, null)) && (!file.isDirectory())) && file.getName().endsWith(".jar"))) {
+      if ((((resource != null) && (!file.isDirectory())) && file.getName().endsWith(".jar"))) {
         this.registerBundle(file);
       }
     };
@@ -584,14 +576,12 @@ public class StandaloneBuilder {
       JarFile _jarFile = new JarFile(file);
       jarFile = _jarFile;
       final Manifest manifest = jarFile.getManifest();
-      boolean _equals = Objects.equal(manifest, null);
-      if (_equals) {
+      if ((manifest == null)) {
         return;
       }
       Attributes _mainAttributes = manifest.getMainAttributes();
       String name = _mainAttributes.getValue("Bundle-SymbolicName");
-      boolean _notEquals = (!Objects.equal(name, null));
-      if (_notEquals) {
+      if ((name != null)) {
         final int indexOf = name.indexOf(";");
         if ((indexOf > 0)) {
           String _substring = name.substring(0, indexOf);
@@ -625,8 +615,7 @@ public class StandaloneBuilder {
       }
     } finally {
       try {
-        boolean _notEquals_1 = (!Objects.equal(jarFile, null));
-        if (_notEquals_1) {
+        if ((jarFile != null)) {
           jarFile.close();
         }
       } catch (final Throwable _t_1) {

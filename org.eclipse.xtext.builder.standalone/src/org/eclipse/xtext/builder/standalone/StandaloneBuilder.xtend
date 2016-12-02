@@ -71,7 +71,7 @@ class StandaloneBuilder {
 	@Inject IJavaCompiler compiler
 
 	def void setTempDir(String pathAsString) {
-		if (pathAsString != null) {
+		if (pathAsString !== null) {
 			tempDir = new File(pathAsString)
 		}
 	}
@@ -82,7 +82,7 @@ class StandaloneBuilder {
 	 */
 	def boolean launch() {
 		val needsJava = languages.values.exists[linksAgainstJava]
-		if (baseDir == null) {
+		if (baseDir === null) {
 			baseDir = System.getProperty('user.dir')
 			LOG.warn("Property baseDir not set. Using '" + baseDir + "'")
 		}
@@ -92,7 +92,7 @@ class StandaloneBuilder {
 
 		val resourceSet = resourceSetProvider.get
 
-		if (encoding != null) {
+		if (encoding !== null) {
 			forceDebugLog("Setting encoding.")
 			fileEncodingSetup(languages.values, encoding)
 		}
@@ -100,7 +100,7 @@ class StandaloneBuilder {
 		LOG.info("Collecting source models.")
 		val startedAt = System.currentTimeMillis
 		var rootsToTravers = classPathEntries
-		if (classPathLookUpFilter != null) {
+		if (classPathLookUpFilter !== null) {
 			LOG.info("Class path look up filter is active.")
 			val cpLookUpFilter = Pattern.compile(classPathLookUpFilter)
 			rootsToTravers = classPathEntries.filter[root|cpLookUpFilter.matcher(root).matches]
@@ -116,7 +116,7 @@ class StandaloneBuilder {
 			LOG.info("Installing type provider.")
 			installTypeProvider(allClassPathEntries, resourceSet, null)
 		}
-		val strategy = if (clusteringConfig != null) {
+		val strategy = if (clusteringConfig !== null) {
 				LOG.info("Clustering configured.")
 				new DynamicResourceClusteringPolicy => [
 					// Convert MB to byte to make it easier for the user
@@ -234,7 +234,7 @@ class StandaloneBuilder {
 	def protected generateStubs(ResourceDescriptionsData data, List<URI> sourceResourceURIs) {
 		val stubsDir = createTempDir("stubs")
 		LOG.info("Generating stubs into " + stubsDir.absolutePath)
-		if (encoding != null)
+		if (encoding !== null)
 			encodingProvider.setDefaultEncoding(encoding)
 		commonFileAccess.setOutputPath(IFileSystemAccess.DEFAULT_OUTPUT, stubsDir.absolutePath)
 		val generateStubs = sourceResourceURIs.filter[languageAccess.linksAgainstJava]
@@ -261,7 +261,7 @@ class StandaloneBuilder {
 			val fileSystemAccess = access.fileSystemAccess
 			if (isWriteStorageResources) {
 				switch it {
-					StorageAwareResource case resourceStorageFacade != null: {
+					StorageAwareResource case resourceStorageFacade !== null: {
 						resourceStorageFacade.saveResource(it, fileSystemAccess)
 					}
 				}
@@ -275,7 +275,7 @@ class StandaloneBuilder {
 		val absoluteSource = sourceDirs
 			.map[UriUtil.createFolderURI(new File(it))]
 			.findFirst [UriUtil.isPrefixOf(it, uri)]
-		if (absoluteSource == null) {
+		if (absoluteSource === null) {
 			throw new IllegalStateException(
 				'''Resource «uri» is not contained in any of the known source folders «sourceDirs».''')
 		}
@@ -297,7 +297,7 @@ class StandaloneBuilder {
 
 	private def getFileSystemAccess(LanguageAccess language) {
 		var fsa = configuredFsas.get(language)
-		if (fsa == null) {
+		if (fsa === null) {
 			fsa = language.createFileSystemAccess(new File(baseDir))
 			fsa = fsa.configureFileSystemAccess(language)
 			configuredFsas.put(language, fsa)
@@ -352,7 +352,7 @@ class StandaloneBuilder {
 		)
 		modelsFound.asMap.forEach [ uri, resource |
 			val file = new File(uri)
-			if (resource != null && !file.directory && file.name.endsWith(".jar")) {
+			if (resource !== null && !file.directory && file.name.endsWith(".jar")) {
 				registerBundle(file)
 			}
 		]
@@ -366,10 +366,10 @@ class StandaloneBuilder {
 		try {
 			jarFile = new JarFile(file);
 			val Manifest manifest = jarFile.getManifest();
-			if (manifest == null)
+			if (manifest === null)
 				return;
 			var String name = manifest.getMainAttributes().getValue("Bundle-SymbolicName");
-			if (name != null) {
+			if (name !== null) {
 				val int indexOf = name.indexOf(';');
 				if (indexOf > 0)
 					name = name.substring(0, indexOf);
@@ -385,7 +385,7 @@ class StandaloneBuilder {
 			LOG.error(file.absolutePath, e);
 		} finally {
 			try {
-				if (jarFile != null)
+				if (jarFile !== null)
 					jarFile.close();
 			} catch (IOException e) {
 				LOG.error(jarFile, e);

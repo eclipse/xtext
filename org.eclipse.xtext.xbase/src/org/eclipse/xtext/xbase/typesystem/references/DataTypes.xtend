@@ -42,7 +42,7 @@ class LightweightBoundTypeArgument {
 	VarianceInfo actualVariance
 	
 	def isValidVariancePair() {
-		declaredVariance.mergeDeclaredWithActual(actualVariance) != null
+		declaredVariance.mergeDeclaredWithActual(actualVariance) !== null
 	}
 }
 

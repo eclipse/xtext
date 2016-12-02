@@ -79,13 +79,13 @@ class ValidatingRootResolvedTypes extends RootResolvedTypes {
 	}
 	
 	override reassignType(JvmIdentifiableElement identifiable, LightweightTypeReference reference) {
-		if (reference != null && !reference.isOwnedBy(getReferenceOwner()))
+		if (reference !== null && !reference.isOwnedBy(getReferenceOwner()))
 			throw new IllegalArgumentException("reference is not owned by this resolved types")
 		super.reassignType(identifiable, reference)
 	}
 	
 	override acceptHint(Object handle, LightweightBoundTypeArgument boundTypeArgument) {
-		if (boundTypeArgument.typeReference != null && !boundTypeArgument.typeReference.isOwnedBy(getReferenceOwner()))
+		if (boundTypeArgument.typeReference !== null && !boundTypeArgument.typeReference.isOwnedBy(getReferenceOwner()))
 			throw new IllegalArgumentException("reference is not owned by this resolved types")
 		super.acceptHint(handle, boundTypeArgument)
 	}
@@ -93,7 +93,7 @@ class ValidatingRootResolvedTypes extends RootResolvedTypes {
 	override protected getHints(Object handle) {
 		val result = super.getHints(handle)
 		result.forEach[ 
-			if (typeReference != null && !typeReference.isOwnedBy(referenceOwner))
+			if (typeReference !== null && !typeReference.isOwnedBy(referenceOwner))
 				throw new IllegalArgumentException("reference is not owned by this resolved types")
 		]
 		return result
@@ -110,7 +110,7 @@ class ValidatingRootResolvedTypes extends RootResolvedTypes {
 	override getAllHints(Object handle) {
 		val result = super.getAllHints(handle)
 		result.forEach [
-			if (typeReference != null &&!typeReference.isOwnedBy(getReferenceOwner()))
+			if (typeReference !== null &&!typeReference.isOwnedBy(getReferenceOwner()))
 				throw new IllegalArgumentException("hint is not owned by this resolved types")
 		]
 		return result
@@ -132,14 +132,14 @@ class ValidatingRootResolvedTypes extends RootResolvedTypes {
 	
 	override getActualType(XExpression expression) {
 		val result = super.getActualType(expression)
-		if (result != null && !result.isOwnedBy(getReferenceOwner()))
+		if (result !== null && !result.isOwnedBy(getReferenceOwner()))
 			throw new IllegalArgumentException("result is not owned by this resolved types")
 		return result
 	}
 	
 	override getExpectedType(XExpression expression) {
 		val result = super.getExpectedType(expression)
-		if (result != null && !result.isOwnedBy(getReferenceOwner()))
+		if (result !== null && !result.isOwnedBy(getReferenceOwner()))
 			throw new IllegalArgumentException("result is not owned by this resolved types")
 		return result
 	}
@@ -216,13 +216,13 @@ class ValidatingExpressionAwareResolvedTypes extends ExpressionAwareStackedResol
 	}
 	
 	override reassignType(JvmIdentifiableElement identifiable, LightweightTypeReference reference) {
-		if (reference != null && !reference.isOwnedBy(getReferenceOwner()))
+		if (reference !== null && !reference.isOwnedBy(getReferenceOwner()))
 			throw new IllegalArgumentException("reference is not owned by this resolved types")
 		super.reassignType(identifiable, reference)
 	}
 	
 	override acceptHint(Object handle, LightweightBoundTypeArgument boundTypeArgument) {
-		if (boundTypeArgument.typeReference != null && !boundTypeArgument.typeReference.isOwnedBy(getReferenceOwner()))
+		if (boundTypeArgument.typeReference !== null && !boundTypeArgument.typeReference.isOwnedBy(getReferenceOwner()))
 			throw new IllegalArgumentException("reference is not owned by this resolved types")
 		super.acceptHint(handle, boundTypeArgument)
 	}
@@ -230,7 +230,7 @@ class ValidatingExpressionAwareResolvedTypes extends ExpressionAwareStackedResol
 	override protected getHints(Object handle) {
 		val result = super.getHints(handle)
 		result.forEach[ 
-			if (typeReference != null && !typeReference.isOwnedBy(referenceOwner))
+			if (typeReference !== null && !typeReference.isOwnedBy(referenceOwner))
 				throw new IllegalArgumentException("reference is not owned by this resolved types")
 		]
 		return result
@@ -247,7 +247,7 @@ class ValidatingExpressionAwareResolvedTypes extends ExpressionAwareStackedResol
 	override getAllHints(Object handle) {
 		val result = super.getAllHints(handle)
 		result.forEach [
-			if (typeReference != null && !typeReference.isOwnedBy(getReferenceOwner()))
+			if (typeReference !== null && !typeReference.isOwnedBy(getReferenceOwner()))
 				throw new IllegalArgumentException("hint is not owned by this resolved types")
 		]
 		return result
@@ -298,7 +298,7 @@ class ValidatingExpressionAwareResolvedTypes extends ExpressionAwareStackedResol
 				throw new IllegalArgumentException("result is not owned by this resolved types")
 		]
 		val result = super.mergeTypeData(expression, allValues, returnType, nullIfEmpty)
-		if (result != null && !result.isOwnedBy(getReferenceOwner()))
+		if (result !== null && !result.isOwnedBy(getReferenceOwner()))
 			throw new IllegalArgumentException("result is not owned by this resolved types")
 		return result
 	}
@@ -330,13 +330,13 @@ class ValidatingStackedResolvedTypes extends StackedResolvedTypes {
 	}
 	
 	override reassignType(JvmIdentifiableElement identifiable, LightweightTypeReference reference) {
-		if (reference != null && !reference.isOwnedBy(getReferenceOwner()))
+		if (reference !== null && !reference.isOwnedBy(getReferenceOwner()))
 			throw new IllegalArgumentException("reference is not owned by this resolved types")
 		super.reassignType(identifiable, reference)
 	}
 	
 	override acceptHint(Object handle, LightweightBoundTypeArgument boundTypeArgument) {
-		if (boundTypeArgument.typeReference != null && !boundTypeArgument.typeReference.isOwnedBy(getReferenceOwner()))
+		if (boundTypeArgument.typeReference !== null && !boundTypeArgument.typeReference.isOwnedBy(getReferenceOwner()))
 			throw new IllegalArgumentException("reference is not owned by this resolved types")
 		super.acceptHint(handle, boundTypeArgument)
 	}
@@ -344,7 +344,7 @@ class ValidatingStackedResolvedTypes extends StackedResolvedTypes {
 	override protected getHints(Object handle) {
 		val result = super.getHints(handle)
 		result.forEach[ 
-			if (typeReference != null && !typeReference.isOwnedBy(referenceOwner))
+			if (typeReference !== null && !typeReference.isOwnedBy(referenceOwner))
 				throw new IllegalArgumentException("reference is not owned by this resolved types")
 		]
 		return result
@@ -361,7 +361,7 @@ class ValidatingStackedResolvedTypes extends StackedResolvedTypes {
 	override getAllHints(Object handle) {
 		val result = super.getAllHints(handle)
 		result.forEach [
-			if (typeReference != null && !typeReference.isOwnedBy(getReferenceOwner()))
+			if (typeReference !== null && !typeReference.isOwnedBy(getReferenceOwner()))
 				throw new IllegalArgumentException("hint is not owned by this resolved types")
 		]
 		return result
@@ -383,7 +383,7 @@ class ValidatingStackedResolvedTypes extends StackedResolvedTypes {
 	
 	override getActualType(XExpression expression) {
 		val result = super.getActualType(expression)
-		if (result != null && !result.isOwnedBy(getReferenceOwner()))
+		if (result !== null && !result.isOwnedBy(getReferenceOwner()))
 			throw new IllegalArgumentException("result is not owned by this resolved types")
 		return result
 	}
@@ -443,13 +443,13 @@ class ValidatingReassigningResolvedTypes extends ReassigningStackedResolvedTypes
 	}
 	
 	override reassignType(JvmIdentifiableElement identifiable, LightweightTypeReference reference) {
-		if (reference != null && !reference.isOwnedBy(getReferenceOwner()))
+		if (reference !== null && !reference.isOwnedBy(getReferenceOwner()))
 			throw new IllegalArgumentException("reference is not owned by this resolved types")
 		super.reassignType(identifiable, reference)
 	}
 	
 	override acceptHint(Object handle, LightweightBoundTypeArgument boundTypeArgument) {
-		if (boundTypeArgument.typeReference != null && !boundTypeArgument.typeReference.isOwnedBy(getReferenceOwner()))
+		if (boundTypeArgument.typeReference !== null && !boundTypeArgument.typeReference.isOwnedBy(getReferenceOwner()))
 			throw new IllegalArgumentException("reference is not owned by this resolved types")
 		super.acceptHint(handle, boundTypeArgument)
 	}
@@ -457,7 +457,7 @@ class ValidatingReassigningResolvedTypes extends ReassigningStackedResolvedTypes
 	override protected getHints(Object handle) {
 		val result = super.getHints(handle)
 		result.forEach[ 
-			if (typeReference != null && !typeReference.isOwnedBy(referenceOwner))
+			if (typeReference !== null && !typeReference.isOwnedBy(referenceOwner))
 				throw new IllegalArgumentException("reference is not owned by this resolved types")
 		]
 		return result
@@ -474,7 +474,7 @@ class ValidatingReassigningResolvedTypes extends ReassigningStackedResolvedTypes
 	override getAllHints(Object handle) {
 		val result = super.getAllHints(handle)
 		result.forEach [
-			if (typeReference != null &&!typeReference.isOwnedBy(getReferenceOwner()))
+			if (typeReference !== null &&!typeReference.isOwnedBy(getReferenceOwner()))
 				throw new IllegalArgumentException("hint is not owned by this resolved types")
 		]
 		return result
@@ -496,7 +496,7 @@ class ValidatingReassigningResolvedTypes extends ReassigningStackedResolvedTypes
 	
 	override getActualType(XExpression expression) {
 		val result = super.getActualType(expression)
-		if (result != null && !result.isOwnedBy(getReferenceOwner()))
+		if (result !== null && !result.isOwnedBy(getReferenceOwner()))
 			throw new IllegalArgumentException("result is not owned by this resolved types")
 		return result
 	}

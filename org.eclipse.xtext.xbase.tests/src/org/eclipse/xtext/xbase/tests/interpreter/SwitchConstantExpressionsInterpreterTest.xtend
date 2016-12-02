@@ -78,7 +78,7 @@ class SwitchConstantExpressionsInterpreterTest extends AbstractXbaseTestCase {
 		val expression = typeAndExpression.value
 		val charSequence = '''
 		{
-			val«IF type != null» «type»«ENDIF» testFoo = «expression»
+			val«IF type !== null» «type»«ENDIF» testFoo = «expression»
 		}
 		'''
 		val blockExpression = expression(charSequence, true) as XBlockExpression

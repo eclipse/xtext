@@ -76,7 +76,7 @@ class ClasspathBasedIdeTypesProposalProvider implements IIdeTypesProposalProvide
 		val resourceSet = context.resource.resourceSet
 		if (resourceSet instanceof XtextResourceSet) {
 			val ctx = resourceSet.classpathURIContext
-			if (ctx != null) {
+			if (ctx !== null) {
 		        if (ctx instanceof Class<?>)
 		            return ctx.classLoader
 		        if (ctx instanceof ClassLoader)

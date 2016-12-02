@@ -1,6 +1,5 @@
 package org.eclipse.xtext.java.resource;
 
-import com.google.common.base.Objects;
 import com.google.common.io.CharStreams;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -78,8 +77,7 @@ public class JavaResource extends ResourceImpl implements IJavaSchemeUriResolver
   }
   
   protected String getEncoding(final URI uri, final Map<?, ?> options) {
-    boolean _notEquals = (!Objects.equal(options, null));
-    if (_notEquals) {
+    if ((options != null)) {
       final Object encodingOption = options.get(JavaResource.OPTION_ENCODING);
       if ((encodingOption instanceof String)) {
         return ((String)encodingOption);
@@ -155,14 +153,12 @@ public class JavaResource extends ResourceImpl implements IJavaSchemeUriResolver
   @Override
   public EObject resolveJavaObjectURIProxy(final InternalEObject proxy, final JvmTypeReference sender) {
     final IndexedJvmTypeAccess access = this.getIndexJvmTypeAccess();
-    boolean _notEquals = (!Objects.equal(access, null));
-    if (_notEquals) {
+    if ((access != null)) {
       try {
         URI _eProxyURI = proxy.eProxyURI();
         ResourceSet _resourceSet = this.getResourceSet();
         final EObject result = access.getIndexedJvmType(_eProxyURI, _resourceSet);
-        boolean _notEquals_1 = (!Objects.equal(result, null));
-        if (_notEquals_1) {
+        if ((result != null)) {
           return result;
         }
       } catch (final Throwable _t) {
@@ -180,8 +176,7 @@ public class JavaResource extends ResourceImpl implements IJavaSchemeUriResolver
   private IndexedJvmTypeAccess _access;
   
   public IndexedJvmTypeAccess getIndexJvmTypeAccess() {
-    boolean _equals = Objects.equal(this._access, null);
-    if (_equals) {
+    if ((this._access == null)) {
       Resource.Factory.Registry _resourceFactoryRegistry = this.resourceSet.getResourceFactoryRegistry();
       Map<String, Object> _protocolToFactoryMap = _resourceFactoryRegistry.getProtocolToFactoryMap();
       final Object provider = _protocolToFactoryMap.get(URIHelperConstants.PROTOCOL);

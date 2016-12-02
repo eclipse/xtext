@@ -1263,7 +1263,7 @@ public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
   
   @Test
   public void testFeatureCall_26() throws Exception {
-    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("newArrayList(\'\').map(s|s != null)", "String");
+    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("newArrayList(\'\').map(s|s !== null)", "String");
     Iterator<XExpression> _and = this.and(_bindTypeArgumentsTo, "String", "Boolean");
     this.done(_and);
   }

@@ -119,8 +119,7 @@ public class ConstantExpressionValidator {
       if (feature instanceof JvmOperation) {
         _matched=true;
         final JvmAnnotationReference annotationReference = this._xExpressionHelper.findInlineAnnotation(expression);
-        boolean _equals = Objects.equal(annotationReference, null);
-        if (_equals) {
+        if ((annotationReference == null)) {
           return false;
         }
         EList<JvmAnnotationValue> _values = annotationReference.getValues();
@@ -132,8 +131,8 @@ public class ConstantExpressionValidator {
         if (_exists) {
           boolean _xifexpression = false;
           XExpression _actualReceiver = expression.getActualReceiver();
-          boolean _equals_1 = Objects.equal(_actualReceiver, null);
-          if (_equals_1) {
+          boolean _tripleEquals = (_actualReceiver == null);
+          if (_tripleEquals) {
             _xifexpression = true;
           } else {
             XExpression _actualReceiver_1 = expression.getActualReceiver();

@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.xbase.tests.typesystem;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.util.Collections;
 import java.util.HashSet;
@@ -75,8 +74,7 @@ public abstract class AbstractIdentifiableTypeTest extends AbstractXbaseTestCase
     Set<EObject> _set = IterableExtensions.<EObject>toSet(_flatten);
     final Function1<EObject, Boolean> _function_1 = (EObject it) -> {
       boolean _and = false;
-      boolean _notEquals = (!Objects.equal(it, null));
-      if (!_notEquals) {
+      if (!(it != null)) {
         _and = false;
       } else {
         boolean _switchResult = false;
@@ -106,8 +104,7 @@ public abstract class AbstractIdentifiableTypeTest extends AbstractXbaseTestCase
       {
         final ICompositeNode node = NodeModelUtils.findActualNodeFor(it);
         int _xifexpression = (int) 0;
-        boolean _notEquals = (!Objects.equal(node, null));
-        if (_notEquals) {
+        if ((node != null)) {
           _xifexpression = node.getOffset();
         } else {
           EObject _eContainer = it.eContainer();

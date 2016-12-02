@@ -57,7 +57,7 @@ class JavaResource extends ResourceImpl implements IJavaSchemeUriResolver, ISync
 	}
 	
 	protected def getEncoding(URI uri, Map<?, ?> options) {
-		if (options != null) {
+		if (options !== null) {
 			val encodingOption = options.get(OPTION_ENCODING);
 			if (encodingOption instanceof String) {
 				return encodingOption;
@@ -122,10 +122,10 @@ class JavaResource extends ResourceImpl implements IJavaSchemeUriResolver, ISync
 	
 	override resolveJavaObjectURIProxy(InternalEObject proxy, JvmTypeReference sender) {
 		val access = getIndexJvmTypeAccess();
-		if (access != null) {
+		if (access !== null) {
 			try {
 				val result = access.getIndexedJvmType(proxy.eProxyURI(), getResourceSet());
-				if (result != null) {
+				if (result !== null) {
 					return result;
 				}
 			} catch(UnknownNestedTypeException e) {
@@ -137,7 +137,7 @@ class JavaResource extends ResourceImpl implements IJavaSchemeUriResolver, ISync
 	
 	IndexedJvmTypeAccess _access
 	def IndexedJvmTypeAccess getIndexJvmTypeAccess() {
-		if (_access == null) {
+		if (_access === null) {
 			val provider = resourceSet.getResourceFactoryRegistry().getProtocolToFactoryMap().get(URIHelperConstants.PROTOCOL)
 			if (provider instanceof AbstractJvmTypeProvider) {
 				_access = provider.indexedJvmTypeAccess

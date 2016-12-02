@@ -167,7 +167,7 @@ public class ErrorSafeExtensions {
   }
   
   public void serializeSafely(final JvmTypeReference typeRef, final String surrogateType, final ITreeAppendable appendable) {
-    if ((Objects.equal(typeRef, null) || Objects.equal(typeRef.getType(), null))) {
+    if (((typeRef == null) || (typeRef.getType() == null))) {
       boolean _matched = false;
       if (typeRef instanceof JvmSpecializedTypeReference) {
         _matched=true;
@@ -205,8 +205,7 @@ public class ErrorSafeExtensions {
           }
         }
         this.closeErrorAppendable(appendable, errorChild);
-        boolean _notEquals = (!Objects.equal(surrogateType, null));
-        if (_notEquals) {
+        if ((surrogateType != null)) {
           appendable.append(surrogateType);
         }
       } else {
@@ -217,7 +216,7 @@ public class ErrorSafeExtensions {
   }
   
   public void serializeSafely(final JvmAnnotationReference annotationRef, final ITreeAppendable appendable, final Procedure1<? super ITreeAppendable> onSuccess) {
-    if ((Objects.equal(annotationRef, null) || Objects.equal(annotationRef.getAnnotation(), null))) {
+    if (((annotationRef == null) || (annotationRef.getAnnotation() == null))) {
       final ITreeAppendable errorChild = this.openErrorAppendable(appendable, appendable);
       errorChild.append("annotation is \'null\'");
       this.closeErrorAppendable(appendable, errorChild);

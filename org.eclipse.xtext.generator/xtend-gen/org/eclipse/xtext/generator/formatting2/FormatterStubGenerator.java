@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.generator.formatting2;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
@@ -105,8 +104,7 @@ public class FormatterStubGenerator {
   
   public String getStubSuperClassName() {
     final Grammar superGrammar = IInheriting.Util.getNonTerminalsSuperGrammar(this.grammar);
-    boolean _notEquals = (!Objects.equal(superGrammar, null));
-    if (_notEquals) {
+    if ((superGrammar != null)) {
       FormatterStubGenerator _createGenerator = this.service.createGenerator(superGrammar);
       return _createGenerator.getStubQualifiedName();
     } else {
@@ -132,8 +130,7 @@ public class FormatterStubGenerator {
     for (final Action action : _containedActions) {
       {
         final String featureName = action.getFeature();
-        boolean _notEquals = (!Objects.equal(featureName, null));
-        if (_notEquals) {
+        if ((featureName != null)) {
           TypeRef _type = action.getType();
           final EClassifier type = _type.getClassifier();
           if ((type instanceof EClass)) {

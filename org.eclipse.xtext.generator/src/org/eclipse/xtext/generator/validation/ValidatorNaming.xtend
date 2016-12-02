@@ -36,7 +36,7 @@ class ValidatorNaming {
 	
 	def getValidatorSuperClassName(boolean isInheritImplementation) {
 		val superGrammar = grammar.nonTerminalsSuperGrammar
-		if(isInheritImplementation && superGrammar != null) 
+		if(isInheritImplementation && superGrammar !== null) 
 			superGrammar.validatorName 
 		else
 			'org.eclipse.xtext.validation.AbstractDeclarativeValidator'

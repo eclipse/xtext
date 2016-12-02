@@ -143,7 +143,7 @@ public class ConstantConditionsInterpreter {
   
   protected EvaluationResult _internalEvaluate(final XAbstractFeatureCall it, final EvaluationContext context) {
     final JvmIdentifiableElement feature = this.getFeature(it, context);
-    if ((Objects.equal(feature, null) || feature.eIsProxy())) {
+    if (((feature == null) || feature.eIsProxy())) {
       return EvaluationResult.NOT_A_CONSTANT;
     }
     boolean _matched = false;
@@ -183,8 +183,8 @@ public class ConstantConditionsInterpreter {
           boolean _isFinal = ((JvmField)feature).isFinal();
           if (_isFinal) {
             XExpression _actualReceiver = it.getActualReceiver();
-            boolean _notEquals = (!Objects.equal(_actualReceiver, null));
-            if (_notEquals) {
+            boolean _tripleNotEquals = (_actualReceiver != null);
+            if (_tripleNotEquals) {
               XExpression _actualReceiver_1 = it.getActualReceiver();
               final EvaluationResult receiver = this.doEvaluate(_actualReceiver_1, context);
               boolean _isNotAConstant = receiver.isNotAConstant();
@@ -192,8 +192,7 @@ public class ConstantConditionsInterpreter {
                 return receiver;
               }
               final XExpression associatedExpression = this.getAssociatedExpression(((JvmField)feature));
-              boolean _notEquals_1 = (!Objects.equal(associatedExpression, null));
-              if (_notEquals_1) {
+              if ((associatedExpression != null)) {
                 final EvaluationResult result = this.evaluateAssociatedExpression(associatedExpression, context);
                 Object _rawValue = result.getRawValue();
                 if ((_rawValue instanceof ThisReference)) {
@@ -229,8 +228,7 @@ public class ConstantConditionsInterpreter {
               }
             } else {
               final XExpression associatedExpression_1 = this.getAssociatedExpression(((JvmField)feature));
-              boolean _notEquals_2 = (!Objects.equal(associatedExpression_1, null));
-              if (_notEquals_2) {
+              if ((associatedExpression_1 != null)) {
                 final EvaluationResult result_1 = this.evaluateAssociatedExpression(associatedExpression_1, context);
                 Object _rawValue_3 = result_1.getRawValue();
                 return new EvaluationResult(_rawValue_3, false);
@@ -245,7 +243,7 @@ public class ConstantConditionsInterpreter {
     }
     if (!_matched) {
       if (feature instanceof XVariableDeclaration) {
-        if (((!((XVariableDeclaration)feature).isWriteable()) && (!Objects.equal(((XVariableDeclaration)feature).getRight(), null)))) {
+        if (((!((XVariableDeclaration)feature).isWriteable()) && (((XVariableDeclaration)feature).getRight() != null))) {
           _matched=true;
           XExpression _right = ((XVariableDeclaration)feature).getRight();
           return this.evaluateAssociatedExpression(_right, context);
@@ -260,8 +258,8 @@ public class ConstantConditionsInterpreter {
         boolean _matched_1 = false;
         if (container instanceof XSwitchExpression) {
           XExpression _switch = ((XSwitchExpression)container).getSwitch();
-          boolean _notEquals = (!Objects.equal(_switch, null));
-          if (_notEquals) {
+          boolean _tripleNotEquals = (_switch != null);
+          if (_tripleNotEquals) {
             _matched_1=true;
             XExpression _switch_1 = ((XSwitchExpression)container).getSwitch();
             return this.doEvaluate(_switch_1, context);
@@ -276,7 +274,7 @@ public class ConstantConditionsInterpreter {
   public JvmIdentifiableElement getFeature(final XAbstractFeatureCall call, final EvaluationContext context) {
     Object _eGet = call.eGet(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, false);
     JvmIdentifiableElement feature = ((JvmIdentifiableElement) _eGet);
-    if ((Objects.equal(feature, null) || feature.eIsProxy())) {
+    if (((feature == null) || feature.eIsProxy())) {
       IResolvedTypes _resolvedTypes = context.getResolvedTypes();
       JvmIdentifiableElement _linkedFeature = _resolvedTypes.getLinkedFeature(call);
       feature = _linkedFeature;
@@ -399,7 +397,7 @@ public class ConstantConditionsInterpreter {
   }
   
   protected EvaluationResult _internalEvaluate(final XBinaryOperation it, final EvaluationContext context) {
-    if ((this.isFromXbaseLibrary(it, context) && (!Objects.equal(it.getRightOperand(), null)))) {
+    if ((this.isFromXbaseLibrary(it, context) && (it.getRightOperand() != null))) {
       XExpression _leftOperand = it.getLeftOperand();
       final EvaluationResult left = this.doEvaluate(_leftOperand, context);
       XExpression _rightOperand = it.getRightOperand();

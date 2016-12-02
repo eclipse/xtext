@@ -1,6 +1,5 @@
 package org.eclipse.xtext.java.resource;
 
-import com.google.common.base.Objects;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
@@ -60,8 +59,7 @@ public class IndexAwareNameEnvironment implements INameEnvironment {
       Iterable<IEObjectDescription> _exportedObjects = this.resourceDescriptions.getExportedObjects(TypesPackage.Literals.JVM_DECLARED_TYPE, className, false);
       final IEObjectDescription candidate = IterableExtensions.<IEObjectDescription>head(_exportedObjects);
       NameEnvironmentAnswer result = null;
-      boolean _notEquals = (!Objects.equal(candidate, null));
-      if (_notEquals) {
+      if ((candidate != null)) {
         URI _eObjectURI = candidate.getEObjectURI();
         URI _trimFragment = _eObjectURI.trimFragment();
         final IResourceDescription resourceDescription = this.resourceDescriptions.getResourceDescription(_trimFragment);
@@ -76,8 +74,7 @@ public class IndexAwareNameEnvironment implements INameEnvironment {
         String _string_1 = className.toString("/");
         final String fileName = (_string_1 + ".class");
         final URL url = this.classLoader.getResource(fileName);
-        boolean _equals = Objects.equal(url, null);
-        if (_equals) {
+        if ((url == null)) {
           this.cache.put(className, null);
           return null;
         }

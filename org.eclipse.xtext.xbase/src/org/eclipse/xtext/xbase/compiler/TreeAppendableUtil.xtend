@@ -45,7 +45,7 @@ class TreeAppendableUtil {
 				ILocationInFileProviderExtension: locationProvider.getTextRegion(source, ILocationInFileProviderExtension.RegionDescription.INCLUDING_COMMENTS)
 				default: locationProvider.getFullTextRegion(source)
 			} as ITextRegionWithLineInformation
-			if (it != null && it !== ITextRegion.EMPTY_REGION)
+			if (it !== null && it !== ITextRegion.EMPTY_REGION)
 				appendable.trace(new LocationData(offset, length, lineNumber, endLineNumber, null))
 			else
 				appendable

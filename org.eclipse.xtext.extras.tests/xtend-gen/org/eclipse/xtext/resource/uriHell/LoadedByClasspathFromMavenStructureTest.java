@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.resource.uriHell;
 
-import com.google.common.base.Objects;
 import java.net.URL;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.resource.uriHell.AbstractURIHandlerWithEcoreTest;
@@ -37,8 +36,7 @@ public class LoadedByClasspathFromMavenStructureTest extends AbstractURIHandlerW
   @Override
   public URI getPackagedReferencedURI() {
     URL url = this.classLoader.getResource("org/eclipse/xtext/resource/mydsl.ecore");
-    boolean _equals = Objects.equal(url, null);
-    if (_equals) {
+    if ((url == null)) {
       URL _resource = this.classLoader.getResource("/org/eclipse/xtext/resource/mydsl.ecore");
       url = _resource;
     }

@@ -1,6 +1,5 @@
 package org.eclipse.xtext.xbase.imports;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.Arrays;
 import java.util.List;
@@ -62,8 +61,7 @@ public class ImportsCollector {
         boolean _contains = selectedRegion.contains(nodeRegion);
         if (_contains) {
           final EObject semanticElement = node.getSemanticElement();
-          boolean _notEquals = (!Objects.equal(semanticElement, null));
-          if (_notEquals) {
+          if ((semanticElement != null)) {
             ICompositeNode _findActualNodeFor_1 = NodeModelUtils.findActualNodeFor(semanticElement);
             this.visit(semanticElement, _findActualNodeFor_1, acceptor);
           }
@@ -83,7 +81,7 @@ public class ImportsCollector {
     int _offset_1 = textRegion.getOffset();
     int _length = textRegion.getLength();
     final int endOffset = (_offset_1 + _length);
-    while (((!Objects.equal(actualOffsetNode.getParent(), null)) && (actualOffsetNode.getTotalEndOffset() < endOffset))) {
+    while (((actualOffsetNode.getParent() != null) && (actualOffsetNode.getTotalEndOffset() < endOffset))) {
       ICompositeNode _parent = actualOffsetNode.getParent();
       actualOffsetNode = _parent;
     }
@@ -145,22 +143,21 @@ public class ImportsCollector {
   
   protected void _visit(final JvmDeclaredType jvmType, final INode originNode, final ImportsAcceptor acceptor) {
     JvmDeclaredType _declaringType = jvmType.getDeclaringType();
-    boolean _equals = Objects.equal(_declaringType, null);
-    if (_equals) {
+    boolean _tripleEquals = (_declaringType == null);
+    if (_tripleEquals) {
       this.collectTypeImportFrom(jvmType, acceptor);
     }
     final String text = NodeModelUtils.getTokenText(originNode);
     final String outerSegment = this.getFirstNameSegment(text);
     final JvmDeclaredType outerType = this.findDeclaringTypeBySimpleName(jvmType, outerSegment);
-    boolean _equals_1 = Objects.equal(outerType, null);
-    if (_equals_1) {
+    if ((outerType == null)) {
       throw new IllegalStateException();
     }
     this.collectTypeImportFrom(outerType, acceptor);
   }
   
   private JvmDeclaredType findDeclaringTypeBySimpleName(final JvmDeclaredType referencedType, final String outerSegment) {
-    if ((Objects.equal(referencedType.getDeclaringType(), null) || outerSegment.equals(referencedType.getSimpleName()))) {
+    if (((referencedType.getDeclaringType() == null) || outerSegment.equals(referencedType.getSimpleName()))) {
       return referencedType;
     }
     JvmDeclaredType _declaringType = referencedType.getDeclaringType();
@@ -266,8 +263,7 @@ public class ImportsCollector {
           QualifiedName _create = QualifiedName.create(docTypeText);
           IEObjectDescription singleElement = scope.getSingleElement(_create);
           JvmType referencedType = null;
-          boolean _notEquals = (!Objects.equal(singleElement, null));
-          if (_notEquals) {
+          if ((singleElement != null)) {
             EObject _eObjectOrProxy = singleElement.getEObjectOrProxy();
             referencedType = ((JvmType) _eObjectOrProxy);
           }

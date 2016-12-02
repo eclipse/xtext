@@ -1,6 +1,5 @@
 package org.eclipse.xtext.java.tests;
 
-import com.google.common.base.Objects;
 import com.google.inject.Injector;
 import org.eclipse.xtext.java.JavaSourceLanguageSetup;
 import org.eclipse.xtext.testing.IInjectorProvider;
@@ -14,8 +13,7 @@ public class JavaInjectorProvider implements IInjectorProvider, IRegistryConfigu
   
   @Override
   public Injector getInjector() {
-    boolean _equals = Objects.equal(this.injector, null);
-    if (_equals) {
+    if ((this.injector == null)) {
       Injector _createInjector = this.setup.createInjector();
       this.injector = _createInjector;
     }

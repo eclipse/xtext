@@ -49,11 +49,11 @@ import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess
 			current = current.lastChild
 		val current1 = current
 		val result = current1.findNextLeaf[current1 != it && grammarElement instanceof Keyword]
-		if (result != null && result.text == kw) result
+		if (result !== null && result.text == kw) result
 	}
 
 	def ILeafNode findNextLeaf(INode node, (ILeafNode)=>boolean matches) {
-		if (node != null) {
+		if (node !== null) {
 			if (node instanceof ILeafNode && matches.apply(node as ILeafNode))
 				return node as ILeafNode
 			val ni = new NodeIterator(node)

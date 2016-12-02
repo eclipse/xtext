@@ -131,7 +131,7 @@ public class XbaseFormatter extends XtypeFormatter {
   }
   
   protected void formatCommaSeparatedList(final Collection<? extends EObject> elements, final ISemanticRegion open, final ISemanticRegion close, @Extension final IFormattableDocument format) {
-    if ((Objects.equal(close, null) || Objects.equal(open, null))) {
+    if (((close == null) || (open == null))) {
     } else {
       boolean _isEmpty = elements.isEmpty();
       if (_isEmpty) {
@@ -197,8 +197,7 @@ public class XbaseFormatter extends XtypeFormatter {
               EObject _object = ele_1.getObject();
               boolean _prependNewLineIfMultiline = this.prependNewLineIfMultiline(_object);
               if (_prependNewLineIfMultiline) {
-                boolean _equals = Objects.equal(sep, null);
-                if (_equals) {
+                if ((sep == null)) {
                   final Procedure1<IHiddenRegionFormatter> _function_4 = (IHiddenRegionFormatter it) -> {
                     it.noSpace();
                     ITextSegment _region = ele_1.getRegion();
@@ -325,8 +324,7 @@ public class XbaseFormatter extends XtypeFormatter {
   }
   
   protected void formatBuilderWithLeadingGap(final XClosure closure, @Extension final IFormattableDocument format) {
-    boolean _notEquals = (!Objects.equal(closure, null));
-    if (_notEquals) {
+    if ((closure != null)) {
       IHiddenRegion _previousHiddenRegion = this.textRegionExtensions.previousHiddenRegion(closure);
       final int offset = _previousHiddenRegion.getOffset();
       IHiddenRegion _nextHiddenRegion = this.textRegionExtensions.nextHiddenRegion(closure);
@@ -355,8 +353,8 @@ public class XbaseFormatter extends XtypeFormatter {
   protected XClosure builder(final List<XExpression> params) {
     XClosure _xifexpression = null;
     XExpression _last = IterableExtensions.<XExpression>last(params);
-    boolean _notEquals = (!Objects.equal(_last, null));
-    if (_notEquals) {
+    boolean _tripleNotEquals = (_last != null);
+    if (_tripleNotEquals) {
       XClosure _xblockexpression = null;
       {
         XExpression _last_1 = IterableExtensions.<XExpression>last(params);
@@ -380,8 +378,7 @@ public class XbaseFormatter extends XtypeFormatter {
     {
       final XClosure builder = this.builder(params);
       Iterable<XExpression> _xifexpression = null;
-      boolean _notEquals = (!Objects.equal(builder, null));
-      if (_notEquals) {
+      if ((builder != null)) {
         int _size = params.size();
         int _minus = (_size - 1);
         _xifexpression = IterableExtensions.<XExpression>take(params, _minus);
@@ -546,8 +543,7 @@ public class XbaseFormatter extends XtypeFormatter {
         this.formatFeatureCallTypeParameters(call, format);
         ISemanticRegionsFinder _regionFor = this.textRegionExtensions.regionFor(call);
         final ISemanticRegion feature = _regionFor.feature(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE);
-        boolean _notEquals = (!Objects.equal(feature, null));
-        if (_notEquals) {
+        if ((feature != null)) {
           ITextSegment _region = entry.getRegion();
           int _length = _region.getLength();
           int _length_1 = feature.getLength();
@@ -593,7 +589,7 @@ public class XbaseFormatter extends XtypeFormatter {
   protected AbstractRule binaryOperationPrecedence(final EObject op) {
     ISemanticRegionsFinder _regionFor = this.textRegionExtensions.regionFor(op);
     final ISemanticRegion node = _regionFor.feature(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE);
-    if (((!Objects.equal(node, null)) && (node.getGrammarElement() instanceof RuleCall))) {
+    if (((node != null) && (node.getGrammarElement() instanceof RuleCall))) {
       EObject _grammarElement = node.getGrammarElement();
       return ((RuleCall) _grammarElement).getRule();
     }
@@ -735,8 +731,8 @@ public class XbaseFormatter extends XtypeFormatter {
     XExpression _if_1 = expr.getIf();
     format.<XExpression>format(_if_1);
     XExpression _else = expr.getElse();
-    boolean _equals = Objects.equal(_else, null);
-    if (_equals) {
+    boolean _tripleEquals = (_else == null);
+    if (_tripleEquals) {
       XExpression _then = expr.getThen();
       this.formatBody(_then, multiline, format);
     } else {
@@ -902,14 +898,14 @@ public class XbaseFormatter extends XtypeFormatter {
     ISemanticRegionsFinder _regionFor_1 = this.textRegionExtensions.regionFor(expr);
     final ISemanticRegion close = _regionFor_1.keyword("}");
     EObject _eContainer = expr.eContainer();
-    boolean _equals = Objects.equal(_eContainer, null);
-    if (_equals) {
+    boolean _tripleEquals = (_eContainer == null);
+    if (_tripleEquals) {
       final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
         it.noSpace();
       };
       format.<XBlockExpression>surround(expr, _function);
     }
-    if (((!Objects.equal(open, null)) && (!Objects.equal(close, null)))) {
+    if (((open != null) && (close != null))) {
       boolean _isSingleLineBlock = this.isSingleLineBlock(expr);
       if (_isSingleLineBlock) {
         final ISubFormatter _function_1 = (IFormattableSubDocument f) -> {
@@ -1004,7 +1000,7 @@ public class XbaseFormatter extends XtypeFormatter {
         };
         JvmFormalParameter _append = format.<JvmFormalParameter>append(_prepend, _function_1);
         format.<JvmFormalParameter>format(_append);
-        if (((!Objects.equal(cc, IterableExtensions.<XCatchClause>last(expr.getCatchClauses()))) || (!Objects.equal(expr.getFinallyExpression(), null)))) {
+        if (((!Objects.equal(cc, IterableExtensions.<XCatchClause>last(expr.getCatchClauses()))) || (expr.getFinallyExpression() != null))) {
           XExpression _expression_1 = cc.getExpression();
           this.formatBodyInline(_expression_1, true, format);
         } else {
@@ -1048,7 +1044,7 @@ public class XbaseFormatter extends XtypeFormatter {
     };
     final boolean containsBlockExpr = IterableExtensions.<XCasePart>exists(_cases, _function);
     final boolean switchSL = ((!containsBlockExpr) && (!this.textRegionExtensions.isMultiline(expr)));
-    final boolean caseSL = ((((!containsBlockExpr) && ((!expr.getCases().isEmpty()) || (!Objects.equal(expr.getDefault(), null)))) && 
+    final boolean caseSL = ((((!containsBlockExpr) && ((!expr.getCases().isEmpty()) || (expr.getDefault() != null))) && 
       (!IterableExtensions.<XCasePart>exists(expr.getCases(), ((Function1<XCasePart, Boolean>) (XCasePart it) -> {
         return Boolean.valueOf(this.textRegionExtensions.isMultiline(it));
       })))) && (!this.isMultilineOrInNewLine(expr.getDefault())));
@@ -1079,8 +1075,8 @@ public class XbaseFormatter extends XtypeFormatter {
           XExpression _then = c.getThen();
           format.<XExpression>format(_then);
           XExpression _then_1 = c.getThen();
-          boolean _equals = Objects.equal(_then_1, null);
-          if (_equals) {
+          boolean _tripleEquals = (_then_1 == null);
+          if (_tripleEquals) {
             final Procedure1<IHiddenRegionFormatter> _function_4 = (IHiddenRegionFormatter it) -> {
               it.oneSpace();
             };
@@ -1099,8 +1095,8 @@ public class XbaseFormatter extends XtypeFormatter {
         }
       }
       XExpression _default = expr.getDefault();
-      boolean _notEquals = (!Objects.equal(_default, null));
-      if (_notEquals) {
+      boolean _tripleNotEquals = (_default != null);
+      if (_tripleNotEquals) {
         ISemanticRegionsFinder _regionFor_3 = this.textRegionExtensions.regionFor(expr);
         ISemanticRegion _keyword_1 = _regionFor_3.keyword("default");
         final Procedure1<IHiddenRegionFormatter> _function_4 = (IHiddenRegionFormatter it) -> {
@@ -1144,8 +1140,8 @@ public class XbaseFormatter extends XtypeFormatter {
             format.<XExpression>prepend(_then_1, _function_8);
             EList<XCasePart> _cases_4 = expr.getCases();
             XCasePart _last = IterableExtensions.<XCasePart>last(_cases_4);
-            boolean _notEquals_1 = (!Objects.equal(c_1, _last));
-            if (_notEquals_1) {
+            boolean _notEquals = (!Objects.equal(c_1, _last));
+            if (_notEquals) {
               final Procedure1<IHiddenRegionFormatter> _function_9 = (IHiddenRegionFormatter it) -> {
                 it.newLine();
               };
@@ -1154,8 +1150,8 @@ public class XbaseFormatter extends XtypeFormatter {
           }
         }
         XExpression _default_2 = expr.getDefault();
-        boolean _notEquals_1 = (!Objects.equal(_default_2, null));
-        if (_notEquals_1) {
+        boolean _tripleNotEquals_1 = (_default_2 != null);
+        if (_tripleNotEquals_1) {
           ISemanticRegionsFinder _regionFor_4 = this.textRegionExtensions.regionFor(expr);
           ISemanticRegion _keyword_2 = _regionFor_4.keyword("default");
           final Procedure1<IHiddenRegionFormatter> _function_8 = (IHiddenRegionFormatter it) -> {
@@ -1183,7 +1179,7 @@ public class XbaseFormatter extends XtypeFormatter {
           it.newLine();
         };
         format.append(_prepend_2, _function_12);
-        if (((!expr.getCases().isEmpty()) || (!Objects.equal(expr.getDefault(), null)))) {
+        if (((!expr.getCases().isEmpty()) || (expr.getDefault() != null))) {
           final Procedure1<IHiddenRegionFormatter> _function_13 = (IHiddenRegionFormatter it) -> {
             it.indent();
           };
@@ -1209,8 +1205,8 @@ public class XbaseFormatter extends XtypeFormatter {
           }
         }
         XExpression _default_4 = expr.getDefault();
-        boolean _notEquals_2 = (!Objects.equal(_default_4, null));
-        if (_notEquals_2) {
+        boolean _tripleNotEquals_2 = (_default_4 != null);
+        if (_tripleNotEquals_2) {
           ISemanticRegionsFinder _regionFor_5 = this.textRegionExtensions.regionFor(expr);
           ISemanticRegion _keyword_3 = _regionFor_5.keyword("default");
           final Procedure1<IHiddenRegionFormatter> _function_14 = (IHiddenRegionFormatter it) -> {
@@ -1224,7 +1220,7 @@ public class XbaseFormatter extends XtypeFormatter {
     }
     EList<XCasePart> _cases_5 = expr.getCases();
     for (final XCasePart c_3 : _cases_5) {
-      if (((!Objects.equal(c_3.getTypeGuard(), null)) && (!Objects.equal(c_3.getCase(), null)))) {
+      if (((c_3.getTypeGuard() != null) && (c_3.getCase() != null))) {
         JvmTypeReference _typeGuard = c_3.getTypeGuard();
         final Procedure1<IHiddenRegionFormatter> _function_15 = (IHiddenRegionFormatter it) -> {
           it.oneSpace();
@@ -1241,8 +1237,8 @@ public class XbaseFormatter extends XtypeFormatter {
         format.<XExpression>append(_prepend_3, _function_17);
       } else {
         JvmTypeReference _typeGuard_1 = c_3.getTypeGuard();
-        boolean _notEquals_3 = (!Objects.equal(_typeGuard_1, null));
-        if (_notEquals_3) {
+        boolean _tripleNotEquals_3 = (_typeGuard_1 != null);
+        if (_tripleNotEquals_3) {
           JvmTypeReference _typeGuard_2 = c_3.getTypeGuard();
           final Procedure1<IHiddenRegionFormatter> _function_18 = (IHiddenRegionFormatter it) -> {
             it.noSpace();
@@ -1250,8 +1246,8 @@ public class XbaseFormatter extends XtypeFormatter {
           format.<JvmTypeReference>append(_typeGuard_2, _function_18);
         } else {
           XExpression _case_1 = c_3.getCase();
-          boolean _notEquals_4 = (!Objects.equal(_case_1, null));
-          if (_notEquals_4) {
+          boolean _tripleNotEquals_4 = (_case_1 != null);
+          if (_tripleNotEquals_4) {
             XExpression _case_2 = c_3.getCase();
             final Procedure1<IHiddenRegionFormatter> _function_19 = (IHiddenRegionFormatter it) -> {
               it.oneSpace();
@@ -1344,7 +1340,7 @@ public class XbaseFormatter extends XtypeFormatter {
       _switchResult = CollectionLiterals.<XExpression>newArrayList(x);
     }
     final List<XExpression> children = _switchResult;
-    if ((Objects.equal(open, null) || Objects.equal(close, null))) {
+    if (((open == null) || (close == null))) {
     } else {
       boolean _isEmpty = children.isEmpty();
       if (_isEmpty) {
@@ -1393,8 +1389,7 @@ public class XbaseFormatter extends XtypeFormatter {
                 it.<XExpression>format(c);
                 ISemanticRegionFinder _immediatelyFollowing_1 = this.textRegionExtensions.immediatelyFollowing(c);
                 final ISemanticRegion semicolon = _immediatelyFollowing_1.keyword(";");
-                boolean _notEquals = (!Objects.equal(semicolon, null));
-                if (_notEquals) {
+                if ((semicolon != null)) {
                   final Procedure1<IHiddenRegionFormatter> _function_6 = (IHiddenRegionFormatter it_1) -> {
                     it_1.noSpace();
                   };
@@ -1438,8 +1433,7 @@ public class XbaseFormatter extends XtypeFormatter {
   }
   
   protected void formatBody(final XExpression expr, final boolean forceMultiline, @Extension final IFormattableDocument doc) {
-    boolean _equals = Objects.equal(expr, null);
-    if (_equals) {
+    if ((expr == null)) {
       return;
     }
     if ((expr instanceof XBlockExpression)) {
@@ -1465,8 +1459,7 @@ public class XbaseFormatter extends XtypeFormatter {
   }
   
   protected void formatBodyInline(final XExpression expr, final boolean forceMultiline, @Extension final IFormattableDocument doc) {
-    boolean _equals = Objects.equal(expr, null);
-    if (_equals) {
+    if ((expr == null)) {
       return;
     }
     if ((expr instanceof XBlockExpression)) {
@@ -1497,8 +1490,7 @@ public class XbaseFormatter extends XtypeFormatter {
   }
   
   protected void formatBodyParagraph(final XExpression expr, @Extension final IFormattableDocument doc) {
-    boolean _equals = Objects.equal(expr, null);
-    if (_equals) {
+    if ((expr == null)) {
       return;
     }
     if ((expr instanceof XBlockExpression)) {
@@ -1579,8 +1571,7 @@ public class XbaseFormatter extends XtypeFormatter {
           format.<XExpression>format(child);
           ISemanticRegionFinder _immediatelyFollowing = this.textRegionExtensions.immediatelyFollowing(child);
           final ISemanticRegion sem = _immediatelyFollowing.keyword(";");
-          boolean _notEquals = (!Objects.equal(sem, null));
-          if (_notEquals) {
+          if ((sem != null)) {
             final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
               it.noSpace();
             };
@@ -1611,8 +1602,7 @@ public class XbaseFormatter extends XtypeFormatter {
           format.<XExpression>format(child);
           ISemanticRegionFinder _immediatelyFollowing = this.textRegionExtensions.immediatelyFollowing(child);
           final ISemanticRegion sem = _immediatelyFollowing.keyword(";");
-          boolean _notEquals = (!Objects.equal(sem, null));
-          if (_notEquals) {
+          if ((sem != null)) {
             final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
               it.noSpace();
             };
@@ -1633,7 +1623,7 @@ public class XbaseFormatter extends XtypeFormatter {
   }
   
   protected boolean isMultilineOrInNewLine(final EObject obj) {
-    return ((!Objects.equal(obj, null)) && (this.textRegionExtensions.isMultiline(obj) || this.textRegionExtensions.previousHiddenRegion(obj).isMultiline()));
+    return ((obj != null) && (this.textRegionExtensions.isMultiline(obj) || this.textRegionExtensions.previousHiddenRegion(obj).isMultiline()));
   }
   
   public void format(final Object expr, final IFormattableDocument format) {

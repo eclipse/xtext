@@ -75,7 +75,7 @@ class ContentAssistFragment extends Xtend2GeneratorFragment implements IInheriti
 	
 	def getSuperClassName() {
 		val superGrammar = grammar.usedGrammars.head
-		if(inheritImplementation && superGrammar != null)
+		if(inheritImplementation && superGrammar !== null)
 			superGrammar.proposalProviderName
 		else
 			"org.eclipse.xtext.ui.editor.contentassist.AbstractJavaBasedContentProposalProvider"

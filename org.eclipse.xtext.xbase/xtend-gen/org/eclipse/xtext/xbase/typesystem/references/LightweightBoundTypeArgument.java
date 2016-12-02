@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.xbase.typesystem.references;
 
-import com.google.common.base.Objects;
 import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
@@ -36,7 +35,7 @@ public class LightweightBoundTypeArgument {
   
   public boolean isValidVariancePair() {
     VarianceInfo _mergeDeclaredWithActual = this.declaredVariance.mergeDeclaredWithActual(this.actualVariance);
-    return (!Objects.equal(_mergeDeclaredWithActual, null));
+    return (_mergeDeclaredWithActual != null);
   }
   
   public LightweightBoundTypeArgument(final LightweightTypeReference typeReference, final BoundTypeArgumentSource source, final Object origin, final VarianceInfo declaredVariance, final VarianceInfo actualVariance) {

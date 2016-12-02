@@ -79,7 +79,7 @@ import java.io.IOException
 			out.writeBoolean(false)
 		}
 		// store additional meta data
-		if (metaDataAdapter != null) {
+		if (metaDataAdapter !== null) {
 			out.writeBoolean(true)
 			out.writeBoolean(metaDataAdapter.synthetic)
 		} else {
@@ -135,7 +135,7 @@ import java.io.IOException
 	}
 
 	protected def String getFragment(EObject obj) {
-		if (obj==null || obj.eIsProxy || obj.eResource == null) {
+		if (obj==null || obj.eIsProxy || obj.eResource === null) {
 			return "none"
 		}
 		obj.eResource.getURIFragment(obj)

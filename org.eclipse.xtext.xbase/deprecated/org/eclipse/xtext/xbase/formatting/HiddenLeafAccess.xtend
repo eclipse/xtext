@@ -20,7 +20,7 @@ import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess
 	def HiddenLeafs getHiddenLeafsBefore(INode node) {
 		val start = node.findNextLeaf[!hidden]
 		val nodes = start.findPreviousHiddenLeafs
-		if(start != null)
+		if(start !== null)
 			newHiddenLeafs(if(nodes.empty) start.offset else nodes.head.offset, nodes)
 		else 
 			new HiddenLeafs(node?.offset)
@@ -56,7 +56,7 @@ import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess
 	
 	def HiddenLeafs getHiddenLeafsAfter(INode node) {
 		val start = node.findPreviousLeaf[!hidden]
-		if(start != null)
+		if(start !== null)
 			newHiddenLeafs(start.endOffset, start.findNextHiddenLeafs)
 		else 
 			new HiddenLeafs(node?.offset)
@@ -83,7 +83,7 @@ import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess
 			current = current.lastChild
 		if(current instanceof ILeafNode && matches.apply(current as ILeafNode))
 			return current as ILeafNode
-		if(current != null) {
+		if(current !== null) {
 			val ni = new NodeIterator(current)
 			while(ni.hasPrevious) {
 				val previous = ni.previous
@@ -99,7 +99,7 @@ import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess
 		while(current instanceof ICompositeNode)
 			current = current.lastChild
 		val result = <ILeafNode>newArrayList
-		if(current != null) {
+		if(current !== null) {
 			val ni = new NodeIterator(current)
 			while(ni.hasPrevious) {
 				val previous = ni.previous

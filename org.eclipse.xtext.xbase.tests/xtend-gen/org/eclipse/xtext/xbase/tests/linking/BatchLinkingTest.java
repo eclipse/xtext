@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.xbase.tests.linking;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
@@ -54,8 +53,8 @@ public class BatchLinkingTest extends AbstractXbaseLinkingTest {
         _matched=true;
         this.assertExpressionTypeIsResolved(((XExpression)content), resolvedTypes);
         XExpression _implicitReceiver = ((XAbstractFeatureCall)content).getImplicitReceiver();
-        boolean _notEquals = (!Objects.equal(_implicitReceiver, null));
-        if (_notEquals) {
+        boolean _tripleNotEquals = (_implicitReceiver != null);
+        if (_tripleNotEquals) {
           XExpression _implicitReceiver_1 = ((XAbstractFeatureCall)content).getImplicitReceiver();
           this.assertExpressionTypeIsResolved(_implicitReceiver_1, resolvedTypes);
         }

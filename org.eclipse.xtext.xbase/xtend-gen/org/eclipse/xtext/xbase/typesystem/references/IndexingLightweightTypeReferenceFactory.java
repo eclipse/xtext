@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.xbase.typesystem.references;
 
-import com.google.common.base.Objects;
 import java.util.Arrays;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
@@ -61,8 +60,7 @@ public class IndexingLightweightTypeReferenceFactory extends LightweightTypeRefe
     JvmArrayType _xblockexpression = null;
     {
       final JvmTypeReference componentTypeReference = it.getComponentType();
-      boolean _equals = Objects.equal(componentTypeReference, null);
-      if (_equals) {
+      if ((componentTypeReference == null)) {
         return null;
       }
       JvmArrayType _switchResult = null;
@@ -106,13 +104,11 @@ public class IndexingLightweightTypeReferenceFactory extends LightweightTypeRefe
   
   public boolean isProcedure(final XFunctionTypeRefImplCustom it) {
     final JvmTypeReference returnType = it.getReturnType();
-    boolean _equals = Objects.equal(returnType, null);
-    if (_equals) {
+    if ((returnType == null)) {
       return true;
     }
     final JvmType type = this.getType(returnType);
-    boolean _equals_1 = Objects.equal(type, null);
-    if (_equals_1) {
+    if ((type == null)) {
       return false;
     }
     boolean _eIsProxy = type.eIsProxy();
@@ -170,8 +166,8 @@ public class IndexingLightweightTypeReferenceFactory extends LightweightTypeRefe
       }
     }
     JvmTypeReference _returnType = reference.getReturnType();
-    boolean _notEquals = (!Objects.equal(_returnType, null));
-    if (_notEquals) {
+    boolean _tripleNotEquals = (_returnType != null);
+    if (_tripleNotEquals) {
       JvmTypeReference _returnType_1 = reference.getReturnType();
       JvmTypeReference _wrapIfNecessary = this.wrapIfNecessary(_returnType_1);
       final LightweightTypeReference returnType = this.visit(_wrapIfNecessary);
@@ -193,8 +189,7 @@ public class IndexingLightweightTypeReferenceFactory extends LightweightTypeRefe
   public JvmTypeReference wrapIfNecessary(final JvmTypeReference reference) {
     JvmTypeReference _xblockexpression = null;
     {
-      boolean _equals = Objects.equal(reference, null);
-      if (_equals) {
+      if ((reference == null)) {
         return null;
       }
       final JvmType type = this.getType(reference);

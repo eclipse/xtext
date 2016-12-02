@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.ui.generator.contentAssist;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.Collections;
 import java.util.List;
@@ -114,7 +113,7 @@ public class ContentAssistFragment extends Xtend2GeneratorFragment implements II
       EList<Grammar> _usedGrammars = this.grammar.getUsedGrammars();
       final Grammar superGrammar = IterableExtensions.<Grammar>head(_usedGrammars);
       String _xifexpression = null;
-      if ((this.inheritImplementation && (!Objects.equal(superGrammar, null)))) {
+      if ((this.inheritImplementation && (superGrammar != null))) {
         _xifexpression = this.getProposalProviderName(superGrammar);
       } else {
         _xifexpression = "org.eclipse.xtext.ui.editor.contentassist.AbstractJavaBasedContentProposalProvider";

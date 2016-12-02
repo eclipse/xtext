@@ -111,8 +111,7 @@ public class ClasspathBasedIdeTypesProposalProvider implements IIdeTypesProposal
     final ResourceSet resourceSet = _resource.getResourceSet();
     if ((resourceSet instanceof XtextResourceSet)) {
       final Object ctx = ((XtextResourceSet)resourceSet).getClasspathURIContext();
-      boolean _notEquals = (!Objects.equal(ctx, null));
-      if (_notEquals) {
+      if ((ctx != null)) {
         if ((ctx instanceof Class<?>)) {
           return ((Class<?>)ctx).getClassLoader();
         }

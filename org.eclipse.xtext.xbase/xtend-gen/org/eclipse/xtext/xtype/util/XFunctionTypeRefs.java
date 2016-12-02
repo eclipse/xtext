@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.xtype.util;
 
-import com.google.common.base.Objects;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -75,8 +74,7 @@ public class XFunctionTypeRefs {
       {
         final JvmType wrappedType = XFunctionTypeRefs.getWrappedType(type);
         JvmTypeReference _xifexpression = null;
-        boolean _equals = Objects.equal(wrappedType, null);
-        if (_equals) {
+        if ((wrappedType == null)) {
           _xifexpression = reference;
         } else {
           JvmParameterizedTypeReference _createJvmParameterizedTypeReference = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();

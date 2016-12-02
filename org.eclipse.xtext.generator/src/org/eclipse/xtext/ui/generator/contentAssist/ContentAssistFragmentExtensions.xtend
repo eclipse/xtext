@@ -40,7 +40,7 @@ class ContentAssistFragmentExtensions {
 		var Set<String> toExclude = <String>newHashSet()
 
 		val superGrammar = getSuperGrammar(grammar)
-		if (superGrammar != null) {
+		if (superGrammar !== null) {
 			val superGrammarsFqFeatureNames = computeFqFeatureNamesFromSuperGrammars(grammar)
 			val thisGrammarFqFeatureNames = computeFqFeatureNames(grammar).toSet
 

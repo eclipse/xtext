@@ -33,14 +33,14 @@ class StaticallyImportedMemberProvider {
 
 	def findAllFeatures(XImportDeclaration it) {
 		val importedType = importedType
-		if (!static || importedType == null) {
+		if (!static || importedType === null) {
 			return <JvmFeature>emptyList
 		}
 		val visibilityHelper = eResource.visibilityHelper
 		val resolvedFeatures = importedType.resolvedFeatures
 		resolvedFeatures.allFeatures.filter [ feature |
 			feature.static && visibilityHelper.isVisible(feature) &&
-			(memberName == null || feature.simpleName.startsWith(memberName))
+			(memberName === null || feature.simpleName.startsWith(memberName))
 		]
 	}
 
@@ -49,7 +49,7 @@ class StaticallyImportedMemberProvider {
 	}
 
 	def getAllFeatures(Resource resource, JvmDeclaredType importedType, boolean ^static, boolean ^extension, String memberName) {
-		if (!static || importedType == null) {
+		if (!static || importedType === null) {
 			return <JvmFeature>emptyList
 		}
 		val visibilityHelper = resource.visibilityHelper
@@ -63,7 +63,7 @@ class StaticallyImportedMemberProvider {
 		switch resource {
 			XtextResource: {
 				val packageName = resource.packageName
-				if (packageName == null) {
+				if (packageName === null) {
 					visibilityHelper
 				} else {
 					new ContextualVisibilityHelper(visibilityHelper, packageName)

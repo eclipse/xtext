@@ -53,7 +53,7 @@ class JavaDerivedStateComputer {
 				new DefaultProblemFactory()), true)
 		val compilationResult = new CompilationResult(compilationUnit, 0, 1, -1)
 		val result = parser.dietParse(compilationUnit, compilationResult)
-		if (result.types != null) {
+		if (result.types !== null) {
 			for (type : result.types) {
 				val packageName = result.currentPackage?.importName?.map[String.valueOf(it)]?.join('.')
 				val jvmType = createType(type, packageName)
@@ -80,7 +80,7 @@ class JavaDerivedStateComputer {
 		jvmType.packageName = packageName
 		jvmType.simpleName = String.valueOf(type.name)
 		if (jvmType instanceof JvmGenericType) {
-			if (type.typeParameters != null) {
+			if (type.typeParameters !== null) {
 				for (typeParam : type.typeParameters) {
 					val jvmTypeParam = TypesFactory.eINSTANCE.createJvmTypeParameter
 					jvmTypeParam.name = String.valueOf(typeParam.name)
@@ -88,7 +88,7 @@ class JavaDerivedStateComputer {
 				}
 			}
 		}
-		if (type.memberTypes != null) {
+		if (type.memberTypes !== null) {
 			for (nestedType : type.memberTypes) {
 				val nested = createType(nestedType, null)
 				jvmType.members += nested
@@ -108,7 +108,7 @@ class JavaDerivedStateComputer {
 		val classLoader = getClassLoader(resource)
 		
 		val data = resourceDescriptionsProvider.getResourceDescriptions(resource.resourceSet)
-		if (data == null)
+		if (data === null)
 			throw new IllegalStateException("no index installed")
 		// TODO use container manager
 		val nameEnv = new IndexAwareNameEnvironment(classLoader, data, stubGenerator)

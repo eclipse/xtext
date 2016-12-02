@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.xbase.util;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -43,8 +42,7 @@ public class XSwitchExpressions {
     boolean _xblockexpression = false;
     {
       final LightweightTypeReference switchType = this.getSwitchVariableType(it);
-      boolean _equals = Objects.equal(switchType, null);
-      if (_equals) {
+      if ((switchType == null)) {
         return false;
       }
       boolean _isSubtypeOf = switchType.isSubtypeOf(Integer.TYPE);
@@ -67,8 +65,7 @@ public class XSwitchExpressions {
     boolean _xblockexpression = false;
     {
       final LightweightTypeReference switchType = this.getSwitchVariableType(it);
-      boolean _equals = Objects.equal(switchType, null);
-      if (_equals) {
+      if ((switchType == null)) {
         return false;
       }
       boolean _isSubtypeOf = switchType.isSubtypeOf(Integer.TYPE);
@@ -92,20 +89,18 @@ public class XSwitchExpressions {
     boolean _xblockexpression = false;
     {
       JvmTypeReference _typeGuard = casePart.getTypeGuard();
-      boolean _notEquals = (!Objects.equal(_typeGuard, null));
-      if (_notEquals) {
+      boolean _tripleNotEquals = (_typeGuard != null);
+      if (_tripleNotEquals) {
         return false;
       }
       final XExpression case_ = casePart.getCase();
-      boolean _equals = Objects.equal(case_, null);
-      if (_equals) {
+      if ((case_ == null)) {
         return false;
       }
       @Extension
       final IResolvedTypes resolvedTypes = this._iBatchTypeResolver.resolveTypes(it);
       final LightweightTypeReference caseType = resolvedTypes.getActualType(case_);
-      boolean _equals_1 = Objects.equal(caseType, null);
-      if (_equals_1) {
+      if ((caseType == null)) {
         return false;
       }
       final LightweightTypeReference switchType = this.getSwitchVariableType(it);
@@ -123,8 +118,7 @@ public class XSwitchExpressions {
     @Extension
     final IResolvedTypes resolvedTypes = this._iBatchTypeResolver.resolveTypes(it);
     final JvmFormalParameter declaredParam = it.getDeclaredParam();
-    boolean _equals = Objects.equal(declaredParam, null);
-    if (_equals) {
+    if ((declaredParam == null)) {
       XExpression _switch = it.getSwitch();
       return resolvedTypes.getActualType(_switch);
     }
@@ -142,8 +136,7 @@ public class XSwitchExpressions {
   
   public boolean isConstant(final XCasePart casePart) {
     final XExpression case_ = casePart.getCase();
-    boolean _equals = Objects.equal(case_, null);
-    if (_equals) {
+    if ((case_ == null)) {
       return false;
     }
     try {
@@ -161,8 +154,7 @@ public class XSwitchExpressions {
   
   public XExpression getThen(final XCasePart casePart, final XSwitchExpression switchExpression) {
     final XExpression then = casePart.getThen();
-    boolean _notEquals = (!Objects.equal(then, null));
-    if (_notEquals) {
+    if ((then != null)) {
       return then;
     }
     EList<XCasePart> _cases = switchExpression.getCases();

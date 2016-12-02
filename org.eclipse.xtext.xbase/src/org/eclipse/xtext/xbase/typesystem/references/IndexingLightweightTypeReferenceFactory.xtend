@@ -43,7 +43,7 @@ class IndexingLightweightTypeReferenceFactory extends LightweightTypeReferenceFa
 
 	def dispatch JvmType getType(JvmGenericArrayTypeReferenceImplCustom it) {
 		val componentTypeReference = componentType
-		if (componentTypeReference == null) {
+		if (componentTypeReference === null) {
 			return null
 		}
 		switch componentType : getType(componentTypeReference) {
@@ -67,10 +67,10 @@ class IndexingLightweightTypeReferenceFactory extends LightweightTypeReferenceFa
 
 	def isProcedure(XFunctionTypeRefImplCustom it) {
 		val returnType = returnType
-		if (returnType == null)
+		if (returnType === null)
 			return true;
 		val type = getType(returnType);
-		if (type == null)
+		if (type === null)
 			return false;
 		if (type.eIsProxy)
 			return false;
@@ -102,7 +102,7 @@ class IndexingLightweightTypeReferenceFactory extends LightweightTypeReferenceFa
 			typeArgument.addUpperBound(javaLangObjectTypeReference)
 			result.addTypeArgument(typeArgument);
 		}
-		if (reference.getReturnType() != null) {
+		if (reference.getReturnType() !== null) {
 			val returnType = visit(wrapIfNecessary(reference.getReturnType()))
 			result.setReturnType(returnType);
 			if (reference instanceof XFunctionTypeRefImplCustom) {
@@ -118,7 +118,7 @@ class IndexingLightweightTypeReferenceFactory extends LightweightTypeReferenceFa
 	}
 
 	def JvmTypeReference wrapIfNecessary(JvmTypeReference reference) {
-		if (reference == null) {
+		if (reference === null) {
 			return null
 		}
 		val type = getType(reference)

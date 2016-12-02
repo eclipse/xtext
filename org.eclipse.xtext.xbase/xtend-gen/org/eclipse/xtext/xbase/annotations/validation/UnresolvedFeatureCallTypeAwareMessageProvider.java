@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.xbase.annotations.validation;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.List;
 import org.eclipse.emf.ecore.EClass;
@@ -154,8 +153,7 @@ public class UnresolvedFeatureCallTypeAwareMessageProvider extends LinkingDiagno
     }
     _builder.append(" is undefined");
     String msg = _builder.toString();
-    boolean _notEquals = (!Objects.equal(recieverType, null));
-    if (_notEquals) {
+    if ((recieverType != null)) {
       String _msg = msg;
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append(" ");

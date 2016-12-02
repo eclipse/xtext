@@ -42,7 +42,7 @@ class BatchLinkingTest extends AbstractXbaseLinkingTest {
 			switch(content) {
 				XAbstractFeatureCall: {
 					assertExpressionTypeIsResolved(content, resolvedTypes)
-					if (content.implicitReceiver != null) {
+					if (content.implicitReceiver !== null) {
 						assertExpressionTypeIsResolved(content.implicitReceiver, resolvedTypes)
 					}
 				}

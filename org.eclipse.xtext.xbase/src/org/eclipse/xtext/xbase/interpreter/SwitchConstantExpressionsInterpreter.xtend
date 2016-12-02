@@ -63,17 +63,17 @@ class SwitchConstantExpressionsInterpreter extends AbstractConstantExpressionsIn
 						// to evaluate non-static final fields when checking for duplicate cases.
 						&& (feature.static || ctx instanceof SwitchContext && (ctx as SwitchContext).validationMode)) {
 					val associatedExpression = feature.associatedExpression
-					if (associatedExpression != null) {
+					if (associatedExpression !== null) {
 						return associatedExpression.evaluateAssociatedExpression(ctx)
 					}
 				}
 			}
-			XVariableDeclaration case !feature.writeable && feature.right != null: {
+			XVariableDeclaration case !feature.writeable && feature.right !== null: {
 				return feature.right.evaluateAssociatedExpression(ctx)
 			}
 			JvmFormalParameter: {
 				switch container : feature.eContainer {
-					XSwitchExpression case container.^switch != null: {
+					XSwitchExpression case container.^switch !== null: {
 						return container.^switch.evaluate(ctx)
 					}
 				}

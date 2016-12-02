@@ -46,7 +46,7 @@ class XFunctionTypeRefs {
 		switch type {
 			JvmPrimitiveType: {
 				val wrappedType = type.wrappedType
-				if (wrappedType == null) {
+				if (wrappedType === null) {
 					reference
 				} else {
 					TypesFactory.eINSTANCE.createJvmParameterizedTypeReference => [

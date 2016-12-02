@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.xbase.imports;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.List;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -44,7 +43,7 @@ public class StaticallyImportedMemberProvider {
     Iterable<JvmFeature> _xblockexpression = null;
     {
       final JvmDeclaredType importedType = it.getImportedType();
-      if (((!it.isStatic()) || Objects.equal(importedType, null))) {
+      if (((!it.isStatic()) || (importedType == null))) {
         return CollectionLiterals.<JvmFeature>emptyList();
       }
       Resource _eResource = it.eResource();
@@ -52,7 +51,7 @@ public class StaticallyImportedMemberProvider {
       final IResolvedFeatures resolvedFeatures = this._provider.getResolvedFeatures(importedType);
       List<JvmFeature> _allFeatures = resolvedFeatures.getAllFeatures();
       final Function1<JvmFeature, Boolean> _function = (JvmFeature feature) -> {
-        return Boolean.valueOf(((feature.isStatic() && visibilityHelper.isVisible(feature)) && (Objects.equal(it.getMemberName(), null) || feature.getSimpleName().startsWith(it.getMemberName()))));
+        return Boolean.valueOf(((feature.isStatic() && visibilityHelper.isVisible(feature)) && ((it.getMemberName() == null) || feature.getSimpleName().startsWith(it.getMemberName()))));
       };
       _xblockexpression = IterableExtensions.<JvmFeature>filter(_allFeatures, _function);
     }
@@ -71,7 +70,7 @@ public class StaticallyImportedMemberProvider {
   public Iterable<JvmFeature> getAllFeatures(final Resource resource, final JvmDeclaredType importedType, final boolean static_, final boolean extension, final String memberName) {
     Iterable<JvmFeature> _xblockexpression = null;
     {
-      if (((!static_) || Objects.equal(importedType, null))) {
+      if (((!static_) || (importedType == null))) {
         return CollectionLiterals.<JvmFeature>emptyList();
       }
       final IVisibilityHelper visibilityHelper = this.getVisibilityHelper(resource);
@@ -94,8 +93,7 @@ public class StaticallyImportedMemberProvider {
       {
         final String packageName = this._iImportsConfiguration.getPackageName(((XtextResource)resource));
         IVisibilityHelper _xifexpression = null;
-        boolean _equals = Objects.equal(packageName, null);
-        if (_equals) {
+        if ((packageName == null)) {
           _xifexpression = this.visibilityHelper;
         } else {
           _xifexpression = new ContextualVisibilityHelper(this.visibilityHelper, packageName);
