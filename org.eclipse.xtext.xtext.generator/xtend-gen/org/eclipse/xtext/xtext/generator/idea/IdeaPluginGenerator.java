@@ -2267,7 +2267,7 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
             _builder.newLineIfNotEmpty();
             _builder.append("\t");
             _builder.append("\t");
-            _builder.append("if (hasSemanticElement !== null && hasSemanticElement) {");
+            _builder.append("if (hasSemanticElement != null && hasSemanticElement) {");
             _builder.newLine();
             _builder.append("\t");
             _builder.append("\t\t");

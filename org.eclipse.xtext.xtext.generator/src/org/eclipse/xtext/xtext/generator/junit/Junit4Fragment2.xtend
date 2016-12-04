@@ -123,7 +123,7 @@ class Junit4Fragment2 extends AbstractStubGeneratingFragment {
 			
 				@Override
 				public «Injector» getInjector() {
-					if (injector === null) {
+					if (injector == null) {
 						stateBeforeInjectorCreation = «globalRegistries».makeCopyOfGlobalState();
 						this.injector = internalCreateInjector();
 						stateAfterInjectorCreation = «globalRegistries».makeCopyOfGlobalState();

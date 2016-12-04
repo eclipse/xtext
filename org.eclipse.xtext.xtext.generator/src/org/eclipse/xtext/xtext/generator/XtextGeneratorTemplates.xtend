@@ -215,7 +215,7 @@ class XtextGeneratorTemplates {
 				}
 				
 				public void configureFileExtensions(«Binder» binder) {
-					if (properties === null || properties.getProperty(Constants.FILE_EXTENSIONS) === null)
+					if (properties == null || properties.getProperty(Constants.FILE_EXTENSIONS) == null)
 						binder.bind(String.class).annotatedWith(«Names».named(«Constants».FILE_EXTENSIONS)).toInstance("«langConfig.fileExtensions.join(',')»");
 				}
 				
@@ -558,7 +558,7 @@ class XtextGeneratorTemplates {
 				public «Injector» getInjector(String language) {
 					synchronized (injectors) {
 						«Injector» injector = injectors.get(language);
-						if (injector === null) {
+						if (injector == null) {
 							injectors.put(language, injector = createInjector(language));
 						}
 						return injector;

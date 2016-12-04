@@ -190,7 +190,7 @@ public class CodetemplatesGeneratorFragment2 extends AbstractXtextGeneratorFragm
         _builder.append(" parser) {");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t");
-        _builder.append("if (rule === null || rule.eIsProxy())");
+        _builder.append("if (rule == null || rule.eIsProxy())");
         _builder.newLine();
         _builder.append("\t\t\t");
         _builder.append("return ");

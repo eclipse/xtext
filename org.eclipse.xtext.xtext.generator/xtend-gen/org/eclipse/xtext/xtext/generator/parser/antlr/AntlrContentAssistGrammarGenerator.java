@@ -161,7 +161,7 @@ public class AntlrContentAssistGrammarGenerator extends AbstractAntlrGrammarWith
         _builder.append("String result = tokenNameToValue.get(tokenName);");
         _builder.newLine();
         _builder.append("\t\t");
-        _builder.append("if (result === null)");
+        _builder.append("if (result == null)");
         _builder.newLine();
         _builder.append("\t\t");
         _builder.append("\t");
