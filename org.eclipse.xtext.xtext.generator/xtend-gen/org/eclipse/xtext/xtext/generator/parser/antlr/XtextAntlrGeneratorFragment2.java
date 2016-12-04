@@ -918,7 +918,7 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
           _builder.append(" element) {");
           _builder.newLineIfNotEmpty();
           _builder.append("\t\t");
-          _builder.append("if (nameMappings === null) {");
+          _builder.append("if (nameMappings == null) {");
           _builder.newLine();
           _builder.append("\t\t\t");
           _builder.append("nameMappings = new ");

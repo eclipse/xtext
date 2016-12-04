@@ -326,7 +326,7 @@ public class Junit4Fragment2 extends AbstractStubGeneratingFragment {
           _builder.append(" getInjector() {");
           _builder.newLineIfNotEmpty();
           _builder.append("\t\t");
-          _builder.append("if (injector === null) {");
+          _builder.append("if (injector == null) {");
           _builder.newLine();
           _builder.append("\t\t\t");
           _builder.append("stateBeforeInjectorCreation = ");

@@ -64,7 +64,7 @@ class AntlrContentAssistGrammarGenerator extends AbstractAntlrGrammarWithActions
 					return tokenName;
 				«ELSE»
 					String result = tokenNameToValue.get(tokenName);
-					if (result === null)
+					if (result == null)
 						result = tokenName;
 					return result;
 				«ENDIF»

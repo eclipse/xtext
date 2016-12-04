@@ -742,7 +742,7 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
             }
           }
           _builder.append("\t");
-          _builder.append("if (errorAcceptor !== null)");
+          _builder.append("if (errorAcceptor != null)");
           _builder.newLine();
           _builder.append("\t\t");
           _builder.append("errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));");
@@ -1179,7 +1179,7 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
           {
             if ((states != null)) {
               _builder.append("\t");
-              _builder.append("if (errorAcceptor !== null) {");
+              _builder.append("if (errorAcceptor != null) {");
               _builder.newLine();
               {
                 for(final ISemanticSequencerNfaProvider.ISemState s : states) {
@@ -1777,7 +1777,7 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
         _builder.append(" node) {");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
-        _builder.append("if (node !== null)");
+        _builder.append("if (node != null)");
         _builder.newLine();
         _builder.append("\t\t");
         _builder.append("return getTokenText(node);");

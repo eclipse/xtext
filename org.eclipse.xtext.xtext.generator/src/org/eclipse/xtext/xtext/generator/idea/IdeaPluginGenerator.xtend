@@ -670,7 +670,7 @@ class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
 				@SuppressWarnings("rawtypes")
 				public «'com.intellij.psi.PsiElement'.typeRef» createElement(«'com.intellij.lang.ASTNode'.typeRef» node) {
 					Boolean hasSemanticElement = node.getUserData(«'org.eclipse.xtext.idea.nodemodel.IASTNodeAwareNodeModelBuilder'.typeRef».HAS_SEMANTIC_ELEMENT_KEY);
-					if (hasSemanticElement !== null && hasSemanticElement) {
+					if (hasSemanticElement != null && hasSemanticElement) {
 						«'com.intellij.psi.tree.IElementType'.typeRef» elementType = node.getElementType();
 						«FOR rule : EObjectRules»
 						if (elementType == elementTypeProvider.get«rule.grammarElementIdentifier»ElementType()) {

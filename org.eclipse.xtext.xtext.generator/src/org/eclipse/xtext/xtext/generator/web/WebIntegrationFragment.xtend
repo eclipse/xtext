@@ -702,7 +702,7 @@ class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
 						new Thread[
 							log.info('Press enter to stop the server...')
 							val key = System.in.read
-							if (key !== -1) {
+							if (key != -1) {
 								server.stop
 							} else {
 								log.warn('Console input is not available. In order to stop the server, you need to cancel process manually.')
@@ -737,7 +737,7 @@ class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
 				}
 				
 				override destroy() {
-					if (disposableRegistry !== null) {
+					if (disposableRegistry != null) {
 						disposableRegistry.dispose()
 						disposableRegistry = null
 					}

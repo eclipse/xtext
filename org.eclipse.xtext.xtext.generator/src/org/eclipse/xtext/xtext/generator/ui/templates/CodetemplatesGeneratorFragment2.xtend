@@ -99,7 +99,7 @@ class CodetemplatesGeneratorFragment2 extends AbstractXtextGeneratorFragment {
 		
 			@Override
 			protected «Collection»<«followElementClass»> getFollowElements(«abstractInternalContentAssistParserClass» parser) {
-				if (rule === null || rule.eIsProxy())
+				if (rule == null || rule.eIsProxy())
 					return «Collections».emptyList();
 				«String» methodName = "entryRule" + rule.getName();
 				«PolymorphicDispatcher»<Collection<FollowElement>> dispatcher = 

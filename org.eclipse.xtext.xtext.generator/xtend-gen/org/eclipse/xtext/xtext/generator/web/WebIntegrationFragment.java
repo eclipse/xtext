@@ -1694,7 +1694,7 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
         _builder.append("val key = System.in.read");
         _builder.newLine();
         _builder.append("\t\t\t\t");
-        _builder.append("if (key !== -1) {");
+        _builder.append("if (key != -1) {");
         _builder.newLine();
         _builder.append("\t\t\t\t\t");
         _builder.append("server.stop");
@@ -1808,7 +1808,7 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
         _builder.append("override destroy() {");
         _builder.newLine();
         _builder.append("\t\t");
-        _builder.append("if (disposableRegistry !== null) {");
+        _builder.append("if (disposableRegistry != null) {");
         _builder.newLine();
         _builder.append("\t\t\t");
         _builder.append("disposableRegistry.dispose()");
