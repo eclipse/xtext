@@ -10,7 +10,6 @@ package org.eclipse.xtext.ide.tests.server.concurrent
 import com.google.inject.Guice
 import com.google.inject.Inject
 import java.util.concurrent.CancellationException
-import java.util.concurrent.ExecutionException
 import java.util.concurrent.atomic.AtomicInteger
 import org.eclipse.xtext.ide.server.ServerModule
 import org.eclipse.xtext.ide.server.concurrent.RequestManager

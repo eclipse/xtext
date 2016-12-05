@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ecoreInference
 
-import com.google.common.base.Joiner
 import java.io.InputStream
 import java.util.List
 import org.eclipse.emf.common.util.URI
@@ -43,9 +42,6 @@ import org.eclipse.xtext.xtext.XtextLinker
 import org.eclipse.xtext.xtext.ecoreInference.Xtext2EcoreTransformerTest.MyErrorAcceptor
 import org.junit.Test
 import org.eclipse.xtext.xtext.XtextLinker.PackageRemover
-import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl
-import org.eclipse.emf.ecore.xmi.XMLResource
-import org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage
 
 /**
  * @author Jan Köhnlein - Initial contribution and API

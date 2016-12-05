@@ -9,13 +9,10 @@ package org.eclipse.xtext.parser.unorderedGroups;
 
 import org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.Model;
 import org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.UnorderedGroupsTestLanguageFactory;
-import org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.UnorderedGroupsTestLanguagePackage;
 import org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.UnorderedSerialization;
 import org.eclipse.xtext.validation.AbstractConcreteSyntaxValidationTest;
-import org.eclipse.xtext.validation.IConcreteSyntaxDiagnosticProvider;
 import org.eclipse.xtext.validation.IConcreteSyntaxValidator;
 import org.eclipse.xtext.validation.impl.ConcreteSyntaxValidator;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**

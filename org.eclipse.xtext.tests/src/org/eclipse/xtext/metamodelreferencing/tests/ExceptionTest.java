@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.metamodelreferencing.tests;
 
-import org.eclipse.emf.ecore.xml.namespace.XMLNamespacePackage;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.tests.AbstractXtextTests;
