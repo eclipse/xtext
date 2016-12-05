@@ -22,7 +22,7 @@ OverridableParserRule returns mm::AType :
 	'element' name=ID;
 	
 OverridableParserRule2 returns mm::AType :
-    'other element' name=STRING;
+	'other element' name=STRING;
 
 /* SuppressWarnings[noInstantiation] */
 AbstractCallExtendedParserRule returns mm::AModel:
@@ -33,4 +33,5 @@ ExtendableParserRule returns mm::AType :
 
 terminal REAL returns ecore::EDouble : INT '.' INT;
 
-terminal ID  		: ('^')?('a'..'z'|'A'..'Z'|'ö'|'ä'|'ü'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
+@Override 
+terminal ID		: ('^')?('a'..'z'|'A'..'Z'|'ö'|'ä'|'ü'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;

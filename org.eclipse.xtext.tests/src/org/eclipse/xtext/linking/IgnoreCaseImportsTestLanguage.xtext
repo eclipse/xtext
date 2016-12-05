@@ -9,6 +9,7 @@ grammar org.eclipse.xtext.linking.IgnoreCaseImportsTestLanguage with org.eclipse
 
 generate ignoreCaseImportsTest "http://eclipse.org/xtext/ignoreCaseImportsTestLanguage"
 
+@Override 
 Model:
 	imports += Import*
 	elements += Element+

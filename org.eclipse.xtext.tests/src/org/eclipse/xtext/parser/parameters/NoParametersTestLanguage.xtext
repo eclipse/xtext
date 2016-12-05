@@ -9,6 +9,7 @@ grammar org.eclipse.xtext.parser.parameters.NoParametersTestLanguage with org.ec
 
 import "http://www.eclipse.org/2015/tmf/xtext/parameters"
 
+@Override 
 ParserRuleParameters: {ParserRuleParameters} 
   ( '#1' scenario=Scenario1_True
   |	'#2' scenario=Scenario1_False

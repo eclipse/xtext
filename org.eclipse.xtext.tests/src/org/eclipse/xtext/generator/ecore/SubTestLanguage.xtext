@@ -5,6 +5,7 @@ generate subPackage "http://www.eclipse.org/2009/tmf/xtext/SubTestLanguage"
 SubMain :
     "{" superMains+=SuperMain "}" (another=AnotherSuperMain)?;
     
+@Override 
 AnotherSuperMain : 
    "ups" name=ID;
 
