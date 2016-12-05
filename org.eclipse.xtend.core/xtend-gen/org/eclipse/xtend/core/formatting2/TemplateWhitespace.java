@@ -31,7 +31,6 @@ public class TemplateWhitespace extends Chunk {
   @Override
   @Pure
   public int hashCode() {
-    final int prime = 31;
     int result = super.hashCode();
     return result;
   }
@@ -47,7 +46,6 @@ public class TemplateWhitespace extends Chunk {
       return false;
     if (!super.equals(obj))
       return false;
-    TemplateWhitespace other = (TemplateWhitespace) obj;
     return true;
   }
 }
