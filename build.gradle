@@ -30,14 +30,8 @@ subprojects {
 	apply from: "${rootDir}/gradle/validation.gradle"
 }
 
-task cleanLocalMavenRepo(type: Delete) {
+task clean(type: Delete) {
 	group 'Build'
-	description 'Deletes the local Maven repository'
-	delete 'build/maven-repository'
-}
-
-task cleanLocalP2Repo(type: Delete) {
-	group 'Build'
-	description 'Deletes the local P2 repository'
-	delete 'build/p2-repository'
+	description 'Deletes the local repositories'
+	delete 'build'
 }
