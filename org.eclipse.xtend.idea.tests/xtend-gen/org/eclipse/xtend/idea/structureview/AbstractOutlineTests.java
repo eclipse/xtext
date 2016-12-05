@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.idea.structureview;
 
-import com.google.common.base.Objects;
 import com.intellij.ide.structureView.StructureView;
 import com.intellij.ide.structureView.StructureViewBuilder;
 import com.intellij.ide.structureView.newStructureView.StructureViewComponent;
@@ -487,16 +486,13 @@ public abstract class AbstractOutlineTests extends LightToolingTest {
   public void testStructureView(final Consumer<StructureViewComponent> consumer) {
     PsiFile _file = this.myFixture.getFile();
     final VirtualFile myFile = _file.getVirtualFile();
-    boolean _notEquals = (!Objects.equal(myFile, null));
-    boolean _not = (!_notEquals);
-    if (_not) {
+    if ((!(myFile != null))) {
       throw new AssertionError("configure first");
     }
     Project _project = this.getProject();
     FileEditorManager _instance = FileEditorManager.getInstance(_project);
     final FileEditor fileEditor = _instance.getSelectedEditor(myFile);
-    boolean _equals = Objects.equal(fileEditor, null);
-    if (_equals) {
+    if ((fileEditor == null)) {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("editor not opened for ");
       _builder.append(myFile, "");
@@ -504,8 +500,7 @@ public abstract class AbstractOutlineTests extends LightToolingTest {
     }
     PsiFile _file_1 = this.myFixture.getFile();
     final StructureViewBuilder builder = LanguageStructureViewBuilder.INSTANCE.getStructureViewBuilder(_file_1);
-    boolean _equals_1 = Objects.equal(builder, null);
-    if (_equals_1) {
+    if ((builder == null)) {
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("no builder for ");
       _builder_1.append(myFile, "");
@@ -519,8 +514,7 @@ public abstract class AbstractOutlineTests extends LightToolingTest {
       final StructureViewComponent component = this.getStructureViewComponent(view);
       consumer.consume(component);
     } finally {
-      boolean _notEquals_1 = (!Objects.equal(view, null));
-      if (_notEquals_1) {
+      if ((view != null)) {
         Disposer.dispose(view);
       }
     }

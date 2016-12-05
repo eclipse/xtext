@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.core.macro.declaration;
 
-import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
@@ -86,20 +85,17 @@ public class AnnotationReferenceProviderImpl implements AnnotationReferenceProvi
     AnnotationReference _xblockexpression = null;
     {
       this.compilationUnit.checkCanceled();
-      boolean _notEquals = (!Objects.equal(annotationTypeName, null));
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("annotationTypeName cannot be null");
-      Preconditions.checkArgument(_notEquals, _builder);
-      boolean _notEquals_1 = (!Objects.equal(initializer, null));
+      Preconditions.checkArgument((annotationTypeName != null), _builder);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("initializer cannot be null");
-      Preconditions.checkArgument(_notEquals_1, _builder_1);
+      Preconditions.checkArgument((initializer != null), _builder_1);
       TypeReferences _typeReferences = this.compilationUnit.getTypeReferences();
       XtendFile _xtendFile = this.compilationUnit.getXtendFile();
       JvmType _findDeclaredType = _typeReferences.findDeclaredType(annotationTypeName, _xtendFile);
       final JvmAnnotationReference jvmAnnotationReference = this.createJvmAnnotationReference(_findDeclaredType);
-      boolean _equals = Objects.equal(jvmAnnotationReference, null);
-      if (_equals) {
+      if ((jvmAnnotationReference == null)) {
         return null;
       }
       AnnotationReferenceBuildContextImpl _annotationReferenceBuildContextImpl = new AnnotationReferenceBuildContextImpl();
@@ -119,14 +115,12 @@ public class AnnotationReferenceProviderImpl implements AnnotationReferenceProvi
     Object _xblockexpression = null;
     {
       this.compilationUnit.checkCanceled();
-      boolean _notEquals = (!Objects.equal(annotationTypeDelcaration, null));
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("annotationTypeDelcaration cannot be null");
-      Preconditions.checkArgument(_notEquals, _builder);
-      boolean _notEquals_1 = (!Objects.equal(initializer, null));
+      Preconditions.checkArgument((annotationTypeDelcaration != null), _builder);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("initializer cannot be null");
-      Preconditions.checkArgument(_notEquals_1, _builder_1);
+      Preconditions.checkArgument((initializer != null), _builder_1);
       JvmDeclaredType _switchResult = null;
       boolean _matched = false;
       if (annotationTypeDelcaration instanceof JvmAnnotationTypeDeclarationImpl) {
@@ -165,10 +159,9 @@ public class AnnotationReferenceProviderImpl implements AnnotationReferenceProvi
   public AnnotationReference newAnnotationReference(final Class<?> annotationClass, final Procedure1<AnnotationReferenceBuildContext> initializer) {
     AnnotationReference _xblockexpression = null;
     {
-      boolean _notEquals = (!Objects.equal(annotationClass, null));
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("annotationClass cannot be null");
-      Preconditions.checkArgument(_notEquals, _builder);
+      Preconditions.checkArgument((annotationClass != null), _builder);
       String _name = annotationClass.getName();
       _xblockexpression = this.newAnnotationReference(_name, initializer);
     }
@@ -180,14 +173,12 @@ public class AnnotationReferenceProviderImpl implements AnnotationReferenceProvi
     Object _xblockexpression = null;
     {
       this.compilationUnit.checkCanceled();
-      boolean _notEquals = (!Objects.equal(annotationReference, null));
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("annotationReference cannot be null");
-      Preconditions.checkArgument(_notEquals, _builder);
-      boolean _notEquals_1 = (!Objects.equal(initializer, null));
+      Preconditions.checkArgument((annotationReference != null), _builder);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("initializer cannot be null");
-      Preconditions.checkArgument(_notEquals_1, _builder_1);
+      Preconditions.checkArgument((initializer != null), _builder_1);
       if ((annotationReference instanceof JvmAnnotationReferenceImpl)) {
         final JvmAnnotationReference baseJvmAnnotationReference = ((JvmAnnotationReferenceImpl)annotationReference).getDelegate();
         ConditionUtils.notRemoved(baseJvmAnnotationReference, "annotationReference");

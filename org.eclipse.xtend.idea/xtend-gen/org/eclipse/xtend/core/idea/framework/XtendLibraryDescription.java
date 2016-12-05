@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.core.idea.framework;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Lists;
 import com.intellij.openapi.roots.OrderRootType;
 import com.intellij.openapi.roots.libraries.LibraryKind;
@@ -67,8 +66,7 @@ public class XtendLibraryDescription extends CustomLibraryDescription {
     
     List<XtendLibraryPresentationProvider> _providers = XtendLibraryDescription.getProviders();
     final XtendLibraryPresentationProvider provider = IterableExtensions.<XtendLibraryPresentationProvider>head(_providers);
-    boolean _equals = Objects.equal(provider, null);
-    if (_equals) {
+    if ((provider == null)) {
       return null;
     }
     return new __XtendLibraryDescription_1(XtendLibraryDescription.XTEND_LIBRARY_NAME) {

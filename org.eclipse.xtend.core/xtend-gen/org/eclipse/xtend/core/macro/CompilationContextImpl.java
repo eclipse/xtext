@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.core.macro;
 
-import com.google.common.base.Objects;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.lib.macro.declaration.CompilationStrategy;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
@@ -53,8 +52,7 @@ public class CompilationContextImpl implements CompilationStrategy.CompilationCo
   @Override
   public String toJavaCode(final TypeReference typeref) {
     StringBuilderBasedAppendable _xifexpression = null;
-    boolean _notEquals = (!Objects.equal(this.importManager, null));
-    if (_notEquals) {
+    if ((this.importManager != null)) {
       _xifexpression = new StringBuilderBasedAppendable(this.importManager);
     } else {
       _xifexpression = new StringBuilderBasedAppendable();

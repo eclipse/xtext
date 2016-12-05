@@ -113,8 +113,7 @@ public class ActualTypeArgumentCollectorTest extends AbstractTestingTypeReferenc
         return mapping;
       }
     }
-    boolean _notEquals = (!Objects.equal(mappedTypes, null));
-    if (_notEquals) {
+    if ((mappedTypes != null)) {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("No mapping for ");
       _builder.append(typeParamName, "");

@@ -88,8 +88,8 @@ class XtendHighlightingLexer extends LexerBase {
 	}
 	
 	def getCurrentRichTextToken() {
-		if(_currentRichTextToken == null) {
-			if(delegate.currentToken != null) {
+		if(_currentRichTextToken === null) {
+			if(delegate.currentToken !== null) {
 				val tokenID = tokenDefMap.get(delegate.currentToken.type)
 				if (TOKEN_TYPE_NAMES_CONTAINING_GUILLEMETS.contains(tokenID))
 					_currentRichTextToken = createRichTextToken(tokenID, delegate.tokenStart,
@@ -104,21 +104,21 @@ class XtendHighlightingLexer extends LexerBase {
 	}
 
 	override getTokenEnd() {
-		if (currentRichTextToken != null)
+		if (currentRichTextToken !== null)
 			currentRichTextToken.tokenOffset + currentRichTextToken.tokenLength
 		else
 			delegate.tokenEnd
 	}
 
 	override getTokenStart() {
-		if (currentRichTextToken != null)
+		if (currentRichTextToken !== null)
 			currentRichTextToken.tokenOffset
 		else
 			delegate.tokenStart
 	}
 
 	override getTokenType() {
-		if (currentRichTextToken != null)
+		if (currentRichTextToken !== null)
 			currentRichTextToken.getTokenType
 		else
 			delegate.tokenType

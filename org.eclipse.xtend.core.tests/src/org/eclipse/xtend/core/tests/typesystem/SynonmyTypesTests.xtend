@@ -33,7 +33,7 @@ class SynonmyTypesTest extends AbstractTestingTypeReferenceOwner {
 			typeAndTypeParams.key» p) {}'''
 		val function = function(signature.toString)
 		val operation = function.directlyInferredOperation
-		val primary = if (typeAndTypeParams.key != null) operation.parameters.head.parameterType.toLightweightTypeReference else owner.newAnyTypeReference
+		val primary = if (typeAndTypeParams.key !== null) operation.parameters.head.parameterType.toLightweightTypeReference else owner.newAnyTypeReference
 		val actualSynonyms = newHashSet
 		primary.collectSynonymTypes [ type, conformance | actualSynonyms.add(type.simpleName) ]
 		assertEquals(actualSynonyms.toString, expectedSynonyms.length, actualSynonyms.size)

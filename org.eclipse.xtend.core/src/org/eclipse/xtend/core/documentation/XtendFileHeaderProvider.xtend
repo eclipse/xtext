@@ -31,7 +31,7 @@ class XtendFileHeaderProvider extends MultiLineFileHeaderProvider {
 	override getFileHeaderNodes(Resource resource) {
 		if (resource instanceof XtextResource) {
 			val parseResult = resource.parseResult
-			if (parseResult != null) {
+			if (parseResult !== null) {
 				for (leafNode: parseResult.rootNode.leafNodes) {
 					var break = true
 					val grammarElement = leafNode.grammarElement
@@ -56,7 +56,7 @@ class XtendFileHeaderProvider extends MultiLineFileHeaderProvider {
 		val content = resource.contents.head
 		if (content instanceof XtendFile) {
 			val type = content.xtendTypes.head
-			if (type != null) {
+			if (type !== null) {
 				if (documentationProvider instanceof IEObjectDocumentationProviderExtension) {
 					return leafNode == documentationProvider.getDocumentationNodes(type).head
 				}

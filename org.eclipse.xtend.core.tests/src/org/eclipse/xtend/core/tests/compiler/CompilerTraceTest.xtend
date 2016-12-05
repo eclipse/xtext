@@ -810,7 +810,7 @@ class CompilerTraceTest extends AbstractXtendTestCase {
 			for(AbstractTraceRegion child: regions) {
 				rootLocation = rootLocation.merge(new TextRegionWithLineInformation(child.getMyOffset(), child.getMyLength(), child.getMyLineNumber(), child.getMyEndLineNumber()));
 				var childAssociation = child.getMergedAssociatedLocation();
-				if (childAssociation != null)
+				if (childAssociation !== null)
 					associated = associated.merge(childAssociation);
 			}
 			val root = new RootTraceRegionForTesting(rootLocation, associated)

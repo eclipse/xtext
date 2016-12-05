@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.core.idea.highlighting;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.intellij.lexer.LexerBase;
 import com.intellij.lexer.LexerPosition;
@@ -116,11 +115,10 @@ public class XtendHighlightingLexer extends LexerBase {
   }
   
   public XtendHighlightingLexer.RichTextToken getCurrentRichTextToken() {
-    boolean _equals = Objects.equal(this._currentRichTextToken, null);
-    if (_equals) {
+    if ((this._currentRichTextToken == null)) {
       CommonToken _currentToken = this.delegate.getCurrentToken();
-      boolean _notEquals = (!Objects.equal(_currentToken, null));
-      if (_notEquals) {
+      boolean _tripleNotEquals = (_currentToken != null);
+      if (_tripleNotEquals) {
         Map<Integer, String> _tokenDefMap = this._antlrTokenDefProvider.getTokenDefMap();
         CommonToken _currentToken_1 = this.delegate.getCurrentToken();
         int _type = _currentToken_1.getType();
@@ -155,8 +153,8 @@ public class XtendHighlightingLexer extends LexerBase {
   public int getTokenEnd() {
     int _xifexpression = (int) 0;
     XtendHighlightingLexer.RichTextToken _currentRichTextToken = this.getCurrentRichTextToken();
-    boolean _notEquals = (!Objects.equal(_currentRichTextToken, null));
-    if (_notEquals) {
+    boolean _tripleNotEquals = (_currentRichTextToken != null);
+    if (_tripleNotEquals) {
       XtendHighlightingLexer.RichTextToken _currentRichTextToken_1 = this.getCurrentRichTextToken();
       int _tokenOffset = _currentRichTextToken_1.getTokenOffset();
       XtendHighlightingLexer.RichTextToken _currentRichTextToken_2 = this.getCurrentRichTextToken();
@@ -172,8 +170,8 @@ public class XtendHighlightingLexer extends LexerBase {
   public int getTokenStart() {
     int _xifexpression = (int) 0;
     XtendHighlightingLexer.RichTextToken _currentRichTextToken = this.getCurrentRichTextToken();
-    boolean _notEquals = (!Objects.equal(_currentRichTextToken, null));
-    if (_notEquals) {
+    boolean _tripleNotEquals = (_currentRichTextToken != null);
+    if (_tripleNotEquals) {
       XtendHighlightingLexer.RichTextToken _currentRichTextToken_1 = this.getCurrentRichTextToken();
       _xifexpression = _currentRichTextToken_1.getTokenOffset();
     } else {
@@ -186,8 +184,8 @@ public class XtendHighlightingLexer extends LexerBase {
   public IElementType getTokenType() {
     IElementType _xifexpression = null;
     XtendHighlightingLexer.RichTextToken _currentRichTextToken = this.getCurrentRichTextToken();
-    boolean _notEquals = (!Objects.equal(_currentRichTextToken, null));
-    if (_notEquals) {
+    boolean _tripleNotEquals = (_currentRichTextToken != null);
+    if (_tripleNotEquals) {
       XtendHighlightingLexer.RichTextToken _currentRichTextToken_1 = this.getCurrentRichTextToken();
       _xifexpression = _currentRichTextToken_1.getTokenType();
     } else {

@@ -75,7 +75,7 @@ abstract class AbstractQueuedBuildDataTest extends AbstractXtendUITestCase {
 			val unexpectedExportedNames = <String>newHashSet
 			for (exportedName : deltas.exportedNames) {
 				val qualifiedName = expectedExportedNames.findFirst[exportedName == it]
-				if (qualifiedName == null) {
+				if (qualifiedName === null) {
 					unexpectedExportedNames.add(exportedName)
 				} else {
 					remainingExportedNames.remove(qualifiedName)

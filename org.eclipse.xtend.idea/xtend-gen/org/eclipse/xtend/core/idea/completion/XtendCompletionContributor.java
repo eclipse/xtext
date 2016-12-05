@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.core.idea.completion;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.completion.CompletionProvider;
@@ -132,8 +131,7 @@ public class XtendCompletionContributor extends AbstractXtendCompletionContribut
           _containerOfType=EcoreUtil2.<XtendTypeDeclaration>getContainerOfType(_findEObject, XtendTypeDeclaration.class);
         }
         final XtendTypeDeclaration clazz = _containerOfType;
-        boolean _equals = Objects.equal(clazz, null);
-        if (_equals) {
+        if ((clazz == null)) {
           return;
         }
         final EObject jvmType = XtendCompletionContributor.this.jvmModelAssociations.getPrimaryJvmElement(clazz);

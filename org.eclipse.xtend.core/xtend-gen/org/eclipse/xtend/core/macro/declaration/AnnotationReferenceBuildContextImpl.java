@@ -86,8 +86,7 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
       return Boolean.valueOf(Objects.equal(_simpleName, name));
     };
     final JvmOperation jvmOperation = IterableExtensions.<JvmOperation>findFirst(_declaredOperations, _function);
-    boolean _equals = Objects.equal(jvmOperation, null);
-    if (_equals) {
+    if ((jvmOperation == null)) {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("The annotation property \'");
       _builder.append(name, "");
@@ -109,7 +108,7 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
     EList<JvmAnnotationValue> _explicitValues = this.delegate.getExplicitValues();
     Iterator<JvmAnnotationValue> _iterator = _explicitValues.iterator();
     final Predicate<JvmAnnotationValue> _function = (JvmAnnotationValue it) -> {
-      return (Objects.equal(op, it.getOperation()) || (Objects.equal(it.getOperation(), null) && Objects.equal(op.getSimpleName(), "value")));
+      return (Objects.equal(op, it.getOperation()) || ((it.getOperation() == null) && Objects.equal(op.getSimpleName(), "value")));
     };
     return Iterators.<JvmAnnotationValue>removeIf(_iterator, _function);
   }
@@ -505,8 +504,7 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
   }
   
   protected void _setValue(final JvmAnnotationValue it, final Object value, final String componentType, final boolean mustBeArray) {
-    boolean _equals = Objects.equal(componentType, null);
-    if (_equals) {
+    if ((componentType == null)) {
       Class<?> _class = value.getClass();
       String _name = _class.getName();
       this.throwNotApplicable(it, _name);
@@ -525,8 +523,8 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
       if (_type!=null) {
         _eClass=_type.eClass();
       }
-      boolean _equals_1 = Objects.equal(_eClass, TypesPackage.Literals.JVM_ARRAY_TYPE);
-      _or = _equals_1;
+      boolean _equals = Objects.equal(_eClass, TypesPackage.Literals.JVM_ARRAY_TYPE);
+      _or = _equals;
     }
     if (_or) {
       this.throwNotApplicable(it, (componentType + "[]"));
@@ -795,8 +793,7 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
   }
   
   protected void checkType(final JvmAnnotationValue it, final String componentType, final boolean mustBeArray) {
-    boolean _equals = Objects.equal(componentType, null);
-    if (_equals) {
+    if ((componentType == null)) {
       return;
     }
     JvmOperation _operation = it.getOperation();
@@ -814,8 +811,8 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
       if (returnType!=null) {
         _eClass=returnType.eClass();
       }
-      boolean _equals_1 = Objects.equal(_eClass, TypesPackage.Literals.JVM_ARRAY_TYPE);
-      _or = _equals_1;
+      boolean _equals = Objects.equal(_eClass, TypesPackage.Literals.JVM_ARRAY_TYPE);
+      _or = _equals;
     }
     if (_or) {
       String _annotationValueTypeName = this.getAnnotationValueTypeName(returnType);

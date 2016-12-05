@@ -78,7 +78,7 @@ class XtendStructureViewTreeElementProvider extends DefaultStructureViewTreeElem
 	}
 
 	protected def isShowInherited() {
-		if (treeActionsOwner == null) {
+		if (treeActionsOwner === null) {
 			return false
 		}
 		treeActionsOwner.isActionActive(XtendShowInheritedNodeProvider.ID)

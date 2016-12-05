@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.core.idea.presentation;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.intellij.psi.PsiElement;
 import java.util.Arrays;
@@ -138,12 +137,10 @@ public class XtendItemPresentationProvider extends XtendJvmItemPresentationProvi
   
   protected String _text(final XtendFunction element) {
     final String simpleName = element.getName();
-    boolean _notEquals = (!Objects.equal(simpleName, null));
-    if (_notEquals) {
+    if ((simpleName != null)) {
       final QualifiedName qnName = QualifiedName.create(simpleName);
       final QualifiedName operator = this.operatorMapping.getOperator(qnName);
-      boolean _notEquals_1 = (!Objects.equal(operator, null));
-      if (_notEquals_1) {
+      if ((operator != null)) {
         String _firstSegment = operator.getFirstSegment();
         JvmOperation _directlyInferredOperation = this._iXtendJvmAssociations.getDirectlyInferredOperation(element);
         String _signature = this.signature(_firstSegment, _directlyInferredOperation);
@@ -160,17 +157,16 @@ public class XtendItemPresentationProvider extends XtendJvmItemPresentationProvi
   protected String _text(final XtendField element) {
     String _xblockexpression = null;
     {
-      if ((Objects.equal(element.getName(), null) && element.isExtension())) {
+      if (((element.getName() == null) && element.isExtension())) {
         JvmTypeReference _type = element.getType();
         return this.uiStrings.referenceToString(_type, "extension");
       }
       final JvmTypeReference fieldType = this.getDisplayedType(element);
-      boolean _notEquals = (!Objects.equal(fieldType, null));
-      if (_notEquals) {
+      if ((fieldType != null)) {
         final String type = this.uiStrings.referenceToString(fieldType, "");
         int _length = type.length();
-        boolean _notEquals_1 = (_length != 0);
-        if (_notEquals_1) {
+        boolean _notEquals = (_length != 0);
+        if (_notEquals) {
           String _name = element.getName();
           String _plus = (_name + " : ");
           return (_plus + type);
@@ -197,8 +193,7 @@ public class XtendItemPresentationProvider extends XtendJvmItemPresentationProvi
     Object _xblockexpression = null;
     {
       final JvmField jvmField = this._iXtendJvmAssociations.getJvmField(field);
-      boolean _notEquals = (!Objects.equal(jvmField, null));
-      if (_notEquals) {
+      if ((jvmField != null)) {
         return jvmField.getType();
       } else {
         Set<EObject> _jvmElements = this._iXtendJvmAssociations.getJvmElements(field);

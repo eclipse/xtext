@@ -43,8 +43,8 @@ abstract class AbstractCodeBuilder implements ICodeBuilder {
 	
 	override isValid() {
 		val javaElement = owner.findElementFor
-		return (javaElement == null || !javaElement.readOnly) 
-			&& ownerSource != null && owner != null && context != null
+		return (javaElement === null || !javaElement.readOnly) 
+			&& ownerSource !== null && owner !== null && context !== null
 	}
 	
 	override getPreview() {
@@ -75,7 +75,7 @@ abstract class AbstractCodeBuilder implements ICodeBuilder {
 	}
 
 	def protected appendType(ISourceAppender appendable, LightweightTypeReference typeRef, String surrogate) {
-		if (typeRef == null) {
+		if (typeRef === null) {
 			appendable.append(surrogate)
 		} else {
 			appendable.append(typeRef)

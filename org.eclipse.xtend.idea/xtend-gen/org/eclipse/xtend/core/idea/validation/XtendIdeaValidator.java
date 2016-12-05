@@ -88,7 +88,7 @@ public class XtendIdeaValidator extends AbstractDeclarativeValidator {
       String _qualifiedName = annotationType.getQualifiedName();
       GlobalSearchScope _moduleScope = module.getModuleScope();
       PsiClass _findClass = psiFacade.findClass(_qualifiedName, _moduleScope);
-      return Boolean.valueOf((!Objects.equal(_findClass, null)));
+      return Boolean.valueOf((_findClass != null));
     };
     return (_application.<Boolean>runReadAction(_function)).booleanValue();
   }
@@ -102,16 +102,15 @@ public class XtendIdeaValidator extends AbstractDeclarativeValidator {
   @Check
   public void checkFileNameConventions(final XtendFile xtendFile) {
     String expectedPackage = this.getExpectedPackageName(xtendFile);
-    boolean _equals = Objects.equal(expectedPackage, null);
-    if (_equals) {
+    if ((expectedPackage == null)) {
       return;
     }
     String declaredPackage = xtendFile.getPackage();
-    if ((expectedPackage.isEmpty() && Objects.equal(declaredPackage, null))) {
+    if ((expectedPackage.isEmpty() && (declaredPackage == null))) {
       return;
     }
-    boolean _equals_1 = Objects.equal(expectedPackage, declaredPackage);
-    if (_equals_1) {
+    boolean _equals = Objects.equal(expectedPackage, declaredPackage);
+    if (_equals) {
       return;
     }
     StringConcatenation _builder = new StringConcatenation();

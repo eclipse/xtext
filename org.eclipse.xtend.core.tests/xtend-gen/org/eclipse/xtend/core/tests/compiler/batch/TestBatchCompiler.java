@@ -8,7 +8,6 @@
 package org.eclipse.xtend.core.tests.compiler.batch;
 
 import com.google.common.base.Charsets;
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.io.File;
 import java.io.FilenameFilter;
@@ -810,8 +809,8 @@ public class TestBatchCompiler {
     try {
       File canon = null;
       String _parent = file.getParent();
-      boolean _equals = Objects.equal(_parent, null);
-      if (_equals) {
+      boolean _tripleEquals = (_parent == null);
+      if (_tripleEquals) {
         canon = file;
       } else {
         File _parentFile = file.getParentFile();
@@ -822,8 +821,8 @@ public class TestBatchCompiler {
       }
       File _canonicalFile = canon.getCanonicalFile();
       File _absoluteFile = canon.getAbsoluteFile();
-      boolean _equals_1 = _canonicalFile.equals(_absoluteFile);
-      return (!_equals_1);
+      boolean _equals = _canonicalFile.equals(_absoluteFile);
+      return (!_equals);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

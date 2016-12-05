@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.core.macro.declaration;
 
-import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
@@ -78,8 +77,7 @@ public class JvmInterfaceDeclarationImpl extends JvmTypeDeclarationImpl<JvmGener
   public MutableMethodDeclaration addMethod(final String name, final Procedure1<MutableMethodDeclaration> initializer) {
     this.checkMutable();
     ConditionUtils.checkJavaIdentifier(name, "name");
-    boolean _notEquals = (!Objects.equal(initializer, null));
-    Preconditions.checkArgument(_notEquals, "initializer cannot be null");
+    Preconditions.checkArgument((initializer != null), "initializer cannot be null");
     final JvmOperation newMethod = TypesFactory.eINSTANCE.createJvmOperation();
     newMethod.setVisibility(JvmVisibility.PUBLIC);
     newMethod.setSimpleName(name);

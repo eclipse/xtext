@@ -34,7 +34,7 @@ class CompilationContextImpl implements CompilationStrategy.CompilationContext {
 	}
 
 	override toJavaCode(TypeReference typeref) {
-		val appendable = if (importManager != null) {
+		val appendable = if (importManager !== null) {
 				new StringBuilderBasedAppendable(importManager)
 			} else {
 				new StringBuilderBasedAppendable()

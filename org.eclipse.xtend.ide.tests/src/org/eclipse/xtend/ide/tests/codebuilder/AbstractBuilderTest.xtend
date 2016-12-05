@@ -41,7 +41,7 @@ class AbstractBuilderTest extends AbstractXtendUITestCase {
 	}
 	
 	def protected getXtendClass() {
-		if(xtendClass == null) {
+		if(xtendClass === null) {
 			xtendClass = (xtendFile('Foo', '''
 				class Foo {
 				}
@@ -51,7 +51,7 @@ class AbstractBuilderTest extends AbstractXtendUITestCase {
 	}
 	
 	def protected getJavaClass() {
-		if(javaClass == null) {	
+		if(javaClass === null) {	
 			createFile('Bar.java', '''
 				public class Bar {
 				}

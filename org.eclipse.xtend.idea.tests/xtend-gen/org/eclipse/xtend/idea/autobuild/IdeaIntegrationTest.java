@@ -37,7 +37,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.util.Collections;
-import junit.framework.Assert;
+import junit.framework.TestCase;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend.core.idea.facet.XtendFacetType;
 import org.eclipse.xtend.core.idea.lang.XtendLanguage;
@@ -69,7 +69,7 @@ public class IdeaIntegrationTest extends LightXtendTest {
     this.myFixture.addFileToProject("otherPackage/Foo.xtend", _builder.toString());
     final VirtualFile file = this.myFixture.findFileInTempDir("xtend-gen/otherPackage/Foo.java");
     boolean _exists = file.exists();
-    Assert.assertTrue(_exists);
+    TestCase.assertTrue(_exists);
     Application _application = ApplicationManager.getApplication();
     final Runnable _function = () -> {
       try {
@@ -81,7 +81,7 @@ public class IdeaIntegrationTest extends LightXtendTest {
     _application.runWriteAction(_function);
     final VirtualFile regenerated = this.myFixture.findFileInTempDir("xtend-gen/otherPackage/Foo.java");
     boolean _exists_1 = regenerated.exists();
-    Assert.assertTrue(_exists_1);
+    TestCase.assertTrue(_exists_1);
   }
   
   public void testNoChangeDoesntTouch() {
@@ -95,7 +95,7 @@ public class IdeaIntegrationTest extends LightXtendTest {
     final PsiFile xtendFile = this.myFixture.addFileToProject("otherPackage/Foo.xtend", _builder.toString());
     final VirtualFile file = this.myFixture.findFileInTempDir("xtend-gen/otherPackage/Foo.java");
     boolean _exists = file.exists();
-    Assert.assertTrue(_exists);
+    TestCase.assertTrue(_exists);
     final long stamp = file.getModificationStamp();
     Project _project = this.getProject();
     PsiDocumentManager _instance = PsiDocumentManager.getInstance(_project);
@@ -117,7 +117,7 @@ public class IdeaIntegrationTest extends LightXtendTest {
     _application.runWriteAction(_function);
     final VirtualFile regenerated = this.myFixture.findFileInTempDir("xtend-gen/otherPackage/Foo.java");
     long _modificationStamp = regenerated.getModificationStamp();
-    Assert.assertEquals(stamp, _modificationStamp);
+    TestCase.assertEquals(stamp, _modificationStamp);
   }
   
   public void testRemoveAndAddFacet() {
@@ -131,7 +131,7 @@ public class IdeaIntegrationTest extends LightXtendTest {
     final PsiFile source = this.myFixture.addFileToProject("otherPackage/Foo.xtend", _builder.toString());
     VirtualFile file = this.myFixture.findFileInTempDir("xtend-gen/otherPackage/Foo.java");
     boolean _exists = file.exists();
-    Assert.assertTrue(_exists);
+    TestCase.assertTrue(_exists);
     Application _application = ApplicationManager.getApplication();
     final Runnable _function = () -> {
       final FacetManager mnr = FacetManager.getInstance(this.myModule);
@@ -153,14 +153,14 @@ public class IdeaIntegrationTest extends LightXtendTest {
     URI _uRI = VirtualFileURIUtil.getURI(_virtualFile);
     Iterable<URI> _generatedSources = autoBuilder.getGeneratedSources(_uRI);
     boolean _isEmpty = IterableExtensions.isEmpty(_generatedSources);
-    Assert.assertTrue(_isEmpty);
+    TestCase.assertTrue(_isEmpty);
     ChunkedResourceDescriptions _indexState = autoBuilder.getIndexState();
     Iterable<IResourceDescription> _allResourceDescriptions = _indexState.getAllResourceDescriptions();
     boolean _isEmpty_1 = IterableExtensions.isEmpty(_allResourceDescriptions);
-    Assert.assertTrue(_isEmpty_1);
+    TestCase.assertTrue(_isEmpty_1);
     VirtualFile _findFileInTempDir = this.myFixture.findFileInTempDir("xtend-gen/otherPackage/Foo.java");
     file = _findFileInTempDir;
-    Assert.assertNull(file);
+    TestCase.assertNull(file);
     String _iD = XtendLanguage.INSTANCE.getID();
     LightToolingTest.addFacetToModule(this.myModule, _iD);
     VirtualFile _virtualFile_1 = source.getVirtualFile();
@@ -169,7 +169,7 @@ public class IdeaIntegrationTest extends LightXtendTest {
     Iterable<IResourceDescription> _allResourceDescriptions_1 = _indexState_1.getAllResourceDescriptions();
     IResourceDescription _head = IterableExtensions.<IResourceDescription>head(_allResourceDescriptions_1);
     URI _uRI_2 = _head.getURI();
-    Assert.assertEquals(_uRI_1, _uRI_2);
+    TestCase.assertEquals(_uRI_1, _uRI_2);
     VirtualFile _virtualFile_2 = source.getVirtualFile();
     URI _uRI_3 = VirtualFileURIUtil.getURI(_virtualFile_2);
     Iterable<URI> _generatedSources_1 = autoBuilder.getGeneratedSources(_uRI_3);
@@ -178,11 +178,11 @@ public class IdeaIntegrationTest extends LightXtendTest {
       return Boolean.valueOf(_string.endsWith("xtend-gen/otherPackage/Foo.java"));
     };
     boolean _exists_1 = IterableExtensions.<URI>exists(_generatedSources_1, _function_1);
-    Assert.assertTrue(_exists_1);
+    TestCase.assertTrue(_exists_1);
     VirtualFile _findFileInTempDir_1 = this.myFixture.findFileInTempDir("xtend-gen/otherPackage/Foo.java");
     file = _findFileInTempDir_1;
     boolean _exists_2 = file.exists();
-    Assert.assertTrue(_exists_2);
+    TestCase.assertTrue(_exists_2);
   }
   
   public void testJavaDeletionTriggersError() {
@@ -241,7 +241,7 @@ public class IdeaIntegrationTest extends LightXtendTest {
     try {
       VirtualFile _virtualFile_1 = xtendFile.getVirtualFile();
       this.myFixture.testHighlighting(true, true, true, _virtualFile_1);
-      Assert.fail("expecting errors");
+      TestCase.fail("expecting errors");
     } catch (final Throwable _t) {
       if (_t instanceof ComparisonFailure) {
         final ComparisonFailure e = (ComparisonFailure)_t;
@@ -278,7 +278,7 @@ public class IdeaIntegrationTest extends LightXtendTest {
     try {
       VirtualFile _virtualFile = xtendFile.getVirtualFile();
       this.myFixture.testHighlighting(true, true, true, _virtualFile);
-      Assert.fail("expecting errors");
+      TestCase.fail("expecting errors");
     } catch (final Throwable _t) {
       if (_t instanceof ComparisonFailure) {
         final ComparisonFailure e = (ComparisonFailure)_t;
@@ -587,10 +587,10 @@ public class IdeaIntegrationTest extends LightXtendTest {
         _instance.processEvents(Collections.<VFileEvent>unmodifiableList(CollectionLiterals.<VFileEvent>newArrayList(_vFileDeleteEvent)));
         File _parentFile = f.getParentFile();
         boolean _sweepFolder = org.eclipse.xtext.util.Files.sweepFolder(_parentFile);
-        Assert.assertTrue(_sweepFolder);
+        TestCase.assertTrue(_sweepFolder);
         File _parentFile_1 = f.getParentFile();
         boolean _delete = _parentFile_1.delete();
-        Assert.assertTrue(_delete);
+        TestCase.assertTrue(_delete);
         return;
       } catch (Throwable _e) {
         throw Exceptions.sneakyThrow(_e);
@@ -598,7 +598,7 @@ public class IdeaIntegrationTest extends LightXtendTest {
     };
     _application.runWriteAction(_function);
     boolean _exists = vFile.exists();
-    Assert.assertFalse(_exists);
+    TestCase.assertFalse(_exists);
   }
   
   public void testAffectedUpdated() {
@@ -726,10 +726,10 @@ public class IdeaIntegrationTest extends LightXtendTest {
     this.myFixture.addFileToProject("otherPackage/Foo.xtend", _builder.toString());
     VirtualFile _findFileInTempDir = this.myFixture.findFileInTempDir("xtend-gen/otherPackage/Foo.java");
     boolean _exists = _findFileInTempDir.exists();
-    Assert.assertTrue(_exists);
+    TestCase.assertTrue(_exists);
     VirtualFile _findFileInTempDir_1 = this.myFixture.findFileInTempDir("xtend-gen/otherPackage/.Foo.java._trace");
     boolean _exists_1 = _findFileInTempDir_1.exists();
-    Assert.assertTrue(_exists_1);
+    TestCase.assertTrue(_exists_1);
     VirtualFile _findFileInTempDir_2 = this.myFixture.findFileInTempDir("otherPackage/Foo.xtend");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("package otherPackage;");
@@ -740,15 +740,15 @@ public class IdeaIntegrationTest extends LightXtendTest {
     _builder_1.newLine();
     this.myFixture.saveText(_findFileInTempDir_2, _builder_1.toString());
     VirtualFile _findFileInTempDir_3 = this.myFixture.findFileInTempDir("xtend-gen/otherPackage/Foo.java");
-    Assert.assertNull(_findFileInTempDir_3);
+    TestCase.assertNull(_findFileInTempDir_3);
     VirtualFile _findFileInTempDir_4 = this.myFixture.findFileInTempDir("xtend-gen/otherPackage/.Foo.java._trace");
-    Assert.assertNull(_findFileInTempDir_4);
+    TestCase.assertNull(_findFileInTempDir_4);
     VirtualFile _findFileInTempDir_5 = this.myFixture.findFileInTempDir("xtend-gen/otherPackage/OtherClass.java");
     boolean _exists_2 = _findFileInTempDir_5.exists();
-    Assert.assertTrue(_exists_2);
+    TestCase.assertTrue(_exists_2);
     VirtualFile _findFileInTempDir_6 = this.myFixture.findFileInTempDir("xtend-gen/otherPackage/.OtherClass.java._trace");
     boolean _exists_3 = _findFileInTempDir_6.exists();
-    Assert.assertTrue(_exists_3);
+    TestCase.assertTrue(_exists_3);
   }
   
   public void testActiveAnnotation() {
@@ -952,10 +952,10 @@ public class IdeaIntegrationTest extends LightXtendTest {
     final URI after = URI.createURI("temp:///src/Foo.xtend");
     ChunkedResourceDescriptions _index = this.getIndex();
     IResourceDescription _resourceDescription = _index.getResourceDescription(after);
-    Assert.assertNull(_resourceDescription);
+    TestCase.assertNull(_resourceDescription);
     ChunkedResourceDescriptions _index_1 = this.getIndex();
     IResourceDescription _resourceDescription_1 = _index_1.getResourceDescription(before);
-    Assert.assertNotNull(_resourceDescription_1);
+    TestCase.assertNotNull(_resourceDescription_1);
     XtextAutoBuilderComponent _builder_1 = this.getBuilder();
     final Procedure0 _function = () -> {
       Application _application = ApplicationManager.getApplication();
@@ -973,10 +973,10 @@ public class IdeaIntegrationTest extends LightXtendTest {
     _builder_1.runOperation(_function);
     ChunkedResourceDescriptions _index_2 = this.getIndex();
     IResourceDescription _resourceDescription_2 = _index_2.getResourceDescription(after);
-    Assert.assertNotNull(_resourceDescription_2);
+    TestCase.assertNotNull(_resourceDescription_2);
     ChunkedResourceDescriptions _index_3 = this.getIndex();
     IResourceDescription _resourceDescription_3 = _index_3.getResourceDescription(before);
-    Assert.assertNull(_resourceDescription_3);
+    TestCase.assertNull(_resourceDescription_3);
   }
   
   public void testRenameFile() {
@@ -995,10 +995,10 @@ public class IdeaIntegrationTest extends LightXtendTest {
     final URI after = URI.createURI("temp:///src/mypackage/Bar.xtend");
     ChunkedResourceDescriptions _index = this.getIndex();
     IResourceDescription _resourceDescription = _index.getResourceDescription(after);
-    Assert.assertNull(_resourceDescription);
+    TestCase.assertNull(_resourceDescription);
     ChunkedResourceDescriptions _index_1 = this.getIndex();
     IResourceDescription _resourceDescription_1 = _index_1.getResourceDescription(before);
-    Assert.assertNotNull(_resourceDescription_1);
+    TestCase.assertNotNull(_resourceDescription_1);
     XtextAutoBuilderComponent _builder_1 = this.getBuilder();
     final Procedure0 _function = () -> {
       this.myFixture.renameElement(xtendFile, "Bar.xtend");
@@ -1006,10 +1006,10 @@ public class IdeaIntegrationTest extends LightXtendTest {
     _builder_1.runOperation(_function);
     ChunkedResourceDescriptions _index_2 = this.getIndex();
     IResourceDescription _resourceDescription_2 = _index_2.getResourceDescription(after);
-    Assert.assertNotNull(_resourceDescription_2);
+    TestCase.assertNotNull(_resourceDescription_2);
     ChunkedResourceDescriptions _index_3 = this.getIndex();
     IResourceDescription _resourceDescription_3 = _index_3.getResourceDescription(before);
-    Assert.assertNull(_resourceDescription_3);
+    TestCase.assertNull(_resourceDescription_3);
   }
   
   public void testRenameReference() {
@@ -1070,7 +1070,7 @@ public class IdeaIntegrationTest extends LightXtendTest {
     ChunkedResourceDescriptions _index = this.getIndex();
     URI _createURI = URI.createURI("temp:///src/otherPackage/Foo.xtend");
     IResourceDescription _resourceDescription = _index.getResourceDescription(_createURI);
-    Assert.assertNull(_resourceDescription);
+    TestCase.assertNull(_resourceDescription);
   }
   
   public void testExcludedFile() {
@@ -1102,21 +1102,21 @@ public class IdeaIntegrationTest extends LightXtendTest {
     ChunkedResourceDescriptions _index = this.getIndex();
     URI _createURI = URI.createURI("temp:///src/excluded/Foo.xtend");
     IResourceDescription _resourceDescription = _index.getResourceDescription(_createURI);
-    Assert.assertNull(_resourceDescription);
+    TestCase.assertNull(_resourceDescription);
   }
   
   public void assertFileContents(final String path, final CharSequence sequence) {
     try {
       final VirtualFile file = this.myFixture.findFileInTempDir(path);
       if ((file == null)) {
-        Assert.fail(("Expected a file for " + path));
+        TestCase.fail(("Expected a file for " + path));
       }
       String _string = sequence.toString();
       InputStream _inputStream = file.getInputStream();
       Charset _charset = file.getCharset();
       InputStreamReader _inputStreamReader = new InputStreamReader(_inputStream, _charset);
       String _string_1 = CharStreams.toString(_inputStreamReader);
-      Assert.assertEquals(_string, _string_1);
+      TestCase.assertEquals(_string, _string_1);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

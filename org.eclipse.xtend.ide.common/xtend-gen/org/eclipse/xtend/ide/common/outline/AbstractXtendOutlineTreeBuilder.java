@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.ide.common.outline;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import java.util.Arrays;
@@ -75,11 +74,11 @@ public abstract class AbstractXtendOutlineTreeBuilder implements IXtendOutlineTr
   
   protected void buildPackageAndImportSection(final XtendFile xtendFile, final IXtendOutlineContext context) {
     String _package = xtendFile.getPackage();
-    boolean _notEquals = (!Objects.equal(_package, null));
-    if (_notEquals) {
+    boolean _tripleNotEquals = (_package != null);
+    if (_tripleNotEquals) {
       this.xtendOutlineNodeBuilder.buildPackageNode(xtendFile, context);
     }
-    if (((!Objects.equal(xtendFile.getImportSection(), null)) && (!xtendFile.getImportSection().getImportDeclarations().isEmpty()))) {
+    if (((xtendFile.getImportSection() != null) && (!xtendFile.getImportSection().getImportDeclarations().isEmpty()))) {
       this.xtendOutlineNodeBuilder.buildImportSectionNode(xtendFile, context);
     }
   }

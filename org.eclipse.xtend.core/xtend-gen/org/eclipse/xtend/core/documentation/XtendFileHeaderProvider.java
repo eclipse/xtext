@@ -39,8 +39,7 @@ public class XtendFileHeaderProvider extends MultiLineFileHeaderProvider {
   public List<INode> getFileHeaderNodes(final Resource resource) {
     if ((resource instanceof XtextResource)) {
       final IParseResult parseResult = ((XtextResource)resource).getParseResult();
-      boolean _notEquals = (!Objects.equal(parseResult, null));
-      if (_notEquals) {
+      if ((parseResult != null)) {
         ICompositeNode _rootNode = parseResult.getRootNode();
         Iterable<ILeafNode> _leafNodes = _rootNode.getLeafNodes();
         for (final ILeafNode leafNode : _leafNodes) {
@@ -79,8 +78,7 @@ public class XtendFileHeaderProvider extends MultiLineFileHeaderProvider {
     if ((content instanceof XtendFile)) {
       EList<XtendTypeDeclaration> _xtendTypes = ((XtendFile)content).getXtendTypes();
       final XtendTypeDeclaration type = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
-      boolean _notEquals = (!Objects.equal(type, null));
-      if (_notEquals) {
+      if ((type != null)) {
         if ((this.documentationProvider instanceof IEObjectDocumentationProviderExtension)) {
           List<INode> _documentationNodes = ((IEObjectDocumentationProviderExtension)this.documentationProvider).getDocumentationNodes(type);
           INode _head = IterableExtensions.<INode>head(_documentationNodes);

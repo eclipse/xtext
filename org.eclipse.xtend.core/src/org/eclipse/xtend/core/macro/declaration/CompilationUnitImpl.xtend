@@ -214,9 +214,9 @@ class CompilationUnitImpl implements CompilationUnit {
 	MutableFileSystemSupport decoratedFileSystemSupport
 	
 	def MutableFileSystemSupport getFileSystemSupport() {
-		if (decoratedFileSystemSupport == null) {
+		if (decoratedFileSystemSupport === null) {
 			val fileSystemAccessQueue = xtendFile.eResource.resourceSet.eAdapters.filter(FileSystemAccessQueue).head
-			if (fileSystemAccessQueue == null) {
+			if (fileSystemAccessQueue === null) {
 				return createListeningFileSystemSupport()
 			}
 			decoratedFileSystemSupport = new ParallelFileSystemSupport(xtendFile.eResource.URI, createListeningFileSystemSupport(), fileSystemAccessQueue)
@@ -266,7 +266,7 @@ class CompilationUnitImpl implements CompilationUnit {
 
 	def private <IN, OUT> OUT getOrCreate(IN in, (IN)=>OUT provider) {
 		checkCanceled
-		if (in == null)
+		if (in === null)
 			return null
 		if (identityCache.containsKey(in))
 			return identityCache.get(in) as OUT
@@ -505,7 +505,7 @@ class CompilationUnitImpl implements CompilationUnit {
 	}
 
 	def TypeReference toTypeReference(JvmTypeReference delegate) {
-		if (delegate == null)
+		if (delegate === null)
 			return null
 		/*
 		 * We don't need to cache type references, as no mutable state
@@ -528,7 +528,7 @@ class CompilationUnitImpl implements CompilationUnit {
 	
 	def TypeReference toTypeReference(LightweightTypeReference delegate, JvmTypeReference source) {
 		checkCanceled
-		if (delegate == null)
+		if (delegate === null)
 			return null
 		new TypeReferenceImpl => [
 			it.delegate = delegate
@@ -740,7 +740,7 @@ class CompilationUnitImpl implements CompilationUnit {
 	}
 	
 	protected def translateAnnotationValue(Object value, JvmTypeReference expectedType, boolean isArray) {
-		if (value == null) {
+		if (value === null) {
 			return null
 		}
 		if (!isArray || value.class.array) { 
@@ -774,7 +774,7 @@ class CompilationUnitImpl implements CompilationUnit {
 	}
 	
 	protected def findExpectedType(JvmAnnotationValue value) {
-		if (value.operation != null) {
+		if (value.operation !== null) {
 			return value.operation.returnType
 		}
 		return switch container : value.eContainer {
@@ -783,7 +783,7 @@ class CompilationUnitImpl implements CompilationUnit {
 			}
 			JvmAnnotationReference : {
 				val defaultOp = container.annotation.findAllFeaturesByName('value').filter(JvmOperation).head
-				if (defaultOp != null) {
+				if (defaultOp !== null) {
 					defaultOp.returnType
 				}
 			}
@@ -859,13 +859,13 @@ class CompilationUnitImpl implements CompilationUnit {
 		]
 		for (valuePair : annotation.elementValuePairs) {
 			val value = valuePair.value
-			if (value != null) {
+			if (value !== null) {
 				val operation = valuePair.element
 				val annotationValue = value.translateAnnotationValue(operation.returnType)
 				buildContext.set(operation.simpleName, annotationValue)
 			}
 		}
-		if (annotation.value != null) {
+		if (annotation.value !== null) {
 			val annotationValue = annotation.value.translateAnnotationValue(null)
 			buildContext.set('value', annotationValue)
 		}

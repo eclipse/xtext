@@ -33,7 +33,7 @@ class AutoEditMultiLineBlockInRichString extends AutoEditMultiLineBlock {
 
 	override protected findOpeningTerminal(int offset, extension AutoEditContext context) {
 		val result = super.findOpeningTerminal(offset, context)
-		if (result == null)
+		if (result === null)
 			return null
 		val endOffset = result.offset + result.length
 		val textBetween = getText(endOffset, offset)

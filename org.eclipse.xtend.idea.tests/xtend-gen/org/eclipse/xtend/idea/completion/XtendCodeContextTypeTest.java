@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.idea.completion;
 
-import com.google.common.base.Objects;
 import com.intellij.codeInsight.template.TemplateContextType;
 import com.intellij.codeInsight.template.impl.TemplateManagerImpl;
 import com.intellij.openapi.editor.CaretModel;
@@ -256,8 +255,7 @@ public class XtendCodeContextTypeTest extends LightXtendTest {
       return Boolean.valueOf(clazz.isInstance(it));
     };
     final TemplateContextType result = IterableExtensions.<TemplateContextType>findFirst(((Iterable<TemplateContextType>)Conversions.doWrapArray(_allContextTypes)), _function);
-    boolean _equals = Objects.equal(result, null);
-    if (_equals) {
+    if ((result == null)) {
       String _name = clazz.getName();
       String _plus = ("The context type " + _name);
       String _plus_1 = (_plus + " wasn\'t registered.");

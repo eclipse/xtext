@@ -16,7 +16,7 @@ class IdeaFileSystemSupport extends AbstractFileSystemSupport {
 	
 	override getChildren(URI uri, Path path) {
 		val handler = VirtualFileBasedUriHandler.find(context)
-		if (handler == null)
+		if (handler === null)
 			return emptyList
 
 		return handler.getChildren(uri).map[getPath(uri, path)].filterNull

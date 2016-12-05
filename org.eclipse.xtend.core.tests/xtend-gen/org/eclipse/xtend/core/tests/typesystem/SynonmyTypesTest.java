@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.core.tests.typesystem;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.Collection;
 import java.util.HashSet;
@@ -75,8 +74,8 @@ public class SynonmyTypesTest extends AbstractTestingTypeReferenceOwner {
       final JvmOperation operation = this._iXtendJvmAssociations.getDirectlyInferredOperation(function);
       LightweightTypeReference _xifexpression = null;
       String _key_1 = typeAndTypeParams.getKey();
-      boolean _notEquals = (!Objects.equal(_key_1, null));
-      if (_notEquals) {
+      boolean _tripleNotEquals = (_key_1 != null);
+      if (_tripleNotEquals) {
         EList<JvmFormalParameter> _parameters = operation.getParameters();
         JvmFormalParameter _head = IterableExtensions.<JvmFormalParameter>head(_parameters);
         JvmTypeReference _parameterType = _head.getParameterType();

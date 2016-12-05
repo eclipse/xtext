@@ -26,7 +26,7 @@ class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> 
 	
 	override getExpression(String property) {
 		val op = findOperation(property)
-		val annotationValue = delegate.values.findFirst[ operation == op || (operation == null && op.simpleName == 'value') ]
+		val annotationValue = delegate.values.findFirst[ operation == op || (operation === null && op.simpleName == 'value') ]
 		switch annotationValue {
 			JvmCustomAnnotationValue : {
 				val expression = annotationValue.values.head as XExpression
@@ -40,9 +40,9 @@ class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> 
 	override getValue(String property) {
 		try {
 			val op = findOperation(property)
-			val annotationValue = delegate.values.findFirst[ operation == op || (operation == null && op.simpleName == 'value') ]
-			val isArrayType = op!=null && compilationUnit.typeReferences.isArray(op.returnType)
-			if (annotationValue != null)
+			val annotationValue = delegate.values.findFirst[ operation == op || (operation === null && op.simpleName == 'value') ]
+			val isArrayType = op!==null && compilationUnit.typeReferences.isArray(op.returnType)
+			if (annotationValue !== null)
 				return compilationUnit.translateAnnotationValue(annotationValue, isArrayType)
 		} catch (ConstantExpressionEvaluationException e) {
 			compilationUnit.problemSupport.addError(this, e.getMessage)
@@ -55,7 +55,7 @@ class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> 
 		
 		val jvmAnnoType = (annotationTypeDeclaration as JvmAnnotationTypeDeclarationImpl).delegate
 		val jvmOperation = jvmAnnoType.declaredOperations.findFirst[it.simpleName == name]
-		if (jvmOperation == null) {
+		if (jvmOperation === null) {
 			throw new IllegalArgumentException("The annotation property '"+name+"' is not declared on the annotation type '"+jvmAnnoType.identifier+"'.")
 		}
 		return jvmOperation
@@ -75,7 +75,7 @@ class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> 
 	
 	override getBooleanValue(String name) {
 		val value = getValue(name)
-		if (value == null) {
+		if (value === null) {
 			return false 
 		}
 		value as Boolean
@@ -87,7 +87,7 @@ class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> 
 	
 	override getByteValue(String name) {
 		val value = getValue(name)
-		if (value == null) {
+		if (value === null) {
 			return 0 as byte
 		}
 		value as Byte
@@ -99,7 +99,7 @@ class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> 
 	
 	override getCharValue(String name) {
 		val value = getValue(name)
-		if (value == null) {
+		if (value === null) {
 			return 0 as char
 		}
 		switch value {
@@ -122,7 +122,7 @@ class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> 
 	
 	override getDoubleValue(String name) {
 		val value = getValue(name)
-		if (value == null) {
+		if (value === null) {
 			return 0
 		}
 		switch value {
@@ -150,7 +150,7 @@ class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> 
 	
 	override getFloatValue(String name) {
 		val value = getValue(name)
-		if (value == null) {
+		if (value === null) {
 			return 0
 		}
 		switch value {
@@ -169,7 +169,7 @@ class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> 
 	
 	override getIntValue(String name) {
 		val value = getValue(name)
-		if (value == null) {
+		if (value === null) {
 			return 0
 		}
 		switch value {
@@ -186,7 +186,7 @@ class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> 
 	
 	override getLongValue(String name) {
 		val value = getValue(name)
-		if (value == null) {
+		if (value === null) {
 			return 0
 		}
 		switch value {
@@ -204,7 +204,7 @@ class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationReference> 
 	
 	override getShortValue(String name) {
 		val value = getValue(name)
-		if (value == null) {
+		if (value === null) {
 			return 0 as short
 		}
 		switch value {

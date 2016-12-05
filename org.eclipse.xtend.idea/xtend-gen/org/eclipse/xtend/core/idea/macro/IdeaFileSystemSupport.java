@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.core.idea.macro;
 
-import com.google.common.base.Objects;
 import java.util.Set;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -24,8 +23,7 @@ public class IdeaFileSystemSupport extends AbstractFileSystemSupport {
   public Iterable<? extends Path> getChildren(final URI uri, final Path path) {
     ResourceSet _context = this.getContext();
     final IdeaResourceSetProvider.VirtualFileBasedUriHandler handler = IdeaResourceSetProvider.VirtualFileBasedUriHandler.find(_context);
-    boolean _equals = Objects.equal(handler, null);
-    if (_equals) {
+    if ((handler == null)) {
       return CollectionLiterals.<Path>emptyList();
     }
     Set<URI> _children = handler.getChildren(uri);

@@ -29,11 +29,11 @@ class TypeReferenceAssignabilityTest extends AssignabilityTest {
 		val operation = function.directlyInferredOperation
 		val xtendFile = EcoreUtil.getRootContainer(function) as XtendFile
 		xtendFile.asCompilationUnit [ it |
-			val lhsType = if (lhsAndParams.key != null)
+			val lhsType = if (lhsAndParams.key !== null)
 					toTypeReference(operation.parameters.head.parameterType)
 				else
 					toTypeReference(owner.newAnyTypeReference)
-			val rhsType = if (rhs != null)
+			val rhsType = if (rhs !== null)
 					toTypeReference(operation.parameters.last.parameterType)
 				else
 					toTypeReference(owner.newAnyTypeReference)

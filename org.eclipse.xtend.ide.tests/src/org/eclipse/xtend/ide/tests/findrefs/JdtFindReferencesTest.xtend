@@ -68,11 +68,11 @@ class JdtFindReferencesTest extends AbstractXtendUITestCase {
 		assertNotNull("Couldn't find 'src/Xtend.xtend'.", project.findMember("/src/Xtend.xtend"))
 		assertNotNull("Couldn't find 'src/JavaRef.java'.", project.findMember("/src/JavaRef.java"))
 		val member = project.findMember("/xtend-gen/Xtend.java")
-		if (member == null) {
+		if (member === null) {
 			assertNotNull("Couldn't find 'xtend-gen/Xtend.java'.", member)
 		}
 		var IType type = JavaCore.create(project).findType("Xtend")
-		if (type == null) {
+		if (type === null) {
 			assertNotNull("Couldn't find type 'Xtend'.", type)
 		}
 		val constructor = type.getMethod("Xtend", newArrayList)

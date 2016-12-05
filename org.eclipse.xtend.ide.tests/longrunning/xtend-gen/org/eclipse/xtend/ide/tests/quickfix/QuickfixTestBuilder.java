@@ -81,8 +81,7 @@ public class QuickfixTestBuilder {
   }
   
   public void setSeverity(final String issueCode, final String severity) {
-    boolean _equals = Objects.equal(this.modifiedIssueCodes, null);
-    if (_equals) {
+    if ((this.modifiedIssueCodes == null)) {
       HashSet<String> _newHashSet = CollectionLiterals.<String>newHashSet();
       this.modifiedIssueCodes = _newHashSet;
     }
@@ -383,8 +382,7 @@ public class QuickfixTestBuilder {
     _files.forEach(_function);
     Set<IFile> _files_1 = this._workbenchTestHelper.getFiles();
     _files_1.clear();
-    boolean _notEquals = (!Objects.equal(this.modifiedIssueCodes, null));
-    if (_notEquals) {
+    if ((this.modifiedIssueCodes != null)) {
       IPersistentPreferenceStore _preferenceStore = this.getPreferenceStore();
       final Procedure1<IPersistentPreferenceStore> _function_1 = (IPersistentPreferenceStore it) -> {
         final Consumer<String> _function_2 = (String code) -> {

@@ -175,7 +175,7 @@ class LineNumberMappingTests extends AbstractXtendTestCase {
 		for (lineNumber : 0..lines.size-1) {
 			val mapping = findMapping(normalizedMappings, lineNumber)
 			val line = lines.get(lineNumber)
-			if (mapping != null) {
+			if (mapping !== null) {
 				if (line.indexOf("//") == -1) {
 					fail('''Line «lineNumber» is mapped to «mapping.targetStartLine»('«line»')'''.toString)
 				}

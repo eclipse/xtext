@@ -1,6 +1,5 @@
 package org.eclipse.xtend.ide.labeling;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -119,8 +118,7 @@ public class XtendLabelProvider extends XtendJvmLabelProvider {
     {
       final JvmOperation operation = this._iXtendJvmAssociations.getDirectlyInferredOperation(element);
       ImageDescriptor _xifexpression = null;
-      boolean _notEquals = (!Objects.equal(operation, null));
-      if (_notEquals) {
+      if ((operation != null)) {
         JvmVisibility _visibility = element.getVisibility();
         int _get = this.adornments.get(operation);
         _xifexpression = this.images.forOperation(_visibility, _get);
@@ -223,12 +221,10 @@ public class XtendLabelProvider extends XtendJvmLabelProvider {
   
   protected StyledString text(final XtendFunction element) {
     final String simpleName = element.getName();
-    boolean _notEquals = (!Objects.equal(simpleName, null));
-    if (_notEquals) {
+    if ((simpleName != null)) {
       final QualifiedName qnName = QualifiedName.create(simpleName);
       final QualifiedName operator = this.operatorMapping.getOperator(qnName);
-      boolean _notEquals_1 = (!Objects.equal(operator, null));
-      if (_notEquals_1) {
+      if ((operator != null)) {
         String _firstSegment = operator.getFirstSegment();
         JvmOperation _directlyInferredOperation = this._iXtendJvmAssociations.getDirectlyInferredOperation(element);
         final StyledString result = this.signature(_firstSegment, _directlyInferredOperation);
@@ -244,19 +240,18 @@ public class XtendLabelProvider extends XtendJvmLabelProvider {
   protected StyledString text(final XtendField element) {
     StyledString _xblockexpression = null;
     {
-      if ((Objects.equal(element.getName(), null) && element.isExtension())) {
+      if (((element.getName() == null) && element.isExtension())) {
         JvmTypeReference _type = element.getType();
         String _referenceToString = this.uiStrings.referenceToString(_type, "extension");
         return new StyledString(_referenceToString, 
           StyledString.DECORATIONS_STYLER);
       }
       final JvmTypeReference fieldType = this.getDisplayedType(element);
-      boolean _notEquals = (!Objects.equal(fieldType, null));
-      if (_notEquals) {
+      if ((fieldType != null)) {
         final String type = this.uiStrings.referenceToString(fieldType, "");
         int _length = type.length();
-        boolean _notEquals_1 = (_length != 0);
-        if (_notEquals_1) {
+        boolean _notEquals = (_length != 0);
+        if (_notEquals) {
           String _name = element.getName();
           StyledString _styledString = new StyledString(_name);
           StyledString _styledString_1 = new StyledString((" : " + type), StyledString.DECORATIONS_STYLER);
@@ -285,8 +280,7 @@ public class XtendLabelProvider extends XtendJvmLabelProvider {
     Object _xblockexpression = null;
     {
       final JvmField jvmField = this._iXtendJvmAssociations.getJvmField(field);
-      boolean _notEquals = (!Objects.equal(jvmField, null));
-      if (_notEquals) {
+      if ((jvmField != null)) {
         return jvmField.getType();
       } else {
         Set<EObject> _jvmElements = this._iXtendJvmAssociations.getJvmElements(field);

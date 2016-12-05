@@ -30,7 +30,7 @@ public class XtendAnnotationBuilder extends AbstractAnnotationBuilder implements
   
   @Override
   public boolean isValid() {
-    return ((super.isValid() && (!Objects.equal(this.getAnnotationName(), null))) && Objects.equal(this.getVisibility(), JvmVisibility.PUBLIC));
+    return ((super.isValid() && (this.getAnnotationName() != null)) && Objects.equal(this.getVisibility(), JvmVisibility.PUBLIC));
   }
   
   @Override

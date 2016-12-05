@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.core.macro;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.util.Map;
 import org.eclipse.emf.common.notify.Adapter;
@@ -56,8 +55,7 @@ public class ActiveAnnotationContexts extends AdapterImpl {
     EList<Adapter> _eAdapters = resource.eAdapters();
     Iterable<ActiveAnnotationContexts> _filter = Iterables.<ActiveAnnotationContexts>filter(_eAdapters, ActiveAnnotationContexts.class);
     ActiveAnnotationContexts result = IterableExtensions.<ActiveAnnotationContexts>head(_filter);
-    boolean _notEquals = (!Objects.equal(result, null));
-    if (_notEquals) {
+    if ((result != null)) {
       result.contexts.clear();
     } else {
       ActiveAnnotationContexts _activeAnnotationContexts = new ActiveAnnotationContexts();

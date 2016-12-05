@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.core.idea.structureview;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.intellij.icons.AllIcons;
@@ -109,8 +108,7 @@ public class XtendStructureViewTreeElementProvider extends DefaultStructureViewT
   protected boolean isShowInherited() {
     boolean _xblockexpression = false;
     {
-      boolean _equals = Objects.equal(this.treeActionsOwner, null);
-      if (_equals) {
+      if ((this.treeActionsOwner == null)) {
         return false;
       }
       _xblockexpression = this.treeActionsOwner.isActionActive(XtendShowInheritedNodeProvider.ID);

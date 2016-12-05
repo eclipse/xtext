@@ -109,11 +109,11 @@ class ConstantExpressionsInterpreter extends AbstractConstantExpressionsInterpre
 		cache.get('visibleFeaturesForAnnotationValues'->container, expression.eResource) [
 			val result = newHashMap
 			val section = importSectionLocator.getImportSection(expression.eResource as XtextResource)
-			if(section != null) {
+			if(section !== null) {
 				for (imp : section.importDeclarations) {
 					if(imp.static) {
 						val importedTypeName = imp.importedTypeName
-						if (importedTypeName != null) {
+						if (importedTypeName !== null) {
 							val type = imp.findTypeByName(importedTypeName)
 							switch type {
 								JvmGenericType: {
@@ -137,7 +137,7 @@ class ConstantExpressionsInterpreter extends AbstractConstantExpressionsInterpre
 	}
 	
 	protected def void collectAllVisibleFields(JvmDeclaredType type, Map<String, JvmIdentifiableElement> result) {
-		if (type == null) {
+		if (type === null) {
 			return;
 		}
 		collectAllVisibleFields(type.declaringType, result)
@@ -158,7 +158,7 @@ class ConstantExpressionsInterpreter extends AbstractConstantExpressionsInterpre
 					if (member instanceof JvmField) {
 						if (member.final && member.static) {
 							val existing = result.put(member.simpleName, member)
-							if (existing != null) {
+							if (existing !== null) {
 								result.put(existing.simpleName, existing)
 							}
 						}
@@ -187,7 +187,7 @@ class ConstantExpressionsInterpreter extends AbstractConstantExpressionsInterpre
 	}
 
 	def dispatch Object internalEvaluate(XNumberLiteral it, Context ctx) {
-		val type = if (ctx.expectedType == null)
+		val type = if (ctx.expectedType === null)
 			javaType
 		else 
 			getJavaType(ctx.expectedType.type,ctx.classFinder) as Class<? extends Number>
@@ -204,7 +204,7 @@ class ConstantExpressionsInterpreter extends AbstractConstantExpressionsInterpre
 		val elements = it.elements.map[
 			evaluate(ctx.cloneWithExpectation(expectedComponentType))
 		]
-		val Class<?> componentType = if (expectedComponentType != null) {
+		val Class<?> componentType = if (expectedComponentType !== null) {
 				expectedComponentType.type.getJavaType(ctx.classFinder)
 			} else if(!elements.empty) {
 				switch cl : elements.head.class {
@@ -244,7 +244,7 @@ class ConstantExpressionsInterpreter extends AbstractConstantExpressionsInterpre
 			switch it: ctx.expectedType {
 				XComputedTypeReferenceImplCustom case equivalentComputed: type
 				XComputedTypeReference,
-				case it == null: null
+				case it === null: null
 				default: type
 			}
 		}
@@ -274,7 +274,7 @@ class ConstantExpressionsInterpreter extends AbstractConstantExpressionsInterpre
 			}
 		}
 		val type = findTypeByName(featureName)
-		if (type != null) {
+		if (type !== null) {
 			resolveType(type)
 			return toTypeReference(type, 0)
 		}
@@ -321,7 +321,7 @@ class ConstantExpressionsInterpreter extends AbstractConstantExpressionsInterpre
 					switch type : receiver.type {
 						JvmEnumerationType : {
 							val enumValue = type.literals.findFirst[simpleName==featureName]
-							if (enumValue == null) {
+							if (enumValue === null) {
 								throw new ConstantExpressionEvaluationException("Couldn't find enum value "+featureName+" on enum "+receiver.simpleName, it)
 							}
 							resolveFeature(enumValue)
@@ -329,7 +329,7 @@ class ConstantExpressionsInterpreter extends AbstractConstantExpressionsInterpre
 						}
 						JvmGenericType : {
 							val field = type.allFeatures.filter(JvmField).findFirst[simpleName==featureName]
-							if (field == null) {
+							if (field === null) {
 								throw new ConstantExpressionEvaluationException("Couldn't find field "+featureName+" on type "+receiver.simpleName, it)
 							}
 							resolveFeature(field)
@@ -342,7 +342,7 @@ class ConstantExpressionsInterpreter extends AbstractConstantExpressionsInterpre
 		} catch (UnresolvableFeatureException e) {
 			val typeName = fullName
 			val type = findTypeByName(typeName)
-			if (type != null) {
+			if (type !== null) {
 				resolveType(type)
 				return toTypeReference(type, 0)
 			} else {

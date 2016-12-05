@@ -1,6 +1,5 @@
 package org.eclipse.xtend.ide.hyperlinking;
 
-import com.google.common.base.Objects;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.model.IProcess;
@@ -95,8 +94,7 @@ public class XtendFileHyperlink implements IHyperlink {
   private ILaunch getLaunch() {
     Object _attribute = this.console.getAttribute(IDebugUIConstants.ATTR_CONSOLE_PROCESS);
     final IProcess process = ((IProcess) _attribute);
-    boolean _notEquals = (!Objects.equal(process, null));
-    if (_notEquals) {
+    if ((process != null)) {
       return process.getLaunch();
     }
     return null;

@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.core.macro.declaration;
 
-import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmMethodDeclarationImpl;
@@ -69,8 +68,7 @@ public class MutableJvmMethodDeclarationImpl extends JvmMethodDeclarationImpl im
   @Override
   public void setReturnType(final TypeReference type) {
     this.checkMutable();
-    boolean _notEquals = (!Objects.equal(type, null));
-    Preconditions.checkArgument(_notEquals, "returnType cannot be null");
+    Preconditions.checkArgument((type != null), "returnType cannot be null");
     JvmOperation _delegate = this.getDelegate();
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     JvmTypeReference _jvmTypeReference = _compilationUnit.toJvmTypeReference(type);

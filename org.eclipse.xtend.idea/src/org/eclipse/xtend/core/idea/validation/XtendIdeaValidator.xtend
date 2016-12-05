@@ -70,7 +70,7 @@ class XtendIdeaValidator extends AbstractDeclarativeValidator {
 		ApplicationManager.application.<Boolean>runReadAction[
 			val module = annotation.module
 			val psiFacade = JavaPsiFacade.getInstance(module.project)
-			return psiFacade.findClass(annotationType.qualifiedName, module.moduleScope) != null
+			return psiFacade.findClass(annotationType.qualifiedName, module.moduleScope) !== null
 		]
 	}
 	
@@ -81,11 +81,11 @@ class XtendIdeaValidator extends AbstractDeclarativeValidator {
 	@Check
 	def void checkFileNameConventions(XtendFile xtendFile) {
 		var expectedPackage = xtendFile.expectedPackageName
-		if (expectedPackage == null) {
+		if (expectedPackage === null) {
 			return
 		}
 		var declaredPackage = xtendFile.package
-		if (expectedPackage.empty && declaredPackage == null) {
+		if (expectedPackage.empty && declaredPackage === null) {
 			return
 		}
 		if (expectedPackage == declaredPackage) {

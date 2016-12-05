@@ -39,7 +39,7 @@ abstract class AbstractExecutableBuilder extends AbstractCodeBuilder {
 
 	def appendBody(ISourceAppender appendable, String statementSeparator) {
 		appendable.append(' {').increaseIndentation.newLine
-		if (bodyGenerator != null)
+		if (bodyGenerator !== null)
 			bodyGenerator.apply(appendable)
 		else
 			appendable.append(defaultBody)
@@ -72,7 +72,7 @@ abstract class AbstractExecutableBuilder extends AbstractCodeBuilder {
 		for (i : 0 ..< parameterBuilders.size) {
 			val parameterBuilder = parameterBuilders.get(i)
 			val acceptor = new VariableNameAcceptor(notAllowed)
-			if(parameterBuilder.name == null) {
+			if(parameterBuilder.name === null) {
 				getVariableProposals(parameterBuilder.type.identifier, context,
 					JdtVariableCompletions.VariableType.PARAMETER, notAllowed, acceptor)
 				parameterBuilder.name = acceptor.variableName
@@ -90,7 +90,7 @@ abstract class AbstractExecutableBuilder extends AbstractCodeBuilder {
 			appendable.append(" throws ")
 			do {
 				val typeRef = iterator.next()
-				if (typeRef != null) {
+				if (typeRef !== null) {
 					appendable.appendType(typeRef, "Exception")
 				}
 				if (iterator.hasNext())

@@ -212,8 +212,7 @@ public class ProblemSupportImpl implements ProblemSupport {
           IXtendJvmAssociations _jvmModelAssociations = this.compilationUnit.getJvmModelAssociations();
           EObject _delegate_1 = ((AbstractElementImpl<? extends EObject>)element).getDelegate();
           final EObject eobject = _jvmModelAssociations.getPrimarySourceElement(_delegate_1);
-          boolean _equals_1 = Objects.equal(eobject, null);
-          if (_equals_1) {
+          if ((eobject == null)) {
             EObject _delegate_2 = ((AbstractElementImpl<? extends EObject>)element).getDelegate();
             return Pair.<Resource, EObject>of(resource, _delegate_2);
           }

@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.core.findReferences;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.Collection;
 import java.util.HashSet;
@@ -90,8 +89,7 @@ public class Declarators {
   
   public Declarators.DeclaratorsData getDeclaratorData(final TargetURIs targetURIs, final IReferenceFinder.IResourceAccess resourceAccess) {
     Declarators.DeclaratorsData result = targetURIs.<Declarators.DeclaratorsData>getUserData(Declarators.KEY);
-    boolean _notEquals = (!Objects.equal(result, null));
-    if (_notEquals) {
+    if ((result != null)) {
       return result;
     }
     final HashSet<QualifiedName> declaratorNames = CollectionLiterals.<QualifiedName>newHashSet();
@@ -103,11 +101,9 @@ public class Declarators {
           Collection<URI> _eObjectURIs = targetURIs.getEObjectURIs(uri);
           final Consumer<URI> _function_2 = (URI objectURI) -> {
             final EObject object = it.getEObject(objectURI, true);
-            boolean _notEquals_1 = (!Objects.equal(object, null));
-            if (_notEquals_1) {
+            if ((object != null)) {
               final JvmType type = EcoreUtil2.<JvmType>getContainerOfType(object, JvmType.class);
-              boolean _notEquals_2 = (!Objects.equal(type, null));
-              if (_notEquals_2) {
+              if ((type != null)) {
                 String _identifier = type.getIdentifier();
                 QualifiedName _qualifiedName = this.nameConverter.toQualifiedName(_identifier);
                 QualifiedName _lowerCase = _qualifiedName.toLowerCase();

@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.ide.javaconverter;
 
-import com.google.common.base.Objects;
 import java.util.Map;
 import org.eclipse.jdt.core.ICompilationUnit;
 import org.eclipse.jdt.core.IJavaElement;
@@ -43,8 +42,7 @@ public class EclipseASTParserFactory extends ASTParserFactory {
   }
   
   public void tweakOptions(final ASTParser parser, final IJavaProject project) {
-    boolean _notEquals = (!Objects.equal(project, null));
-    if (_notEquals) {
+    if ((project != null)) {
       final Map options = project.getOptions(true);
       options.remove(JavaCore.COMPILER_TASK_TAGS);
       options.put(JavaCore.COMPILER_DOC_COMMENT_SUPPORT, JavaCore.ENABLED);

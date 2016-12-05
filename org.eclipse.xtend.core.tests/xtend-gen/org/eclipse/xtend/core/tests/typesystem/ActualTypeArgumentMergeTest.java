@@ -130,8 +130,7 @@ public class ActualTypeArgumentMergeTest extends AbstractTestingTypeReferenceOwn
   public Map<JvmTypeParameter, List<LightweightBoundTypeArgument>> to(final Pair<Map<JvmTypeParameter, List<LightweightBoundTypeArgument>>, LightweightMergedBoundTypeArgument> merged, final String type, final VarianceInfo variance) {
     Map<JvmTypeParameter, List<LightweightBoundTypeArgument>> _xblockexpression = null;
     {
-      boolean _equals = Objects.equal(type, null);
-      if (_equals) {
+      if ((type == null)) {
         LightweightMergedBoundTypeArgument _value = merged.getValue();
         Assert.assertNull(_value);
       } else {

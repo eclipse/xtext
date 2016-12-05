@@ -36,7 +36,7 @@ class EclipseXtendOutlineSourceContext extends EclipseXtendOutlineContext {
 	protected def markCreateExtensionJvmFeaturesAsProcessed(JvmMember member) {
 		val function = member.primarySourceElement
 		if (function instanceof XtendFunction) {
-			if (function.createExtensionInfo != null) {
+			if (function.createExtensionInfo !== null) {
 				for (jvmFeature : function.jvmElements.filter(JvmFeature).filter[it != member].filter [
 					simpleName.startsWith(CREATE_CHACHE_VARIABLE_PREFIX) ||
 						simpleName.startsWith(CREATE_INITIALIZER_PREFIX)

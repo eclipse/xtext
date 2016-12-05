@@ -204,7 +204,7 @@ public class EmfModelsTest {
             }
           }
           if ((((eStructuralFeature instanceof EReference) && (!((EReference) eStructuralFeature).isContainment())) && 
-            Objects.equal(((EReference) eStructuralFeature).getEOpposite(), null))) {
+            (((EReference) eStructuralFeature).getEOpposite() == null))) {
             String _firstUpper_2 = Strings.toFirstUpper(getterName);
             final String basicGetterName = ("basic" + _firstUpper_2);
             Class<? extends EObject> _class_2 = obj.getClass();
@@ -232,8 +232,8 @@ public class EmfModelsTest {
   
   public Class<?> toJavaClass(final EClassifier eClassifier) {
     Class<?> _instanceClass = eClassifier.getInstanceClass();
-    boolean _notEquals = (!Objects.equal(_instanceClass, null));
-    if (_notEquals) {
+    boolean _tripleNotEquals = (_instanceClass != null);
+    if (_tripleNotEquals) {
       return eClassifier.getInstanceClass();
     }
     return null;

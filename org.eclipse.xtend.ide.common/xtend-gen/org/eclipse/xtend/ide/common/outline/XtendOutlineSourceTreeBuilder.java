@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.ide.common.outline;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -64,8 +63,7 @@ public class XtendOutlineSourceTreeBuilder extends AbstractXtendOutlineTreeBuild
   }
   
   protected void buildMembers(final XtendTypeDeclaration xtendType, final JvmDeclaredType inferredType, final IXtendOutlineContext context) {
-    boolean _notEquals = (!Objects.equal(inferredType, null));
-    if (_notEquals) {
+    if ((inferredType != null)) {
       final IXtendOutlineContext membersContext = context.newContext();
       this.buildMembers(xtendType, inferredType, inferredType, membersContext);
     } else {
@@ -78,8 +76,7 @@ public class XtendOutlineSourceTreeBuilder extends AbstractXtendOutlineTreeBuild
   }
   
   protected void buildMembers(final XtendTypeDeclaration xtendType, final JvmDeclaredType inferredType, final JvmDeclaredType baseType, @Extension final IXtendOutlineContext context) {
-    boolean _notEquals = (!Objects.equal(xtendType, null));
-    if (_notEquals) {
+    if ((xtendType != null)) {
       EList<XtendMember> _members = xtendType.getMembers();
       for (final XtendMember member : _members) {
         {

@@ -67,7 +67,7 @@ public abstract class AbstractCodeBuilder implements ICodeBuilder {
   @Override
   public boolean isValid() {
     final IJavaElement javaElement = this._iJavaElementFinder.findElementFor(this.owner);
-    return ((((Objects.equal(javaElement, null) || (!javaElement.isReadOnly())) && (!Objects.equal(this.ownerSource, null))) && (!Objects.equal(this.owner, null))) && (!Objects.equal(this.context, null)));
+    return (((((javaElement == null) || (!javaElement.isReadOnly())) && (this.ownerSource != null)) && (this.owner != null)) && (this.context != null));
   }
   
   @Override
@@ -131,8 +131,7 @@ public abstract class AbstractCodeBuilder implements ICodeBuilder {
   protected ISourceAppender appendType(final ISourceAppender appendable, final LightweightTypeReference typeRef, final String surrogate) {
     ISourceAppender _xblockexpression = null;
     {
-      boolean _equals = Objects.equal(typeRef, null);
-      if (_equals) {
+      if ((typeRef == null)) {
         appendable.append(surrogate);
       } else {
         appendable.append(typeRef);

@@ -56,14 +56,14 @@ class RegisterGlobalsContextImpl implements RegisterGlobalsContext {
 	
 	private def void setNameAndAccept(JvmDeclaredType newType, String qualifiedName) {
 		checkQualifiedName(qualifiedName, "qualifiedName")
-		Preconditions.checkArgument(qualifiedName.findType == null, '''The type '«qualifiedName»' has already been registered.''');
+		Preconditions.checkArgument(qualifiedName.findType === null, '''The type '«qualifiedName»' has already been registered.''');
 		compilationUnit.checkCanceled
 		val namespaceAndName = getNameParts(qualifiedName)
 		val headerText = compilationUnit.fileHeaderProvider.getFileHeader(compilationUnit.xtendFile.eResource)
 		compilationUnit.jvmTypesBuilder.setFileHeader(newType, headerText)
-		if (namespaceAndName.key != null) {
+		if (namespaceAndName.key !== null) {
 			val parentType = findType(namespaceAndName.key)
-			if (parentType != null) {
+			if (parentType !== null) {
 				parentType.members += newType
 				newType.static = true
 			} else {
@@ -88,7 +88,7 @@ class RegisterGlobalsContextImpl implements RegisterGlobalsContext {
 			}
 			if (string.startsWith(candidateQualifiedName)) {
 				val result = findRecursively(string, type.members.filter(JvmDeclaredType))
-				if (result != null)
+				if (result !== null)
 					return result
 			}
 		}

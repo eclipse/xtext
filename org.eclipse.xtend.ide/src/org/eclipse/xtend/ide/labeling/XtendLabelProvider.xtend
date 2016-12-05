@@ -69,7 +69,7 @@ public class XtendLabelProvider extends XtendJvmLabelProvider {
 
 	protected def dispatch imageDescriptor(XtendFunction element) {
 		val operation = element.directlyInferredOperation
-		if (operation != null)
+		if (operation !== null)
 			images.forOperation(element.visibility, adornments.get(operation))
 	}
 
@@ -124,10 +124,10 @@ public class XtendLabelProvider extends XtendJvmLabelProvider {
 
 	protected def text(XtendFunction element) {
 		val simpleName = element.name
-		if (simpleName != null) {
+		if (simpleName !== null) {
 			val qnName = QualifiedName.create(simpleName)
 			val operator = operatorMapping.getOperator(qnName)
-			if (operator != null) {
+			if (operator !== null) {
 				val result = signature(operator.firstSegment, element.directlyInferredOperation)
 				result.append(' (' + simpleName + ')', StyledString.COUNTER_STYLER)
 				return result
@@ -137,11 +137,11 @@ public class XtendLabelProvider extends XtendJvmLabelProvider {
 	}
 
 	protected def text(XtendField element) {
-		if (element.name == null && element.extension)
+		if (element.name === null && element.extension)
 			return new StyledString(uiStrings.referenceToString(element.type, "extension"),
 				StyledString.DECORATIONS_STYLER)
 		val fieldType = element.displayedType
-		if (fieldType != null) {
+		if (fieldType !== null) {
 			val type = uiStrings.referenceToString(fieldType, "")
 			if (type.length != 0) {
 				return new StyledString(element.name).append(
@@ -161,7 +161,7 @@ public class XtendLabelProvider extends XtendJvmLabelProvider {
 
 	protected def JvmTypeReference getDisplayedType(XtendField field) {
 		val jvmField = field.jvmField
-		if (jvmField != null) {
+		if (jvmField !== null) {
 			return jvmField.getType
 		} else {
 			val i = field.jvmElements.iterator

@@ -108,8 +108,7 @@ public class TypeLookupImpl implements TypeLookup, SourceTypeLookup, UpstreamTyp
     };
     final JvmDeclaredType result = this.<JvmDeclaredType>recursiveFindType(qualifiedName, _filter, _function, _function_1);
     Type _xifexpression = null;
-    boolean _notEquals = (!Objects.equal(result, null));
-    if (_notEquals) {
+    if ((result != null)) {
       _xifexpression = this.compilationUnit.toType(result);
     }
     return _xifexpression;
@@ -181,8 +180,7 @@ public class TypeLookupImpl implements TypeLookup, SourceTypeLookup, UpstreamTyp
     };
     final XtendTypeDeclaration result = this.<XtendTypeDeclaration>recursiveFindType(qualifiedName, _xtendTypes, _function, _function_1);
     XtendTypeDeclarationImpl<? extends XtendTypeDeclaration> _xifexpression = null;
-    boolean _notEquals = (!Objects.equal(result, null));
-    if (_notEquals) {
+    if ((result != null)) {
       _xifexpression = this.compilationUnit.toXtendTypeDeclaration(result);
     }
     return _xifexpression;

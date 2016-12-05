@@ -91,8 +91,7 @@ public class XtendLibraryConfigurator {
     JavaPsiFacade _instance = JavaPsiFacade.getInstance(_project);
     String _name = Data.class.getName();
     final PsiClass psiClass = _instance.findClass(_name, scope);
-    boolean _equals = Objects.equal(psiClass, null);
-    if (_equals) {
+    if ((psiClass == null)) {
       final boolean testScope = this.isTestScope(context);
       if ((this._platformUtil.isMavenInstalled() && this._mavenUtility.isMavenizedModule(module))) {
         this._mavenUtility.addXtendLibMavenDependency(module, testScope);
@@ -119,7 +118,7 @@ public class XtendLibraryConfigurator {
   
   public void addJavaRuntimeLibrary(final Module module, final ModifiableRootModel rootModel) {
     final Library library = this.createOrGetXtendJavaLibrary(rootModel, module);
-    if (((!Objects.equal(library, null)) && (rootModel.findLibraryOrderEntry(library) == null))) {
+    if (((library != null) && (rootModel.findLibraryOrderEntry(library) == null))) {
       boolean _isWritable = rootModel.isWritable();
       if (_isWritable) {
         rootModel.addLibraryEntry(library);

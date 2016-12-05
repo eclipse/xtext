@@ -78,9 +78,9 @@ class AccessObjectProcessor implements TransformationParticipant<MutableClassDec
 			
 			val PVersionName = pkg+"P"+it.simpleName;
 			val p = findClass(PVersionName)
-			if ( p == null )
+			if ( p === null )
 				addError("Class "+PVersionName+" not found")
-			if ( p!=null && ser != null) {
+			if ( p!==null && ser !== null) {
 				val pIfcs = new LinkedList
 				pIfcs.add(ser)
 				p.setImplementedInterfaces(pIfcs)
@@ -88,9 +88,9 @@ class AccessObjectProcessor implements TransformationParticipant<MutableClassDec
 			
 			val GVersionName = pkg+"G"+it.simpleName;
 			val g = findClass(GVersionName)
-			if ( g == null )
+			if ( g === null )
 				addError("Class "+GVersionName+" not found")
-			if ( g!=null && ser != null) {
+			if ( g!==null && ser !== null) {
 				val gIfcs = new LinkedList
 				gIfcs.add(ser)
 				g.setImplementedInterfaces(gIfcs)

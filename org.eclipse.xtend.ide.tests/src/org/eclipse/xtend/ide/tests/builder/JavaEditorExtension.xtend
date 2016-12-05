@@ -36,7 +36,7 @@ class JavaEditorExtension {
 	}
 
 	def ITextEditor reconcile(ITextEditor editor, (ITextEditor)=>ITextEditor consumer) {
-		if (consumer == null) {
+		if (consumer === null) {
 			return editor
 		}
 		waitForPostReconcileEvent [ |
@@ -51,7 +51,7 @@ class JavaEditorExtension {
 
 	def save(ITextEditor editor, (ITextEditor)=>ITextEditor consumer) {
 		waitForPostChangeEvent [ |
-			if (consumer != null) {
+			if (consumer !== null) {
 				consumer.apply(editor)
 			}
 			assertTrue(editor.saveEditor(false))
@@ -65,7 +65,7 @@ class JavaEditorExtension {
 
 	def close(ITextEditor editor, (ITextEditor)=>ITextEditor consumer) {
 		waitForPostChangeEvent [ |
-			if (consumer != null) {
+			if (consumer !== null) {
 				consumer.apply(editor)
 			}
 			assertTrue(editor.closeEditor(false))

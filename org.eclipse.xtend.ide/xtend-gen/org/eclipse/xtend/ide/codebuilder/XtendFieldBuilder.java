@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.ide.codebuilder;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
@@ -31,7 +30,7 @@ public class XtendFieldBuilder extends AbstractFieldBuilder implements ICodeBuil
   
   @Override
   public boolean isValid() {
-    return (super.isValid() && (!Objects.equal(this.getFieldName(), null)));
+    return (super.isValid() && (this.getFieldName() != null));
   }
   
   @Override

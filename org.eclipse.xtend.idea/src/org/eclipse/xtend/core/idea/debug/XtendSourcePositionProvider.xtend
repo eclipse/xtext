@@ -39,14 +39,14 @@ class XtendSourcePositionProvider extends SourcePositionProvider {
 		val ele = context.contextElement
 		if (ele instanceof LeafXtextPsiElement) {
 			val eobj = ele.INode.semanticElement
-			if (eobj == null) {
+			if (eobj === null) {
 				return null;
 			}
 			val scope = scopeProvider.getScope(eobj, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE)
 			val element = scope.getSingleElement(QualifiedName.create(name))
-			if (element != null && element.EObjectOrProxy.eResource == eobj.eResource) {
+			if (element !== null && element.EObjectOrProxy.eResource == eobj.eResource) {
 				val node = NodeModelUtils.getNode(element.EObjectOrProxy)
-				if (node != null) {
+				if (node !== null) {
 					val offset = node.offset
 					return SourcePosition.createFromOffset(ele.xtextFile, offset)
 				}

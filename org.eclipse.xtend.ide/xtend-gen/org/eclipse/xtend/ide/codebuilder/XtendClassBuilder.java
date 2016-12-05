@@ -30,7 +30,7 @@ public class XtendClassBuilder extends AbstractClassBuilder implements ICodeBuil
   
   @Override
   public boolean isValid() {
-    return ((super.isValid() && (!Objects.equal(this.getClassName(), null))) && Objects.equal(this.getVisibility(), JvmVisibility.PUBLIC));
+    return ((super.isValid() && (this.getClassName() != null)) && Objects.equal(this.getVisibility(), JvmVisibility.PUBLIC));
   }
   
   @Override

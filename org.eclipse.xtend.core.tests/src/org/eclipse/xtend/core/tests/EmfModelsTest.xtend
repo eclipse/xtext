@@ -123,7 +123,7 @@ class EmfModelsTest {
 							debug(eClassifier.getName() + ": Overridden setter " + setter.getName());
 					}
 					if (eStructuralFeature instanceof EReference && !(eStructuralFeature as EReference).isContainment() &&
-						(eStructuralFeature as EReference).getEOpposite() == null) {
+						(eStructuralFeature as EReference).getEOpposite() === null) {
 						val String basicGetterName = "basic" + Strings.toFirstUpper(getterName);
 						val Method basicGetter = obj.getClass().getMethod(basicGetterName);
 						if (isCustom(basicGetter))
@@ -137,7 +137,7 @@ class EmfModelsTest {
 	}
 
 	def toJavaClass(EClassifier eClassifier) {
-		if (eClassifier.getInstanceClass() != null) {
+		if (eClassifier.getInstanceClass() !== null) {
 			return eClassifier.getInstanceClass();
 		}
 		return null;

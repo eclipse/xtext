@@ -118,13 +118,13 @@ abstract class XtendTypeDeclarationImpl<T extends XtendTypeDeclaration> extends 
 		val container = decl.eContainer
 		if (container instanceof XtendFile) {
 			val package = container.package
-			if (package == null)
+			if (package === null)
 				return decl.name
 			return package + '.' + decl.name
 		}
 		if (container instanceof XtendTypeDeclaration) {
 			val containerName = container.qualifiedName
-			if (containerName == null)
+			if (containerName === null)
 				return null
 			return containerName + '.' + decl.name
 		}
@@ -140,7 +140,7 @@ abstract class XtendTypeDeclarationImpl<T extends XtendTypeDeclaration> extends 
 	}
 	
 	override isAssignableFrom(Type otherType) {
-		if (otherType == null)
+		if (otherType === null)
 			return false;
 		val thisTypeRef = compilationUnit.typeReferenceProvider.newTypeReference(this)
 		val thatTypeRef = compilationUnit.typeReferenceProvider.newTypeReference(otherType)
@@ -272,7 +272,7 @@ class XtendAnnotationTypeDeclarationImpl extends XtendTypeDeclarationImpl<XtendA
 class XtendMethodDeclarationImpl extends XtendMemberDeclarationImpl<XtendFunction> implements MethodDeclaration {
 	
 	override isAbstract() {
-		delegate.expression == null
+		delegate.expression === null
 	}
 	
 	override isFinal() {
@@ -317,7 +317,7 @@ class XtendMethodDeclarationImpl extends XtendMemberDeclarationImpl<XtendFunctio
 	}
 	
 	override getBody() {
-		if (delegate.expression == null)
+		if (delegate.expression === null)
 			return null
 		return compilationUnit.toExpression(delegate.expression)
 	}
@@ -343,7 +343,7 @@ class XtendMethodDeclarationImpl extends XtendMemberDeclarationImpl<XtendFunctio
 class XtendConstructorDeclarationImpl extends XtendMemberDeclarationImpl<XtendConstructor> implements ConstructorDeclaration {
 	
 	override getBody() {
-		if (delegate.expression == null)
+		if (delegate.expression === null)
 			return null
 		return compilationUnit.toExpression(delegate.expression)
 	}
@@ -401,7 +401,7 @@ class XtendFieldDeclarationImpl extends XtendMemberDeclarationImpl<XtendField> i
 	}
 	
 	override getInitializer() {
-		if (delegate.initialValue == null)
+		if (delegate.initialValue === null)
 			return null
 		return compilationUnit.toExpression(delegate.initialValue)
 	}
@@ -451,13 +451,13 @@ class XtendAnnotationTypeElementDeclarationImpl extends XtendMemberDeclarationIm
 	}
 	
 	override getDefaultValue() {
-		if (delegate.initialValue == null)
+		if (delegate.initialValue === null)
 			return null
 		compilationUnit.evaluate(delegate.initialValue, delegate.type)
 	}
 	
 	override getDefaultValueExpression() {
-		if (delegate.initialValue == null)
+		if (delegate.initialValue === null)
 			return null
 		compilationUnit.toExpression(delegate.initialValue) 
 	}
@@ -496,7 +496,7 @@ class XtendTypeParameterDeclarationImpl extends AbstractElementImpl<JvmTypeParam
 	}
 	
 	override isAssignableFrom(Type otherType) {
-		if (otherType == null)
+		if (otherType === null)
 			return false;
 		val thisTypeRef = compilationUnit.typeReferenceProvider.newTypeReference(this)
 		val thatTypeRef = compilationUnit.typeReferenceProvider.newTypeReference(otherType)
@@ -531,7 +531,7 @@ class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotation> impl
 	
 	override getExpression(String property) {
 		val value = property.findValue
-		if (value != null) {
+		if (value !== null) {
 			return compilationUnit.toExpression(value)
 		}
 		return null
@@ -539,14 +539,14 @@ class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotation> impl
 	
 	override getValue(String property) {
 		val value = property.findValue
-		if (value != null) {
+		if (value !== null) {
 			return value.translateAnnotationValue(property)		
 		}
 		return annotationTypeDeclaration.findDeclaredAnnotationTypeElement(property).defaultValue
 	}
 	
 	protected def findValue(String property) {
-		if (property == 'value' && delegate.value != null) {
+		if (property == 'value' && delegate.value !== null) {
 			return delegate.value
 		}
 		delegate.elementValuePairs.findFirst[element.simpleName == property]?.value
@@ -556,7 +556,7 @@ class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotation> impl
 		val annotationType = delegate.annotationType
 		if (annotationType instanceof JvmAnnotationType) {
 			val operation = annotationType.members.filter(JvmOperation).findFirst[simpleName == property]
-			if (operation != null) {
+			if (operation !== null) {
 				val array = compilationUnit.typeReferences.isArray(operation.returnType)
 				return compilationUnit.translateAnnotationValue(value, operation.returnType, array)
 			}
@@ -578,7 +578,7 @@ class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotation> impl
 	
 	override getBooleanValue(String name) {
 		val value = getValue(name)
-		if (value == null) {
+		if (value === null) {
 			return false 
 		}
 		value as Boolean
@@ -590,7 +590,7 @@ class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotation> impl
 	
 	override getByteValue(String name) {
 		val value = getValue(name)
-		if (value == null) {
+		if (value === null) {
 			return 0 as byte
 		}
 		value as Byte
@@ -602,7 +602,7 @@ class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotation> impl
 	
 	override getCharValue(String name) {
 		val value = getValue(name)
-		if (value == null) {
+		if (value === null) {
 			return 0 as char
 		}
 		switch value {
@@ -625,7 +625,7 @@ class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotation> impl
 	
 	override getDoubleValue(String name) {
 		val value = getValue(name)
-		if (value == null) {
+		if (value === null) {
 			return 0
 		}
 		switch value {
@@ -653,7 +653,7 @@ class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotation> impl
 	
 	override getFloatValue(String name) {
 		val value = getValue(name)
-		if (value == null) {
+		if (value === null) {
 			return 0
 		}
 		switch value {
@@ -672,7 +672,7 @@ class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotation> impl
 	
 	override getIntValue(String name) {
 		val value = getValue(name)
-		if (value == null) {
+		if (value === null) {
 			return 0
 		}
 		switch value {
@@ -689,7 +689,7 @@ class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotation> impl
 	
 	override getLongValue(String name) {
 		val value = getValue(name)
-		if (value == null) {
+		if (value === null) {
 			return 0
 		}
 		switch value {
@@ -707,7 +707,7 @@ class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotation> impl
 	
 	override getShortValue(String name) {
 		val value = getValue(name)
-		if (value == null) {
+		if (value === null) {
 			return 0 as short
 		}
 		switch value {

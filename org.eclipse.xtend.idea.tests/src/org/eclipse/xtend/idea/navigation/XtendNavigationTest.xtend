@@ -499,7 +499,7 @@ class XtendNavigationTest extends LightXtendTest {
 		assertNotNull(element)
 
 		val namedEObject = element.findPsiNamedEObject(range)
-		if (namedEObject != null) {
+		if (namedEObject !== null) {
 			assertEquals(namedEObject, namedEObject.navigationElement)
 			return namedEObject
 		}
@@ -513,12 +513,12 @@ class XtendNavigationTest extends LightXtendTest {
 	}
 
 	protected def PsiElement findPsiNamedEObject(PsiElement element, TextRange identifierRange) {
-		if (element == null) {
+		if (element === null) {
 			return null
 		}
 		if (element instanceof PsiNamedEObject) {
 			val nameIdentifier = element.nameIdentifier
-			if (nameIdentifier != null) {
+			if (nameIdentifier !== null) {
 				return if (nameIdentifier.textRange == identifierRange)
 					element
 				else

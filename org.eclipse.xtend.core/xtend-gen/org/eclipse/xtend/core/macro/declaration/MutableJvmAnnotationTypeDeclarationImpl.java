@@ -145,8 +145,7 @@ public class MutableJvmAnnotationTypeDeclarationImpl extends JvmAnnotationTypeDe
   public MutableAnnotationTypeElementDeclaration addAnnotationTypeElement(final String name, final Procedure1<MutableAnnotationTypeElementDeclaration> initializer) {
     this.checkMutable();
     ConditionUtils.checkJavaIdentifier(name, "name");
-    boolean _notEquals = (!Objects.equal(initializer, null));
-    Preconditions.checkArgument(_notEquals, "initializer cannot be null");
+    Preconditions.checkArgument((initializer != null), "initializer cannot be null");
     final JvmOperation newAnnotationElement = TypesFactory.eINSTANCE.createJvmOperation();
     newAnnotationElement.setSimpleName(name);
     newAnnotationElement.setVisibility(JvmVisibility.PUBLIC);

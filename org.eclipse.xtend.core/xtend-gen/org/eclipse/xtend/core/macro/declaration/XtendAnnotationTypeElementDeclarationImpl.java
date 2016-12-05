@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.core.macro.declaration;
 
-import com.google.common.base.Objects;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.XtendMemberDeclarationImpl;
 import org.eclipse.xtend.core.xtend.XtendField;
@@ -31,8 +30,8 @@ public class XtendAnnotationTypeElementDeclarationImpl extends XtendMemberDeclar
     {
       XtendField _delegate = this.getDelegate();
       XExpression _initialValue = _delegate.getInitialValue();
-      boolean _equals = Objects.equal(_initialValue, null);
-      if (_equals) {
+      boolean _tripleEquals = (_initialValue == null);
+      if (_tripleEquals) {
         return null;
       }
       CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
@@ -51,8 +50,8 @@ public class XtendAnnotationTypeElementDeclarationImpl extends XtendMemberDeclar
     {
       XtendField _delegate = this.getDelegate();
       XExpression _initialValue = _delegate.getInitialValue();
-      boolean _equals = Objects.equal(_initialValue, null);
-      if (_equals) {
+      boolean _tripleEquals = (_initialValue == null);
+      if (_tripleEquals) {
         return null;
       }
       CompilationUnitImpl _compilationUnit = this.getCompilationUnit();

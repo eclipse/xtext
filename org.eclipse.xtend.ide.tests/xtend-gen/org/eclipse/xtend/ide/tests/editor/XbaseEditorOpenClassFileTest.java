@@ -1,6 +1,5 @@
 package org.eclipse.xtend.ide.tests.editor;
 
-import com.google.common.base.Objects;
 import com.google.common.io.ByteStreams;
 import com.google.inject.Inject;
 import java.io.ByteArrayInputStream;
@@ -513,8 +512,7 @@ public class XbaseEditorOpenClassFileTest extends AbstractXtendUITestCase {
       InputStream _resourceAsStream = _class.getResourceAsStream(fileName);
       jarFile.create(_resourceAsStream, true, null);
       IFile _xifexpression = null;
-      boolean _notEquals = (!Objects.equal(fileNameOfSource, null));
-      if (_notEquals) {
+      if ((fileNameOfSource != null)) {
         IFile _xblockexpression = null;
         {
           IProject _project_1 = jp.getProject();
@@ -557,8 +555,8 @@ public class XbaseEditorOpenClassFileTest extends AbstractXtendUITestCase {
   public boolean supportsEditorOverride() {
     try {
       Class<?> _forName = Class.forName("org.eclipse.ui.ide.IEditorAssociationOverride");
-      boolean _notEquals = (!Objects.equal(_forName, null));
-      if (_notEquals) {
+      boolean _tripleNotEquals = (_forName != null);
+      if (_tripleNotEquals) {
         return true;
       }
     } catch (final Throwable _t) {

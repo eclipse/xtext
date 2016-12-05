@@ -70,7 +70,7 @@ class XtendResourceDescription extends DefaultResourceDescription {
 	}
 
 	override protected getLookUp() {
-		if (lookup == null)
+		if (lookup === null)
 			lookup = new EObjectDescriptionLookUp(computeExportedObjects());
 		return lookup;
 	}
@@ -81,18 +81,18 @@ class XtendResourceDescription extends DefaultResourceDescription {
 	
 
 	def override Iterable<QualifiedName> getImportedNames() {
-		if (importedNames != null) {
+		if (importedNames !== null) {
 			return importedNames;
 		}
 		val result = newHashSet()
 		val astRoot = resource.contents.head
-		if (astRoot != null) {
+		if (astRoot !== null) {
 			val types = typeResolver.resolveTypes(astRoot)
 			for (expression : EcoreUtil.getAllContents(astRoot, true).toIterable.filter(XExpression)) {
 				switch expression {
 					// an unresolved member feature call, where the receiver is a type literal could potentially become
 					// a reference to a nested type
-					XMemberFeatureCall case expression.feature != null && expression.feature.eIsProxy && !expression.explicitOperationCallOrBuilderSyntax: {
+					XMemberFeatureCall case expression.feature !== null && expression.feature.eIsProxy && !expression.explicitOperationCallOrBuilderSyntax: {
 						val receiver = expression.actualReceiver
 						switch receiver {
 							XAbstractFeatureCall case receiver.typeLiteral: {
@@ -114,7 +114,7 @@ class XtendResourceDescription extends DefaultResourceDescription {
 					}
 				}
 				val typeRef = types.getActualType(expression)
-				if (typeRef != null) {
+				if (typeRef !== null) {
 					registerAllTypes(typeRef.type) [
 						result += nameConverter.toQualifiedName(it).toLowerCase
 					]
@@ -126,7 +126,7 @@ class XtendResourceDescription extends DefaultResourceDescription {
 						types.getActualType(it)
 				].toIterable
 				for (typeRef : typesOfIdentifiables) {
-					if (typeRef != null) {
+					if (typeRef !== null) {
 						registerAllTypes(typeRef.type) [
 							result += nameConverter.toQualifiedName(it).toLowerCase
 						]
@@ -142,7 +142,7 @@ class XtendResourceDescription extends DefaultResourceDescription {
 	}
 	
 	def void registerAllTypes(JvmType type, (String)=>boolean acceptor) {
-		if (type == null || type.eIsProxy)
+		if (type === null || type.eIsProxy)
 			return;
 		if (!type.local && acceptor.apply(type.identifier)) {
 			switch type {

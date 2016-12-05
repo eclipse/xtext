@@ -191,18 +191,16 @@ public class XtendProjectConfigurator extends XtextProjectConfigurator {
     try {
       String _outputDirectory = state.getOutputDirectory();
       VirtualFile xtendGenMain = VfsUtil.createDirectoryIfMissing(_outputDirectory);
-      boolean _notEquals = (!Objects.equal(xtendGenMain, null));
-      if (_notEquals) {
+      if ((xtendGenMain != null)) {
         this.addAsSourceFolder(rootModel, xtendGenMain, JavaSourceRootType.SOURCE);
       }
       String _outputDirectory_1 = state.getOutputDirectory();
       String _testOutputDirectory = state.getTestOutputDirectory();
-      boolean _notEquals_1 = (!Objects.equal(_outputDirectory_1, _testOutputDirectory));
-      if (_notEquals_1) {
+      boolean _notEquals = (!Objects.equal(_outputDirectory_1, _testOutputDirectory));
+      if (_notEquals) {
         String _testOutputDirectory_1 = state.getTestOutputDirectory();
         VirtualFile xtendGenTest = VfsUtil.createDirectoryIfMissing(_testOutputDirectory_1);
-        boolean _notEquals_2 = (!Objects.equal(xtendGenTest, null));
-        if (_notEquals_2) {
+        if ((xtendGenTest != null)) {
           this.addAsSourceFolder(rootModel, xtendGenTest, JavaSourceRootType.TEST_SOURCE);
         }
       }

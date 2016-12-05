@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.ide.codebuilder;
 
-import com.google.common.base.Objects;
 import org.eclipse.xtend.ide.codebuilder.AbstractCodeBuilder;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.xbase.compiler.ISourceAppender;
@@ -57,7 +56,7 @@ public abstract class AbstractParameterBuilder extends AbstractCodeBuilder {
   
   @Override
   public boolean isValid() {
-    return (((!Objects.equal(this.type, null)) && ((!this.varArgsFlag) || (this.type instanceof ArrayTypeReference))) && super.isValid());
+    return (((this.type != null) && ((!this.varArgsFlag) || (this.type instanceof ArrayTypeReference))) && super.isValid());
   }
   
   @Override

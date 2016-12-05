@@ -80,12 +80,12 @@ abstract class JvmElementImpl<T extends EObject> extends AbstractElementImpl<T> 
 	
 	def remove() {
 		checkMutable
-		Preconditions.checkState(delegate.eResource != null, '''This element has already been removed: «delegate»''')
+		Preconditions.checkState(delegate.eResource !== null, '''This element has already been removed: «delegate»''')
 		
 		compilationUnit.jvmModelAssociator.removeAllAssociation(delegate)
 		EcoreUtil.remove(delegate)
 		
-		Preconditions.checkState(delegate.eResource == null, '''Couldn't remove: «delegate»''')
+		Preconditions.checkState(delegate.eResource === null, '''Couldn't remove: «delegate»''')
 	}
 	
 	protected final def checkMutable() {
@@ -115,7 +115,7 @@ abstract class JvmAnnotationTargetImpl<T extends JvmAnnotationTarget> extends Jv
 	
 	def addAnnotation(AnnotationReference annotationReference) {
 		checkMutable
-		Preconditions.checkArgument(annotationReference != null, "annotationReference cannot be null")
+		Preconditions.checkArgument(annotationReference !== null, "annotationReference cannot be null")
 		if (annotationReference instanceof JvmAnnotationReferenceImpl) {
 			val jvmAnnotationReference = annotationReference.delegate.cloneWithProxies
 			this.delegate.annotations += jvmAnnotationReference
@@ -149,7 +149,7 @@ abstract class JvmMemberDeclarationImpl<T extends JvmMember> extends JvmAnnotati
 	def setDocComment(String docComment) {
 		checkMutable
 		var adapter = EcoreUtil.getAdapter(delegate.eAdapters(), DocumentationAdapter) as DocumentationAdapter;
-		if (adapter == null) {
+		if (adapter === null) {
 			adapter = new DocumentationAdapter
 			delegate.eAdapters += adapter
 		}
@@ -199,7 +199,7 @@ abstract class JvmMemberDeclarationImpl<T extends JvmMember> extends JvmAnnotati
 		} else {
 			delegate.deprecated = false
 			val existingReference = findAnnotation(compilationUnit.typeLookup.findTypeGlobally(Deprecated))
-			if (existingReference != null) {
+			if (existingReference !== null) {
 				removeAnnotation(existingReference)
 			}
 		}
@@ -222,7 +222,7 @@ abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends JvmMemb
 	}
 	
 	def isAssignableFrom(Type otherType) {
-		if (otherType == null)
+		if (otherType === null)
 			return false;
 		val thisTypeRef = compilationUnit.typeReferenceProvider.newTypeReference(this as Type)
 		val thatTypeRef = compilationUnit.typeReferenceProvider.newTypeReference(otherType)
@@ -231,10 +231,10 @@ abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends JvmMemb
 	
 	def addConstructor(Procedure1<MutableConstructorDeclaration> initializer) {
 		checkMutable
-		Preconditions.checkArgument(initializer != null, "initializer cannot be null")
+		Preconditions.checkArgument(initializer !== null, "initializer cannot be null")
 		// remove default constructor
 		val constructor = delegate.members.filter(JvmConstructor).findFirst[compilationUnit.typeExtensions.isSingleSyntheticDefaultConstructor(it)]
-		if (constructor != null) {
+		if (constructor !== null) {
 			EcoreUtil.remove(constructor)
 		}
 		val newConstructor = TypesFactory.eINSTANCE.createJvmConstructor
@@ -249,7 +249,7 @@ abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends JvmMemb
 	def addField(String name, Procedure1<MutableFieldDeclaration> initializer) {
 		checkMutable
 		checkJavaIdentifier(name, "name")
-		Preconditions.checkArgument(initializer != null, "initializer cannot be null")
+		Preconditions.checkArgument(initializer !== null, "initializer cannot be null")
 		val newField = TypesFactory.eINSTANCE.createJvmField
 		newField.simpleName = name
 		newField.visibility = JvmVisibility.PRIVATE
@@ -262,7 +262,7 @@ abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends JvmMemb
 	def addMethod(String name, Procedure1<MutableMethodDeclaration> initializer) {
 		checkMutable
 		checkJavaIdentifier(name, "name")
-		Preconditions.checkArgument(initializer != null, "initializer cannot be null")
+		Preconditions.checkArgument(initializer !== null, "initializer cannot be null")
 		val newMethod = TypesFactory.eINSTANCE.createJvmOperation
 		newMethod.visibility = JvmVisibility.PUBLIC
 		newMethod.simpleName = name
@@ -453,7 +453,7 @@ class JvmInterfaceDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericType>
 	override addMethod(String name, Procedure1<MutableMethodDeclaration> initializer) {
 		checkMutable
 		checkJavaIdentifier(name, "name")
-		Preconditions.checkArgument(initializer != null, "initializer cannot be null")
+		Preconditions.checkArgument(initializer !== null, "initializer cannot be null")
 		val newMethod = TypesFactory.eINSTANCE.createJvmOperation
 		newMethod.visibility = JvmVisibility.PUBLIC
 		newMethod.simpleName = name
@@ -537,7 +537,7 @@ class MutableJvmAnnotationTypeDeclarationImpl extends JvmAnnotationTypeDeclarati
 	override MutableAnnotationTypeElementDeclaration addAnnotationTypeElement(String name, Procedure1<MutableAnnotationTypeElementDeclaration> initializer) {
 		checkMutable
 		checkJavaIdentifier(name, "name")
-		Preconditions.checkArgument(initializer != null, "initializer cannot be null")
+		Preconditions.checkArgument(initializer !== null, "initializer cannot be null")
 		val newAnnotationElement = TypesFactory.eINSTANCE.createJvmOperation
 		newAnnotationElement.simpleName = name
 		newAnnotationElement.visibility = JvmVisibility.PUBLIC
@@ -655,7 +655,7 @@ class MutableJvmEnumerationTypeDeclarationImpl extends JvmEnumerationTypeDeclara
 	override addValue(String name, Procedure1<MutableEnumerationValueDeclaration> initializer) {
 		checkMutable
 		checkJavaIdentifier(name, "name")
-		Preconditions.checkArgument(initializer != null, "initializer cannot be null")
+		Preconditions.checkArgument(initializer !== null, "initializer cannot be null")
 		val jvmLiteral = TypesFactory.eINSTANCE.createJvmEnumerationLiteral
 		jvmLiteral.simpleName = name
 		jvmLiteral.visibility = JvmVisibility.PUBLIC
@@ -770,13 +770,13 @@ class MutableJvmClassDeclarationImpl extends JvmClassDeclarationImpl implements 
 		checkMutable
 		checkInferredTypeReferences("extended class", superclass)
 		val newTypeRef = 
-			if (superclass != null) {
+			if (superclass !== null) {
 				compilationUnit.toJvmTypeReference(superclass)
 			} else {
 				compilationUnit.typeReferences.getTypeForName(Object, compilationUnit.xtendFile)
 			}
 		val oldType = delegate.superTypes.findFirst[it.type instanceof JvmGenericType && !(type as JvmGenericType).isInterface]
-		if (oldType != null)
+		if (oldType !== null)
 			delegate.superTypes.remove(oldType)
 		delegate.superTypes.add(newTypeRef)
 	}
@@ -886,7 +886,7 @@ abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> extends Jvm
 	
 	def setBody(Expression body) {
 		checkMutable
-		if (body == null) {
+		if (body === null) {
 			compilationUnit.jvmTypesBuilder.removeExistingBody(delegate)
 		} else {
 			compilationUnit.jvmTypesBuilder.setBody(delegate, (body as ExpressionImpl).delegate)
@@ -899,7 +899,7 @@ abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> extends Jvm
 		checkInferredTypeReferences("exception type", exceptions)
 		delegate.exceptions.clear
 		for (exceptionType : exceptions) {
-			if (exceptionType != null) {
+			if (exceptionType !== null) {
 				delegate.exceptions.add(compilationUnit.toJvmTypeReference(exceptionType))
 			}
 		}
@@ -929,20 +929,20 @@ abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> extends Jvm
 	
 	def setBody(CompilationStrategy compilationStrategy) {
 		checkMutable
-		Preconditions.checkArgument(compilationStrategy != null, "compilationStrategy cannot be null")
+		Preconditions.checkArgument(compilationStrategy !== null, "compilationStrategy cannot be null")
 		compilationUnit.setCompilationStrategy(delegate, compilationStrategy)
 	}
 	
 	def setBody(StringConcatenationClient compilationTemplate) {
 		checkMutable
-		Preconditions.checkArgument(compilationTemplate != null, "compilationTemplate cannot be null")
+		Preconditions.checkArgument(compilationTemplate !== null, "compilationTemplate cannot be null")
 		compilationUnit.setCompilationTemplate(delegate, compilationTemplate)
 	}
 	
 	def MutableParameterDeclaration addParameter(String name, TypeReference type) {
 		checkMutable
 		checkJavaIdentifier(name, "name");
-		Preconditions.checkArgument(type != null, "type cannot be null");
+		Preconditions.checkArgument(type !== null, "type cannot be null");
 		if (type.inferred)
 			throw new IllegalArgumentException("Cannot use inferred type as parameter type.")
 		val param = TypesFactory.eINSTANCE.createJvmFormalParameter
@@ -1021,7 +1021,7 @@ class MutableJvmMethodDeclarationImpl extends JvmMethodDeclarationImpl implement
 
 	override setReturnType(TypeReference type) {
 		checkMutable
-		Preconditions.checkArgument(type != null, "returnType cannot be null");
+		Preconditions.checkArgument(type !== null, "returnType cannot be null");
 		delegate.setReturnType(compilationUnit.toJvmTypeReference(type))
 	}
 	
@@ -1177,7 +1177,7 @@ class MutableJvmFieldDeclarationImpl extends JvmFieldDeclarationImpl implements 
 	
 	override setInitializer(Expression initializer) {
 		checkMutable
-		if (initializer == null) {
+		if (initializer === null) {
 			compilationUnit.jvmTypesBuilder.removeExistingBody(delegate)
 		} else {
 			compilationUnit.jvmTypesBuilder.setInitializer(delegate, (initializer as ExpressionImpl).delegate)
@@ -1186,13 +1186,13 @@ class MutableJvmFieldDeclarationImpl extends JvmFieldDeclarationImpl implements 
 	
 	override setInitializer(CompilationStrategy initializer) {
 		checkMutable
-		Preconditions.checkArgument(initializer != null, "initializer cannot be null")
+		Preconditions.checkArgument(initializer !== null, "initializer cannot be null")
 		compilationUnit.setCompilationStrategy(delegate, initializer)
 	}
 	
 	override setInitializer(StringConcatenationClient template) {
 		checkMutable
-		Preconditions.checkArgument(template != null, "template cannot be null")
+		Preconditions.checkArgument(template !== null, "template cannot be null")
 		compilationUnit.setCompilationTemplate(delegate, template)
 	}
 	
@@ -1218,7 +1218,7 @@ class MutableJvmFieldDeclarationImpl extends JvmFieldDeclarationImpl implements 
 	
 	override setType(TypeReference type) {
 		checkMutable
-		Preconditions.checkArgument(type != null, "type cannot be null");
+		Preconditions.checkArgument(type !== null, "type cannot be null");
 		delegate.setType(compilationUnit.toJvmTypeReference(type))
 	}
 	
@@ -1229,7 +1229,7 @@ class MutableJvmFieldDeclarationImpl extends JvmFieldDeclarationImpl implements 
 	
 	private def internalGenericSetConstantValue(Object value) {
 		checkMutable
-		Preconditions.checkArgument(value != null, "value cannot be null");
+		Preconditions.checkArgument(value !== null, "value cannot be null");
 		delegate.constant = true
 		delegate.final = true
 		delegate.static = true
@@ -1330,12 +1330,12 @@ class MutableJvmTypeParameterDeclarationImpl extends JvmTypeParameterDeclaration
 	
 	override remove() {
 		checkMutable
-		Preconditions.checkState(delegate.eResource != null, '''This element has already been removed: «delegate»''')
+		Preconditions.checkState(delegate.eResource !== null, '''This element has already been removed: «delegate»''')
 		
 		compilationUnit.jvmModelAssociator.removeAllAssociation(delegate)
 		EcoreUtil.remove(delegate)
 		
-		Preconditions.checkState(delegate.eResource == null, '''Couldn't remove: «delegate»''')
+		Preconditions.checkState(delegate.eResource === null, '''Couldn't remove: «delegate»''')
 	}
 	
 	override addAnnotation(AnnotationReference annotationReference) {
@@ -1372,7 +1372,7 @@ class JvmTypeParameterDeclarationImpl extends TypeParameterDeclarationImpl imple
 	}
 	
 	override isAssignableFrom(Type otherType) {
-		if (otherType == null)
+		if (otherType === null)
 			return false;
 		val thisTypeRef = compilationUnit.typeReferenceProvider.newTypeReference(this)
 		val thatTypeRef = compilationUnit.typeReferenceProvider.newTypeReference(otherType)

@@ -42,7 +42,7 @@ class ProcessorInstanceForJvmTypeProvider {
 		}
 		
 		override setTarget(Notifier newTarget) {
-			if (newTarget==null) {
+			if (newTarget===null) {
 				discard()
 			}
 		}
@@ -77,7 +77,7 @@ class ProcessorInstanceForJvmTypeProvider {
 	def protected getClassLoader(EObject ctx) {
 		val resourceSet = ctx.eResource.resourceSet
 		val adapter = resourceSet.eAdapters.filter(ProcessorClassloaderAdapter).head
-		if (adapter != null) {
+		if (adapter !== null) {
 			return adapter.getClassLoader
 		}
 		switch resourceSet {
@@ -98,7 +98,7 @@ class ProcessorInstanceForJvmTypeProvider {
 				} else {
 					jvmTypeLoader
 				}
-				if (processorClassLoader != null) {
+				if (processorClassLoader !== null) {
 					resourceSet.eAdapters += new ProcessorClassloaderAdapter(processorClassLoader)
 					return processorClassLoader
 				}

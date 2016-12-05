@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.core.macro.declaration;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -81,8 +80,7 @@ public class XtendTypeParameterDeclarationImpl extends AbstractElementImpl<JvmTy
   
   @Override
   public boolean isAssignableFrom(final Type otherType) {
-    boolean _equals = Objects.equal(otherType, null);
-    if (_equals) {
+    if ((otherType == null)) {
       return false;
     }
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();

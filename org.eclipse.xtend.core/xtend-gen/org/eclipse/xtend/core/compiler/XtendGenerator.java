@@ -373,8 +373,8 @@ public class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
             _traceSignificant_2.append(_simpleName_4);
             if ((((JvmField)it_1).isFinal() && ((JvmField)it_1).isStatic())) {
               Object _constantValue = ((JvmField)it_1).getConstantValue();
-              boolean _notEquals = (!Objects.equal(_constantValue, null));
-              if (_notEquals) {
+              boolean _tripleNotEquals = (_constantValue != null);
+              if (_tripleNotEquals) {
                 tracedAppendable_1.append(" = ");
                 Object _constantValue_1 = ((JvmField)it_1).getConstantValue();
                 this.generateJavaConstant(_constantValue_1, tracedAppendable_1);

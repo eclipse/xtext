@@ -87,8 +87,8 @@ public class RichStringFormatter {
   protected void _format(final RichString richString, final IFormattableDocument doc) {
     EObject _eContainer = richString.eContainer();
     RichString _containerOfType = EcoreUtil2.<RichString>getContainerOfType(_eContainer, RichString.class);
-    boolean _notEquals = (!Objects.equal(_containerOfType, null));
-    if (_notEquals) {
+    boolean _tripleNotEquals = (_containerOfType != null);
+    if (_tripleNotEquals) {
       return;
     }
     IEObjectRegion _regionForEObject = this._iTextRegionExtensions.regionForEObject(richString);
@@ -201,8 +201,8 @@ public class RichStringFormatter {
     while (i.hasNext()) {
       INode _next = i.next();
       SyntaxErrorMessage _syntaxErrorMessage = _next.getSyntaxErrorMessage();
-      boolean _notEquals = (!Objects.equal(_syntaxErrorMessage, null));
-      if (_notEquals) {
+      boolean _tripleNotEquals = (_syntaxErrorMessage != null);
+      if (_tripleNotEquals) {
         return true;
       }
     }
@@ -271,8 +271,8 @@ public class RichStringFormatter {
   
   protected void _suppressLineWraps(final IHiddenRegionFormatting it) {
     String _space = it.getSpace();
-    boolean _equals = Objects.equal(_space, null);
-    if (_equals) {
+    boolean _tripleEquals = (_space == null);
+    if (_tripleEquals) {
       it.setSpace(" ");
     }
     it.setNewLinesMin(null);

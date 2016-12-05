@@ -91,7 +91,7 @@ class ExternalizedProcessor extends AbstractClassProcessor implements CodeGenera
 
 	def getInitializerAsString(FieldDeclaration f) {
 		val string = f.initializer?.toString
-		if(string == null)
+		if(string === null)
 			return "empty string"
 		return string.substring(1, string.length - 1)
 	}

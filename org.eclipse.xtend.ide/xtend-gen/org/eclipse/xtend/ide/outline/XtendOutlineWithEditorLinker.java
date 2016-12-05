@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.ide.outline;
 
-import com.google.common.base.Objects;
 import java.util.List;
 import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.jface.viewers.ISelection;
@@ -67,7 +66,7 @@ public class XtendOutlineWithEditorLinker extends OutlineWithEditorLinker {
   
   protected void findNodesInRange(final IOutlineNode input, final ITextRegion selectedTextRegion, final List<IOutlineNode> nodes) {
     final ITextRegion textRegion = input.getFullTextRegion();
-    if ((Objects.equal(textRegion, null) || textRegion.contains(selectedTextRegion))) {
+    if (((textRegion == null) || textRegion.contains(selectedTextRegion))) {
       nodes.add(input);
     }
     List<IOutlineNode> _children = input.getChildren();

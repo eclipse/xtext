@@ -49,7 +49,7 @@ class GetProcessor implements TransformationParticipant<MutableMethodDeclaration
 		for (m : methods) {
 			val annotation = m.findAnnotation(typeof(Get).findTypeGlobally)
 			val pattern = annotation.getValue('value')
-			if (pattern == null) {
+			if (pattern === null) {
 				annotation.addError('A URL pattern must be provided.')
 			} else {
 				

@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.core.tests.imports;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.List;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -53,7 +52,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
       ReplaceRegion lastChange = null;
       for (final ReplaceRegion it : sortedChanges) {
         {
-          if (((!Objects.equal(lastChange, null)) && (lastChange.getEndOffset() > it.getOffset()))) {
+          if (((lastChange != null) && (lastChange.getEndOffset() > it.getOffset()))) {
             Assert.fail(((("Overlapping text edits: " + lastChange) + " and ") + it));
           }
           lastChange = it;

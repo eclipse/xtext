@@ -284,7 +284,7 @@ class DelegatingClassloader extends ClassLoader {
 	
 	override findClass(String name) throws ClassNotFoundException {
 		val result = classFinder.getCompiledClass(name)
-		if (result != null)
+		if (result !== null)
 			return result
 		super.findClass(name)
 	}

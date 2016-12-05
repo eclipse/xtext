@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.ide.codebuilder;
 
-import com.google.common.base.Objects;
 import java.util.List;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.xtend.ide.codebuilder.AbstractMethodBuilder;
@@ -24,7 +23,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 public class JavaMethodBuilder extends AbstractMethodBuilder implements ICodeBuilder.Java {
   @Override
   public boolean isValid() {
-    return (super.isValid() && (!Objects.equal(this.getMethodName(), null)));
+    return (super.isValid() && (this.getMethodName() != null));
   }
   
   @Override

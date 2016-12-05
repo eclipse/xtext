@@ -46,14 +46,14 @@ class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
 			computedSuperType = getServices.typeConformanceComputer.getCommonSuperType((typeReferences + newImmutableList(owner.newAnyTypeReference, owner.newAnyTypeReference)).toList, owner)
 			assertEquals(superTypeAndParam.key, computedSuperType?.simpleName)
 		}
-		if (computedSuperType != null) {
+		if (computedSuperType !== null) {
 			computedSuperType => [ superType |
 				typeReferences.forEach [
 					assertEquals(superTypeAndParam.key, conformanceComputer.getCommonSuperType(#[it, superType], superType.owner)?.simpleName)
 				]
 			]
 		}
-		if (computedSuperType != null) {
+		if (computedSuperType !== null) {
 			for(subType: typeReferences) {
 				assertTrue(computedSuperType.isAssignableFrom(subType))
 			}

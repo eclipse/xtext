@@ -184,11 +184,10 @@ public class MemberFromSuperImplementor {
       Iterable<JvmDeclaredType> _map = IterableExtensions.<JvmTypeReference, JvmDeclaredType>map(_filter, _function_3);
       final Function1<JvmDeclaredType, Boolean> _function_4 = (JvmDeclaredType it) -> {
         Procedure1<? super ISourceAppender> _implementedInterface = this.getImplementedInterface(it, superInterface);
-        return Boolean.valueOf((!Objects.equal(_implementedInterface, null)));
+        return Boolean.valueOf((_implementedInterface != null));
       };
       final JvmDeclaredType interfaze = IterableExtensions.<JvmDeclaredType>findFirst(_map, _function_4);
-      boolean _notEquals = (!Objects.equal(interfaze, null));
-      if (_notEquals) {
+      if ((interfaze != null)) {
         final Procedure1<ISourceAppender> _function_5 = (ISourceAppender it) -> {
           ISourceAppender _append = it.append(interfaze);
           _append.append(".");
@@ -248,8 +247,8 @@ public class MemberFromSuperImplementor {
       parameterBuilder.setName(_simpleName);
       parameterBuilder.setType(it);
       JvmAnnotationReference _findAnnotation = this.annotationLookup.findAnnotation(declaredParameter, Extension.class);
-      boolean _notEquals = (!Objects.equal(_findAnnotation, null));
-      parameterBuilder.setExtensionFlag(_notEquals);
+      boolean _tripleNotEquals = (_findAnnotation != null);
+      parameterBuilder.setExtensionFlag(_tripleNotEquals);
     };
     IterableExtensions.<LightweightTypeReference>forEach(_resolvedParameterTypes, _function);
     boolean _isVarArgs = executable.isVarArgs();

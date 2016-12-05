@@ -94,12 +94,12 @@ class XtendProjectConfigurator extends XtextProjectConfigurator {
 
 	def void createOutputFolders(ModifiableRootModel rootModel, XbaseGeneratorConfigurationState state) {
 		var xtendGenMain = VfsUtil.createDirectoryIfMissing(state.outputDirectory)
-		if (xtendGenMain != null) {
+		if (xtendGenMain !== null) {
 			rootModel.addAsSourceFolder(xtendGenMain, JavaSourceRootType.SOURCE)
 		}
 		if (state.outputDirectory != state.testOutputDirectory) {
 			var xtendGenTest = VfsUtil.createDirectoryIfMissing(state.testOutputDirectory)
-			if (xtendGenTest != null) {
+			if (xtendGenTest !== null) {
 				rootModel.addAsSourceFolder(xtendGenTest, JavaSourceRootType.TEST_SOURCE)
 			}
 		}

@@ -87,11 +87,11 @@ abstract class XtendCodeContextType extends TemplateContextType {
 	protected def getTokenSet(PsiFile file, int offset) {
 		val lexer = parserDefinition.createLexer(file.project)
 		lexer.start(file.text)
-		while (lexer.tokenType != null && lexer.tokenEnd <= offset)
+		while (lexer.tokenType !== null && lexer.tokenEnd <= offset)
 			lexer.advance
 
 		val tokenType = lexer.tokenType
-		if (tokenType == null)
+		if (tokenType === null)
 			return false
 
 		tokenSetProvider.getTokenSet(tokenType)

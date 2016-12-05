@@ -36,7 +36,7 @@ class XtendAnnotationBuilder extends AbstractAnnotationBuilder implements ICodeB
 	@Inject extension InsertionOffsets
 	
 	override isValid() {
-		super.valid && annotationName != null && visibility == JvmVisibility.PUBLIC  
+		super.valid && annotationName !== null && visibility == JvmVisibility.PUBLIC  
 	}	
 
 	override build(ISourceAppender appendable) {
@@ -63,7 +63,7 @@ class XtendAnnotationBuilder extends AbstractAnnotationBuilder implements ICodeB
 class JavaAnnotationBuilder extends AbstractAnnotationBuilder implements ICodeBuilder.Java {
 	
 	override isValid() {
-		super.valid && annotationName != null  
+		super.valid && annotationName !== null  
 	}	
 
 	override build(ISourceAppender appendable) {

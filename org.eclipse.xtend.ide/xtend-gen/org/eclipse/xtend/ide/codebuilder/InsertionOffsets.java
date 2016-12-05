@@ -40,14 +40,13 @@ public class InsertionOffsets {
       return this.inEmpty(ownerType);
     }
     final XtendField callingMember = EcoreUtil2.<XtendField>getContainerOfType(call, XtendField.class);
-    if (((!Objects.equal(callingMember, null)) && ownerType.getMembers().contains(callingMember))) {
+    if (((callingMember != null) && ownerType.getMembers().contains(callingMember))) {
       return this.before(callingMember);
     }
     EList<XtendMember> _members_1 = ownerType.getMembers();
     Iterable<XtendField> _filter = Iterables.<XtendField>filter(_members_1, XtendField.class);
     final XtendField lastDefinedField = IterableExtensions.<XtendField>last(_filter);
-    boolean _equals = Objects.equal(lastDefinedField, null);
-    if (_equals) {
+    if ((lastDefinedField == null)) {
       EList<XtendMember> _members_2 = ownerType.getMembers();
       XtendMember _head = IterableExtensions.<XtendMember>head(_members_2);
       return this.before(_head);
@@ -58,7 +57,7 @@ public class InsertionOffsets {
   
   public int getNewMethodInsertOffset(final EObject call, final XtendTypeDeclaration ownerType) {
     final XtendMember callingMember = EcoreUtil2.<XtendMember>getContainerOfType(call, XtendMember.class);
-    if (((!Objects.equal(callingMember, null)) && ownerType.getMembers().contains(callingMember))) {
+    if (((callingMember != null) && ownerType.getMembers().contains(callingMember))) {
       return this.after(callingMember);
     } else {
       EList<XtendMember> _members = ownerType.getMembers();
@@ -77,8 +76,7 @@ public class InsertionOffsets {
     EList<XtendMember> _members = ownerType.getMembers();
     Iterable<XtendConstructor> _filter = Iterables.<XtendConstructor>filter(_members, XtendConstructor.class);
     final XtendConstructor lastDefinedConstructor = IterableExtensions.<XtendConstructor>last(_filter);
-    boolean _equals = Objects.equal(lastDefinedConstructor, null);
-    if (_equals) {
+    if ((lastDefinedConstructor == null)) {
       return this.getNewFieldInsertOffset(call, ownerType);
     } else {
       return this.after(lastDefinedConstructor);
@@ -110,8 +108,7 @@ public class InsertionOffsets {
       };
       final ILeafNode openingBraceNode = IterableExtensions.<ILeafNode>findFirst(_leafNodes, _function);
       int _xifexpression = (int) 0;
-      boolean _notEquals = (!Objects.equal(openingBraceNode, null));
-      if (_notEquals) {
+      if ((openingBraceNode != null)) {
         int _offset = openingBraceNode.getOffset();
         _xifexpression = (_offset + 1);
       } else {

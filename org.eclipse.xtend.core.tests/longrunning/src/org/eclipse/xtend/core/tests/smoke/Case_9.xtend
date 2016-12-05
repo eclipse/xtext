@@ -10,7 +10,7 @@ import java.util.List
 class Case_9 extends Case_8 {
 	
 	def dispatch CharSequence generateTypeRef(ENamedElement c) {
-		  if (c.eContainer != null)
+		  if (c.eContainer !== null)
 		    c.eContainer.generateTypeRef
 		  else if (c.eIsProxy)
 		    '''«c.name»'''

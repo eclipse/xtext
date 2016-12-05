@@ -37,7 +37,7 @@ class XtendMethodBuilder extends AbstractMethodBuilder implements ICodeBuilder.X
 	@Inject extension InsertionOffsets
 
 	override isValid() {
-		super.isValid() && methodName != null
+		super.isValid() && methodName !== null
 	}
 	
 	override build(ISourceAppender appendable) {
@@ -75,7 +75,7 @@ class XtendMethodBuilder extends AbstractMethodBuilder implements ICodeBuilder.X
 class JavaMethodBuilder extends AbstractMethodBuilder implements ICodeBuilder.Java {
 	
 	override isValid() {
-		super.isValid() && methodName != null
+		super.isValid() && methodName !== null
 	}
 	
 	override build(ISourceAppender appendable) {

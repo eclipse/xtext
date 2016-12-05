@@ -34,7 +34,7 @@ class Declarators {
 	
 	def getDeclaratorData(TargetURIs targetURIs, IReferenceFinder.IResourceAccess resourceAccess) {
 		var result = targetURIs.getUserData(KEY)
-		if (result != null) {
+		if (result !== null) {
 			return result
 		}
 		val declaratorNames = newHashSet()
@@ -42,9 +42,9 @@ class Declarators {
 			resourceAccess.readOnly(uri) [
 				targetURIs.getEObjectURIs(uri).forEach [ objectURI |
 					val object = getEObject(objectURI, true)
-					if (object != null) {
+					if (object !== null) {
 						val type = EcoreUtil2.getContainerOfType(object, JvmType)
-						if (type != null) {
+						if (type !== null) {
 							declaratorNames += nameConverter.toQualifiedName(type.identifier).toLowerCase
 							declaratorNames += nameConverter.toQualifiedName(type.getQualifiedName('.')).toLowerCase
 						}

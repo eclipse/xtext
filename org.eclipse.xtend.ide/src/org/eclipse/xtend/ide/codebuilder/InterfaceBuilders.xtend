@@ -36,7 +36,7 @@ class XtendInterfaceBuilder extends AbstractInterfaceBuilder implements ICodeBui
 	@Inject extension InsertionOffsets
 	
 	override isValid() {
-		super.valid && interfaceName != null && visibility == JvmVisibility.PUBLIC  
+		super.valid && interfaceName !== null && visibility == JvmVisibility.PUBLIC  
 	}	
 
 	override build(ISourceAppender appendable) {
@@ -63,7 +63,7 @@ class XtendInterfaceBuilder extends AbstractInterfaceBuilder implements ICodeBui
 class JavaInterfaceBuilder extends AbstractInterfaceBuilder implements ICodeBuilder.Java {
 	
 	override isValid() {
-		super.valid && interfaceName != null  
+		super.valid && interfaceName !== null  
 	}	
 
 	override build(ISourceAppender appendable) {

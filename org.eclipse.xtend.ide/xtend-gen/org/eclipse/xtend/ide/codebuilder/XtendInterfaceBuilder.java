@@ -30,7 +30,7 @@ public class XtendInterfaceBuilder extends AbstractInterfaceBuilder implements I
   
   @Override
   public boolean isValid() {
-    return ((super.isValid() && (!Objects.equal(this.getInterfaceName(), null))) && Objects.equal(this.getVisibility(), JvmVisibility.PUBLIC));
+    return ((super.isValid() && (this.getInterfaceName() != null)) && Objects.equal(this.getVisibility(), JvmVisibility.PUBLIC));
   }
   
   @Override

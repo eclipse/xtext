@@ -66,16 +66,14 @@ public class FileLocationsImpl implements FileLocations {
     Path _xblockexpression = null;
     {
       final Path projectFolder = this.getProjectFolder(path);
-      boolean _equals = Objects.equal(projectFolder, null);
-      if (_equals) {
+      if ((projectFolder == null)) {
         return null;
       }
       Set<OutputConfiguration> _outputConfigurations = this.outputConfigurationProvider.getOutputConfigurations(this.context);
       final OutputConfiguration outputConfiguration = IterableExtensions.<OutputConfiguration>head(_outputConfigurations);
       final Path sourceFolder = this.getSourceFolder(path);
       String _xifexpression = null;
-      boolean _equals_1 = Objects.equal(sourceFolder, null);
-      if (_equals_1) {
+      if ((sourceFolder == null)) {
         _xifexpression = outputConfiguration.getOutputDirectory();
       } else {
         String _xblockexpression_1 = null;

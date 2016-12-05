@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.core.macro.declaration;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.macro.ConditionUtils;
@@ -182,8 +181,7 @@ public class MutableJvmClassDeclarationImpl extends JvmClassDeclarationImpl impl
     this.checkMutable();
     ConditionUtils.checkInferredTypeReferences("extended class", superclass);
     JvmTypeReference _xifexpression = null;
-    boolean _notEquals = (!Objects.equal(superclass, null));
-    if (_notEquals) {
+    if ((superclass != null)) {
       CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
       _xifexpression = _compilationUnit.toJvmTypeReference(superclass);
     } else {
@@ -200,8 +198,7 @@ public class MutableJvmClassDeclarationImpl extends JvmClassDeclarationImpl impl
       return Boolean.valueOf(((it.getType() instanceof JvmGenericType) && (!((JvmGenericType) it.getType()).isInterface())));
     };
     final JvmTypeReference oldType = IterableExtensions.<JvmTypeReference>findFirst(_superTypes, _function);
-    boolean _notEquals_1 = (!Objects.equal(oldType, null));
-    if (_notEquals_1) {
+    if ((oldType != null)) {
       JvmGenericType _delegate_1 = this.getDelegate();
       EList<JvmTypeReference> _superTypes_1 = _delegate_1.getSuperTypes();
       _superTypes_1.remove(oldType);

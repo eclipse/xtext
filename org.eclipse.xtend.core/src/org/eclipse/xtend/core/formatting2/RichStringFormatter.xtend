@@ -62,7 +62,7 @@ import static org.eclipse.xtext.formatting2.FormatterPreferenceKeys.*
 	val extension ITextRegionExtensions
 
 	def dispatch void format(RichString richString, IFormattableDocument doc) {
-		if (EcoreUtil2.getContainerOfType(richString.eContainer, RichString) != null)
+		if (EcoreUtil2.getContainerOfType(richString.eContainer, RichString) !== null)
 			return;
 		if (richString.regionForEObject.hasSyntaxError)
 			return;
@@ -115,7 +115,7 @@ import static org.eclipse.xtext.formatting2.FormatterPreferenceKeys.*
 		// TODO: remove if https://bugs.eclipse.org/bugs/show_bug.cgi?id=465299 gets fixed 
 		val i = region.node.getAsTreeIterable().iterator();
 		while (i.hasNext()) {
-			if (i.next().getSyntaxErrorMessage() != null)
+			if (i.next().getSyntaxErrorMessage() !== null)
 				return true;
 		}
 		return false;
@@ -160,7 +160,7 @@ import static org.eclipse.xtext.formatting2.FormatterPreferenceKeys.*
 	}
 
 	def protected dispatch  void suppressLineWraps(IHiddenRegionFormatting it) {
-		if (space == null)
+		if (space === null)
 			space = " "
 		it.newLinesMin = null
 		newLinesDefault = null
@@ -267,7 +267,7 @@ class RichStringToLineModel extends AbstractRichStringPartAcceptor.ForLoopOnce {
 		if (lastLiteralEndOffset > 0 && contentStartOffset < 0)
 			contentStartOffset = lastLiteralEndOffset
 		val node = nodeModelAccess.regionForEObject(object)?.regionFor?.feature(XbasePackage.Literals.XSTRING_LITERAL__VALUE)
-		if (node != null) {
+		if (node !== null) {
 			offset = node.offset + node.literalPrefixLenght
 			lastLiteralEndOffset = node.endOffset - node.literalPostfixLenght
 		}

@@ -87,7 +87,7 @@ class XtendFileHyperlink implements IHyperlink {
 	
 	def private ILaunch getLaunch() {
 		val process = console.getAttribute(IDebugUIConstants.ATTR_CONSOLE_PROCESS) as IProcess
-		if (process != null) {
+		if (process !== null) {
 		    return process.getLaunch();
 		}
 		return null;

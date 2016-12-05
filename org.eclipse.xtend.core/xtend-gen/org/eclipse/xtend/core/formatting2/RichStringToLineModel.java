@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.core.formatting2;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.util.List;
 import java.util.Stack;
@@ -161,8 +160,7 @@ public class RichStringToLineModel extends AbstractRichStringPartAcceptor.ForLoo
       _feature=_regionFor.feature(XbasePackage.Literals.XSTRING_LITERAL__VALUE);
     }
     final ISemanticRegion node = _feature;
-    boolean _notEquals = (!Objects.equal(node, null));
-    if (_notEquals) {
+    if ((node != null)) {
       int _offset = node.getOffset();
       int _literalPrefixLenght = this.literalPrefixLenght(node);
       int _plus = (_offset + _literalPrefixLenght);

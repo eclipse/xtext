@@ -238,7 +238,7 @@ class TraceBasedConfigurationProducerTest extends XtendIdeaTestCase {
 
 	def private ConfigurationContext createContext(@NotNull PsiElement psiClass, @NotNull MapDataContext dataContext) {
 		dataContext.put(CommonDataKeys.PROJECT, myProject);
-		if (LangDataKeys.MODULE.getData(dataContext) == null) {
+		if (LangDataKeys.MODULE.getData(dataContext) === null) {
 			dataContext.put(LangDataKeys.MODULE, ModuleUtilCore.findModuleForPsiElement(psiClass));
 		}
 		dataContext.put(Location.DATA_KEY, PsiLocation.fromPsiElement(psiClass));

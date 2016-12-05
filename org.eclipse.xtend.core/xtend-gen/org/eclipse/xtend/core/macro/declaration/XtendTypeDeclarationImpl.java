@@ -66,8 +66,7 @@ public abstract class XtendTypeDeclarationImpl<T extends XtendTypeDeclaration> e
     final EObject container = decl.eContainer();
     if ((container instanceof XtendFile)) {
       final String package_ = ((XtendFile)container).getPackage();
-      boolean _equals = Objects.equal(package_, null);
-      if (_equals) {
+      if ((package_ == null)) {
         return decl.getName();
       }
       String _name = decl.getName();
@@ -75,8 +74,7 @@ public abstract class XtendTypeDeclarationImpl<T extends XtendTypeDeclaration> e
     }
     if ((container instanceof XtendTypeDeclaration)) {
       final String containerName = this.getQualifiedName(((XtendTypeDeclaration)container));
-      boolean _equals_1 = Objects.equal(containerName, null);
-      if (_equals_1) {
+      if ((containerName == null)) {
         return null;
       }
       String _name_1 = decl.getName();
@@ -106,8 +104,7 @@ public abstract class XtendTypeDeclarationImpl<T extends XtendTypeDeclaration> e
   
   @Override
   public boolean isAssignableFrom(final Type otherType) {
-    boolean _equals = Objects.equal(otherType, null);
-    if (_equals) {
+    if ((otherType == null)) {
       return false;
     }
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();

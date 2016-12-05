@@ -111,7 +111,7 @@ class ProblemSupportImpl implements ProblemSupport {
 				val resource = element.delegate.eResource
 				if (resource == compilationUnit.xtendFile.eResource) {
 					val eobject = compilationUnit.jvmModelAssociations.getPrimarySourceElement(element.delegate)
-					if (eobject == null) {
+					if (eobject === null) {
 						return resource -> element.delegate
 					}
 					return resource -> eobject

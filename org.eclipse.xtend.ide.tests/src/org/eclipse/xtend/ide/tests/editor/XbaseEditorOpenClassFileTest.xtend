@@ -291,7 +291,7 @@ import org.junit.Before
 		val jarFile = jp.project.getFile(new Path(fileName))
 		jarFile.create(class.getResourceAsStream(fileName), true, null)
 
-		val sourceFile = if (fileNameOfSource != null) {
+		val sourceFile = if (fileNameOfSource !== null) {
 				val source = jp.project.getFile(new Path(fileNameOfSource))
 				source.create(class.getResourceAsStream(fileNameOfSource), true, null)
 				source
@@ -310,7 +310,7 @@ import org.junit.Before
 
 	def supportsEditorOverride() {
 		try {
-			if (Class.forName("org.eclipse.ui.ide.IEditorAssociationOverride") != null) {
+			if (Class.forName("org.eclipse.ui.ide.IEditorAssociationOverride") !== null) {
 				return true;
 			}
 		} catch (ClassNotFoundException e) {

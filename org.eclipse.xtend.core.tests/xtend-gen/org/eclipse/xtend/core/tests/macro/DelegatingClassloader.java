@@ -1,6 +1,5 @@
 package org.eclipse.xtend.core.tests.macro;
 
-import com.google.common.base.Objects;
 import java.net.URL;
 import org.eclipse.xtext.xbase.compiler.CompilationTestHelper;
 
@@ -32,8 +31,7 @@ public class DelegatingClassloader extends ClassLoader {
     Class<?> _xblockexpression = null;
     {
       final Class<?> result = this.classFinder.getCompiledClass(name);
-      boolean _notEquals = (!Objects.equal(result, null));
-      if (_notEquals) {
+      if ((result != null)) {
         return result;
       }
       _xblockexpression = super.findClass(name);
