@@ -21,16 +21,8 @@
 		<module>org.eclipse.xtext.tycho.feature.parent</module>
 		<module>org.eclipse.xtext.tycho.tests.parent</module>
 		<module>org.eclipse.xtext.p2-repository</module>
-		<module>org.eclipse.xtext.gwt.feature</module>
 		<module>org.eclipse.xtext.docs.feature</module>
-		<module>org.eclipse.xtext.examples.feature</module>
 		<module>org.eclipse.xtext.license.feature</module>
-		<module>org.eclipse.xtext.redist.feature</module>
-		<module>org.eclipse.xtext.runtime.feature</module>
-		<module>org.eclipse.xtext.ui.feature</module>
-		<module>org.eclipse.xtext.xbase.feature</module>
-		<module>org.eclipse.xtext.xbase.lib.feature</module>
-		<module>org.eclipse.xtext.xtext.ui.feature</module>
 	</modules>
 
 </project>
