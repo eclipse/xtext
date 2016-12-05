@@ -9,7 +9,6 @@ package org.eclipse.xtext.xbase.tests.lib;
 
 import static com.google.common.collect.Lists.*;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
