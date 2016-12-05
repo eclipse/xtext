@@ -30,10 +30,10 @@ class InsertionOffsets {
 		if (ownerType.members.empty)
 			return inEmpty(ownerType)
 		val callingMember = EcoreUtil2.getContainerOfType(call, XtendField)
-		if (callingMember != null && ownerType.members.contains(callingMember))
+		if (callingMember !== null && ownerType.members.contains(callingMember))
 			return before(callingMember)
 		val lastDefinedField = ownerType.members.filter(XtendField).last
-		if (lastDefinedField == null)
+		if (lastDefinedField === null)
 			return before(ownerType.members.head)
 		else
 			return after(lastDefinedField)
@@ -41,7 +41,7 @@ class InsertionOffsets {
 
 	def getNewMethodInsertOffset(/* @Nullable */ EObject call, XtendTypeDeclaration ownerType) {
 		val callingMember = EcoreUtil2.getContainerOfType(call, XtendMember)
-		if (callingMember != null && ownerType.members.contains(callingMember))
+		if (callingMember !== null && ownerType.members.contains(callingMember))
 			return after(callingMember)
 		else if (ownerType.members.empty)
 			return inEmpty(ownerType)
@@ -51,7 +51,7 @@ class InsertionOffsets {
 
 	def getNewConstructorInsertOffset(/* @Nullable */ EObject call, XtendTypeDeclaration ownerType) {
 		val lastDefinedConstructor = ownerType.members.filter(XtendConstructor).last
-		if(lastDefinedConstructor == null)
+		if(lastDefinedConstructor === null)
 			return getNewFieldInsertOffset(call, ownerType)		
 		else	
 			return after(lastDefinedConstructor)
@@ -69,7 +69,7 @@ class InsertionOffsets {
 	def protected inEmpty(XtendTypeDeclaration ownerType) {
 		val classNode = NodeModelUtils.findActualNodeFor(ownerType)
 		val openingBraceNode = classNode.leafNodes.findFirst[text == "{"]
-		if(openingBraceNode != null)
+		if(openingBraceNode !== null)
 			openingBraceNode.offset + 1
 		else 
 			classNode.endOffset

@@ -50,7 +50,7 @@ class ActualTypeArgumentCollectorTest extends AbstractTestingTypeReferenceOwner 
 				return mapping
 			}
 		}
-		if (mappedTypes != null)
+		if (mappedTypes !== null)
 			fail('''No mapping for «typeParamName» in «mapping.keySet.map[simpleName]»'''.toString)
 		return mapping
 	}

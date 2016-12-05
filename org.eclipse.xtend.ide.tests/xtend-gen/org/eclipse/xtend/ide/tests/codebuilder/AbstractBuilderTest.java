@@ -1,6 +1,5 @@
 package org.eclipse.xtend.ide.tests.codebuilder;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -62,8 +61,7 @@ public class AbstractBuilderTest extends AbstractXtendUITestCase {
     try {
       JvmDeclaredType _xblockexpression = null;
       {
-        boolean _equals = Objects.equal(AbstractBuilderTest.xtendClass, null);
-        if (_equals) {
+        if ((AbstractBuilderTest.xtendClass == null)) {
           StringConcatenation _builder = new StringConcatenation();
           _builder.append("class Foo {");
           _builder.newLine();
@@ -87,8 +85,7 @@ public class AbstractBuilderTest extends AbstractXtendUITestCase {
     try {
       JvmDeclaredType _xblockexpression = null;
       {
-        boolean _equals = Objects.equal(AbstractBuilderTest.javaClass, null);
-        if (_equals) {
+        if ((AbstractBuilderTest.javaClass == null)) {
           StringConcatenation _builder = new StringConcatenation();
           _builder.append("public class Bar {");
           _builder.newLine();

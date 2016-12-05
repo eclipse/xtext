@@ -34,7 +34,7 @@ abstract class AbstractParameterBuilder extends AbstractCodeBuilder {
 	protected def ISourceAppender appendModifiers(ISourceAppender appendable)
 
 	override isValid() {
-		type != null 
+		type !== null 
 		&& (!varArgsFlag || type instanceof ArrayTypeReference)
 		&& super.isValid()
 	}

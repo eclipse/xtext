@@ -52,7 +52,7 @@ class XtendLibraryConfigurator {
 		val module = rootModel.module
 		val scope = GlobalSearchScope.moduleWithDependenciesAndLibrariesScope(module)
 		val psiClass = JavaPsiFacade.getInstance(rootModel.project).findClass(Data.name, scope)
-		if (psiClass == null) {
+		if (psiClass === null) {
 			val testScope = isTestScope(context)
 			if (isMavenInstalled && module.isMavenizedModule) {
 				module.addXtendLibMavenDependency(testScope)
@@ -75,7 +75,7 @@ class XtendLibraryConfigurator {
 
 	def void addJavaRuntimeLibrary(Module module, ModifiableRootModel rootModel) {
 		val library = createOrGetXtendJavaLibrary(rootModel, module)
-		if (library != null && rootModel.findLibraryOrderEntry(library) === null) {
+		if (library !== null && rootModel.findLibraryOrderEntry(library) === null) {
 			if (rootModel.isWritable)
 				rootModel.addLibraryEntry(library)
 		}

@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.core.macro.declaration;
 
-import com.google.common.base.Objects;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.XtendMemberDeclarationImpl;
@@ -35,7 +34,7 @@ public class XtendMethodDeclarationImpl extends XtendMemberDeclarationImpl<Xtend
   public boolean isAbstract() {
     XtendFunction _delegate = this.getDelegate();
     XExpression _expression = _delegate.getExpression();
-    return Objects.equal(_expression, null);
+    return (_expression == null);
   }
   
   @Override
@@ -101,8 +100,8 @@ public class XtendMethodDeclarationImpl extends XtendMemberDeclarationImpl<Xtend
   public Expression getBody() {
     XtendFunction _delegate = this.getDelegate();
     XExpression _expression = _delegate.getExpression();
-    boolean _equals = Objects.equal(_expression, null);
-    if (_equals) {
+    boolean _tripleEquals = (_expression == null);
+    if (_tripleEquals) {
       return null;
     }
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();

@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.core.tests.typesystem;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import java.util.ArrayList;
@@ -155,8 +154,7 @@ public class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
         }
         Assert.assertEquals(_key_3, _simpleName_3);
       }
-      boolean _notEquals = (!Objects.equal(computedSuperType, null));
-      if (_notEquals) {
+      if ((computedSuperType != null)) {
         final Procedure1<LightweightTypeReference> _function_1 = (LightweightTypeReference superType) -> {
           final Consumer<LightweightTypeReference> _function_2 = (LightweightTypeReference it) -> {
             String _key_4 = superTypeAndParam.getKey();
@@ -172,8 +170,7 @@ public class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
         };
         ObjectExtensions.<LightweightTypeReference>operator_doubleArrow(computedSuperType, _function_1);
       }
-      boolean _notEquals_1 = (!Objects.equal(computedSuperType, null));
-      if (_notEquals_1) {
+      if ((computedSuperType != null)) {
         for (final LightweightTypeReference subType : typeReferences) {
           boolean _isAssignableFrom = computedSuperType.isAssignableFrom(subType);
           Assert.assertTrue(_isAssignableFrom);

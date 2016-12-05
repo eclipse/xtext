@@ -72,7 +72,7 @@ class XtendReferenceFinder extends ReferenceFinder {
 			XImportDeclaration case sourceCandidate.static && !sourceCandidate.wildcard: {
 				addReferenceToFeatureFromStaticImport(sourceCandidate, targetURIs, acceptor)
 			} 
-			XFeatureCall case sourceCandidate.actualReceiver == null && sourceCandidate.static: {
+			XFeatureCall case sourceCandidate.actualReceiver === null && sourceCandidate.static: {
 				addReferenceToTypeFromStaticImport(sourceCandidate, targetURIs, acceptor)
 			}
 			XMemberFeatureCall: { 

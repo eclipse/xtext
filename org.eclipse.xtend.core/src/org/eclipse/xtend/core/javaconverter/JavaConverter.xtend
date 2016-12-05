@@ -47,7 +47,7 @@ class JavaConverter {
 	 * @throws IllegalArgumentException if unitName is <code>null</code> 
 	 */
 	def ConversionResult toXtend(String unitName, String javaSrc) {
-		if (unitName == null)
+		if (unitName === null)
 			throw new IllegalArgumentException()
 		internalToXtend(unitName, javaSrc, null, astParserFactory.createJavaParser(null))
 	}
@@ -60,7 +60,7 @@ class JavaConverter {
 	 * @throws IllegalArgumentException if unitName is <code>null</code> 
 	 */
 	def ConversionResult toXtend(String unitName, String javaSrc, Object classPathContext) {
-		if (unitName == null)
+		if (unitName === null)
 			throw new IllegalArgumentException()
 		internalToXtend(unitName, javaSrc, null, astParserFactory.createJavaParser(classPathContext))
 	}
@@ -139,10 +139,10 @@ class JavaConverter {
 	def private ConversionResult internalToXtend(String unitName, String javaSrc, String[] imports,
 		ASTParserWrapper parser) {
 		val javaSrcBuilder = new StringBuilder()
-		if (imports != null) {
+		if (imports !== null) {
 			imports.forEach[javaSrcBuilder.append("import " + it + ";")]
 		}
-		if (unitName == null) {
+		if (unitName === null) {
 			parser.unitName = "MISSING"
 			javaSrcBuilder.append('''class MISSING { «javaSrc» }''')
 		} else {
@@ -192,7 +192,7 @@ class JavaConverter {
 		def static create(JavaASTFlattener flattener) {
 			val result = new ConversionResult
 			result.xtendCode = flattener.result
-			if (flattener.problems != null)
+			if (flattener.problems !== null)
 				result.problems = flattener.problems
 			return result
 		}

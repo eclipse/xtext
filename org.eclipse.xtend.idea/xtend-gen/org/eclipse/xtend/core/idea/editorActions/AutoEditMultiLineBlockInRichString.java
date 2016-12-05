@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.core.idea.editorActions;
 
-import com.google.common.base.Objects;
 import org.eclipse.xtext.idea.editorActions.AutoEditContext;
 import org.eclipse.xtext.idea.editorActions.AutoEditMultiLineBlock;
 import org.eclipse.xtext.util.TextRegion;
@@ -37,8 +36,7 @@ public class AutoEditMultiLineBlockInRichString extends AutoEditMultiLineBlock {
   @Override
   protected TextRegion findOpeningTerminal(final int offset, @Extension final AutoEditContext context) {
     final TextRegion result = super.findOpeningTerminal(offset, context);
-    boolean _equals = Objects.equal(result, null);
-    if (_equals) {
+    if ((result == null)) {
       return null;
     }
     int _offset = result.getOffset();

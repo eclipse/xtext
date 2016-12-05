@@ -87,10 +87,10 @@ class XtendItemPresentationProvider extends XtendJvmItemPresentationProvider {
 
 	def dispatch text(XtendFunction element) {
 		val simpleName = element.name
-		if (simpleName != null) {
+		if (simpleName !== null) {
 			val qnName = QualifiedName.create(simpleName)
 			val operator = operatorMapping.getOperator(qnName)
-			if (operator != null) {
+			if (operator !== null) {
 				return signature(operator.firstSegment, element.directlyInferredOperation) + ' (' + simpleName + ')'
 			}
 		}
@@ -98,10 +98,10 @@ class XtendItemPresentationProvider extends XtendJvmItemPresentationProvider {
 	}
 
 	def dispatch text(XtendField element) {
-		if (element.name == null && element.extension)
+		if (element.name === null && element.extension)
 			return uiStrings.referenceToString(element.type, "extension")
 		val fieldType = element.displayedType
-		if (fieldType != null) {
+		if (fieldType !== null) {
 			val type = uiStrings.referenceToString(fieldType, "")
 			if (type.length != 0) {
 				return element.name + " : " + type
@@ -120,7 +120,7 @@ class XtendItemPresentationProvider extends XtendJvmItemPresentationProvider {
 
 	protected def JvmTypeReference getDisplayedType(XtendField field) {
 		val jvmField = field.jvmField
-		if (jvmField != null) {
+		if (jvmField !== null) {
 			return jvmField.getType
 		} else {
 			val i = field.jvmElements.iterator

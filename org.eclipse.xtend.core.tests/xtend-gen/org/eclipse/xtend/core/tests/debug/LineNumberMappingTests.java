@@ -1,6 +1,5 @@
 package org.eclipse.xtend.core.tests.debug;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.List;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -332,8 +331,7 @@ public class LineNumberMappingTests extends AbstractXtendTestCase {
       {
         final LineMappingProvider.LineMapping mapping = this.findMapping(normalizedMappings, lineNumber);
         final String line = lines[(lineNumber).intValue()];
-        boolean _notEquals = (!Objects.equal(mapping, null));
-        if (_notEquals) {
+        if ((mapping != null)) {
           int _indexOf = line.indexOf("//");
           boolean _equals = (_indexOf == (-1));
           if (_equals) {
@@ -355,8 +353,8 @@ public class LineNumberMappingTests extends AbstractXtendTestCase {
           int expTargetStart = (-1);
           int expTargetEnd = (-1);
           int _indexOf_2 = expectation.indexOf("..");
-          boolean _notEquals_1 = (_indexOf_2 != (-1));
-          if (_notEquals_1) {
+          boolean _notEquals = (_indexOf_2 != (-1));
+          if (_notEquals) {
             final int idx = expectation.indexOf("..");
             String _substring_1 = expectation.substring(0, idx);
             int _parseInt = Integer.parseInt(_substring_1);
@@ -373,8 +371,8 @@ public class LineNumberMappingTests extends AbstractXtendTestCase {
           Assert.assertEquals(("unexpected end in line : " + line), expTargetEnd, mapping.targetEndLine);
         } else {
           int _indexOf_3 = line.indexOf("//");
-          boolean _notEquals_2 = (_indexOf_3 != (-1));
-          if (_notEquals_2) {
+          boolean _notEquals_1 = (_indexOf_3 != (-1));
+          if (_notEquals_1) {
             Assert.fail(("Unmatched expectation : " + line));
           }
         }

@@ -70,8 +70,8 @@ public class AnnotationValidation extends AbstractDeclarativeValidator {
             IssueCodes.INVALID_ANNOTATION_VALUE_TYPE);
         }
         XExpression _initialValue = it_1.getInitialValue();
-        boolean _notEquals = (!Objects.equal(_initialValue, null));
-        if (_notEquals) {
+        boolean _tripleNotEquals = (_initialValue != null);
+        if (_tripleNotEquals) {
           XExpression _initialValue_1 = it_1.getInitialValue();
           this.annotationValueValidator.validateAnnotationValue(_initialValue_1, this);
         }
@@ -90,8 +90,7 @@ public class AnnotationValidation extends AbstractDeclarativeValidator {
       _switchResult = reference;
     }
     final JvmTypeReference toCheck = _switchResult;
-    boolean _equals = Objects.equal(toCheck, null);
-    if (_equals) {
+    if ((toCheck == null)) {
       return true;
     }
     JvmType _type = toCheck.getType();

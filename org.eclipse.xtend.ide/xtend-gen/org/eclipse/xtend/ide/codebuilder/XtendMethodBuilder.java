@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.ide.codebuilder;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.List;
 import org.eclipse.emf.ecore.EObject;
@@ -33,7 +32,7 @@ public class XtendMethodBuilder extends AbstractMethodBuilder implements ICodeBu
   
   @Override
   public boolean isValid() {
-    return (super.isValid() && (!Objects.equal(this.getMethodName(), null)));
+    return (super.isValid() && (this.getMethodName() != null));
   }
   
   @Override

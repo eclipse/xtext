@@ -91,7 +91,7 @@ class DirtyEditorFilteringContentAssistTests extends AbstractXtendUITestCase{
 		val contentAssistant = editorForCompletion.getXtextSourceViewerConfiguration().getContentAssistant(sourceViewer);
 		val contentType = editorForCompletion.document.getContentType(cursorPosition);
 		val processor = contentAssistant.getContentAssistProcessor(contentType);
-		if (processor != null) {
+		if (processor !== null) {
 			return processor.computeCompletionProposals(sourceViewer, cursorPosition);
 		}
 		return null;

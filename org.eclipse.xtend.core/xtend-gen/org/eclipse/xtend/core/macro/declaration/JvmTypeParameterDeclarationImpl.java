@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.core.macro.declaration;
 
-import com.google.common.base.Objects;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.TypeParameterDeclarationImpl;
@@ -34,8 +33,7 @@ public class JvmTypeParameterDeclarationImpl extends TypeParameterDeclarationImp
   
   @Override
   public boolean isAssignableFrom(final Type otherType) {
-    boolean _equals = Objects.equal(otherType, null);
-    if (_equals) {
+    if ((otherType == null)) {
       return false;
     }
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();

@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.ide.tests;
 
-import com.google.common.base.Objects;
 import org.eclipse.swtbot.swt.finder.waits.DefaultCondition;
 import org.eclipse.xtext.ui.refactoring.ui.RenameLinkedMode;
 import org.eclipse.xtext.ui.refactoring.ui.RenameRefactoringController;
@@ -28,6 +27,6 @@ public class WaitForLinkedModeCondition extends DefaultCondition {
   @Override
   public boolean test() throws Exception {
     RenameLinkedMode _activeLinkedMode = this.controller.getActiveLinkedMode();
-    return (!Objects.equal(_activeLinkedMode, null));
+    return (_activeLinkedMode != null);
   }
 }

@@ -57,7 +57,7 @@ class ActualTypeArgumentMergeTest extends AbstractTestingTypeReferenceOwner {
 	}
 	
 	def to(Pair<Map<JvmTypeParameter, List<LightweightBoundTypeArgument>>, LightweightMergedBoundTypeArgument> merged, String type, VarianceInfo variance) {
-		if (type == null) {
+		if (type === null) {
 			assertNull(merged.value)
 		} else {
 			assertEquals(type, merged.value.typeReference.toString)

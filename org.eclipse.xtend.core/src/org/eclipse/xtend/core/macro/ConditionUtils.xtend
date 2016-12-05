@@ -17,22 +17,22 @@ import org.eclipse.emf.ecore.EObject
 class ConditionUtils {
 	
 	static def notRemoved(EObject object, String name) {
-		Preconditions.checkArgument(object != null, '''«name» cannot be null''')
-		Preconditions.checkArgument(object.eResource != null, '''«name» cannot be removed''')
+		Preconditions.checkArgument(object !== null, '''«name» cannot be null''')
+		Preconditions.checkArgument(object.eResource !== null, '''«name» cannot be removed''')
 	}
 	
 	static def checkInferredTypeReferences(String typeName, TypeReference ... types) {
 		for (type : types) {
-			if (type != null && type.inferred) {
+			if (type !== null && type.inferred) {
 				throw new IllegalArgumentException('''Cannot use inferred type as «typeName».''')
 			}
 		}
 	}
 
 	static def checkIterable(Iterable<?> values, String name) {
-		Preconditions.checkArgument(values != null, '''«name» cannot be null''')
+		Preconditions.checkArgument(values !== null, '''«name» cannot be null''')
 		for (value : values) {
-			Preconditions.checkArgument(value != null, '''«name» cannot contain null''')
+			Preconditions.checkArgument(value !== null, '''«name» cannot contain null''')
 		}
 	}
 
@@ -51,7 +51,7 @@ class ConditionUtils {
 	static def String isNotApplicableMessage(String valueType, String typeName) '''«valueType» is not applicable at this location. Expected «typeName»'''
 
 	static def isValidQualifiedName(String string) {
-		if (string == null || string.length == 0) {
+		if (string === null || string.length == 0) {
 			return false
 		}
 		for (identifier : string.split("\\.")) {
@@ -63,7 +63,7 @@ class ConditionUtils {
 	}
 
 	static def isValidJavaIdentifier(String string) {
-		if (string == null || string.length == 0) {
+		if (string === null || string.length == 0) {
 			return false
 		}
 		val charArray = string.toCharArray

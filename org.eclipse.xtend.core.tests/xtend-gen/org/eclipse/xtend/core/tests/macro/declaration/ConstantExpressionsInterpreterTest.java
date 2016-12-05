@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.core.tests.macro.declaration;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import org.eclipse.emf.common.util.EList;
@@ -617,8 +616,7 @@ public class ConstantExpressionsInterpreterTest extends AbstractXtendTestCase {
       EList<XExpression> _expressions = ((XBlockExpression) _expression).getExpressions();
       final XExpression expr = IterableExtensions.<XExpression>head(_expressions);
       JvmTypeReference _xifexpression = null;
-      boolean _notEquals = (!Objects.equal(type, null));
-      if (_notEquals) {
+      if ((type != null)) {
         _xifexpression = function.getReturnType();
       }
       final Object value = this.interpreter.evaluate(expr, _xifexpression);

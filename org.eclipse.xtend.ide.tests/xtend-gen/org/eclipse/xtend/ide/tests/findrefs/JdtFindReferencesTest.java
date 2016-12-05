@@ -142,15 +142,13 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
       Assert.assertNotNull("Couldn\'t find \'src/JavaRef.java\'.", _findMember_1);
       IProject _project_2 = this._workbenchTestHelper.getProject();
       final IResource member = _project_2.findMember("/xtend-gen/Xtend.java");
-      boolean _equals = Objects.equal(member, null);
-      if (_equals) {
+      if ((member == null)) {
         Assert.assertNotNull("Couldn\'t find \'xtend-gen/Xtend.java\'.", member);
       }
       IProject _project_3 = this._workbenchTestHelper.getProject();
       IJavaProject _create = JavaCore.create(_project_3);
       IType type = _create.findType("Xtend");
-      boolean _equals_1 = Objects.equal(type, null);
-      if (_equals_1) {
+      if ((type == null)) {
         Assert.assertNotNull("Couldn\'t find type \'Xtend\'.", type);
       }
       ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList();

@@ -49,7 +49,7 @@ class QuickfixTestBuilder {
 	}
 	
 	def setSeverity(String issueCode, String severity) {
-		if (modifiedIssueCodes == null)
+		if (modifiedIssueCodes === null)
 			modifiedIssueCodes = newHashSet
 		modifiedIssueCodes.add(issueCode)
 		preferenceStore.setValue(issueCode, "error")
@@ -180,7 +180,7 @@ class QuickfixTestBuilder {
 		closeAllEditors(false)
 		files.forEach[ delete(true, new NullProgressMonitor) ]
 		files.clear
-		if (modifiedIssueCodes != null) {
+		if (modifiedIssueCodes !== null) {
 			preferenceStore => [
 				modifiedIssueCodes.forEach [ code |
 					setToDefault(code)

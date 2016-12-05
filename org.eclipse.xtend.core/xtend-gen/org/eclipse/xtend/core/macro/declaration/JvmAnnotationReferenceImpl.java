@@ -49,7 +49,7 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
     JvmAnnotationReference _delegate = this.getDelegate();
     EList<JvmAnnotationValue> _values = _delegate.getValues();
     final Function1<JvmAnnotationValue, Boolean> _function = (JvmAnnotationValue it) -> {
-      return Boolean.valueOf((Objects.equal(it.getOperation(), op) || (Objects.equal(it.getOperation(), null) && Objects.equal(op.getSimpleName(), "value"))));
+      return Boolean.valueOf((Objects.equal(it.getOperation(), op) || ((it.getOperation() == null) && Objects.equal(op.getSimpleName(), "value"))));
     };
     final JvmAnnotationValue annotationValue = IterableExtensions.<JvmAnnotationValue>findFirst(_values, _function);
     boolean _matched = false;
@@ -73,12 +73,11 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
       JvmAnnotationReference _delegate = this.getDelegate();
       EList<JvmAnnotationValue> _values = _delegate.getValues();
       final Function1<JvmAnnotationValue, Boolean> _function = (JvmAnnotationValue it) -> {
-        return Boolean.valueOf((Objects.equal(it.getOperation(), op) || (Objects.equal(it.getOperation(), null) && Objects.equal(op.getSimpleName(), "value"))));
+        return Boolean.valueOf((Objects.equal(it.getOperation(), op) || ((it.getOperation() == null) && Objects.equal(op.getSimpleName(), "value"))));
       };
       final JvmAnnotationValue annotationValue = IterableExtensions.<JvmAnnotationValue>findFirst(_values, _function);
-      final boolean isArrayType = ((!Objects.equal(op, null)) && this.getCompilationUnit().getTypeReferences().isArray(op.getReturnType()));
-      boolean _notEquals = (!Objects.equal(annotationValue, null));
-      if (_notEquals) {
+      final boolean isArrayType = ((op != null) && this.getCompilationUnit().getTypeReferences().isArray(op.getReturnType()));
+      if ((annotationValue != null)) {
         CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
         return _compilationUnit.translateAnnotationValue(annotationValue, isArrayType);
       }
@@ -106,8 +105,7 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
       return Boolean.valueOf(Objects.equal(_simpleName, name));
     };
     final JvmOperation jvmOperation = IterableExtensions.<JvmOperation>findFirst(_declaredOperations, _function);
-    boolean _equals = Objects.equal(jvmOperation, null);
-    if (_equals) {
+    if ((jvmOperation == null)) {
       String _identifier = jvmAnnoType.getIdentifier();
       String _plus = ((("The annotation property \'" + name) + "\' is not declared on the annotation type \'") + _identifier);
       String _plus_1 = (_plus + "\'.");
@@ -139,8 +137,7 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
     Boolean _xblockexpression = null;
     {
       final Object value = this.getValue(name);
-      boolean _equals = Objects.equal(value, null);
-      if (_equals) {
+      if ((value == null)) {
         return false;
       }
       _xblockexpression = ((Boolean) value);
@@ -159,8 +156,7 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
     Byte _xblockexpression = null;
     {
       final Object value = this.getValue(name);
-      boolean _equals = Objects.equal(value, null);
-      if (_equals) {
+      if ((value == null)) {
         return ((byte) 0);
       }
       _xblockexpression = ((Byte) value);
@@ -179,8 +175,7 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
     Character _xblockexpression = null;
     {
       final Object value = this.getValue(name);
-      boolean _equals = Objects.equal(value, null);
-      if (_equals) {
+      if ((value == null)) {
         return ((char) 0);
       }
       Character _switchResult = null;
@@ -220,8 +215,7 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
     Double _xblockexpression = null;
     {
       final Object value = this.getValue(name);
-      boolean _equals = Objects.equal(value, null);
-      if (_equals) {
+      if ((value == null)) {
         return 0;
       }
       Double _switchResult = null;
@@ -291,8 +285,7 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
     Float _xblockexpression = null;
     {
       final Object value = this.getValue(name);
-      boolean _equals = Objects.equal(value, null);
-      if (_equals) {
+      if ((value == null)) {
         return 0;
       }
       Float _switchResult = null;
@@ -344,8 +337,7 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
     Integer _xblockexpression = null;
     {
       final Object value = this.getValue(name);
-      boolean _equals = Objects.equal(value, null);
-      if (_equals) {
+      if ((value == null)) {
         return 0;
       }
       Integer _switchResult = null;
@@ -385,8 +377,7 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
     Long _xblockexpression = null;
     {
       final Object value = this.getValue(name);
-      boolean _equals = Objects.equal(value, null);
-      if (_equals) {
+      if ((value == null)) {
         return 0;
       }
       Long _switchResult = null;
@@ -432,8 +423,7 @@ public class JvmAnnotationReferenceImpl extends JvmElementImpl<JvmAnnotationRefe
     Short _xblockexpression = null;
     {
       final Object value = this.getValue(name);
-      boolean _equals = Objects.equal(value, null);
-      if (_equals) {
+      if ((value == null)) {
         return ((short) 0);
       }
       Short _switchResult = null;

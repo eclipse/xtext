@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.ide.tests.builder;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import org.eclipse.core.resources.IFile;
@@ -89,8 +88,7 @@ public class BuildAffectionTest {
   @After
   public void tearDown() {
     try {
-      boolean _notEquals = (!Objects.equal(this.clientProject, null));
-      if (_notEquals) {
+      if ((this.clientProject != null)) {
         WorkbenchTestHelper.deleteProject(this.clientProject);
       }
       this.workbenchTestHelper.tearDown();

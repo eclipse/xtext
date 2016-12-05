@@ -78,7 +78,7 @@ class BuildAffectionTest {
 	 
 	@After
 	def tearDown() {
-		if(clientProject != null) 
+		if(clientProject !== null) 
 			WorkbenchTestHelper.deleteProject(clientProject)
 		workbenchTestHelper.tearDown
 		autoBuild

@@ -156,8 +156,7 @@ public class XtendIntentionsProvider extends IdeaIntentionsProvider {
     public int findInsertionOffSet(final XtendTypeDeclaration class1, final Editor editor) {
       EList<XtendMember> _members = class1.getMembers();
       final XtendMember last = IterableExtensions.<XtendMember>last(_members);
-      boolean _notEquals = (!Objects.equal(last, null));
-      if (_notEquals) {
+      if ((last != null)) {
         final ICompositeNode n = NodeModelUtils.getNode(last);
         int _totalOffset = n.getTotalOffset();
         int _totalLength = n.getTotalLength();
@@ -170,8 +169,7 @@ public class XtendIntentionsProvider extends IdeaIntentionsProvider {
           return Boolean.valueOf(Objects.equal(_text, "{"));
         };
         final INode openingBracket = IterableExtensions.<INode>findFirst(_asTreeIterable, _function);
-        boolean _notEquals_1 = (!Objects.equal(openingBracket, null));
-        if (_notEquals_1) {
+        if ((openingBracket != null)) {
           int _offset = openingBracket.getOffset();
           return (_offset + 1);
         }

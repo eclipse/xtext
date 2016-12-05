@@ -186,7 +186,7 @@ class WaitForLinkedModeCondition extends DefaultCondition {
 	}
 
 	override test() throws Exception {
-		controller.activeLinkedMode != null
+		controller.activeLinkedMode !== null
 	}
 }
 

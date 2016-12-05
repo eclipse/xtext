@@ -454,7 +454,7 @@ class TestBatchCompiler {
 
 	def private boolean isSymlink(File file) {
 		var File canon
-		if (file.getParent() == null) {
+		if (file.getParent() === null) {
 			canon = file
 		} else {
 			var File canonDir = file.getParentFile().getCanonicalFile()

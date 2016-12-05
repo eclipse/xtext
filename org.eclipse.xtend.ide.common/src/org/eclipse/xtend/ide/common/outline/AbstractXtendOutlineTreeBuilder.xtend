@@ -46,10 +46,10 @@ abstract class AbstractXtendOutlineTreeBuilder implements IXtendOutlineTreeBuild
 	}
 
 	protected def void buildPackageAndImportSection(XtendFile xtendFile, IXtendOutlineContext context) {
-		if (xtendFile.package != null) {
+		if (xtendFile.package !== null) {
 			xtendFile.buildPackageNode(context)
 		}
-		if (xtendFile.importSection != null && !xtendFile.importSection.importDeclarations.empty) {
+		if (xtendFile.importSection !== null && !xtendFile.importSection.importDeclarations.empty) {
 			xtendFile.buildImportSectionNode(context)
 		}
 	}

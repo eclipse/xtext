@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.ide.macro;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.io.File;
 import java.net.URL;
@@ -80,8 +79,7 @@ public class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvid
       EList<Adapter> _eAdapters = rs.eAdapters();
       Iterable<ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter> _filter = Iterables.<ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter>filter(_eAdapters, ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter.class);
       final ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter adapter = IterableExtensions.<ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter>head(_filter);
-      boolean _notEquals = (!Objects.equal(adapter, null));
-      if (_notEquals) {
+      if ((adapter != null)) {
         return adapter.getClassLoader();
       }
     }
@@ -90,11 +88,10 @@ public class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvid
       EList<Adapter> _eAdapters_1 = _editorResource.eAdapters();
       Iterable<ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter> _filter_1 = Iterables.<ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter>filter(_eAdapters_1, ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter.class);
       final ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter adapter_1 = IterableExtensions.<ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter>head(_filter_1);
-      boolean _notEquals_1 = (!Objects.equal(adapter_1, null));
-      if (_notEquals_1) {
+      if ((adapter_1 != null)) {
         ClassLoader _classLoader = adapter_1.getClassLoader();
-        boolean _equals = Objects.equal(_classLoader, null);
-        if (_equals) {
+        boolean _tripleEquals = (_classLoader == null);
+        if (_tripleEquals) {
           Resource _editorResource_1 = this.getEditorResource(ctx);
           EList<Adapter> _eAdapters_2 = _editorResource_1.eAdapters();
           _eAdapters_2.remove(adapter_1);
@@ -181,8 +178,7 @@ public class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvid
             case IClasspathEntry.CPE_SOURCE:
               if (includeOutputFolder) {
                 final IPath path_1 = entry.getOutputLocation();
-                boolean _notEquals = (!Objects.equal(path_1, null));
-                if (_notEquals) {
+                if ((path_1 != null)) {
                   IPath _addTrailingSeparator = path_1.addTrailingSeparator();
                   String _string_2 = _addTrailingSeparator.toString();
                   URI _createPlatformResourceURI_1 = URI.createPlatformResourceURI(_string_2, true);
@@ -205,8 +201,7 @@ public class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvid
               IWorkspaceRoot _workspaceRoot_1 = this.getWorkspaceRoot(projectToUse);
               final IResource library = _workspaceRoot_1.findMember(path_3);
               URL _xifexpression = null;
-              boolean _notEquals_1 = (!Objects.equal(library, null));
-              if (_notEquals_1) {
+              if ((library != null)) {
                 java.net.URI _rawLocationURI = library.getRawLocationURI();
                 _xifexpression = _rawLocationURI.toURL();
               } else {
@@ -226,8 +221,7 @@ public class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvid
               }
               break;
           }
-          boolean _notEquals_2 = (!Objects.equal(url_1, null));
-          if (_notEquals_2) {
+          if ((url_1 != null)) {
             result.add(url_1);
           }
         }

@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.ide.macro;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
@@ -76,8 +75,7 @@ public class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
     java.net.URI _xblockexpression = null;
     {
       final IResource resource = this.findMember(uri);
-      boolean _equals = Objects.equal(resource, null);
-      if (_equals) {
+      if ((resource == null)) {
         String _lastSegment = uri.lastSegment();
         trailingSegments.add(_lastSegment);
         URI _trimSegments = uri.trimSegments(1);

@@ -112,13 +112,13 @@ class XtendIntentionsProvider extends IdeaIntentionsProvider {
 
 		def findInsertionOffSet(XtendTypeDeclaration class1, Editor editor) {
 			val last = class1.members.last
-			if (last != null) {
+			if (last !== null) {
 				val n = NodeModelUtils.getNode(last)
 				return n.totalOffset + n.totalLength
 			} else {
 				val n = NodeModelUtils.getNode(class1)
 				val openingBracket = n.asTreeIterable.findFirst[it.text == '{']
-				if (openingBracket != null) {
+				if (openingBracket !== null) {
 					return openingBracket.offset + 1
 				}
 			}

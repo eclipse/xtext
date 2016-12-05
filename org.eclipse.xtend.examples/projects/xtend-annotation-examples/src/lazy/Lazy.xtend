@@ -29,7 +29,7 @@ class LazyProcessor extends AbstractFieldProcessor {
 		if (field.type.primitive)
 			field.addError("Fields with primitives are not supported by @Lazy")
 			
-		if (field.initializer == null)
+		if (field.initializer === null)
 			field.addError("A lazy field must have an initializer.")
 		
 		field.declaringType.addMethod('_init' + field.simpleName) [

@@ -43,8 +43,7 @@ public abstract class JvmAnnotationTargetImpl<T extends JvmAnnotationTarget> ext
     AnnotationReference _xblockexpression = null;
     {
       this.checkMutable();
-      boolean _notEquals = (!Objects.equal(annotationReference, null));
-      Preconditions.checkArgument(_notEquals, "annotationReference cannot be null");
+      Preconditions.checkArgument((annotationReference != null), "annotationReference cannot be null");
       AnnotationReference _xifexpression = null;
       if ((annotationReference instanceof JvmAnnotationReferenceImpl)) {
         AnnotationReference _xblockexpression_1 = null;

@@ -92,12 +92,12 @@ public class RegisterGlobalsContextImpl implements RegisterGlobalsContext {
   private void setNameAndAccept(final JvmDeclaredType newType, final String qualifiedName) {
     ConditionUtils.checkQualifiedName(qualifiedName, "qualifiedName");
     JvmDeclaredType _findType = this.findType(qualifiedName);
-    boolean _equals = Objects.equal(_findType, null);
+    boolean _tripleEquals = (_findType == null);
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("The type \'");
     _builder.append(qualifiedName, "");
     _builder.append("\' has already been registered.");
-    Preconditions.checkArgument(_equals, _builder);
+    Preconditions.checkArgument(_tripleEquals, _builder);
     this.compilationUnit.checkCanceled();
     final Pair<String, String> namespaceAndName = this.getNameParts(qualifiedName);
     IFileHeaderProvider _fileHeaderProvider = this.compilationUnit.getFileHeaderProvider();
@@ -107,12 +107,11 @@ public class RegisterGlobalsContextImpl implements RegisterGlobalsContext {
     JvmTypesBuilder _jvmTypesBuilder = this.compilationUnit.getJvmTypesBuilder();
     _jvmTypesBuilder.setFileHeader(newType, headerText);
     String _key = namespaceAndName.getKey();
-    boolean _notEquals = (!Objects.equal(_key, null));
-    if (_notEquals) {
+    boolean _tripleNotEquals = (_key != null);
+    if (_tripleNotEquals) {
       String _key_1 = namespaceAndName.getKey();
       final JvmDeclaredType parentType = this.findType(_key_1);
-      boolean _notEquals_1 = (!Objects.equal(parentType, null));
-      if (_notEquals_1) {
+      if ((parentType != null)) {
         EList<JvmMember> _members = parentType.getMembers();
         _members.add(newType);
         newType.setStatic(true);
@@ -149,8 +148,7 @@ public class RegisterGlobalsContextImpl implements RegisterGlobalsContext {
           EList<JvmMember> _members = type.getMembers();
           Iterable<JvmDeclaredType> _filter = Iterables.<JvmDeclaredType>filter(_members, JvmDeclaredType.class);
           final JvmDeclaredType result = this.findRecursively(string, _filter);
-          boolean _notEquals = (!Objects.equal(result, null));
-          if (_notEquals) {
+          if ((result != null)) {
             return result;
           }
         }

@@ -51,18 +51,16 @@ public class XtendSourcePositionProvider extends SourcePositionProvider {
     if ((ele instanceof LeafXtextPsiElement)) {
       INode _iNode = ((LeafXtextPsiElement)ele).getINode();
       final EObject eobj = _iNode.getSemanticElement();
-      boolean _equals = Objects.equal(eobj, null);
-      if (_equals) {
+      if ((eobj == null)) {
         return null;
       }
       final IScope scope = this.scopeProvider.getScope(eobj, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE);
       QualifiedName _create = QualifiedName.create(name);
       final IEObjectDescription element = scope.getSingleElement(_create);
-      if (((!Objects.equal(element, null)) && Objects.equal(element.getEObjectOrProxy().eResource(), eobj.eResource()))) {
+      if (((element != null) && Objects.equal(element.getEObjectOrProxy().eResource(), eobj.eResource()))) {
         EObject _eObjectOrProxy = element.getEObjectOrProxy();
         final ICompositeNode node = NodeModelUtils.getNode(_eObjectOrProxy);
-        boolean _notEquals = (!Objects.equal(node, null));
-        if (_notEquals) {
+        if ((node != null)) {
           final int offset = node.getOffset();
           BaseXtextFile _xtextFile = ((LeafXtextPsiElement)ele).getXtextFile();
           return SourcePosition.createFromOffset(_xtextFile, offset);

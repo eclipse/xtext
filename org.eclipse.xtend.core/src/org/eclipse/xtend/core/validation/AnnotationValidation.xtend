@@ -46,7 +46,7 @@ class AnnotationValidation extends AbstractDeclarativeValidator {
 					IssueCodes.INVALID_ANNOTATION_VALUE_TYPE
 				)
 			}
-			if(initialValue != null) {
+			if(initialValue !== null) {
 				annotationValueValidator.validateAnnotationValue(initialValue, this)
 			}
 		}
@@ -58,7 +58,7 @@ class AnnotationValidation extends AbstractDeclarativeValidator {
 				reference.componentType
 			default : reference
 		}
-		if (toCheck == null)
+		if (toCheck === null)
 			return true;
 		if (toCheck.type instanceof JvmPrimitiveType) 
 			return true

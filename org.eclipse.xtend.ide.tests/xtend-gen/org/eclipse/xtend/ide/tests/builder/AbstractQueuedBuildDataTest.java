@@ -112,8 +112,7 @@ public abstract class AbstractQueuedBuildDataTest extends AbstractXtendUITestCas
               return Boolean.valueOf(Objects.equal(exportedName, it));
             };
             final String qualifiedName = IterableExtensions.<String>findFirst(((Iterable<String>)Conversions.doWrapArray(expectedExportedNames)), _function);
-            boolean _equals = Objects.equal(qualifiedName, null);
-            if (_equals) {
+            if ((qualifiedName == null)) {
               unexpectedExportedNames.add(exportedName);
             } else {
               remainingExportedNames.remove(qualifiedName);

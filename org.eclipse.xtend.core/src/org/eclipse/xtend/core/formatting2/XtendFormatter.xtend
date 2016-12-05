@@ -47,10 +47,10 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
 	def dispatch void format(XtendFile xtendFile, extension IFormattableDocument format) {
 		xtendFile.prepend[noSpace]
 		val pkg = xtendFile.regionFor.feature(XTEND_FILE__PACKAGE)
-		if(pkg != null) {
+		if(pkg !== null) {
 			pkg.prepend[oneSpace]
 			val pkgSemicolon = pkg.immediatelyFollowing.keyword(";")
-			if (pkgSemicolon != null) {
+			if (pkgSemicolon !== null) {
 				pkg.append[noSpace]
 				pkgSemicolon.append(blankLinesAfterPackageDecl)
 			} else {
@@ -211,7 +211,7 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
 		val close = func.regionFor.keyword(")")
 		func.returnType.append[oneSpace]
 		open.prepend[noSpace]
-		if (func.expression != null)
+		if (func.expression !== null)
 			close.append(bracesInNewLine)
 		formatCommaSeparatedList(func.parameters, open, close, format)
 		func.returnType.format
@@ -221,7 +221,7 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
 	def dispatch void format(XtendField field, extension IFormattableDocument document) {
 		formatAnnotations(field, document, newLineAfterFieldAnnotations)
 		formatModifiers(field, document)
-		if (field.name != null)
+		if (field.name !== null)
 			field.type.append[oneSpace]
 		field.regionFor.keyword("=").prepend[oneSpace].append[oneSpace]
 		field.type.format
@@ -261,7 +261,7 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
 	}
 
 	override protected builder(List<XExpression> params) {
-		if (params.last != null) {
+		if (params.last !== null) {
 			val grammarElement = params.last.grammarElement
 			if (grammarElement == XMemberFeatureCallAccess.memberCallArgumentsXClosureParserRuleCall_1_1_4_0 ||
 				grammarElement == XFeatureCallAccess.featureCallArgumentsXClosureParserRuleCall_4_0 ||

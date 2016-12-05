@@ -73,8 +73,7 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
   }
   
   public boolean isAssignableFrom(final Type otherType) {
-    boolean _equals = Objects.equal(otherType, null);
-    if (_equals) {
+    if ((otherType == null)) {
       return false;
     }
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
@@ -88,8 +87,7 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
   
   public MutableConstructorDeclaration addConstructor(final Procedure1<MutableConstructorDeclaration> initializer) {
     this.checkMutable();
-    boolean _notEquals = (!Objects.equal(initializer, null));
-    Preconditions.checkArgument(_notEquals, "initializer cannot be null");
+    Preconditions.checkArgument((initializer != null), "initializer cannot be null");
     T _delegate = this.getDelegate();
     EList<JvmMember> _members = _delegate.getMembers();
     Iterable<JvmConstructor> _filter = Iterables.<JvmConstructor>filter(_members, JvmConstructor.class);
@@ -99,8 +97,7 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
       return Boolean.valueOf(_typeExtensions.isSingleSyntheticDefaultConstructor(it));
     };
     final JvmConstructor constructor = IterableExtensions.<JvmConstructor>findFirst(_filter, _function);
-    boolean _notEquals_1 = (!Objects.equal(constructor, null));
-    if (_notEquals_1) {
+    if ((constructor != null)) {
       EcoreUtil.remove(constructor);
     }
     final JvmConstructor newConstructor = TypesFactory.eINSTANCE.createJvmConstructor();
@@ -120,8 +117,7 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
   public MutableFieldDeclaration addField(final String name, final Procedure1<MutableFieldDeclaration> initializer) {
     this.checkMutable();
     ConditionUtils.checkJavaIdentifier(name, "name");
-    boolean _notEquals = (!Objects.equal(initializer, null));
-    Preconditions.checkArgument(_notEquals, "initializer cannot be null");
+    Preconditions.checkArgument((initializer != null), "initializer cannot be null");
     final JvmField newField = TypesFactory.eINSTANCE.createJvmField();
     newField.setSimpleName(name);
     newField.setVisibility(JvmVisibility.PRIVATE);
@@ -138,8 +134,7 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
   public MutableMethodDeclaration addMethod(final String name, final Procedure1<MutableMethodDeclaration> initializer) {
     this.checkMutable();
     ConditionUtils.checkJavaIdentifier(name, "name");
-    boolean _notEquals = (!Objects.equal(initializer, null));
-    Preconditions.checkArgument(_notEquals, "initializer cannot be null");
+    Preconditions.checkArgument((initializer != null), "initializer cannot be null");
     final JvmOperation newMethod = TypesFactory.eINSTANCE.createJvmOperation();
     newMethod.setVisibility(JvmVisibility.PUBLIC);
     newMethod.setSimpleName(name);

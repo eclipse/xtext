@@ -36,7 +36,7 @@ class XtendClassBuilder extends AbstractClassBuilder implements ICodeBuilder.Xte
 	@Inject extension InsertionOffsets
 	
 	override isValid() {
-		super.valid && className != null && visibility == JvmVisibility.PUBLIC  
+		super.valid && className !== null && visibility == JvmVisibility.PUBLIC  
 	}	
 
 	override build(ISourceAppender appendable) {
@@ -63,7 +63,7 @@ class XtendClassBuilder extends AbstractClassBuilder implements ICodeBuilder.Xte
 class JavaClassBuilder extends AbstractClassBuilder implements ICodeBuilder.Java {
 	
 	override isValid() {
-		super.valid && className != null  
+		super.valid && className !== null  
 	}	
 
 	override build(ISourceAppender appendable) {

@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.core.tests.typesystem;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -152,8 +151,7 @@ public class BoundTypeArgumentMergerTest extends AbstractTestingTypeReferenceOwn
   }
   
   public void to(final LightweightMergedBoundTypeArgument merged, final String type, final VarianceInfo variance) {
-    boolean _equals = Objects.equal(type, null);
-    if (_equals) {
+    if ((type == null)) {
       Assert.assertNull(merged);
     } else {
       LightweightTypeReference _typeReference = merged.getTypeReference();

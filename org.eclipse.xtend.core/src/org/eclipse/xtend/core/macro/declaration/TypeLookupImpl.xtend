@@ -62,7 +62,7 @@ class TypeLookupImpl implements TypeLookup, SourceTypeLookup, UpstreamTypeLookup
 			[type|type.getQualifiedName('.')],
 			[type|type.members.filter(JvmDeclaredType)]
 		)
-		return if (result != null) {
+		return if (result !== null) {
 			compilationUnit.toType(result)
 		}
 	}
@@ -102,7 +102,7 @@ class TypeLookupImpl implements TypeLookup, SourceTypeLookup, UpstreamTypeLookup
 			[type|compilationUnit.qualifiedNameConverter.toString(compilationUnit.qualifiedNameProvider.getFullyQualifiedName(type))],
 			[type|type.members.filter(XtendTypeDeclaration)]
 		)
-		return if (result != null) {
+		return if (result !== null) {
 			compilationUnit.toXtendTypeDeclaration(result)
 		}
 	}

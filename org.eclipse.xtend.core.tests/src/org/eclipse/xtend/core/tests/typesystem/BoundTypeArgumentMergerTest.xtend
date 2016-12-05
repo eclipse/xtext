@@ -71,7 +71,7 @@ class BoundTypeArgumentMergerTest extends AbstractTestingTypeReferenceOwner {
 	
 	
 	def to(LightweightMergedBoundTypeArgument merged, String type, VarianceInfo variance) {
-		if (type == null) {
+		if (type === null) {
 			assertNull(merged)
 		} else {
 			assertEquals(type, merged.typeReference.simpleName)

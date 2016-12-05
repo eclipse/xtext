@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.ide.codebuilder;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -70,8 +69,7 @@ public abstract class AbstractExecutableBuilder extends AbstractCodeBuilder {
       ISourceAppender _append = appendable.append(" {");
       ISourceAppender _increaseIndentation = _append.increaseIndentation();
       _increaseIndentation.newLine();
-      boolean _notEquals = (!Objects.equal(this.bodyGenerator, null));
-      if (_notEquals) {
+      if ((this.bodyGenerator != null)) {
         this.bodyGenerator.apply(appendable);
       } else {
         String _defaultBody = this.defaultBody();
@@ -134,8 +132,8 @@ public abstract class AbstractExecutableBuilder extends AbstractCodeBuilder {
           final AbstractParameterBuilder parameterBuilder = this.parameterBuilders.get((i).intValue());
           final VariableNameAcceptor acceptor = new VariableNameAcceptor(notAllowed);
           String _name = parameterBuilder.getName();
-          boolean _equals = Objects.equal(_name, null);
-          if (_equals) {
+          boolean _tripleEquals = (_name == null);
+          if (_tripleEquals) {
             LightweightTypeReference _type = parameterBuilder.getType();
             String _identifier = _type.getIdentifier();
             EObject _context = this.getContext();
@@ -168,8 +166,7 @@ public abstract class AbstractExecutableBuilder extends AbstractCodeBuilder {
         do {
           {
             final LightweightTypeReference typeRef = iterator.next();
-            boolean _notEquals = (!Objects.equal(typeRef, null));
-            if (_notEquals) {
+            if ((typeRef != null)) {
               this.appendType(appendable, typeRef, "Exception");
             }
             boolean _hasNext_1 = iterator.hasNext();

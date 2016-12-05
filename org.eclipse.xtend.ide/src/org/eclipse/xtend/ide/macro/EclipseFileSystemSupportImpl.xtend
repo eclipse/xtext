@@ -46,7 +46,7 @@ class EclipseFileSystemSupportImpl extends AbstractFileSystemSupport {
 
 	protected def java.net.URI toURI(URI uri, List<String> trailingSegments) {
 		val resource = uri.findMember
-		if (resource == null) {
+		if (resource === null) {
 			trailingSegments += uri.lastSegment
 			return toURI(uri.trimSegments(1), trailingSegments)
 		}

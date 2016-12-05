@@ -22,22 +22,21 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 @SuppressWarnings("all")
 public class ConditionUtils {
   public static void notRemoved(final EObject object, final String name) {
-    boolean _notEquals = (!Objects.equal(object, null));
     StringConcatenation _builder = new StringConcatenation();
     _builder.append(name, "");
     _builder.append(" cannot be null");
-    Preconditions.checkArgument(_notEquals, _builder);
+    Preconditions.checkArgument((object != null), _builder);
     Resource _eResource = object.eResource();
-    boolean _notEquals_1 = (!Objects.equal(_eResource, null));
+    boolean _tripleNotEquals = (_eResource != null);
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append(name, "");
     _builder_1.append(" cannot be removed");
-    Preconditions.checkArgument(_notEquals_1, _builder_1);
+    Preconditions.checkArgument(_tripleNotEquals, _builder_1);
   }
   
   public static void checkInferredTypeReferences(final String typeName, final TypeReference... types) {
     for (final TypeReference type : types) {
-      if (((!Objects.equal(type, null)) && type.isInferred())) {
+      if (((type != null) && type.isInferred())) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("Cannot use inferred type as ");
         _builder.append(typeName, "");
@@ -48,17 +47,15 @@ public class ConditionUtils {
   }
   
   public static void checkIterable(final Iterable<?> values, final String name) {
-    boolean _notEquals = (!Objects.equal(values, null));
     StringConcatenation _builder = new StringConcatenation();
     _builder.append(name, "");
     _builder.append(" cannot be null");
-    Preconditions.checkArgument(_notEquals, _builder);
+    Preconditions.checkArgument((values != null), _builder);
     for (final Object value : values) {
-      boolean _notEquals_1 = (!Objects.equal(value, null));
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append(name, "");
       _builder_1.append(" cannot contain null");
-      Preconditions.checkArgument(_notEquals_1, _builder_1);
+      Preconditions.checkArgument((value != null), _builder_1);
     }
   }
   
@@ -95,7 +92,7 @@ public class ConditionUtils {
   public static boolean isValidQualifiedName(final String string) {
     boolean _xblockexpression = false;
     {
-      if ((Objects.equal(string, null) || (string.length() == 0))) {
+      if (((string == null) || (string.length() == 0))) {
         return false;
       }
       String[] _split = string.split("\\.");
@@ -114,7 +111,7 @@ public class ConditionUtils {
   public static boolean isValidJavaIdentifier(final String string) {
     boolean _xblockexpression = false;
     {
-      if ((Objects.equal(string, null) || (string.length() == 0))) {
+      if (((string == null) || (string.length() == 0))) {
         return false;
       }
       final char[] charArray = string.toCharArray();

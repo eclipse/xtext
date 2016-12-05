@@ -44,7 +44,7 @@ class XtendFieldBuilder extends AbstractFieldBuilder implements ICodeBuilder.Xte
 	@Inject extension InsertionOffsets
 	
 	override isValid() {
-		super.isValid() && fieldName != null
+		super.isValid() && fieldName !== null
 	}
 	
 	override build(ISourceAppender appendable) {
@@ -73,7 +73,7 @@ class XtendFieldBuilder extends AbstractFieldBuilder implements ICodeBuilder.Xte
 class JavaFieldBuilder extends AbstractFieldBuilder implements ICodeBuilder.Java {
 	
 	override isValid() {
-		super.isValid() && fieldName != null && fieldType != null
+		super.isValid() && fieldName !== null && fieldType !== null
 	}
 	
 	override build(ISourceAppender appendable) {

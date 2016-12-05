@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.ide.codebuilder;
 
-import com.google.common.base.Objects;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.xtend.ide.codebuilder.AbstractFieldBuilder;
 import org.eclipse.xtend.ide.codebuilder.ICodeBuilder;
@@ -22,7 +21,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 public class JavaFieldBuilder extends AbstractFieldBuilder implements ICodeBuilder.Java {
   @Override
   public boolean isValid() {
-    return ((super.isValid() && (!Objects.equal(this.getFieldName(), null))) && (!Objects.equal(this.getFieldType(), null)));
+    return ((super.isValid() && (this.getFieldName() != null)) && (this.getFieldType() != null));
   }
   
   @Override

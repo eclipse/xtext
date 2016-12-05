@@ -77,8 +77,8 @@ class MemberFromSuperImplementor {
 				return [append(superInterface).append('.')]
 			}
 			val interfaze = subType.superTypes.filter[type.isInterface].map[type as JvmDeclaredType]
-				.findFirst[getImplementedInterface(superInterface) != null]
-			if (interfaze != null) {
+				.findFirst[getImplementedInterface(superInterface) !== null]
+			if (interfaze !== null) {
 				return [append(interfaze).append('.')]
 			}
 		}
@@ -110,7 +110,7 @@ class MemberFromSuperImplementor {
 			val parameterBuilder = builder.newParameterBuilder
 			parameterBuilder.name = declaredParameter.simpleName
 			parameterBuilder.type = it
-			parameterBuilder.extensionFlag = annotationLookup.findAnnotation(declaredParameter, Extension) != null
+			parameterBuilder.extensionFlag = annotationLookup.findAnnotation(declaredParameter, Extension) !== null
 		]
 		builder.varArgsFlag = executable.varArgs
 		builder.exceptions = overridden.resolvedExceptions

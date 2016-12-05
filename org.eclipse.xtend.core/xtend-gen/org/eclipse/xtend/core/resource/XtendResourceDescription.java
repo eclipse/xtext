@@ -1,6 +1,5 @@
 package org.eclipse.xtend.core.resource;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Iterators;
 import java.util.Collections;
@@ -56,8 +55,7 @@ public class XtendResourceDescription extends DefaultResourceDescription {
   
   @Override
   protected EObjectDescriptionLookUp getLookUp() {
-    boolean _equals = Objects.equal(this.lookup, null);
-    if (_equals) {
+    if ((this.lookup == null)) {
       List<IEObjectDescription> _computeExportedObjects = this.computeExportedObjects();
       EObjectDescriptionLookUp _eObjectDescriptionLookUp = new EObjectDescriptionLookUp(_computeExportedObjects);
       this.lookup = _eObjectDescriptionLookUp;
@@ -72,16 +70,14 @@ public class XtendResourceDescription extends DefaultResourceDescription {
   
   @Override
   public Iterable<QualifiedName> getImportedNames() {
-    boolean _notEquals = (!Objects.equal(this.importedNames, null));
-    if (_notEquals) {
+    if ((this.importedNames != null)) {
       return this.importedNames;
     }
     final HashSet<QualifiedName> result = CollectionLiterals.<QualifiedName>newHashSet();
     Resource _resource = this.getResource();
     EList<EObject> _contents = _resource.getContents();
     final EObject astRoot = IterableExtensions.<EObject>head(_contents);
-    boolean _notEquals_1 = (!Objects.equal(astRoot, null));
-    if (_notEquals_1) {
+    if ((astRoot != null)) {
       final IResolvedTypes types = this.typeResolver.resolveTypes(astRoot);
       TreeIterator<Object> _allContents = EcoreUtil.<Object>getAllContents(astRoot, true);
       Iterable<Object> _iterable = IteratorExtensions.<Object>toIterable(_allContents);
@@ -90,7 +86,7 @@ public class XtendResourceDescription extends DefaultResourceDescription {
         {
           boolean _matched = false;
           if (expression instanceof XMemberFeatureCall) {
-            if ((((!Objects.equal(((XMemberFeatureCall)expression).getFeature(), null)) && ((XMemberFeatureCall)expression).getFeature().eIsProxy()) && (!((XMemberFeatureCall)expression).isExplicitOperationCallOrBuilderSyntax()))) {
+            if ((((((XMemberFeatureCall)expression).getFeature() != null) && ((XMemberFeatureCall)expression).getFeature().eIsProxy()) && (!((XMemberFeatureCall)expression).isExplicitOperationCallOrBuilderSyntax()))) {
               _matched=true;
               final XExpression receiver = ((XMemberFeatureCall)expression).getActualReceiver();
               boolean _matched_1 = false;
@@ -128,8 +124,7 @@ public class XtendResourceDescription extends DefaultResourceDescription {
             }
           }
           final LightweightTypeReference typeRef = types.getActualType(expression);
-          boolean _notEquals_2 = (!Objects.equal(typeRef, null));
-          if (_notEquals_2) {
+          if ((typeRef != null)) {
             JvmType _type = typeRef.getType();
             final Function1<String, Boolean> _function = (String it) -> {
               QualifiedName _qualifiedName = this.nameConverter.toQualifiedName(it);
@@ -156,8 +151,7 @@ public class XtendResourceDescription extends DefaultResourceDescription {
           Iterator<LightweightTypeReference> _map = IteratorExtensions.<JvmIdentifiableElement, LightweightTypeReference>map(_filter_1, _function);
           final Iterable<LightweightTypeReference> typesOfIdentifiables = IteratorExtensions.<LightweightTypeReference>toIterable(_map);
           for (final LightweightTypeReference typeRef : typesOfIdentifiables) {
-            boolean _notEquals_2 = (!Objects.equal(typeRef, null));
-            if (_notEquals_2) {
+            if ((typeRef != null)) {
               JvmType _type = typeRef.getType();
               final Function1<String, Boolean> _function_1 = (String it) -> {
                 QualifiedName _qualifiedName = this.nameConverter.toQualifiedName(it);
@@ -184,7 +178,7 @@ public class XtendResourceDescription extends DefaultResourceDescription {
   }
   
   public void registerAllTypes(final JvmType type, final Function1<? super String, ? extends Boolean> acceptor) {
-    if ((Objects.equal(type, null) || type.eIsProxy())) {
+    if (((type == null) || type.eIsProxy())) {
       return;
     }
     if (((!this.isLocal(type)) && (acceptor.apply(type.getIdentifier())).booleanValue())) {

@@ -231,8 +231,7 @@ public class JavaASTFlattener extends ASTVisitor {
     };
     Iterable<IExtendedModifier> _filter = IterableExtensions.<IExtendedModifier>filter(ext, _function_1);
     IterableExtensions.<IExtendedModifier>forEach(_filter, appender);
-    boolean _notEquals = (!Objects.equal(callBack, null));
-    if (_notEquals) {
+    if ((callBack != null)) {
       callBack.apply(node);
     }
     final Function1<IExtendedModifier, Boolean> _function_2 = (IExtendedModifier it) -> {
@@ -448,8 +447,8 @@ public class JavaASTFlattener extends ASTVisitor {
   @Override
   public boolean visit(final PackageDeclaration it) {
     Javadoc _javadoc = it.getJavadoc();
-    boolean _notEquals = (!Objects.equal(_javadoc, null));
-    if (_notEquals) {
+    boolean _tripleNotEquals = (_javadoc != null);
+    if (_tripleNotEquals) {
       Javadoc _javadoc_1 = it.getJavadoc();
       _javadoc_1.accept(this);
     }
@@ -515,8 +514,8 @@ public class JavaASTFlattener extends ASTVisitor {
   @Override
   public boolean visit(final Initializer it) {
     Javadoc _javadoc = it.getJavadoc();
-    boolean _notEquals = (!Objects.equal(_javadoc, null));
-    if (_notEquals) {
+    boolean _tripleNotEquals = (_javadoc != null);
+    if (_tripleNotEquals) {
       Javadoc _javadoc_1 = it.getJavadoc();
       _javadoc_1.accept(this);
     }
@@ -584,8 +583,8 @@ public class JavaASTFlattener extends ASTVisitor {
       this.addProblem(it, "Non-static inner classes are not supported.");
     }
     Javadoc _javadoc = it.getJavadoc();
-    boolean _notEquals = (!Objects.equal(_javadoc, null));
-    if (_notEquals) {
+    boolean _tripleNotEquals = (_javadoc != null);
+    if (_tripleNotEquals) {
       Javadoc _javadoc_1 = it.getJavadoc();
       _javadoc_1.accept(this);
     }
@@ -614,8 +613,8 @@ public class JavaASTFlattener extends ASTVisitor {
     }
     this.appendSpaceToBuffer();
     Type _superclassType = it.getSuperclassType();
-    boolean _notEquals_1 = (!Objects.equal(_superclassType, null));
-    if (_notEquals_1) {
+    boolean _tripleNotEquals_1 = (_superclassType != null);
+    if (_tripleNotEquals_1) {
       this.appendToBuffer("extends ");
       Type _superclassType_1 = it.getSuperclassType();
       _superclassType_1.accept(this);
@@ -672,7 +671,7 @@ public class JavaASTFlattener extends ASTVisitor {
   private Iterable<Comment> unAssignedComments(final CompilationUnit cu) {
     List _commentList = cu.getCommentList();
     final Function1<Comment, Boolean> _function = (Comment c) -> {
-      return Boolean.valueOf(((!(c.isDocComment() && (!Objects.equal(c.getParent(), null)))) && this.notAssigned(c)));
+      return Boolean.valueOf(((!(c.isDocComment() && (c.getParent() != null))) && this.notAssigned(c)));
     };
     return IterableExtensions.<Comment>filter(_commentList, _function);
   }
@@ -763,8 +762,8 @@ public class JavaASTFlattener extends ASTVisitor {
   @Override
   public boolean visit(final FieldDeclaration it) {
     Javadoc _javadoc = it.getJavadoc();
-    boolean _notEquals = (!Objects.equal(_javadoc, null));
-    if (_notEquals) {
+    boolean _tripleNotEquals = (_javadoc != null);
+    if (_tripleNotEquals) {
       Javadoc _javadoc_1 = it.getJavadoc();
       _javadoc_1.accept(this);
     }
@@ -829,8 +828,8 @@ public class JavaASTFlattener extends ASTVisitor {
     SimpleName _name = it.getName();
     _name.accept(this);
     Expression _initializer = it.getInitializer();
-    boolean _notEquals = (!Objects.equal(_initializer, null));
-    if (_notEquals) {
+    boolean _tripleNotEquals = (_initializer != null);
+    if (_tripleNotEquals) {
       this.appendToBuffer("=");
       SimpleName _name_1 = it.getName();
       final Type type = this._aSTFlattenerUtils.findDeclaredType(_name_1);
@@ -968,7 +967,7 @@ public class JavaASTFlattener extends ASTVisitor {
   public void visitAll(final Iterable<? extends ASTNode> iterable, final String separator) {
     final Procedure2<ASTNode, Integer> _function = (ASTNode node, Integer counter) -> {
       node.accept(this);
-      if (((!Objects.equal(separator, null)) && ((counter).intValue() < (IterableExtensions.size(iterable) - 1)))) {
+      if (((separator != null) && ((counter).intValue() < (IterableExtensions.size(iterable) - 1)))) {
         this.appendToBuffer(separator);
       }
     };
@@ -988,8 +987,8 @@ public class JavaASTFlattener extends ASTVisitor {
   @Override
   public boolean visit(final MethodDeclaration it) {
     Javadoc _javadoc = it.getJavadoc();
-    boolean _notEquals = (!Objects.equal(_javadoc, null));
-    if (_notEquals) {
+    boolean _tripleNotEquals = (_javadoc != null);
+    if (_tripleNotEquals) {
       Javadoc _javadoc_1 = it.getJavadoc();
       _javadoc_1.accept(this);
     }
@@ -1049,8 +1048,8 @@ public class JavaASTFlattener extends ASTVisitor {
     boolean _not_2 = (!_isConstructor_2);
     if (_not_2) {
       Type _returnType2 = it.getReturnType2();
-      boolean _notEquals_1 = (!Objects.equal(_returnType2, null));
-      if (_notEquals_1) {
+      boolean _tripleNotEquals_1 = (_returnType2 != null);
+      if (_tripleNotEquals_1) {
         Type _returnType2_1 = it.getReturnType2();
         _returnType2_1.accept(this);
       } else {
@@ -1074,13 +1073,13 @@ public class JavaASTFlattener extends ASTVisitor {
           final Expression firstInBody = IterableExtensions.<Expression>head(_findAssignmentsInBlock);
           if ((firstInBody != null)) {
             ConstructorInvocation _findParentOfType = this._aSTFlattenerUtils.<ConstructorInvocation>findParentOfType(firstInBody, ConstructorInvocation.class);
-            boolean _tripleNotEquals = (_findParentOfType != null);
-            if (_tripleNotEquals) {
+            boolean _tripleNotEquals_2 = (_findParentOfType != null);
+            if (_tripleNotEquals_2) {
               this.addProblem(p, "Final parameter modified in constructor call");
             } else {
               SuperConstructorInvocation _findParentOfType_1 = this._aSTFlattenerUtils.<SuperConstructorInvocation>findParentOfType(firstInBody, SuperConstructorInvocation.class);
-              boolean _tripleNotEquals_1 = (_findParentOfType_1 != null);
-              if (_tripleNotEquals_1) {
+              boolean _tripleNotEquals_3 = (_findParentOfType_1 != null);
+              if (_tripleNotEquals_3) {
                 this.addProblem(p, "Final parameter modified in super constructor call");
               }
             }
@@ -1138,8 +1137,8 @@ public class JavaASTFlattener extends ASTVisitor {
     }
     this.appendSpaceToBuffer();
     Block _body = it.getBody();
-    boolean _notEquals_2 = (!Objects.equal(_body, null));
-    if (_notEquals_2) {
+    boolean _tripleNotEquals_2 = (_body != null);
+    if (_tripleNotEquals_2) {
       Block _body_1 = it.getBody();
       _body_1.accept(this);
     } else {
@@ -1175,8 +1174,8 @@ public class JavaASTFlattener extends ASTVisitor {
     SimpleName _name = it.getName();
     _name.accept(this);
     Expression _initializer = it.getInitializer();
-    boolean _notEquals = (!Objects.equal(_initializer, null));
-    if (_notEquals) {
+    boolean _tripleNotEquals = (_initializer != null);
+    if (_tripleNotEquals) {
       this.appendToBuffer("=");
       Expression _initializer_1 = it.getInitializer();
       _initializer_1.accept(this);
@@ -1187,8 +1186,8 @@ public class JavaASTFlattener extends ASTVisitor {
   @Override
   public boolean visit(final ClassInstanceCreation node) {
     Expression _expression = node.getExpression();
-    boolean _notEquals = (!Objects.equal(_expression, null));
-    if (_notEquals) {
+    boolean _tripleNotEquals = (_expression != null);
+    if (_tripleNotEquals) {
       Expression _expression_1 = node.getExpression();
       _expression_1.accept(this);
       this.appendToBuffer(".");
@@ -1256,8 +1255,8 @@ public class JavaASTFlattener extends ASTVisitor {
       }
       this.appendToBuffer(")");
       AnonymousClassDeclaration _anonymousClassDeclaration_1 = node.getAnonymousClassDeclaration();
-      boolean _notEquals_1 = (!Objects.equal(_anonymousClassDeclaration_1, null));
-      if (_notEquals_1) {
+      boolean _tripleNotEquals_1 = (_anonymousClassDeclaration_1 != null);
+      if (_tripleNotEquals_1) {
         AnonymousClassDeclaration _anonymousClassDeclaration_2 = node.getAnonymousClassDeclaration();
         _anonymousClassDeclaration_2.accept(this);
       }
@@ -1337,8 +1336,8 @@ public class JavaASTFlattener extends ASTVisitor {
   @Override
   public boolean visit(final MethodInvocation it) {
     Expression _expression = it.getExpression();
-    boolean _notEquals = (!Objects.equal(_expression, null));
-    if (_notEquals) {
+    boolean _tripleNotEquals = (_expression != null);
+    if (_tripleNotEquals) {
       Expression _expression_1 = it.getExpression();
       _expression_1.accept(this);
       if ((this.fallBackStrategy && this._aSTFlattenerUtils.isStaticMemberCall(it))) {
@@ -1370,8 +1369,8 @@ public class JavaASTFlattener extends ASTVisitor {
     this.visitAll(_initializers);
     this.appendToBuffer("; ");
     Expression _expression = it.getExpression();
-    boolean _notEquals = (!Objects.equal(_expression, null));
-    if (_notEquals) {
+    boolean _tripleNotEquals = (_expression != null);
+    if (_tripleNotEquals) {
       Expression _expression_1 = it.getExpression();
       _expression_1.accept(this);
     }
@@ -1393,8 +1392,8 @@ public class JavaASTFlattener extends ASTVisitor {
   @Override
   public boolean visit(final ThisExpression it) {
     Name _qualifier = it.getQualifier();
-    boolean _notEquals = (!Objects.equal(_qualifier, null));
-    if (_notEquals) {
+    boolean _tripleNotEquals = (_qualifier != null);
+    if (_tripleNotEquals) {
       Name _qualifier_1 = it.getQualifier();
       _qualifier_1.accept(this);
       this.appendToBuffer(".");
@@ -1412,8 +1411,8 @@ public class JavaASTFlattener extends ASTVisitor {
     Statement _thenStatement = node.getThenStatement();
     _thenStatement.accept(this);
     Statement _elseStatement = node.getElseStatement();
-    boolean _notEquals = (!Objects.equal(_elseStatement, null));
-    if (_notEquals) {
+    boolean _tripleNotEquals = (_elseStatement != null);
+    if (_tripleNotEquals) {
       this.appendToBuffer(" else ");
       Statement _elseStatement_1 = node.getElseStatement();
       _elseStatement_1.accept(this);
@@ -1585,8 +1584,7 @@ public class JavaASTFlattener extends ASTVisitor {
     }
     if ((expression instanceof SimpleName)) {
       final Type declType = this._aSTFlattenerUtils.findDeclaredType(((SimpleName)expression));
-      boolean _notEquals = (!Objects.equal(declType, null));
-      if (_notEquals) {
+      if ((declType != null)) {
         boolean _matched = false;
         boolean _isPrimitiveType = declType.isPrimitiveType();
         if (_isPrimitiveType) {
@@ -1640,8 +1638,8 @@ public class JavaASTFlattener extends ASTVisitor {
   public boolean visit(final ReturnStatement node) {
     this.appendToBuffer("return");
     Expression _expression = node.getExpression();
-    boolean _notEquals = (!Objects.equal(_expression, null));
-    if (_notEquals) {
+    boolean _tripleNotEquals = (_expression != null);
+    if (_tripleNotEquals) {
       this.appendSpaceToBuffer();
       Expression _expression_1 = node.getExpression();
       _expression_1.accept(this);
@@ -1658,8 +1656,7 @@ public class JavaASTFlattener extends ASTVisitor {
   
   @Override
   public boolean visit(final BlockComment node) {
-    boolean _notEquals = (!Objects.equal(this.javaSources, null));
-    if (_notEquals) {
+    if ((this.javaSources != null)) {
       String _commentContent = this.commentContent(node);
       this.appendToBuffer(_commentContent);
       boolean _shouldWrap = this.shouldWrap(node);
@@ -1695,8 +1692,7 @@ public class JavaASTFlattener extends ASTVisitor {
   
   @Override
   public boolean visit(final LineComment node) {
-    boolean _notEquals = (!Objects.equal(this.javaSources, null));
-    if (_notEquals) {
+    if ((this.javaSources != null)) {
       String _commentContent = this.commentContent(node);
       this.appendToBuffer(_commentContent);
     }
@@ -1918,8 +1914,8 @@ public class JavaASTFlattener extends ASTVisitor {
   @Override
   public boolean visit(final SuperConstructorInvocation node) {
     Expression _expression = node.getExpression();
-    boolean _notEquals = (!Objects.equal(_expression, null));
-    if (_notEquals) {
+    boolean _tripleNotEquals = (_expression != null);
+    if (_tripleNotEquals) {
       Expression _expression_1 = node.getExpression();
       _expression_1.accept(this);
       this.appendToBuffer(".");
@@ -1941,8 +1937,8 @@ public class JavaASTFlattener extends ASTVisitor {
   @Override
   public boolean visit(final SuperFieldAccess node) {
     Name _qualifier = node.getQualifier();
-    boolean _notEquals = (!Objects.equal(_qualifier, null));
-    if (_notEquals) {
+    boolean _tripleNotEquals = (_qualifier != null);
+    if (_tripleNotEquals) {
       Name _qualifier_1 = node.getQualifier();
       _qualifier_1.accept(this);
       this.appendToBuffer(".");
@@ -1956,8 +1952,8 @@ public class JavaASTFlattener extends ASTVisitor {
   @Override
   public boolean visit(final SuperMethodInvocation node) {
     Name _qualifier = node.getQualifier();
-    boolean _notEquals = (!Objects.equal(_qualifier, null));
-    if (_notEquals) {
+    boolean _tripleNotEquals = (_qualifier != null);
+    if (_tripleNotEquals) {
       Name _qualifier_1 = node.getQualifier();
       _qualifier_1.accept(this);
       this.appendToBuffer(".");
@@ -1990,8 +1986,8 @@ public class JavaASTFlattener extends ASTVisitor {
     }
     boolean previousRequiresWhiteSpace = false;
     String _tagName = node.getTagName();
-    boolean _notEquals = (!Objects.equal(_tagName, null));
-    if (_notEquals) {
+    boolean _tripleNotEquals = (_tagName != null);
+    if (_tripleNotEquals) {
       String _tagName_1 = node.getTagName();
       this.appendToBuffer(_tagName_1);
       previousRequiresWhiteSpace = true;
@@ -2075,8 +2071,8 @@ public class JavaASTFlattener extends ASTVisitor {
     };
     _catchClauses.forEach(_function);
     Block _finally = node.getFinally();
-    boolean _notEquals = (!Objects.equal(_finally, null));
-    if (_notEquals) {
+    boolean _tripleNotEquals = (_finally != null);
+    if (_tripleNotEquals) {
       this.appendToBuffer(" finally ");
       Block _finally_1 = node.getFinally();
       _finally_1.accept(this);
@@ -2173,8 +2169,7 @@ public class JavaASTFlattener extends ASTVisitor {
   public boolean visit(final WildcardType node) {
     this.appendToBuffer("?");
     Type bound = node.getBound();
-    boolean _notEquals = (!Objects.equal(bound, null));
-    if (_notEquals) {
+    if ((bound != null)) {
       boolean _isUpperBound = node.isUpperBound();
       if (_isUpperBound) {
         this.appendToBuffer(" extends ");
@@ -2213,8 +2208,8 @@ public class JavaASTFlattener extends ASTVisitor {
   @Override
   public boolean visit(final AnnotationTypeDeclaration node) {
     Javadoc _javadoc = node.getJavadoc();
-    boolean _notEquals = (!Objects.equal(_javadoc, null));
-    if (_notEquals) {
+    boolean _tripleNotEquals = (_javadoc != null);
+    if (_tripleNotEquals) {
       Javadoc _javadoc_1 = node.getJavadoc();
       _javadoc_1.accept(this);
     }
@@ -2234,8 +2229,8 @@ public class JavaASTFlattener extends ASTVisitor {
   @Override
   public boolean visit(final AnnotationTypeMemberDeclaration node) {
     Javadoc _javadoc = node.getJavadoc();
-    boolean _notEquals = (!Objects.equal(_javadoc, null));
-    if (_notEquals) {
+    boolean _tripleNotEquals = (_javadoc != null);
+    if (_tripleNotEquals) {
       Javadoc _javadoc_1 = node.getJavadoc();
       _javadoc_1.accept(this);
     }
@@ -2247,8 +2242,8 @@ public class JavaASTFlattener extends ASTVisitor {
     SimpleName _name = node.getName();
     _name.accept(this);
     Expression _default = node.getDefault();
-    boolean _notEquals_1 = (!Objects.equal(_default, null));
-    if (_notEquals_1) {
+    boolean _tripleNotEquals_1 = (_default != null);
+    if (_tripleNotEquals_1) {
       this.appendToBuffer(" = ");
       Expression _default_1 = node.getDefault();
       _default_1.accept(this);
@@ -2343,8 +2338,8 @@ public class JavaASTFlattener extends ASTVisitor {
       return false;
     }
     ArrayInitializer _initializer = node.getInitializer();
-    boolean _notEquals = (!Objects.equal(_initializer, null));
-    if (_notEquals) {
+    boolean _tripleNotEquals = (_initializer != null);
+    if (_tripleNotEquals) {
       if (this.fallBackStrategy) {
         this.appendToBuffer("(");
       }
@@ -2427,8 +2422,8 @@ public class JavaASTFlattener extends ASTVisitor {
     this.appendToBuffer(")) {");
     this.appendToBuffer("throw new AssertionError(");
     Expression _message = node.getMessage();
-    boolean _notEquals = (!Objects.equal(_message, null));
-    if (_notEquals) {
+    boolean _tripleNotEquals = (_message != null);
+    if (_tripleNotEquals) {
       Expression _message_1 = node.getMessage();
       _message_1.accept(this);
     }
@@ -2443,8 +2438,8 @@ public class JavaASTFlattener extends ASTVisitor {
     this.appendToBuffer(_builder.toString());
     this.addProblem(node, "Break statement is not supported");
     SimpleName _label = node.getLabel();
-    boolean _notEquals = (!Objects.equal(_label, null));
-    if (_notEquals) {
+    boolean _tripleNotEquals = (_label != null);
+    if (_tripleNotEquals) {
       this.appendSpaceToBuffer();
       SimpleName _label_1 = node.getLabel();
       _label_1.accept(this);
@@ -2509,8 +2504,8 @@ public class JavaASTFlattener extends ASTVisitor {
     this.appendToBuffer("/* FIXME Unsupported continue statement */ continue");
     this.addProblem(node, "Continue statement is not supported");
     SimpleName _label = node.getLabel();
-    boolean _notEquals = (!Objects.equal(_label, null));
-    if (_notEquals) {
+    boolean _tripleNotEquals = (_label != null);
+    if (_tripleNotEquals) {
       this.appendSpaceToBuffer();
       SimpleName _label_1 = node.getLabel();
       _label_1.accept(this);
@@ -2555,8 +2550,8 @@ public class JavaASTFlattener extends ASTVisitor {
   @Override
   public boolean visit(final EnumConstantDeclaration node) {
     Javadoc _javadoc = node.getJavadoc();
-    boolean _notEquals = (!Objects.equal(_javadoc, null));
-    if (_notEquals) {
+    boolean _tripleNotEquals = (_javadoc != null);
+    if (_tripleNotEquals) {
       Javadoc _javadoc_1 = node.getJavadoc();
       _javadoc_1.accept(this);
     }
@@ -2575,8 +2570,8 @@ public class JavaASTFlattener extends ASTVisitor {
       this.appendToBuffer(")");
     }
     AnonymousClassDeclaration _anonymousClassDeclaration = node.getAnonymousClassDeclaration();
-    boolean _notEquals_1 = (!Objects.equal(_anonymousClassDeclaration, null));
-    if (_notEquals_1) {
+    boolean _tripleNotEquals_1 = (_anonymousClassDeclaration != null);
+    if (_tripleNotEquals_1) {
       this.addProblem(node, "Enum constant cannot have any anonymous class declarations");
       AnonymousClassDeclaration _anonymousClassDeclaration_1 = node.getAnonymousClassDeclaration();
       _anonymousClassDeclaration_1.accept(this);
@@ -2587,8 +2582,8 @@ public class JavaASTFlattener extends ASTVisitor {
   @Override
   public boolean visit(final EnumDeclaration node) {
     Javadoc _javadoc = node.getJavadoc();
-    boolean _notEquals = (!Objects.equal(_javadoc, null));
-    if (_notEquals) {
+    boolean _tripleNotEquals = (_javadoc != null);
+    if (_tripleNotEquals) {
       Javadoc _javadoc_1 = node.getJavadoc();
       _javadoc_1.accept(this);
     }
@@ -2649,8 +2644,8 @@ public class JavaASTFlattener extends ASTVisitor {
   @Override
   public boolean visit(final MemberRef node) {
     Name _qualifier = node.getQualifier();
-    boolean _notEquals = (!Objects.equal(_qualifier, null));
-    if (_notEquals) {
+    boolean _tripleNotEquals = (_qualifier != null);
+    if (_tripleNotEquals) {
       Name _qualifier_1 = node.getQualifier();
       _qualifier_1.accept(this);
     }
@@ -2663,8 +2658,8 @@ public class JavaASTFlattener extends ASTVisitor {
   @Override
   public boolean visit(final MethodRef node) {
     Name _qualifier = node.getQualifier();
-    boolean _notEquals = (!Objects.equal(_qualifier, null));
-    if (_notEquals) {
+    boolean _tripleNotEquals = (_qualifier != null);
+    if (_tripleNotEquals) {
       Name _qualifier_1 = node.getQualifier();
       _qualifier_1.accept(this);
     }
@@ -2687,8 +2682,8 @@ public class JavaASTFlattener extends ASTVisitor {
       this.appendToBuffer("...");
     }
     SimpleName _name = node.getName();
-    boolean _notEquals = (!Objects.equal(_name, null));
-    if (_notEquals) {
+    boolean _tripleNotEquals = (_name != null);
+    if (_tripleNotEquals) {
       this.appendSpaceToBuffer();
       SimpleName _name_1 = node.getName();
       _name_1.accept(this);

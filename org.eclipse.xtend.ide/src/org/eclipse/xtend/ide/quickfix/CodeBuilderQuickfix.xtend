@@ -104,7 +104,7 @@ class CodeBuilderQuickfix {
 					JavaMethodBuilder: type.createMethod(content.toString, null, true, new NullProgressMonitor)
 					default: null
 				}
-			if(element != null)
+			if(element !== null)
 				new JdtHyperlink => [
 					javaElement = element
 					open

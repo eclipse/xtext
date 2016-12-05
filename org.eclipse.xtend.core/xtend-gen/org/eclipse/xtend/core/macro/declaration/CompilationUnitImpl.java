@@ -373,15 +373,13 @@ public class CompilationUnitImpl implements CompilationUnit {
   public MutableFileSystemSupport getFileSystemSupport() {
     MutableFileSystemSupport _xblockexpression = null;
     {
-      boolean _equals = Objects.equal(this.decoratedFileSystemSupport, null);
-      if (_equals) {
+      if ((this.decoratedFileSystemSupport == null)) {
         Resource _eResource = this.xtendFile.eResource();
         ResourceSet _resourceSet = _eResource.getResourceSet();
         EList<Adapter> _eAdapters = _resourceSet.eAdapters();
         Iterable<FileSystemAccessQueue> _filter = Iterables.<FileSystemAccessQueue>filter(_eAdapters, FileSystemAccessQueue.class);
         final FileSystemAccessQueue fileSystemAccessQueue = IterableExtensions.<FileSystemAccessQueue>head(_filter);
-        boolean _equals_1 = Objects.equal(fileSystemAccessQueue, null);
-        if (_equals_1) {
+        if ((fileSystemAccessQueue == null)) {
           return this.createListeningFileSystemSupport();
         }
         Resource _eResource_1 = this.xtendFile.eResource();
@@ -455,8 +453,7 @@ public class CompilationUnitImpl implements CompilationUnit {
   
   private <IN extends Object, OUT extends Object> OUT getOrCreate(final IN in, final Function1<? super IN, ? extends OUT> provider) {
     this.checkCanceled();
-    boolean _equals = Objects.equal(in, null);
-    if (_equals) {
+    if ((in == null)) {
       return null;
     }
     boolean _containsKey = this.identityCache.containsKey(in);
@@ -907,8 +904,7 @@ public class CompilationUnitImpl implements CompilationUnit {
   public TypeReference toTypeReference(final JvmTypeReference delegate) {
     TypeReference _xblockexpression = null;
     {
-      boolean _equals = Objects.equal(delegate, null);
-      if (_equals) {
+      if ((delegate == null)) {
         return null;
       }
       TypeReference _switchResult = null;
@@ -943,8 +939,7 @@ public class CompilationUnitImpl implements CompilationUnit {
     TypeReferenceImpl _xblockexpression = null;
     {
       this.checkCanceled();
-      boolean _equals = Objects.equal(delegate, null);
-      if (_equals) {
+      if ((delegate == null)) {
         return null;
       }
       TypeReferenceImpl _typeReferenceImpl = new TypeReferenceImpl();
@@ -1404,8 +1399,7 @@ public class CompilationUnitImpl implements CompilationUnit {
   protected Object translateAnnotationValue(final Object value, final JvmTypeReference expectedType, final boolean isArray) {
     Object _xblockexpression = null;
     {
-      boolean _equals = Objects.equal(value, null);
-      if (_equals) {
+      if ((value == null)) {
         return null;
       }
       if (((!isArray) || value.getClass().isArray())) {
@@ -1483,8 +1477,8 @@ public class CompilationUnitImpl implements CompilationUnit {
   
   protected JvmTypeReference findExpectedType(final JvmAnnotationValue value) {
     JvmOperation _operation = value.getOperation();
-    boolean _notEquals = (!Objects.equal(_operation, null));
-    if (_notEquals) {
+    boolean _tripleNotEquals = (_operation != null);
+    if (_tripleNotEquals) {
       JvmOperation _operation_1 = value.getOperation();
       return _operation_1.getReturnType();
     }
@@ -1506,8 +1500,7 @@ public class CompilationUnitImpl implements CompilationUnit {
           Iterable<JvmOperation> _filter = Iterables.<JvmOperation>filter(_findAllFeaturesByName, JvmOperation.class);
           final JvmOperation defaultOp = IterableExtensions.<JvmOperation>head(_filter);
           JvmTypeReference _xifexpression = null;
-          boolean _notEquals_1 = (!Objects.equal(defaultOp, null));
-          if (_notEquals_1) {
+          if ((defaultOp != null)) {
             _xifexpression = defaultOp.getReturnType();
           }
           _xblockexpression = _xifexpression;
@@ -1667,8 +1660,7 @@ public class CompilationUnitImpl implements CompilationUnit {
       for (final XAnnotationElementValuePair valuePair : _elementValuePairs) {
         {
           final XExpression value = valuePair.getValue();
-          boolean _notEquals = (!Objects.equal(value, null));
-          if (_notEquals) {
+          if ((value != null)) {
             final JvmOperation operation = valuePair.getElement();
             JvmTypeReference _returnType = operation.getReturnType();
             final Object annotationValue = this.translateAnnotationValue(value, _returnType);
@@ -1678,8 +1670,8 @@ public class CompilationUnitImpl implements CompilationUnit {
         }
       }
       XExpression _value = annotation.getValue();
-      boolean _notEquals = (!Objects.equal(_value, null));
-      if (_notEquals) {
+      boolean _tripleNotEquals = (_value != null);
+      if (_tripleNotEquals) {
         XExpression _value_1 = annotation.getValue();
         final Object annotationValue = this.translateAnnotationValue(_value_1, null);
         buildContext.set("value", annotationValue);

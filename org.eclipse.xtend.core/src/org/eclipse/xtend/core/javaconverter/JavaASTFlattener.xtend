@@ -190,7 +190,7 @@ class JavaASTFlattener extends ASTVisitor {
 	def appendModifiers(ASTNode node, Iterable<IExtendedModifier> ext, (ASTNode)=>StringBuffer callBack) {
 		val appender = [IExtendedModifier p|(p as ASTNode).accept(this)]
 		ext.filter[isAnnotation && (it as Annotation).typeName.toString != "Override"].forEach(appender)
-		if (callBack != null) {
+		if (callBack !== null) {
 			callBack.apply(node)
 		}
 		ext.filter[isModifier && (it as Modifier).keyword.toString != "default"].forEach(appender)
@@ -307,7 +307,7 @@ class JavaASTFlattener extends ASTVisitor {
 	}
 
 	override visit(PackageDeclaration it) {
-		if (javadoc != null) {
+		if (javadoc !== null) {
 			javadoc.accept(this)
 		}
 		annotations.visitAll(" ")
@@ -356,7 +356,7 @@ class JavaASTFlattener extends ASTVisitor {
 	}
 
 	override visit(Initializer it) {
-		if (javadoc != null) {
+		if (javadoc !== null) {
 			javadoc.accept(this)
 		}
 		appendModifiers(modifiers())
@@ -396,7 +396,7 @@ class JavaASTFlattener extends ASTVisitor {
 			addProblem("Non-static inner classes are not supported.")
 		}
 
-		if (javadoc != null) {
+		if (javadoc !== null) {
 			javadoc.accept(this)
 		}
 		appendModifiers(modifiers())
@@ -414,7 +414,7 @@ class JavaASTFlattener extends ASTVisitor {
 			typeParameters.appendTypeParameters
 		}
 		appendSpaceToBuffer
-		if (getSuperclassType() != null) {
+		if (getSuperclassType() !== null) {
 			appendToBuffer("extends ")
 			getSuperclassType.accept(this)
 			appendSpaceToBuffer
@@ -455,7 +455,7 @@ class JavaASTFlattener extends ASTVisitor {
 	}
 
 	def private Iterable<Comment> unAssignedComments(CompilationUnit cu) {
-		cu.commentList.filter[Comment c|!(c.docComment && c.parent != null) && c.notAssigned]
+		cu.commentList.filter[Comment c|!(c.docComment && c.parent !== null) && c.notAssigned]
 	}
 
 	override visit(Javadoc it) {
@@ -522,7 +522,7 @@ class JavaASTFlattener extends ASTVisitor {
 	}
 
 	override visit(FieldDeclaration it) {
-		if (javadoc != null) {
+		if (javadoc !== null) {
 			javadoc.accept(this)
 		}
 		fragments.forEach [ VariableDeclarationFragment frag |
@@ -561,7 +561,7 @@ class JavaASTFlattener extends ASTVisitor {
 
 	override visit(VariableDeclarationFragment it) {
 		name.accept(this)
-		if (getInitializer() != null) {
+		if (getInitializer() !== null) {
 			appendToBuffer("=")
 			val type = findDeclaredType(name)
 			if (type.needPrimitiveCast && !hasDimensions(it)) {
@@ -652,7 +652,7 @@ class JavaASTFlattener extends ASTVisitor {
 	def visitAll(Iterable<? extends ASTNode> iterable, String separator) {
 		iterable.forEach [ ASTNode node, counter |
 			node.accept(this)
-			if (separator != null && counter < iterable.size - 1) {
+			if (separator !== null && counter < iterable.size - 1) {
 				appendToBuffer(separator)
 			}
 		]
@@ -667,7 +667,7 @@ class JavaASTFlattener extends ASTVisitor {
 	}
 
 	override visit(MethodDeclaration it) {
-		if (javadoc != null) {
+		if (javadoc !== null) {
 			javadoc.accept(this)
 		}
 		val afterAnnotationProcessingCallback = [ ASTNode node |
@@ -699,7 +699,7 @@ class JavaASTFlattener extends ASTVisitor {
 			typeParameters.appendTypeParameters
 		}
 		if (!isConstructor()) {
-			if (getReturnType2() != null) {
+			if (getReturnType2() !== null) {
 				getReturnType2.accept(this)
 			} else {
 				appendToBuffer("void")
@@ -745,7 +745,7 @@ class JavaASTFlattener extends ASTVisitor {
 			throwsTypes.visitAllSeparatedByComma
 		}
 		appendSpaceToBuffer
-		if (getBody() != null) {
+		if (getBody() !== null) {
 			getBody.accept(this)
 		} else {
 			appendLineWrapToBuffer
@@ -767,7 +767,7 @@ class JavaASTFlattener extends ASTVisitor {
 		}
 		appendSpaceToBuffer
 		name.accept(this)
-		if (getInitializer() != null) {
+		if (getInitializer() !== null) {
 			appendToBuffer("=")
 			getInitializer.accept(this)
 		}
@@ -775,7 +775,7 @@ class JavaASTFlattener extends ASTVisitor {
 	}
 
 	override boolean visit(ClassInstanceCreation node) {
-		if (node.getExpression() != null) {
+		if (node.getExpression() !== null) {
 			node.getExpression().accept(this)
 			appendToBuffer(".")
 		}
@@ -816,7 +816,7 @@ class JavaASTFlattener extends ASTVisitor {
 				}
 			}
 			appendToBuffer(")")
-			if (node.getAnonymousClassDeclaration() != null) {
+			if (node.getAnonymousClassDeclaration() !== null) {
 				node.getAnonymousClassDeclaration().accept(this)
 			}
 		}
@@ -871,7 +871,7 @@ class JavaASTFlattener extends ASTVisitor {
 	}
 
 	override visit(MethodInvocation it) {
-		if (getExpression() != null) {
+		if (getExpression() !== null) {
 			getExpression.accept(this)
 			if (fallBackStrategy && isStaticMemberCall) {
 				appendToBuffer("::")
@@ -893,7 +893,7 @@ class JavaASTFlattener extends ASTVisitor {
 		appendToBuffer("for (")
 		initializers.visitAll
 		appendToBuffer("; ")
-		if (getExpression() != null) {
+		if (getExpression() !== null) {
 			getExpression.accept(this)
 		}
 		appendToBuffer("; ")
@@ -910,7 +910,7 @@ class JavaASTFlattener extends ASTVisitor {
 	}
 
 	override visit(ThisExpression it) {
-		if (getQualifier() != null) {
+		if (getQualifier() !== null) {
 			getQualifier.accept(this)
 			appendToBuffer(".")
 		}
@@ -923,7 +923,7 @@ class JavaASTFlattener extends ASTVisitor {
 		node.getExpression().accept(this)
 		appendToBuffer(") ")
 		node.getThenStatement().accept(this)
-		if (node.getElseStatement() != null) {
+		if (node.getElseStatement() !== null) {
 			appendToBuffer(" else ")
 			node.getElseStatement().accept(this)
 		}
@@ -1026,7 +1026,7 @@ class JavaASTFlattener extends ASTVisitor {
 		}
 		if (expression instanceof SimpleName) {
 			val declType = findDeclaredType(expression)
-			if (declType != null) {
+			if (declType !== null) {
 				switch declType {
 					case declType.isPrimitiveType: {
 						return (declType as PrimitiveType).getPrimitiveTypeCode == PrimitiveType.BOOLEAN
@@ -1068,7 +1068,7 @@ class JavaASTFlattener extends ASTVisitor {
 
 	override boolean visit(ReturnStatement node) {
 		appendToBuffer("return")
-		if (node.getExpression() != null) {
+		if (node.getExpression() !== null) {
 			appendSpaceToBuffer
 			node.getExpression().accept(this)
 			appendSpaceToBuffer
@@ -1083,7 +1083,7 @@ class JavaASTFlattener extends ASTVisitor {
 	}
 
 	override visit(BlockComment node) {
-		if (javaSources != null) {
+		if (javaSources !== null) {
 			appendToBuffer(node.commentContent)
 			if(node.shouldWrap) appendLineWrapToBuffer
 		}
@@ -1105,7 +1105,7 @@ class JavaASTFlattener extends ASTVisitor {
 	}
 
 	override boolean visit(LineComment node) {
-		if (javaSources != null) {
+		if (javaSources !== null) {
 			appendToBuffer(node.commentContent)
 		}
 		appendLineWrapToBuffer
@@ -1232,7 +1232,7 @@ class JavaASTFlattener extends ASTVisitor {
 	}
 
 	@Override override boolean visit(SuperConstructorInvocation node) {
-		if (node.getExpression() != null) {
+		if (node.getExpression() !== null) {
 			node.getExpression().accept(this)
 			appendToBuffer(".")
 		}
@@ -1246,7 +1246,7 @@ class JavaASTFlattener extends ASTVisitor {
 	}
 
 	@Override override boolean visit(SuperFieldAccess node) {
-		if (node.getQualifier() != null) {
+		if (node.getQualifier() !== null) {
 			node.getQualifier().accept(this)
 			appendToBuffer(".")
 		}
@@ -1256,7 +1256,7 @@ class JavaASTFlattener extends ASTVisitor {
 	}
 
 	@Override override boolean visit(SuperMethodInvocation node) {
-		if (node.getQualifier() != null) {
+		if (node.getQualifier() !== null) {
 			node.getQualifier().accept(this)
 			appendToBuffer(".")
 		}
@@ -1280,7 +1280,7 @@ class JavaASTFlattener extends ASTVisitor {
 		}
 
 		var boolean previousRequiresWhiteSpace = false
-		if (node.getTagName() != null) {
+		if (node.getTagName() !== null) {
 			appendToBuffer(node.getTagName())
 			previousRequiresWhiteSpace = true
 		}
@@ -1344,7 +1344,7 @@ class JavaASTFlattener extends ASTVisitor {
 		node.getBody().accept(this)
 		node.catchClauses.forEach[(it as ASTNode).accept(this)]
 
-		if (node.getFinally() != null) {
+		if (node.getFinally() !== null) {
 			appendToBuffer(" finally ")
 			node.getFinally().accept(this)
 		} else {
@@ -1405,7 +1405,7 @@ class JavaASTFlattener extends ASTVisitor {
 	override boolean visit(WildcardType node) {
 		appendToBuffer("?")
 		var Type bound = node.getBound()
-		if (bound != null) {
+		if (bound !== null) {
 			if (node.isUpperBound()) {
 				appendToBuffer(" extends ")
 			} else {
@@ -1433,7 +1433,7 @@ class JavaASTFlattener extends ASTVisitor {
 
 	/* Start self Converted part*/
 	@Override override boolean visit(AnnotationTypeDeclaration node) {
-		if (node.getJavadoc() != null) {
+		if (node.getJavadoc() !== null) {
 			node.getJavadoc().accept(this)
 		}
 		appendModifiers(node, node.modifiers())
@@ -1447,14 +1447,14 @@ class JavaASTFlattener extends ASTVisitor {
 	}
 
 	@Override override boolean visit(AnnotationTypeMemberDeclaration node) {
-		if (node.getJavadoc() != null) {
+		if (node.getJavadoc() !== null) {
 			node.getJavadoc().accept(this)
 		}
 		appendModifiers(node, node.modifiers())
 		node.getType().accept(this)
 		appendSpaceToBuffer
 		node.getName().accept(this)
-		if (node.getDefault() != null) {
+		if (node.getDefault() !== null) {
 			appendToBuffer(" = ")
 			node.getDefault().accept(this)
 		}
@@ -1512,7 +1512,7 @@ class JavaASTFlattener extends ASTVisitor {
 			node.addProblem("Only one dimension arrays are supported.")
 			return false
 		}
-		if (node.getInitializer() != null) {
+		if (node.getInitializer() !== null) {
 			if(fallBackStrategy) appendToBuffer('(')
 			node.getInitializer().accept(this)
 			if (fallBackStrategy) {
@@ -1561,7 +1561,7 @@ class JavaASTFlattener extends ASTVisitor {
 		node.getExpression().accept(this)
 		appendToBuffer(")) {")
 		appendToBuffer("throw new AssertionError(")
-		if (node.getMessage() != null) {
+		if (node.getMessage() !== null) {
 			node.getMessage().accept(this)
 		}
 		appendToBuffer(")}")
@@ -1571,7 +1571,7 @@ class JavaASTFlattener extends ASTVisitor {
 	@Override override boolean visit(BreakStatement node) {
 		appendToBuffer('''/* FIXME Unsupported BreakStatement */ break''')
 		node.addProblem("Break statement is not supported")
-		if (node.getLabel() != null) {
+		if (node.getLabel() !== null) {
 			appendSpaceToBuffer
 			node.getLabel().accept(this)
 		}
@@ -1611,7 +1611,7 @@ class JavaASTFlattener extends ASTVisitor {
 	@Override override boolean visit(ContinueStatement node) {
 		appendToBuffer("/* FIXME Unsupported continue statement */ continue")
 		node.addProblem("Continue statement is not supported")
-		if (node.getLabel() != null) {
+		if (node.getLabel() !== null) {
 			appendSpaceToBuffer
 			node.getLabel().accept(this)
 		}
@@ -1645,7 +1645,7 @@ class JavaASTFlattener extends ASTVisitor {
 	}
 
 	@Override override boolean visit(EnumConstantDeclaration node) {
-		if (node.getJavadoc() != null) {
+		if (node.getJavadoc() !== null) {
 			node.getJavadoc().accept(this)
 		}
 		appendModifiers(node, node.modifiers())
@@ -1656,7 +1656,7 @@ class JavaASTFlattener extends ASTVisitor {
 			visitAllSeparatedByComma(node.arguments())
 			appendToBuffer(")")
 		}
-		if (node.getAnonymousClassDeclaration() != null) {
+		if (node.getAnonymousClassDeclaration() !== null) {
 			node.addProblem("Enum constant cannot have any anonymous class declarations")
 			node.getAnonymousClassDeclaration().accept(this)
 		}
@@ -1664,7 +1664,7 @@ class JavaASTFlattener extends ASTVisitor {
 	}
 
 	@Override override boolean visit(EnumDeclaration node) {
-		if (node.getJavadoc() != null) {
+		if (node.getJavadoc() !== null) {
 			node.getJavadoc().accept(this)
 		}
 		appendModifiers(node, node.modifiers())
@@ -1706,7 +1706,7 @@ class JavaASTFlattener extends ASTVisitor {
 	}
 
 	@Override override boolean visit(MemberRef node) {
-		if (node.getQualifier() != null) {
+		if (node.getQualifier() !== null) {
 			node.getQualifier().accept(this)
 		}
 		appendToBuffer("#")
@@ -1715,7 +1715,7 @@ class JavaASTFlattener extends ASTVisitor {
 	}
 
 	@Override override boolean visit(MethodRef node) {
-		if (node.getQualifier() != null) {
+		if (node.getQualifier() !== null) {
 			node.getQualifier().accept(this)
 		}
 		appendToBuffer("#")
@@ -1731,7 +1731,7 @@ class JavaASTFlattener extends ASTVisitor {
 		if (node.isVarargs()) {
 			appendToBuffer("...")
 		}
-		if (node.getName() != null) {
+		if (node.getName() !== null) {
 			appendSpaceToBuffer
 			node.getName().accept(this)
 		}

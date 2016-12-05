@@ -74,7 +74,7 @@ class XtendCompletionContributor extends AbstractXtendCompletionContributor {
 		) [
 			val psiElement = $0.position
 			val clazz = psiElement.findEObject?.getContainerOfType(XtendTypeDeclaration)
-			if (clazz == null) {
+			if (clazz === null) {
 				return
 			}
 			val jvmType = jvmModelAssociations.getPrimaryJvmElement(clazz)

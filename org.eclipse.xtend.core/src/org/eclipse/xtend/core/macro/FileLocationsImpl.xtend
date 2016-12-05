@@ -40,12 +40,12 @@ class FileLocationsImpl implements FileLocations {
 
 	override Path getTargetFolder(Path path) {
 		val projectFolder = getProjectFolder(path)
-		if (projectFolder == null) {
+		if (projectFolder === null) {
 		 return null
 		}
 		val outputConfiguration = outputConfigurationProvider.getOutputConfigurations(context).head
 		val sourceFolder = getSourceFolder(path)
-		val outputFolder = if (sourceFolder == null) {
+		val outputFolder = if (sourceFolder === null) {
 			outputConfiguration.outputDirectory
 		} else {
 			val projectRelativeSourceFolder = sourceFolder.segments.tail.join('/')

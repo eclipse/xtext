@@ -128,7 +128,7 @@ class XtendCodeContextTypeTest extends LightXtendTest {
 		val result = TemplateManagerImpl.allContextTypes.findFirst[
 			clazz.isInstance(it)
 		]
-		if (result == null) {
+		if (result === null) {
 			throw new AssertionError("The context type "+clazz.name+" wasn't registered.")
 		}
 		return result

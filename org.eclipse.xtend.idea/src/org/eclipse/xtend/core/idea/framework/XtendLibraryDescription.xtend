@@ -40,7 +40,7 @@ class XtendLibraryDescription extends CustomLibraryDescription {
 
 	def createLibraryDescription() {
 		val provider = providers.head
-		if (provider == null) {
+		if (provider === null) {
 			return null
 		}
 		return new NewLibraryConfiguration(XTEND_LIBRARY_NAME) {

@@ -38,7 +38,7 @@ class EclipseASTParserFactory extends org.eclipse.xtend.core.javaconverter.ASTPa
 	}
 
 	def tweakOptions(ASTParser parser, IJavaProject project) {
-		if (project != null) {
+		if (project !== null) {
 			val options = project.getOptions(true);
 			options.remove(JavaCore.COMPILER_TASK_TAGS);
 			options.put(JavaCore.COMPILER_DOC_COMMENT_SUPPORT, JavaCore.ENABLED)

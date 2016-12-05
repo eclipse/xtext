@@ -292,15 +292,15 @@ abstract class AbstractOutlineTests extends LightToolingTest {
 
 	override void testStructureView(Consumer<StructureViewComponent> consumer) {
 		val myFile = myFixture.file.virtualFile
-		if (!(myFile != null)) {
+		if (!(myFile !== null)) {
 			throw new AssertionError("configure first")
 		}
 		val fileEditor = FileEditorManager.getInstance(project).getSelectedEditor(myFile)
-		if (fileEditor == null) {
+		if (fileEditor === null) {
 			throw new AssertionError('''editor not opened for «myFile»''')
 		}
 		val builder = LanguageStructureViewBuilder.INSTANCE.getStructureViewBuilder(myFixture.file)
-		if (builder == null) {
+		if (builder === null) {
 			throw new AssertionError('''no builder for «myFile»''')
 		}
 		var StructureView view = null
@@ -309,7 +309,7 @@ abstract class AbstractOutlineTests extends LightToolingTest {
 			val component = view.structureViewComponent
 			consumer.consume(component)
 		} finally {
-			if(view != null) Disposer.dispose(view)
+			if(view !== null) Disposer.dispose(view)
 		}
 	}
 

@@ -41,7 +41,7 @@ class XtendOutlineWithEditorLinker extends OutlineWithEditorLinker {
 	
 	def protected void findNodesInRange(IOutlineNode input, ITextRegion selectedTextRegion, List<IOutlineNode> nodes) {
 		val ITextRegion textRegion = input.getFullTextRegion();
-		if (textRegion == null || textRegion.contains(selectedTextRegion)) {
+		if (textRegion === null || textRegion.contains(selectedTextRegion)) {
 			nodes.add(input)
 		}
 		for (IOutlineNode child : input.getChildren()) {

@@ -220,7 +220,7 @@ class XtendGenerator extends JvmModelGenerator implements IGenerator2 {
 						tracedAppendable.append(" ")
 						tracedAppendable.traceSignificant(it).append(simpleName)
 						if (isFinal && isStatic) {
-							if (constantValue != null) {
+							if (constantValue !== null) {
 								tracedAppendable.append(" = ")
 								generateJavaConstant(constantValue, tracedAppendable)
 							} else {

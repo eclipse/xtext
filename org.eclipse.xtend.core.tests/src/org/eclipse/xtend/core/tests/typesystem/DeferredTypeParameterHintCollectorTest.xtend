@@ -185,7 +185,7 @@ class MockTypeParameterSubstitutor extends TypeParameterSubstitutor<Set<JvmTypeP
 			}
 			try {
 				val mappedReference = getTypeParameterMapping().get(type);
-				if (mappedReference != null) {
+				if (mappedReference !== null) {
 					return mappedReference.typeReference.accept(this, visiting)
 				} else {
 					val result = new SimpleUnboundTypeReference(owner, type, new Object)

@@ -52,8 +52,8 @@ public class EclipseXtendOutlineSourceContext extends EclipseXtendOutlineContext
     final EObject function = this._iXtendJvmAssociations.getPrimarySourceElement(member);
     if ((function instanceof XtendFunction)) {
       CreateExtensionInfo _createExtensionInfo = ((XtendFunction)function).getCreateExtensionInfo();
-      boolean _notEquals = (!Objects.equal(_createExtensionInfo, null));
-      if (_notEquals) {
+      boolean _tripleNotEquals = (_createExtensionInfo != null);
+      if (_tripleNotEquals) {
         Set<EObject> _jvmElements = this._iXtendJvmAssociations.getJvmElements(function);
         Iterable<JvmFeature> _filter = Iterables.<JvmFeature>filter(_jvmElements, JvmFeature.class);
         final Function1<JvmFeature, Boolean> _function = (JvmFeature it) -> {

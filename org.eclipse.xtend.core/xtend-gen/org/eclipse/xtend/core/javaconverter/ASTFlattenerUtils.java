@@ -83,11 +83,10 @@ public class ASTFlattenerUtils {
       return true;
     }
     final IMethodBinding iMethodBinding = declaration.resolveBinding();
-    boolean _notEquals = (!Objects.equal(iMethodBinding, null));
-    if (_notEquals) {
+    if ((iMethodBinding != null)) {
       ITypeBinding _declaringClass = iMethodBinding.getDeclaringClass();
       IMethodBinding _findOverride = this.findOverride(iMethodBinding, _declaringClass);
-      return (!Objects.equal(_findOverride, null));
+      return (_findOverride != null);
     }
     return false;
   }
@@ -99,20 +98,17 @@ public class ASTFlattenerUtils {
   public IMethodBinding findOverride(final IMethodBinding method, final ITypeBinding type, final boolean onlyPrimarylevel) {
     final ITypeBinding superclass = type.getSuperclass();
     IMethodBinding overridden = null;
-    boolean _notEquals = (!Objects.equal(superclass, null));
-    if (_notEquals) {
+    if ((superclass != null)) {
       IMethodBinding _internalFindOverride = this.internalFindOverride(method, superclass, onlyPrimarylevel);
       overridden = _internalFindOverride;
     }
-    boolean _equals = Objects.equal(overridden, null);
-    if (_equals) {
+    if ((overridden == null)) {
       ITypeBinding[] _interfaces = type.getInterfaces();
       for (final ITypeBinding interfaze : _interfaces) {
         {
           IMethodBinding _internalFindOverride_1 = this.internalFindOverride(method, interfaze, onlyPrimarylevel);
           overridden = _internalFindOverride_1;
-          boolean _notEquals_1 = (!Objects.equal(overridden, null));
-          if (_notEquals_1) {
+          if ((overridden != null)) {
             return overridden;
           }
         }
@@ -194,8 +190,7 @@ public class ASTFlattenerUtils {
   }
   
   private boolean isStaticBinding(final IBinding binding) {
-    boolean _notEquals = (!Objects.equal(binding, null));
-    if (_notEquals) {
+    if ((binding != null)) {
       int _modifiers = binding.getModifiers();
       return Modifier.isStatic(_modifiers);
     }
@@ -223,16 +218,15 @@ public class ASTFlattenerUtils {
   
   public boolean isLambdaCase(final ClassInstanceCreation creation) {
     final AnonymousClassDeclaration anonymousClazz = creation.getAnonymousClassDeclaration();
-    if (((!Objects.equal(anonymousClazz, null)) && (anonymousClazz.bodyDeclarations().size() == 1))) {
+    if (((anonymousClazz != null) && (anonymousClazz.bodyDeclarations().size() == 1))) {
       List _bodyDeclarations = anonymousClazz.bodyDeclarations();
       final Object declaredMethod = _bodyDeclarations.get(0);
-      if (((declaredMethod instanceof MethodDeclaration) && (!Objects.equal(creation.getType().resolveBinding(), null)))) {
+      if (((declaredMethod instanceof MethodDeclaration) && (creation.getType().resolveBinding() != null))) {
         final IMethodBinding methodBinding = ((MethodDeclaration) declaredMethod).resolveBinding();
-        boolean _notEquals = (!Objects.equal(methodBinding, null));
-        if (_notEquals) {
+        if ((methodBinding != null)) {
           ITypeBinding _declaringClass = methodBinding.getDeclaringClass();
           final IMethodBinding overrides = this.findOverride(methodBinding, _declaringClass, true);
-          return ((!Objects.equal(overrides, null)) && Modifier.isAbstract(overrides.getModifiers()));
+          return ((overrides != null) && Modifier.isAbstract(overrides.getModifiers()));
         }
       }
     }
@@ -240,7 +234,7 @@ public class ASTFlattenerUtils {
   }
   
   public boolean needsReturnValue(final ASTNode node) {
-    return ((!Objects.equal(node.getParent(), null)) && ((!(node.getParent() instanceof Statement)) || (node.getParent() instanceof ReturnStatement)));
+    return ((node.getParent() != null) && ((!(node.getParent() instanceof Statement)) || (node.getParent() instanceof ReturnStatement)));
   }
   
   public boolean isConstantArrayIndex(final Expression node) {
@@ -249,8 +243,7 @@ public class ASTFlattenerUtils {
   
   public boolean canConvertToRichText(final InfixExpression node) {
     final FieldDeclaration parentFieldDecl = this.<FieldDeclaration>findParentOfType(node, FieldDeclaration.class);
-    boolean _notEquals = (!Objects.equal(parentFieldDecl, null));
-    if (_notEquals) {
+    if ((parentFieldDecl != null)) {
       final TypeDeclaration typeDeclr = this.<TypeDeclaration>findParentOfType(parentFieldDecl, TypeDeclaration.class);
       if ((typeDeclr.isInterface() || (this.isFinal(parentFieldDecl.modifiers()) && this.isStatic(parentFieldDecl.modifiers())))) {
         return false;
@@ -264,8 +257,8 @@ public class ASTFlattenerUtils {
   
   public <T extends ASTNode> T findParentOfType(final ASTNode someNode, final Class<T> parentType) {
     ASTNode _parent = someNode.getParent();
-    boolean _equals = Objects.equal(_parent, null);
-    if (_equals) {
+    boolean _tripleEquals = (_parent == null);
+    if (_tripleEquals) {
       return null;
     } else {
       ASTNode _parent_1 = someNode.getParent();
@@ -318,11 +311,10 @@ public class ASTFlattenerUtils {
   
   public Type findDeclaredType(final SimpleName simpleName) {
     ASTNode scope = this.findDeclarationBlocks(simpleName);
-    while ((!Objects.equal(scope, null))) {
+    while ((scope != null)) {
       {
         final Type type = this.findDeclaredType(scope, simpleName);
-        boolean _notEquals = (!Objects.equal(type, null));
-        if (_notEquals) {
+        if ((type != null)) {
           return type;
         }
         ASTNode _findDeclarationBlocks = this.findDeclarationBlocks(scope);
@@ -403,8 +395,7 @@ public class ASTFlattenerUtils {
   
   public Iterable<Expression> findAssignmentsInBlock(final Block scope, final Function1<? super Expression, ? extends Boolean> constraint) {
     final HashSet<Expression> assigments = CollectionLiterals.<Expression>newHashSet();
-    boolean _notEquals = (!Objects.equal(scope, null));
-    if (_notEquals) {
+    if ((scope != null)) {
       scope.accept(new ASTVisitor() {
         @Override
         public boolean visit(final Assignment node) {
@@ -502,7 +493,7 @@ public class ASTFlattenerUtils {
         }
       }
       if ((simpleName instanceof SimpleName)) {
-        return Boolean.valueOf(((!Objects.equal(simpleName, null)) && nameToLookFor.getIdentifier().equals(((SimpleName)simpleName).getIdentifier())));
+        return Boolean.valueOf(((simpleName != null) && nameToLookFor.getIdentifier().equals(((SimpleName)simpleName).getIdentifier())));
       }
       return Boolean.valueOf(false);
     };
@@ -529,8 +520,7 @@ public class ASTFlattenerUtils {
     };
     Iterable<ChildListPropertyDescriptor> _filter_1 = IterableExtensions.<ChildListPropertyDescriptor>filter(_filter, _function);
     final ChildListPropertyDescriptor property = IterableExtensions.<ChildListPropertyDescriptor>head(_filter_1);
-    boolean _notEquals = (!Objects.equal(property, null));
-    if (_notEquals) {
+    if ((property != null)) {
       Object _structuralProperty = node.getStructuralProperty(property);
       return ((List<ASTNode>) _structuralProperty);
     }
@@ -554,8 +544,7 @@ public class ASTFlattenerUtils {
     };
     Iterable<ChildPropertyDescriptor> _filter_1 = IterableExtensions.<ChildPropertyDescriptor>filter(_filter, _function);
     final ChildPropertyDescriptor property = IterableExtensions.<ChildPropertyDescriptor>head(_filter_1);
-    boolean _notEquals = (!Objects.equal(property, null));
-    if (_notEquals) {
+    if ((property != null)) {
       Object _structuralProperty = node.getStructuralProperty(property);
       return ((ASTNode) _structuralProperty);
     }

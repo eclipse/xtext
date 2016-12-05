@@ -113,8 +113,7 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
             if ((((JvmField)member).isFinal() && ((JvmField)member).isStatic())) {
               String _simpleName = ((JvmField)member).getSimpleName();
               final JvmIdentifiableElement existing = result.put(_simpleName, member);
-              boolean _notEquals = (!Objects.equal(existing, null));
-              if (_notEquals) {
+              if ((existing != null)) {
                 String _simpleName_1 = existing.getSimpleName();
                 result.put(_simpleName_1, existing);
               }
@@ -214,15 +213,13 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
         final HashMap<String, JvmIdentifiableElement> result = CollectionLiterals.<String, JvmIdentifiableElement>newHashMap();
         Resource _eResource_2 = expression.eResource();
         final XImportSection section = this.importSectionLocator.getImportSection(((XtextResource) _eResource_2));
-        boolean _notEquals = (!Objects.equal(section, null));
-        if (_notEquals) {
+        if ((section != null)) {
           EList<XImportDeclaration> _importDeclarations = section.getImportDeclarations();
           for (final XImportDeclaration imp : _importDeclarations) {
             boolean _isStatic = imp.isStatic();
             if (_isStatic) {
               final String importedTypeName = imp.getImportedTypeName();
-              boolean _notEquals_1 = (!Objects.equal(importedTypeName, null));
-              if (_notEquals_1) {
+              if ((importedTypeName != null)) {
                 final JvmType type = this.findTypeByName(imp, importedTypeName);
                 boolean _matched_2 = false;
                 if (type instanceof JvmGenericType) {
@@ -252,8 +249,7 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
   }
   
   protected void collectAllVisibleFields(final JvmDeclaredType type, final Map<String, JvmIdentifiableElement> result) {
-    boolean _equals = Objects.equal(type, null);
-    if (_equals) {
+    if ((type == null)) {
       return;
     }
     JvmDeclaredType _declaringType = type.getDeclaringType();
@@ -286,8 +282,8 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
       {
         Class<? extends Number> _xifexpression = null;
         JvmTypeReference _expectedType = ctx.getExpectedType();
-        boolean _equals = Objects.equal(_expectedType, null);
-        if (_equals) {
+        boolean _tripleEquals = (_expectedType == null);
+        if (_tripleEquals) {
           _xifexpression = this.numberLiterals.getJavaType(it);
         } else {
           JvmTypeReference _expectedType_1 = ctx.getExpectedType();
@@ -323,8 +319,7 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
       };
       final List<Object> elements = ListExtensions.<XExpression, Object>map(_elements, _function);
       Class<?> _xifexpression = null;
-      boolean _notEquals = (!Objects.equal(expectedComponentType, null));
-      if (_notEquals) {
+      if ((expectedComponentType != null)) {
         JvmType _type = expectedComponentType.getType();
         ClassFinder _classFinder = ctx.getClassFinder();
         _xifexpression = this.getJavaType(_type, _classFinder);
@@ -453,8 +448,7 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
         _matched_1=true;
       }
       if (!_matched_1) {
-        boolean _equals = Objects.equal(it_1, null);
-        if (_equals) {
+        if ((it_1 == null)) {
           _matched_1=true;
         }
       }
@@ -529,8 +523,7 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
       return _switchResult_2;
     }
     final JvmType type = this.findTypeByName(it, featureName);
-    boolean _notEquals = (!Objects.equal(type, null));
-    if (_notEquals) {
+    if ((type != null)) {
       this.resolveType(it, type);
       return this.toTypeReference(type, 0);
     }
@@ -605,8 +598,7 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
             return Boolean.valueOf(Objects.equal(_simpleName, featureName));
           };
           final JvmEnumerationLiteral enumValue = IterableExtensions.<JvmEnumerationLiteral>findFirst(_literals, _function);
-          boolean _equals = Objects.equal(enumValue, null);
-          if (_equals) {
+          if ((enumValue == null)) {
             String _simpleName = ((JvmTypeReference)receiver).getSimpleName();
             String _plus = ((("Couldn\'t find enum value " + featureName) + " on enum ") + _simpleName);
             throw new ConstantExpressionEvaluationException(_plus, it);
@@ -624,8 +616,7 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
               return Boolean.valueOf(Objects.equal(_simpleName, featureName));
             };
             final JvmField field = IterableExtensions.<JvmField>findFirst(_filter, _function);
-            boolean _equals = Objects.equal(field, null);
-            if (_equals) {
+            if ((field == null)) {
               String _simpleName = ((JvmTypeReference)receiver).getSimpleName();
               String _plus = ((("Couldn\'t find field " + featureName) + " on type ") + _simpleName);
               throw new ConstantExpressionEvaluationException(_plus, it);
@@ -641,8 +632,7 @@ public class ConstantExpressionsInterpreter extends AbstractConstantExpressionsI
         final UnresolvableFeatureException e = (UnresolvableFeatureException)_t;
         final String typeName = this.getFullName(it);
         final JvmType type = this.findTypeByName(it, typeName);
-        boolean _notEquals = (!Objects.equal(type, null));
-        if (_notEquals) {
+        if ((type != null)) {
           this.resolveType(it, type);
           return this.toTypeReference(type, 0);
         } else {

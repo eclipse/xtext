@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.ide.quickfix;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.List;
 import java.util.function.Consumer;
@@ -192,8 +191,7 @@ public class CodeBuilderQuickfix {
         _switchResult = null;
       }
       final Object element = ((Object)_switchResult);
-      boolean _notEquals = (!Objects.equal(element, null));
-      if (_notEquals) {
+      if ((element != null)) {
         JdtHyperlink _jdtHyperlink = new JdtHyperlink();
         final Procedure1<JdtHyperlink> _function_2 = (JdtHyperlink it_1) -> {
           it_1.setJavaElement(((IMember)element));

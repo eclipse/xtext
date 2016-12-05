@@ -99,8 +99,7 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
   @Override
   public Expression getExpression(final String property) {
     final XExpression value = this.findValue(property);
-    boolean _notEquals = (!Objects.equal(value, null));
-    if (_notEquals) {
+    if ((value != null)) {
       CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
       return _compilationUnit.toExpression(value);
     }
@@ -110,8 +109,7 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
   @Override
   public Object getValue(final String property) {
     final XExpression value = this.findValue(property);
-    boolean _notEquals = (!Objects.equal(value, null));
-    if (_notEquals) {
+    if ((value != null)) {
       return this.translateAnnotationValue(value, property);
     }
     AnnotationTypeDeclaration _annotationTypeDeclaration = this.getAnnotationTypeDeclaration();
@@ -122,7 +120,7 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
   protected XExpression findValue(final String property) {
     XExpression _xblockexpression = null;
     {
-      if ((Objects.equal(property, "value") && (!Objects.equal(this.getDelegate().getValue(), null)))) {
+      if ((Objects.equal(property, "value") && (this.getDelegate().getValue() != null))) {
         XAnnotation _delegate = this.getDelegate();
         return _delegate.getValue();
       }
@@ -154,8 +152,7 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
         return Boolean.valueOf(Objects.equal(_simpleName, property));
       };
       final JvmOperation operation = IterableExtensions.<JvmOperation>findFirst(_filter, _function);
-      boolean _notEquals = (!Objects.equal(operation, null));
-      if (_notEquals) {
+      if ((operation != null)) {
         CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
         TypeReferences _typeReferences = _compilationUnit.getTypeReferences();
         JvmTypeReference _returnType = operation.getReturnType();
@@ -192,8 +189,7 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
     Boolean _xblockexpression = null;
     {
       final Object value = this.getValue(name);
-      boolean _equals = Objects.equal(value, null);
-      if (_equals) {
+      if ((value == null)) {
         return false;
       }
       _xblockexpression = ((Boolean) value);
@@ -212,8 +208,7 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
     Byte _xblockexpression = null;
     {
       final Object value = this.getValue(name);
-      boolean _equals = Objects.equal(value, null);
-      if (_equals) {
+      if ((value == null)) {
         return ((byte) 0);
       }
       _xblockexpression = ((Byte) value);
@@ -232,8 +227,7 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
     Character _xblockexpression = null;
     {
       final Object value = this.getValue(name);
-      boolean _equals = Objects.equal(value, null);
-      if (_equals) {
+      if ((value == null)) {
         return ((char) 0);
       }
       Character _switchResult = null;
@@ -273,8 +267,7 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
     Double _xblockexpression = null;
     {
       final Object value = this.getValue(name);
-      boolean _equals = Objects.equal(value, null);
-      if (_equals) {
+      if ((value == null)) {
         return 0;
       }
       Double _switchResult = null;
@@ -344,8 +337,7 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
     Float _xblockexpression = null;
     {
       final Object value = this.getValue(name);
-      boolean _equals = Objects.equal(value, null);
-      if (_equals) {
+      if ((value == null)) {
         return 0;
       }
       Float _switchResult = null;
@@ -397,8 +389,7 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
     Integer _xblockexpression = null;
     {
       final Object value = this.getValue(name);
-      boolean _equals = Objects.equal(value, null);
-      if (_equals) {
+      if ((value == null)) {
         return 0;
       }
       Integer _switchResult = null;
@@ -438,8 +429,7 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
     Long _xblockexpression = null;
     {
       final Object value = this.getValue(name);
-      boolean _equals = Objects.equal(value, null);
-      if (_equals) {
+      if ((value == null)) {
         return 0;
       }
       Long _switchResult = null;
@@ -485,8 +475,7 @@ public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotatio
     Short _xblockexpression = null;
     {
       final Object value = this.getValue(name);
-      boolean _equals = Objects.equal(value, null);
-      if (_equals) {
+      if ((value == null)) {
         return ((short) 0);
       }
       Short _switchResult = null;

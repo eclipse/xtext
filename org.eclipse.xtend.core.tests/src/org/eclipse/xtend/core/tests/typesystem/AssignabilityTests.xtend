@@ -72,8 +72,8 @@ abstract class AbstractAssignabilityTest extends AbstractTestingTypeReferenceOwn
 			rhs.fixup» rhs) {}'''
 		val function = function(signature.toString)
 		val operation = function.directlyInferredOperation
-		val lhsType = if (lhsAndParams.key != null) operation.parameters.head.parameterType.toLightweightTypeReference else owner.newAnyTypeReference
-		val rhsType = if (rhs != null) operation.parameters.last.parameterType.toLightweightTypeReference else owner.newAnyTypeReference
+		val lhsType = if (lhsAndParams.key !== null) operation.parameters.head.parameterType.toLightweightTypeReference else owner.newAnyTypeReference
+		val rhsType = if (rhs !== null) operation.parameters.last.parameterType.toLightweightTypeReference else owner.newAnyTypeReference
 		assertEquals(lhsType.simpleName + " := " + rhsType.simpleName, expectation, lhsType.testIsAssignable(rhsType))
 		if (expectation) {
 			for(superType: lhsType.allSuperTypes) {

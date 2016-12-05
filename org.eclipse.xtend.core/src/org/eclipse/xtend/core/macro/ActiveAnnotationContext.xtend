@@ -74,7 +74,7 @@ class ActiveAnnotationContexts extends AdapterImpl {
 	
 	def static ActiveAnnotationContexts installNew(Resource resource) {
 		var result = resource.eAdapters.filter(ActiveAnnotationContexts).head
-		if (result != null) {
+		if (result !== null) {
 			result.contexts.clear
 		} else {
 			result = new ActiveAnnotationContexts
@@ -124,7 +124,7 @@ class ActiveAnnotationContextProvider {
 					val processorType = key.getProcessorType
 					try {
 						val processorInstance = processorType.processorInstance
-						if (processorInstance == null) {
+						if (processorInstance === null) {
 							throw new IllegalStateException("Couldn't instantiate the annotation processor of type '" + processorType.identifier + "'. This is usually the case when the processor resides in the same project as the annotated element.");
 						}
 						fa.setProcessorInstance(processorInstance)
@@ -213,7 +213,7 @@ class ActiveAnnotationContextProvider {
 	def private void registerMacroAnnotations(XtendAnnotationTarget candidate, IAcceptor<Pair<JvmAnnotationType, XAnnotation>> acceptor) {
 		for (annotation : candidate.annotations.filter[ processed ]) {
 			val activeAnnotationDeclaration = annotation.tryFindAnnotationType
-			if (activeAnnotationDeclaration != null) {
+			if (activeAnnotationDeclaration !== null) {
 				if (isValid(annotation, activeAnnotationDeclaration)) {
 					acceptor.accept(activeAnnotationDeclaration -> annotation)
 				}
@@ -223,6 +223,6 @@ class ActiveAnnotationContextProvider {
 	
 	def private boolean isValid(XAnnotation annotation, JvmAnnotationType activeAnnotationDeclaration) {
 		//TODO validate the annotationTarget against the annotation processor (compatible types, etc.)
-		return annotation != null
+		return annotation !== null
 	}
 }

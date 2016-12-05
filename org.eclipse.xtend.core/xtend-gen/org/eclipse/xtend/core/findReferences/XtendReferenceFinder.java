@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.core.findReferences;
 
-import com.google.common.base.Objects;
 import com.google.common.base.Predicate;
 import com.google.inject.Inject;
 import java.util.Set;
@@ -112,7 +111,7 @@ public class XtendReferenceFinder extends ReferenceFinder {
     }
     if (!_matched_1) {
       if (sourceCandidate instanceof XFeatureCall) {
-        if ((Objects.equal(((XFeatureCall)sourceCandidate).getActualReceiver(), null) && ((XFeatureCall)sourceCandidate).isStatic())) {
+        if (((((XFeatureCall)sourceCandidate).getActualReceiver() == null) && ((XFeatureCall)sourceCandidate).isStatic())) {
           _matched_1=true;
           this.addReferenceToTypeFromStaticImport(((XAbstractFeatureCall)sourceCandidate), targetURIs, acceptor);
         }

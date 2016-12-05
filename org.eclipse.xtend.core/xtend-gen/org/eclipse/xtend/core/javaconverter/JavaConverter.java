@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.core.javaconverter;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import java.util.List;
@@ -48,8 +47,8 @@ public class JavaConverter {
       String _result = flattener.getResult();
       result.xtendCode = _result;
       List<String> _problems = flattener.getProblems();
-      boolean _notEquals = (!Objects.equal(_problems, null));
-      if (_notEquals) {
+      boolean _tripleNotEquals = (_problems != null);
+      if (_tripleNotEquals) {
         List<String> _problems_1 = flattener.getProblems();
         result.problems = _problems_1;
       }
@@ -107,8 +106,7 @@ public class JavaConverter {
   public JavaConverter.ConversionResult toXtend(final String unitName, final String javaSrc) {
     JavaConverter.ConversionResult _xblockexpression = null;
     {
-      boolean _equals = Objects.equal(unitName, null);
-      if (_equals) {
+      if ((unitName == null)) {
         throw new IllegalArgumentException();
       }
       ASTParserFactory.ASTParserWrapper _createJavaParser = this.astParserFactory.createJavaParser(null);
@@ -127,8 +125,7 @@ public class JavaConverter {
   public JavaConverter.ConversionResult toXtend(final String unitName, final String javaSrc, final Object classPathContext) {
     JavaConverter.ConversionResult _xblockexpression = null;
     {
-      boolean _equals = Objects.equal(unitName, null);
-      if (_equals) {
+      if ((unitName == null)) {
         throw new IllegalArgumentException();
       }
       ASTParserFactory.ASTParserWrapper _createJavaParser = this.astParserFactory.createJavaParser(classPathContext);
@@ -226,15 +223,13 @@ public class JavaConverter {
    */
   private JavaConverter.ConversionResult internalToXtend(final String unitName, final String javaSrc, final String[] imports, final ASTParserFactory.ASTParserWrapper parser) {
     final StringBuilder javaSrcBuilder = new StringBuilder();
-    boolean _notEquals = (!Objects.equal(imports, null));
-    if (_notEquals) {
+    if ((imports != null)) {
       final Consumer<String> _function = (String it) -> {
         javaSrcBuilder.append((("import " + it) + ";"));
       };
       ((List<String>)Conversions.doWrapArray(imports)).forEach(_function);
     }
-    boolean _equals = Objects.equal(unitName, null);
-    if (_equals) {
+    if ((unitName == null)) {
       parser.setUnitName("MISSING");
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("class MISSING { ");

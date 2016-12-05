@@ -57,8 +57,7 @@ public class ProcessorInstanceForJvmTypeProvider {
     
     @Override
     public void setTarget(final Notifier newTarget) {
-      boolean _equals = Objects.equal(newTarget, null);
-      if (_equals) {
+      if ((newTarget == null)) {
         this.discard();
       }
     }
@@ -138,8 +137,7 @@ public class ProcessorInstanceForJvmTypeProvider {
     EList<Adapter> _eAdapters = resourceSet.eAdapters();
     Iterable<ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter> _filter = Iterables.<ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter>filter(_eAdapters, ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter.class);
     final ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter adapter = IterableExtensions.<ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter>head(_filter);
-    boolean _notEquals = (!Objects.equal(adapter, null));
-    if (_notEquals) {
+    if ((adapter != null)) {
       return adapter.getClassLoader();
     }
     boolean _matched = false;
@@ -179,8 +177,7 @@ public class ProcessorInstanceForJvmTypeProvider {
         _xifexpression = jvmTypeLoader;
       }
       final ClassLoader processorClassLoader = _xifexpression;
-      boolean _notEquals_1 = (!Objects.equal(processorClassLoader, null));
-      if (_notEquals_1) {
+      if ((processorClassLoader != null)) {
         EList<Adapter> _eAdapters_1 = ((XtextResourceSet)resourceSet).eAdapters();
         ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter _processorClassloaderAdapter = new ProcessorInstanceForJvmTypeProvider.ProcessorClassloaderAdapter(processorClassLoader);
         _eAdapters_1.add(_processorClassloaderAdapter);

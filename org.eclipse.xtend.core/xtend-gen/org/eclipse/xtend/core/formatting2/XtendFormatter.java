@@ -102,16 +102,14 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
     format.<XtendFile>prepend(xtendFile, _function);
     ISemanticRegionsFinder _regionFor = this.textRegionExtensions.regionFor(xtendFile);
     final ISemanticRegion pkg = _regionFor.feature(XtendPackage.Literals.XTEND_FILE__PACKAGE);
-    boolean _notEquals = (!Objects.equal(pkg, null));
-    if (_notEquals) {
+    if ((pkg != null)) {
       final Procedure1<IHiddenRegionFormatter> _function_1 = (IHiddenRegionFormatter it) -> {
         it.oneSpace();
       };
       format.prepend(pkg, _function_1);
       ISemanticRegionFinder _immediatelyFollowing = pkg.immediatelyFollowing();
       final ISemanticRegion pkgSemicolon = _immediatelyFollowing.keyword(";");
-      boolean _notEquals_1 = (!Objects.equal(pkgSemicolon, null));
-      if (_notEquals_1) {
+      if ((pkgSemicolon != null)) {
         final Procedure1<IHiddenRegionFormatter> _function_2 = (IHiddenRegionFormatter it) -> {
           it.noSpace();
         };
@@ -131,8 +129,8 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
         format.<XtendTypeDeclaration>format(clazz);
         EList<XtendTypeDeclaration> _xtendTypes_1 = xtendFile.getXtendTypes();
         XtendTypeDeclaration _last = IterableExtensions.<XtendTypeDeclaration>last(_xtendTypes_1);
-        boolean _notEquals_2 = (!Objects.equal(clazz, _last));
-        if (_notEquals_2) {
+        boolean _notEquals = (!Objects.equal(clazz, _last));
+        if (_notEquals) {
           format.<XtendTypeDeclaration>append(clazz, XtendFormatterPreferenceKeys.blankLinesBetweenClasses);
         }
       }
@@ -524,8 +522,8 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
     };
     format.prepend(open, _function_4);
     XExpression _expression = func.getExpression();
-    boolean _notEquals = (!Objects.equal(_expression, null));
-    if (_notEquals) {
+    boolean _tripleNotEquals = (_expression != null);
+    if (_tripleNotEquals) {
       format.append(close, XbaseFormatterPreferenceKeys.bracesInNewLine);
     }
     EList<XtendParameter> _parameters = func.getParameters();
@@ -540,8 +538,8 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
     this.formatAnnotations(field, document, XbaseFormatterPreferenceKeys.newLineAfterFieldAnnotations);
     this.formatModifiers(field, document);
     String _name = field.getName();
-    boolean _notEquals = (!Objects.equal(_name, null));
-    if (_notEquals) {
+    boolean _tripleNotEquals = (_name != null);
+    if (_tripleNotEquals) {
       JvmTypeReference _type = field.getType();
       final Procedure1<IHiddenRegionFormatter> _function = (IHiddenRegionFormatter it) -> {
         it.oneSpace();
@@ -618,8 +616,8 @@ public class XtendFormatter extends XbaseWithAnnotationsFormatter {
   protected XClosure builder(final List<XExpression> params) {
     XClosure _xifexpression = null;
     XExpression _last = IterableExtensions.<XExpression>last(params);
-    boolean _notEquals = (!Objects.equal(_last, null));
-    if (_notEquals) {
+    boolean _tripleNotEquals = (_last != null);
+    if (_tripleNotEquals) {
       XClosure _xblockexpression = null;
       {
         XExpression _last_1 = IterableExtensions.<XExpression>last(params);

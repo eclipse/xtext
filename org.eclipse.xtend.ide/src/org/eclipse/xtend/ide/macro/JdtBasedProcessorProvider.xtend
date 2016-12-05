@@ -47,13 +47,13 @@ class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvider {
 		val isEditor = ResourceSetContext.get(rs).isEditor
 		if (isBuilder) {
 			val adapter = rs.eAdapters.filter(ProcessorClassloaderAdapter).head
-			if (adapter != null)
+			if (adapter !== null)
 				return adapter.classLoader
 		}
 		if (isEditor) {
 			val adapter = ctx.editorResource.eAdapters.filter(ProcessorClassloaderAdapter).head
-			if (adapter != null) {
-				if (adapter.classLoader == null) {
+			if (adapter !== null) {
+				if (adapter.classLoader === null) {
 					// old adapter without classLoader (already closed)
 					// remove
 					ctx.editorResource.eAdapters.remove(adapter)				
@@ -114,7 +114,7 @@ class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvider {
 				case IClasspathEntry.CPE_SOURCE: {
 					if (includeOutputFolder) {
 						val path = entry.getOutputLocation();
-						if (path != null)
+						if (path !== null)
 							url = new URL(
 								URI.createPlatformResourceURI(path.addTrailingSeparator().toString(), true).toString());
 					}
@@ -130,7 +130,7 @@ class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvider {
 					// if the library is in the workspace, the entry path is relative to the workspace root
 					// thus we load it as a resource and take the raw path to find the location in the file system
 					val IResource library = projectToUse.workspaceRoot.findMember(path)
-					url = if (library != null) {
+					url = if (library !== null) {
 						library.rawLocationURI.toURL
 					} else {
 						// otherwise we use the path itself
@@ -142,7 +142,7 @@ class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvider {
 					url = path.toFile().toURI().toURL();
 				}
 			}
-			if (url != null) {
+			if (url !== null) {
 				result.add(url);
 			}
 		}

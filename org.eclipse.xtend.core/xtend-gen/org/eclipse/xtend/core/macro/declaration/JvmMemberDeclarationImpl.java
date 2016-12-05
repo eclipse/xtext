@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.core.macro.declaration;
 
-import com.google.common.base.Objects;
 import java.util.Collections;
 import java.util.Set;
 import org.eclipse.emf.common.notify.Adapter;
@@ -53,8 +52,7 @@ public abstract class JvmMemberDeclarationImpl<T extends JvmMember> extends JvmA
     EList<Adapter> _eAdapters = _delegate.eAdapters();
     Adapter _adapter = EcoreUtil.getAdapter(_eAdapters, DocumentationAdapter.class);
     DocumentationAdapter adapter = ((DocumentationAdapter) _adapter);
-    boolean _equals = Objects.equal(adapter, null);
-    if (_equals) {
+    if ((adapter == null)) {
       DocumentationAdapter _documentationAdapter = new DocumentationAdapter();
       adapter = _documentationAdapter;
       T _delegate_1 = this.getDelegate();
@@ -146,8 +144,7 @@ public abstract class JvmMemberDeclarationImpl<T extends JvmMember> extends JvmA
       TypeLookupImpl _typeLookup = _compilationUnit_1.getTypeLookup();
       Type _findTypeGlobally = _typeLookup.findTypeGlobally(Deprecated.class);
       final AnnotationReference existingReference = this.findAnnotation(_findTypeGlobally);
-      boolean _notEquals = (!Objects.equal(existingReference, null));
-      if (_notEquals) {
+      if ((existingReference != null)) {
         this.removeAnnotation(existingReference);
       }
     }

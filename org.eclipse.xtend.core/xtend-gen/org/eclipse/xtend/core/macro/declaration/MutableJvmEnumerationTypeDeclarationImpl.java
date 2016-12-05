@@ -159,8 +159,7 @@ public class MutableJvmEnumerationTypeDeclarationImpl extends JvmEnumerationType
   public MutableEnumerationValueDeclaration addValue(final String name, final Procedure1<MutableEnumerationValueDeclaration> initializer) {
     this.checkMutable();
     ConditionUtils.checkJavaIdentifier(name, "name");
-    boolean _notEquals = (!Objects.equal(initializer, null));
-    Preconditions.checkArgument(_notEquals, "initializer cannot be null");
+    Preconditions.checkArgument((initializer != null), "initializer cannot be null");
     final JvmEnumerationLiteral jvmLiteral = TypesFactory.eINSTANCE.createJvmEnumerationLiteral();
     jvmLiteral.setSimpleName(name);
     jvmLiteral.setVisibility(JvmVisibility.PUBLIC);

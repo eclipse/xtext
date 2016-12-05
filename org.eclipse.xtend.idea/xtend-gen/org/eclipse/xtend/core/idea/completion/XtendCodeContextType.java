@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.core.idea.completion;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.intellij.codeInsight.template.EverywhereContextType;
 import com.intellij.codeInsight.template.TemplateContextType;
@@ -189,12 +188,11 @@ public abstract class XtendCodeContextType extends TemplateContextType {
       final Lexer lexer = this.parserDefinition.createLexer(_project);
       String _text = file.getText();
       lexer.start(_text);
-      while (((!Objects.equal(lexer.getTokenType(), null)) && (lexer.getTokenEnd() <= offset))) {
+      while (((lexer.getTokenType() != null) && (lexer.getTokenEnd() <= offset))) {
         lexer.advance();
       }
       final IElementType tokenType = lexer.getTokenType();
-      boolean _equals = Objects.equal(tokenType, null);
-      if (_equals) {
+      if ((tokenType == null)) {
         return Boolean.valueOf(false);
       }
       _xblockexpression = this.tokenSetProvider.getTokenSet(tokenType);

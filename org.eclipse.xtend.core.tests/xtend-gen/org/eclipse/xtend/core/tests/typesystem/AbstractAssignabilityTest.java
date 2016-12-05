@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.core.tests.typesystem;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
@@ -125,8 +124,8 @@ public abstract class AbstractAssignabilityTest extends AbstractTestingTypeRefer
       final JvmOperation operation = this._iXtendJvmAssociations.getDirectlyInferredOperation(function);
       LightweightTypeReference _xifexpression = null;
       String _key_1 = lhsAndParams.getKey();
-      boolean _notEquals = (!Objects.equal(_key_1, null));
-      if (_notEquals) {
+      boolean _tripleNotEquals = (_key_1 != null);
+      if (_tripleNotEquals) {
         EList<JvmFormalParameter> _parameters = operation.getParameters();
         JvmFormalParameter _head = IterableExtensions.<JvmFormalParameter>head(_parameters);
         JvmTypeReference _parameterType = _head.getParameterType();
@@ -137,8 +136,7 @@ public abstract class AbstractAssignabilityTest extends AbstractTestingTypeRefer
       }
       final LightweightTypeReference lhsType = _xifexpression;
       LightweightTypeReference _xifexpression_1 = null;
-      boolean _notEquals_1 = (!Objects.equal(rhs, null));
-      if (_notEquals_1) {
+      if ((rhs != null)) {
         EList<JvmFormalParameter> _parameters_1 = operation.getParameters();
         JvmFormalParameter _last = IterableExtensions.<JvmFormalParameter>last(_parameters_1);
         JvmTypeReference _parameterType_1 = _last.getParameterType();

@@ -1,6 +1,5 @@
 package org.eclipse.xtend.core.tests.macro;
 
-import com.google.common.base.Objects;
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
@@ -63,11 +62,10 @@ public class AccessObjectProcessor implements TransformationParticipant<MutableC
       String _simpleName_1 = it.getSimpleName();
       final String PVersionName = ((pkg + "P") + _simpleName_1);
       final MutableClassDeclaration p = ctx.findClass(PVersionName);
-      boolean _equals = Objects.equal(p, null);
-      if (_equals) {
+      if ((p == null)) {
         ctx.addError(it, (("Class " + PVersionName) + " not found"));
       }
-      if (((!Objects.equal(p, null)) && (!Objects.equal(ser, null)))) {
+      if (((p != null) && (ser != null))) {
         final LinkedList<TypeReference> pIfcs = new LinkedList<TypeReference>();
         pIfcs.add(ser);
         p.setImplementedInterfaces(pIfcs);
@@ -75,11 +73,10 @@ public class AccessObjectProcessor implements TransformationParticipant<MutableC
       String _simpleName_2 = it.getSimpleName();
       final String GVersionName = ((pkg + "G") + _simpleName_2);
       final MutableClassDeclaration g = ctx.findClass(GVersionName);
-      boolean _equals_1 = Objects.equal(g, null);
-      if (_equals_1) {
+      if ((g == null)) {
         ctx.addError(it, (("Class " + GVersionName) + " not found"));
       }
-      if (((!Objects.equal(g, null)) && (!Objects.equal(ser, null)))) {
+      if (((g != null) && (ser != null))) {
         final LinkedList<TypeReference> gIfcs = new LinkedList<TypeReference>();
         gIfcs.add(ser);
         g.setImplementedInterfaces(gIfcs);

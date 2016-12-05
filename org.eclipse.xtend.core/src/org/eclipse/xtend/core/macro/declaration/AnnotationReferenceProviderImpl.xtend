@@ -50,10 +50,10 @@ class AnnotationReferenceProviderImpl implements AnnotationReferenceProvider {
 
 	override newAnnotationReference(String annotationTypeName, Procedure1<AnnotationReferenceBuildContext> initializer) {
 		checkCanceled
-		Preconditions.checkArgument(annotationTypeName != null, '''annotationTypeName cannot be null''')
-		Preconditions.checkArgument(initializer != null, '''initializer cannot be null''')
+		Preconditions.checkArgument(annotationTypeName !== null, '''annotationTypeName cannot be null''')
+		Preconditions.checkArgument(initializer !== null, '''initializer cannot be null''')
 		val jvmAnnotationReference = typeReferences.findDeclaredType(annotationTypeName, xtendFile).createJvmAnnotationReference
-		if (jvmAnnotationReference == null) {
+		if (jvmAnnotationReference === null) {
 			return null
 		}
 		val buildContext = new AnnotationReferenceBuildContextImpl => [
@@ -66,8 +66,8 @@ class AnnotationReferenceProviderImpl implements AnnotationReferenceProvider {
 
 	override newAnnotationReference(Type annotationTypeDelcaration, Procedure1<AnnotationReferenceBuildContext> initializer) {
 		checkCanceled
-		Preconditions.checkArgument(annotationTypeDelcaration != null, '''annotationTypeDelcaration cannot be null''')
-		Preconditions.checkArgument(initializer != null, '''initializer cannot be null''')
+		Preconditions.checkArgument(annotationTypeDelcaration !== null, '''annotationTypeDelcaration cannot be null''')
+		Preconditions.checkArgument(initializer !== null, '''initializer cannot be null''')
 		val type = switch annotationTypeDelcaration {
 			JvmAnnotationTypeDeclarationImpl: {
 				annotationTypeDelcaration.delegate
@@ -92,14 +92,14 @@ class AnnotationReferenceProviderImpl implements AnnotationReferenceProvider {
 	}
 
 	override newAnnotationReference(Class<?> annotationClass, Procedure1<AnnotationReferenceBuildContext> initializer) {
-		Preconditions.checkArgument(annotationClass != null, '''annotationClass cannot be null''')
+		Preconditions.checkArgument(annotationClass !== null, '''annotationClass cannot be null''')
 		annotationClass.name.newAnnotationReference(initializer)
 	}
 
 	override newAnnotationReference(AnnotationReference annotationReference, Procedure1<AnnotationReferenceBuildContext> initializer) {
 		checkCanceled
-		Preconditions.checkArgument(annotationReference != null, '''annotationReference cannot be null''')
-		Preconditions.checkArgument(initializer != null, '''initializer cannot be null''')
+		Preconditions.checkArgument(annotationReference !== null, '''annotationReference cannot be null''')
+		Preconditions.checkArgument(initializer !== null, '''initializer cannot be null''')
 		if (annotationReference instanceof JvmAnnotationReferenceImpl) {
 			val baseJvmAnnotationReference = annotationReference.delegate
 			baseJvmAnnotationReference.notRemoved("annotationReference")

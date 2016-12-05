@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.ide.tests.builder;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.ArrayList;
 import org.eclipse.core.resources.IFile;
@@ -55,8 +54,7 @@ public class JavaEditorExtension {
   public ITextEditor reconcile(final ITextEditor editor, final Function1<? super ITextEditor, ? extends ITextEditor> consumer) {
     ITextEditor _xblockexpression = null;
     {
-      boolean _equals = Objects.equal(consumer, null);
-      if (_equals) {
+      if ((consumer == null)) {
         return editor;
       }
       final Procedure0 _function = () -> {
@@ -76,8 +74,7 @@ public class JavaEditorExtension {
     ITextEditor _xblockexpression = null;
     {
       final Procedure0 _function = () -> {
-        boolean _notEquals = (!Objects.equal(consumer, null));
-        if (_notEquals) {
+        if ((consumer != null)) {
           consumer.apply(editor);
         }
         boolean _saveEditor = this._workbenchTestHelper.saveEditor(editor, false);
@@ -97,8 +94,7 @@ public class JavaEditorExtension {
     ITextEditor _xblockexpression = null;
     {
       final Procedure0 _function = () -> {
-        boolean _notEquals = (!Objects.equal(consumer, null));
-        if (_notEquals) {
+        if ((consumer != null)) {
           consumer.apply(editor);
         }
         boolean _closeEditor = this._workbenchTestHelper.closeEditor(editor, false);

@@ -45,7 +45,7 @@ class XtendOutlineSourceTreeBuilder extends AbstractXtendOutlineTreeBuilder impl
 		JvmDeclaredType inferredType,
 		IXtendOutlineContext context
 	) {
-		if (inferredType != null) {
+		if (inferredType !== null) {
 			val membersContext = context.newContext
 			xtendType.buildMembers(inferredType, inferredType, membersContext)
 		} else {
@@ -59,7 +59,7 @@ class XtendOutlineSourceTreeBuilder extends AbstractXtendOutlineTreeBuilder impl
 		JvmDeclaredType baseType,
 		extension IXtendOutlineContext context
 	) {
-		if (xtendType != null) {
+		if (xtendType !== null) {
 			for (member : xtendType.members) {
 				val jvmElement = member.getPrimaryJvmElement
 				if (jvmElement instanceof JvmMember) {

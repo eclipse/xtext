@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.ide.codebuilder;
 
-import com.google.common.base.Objects;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.xtend.ide.codebuilder.AbstractAnnotationBuilder;
 import org.eclipse.xtend.ide.codebuilder.ICodeBuilder;
@@ -21,7 +20,7 @@ import org.eclipse.xtext.xbase.compiler.ISourceAppender;
 public class JavaAnnotationBuilder extends AbstractAnnotationBuilder implements ICodeBuilder.Java {
   @Override
   public boolean isValid() {
-    return (super.isValid() && (!Objects.equal(this.getAnnotationName(), null)));
+    return (super.isValid() && (this.getAnnotationName() != null));
   }
   
   @Override

@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.ide.hyperlinking;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.xtend.ide.labeling.XtendLabelProvider;
@@ -25,8 +24,7 @@ public class HyperLinkingLabelProvider extends XtendLabelProvider {
   @Override
   public String getText(final Object element) {
     final String result = super.getText(element);
-    boolean _notEquals = (!Objects.equal(result, null));
-    if (_notEquals) {
+    if ((result != null)) {
       return ("Open Declaration - " + result);
     }
     return null;

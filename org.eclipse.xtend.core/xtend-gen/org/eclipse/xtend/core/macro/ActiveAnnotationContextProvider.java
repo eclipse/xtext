@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.core.macro;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import java.util.List;
@@ -92,8 +91,7 @@ public class ActiveAnnotationContextProvider {
           final JvmType processorType = this._xAnnotationExtensions.getProcessorType(_key_1);
           try {
             final Object processorInstance = this._processorInstanceForJvmTypeProvider.getProcessorInstance(processorType);
-            boolean _equals = Objects.equal(processorInstance, null);
-            if (_equals) {
+            if ((processorInstance == null)) {
               String _identifier = processorType.getIdentifier();
               String _plus = ("Couldn\'t instantiate the annotation processor of type \'" + _identifier);
               String _plus_1 = (_plus + "\'. This is usually the case when the processor resides in the same project as the annotated element.");
@@ -268,8 +266,7 @@ public class ActiveAnnotationContextProvider {
     for (final XAnnotation annotation : _filter) {
       {
         final JvmAnnotationType activeAnnotationDeclaration = this._xAnnotationExtensions.tryFindAnnotationType(annotation);
-        boolean _notEquals = (!Objects.equal(activeAnnotationDeclaration, null));
-        if (_notEquals) {
+        if ((activeAnnotationDeclaration != null)) {
           boolean _isValid = this.isValid(annotation, activeAnnotationDeclaration);
           if (_isValid) {
             Pair<JvmAnnotationType, XAnnotation> _mappedTo = Pair.<JvmAnnotationType, XAnnotation>of(activeAnnotationDeclaration, annotation);
@@ -281,6 +278,6 @@ public class ActiveAnnotationContextProvider {
   }
   
   private boolean isValid(final XAnnotation annotation, final JvmAnnotationType activeAnnotationDeclaration) {
-    return (!Objects.equal(annotation, null));
+    return (annotation != null);
   }
 }

@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.ide.tests.contentassist;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.List;
 import org.eclipse.jface.text.BadLocationException;
@@ -174,8 +173,7 @@ public class DirtyEditorFilteringContentAssistTests extends AbstractXtendUITestC
     IXtextDocument _document = editorForCompletion.getDocument();
     final String contentType = _document.getContentType(cursorPosition);
     final IContentAssistProcessor processor = contentAssistant.getContentAssistProcessor(contentType);
-    boolean _notEquals = (!Objects.equal(processor, null));
-    if (_notEquals) {
+    if ((processor != null)) {
       return processor.computeCompletionProposals(sourceViewer, cursorPosition);
     }
     return null;

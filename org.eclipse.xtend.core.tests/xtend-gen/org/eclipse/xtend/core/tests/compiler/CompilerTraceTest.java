@@ -1633,8 +1633,7 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
           ITextRegionWithLineInformation _merge = rootLocation.merge(_textRegionWithLineInformation);
           rootLocation = _merge;
           ILocationData childAssociation = child.getMergedAssociatedLocation();
-          boolean _notEquals = (!Objects.equal(childAssociation, null));
-          if (_notEquals) {
+          if ((childAssociation != null)) {
             ITextRegionWithLineInformation _merge_1 = associated.merge(childAssociation);
             associated = _merge_1;
           }

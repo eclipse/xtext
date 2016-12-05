@@ -298,7 +298,7 @@ class ConstantExpressionsInterpreterTest extends AbstractXtendTestCase {
 		val expression = typeAndExpression.value
 		val function = function('def '+(type?:'void')+' testFoo() { '+expression+' }')
 		val expr = (function.expression as XBlockExpression).expressions.head
-		val value = interpreter.evaluate(expr, if (type!=null) function.returnType)
+		val value = interpreter.evaluate(expr, if (type!==null) function.returnType)
 		assertions.apply(value)
 	}
 }

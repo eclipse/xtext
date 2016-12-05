@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.core.tests.typesystem;
 
-import com.google.common.base.Objects;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -53,8 +52,7 @@ public class MockTypeParameterSubstitutor extends TypeParameterSubstitutor<Set<J
       try {
         Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> _typeParameterMapping = this.getTypeParameterMapping();
         final LightweightMergedBoundTypeArgument mappedReference = _typeParameterMapping.get(type);
-        boolean _notEquals = (!Objects.equal(mappedReference, null));
-        if (_notEquals) {
+        if ((mappedReference != null)) {
           LightweightTypeReference _typeReference = mappedReference.getTypeReference();
           return _typeReference.<Set<JvmTypeParameter>, LightweightTypeReference>accept(this, visiting);
         } else {

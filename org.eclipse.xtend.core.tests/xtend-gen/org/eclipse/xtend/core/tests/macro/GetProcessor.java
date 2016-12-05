@@ -1,6 +1,5 @@
 package org.eclipse.xtend.core.tests.macro;
 
-import com.google.common.base.Objects;
 import java.util.List;
 import org.eclipse.xtend.core.tests.macro.Get;
 import org.eclipse.xtend.lib.macro.TransformationContext;
@@ -19,8 +18,7 @@ public class GetProcessor implements TransformationParticipant<MutableMethodDecl
         Type _findTypeGlobally = context.findTypeGlobally(Get.class);
         final AnnotationReference annotation = m.findAnnotation(_findTypeGlobally);
         final Object pattern = annotation.getValue("value");
-        boolean _equals = Objects.equal(pattern, null);
-        if (_equals) {
+        if ((pattern == null)) {
           context.addError(annotation, "A URL pattern must be provided.");
         } else {
         }

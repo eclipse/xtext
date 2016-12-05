@@ -23,7 +23,7 @@ class HyperLinkingLabelProvider extends XtendLabelProvider {
 	
 	override getText(Object element) {
 		val result = super.getText(element)
-		if (result != null) {
+		if (result !== null) {
 			return 'Open Declaration - '+result
 		}
 		return null;

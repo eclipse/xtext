@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.core.macro.declaration;
 
-import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
@@ -87,8 +86,7 @@ public class MutableJvmFieldDeclarationImpl extends JvmFieldDeclarationImpl impl
   @Override
   public void setInitializer(final Expression initializer) {
     this.checkMutable();
-    boolean _equals = Objects.equal(initializer, null);
-    if (_equals) {
+    if ((initializer == null)) {
       CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
       JvmTypesBuilder _jvmTypesBuilder = _compilationUnit.getJvmTypesBuilder();
       JvmField _delegate = this.getDelegate();
@@ -105,8 +103,7 @@ public class MutableJvmFieldDeclarationImpl extends JvmFieldDeclarationImpl impl
   @Override
   public void setInitializer(final CompilationStrategy initializer) {
     this.checkMutable();
-    boolean _notEquals = (!Objects.equal(initializer, null));
-    Preconditions.checkArgument(_notEquals, "initializer cannot be null");
+    Preconditions.checkArgument((initializer != null), "initializer cannot be null");
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     JvmField _delegate = this.getDelegate();
     _compilationUnit.setCompilationStrategy(_delegate, initializer);
@@ -115,8 +112,7 @@ public class MutableJvmFieldDeclarationImpl extends JvmFieldDeclarationImpl impl
   @Override
   public void setInitializer(final StringConcatenationClient template) {
     this.checkMutable();
-    boolean _notEquals = (!Objects.equal(template, null));
-    Preconditions.checkArgument(_notEquals, "template cannot be null");
+    Preconditions.checkArgument((template != null), "template cannot be null");
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     JvmField _delegate = this.getDelegate();
     _compilationUnit.setCompilationTemplate(_delegate, template);
@@ -153,8 +149,7 @@ public class MutableJvmFieldDeclarationImpl extends JvmFieldDeclarationImpl impl
   @Override
   public void setType(final TypeReference type) {
     this.checkMutable();
-    boolean _notEquals = (!Objects.equal(type, null));
-    Preconditions.checkArgument(_notEquals, "type cannot be null");
+    Preconditions.checkArgument((type != null), "type cannot be null");
     JvmField _delegate = this.getDelegate();
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     JvmTypeReference _jvmTypeReference = _compilationUnit.toJvmTypeReference(type);
@@ -177,8 +172,7 @@ public class MutableJvmFieldDeclarationImpl extends JvmFieldDeclarationImpl impl
   
   private void internalGenericSetConstantValue(final Object value) {
     this.checkMutable();
-    boolean _notEquals = (!Objects.equal(value, null));
-    Preconditions.checkArgument(_notEquals, "value cannot be null");
+    Preconditions.checkArgument((value != null), "value cannot be null");
     JvmField _delegate = this.getDelegate();
     _delegate.setConstant(true);
     JvmField _delegate_1 = this.getDelegate();

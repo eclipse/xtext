@@ -67,8 +67,8 @@ class ASTFlattenerUtils {
 			return true
 		}
 		val iMethodBinding = declaration.resolveBinding
-		if (iMethodBinding != null) {
-			return findOverride(iMethodBinding, iMethodBinding.declaringClass) != null
+		if (iMethodBinding !== null) {
+			return findOverride(iMethodBinding, iMethodBinding.declaringClass) !== null
 		}
 		return false
 	}
@@ -80,13 +80,13 @@ class ASTFlattenerUtils {
 	def IMethodBinding findOverride(IMethodBinding method, ITypeBinding type, boolean onlyPrimarylevel) {
 		val superclass = type.superclass
 		var IMethodBinding overridden = null
-		if (superclass != null) {
+		if (superclass !== null) {
 			overridden = internalFindOverride(method, superclass, onlyPrimarylevel)
 		}
-		if (overridden == null) {
+		if (overridden === null) {
 			for (ITypeBinding interfaze : type.interfaces) {
 				overridden = internalFindOverride(method, interfaze, onlyPrimarylevel)
-				if (overridden != null) {
+				if (overridden !== null) {
 					return overridden
 				}
 			}
@@ -144,7 +144,7 @@ class ASTFlattenerUtils {
 	}
 
 	def private boolean isStaticBinding(IBinding binding) {
-		if (binding != null) {
+		if (binding !== null) {
 			return Modifier.isStatic(binding.modifiers)
 		}
 		return false
@@ -168,13 +168,13 @@ class ASTFlattenerUtils {
 
 	def isLambdaCase(ClassInstanceCreation creation) {
 		val anonymousClazz = creation.anonymousClassDeclaration
-		if (anonymousClazz != null && anonymousClazz.bodyDeclarations.size == 1) {
+		if (anonymousClazz !== null && anonymousClazz.bodyDeclarations.size == 1) {
 			val declaredMethod = anonymousClazz.bodyDeclarations.get(0)
-			if (declaredMethod instanceof MethodDeclaration && creation.type.resolveBinding != null) {
+			if (declaredMethod instanceof MethodDeclaration && creation.type.resolveBinding !== null) {
 				val methodBinding = (declaredMethod as MethodDeclaration).resolveBinding
-				if (methodBinding != null) {
+				if (methodBinding !== null) {
 					val overrides = findOverride(methodBinding, methodBinding.declaringClass, true)
-					return overrides != null && Modifier.isAbstract(overrides.modifiers)
+					return overrides !== null && Modifier.isAbstract(overrides.modifiers)
 				}
 			}
 		}
@@ -182,7 +182,7 @@ class ASTFlattenerUtils {
 	}
 
 	def boolean needsReturnValue(ASTNode node) {
-		(node.parent != null) && (!(node.parent instanceof Statement) || (node.parent instanceof ReturnStatement))
+		(node.parent !== null) && (!(node.parent instanceof Statement) || (node.parent instanceof ReturnStatement))
 	}
 
 	def boolean isConstantArrayIndex(Expression node) {
@@ -191,7 +191,7 @@ class ASTFlattenerUtils {
 
 	def boolean canConvertToRichText(InfixExpression node) {
 		val parentFieldDecl = node.findParentOfType(FieldDeclaration)
-		if (parentFieldDecl != null) {
+		if (parentFieldDecl !== null) {
 			val typeDeclr = parentFieldDecl.findParentOfType(TypeDeclaration)
 
 			// Do not convert static final fields
@@ -203,7 +203,7 @@ class ASTFlattenerUtils {
 	}
 
 	def <T extends ASTNode> T findParentOfType(ASTNode someNode, Class<T> parentType) {
-		if (someNode.parent == null) {
+		if (someNode.parent === null) {
 			return null
 		} else if (parentType.isInstance(someNode.parent)) {
 			return parentType.cast(someNode.parent)
@@ -241,9 +241,9 @@ class ASTFlattenerUtils {
 
 	def Type findDeclaredType(SimpleName simpleName) {
 		var ASTNode scope = simpleName.findDeclarationBlocks
-		while (scope != null) {
+		while (scope !== null) {
 			val type = scope.findDeclaredType(simpleName)
-			if (type != null) {
+			if (type !== null) {
 				return type
 			}
 			scope = scope.findDeclarationBlocks
@@ -301,7 +301,7 @@ class ASTFlattenerUtils {
 
 	def Iterable<Expression> findAssignmentsInBlock(Block scope, (Expression)=>Boolean constraint) {
 		val assigments = newHashSet()
-		if (scope != null) {
+		if (scope !== null) {
 			scope.accept(new ASTVisitor() {
 				override visit(Assignment node) {
 					if (constraint.apply(node)) {
@@ -368,7 +368,7 @@ class ASTFlattenerUtils {
 					simpleName = operand
 			}
 			if (simpleName instanceof SimpleName) {
-				return simpleName != null && nameToLookFor.identifier.equals(simpleName.identifier)
+				return simpleName !== null && nameToLookFor.identifier.equals(simpleName.identifier)
 			}
 			return false
 		]).empty
@@ -385,7 +385,7 @@ class ASTFlattenerUtils {
 	def genericChildListProperty(ASTNode node, String propertyName) {
 		val property = node.structuralPropertiesForType.filter(ChildListPropertyDescriptor).filter[propertyName == id].
 			head
-		if (property != null) {
+		if (property !== null) {
 			return node.getStructuralProperty(property) as List<ASTNode>
 		}
 		return null
@@ -401,7 +401,7 @@ class ASTFlattenerUtils {
 
 	def genericChildProperty(ASTNode node, String propertyName) {
 		val property = node.structuralPropertiesForType.filter(ChildPropertyDescriptor).filter[propertyName == id].head
-		if (property != null) {
+		if (property !== null) {
 			return node.getStructuralProperty(property) as ASTNode
 		}
 		return null

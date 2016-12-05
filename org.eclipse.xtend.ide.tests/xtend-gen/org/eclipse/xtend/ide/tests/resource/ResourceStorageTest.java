@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtend.ide.tests.resource;
 
-import com.google.common.base.Objects;
 import com.google.common.base.Throwables;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
@@ -302,8 +301,7 @@ public class ResourceStorageTest extends AbstractXtendUITestCase {
       testShouldLoadFromStorageJob.schedule();
       testShouldLoadFromStorageJob.join();
       final Throwable t = IterableExtensions.<Throwable>head(throwables);
-      boolean _notEquals = (!Objects.equal(t, null));
-      if (_notEquals) {
+      if ((t != null)) {
         Throwables.propagate(t);
       }
     } catch (Throwable _e) {

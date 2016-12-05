@@ -55,7 +55,7 @@ class AnnotationReferenceBuildContextImpl implements AnnotationReferenceBuildCon
 
 		val annotationType = delegate.annotation
 		val jvmOperation = annotationType.declaredOperations.findFirst[simpleName == name]
-		if (jvmOperation == null) {
+		if (jvmOperation === null) {
 			throw new IllegalArgumentException('''The annotation property '«name»' is not declared on the annotation type '«annotationType.identifier»'.''')
 		}
 		return jvmOperation
@@ -67,7 +67,7 @@ class AnnotationReferenceBuildContextImpl implements AnnotationReferenceBuildCon
 	}
 	
 	protected def remove(JvmOperation op) {
-		return Iterators.removeIf(delegate.explicitValues.iterator) [ op == operation || (operation == null && op.simpleName == 'value') ]
+		return Iterators.removeIf(delegate.explicitValues.iterator) [ op == operation || (operation === null && op.simpleName == 'value') ]
 	}
 	
 	protected def findOperation(String name, boolean mustBeArray) {
@@ -306,7 +306,7 @@ class AnnotationReferenceBuildContextImpl implements AnnotationReferenceBuildCon
 	}
 	
 	protected def dispatch void setValue(JvmAnnotationValue it, Object value, String componentType, boolean mustBeArray) {
-		if (componentType == null) {
+		if (componentType === null) {
 			throwNotApplicable(value.class.name)
 		}
 		if (mustBeArray || operation.returnType?.type?.eClass == TypesPackage.Literals.JVM_ARRAY_TYPE) {
@@ -470,7 +470,7 @@ class AnnotationReferenceBuildContextImpl implements AnnotationReferenceBuildCon
 	}
 	
 	protected def checkType(JvmAnnotationValue it, String componentType, boolean mustBeArray) {
-		if (componentType == null) {
+		if (componentType === null) {
 			return
 		}
 		val returnType = operation.returnType?.type

@@ -24,12 +24,12 @@ public abstract class JvmElementImpl<T extends EObject> extends AbstractElementI
     this.checkMutable();
     T _delegate = this.getDelegate();
     Resource _eResource = _delegate.eResource();
-    boolean _notEquals = (!Objects.equal(_eResource, null));
+    boolean _tripleNotEquals = (_eResource != null);
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("This element has already been removed: ");
     T _delegate_1 = this.getDelegate();
     _builder.append(_delegate_1, "");
-    Preconditions.checkState(_notEquals, _builder);
+    Preconditions.checkState(_tripleNotEquals, _builder);
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     IJvmModelAssociator _jvmModelAssociator = _compilationUnit.getJvmModelAssociator();
     T _delegate_2 = this.getDelegate();
@@ -38,12 +38,12 @@ public abstract class JvmElementImpl<T extends EObject> extends AbstractElementI
     EcoreUtil.remove(_delegate_3);
     T _delegate_4 = this.getDelegate();
     Resource _eResource_1 = _delegate_4.eResource();
-    boolean _equals = Objects.equal(_eResource_1, null);
+    boolean _tripleEquals = (_eResource_1 == null);
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("Couldn\'t remove: ");
     T _delegate_5 = this.getDelegate();
     _builder_1.append(_delegate_5, "");
-    Preconditions.checkState(_equals, _builder_1);
+    Preconditions.checkState(_tripleEquals, _builder_1);
   }
   
   protected final void checkMutable() {
