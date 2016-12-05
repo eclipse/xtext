@@ -3,7 +3,6 @@
  */
 package org.eclipse.xtext.testlanguages.backtracking.formatting2;
 
-import com.google.inject.Inject;
 import java.util.Arrays;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -17,15 +16,10 @@ import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.Provided
 import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.RequiredCapability;
 import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.SimpleTypeRef;
 import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.Unit;
-import org.eclipse.xtext.testlanguages.backtracking.services.BeeLangTestLanguageGrammarAccess;
 import org.eclipse.xtext.xbase.lib.Extension;
 
 @SuppressWarnings("all")
 public class BeeLangTestLanguageFormatter extends AbstractFormatter2 {
-  @Inject
-  @Extension
-  private BeeLangTestLanguageGrammarAccess _beeLangTestLanguageGrammarAccess;
-  
   protected void _format(final Model model, @Extension final IFormattableDocument document) {
     EList<Unit> _units = model.getUnits();
     for (final Unit unit : _units) {

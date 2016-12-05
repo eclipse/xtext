@@ -3,7 +3,6 @@
  */
 package org.eclipse.xtext.testlanguages.noJdt.formatting2;
 
-import com.google.inject.Inject;
 import java.util.Arrays;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -12,15 +11,10 @@ import org.eclipse.xtext.formatting2.IFormattableDocument;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.testlanguages.noJdt.noJdt.Greeting;
 import org.eclipse.xtext.testlanguages.noJdt.noJdt.Model;
-import org.eclipse.xtext.testlanguages.noJdt.services.NoJdtTestLanguageGrammarAccess;
 import org.eclipse.xtext.xbase.lib.Extension;
 
 @SuppressWarnings("all")
 public class NoJdtTestLanguageFormatter extends AbstractFormatter2 {
-  @Inject
-  @Extension
-  private NoJdtTestLanguageGrammarAccess _noJdtTestLanguageGrammarAccess;
-  
   protected void _format(final Model model, @Extension final IFormattableDocument document) {
     EList<Greeting> _greetings = model.getGreetings();
     for (final Greeting greeting : _greetings) {
