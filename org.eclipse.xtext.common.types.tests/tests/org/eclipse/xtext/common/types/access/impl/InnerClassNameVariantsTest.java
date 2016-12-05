@@ -9,7 +9,6 @@ package org.eclipse.xtext.common.types.access.impl;
 
 import static org.junit.Assert.*;
 
-import java.util.Arrays;
 import java.util.Iterator;
 
 import org.junit.Test;

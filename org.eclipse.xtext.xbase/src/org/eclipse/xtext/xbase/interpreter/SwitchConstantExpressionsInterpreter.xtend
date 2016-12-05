@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xbase.interpreter
 
 import com.google.inject.Inject
-import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.common.types.JvmEnumerationLiteral
 import org.eclipse.xtext.common.types.JvmField

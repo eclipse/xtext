@@ -7,9 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.computation;
 
-import static com.google.common.collect.Iterables.*;
-import static org.eclipse.xtext.xbase.lib.IterableExtensions.*;
-
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;

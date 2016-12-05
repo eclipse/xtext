@@ -13,8 +13,6 @@ import org.eclipse.emf.mwe.utils.DirectoryCleaner;
 import org.eclipse.emf.mwe.utils.StandaloneSetup;
 import org.eclipse.emf.mwe2.ecore.EcoreGenerator;
 
-import static java.io.File.*;
-
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
