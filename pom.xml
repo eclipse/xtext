@@ -2,15 +2,20 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
+	<parent>
+		<groupId>org.eclipse.xtext</groupId>
+		<artifactId>org.eclipse.xtext.tycho.parent</artifactId>
+		<version>2.11.0-SNAPSHOT</version>
+		<relativePath>/releng/org.eclipse.xtext.tycho.parent</relativePath>
+	</parent>
+
 	<groupId>org.eclipse.xtext</groupId>
 	<artifactId>org.eclipse.xtend.root</artifactId>
 	<packaging>pom</packaging>
 	<version>2.11.0-SNAPSHOT</version>
 
 	<modules>
-		<module>org.eclipse.xtext.tycho.parent</module>
-		<module>org.eclipse.xtext.license.feature</module>
-		<module>org.eclipse.xtext.target</module>
+		<module>releng</module>
 		<module>org.eclipse.xtend.core</module>
 		<module>org.eclipse.xtend.core.tests</module>
 		<module>org.eclipse.xtend.core.tests.java8</module>
@@ -20,7 +25,6 @@
 		<module>org.eclipse.xtend.ide.common</module>
 		<module>org.eclipse.xtend.m2e</module>
 		<module>org.eclipse.xtend.standalone</module>
-		<module>org.eclipse.xtext.parent</module>
 		<module>org.eclipse.xtend.performance.tests</module>
 		<module>org.eclipse.xtend.caliper.tests</module>
 		<module>org.eclipse.xtend.swtbot</module>
@@ -30,9 +34,6 @@
 		<!--<module>org.eclipse.xtend.maven.android.archetype</module> -->
 		<module>org.eclipse.xtend.doc</module>
 		<module>org.eclipse.xtend.examples</module>
-		<module>org.eclipse.xtend.gwt.feature</module>
-		<module>org.eclipse.xtend.sdk.feature</module>
-		<module>org.eclipse.xtend.p2-repository</module>
 	</modules>
 
 	<build>

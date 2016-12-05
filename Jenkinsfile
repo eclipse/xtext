@@ -22,7 +22,7 @@ node {
         env.M2_HOME = "${mvnHome}"
         try {
             wrap([$class:'Xvnc', useXauthority: true]) {
-                sh "${mvnHome}/bin/mvn --batch-mode --update-snapshots -fae -Dmaven.test.failure.ignore=true -Dmaven.repo.local=local-maven-repository/ clean deploy"
+                sh "${mvnHome}/bin/mvn --batch-mode -fae -Dmaven.test.failure.ignore=true -Dmaven.repo.local=local-maven-repository/ clean install"
             }
             archive 'build/**/*.*'
         } finally {
