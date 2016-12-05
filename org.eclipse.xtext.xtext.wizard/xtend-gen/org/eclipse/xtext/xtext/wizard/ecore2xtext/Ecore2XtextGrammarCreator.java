@@ -154,8 +154,7 @@ public class Ecore2XtextGrammarCreator {
     {
       final EAttribute idAttr = Ecore2XtextExtensions.idAttribute(it);
       CharSequence _xifexpression = null;
-      boolean _notEquals = (!Objects.equal(idAttr, null));
-      if (_notEquals) {
+      if ((idAttr != null)) {
         StringConcatenation _builder = new StringConcatenation();
         String _name = idAttr.getName();
         _builder.append(_name, "");

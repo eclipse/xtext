@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.xtext.generator;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Maps;
 import com.google.inject.Binder;
 import com.google.inject.Guice;
@@ -484,8 +483,8 @@ public class XtextGeneratorTemplates {
               {
                 GuiceModuleAccess.BindValue _value_5 = it.getValue();
                 Object _expression_3 = _value_5.getExpression();
-                boolean _equals = Objects.equal(_expression_3, null);
-                if (_equals) {
+                boolean _tripleEquals_1 = (_expression_3 == null);
+                if (_tripleEquals_1) {
                   _builder.append("Class<? extends ");
                   _builder.append(Provider.class, "");
                   _builder.append("<? extends ");
@@ -512,8 +511,8 @@ public class XtextGeneratorTemplates {
               {
                 GuiceModuleAccess.BindValue _value_6 = it.getValue();
                 Object _expression_4 = _value_6.getExpression();
-                boolean _notEquals = (!Objects.equal(_expression_4, null));
-                if (_notEquals) {
+                boolean _tripleNotEquals_1 = (_expression_4 != null);
+                if (_tripleNotEquals_1) {
                   GuiceModuleAccess.BindValue _value_7 = it.getValue();
                   Object _expression_5 = _value_7.getExpression();
                   _builder.append(_expression_5, "\t");

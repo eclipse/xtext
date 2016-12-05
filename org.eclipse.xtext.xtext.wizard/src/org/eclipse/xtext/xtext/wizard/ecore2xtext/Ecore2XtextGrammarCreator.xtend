@@ -67,7 +67,7 @@ import org.eclipse.xtext.xtext.wizard.WizardConfiguration
 	
 	def idAssignment(EClass it) {
 		val idAttr = idAttribute
-		if(idAttr!=null) {
+		if(idAttr!==null) {
 			'''«idAttr.name»=«assignedRuleCall(idAttr)»'''
 		}
 	}
