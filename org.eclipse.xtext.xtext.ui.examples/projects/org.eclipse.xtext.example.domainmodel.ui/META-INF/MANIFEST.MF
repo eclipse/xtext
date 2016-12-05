@@ -1,35 +1,29 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Xtext Domainmodel Example UI
+Bundle-Name: Xtext Domainmodel Example - Eclipse UI
 Bundle-Vendor: Eclipse Xtext
-Bundle-Version: 2.10.0.qualifier
-Bundle-SymbolicName: org.eclipse.xtext.example.domainmodel.ui;singleton:=true
+Bundle-Version: 2.11.0.qualifier
+Bundle-SymbolicName: org.eclipse.xtext.example.domainmodel.ui; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext.example.domainmodel,
  org.eclipse.xtext.example.domainmodel.ide,
  org.eclipse.xtext.ui,
- org.eclipse.ui.editors;bundle-version="3.6.0",
- org.eclipse.ui;bundle-version="3.6.0",
- org.eclipse.ui.ide;bundle-version="3.6.0",
- org.eclipse.jdt.core;bundle-version="3.6.0";resolution:=optional;x-installation:=greedy,
- org.eclipse.xtext.builder,
- org.eclipse.xpand;bundle-version="1.1.0",
- org.eclipse.xtend;bundle-version="1.1.0",
  org.eclipse.xtext.ui.shared,
- org.eclipse.text;bundle-version="3.5.0",
- org.eclipse.xtext.common.types.ui,
- org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
- org.eclipse.xtext.xbase.ui,
  org.eclipse.xtext.ui.codetemplates.ui,
- org.eclipse.compare;bundle-version="3.5.101",
- org.eclipse.debug.ui;bundle-version="3.6.0",
- org.eclipse.jdt.debug.ui;bundle-version="3.5.2",
+ org.eclipse.ui.editors;bundle-version="3.5.0",
+ org.eclipse.ui.ide;bundle-version="3.5.0",
+ org.eclipse.ui,
+ org.eclipse.compare,
+ org.eclipse.xtext.builder,
+ org.eclipse.xtend.lib;resolution:=optional,
  org.eclipse.xtext.xbase.lib,
- org.eclipse.xtend.lib;resolution:=optional
-Bundle-Activator: org.eclipse.xtext.example.domainmodel.ui.internal.DomainmodelActivator
+ org.eclipse.xtext.common.types.ui,
+ org.eclipse.xtext.xbase.ui,
+ org.eclipse.jdt.core;bundle-version="3.6.0";resolution:=optional;x-installation:=greedy,
+ org.eclipse.jdt.debug.ui
+Import-Package: org.apache.log4j
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Import-Package: org.apache.log4j;version="1.2.15"
-Export-Package: org.eclipse.xtext.example.domainmodel.ui,
+Export-Package: org.eclipse.xtext.example.domainmodel.ui.contentassist,
  org.eclipse.xtext.example.domainmodel.ui.autoedit,
  org.eclipse.xtext.example.domainmodel.ui.contentassist,
  org.eclipse.xtext.example.domainmodel.ui.internal,
@@ -39,4 +33,4 @@ Export-Package: org.eclipse.xtext.example.domainmodel.ui,
  org.eclipse.xtext.example.domainmodel.ui.outline,
  org.eclipse.xtext.example.domainmodel.ui.quickfix,
  org.eclipse.xtext.example.domainmodel.ui.search
-
+Bundle-Activator: org.eclipse.xtext.example.domainmodel.ui.internal.DomainmodelActivator

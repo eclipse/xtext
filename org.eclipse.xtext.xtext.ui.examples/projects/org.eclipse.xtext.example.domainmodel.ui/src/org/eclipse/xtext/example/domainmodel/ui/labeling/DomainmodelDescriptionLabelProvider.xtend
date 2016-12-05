@@ -6,8 +6,9 @@ package org.eclipse.xtext.example.domainmodel.ui.labeling
 import org.eclipse.xtext.resource.IEObjectDescription
 import org.eclipse.xtext.ui.label.DefaultDescriptionLabelProvider
 
-/** 
- * Provides labels for a IEObjectDescriptions and IResourceDescriptions.
+/**
+ * Provides labels for IEObjectDescriptions and IResourceDescriptions.
+ * 
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#label-provider
  */
 class DomainmodelDescriptionLabelProvider extends DefaultDescriptionLabelProvider {
