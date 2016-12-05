@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.web.example.entities.formatting2;
 
-import com.google.inject.Inject;
 import java.util.Arrays;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -22,7 +21,6 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.web.example.entities.domainmodel.AbstractElement;
 import org.eclipse.xtext.web.example.entities.domainmodel.Entities;
 import org.eclipse.xtext.web.example.entities.domainmodel.PackageDeclaration;
-import org.eclipse.xtext.web.example.entities.services.EntitiesGrammarAccess;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBasicForLoopExpression;
 import org.eclipse.xtext.xbase.XBinaryOperation;
@@ -55,10 +53,6 @@ import org.eclipse.xtext.xtype.XImportSection;
 
 @SuppressWarnings("all")
 public class EntitiesFormatter extends XbaseFormatter {
-  @Inject
-  @Extension
-  private EntitiesGrammarAccess _entitiesGrammarAccess;
-  
   protected void _format(final Entities entities, @Extension final IFormattableDocument document) {
     XImportSection _importSection = entities.getImportSection();
     document.<XImportSection>format(_importSection);
