@@ -8,6 +8,7 @@
 package org.eclipse.xtext.serializer;
 
 import com.google.inject.Inject;
+import java.util.concurrent.TimeUnit;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.serializer.HiddenTokenSequencerTestLanguageInjectorProvider;
@@ -46,7 +47,7 @@ public class SerializerPerformanceTest {
   private ISerializer _iSerializer;
   
   @Rule
-  public final Timeout timeout = new Timeout(5000);
+  public final Timeout timeout = new Timeout(5000, TimeUnit.MILLISECONDS);
   
   private final static int numberOfElements = 1000;
   
