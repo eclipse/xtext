@@ -11,8 +11,6 @@ import org.eclipse.jface.action.ActionContributionItem;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.action.IContributionItem;
 import org.eclipse.jface.action.IToolBarManager;
-import org.eclipse.ui.IWorkbenchWindow;
-import org.eclipse.ui.internal.WorkbenchWindow;
 import org.eclipse.ui.texteditor.ITextEditorActionConstants;
 import org.eclipse.ui.texteditor.ShowWhitespaceCharactersAction;
 import org.eclipse.xtext.ui.IImageHelper.IImageDescriptorHelper;
