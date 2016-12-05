@@ -412,7 +412,7 @@ class XtextServiceDispatcher {
 		val preferences = new MapBasedPreferenceValues(formatterPreferences, newLinkedHashMap)
 		preferences.put(FormatterPreferenceKeys.lineSeparator, lineSeparator)
 		preferences.put(FormatterPreferenceKeys.indentation, indentation)
-		preferences.put(FormatterPreferenceKeys.indentationLength, indentationLength)
+		preferences.put(FormatterPreferenceKeys.tabWidth, indentationLength)
 		preferences.put(FormatterPreferenceKeys.maxLineWidth, maxLineWidth)
 
 		val selection =
