@@ -6,7 +6,7 @@ node {
 		
 		stage 'Gradle Build'
         try {
-			sh "./gradlew cleanLocalMavenRepo cleanLocalP2Repo clean build createLocalMavenRepo --refresh-dependencies --continue"
+			sh "./gradlew clean build createLocalMavenRepo --refresh-dependencies --continue"
 			archive 'build/maven-repository/**/*.*'
 		} finally {
 			step([$class: 'JUnitResultArchiver', testResults: '**/build/test-results/test/*.xml'])
