@@ -60,14 +60,20 @@
 	</location>
 	
 	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+		<unit id="org.eclipse.xtext.builder" version="0.0.0"/>
+		<unit id="org.eclipse.xtext.builder.source" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.common.types.shared" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.common.types.shared.source" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.common.types.shared.jdt38" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.common.types.shared.jdt38.source" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.junit4" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.junit4.source" version="0.0.0"/>
+		<unit id="org.eclipse.xtext.ui" version="0.0.0"/>
+		<unit id="org.eclipse.xtext.ui.source" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.xbase.junit" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.xbase.junit.source" version="0.0.0"/>
+		<unit id="org.eclipse.xtext.xbase.ui" version="0.0.0"/>
+		<unit id="org.eclipse.xtext.xbase.ui.source" version="0.0.0"/>
 		<repository location="http://services.typefox.io/open-source/jenkins/job/xtext-eclipse/job/msp_p2repo/lastStableBuild/artifact/build/p2-repository/"/>
 	</location>
 	

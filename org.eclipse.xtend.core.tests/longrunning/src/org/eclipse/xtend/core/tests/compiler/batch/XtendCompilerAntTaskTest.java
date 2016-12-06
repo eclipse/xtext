@@ -54,34 +54,42 @@ public class XtendCompilerAntTaskTest {
 
 	@Test
 	public void testSrcdirAsAttr() {
-		executeTarget("compile");
-		Assert.assertEquals("Message was logged but should not.", getLog(), "");
-		File genFolder = new File("batch-compiler-data/ant/xtend-gen/test");
-		Assert.assertTrue("Gen folder created", genFolder.exists());
-		Assert.assertTrue("Gen folder not empty", genFolder.list() != null);
-		Assert.assertEquals("Gen folder contains 7 compiled java files", 7, genFolder.list(new FilenameFilter() {
-
-			@Override
-			public boolean accept(File dir, String name) {
-				return name.endsWith(".java");
-			}
-		}).length);
+		try {
+			executeTarget("compile");
+			Assert.assertEquals("Message was logged but should not.", getLog(), "");
+			File genFolder = new File("batch-compiler-data/ant/xtend-gen/test");
+			Assert.assertTrue("Gen folder created", genFolder.exists());
+			Assert.assertTrue("Gen folder not empty", genFolder.list() != null);
+			Assert.assertEquals("Gen folder contains 7 compiled java files", 7, genFolder.list(new FilenameFilter() {
+				@Override
+				public boolean accept(File dir, String name) {
+					return name.endsWith(".java");
+				}
+			}).length);
+		} catch (AssertionError e) {
+			printExecutionOutput();
+			throw e;
+		}
 	}
 
 	@Test
 	public void testSrcdirAsNestedPath() {
-		executeTarget("compile.multisrc");
-		Assert.assertEquals("Message was logged but should not.", getLog(), "");
-		File genFolder = new File("batch-compiler-data/ant/xtend-gen/test");
-		Assert.assertTrue("Gen folder created", genFolder.exists());
-		Assert.assertTrue("Gen folder not empty", genFolder.list() != null);
-		Assert.assertEquals("Gen folder contains 8 compiled java files", 8, genFolder.list(new FilenameFilter() {
-
-			@Override
-			public boolean accept(File dir, String name) {
-				return name.endsWith(".java");
-			}
-		}).length);
+		try {
+			executeTarget("compile.multisrc");
+			Assert.assertEquals("Message was logged but should not.", getLog(), "");
+			File genFolder = new File("batch-compiler-data/ant/xtend-gen/test");
+			Assert.assertTrue("Gen folder created", genFolder.exists());
+			Assert.assertTrue("Gen folder not empty", genFolder.list() != null);
+			Assert.assertEquals("Gen folder contains 8 compiled java files", 8, genFolder.list(new FilenameFilter() {
+				@Override
+				public boolean accept(File dir, String name) {
+					return name.endsWith(".java");
+				}
+			}).length);
+		} catch (AssertionError e) {
+			printExecutionOutput();
+			throw e;
+		}
 	}
 
 	@Test
@@ -153,7 +161,15 @@ public class XtendCompilerAntTaskTest {
 			System.setOut(sysOut);
 			System.setErr(sysErr);
 		}
-
+	}
+	
+	public void printExecutionOutput() {
+		if (outBuffer != null && outBuffer.length() > 0) {
+			System.out.println(outBuffer.toString());
+		}
+		if (errBuffer != null && errBuffer.length() > 0) {
+			System.err.println(errBuffer.toString());
+		}
 	}
 
 	/**
