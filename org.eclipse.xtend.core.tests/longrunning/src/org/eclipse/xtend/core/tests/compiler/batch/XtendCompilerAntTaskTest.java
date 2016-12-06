@@ -52,6 +52,8 @@ public class XtendCompilerAntTaskTest {
 		project = null;
 	}
 
+	// https://github.com/eclipse/xtext-xtend/issues/87
+	@Ignore
 	@Test
 	public void testSrcdirAsAttr() {
 		try {
@@ -72,6 +74,8 @@ public class XtendCompilerAntTaskTest {
 		}
 	}
 
+	// https://github.com/eclipse/xtext-xtend/issues/87
+	@Ignore
 	@Test
 	public void testSrcdirAsNestedPath() {
 		try {
