@@ -12,6 +12,7 @@ import 'http://www.eclipse.org/2009/tmf/xtext/EnumRulesTest'
 /* SuppressWarnings[external] */
 import 'classpath:/org/eclipse/xtext/enumrules/enums.ecore'
  
+@Override 
 Model:
   'model' existing=ExistingEnumAsDT
 ;

@@ -19,4 +19,5 @@ Variable: ID (('.'|'-') ID)*;
 
 /* SuppressWarnings[InvalidTerminalruleName] */
 terminal Value: ('='|'+='|'-=') -> '\n';
+@Override 
 terminal SL_COMMENT: '#' !('\n'|'\r')* ('\r'? '\n')?;

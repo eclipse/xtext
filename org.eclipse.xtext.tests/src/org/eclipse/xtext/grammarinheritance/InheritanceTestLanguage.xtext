@@ -10,6 +10,7 @@ grammar org.eclipse.xtext.grammarinheritance.InheritanceTestLanguage
  	
 generate inheritanceTest "http://www.eclipse.org/2009/tmf/xtext/InheritanceTestLanguage"
 
+@Override 
 Model :
 	"model" name=ID "{"
 		elements+=Element*
@@ -20,4 +21,5 @@ Element :
 	"element" name=ID
 ;
 
+@Override 
 terminal ID: ('a'..'z')+;

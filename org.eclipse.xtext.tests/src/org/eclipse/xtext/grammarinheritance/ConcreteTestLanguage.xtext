@@ -19,6 +19,7 @@ ConcreteParserRule :
 	'model' magicNumber=REAL ':' (elements+=InheritedParserRule)*;
 	
 // override OverridableParserRule and call it
+@Override 
 OverridableParserRule returns mm::AType:
 	'overriddenelement' name=ID;
 	
@@ -26,10 +27,12 @@ CallOverridenParserRule:
 	call=AbstractCallOverridenParserRule;
 	
 // override parser rule and change return type
+@Override 
 OverridableParserRule2 returns AType2 :
 	'overridden other element' name=ID '-' age=INT;
 	
 // override and extend ExtendableParserRule and call it
+@Override 
 ExtendableParserRule returns mm::AType:
 	Subrule1 | Subrule2 | Subrule3;
 	
@@ -45,6 +48,7 @@ Subrule3:
 CallExtendedParserRule:
 	call=AbstractCallExtendedParserRule;
 	
+@Override 
 terminal ID:
 	super
 ;

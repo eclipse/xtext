@@ -10,10 +10,12 @@ grammar org.eclipse.xtext.grammarinheritance.InheritanceTest3Language
  	
 import "http://www.eclipse.org/2009/tmf/xtext/InheritanceTestLanguage"
 
+@Override 
 Model:
 	super::Model
 ;
 
+@Override 
 Element :
 	  super::Element
 	| {Element} "element" name=super::ID
@@ -21,4 +23,5 @@ Element :
 	| {Element} "element" name=super::STRING
 ;
 
+@Override 
 terminal ID: 'id';

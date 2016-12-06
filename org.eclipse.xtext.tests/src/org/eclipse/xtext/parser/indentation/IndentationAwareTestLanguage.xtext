@@ -20,7 +20,8 @@ TreeNode:
 	DEDENT)?
 ;
 
-terminal SL_COMMENT 	: '//' !('\n'|'\r')*;
+@Override 
+terminal SL_COMMENT: '//' !('\n'|'\r')*;
 
 terminal INDENT: 'synthetic:INDENT';
 terminal DEDENT: 'synthetic:DEDENT';

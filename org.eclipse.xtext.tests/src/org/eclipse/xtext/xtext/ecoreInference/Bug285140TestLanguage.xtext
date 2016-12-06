@@ -10,6 +10,7 @@ grammar org.eclipse.xtext.xtext.ecoreInference.Bug285140TestLanguage with org.ec
  
 import "http://www.eclipse.org/2008/tmf/xtext/ActionLang" as actionLang 
  
+@Override 
 Model returns actionLang::Model:
 	Child ({actionLang::Parent.left=current} right=Child)?;
  

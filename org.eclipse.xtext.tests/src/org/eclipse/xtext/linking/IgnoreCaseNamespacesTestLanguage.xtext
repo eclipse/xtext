@@ -9,6 +9,7 @@ grammar org.eclipse.xtext.linking.IgnoreCaseNamespacesTestLanguage with org.ecli
 
 generate ignoreCaseNamespacesTest "http://eclipse.org/xtext/ignoreCaseNamespacesTestLanguage"
 
+@Override 
 Model:
 	imports += Import*
 	elements += Element+
