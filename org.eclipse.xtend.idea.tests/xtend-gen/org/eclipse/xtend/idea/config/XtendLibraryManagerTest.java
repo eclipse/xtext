@@ -23,7 +23,7 @@ import com.intellij.openapi.roots.OrderEntry;
 import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiFile;
 import com.intellij.util.Consumer;
-import junit.framework.Assert;
+import junit.framework.TestCase;
 import org.eclipse.xtend.core.idea.config.XtendLibraryConfigurator;
 import org.eclipse.xtend.core.idea.framework.XtendLibraryDescription;
 import org.eclipse.xtend.core.idea.intentions.XtendIntentionsProvider;
@@ -153,7 +153,7 @@ public class XtendLibraryManagerTest extends LightXtendTest {
     };
     final Iterable<OrderEntry> xtendlibs = IterableExtensions.<OrderEntry>filter(((Iterable<OrderEntry>)Conversions.doWrapArray(_orderEntries)), _function);
     int _size = IterableExtensions.size(xtendlibs);
-    Assert.assertEquals("Xtend libraries in module", 1, _size);
+    TestCase.assertEquals("Xtend libraries in module", 1, _size);
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Foo {");
     _builder.newLine();
