@@ -9,7 +9,7 @@ package org.eclipse.xtend.idea.highlighting;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import junit.framework.Assert;
+import junit.framework.TestCase;
 import org.eclipse.xtend.core.idea.highlighting.XtendHighlightingLexer;
 import org.eclipse.xtend.idea.LightXtendTest;
 
@@ -25,25 +25,25 @@ public class XtendHighlightingLexerTest extends LightXtendTest {
     final XtendHighlightingLexer lexer = this.lexerProvider.get();
     lexer.start("package mypackage");
     int _tokenStart = lexer.getTokenStart();
-    Assert.assertEquals(0, _tokenStart);
+    TestCase.assertEquals(0, _tokenStart);
     lexer.advance();
     int _tokenStart_1 = lexer.getTokenStart();
-    Assert.assertNotSame(Integer.valueOf(0), Integer.valueOf(_tokenStart_1));
+    TestCase.assertNotSame(Integer.valueOf(0), Integer.valueOf(_tokenStart_1));
     lexer.start("package mypackage");
     int _tokenStart_2 = lexer.getTokenStart();
-    Assert.assertEquals(0, _tokenStart_2);
+    TestCase.assertEquals(0, _tokenStart_2);
   }
   
   public void ignoreStart_02() {
     final XtendHighlightingLexer lexer = this.lexerProvider.get();
     lexer.start("\'\'\' «» \'\'\'");
     int _tokenStart = lexer.getTokenStart();
-    Assert.assertEquals(0, _tokenStart);
+    TestCase.assertEquals(0, _tokenStart);
     lexer.advance();
     int _tokenStart_1 = lexer.getTokenStart();
-    Assert.assertNotSame(Integer.valueOf(0), Integer.valueOf(_tokenStart_1));
+    TestCase.assertNotSame(Integer.valueOf(0), Integer.valueOf(_tokenStart_1));
     lexer.start("\'\'\' «» \'\'\'");
     int _tokenStart_2 = lexer.getTokenStart();
-    Assert.assertEquals(0, _tokenStart_2);
+    TestCase.assertEquals(0, _tokenStart_2);
   }
 }

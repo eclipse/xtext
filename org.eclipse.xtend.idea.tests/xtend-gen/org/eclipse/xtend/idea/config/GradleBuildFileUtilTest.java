@@ -14,7 +14,7 @@ import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
-import junit.framework.Assert;
+import junit.framework.TestCase;
 import org.eclipse.xtend.core.idea.config.GradleBuildFileUtility;
 import org.eclipse.xtend.core.idea.config.MavenArtifact;
 import org.eclipse.xtend.core.idea.config.XtendLibraryConfigurator;
@@ -43,7 +43,7 @@ public class GradleBuildFileUtilTest extends LightXtendTest {
   public void testSetupGradleBuildEmptyFile() {
     PsiFile _addFileToProject = this.myFixture.addFileToProject("build.gradle", "");
     final GroovyFile buildFile = ((GroovyFile) _addFileToProject);
-    Assert.assertNotNull(buildFile);
+    TestCase.assertNotNull(buildFile);
     Project _project = this.myFixture.getProject();
     final Runnable _function = () -> {
       this.util.setupGradleBuild(this.myModule, buildFile);
@@ -86,13 +86,13 @@ public class GradleBuildFileUtilTest extends LightXtendTest {
     String _string = _builder.toString();
     String _trim = _string.trim();
     String _text = buildFile.getText();
-    Assert.assertEquals(_trim, _text);
+    TestCase.assertEquals(_trim, _text);
   }
   
   public void testSetupGradleBuildFileWithContent() {
     PsiFile _addFileToProject = this.myFixture.addFileToProject("build.gradle", "buildscript{dependencies{}}");
     final GroovyFile buildFile = ((GroovyFile) _addFileToProject);
-    Assert.assertNotNull(buildFile);
+    TestCase.assertNotNull(buildFile);
     Project _project = this.myFixture.getProject();
     final Runnable _function = () -> {
       this.util.setupGradleBuild(this.myModule, buildFile);
@@ -131,13 +131,13 @@ public class GradleBuildFileUtilTest extends LightXtendTest {
     String _string = _builder.toString();
     String _trim = _string.trim();
     String _text = buildFile.getText();
-    Assert.assertEquals(_trim, _text);
+    TestCase.assertEquals(_trim, _text);
   }
   
   public void testAddDependencyEmptyFile() {
     PsiFile _addFileToProject = this.myFixture.addFileToProject("build.gradle", "");
     final GroovyFile buildFile = ((GroovyFile) _addFileToProject);
-    Assert.assertNotNull(buildFile);
+    TestCase.assertNotNull(buildFile);
     Project _project = this.myFixture.getProject();
     final Runnable _function = () -> {
       MavenArtifact _xtendLibMavenId = XtendLibraryConfigurator.xtendLibMavenId();
@@ -160,7 +160,7 @@ public class GradleBuildFileUtilTest extends LightXtendTest {
     _builder.append("}");
     String _string_1 = _builder.toString();
     String _text = buildFile.getText();
-    Assert.assertEquals(_string_1, _text);
+    TestCase.assertEquals(_string_1, _text);
   }
   
   public void testAddDependencyFileWithContent() {
@@ -168,7 +168,7 @@ public class GradleBuildFileUtilTest extends LightXtendTest {
     _builder.append("dependencies {}");
     PsiFile _addFileToProject = this.myFixture.addFileToProject("build.gradle", _builder.toString());
     final GroovyFile buildFile = ((GroovyFile) _addFileToProject);
-    Assert.assertNotNull(buildFile);
+    TestCase.assertNotNull(buildFile);
     Project _project = this.myFixture.getProject();
     final Runnable _function = () -> {
       MavenArtifact _xtendLibMavenId = XtendLibraryConfigurator.xtendLibMavenId();
@@ -191,22 +191,22 @@ public class GradleBuildFileUtilTest extends LightXtendTest {
     _builder_1.append("}");
     String _string_1 = _builder_1.toString();
     String _text = buildFile.getText();
-    Assert.assertEquals(_string_1, _text);
+    TestCase.assertEquals(_string_1, _text);
   }
   
   public void testIsGradleModule() {
     PlatformUtil _platformUtil = new PlatformUtil();
     boolean _isGradleInstalled = _platformUtil.isGradleInstalled();
-    Assert.assertTrue(_isGradleInstalled);
+    TestCase.assertTrue(_isGradleInstalled);
     Module _module = this.myFixture.getModule();
     boolean _isGradleedModule = this.util.isGradleedModule(_module);
-    Assert.assertFalse(_isGradleedModule);
+    TestCase.assertFalse(_isGradleedModule);
   }
   
   public void assertTree(final GroovyFile buildFile) {
     GrStatement[] _statements = buildFile.getStatements();
     int _length = _statements.length;
-    Assert.assertEquals(2, _length);
+    TestCase.assertEquals(2, _length);
     GrStatement[] _statements_1 = buildFile.getStatements();
     Iterable<GrMethodCallExpression> _filter = Iterables.<GrMethodCallExpression>filter(((Iterable<?>)Conversions.doWrapArray(_statements_1)), GrMethodCallExpression.class);
     final Function1<GrMethodCallExpression, Boolean> _function = (GrMethodCallExpression it) -> {
@@ -216,17 +216,17 @@ public class GradleBuildFileUtilTest extends LightXtendTest {
     };
     final Iterable<GrMethodCallExpression> bsCol = IterableExtensions.<GrMethodCallExpression>filter(_filter, _function);
     int _size = IterableExtensions.size(bsCol);
-    Assert.assertEquals(1, _size);
+    TestCase.assertEquals(1, _size);
     final GrMethodCallExpression bs = IterableExtensions.<GrMethodCallExpression>head(bsCol);
     GrExpression _invokedExpression = bs.getInvokedExpression();
     String _text = _invokedExpression.getText();
-    Assert.assertEquals("buildscript", _text);
+    TestCase.assertEquals("buildscript", _text);
     GrClosableBlock[] _closureArguments = bs.getClosureArguments();
     GrClosableBlock _head = IterableExtensions.<GrClosableBlock>head(((Iterable<GrClosableBlock>)Conversions.doWrapArray(_closureArguments)));
     PsiElement[] _children = _head.getChildren();
     final Iterable<GrMethodCallExpression> children = Iterables.<GrMethodCallExpression>filter(((Iterable<?>)Conversions.doWrapArray(_children)), GrMethodCallExpression.class);
     int _size_1 = IterableExtensions.size(children);
-    Assert.assertEquals(2, _size_1);
+    TestCase.assertEquals(2, _size_1);
     final Function1<GrMethodCallExpression, Boolean> _function_1 = (GrMethodCallExpression it) -> {
       GrExpression _invokedExpression_1 = it.getInvokedExpression();
       String _text_1 = _invokedExpression_1.getText();
@@ -234,26 +234,26 @@ public class GradleBuildFileUtilTest extends LightXtendTest {
     };
     Iterable<GrMethodCallExpression> _filter_1 = IterableExtensions.<GrMethodCallExpression>filter(children, _function_1);
     final GrMethodCallExpression dps = IterableExtensions.<GrMethodCallExpression>head(_filter_1);
-    Assert.assertNotNull(dps);
+    TestCase.assertNotNull(dps);
     PsiElement[] _children_1 = dps.getChildren();
     int _length_1 = _children_1.length;
-    Assert.assertEquals(3, _length_1);
+    TestCase.assertEquals(3, _length_1);
     GrClosableBlock[] _closureArguments_1 = dps.getClosureArguments();
     final GrClosableBlock closureBlock = IterableExtensions.<GrClosableBlock>head(((Iterable<GrClosableBlock>)Conversions.doWrapArray(_closureArguments_1)));
     GrStatement[] _statements_2 = closureBlock.getStatements();
     int _length_2 = _statements_2.length;
-    Assert.assertEquals(1, _length_2);
+    TestCase.assertEquals(1, _length_2);
     GrStatement[] _statements_3 = closureBlock.getStatements();
     Iterable<GrApplicationStatement> _filter_2 = Iterables.<GrApplicationStatement>filter(((Iterable<?>)Conversions.doWrapArray(_statements_3)), GrApplicationStatement.class);
     final GrApplicationStatement clEntry = IterableExtensions.<GrApplicationStatement>head(_filter_2);
-    Assert.assertNotNull(clEntry);
+    TestCase.assertNotNull(clEntry);
     GrExpression _invokedExpression_1 = clEntry.getInvokedExpression();
     String _text_1 = _invokedExpression_1.getText();
-    Assert.assertEquals("classpath", _text_1);
+    TestCase.assertEquals("classpath", _text_1);
     GrCommandArgumentList _argumentList = clEntry.getArgumentList();
     String _text_2 = _argumentList.getText();
     boolean _startsWith = _text_2.startsWith("\'org.xtext:xtext-gradle-plugin:");
-    Assert.assertTrue(_startsWith);
+    TestCase.assertTrue(_startsWith);
     final Function1<GrMethodCallExpression, Boolean> _function_2 = (GrMethodCallExpression it) -> {
       GrExpression _invokedExpression_2 = it.getInvokedExpression();
       String _text_3 = _invokedExpression_2.getText();
@@ -261,7 +261,7 @@ public class GradleBuildFileUtilTest extends LightXtendTest {
     };
     Iterable<GrMethodCallExpression> _filter_3 = IterableExtensions.<GrMethodCallExpression>filter(children, _function_2);
     final GrMethodCallExpression repos = IterableExtensions.<GrMethodCallExpression>head(_filter_3);
-    Assert.assertNotNull(repos);
+    TestCase.assertNotNull(repos);
     GrClosableBlock[] _closureArguments_2 = repos.getClosureArguments();
     GrClosableBlock _head_1 = IterableExtensions.<GrClosableBlock>head(((Iterable<GrClosableBlock>)Conversions.doWrapArray(_closureArguments_2)));
     GrStatement[] _statements_4 = _head_1.getStatements();
@@ -269,6 +269,6 @@ public class GradleBuildFileUtilTest extends LightXtendTest {
     final GrMethodCallExpression jcenterEntry = IterableExtensions.<GrMethodCallExpression>head(_filter_4);
     GrExpression _invokedExpression_2 = jcenterEntry.getInvokedExpression();
     String _text_3 = _invokedExpression_2.getText();
-    Assert.assertEquals("jcenter", _text_3);
+    TestCase.assertEquals("jcenter", _text_3);
   }
 }

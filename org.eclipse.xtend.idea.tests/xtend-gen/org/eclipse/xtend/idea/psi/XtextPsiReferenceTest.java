@@ -15,7 +15,7 @@ import com.intellij.psi.PsiField;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiMethod;
 import com.intellij.psi.PsiReference;
-import junit.framework.Assert;
+import junit.framework.TestCase;
 import org.eclipse.xtend.idea.LightXtendTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.junit.Test;
@@ -57,7 +57,7 @@ public class XtextPsiReferenceTest extends LightXtendTest {
     String _plus = (textRange + " ");
     String _plus_1 = (_plus + Integer.valueOf(textOffset));
     boolean _contains = textRange.contains(textOffset);
-    Assert.assertTrue(_plus_1, _contains);
+    TestCase.assertTrue(_plus_1, _contains);
   }
   
   @Test
@@ -80,9 +80,9 @@ public class XtextPsiReferenceTest extends LightXtendTest {
     final PsiElement referencedElement = reference.resolve();
     if ((referencedElement instanceof PsiClass)) {
       String _qualifiedName = ((PsiClass)referencedElement).getQualifiedName();
-      Assert.assertEquals("java.lang.String", _qualifiedName);
+      TestCase.assertEquals("java.lang.String", _qualifiedName);
     } else {
-      Assert.fail(("" + referencedElement));
+      TestCase.fail(("" + referencedElement));
     }
   }
   
@@ -117,7 +117,7 @@ public class XtextPsiReferenceTest extends LightXtendTest {
     final int index = model.indexOf("Bar");
     final PsiReference reference = file.findReferenceAt(index);
     final PsiElement referencedElement = reference.resolve();
-    Assert.assertEquals(psiClass, referencedElement);
+    TestCase.assertEquals(psiClass, referencedElement);
   }
   
   @Test
@@ -146,11 +146,11 @@ public class XtextPsiReferenceTest extends LightXtendTest {
     final PsiElement referencedElement = reference.resolve();
     if ((referencedElement instanceof PsiMethod)) {
       boolean _isConstructor = ((PsiMethod)referencedElement).isConstructor();
-      Assert.assertTrue(_isConstructor);
+      TestCase.assertTrue(_isConstructor);
       String _name = ((PsiMethod)referencedElement).getName();
-      Assert.assertEquals("String", _name);
+      TestCase.assertEquals("String", _name);
     } else {
-      Assert.fail(("" + referencedElement));
+      TestCase.fail(("" + referencedElement));
     }
   }
   
@@ -192,9 +192,9 @@ public class XtextPsiReferenceTest extends LightXtendTest {
     final PsiElement referencedElement = reference.resolve();
     if ((referencedElement instanceof PsiField)) {
       String _name = ((PsiField)referencedElement).getName();
-      Assert.assertEquals("myField", _name);
+      TestCase.assertEquals("myField", _name);
     } else {
-      Assert.fail(("" + referencedElement));
+      TestCase.fail(("" + referencedElement));
     }
   }
   
@@ -236,9 +236,9 @@ public class XtextPsiReferenceTest extends LightXtendTest {
     final PsiElement referencedElement = reference.resolve();
     if ((referencedElement instanceof PsiEnumConstant)) {
       String _name = ((PsiEnumConstant)referencedElement).getName();
-      Assert.assertEquals("MY_ENUM_LITERAL", _name);
+      TestCase.assertEquals("MY_ENUM_LITERAL", _name);
     } else {
-      Assert.fail(("" + referencedElement));
+      TestCase.fail(("" + referencedElement));
     }
   }
   
@@ -273,7 +273,7 @@ public class XtextPsiReferenceTest extends LightXtendTest {
     final int index = model.indexOf("valueOf");
     final PsiReference reference = file.findReferenceAt(index);
     final PsiElement referencedElement = reference.resolve();
-    Assert.assertEquals(psiClass, referencedElement);
+    TestCase.assertEquals(psiClass, referencedElement);
   }
   
   @Test
@@ -307,7 +307,7 @@ public class XtextPsiReferenceTest extends LightXtendTest {
     final int index = model.indexOf("values");
     final PsiReference reference = file.findReferenceAt(index);
     final PsiElement referencedElement = reference.resolve();
-    Assert.assertEquals(psiClass, referencedElement);
+    TestCase.assertEquals(psiClass, referencedElement);
   }
   
   @Test
@@ -354,11 +354,11 @@ public class XtextPsiReferenceTest extends LightXtendTest {
     final PsiElement referencedElement = reference.resolve();
     if ((referencedElement instanceof PsiMethod)) {
       boolean _isConstructor = ((PsiMethod)referencedElement).isConstructor();
-      Assert.assertFalse(_isConstructor);
+      TestCase.assertFalse(_isConstructor);
       String _name = ((PsiMethod)referencedElement).getName();
-      Assert.assertEquals("myMethod", _name);
+      TestCase.assertEquals("myMethod", _name);
     } else {
-      Assert.fail(("" + referencedElement));
+      TestCase.fail(("" + referencedElement));
     }
   }
 }

@@ -23,7 +23,7 @@ import com.intellij.testFramework.PlatformTestCase;
 import com.intellij.testFramework.PsiTestCase;
 import com.intellij.testFramework.PsiTestUtil;
 import java.io.File;
-import junit.framework.Assert;
+import junit.framework.TestCase;
 import org.eclipse.xtend.core.idea.lang.XtendLanguage;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.idea.tests.LightToolingTest;
@@ -98,7 +98,7 @@ public class XtendDocumentationTest extends PsiTestCase {
     final PsiReference xtend = this.createReferenceByFileWithMarker(this.src, "Bar.xtend", _builder_1.toString());
     final String expected = this.generateDocumentation(xtend);
     boolean _contains = expected.contains("mydocumentation");
-    Assert.assertTrue(_contains);
+    TestCase.assertTrue(_contains);
   }
   
   public void testXtendClass() {
@@ -124,7 +124,7 @@ public class XtendDocumentationTest extends PsiTestCase {
     final PsiReference xtend = this.createReferenceByFileWithMarker(this.src, "Bar.xtend", _builder_1.toString());
     final String expected = this.generateDocumentation(xtend);
     boolean _contains = expected.contains("mydocumentation");
-    Assert.assertTrue(_contains);
+    TestCase.assertTrue(_contains);
   }
   
   public void testXtendField() {
@@ -157,9 +157,9 @@ public class XtendDocumentationTest extends PsiTestCase {
     final PsiReference xtend = this.createReferenceByFileWithMarker(this.src, "Bar.xtend", _builder_1.toString());
     final String expected = this.generateDocumentation(xtend);
     boolean _contains = expected.contains("<b>myfoo = &quot;x&quot;</b>");
-    Assert.assertTrue(_contains);
+    TestCase.assertTrue(_contains);
     boolean _contains_1 = expected.contains("mydocumentation");
-    Assert.assertTrue(_contains_1);
+    TestCase.assertTrue(_contains_1);
   }
   
   public void testXtendMethod() {
@@ -192,9 +192,9 @@ public class XtendDocumentationTest extends PsiTestCase {
     final PsiReference xtend = this.createReferenceByFileWithMarker(this.src, "Bar.xtend", _builder_1.toString());
     final String expected = this.generateDocumentation(xtend);
     boolean _contains = expected.contains("<b>myfoo</b>()");
-    Assert.assertTrue(_contains);
+    TestCase.assertTrue(_contains);
     boolean _contains_1 = expected.contains("mydocumentation");
-    Assert.assertTrue(_contains_1);
+    TestCase.assertTrue(_contains_1);
   }
   
   public void testXtendConstructor() {
@@ -227,9 +227,9 @@ public class XtendDocumentationTest extends PsiTestCase {
     final PsiReference xtend = this.createReferenceByFileWithMarker(this.src, "Bar.xtend", _builder_1.toString());
     final String expected = this.generateDocumentation(xtend);
     boolean _contains = expected.contains("<b>Foo</b>()");
-    Assert.assertTrue(_contains);
+    TestCase.assertTrue(_contains);
     boolean _contains_1 = expected.contains("mydocumentation");
-    Assert.assertTrue(_contains_1);
+    TestCase.assertTrue(_contains_1);
   }
   
   protected PsiFile createFile(final VirtualFile dir, final String fileName, final String contents) {
@@ -262,8 +262,8 @@ public class XtendDocumentationTest extends PsiTestCase {
     {
       final PsiElement originalElement = reference.getElement();
       final PsiElement element = reference.resolve();
-      Assert.assertNotNull(originalElement);
-      Assert.assertNotNull(element);
+      TestCase.assertNotNull(originalElement);
+      TestCase.assertNotNull(element);
       _xblockexpression = this.generateDocumentation(element, originalElement);
     }
     return _xblockexpression;

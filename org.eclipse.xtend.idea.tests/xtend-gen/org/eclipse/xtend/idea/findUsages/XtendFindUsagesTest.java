@@ -28,7 +28,7 @@ import com.intellij.util.CommonProcessors;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
-import junit.framework.Assert;
+import junit.framework.TestCase;
 import org.eclipse.xtend.idea.LightXtendTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -2340,7 +2340,7 @@ public class XtendFindUsagesTest extends LightXtendTest {
   protected void testHighlightUsages(final PsiElement element, final String expectation) {
     FindUsagesHandler _highlightUsagesHandler = this.getHighlightUsagesHandler(element);
     String _printHighlightUsages = this.printHighlightUsages(_highlightUsagesHandler, element);
-    Assert.assertEquals(expectation, _printHighlightUsages);
+    TestCase.assertEquals(expectation, _printHighlightUsages);
   }
   
   protected String printHighlightUsages(final FindUsagesHandler findUsagesHandler, final PsiElement element) {
@@ -2404,7 +2404,7 @@ public class XtendFindUsagesTest extends LightXtendTest {
   protected void testFindUsages(final PsiElement element, final String expectation) {
     FindUsagesHandler _findUsagesHandler = this.getFindUsagesHandler(element);
     String _printUsages = this.printUsages(_findUsagesHandler);
-    Assert.assertEquals(expectation, _printUsages);
+    TestCase.assertEquals(expectation, _printUsages);
   }
   
   protected String printUsages(final FindUsagesHandler findUsagesHandler) {

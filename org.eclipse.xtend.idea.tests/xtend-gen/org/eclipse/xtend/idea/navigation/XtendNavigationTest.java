@@ -15,7 +15,7 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.impl.DebugUtil;
-import junit.framework.Assert;
+import junit.framework.TestCase;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.xtend.AnonymousClass;
 import org.eclipse.xtend.core.xtend.XtendClass;
@@ -841,13 +841,13 @@ public class XtendNavigationTest extends LightXtendTest {
       CaretModel _caretModel = _editor.getCaretModel();
       _caretModel.moveToOffset(referenceOffset);
       final PsiElement targetElement = this.myFixture.getElementAtCaret();
-      Assert.assertNotNull(targetElement);
+      TestCase.assertNotNull(targetElement);
       final PsiElement actualNavigationElement = targetElement.getNavigationElement();
       boolean _notEquals = (!Objects.equal(expectedNavigationElement, actualNavigationElement));
       if (_notEquals) {
         PsiFile _file = this.getFile();
         String _psiToString = DebugUtil.psiToString(_file, true, true);
-        Assert.assertEquals(_psiToString, expectedNavigationElement, actualNavigationElement);
+        TestCase.assertEquals(_psiToString, expectedNavigationElement, actualNavigationElement);
       }
       final EObject result = ((PsiEObject) targetElement).getEObject();
       Class<? extends EObject> _class = result.getClass();
@@ -855,7 +855,7 @@ public class XtendNavigationTest extends LightXtendTest {
       String _plus_1 = (_plus + expectedType);
       Class<? extends EObject> _class_1 = result.getClass();
       boolean _isAssignableFrom = expectedType.isAssignableFrom(_class_1);
-      Assert.assertTrue(_plus_1, _isAssignableFrom);
+      TestCase.assertTrue(_plus_1, _isAssignableFrom);
       _xblockexpression = ((T) result);
     }
     return _xblockexpression;
@@ -867,41 +867,38 @@ public class XtendNavigationTest extends LightXtendTest {
       PsiFile _file = this.getFile();
       int _startOffset = range.getStartOffset();
       PsiElement element = _file.findElementAt(_startOffset);
-      Assert.assertNotNull(element);
+      TestCase.assertNotNull(element);
       final PsiElement namedEObject = this.findPsiNamedEObject(element, range);
-      boolean _notEquals = (!Objects.equal(namedEObject, null));
-      if (_notEquals) {
+      if ((namedEObject != null)) {
         PsiElement _navigationElement = namedEObject.getNavigationElement();
-        Assert.assertEquals(namedEObject, _navigationElement);
+        TestCase.assertEquals(namedEObject, _navigationElement);
         return namedEObject;
       }
       while ((!Objects.equal(element.getTextRange(), range))) {
         {
           PsiElement _parent = element.getParent();
           element = _parent;
-          Assert.assertNotNull(element);
+          TestCase.assertNotNull(element);
         }
       }
       PsiElement _navigationElement_1 = element.getNavigationElement();
-      Assert.assertEquals(element, _navigationElement_1);
+      TestCase.assertEquals(element, _navigationElement_1);
       _xblockexpression = element;
     }
     return _xblockexpression;
   }
   
   protected PsiElement findPsiNamedEObject(final PsiElement element, final TextRange identifierRange) {
-    boolean _equals = Objects.equal(element, null);
-    if (_equals) {
+    if ((element == null)) {
       return null;
     }
     if ((element instanceof PsiNamedEObject)) {
       final PsiEObjectIdentifier nameIdentifier = ((PsiNamedEObject)element).getNameIdentifier();
-      boolean _notEquals = (!Objects.equal(nameIdentifier, null));
-      if (_notEquals) {
+      if ((nameIdentifier != null)) {
         PsiNamedEObject _xifexpression = null;
         TextRange _textRange = nameIdentifier.getTextRange();
-        boolean _equals_1 = Objects.equal(_textRange, identifierRange);
-        if (_equals_1) {
+        boolean _equals = Objects.equal(_textRange, identifierRange);
+        if (_equals) {
           _xifexpression = ((PsiNamedEObject)element);
         } else {
           _xifexpression = null;

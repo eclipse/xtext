@@ -15,7 +15,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiJavaFile;
 import java.util.Iterator;
-import junit.framework.Assert;
+import junit.framework.TestCase;
 import org.eclipse.xtend.core.idea.javaconverter.ConvertJavaCodeHandler;
 import org.eclipse.xtend.core.idea.lang.XtendFileType;
 import org.eclipse.xtend.core.javaconverter.JavaConverter;
@@ -99,10 +99,10 @@ public class IdeaJavaConverterTest extends AbstractModelTestCase {
     String _nameWithoutExtension = _virtualFile.getNameWithoutExtension();
     String _text = javaCalzz.getText();
     final JavaConverter.ConversionResult result = this.converter.toXtend(_nameWithoutExtension, _text, this.myModule);
-    Assert.assertNotNull(result);
+    TestCase.assertNotNull(result);
     Iterable<String> _problems = result.getProblems();
     boolean _isEmpty = IterableExtensions.isEmpty(_problems);
-    Assert.assertTrue(_isEmpty);
+    TestCase.assertTrue(_isEmpty);
   }
   
   @Test
@@ -128,10 +128,10 @@ public class IdeaJavaConverterTest extends AbstractModelTestCase {
     final Iterable<PsiJavaFile> result = ConvertJavaCodeHandler.collectJavaFiles(new PsiElement[] { _parent_1, otherClazz });
     Iterator<PsiJavaFile> _iterator = result.iterator();
     boolean _hasNext = _iterator.hasNext();
-    Assert.assertTrue(_hasNext);
+    TestCase.assertTrue(_hasNext);
     Iterator<PsiJavaFile> _iterator_1 = result.iterator();
     int _size = IteratorExtensions.size(_iterator_1);
-    Assert.assertEquals(3, _size);
+    TestCase.assertEquals(3, _size);
   }
   
   public void testAnnotationDeclaration() throws Exception {

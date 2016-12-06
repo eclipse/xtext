@@ -12,7 +12,7 @@ import com.intellij.codeInsight.template.impl.TemplateManagerImpl;
 import com.intellij.openapi.editor.CaretModel;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.psi.PsiFile;
-import junit.framework.Assert;
+import junit.framework.TestCase;
 import org.eclipse.xtend.core.idea.completion.XtendCodeContextType;
 import org.eclipse.xtend.idea.LightXtendTest;
 import org.eclipse.xtend.lib.annotations.Data;
@@ -234,7 +234,7 @@ public class XtendCodeContextTypeTest extends LightXtendTest {
       CaretModel _caretModel = _editor.getCaretModel();
       int _offset = _caretModel.getOffset();
       boolean _isInContext = type.contextType.isInContext(file, _offset);
-      Assert.assertEquals(_builder.toString(), 
+      TestCase.assertEquals(_builder.toString(), 
         type.shouldMatch, _isInContext);
     }
   }

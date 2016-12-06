@@ -46,7 +46,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import junit.framework.Assert;
+import junit.framework.TestCase;
 import org.eclipse.xtend.core.idea.facet.XtendFacetConfiguration;
 import org.eclipse.xtend.core.idea.facet.XtendFacetType;
 import org.eclipse.xtend.core.idea.lang.XtendFileType;
@@ -66,23 +66,23 @@ public class XtendSupportConfigurableTest extends PsiTestCase {
     final ModuleRootManager manager = ModuleRootManager.getInstance(this.myModule);
     VirtualFile[] _contentRoots = manager.getContentRoots();
     int _size = ((List<VirtualFile>)Conversions.doWrapArray(_contentRoots)).size();
-    Assert.assertEquals(0, _size);
+    TestCase.assertEquals(0, _size);
     this.addFrameworkSupport(this.myModule);
     VirtualFile[] _contentRoots_1 = manager.getContentRoots();
     int _size_1 = ((List<VirtualFile>)Conversions.doWrapArray(_contentRoots_1)).size();
-    Assert.assertEquals(1, _size_1);
+    TestCase.assertEquals(1, _size_1);
     FacetManager _instance = FacetManager.getInstance(this.myModule);
     Collection<Facet<XtendFacetConfiguration>> _facetsByType = _instance.<Facet<XtendFacetConfiguration>>getFacetsByType(XtendFacetType.TYPEID);
     final Facet<XtendFacetConfiguration> facet = IterableExtensions.<Facet<XtendFacetConfiguration>>head(_facetsByType);
-    Assert.assertNotNull(facet);
+    TestCase.assertNotNull(facet);
     XtendFacetConfiguration _configuration = facet.getConfiguration();
     final XbaseGeneratorConfigurationState xtendConfig = _configuration.getState();
     String _outputDirectory = xtendConfig.getOutputDirectory();
     boolean _endsWith = _outputDirectory.endsWith("xtend-gen");
-    Assert.assertTrue(_endsWith);
+    TestCase.assertTrue(_endsWith);
     String _testOutputDirectory = xtendConfig.getTestOutputDirectory();
     boolean _endsWith_1 = _testOutputDirectory.endsWith("xtend-gen");
-    Assert.assertTrue(_endsWith_1);
+    TestCase.assertTrue(_endsWith_1);
     ContentEntry[] _contentEntries = manager.getContentEntries();
     ContentEntry _head = IterableExtensions.<ContentEntry>head(((Iterable<ContentEntry>)Conversions.doWrapArray(_contentEntries)));
     SourceFolder[] _sourceFolders = _head.getSourceFolders();
@@ -98,7 +98,7 @@ public class XtendSupportConfigurableTest extends PsiTestCase {
     };
     Iterable<SourceFolder> _filter = IterableExtensions.<SourceFolder>filter(((Iterable<SourceFolder>)Conversions.doWrapArray(_sourceFolders)), _function);
     int _size_2 = IterableExtensions.size(_filter);
-    Assert.assertEquals(1, _size_2);
+    TestCase.assertEquals(1, _size_2);
   }
   
   public void testPlainJavaOutputConfiguration_02() {
@@ -124,24 +124,24 @@ public class XtendSupportConfigurableTest extends PsiTestCase {
     final ModuleRootManager manager = ModuleRootManager.getInstance(module);
     final VirtualFile[] srcFolders = manager.getSourceRoots(true);
     int _size = ((List<VirtualFile>)Conversions.doWrapArray(srcFolders)).size();
-    Assert.assertEquals(2, _size);
+    TestCase.assertEquals(2, _size);
     this.addFrameworkSupport(module);
     FacetManager _instance = FacetManager.getInstance(module);
     Collection<Facet<XtendFacetConfiguration>> _facetsByType = _instance.<Facet<XtendFacetConfiguration>>getFacetsByType(XtendFacetType.TYPEID);
     final Facet<XtendFacetConfiguration> facet = IterableExtensions.<Facet<XtendFacetConfiguration>>head(_facetsByType);
-    Assert.assertNotNull(facet);
+    TestCase.assertNotNull(facet);
     XtendFacetConfiguration _configuration = facet.getConfiguration();
     final XbaseGeneratorConfigurationState xtendConfig = _configuration.getState();
     String _outputDirectory = xtendConfig.getOutputDirectory();
     String _testOutputDirectory = xtendConfig.getTestOutputDirectory();
     boolean _equals = Objects.equal(_outputDirectory, _testOutputDirectory);
-    Assert.assertFalse(_equals);
+    TestCase.assertFalse(_equals);
     String _outputDirectory_1 = xtendConfig.getOutputDirectory();
     boolean _endsWith = _outputDirectory_1.endsWith("module1/src/main/xtend-gen");
-    Assert.assertTrue(_endsWith);
+    TestCase.assertTrue(_endsWith);
     String _testOutputDirectory_1 = xtendConfig.getTestOutputDirectory();
     boolean _endsWith_1 = _testOutputDirectory_1.endsWith("module1/src/test/xtend-gen");
-    Assert.assertTrue(_endsWith_1);
+    TestCase.assertTrue(_endsWith_1);
     ModuleRootManager _instance_1 = ModuleRootManager.getInstance(module);
     final VirtualFile[] sourceRoots = _instance_1.getSourceRoots(true);
     final Function1<VirtualFile, Boolean> _function_1 = (VirtualFile it) -> {
@@ -156,7 +156,7 @@ public class XtendSupportConfigurableTest extends PsiTestCase {
     };
     Iterable<VirtualFile> _filter = IterableExtensions.<VirtualFile>filter(((Iterable<VirtualFile>)Conversions.doWrapArray(sourceRoots)), _function_1);
     int _size_1 = IterableExtensions.size(_filter);
-    Assert.assertEquals(1, _size_1);
+    TestCase.assertEquals(1, _size_1);
     final Function1<VirtualFile, Boolean> _function_2 = (VirtualFile it) -> {
       boolean _xblockexpression = false;
       {
@@ -169,30 +169,30 @@ public class XtendSupportConfigurableTest extends PsiTestCase {
     };
     Iterable<VirtualFile> _filter_1 = IterableExtensions.<VirtualFile>filter(((Iterable<VirtualFile>)Conversions.doWrapArray(sourceRoots)), _function_2);
     int _size_2 = IterableExtensions.size(_filter_1);
-    Assert.assertEquals(1, _size_2);
+    TestCase.assertEquals(1, _size_2);
   }
   
   public void testPlainJavaOutputConfiguration_03() {
     final ModuleRootManager manager = ModuleRootManager.getInstance(this.myModule);
     VirtualFile[] _contentRoots = manager.getContentRoots();
     int _size = ((List<VirtualFile>)Conversions.doWrapArray(_contentRoots)).size();
-    Assert.assertEquals(0, _size);
+    TestCase.assertEquals(0, _size);
     this.addFrameworkSupportUsingDetector(this.myModule);
     VirtualFile[] _contentRoots_1 = manager.getContentRoots();
     int _size_1 = ((List<VirtualFile>)Conversions.doWrapArray(_contentRoots_1)).size();
-    Assert.assertEquals(1, _size_1);
+    TestCase.assertEquals(1, _size_1);
     FacetManager _instance = FacetManager.getInstance(this.myModule);
     Collection<Facet<XtendFacetConfiguration>> _facetsByType = _instance.<Facet<XtendFacetConfiguration>>getFacetsByType(XtendFacetType.TYPEID);
     final Facet<XtendFacetConfiguration> facet = IterableExtensions.<Facet<XtendFacetConfiguration>>head(_facetsByType);
-    Assert.assertNotNull(facet);
+    TestCase.assertNotNull(facet);
     XtendFacetConfiguration _configuration = facet.getConfiguration();
     final XbaseGeneratorConfigurationState xtendConfig = _configuration.getState();
     String _outputDirectory = xtendConfig.getOutputDirectory();
     boolean _endsWith = _outputDirectory.endsWith("xtend-gen");
-    Assert.assertTrue(_endsWith);
+    TestCase.assertTrue(_endsWith);
     String _testOutputDirectory = xtendConfig.getTestOutputDirectory();
     boolean _endsWith_1 = _testOutputDirectory.endsWith("xtend-gen");
-    Assert.assertTrue(_endsWith_1);
+    TestCase.assertTrue(_endsWith_1);
     ContentEntry[] _contentEntries = manager.getContentEntries();
     ContentEntry _head = IterableExtensions.<ContentEntry>head(((Iterable<ContentEntry>)Conversions.doWrapArray(_contentEntries)));
     SourceFolder[] _sourceFolders = _head.getSourceFolders();
@@ -208,7 +208,7 @@ public class XtendSupportConfigurableTest extends PsiTestCase {
     };
     Iterable<SourceFolder> _filter = IterableExtensions.<SourceFolder>filter(((Iterable<SourceFolder>)Conversions.doWrapArray(_sourceFolders)), _function);
     int _size_2 = IterableExtensions.size(_filter);
-    Assert.assertEquals(1, _size_2);
+    TestCase.assertEquals(1, _size_2);
   }
   
   protected void addFrameworkSupportUsingDetector(final Module moduleToHandle) {

@@ -9,7 +9,7 @@ package org.eclipse.xtend.idea.macro;
 
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiFile;
-import junit.framework.Assert;
+import junit.framework.TestCase;
 import org.eclipse.xtend.idea.LightXtendTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
 
@@ -46,7 +46,7 @@ public class Bug473721 extends LightXtendTest {
     final PsiFile file = this.myFixture.addFileToProject("otherPackage/Bar.xtend", _builder_1.toString());
     VirtualFile _findFileInTempDir = this.myFixture.findFileInTempDir("xtend-gen/otherPackage/Bar.java");
     boolean _exists = _findFileInTempDir.exists();
-    Assert.assertTrue(_exists);
+    TestCase.assertTrue(_exists);
     VirtualFile _virtualFile = file.getVirtualFile();
     this.myFixture.testHighlighting(true, true, true, _virtualFile);
   }

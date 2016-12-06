@@ -9,7 +9,7 @@ package org.eclipse.xtend.idea.macro;
 
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
-import junit.framework.Assert;
+import junit.framework.TestCase;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.idea.macro.IdeaProcessorProvider;
@@ -59,7 +59,7 @@ public class IdeaProcessorProviderTest extends LightXtendTest {
     final Object processor = this.provider.getProcessorInstance(processorType);
     Class<?> _class = processor.getClass();
     String _simpleName = _class.getSimpleName();
-    Assert.assertEquals("DataProcessor", _simpleName);
+    TestCase.assertEquals("DataProcessor", _simpleName);
   }
   
   @Test
@@ -86,26 +86,26 @@ public class IdeaProcessorProviderTest extends LightXtendTest {
       String _name = String.class.getName();
       Class<?> _loadClass = classLoader.loadClass(_name);
       ClassLoader _classLoader = _loadClass.getClassLoader();
-      Assert.assertNull(_classLoader);
+      TestCase.assertNull(_classLoader);
       ClassLoader _classLoader_1 = TransformationContext.class.getClassLoader();
       String _name_1 = TransformationContext.class.getName();
       Class<?> _loadClass_1 = classLoader.loadClass(_name_1);
       ClassLoader _classLoader_2 = _loadClass_1.getClassLoader();
-      Assert.assertEquals(_classLoader_1, _classLoader_2);
+      TestCase.assertEquals(_classLoader_1, _classLoader_2);
       ClassLoader _classLoader_3 = TransformationContext.class.getClassLoader();
       String _name_2 = Procedures.class.getName();
       Class<?> _loadClass_2 = classLoader.loadClass(_name_2);
       ClassLoader _classLoader_4 = _loadClass_2.getClassLoader();
-      Assert.assertEquals(_classLoader_3, _classLoader_4);
+      TestCase.assertEquals(_classLoader_3, _classLoader_4);
       ClassLoader _classLoader_5 = TransformationContext.class.getClassLoader();
       String _name_3 = Iterables.class.getName();
       Class<?> _loadClass_3 = classLoader.loadClass(_name_3);
       ClassLoader _classLoader_6 = _loadClass_3.getClassLoader();
-      Assert.assertEquals(_classLoader_5, _classLoader_6);
+      TestCase.assertEquals(_classLoader_5, _classLoader_6);
       String _identifier = processorType.getIdentifier();
       Class<?> _loadClass_4 = classLoader.loadClass(_identifier);
       ClassLoader _classLoader_7 = _loadClass_4.getClassLoader();
-      Assert.assertEquals(classLoader, _classLoader_7);
+      TestCase.assertEquals(classLoader, _classLoader_7);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

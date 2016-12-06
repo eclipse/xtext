@@ -14,7 +14,7 @@ import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.SelectionModel;
 import java.util.List;
-import junit.framework.Assert;
+import junit.framework.TestCase;
 import org.eclipse.xtend.idea.LightXtendTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -49,7 +49,7 @@ public class XtendCompletionTest extends LightXtendTest {
     final List<String> lookupElementStrings = this.myFixture.getLookupElementStrings();
     String _string = lookupElementStrings.toString();
     boolean _contains = lookupElementStrings.contains("ArrayList");
-    Assert.assertTrue(_string, _contains);
+    TestCase.assertTrue(_string, _contains);
   }
   
   public void testTypeReferenceNoTypeArgs_Type() {
@@ -66,7 +66,7 @@ public class XtendCompletionTest extends LightXtendTest {
     final List<String> lookupElementStrings = this.myFixture.getLookupElementStrings();
     String _string_1 = lookupElementStrings.toString();
     boolean _contains = lookupElementStrings.contains("ArrayList");
-    Assert.assertTrue(_string_1, _contains);
+    TestCase.assertTrue(_string_1, _contains);
   }
   
   public void testJvmParameterizedTypeReference_Type_03() {
@@ -96,7 +96,7 @@ public class XtendCompletionTest extends LightXtendTest {
     final List<String> lookupElementStrings = this.myFixture.getLookupElementStrings();
     String _string_1 = lookupElementStrings.toString();
     boolean _contains = lookupElementStrings.contains("ArrayList");
-    Assert.assertTrue(_string_1, _contains);
+    TestCase.assertTrue(_string_1, _contains);
   }
   
   public void testXImportDeclaration_ImportedType() {
@@ -104,7 +104,7 @@ public class XtendCompletionTest extends LightXtendTest {
     final List<String> lookupElementStrings = this.myFixture.getLookupElementStrings();
     String _string = lookupElementStrings.toString();
     boolean _contains = lookupElementStrings.contains("ArrayList");
-    Assert.assertTrue(_string, _contains);
+    TestCase.assertTrue(_string, _contains);
   }
   
   public void testXImportDeclaration_ImportedType_02() {
@@ -112,7 +112,7 @@ public class XtendCompletionTest extends LightXtendTest {
     final List<String> lookupElementStrings = this.myFixture.getLookupElementStrings();
     String _string = lookupElementStrings.toString();
     boolean _contains = lookupElementStrings.contains("ArrayList");
-    Assert.assertTrue(_string, _contains);
+    TestCase.assertTrue(_string, _contains);
   }
   
   public void testAppliedXImportDeclaration() {
@@ -122,7 +122,7 @@ public class XtendCompletionTest extends LightXtendTest {
     Document _document = _editor.getDocument();
     String _text = _document.getText();
     String _string = _text.toString();
-    Assert.assertEquals("import java.util.ArrayList", _string);
+    TestCase.assertEquals("import java.util.ArrayList", _string);
   }
   
   public void testAppliedXImportDeclaration_01() {
@@ -132,7 +132,7 @@ public class XtendCompletionTest extends LightXtendTest {
     Document _document = _editor.getDocument();
     String _text = _document.getText();
     String _string = _text.toString();
-    Assert.assertEquals("import java.util.ArrayList", _string);
+    TestCase.assertEquals("import java.util.ArrayList", _string);
   }
   
   public void testAppliedTypeReferenceImportsType_01() {
@@ -161,7 +161,7 @@ public class XtendCompletionTest extends LightXtendTest {
     Document _document = _editor.getDocument();
     String _text = _document.getText();
     String _string_2 = _text.toString();
-    Assert.assertEquals(_string_1, _string_2);
+    TestCase.assertEquals(_string_1, _string_2);
   }
   
   public void testAppliedTypeReferenceImportsType_02() {
@@ -193,7 +193,7 @@ public class XtendCompletionTest extends LightXtendTest {
     Document _document = _editor.getDocument();
     String _text = _document.getText();
     String _string_2 = _text.toString();
-    Assert.assertEquals(_string_1, _string_2);
+    TestCase.assertEquals(_string_1, _string_2);
   }
   
   public void testAppliedTypeReferenceImportsType_03() {
@@ -223,7 +223,7 @@ public class XtendCompletionTest extends LightXtendTest {
     Document _document = _editor.getDocument();
     String _text = _document.getText();
     String _string_2 = _text.toString();
-    Assert.assertEquals(_string_1, _string_2);
+    TestCase.assertEquals(_string_1, _string_2);
   }
   
   public void testAppliedTypeReferenceImportsType_04() {
@@ -254,7 +254,7 @@ public class XtendCompletionTest extends LightXtendTest {
     Document _document = _editor.getDocument();
     String _text = _document.getText();
     String _string_2 = _text.toString();
-    Assert.assertEquals(_string_1, _string_2);
+    TestCase.assertEquals(_string_1, _string_2);
   }
   
   public void testAppliedTypeReferenceImportsType_05() {
@@ -291,7 +291,7 @@ public class XtendCompletionTest extends LightXtendTest {
     Document _document = _editor.getDocument();
     String _text = _document.getText();
     String _string_2 = _text.toString();
-    Assert.assertEquals(_string_1, _string_2);
+    TestCase.assertEquals(_string_1, _string_2);
   }
   
   public void testAppliedTypeReferenceImportsType_06() {
@@ -334,7 +334,7 @@ public class XtendCompletionTest extends LightXtendTest {
     Document _document = _editor.getDocument();
     String _text = _document.getText();
     String _string_2 = _text.toString();
-    Assert.assertEquals(_string_1, _string_2);
+    TestCase.assertEquals(_string_1, _string_2);
   }
   
   public void testXConstructorCall_Constructor() {
@@ -366,16 +366,16 @@ public class XtendCompletionTest extends LightXtendTest {
     final List<String> lookupElementStrings = this.myFixture.getLookupElementStrings();
     String _string_1 = lookupElementStrings.toString();
     boolean _contains = lookupElementStrings.contains("ArrayList");
-    Assert.assertTrue(_string_1, _contains);
+    TestCase.assertTrue(_string_1, _contains);
     String _string_2 = lookupElementStrings.toString();
     boolean _contains_1 = lookupElementStrings.contains("Bar");
-    Assert.assertTrue(_string_2, _contains_1);
+    TestCase.assertTrue(_string_2, _contains_1);
     String _string_3 = lookupElementStrings.toString();
     boolean _contains_2 = lookupElementStrings.contains("AbstractBar");
-    Assert.assertFalse(_string_3, _contains_2);
+    TestCase.assertFalse(_string_3, _contains_2);
     String _string_4 = lookupElementStrings.toString();
     boolean _contains_3 = lookupElementStrings.contains("InterfaceBar");
-    Assert.assertFalse(_string_4, _contains_3);
+    TestCase.assertFalse(_string_4, _contains_3);
   }
   
   public void testXTypeLiteral_Type() {
@@ -398,10 +398,10 @@ public class XtendCompletionTest extends LightXtendTest {
     final List<String> lookupElementStrings = this.myFixture.getLookupElementStrings();
     String _string_1 = lookupElementStrings.toString();
     boolean _contains = lookupElementStrings.contains("ArrayList");
-    Assert.assertTrue(_string_1, _contains);
+    TestCase.assertTrue(_string_1, _contains);
     String _string_2 = lookupElementStrings.toString();
     boolean _contains_1 = lookupElementStrings.contains("Foo");
-    Assert.assertTrue(_string_2, _contains_1);
+    TestCase.assertTrue(_string_2, _contains_1);
   }
   
   public void testXAnnotation_AnnotationType() {
@@ -417,7 +417,7 @@ public class XtendCompletionTest extends LightXtendTest {
     final List<String> lookupElementStrings = this.myFixture.getLookupElementStrings();
     String _string_1 = lookupElementStrings.toString();
     boolean _contains = lookupElementStrings.contains("Deprecated");
-    Assert.assertTrue(_string_1, _contains);
+    TestCase.assertTrue(_string_1, _contains);
   }
   
   public void testXAnnotation_AnnotationType_02() {
@@ -433,7 +433,7 @@ public class XtendCompletionTest extends LightXtendTest {
     final List<String> lookupElementStrings = this.myFixture.getLookupElementStrings();
     String _string_1 = lookupElementStrings.toString();
     boolean _contains = lookupElementStrings.contains("ArrayList");
-    Assert.assertFalse(_string_1, _contains);
+    TestCase.assertFalse(_string_1, _contains);
   }
   
   public void testXAnnotation_Value() {
@@ -449,7 +449,7 @@ public class XtendCompletionTest extends LightXtendTest {
     final List<String> lookupElementStrings = this.myFixture.getLookupElementStrings();
     String _string_1 = lookupElementStrings.toString();
     boolean _contains = lookupElementStrings.contains("ArrayList");
-    Assert.assertTrue(_string_1, _contains);
+    TestCase.assertTrue(_string_1, _contains);
   }
   
   public void testOverrideCompletion_01() {
@@ -466,19 +466,19 @@ public class XtendCompletionTest extends LightXtendTest {
     final List<String> lookupElementStrings = this.myFixture.getLookupElementStrings();
     String _string_1 = lookupElementStrings.toString();
     boolean _contains = lookupElementStrings.contains("override equals(Object)");
-    Assert.assertTrue(_string_1, _contains);
+    TestCase.assertTrue(_string_1, _contains);
     String _string_2 = lookupElementStrings.toString();
     boolean _contains_1 = lookupElementStrings.contains("override hashCode()");
-    Assert.assertTrue(_string_2, _contains_1);
+    TestCase.assertTrue(_string_2, _contains_1);
     String _string_3 = lookupElementStrings.toString();
     boolean _contains_2 = lookupElementStrings.contains("override toString()");
-    Assert.assertTrue(_string_3, _contains_2);
+    TestCase.assertTrue(_string_3, _contains_2);
     String _string_4 = lookupElementStrings.toString();
     boolean _contains_3 = lookupElementStrings.contains("override clone()");
-    Assert.assertTrue(_string_4, _contains_3);
+    TestCase.assertTrue(_string_4, _contains_3);
     String _string_5 = lookupElementStrings.toString();
     boolean _contains_4 = lookupElementStrings.contains("override finalize()");
-    Assert.assertTrue(_string_5, _contains_4);
+    TestCase.assertTrue(_string_5, _contains_4);
   }
   
   public void testOverrideCompletion_02() {
@@ -504,7 +504,7 @@ public class XtendCompletionTest extends LightXtendTest {
     final List<String> lookupElementStrings = this.myFixture.getLookupElementStrings();
     String _string_1 = lookupElementStrings.toString();
     boolean _contains = lookupElementStrings.contains("override toString()");
-    Assert.assertFalse(_string_1, _contains);
+    TestCase.assertFalse(_string_1, _contains);
   }
   
   public void testOverrideCompletion_03() {
@@ -530,7 +530,7 @@ public class XtendCompletionTest extends LightXtendTest {
     final List<String> lookupElementStrings = this.myFixture.getLookupElementStrings();
     String _string_1 = lookupElementStrings.toString();
     boolean _contains = lookupElementStrings.contains("override equals(Object)");
-    Assert.assertTrue(_string_1, _contains);
+    TestCase.assertTrue(_string_1, _contains);
   }
   
   public void testOverrideCompletion_04() {
@@ -568,11 +568,11 @@ public class XtendCompletionTest extends LightXtendTest {
     Document _document = _editor.getDocument();
     String _text = _document.getText();
     String _string_2 = _text.toString();
-    Assert.assertEquals(_string_1, _string_2);
+    TestCase.assertEquals(_string_1, _string_2);
     Editor _editor_1 = this.myFixture.getEditor();
     SelectionModel _selectionModel = _editor_1.getSelectionModel();
     String _selectedText = _selectionModel.getSelectedText();
-    Assert.assertEquals("throw new UnsupportedOperationException()", _selectedText);
+    TestCase.assertEquals("throw new UnsupportedOperationException()", _selectedText);
   }
   
   public void testOverrideCompletion_05() {
@@ -643,11 +643,11 @@ public class XtendCompletionTest extends LightXtendTest {
     Document _document = _editor.getDocument();
     String _text = _document.getText();
     String _string_2 = _text.toString();
-    Assert.assertEquals(_string_1, _string_2);
+    TestCase.assertEquals(_string_1, _string_2);
     Editor _editor_1 = this.myFixture.getEditor();
     SelectionModel _selectionModel = _editor_1.getSelectionModel();
     String _selectedText = _selectionModel.getSelectedText();
-    Assert.assertEquals("throw new UnsupportedOperationException()", _selectedText);
+    TestCase.assertEquals("throw new UnsupportedOperationException()", _selectedText);
   }
   
   public void testOverrideCompletion_06() {
@@ -712,7 +712,7 @@ public class XtendCompletionTest extends LightXtendTest {
     Document _document = _editor.getDocument();
     String _text = _document.getText();
     String _string_2 = _text.toString();
-    Assert.assertEquals(_string_1, _string_2);
+    TestCase.assertEquals(_string_1, _string_2);
     Editor _editor_1 = this.myFixture.getEditor();
     Document _document_1 = _editor_1.getDocument();
     String _text_1 = _document_1.getText();
@@ -723,7 +723,7 @@ public class XtendCompletionTest extends LightXtendTest {
     CaretModel _caretModel = _editor_2.getCaretModel();
     Caret _currentCaret = _caretModel.getCurrentCaret();
     int _offset = _currentCaret.getOffset();
-    Assert.assertEquals(offset, _offset);
+    TestCase.assertEquals(offset, _offset);
   }
   
   public void testOverrideCompletion_07() {
@@ -821,11 +821,11 @@ public class XtendCompletionTest extends LightXtendTest {
     Document _document = _editor.getDocument();
     String _text = _document.getText();
     String _string_2 = _text.toString();
-    Assert.assertEquals(_string_1, _string_2);
+    TestCase.assertEquals(_string_1, _string_2);
     Editor _editor_1 = this.myFixture.getEditor();
     SelectionModel _selectionModel = _editor_1.getSelectionModel();
     String _selectedText = _selectionModel.getSelectedText();
-    Assert.assertEquals("throw new UnsupportedOperationException()", _selectedText);
+    TestCase.assertEquals("throw new UnsupportedOperationException()", _selectedText);
   }
   
   public void testOverrideCompletion_08() {
@@ -851,7 +851,7 @@ public class XtendCompletionTest extends LightXtendTest {
     final List<String> lookupElementStrings = this.myFixture.getLookupElementStrings();
     String _string_1 = lookupElementStrings.toString();
     boolean _contains = lookupElementStrings.contains("override toString()");
-    Assert.assertFalse(_string_1, _contains);
+    TestCase.assertFalse(_string_1, _contains);
   }
   
   public void testOverrideCompletion_09() {
@@ -877,7 +877,7 @@ public class XtendCompletionTest extends LightXtendTest {
     final List<String> lookupElementStrings = this.myFixture.getLookupElementStrings();
     String _string_1 = lookupElementStrings.toString();
     boolean _contains = lookupElementStrings.contains("override toString()");
-    Assert.assertFalse(_string_1, _contains);
+    TestCase.assertFalse(_string_1, _contains);
   }
   
   public void testOverrideCompletion_10() {
@@ -902,7 +902,7 @@ public class XtendCompletionTest extends LightXtendTest {
     final List<String> lookupElementStrings = this.myFixture.getLookupElementStrings();
     String _string_1 = lookupElementStrings.toString();
     boolean _contains = lookupElementStrings.contains("override toString()");
-    Assert.assertFalse(_string_1, _contains);
+    TestCase.assertFalse(_string_1, _contains);
   }
   
   public void testOverrideCompletion_11() {
@@ -927,7 +927,7 @@ public class XtendCompletionTest extends LightXtendTest {
     final List<String> lookupElementStrings = this.myFixture.getLookupElementStrings();
     String _string_1 = lookupElementStrings.toString();
     boolean _contains = lookupElementStrings.contains("override toString()");
-    Assert.assertFalse(_string_1, _contains);
+    TestCase.assertFalse(_string_1, _contains);
   }
   
   public void testSingleLineComment() {
@@ -941,7 +941,7 @@ public class XtendCompletionTest extends LightXtendTest {
     final List<String> lookupElementStrings = this.myFixture.getLookupElementStrings();
     String _string_1 = lookupElementStrings.toString();
     boolean _contains = lookupElementStrings.contains("ArrayList");
-    Assert.assertFalse(_string_1, _contains);
+    TestCase.assertFalse(_string_1, _contains);
   }
   
   public void testMultiLineComment() {
@@ -955,7 +955,7 @@ public class XtendCompletionTest extends LightXtendTest {
     final List<String> lookupElementStrings = this.myFixture.getLookupElementStrings();
     String _string_1 = lookupElementStrings.toString();
     boolean _contains = lookupElementStrings.contains("ArrayList");
-    Assert.assertTrue(_string_1, _contains);
+    TestCase.assertTrue(_string_1, _contains);
   }
   
   public void testStringLiteral_01() {
@@ -978,7 +978,7 @@ public class XtendCompletionTest extends LightXtendTest {
     final List<String> lookupElementStrings = this.myFixture.getLookupElementStrings();
     String _string_1 = lookupElementStrings.toString();
     boolean _contains = lookupElementStrings.contains("ArrayList");
-    Assert.assertFalse(_string_1, _contains);
+    TestCase.assertFalse(_string_1, _contains);
   }
   
   public void testStringLiteral_02() {
@@ -1001,7 +1001,7 @@ public class XtendCompletionTest extends LightXtendTest {
     final List<String> lookupElementStrings = this.myFixture.getLookupElementStrings();
     String _string_1 = lookupElementStrings.toString();
     boolean _contains = lookupElementStrings.contains("ArrayList");
-    Assert.assertFalse(_string_1, _contains);
+    TestCase.assertFalse(_string_1, _contains);
   }
   
   public void testRichString_01() {
@@ -1026,7 +1026,7 @@ public class XtendCompletionTest extends LightXtendTest {
     final List<String> lookupElementStrings = this.myFixture.getLookupElementStrings();
     String _string_1 = lookupElementStrings.toString();
     boolean _contains = lookupElementStrings.contains("ArrayList");
-    Assert.assertFalse(_string_1, _contains);
+    TestCase.assertFalse(_string_1, _contains);
   }
   
   public void testRichString_02() {
@@ -1071,7 +1071,7 @@ public class XtendCompletionTest extends LightXtendTest {
     Document _document = _editor.getDocument();
     String _text = _document.getText();
     String _string_2 = _text.toString();
-    Assert.assertEquals(_string_1, _string_2);
+    TestCase.assertEquals(_string_1, _string_2);
   }
   
   public void testJavaTypeInExpressionContext() {
@@ -1106,16 +1106,16 @@ public class XtendCompletionTest extends LightXtendTest {
       return Boolean.valueOf(Objects.equal(_value, "zzz"));
     };
     final Pair<Integer, String> methodProposal = IterableExtensions.<Pair<Integer, String>>findFirst(lookupElementStrings, _function);
-    Assert.assertNotNull(methodProposal);
+    TestCase.assertNotNull(methodProposal);
     final Function1<Pair<Integer, String>, Boolean> _function_1 = (Pair<Integer, String> it) -> {
       String _value = it.getValue();
       return Boolean.valueOf(Objects.equal(_value, "ArrayList"));
     };
     final Pair<Integer, String> typeProposal = IterableExtensions.<Pair<Integer, String>>findFirst(lookupElementStrings, _function_1);
-    Assert.assertNotNull(typeProposal);
+    TestCase.assertNotNull(typeProposal);
     Integer _key = methodProposal.getKey();
     Integer _key_1 = typeProposal.getKey();
     boolean _lessThan = (_key.compareTo(_key_1) < 0);
-    Assert.assertTrue(_lessThan);
+    TestCase.assertTrue(_lessThan);
   }
 }

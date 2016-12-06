@@ -16,7 +16,7 @@ import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiFile;
-import junit.framework.Assert;
+import junit.framework.TestCase;
 import org.eclipse.xtend.core.idea.intentions.XtendIntentionsProvider;
 import org.eclipse.xtend.idea.LightXtendTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -204,6 +204,6 @@ public class IntentionsTest extends LightXtendTest {
     Editor _editor = this.myFixture.getEditor();
     Document _document = _editor.getDocument();
     String _text = _document.getText();
-    Assert.assertEquals(after, _text);
+    TestCase.assertEquals(after, _text);
   }
 }

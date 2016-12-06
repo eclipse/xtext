@@ -35,7 +35,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Collections;
 import java.util.List;
-import junit.framework.Assert;
+import junit.framework.TestCase;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend.core.idea.facet.XtendFacetConfiguration;
 import org.eclipse.xtend.core.idea.lang.XtendLanguage;
@@ -107,13 +107,13 @@ public class MultiModuleTest extends PsiTestCase {
         _findChild_3=_findChild_2.findChild("MyClass.java");
       }
       final VirtualFile generatedReferenced = _findChild_3;
-      Assert.assertNotNull(generatedReferencing);
-      Assert.assertNotNull(generatedReferenced);
+      TestCase.assertNotNull(generatedReferencing);
+      TestCase.assertNotNull(generatedReferenced);
       VirtualFile _virtualFile_2 = referenced.getVirtualFile();
       VirtualFile _parent_2 = _virtualFile_2.getParent();
       VirtualFile _findChild_4 = _parent_2.findChild("xtend-gen");
       VirtualFile _findChild_5 = _findChild_4.findChild("OtherClass.java");
-      Assert.assertNull(_findChild_5);
+      TestCase.assertNull(_findChild_5);
       StringConcatenation _builder_2 = new StringConcatenation();
       _builder_2.append("public class OtherClass extends MyClass {");
       _builder_2.newLine();
@@ -166,14 +166,14 @@ public class MultiModuleTest extends PsiTestCase {
       };
       final Provider<VirtualFile> generatedReferenced = _function_1;
       VirtualFile _get = generatedReferencing.get();
-      Assert.assertNotNull(_get);
+      TestCase.assertNotNull(_get);
       VirtualFile _get_1 = generatedReferenced.get();
-      Assert.assertNotNull(_get_1);
+      TestCase.assertNotNull(_get_1);
       VirtualFile _virtualFile = referenced.getVirtualFile();
       VirtualFile _parent = _virtualFile.getParent();
       VirtualFile _findChild = _parent.findChild("xtend-gen");
       VirtualFile _findChild_1 = _findChild.findChild("OtherClass.java");
-      Assert.assertNull(_findChild_1);
+      TestCase.assertNull(_findChild_1);
       VirtualFile _get_2 = generatedReferencing.get();
       StringConcatenation _builder_2 = new StringConcatenation();
       _builder_2.append("public class OtherClass /* implements MyClass  */{");
@@ -253,8 +253,8 @@ public class MultiModuleTest extends PsiTestCase {
         _findChild_3=_findChild_2.findChild("MyClass.java");
       }
       final VirtualFile generatedReferenced = _findChild_3;
-      Assert.assertNotNull(generatedReferencing);
-      Assert.assertNotNull(generatedReferenced);
+      TestCase.assertNotNull(generatedReferencing);
+      TestCase.assertNotNull(generatedReferenced);
       Application _application = ApplicationManager.getApplication();
       final Runnable _function = () -> {
         ModuleRootManager _instance = ModuleRootManager.getInstance(moduleA);
@@ -276,7 +276,7 @@ public class MultiModuleTest extends PsiTestCase {
         return Boolean.valueOf(_fileString.endsWith("OtherClass.xtend"));
       };
       boolean _exists = IterableExtensions.<IResourceDescription>exists(_allResourceDescriptions, _function_1);
-      Assert.assertTrue(_exists);
+      TestCase.assertTrue(_exists);
       ChunkedResourceDescriptions _index_1 = this.getIndex();
       Iterable<IResourceDescription> _allResourceDescriptions_1 = _index_1.getAllResourceDescriptions();
       final Function1<IResourceDescription, Boolean> _function_2 = (IResourceDescription it) -> {
@@ -285,7 +285,7 @@ public class MultiModuleTest extends PsiTestCase {
         return Boolean.valueOf(_fileString.endsWith("MyClass.xtend"));
       };
       boolean _exists_1 = IterableExtensions.<IResourceDescription>exists(_allResourceDescriptions_1, _function_2);
-      Assert.assertFalse("Deleted module file removed from index", _exists_1);
+      TestCase.assertFalse("Deleted module file removed from index", _exists_1);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -351,16 +351,16 @@ public class MultiModuleTest extends PsiTestCase {
         _findChild_3=_findChild_2.findChild("ClassB.java");
       }
       final VirtualFile generatedB = _findChild_3;
-      Assert.assertNotNull(generatedA);
-      Assert.assertNotNull(generatedB);
+      TestCase.assertNotNull(generatedA);
+      TestCase.assertNotNull(generatedB);
       InputStream _inputStream = generatedA.getInputStream();
       final String aString = Files.readStreamIntoString(_inputStream);
       boolean _contains = aString.contains("->");
-      Assert.assertFalse(aString, _contains);
+      TestCase.assertFalse(aString, _contains);
       InputStream _inputStream_1 = generatedB.getInputStream();
       final String bString = Files.readStreamIntoString(_inputStream_1);
       boolean _contains_1 = bString.contains("->");
-      Assert.assertTrue(bString, _contains_1);
+      TestCase.assertTrue(bString, _contains_1);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -371,7 +371,7 @@ public class MultiModuleTest extends PsiTestCase {
       InputStream _inputStream = file.getInputStream();
       InputStreamReader _inputStreamReader = new InputStreamReader(_inputStream);
       final String result = CharStreams.toString(_inputStreamReader);
-      Assert.assertEquals(string, result);
+      TestCase.assertEquals(string, result);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

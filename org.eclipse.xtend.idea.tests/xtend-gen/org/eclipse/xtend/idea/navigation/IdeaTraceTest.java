@@ -32,7 +32,7 @@ import java.io.ByteArrayInputStream;
 import java.net.URL;
 import java.util.List;
 import java.util.function.Consumer;
-import junit.framework.Assert;
+import junit.framework.TestCase;
 import org.eclipse.xtend.idea.LightXtendTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.trace.AbsoluteURI;
@@ -70,7 +70,7 @@ public class IdeaTraceTest extends LightXtendTest {
       this.myFixture.addFileToProject("com/acme/MyClass.xtend", _builder.toString());
       final VirtualFile file = this.myFixture.findFileInTempDir("xtend-gen/com/acme/MyClass.java");
       boolean _exists = file.exists();
-      Assert.assertTrue(_exists);
+      TestCase.assertTrue(_exists);
       final String compiledContent = VfsUtil.loadText(file);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("package com.acme;");
@@ -83,16 +83,16 @@ public class IdeaTraceTest extends LightXtendTest {
       _builder_1.append("}");
       _builder_1.newLine();
       String _string = _builder_1.toString();
-      Assert.assertEquals(_string, compiledContent);
+      TestCase.assertEquals(_string, compiledContent);
       final VirtualFile traceFile = this.myFixture.findFileInTempDir("xtend-gen/com/acme/.MyClass.java._trace");
       boolean _exists_1 = file.exists();
-      Assert.assertTrue(_exists_1);
+      TestCase.assertTrue(_exists_1);
       byte[] _contentsToByteArray = traceFile.contentsToByteArray();
       ByteArrayInputStream _byteArrayInputStream = new ByteArrayInputStream(_contentsToByteArray);
       final AbstractTraceRegion trace = this.bareTraceReader.readTraceRegionFrom(_byteArrayInputStream);
       final SourceRelativeURI associatedPath = trace.getAssociatedSrcRelativePath();
       String _string_1 = associatedPath.toString();
-      Assert.assertEquals("com/acme/MyClass.xtend", _string_1);
+      TestCase.assertEquals("com/acme/MyClass.xtend", _string_1);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -111,7 +111,7 @@ public class IdeaTraceTest extends LightXtendTest {
     Project _project = file.getProject();
     VirtualFileInProject _virtualFileInProject = new VirtualFileInProject(_virtualFile, _project);
     final IIdeaTrace trace = this.traceProvider.getTraceToSource(_virtualFileInProject);
-    Assert.assertNull(trace);
+    TestCase.assertNull(trace);
   }
   
   public void testTraceToTarget() {
@@ -129,16 +129,16 @@ public class IdeaTraceTest extends LightXtendTest {
     final IIdeaTrace traceToTarget = this.traceProvider.getTraceToTarget(_virtualFileInProject);
     TextRegion _textRegion = new TextRegion(0, 1);
     final ILocationInVirtualFile noAssociatedLocation = traceToTarget.getBestAssociatedLocation(_textRegion);
-    Assert.assertNull(noAssociatedLocation);
+    TestCase.assertNull(noAssociatedLocation);
     TextRegion _textRegion_1 = new TextRegion(18, 1);
     final ILocationInVirtualFile associatedLocation = traceToTarget.getBestAssociatedLocation(_textRegion_1);
-    Assert.assertNotNull(associatedLocation);
+    TestCase.assertNotNull(associatedLocation);
     final SourceRelativeURI srcRelativeLocation = associatedLocation.getSrcRelativeResourceURI();
     String _string = srcRelativeLocation.toString();
-    Assert.assertEquals("com/acme/MyClass.java", _string);
+    TestCase.assertEquals("com/acme/MyClass.java", _string);
     AbsoluteURI _absoluteResourceURI = associatedLocation.getAbsoluteResourceURI();
     String _string_1 = _absoluteResourceURI.toString();
-    Assert.assertEquals("temp:///src/xtend-gen/com/acme/MyClass.java", _string_1);
+    TestCase.assertEquals("temp:///src/xtend-gen/com/acme/MyClass.java", _string_1);
   }
   
   @Ignore
@@ -170,7 +170,7 @@ public class IdeaTraceTest extends LightXtendTest {
     final IIdeaTrace traceToSource = this.traceProvider.getTraceToSource(_virtualFileInProject);
     TextRegion _textRegion = new TextRegion(8, 4);
     final ILocationInVirtualFile associatedLocation = traceToSource.getBestAssociatedLocation(_textRegion);
-    Assert.assertNotNull(associatedLocation);
+    TestCase.assertNotNull(associatedLocation);
   }
   
   public void testTraceForJar_01() {
@@ -184,13 +184,13 @@ public class IdeaTraceTest extends LightXtendTest {
     Project _project = this.getProject();
     VirtualFileInProject _virtualFileInProject = new VirtualFileInProject(generated, _project);
     final IIdeaTrace traceToSource = this.traceProvider.getTraceToSource(_virtualFileInProject);
-    Assert.assertNotNull(traceToSource);
+    TestCase.assertNotNull(traceToSource);
     Iterable<? extends ILocationInVirtualFile> _allAssociatedLocations = traceToSource.getAllAssociatedLocations();
     final Consumer<ILocationInVirtualFile> _function = (ILocationInVirtualFile it) -> {
       AbsoluteURI _absoluteResourceURI = it.getAbsoluteResourceURI();
       String _string = _absoluteResourceURI.toString();
       boolean _endsWith = _string.endsWith("smap-sources.jar!/de/itemis/HelloXtend.xtend");
-      Assert.assertTrue(_endsWith);
+      TestCase.assertTrue(_endsWith);
     };
     _allAssociatedLocations.forEach(_function);
   }
@@ -206,7 +206,7 @@ public class IdeaTraceTest extends LightXtendTest {
     Project _project = this.getProject();
     VirtualFileInProject _virtualFileInProject = new VirtualFileInProject(generated, _project);
     final IIdeaTrace traceToTarget = this.traceProvider.getTraceToTarget(_virtualFileInProject);
-    Assert.assertNull(traceToTarget);
+    TestCase.assertNull(traceToTarget);
   }
   
   public void addLibrary(final Module module, final VirtualFile bin, final VirtualFile src) {
