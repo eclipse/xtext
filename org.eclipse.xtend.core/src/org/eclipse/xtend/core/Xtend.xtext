@@ -236,11 +236,13 @@ CreateExtensionInfo:
 	'create' (name=ValidID ':')? createExpression=XExpression
 ;
 
+@Override 
 ValidID:
 	ID | 'create' | 'annotation' | 'AFTER' | 'BEFORE' | 'SEPARATOR'
 ;
 
 // For feature calls we add 'extension' since there are method such as 'isExtension' or 'getExtension' out there.
+@Override 
 FeatureCallID:
 	InnerVarID | 'extension'
 ;
@@ -256,11 +258,13 @@ Parameter returns XtendParameter:
 	annotations+=XAnnotation* (extension?='extension' annotations+=XAnnotation*)?  
 	parameterType=JvmTypeReference varArg?='...'? name=ValidID;
 	
+@Override 
 XVariableDeclaration returns xbase::XExpression:
 	=>({XtendVariableDeclaration}
 	(((writeable?='var'|'val') extension?='extension'?) | (extension?='extension' (writeable?='var'|'val'))))
 	(=>(type=JvmTypeReference name=InnerVarID) | name=InnerVarID) ('=' right=XExpression)?;
 
+@Override 
 XConstructorCall returns xbase::XExpression:
 	XbaseConstructorCall (=>({AnonymousClass.constructorCall=current} '{') members+=Member* '}')?
 ;
@@ -278,16 +282,20 @@ XbaseConstructorCall returns xbase::XConstructorCall:
 	(arguments+=XClosure)?
 ;
 
+@Override 
 JvmFormalParameter returns XtendFormalParameter:
 	extension?='extension'? (parameterType=JvmTypeReference)? name=InnerVarID;
 	
+@Override 
 FullJvmFormalParameter returns XtendFormalParameter:
 	extension?='extension'? parameterType=JvmTypeReference name=InnerVarID;
 
+@Override 
 XStringLiteral returns xbase::XExpression:
 	SimpleStringLiteral | RichString
 ;
 
+@Override 
 XSwitchExpression returns xbase::XExpression:
 	{xbase::XSwitchExpression}
 	'switch' (=>('(' declaredParam=JvmFormalParameter ':') switch=XExpression ')'
@@ -368,6 +376,7 @@ RichStringElseIf returns RichStringElseIf:
 	"ELSEIF" if=XExpression then=InternalRichString
 ;
 
+@Override 
 terminal ID:
 	'^'? (IDENTIFIER_START | UNICODE_ESCAPE) (IDENTIFIER_PART | UNICODE_ESCAPE)*	
 ;
