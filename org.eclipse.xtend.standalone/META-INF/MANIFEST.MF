@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-SymbolicName: org.eclipse.xtend.standalone
 Bundle-Name: Xtend Standalone Bundle
-Bundle-Vendor: Eclipse Xtend
+Bundle-Vendor: Eclipse Xtext
 Bundle-Version: 2.11.0.qualifier
 Require-Bundle: org.eclipse.xtend.core;visibility:=reexport,
  org.eclipse.xtext.junit4;visibility:=reexport,
