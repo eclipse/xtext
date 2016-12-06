@@ -30,6 +30,8 @@
               <overWriteReleases>false</overWriteReleases>
               <overWriteSnapshots>false</overWriteSnapshots>
               <overWriteIfNewer>true</overWriteIfNewer>
+              <!-- Filter Eclipse Features -->
+              <excludeGroupIds>p2.eclipse-feature</excludeGroupIds>
             </configuration>
           </execution>
         </executions>
