@@ -20,4 +20,5 @@ Export-Package: extract,
  i18n,
  lazy,
  observables
+Bundle-Vendor: Eclipse Xtend
 
