@@ -45,6 +45,7 @@ class RequestManager {
 		executorService.shutdown()
 	}
 
+
 	/**
 	 * <p>
 	 * The given <i>write request</i> will be run first when <i>all running requests</i> completed.
@@ -58,11 +59,11 @@ class RequestManager {
 	 * </p>
 	 */
 	def <V> CompletableFuture<V> runWrite((CancelIndicator)=>V writeRequest) {
+		semaphore.acquire(MAX_PERMITS)
 		return CompletableFutures.computeAsync(executorService) [
 			val cancelIndicator = new RequestCancelIndicator(it)
 			cancelIndicators += cancelIndicator
 	
-			semaphore.acquire(MAX_PERMITS)
 			try {
 				return writeRequest.apply([
 					cancelIndicator.checkCanceled
@@ -94,10 +95,10 @@ class RequestManager {
 	 * </p>
 	 */
 	def <V> CompletableFuture<V> runRead((CancelIndicator)=>V readRequest) {
+		semaphore.acquire(1)
 		return CompletableFutures.computeAsync(executorService) [
 			val cancelIndicator = new RequestCancelIndicator(it)
 			cancelIndicators += cancelIndicator
-			semaphore.acquire(1)
 			try {
 				return readRequest.apply [
 					cancelIndicator.checkCanceled
