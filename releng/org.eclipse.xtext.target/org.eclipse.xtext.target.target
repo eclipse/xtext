@@ -61,15 +61,20 @@
 	
 	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 		<unit id="org.eclipse.xtext.builder" version="0.0.0"/>
-		<unit id="org.eclipse.xtext.builder.source" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.common.types.shared" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.common.types.shared.source" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.common.types.shared.jdt38" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.common.types.shared.jdt38.source" version="0.0.0"/>
+		<unit id="org.eclipse.xtext.common.types.ui" version="0.0.0"/>
+		<unit id="org.eclipse.xtext.common.types.ui.source" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.junit4" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.junit4.source" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.ui" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.ui.source" version="0.0.0"/>
+		<unit id="org.eclipse.xtext.ui.codetemplates.ui" version="0.0.0"/>
+		<unit id="org.eclipse.xtext.ui.codetemplates.ui.source" version="0.0.0"/>
+		<unit id="org.eclipse.xtext.ui.shared" version="0.0.0"/>
+		<unit id="org.eclipse.xtext.ui.shared.source" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.xbase.junit" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.xbase.junit.source" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.xbase.ui" version="0.0.0"/>
