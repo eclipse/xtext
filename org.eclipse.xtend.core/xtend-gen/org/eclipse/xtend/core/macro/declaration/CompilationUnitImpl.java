@@ -1420,55 +1420,74 @@ public class CompilationUnitImpl implements CompilationUnit {
       final JvmComponentType componentType = expectedType.getComponentType();
       final String componentTypeName = componentType.getIdentifier();
       Class<?> _switchResult = null;
-      switch (componentTypeName) {
-        case "java.lang.Class":
-          _switchResult = TypeReference.class;
-          break;
-        case "java.lang.String":
-          _switchResult = String.class;
-          break;
-        case "boolean":
-          _switchResult = boolean.class;
-          break;
-        case "int":
-          _switchResult = int.class;
-          break;
-        case "byte":
-          _switchResult = byte.class;
-          break;
-        case "char":
-          _switchResult = char.class;
-          break;
-        case "double":
-          _switchResult = double.class;
-          break;
-        case "float":
-          _switchResult = float.class;
-          break;
-        case "long":
-          _switchResult = long.class;
-          break;
-        case "short":
-          _switchResult = short.class;
-          break;
-        default:
-          Class<?> _switchResult_1 = null;
-          boolean _matched = false;
-          if (componentType instanceof JvmEnumerationType) {
-            _matched=true;
-            _switchResult_1 = EnumerationValueDeclaration.class;
-          }
-          if (!_matched) {
-            if (componentType instanceof JvmAnnotationType) {
+      if (componentTypeName != null) {
+        switch (componentTypeName) {
+          case "java.lang.Class":
+            _switchResult = TypeReference.class;
+            break;
+          case "java.lang.String":
+            _switchResult = String.class;
+            break;
+          case "boolean":
+            _switchResult = boolean.class;
+            break;
+          case "int":
+            _switchResult = int.class;
+            break;
+          case "byte":
+            _switchResult = byte.class;
+            break;
+          case "char":
+            _switchResult = char.class;
+            break;
+          case "double":
+            _switchResult = double.class;
+            break;
+          case "float":
+            _switchResult = float.class;
+            break;
+          case "long":
+            _switchResult = long.class;
+            break;
+          case "short":
+            _switchResult = short.class;
+            break;
+          default:
+            Class<?> _switchResult_1 = null;
+            boolean _matched = false;
+            if (componentType instanceof JvmEnumerationType) {
               _matched=true;
-              _switchResult_1 = AnnotationReference.class;
+              _switchResult_1 = EnumerationValueDeclaration.class;
             }
+            if (!_matched) {
+              if (componentType instanceof JvmAnnotationType) {
+                _matched=true;
+                _switchResult_1 = AnnotationReference.class;
+              }
+            }
+            if (!_matched) {
+              _switchResult_1 = Object.class;
+            }
+            _switchResult = _switchResult_1;
+            break;
+        }
+      } else {
+        Class<?> _switchResult_1 = null;
+        boolean _matched = false;
+        if (componentType instanceof JvmEnumerationType) {
+          _matched=true;
+          _switchResult_1 = EnumerationValueDeclaration.class;
+        }
+        if (!_matched) {
+          if (componentType instanceof JvmAnnotationType) {
+            _matched=true;
+            _switchResult_1 = AnnotationReference.class;
           }
-          if (!_matched) {
-            _switchResult_1 = Object.class;
-          }
-          _switchResult = _switchResult_1;
-          break;
+        }
+        if (!_matched) {
+          _switchResult_1 = Object.class;
+        }
+        _switchResult = _switchResult_1;
       }
       _xblockexpression = _switchResult;
     }
