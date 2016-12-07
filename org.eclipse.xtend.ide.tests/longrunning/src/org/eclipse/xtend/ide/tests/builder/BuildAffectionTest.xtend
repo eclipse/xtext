@@ -21,12 +21,12 @@ import org.eclipse.xtext.builder.debug.XtextBuildConsole
 import org.eclipse.xtext.builder.impl.QueuedBuildData
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil
 import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil
+import org.eclipse.xtext.junit4.ui.util.TargetPlatformUtil
 import org.eclipse.xtext.util.StringInputStream
 import org.junit.After
 import org.junit.AfterClass
 import org.junit.Before
 import org.junit.BeforeClass
-import org.junit.Ignore
 import org.junit.Test
 
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
@@ -49,6 +49,7 @@ class BuildAffectionTest {
 	 
 	@BeforeClass 
 	def static void setUpProject() throws Exception {
+		TargetPlatformUtil.setTargetPlatform
 		cleanWorkspace();
 		// disable auto build
 		val workspace = ResourcesPlugin.workspace
@@ -497,8 +498,6 @@ class BuildAffectionTest {
 		''')
 	}
 	
-	//FIXME https://github.com/eclipse/xtext-xtend/issues/8
-	@Ignore("https://github.com/eclipse/xtext-xtend/issues/8")
 	@Test
 	def void testAffected_dependentProject_Java() {
 		val foo = createFile('Foo.java', '''
@@ -528,8 +527,6 @@ class BuildAffectionTest {
 		''')
 	}
 	
-	//FIXME https://github.com/eclipse/xtext-xtend/issues/8
-	@Ignore("https://github.com/eclipse/xtext-xtend/issues/8")
 	@Test
 	def void testAffected_dependentProject_Java_WithExpression() {
 		val foo = createFile('Foo.java', '''
@@ -611,8 +608,6 @@ class BuildAffectionTest {
 		''')
 	}
 	
-	//FIXME https://github.com/eclipse/xtext-xtend/issues/8
-	@Ignore("https://github.com/eclipse/xtext-xtend/issues/8")
 	@Test
 	def void testAffected_annotationProcessorChanged_separateFiles() {
 		createFile('Foo', '''
