@@ -18,11 +18,11 @@
 			<url>file:${root-dir}/build/maven-repository</url>
 		</repository>
 		<repository>
+			<id>BintrayJCenter</id>
+			<url>https://jcenter.bintray.com/</url>
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
-			<id>jcenter</id>
-			<url>http://jcenter.bintray.com</url>
 		</repository>
 	</repositories>
 
