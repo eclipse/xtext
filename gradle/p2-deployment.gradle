@@ -3,7 +3,7 @@
  * The generator task should be rerun whenever necessary, e.g. when the version changes.
  */
 
-apply plugin: 'io.typefox.p2gen'
+apply plugin: 'io.typefox.gradle.p2gen'
 
 group = 'org.eclipse.xtext'
 
@@ -17,8 +17,8 @@ p2gen {
 	exclude 'org.eclipse.xtend.lib.tests'
 	exclude 'org.eclipse.xtend.lib.gwt.test'
 	
-	targetRepository {
-		location 'http://download.eclipse.org/releases/luna/201502271000/'
-		unit 'com.google.guava'
+	dependencies {
+		repositoryUrl 'http://download.eclipse.org/releases/luna/201502271000/'
+		bundle 'com.google.guava'
 	}
 }
