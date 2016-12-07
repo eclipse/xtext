@@ -18,11 +18,23 @@
 			<url>file:${root-dir}/build/maven-repository</url>
 		</repository>
 		<repository>
+			<id>BintrayJCenter</id>
+			<url>https://jcenter.bintray.com/</url>
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
-			<id>jcenter</id>
-			<url>http://jcenter.bintray.com</url>
+		</repository>
+		<repository>
+			<id>maven</id>
+			<url>http://services.typefox.io/open-source/jenkins/job/lsp4j/job/master/lastStableBuild/artifact/build/maven-repository/</url>
+		</repository>
+		<repository>
+			<id>maven2</id>
+			<url>http://services.typefox.io/open-source/jenkins/job/xtext-lib/job/master/lastStableBuild/artifact/build/maven-repository/</url>
+		</repository>
+		<repository>
+			<id>maven3</id>
+			<url>http://services.typefox.io/open-source/jenkins/job/xtext-core/job/master/lastStableBuild/artifact/build/maven-repository/</url>
 		</repository>
 	</repositories>
 
