@@ -748,7 +748,7 @@ public class XtextServiceDispatcher {
       final MapBasedPreferenceValues preferences = new MapBasedPreferenceValues(formatterPreferences, _newLinkedHashMap);
       preferences.<String>put(FormatterPreferenceKeys.lineSeparator, lineSeparator);
       preferences.<String>put(FormatterPreferenceKeys.indentation, indentation);
-      preferences.<Integer>put(FormatterPreferenceKeys.indentationLength, Integer.valueOf(indentationLength));
+      preferences.<Integer>put(FormatterPreferenceKeys.tabWidth, Integer.valueOf(indentationLength));
       preferences.<Integer>put(FormatterPreferenceKeys.maxLineWidth, Integer.valueOf(maxLineWidth));
       TextRegion _xifexpression = null;
       if ((selectionEnd > selectionStart)) {
