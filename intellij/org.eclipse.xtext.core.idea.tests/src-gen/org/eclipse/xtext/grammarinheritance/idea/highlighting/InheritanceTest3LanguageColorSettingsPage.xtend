@@ -1,4 +1,0 @@
-package org.eclipse.xtext.grammarinheritance.idea.highlighting
-
-class InheritanceTest3LanguageColorSettingsPage extends InheritanceTest3LanguageBaseColorSettingsPage {
-}

@@ -1,4 +1,0 @@
-package org.eclipse.xtext.enumrules.idea.highlighting
-
-class MultiRuleEnumTestLanguageColorSettingsPage extends MultiRuleEnumTestLanguageBaseColorSettingsPage {
-}

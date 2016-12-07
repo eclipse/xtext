@@ -1,4 +1,0 @@
-package org.eclipse.xtext.testlanguages.idea.highlighting
-
-class PartialParserTestLanguageColorSettingsPage extends PartialParserTestLanguageBaseColorSettingsPage {
-}

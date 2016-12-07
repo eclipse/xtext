@@ -1,8 +1,0 @@
-org.eclipse.xtext.parser.assignments.idea.lang.psi.impl.AssignmentsTestLanguageFileImpl:a.assignmentstestlanguage(0,31)
-  org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_ELEMENT_TYPE)('anonymous')(0,31)
-    PsiElement(Model_ComplexKeyword_1_0_ELEMENT_TYPE)('complex')(0,7)
-    org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_ObjectMultiValueParserRuleCall_1_1_0_1_ELEMENT_TYPE)('anonymous')(7,31)
-      PsiWhiteSpace(' ')(7,8)
-      PsiElement(MultiValue_AlternativesKeyword_1_0_ELEMENT_TYPE)('alternatives')(8,20)
-      PsiWhiteSpace(' ')(20,21)
-      PsiElement(MultiValue_ValueIDTerminalRuleCall_1_1_0_0_ELEMENT_TYPE)('^something')(21,31)

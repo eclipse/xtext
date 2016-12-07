@@ -1,3 +1,0 @@
-org.eclipse.xtext.parser.terminalrules.idea.lang.psi.impl.TerminalRulesTestLanguageFileImpl:a.terminalrulestestlanguage(0,9)
-  org.eclipse.xtext.psi.impl.PsiEObjectImpl(Model_ELEMENT_TYPE)('anonymous')(0,9)
-    PsiElement(Model_RichStringValueRICH_STRINGTerminalRuleCall_3_0_ELEMENT_TYPE)(''''test''')(0,9)

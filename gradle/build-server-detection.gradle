@@ -1,7 +1,0 @@
-ext.isBuildServer = System.getenv("JOB_NAME") != null || project.hasProperty('buildServer')
-
-if (isBuildServer) {
-	tasks.withType(Test) {
-		ignoreFailures = true
-	}
-}

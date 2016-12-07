@@ -1,3 +1,0 @@
-entity Bar {
-	Fo<caret>o foo
-}

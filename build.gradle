@@ -1,1 +1,0 @@
-apply from: 'gradle/fix-gradle2492.gradle'

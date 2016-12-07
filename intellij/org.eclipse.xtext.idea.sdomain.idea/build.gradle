@@ -1,9 +1,0 @@
-dependencies {
-	compile project(':intellij:org.eclipse.xtext.idea.sdomain')
-}
-
-ideaDevelopment {
-	pluginDependencies {
-		project ':intellij:org.eclipse.xtext.idea'
-	}
-}

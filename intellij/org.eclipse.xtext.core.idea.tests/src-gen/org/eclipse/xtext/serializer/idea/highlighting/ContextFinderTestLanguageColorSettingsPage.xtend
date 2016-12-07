@@ -1,4 +1,0 @@
-package org.eclipse.xtext.serializer.idea.highlighting
-
-class ContextFinderTestLanguageColorSettingsPage extends ContextFinderTestLanguageBaseColorSettingsPage {
-}

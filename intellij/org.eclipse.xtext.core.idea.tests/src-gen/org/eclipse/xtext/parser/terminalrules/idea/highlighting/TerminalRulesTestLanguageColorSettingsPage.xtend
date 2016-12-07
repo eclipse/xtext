@@ -1,4 +1,0 @@
-package org.eclipse.xtext.parser.terminalrules.idea.highlighting
-
-class TerminalRulesTestLanguageColorSettingsPage extends TerminalRulesTestLanguageBaseColorSettingsPage {
-}

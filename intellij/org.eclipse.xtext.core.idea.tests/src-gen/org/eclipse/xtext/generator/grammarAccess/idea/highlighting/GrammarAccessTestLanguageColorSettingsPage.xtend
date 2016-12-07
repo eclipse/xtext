@@ -1,4 +1,0 @@
-package org.eclipse.xtext.generator.grammarAccess.idea.highlighting
-
-class GrammarAccessTestLanguageColorSettingsPage extends GrammarAccessTestLanguageBaseColorSettingsPage {
-}

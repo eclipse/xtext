@@ -1,11 +1,1 @@
-bin
 .DS_Store
-target
-*.xtendbin
-*.java._trace
-*.java_trace
-
-.gradle
-build/
-!**/src/**/build/
-!**/xtend-gen/**/build/

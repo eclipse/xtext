@@ -1,5 +1,0 @@
-package org.eclipse.xtext.parser.unorderedGroups.idea;
-
-public class SimpleBacktrackingBug325745TestLanguageIdeaModule extends AbstractSimpleBacktrackingBug325745TestLanguageIdeaModule {
-
-}

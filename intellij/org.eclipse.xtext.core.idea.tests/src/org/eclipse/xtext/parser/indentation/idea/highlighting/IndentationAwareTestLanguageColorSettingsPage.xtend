@@ -1,4 +1,0 @@
-package org.eclipse.xtext.parser.indentation.idea.highlighting
-
-class IndentationAwareTestLanguageColorSettingsPage extends IndentationAwareTestLanguageBaseColorSettingsPage {
-}

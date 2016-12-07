@@ -1,8 +1,0 @@
-org.eclipse.xtext.parser.parameters.idea.lang.psi.impl.ParametersTestLanguageFileImpl:a.parameterstestlanguage(0,9)
-  org.eclipse.xtext.psi.impl.PsiEObjectImpl(ParserRuleParameters_ParserRuleParametersAction_0_ELEMENT_TYPE)('anonymous')(0,9)
-    org.eclipse.xtext.psi.impl.PsiEObjectImpl(ParserRuleParameters_ELEMENT_TYPE)(0,0)
-      <empty list>
-    PsiElement(ParserRuleParameters_NumberSignDigitTwoKeyword_1_1_0_ELEMENT_TYPE)('#2')(0,2)
-    org.eclipse.xtext.psi.impl.PsiEObjectImpl(ParserRuleParameters_ScenarioScenario1ParserRuleCall_1_1_1_0_ELEMENT_TYPE)('anonymous')(2,9)
-      PsiWhiteSpace(' ')(2,3)
-      PsiElement(Scenario1_SecondIDTerminalRuleCall_1_0_0_ELEMENT_TYPE)('second')(3,9)

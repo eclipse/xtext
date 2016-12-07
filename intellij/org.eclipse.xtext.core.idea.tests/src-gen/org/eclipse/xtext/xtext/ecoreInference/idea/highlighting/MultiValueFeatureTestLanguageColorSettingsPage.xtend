@@ -1,4 +1,0 @@
-package org.eclipse.xtext.xtext.ecoreInference.idea.highlighting
-
-class MultiValueFeatureTestLanguageColorSettingsPage extends MultiValueFeatureTestLanguageBaseColorSettingsPage {
-}

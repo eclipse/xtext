@@ -1,9 +1,0 @@
-java.lang {
-	datatype String
-}
-
-a.b.c {
-	entity Foo {
-		java.lang.String value 
-	}
-}

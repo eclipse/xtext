@@ -1,4 +1,0 @@
-package org.eclipse.xtext.generator.ecore.idea.highlighting
-
-class EcoreFragmentTestLanguageColorSettingsPage extends EcoreFragmentTestLanguageBaseColorSettingsPage {
-}
