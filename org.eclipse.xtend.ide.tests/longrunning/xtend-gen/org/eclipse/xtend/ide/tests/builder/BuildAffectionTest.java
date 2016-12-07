@@ -26,6 +26,7 @@ import org.eclipse.xtext.builder.debug.XtextBuildConsole;
 import org.eclipse.xtext.builder.impl.QueuedBuildData;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil;
+import org.eclipse.xtext.junit4.ui.util.TargetPlatformUtil;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -34,7 +35,6 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -58,6 +58,7 @@ public class BuildAffectionTest {
   
   @BeforeClass
   public static void setUpProject() throws Exception {
+    TargetPlatformUtil.setTargetPlatform();
     IResourcesSetupUtil.cleanWorkspace();
     final IWorkspace workspace = ResourcesPlugin.getWorkspace();
     final IWorkspaceDescription description = workspace.getDescription();
@@ -777,7 +778,6 @@ public class BuildAffectionTest {
     }
   }
   
-  @Ignore("https://github.com/eclipse/xtext-xtend/issues/8")
   @Test
   public void testAffected_dependentProject_Java() {
     try {
@@ -828,7 +828,6 @@ public class BuildAffectionTest {
     }
   }
   
-  @Ignore("https://github.com/eclipse/xtext-xtend/issues/8")
   @Test
   public void testAffected_dependentProject_Java_WithExpression() {
     try {
@@ -978,7 +977,6 @@ public class BuildAffectionTest {
     }
   }
   
-  @Ignore("https://github.com/eclipse/xtext-xtend/issues/8")
   @Test
   public void testAffected_annotationProcessorChanged_separateFiles() {
     try {
