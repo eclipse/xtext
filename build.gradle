@@ -3,9 +3,14 @@
  */
 
 buildscript {
-	repositories.mavenLocal()
+	repositories {
+		jcenter()
+		maven {
+			url 'http://services.typefox.io/open-source/jenkins/job/gradle-plugins/lastStableBuild/artifact/build/maven-repository/'
+		}
+	}
 	dependencies {
-		classpath 'io.typefox:p2-repo-gen:0.1.0'
+		classpath 'io.typefox.gradle:io.typefox.gradle.p2gen:0.1.0'
 	}
 }
 

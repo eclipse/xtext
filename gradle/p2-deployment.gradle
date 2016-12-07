@@ -3,16 +3,16 @@
  * The generator task should be rerun whenever necessary, e.g. when the version changes.
  */
 
-apply plugin: 'io.typefox.p2gen'
+apply plugin: 'io.typefox.gradle.p2gen'
 
 group = 'org.eclipse.xtext'
 
 p2gen {
-	targetRepository {
-		location "http://download.eclipse.org/modeling/tmf/xtext/updates/releases/${versions.xtext_bootstrap}/"
-		unit 'org.eclipse.xtext.sdk.feature.group'
+	dependencies {
+		repositoryUrl "http://download.eclipse.org/modeling/tmf/xtext/updates/releases/${versions.xtext_bootstrap}/"
+		feature 'org.eclipse.xtext.sdk'
 	}
-	targetRepository {
-		location 'http://download.eclipse.org/releases/luna/201502271000/'
+	dependencies {
+		repositoryUrl 'http://download.eclipse.org/releases/luna/201502271000/'
 	}
 }
