@@ -10,7 +10,7 @@ node {
 		}
 		def mvnHome = tool 'M3'
 		wrap([$class:'Xvnc', useXauthority: true]) {
-			sh "${mvnHome}/bin/mvn --batch-mode -fae -Dmaven.test.failure.ignore=true -Dmaven.repo.local=local-maven-repository/ clean install"
+			sh "${mvnHome}/bin/mvn --batch-mode -fae -Dmaven.test.failure.ignore=true -Dmaven.repo.local=.m2/repository clean install"
 		}
 		archive 'build/**/*.*'
 				
