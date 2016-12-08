@@ -1362,14 +1362,15 @@ public class XbaseValidator extends AbstractXbaseValidator {
 			// for private members it has to be checked if all usages are within the operation
 			EObject targetSourceElem = associations.getPrimarySourceElement(target);
 			for (Setting s : usages) {
-			    if (s.getEObject() instanceof XFeatureCall) {
-			        XFeatureCall fc = (XFeatureCall) s.getEObject();
-			        // when the feature call does not call itself or the call is from another function, then it is locally used
-			        if (fc.getFeature() != target || !EcoreUtil.isAncestor(targetSourceElem, fc))
-			            return true;
-			    } else {
-			    	return true;
-			    }
+				if (s.getEObject() instanceof XAbstractFeatureCall) {
+					XAbstractFeatureCall fc = (XAbstractFeatureCall) s.getEObject();
+					// when the feature call does not call itself or the call is
+					// from another function, then it is locally used
+					if (fc.getFeature() != target || !EcoreUtil.isAncestor(targetSourceElem, fc))
+						return true;
+				} else {
+					return true;
+				}
 			}
 			return false;
 		}
