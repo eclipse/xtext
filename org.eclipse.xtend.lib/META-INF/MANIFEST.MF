@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-SymbolicName: org.eclipse.xtend.lib
 Bundle-Name: Xtend Runtime Library
-Bundle-Vendor: Eclipse Xtend
+Bundle-Vendor: Eclipse Xtext
 Bundle-Version: 2.11.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Export-Package: org.eclipse.xtend.lib;version="2.11.0";uses:="org.eclipse.xtend.lib.macro.declaration,org.eclipse.xtend.lib.macro",
