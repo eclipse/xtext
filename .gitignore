@@ -1,5 +1,6 @@
+/build/
+/.m2/
 bin/
 target/
 *._trace
 *.xtendbin
-/build/
