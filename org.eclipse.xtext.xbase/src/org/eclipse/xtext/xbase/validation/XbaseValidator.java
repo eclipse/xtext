@@ -27,6 +27,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.EStructuralFeature.Setting;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
@@ -46,6 +48,7 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.JvmVoid;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.DeprecationUtil;
@@ -1348,7 +1351,26 @@ public class XbaseValidator extends AbstractXbaseValidator {
 	}
 		
 	protected boolean isLocallyUsed(EObject target, EObject containerToFindUsage) {
-		return readAndWriteTracking.isRead(target) || !XbaseUsageCrossReferencer.find(target, containerToFindUsage).isEmpty();
+		if (readAndWriteTracking.isRead(target)) {
+			return true;
+		}
+		Collection<Setting> usages = XbaseUsageCrossReferencer.find(target, containerToFindUsage);
+		// for non-private members it is enough to check that there are usages
+		if (!(target instanceof JvmOperation) || ((JvmOperation)target).getVisibility()!=JvmVisibility.PRIVATE) {
+			return !usages.isEmpty();
+		} else {
+			// for private members it has to be checked if all usages are within the operation
+			EObject targetSourceElem = associations.getPrimarySourceElement(target);
+			for (Setting s : usages) {
+			    if (s.getEObject() instanceof XFeatureCall) {
+			        XFeatureCall fc = (XFeatureCall) s.getEObject();
+			        // when the feature call does not call itself or the call is from another function, then it is locally used
+			        if (fc.getFeature() != target || !EcoreUtil.isAncestor(targetSourceElem, fc))
+			            return true;
+			    }
+			}
+			return false;
+		}
 	}
 
 	@Override
