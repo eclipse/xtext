@@ -1,0 +1,37 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.eclipse.xtend</groupId>
+		<artifactId>org.eclipse.xtend.maven.parent</artifactId>
+		<version>2.11.0-SNAPSHOT</version>
+		<relativePath>releng/org.eclipse.xtend.maven.parent</relativePath>
+	</parent>
+
+	<groupId>org.eclipse.xtext</groupId>
+	<artifactId>org.eclipse.xtend.root</artifactId>
+	<packaging>pom</packaging>
+	<version>2.11.0-SNAPSHOT</version>
+
+	<modules>
+		<module>releng/org.eclipse.xtend.maven.parent</module>
+		<module>org.eclipse.xtend.maven.plugin</module>
+		<module>org.eclipse.xtend.maven.archetype</module>
+		<module>org.eclipse.xtend.maven.android.archetype</module>
+	</modules>
+
+	<build>
+		<plugins>
+	  		<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-deploy-plugin</artifactId>
+				<version>2.8.2</version>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

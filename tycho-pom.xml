@@ -6,7 +6,7 @@
 		<groupId>org.eclipse.xtext</groupId>
 		<artifactId>org.eclipse.xtext.tycho.parent</artifactId>
 		<version>2.11.0-SNAPSHOT</version>
-		<relativePath>/releng/org.eclipse.xtext.tycho.parent</relativePath>
+		<relativePath>releng/org.eclipse.xtext.tycho.parent</relativePath>
 	</parent>
 
 	<groupId>org.eclipse.xtext</groupId>
@@ -15,7 +15,10 @@
 	<version>2.11.0-SNAPSHOT</version>
 
 	<modules>
-		<module>releng</module>
+		<module>releng/org.eclipse.xtend.tycho.parent</module>
+		<module>releng/org.eclipse.xtend.tycho.tests.parent</module>
+		<module>releng/org.eclipse.xtend.target</module>
+		<module>releng/org.eclipse.xtend.p2-repository</module>
 		<module>org.eclipse.xtend.core</module>
 		<module>org.eclipse.xtend.core.tests</module>
 		<module>org.eclipse.xtend.core.tests.java8</module>
@@ -29,24 +32,8 @@
 		<module>org.eclipse.xtend.caliper.tests</module>
 		<module>org.eclipse.xtend.swtbot</module>
 		<module>org.eclipse.xtend.ide.swtbot.tests</module>
-		<module>org.eclipse.xtend.maven.plugin</module>
-		<module>org.eclipse.xtend.maven.archetype</module>
-		<!--<module>org.eclipse.xtend.maven.android.archetype</module> -->
 		<module>org.eclipse.xtend.doc</module>
 		<module>org.eclipse.xtend.examples</module>
 	</modules>
-
-	<build>
-		<plugins>
-	  		<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-deploy-plugin</artifactId>
-				<version>2.8.2</version>
-				<configuration>
-					<skip>true</skip>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
 
 </project>
