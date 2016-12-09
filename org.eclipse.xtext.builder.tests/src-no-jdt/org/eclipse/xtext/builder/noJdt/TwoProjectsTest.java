@@ -18,17 +18,15 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
+import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.util.StringInputStream;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  * @author Sebastian Zarnekow
  */
-//FIXME https://github.com/eclipse/xtext-eclipse/issues/31
-@Ignore("https://github.com/eclipse/xtext-eclipse/issues/31")
 public class TwoProjectsTest extends AbstractBuilderTest {
 
 	private IProject first;
@@ -42,6 +40,11 @@ public class TwoProjectsTest extends AbstractBuilderTest {
 		super.setUp();
 		first = createEmptyProject("first");
 		second = createEmptyProject("second");
+	}
+	
+	private void waitForBuild() throws Exception {
+		Thread.sleep(10);
+		IResourcesSetupUtil.waitForBuild();
 	}
 	
 	protected void addProjectReference(IProject from, IProject referencedProject) throws CoreException {
