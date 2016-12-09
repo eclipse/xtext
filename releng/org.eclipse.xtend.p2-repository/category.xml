@@ -10,5 +10,7 @@
    <bundle id="org.eclipse.xtend.ide.common.source" version="2.11.0.qualifier"><category name="Xtext"/></bundle>
    <bundle id="org.eclipse.xtend.m2e" version="2.11.0.qualifier"><category name="Xtext"/></bundle>
    <bundle id="org.eclipse.xtend.m2e.source" version="2.11.0.qualifier"><category name="Xtext"/></bundle>
+   <bundle id="org.eclipse.xtend.standalone" version="2.11.0.qualifier"><category name="Xtext"/></bundle>
+   <bundle id="org.eclipse.xtend.standalone.source" version="2.11.0.qualifier"><category name="Xtext"/></bundle>
    <category-def name="Xtend" label="Xtend"/>
 </site>
