@@ -91,8 +91,8 @@
 				<configuration>
 					<target>
 						<artifact>
-							<groupId>org.eclipse.xtext</groupId>
-							<artifactId>org.eclipse.xtext.target</artifactId>
+							<groupId>org.eclipse.xtend</groupId>
+							<artifactId>org.eclipse.xtend.target</artifactId>
 							<version>${project.parent.version}</version>
 						</artifact>
 					</target>
