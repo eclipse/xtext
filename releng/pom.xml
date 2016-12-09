@@ -18,8 +18,16 @@
 		<module>org.eclipse.xtext.sdk.target</module>
 		<module>org.eclipse.xtext.sdk.parent</module>
 		<module>org.eclipse.xtext.license.feature</module>
+		<module>org.eclipse.xtext.examples.feature</module>
+		<module>org.eclipse.xtext.redist.feature</module>
+		<module>org.eclipse.xtext.runtime.feature</module>
 		<module>org.eclipse.xtext.sdk.feature</module>
+		<module>org.eclipse.xtext.ui.feature</module>
+		<module>org.eclipse.xtext.xbase.feature</module>
+		<module>org.eclipse.xtext.xtext.ui.feature</module>
+		<module>org.eclipse.xtend.sdk.feature</module>
 		<module>org.eclipse.xtext.sdk.p2-repository</module>
+		<module>org.eclipse.emf.mwe2.language.sdk.dummy</module>
 	</modules>
 
 </project>

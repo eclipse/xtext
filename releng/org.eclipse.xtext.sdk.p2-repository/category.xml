@@ -1,20 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-   <feature url="features/org.eclipse.xtext.sdk_2.11.0.qualifier.jar" id="org.eclipse.xtext.sdk" version="2.11.0.qualifier">
-      <category name="Xtext"/>
-   </feature>
-   <feature url="features/org.eclipse.xtend.sdk_2.11.0.qualifier.jar" id="org.eclipse.xtend.sdk" version="2.11.0.qualifier">
-      <category name="Xtext"/>
-   </feature>
-   <bundle id="org.eclipse.lsp4j" version="0.0.0">
-      <category name="Xtext"/>
-   </bundle>
-   <bundle id="org.eclipse.lsp4j.jsonrpc" version="0.0.0">
-      <category name="Xtext"/>
-   </bundle>
-   <bundle id="com.google.gson" version="0.0.0">
-      <category name="Xtext"/>
-   </bundle>
-   
-   <category-def name="Xtext" label="Xtext"/>
+	<feature url="features/org.eclipse.xtext.sdk_2.11.0.qualifier.jar" id="org.eclipse.xtext.sdk" version="2.11.0.qualifier">
+		<category name="Xtext"/>
+	</feature>
+	<feature url="features/org.eclipse.xtend.sdk_2.11.0.qualifier.jar" id="org.eclipse.xtend.sdk" version="2.11.0.qualifier">
+		<category name="Xtext"/>
+	</feature>
+	<feature url="features/org.eclipse.lsp4j.sdk_0.1.0.qualifier.jar" id="org.eclipse.lsp4j.sdk" version="0.1.0.qualifier">
+		<category name="lsp4j"/>
+	</feature>
+	<category-def name="Xtext" label="Xtext"/>
+	<category-def name="lsp4j" label="LSP4J"/>
 </site>
