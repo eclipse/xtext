@@ -8,9 +8,7 @@
 package org.eclipse.xtext.formatting2.regionaccess.internal;
 
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
-
-import com.google.common.base.Objects;
-import com.google.common.base.Objects.ToStringHelper;
+import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -45,10 +43,10 @@ public class TextSegment extends AbstractTextSegment {
 
 	@Override
 	public String toString() {
-		ToStringHelper helper = Objects.toStringHelper(this).add("offset", offset).add("length", length);
+		ToStringBuilder builder = new ToStringBuilder(this).singleLine().add("offset", offset).add("length", length);
 		if (regionAccess != null)
-			helper.add("text", getText());
-		return helper.toString();
+			builder.add("text", getText());
+		return builder.toString();
 	}
 
 }

@@ -37,7 +37,6 @@ public class JavaIoFileSystemAccessTest extends Assert {
 		File textFile = null;
 		File binFile = null;
 		try {
-
 			JavaIoFileSystemAccess fileSystemAccess = new JavaIoFileSystemAccess(
 					IResourceServiceProvider.Registry.INSTANCE, new IEncodingProvider.Runtime());
 
@@ -101,6 +100,7 @@ public class JavaIoFileSystemAccessTest extends Assert {
 	@Test
 	public void testEncoding() throws Exception {
 		File file = null;
+		FileInputStream fileInputStream = null;
 		try {
 			JavaIoFileSystemAccess fileSystemAccess = new JavaIoFileSystemAccess(
 					IResourceServiceProvider.Registry.INSTANCE, new IEncodingProvider() {
@@ -114,7 +114,7 @@ public class JavaIoFileSystemAccessTest extends Assert {
 			fileSystemAccess.generateFile("test.txt", contents);
 			file = new File(tmpDir, "test.txt");
 			assertTrue(file.exists());
-			FileInputStream fileInputStream = new FileInputStream(file);
+			fileInputStream = new FileInputStream(file);
 			byte[] buffer = new byte[512];
 			int read = fileInputStream.read(buffer);
 			String utfString = new String(buffer, 0, read, "UTF-8");
@@ -122,6 +122,8 @@ public class JavaIoFileSystemAccessTest extends Assert {
 			String isoString = new String(buffer, 0, read, "ISO-8859-1");
 			assertEquals(contents, isoString);
 		} finally {
+			if (fileInputStream != null)
+				fileInputStream.close();
 			if (file != null)
 				file.delete();
 		}

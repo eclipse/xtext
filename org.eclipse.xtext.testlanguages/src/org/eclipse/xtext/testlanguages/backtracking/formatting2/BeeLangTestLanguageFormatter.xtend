@@ -3,7 +3,6 @@
  */
 package org.eclipse.xtext.testlanguages.backtracking.formatting2
 
-import com.google.inject.Inject
 import org.eclipse.xtext.formatting2.AbstractFormatter2
 import org.eclipse.xtext.formatting2.IFormattableDocument
 import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.AliasedRequiredCapability
@@ -13,11 +12,8 @@ import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.Provided
 import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.RequiredCapability
 import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.SimpleTypeRef
 import org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.Unit
-import org.eclipse.xtext.testlanguages.backtracking.services.BeeLangTestLanguageGrammarAccess
 
 class BeeLangTestLanguageFormatter extends AbstractFormatter2 {
-	
-	@Inject extension BeeLangTestLanguageGrammarAccess
 
 	def dispatch void format(Model model, extension IFormattableDocument document) {
 		// TODO: format HiddenRegions around keywords, attributes, cross references, etc. 

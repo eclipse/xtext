@@ -17,6 +17,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.Timeout
 import org.junit.runner.RunWith
+import java.util.concurrent.TimeUnit
 
 /**
  * @author Stefan Oehme - Initial contribution and API
@@ -28,7 +29,7 @@ class SerializerPerformanceTest {
 	@Inject extension ISerializer
 
 	@Rule
-	public val Timeout timeout = new Timeout(5000)
+	public val Timeout timeout = new Timeout(5000, TimeUnit.MILLISECONDS)
 	static val numberOfElements = 1000
 	static val editEvery = 100
 	var Model model

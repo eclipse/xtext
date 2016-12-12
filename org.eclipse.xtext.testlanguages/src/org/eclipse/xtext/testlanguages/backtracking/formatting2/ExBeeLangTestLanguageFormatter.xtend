@@ -3,10 +3,5 @@
  */
 package org.eclipse.xtext.testlanguages.backtracking.formatting2
 
-import com.google.inject.Inject
-import org.eclipse.xtext.testlanguages.backtracking.services.ExBeeLangTestLanguageGrammarAccess
-
 class ExBeeLangTestLanguageFormatter extends BeeLangTestLanguageFormatter {
-	
-	@Inject extension ExBeeLangTestLanguageGrammarAccess
 }
