@@ -65,8 +65,8 @@ class XtextGeneratorResourceSetInitializer {
 				val resourceServiceProvider = IResourceServiceProvider.Registry.INSTANCE.getResourceServiceProvider(loadedResource)
 				if (resourceServiceProvider === null) {
 					try {
-                        val xcore = Class.forName('org.eclipse.xtext.ecore.EcoreSupportStandaloneSetup')
-                        xcore.getDeclaredMethod('doSetup', #[]).invoke(null)
+                        val ecore = Class.forName('org.eclipse.xtext.ecore.EcoreSupportStandaloneSetup')
+                        ecore.getDeclaredMethod('setup', #[]).invoke(null)
                     } catch (ClassNotFoundException e) {
                         LOG.error("Couldn't initialize Ecore support. Is 'org.eclipse.xtext.ecore' on the classpath?")
                         LOG.debug(e.getMessage(), e)
