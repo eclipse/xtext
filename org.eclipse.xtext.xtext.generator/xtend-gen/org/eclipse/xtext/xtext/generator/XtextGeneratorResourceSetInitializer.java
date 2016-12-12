@@ -85,8 +85,8 @@ public class XtextGeneratorResourceSetInitializer {
           final IResourceServiceProvider resourceServiceProvider_1 = IResourceServiceProvider.Registry.INSTANCE.getResourceServiceProvider(loadedResource);
           if ((resourceServiceProvider_1 == null)) {
             try {
-              final Class<?> xcore = Class.forName("org.eclipse.xtext.ecore.EcoreSupportStandaloneSetup");
-              Method _declaredMethod_1 = xcore.getDeclaredMethod("doSetup", new Class[] {});
+              final Class<?> ecore = Class.forName("org.eclipse.xtext.ecore.EcoreSupportStandaloneSetup");
+              Method _declaredMethod_1 = ecore.getDeclaredMethod("setup", new Class[] {});
               _declaredMethod_1.invoke(null);
             } catch (final Throwable _t_1) {
               if (_t_1 instanceof ClassNotFoundException) {
@@ -107,8 +107,8 @@ public class XtextGeneratorResourceSetInitializer {
           final IResourceServiceProvider resourceServiceProvider_2 = IResourceServiceProvider.Registry.INSTANCE.getResourceServiceProvider(loadedResource);
           if ((resourceServiceProvider_2 == null)) {
             try {
-              final Class<?> xcore_1 = Class.forName("org.eclipse.emf.ecore.xcore.XcoreStandaloneSetup");
-              Method _declaredMethod_2 = xcore_1.getDeclaredMethod("doSetup", new Class[] {});
+              final Class<?> xcore = Class.forName("org.eclipse.emf.ecore.xcore.XcoreStandaloneSetup");
+              Method _declaredMethod_2 = xcore.getDeclaredMethod("doSetup", new Class[] {});
               _declaredMethod_2.invoke(null);
             } catch (final Throwable _t_2) {
               if (_t_2 instanceof ClassNotFoundException) {
