@@ -13,6 +13,7 @@ import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourceAttributes;
+import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.junit.Test;
 
@@ -34,6 +35,11 @@ public class SingleProjectTest extends AbstractBuilderTest {
 	public void tearDown() throws Exception {
 		project = null;
 		super.tearDown();
+	}
+	
+	private void waitForBuild() throws Exception {
+		Thread.sleep(10);
+		IResourcesSetupUtil.waitForBuild();
 	}
 	
 	@Test public void testValidSimpleModel() throws Exception {
