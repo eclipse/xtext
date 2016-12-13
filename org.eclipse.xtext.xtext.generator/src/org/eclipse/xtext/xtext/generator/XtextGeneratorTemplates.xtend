@@ -233,19 +233,19 @@ class XtextGeneratorTemplates {
 	def JavaFileAccess createIdeModule(IXtextGeneratorLanguage langConfig) {
 		val it = langConfig.grammar
 		if (langConfig.generateXtendStubs) {
-			return fileAccessFactory.createXtendFile(ideModule,'''
+			return fileAccessFactory.createXtendFile(genericIdeModule,'''
 				/**
 				 * Use this class to register ide components.
 				 */
-				class «ideModule.simpleName» extends «ideGenModule» {
+				class «genericIdeModule.simpleName» extends «genericIdeGenModule» {
 				}
 			''')
 		} else {
-			return fileAccessFactory.createJavaFile(ideModule,'''
+			return fileAccessFactory.createJavaFile(genericIdeModule,'''
 				/**
 				 * Use this class to register ide components.
 				 */
-				public class «ideModule.simpleName» extends «ideGenModule» {
+				public class «genericIdeModule.simpleName» extends «genericIdeGenModule» {
 				}
 			''')
 		}
@@ -253,18 +253,18 @@ class XtextGeneratorTemplates {
 	
 	def JavaFileAccess createIdeGenModule(IXtextGeneratorLanguage langConfig) {
 		val it = langConfig.grammar
-		val superClass = langConfig.ideGenModule.superClass ?: ideDefaultModule
-		val file = fileAccessFactory.createGeneratedJavaFile(ideGenModule)
+		val superClass = langConfig.ideGenModule.superClass ?: genericIdeDefaultModule
+		val file = fileAccessFactory.createGeneratedJavaFile(genericIdeGenModule)
 		file.importNestedTypeThreshold = JavaFileAccess.DONT_IMPORT_NESTED_TYPES
 		
 		file.typeComment = '''
 			/**
-			 * Manual modifications go to {@link «ideModule.simpleName»}.
+			 * Manual modifications go to {@link «genericIdeModule.simpleName»}.
 			 */
 		'''
 		file.annotations += new SuppressWarningsAnnotation
 		file.content = '''
-			public abstract class «ideGenModule.simpleName» extends «superClass» {
+			public abstract class «genericIdeGenModule.simpleName» extends «superClass» {
 			
 				«FOR binding : langConfig.ideGenModule.bindings»
 					«binding.createBindingMethod»
@@ -279,28 +279,28 @@ class XtextGeneratorTemplates {
 	def JavaFileAccess createIdeSetup(IXtextGeneratorLanguage langConfig) {
 		val it = langConfig.grammar
 		if (langConfig.generateXtendStubs) {
-			return fileAccessFactory.createXtendFile(ideSetup,'''
+			return fileAccessFactory.createXtendFile(genericIdeSetup,'''
 				/**
 				 * Initialization support for running Xtext languages as language servers.
 				 */
-				class «ideSetup.simpleName» extends «runtimeSetup» {
+				class «genericIdeSetup.simpleName» extends «runtimeSetup» {
 				
 					override createInjector() {
-						«Guice».createInjector(«Modules2».mixin(new «runtimeModule», new «ideModule»))
+						«Guice».createInjector(«Modules2».mixin(new «runtimeModule», new «genericIdeModule»))
 					}
 					
 				}
 		 	''')
 		} else {
-			return fileAccessFactory.createJavaFile(ideSetup,'''
+			return fileAccessFactory.createJavaFile(genericIdeSetup,'''
 				/**
 				 * Initialization support for running Xtext languages as language servers.
 				 */
-				public class «ideSetup.simpleName» extends «runtimeSetup» {
+				public class «genericIdeSetup.simpleName» extends «runtimeSetup» {
 				
 					@Override
 					public «Injector» createInjector() {
-						return «Guice».createInjector(«Modules2».mixin(new «runtimeModule»(), new «ideModule»()));
+						return «Guice».createInjector(«Modules2».mixin(new «runtimeModule»(), new «genericIdeModule»()));
 					}
 					
 				}
@@ -464,7 +464,7 @@ class XtextGeneratorTemplates {
 				class «webSetup.simpleName» extends «runtimeSetup» {
 					
 					override «Injector» createInjector() {
-						return «Guice».createInjector(«Modules2».mixin(new «runtimeModule», new «ideModule», new «webModule»))
+						return «Guice».createInjector(«Modules2».mixin(new «runtimeModule», new «genericIdeModule», new «webModule»))
 					}
 					
 				}
@@ -478,7 +478,7 @@ class XtextGeneratorTemplates {
 					
 					@Override
 					public «Injector» createInjector() {
-						return «Guice».createInjector(«Modules2».mixin(new «runtimeModule»(), new «ideModule»(), new «webModule»()));
+						return «Guice».createInjector(«Modules2».mixin(new «runtimeModule»(), new «genericIdeModule»(), new «webModule»()));
 					}
 					
 				}

@@ -281,7 +281,7 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 		file.path = "META-INF/services/org.eclipse.xtext.ISetup"
 		file.content = '''
 			«FOR lang : languageConfigs»
-				«naming.getIdeSetup(lang.grammar)»
+				«naming.getGenericIdeSetup(lang.grammar)»
 			«ENDFOR»
 		'''
 		file.writeTo(projectConfig.genericIde.srcGen)
