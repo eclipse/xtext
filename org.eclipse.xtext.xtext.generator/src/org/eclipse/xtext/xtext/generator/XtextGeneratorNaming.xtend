@@ -50,28 +50,28 @@ class XtextGeneratorNaming {
 		new TypeReference(grammar.runtimeBasePackage, getSimpleName(grammar) + 'StandaloneSetupGenerated')
 	}
 	
-	def getIdeBasePackage(Grammar grammar) {
+	def getGenericIdeBasePackage(Grammar grammar) {
 		return grammar.runtimeBasePackage+".ide"
 	}
 	
-	def getIdeTestBasePackage(Grammar grammar) {
-		grammar.ideBasePackage + ".tests"
+	def getGenericIdeTestBasePackage(Grammar grammar) {
+		grammar.genericIdeBasePackage + ".tests"
+	}
+
+	def getGenericIdeModule(Grammar grammar) {
+		new TypeReference(grammar.genericIdeBasePackage, getSimpleName(grammar) + 'IdeModule')
 	}
 	
-	def getIdeModule(Grammar grammar) {
-		new TypeReference(grammar.ideBasePackage, getSimpleName(grammar) + 'IdeModule')
+	def getGenericIdeGenModule(Grammar grammar) {
+		new TypeReference(grammar.genericIdeBasePackage, 'Abstract' + getSimpleName(grammar) + 'IdeModule')
 	}
 	
-	def getIdeGenModule(Grammar grammar) {
-		new TypeReference(grammar.ideBasePackage, 'Abstract' + getSimpleName(grammar) + 'IdeModule')
-	}
-	
-	def getIdeDefaultModule(Grammar grammar) {
+	def getGenericIdeDefaultModule(Grammar grammar) {
 		new TypeReference('org.eclipse.xtext.ide.DefaultIdeModule')
 	}
 	
-	def getIdeSetup(Grammar grammar) {
-		new TypeReference(grammar.ideBasePackage, getSimpleName(grammar) + 'IdeSetup')
+	def getGenericIdeSetup(Grammar grammar) {
+		new TypeReference(grammar.genericIdeBasePackage, getSimpleName(grammar) + 'IdeSetup')
 	}
 	
 	def getEclipsePluginBasePackage(Grammar grammar) {
@@ -116,18 +116,6 @@ class XtextGeneratorNaming {
 		activatorName = activatorName.substring(activatorName.lastIndexOf('.') + 1).toFirstUpper + 'Activator'
 		
 		new TypeReference(pluginName + '.internal', activatorName)
-	}
-	
-	def getGenericIdeBasePackage(Grammar grammar) {
-		return getNamespace(grammar) + '.ide'
-	}
-	
-	def getGenericIdeModule(Grammar grammar) {
-		new TypeReference(grammar.genericIdeBasePackage, getSimpleName(grammar) + 'IdeModule')
-	}
-	
-	def getGenericIdeGenModule(Grammar grammar) {
-		new TypeReference(grammar.genericIdeBasePackage, 'Abstract' + getSimpleName(grammar) + 'IdeModule')
 	}
 	
 	def getIdeaBasePackage(Grammar grammar) {
