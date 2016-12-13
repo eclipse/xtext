@@ -54,6 +54,12 @@
 	<bundle id="org.eclipse.xtext.xtext.generator.source" version="2.11.0.qualifier">
 		<category name="xtext-core"/>
 	</bundle>
+	<bundle id="org.eclipse.xtext.xtext.ide" version="2.11.0.qualifier">
+		<category name="xtext-core"/>
+	</bundle>
+	<bundle id="org.eclipse.xtext.xtext.ide.source" version="2.11.0.qualifier">
+		<category name="xtext-core"/>
+	</bundle>
 	<bundle id="org.eclipse.xtext.xtext.wizard" version="2.11.0.qualifier">
 		<category name="xtext-core"/>
 	</bundle>
