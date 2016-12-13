@@ -8,6 +8,8 @@ apply plugin: 'io.typefox.gradle.p2gen'
 group = 'org.eclipse.xtext'
 
 p2gen {
+	exclude 'org.eclipse.xtext.xtext.bootstrap'
+
 	dependencies {
 		repositoryUrl "http://download.eclipse.org/modeling/tmf/xtext/updates/releases/${versions.xtext_bootstrap}/"
 		feature 'org.eclipse.xtext.sdk'
