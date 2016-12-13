@@ -371,6 +371,14 @@ public class XtextReconciler extends Job implements IReconciler {
 			log.debug("Reconciliation finished. Time required: " + (System.currentTimeMillis() - start)); //$NON-NLS-1$
 		return Status.OK_STATUS;
 	}
+	
+	/**
+	 * @since 2.11
+	 */
+	protected String getResourceText(XtextResource resource) {
+		IParseResult parseResult = resource.getParseResult();
+		return (parseResult != null) ? parseResult.getRootNode().getText() : "";
+	}
 
 	/**
 	 * Not thread safe. Guard access with a transaction on the resource.
@@ -382,8 +390,7 @@ public class XtextReconciler extends Job implements IReconciler {
 		pendingChanges.drainTo(events);
 		if (events.isEmpty() || resource == null)
 			return null;
-		IParseResult parseResult = resource.getParseResult();
-		String resourceText = (parseResult != null) ? parseResult.getRootNode().getText() : "";
+		String resourceText = getResourceText(resource);
 		ReconcilerReplaceRegion.Builder builder = ReconcilerReplaceRegion.builder(resourceText);
 		for (DocumentEvent event : events) {
 			if (event instanceof InputChangedDocumentEvent) {
