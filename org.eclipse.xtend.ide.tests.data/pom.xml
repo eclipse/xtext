@@ -2,10 +2,10 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>org.eclipse.xtext</groupId>
-		<artifactId>org.eclipse.xtext.tycho.parent</artifactId>
+		<groupId>org.eclipse.xtend</groupId>
+		<artifactId>org.eclipse.xtend.tycho.parent</artifactId>
 		<version>2.11.0-SNAPSHOT</version>
-		<relativePath>../releng/org.eclipse.xtext.tycho.parent</relativePath>
+		<relativePath>../releng/org.eclipse.xtend.tycho.parent</relativePath>
 	</parent>
 	<packaging>eclipse-plugin</packaging>
 	<artifactId>org.eclipse.xtend.ide.tests.data</artifactId>

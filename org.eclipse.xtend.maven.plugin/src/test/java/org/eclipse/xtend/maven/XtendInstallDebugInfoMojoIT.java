@@ -2,6 +2,7 @@ package org.eclipse.xtend.maven;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 
 import org.apache.maven.it.VerificationException;
 import org.apache.maven.it.Verifier;
@@ -250,7 +251,7 @@ public class XtendInstallDebugInfoMojoIT {
 	private Verifier newVerifier(String pathToTestProject) throws IOException, VerificationException {
 		File testDir = ResourceExtractor.simpleExtractResources(getClass(), pathToTestProject);
 		Verifier verifier = new Verifier(testDir.getAbsolutePath());
-		String localRepo = new File("../local-maven-repository/").getAbsolutePath();
+		String localRepo = Paths.get("../.m2/repository/").toAbsolutePath().normalize().toString();
 		verifier.setLocalRepo(localRepo);
 		return verifier;
 	}

@@ -1,22 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>org.sonatype.oss</groupId>
-		<artifactId>oss-parent</artifactId>
-		<version>7</version>
-		<!-- empty <relativePath> tag need to be here -->
-		<!-- http://stackoverflow.com/questions/6003831/parent-relativepath-points-at-my-com-mycompanymyproject-instead-of-org-apache -->
-		<relativePath></relativePath>
-	</parent>
 
-	<groupId>org.eclipse.xtext</groupId>
-	<artifactId>org.eclipse.xtext.parent</artifactId>
+	<groupId>org.eclipse.xtend</groupId>
+	<artifactId>org.eclipse.xtend.maven.parent</artifactId>
 	<packaging>pom</packaging>
 	<version>2.11.0-SNAPSHOT</version>
 
-
 	<properties>
+		<root-dir>${basedir}/../..</root-dir>
 		<mavenVersion>3.2.5</mavenVersion>
 		<tycho-version>0.25.0</tycho-version>
 		<emf.version>(2.8,3.0)</emf.version>
@@ -46,14 +39,8 @@
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<maven.javadoc.failOnError>false</maven.javadoc.failOnError>
-		<sign.skip>true</sign.skip>
 	</properties>
-	<licenses>
-		<license>
-			<name>Eclipse Public License - v 1.0</name>
-			<url>http://www.eclipse.org/legal/epl-v10.html</url>
-		</license>
-	</licenses>
+	
 	<build>
 		<extensions>
 			<!-- See https://jira.codehaus.org/browse/MINSTALL-102 -->
@@ -236,12 +223,6 @@
 		</pluginManagement>
 	</build>
 
-	<scm>
-		<connection>scm:git:git://github.com/eclipse/xtext.git</connection>
-		<developerConnection>scm:git:ssh://git@github.com:eclipse/xtext.git</developerConnection>
-		<url>https://github.com/eclipse/xtext.git</url>
-	</scm>
-
 	<profiles>
 		<profile>
 			<id>doclint-java8-disable</id>
@@ -266,11 +247,36 @@
 			</properties>
 		</profile>
 		<profile>
-			<id>snapshot-build</id>
+			<id>useJenkinsSnapshots</id>
 			<repositories>
 				<repository>
-					<id>central snapshots</id>
-					<url>${sonatypeOssDistMgmtSnapshotsUrl}</url>
+					<id>local-repo</id>
+					<url>file:${root-dir}/build/maven-repository</url>
+				</repository>
+				<repository>
+					<id>lsp4j-from-jenkins</id>
+					<url>http://services.typefox.io/open-source/jenkins/job/lsp4j/job/master/lastStableBuild/artifact/build/maven-repository/</url>
+				</repository>
+				<repository>
+					<id>xtext-lib-from-jenkins</id>
+					<url>http://services.typefox.io/open-source/jenkins/job/xtext-lib/job/master/lastStableBuild/artifact/build/maven-repository/</url>
+				</repository>
+				<repository>
+					<id>xtext-core-from-jenkins</id>
+					<url>http://services.typefox.io/open-source/jenkins/job/xtext-core/job/master/lastStableBuild/artifact/build/maven-repository/</url>
+				</repository>
+				<repository>
+					<id>xtext-extras-from-jenkins</id>
+					<url>http://services.typefox.io/open-source/jenkins/job/xtext-extras/job/master/lastStableBuild/artifact/build/maven-repository/</url>
+				</repository>
+			</repositories>
+		</profile>
+		<profile>
+			<id>useSonatypeSnapshots</id>
+			<repositories>
+				<repository>
+					<id>sonatype-snapshots</id>
+					<url>https://oss.sonatype.org/content/repositories/snapshots</url>
 					<snapshots>
 						<enabled>true</enabled>
 						<checksumPolicy>fail</checksumPolicy>
@@ -280,179 +286,139 @@
 					</releases>
 				</repository>
 			</repositories>
-			<pluginRepositories>
-				<pluginRepository>
-					<id>central snapshots</id>
-					<url>${sonatypeOssDistMgmtSnapshotsUrl}</url>
-					<snapshots>
-						<enabled>true</enabled>
-						<checksumPolicy>fail</checksumPolicy>
-					</snapshots>
-					<releases>
-						<enabled>false</enabled>
-					</releases>
-				</pluginRepository>
-			</pluginRepositories>
-		</profile>
-		<profile>
-			<id>staging-build</id>
-			<repositories>
-				<repository>
-					<id>oss staging</id>
-					<url>https://oss.sonatype.org/content/groups/staging/</url>
-					<snapshots>
-						<enabled>false</enabled>
-					</snapshots>
-					<releases>
-						<enabled>true</enabled>
-						<checksumPolicy>fail</checksumPolicy>
-					</releases>
-				</repository>
-			</repositories>
-			<pluginRepositories>
-				<pluginRepository>
-					<id>oss staging</id>
-					<url>https://oss.sonatype.org/content/groups/staging/</url>
-					<snapshots>
-						<enabled>false</enabled>
-					</snapshots>
-					<releases>
-						<enabled>true</enabled>
-						<checksumPolicy>fail</checksumPolicy>
-					</releases>
-				</pluginRepository>
-			</pluginRepositories>
-		</profile>
-		<profile>
-			<id>eclipse-sign</id>
-			<activation>
-				<property>
-					<name>sign.skip</name>
-					<value>false</value>
-				</property>
-			</activation>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.eclipse.cbi.maven.plugins</groupId>
-						<artifactId>eclipse-jarsigner-plugin</artifactId>
-						<version>${cbi-plugins.version}</version>
-						<executions>
-							<execution>
-								<id>sign</id>
-								<goals>
-									<goal>sign</goal>
-								</goals>
-								<phase>verify</phase>
-							</execution>
-						</executions>
-						<configuration>
-							<skip>${sign.skip}</skip>
-							<resigningStrategy>DO_NOT_RESIGN</resigningStrategy>
-							<!-- Indigo compatibility: only supports SHA1 RSA/DSA -->
-							<digestAlgorithm>SHA1</digestAlgorithm>
-							<signatureAlgorithm>SHA1withRSA</signatureAlgorithm>
-							<excludeInnerJars>true</excludeInnerJars>
-						</configuration>
-					</plugin>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-gpg-plugin</artifactId>
-						<version>1.6</version>
-						<configuration>
-							<skip>${sign.skip}</skip>
-						</configuration>
-						<executions>
-							<execution>
-								<id>sign-artifacts</id>
-								<phase>verify</phase>
-								<goals>
-									<goal>sign</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-			<pluginRepositories>
-				<pluginRepository>
-					<id>eclipse</id>
-					<url>https://repo.eclipse.org/content/repositories/cbi/</url>
-					<releases>
-						<enabled>true</enabled>
-					</releases>
-					<snapshots>
-						<enabled>false</enabled>
-					</snapshots>
-				</pluginRepository>
-			</pluginRepositories>
 		</profile>
 	</profiles>
+	
 	<distributionManagement>
 		<repository>
-			<id>local.release.repo</id>
-			<url>file:${basedir}/../build/maven-repository</url>
+			<id>local-repo</id>
+			<url>file:${root-dir}/build/maven-repository</url>
 		</repository>
 		<snapshotRepository>
-			<id>local.release.repo</id>
-			<url>file:${basedir}/../build/maven-repository</url>
+			<id>local-repo</id>
+			<url>file:${root-dir}/build/maven-repository</url>
 		</snapshotRepository>
 	</distributionManagement>
-	<url>https://www.eclipse.org/Xtext/</url>
-	<description>Xtext is a framework for development of programming languages and domain-specific languages. With Xtext you define your language using a powerful grammar language. As a result you get a full infrastructure, including parser, linker, typechecker, compiler as well as editing support for Eclipse, IntelliJ IDEA and your favorite web browser. 
 
-Xtend is a little language that compiles into idiomatic Java source code. You can use any existing Java library seamlessly from Xtend (and vice-versa). The compiled output is readable and pretty-printed, and tends to run as fast or faster than the equivalent handwritten Java code. It's the CoffeeScript for Java.</description>
+	<scm>
+		<connection>scm:git:git://github.com/eclipse/xtext.git</connection>
+		<developerConnection>scm:git:ssh://git@github.com:eclipse/xtext.git</developerConnection>
+		<url>https://github.com/eclipse/xtext.git</url>
+	</scm>
+	
+	<licenses>
+		<license>
+			<name>Eclipse Public License - v 1.0</name>
+			<url>http://www.eclipse.org/legal/epl-v10.html</url>
+		</license>
+	</licenses>
+	
+	<url>http://xtend-lang.org</url>
+	<description>Xtend is a little language that compiles into idiomatic Java source code. You can use any existing Java library seamlessly from Xtend (and vice-versa). The compiled output is readable and pretty-printed, and tends to run as fast or faster than the equivalent handwritten Java code. It's the CoffeeScript for Java.</description>
+
 	<developers>
 		<developer>
-			<id>dennis.huebner</id>
-			<name>Dennis</name>
-			<email>dennis.huebner@itemis.de</email>
-			<organization>itemis AG</organization>
+			<id>sven.efftinge</id>
+			<name>Sven Efftinge</name>
+			<email>sven.efftinge@typefox.io</email>
+			<organization>TypeFox</organization>
+			<organizationUrl>http://typefox.io</organizationUrl>
+			<roles>
+				<role>project lead</role>
+			</roles>
 		</developer>
 		<developer>
-			<id>holger.schill</id>
-			<name>Holger</name>
-			<email>Holger.Schill@itemis.de</email>
-			<organization>itemis AG</organization>
+			<id>sebastian.benz</id>
+			<name>Sebastian Benz</name>
 		</developer>
 		<developer>
-			<id>jan.koehnlein</id>
-			<name>Jan</name>
-			<email>jan.koehnlein@typefox.io</email>
-			<organization>TypeFox GmbH</organization>
-		</developer>
-		<developer>
-			<id>knut.wannheden</id>
-			<name>Knut</name>
-			<email>knut.wannheden@paranor.ch</email>
-			<organization>Paranor</organization>
+			<id>lorenzo.bettini</id>
+			<name>Lorenzo Bettini</name>
 		</developer>
 		<developer>
 			<id>michael.clay</id>
-			<name>Michael</name>
+			<name>Michael Clay</name>
 			<email>michael.clay@codeworkz.at</email>
 			<organization>Codeworkz</organization>
 		</developer>
 		<developer>
+			<id>christian.dietrich</id>
+			<name>Christian Dietrich</name>
+			<email>christian.dietrich@itemis.de</email>
+			<organization>itemis</organization>
+			<organizationUrl>http://www.itemis.com</organizationUrl>
+		</developer>
+		<developer>
 			<id>moritz.eysholdt</id>
-			<name>Moritz</name>
+			<name>Moritz Eysholdt</name>
 			<email>moritz.eysholdt@typefox.io</email>
-			<organization>TypeFox GmbH</organization>
+			<organization>TypeFox</organization>
+			<organizationUrl>http://typefox.io</organizationUrl>
+		</developer>
+		<developer>
+			<id>dennis.huebner</id>
+			<name>Dennis Hübner</name>
+			<email>dennis.huebner@typefox.io</email>
+			<organization>TypeFox</organization>
+			<organizationUrl>http://typefox.io</organizationUrl>
+		</developer>
+		<developer>
+			<id>jan.koehnlein</id>
+			<name>Jan Köhnlein</name>
+			<email>jan.koehnlein@typefox.io</email>
+			<organization>TypeFox</organization>
+			<organizationUrl>http://typefox.io</organizationUrl>
+		</developer>
+		<developer>
+			<id>anton.kosyakov</id>
+			<name>Anton Kosyakov</name>
+			<email>anton.kosyakov@typefox.io</email>
+			<organization>TypeFox</organization>
+			<organizationUrl>http://typefox.io</organizationUrl>
+		</developer>
+		<developer>
+			<id>stefan.oehme</id>
+			<name>Stefan Oehme</name>
+		</developer>
+		<developer>
+			<id>holger.schill</id>
+			<name>Holger Schill</name>
+			<email>holger.schill@itemis.de</email>
+			<organization>itemis</organization>
+			<organizationUrl>http://www.itemis.com</organizationUrl>
+		</developer>
+		<developer>
+			<id>christian.schneider</id>
+			<name>Christian Schneider</name>
+			<email>christian.schneider@typefox.io</email>
+			<organization>TypeFox</organization>
+			<organizationUrl>http://typefox.io</organizationUrl>
+		</developer>
+		<developer>
+			<id>miro.spoenemann</id>
+			<name>Miro Spönemann</name>
+			<email>miro.spoenemann@typefox.io</email>
+			<organization>TypeFox</organization>
+			<organizationUrl>http://typefox.io</organizationUrl>
+		</developer>
+		<developer>
+			<id>karston.thoms</id>
+			<name>Karsten Thoms</name>
+			<email>karsten.thoms@itemis.de</email>
+			<organization>itemis</organization>
+			<organizationUrl>http://www.itemis.com</organizationUrl>
+		</developer>
+		<developer>
+			<id>knut.wannheden</id>
+			<name>Knut Wannheden</name>
+			<email>knut.wannheden@paranor.ch</email>
+			<organization>Paranor</organization>
 		</developer>
 		<developer>
 			<id>sebastian.zarnekow</id>
-			<name>Sebastian</name>
+			<name>Sebastian Zarnekow</name>
 			<email>sebastian.Zarnekow@gmail.com</email>
 			<organization>SMACC GmbH</organization>
-		</developer>
-		<developer>
-			<id>sven.efftinge</id>
-			<name>Sven</name>
-			<email>sven.efftinge@typefox.io</email>
-			<organization>TypeFox GmbH</organization>
-			<roles>
-				<role>project lead</role>
-			</roles>
 		</developer>
 	</developers>
 </project>
