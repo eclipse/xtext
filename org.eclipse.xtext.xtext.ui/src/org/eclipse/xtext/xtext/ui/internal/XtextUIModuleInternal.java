@@ -8,7 +8,7 @@
 package org.eclipse.xtext.xtext.ui.internal;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
-import org.eclipse.xtext.ui.XtextUiModule;
+import org.eclipse.xtext.xtext.ui.XtextUiModule;
 
 /**
  * This class is intended to be used in tests.<br>
