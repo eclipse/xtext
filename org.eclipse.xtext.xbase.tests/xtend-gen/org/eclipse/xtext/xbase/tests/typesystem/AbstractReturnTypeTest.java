@@ -188,6 +188,21 @@ public abstract class AbstractReturnTypeTest<Reference extends Object> extends A
   }
   
   @Test
+  public void testWhileExpression_EarlyExitWithSwitchCase() throws Exception {
+    this.resolvesTo("while(true) {\n\t\t\tswitch \"test\" {\n\t\t\t\tcase \"foo\" : return \"result\"\n\t\t\t}\n\t\t}", "String");
+  }
+  
+  @Test
+  public void testWhileExpression_EarlyExitWithSwitchDefault() throws Exception {
+    this.resolvesTo("while(true) {\n\t\t\tswitch \"test\" {\n\t\t\t\tcase \"foo\" : {}\n\t\t\t\tdefault : return \"result\"\n\t\t\t}\n\t\t}", "String");
+  }
+  
+  @Test
+  public void testWhileExpression_EarlyExitWithSwitchAndIf() throws Exception {
+    this.resolvesTo("while(true) {\n\t\t\tif(false) {\n\t\t\t\tswitch \"test\" {\n\t\t\t\t\tcase \"foo\" : if(false) return \"result\"\n\t\t\t\t}\n\t\t\t}\n\t\t}", "String");
+  }
+  
+  @Test
   @Override
   public void testTryCatchFinallyExpression_08() throws Exception {
     this.resolvesTo("try return \'foo\' catch (Exception e) return \'bar\'", "String");
