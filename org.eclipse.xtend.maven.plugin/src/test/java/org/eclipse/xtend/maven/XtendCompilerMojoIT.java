@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Arrays;
 
 import org.apache.maven.it.VerificationException;
@@ -215,14 +217,14 @@ public class XtendCompilerMojoIT {
 	private Verifier newVerifier(String pathToTestProject) throws IOException, VerificationException {
 		File testDir = ResourceExtractor.simpleExtractResources(getClass(), pathToTestProject);
 		Verifier verifier = new Verifier(testDir.getAbsolutePath());
-		String localRepo = new File("../local-maven-repository/").getAbsolutePath();
+		String localRepo = Paths.get("../.m2/repository/").toAbsolutePath().normalize().toString();
 		verifier.setLocalRepo(localRepo);
 		verifier.setDebug(true);
 		// verifier.setDebugJvm(true);
 		// verifier.setForkJvm(false);
 		return verifier;
 	}
-
+	
 	private boolean createSymLink(final String linkTarget, final String link) throws IOException {
 		File linkFile = new File(link);
 		if (linkFile.exists() && isSymlink(linkFile)) {

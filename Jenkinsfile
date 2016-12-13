@@ -21,7 +21,7 @@ node {
         env.M2_HOME = "${mvnHome}"
         try {
 	        stage 'Maven Plugin Build'
-	        sh "${mvnHome}/bin/mvn -f maven-pom.xml --batch-mode --update-snapshots -fae -PuseJenkinsSnapshots -Dit-tests-skip=true -Dmaven.test.failure.ignore=true -Dmaven.repo.local=.m2/repository clean deploy"
+	        sh "${mvnHome}/bin/mvn -f maven-pom.xml --batch-mode --update-snapshots -fae -PuseJenkinsSnapshots -Dmaven.test.failure.ignore=true -Dmaven.repo.local=.m2/repository clean deploy"
 	        
 	        stage 'Maven Tycho Build'
             wrap([$class:'Xvnc', useXauthority: true]) {
