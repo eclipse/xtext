@@ -10,9 +10,9 @@ package org.eclipse.xtend.core.tests.parser;
 import java.io.StringReader;
 
 import org.eclipse.xtend.core.tests.compiler.CompilerSuite;
-import org.eclipse.xtext.junit4.smoketest.ProcessedBy;
-import org.eclipse.xtext.junit4.smoketest.ScenarioProcessor;
-import org.eclipse.xtext.junit4.smoketest.XtextSmokeTestRunner;
+import org.eclipse.xtext.testing.smoketest.ProcessedBy;
+import org.eclipse.xtext.testing.smoketest.ScenarioProcessor;
+import org.eclipse.xtext.testing.smoketest.XtextSmokeTestRunner;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.util.ReplaceRegion;

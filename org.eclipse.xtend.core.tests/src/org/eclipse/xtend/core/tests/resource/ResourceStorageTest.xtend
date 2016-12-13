@@ -16,7 +16,7 @@ import org.eclipse.emf.common.util.URI
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase
 import org.eclipse.xtext.common.types.JvmField
 import org.eclipse.xtext.common.types.JvmGenericType
-import org.eclipse.xtext.junit4.util.InMemoryURIConverter
+import org.eclipse.xtend.core.tests.util.InMemoryURIConverter
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 import org.eclipse.xtext.resource.persistence.IResourceStorageFacade
 import org.eclipse.xtext.resource.persistence.ResourceStorageFacade

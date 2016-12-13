@@ -13,7 +13,7 @@ import org.eclipse.xtend.core.tests.AbstractXtendTestCase
 import org.eclipse.xtend.core.xtend.XtendFile
 import org.eclipse.xtend.core.xtend.XtendFunction
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic
-import org.eclipse.xtext.junit4.internal.LineDelimiters
+import org.eclipse.xtend.core.tests.util.LineDelimiters
 import org.eclipse.xtext.testing.util.ParseHelper
 import org.eclipse.xtext.testing.validation.ValidationTestHelper
 import org.eclipse.xtext.xbase.XAbstractFeatureCall

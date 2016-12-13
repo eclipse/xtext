@@ -8,9 +8,9 @@
 package org.eclipse.xtend.core.tests.parser;
 
 import org.eclipse.xtend.core.tests.compiler.CompilerSuite;
-import org.eclipse.xtext.junit4.smoketest.ProcessedBy;
-import org.eclipse.xtext.junit4.smoketest.XtextSmokeTestRunner;
-import org.eclipse.xtext.junit4.smoketest.processors.PartialParsingProcessor;
+import org.eclipse.xtext.testing.smoketest.ProcessedBy;
+import org.eclipse.xtext.testing.smoketest.XtextSmokeTestRunner;
+import org.eclipse.xtext.testing.smoketest.processors.PartialParsingProcessor;
 import org.junit.runner.RunWith;
 
 /**

@@ -10,9 +10,7 @@ package org.eclipse.xtend.core.tests.performance
 import com.google.inject.Inject
 import java.util.List
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase
-import org.eclipse.xtext.junit4.internal.StopwatchRule
 import org.junit.Ignore
-import org.junit.Rule
 import org.junit.Test
 
 import static org.eclipse.xtext.util.internal.Stopwatches.*
@@ -24,8 +22,6 @@ class PerformanceTest extends AbstractXtendTestCase {
 	
 	@Inject XtendFileGenerator fileGenerator
 	
-	@Rule public val rule = new StopwatchRule(true)
-
 	/*
 	Sven 2013-01-24 (old typesystem)
 	-------------------------------------------------------------------------------------------------------------------------

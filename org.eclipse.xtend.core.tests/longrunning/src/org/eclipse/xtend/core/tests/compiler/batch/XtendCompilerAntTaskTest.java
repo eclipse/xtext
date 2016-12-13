@@ -18,7 +18,6 @@ import org.apache.tools.ant.Project;
 import org.apache.tools.ant.ProjectHelper;
 import org.apache.tools.ant.types.selectors.FilenameSelector;
 import org.eclipse.pde.core.plugin.TargetPlatform;
-import org.eclipse.xtext.junit4.ui.util.TargetPlatformUtil;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;

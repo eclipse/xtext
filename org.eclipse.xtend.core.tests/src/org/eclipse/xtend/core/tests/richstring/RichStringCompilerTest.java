@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.tests.richstring;
 
-import org.eclipse.xtext.junit4.TemporaryFolder;
+import org.eclipse.xtend.core.tests.util.TemporaryFolder;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;

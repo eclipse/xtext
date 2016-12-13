@@ -1,7 +1,8 @@
 dependencies {
 	compile project(':org.eclipse.xtend.core')
+	compile "org.eclipse.emf:org.eclipse.emf.codegen:$versions.emfEcore"
+	compile "org.eclipse.emf:org.eclipse.emf.codegen.ecore:$versions.emfEcore"
 	compile "org.eclipse.xtext:org.eclipse.xtext.java:$versions.xtext"
-	compile "org.eclipse.xtext:org.eclipse.xtext.junit4:$versions.xtext"
 	compile "org.eclipse.xtext:org.eclipse.xtext.testing:$versions.xtext"
 	compile "org.eclipse.xtext:org.eclipse.xtext.xbase.junit:$versions.xtext"
 	compile "org.eclipse.xtext:org.eclipse.xtext.xbase.testing:$versions.xtext"
