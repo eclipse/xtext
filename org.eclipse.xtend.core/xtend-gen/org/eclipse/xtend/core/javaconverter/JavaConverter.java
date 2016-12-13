@@ -140,21 +140,21 @@ public class JavaConverter {
    * @param targetElement Used to determinate javaCode conversion type
    * @param classPathContext Contextual object from where to get the classpath entries (e.g. IProject in eclipse Module in idea)
    */
-  public String toXtend(final String javaCode, final String[] javaImports, final EObject targetElement, final Object classPathContext) {
+  public String toXtend(final String javaSrc, final String[] javaImports, final EObject targetElement, final Object classPathContext) {
     boolean forceStatement = this.shouldForceStatementMode(targetElement);
-    JavaCodeAnalyzer.JavaParseResult<? extends ASTNode> parseResult = this.codeAnalyzer.determinateJavaType(javaCode);
+    JavaCodeAnalyzer.JavaParseResult<? extends ASTNode> parseResult = this.codeAnalyzer.determinateJavaType(javaSrc);
     if ((parseResult == null)) {
-      return javaCode;
+      return javaSrc;
     }
     JavaConverter.ConversionResult conversionResult = null;
     if ((forceStatement || (parseResult.getType() < ASTParser.K_CLASS_BODY_DECLARATIONS))) {
       int _type = parseResult.getType();
       boolean _tripleEquals = (_type == ASTParser.K_EXPRESSION);
       if (_tripleEquals) {
-        JavaConverter.ConversionResult _expressionToXtend = this.expressionToXtend(javaCode, classPathContext);
+        JavaConverter.ConversionResult _expressionToXtend = this.expressionToXtend(javaSrc, classPathContext);
         conversionResult = _expressionToXtend;
       } else {
-        JavaConverter.ConversionResult _statementToXtend = this.statementToXtend(javaCode, classPathContext);
+        JavaConverter.ConversionResult _statementToXtend = this.statementToXtend(javaSrc, classPathContext);
         conversionResult = _statementToXtend;
       }
     } else {
@@ -164,7 +164,7 @@ public class JavaConverter {
       } else {
         _xifexpression = null;
       }
-      JavaConverter.ConversionResult _bodyDeclarationToXtend = this.bodyDeclarationToXtend(javaCode, _xifexpression, classPathContext);
+      JavaConverter.ConversionResult _bodyDeclarationToXtend = this.bodyDeclarationToXtend(javaSrc, _xifexpression, classPathContext);
       conversionResult = _bodyDeclarationToXtend;
     }
     return conversionResult.getXtendCode();
@@ -172,8 +172,6 @@ public class JavaConverter {
   
   /**
    * @param javaSrc Java class source code as String
-   * @param project JavaProject where the java source code comes from. If project is <code>null</code>, the parser will be<br>
-   * 			 configured with the system class loader to resolve bindings.
    * @param imports imports to use
    * @param classPathContext Contextual object from where to get the classpath entries (e.g. IProject in eclipse Module in idea)
    */

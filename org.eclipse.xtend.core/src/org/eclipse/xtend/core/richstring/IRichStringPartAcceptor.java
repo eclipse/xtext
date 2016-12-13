@@ -15,7 +15,7 @@ import org.eclipse.xtext.xbase.XExpression;
  * The {@link IRichStringPartAcceptor} can be passed into a {@link RichStringProcessor} to
  * handle the semantics of a {@link org.eclipse.xtend.core.xtend.RichString} for a 
  * specific use case. It's mainly an event sink but may influence the control flow
- * of the {@link RichStringProcessor} by means of {@link #forLoopHasNext()}.
+ * of the {@link RichStringProcessor} by means of {@link #forLoopHasNext(XExpression, XExpression, CharSequence) forLoopHasNext()}.
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public interface IRichStringPartAcceptor {
@@ -36,7 +36,7 @@ public interface IRichStringPartAcceptor {
 	 * Indicates a semantic line break in a rich string literal.
 	 * @param origin the instance holding the complete text value that contains the line break.
 	 * @param charCount the number of characters in the line break.
-	 * @param whether or not the line break occurs in a line that contains a control structure.
+	 * @param controlStructureSeen whether or not the line break occurs in a line that contains a control structure.
 	 */
 	void acceptSemanticLineBreak(int charCount, RichStringLiteral origin, boolean controlStructureSeen);
 	

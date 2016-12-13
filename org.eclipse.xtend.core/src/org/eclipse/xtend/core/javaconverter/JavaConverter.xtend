@@ -71,21 +71,21 @@ class JavaConverter {
 	 * @param targetElement Used to determinate javaCode conversion type
 	 * @param classPathContext Contextual object from where to get the classpath entries (e.g. IProject in eclipse Module in idea)
 	 */
-	def String toXtend(String javaCode, String[] javaImports, EObject targetElement, Object classPathContext) {
+	def String toXtend(String javaSrc, String[] javaImports, EObject targetElement, Object classPathContext) {
 		var boolean forceStatement = shouldForceStatementMode(targetElement)
-		var JavaParseResult<? extends ASTNode> parseResult = codeAnalyzer.determinateJavaType(javaCode)
+		var JavaParseResult<? extends ASTNode> parseResult = codeAnalyzer.determinateJavaType(javaSrc)
 		if (parseResult === null) {
-			return javaCode
+			return javaSrc
 		}
 		var ConversionResult conversionResult
 		if (forceStatement || parseResult.getType() < ASTParser.K_CLASS_BODY_DECLARATIONS) {
 			if (parseResult.getType() === ASTParser.K_EXPRESSION) {
-				conversionResult = expressionToXtend(javaCode, classPathContext)
+				conversionResult = expressionToXtend(javaSrc, classPathContext)
 			} else {
-				conversionResult = statementToXtend(javaCode, classPathContext)
+				conversionResult = statementToXtend(javaSrc, classPathContext)
 			}
 		} else {
-			conversionResult = bodyDeclarationToXtend(javaCode, if(javaImports !== null) javaImports else null,
+			conversionResult = bodyDeclarationToXtend(javaSrc, if(javaImports !== null) javaImports else null,
 				classPathContext)
 		}
 		return conversionResult.getXtendCode()
@@ -93,8 +93,6 @@ class JavaConverter {
 	
 	/**
 	 * @param javaSrc Java class source code as String
-	 * @param project JavaProject where the java source code comes from. If project is <code>null</code>, the parser will be<br>
-	 * 			 configured with the system class loader to resolve bindings.
 	 * @param imports imports to use 
 	 * @param classPathContext Contextual object from where to get the classpath entries (e.g. IProject in eclipse Module in idea)
 	 */
