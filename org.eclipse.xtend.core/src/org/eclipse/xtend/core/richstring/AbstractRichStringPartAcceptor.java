@@ -16,7 +16,7 @@ import org.eclipse.xtext.xbase.XExpression;
 
 /**
  * No-op implementation of the {@link IRichStringPartAcceptor}. Clients should inherit from this class if they do not
- * want to implement all methods. It is mandatory to implement {@link #forLoopHasNext()}.
+ * want to implement all methods. It is mandatory to implement {@link #forLoopHasNext(XExpression, XExpression, CharSequence) forLoopHasNext()}.
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */

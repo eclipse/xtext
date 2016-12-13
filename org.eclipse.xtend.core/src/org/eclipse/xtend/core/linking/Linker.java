@@ -33,7 +33,7 @@ import org.eclipse.xtext.xbase.linking.XbaseLazyLinker;
 import com.google.inject.Inject;
 
 /**
- * Optimized lazy linker implementation for Xtend. It's based on the {@link BatchLinkableResource}.
+ * Optimized lazy linker implementation for Xtend. It's based on the {@link org.eclipse.xtext.xbase.resource.BatchLinkableResource BatchLinkableResource}.
  * 
  * It also validates the concrete syntax of the cross link text.
  * 

@@ -160,7 +160,7 @@ public class ASTParserFactory {
   }
   
   /**
-   * @param classPathContext Contextual object from where to get the classpath entries (e.g. IProject or Module or null)
+   * @param context Contextual object from where to get the classpath entries (e.g. IProject or Module or <code>null</code>)
    */
   public ASTParserFactory.ASTParserWrapper createJavaParser(final Object context) {
     String targetJavaVersion = System.getProperty("java.specification.version");
@@ -173,7 +173,7 @@ public class ASTParserFactory {
   }
   
   /**
-   * Will be called when the environment can not be derived from a context in {@link #createJavaParser(String, Object)}
+   * Will be called when the environment can not be derived from a context in {@link #createJavaParser(Object)}
    * {@link ASTParser#setEnvironment(String[], String[], String[], boolean)}
    */
   protected void provideCustomEnvironment(final ASTParser parser) {
