@@ -15,9 +15,6 @@ import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.internal.ui.JavaPlugin;
 import org.eclipse.jdt.internal.ui.wizards.NewElementWizard;
 import org.eclipse.jface.resource.ImageDescriptor;
-import org.eclipse.jface.text.TextSelection;
-import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.PartInitException;
@@ -71,10 +68,7 @@ public class AbstractNewXtendElementWizard extends NewElementWizard {
 					try {
 						editor = IDE.openEditor(JavaPlugin.getActivePage(), (IFile) resource);
 						if (editor instanceof ITextEditor) {
-							final ITextEditor textEditor = (ITextEditor) editor;
-							ISelectionProvider selectionProvider = textEditor.getSelectionProvider();
-							ISelection selection = new TextSelection(size - 2, 0);
-							selectionProvider.setSelection(selection);
+							((ITextEditor) editor).selectAndReveal(size -2, -1);
 						}
 					} catch (PartInitException e) {
 						throw new RuntimeException(e);
