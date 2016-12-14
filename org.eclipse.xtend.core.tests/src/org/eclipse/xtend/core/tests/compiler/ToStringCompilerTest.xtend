@@ -12,7 +12,7 @@ import org.eclipse.xtext.testing.validation.ValidationTestHelper
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage
 import org.junit.Test
 
-import static org.eclipse.xtext.junit4.internal.LineDelimiters.*
+import static org.eclipse.xtend.core.tests.util.LineDelimiters.*
 
 class ToStringCompilerTest extends AbstractXtendCompilerTest {
 	@Inject

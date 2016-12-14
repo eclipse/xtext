@@ -15,7 +15,6 @@ import java.util.Map;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.tests.performance.GeneratorConfig;
 import org.eclipse.xtend.core.tests.performance.XtendFileGenerator;
-import org.eclipse.xtext.junit4.internal.StopwatchRule;
 import org.eclipse.xtext.util.internal.Stopwatches;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
@@ -24,7 +23,6 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.junit.Ignore;
-import org.junit.Rule;
 import org.junit.Test;
 
 /**
@@ -34,9 +32,6 @@ import org.junit.Test;
 public class PerformanceTest extends AbstractXtendTestCase {
   @Inject
   private XtendFileGenerator fileGenerator;
-  
-  @Rule
-  public final StopwatchRule rule = new StopwatchRule(true);
   
   /**
    * Sven 2013-01-24 (old typesystem)

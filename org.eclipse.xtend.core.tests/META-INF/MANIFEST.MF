@@ -6,7 +6,6 @@ Bundle-Version: 2.11.0.qualifier
 Bundle-Vendor: Eclipse Xtext
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Require-Bundle: org.eclipse.xtend.core,
- org.eclipse.xtext.junit4,
  org.eclipse.xtext.testing,
  org.eclipse.xtext.xbase.testing,
  org.eclipse.xtext,
@@ -28,7 +27,10 @@ Import-Package: javax.inject;version="1.0.0",
  org.apache.log4j.spi;version="1.2.15",
  org.junit;version="4.5.0",
  org.junit.runner;version="4.5.0",
- org.junit.runners;version="4.5.0"
+ org.junit.runners;version="4.5.0",
+ org.junit.internal;version="4.10.0",
+ org.junit.internal.builders;version="4.10.0",
+ org.junit.rules;version="4.7.0";resolution:=optional
 Bundle-ClassPath: .
 Export-Package: .;x-internal:=true,
  bug380058;x-internal:=true,

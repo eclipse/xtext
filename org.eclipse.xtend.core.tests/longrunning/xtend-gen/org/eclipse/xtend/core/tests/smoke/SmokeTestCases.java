@@ -9,7 +9,7 @@ package org.eclipse.xtend.core.tests.smoke;
 
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.junit4.smoketest.IgnoredBySmokeTest;
+import org.eclipse.xtext.testing.smoketest.IgnoredBySmokeTest;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.junit.Test;
 
@@ -626,7 +626,7 @@ public class SmokeTestCases extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("import org.eclipse.emf.ecore.util.EcoreUtil");
       _builder.newLine();
-      _builder.append("import org.eclipse.xtext.junit4.util.ParseHelper");
+      _builder.append("import org.eclipse.xtext.testing.util.ParseHelper");
       _builder.newLine();
       _builder.append("import org.eclipse.xtext.naming.IQualifiedNameProvider");
       _builder.newLine();

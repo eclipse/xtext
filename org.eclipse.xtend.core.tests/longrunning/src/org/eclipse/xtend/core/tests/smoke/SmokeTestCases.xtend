@@ -9,7 +9,7 @@ package org.eclipse.xtend.core.tests.smoke
 
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase
 import org.junit.Test
-import org.eclipse.xtext.junit4.smoketest.IgnoredBySmokeTest
+import org.eclipse.xtext.testing.smoketest.IgnoredBySmokeTest
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -300,7 +300,7 @@ class SmokeTestCases extends AbstractXtendTestCase {
 			import java.util.List
 			import org.eclipse.emf.ecore.EObject
 			import org.eclipse.emf.ecore.util.EcoreUtil
-			import org.eclipse.xtext.junit4.util.ParseHelper
+			import org.eclipse.xtext.testing.util.ParseHelper
 			import org.eclipse.xtext.naming.IQualifiedNameProvider
 			
 			import static org.junit.Assert.*
