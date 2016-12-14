@@ -5,16 +5,13 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtend.core.tests.contentassist;
+package org.eclipse.xtend.ide.tests.contentassist;
 
 import java.util.Arrays;
 import java.util.List;
 
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
-import org.eclipse.xtend.core.tests.RuntimeTestSetup;
-import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.junit4.internal.LineDelimiters;
-import org.eclipse.xtext.junit4.ui.AbstractContentAssistProcessorTest;
 import org.eclipse.xtext.junit4.ui.ContentAssistProcessorTestBuilder;
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ReplacementTextApplier;
@@ -29,19 +26,14 @@ import com.google.common.collect.Lists;
  * @author Stephane Galland - Initial contribution and API
  * @since 2.11
  */
-public class EclipseBug28DirtyStateModifierContentAssistTest extends AbstractContentAssistProcessorTest {
-
-	@Override
-	public ISetup doGetSetup() {
-		return new RuntimeTestSetup();
-	}
+public class EclipseBug28DirtyStateModifierContentAssistTest extends AbstractXtendContentAssistBugTest {
 
 	@Test public void testDirtyStateModifiers_01() throws Exception {
 		final ContentAssistProcessorTestBuilder builder = newBuilder().withDirtyState()
 				.appendNl("final class FooA1 {}")
 				.appendNl("class FooA2 {}")
 				.append("class FooA3 extends FooA")
-				.assertText("FooA2");
+				.assertText("FooA2", "FooA3");
 		assertNoText(builder, "FooA1");
 	}
 
@@ -50,7 +42,7 @@ public class EclipseBug28DirtyStateModifierContentAssistTest extends AbstractCon
 				.appendNl("class FooA1 {}")
 				.appendNl("class FooA2 {}")
 				.append("class FooA3 extends FooA")
-				.assertText("FooA1", "FooA2");
+				.assertText("FooA1", "FooA2", "FooA3");
 	}
 
 	/**
