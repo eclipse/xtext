@@ -5,7 +5,7 @@
 	<extension
             point="org.eclipse.ui.editors">
         <editor
-              class="org.eclipse.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
+              class="org.eclipse.xtext.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
               contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
               default="true"
               extensions="xtext,xtext2"
@@ -17,7 +17,7 @@
 	<extension
         point="org.eclipse.ui.handlers">
         <handler
-            class="org.eclipse.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclarationHandler"
+            class="org.eclipse.xtext.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclarationHandler"
             commandId="org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclaration">
             <activeWhen>
                 <reference
@@ -26,7 +26,7 @@
             </activeWhen>
         </handler>
         <handler
-            class="org.eclipse.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.editor.handler.ValidateActionHandler"
+            class="org.eclipse.xtext.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.editor.handler.ValidateActionHandler"
             commandId="org.eclipse.xtext.Xtext.validate">
          <activeWhen>
             <reference
@@ -50,28 +50,28 @@
     <extension
             point="org.eclipse.ui.preferencePages">
         <page
-            class="org.eclipse.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            class="org.eclipse.xtext.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
             id="org.eclipse.xtext.Xtext"
             name="%Xtext_Language_Root_Preferences">
             <keywordReference id="org.eclipse.xtext.ui.keyword_Xtext"/>
         </page>
         <page
             category="org.eclipse.xtext.Xtext"
-            class="org.eclipse.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.editor.syntaxcoloring.SyntaxColoringPreferencePage"
+            class="org.eclipse.xtext.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.editor.syntaxcoloring.SyntaxColoringPreferencePage"
             id="org.eclipse.xtext.Xtext.coloring"
             name="%Syntax_Coloring">
             <keywordReference id="org.eclipse.xtext.ui.keyword_Xtext"/>
         </page>
         <page
             category="org.eclipse.xtext.Xtext"
-            class="org.eclipse.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage"
+            class="org.eclipse.xtext.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage"
             id="org.eclipse.xtext.Xtext.templates"
             name="%Templates">
             <keywordReference id="org.eclipse.xtext.ui.keyword_Xtext"/>
         </page>
         <page
             category="org.eclipse.xtext.Xtext"
-            class="org.eclipse.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.validation.ValidatorPreferencePage"
+            class="org.eclipse.xtext.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.validation.ValidatorPreferencePage"
             id="org.eclipse.xtext.Xtext.validator.preferencePage"
             name="%Errors_Warnings">
             <keywordReference id="org.eclipse.xtext.ui.keyword_Xtext"/>
@@ -80,7 +80,7 @@
     <extension
             point="org.eclipse.ui.propertyPages">
         <page
-              class="org.eclipse.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.validation.ValidatorPreferencePage"
+              class="org.eclipse.xtext.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.validation.ValidatorPreferencePage"
               id="org.eclipse.xtext.Xtext.validator.propertyPage"
               name="Xtext">
            <keywordReference
@@ -138,7 +138,7 @@
 	</extension>
 	<extension point="org.eclipse.ui.handlers">
 	    <handler
-            class="org.eclipse.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.editor.findrefs.FindReferencesHandler"
+            class="org.eclipse.xtext.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.editor.findrefs.FindReferencesHandler"
             commandId="org.eclipse.xtext.ui.editor.FindReferences">
             <activeWhen>
                 <reference
@@ -153,13 +153,13 @@
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
 		<parser
-			class="org.eclipse.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
+			class="org.eclipse.xtext.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
 			type="xtext">
 		</parser>
 	</extension>
 	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
         <resourceServiceProvider
-            class="org.eclipse.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
+            class="org.eclipse.xtext.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
             uriExtension="xtext">
         </resourceServiceProvider>
     </extension>
@@ -167,13 +167,13 @@
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
 		<parser
-			class="org.eclipse.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
+			class="org.eclipse.xtext.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
 			type="xtext2">
 		</parser>
 	</extension>
 	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
         <resourceServiceProvider
-            class="org.eclipse.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
+            class="org.eclipse.xtext.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
             uriExtension="xtext2">
         </resourceServiceProvider>
     </extension>
@@ -187,7 +187,7 @@
 		</category>
 		<wizard
 			category="org.eclipse.xtext.projectwiz"
-			class="org.eclipse.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.xtext.ui.wizard.project.NewXtextProjectWizard"
+			class="org.eclipse.xtext.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.xtext.ui.wizard.project.NewXtextProjectWizard"
 			icon="icons/new_xproj.gif"
 			id="org.eclipse.xtext.xtext.ui.wizard.project.NewXtextProjectWizard"
 			name="%Xtext_Project"
@@ -198,7 +198,7 @@
 		</wizard>
 		<wizard
 			category="org.eclipse.xtext.projectwiz"
-			class="org.eclipse.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.NewXtextProjectFromEcoreWizard"
+			class="org.eclipse.xtext.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.NewXtextProjectFromEcoreWizard"
 			icon="icons/new_xproj.gif"
 			id="org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.NewXtextProjectFromEcoreWizard"
 			name="%Xtext_Project_From_Ecore"
@@ -253,7 +253,7 @@
 	<extension
 		point="org.eclipse.ui.handlers">
 		<handler
-			class="org.eclipse.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.editor.outline.quickoutline.ShowQuickOutlineActionHandler"
+			class="org.eclipse.xtext.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.editor.outline.quickoutline.ShowQuickOutlineActionHandler"
 			commandId="org.eclipse.xtext.ui.editor.outline.QuickOutline">
 			<activeWhen>
 				<reference
@@ -285,19 +285,19 @@
 	
   <extension point="org.eclipse.compare.contentViewers">
     <viewer id="org.eclipse.xtext.Xtext.compare.contentViewers"
-            class="org.eclipse.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
+            class="org.eclipse.xtext.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
             extensions="xtext,xtext2">
     </viewer>
   </extension>
   <extension point="org.eclipse.compare.contentMergeViewers">
     <viewer id="org.eclipse.xtext.Xtext.compare.contentMergeViewers"
-            class="org.eclipse.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
+            class="org.eclipse.xtext.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
             extensions="xtext,xtext2" label="Xtext Compare">
      </viewer>
   </extension>
   <extension point="org.eclipse.ui.editors.documentProviders">
     <provider id="org.eclipse.xtext.Xtext.editors.documentProviders"
-            class="org.eclipse.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.editor.model.XtextDocumentProvider"
+            class="org.eclipse.xtext.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.editor.model.XtextDocumentProvider"
             extensions="xtext,xtext2">
     </provider>
   </extension>
@@ -314,7 +314,7 @@
    	<!-- Rename Refactoring -->
 	<extension point="org.eclipse.ui.handlers">
 		<handler
-			class="org.eclipse.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.DefaultRenameElementHandler"
+			class="org.eclipse.xtext.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.DefaultRenameElementHandler"
 			commandId="org.eclipse.xtext.ui.refactoring.RenameElement">
 			<activeWhen>
 				<reference
@@ -339,7 +339,7 @@
     <extension
           point="org.eclipse.ltk.core.refactoring.renameParticipants">
        <renameParticipant
-             class="org.eclipse.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.xtext.ui.refactoring.EcoreRefactoringParticipant"
+             class="org.eclipse.xtext.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.xtext.ui.refactoring.EcoreRefactoringParticipant"
              id="org.eclipse.xtext.xtext.ui.ecoreRenameParticipant"
              name="Ecore Rename Participant">
           <enablement>
@@ -351,7 +351,7 @@
           </enablement>
        </renameParticipant>
        <renameParticipant
-             class="org.eclipse.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.xtext.ui.refactoring.OverridingRuleRefactoringParticipant"
+             class="org.eclipse.xtext.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.xtext.ui.refactoring.OverridingRuleRefactoringParticipant"
              id="org.eclipse.xtext.xtext.ui.ecoreRenameParticipant"
              name="Ecore Rename Participant">
           <enablement>
@@ -390,7 +390,7 @@
     <extension
             point="org.eclipse.ui.ide.markerResolution">
         <markerResolutionGenerator
-            class="org.eclipse.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+            class="org.eclipse.xtext.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
             markerType="org.eclipse.xtext.xtext.ui.xtext.check.fast">
             <attribute
                 name="FIXABLE_KEY"
@@ -398,7 +398,7 @@
             </attribute>
         </markerResolutionGenerator>
         <markerResolutionGenerator
-            class="org.eclipse.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+            class="org.eclipse.xtext.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
             markerType="org.eclipse.xtext.xtext.ui.xtext.check.normal">
             <attribute
                 name="FIXABLE_KEY"
@@ -406,7 +406,7 @@
             </attribute>
         </markerResolutionGenerator>
         <markerResolutionGenerator
-            class="org.eclipse.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+            class="org.eclipse.xtext.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
             markerType="org.eclipse.xtext.xtext.ui.xtext.check.expensive">
             <attribute
                 name="FIXABLE_KEY"
@@ -430,7 +430,7 @@
  <extension
        point="org.eclipse.ui.views">
     <view
-          class="org.eclipse.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.editor.hierarchy.XtextCallHierarchyViewPart"
+          class="org.eclipse.xtext.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.editor.hierarchy.XtextCallHierarchyViewPart"
           icon="icons/editor.gif"
           id="org.eclipse.xtext.ui.XtextCallHierarchy"
           name="%CallHierarchy"
@@ -467,7 +467,7 @@
  <extension
        point="org.eclipse.ui.handlers">
     <handler
-          class="org.eclipse.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.editor.hierarchy.OpenCallHierarchyHandler"
+          class="org.eclipse.xtext.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.editor.hierarchy.OpenCallHierarchyHandler"
           commandId="org.eclipse.xtext.ui.editor.OpenCallHierarchy">
        <activeWhen>
           <reference
