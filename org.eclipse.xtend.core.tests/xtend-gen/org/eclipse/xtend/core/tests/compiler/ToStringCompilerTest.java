@@ -15,9 +15,9 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.testing.validation.ValidationTestHelper;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
-import org.eclipse.xtext.xbase.compiler.CompilationTestHelper;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.testing.CompilationTestHelper;
 import org.junit.Assert;
 import org.junit.Test;
 

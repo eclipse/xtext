@@ -25,7 +25,7 @@ import org.eclipse.xtext.validation.CheckMode
 import org.eclipse.xtext.validation.Issue
 import org.eclipse.xtext.workspace.FileProjectConfig
 import org.eclipse.xtext.workspace.ProjectConfigAdapter
-import org.eclipse.xtext.xbase.compiler.CompilationTestHelper
+import org.eclipse.xtext.xbase.testing.CompilationTestHelper
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test

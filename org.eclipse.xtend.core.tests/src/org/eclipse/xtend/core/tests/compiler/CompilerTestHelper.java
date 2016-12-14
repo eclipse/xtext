@@ -18,8 +18,8 @@ import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.testing.util.ParseHelper;
 import org.eclipse.xtext.testing.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider;
-import org.eclipse.xtext.xbase.compiler.InMemoryJavaCompiler;
-import org.eclipse.xtext.xbase.compiler.JavaSource;
+import org.eclipse.xtext.xbase.testing.InMemoryJavaCompiler;
+import org.eclipse.xtext.xbase.testing.JavaSource;
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
 import org.junit.Assert;
 

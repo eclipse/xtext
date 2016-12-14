@@ -18,7 +18,6 @@ import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
 import org.eclipse.xtext.common.types.JvmTypeParameter
 import org.eclipse.xtext.util.Triple
 import org.eclipse.xtext.util.Tuples
-import org.eclipse.xtext.xbase.junit.typesystem.PublicResolvedTypes
 import org.eclipse.xtext.xbase.typesystem.internal.DefaultReentrantTypeResolver
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument
@@ -35,6 +34,7 @@ import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo
 import org.junit.Test
 
 import static org.eclipse.xtext.xbase.typesystem.util.VarianceInfo.*
+import org.eclipse.xtend.core.tests.compiler.PublicResolvedTypes
 
 /**
  * @author Sebastian Zarnekow

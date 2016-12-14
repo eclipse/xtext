@@ -10,7 +10,7 @@ package org.eclipse.xtend.core.tests.java8;
 import org.eclipse.xtend.core.tests.RuntimeInjectorProvider;
 import org.eclipse.xtend.core.tests.RuntimeTestSetup;
 import org.eclipse.xtext.util.JavaVersion;
-import org.eclipse.xtext.xbase.compiler.JavaVersionModule;
+import org.eclipse.xtext.xbase.testing.JavaVersionModule;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;

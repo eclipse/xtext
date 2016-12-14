@@ -26,7 +26,6 @@ import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.util.JREContainerProvider;
 import org.eclipse.xtext.ui.util.PluginProjectFactory;
-import org.eclipse.xtext.xbase.junit.ui.AbstractXbaseContentAssistInBlockTest;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;

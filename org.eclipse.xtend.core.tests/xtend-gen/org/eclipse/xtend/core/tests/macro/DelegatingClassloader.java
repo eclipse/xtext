@@ -1,7 +1,7 @@
 package org.eclipse.xtend.core.tests.macro;
 
 import java.net.URL;
-import org.eclipse.xtext.xbase.compiler.CompilationTestHelper;
+import org.eclipse.xtext.xbase.testing.CompilationTestHelper;
 
 @SuppressWarnings("all")
 public class DelegatingClassloader extends ClassLoader {

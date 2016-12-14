@@ -25,8 +25,8 @@ import org.eclipse.xtend.lib.macro.services.Problem;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
-import org.eclipse.xtext.xbase.compiler.CompilationTestHelper;
-import org.eclipse.xtext.xbase.compiler.CompilationTestHelper.Result;
+import org.eclipse.xtext.xbase.testing.CompilationTestHelper;
+import org.eclipse.xtext.xbase.testing.CompilationTestHelper.Result;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 
 import com.google.common.base.Function;
