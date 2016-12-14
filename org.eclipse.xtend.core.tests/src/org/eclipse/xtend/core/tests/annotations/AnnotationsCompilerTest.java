@@ -16,8 +16,8 @@ import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
-import org.eclipse.xtext.xbase.compiler.CompilationTestHelper;
-import org.eclipse.xtext.xbase.compiler.CompilationTestHelper.Result;
+import org.eclipse.xtext.xbase.testing.CompilationTestHelper;
+import org.eclipse.xtext.xbase.testing.CompilationTestHelper.Result;
 import org.junit.Test;
 
 import com.google.inject.ImplementedBy;

@@ -11,7 +11,7 @@ import com.google.inject.Inject
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase
 import org.eclipse.xtext.common.types.JvmDeclaredType
 import org.eclipse.xtext.generator.IFilePostProcessor
-import org.eclipse.xtext.xbase.compiler.CompilationTestHelper
+import org.eclipse.xtext.xbase.testing.CompilationTestHelper
 import org.eclipse.xtext.xbase.compiler.DisableCodeGenerationAdapter
 import org.eclipse.xtext.xbase.compiler.GeneratorConfig
 import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider

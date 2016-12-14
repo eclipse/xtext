@@ -9,7 +9,7 @@ package org.eclipse.xtend.core.tests;
 
 import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
 import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider;
-import org.eclipse.xtext.xbase.compiler.SingletonGeneratorConfigModule;
+import org.eclipse.xtext.xbase.testing.SingletonGeneratorConfigModule;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;

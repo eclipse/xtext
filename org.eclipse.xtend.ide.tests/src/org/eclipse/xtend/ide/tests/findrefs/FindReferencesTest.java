@@ -19,12 +19,11 @@ import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
+import org.eclipse.xtend.ide.tests.findrefs.FindReferencesTestUtil.MockAcceptor;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.xbase.XBlockExpression;
-import org.eclipse.xtext.xbase.junit.ui.FindReferencesTestUtil;
-import org.eclipse.xtext.xbase.junit.ui.FindReferencesTestUtil.MockAcceptor;
 import org.junit.Test;
 
 import com.google.inject.Inject;

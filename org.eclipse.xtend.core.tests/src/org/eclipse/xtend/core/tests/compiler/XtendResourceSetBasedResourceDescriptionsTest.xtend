@@ -16,7 +16,7 @@ import org.eclipse.xtext.resource.DerivedStateAwareResource
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.validation.CheckMode
 import org.eclipse.xtext.validation.IResourceValidator
-import org.eclipse.xtext.xbase.compiler.CompilationTestHelper
+import org.eclipse.xtext.xbase.testing.CompilationTestHelper
 import org.junit.Test
 
 /**
