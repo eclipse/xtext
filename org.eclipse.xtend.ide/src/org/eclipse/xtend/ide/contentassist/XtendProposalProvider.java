@@ -31,6 +31,7 @@ import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.TypesPackage;
@@ -223,16 +224,26 @@ public class XtendProposalProvider extends AbstractXtendProposalProvider {
 	}
 	
 	@Override
-	public void completeJvmParameterizedTypeReference_Type(EObject model, Assignment assignment,
-			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+	public void completeJvmParameterizedTypeReference_Type(EObject model, Assignment assignment, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
 		if (model instanceof XtendField) { // already handled by completeMember_Type
 			XtendField field = (XtendField) model;
 			if (!field.getModifiers().isEmpty())
 				return;
 		} else if (model instanceof XtendExecutable) {
 			return;
+		} else if (isExtendsClause(context)) {
+			return;
 		}
 		super.completeJvmParameterizedTypeReference_Type(model, assignment, context, acceptor);
+	}
+
+	private boolean isExtendsClause(ContentAssistContext context) {
+		return context.getLastCompleteNode() != null && context.getLastCompleteNode().getGrammarElement() instanceof Keyword
+				&& (((Keyword) context.getLastCompleteNode().getGrammarElement()) == grammarAccess.getTypeAccess()
+						.getExtendsKeyword_2_0_5_0())
+				|| (((Keyword) context.getLastCompleteNode().getGrammarElement()) == grammarAccess.getTypeAccess()
+						.getExtendsKeyword_2_1_5_0());
 	}
 	
 	@Override
@@ -329,6 +340,7 @@ public class XtendProposalProvider extends AbstractXtendProposalProvider {
 	@Override
 	public void completeType_Extends(EObject model, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
+		//	FIXME filter "self"
 		completeJavaTypes(context, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, true, getQualifiedNameValueConverter(),
 				new ITypesProposalProvider.Filter() {
 					@Override
@@ -339,6 +351,7 @@ public class XtendProposalProvider extends AbstractXtendProposalProvider {
 					@Override
 					public boolean accept(int modifiers, char[] packageName, char[] simpleTypeName,
 							char[][] enclosingTypeNames, String path) {
+						
 						if (TypeMatchFilters.isInternalClass(simpleTypeName, enclosingTypeNames))
 							return false;
 						if (!TypeMatchFilters.isAcceptableByPreference().accept(modifiers, packageName, simpleTypeName, enclosingTypeNames, path)) {
