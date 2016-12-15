@@ -22,8 +22,8 @@ subprojects {
 	group = 'org.eclipse.xtend'
 }
 
-task cleanLocalMavenRepo(type: Delete) {
-	group = 'Upload'
-	description = 'Delete the local Maven repository'
-	delete 'build/maven-repository'
+task clean(type: Delete) {
+	group 'Build'
+	description 'Deletes the local repositories'
+	delete 'build'
 }
