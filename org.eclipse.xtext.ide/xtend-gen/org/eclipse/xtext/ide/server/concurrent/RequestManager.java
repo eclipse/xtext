@@ -114,42 +114,39 @@ public class RequestManager {
    * </p>
    */
   public <V extends Object> CompletableFuture<V> runRead(final Function1<? super CancelIndicator, ? extends V> readRequest) {
-    try {
-      this.semaphore.acquire(1);
-      final Function<CancelChecker, V> _function = (CancelChecker it) -> {
+    final Function<CancelChecker, V> _function = (CancelChecker it) -> {
+      try {
+        final RequestCancelIndicator cancelIndicator = new RequestCancelIndicator(it);
+        this.cancelIndicators.add(cancelIndicator);
+        this.semaphore.acquire(1);
+        cancelIndicator.checkCanceled();
         try {
-          final RequestCancelIndicator cancelIndicator = new RequestCancelIndicator(it);
-          this.cancelIndicators.add(cancelIndicator);
-          try {
-            final CancelIndicator _function_1 = () -> {
-              cancelIndicator.checkCanceled();
-              return false;
-            };
-            return readRequest.apply(_function_1);
-          } catch (final Throwable _t) {
-            if (_t instanceof Throwable) {
-              final Throwable t = (Throwable)_t;
-              boolean _isCancelException = this.isCancelException(t);
-              if (_isCancelException) {
-                RequestManager.LOGGER.info("request cancelled.");
-                throw new CancellationException();
-              }
-              throw t;
-            } else {
-              throw Exceptions.sneakyThrow(_t);
+          final CancelIndicator _function_1 = () -> {
+            cancelIndicator.checkCanceled();
+            return false;
+          };
+          return readRequest.apply(_function_1);
+        } catch (final Throwable _t) {
+          if (_t instanceof Throwable) {
+            final Throwable t = (Throwable)_t;
+            boolean _isCancelException = this.isCancelException(t);
+            if (_isCancelException) {
+              RequestManager.LOGGER.info("request cancelled.");
+              throw new CancellationException();
             }
-          } finally {
-            this.cancelIndicators.remove(cancelIndicator);
-            this.semaphore.release(1);
+            throw t;
+          } else {
+            throw Exceptions.sneakyThrow(_t);
           }
-        } catch (Throwable _e) {
-          throw Exceptions.sneakyThrow(_e);
+        } finally {
+          this.cancelIndicators.remove(cancelIndicator);
+          this.semaphore.release(1);
         }
-      };
-      return CompletableFutures.<V>computeAsync(this.executorService, _function);
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+      } catch (Throwable _e) {
+        throw Exceptions.sneakyThrow(_e);
+      }
+    };
+    return CompletableFutures.<V>computeAsync(this.executorService, _function);
   }
   
   protected boolean isCancelException(final Throwable t) {

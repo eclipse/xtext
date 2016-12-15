@@ -51,7 +51,9 @@ import org.eclipse.lsp4j.TextEdit
 import org.eclipse.lsp4j.WorkspaceSymbolParams
 import org.eclipse.lsp4j.jsonrpc.Endpoint
 import org.eclipse.lsp4j.jsonrpc.services.ServiceEndpoints
+import org.eclipse.lsp4j.services.LanguageClientExtensions
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtend.lib.annotations.Data
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.LanguageInfo
 import org.eclipse.xtext.ide.server.Document
@@ -65,8 +67,6 @@ import org.eclipse.xtext.util.Files
 import org.eclipse.xtext.util.Modules2
 import org.junit.Assert
 import org.junit.Before
-import org.eclipse.lsp4j.services.LanguageClientExtensions
-import org.eclipse.xtend.lib.annotations.Data
 
 /**
  * @author Sven Efftinge - Initial contribution and API

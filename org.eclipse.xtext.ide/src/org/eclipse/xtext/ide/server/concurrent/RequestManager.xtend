@@ -95,10 +95,11 @@ class RequestManager {
 	 * </p>
 	 */
 	def <V> CompletableFuture<V> runRead((CancelIndicator)=>V readRequest) {
-		semaphore.acquire(1)
 		return CompletableFutures.computeAsync(executorService) [
 			val cancelIndicator = new RequestCancelIndicator(it)
 			cancelIndicators += cancelIndicator
+    		semaphore.acquire(1)
+    		cancelIndicator.checkCanceled
 			try {
 				return readRequest.apply [
 					cancelIndicator.checkCanceled
