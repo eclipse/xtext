@@ -3,12 +3,15 @@ node {
 	try {
 		stage 'Checkout'
 		checkout scm
+		
+		dir('build') {
+            deleteDir()
+        }
 			
 		stage 'Maven Build'
 		def mvnHome = tool 'M3'
 		env.M2_HOME = "${mvnHome}"
-		sh "rm -rf build/maven-repository/"
-		sh "${mvnHome}/bin/mvn clean deploy --update-snapshots -PuseJenkinsSnapshots -Dmaven.repo.local=local-maven-repository/"
+		sh "${mvnHome}/bin/mvn --batch-mode --update-snapshots -fae -PuseJenkinsSnapshots -Dmaven.test.failure.ignore=true -Dmaven.repo.local=.m2/repository clean deploy"
 		archive 'build/maven-repository/**/*.*'
 				
 		slackSend "Build Succeeded - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"

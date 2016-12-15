@@ -131,7 +131,7 @@ public class XtextGeneratorIT {
 			throw new IllegalArgumentException("You need to pass at least one goal to verify log");
 		}
 		Verifier verifier = newVerifier(pathToTestProject);
-		String localRepo = new File(System.getProperty("testProjectDir")+"/../../local-maven-repository/").getAbsoluteFile().getAbsolutePath();
+		String localRepo = new File(System.getProperty("testProjectDir")+"/../../.m2/repository/").getAbsoluteFile().getAbsolutePath();
 		verifier.setLocalRepo(localRepo);
 		
 		if(updateSnapshots) {
