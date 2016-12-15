@@ -39,7 +39,7 @@ public class PreferenceKey {
 
 	@Override
 	public String toString() {
-		return "Configration key '" + id + "' default value '" + getDefaultValue() + "'.";
+		return "Configuration key '" + id + "' default value '" + getDefaultValue() + "'.";
 	}
 
 	@Override
