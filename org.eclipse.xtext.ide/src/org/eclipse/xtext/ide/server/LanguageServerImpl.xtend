@@ -556,7 +556,7 @@ import org.eclipse.xtext.validation.Issue
 				access.<Void>doRead(it) [ ctx |
 					if (ctx.documentOpen) {
 						if (ctx.resource instanceof XtextResource) {
-							// XXX Do the coloring update iff the resource has no syntax errors?
+							// XXX Do the coloring update if the resource has no syntax errors?
 							val resource = ctx.resource as XtextResource;
 							val serviceProvider = resource.URI.resourceServiceProvider;
 							val coloringService = serviceProvider?.get(IColoringService);

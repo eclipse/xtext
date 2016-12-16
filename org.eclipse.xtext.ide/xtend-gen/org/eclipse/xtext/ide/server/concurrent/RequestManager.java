@@ -8,7 +8,6 @@
 package org.eclipse.xtext.ide.server.concurrent;
 
 import com.google.inject.Inject;
-import com.google.inject.Singleton;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionException;
@@ -30,7 +29,6 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
  * @author kosyakov - Initial contribution and API
  * @since 2.11
  */
-@Singleton
 @SuppressWarnings("all")
 public class RequestManager {
   private final static Logger LOGGER = Logger.getLogger(RequestManager.class);

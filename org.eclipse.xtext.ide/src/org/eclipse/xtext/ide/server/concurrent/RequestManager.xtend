@@ -8,7 +8,6 @@
 package org.eclipse.xtext.ide.server.concurrent
 
 import com.google.inject.Inject
-import com.google.inject.Singleton
 import java.util.concurrent.CancellationException
 import java.util.concurrent.CompletableFuture
 import java.util.concurrent.CompletionException
@@ -16,15 +15,14 @@ import java.util.concurrent.ExecutorService
 import java.util.concurrent.LinkedBlockingQueue
 import java.util.concurrent.Semaphore
 import org.apache.log4j.Logger
-import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.lsp4j.jsonrpc.CompletableFutures
 import org.eclipse.xtext.service.OperationCanceledManager
+import org.eclipse.xtext.util.CancelIndicator
 
 /**
  * @author kosyakov - Initial contribution and API
  * @since 2.11
  */
-@Singleton
 class RequestManager {
     
     static val LOGGER = Logger.getLogger(RequestManager)
