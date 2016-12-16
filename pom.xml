@@ -15,10 +15,9 @@
 	<version>2.11.0-SNAPSHOT</version>
 
 	<modules>
-		<module>org.eclipse.xtext.parent</module>
-		<module>org.eclipse.xtext.xtext</module>
+		<module>org.eclipse.xtext.maven.parent</module>
 		<module>org.eclipse.xtext.maven.plugin</module>
+		<module>org.eclipse.xtext.xtext</module>
 	</modules>
 
 </project>
-	
