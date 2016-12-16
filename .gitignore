@@ -1,4 +1,5 @@
 /.m2/
+/build/
 bin/
 target/
 *._trace
