@@ -3,10 +3,10 @@ node {
 	try {
 		stage 'Checkout'
 		checkout scm
-			
-		dir('build') {
-			deleteDir()
-		}
+		
+		dir('build') { deleteDir() }
+		dir('.m2/repository/org/eclipse/xtext') { deleteDir() }
+		dir('.m2/repository/org/eclipse/xtend') { deleteDir() }
 		
 		stage 'Maven Build'
 		def mvnHome = tool 'M3'
@@ -18,8 +18,7 @@ node {
 			step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/*.xml'])
 		}
 		archive 'build/**'
-				
-
+		
 		if (currentBuild.result == 'UNSTABLE') {
 			slackSend color: 'warning', message: "Build Unstable - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
 		} else {
