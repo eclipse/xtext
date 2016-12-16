@@ -4,9 +4,9 @@ node {
 		stage 'Checkout'
 		checkout scm
 		
-		dir('build') {
-			deleteDir()
-		}
+		dir('build') { deleteDir() }
+		dir('.m2/repository/org/eclipse/xtext') { deleteDir() }
+		dir('.m2/repository/org/eclipse/xtend') { deleteDir() }
 			
 		stage 'Maven Build'
 		def mvnHome = tool 'M3'
