@@ -27,6 +27,8 @@
 		<unit id="org.eclipse.xtext.util.source" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.xtext.generator" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.xtext.generator.source" version="0.0.0"/>
+		<unit id="org.eclipse.xtext.xtext.ide" version="0.0.0"/>
+		<unit id="org.eclipse.xtext.xtext.ide.source" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.xtext.wizard" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.xtext.wizard.source" version="0.0.0"/>
 		<unit id="org.eclipse.xtext.testlanguages" version="0.0.0"/>
