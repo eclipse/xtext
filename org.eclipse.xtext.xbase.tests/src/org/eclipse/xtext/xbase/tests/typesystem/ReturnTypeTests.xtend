@@ -151,6 +151,33 @@ abstract class AbstractReturnTypeTest<Reference> extends AbstractTypeResolverTes
 		"{ while(null instanceof String) return '' return '' }".resolvesTo("String")
 	}
 	
+	@Test def void testWhileExpression_EarlyExitWithSwitchCase() throws Exception {
+		'while(true) {
+			switch "test" {
+				case "foo" : return "result"
+			}
+		}'.resolvesTo("String")
+	}
+	
+	@Test def void testWhileExpression_EarlyExitWithSwitchDefault() throws Exception {
+		'while(true) {
+			switch "test" {
+				case "foo" : {}
+				default : return "result"
+			}
+		}'.resolvesTo("String")
+	}
+	
+	@Test def void testWhileExpression_EarlyExitWithSwitchAndIf() throws Exception {
+		'while(true) {
+			if(false) {
+				switch "test" {
+					case "foo" : if(false) return "result"
+				}
+			}
+		}'.resolvesTo("String")
+	}
+	
 	@Test override testTryCatchFinallyExpression_08() throws Exception {
 		"try return 'foo' catch (Exception e) return 'bar'".resolvesTo("String") 
 	}

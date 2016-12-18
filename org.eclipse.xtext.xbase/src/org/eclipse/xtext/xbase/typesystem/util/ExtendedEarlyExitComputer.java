@@ -65,7 +65,18 @@ public class ExtendedEarlyExitComputer {
 				}
 			}
 		} else if (expression instanceof XIfExpression) {
-			return isIntentionalEarlyExit(((XIfExpression) expression).getThen()) && isIntentionalEarlyExit(((XIfExpression) expression).getElse());
+			return isIntentionalEarlyExit(((XIfExpression) expression).getThen()) 
+					|| isIntentionalEarlyExit(((XIfExpression) expression).getElse());
+		} else if (expression instanceof XSwitchExpression) {
+			XSwitchExpression switchExpression = (XSwitchExpression) expression;
+			for(XCasePart caseExpression: switchExpression.getCases()) {
+				if (isIntentionalEarlyExit(caseExpression.getThen())) {
+					return true;
+				}
+			}
+			if (isIntentionalEarlyExit(switchExpression.getDefault())) {
+				return true;
+			}
 		} else if (expression instanceof XTryCatchFinallyExpression) {
 			XTryCatchFinallyExpression tryCatchFinally = (XTryCatchFinallyExpression) expression;
 			if (isIntentionalEarlyExit(tryCatchFinally.getExpression())) {
