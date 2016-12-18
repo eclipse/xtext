@@ -11,6 +11,7 @@ package org.eclipse.xtext.parser.antlr;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -211,7 +212,7 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 	
 	private int lastConsumedIndex = -1;
 
-	private final Map<String, AbstractRule> allRules;
+	private Map<String, AbstractRule> allRules;
 	
 	private ISyntaxErrorMessageProvider syntaxErrorProvider;
 	
@@ -221,21 +222,28 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 	
 	protected AbstractInternalAntlrParser(TokenStream input) {
 		super(input);
-		allRules = Maps.newHashMap();
 	}
 	
 	protected AbstractInternalAntlrParser(TokenStream input, RecognizerSharedState state) {
 		super(input, state);
-		allRules = Maps.newHashMap();
 	}
 
 	protected void registerRules(Grammar grammar) {
+		allRules = createAllRules(grammar);
+	}
+	
+	/**
+	 * @since 2.11
+	 */
+	protected Map<String, AbstractRule> createAllRules(Grammar grammar) {
+		Map<String, AbstractRule> allRules = Maps.newHashMap();
 		for (AbstractRule rule: GrammarUtil.allRules(grammar)) {
 			if(rule instanceof TerminalRule)
 				allRules.put(rule.getName().toUpperCase(), rule);
 			else
 				allRules.put(rule.getName(), rule);
 		}
+		return allRules;
 	}
 
 	public TokenStream getInput() {
