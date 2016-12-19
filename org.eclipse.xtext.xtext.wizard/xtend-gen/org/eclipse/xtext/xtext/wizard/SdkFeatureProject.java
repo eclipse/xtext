@@ -103,7 +103,7 @@ public class SdkFeatureProject extends ProjectDescriptor {
     _builder.newLine();
     _builder.append("<feature id=\"");
     String _name = this.getName();
-    _builder.append(_name, "");
+    _builder.append(_name);
     _builder.append("\"");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");

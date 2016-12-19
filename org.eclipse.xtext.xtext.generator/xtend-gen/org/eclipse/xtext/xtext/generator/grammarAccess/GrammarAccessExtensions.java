@@ -130,10 +130,10 @@ public class GrammarAccessExtensions {
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         Grammar _grammar = GrammarUtil.getGrammar(ele);
         TypeReference _grammarAccess = GrammarAccessExtensions.this.getGrammarAccess(_grammar);
-        _builder.append(_grammarAccess, "");
+        _builder.append(_grammarAccess);
         _builder.append(".INSTANCE.");
         String _gaRuleElementAccessor = GrammarAccessExtensions.this.gaRuleElementAccessor(ele);
-        _builder.append(_gaRuleElementAccessor, "");
+        _builder.append(_gaRuleElementAccessor);
       }
     };
     return _client;
@@ -928,7 +928,7 @@ public class GrammarAccessExtensions {
         _builder.append("\"");
         String _value = ((Keyword)it).getValue();
         String _stringInAntlrAction = AntlrGrammarGenUtil.toStringInAntlrAction(_value);
-        _builder.append(_stringInAntlrAction, "");
+        _builder.append(_stringInAntlrAction);
         _builder.append("\"");
         _switchResult = _builder;
       }

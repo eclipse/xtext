@@ -92,7 +92,7 @@ public class RefactorElementNameFragment2 extends AbstractXtextGeneratorFragment
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         _builder.append("binder.bind(");
         TypeReference _typeRef = TypeReference.typeRef("org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreInitializer");
-        _builder.append(_typeRef, "");
+        _builder.append(_typeRef);
         _builder.append(".class)");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
@@ -129,13 +129,13 @@ public class RefactorElementNameFragment2 extends AbstractXtextGeneratorFragment
         protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
           _builder.append("binder.bind(");
           TypeReference _typeReference = new TypeReference("org.eclipse.xtext.ui.refactoring", "IRenameStrategy.Provider");
-          _builder.append(_typeReference, "");
+          _builder.append(_typeReference);
           _builder.append(".class).annotatedWith(");
           TypeReference _typeReference_1 = new TypeReference("org.eclipse.xtext.common.types.ui.refactoring.participant", "JvmMemberRenameStrategy.Provider.Delegate");
-          _builder.append(_typeReference_1, "");
+          _builder.append(_typeReference_1);
           _builder.append(".class).to(");
           TypeReference _typeRef = TypeReference.typeRef("org.eclipse.xtext.ui.refactoring.impl.DefaultRenameStrategyProvider");
-          _builder.append(_typeRef, "");
+          _builder.append(_typeRef);
           _builder.append(".class);");
           _builder.newLineIfNotEmpty();
         }

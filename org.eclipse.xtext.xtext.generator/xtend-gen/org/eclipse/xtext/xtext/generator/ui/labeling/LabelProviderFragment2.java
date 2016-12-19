@@ -143,11 +143,11 @@ public class LabelProviderFragment2 extends AbstractStubGeneratingFragment {
         @Override
         protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
           _builder.append("binder.bind(");
-          _builder.append(iLabelProviderClass, "");
+          _builder.append(iLabelProviderClass);
           _builder.append(".class).annotatedWith(");
-          _builder.append(rsdLabelProviderClass, "");
+          _builder.append(rsdLabelProviderClass);
           _builder.append(".class).to(");
-          _builder.append(descriptionLabelProviderClass, "");
+          _builder.append(descriptionLabelProviderClass);
           _builder.append(".class);");
           _builder.newLineIfNotEmpty();
         }
@@ -193,11 +193,11 @@ public class LabelProviderFragment2 extends AbstractStubGeneratingFragment {
         Grammar _grammar = LabelProviderFragment2.this.getGrammar();
         TypeReference _eObjectLabelProviderClass = LabelProviderFragment2.this.getEObjectLabelProviderClass(_grammar);
         String _simpleName = _eObjectLabelProviderClass.getSimpleName();
-        _builder.append(_simpleName, "");
+        _builder.append(_simpleName);
         _builder.append(" extends ");
         Grammar _grammar_1 = LabelProviderFragment2.this.getGrammar();
         TypeReference _eObjectLabelProviderSuperClass = LabelProviderFragment2.this.getEObjectLabelProviderSuperClass(_grammar_1);
-        _builder.append(_eObjectLabelProviderSuperClass, "");
+        _builder.append(_eObjectLabelProviderSuperClass);
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
         _builder.newLine();
@@ -272,11 +272,11 @@ public class LabelProviderFragment2 extends AbstractStubGeneratingFragment {
         Grammar _grammar = LabelProviderFragment2.this.getGrammar();
         TypeReference _descriptionLabelProviderClass = LabelProviderFragment2.this.getDescriptionLabelProviderClass(_grammar);
         String _simpleName = _descriptionLabelProviderClass.getSimpleName();
-        _builder.append(_simpleName, "");
+        _builder.append(_simpleName);
         _builder.append(" extends ");
         Grammar _grammar_1 = LabelProviderFragment2.this.getGrammar();
         TypeReference _descriptionLabelProviderSuperClass = LabelProviderFragment2.this.getDescriptionLabelProviderSuperClass(_grammar_1);
-        _builder.append(_descriptionLabelProviderSuperClass, "");
+        _builder.append(_descriptionLabelProviderSuperClass);
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
         _builder.newLine();
@@ -334,11 +334,11 @@ public class LabelProviderFragment2 extends AbstractStubGeneratingFragment {
         Grammar _grammar = LabelProviderFragment2.this.getGrammar();
         TypeReference _eObjectLabelProviderClass = LabelProviderFragment2.this.getEObjectLabelProviderClass(_grammar);
         String _simpleName = _eObjectLabelProviderClass.getSimpleName();
-        _builder.append(_simpleName, "");
+        _builder.append(_simpleName);
         _builder.append(" extends ");
         Grammar _grammar_1 = LabelProviderFragment2.this.getGrammar();
         TypeReference _eObjectLabelProviderSuperClass = LabelProviderFragment2.this.getEObjectLabelProviderSuperClass(_grammar_1);
-        _builder.append(_eObjectLabelProviderSuperClass, "");
+        _builder.append(_eObjectLabelProviderSuperClass);
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
         _builder.newLine();
@@ -418,11 +418,11 @@ public class LabelProviderFragment2 extends AbstractStubGeneratingFragment {
         Grammar _grammar = LabelProviderFragment2.this.getGrammar();
         TypeReference _descriptionLabelProviderClass = LabelProviderFragment2.this.getDescriptionLabelProviderClass(_grammar);
         String _simpleName = _descriptionLabelProviderClass.getSimpleName();
-        _builder.append(_simpleName, "");
+        _builder.append(_simpleName);
         _builder.append(" extends ");
         Grammar _grammar_1 = LabelProviderFragment2.this.getGrammar();
         TypeReference _descriptionLabelProviderSuperClass = LabelProviderFragment2.this.getDescriptionLabelProviderSuperClass(_grammar_1);
-        _builder.append(_descriptionLabelProviderSuperClass, "");
+        _builder.append(_descriptionLabelProviderSuperClass);
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
         _builder.newLine();

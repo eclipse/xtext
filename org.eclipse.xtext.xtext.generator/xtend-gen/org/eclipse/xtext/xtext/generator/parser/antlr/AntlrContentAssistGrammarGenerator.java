@@ -214,7 +214,7 @@ public class AntlrContentAssistGrammarGenerator extends AbstractAntlrGrammarWith
     GrammarNaming _grammarNaming = this.getGrammarNaming();
     TypeReference _internalParserSuperClass = _grammarNaming.getInternalParserSuperClass(it);
     String _name = _internalParserSuperClass.getName();
-    _builder.append(_name, "");
+    _builder.append(_name);
     _builder.append(";");
     _builder.newLineIfNotEmpty();
     _builder.append("import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.DFA;");
@@ -222,7 +222,7 @@ public class AntlrContentAssistGrammarGenerator extends AbstractAntlrGrammarWith
     _builder.append("import ");
     TypeReference _grammarAccess = this._grammarAccessExtensions.getGrammarAccess(it);
     String _name_1 = _grammarAccess.getName();
-    _builder.append(_name_1, "");
+    _builder.append(_name_1);
     _builder.append(";");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
@@ -252,7 +252,7 @@ public class AntlrContentAssistGrammarGenerator extends AbstractAntlrGrammarWith
       for(final EObject rule : _filter) {
         _builder.newLine();
         CharSequence _compileRule = this.compileRule(rule, g, options);
-        _builder.append(_compileRule, "");
+        _builder.append(_compileRule);
         _builder.newLineIfNotEmpty();
       }
     }
@@ -260,7 +260,7 @@ public class AntlrContentAssistGrammarGenerator extends AbstractAntlrGrammarWith
       boolean _isCombinedGrammar = this.isCombinedGrammar();
       if (_isCombinedGrammar) {
         CharSequence _compileTerminalRules = this.compileTerminalRules(g, options);
-        _builder.append(_compileTerminalRules, "");
+        _builder.append(_compileTerminalRules);
         _builder.newLineIfNotEmpty();
       }
     }
@@ -275,10 +275,10 @@ public class AntlrContentAssistGrammarGenerator extends AbstractAntlrGrammarWith
       if (_isValidEntryRule) {
         _builder.append("// Entry rule ");
         String _entryRuleName = this._grammarAccessExtensions.entryRuleName(it);
-        _builder.append(_entryRuleName, "");
+        _builder.append(_entryRuleName);
         _builder.newLineIfNotEmpty();
         String _entryRuleName_1 = this._grammarAccessExtensions.entryRuleName(it);
-        _builder.append(_entryRuleName_1, "");
+        _builder.append(_entryRuleName_1);
         _builder.newLineIfNotEmpty();
         {
           boolean _isDefinesHiddenTokens = it.isDefinesHiddenTokens();
@@ -298,7 +298,7 @@ public class AntlrContentAssistGrammarGenerator extends AbstractAntlrGrammarWith
         _builder.append("{ before(grammarAccess.");
         ParserRule _originalElement = AntlrGrammarGenUtil.<ParserRule>getOriginalElement(it);
         String _grammarElementAccess = this._grammarAccessExtensions.grammarElementAccess(_originalElement);
-        _builder.append(_grammarElementAccess, "");
+        _builder.append(_grammarElementAccess);
         _builder.append("); }");
         _builder.newLineIfNotEmpty();
         _builder.append("\t ");
@@ -308,7 +308,7 @@ public class AntlrContentAssistGrammarGenerator extends AbstractAntlrGrammarWith
         _builder.append("{ after(grammarAccess.");
         ParserRule _originalElement_1 = AntlrGrammarGenUtil.<ParserRule>getOriginalElement(it);
         String _grammarElementAccess_1 = this._grammarAccessExtensions.grammarElementAccess(_originalElement_1);
-        _builder.append(_grammarElementAccess_1, "");
+        _builder.append(_grammarElementAccess_1);
         _builder.append("); } ");
         _builder.newLineIfNotEmpty();
         _builder.append("\t ");
@@ -335,10 +335,10 @@ public class AntlrContentAssistGrammarGenerator extends AbstractAntlrGrammarWith
     _builder.append("// Rule ");
     ParserRule _originalElement_2 = AntlrGrammarGenUtil.<ParserRule>getOriginalElement(it);
     String _name = _originalElement_2.getName();
-    _builder.append(_name, "");
+    _builder.append(_name);
     _builder.newLineIfNotEmpty();
     String _ruleName_1 = this._grammarAccessExtensions.ruleName(it);
-    _builder.append(_ruleName_1, "");
+    _builder.append(_ruleName_1);
     _builder.append(" ");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
@@ -384,10 +384,10 @@ public class AntlrContentAssistGrammarGenerator extends AbstractAntlrGrammarWith
     _builder.append("// Rule ");
     EnumRule _originalElement = AntlrGrammarGenUtil.<EnumRule>getOriginalElement(it);
     String _name = _originalElement.getName();
-    _builder.append(_name, "");
+    _builder.append(_name);
     _builder.newLineIfNotEmpty();
     String _ruleName = this._grammarAccessExtensions.ruleName(it);
-    _builder.append(_ruleName, "");
+    _builder.append(_ruleName);
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.append("@init {");
@@ -421,11 +421,11 @@ public class AntlrContentAssistGrammarGenerator extends AbstractAntlrGrammarWith
     StringConcatenation _builder = new StringConcatenation();
     AbstractRule _containingRule = GrammarUtil.containingRule(it);
     String _contentAssistRuleName = AntlrGrammarGenUtil.getContentAssistRuleName(_containingRule);
-    _builder.append(_contentAssistRuleName, "");
+    _builder.append(_contentAssistRuleName);
     _builder.append("__");
     Alternatives _originalElement = AntlrGrammarGenUtil.<Alternatives>getOriginalElement(it);
     String _gaElementIdentifier = this._grammarAccessExtensions.gaElementIdentifier(_originalElement);
-    _builder.append(_gaElementIdentifier, "");
+    _builder.append(_gaElementIdentifier);
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.append("@init {");
@@ -469,11 +469,11 @@ public class AntlrContentAssistGrammarGenerator extends AbstractAntlrGrammarWith
     StringConcatenation _builder = new StringConcatenation();
     AbstractRule _containingRule = GrammarUtil.containingRule(it);
     String _contentAssistRuleName = AntlrGrammarGenUtil.getContentAssistRuleName(_containingRule);
-    _builder.append(_contentAssistRuleName, "");
+    _builder.append(_contentAssistRuleName);
     _builder.append("__");
     Assignment _originalElement = AntlrGrammarGenUtil.<Assignment>getOriginalElement(it);
     String _gaElementIdentifier = this._grammarAccessExtensions.gaElementIdentifier(_originalElement);
-    _builder.append(_gaElementIdentifier, "");
+    _builder.append(_gaElementIdentifier);
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.append("@init {");
@@ -515,11 +515,11 @@ public class AntlrContentAssistGrammarGenerator extends AbstractAntlrGrammarWith
       StringConcatenation _builder = new StringConcatenation();
       AbstractRule _containingRule = GrammarUtil.containingRule(it);
       String _contentAssistRuleName = AntlrGrammarGenUtil.getContentAssistRuleName(_containingRule);
-      _builder.append(_contentAssistRuleName, "");
+      _builder.append(_contentAssistRuleName);
       _builder.append("__");
       UnorderedGroup _originalElement = AntlrGrammarGenUtil.<UnorderedGroup>getOriginalElement(it);
       String _gaElementIdentifier = this._grammarAccessExtensions.gaElementIdentifier(_originalElement);
-      _builder.append(_gaElementIdentifier, "");
+      _builder.append(_gaElementIdentifier);
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
       _builder.append("@init {");
@@ -582,11 +582,11 @@ public class AntlrContentAssistGrammarGenerator extends AbstractAntlrGrammarWith
       _builder.newLine();
       _builder.newLine();
       CharSequence _ruleImpl = this.ruleImpl(it, grammar, options);
-      _builder.append(_ruleImpl, "");
+      _builder.append(_ruleImpl);
       _builder.newLineIfNotEmpty();
       _builder.newLine();
       CharSequence _ruleImpl_1 = this.ruleImpl(it, grammar, options, 0);
-      _builder.append(_ruleImpl_1, "");
+      _builder.append(_ruleImpl_1);
       _builder.newLineIfNotEmpty();
       _xblockexpression = _builder;
     }
@@ -596,7 +596,7 @@ public class AntlrContentAssistGrammarGenerator extends AbstractAntlrGrammarWith
   protected CharSequence _compileRule(final Group it, final Grammar grammar, final AntlrOptions options) {
     StringConcatenation _builder = new StringConcatenation();
     CharSequence _ruleImpl = this.ruleImpl(it, grammar, options, 0);
-    _builder.append(_ruleImpl, "");
+    _builder.append(_ruleImpl);
     _builder.newLineIfNotEmpty();
     return _builder;
   }
@@ -605,11 +605,11 @@ public class AntlrContentAssistGrammarGenerator extends AbstractAntlrGrammarWith
     StringConcatenation _builder = new StringConcatenation();
     AbstractRule _containingRule = GrammarUtil.containingRule(it);
     String _contentAssistRuleName = AntlrGrammarGenUtil.getContentAssistRuleName(_containingRule);
-    _builder.append(_contentAssistRuleName, "");
+    _builder.append(_contentAssistRuleName);
     _builder.append("__");
     UnorderedGroup _originalElement = AntlrGrammarGenUtil.<UnorderedGroup>getOriginalElement(it);
     String _gaElementIdentifier = this._grammarAccessExtensions.gaElementIdentifier(_originalElement);
-    _builder.append(_gaElementIdentifier, "");
+    _builder.append(_gaElementIdentifier);
     _builder.append("__Impl");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
@@ -841,13 +841,13 @@ public class AntlrContentAssistGrammarGenerator extends AbstractAntlrGrammarWith
     StringConcatenation _builder = new StringConcatenation();
     AbstractRule _containingRule = GrammarUtil.containingRule(it);
     String _contentAssistRuleName = AntlrGrammarGenUtil.getContentAssistRuleName(_containingRule);
-    _builder.append(_contentAssistRuleName, "");
+    _builder.append(_contentAssistRuleName);
     _builder.append("__");
     UnorderedGroup _originalElement = AntlrGrammarGenUtil.<UnorderedGroup>getOriginalElement(it);
     String _gaElementIdentifier = this._grammarAccessExtensions.gaElementIdentifier(_originalElement);
-    _builder.append(_gaElementIdentifier, "");
+    _builder.append(_gaElementIdentifier);
     _builder.append("__");
-    _builder.append(index, "");
+    _builder.append(index);
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.append("@init {");
@@ -905,7 +905,7 @@ public class AntlrContentAssistGrammarGenerator extends AbstractAntlrGrammarWith
       boolean _greaterThan_1 = (_size_1 > (index + 1));
       if (_greaterThan_1) {
         CharSequence _ruleImpl = this.ruleImpl(it, grammar, options, (index + 1));
-        _builder.append(_ruleImpl, "");
+        _builder.append(_ruleImpl);
         _builder.newLineIfNotEmpty();
       }
     }
@@ -916,13 +916,13 @@ public class AntlrContentAssistGrammarGenerator extends AbstractAntlrGrammarWith
     StringConcatenation _builder = new StringConcatenation();
     AbstractRule _containingRule = GrammarUtil.containingRule(it);
     String _contentAssistRuleName = AntlrGrammarGenUtil.getContentAssistRuleName(_containingRule);
-    _builder.append(_contentAssistRuleName, "");
+    _builder.append(_contentAssistRuleName);
     _builder.append("__");
     Group _originalElement = AntlrGrammarGenUtil.<Group>getOriginalElement(it);
     String _gaElementIdentifier = this._grammarAccessExtensions.gaElementIdentifier(_originalElement);
-    _builder.append(_gaElementIdentifier, "");
+    _builder.append(_gaElementIdentifier);
     _builder.append("__");
-    _builder.append(index, "");
+    _builder.append(index);
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.append("@init {");
@@ -977,13 +977,13 @@ public class AntlrContentAssistGrammarGenerator extends AbstractAntlrGrammarWith
     _builder.newLine();
     AbstractRule _containingRule_3 = GrammarUtil.containingRule(it);
     String _contentAssistRuleName_3 = AntlrGrammarGenUtil.getContentAssistRuleName(_containingRule_3);
-    _builder.append(_contentAssistRuleName_3, "");
+    _builder.append(_contentAssistRuleName_3);
     _builder.append("__");
     Group _originalElement_3 = AntlrGrammarGenUtil.<Group>getOriginalElement(it);
     String _gaElementIdentifier_3 = this._grammarAccessExtensions.gaElementIdentifier(_originalElement_3);
-    _builder.append(_gaElementIdentifier_3, "");
+    _builder.append(_gaElementIdentifier_3);
     _builder.append("__");
-    _builder.append(index, "");
+    _builder.append(index);
     _builder.append("__Impl");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
@@ -1000,7 +1000,7 @@ public class AntlrContentAssistGrammarGenerator extends AbstractAntlrGrammarWith
     EList<AbstractElement> _elements_1 = it.getElements();
     AbstractElement _get = _elements_1.get(index);
     String _ebnf = this.ebnf(_get, options, false);
-    _builder.append(_ebnf, "");
+    _builder.append(_ebnf);
     _builder.newLineIfNotEmpty();
     _builder.append(";");
     _builder.newLine();
@@ -1018,7 +1018,7 @@ public class AntlrContentAssistGrammarGenerator extends AbstractAntlrGrammarWith
       boolean _greaterThan_1 = (_size_1 > (index + 1));
       if (_greaterThan_1) {
         CharSequence _ruleImpl = this.ruleImpl(it, grammar, options, (index + 1));
-        _builder.append(_ruleImpl, "");
+        _builder.append(_ruleImpl);
         _builder.newLineIfNotEmpty();
       }
     }
@@ -1145,7 +1145,7 @@ public class AntlrContentAssistGrammarGenerator extends AbstractAntlrGrammarWith
         _builder.append(", ");
         AbstractRule _containingRule = GrammarUtil.containingRule(it);
         int _parameterConfig = AntlrGrammarGenUtil.getParameterConfig(((ParserRule) _containingRule));
-        _builder.append(_parameterConfig, "");
+        _builder.append(_parameterConfig);
         _builder.newLineIfNotEmpty();
       }
     }
@@ -1326,11 +1326,11 @@ public class AntlrContentAssistGrammarGenerator extends AbstractAntlrGrammarWith
     StringConcatenation _builder = new StringConcatenation();
     AbstractRule _containingRule = GrammarUtil.containingRule(it);
     String _contentAssistRuleName = AntlrGrammarGenUtil.getContentAssistRuleName(_containingRule);
-    _builder.append(_contentAssistRuleName, "");
+    _builder.append(_contentAssistRuleName);
     _builder.append("__");
     Alternatives _originalElement = AntlrGrammarGenUtil.<Alternatives>getOriginalElement(it);
     String _gaElementIdentifier = this._grammarAccessExtensions.gaElementIdentifier(_originalElement);
-    _builder.append(_gaElementIdentifier, "");
+    _builder.append(_gaElementIdentifier);
     return _builder.toString();
   }
   
@@ -1339,11 +1339,11 @@ public class AntlrContentAssistGrammarGenerator extends AbstractAntlrGrammarWith
     StringConcatenation _builder = new StringConcatenation();
     AbstractRule _containingRule = GrammarUtil.containingRule(it);
     String _contentAssistRuleName = AntlrGrammarGenUtil.getContentAssistRuleName(_containingRule);
-    _builder.append(_contentAssistRuleName, "");
+    _builder.append(_contentAssistRuleName);
     _builder.append("__");
     Assignment _originalElement = AntlrGrammarGenUtil.<Assignment>getOriginalElement(it);
     String _gaElementIdentifier = this._grammarAccessExtensions.gaElementIdentifier(_originalElement);
-    _builder.append(_gaElementIdentifier, "");
+    _builder.append(_gaElementIdentifier);
     return _builder.toString();
   }
   
@@ -1352,11 +1352,11 @@ public class AntlrContentAssistGrammarGenerator extends AbstractAntlrGrammarWith
     StringConcatenation _builder = new StringConcatenation();
     AbstractRule _containingRule = GrammarUtil.containingRule(it);
     String _contentAssistRuleName = AntlrGrammarGenUtil.getContentAssistRuleName(_containingRule);
-    _builder.append(_contentAssistRuleName, "");
+    _builder.append(_contentAssistRuleName);
     _builder.append("__");
     Group _originalElement = AntlrGrammarGenUtil.<Group>getOriginalElement(it);
     String _gaElementIdentifier = this._grammarAccessExtensions.gaElementIdentifier(_originalElement);
-    _builder.append(_gaElementIdentifier, "");
+    _builder.append(_gaElementIdentifier);
     _builder.append("__0");
     return _builder.toString();
   }
@@ -1366,11 +1366,11 @@ public class AntlrContentAssistGrammarGenerator extends AbstractAntlrGrammarWith
     StringConcatenation _builder = new StringConcatenation();
     AbstractRule _containingRule = GrammarUtil.containingRule(it);
     String _contentAssistRuleName = AntlrGrammarGenUtil.getContentAssistRuleName(_containingRule);
-    _builder.append(_contentAssistRuleName, "");
+    _builder.append(_contentAssistRuleName);
     _builder.append("__");
     UnorderedGroup _originalElement = AntlrGrammarGenUtil.<UnorderedGroup>getOriginalElement(it);
     String _gaElementIdentifier = this._grammarAccessExtensions.gaElementIdentifier(_originalElement);
-    _builder.append(_gaElementIdentifier, "");
+    _builder.append(_gaElementIdentifier);
     return _builder.toString();
   }
   

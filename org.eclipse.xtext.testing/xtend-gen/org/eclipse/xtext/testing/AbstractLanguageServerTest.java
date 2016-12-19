@@ -311,7 +311,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     {
       for(final Object element : elements) {
         String _expectation = this.toExpectation(element);
-        _builder.append(_expectation, "");
+        _builder.append(_expectation);
         _builder.newLineIfNotEmpty();
       }
     }
@@ -324,7 +324,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
   
   protected String _toExpectation(final Integer it) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append(it, "");
+    _builder.append(it);
     return _builder.toString();
   }
   
@@ -336,11 +336,11 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     StringConcatenation _builder = new StringConcatenation();
     String _uri = it.getUri();
     Path _relativize = this.relativize(_uri);
-    _builder.append(_relativize, "");
+    _builder.append(_relativize);
     _builder.append(" ");
     Range _range = it.getRange();
     String _expectation = this.toExpectation(_range);
-    _builder.append(_expectation, "");
+    _builder.append(_expectation);
     return _builder.toString();
   }
   
@@ -349,11 +349,11 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     _builder.append("[");
     Position _start = it.getStart();
     String _expectation = this.toExpectation(_start);
-    _builder.append(_expectation, "");
+    _builder.append(_expectation);
     _builder.append(" .. ");
     Position _end = it.getEnd();
     String _expectation_1 = this.toExpectation(_end);
-    _builder.append(_expectation_1, "");
+    _builder.append(_expectation_1);
     _builder.append("]");
     return _builder.toString();
   }
@@ -362,10 +362,10 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("[");
     int _line = it.getLine();
-    _builder.append(_line, "");
+    _builder.append(_line);
     _builder.append(", ");
     int _character = it.getCharacter();
-    _builder.append(_character, "");
+    _builder.append(_character);
     _builder.append("]");
     return _builder.toString();
   }
@@ -374,7 +374,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("symbol \"");
     String _name = it.getName();
-    _builder.append(_name, "");
+    _builder.append(_name);
     _builder.append("\" {");
     _builder.newLineIfNotEmpty();
     _builder.append("    ");
@@ -410,7 +410,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
   protected String _toExpectation(final CompletionItem it) {
     StringConcatenation _builder = new StringConcatenation();
     String _label = it.getLabel();
-    _builder.append(_label, "");
+    _builder.append(_label);
     {
       String _detail = it.getDetail();
       boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(_detail);
@@ -418,7 +418,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       if (_not) {
         _builder.append(" (");
         String _detail_1 = it.getDetail();
-        _builder.append(_detail_1, "");
+        _builder.append(_detail_1);
         _builder.append(")");
       }
     }
@@ -429,12 +429,12 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
         _builder.append(" -> ");
         TextEdit _textEdit_1 = it.getTextEdit();
         String _expectation = this.toExpectation(_textEdit_1);
-        _builder.append(_expectation, "");
+        _builder.append(_expectation);
       } else {
         if (((it.getInsertText() != null) && (!Objects.equal(it.getInsertText(), it.getLabel())))) {
           _builder.append(" -> ");
           String _insertText = it.getInsertText();
-          _builder.append(_insertText, "");
+          _builder.append(_insertText);
         }
       }
     }
@@ -445,11 +445,11 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
   protected String _toExpectation(final TextEdit it) {
     StringConcatenation _builder = new StringConcatenation();
     String _newText = it.getNewText();
-    _builder.append(_newText, "");
+    _builder.append(_newText);
     _builder.append(" ");
     Range _range = it.getRange();
     String _expectation = this.toExpectation(_range);
-    _builder.append(_expectation, "");
+    _builder.append(_expectation);
     _builder.newLineIfNotEmpty();
     return _builder.toString();
   }
@@ -458,13 +458,13 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     StringConcatenation _builder = new StringConcatenation();
     Range _range = it.getRange();
     String _expectation = this.toExpectation(_range);
-    _builder.append(_expectation, "");
+    _builder.append(_expectation);
     _builder.newLineIfNotEmpty();
     {
       List<String> _contents = it.getContents();
       for(final String content : _contents) {
         String _expectation_1 = this.toExpectation(content);
-        _builder.append(_expectation_1, "");
+        _builder.append(_expectation_1);
         _builder.newLineIfNotEmpty();
       }
     }
@@ -481,7 +481,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("Signature index is expected to be null when no signatures are available. Was: ");
         Integer _activeSignature = it.getActiveSignature();
-        _builder.append(_activeSignature, "");
+        _builder.append(_activeSignature);
         _builder.append(".");
         Integer _activeSignature_1 = it.getActiveSignature();
         Assert.assertNull(_builder.toString(), _activeSignature_1);
@@ -511,9 +511,9 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       };
       List<String> _map = ListExtensions.<SignatureInformation, String>map(_signatures_2, _function);
       String _join = IterableExtensions.join(_map, " | ");
-      _builder_1.append(_join, "");
+      _builder_1.append(_join);
       _builder_1.append(" | ");
-      _builder_1.append(param, "");
+      _builder_1.append(param);
       _xblockexpression = _builder_1.toString();
     }
     return _xblockexpression;
@@ -531,7 +531,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
         } else {
           Range _range_1 = it.getRange();
           String _expectation = this.toExpectation(_range_1);
-          _builder.append(_expectation, "");
+          _builder.append(_expectation);
         }
       }
       final String rangeString = _builder.toString();
@@ -544,11 +544,11 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
         } else {
           DocumentHighlightKind _kind_1 = it.getKind();
           String _expectation_1 = this.toExpectation(_kind_1);
-          _builder_1.append(_expectation_1, "");
+          _builder_1.append(_expectation_1);
         }
       }
       _builder_1.append(" ");
-      _builder_1.append(rangeString, "");
+      _builder_1.append(rangeString);
       _xblockexpression = _builder_1.toString();
     }
     return _xblockexpression;
@@ -597,11 +597,11 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
     StringConcatenation _builder = new StringConcatenation();
     Range _range = it.getRange();
     String _expectation = this.toExpectation(_range);
-    _builder.append(_expectation, "");
+    _builder.append(_expectation);
     _builder.append(" -> [");
     List<Integer> _styles = it.getStyles();
     String _join = IterableExtensions.join(_styles, ", ");
-    _builder.append(_join, "");
+    _builder.append(_join);
     _builder.append("]");
     return _builder.toString();
   }
@@ -802,7 +802,7 @@ public abstract class AbstractLanguageServerTest implements Endpoint {
       final Procedure1<DocumentHighlightConfiguration> _function = (DocumentHighlightConfiguration it) -> {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("MyModel.");
-        _builder.append(this.fileExtension, "");
+        _builder.append(this.fileExtension);
         it.setFilePath(_builder.toString());
       };
       @Extension

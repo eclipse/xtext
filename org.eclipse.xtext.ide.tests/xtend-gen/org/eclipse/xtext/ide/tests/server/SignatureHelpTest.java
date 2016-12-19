@@ -323,7 +323,7 @@ public class SignatureHelpTest extends AbstractTestLangLanguageServerTest {
     _builder.append("    ");
     _builder.append("op main() {");
     _builder.newLine();
-    _builder.append(method, "");
+    _builder.append(method);
     _builder.newLineIfNotEmpty();
     _builder.append("    ");
     _builder.append("}");

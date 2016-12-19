@@ -110,7 +110,7 @@ class ImplicitFragment extends AbstractStubGeneratingFragment {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         TypeReference _typeRef = TypeReference.typeRef("org.eclipse.xtext.ui.shared.Access");
-        _builder.append(_typeRef, "");
+        _builder.append(_typeRef);
         _builder.append(".getJavaProjectsState()");
       }
     };

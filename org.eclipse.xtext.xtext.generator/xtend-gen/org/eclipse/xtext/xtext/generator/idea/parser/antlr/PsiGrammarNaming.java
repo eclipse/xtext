@@ -32,7 +32,7 @@ public class PsiGrammarNaming extends GrammarNaming {
   public String getParserPackage(final Grammar it) {
     StringConcatenation _builder = new StringConcatenation();
     String _ideaBasePackage = this._xtextGeneratorNaming.getIdeaBasePackage(it);
-    _builder.append(_ideaBasePackage, "");
+    _builder.append(_ideaBasePackage);
     _builder.append(".parser.antlr");
     return _builder.toString();
   }

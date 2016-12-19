@@ -84,7 +84,7 @@ public class ColoringTest extends AbstractTestLangLanguageServerTest {
     Path _path = this.root.toPath();
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("MyModel.");
-    _builder.append(this.fileExtension, "");
+    _builder.append(this.fileExtension);
     Path _resolve = _path.resolve(_builder.toString());
     final File file = _resolve.toFile();
     URI _uRI = file.toURI();
@@ -106,7 +106,7 @@ public class ColoringTest extends AbstractTestLangLanguageServerTest {
     final String expectation = this.toExpectation(_map);
     StringConcatenation _builder_1 = new StringConcatenation();
     String _name = file.getName();
-    _builder_1.append(_name, "");
+    _builder_1.append(_name);
     _builder_1.append(" ->");
     _builder_1.newLineIfNotEmpty();
     _builder_1.append(" ");

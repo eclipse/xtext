@@ -395,14 +395,14 @@ public class CliWizardIntegrationTest {
     final Consumer<CliWizardIntegrationTest.GeneratedFile> _function_2 = (CliWizardIntegrationTest.GeneratedFile it) -> {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("Missing file: ");
-      _builder.append(it.relativePath, "");
+      _builder.append(it.relativePath);
       throw new ComparisonFailure(_builder.toString(), it.content, "");
     };
     missingFiles.forEach(_function_2);
     final Consumer<CliWizardIntegrationTest.GeneratedFile> _function_3 = (CliWizardIntegrationTest.GeneratedFile it) -> {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("Unexpected file: ");
-      _builder.append(it.relativePath, "");
+      _builder.append(it.relativePath);
       throw new ComparisonFailure(_builder.toString(), "", it.content);
     };
     unexpectedFiles.forEach(_function_3);

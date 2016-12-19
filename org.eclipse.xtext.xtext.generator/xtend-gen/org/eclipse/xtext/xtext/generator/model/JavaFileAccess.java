@@ -181,11 +181,11 @@ public class JavaFileAccess extends TextFileAccess {
   public CharSequence getContent() {
     StringConcatenation _builder = new StringConcatenation();
     String _fileHeader = this.codeConfig.getFileHeader();
-    _builder.append(_fileHeader, "");
+    _builder.append(_fileHeader);
     _builder.newLineIfNotEmpty();
     _builder.append("package ");
     String _packageName = this.javaType.getPackageName();
-    _builder.append(_packageName, "");
+    _builder.append(_packageName);
     {
       boolean _appendSemicolons = this.appendSemicolons();
       if (_appendSemicolons) {
@@ -200,7 +200,7 @@ public class JavaFileAccess extends TextFileAccess {
       List<String> _sort = IterableExtensions.<String>sort(_set);
       for(final String importName : _sort) {
         _builder.append("import ");
-        _builder.append(importName, "");
+        _builder.append(importName);
         {
           boolean _appendSemicolons_1 = this.appendSemicolons();
           if (_appendSemicolons_1) {
@@ -212,7 +212,7 @@ public class JavaFileAccess extends TextFileAccess {
     }
     _builder.newLine();
     CharSequence _internalContent = this.getInternalContent();
-    _builder.append(_internalContent, "");
+    _builder.append(_internalContent);
     _builder.newLineIfNotEmpty();
     return _builder;
   }

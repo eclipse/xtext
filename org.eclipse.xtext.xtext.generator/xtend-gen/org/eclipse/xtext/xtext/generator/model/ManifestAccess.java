@@ -146,7 +146,7 @@ public class ManifestAccess extends TextFileAccess implements IGuiceAwareGenerat
     _builder.append("Bundle-ManifestVersion: 2");
     _builder.newLine();
     _builder.append("Bundle-Name: ");
-    _builder.append(this.bundleName, "");
+    _builder.append(this.bundleName);
     _builder.newLineIfNotEmpty();
     _builder.append("Bundle-SymbolicName: ");
     String _elvis = null;
@@ -155,7 +155,7 @@ public class ManifestAccess extends TextFileAccess implements IGuiceAwareGenerat
     } else {
       _elvis = this.bundleName;
     }
-    _builder.append(_elvis, "");
+    _builder.append(_elvis);
     _builder.append(";singleton:=true");
     _builder.newLineIfNotEmpty();
     {
@@ -163,7 +163,7 @@ public class ManifestAccess extends TextFileAccess implements IGuiceAwareGenerat
       boolean _not = (!_isNullOrEmpty);
       if (_not) {
         _builder.append("Bundle-Version: ");
-        _builder.append(this.version, "");
+        _builder.append(this.version);
         _builder.newLineIfNotEmpty();
       }
     }
@@ -185,7 +185,7 @@ public class ManifestAccess extends TextFileAccess implements IGuiceAwareGenerat
             } else {
               _builder.appendImmediate(",\n ", "");
             }
-            _builder.append(pack, "");
+            _builder.append(pack);
           }
         }
         _builder.newLineIfNotEmpty();
@@ -210,7 +210,7 @@ public class ManifestAccess extends TextFileAccess implements IGuiceAwareGenerat
             } else {
               _builder.appendImmediate(",\n ", "");
             }
-            _builder.append(bundle, "");
+            _builder.append(bundle);
           }
         }
         _builder.newLineIfNotEmpty();
@@ -230,7 +230,7 @@ public class ManifestAccess extends TextFileAccess implements IGuiceAwareGenerat
             } else {
               _builder.appendImmediate(",\n ", "");
             }
-            _builder.append(pack_1, "");
+            _builder.append(pack_1);
           }
         }
         _builder.newLineIfNotEmpty();
@@ -239,7 +239,7 @@ public class ManifestAccess extends TextFileAccess implements IGuiceAwareGenerat
     {
       if ((this.activator != null)) {
         _builder.append("Bundle-Activator: ");
-        _builder.append(this.activator, "");
+        _builder.append(this.activator);
         _builder.newLineIfNotEmpty();
       }
     }

@@ -47,14 +47,14 @@ public class ResourceFactoryFragment2 extends AbstractXtextGeneratorFragment {
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-        _builder.append(IResourceFactory.class, "");
+        _builder.append(IResourceFactory.class);
         _builder.append(" resourceFactory = injector.getInstance(");
-        _builder.append(IResourceFactory.class, "");
+        _builder.append(IResourceFactory.class);
         _builder.append(".class);");
         _builder.newLineIfNotEmpty();
-        _builder.append(IResourceServiceProvider.class, "");
+        _builder.append(IResourceServiceProvider.class);
         _builder.append(" serviceProvider = injector.getInstance(");
-        _builder.append(IResourceServiceProvider.class, "");
+        _builder.append(IResourceServiceProvider.class);
         _builder.append(".class);");
         _builder.newLineIfNotEmpty();
         _builder.newLine();
@@ -62,14 +62,14 @@ public class ResourceFactoryFragment2 extends AbstractXtextGeneratorFragment {
           IXtextGeneratorLanguage _language = ResourceFactoryFragment2.this.getLanguage();
           List<String> _fileExtensions = _language.getFileExtensions();
           for(final String fileExtension : _fileExtensions) {
-            _builder.append(Resource.class, "");
+            _builder.append(Resource.class);
             _builder.append(".Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(\"");
-            _builder.append(fileExtension, "");
+            _builder.append(fileExtension);
             _builder.append("\", resourceFactory);");
             _builder.newLineIfNotEmpty();
-            _builder.append(IResourceServiceProvider.class, "");
+            _builder.append(IResourceServiceProvider.class);
             _builder.append(".Registry.INSTANCE.getExtensionToFactoryMap().put(\"");
-            _builder.append(fileExtension, "");
+            _builder.append(fileExtension);
             _builder.append("\", serviceProvider);");
             _builder.newLineIfNotEmpty();
           }

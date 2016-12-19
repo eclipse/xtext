@@ -56,11 +56,11 @@ public class GenModelUtil2 {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("No GenClassifier named \'");
     String _name_2 = cls.getName();
-    _builder.append(_name_2, "");
+    _builder.append(_name_2);
     _builder.append("\' found in GenModel ");
     Resource _eResource = genPackage.eResource();
     URI _uRI = _eResource.getURI();
-    _builder.append(_uRI, "");
+    _builder.append(_uRI);
     throw new RuntimeException(_builder.toString());
   }
   
@@ -91,13 +91,13 @@ public class GenModelUtil2 {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("No GenFeature named \'");
     String _name_2 = feature.getName();
-    _builder.append(_name_2, "");
+    _builder.append(_name_2);
     _builder.append("\' found in GenClass \'");
-    _builder.append(genCls, "");
+    _builder.append(genCls);
     _builder.append("\' from GenModel");
     Resource _eResource = genCls.eResource();
     URI _uRI = _eResource.getURI();
-    _builder.append(_uRI, "");
+    _builder.append(_uRI);
     throw new RuntimeException(_builder.toString());
   }
   
@@ -131,15 +131,15 @@ public class GenModelUtil2 {
       }
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("No GenPackage for NsURI ");
-      _builder.append(nsURI, "");
+      _builder.append(nsURI);
       _builder.append(" found in ");
       URI _uRI_2 = genModelResource.getURI();
-      _builder.append(_uRI_2, "");
+      _builder.append(_uRI_2);
       throw new RuntimeException(_builder.toString());
     }
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("No GenPackage for NsURI ");
-    _builder_1.append(nsURI, "");
+    _builder_1.append(nsURI);
     _builder_1.append(".");
     throw new RuntimeException(_builder_1.toString());
   }
@@ -170,21 +170,21 @@ public class GenModelUtil2 {
       }
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("Could not find a GenModel for EPackage \'");
-      _builder.append(nsURI, "");
+      _builder.append(nsURI);
       _builder.append("\'");
       {
         boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(locationInfo);
         boolean _not = (!_isNullOrEmpty);
         if (_not) {
           _builder.append(" from ");
-          _builder.append(locationInfo, "");
+          _builder.append(locationInfo);
         }
       }
       _builder.append(".");
       _builder.newLineIfNotEmpty();
       _builder.append("If the missing GenModel has been generated via ");
       String _simpleName = EMFGeneratorFragment2.class.getSimpleName();
-      _builder.append(_simpleName, "");
+      _builder.append(_simpleName);
       _builder.append(", make sure to run it first in the workflow.");
       _builder.newLineIfNotEmpty();
       _builder.append("If you have a *.genmodel-file, make sure to register it via StandaloneSetup.registerGenModelFile(String).");
@@ -194,7 +194,7 @@ public class GenModelUtil2 {
     if ((resourceSet == null)) {
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("There is no ResourceSet for EPackage \'");
-      _builder_1.append(nsURI, "");
+      _builder_1.append(nsURI);
       _builder_1.append("\'. Please make sure the EPackage has been loaded from a .ecore file and not from the generated Java file.");
       throw new RuntimeException(_builder_1.toString());
     }
@@ -202,7 +202,7 @@ public class GenModelUtil2 {
     if ((genModelResource == null)) {
       StringConcatenation _builder_2 = new StringConcatenation();
       _builder_2.append("Error loading GenModel ");
-      _builder_2.append(genModelURI, "");
+      _builder_2.append(genModelURI);
       throw new RuntimeException(_builder_2.toString());
     }
     EList<EObject> _contents_1 = genModelResource.getContents();

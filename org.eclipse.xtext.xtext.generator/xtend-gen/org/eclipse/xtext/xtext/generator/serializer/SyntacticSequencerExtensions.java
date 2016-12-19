@@ -215,15 +215,15 @@ public class SyntacticSequencerExtensions {
         @Override
         protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
           _builder.append("new ");
-          _builder.append(GrammarAlias.TokenAlias.class, "");
+          _builder.append(GrammarAlias.TokenAlias.class);
           _builder.append("(");
-          _builder.append(many, "");
+          _builder.append(many);
           _builder.append(", ");
-          _builder.append(optional, "");
+          _builder.append(optional);
           _builder.append(", grammarAccess.");
           AbstractElement _token = ((GrammarAlias.TokenAlias)alias).getToken();
           String _gaAccessor = SyntacticSequencerExtensions.this._grammarAccessExtensions.gaAccessor(_token);
-          _builder.append(_gaAccessor, "");
+          _builder.append(_gaAccessor);
           _builder.append(")");
         }
       };
@@ -240,11 +240,11 @@ public class SyntacticSequencerExtensions {
           @Override
           protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
             _builder.append("new ");
-            _builder.append(GrammarAlias.GroupAlias.class, "");
+            _builder.append(GrammarAlias.GroupAlias.class);
             _builder.append("(");
-            _builder.append(many, "");
+            _builder.append(many);
             _builder.append(", ");
-            _builder.append(optional, "");
+            _builder.append(optional);
             _builder.append(", ");
             {
               boolean _hasElements = false;
@@ -254,7 +254,7 @@ public class SyntacticSequencerExtensions {
                 } else {
                   _builder.appendImmediate(", ", "");
                 }
-                _builder.append(c, "");
+                _builder.append(c);
               }
             }
             _builder.append(")");
@@ -271,7 +271,7 @@ public class SyntacticSequencerExtensions {
           }
           final Function1<StringConcatenationClient, String> _function = (StringConcatenationClient it) -> {
             StringConcatenation _builder = new StringConcatenation();
-            _builder.append(it, "");
+            _builder.append(it);
             return _builder.toString();
           };
           ListExtensions.<StringConcatenationClient, String>sortInplaceBy(children_1, _function);
@@ -279,11 +279,11 @@ public class SyntacticSequencerExtensions {
             @Override
             protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
               _builder.append("new ");
-              _builder.append(GrammarAlias.AlternativeAlias.class, "");
+              _builder.append(GrammarAlias.AlternativeAlias.class);
               _builder.append("(");
-              _builder.append(many, "");
+              _builder.append(many);
               _builder.append(", ");
-              _builder.append(optional, "");
+              _builder.append(optional);
               _builder.append(", ");
               {
                 boolean _hasElements = false;
@@ -293,7 +293,7 @@ public class SyntacticSequencerExtensions {
                   } else {
                     _builder.appendImmediate(", ", "");
                   }
-                  _builder.append(c, "");
+                  _builder.append(c);
                 }
               }
               _builder.append(")");

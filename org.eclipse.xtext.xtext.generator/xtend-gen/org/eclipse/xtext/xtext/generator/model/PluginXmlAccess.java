@@ -52,7 +52,7 @@ public class PluginXmlAccess extends TextFileAccess implements IGuiceAwareGenera
     } else {
       _elvis = "UTF-8";
     }
-    _builder.append(_elvis, "");
+    _builder.append(_elvis);
     _builder.append("\"?>");
     _builder.newLineIfNotEmpty();
     _builder.append("<?eclipse version=\"3.0\"?>");

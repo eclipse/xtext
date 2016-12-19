@@ -188,7 +188,7 @@ public class DebugGraphGenerator {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("id: ");
         String _identifier = group.getIdentifier();
-        _builder.append(_identifier, "");
+        _builder.append(_identifier);
         _builder.newLineIfNotEmpty();
         _builder.append("    ");
         _builder.append("Ambiguous syntax:»:");

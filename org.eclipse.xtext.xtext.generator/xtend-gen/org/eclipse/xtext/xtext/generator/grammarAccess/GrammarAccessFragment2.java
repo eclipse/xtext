@@ -321,9 +321,9 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
         Grammar _grammar = _language.getGrammar();
         TypeReference _grammarAccess = GrammarAccessFragment2.this._grammarAccessExtensions.getGrammarAccess(_grammar);
         String _simpleName = _grammarAccess.getSimpleName();
-        _builder.append(_simpleName, "");
+        _builder.append(_simpleName);
         _builder.append(" extends ");
-        _builder.append(AbstractElementFinder.AbstractGrammarElementFinder.class, "");
+        _builder.append(AbstractElementFinder.AbstractGrammarElementFinder.class);
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
@@ -598,7 +598,7 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         _builder.append("public class ");
         String _gaRuleAccessorClassName = GrammarAccessFragment2.this._grammarAccessExtensions.gaRuleAccessorClassName(it);
-        _builder.append(_gaRuleAccessorClassName, "");
+        _builder.append(_gaRuleAccessorClassName);
         _builder.append(" extends AbstractParserRuleElementFinder {");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
@@ -681,9 +681,9 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         _builder.append("public class ");
         String _gaRuleAccessorClassName = GrammarAccessFragment2.this._grammarAccessExtensions.gaRuleAccessorClassName(it);
-        _builder.append(_gaRuleAccessorClassName, "");
+        _builder.append(_gaRuleAccessorClassName);
         _builder.append(" extends ");
-        _builder.append(AbstractElementFinder.AbstractEnumRuleElementFinder.class, "");
+        _builder.append(AbstractElementFinder.AbstractEnumRuleElementFinder.class);
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
@@ -764,10 +764,10 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         _builder.append("private final ");
         String _gaRuleAccessorClassName = GrammarAccessFragment2.this._grammarAccessExtensions.gaRuleAccessorClassName(it);
-        _builder.append(_gaRuleAccessorClassName, "");
+        _builder.append(_gaRuleAccessorClassName);
         _builder.append(" ");
         String _gaRuleAccessorLocalVarName = GrammarAccessFragment2.this.gaRuleAccessorLocalVarName(it);
-        _builder.append(_gaRuleAccessorLocalVarName, "");
+        _builder.append(_gaRuleAccessorLocalVarName);
         _builder.append(";");
         _builder.newLineIfNotEmpty();
       }
@@ -781,10 +781,10 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         _builder.append("private final ");
         String _gaRuleAccessorClassName = GrammarAccessFragment2.this._grammarAccessExtensions.gaRuleAccessorClassName(it);
-        _builder.append(_gaRuleAccessorClassName, "");
+        _builder.append(_gaRuleAccessorClassName);
         _builder.append(" ");
         String _gaRuleAccessorLocalVarName = GrammarAccessFragment2.this.gaRuleAccessorLocalVarName(it);
-        _builder.append(_gaRuleAccessorLocalVarName, "");
+        _builder.append(_gaRuleAccessorLocalVarName);
         _builder.append(";");
         _builder.newLineIfNotEmpty();
       }
@@ -797,10 +797,10 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         _builder.append("private final ");
-        _builder.append(TerminalRule.class, "");
+        _builder.append(TerminalRule.class);
         _builder.append(" ");
         String _gaRuleAccessorLocalVarName = GrammarAccessFragment2.this.gaRuleAccessorLocalVarName(it);
-        _builder.append(_gaRuleAccessorLocalVarName, "");
+        _builder.append(_gaRuleAccessorLocalVarName);
         _builder.append(";");
         _builder.newLineIfNotEmpty();
       }
@@ -814,10 +814,10 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         _builder.append("this.");
         String _gaRuleAccessorLocalVarName = GrammarAccessFragment2.this.gaRuleAccessorLocalVarName(it);
-        _builder.append(_gaRuleAccessorLocalVarName, "");
+        _builder.append(_gaRuleAccessorLocalVarName);
         _builder.append(" = new ");
         String _gaRuleAccessorClassName = GrammarAccessFragment2.this._grammarAccessExtensions.gaRuleAccessorClassName(it);
-        _builder.append(_gaRuleAccessorClassName, "");
+        _builder.append(_gaRuleAccessorClassName);
         _builder.append("();");
         _builder.newLineIfNotEmpty();
       }
@@ -831,10 +831,10 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         _builder.append("this.");
         String _gaRuleAccessorLocalVarName = GrammarAccessFragment2.this.gaRuleAccessorLocalVarName(it);
-        _builder.append(_gaRuleAccessorLocalVarName, "");
+        _builder.append(_gaRuleAccessorLocalVarName);
         _builder.append(" = new ");
         String _gaRuleAccessorClassName = GrammarAccessFragment2.this._grammarAccessExtensions.gaRuleAccessorClassName(it);
-        _builder.append(_gaRuleAccessorClassName, "");
+        _builder.append(_gaRuleAccessorClassName);
         _builder.append("();");
         _builder.newLineIfNotEmpty();
       }
@@ -848,14 +848,14 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         _builder.append("this.");
         String _gaRuleAccessorLocalVarName = GrammarAccessFragment2.this.gaRuleAccessorLocalVarName(it);
-        _builder.append(_gaRuleAccessorLocalVarName, "");
+        _builder.append(_gaRuleAccessorLocalVarName);
         _builder.append(" = (");
-        _builder.append(TerminalRule.class, "");
+        _builder.append(TerminalRule.class);
         _builder.append(") ");
-        _builder.append(GrammarUtil.class, "");
+        _builder.append(GrammarUtil.class);
         _builder.append(".findRuleForName(getGrammar(), \"");
         String _qualifiedName = GrammarAccessFragment2.this.getQualifiedName(it);
-        _builder.append(_qualifiedName, "");
+        _builder.append(_qualifiedName);
         _builder.append("\");");
         _builder.newLineIfNotEmpty();
       }
@@ -868,7 +868,7 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         String _grammarFragmentToString = GrammarAccessFragment2.this._grammarAccessExtensions.grammarFragmentToString(it, "//");
-        _builder.append(_grammarFragmentToString, "");
+        _builder.append(_grammarFragmentToString);
         _builder.newLineIfNotEmpty();
         {
           Grammar _grammar = GrammarUtil.getGrammar(it);
@@ -876,10 +876,10 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
           if (_tripleEquals) {
             _builder.append("public ");
             String _gaRuleAccessorClassName = GrammarAccessFragment2.this._grammarAccessExtensions.gaRuleAccessorClassName(it);
-            _builder.append(_gaRuleAccessorClassName, "");
+            _builder.append(_gaRuleAccessorClassName);
             _builder.append(" ");
             String _gaElementsAccessor = GrammarAccessFragment2.this._grammarAccessExtensions.gaElementsAccessor(it);
-            _builder.append(_gaElementsAccessor, "");
+            _builder.append(_gaElementsAccessor);
             _builder.append(" {");
             _builder.newLineIfNotEmpty();
             _builder.append("\t");
@@ -894,13 +894,13 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
             _builder.append("public ");
             Grammar _grammar_1 = GrammarUtil.getGrammar(it);
             TypeReference _grammarAccess = GrammarAccessFragment2.this._grammarAccessExtensions.getGrammarAccess(_grammar_1);
-            _builder.append(_grammarAccess, "");
+            _builder.append(_grammarAccess);
             _builder.append(".");
             String _gaBaseRuleAccessorClassName = GrammarAccessFragment2.this._grammarAccessExtensions.gaBaseRuleAccessorClassName(it);
-            _builder.append(_gaBaseRuleAccessorClassName, "");
+            _builder.append(_gaBaseRuleAccessorClassName);
             _builder.append(" ");
             String _gaElementsAccessor_1 = GrammarAccessFragment2.this._grammarAccessExtensions.gaElementsAccessor(it);
-            _builder.append(_gaElementsAccessor_1, "");
+            _builder.append(_gaElementsAccessor_1);
             _builder.append(" {");
             _builder.newLineIfNotEmpty();
             _builder.append("\t");
@@ -920,7 +920,7 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
         _builder.newLine();
         _builder.append("public ParserRule ");
         String _gaRuleAccessor = GrammarAccessFragment2.this._grammarAccessExtensions.gaRuleAccessor(it);
-        _builder.append(_gaRuleAccessor, "");
+        _builder.append(_gaRuleAccessor);
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
@@ -941,7 +941,7 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         String _grammarFragmentToString = GrammarAccessFragment2.this._grammarAccessExtensions.grammarFragmentToString(it, "//");
-        _builder.append(_grammarFragmentToString, "");
+        _builder.append(_grammarFragmentToString);
         _builder.newLineIfNotEmpty();
         {
           Grammar _grammar = GrammarUtil.getGrammar(it);
@@ -949,10 +949,10 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
           if (_tripleEquals) {
             _builder.append("public ");
             String _gaRuleAccessorClassName = GrammarAccessFragment2.this._grammarAccessExtensions.gaRuleAccessorClassName(it);
-            _builder.append(_gaRuleAccessorClassName, "");
+            _builder.append(_gaRuleAccessorClassName);
             _builder.append(" ");
             String _gaElementsAccessor = GrammarAccessFragment2.this._grammarAccessExtensions.gaElementsAccessor(it);
-            _builder.append(_gaElementsAccessor, "");
+            _builder.append(_gaElementsAccessor);
             _builder.append(" {");
             _builder.newLineIfNotEmpty();
             _builder.append("\t");
@@ -967,13 +967,13 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
             _builder.append("public ");
             Grammar _grammar_1 = GrammarUtil.getGrammar(it);
             TypeReference _grammarAccess = GrammarAccessFragment2.this._grammarAccessExtensions.getGrammarAccess(_grammar_1);
-            _builder.append(_grammarAccess, "");
+            _builder.append(_grammarAccess);
             _builder.append(".");
             String _gaRuleAccessorClassName_1 = GrammarAccessFragment2.this._grammarAccessExtensions.gaRuleAccessorClassName(it);
-            _builder.append(_gaRuleAccessorClassName_1, "");
+            _builder.append(_gaRuleAccessorClassName_1);
             _builder.append(" ");
             String _gaElementsAccessor_1 = GrammarAccessFragment2.this._grammarAccessExtensions.gaElementsAccessor(it);
-            _builder.append(_gaElementsAccessor_1, "");
+            _builder.append(_gaElementsAccessor_1);
             _builder.append(" {");
             _builder.newLineIfNotEmpty();
             _builder.append("\t");
@@ -992,10 +992,10 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
         }
         _builder.newLine();
         _builder.append("public ");
-        _builder.append(EnumRule.class, "");
+        _builder.append(EnumRule.class);
         _builder.append(" ");
         String _gaRuleAccessor = GrammarAccessFragment2.this._grammarAccessExtensions.gaRuleAccessor(it);
-        _builder.append(_gaRuleAccessor, "");
+        _builder.append(_gaRuleAccessor);
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
@@ -1016,13 +1016,13 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         String _grammarFragmentToString = GrammarAccessFragment2.this._grammarAccessExtensions.grammarFragmentToString(it, "//");
-        _builder.append(_grammarFragmentToString, "");
+        _builder.append(_grammarFragmentToString);
         _builder.newLineIfNotEmpty();
         _builder.append("public ");
-        _builder.append(TerminalRule.class, "");
+        _builder.append(TerminalRule.class);
         _builder.append(" ");
         String _gaRuleAccessor = GrammarAccessFragment2.this._grammarAccessExtensions.gaRuleAccessor(it);
-        _builder.append(_gaRuleAccessor, "");
+        _builder.append(_gaRuleAccessor);
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
         {
@@ -1088,15 +1088,15 @@ public class GrammarAccessFragment2 extends AbstractXtextGeneratorFragment {
         EClass _eClass = ele.eClass();
         IXtextGeneratorLanguage _language = GrammarAccessFragment2.this.getLanguage();
         TypeReference _typeRef = TypeReference.typeRef(_eClass, _language);
-        _builder.append(_typeRef, "");
+        _builder.append(_typeRef);
         _builder.append(")");
         String _loadElementParentStatement = GrammarAccessFragment2.this.loadElementParentStatement(ele);
-        _builder.append(_loadElementParentStatement, "");
+        _builder.append(_loadElementParentStatement);
         _builder.append(".eContents().get(");
         EObject _eContainer = ele.eContainer();
         EList<EObject> _eContents = _eContainer.eContents();
         int _indexOf = _eContents.indexOf(ele);
-        _builder.append(_indexOf, "");
+        _builder.append(_indexOf);
         _builder.append(")");
       }
     };

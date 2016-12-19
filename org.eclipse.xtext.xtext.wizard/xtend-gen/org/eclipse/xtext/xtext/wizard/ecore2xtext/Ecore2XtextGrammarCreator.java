@@ -48,7 +48,7 @@ public class Ecore2XtextGrammarCreator {
       _builder.append("grammar ");
       LanguageDescriptor _language = config.getLanguage();
       String _name = _language.getName();
-      _builder.append(_name, "");
+      _builder.append(_name);
       _builder.append(" with org.eclipse.xtext.common.Terminals");
       _builder.newLineIfNotEmpty();
       _builder.newLine();
@@ -57,13 +57,13 @@ public class Ecore2XtextGrammarCreator {
         for(final EPackage it_1 : _allReferencedEPackages) {
           _builder.append("import \"");
           String _nsURI = it_1.getNsURI();
-          _builder.append(_nsURI, "");
+          _builder.append(_nsURI);
           _builder.append("\" ");
           {
             if (((UniqueNameUtil.uniqueName(it_1) != null) && (!Objects.equal(UniqueNameUtil.uniqueName(it_1), "")))) {
               _builder.append("as ");
               String _uniqueName = UniqueNameUtil.uniqueName(it_1);
-              _builder.append(_uniqueName, "");
+              _builder.append(_uniqueName);
             }
           }
           _builder.newLineIfNotEmpty();
@@ -72,7 +72,7 @@ public class Ecore2XtextGrammarCreator {
       _builder.newLine();
       EClass _rootElementClass = it.getRootElementClass();
       CharSequence _rules = this.rules(_rootElementClass);
-      _builder.append(_rules, "");
+      _builder.append(_rules);
       _builder.newLineIfNotEmpty();
       {
         Collection<EClass> _allDispatcherRuleClasses = Ecore2XtextExtensions.allDispatcherRuleClasses(it);
@@ -81,7 +81,7 @@ public class Ecore2XtextGrammarCreator {
         for(final EClass it_2 : _but) {
           _builder.newLine();
           CharSequence _subClassDispatcherRule = this.subClassDispatcherRule(it_2);
-          _builder.append(_subClassDispatcherRule, "");
+          _builder.append(_subClassDispatcherRule);
           _builder.newLineIfNotEmpty();
         }
       }
@@ -92,7 +92,7 @@ public class Ecore2XtextGrammarCreator {
         for(final EClassifier it_3 : _but_1) {
           _builder.newLine();
           CharSequence _rule = this.rule(it_3);
-          _builder.append(_rule, "");
+          _builder.append(_rule);
           _builder.newLineIfNotEmpty();
         }
       }
@@ -113,10 +113,10 @@ public class Ecore2XtextGrammarCreator {
       boolean _needsDispatcherRule = Ecore2XtextExtensions.needsDispatcherRule(it);
       if (_needsDispatcherRule) {
         String _uniqueName = UniqueNameUtil.uniqueName(it);
-        _builder.append(_uniqueName, "");
+        _builder.append(_uniqueName);
         _builder.append(" returns ");
         String _fqn = Ecore2XtextExtensions.fqn(it);
-        _builder.append(_fqn, "");
+        _builder.append(_fqn);
         _builder.append(":");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
@@ -157,10 +157,10 @@ public class Ecore2XtextGrammarCreator {
       if ((idAttr != null)) {
         StringConcatenation _builder = new StringConcatenation();
         String _name = idAttr.getName();
-        _builder.append(_name, "");
+        _builder.append(_name);
         _builder.append("=");
         String _assignedRuleCall = Ecore2XtextExtensions.assignedRuleCall(idAttr);
-        _builder.append(_assignedRuleCall, "");
+        _builder.append(_assignedRuleCall);
         _xifexpression = _builder;
       }
       _xblockexpression = _xifexpression;
@@ -178,7 +178,7 @@ public class Ecore2XtextGrammarCreator {
       }
     }
     String _assignmentKeyword = Ecore2XtextExtensions.assignmentKeyword(it);
-    _builder.append(_assignmentKeyword, "");
+    _builder.append(_assignmentKeyword);
     {
       boolean _isMany = it.isMany();
       if (_isMany) {
@@ -194,22 +194,22 @@ public class Ecore2XtextGrammarCreator {
     }
     String _name = it.getName();
     String _quoteIfNeccesary = Ecore2XtextExtensions.quoteIfNeccesary(_name);
-    _builder.append(_quoteIfNeccesary, "");
+    _builder.append(_quoteIfNeccesary);
     CharSequence _assignmentOperator = this.assignmentOperator(it);
-    _builder.append(_assignmentOperator, "");
+    _builder.append(_assignmentOperator);
     CharSequence _assignedTerminal = this.assignedTerminal(it);
-    _builder.append(_assignedTerminal, "");
+    _builder.append(_assignedTerminal);
     {
       boolean _isMany_1 = it.isMany();
       if (_isMany_1) {
         _builder.append(" ( \",\" ");
         String _name_1 = it.getName();
         String _quoteIfNeccesary_1 = Ecore2XtextExtensions.quoteIfNeccesary(_name_1);
-        _builder.append(_quoteIfNeccesary_1, "");
+        _builder.append(_quoteIfNeccesary_1);
         CharSequence _assignmentOperator_1 = this.assignmentOperator(it);
-        _builder.append(_assignmentOperator_1, "");
+        _builder.append(_assignmentOperator_1);
         CharSequence _assignedTerminal_1 = this.assignedTerminal(it);
-        _builder.append(_assignedTerminal_1, "");
+        _builder.append(_assignedTerminal_1);
         _builder.append(")* ");
         {
           boolean _isContainment_1 = Ecore2XtextExtensions.isContainment(it);
@@ -252,7 +252,7 @@ public class Ecore2XtextGrammarCreator {
           _builder.append("[");
           EClass _eReferenceType_1 = ((EReference)it).getEReferenceType();
           String _fqn = Ecore2XtextExtensions.fqn(_eReferenceType_1);
-          _builder.append(_fqn, "");
+          _builder.append(_fqn);
           _builder.append("|EString]");
           _xifexpression = _builder;
         }
@@ -298,10 +298,10 @@ public class Ecore2XtextGrammarCreator {
       _matched=true;
       StringConcatenation _builder = new StringConcatenation();
       String _concreteRuleName = Ecore2XtextExtensions.concreteRuleName(((EClass)it));
-      _builder.append(_concreteRuleName, "");
+      _builder.append(_concreteRuleName);
       _builder.append(" returns ");
       String _fqn = Ecore2XtextExtensions.fqn(it);
-      _builder.append(_fqn, "");
+      _builder.append(_fqn);
       _builder.append(":");
       _builder.newLineIfNotEmpty();
       {
@@ -387,10 +387,10 @@ public class Ecore2XtextGrammarCreator {
         _builder.append("enum ");
         String _name = ((EEnum)it).getName();
         String _quoteIfNeccesary = Ecore2XtextExtensions.quoteIfNeccesary(_name);
-        _builder.append(_quoteIfNeccesary, "");
+        _builder.append(_quoteIfNeccesary);
         _builder.append(" returns ");
         String _fqn = Ecore2XtextExtensions.fqn(it);
-        _builder.append(_fqn, "");
+        _builder.append(_fqn);
         _builder.append(":");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t\t\t");
@@ -417,10 +417,10 @@ public class Ecore2XtextGrammarCreator {
         if (_isSerializable) {
           StringConcatenation _builder = new StringConcatenation();
           String _uniqueName = UniqueNameUtil.uniqueName(it);
-          _builder.append(_uniqueName, "");
+          _builder.append(_uniqueName);
           _builder.append(" returns ");
           String _fqn = Ecore2XtextExtensions.fqn(it);
-          _builder.append(_fqn, "");
+          _builder.append(_fqn);
           _builder.append(":");
           _builder.newLineIfNotEmpty();
           _builder.append("\t");

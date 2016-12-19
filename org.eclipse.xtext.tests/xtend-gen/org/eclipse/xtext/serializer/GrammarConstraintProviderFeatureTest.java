@@ -293,7 +293,7 @@ public class GrammarConstraintProviderFeatureTest {
       _builder.append("generate GrammarConstraintProviderFeatureTest \"http://www.eclipse.org/2010/tmf/xtext/GrammarConstraintProviderFeatureTestLanguage\"");
       _builder.newLine();
       _builder.newLine();
-      _builder.append(grammarString, "");
+      _builder.append(grammarString);
       _builder.newLineIfNotEmpty();
       final Grammar grammar = this.parser.parse(_builder);
       this.validator.assertNoErrors(grammar);

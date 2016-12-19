@@ -76,18 +76,18 @@ public class GeneratedJavaFileAccess extends JavaFileAccess {
   @Override
   public CharSequence getInternalContent() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append(this.typeComment, "");
+    _builder.append(this.typeComment);
     _builder.newLineIfNotEmpty();
     {
       Iterable<IClassAnnotation> _classAnnotations = this.getClassAnnotations();
       for(final IClassAnnotation annot : _classAnnotations) {
         CharSequence _generate = annot.generate();
-        _builder.append(_generate, "");
+        _builder.append(_generate);
         _builder.newLineIfNotEmpty();
       }
     }
     CharSequence _internalContent = super.getInternalContent();
-    _builder.append(_internalContent, "");
+    _builder.append(_internalContent);
     _builder.newLineIfNotEmpty();
     return _builder;
   }

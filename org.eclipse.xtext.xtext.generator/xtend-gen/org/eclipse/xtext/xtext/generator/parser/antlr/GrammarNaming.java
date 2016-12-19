@@ -49,10 +49,10 @@ public class GrammarNaming {
     String _internalParserPackage = this.getInternalParserPackage(it);
     StringConcatenation _builder = new StringConcatenation();
     String _grammarNamePrefix = this.getGrammarNamePrefix(it);
-    _builder.append(_grammarNamePrefix, "");
+    _builder.append(_grammarNamePrefix);
     _builder.append("Internal");
     String _simpleName = GrammarUtil.getSimpleName(it);
-    _builder.append(_simpleName, "");
+    _builder.append(_simpleName);
     {
       boolean _isCombinedGrammar = this.isCombinedGrammar(it);
       boolean _not = (!_isCombinedGrammar);
@@ -72,10 +72,10 @@ public class GrammarNaming {
       String _internalLexerPackage = this.getInternalLexerPackage(it);
       StringConcatenation _builder = new StringConcatenation();
       String _grammarNamePrefix = this.getGrammarNamePrefix(it);
-      _builder.append(_grammarNamePrefix, "");
+      _builder.append(_grammarNamePrefix);
       _builder.append("Internal");
       String _simpleName = GrammarUtil.getSimpleName(it);
-      _builder.append(_simpleName, "");
+      _builder.append(_simpleName);
       _builder.append("Lexer");
       _xifexpression = new AntlrGrammar(_internalLexerPackage, _builder.toString());
     }
@@ -92,7 +92,7 @@ public class GrammarNaming {
     StringConcatenation _builder = new StringConcatenation();
     AntlrGrammar _lexerGrammar_1 = this.getLexerGrammar(it);
     String _simpleName = _lexerGrammar_1.getSimpleName();
-    _builder.append(_simpleName, "");
+    _builder.append(_simpleName);
     {
       boolean _isCombinedGrammar = this.isCombinedGrammar(it);
       if (_isCombinedGrammar) {
@@ -110,7 +110,7 @@ public class GrammarNaming {
     String _parserPackage = this.getParserPackage(it);
     StringConcatenation _builder = new StringConcatenation();
     String _simpleName = GrammarUtil.getSimpleName(it);
-    _builder.append(_simpleName, "");
+    _builder.append(_simpleName);
     _builder.append("Parser");
     return new TypeReference(_parserPackage, _builder.toString());
   }
@@ -125,7 +125,7 @@ public class GrammarNaming {
     StringConcatenation _builder = new StringConcatenation();
     AntlrGrammar _parserGrammar_1 = this.getParserGrammar(it);
     String _simpleName = _parserGrammar_1.getSimpleName();
-    _builder.append(_simpleName, "");
+    _builder.append(_simpleName);
     {
       boolean _isCombinedGrammar = this.isCombinedGrammar(it);
       if (_isCombinedGrammar) {
@@ -143,7 +143,7 @@ public class GrammarNaming {
     String _parserPackage = this.getParserPackage(it);
     StringConcatenation _builder = new StringConcatenation();
     String _simpleName = GrammarUtil.getSimpleName(it);
-    _builder.append(_simpleName, "");
+    _builder.append(_simpleName);
     _builder.append("AntlrTokenFileProvider");
     return new TypeReference(_parserPackage, _builder.toString());
   }

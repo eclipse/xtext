@@ -182,7 +182,7 @@ public class Indexer {
     public Iterable<QualifiedName> getImportedNames() {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("getImportedNames ");
-      _builder.append(this.URI, "");
+      _builder.append(this.URI);
       IllegalStateException exception = new IllegalStateException(_builder.toString());
       Indexer.ResolvedResourceDescription.LOG.error(exception, exception);
       return CollectionLiterals.<QualifiedName>emptyList();
@@ -192,7 +192,7 @@ public class Indexer {
     public Iterable<IReferenceDescription> getReferenceDescriptions() {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("getReferenceDescriptions ");
-      _builder.append(this.URI, "");
+      _builder.append(this.URI);
       IllegalStateException exception = new IllegalStateException(_builder.toString());
       Indexer.ResolvedResourceDescription.LOG.error(exception, exception);
       return CollectionLiterals.<IReferenceDescription>emptyList();

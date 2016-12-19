@@ -166,11 +166,11 @@ public class QuickfixProviderFragment2 extends AbstractInheritingFragment {
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         _builder.append("public class ");
         String _simpleName = genClass.getSimpleName();
-        _builder.append(_simpleName, "");
+        _builder.append(_simpleName);
         _builder.append(" extends ");
         Grammar _grammar = QuickfixProviderFragment2.this.getGrammar();
         TypeReference _quickfixProviderSuperClass = QuickfixProviderFragment2.this.getQuickfixProviderSuperClass(_grammar);
-        _builder.append(_quickfixProviderSuperClass, "");
+        _builder.append(_quickfixProviderSuperClass);
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
         _builder.append("}");
@@ -208,11 +208,11 @@ public class QuickfixProviderFragment2 extends AbstractInheritingFragment {
         Grammar _grammar = QuickfixProviderFragment2.this.getGrammar();
         TypeReference _quickfixProviderClass = QuickfixProviderFragment2.this.getQuickfixProviderClass(_grammar);
         String _simpleName = _quickfixProviderClass.getSimpleName();
-        _builder.append(_simpleName, "");
+        _builder.append(_simpleName);
         _builder.append(" extends ");
         Grammar _grammar_1 = QuickfixProviderFragment2.this.getGrammar();
         TypeReference _quickfixProviderSuperClass = QuickfixProviderFragment2.this.getQuickfixProviderSuperClass(_grammar_1);
-        _builder.append(_quickfixProviderSuperClass, "");
+        _builder.append(_quickfixProviderSuperClass);
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
         _builder.newLine();
@@ -220,7 +220,7 @@ public class QuickfixProviderFragment2 extends AbstractInheritingFragment {
         Grammar _grammar_2 = QuickfixProviderFragment2.this.getGrammar();
         TypeReference _validatorClass = QuickfixProviderFragment2.this._validatorNaming.getValidatorClass(_grammar_2);
         String _simpleName_1 = _validatorClass.getSimpleName();
-        _builder.append(_simpleName_1, "");
+        _builder.append(_simpleName_1);
         _builder.append(".INVALID_NAME)");
         _builder.newLineIfNotEmpty();
         _builder.append("//\tdef capitalizeName(Issue issue, IssueResolutionAcceptor acceptor) {");
@@ -274,11 +274,11 @@ public class QuickfixProviderFragment2 extends AbstractInheritingFragment {
         Grammar _grammar = QuickfixProviderFragment2.this.getGrammar();
         TypeReference _quickfixProviderClass = QuickfixProviderFragment2.this.getQuickfixProviderClass(_grammar);
         String _simpleName = _quickfixProviderClass.getSimpleName();
-        _builder.append(_simpleName, "");
+        _builder.append(_simpleName);
         _builder.append(" extends ");
         Grammar _grammar_1 = QuickfixProviderFragment2.this.getGrammar();
         TypeReference _quickfixProviderSuperClass = QuickfixProviderFragment2.this.getQuickfixProviderSuperClass(_grammar_1);
-        _builder.append(_quickfixProviderSuperClass, "");
+        _builder.append(_quickfixProviderSuperClass);
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
         _builder.newLine();
@@ -286,7 +286,7 @@ public class QuickfixProviderFragment2 extends AbstractInheritingFragment {
         Grammar _grammar_2 = QuickfixProviderFragment2.this.getGrammar();
         TypeReference _validatorClass = QuickfixProviderFragment2.this._validatorNaming.getValidatorClass(_grammar_2);
         String _simpleName_1 = _validatorClass.getSimpleName();
-        _builder.append(_simpleName_1, "");
+        _builder.append(_simpleName_1);
         _builder.append(".INVALID_NAME)");
         _builder.newLineIfNotEmpty();
         _builder.append("//\tpublic void capitalizeName(final Issue issue, IssueResolutionAcceptor acceptor) {");
@@ -340,7 +340,7 @@ public class QuickfixProviderFragment2 extends AbstractInheritingFragment {
       _builder.append("<!-- quickfix marker resolution generator for ");
       Grammar _grammar_2 = this.getGrammar();
       String _name_1 = _grammar_2.getName();
-      _builder.append(_name_1, "");
+      _builder.append(_name_1);
       _builder.append(" -->");
       _builder.newLineIfNotEmpty();
       _builder.append("<extension");

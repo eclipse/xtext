@@ -34,10 +34,10 @@ public class TestableTextSegmentSet {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("[");
     int _offset = region.getOffset();
-    _builder.append(_offset, "");
+    _builder.append(_offset);
     _builder.append(",");
     int _length = region.getLength();
-    _builder.append(_length, "");
+    _builder.append(_length);
     _builder.append("]");
     return _builder.toString();
   }
@@ -47,24 +47,24 @@ public class TestableTextSegmentSet {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("issues=");
     String _join = IterableExtensions.join(this.issues, ", ");
-    _builder.append(_join, "");
+    _builder.append(_join);
     _builder.newLineIfNotEmpty();
     _builder.append("set=");
     final Function1<ITextSegment, String> _function = (ITextSegment it) -> {
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("[");
       int _offset = it.getOffset();
-      _builder_1.append(_offset, "");
+      _builder_1.append(_offset);
       _builder_1.append(",");
       int _length = it.getLength();
-      _builder_1.append(_length, "");
+      _builder_1.append(_length);
       _builder_1.append("]");
       return _builder_1.toString();
     };
     Iterable<String> _map = IterableExtensions.<ITextSegment, String>map(this.set, _function);
     String _string = _map.toString();
     String _replace = _string.replace("\n", ", ");
-    _builder.append(_replace, "");
+    _builder.append(_replace);
     _builder.newLineIfNotEmpty();
     return _builder.toString();
   }
@@ -87,7 +87,7 @@ public class TestableTextSegmentSet {
         };
         Iterable<String> _map = IterableExtensions.<ITextSegment, String>map(conflicting, _function_1);
         String _join = IterableExtensions.join(_map, "<>");
-        _builder.append(_join, "");
+        _builder.append(_join);
         this.issues.add(_builder.toString());
       } else {
         throw Exceptions.sneakyThrow(_t);

@@ -35,7 +35,7 @@ public class GradleBuildFile extends TextFile {
   @Override
   public String getContent() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append(this.pluginsSection, "");
+    _builder.append(this.pluginsSection);
     _builder.newLineIfNotEmpty();
     {
       Iterable<Object> _allDependencies = this.getAllDependencies();
@@ -80,7 +80,7 @@ public class GradleBuildFile extends TextFile {
         _builder.newLine();
       }
     }
-    _builder.append(this.additionalContent, "");
+    _builder.append(this.additionalContent);
     _builder.newLineIfNotEmpty();
     {
       ProjectDescriptor _project_1 = this.getProject();

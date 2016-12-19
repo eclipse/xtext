@@ -58,10 +58,10 @@ public class FileSourceFolder implements ISourceFolder {
   @Override
   public String toString() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append(this.name, "");
+    _builder.append(this.name);
     _builder.append(" (");
     URI _path = this.getPath();
-    _builder.append(_path, "");
+    _builder.append(_path);
     _builder.append(")");
     return _builder.toString();
   }

@@ -34,10 +34,10 @@ public class AbstractAntlrParserBasedTokenSourceProvider extends AbstractTokenSo
     StringConcatenation _builder = new StringConcatenation();
     Class<? extends IParser> _class = this.parser.getClass();
     String _name = _class.getName();
-    _builder.append(_name, "");
+    _builder.append(_name);
     _builder.append(" should be a subclass of ");
     String _name_1 = AbstractAntlrParser.class.getName();
-    _builder.append(_name_1, "");
+    _builder.append(_name_1);
     throw new IllegalStateException(_builder.toString());
   }
 }

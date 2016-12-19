@@ -936,7 +936,7 @@ public class GrammarPDAProviderTest {
       _builder.append("generate GrammarPDAProviderTest \"http://www.eclipse.org/2010/tmf/xtext/GrammarPDAProviderTestLanguage\"");
       _builder.newLine();
       _builder.newLine();
-      _builder.append(rulesText, "");
+      _builder.append(rulesText);
       _builder.newLineIfNotEmpty();
       final Grammar grammar = this.parser.parse(_builder);
       this.validator.assertNoErrors(grammar);
@@ -956,7 +956,7 @@ public class GrammarPDAProviderTest {
       List<ISerializationContext> _sort = IterableExtensions.<ISerializationContext>sort(_flatten);
       final Function1<ISerializationContext, String> _function_2 = (ISerializationContext it) -> {
         StringConcatenation _builder_1 = new StringConcatenation();
-        _builder_1.append(it, "");
+        _builder_1.append(it);
         _builder_1.append(":");
         _builder_1.newLineIfNotEmpty();
         _builder_1.append("\t");

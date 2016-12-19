@@ -63,7 +63,7 @@ public class URIBasedFileSystemAccessTest {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("tempFolder_");
       UUID _randomUUID = UUID.randomUUID();
-      _builder.append(_randomUUID, "");
+      _builder.append(_randomUUID);
       final Path output = Files.createTempDirectory(tmpPath, _builder.toString());
       Path _resolve = output.resolve(URIBasedFileSystemAccessTest.EXISTING_RESOURCE_NAME);
       final Path resource = Files.createFile(_resolve);

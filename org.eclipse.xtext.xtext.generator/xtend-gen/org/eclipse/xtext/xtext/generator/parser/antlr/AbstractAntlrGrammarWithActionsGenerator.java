@@ -93,7 +93,7 @@ public abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractA
             }
             _builder.append("\"");
             String _ruleName = this._grammarAccessExtensions.ruleName(hidden);
-            _builder.append(_ruleName, "");
+            _builder.append(_ruleName);
             _builder.append("\"");
           }
         }
@@ -128,7 +128,7 @@ public abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractA
             _builder.append("grammarAccess.");
             UnorderedGroup _originalElement = AntlrGrammarGenUtil.<UnorderedGroup>getOriginalElement(group);
             String _gaRuleElementAccessor = this._grammarAccessExtensions.gaRuleElementAccessor(((AbstractElement) _originalElement));
-            _builder.append(_gaRuleElementAccessor, "");
+            _builder.append(_gaRuleElementAccessor);
             _builder.newLineIfNotEmpty();
           }
         }

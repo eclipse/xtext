@@ -89,7 +89,7 @@ public class TargetPlatformProject extends ProjectDescriptor {
     _builder.newLine();
     _builder.append("<target name=\"");
     String _name = this.getName();
-    _builder.append(_name, "");
+    _builder.append(_name);
     _builder.append("\" sequenceNumber=\"1\">");
     _builder.newLineIfNotEmpty();
     _builder.append("<locations>");
@@ -146,7 +146,7 @@ public class TargetPlatformProject extends ProjectDescriptor {
           _builder.append("<repository location=\"http://download.eclipse.org/modeling/tmf/xtext/updates/releases/");
           WizardConfiguration _config_2 = this.getConfig();
           XtextVersion _xtextVersion_2 = _config_2.getXtextVersion();
-          _builder.append(_xtextVersion_2, "");
+          _builder.append(_xtextVersion_2);
           _builder.append("/\"/>");
           _builder.newLineIfNotEmpty();
         }

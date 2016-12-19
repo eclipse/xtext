@@ -183,14 +183,14 @@ public class ImportNamespacesScopingFragment2 extends AbstractInheritingFragment
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         _builder.append("binder.bind(");
-        _builder.append(IScopeProvider.class, "");
+        _builder.append(IScopeProvider.class);
         _builder.append(".class).annotatedWith(");
-        _builder.append(Names.class, "");
+        _builder.append(Names.class);
         _builder.append(".named(");
-        _builder.append(AbstractDeclarativeScopeProvider.class, "");
+        _builder.append(AbstractDeclarativeScopeProvider.class);
         _builder.append(".NAMED_DELEGATE)).to(");
         TypeReference _delegateScopeProvider = ImportNamespacesScopingFragment2.this.getDelegateScopeProvider();
-        _builder.append(_delegateScopeProvider, "");
+        _builder.append(_delegateScopeProvider);
         _builder.append(".class);");
       }
     };
@@ -203,9 +203,9 @@ public class ImportNamespacesScopingFragment2 extends AbstractInheritingFragment
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         _builder.append("binder.bindConstant().annotatedWith(");
-        _builder.append(IgnoreCaseLinking.class, "");
+        _builder.append(IgnoreCaseLinking.class);
         _builder.append(".class).to(");
-        _builder.append(ImportNamespacesScopingFragment2.this.ignoreCase, "");
+        _builder.append(ImportNamespacesScopingFragment2.this.ignoreCase);
         _builder.append(");");
       }
     };
@@ -239,11 +239,11 @@ public class ImportNamespacesScopingFragment2 extends AbstractInheritingFragment
         }
         _builder.append("class ");
         String _simpleName = genClass.getSimpleName();
-        _builder.append(_simpleName, "");
+        _builder.append(_simpleName);
         _builder.append(" extends ");
         Grammar _grammar = ImportNamespacesScopingFragment2.this.getGrammar();
         TypeReference _scopeProviderSuperClass = ImportNamespacesScopingFragment2.this.getScopeProviderSuperClass(_grammar);
-        _builder.append(_scopeProviderSuperClass, "");
+        _builder.append(_scopeProviderSuperClass);
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
         _builder.append("}");
@@ -284,11 +284,11 @@ public class ImportNamespacesScopingFragment2 extends AbstractInheritingFragment
         Grammar _grammar = ImportNamespacesScopingFragment2.this.getGrammar();
         TypeReference _scopeProviderClass = ImportNamespacesScopingFragment2.this.getScopeProviderClass(_grammar);
         String _simpleName = _scopeProviderClass.getSimpleName();
-        _builder.append(_simpleName, "");
+        _builder.append(_simpleName);
         _builder.append(" extends ");
         Grammar _grammar_1 = ImportNamespacesScopingFragment2.this.getGrammar();
         TypeReference _abstractScopeProviderClass = ImportNamespacesScopingFragment2.this.getAbstractScopeProviderClass(_grammar_1);
-        _builder.append(_abstractScopeProviderClass, "");
+        _builder.append(_abstractScopeProviderClass);
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
         _builder.newLine();
@@ -330,11 +330,11 @@ public class ImportNamespacesScopingFragment2 extends AbstractInheritingFragment
         Grammar _grammar = ImportNamespacesScopingFragment2.this.getGrammar();
         TypeReference _scopeProviderClass = ImportNamespacesScopingFragment2.this.getScopeProviderClass(_grammar);
         String _simpleName = _scopeProviderClass.getSimpleName();
-        _builder.append(_simpleName, "");
+        _builder.append(_simpleName);
         _builder.append(" extends ");
         Grammar _grammar_1 = ImportNamespacesScopingFragment2.this.getGrammar();
         TypeReference _abstractScopeProviderClass = ImportNamespacesScopingFragment2.this.getAbstractScopeProviderClass(_grammar_1);
-        _builder.append(_abstractScopeProviderClass, "");
+        _builder.append(_abstractScopeProviderClass);
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
         _builder.newLine();

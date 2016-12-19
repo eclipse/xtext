@@ -158,11 +158,11 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
         Grammar _grammar = ValidatorFragment2.this.getGrammar();
         TypeReference _validatorClass = ValidatorFragment2.this._validatorNaming.getValidatorClass(_grammar);
         String _simpleName = _validatorClass.getSimpleName();
-        _builder.append(_simpleName, "");
+        _builder.append(_simpleName);
         _builder.append(" extends ");
         Grammar _grammar_1 = ValidatorFragment2.this.getGrammar();
         TypeReference _abstractValidatorClass = ValidatorFragment2.this._validatorNaming.getAbstractValidatorClass(_grammar_1);
-        _builder.append(_abstractValidatorClass, "");
+        _builder.append(_abstractValidatorClass);
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
@@ -182,7 +182,7 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
         _builder.append("//\t\t\t\t\t");
         Grammar _grammar_2 = ValidatorFragment2.this.getGrammar();
         String _simpleName_1 = GrammarUtil.getSimpleName(_grammar_2);
-        _builder.append(_simpleName_1, "");
+        _builder.append(_simpleName_1);
         _builder.append("Package.Literals.GREETING__NAME,");
         _builder.newLineIfNotEmpty();
         _builder.append("//\t\t\t\t\tINVALID_NAME)");
@@ -228,11 +228,11 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
         Grammar _grammar = ValidatorFragment2.this.getGrammar();
         TypeReference _validatorClass = ValidatorFragment2.this._validatorNaming.getValidatorClass(_grammar);
         String _simpleName = _validatorClass.getSimpleName();
-        _builder.append(_simpleName, "");
+        _builder.append(_simpleName);
         _builder.append(" extends ");
         Grammar _grammar_1 = ValidatorFragment2.this.getGrammar();
         TypeReference _abstractValidatorClass = ValidatorFragment2.this._validatorNaming.getAbstractValidatorClass(_grammar_1);
-        _builder.append(_abstractValidatorClass, "");
+        _builder.append(_abstractValidatorClass);
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
@@ -252,7 +252,7 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
         _builder.append("//\t\t\t\t\t");
         Grammar _grammar_2 = ValidatorFragment2.this.getGrammar();
         String _simpleName_1 = GrammarUtil.getSimpleName(_grammar_2);
-        _builder.append(_simpleName_1, "");
+        _builder.append(_simpleName_1);
         _builder.append("Package.Literals.GREETING__NAME,");
         _builder.newLineIfNotEmpty();
         _builder.append("//\t\t\t\t\tINVALID_NAME);");
@@ -294,7 +294,7 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
           boolean _not = (!_isEmpty);
           if (_not) {
             _builder.append("@");
-            _builder.append(ComposedChecks.class, "");
+            _builder.append(ComposedChecks.class);
             _builder.append("(validators = {");
             {
               boolean _hasElements = false;
@@ -305,7 +305,7 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
                   _builder.appendImmediate(", ", "");
                 }
                 TypeReference _typeRef = TypeReference.typeRef(validator);
-                _builder.append(_typeRef, "");
+                _builder.append(_typeRef);
                 _builder.append(".class");
               }
             }
@@ -322,11 +322,11 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
         }
         _builder.append("class ");
         String _simpleName = genClass.getSimpleName();
-        _builder.append(_simpleName, "");
+        _builder.append(_simpleName);
         _builder.append(" extends ");
         Grammar _grammar = ValidatorFragment2.this.getGrammar();
         TypeReference _genValidatorSuperClass = ValidatorFragment2.this.getGenValidatorSuperClass(_grammar);
-        _builder.append(_genValidatorSuperClass, "");
+        _builder.append(_genValidatorSuperClass);
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
@@ -427,14 +427,14 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
     StringConcatenation _builder = new StringConcatenation();
     Grammar _grammar = this.getGrammar();
     String _runtimeBasePackage = this._xtextGeneratorNaming.getRuntimeBasePackage(_grammar);
-    _builder.append(_runtimeBasePackage, "");
+    _builder.append(_runtimeBasePackage);
     _builder.append(".");
     String _name = pack.getName();
-    _builder.append(_name, "");
+    _builder.append(_name);
     _builder.append(".");
     String _name_1 = pack.getName();
     String _firstUpper = StringExtensions.toFirstUpper(_name_1);
-    _builder.append(_firstUpper, "");
+    _builder.append(_firstUpper);
     _builder.append("Package");
     return _builder.toString();
   }
@@ -452,7 +452,7 @@ public class ValidatorFragment2 extends AbstractInheritingFragment {
       _builder.append("<!-- marker definitions for ");
       Grammar _grammar_1 = this.getGrammar();
       String _name = _grammar_1.getName();
-      _builder.append(_name, "");
+      _builder.append(_name);
       _builder.append(" -->");
       _builder.newLineIfNotEmpty();
       _builder.append("<extension");
