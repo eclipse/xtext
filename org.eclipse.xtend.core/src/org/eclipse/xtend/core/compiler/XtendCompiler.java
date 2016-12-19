@@ -328,9 +328,14 @@ public class XtendCompiler extends XbaseCompiler {
 				else
 					tracingAppendable.append(".append(");
 				internalToJavaExpression(expression, tracingAppendable);
-				tracingAppendable.append(", \"");
-				tracingAppendable.append(Strings.convertToJavaString(indentation.toString(), false));
-				tracingAppendable.append("\");");
+
+				String javaIndentation = Strings.convertToJavaString(indentation.toString(), false);
+				if (immediate || !javaIndentation.isEmpty()) {
+					tracingAppendable.append(", \"");
+					tracingAppendable.append(javaIndentation);
+					tracingAppendable.append("\"");
+				}
+				tracingAppendable.append(");");
 			}
 		}
 

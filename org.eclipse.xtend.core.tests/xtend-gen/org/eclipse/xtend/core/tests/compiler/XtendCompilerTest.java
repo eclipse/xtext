@@ -3065,7 +3065,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("for(final char it_1 : _charArray) {");
     _builder_1.newLine();
     _builder_1.append("        ");
-    _builder_1.append("_builder.append(it_1, \"\");");
+    _builder_1.append("_builder.append(it_1);");
     _builder_1.newLine();
     _builder_1.append("        ");
     _builder_1.append("_builder.newLineIfNotEmpty();");
