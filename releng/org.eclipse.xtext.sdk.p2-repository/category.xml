@@ -9,6 +9,8 @@
 	<feature url="features/org.eclipse.lsp4j.sdk_0.1.0.qualifier.jar" id="org.eclipse.lsp4j.sdk" version="0.1.0.qualifier">
 		<category name="lsp4j"/>
 	</feature>
+	<bundle id="com.google.gson" version="2.7.0.v20161205-1708"/>
+	<bundle id="com.google.gson.source" version="2.7.0.v20161205-1708"/>
 	<category-def name="Xtext" label="Xtext"/>
 	<category-def name="lsp4j" label="LSP4J"/>
 </site>
