@@ -144,5 +144,11 @@
 		<unit id="org.eclipse.m2e.feature.feature.group" version="1.5.1.20150109-1820"/>
 		<repository location="http://download.eclipse.org/releases/luna/201502271000/"/>
 	</location>
+	
+	<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="false" type="InstallableUnit">
+		<unit id="com.google.gson" version="2.7.0.v20161205-1708"/>
+		<unit id="com.google.gson.source" version="2.7.0.v20161205-1708"/>
+		<repository location="http://download.eclipse.org/tools/orbit/S-builds/S20161205183421/repository/"/>
+	</location>
 </locations>
 </target>
