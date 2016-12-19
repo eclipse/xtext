@@ -157,10 +157,10 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
                 StringConcatenation _builder = new StringConcatenation();
                 _builder.append("The interface ");
                 String _simpleName = iface.getSimpleName();
-                _builder.append(_simpleName, "");
+                _builder.append(_simpleName);
                 _builder.append(" is also implemented by the delegate ");
                 String _simpleName_1 = other.getSimpleName();
-                _builder.append(_simpleName_1, "");
+                _builder.append(_simpleName_1);
                 this.context.addError(delegate, _builder.toString());
               }
             }
@@ -203,10 +203,10 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
               StringConcatenation _builder = new StringConcatenation();
               TypeReference _type_1 = this.getType(delegate);
               String _simpleName = _type_1.getSimpleName();
-              _builder.append(_simpleName, "");
+              _builder.append(_simpleName);
               _builder.append(" does not implement ");
               String _simpleName_1 = iface.getSimpleName();
-              _builder.append(_simpleName_1, "");
+              _builder.append(_simpleName_1);
               this.context.addError(delegate, _builder.toString());
               valid = false;
             }
@@ -220,10 +220,10 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
             if (_not_1) {
               StringConcatenation _builder_1 = new StringConcatenation();
               String _simpleName_2 = declaringType.getSimpleName();
-              _builder_1.append(_simpleName_2, "");
+              _builder_1.append(_simpleName_2);
               _builder_1.append(" does not implement ");
               String _simpleName_3 = iface.getSimpleName();
-              _builder_1.append(_simpleName_3, "");
+              _builder_1.append(_simpleName_3);
               this.context.addError(delegate, _builder_1.toString());
               valid = false;
             }
@@ -233,10 +233,10 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
           StringConcatenation _builder = new StringConcatenation();
           TypeReference _type_1 = this.getType(delegate);
           String _simpleName = _type_1.getSimpleName();
-          _builder.append(_simpleName, "");
+          _builder.append(_simpleName);
           _builder.append(" and ");
           String _simpleName_1 = declaringType.getSimpleName();
-          _builder.append(_simpleName_1, "");
+          _builder.append(_simpleName_1);
           _builder.append(" have no interfaces in common");
           this.context.addError(delegate, _builder.toString());
           valid = false;
@@ -417,19 +417,19 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
             @Override
             protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
               String _returnIfNeeded = Util.this.returnIfNeeded(resolvedMethod);
-              _builder.append(_returnIfNeeded, "");
+              _builder.append(_returnIfNeeded);
               CharSequence _delegateAccess = Util.this.delegateAccess(delegate, declaration);
-              _builder.append(_delegateAccess, "");
+              _builder.append(_delegateAccess);
               _builder.append(".");
               String _simpleName = declaration.getSimpleName();
-              _builder.append(_simpleName, "");
+              _builder.append(_simpleName);
               _builder.append("(");
               Iterable<? extends ParameterDeclaration> _parameters = declaration.getParameters();
               final Function1<ParameterDeclaration, CharSequence> _function = (ParameterDeclaration it) -> {
                 return it.getSimpleName();
               };
               String _join = IterableExtensions.join(_parameters, ", ", _function);
-              _builder.append(_join, "");
+              _builder.append(_join);
               _builder.append(");");
               _builder.newLineIfNotEmpty();
             }
@@ -501,7 +501,7 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("this.");
       String _simpleName = it.getSimpleName();
-      _builder.append(_simpleName, "");
+      _builder.append(_simpleName);
       return _builder;
     }
     
@@ -519,7 +519,7 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("this.");
         String _simpleName = it.getSimpleName();
-        _builder.append(_simpleName, "");
+        _builder.append(_simpleName);
         _builder.append("()");
         _switchResult = _builder;
       }
@@ -530,10 +530,10 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
           StringConcatenation _builder_1 = new StringConcatenation();
           _builder_1.append("this.");
           String _simpleName_1 = it.getSimpleName();
-          _builder_1.append(_simpleName_1, "");
+          _builder_1.append(_simpleName_1);
           _builder_1.append("(\"");
           String _simpleName_2 = method.getSimpleName();
-          _builder_1.append(_simpleName_2, "");
+          _builder_1.append(_simpleName_2);
           _builder_1.append("\")");
           _switchResult = _builder_1;
         }
@@ -550,10 +550,10 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
           StringConcatenation _builder_2 = new StringConcatenation();
           _builder_2.append("this.");
           String _simpleName_3 = it.getSimpleName();
-          _builder_2.append(_simpleName_3, "");
+          _builder_2.append(_simpleName_3);
           _builder_2.append("(\"");
           String _simpleName_4 = method.getSimpleName();
-          _builder_2.append(_simpleName_4, "");
+          _builder_2.append(_simpleName_4);
           _builder_2.append("\", new Class[]{");
           Iterable<? extends ParameterDeclaration> _parameters_1 = method.getParameters();
           final Function1<ParameterDeclaration, CharSequence> _function_1 = (ParameterDeclaration it_1) -> {
@@ -563,14 +563,14 @@ public class DelegateProcessor implements TransformationParticipant<MutableMembe
             return (_simpleName_5 + ".class");
           };
           String _join = IterableExtensions.join(_parameters_1, ", ", _function_1);
-          _builder_2.append(_join, "");
+          _builder_2.append(_join);
           _builder_2.append("}, new Object[]{");
           Iterable<? extends ParameterDeclaration> _parameters_2 = method.getParameters();
           final Function1<ParameterDeclaration, CharSequence> _function_2 = (ParameterDeclaration it_1) -> {
             return it_1.getSimpleName();
           };
           String _join_1 = IterableExtensions.join(_parameters_2, ", ", _function_2);
-          _builder_2.append(_join_1, "");
+          _builder_2.append(_join_1);
           _builder_2.append("})");
           _switchResult = _builder_2;
         }
