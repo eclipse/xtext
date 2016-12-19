@@ -61,7 +61,7 @@ public class StandardTypeParameterSubstitutorTest extends AbstractXbaseTestCase 
   protected LightweightTypeReference substituteInArrayContext(final String componentType) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Iterable<");
-    _builder.append(componentType, "");
+    _builder.append(componentType);
     _builder.append(">");
     final LightweightTypeReference typeReference = this.toTypeReference(_builder);
     final DeclaratorTypeArgumentCollector collector = new DeclaratorTypeArgumentCollector();
@@ -89,7 +89,7 @@ public class StandardTypeParameterSubstitutorTest extends AbstractXbaseTestCase 
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("null as ");
-      _builder.append(reference, "");
+      _builder.append(reference);
       final String expression = _builder.toString();
       XExpression _expression = this.expression(expression);
       final XCastedExpression castExpression = ((XCastedExpression) _expression);

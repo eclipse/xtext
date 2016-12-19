@@ -454,9 +454,9 @@ public class StandaloneBuilder {
     if ((absoluteSource == null)) {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("Resource ");
-      _builder.append(uri, "");
+      _builder.append(uri);
       _builder.append(" is not contained in any of the known source folders ");
-      _builder.append(this.sourceDirs, "");
+      _builder.append(this.sourceDirs);
       _builder.append(".");
       throw new IllegalStateException(_builder.toString());
     }

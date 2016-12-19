@@ -79,7 +79,7 @@ public class RecomputingReentrantTypeResolver extends PublicReentrantTypeResolve
     final Map<XExpression, IApplicableCandidate> secondRun = result.getResolvedProxies();
     StringConcatenation _builder = new StringConcatenation();
     String _join = this.mapJoiner.join(firstRun);
-    _builder.append(_join, "");
+    _builder.append(_join);
     _builder.newLineIfNotEmpty();
     _builder.append(" \t");
     _builder.newLine();
@@ -89,7 +89,7 @@ public class RecomputingReentrantTypeResolver extends PublicReentrantTypeResolve
     _builder.append(" \t");
     _builder.newLine();
     String _join_1 = this.mapJoiner.join(secondRun);
-    _builder.append(_join_1, "");
+    _builder.append(_join_1);
     _builder.newLineIfNotEmpty();
     int _size = firstRun.size();
     int _size_1 = secondRun.size();
@@ -98,7 +98,7 @@ public class RecomputingReentrantTypeResolver extends PublicReentrantTypeResolve
     StringConcatenation _builder_1 = new StringConcatenation();
     Set<XExpression> _keySet = firstRun.keySet();
     String _join_2 = setJoiner.join(_keySet);
-    _builder_1.append(_join_2, "");
+    _builder_1.append(_join_2);
     _builder_1.newLineIfNotEmpty();
     _builder_1.append(" \t");
     _builder_1.newLine();
@@ -109,7 +109,7 @@ public class RecomputingReentrantTypeResolver extends PublicReentrantTypeResolve
     _builder_1.newLine();
     Set<XExpression> _keySet_1 = secondRun.keySet();
     String _join_3 = setJoiner.join(_keySet_1);
-    _builder_1.append(_join_3, "");
+    _builder_1.append(_join_3);
     _builder_1.newLineIfNotEmpty();
     Set<XExpression> _keySet_2 = firstRun.keySet();
     Set<XExpression> _keySet_3 = secondRun.keySet();
@@ -127,9 +127,9 @@ public class RecomputingReentrantTypeResolver extends PublicReentrantTypeResolve
   
   protected void _assertEqualLinkingData(final IApplicableCandidate left, final IApplicableCandidate right) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append(left, "");
+    _builder.append(left);
     _builder.append(" vs ");
-    _builder.append(right, "");
+    _builder.append(right);
     Assert.fail(_builder.toString());
   }
   
@@ -180,17 +180,17 @@ public class RecomputingReentrantTypeResolver extends PublicReentrantTypeResolve
   
   protected void _assertEqualLinkingData(final ITypeLiteralLinkingCandidate left, final ILinkingCandidate right) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append(left, "");
+    _builder.append(left);
     _builder.append(" vs ");
-    _builder.append(right, "");
+    _builder.append(right);
     Assert.fail(_builder.toString());
   }
   
   protected void _assertEqualLinkingData(final ILinkingCandidate left, final ITypeLiteralLinkingCandidate right) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append(left, "");
+    _builder.append(left);
     _builder.append(" vs ");
-    _builder.append(right, "");
+    _builder.append(right);
     Assert.fail(_builder.toString());
   }
   
@@ -206,17 +206,17 @@ public class RecomputingReentrantTypeResolver extends PublicReentrantTypeResolve
   
   protected void _assertEqualLinkingData(final TypeInsteadOfConstructorLinkingCandidate left, final IConstructorLinkingCandidate right) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append(left, "");
+    _builder.append(left);
     _builder.append(" vs ");
-    _builder.append(right, "");
+    _builder.append(right);
     Assert.fail(_builder.toString());
   }
   
   protected void _assertEqualLinkingData(final IConstructorLinkingCandidate left, final TypeInsteadOfConstructorLinkingCandidate right) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append(left, "");
+    _builder.append(left);
     _builder.append(" vs ");
-    _builder.append(right, "");
+    _builder.append(right);
     Assert.fail(_builder.toString());
   }
   
@@ -244,17 +244,17 @@ public class RecomputingReentrantTypeResolver extends PublicReentrantTypeResolve
   
   protected void _assertEqualLinkingData(final ImplicitReceiver left, final IFeatureLinkingCandidate right) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append(left, "");
+    _builder.append(left);
     _builder.append(" vs ");
-    _builder.append(right, "");
+    _builder.append(right);
     Assert.fail(_builder.toString());
   }
   
   protected void _assertEqualLinkingData(final IFeatureLinkingCandidate left, final ImplicitReceiver right) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append(left, "");
+    _builder.append(left);
     _builder.append(" vs ");
-    _builder.append(right, "");
+    _builder.append(right);
     Assert.fail(_builder.toString());
   }
   
@@ -386,11 +386,11 @@ public class RecomputingReentrantTypeResolver extends PublicReentrantTypeResolve
   
   public void assertEqualMapping(final String message, final Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> left, final Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> right) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append(message, "");
+    _builder.append(message);
     _builder.append(":");
     _builder.newLineIfNotEmpty();
     String _join = this.mapJoiner.join(left);
-    _builder.append(_join, "");
+    _builder.append(_join);
     _builder.newLineIfNotEmpty();
     _builder.append(" \t");
     _builder.newLine();
@@ -400,17 +400,17 @@ public class RecomputingReentrantTypeResolver extends PublicReentrantTypeResolve
     _builder.append(" \t");
     _builder.newLine();
     String _join_1 = this.mapJoiner.join(right);
-    _builder.append(_join_1, "");
+    _builder.append(_join_1);
     _builder.newLineIfNotEmpty();
     int _size = left.size();
     int _size_1 = right.size();
     Assert.assertEquals(_builder.toString(), _size, _size_1);
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append(message, "");
+    _builder_1.append(message);
     _builder_1.append(":");
     _builder_1.newLineIfNotEmpty();
     String _join_2 = this.mapJoiner.join(left);
-    _builder_1.append(_join_2, "");
+    _builder_1.append(_join_2);
     _builder_1.newLineIfNotEmpty();
     _builder_1.append(" \t");
     _builder_1.newLine();
@@ -420,7 +420,7 @@ public class RecomputingReentrantTypeResolver extends PublicReentrantTypeResolve
     _builder_1.append(" \t");
     _builder_1.newLine();
     String _join_3 = this.mapJoiner.join(right);
-    _builder_1.append(_join_3, "");
+    _builder_1.append(_join_3);
     _builder_1.newLineIfNotEmpty();
     Set<JvmTypeParameter> _keySet = left.keySet();
     Set<JvmTypeParameter> _keySet_1 = right.keySet();

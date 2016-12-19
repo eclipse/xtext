@@ -69,9 +69,9 @@ public abstract class AbstractClosureTypeTest2 extends AbstractXbaseTestCase {
       final Callable<Object> _function_1 = () -> {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("failed for closure at ");
-        _builder.append(index, "");
+        _builder.append(index);
         _builder.append(": ");
-        _builder.append(closureType, "");
+        _builder.append(closureType);
         Assert.assertTrue(_builder.toString(), (closureType instanceof FunctionTypeReference));
         return null;
       };
@@ -79,7 +79,7 @@ public abstract class AbstractClosureTypeTest2 extends AbstractXbaseTestCase {
       final Callable<Object> _function_2 = () -> {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("failed for closure at ");
-        _builder.append(index, "");
+        _builder.append(index);
         Object _get = types[(index).intValue()];
         String _simpleName = closureType.getSimpleName();
         Assert.assertEquals(_builder.toString(), _get, _simpleName);
@@ -120,14 +120,14 @@ public abstract class AbstractClosureTypeTest2 extends AbstractXbaseTestCase {
     StringConcatenation _builder = new StringConcatenation();
     JvmType _type_1 = type.getType();
     String _simpleName = _type_1.getSimpleName();
-    _builder.append(_simpleName, "");
+    _builder.append(_simpleName);
     _builder.append("<");
     List<LightweightTypeReference> _typeArguments_1 = type.getTypeArguments();
     final Function1<LightweightTypeReference, CharSequence> _function = (LightweightTypeReference it) -> {
       return it.getSimpleName();
     };
     String _join = IterableExtensions.<LightweightTypeReference>join(_typeArguments_1, ", ", _function);
-    _builder.append(_join, "");
+    _builder.append(_join);
     _builder.append(">");
     return _builder.toString();
   }

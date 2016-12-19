@@ -55,13 +55,13 @@ public class SeparatorEntry<T extends Object, R extends ITextSegment> extends En
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("\"");
     String _text = this.separator.getText();
-    _builder.append(_text, "");
+    _builder.append(_text);
     _builder.append("\" at offset=");
     int _offset = this.separator.getOffset();
-    _builder.append(_offset, "");
+    _builder.append(_offset);
     _builder.append(" lenght=");
     int _length = this.separator.getLength();
-    _builder.append(_length, "");
+    _builder.append(_length);
     return _builder.toString();
   }
   

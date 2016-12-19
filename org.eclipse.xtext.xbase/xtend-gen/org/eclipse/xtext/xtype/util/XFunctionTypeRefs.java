@@ -40,23 +40,23 @@ public class XFunctionTypeRefs {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("java:/Objects/");
       String _canonicalName = Procedures.class.getCanonicalName();
-      _builder.append(_canonicalName, "");
+      _builder.append(_canonicalName);
       _builder.append("#");
       String _canonicalName_1 = Procedures.class.getCanonicalName();
-      _builder.append(_canonicalName_1, "");
+      _builder.append(_canonicalName_1);
       _builder.append("$Procedure");
-      _builder.append(paramCount, "");
+      _builder.append(paramCount);
       return _builder.toString();
     }
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("java:/Objects/");
     String _canonicalName_2 = Functions.class.getCanonicalName();
-    _builder_1.append(_canonicalName_2, "");
+    _builder_1.append(_canonicalName_2);
     _builder_1.append("#");
     String _canonicalName_3 = Functions.class.getCanonicalName();
-    _builder_1.append(_canonicalName_3, "");
+    _builder_1.append(_canonicalName_3);
     _builder_1.append("$Function");
-    _builder_1.append(paramCount, "");
+    _builder_1.append(paramCount);
     return _builder_1.toString();
   }
   

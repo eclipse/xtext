@@ -253,10 +253,10 @@ public class ResolvedOperationTest extends AbstractXbaseTestCase {
       final EnumSet<IOverrideCheckResult.OverrideCheckDetails> actual = checkResult.getDetails();
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("Failed: ");
-      _builder.append(actual, "");
+      _builder.append(actual);
       _builder.append(".containsAll(");
       List<IOverrideCheckResult.OverrideCheckDetails> _list = IterableExtensions.<IOverrideCheckResult.OverrideCheckDetails>toList(((Iterable<IOverrideCheckResult.OverrideCheckDetails>)Conversions.doWrapArray(details)));
-      _builder.append(_list, "");
+      _builder.append(_list);
       _builder.append(")");
       boolean _containsAll = actual.containsAll(((Collection<?>)Conversions.doWrapArray(details)));
       Assert.assertTrue(_builder.toString(), _containsAll);
@@ -271,9 +271,9 @@ public class ResolvedOperationTest extends AbstractXbaseTestCase {
       final EnumSet<IOverrideCheckResult.OverrideCheckDetails> actual = checkResult.getDetails();
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("Failed: ");
-      _builder.append(actual, "");
+      _builder.append(actual);
       _builder.append(".contains(");
-      _builder.append(detail, "");
+      _builder.append(detail);
       _builder.append(")");
       boolean _contains = actual.contains(detail);
       Assert.assertTrue(_builder.toString(), _contains);

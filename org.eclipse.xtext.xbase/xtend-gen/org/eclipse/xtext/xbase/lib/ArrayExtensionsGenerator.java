@@ -61,7 +61,7 @@ public class ArrayExtensionsGenerator {
         int _length = _startMarker_2.length();
         int _plus = (_indexOf_1 + _length);
         String _substring = content.substring(0, _plus);
-        _builder.append(_substring, "");
+        _builder.append(_substring);
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
         _builder.newLine();
@@ -72,7 +72,7 @@ public class ArrayExtensionsGenerator {
         String _endMarker = this.endMarker();
         int _indexOf_2 = content.indexOf(_endMarker);
         String _substring_1 = content.substring(_indexOf_2);
-        _builder.append(_substring_1, "");
+        _builder.append(_substring_1);
         _builder.newLineIfNotEmpty();
         final String newContent = _builder.toString();
         final FileWriter writer = new FileWriter(file);
@@ -89,41 +89,41 @@ public class ArrayExtensionsGenerator {
   public CharSequence generateAllOperations() {
     StringConcatenation _builder = new StringConcatenation();
     CharSequence _generateLength = this.generateLength("Object");
-    _builder.append(_generateLength, "");
+    _builder.append(_generateLength);
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     CharSequence _generateHashCode = this.generateHashCode("Object");
-    _builder.append(_generateHashCode, "");
+    _builder.append(_generateHashCode);
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     CharSequence _generateEquals = this.generateEquals("Object");
-    _builder.append(_generateEquals, "");
+    _builder.append(_generateEquals);
     _builder.newLineIfNotEmpty();
     {
       for(final String t : this.primitiveTypes) {
         _builder.newLine();
         CharSequence _generateGet = this.generateGet(t);
-        _builder.append(_generateGet, "");
+        _builder.append(_generateGet);
         _builder.newLineIfNotEmpty();
         _builder.newLine();
         CharSequence _generateSet = this.generateSet(t);
-        _builder.append(_generateSet, "");
+        _builder.append(_generateSet);
         _builder.newLineIfNotEmpty();
         _builder.newLine();
         CharSequence _generateLength_1 = this.generateLength(t);
-        _builder.append(_generateLength_1, "");
+        _builder.append(_generateLength_1);
         _builder.newLineIfNotEmpty();
         _builder.newLine();
         CharSequence _generateHashCode_1 = this.generateHashCode(t);
-        _builder.append(_generateHashCode_1, "");
+        _builder.append(_generateHashCode_1);
         _builder.newLineIfNotEmpty();
         _builder.newLine();
         CharSequence _generateEquals_1 = this.generateEquals(t);
-        _builder.append(_generateEquals_1, "");
+        _builder.append(_generateEquals_1);
         _builder.newLineIfNotEmpty();
         _builder.newLine();
         CharSequence _generateClone = this.generateClone(t);
-        _builder.append(_generateClone, "");
+        _builder.append(_generateClone);
         _builder.newLineIfNotEmpty();
       }
     }
@@ -162,9 +162,9 @@ public class ArrayExtensionsGenerator {
     _builder.append("@GwtIncompatible(\"clone\")");
     _builder.newLine();
     _builder.append("public static ");
-    _builder.append(type, "");
+    _builder.append(type);
     _builder.append("[] clone(");
-    _builder.append(type, "");
+    _builder.append(type);
     _builder.append("[] array) {");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
@@ -217,7 +217,7 @@ public class ArrayExtensionsGenerator {
     _builder.append("@Inline(\"$1.equals($2)\")");
     _builder.newLine();
     _builder.append("public static boolean equals(");
-    _builder.append(type, "");
+    _builder.append(type);
     _builder.append("[] array, Object other) {");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
@@ -258,7 +258,7 @@ public class ArrayExtensionsGenerator {
     _builder.append("@Inline(\"$1.hashCode()\")");
     _builder.newLine();
     _builder.append("public static int hashCode(");
-    _builder.append(type, "");
+    _builder.append(type);
     _builder.append("[] array) {");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
@@ -290,7 +290,7 @@ public class ArrayExtensionsGenerator {
     _builder.append("@Inline(\"$1.length\")");
     _builder.newLine();
     _builder.append("public static int length(");
-    _builder.append(type, "");
+    _builder.append(type);
     _builder.append("[] array) {");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
@@ -332,11 +332,11 @@ public class ArrayExtensionsGenerator {
     _builder.append("@Inline(\"$1[$2] = $3\")");
     _builder.newLine();
     _builder.append("public static ");
-    _builder.append(type, "");
+    _builder.append(type);
     _builder.append(" set(");
-    _builder.append(type, "");
+    _builder.append(type);
     _builder.append("[] array, int index, ");
-    _builder.append(type, "");
+    _builder.append(type);
     _builder.append(" value) {");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
@@ -377,9 +377,9 @@ public class ArrayExtensionsGenerator {
     _builder.append("@Inline(\"$1[$2]\")");
     _builder.newLine();
     _builder.append("public static ");
-    _builder.append(type, "");
+    _builder.append(type);
     _builder.append(" get(");
-    _builder.append(type, "");
+    _builder.append(type);
     _builder.append("[] array, int index) {");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");

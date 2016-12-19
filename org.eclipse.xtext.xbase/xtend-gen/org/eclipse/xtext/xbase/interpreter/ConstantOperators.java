@@ -155,9 +155,9 @@ public class ConstantOperators {
         StringConcatenation _builder = new StringConcatenation();
         _builder.newLine();
         _builder.append("def dispatch ");
-        _builder.append(returnType, "");
+        _builder.append(returnType);
         String _key = op.getKey();
-        _builder.append(_key, "");
+        _builder.append(_key);
         _builder.append("(Object left, Object right) {");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
@@ -177,22 +177,22 @@ public class ConstantOperators {
             for (final String right : _keySet_1) {
               StringConcatenation _builder_1 = new StringConcatenation();
               _builder_1.append("def dispatch ");
-              _builder_1.append(returnType, "");
+              _builder_1.append(returnType);
               String _key_1 = op.getKey();
-              _builder_1.append(_key_1, "");
+              _builder_1.append(_key_1);
               _builder_1.append("(");
-              _builder_1.append(left, "");
+              _builder_1.append(left);
               _builder_1.append(" left, ");
-              _builder_1.append(right, "");
+              _builder_1.append(right);
               _builder_1.append(" right) { left.");
               String _get = types.get(left);
-              _builder_1.append(_get, "");
+              _builder_1.append(_get);
               _builder_1.append(" ");
               String _value_2 = op.getValue();
-              _builder_1.append(_value_2, "");
+              _builder_1.append(_value_2);
               _builder_1.append(" right.");
               String _get_1 = types.get(right);
-              _builder_1.append(_get_1, "");
+              _builder_1.append(_get_1);
               _builder_1.append(" }");
               InputOutput.<String>println(_builder_1.toString());
             }

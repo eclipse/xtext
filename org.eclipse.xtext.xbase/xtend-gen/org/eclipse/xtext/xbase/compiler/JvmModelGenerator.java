@@ -714,7 +714,7 @@ public class JvmModelGenerator implements IGenerator {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("java.lang.Enum<");
         String _identifier = ((JvmEnumerationType)it).getIdentifier();
-        _builder.append(_identifier, "");
+        _builder.append(_identifier);
         _builder.append(">");
         _switchResult = _builder.toString();
       }

@@ -77,7 +77,7 @@ public class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
       _builder.append("Noticed an unexpectect character sequence in reference grammar after token ");
       AntlrGrammarComparator.MatchState _testedGrammar = context.getTestedGrammar();
       String _previousToken = _testedGrammar.getPreviousToken();
-      _builder.append(_previousToken, "");
+      _builder.append(_previousToken);
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
       _builder.append("and before token ");
@@ -109,7 +109,7 @@ public class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
       _builder.append("Noticed an unexpectect character sequence in reference grammar after token ");
       AntlrGrammarComparator.MatchState _referenceGrammar_1 = context.getReferenceGrammar();
       String _previousToken = _referenceGrammar_1.getPreviousToken();
-      _builder.append(_previousToken, "");
+      _builder.append(_previousToken);
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
       _builder.append("and before token ");
@@ -141,7 +141,7 @@ public class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
       _builder.append("Generated grammar ");
       AntlrGrammarComparator.MatchState _testedGrammar_1 = context.getTestedGrammar();
       String _absoluteFileName_2 = _testedGrammar_1.getAbsoluteFileName();
-      _builder.append(_absoluteFileName_2, "");
+      _builder.append(_absoluteFileName_2);
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
       _builder.append("differs at token ");
@@ -352,16 +352,16 @@ public class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
       StringConcatenation _builder = new StringConcatenation();
       File _tmpFolder = this.getTmpFolder();
       String _absolutePath = _tmpFolder.getAbsolutePath();
-      _builder.append(_absolutePath, "");
+      _builder.append(_absolutePath);
       _builder.append("/");
-      _builder.append(lexerGrammarFileName, "");
+      _builder.append(lexerGrammarFileName);
       final String absoluteLexerGrammarFileNameReference = _builder.toString();
       StringConcatenation _builder_1 = new StringConcatenation();
       File _tmpFolder_1 = this.getTmpFolder();
       String _absolutePath_1 = _tmpFolder_1.getAbsolutePath();
-      _builder_1.append(_absolutePath_1, "");
+      _builder_1.append(_absolutePath_1);
       _builder_1.append("/");
-      _builder_1.append(parserGrammarFileName, "");
+      _builder_1.append(parserGrammarFileName);
       final String absoluteParserGrammarFileNameReference = _builder_1.toString();
       RuntimeException exception = null;
       Grammar _grammar_4 = this.getGrammar();
@@ -376,21 +376,21 @@ public class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
         try {
           StringConcatenation _builder_2 = new StringConcatenation();
           String _path = this.getPath(fsa);
-          _builder_2.append(_path, "");
+          _builder_2.append(_path);
           _builder_2.append("/");
-          _builder_2.append(lexerGrammarFileName, "");
+          _builder_2.append(lexerGrammarFileName);
           final AntlrGrammarComparator.ErrorContext resultLexer = this.comparator.compareGrammars(lexerGrammarFile, lexerGrammarFileReference, _builder_2.toString(), absoluteLexerGrammarFileNameReference, errorHandler);
           StringConcatenation _builder_3 = new StringConcatenation();
           _builder_3.append("Generated ");
-          _builder_3.append(type, "");
+          _builder_3.append(type);
           _builder_3.append(" lexer grammar of ");
           AntlrGrammarComparator.MatchState _testedGrammar = resultLexer.getTestedGrammar();
           int _lineNumber = _testedGrammar.getLineNumber();
-          _builder_3.append(_lineNumber, "");
+          _builder_3.append(_lineNumber);
           _builder_3.append(" lines matches expected one of ");
           AntlrGrammarComparator.MatchState _referenceGrammar = resultLexer.getReferenceGrammar();
           int _lineNumber_1 = _referenceGrammar.getLineNumber();
-          _builder_3.append(_lineNumber_1, "");
+          _builder_3.append(_lineNumber_1);
           _builder_3.append(".");
           XtextAntlrGeneratorComparisonFragment.LOG.info(_builder_3);
         } catch (final Throwable _t) {
@@ -415,24 +415,24 @@ public class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
       try {
         StringConcatenation _builder_4 = new StringConcatenation();
         String _path_1 = this.getPath(fsa);
-        _builder_4.append(_path_1, "");
+        _builder_4.append(_path_1);
         _builder_4.append("/");
-        _builder_4.append(parserGrammarFileName, "");
+        _builder_4.append(parserGrammarFileName);
         final AntlrGrammarComparator.ErrorContext result = this.comparator.compareGrammars(grammarFile, grammarFileReference, _builder_4.toString(), absoluteParserGrammarFileNameReference, errorHandler);
         StringConcatenation _builder_5 = new StringConcatenation();
         _builder_5.append("Generated ");
-        _builder_5.append(type, "");
+        _builder_5.append(type);
         _builder_5.append(" parser grammar of ");
         AntlrGrammarComparator.MatchState _testedGrammar_1 = result.getTestedGrammar();
         int _lineNumber_2 = _testedGrammar_1.getLineNumber();
-        _builder_5.append(_lineNumber_2, "");
+        _builder_5.append(_lineNumber_2);
         _builder_5.append(" lines matches expected one of ");
         AntlrGrammarComparator.MatchState _referenceGrammar_1 = result.getReferenceGrammar();
         int _lineNumber_3 = _referenceGrammar_1.getLineNumber();
-        _builder_5.append(_lineNumber_3, "");
+        _builder_5.append(_lineNumber_3);
         _builder_5.append(" (");
         long _reset = stopWatch.reset();
-        _builder_5.append(_reset, "");
+        _builder_5.append(_reset);
         _builder_5.append(" ms).");
         XtextAntlrGeneratorComparisonFragment.LOG.info(_builder_5);
       } catch (final Throwable _t_1) {
@@ -567,7 +567,7 @@ public class XtextAntlrGeneratorComparisonFragment extends FragmentAdapter {
       int _length = to.length();
       int _minus = (_length - 2);
       String _substring = to.substring(0, _minus);
-      _builder.append(_substring, "");
+      _builder.append(_substring);
       _builder.append("Expected.g");
       File _file_1 = new File(_builder.toString());
       Files.copy(_file, _file_1);

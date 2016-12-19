@@ -35,7 +35,7 @@ public class Bug462047LangJvmModelInferrer extends AbstractModelInferrer {
       if (_ref!=null) {
         _qualifiedName=_ref.getQualifiedName();
       }
-      _builder.append(_qualifiedName, "");
+      _builder.append(_qualifiedName);
       this._jvmTypesBuilder.setDocumentation(it, _builder.toString());
     };
     acceptor.<JvmGenericType>accept(_class, _function);

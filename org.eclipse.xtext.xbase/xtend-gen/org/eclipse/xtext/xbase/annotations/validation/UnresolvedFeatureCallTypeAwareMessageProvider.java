@@ -82,7 +82,7 @@ public class UnresolvedFeatureCallTypeAwareMessageProvider extends LinkingDiagno
     boolean _isStaticMemberCallTarget = this.isStaticMemberCallTarget(contextObject);
     if (_isStaticMemberCallTarget) {
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append(linkText, "");
+      _builder.append(linkText);
       _builder.append(" cannot be resolved to a type.");
       return new DiagnosticMessage(_builder.toString(), Severity.ERROR, Diagnostic.LINKING_DIAGNOSTIC, 
         UnresolvedFeatureCallTypeAwareMessageProvider.TYPE_LITERAL);
@@ -97,11 +97,11 @@ public class UnresolvedFeatureCallTypeAwareMessageProvider extends LinkingDiagno
     EReference _reference = context.getReference();
     EClass referenceType = _reference.getEReferenceType();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append(linkText, "");
+    _builder_1.append(linkText);
     _builder_1.append(" cannot be resolved");
     EReference _reference_1 = context.getReference();
     String _typeName = this.getTypeName(referenceType, _reference_1);
-    _builder_1.append(_typeName, "");
+    _builder_1.append(_typeName);
     _builder_1.append(".");
     final String msg = _builder_1.toString();
     return new DiagnosticMessage(msg, Severity.ERROR, Diagnostic.LINKING_DIAGNOSTIC, linkText);
@@ -143,11 +143,11 @@ public class UnresolvedFeatureCallTypeAwareMessageProvider extends LinkingDiagno
     {
       if (orField) {
         _builder.append("or field ");
-        _builder.append(linkText, "");
+        _builder.append(linkText);
       } else {
-        _builder.append(linkText, "");
+        _builder.append(linkText);
         _builder.append("(");
-        _builder.append(args, "");
+        _builder.append(args);
         _builder.append(")");
       }
     }

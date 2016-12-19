@@ -33,10 +33,10 @@ public class ValidatorNaming {
   public String getValidatorName(final Grammar g) {
     StringConcatenation _builder = new StringConcatenation();
     String _basePackageRuntime = this._naming.basePackageRuntime(g);
-    _builder.append(_basePackageRuntime, "");
+    _builder.append(_basePackageRuntime);
     _builder.append(".validation.");
     String _simpleName = GrammarUtil.getSimpleName(g);
-    _builder.append(_simpleName, "");
+    _builder.append(_simpleName);
     _builder.append("Validator");
     return _builder.toString();
   }
@@ -44,10 +44,10 @@ public class ValidatorNaming {
   public String getAbstractValidatorName() {
     StringConcatenation _builder = new StringConcatenation();
     String _basePackageRuntime = this._naming.basePackageRuntime(this.grammar);
-    _builder.append(_basePackageRuntime, "");
+    _builder.append(_basePackageRuntime);
     _builder.append(".validation.Abstract");
     String _simpleName = GrammarUtil.getSimpleName(this.grammar);
-    _builder.append(_simpleName, "");
+    _builder.append(_simpleName);
     _builder.append("Validator");
     return _builder.toString();
   }
@@ -70,14 +70,14 @@ public class ValidatorNaming {
   public String getGeneratedEPackageName(final EPackage pack) {
     StringConcatenation _builder = new StringConcatenation();
     String _basePackageRuntime = this._naming.basePackageRuntime(this.grammar);
-    _builder.append(_basePackageRuntime, "");
+    _builder.append(_basePackageRuntime);
     _builder.append(".");
     String _name = pack.getName();
-    _builder.append(_name, "");
+    _builder.append(_name);
     _builder.append(".");
     String _name_1 = pack.getName();
     String _firstUpper = StringExtensions.toFirstUpper(_name_1);
-    _builder.append(_firstUpper, "");
+    _builder.append(_firstUpper);
     _builder.append("Package");
     return _builder.toString();
   }
