@@ -8,8 +8,8 @@
 	<packaging>pom</packaging>
 	<repositories>
 		<repository>
-			<id>lsapi-from-jenkins</id>
-			<url>http://services.typefox.io/open-source/jenkins/job/lsapi/lastStableBuild/artifact/build/maven-repository/</url>
+			<id>lsp4j-from-jenkins</id>
+			<url>http://services.typefox.io/open-source/jenkins/job/lsp4j/job/master/lastStableBuild/artifact/build/maven-repository/</url>
 		</repository>
 		<repository>
 			<id>xtext-lib-from-jenkins</id>
@@ -26,12 +26,22 @@
 		<repository>
 			<id>central snapshots</id>
 			<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+		</repository>
+		<repository>
+			<id>it-repo</id>
+			<url>file://${maven.repo.local}</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
 		</repository>
 	</repositories>
 	<pluginRepositories>
 		<pluginRepository>
-			<id>lsapi-from-jenkins</id>
-			<url>http://services.typefox.io/open-source/jenkins/job/lsapi/lastStableBuild/artifact/build/maven-repository/</url>
+			<id>lsp4j-from-jenkins</id>
+			<url>http://services.typefox.io/open-source/jenkins/job/lsp4j/job/master/lastStableBuild/artifact/build/maven-repository/</url>
 		</pluginRepository>
 		<pluginRepository>
 			<id>xtext-lib-from-jenkins</id>
@@ -48,6 +58,16 @@
 		<pluginRepository>
 			<id>central snapshots</id>
 			<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+		</pluginRepository>
+		<pluginRepository>
+			<id>it-repo</id>
+			<url>file://${maven.repo.local}</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
 		</pluginRepository>
 	</pluginRepositories>
 </project>
