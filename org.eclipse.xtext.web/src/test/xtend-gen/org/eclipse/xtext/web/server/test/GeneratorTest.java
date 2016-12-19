@@ -60,7 +60,7 @@ public class GeneratorTest extends AbstractWebServerTest {
             _builder.appendImmediate(",", "");
           }
           String _name = state.getName();
-          _builder.append(_name, "");
+          _builder.append(_name);
         }
       }
       _builder.newLineIfNotEmpty();

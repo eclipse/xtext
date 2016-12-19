@@ -20,7 +20,7 @@ public class StatemachineTemplateProposalProvider extends AbstractIdeTemplatePro
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         _builder.append("state ");
         AbstractIdeTemplateProposalProvider.Variable _variable = StatemachineTemplateProposalProvider.this.variable("name");
-        _builder.append(_variable, "");
+        _builder.append(_variable);
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
         AbstractIdeTemplateProposalProvider.Cursor _cursor = StatemachineTemplateProposalProvider.this.cursor();

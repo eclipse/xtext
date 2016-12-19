@@ -222,7 +222,7 @@ public class HoverService {
       if (_greaterThan) {
         _builder.append(" class=\"");
         String _join = IterableExtensions.join(((Iterable<?>)Conversions.doWrapArray(divClasses)), " ");
-        _builder.append(_join, "");
+        _builder.append(_join);
         _builder.append("\"");
       }
     }
