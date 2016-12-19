@@ -652,6 +652,9 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
       _builder.append("\"");
       _builder.newLineIfNotEmpty();
       _builder.append("\t");
+      _builder.append("mwe2 \"org.eclipse.xtext:org.eclipse.xtext.common.types:${xtextVersion}\"");
+      _builder.newLine();
+      _builder.append("\t");
       _builder.append("mwe2 \"org.eclipse.xtext:org.eclipse.xtext.xtext.generator:${xtextVersion}\"");
       _builder.newLine();
       {
@@ -911,6 +914,26 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
           _builder.append(_mweVersion, "\t\t\t\t\t");
           _builder.append("</version>");
           _builder.newLineIfNotEmpty();
+          _builder.append("\t\t\t");
+          _builder.append("\t");
+          _builder.append("</dependency>");
+          _builder.newLine();
+          _builder.append("\t\t\t");
+          _builder.append("\t");
+          _builder.append("<dependency>");
+          _builder.newLine();
+          _builder.append("\t\t\t");
+          _builder.append("\t\t");
+          _builder.append("<groupId>org.eclipse.xtext</groupId>");
+          _builder.newLine();
+          _builder.append("\t\t\t");
+          _builder.append("\t\t");
+          _builder.append("<artifactId>org.eclipse.xtext.common.types</artifactId>");
+          _builder.newLine();
+          _builder.append("\t\t\t");
+          _builder.append("\t\t");
+          _builder.append("<version>${xtextVersion}</version>");
+          _builder.newLine();
           _builder.append("\t\t\t");
           _builder.append("\t");
           _builder.append("</dependency>");

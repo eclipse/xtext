@@ -275,6 +275,7 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 
 				dependencies {
 					mwe2 "org.eclipse.emf:org.eclipse.emf.mwe2.launch:«config.xtextVersion.mweVersion»"
+					mwe2 "org.eclipse.xtext:org.eclipse.xtext.common.types:${xtextVersion}"
 					mwe2 "org.eclipse.xtext:org.eclipse.xtext.xtext.generator:${xtextVersion}"
 					«IF fromExistingEcoreModels»
 						mwe2 "org.eclipse.xtext:org.eclipse.xtext.generator:${xtextVersion}"
@@ -351,6 +352,11 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 										<groupId>org.eclipse.emf</groupId>
 										<artifactId>org.eclipse.emf.mwe2.launch</artifactId>
 										<version>«config.xtextVersion.mweVersion»</version>
+									</dependency>
+									<dependency>
+										<groupId>org.eclipse.xtext</groupId>
+										<artifactId>org.eclipse.xtext.common.types</artifactId>
+										<version>${xtextVersion}</version>
 									</dependency>
 									<dependency>
 										<groupId>org.eclipse.xtext</groupId>
