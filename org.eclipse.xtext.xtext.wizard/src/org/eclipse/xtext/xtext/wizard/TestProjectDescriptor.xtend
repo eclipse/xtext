@@ -46,7 +46,11 @@ abstract class TestProjectDescriptor extends ProjectDescriptor {
 		deps += super.externalDependencies
 		deps += new ExternalDependency()=>[
 			p2.bundleId = "org.junit"
-			p2.version = "4.7.0"
+			p2.version = "4.12.0"
+			maven.groupId = "junit"
+			maven.artifactId = "junit"
+			maven.version = "4.12"
+			maven.scope = Scope.TESTCOMPILE
 		]
 		return deps
 	}

@@ -26,6 +26,7 @@ import org.eclipse.xtext.xtext.wizard.ExternalDependency;
 import org.eclipse.xtext.xtext.wizard.Outlet;
 import org.eclipse.xtext.xtext.wizard.PomFile;
 import org.eclipse.xtext.xtext.wizard.ProjectDescriptor;
+import org.eclipse.xtext.xtext.wizard.Scope;
 import org.eclipse.xtext.xtext.wizard.SourceLayout;
 import org.eclipse.xtext.xtext.wizard.TestedProjectDescriptor;
 
@@ -82,7 +83,15 @@ public abstract class TestProjectDescriptor extends ProjectDescriptor {
       ExternalDependency.P2Coordinates _p2 = it.getP2();
       _p2.setBundleId("org.junit");
       ExternalDependency.P2Coordinates _p2_1 = it.getP2();
-      _p2_1.setVersion("4.7.0");
+      _p2_1.setVersion("4.12.0");
+      ExternalDependency.MavenCoordinates _maven = it.getMaven();
+      _maven.setGroupId("junit");
+      ExternalDependency.MavenCoordinates _maven_1 = it.getMaven();
+      _maven_1.setArtifactId("junit");
+      ExternalDependency.MavenCoordinates _maven_2 = it.getMaven();
+      _maven_2.setVersion("4.12");
+      ExternalDependency.MavenCoordinates _maven_3 = it.getMaven();
+      _maven_3.setScope(Scope.TESTCOMPILE);
     };
     ExternalDependency _doubleArrow = ObjectExtensions.<ExternalDependency>operator_doubleArrow(_externalDependency, _function);
     deps.add(_doubleArrow);
