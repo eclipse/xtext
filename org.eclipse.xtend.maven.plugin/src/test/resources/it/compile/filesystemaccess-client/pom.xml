@@ -4,6 +4,12 @@
 	<groupId>org.eclipse.xtend</groupId>
 	<artifactId>filesystemaccess-client</artifactId>
 	<version>IT-SNAPSHOT</version>
+	<parent>
+		<relativePath>../pom.xml</relativePath>
+		<groupId>org.eclipse.xtend</groupId>
+		<artifactId>it-tests-parent</artifactId>
+		<version>IT-SNAPSHOT</version>
+	</parent>
 
 	<build>
 		<plugins>

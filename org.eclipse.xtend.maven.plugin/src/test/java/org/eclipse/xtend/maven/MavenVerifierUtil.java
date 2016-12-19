@@ -5,9 +5,11 @@ package org.eclipse.xtend.maven;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 
 import org.apache.maven.it.VerificationException;
 import org.apache.maven.it.Verifier;
+import org.apache.maven.it.util.ResourceExtractor;
 import org.apache.maven.shared.utils.cli.CommandLineUtils;
 import org.junit.Assert;
 
@@ -16,8 +18,18 @@ import org.junit.Assert;
  *
  */
 public class MavenVerifierUtil {
-	
-	
+
+	public static Verifier newVerifier(String pathToTestProject) throws IOException, VerificationException {
+		File testDir = ResourceExtractor.simpleExtractResources(MavenVerifierUtil.class, pathToTestProject);
+		Verifier verifier = new Verifier(testDir.getAbsolutePath());
+		String localRepo = Paths.get("../.m2/repository/").toAbsolutePath().normalize().toString();
+		verifier.setLocalRepo(localRepo);
+		verifier.setDebug(true);
+		// verifier.setDebugJvm(true);
+		// verifier.setForkJvm(false);
+		return verifier;
+	}
+
 	static public void checkMavenExecutable(String verifierRoot) throws IOException, VerificationException {
 		File mvnExecutable = new File(new Verifier(verifierRoot).getExecutable());
 		if (!mvnExecutable.exists()) {

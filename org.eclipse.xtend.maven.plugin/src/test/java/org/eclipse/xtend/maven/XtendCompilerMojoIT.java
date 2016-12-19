@@ -4,8 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Arrays;
 
 import org.apache.maven.it.VerificationException;
@@ -25,6 +23,8 @@ public class XtendCompilerMojoIT {
 	@BeforeClass
 	static public void setUpOnce() throws IOException, VerificationException {
 		MavenVerifierUtil.checkMavenExecutable(ROOT);
+		Verifier clientVerifier = MavenVerifierUtil.newVerifier(ROOT);
+		clientVerifier.executeGoal("install");
 	}
 
 	@Test
@@ -32,12 +32,12 @@ public class XtendCompilerMojoIT {
 		deleteFileIfExist("myusercode/UserCode.css");
 		deleteFileIfExist("com/itemis/myusercode/UserCode2.css");
 
-		Verifier annotationVerifier = newVerifier(ROOT + "/filesystemaccess");
+		Verifier annotationVerifier = MavenVerifierUtil.newVerifier(ROOT + "/filesystemaccess");
 		annotationVerifier.setDebug(true);
 		annotationVerifier.executeGoal("install");
 		annotationVerifier.verifyErrorFreeLog();
 
-		Verifier clientVerifier = newVerifier(ROOT + "/filesystemaccess-client");
+		Verifier clientVerifier = MavenVerifierUtil.newVerifier(ROOT + "/filesystemaccess-client");
 		clientVerifier.setDebug(true);
 		clientVerifier.executeGoal("compile");
 		clientVerifier.verifyErrorFreeLog();
@@ -62,7 +62,7 @@ public class XtendCompilerMojoIT {
 
 	@Test
 	public void encoding() throws Exception {
-		Verifier verifier = newVerifier(ROOT + "/encoding");
+		Verifier verifier = MavenVerifierUtil.newVerifier(ROOT + "/encoding");
 
 		String xtendDir = verifier.getBasedir() + "/src/main/java";
 		assertFileContainsUTF16(verifier, xtendDir + "/test/XtendA.xtend", "Mühlheim-Kärlicher Bürger");
@@ -74,7 +74,7 @@ public class XtendCompilerMojoIT {
 		String gen = verifier.getBasedir() + "/src/main/generated-sources/xtend/test/XtendA.java";
 		assertFileContainsUTF16(verifier, gen, "Mühlheim-Kärlicher Bürger");
 		assertFileContainsUTF16(verifier, gen, "_builder.append(\"möchte meine \");");
-		assertFileContainsUTF16(verifier, gen, "_builder.append(\"tür ölen\");");
+		assertFileContainsUTF16(verifier, gen, "_builder.append(\"tür ölen\", \"\");");
 	}
 
 	@Test
@@ -89,7 +89,7 @@ public class XtendCompilerMojoIT {
 
 	@Test
 	public void aggregation() throws Exception {
-		Verifier verifier = newVerifier(ROOT + "/aggregation");
+		Verifier verifier = MavenVerifierUtil.newVerifier(ROOT + "/aggregation");
 		verifier.setDebug(true);
 		verifier.executeGoal("test");
 		verifier.verifyErrorFreeLog();
@@ -105,7 +105,7 @@ public class XtendCompilerMojoIT {
 	
 	@Test
 	public void suppressWarningsAnnotation() throws Exception {
-		Verifier verifier = newVerifier(ROOT + "/suppress_warnings_annotation");
+		Verifier verifier = MavenVerifierUtil.newVerifier(ROOT + "/suppress_warnings_annotation");
 		System.out.println(verifier.getLogFileName());
 		verifier.setDebug(true);
 		verifier.executeGoal("test");
@@ -122,7 +122,7 @@ public class XtendCompilerMojoIT {
 
 	@Test
 	public void haltOnXtendValidationErrors() throws Exception {
-		Verifier verifier = newVerifier(ROOT + "/xtenderrors");
+		Verifier verifier = MavenVerifierUtil.newVerifier(ROOT + "/xtenderrors");
 		try {
 			verifier.executeGoal("verify");
 			Assert.fail("expected org.apache.maven.plugin.MojoExecutionException");
@@ -134,7 +134,7 @@ public class XtendCompilerMojoIT {
 
 	@Test
 	public void continueOnXtendWarnings() throws Exception {
-		Verifier verifier = newVerifier(ROOT + "/xtendwarnings");
+		Verifier verifier = MavenVerifierUtil.newVerifier(ROOT + "/xtendwarnings");
 		verifier.executeGoal("verify");
 		verifier.verifyTextInLog("3: The import 'java.util.Collections' is never used.");
 		verifier.verifyTextInLog("[INFO] BUILD SUCCESS");
@@ -142,7 +142,7 @@ public class XtendCompilerMojoIT {
 
 	@Test
 	public void readXtendPrefs() throws Exception {
-		Verifier verifier = newVerifier(ROOT + "/xtend-prefs");
+		Verifier verifier = MavenVerifierUtil.newVerifier(ROOT + "/xtend-prefs");
 		verifier.setDebug(true);
 		verifier.executeGoal("test");
 		verifier.verifyErrorFreeLog();
@@ -159,7 +159,7 @@ public class XtendCompilerMojoIT {
 
 	@Test
 	public void readXtendPrefsUnused() throws Exception {
-		Verifier verifier = newVerifier(ROOT + "/xtend-prefs-unused");
+		Verifier verifier = MavenVerifierUtil.newVerifier(ROOT + "/xtend-prefs-unused");
 		verifier.setDebug(true);
 		verifier.executeGoal("test");
 		verifier.verifyErrorFreeLog();
@@ -182,7 +182,7 @@ public class XtendCompilerMojoIT {
 		createSymLink(root + "/multisources/src/main/java/", link.getAbsolutePath());
 		createSymLink(root + "/multisources/src/test/java/", link2.getAbsolutePath());
 		try {
-			Verifier verifier = newVerifier(ROOT + "/symlinks");
+			Verifier verifier = MavenVerifierUtil.newVerifier(ROOT + "/symlinks");
 			verifier.setDebug(true);
 			verifier.executeGoal("test");
 			verifier.verifyErrorFreeLog();
@@ -208,22 +208,12 @@ public class XtendCompilerMojoIT {
 	}
 
 	private void verifyErrorFreeLog(String pathToTestProject, String goal) throws IOException, VerificationException {
-		Verifier verifier = newVerifier(pathToTestProject);
+		Verifier verifier = MavenVerifierUtil.newVerifier(pathToTestProject);
 		verifier.executeGoal(goal);
 		verifier.verifyErrorFreeLog();
 		verifier.resetStreams();
 	}
 
-	private Verifier newVerifier(String pathToTestProject) throws IOException, VerificationException {
-		File testDir = ResourceExtractor.simpleExtractResources(getClass(), pathToTestProject);
-		Verifier verifier = new Verifier(testDir.getAbsolutePath());
-		String localRepo = Paths.get("../.m2/repository/").toAbsolutePath().normalize().toString();
-		verifier.setLocalRepo(localRepo);
-		verifier.setDebug(true);
-		// verifier.setDebugJvm(true);
-		// verifier.setForkJvm(false);
-		return verifier;
-	}
 	
 	private boolean createSymLink(final String linkTarget, final String link) throws IOException {
 		File linkFile = new File(link);
