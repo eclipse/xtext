@@ -75,7 +75,7 @@ public class RuleEngineValidator extends AbstractRuleEngineValidator {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("The device \"");
       String _name = device.getName();
-      _builder.append(_name, "");
+      _builder.append(_name);
       _builder.append("\" must have at least one state.");
       this.error(_builder.toString(), device, RuleEnginePackage.Literals.DEVICE__NAME);
     }
@@ -119,7 +119,7 @@ public class RuleEngineValidator extends AbstractRuleEngineValidator {
           StringConcatenation _builder = new StringConcatenation();
           _builder.append("Firing the same device state that triggers the rule \"");
           String _description = containingRule.getDescription();
-          _builder.append(_description, "");
+          _builder.append(_description);
           _builder.append("\" may lead to endless recursion.");
           this.warning(_builder.toString(), featureCall, XbasePackage.Literals.XFEATURE_CALL__FEATURE_CALL_ARGUMENTS, 0);
         }

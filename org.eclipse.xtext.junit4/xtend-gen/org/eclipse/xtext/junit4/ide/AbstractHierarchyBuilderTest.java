@@ -175,7 +175,7 @@ public abstract class AbstractHierarchyBuilderTest {
       Collection<IHierarchyNode> _buildRoots = builder.buildRoots(rootURI, null);
       for(final IHierarchyNode root : _buildRoots) {
         String _expectation = this.toExpectation(root, builder);
-        _builder.append(_expectation, "");
+        _builder.append(_expectation);
         _builder.newLineIfNotEmpty();
       }
     }
@@ -185,7 +185,7 @@ public abstract class AbstractHierarchyBuilderTest {
   protected String toExpectation(final IHierarchyNode node, final IHierarchyBuilder builder) {
     StringConcatenation _builder = new StringConcatenation();
     IEObjectDescription _element = node.getElement();
-    _builder.append(_element, "");
+    _builder.append(_element);
     _builder.append(" {");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
@@ -203,7 +203,7 @@ public abstract class AbstractHierarchyBuilderTest {
       Collection<IHierarchyNodeReference> _references = node.getReferences();
       for(final IHierarchyNodeReference location : _references) {
         String _expectation = this.toExpectation(location);
-        _builder.append(_expectation, "");
+        _builder.append(_expectation);
         _builder.newLineIfNotEmpty();
       }
     }
@@ -214,7 +214,7 @@ public abstract class AbstractHierarchyBuilderTest {
           Collection<IHierarchyNode> _buildChildren = builder.buildChildren(node, null);
           for(final IHierarchyNode childNode : _buildChildren) {
             String _expectation_1 = this.toExpectation(childNode, builder);
-            _builder.append(_expectation_1, "");
+            _builder.append(_expectation_1);
             _builder.newLineIfNotEmpty();
           }
         }
@@ -227,13 +227,13 @@ public abstract class AbstractHierarchyBuilderTest {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("\'");
     String _text = location.getText();
-    _builder.append(_text, "");
+    _builder.append(_text);
     _builder.append("\' [");
     int _offset = location.getOffset();
-    _builder.append(_offset, "");
+    _builder.append(_offset);
     _builder.append(", ");
     int _length = location.getLength();
-    _builder.append(_length, "");
+    _builder.append(_length);
     _builder.append("]");
     return _builder.toString();
   }

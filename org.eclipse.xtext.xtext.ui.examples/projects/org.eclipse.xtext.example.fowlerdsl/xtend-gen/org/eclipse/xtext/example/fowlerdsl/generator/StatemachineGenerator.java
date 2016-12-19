@@ -57,7 +57,7 @@ public class StatemachineGenerator implements IGenerator {
     _builder.append("public class ");
     Resource _eResource = sm.eResource();
     String _className = this.className(_eResource);
-    _builder.append(_className, "");
+    _builder.append(_className);
     _builder.append(" {");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
@@ -204,7 +204,7 @@ public class StatemachineGenerator implements IGenerator {
     _builder.append("protected void do");
     String _name = command.getName();
     String _firstUpper = StringExtensions.toFirstUpper(_name);
-    _builder.append(_firstUpper, "");
+    _builder.append(_firstUpper);
     _builder.append("() {");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
@@ -225,7 +225,7 @@ public class StatemachineGenerator implements IGenerator {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("if (currentState.equals(\"");
     String _name = state.getName();
-    _builder.append(_name, "");
+    _builder.append(_name);
     _builder.append("\")) {");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");

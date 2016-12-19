@@ -228,10 +228,10 @@ public class FormatterTester {
           int _length = edit.getLength();
           int _plus = (_offset_2 + _length);
           String _substring_1 = oldDocument.substring(_offset_1, _plus);
-          _builder.append(_substring_1, "");
+          _builder.append(_substring_1);
           _builder.append("|");
           String _text = edit.getText();
-          _builder.append(_text, "");
+          _builder.append(_text);
           _builder.append("]");
           debugTrace.append(_builder);
           int _offset_3 = edit.getOffset();

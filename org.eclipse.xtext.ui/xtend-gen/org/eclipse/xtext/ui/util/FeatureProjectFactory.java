@@ -85,7 +85,7 @@ public class FeatureProjectFactory extends ProjectFactory {
   private void createBuildProperties(final IProject project, final IProgressMonitor monitor) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("bin.includes =");
-    _builder.append(FeatureProjectFactory.MANIFEST_FILENAME, "");
+    _builder.append(FeatureProjectFactory.MANIFEST_FILENAME);
     _builder.newLineIfNotEmpty();
     this.writeToFile(_builder, FeatureProjectFactory.BUILD_PROPS_FILE_NAME, project, monitor);
   }
@@ -95,7 +95,7 @@ public class FeatureProjectFactory extends ProjectFactory {
     _builder.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
     _builder.newLine();
     _builder.append("<feature id=\"");
-    _builder.append(this.projectName, "");
+    _builder.append(this.projectName);
     _builder.append("\"");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");

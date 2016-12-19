@@ -61,12 +61,12 @@ public class OnTheFlyJavaCompiler2 {
         };
         Iterable<CategorizedProblem> _filter = IterableExtensions.<CategorizedProblem>filter(_compilationProblems_1, _function_1);
         String _join = IterableExtensions.join(_filter, "\n");
-        _builder.append(_join, "");
+        _builder.append(_join);
         _builder.newLineIfNotEmpty();
         _builder.newLine();
         _builder.append("Code was:");
         _builder.newLine();
-        _builder.append(code, "");
+        _builder.append(code);
         _builder.newLineIfNotEmpty();
         throw new IllegalArgumentException(_builder.toString());
       }
@@ -77,7 +77,7 @@ public class OnTheFlyJavaCompiler2 {
         final ClassNotFoundException e = (ClassNotFoundException)_t;
         StringConcatenation _builder_1 = new StringConcatenation();
         _builder_1.append("Couldn\'t load \'");
-        _builder_1.append(classname, "");
+        _builder_1.append(classname);
         _builder_1.append("\' ");
         _builder_1.newLineIfNotEmpty();
         _builder_1.append("source :");
@@ -131,7 +131,7 @@ public class OnTheFlyJavaCompiler2 {
         };
         Iterable<CategorizedProblem> _filter = IterableExtensions.<CategorizedProblem>filter(_compilationProblems_1, _function_2);
         String _join = IterableExtensions.join(_filter, "\n");
-        _builder.append(_join, "");
+        _builder.append(_join);
         _builder.newLineIfNotEmpty();
         _builder.newLine();
         _builder.append("Code was:");
@@ -140,7 +140,7 @@ public class OnTheFlyJavaCompiler2 {
         _builder.newLine();
         Collection<String> _values = sources.values();
         String _join_1 = IterableExtensions.join(_values, "\n=========\n");
-        _builder.append(_join_1, "");
+        _builder.append(_join_1);
         _builder.newLineIfNotEmpty();
         _builder.append("=========");
         _builder.newLine();
@@ -165,7 +165,7 @@ public class OnTheFlyJavaCompiler2 {
         final ClassNotFoundException e = (ClassNotFoundException)_t;
         StringConcatenation _builder_1 = new StringConcatenation();
         String _message = e.getMessage();
-        _builder_1.append(_message, "");
+        _builder_1.append(_message);
         _builder_1.append(" ");
         _builder_1.newLineIfNotEmpty();
         _builder_1.append("source :");
@@ -194,7 +194,7 @@ public class OnTheFlyJavaCompiler2 {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("public class __Generated implements org.eclipse.xtext.xbase.lib.Functions.Function0<");
       String _name = returnType.getName();
-      _builder.append(_name, "");
+      _builder.append(_name);
       _builder.append("> {");
       _builder.newLineIfNotEmpty();
       _builder.append("\t");

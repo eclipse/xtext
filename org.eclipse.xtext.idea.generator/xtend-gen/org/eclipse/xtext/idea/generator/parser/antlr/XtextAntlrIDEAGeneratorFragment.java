@@ -61,11 +61,11 @@ public class XtextAntlrIDEAGeneratorFragment extends AbstractAntlrXtendGenerator
       final String srcGenPath = srcGenOutlet.getPath();
       final String encoding = srcGenOutlet.getFileEncoding();
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append(srcGenPath, "");
+      _builder.append(srcGenPath);
       _builder.append("/");
       String _grammarFileName = this._psiAntlrGrammarGenerator.getGrammarFileName(grammar);
       String _asPath = this._naming.asPath(_grammarFileName);
-      _builder.append(_asPath, "");
+      _builder.append(_asPath);
       _builder.append(".g");
       final String absoluteGrammarFileName = _builder.toString();
       this.addAntlrParam("-fo");

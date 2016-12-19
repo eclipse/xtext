@@ -43,7 +43,7 @@ public class DomainmodelLabelProvider extends XbaseLabelProvider {
       StringConcatenation _builder = new StringConcatenation();
       EClass _eClass = ((EObject) element).eClass();
       String _name = _eClass.getName();
-      _builder.append(_name, "");
+      _builder.append(_name);
       _builder.append(".gif");
       return _builder;
     }

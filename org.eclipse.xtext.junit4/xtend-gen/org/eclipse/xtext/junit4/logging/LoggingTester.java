@@ -87,7 +87,7 @@ public class LoggingTester {
               _builder.newLine();
             } else {
               _builder.append("Expected ");
-              _builder.append(number, "");
+              _builder.append(number);
               _builder.append(" log entries");
               _builder.newLineIfNotEmpty();
             }
@@ -96,7 +96,7 @@ public class LoggingTester {
         {
           if ((level != null)) {
             _builder.append("with ");
-            _builder.append(level, "");
+            _builder.append(level);
             _builder.append(" level");
             _builder.newLineIfNotEmpty();
           }
@@ -106,11 +106,11 @@ public class LoggingTester {
           return (("\"" + it) + "\"");
         };
         String _join = IterableExtensions.<String>join(((Iterable<String>)Conversions.doWrapArray(messageParts)), ", ", _function_1);
-        _builder.append(_join, "");
+        _builder.append(_join);
         _builder.newLineIfNotEmpty();
         _builder.append("but got");
         _builder.newLine();
-        _builder.append(this.logEntries, "");
+        _builder.append(this.logEntries);
         _builder.newLineIfNotEmpty();
         Assert.fail(_builder.toString());
       }

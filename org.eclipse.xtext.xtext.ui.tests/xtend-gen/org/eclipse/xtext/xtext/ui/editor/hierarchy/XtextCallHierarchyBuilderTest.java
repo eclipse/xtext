@@ -732,9 +732,9 @@ public class XtextCallHierarchyBuilderTest extends AbstractHierarchyBuilderTest 
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("grammar: ");
       IEObjectDescription _grammarDescription = ((XtextCallHierarchyNode)node).getGrammarDescription();
-      _builder.append(_grammarDescription, "");
+      _builder.append(_grammarDescription);
       _builder.newLineIfNotEmpty();
-      _builder.append(superExpectation, "");
+      _builder.append(superExpectation);
       _builder.newLineIfNotEmpty();
       return _builder.toString();
     }

@@ -59,7 +59,7 @@ public class XbaseCopyQualifiedNameService extends DefaultCopyQualifiedNameServi
   protected String toQualifiedName(final JvmExecutable it) {
     StringConcatenation _builder = new StringConcatenation();
     String _fullyQualifiedName = this.toFullyQualifiedName(it);
-    _builder.append(_fullyQualifiedName, "");
+    _builder.append(_fullyQualifiedName);
     _builder.append("(");
     EList<JvmFormalParameter> _parameters = it.getParameters();
     final Function1<JvmFormalParameter, String> _function = (JvmFormalParameter it_1) -> {
@@ -67,7 +67,7 @@ public class XbaseCopyQualifiedNameService extends DefaultCopyQualifiedNameServi
       return _parameterType.getSimpleName();
     };
     CharSequence _qualifiedNames = this.<JvmFormalParameter>toQualifiedNames(_parameters, _function);
-    _builder.append(_qualifiedNames, "");
+    _builder.append(_qualifiedNames);
     _builder.append(")");
     return _builder.toString();
   }
@@ -79,7 +79,7 @@ public class XbaseCopyQualifiedNameService extends DefaultCopyQualifiedNameServi
       final IResolvedExecutable resolvedExecutable = this.resolveExecutable(executable, featureCall, resolvedTypes);
       StringConcatenation _builder = new StringConcatenation();
       String _fullyQualifiedName = this.toFullyQualifiedName(executable);
-      _builder.append(_fullyQualifiedName, "");
+      _builder.append(_fullyQualifiedName);
       _builder.append("(");
       EList<XExpression> _actualArguments = featureCall.getActualArguments();
       final Function1<XExpression, String> _function = (XExpression it) -> {
@@ -87,7 +87,7 @@ public class XbaseCopyQualifiedNameService extends DefaultCopyQualifiedNameServi
         return this.toQualifiedName(it, resolvedExecutable, executable, resolvedTypes, _actualArguments_1);
       };
       CharSequence _qualifiedNames = this.<XExpression>toQualifiedNames(_actualArguments, _function);
-      _builder.append(_qualifiedNames, "");
+      _builder.append(_qualifiedNames);
       _builder.append(")");
       _xblockexpression = _builder.toString();
     }
@@ -101,7 +101,7 @@ public class XbaseCopyQualifiedNameService extends DefaultCopyQualifiedNameServi
       final IResolvedExecutable resolvedExecutable = this.resolveExecutable(constructor, constructorCall, resolvedTypes);
       StringConcatenation _builder = new StringConcatenation();
       String _fullyQualifiedName = this.toFullyQualifiedName(constructor);
-      _builder.append(_fullyQualifiedName, "");
+      _builder.append(_fullyQualifiedName);
       _builder.append("(");
       EList<XExpression> _arguments = constructorCall.getArguments();
       final Function1<XExpression, String> _function = (XExpression it) -> {
@@ -109,7 +109,7 @@ public class XbaseCopyQualifiedNameService extends DefaultCopyQualifiedNameServi
         return this.toQualifiedName(it, resolvedExecutable, constructor, resolvedTypes, _arguments_1);
       };
       CharSequence _qualifiedNames = this.<XExpression>toQualifiedNames(_arguments, _function);
-      _builder.append(_qualifiedNames, "");
+      _builder.append(_qualifiedNames);
       _builder.append(")");
       _xblockexpression = _builder.toString();
     }

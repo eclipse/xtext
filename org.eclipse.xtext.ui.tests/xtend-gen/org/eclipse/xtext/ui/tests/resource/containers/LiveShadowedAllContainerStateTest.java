@@ -275,10 +275,10 @@ public class LiveShadowedAllContainerStateTest {
       {
         for(final String container : allContainers) {
           _builder.append("container ");
-          _builder.append(container, "");
+          _builder.append(container);
           _builder.append(" isEmpty=");
           boolean _isEmpty = containerState.isEmpty(container);
-          _builder.append(_isEmpty, "");
+          _builder.append(_isEmpty);
           _builder.append(" {");
           _builder.newLineIfNotEmpty();
           {

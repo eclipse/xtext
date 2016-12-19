@@ -62,7 +62,7 @@ public class DefaultCopyQualifiedNameService implements CopyQualifiedNameService
             _builder.appendImmediate(", ", "");
           }
           String _apply = toQualifiedNameFunction.apply(element);
-          _builder.append(_apply, "");
+          _builder.append(_apply);
         }
       }
       _xblockexpression = _builder;

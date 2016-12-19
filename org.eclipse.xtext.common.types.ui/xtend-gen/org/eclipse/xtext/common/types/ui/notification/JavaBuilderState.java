@@ -273,9 +273,9 @@ public class JavaBuilderState {
         return simpleTypeName;
       }
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append(packageName, "");
+      _builder.append(packageName);
       _builder.append(".");
-      _builder.append(simpleTypeName, "");
+      _builder.append(simpleTypeName);
       _xblockexpression = _builder.toString();
     }
     return _xblockexpression;

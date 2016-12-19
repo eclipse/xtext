@@ -25,22 +25,22 @@ public class NamingExtensions {
   public String getGrammarFileName(final Grammar it, final String prefix) {
     StringConcatenation _builder = new StringConcatenation();
     String _parserPackage = this.getParserPackage(it);
-    _builder.append(_parserPackage, "");
+    _builder.append(_parserPackage);
     _builder.append(".");
-    _builder.append(prefix, "");
+    _builder.append(prefix);
     _builder.append("Internal");
     String _simpleName = GrammarUtil.getSimpleName(it);
-    _builder.append(_simpleName, "");
+    _builder.append(_simpleName);
     return _builder.toString();
   }
   
   public String getInternalParserClassName(final Grammar it) {
     StringConcatenation _builder = new StringConcatenation();
     String _parserPackage = this.getParserPackage(it);
-    _builder.append(_parserPackage, "");
+    _builder.append(_parserPackage);
     _builder.append(".Internal");
     String _simpleName = GrammarUtil.getSimpleName(it);
-    _builder.append(_simpleName, "");
+    _builder.append(_simpleName);
     _builder.append("Parser");
     return _builder.toString();
   }
@@ -48,7 +48,7 @@ public class NamingExtensions {
   public String getParserPackage(final Grammar it) {
     StringConcatenation _builder = new StringConcatenation();
     String _basePackageRuntime = this._naming.basePackageRuntime(it);
-    _builder.append(_basePackageRuntime, "");
+    _builder.append(_basePackageRuntime);
     _builder.append(".idea.parser.antlr.internal");
     return _builder.toString();
   }
