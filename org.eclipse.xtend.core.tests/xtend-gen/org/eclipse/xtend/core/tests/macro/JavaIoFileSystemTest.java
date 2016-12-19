@@ -393,10 +393,10 @@ public class JavaIoFileSystemTest {
         final Exception e = (Exception)_t;
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("URI: ");
-        _builder.append(uri, "");
+        _builder.append(uri);
         _builder.append("; ");
         String _message = e.getMessage();
-        _builder.append(_message, "");
+        _builder.append(_message);
         Assert.fail(_builder.toString());
       } else {
         throw Exceptions.sneakyThrow(_t);

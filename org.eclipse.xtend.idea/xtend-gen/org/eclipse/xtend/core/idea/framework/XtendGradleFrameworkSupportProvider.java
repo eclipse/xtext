@@ -95,7 +95,7 @@ public class XtendGradleFrameworkSupportProvider extends GradleFrameworkSupportP
     _builder_1.append("compile \'");
     MavenArtifact _xtendLibMavenId = XtendLibraryConfigurator.xtendLibMavenId();
     String _key = _xtendLibMavenId.getKey();
-    _builder_1.append(_key, "");
+    _builder_1.append(_key);
     _builder_1.append("\' ");
     _addRepositoriesDefinition.addDependencyNotation(_builder_1.toString());
     if (snapshot) {

@@ -391,7 +391,7 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
     _builder.append("   Test   Test");
     _builder.newLineIfNotEmpty();
     _builder.append("Test");
-    _builder.append("\'\'\'", "");
+    _builder.append("\'\'\'");
     _builder.append(")");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
@@ -416,11 +416,11 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
     final XExpression call = _expressions.get(0);
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("this._extension.barCharSequence(42, ");
-    _builder_1.append("\'\'\'", "");
+    _builder_1.append("\'\'\'");
     _builder_1.append("   Test   Test");
     _builder_1.newLineIfNotEmpty();
     _builder_1.append("Test");
-    _builder_1.append("\'\'\'", "");
+    _builder_1.append("\'\'\'");
     _builder_1.append(")");
     String _string_1 = _builder_1.toString();
     String _computeUnsugaredExpression = this.serializer.computeUnsugaredExpression(call);

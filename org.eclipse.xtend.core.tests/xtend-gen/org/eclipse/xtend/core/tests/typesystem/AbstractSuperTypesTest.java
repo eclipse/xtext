@@ -61,13 +61,13 @@ public abstract class AbstractSuperTypesTest extends AbstractTestingTypeReferenc
         if (_not) {
           _builder.append("<");
           String _value_1 = type.getValue();
-          _builder.append(_value_1, "");
+          _builder.append(_value_1);
           _builder.append("> ");
         }
       }
       _builder.append("void method(");
       String _key = type.getKey();
-      _builder.append(_key, "");
+      _builder.append(_key);
       _builder.append(" type) {}");
       final String signature = _builder.toString();
       String _string = signature.toString();

@@ -60,13 +60,13 @@ public class SynonmyTypesTest extends AbstractTestingTypeReferenceOwner {
         if (_not) {
           _builder.append("<");
           String _value_1 = typeAndTypeParams.getValue();
-          _builder.append(_value_1, "");
+          _builder.append(_value_1);
           _builder.append("> ");
         }
       }
       _builder.append("void method(");
       String _key = typeAndTypeParams.getKey();
-      _builder.append(_key, "");
+      _builder.append(_key);
       _builder.append(" p) {}");
       final String signature = _builder.toString();
       String _string = signature.toString();

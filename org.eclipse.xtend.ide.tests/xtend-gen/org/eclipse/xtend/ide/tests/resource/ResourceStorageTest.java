@@ -272,7 +272,7 @@ public class ResourceStorageTest extends AbstractXtendUITestCase {
       StringConcatenation _builder = new StringConcatenation();
       Class<? extends ResourceStorageTest> _class = this.getClass();
       String _name = _class.getName();
-      _builder.append(_name, "");
+      _builder.append(_name);
       _builder.append(".TestJob");
       final Procedure1<Job> _function = (Job it) -> {
         ISchedulingRule _newSequence = SchedulingRuleFactory.INSTANCE.newSequence();

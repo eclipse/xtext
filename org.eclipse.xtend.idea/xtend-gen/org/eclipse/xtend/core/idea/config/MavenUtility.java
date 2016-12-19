@@ -41,7 +41,7 @@ public class MavenUtility {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("Can\'t add maven dependency to a non maven module ");
       String _name = module.getName();
-      _builder.append(_name, "");
+      _builder.append(_name);
       throw new IllegalArgumentException(_builder.toString());
     }
     final Project project = module.getProject();

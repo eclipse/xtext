@@ -822,7 +822,7 @@ public abstract class CommonAssignabilityTest extends AbstractAssignabilityTest 
   private String strangeIterable(final String typeParam) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("org.eclipse.xtend.core.tests.typesystem.StrangeIterable<");
-    _builder.append(typeParam, "");
+    _builder.append(typeParam);
     _builder.append(">");
     return _builder.toString();
   }

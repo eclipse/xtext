@@ -17,13 +17,13 @@ public class RewritableImportSectionTest0 extends AbstractRewritableImportSectio
           if (isStatic) {
             _builder.append("import static ");
             String _canonicalName = type.getCanonicalName();
-            _builder.append(_canonicalName, "");
+            _builder.append(_canonicalName);
             _builder.append(".*");
             _builder.newLineIfNotEmpty();
           } else {
             _builder.append("import ");
             String _canonicalName_1 = type.getCanonicalName();
-            _builder.append(_canonicalName_1, "");
+            _builder.append(_canonicalName_1);
             _builder.newLineIfNotEmpty();
           }
         }
@@ -41,7 +41,7 @@ public class RewritableImportSectionTest0 extends AbstractRewritableImportSectio
     _builder.append("package foo");
     _builder.newLine();
     _builder.newLine();
-    _builder.append(sectionAsString, "");
+    _builder.append(sectionAsString);
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("class Foo{}");

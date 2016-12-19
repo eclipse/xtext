@@ -148,9 +148,9 @@ public class AnnotationTest extends AbstractXtendTestCase {
   protected void assertContains(final CharSequence code, final String text) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Substring \'");
-    _builder.append(text, "");
+    _builder.append(text);
     _builder.append("\' not found in \'");
-    _builder.append(code, "");
+    _builder.append(code);
     _builder.append("\' ");
     String _string = code.toString();
     boolean _contains = _string.contains(text);

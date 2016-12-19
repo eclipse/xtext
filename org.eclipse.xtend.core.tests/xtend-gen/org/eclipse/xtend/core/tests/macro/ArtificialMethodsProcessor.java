@@ -84,11 +84,11 @@ public class ArtificialMethodsProcessor extends AbstractClassProcessor {
       StringConcatenationClient _client = new StringConcatenationClient() {
         @Override
         protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-          _builder.append(List.class, "");
+          _builder.append(List.class);
           _builder.append("<? extends Object> list = new ");
-          _builder.append(ArrayList.class, "");
+          _builder.append(ArrayList.class);
           _builder.append("<");
-          _builder.append(BigDecimal.class, "");
+          _builder.append(BigDecimal.class);
           _builder.append(">();");
         }
       };

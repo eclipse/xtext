@@ -61,7 +61,7 @@ public class FileProcessor extends AbstractClassProcessor {
         } else {
           _builder.appendImmediate("|", "");
         }
-        _builder.append(seg, "");
+        _builder.append(seg);
       }
     }
     context.setContents(result, _builder);

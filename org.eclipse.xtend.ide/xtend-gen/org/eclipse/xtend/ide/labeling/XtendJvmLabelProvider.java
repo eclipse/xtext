@@ -40,7 +40,7 @@ public class XtendJvmLabelProvider extends XbaseLabelProvider {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("new ");
         String _simpleName = supertype.getSimpleName();
-        _builder.append(_simpleName, "");
+        _builder.append(_simpleName);
         _builder.append("() {...}");
         return _builder.toString();
       }

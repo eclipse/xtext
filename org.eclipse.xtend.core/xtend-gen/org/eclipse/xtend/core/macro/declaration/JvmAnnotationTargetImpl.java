@@ -59,7 +59,7 @@ public abstract class JvmAnnotationTargetImpl<T extends JvmAnnotationTarget> ext
         _xifexpression = _xblockexpression_1;
       } else {
         StringConcatenation _builder = new StringConcatenation();
-        _builder.append(annotationReference, "");
+        _builder.append(annotationReference);
         _builder.append(" is not annotation reference");
         throw new IllegalArgumentException(_builder.toString());
       }

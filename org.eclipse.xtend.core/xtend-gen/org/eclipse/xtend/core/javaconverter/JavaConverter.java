@@ -231,7 +231,7 @@ public class JavaConverter {
       parser.setUnitName("MISSING");
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("class MISSING { ");
-      _builder.append(javaSrc, "");
+      _builder.append(javaSrc);
       _builder.append(" }");
       javaSrcBuilder.append(_builder);
     } else {

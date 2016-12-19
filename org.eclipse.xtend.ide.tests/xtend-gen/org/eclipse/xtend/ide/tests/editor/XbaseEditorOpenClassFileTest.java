@@ -490,12 +490,12 @@ public class XbaseEditorOpenClassFileTest extends AbstractXtendUITestCase {
     if (_not) {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("Substring \'");
-      _builder.append(substring, "");
+      _builder.append(substring);
       _builder.append("\' not found in");
       _builder.newLineIfNotEmpty();
       _builder.append("-----------");
       _builder.newLine();
-      _builder.append(container, "");
+      _builder.append(container);
       _builder.newLineIfNotEmpty();
       _builder.append("-----------");
       _builder.newLine();

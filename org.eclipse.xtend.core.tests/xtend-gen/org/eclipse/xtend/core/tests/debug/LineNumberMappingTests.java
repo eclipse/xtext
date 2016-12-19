@@ -337,11 +337,11 @@ public class LineNumberMappingTests extends AbstractXtendTestCase {
           if (_equals) {
             StringConcatenation _builder = new StringConcatenation();
             _builder.append("Line ");
-            _builder.append(lineNumber, "");
+            _builder.append(lineNumber);
             _builder.append(" is mapped to ");
-            _builder.append(mapping.targetStartLine, "");
+            _builder.append(mapping.targetStartLine);
             _builder.append("(\'");
-            _builder.append(line, "");
+            _builder.append(line);
             _builder.append("\')");
             String _string_1 = _builder.toString();
             Assert.fail(_string_1);

@@ -114,20 +114,20 @@ public class MemberFromSuperImplementor {
         for(final JvmTypeParameter typeParam : _resolvedTypeParameters_2) {
           if (!_hasElements) {
             _hasElements = true;
-            _builder.append("<", "");
+            _builder.append("<");
           } else {
             _builder.appendImmediate(", ", "");
           }
           String _simpleName_1 = typeParam.getSimpleName();
-          _builder.append(_simpleName_1, "");
+          _builder.append(_simpleName_1);
         }
         if (_hasElements) {
-          _builder.append(">", "");
+          _builder.append(">");
         }
       }
       JvmOperation _declaration_2 = overriddenOperation.getDeclaration();
       String _simpleName_2 = _declaration_2.getSimpleName();
-      _builder.append(_simpleName_2, "");
+      _builder.append(_simpleName_2);
       _builder.append("(");
       JvmOperation _declaration_3 = overriddenOperation.getDeclaration();
       EList<JvmFormalParameter> _parameters = _declaration_3.getParameters();
@@ -136,7 +136,7 @@ public class MemberFromSuperImplementor {
       };
       List<String> _map = ListExtensions.<JvmFormalParameter, String>map(_parameters, _function_1);
       String _join = IterableExtensions.join(_map, ", ");
-      _builder.append(_join, "");
+      _builder.append(_join);
       _builder.append(")");
       final String body = _builder.toString();
       JvmOperation _declaration_4 = overriddenOperation.getDeclaration();
@@ -220,7 +220,7 @@ public class MemberFromSuperImplementor {
         };
         List<String> _map = ListExtensions.<JvmFormalParameter, String>map(_parameters, _function_1);
         String _join = IterableExtensions.join(_map, ", ");
-        _builder.append(_join, "");
+        _builder.append(_join);
         _builder.append(")");
         it.append(_builder);
       }

@@ -510,17 +510,17 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
         IntegerRange _upTo = new IntegerRange(0, 200);
         for(final Integer i : _upTo) {
           _builder.append("RestrictedClass x");
-          _builder.append(i, "");
+          _builder.append(i);
           _builder.append(" = new RestrictedClass");
           _builder.newLineIfNotEmpty();
           _builder.append("InternalClass y");
-          _builder.append(i, "");
+          _builder.append(i);
           _builder.append(" = new InternalClass");
           _builder.newLineIfNotEmpty();
           _builder.append("def bar(InternalClass p1");
-          _builder.append(i, "");
+          _builder.append(i);
           _builder.append(", RestrictedClass p2");
-          _builder.append(i, "");
+          _builder.append(i);
           _builder.append("){}");
           _builder.newLineIfNotEmpty();
         }

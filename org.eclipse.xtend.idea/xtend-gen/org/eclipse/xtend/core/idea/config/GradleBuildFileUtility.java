@@ -82,11 +82,11 @@ public class GradleBuildFileUtility {
         }
         final String scope = _xifexpression;
         StringConcatenation _builder = new StringConcatenation();
-        _builder.append(scope, "");
+        _builder.append(scope);
         _builder.append(" \'");
         MavenArtifact _xtendLibMavenId = XtendLibraryConfigurator.xtendLibMavenId();
         String _key = _xtendLibMavenId.getKey();
-        _builder.append(_key, "");
+        _builder.append(_key);
         _builder.append("\' ");
         GradleBuildFileUtility.this.addDependency(buildFile, _builder.toString());
       }
@@ -108,7 +108,7 @@ public class GradleBuildFileUtility {
       if (android) {
         _xifexpression = "\\.android";
       }
-      _builder.append(_xifexpression, "");
+      _builder.append(_xifexpression);
       _builder.append("\\\\.xtend.*");
       return Boolean.valueOf(_trim.matches(_builder.toString()));
     };
@@ -126,7 +126,7 @@ public class GradleBuildFileUtility {
       _builder.append("classpath \'org.xtext:xtext-android-gradle-plugin:");
       XtextVersion _current = XtextVersion.getCurrent();
       String _xtendAndroidGradlePluginVersion = _current.getXtendAndroidGradlePluginVersion();
-      _builder.append(_xtendAndroidGradlePluginVersion, "");
+      _builder.append(_xtendAndroidGradlePluginVersion);
       _builder.append("\' ");
       _xifexpression = _builder.toString();
     } else {
@@ -134,7 +134,7 @@ public class GradleBuildFileUtility {
       _builder_1.append("classpath \'org.xtext:xtext-gradle-plugin:");
       XtextVersion _current_1 = XtextVersion.getCurrent();
       String _xtendGradlePluginVersion = _current_1.getXtendGradlePluginVersion();
-      _builder_1.append(_xtendGradlePluginVersion, "");
+      _builder_1.append(_xtendGradlePluginVersion);
       _builder_1.append("\' ");
       _xifexpression = _builder_1.toString();
     }
@@ -146,7 +146,7 @@ public class GradleBuildFileUtility {
     if (android) {
       _xifexpression_1 = ".android";
     }
-    _builder_2.append(_xifexpression_1, "");
+    _builder_2.append(_xifexpression_1);
     _builder_2.append(".xtend\' ");
     this.createStatementIfNotExists(buildFile, _builder_2.toString());
   }
@@ -212,7 +212,7 @@ public class GradleBuildFileUtility {
       Project _project = element.getProject();
       GroovyPsiElementFactory factory = GroovyPsiElementFactory.getInstance(_project);
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append(methodName, "");
+      _builder.append(methodName);
       _builder.append("{}");
       GrStatement _createStatementFromText = factory.createStatementFromText(_builder);
       GrStatement _addStatementBefore = element.addStatementBefore(_createStatementFromText, 

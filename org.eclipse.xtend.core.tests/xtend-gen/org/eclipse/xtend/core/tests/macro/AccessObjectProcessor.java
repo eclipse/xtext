@@ -38,7 +38,7 @@ public class AccessObjectProcessor implements TransformationParticipant<MutableC
             StringConcatenation _builder = new StringConcatenation();
             _builder.append("return this.");
             String _simpleName_1 = field.getSimpleName();
-            _builder.append(_simpleName_1, "");
+            _builder.append(_simpleName_1);
             _builder.append(";");
             _builder.newLineIfNotEmpty();
             return _builder;

@@ -6701,9 +6701,9 @@ public abstract class AbstractReusableActiveAnnotationTests {
     boolean _notEquals = (!Objects.equal(first, second));
     if (_notEquals) {
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append(first, "");
+      _builder.append(first);
       _builder.append(" does not refer to the same type as ");
-      _builder.append(second, "");
+      _builder.append(second);
       Assert.fail(_builder.toString());
     }
   }

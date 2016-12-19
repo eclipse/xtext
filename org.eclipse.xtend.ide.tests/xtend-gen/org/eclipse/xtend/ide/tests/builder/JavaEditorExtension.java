@@ -120,7 +120,7 @@ public class JavaEditorExtension {
       if ((JavaEditorExtension.VERBOSE).booleanValue()) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("start waiting for an element changed event: ");
-        _builder.append(eventMask, "");
+        _builder.append(eventMask);
         InputOutput.<String>println(_builder.toString());
       }
       final ArrayList<Boolean> changed = CollectionLiterals.<Boolean>newArrayList(Boolean.valueOf(false));
@@ -146,7 +146,7 @@ public class JavaEditorExtension {
       if ((JavaEditorExtension.VERBOSE).booleanValue()) {
         StringConcatenation _builder_1 = new StringConcatenation();
         _builder_1.append("end waiting for an element changed event: ");
-        _builder_1.append(eventMask, "");
+        _builder_1.append(eventMask);
         _xifexpression = InputOutput.<String>println(_builder_1.toString());
       }
       _xblockexpression = _xifexpression;

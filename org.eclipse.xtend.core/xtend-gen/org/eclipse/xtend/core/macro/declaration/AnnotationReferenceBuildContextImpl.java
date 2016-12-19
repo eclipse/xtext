@@ -89,10 +89,10 @@ public class AnnotationReferenceBuildContextImpl implements AnnotationReferenceB
     if ((jvmOperation == null)) {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("The annotation property \'");
-      _builder.append(name, "");
+      _builder.append(name);
       _builder.append("\' is not declared on the annotation type \'");
       String _identifier = annotationType.getIdentifier();
-      _builder.append(_identifier, "");
+      _builder.append(_identifier);
       _builder.append("\'.");
       throw new IllegalArgumentException(_builder.toString());
     }

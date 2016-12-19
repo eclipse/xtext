@@ -2438,7 +2438,7 @@ public class XtendFindUsagesTest extends LightXtendTest {
     StringConcatenation _builder = new StringConcatenation();
     {
       for(final PsiElement element : elements) {
-        _builder.append(element, "");
+        _builder.append(element);
         Collection<UsageInfo> _findUsages = this.findUsages(findUsagesHandler, element);
         final Comparator<UsageInfo> _function = (UsageInfo $0, UsageInfo $1) -> {
           int _navigationOffset = $0.getNavigationOffset();

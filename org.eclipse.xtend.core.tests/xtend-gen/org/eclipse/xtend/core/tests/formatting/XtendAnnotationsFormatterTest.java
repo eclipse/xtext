@@ -20,7 +20,7 @@ public class XtendAnnotationsFormatterTest extends AbstractXtendFormatterTest {
     _builder.append("import com.google.common.annotations.*");
     _builder.newLine();
     _builder.newLine();
-    _builder.append(ann, "");
+    _builder.append(ann);
     _builder.newLineIfNotEmpty();
     _builder.append("class bar {");
     _builder.newLine();

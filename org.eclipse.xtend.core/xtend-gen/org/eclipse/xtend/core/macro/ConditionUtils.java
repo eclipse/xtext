@@ -23,13 +23,13 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 public class ConditionUtils {
   public static void notRemoved(final EObject object, final String name) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append(name, "");
+    _builder.append(name);
     _builder.append(" cannot be null");
     Preconditions.checkArgument((object != null), _builder);
     Resource _eResource = object.eResource();
     boolean _tripleNotEquals = (_eResource != null);
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append(name, "");
+    _builder_1.append(name);
     _builder_1.append(" cannot be removed");
     Preconditions.checkArgument(_tripleNotEquals, _builder_1);
   }
@@ -39,7 +39,7 @@ public class ConditionUtils {
       if (((type != null) && type.isInferred())) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("Cannot use inferred type as ");
-        _builder.append(typeName, "");
+        _builder.append(typeName);
         _builder.append(".");
         throw new IllegalArgumentException(_builder.toString());
       }
@@ -48,12 +48,12 @@ public class ConditionUtils {
   
   public static void checkIterable(final Iterable<?> values, final String name) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append(name, "");
+    _builder.append(name);
     _builder.append(" cannot be null");
     Preconditions.checkArgument((values != null), _builder);
     for (final Object value : values) {
       StringConcatenation _builder_1 = new StringConcatenation();
-      _builder_1.append(name, "");
+      _builder_1.append(name);
       _builder_1.append(" cannot contain null");
       Preconditions.checkArgument((value != null), _builder_1);
     }
@@ -62,7 +62,7 @@ public class ConditionUtils {
   public static void checkQualifiedName(final String qualifiedName, final String name) {
     boolean _isValidQualifiedName = ConditionUtils.isValidQualifiedName(qualifiedName);
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append(name, "");
+    _builder.append(name);
     _builder.append(" has to be a valid qualified name");
     Preconditions.checkArgument(_isValidQualifiedName, _builder);
   }
@@ -70,7 +70,7 @@ public class ConditionUtils {
   public static void checkJavaIdentifier(final String string, final String name) {
     boolean _isValidJavaIdentifier = ConditionUtils.isValidJavaIdentifier(string);
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append(name, "");
+    _builder.append(name);
     _builder.append(" has to be a valid java identifier");
     Preconditions.checkArgument(_isValidJavaIdentifier, _builder);
   }
@@ -83,9 +83,9 @@ public class ConditionUtils {
   
   public static String isNotApplicableMessage(final String valueType, final String typeName) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append(valueType, "");
+    _builder.append(valueType);
     _builder.append(" is not applicable at this location. Expected ");
-    _builder.append(typeName, "");
+    _builder.append(typeName);
     return _builder.toString();
   }
   

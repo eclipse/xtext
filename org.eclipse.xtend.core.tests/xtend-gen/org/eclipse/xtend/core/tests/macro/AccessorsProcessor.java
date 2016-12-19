@@ -33,7 +33,7 @@ public class AccessorsProcessor implements TransformationParticipant<MutableFiel
             StringConcatenation _builder = new StringConcatenation();
             _builder.append("return ");
             String _simpleName_2 = f.getSimpleName();
-            _builder.append(_simpleName_2, "");
+            _builder.append(_simpleName_2);
             _builder.append(";");
             _builder.newLineIfNotEmpty();
             return _builder;
@@ -55,10 +55,10 @@ public class AccessorsProcessor implements TransformationParticipant<MutableFiel
               StringConcatenation _builder = new StringConcatenation();
               _builder.append("this.");
               String _simpleName_3 = f.getSimpleName();
-              _builder.append(_simpleName_3, "");
+              _builder.append(_simpleName_3);
               _builder.append(" = ");
               String _simpleName_4 = f.getSimpleName();
-              _builder.append(_simpleName_4, "");
+              _builder.append(_simpleName_4);
               _builder.append(";");
               _builder.newLineIfNotEmpty();
               return _builder;

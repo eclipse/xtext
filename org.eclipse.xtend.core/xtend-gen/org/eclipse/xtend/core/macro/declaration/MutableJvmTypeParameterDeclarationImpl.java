@@ -66,7 +66,7 @@ public class MutableJvmTypeParameterDeclarationImpl extends JvmTypeParameterDecl
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("This element has already been removed: ");
     JvmTypeParameter _delegate_1 = this.getDelegate();
-    _builder.append(_delegate_1, "");
+    _builder.append(_delegate_1);
     Preconditions.checkState(_tripleNotEquals, _builder);
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     IJvmModelAssociator _jvmModelAssociator = _compilationUnit.getJvmModelAssociator();
@@ -80,7 +80,7 @@ public class MutableJvmTypeParameterDeclarationImpl extends JvmTypeParameterDecl
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("Couldn\'t remove: ");
     JvmTypeParameter _delegate_5 = this.getDelegate();
-    _builder_1.append(_delegate_5, "");
+    _builder_1.append(_delegate_5);
     Preconditions.checkState(_tripleEquals, _builder_1);
   }
   

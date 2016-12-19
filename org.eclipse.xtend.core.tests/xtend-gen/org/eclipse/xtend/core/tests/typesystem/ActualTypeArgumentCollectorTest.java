@@ -84,13 +84,13 @@ public class ActualTypeArgumentCollectorTest extends AbstractTestingTypeReferenc
         final Function1<LightweightBoundTypeArgument, String> _function = (LightweightBoundTypeArgument it) -> {
           StringConcatenation _builder = new StringConcatenation();
           LightweightTypeReference _typeReference = it.getTypeReference();
-          _builder.append(_typeReference, "");
+          _builder.append(_typeReference);
           _builder.append("(");
           VarianceInfo _declaredVariance = it.getDeclaredVariance();
-          _builder.append(_declaredVariance, "");
+          _builder.append(_declaredVariance);
           _builder.append("/");
           VarianceInfo _actualVariance = it.getActualVariance();
-          _builder.append(_actualVariance, "");
+          _builder.append(_actualVariance);
           _builder.append(")");
           return _builder.toString();
         };
@@ -116,14 +116,14 @@ public class ActualTypeArgumentCollectorTest extends AbstractTestingTypeReferenc
     if ((mappedTypes != null)) {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("No mapping for ");
-      _builder.append(typeParamName, "");
+      _builder.append(typeParamName);
       _builder.append(" in ");
       Set<JvmTypeParameter> _keySet = mapping.keySet();
       final Function1<JvmTypeParameter, String> _function_2 = (JvmTypeParameter it) -> {
         return it.getSimpleName();
       };
       Iterable<String> _map_2 = IterableExtensions.<JvmTypeParameter, String>map(_keySet, _function_2);
-      _builder.append(_map_2, "");
+      _builder.append(_map_2);
       String _string_1 = _builder.toString();
       Assert.fail(_string_1);
     }
@@ -161,7 +161,7 @@ public class ActualTypeArgumentCollectorTest extends AbstractTestingTypeReferenc
           boolean _not = (!_isNullOrEmpty);
           if (_not) {
             _builder.append("<");
-            _builder.append(typeParameters, "");
+            _builder.append(typeParameters);
             _builder.append(">");
           }
         }
@@ -170,7 +170,7 @@ public class ActualTypeArgumentCollectorTest extends AbstractTestingTypeReferenc
           return it;
         };
         String _join = IterableExtensions.<String>join(((Iterable<String>)Conversions.doWrapArray(alternatingTypeReferences)), null, " p, ", " p", _function);
-        _builder.append(_join, "");
+        _builder.append(_join);
         _builder.append(") {}");
         final String signature = _builder.toString();
         String _string = signature.toString();

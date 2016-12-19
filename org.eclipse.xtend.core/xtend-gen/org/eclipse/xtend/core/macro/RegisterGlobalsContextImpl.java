@@ -95,7 +95,7 @@ public class RegisterGlobalsContextImpl implements RegisterGlobalsContext {
     boolean _tripleEquals = (_findType == null);
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("The type \'");
-    _builder.append(qualifiedName, "");
+    _builder.append(qualifiedName);
     _builder.append("\' has already been registered.");
     Preconditions.checkArgument(_tripleEquals, _builder);
     this.compilationUnit.checkCanceled();

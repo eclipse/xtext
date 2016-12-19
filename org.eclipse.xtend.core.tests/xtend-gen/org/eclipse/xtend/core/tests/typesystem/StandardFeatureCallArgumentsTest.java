@@ -409,7 +409,7 @@ public class StandardFeatureCallArgumentsTest extends AbstractTestingTypeReferen
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("def void m(");
-      _builder.append(signature, "");
+      _builder.append(signature);
       _builder.append(") {");
       _builder.newLineIfNotEmpty();
       _builder.append("\t");

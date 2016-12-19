@@ -61,7 +61,7 @@ public class ActualTypeArgumentMergeTest extends AbstractTestingTypeReferenceOwn
         boolean _not = (!_isNullOrEmpty);
         if (_not) {
           _builder.append("<");
-          _builder.append(typeParameters, "");
+          _builder.append(typeParameters);
           _builder.append(">");
         }
       }
@@ -70,7 +70,7 @@ public class ActualTypeArgumentMergeTest extends AbstractTestingTypeReferenceOwn
         return it;
       };
       String _join = IterableExtensions.<String>join(((Iterable<String>)Conversions.doWrapArray(alternatingTypeReferences)), null, " p, ", " p", _function);
-      _builder.append(_join, "");
+      _builder.append(_join);
       _builder.append(") {}");
       final String signature = _builder.toString();
       String _string = signature.toString();
@@ -114,14 +114,14 @@ public class ActualTypeArgumentMergeTest extends AbstractTestingTypeReferenceOwn
     }
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("No mapping for ");
-    _builder.append(typeParamName, "");
+    _builder.append(typeParamName);
     _builder.append(" in ");
     Set<JvmTypeParameter> _keySet = mapping.keySet();
     final Function1<JvmTypeParameter, String> _function = (JvmTypeParameter it) -> {
       return it.getSimpleName();
     };
     Iterable<String> _map = IterableExtensions.<JvmTypeParameter, String>map(_keySet, _function);
-    _builder.append(_map, "");
+    _builder.append(_map);
     String _string = _builder.toString();
     Assert.fail(_string);
     return null;

@@ -31,11 +31,11 @@ public class LineModel {
   public String toString() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("rootIndentLenght=");
-    _builder.append(this.rootIndentLenght, "");
+    _builder.append(this.rootIndentLenght);
     _builder.newLineIfNotEmpty();
-    _builder.append(this.leadingText, "");
+    _builder.append(this.leadingText);
     String _join = IterableExtensions.join(this.lines);
-    _builder.append(_join, "");
+    _builder.append(_join);
     _builder.newLineIfNotEmpty();
     return _builder.toString();
   }

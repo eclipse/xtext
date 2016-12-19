@@ -62,7 +62,7 @@ public class BoundTypeArgumentMergerTest extends AbstractTestingTypeReferenceOwn
         return it.getFirst();
       };
       String _join = IterableExtensions.<Triple<String, VarianceInfo, VarianceInfo>>join(((Iterable<Triple<String, VarianceInfo, VarianceInfo>>)Conversions.doWrapArray(mergeUs)), null, " p, ", " p", _function);
-      _builder.append(_join, "");
+      _builder.append(_join);
       _builder.append(") {}");
       final String signature = _builder.toString();
       String _string = signature.toString();
@@ -105,7 +105,7 @@ public class BoundTypeArgumentMergerTest extends AbstractTestingTypeReferenceOwn
         return it.getFirst();
       };
       String _join = IterableExtensions.<Triple<String, VarianceInfo, VarianceInfo>>join(((Iterable<Triple<String, VarianceInfo, VarianceInfo>>)Conversions.doWrapArray(mergeUs)), null, " p, ", " p", _function);
-      _builder.append(_join, "");
+      _builder.append(_join);
       _builder.append(") {}");
       final String signature = _builder.toString();
       String _string = signature.toString();

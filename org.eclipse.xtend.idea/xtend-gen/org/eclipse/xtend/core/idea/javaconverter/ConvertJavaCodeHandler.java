@@ -316,7 +316,7 @@ public class ConvertJavaCodeHandler implements RefactoringActionHandler {
           _builder.append("Convert ");
           Set<PsiFile> _keySet_1 = coversionResult.keySet();
           int _size = _keySet_1.size();
-          _builder.append(_size, "");
+          _builder.append(_size);
           _builder.append(" Java to Xtend");
           _instance_1.executeCommand(_project_1, _function, _builder.toString(), null);
         }

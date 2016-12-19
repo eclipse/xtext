@@ -71,11 +71,11 @@ public class DeferredTypeParameterHintCollectorTest extends AbstractTestingTypeR
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("def <");
-      _builder.append(typeParameters, "");
+      _builder.append(typeParameters);
       _builder.append("> void method(");
-      _builder.append(expectedType, "");
+      _builder.append(expectedType);
       _builder.append(" expected, ");
-      _builder.append(actualType, "");
+      _builder.append(actualType);
       _builder.append(" actual) {}");
       final String signature = _builder.toString();
       String _string = signature.toString();
@@ -130,14 +130,14 @@ public class DeferredTypeParameterHintCollectorTest extends AbstractTestingTypeR
     }
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("No mapping for ");
-    _builder.append(typeParamName, "");
+    _builder.append(typeParamName);
     _builder.append(" in ");
     Set<JvmTypeParameter> _keySet = mapping.keySet();
     final Function1<JvmTypeParameter, String> _function_1 = (JvmTypeParameter it) -> {
       return it.getSimpleName();
     };
     Iterable<String> _map = IterableExtensions.<JvmTypeParameter, String>map(_keySet, _function_1);
-    _builder.append(_map, "");
+    _builder.append(_map);
     String _string = _builder.toString();
     Assert.fail(_string);
     return null;
@@ -158,14 +158,14 @@ public class DeferredTypeParameterHintCollectorTest extends AbstractTestingTypeR
         if (_not) {
           StringConcatenation _builder = new StringConcatenation();
           _builder.append("Unexpected mapping for ");
-          _builder.append(typeParamName, "");
+          _builder.append(typeParamName);
           _builder.append(" in ");
           Set<JvmTypeParameter> _keySet = mapping.keySet();
           final Function1<JvmTypeParameter, String> _function = (JvmTypeParameter it) -> {
             return it.getSimpleName();
           };
           Iterable<String> _map = IterableExtensions.<JvmTypeParameter, String>map(_keySet, _function);
-          _builder.append(_map, "");
+          _builder.append(_map);
           String _string = _builder.toString();
           Assert.fail(_string);
         }
@@ -178,13 +178,13 @@ public class DeferredTypeParameterHintCollectorTest extends AbstractTestingTypeR
       StringConcatenation _builder = new StringConcatenation();
       LightweightTypeReference _typeReference = it.getTypeReference();
       String _string = _typeReference.toString();
-      _builder.append(_string, "");
+      _builder.append(_string);
       _builder.append("(");
       VarianceInfo _declaredVariance = it.getDeclaredVariance();
-      _builder.append(_declaredVariance, "");
+      _builder.append(_declaredVariance);
       _builder.append("/");
       VarianceInfo _actualVariance = it.getActualVariance();
-      _builder.append(_actualVariance, "");
+      _builder.append(_actualVariance);
       _builder.append(")");
       return _builder.toString();
     };

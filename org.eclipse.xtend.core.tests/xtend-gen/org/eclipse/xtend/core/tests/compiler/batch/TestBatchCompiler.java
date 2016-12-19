@@ -212,7 +212,7 @@ public class TestBatchCompiler {
   public void testProjectConfigMultipleSourceDirs1() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("ws/prj1/src");
-    _builder.append(File.pathSeparator, "");
+    _builder.append(File.pathSeparator);
     _builder.append("ws/prj1/src-gen");
     this.batchCompiler.setSourcePath(_builder.toString());
     StringConcatenation _builder_1 = new StringConcatenation();
@@ -254,7 +254,7 @@ public class TestBatchCompiler {
   public void testProjectConfigMultipleSourceDirs2AbsPaths() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("/tmp/ws/prj1/src");
-    _builder.append(File.pathSeparator, "");
+    _builder.append(File.pathSeparator);
     _builder.append("/tmp/ws/prj1/src-gen");
     this.batchCompiler.setSourcePath(_builder.toString());
     StringConcatenation _builder_1 = new StringConcatenation();
@@ -294,7 +294,7 @@ public class TestBatchCompiler {
   public void testProjectConfigMultipleSourceDirs3() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("ws/prj1/dir1/src");
-    _builder.append(File.pathSeparator, "");
+    _builder.append(File.pathSeparator);
     _builder.append("ws/prj1/src-gen");
     this.batchCompiler.setSourcePath(_builder.toString());
     StringConcatenation _builder_1 = new StringConcatenation();
@@ -334,7 +334,7 @@ public class TestBatchCompiler {
   public void testProjectConfigMultipleSourceDirs4() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("ws/prj1/src");
-    _builder.append(File.pathSeparator, "");
+    _builder.append(File.pathSeparator);
     _builder.append("ws/prj1/dir1/src-gen");
     this.batchCompiler.setSourcePath(_builder.toString());
     StringConcatenation _builder_1 = new StringConcatenation();
@@ -374,7 +374,7 @@ public class TestBatchCompiler {
   public void testProjectConfigMultipleSourceDirs5() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("ws/prj1/dir1/dir1a/src");
-    _builder.append(File.pathSeparator, "");
+    _builder.append(File.pathSeparator);
     _builder.append("ws/prj1/dir3/dir3a/src-gen");
     this.batchCompiler.setSourcePath(_builder.toString());
     StringConcatenation _builder_1 = new StringConcatenation();
@@ -414,11 +414,11 @@ public class TestBatchCompiler {
   public void testProjectConfigMultipleSourceDirs6() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("dir1/ws/prj1/dir2/dir3/dir4/src1");
-    _builder.append(File.pathSeparator, "");
+    _builder.append(File.pathSeparator);
     _builder.append("dir1/ws/prj1/dir2/dir3/src2");
-    _builder.append(File.pathSeparator, "");
+    _builder.append(File.pathSeparator);
     _builder.append("dir1/ws/prj1/dir2/src3");
-    _builder.append(File.pathSeparator, "");
+    _builder.append(File.pathSeparator);
     _builder.append("dir1/ws/prj1/src4");
     this.batchCompiler.setSourcePath(_builder.toString());
     StringConcatenation _builder_1 = new StringConcatenation();
@@ -581,9 +581,9 @@ public class TestBatchCompiler {
     File _file_1 = new File(outputDir, "mypackage/Bug417177_2.java");
     _file_1.delete();
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append(TestBatchCompiler.BUG417177_SRC_DIRECTORY_1, "");
-    _builder.append(File.pathSeparator, "");
-    _builder.append(TestBatchCompiler.BUG417177_SRC_DIRECTORY_2, "");
+    _builder.append(TestBatchCompiler.BUG417177_SRC_DIRECTORY_1);
+    _builder.append(File.pathSeparator);
+    _builder.append(TestBatchCompiler.BUG417177_SRC_DIRECTORY_2);
     this.batchCompiler.setSourcePath(_builder.toString());
     this.batchCompiler.setOutputPath(TestBatchCompiler.BUG417177_OUTPUT_DIRECTORY);
     boolean _compile = this.batchCompiler.compile();

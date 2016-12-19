@@ -24,10 +24,10 @@ public class ResolvedParameterImpl implements ResolvedParameter {
   @Override
   public String toString() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append(this.resolvedType, "");
+    _builder.append(this.resolvedType);
     _builder.append(" ");
     String _simpleName = this.declaration.getSimpleName();
-    _builder.append(_simpleName, "");
+    _builder.append(_simpleName);
     return _builder.toString();
   }
   

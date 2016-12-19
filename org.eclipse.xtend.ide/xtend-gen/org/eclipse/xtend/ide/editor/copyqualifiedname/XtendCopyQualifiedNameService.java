@@ -39,7 +39,7 @@ public class XtendCopyQualifiedNameService extends XbaseCopyQualifiedNameService
   protected String toQualifiedName(final XtendFunction it) {
     StringConcatenation _builder = new StringConcatenation();
     String _fullyQualifiedName = this.toFullyQualifiedName(it);
-    _builder.append(_fullyQualifiedName, "");
+    _builder.append(_fullyQualifiedName);
     _builder.append("(");
     EList<XtendParameter> _parameters = it.getParameters();
     final Function1<XtendParameter, String> _function = (XtendParameter it_1) -> {
@@ -47,7 +47,7 @@ public class XtendCopyQualifiedNameService extends XbaseCopyQualifiedNameService
       return _parameterType.getSimpleName();
     };
     CharSequence _qualifiedNames = this.<XtendParameter>toQualifiedNames(_parameters, _function);
-    _builder.append(_qualifiedNames, "");
+    _builder.append(_qualifiedNames);
     _builder.append(")");
     return _builder.toString();
   }
@@ -63,7 +63,7 @@ public class XtendCopyQualifiedNameService extends XbaseCopyQualifiedNameService
   protected String toQualifiedName(final XtendConstructor it) {
     StringConcatenation _builder = new StringConcatenation();
     String _fullyQualifiedName = this.toFullyQualifiedName(it);
-    _builder.append(_fullyQualifiedName, "");
+    _builder.append(_fullyQualifiedName);
     _builder.append("(");
     EList<XtendParameter> _parameters = it.getParameters();
     final Function1<XtendParameter, String> _function = (XtendParameter it_1) -> {
@@ -71,7 +71,7 @@ public class XtendCopyQualifiedNameService extends XbaseCopyQualifiedNameService
       return _parameterType.getSimpleName();
     };
     CharSequence _qualifiedNames = this.<XtendParameter>toQualifiedNames(_parameters, _function);
-    _builder.append(_qualifiedNames, "");
+    _builder.append(_qualifiedNames);
     _builder.append(")");
     return _builder.toString();
   }

@@ -495,7 +495,7 @@ public abstract class AbstractOutlineTests extends LightToolingTest {
     if ((fileEditor == null)) {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("editor not opened for ");
-      _builder.append(myFile, "");
+      _builder.append(myFile);
       throw new AssertionError(_builder);
     }
     PsiFile _file_1 = this.myFixture.getFile();
@@ -503,7 +503,7 @@ public abstract class AbstractOutlineTests extends LightToolingTest {
     if ((builder == null)) {
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("no builder for ");
-      _builder_1.append(myFile, "");
+      _builder_1.append(myFile);
       throw new AssertionError(_builder_1);
     }
     StructureView view = null;
