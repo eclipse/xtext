@@ -1,5 +1,6 @@
 rootProject.name = 'xtext-core'
 
+include 'org.eclipse.xtext.xtext.bootstrap'
 include 'org.eclipse.xtext'
 include 'org.eclipse.xtext.ide'
 include 'org.eclipse.xtext.util'

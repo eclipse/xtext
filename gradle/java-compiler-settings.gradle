@@ -17,12 +17,7 @@ tasks.withType(Javadoc) {
 }
 
 sourceSets {
-	mwe2 {
-		java {
-			compileClasspath += main.output
-			runtimeClasspath += main.output
-		}
-	}
+	mwe2 {}
 }
 
 configurations {
