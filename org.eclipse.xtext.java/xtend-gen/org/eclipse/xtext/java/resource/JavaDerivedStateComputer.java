@@ -67,11 +67,8 @@ public class JavaDerivedStateComputer {
   
   public void discardDerivedState(final Resource resource) {
     EList<EObject> resourcesContentsList = resource.getContents();
-    for (int i = 1; (i < resourcesContentsList.size()); i++) {
-      {
-        EObject eObject = resourcesContentsList.get(i);
-        this.unloader.unloadRoot(eObject);
-      }
+    for (final EObject eObject : resourcesContentsList) {
+      this.unloader.unloadRoot(eObject);
     }
     EList<EObject> _contents = resource.getContents();
     _contents.clear();
