@@ -134,12 +134,12 @@ public class AntlrGrammarComparator {
     public String apply() {
       StringConcatenation _builder = new StringConcatenation();
       String _join = IterableExtensions.join(AntlrGrammarComparator.SINGLE_CHAR_TOKENS, "|");
-      _builder.append(_join, "");
+      _builder.append(_join);
       _builder.append("|");
-      _builder.append(AntlrGrammarComparator.QUOTED_TOKENS, "");
+      _builder.append(AntlrGrammarComparator.QUOTED_TOKENS);
       _builder.append("|[^\\s\'\"");
       String _join_1 = IterableExtensions.join(AntlrGrammarComparator.SINGLE_CHAR_TOKENS);
-      _builder.append(_join_1, "");
+      _builder.append(_join_1);
       _builder.append("]+");
       return _builder.toString();
     }
@@ -173,15 +173,15 @@ public class AntlrGrammarComparator {
     public Pattern apply() {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("(");
-      _builder.append(AntlrGrammarComparator.SL_COMMENT, "");
+      _builder.append(AntlrGrammarComparator.SL_COMMENT);
       _builder.append(")|(");
-      _builder.append(AntlrGrammarComparator.ML_COMMENT, "");
+      _builder.append(AntlrGrammarComparator.ML_COMMENT);
       _builder.append(")|(");
-      _builder.append(AntlrGrammarComparator.TOKEN, "");
+      _builder.append(AntlrGrammarComparator.TOKEN);
       _builder.append(")|(");
-      _builder.append(AntlrGrammarComparator.NEWLINE, "");
+      _builder.append(AntlrGrammarComparator.NEWLINE);
       _builder.append(")|(");
-      _builder.append(AntlrGrammarComparator.WS, "");
+      _builder.append(AntlrGrammarComparator.WS);
       _builder.append(")");
       Pattern _compile = Pattern.compile(_builder.toString(), Pattern.MULTILINE);
       return _compile;

@@ -93,17 +93,17 @@ public class ValidatorFragment extends Xtend2GeneratorFragment implements IInher
     String _plus = (_asPath + ".java");
     StringConcatenation _builder = new StringConcatenation();
     String _fileHeader = this._naming.fileHeader();
-    _builder.append(_fileHeader, "");
+    _builder.append(_fileHeader);
     _builder.newLineIfNotEmpty();
     _builder.append("package ");
     String _abstractValidatorName_1 = this._validatorNaming.getAbstractValidatorName();
     String _packageName = this._naming.packageName(_abstractValidatorName_1);
-    _builder.append(_packageName, "");
+    _builder.append(_packageName);
     _builder.append(";");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     String _annotationImports = this._naming.annotationImports();
-    _builder.append(_annotationImports, "");
+    _builder.append(_annotationImports);
     _builder.newLineIfNotEmpty();
     _builder.append("import java.util.ArrayList;");
     _builder.newLine();
@@ -133,7 +133,7 @@ public class ValidatorFragment extends Xtend2GeneratorFragment implements IInher
             } else {
               _builder.appendImmediate(", ", "");
             }
-            _builder.append(validator, "");
+            _builder.append(validator);
             _builder.append(".class");
           }
         }
@@ -142,15 +142,15 @@ public class ValidatorFragment extends Xtend2GeneratorFragment implements IInher
       }
     }
     String _classAnnotations = this._naming.classAnnotations();
-    _builder.append(_classAnnotations, "");
+    _builder.append(_classAnnotations);
     _builder.append("public class ");
     String _abstractValidatorName_2 = this._validatorNaming.getAbstractValidatorName();
     String _simpleName = this._naming.toSimpleName(_abstractValidatorName_2);
-    _builder.append(_simpleName, "");
+    _builder.append(_simpleName);
     _builder.append(" extends ");
     boolean _isInheritImplementation = this.isInheritImplementation();
     String _validatorSuperClassName = this._validatorNaming.getValidatorSuperClassName(_isInheritImplementation);
-    _builder.append(_validatorSuperClassName, "");
+    _builder.append(_validatorSuperClassName);
     _builder.append(" {");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
@@ -206,12 +206,12 @@ public class ValidatorFragment extends Xtend2GeneratorFragment implements IInher
       String _plus_1 = (_asPath_1 + ".xtend");
       StringConcatenation _builder_1 = new StringConcatenation();
       String _fileHeader_1 = this._naming.fileHeader();
-      _builder_1.append(_fileHeader_1, "");
+      _builder_1.append(_fileHeader_1);
       _builder_1.newLineIfNotEmpty();
       _builder_1.append("package ");
       String _validatorName_1 = this._validatorNaming.getValidatorName(this.grammar);
       String _packageName_1 = this._naming.packageName(_validatorName_1);
-      _builder_1.append(_packageName_1, "");
+      _builder_1.append(_packageName_1);
       _builder_1.newLineIfNotEmpty();
       _builder_1.newLine();
       _builder_1.append("//import org.eclipse.xtext.validation.Check");
@@ -234,11 +234,11 @@ public class ValidatorFragment extends Xtend2GeneratorFragment implements IInher
       _builder_1.append("class ");
       String _validatorName_2 = this._validatorNaming.getValidatorName(this.grammar);
       String _simpleName_1 = this._naming.toSimpleName(_validatorName_2);
-      _builder_1.append(_simpleName_1, "");
+      _builder_1.append(_simpleName_1);
       _builder_1.append(" extends ");
       String _abstractValidatorName_3 = this._validatorNaming.getAbstractValidatorName();
       String _simpleName_2 = this._naming.toSimpleName(_abstractValidatorName_3);
-      _builder_1.append(_simpleName_2, "");
+      _builder_1.append(_simpleName_2);
       _builder_1.append(" {");
       _builder_1.newLineIfNotEmpty();
       _builder_1.newLine();

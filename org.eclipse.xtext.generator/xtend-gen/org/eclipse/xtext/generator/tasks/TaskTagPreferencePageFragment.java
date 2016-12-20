@@ -36,7 +36,7 @@ public class TaskTagPreferencePageFragment extends Xtend2GeneratorFragment {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<!-- task preference page for ");
     String _name = this.grammar.getName();
-    _builder.append(_name, "");
+    _builder.append(_name);
     _builder.append(" -->");
     _builder.newLineIfNotEmpty();
     _builder.append("<extension");

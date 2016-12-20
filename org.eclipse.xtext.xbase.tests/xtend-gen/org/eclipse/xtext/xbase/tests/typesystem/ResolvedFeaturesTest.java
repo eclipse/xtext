@@ -70,7 +70,7 @@ public class ResolvedFeaturesTest extends AbstractXbaseTestCase {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("typeof(");
       String _canonicalName = type.getCanonicalName();
-      _builder.append(_canonicalName, "");
+      _builder.append(_canonicalName);
       _builder.append(")");
       XExpression _expression = this.expression(_builder);
       final XTypeLiteral typeLiteral = ((XTypeLiteral) _expression);

@@ -164,7 +164,7 @@ public class FragmentAdapter extends AbstractXtextGeneratorFragment {
         protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
           String _string = result.toString();
           StringBuilder _decreaseIndentation = FragmentAdapter.this.decreaseIndentation(_string, 2);
-          _builder.append(_decreaseIndentation, "");
+          _builder.append(_decreaseIndentation);
         }
       };
       _registrations.add(_client);

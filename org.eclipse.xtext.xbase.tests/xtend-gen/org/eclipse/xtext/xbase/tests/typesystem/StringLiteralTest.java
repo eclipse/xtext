@@ -55,7 +55,7 @@ public class StringLiteralTest extends AbstractXbaseTestCase {
       final LightweightTypeReference type = resolvedTypes.getActualType(featureCall);
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("failed for literal at ");
-      _builder.append(index, "");
+      _builder.append(index);
       Object _get = types[(index).intValue()];
       String _simpleName = type.getSimpleName();
       Assert.assertEquals(_builder.toString(), _get, _simpleName);

@@ -140,9 +140,9 @@ public class UniqueClassNameValidator extends AbstractDeclarativeValidator {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("The type ");
       String _simpleName = type.getSimpleName();
-      _builder.append(_simpleName, "");
+      _builder.append(_simpleName);
       _builder.append(" is already defined in ");
-      _builder.append(fileName, "");
+      _builder.append(fileName);
       _builder.append(".");
       this.addIssue(_builder.toString(), type, IssueCodes.DUPLICATE_TYPE);
     } else {
@@ -151,9 +151,9 @@ public class UniqueClassNameValidator extends AbstractDeclarativeValidator {
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("The type ");
       String _simpleName_1 = type.getSimpleName();
-      _builder_1.append(_simpleName_1, "");
+      _builder_1.append(_simpleName_1);
       _builder_1.append(" is already defined in ");
-      _builder_1.append(fileName, "");
+      _builder_1.append(fileName);
       _builder_1.append(".");
       this.addIssue(_builder_1.toString(), sourceElement, feature, IssueCodes.DUPLICATE_TYPE);
     }

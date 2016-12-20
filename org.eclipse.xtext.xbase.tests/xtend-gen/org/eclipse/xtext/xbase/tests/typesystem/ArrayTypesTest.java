@@ -120,7 +120,7 @@ public class ArrayTypesTest extends AbstractXbaseTestCase {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("null as ");
-      _builder.append(reference, "");
+      _builder.append(reference);
       final String expression = _builder.toString();
       XExpression _expression = this.expression(expression);
       final XCastedExpression castExpression = ((XCastedExpression) _expression);

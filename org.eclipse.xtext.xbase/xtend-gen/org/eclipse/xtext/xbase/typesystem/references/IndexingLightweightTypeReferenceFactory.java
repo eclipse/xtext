@@ -52,7 +52,7 @@ public class IndexingLightweightTypeReferenceFactory extends LightweightTypeRefe
     _builder.append("It is not possible to get a type for the given jvm type reference: ");
     Class<? extends JvmTypeReference> _class = it.getClass();
     String _name = _class.getName();
-    _builder.append(_name, "");
+    _builder.append(_name);
     throw new UnsupportedOperationException(_builder.toString());
   }
   

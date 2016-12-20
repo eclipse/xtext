@@ -388,9 +388,9 @@ public class ImplicitReturnFinderTest extends AbstractXbaseTestCase {
     this.finder.findImplicitReturns(expression, _function);
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Expected ");
-    _builder.append(expression, "");
+    _builder.append(expression);
     _builder.append(" to have no implicit returns, but it had ");
-    _builder.append(returns, "");
+    _builder.append(returns);
     boolean _isEmpty = returns.isEmpty();
     Assert.assertTrue(_builder.toString(), _isEmpty);
   }

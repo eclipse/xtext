@@ -97,9 +97,9 @@ public class OrderSensitivityTest extends AbstractXbaseTestCase {
       boolean _eIsProxy = feature.eIsProxy();
       Assert.assertFalse("feature is resolved", _eIsProxy);
       StringConcatenation _builder_1 = new StringConcatenation();
-      _builder_1.append(declarator, "");
+      _builder_1.append(declarator);
       _builder_1.append(".");
-      _builder_1.append(expectation, "");
+      _builder_1.append(expectation);
       String _string = _builder_1.toString();
       String _identifier = feature.getIdentifier();
       Assert.assertEquals(_string, _identifier);
@@ -112,9 +112,9 @@ public class OrderSensitivityTest extends AbstractXbaseTestCase {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("new ");
-      _builder.append(declarator, "");
+      _builder.append(declarator);
       _builder.append("().run [| ");
-      _builder.append(expression, "");
+      _builder.append(expression);
       _builder.append(" ]");
       XExpression _expression = this.expression(_builder);
       final XMemberFeatureCall featureCall = ((XMemberFeatureCall) _expression);
@@ -123,11 +123,11 @@ public class OrderSensitivityTest extends AbstractXbaseTestCase {
       boolean _eIsProxy = feature.eIsProxy();
       Assert.assertFalse("feature is resolved", _eIsProxy);
       StringConcatenation _builder_1 = new StringConcatenation();
-      _builder_1.append(declarator, "");
+      _builder_1.append(declarator);
       _builder_1.append(".run(");
-      _builder_1.append(declarator, "");
+      _builder_1.append(declarator);
       _builder_1.append("$");
-      _builder_1.append(expectation, "");
+      _builder_1.append(expectation);
       _builder_1.append(")");
       String _string = _builder_1.toString();
       String _identifier = feature.getIdentifier();

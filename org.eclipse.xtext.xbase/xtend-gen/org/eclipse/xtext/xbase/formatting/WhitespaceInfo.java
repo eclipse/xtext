@@ -75,7 +75,7 @@ public class WhitespaceInfo extends LeafInfo {
     if (_node!=null) {
       _text=_node.getText();
     }
-    _builder.append(_text, "");
+    _builder.append(_text);
     _builder.append("\"");
     _builder.newLineIfNotEmpty();
     return _builder.toString();

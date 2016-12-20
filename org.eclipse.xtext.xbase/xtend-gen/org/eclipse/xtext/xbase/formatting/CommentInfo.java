@@ -29,7 +29,7 @@ public class CommentInfo extends LeafInfo {
     _builder.append("Comment: \"");
     ILeafNode _node = this.getNode();
     String _text = _node.getText();
-    _builder.append(_text, "");
+    _builder.append(_text);
     _builder.append("\"");
     _builder.newLineIfNotEmpty();
     return _builder.toString();

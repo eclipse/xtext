@@ -69,7 +69,7 @@ public class FormatterStubGenerator {
     StringConcatenation _builder = new StringConcatenation();
     String _name = this.grammar.getName();
     String _simpleName = this.service.naming.toSimpleName(_name);
-    _builder.append(_simpleName, "");
+    _builder.append(_simpleName);
     _builder.append("Formatter");
     return _builder.toString();
   }
@@ -78,7 +78,7 @@ public class FormatterStubGenerator {
     StringConcatenation _builder = new StringConcatenation();
     String _name = this.grammar.getName();
     String _packageName = this.service.naming.toPackageName(_name);
-    _builder.append(_packageName, "");
+    _builder.append(_packageName);
     _builder.append(".formatting2");
     return _builder.toString();
   }
@@ -86,10 +86,10 @@ public class FormatterStubGenerator {
   public String getStubQualifiedName() {
     StringConcatenation _builder = new StringConcatenation();
     String _stubPackageName = this.getStubPackageName();
-    _builder.append(_stubPackageName, "");
+    _builder.append(_stubPackageName);
     _builder.append(".");
     String _stubSimpleName = this.getStubSimpleName();
-    _builder.append(_stubSimpleName, "");
+    _builder.append(_stubSimpleName);
     return _builder.toString();
   }
   
@@ -97,7 +97,7 @@ public class FormatterStubGenerator {
     StringConcatenation _builder = new StringConcatenation();
     String _stubQualifiedName = this.getStubQualifiedName();
     String _asPath = this.service.naming.asPath(_stubQualifiedName);
-    _builder.append(_asPath, "");
+    _builder.append(_asPath);
     _builder.append(".xtend");
     return _builder.toString();
   }
@@ -173,11 +173,11 @@ public class FormatterStubGenerator {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class ");
     String _stubSimpleName = this.getStubSimpleName();
-    _builder.append(_stubSimpleName, "");
+    _builder.append(_stubSimpleName);
     _builder.append(" extends ");
     String _stubSuperClassName = this.getStubSuperClassName();
     String _imported = file.imported(_stubSuperClassName);
-    _builder.append(_imported, "");
+    _builder.append(_imported);
     _builder.append(" {");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
@@ -225,10 +225,10 @@ public class FormatterStubGenerator {
     }
     _builder.append(" dispatch void format(");
     String _importedGenTypeName = file.importedGenTypeName(clazz);
-    _builder.append(_importedGenTypeName, "");
+    _builder.append(_importedGenTypeName);
     _builder.append(" ");
     String _name = this.toName(clazz);
-    _builder.append(_name, "");
+    _builder.append(_name);
     _builder.append(", extension IFormattableDocument document) {");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
