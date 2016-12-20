@@ -9,5 +9,9 @@
 		<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="false" type="InstallableUnit">
 			<repository location="http://download.eclipse.org/releases/luna/201502271000/"/>
 		</location>
+		<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+			<repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/"/>
+			<unit id="org.junit" version="0.0.0"/>
+		</location>
 	</locations>
 </target>
