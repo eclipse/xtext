@@ -39,7 +39,7 @@ public class RuntimeTestProjectDescriptor extends TestProjectDescriptor {
       };
       ExternalDependency _doubleArrow = ObjectExtensions.<ExternalDependency>operator_doubleArrow(_createXtextDependency, _function);
       deps.add(_doubleArrow);
-      ExternalDependency _createXtextDependency_1 = ExternalDependency.createXtextDependency("org.eclipse.xtext.xbase.junit");
+      ExternalDependency _createXtextDependency_1 = ExternalDependency.createXtextDependency("org.eclipse.xtext.xbase.testing");
       final Procedure1<ExternalDependency> _function_1 = (ExternalDependency it) -> {
         ExternalDependency.MavenCoordinates _maven = it.getMaven();
         _maven.setScope(Scope.TESTCOMPILE);
