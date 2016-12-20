@@ -155,10 +155,10 @@ public class SimpleProjectWizardFragment2 extends AbstractXtextGeneratorFragment
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         _builder.append("public class ");
         String _simpleName = projectInfoClass.getSimpleName();
-        _builder.append(_simpleName, "");
+        _builder.append(_simpleName);
         _builder.append(" extends ");
         TypeReference _typeRef = TypeReference.typeRef("org.eclipse.xtext.ui.wizard.DefaultProjectInfo");
-        _builder.append(_typeRef, "");
+        _builder.append(_typeRef);
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
         _builder.newLine();
@@ -182,10 +182,10 @@ public class SimpleProjectWizardFragment2 extends AbstractXtextGeneratorFragment
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         _builder.append("public class ");
         String _simpleName = mainPageClass.getSimpleName();
-        _builder.append(_simpleName, "");
+        _builder.append(_simpleName);
         _builder.append(" extends ");
         TypeReference _typeRef = TypeReference.typeRef("org.eclipse.ui.dialogs.WizardNewProjectCreationPage");
-        _builder.append(_typeRef, "");
+        _builder.append(_typeRef);
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
         _builder.newLine();
@@ -229,7 +229,7 @@ public class SimpleProjectWizardFragment2 extends AbstractXtextGeneratorFragment
         _builder.newLine();
         _builder.append("class ");
         String _simpleName = initialContentsClass.getSimpleName();
-        _builder.append(_simpleName, "");
+        _builder.append(_simpleName);
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
@@ -350,9 +350,9 @@ public class SimpleProjectWizardFragment2 extends AbstractXtextGeneratorFragment
         _builder.newLine();
         _builder.append("public class ");
         String _simpleName = genClass.getSimpleName();
-        _builder.append(_simpleName, "");
+        _builder.append(_simpleName);
         _builder.append(" extends ");
-        _builder.append(baseClass, "");
+        _builder.append(baseClass);
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
@@ -626,10 +626,10 @@ public class SimpleProjectWizardFragment2 extends AbstractXtextGeneratorFragment
         _builder.newLine();
         _builder.append("public class ");
         String _simpleName = genClass.getSimpleName();
-        _builder.append(_simpleName, "");
+        _builder.append(_simpleName);
         _builder.append(" extends ");
         TypeReference _typeRef = TypeReference.typeRef("org.eclipse.xtext.ui.wizard.XtextNewProjectWizard");
-        _builder.append(_typeRef, "");
+        _builder.append(_typeRef);
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
         _builder.newLine();

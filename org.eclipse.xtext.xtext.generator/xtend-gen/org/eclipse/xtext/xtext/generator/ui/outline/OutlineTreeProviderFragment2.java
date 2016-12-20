@@ -115,10 +115,10 @@ public class OutlineTreeProviderFragment2 extends AbstractStubGeneratingFragment
         Grammar _grammar = OutlineTreeProviderFragment2.this.getGrammar();
         TypeReference _outlineTreeProviderClass = OutlineTreeProviderFragment2.this.getOutlineTreeProviderClass(_grammar);
         String _simpleName = _outlineTreeProviderClass.getSimpleName();
-        _builder.append(_simpleName, "");
+        _builder.append(_simpleName);
         _builder.append(" extends ");
         TypeReference _typeRef = TypeReference.typeRef("org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider");
-        _builder.append(_typeRef, "");
+        _builder.append(_typeRef);
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
         _builder.newLine();
@@ -157,10 +157,10 @@ public class OutlineTreeProviderFragment2 extends AbstractStubGeneratingFragment
         Grammar _grammar = OutlineTreeProviderFragment2.this.getGrammar();
         TypeReference _outlineTreeProviderClass = OutlineTreeProviderFragment2.this.getOutlineTreeProviderClass(_grammar);
         String _simpleName = _outlineTreeProviderClass.getSimpleName();
-        _builder.append(_simpleName, "");
+        _builder.append(_simpleName);
         _builder.append(" extends ");
         TypeReference _typeRef = TypeReference.typeRef("org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider");
-        _builder.append(_typeRef, "");
+        _builder.append(_typeRef);
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
         _builder.newLine();

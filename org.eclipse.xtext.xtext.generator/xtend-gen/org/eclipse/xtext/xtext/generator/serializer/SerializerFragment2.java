@@ -277,11 +277,11 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
           Grammar _grammar = SerializerFragment2.this.getGrammar();
           TypeReference _semanticSequencerClass = SerializerFragment2.this.getSemanticSequencerClass(_grammar);
           String _simpleName = _semanticSequencerClass.getSimpleName();
-          _builder.append(_simpleName, "");
+          _builder.append(_simpleName);
           _builder.append(" extends ");
           Grammar _grammar_1 = SerializerFragment2.this.getGrammar();
           TypeReference _abstractSemanticSequencerClass = SerializerFragment2.this.getAbstractSemanticSequencerClass(_grammar_1);
-          _builder.append(_abstractSemanticSequencerClass, "");
+          _builder.append(_abstractSemanticSequencerClass);
           _builder.append(" {");
           _builder.newLineIfNotEmpty();
           _builder.append("}");
@@ -303,11 +303,11 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
           Grammar _grammar = SerializerFragment2.this.getGrammar();
           TypeReference _semanticSequencerClass = SerializerFragment2.this.getSemanticSequencerClass(_grammar);
           String _simpleName = _semanticSequencerClass.getSimpleName();
-          _builder.append(_simpleName, "");
+          _builder.append(_simpleName);
           _builder.append(" extends ");
           Grammar _grammar_1 = SerializerFragment2.this.getGrammar();
           TypeReference _abstractSemanticSequencerClass = SerializerFragment2.this.getAbstractSemanticSequencerClass(_grammar_1);
-          _builder.append(_abstractSemanticSequencerClass, "");
+          _builder.append(_abstractSemanticSequencerClass);
           _builder.append(" {");
           _builder.newLineIfNotEmpty();
           _builder.append("}");
@@ -326,7 +326,7 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("get");
     String _name = rule.getName();
-    _builder.append(_name, "");
+    _builder.append(_name);
     _builder.append("Token");
     return _builder;
   }
@@ -343,11 +343,11 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
           Grammar _grammar = SerializerFragment2.this.getGrammar();
           TypeReference _syntacticSequencerClass = SerializerFragment2.this.getSyntacticSequencerClass(_grammar);
           String _simpleName = _syntacticSequencerClass.getSimpleName();
-          _builder.append(_simpleName, "");
+          _builder.append(_simpleName);
           _builder.append(" extends ");
           Grammar _grammar_1 = SerializerFragment2.this.getGrammar();
           TypeReference _abstractSyntacticSequencerClass = SerializerFragment2.this.getAbstractSyntacticSequencerClass(_grammar_1);
-          _builder.append(_abstractSyntacticSequencerClass, "");
+          _builder.append(_abstractSyntacticSequencerClass);
           _builder.append(" {");
           _builder.newLineIfNotEmpty();
           {
@@ -418,11 +418,11 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
           Grammar _grammar = SerializerFragment2.this.getGrammar();
           TypeReference _syntacticSequencerClass = SerializerFragment2.this.getSyntacticSequencerClass(_grammar);
           String _simpleName = _syntacticSequencerClass.getSimpleName();
-          _builder.append(_simpleName, "");
+          _builder.append(_simpleName);
           _builder.append(" extends ");
           Grammar _grammar_1 = SerializerFragment2.this.getGrammar();
           TypeReference _abstractSyntacticSequencerClass = SerializerFragment2.this.getAbstractSyntacticSequencerClass(_grammar_1);
-          _builder.append(_abstractSyntacticSequencerClass, "");
+          _builder.append(_abstractSyntacticSequencerClass);
           _builder.append(" {");
           _builder.newLineIfNotEmpty();
           {
@@ -541,9 +541,9 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
         }
         _builder.append("class ");
         String _simpleName = clazz.getSimpleName();
-        _builder.append(_simpleName, "");
+        _builder.append(_simpleName);
         _builder.append(" extends ");
-        _builder.append(superClazz, "");
+        _builder.append(superClazz);
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
         _builder.newLine();
@@ -664,9 +664,9 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
           _builder.append("@Override");
           _builder.newLine();
           _builder.append("public void sequence(");
-          _builder.append(ISerializationContext.class, "");
+          _builder.append(ISerializationContext.class);
           _builder.append(" context, ");
-          _builder.append(EObject.class, "");
+          _builder.append(EObject.class);
           _builder.append(" semanticObject) {");
           _builder.newLineIfNotEmpty();
           _builder.append("\t");
@@ -767,7 +767,7 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
         StringConcatenationClient _client = new StringConcatenationClient() {
           @Override
           protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-            _builder.append(ImmutableSet.class, "");
+            _builder.append(ImmutableSet.class);
             _builder.append(".of(");
             final Function1<Parameter, String> _function = (Parameter it) -> {
               String _gaAccessor = SerializerFragment2.this._grammarAccessExtensions.gaAccessor(it);
@@ -775,7 +775,7 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
             };
             Iterable<String> _map = IterableExtensions.<Parameter, String>map(values, _function);
             String _join = IterableExtensions.join(_map, ", ");
-            _builder.append(_join, "");
+            _builder.append(_join);
             _builder.append(").equals(parameters)");
           }
         };
@@ -855,7 +855,7 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
                   Map.Entry<IGrammarConstraintProvider.IConstraint, List<ISerializationContext>> _value_2 = ctx.getValue();
                   IGrammarConstraintProvider.IConstraint _key_1 = _value_2.getKey();
                   StringConcatenationClient _genCondition = SerializerFragment2.this.genCondition(_value_1, _key_1, context2constraint);
-                  _builder.append(_genCondition, "");
+                  _builder.append(_genCondition);
                   _builder.append(") {");
                   _builder.newLineIfNotEmpty();
                   _builder.append("\t");
@@ -877,7 +877,7 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
                 Map.Entry<IGrammarConstraintProvider.IConstraint, List<ISerializationContext>> _head = IterableExtensions.<Map.Entry<IGrammarConstraintProvider.IConstraint, List<ISerializationContext>>>head(contexts);
                 IGrammarConstraintProvider.IConstraint _key_3 = _head.getKey();
                 StringConcatenationClient _genMethodCreateSequenceCall_1 = SerializerFragment2.this.genMethodCreateSequenceCall(superConstraints, type, _key_3);
-                _builder.append(_genMethodCreateSequenceCall_1, "");
+                _builder.append(_genMethodCreateSequenceCall_1);
                 _builder.newLineIfNotEmpty();
               } else {
                 _builder.append("// error, no contexts. ");
@@ -915,7 +915,7 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
                 _builder.appendImmediate("\n\t\t|| ", "");
               }
               StringConcatenationClient _genObjectSelector = SerializerFragment2.this.genObjectSelector(obj);
-              _builder.append(_genObjectSelector, "");
+              _builder.append(_genObjectSelector);
               {
                 Collection<IGrammarConstraintProvider.IConstraint> _get = ctx2ctr.get(obj);
                 int _size = _get.size();
@@ -923,7 +923,7 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
                 if (_greaterThan) {
                   Set<ISerializationContext> _get_1 = index.get(obj);
                   StringConcatenationClient _genParameterSelector = SerializerFragment2.this.genParameterSelector(obj, _get_1, constraint);
-                  _builder.append(_genParameterSelector, "");
+                  _builder.append(_genParameterSelector);
                 }
               }
             }
@@ -945,7 +945,7 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
         protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
           _builder.append("action == grammarAccess.");
           String _gaAccessor = SerializerFragment2.this._grammarAccessExtensions.gaAccessor(obj);
-          _builder.append(_gaAccessor, "");
+          _builder.append(_gaAccessor);
         }
       };
       _switchResult = _client;
@@ -958,7 +958,7 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
           protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
             _builder.append("rule == grammarAccess.");
             String _gaAccessor = SerializerFragment2.this._grammarAccessExtensions.gaAccessor(obj);
-            _builder.append(_gaAccessor, "");
+            _builder.append(_gaAccessor);
           }
         };
         _switchResult = _client;
@@ -1019,9 +1019,9 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
         protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
           _builder.append("sequence_");
           String _simpleName = constraint.getSimpleName();
-          _builder.append(_simpleName, "");
+          _builder.append(_simpleName);
           _builder.append("(context, (");
-          _builder.append(type, "");
+          _builder.append(type);
           _builder.append(") semanticObject); ");
           _builder.newLineIfNotEmpty();
           _builder.append("return; ");
@@ -1052,7 +1052,7 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
         List<ISerializationContext> _sort = IterableExtensions.<ISerializationContext>sort(_contexts);
         String _join = IterableExtensions.join(_sort, "\n");
         String _replaceAll = _join.replaceAll("\\n", "\n//     ");
-        _builder.append(_replaceAll, "");
+        _builder.append(_replaceAll);
         _builder.newLineIfNotEmpty();
         _builder.append("//");
         _builder.newLine();
@@ -1066,13 +1066,13 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
             _builder.append("{");
             EClass _type = c.getType();
             String _name = _type.getName();
-            _builder.append(_name, "");
+            _builder.append(_name);
             _builder.append("}");
           } else {
             IGrammarConstraintProvider.IConstraintElement _body_1 = c.getBody();
             String _string = _body_1.toString();
             String _replaceAll_1 = _string.replaceAll("\\n", "\n//     ");
-            _builder.append(_replaceAll_1, "");
+            _builder.append(_replaceAll_1);
           }
         }
         _builder.newLineIfNotEmpty();
@@ -1080,12 +1080,12 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
         _builder.newLine();
         _builder.append("// protected void sequence_");
         String _simpleName = c.getSimpleName();
-        _builder.append(_simpleName, "");
+        _builder.append(_simpleName);
         _builder.append("(");
-        _builder.append(ISerializationContext.class, "");
+        _builder.append(ISerializationContext.class);
         _builder.append(" context, ");
         EClass _type_1 = c.getType();
-        _builder.append(_type_1, "");
+        _builder.append(_type_1);
         _builder.append(" semanticObject) { }");
         _builder.newLineIfNotEmpty();
       }
@@ -1114,7 +1114,7 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
           @Override
           protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
             _builder.append("(");
-            _builder.append(EObject.class, "");
+            _builder.append(EObject.class);
             _builder.append(") ");
           }
         };
@@ -1168,12 +1168,12 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
           _builder.newLine();
           _builder.append("protected void sequence_");
           String _simpleName = c.getSimpleName();
-          _builder.append(_simpleName, "");
+          _builder.append(_simpleName);
           _builder.append("(");
-          _builder.append(ISerializationContext.class, "");
+          _builder.append(ISerializationContext.class);
           _builder.append(" context, ");
           EClass _type_1 = c.getType();
-          _builder.append(_type_1, "");
+          _builder.append(_type_1);
           _builder.append(" semanticObject) {");
           _builder.newLineIfNotEmpty();
           {
@@ -1262,12 +1262,12 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
               _builder.newLine();
               _builder.append("protected void sequence_");
               String _simpleName_1 = c.getSimpleName();
-              _builder.append(_simpleName_1, "");
+              _builder.append(_simpleName_1);
               _builder.append("(");
-              _builder.append(EObject.class, "");
+              _builder.append(EObject.class);
               _builder.append(" context, ");
               EClass _type_2 = c.getType();
-              _builder.append(_type_2, "");
+              _builder.append(_type_2);
               _builder.append(" semanticObject) {");
               _builder.newLineIfNotEmpty();
               _builder.append("\t");
@@ -1297,10 +1297,10 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
           _builder.append("eGet(");
           GenPackage _genPackage = genFeature.getGenPackage();
           EPackage _ecorePackage = _genPackage.getEcorePackage();
-          _builder.append(_ecorePackage, "");
+          _builder.append(_ecorePackage);
           _builder.append(".");
           String _featureLiteral = GenModelUtil2.getFeatureLiteral(genFeature, resourceSet);
-          _builder.append(_featureLiteral, "");
+          _builder.append(_featureLiteral);
           _builder.append(", false)");
         }
       };
@@ -1310,7 +1310,7 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
         @Override
         protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
           String _getAccessor = GenModelUtil2.getGetAccessor(genFeature, resourceSet);
-          _builder.append(_getAccessor, "");
+          _builder.append(_getAccessor);
           _builder.append("()");
         }
       };
@@ -1345,9 +1345,9 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
         }
         _builder.append("class ");
         String _simpleName = clazz.getSimpleName();
-        _builder.append(_simpleName, "");
+        _builder.append(_simpleName);
         _builder.append(" extends ");
-        _builder.append(AbstractSyntacticSequencer.class, "");
+        _builder.append(AbstractSyntacticSequencer.class);
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
         _builder.newLine();
@@ -1624,11 +1624,11 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
         _builder.append("@Override");
         _builder.newLine();
         _builder.append("protected String getUnassignedRuleCallToken(");
-        _builder.append(EObject.class, "");
+        _builder.append(EObject.class);
         _builder.append(" semanticObject, ");
-        _builder.append(RuleCall.class, "");
+        _builder.append(RuleCall.class);
         _builder.append(" ruleCall, ");
-        _builder.append(INode.class, "");
+        _builder.append(INode.class);
         _builder.append(" node) {");
         _builder.newLineIfNotEmpty();
         {
@@ -1726,13 +1726,13 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
             }
             _builder.append("String ");
             CharSequence _unassignedCalledTokenRuleName = SerializerFragment2.this.unassignedCalledTokenRuleName(rule);
-            _builder.append(_unassignedCalledTokenRuleName, "");
+            _builder.append(_unassignedCalledTokenRuleName);
             _builder.append("(");
-            _builder.append(EObject.class, "");
+            _builder.append(EObject.class);
             _builder.append(" semanticObject, ");
-            _builder.append(RuleCall.class, "");
+            _builder.append(RuleCall.class);
             _builder.append(" ruleCall, ");
-            _builder.append(INode.class, "");
+            _builder.append(INode.class);
             _builder.append(" node)");
             {
               boolean _isGenerateStub_2 = SerializerFragment2.this.isGenerateStub();
@@ -1767,13 +1767,13 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
         _builder.newLine();
         _builder.append("protected String ");
         CharSequence _unassignedCalledTokenRuleName = SerializerFragment2.this.unassignedCalledTokenRuleName(rule);
-        _builder.append(_unassignedCalledTokenRuleName, "");
+        _builder.append(_unassignedCalledTokenRuleName);
         _builder.append("(");
-        _builder.append(EObject.class, "");
+        _builder.append(EObject.class);
         _builder.append(" semanticObject, ");
-        _builder.append(RuleCall.class, "");
+        _builder.append(RuleCall.class);
         _builder.append(" ruleCall, ");
-        _builder.append(INode.class, "");
+        _builder.append(INode.class);
         _builder.append(" node) {");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
@@ -1805,13 +1805,13 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
         _builder.append("@Override");
         _builder.newLine();
         _builder.append("protected void emitUnassignedTokens(");
-        _builder.append(EObject.class, "");
+        _builder.append(EObject.class);
         _builder.append(" semanticObject, ");
-        _builder.append(ISyntacticSequencerPDAProvider.ISynTransition.class, "");
+        _builder.append(ISyntacticSequencerPDAProvider.ISynTransition.class);
         _builder.append(" transition, ");
-        _builder.append(INode.class, "");
+        _builder.append(INode.class);
         _builder.append(" fromNode, ");
-        _builder.append(INode.class, "");
+        _builder.append(INode.class);
         _builder.append(" toNode) {");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
@@ -1903,7 +1903,7 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
             }
             List<ISerializationContext> _contexts = e.getContexts();
             String _join = IterableExtensions.join(_contexts, ", ");
-            _builder.append(_join, "");
+            _builder.append(_join);
             _builder.append(":");
             _builder.newLineIfNotEmpty();
             {

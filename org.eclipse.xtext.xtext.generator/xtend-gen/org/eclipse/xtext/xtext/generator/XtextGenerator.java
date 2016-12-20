@@ -472,7 +472,7 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
           for(final XtextGeneratorLanguage lang : XtextGenerator.this.languageConfigs) {
             Grammar _grammar = lang.getGrammar();
             TypeReference _genericIdeSetup = XtextGenerator.this.naming.getGenericIdeSetup(_grammar);
-            _builder.append(_genericIdeSetup, "");
+            _builder.append(_genericIdeSetup);
             _builder.newLineIfNotEmpty();
           }
         }

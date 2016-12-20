@@ -300,10 +300,10 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
     final String encoding = _codeConfig.getEncoding();
     StringConcatenation _builder = new StringConcatenation();
     String _path = fsa.getPath();
-    _builder.append(_path, "");
+    _builder.append(_path);
     _builder.append("/");
     String _grammarFileName = lexerGrammar.getGrammarFileName();
-    _builder.append(_grammarFileName, "");
+    _builder.append(_grammarFileName);
     final String lexerGrammarFile = _builder.toString();
     String[] _antlrParams = this.getAntlrParams();
     final ArrayList<String> lexerAntlrParams = CollectionLiterals.<String>newArrayList(_antlrParams);
@@ -322,10 +322,10 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
     }
     StringConcatenation _builder_1 = new StringConcatenation();
     String _path_1 = fsa.getPath();
-    _builder_1.append(_path_1, "");
+    _builder_1.append(_path_1);
     _builder_1.append("/");
     String _grammarFileName_1 = parserGrammar.getGrammarFileName();
-    _builder_1.append(_grammarFileName_1, "");
+    _builder_1.append(_grammarFileName_1);
     final String parserGrammarFile = _builder_1.toString();
     String[] _antlrParams_1 = this.getAntlrParams();
     final ArrayList<String> parserAntlrParams = CollectionLiterals.<String>newArrayList(_antlrParams_1);
@@ -374,9 +374,9 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
           Grammar _grammar = XtextAntlrGeneratorFragment2.this.getGrammar();
           TypeReference _parserClass = naming.getParserClass(_grammar);
           String _simpleName = _parserClass.getSimpleName();
-          _builder.append(_simpleName, "");
+          _builder.append(_simpleName);
           _builder.append(" extends ");
-          _builder.append(AbstractAntlrParser.class, "");
+          _builder.append(AbstractAntlrParser.class);
           _builder.append(" {");
           _builder.newLineIfNotEmpty();
           _builder.newLine();
@@ -581,9 +581,9 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
           Grammar _grammar = XtextAntlrGeneratorFragment2.this.getGrammar();
           TypeReference _antlrTokenFileProviderClass = naming.getAntlrTokenFileProviderClass(_grammar);
           String _simpleName = _antlrTokenFileProviderClass.getSimpleName();
-          _builder.append(_simpleName, "");
+          _builder.append(_simpleName);
           _builder.append(" implements ");
-          _builder.append(IAntlrTokenFileProvider.class, "");
+          _builder.append(IAntlrTokenFileProvider.class);
           _builder.append(" {");
           _builder.newLineIfNotEmpty();
           _builder.newLine();
@@ -651,9 +651,9 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
           Grammar _grammar = XtextAntlrGeneratorFragment2.this.getGrammar();
           TypeReference _tokenSourceClass = naming.getTokenSourceClass(_grammar);
           String _simpleName = _tokenSourceClass.getSimpleName();
-          _builder.append(_simpleName, "");
+          _builder.append(_simpleName);
           _builder.append(" extends ");
-          _builder.append(AbstractIndentationTokenSource.class, "");
+          _builder.append(AbstractIndentationTokenSource.class);
           _builder.append(" {");
           _builder.newLineIfNotEmpty();
           _builder.newLine();
@@ -818,11 +818,11 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
           Grammar _grammar = XtextAntlrGeneratorFragment2.this.getGrammar();
           TypeReference _parserClass = naming.getParserClass(_grammar);
           String _simpleName = _parserClass.getSimpleName();
-          _builder.append(_simpleName, "");
+          _builder.append(_simpleName);
           _builder.append(" extends ");
           Grammar _grammar_1 = XtextAntlrGeneratorFragment2.this.getGrammar();
           TypeReference _parserSuperClass = naming.getParserSuperClass(_grammar_1, XtextAntlrGeneratorFragment2.this.partialParsing);
-          _builder.append(_parserSuperClass, "");
+          _builder.append(_parserSuperClass);
           _builder.append(" {");
           _builder.newLineIfNotEmpty();
           _builder.newLine();
@@ -1081,9 +1081,9 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
           Grammar _grammar = XtextAntlrGeneratorFragment2.this.getGrammar();
           TypeReference _tokenSourceClass = naming.getTokenSourceClass(_grammar);
           String _simpleName = _tokenSourceClass.getSimpleName();
-          _builder.append(_simpleName, "");
+          _builder.append(_simpleName);
           _builder.append(" extends ");
-          _builder.append(AbstractIndentationTokenSource.class, "");
+          _builder.append(AbstractIndentationTokenSource.class);
           _builder.append(" {");
           _builder.newLineIfNotEmpty();
           _builder.newLine();
@@ -1312,11 +1312,11 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-        _builder.append(LexerProvider.class, "");
+        _builder.append(LexerProvider.class);
         _builder.append(".create(");
         Grammar _grammar = XtextAntlrGeneratorFragment2.this.getGrammar();
         TypeReference _lexerClass = naming.getLexerClass(_grammar);
-        _builder.append(_lexerClass, "");
+        _builder.append(_lexerClass);
         _builder.append(".class)");
       }
     };
@@ -1325,7 +1325,7 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         _builder.append("binder.bind(");
-        _builder.append(Lexer.class, "");
+        _builder.append(Lexer.class);
         _builder.append(".class)");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
@@ -1405,7 +1405,7 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
         _builder.append("binder.bind(");
         Grammar _grammar = XtextAntlrGeneratorFragment2.this.getGrammar();
         TypeReference _lexerSuperClass = naming.getLexerSuperClass(_grammar);
-        _builder.append(_lexerSuperClass, "");
+        _builder.append(_lexerSuperClass);
         _builder.append(".class)");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
@@ -1479,7 +1479,7 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
         _builder.append("binder.bind(");
         Grammar _grammar = XtextAntlrGeneratorFragment2.this.getGrammar();
         TypeReference _lexerSuperClass = naming.getLexerSuperClass(_grammar);
-        _builder.append(_lexerSuperClass, "");
+        _builder.append(_lexerSuperClass);
         _builder.append(".class)");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
@@ -1502,7 +1502,7 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         _builder.append("binder.bind(");
-        _builder.append(Lexer.class, "");
+        _builder.append(Lexer.class);
         _builder.append(".class)");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
@@ -1527,7 +1527,7 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         _builder.append("binder.bind(");
-        _builder.append(ITokenDefProvider.class, "");
+        _builder.append(ITokenDefProvider.class);
         _builder.append(".class)");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
@@ -1557,11 +1557,11 @@ public class XtextAntlrGeneratorFragment2 extends AbstractAntlrGeneratorFragment
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         _builder.append("binder.bind(");
-        _builder.append(caLexerClass, "");
+        _builder.append(caLexerClass);
         _builder.append(".class).toProvider(");
-        _builder.append(LexerProvider.class, "");
+        _builder.append(LexerProvider.class);
         _builder.append(".create(");
-        _builder.append(caLexerClass, "");
+        _builder.append(caLexerClass);
         _builder.append(".class));");
         _builder.newLineIfNotEmpty();
       }

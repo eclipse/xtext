@@ -244,11 +244,11 @@ public class SignatureHelpServiceImpl implements ISignatureHelpService {
             final Procedure1<ParameterInformation> _function_5 = (ParameterInformation it_2) -> {
               StringConcatenation _builder = new StringConcatenation();
               String _name = param.getName();
-              _builder.append(_name, "");
+              _builder.append(_name);
               _builder.append(": ");
               Type _type = param.getType();
               String _label_1 = this.getLabel(_type);
-              _builder.append(_label_1, "");
+              _builder.append(_label_1);
               it_2.setLabel(_builder.toString());
             };
             return ObjectExtensions.<ParameterInformation>operator_doubleArrow(_parameterInformation, _function_5);
@@ -304,10 +304,10 @@ public class SignatureHelpServiceImpl implements ISignatureHelpService {
     StringConcatenation _builder = new StringConcatenation();
     TypeDeclaration _containerOfType = EcoreUtil2.<TypeDeclaration>getContainerOfType(it, TypeDeclaration.class);
     String _name = _containerOfType.getName();
-    _builder.append(_name, "");
+    _builder.append(_name);
     _builder.append(".");
     String _name_1 = it.getName();
-    _builder.append(_name_1, "");
+    _builder.append(_name_1);
     _builder.append("(");
     {
       EList<Parameter> _params = it.getParams();
@@ -319,11 +319,11 @@ public class SignatureHelpServiceImpl implements ISignatureHelpService {
           _builder.appendImmediate(", ", "");
         }
         String _name_2 = p.getName();
-        _builder.append(_name_2, "");
+        _builder.append(_name_2);
         _builder.append(": ");
         Type _type = p.getType();
         String _label = this.getLabel(_type);
-        _builder.append(_label, "");
+        _builder.append(_label);
       }
     }
     _builder.append("): ");
@@ -335,7 +335,7 @@ public class SignatureHelpServiceImpl implements ISignatureHelpService {
       } else {
         Type _returnType_1 = it.getReturnType();
         String _label_1 = this.getLabel(_returnType_1);
-        _builder.append(_label_1, "");
+        _builder.append(_label_1);
       }
     }
     return _builder.toString();

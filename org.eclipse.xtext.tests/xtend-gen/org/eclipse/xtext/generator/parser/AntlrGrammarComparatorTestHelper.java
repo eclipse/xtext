@@ -43,17 +43,17 @@ public class AntlrGrammarComparatorTestHelper {
       int _lineNumber_1 = _referenceGrammar.getLineNumber();
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("Inputs differs at token ");
-      _builder.append(match, "");
+      _builder.append(match);
       _builder.append(" (line ");
       AntlrGrammarComparator.MatchState _testedGrammar_1 = context.getTestedGrammar();
       int _lineNumber_2 = _testedGrammar_1.getLineNumber();
-      _builder.append(_lineNumber_2, "");
+      _builder.append(_lineNumber_2);
       _builder.append("), expected token ");
-      _builder.append(matchReference, "");
+      _builder.append(matchReference);
       _builder.append(" (line ");
       AntlrGrammarComparator.MatchState _referenceGrammar_1 = context.getReferenceGrammar();
       int _lineNumber_3 = _referenceGrammar_1.getLineNumber();
-      _builder.append(_lineNumber_3, "");
+      _builder.append(_lineNumber_3);
       _builder.append(").");
       _builder.newLineIfNotEmpty();
       AntlrGrammarComparatorTestHelper.fail(_lineNumber, _lineNumber_1, _builder.toString());
@@ -65,7 +65,7 @@ public class AntlrGrammarComparatorTestHelper {
       _builder.append("Noticed an unmatched character sequence in \'testee\' in/before line ");
       AntlrGrammarComparator.MatchState _testedGrammar = context.getTestedGrammar();
       int _lineNumber = _testedGrammar.getLineNumber();
-      _builder.append(_lineNumber, "");
+      _builder.append(_lineNumber);
       _builder.append(".");
       _builder.newLineIfNotEmpty();
       AntlrGrammarComparatorTestHelper.fail(_builder.toString());
@@ -77,7 +77,7 @@ public class AntlrGrammarComparatorTestHelper {
       _builder.append("Noticed an unmatched character sequence in \'expected\' in/before line ");
       AntlrGrammarComparator.MatchState _referenceGrammar = context.getReferenceGrammar();
       int _lineNumber = _referenceGrammar.getLineNumber();
-      _builder.append(_lineNumber, "");
+      _builder.append(_lineNumber);
       _builder.append(".");
       _builder.newLineIfNotEmpty();
       AntlrGrammarComparatorTestHelper.fail(_builder.toString());
@@ -115,9 +115,9 @@ public class AntlrGrammarComparatorTestHelper {
     }
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Expected mismatch in lines ");
-    _builder.append(lineNoTestee, "");
+    _builder.append(lineNoTestee);
     _builder.append("/");
-    _builder.append(lineNoExpected, "");
+    _builder.append(lineNoExpected);
     _builder.append(".");
     AntlrGrammarComparatorTestHelper.fail(_builder.toString());
   }

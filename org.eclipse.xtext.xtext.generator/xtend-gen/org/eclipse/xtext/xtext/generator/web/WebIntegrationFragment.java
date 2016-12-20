@@ -371,10 +371,10 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
           if (_not) {
             StringConcatenation _builder = new StringConcatenation();
             _builder.append("{name: \"keyword.");
-            _builder.append(langId, "");
+            _builder.append(langId);
             _builder.append("\", match: ");
             CharSequence _generateKeywordsRegExp = this.generateKeywordsRegExp();
-            _builder.append(_generateKeywordsRegExp, "");
+            _builder.append(_generateKeywordsRegExp);
             _builder.append("}");
             patterns.add(_builder.toString());
           }
@@ -383,10 +383,10 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
           if (_not_1) {
             StringConcatenation _builder_1 = new StringConcatenation();
             _builder_1.append("{name: \"keyword.extra.");
-            _builder_1.append(langId, "");
+            _builder_1.append(langId);
             _builder_1.append("\", match: ");
             CharSequence _generateExtraKeywordsRegExp = this.generateExtraKeywordsRegExp();
-            _builder_1.append(_generateExtraKeywordsRegExp, "");
+            _builder_1.append(_generateExtraKeywordsRegExp);
             _builder_1.append("}");
             patterns.add(_builder_1.toString());
           }
@@ -399,7 +399,7 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
                 boolean _not = (!_isNullOrEmpty);
                 if (_not) {
                   _builder.append("\"");
-                  _builder.append(WebIntegrationFragment.this.highlightingModuleName, "");
+                  _builder.append(WebIntegrationFragment.this.highlightingModuleName);
                   _builder.append("\", ");
                 }
               }
@@ -458,7 +458,7 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
             StringConcatenation _builder_2 = new StringConcatenation();
             _builder_2.append("{token: \"keyword\", regex: ");
             CharSequence _generateKeywordsRegExp_1 = this.generateKeywordsRegExp();
-            _builder_2.append(_generateKeywordsRegExp_1, "");
+            _builder_2.append(_generateKeywordsRegExp_1);
             _builder_2.append("}");
             patterns_1.put("start", _builder_2.toString());
           }
@@ -468,7 +468,7 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
             StringConcatenation _builder_3 = new StringConcatenation();
             _builder_3.append("{token: \"keyword\", regex: ");
             CharSequence _generateExtraKeywordsRegExp_1 = this.generateExtraKeywordsRegExp();
-            _builder_3.append(_generateExtraKeywordsRegExp_1, "");
+            _builder_3.append(_generateExtraKeywordsRegExp_1);
             _builder_3.append("}");
             patterns_1.put("start", _builder_3.toString());
           }
@@ -481,7 +481,7 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
                 boolean _not = (!_isNullOrEmpty);
                 if (_not) {
                   _builder.append("\"");
-                  _builder.append(WebIntegrationFragment.this.highlightingModuleName, "");
+                  _builder.append(WebIntegrationFragment.this.highlightingModuleName);
                   _builder.append("\", ");
                 }
               }
@@ -593,7 +593,7 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
             StringConcatenation _builder_4 = new StringConcatenation();
             _builder_4.append("{token: \"keyword\", regex: ");
             CharSequence _generateKeywordsRegExp_2 = this.generateKeywordsRegExp();
-            _builder_4.append(_generateKeywordsRegExp_2, "");
+            _builder_4.append(_generateKeywordsRegExp_2);
             _builder_4.append("}");
             patterns_2.put("start", _builder_4.toString());
           }
@@ -603,7 +603,7 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
             StringConcatenation _builder_5 = new StringConcatenation();
             _builder_5.append("{token: \"keyword\", regex: ");
             CharSequence _generateExtraKeywordsRegExp_2 = this.generateExtraKeywordsRegExp();
-            _builder_5.append(_generateExtraKeywordsRegExp_2, "");
+            _builder_5.append(_generateExtraKeywordsRegExp_2);
             _builder_5.append("}");
             patterns_2.put("start", _builder_5.toString());
           }
@@ -616,7 +616,7 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
                 boolean _not = (!_isNullOrEmpty);
                 if (_not) {
                   _builder.append("\"");
-                  _builder.append(WebIntegrationFragment.this.highlightingModuleName, "");
+                  _builder.append(WebIntegrationFragment.this.highlightingModuleName);
                   _builder.append("\", ");
                 }
               }
@@ -714,7 +714,7 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
               _builder.appendImmediate("|", "");
             }
             String _regexpString = RegexpExtensions.toRegexpString(kw, ((!Objects.equal(this.framework.get(), WebIntegrationFragment.Framework.CODEMIRROR)) && this.ignoreCase));
-            _builder.append(_regexpString, "");
+            _builder.append(_regexpString);
           }
         }
         _builder.append("\";");
@@ -735,7 +735,7 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
               _builder.appendImmediate("|", "");
             }
             String _regexpString_1 = RegexpExtensions.toRegexpString(kw_1, ((!Objects.equal(this.framework.get(), WebIntegrationFragment.Framework.CODEMIRROR)) && this.ignoreCase));
-            _builder.append(_regexpString_1, "");
+            _builder.append(_regexpString_1);
           }
         }
         _builder.append("\";");
@@ -764,13 +764,13 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
     if ((Objects.equal(this.framework.get(), WebIntegrationFragment.Framework.CODEMIRROR) && this.ignoreCase)) {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("new RegExp(\"(?:^|\\\\s)(?:\" + extraKeywords + \")(?=");
-      _builder.append(WebIntegrationFragment.DELIMITERS_PATTERN, "");
+      _builder.append(WebIntegrationFragment.DELIMITERS_PATTERN);
       _builder.append("|$)\", \"gi\")");
       _xifexpression = _builder;
     } else {
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("\"(?:^|\\\\s)(?:\" + extraKeywords + \")(?=");
-      _builder_1.append(WebIntegrationFragment.DELIMITERS_PATTERN, "");
+      _builder_1.append(WebIntegrationFragment.DELIMITERS_PATTERN);
       _builder_1.append("|$)\"");
       _xifexpression = _builder_1;
     }
@@ -1575,7 +1575,7 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
         Grammar _grammar = WebIntegrationFragment.this.getGrammar();
         TypeReference _serverLauncherClass = WebIntegrationFragment.this.getServerLauncherClass(_grammar);
         String _simpleName = _serverLauncherClass.getSimpleName();
-        _builder.append(_simpleName, "");
+        _builder.append(_simpleName);
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
@@ -1758,7 +1758,7 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
           if (WebIntegrationFragment.this.useServlet3Api) {
             _builder.append("@");
             TypeReference _typeReference = new TypeReference("javax.servlet.annotation.WebServlet");
-            _builder.append(_typeReference, "");
+            _builder.append(_typeReference);
             _builder.append("(name = \'XtextServices\', urlPatterns = \'/xtext-service/*\')");
             _builder.newLineIfNotEmpty();
           }
@@ -1767,10 +1767,10 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
         Grammar _grammar = WebIntegrationFragment.this.getGrammar();
         TypeReference _servletClass = WebIntegrationFragment.this.getServletClass(_grammar);
         String _simpleName = _servletClass.getSimpleName();
-        _builder.append(_simpleName, "");
+        _builder.append(_simpleName);
         _builder.append(" extends ");
         TypeReference _typeRef = TypeReference.typeRef("org.eclipse.xtext.web.servlet.XtextServlet");
-        _builder.append(_typeRef, "");
+        _builder.append(_typeRef);
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");

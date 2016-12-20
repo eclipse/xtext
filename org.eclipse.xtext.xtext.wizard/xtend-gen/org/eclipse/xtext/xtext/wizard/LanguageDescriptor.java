@@ -89,23 +89,23 @@ public class LanguageDescriptor {
     if (_lessThan) {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("http://www.");
-      _builder.append(this.name, "");
+      _builder.append(this.name);
       return _builder.toString();
     }
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("http://www.");
     String _get = strings[1];
-    _builder_1.append(_get, "");
+    _builder_1.append(_get);
     _builder_1.append(".");
     String _get_1 = strings[0];
-    _builder_1.append(_get_1, "");
+    _builder_1.append(_get_1);
     String s = _builder_1.toString();
     for (int i = 2; (i < strings.length); i++) {
       String _s = s;
       StringConcatenation _builder_2 = new StringConcatenation();
       _builder_2.append("/");
       String _get_2 = strings[i];
-      _builder_2.append(_get_2, "");
+      _builder_2.append(_get_2);
       s = (_s + _builder_2);
     }
     return s;

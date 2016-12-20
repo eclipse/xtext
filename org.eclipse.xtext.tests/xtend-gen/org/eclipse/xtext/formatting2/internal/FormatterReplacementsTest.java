@@ -93,12 +93,12 @@ public class FormatterReplacementsTest {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("\"");
         String _text = it.getText();
-        _builder.append(_text, "");
+        _builder.append(_text);
         _builder.append("\" -> \"");
         String _replacementText = it.getReplacementText();
-        _builder.append(_replacementText, "");
+        _builder.append(_replacementText);
         _builder.append("\"");
-        _builder.append("\n", "");
+        _builder.append("\n");
         return _builder.toString();
       };
       List<String> _map = ListExtensions.<ITextReplacement, String>map(replacements, _function_1);

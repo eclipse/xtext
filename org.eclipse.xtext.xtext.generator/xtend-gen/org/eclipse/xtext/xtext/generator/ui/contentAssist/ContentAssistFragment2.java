@@ -199,11 +199,11 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
         Grammar _grammar = ContentAssistFragment2.this.getGrammar();
         TypeReference _proposalProviderClass = ContentAssistFragment2.this.getProposalProviderClass(_grammar);
         String _simpleName = _proposalProviderClass.getSimpleName();
-        _builder.append(_simpleName, "");
+        _builder.append(_simpleName);
         _builder.append(" extends ");
         Grammar _grammar_1 = ContentAssistFragment2.this.getGrammar();
         TypeReference _genProposalProviderClass = ContentAssistFragment2.this.getGenProposalProviderClass(_grammar_1);
-        _builder.append(_genProposalProviderClass, "");
+        _builder.append(_genProposalProviderClass);
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
         _builder.append("}");
@@ -238,11 +238,11 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
         Grammar _grammar = ContentAssistFragment2.this.getGrammar();
         TypeReference _proposalProviderClass = ContentAssistFragment2.this.getProposalProviderClass(_grammar);
         String _simpleName = _proposalProviderClass.getSimpleName();
-        _builder.append(_simpleName, "");
+        _builder.append(_simpleName);
         _builder.append(" extends ");
         Grammar _grammar_1 = ContentAssistFragment2.this.getGrammar();
         TypeReference _genProposalProviderClass = ContentAssistFragment2.this.getGenProposalProviderClass(_grammar_1);
-        _builder.append(_genProposalProviderClass, "");
+        _builder.append(_genProposalProviderClass);
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
         _builder.append("}");
@@ -342,9 +342,9 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
             }
             _builder.append("class ");
             String _simpleName = genClass.getSimpleName();
-            _builder.append(_simpleName, "");
+            _builder.append(_simpleName);
             _builder.append(" extends ");
-            _builder.append(superClass, "");
+            _builder.append(superClass);
             _builder.append(" {");
             _builder.newLineIfNotEmpty();
             _builder.newLine();
@@ -431,17 +431,17 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
         protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
           _builder.append("public void complete");
           String _fQFeatureName = ContentAssistFragment2.this.getFQFeatureName(assignment);
-          _builder.append(_fQFeatureName, "");
+          _builder.append(_fQFeatureName);
           _builder.append("(");
-          _builder.append(EObject.class, "");
+          _builder.append(EObject.class);
           _builder.append(" model, ");
-          _builder.append(Assignment.class, "");
+          _builder.append(Assignment.class);
           _builder.append(" assignment, ");
           TypeReference _contentAssistContextClass = ContentAssistFragment2.this.getContentAssistContextClass();
-          _builder.append(_contentAssistContextClass, "");
+          _builder.append(_contentAssistContextClass);
           _builder.append(" context, ");
           TypeReference _iCompletionProposalAcceptorClass = ContentAssistFragment2.this.getICompletionProposalAcceptorClass();
-          _builder.append(_iCompletionProposalAcceptorClass, "");
+          _builder.append(_iCompletionProposalAcceptorClass);
           _builder.append(" acceptor) {");
           _builder.newLineIfNotEmpty();
           {
@@ -504,7 +504,7 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
               _builder.append("if (assignment.getTerminal() instanceof ");
               EClass _eClass = terminal.eClass();
               Class<?> _instanceClass = _eClass.getInstanceClass();
-              _builder.append(_instanceClass, "");
+              _builder.append(_instanceClass);
               _builder.append(") {");
               _builder.newLineIfNotEmpty();
               _builder.append("\t");
@@ -544,9 +544,9 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         _builder.append("lookupCrossReference(((");
-        _builder.append(CrossReference.class, "");
+        _builder.append(CrossReference.class);
         _builder.append(")");
-        _builder.append(accessor, "");
+        _builder.append(accessor);
         _builder.append("), context, acceptor);");
         _builder.newLineIfNotEmpty();
       }
@@ -559,9 +559,9 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         _builder.append("completeRuleCall(((");
-        _builder.append(RuleCall.class, "");
+        _builder.append(RuleCall.class);
         _builder.append(")");
-        _builder.append(accessor, "");
+        _builder.append(accessor);
         _builder.append("), context, acceptor);");
         _builder.newLineIfNotEmpty();
       }
@@ -582,17 +582,17 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
               @Override
               protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
                 _builder.append("((");
-                _builder.append(Alternatives.class, "");
+                _builder.append(Alternatives.class);
                 _builder.append(")");
-                _builder.append(accessor, "");
+                _builder.append(accessor);
                 _builder.append(").getElements().get(");
                 Integer _key = pair.getKey();
-                _builder.append(_key, "");
+                _builder.append(_key);
                 _builder.append(")");
               }
             };
             StringConcatenationClient _assignmentTerminal = ContentAssistFragment2.this.assignmentTerminal(_value, _client);
-            _builder.append(_assignmentTerminal, "");
+            _builder.append(_assignmentTerminal);
             _builder.newLineIfNotEmpty();
           }
         }

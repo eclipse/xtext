@@ -207,7 +207,7 @@ public class GeneratorFragment2 extends AbstractStubGeneratingFragment {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         TypeReference _typeRef = TypeReference.typeRef("org.eclipse.core.resources.ResourcesPlugin");
-        _builder.append(_typeRef, "");
+        _builder.append(_typeRef);
         _builder.append(".getWorkspace().getRoot()");
       }
     };
@@ -217,7 +217,7 @@ public class GeneratorFragment2 extends AbstractStubGeneratingFragment {
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         _builder.append("binder.bind(");
         TypeReference _typeRef = TypeReference.typeRef("org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreInitializer");
-        _builder.append(_typeRef, "");
+        _builder.append(_typeRef);
         _builder.append(".class)");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
@@ -271,9 +271,9 @@ public class GeneratorFragment2 extends AbstractStubGeneratingFragment {
         Grammar _grammar = _language.getGrammar();
         TypeReference _generatorStub = GeneratorFragment2.this.getGeneratorStub(_grammar);
         String _simpleName = _generatorStub.getSimpleName();
-        _builder.append(_simpleName, "");
+        _builder.append(_simpleName);
         _builder.append(" extends ");
-        _builder.append(AbstractGenerator.class, "");
+        _builder.append(AbstractGenerator.class);
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
         _builder.newLine();
@@ -335,9 +335,9 @@ public class GeneratorFragment2 extends AbstractStubGeneratingFragment {
         Grammar _grammar = _language.getGrammar();
         TypeReference _generatorStub = GeneratorFragment2.this.getGeneratorStub(_grammar);
         String _simpleName = _generatorStub.getSimpleName();
-        _builder.append(_simpleName, "");
+        _builder.append(_simpleName);
         _builder.append(" extends ");
-        _builder.append(AbstractGenerator.class, "");
+        _builder.append(AbstractGenerator.class);
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
         _builder.newLine();
@@ -361,7 +361,7 @@ public class GeneratorFragment2 extends AbstractStubGeneratingFragment {
         _builder.append("//");
         _builder.newLine();
         _builder.append("//\t\t\t@");
-        _builder.append(Override.class, "");
+        _builder.append(Override.class);
         _builder.newLineIfNotEmpty();
         _builder.append("//\t\t\tpublic String apply(Greeting greeting) {");
         _builder.newLine();
@@ -723,14 +723,14 @@ public class GeneratorFragment2 extends AbstractStubGeneratingFragment {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         String _fileHeader = GeneratorFragment2.this.codeConfig.getFileHeader();
-        _builder.append(_fileHeader, "");
+        _builder.append(_fileHeader);
         _builder.newLineIfNotEmpty();
         _builder.append("module ");
         IXtextGeneratorLanguage _language = GeneratorFragment2.this.getLanguage();
         Grammar _grammar = _language.getGrammar();
         TypeReference _generatorStub = GeneratorFragment2.this.getGeneratorStub(_grammar);
         String _name = _generatorStub.getName();
-        _builder.append(_name, "");
+        _builder.append(_name);
         _builder.append("MWE");
         _builder.newLineIfNotEmpty();
         _builder.newLine();
@@ -740,7 +740,7 @@ public class GeneratorFragment2 extends AbstractStubGeneratingFragment {
         Grammar _grammar_1 = GeneratorFragment2.this.getGrammar();
         TypeReference _runtimeSetup = GeneratorFragment2.this._xtextGeneratorNaming.getRuntimeSetup(_grammar_1);
         String _packageName = _runtimeSetup.getPackageName();
-        _builder.append(_packageName, "");
+        _builder.append(_packageName);
         _builder.append(".*");
         _builder.newLineIfNotEmpty();
         _builder.newLine();

@@ -186,21 +186,21 @@ public class Junit4Fragment2 extends AbstractStubGeneratingFragment {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         _builder.append("@");
-        _builder.append(runWith, "");
+        _builder.append(runWith);
         _builder.append("(");
-        _builder.append(xtextRunner, "");
+        _builder.append(xtextRunner);
         _builder.append(")");
         _builder.newLineIfNotEmpty();
         _builder.append("@");
-        _builder.append(injectWith, "");
+        _builder.append(injectWith);
         _builder.append("(");
         TypeReference _injectorProvider = Junit4Fragment2.this.injectorProvider();
-        _builder.append(_injectorProvider, "");
+        _builder.append(_injectorProvider);
         _builder.append(")");
         _builder.newLineIfNotEmpty();
         _builder.append("class ");
         TypeReference _exampleRuntimeTest = Junit4Fragment2.this.exampleRuntimeTest();
-        _builder.append(_exampleRuntimeTest, "");
+        _builder.append(_exampleRuntimeTest);
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
@@ -281,12 +281,12 @@ public class Junit4Fragment2 extends AbstractStubGeneratingFragment {
           _builder.append("public class ");
           TypeReference _injectorProvider = Junit4Fragment2.this.injectorProvider();
           String _simpleName = _injectorProvider.getSimpleName();
-          _builder.append(_simpleName, "");
+          _builder.append(_simpleName);
           _builder.append(" implements ");
           TypeReference _iInjectorProvider = Junit4Fragment2.this.iInjectorProvider();
-          _builder.append(_iInjectorProvider, "");
+          _builder.append(_iInjectorProvider);
           _builder.append(", ");
-          _builder.append(iRegistryConfigurator, "");
+          _builder.append(iRegistryConfigurator);
           _builder.append(" {");
           _builder.newLineIfNotEmpty();
           _builder.newLine();
@@ -496,10 +496,10 @@ public class Junit4Fragment2 extends AbstractStubGeneratingFragment {
           _builder.append("public class ");
           TypeReference _uiInjectorProvider = Junit4Fragment2.this.uiInjectorProvider();
           String _simpleName = _uiInjectorProvider.getSimpleName();
-          _builder.append(_simpleName, "");
+          _builder.append(_simpleName);
           _builder.append(" implements ");
           TypeReference _iInjectorProvider = Junit4Fragment2.this.iInjectorProvider();
-          _builder.append(_iInjectorProvider, "");
+          _builder.append(_iInjectorProvider);
           _builder.append(" {");
           _builder.newLineIfNotEmpty();
           _builder.newLine();

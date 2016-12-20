@@ -103,7 +103,7 @@ public class ContentAssistContextTestHelper {
       for(final Pair<Integer, ContentAssistContext> ctx : _indexed) {
         _builder.append("context");
         Integer _key = ctx.getKey();
-        _builder.append(_key, "");
+        _builder.append(_key);
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
         {

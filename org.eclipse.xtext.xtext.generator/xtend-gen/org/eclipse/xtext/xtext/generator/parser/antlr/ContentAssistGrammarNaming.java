@@ -25,7 +25,7 @@ public class ContentAssistGrammarNaming extends GrammarNaming {
   protected String getParserPackage(final Grammar it) {
     StringConcatenation _builder = new StringConcatenation();
     String _genericIdeBasePackage = this._xtextGeneratorNaming.getGenericIdeBasePackage(it);
-    _builder.append(_genericIdeBasePackage, "");
+    _builder.append(_genericIdeBasePackage);
     _builder.append(".contentassist.antlr");
     return _builder.toString();
   }

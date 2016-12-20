@@ -54,9 +54,9 @@ public class XtextAntlrIDEAGeneratorFragment extends AbstractAntlrGeneratorFragm
     final String grammarFileName = _parserGrammar.getGrammarFileName();
     StringConcatenation _builder = new StringConcatenation();
     String _path = fsa.getPath();
-    _builder.append(_path, "");
+    _builder.append(_path);
     _builder.append("/");
-    _builder.append(grammarFileName, "");
+    _builder.append(grammarFileName);
     final String absoluteGrammarFileName = _builder.toString();
     this.addAntlrParam("-fo");
     int _lastIndexOf = absoluteGrammarFileName.lastIndexOf("/");

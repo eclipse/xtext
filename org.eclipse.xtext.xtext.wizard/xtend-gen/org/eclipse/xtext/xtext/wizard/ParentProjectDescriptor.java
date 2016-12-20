@@ -313,7 +313,7 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
         }
         _builder.append(" \'");
         String _name = p.getName();
-        _builder.append(_name, "");
+        _builder.append(_name);
         _builder.append("\'");
         _builder.newLineIfNotEmpty();
       }

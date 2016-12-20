@@ -90,11 +90,11 @@ public class Formatter2Fragment2 extends AbstractStubGeneratingFragment {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         _builder.append("binder.bind(");
-        _builder.append(IPreferenceValuesProvider.class, "");
+        _builder.append(IPreferenceValuesProvider.class);
         _builder.append(".class).annotatedWith(");
-        _builder.append(FormatterPreferences.class, "");
+        _builder.append(FormatterPreferences.class);
         _builder.append(".class).to(");
-        _builder.append(FormatterPreferenceValuesProvider.class, "");
+        _builder.append(FormatterPreferenceValuesProvider.class);
         _builder.append(".class);");
       }
     };
@@ -165,10 +165,10 @@ public class Formatter2Fragment2 extends AbstractStubGeneratingFragment {
           Grammar _grammar = Formatter2Fragment2.this.getGrammar();
           TypeReference _formatter2Stub = Formatter2Fragment2.this.getFormatter2Stub(_grammar);
           String _simpleName = _formatter2Stub.getSimpleName();
-          _builder.append(_simpleName, "");
+          _builder.append(_simpleName);
           _builder.append(" extends ");
           TypeReference _stubSuperClass = Formatter2Fragment2.this.getStubSuperClass();
-          _builder.append(_stubSuperClass, "");
+          _builder.append(_stubSuperClass);
           _builder.append(" {");
           _builder.newLineIfNotEmpty();
           _builder.append("\t");
@@ -234,12 +234,12 @@ public class Formatter2Fragment2 extends AbstractStubGeneratingFragment {
           }
         }
         _builder.append(" dispatch void format(");
-        _builder.append(clazz, "");
+        _builder.append(clazz);
         _builder.append(" ");
         String _varName = Formatter2Fragment2.this.toVarName(clazz);
-        _builder.append(_varName, "");
+        _builder.append(_varName);
         _builder.append(", extension ");
-        _builder.append(IFormattableDocument.class, "");
+        _builder.append(IFormattableDocument.class);
         _builder.append(" document) {");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");

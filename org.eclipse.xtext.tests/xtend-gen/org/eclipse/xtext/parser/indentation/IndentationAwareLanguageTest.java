@@ -461,7 +461,7 @@ public class IndentationAwareLanguageTest {
       EList<TreeNode> _nodes = tree.getNodes();
       for(final TreeNode node : _nodes) {
         StringConcatenation _asText = this.asText(node);
-        _builder.append(_asText, "");
+        _builder.append(_asText);
         _builder.newLineIfNotEmpty();
       }
     }
@@ -471,7 +471,7 @@ public class IndentationAwareLanguageTest {
   private StringConcatenation asText(final TreeNode treeNode) {
     StringConcatenation _builder = new StringConcatenation();
     String _name = treeNode.getName();
-    _builder.append(_name, "");
+    _builder.append(_name);
     _builder.newLineIfNotEmpty();
     {
       EList<TreeNode> _children = treeNode.getChildren();

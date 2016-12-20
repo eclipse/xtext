@@ -97,9 +97,9 @@ public class FileProjectConfig implements IProjectConfig {
   public String toString() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Project ");
-    _builder.append(this.name, "");
+    _builder.append(this.name);
     _builder.append(" (");
-    _builder.append(this.path, "");
+    _builder.append(this.path);
     _builder.append(")");
     return _builder.toString();
   }

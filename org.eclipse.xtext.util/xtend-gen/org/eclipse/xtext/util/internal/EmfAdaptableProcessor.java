@@ -47,7 +47,7 @@ public class EmfAdaptableProcessor extends AbstractClassProcessor {
         @Override
         protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
           _builder.append("for (");
-          _builder.append(Adapter.class, "");
+          _builder.append(Adapter.class);
           _builder.append(" adapter : emfObject.eAdapters()) {");
           _builder.newLineIfNotEmpty();
           _builder.append("\t");
@@ -81,9 +81,9 @@ public class EmfAdaptableProcessor extends AbstractClassProcessor {
       StringConcatenationClient _client = new StringConcatenationClient() {
         @Override
         protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-          _builder.append(List.class, "");
+          _builder.append(List.class);
           _builder.append("<");
-          _builder.append(Adapter.class, "");
+          _builder.append(Adapter.class);
           _builder.append("> adapters = emfObject.eAdapters();");
           _builder.newLineIfNotEmpty();
           _builder.append("for(int i = 0, max = adapters.size(); i < max; i++) {");
@@ -126,7 +126,7 @@ public class EmfAdaptableProcessor extends AbstractClassProcessor {
         @Override
         protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
           String _simpleName = annotatedClass.getSimpleName();
-          _builder.append(_simpleName, "");
+          _builder.append(_simpleName);
           _builder.append(" result = findInEmfObject(emfObject);");
           _builder.newLineIfNotEmpty();
           _builder.append("if (result != null)");
@@ -137,9 +137,9 @@ public class EmfAdaptableProcessor extends AbstractClassProcessor {
           _builder.append(_simpleName_1, "\t");
           _builder.append("\");");
           _builder.newLineIfNotEmpty();
-          _builder.append(adapterClass, "");
+          _builder.append(adapterClass);
           _builder.append(" adapter = new ");
-          _builder.append(adapterClass, "");
+          _builder.append(adapterClass);
           _builder.append("(this);");
           _builder.newLineIfNotEmpty();
           _builder.append("emfObject.eAdapters().add(adapter);");
@@ -193,7 +193,7 @@ public class EmfAdaptableProcessor extends AbstractClassProcessor {
         @Override
         protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
           _builder.append("return object == ");
-          _builder.append(annotatedClass, "");
+          _builder.append(annotatedClass);
           _builder.append(".class;");
           _builder.newLineIfNotEmpty();
         }

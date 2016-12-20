@@ -83,7 +83,7 @@ public class CodetemplatesGeneratorFragment2 extends AbstractXtextGeneratorFragm
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         TypeReference _typeRef = TypeReference.typeRef("org.eclipse.xtext.ui.codetemplates.ui.AccessibleCodetemplatesActivator");
-        _builder.append(_typeRef, "");
+        _builder.append(_typeRef);
         _builder.append(".getTemplatesLanguageConfigurationProvider()");
       }
     };
@@ -93,7 +93,7 @@ public class CodetemplatesGeneratorFragment2 extends AbstractXtextGeneratorFragm
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         TypeReference _typeRef = TypeReference.typeRef("org.eclipse.xtext.ui.codetemplates.ui.AccessibleCodetemplatesActivator");
-        _builder.append(_typeRef, "");
+        _builder.append(_typeRef);
         _builder.append(".getLanguageRegistry()");
       }
     };
@@ -145,14 +145,14 @@ public class CodetemplatesGeneratorFragment2 extends AbstractXtextGeneratorFragm
         Grammar _grammar = CodetemplatesGeneratorFragment2.this.getGrammar();
         TypeReference _partialContentAssistParserClass = CodetemplatesGeneratorFragment2.this.getPartialContentAssistParserClass(_grammar);
         String _simpleName = _partialContentAssistParserClass.getSimpleName();
-        _builder.append(_simpleName, "");
+        _builder.append(_simpleName);
         _builder.append(" extends ");
         Grammar _grammar_1 = CodetemplatesGeneratorFragment2.this.getGrammar();
         TypeReference _parserClass = CodetemplatesGeneratorFragment2.this.caNaming.getParserClass(_grammar_1);
-        _builder.append(_parserClass, "");
+        _builder.append(_parserClass);
         _builder.append(" implements ");
         TypeReference _typeRef = TypeReference.typeRef("org.eclipse.xtext.ide.editor.partialEditing.IPartialEditingContentAssistParser");
-        _builder.append(_typeRef, "");
+        _builder.append(_typeRef);
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
         _builder.newLine();

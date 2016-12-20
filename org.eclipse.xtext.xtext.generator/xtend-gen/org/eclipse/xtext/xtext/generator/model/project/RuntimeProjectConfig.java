@@ -62,10 +62,10 @@ public class RuntimeProjectConfig extends BundleProjectConfig implements IRuntim
     _builder.append("was (root=\'");
     IXtextGeneratorFileSystemAccess _root_2 = this.getRoot();
     String _path_4 = _root_2.getPath();
-    _builder.append(_path_4, "");
+    _builder.append(_path_4);
     _builder.append("\', ecoreModel=\'");
     String _path_5 = this.ecoreModel.getPath();
-    _builder.append(_path_5, "");
+    _builder.append(_path_5);
     _builder.append("\')");
     _builder.newLineIfNotEmpty();
     _builder.newLine();

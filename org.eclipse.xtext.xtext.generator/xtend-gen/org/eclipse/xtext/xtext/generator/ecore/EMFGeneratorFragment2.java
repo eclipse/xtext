@@ -507,7 +507,7 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
                   @Override
                   protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
                     String _packageInterfaceName = genPkg.getPackageInterfaceName();
-                    _builder.append(_packageInterfaceName, "");
+                    _builder.append(_packageInterfaceName);
                     _builder.append(".eINSTANCE");
                   }
                 };
@@ -518,7 +518,7 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
                   @Override
                   protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
                     String _factoryInterfaceName = genPkg.getFactoryInterfaceName();
-                    _builder.append(_factoryInterfaceName, "");
+                    _builder.append(_factoryInterfaceName);
                     _builder.append(".eINSTANCE");
                   }
                 };
@@ -621,10 +621,10 @@ public class EMFGeneratorFragment2 extends AbstractXtextGeneratorFragment {
           @Override
           protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
             _builder.append("if (!");
-            _builder.append(EPackage.class, "");
+            _builder.append(EPackage.class);
             _builder.append(".Registry.INSTANCE.containsKey(\"");
             String _nsURI = pack_1.getNsURI();
-            _builder.append(_nsURI, "");
+            _builder.append(_nsURI);
             _builder.append("\")) {");
             _builder.newLineIfNotEmpty();
             _builder.append("\t");

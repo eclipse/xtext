@@ -132,19 +132,19 @@ public abstract class ProjectDescriptor {
     };
     Iterable<String> _map = IterableExtensions.<String, String>map(_sourceFolders, _function);
     String _buildPropertiesEntry = this.buildPropertiesEntry("source..", _map);
-    _builder.append(_buildPropertiesEntry, "");
+    _builder.append(_buildPropertiesEntry);
     _builder.newLineIfNotEmpty();
     Set<String> _binIncludes = this.getBinIncludes();
     String _buildPropertiesEntry_1 = this.buildPropertiesEntry("bin.includes", _binIncludes);
-    _builder.append(_buildPropertiesEntry_1, "");
+    _builder.append(_buildPropertiesEntry_1);
     _builder.newLineIfNotEmpty();
     Set<String> _binExcludes = this.getBinExcludes();
     String _buildPropertiesEntry_2 = this.buildPropertiesEntry("bin.excludes", _binExcludes);
-    _builder.append(_buildPropertiesEntry_2, "");
+    _builder.append(_buildPropertiesEntry_2);
     _builder.newLineIfNotEmpty();
     Set<String> _developmentBundles = this.getDevelopmentBundles();
     String _buildPropertiesEntry_3 = this.buildPropertiesEntry("additional.bundles", _developmentBundles);
-    _builder.append(_buildPropertiesEntry_3, "");
+    _builder.append(_buildPropertiesEntry_3);
     _builder.newLineIfNotEmpty();
     return _builder;
   }
@@ -152,7 +152,7 @@ public abstract class ProjectDescriptor {
   public Set<String> getBinIncludes() {
     StringConcatenation _builder = new StringConcatenation();
     String _sourceFolder = this.sourceFolder(Outlet.META_INF);
-    _builder.append(_sourceFolder, "");
+    _builder.append(_sourceFolder);
     _builder.append("/");
     return CollectionLiterals.<String>newLinkedHashSet(".", _builder.toString());
   }
@@ -192,7 +192,7 @@ public abstract class ProjectDescriptor {
     _builder.newLine();
     _builder.append("Bundle-Name: ");
     String _name = this.getName();
-    _builder.append(_name, "");
+    _builder.append(_name);
     _builder.newLineIfNotEmpty();
     _builder.append("Bundle-Vendor: My Company");
     _builder.newLine();
@@ -200,7 +200,7 @@ public abstract class ProjectDescriptor {
     _builder.newLine();
     _builder.append("Bundle-SymbolicName: ");
     String _name_1 = this.getName();
-    _builder.append(_name_1, "");
+    _builder.append(_name_1);
     _builder.append("; singleton:=true");
     _builder.newLineIfNotEmpty();
     {
@@ -209,7 +209,7 @@ public abstract class ProjectDescriptor {
       if (_tripleNotEquals) {
         _builder.append("Bundle-Activator: ");
         Object _activatorClassName_1 = this.getActivatorClassName();
-        _builder.append(_activatorClassName_1, "");
+        _builder.append(_activatorClassName_1);
         _builder.newLineIfNotEmpty();
       }
     }
@@ -217,15 +217,15 @@ public abstract class ProjectDescriptor {
     _builder.newLine();
     Set<String> _requiredBundles = this.getRequiredBundles();
     String _manifestEntry = this.manifestEntry("Require-Bundle", _requiredBundles);
-    _builder.append(_manifestEntry, "");
+    _builder.append(_manifestEntry);
     _builder.newLineIfNotEmpty();
     Set<String> _importedPackages = this.getImportedPackages();
     String _manifestEntry_1 = this.manifestEntry("Import-Package", _importedPackages);
-    _builder.append(_manifestEntry_1, "");
+    _builder.append(_manifestEntry_1);
     _builder.newLineIfNotEmpty();
     _builder.append("Bundle-RequiredExecutionEnvironment: ");
     String _bree = this.getBree();
-    _builder.append(_bree, "");
+    _builder.append(_bree);
     _builder.newLineIfNotEmpty();
     return _builder.toString();
   }
@@ -241,10 +241,10 @@ public abstract class ProjectDescriptor {
       return "";
     }
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append(key, "");
+    _builder.append(key);
     _builder.append(": ");
     String _join = IterableExtensions.join(value, ",\n ");
-    _builder.append(_join, "");
+    _builder.append(_join);
     return _builder.toString();
   }
   

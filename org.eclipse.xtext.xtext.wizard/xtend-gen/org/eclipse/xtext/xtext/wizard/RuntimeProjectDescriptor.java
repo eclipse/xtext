@@ -248,12 +248,12 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     WizardConfiguration _config = this.getConfig();
     LanguageDescriptor _language = _config.getLanguage();
     String _basePackagePath = _language.getBasePackagePath();
-    _builder.append(_basePackagePath, "");
+    _builder.append(_basePackagePath);
     _builder.append("/");
     WizardConfiguration _config_1 = this.getConfig();
     LanguageDescriptor _language_1 = _config_1.getLanguage();
     String _simpleName = _language_1.getSimpleName();
-    _builder.append(_simpleName, "");
+    _builder.append(_simpleName);
     _builder.append(".xtext");
     return _builder.toString();
   }
@@ -276,7 +276,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     WizardConfiguration _config = this.getConfig();
     LanguageDescriptor _language = _config.getLanguage();
     String _name = _language.getName();
-    _builder.append(_name, "");
+    _builder.append(_name);
     _builder.append(" with org.eclipse.xtext.common.Terminals");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
@@ -285,12 +285,12 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     LanguageDescriptor _language_1 = _config_1.getLanguage();
     String _simpleName = _language_1.getSimpleName();
     String _firstLower = StringExtensions.toFirstLower(_simpleName);
-    _builder.append(_firstLower, "");
+    _builder.append(_firstLower);
     _builder.append(" \"");
     WizardConfiguration _config_2 = this.getConfig();
     LanguageDescriptor _language_2 = _config_2.getLanguage();
     String _nsURI = _language_2.getNsURI();
-    _builder.append(_nsURI, "");
+    _builder.append(_nsURI);
     _builder.append("\"");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
@@ -314,12 +314,12 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     WizardConfiguration _config = this.getConfig();
     LanguageDescriptor _language = _config.getLanguage();
     String _basePackagePath = _language.getBasePackagePath();
-    _builder.append(_basePackagePath, "");
+    _builder.append(_basePackagePath);
     _builder.append("/Generate");
     WizardConfiguration _config_1 = this.getConfig();
     LanguageDescriptor _language_1 = _config_1.getLanguage();
     String _simpleName = _language_1.getSimpleName();
-    _builder.append(_simpleName, "");
+    _builder.append(_simpleName);
     _builder.append(".mwe2");
     return _builder.toString();
   }
@@ -336,7 +336,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     String _simpleName = _language_1.getSimpleName();
     String _plus_1 = (_plus + _simpleName);
     String _replaceAll = _plus_1.replaceAll("/", ".");
-    _builder.append(_replaceAll, "");
+    _builder.append(_replaceAll);
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("import org.eclipse.xtext.xtext.generator.*");
@@ -1606,13 +1606,13 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     WizardConfiguration _config = this.getConfig();
     LanguageDescriptor _language = _config.getLanguage();
     String _simpleName = _language.getSimpleName();
-    _builder.append(_simpleName, "");
+    _builder.append(_simpleName);
     _builder.append(" (");
     WizardConfiguration _config_1 = this.getConfig();
     LanguageDescriptor _language_1 = _config_1.getLanguage();
     LanguageDescriptor.FileExtensions _fileExtensions = _language_1.getFileExtensions();
     String _head = IterableExtensions.<String>head(_fileExtensions);
-    _builder.append(_head, "");
+    _builder.append(_head);
     _builder.append(") Language Infrastructure.launch");
     String _string = _builder.toString();
     CharSequence _workflowLaunchConfig = this.workflowLaunchConfig();
@@ -1653,7 +1653,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
         for(final ProjectDescriptor it : projectsToRefresh) {
           _builder.append("&lt;item path=&quot;/");
           String _name = it.getName();
-          _builder.append(_name, "");
+          _builder.append(_name);
           _builder.append("&quot; type=&quot;4&quot;/&gt;&#10;");
         }
       }
@@ -1675,7 +1675,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
           WizardConfiguration _config_6 = this.getConfig();
           RuntimeProjectDescriptor _runtimeProject_3 = _config_6.getRuntimeProject();
           String _name_1 = _runtimeProject_3.getName();
-          _builder_1.append(_name_1, "");
+          _builder_1.append(_name_1);
           _builder_1.append("\"/>");
           _builder_1.newLineIfNotEmpty();
           _builder_1.append("</listAttribute>");
@@ -1695,7 +1695,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
           _builder_1.append("</listAttribute>");
           _builder_1.newLine();
           _builder_1.append("<stringAttribute key=\"org.eclipse.debug.core.ATTR_REFRESH_SCOPE\" value=\"");
-          _builder_1.append(refreshAttr, "");
+          _builder_1.append(refreshAttr);
           _builder_1.append("\"/>");
           _builder_1.newLineIfNotEmpty();
           _builder_1.append("<stringAttribute key=\"org.eclipse.jdt.launching.MAIN_TYPE\" value=\"org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher\"/>");
@@ -1710,14 +1710,14 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
           String _simpleName = _language_1.getSimpleName();
           String _plus_1 = (_plus + _simpleName);
           String _replaceAll = _plus_1.replaceAll("/", ".");
-          _builder_1.append(_replaceAll, "");
+          _builder_1.append(_replaceAll);
           _builder_1.append("\"/>");
           _builder_1.newLineIfNotEmpty();
           _builder_1.append("<stringAttribute key=\"org.eclipse.jdt.launching.PROJECT_ATTR\" value=\"");
           WizardConfiguration _config_9 = this.getConfig();
           RuntimeProjectDescriptor _runtimeProject_4 = _config_9.getRuntimeProject();
           String _name_2 = _runtimeProject_4.getName();
-          _builder_1.append(_name_2, "");
+          _builder_1.append(_name_2);
           _builder_1.append("\"/>");
           _builder_1.newLineIfNotEmpty();
           _builder_1.append("<stringAttribute key=\"org.eclipse.jdt.launching.VM_ARGUMENTS\" value=\"-Xmx512m\"/>");
@@ -1756,7 +1756,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
             _builder_1.append("<booleanAttribute key=\"M2_WORKSPACE_RESOLUTION\" value=\"true\"/>");
             _builder_1.newLine();
             _builder_1.append("<stringAttribute key=\"org.eclipse.debug.core.ATTR_REFRESH_SCOPE\" value=\"");
-            _builder_1.append(refreshAttr, "");
+            _builder_1.append(refreshAttr);
             _builder_1.append("\"/>");
             _builder_1.newLineIfNotEmpty();
             _builder_1.append("<booleanAttribute key=\"org.eclipse.jdt.launching.ATTR_USE_START_ON_FIRST_THREAD\" value=\"true\"/>");
@@ -1765,7 +1765,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
             WizardConfiguration _config_11 = this.getConfig();
             RuntimeProjectDescriptor _runtimeProject_5 = _config_11.getRuntimeProject();
             String _name_3 = _runtimeProject_5.getName();
-            _builder_1.append(_name_3, "");
+            _builder_1.append(_name_3);
             _builder_1.append("}\"/>");
             _builder_1.newLineIfNotEmpty();
             _builder_1.append("</launchConfiguration>");
@@ -1794,7 +1794,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
               _builder_1.append("</listAttribute>");
               _builder_1.newLine();
               _builder_1.append("<stringAttribute key=\"org.eclipse.debug.core.ATTR_REFRESH_SCOPE\" value=\"");
-              _builder_1.append(refreshAttr, "");
+              _builder_1.append(refreshAttr);
               _builder_1.append("\"/>");
               _builder_1.newLineIfNotEmpty();
               _builder_1.append("<booleanAttribute key=\"org.eclipse.jdt.launching.ATTR_USE_START_ON_FIRST_THREAD\" value=\"true\"/>");
@@ -1803,7 +1803,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
               WizardConfiguration _config_13 = this.getConfig();
               RuntimeProjectDescriptor _runtimeProject_6 = _config_13.getRuntimeProject();
               String _name_4 = _runtimeProject_6.getName();
-              _builder_1.append(_name_4, "");
+              _builder_1.append(_name_4);
               _builder_1.append("}\"/>");
               _builder_1.newLineIfNotEmpty();
               _builder_1.append("</launchConfiguration>");
@@ -1846,7 +1846,7 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
     WizardConfiguration _config = this.getConfig();
     RuntimeProjectDescriptor _runtimeProject = _config.getRuntimeProject();
     String _name = _runtimeProject.getName();
-    _builder.append(_name, "");
+    _builder.append(_name);
     _builder.append("/.launch/\"/>");
     _builder.newLineIfNotEmpty();
     _builder.append("<stringAttribute key=\"bootstrap\" value=\"\"/>");

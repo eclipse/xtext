@@ -2009,7 +2009,7 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     Character _valueOf_1 = Character.valueOf('/');
     char _charValue_1 = _valueOf_1.charValue();
     String _replace = _name.replace(_charValue, _charValue_1);
-    _builder.append(_replace, "");
+    _builder.append(_replace);
     _builder.append("/Test.xtext");
     URI _createURI = URI.createURI(_builder.toString());
     Resource _createResource = rs.createResource(_createURI, 

@@ -50,7 +50,7 @@ public class TestLanguageGenerator extends AbstractGenerator {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("public class ");
       String _name_1 = type.getName();
-      _builder.append(_name_1, "");
+      _builder.append(_name_1);
       _builder.append(" {");
       _builder.newLineIfNotEmpty();
       {

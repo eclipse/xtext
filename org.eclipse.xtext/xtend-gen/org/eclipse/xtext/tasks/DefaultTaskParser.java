@@ -93,7 +93,7 @@ public class DefaultTaskParser implements ITaskParser {
       };
       Iterable<String> _map = IterableExtensions.<TaskTag, String>map(taskTags, _function);
       String _join = IterableExtensions.join(_map, "|");
-      _builder.append(_join, "");
+      _builder.append(_join);
       _builder.append(")(.*)?)$");
       _xblockexpression = Pattern.compile(_builder.toString(), flags);
     }

@@ -220,10 +220,10 @@ public class BuildOrderTest {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Expected: ");
     String _asString = this.asString(expected);
-    _builder.append(_asString, "");
+    _builder.append(_asString);
     _builder.append(" but was ");
     String _asString_1 = this.asString(actual);
-    _builder.append(_asString_1, "");
+    _builder.append(_asString_1);
     Assert.assertEquals(_builder.toString(), expected, actual);
   }
   

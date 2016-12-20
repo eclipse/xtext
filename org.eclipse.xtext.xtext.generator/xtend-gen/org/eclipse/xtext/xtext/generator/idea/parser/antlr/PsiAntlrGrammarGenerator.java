@@ -63,13 +63,13 @@ public class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGen
     GrammarNaming _grammarNaming = this.getGrammarNaming();
     TypeReference _internalParserSuperClass = _grammarNaming.getInternalParserSuperClass(it);
     String _name = _internalParserSuperClass.getName();
-    _builder.append(_name, "");
+    _builder.append(_name);
     _builder.append(";");
     _builder.newLineIfNotEmpty();
     _builder.append("import ");
     Grammar _grammar = GrammarUtil.getGrammar(it);
     TypeReference _elementTypeProvider = this._ideaPluginClassNames.getElementTypeProvider(_grammar);
-    _builder.append(_elementTypeProvider, "");
+    _builder.append(_elementTypeProvider);
     _builder.append(";");
     _builder.newLineIfNotEmpty();
     _builder.append("import org.eclipse.xtext.idea.parser.TokenTypeProvider;");
@@ -89,7 +89,7 @@ public class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGen
     _builder.append("import ");
     TypeReference _grammarAccess = this._grammarAccessExtensions.getGrammarAccess(it);
     String _name_1 = _grammarAccess.getName();
-    _builder.append(_name_1, "");
+    _builder.append(_name_1);
     _builder.append(";");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
@@ -208,16 +208,16 @@ public class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGen
       if (_isValidEntryRule) {
         _builder.append("//Entry rule ");
         String _entryRuleName = this._grammarAccessExtensions.entryRuleName(it);
-        _builder.append(_entryRuleName, "");
+        _builder.append(_entryRuleName);
         _builder.newLineIfNotEmpty();
         String _entryRuleName_1 = this._grammarAccessExtensions.entryRuleName(it);
-        _builder.append(_entryRuleName_1, "");
+        _builder.append(_entryRuleName_1);
         _builder.append(" returns [");
         String _currentType = this.getCurrentType();
-        _builder.append(_currentType, "");
+        _builder.append(_currentType);
         _builder.append(" current=false]");
         CharSequence _compileEntryInit = this.compileEntryInit(it, options);
-        _builder.append(_compileEntryInit, "");
+        _builder.append(_compileEntryInit);
         _builder.append(":");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
@@ -249,13 +249,13 @@ public class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGen
         _builder.append("EOF;");
         _builder.newLine();
         CharSequence _compileEntryFinally = this.compileEntryFinally(it, options);
-        _builder.append(_compileEntryFinally, "");
+        _builder.append(_compileEntryFinally);
         _builder.newLineIfNotEmpty();
       }
     }
     _builder.newLine();
     String _compileEBNF = this.compileEBNF(it, options);
-    _builder.append(_compileEBNF, "");
+    _builder.append(_compileEBNF);
     _builder.newLineIfNotEmpty();
     return _builder;
   }
@@ -269,15 +269,15 @@ public class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGen
         boolean _not = (!_isPassCurrentIntoFragment);
         String _currentType = this.getCurrentType();
         String _parameterList = AntlrGrammarGenUtil.getParameterList(((ParserRule)it), Boolean.valueOf(_not), _currentType);
-        _builder.append(_parameterList, "");
+        _builder.append(_parameterList);
       }
     }
     _builder.append(" returns ");
     CharSequence _compileReturns = this.compileReturns(it, options);
-    _builder.append(_compileReturns, "");
+    _builder.append(_compileReturns);
     _builder.newLineIfNotEmpty();
     String _compileInit = super.compileInit(it, options);
-    _builder.append(_compileInit, "");
+    _builder.append(_compileInit);
     return _builder.toString();
   }
   
@@ -290,7 +290,7 @@ public class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGen
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("[");
         String _currentType = this.getCurrentType();
-        _builder.append(_currentType, "");
+        _builder.append(_currentType);
         _builder.append(" current=in_current]");
         _switchResult = _builder;
       }
@@ -299,7 +299,7 @@ public class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGen
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("[");
       String _currentType = this.getCurrentType();
-      _builder.append(_currentType, "");
+      _builder.append(_currentType);
       _builder.append(" current=false]");
       _switchResult = _builder;
     }
@@ -321,7 +321,7 @@ public class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGen
       _builder.newLine();
       _builder.append("kw=");
       String __dataTypeEbnf2 = super._dataTypeEbnf2(it, supportActions);
-      _builder.append(__dataTypeEbnf2, "");
+      _builder.append(__dataTypeEbnf2);
       _builder.newLineIfNotEmpty();
       _builder.append("{");
       _builder.newLine();
@@ -382,7 +382,7 @@ public class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGen
           _builder.append("}");
           _builder.newLine();
           String __dataTypeEbnf2 = super._dataTypeEbnf2(it, supportActions);
-          _builder.append(__dataTypeEbnf2, "");
+          _builder.append(__dataTypeEbnf2);
           _builder.newLineIfNotEmpty();
           _builder.append("{");
           _builder.newLine();
@@ -408,10 +408,10 @@ public class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGen
           _builder_1.append("}");
           _builder_1.newLine();
           String _localVar = this._grammarAccessExtensions.localVar(it);
-          _builder_1.append(_localVar, "");
+          _builder_1.append(_localVar);
           _builder_1.append("=");
           String __dataTypeEbnf2_1 = super._dataTypeEbnf2(it, supportActions);
-          _builder_1.append(__dataTypeEbnf2_1, "");
+          _builder_1.append(__dataTypeEbnf2_1);
           _builder_1.newLineIfNotEmpty();
           _builder_1.append("{");
           _builder_1.newLine();
@@ -495,10 +495,10 @@ public class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGen
         _builder.newLine();
         Assignment _containingAssignment = GrammarUtil.containingAssignment(it);
         String _localVar = this._grammarAccessExtensions.localVar(_containingAssignment, it);
-        _builder.append(_localVar, "");
+        _builder.append(_localVar);
         _builder.append("=");
         String __ebnf2 = super._ebnf2(it, options, supportActions);
-        _builder.append(__ebnf2, "");
+        _builder.append(__ebnf2);
         _builder.newLineIfNotEmpty();
         _builder.append("{");
         _builder.newLine();
@@ -522,10 +522,10 @@ public class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGen
         _builder_1.append("}");
         _builder_1.newLine();
         String _localVar_2 = this._grammarAccessExtensions.localVar(it);
-        _builder_1.append(_localVar_2, "");
+        _builder_1.append(_localVar_2);
         _builder_1.append("=");
         String __ebnf2_1 = super._ebnf2(it, options, supportActions);
-        _builder_1.append(__ebnf2_1, "");
+        _builder_1.append(__ebnf2_1);
         _builder_1.newLineIfNotEmpty();
         _builder_1.append("{");
         _builder_1.newLine();
@@ -559,10 +559,10 @@ public class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGen
       _builder.append("}");
       _builder.newLine();
       String _localVar = this._grammarAccessExtensions.localVar(it);
-      _builder.append(_localVar, "");
+      _builder.append(_localVar);
       _builder.append("=");
       String __ebnf2 = super._ebnf2(it, options, supportActions);
-      _builder.append(__ebnf2, "");
+      _builder.append(__ebnf2);
       _builder.newLineIfNotEmpty();
       _builder.append("{");
       _builder.newLine();
@@ -639,7 +639,7 @@ public class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGen
           _builder.append("}");
           _builder.newLine();
           String __ebnf2 = super._ebnf2(it, options, supportActions);
-          _builder.append(__ebnf2, "");
+          _builder.append(__ebnf2);
           _builder.newLineIfNotEmpty();
           _builder.append("{");
           _builder.newLine();
@@ -697,10 +697,10 @@ public class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGen
           _builder_1.append("}");
           _builder_1.newLine();
           String _localVar = this._grammarAccessExtensions.localVar(it);
-          _builder_1.append(_localVar, "");
+          _builder_1.append(_localVar);
           _builder_1.append("=");
           String __ebnf2_1 = super._ebnf2(it, options, supportActions);
-          _builder_1.append(__ebnf2_1, "");
+          _builder_1.append(__ebnf2_1);
           _builder_1.newLineIfNotEmpty();
           _builder_1.append("{");
           _builder_1.newLine();
@@ -732,10 +732,10 @@ public class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGen
           _builder_1.append("}");
           _builder_1.newLine();
           String _localVar = this._grammarAccessExtensions.localVar(it);
-          _builder_1.append(_localVar, "");
+          _builder_1.append(_localVar);
           _builder_1.append("=");
           String __ebnf2_1 = super._ebnf2(it, options, supportActions);
-          _builder_1.append(__ebnf2_1, "");
+          _builder_1.append(__ebnf2_1);
           _builder_1.newLineIfNotEmpty();
           _builder_1.append("{");
           _builder_1.newLine();
@@ -784,7 +784,7 @@ public class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGen
         _builder.append("}");
         _builder.newLine();
         String _crossrefEbnf = super.crossrefEbnf(it, call, ref, supportActions);
-        _builder.append(_crossrefEbnf, "");
+        _builder.append(_crossrefEbnf);
         _builder.newLineIfNotEmpty();
         _builder.append("{");
         _builder.newLine();
@@ -810,10 +810,10 @@ public class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGen
           _builder_1.newLine();
           Assignment _containingAssignment = GrammarUtil.containingAssignment(ref);
           String _localVar = this._grammarAccessExtensions.localVar(_containingAssignment);
-          _builder_1.append(_localVar, "");
+          _builder_1.append(_localVar);
           _builder_1.append("=");
           String _crossrefEbnf_1 = super.crossrefEbnf(it, call, ref, supportActions);
-          _builder_1.append(_crossrefEbnf_1, "");
+          _builder_1.append(_crossrefEbnf_1);
           _builder_1.newLineIfNotEmpty();
           _builder_1.append("{");
           _builder_1.newLine();
@@ -873,7 +873,7 @@ public class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGen
       _builder.append("}");
       _builder.newLine();
       String __assignmentEbnf = super._assignmentEbnf(it, assignment, options, supportActions);
-      _builder.append(__assignmentEbnf, "");
+      _builder.append(__assignmentEbnf);
       _xifexpression = _builder.toString();
     } else {
       _xifexpression = super._assignmentEbnf(it, assignment, options, supportActions);
@@ -887,7 +887,7 @@ public class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGen
     if (supportActions) {
       StringConcatenation _builder = new StringConcatenation();
       String __assignmentEbnf = super._assignmentEbnf(it, assignment, options, supportActions);
-      _builder.append(__assignmentEbnf, "");
+      _builder.append(__assignmentEbnf);
       _builder.newLineIfNotEmpty();
       _builder.append("{");
       _builder.newLine();
@@ -939,10 +939,10 @@ public class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGen
         _builder.append("}");
         _builder.newLine();
         String _localVar = this._grammarAccessExtensions.localVar(assignment, it);
-        _builder.append(_localVar, "");
+        _builder.append(_localVar);
         _builder.append("=");
         String __assignmentEbnf = super._assignmentEbnf(it, assignment, options, supportActions);
-        _builder.append(__assignmentEbnf, "");
+        _builder.append(__assignmentEbnf);
         _builder.newLineIfNotEmpty();
         _builder.append("{");
         _builder.newLine();
@@ -980,10 +980,10 @@ public class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGen
           _builder_1.append("}");
           _builder_1.newLine();
           String _localVar_1 = this._grammarAccessExtensions.localVar(assignment, it);
-          _builder_1.append(_localVar_1, "");
+          _builder_1.append(_localVar_1);
           _builder_1.append("=");
           String __assignmentEbnf_1 = super._assignmentEbnf(it, assignment, options, supportActions);
-          _builder_1.append(__assignmentEbnf_1, "");
+          _builder_1.append(__assignmentEbnf_1);
           _builder_1.newLineIfNotEmpty();
           _builder_1.append("{");
           _builder_1.newLine();
@@ -1029,7 +1029,7 @@ public class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGen
     _builder.append("markLeaf(elementTypeProvider.get");
     EObject _originalElement = AntlrGrammarGenUtil.<EObject>getOriginalElement(it);
     String _grammarElementIdentifier = this._grammarAccessExtensions.grammarElementIdentifier(_originalElement);
-    _builder.append(_grammarElementIdentifier, "");
+    _builder.append(_grammarElementIdentifier);
     _builder.append("ElementType());");
     return _builder;
   }
@@ -1037,7 +1037,7 @@ public class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGen
   protected CharSequence doneLeaf(final EObject it, final String token) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("doneLeaf(");
-    _builder.append(token, "");
+    _builder.append(token);
     _builder.append(");");
     return _builder;
   }
@@ -1047,7 +1047,7 @@ public class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGen
     _builder.append("markComposite(elementTypeProvider.get");
     EObject _originalElement = AntlrGrammarGenUtil.<EObject>getOriginalElement(it);
     String _grammarElementIdentifier = this._grammarAccessExtensions.grammarElementIdentifier(_originalElement);
-    _builder.append(_grammarElementIdentifier, "");
+    _builder.append(_grammarElementIdentifier);
     _builder.append("ElementType());");
     return _builder;
   }
@@ -1063,7 +1063,7 @@ public class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGen
     _builder.append("precedeComposite(elementTypeProvider.get");
     EObject _originalElement = AntlrGrammarGenUtil.<EObject>getOriginalElement(it);
     String _grammarElementIdentifier = this._grammarAccessExtensions.grammarElementIdentifier(_originalElement);
-    _builder.append(_grammarElementIdentifier, "");
+    _builder.append(_grammarElementIdentifier);
     _builder.append("ElementType());");
     return _builder;
   }

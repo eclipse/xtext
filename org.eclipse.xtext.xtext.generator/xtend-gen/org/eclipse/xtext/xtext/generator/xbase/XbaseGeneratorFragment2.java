@@ -209,7 +209,7 @@ public class XbaseGeneratorFragment2 extends AbstractXtextGeneratorFragment {
         protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
           _builder.append("if (");
           TypeReference _typeRef = TypeReference.typeRef("org.eclipse.ui.PlatformUI");
-          _builder.append(_typeRef, "");
+          _builder.append(_typeRef);
           _builder.append(".isWorkbenchRunning()) {");
           _builder.newLineIfNotEmpty();
           _builder.append("\t");
@@ -351,10 +351,10 @@ public class XbaseGeneratorFragment2 extends AbstractXtextGeneratorFragment {
         _builder.append("class ");
         TypeReference _jvmModelInferrer = XbaseGeneratorFragment2.this.getJvmModelInferrer();
         String _simpleName = _jvmModelInferrer.getSimpleName();
-        _builder.append(_simpleName, "");
+        _builder.append(_simpleName);
         _builder.append(" extends ");
         TypeReference _typeRef = TypeReference.typeRef("org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer");
-        _builder.append(_typeRef, "");
+        _builder.append(_typeRef);
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
         _builder.newLine();
@@ -467,16 +467,16 @@ public class XbaseGeneratorFragment2 extends AbstractXtextGeneratorFragment {
         _builder.append("// \t\t\t\tmembers += greeting.toMethod(\"hello\" + greeting.name, typeRef(String)) [");
         _builder.newLine();
         _builder.append("// \t\t\t\t\tbody = ");
-        _builder.append("\'\'\'", "");
+        _builder.append("\'\'\'");
         _builder.newLineIfNotEmpty();
         _builder.append("//\t\t\t\t\t\treturn \"Hello ");
-        _builder.append("«", "");
+        _builder.append("«");
         _builder.append("greeting.name");
-        _builder.append("»", "");
+        _builder.append("»");
         _builder.append("\";");
         _builder.newLineIfNotEmpty();
         _builder.append("//\t\t\t\t\t");
-        _builder.append("\'\'\'", "");
+        _builder.append("\'\'\'");
         _builder.newLineIfNotEmpty();
         _builder.append("//\t\t\t\t]");
         _builder.newLine();

@@ -52,9 +52,9 @@ public class BuilderIntegrationFragment2 extends AbstractXtextGeneratorFragment 
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         _builder.append("binder.bind(");
-        _builder.append(IResourceDescriptions.class, "");
+        _builder.append(IResourceDescriptions.class);
         _builder.append(".class).to(");
-        _builder.append(ResourceSetBasedResourceDescriptions.class, "");
+        _builder.append(ResourceSetBasedResourceDescriptions.class);
         _builder.append(".class);");
       }
     };
@@ -63,13 +63,13 @@ public class BuilderIntegrationFragment2 extends AbstractXtextGeneratorFragment 
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         _builder.append("binder.bind(");
-        _builder.append(IResourceDescriptions.class, "");
+        _builder.append(IResourceDescriptions.class);
         _builder.append(".class).annotatedWith(");
-        _builder.append(Names.class, "");
+        _builder.append(Names.class);
         _builder.append(".named(");
-        _builder.append(ResourceDescriptionsProvider.class, "");
+        _builder.append(ResourceDescriptionsProvider.class);
         _builder.append(".PERSISTED_DESCRIPTIONS)).to(");
-        _builder.append(ResourceSetBasedResourceDescriptions.class, "");
+        _builder.append(ResourceSetBasedResourceDescriptions.class);
         _builder.append(".class);");
       }
     };
@@ -96,14 +96,14 @@ public class BuilderIntegrationFragment2 extends AbstractXtextGeneratorFragment 
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         _builder.append("binder.bind(");
-        _builder.append(IResourceDescriptions.class, "");
+        _builder.append(IResourceDescriptions.class);
         _builder.append(".class).annotatedWith(");
-        _builder.append(Names.class, "");
+        _builder.append(Names.class);
         _builder.append(".named(");
-        _builder.append(ResourceDescriptionsProvider.class, "");
+        _builder.append(ResourceDescriptionsProvider.class);
         _builder.append(".NAMED_BUILDER_SCOPE)).to(");
         TypeReference _typeReference = new TypeReference("org.eclipse.xtext.builder.clustering", "CurrentDescriptions.ResourceSetAware");
-        _builder.append(_typeReference, "");
+        _builder.append(_typeReference);
         _builder.append(".class);");
       }
     };
@@ -112,14 +112,14 @@ public class BuilderIntegrationFragment2 extends AbstractXtextGeneratorFragment 
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         _builder.append("binder.bind(");
-        _builder.append(IResourceDescriptions.class, "");
+        _builder.append(IResourceDescriptions.class);
         _builder.append(".class).annotatedWith(");
-        _builder.append(Names.class, "");
+        _builder.append(Names.class);
         _builder.append(".named(");
-        _builder.append(ResourceDescriptionsProvider.class, "");
+        _builder.append(ResourceDescriptionsProvider.class);
         _builder.append(".PERSISTED_DESCRIPTIONS)).to(");
         TypeReference _typeRef = TypeReference.typeRef("org.eclipse.xtext.builder.builderState.IBuilderState");
-        _builder.append(_typeRef, "");
+        _builder.append(_typeRef);
         _builder.append(".class);");
       }
     };

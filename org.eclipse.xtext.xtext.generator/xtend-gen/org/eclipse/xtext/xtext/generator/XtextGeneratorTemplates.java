@@ -79,10 +79,10 @@ public class XtextGeneratorTemplates {
           _builder.append("class ");
           TypeReference _runtimeSetup = XtextGeneratorTemplates.this.naming.getRuntimeSetup(it);
           String _simpleName = _runtimeSetup.getSimpleName();
-          _builder.append(_simpleName, "");
+          _builder.append(_simpleName);
           _builder.append(" extends ");
           TypeReference _runtimeGenSetup = XtextGeneratorTemplates.this.naming.getRuntimeGenSetup(it);
-          _builder.append(_runtimeGenSetup, "");
+          _builder.append(_runtimeGenSetup);
           _builder.append(" {");
           _builder.newLineIfNotEmpty();
           _builder.newLine();
@@ -120,10 +120,10 @@ public class XtextGeneratorTemplates {
           _builder.append("public class ");
           TypeReference _runtimeSetup = XtextGeneratorTemplates.this.naming.getRuntimeSetup(it);
           String _simpleName = _runtimeSetup.getSimpleName();
-          _builder.append(_simpleName, "");
+          _builder.append(_simpleName);
           _builder.append(" extends ");
           TypeReference _runtimeGenSetup = XtextGeneratorTemplates.this.naming.getRuntimeGenSetup(it);
-          _builder.append(_runtimeGenSetup, "");
+          _builder.append(_runtimeGenSetup);
           _builder.append(" {");
           _builder.newLineIfNotEmpty();
           _builder.newLine();
@@ -166,9 +166,9 @@ public class XtextGeneratorTemplates {
         _builder.append("public class ");
         TypeReference _runtimeGenSetup = XtextGeneratorTemplates.this.naming.getRuntimeGenSetup(it);
         String _simpleName = _runtimeGenSetup.getSimpleName();
-        _builder.append(_simpleName, "");
+        _builder.append(_simpleName);
         _builder.append(" implements ");
-        _builder.append(ISetup.class, "");
+        _builder.append(ISetup.class);
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
         _builder.newLine();
@@ -365,7 +365,7 @@ public class XtextGeneratorTemplates {
       String _simpleMethodName = this.getSimpleMethodName(_type);
       _elvis = _simpleMethodName;
     }
-    _builder.append(_elvis, "");
+    _builder.append(_elvis);
     {
       if (((it.getValue().getExpression() != null) && (!it.getValue().isProvider()))) {
         _builder.append("ToInstance");
@@ -393,14 +393,14 @@ public class XtextGeneratorTemplates {
           if (((!it.getValue().isProvider()) && it.getValue().getStatements().isEmpty())) {
             _builder.append("// contributed by ");
             String _contributedBy = it.getContributedBy();
-            _builder.append(_contributedBy, "");
+            _builder.append(_contributedBy);
             _builder.newLineIfNotEmpty();
             {
               GuiceModuleAccess.BindKey _key = it.getKey();
               boolean _isSingleton = _key.isSingleton();
               if (_isSingleton) {
                 _builder.append("@");
-                _builder.append(SingletonBinding.class, "");
+                _builder.append(SingletonBinding.class);
                 {
                   GuiceModuleAccess.BindKey _key_1 = it.getKey();
                   boolean _isEagerSingleton = _key_1.isEagerSingleton();
@@ -420,17 +420,17 @@ public class XtextGeneratorTemplates {
                 _builder.append("Class<? extends ");
                 GuiceModuleAccess.BindKey _key_2 = it.getKey();
                 TypeReference _type = _key_2.getType();
-                _builder.append(_type, "");
+                _builder.append(_type);
                 _builder.append(">");
               } else {
                 GuiceModuleAccess.BindKey _key_3 = it.getKey();
                 TypeReference _type_1 = _key_3.getType();
-                _builder.append(_type_1, "");
+                _builder.append(_type_1);
               }
             }
             _builder.append(" ");
             CharSequence _bindMethodName = XtextGeneratorTemplates.this.getBindMethodName(it);
-            _builder.append(_bindMethodName, "");
+            _builder.append(_bindMethodName);
             _builder.append("() {");
             _builder.newLineIfNotEmpty();
             _builder.append("\t");
@@ -461,14 +461,14 @@ public class XtextGeneratorTemplates {
             if (_isEmpty) {
               _builder.append("// contributed by ");
               String _contributedBy_1 = it.getContributedBy();
-              _builder.append(_contributedBy_1, "");
+              _builder.append(_contributedBy_1);
               _builder.newLineIfNotEmpty();
               {
                 GuiceModuleAccess.BindKey _key_4 = it.getKey();
                 boolean _isSingleton_1 = _key_4.isSingleton();
                 if (_isSingleton_1) {
                   _builder.append("@");
-                  _builder.append(SingletonBinding.class, "");
+                  _builder.append(SingletonBinding.class);
                   {
                     GuiceModuleAccess.BindKey _key_5 = it.getKey();
                     boolean _isEagerSingleton_1 = _key_5.isEagerSingleton();
@@ -486,24 +486,24 @@ public class XtextGeneratorTemplates {
                 boolean _tripleEquals_1 = (_expression_3 == null);
                 if (_tripleEquals_1) {
                   _builder.append("Class<? extends ");
-                  _builder.append(Provider.class, "");
+                  _builder.append(Provider.class);
                   _builder.append("<? extends ");
                   GuiceModuleAccess.BindKey _key_6 = it.getKey();
                   TypeReference _type_3 = _key_6.getType();
-                  _builder.append(_type_3, "");
+                  _builder.append(_type_3);
                   _builder.append(">>");
                 } else {
-                  _builder.append(Provider.class, "");
+                  _builder.append(Provider.class);
                   _builder.append("<? extends ");
                   GuiceModuleAccess.BindKey _key_7 = it.getKey();
                   TypeReference _type_4 = _key_7.getType();
-                  _builder.append(_type_4, "");
+                  _builder.append(_type_4);
                   _builder.append(">");
                 }
               }
               _builder.append(" ");
               CharSequence _bindMethodName_1 = XtextGeneratorTemplates.this.getBindMethodName(it);
-              _builder.append(_bindMethodName_1, "");
+              _builder.append(_bindMethodName_1);
               _builder.append("() {");
               _builder.newLineIfNotEmpty();
               _builder.append("\t");
@@ -530,13 +530,13 @@ public class XtextGeneratorTemplates {
             } else {
               _builder.append("// contributed by ");
               String _contributedBy_2 = it.getContributedBy();
-              _builder.append(_contributedBy_2, "");
+              _builder.append(_contributedBy_2);
               _builder.newLineIfNotEmpty();
               _builder.append("public void ");
               CharSequence _bindMethodName_2 = XtextGeneratorTemplates.this.getBindMethodName(it);
-              _builder.append(_bindMethodName_2, "");
+              _builder.append(_bindMethodName_2);
               _builder.append("(");
-              _builder.append(Binder.class, "");
+              _builder.append(Binder.class);
               _builder.append(" binder) {");
               _builder.newLineIfNotEmpty();
               {
@@ -577,10 +577,10 @@ public class XtextGeneratorTemplates {
           _builder.append("class ");
           TypeReference _runtimeModule = XtextGeneratorTemplates.this.naming.getRuntimeModule(it);
           String _simpleName = _runtimeModule.getSimpleName();
-          _builder.append(_simpleName, "");
+          _builder.append(_simpleName);
           _builder.append(" extends ");
           TypeReference _runtimeGenModule = XtextGeneratorTemplates.this.naming.getRuntimeGenModule(it);
-          _builder.append(_runtimeGenModule, "");
+          _builder.append(_runtimeGenModule);
           _builder.append(" {");
           _builder.newLineIfNotEmpty();
           _builder.append("}");
@@ -604,10 +604,10 @@ public class XtextGeneratorTemplates {
           _builder.append("public class ");
           TypeReference _runtimeModule = XtextGeneratorTemplates.this.naming.getRuntimeModule(it);
           String _simpleName = _runtimeModule.getSimpleName();
-          _builder.append(_simpleName, "");
+          _builder.append(_simpleName);
           _builder.append(" extends ");
           TypeReference _runtimeGenModule = XtextGeneratorTemplates.this.naming.getRuntimeGenModule(it);
-          _builder.append(_runtimeGenModule, "");
+          _builder.append(_runtimeGenModule);
           _builder.append(" {");
           _builder.newLineIfNotEmpty();
           _builder.append("}");
@@ -660,9 +660,9 @@ public class XtextGeneratorTemplates {
         _builder.append("public abstract class ");
         TypeReference _runtimeGenModule = XtextGeneratorTemplates.this.naming.getRuntimeGenModule(it);
         String _simpleName = _runtimeGenModule.getSimpleName();
-        _builder.append(_simpleName, "");
+        _builder.append(_simpleName);
         _builder.append(" extends ");
-        _builder.append(superClass, "");
+        _builder.append(superClass);
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
         _builder.newLine();
@@ -781,10 +781,10 @@ public class XtextGeneratorTemplates {
           _builder.append("class ");
           TypeReference _genericIdeModule = XtextGeneratorTemplates.this.naming.getGenericIdeModule(it);
           String _simpleName = _genericIdeModule.getSimpleName();
-          _builder.append(_simpleName, "");
+          _builder.append(_simpleName);
           _builder.append(" extends ");
           TypeReference _genericIdeGenModule = XtextGeneratorTemplates.this.naming.getGenericIdeGenModule(it);
-          _builder.append(_genericIdeGenModule, "");
+          _builder.append(_genericIdeGenModule);
           _builder.append(" {");
           _builder.newLineIfNotEmpty();
           _builder.append("}");
@@ -808,10 +808,10 @@ public class XtextGeneratorTemplates {
           _builder.append("public class ");
           TypeReference _genericIdeModule = XtextGeneratorTemplates.this.naming.getGenericIdeModule(it);
           String _simpleName = _genericIdeModule.getSimpleName();
-          _builder.append(_simpleName, "");
+          _builder.append(_simpleName);
           _builder.append(" extends ");
           TypeReference _genericIdeGenModule = XtextGeneratorTemplates.this.naming.getGenericIdeGenModule(it);
-          _builder.append(_genericIdeGenModule, "");
+          _builder.append(_genericIdeGenModule);
           _builder.append(" {");
           _builder.newLineIfNotEmpty();
           _builder.append("}");
@@ -864,9 +864,9 @@ public class XtextGeneratorTemplates {
         _builder.append("public abstract class ");
         TypeReference _genericIdeGenModule = XtextGeneratorTemplates.this.naming.getGenericIdeGenModule(it);
         String _simpleName = _genericIdeGenModule.getSimpleName();
-        _builder.append(_simpleName, "");
+        _builder.append(_simpleName);
         _builder.append(" extends ");
-        _builder.append(superClass, "");
+        _builder.append(superClass);
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
         _builder.newLine();
@@ -910,10 +910,10 @@ public class XtextGeneratorTemplates {
           _builder.append("class ");
           TypeReference _genericIdeSetup = XtextGeneratorTemplates.this.naming.getGenericIdeSetup(it);
           String _simpleName = _genericIdeSetup.getSimpleName();
-          _builder.append(_simpleName, "");
+          _builder.append(_simpleName);
           _builder.append(" extends ");
           TypeReference _runtimeSetup = XtextGeneratorTemplates.this.naming.getRuntimeSetup(it);
-          _builder.append(_runtimeSetup, "");
+          _builder.append(_runtimeSetup);
           _builder.append(" {");
           _builder.newLineIfNotEmpty();
           _builder.newLine();
@@ -958,10 +958,10 @@ public class XtextGeneratorTemplates {
           _builder.append("public class ");
           TypeReference _genericIdeSetup = XtextGeneratorTemplates.this.naming.getGenericIdeSetup(it);
           String _simpleName = _genericIdeSetup.getSimpleName();
-          _builder.append(_simpleName, "");
+          _builder.append(_simpleName);
           _builder.append(" extends ");
           TypeReference _runtimeSetup = XtextGeneratorTemplates.this.naming.getRuntimeSetup(it);
-          _builder.append(_runtimeSetup, "");
+          _builder.append(_runtimeSetup);
           _builder.append(" {");
           _builder.newLineIfNotEmpty();
           _builder.newLine();
@@ -1016,15 +1016,15 @@ public class XtextGeneratorTemplates {
           _builder.append("*/");
           _builder.newLine();
           _builder.append("@");
-          _builder.append(FinalFieldsConstructor.class, "");
+          _builder.append(FinalFieldsConstructor.class);
           _builder.newLineIfNotEmpty();
           _builder.append("class ");
           TypeReference _eclipsePluginModule = XtextGeneratorTemplates.this.naming.getEclipsePluginModule(it);
           String _simpleName = _eclipsePluginModule.getSimpleName();
-          _builder.append(_simpleName, "");
+          _builder.append(_simpleName);
           _builder.append(" extends ");
           TypeReference _eclipsePluginGenModule = XtextGeneratorTemplates.this.naming.getEclipsePluginGenModule(it);
-          _builder.append(_eclipsePluginGenModule, "");
+          _builder.append(_eclipsePluginGenModule);
           _builder.append(" {");
           _builder.newLineIfNotEmpty();
           _builder.append("}");
@@ -1048,10 +1048,10 @@ public class XtextGeneratorTemplates {
           _builder.append("public class ");
           TypeReference _eclipsePluginModule = XtextGeneratorTemplates.this.naming.getEclipsePluginModule(it);
           String _simpleName = _eclipsePluginModule.getSimpleName();
-          _builder.append(_simpleName, "");
+          _builder.append(_simpleName);
           _builder.append(" extends ");
           TypeReference _eclipsePluginGenModule = XtextGeneratorTemplates.this.naming.getEclipsePluginGenModule(it);
-          _builder.append(_eclipsePluginGenModule, "");
+          _builder.append(_eclipsePluginGenModule);
           _builder.append(" {");
           _builder.newLineIfNotEmpty();
           _builder.newLine();
@@ -1121,9 +1121,9 @@ public class XtextGeneratorTemplates {
         _builder.append("public abstract class ");
         TypeReference _eclipsePluginGenModule = XtextGeneratorTemplates.this.naming.getEclipsePluginGenModule(it);
         String _simpleName = _eclipsePluginGenModule.getSimpleName();
-        _builder.append(_simpleName, "");
+        _builder.append(_simpleName);
         _builder.append(" extends ");
-        _builder.append(superClass, "");
+        _builder.append(superClass);
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
         _builder.newLine();
@@ -1185,10 +1185,10 @@ public class XtextGeneratorTemplates {
           _builder.append("class ");
           TypeReference _ideaModule = XtextGeneratorTemplates.this.naming.getIdeaModule(it);
           String _simpleName = _ideaModule.getSimpleName();
-          _builder.append(_simpleName, "");
+          _builder.append(_simpleName);
           _builder.append(" extends ");
           TypeReference _ideaGenModule = XtextGeneratorTemplates.this.naming.getIdeaGenModule(it);
-          _builder.append(_ideaGenModule, "");
+          _builder.append(_ideaGenModule);
           _builder.append(" {");
           _builder.newLineIfNotEmpty();
           _builder.append("}");
@@ -1212,10 +1212,10 @@ public class XtextGeneratorTemplates {
           _builder.append("public class ");
           TypeReference _ideaModule = XtextGeneratorTemplates.this.naming.getIdeaModule(it);
           String _simpleName = _ideaModule.getSimpleName();
-          _builder.append(_simpleName, "");
+          _builder.append(_simpleName);
           _builder.append(" extends ");
           TypeReference _ideaGenModule = XtextGeneratorTemplates.this.naming.getIdeaGenModule(it);
-          _builder.append(_ideaGenModule, "");
+          _builder.append(_ideaGenModule);
           _builder.append(" {");
           _builder.newLineIfNotEmpty();
           _builder.append("}");
@@ -1268,9 +1268,9 @@ public class XtextGeneratorTemplates {
         _builder.append("public abstract class ");
         TypeReference _ideaGenModule = XtextGeneratorTemplates.this.naming.getIdeaGenModule(it);
         String _simpleName = _ideaGenModule.getSimpleName();
-        _builder.append(_simpleName, "");
+        _builder.append(_simpleName);
         _builder.append(" extends ");
-        _builder.append(superClass, "");
+        _builder.append(superClass);
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
@@ -1314,10 +1314,10 @@ public class XtextGeneratorTemplates {
           _builder.append("class ");
           TypeReference _webModule = XtextGeneratorTemplates.this.naming.getWebModule(it);
           String _simpleName = _webModule.getSimpleName();
-          _builder.append(_simpleName, "");
+          _builder.append(_simpleName);
           _builder.append(" extends ");
           TypeReference _webGenModule = XtextGeneratorTemplates.this.naming.getWebGenModule(it);
-          _builder.append(_webGenModule, "");
+          _builder.append(_webGenModule);
           _builder.append(" {");
           _builder.newLineIfNotEmpty();
           _builder.append("}");
@@ -1341,10 +1341,10 @@ public class XtextGeneratorTemplates {
           _builder.append("public class ");
           TypeReference _webModule = XtextGeneratorTemplates.this.naming.getWebModule(it);
           String _simpleName = _webModule.getSimpleName();
-          _builder.append(_simpleName, "");
+          _builder.append(_simpleName);
           _builder.append(" extends ");
           TypeReference _webGenModule = XtextGeneratorTemplates.this.naming.getWebGenModule(it);
-          _builder.append(_webGenModule, "");
+          _builder.append(_webGenModule);
           _builder.append(" {");
           _builder.newLineIfNotEmpty();
           _builder.append("}");
@@ -1397,9 +1397,9 @@ public class XtextGeneratorTemplates {
         _builder.append("public abstract class ");
         TypeReference _webGenModule = XtextGeneratorTemplates.this.naming.getWebGenModule(it);
         String _simpleName = _webGenModule.getSimpleName();
-        _builder.append(_simpleName, "");
+        _builder.append(_simpleName);
         _builder.append(" extends ");
-        _builder.append(superClass, "");
+        _builder.append(superClass);
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
         _builder.newLine();
@@ -1443,10 +1443,10 @@ public class XtextGeneratorTemplates {
           _builder.append("class ");
           TypeReference _webSetup = XtextGeneratorTemplates.this.naming.getWebSetup(it);
           String _simpleName = _webSetup.getSimpleName();
-          _builder.append(_simpleName, "");
+          _builder.append(_simpleName);
           _builder.append(" extends ");
           TypeReference _runtimeSetup = XtextGeneratorTemplates.this.naming.getRuntimeSetup(it);
-          _builder.append(_runtimeSetup, "");
+          _builder.append(_runtimeSetup);
           _builder.append(" {");
           _builder.newLineIfNotEmpty();
           _builder.append("\t");
@@ -1498,10 +1498,10 @@ public class XtextGeneratorTemplates {
           _builder.append("public class ");
           TypeReference _webSetup = XtextGeneratorTemplates.this.naming.getWebSetup(it);
           String _simpleName = _webSetup.getSimpleName();
-          _builder.append(_simpleName, "");
+          _builder.append(_simpleName);
           _builder.append(" extends ");
           TypeReference _runtimeSetup = XtextGeneratorTemplates.this.naming.getRuntimeSetup(it);
-          _builder.append(_runtimeSetup, "");
+          _builder.append(_runtimeSetup);
           _builder.append(" {");
           _builder.newLineIfNotEmpty();
           _builder.append("\t");
@@ -1570,10 +1570,10 @@ public class XtextGeneratorTemplates {
         _builder.append("public class ");
         TypeReference _eclipsePluginExecutableExtensionFactory = XtextGeneratorTemplates.this.naming.getEclipsePluginExecutableExtensionFactory(grammar);
         String _simpleName = _eclipsePluginExecutableExtensionFactory.getSimpleName();
-        _builder.append(_simpleName, "");
+        _builder.append(_simpleName);
         _builder.append(" extends ");
         TypeReference _typeRef = TypeReference.typeRef("org.eclipse.xtext.ui.guice.AbstractGuiceAwareExecutableExtensionFactory");
-        _builder.append(_typeRef, "");
+        _builder.append(_typeRef);
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
         _builder.newLine();
@@ -1658,10 +1658,10 @@ public class XtextGeneratorTemplates {
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         _builder.append("public class ");
         String _simpleName = activator.getSimpleName();
-        _builder.append(_simpleName, "");
+        _builder.append(_simpleName);
         _builder.append(" extends ");
         TypeReference _typeRef = TypeReference.typeRef("org.eclipse.ui.plugin.AbstractUIPlugin");
-        _builder.append(_typeRef, "");
+        _builder.append(_typeRef);
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
         _builder.newLine();

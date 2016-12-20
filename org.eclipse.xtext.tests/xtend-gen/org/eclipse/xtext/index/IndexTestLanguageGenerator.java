@@ -25,7 +25,7 @@ public class IndexTestLanguageGenerator extends AbstractGenerator {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("Hello ");
         String _name_1 = ((Entity)e).getName();
-        _builder.append(_name_1, "");
+        _builder.append(_name_1);
         _builder.append("!");
         _builder.newLineIfNotEmpty();
         fsa.generateFile(_plus, _builder);

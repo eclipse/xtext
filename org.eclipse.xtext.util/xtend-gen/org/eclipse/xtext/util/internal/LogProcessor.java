@@ -29,10 +29,10 @@ public class LogProcessor extends AbstractClassProcessor {
       StringConcatenationClient _client = new StringConcatenationClient() {
         @Override
         protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-          _builder.append(Logger.class, "");
+          _builder.append(Logger.class);
           _builder.append(".getLogger(");
           String _simpleName = cls.getSimpleName();
-          _builder.append(_simpleName, "");
+          _builder.append(_simpleName);
           _builder.append(".class)");
           _builder.newLineIfNotEmpty();
         }
