@@ -82,7 +82,7 @@ public class ToStringProcessor extends AbstractClassProcessor {
           @Override
           protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
             _builder.append("String result = new ");
-            _builder.append(ToStringBuilder.class, "");
+            _builder.append(ToStringBuilder.class);
             _builder.append("(this)");
             _builder.newLineIfNotEmpty();
             _builder.append("\t");
@@ -145,9 +145,9 @@ public class ToStringProcessor extends AbstractClassProcessor {
         StringConcatenationClient _client = new StringConcatenationClient() {
           @Override
           protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-            _builder.append(ToStringBuilder.class, "");
+            _builder.append(ToStringBuilder.class);
             _builder.append(" b = new ");
-            _builder.append(ToStringBuilder.class, "");
+            _builder.append(ToStringBuilder.class);
             _builder.append("(this);");
             _builder.newLineIfNotEmpty();
             {
@@ -182,10 +182,10 @@ public class ToStringProcessor extends AbstractClassProcessor {
               for(final FieldDeclaration field : fields) {
                 _builder.append("b.add(\"");
                 String _simpleName = field.getSimpleName();
-                _builder.append(_simpleName, "");
+                _builder.append(_simpleName);
                 _builder.append("\", this.");
                 String _simpleName_1 = field.getSimpleName();
-                _builder.append(_simpleName_1, "");
+                _builder.append(_simpleName_1);
                 _builder.append(");");
                 _builder.newLineIfNotEmpty();
               }

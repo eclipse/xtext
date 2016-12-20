@@ -122,7 +122,7 @@ public class FinalFieldsConstructorProcessor implements TransformationParticipan
       _builder.append("Cannot create FinalFieldsConstructor as a constructor with the signature \"new(");
       ArrayList<TypeReference> _finalFieldsConstructorArgumentTypes = this.getFinalFieldsConstructorArgumentTypes(it);
       String _join = IterableExtensions.join(_finalFieldsConstructorArgumentTypes, ",");
-      _builder.append(_join, "");
+      _builder.append(_join);
       _builder.append(")\" already exists.");
       return _builder.toString();
     }
@@ -225,7 +225,7 @@ public class FinalFieldsConstructorProcessor implements TransformationParticipan
             return _declaration.getSimpleName();
           };
           String _join = IterableExtensions.join(superParameters, ", ", _function);
-          _builder.append(_join, "");
+          _builder.append(_join);
           _builder.append(");");
           _builder.newLineIfNotEmpty();
           {
@@ -234,11 +234,11 @@ public class FinalFieldsConstructorProcessor implements TransformationParticipan
             for(final MutableFieldDeclaration arg : _finalFields) {
               _builder.append("this.");
               String _simpleName = arg.getSimpleName();
-              _builder.append(_simpleName, "");
+              _builder.append(_simpleName);
               _builder.append(" = ");
               MutableParameterDeclaration _get = fieldToParameter.get(arg);
               String _simpleName_1 = _get.getSimpleName();
-              _builder.append(_simpleName_1, "");
+              _builder.append(_simpleName_1);
               _builder.append(";");
               _builder.newLineIfNotEmpty();
             }

@@ -77,7 +77,7 @@ public class DataProcessor extends AbstractClassProcessor {
           @Override
           protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
             _builder.append("String result = new ");
-            _builder.append(ToStringHelper.class, "");
+            _builder.append(ToStringHelper.class);
             _builder.append("().toString(this);");
             _builder.newLineIfNotEmpty();
             _builder.append("return result;");

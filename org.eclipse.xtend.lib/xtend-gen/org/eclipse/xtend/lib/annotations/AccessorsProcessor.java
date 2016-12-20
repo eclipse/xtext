@@ -95,13 +95,13 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
           default:
             StringConcatenation _builder = new StringConcatenation();
             _builder.append("Cannot convert ");
-            _builder.append(type, "");
+            _builder.append(type);
             throw new IllegalArgumentException(_builder.toString());
         }
       } else {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("Cannot convert ");
-        _builder.append(type, "");
+        _builder.append(type);
         throw new IllegalArgumentException(_builder.toString());
       }
       return _switchResult;
@@ -216,10 +216,10 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
           protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
             _builder.append("return ");
             Object _fieldOwner = Util.this.fieldOwner(field);
-            _builder.append(_fieldOwner, "");
+            _builder.append(_fieldOwner);
             _builder.append(".");
             String _simpleName = field.getSimpleName();
-            _builder.append(_simpleName, "");
+            _builder.append(_simpleName);
             _builder.append(";");
           }
         };
@@ -324,13 +324,13 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
           @Override
           protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
             Object _fieldOwner = Util.this.fieldOwner(field);
-            _builder.append(_fieldOwner, "");
+            _builder.append(_fieldOwner);
             _builder.append(".");
             String _simpleName = field.getSimpleName();
-            _builder.append(_simpleName, "");
+            _builder.append(_simpleName);
             _builder.append(" = ");
             String _simpleName_1 = param.getSimpleName();
-            _builder.append(_simpleName_1, "");
+            _builder.append(_simpleName_1);
             _builder.append(";");
           }
         };
