@@ -19,7 +19,7 @@ public class DomainmodelDescriptionLabelProvider extends DefaultDescriptionLabel
     StringConcatenation _builder = new StringConcatenation();
     EClass _eClass = description.getEClass();
     String _name = _eClass.getName();
-    _builder.append(_name, "");
+    _builder.append(_name);
     _builder.append(".gif");
     return _builder.toString();
   }

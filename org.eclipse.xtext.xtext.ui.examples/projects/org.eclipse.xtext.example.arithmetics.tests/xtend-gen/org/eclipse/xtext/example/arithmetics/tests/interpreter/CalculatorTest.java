@@ -63,7 +63,7 @@ public class CalculatorTest {
   protected void check(final double expected, final String expression) throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("module test ");
-    _builder.append(expression, "");
+    _builder.append(expression);
     final Module module = this.parseHelper.parse(_builder);
     EList<Statement> _statements = module.getStatements();
     Statement _head = IterableExtensions.<Statement>head(_statements);

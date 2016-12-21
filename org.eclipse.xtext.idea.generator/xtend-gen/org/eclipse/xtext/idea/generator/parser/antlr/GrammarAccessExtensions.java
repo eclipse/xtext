@@ -308,7 +308,7 @@ public class GrammarAccessExtensions {
         _builder.append("\"");
         AbstractRule _rule_1 = ((RuleCall)it).getRule();
         String _name = _rule_1.getName();
-        _builder.append(_name, "");
+        _builder.append(_name);
         _builder.append("\"");
         _switchResult = _builder;
       }
@@ -320,7 +320,7 @@ public class GrammarAccessExtensions {
         _builder.append("\"");
         String _value = ((Keyword)it).getValue();
         String _stringInAntlrAction = AntlrGrammarGenUtil.toStringInAntlrAction(_value);
-        _builder.append(_stringInAntlrAction, "");
+        _builder.append(_stringInAntlrAction);
         _builder.append("\"");
         _switchResult = _builder;
       }

@@ -92,7 +92,7 @@ public class RuleEngineJvmModelInferrer extends AbstractModelInferrer {
                   for(final State state : _states) {
                     _builder.append("if (event == ");
                     String _qualifiedJavaName = RuleEngineJvmModelInferrer.this.getQualifiedJavaName(state);
-                    _builder.append(_qualifiedJavaName, "");
+                    _builder.append(_qualifiedJavaName);
                     _builder.append(") {");
                     _builder.newLineIfNotEmpty();
                     _builder.append("\t");
@@ -117,7 +117,7 @@ public class RuleEngineJvmModelInferrer extends AbstractModelInferrer {
                 _builder.append("if (event == ");
                 State _deviceState = rule.getDeviceState();
                 String _qualifiedJavaName_1 = RuleEngineJvmModelInferrer.this.getQualifiedJavaName(_deviceState);
-                _builder.append(_qualifiedJavaName_1, "");
+                _builder.append(_qualifiedJavaName_1);
                 _builder.append(") {");
                 _builder.newLineIfNotEmpty();
                 _builder.append("\t");
@@ -147,7 +147,7 @@ public class RuleEngineJvmModelInferrer extends AbstractModelInferrer {
         StringConcatenationClient _client = new StringConcatenationClient() {
           @Override
           protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-            _builder.append(Scanner.class, "");
+            _builder.append(Scanner.class);
             _builder.append(" scanner = new Scanner(System.in);");
             _builder.newLineIfNotEmpty();
             _builder.append("System.out.println(\"Welcome home!\");");
@@ -163,10 +163,10 @@ public class RuleEngineJvmModelInferrer extends AbstractModelInferrer {
                   for(final State state : _states) {
                     _builder.append("System.out.println(\"  ");
                     String _name = device.getName();
-                    _builder.append(_name, "");
+                    _builder.append(_name);
                     _builder.append(" ");
                     String _name_1 = state.getName();
-                    _builder.append(_name_1, "");
+                    _builder.append(_name_1);
                     _builder.append("\" );");
                     _builder.newLineIfNotEmpty();
                   }

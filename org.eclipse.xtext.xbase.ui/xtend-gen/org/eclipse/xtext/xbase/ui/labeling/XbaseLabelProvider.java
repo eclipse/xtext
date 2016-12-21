@@ -233,7 +233,7 @@ public class XbaseLabelProvider extends DefaultEObjectLabelProvider {
   protected String text(final XImportDeclaration it) {
     StringConcatenation _builder = new StringConcatenation();
     String _importedTypeName = it.getImportedTypeName();
-    _builder.append(_importedTypeName, "");
+    _builder.append(_importedTypeName);
     {
       boolean _isWildcard = it.isWildcard();
       if (_isWildcard) {
@@ -244,7 +244,7 @@ public class XbaseLabelProvider extends DefaultEObjectLabelProvider {
         if (_tripleNotEquals) {
           _builder.append(".");
           String _memberName_1 = it.getMemberName();
-          _builder.append(_memberName_1, "");
+          _builder.append(_memberName_1);
         }
       }
     }

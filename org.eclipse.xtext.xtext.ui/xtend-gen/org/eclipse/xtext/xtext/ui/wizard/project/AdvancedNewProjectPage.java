@@ -245,13 +245,13 @@ public class AdvancedNewProjectPage extends WizardPage {
           StringConcatenation _builder = new StringConcatenation();
           _builder.append("\'");
           String _text = this.createUiProject.getText();
-          _builder.append(_text, "");
+          _builder.append(_text);
           _builder.append("\' requires ");
-          _builder.append(SourceLayout.PLAIN, "");
+          _builder.append(SourceLayout.PLAIN);
           _builder.append(" source layout.");
           _builder.newLineIfNotEmpty();
           _builder.append("Please <a>select \'");
-          _builder.append(SourceLayout.PLAIN, "");
+          _builder.append(SourceLayout.PLAIN);
           _builder.append("\'</a> source layout.");
           final Procedure0 _function = () -> {
             this.select(this.sourceLayout, SourceLayout.PLAIN);
@@ -259,15 +259,15 @@ public class AdvancedNewProjectPage extends WizardPage {
           this.<Control>reportIssue(IMessageProvider.ERROR, _builder.toString(), _function);
         } else {
           StringConcatenation _builder_1 = new StringConcatenation();
-          _builder_1.append(SourceLayout.MAVEN, "");
+          _builder_1.append(SourceLayout.MAVEN);
           _builder_1.append(" source layout is not supported by the \'");
           String _text_1 = this.createUiProject.getText();
-          _builder_1.append(_text_1, "");
+          _builder_1.append(_text_1);
           _builder_1.append("\' project.");
           _builder_1.newLineIfNotEmpty();
           _builder_1.append("Please <a>deselect \'");
           String _text_2 = this.createUiProject.getText();
-          _builder_1.append(_text_2, "");
+          _builder_1.append(_text_2);
           _builder_1.append("\'</a>.");
           final Procedure0 _function_1 = () -> {
             this.createUiProject.setSelection(false);
@@ -281,7 +281,7 @@ public class AdvancedNewProjectPage extends WizardPage {
           _builder_2.append("Maven/Gradle source layout is not supported without a build system.");
           _builder_2.newLine();
           _builder_2.append("Please <a>select \'");
-          _builder_2.append(SourceLayout.PLAIN, "");
+          _builder_2.append(SourceLayout.PLAIN);
           _builder_2.append("\'</a> source layout.");
           final Procedure0 _function_2 = () -> {
             this.select(this.sourceLayout, SourceLayout.PLAIN);
@@ -305,12 +305,12 @@ public class AdvancedNewProjectPage extends WizardPage {
           StringConcatenation _builder_4 = new StringConcatenation();
           _builder_4.append("The \'");
           String _text_3 = this.createWebProject.getText();
-          _builder_4.append(_text_3, "");
+          _builder_4.append(_text_3);
           _builder_4.append("\' project can not be build without a build system.");
           _builder_4.newLineIfNotEmpty();
           _builder_4.append("Please <a>deselect \'");
           String _text_4 = this.createWebProject.getText();
-          _builder_4.append(_text_4, "");
+          _builder_4.append(_text_4);
           _builder_4.append("\'</a>.");
           final Procedure0 _function_4 = () -> {
             this.createWebProject.setSelection(false);
@@ -320,7 +320,7 @@ public class AdvancedNewProjectPage extends WizardPage {
           StringConcatenation _builder_5 = new StringConcatenation();
           _builder_5.append("To build the \'");
           String _text_5 = this.createWebProject.getText();
-          _builder_5.append(_text_5, "");
+          _builder_5.append(_text_5);
           _builder_5.append("\' project, you need to choose Maven or Gradle build system.");
           _builder_5.newLineIfNotEmpty();
           _builder_5.append("Select <a>Gradle</a> build.");
@@ -349,10 +349,10 @@ public class AdvancedNewProjectPage extends WizardPage {
           if ((this.createIdeProject == source)) {
             StringConcatenation _builder_6 = new StringConcatenation();
             _builder_6.append("Frontend projects like \'");
-            _builder_6.append(affectedProjects, "");
+            _builder_6.append(affectedProjects);
             _builder_6.append("\' depends on \'");
             String _text_6 = this.createIdeProject.getText();
-            _builder_6.append(_text_6, "");
+            _builder_6.append(_text_6);
             _builder_6.append("\' project.");
             _builder_6.newLineIfNotEmpty();
             _builder_6.append("Please <a>deselect</a> these.");
@@ -366,15 +366,15 @@ public class AdvancedNewProjectPage extends WizardPage {
           } else {
             StringConcatenation _builder_7 = new StringConcatenation();
             _builder_7.append("Projects like \'");
-            _builder_7.append(affectedProjects, "");
+            _builder_7.append(affectedProjects);
             _builder_7.append("\' depends on \'");
             String _text_7 = this.createIdeProject.getText();
-            _builder_7.append(_text_7, "");
+            _builder_7.append(_text_7);
             _builder_7.append("\' project.");
             _builder_7.newLineIfNotEmpty();
             _builder_7.append("Please <a>enable \'");
             String _text_8 = this.createIdeProject.getText();
-            _builder_7.append(_text_8, "");
+            _builder_7.append(_text_8);
             _builder_7.append("\'</a> project.");
             final Procedure0 _function_9 = () -> {
               this.createIdeProject.setSelection(true);

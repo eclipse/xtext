@@ -232,7 +232,7 @@ public class JvmAnnotationReferencePrinter {
       };
       List<String> _map = ListExtensions.map(values, _function);
       String _join = IterableExtensions.join(_map, ", ");
-      _builder.append(_join, "");
+      _builder.append(_join);
       _builder.append("]");
       return _builder.toString();
     } else {

@@ -29,7 +29,7 @@ public class DomainmodelQuickfixProvider extends XbaseQuickfixProvider {
     _builder.append("Capitalize name  of \'");
     String[] _data = issue.getData();
     String _get = _data[0];
-    _builder.append(_get, "");
+    _builder.append(_get);
     _builder.append("\'");
     final IModification _function = (IModificationContext context) -> {
       IXtextDocument xtextDocument = context.getXtextDocument();
@@ -49,7 +49,7 @@ public class DomainmodelQuickfixProvider extends XbaseQuickfixProvider {
     _builder.append("Uncapitalize name of \'");
     String[] _data = issue.getData();
     String _get = _data[0];
-    _builder.append(_get, "");
+    _builder.append(_get);
     _builder.append("\'");
     final ISemanticModification _function = (EObject element, IModificationContext context) -> {
       String[] _data_1 = issue.getData();
