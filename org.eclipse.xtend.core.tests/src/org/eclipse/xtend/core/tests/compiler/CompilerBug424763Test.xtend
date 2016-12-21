@@ -55,14 +55,11 @@ class CompilerBug424763Test extends AbstractXtendCompilerTest {
 			  private final String type;
 			  
 			  public NoConstructor(final String theTypeName) {
-			    String _checkNotNull = Preconditions.<String>checkNotNull(theTypeName, "theTypeName");
-			    this.type = _checkNotNull;
+			    this.type = Preconditions.<String>checkNotNull(theTypeName, "theTypeName");
 			  }
 			  
 			  public NoConstructor(final Class<JAVA_TYPE> theType) {
-			    Class<JAVA_TYPE> _checkNotNull = Preconditions.<Class<JAVA_TYPE>>checkNotNull(theType, "theType");
-			    String _name = _checkNotNull.getName();
-			    this.type = _name;
+			    this.type = Preconditions.<Class<JAVA_TYPE>>checkNotNull(theType, "theType").getName();
 			  }
 			  
 			  public JAVA_TYPE apply() {
@@ -330,13 +327,16 @@ class CompilerBug424763Test extends AbstractXtendCompilerTest {
 			  private final Function0<T> constructor;
 			  
 			  public C(final C<T> theConstructor) {
-			    String _xtrycatchfinallyexpression = null;
-			    try {
-			      _xtrycatchfinallyexpression = "";
-			    } finally {
-			    }
-			    Function0<T> _doGetConstructor = theConstructor.doGetConstructor(_xtrycatchfinallyexpression);
-			    this.constructor = _doGetConstructor;
+			    this.constructor = theConstructor.doGetConstructor(new Function0<String>() {
+			      public String apply() {
+			        String _xtrycatchfinallyexpression = null;
+			        try {
+			          _xtrycatchfinallyexpression = "";
+			        } finally {
+			        }
+			        return _xtrycatchfinallyexpression;
+			      }
+			    }.apply());
 			  }
 			  
 			  public Function0<T> doGetConstructor(final String s) {
@@ -371,17 +371,16 @@ class CompilerBug424763Test extends AbstractXtendCompilerTest {
 			  private final Function0<T> constructor;
 			  
 			  public C(final C<T> theConstructor) {
-			    this(new Function0<Function0<T>>() {
-			      public Function0<T> apply() {
+			    this(theConstructor.doGetConstructor(new Function0<String>() {
+			      public String apply() {
 			        String _xtrycatchfinallyexpression = null;
 			        try {
 			          _xtrycatchfinallyexpression = "";
 			        } finally {
 			        }
-			        Function0<T> _doGetConstructor = theConstructor.doGetConstructor(_xtrycatchfinallyexpression);
-			        return _doGetConstructor;
+			        return _xtrycatchfinallyexpression;
 			      }
-			    }.apply());
+			    }.apply()));
 			  }
 			  
 			  public C(final Function0<T> f) {

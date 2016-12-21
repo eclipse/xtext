@@ -299,8 +299,6 @@ public class CompilerBug462260Test extends AbstractXtendCompilerTest {
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("import java.util.Collections;");
     _builder_1.newLine();
-    _builder_1.append("import java.util.HashMap;");
-    _builder_1.newLine();
     _builder_1.append("import java.util.Map;");
     _builder_1.newLine();
     _builder_1.append("import org.eclipse.xtext.xbase.lib.CollectionLiterals;");
@@ -319,10 +317,7 @@ public class CompilerBug462260Test extends AbstractXtendCompilerTest {
     _builder_1.append("public void test() {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("HashMap<Object, Object> _newHashMap = CollectionLiterals.<Object, Object>newHashMap();");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("this.<Map<Object, Object>>graph(_newHashMap, Collections.<Object, Object>unmodifiableMap(CollectionLiterals.<Object, Object>newHashMap()));");
+    _builder_1.append("this.<Map<Object, Object>>graph(CollectionLiterals.<Object, Object>newHashMap(), Collections.<Object, Object>unmodifiableMap(CollectionLiterals.<Object, Object>newHashMap()));");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");

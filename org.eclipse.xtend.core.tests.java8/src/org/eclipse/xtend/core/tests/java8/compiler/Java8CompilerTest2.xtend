@@ -962,8 +962,7 @@ class Java8CompilerTest2 extends XtendCompilerTest {
 			@SuppressWarnings("all")
 			public class B extends A {
 			  public String client(final CharSequence c) {
-			    CharSequence _m = this.m();
-			    return this.client(_m);
+			    return this.client(this.m());
 			  }
 			  
 			  @Override

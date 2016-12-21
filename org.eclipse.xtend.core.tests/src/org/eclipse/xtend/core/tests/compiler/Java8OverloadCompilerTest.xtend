@@ -393,8 +393,7 @@ class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public void x() {
-			    List<Number> _asList = Arrays.<Number>asList(Integer.valueOf(1));
-			    this.m(_asList);
+			    this.m(Arrays.<Number>asList(Integer.valueOf(1)));
 			  }
 			  
 			  public void m(final Object o) {
@@ -425,8 +424,7 @@ class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public void x() {
-			    List<Number> _asList = Arrays.<Number>asList(Integer.valueOf(1), Integer.valueOf(2));
-			    this.m(_asList);
+			    this.m(Arrays.<Number>asList(Integer.valueOf(1), Integer.valueOf(2)));
 			  }
 			  
 			  public void m(final Object o) {
@@ -491,8 +489,7 @@ class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public void x(final Integer[] ints) {
-			    List<Number> _asList = Arrays.<Number>asList(ints);
-			    this.m(_asList);
+			    this.m(Arrays.<Number>asList(ints));
 			  }
 			  
 			  public void m(final Object o) {
@@ -523,8 +520,7 @@ class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public void x() {
-			    List<Number> _asList = Arrays.<Number>asList();
-			    this.m(_asList);
+			    this.m(Arrays.<Number>asList());
 			  }
 			  
 			  public void m(final Object o) {
@@ -555,8 +551,7 @@ class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public void x() {
-			    List<Integer> _asList = Arrays.<Integer>asList(Integer.valueOf(1));
-			    this.m(_asList);
+			    this.m(Arrays.<Integer>asList(Integer.valueOf(1)));
 			  }
 			  
 			  public void m(final Object o) {
@@ -587,8 +582,7 @@ class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public void x() {
-			    List<Integer> _asList = Arrays.<Integer>asList(Integer.valueOf(1), Integer.valueOf(2));
-			    this.m(_asList);
+			    this.m(Arrays.<Integer>asList(Integer.valueOf(1), Integer.valueOf(2)));
 			  }
 			  
 			  public void m(final Object o) {
@@ -619,8 +613,7 @@ class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public void x() {
-			    List<Number> _asList = Arrays.<Number>asList();
-			    this.m(_asList);
+			    this.m(Arrays.<Number>asList());
 			  }
 			  
 			  public void m(final Object o) {
@@ -650,8 +643,7 @@ class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public void x() {
-			    List<Number> _asList = Arrays.<Number>asList(Integer.valueOf(1));
-			    this.m(_asList);
+			    this.m(Arrays.<Number>asList(Integer.valueOf(1)));
 			  }
 			  
 			  public void m(final Object o) {
@@ -682,8 +674,7 @@ class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public void x() {
-			    List<Number> _asList = Arrays.<Number>asList(Integer.valueOf(1), Integer.valueOf(2));
-			    this.m(_asList);
+			    this.m(Arrays.<Number>asList(Integer.valueOf(1), Integer.valueOf(2)));
 			  }
 			  
 			  public void m(final Object o) {
@@ -714,8 +705,7 @@ class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public void x() {
-			    List<Number> _asList = Arrays.<Number>asList();
-			    this.m(_asList);
+			    this.m(Arrays.<Number>asList());
 			  }
 			  
 			  public void m(final Object o) {
@@ -777,8 +767,7 @@ class Java8OverloadCompilerTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public void x() {
-			    ArrayList<Number> _newArrayList = CollectionLiterals.<Number>newArrayList(Integer.valueOf(1));
-			    final Iterable<Iterable<Number>> l = CollectionLiterals.<Iterable<Number>>newArrayList(_newArrayList);
+			    this.m(Arrays.<Number>asList(Integer.valueOf(1), Integer.valueOf(2)));
 			  }
 			}
 		''')

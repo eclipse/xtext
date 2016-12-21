@@ -227,10 +227,7 @@ public class CompilerBugInheritedDispatchTest extends AbstractXtendCompilerTest 
     _builder_1.append("protected T _test(final Fallunterscheidung a) {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("Ausdruck _dann = a.getDann();");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("return this.test(_dann);");
+    _builder_1.append("return this.test(a.getDann());");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");

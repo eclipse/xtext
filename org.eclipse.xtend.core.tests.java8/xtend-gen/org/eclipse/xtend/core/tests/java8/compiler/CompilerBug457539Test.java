@@ -869,10 +869,7 @@ public class CompilerBug457539Test extends org.eclipse.xtend.core.tests.compiler
     _builder_1.append("this.<Serializable>m(it, _long);");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("int _length = it.length();");
-    _builder_1.newLine();
-    _builder_1.append("      ");
-    _builder_1.append("InputOutput.<Integer>println(Integer.valueOf(_length));");
+    _builder_1.append("InputOutput.<Integer>println(Integer.valueOf(it.length()));");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("};");

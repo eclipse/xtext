@@ -2190,10 +2190,7 @@ public class Java8CompilerTest2 extends XtendCompilerTest {
     _builder_1.append("public String client(final CharSequence c) {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("CharSequence _m = this.m();");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("return this.client(_m);");
+    _builder_1.append("return this.client(this.m());");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");

@@ -52,10 +52,7 @@ class CompilerBug441580Test extends AbstractXtendCompilerTest {
 			      InputStream in = null;
 			      ByteArrayOutputStream out = null;
 			      try {
-			        Class<? extends C> _class = this.getClass();
-			        ClassLoader _classLoader = _class.getClassLoader();
-			        InputStream _resourceAsStream = _classLoader.getResourceAsStream(fileName);
-			        in = _resourceAsStream;
+			        in = this.getClass().getClassLoader().getResourceAsStream(fileName);
 			        ByteArrayOutputStream _byteArrayOutputStream = new ByteArrayOutputStream();
 			        out = _byteArrayOutputStream;
 			        byte[] buffer = new byte[2048];

@@ -1870,11 +1870,10 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			    final Function<Demo.Person, Demo.Person.Sex> _function = (Demo.Person it) -> {
 			      return it.gender;
 			    };
-			    final ToIntFunction<Demo.Person> _function_1 = (Demo.Person it) -> {
-			      return it.getAge();
-			    };
-			    Collector<Demo.Person, ?, Double> _averagingInt = Collectors.<Demo.Person>averagingInt(_function_1);
-			    Collector<Demo.Person, ?, Map<Demo.Person.Sex, Double>> _groupingBy = Collectors.groupingBy(_function, _averagingInt);
+			    Collector<Demo.Person, ?, Map<Demo.Person.Sex, Double>> _groupingBy = Collectors.groupingBy(_function, 
+			      Collectors.<Demo.Person>averagingInt(((ToIntFunction<Demo.Person>) (Demo.Person it) -> {
+			        return it.getAge();
+			      })));
 			    _stream.collect(_groupingBy);
 			  }
 			}
@@ -1994,11 +1993,10 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			    final Function<Demo.Person, Demo.Person.Sex> _function = (Demo.Person it) -> {
 			      return it.gender;
 			    };
-			    final ToIntFunction<Demo.Person> _function_1 = (Demo.Person it) -> {
-			      return it.getAge();
-			    };
-			    Collector<Demo.Person, ?, Double> _averagingInt = Collectors.<Demo.Person>averagingInt(_function_1);
-			    Collector<Demo.Person, ?, Map<Demo.Person.Sex, Double>> _groupingBy = Collectors.groupingBy(_function, _averagingInt);
+			    Collector<Demo.Person, ?, Map<Demo.Person.Sex, Double>> _groupingBy = Collectors.groupingBy(_function, 
+			      Collectors.<Demo.Person>averagingInt(((ToIntFunction<Demo.Person>) (Demo.Person it) -> {
+			        return it.getAge();
+			      })));
 			    _stream.collect(_groupingBy);
 			  }
 			}
@@ -2119,11 +2117,10 @@ class CompilerBug458010Test extends AbstractXtendCompilerTest {
 			    final Function<Demo.Person, Demo.Person.Sex> _function = (Demo.Person it) -> {
 			      return it.gender;
 			    };
-			    final ToIntFunction<Demo.Person> _function_1 = (Demo.Person it) -> {
-			      return it.getAge();
-			    };
-			    Collector<Demo.Person, ?, Double> _averagingInt = Collectors.<Demo.Person>averagingInt(_function_1);
-			    Collector<Demo.Person, ?, Map<Demo.Person.Sex, Double>> _groupingBy = Collectors.groupingBy(_function, _averagingInt);
+			    Collector<Demo.Person, ?, Map<Demo.Person.Sex, Double>> _groupingBy = Collectors.groupingBy(_function, 
+			      Collectors.<Demo.Person>averagingInt(((ToIntFunction<Demo.Person>) (Demo.Person it) -> {
+			        return it.getAge();
+			      })));
 			    _stream.collect(_groupingBy);
 			  }
 			}

@@ -155,18 +155,10 @@ class CompilerBug465649Test extends AbstractXtendCompilerTest {
 			    final Number[] arr2 = C.<Number>newArray(Integer.valueOf(1), Double.valueOf(1.1));
 			    final Object[] arr3 = C.<Object>newArray(Integer.valueOf(1), "1");
 			    final Object[] arr4 = C.<Object>newArray(Integer.valueOf(1), Double.valueOf(1.1), "1");
-			    Class<? extends Integer[]> _class = C.<Integer>getClass(arr1);
-			    String _name = _class.getName();
-			    InputOutput.<String>println(_name);
-			    Class<? extends Number[]> _class_1 = C.<Number>getClass(arr2);
-			    String _name_1 = _class_1.getName();
-			    InputOutput.<String>println(_name_1);
-			    Class<? extends Object[]> _class_2 = C.<Object>getClass(arr3);
-			    String _name_2 = _class_2.getName();
-			    InputOutput.<String>println(_name_2);
-			    Class<? extends Object[]> _class_3 = C.<Object>getClass(arr4);
-			    String _name_3 = _class_3.getName();
-			    InputOutput.<String>println(_name_3);
+			    InputOutput.<String>println(C.<Integer>getClass(arr1).getName());
+			    InputOutput.<String>println(C.<Number>getClass(arr2).getName());
+			    InputOutput.<String>println(C.<Object>getClass(arr3).getName());
+			    InputOutput.<String>println(C.<Object>getClass(arr4).getName());
 			  }
 			}
 		''')
