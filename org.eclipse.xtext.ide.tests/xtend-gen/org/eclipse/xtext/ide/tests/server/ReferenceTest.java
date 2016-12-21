@@ -7,9 +7,12 @@
  */
 package org.eclipse.xtext.ide.tests.server;
 
+import java.util.Collections;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.ide.tests.server.AbstractTestLangLanguageServerTest;
 import org.eclipse.xtext.testing.ReferenceTestConfiguration;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Test;
 
@@ -65,6 +68,36 @@ public class ReferenceTest extends AbstractTestLangLanguageServerTest {
       _builder_1.append("MyModel.testlang [[2, 1] .. [2, 4]]");
       _builder_1.newLine();
       it.setExpectedReferences(_builder_1.toString());
+    };
+    this.testReferences(_function);
+  }
+  
+  @Test
+  public void testReferences_03_acrossFiles() {
+    final Procedure1<ReferenceTestConfiguration> _function = (ReferenceTestConfiguration it) -> {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("type Foo {}");
+      _builder.newLine();
+      Pair<String, String> _mappedTo = Pair.<String, String>of("foo.testlang", _builder.toString());
+      it.setFilesInScope(Collections.<String, CharSequence>unmodifiableMap(CollectionLiterals.<String, CharSequence>newHashMap(_mappedTo)));
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("type Bar {");
+      _builder_1.newLine();
+      _builder_1.append("    ");
+      _builder_1.append("Foo foo");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      it.setModel(_builder_1.toString());
+      it.setLine(1);
+      it.setColumn(6);
+      it.setIncludeDeclaration(true);
+      StringConcatenation _builder_2 = new StringConcatenation();
+      _builder_2.append("foo.testlang [[0, 5] .. [0, 8]]");
+      _builder_2.newLine();
+      _builder_2.append("MyModel.testlang [[1, 4] .. [1, 7]]");
+      _builder_2.newLine();
+      it.setExpectedReferences(_builder_2.toString());
     };
     this.testReferences(_function);
   }

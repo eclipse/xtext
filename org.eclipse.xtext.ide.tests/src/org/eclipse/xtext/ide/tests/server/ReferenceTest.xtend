@@ -48,4 +48,27 @@ class ReferenceTest extends AbstractTestLangLanguageServerTest {
 		]
 	}
 
+	@Test
+	def void testReferences_03_acrossFiles() {
+		testReferences[
+			filesInScope = #{
+				"foo.testlang" -> '''
+					type Foo {}
+				'''
+			}
+			model = '''
+				type Bar {
+				    Foo foo
+				}
+			'''
+			line = 1
+			column = 6
+			includeDeclaration = true
+			expectedReferences = '''
+				foo.testlang [[0, 5] .. [0, 8]]
+				MyModel.testlang [[1, 4] .. [1, 7]]
+			'''
+		]
+	}
+
 }
