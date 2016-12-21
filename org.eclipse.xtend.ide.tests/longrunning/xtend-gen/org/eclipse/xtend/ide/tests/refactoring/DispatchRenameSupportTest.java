@@ -848,7 +848,7 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
   public String signature(final JvmOperation it) {
     StringConcatenation _builder = new StringConcatenation();
     String _qualifiedName = it.getQualifiedName();
-    _builder.append(_qualifiedName, "");
+    _builder.append(_qualifiedName);
     _builder.append("(");
     {
       EList<JvmFormalParameter> _parameters = it.getParameters();
@@ -862,7 +862,7 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
         JvmTypeReference _parameterType = p.getParameterType();
         JvmType _type = _parameterType.getType();
         String _simpleName = _type.getSimpleName();
-        _builder.append(_simpleName, "");
+        _builder.append(_simpleName);
       }
     }
     _builder.append(")");

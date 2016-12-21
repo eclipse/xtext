@@ -141,13 +141,13 @@ public class XtendIntentionsProvider extends IdeaIntentionsProvider {
         List<LightweightTypeReference> _resolvedParameterTypes = executable.getResolvedParameterTypes();
         LightweightTypeReference _get = _resolvedParameterTypes.get(i);
         String _importableString = this._documentUtils.toImportableString(_get, importSection);
-        _builder.append(_importableString, "");
+        _builder.append(_importableString);
         _builder.append(" ");
         JvmExecutable _declaration = executable.getDeclaration();
         EList<JvmFormalParameter> _parameters = _declaration.getParameters();
         JvmFormalParameter _get_1 = _parameters.get(i);
         String _simpleName = _get_1.getSimpleName();
-        _builder.append(_simpleName, "");
+        _builder.append(_simpleName);
         result.add(_builder.toString());
       }
       return result;

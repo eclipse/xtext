@@ -106,17 +106,17 @@ public abstract class AbstractAssignabilityTest extends AbstractTestingTypeRefer
         if (_not) {
           _builder.append("<");
           String _value_1 = lhsAndParams.getValue();
-          _builder.append(_value_1, "");
+          _builder.append(_value_1);
           _builder.append("> ");
         }
       }
       _builder.append("void method(");
       String _key = lhsAndParams.getKey();
       String _fixup = this.fixup(_key);
-      _builder.append(_fixup, "");
+      _builder.append(_fixup);
       _builder.append(" lhs, ");
       String _fixup_1 = this.fixup(rhs);
-      _builder.append(_fixup_1, "");
+      _builder.append(_fixup_1);
       _builder.append(" rhs) {}");
       final String signature = _builder.toString();
       String _string = signature.toString();

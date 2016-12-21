@@ -17,7 +17,7 @@ import org.junit.Assert;
 public class MutableAssert extends Assert {
   public static void assertValidQualifiedName(final String name, final String expectedQualifiedName, final Procedure1<? super String> codeToTest) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append(name, "");
+    _builder.append(name);
     _builder.append(" has to be a valid qualified name");
     final String message = _builder.toString();
     final Procedure0 _function = () -> {
@@ -45,7 +45,7 @@ public class MutableAssert extends Assert {
   
   public static void assertValidJavaIdentifier(final String name, final Procedure1<? super String> codeToTest) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append(name, "");
+    _builder.append(name);
     _builder.append(" has to be a valid java identifier");
     final String message = _builder.toString();
     final Procedure0 _function = () -> {
@@ -93,7 +93,7 @@ public class MutableAssert extends Assert {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("an instance of the ");
       String _name = clazz.getName();
-      _builder.append(_name, "");
+      _builder.append(_name);
       _builder.append(" class had to be thrown");
       Assert.fail(_builder.toString());
       _xblockexpression = null;

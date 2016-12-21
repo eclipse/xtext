@@ -23,7 +23,7 @@ public class XtendHighlightingTest extends LightXtendTest {
     this.configureByText("public");
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("0-6:");
-    _builder.append(HighlightingStyles.KEYWORD_ID, "");
+    _builder.append(HighlightingStyles.KEYWORD_ID);
     _builder.newLineIfNotEmpty();
     this.assertHighlights(_builder.toString());
   }
@@ -32,7 +32,7 @@ public class XtendHighlightingTest extends LightXtendTest {
     this.configureByText("\"Foo\"");
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("0-5:");
-    _builder.append(HighlightingStyles.STRING_ID, "");
+    _builder.append(HighlightingStyles.STRING_ID);
     _builder.newLineIfNotEmpty();
     this.assertHighlights(_builder.toString());
   }
@@ -41,7 +41,7 @@ public class XtendHighlightingTest extends LightXtendTest {
     this.configureByText("5");
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("0-1:");
-    _builder.append(HighlightingStyles.NUMBER_ID, "");
+    _builder.append(HighlightingStyles.NUMBER_ID);
     _builder.newLineIfNotEmpty();
     this.assertHighlights(_builder.toString());
   }
@@ -50,7 +50,7 @@ public class XtendHighlightingTest extends LightXtendTest {
     this.configureByText("//comment");
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("0-9:");
-    _builder.append(HighlightingStyles.COMMENT_ID, "");
+    _builder.append(HighlightingStyles.COMMENT_ID);
     _builder.newLineIfNotEmpty();
     this.assertHighlights(_builder.toString());
   }
@@ -67,7 +67,7 @@ public class XtendHighlightingTest extends LightXtendTest {
     this.configureByText(_builder.toString());
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("0-18:");
-    _builder_1.append(HighlightingStyles.COMMENT_ID, "");
+    _builder_1.append(HighlightingStyles.COMMENT_ID);
     _builder_1.newLineIfNotEmpty();
     this.assertHighlights(_builder_1.toString());
   }

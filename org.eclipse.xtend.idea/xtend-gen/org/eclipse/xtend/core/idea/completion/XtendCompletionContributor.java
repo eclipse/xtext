@@ -155,14 +155,14 @@ public class XtendCompletionContributor extends AbstractXtendCompletionContribut
                   return it.getName();
                 };
                 String _join = IterableExtensions.<JvmTypeParameter>join(_typeParameters, "<", ",", "> ", _function_1);
-                _builder.append(_join, "");
+                _builder.append(_join);
                 JvmOperation _declaration = ((IResolvedOperation)candidate).getDeclaration();
                 String _simpleName = _declaration.getSimpleName();
-                _builder.append(_simpleName, "");
+                _builder.append(_simpleName);
                 _builder.append("(");
                 ArrayList<String> _parameterText = XtendCompletionContributor.this.getParameterText(candidate, importSection);
                 String _join_1 = IterableExtensions.join(_parameterText, ", ");
-                _builder.append(_join_1, "");
+                _builder.append(_join_1);
                 _builder.append(") ");
                 JvmOperation _declaration_1 = ((IResolvedOperation)candidate).getDeclaration();
                 EList<JvmTypeReference> _exceptions = _declaration_1.getExceptions();
@@ -170,7 +170,7 @@ public class XtendCompletionContributor extends AbstractXtendCompletionContribut
                   return XtendCompletionContributor.this.documentUtils.toImportableString(it, importSection);
                 };
                 String _join_2 = IterableExtensions.<JvmTypeReference>join(_exceptions, "throws ", ", ", " ", _function_2);
-                _builder.append(_join_2, "");
+                _builder.append(_join_2);
                 _builder.append("{");
                 _builder.newLineIfNotEmpty();
                 _builder.append("\t");
@@ -200,7 +200,7 @@ public class XtendCompletionContributor extends AbstractXtendCompletionContribut
                   _builder.append("new (");
                   ArrayList<String> _parameterText = XtendCompletionContributor.this.getParameterText(candidate, importSection);
                   String _join = IterableExtensions.join(_parameterText, ", ");
-                  _builder.append(_join, "");
+                  _builder.append(_join);
                   _builder.append(") ");
                   JvmConstructor _declaration = ((IResolvedConstructor)candidate).getDeclaration();
                   EList<JvmTypeReference> _exceptions = _declaration.getExceptions();
@@ -208,7 +208,7 @@ public class XtendCompletionContributor extends AbstractXtendCompletionContribut
                     return XtendCompletionContributor.this.documentUtils.toImportableString(it, importSection);
                   };
                   String _join_1 = IterableExtensions.<JvmTypeReference>join(_exceptions, "throws ", ", ", " ", _function_2);
-                  _builder.append(_join_1, "");
+                  _builder.append(_join_1);
                   _builder.append("{");
                   _builder.newLineIfNotEmpty();
                   _builder.append("\t");
@@ -320,13 +320,13 @@ public class XtendCompletionContributor extends AbstractXtendCompletionContribut
       List<LightweightTypeReference> _resolvedParameterTypes = executable.getResolvedParameterTypes();
       LightweightTypeReference _get = _resolvedParameterTypes.get(i);
       String _importableString = this.documentUtils.toImportableString(_get, importSection);
-      _builder.append(_importableString, "");
+      _builder.append(_importableString);
       _builder.append(" ");
       JvmExecutable _declaration = executable.getDeclaration();
       EList<JvmFormalParameter> _parameters = _declaration.getParameters();
       JvmFormalParameter _get_1 = _parameters.get(i);
       String _simpleName = _get_1.getSimpleName();
-      _builder.append(_simpleName, "");
+      _builder.append(_simpleName);
       result.add(_builder.toString());
     }
     return result;
@@ -337,19 +337,19 @@ public class XtendCompletionContributor extends AbstractXtendCompletionContribut
     String methodName = _declaration.getSimpleName();
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("override ");
-    _builder.append(methodName, "");
+    _builder.append(methodName);
     _builder.append("(");
     List<LightweightTypeReference> _resolvedParameterTypes = prototype.getResolvedParameterTypes();
     final Function1<LightweightTypeReference, CharSequence> _function = (LightweightTypeReference it) -> {
       return it.getHumanReadableName();
     };
     String _join = IterableExtensions.<LightweightTypeReference>join(_resolvedParameterTypes, ",", _function);
-    _builder.append(_join, "");
+    _builder.append(_join);
     _builder.append(")");
     String signature = _builder.toString();
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("override ");
-    _builder_1.append(signature, "");
+    _builder_1.append(signature);
     String overrideSignature = _builder_1.toString();
     LookupElementBuilder _create = LookupElementBuilder.create(prototype, signature);
     LookupElementBuilder _withLookupString = _create.withLookupString(methodName);
@@ -371,7 +371,7 @@ public class XtendCompletionContributor extends AbstractXtendCompletionContribut
       return it.getHumanReadableName();
     };
     String _join = IterableExtensions.<LightweightTypeReference>join(_resolvedParameterTypes, ",", _function);
-    _builder.append(_join, "");
+    _builder.append(_join);
     _builder.append(")");
     String signature = _builder.toString();
     LookupElementBuilder _create = LookupElementBuilder.create(prototype, signature);

@@ -83,7 +83,7 @@ public class AssignmentFeatureCallArgumentsTest extends AbstractTestingTypeRefer
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("def void m(");
-      _builder.append(type, "");
+      _builder.append(type);
       _builder.append(") {");
       _builder.newLineIfNotEmpty();
       _builder.append("\t");

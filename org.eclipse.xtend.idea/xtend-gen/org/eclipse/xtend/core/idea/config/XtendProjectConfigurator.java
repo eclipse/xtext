@@ -103,20 +103,20 @@ public class XtendProjectConfigurator extends XtextProjectConfigurator {
     boolean _isAndroidGradleModule = this._gradleBuildFileUtility.isAndroidGradleModule(_module);
     if (_isAndroidGradleModule) {
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append(parentPath, "");
+      _builder.append(parentPath);
       _builder.append("/build/generated/source/xtend/debug");
       state.setOutputDirectory(_builder.toString());
       StringConcatenation _builder_1 = new StringConcatenation();
-      _builder_1.append(parentPath, "");
+      _builder_1.append(parentPath);
       _builder_1.append("/build/generated/source/xtend/androidTest/debug");
       state.setTestOutputDirectory(_builder_1.toString());
     } else {
       StringConcatenation _builder_2 = new StringConcatenation();
-      _builder_2.append(parentPath, "");
+      _builder_2.append(parentPath);
       _builder_2.append("/build/xtend-gen/main");
       state.setOutputDirectory(_builder_2.toString());
       StringConcatenation _builder_3 = new StringConcatenation();
-      _builder_3.append(parentPath, "");
+      _builder_3.append(parentPath);
       _builder_3.append("/build/xtend-gen/test");
       state.setTestOutputDirectory(_builder_3.toString());
     }

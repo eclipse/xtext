@@ -120,7 +120,7 @@ public class ActiveAnnotationContextProvider {
               EList<Resource.Diagnostic> _errors = _eResource_1.getErrors();
               StringConcatenation _builder = new StringConcatenation();
               _builder.append("Problem while loading annotation processor: ");
-              _builder.append(msg, "");
+              _builder.append(msg);
               XAnnotation _value = it.getValue();
               EObjectDiagnosticImpl _eObjectDiagnosticImpl = new EObjectDiagnosticImpl(Severity.ERROR, 
                 IssueCodes.PROCESSING_ERROR, _builder.toString(), _value, 

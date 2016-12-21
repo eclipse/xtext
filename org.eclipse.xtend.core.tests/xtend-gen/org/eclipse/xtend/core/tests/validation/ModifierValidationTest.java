@@ -923,7 +923,7 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("interface Foo { ");
-      _builder.append(model, "");
+      _builder.append(model);
       _builder.append(" }");
       XtendInterface _interfaze = this.interfaze(_builder.toString());
       EList<XtendMember> _members = _interfaze.getMembers();
@@ -937,7 +937,7 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("annotation Foo { ");
-      _builder.append(model, "");
+      _builder.append(model);
       _builder.append(" }");
       XtendAnnotationType _annotationType = this.annotationType(_builder.toString());
       EList<XtendMember> _members = _annotationType.getMembers();

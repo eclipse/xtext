@@ -282,13 +282,13 @@ public class JavaASTFlattener extends ASTVisitor {
   
   protected boolean addProblem(final ASTNode node, final String string) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append(string, "");
+    _builder.append(string);
     _builder.append(" (start: ");
     int _startPosition = node.getStartPosition();
-    _builder.append(_startPosition, "");
+    _builder.append(_startPosition);
     _builder.append(", length: ");
     int _length = node.getLength();
-    _builder.append(_length, "");
+    _builder.append(_length);
     _builder.append(")");
     return this.problems.add(_builder.toString());
   }
@@ -328,15 +328,15 @@ public class JavaASTFlattener extends ASTVisitor {
     this.appendToBuffer("{ ");
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("_wrVal_");
-    _builder.append(arrayName, "");
+    _builder.append(arrayName);
     final String valName = _builder.toString();
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("_wrIndx_");
-    _builder_1.append(arrayName, "");
+    _builder_1.append(arrayName);
     String idxName = _builder_1.toString();
     StringConcatenation _builder_2 = new StringConcatenation();
     _builder_2.append("val ");
-    _builder_2.append(valName, "");
+    _builder_2.append(valName);
     _builder_2.append("=");
     this.appendToBuffer(_builder_2.toString());
     Expression _array = leftSide.getArray();
@@ -384,7 +384,7 @@ public class JavaASTFlattener extends ASTVisitor {
       boolean _not_1 = (!_isConstantArrayIndex_1);
       if (_not_1) {
         StringConcatenation _builder_7 = new StringConcatenation();
-        _builder_7.append(idxName, "");
+        _builder_7.append(idxName);
         this.appendToBuffer(_builder_7.toString());
       } else {
         Expression _index_4 = leftSide.getIndex();
@@ -405,7 +405,7 @@ public class JavaASTFlattener extends ASTVisitor {
         _rightHandSide.accept(this);
         StringConcatenation _builder = new StringConcatenation();
         _builder.append(") as ");
-        _builder.append(type, "");
+        _builder.append(type);
         _xblockexpression = this.appendToBuffer(_builder.toString());
       }
       _xifexpression = _xblockexpression;
@@ -557,7 +557,7 @@ public class JavaASTFlattener extends ASTVisitor {
         int _nodeType = _parent_1.getNodeType();
         Class _nodeClassForType = ASTNode.nodeClassForType(_nodeType);
         String _simpleName = _nodeClassForType.getSimpleName();
-        _builder.append(_simpleName, "");
+        _builder.append(_simpleName);
         this.addProblem(it, _builder.toString());
       }
       Block _body_2 = it.getBody();
@@ -839,7 +839,7 @@ public class JavaASTFlattener extends ASTVisitor {
         _initializer_1.accept(this);
         StringConcatenation _builder = new StringConcatenation();
         _builder.append(") as ");
-        _builder.append(type, "");
+        _builder.append(type);
         this.appendToBuffer(_builder.toString());
       } else {
         Expression _initializer_2 = it.getInitializer();
@@ -1530,7 +1530,7 @@ public class JavaASTFlattener extends ASTVisitor {
             } else {
               _xifexpression_2 = "Or";
             }
-            _builder.append(_xifexpression_2, "");
+            _builder.append(_xifexpression_2);
             _builder.append("(");
             this.appendToBuffer(_builder.toString());
             rightSide.accept(this);
@@ -1724,15 +1724,15 @@ public class JavaASTFlattener extends ASTVisitor {
         final String arrayName = this.computeArrayName(pfOperand);
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("_postIndx_");
-        _builder.append(arrayName, "");
+        _builder.append(arrayName);
         final String idxName = _builder.toString();
         StringConcatenation _builder_1 = new StringConcatenation();
         _builder_1.append("_postVal_");
-        _builder_1.append(arrayName, "");
+        _builder_1.append(arrayName);
         final String tempVarName = _builder_1.toString();
         StringConcatenation _builder_2 = new StringConcatenation();
         _builder_2.append("{ var ");
-        _builder_2.append(idxName, "");
+        _builder_2.append(idxName);
         _builder_2.append("=");
         this.appendToBuffer(_builder_2.toString());
         Expression _index = pfOperand.getIndex();
@@ -1777,7 +1777,7 @@ public class JavaASTFlattener extends ASTVisitor {
         if (_needsReturnValue) {
           _xifexpression = tempVarName;
         }
-        _builder_4.append(_xifexpression, "");
+        _builder_4.append(_xifexpression);
         _builder_4.append(" }");
         this.appendToBuffer(_builder_4.toString());
         return false;
@@ -1808,7 +1808,7 @@ public class JavaASTFlattener extends ASTVisitor {
         final String arrayName = this.computeArrayName(((ArrayAccess)operand));
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("_tPreInx_");
-        _builder.append(arrayName, "");
+        _builder.append(arrayName);
         final String idxName = _builder.toString();
         String op = "-";
         PrefixExpression.Operator _operator_1 = node.getOperator();
@@ -1818,7 +1818,7 @@ public class JavaASTFlattener extends ASTVisitor {
         }
         StringConcatenation _builder_1 = new StringConcatenation();
         _builder_1.append("{val ");
-        _builder_1.append(idxName, "");
+        _builder_1.append(idxName);
         _builder_1.append("=");
         this.appendToBuffer(_builder_1.toString());
         Expression _index = ((ArrayAccess)operand).getIndex();
@@ -2159,7 +2159,7 @@ public class JavaASTFlattener extends ASTVisitor {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Character.valueOf(");
     String _escapedValue = node.getEscapedValue();
-    _builder.append(_escapedValue, "");
+    _builder.append(_escapedValue);
     _builder.append(").charValue");
     this.appendToBuffer(_builder.toString());
     return false;
@@ -2278,7 +2278,7 @@ public class JavaASTFlattener extends ASTVisitor {
       final String arrayname = this.computeArrayName(node);
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("{val _rdIndx_");
-      _builder.append(arrayname, "");
+      _builder.append(arrayname);
       _builder.append("=");
       this.appendToBuffer(_builder.toString());
       Expression _index_2 = node.getIndex();
@@ -2288,7 +2288,7 @@ public class JavaASTFlattener extends ASTVisitor {
       _array_1.accept(this);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append(".get(_rdIndx_");
-      _builder_1.append(arrayname, "");
+      _builder_1.append(arrayname);
       _builder_1.append(")}");
       this.appendToBuffer(_builder_1.toString());
     }
@@ -2331,7 +2331,7 @@ public class JavaASTFlattener extends ASTVisitor {
     if ((dims > 1)) {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("/* FIXME Only one dimensional arrays are supported. ");
-      _builder.append(node, "");
+      _builder.append(node);
       _builder.append("*/");
       this.appendToBuffer(_builder.toString());
       this.addProblem(node, "Only one dimension arrays are supported.");
@@ -2364,7 +2364,7 @@ public class JavaASTFlattener extends ASTVisitor {
         String _string = _primitiveTypeCode.toString();
         _xifexpression = StringExtensions.toFirstUpper(_string);
       }
-      _builder_1.append(_xifexpression, "");
+      _builder_1.append(_xifexpression);
       _builder_1.append("ArrayOfSize(");
       this.appendToBuffer(_builder_1.toString());
       List _dimensions = node.dimensions();

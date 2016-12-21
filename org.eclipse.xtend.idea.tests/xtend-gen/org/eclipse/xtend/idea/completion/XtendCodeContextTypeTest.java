@@ -227,7 +227,7 @@ public class XtendCodeContextTypeTest extends LightXtendTest {
       }
       _builder.append("match: ");
       String _string_1 = type.contextType.toString();
-      _builder.append(_string_1, "");
+      _builder.append(_string_1);
       _builder.newLineIfNotEmpty();
       _builder.newLine();
       Editor _editor = this.getEditor();

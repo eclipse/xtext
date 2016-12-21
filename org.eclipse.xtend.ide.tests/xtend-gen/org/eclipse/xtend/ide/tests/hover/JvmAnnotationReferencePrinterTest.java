@@ -116,7 +116,7 @@ public class JvmAnnotationReferencePrinterTest extends AbstractXtendUITestCase {
   private void assertPrinted(final String expected, final String xtendCode) {
     try {
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append(xtendCode, "");
+      _builder.append(xtendCode);
       _builder.append(" class Foo {}");
       _builder.newLineIfNotEmpty();
       IProject _project = this.testHelper.getProject();

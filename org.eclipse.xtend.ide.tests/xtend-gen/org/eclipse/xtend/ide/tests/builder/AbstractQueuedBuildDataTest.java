@@ -121,12 +121,12 @@ public abstract class AbstractQueuedBuildDataTest extends AbstractXtendUITestCas
         }
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("There are unexpected exported names: ");
-        _builder.append(unexpectedExportedNames, "");
+        _builder.append(unexpectedExportedNames);
         int _length_1 = ((Object[])Conversions.unwrapArray(unexpectedExportedNames, Object.class)).length;
         Assert.assertEquals(_builder.toString(), 0, _length_1);
         StringConcatenation _builder_1 = new StringConcatenation();
         _builder_1.append("There are not expected exported names ");
-        _builder_1.append(remainingExportedNames, "");
+        _builder_1.append(remainingExportedNames);
         int _length_2 = ((Object[])Conversions.unwrapArray(remainingExportedNames, Object.class)).length;
         Assert.assertEquals(_builder_1.toString(), 0, _length_2);
       }
@@ -230,7 +230,7 @@ public abstract class AbstractQueuedBuildDataTest extends AbstractXtendUITestCas
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("There are unconfirmed changes: ");
     HashSet<String> _exportedNames = this.getExportedNames(deltas);
-    _builder.append(_exportedNames, "");
+    _builder.append(_exportedNames);
     Assert.assertTrue(_builder.toString(), result);
   }
   

@@ -25,11 +25,11 @@ public class MavenArtifact {
   
   public String getKey() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append(this.groupId, "");
+    _builder.append(this.groupId);
     _builder.append(":");
-    _builder.append(this.artifactId, "");
+    _builder.append(this.artifactId);
     _builder.append(":");
-    _builder.append(this.version, "");
+    _builder.append(this.version);
     return _builder.toString();
   }
   

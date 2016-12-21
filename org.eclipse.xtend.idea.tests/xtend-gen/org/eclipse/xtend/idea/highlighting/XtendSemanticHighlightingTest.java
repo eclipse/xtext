@@ -44,9 +44,9 @@ public class XtendSemanticHighlightingTest extends LightXtendTest {
   protected CharSequence $(final String xtextStyle, final CharSequence text) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<symbolName descr=\"");
-    _builder.append(xtextStyle, "");
+    _builder.append(xtextStyle);
     _builder.append("\">");
-    _builder.append(text, "");
+    _builder.append(text);
     _builder.append("</symbolName>");
     return _builder;
   }
@@ -59,7 +59,7 @@ public class XtendSemanticHighlightingTest extends LightXtendTest {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class ");
     CharSequence _$ = this.$(XbaseHighlightingStyles.CLASS, "Foo");
-    _builder.append(_$, "");
+    _builder.append(_$);
     _builder.append(" {");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
@@ -80,7 +80,7 @@ public class XtendSemanticHighlightingTest extends LightXtendTest {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class ");
     CharSequence _$ = this.$(XbaseHighlightingStyles.CLASS, "Foo");
-    _builder.append(_$, "");
+    _builder.append(_$);
     _builder.append(" {");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
@@ -105,7 +105,7 @@ public class XtendSemanticHighlightingTest extends LightXtendTest {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class ");
     CharSequence _$ = this.$(XbaseHighlightingStyles.CLASS, "Foo");
-    _builder.append(_$, "");
+    _builder.append(_$);
     _builder.append(" {");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
@@ -132,7 +132,7 @@ public class XtendSemanticHighlightingTest extends LightXtendTest {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class ");
     CharSequence _$ = this.$(XbaseHighlightingStyles.CLASS, "Foo");
-    _builder.append(_$, "");
+    _builder.append(_$);
     _builder.append(" {");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
@@ -163,7 +163,7 @@ public class XtendSemanticHighlightingTest extends LightXtendTest {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class ");
     CharSequence _$ = this.$(XbaseHighlightingStyles.CLASS, "Foo");
-    _builder.append(_$, "");
+    _builder.append(_$);
     _builder.append(" {");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
@@ -191,7 +191,7 @@ public class XtendSemanticHighlightingTest extends LightXtendTest {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class ");
     CharSequence _$ = this.$(XbaseHighlightingStyles.CLASS, "Foo");
-    _builder.append(_$, "");
+    _builder.append(_$);
     _builder.append(" {");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
@@ -208,14 +208,14 @@ public class XtendSemanticHighlightingTest extends LightXtendTest {
   public void testAnnotation() {
     StringConcatenation _builder = new StringConcatenation();
     CharSequence _$ = this.$(XbaseHighlightingStyles.ANNOTATION, "@");
-    _builder.append(_$, "");
+    _builder.append(_$);
     CharSequence _$_1 = this.$(XbaseHighlightingStyles.ANNOTATION, "SuppressWarnings");
-    _builder.append(_$_1, "");
+    _builder.append(_$_1);
     _builder.append("(\"all\")");
     _builder.newLineIfNotEmpty();
     _builder.append("class ");
     CharSequence _$_2 = this.$(XbaseHighlightingStyles.CLASS, "Foo");
-    _builder.append(_$_2, "");
+    _builder.append(_$_2);
     _builder.append(" {");
     _builder.newLineIfNotEmpty();
     _builder.append("}");
@@ -227,7 +227,7 @@ public class XtendSemanticHighlightingTest extends LightXtendTest {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class ");
     CharSequence _$ = this.$(XbaseHighlightingStyles.CLASS, "Foo");
-    _builder.append(_$, "");
+    _builder.append(_$);
     _builder.append(" {");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
@@ -271,7 +271,7 @@ public class XtendSemanticHighlightingTest extends LightXtendTest {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class ");
     CharSequence _$ = this.$(XbaseHighlightingStyles.CLASS, "Foo");
-    _builder.append(_$, "");
+    _builder.append(_$);
     _builder.append(" {");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
@@ -302,7 +302,7 @@ public class XtendSemanticHighlightingTest extends LightXtendTest {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class ");
     CharSequence _$ = this.$(XbaseHighlightingStyles.CLASS, "Foo");
-    _builder.append(_$, "");
+    _builder.append(_$);
     _builder.append(" {");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
@@ -343,7 +343,7 @@ public class XtendSemanticHighlightingTest extends LightXtendTest {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class ");
     CharSequence _$ = this.$(XbaseHighlightingStyles.CLASS, "Foo");
-    _builder.append(_$, "");
+    _builder.append(_$);
     _builder.append(" {");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
@@ -412,7 +412,7 @@ public class XtendSemanticHighlightingTest extends LightXtendTest {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class ");
     CharSequence _$ = this.$(XbaseHighlightingStyles.CLASS, "Foo");
-    _builder.append(_$, "");
+    _builder.append(_$);
     _builder.append(" {");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
@@ -482,7 +482,7 @@ public class XtendSemanticHighlightingTest extends LightXtendTest {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class ");
     CharSequence _$ = this.$(XbaseHighlightingStyles.CLASS, "Foo");
-    _builder.append(_$, "");
+    _builder.append(_$);
     _builder.append(" {");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
@@ -503,14 +503,14 @@ public class XtendSemanticHighlightingTest extends LightXtendTest {
     _builder.append(_$_4, "\t");
     _builder.newLineIfNotEmpty();
     CharSequence _white_2 = this.white("\t\t");
-    _builder.append(_white_2, "");
+    _builder.append(_white_2);
     _builder.append("this is not indented");
     CharSequence _$_5 = this.$(XtendHighlightingStyles.SEMANTIC_LINE_BREAK, XtendSemanticHighlightingTest.NL);
-    _builder.append(_$_5, "");
+    _builder.append(_$_5);
     CharSequence _white_3 = this.white("\t");
-    _builder.append(_white_3, "");
+    _builder.append(_white_3);
     CharSequence _white_4 = this.white(XtendSemanticHighlightingTest.Q3);
-    _builder.append(_white_4, "");
+    _builder.append(_white_4);
     _builder.newLineIfNotEmpty();
     _builder.append("}");
     _builder.newLine();

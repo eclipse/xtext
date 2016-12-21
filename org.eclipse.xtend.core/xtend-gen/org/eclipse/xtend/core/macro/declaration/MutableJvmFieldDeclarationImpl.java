@@ -164,7 +164,7 @@ public class MutableJvmFieldDeclarationImpl extends JvmFieldDeclarationImpl impl
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-        _builder.append(value, "");
+        _builder.append(value);
       }
     };
     _compilationUnit.setCompilationTemplate(_delegate, _client);
@@ -191,7 +191,7 @@ public class MutableJvmFieldDeclarationImpl extends JvmFieldDeclarationImpl impl
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-        _builder.append(value, "");
+        _builder.append(value);
       }
     };
     _compilationUnit.setCompilationTemplate(_delegate, _client);
@@ -205,7 +205,7 @@ public class MutableJvmFieldDeclarationImpl extends JvmFieldDeclarationImpl impl
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-        _builder.append(value, "");
+        _builder.append(value);
       }
     };
     _compilationUnit.setCompilationTemplate(_delegate, _client);
@@ -219,7 +219,7 @@ public class MutableJvmFieldDeclarationImpl extends JvmFieldDeclarationImpl impl
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-        _builder.append(value, "");
+        _builder.append(value);
       }
     };
     _compilationUnit.setCompilationTemplate(_delegate, _client);
@@ -233,7 +233,7 @@ public class MutableJvmFieldDeclarationImpl extends JvmFieldDeclarationImpl impl
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-        _builder.append(value, "");
+        _builder.append(value);
         _builder.append("L");
       }
     };
@@ -248,7 +248,7 @@ public class MutableJvmFieldDeclarationImpl extends JvmFieldDeclarationImpl impl
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-        _builder.append(value, "");
+        _builder.append(value);
         _builder.append("f");
       }
     };
@@ -263,7 +263,7 @@ public class MutableJvmFieldDeclarationImpl extends JvmFieldDeclarationImpl impl
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-        _builder.append(value, "");
+        _builder.append(value);
         _builder.append("d");
       }
     };
@@ -281,7 +281,7 @@ public class MutableJvmFieldDeclarationImpl extends JvmFieldDeclarationImpl impl
         _builder.append("\'");
         String _string = Character.toString(value);
         String _convertToJavaString = Strings.convertToJavaString(_string);
-        _builder.append(_convertToJavaString, "");
+        _builder.append(_convertToJavaString);
         _builder.append("\'");
       }
     };
@@ -298,7 +298,7 @@ public class MutableJvmFieldDeclarationImpl extends JvmFieldDeclarationImpl impl
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         _builder.append("\"");
         String _convertToJavaString = Strings.convertToJavaString(value);
-        _builder.append(_convertToJavaString, "");
+        _builder.append(_convertToJavaString);
         _builder.append("\"");
       }
     };

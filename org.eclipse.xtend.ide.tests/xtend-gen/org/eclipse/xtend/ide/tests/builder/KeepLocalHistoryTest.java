@@ -256,11 +256,11 @@ public class KeepLocalHistoryTest extends AbstractXtendUITestCase {
   
   public String getKey(final String preferenceName) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append(EclipseOutputConfigurationProvider.OUTPUT_PREFERENCE_TAG, "");
-    _builder.append(PreferenceConstants.SEPARATOR, "");
-    _builder.append(IFileSystemAccess.DEFAULT_OUTPUT, "");
-    _builder.append(PreferenceConstants.SEPARATOR, "");
-    _builder.append(preferenceName, "");
+    _builder.append(EclipseOutputConfigurationProvider.OUTPUT_PREFERENCE_TAG);
+    _builder.append(PreferenceConstants.SEPARATOR);
+    _builder.append(IFileSystemAccess.DEFAULT_OUTPUT);
+    _builder.append(PreferenceConstants.SEPARATOR);
+    _builder.append(preferenceName);
     return _builder.toString();
   }
 }

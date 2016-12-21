@@ -60,10 +60,10 @@ public class AnnotationValidation extends AbstractDeclarativeValidator {
           _builder.append("Invalid type ");
           JvmTypeReference _type_1 = it_1.getType();
           String _simpleName = _type_1.getSimpleName();
-          _builder.append(_simpleName, "");
+          _builder.append(_simpleName);
           _builder.append(" for the annotation attribute ");
           String _name = it_1.getName();
-          _builder.append(_name, "");
+          _builder.append(_name);
           _builder.append("; only primitive type, String, Class, annotation, enumeration are permitted or 1-dimensional arrays thereof");
           this.error(_builder.toString(), it_1, 
             XtendPackage.Literals.XTEND_FIELD__TYPE, 

@@ -67,7 +67,7 @@ public class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
         if (_not) {
           _builder.append("<");
           String _value_1 = superTypeAndParam.getValue();
-          _builder.append(_value_1, "");
+          _builder.append(_value_1);
           _builder.append("> ");
         }
       }
@@ -81,7 +81,7 @@ public class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
             _builder.appendImmediate(", ", "");
           }
           String _fixup = this.fixup(type);
-          _builder.append(_fixup, "");
+          _builder.append(_fixup);
           _builder.append(" t");
         }
       }
@@ -209,14 +209,14 @@ public class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
     StringConcatenation _builder = new StringConcatenation();
     JvmType _type_1 = type.getType();
     String _simpleName = _type_1.getSimpleName();
-    _builder.append(_simpleName, "");
+    _builder.append(_simpleName);
     _builder.append("<");
     List<LightweightTypeReference> _typeArguments_1 = type.getTypeArguments();
     final Function1<LightweightTypeReference, CharSequence> _function = (LightweightTypeReference it) -> {
       return it.getSimpleName();
     };
     String _join = IterableExtensions.<LightweightTypeReference>join(_typeArguments_1, ", ", _function);
-    _builder.append(_join, "");
+    _builder.append(_join);
     _builder.append(">");
     return _builder.toString();
   }

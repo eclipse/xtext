@@ -945,7 +945,7 @@ public class JavaConverterTest extends AbstractXtendTestCase {
     String xtendCode = _bodyDeclarationToXtend.getXtendCode();
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Javadoc Parameter well formed: ");
-    _builder.append(xtendCode, "");
+    _builder.append(xtendCode);
     boolean _contains = xtendCode.contains("@param p Param p");
     Assert.assertTrue(_builder.toString(), _contains);
   }
@@ -1014,7 +1014,7 @@ public class JavaConverterTest extends AbstractXtendTestCase {
     String xtendCode = _bodyDeclarationToXtend.getXtendCode();
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Javadoc Parameter well formed: ");
-    _builder.append(xtendCode, "");
+    _builder.append(xtendCode);
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("def abstract void foo() {");
     _builder_1.newLine();
@@ -3007,7 +3007,7 @@ public class JavaConverterTest extends AbstractXtendTestCase {
     final String javaBody = _builder.toString();
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class Test {");
-    _builder_1.append(javaBody, "");
+    _builder_1.append(javaBody);
     _builder_1.append("}");
     final XtendClass clazz = this.toValidXtendClass(_builder_1);
     Assert.assertNotNull(clazz);
@@ -3108,7 +3108,7 @@ public class JavaConverterTest extends AbstractXtendTestCase {
     final String javaBody = _builder.toString();
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class Test {");
-    _builder_1.append(javaBody, "");
+    _builder_1.append(javaBody);
     _builder_1.append("}");
     final XtendClass clazz = this.toValidXtendClass(_builder_1);
     Assert.assertNotNull(clazz);
@@ -3317,7 +3317,7 @@ public class JavaConverterTest extends AbstractXtendTestCase {
     _builder.append("}");
     final String javaBody = _builder.toString();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append(javaBody, "");
+    _builder_1.append(javaBody);
     final XtendAnnotationType clazz = this.toValidXtendAnnotation(_builder_1.toString());
     Assert.assertNotNull(clazz);
     String body = this.toXtendCode(javaBody);
@@ -3535,7 +3535,7 @@ public class JavaConverterTest extends AbstractXtendTestCase {
     for (final String problem : _problems) {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("ERROR: ");
-      _builder.append(problem, "");
+      _builder.append(problem);
       this.dump(_builder.toString());
     }
     Iterable<String> _problems_1 = conversionResult.getProblems();

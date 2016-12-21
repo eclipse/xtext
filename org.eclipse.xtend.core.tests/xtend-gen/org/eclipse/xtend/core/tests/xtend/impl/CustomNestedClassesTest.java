@@ -31,7 +31,7 @@ public class CustomNestedClassesTest extends CustomClassesTest {
   protected XtendClass clazz(final String string) throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class C { ");
-    _builder.append(string, "");
+    _builder.append(string);
     _builder.append(" }");
     XtendFile _file = this.file(_builder.toString());
     EList<XtendTypeDeclaration> _xtendTypes = _file.getXtendTypes();
@@ -45,7 +45,7 @@ public class CustomNestedClassesTest extends CustomClassesTest {
   protected XtendInterface interfaze(final String string) throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class C { ");
-    _builder.append(string, "");
+    _builder.append(string);
     _builder.append(" }");
     XtendFile _file = this.file(_builder.toString());
     EList<XtendTypeDeclaration> _xtendTypes = _file.getXtendTypes();
@@ -59,7 +59,7 @@ public class CustomNestedClassesTest extends CustomClassesTest {
   protected XtendEnum enumeration(final String string) throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class C { ");
-    _builder.append(string, "");
+    _builder.append(string);
     _builder.append(" }");
     XtendFile _file = this.file(_builder.toString());
     EList<XtendTypeDeclaration> _xtendTypes = _file.getXtendTypes();
@@ -73,7 +73,7 @@ public class CustomNestedClassesTest extends CustomClassesTest {
   protected XtendAnnotationType annotationType(final String string) throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class C { ");
-    _builder.append(string, "");
+    _builder.append(string);
     _builder.append(" }");
     XtendFile _file = this.file(_builder.toString());
     EList<XtendTypeDeclaration> _xtendTypes = _file.getXtendTypes();

@@ -16,7 +16,7 @@ public class XtendFileGenerator {
       boolean _not = (!_isNullOrEmpty);
       if (_not) {
         _builder.append("package ");
-        _builder.append(conf.packageName, "");
+        _builder.append(conf.packageName);
         _builder.newLineIfNotEmpty();
       }
     }
@@ -45,7 +45,7 @@ public class XtendFileGenerator {
     {
       for(final String staticImport : conf.staticImportTypes) {
         _builder.append("import static extension ");
-        _builder.append(staticImport, "");
+        _builder.append(staticImport);
         _builder.append(".*");
         _builder.newLineIfNotEmpty();
       }
@@ -54,7 +54,7 @@ public class XtendFileGenerator {
     _builder.append("@Deprecated");
     _builder.newLine();
     _builder.append("class ");
-    _builder.append(conf.className, "");
+    _builder.append(conf.className);
     _builder.append(" {");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");

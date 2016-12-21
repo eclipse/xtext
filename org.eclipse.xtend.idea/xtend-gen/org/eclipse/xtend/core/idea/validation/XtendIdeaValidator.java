@@ -116,10 +116,10 @@ public class XtendIdeaValidator extends AbstractDeclarativeValidator {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("The declared package \'");
     String _notNull = Strings.notNull(declaredPackage);
-    _builder.append(_notNull, "");
+    _builder.append(_notNull);
     _builder.append("\' does not match the expected package \'");
     String _notNull_1 = Strings.notNull(expectedPackage);
-    _builder.append(_notNull_1, "");
+    _builder.append(_notNull_1);
     _builder.append("\'");
     this.error(_builder.toString(), 
       XtendPackage.Literals.XTEND_FILE__PACKAGE, 

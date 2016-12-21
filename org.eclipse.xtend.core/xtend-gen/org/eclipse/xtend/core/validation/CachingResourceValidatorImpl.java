@@ -150,7 +150,7 @@ public class CachingResourceValidatorImpl extends DerivedStateAwareResourceValid
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("The generated ");
     String _uiString = this.getUiString(jvmElement);
-    _builder.append(_uiString, "");
+    _builder.append(_uiString);
     _builder.append(" is not associated with a source element. The producing active annotation should use \'setPrimarySourceElement\'.");
     EList<EObject> _contents = resource.getContents();
     EObject _head = IterableExtensions.<EObject>head(_contents);

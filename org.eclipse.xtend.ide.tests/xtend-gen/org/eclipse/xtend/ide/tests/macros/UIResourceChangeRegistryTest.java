@@ -81,7 +81,7 @@ public class UIResourceChangeRegistryTest extends AbstractXtendUITestCase {
     public static String toReadableString(final IResourceDelta delta) {
       StringConcatenation _builder = new StringConcatenation();
       IPath _fullPath = delta.getFullPath();
-      _builder.append(_fullPath, "");
+      _builder.append(_fullPath);
       _builder.append(" ");
       String _switchResult = null;
       int _kind = delta.getKind();
@@ -96,7 +96,7 @@ public class UIResourceChangeRegistryTest extends AbstractXtendUITestCase {
           _switchResult = "CHANGED";
           break;
       }
-      _builder.append(_switchResult, "");
+      _builder.append(_switchResult);
       _builder.append(" ");
       Pair<Integer, String> _mappedTo = Pair.<Integer, String>of(Integer.valueOf(IResourceDelta.CONTENT), "CONTENT");
       Pair<Integer, String> _mappedTo_1 = Pair.<Integer, String>of(Integer.valueOf(IResourceDelta.DERIVED_CHANGED), "DERIVED_CHANGED");
@@ -127,7 +127,7 @@ public class UIResourceChangeRegistryTest extends AbstractXtendUITestCase {
       List<String> _map = ListExtensions.<Pair<Integer, String>, String>map(Collections.<Pair<Integer, String>>unmodifiableList(CollectionLiterals.<Pair<Integer, String>>newArrayList(_mappedTo, _mappedTo_1, _mappedTo_2, _mappedTo_3, _mappedTo_4, _mappedTo_5, _mappedTo_6, _mappedTo_7, _mappedTo_8, _mappedTo_9, _mappedTo_10, _mappedTo_11, _mappedTo_12)), _function);
       Iterable<String> _filterNull = IterableExtensions.<String>filterNull(_map);
       String _join = IterableExtensions.join(_filterNull, ",");
-      _builder.append(_join, "");
+      _builder.append(_join);
       _builder.append(" {");
       _builder.newLineIfNotEmpty();
       {

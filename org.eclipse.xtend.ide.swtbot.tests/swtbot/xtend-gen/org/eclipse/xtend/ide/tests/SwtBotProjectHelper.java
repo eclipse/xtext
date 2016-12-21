@@ -158,20 +158,20 @@ public class SwtBotProjectHelper {
             StringConcatenation _builder = new StringConcatenation();
             _builder.append("Shell: \'");
             String _text = it_1.getText();
-            _builder.append(_text, "");
+            _builder.append(_text);
             _builder.append("\', active: ");
             boolean _isActive = it_1.isActive();
-            _builder.append(_isActive, "");
+            _builder.append(_isActive);
             InputOutput.<String>println(_builder.toString());
           };
           ((List<SWTBotShell>)Conversions.doWrapArray(_shells)).forEach(_function);
           StringConcatenation _builder = new StringConcatenation();
-          _builder.append(SWTBotPreferences.SCREENSHOTS_DIR, "");
+          _builder.append(SWTBotPreferences.SCREENSHOTS_DIR);
           _builder.append("/MenuFileNotFound");
           long _currentTimeMillis = System.currentTimeMillis();
-          _builder.append(_currentTimeMillis, "");
+          _builder.append(_currentTimeMillis);
           _builder.append(".");
-          _builder.append(SWTBotPreferences.SCREENSHOT_FORMAT, "");
+          _builder.append(SWTBotPreferences.SCREENSHOT_FORMAT);
           SWTBotShell[] _shells_1 = it.shells();
           final Function1<SWTBotShell, Boolean> _function_1 = (SWTBotShell it_1) -> {
             return Boolean.valueOf(it_1.isActive());

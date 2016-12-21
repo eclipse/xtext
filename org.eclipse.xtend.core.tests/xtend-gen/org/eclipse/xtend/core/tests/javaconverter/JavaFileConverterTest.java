@@ -121,10 +121,10 @@ public class JavaFileConverterTest extends AbstractXtendTestCase {
               final AssertionError error = (AssertionError)_t;
               compileError = true;
               StringConcatenation _builder = new StringConcatenation();
-              _builder.append(javaFileProjRelPath, "");
+              _builder.append(javaFileProjRelPath);
               _builder.append(" - ");
               String _message = error.getMessage();
-              _builder.append(_message, "");
+              _builder.append(_message);
               System.err.println(_builder);
             } else {
               throw Exceptions.sneakyThrow(_t);
@@ -148,22 +148,22 @@ public class JavaFileConverterTest extends AbstractXtendTestCase {
       }
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("Not covered Errors (");
-      _builder.append(errors, "");
+      _builder.append(errors);
       _builder.append(")");
       InputOutput.<String>println(_builder.toString());
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("Known Problems (");
-      _builder_1.append(problems, "");
+      _builder_1.append(problems);
       _builder_1.append(")");
       InputOutput.<String>println(_builder_1.toString());
       StringConcatenation _builder_2 = new StringConcatenation();
       _builder_2.append("Files read (");
-      _builder_2.append(files, "");
+      _builder_2.append(files);
       _builder_2.append(")");
       InputOutput.<String>println(_builder_2.toString());
       StringConcatenation _builder_3 = new StringConcatenation();
       _builder_3.append("Files with errors/problems (");
-      _builder_3.append(filesWithErrorsOrProblems, "");
+      _builder_3.append(filesWithErrorsOrProblems);
       _builder_3.append(")");
       InputOutput.<String>println(_builder_3.toString());
       InputOutput.<String>println("Done...");
@@ -207,7 +207,7 @@ public class JavaFileConverterTest extends AbstractXtendTestCase {
       final File targetFile = new File(parent, fileName);
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("Writing to: ");
-      _builder.append(fileName, "");
+      _builder.append(fileName);
       InputOutput.<String>println(_builder.toString());
       boolean _exists = targetFile.exists();
       boolean _not = (!_exists);

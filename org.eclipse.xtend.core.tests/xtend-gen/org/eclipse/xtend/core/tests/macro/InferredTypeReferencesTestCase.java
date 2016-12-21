@@ -22,7 +22,7 @@ public class InferredTypeReferencesTestCase extends AbstractActiveAnnotationTest
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("@");
     String _name = InferredTypeReferencesCheck.class.getName();
-    _builder.append(_name, "");
+    _builder.append(_name);
     _builder.append(" ");
     _builder.newLineIfNotEmpty();
     _builder.append("class Foo {");
