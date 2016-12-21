@@ -29,8 +29,7 @@ public class Formatting2Test extends AbstractWebServerTest {
     String _name = file.getName();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("resource", _name);
     final XtextServiceDispatcher.ServiceDescriptor format = this.getService(Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1)));
-    boolean _isHasSideEffects = format.isHasSideEffects();
-    Assert.assertTrue(_isHasSideEffects);
+    Assert.assertTrue(format.isHasSideEffects());
     Function0<? extends IServiceResult> _service = format.getService();
     IServiceResult _apply = _service.apply();
     final FormattingResult result = ((FormattingResult) _apply);
@@ -45,8 +44,7 @@ public class Formatting2Test extends AbstractWebServerTest {
     _builder.newLine();
     _builder.append("]");
     final String expectedResult = _builder.toString();
-    String _string = result.toString();
-    Assert.assertEquals(expectedResult, _string);
+    Assert.assertEquals(expectedResult, result.toString());
   }
   
   @Test
@@ -59,8 +57,7 @@ public class Formatting2Test extends AbstractWebServerTest {
     Pair<String, String> _mappedTo_3 = Pair.<String, String>of("resource", _name);
     final XtextServiceDispatcher.ServiceDescriptor format = this.getService(
       Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1, _mappedTo_2, _mappedTo_3)));
-    boolean _isHasSideEffects = format.isHasSideEffects();
-    Assert.assertTrue(_isHasSideEffects);
+    Assert.assertTrue(format.isHasSideEffects());
     Function0<? extends IServiceResult> _service = format.getService();
     IServiceResult _apply = _service.apply();
     final FormattingResult result = ((FormattingResult) _apply);
@@ -78,7 +75,6 @@ public class Formatting2Test extends AbstractWebServerTest {
     _builder.newLine();
     _builder.append("]");
     final String expectedResult = _builder.toString();
-    String _string = result.toString();
-    Assert.assertEquals(expectedResult, _string);
+    Assert.assertEquals(expectedResult, result.toString());
   }
 }

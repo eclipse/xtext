@@ -33,15 +33,12 @@ public class ResourcePersistenceTest extends AbstractWebServerTest {
     String _name = file.getName();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("resource", _name);
     final XtextServiceDispatcher.ServiceDescriptor load = this.getService(Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1)));
-    boolean _isHasSideEffects = load.isHasSideEffects();
-    Assert.assertFalse(_isHasSideEffects);
+    Assert.assertFalse(load.isHasSideEffects());
     Function0<? extends IServiceResult> _service = load.getService();
     IServiceResult _apply = _service.apply();
     final ResourceContentResult result = ((ResourceContentResult) _apply);
-    String _fullText = result.getFullText();
-    Assert.assertEquals(resourceContent, _fullText);
-    boolean _isDirty = result.isDirty();
-    Assert.assertFalse(_isDirty);
+    Assert.assertEquals(resourceContent, result.getFullText());
+    Assert.assertFalse(result.isDirty());
   }
   
   @Test
@@ -61,27 +58,16 @@ public class ResourcePersistenceTest extends AbstractWebServerTest {
     Function0<? extends IServiceResult> _service_1 = load.getService();
     IServiceResult _apply = _service_1.apply();
     ResourceContentResult result = ((ResourceContentResult) _apply);
-    String _fullText = result.getFullText();
-    Assert.assertEquals(resourceContent, _fullText);
-    Pair<String, String> _mappedTo_5 = Pair.<String, String>of("serviceType", "update");
-    Pair<String, String> _mappedTo_6 = Pair.<String, String>of("resource", "dummy.statemachine");
-    Pair<String, String> _mappedTo_7 = Pair.<String, String>of("deltaText", "bar");
-    Pair<String, String> _mappedTo_8 = Pair.<String, String>of("deltaOffset", "6");
-    Pair<String, String> _mappedTo_9 = Pair.<String, String>of("deltaReplaceLength", "3");
-    XtextServiceDispatcher.ServiceDescriptor _service_2 = this.getService(
-      Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo_5, _mappedTo_6, _mappedTo_7, _mappedTo_8, _mappedTo_9)), session);
-    update = _service_2;
-    Function0<? extends IServiceResult> _service_3 = update.getService();
-    _service_3.apply();
-    Pair<String, String> _mappedTo_10 = Pair.<String, String>of("serviceType", "load");
-    Pair<String, String> _mappedTo_11 = Pair.<String, String>of("resource", "dummy.statemachine");
-    XtextServiceDispatcher.ServiceDescriptor _service_4 = this.getService(Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo_10, _mappedTo_11)), session);
-    load = _service_4;
-    Function0<? extends IServiceResult> _service_5 = load.getService();
-    IServiceResult _apply_1 = _service_5.apply();
+    Assert.assertEquals(resourceContent, result.getFullText());
+    update = this.getService(
+      Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(Pair.<String, String>of("serviceType", "update"), Pair.<String, String>of("resource", "dummy.statemachine"), Pair.<String, String>of("deltaText", "bar"), Pair.<String, String>of("deltaOffset", "6"), Pair.<String, String>of("deltaReplaceLength", "3"))), session);
+    Function0<? extends IServiceResult> _service_2 = update.getService();
+    _service_2.apply();
+    load = this.getService(Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(Pair.<String, String>of("serviceType", "load"), Pair.<String, String>of("resource", "dummy.statemachine"))), session);
+    Function0<? extends IServiceResult> _service_3 = load.getService();
+    IServiceResult _apply_1 = _service_3.apply();
     result = ((ResourceContentResult) _apply_1);
-    String _fullText_1 = result.getFullText();
-    Assert.assertEquals("state bar end", _fullText_1);
+    Assert.assertEquals("state bar end", result.getFullText());
   }
   
   @Test
@@ -109,13 +95,11 @@ public class ResourcePersistenceTest extends AbstractWebServerTest {
     String _name_2 = file.getName();
     Pair<String, String> _mappedTo_8 = Pair.<String, String>of("resource", _name_2);
     final XtextServiceDispatcher.ServiceDescriptor revert = this.getService(Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo_7, _mappedTo_8)), session);
-    boolean _isHasSideEffects = revert.isHasSideEffects();
-    Assert.assertTrue(_isHasSideEffects);
+    Assert.assertTrue(revert.isHasSideEffects());
     Function0<? extends IServiceResult> _service_2 = revert.getService();
     IServiceResult _apply = _service_2.apply();
     final ResourceContentResult result = ((ResourceContentResult) _apply);
-    String _fullText = result.getFullText();
-    Assert.assertEquals(resourceContent, _fullText);
+    Assert.assertEquals(resourceContent, result.getFullText());
   }
   
   @Test
@@ -143,8 +127,7 @@ public class ResourcePersistenceTest extends AbstractWebServerTest {
       String _name_2 = file.getName();
       Pair<String, String> _mappedTo_8 = Pair.<String, String>of("resource", _name_2);
       final XtextServiceDispatcher.ServiceDescriptor save = this.getService(Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo_7, _mappedTo_8)), session);
-      boolean _isHasSideEffects = save.isHasSideEffects();
-      Assert.assertTrue(_isHasSideEffects);
+      Assert.assertTrue(save.isHasSideEffects());
       Function0<? extends IServiceResult> _service_2 = save.getService();
       _service_2.apply();
       final String resourceContent = Files.toString(file, Charsets.UTF_8);

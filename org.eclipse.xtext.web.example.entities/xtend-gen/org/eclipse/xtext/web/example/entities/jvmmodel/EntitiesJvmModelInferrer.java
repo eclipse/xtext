@@ -21,12 +21,10 @@ import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
-import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.web.example.entities.domainmodel.Entity;
 import org.eclipse.xtext.web.example.entities.domainmodel.Feature;
 import org.eclipse.xtext.web.example.entities.domainmodel.Operation;
 import org.eclipse.xtext.web.example.entities.domainmodel.Property;
-import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
@@ -44,11 +42,8 @@ public class EntitiesJvmModelInferrer extends AbstractModelInferrer {
   private IQualifiedNameProvider _iQualifiedNameProvider;
   
   protected void _infer(final Entity entity, @Extension final IJvmDeclaredTypeAcceptor acceptor, final boolean prelinkingPhase) {
-    QualifiedName _fullyQualifiedName = this._iQualifiedNameProvider.getFullyQualifiedName(entity);
-    JvmGenericType _class = this._jvmTypesBuilder.toClass(entity, _fullyQualifiedName);
     final Procedure1<JvmGenericType> _function = (JvmGenericType it) -> {
-      String _documentation = this._jvmTypesBuilder.getDocumentation(entity);
-      this._jvmTypesBuilder.setDocumentation(it, _documentation);
+      this._jvmTypesBuilder.setDocumentation(it, this._jvmTypesBuilder.getDocumentation(entity));
       JvmParameterizedTypeReference _superType = entity.getSuperType();
       boolean _tripleNotEquals = (_superType != null);
       if (_tripleNotEquals) {
@@ -62,8 +57,7 @@ public class EntitiesJvmModelInferrer extends AbstractModelInferrer {
       };
       JvmConstructor _constructor = this._jvmTypesBuilder.toConstructor(entity, _function_1);
       this._jvmTypesBuilder.<JvmConstructor>operator_add(_members, _constructor);
-      JvmTypeReference _typeRef = this._typeReferenceBuilder.typeRef(it);
-      final JvmTypeReference procedureType = this._typeReferenceBuilder.typeRef(Procedure1.class, _typeRef);
+      final JvmTypeReference procedureType = this._typeReferenceBuilder.typeRef(Procedure1.class, this._typeReferenceBuilder.typeRef(it));
       EList<JvmMember> _members_1 = it.getMembers();
       final Procedure1<JvmConstructor> _function_2 = (JvmConstructor it_1) -> {
         EList<JvmFormalParameter> _parameters = it_1.getParameters();
@@ -115,8 +109,7 @@ public class EntitiesJvmModelInferrer extends AbstractModelInferrer {
               _elvis = _inferredType;
             }
             final Procedure1<JvmOperation> _function_3 = (JvmOperation it_1) -> {
-              String _documentation_1 = this._jvmTypesBuilder.getDocumentation(f);
-              this._jvmTypesBuilder.setDocumentation(it_1, _documentation_1);
+              this._jvmTypesBuilder.setDocumentation(it_1, this._jvmTypesBuilder.getDocumentation(f));
               EList<JvmFormalParameter> _params = ((Operation)f).getParams();
               for (final JvmFormalParameter p : _params) {
                 EList<JvmFormalParameter> _parameters = it_1.getParameters();
@@ -125,8 +118,7 @@ public class EntitiesJvmModelInferrer extends AbstractModelInferrer {
                 JvmFormalParameter _parameter = this._jvmTypesBuilder.toParameter(p, _name_1, _parameterType);
                 this._jvmTypesBuilder.<JvmFormalParameter>operator_add(_parameters, _parameter);
               }
-              XExpression _body = ((Operation)f).getBody();
-              this._jvmTypesBuilder.setBody(it_1, _body);
+              this._jvmTypesBuilder.setBody(it_1, ((Operation)f).getBody());
             };
             JvmOperation _method = this._jvmTypesBuilder.toMethod(f, _name, _elvis, _function_3);
             this._jvmTypesBuilder.<JvmOperation>operator_add(_members_2, _method);
@@ -137,7 +129,7 @@ public class EntitiesJvmModelInferrer extends AbstractModelInferrer {
       JvmOperation _toStringMethod = this._jvmTypesBuilder.toToStringMethod(entity, it);
       this._jvmTypesBuilder.<JvmOperation>operator_add(_members_2, _toStringMethod);
     };
-    acceptor.<JvmGenericType>accept(_class, _function);
+    acceptor.<JvmGenericType>accept(this._jvmTypesBuilder.toClass(entity, this._iQualifiedNameProvider.getFullyQualifiedName(entity)), _function);
   }
   
   public void infer(final EObject entity, final IJvmDeclaredTypeAcceptor acceptor, final boolean prelinkingPhase) {

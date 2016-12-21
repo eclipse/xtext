@@ -63,8 +63,7 @@ public class HoverTest extends AbstractWebServerTest {
   protected HoverResult assertTitle(final HoverResult result, final String expectedTitle) {
     HoverResult _xblockexpression = null;
     {
-      String _title = result.getTitle();
-      Assert.assertEquals(expectedTitle, _title);
+      Assert.assertEquals(expectedTitle, result.getTitle());
       _xblockexpression = result;
     }
     return _xblockexpression;
@@ -73,8 +72,7 @@ public class HoverTest extends AbstractWebServerTest {
   protected HoverResult assertContent(final HoverResult result, final String expectedContent) {
     HoverResult _xblockexpression = null;
     {
-      String _content = result.getContent();
-      Assert.assertEquals(expectedContent, _content);
+      Assert.assertEquals(expectedContent, result.getContent());
       _xblockexpression = result;
     }
     return _xblockexpression;

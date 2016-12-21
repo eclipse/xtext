@@ -90,8 +90,7 @@ public class GeneratorTest extends AbstractWebServerTest {
     String _name = file.getName();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("resource", _name);
     final XtextServiceDispatcher.ServiceDescriptor generate = this.getService(Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1)));
-    boolean _isHasSideEffects = generate.isHasSideEffects();
-    Assert.assertFalse(_isHasSideEffects);
+    Assert.assertFalse(generate.isHasSideEffects());
     Function0<? extends IServiceResult> _service = generate.getService();
     IServiceResult _apply = _service.apply();
     final GeneratorResult result = ((GeneratorResult) _apply);
@@ -106,8 +105,7 @@ public class GeneratorTest extends AbstractWebServerTest {
     _builder.newLine();
     _builder.append("]");
     final String expectedResult = _builder.toString();
-    String _string = result.toString();
-    Assert.assertEquals(expectedResult, _string);
+    Assert.assertEquals(expectedResult, result.toString());
   }
   
   @Test
@@ -118,8 +116,7 @@ public class GeneratorTest extends AbstractWebServerTest {
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("resource", _name);
     Pair<String, String> _mappedTo_2 = Pair.<String, String>of("artifact", "DEFAULT_OUTPUT/test.txt");
     final XtextServiceDispatcher.ServiceDescriptor generate = this.getService(Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1, _mappedTo_2)));
-    boolean _isHasSideEffects = generate.isHasSideEffects();
-    Assert.assertFalse(_isHasSideEffects);
+    Assert.assertFalse(generate.isHasSideEffects());
     Function0<? extends IServiceResult> _service = generate.getService();
     IServiceResult _apply = _service.apply();
     final GeneratorResult result = ((GeneratorResult) _apply);
@@ -137,8 +134,7 @@ public class GeneratorTest extends AbstractWebServerTest {
     _builder.newLine();
     _builder.append("]");
     final String expectedResult = _builder.toString();
-    String _string = result.toString();
-    Assert.assertEquals(expectedResult, _string);
+    Assert.assertEquals(expectedResult, result.toString());
   }
   
   @Test
@@ -182,8 +178,7 @@ public class GeneratorTest extends AbstractWebServerTest {
     _builder.newLine();
     _builder.append("]");
     final String expectedResult = _builder.toString();
-    String _string = result.toString();
-    Assert.assertEquals(expectedResult, _string);
+    Assert.assertEquals(expectedResult, result.toString());
   }
   
   @Test
@@ -235,8 +230,7 @@ public class GeneratorTest extends AbstractWebServerTest {
     _builder.newLine();
     _builder.append("]");
     final String expectedResult = _builder.toString();
-    String _string = result.toString();
-    Assert.assertEquals(expectedResult, _string);
+    Assert.assertEquals(expectedResult, result.toString());
   }
   
   @Test
@@ -283,7 +277,6 @@ public class GeneratorTest extends AbstractWebServerTest {
     _builder.newLine();
     _builder.append("]");
     final String expectedResult = _builder.toString();
-    String _string = result.toString();
-    Assert.assertEquals(expectedResult, _string);
+    Assert.assertEquals(expectedResult, result.toString());
   }
 }

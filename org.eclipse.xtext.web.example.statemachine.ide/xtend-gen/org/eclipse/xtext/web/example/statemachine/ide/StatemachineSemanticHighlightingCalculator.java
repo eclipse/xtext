@@ -41,15 +41,13 @@ public class StatemachineSemanticHighlightingCalculator extends DefaultSemanticH
     if (!_matched) {
       if (it instanceof Command) {
         _matched=true;
-        Signal _signal = ((Command)it).getSignal();
-        this.highlightSignal(it, _signal, StatemachinePackage.Literals.COMMAND__SIGNAL, acceptor, cancelIndicator);
+        this.highlightSignal(it, ((Command)it).getSignal(), StatemachinePackage.Literals.COMMAND__SIGNAL, acceptor, cancelIndicator);
       }
     }
     if (!_matched) {
       if (it instanceof Event) {
         _matched=true;
-        Signal _signal = ((Event)it).getSignal();
-        this.highlightSignal(it, _signal, StatemachinePackage.Literals.EVENT__SIGNAL, acceptor, cancelIndicator);
+        this.highlightSignal(it, ((Event)it).getSignal(), StatemachinePackage.Literals.EVENT__SIGNAL, acceptor, cancelIndicator);
       }
     }
     return false;

@@ -166,12 +166,10 @@ public class GeneratorService extends AbstractCachedService<GeneratorService.Gen
     GeneratorResult result = IterableExtensions.<GeneratorResult>findFirst(artifacts, _function);
     if (((result == null) && (!searchString.startsWith(IFileSystemAccess.DEFAULT_OUTPUT)))) {
       final String defaultSearchString = (IFileSystemAccess.DEFAULT_OUTPUT + searchString);
-      final Function1<GeneratorResult, Boolean> _function_1 = (GeneratorResult it) -> {
+      result = IterableExtensions.<GeneratorResult>findFirst(artifacts, ((Function1<GeneratorResult, Boolean>) (GeneratorResult it) -> {
         String _name = it.getName();
         return Boolean.valueOf(Objects.equal(_name, defaultSearchString));
-      };
-      GeneratorResult _findFirst = IterableExtensions.<GeneratorResult>findFirst(artifacts, _function_1);
-      result = _findFirst;
+      }));
     }
     if ((result == null)) {
       throw new InvalidRequestException.ResourceNotFoundException("The requested generator artifact was not found.");

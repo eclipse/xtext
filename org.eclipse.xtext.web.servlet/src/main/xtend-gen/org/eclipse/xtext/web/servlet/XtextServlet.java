@@ -174,8 +174,7 @@ public class XtextServlet extends HttpServlet {
       Function0<? extends IServiceResult> _service = service.getService();
       final IServiceResult result = _service.apply();
       response.setStatus(HttpServletResponse.SC_OK);
-      String _encoding = this.getEncoding(service, result);
-      response.setCharacterEncoding(_encoding);
+      response.setCharacterEncoding(this.getEncoding(service, result));
       response.setHeader("Cache-Control", "no-cache");
       if (((result instanceof IUnwrappableServiceResult) && (((IUnwrappableServiceResult) result).getContent() != null))) {
         final IUnwrappableServiceResult unwrapResult = ((IUnwrappableServiceResult) result);
@@ -223,8 +222,7 @@ public class XtextServlet extends HttpServlet {
     final String contentType = serviceContext.getParameter("contentType");
     boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(contentType);
     if (_isNullOrEmpty) {
-      IResourceServiceProvider _resourceServiceProvider = this.serviceProviderRegistry.getResourceServiceProvider(emfURI);
-      resourceServiceProvider = _resourceServiceProvider;
+      resourceServiceProvider = this.serviceProviderRegistry.getResourceServiceProvider(emfURI);
       if ((resourceServiceProvider == null)) {
         String _string = emfURI.toString();
         boolean _isEmpty = _string.isEmpty();
@@ -241,8 +239,7 @@ public class XtextServlet extends HttpServlet {
         }
       }
     } else {
-      IResourceServiceProvider _resourceServiceProvider_1 = this.serviceProviderRegistry.getResourceServiceProvider(emfURI, contentType);
-      resourceServiceProvider = _resourceServiceProvider_1;
+      resourceServiceProvider = this.serviceProviderRegistry.getResourceServiceProvider(emfURI, contentType);
       if ((resourceServiceProvider == null)) {
         StringConcatenation _builder_2 = new StringConcatenation();
         _builder_2.append("Unable to identify the Xtext language for contentType ");

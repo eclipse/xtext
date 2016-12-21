@@ -37,8 +37,7 @@ public class HighlightingService extends AbstractCachedService<HighlightingResul
   @Override
   public HighlightingResult compute(final IXtextWebDocument it, final CancelIndicator cancelIndicator) {
     final HighlightingResult result = new HighlightingResult();
-    List<HighlightingResult.Region> _regions = result.getRegions();
-    final IHighlightedPositionAcceptor acceptor = this.createHighlightedPositionAcceptor(_regions);
+    final IHighlightedPositionAcceptor acceptor = this.createHighlightedPositionAcceptor(result.getRegions());
     XtextResource _resource = it.getResource();
     this.highlightingCalculator.provideHighlightingFor(_resource, acceptor, cancelIndicator);
     return result;

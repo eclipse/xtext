@@ -35,8 +35,7 @@ public class XtextResourcesServlet extends HttpServlet {
     super.init(config);
     String disableCache = config.getInitParameter("disableCache");
     if ((disableCache != null)) {
-      boolean _parseBoolean = Boolean.parseBoolean(disableCache);
-      this.disableCache = _parseBoolean;
+      this.disableCache = Boolean.parseBoolean(disableCache);
     }
   }
   

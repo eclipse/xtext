@@ -35,32 +35,24 @@ public class HighlightingTest extends AbstractWebServerTest {
     Function0<? extends IServiceResult> _service = highlighting.getService();
     IServiceResult _apply = _service.apply();
     final HighlightingResult result = ((HighlightingResult) _apply);
-    int _length = styleClasses.length;
-    List<HighlightingResult.Region> _regions = result.getRegions();
-    int _size = _regions.size();
-    Assert.assertEquals(_length, _size);
+    Assert.assertEquals(styleClasses.length, result.getRegions().size());
     int offset = 0;
     final String[] snippets = content.split("#");
     for (int i = 0; (i < styleClasses.length); i++) {
       {
         int _offset = offset;
         String _get = snippets[(2 * i)];
-        int _length_1 = _get.length();
-        offset = (_offset + _length_1);
+        int _length = _get.length();
+        offset = (_offset + _length);
         String _get_1 = snippets[((2 * i) + 1)];
         final int length = _get_1.length();
-        List<HighlightingResult.Region> _regions_1 = result.getRegions();
-        final HighlightingResult.Region region = _regions_1.get(i);
-        Object _get_2 = styleClasses[i];
-        String[] _styleClasses = region.getStyleClasses();
-        Object _head = IterableExtensions.<Object>head(((Iterable<Object>)Conversions.doWrapArray(_styleClasses)));
-        Assert.assertEquals(_get_2, _head);
-        int _offset_1 = region.getOffset();
-        Assert.assertEquals(offset, _offset_1);
-        int _length_2 = region.getLength();
-        Assert.assertEquals(length, _length_2);
-        int _offset_2 = offset;
-        offset = (_offset_2 + length);
+        List<HighlightingResult.Region> _regions = result.getRegions();
+        final HighlightingResult.Region region = _regions.get(i);
+        Assert.assertEquals(styleClasses[i], IterableExtensions.<Object>head(((Iterable<Object>)Conversions.doWrapArray(region.getStyleClasses()))));
+        Assert.assertEquals(offset, region.getOffset());
+        Assert.assertEquals(length, region.getLength());
+        int _offset_1 = offset;
+        offset = (_offset_1 + length);
       }
     }
   }
@@ -68,8 +60,7 @@ public class HighlightingTest extends AbstractWebServerTest {
   protected HoverResult assertTitle(final HoverResult result, final String expectedTitle) {
     HoverResult _xblockexpression = null;
     {
-      String _title = result.getTitle();
-      Assert.assertEquals(expectedTitle, _title);
+      Assert.assertEquals(expectedTitle, result.getTitle());
       _xblockexpression = result;
     }
     return _xblockexpression;
@@ -78,8 +69,7 @@ public class HighlightingTest extends AbstractWebServerTest {
   protected HoverResult assertContent(final HoverResult result, final String expectedContent) {
     HoverResult _xblockexpression = null;
     {
-      String _content = result.getContent();
-      Assert.assertEquals(expectedContent, _content);
+      Assert.assertEquals(expectedContent, result.getContent());
       _xblockexpression = result;
     }
     return _xblockexpression;
