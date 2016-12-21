@@ -235,7 +235,7 @@ public class XtextServlet extends HttpServlet {
         } else {
           StringConcatenation _builder_1 = new StringConcatenation();
           _builder_1.append("Unable to identify the Xtext language for resource ");
-          _builder_1.append(emfURI, "");
+          _builder_1.append(emfURI);
           _builder_1.append(".");
           throw new InvalidRequestException.UnknownLanguageException(_builder_1.toString());
         }
@@ -246,7 +246,7 @@ public class XtextServlet extends HttpServlet {
       if ((resourceServiceProvider == null)) {
         StringConcatenation _builder_2 = new StringConcatenation();
         _builder_2.append("Unable to identify the Xtext language for contentType ");
-        _builder_2.append(contentType, "");
+        _builder_2.append(contentType);
         _builder_2.append(".");
         throw new InvalidRequestException.UnknownLanguageException(_builder_2.toString());
       }
