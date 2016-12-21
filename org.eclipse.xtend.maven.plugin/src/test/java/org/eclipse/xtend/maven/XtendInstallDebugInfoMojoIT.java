@@ -48,10 +48,6 @@ public class XtendInstallDebugInfoMojoIT {
 				"      // XtendA.java:12 -> XtendA.xtend:5\n" + 
 				"      // XtendA.java:13:17 -> XtendA.xtend:6\n" + 
 				"      void this;\n" + 
-				"      void _newArrayList;\n" + 
-				"      void _function;\n" + 
-				"      void _map;\n" + 
-				"      void _join;\n" + 
 				"    }\n" + 
 				"  }\n" + 
 				"  \n" + 
