@@ -118,9 +118,7 @@ public final class ToStringBuilder {
    */
   public ToStringBuilder(final Object instance) {
     this.instance = instance;
-    Class<?> _class = instance.getClass();
-    String _simpleName = _class.getSimpleName();
-    this.typeName = _simpleName;
+    this.typeName = instance.getClass().getSimpleName();
   }
   
   /**
@@ -218,9 +216,7 @@ public final class ToStringBuilder {
         ToStringBuilder _xblockexpression = null;
         {
           field.setAccessible(true);
-          String _name = field.getName();
-          Object _get = field.get(this.instance);
-          _xblockexpression = this.add(_name, _get);
+          _xblockexpression = this.add(field.getName(), field.get(this.instance));
         }
         _xifexpression = _xblockexpression;
       }
@@ -395,8 +391,7 @@ public final class ToStringBuilder {
         if (this.multiLine) {
           sb.newLine();
         }
-        Object _next = iterator.next();
-        this.internalToString(_next, sb);
+        this.internalToString(iterator.next(), sb);
         boolean _hasNext = iterator.hasNext();
         if (_hasNext) {
           sb.append(",");
@@ -428,8 +423,7 @@ public final class ToStringBuilder {
       {
         Field[] _declaredFields = current.getDeclaredFields();
         Iterables.<Field>addAll(result, ((Iterable<? extends Field>)Conversions.doWrapArray(_declaredFields)));
-        Class<?> _superclass = current.getSuperclass();
-        current = _superclass;
+        current = current.getSuperclass();
       }
     } while((current != null));
     return result;

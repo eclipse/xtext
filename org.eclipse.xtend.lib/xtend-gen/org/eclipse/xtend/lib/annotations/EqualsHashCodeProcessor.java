@@ -9,7 +9,6 @@ import org.eclipse.xtend.lib.macro.AbstractClassProcessor;
 import org.eclipse.xtend.lib.macro.TransformationContext;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
 import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.Element;
 import org.eclipse.xtend.lib.macro.declaration.FieldDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MethodDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
@@ -117,16 +116,11 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
     
     public void addEquals(final MutableClassDeclaration cls, final Iterable<? extends FieldDeclaration> includedFields, final boolean includeSuper) {
       final Procedure1<MutableMethodDeclaration> _function = (MutableMethodDeclaration it) -> {
-        Element _primarySourceElement = this.context.getPrimarySourceElement(cls);
-        this.context.setPrimarySourceElement(it, _primarySourceElement);
-        TypeReference _primitiveBoolean = this.context.getPrimitiveBoolean();
-        it.setReturnType(_primitiveBoolean);
-        AnnotationReference _newAnnotationReference = this.context.newAnnotationReference(Override.class);
-        it.addAnnotation(_newAnnotationReference);
-        AnnotationReference _newAnnotationReference_1 = this.context.newAnnotationReference(Pure.class);
-        it.addAnnotation(_newAnnotationReference_1);
-        TypeReference _object = this.context.getObject();
-        it.addParameter("obj", _object);
+        this.context.setPrimarySourceElement(it, this.context.getPrimarySourceElement(cls));
+        it.setReturnType(this.context.getPrimitiveBoolean());
+        it.addAnnotation(this.context.newAnnotationReference(Override.class));
+        it.addAnnotation(this.context.newAnnotationReference(Pure.class));
+        it.addParameter("obj", this.context.getObject());
         StringConcatenationClient _client = new StringConcatenationClient() {
           @Override
           protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -400,14 +394,10 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
     
     public void addHashCode(final MutableClassDeclaration cls, final Iterable<? extends FieldDeclaration> includedFields, final boolean includeSuper) {
       final Procedure1<MutableMethodDeclaration> _function = (MutableMethodDeclaration it) -> {
-        Element _primarySourceElement = this.context.getPrimarySourceElement(cls);
-        this.context.setPrimarySourceElement(it, _primarySourceElement);
-        TypeReference _primitiveInt = this.context.getPrimitiveInt();
-        it.setReturnType(_primitiveInt);
-        AnnotationReference _newAnnotationReference = this.context.newAnnotationReference(Override.class);
-        it.addAnnotation(_newAnnotationReference);
-        AnnotationReference _newAnnotationReference_1 = this.context.newAnnotationReference(Pure.class);
-        it.addAnnotation(_newAnnotationReference_1);
+        this.context.setPrimarySourceElement(it, this.context.getPrimarySourceElement(cls));
+        it.setReturnType(this.context.getPrimitiveInt());
+        it.addAnnotation(this.context.newAnnotationReference(Override.class));
+        it.addAnnotation(this.context.newAnnotationReference(Pure.class));
         StringConcatenationClient _client = new StringConcatenationClient() {
           @Override
           protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -647,8 +637,7 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
   
   @Override
   public void doTransform(final MutableClassDeclaration it, @Extension final TransformationContext context) {
-    Type _findTypeGlobally = context.findTypeGlobally(Data.class);
-    AnnotationReference _findAnnotation = it.findAnnotation(_findTypeGlobally);
+    AnnotationReference _findAnnotation = it.findAnnotation(context.findTypeGlobally(Data.class));
     boolean _tripleNotEquals = (_findAnnotation != null);
     if (_tripleNotEquals) {
       return;
@@ -657,8 +646,7 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
     final EqualsHashCodeProcessor.Util util = new EqualsHashCodeProcessor.Util(context);
     boolean _hasEquals = util.hasEquals(it);
     if (_hasEquals) {
-      Type _findTypeGlobally_1 = context.findTypeGlobally(EqualsHashCode.class);
-      final AnnotationReference annotation = it.findAnnotation(_findTypeGlobally_1);
+      final AnnotationReference annotation = it.findAnnotation(context.findTypeGlobally(EqualsHashCode.class));
       context.addWarning(annotation, "equals is already defined, this annotation has no effect");
     } else {
       boolean _hasHashCode = util.hasHashCode(it);
@@ -670,10 +658,8 @@ public class EqualsHashCodeProcessor extends AbstractClassProcessor {
           return Boolean.valueOf((((!it_1.isStatic()) && (!it_1.isTransient())) && context.isThePrimaryGeneratedJavaElement(it_1)));
         };
         final Iterable<? extends MutableFieldDeclaration> fields = IterableExtensions.filter(_declaredFields, _function);
-        boolean _hasSuperEquals = util.hasSuperEquals(it);
-        util.addEquals(it, fields, _hasSuperEquals);
-        boolean _hasSuperHashCode = util.hasSuperHashCode(it);
-        util.addHashCode(it, fields, _hasSuperHashCode);
+        util.addEquals(it, fields, util.hasSuperEquals(it));
+        util.addHashCode(it, fields, util.hasSuperHashCode(it));
       }
     }
   }

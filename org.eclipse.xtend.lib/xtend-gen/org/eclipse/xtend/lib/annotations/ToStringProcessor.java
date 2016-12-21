@@ -9,13 +9,11 @@ import org.eclipse.xtend.lib.macro.AbstractClassProcessor;
 import org.eclipse.xtend.lib.macro.TransformationContext;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
 import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.Element;
 import org.eclipse.xtend.lib.macro.declaration.FieldDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MethodDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.Type;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -55,8 +53,7 @@ public class ToStringProcessor extends AbstractClassProcessor {
     public ToStringConfiguration getToStringConfig(final ClassDeclaration it) {
       ToStringConfiguration _xblockexpression = null;
       {
-        Type _findTypeGlobally = this.context.findTypeGlobally(ToString.class);
-        final AnnotationReference anno = it.findAnnotation(_findTypeGlobally);
+        final AnnotationReference anno = it.findAnnotation(this.context.findTypeGlobally(ToString.class));
         ToStringConfiguration _xifexpression = null;
         if ((anno == null)) {
           _xifexpression = null;
@@ -70,14 +67,10 @@ public class ToStringProcessor extends AbstractClassProcessor {
     
     public void addReflectiveToString(final MutableClassDeclaration cls, final ToStringConfiguration config) {
       final Procedure1<MutableMethodDeclaration> _function = (MutableMethodDeclaration it) -> {
-        Element _primarySourceElement = this.context.getPrimarySourceElement(cls);
-        this.context.setPrimarySourceElement(it, _primarySourceElement);
-        TypeReference _string = this.context.getString();
-        it.setReturnType(_string);
-        AnnotationReference _newAnnotationReference = this.context.newAnnotationReference(Override.class);
-        it.addAnnotation(_newAnnotationReference);
-        AnnotationReference _newAnnotationReference_1 = this.context.newAnnotationReference(Pure.class);
-        it.addAnnotation(_newAnnotationReference_1);
+        this.context.setPrimarySourceElement(it, this.context.getPrimarySourceElement(cls));
+        it.setReturnType(this.context.getString());
+        it.addAnnotation(this.context.newAnnotationReference(Override.class));
+        it.addAnnotation(this.context.newAnnotationReference(Pure.class));
         StringConcatenationClient _client = new StringConcatenationClient() {
           @Override
           protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -134,14 +127,10 @@ public class ToStringProcessor extends AbstractClassProcessor {
     
     public void addToString(final MutableClassDeclaration cls, final Iterable<? extends FieldDeclaration> fields, final ToStringConfiguration config) {
       final Procedure1<MutableMethodDeclaration> _function = (MutableMethodDeclaration it) -> {
-        Element _primarySourceElement = this.context.getPrimarySourceElement(cls);
-        this.context.setPrimarySourceElement(it, _primarySourceElement);
-        TypeReference _string = this.context.getString();
-        it.setReturnType(_string);
-        AnnotationReference _newAnnotationReference = this.context.newAnnotationReference(Override.class);
-        it.addAnnotation(_newAnnotationReference);
-        AnnotationReference _newAnnotationReference_1 = this.context.newAnnotationReference(Pure.class);
-        it.addAnnotation(_newAnnotationReference_1);
+        this.context.setPrimarySourceElement(it, this.context.getPrimarySourceElement(cls));
+        it.setReturnType(this.context.getString());
+        it.addAnnotation(this.context.newAnnotationReference(Override.class));
+        it.addAnnotation(this.context.newAnnotationReference(Pure.class));
         StringConcatenationClient _client = new StringConcatenationClient() {
           @Override
           protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -202,16 +191,14 @@ public class ToStringProcessor extends AbstractClassProcessor {
   
   @Override
   public void doTransform(final MutableClassDeclaration it, @Extension final TransformationContext context) {
-    Type _findTypeGlobally = context.findTypeGlobally(Data.class);
-    AnnotationReference _findAnnotation = it.findAnnotation(_findTypeGlobally);
+    AnnotationReference _findAnnotation = it.findAnnotation(context.findTypeGlobally(Data.class));
     boolean _tripleNotEquals = (_findAnnotation != null);
     if (_tripleNotEquals) {
       return;
     }
     @Extension
     final ToStringProcessor.Util util = new ToStringProcessor.Util(context);
-    Type _findTypeGlobally_1 = context.findTypeGlobally(ToString.class);
-    final AnnotationReference annotation = it.findAnnotation(_findTypeGlobally_1);
+    final AnnotationReference annotation = it.findAnnotation(context.findTypeGlobally(ToString.class));
     final ToStringConfiguration configuration = new ToStringConfiguration(annotation);
     boolean _hasToString = util.hasToString(it);
     if (_hasToString) {
@@ -223,12 +210,9 @@ public class ToStringProcessor extends AbstractClassProcessor {
       if (_notEquals) {
         util.addReflectiveToString(it, configuration);
       } else {
-        Iterable<? extends MutableFieldDeclaration> _declaredFields = it.getDeclaredFields();
-        final Function1<MutableFieldDeclaration, Boolean> _function = (MutableFieldDeclaration it_1) -> {
+        util.addToString(it, IterableExtensions.filter(it.getDeclaredFields(), ((Function1<MutableFieldDeclaration, Boolean>) (MutableFieldDeclaration it_1) -> {
           return Boolean.valueOf(((context.isThePrimaryGeneratedJavaElement(it_1) && (!it_1.isStatic())) && (!it_1.isTransient())));
-        };
-        Iterable<? extends MutableFieldDeclaration> _filter = IterableExtensions.filter(_declaredFields, _function);
-        util.addToString(it, _filter, configuration);
+        })), configuration);
       }
     }
   }

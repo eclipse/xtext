@@ -16,7 +16,6 @@ import org.eclipse.xtend.lib.macro.TransformationContext;
 import org.eclipse.xtend.lib.macro.TransformationParticipant;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationTarget;
-import org.eclipse.xtend.lib.macro.declaration.Element;
 import org.eclipse.xtend.lib.macro.declaration.EnumerationValueDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.FieldDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MethodDeclaration;
@@ -26,7 +25,6 @@ import org.eclipse.xtend.lib.macro.declaration.MutableMemberDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.Type;
 import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend.lib.macro.declaration.Visibility;
@@ -156,8 +154,7 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
     }
     
     public AnnotationReference getAccessorsAnnotation(final AnnotationTarget it) {
-      Type _findTypeGlobally = this.context.findTypeGlobally(Accessors.class);
-      return it.findAnnotation(_findTypeGlobally);
+      return it.findAnnotation(this.context.findTypeGlobally(Accessors.class));
     }
     
     public Object validateGetter(final MutableFieldDeclaration field) {
@@ -204,13 +201,9 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
       MutableTypeDeclaration _declaringType = field.getDeclaringType();
       String _getterName = this.getGetterName(field);
       final Procedure1<MutableMethodDeclaration> _function = (MutableMethodDeclaration it) -> {
-        Element _primarySourceElement = this.context.getPrimarySourceElement(field);
-        this.context.setPrimarySourceElement(it, _primarySourceElement);
-        AnnotationReference _newAnnotationReference = this.context.newAnnotationReference(Pure.class);
-        it.addAnnotation(_newAnnotationReference);
-        TypeReference _type = field.getType();
-        TypeReference _orObject = this.orObject(_type);
-        it.setReturnType(_orObject);
+        this.context.setPrimarySourceElement(it, this.context.getPrimarySourceElement(field));
+        it.addAnnotation(this.context.newAnnotationReference(Pure.class));
+        it.setReturnType(this.orObject(field.getType()));
         StringConcatenationClient _client = new StringConcatenationClient() {
           @Override
           protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -224,8 +217,7 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
           }
         };
         it.setBody(_client);
-        boolean _isStatic = field.isStatic();
-        it.setStatic(_isStatic);
+        it.setStatic(field.isStatic());
         it.setVisibility(visibility);
       };
       _declaringType.addMethod(_getterName, _function);
@@ -312,14 +304,9 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
       MutableTypeDeclaration _declaringType = field.getDeclaringType();
       String _setterName = this.getSetterName(field);
       final Procedure1<MutableMethodDeclaration> _function = (MutableMethodDeclaration it) -> {
-        Element _primarySourceElement = this.context.getPrimarySourceElement(field);
-        this.context.setPrimarySourceElement(it, _primarySourceElement);
-        TypeReference _primitiveVoid = this.context.getPrimitiveVoid();
-        it.setReturnType(_primitiveVoid);
-        String _simpleName = field.getSimpleName();
-        TypeReference _type = field.getType();
-        TypeReference _orObject = this.orObject(_type);
-        final MutableParameterDeclaration param = it.addParameter(_simpleName, _orObject);
+        this.context.setPrimarySourceElement(it, this.context.getPrimarySourceElement(field));
+        it.setReturnType(this.context.getPrimitiveVoid());
+        final MutableParameterDeclaration param = it.addParameter(field.getSimpleName(), this.orObject(field.getType()));
         StringConcatenationClient _client = new StringConcatenationClient() {
           @Override
           protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -335,8 +322,7 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
           }
         };
         it.setBody(_client);
-        boolean _isStatic = field.isStatic();
-        it.setStatic(_isStatic);
+        it.setStatic(field.isStatic());
         it.setVisibility(visibility);
       };
       _declaringType.addMethod(_setterName, _function);
@@ -366,21 +352,16 @@ public class AccessorsProcessor implements TransformationParticipant<MutableMemb
     final AccessorsProcessor.Util util = new AccessorsProcessor.Util(context);
     boolean _shouldAddGetter = util.shouldAddGetter(it);
     if (_shouldAddGetter) {
-      AccessorType _getterType = util.getGetterType(it);
-      Visibility _visibility = util.toVisibility(_getterType);
-      util.addGetter(it, _visibility);
+      util.addGetter(it, util.toVisibility(util.getGetterType(it)));
     }
     boolean _shouldAddSetter = util.shouldAddSetter(it);
     if (_shouldAddSetter) {
-      AccessorType _setterType = util.getSetterType(it);
-      Visibility _visibility_1 = util.toVisibility(_setterType);
-      util.addSetter(it, _visibility_1);
+      util.addSetter(it, util.toVisibility(util.getSetterType(it)));
     }
   }
   
   protected void _transform(final MutableClassDeclaration it, @Extension final TransformationContext context) {
-    Type _findTypeGlobally = context.findTypeGlobally(Data.class);
-    AnnotationReference _findAnnotation = it.findAnnotation(_findTypeGlobally);
+    AnnotationReference _findAnnotation = it.findAnnotation(context.findTypeGlobally(Data.class));
     boolean _tripleNotEquals = (_findAnnotation != null);
     if (_tripleNotEquals) {
       return;
