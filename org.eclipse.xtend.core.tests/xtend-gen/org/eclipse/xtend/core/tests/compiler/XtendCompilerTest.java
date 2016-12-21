@@ -9364,7 +9364,10 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder.append("_builder.append(\"SomeString\");");
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("return _builder.toString();");
+    _builder.append("String _string = _builder.toString();");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("return _string;");
     _builder.newLine();
     _builder.append("  ");
     _builder.append("}");
@@ -9868,8 +9871,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
       _builder_2.append("}");
       _builder_2.newLine();
       final String expectedBazClass = _builder_2.toString();
-      String _string = input.toString();
-      final XtendFile file = this.file(_string, true);
+      final XtendFile file = this.file(input.toString(), true);
       Resource _eResource = file.eResource();
       EList<EObject> _contents = _eResource.getContents();
       Iterable<JvmDeclaredType> _filter = Iterables.<JvmDeclaredType>filter(_contents, JvmDeclaredType.class);
@@ -9880,17 +9882,15 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
       final JvmDeclaredType bazType = IterableExtensions.<JvmDeclaredType>last(_filter_1);
       final GeneratorConfig generatorConfig = this.generatorConfigProvider.get(barType);
       CharSequence barJavaCode = this.generator.generateType(barType, generatorConfig);
-      CharSequence _postProcess = this.postProcessor.postProcess(null, barJavaCode);
-      barJavaCode = _postProcess;
+      barJavaCode = this.postProcessor.postProcess(null, barJavaCode);
       CharSequence bazJavaCode = this.generator.generateType(bazType, generatorConfig);
-      CharSequence _postProcess_1 = this.postProcessor.postProcess(null, bazJavaCode);
-      bazJavaCode = _postProcess_1;
-      String _string_1 = expectedBarClass.toString();
-      String _string_2 = barJavaCode.toString();
-      XtendCompilerTest.assertEquals(_string_1, _string_2);
-      String _string_3 = expectedBazClass.toString();
-      String _string_4 = bazJavaCode.toString();
-      XtendCompilerTest.assertEquals(_string_3, _string_4);
+      bazJavaCode = this.postProcessor.postProcess(null, bazJavaCode);
+      String _string = expectedBarClass.toString();
+      String _string_1 = barJavaCode.toString();
+      XtendCompilerTest.assertEquals(_string, _string_1);
+      String _string_2 = expectedBazClass.toString();
+      String _string_3 = bazJavaCode.toString();
+      XtendCompilerTest.assertEquals(_string_2, _string_3);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

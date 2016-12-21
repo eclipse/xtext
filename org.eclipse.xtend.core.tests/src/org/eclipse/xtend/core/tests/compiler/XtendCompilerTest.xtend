@@ -4203,7 +4203,8 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 				  public String test() {
 				    StringConcatenation _builder = new StringConcatenation();
 				    _builder.append("SomeString");
-				    return _builder.toString();
+				    String _string = _builder.toString();
+				    return _string;
 				  }
 				}
 			''')

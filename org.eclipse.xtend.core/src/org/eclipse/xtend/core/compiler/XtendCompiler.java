@@ -47,6 +47,7 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XListLiteral;
+import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XStringLiteral;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage;
@@ -584,6 +585,10 @@ public class XtendCompiler extends XbaseCompiler {
 					}
 				}
 			}
+		}
+		if (!result && expr instanceof XMemberFeatureCall && 
+				((XMemberFeatureCall)expr).getMemberCallTarget() instanceof RichString) {
+			return true;
 		}
 		return result;
 	}
