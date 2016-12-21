@@ -20,4 +20,9 @@ p2gen {
 	dependencies {
 		repositoryUrl 'http://download.eclipse.org/releases/luna/201502271000/'
 	}
+	dependencies {
+		repositoryUrl 'http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/'
+		bundle 'org.junit'
+		includeSource true
+	}
 }

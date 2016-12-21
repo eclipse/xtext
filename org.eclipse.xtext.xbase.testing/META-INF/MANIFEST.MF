@@ -9,7 +9,7 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Require-Bundle: org.eclipse.xtext,
  org.eclipse.xtext.xbase,
  org.eclipse.jdt.core;bundle-version="3.6.0",
- org.junit;bundle-version="4.11.0"
+ org.junit;bundle-version="4.12.0"
 Bundle-ActivationPolicy: lazy
 Export-Package: org.eclipse.xtext.xbase.testing
 Import-Package: org.apache.log4j;version="1.2.15"
