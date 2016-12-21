@@ -129,41 +129,24 @@ public class TraceRegionMergerTest {
       TraceRegionMergerTest.AssertBuilder _xblockexpression = null;
       {
         final AbstractTraceRegion head = this.regions.poll();
-        String _string = head.toString();
-        int _myOffset = head.getMyOffset();
-        Assert.assertEquals(_string, offset, _myOffset);
-        String _string_1 = head.toString();
-        int _myLength = head.getMyLength();
-        Assert.assertEquals(_string_1, length, _myLength);
-        String _string_2 = head.toString();
-        int _myLineNumber = head.getMyLineNumber();
-        Assert.assertEquals(_string_2, startLine, _myLineNumber);
-        String _string_3 = head.toString();
-        int _myEndLineNumber = head.getMyEndLineNumber();
-        Assert.assertEquals(_string_3, endLine, _myEndLineNumber);
+        Assert.assertEquals(head.toString(), offset, head.getMyOffset());
+        Assert.assertEquals(head.toString(), length, head.getMyLength());
+        Assert.assertEquals(head.toString(), startLine, head.getMyLineNumber());
+        Assert.assertEquals(head.toString(), endLine, head.getMyEndLineNumber());
         List<ILocationData> _associatedLocations = head.getAssociatedLocations();
         final Function1<ILocationData, SourceRelativeURI> _function = (ILocationData it) -> {
           return it.getSrcRelativePath();
         };
         List<SourceRelativeURI> _map = ListExtensions.<ILocationData, SourceRelativeURI>map(_associatedLocations, _function);
         final Set<SourceRelativeURI> associatedLocations = IterableExtensions.<SourceRelativeURI>toSet(_map);
-        String _string_4 = head.toString();
-        int _length = ((Object[])Conversions.unwrapArray(uris, Object.class)).length;
-        int _length_1 = ((Object[])Conversions.unwrapArray(associatedLocations, Object.class)).length;
-        Assert.assertEquals(_string_4, _length, _length_1);
+        Assert.assertEquals(head.toString(), ((Object[])Conversions.unwrapArray(uris, Object.class)).length, ((Object[])Conversions.unwrapArray(associatedLocations, Object.class)).length);
         for (final String uri : uris) {
-          URI _createURI = URI.createURI(uri);
-          SourceRelativeURI _sourceRelativeURI = new SourceRelativeURI(_createURI);
-          boolean _contains = associatedLocations.contains(_sourceRelativeURI);
-          Assert.assertTrue(("Missing " + uri), _contains);
+          Assert.assertTrue(("Missing " + uri), associatedLocations.contains(new SourceRelativeURI(URI.createURI(uri))));
         }
         if ((init == null)) {
-          List<AbstractTraceRegion> _nestedRegions = head.getNestedRegions();
-          boolean _isEmpty = _nestedRegions.isEmpty();
-          Assert.assertTrue(_isEmpty);
+          Assert.assertTrue(head.getNestedRegions().isEmpty());
         } else {
-          List<AbstractTraceRegion> _nestedRegions_1 = head.getNestedRegions();
-          LinkedList<AbstractTraceRegion> _newLinkedList = CollectionLiterals.<AbstractTraceRegion>newLinkedList(((AbstractTraceRegion[])Conversions.unwrapArray(_nestedRegions_1, AbstractTraceRegion.class)));
+          LinkedList<AbstractTraceRegion> _newLinkedList = CollectionLiterals.<AbstractTraceRegion>newLinkedList(((AbstractTraceRegion[])Conversions.unwrapArray(head.getNestedRegions(), AbstractTraceRegion.class)));
           final TraceRegionMergerTest.AssertBuilder child = new TraceRegionMergerTest.AssertBuilder(this.testBuilder, _newLinkedList);
           init.apply(child);
           child.thatsIt();
@@ -174,9 +157,7 @@ public class TraceRegionMergerTest {
     }
     
     public void thatsIt() {
-      String _string = this.regions.toString();
-      boolean _isEmpty = this.regions.isEmpty();
-      Assert.assertTrue(_string, _isEmpty);
+      Assert.assertTrue(this.regions.toString(), this.regions.isEmpty());
     }
     
     public AssertBuilder(final TraceRegionMergerTest.TestBuilder testBuilder, final Queue<AbstractTraceRegion> regions) {

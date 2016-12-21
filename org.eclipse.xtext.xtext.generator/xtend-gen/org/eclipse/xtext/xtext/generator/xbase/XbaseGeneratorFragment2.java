@@ -140,12 +140,10 @@ public class XbaseGeneratorFragment2 extends AbstractXtextGeneratorFragment {
     }
     IXtextGeneratorLanguage _language = this.getLanguage();
     GuiceModuleAccess _ideGenModule = _language.getIdeGenModule();
-    TypeReference _typeRef = TypeReference.typeRef("org.eclipse.xtext.xbase.ide.DefaultXbaseIdeModule");
-    _ideGenModule.setSuperClass(_typeRef);
+    _ideGenModule.setSuperClass(TypeReference.typeRef("org.eclipse.xtext.xbase.ide.DefaultXbaseIdeModule"));
     IXtextGeneratorLanguage _language_1 = this.getLanguage();
     GuiceModuleAccess _webGenModule = _language_1.getWebGenModule();
-    TypeReference _typeRef_1 = TypeReference.typeRef("org.eclipse.xtext.xbase.web.DefaultXbaseWebModule");
-    _webGenModule.setSuperClass(_typeRef_1);
+    _webGenModule.setSuperClass(TypeReference.typeRef("org.eclipse.xtext.xbase.web.DefaultXbaseWebModule"));
   }
   
   protected void contributeRuntimeGuiceBindings() {
@@ -191,13 +189,11 @@ public class XbaseGeneratorFragment2 extends AbstractXtextGeneratorFragment {
     if (_inheritsXbaseWithAnnotations) {
       IXtextGeneratorLanguage _language_2 = this.getLanguage();
       GuiceModuleAccess _runtimeGenModule_1 = _language_2.getRuntimeGenModule();
-      TypeReference _typeRef_17 = TypeReference.typeRef("org.eclipse.xtext.xbase.annotations.DefaultXbaseWithAnnotationsRuntimeModule");
-      _runtimeGenModule_1.setSuperClass(_typeRef_17);
+      _runtimeGenModule_1.setSuperClass(TypeReference.typeRef("org.eclipse.xtext.xbase.annotations.DefaultXbaseWithAnnotationsRuntimeModule"));
     } else {
       IXtextGeneratorLanguage _language_3 = this.getLanguage();
       GuiceModuleAccess _runtimeGenModule_2 = _language_3.getRuntimeGenModule();
-      TypeReference _typeRef_18 = TypeReference.typeRef("org.eclipse.xtext.xbase.DefaultXbaseRuntimeModule");
-      _runtimeGenModule_2.setSuperClass(_typeRef_18);
+      _runtimeGenModule_2.setSuperClass(TypeReference.typeRef("org.eclipse.xtext.xbase.DefaultXbaseRuntimeModule"));
     }
   }
   
@@ -304,13 +300,11 @@ public class XbaseGeneratorFragment2 extends AbstractXtextGeneratorFragment {
     if (_inheritsXbaseWithAnnotations) {
       IXtextGeneratorLanguage _language_3 = this.getLanguage();
       GuiceModuleAccess _eclipsePluginGenModule_1 = _language_3.getEclipsePluginGenModule();
-      TypeReference _typeRef_29 = TypeReference.typeRef("org.eclipse.xtext.xbase.annotations.ui.DefaultXbaseWithAnnotationsUiModule");
-      _eclipsePluginGenModule_1.setSuperClass(_typeRef_29);
+      _eclipsePluginGenModule_1.setSuperClass(TypeReference.typeRef("org.eclipse.xtext.xbase.annotations.ui.DefaultXbaseWithAnnotationsUiModule"));
     } else {
       IXtextGeneratorLanguage _language_4 = this.getLanguage();
       GuiceModuleAccess _eclipsePluginGenModule_2 = _language_4.getEclipsePluginGenModule();
-      TypeReference _typeRef_30 = TypeReference.typeRef("org.eclipse.xtext.xbase.ui.DefaultXbaseUiModule");
-      _eclipsePluginGenModule_2.setSuperClass(_typeRef_30);
+      _eclipsePluginGenModule_2.setSuperClass(TypeReference.typeRef("org.eclipse.xtext.xbase.ui.DefaultXbaseUiModule"));
     }
   }
   

@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.tasks;
 
-import org.eclipse.xtext.tasks.Priority;
 import org.eclipse.xtext.tasks.Task;
 import org.eclipse.xtext.tasks.TaskTag;
 import org.junit.Assert;
@@ -18,26 +17,14 @@ import org.junit.Assert;
 @SuppressWarnings("all")
 public class TaskAssert {
   public static void assertExactMatch(final Task expected, final Task actual) {
-    TaskTag _tag = expected.getTag();
-    TaskTag _tag_1 = actual.getTag();
-    TaskAssert.assertExactMatch(_tag, _tag_1);
-    String _description = expected.getDescription();
-    String _description_1 = actual.getDescription();
-    Assert.assertEquals(_description, _description_1);
-    int _lineNumber = expected.getLineNumber();
-    int _lineNumber_1 = actual.getLineNumber();
-    Assert.assertEquals(_lineNumber, _lineNumber_1);
-    int _offset = expected.getOffset();
-    int _offset_1 = actual.getOffset();
-    Assert.assertEquals(_offset, _offset_1);
+    TaskAssert.assertExactMatch(expected.getTag(), actual.getTag());
+    Assert.assertEquals(expected.getDescription(), actual.getDescription());
+    Assert.assertEquals(expected.getLineNumber(), actual.getLineNumber());
+    Assert.assertEquals(expected.getOffset(), actual.getOffset());
   }
   
   public static void assertExactMatch(final TaskTag expected, final TaskTag actual) {
-    String _name = expected.getName();
-    String _name_1 = actual.getName();
-    Assert.assertEquals(_name, _name_1);
-    Priority _priority = expected.getPriority();
-    Priority _priority_1 = actual.getPriority();
-    Assert.assertEquals(_priority, _priority_1);
+    Assert.assertEquals(expected.getName(), actual.getName());
+    Assert.assertEquals(expected.getPriority(), actual.getPriority());
   }
 }

@@ -525,9 +525,7 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
     }
     final TypeReference superClazz = _xifexpression_1;
     final GeneratedJavaFileAccess javaFile = this.fileAccessFactory.createGeneratedJavaFile(clazz);
-    IXtextGeneratorLanguage _language = this.getLanguage();
-    ResourceSet _resourceSet = _language.getResourceSet();
-    javaFile.setResourceSet(_resourceSet);
+    javaFile.setResourceSet(this.getLanguage().getResourceSet());
     final HashSet<Pair<String, EClass>> methodSignatures = CollectionLiterals.<Pair<String, EClass>>newHashSet();
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
@@ -850,18 +848,12 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
                     }
                   }
                   _builder.append("if (");
-                  Map.Entry<IGrammarConstraintProvider.IConstraint, List<ISerializationContext>> _value = ctx.getValue();
-                  List<ISerializationContext> _value_1 = _value.getValue();
-                  Map.Entry<IGrammarConstraintProvider.IConstraint, List<ISerializationContext>> _value_2 = ctx.getValue();
-                  IGrammarConstraintProvider.IConstraint _key_1 = _value_2.getKey();
-                  StringConcatenationClient _genCondition = SerializerFragment2.this.genCondition(_value_1, _key_1, context2constraint);
+                  StringConcatenationClient _genCondition = SerializerFragment2.this.genCondition(ctx.getValue().getValue(), ctx.getValue().getKey(), context2constraint);
                   _builder.append(_genCondition);
                   _builder.append(") {");
                   _builder.newLineIfNotEmpty();
                   _builder.append("\t");
-                  Map.Entry<IGrammarConstraintProvider.IConstraint, List<ISerializationContext>> _value_3 = ctx.getValue();
-                  IGrammarConstraintProvider.IConstraint _key_2 = _value_3.getKey();
-                  StringConcatenationClient _genMethodCreateSequenceCall = SerializerFragment2.this.genMethodCreateSequenceCall(superConstraints, type, _key_2);
+                  StringConcatenationClient _genMethodCreateSequenceCall = SerializerFragment2.this.genMethodCreateSequenceCall(superConstraints, type, ctx.getValue().getKey());
                   _builder.append(_genMethodCreateSequenceCall, "\t");
                   _builder.newLineIfNotEmpty();
                   _builder.append("}");
@@ -874,9 +866,7 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
               int _size_1 = contexts.size();
               boolean _equals = (_size_1 == 1);
               if (_equals) {
-                Map.Entry<IGrammarConstraintProvider.IConstraint, List<ISerializationContext>> _head = IterableExtensions.<Map.Entry<IGrammarConstraintProvider.IConstraint, List<ISerializationContext>>>head(contexts);
-                IGrammarConstraintProvider.IConstraint _key_3 = _head.getKey();
-                StringConcatenationClient _genMethodCreateSequenceCall_1 = SerializerFragment2.this.genMethodCreateSequenceCall(superConstraints, type, _key_3);
+                StringConcatenationClient _genMethodCreateSequenceCall_1 = SerializerFragment2.this.genMethodCreateSequenceCall(superConstraints, type, IterableExtensions.<Map.Entry<IGrammarConstraintProvider.IConstraint, List<ISerializationContext>>>head(contexts).getKey());
                 _builder.append(_genMethodCreateSequenceCall_1);
                 _builder.newLineIfNotEmpty();
               } else {
@@ -1330,9 +1320,7 @@ public class SerializerFragment2 extends AbstractStubGeneratingFragment {
     }
     final TypeReference clazz = _xifexpression;
     final GeneratedJavaFileAccess javaFile = this.fileAccessFactory.createGeneratedJavaFile(clazz);
-    IXtextGeneratorLanguage _language = this.getLanguage();
-    ResourceSet _resourceSet = _language.getResourceSet();
-    javaFile.setResourceSet(_resourceSet);
+    javaFile.setResourceSet(this.getLanguage().getResourceSet());
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {

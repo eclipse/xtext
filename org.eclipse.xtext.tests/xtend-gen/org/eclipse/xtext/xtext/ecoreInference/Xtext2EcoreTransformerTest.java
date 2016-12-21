@@ -49,7 +49,6 @@ import org.eclipse.xtext.util.OnChangeEvictingCache;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xtext.XtextLinker;
-import org.eclipse.xtext.xtext.ecoreInference.EClassifierInfo;
 import org.eclipse.xtext.xtext.ecoreInference.EClassifierInfos;
 import org.eclipse.xtext.xtext.ecoreInference.ErrorAcceptor;
 import org.eclipse.xtext.xtext.ecoreInference.IXtext2EcorePostProcessor;
@@ -130,8 +129,7 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
   
   private EPackage getEPackageFromGrammar(final String xtextGrammar, final int expectedErrors) throws Exception {
     final List<EPackage> metamodels = this.getEPackagesFromGrammar(xtextGrammar, expectedErrors);
-    int _size = metamodels.size();
-    Assert.assertEquals(1, _size);
+    Assert.assertEquals(1, metamodels.size());
     final EPackage result = IterableExtensions.<EPackage>head(metamodels);
     Assert.assertNotNull(result);
     return result;
@@ -194,41 +192,28 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
   private EAttribute assertAttributeConfiguration(final EClass eClass, final int attributeIndex, final String featureName, final String featureTypeName) {
     EList<EAttribute> _eAttributes = eClass.getEAttributes();
     final EAttribute feature = _eAttributes.get(attributeIndex);
-    String _name = feature.getName();
-    Assert.assertEquals(featureName, _name);
-    EClassifier _eType = feature.getEType();
-    Assert.assertNotNull(_eType);
-    EClassifier _eType_1 = feature.getEType();
-    String _name_1 = _eType_1.getName();
-    Assert.assertEquals(featureTypeName, _name_1);
+    Assert.assertEquals(featureName, feature.getName());
+    Assert.assertNotNull(feature.getEType());
+    Assert.assertEquals(featureTypeName, feature.getEType().getName());
     return feature;
   }
   
   private EAttribute assertAttributeConfiguration(final EClass eClass, final int attributeIndex, final String featureName, final String featureTypeName, final int lowerBound, final int upperBound) {
     final EAttribute feature = this.assertAttributeConfiguration(eClass, attributeIndex, featureName, featureTypeName);
-    int _lowerBound = feature.getLowerBound();
-    Assert.assertEquals(lowerBound, _lowerBound);
-    int _upperBound = feature.getUpperBound();
-    Assert.assertEquals(upperBound, _upperBound);
+    Assert.assertEquals(lowerBound, feature.getLowerBound());
+    Assert.assertEquals(upperBound, feature.getUpperBound());
     return feature;
   }
   
   private EReference assertReferenceConfiguration(final EClass eClass, final int referenceIndex, final String featureName, final String featureTypeName, final boolean isContainment, final int lowerBound, final int upperBound) {
     EList<EReference> _eReferences = eClass.getEReferences();
     final EReference reference = _eReferences.get(referenceIndex);
-    String _name = reference.getName();
-    Assert.assertEquals(featureName, _name);
-    EClassifier _eType = reference.getEType();
-    Assert.assertNotNull(_eType);
-    EClassifier _eType_1 = reference.getEType();
-    String _name_1 = _eType_1.getName();
-    Assert.assertEquals(featureTypeName, _name_1);
-    boolean _isContainment = reference.isContainment();
-    Assert.assertEquals(Boolean.valueOf(isContainment), Boolean.valueOf(_isContainment));
-    int _lowerBound = reference.getLowerBound();
-    Assert.assertEquals(lowerBound, _lowerBound);
-    int _upperBound = reference.getUpperBound();
-    Assert.assertEquals(upperBound, _upperBound);
+    Assert.assertEquals(featureName, reference.getName());
+    Assert.assertNotNull(reference.getEType());
+    Assert.assertEquals(featureTypeName, reference.getEType().getName());
+    Assert.assertEquals(Boolean.valueOf(isContainment), Boolean.valueOf(reference.isContainment()));
+    Assert.assertEquals(lowerBound, reference.getLowerBound());
+    Assert.assertEquals(upperBound, reference.getUpperBound());
     return reference;
   }
   
@@ -244,11 +229,9 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     final String grammar = _builder.toString();
     EPackage ePackage = this.getEPackageFromGrammar(grammar);
     final EList<EClassifier> classifiers = ePackage.getEClassifiers();
-    int _size = classifiers.size();
-    Assert.assertEquals(1, _size);
+    Assert.assertEquals(1, classifiers.size());
     final EClassifier myRuleType = IterableExtensions.<EClassifier>head(classifiers);
-    String _name = myRuleType.getName();
-    Assert.assertEquals("MyRule", _name);
+    Assert.assertEquals("MyRule", myRuleType.getName());
   }
   
   @Test
@@ -267,17 +250,10 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     final String grammar = _builder.toString();
     EPackage ePackage = this.getEPackageFromGrammar(grammar);
     final EList<EClassifier> classifiers = ePackage.getEClassifiers();
-    int _size = classifiers.size();
-    Assert.assertEquals(3, _size);
-    EClassifier _get = classifiers.get(0);
-    String _name = _get.getName();
-    Assert.assertEquals("RootRule", _name);
-    EClassifier _get_1 = classifiers.get(1);
-    String _name_1 = _get_1.getName();
-    Assert.assertEquals("Sub1", _name_1);
-    EClassifier _get_2 = classifiers.get(2);
-    String _name_2 = _get_2.getName();
-    Assert.assertEquals("Sub2", _name_2);
+    Assert.assertEquals(3, classifiers.size());
+    Assert.assertEquals("RootRule", classifiers.get(0).getName());
+    Assert.assertEquals("Sub1", classifiers.get(1).getName());
+    Assert.assertEquals("Sub2", classifiers.get(2).getName());
   }
   
   @Test
@@ -294,15 +270,10 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     final String grammar = _builder.toString();
     EPackage ePackage = this.getEPackageFromGrammar(grammar);
     final EList<EClassifier> classifiers = ePackage.getEClassifiers();
-    int _size = classifiers.size();
-    Assert.assertEquals(1, _size);
+    Assert.assertEquals(1, classifiers.size());
     final EClassifier myRuleType = IterableExtensions.<EClassifier>head(classifiers);
-    String _name = myRuleType.getName();
-    Assert.assertEquals("MyRule", _name);
-    EStructuralFeature _feature = this.<EStructuralFeature>feature(myRuleType, "myFeature");
-    EClassifier _eType = _feature.getEType();
-    String _name_1 = _eType.getName();
-    Assert.assertEquals("EInt", _name_1);
+    Assert.assertEquals("MyRule", myRuleType.getName());
+    Assert.assertEquals("EInt", this.<EStructuralFeature>feature(myRuleType, "myFeature").getEType().getName());
   }
   
   @Test
@@ -319,22 +290,13 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     final String grammar = _builder.toString();
     EPackage ePackage = this.getEPackageFromGrammar(grammar);
     final EList<EClassifier> classifiers = ePackage.getEClassifiers();
-    int _size = classifiers.size();
-    Assert.assertEquals(2, _size);
+    Assert.assertEquals(2, classifiers.size());
     final EClassifier myRuleType = IterableExtensions.<EClassifier>head(classifiers);
-    String _name = myRuleType.getName();
-    Assert.assertEquals("MyRule", _name);
-    List<? extends EStructuralFeature> _features = this.features(myRuleType);
-    boolean _isEmpty = _features.isEmpty();
-    Assert.assertTrue(_isEmpty);
+    Assert.assertEquals("MyRule", myRuleType.getName());
+    Assert.assertTrue(this.features(myRuleType).isEmpty());
     final EClassifier intFeatureHolder = IterableExtensions.<EClassifier>last(classifiers);
-    EStructuralFeature _feature = this.<EStructuralFeature>feature(intFeatureHolder, "myFeature");
-    EClassifier _eType = _feature.getEType();
-    String _name_1 = _eType.getName();
-    Assert.assertEquals("EInt", _name_1);
-    List<EClass> _superTypes = this.superTypes(myRuleType);
-    boolean _contains = _superTypes.contains(intFeatureHolder);
-    Assert.assertTrue(_contains);
+    Assert.assertEquals("EInt", this.<EStructuralFeature>feature(intFeatureHolder, "myFeature").getEType().getName());
+    Assert.assertTrue(this.superTypes(myRuleType).contains(intFeatureHolder));
   }
   
   @Test
@@ -353,30 +315,16 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     final String grammar = _builder.toString();
     EPackage ePackage = this.getEPackageFromGrammar(grammar);
     final EList<EClassifier> classifiers = ePackage.getEClassifiers();
-    int _size = classifiers.size();
-    Assert.assertEquals(3, _size);
+    Assert.assertEquals(3, classifiers.size());
     final EClassifier myRuleType = IterableExtensions.<EClassifier>head(classifiers);
-    String _name = myRuleType.getName();
-    Assert.assertEquals("MyRule", _name);
-    List<? extends EStructuralFeature> _features = this.features(myRuleType);
-    boolean _isEmpty = _features.isEmpty();
-    Assert.assertTrue(_isEmpty);
+    Assert.assertEquals("MyRule", myRuleType.getName());
+    Assert.assertTrue(this.features(myRuleType).isEmpty());
     final EClassifier intFeatureHolder = classifiers.get(1);
-    EStructuralFeature _feature = this.<EStructuralFeature>feature(intFeatureHolder, "myFeature");
-    EClassifier _eType = _feature.getEType();
-    String _name_1 = _eType.getName();
-    Assert.assertEquals("EInt", _name_1);
-    List<EClass> _superTypes = this.superTypes(myRuleType);
-    boolean _contains = _superTypes.contains(intFeatureHolder);
-    Assert.assertTrue(_contains);
+    Assert.assertEquals("EInt", this.<EStructuralFeature>feature(intFeatureHolder, "myFeature").getEType().getName());
+    Assert.assertTrue(this.superTypes(myRuleType).contains(intFeatureHolder));
     final EClassifier nameFeatureHolder = IterableExtensions.<EClassifier>last(classifiers);
-    EStructuralFeature _feature_1 = this.<EStructuralFeature>feature(nameFeatureHolder, "name");
-    EClassifier _eType_1 = _feature_1.getEType();
-    String _name_2 = _eType_1.getName();
-    Assert.assertEquals("EString", _name_2);
-    List<EClass> _superTypes_1 = this.superTypes(intFeatureHolder);
-    boolean _contains_1 = _superTypes_1.contains(nameFeatureHolder);
-    Assert.assertTrue(_contains_1);
+    Assert.assertEquals("EString", this.<EStructuralFeature>feature(nameFeatureHolder, "name").getEType().getName());
+    Assert.assertTrue(this.superTypes(intFeatureHolder).contains(nameFeatureHolder));
   }
   
   @Test
@@ -397,30 +345,16 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     final String grammar = _builder.toString();
     EPackage ePackage = this.getEPackageFromGrammar(grammar);
     final EList<EClassifier> classifiers = ePackage.getEClassifiers();
-    int _size = classifiers.size();
-    Assert.assertEquals(3, _size);
+    Assert.assertEquals(3, classifiers.size());
     final EClassifier myRuleType = IterableExtensions.<EClassifier>head(classifiers);
-    String _name = myRuleType.getName();
-    Assert.assertEquals("MyRule", _name);
-    List<? extends EStructuralFeature> _features = this.features(myRuleType);
-    boolean _isEmpty = _features.isEmpty();
-    Assert.assertTrue(_isEmpty);
+    Assert.assertEquals("MyRule", myRuleType.getName());
+    Assert.assertTrue(this.features(myRuleType).isEmpty());
     final EClassifier intFeatureHolder = classifiers.get(1);
-    EStructuralFeature _feature = this.<EStructuralFeature>feature(intFeatureHolder, "myFeature");
-    EClassifier _eType = _feature.getEType();
-    String _name_1 = _eType.getName();
-    Assert.assertEquals("EInt", _name_1);
-    List<? extends EStructuralFeature> _features_1 = this.features(intFeatureHolder);
-    int _size_1 = _features_1.size();
-    Assert.assertEquals(1, _size_1);
+    Assert.assertEquals("EInt", this.<EStructuralFeature>feature(intFeatureHolder, "myFeature").getEType().getName());
+    Assert.assertEquals(1, this.features(intFeatureHolder).size());
     final EClassifier nameFeatureHolder = IterableExtensions.<EClassifier>last(classifiers);
-    EStructuralFeature _feature_1 = this.<EStructuralFeature>feature(nameFeatureHolder, "name");
-    EClassifier _eType_1 = _feature_1.getEType();
-    String _name_2 = _eType_1.getName();
-    Assert.assertEquals("EString", _name_2);
-    List<? extends EStructuralFeature> _features_2 = this.features(nameFeatureHolder);
-    int _size_2 = _features_2.size();
-    Assert.assertEquals(2, _size_2);
+    Assert.assertEquals("EString", this.<EStructuralFeature>feature(nameFeatureHolder, "name").getEType().getName());
+    Assert.assertEquals(2, this.features(nameFeatureHolder).size());
   }
   
   @Test
@@ -437,30 +371,16 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     final String grammar = _builder.toString();
     EPackage ePackage = this.getEPackageFromGrammar(grammar);
     final EList<EClassifier> classifiers = ePackage.getEClassifiers();
-    int _size = classifiers.size();
-    Assert.assertEquals(3, _size);
+    Assert.assertEquals(3, classifiers.size());
     final EClassifier middleType = IterableExtensions.<EClassifier>head(classifiers);
-    String _name = middleType.getName();
-    Assert.assertEquals("Middle", _name);
-    List<? extends EStructuralFeature> _features = this.features(middleType);
-    boolean _isEmpty = _features.isEmpty();
-    Assert.assertTrue(_isEmpty);
+    Assert.assertEquals("Middle", middleType.getName());
+    Assert.assertTrue(this.features(middleType).isEmpty());
     final EClassifier topType = classifiers.get(1);
-    EStructuralFeature _feature = this.<EStructuralFeature>feature(topType, "name");
-    EClassifier _eType = _feature.getEType();
-    String _name_1 = _eType.getName();
-    Assert.assertEquals("EString", _name_1);
-    List<EClass> _superTypes = this.superTypes(middleType);
-    boolean _contains = _superTypes.contains(topType);
-    Assert.assertTrue(_contains);
+    Assert.assertEquals("EString", this.<EStructuralFeature>feature(topType, "name").getEType().getName());
+    Assert.assertTrue(this.superTypes(middleType).contains(topType));
     final EClassifier bottomType = IterableExtensions.<EClassifier>last(classifiers);
-    EStructuralFeature _feature_1 = this.<EStructuralFeature>feature(bottomType, "prev");
-    EClassifier _eType_1 = _feature_1.getEType();
-    String _name_2 = _eType_1.getName();
-    Assert.assertEquals("Top", _name_2);
-    List<EClass> _superTypes_1 = this.superTypes(bottomType);
-    boolean _contains_1 = _superTypes_1.contains(middleType);
-    Assert.assertTrue(_contains_1);
+    Assert.assertEquals("Top", this.<EStructuralFeature>feature(bottomType, "prev").getEType().getName());
+    Assert.assertTrue(this.superTypes(bottomType).contains(middleType));
   }
   
   @Test
@@ -479,42 +399,21 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     final String grammar = _builder.toString();
     EPackage ePackage = this.getEPackageFromGrammar(grammar);
     final EList<EClassifier> classifiers = ePackage.getEClassifiers();
-    int _size = classifiers.size();
-    Assert.assertEquals(4, _size);
+    Assert.assertEquals(4, classifiers.size());
     final EClassifier middleType1 = IterableExtensions.<EClassifier>head(classifiers);
-    String _name = middleType1.getName();
-    Assert.assertEquals("Middle1", _name);
-    List<? extends EStructuralFeature> _features = this.features(middleType1);
-    boolean _isEmpty = _features.isEmpty();
-    Assert.assertTrue(_isEmpty);
+    Assert.assertEquals("Middle1", middleType1.getName());
+    Assert.assertTrue(this.features(middleType1).isEmpty());
     final EClassifier middleType2 = classifiers.get(1);
-    String _name_1 = middleType2.getName();
-    Assert.assertEquals("Middle2", _name_1);
-    List<? extends EStructuralFeature> _features_1 = this.features(middleType2);
-    boolean _isEmpty_1 = _features_1.isEmpty();
-    Assert.assertTrue(_isEmpty_1);
+    Assert.assertEquals("Middle2", middleType2.getName());
+    Assert.assertTrue(this.features(middleType2).isEmpty());
     final EClassifier topType = classifiers.get(2);
-    EStructuralFeature _feature = this.<EStructuralFeature>feature(topType, "name");
-    EClassifier _eType = _feature.getEType();
-    String _name_2 = _eType.getName();
-    Assert.assertEquals("EString", _name_2);
-    List<EClass> _superTypes = this.superTypes(middleType1);
-    boolean _contains = _superTypes.contains(topType);
-    Assert.assertTrue(_contains);
-    List<EClass> _superTypes_1 = this.superTypes(middleType2);
-    boolean _contains_1 = _superTypes_1.contains(topType);
-    Assert.assertTrue(_contains_1);
+    Assert.assertEquals("EString", this.<EStructuralFeature>feature(topType, "name").getEType().getName());
+    Assert.assertTrue(this.superTypes(middleType1).contains(topType));
+    Assert.assertTrue(this.superTypes(middleType2).contains(topType));
     final EClassifier bottomType = IterableExtensions.<EClassifier>last(classifiers);
-    EStructuralFeature _feature_1 = this.<EStructuralFeature>feature(bottomType, "prev");
-    EClassifier _eType_1 = _feature_1.getEType();
-    String _name_3 = _eType_1.getName();
-    Assert.assertEquals("Top", _name_3);
-    List<EClass> _superTypes_2 = this.superTypes(bottomType);
-    boolean _contains_2 = _superTypes_2.contains(middleType1);
-    Assert.assertTrue(_contains_2);
-    List<EClass> _superTypes_3 = this.superTypes(bottomType);
-    boolean _contains_3 = _superTypes_3.contains(middleType2);
-    Assert.assertTrue(_contains_3);
+    Assert.assertEquals("Top", this.<EStructuralFeature>feature(bottomType, "prev").getEType().getName());
+    Assert.assertTrue(this.superTypes(bottomType).contains(middleType1));
+    Assert.assertTrue(this.superTypes(bottomType).contains(middleType2));
   }
   
   @Test
@@ -533,42 +432,21 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     final String grammar = _builder.toString();
     EPackage ePackage = this.getEPackageFromGrammar(grammar);
     final EList<EClassifier> classifiers = ePackage.getEClassifiers();
-    int _size = classifiers.size();
-    Assert.assertEquals(4, _size);
+    Assert.assertEquals(4, classifiers.size());
     final EClassifier middleType1 = IterableExtensions.<EClassifier>head(classifiers);
-    String _name = middleType1.getName();
-    Assert.assertEquals("Middle1", _name);
-    List<? extends EStructuralFeature> _features = this.features(middleType1);
-    boolean _isEmpty = _features.isEmpty();
-    Assert.assertTrue(_isEmpty);
+    Assert.assertEquals("Middle1", middleType1.getName());
+    Assert.assertTrue(this.features(middleType1).isEmpty());
     final EClassifier middleType2 = classifiers.get(1);
-    String _name_1 = middleType2.getName();
-    Assert.assertEquals("Middle2", _name_1);
-    List<? extends EStructuralFeature> _features_1 = this.features(middleType2);
-    boolean _isEmpty_1 = _features_1.isEmpty();
-    Assert.assertTrue(_isEmpty_1);
+    Assert.assertEquals("Middle2", middleType2.getName());
+    Assert.assertTrue(this.features(middleType2).isEmpty());
     final EClassifier topType = classifiers.get(2);
-    EStructuralFeature _feature = this.<EStructuralFeature>feature(topType, "name");
-    EClassifier _eType = _feature.getEType();
-    String _name_2 = _eType.getName();
-    Assert.assertEquals("EString", _name_2);
-    List<EClass> _superTypes = this.superTypes(middleType1);
-    boolean _contains = _superTypes.contains(topType);
-    Assert.assertTrue(_contains);
-    List<EClass> _superTypes_1 = this.superTypes(middleType2);
-    boolean _contains_1 = _superTypes_1.contains(topType);
-    Assert.assertTrue(_contains_1);
+    Assert.assertEquals("EString", this.<EStructuralFeature>feature(topType, "name").getEType().getName());
+    Assert.assertTrue(this.superTypes(middleType1).contains(topType));
+    Assert.assertTrue(this.superTypes(middleType2).contains(topType));
     final EClassifier bottomType = IterableExtensions.<EClassifier>last(classifiers);
-    EStructuralFeature _feature_1 = this.<EStructuralFeature>feature(bottomType, "prev");
-    EClassifier _eType_1 = _feature_1.getEType();
-    String _name_3 = _eType_1.getName();
-    Assert.assertEquals("Top", _name_3);
-    List<EClass> _superTypes_2 = this.superTypes(bottomType);
-    boolean _contains_2 = _superTypes_2.contains(middleType1);
-    Assert.assertTrue(_contains_2);
-    List<EClass> _superTypes_3 = this.superTypes(bottomType);
-    boolean _contains_3 = _superTypes_3.contains(middleType2);
-    Assert.assertTrue(_contains_3);
+    Assert.assertEquals("Top", this.<EStructuralFeature>feature(bottomType, "prev").getEType().getName());
+    Assert.assertTrue(this.superTypes(bottomType).contains(middleType1));
+    Assert.assertTrue(this.superTypes(bottomType).contains(middleType2));
   }
   
   @Test
@@ -586,9 +464,7 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     this.errorAcceptorMock.acceptError(TransformationErrorCode.InvalidFragmentCall, 
       TestErrorAcceptor.ANY_STRING, TestErrorAcceptor.ANY_EOBJECT);
     EPackage result = this.getEPackageFromGrammar(grammar, 2);
-    EList<EClassifier> _eClassifiers = result.getEClassifiers();
-    int _size = _eClassifiers.size();
-    Assert.assertEquals(1, _size);
+    Assert.assertEquals(1, result.getEClassifiers().size());
   }
   
   @Test
@@ -606,9 +482,7 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     this.errorAcceptorMock.acceptError(TransformationErrorCode.InvalidFragmentCall, 
       TestErrorAcceptor.ANY_STRING, TestErrorAcceptor.ANY_EOBJECT);
     EPackage result = this.getEPackageFromGrammar(grammar, 1);
-    EList<EClassifier> _eClassifiers = result.getEClassifiers();
-    int _size = _eClassifiers.size();
-    Assert.assertEquals(2, _size);
+    Assert.assertEquals(2, result.getEClassifiers().size());
   }
   
   @Test
@@ -626,9 +500,7 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     this.errorAcceptorMock.acceptError(TransformationErrorCode.InvalidFragmentCall, 
       TestErrorAcceptor.ANY_STRING, TestErrorAcceptor.ANY_EOBJECT);
     EPackage result = this.getEPackageFromGrammar(grammar, 1);
-    EList<EClassifier> _eClassifiers = result.getEClassifiers();
-    int _size = _eClassifiers.size();
-    Assert.assertEquals(2, _size);
+    Assert.assertEquals(2, result.getEClassifiers().size());
   }
   
   @Test
@@ -646,9 +518,7 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     this.errorAcceptorMock.acceptError(TransformationErrorCode.InvalidFragmentCall, 
       TestErrorAcceptor.ANY_STRING, TestErrorAcceptor.ANY_EOBJECT);
     EPackage result = this.getEPackageFromGrammar(grammar, 1);
-    EList<EClassifier> _eClassifiers = result.getEClassifiers();
-    int _size = _eClassifiers.size();
-    Assert.assertEquals(2, _size);
+    Assert.assertEquals(2, result.getEClassifiers().size());
   }
   
   @Test
@@ -670,28 +540,19 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     final AbstractRule rule = IterableExtensions.<AbstractRule>head(_rules);
     TypeRef type = rule.getType();
     Assert.assertNotNull(type);
-    EClassifierInfos _eClassifierInfos = transformer.getEClassifierInfos();
-    EClassifierInfo _info = _eClassifierInfos.getInfo(type);
-    Assert.assertNotNull(_info);
+    Assert.assertNotNull(transformer.getEClassifierInfos().getInfo(type));
     List<AbstractMetamodelDeclaration> _allMetamodelDeclarations = GrammarUtil.allMetamodelDeclarations(grammar);
     AbstractMetamodelDeclaration _get = _allMetamodelDeclarations.get(1);
     final ReferencedMetamodel referenced = ((ReferencedMetamodel) _get);
     Assert.assertNotNull(referenced);
-    String _alias = referenced.getAlias();
-    Assert.assertEquals("ecore", _alias);
-    EClassifierInfos _eClassifierInfos_1 = transformer.getEClassifierInfos();
-    EClassifierInfo _info_1 = _eClassifierInfos_1.getInfo(referenced, "EString");
-    Assert.assertNull(_info_1);
-    EClassifierInfos _eClassifierInfos_2 = transformer.getEClassifierInfos();
-    EClassifierInfo _info_2 = _eClassifierInfos_2.getInfo(referenced, "EInt");
-    Assert.assertNull(_info_2);
-    EClassifierInfos _eClassifierInfos_3 = transformer.getEClassifierInfos();
-    List<EClassifierInfos> _parents = _eClassifierInfos_3.getParents();
+    Assert.assertEquals("ecore", referenced.getAlias());
+    Assert.assertNull(transformer.getEClassifierInfos().getInfo(referenced, "EString"));
+    Assert.assertNull(transformer.getEClassifierInfos().getInfo(referenced, "EInt"));
+    EClassifierInfos _eClassifierInfos = transformer.getEClassifierInfos();
+    List<EClassifierInfos> _parents = _eClassifierInfos.getParents();
     EClassifierInfos parentInfos = IterableExtensions.<EClassifierInfos>head(_parents);
-    EClassifierInfo _info_3 = parentInfos.getInfo(referenced, "EString");
-    Assert.assertNotNull(_info_3);
-    EClassifierInfo _info_4 = parentInfos.getInfo(referenced, "EInt");
-    Assert.assertNotNull(_info_4);
+    Assert.assertNotNull(parentInfos.getInfo(referenced, "EString"));
+    Assert.assertNotNull(parentInfos.getInfo(referenced, "EInt"));
   }
   
   protected <T extends EClassifier> T type(final EPackage pack, final String name) {
@@ -733,15 +594,10 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     final String grammar = _builder.toString();
     EPackage ePackage = this.getEPackageFromGrammar(grammar);
     final EList<EClassifier> classifiers = ePackage.getEClassifiers();
-    int _size = classifiers.size();
-    Assert.assertEquals(1, _size);
+    Assert.assertEquals(1, classifiers.size());
     final EClassifier myRuleType = IterableExtensions.<EClassifier>head(classifiers);
-    String _name = myRuleType.getName();
-    Assert.assertEquals("MyRule", _name);
-    List<? extends EStructuralFeature> _features = this.features(myRuleType);
-    EStructuralFeature _head = IterableExtensions.head(_features);
-    String _name_1 = _head.getName();
-    Assert.assertEquals("myFeature", _name_1);
+    Assert.assertEquals("MyRule", myRuleType.getName());
+    Assert.assertEquals("myFeature", IterableExtensions.head(this.features(myRuleType)).getName());
   }
   
   @Test
@@ -757,13 +613,9 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     _builder.newLine();
     final String grammar = _builder.toString();
     EPackage ePackage = this.getEPackageFromGrammar(grammar);
-    EList<EClassifier> _eClassifiers = ePackage.getEClassifiers();
-    int _size = _eClassifiers.size();
-    Assert.assertEquals(2, _size);
-    EClassifier _type = this.<EClassifier>type(ePackage, "TypeA");
-    Assert.assertNotNull(_type);
-    EClassifier _type_1 = this.<EClassifier>type(ePackage, "TypeB");
-    Assert.assertNotNull(_type_1);
+    Assert.assertEquals(2, ePackage.getEClassifiers().size());
+    Assert.assertNotNull(this.<EClassifier>type(ePackage, "TypeA"));
+    Assert.assertNotNull(this.<EClassifier>type(ePackage, "TypeB"));
   }
   
   @Test
@@ -772,23 +624,17 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     _builder.append("grammar test with org.eclipse.xtext.common.Terminals generate test \'http://test\' RuleA: RuleB; RuleB: featureB= INT;");
     final String grammar = _builder.toString();
     EPackage ePackage = this.getEPackageFromGrammar(grammar);
-    EList<EClassifier> _eClassifiers = ePackage.getEClassifiers();
-    int _size = _eClassifiers.size();
-    Assert.assertEquals(2, _size);
+    Assert.assertEquals(2, ePackage.getEClassifiers().size());
     EClassifier _type = this.<EClassifier>type(ePackage, "RuleA");
     EClass ruleA = ((EClass) _type);
     Assert.assertNotNull(ruleA);
     EClassifier _type_1 = this.<EClassifier>type(ePackage, "RuleB");
     EClass ruleB = ((EClass) _type_1);
     Assert.assertNotNull(ruleB);
-    EList<EClass> _eSuperTypes = ruleA.getESuperTypes();
-    boolean _isEmpty = _eSuperTypes.isEmpty();
-    Assert.assertTrue(_isEmpty);
-    EList<EClass> _eSuperTypes_1 = ruleB.getESuperTypes();
-    int _size_1 = _eSuperTypes_1.size();
-    Assert.assertEquals(1, _size_1);
-    EList<EClass> _eSuperTypes_2 = ruleB.getESuperTypes();
-    EClass superClass = IterableExtensions.<EClass>head(_eSuperTypes_2);
+    Assert.assertTrue(ruleA.getESuperTypes().isEmpty());
+    Assert.assertEquals(1, ruleB.getESuperTypes().size());
+    EList<EClass> _eSuperTypes = ruleB.getESuperTypes();
+    EClass superClass = IterableExtensions.<EClass>head(_eSuperTypes);
     Assert.assertEquals(ruleA, superClass);
   }
   
@@ -798,101 +644,55 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     _builder.append("grammar test with org.eclipse.xtext.common.Terminals generate test \'http://test\' Model: name=ID value=SubNamed1 otherValue=SubNamed2 thirdValue=SubNamed3;Named: SubNamed1 | SubNamed2 | SubNamed3;SubNamed1: ConcreteNamed1 | ConcreteNamed2;SubNamed2: ConcreteNamed2 | ConcreteNamed3;SubNamed3: ConcreteNamed1 | ConcreteNamed3;ConcreteNamed1: name=ID bar=ID foo=ID a=ID;ConcreteNamed2: name=ID bar=ID zonk=ID b=ID;ConcreteNamed3: name=ID foo=ID zonk=ID c=ID;");
     final String grammar = _builder.toString();
     EPackage ePackage = this.getEPackageFromGrammar(grammar);
-    EList<EClassifier> _eClassifiers = ePackage.getEClassifiers();
-    int _size = _eClassifiers.size();
-    Assert.assertEquals(8, _size);
+    Assert.assertEquals(8, ePackage.getEClassifiers().size());
     final EClassifier classifier = this.<EClassifier>type(ePackage, "Named");
     Assert.assertNotNull(classifier);
     EClass named = ((EClass) classifier);
     EStructuralFeature feature = this.<EStructuralFeature>feature(named, "name");
     Assert.assertNotNull("name", feature);
-    List<? extends EStructuralFeature> _features = this.features(named);
-    int _size_1 = _features.size();
-    Assert.assertEquals("named", 1, _size_1);
+    Assert.assertEquals("named", 1, this.features(named).size());
     EClassifier _type = this.<EClassifier>type(ePackage, "SubNamed1");
     EClass subNamed1 = ((EClass) _type);
     Assert.assertNotNull("subNamed1", subNamed1);
-    EList<EClass> _eSuperTypes = subNamed1.getESuperTypes();
-    int _size_2 = _eSuperTypes.size();
-    Assert.assertEquals(1, _size_2);
-    EStructuralFeature _feature = this.<EStructuralFeature>feature(subNamed1, "bar");
-    Assert.assertNotNull("bar", _feature);
-    List<? extends EStructuralFeature> _features_1 = this.features(subNamed1);
-    int _size_3 = _features_1.size();
-    Assert.assertEquals("subNamed1", 1, _size_3);
+    Assert.assertEquals(1, subNamed1.getESuperTypes().size());
+    Assert.assertNotNull("bar", this.<EStructuralFeature>feature(subNamed1, "bar"));
+    Assert.assertEquals("subNamed1", 1, this.features(subNamed1).size());
     EClassifier _type_1 = this.<EClassifier>type(ePackage, "SubNamed2");
     EClass subNamed2 = ((EClass) _type_1);
     Assert.assertNotNull("subNamed2", subNamed2);
-    EList<EClass> _eSuperTypes_1 = subNamed2.getESuperTypes();
-    int _size_4 = _eSuperTypes_1.size();
-    Assert.assertEquals(1, _size_4);
-    EStructuralFeature _feature_1 = this.<EStructuralFeature>feature(subNamed2, "zonk");
-    Assert.assertNotNull("bar", _feature_1);
-    List<? extends EStructuralFeature> _features_2 = this.features(subNamed2);
-    int _size_5 = _features_2.size();
-    Assert.assertEquals("subNamed2", 1, _size_5);
+    Assert.assertEquals(1, subNamed2.getESuperTypes().size());
+    Assert.assertNotNull("bar", this.<EStructuralFeature>feature(subNamed2, "zonk"));
+    Assert.assertEquals("subNamed2", 1, this.features(subNamed2).size());
     EClassifier _type_2 = this.<EClassifier>type(ePackage, "SubNamed3");
     EClass subNamed3 = ((EClass) _type_2);
     Assert.assertNotNull("subNamed3", subNamed3);
-    EList<EClass> _eSuperTypes_2 = subNamed3.getESuperTypes();
-    int _size_6 = _eSuperTypes_2.size();
-    Assert.assertEquals(1, _size_6);
-    EStructuralFeature _feature_2 = this.<EStructuralFeature>feature(subNamed3, "foo");
-    Assert.assertNotNull("bar", _feature_2);
-    List<? extends EStructuralFeature> _features_3 = this.features(subNamed3);
-    int _size_7 = _features_3.size();
-    Assert.assertEquals("subNamed3", 1, _size_7);
+    Assert.assertEquals(1, subNamed3.getESuperTypes().size());
+    Assert.assertNotNull("bar", this.<EStructuralFeature>feature(subNamed3, "foo"));
+    Assert.assertEquals("subNamed3", 1, this.features(subNamed3).size());
     EClassifier _type_3 = this.<EClassifier>type(ePackage, "ConcreteNamed1");
     EClass concreteNamed1 = ((EClass) _type_3);
     Assert.assertNotNull("concreteNamed1", concreteNamed1);
-    EList<EClass> _eSuperTypes_3 = concreteNamed1.getESuperTypes();
-    int _size_8 = _eSuperTypes_3.size();
-    Assert.assertEquals("concreteNamed1", 2, _size_8);
-    EList<EClass> _eSuperTypes_4 = concreteNamed1.getESuperTypes();
-    boolean _contains = _eSuperTypes_4.contains(subNamed1);
-    Assert.assertTrue(_contains);
-    EList<EClass> _eSuperTypes_5 = concreteNamed1.getESuperTypes();
-    boolean _contains_1 = _eSuperTypes_5.contains(subNamed3);
-    Assert.assertTrue(_contains_1);
-    EStructuralFeature _feature_3 = this.<EStructuralFeature>feature(concreteNamed1, "a");
-    Assert.assertNotNull("a", _feature_3);
-    List<? extends EStructuralFeature> _features_4 = this.features(concreteNamed1);
-    int _size_9 = _features_4.size();
-    Assert.assertEquals("concreteNamed1", 1, _size_9);
+    Assert.assertEquals("concreteNamed1", 2, concreteNamed1.getESuperTypes().size());
+    Assert.assertTrue(concreteNamed1.getESuperTypes().contains(subNamed1));
+    Assert.assertTrue(concreteNamed1.getESuperTypes().contains(subNamed3));
+    Assert.assertNotNull("a", this.<EStructuralFeature>feature(concreteNamed1, "a"));
+    Assert.assertEquals("concreteNamed1", 1, this.features(concreteNamed1).size());
     EClassifier _type_4 = this.<EClassifier>type(ePackage, "ConcreteNamed2");
     EClass concreteNamed2 = ((EClass) _type_4);
     Assert.assertNotNull("concreteNamed2", concreteNamed2);
-    EList<EClass> _eSuperTypes_6 = concreteNamed2.getESuperTypes();
-    int _size_10 = _eSuperTypes_6.size();
-    Assert.assertEquals("concreteNamed2", 2, _size_10);
-    EList<EClass> _eSuperTypes_7 = concreteNamed2.getESuperTypes();
-    boolean _contains_2 = _eSuperTypes_7.contains(subNamed1);
-    Assert.assertTrue(_contains_2);
-    EList<EClass> _eSuperTypes_8 = concreteNamed2.getESuperTypes();
-    boolean _contains_3 = _eSuperTypes_8.contains(subNamed2);
-    Assert.assertTrue(_contains_3);
-    EStructuralFeature _feature_4 = this.<EStructuralFeature>feature(concreteNamed2, "b");
-    Assert.assertNotNull("b", _feature_4);
-    List<? extends EStructuralFeature> _features_5 = this.features(concreteNamed2);
-    int _size_11 = _features_5.size();
-    Assert.assertEquals("concreteNamed2", 1, _size_11);
+    Assert.assertEquals("concreteNamed2", 2, concreteNamed2.getESuperTypes().size());
+    Assert.assertTrue(concreteNamed2.getESuperTypes().contains(subNamed1));
+    Assert.assertTrue(concreteNamed2.getESuperTypes().contains(subNamed2));
+    Assert.assertNotNull("b", this.<EStructuralFeature>feature(concreteNamed2, "b"));
+    Assert.assertEquals("concreteNamed2", 1, this.features(concreteNamed2).size());
     EClassifier _type_5 = this.<EClassifier>type(ePackage, "ConcreteNamed3");
     EClass concreteNamed3 = ((EClass) _type_5);
     Assert.assertNotNull("concreteNamed3", concreteNamed3);
-    EList<EClass> _eSuperTypes_9 = concreteNamed3.getESuperTypes();
-    int _size_12 = _eSuperTypes_9.size();
-    Assert.assertEquals("concreteNamed3", 2, _size_12);
-    EList<EClass> _eSuperTypes_10 = concreteNamed3.getESuperTypes();
-    boolean _contains_4 = _eSuperTypes_10.contains(subNamed2);
-    Assert.assertTrue(_contains_4);
-    EList<EClass> _eSuperTypes_11 = concreteNamed3.getESuperTypes();
-    boolean _contains_5 = _eSuperTypes_11.contains(subNamed3);
-    Assert.assertTrue(_contains_5);
-    EStructuralFeature _feature_5 = this.<EStructuralFeature>feature(concreteNamed3, "c");
-    Assert.assertNotNull("c", _feature_5);
-    List<? extends EStructuralFeature> _features_6 = this.features(concreteNamed3);
-    int _size_13 = _features_6.size();
-    Assert.assertEquals("concreteNamed3", 1, _size_13);
+    Assert.assertEquals("concreteNamed3", 2, concreteNamed3.getESuperTypes().size());
+    Assert.assertTrue(concreteNamed3.getESuperTypes().contains(subNamed2));
+    Assert.assertTrue(concreteNamed3.getESuperTypes().contains(subNamed3));
+    Assert.assertNotNull("c", this.<EStructuralFeature>feature(concreteNamed3, "c"));
+    Assert.assertEquals("concreteNamed3", 1, this.features(concreteNamed3).size());
   }
   
   @Test
@@ -904,9 +704,7 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     EClassifier _type = this.<EClassifier>type(ePackage, "RuleA");
     EClass ruleA = ((EClass) _type);
     Assert.assertNotNull(ruleA);
-    EList<EAttribute> _eAttributes = ruleA.getEAttributes();
-    int _size = _eAttributes.size();
-    Assert.assertEquals(1, _size);
+    Assert.assertEquals(1, ruleA.getEAttributes().size());
     this.assertAttributeConfiguration(ruleA, 0, "featureA", 
       "EInt");
   }
@@ -920,9 +718,7 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     EClassifier _type = this.<EClassifier>type(ePackage, "RuleA");
     EClass ruleA = ((EClass) _type);
     Assert.assertNotNull(ruleA);
-    EList<EAttribute> _eAttributes = ruleA.getEAttributes();
-    int _size = _eAttributes.size();
-    Assert.assertEquals(3, _size);
+    Assert.assertEquals(3, ruleA.getEAttributes().size());
     this.assertAttributeConfiguration(ruleA, 0, "featureA", "EString");
     this.assertAttributeConfiguration(ruleA, 1, "featureB", "EInt");
     this.assertAttributeConfiguration(ruleA, 2, "featureC", 
@@ -938,9 +734,7 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     EClassifier _type = this.<EClassifier>type(ePackage, "RuleA");
     EClass ruleA = ((EClass) _type);
     Assert.assertNotNull(ruleA);
-    EList<EAttribute> _eAttributes = ruleA.getEAttributes();
-    int _size = _eAttributes.size();
-    Assert.assertEquals(3, _size);
+    Assert.assertEquals(3, ruleA.getEAttributes().size());
     this.assertAttributeConfiguration(ruleA, 0, "featureA", "EBoolean", 0, 1);
     this.assertAttributeConfiguration(ruleA, 1, "featureB", "EInt", 0, 1);
     this.assertAttributeConfiguration(ruleA, 2, "featureC", "EString", 0, 
@@ -953,15 +747,11 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     _builder.append("grammar test with org.eclipse.xtext.common.Terminals generate test \'http://test\' RuleA: (featureA?=\'abstract\' featureB+=INT)?;");
     final String grammar = _builder.toString();
     EPackage ePackage = this.getEPackageFromGrammar(grammar);
-    EList<EClassifier> _eClassifiers = ePackage.getEClassifiers();
-    int _size = _eClassifiers.size();
-    Assert.assertEquals(1, _size);
+    Assert.assertEquals(1, ePackage.getEClassifiers().size());
     EClassifier _type = this.<EClassifier>type(ePackage, "RuleA");
     EClass ruleA = ((EClass) _type);
     Assert.assertNotNull(ruleA);
-    EList<EAttribute> _eAttributes = ruleA.getEAttributes();
-    int _size_1 = _eAttributes.size();
-    Assert.assertEquals(2, _size_1);
+    Assert.assertEquals(2, ruleA.getEAttributes().size());
     this.assertAttributeConfiguration(ruleA, 0, "featureA", "EBoolean", 0, 1);
     this.assertAttributeConfiguration(ruleA, 1, "featureB", "EInt", 0, 
       (-1));
@@ -973,22 +763,16 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     _builder.append("grammar test with org.eclipse.xtext.common.Terminals generate test \'http://test\' RuleA: RuleB? featureA=INT; RuleB: featureB=STRING;");
     final String grammar = _builder.toString();
     EPackage ePackage = this.getEPackageFromGrammar(grammar);
-    EList<EClassifier> _eClassifiers = ePackage.getEClassifiers();
-    int _size = _eClassifiers.size();
-    Assert.assertEquals(2, _size);
+    Assert.assertEquals(2, ePackage.getEClassifiers().size());
     EClassifier _type = this.<EClassifier>type(ePackage, "RuleA");
     EClass ruleA = ((EClass) _type);
     Assert.assertNotNull(ruleA);
     EClassifier _type_1 = this.<EClassifier>type(ePackage, "RuleB");
     EClass ruleB = ((EClass) _type_1);
     Assert.assertNotNull(ruleB);
-    EList<EAttribute> _eAttributes = ruleA.getEAttributes();
-    int _size_1 = _eAttributes.size();
-    Assert.assertEquals(1, _size_1);
+    Assert.assertEquals(1, ruleA.getEAttributes().size());
     this.assertAttributeConfiguration(ruleA, 0, "featureA", "EInt");
-    EList<EAttribute> _eAttributes_1 = ruleB.getEAttributes();
-    int _size_2 = _eAttributes_1.size();
-    Assert.assertEquals(1, _size_2);
+    Assert.assertEquals(1, ruleB.getEAttributes().size());
     this.assertAttributeConfiguration(ruleB, 0, "featureB", 
       "EString");
   }
@@ -999,21 +783,15 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     _builder.append("grammar test with org.eclipse.xtext.common.Terminals generate test \'http://test\' RuleA: RuleB featureA=INT; RuleB: featureB=STRING;");
     final String grammar = _builder.toString();
     EPackage ePackage = this.getEPackageFromGrammar(grammar);
-    EList<EClassifier> _eClassifiers = ePackage.getEClassifiers();
-    int _size = _eClassifiers.size();
-    Assert.assertEquals(2, _size);
+    Assert.assertEquals(2, ePackage.getEClassifiers().size());
     EClassifier _type = this.<EClassifier>type(ePackage, "RuleA");
     EClass ruleA = ((EClass) _type);
     Assert.assertNotNull(ruleA);
     EClassifier _type_1 = this.<EClassifier>type(ePackage, "RuleB");
     EClass ruleB = ((EClass) _type_1);
     Assert.assertNotNull(ruleB);
-    EList<EAttribute> _eAttributes = ruleA.getEAttributes();
-    int _size_1 = _eAttributes.size();
-    Assert.assertEquals(0, _size_1);
-    EList<EAttribute> _eAttributes_1 = ruleB.getEAttributes();
-    int _size_2 = _eAttributes_1.size();
-    Assert.assertEquals(2, _size_2);
+    Assert.assertEquals(0, ruleA.getEAttributes().size());
+    Assert.assertEquals(2, ruleB.getEAttributes().size());
     this.assertAttributeConfiguration(ruleB, 0, "featureA", "EInt");
     this.assertAttributeConfiguration(ruleB, 1, "featureB", 
       "EString");
@@ -1025,9 +803,7 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     _builder.append("grammar test with org.eclipse.xtext.common.Terminals generate test \'http://test\' RuleA: (RuleB|RuleC featureC1=ID) featureA=ID; RuleB: featureB=ID; RuleC: featureC2=ID;");
     final String grammar = _builder.toString();
     EPackage ePackage = this.getEPackageFromGrammar(grammar);
-    EList<EClassifier> _eClassifiers = ePackage.getEClassifiers();
-    int _size = _eClassifiers.size();
-    Assert.assertEquals(3, _size);
+    Assert.assertEquals(3, ePackage.getEClassifiers().size());
     EClassifier _type = this.<EClassifier>type(ePackage, "RuleA");
     EClass ruleA = ((EClass) _type);
     Assert.assertNotNull(ruleA);
@@ -1037,32 +813,16 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     EClassifier _type_2 = this.<EClassifier>type(ePackage, "RuleC");
     EClass ruleC = ((EClass) _type_2);
     Assert.assertNotNull(ruleC);
-    EList<EClass> _eSuperTypes = ruleA.getESuperTypes();
-    boolean _isEmpty = _eSuperTypes.isEmpty();
-    Assert.assertTrue(_isEmpty);
-    EList<EClass> _eSuperTypes_1 = ruleB.getESuperTypes();
-    int _size_1 = _eSuperTypes_1.size();
-    Assert.assertEquals(1, _size_1);
-    EList<EClass> _eSuperTypes_2 = ruleB.getESuperTypes();
-    EClass _head = IterableExtensions.<EClass>head(_eSuperTypes_2);
-    Assert.assertEquals(ruleA, _head);
-    EList<EClass> _eSuperTypes_3 = ruleC.getESuperTypes();
-    int _size_2 = _eSuperTypes_3.size();
-    Assert.assertEquals(1, _size_2);
-    EList<EClass> _eSuperTypes_4 = ruleC.getESuperTypes();
-    EClass _head_1 = IterableExtensions.<EClass>head(_eSuperTypes_4);
-    Assert.assertEquals(ruleA, _head_1);
-    EList<EAttribute> _eAttributes = ruleA.getEAttributes();
-    int _size_3 = _eAttributes.size();
-    Assert.assertEquals(1, _size_3);
+    Assert.assertTrue(ruleA.getESuperTypes().isEmpty());
+    Assert.assertEquals(1, ruleB.getESuperTypes().size());
+    Assert.assertEquals(ruleA, IterableExtensions.<EClass>head(ruleB.getESuperTypes()));
+    Assert.assertEquals(1, ruleC.getESuperTypes().size());
+    Assert.assertEquals(ruleA, IterableExtensions.<EClass>head(ruleC.getESuperTypes()));
+    Assert.assertEquals(1, ruleA.getEAttributes().size());
     this.assertAttributeConfiguration(ruleA, 0, "featureA", "EString");
-    EList<EAttribute> _eAttributes_1 = ruleB.getEAttributes();
-    int _size_4 = _eAttributes_1.size();
-    Assert.assertEquals(1, _size_4);
+    Assert.assertEquals(1, ruleB.getEAttributes().size());
     this.assertAttributeConfiguration(ruleB, 0, "featureB", "EString");
-    EList<EAttribute> _eAttributes_2 = ruleC.getEAttributes();
-    int _size_5 = _eAttributes_2.size();
-    Assert.assertEquals(2, _size_5);
+    Assert.assertEquals(2, ruleC.getEAttributes().size());
     this.assertAttributeConfiguration(ruleC, 0, "featureC1", "EString");
     this.assertAttributeConfiguration(ruleC, 1, "featureC2", 
       "EString");
@@ -1074,9 +834,7 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     _builder.append("grammar test with org.eclipse.xtext.common.Terminals generate test \'http://test\' RuleA: (RuleB|RuleC featureC1=ID)? featureA=ID; RuleB: featureB=ID; RuleC: featureC2=ID;");
     final String grammar = _builder.toString();
     EPackage ePackage = this.getEPackageFromGrammar(grammar);
-    EList<EClassifier> _eClassifiers = ePackage.getEClassifiers();
-    int _size = _eClassifiers.size();
-    Assert.assertEquals(3, _size);
+    Assert.assertEquals(3, ePackage.getEClassifiers().size());
     EClassifier _type = this.<EClassifier>type(ePackage, "RuleA");
     EClass ruleA = ((EClass) _type);
     Assert.assertNotNull(ruleA);
@@ -1086,32 +844,16 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     EClassifier _type_2 = this.<EClassifier>type(ePackage, "RuleC");
     EClass ruleC = ((EClass) _type_2);
     Assert.assertNotNull(ruleC);
-    EList<EClass> _eSuperTypes = ruleA.getESuperTypes();
-    boolean _isEmpty = _eSuperTypes.isEmpty();
-    Assert.assertTrue(_isEmpty);
-    EList<EClass> _eSuperTypes_1 = ruleB.getESuperTypes();
-    int _size_1 = _eSuperTypes_1.size();
-    Assert.assertEquals(1, _size_1);
-    EList<EClass> _eSuperTypes_2 = ruleB.getESuperTypes();
-    EClass _head = IterableExtensions.<EClass>head(_eSuperTypes_2);
-    Assert.assertEquals(ruleA, _head);
-    EList<EClass> _eSuperTypes_3 = ruleC.getESuperTypes();
-    int _size_2 = _eSuperTypes_3.size();
-    Assert.assertEquals(1, _size_2);
-    EList<EClass> _eSuperTypes_4 = ruleC.getESuperTypes();
-    EClass _head_1 = IterableExtensions.<EClass>head(_eSuperTypes_4);
-    Assert.assertEquals(ruleA, _head_1);
-    EList<EAttribute> _eAttributes = ruleA.getEAttributes();
-    int _size_3 = _eAttributes.size();
-    Assert.assertEquals(1, _size_3);
+    Assert.assertTrue(ruleA.getESuperTypes().isEmpty());
+    Assert.assertEquals(1, ruleB.getESuperTypes().size());
+    Assert.assertEquals(ruleA, IterableExtensions.<EClass>head(ruleB.getESuperTypes()));
+    Assert.assertEquals(1, ruleC.getESuperTypes().size());
+    Assert.assertEquals(ruleA, IterableExtensions.<EClass>head(ruleC.getESuperTypes()));
+    Assert.assertEquals(1, ruleA.getEAttributes().size());
     this.assertAttributeConfiguration(ruleA, 0, "featureA", "EString");
-    EList<EAttribute> _eAttributes_1 = ruleB.getEAttributes();
-    int _size_4 = _eAttributes_1.size();
-    Assert.assertEquals(1, _size_4);
+    Assert.assertEquals(1, ruleB.getEAttributes().size());
     this.assertAttributeConfiguration(ruleB, 0, "featureB", "EString");
-    EList<EAttribute> _eAttributes_2 = ruleC.getEAttributes();
-    int _size_5 = _eAttributes_2.size();
-    Assert.assertEquals(2, _size_5);
+    Assert.assertEquals(2, ruleC.getEAttributes().size());
     this.assertAttributeConfiguration(ruleC, 0, "featureC1", "EString");
     this.assertAttributeConfiguration(ruleC, 1, "featureC2", 
       "EString");
@@ -1132,9 +874,7 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     String _grammar_3 = grammar;
     grammar = (_grammar_3 + " RuleD: featureD2=ID;");
     EPackage ePackage = this.getEPackageFromGrammar(grammar);
-    EList<EClassifier> _eClassifiers = ePackage.getEClassifiers();
-    int _size = _eClassifiers.size();
-    Assert.assertEquals(4, _size);
+    Assert.assertEquals(4, ePackage.getEClassifiers().size());
     EClassifier _type = this.<EClassifier>type(ePackage, "RuleA");
     EClass ruleA = ((EClass) _type);
     Assert.assertNotNull(ruleA);
@@ -1147,46 +887,24 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     EClassifier _type_3 = this.<EClassifier>type(ePackage, "RuleD");
     EClass ruleD = ((EClass) _type_3);
     Assert.assertNotNull(ruleD);
-    EList<EClass> _eSuperTypes = ruleA.getESuperTypes();
-    boolean _isEmpty = _eSuperTypes.isEmpty();
-    Assert.assertTrue(_isEmpty);
-    EList<EClass> _eSuperTypes_1 = ruleB.getESuperTypes();
-    int _size_1 = _eSuperTypes_1.size();
-    Assert.assertEquals(1, _size_1);
-    EList<EClass> _eSuperTypes_2 = ruleB.getESuperTypes();
-    EClass _head = IterableExtensions.<EClass>head(_eSuperTypes_2);
-    Assert.assertEquals(ruleA, _head);
-    EList<EClass> _eSuperTypes_3 = ruleC.getESuperTypes();
-    int _size_2 = _eSuperTypes_3.size();
-    Assert.assertEquals(1, _size_2);
-    EList<EClass> _eSuperTypes_4 = ruleC.getESuperTypes();
-    EClass _head_1 = IterableExtensions.<EClass>head(_eSuperTypes_4);
-    Assert.assertEquals(ruleA, _head_1);
-    EList<EClass> _eSuperTypes_5 = ruleD.getESuperTypes();
-    int _size_3 = _eSuperTypes_5.size();
-    Assert.assertEquals(1, _size_3);
-    EList<EClass> _eSuperTypes_6 = ruleD.getESuperTypes();
-    EClass _head_2 = IterableExtensions.<EClass>head(_eSuperTypes_6);
-    Assert.assertEquals(ruleA, _head_2);
-    EList<EAttribute> _eAttributes = ruleA.getEAttributes();
-    int _size_4 = _eAttributes.size();
-    Assert.assertEquals(1, _size_4);
+    Assert.assertTrue(ruleA.getESuperTypes().isEmpty());
+    Assert.assertEquals(1, ruleB.getESuperTypes().size());
+    Assert.assertEquals(ruleA, IterableExtensions.<EClass>head(ruleB.getESuperTypes()));
+    Assert.assertEquals(1, ruleC.getESuperTypes().size());
+    Assert.assertEquals(ruleA, IterableExtensions.<EClass>head(ruleC.getESuperTypes()));
+    Assert.assertEquals(1, ruleD.getESuperTypes().size());
+    Assert.assertEquals(ruleA, IterableExtensions.<EClass>head(ruleD.getESuperTypes()));
+    Assert.assertEquals(1, ruleA.getEAttributes().size());
     this.assertAttributeConfiguration(ruleA, 0, "featureA", "EString");
-    EList<EAttribute> _eAttributes_1 = ruleB.getEAttributes();
-    int _size_5 = _eAttributes_1.size();
-    Assert.assertEquals(2, _size_5);
+    Assert.assertEquals(2, ruleB.getEAttributes().size());
     this.assertAttributeConfiguration(ruleB, 0, "featureBC", "EString");
     this.assertAttributeConfiguration(ruleB, 1, "featureB2", "EString");
-    EList<EAttribute> _eAttributes_2 = ruleC.getEAttributes();
-    int _size_6 = _eAttributes_2.size();
-    Assert.assertEquals(4, _size_6);
+    Assert.assertEquals(4, ruleC.getEAttributes().size());
     this.assertAttributeConfiguration(ruleC, 0, "featureC1", "EString");
     this.assertAttributeConfiguration(ruleC, 1, "featureBC", "EString");
     this.assertAttributeConfiguration(ruleC, 2, "featureCD", "EString");
     this.assertAttributeConfiguration(ruleC, 3, "featureC2", "EString");
-    EList<EAttribute> _eAttributes_3 = ruleD.getEAttributes();
-    int _size_7 = _eAttributes_3.size();
-    Assert.assertEquals(3, _size_7);
+    Assert.assertEquals(3, ruleD.getEAttributes().size());
     this.assertAttributeConfiguration(ruleD, 0, "featureD1", "EString");
     this.assertAttributeConfiguration(ruleD, 1, "featureCD", "EString");
     this.assertAttributeConfiguration(ruleD, 2, "featureD2", 
@@ -1208,9 +926,7 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     String _grammar_3 = grammar;
     grammar = (_grammar_3 + " RuleD: featureD2=ID;");
     EPackage ePackage = this.getEPackageFromGrammar(grammar);
-    EList<EClassifier> _eClassifiers = ePackage.getEClassifiers();
-    int _size = _eClassifiers.size();
-    Assert.assertEquals(4, _size);
+    Assert.assertEquals(4, ePackage.getEClassifiers().size());
     EClassifier _type = this.<EClassifier>type(ePackage, "RuleA");
     EClass ruleA = ((EClass) _type);
     Assert.assertNotNull(ruleA);
@@ -1223,45 +939,23 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     EClassifier _type_3 = this.<EClassifier>type(ePackage, "RuleD");
     EClass ruleD = ((EClass) _type_3);
     Assert.assertNotNull(ruleD);
-    EList<EClass> _eSuperTypes = ruleA.getESuperTypes();
-    boolean _isEmpty = _eSuperTypes.isEmpty();
-    Assert.assertTrue(_isEmpty);
-    EList<EClass> _eSuperTypes_1 = ruleB.getESuperTypes();
-    int _size_1 = _eSuperTypes_1.size();
-    Assert.assertEquals(1, _size_1);
-    EList<EClass> _eSuperTypes_2 = ruleB.getESuperTypes();
-    EClass _head = IterableExtensions.<EClass>head(_eSuperTypes_2);
-    Assert.assertEquals(ruleA, _head);
-    EList<EClass> _eSuperTypes_3 = ruleC.getESuperTypes();
-    int _size_2 = _eSuperTypes_3.size();
-    Assert.assertEquals(1, _size_2);
-    EList<EClass> _eSuperTypes_4 = ruleC.getESuperTypes();
-    EClass _head_1 = IterableExtensions.<EClass>head(_eSuperTypes_4);
-    Assert.assertEquals(ruleA, _head_1);
-    EList<EClass> _eSuperTypes_5 = ruleD.getESuperTypes();
-    int _size_3 = _eSuperTypes_5.size();
-    Assert.assertEquals(1, _size_3);
-    EList<EClass> _eSuperTypes_6 = ruleD.getESuperTypes();
-    EClass _head_2 = IterableExtensions.<EClass>head(_eSuperTypes_6);
-    Assert.assertEquals(ruleA, _head_2);
-    EList<EAttribute> _eAttributes = ruleA.getEAttributes();
-    int _size_4 = _eAttributes.size();
-    Assert.assertEquals(2, _size_4);
+    Assert.assertTrue(ruleA.getESuperTypes().isEmpty());
+    Assert.assertEquals(1, ruleB.getESuperTypes().size());
+    Assert.assertEquals(ruleA, IterableExtensions.<EClass>head(ruleB.getESuperTypes()));
+    Assert.assertEquals(1, ruleC.getESuperTypes().size());
+    Assert.assertEquals(ruleA, IterableExtensions.<EClass>head(ruleC.getESuperTypes()));
+    Assert.assertEquals(1, ruleD.getESuperTypes().size());
+    Assert.assertEquals(ruleA, IterableExtensions.<EClass>head(ruleD.getESuperTypes()));
+    Assert.assertEquals(2, ruleA.getEAttributes().size());
     this.assertAttributeConfiguration(ruleA, 0, "featureABC", "EString");
     this.assertAttributeConfiguration(ruleA, 1, "featureA", "EString");
-    EList<EAttribute> _eAttributes_1 = ruleB.getEAttributes();
-    int _size_5 = _eAttributes_1.size();
-    Assert.assertEquals(1, _size_5);
+    Assert.assertEquals(1, ruleB.getEAttributes().size());
     this.assertAttributeConfiguration(ruleB, 0, "featureB2", "EString");
-    EList<EAttribute> _eAttributes_2 = ruleC.getEAttributes();
-    int _size_6 = _eAttributes_2.size();
-    Assert.assertEquals(3, _size_6);
+    Assert.assertEquals(3, ruleC.getEAttributes().size());
     this.assertAttributeConfiguration(ruleC, 0, "featureC1", "EString");
     this.assertAttributeConfiguration(ruleC, 1, "featureCD", "EString");
     this.assertAttributeConfiguration(ruleC, 2, "featureC2", "EString");
-    EList<EAttribute> _eAttributes_3 = ruleD.getEAttributes();
-    int _size_7 = _eAttributes_3.size();
-    Assert.assertEquals(3, _size_7);
+    Assert.assertEquals(3, ruleD.getEAttributes().size());
     this.assertAttributeConfiguration(ruleD, 0, "featureD1", "EString");
     this.assertAttributeConfiguration(ruleD, 1, "featureCD", "EString");
     this.assertAttributeConfiguration(ruleD, 2, "featureD2", 
@@ -1274,9 +968,7 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     _builder.append("grammar test with org.eclipse.xtext.common.Terminals generate test \'http://test\' RuleA: ({Add.a=current} \'+\'|{Sub.a=current} \'-\') featureAS=ID;");
     final String grammar = _builder.toString();
     EPackage ePackage = this.getEPackageFromGrammar(grammar);
-    EList<EClassifier> _eClassifiers = ePackage.getEClassifiers();
-    int _size = _eClassifiers.size();
-    Assert.assertEquals(3, _size);
+    Assert.assertEquals(3, ePackage.getEClassifiers().size());
     EClassifier _type = this.<EClassifier>type(ePackage, "RuleA");
     EClass ruleA = ((EClass) _type);
     Assert.assertNotNull(ruleA);
@@ -1286,41 +978,19 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     EClassifier _type_2 = this.<EClassifier>type(ePackage, "Sub");
     EClass sub = ((EClass) _type_2);
     Assert.assertNotNull(sub);
-    EList<EClass> _eSuperTypes = ruleA.getESuperTypes();
-    boolean _isEmpty = _eSuperTypes.isEmpty();
-    Assert.assertTrue(_isEmpty);
-    EList<EClass> _eSuperTypes_1 = add.getESuperTypes();
-    int _size_1 = _eSuperTypes_1.size();
-    Assert.assertEquals(1, _size_1);
-    EList<EClass> _eSuperTypes_2 = add.getESuperTypes();
-    EClass _head = IterableExtensions.<EClass>head(_eSuperTypes_2);
-    Assert.assertEquals(ruleA, _head);
-    EList<EClass> _eSuperTypes_3 = sub.getESuperTypes();
-    int _size_2 = _eSuperTypes_3.size();
-    Assert.assertEquals(1, _size_2);
-    EList<EClass> _eSuperTypes_4 = sub.getESuperTypes();
-    EClass _head_1 = IterableExtensions.<EClass>head(_eSuperTypes_4);
-    Assert.assertEquals(ruleA, _head_1);
-    EList<EAttribute> _eAttributes = ruleA.getEAttributes();
-    int _size_3 = _eAttributes.size();
-    Assert.assertEquals(1, _size_3);
+    Assert.assertTrue(ruleA.getESuperTypes().isEmpty());
+    Assert.assertEquals(1, add.getESuperTypes().size());
+    Assert.assertEquals(ruleA, IterableExtensions.<EClass>head(add.getESuperTypes()));
+    Assert.assertEquals(1, sub.getESuperTypes().size());
+    Assert.assertEquals(ruleA, IterableExtensions.<EClass>head(sub.getESuperTypes()));
+    Assert.assertEquals(1, ruleA.getEAttributes().size());
     this.assertAttributeConfiguration(ruleA, 0, "featureAS", "EString");
-    EList<EReference> _eReferences = ruleA.getEReferences();
-    int _size_4 = _eReferences.size();
-    Assert.assertEquals(1, _size_4);
+    Assert.assertEquals(1, ruleA.getEReferences().size());
     this.assertReferenceConfiguration(ruleA, 0, "a", "RuleA", true, 0, 1);
-    EList<EAttribute> _eAttributes_1 = add.getEAttributes();
-    int _size_5 = _eAttributes_1.size();
-    Assert.assertEquals(0, _size_5);
-    EList<EReference> _eReferences_1 = add.getEReferences();
-    int _size_6 = _eReferences_1.size();
-    Assert.assertEquals(0, _size_6);
-    EList<EAttribute> _eAttributes_2 = sub.getEAttributes();
-    int _size_7 = _eAttributes_2.size();
-    Assert.assertEquals(0, _size_7);
-    EList<EReference> _eReferences_2 = sub.getEReferences();
-    int _size_8 = _eReferences_2.size();
-    Assert.assertEquals(0, _size_8);
+    Assert.assertEquals(0, add.getEAttributes().size());
+    Assert.assertEquals(0, add.getEReferences().size());
+    Assert.assertEquals(0, sub.getEAttributes().size());
+    Assert.assertEquals(0, sub.getEReferences().size());
   }
   
   @Test
@@ -1351,9 +1021,7 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     String _grammar_11 = grammar;
     grammar = (_grammar_11 + " { Thing.content=current } name=ID;");
     EPackage ePackage = this.getEPackageFromGrammar(grammar);
-    EList<EClassifier> _eClassifiers = ePackage.getEClassifiers();
-    int _size = _eClassifiers.size();
-    Assert.assertEquals(4, _size);
+    Assert.assertEquals(4, ePackage.getEClassifiers().size());
     EClassifier _type = this.<EClassifier>type(ePackage, "Model");
     EClass model = ((EClass) _type);
     Assert.assertNotNull(model);
@@ -1366,25 +1034,13 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     EClassifier _type_3 = this.<EClassifier>type(ePackage, "Thing");
     EClass thing = ((EClass) _type_3);
     Assert.assertNotNull(thing);
-    EList<EClass> _eSuperTypes = model.getESuperTypes();
-    int _size_1 = _eSuperTypes.size();
-    Assert.assertEquals(0, _size_1);
-    EList<EClass> _eSuperTypes_1 = type.getESuperTypes();
-    int _size_2 = _eSuperTypes_1.size();
-    Assert.assertEquals(0, _size_2);
-    EList<EClass> _eSuperTypes_2 = item.getESuperTypes();
-    int _size_3 = _eSuperTypes_2.size();
-    Assert.assertEquals(1, _size_3);
-    EList<EClass> _eSuperTypes_3 = item.getESuperTypes();
-    EClass _head = IterableExtensions.<EClass>head(_eSuperTypes_3);
-    Assert.assertSame(type, _head);
-    EList<EClass> _eSuperTypes_4 = thing.getESuperTypes();
-    int _size_4 = _eSuperTypes_4.size();
-    Assert.assertEquals(1, _size_4);
-    EList<EClass> _eSuperTypes_5 = thing.getESuperTypes();
-    EClass _get = _eSuperTypes_5.get(
-      0);
-    Assert.assertSame(type, _get);
+    Assert.assertEquals(0, model.getESuperTypes().size());
+    Assert.assertEquals(0, type.getESuperTypes().size());
+    Assert.assertEquals(1, item.getESuperTypes().size());
+    Assert.assertSame(type, IterableExtensions.<EClass>head(item.getESuperTypes()));
+    Assert.assertEquals(1, thing.getESuperTypes().size());
+    Assert.assertSame(type, thing.getESuperTypes().get(
+      0));
   }
   
   @Test
@@ -1400,27 +1056,19 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     _builder.newLine();
     final String grammar = _builder.toString();
     EPackage ePackage = this.getEPackageFromGrammar(grammar);
-    EList<EClassifier> _eClassifiers = ePackage.getEClassifiers();
-    int _size = _eClassifiers.size();
-    Assert.assertEquals(2, _size);
+    Assert.assertEquals(2, ePackage.getEClassifiers().size());
     EClassifier _type = this.<EClassifier>type(ePackage, "RuleA");
     EClass ruleA = ((EClass) _type);
     Assert.assertNotNull(ruleA);
     EClassifier _type_1 = this.<EClassifier>type(ePackage, "RuleB");
     EClass ruleB = ((EClass) _type_1);
     Assert.assertNotNull(ruleB);
-    EList<EAttribute> _eAttributes = ruleA.getEAttributes();
-    int _size_1 = _eAttributes.size();
-    Assert.assertEquals(1, _size_1);
+    Assert.assertEquals(1, ruleA.getEAttributes().size());
     this.assertAttributeConfiguration(ruleA, 0, "simpleFeature", "EString");
-    EList<EReference> _eReferences = ruleA.getEReferences();
-    int _size_2 = _eReferences.size();
-    Assert.assertEquals(2, _size_2);
+    Assert.assertEquals(2, ruleA.getEReferences().size());
     this.assertReferenceConfiguration(ruleA, 0, "callA1", "RuleB", true, 0, 1);
     this.assertReferenceConfiguration(ruleA, 1, "callA2", "RuleB", true, 0, (-1));
-    EList<EAttribute> _eAttributes_1 = ruleB.getEAttributes();
-    int _size_3 = _eAttributes_1.size();
-    Assert.assertEquals(1, _size_3);
+    Assert.assertEquals(1, ruleB.getEAttributes().size());
     this.assertAttributeConfiguration(ruleB, 0, "featureB", "EString");
   }
   
@@ -1430,29 +1078,21 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     _builder.append("grammar test with org.eclipse.xtext.common.Terminals generate test \'http://test\' RuleA: refA1=[TypeB] refA2+=[TypeB|RuleB] simpleFeature=ID; RuleB returns TypeB: featureB=ID;");
     final String grammar = _builder.toString();
     EPackage ePackage = this.getEPackageFromGrammar(grammar);
-    EList<EClassifier> _eClassifiers = ePackage.getEClassifiers();
-    int _size = _eClassifiers.size();
-    Assert.assertEquals(2, _size);
+    Assert.assertEquals(2, ePackage.getEClassifiers().size());
     EClassifier _type = this.<EClassifier>type(ePackage, "RuleA");
     EClass ruleA = ((EClass) _type);
     Assert.assertNotNull(ruleA);
     EClassifier _type_1 = this.<EClassifier>type(ePackage, "TypeB");
     EClass typeB = ((EClass) _type_1);
     Assert.assertNotNull(typeB);
-    EList<EAttribute> _eAttributes = ruleA.getEAttributes();
-    int _size_1 = _eAttributes.size();
-    Assert.assertEquals(1, _size_1);
+    Assert.assertEquals(1, ruleA.getEAttributes().size());
     this.assertAttributeConfiguration(ruleA, 0, "simpleFeature", "EString");
-    EList<EReference> _eReferences = ruleA.getEReferences();
-    int _size_2 = _eReferences.size();
-    Assert.assertEquals(2, _size_2);
+    Assert.assertEquals(2, ruleA.getEReferences().size());
     this.assertReferenceConfiguration(ruleA, 0, "refA1", "TypeB", false, 0, 
       1);
     this.assertReferenceConfiguration(ruleA, 1, "refA2", "TypeB", false, 0, 
       (-1));
-    EList<EAttribute> _eAttributes_1 = typeB.getEAttributes();
-    int _size_3 = _eAttributes_1.size();
-    Assert.assertEquals(1, _size_3);
+    Assert.assertEquals(1, typeB.getEAttributes().size());
     this.assertAttributeConfiguration(typeB, 0, "featureB", 
       "EString");
   }
@@ -1473,39 +1113,25 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     String _grammar_3 = grammar;
     grammar = (_grammar_3 + " RuleD returns TypeB: featureD=ID;");
     EPackage ePackage = this.getEPackageFromGrammar(grammar);
-    EList<EClassifier> _eClassifiers = ePackage.getEClassifiers();
-    int _size = _eClassifiers.size();
-    Assert.assertEquals(3, _size);
+    Assert.assertEquals(3, ePackage.getEClassifiers().size());
     EClassifier _type = this.<EClassifier>type(ePackage, "RuleA");
     EClass ruleA = ((EClass) _type);
     Assert.assertNotNull(ruleA);
-    EList<EClass> _eSuperTypes = ruleA.getESuperTypes();
-    int _size_1 = _eSuperTypes.size();
-    Assert.assertEquals(0, _size_1);
+    Assert.assertEquals(0, ruleA.getESuperTypes().size());
     EClassifier _type_1 = this.<EClassifier>type(ePackage, "TypeB");
     EClass typeB = ((EClass) _type_1);
     Assert.assertNotNull(typeB);
-    EList<EClass> _eSuperTypes_1 = typeB.getESuperTypes();
-    int _size_2 = _eSuperTypes_1.size();
-    Assert.assertEquals(0, _size_2);
+    Assert.assertEquals(0, typeB.getESuperTypes().size());
     EClassifier _type_2 = this.<EClassifier>type(ePackage, "RuleC");
     EClass ruleC = ((EClass) _type_2);
     Assert.assertNotNull(ruleC);
-    EList<EClass> _eSuperTypes_2 = ruleC.getESuperTypes();
-    int _size_3 = _eSuperTypes_2.size();
-    Assert.assertEquals(1, _size_3);
-    EList<EClass> _eSuperTypes_3 = ruleC.getESuperTypes();
-    EClass _head = IterableExtensions.<EClass>head(_eSuperTypes_3);
-    Assert.assertEquals(typeB, _head);
-    EList<EAttribute> _eAttributes = ruleA.getEAttributes();
-    int _size_4 = _eAttributes.size();
-    Assert.assertEquals(2, _size_4);
+    Assert.assertEquals(1, ruleC.getESuperTypes().size());
+    Assert.assertEquals(typeB, IterableExtensions.<EClass>head(ruleC.getESuperTypes()));
+    Assert.assertEquals(2, ruleA.getEAttributes().size());
     this.assertAttributeConfiguration(ruleA, 0, "featureA1", "EBoolean");
     this.assertAttributeConfiguration(ruleA, 1, "featureA2", "EString", 0, 
       (-1));
-    EList<EReference> _eReferences = ruleA.getEReferences();
-    int _size_5 = _eReferences.size();
-    Assert.assertEquals(4, _size_5);
+    Assert.assertEquals(4, ruleA.getEReferences().size());
     this.assertReferenceConfiguration(ruleA, 0, "refA1", "TypeB", true, 0, 1);
     this.assertReferenceConfiguration(ruleA, 1, "refA2", "TypeB", true, 0, 1);
     this.assertReferenceConfiguration(ruleA, 2, "refA3", "TypeB", true, 0, 
@@ -1520,14 +1146,10 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     _builder.append("grammar test with org.eclipse.xtext.common.Terminals generate test \'http://test\' RuleA: featureA?=(\'+\'|\'-\') featureB=(\'*\'|\'/\');");
     final String grammar = _builder.toString();
     EPackage ePackage = this.getEPackageFromGrammar(grammar);
-    EList<EClassifier> _eClassifiers = ePackage.getEClassifiers();
-    int _size = _eClassifiers.size();
-    Assert.assertEquals(1, _size);
+    Assert.assertEquals(1, ePackage.getEClassifiers().size());
     EClassifier _type = this.<EClassifier>type(ePackage, "RuleA");
     EClass ruleA = ((EClass) _type);
-    EList<EAttribute> _eAttributes = ruleA.getEAttributes();
-    int _size_1 = _eAttributes.size();
-    Assert.assertEquals(2, _size_1);
+    Assert.assertEquals(2, ruleA.getEAttributes().size());
     this.assertAttributeConfiguration(ruleA, 0, "featureA", "EBoolean", 0, 1);
     this.assertAttributeConfiguration(ruleA, 1, "featureB", "EString", 0, 
       1);
@@ -1555,22 +1177,15 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     String _grammar_4 = grammar;
     grammar = (_grammar_4 + " RuleB returns t2::TypeB: featureB=ID;");
     List<EPackage> ePackages = this.getEPackagesFromGrammar(grammar, 0);
-    int _size = ePackages.size();
-    Assert.assertEquals(2, _size);
+    Assert.assertEquals(2, ePackages.size());
     EPackage t1 = IterableExtensions.<EPackage>head(ePackages);
-    String _name = t1.getName();
-    Assert.assertEquals("t1", _name);
-    EList<EClassifier> _eClassifiers = t1.getEClassifiers();
-    int _size_1 = _eClassifiers.size();
-    Assert.assertEquals(1, _size_1);
+    Assert.assertEquals("t1", t1.getName());
+    Assert.assertEquals(1, t1.getEClassifiers().size());
     final EClassifier ruleA = this.<EClassifier>type(t1, "RuleA");
     Assert.assertNotNull(ruleA);
     EPackage t2 = ePackages.get(1);
-    EList<EClassifier> _eClassifiers_1 = t2.getEClassifiers();
-    int _size_2 = _eClassifiers_1.size();
-    Assert.assertEquals(1, _size_2);
-    String _name_1 = t2.getName();
-    Assert.assertEquals("t2", _name_1);
+    Assert.assertEquals(1, t2.getEClassifiers().size());
+    Assert.assertEquals("t2", t2.getName());
     final EClassifier typeB = this.<EClassifier>type(t2, "TypeB");
     Assert.assertNotNull(typeB);
   }
@@ -1595,8 +1210,7 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     this.errorAcceptorMock.acceptError(TransformationErrorCode.UnknownMetaModelAlias, TestErrorAcceptor.ANY_STRING, 
       TestErrorAcceptor.ANY_EOBJECT);
     List<EPackage> ePackages = this.getEPackagesFromGrammar(grammar, 5);
-    int _size = ePackages.size();
-    Assert.assertEquals(0, _size);
+    Assert.assertEquals(0, ePackages.size());
   }
   
   @Test
@@ -1607,9 +1221,7 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     this.errorAcceptorMock.acceptError(TransformationErrorCode.CannotCreateTypeInSealedMetamodel, 
       TestErrorAcceptor.ANY_STRING, TestErrorAcceptor.ANY_EOBJECT);
     EPackage result = this.getEPackageFromGrammar(grammar, 2);
-    EList<EClassifier> _eClassifiers = result.getEClassifiers();
-    boolean _isEmpty = _eClassifiers.isEmpty();
-    Assert.assertTrue(_isEmpty);
+    Assert.assertTrue(result.getEClassifiers().isEmpty());
   }
   
   @Test
@@ -1661,15 +1273,12 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     _builder.append("grammar test with org.eclipse.xtext.common.Terminals generate test \'http://test\' RuleA returns TypeA: featureA=ID; RuleB returns TypeA: featureA=STRING;");
     final String grammar = _builder.toString();
     EPackage ePackage = this.getEPackageFromGrammar(grammar);
-    EList<EClassifier> _eClassifiers = ePackage.getEClassifiers();
-    int _size = _eClassifiers.size();
-    Assert.assertEquals(1, _size);
+    Assert.assertEquals(1, 
+      ePackage.getEClassifiers().size());
     EClassifier _eClassifier = ePackage.getEClassifier("TypeA");
     EClass typeA = ((EClass) _eClassifier);
     Assert.assertNotNull(typeA);
-    EList<EAttribute> _eAttributes = typeA.getEAttributes();
-    int _size_1 = _eAttributes.size();
-    Assert.assertEquals(1, _size_1);
+    Assert.assertEquals(1, typeA.getEAttributes().size());
     this.assertAttributeConfiguration(typeA, 0, 
       "featureA", 
       "EString");
@@ -1685,15 +1294,11 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     this.errorAcceptorMock.acceptError(TransformationErrorCode.NoCompatibleFeatureTypeAvailable, 
       TestErrorAcceptor.ANY_STRING, TestErrorAcceptor.ANY_EOBJECT);
     EPackage ePackage = this.getEPackageFromGrammar(grammar, 1);
-    EList<EClassifier> _eClassifiers = ePackage.getEClassifiers();
-    int _size = _eClassifiers.size();
-    Assert.assertEquals(1, _size);
+    Assert.assertEquals(1, ePackage.getEClassifiers().size());
     EClassifier _type = this.<EClassifier>type(ePackage, "TypeA");
     EClass typeA = ((EClass) _type);
     Assert.assertNotNull(typeA);
-    EList<EAttribute> _eAttributes = typeA.getEAttributes();
-    int _size_1 = _eAttributes.size();
-    Assert.assertEquals(1, _size_1);
+    Assert.assertEquals(1, typeA.getEAttributes().size());
     this.assertAttributeConfiguration(typeA, 0, "featureA", 
       "EString");
   }
@@ -1712,9 +1317,7 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     String _grammar_3 = grammar;
     grammar = (_grammar_3 + " RuleD: featureD=ID;");
     EPackage ePackage = this.getEPackageFromGrammar(grammar);
-    EList<EClassifier> _eClassifiers = ePackage.getEClassifiers();
-    int _size = _eClassifiers.size();
-    Assert.assertEquals(3, _size);
+    Assert.assertEquals(3, ePackage.getEClassifiers().size());
     EClassifier _type = this.<EClassifier>type(ePackage, "TypeA");
     EClass typeA = ((EClass) _type);
     Assert.assertNotNull(typeA);
@@ -1724,9 +1327,7 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     EClassifier _type_2 = this.<EClassifier>type(ePackage, "RuleD");
     EClass ruleD = ((EClass) _type_2);
     Assert.assertNotNull(ruleD);
-    EList<EReference> _eReferences = typeA.getEReferences();
-    int _size_1 = _eReferences.size();
-    Assert.assertEquals(1, _size_1);
+    Assert.assertEquals(1, typeA.getEReferences().size());
     this.assertReferenceConfiguration(typeA, 0, "featureA", "RuleC", true, 0, 
       1);
   }
@@ -1745,9 +1346,7 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     String _grammar_3 = grammar;
     grammar = (_grammar_3 + " RuleD: featureD=ID;");
     EPackage ePackage = this.getEPackageFromGrammar(grammar);
-    EList<EClassifier> _eClassifiers = ePackage.getEClassifiers();
-    int _size = _eClassifiers.size();
-    Assert.assertEquals(3, _size);
+    Assert.assertEquals(3, ePackage.getEClassifiers().size());
     EClassifier _type = this.<EClassifier>type(ePackage, "TypeA");
     EClass typeA = ((EClass) _type);
     Assert.assertNotNull(typeA);
@@ -1757,14 +1356,10 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     EClassifier _type_2 = this.<EClassifier>type(ePackage, "RuleD");
     EClass ruleD = ((EClass) _type_2);
     Assert.assertNotNull(ruleD);
-    EList<EAttribute> _eAllAttributes = typeA.getEAllAttributes();
-    int _size_1 = _eAllAttributes.size();
-    Assert.assertEquals(2, _size_1);
+    Assert.assertEquals(2, typeA.getEAllAttributes().size());
     this.assertAttributeConfiguration(typeA, 0, "featureA1", "EString");
     this.assertAttributeConfiguration(typeA, 1, "featureA4", "EInt");
-    EList<EReference> _eReferences = typeA.getEReferences();
-    int _size_2 = _eReferences.size();
-    Assert.assertEquals(2, _size_2);
+    Assert.assertEquals(2, typeA.getEReferences().size());
     this.assertReferenceConfiguration(typeA, 0, "featureA2", "EObject", true, 0, 1);
     this.assertReferenceConfiguration(typeA, 1, "featureA3", "RuleC", true, 0, 1);
   }
@@ -1781,9 +1376,7 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     String _grammar_2 = grammar;
     grammar = (_grammar_2 + " RuleC: (featureA=ID)?;");
     EPackage ePackage = this.getEPackageFromGrammar(grammar);
-    EList<EClassifier> _eClassifiers = ePackage.getEClassifiers();
-    int _size = _eClassifiers.size();
-    Assert.assertEquals(3, _size);
+    Assert.assertEquals(3, ePackage.getEClassifiers().size());
     EClassifier _type = this.<EClassifier>type(ePackage, "RuleA");
     EClass ruleA = ((EClass) _type);
     Assert.assertNotNull(ruleA);
@@ -1793,17 +1386,11 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     EClassifier _type_2 = this.<EClassifier>type(ePackage, "RuleC");
     EClass ruleC = ((EClass) _type_2);
     Assert.assertNotNull(ruleC);
-    EList<EAttribute> _eAttributes = ruleA.getEAttributes();
-    int _size_1 = _eAttributes.size();
-    Assert.assertEquals(1, _size_1);
+    Assert.assertEquals(1, ruleA.getEAttributes().size());
     this.assertAttributeConfiguration(ruleA, 0, "featureA", "EString");
-    EList<EAttribute> _eAttributes_1 = ruleB.getEAttributes();
-    int _size_2 = _eAttributes_1.size();
-    Assert.assertEquals(1, _size_2);
+    Assert.assertEquals(1, ruleB.getEAttributes().size());
     this.assertAttributeConfiguration(ruleB, 0, "featureB", "EInt");
-    EList<EAttribute> _eAttributes_2 = ruleC.getEAttributes();
-    int _size_3 = _eAttributes_2.size();
-    Assert.assertEquals(0, _size_3);
+    Assert.assertEquals(0, ruleC.getEAttributes().size());
   }
   
   @Test
@@ -1816,13 +1403,8 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     this.errorAcceptorMock.acceptError(TransformationErrorCode.NoSuchRuleAvailable, TestErrorAcceptor.ANY_STRING, 
       TestErrorAcceptor.ANY_EOBJECT);
     EPackage ePackage = this.getEPackageFromGrammar(grammar, 1);
-    EList<EClassifier> _eClassifiers = ePackage.getEClassifiers();
-    int _size = _eClassifiers.size();
-    Assert.assertEquals(1, _size);
-    EList<EClassifier> _eClassifiers_1 = ePackage.getEClassifiers();
-    EClassifier _head = IterableExtensions.<EClassifier>head(_eClassifiers_1);
-    String _name = _head.getName();
-    Assert.assertEquals("RuleA", _name);
+    Assert.assertEquals(1, ePackage.getEClassifiers().size());
+    Assert.assertEquals("RuleA", IterableExtensions.<EClassifier>head(ePackage.getEClassifiers()).getName());
   }
   
   @Test
@@ -1838,9 +1420,7 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     EPackage ePackage = this.getEPackageFromGrammar(grammar);
     EClassifier _type = this.<EClassifier>type(ePackage, "Ex");
     EClass classifier = ((EClass) _type);
-    List<? extends EStructuralFeature> _features = this.features(classifier);
-    int _size = _features.size();
-    Assert.assertEquals(0, _size);
+    Assert.assertEquals(0, this.features(classifier).size());
   }
   
   @Test
@@ -1853,18 +1433,12 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     EPackage ePackage = this.getEPackageFromGrammar(grammar);
     EClassifier _type = this.<EClassifier>type(ePackage, "EString");
     EClass classifier = ((EClass) _type);
-    String _name = classifier.getName();
-    Assert.assertEquals("EString", _name);
+    Assert.assertEquals("EString", classifier.getName());
     EStructuralFeature feature = this.<EStructuralFeature>feature(classifier, "id");
     Assert.assertNotNull(feature);
-    EClassifier _eType = feature.getEType();
-    String _name_1 = _eType.getName();
-    Assert.assertEquals("EString", _name_1);
-    EClassifier _eType_1 = feature.getEType();
-    boolean _equals = _eType_1.equals(classifier);
-    Assert.assertFalse(_equals);
-    EClassifier _eType_2 = feature.getEType();
-    Assert.assertEquals(EcorePackage.Literals.ESTRING, _eType_2);
+    Assert.assertEquals("EString", feature.getEType().getName());
+    Assert.assertFalse(feature.getEType().equals(classifier));
+    Assert.assertEquals(EcorePackage.Literals.ESTRING, feature.getEType());
   }
   
   @Test
@@ -1923,9 +1497,7 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     _builder.append("EDataType returns ecore::EDataType: \'dt\' name=ID;");
     String grammar = _builder.toString();
     final XtextResource resource = this.getResourceFromString(grammar);
-    EList<Resource.Diagnostic> _errors = resource.getErrors();
-    boolean _isEmpty = _errors.isEmpty();
-    Assert.assertTrue(_isEmpty);
+    Assert.assertTrue(resource.getErrors().isEmpty());
   }
   
   @Test
@@ -1939,10 +1511,7 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     _builder.newLine();
     String grammar = _builder.toString();
     final XtextResource resource = this.getResourceFromStringAndExpect(grammar, 1);
-    EList<Resource.Diagnostic> _errors = resource.getErrors();
-    Resource.Diagnostic _head = IterableExtensions.<Resource.Diagnostic>head(_errors);
-    String _message = _head.getMessage();
-    Assert.assertEquals("no viable alternative at input \';\'", _message);
+    Assert.assertEquals("no viable alternative at input \';\'", IterableExtensions.<Resource.Diagnostic>head(resource.getErrors()).getMessage());
   }
   
   @Test
@@ -1956,10 +1525,7 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     _builder.newLine();
     String grammar = _builder.toString();
     final XtextResource resource = this.getResourceFromStringAndExpect(grammar, 1);
-    EList<Resource.Diagnostic> _errors = resource.getErrors();
-    Resource.Diagnostic _head = IterableExtensions.<Resource.Diagnostic>head(_errors);
-    String _message = _head.getMessage();
-    Assert.assertEquals("no viable alternative at input \';\'", _message);
+    Assert.assertEquals("no viable alternative at input \';\'", IterableExtensions.<Resource.Diagnostic>head(resource.getErrors()).getMessage());
   }
   
   @Test
@@ -1976,9 +1542,7 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     _builder.append("EDataType: \'dt\' name=ID;");
     String grammar = _builder.toString();
     final XtextResource resource = this.getResourceFromString(grammar);
-    EList<Resource.Diagnostic> _errors = resource.getErrors();
-    boolean _isEmpty = _errors.isEmpty();
-    Assert.assertTrue(_isEmpty);
+    Assert.assertTrue(resource.getErrors().isEmpty());
     EList<EObject> _contents = resource.getContents();
     EObject _head = IterableExtensions.<EObject>head(_contents);
     final Grammar parsedGrammar = ((Grammar) _head);
@@ -1988,8 +1552,7 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
         TypeRef _type = rule.getType();
         final EClassifier classifier = _type.getClassifier();
         EPackage pack = classifier.getEPackage();
-        String _name = pack.getName();
-        Assert.assertEquals("bugreport", _name);
+        Assert.assertEquals("bugreport", pack.getName());
       }
     }
   }
@@ -2018,8 +1581,7 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     resource.load(null);
     EList<Resource.Diagnostic> _errors = resource.getErrors();
     for (final Resource.Diagnostic d : _errors) {
-      String _message = d.getMessage();
-      Assert.fail(_message);
+      Assert.fail(d.getMessage());
     }
   }
   
@@ -2047,11 +1609,7 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     _builder.newLine();
     String grammar = _builder.toString();
     final XtextResource resource = this.getResourceFromString(grammar);
-    EList<Resource.Diagnostic> _errors = resource.getErrors();
-    String _string = _errors.toString();
-    EList<Resource.Diagnostic> _errors_1 = resource.getErrors();
-    boolean _isEmpty = _errors_1.isEmpty();
-    Assert.assertTrue(_string, _isEmpty);
+    Assert.assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
   }
   
   @Test
@@ -2083,11 +1641,7 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     _builder.newLine();
     String grammar = _builder.toString();
     final XtextResource resource = this.getResourceFromString(grammar);
-    EList<Resource.Diagnostic> _errors = resource.getErrors();
-    String _string = _errors.toString();
-    EList<Resource.Diagnostic> _errors_1 = resource.getErrors();
-    boolean _isEmpty = _errors_1.isEmpty();
-    Assert.assertTrue(_string, _isEmpty);
+    Assert.assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
   }
   
   @Test
@@ -2119,13 +1673,9 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     _builder.newLine();
     String grammar = _builder.toString();
     final XtextResource resource = this.getResourceFromStringAndExpect(grammar, 1);
+    Assert.assertFalse(resource.getErrors().toString(), resource.getErrors().isEmpty());
     EList<Resource.Diagnostic> _errors = resource.getErrors();
-    String _string = _errors.toString();
-    EList<Resource.Diagnostic> _errors_1 = resource.getErrors();
-    boolean _isEmpty = _errors_1.isEmpty();
-    Assert.assertFalse(_string, _isEmpty);
-    EList<Resource.Diagnostic> _errors_2 = resource.getErrors();
-    for (final Resource.Diagnostic d : _errors_2) {
+    for (final Resource.Diagnostic d : _errors) {
       Assert.assertFalse((d instanceof ExceptionDiagnostic));
     }
   }
@@ -2136,9 +1686,7 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     _builder.append("grammar test with org.eclipse.xtext.common.Terminals import \'http://www.eclipse.org/emf/2002/Ecore\' as ecore  import \'classpath:/org/eclipse/xtext/xtext/ecoreInference/test.ecore\' as test  A returns ecore::EObject: B | C;  B returns test::Optional: \'b\' optionalString=STRING;  C returns test::Mandatory: \'c\' mandatoryString=STRING; ");
     String grammar = _builder.toString();
     final XtextResource resource = this.getResourceFromString(grammar);
-    EList<Resource.Diagnostic> _errors = resource.getErrors();
-    boolean _isEmpty = _errors.isEmpty();
-    Assert.assertTrue(_isEmpty);
+    Assert.assertTrue(resource.getErrors().isEmpty());
   }
   
   @Test
@@ -2148,11 +1696,7 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     _builder.append("grammar test with org.eclipse.xtext.common.Terminals import \'http://www.eclipse.org/emf/2002/Ecore\' as ecore  Object returns ecore::EObject: {ecore::EInt}; ");
     String grammar = _builder.toString();
     final XtextResource resource = this.getResourceFromStringAndExpect(grammar, 1);
-    EList<Resource.Diagnostic> _errors = resource.getErrors();
-    String _string = _errors.toString();
-    EList<Resource.Diagnostic> _errors_1 = resource.getErrors();
-    int _size = _errors_1.size();
-    Assert.assertEquals(_string, 1, _size);
+    Assert.assertEquals(resource.getErrors().toString(), 1, resource.getErrors().size());
   }
   
   @Test
@@ -2162,9 +1706,7 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     _builder.append("grammar test with org.eclipse.xtext.common.Terminals import \'http://www.eclipse.org/emf/2002/Ecore\' as ecore  Object returns ecore::EObject: {ecore::EAnnotation}; ");
     String grammar = _builder.toString();
     final XtextResource resource = this.getResourceFromString(grammar);
-    EList<Resource.Diagnostic> _errors = resource.getErrors();
-    boolean _isEmpty = _errors.isEmpty();
-    Assert.assertTrue(_isEmpty);
+    Assert.assertTrue(resource.getErrors().isEmpty());
   }
   
   @Test
@@ -2181,8 +1723,7 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     final Xtext2EcoreTransformerTest.MockedXtext2EcorePostProcessor postProcessor = new Xtext2EcoreTransformerTest.MockedXtext2EcorePostProcessor(testMetamodel);
     transformer.setPostProcessor(postProcessor);
     transformer.transform();
-    int _proccessMethCalled = postProcessor.proccessMethCalled();
-    Assert.assertEquals("process mthde called once", 1, _proccessMethCalled);
+    Assert.assertEquals("process mthde called once", 1, postProcessor.proccessMethCalled());
   }
   
   @Test
@@ -2196,11 +1737,7 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     _builder.newLine();
     final String grammar = _builder.toString();
     final XtextResource resource = this.getResourceFromString(grammar);
-    EList<Resource.Diagnostic> _errors = resource.getErrors();
-    String _string = _errors.toString();
-    EList<Resource.Diagnostic> _errors_1 = resource.getErrors();
-    boolean _isEmpty = _errors_1.isEmpty();
-    Assert.assertTrue(_string, _isEmpty);
+    Assert.assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
   }
   
   @Test
@@ -2216,11 +1753,7 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     _builder.newLine();
     final String grammar = _builder.toString();
     final XtextResource resource = this.getResourceFromString(grammar);
-    EList<Resource.Diagnostic> _errors = resource.getErrors();
-    String _string = _errors.toString();
-    EList<Resource.Diagnostic> _errors_1 = resource.getErrors();
-    boolean _isEmpty = _errors_1.isEmpty();
-    Assert.assertTrue(_string, _isEmpty);
+    Assert.assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
   }
   
   @Test
@@ -2236,11 +1769,7 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     _builder.newLine();
     final String grammar = _builder.toString();
     final XtextResource resource = this.getResourceFromString(grammar);
-    EList<Resource.Diagnostic> _errors = resource.getErrors();
-    String _string = _errors.toString();
-    EList<Resource.Diagnostic> _errors_1 = resource.getErrors();
-    boolean _isEmpty = _errors_1.isEmpty();
-    Assert.assertTrue(_string, _isEmpty);
+    Assert.assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
   }
   
   @Test
@@ -2256,21 +1785,13 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     _builder.newLine();
     final String grammar = _builder.toString();
     final XtextResource resource = this.getResourceFromStringAndExpect(grammar, 1);
+    Assert.assertEquals(resource.getErrors().toString(), 1, resource.getErrors().size());
     EList<Resource.Diagnostic> _errors = resource.getErrors();
-    String _string = _errors.toString();
-    EList<Resource.Diagnostic> _errors_1 = resource.getErrors();
-    int _size = _errors_1.size();
-    Assert.assertEquals(_string, 1, _size);
-    EList<Resource.Diagnostic> _errors_2 = resource.getErrors();
-    Resource.Diagnostic _get = _errors_2.get(
+    Resource.Diagnostic _get = _errors.get(
       0);
     TransformationDiagnostic diagnostic = ((TransformationDiagnostic) _get);
-    int _indexOf = grammar.indexOf("mm::Atom");
-    int _offset = diagnostic.getOffset();
-    Assert.assertEquals(_indexOf, _offset);
-    int _length = "mm::Atom".length();
-    int _length_1 = diagnostic.getLength();
-    Assert.assertEquals(_length, _length_1);
+    Assert.assertEquals(grammar.indexOf("mm::Atom"), diagnostic.getOffset());
+    Assert.assertEquals("mm::Atom".length(), diagnostic.getLength());
   }
   
   @Test
@@ -2296,11 +1817,7 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     _builder.newLine();
     final String grammar = _builder.toString();
     final XtextResource resource = this.getResourceFromStringAndExpect(grammar, 1);
-    EList<Resource.Diagnostic> _errors = resource.getErrors();
-    String _string = _errors.toString();
-    EList<Resource.Diagnostic> _errors_1 = resource.getErrors();
-    int _size = _errors_1.size();
-    Assert.assertEquals(_string, 1, _size);
+    Assert.assertEquals(resource.getErrors().toString(), 1, resource.getErrors().size());
   }
   
   @Test
@@ -2321,11 +1838,7 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     _builder.newLine();
     final String grammar = _builder.toString();
     final XtextResource resource = this.getResourceFromString(grammar);
-    EList<Resource.Diagnostic> _errors = resource.getErrors();
-    String _string = _errors.toString();
-    EList<Resource.Diagnostic> _errors_1 = resource.getErrors();
-    int _size = _errors_1.size();
-    Assert.assertEquals(_string, 0, _size);
+    Assert.assertEquals(resource.getErrors().toString(), 0, resource.getErrors().size());
   }
   
   @Test
@@ -2344,11 +1857,7 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     _builder.newLine();
     final String grammar = _builder.toString();
     final XtextResource resource = this.getResourceFromString(grammar);
-    EList<Resource.Diagnostic> _errors = resource.getErrors();
-    String _string = _errors.toString();
-    EList<Resource.Diagnostic> _errors_1 = resource.getErrors();
-    int _size = _errors_1.size();
-    Assert.assertEquals(_string, 0, _size);
+    Assert.assertEquals(resource.getErrors().toString(), 0, resource.getErrors().size());
   }
   
   @Test
@@ -2367,11 +1876,7 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     _builder.newLine();
     final String grammar = _builder.toString();
     final XtextResource resource = this.getResourceFromString(grammar);
-    EList<Resource.Diagnostic> _errors = resource.getErrors();
-    String _string = _errors.toString();
-    EList<Resource.Diagnostic> _errors_1 = resource.getErrors();
-    int _size = _errors_1.size();
-    Assert.assertEquals(_string, 0, _size);
+    Assert.assertEquals(resource.getErrors().toString(), 0, resource.getErrors().size());
   }
   
   @Test
@@ -2390,11 +1895,7 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     _builder.newLine();
     final String grammar = _builder.toString();
     final XtextResource resource = this.getResourceFromStringAndExpect(grammar, 1);
-    EList<Resource.Diagnostic> _errors = resource.getErrors();
-    String _string = _errors.toString();
-    EList<Resource.Diagnostic> _errors_1 = resource.getErrors();
-    int _size = _errors_1.size();
-    Assert.assertEquals(_string, 1, _size);
+    Assert.assertEquals(resource.getErrors().toString(), 1, resource.getErrors().size());
   }
   
   @Test
@@ -2413,11 +1914,7 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     _builder.newLine();
     final String grammar = _builder.toString();
     final XtextResource resource = this.getResourceFromString(grammar);
-    EList<Resource.Diagnostic> _errors = resource.getErrors();
-    String _string = _errors.toString();
-    EList<Resource.Diagnostic> _errors_1 = resource.getErrors();
-    int _size = _errors_1.size();
-    Assert.assertEquals(_string, 0, _size);
+    Assert.assertEquals(resource.getErrors().toString(), 0, resource.getErrors().size());
   }
   
   @Test
@@ -2437,11 +1934,7 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     _builder.newLine();
     String grammar = _builder.toString();
     final XtextResource resource = this.getResourceFromString(grammar);
-    EList<Resource.Diagnostic> _errors = resource.getErrors();
-    String _string = _errors.toString();
-    EList<Resource.Diagnostic> _errors_1 = resource.getErrors();
-    int _size = _errors_1.size();
-    Assert.assertEquals(_string, 0, _size);
+    Assert.assertEquals(resource.getErrors().toString(), 0, resource.getErrors().size());
   }
   
   @Test
@@ -2461,11 +1954,7 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     _builder.newLine();
     String grammar = _builder.toString();
     final XtextResource resource = this.getResourceFromString(grammar);
-    EList<Resource.Diagnostic> _errors = resource.getErrors();
-    String _string = _errors.toString();
-    EList<Resource.Diagnostic> _errors_1 = resource.getErrors();
-    int _size = _errors_1.size();
-    Assert.assertEquals(_string, 0, _size);
+    Assert.assertEquals(resource.getErrors().toString(), 0, resource.getErrors().size());
   }
   
   @Test
@@ -2493,11 +1982,8 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     _builder.newLine();
     String grammar = _builder.toString();
     final XtextResource resource = this.getResourceFromString(grammar);
-    EList<Resource.Diagnostic> _errors = resource.getErrors();
-    String _string = _errors.toString();
-    EList<Resource.Diagnostic> _errors_1 = resource.getErrors();
-    int _size = _errors_1.size();
-    Assert.assertEquals(_string, 0, _size);
+    Assert.assertEquals(resource.getErrors().toString(), 0, 
+      resource.getErrors().size());
   }
   
   @Test
@@ -2506,11 +1992,8 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     _builder.append("grammar test with org.eclipse.xtext.common.Terminals import \'http://www.eclipse.org/emf/2002/Ecore\' EClass: name=ID eSuperTypes+=EClass;");
     final String grammar = _builder.toString();
     final XtextResource resource = this.getResourceFromStringAndExpect(grammar, 1);
-    EList<Resource.Diagnostic> _errors = resource.getErrors();
-    String _string = _errors.toString();
-    EList<Resource.Diagnostic> _errors_1 = resource.getErrors();
-    int _size = _errors_1.size();
-    Assert.assertEquals(_string, 1, _size);
+    Assert.assertEquals(resource.getErrors().toString(), 1, 
+      resource.getErrors().size());
   }
   
   @Test
@@ -2519,11 +2002,8 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     _builder.append("grammar test with org.eclipse.xtext.common.Terminals import \'http://www.eclipse.org/emf/2002/Ecore\' EClass: name=ID eSuperTypes+=[EClass];");
     final String grammar = _builder.toString();
     final XtextResource resource = this.getResourceFromString(grammar);
-    EList<Resource.Diagnostic> _errors = resource.getErrors();
-    String _string = _errors.toString();
-    EList<Resource.Diagnostic> _errors_1 = resource.getErrors();
-    int _size = _errors_1.size();
-    Assert.assertEquals(_string, 0, _size);
+    Assert.assertEquals(resource.getErrors().toString(), 0, 
+      resource.getErrors().size());
   }
   
   @Test
@@ -2532,11 +2012,8 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     _builder.append("grammar test with org.eclipse.xtext.common.Terminals import \'http://www.eclipse.org/emf/2002/Ecore\' EReference: name=ID eType=[EClass];");
     final String grammar = _builder.toString();
     final XtextResource resource = this.getResourceFromString(grammar);
-    EList<Resource.Diagnostic> _errors = resource.getErrors();
-    String _string = _errors.toString();
-    EList<Resource.Diagnostic> _errors_1 = resource.getErrors();
-    int _size = _errors_1.size();
-    Assert.assertEquals(_string, 0, _size);
+    Assert.assertEquals(resource.getErrors().toString(), 0, 
+      resource.getErrors().size());
   }
   
   @Test
@@ -2552,11 +2029,8 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     _builder.newLine();
     final String grammar = _builder.toString();
     final XtextResource resource = this.getResourceFromStringAndExpect(grammar, 1);
-    EList<Resource.Diagnostic> _errors = resource.getErrors();
-    String _string = _errors.toString();
-    EList<Resource.Diagnostic> _errors_1 = resource.getErrors();
-    int _size = _errors_1.size();
-    Assert.assertEquals(_string, 1, _size);
+    Assert.assertEquals(resource.getErrors().toString(), 1, 
+      resource.getErrors().size());
   }
   
   @Test
@@ -2565,11 +2039,8 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     _builder.append("grammar test with org.eclipse.xtext.common.Terminals import \'http://www.eclipse.org/emf/2002/Ecore\' EReference: name=ID eContainingClass=[EClass];");
     final String grammar = _builder.toString();
     final XtextResource resource = this.getResourceFromStringAndExpect(grammar, 1);
-    EList<Resource.Diagnostic> _errors = resource.getErrors();
-    String _string = _errors.toString();
-    EList<Resource.Diagnostic> _errors_1 = resource.getErrors();
-    int _size = _errors_1.size();
-    Assert.assertEquals(_string, 1, _size);
+    Assert.assertEquals(resource.getErrors().toString(), 1, 
+      resource.getErrors().size());
   }
   
   @Test
@@ -2585,11 +2056,8 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     _builder.newLine();
     final String grammar = _builder.toString();
     final XtextResource resource = this.getResourceFromStringAndExpect(grammar, 1);
-    EList<Resource.Diagnostic> _errors = resource.getErrors();
-    String _string = _errors.toString();
-    EList<Resource.Diagnostic> _errors_1 = resource.getErrors();
-    int _size = _errors_1.size();
-    Assert.assertEquals(_string, 1, _size);
+    Assert.assertEquals(resource.getErrors().toString(), 1, 
+      resource.getErrors().size());
   }
   
   @Test
@@ -2611,11 +2079,8 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     _builder.newLine();
     final String grammar = _builder.toString();
     final XtextResource resource = this.getResourceFromStringAndExpect(grammar, 1);
-    EList<Resource.Diagnostic> _errors = resource.getErrors();
-    String _string = _errors.toString();
-    EList<Resource.Diagnostic> _errors_1 = resource.getErrors();
-    int _size = _errors_1.size();
-    Assert.assertEquals(_string, 1, _size);
+    Assert.assertEquals(resource.getErrors().toString(), 1, 
+      resource.getErrors().size());
   }
   
   @Test
@@ -2639,27 +2104,19 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     _builder.newLine();
     final String grammarAsString = _builder.toString();
     final XtextResource resource = this.getResourceFromStringAndExpect(grammarAsString, 0);
-    EList<Resource.Diagnostic> _errors = resource.getErrors();
-    String _string = _errors.toString();
-    EList<Resource.Diagnostic> _errors_1 = resource.getErrors();
-    boolean _isEmpty = _errors_1.isEmpty();
-    Assert.assertTrue(_string, _isEmpty);
+    Assert.assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
     EList<EObject> _contents = resource.getContents();
     EObject _head = IterableExtensions.<EObject>head(_contents);
     final Grammar grammar = ((Grammar) _head);
     EList<AbstractMetamodelDeclaration> _metamodelDeclarations = grammar.getMetamodelDeclarations();
     AbstractMetamodelDeclaration _get = _metamodelDeclarations.get(1);
     GeneratedMetamodel generatedMetamodel = ((GeneratedMetamodel) _get);
-    String _name = generatedMetamodel.getName();
-    Assert.assertEquals("myDsl", _name);
+    Assert.assertEquals("myDsl", generatedMetamodel.getName());
     EPackage _ePackage = generatedMetamodel.getEPackage();
     EClassifier _type = this.<EClassifier>type(_ePackage, "CreatedType");
     EClass createdType = ((EClass) _type);
-    EStructuralFeature _feature = this.<EStructuralFeature>feature(createdType, "enumFeature");
-    EClassifier _eType = _feature.getEType();
-    EStructuralFeature _feature_1 = this.<EStructuralFeature>feature(createdType, "otherEnumFeature");
-    EClassifier _eType_1 = _feature_1.getEType();
-    Assert.assertEquals(_eType, _eType_1);
+    Assert.assertEquals(this.<EStructuralFeature>feature(createdType, "enumFeature").getEType(), 
+      this.<EStructuralFeature>feature(createdType, "otherEnumFeature").getEType());
   }
   
   @Test
@@ -2681,23 +2138,15 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     EList<AbstractMetamodelDeclaration> _metamodelDeclarations = grammar.getMetamodelDeclarations();
     AbstractMetamodelDeclaration _head_1 = IterableExtensions.<AbstractMetamodelDeclaration>head(_metamodelDeclarations);
     GeneratedMetamodel generatedMetamodel = ((GeneratedMetamodel) _head_1);
-    String _name = generatedMetamodel.getName();
-    Assert.assertEquals("myDsl", _name);
+    Assert.assertEquals("myDsl", generatedMetamodel.getName());
+    Assert.assertEquals(1, generatedMetamodel.getEPackage().getEClassifiers().size());
     EPackage _ePackage = generatedMetamodel.getEPackage();
-    EList<EClassifier> _eClassifiers = _ePackage.getEClassifiers();
-    int _size = _eClassifiers.size();
-    Assert.assertEquals(1, _size);
-    EPackage _ePackage_1 = generatedMetamodel.getEPackage();
-    EClassifier _type = this.<EClassifier>type(_ePackage_1, "Model");
+    EClassifier _type = this.<EClassifier>type(_ePackage, "Model");
     EClass createdModel = ((EClass) _type);
-    EStructuralFeature _feature = this.<EStructuralFeature>feature(createdModel, "name");
-    EClassifier _eType = _feature.getEType();
-    Assert.assertEquals(EcorePackage.Literals.ESTRING, _eType);
+    Assert.assertEquals(EcorePackage.Literals.ESTRING, this.<EStructuralFeature>feature(createdModel, "name").getEType());
     EList<AbstractRule> _rules = grammar.getRules();
     for (final AbstractRule rule : _rules) {
-      TypeRef _type_1 = rule.getType();
-      EClassifier _classifier = _type_1.getClassifier();
-      Assert.assertEquals(createdModel, _classifier);
+      Assert.assertEquals(createdModel, rule.getType().getClassifier());
     }
   }
   
@@ -2899,39 +2348,27 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     String _grammar_1 = grammar;
     grammar = (_grammar_1 + " RuleB returns TypeB: {TypeB} \'ignore\';");
     EPackage ePackage = this.getEPackageFromGrammar(grammar);
-    EList<EClassifier> _eClassifiers = ePackage.getEClassifiers();
-    int _size = _eClassifiers.size();
-    Assert.assertEquals(4, _size);
+    Assert.assertEquals(4, ePackage.getEClassifiers().size());
     EClassifier _type = this.<EClassifier>type(ePackage, "TypeA");
     EClass typeA = ((EClass) _type);
     Assert.assertNotNull(typeA);
-    EStructuralFeature _feature = this.<EStructuralFeature>feature(typeA, "name");
-    Assert.assertNotNull(_feature);
-    List<? extends EStructuralFeature> _features = this.features(typeA);
-    int _size_1 = _features.size();
-    Assert.assertEquals(1, _size_1);
+    Assert.assertNotNull(this.<EStructuralFeature>feature(typeA, "name"));
+    Assert.assertEquals(1, this.features(typeA).size());
     EClassifier _type_1 = this.<EClassifier>type(ePackage, "TypeB");
     EClass typeB = ((EClass) _type_1);
     Assert.assertNotNull(typeB);
-    List<? extends EStructuralFeature> _features_1 = this.features(typeB);
-    boolean _isEmpty = _features_1.isEmpty();
-    Assert.assertTrue(_isEmpty);
+    Assert.assertTrue(this.features(typeB).isEmpty());
     EClassifier _type_2 = this.<EClassifier>type(ePackage, "TypeC");
     EClass typeC = ((EClass) _type_2);
     Assert.assertNotNull(typeC);
-    EStructuralFeature _feature_1 = this.<EStructuralFeature>feature(typeC, "x");
-    Assert.assertNotNull(_feature_1);
-    List<? extends EStructuralFeature> _features_2 = this.features(typeC);
-    int _size_2 = _features_2.size();
-    Assert.assertEquals(1, _size_2);
+    Assert.assertNotNull(this.<EStructuralFeature>feature(typeC, "x"));
+    Assert.assertEquals(1, this.features(typeC).size());
     EClassifier _type_3 = this.<EClassifier>type(ePackage, "TypeD");
     EClass typeD = ((EClass) _type_3);
     Assert.assertNotNull(typeD);
-    EStructuralFeature _feature_2 = this.<EStructuralFeature>feature(typeD, "x");
-    Assert.assertNotNull(_feature_2);
-    List<? extends EStructuralFeature> _features_3 = this.features(typeD);
-    int _size_3 = _features_3.size();
-    Assert.assertEquals(1, _size_3);
+    Assert.assertNotNull(this.<EStructuralFeature>feature(typeD, "x"));
+    Assert.assertEquals(1, 
+      this.features(typeD).size());
   }
   
   @Test
@@ -2944,41 +2381,27 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     String _grammar_1 = grammar;
     grammar = (_grammar_1 + " RuleB returns TypeB: {TypeB} \'ignore\';");
     EPackage ePackage = this.getEPackageFromGrammar(grammar);
-    EList<EClassifier> _eClassifiers = ePackage.getEClassifiers();
-    int _size = _eClassifiers.size();
-    Assert.assertEquals(4, _size);
+    Assert.assertEquals(4, ePackage.getEClassifiers().size());
     EClassifier _type = this.<EClassifier>type(ePackage, "TypeA");
     EClass typeA = ((EClass) _type);
     Assert.assertNotNull(typeA);
-    List<? extends EStructuralFeature> _features = this.features(typeA);
-    boolean _isEmpty = _features.isEmpty();
-    Assert.assertTrue(_isEmpty);
+    Assert.assertTrue(this.features(typeA).isEmpty());
     EClassifier _type_1 = this.<EClassifier>type(ePackage, "TypeB");
     EClass typeB = ((EClass) _type_1);
     Assert.assertNotNull(typeB);
-    List<? extends EStructuralFeature> _features_1 = this.features(typeB);
-    boolean _isEmpty_1 = _features_1.isEmpty();
-    Assert.assertTrue(_isEmpty_1);
+    Assert.assertTrue(this.features(typeB).isEmpty());
     EClassifier _type_2 = this.<EClassifier>type(ePackage, "TypeC");
     EClass typeC = ((EClass) _type_2);
     Assert.assertNotNull(typeC);
-    EStructuralFeature _feature = this.<EStructuralFeature>feature(typeC, "x");
-    Assert.assertNotNull(_feature);
-    EStructuralFeature _feature_1 = this.<EStructuralFeature>feature(typeC, "name");
-    Assert.assertNotNull(_feature_1);
-    List<? extends EStructuralFeature> _features_2 = this.features(typeC);
-    int _size_1 = _features_2.size();
-    Assert.assertEquals(2, _size_1);
+    Assert.assertNotNull(this.<EStructuralFeature>feature(typeC, "x"));
+    Assert.assertNotNull(this.<EStructuralFeature>feature(typeC, "name"));
+    Assert.assertEquals(2, this.features(typeC).size());
     EClassifier _type_3 = this.<EClassifier>type(ePackage, "TypeD");
     EClass typeD = ((EClass) _type_3);
     Assert.assertNotNull(typeD);
-    EStructuralFeature _feature_2 = this.<EStructuralFeature>feature(typeD, "x");
-    Assert.assertNotNull(_feature_2);
-    EStructuralFeature _feature_3 = this.<EStructuralFeature>feature(typeD, "name");
-    Assert.assertNotNull(_feature_3);
-    List<? extends EStructuralFeature> _features_3 = this.features(typeD);
-    int _size_2 = _features_3.size();
-    Assert.assertEquals(2, _size_2);
+    Assert.assertNotNull(this.<EStructuralFeature>feature(typeD, "x"));
+    Assert.assertNotNull(this.<EStructuralFeature>feature(typeD, "name"));
+    Assert.assertEquals(2, this.features(typeD).size());
   }
   
   @Test
@@ -2991,39 +2414,26 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     String _grammar_1 = grammar;
     grammar = (_grammar_1 + " RuleB returns TypeB: {TypeB} name+=ID;");
     EPackage ePackage = this.getEPackageFromGrammar(grammar);
-    EList<EClassifier> _eClassifiers = ePackage.getEClassifiers();
-    int _size = _eClassifiers.size();
-    Assert.assertEquals(4, _size);
+    Assert.assertEquals(4, ePackage.getEClassifiers().size());
     EClassifier _type = this.<EClassifier>type(ePackage, "TypeA");
     EClass typeA = ((EClass) _type);
     Assert.assertNotNull(typeA);
-    EStructuralFeature _feature = this.<EStructuralFeature>feature(typeA, "name");
-    Assert.assertNotNull(_feature);
-    List<? extends EStructuralFeature> _features = this.features(typeA);
-    int _size_1 = _features.size();
-    Assert.assertEquals(1, _size_1);
+    Assert.assertNotNull(this.<EStructuralFeature>feature(typeA, "name"));
+    Assert.assertEquals(1, this.features(typeA).size());
     EClassifier _type_1 = this.<EClassifier>type(ePackage, "TypeB");
     EClass typeB = ((EClass) _type_1);
     Assert.assertNotNull(typeB);
-    List<? extends EStructuralFeature> _features_1 = this.features(typeB);
-    boolean _isEmpty = _features_1.isEmpty();
-    Assert.assertTrue(_isEmpty);
+    Assert.assertTrue(this.features(typeB).isEmpty());
     EClassifier _type_2 = this.<EClassifier>type(ePackage, "TypeC");
     EClass typeC = ((EClass) _type_2);
     Assert.assertNotNull(typeC);
-    EStructuralFeature _feature_1 = this.<EStructuralFeature>feature(typeC, "x");
-    Assert.assertNotNull(_feature_1);
-    List<? extends EStructuralFeature> _features_2 = this.features(typeC);
-    int _size_2 = _features_2.size();
-    Assert.assertEquals(1, _size_2);
+    Assert.assertNotNull(this.<EStructuralFeature>feature(typeC, "x"));
+    Assert.assertEquals(1, this.features(typeC).size());
     EClassifier _type_3 = this.<EClassifier>type(ePackage, "TypeD");
     EClass typeD = ((EClass) _type_3);
     Assert.assertNotNull(typeD);
-    EStructuralFeature _feature_2 = this.<EStructuralFeature>feature(typeD, "x");
-    Assert.assertNotNull(_feature_2);
-    List<? extends EStructuralFeature> _features_3 = this.features(typeD);
-    int _size_3 = _features_3.size();
-    Assert.assertEquals(1, _size_3);
+    Assert.assertNotNull(this.<EStructuralFeature>feature(typeD, "x"));
+    Assert.assertEquals(1, this.features(typeD).size());
   }
   
   @Test
@@ -3036,39 +2446,26 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     String _grammar_1 = grammar;
     grammar = (_grammar_1 + " RuleB returns TypeB: {TypeB} name+=ID;");
     EPackage ePackage = this.getEPackageFromGrammar(grammar);
-    EList<EClassifier> _eClassifiers = ePackage.getEClassifiers();
-    int _size = _eClassifiers.size();
-    Assert.assertEquals(4, _size);
+    Assert.assertEquals(4, ePackage.getEClassifiers().size());
     EClassifier _type = this.<EClassifier>type(ePackage, "TypeA");
     EClass typeA = ((EClass) _type);
     Assert.assertNotNull(typeA);
-    EStructuralFeature _feature = this.<EStructuralFeature>feature(typeA, "name");
-    Assert.assertNotNull(_feature);
-    List<? extends EStructuralFeature> _features = this.features(typeA);
-    int _size_1 = _features.size();
-    Assert.assertEquals(1, _size_1);
+    Assert.assertNotNull(this.<EStructuralFeature>feature(typeA, "name"));
+    Assert.assertEquals(1, this.features(typeA).size());
     EClassifier _type_1 = this.<EClassifier>type(ePackage, "TypeB");
     EClass typeB = ((EClass) _type_1);
     Assert.assertNotNull(typeB);
-    List<? extends EStructuralFeature> _features_1 = this.features(typeB);
-    boolean _isEmpty = _features_1.isEmpty();
-    Assert.assertTrue(_isEmpty);
+    Assert.assertTrue(this.features(typeB).isEmpty());
     EClassifier _type_2 = this.<EClassifier>type(ePackage, "TypeC");
     EClass typeC = ((EClass) _type_2);
     Assert.assertNotNull(typeC);
-    EStructuralFeature _feature_1 = this.<EStructuralFeature>feature(typeC, "x");
-    Assert.assertNotNull(_feature_1);
-    List<? extends EStructuralFeature> _features_2 = this.features(typeC);
-    int _size_2 = _features_2.size();
-    Assert.assertEquals(1, _size_2);
+    Assert.assertNotNull(this.<EStructuralFeature>feature(typeC, "x"));
+    Assert.assertEquals(1, this.features(typeC).size());
     EClassifier _type_3 = this.<EClassifier>type(ePackage, "TypeD");
     EClass typeD = ((EClass) _type_3);
     Assert.assertNotNull(typeD);
-    EStructuralFeature _feature_2 = this.<EStructuralFeature>feature(typeD, "x");
-    Assert.assertNotNull(_feature_2);
-    List<? extends EStructuralFeature> _features_3 = this.features(typeD);
-    int _size_3 = _features_3.size();
-    Assert.assertEquals(1, _size_3);
+    Assert.assertNotNull(this.<EStructuralFeature>feature(typeD, "x"));
+    Assert.assertEquals(1, this.features(typeD).size());
   }
   
   @Test
@@ -3081,39 +2478,26 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     String _grammar_1 = grammar;
     grammar = (_grammar_1 + " RuleB returns TypeB: {TypeB} \'ignore\';");
     EPackage ePackage = this.getEPackageFromGrammar(grammar);
-    EList<EClassifier> _eClassifiers = ePackage.getEClassifiers();
-    int _size = _eClassifiers.size();
-    Assert.assertEquals(4, _size);
+    Assert.assertEquals(4, ePackage.getEClassifiers().size());
     EClassifier _type = this.<EClassifier>type(ePackage, "TypeA");
     EClass typeA = ((EClass) _type);
     Assert.assertNotNull(typeA);
-    EStructuralFeature _feature = this.<EStructuralFeature>feature(typeA, "name");
-    Assert.assertNotNull(_feature);
-    List<? extends EStructuralFeature> _features = this.features(typeA);
-    int _size_1 = _features.size();
-    Assert.assertEquals(1, _size_1);
+    Assert.assertNotNull(this.<EStructuralFeature>feature(typeA, "name"));
+    Assert.assertEquals(1, this.features(typeA).size());
     EClassifier _type_1 = this.<EClassifier>type(ePackage, "TypeB");
     EClass typeB = ((EClass) _type_1);
     Assert.assertNotNull(typeB);
-    List<? extends EStructuralFeature> _features_1 = this.features(typeB);
-    boolean _isEmpty = _features_1.isEmpty();
-    Assert.assertTrue(_isEmpty);
+    Assert.assertTrue(this.features(typeB).isEmpty());
     EClassifier _type_2 = this.<EClassifier>type(ePackage, "TypeC");
     EClass typeC = ((EClass) _type_2);
     Assert.assertNotNull(typeC);
-    EStructuralFeature _feature_1 = this.<EStructuralFeature>feature(typeC, "x");
-    Assert.assertNotNull(_feature_1);
-    List<? extends EStructuralFeature> _features_2 = this.features(typeC);
-    int _size_2 = _features_2.size();
-    Assert.assertEquals(1, _size_2);
+    Assert.assertNotNull(this.<EStructuralFeature>feature(typeC, "x"));
+    Assert.assertEquals(1, this.features(typeC).size());
     EClassifier _type_3 = this.<EClassifier>type(ePackage, "TypeD");
     EClass typeD = ((EClass) _type_3);
     Assert.assertNotNull(typeD);
-    EStructuralFeature _feature_2 = this.<EStructuralFeature>feature(typeD, "x");
-    Assert.assertNotNull(_feature_2);
-    List<? extends EStructuralFeature> _features_3 = this.features(typeD);
-    int _size_3 = _features_3.size();
-    Assert.assertEquals(1, _size_3);
+    Assert.assertNotNull(this.<EStructuralFeature>feature(typeD, "x"));
+    Assert.assertEquals(1, this.features(typeD).size());
   }
   
   @Test
@@ -3126,41 +2510,27 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     String _grammar_1 = grammar;
     grammar = (_grammar_1 + " RuleB returns TypeB: {TypeB} \'ignore\';");
     EPackage ePackage = this.getEPackageFromGrammar(grammar);
-    EList<EClassifier> _eClassifiers = ePackage.getEClassifiers();
-    int _size = _eClassifiers.size();
-    Assert.assertEquals(4, _size);
+    Assert.assertEquals(4, ePackage.getEClassifiers().size());
     EClassifier _type = this.<EClassifier>type(ePackage, "TypeA");
     EClass typeA = ((EClass) _type);
     Assert.assertNotNull(typeA);
-    List<? extends EStructuralFeature> _features = this.features(typeA);
-    boolean _isEmpty = _features.isEmpty();
-    Assert.assertTrue(_isEmpty);
+    Assert.assertTrue(this.features(typeA).isEmpty());
     EClassifier _type_1 = this.<EClassifier>type(ePackage, "TypeB");
     EClass typeB = ((EClass) _type_1);
     Assert.assertNotNull(typeB);
-    List<? extends EStructuralFeature> _features_1 = this.features(typeB);
-    boolean _isEmpty_1 = _features_1.isEmpty();
-    Assert.assertTrue(_isEmpty_1);
+    Assert.assertTrue(this.features(typeB).isEmpty());
     EClassifier _type_2 = this.<EClassifier>type(ePackage, "TypeC");
     EClass typeC = ((EClass) _type_2);
     Assert.assertNotNull(typeC);
-    EStructuralFeature _feature = this.<EStructuralFeature>feature(typeC, "x");
-    Assert.assertNotNull(_feature);
-    EStructuralFeature _feature_1 = this.<EStructuralFeature>feature(typeC, "name");
-    Assert.assertNotNull(_feature_1);
-    List<? extends EStructuralFeature> _features_2 = this.features(typeC);
-    int _size_1 = _features_2.size();
-    Assert.assertEquals(2, _size_1);
+    Assert.assertNotNull(this.<EStructuralFeature>feature(typeC, "x"));
+    Assert.assertNotNull(this.<EStructuralFeature>feature(typeC, "name"));
+    Assert.assertEquals(2, this.features(typeC).size());
     EClassifier _type_3 = this.<EClassifier>type(ePackage, "TypeD");
     EClass typeD = ((EClass) _type_3);
     Assert.assertNotNull(typeD);
-    EStructuralFeature _feature_2 = this.<EStructuralFeature>feature(typeD, "x");
-    Assert.assertNotNull(_feature_2);
-    EStructuralFeature _feature_3 = this.<EStructuralFeature>feature(typeD, "name");
-    Assert.assertNotNull(_feature_3);
-    List<? extends EStructuralFeature> _features_3 = this.features(typeD);
-    int _size_2 = _features_3.size();
-    Assert.assertEquals(2, _size_2);
+    Assert.assertNotNull(this.<EStructuralFeature>feature(typeD, "x"));
+    Assert.assertNotNull(this.<EStructuralFeature>feature(typeD, "name"));
+    Assert.assertEquals(2, this.features(typeD).size());
   }
   
   @Test
@@ -3173,39 +2543,26 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     String _grammar_1 = grammar;
     grammar = (_grammar_1 + " RuleB returns TypeB: {TypeB} name+=ID;");
     EPackage ePackage = this.getEPackageFromGrammar(grammar);
-    EList<EClassifier> _eClassifiers = ePackage.getEClassifiers();
-    int _size = _eClassifiers.size();
-    Assert.assertEquals(4, _size);
+    Assert.assertEquals(4, ePackage.getEClassifiers().size());
     EClassifier _type = this.<EClassifier>type(ePackage, "TypeA");
     EClass typeA = ((EClass) _type);
     Assert.assertNotNull(typeA);
-    EStructuralFeature _feature = this.<EStructuralFeature>feature(typeA, "name");
-    Assert.assertNotNull(_feature);
-    List<? extends EStructuralFeature> _features = this.features(typeA);
-    int _size_1 = _features.size();
-    Assert.assertEquals(1, _size_1);
+    Assert.assertNotNull(this.<EStructuralFeature>feature(typeA, "name"));
+    Assert.assertEquals(1, this.features(typeA).size());
     EClassifier _type_1 = this.<EClassifier>type(ePackage, "TypeB");
     EClass typeB = ((EClass) _type_1);
     Assert.assertNotNull(typeB);
-    List<? extends EStructuralFeature> _features_1 = this.features(typeB);
-    boolean _isEmpty = _features_1.isEmpty();
-    Assert.assertTrue(_isEmpty);
+    Assert.assertTrue(this.features(typeB).isEmpty());
     EClassifier _type_2 = this.<EClassifier>type(ePackage, "TypeC");
     EClass typeC = ((EClass) _type_2);
     Assert.assertNotNull(typeC);
-    EStructuralFeature _feature_1 = this.<EStructuralFeature>feature(typeC, "x");
-    Assert.assertNotNull(_feature_1);
-    List<? extends EStructuralFeature> _features_2 = this.features(typeC);
-    int _size_2 = _features_2.size();
-    Assert.assertEquals(1, _size_2);
+    Assert.assertNotNull(this.<EStructuralFeature>feature(typeC, "x"));
+    Assert.assertEquals(1, this.features(typeC).size());
     EClassifier _type_3 = this.<EClassifier>type(ePackage, "TypeD");
     EClass typeD = ((EClass) _type_3);
     Assert.assertNotNull(typeD);
-    EStructuralFeature _feature_2 = this.<EStructuralFeature>feature(typeD, "x");
-    Assert.assertNotNull(_feature_2);
-    List<? extends EStructuralFeature> _features_3 = this.features(typeD);
-    int _size_3 = _features_3.size();
-    Assert.assertEquals(1, _size_3);
+    Assert.assertNotNull(this.<EStructuralFeature>feature(typeD, "x"));
+    Assert.assertEquals(1, this.features(typeD).size());
   }
   
   @Test
@@ -3218,39 +2575,26 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     String _grammar_1 = grammar;
     grammar = (_grammar_1 + " RuleB returns TypeB: {TypeB} name+=ID;");
     EPackage ePackage = this.getEPackageFromGrammar(grammar);
-    EList<EClassifier> _eClassifiers = ePackage.getEClassifiers();
-    int _size = _eClassifiers.size();
-    Assert.assertEquals(4, _size);
+    Assert.assertEquals(4, ePackage.getEClassifiers().size());
     EClassifier _type = this.<EClassifier>type(ePackage, "TypeA");
     EClass typeA = ((EClass) _type);
     Assert.assertNotNull(typeA);
-    EStructuralFeature _feature = this.<EStructuralFeature>feature(typeA, "name");
-    Assert.assertNotNull(_feature);
-    List<? extends EStructuralFeature> _features = this.features(typeA);
-    int _size_1 = _features.size();
-    Assert.assertEquals(1, _size_1);
+    Assert.assertNotNull(this.<EStructuralFeature>feature(typeA, "name"));
+    Assert.assertEquals(1, this.features(typeA).size());
     EClassifier _type_1 = this.<EClassifier>type(ePackage, "TypeB");
     EClass typeB = ((EClass) _type_1);
     Assert.assertNotNull(typeB);
-    List<? extends EStructuralFeature> _features_1 = this.features(typeB);
-    boolean _isEmpty = _features_1.isEmpty();
-    Assert.assertTrue(_isEmpty);
+    Assert.assertTrue(this.features(typeB).isEmpty());
     EClassifier _type_2 = this.<EClassifier>type(ePackage, "TypeC");
     EClass typeC = ((EClass) _type_2);
     Assert.assertNotNull(typeC);
-    EStructuralFeature _feature_1 = this.<EStructuralFeature>feature(typeC, "x");
-    Assert.assertNotNull(_feature_1);
-    List<? extends EStructuralFeature> _features_2 = this.features(typeC);
-    int _size_2 = _features_2.size();
-    Assert.assertEquals(1, _size_2);
+    Assert.assertNotNull(this.<EStructuralFeature>feature(typeC, "x"));
+    Assert.assertEquals(1, this.features(typeC).size());
     EClassifier _type_3 = this.<EClassifier>type(ePackage, "TypeD");
     EClass typeD = ((EClass) _type_3);
     Assert.assertNotNull(typeD);
-    EStructuralFeature _feature_2 = this.<EStructuralFeature>feature(typeD, "x");
-    Assert.assertNotNull(_feature_2);
-    List<? extends EStructuralFeature> _features_3 = this.features(typeD);
-    int _size_3 = _features_3.size();
-    Assert.assertEquals(1, _size_3);
+    Assert.assertNotNull(this.<EStructuralFeature>feature(typeD, "x"));
+    Assert.assertEquals(1, this.features(typeD).size());
   }
   
   @Test
@@ -3263,39 +2607,26 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     String _grammar_1 = grammar;
     grammar = (_grammar_1 + " RuleB returns TypeB: {TypeB} \'ignore\';");
     EPackage ePackage = this.getEPackageFromGrammar(grammar);
-    EList<EClassifier> _eClassifiers = ePackage.getEClassifiers();
-    int _size = _eClassifiers.size();
-    Assert.assertEquals(4, _size);
+    Assert.assertEquals(4, ePackage.getEClassifiers().size());
     EClassifier _type = this.<EClassifier>type(ePackage, "TypeA");
     EClass typeA = ((EClass) _type);
     Assert.assertNotNull(typeA);
-    EStructuralFeature _feature = this.<EStructuralFeature>feature(typeA, "name");
-    Assert.assertNotNull(_feature);
-    List<? extends EStructuralFeature> _features = this.features(typeA);
-    int _size_1 = _features.size();
-    Assert.assertEquals(1, _size_1);
+    Assert.assertNotNull(this.<EStructuralFeature>feature(typeA, "name"));
+    Assert.assertEquals(1, this.features(typeA).size());
     EClassifier _type_1 = this.<EClassifier>type(ePackage, "TypeB");
     EClass typeB = ((EClass) _type_1);
     Assert.assertNotNull(typeB);
-    List<? extends EStructuralFeature> _features_1 = this.features(typeB);
-    boolean _isEmpty = _features_1.isEmpty();
-    Assert.assertTrue(_isEmpty);
+    Assert.assertTrue(this.features(typeB).isEmpty());
     EClassifier _type_2 = this.<EClassifier>type(ePackage, "TypeC");
     EClass typeC = ((EClass) _type_2);
     Assert.assertNotNull(typeC);
-    EStructuralFeature _feature_1 = this.<EStructuralFeature>feature(typeC, "x");
-    Assert.assertNotNull(_feature_1);
-    List<? extends EStructuralFeature> _features_2 = this.features(typeC);
-    int _size_2 = _features_2.size();
-    Assert.assertEquals(1, _size_2);
+    Assert.assertNotNull(this.<EStructuralFeature>feature(typeC, "x"));
+    Assert.assertEquals(1, this.features(typeC).size());
     EClassifier _type_3 = this.<EClassifier>type(ePackage, "TypeD");
     EClass typeD = ((EClass) _type_3);
     Assert.assertNotNull(typeD);
-    EStructuralFeature _feature_2 = this.<EStructuralFeature>feature(typeD, "x");
-    Assert.assertNotNull(_feature_2);
-    List<? extends EStructuralFeature> _features_3 = this.features(typeD);
-    int _size_3 = _features_3.size();
-    Assert.assertEquals(1, _size_3);
+    Assert.assertNotNull(this.<EStructuralFeature>feature(typeD, "x"));
+    Assert.assertEquals(1, this.features(typeD).size());
   }
   
   @Test
@@ -3308,39 +2639,26 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     String _grammar_1 = grammar;
     grammar = (_grammar_1 + " RuleB returns TypeB: {TypeB} \'ignore\';");
     EPackage ePackage = this.getEPackageFromGrammar(grammar);
-    EList<EClassifier> _eClassifiers = ePackage.getEClassifiers();
-    int _size = _eClassifiers.size();
-    Assert.assertEquals(4, _size);
+    Assert.assertEquals(4, ePackage.getEClassifiers().size());
     EClassifier _type = this.<EClassifier>type(ePackage, "TypeA");
     EClass typeA = ((EClass) _type);
     Assert.assertNotNull(typeA);
-    EStructuralFeature _feature = this.<EStructuralFeature>feature(typeA, "name");
-    Assert.assertNotNull(_feature);
-    List<? extends EStructuralFeature> _features = this.features(typeA);
-    int _size_1 = _features.size();
-    Assert.assertEquals(1, _size_1);
+    Assert.assertNotNull(this.<EStructuralFeature>feature(typeA, "name"));
+    Assert.assertEquals(1, this.features(typeA).size());
     EClassifier _type_1 = this.<EClassifier>type(ePackage, "TypeB");
     EClass typeB = ((EClass) _type_1);
     Assert.assertNotNull(typeB);
-    List<? extends EStructuralFeature> _features_1 = this.features(typeB);
-    boolean _isEmpty = _features_1.isEmpty();
-    Assert.assertTrue(_isEmpty);
+    Assert.assertTrue(this.features(typeB).isEmpty());
     EClassifier _type_2 = this.<EClassifier>type(ePackage, "TypeC");
     EClass typeC = ((EClass) _type_2);
     Assert.assertNotNull(typeC);
-    EStructuralFeature _feature_1 = this.<EStructuralFeature>feature(typeC, "x");
-    Assert.assertNotNull(_feature_1);
-    List<? extends EStructuralFeature> _features_2 = this.features(typeC);
-    int _size_2 = _features_2.size();
-    Assert.assertEquals(1, _size_2);
+    Assert.assertNotNull(this.<EStructuralFeature>feature(typeC, "x"));
+    Assert.assertEquals(1, this.features(typeC).size());
     EClassifier _type_3 = this.<EClassifier>type(ePackage, "TypeD");
     EClass typeD = ((EClass) _type_3);
     Assert.assertNotNull(typeD);
-    EStructuralFeature _feature_2 = this.<EStructuralFeature>feature(typeD, "x");
-    Assert.assertNotNull(_feature_2);
-    List<? extends EStructuralFeature> _features_3 = this.features(typeD);
-    int _size_3 = _features_3.size();
-    Assert.assertEquals(1, _size_3);
+    Assert.assertNotNull(this.<EStructuralFeature>feature(typeD, "x"));
+    Assert.assertEquals(1, this.features(typeD).size());
   }
   
   @Test
@@ -3357,51 +2675,32 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     String _grammar_3 = grammar;
     grammar = (_grammar_3 + " C: {C} \'b\';\n");
     EPackage ePackage = this.getEPackageFromGrammar(grammar);
-    EList<EClassifier> _eClassifiers = ePackage.getEClassifiers();
-    int _size = _eClassifiers.size();
-    Assert.assertEquals(5, _size);
+    Assert.assertEquals(5, ePackage.getEClassifiers().size());
     EClassifier _type = this.<EClassifier>type(ePackage, "Model");
     EClass typeModel = ((EClass) _type);
     Assert.assertNotNull(typeModel);
-    EStructuralFeature _feature = this.<EStructuralFeature>feature(typeModel, "c");
-    Assert.assertNotNull(_feature);
-    List<? extends EStructuralFeature> _features = this.features(typeModel);
-    int _size_1 = _features.size();
-    Assert.assertEquals(1, _size_1);
+    Assert.assertNotNull(this.<EStructuralFeature>feature(typeModel, "c"));
+    Assert.assertEquals(1, this.features(typeModel).size());
     EClassifier _type_1 = this.<EClassifier>type(ePackage, "A");
     EClass typeA = ((EClass) _type_1);
     Assert.assertNotNull(typeA);
-    List<? extends EStructuralFeature> _features_1 = this.features(typeA);
-    boolean _isEmpty = _features_1.isEmpty();
-    Assert.assertTrue(_isEmpty);
-    EList<EClass> _eSuperTypes = typeA.getESuperTypes();
-    int _size_2 = _eSuperTypes.size();
-    Assert.assertEquals(1, _size_2);
-    EList<EClass> _eSuperTypes_1 = typeA.getESuperTypes();
-    EClass _head = IterableExtensions.<EClass>head(_eSuperTypes_1);
-    Assert.assertSame(typeModel, _head);
+    Assert.assertTrue(this.features(typeA).isEmpty());
+    Assert.assertEquals(1, typeA.getESuperTypes().size());
+    Assert.assertSame(typeModel, IterableExtensions.<EClass>head(typeA.getESuperTypes()));
     EClassifier _type_2 = this.<EClassifier>type(ePackage, "B");
     EClass typeB = ((EClass) _type_2);
     Assert.assertNotNull(typeB);
-    List<? extends EStructuralFeature> _features_2 = this.features(typeB);
-    boolean _isEmpty_1 = _features_2.isEmpty();
-    Assert.assertTrue(_isEmpty_1);
+    Assert.assertTrue(this.features(typeB).isEmpty());
     EClassifier _type_3 = this.<EClassifier>type(ePackage, "C");
     EClass typeC = ((EClass) _type_3);
     Assert.assertNotNull(typeC);
-    List<? extends EStructuralFeature> _features_3 = this.features(typeC);
-    boolean _isEmpty_2 = _features_3.isEmpty();
-    Assert.assertTrue(_isEmpty_2);
+    Assert.assertTrue(this.features(typeC).isEmpty());
     EClassifier _type_4 = this.<EClassifier>type(ePackage, "D");
     EClass typeD = ((EClass) _type_4);
     Assert.assertNotNull(typeD);
-    EStructuralFeature _feature_1 = this.<EStructuralFeature>feature(typeD, "a");
-    Assert.assertNotNull(_feature_1);
-    EStructuralFeature _feature_2 = this.<EStructuralFeature>feature(typeD, "b");
-    Assert.assertNotNull(_feature_2);
-    List<? extends EStructuralFeature> _features_4 = this.features(typeD);
-    int _size_3 = _features_4.size();
-    Assert.assertEquals(2, _size_3);
+    Assert.assertNotNull(this.<EStructuralFeature>feature(typeD, "a"));
+    Assert.assertNotNull(this.<EStructuralFeature>feature(typeD, "b"));
+    Assert.assertEquals(2, this.features(typeD).size());
   }
   
   @Test
@@ -3418,51 +2717,32 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     String _grammar_3 = grammar;
     grammar = (_grammar_3 + " C: {C} \'b\';\n");
     EPackage ePackage = this.getEPackageFromGrammar(grammar);
-    EList<EClassifier> _eClassifiers = ePackage.getEClassifiers();
-    int _size = _eClassifiers.size();
-    Assert.assertEquals(5, _size);
+    Assert.assertEquals(5, ePackage.getEClassifiers().size());
     EClassifier _type = this.<EClassifier>type(ePackage, "Model");
     EClass typeModel = ((EClass) _type);
     Assert.assertNotNull(typeModel);
-    List<? extends EStructuralFeature> _features = this.features(typeModel);
-    boolean _isEmpty = _features.isEmpty();
-    Assert.assertTrue(_isEmpty);
+    Assert.assertTrue(this.features(typeModel).isEmpty());
     EClassifier _type_1 = this.<EClassifier>type(ePackage, "A");
     EClass typeA = ((EClass) _type_1);
     Assert.assertNotNull(typeA);
-    List<? extends EStructuralFeature> _features_1 = this.features(typeA);
-    boolean _isEmpty_1 = _features_1.isEmpty();
-    Assert.assertTrue(_isEmpty_1);
-    EList<EClass> _eSuperTypes = typeA.getESuperTypes();
-    int _size_1 = _eSuperTypes.size();
-    Assert.assertEquals(1, _size_1);
-    EList<EClass> _eSuperTypes_1 = typeA.getESuperTypes();
-    EClass _head = IterableExtensions.<EClass>head(_eSuperTypes_1);
-    Assert.assertSame(typeModel, _head);
+    Assert.assertTrue(this.features(typeA).isEmpty());
+    Assert.assertEquals(1, typeA.getESuperTypes().size());
+    Assert.assertSame(typeModel, IterableExtensions.<EClass>head(typeA.getESuperTypes()));
     EClassifier _type_2 = this.<EClassifier>type(ePackage, "B");
     EClass typeB = ((EClass) _type_2);
     Assert.assertNotNull(typeB);
-    List<? extends EStructuralFeature> _features_2 = this.features(typeB);
-    boolean _isEmpty_2 = _features_2.isEmpty();
-    Assert.assertTrue(_isEmpty_2);
+    Assert.assertTrue(this.features(typeB).isEmpty());
     EClassifier _type_3 = this.<EClassifier>type(ePackage, "C");
     EClass typeC = ((EClass) _type_3);
     Assert.assertNotNull(typeC);
-    List<? extends EStructuralFeature> _features_3 = this.features(typeC);
-    boolean _isEmpty_3 = _features_3.isEmpty();
-    Assert.assertTrue(_isEmpty_3);
+    Assert.assertTrue(this.features(typeC).isEmpty());
     EClassifier _type_4 = this.<EClassifier>type(ePackage, "D");
     EClass typeD = ((EClass) _type_4);
     Assert.assertNotNull(typeD);
-    EStructuralFeature _feature = this.<EStructuralFeature>feature(typeD, "a");
-    Assert.assertNotNull(_feature);
-    EStructuralFeature _feature_1 = this.<EStructuralFeature>feature(typeD, "b");
-    Assert.assertNotNull(_feature_1);
-    EStructuralFeature _feature_2 = this.<EStructuralFeature>feature(typeD, "c");
-    Assert.assertNotNull(_feature_2);
-    List<? extends EStructuralFeature> _features_4 = this.features(typeD);
-    int _size_2 = _features_4.size();
-    Assert.assertEquals(3, _size_2);
+    Assert.assertNotNull(this.<EStructuralFeature>feature(typeD, "a"));
+    Assert.assertNotNull(this.<EStructuralFeature>feature(typeD, "b"));
+    Assert.assertNotNull(this.<EStructuralFeature>feature(typeD, "c"));
+    Assert.assertEquals(3, this.features(typeD).size());
   }
   
   @Test
@@ -3479,51 +2759,32 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     String _grammar_3 = grammar;
     grammar = (_grammar_3 + " C: {C} \'b\';\n");
     EPackage ePackage = this.getEPackageFromGrammar(grammar);
-    EList<EClassifier> _eClassifiers = ePackage.getEClassifiers();
-    int _size = _eClassifiers.size();
-    Assert.assertEquals(5, _size);
+    Assert.assertEquals(5, ePackage.getEClassifiers().size());
     EClassifier _type = this.<EClassifier>type(ePackage, "Model");
     EClass typeModel = ((EClass) _type);
     Assert.assertNotNull(typeModel);
-    EStructuralFeature _feature = this.<EStructuralFeature>feature(typeModel, "c");
-    Assert.assertNotNull(_feature);
-    List<? extends EStructuralFeature> _features = this.features(typeModel);
-    int _size_1 = _features.size();
-    Assert.assertEquals(1, _size_1);
+    Assert.assertNotNull(this.<EStructuralFeature>feature(typeModel, "c"));
+    Assert.assertEquals(1, this.features(typeModel).size());
     EClassifier _type_1 = this.<EClassifier>type(ePackage, "A");
     EClass typeA = ((EClass) _type_1);
     Assert.assertNotNull(typeA);
-    List<? extends EStructuralFeature> _features_1 = this.features(typeA);
-    boolean _isEmpty = _features_1.isEmpty();
-    Assert.assertTrue(_isEmpty);
-    EList<EClass> _eSuperTypes = typeA.getESuperTypes();
-    int _size_2 = _eSuperTypes.size();
-    Assert.assertEquals(1, _size_2);
-    EList<EClass> _eSuperTypes_1 = typeA.getESuperTypes();
-    EClass _head = IterableExtensions.<EClass>head(_eSuperTypes_1);
-    Assert.assertSame(typeModel, _head);
+    Assert.assertTrue(this.features(typeA).isEmpty());
+    Assert.assertEquals(1, typeA.getESuperTypes().size());
+    Assert.assertSame(typeModel, IterableExtensions.<EClass>head(typeA.getESuperTypes()));
     EClassifier _type_2 = this.<EClassifier>type(ePackage, "B");
     EClass typeB = ((EClass) _type_2);
     Assert.assertNotNull(typeB);
-    List<? extends EStructuralFeature> _features_2 = this.features(typeB);
-    boolean _isEmpty_1 = _features_2.isEmpty();
-    Assert.assertTrue(_isEmpty_1);
+    Assert.assertTrue(this.features(typeB).isEmpty());
     EClassifier _type_3 = this.<EClassifier>type(ePackage, "C");
     EClass typeC = ((EClass) _type_3);
     Assert.assertNotNull(typeC);
-    List<? extends EStructuralFeature> _features_3 = this.features(typeC);
-    boolean _isEmpty_2 = _features_3.isEmpty();
-    Assert.assertTrue(_isEmpty_2);
+    Assert.assertTrue(this.features(typeC).isEmpty());
     EClassifier _type_4 = this.<EClassifier>type(ePackage, "D");
     EClass typeD = ((EClass) _type_4);
     Assert.assertNotNull(typeD);
-    EStructuralFeature _feature_1 = this.<EStructuralFeature>feature(typeD, "a");
-    Assert.assertNotNull(_feature_1);
-    EStructuralFeature _feature_2 = this.<EStructuralFeature>feature(typeD, "b");
-    Assert.assertNotNull(_feature_2);
-    List<? extends EStructuralFeature> _features_4 = this.features(typeD);
-    int _size_3 = _features_4.size();
-    Assert.assertEquals(2, _size_3);
+    Assert.assertNotNull(this.<EStructuralFeature>feature(typeD, "a"));
+    Assert.assertNotNull(this.<EStructuralFeature>feature(typeD, "b"));
+    Assert.assertEquals(2, this.features(typeD).size());
   }
   
   @Test
@@ -3540,77 +2801,54 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     String _grammar_3 = grammar;
     grammar = (_grammar_3 + " C: {C} \'b\';\n");
     EPackage ePackage = this.getEPackageFromGrammar(grammar);
-    EList<EClassifier> _eClassifiers = ePackage.getEClassifiers();
-    int _size = _eClassifiers.size();
-    Assert.assertEquals(5, _size);
+    Assert.assertEquals(5, ePackage.getEClassifiers().size());
     EClassifier _type = this.<EClassifier>type(ePackage, "Model");
     EClass typeModel = ((EClass) _type);
     Assert.assertNotNull(typeModel);
-    List<? extends EStructuralFeature> _features = this.features(typeModel);
-    boolean _isEmpty = _features.isEmpty();
-    Assert.assertTrue(_isEmpty);
+    Assert.assertTrue(this.features(typeModel).isEmpty());
     EClassifier _type_1 = this.<EClassifier>type(ePackage, "A");
     EClass typeA = ((EClass) _type_1);
     Assert.assertNotNull(typeA);
-    List<? extends EStructuralFeature> _features_1 = this.features(typeA);
-    boolean _isEmpty_1 = _features_1.isEmpty();
-    Assert.assertTrue(_isEmpty_1);
-    EList<EClass> _eSuperTypes = typeA.getESuperTypes();
-    int _size_1 = _eSuperTypes.size();
-    Assert.assertEquals(1, _size_1);
-    EList<EClass> _eSuperTypes_1 = typeA.getESuperTypes();
-    EClass _head = IterableExtensions.<EClass>head(_eSuperTypes_1);
-    Assert.assertSame(typeModel, _head);
+    Assert.assertTrue(this.features(typeA).isEmpty());
+    Assert.assertEquals(1, typeA.getESuperTypes().size());
+    Assert.assertSame(typeModel, IterableExtensions.<EClass>head(typeA.getESuperTypes()));
     EClassifier _type_2 = this.<EClassifier>type(ePackage, "B");
     EClass typeB = ((EClass) _type_2);
     Assert.assertNotNull(typeB);
-    List<? extends EStructuralFeature> _features_2 = this.features(typeB);
-    boolean _isEmpty_2 = _features_2.isEmpty();
-    Assert.assertTrue(_isEmpty_2);
+    Assert.assertTrue(this.features(typeB).isEmpty());
     EClassifier _type_3 = this.<EClassifier>type(ePackage, "C");
     EClass typeC = ((EClass) _type_3);
     Assert.assertNotNull(typeC);
-    List<? extends EStructuralFeature> _features_3 = this.features(typeC);
-    boolean _isEmpty_3 = _features_3.isEmpty();
-    Assert.assertTrue(_isEmpty_3);
+    Assert.assertTrue(this.features(typeC).isEmpty());
     EClassifier _type_4 = this.<EClassifier>type(ePackage, "D");
     EClass typeD = ((EClass) _type_4);
     Assert.assertNotNull(typeD);
-    EStructuralFeature _feature = this.<EStructuralFeature>feature(typeD, "a");
-    Assert.assertNotNull(_feature);
-    EStructuralFeature _feature_1 = this.<EStructuralFeature>feature(typeD, "b");
-    Assert.assertNotNull(_feature_1);
-    EStructuralFeature _feature_2 = this.<EStructuralFeature>feature(typeD, "c");
-    Assert.assertNotNull(_feature_2);
-    List<? extends EStructuralFeature> _features_4 = this.features(typeD);
-    int _size_2 = _features_4.size();
-    Assert.assertEquals(3, _size_2);
+    Assert.assertNotNull(this.<EStructuralFeature>feature(typeD, "a"));
+    Assert.assertNotNull(this.<EStructuralFeature>feature(typeD, "b"));
+    Assert.assertNotNull(this.<EStructuralFeature>feature(typeD, "c"));
+    Assert.assertEquals(3, this.features(typeD).size());
   }
   
   @Test
   public void testBug413171_01() throws Exception {
-    String _readFileIntoString = this.readFileIntoString("org/eclipse/xtext/xtext/ecoreInference/Bug413171_01.xtext.txt");
-    EObject _model = this.getModel(_readFileIntoString);
+    EObject _model = this.getModel(this.readFileIntoString("org/eclipse/xtext/xtext/ecoreInference/Bug413171_01.xtext.txt"));
     final Grammar grammar = ((Grammar) _model);
     EList<AbstractRule> _rules = grammar.getRules();
     final AbstractRule parserRule = _rules.get(2);
     TypeRef _type = parserRule.getType();
     final EClassifier classifier = _type.getClassifier();
-    String _name = parserRule.getName();
-    Assert.assertTrue(_name, (classifier instanceof EDataType));
+    Assert.assertTrue(parserRule.getName(), (classifier instanceof EDataType));
   }
   
   @Test
   public void testBug413171_02() throws Exception {
-    String _readFileIntoString = this.readFileIntoString("org/eclipse/xtext/xtext/ecoreInference/Bug413171_02.xtext.txt");
-    EObject _model = this.getModel(_readFileIntoString);
+    EObject _model = this.getModel(this.readFileIntoString("org/eclipse/xtext/xtext/ecoreInference/Bug413171_02.xtext.txt"));
     final Grammar grammar = ((Grammar) _model);
     EList<AbstractRule> _rules = grammar.getRules();
     final AbstractRule parserRule = _rules.get(2);
     TypeRef _type = parserRule.getType();
     final EClassifier classifier = _type.getClassifier();
-    String _name = parserRule.getName();
-    Assert.assertTrue(_name, (classifier instanceof EDataType));
+    Assert.assertTrue(parserRule.getName(), (classifier instanceof EDataType));
   }
   
   @Test
@@ -3626,9 +2864,7 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     EClassifier _type = this.<EClassifier>type(ePackage, "B");
     EClass clazz = ((EClass) _type);
     EStructuralFeature feature = this.<EStructuralFeature>feature(clazz, "a");
-    EClassifier _eType = feature.getEType();
-    String _name = _eType.getName();
-    Assert.assertEquals("Model", _name);
+    Assert.assertEquals("Model", feature.getEType().getName());
   }
   
   @Test
@@ -3646,15 +2882,11 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     EClassifier _type = this.<EClassifier>type(ePackage, "B");
     EClass clazzB = ((EClass) _type);
     EStructuralFeature feature = this.<EStructuralFeature>feature(clazzB, "a");
-    EClassifier _eType = feature.getEType();
-    String _name = _eType.getName();
-    Assert.assertEquals("Model", _name);
+    Assert.assertEquals("Model", feature.getEType().getName());
     EClassifier _type_1 = this.<EClassifier>type(ePackage, "C");
     EClass clazzC = ((EClass) _type_1);
     EStructuralFeature featureC_A = this.<EStructuralFeature>feature(clazzC, "a");
-    EClassifier _eType_1 = featureC_A.getEType();
-    String _name_1 = _eType_1.getName();
-    Assert.assertEquals("B", _name_1);
+    Assert.assertEquals("B", featureC_A.getEType().getName());
   }
   
   @Test
@@ -3672,14 +2904,10 @@ public class Xtext2EcoreTransformerTest extends AbstractXtextTests {
     EClassifier _type = this.<EClassifier>type(ePackage, "A");
     EClass clazzA = ((EClass) _type);
     EStructuralFeature featureA_a = this.<EStructuralFeature>feature(clazzA, "a");
-    EClassifier _eType = featureA_a.getEType();
-    String _name = _eType.getName();
-    Assert.assertEquals("Model", _name);
+    Assert.assertEquals("Model", featureA_a.getEType().getName());
     EClassifier _type_1 = this.<EClassifier>type(ePackage, "B");
     EClass clazzB = ((EClass) _type_1);
     EStructuralFeature featureB_a = this.<EStructuralFeature>feature(clazzB, "a");
-    EClassifier _eType_1 = featureB_a.getEType();
-    String _name_1 = _eType_1.getName();
-    Assert.assertEquals("Model", _name_1);
+    Assert.assertEquals("Model", featureB_a.getEType().getName());
   }
 }

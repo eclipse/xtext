@@ -19,8 +19,7 @@ public class DefaultProjectDescriptionFactory implements IProjectDescriptionFact
   public ProjectDescription getProjectDescription(final IProjectConfig config) {
     ProjectDescription _projectDescription = new ProjectDescription();
     final Procedure1<ProjectDescription> _function = (ProjectDescription it) -> {
-      String _name = config.getName();
-      it.setName(_name);
+      it.setName(config.getName());
     };
     return ObjectExtensions.<ProjectDescription>operator_doubleArrow(_projectDescription, _function);
   }

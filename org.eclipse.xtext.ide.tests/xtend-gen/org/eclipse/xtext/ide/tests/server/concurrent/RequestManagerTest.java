@@ -55,8 +55,7 @@ public class RequestManagerTest {
         return "Foo";
       };
       final CompletableFuture<String> future = this.requestManager.<String>runRead(_function);
-      String _get = future.get();
-      Assert.assertEquals("Foo", _get);
+      Assert.assertEquals("Foo", future.get());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -79,8 +78,7 @@ public class RequestManagerTest {
     };
     this.requestManager.<Integer>runRead(_function_1);
     future.join();
-    int _get = this.sharedState.get();
-    Assert.assertEquals(2, _get);
+    Assert.assertEquals(2, this.sharedState.get());
   }
   
   @Test(timeout = 1000)
@@ -94,8 +92,7 @@ public class RequestManagerTest {
         return Integer.valueOf(this.sharedState.get());
       };
       final CompletableFuture<Integer> future = this.requestManager.<Integer>runRead(_function_1);
-      Integer _get = future.get();
-      Assert.assertEquals(1, (_get).intValue());
+      Assert.assertEquals(1, (future.get()).intValue());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -108,8 +105,7 @@ public class RequestManagerTest {
     };
     CompletableFuture<Integer> _runWrite = this.requestManager.<Integer>runWrite(_function);
     _runWrite.join();
-    int _get = this.sharedState.get();
-    Assert.assertEquals(1, _get);
+    Assert.assertEquals(1, this.sharedState.get());
   }
   
   @Test(timeout = 1000)
@@ -130,8 +126,7 @@ public class RequestManagerTest {
     };
     CompletableFuture<Integer> _runWrite = this.requestManager.<Integer>runWrite(_function_1);
     _runWrite.join();
-    int _get = this.sharedState.get();
-    Assert.assertEquals(2, _get);
+    Assert.assertEquals(2, this.sharedState.get());
   }
   
   @Test(timeout = 1000)
@@ -143,16 +138,14 @@ public class RequestManagerTest {
     final Function1<CancelIndicator, Integer> _function_1 = (CancelIndicator it) -> {
       int _xblockexpression = (int) 0;
       {
-        int _get = this.sharedState.get();
-        Assert.assertEquals(1, _get);
+        Assert.assertEquals(1, this.sharedState.get());
         _xblockexpression = this.sharedState.incrementAndGet();
       }
       return Integer.valueOf(_xblockexpression);
     };
     CompletableFuture<Integer> _runWrite = this.requestManager.<Integer>runWrite(_function_1);
     _runWrite.join();
-    int _get = this.sharedState.get();
-    Assert.assertEquals(2, _get);
+    Assert.assertEquals(2, this.sharedState.get());
   }
   
   @Test(timeout = 1000)

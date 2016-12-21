@@ -395,10 +395,7 @@ public class ContentAssistFragment2 extends AbstractInheritingFragment {
           }
         };
         it.setContent(_client_1);
-        IXtextProjectConfig _projectConfig = this.getProjectConfig();
-        IBundleProjectConfig _eclipsePlugin = _projectConfig.getEclipsePlugin();
-        IXtextGeneratorFileSystemAccess _srcGen = _eclipsePlugin.getSrcGen();
-        it.writeTo(_srcGen);
+        it.writeTo(this.getProjectConfig().getEclipsePlugin().getSrcGen());
       };
       _xblockexpression = ObjectExtensions.<GeneratedJavaFileAccess>operator_doubleArrow(_createGeneratedJavaFile, _function_2);
     }

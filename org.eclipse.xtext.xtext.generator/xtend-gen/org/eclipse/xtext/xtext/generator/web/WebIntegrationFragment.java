@@ -275,10 +275,7 @@ public class WebIntegrationFragment extends AbstractXtextGeneratorFragment {
   @Override
   public void generate() {
     if (((this.highlightingModuleName != null) && this.highlightingModuleName.endsWith(".js"))) {
-      int _length = this.highlightingModuleName.length();
-      int _minus = (_length - 3);
-      String _substring = this.highlightingModuleName.substring(0, _minus);
-      this.highlightingModuleName = _substring;
+      this.highlightingModuleName = this.highlightingModuleName.substring(0, (this.highlightingModuleName.length() - 3));
     }
     IXtextGeneratorLanguage _language = this.getLanguage();
     List<String> _fileExtensions = _language.getFileExtensions();

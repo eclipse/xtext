@@ -163,12 +163,10 @@ public class GrammarAccessExtensions {
   
   private String toJavaIdentifier(final List<String> text, final boolean uppercaseFirst) {
     final Iterator<String> i = text.iterator();
-    String _next = i.next();
-    String _javaIdentifierSegment = this.toJavaIdentifierSegment(_next, true, uppercaseFirst);
+    String _javaIdentifierSegment = this.toJavaIdentifierSegment(i.next(), true, uppercaseFirst);
     final StringBuilder b = new StringBuilder(_javaIdentifierSegment);
     while (i.hasNext()) {
-      String _next_1 = i.next();
-      String _javaIdentifierSegment_1 = this.toJavaIdentifierSegment(_next_1, false, true);
+      String _javaIdentifierSegment_1 = this.toJavaIdentifierSegment(i.next(), false, true);
       b.append(_javaIdentifierSegment_1);
     }
     return b.toString();
@@ -201,10 +199,7 @@ public class GrammarAccessExtensions {
         }
       }
     }
-    String _string = builder.toString();
-    String _lowerCase = _string.toLowerCase();
-    String _trim = _lowerCase.trim();
-    return this.toJavaIdentifierSegmentInt(_trim, isFirst, true);
+    return this.toJavaIdentifierSegmentInt(builder.toString().toLowerCase().trim(), isFirst, true);
   }
   
   /**
@@ -656,13 +651,11 @@ public class GrammarAccessExtensions {
       SaveOptions.Builder _newBuilder = SaveOptions.newBuilder();
       SaveOptions.Builder _format = _newBuilder.format();
       final SaveOptions options = _format.getOptions();
-      String _serialize = serializer.serialize(object, options);
-      s = _serialize;
+      s = serializer.serialize(object, options);
     } catch (final Throwable _t) {
       if (_t instanceof Exception) {
         final Exception e = (Exception)_t;
-        String _string = e.toString();
-        s = _string;
+        s = e.toString();
       } else {
         throw Exceptions.sneakyThrow(_t);
       }
@@ -721,9 +714,7 @@ public class GrammarAccessExtensions {
       int _size = _usedGrammars.size();
       boolean _equals = (_size == 1);
       if (_equals) {
-        EList<Grammar> _usedGrammars_1 = it.getUsedGrammars();
-        Grammar _head = IterableExtensions.<Grammar>head(_usedGrammars_1);
-        return this.initialHiddenTokens(_head);
+        return this.initialHiddenTokens(IterableExtensions.<Grammar>head(it.getUsedGrammars()));
       }
       _xblockexpression = CollectionLiterals.<String>emptyList();
     }
@@ -950,8 +941,7 @@ public class GrammarAccessExtensions {
     };
     GrammarAccessExtensions.LineSeparatorModule _lineSeparatorModule = new GrammarAccessExtensions.LineSeparatorModule(_function);
     final Injector injector = Guice.createInjector(_lineSeparatorModule);
-    ISerializer _instance = injector.<ISerializer>getInstance(ISerializer.class);
-    result = _instance;
+    result = injector.<ISerializer>getInstance(ISerializer.class);
     this.xtextSerializerByLineDelimiter.put(delimiter, result);
     return result;
   }

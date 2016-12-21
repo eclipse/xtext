@@ -40,9 +40,7 @@ public class RegionSetTest {
         throw Exceptions.sneakyThrow(_t);
       }
     }
-    String _string = expectation.toString();
-    String _string_1 = set.toString();
-    Assert.assertEquals(_string, _string_1);
+    Assert.assertEquals(expectation.toString(), set.toString());
   }
   
   @Test

@@ -169,8 +169,7 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
       StandaloneSetup _standaloneSetup = new StandaloneSetup();
       _standaloneSetup.addRegisterGeneratedEPackage("org.eclipse.xtext.common.types.TypesPackage");
       this.initializeEncoding();
-      Injector _createInjector = this.createInjector();
-      this.injector = _createInjector;
+      this.injector = this.createInjector();
       this.injector.injectMembers(this);
       CodeConfig _instance = this.injector.<CodeConfig>getInstance(CodeConfig.class);
       final Procedure1<CodeConfig> _function = (CodeConfig it) -> {
@@ -370,8 +369,7 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
             manifestIter.remove();
           } else {
             if (((manifest.getActivator() == null) && (manifest == this.projectConfig.getEclipsePlugin().getManifest()))) {
-              TypeReference _eclipsePluginActivator = this.naming.getEclipsePluginActivator();
-              manifest.setActivator(_eclipsePluginActivator);
+              manifest.setActivator(this.naming.getEclipsePluginActivator());
             }
             String _path = manifest.getPath();
             final URI uri = metaInf.getURI(_path);
@@ -393,8 +391,7 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
           String _bundleName = manifest.getBundleName();
           boolean _tripleEquals = (_bundleName == null);
           if (_tripleEquals) {
-            String _third = entry.getThird();
-            manifest.setBundleName(_third);
+            manifest.setBundleName(entry.getThird());
           }
           String _path = manifest.getPath();
           boolean _isFile = metaInf.isFile(_path);
@@ -425,13 +422,10 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
   protected void mergeManifest(final ManifestAccess manifest, final IXtextGeneratorFileSystemAccess metaInf) throws IOException {
     InputStream in = null;
     try {
-      String _path = manifest.getPath();
-      InputStream _readBinaryFile = metaInf.readBinaryFile(_path);
-      in = _readBinaryFile;
+      in = metaInf.readBinaryFile(manifest.getPath());
       String _bundleName = manifest.getBundleName();
       final MergeableManifest merge = new MergeableManifest(in, _bundleName);
-      String _lineDelimiter = this.codeConfig.getLineDelimiter();
-      merge.setLineDelimiter(_lineDelimiter);
+      merge.setLineDelimiter(this.codeConfig.getLineDelimiter());
       Set<String> _exportedPackages = manifest.getExportedPackages();
       merge.addExportedPackages(_exportedPackages);
       Set<String> _requiredBundles = manifest.getRequiredBundles();
@@ -439,18 +433,16 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
       Set<String> _importedPackages = manifest.getImportedPackages();
       merge.addImportedPackages(_importedPackages);
       if (((manifest.getActivator() != null) && StringExtensions.isNullOrEmpty(merge.getBundleActivator()))) {
-        TypeReference _activator = manifest.getActivator();
-        String _name = _activator.getName();
-        merge.setBundleActivator(_name);
+        merge.setBundleActivator(manifest.getActivator().getName());
       }
       boolean _isModified = merge.isModified();
       if (_isModified) {
         final ByteArrayOutputStream out = new ByteArrayOutputStream();
         merge.write(out);
-        String _path_1 = manifest.getPath();
+        String _path = manifest.getPath();
         byte[] _byteArray = out.toByteArray();
         ByteArrayInputStream _byteArrayInputStream = new ByteArrayInputStream(_byteArray);
-        metaInf.generateFile(_path_1, _byteArrayInputStream);
+        metaInf.generateFile(_path, _byteArrayInputStream);
       }
     } finally {
       if ((in != null)) {

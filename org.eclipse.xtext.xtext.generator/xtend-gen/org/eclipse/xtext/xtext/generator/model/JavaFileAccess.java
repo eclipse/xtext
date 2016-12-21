@@ -122,8 +122,7 @@ public class JavaFileAccess extends TextFileAccess {
     final List<String> simpleNames = typeRef.getSimpleNames();
     String usableName = null;
     if ((Objects.equal(typeRef.getPackageName(), "java.lang") || Objects.equal(typeRef.getPackageName(), this.javaType.getPackageName()))) {
-      String _join = IterableExtensions.join(simpleNames, ".");
-      usableName = _join;
+      usableName = IterableExtensions.join(simpleNames, ".");
     } else {
       boolean found = false;
       for (int i = (((Object[])Conversions.unwrapArray(simpleNames, Object.class)).length - 1); ((i >= 0) && (!found)); i--) {
@@ -138,8 +137,8 @@ public class JavaFileAccess extends TextFileAccess {
             String _packageName = typeRef.getPackageName();
             String _plus = (_packageName + ".");
             List<String> _subList = simpleNames.subList(0, (i + 1));
-            String _join_1 = IterableExtensions.join(_subList, ".");
-            final String importable = (_plus + _join_1);
+            String _join = IterableExtensions.join(_subList, ".");
+            final String importable = (_plus + _join);
             final String imported = this.imports.get(usableName);
             if ((imported == null)) {
               this.imports.put(usableName, importable);
@@ -154,16 +153,15 @@ public class JavaFileAccess extends TextFileAccess {
         }
       }
       if ((!found)) {
-        String _name = typeRef.getName();
-        usableName = _name;
+        usableName = typeRef.getName();
       }
     }
     List<TypeReference> _typeArguments = typeRef.getTypeArguments();
     final Function1<TypeReference, CharSequence> _function = (TypeReference it) -> {
       return this.importType(it);
     };
-    String _join_1 = IterableExtensions.<TypeReference>join(_typeArguments, "<", ", ", ">", _function);
-    return (usableName + _join_1);
+    String _join = IterableExtensions.<TypeReference>join(_typeArguments, "<", ", ", ">", _function);
+    return (usableName + _join);
   }
   
   @Override

@@ -125,8 +125,7 @@ public class XtextProjectConfig implements IXtextProjectConfig {
   protected ManifestAccess newManifestAccess() {
     ManifestAccess _manifestAccess = new ManifestAccess();
     final Procedure1<ManifestAccess> _function = (ManifestAccess it) -> {
-      String _lineDelimiter = this.codeConfig.getLineDelimiter();
-      it.setLineDelimiter(_lineDelimiter);
+      it.setLineDelimiter(this.codeConfig.getLineDelimiter());
     };
     return ObjectExtensions.<ManifestAccess>operator_doubleArrow(_manifestAccess, _function);
   }

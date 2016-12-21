@@ -12,10 +12,8 @@ import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
-import org.eclipse.xtext.xtext.generator.model.XtextGeneratorFileSystemAccess;
 import org.eclipse.xtext.xtext.generator.model.project.IWebProjectConfig;
 import org.eclipse.xtext.xtext.generator.model.project.SubProjectConfig;
-import org.eclipse.xtext.xtext.generator.model.project.XtextProjectConfig;
 
 /**
  * @noextend
@@ -36,9 +34,7 @@ public class WebProjectConfig extends SubProjectConfig implements IWebProjectCon
   public void initialize(final Injector injector) {
     super.initialize(injector);
     if ((this.assetsPath != null)) {
-      XtextProjectConfig _owner = this.getOwner();
-      XtextGeneratorFileSystemAccess _newFileSystemAccess = _owner.newFileSystemAccess(this.assetsPath, true);
-      this.assets = _newFileSystemAccess;
+      this.assets = this.getOwner().newFileSystemAccess(this.assetsPath, true);
       this.assets.initialize(injector);
     }
   }

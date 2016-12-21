@@ -18,8 +18,7 @@ import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
 @SuppressWarnings("all")
 public class XtextGeneratorFileSystemAccess extends JavaIoFileSystemAccess implements IXtextGeneratorFileSystemAccess {
   public XtextGeneratorFileSystemAccess(final String path, final boolean overwrite) {
-    String _removeTrailingPathSeparator = this.removeTrailingPathSeparator(path);
-    this.setOutputPath(_removeTrailingPathSeparator);
+    this.setOutputPath(this.removeTrailingPathSeparator(path));
     OutputConfiguration _defaultOutput = this.getDefaultOutput();
     _defaultOutput.setOverrideExistingResources(overwrite);
   }

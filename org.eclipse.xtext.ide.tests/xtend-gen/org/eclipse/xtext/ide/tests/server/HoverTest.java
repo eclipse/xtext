@@ -39,8 +39,7 @@ public class HoverTest extends AbstractTestLangLanguageServerTest {
       _builder.newLine();
       it.setModel(_builder.toString());
       it.setLine(3);
-      int _length = "type F".length();
-      it.setColumn(_length);
+      it.setColumn("type F".length());
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("[[3, 5] .. [3, 8]]");
       _builder_1.newLine();
@@ -67,8 +66,7 @@ public class HoverTest extends AbstractTestLangLanguageServerTest {
       _builder.newLine();
       it.setModel(_builder.toString());
       it.setLine(3);
-      int _length = "{".length();
-      it.setColumn(_length);
+      it.setColumn("{".length());
     };
     this.testHover(_function);
   }
@@ -94,8 +92,7 @@ public class HoverTest extends AbstractTestLangLanguageServerTest {
       _builder.newLine();
       it.setModel(_builder.toString());
       it.setLine(4);
-      int _length = "\tF".length();
-      it.setColumn(_length);
+      it.setColumn("\tF".length());
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("[[4, 1] .. [4, 4]]");
       _builder_1.newLine();
@@ -128,8 +125,7 @@ public class HoverTest extends AbstractTestLangLanguageServerTest {
       _builder.newLine();
       it.setModel(_builder.toString());
       it.setLine(5);
-      int _length = "type Bar extends F".length();
-      it.setColumn(_length);
+      it.setColumn("type Bar extends F".length());
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("[[5, 17] .. [5, 20]]");
       _builder_1.newLine();
@@ -164,8 +160,7 @@ public class HoverTest extends AbstractTestLangLanguageServerTest {
       _builder_1.append("}");
       _builder_1.newLine();
       it.setModel(_builder_1.toString());
-      int _length = "type Bar extends F".length();
-      it.setColumn(_length);
+      it.setColumn("type Bar extends F".length());
       StringConcatenation _builder_2 = new StringConcatenation();
       _builder_2.append("[[0, 17] .. [0, 20]]");
       _builder_2.newLine();

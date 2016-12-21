@@ -19,43 +19,35 @@ public class UriUtilTest {
   public void testPrefix() {
     final URI prefix = URI.createURI("file:/foo/");
     final URI uri = URI.createURI("file:/foo/bar");
-    boolean _isPrefixOf = UriUtil.isPrefixOf(prefix, uri);
-    Assert.assertTrue(_isPrefixOf);
+    Assert.assertTrue(UriUtil.isPrefixOf(prefix, uri));
   }
   
   @Test
   public void testPrefixRequiresSameScheme() {
     final URI prefix = URI.createURI("platform:/foo/");
     final URI uri = URI.createURI("file:/foo/bar");
-    boolean _isPrefixOf = UriUtil.isPrefixOf(prefix, uri);
-    Assert.assertFalse(_isPrefixOf);
+    Assert.assertFalse(UriUtil.isPrefixOf(prefix, uri));
   }
   
   @Test
   public void testPrefixRequiresTrailingSeparator() {
     final URI prefix = URI.createURI("file:/foo");
     final URI uri = URI.createURI("file:/foo/bar");
-    boolean _isPrefixOf = UriUtil.isPrefixOf(prefix, uri);
-    Assert.assertFalse(_isPrefixOf);
+    Assert.assertFalse(UriUtil.isPrefixOf(prefix, uri));
   }
   
   @Test
   public void testPrefixRequiresSegmentsToMatch() {
     final URI prefix = URI.createURI("file:/foo");
     final URI uri = URI.createURI("file:/buzz/bar");
-    boolean _isPrefixOf = UriUtil.isPrefixOf(prefix, uri);
-    Assert.assertFalse(_isPrefixOf);
+    Assert.assertFalse(UriUtil.isPrefixOf(prefix, uri));
   }
   
   @Test
   public void testFolderUriHasTrailingSeparator() {
     final File folder = new File(".");
     final URI uri = UriUtil.createFolderURI(folder);
-    boolean _hasTrailingPathSeparator = uri.hasTrailingPathSeparator();
-    Assert.assertTrue(_hasTrailingPathSeparator);
-    int _segmentCount = uri.segmentCount();
-    int _minus = (_segmentCount - 2);
-    String _segment = uri.segment(_minus);
-    Assert.assertEquals(".", _segment);
+    Assert.assertTrue(uri.hasTrailingPathSeparator());
+    Assert.assertEquals(".", uri.segment((uri.segmentCount() - 2)));
   }
 }

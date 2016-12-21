@@ -52,10 +52,8 @@ public class XtextGeneratorStandaloneSetup implements IGuiceAwareGeneratorCompon
     final Consumer<Pair<String, String>> _function = (Pair<String, String> mapping) -> {
       ProjectMapping _projectMapping = new ProjectMapping();
       final Procedure1<ProjectMapping> _function_1 = (ProjectMapping it) -> {
-        String _key = mapping.getKey();
-        it.setProjectName(_key);
-        String _value = mapping.getValue();
-        it.setPath(_value);
+        it.setProjectName(mapping.getKey());
+        it.setPath(mapping.getValue());
       };
       ProjectMapping _doubleArrow = ObjectExtensions.<ProjectMapping>operator_doubleArrow(_projectMapping, _function_1);
       delegate.addProjectMapping(_doubleArrow);

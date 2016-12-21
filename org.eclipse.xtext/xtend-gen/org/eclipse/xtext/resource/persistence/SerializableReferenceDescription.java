@@ -37,16 +37,11 @@ public class SerializableReferenceDescription implements IReferenceDescription, 
   
   @Override
   public void readExternal(final ObjectInput in) throws IOException, ClassNotFoundException {
-    URI _readURI = SerializationExtensions.readURI(in);
-    this.sourceEObjectUri = _readURI;
-    URI _readURI_1 = SerializationExtensions.readURI(in);
-    this.targetEObjectUri = _readURI_1;
-    URI _readURI_2 = SerializationExtensions.readURI(in);
-    this.containerEObjectURI = _readURI_2;
-    EReference _readEcoreElement = SerializationExtensions.<EReference>readEcoreElement(in);
-    this.eReference = _readEcoreElement;
-    int _readInt = in.readInt();
-    this.indexInList = _readInt;
+    this.sourceEObjectUri = SerializationExtensions.readURI(in);
+    this.targetEObjectUri = SerializationExtensions.readURI(in);
+    this.containerEObjectURI = SerializationExtensions.readURI(in);
+    this.eReference = SerializationExtensions.<EReference>readEcoreElement(in);
+    this.indexInList = in.readInt();
   }
   
   @Override
@@ -59,15 +54,11 @@ public class SerializableReferenceDescription implements IReferenceDescription, 
   }
   
   public void updateResourceURI(final URI newURI, final URI oldURI) {
-    String _fragment = this.sourceEObjectUri.fragment();
-    URI _appendFragment = newURI.appendFragment(_fragment);
-    this.sourceEObjectUri = _appendFragment;
+    this.sourceEObjectUri = newURI.appendFragment(this.sourceEObjectUri.fragment());
     URI _trimFragment = this.targetEObjectUri.trimFragment();
     boolean _equals = Objects.equal(_trimFragment, oldURI);
     if (_equals) {
-      String _fragment_1 = this.targetEObjectUri.fragment();
-      URI _appendFragment_1 = newURI.appendFragment(_fragment_1);
-      this.targetEObjectUri = _appendFragment_1;
+      this.targetEObjectUri = newURI.appendFragment(this.targetEObjectUri.fragment());
     }
   }
   

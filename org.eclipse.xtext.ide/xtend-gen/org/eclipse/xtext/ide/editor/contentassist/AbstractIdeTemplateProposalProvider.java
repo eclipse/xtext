@@ -192,8 +192,7 @@ public abstract class AbstractIdeTemplateProposalProvider {
   
   protected ContentAssistEntry createProposal(final StringConcatenationClient template, final ContentAssistContext context, final boolean adaptIndentation) {
     final ContentAssistEntry entry = new ContentAssistEntry();
-    String _prefix = context.getPrefix();
-    entry.setPrefix(_prefix);
+    entry.setPrefix(context.getPrefix());
     String _lineDelimiter = this.getLineDelimiter();
     final AbstractIdeTemplateProposalProvider.TemplateStringConcatenation stringConcat = new AbstractIdeTemplateProposalProvider.TemplateStringConcatenation(context, entry, _lineDelimiter);
     String _xifexpression = null;
@@ -208,8 +207,7 @@ public abstract class AbstractIdeTemplateProposalProvider {
     } else {
       stringConcat.append(template, indentation);
     }
-    String _string = stringConcat.toString();
-    entry.setProposal(_string);
+    entry.setProposal(stringConcat.toString());
     return entry;
   }
   

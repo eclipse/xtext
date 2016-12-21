@@ -14,13 +14,11 @@ import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.xtend.lib.macro.AbstractClassProcessor;
 import org.eclipse.xtend.lib.macro.RegisterGlobalsContext;
 import org.eclipse.xtend.lib.macro.TransformationContext;
-import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
 import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableConstructorDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -35,13 +33,10 @@ public class EmfAdaptableProcessor extends AbstractClassProcessor {
   
   @Override
   public void doTransform(final MutableClassDeclaration annotatedClass, @Extension final TransformationContext context) {
-    String _adapterClassName = this.getAdapterClassName(annotatedClass);
-    final MutableClassDeclaration adapterClass = context.findClass(_adapterClassName);
+    final MutableClassDeclaration adapterClass = context.findClass(this.getAdapterClassName(annotatedClass));
     final Procedure1<MutableMethodDeclaration> _function = (MutableMethodDeclaration it) -> {
-      TypeReference _newTypeReference = context.newTypeReference(Notifier.class);
-      it.addParameter("emfObject", _newTypeReference);
-      TypeReference _newTypeReference_1 = context.newTypeReference(annotatedClass);
-      it.setReturnType(_newTypeReference_1);
+      it.addParameter("emfObject", context.newTypeReference(Notifier.class));
+      it.setReturnType(context.newTypeReference(annotatedClass));
       it.setStatic(true);
       StringConcatenationClient _client = new StringConcatenationClient() {
         @Override
@@ -73,10 +68,8 @@ public class EmfAdaptableProcessor extends AbstractClassProcessor {
     };
     annotatedClass.addMethod("findInEmfObject", _function);
     final Procedure1<MutableMethodDeclaration> _function_1 = (MutableMethodDeclaration it) -> {
-      TypeReference _newTypeReference = context.newTypeReference(Notifier.class);
-      it.addParameter("emfObject", _newTypeReference);
-      TypeReference _newTypeReference_1 = context.newTypeReference(annotatedClass);
-      it.setReturnType(_newTypeReference_1);
+      it.addParameter("emfObject", context.newTypeReference(Notifier.class));
+      it.setReturnType(context.newTypeReference(annotatedClass));
       it.setStatic(true);
       StringConcatenationClient _client = new StringConcatenationClient() {
         @Override
@@ -118,10 +111,8 @@ public class EmfAdaptableProcessor extends AbstractClassProcessor {
     };
     annotatedClass.addMethod("removeFromEmfObject", _function_1);
     final Procedure1<MutableMethodDeclaration> _function_2 = (MutableMethodDeclaration it) -> {
-      TypeReference _newTypeReference = context.newTypeReference(Notifier.class);
-      it.addParameter("emfObject", _newTypeReference);
-      TypeReference _primitiveVoid = context.getPrimitiveVoid();
-      it.setReturnType(_primitiveVoid);
+      it.addParameter("emfObject", context.newTypeReference(Notifier.class));
+      it.setReturnType(context.getPrimitiveVoid());
       StringConcatenationClient _client = new StringConcatenationClient() {
         @Override
         protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -149,16 +140,13 @@ public class EmfAdaptableProcessor extends AbstractClassProcessor {
       it.setBody(_client);
     };
     annotatedClass.addMethod("attachToEmfObject", _function_2);
-    TypeReference _newTypeReference = context.newTypeReference(AdapterImpl.class);
-    adapterClass.setExtendedClass(_newTypeReference);
+    adapterClass.setExtendedClass(context.newTypeReference(AdapterImpl.class));
     final Procedure1<MutableFieldDeclaration> _function_3 = (MutableFieldDeclaration it) -> {
-      TypeReference _newTypeReference_1 = context.newTypeReference(annotatedClass);
-      it.setType(_newTypeReference_1);
+      it.setType(context.newTypeReference(annotatedClass));
     };
     adapterClass.addField("element", _function_3);
     final Procedure1<MutableConstructorDeclaration> _function_4 = (MutableConstructorDeclaration it) -> {
-      TypeReference _newTypeReference_1 = context.newTypeReference(annotatedClass);
-      it.addParameter("element", _newTypeReference_1);
+      it.addParameter("element", context.newTypeReference(annotatedClass));
       StringConcatenationClient _client = new StringConcatenationClient() {
         @Override
         protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -170,8 +158,7 @@ public class EmfAdaptableProcessor extends AbstractClassProcessor {
     };
     adapterClass.addConstructor(_function_4);
     final Procedure1<MutableMethodDeclaration> _function_5 = (MutableMethodDeclaration it) -> {
-      TypeReference _newTypeReference_1 = context.newTypeReference(annotatedClass);
-      it.setReturnType(_newTypeReference_1);
+      it.setReturnType(context.newTypeReference(annotatedClass));
       StringConcatenationClient _client = new StringConcatenationClient() {
         @Override
         protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -183,12 +170,9 @@ public class EmfAdaptableProcessor extends AbstractClassProcessor {
     };
     adapterClass.addMethod("get", _function_5);
     final Procedure1<MutableMethodDeclaration> _function_6 = (MutableMethodDeclaration it) -> {
-      AnnotationReference _newAnnotationReference = context.newAnnotationReference(Override.class);
-      it.addAnnotation(_newAnnotationReference);
-      TypeReference _newTypeReference_1 = context.newTypeReference(Object.class);
-      it.addParameter("object", _newTypeReference_1);
-      TypeReference _primitiveBoolean = context.getPrimitiveBoolean();
-      it.setReturnType(_primitiveBoolean);
+      it.addAnnotation(context.newAnnotationReference(Override.class));
+      it.addParameter("object", context.newTypeReference(Object.class));
+      it.setReturnType(context.getPrimitiveBoolean());
       StringConcatenationClient _client = new StringConcatenationClient() {
         @Override
         protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {

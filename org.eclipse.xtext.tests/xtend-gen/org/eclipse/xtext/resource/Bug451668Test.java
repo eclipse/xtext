@@ -11,7 +11,6 @@ import java.io.IOException;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.DerivedStateAwareResource;
 import org.eclipse.xtext.testlanguages.OptionalEmptyTestLanguageStandaloneSetup;
 import org.eclipse.xtext.tests.AbstractXtextTests;
@@ -44,15 +43,12 @@ public class Bug451668Test extends AbstractXtextTests {
       r.setURI(_createURI);
       StringInputStream _stringInputStream = new StringInputStream("");
       r.load(_stringInputStream, null);
-      boolean _isLoaded = r.isLoaded();
-      Assert.assertTrue(_isLoaded);
+      Assert.assertTrue(r.isLoaded());
       final int callsBeforeUnload = r.contentsCalls;
       r.unload();
       Assert.assertEquals(callsBeforeUnload, r.contentsCalls);
-      boolean _isLoaded_1 = r.isLoaded();
-      Assert.assertFalse(_isLoaded_1);
-      IParseResult _parseResult = r.getParseResult();
-      Assert.assertNull(_parseResult);
+      Assert.assertFalse(r.isLoaded());
+      Assert.assertNull(r.getParseResult());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

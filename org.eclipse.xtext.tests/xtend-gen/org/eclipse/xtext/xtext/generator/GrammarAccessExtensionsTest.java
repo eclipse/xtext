@@ -22,26 +22,16 @@ public class GrammarAccessExtensionsTest {
   
   @Test
   public void testToJavaIdentifier() {
-    String _javaIdentifier = this._grammarAccessExtensions.toJavaIdentifier("foo Bar", true);
-    Assert.assertEquals("FooBar", _javaIdentifier);
-    String _javaIdentifier_1 = this._grammarAccessExtensions.toJavaIdentifier("foo;", true);
-    Assert.assertEquals("Foo", _javaIdentifier_1);
-    String _javaIdentifier_2 = this._grammarAccessExtensions.toJavaIdentifier("foo;", false);
-    Assert.assertEquals("foo", _javaIdentifier_2);
-    String _javaIdentifier_3 = this._grammarAccessExtensions.toJavaIdentifier(":", true);
-    Assert.assertEquals("Colon", _javaIdentifier_3);
-    String _javaIdentifier_4 = this._grammarAccessExtensions.toJavaIdentifier(":", false);
-    Assert.assertEquals("Colon", _javaIdentifier_4);
-    String _javaIdentifier_5 = this._grammarAccessExtensions.toJavaIdentifier(";", false);
-    Assert.assertEquals("Semicolon", _javaIdentifier_5);
-    String _javaIdentifier_6 = this._grammarAccessExtensions.toJavaIdentifier("@\'", false);
-    Assert.assertEquals("CommercialAtApostrophe", _javaIdentifier_6);
-    String _javaIdentifier_7 = this._grammarAccessExtensions.toJavaIdentifier("Grün", true);
-    Assert.assertEquals("Grün", _javaIdentifier_7);
-    String _javaIdentifier_8 = this._grammarAccessExtensions.toJavaIdentifier("$", true);
-    Assert.assertEquals("DollarSign", _javaIdentifier_8);
-    String _javaIdentifier_9 = this._grammarAccessExtensions.toJavaIdentifier("_", true);
-    Assert.assertEquals("_", _javaIdentifier_9);
+    Assert.assertEquals("FooBar", this._grammarAccessExtensions.toJavaIdentifier("foo Bar", true));
+    Assert.assertEquals("Foo", this._grammarAccessExtensions.toJavaIdentifier("foo;", true));
+    Assert.assertEquals("foo", this._grammarAccessExtensions.toJavaIdentifier("foo;", false));
+    Assert.assertEquals("Colon", this._grammarAccessExtensions.toJavaIdentifier(":", true));
+    Assert.assertEquals("Colon", this._grammarAccessExtensions.toJavaIdentifier(":", false));
+    Assert.assertEquals("Semicolon", this._grammarAccessExtensions.toJavaIdentifier(";", false));
+    Assert.assertEquals("CommercialAtApostrophe", this._grammarAccessExtensions.toJavaIdentifier("@\'", false));
+    Assert.assertEquals("Grün", this._grammarAccessExtensions.toJavaIdentifier("Grün", true));
+    Assert.assertEquals("DollarSign", this._grammarAccessExtensions.toJavaIdentifier("$", true));
+    Assert.assertEquals("_", this._grammarAccessExtensions.toJavaIdentifier("_", true));
   }
   
   /**
@@ -49,21 +39,18 @@ public class GrammarAccessExtensionsTest {
    */
   @Test
   public void testBug() throws Exception {
-    String _javaIdentifier = this._grammarAccessExtensions.toJavaIdentifier("\u308b", true);
-    Assert.assertEquals("HiraganaLetterRu", _javaIdentifier);
+    Assert.assertEquals("HiraganaLetterRu", this._grammarAccessExtensions.toJavaIdentifier("\u308b", true));
   }
   
   @Test
   public void testSmoke() throws Exception {
     for (int i = 0; (i < 4000); i++) {
       {
-        String _valueOf = String.valueOf(((char) i));
-        final String identifier = this._grammarAccessExtensions.toJavaIdentifier(_valueOf, false);
+        final String identifier = this._grammarAccessExtensions.toJavaIdentifier(String.valueOf(((char) i)), false);
         for (int j = 0; (j < identifier.length()); j++) {
           {
             final char charAt = identifier.charAt(j);
-            boolean _isValidJavaLatinIdentifier = this._grammarAccessExtensions.isValidJavaLatinIdentifier(charAt, (j == 0));
-            Assert.assertTrue(((identifier + ":") + Character.valueOf(charAt)), _isValidJavaLatinIdentifier);
+            Assert.assertTrue(((identifier + ":") + Character.valueOf(charAt)), this._grammarAccessExtensions.isValidJavaLatinIdentifier(charAt, (j == 0)));
           }
         }
       }

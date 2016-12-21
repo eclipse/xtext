@@ -81,9 +81,7 @@ public class BuildRequest {
   public URI getBaseDir() {
     if ((this.baseDir == null)) {
       final String userDir = System.getProperty("user.dir");
-      File _file = new File(userDir);
-      URI _createFolderURI = UriUtil.createFolderURI(_file);
-      this.baseDir = _createFolderURI;
+      this.baseDir = UriUtil.createFolderURI(new File(userDir));
     }
     return this.baseDir;
   }

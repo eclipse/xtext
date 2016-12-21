@@ -76,12 +76,10 @@ public abstract class AbstractAntlrGrammarGenerator {
   private Grammar originalGrammar;
   
   public void generate(final Grammar it, final AntlrOptions options, final IXtextGeneratorFileSystemAccess fsa) {
-    KeywordHelper _helper = KeywordHelper.getHelper(it);
-    this.keywordHelper = _helper;
+    this.keywordHelper = KeywordHelper.getHelper(it);
     this.originalGrammar = it;
     final RuleFilter filter = new RuleFilter();
-    boolean _isSkipUnusedRules = options.isSkipUnusedRules();
-    filter.setDiscardUnreachableRules(_isSkipUnusedRules);
+    filter.setDiscardUnreachableRules(options.isSkipUnusedRules());
     final RuleNames ruleNames = RuleNames.getRuleNames(it, true);
     FlattenedGrammarAccess _flattenedGrammarAccess = new FlattenedGrammarAccess(ruleNames, filter);
     final Grammar flattened = _flattenedGrammarAccess.getFlattenedGrammar();
@@ -677,14 +675,12 @@ public abstract class AbstractAntlrGrammarGenerator {
     {
       if (((it instanceof ParserRule) && GrammarUtil.isDatatypeRule(AntlrGrammarGenUtil.<AbstractRule>getOriginalElement(it)))) {
         _builder.append("\t");
-        AbstractElement _alternatives = it.getAlternatives();
-        String _dataTypeEbnf = this.dataTypeEbnf(_alternatives, true);
+        String _dataTypeEbnf = this.dataTypeEbnf(it.getAlternatives(), true);
         _builder.append(_dataTypeEbnf, "\t");
         _builder.newLineIfNotEmpty();
       } else {
         _builder.append("\t");
-        AbstractElement _alternatives_1 = it.getAlternatives();
-        String _ebnf = this.ebnf(_alternatives_1, options, true);
+        String _ebnf = this.ebnf(it.getAlternatives(), options, true);
         _builder.append(_ebnf, "\t");
         _builder.newLineIfNotEmpty();
       }

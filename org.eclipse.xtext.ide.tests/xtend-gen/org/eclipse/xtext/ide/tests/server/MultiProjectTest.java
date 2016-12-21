@@ -77,18 +77,10 @@ public class MultiProjectTest {
     final URI bar = this.createFile(this.project1, "Bar.testlang", _builder_1);
     List<URI> _emptyList = CollectionLiterals.<URI>emptyList();
     this.workspaceManager.doBuild(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(foo, bar)), _emptyList, CancelIndicator.NullImpl);
-    int _size = this.diagnostics.size();
-    Assert.assertEquals(2, _size);
-    List<Issue> _get = this.diagnostics.get(foo);
-    int _size_1 = _get.size();
-    Assert.assertEquals(1, _size_1);
-    List<Issue> _get_1 = this.diagnostics.get(foo);
-    Issue _head = IterableExtensions.<Issue>head(_get_1);
-    String _code = _head.getCode();
-    Assert.assertEquals(Diagnostic.LINKING_DIAGNOSTIC, _code);
-    List<Issue> _get_2 = this.diagnostics.get(bar);
-    boolean _isEmpty = _get_2.isEmpty();
-    Assert.assertTrue(_isEmpty);
+    Assert.assertEquals(2, this.diagnostics.size());
+    Assert.assertEquals(1, this.diagnostics.get(foo).size());
+    Assert.assertEquals(Diagnostic.LINKING_DIAGNOSTIC, IterableExtensions.<Issue>head(this.diagnostics.get(foo)).getCode());
+    Assert.assertTrue(this.diagnostics.get(bar).isEmpty());
     this.diagnostics.clear();
     String _name = this.project0.getName();
     ProjectManager _projectManager = this.workspaceManager.getProjectManager(_name);
@@ -98,14 +90,9 @@ public class MultiProjectTest {
     _dependencies.add(_name_1);
     List<URI> _emptyList_1 = CollectionLiterals.<URI>emptyList();
     this.workspaceManager.doBuild(Collections.<URI>unmodifiableList(CollectionLiterals.<URI>newArrayList(foo, bar)), _emptyList_1, CancelIndicator.NullImpl);
-    int _size_2 = this.diagnostics.size();
-    Assert.assertEquals(2, _size_2);
-    List<Issue> _get_3 = this.diagnostics.get(foo);
-    boolean _isEmpty_1 = _get_3.isEmpty();
-    Assert.assertTrue(_isEmpty_1);
-    List<Issue> _get_4 = this.diagnostics.get(bar);
-    boolean _isEmpty_2 = _get_4.isEmpty();
-    Assert.assertTrue(_isEmpty_2);
+    Assert.assertEquals(2, this.diagnostics.size());
+    Assert.assertTrue(this.diagnostics.get(foo).isEmpty());
+    Assert.assertTrue(this.diagnostics.get(bar).isEmpty());
   }
   
   @Before
@@ -184,8 +171,7 @@ public class MultiProjectTest {
       FileWriter _fileWriter = new FileWriter(file);
       final Procedure1<FileWriter> _function = (FileWriter it) -> {
         try {
-          String _string = contents.toString();
-          it.write(_string);
+          it.write(contents.toString());
           it.close();
         } catch (Throwable _e) {
           throw Exceptions.sneakyThrow(_e);

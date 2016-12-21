@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.xtext.generator.grammarAccess;
 
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import org.eclipse.emf.common.util.EList;
@@ -83,9 +82,7 @@ public class FragmentFakingEcoreResource extends XMIResourceImpl {
     boolean _tripleNotEquals = (_eSuperPackage != null);
     if (_tripleNotEquals) {
       final StringBuilder result = new StringBuilder(60);
-      EPackage _ePackage_1 = classifier.getEPackage();
-      HashSet<EPackage> _newHashSet = CollectionLiterals.<EPackage>newHashSet();
-      this.calculateURIFragment(_ePackage_1, result, _newHashSet);
+      this.calculateURIFragment(classifier.getEPackage(), result, CollectionLiterals.<EPackage>newHashSet());
       String _name = classifier.getName();
       result.append(_name);
       return result.toString();
@@ -107,8 +104,7 @@ public class FragmentFakingEcoreResource extends XMIResourceImpl {
       Resource _eResource_1 = _eSuperPackage_1.eResource();
       boolean _tripleEquals = (_eResource == _eResource_1);
       if (_tripleEquals) {
-        EPackage _eSuperPackage_2 = ePackage.getESuperPackage();
-        this.calculateURIFragment(_eSuperPackage_2, result, visited);
+        this.calculateURIFragment(ePackage.getESuperPackage(), result, visited);
         EList<EClassifier> _eClassifiers = ePackage.getEClassifiers();
         boolean _isEmpty = _eClassifiers.isEmpty();
         boolean _not_1 = (!_isEmpty);

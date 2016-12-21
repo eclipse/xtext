@@ -71,8 +71,7 @@ public class SdkFeatureProject extends ProjectDescriptor {
       final ArrayList<AbstractFile> files = CollectionLiterals.<AbstractFile>newArrayList();
       Iterable<? extends AbstractFile> _files = super.getFiles();
       Iterables.<AbstractFile>addAll(files, _files);
-      CharSequence _featureXml = this.featureXml();
-      PlainTextFile _file = this.file(Outlet.ROOT, "feature.xml", _featureXml);
+      PlainTextFile _file = this.file(Outlet.ROOT, "feature.xml", this.featureXml());
       files.add(_file);
       _xblockexpression = files;
     }
@@ -127,24 +126,18 @@ public class SdkFeatureProject extends ProjectDescriptor {
       boolean _isEnabled = _ideProject.isEnabled();
       if (_isEnabled) {
         _builder.append("\t");
-        WizardConfiguration _config_2 = this.getConfig();
-        IdeProjectDescriptor _ideProject_1 = _config_2.getIdeProject();
-        String _nameQualifier = _ideProject_1.getNameQualifier();
-        CharSequence _includedPlugin_1 = this.includedPlugin(_nameQualifier);
+        CharSequence _includedPlugin_1 = this.includedPlugin(this.getConfig().getIdeProject().getNameQualifier());
         _builder.append(_includedPlugin_1, "\t");
         _builder.newLineIfNotEmpty();
       }
     }
     {
-      WizardConfiguration _config_3 = this.getConfig();
-      UiProjectDescriptor _uiProject = _config_3.getUiProject();
+      WizardConfiguration _config_2 = this.getConfig();
+      UiProjectDescriptor _uiProject = _config_2.getUiProject();
       boolean _isEnabled_1 = _uiProject.isEnabled();
       if (_isEnabled_1) {
         _builder.append("\t");
-        WizardConfiguration _config_4 = this.getConfig();
-        UiProjectDescriptor _uiProject_1 = _config_4.getUiProject();
-        String _nameQualifier_1 = _uiProject_1.getNameQualifier();
-        CharSequence _includedPlugin_2 = this.includedPlugin(_nameQualifier_1);
+        CharSequence _includedPlugin_2 = this.includedPlugin(this.getConfig().getUiProject().getNameQualifier());
         _builder.append(_includedPlugin_2, "\t");
         _builder.newLineIfNotEmpty();
       }

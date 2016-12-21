@@ -53,12 +53,9 @@ public class BuildOrderTest {
       it.setDependencies(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList()));
     };
     final ProjectDescription d = ObjectExtensions.<ProjectDescription>operator_doubleArrow(_projectDescription_3, _function_3);
-    TopologicalSorter _topologicalSorter = new TopologicalSorter();
-    final Procedure1<ProjectDescription> _function_4 = (ProjectDescription it) -> {
+    this.assertEquals(Collections.<ProjectDescription>unmodifiableList(CollectionLiterals.<ProjectDescription>newArrayList(d, c, b, a)), new TopologicalSorter().sortByDependencies(Collections.<ProjectDescription>unmodifiableList(CollectionLiterals.<ProjectDescription>newArrayList(a, b, c, d)), ((Procedure1<ProjectDescription>) (ProjectDescription it) -> {
       Assert.fail();
-    };
-    List<ProjectDescription> _sortByDependencies = _topologicalSorter.sortByDependencies(Collections.<ProjectDescription>unmodifiableList(CollectionLiterals.<ProjectDescription>newArrayList(a, b, c, d)), _function_4);
-    this.assertEquals(Collections.<ProjectDescription>unmodifiableList(CollectionLiterals.<ProjectDescription>newArrayList(d, c, b, a)), _sortByDependencies);
+    })));
   }
   
   @Test
@@ -87,12 +84,9 @@ public class BuildOrderTest {
       it.setDependencies(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList()));
     };
     final ProjectDescription d = ObjectExtensions.<ProjectDescription>operator_doubleArrow(_projectDescription_3, _function_3);
-    TopologicalSorter _topologicalSorter = new TopologicalSorter();
-    final Procedure1<ProjectDescription> _function_4 = (ProjectDescription it) -> {
+    this.assertEquals(Collections.<ProjectDescription>unmodifiableList(CollectionLiterals.<ProjectDescription>newArrayList(d, c, b, a)), new TopologicalSorter().sortByDependencies(Collections.<ProjectDescription>unmodifiableList(CollectionLiterals.<ProjectDescription>newArrayList(a, b, c, d)), ((Procedure1<ProjectDescription>) (ProjectDescription it) -> {
       Assert.fail();
-    };
-    List<ProjectDescription> _sortByDependencies = _topologicalSorter.sortByDependencies(Collections.<ProjectDescription>unmodifiableList(CollectionLiterals.<ProjectDescription>newArrayList(a, b, c, d)), _function_4);
-    this.assertEquals(Collections.<ProjectDescription>unmodifiableList(CollectionLiterals.<ProjectDescription>newArrayList(d, c, b, a)), _sortByDependencies);
+    })));
   }
   
   @Test
@@ -121,12 +115,9 @@ public class BuildOrderTest {
       it.setDependencies(Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList()));
     };
     final ProjectDescription d = ObjectExtensions.<ProjectDescription>operator_doubleArrow(_projectDescription_3, _function_3);
-    TopologicalSorter _topologicalSorter = new TopologicalSorter();
-    final Procedure1<ProjectDescription> _function_4 = (ProjectDescription it) -> {
+    this.assertEquals(Collections.<ProjectDescription>unmodifiableList(CollectionLiterals.<ProjectDescription>newArrayList(d, c, b, a)), new TopologicalSorter().sortByDependencies(Collections.<ProjectDescription>unmodifiableList(CollectionLiterals.<ProjectDescription>newArrayList(a, b, c, d)), ((Procedure1<ProjectDescription>) (ProjectDescription it) -> {
       Assert.fail();
-    };
-    List<ProjectDescription> _sortByDependencies = _topologicalSorter.sortByDependencies(Collections.<ProjectDescription>unmodifiableList(CollectionLiterals.<ProjectDescription>newArrayList(a, b, c, d)), _function_4);
-    this.assertEquals(Collections.<ProjectDescription>unmodifiableList(CollectionLiterals.<ProjectDescription>newArrayList(d, c, b, a)), _sortByDependencies);
+    })));
   }
   
   @Test
@@ -142,18 +133,12 @@ public class BuildOrderTest {
       it.setName("b");
     };
     final ProjectDescription b = ObjectExtensions.<ProjectDescription>operator_doubleArrow(_projectDescription_1, _function_1);
-    TopologicalSorter _topologicalSorter = new TopologicalSorter();
-    final Procedure1<ProjectDescription> _function_2 = (ProjectDescription it) -> {
+    this.assertEquals(Collections.<ProjectDescription>unmodifiableList(CollectionLiterals.<ProjectDescription>newArrayList(a)), new TopologicalSorter().sortByDependencies(Collections.<ProjectDescription>unmodifiableList(CollectionLiterals.<ProjectDescription>newArrayList(a)), ((Procedure1<ProjectDescription>) (ProjectDescription it) -> {
       Assert.fail();
-    };
-    List<ProjectDescription> _sortByDependencies = _topologicalSorter.sortByDependencies(Collections.<ProjectDescription>unmodifiableList(CollectionLiterals.<ProjectDescription>newArrayList(a)), _function_2);
-    this.assertEquals(Collections.<ProjectDescription>unmodifiableList(CollectionLiterals.<ProjectDescription>newArrayList(a)), _sortByDependencies);
-    TopologicalSorter _topologicalSorter_1 = new TopologicalSorter();
-    final Procedure1<ProjectDescription> _function_3 = (ProjectDescription it) -> {
+    })));
+    this.assertEquals(Collections.<ProjectDescription>unmodifiableList(CollectionLiterals.<ProjectDescription>newArrayList(b)), new TopologicalSorter().sortByDependencies(Collections.<ProjectDescription>unmodifiableList(CollectionLiterals.<ProjectDescription>newArrayList(b)), ((Procedure1<ProjectDescription>) (ProjectDescription it) -> {
       Assert.fail();
-    };
-    List<ProjectDescription> _sortByDependencies_1 = _topologicalSorter_1.sortByDependencies(Collections.<ProjectDescription>unmodifiableList(CollectionLiterals.<ProjectDescription>newArrayList(b)), _function_3);
-    this.assertEquals(Collections.<ProjectDescription>unmodifiableList(CollectionLiterals.<ProjectDescription>newArrayList(b)), _sortByDependencies_1);
+    })));
   }
   
   @Test
@@ -189,12 +174,9 @@ public class BuildOrderTest {
     };
     final ProjectDescription e = ObjectExtensions.<ProjectDescription>operator_doubleArrow(_projectDescription_4, _function_4);
     final ArrayList<ProjectDescription> cyclic = CollectionLiterals.<ProjectDescription>newArrayList();
-    TopologicalSorter _topologicalSorter = new TopologicalSorter();
-    final Procedure1<ProjectDescription> _function_5 = (ProjectDescription it) -> {
+    this.assertEquals(Collections.<ProjectDescription>unmodifiableList(CollectionLiterals.<ProjectDescription>newArrayList(e)), new TopologicalSorter().sortByDependencies(Collections.<ProjectDescription>unmodifiableList(CollectionLiterals.<ProjectDescription>newArrayList(a, b, c, d, e)), ((Procedure1<ProjectDescription>) (ProjectDescription it) -> {
       cyclic.add(it);
-    };
-    List<ProjectDescription> _sortByDependencies = _topologicalSorter.sortByDependencies(Collections.<ProjectDescription>unmodifiableList(CollectionLiterals.<ProjectDescription>newArrayList(a, b, c, d, e)), _function_5);
-    this.assertEquals(Collections.<ProjectDescription>unmodifiableList(CollectionLiterals.<ProjectDescription>newArrayList(e)), _sortByDependencies);
+    })));
     this.assertEquals(Collections.<ProjectDescription>unmodifiableList(CollectionLiterals.<ProjectDescription>newArrayList(b, d, c, a)), cyclic);
   }
   
@@ -207,12 +189,9 @@ public class BuildOrderTest {
     };
     final ProjectDescription a = ObjectExtensions.<ProjectDescription>operator_doubleArrow(_projectDescription, _function);
     final ArrayList<ProjectDescription> cyclic = CollectionLiterals.<ProjectDescription>newArrayList();
-    TopologicalSorter _topologicalSorter = new TopologicalSorter();
-    final Procedure1<ProjectDescription> _function_1 = (ProjectDescription it) -> {
+    this.assertEquals(Collections.<ProjectDescription>unmodifiableList(CollectionLiterals.<ProjectDescription>newArrayList()), new TopologicalSorter().sortByDependencies(Collections.<ProjectDescription>unmodifiableList(CollectionLiterals.<ProjectDescription>newArrayList(a)), ((Procedure1<ProjectDescription>) (ProjectDescription it) -> {
       cyclic.add(it);
-    };
-    List<ProjectDescription> _sortByDependencies = _topologicalSorter.sortByDependencies(Collections.<ProjectDescription>unmodifiableList(CollectionLiterals.<ProjectDescription>newArrayList(a)), _function_1);
-    this.assertEquals(Collections.<ProjectDescription>unmodifiableList(CollectionLiterals.<ProjectDescription>newArrayList()), _sortByDependencies);
+    })));
     this.assertEquals(Collections.<ProjectDescription>unmodifiableList(CollectionLiterals.<ProjectDescription>newArrayList(a)), cyclic);
   }
   

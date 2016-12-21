@@ -90,17 +90,14 @@ public abstract class ProjectDescriptor {
     final List<TextFile> files = CollectionLiterals.<TextFile>newArrayList();
     boolean _isEclipsePluginProject = this.isEclipsePluginProject();
     if (_isEclipsePluginProject) {
-      String _manifest = this.manifest();
-      PlainTextFile _file = this.file(Outlet.META_INF, "MANIFEST.MF", _manifest);
+      PlainTextFile _file = this.file(Outlet.META_INF, "MANIFEST.MF", this.manifest());
       files.add(_file);
-      CharSequence _buildProperties = this.buildProperties();
-      PlainTextFile _file_1 = this.file(Outlet.ROOT, "build.properties", _buildProperties);
+      PlainTextFile _file_1 = this.file(Outlet.ROOT, "build.properties", this.buildProperties());
       files.add(_file_1);
     }
     boolean _isEclipseFeatureProject = this.isEclipseFeatureProject();
     if (_isEclipseFeatureProject) {
-      CharSequence _buildProperties_1 = this.buildProperties();
-      PlainTextFile _file_2 = this.file(Outlet.ROOT, "build.properties", _buildProperties_1);
+      PlainTextFile _file_2 = this.file(Outlet.ROOT, "build.properties", this.buildProperties());
       files.add(_file_2);
     }
     if ((this.config.needsGradleBuild() && this.isPartOfGradleBuild())) {
@@ -126,24 +123,18 @@ public abstract class ProjectDescriptor {
   
   public CharSequence buildProperties() {
     StringConcatenation _builder = new StringConcatenation();
-    Set<String> _sourceFolders = this.getSourceFolders();
-    final Function1<String, String> _function = (String it) -> {
+    String _buildPropertiesEntry = this.buildPropertiesEntry("source..", IterableExtensions.<String, String>map(this.getSourceFolders(), ((Function1<String, String>) (String it) -> {
       return (it + "/");
-    };
-    Iterable<String> _map = IterableExtensions.<String, String>map(_sourceFolders, _function);
-    String _buildPropertiesEntry = this.buildPropertiesEntry("source..", _map);
+    })));
     _builder.append(_buildPropertiesEntry);
     _builder.newLineIfNotEmpty();
-    Set<String> _binIncludes = this.getBinIncludes();
-    String _buildPropertiesEntry_1 = this.buildPropertiesEntry("bin.includes", _binIncludes);
+    String _buildPropertiesEntry_1 = this.buildPropertiesEntry("bin.includes", this.getBinIncludes());
     _builder.append(_buildPropertiesEntry_1);
     _builder.newLineIfNotEmpty();
-    Set<String> _binExcludes = this.getBinExcludes();
-    String _buildPropertiesEntry_2 = this.buildPropertiesEntry("bin.excludes", _binExcludes);
+    String _buildPropertiesEntry_2 = this.buildPropertiesEntry("bin.excludes", this.getBinExcludes());
     _builder.append(_buildPropertiesEntry_2);
     _builder.newLineIfNotEmpty();
-    Set<String> _developmentBundles = this.getDevelopmentBundles();
-    String _buildPropertiesEntry_3 = this.buildPropertiesEntry("additional.bundles", _developmentBundles);
+    String _buildPropertiesEntry_3 = this.buildPropertiesEntry("additional.bundles", this.getDevelopmentBundles());
     _builder.append(_buildPropertiesEntry_3);
     _builder.newLineIfNotEmpty();
     return _builder;
@@ -215,12 +206,10 @@ public abstract class ProjectDescriptor {
     }
     _builder.append("Bundle-ActivationPolicy: lazy");
     _builder.newLine();
-    Set<String> _requiredBundles = this.getRequiredBundles();
-    String _manifestEntry = this.manifestEntry("Require-Bundle", _requiredBundles);
+    String _manifestEntry = this.manifestEntry("Require-Bundle", this.getRequiredBundles());
     _builder.append(_manifestEntry);
     _builder.newLineIfNotEmpty();
-    Set<String> _importedPackages = this.getImportedPackages();
-    String _manifestEntry_1 = this.manifestEntry("Import-Package", _importedPackages);
+    String _manifestEntry_1 = this.manifestEntry("Import-Package", this.getImportedPackages());
     _builder.append(_manifestEntry_1);
     _builder.newLineIfNotEmpty();
     _builder.append("Bundle-RequiredExecutionEnvironment: ");

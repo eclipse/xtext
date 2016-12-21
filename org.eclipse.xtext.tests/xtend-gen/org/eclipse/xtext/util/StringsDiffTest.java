@@ -139,7 +139,6 @@ public class StringsDiffTest {
     if (_string!=null) {
       _trim=_string.trim();
     }
-    String _diff = DiffUtil.diff(one, two);
-    Assert.assertEquals(_trim, _diff);
+    Assert.assertEquals(_trim, DiffUtil.diff(one, two));
   }
 }

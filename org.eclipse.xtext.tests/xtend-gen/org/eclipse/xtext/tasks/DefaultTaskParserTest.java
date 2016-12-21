@@ -41,9 +41,7 @@ public class DefaultTaskParserTest {
   public void setup() {
     DefaultTaskParser _defaultTaskParser = new DefaultTaskParser();
     this.parser = _defaultTaskParser;
-    DefaultTaskTagProvider _defaultTaskTagProvider = new DefaultTaskTagProvider();
-    TaskTags _taskTags = _defaultTaskTagProvider.getTaskTags(null);
-    this.definitions = _taskTags;
+    this.definitions = new DefaultTaskTagProvider().getTaskTags(null);
   }
   
   @Test
@@ -176,13 +174,10 @@ public class DefaultTaskParserTest {
     final String source = _builder.toString();
     String _unix = LineDelimiters.toUnix(source);
     final List<Task> parsed = this.parser.parseTasks(_unix, this.definitions);
-    int _size = parsed.size();
-    Assert.assertEquals(expectation, _size);
+    Assert.assertEquals(expectation, parsed.size());
     ExclusiveRange _doubleDotLessThan = new ExclusiveRange(0, expectation, true);
     for (final Integer i_1 : _doubleDotLessThan) {
-      Task _get = parsed.get((i_1).intValue());
-      int _lineNumber = _get.getLineNumber();
-      Assert.assertEquals(((i_1).intValue() + 2), _lineNumber);
+      Assert.assertEquals(((i_1).intValue() + 2), parsed.get((i_1).intValue()).getLineNumber());
     }
   }
   
@@ -190,15 +185,11 @@ public class DefaultTaskParserTest {
     String _string = source.toString();
     String _unix = LineDelimiters.toUnix(_string);
     final List<Task> actualTasks = this.parser.parseTasks(_unix, this.definitions);
+    Assert.assertEquals(expectedTasks.size(), actualTasks.size());
     int _size = expectedTasks.size();
-    int _size_1 = actualTasks.size();
-    Assert.assertEquals(_size, _size_1);
-    int _size_2 = expectedTasks.size();
-    ExclusiveRange _doubleDotLessThan = new ExclusiveRange(0, _size_2, true);
+    ExclusiveRange _doubleDotLessThan = new ExclusiveRange(0, _size, true);
     for (final Integer i : _doubleDotLessThan) {
-      Task _get = expectedTasks.get((i).intValue());
-      Task _get_1 = actualTasks.get((i).intValue());
-      TaskAssert.assertExactMatch(_get, _get_1);
+      TaskAssert.assertExactMatch(expectedTasks.get((i).intValue()), actualTasks.get((i).intValue()));
     }
   }
 }

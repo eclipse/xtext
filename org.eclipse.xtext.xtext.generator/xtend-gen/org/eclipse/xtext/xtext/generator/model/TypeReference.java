@@ -9,7 +9,6 @@ package org.eclipse.xtext.xtext.generator.model;
 
 import com.google.common.base.Objects;
 import com.google.common.base.Splitter;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import org.eclipse.emf.codegen.ecore.genmodel.GenClass;
@@ -82,8 +81,7 @@ public class TypeReference {
       throw new IllegalArgumentException(("Invalid class name: " + className));
     }
     this.packageName = packageName;
-    String[] _split = className.split("\\.");
-    this.simpleNames = ((List<String>)Conversions.doWrapArray(_split));
+    this.simpleNames = ((List<String>)Conversions.doWrapArray(className.split("\\.")));
     List<TypeReference> _elvis = null;
     if (arguments != null) {
       _elvis = arguments;
@@ -117,11 +115,8 @@ public class TypeReference {
       String _plus_2 = ("Class is local: " + _name_2);
       throw new IllegalArgumentException(_plus_2);
     }
-    Package _package = clazz.getPackage();
-    String _name_3 = _package.getName();
-    this.packageName = _name_3;
-    ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList();
-    this.simpleNames = _newArrayList;
+    this.packageName = clazz.getPackage().getName();
+    this.simpleNames = CollectionLiterals.<String>newArrayList();
     List<TypeReference> _elvis = null;
     if (arguments != null) {
       _elvis = arguments;
@@ -135,8 +130,7 @@ public class TypeReference {
       {
         String _simpleName = c.getSimpleName();
         this.simpleNames.add(0, _simpleName);
-        Class<?> _declaringClass = c.getDeclaringClass();
-        c = _declaringClass;
+        c = c.getDeclaringClass();
       }
     } while((c != null));
   }
@@ -182,11 +176,7 @@ public class TypeReference {
         char _charAt = _last.charAt(0);
         boolean _isUpperCase = Character.isUpperCase(_charAt);
         if (_isUpperCase) {
-          final List<String> _converted_packageSegments_1 = (List<String>)packageSegments_1;
-          int _length_2 = ((Object[])Conversions.unwrapArray(_converted_packageSegments_1, Object.class)).length;
-          int _minus_2 = (_length_2 - 1);
-          List<String> _subList = packageSegments_1.subList(0, _minus_2);
-          packageSegments_1 = _subList;
+          packageSegments_1 = packageSegments_1.subList(0, (((Object[])Conversions.unwrapArray(packageSegments_1, Object.class)).length - 1));
         } else {
           return IterableExtensions.join(packageSegments_1, ".");
         }

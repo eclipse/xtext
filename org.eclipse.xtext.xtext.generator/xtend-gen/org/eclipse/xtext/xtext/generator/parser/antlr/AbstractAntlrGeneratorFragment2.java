@@ -23,7 +23,6 @@ import java.util.Set;
 import java.util.function.Consumer;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
@@ -118,8 +117,7 @@ public abstract class AbstractAntlrGeneratorFragment2 extends AbstractXtextGener
   protected abstract void doGenerate();
   
   protected void checkGrammar() {
-    Grammar _grammar = this.getGrammar();
-    boolean _hasProductionRules = this.hasProductionRules(_grammar);
+    boolean _hasProductionRules = this.hasProductionRules(this.getGrammar());
     boolean _not = (!_hasProductionRules);
     if (_not) {
       throw new IllegalArgumentException("You may not generate an ANTLR parser for a grammar without production rules.");
@@ -186,8 +184,7 @@ public abstract class AbstractAntlrGeneratorFragment2 extends AbstractXtextGener
     UnorderedGroupsSplitter splitter = new UnorderedGroupsSplitter(content);
     String transformed = splitter.transform();
     SyntacticPredicateFixup fixup = new SyntacticPredicateFixup(transformed);
-    String _transform = fixup.transform();
-    transformed = _transform;
+    transformed = fixup.transform();
     BacktrackingGuardForUnorderedGroupsRemover remover = new BacktrackingGuardForUnorderedGroupsRemover(transformed);
     String newContent = remover.transform();
     String _javaPath_1 = parser.getJavaPath();
@@ -215,15 +212,10 @@ public abstract class AbstractAntlrGeneratorFragment2 extends AbstractXtextGener
     String _javaPath = type.getJavaPath();
     CharSequence _readTextFile = fsa.readTextFile(_javaPath);
     String content = _readTextFile.toString();
+    content = this.newLineNormalizer.postProcess(fsa.getURI(type.getJavaPath()), content).toString();
+    content = content.replaceAll("\"\\+(\\r)?\\n\\s+\"", "");
     String _javaPath_1 = type.getJavaPath();
-    URI _uRI = fsa.getURI(_javaPath_1);
-    CharSequence _postProcess = this.newLineNormalizer.postProcess(_uRI, content);
-    String _string = _postProcess.toString();
-    content = _string;
-    String _replaceAll = content.replaceAll("\"\\+(\\r)?\\n\\s+\"", "");
-    content = _replaceAll;
-    String _javaPath_2 = type.getJavaPath();
-    fsa.generateFile(_javaPath_2, content);
+    fsa.generateFile(_javaPath_1, content);
   }
   
   protected void normalizeLineDelimiters(final IXtextGeneratorFileSystemAccess fsa, final TypeReference... types) {
@@ -236,10 +228,7 @@ public abstract class AbstractAntlrGeneratorFragment2 extends AbstractXtextGener
   protected void normalizeTokens(final IXtextGeneratorFileSystemAccess fsa, final String tokenFile) {
     CharSequence _readTextFile = fsa.readTextFile(tokenFile);
     String content = _readTextFile.toString();
-    URI _uRI = fsa.getURI(tokenFile);
-    CharSequence _postProcess = this.newLineNormalizer.postProcess(_uRI, content);
-    String _string = _postProcess.toString();
-    content = _string;
+    content = this.newLineNormalizer.postProcess(fsa.getURI(tokenFile), content).toString();
     String _lineDelimiter = this.codeConfig.getLineDelimiter();
     final List<String> splitted = Strings.split(content, _lineDelimiter);
     Collections.<String>sort(splitted);
@@ -265,19 +254,15 @@ public abstract class AbstractAntlrGeneratorFragment2 extends AbstractXtextGener
     String _javaPath = lexer.getJavaPath();
     CharSequence _readTextFile = fsa.readTextFile(_javaPath);
     String lexerContent = _readTextFile.toString();
-    String _stripUnnecessaryComments = this.codeQualityHelper.stripUnnecessaryComments(lexerContent, this.options);
-    lexerContent = _stripUnnecessaryComments;
+    lexerContent = this.codeQualityHelper.stripUnnecessaryComments(lexerContent, this.options);
     String _javaPath_1 = lexer.getJavaPath();
     fsa.generateFile(_javaPath_1, lexerContent);
     String _javaPath_2 = parser.getJavaPath();
     CharSequence _readTextFile_1 = fsa.readTextFile(_javaPath_2);
     String parserContent = _readTextFile_1.toString();
-    String _stripUnnecessaryComments_1 = this.codeQualityHelper.stripUnnecessaryComments(parserContent, this.options);
-    parserContent = _stripUnnecessaryComments_1;
-    String _removeDuplicateBitsets = this.codeQualityHelper.removeDuplicateBitsets(parserContent, this.options);
-    parserContent = _removeDuplicateBitsets;
-    String _removeDuplicateDFAs = this.codeQualityHelper.removeDuplicateDFAs(parserContent, this.options);
-    parserContent = _removeDuplicateDFAs;
+    parserContent = this.codeQualityHelper.stripUnnecessaryComments(parserContent, this.options);
+    parserContent = this.codeQualityHelper.removeDuplicateBitsets(parserContent, this.options);
+    parserContent = this.codeQualityHelper.removeDuplicateDFAs(parserContent, this.options);
     String _javaPath_3 = parser.getJavaPath();
     fsa.generateFile(_javaPath_3, parserContent);
   }

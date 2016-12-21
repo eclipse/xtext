@@ -268,10 +268,7 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
     JavaFileAccess _compileFacetConfiguration = this.compileFacetConfiguration(grammar);
     JavaFileAccess _compileColorSettingsPage = this.compileColorSettingsPage(grammar);
     final Consumer<JavaFileAccess> _function = (JavaFileAccess it) -> {
-      IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
-      ISubProjectConfig _ideaPlugin_1 = _projectConfig_1.getIdeaPlugin();
-      IXtextGeneratorFileSystemAccess _src = _ideaPlugin_1.getSrc();
-      it.writeTo(_src);
+      it.writeTo(this.getProjectConfig().getIdeaPlugin().getSrc());
     };
     Collections.<JavaFileAccess>unmodifiableList(CollectionLiterals.<JavaFileAccess>newArrayList(_compileStandaloneSetup, _compileIdeaSetup, _compileCompletionContributor, _compileFileType, _compileFacetConfiguration, _compileColorSettingsPage)).forEach(_function);
     TextFileAccess _compileServicesISetup = this.compileServicesISetup(grammar);
@@ -293,10 +290,7 @@ public class IdeaPluginGenerator extends AbstractStubGeneratingFragment {
     JavaFileAccess _compileFacetType = this.compileFacetType(grammar);
     JavaFileAccess _compileBaseColorSettingsPage = this.compileBaseColorSettingsPage(grammar);
     final Consumer<TextFileAccess> _function_1 = (TextFileAccess it) -> {
-      IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
-      ISubProjectConfig _ideaPlugin_1 = _projectConfig_1.getIdeaPlugin();
-      IXtextGeneratorFileSystemAccess _srcGen = _ideaPlugin_1.getSrcGen();
-      it.writeTo(_srcGen);
+      it.writeTo(this.getProjectConfig().getIdeaPlugin().getSrcGen());
     };
     Collections.<TextFileAccess>unmodifiableList(CollectionLiterals.<TextFileAccess>newArrayList(_compileServicesISetup, _compileAbstractCompletionContributor, _compileLanguage, _compileAbstractFileType, _compileFileTypeFactory, _compileFileImpl, _compileTokenTypeProvider, _compileElementTypeProvider, _compileParserDefinition, _compileSyntaxHighlighterFactory, _compileSemanticHighlightVisitor, _compileExtensionFactory, _compileCodeBlockModificationListener, _compilePsiParser, _compileAntlrTokenFileProvider, _compilePomDeclarationSearcher, _compileFacetType, _compileBaseColorSettingsPage)).forEach(_function_1);
     if (this.deployable) {

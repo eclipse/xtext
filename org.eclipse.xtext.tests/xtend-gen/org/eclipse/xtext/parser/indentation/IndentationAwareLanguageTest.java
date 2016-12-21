@@ -53,9 +53,7 @@ public class IndentationAwareLanguageTest {
     try {
       final Tree tree = this.parseHelper.parse("");
       Assert.assertNotNull(tree);
-      EList<TreeNode> _nodes = tree.getNodes();
-      boolean _isEmpty = _nodes.isEmpty();
-      Assert.assertTrue(_isEmpty);
+      Assert.assertTrue(tree.getNodes().isEmpty());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -66,13 +64,8 @@ public class IndentationAwareLanguageTest {
     try {
       final Tree tree = this.parseHelper.parse("root");
       Assert.assertNotNull(tree);
-      EList<TreeNode> _nodes = tree.getNodes();
-      int _size = _nodes.size();
-      Assert.assertEquals(1, _size);
-      EList<TreeNode> _nodes_1 = tree.getNodes();
-      TreeNode _head = IterableExtensions.<TreeNode>head(_nodes_1);
-      String _name = _head.getName();
-      Assert.assertEquals("root", _name);
+      Assert.assertEquals(1, tree.getNodes().size());
+      Assert.assertEquals("root", IterableExtensions.<TreeNode>head(tree.getNodes()).getName());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -88,17 +81,9 @@ public class IndentationAwareLanguageTest {
       _builder.newLine();
       final Tree tree = this.parseHelper.parse(_builder);
       Assert.assertNotNull(tree);
-      EList<TreeNode> _nodes = tree.getNodes();
-      int _size = _nodes.size();
-      Assert.assertEquals(2, _size);
-      EList<TreeNode> _nodes_1 = tree.getNodes();
-      TreeNode _head = IterableExtensions.<TreeNode>head(_nodes_1);
-      String _name = _head.getName();
-      Assert.assertEquals("first", _name);
-      EList<TreeNode> _nodes_2 = tree.getNodes();
-      TreeNode _last = IterableExtensions.<TreeNode>last(_nodes_2);
-      String _name_1 = _last.getName();
-      Assert.assertEquals("second", _name_1);
+      Assert.assertEquals(2, tree.getNodes().size());
+      Assert.assertEquals("first", IterableExtensions.<TreeNode>head(tree.getNodes()).getName());
+      Assert.assertEquals("second", IterableExtensions.<TreeNode>last(tree.getNodes()).getName());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -115,19 +100,9 @@ public class IndentationAwareLanguageTest {
       _builder.newLine();
       final Tree tree = this.parseHelper.parse(_builder);
       Assert.assertNotNull(tree);
-      EList<TreeNode> _nodes = tree.getNodes();
-      int _size = _nodes.size();
-      Assert.assertEquals(1, _size);
-      EList<TreeNode> _nodes_1 = tree.getNodes();
-      TreeNode _head = IterableExtensions.<TreeNode>head(_nodes_1);
-      String _name = _head.getName();
-      Assert.assertEquals("parent", _name);
-      EList<TreeNode> _nodes_2 = tree.getNodes();
-      TreeNode _head_1 = IterableExtensions.<TreeNode>head(_nodes_2);
-      EList<TreeNode> _children = _head_1.getChildren();
-      TreeNode _head_2 = IterableExtensions.<TreeNode>head(_children);
-      String _name_1 = _head_2.getName();
-      Assert.assertEquals("child", _name_1);
+      Assert.assertEquals(1, tree.getNodes().size());
+      Assert.assertEquals("parent", IterableExtensions.<TreeNode>head(tree.getNodes()).getName());
+      Assert.assertEquals("child", IterableExtensions.<TreeNode>head(IterableExtensions.<TreeNode>head(tree.getNodes()).getChildren()).getName());
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("parent");
       _builder_1.newLine();

@@ -53,8 +53,7 @@ public class CompletionTest extends AbstractTestLangLanguageServerTest {
       _builder.newLine();
       it.setModel(_builder.toString());
       it.setLine(1);
-      int _length = "type Bar {".length();
-      it.setColumn(_length);
+      it.setColumn("type Bar {".length());
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("Bar (TypeDeclaration) -> Bar [[1, 10] .. [1, 10]]");
       _builder_1.newLine();
@@ -92,8 +91,7 @@ public class CompletionTest extends AbstractTestLangLanguageServerTest {
       _builder.newLine();
       it.setModel(_builder.toString());
       it.setLine(1);
-      int _length = "    Fo".length();
-      it.setColumn(_length);
+      it.setColumn("    Fo".length());
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("Foo (TypeDeclaration) -> Foo [[1, 4] .. [1, 6]]");
       _builder_1.newLine();
@@ -118,8 +116,7 @@ public class CompletionTest extends AbstractTestLangLanguageServerTest {
       _builder.newLine();
       it.setModel(_builder.toString());
       it.setLine(1);
-      int _length = "type Bar {".length();
-      it.setColumn(_length);
+      it.setColumn("type Bar {".length());
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("Boo (TypeDeclaration) -> Boo [[1, 10] .. [1, 10]]");
       _builder_1.newLine();

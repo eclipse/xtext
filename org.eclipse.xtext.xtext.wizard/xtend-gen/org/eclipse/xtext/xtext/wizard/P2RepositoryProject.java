@@ -64,8 +64,7 @@ public class P2RepositoryProject extends ProjectDescriptor {
       final ArrayList<AbstractFile> files = CollectionLiterals.<AbstractFile>newArrayList();
       Iterable<? extends AbstractFile> _files = super.getFiles();
       Iterables.<AbstractFile>addAll(files, _files);
-      CharSequence _categoryXml = this.categoryXml();
-      PlainTextFile _file = this.file(Outlet.ROOT, "category.xml", _categoryXml);
+      PlainTextFile _file = this.file(Outlet.ROOT, "category.xml", this.categoryXml());
       files.add(_file);
       _xblockexpression = files;
     }

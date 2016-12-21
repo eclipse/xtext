@@ -44,9 +44,7 @@ public class SerializableEObjectDescription implements IEObjectDescription, Exte
   protected transient EObject eObjectOrProxy;
   
   public void updateResourceURI(final URI uri) {
-    String _fragment = this.eObjectURI.fragment();
-    URI _appendFragment = uri.appendFragment(_fragment);
-    this.eObjectURI = _appendFragment;
+    this.eObjectURI = uri.appendFragment(this.eObjectURI.fragment());
   }
   
   @Override
@@ -76,14 +74,10 @@ public class SerializableEObjectDescription implements IEObjectDescription, Exte
   
   @Override
   public void readExternal(final ObjectInput in) throws IOException, ClassNotFoundException {
-    URI _readURI = SerializationExtensions.readURI(in);
-    this.eObjectURI = _readURI;
-    EClass _readEcoreElement = SerializationExtensions.<EClass>readEcoreElement(in);
-    this.eClass = _readEcoreElement;
-    QualifiedName _readQualifiedName = SerializationExtensions.readQualifiedName(in);
-    this.qualifiedName = _readQualifiedName;
-    HashMap<String, String> _readCastedObject = SerializationExtensions.<HashMap<String, String>>readCastedObject(in);
-    this.userData = _readCastedObject;
+    this.eObjectURI = SerializationExtensions.readURI(in);
+    this.eClass = SerializationExtensions.<EClass>readEcoreElement(in);
+    this.qualifiedName = SerializationExtensions.readQualifiedName(in);
+    this.userData = SerializationExtensions.<HashMap<String, String>>readCastedObject(in);
   }
   
   @Override

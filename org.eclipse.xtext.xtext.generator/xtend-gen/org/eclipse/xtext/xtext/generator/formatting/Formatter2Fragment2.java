@@ -11,7 +11,6 @@ import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import org.apache.log4j.Logger;
@@ -145,18 +144,11 @@ public class Formatter2Fragment2 extends AbstractStubGeneratingFragment {
       Grammar _grammar = this.getGrammar();
       TypeReference _formatter2Stub = this.getFormatter2Stub(_grammar);
       final XtendFileAccess xtendFile = this.fileAccessFactory.createXtendFile(_formatter2Stub);
-      IXtextGeneratorLanguage _language = this.getLanguage();
-      ResourceSet _resourceSet = _language.getResourceSet();
-      xtendFile.setResourceSet(_resourceSet);
+      xtendFile.setResourceSet(this.getLanguage().getResourceSet());
       final LinkedHashMultimap<EClass, EReference> type2ref = LinkedHashMultimap.<EClass, EReference>create();
-      IXtextGeneratorLanguage _language_1 = this.getLanguage();
-      Grammar _grammar_1 = _language_1.getGrammar();
-      this.getLocallyAssignedContainmentReferences(_grammar_1, type2ref);
+      this.getLocallyAssignedContainmentReferences(this.getLanguage().getGrammar(), type2ref);
       final LinkedHashMultimap<EClass, EReference> inheritedTypes = LinkedHashMultimap.<EClass, EReference>create();
-      IXtextGeneratorLanguage _language_2 = this.getLanguage();
-      Grammar _grammar_2 = _language_2.getGrammar();
-      HashSet<Grammar> _newHashSet = CollectionLiterals.<Grammar>newHashSet();
-      this.getInheritedContainmentReferences(_grammar_2, inheritedTypes, _newHashSet);
+      this.getInheritedContainmentReferences(this.getLanguage().getGrammar(), inheritedTypes, CollectionLiterals.<Grammar>newHashSet());
       final Set<EClass> types = type2ref.keySet();
       StringConcatenationClient _client = new StringConcatenationClient() {
         @Override

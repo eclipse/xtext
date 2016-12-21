@@ -9,7 +9,6 @@ package org.eclipse.xtext.ide.tests.editor.contentassist;
 
 import com.google.inject.Inject;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.ContentAssistContextFactory;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.PartialContentAssistContextFactory;
 import org.eclipse.xtext.ide.tests.editor.contentassist.ContentAssistContextTestHelper;
@@ -139,8 +138,7 @@ public class PartialContentAssistTestLanguageContextFactoryTest {
   
   @Test
   public void testCustomEntryPoint() {
-    ParserRule _propertyRule = this.grammar.getPropertyRule();
-    this._contentAssistContextTestHelper.setEntryPoint(_propertyRule);
+    this._contentAssistContextTestHelper.setEntryPoint(this.grammar.getPropertyRule());
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("int <|>bar");
     _builder.newLine();
@@ -163,8 +161,7 @@ public class PartialContentAssistTestLanguageContextFactoryTest {
   
   @Test
   public void testCustomEntryPointBeginning() {
-    ParserRule _propertyRule = this.grammar.getPropertyRule();
-    this._contentAssistContextTestHelper.setEntryPoint(_propertyRule);
+    this._contentAssistContextTestHelper.setEntryPoint(this.grammar.getPropertyRule());
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<|>int bar");
     _builder.newLine();

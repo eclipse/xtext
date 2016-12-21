@@ -49,23 +49,19 @@ public class AntlrOptions {
   private String keptBitSetName;
   
   public void setFieldsPerClass(final String fieldsPerClass) {
-    int _parseInt = Integer.parseInt(fieldsPerClass);
-    this.fieldsPerClass = _parseInt;
+    this.fieldsPerClass = Integer.parseInt(fieldsPerClass);
   }
   
   public void setMethodsPerClass(final String methodsPerClass) {
-    int _parseInt = Integer.parseInt(methodsPerClass);
-    this.methodsPerClass = _parseInt;
+    this.methodsPerClass = Integer.parseInt(methodsPerClass);
   }
   
   public void setCasesPerSpecialStateSwitch(final String casesPerSpecialStateSwitch) {
-    int _parseInt = Integer.parseInt(casesPerSpecialStateSwitch);
-    this.casesPerSpecialStateSwitch = _parseInt;
+    this.casesPerSpecialStateSwitch = Integer.parseInt(casesPerSpecialStateSwitch);
   }
   
   public void setKAsString(final String k) {
-    int _parseInt = Integer.parseInt(k);
-    this.k = _parseInt;
+    this.k = Integer.parseInt(k);
   }
   
   @Pure

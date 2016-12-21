@@ -42,8 +42,7 @@ public class ExecutorServiceProvider implements Provider<ExecutorService>, IDisp
   public ExecutorService get(final String key) {
     ExecutorService result = this.instanceCache.get(key);
     if ((result == null)) {
-      ExecutorService _createInstance = this.createInstance(key);
-      result = _createInstance;
+      result = this.createInstance(key);
       this.instanceCache.put(key, result);
     }
     return result;

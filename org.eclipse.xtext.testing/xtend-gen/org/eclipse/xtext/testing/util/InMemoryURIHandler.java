@@ -41,8 +41,7 @@ public class InMemoryURIHandler implements URIHandler {
       return new ByteArrayOutputStream() {
         @Override
         public void close() throws IOException {
-          byte[] _byteArray = this.toByteArray();
-          InMemFile.this.contents = _byteArray;
+          InMemFile.this.contents = this.toByteArray();
           InMemFile.this.exists = true;
         }
       };

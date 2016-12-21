@@ -38,11 +38,9 @@ public class ServerLauncher {
   private static boolean IS_DEBUG = false;
   
   public static void main(final String[] args) {
-    final Function1<String, Boolean> _function = (String it) -> {
+    ServerLauncher.IS_DEBUG = IterableExtensions.<String>exists(((Iterable<String>)Conversions.doWrapArray(args)), ((Function1<String, Boolean>) (String it) -> {
       return Boolean.valueOf(Objects.equal(it, "debug"));
-    };
-    boolean _exists = IterableExtensions.<String>exists(((Iterable<String>)Conversions.doWrapArray(args)), _function);
-    ServerLauncher.IS_DEBUG = _exists;
+    }));
     final InputStream stdin = System.in;
     final PrintStream stdout = System.out;
     ServerLauncher.redirectStandardStreams();

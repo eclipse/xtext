@@ -41,8 +41,7 @@ public class GenModelUtil2 {
   }
   
   public static GenClassifier getGenClassifier(final EClassifier cls, final ResourceSet resourceSet) {
-    EPackage _ePackage = cls.getEPackage();
-    final GenPackage genPackage = GenModelUtil2.getGenPackage(_ePackage, resourceSet);
+    final GenPackage genPackage = GenModelUtil2.getGenPackage(cls.getEPackage(), resourceSet);
     EList<GenClassifier> _genClassifiers = genPackage.getGenClassifiers();
     for (final GenClassifier genCls : _genClassifiers) {
       String _name = cls.getName();
@@ -75,8 +74,7 @@ public class GenModelUtil2 {
   }
   
   public static GenFeature getGenFeature(final EStructuralFeature feature, final ResourceSet resourceSet) {
-    EClass _eContainingClass = feature.getEContainingClass();
-    GenClassifier _genClassifier = GenModelUtil2.getGenClassifier(_eContainingClass, resourceSet);
+    GenClassifier _genClassifier = GenModelUtil2.getGenClassifier(feature.getEContainingClass(), resourceSet);
     final GenClass genCls = ((GenClass) _genClassifier);
     EList<GenFeature> _genFeatures = genCls.getGenFeatures();
     for (final GenFeature genFeat : _genFeatures) {
@@ -111,10 +109,7 @@ public class GenModelUtil2 {
     }
     boolean _tripleNotEquals = (_uRI != null);
     if (_tripleNotEquals) {
-      Resource _eResource_1 = pkg.eResource();
-      URI _uRI_1 = _eResource_1.getURI();
-      String _string = _uRI_1.toString();
-      location = _string;
+      location = pkg.eResource().getURI().toString();
     }
     final Resource genModelResource = GenModelUtil2.getGenModelResource(location, nsURI, resourceSet);
     if ((genModelResource != null)) {
@@ -133,8 +128,8 @@ public class GenModelUtil2 {
       _builder.append("No GenPackage for NsURI ");
       _builder.append(nsURI);
       _builder.append(" found in ");
-      URI _uRI_2 = genModelResource.getURI();
-      _builder.append(_uRI_2);
+      URI _uRI_1 = genModelResource.getURI();
+      _builder.append(_uRI_1);
       throw new RuntimeException(_builder.toString());
     }
     StringConcatenation _builder_1 = new StringConcatenation();
@@ -244,8 +239,7 @@ public class GenModelUtil2 {
   }
   
   public static String getFeatureLiteral(final EStructuralFeature feature, final ResourceSet resourceSet) {
-    GenFeature _genFeature = GenModelUtil2.getGenFeature(feature, resourceSet);
-    return GenModelUtil2.getFeatureLiteral(_genFeature, resourceSet);
+    return GenModelUtil2.getFeatureLiteral(GenModelUtil2.getGenFeature(feature, resourceSet), resourceSet);
   }
   
   public static String getFeatureLiteral(final GenFeature genFeature, final ResourceSet resourceSet) {
@@ -272,8 +266,7 @@ public class GenModelUtil2 {
   }
   
   public static String getGetAccessor(final EStructuralFeature feature, final ResourceSet resourceSet) {
-    GenFeature _genFeature = GenModelUtil2.getGenFeature(feature, resourceSet);
-    return GenModelUtil2.getGetAccessor(_genFeature, resourceSet);
+    return GenModelUtil2.getGetAccessor(GenModelUtil2.getGenFeature(feature, resourceSet), resourceSet);
   }
   
   public static String getGetAccessor(final GenFeature genFeature, final ResourceSet resourceSet) {

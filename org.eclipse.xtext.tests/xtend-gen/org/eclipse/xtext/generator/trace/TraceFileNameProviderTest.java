@@ -17,14 +17,12 @@ public class TraceFileNameProviderTest {
   
   @Test
   public void testTraceFileNameOnWindows() {
-    boolean _isTraceFileName = this.nameProvider.isTraceFileName("C:\\workspace\\.Foo.java._trace");
-    Assert.assertTrue(_isTraceFileName);
+    Assert.assertTrue(this.nameProvider.isTraceFileName("C:\\workspace\\.Foo.java._trace"));
   }
   
   @Test
   public void testTraceFileNameOnUnix() {
-    boolean _isTraceFileName = this.nameProvider.isTraceFileName("/workspace/.Foo.java._trace");
-    Assert.assertTrue(_isTraceFileName);
+    Assert.assertTrue(this.nameProvider.isTraceFileName("/workspace/.Foo.java._trace"));
   }
   
   @Test

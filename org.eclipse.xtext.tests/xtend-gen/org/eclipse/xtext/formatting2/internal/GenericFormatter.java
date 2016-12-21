@@ -11,9 +11,7 @@ import java.util.Arrays;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.formatting2.AbstractFormatter2;
-import org.eclipse.xtext.formatting2.FormatterRequest;
 import org.eclipse.xtext.formatting2.IFormattableDocument;
-import org.eclipse.xtext.formatting2.regionaccess.ITextRegionAccess;
 import org.eclipse.xtext.formatting2.regionaccess.ITextRegionExtensions;
 import org.eclipse.xtext.resource.XtextResource;
 
@@ -25,10 +23,7 @@ import org.eclipse.xtext.resource.XtextResource;
 public abstract class GenericFormatter<T extends EObject> extends AbstractFormatter2 {
   @Override
   protected void _format(final EObject obj, final IFormattableDocument document) {
-    FormatterRequest _request = this.getRequest();
-    ITextRegionAccess _textRegionAccess = _request.getTextRegionAccess();
-    ITextRegionExtensions _extensions = _textRegionAccess.getExtensions();
-    this.format(((T) obj), _extensions, document);
+    this.format(((T) obj), this.getRequest().getTextRegionAccess().getExtensions(), document);
   }
   
   protected abstract void format(final T model, final ITextRegionExtensions regionAccess, final IFormattableDocument document);

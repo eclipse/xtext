@@ -10,7 +10,6 @@ package org.eclipse.xtext.xtext;
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterators;
 import java.util.Iterator;
-import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
@@ -80,19 +79,12 @@ public class XtextLinkerTest extends AbstractXtextTests {
     AbstractElement _head_1 = IterableExtensions.<AbstractElement>head(_elements);
     Condition _guardCondition = ((Group) _head_1).getGuardCondition();
     final ParameterReference firstGuard = ((ParameterReference) _guardCondition);
-    EList<Parameter> _parameters = rootRule.getParameters();
-    Parameter _head_2 = IterableExtensions.<Parameter>head(_parameters);
-    Parameter _parameter = firstGuard.getParameter();
-    Assert.assertEquals(_head_2, _parameter);
+    Assert.assertEquals(IterableExtensions.<Parameter>head(rootRule.getParameters()), firstGuard.getParameter());
     EList<AbstractElement> _elements_1 = alternatives.getElements();
     AbstractElement _last = IterableExtensions.<AbstractElement>last(_elements_1);
     Condition _guardCondition_1 = ((Group) _last).getGuardCondition();
     final Negation secondGuard = ((Negation) _guardCondition_1);
-    EList<Parameter> _parameters_1 = rootRule.getParameters();
-    Parameter _head_3 = IterableExtensions.<Parameter>head(_parameters_1);
-    Condition _value = secondGuard.getValue();
-    Parameter _parameter_1 = ((ParameterReference) _value).getParameter();
-    Assert.assertEquals(_head_3, _parameter_1);
+    Assert.assertEquals(IterableExtensions.<Parameter>head(rootRule.getParameters()), ((ParameterReference) secondGuard.getValue()).getParameter());
   }
   
   @Test
@@ -123,15 +115,8 @@ public class XtextLinkerTest extends AbstractXtextTests {
     final RuleCall ruleCall = ((RuleCall) _terminal);
     EList<NamedArgument> _arguments = ruleCall.getArguments();
     final NamedArgument argument = IterableExtensions.<NamedArgument>head(_arguments);
-    EList<Parameter> _parameters = rootRule.getParameters();
-    Parameter _head_1 = IterableExtensions.<Parameter>head(_parameters);
-    Parameter _parameter = argument.getParameter();
-    Assert.assertEquals(_head_1, _parameter);
-    EList<Parameter> _parameters_1 = lastRule.getParameters();
-    Parameter _head_2 = IterableExtensions.<Parameter>head(_parameters_1);
-    Condition _value = argument.getValue();
-    Parameter _parameter_1 = ((ParameterReference) _value).getParameter();
-    Assert.assertEquals(_head_2, _parameter_1);
+    Assert.assertEquals(IterableExtensions.<Parameter>head(rootRule.getParameters()), argument.getParameter());
+    Assert.assertEquals(IterableExtensions.<Parameter>head(lastRule.getParameters()), ((ParameterReference) argument.getValue()).getParameter());
   }
   
   @Test
@@ -162,15 +147,8 @@ public class XtextLinkerTest extends AbstractXtextTests {
     final RuleCall ruleCall = ((RuleCall) _terminal);
     EList<NamedArgument> _arguments = ruleCall.getArguments();
     final NamedArgument argument = IterableExtensions.<NamedArgument>head(_arguments);
-    EList<Parameter> _parameters = rootRule.getParameters();
-    Parameter _head_1 = IterableExtensions.<Parameter>head(_parameters);
-    Parameter _parameter = argument.getParameter();
-    Assert.assertEquals(_head_1, _parameter);
-    EList<Parameter> _parameters_1 = lastRule.getParameters();
-    Parameter _head_2 = IterableExtensions.<Parameter>head(_parameters_1);
-    Condition _value = argument.getValue();
-    Parameter _parameter_1 = ((ParameterReference) _value).getParameter();
-    Assert.assertEquals(_head_2, _parameter_1);
+    Assert.assertEquals(IterableExtensions.<Parameter>head(rootRule.getParameters()), argument.getParameter());
+    Assert.assertEquals(IterableExtensions.<Parameter>head(lastRule.getParameters()), ((ParameterReference) argument.getValue()).getParameter());
   }
   
   @Test
@@ -201,13 +179,8 @@ public class XtextLinkerTest extends AbstractXtextTests {
     final RuleCall ruleCall = ((RuleCall) _terminal);
     EList<NamedArgument> _arguments = ruleCall.getArguments();
     final NamedArgument argument = IterableExtensions.<NamedArgument>head(_arguments);
-    EList<Parameter> _parameters = rootRule.getParameters();
-    Parameter _head_1 = IterableExtensions.<Parameter>head(_parameters);
-    Parameter _parameter = argument.getParameter();
-    Assert.assertEquals(_head_1, _parameter);
-    Condition _value = argument.getValue();
-    boolean _isTrue = ((LiteralCondition) _value).isTrue();
-    Assert.assertFalse(_isTrue);
+    Assert.assertEquals(IterableExtensions.<Parameter>head(rootRule.getParameters()), argument.getParameter());
+    Assert.assertFalse(((LiteralCondition) argument.getValue()).isTrue());
   }
   
   @Test
@@ -254,13 +227,8 @@ public class XtextLinkerTest extends AbstractXtextTests {
     final RuleCall ruleCall = ((RuleCall) _terminal);
     EList<NamedArgument> _arguments = ruleCall.getArguments();
     final NamedArgument argument = IterableExtensions.<NamedArgument>head(_arguments);
-    EList<Parameter> _parameters = rootRule.getParameters();
-    Parameter _head_2 = IterableExtensions.<Parameter>head(_parameters);
-    Parameter _parameter = argument.getParameter();
-    Assert.assertEquals(_head_2, _parameter);
-    Condition _value = argument.getValue();
-    boolean _isTrue = ((LiteralCondition) _value).isTrue();
-    Assert.assertFalse(_isTrue);
+    Assert.assertEquals(IterableExtensions.<Parameter>head(rootRule.getParameters()), argument.getParameter());
+    Assert.assertFalse(((LiteralCondition) argument.getValue()).isTrue());
   }
   
   @Test
@@ -286,35 +254,25 @@ public class XtextLinkerTest extends AbstractXtextTests {
     TreeIterator<EObject> _eAllContents = firstRule.eAllContents();
     Iterator<RuleCall> _filter = Iterators.<RuleCall>filter(_eAllContents, RuleCall.class);
     final RuleCall firstRuleCall = IteratorExtensions.<RuleCall>head(_filter);
-    boolean _isExplicitlyCalled = firstRuleCall.isExplicitlyCalled();
-    Assert.assertTrue(_isExplicitlyCalled);
+    Assert.assertTrue(firstRuleCall.isExplicitlyCalled());
     TreeIterator<EObject> _eAllContents_1 = firstRule.eAllContents();
     Iterator<RuleCall> _filter_1 = Iterators.<RuleCall>filter(_eAllContents_1, RuleCall.class);
     final RuleCall secondRuleCall = IteratorExtensions.<RuleCall>last(_filter_1);
-    boolean _isExplicitlyCalled_1 = secondRuleCall.isExplicitlyCalled();
-    Assert.assertFalse(_isExplicitlyCalled_1);
+    Assert.assertFalse(secondRuleCall.isExplicitlyCalled());
     EList<AbstractRule> _rules_1 = grammar.getRules();
     AbstractRule _get_1 = _rules_1.get(1);
     TreeIterator<EObject> _eAllContents_2 = _get_1.eAllContents();
     Iterator<RuleCall> _filter_2 = Iterators.<RuleCall>filter(_eAllContents_2, RuleCall.class);
     final RuleCall thirdRuleCall = IteratorExtensions.<RuleCall>head(_filter_2);
-    boolean _isExplicitlyCalled_2 = thirdRuleCall.isExplicitlyCalled();
-    Assert.assertTrue(_isExplicitlyCalled_2);
+    Assert.assertTrue(thirdRuleCall.isExplicitlyCalled());
     int _indexOf = grammarAsString.indexOf("_super");
     resource.update(_indexOf, 1, " ");
-    Resource _eResource = firstRuleCall.eResource();
-    Assert.assertEquals(resource, _eResource);
-    Resource _eResource_1 = secondRuleCall.eResource();
-    Assert.assertEquals(resource, _eResource_1);
-    Resource _eResource_2 = thirdRuleCall.eResource();
-    Assert.assertEquals(resource, _eResource_2);
+    Assert.assertEquals(resource, firstRuleCall.eResource());
+    Assert.assertEquals(resource, secondRuleCall.eResource());
+    Assert.assertEquals(resource, thirdRuleCall.eResource());
     resource.getContents();
-    boolean _isExplicitlyCalled_3 = thirdRuleCall.isExplicitlyCalled();
-    Assert.assertFalse(_isExplicitlyCalled_3);
-    EList<AbstractRule> _rules_2 = grammar.getRules();
-    AbstractRule _last = IterableExtensions.<AbstractRule>last(_rules_2);
-    AbstractRule _rule = thirdRuleCall.getRule();
-    Assert.assertEquals(_last, _rule);
+    Assert.assertFalse(thirdRuleCall.isExplicitlyCalled());
+    Assert.assertEquals(IterableExtensions.<AbstractRule>last(grammar.getRules()), thirdRuleCall.getRule());
   }
   
   @Test
@@ -351,38 +309,35 @@ public class XtextLinkerTest extends AbstractXtextTests {
     EList<Grammar> _usedGrammars = grammar.getUsedGrammars();
     Grammar _head = IterableExtensions.<Grammar>head(_usedGrammars);
     final AbstractRule idRule = GrammarUtil.findRuleForName(_head, "ID");
-    List<RuleCall> _containedRuleCalls = GrammarUtil.containedRuleCalls(firstRule);
-    final Function1<RuleCall, Boolean> _function = (RuleCall it) -> {
-      AbstractRule _rule = it.getRule();
-      return Boolean.valueOf(Objects.equal(_rule, idRule));
-    };
-    boolean _forall = IterableExtensions.<RuleCall>forall(_containedRuleCalls, _function);
-    Assert.assertTrue(_forall);
+    Assert.assertTrue(
+      IterableExtensions.<RuleCall>forall(GrammarUtil.containedRuleCalls(firstRule), 
+        ((Function1<RuleCall, Boolean>) (RuleCall it) -> {
+          AbstractRule _rule = it.getRule();
+          return Boolean.valueOf(Objects.equal(_rule, idRule));
+        })));
     EList<AbstractRule> _rules_1 = grammar.getRules();
     Iterable<AbstractRule> _tail = IterableExtensions.<AbstractRule>tail(_rules_1);
     final AbstractRule secondRule = IterableExtensions.<AbstractRule>head(_tail);
     EList<AbstractRule> _rules_2 = grammar.getRules();
     final AbstractRule stringRule = IterableExtensions.<AbstractRule>last(_rules_2);
-    List<RuleCall> _containedRuleCalls_1 = GrammarUtil.containedRuleCalls(secondRule);
-    final Function1<RuleCall, Boolean> _function_1 = (RuleCall it) -> {
-      AbstractRule _rule = it.getRule();
-      return Boolean.valueOf(Objects.equal(_rule, stringRule));
-    };
-    boolean _forall_1 = IterableExtensions.<RuleCall>forall(_containedRuleCalls_1, _function_1);
-    Assert.assertTrue(_forall_1);
+    Assert.assertTrue(
+      IterableExtensions.<RuleCall>forall(GrammarUtil.containedRuleCalls(secondRule), 
+        ((Function1<RuleCall, Boolean>) (RuleCall it) -> {
+          AbstractRule _rule = it.getRule();
+          return Boolean.valueOf(Objects.equal(_rule, stringRule));
+        })));
     EList<AbstractRule> _rules_3 = grammar.getRules();
     Iterable<AbstractRule> _drop = IterableExtensions.<AbstractRule>drop(_rules_3, 2);
     final AbstractRule thirdRule = IterableExtensions.<AbstractRule>head(_drop);
     EList<Grammar> _usedGrammars_1 = grammar.getUsedGrammars();
     Grammar _head_1 = IterableExtensions.<Grammar>head(_usedGrammars_1);
     final AbstractRule inheritedString = GrammarUtil.findRuleForName(_head_1, "STRING");
-    List<RuleCall> _containedRuleCalls_2 = GrammarUtil.containedRuleCalls(thirdRule);
-    final Function1<RuleCall, Boolean> _function_2 = (RuleCall it) -> {
-      AbstractRule _rule = it.getRule();
-      return Boolean.valueOf(Objects.equal(_rule, inheritedString));
-    };
-    boolean _forall_2 = IterableExtensions.<RuleCall>forall(_containedRuleCalls_2, _function_2);
-    Assert.assertTrue(_forall_2);
+    Assert.assertTrue(
+      IterableExtensions.<RuleCall>forall(GrammarUtil.containedRuleCalls(thirdRule), 
+        ((Function1<RuleCall, Boolean>) (RuleCall it) -> {
+          AbstractRule _rule = it.getRule();
+          return Boolean.valueOf(Objects.equal(_rule, inheritedString));
+        })));
   }
   
   @Test
@@ -406,11 +361,7 @@ public class XtextLinkerTest extends AbstractXtextTests {
     final TerminalRule string = ((TerminalRule) _get_1);
     AbstractElement _alternatives = string.getAlternatives();
     final RuleCall callToSuper = ((RuleCall) _alternatives);
-    EList<Grammar> _usedGrammars = grammar.getUsedGrammars();
-    Grammar _head = IterableExtensions.<Grammar>head(_usedGrammars);
-    AbstractRule _findRuleForName = GrammarUtil.findRuleForName(_head, "STRING");
-    AbstractRule _rule = callToSuper.getRule();
-    Assert.assertEquals(_findRuleForName, _rule);
+    Assert.assertEquals(GrammarUtil.findRuleForName(IterableExtensions.<Grammar>head(grammar.getUsedGrammars()), "STRING"), callToSuper.getRule());
   }
   
   @Test
@@ -436,46 +387,37 @@ public class XtextLinkerTest extends AbstractXtextTests {
     final TerminalRule string = ((TerminalRule) _get_1);
     AbstractElement _alternatives = string.getAlternatives();
     final RuleCall callToSuper = ((RuleCall) _alternatives);
-    EList<AbstractRule> _rules_1 = grammar.getRules();
-    AbstractRule _last = IterableExtensions.<AbstractRule>last(_rules_1);
-    AbstractRule _rule = callToSuper.getRule();
-    Assert.assertEquals(_last, _rule);
+    Assert.assertEquals(IterableExtensions.<AbstractRule>last(grammar.getRules()), callToSuper.getRule());
   }
   
   @Test
   public void testGeneratedPackageRemovedProperly() throws Exception {
     final String testGrammar = "grammar foo.Bar generate foo \'bar\'  Model : name=ID;";
-    int _indexOf = testGrammar.indexOf("name");
-    this.checkPackageRemovalAfterGrammarChange(true, testGrammar, _indexOf, 4, "foo");
-    int _indexOf_1 = testGrammar.indexOf("generate foo");
-    int _plus = (_indexOf_1 + 11);
+    this.checkPackageRemovalAfterGrammarChange(true, testGrammar, testGrammar.indexOf("name"), 4, "foo");
+    int _indexOf = testGrammar.indexOf("generate foo");
+    int _plus = (_indexOf + 11);
     this.checkPackageRemovalAfterGrammarChange(true, testGrammar, _plus, 1, "x");
-    int _indexOf_2 = testGrammar.indexOf("foo.Bar");
-    this.checkPackageRemovalAfterGrammarChange(true, testGrammar, _indexOf_2, 1, "x");
+    this.checkPackageRemovalAfterGrammarChange(true, testGrammar, testGrammar.indexOf("foo.Bar"), 1, "x");
   }
   
   @Test
   public void testImportedPackageRemovedProperly() throws Exception {
     final String testGrammar = "grammar foo.Bar import \'classpath:/org/eclipse/xtext/xtext/Foo.ecore\' as foo Model returns foo::Model: name=ID;";
-    int _indexOf = testGrammar.indexOf("name");
-    this.checkPackageRemovalAfterGrammarChange(false, testGrammar, _indexOf, 4, "foo");
-    int _indexOf_1 = testGrammar.indexOf("as foo");
-    int _plus = (_indexOf_1 + 4);
+    this.checkPackageRemovalAfterGrammarChange(false, testGrammar, testGrammar.indexOf("name"), 4, "foo");
+    int _indexOf = testGrammar.indexOf("as foo");
+    int _plus = (_indexOf + 4);
     this.checkPackageRemovalAfterGrammarChange(true, testGrammar, _plus, 1, "x");
-    int _indexOf_2 = testGrammar.indexOf("foo.Bar");
-    this.checkPackageRemovalAfterGrammarChange(true, testGrammar, _indexOf_2, 1, "x");
+    this.checkPackageRemovalAfterGrammarChange(true, testGrammar, testGrammar.indexOf("foo.Bar"), 1, "x");
   }
   
   @Test
   public void testRegisteredPackageNotUnloaded() throws Exception {
     final String testGrammar = "grammar foo.Bar import \'http://www.eclipse.org/emf/2002/Ecore\' EClass: \'foo\';";
-    int _indexOf = testGrammar.indexOf("\'foo\'");
-    this.checkRegisteredPackageNotUnloadedAfterGrammarChange(testGrammar, _indexOf, 4, "foo");
-    int _indexOf_1 = testGrammar.indexOf("import ");
-    int _plus = (_indexOf_1 + 11);
+    this.checkRegisteredPackageNotUnloadedAfterGrammarChange(testGrammar, testGrammar.indexOf("\'foo\'"), 4, "foo");
+    int _indexOf = testGrammar.indexOf("import ");
+    int _plus = (_indexOf + 11);
     this.checkRegisteredPackageNotUnloadedAfterGrammarChange(testGrammar, _plus, 1, "x");
-    int _indexOf_2 = testGrammar.indexOf("foo.Bar");
-    this.checkRegisteredPackageNotUnloadedAfterGrammarChange(testGrammar, _indexOf_2, 1, "x");
+    this.checkRegisteredPackageNotUnloadedAfterGrammarChange(testGrammar, testGrammar.indexOf("foo.Bar"), 1, "x");
   }
   
   private void checkPackageRemovalAfterGrammarChange(final boolean isRemoved, final String originalGrammar, final int offset, final int length, final String replacement) throws Exception {
@@ -486,33 +428,19 @@ public class XtextLinkerTest extends AbstractXtextTests {
     EList<AbstractMetamodelDeclaration> _metamodelDeclarations = grammar.getMetamodelDeclarations();
     AbstractMetamodelDeclaration generatedMetamodel = _metamodelDeclarations.get(0);
     EPackage ePackage = generatedMetamodel.getEPackage();
-    Resource _eResource = ePackage.eResource();
-    ResourceSet _resourceSet = _eResource.getResourceSet();
-    ResourceSet _resourceSet_1 = resource.getResourceSet();
-    Assert.assertEquals(_resourceSet, _resourceSet_1);
+    Assert.assertEquals(ePackage.eResource().getResourceSet(), resource.getResourceSet());
     resource.update(offset, length, replacement);
     if (isRemoved) {
-      Resource _eResource_1 = ePackage.eResource();
-      ResourceSet _resourceSet_2 = _eResource_1.getResourceSet();
-      Assert.assertNull(_resourceSet_2);
+      Assert.assertNull(ePackage.eResource().getResourceSet());
     } else {
-      Resource _eResource_2 = ePackage.eResource();
-      ResourceSet _resourceSet_3 = _eResource_2.getResourceSet();
-      ResourceSet _resourceSet_4 = resource.getResourceSet();
-      Assert.assertEquals(_resourceSet_3, _resourceSet_4);
+      Assert.assertEquals(ePackage.eResource().getResourceSet(), resource.getResourceSet());
     }
     EList<EObject> _contents_1 = resource.getContents();
     EObject _get_1 = _contents_1.get(0);
     grammar = ((Grammar) _get_1);
-    EList<AbstractMetamodelDeclaration> _metamodelDeclarations_1 = grammar.getMetamodelDeclarations();
-    AbstractMetamodelDeclaration _get_2 = _metamodelDeclarations_1.get(0);
-    generatedMetamodel = _get_2;
-    EPackage _ePackage = generatedMetamodel.getEPackage();
-    ePackage = _ePackage;
-    ResourceSet _resourceSet_5 = resource.getResourceSet();
-    Resource _eResource_3 = ePackage.eResource();
-    ResourceSet _resourceSet_6 = _eResource_3.getResourceSet();
-    Assert.assertEquals(_resourceSet_5, _resourceSet_6);
+    generatedMetamodel = grammar.getMetamodelDeclarations().get(0);
+    ePackage = generatedMetamodel.getEPackage();
+    Assert.assertEquals(resource.getResourceSet(), ePackage.eResource().getResourceSet());
   }
   
   private void checkRegisteredPackageNotUnloadedAfterGrammarChange(final String originalGrammar, final int offset, final int length, final String replacement) throws Exception {
@@ -523,10 +451,8 @@ public class XtextLinkerTest extends AbstractXtextTests {
     EList<AbstractMetamodelDeclaration> _metamodelDeclarations = grammar.getMetamodelDeclarations();
     final AbstractMetamodelDeclaration generatedMetamodel = _metamodelDeclarations.get(0);
     final EPackage ePackage = generatedMetamodel.getEPackage();
-    URI _eProxyURI = ((InternalEObject) ePackage).eProxyURI();
-    Assert.assertNull(_eProxyURI);
+    Assert.assertNull(((InternalEObject) ePackage).eProxyURI());
     resource.update(offset, length, replacement);
-    URI _eProxyURI_1 = ((InternalEObject) ePackage).eProxyURI();
-    Assert.assertNull(_eProxyURI_1);
+    Assert.assertNull(((InternalEObject) ePackage).eProxyURI());
   }
 }

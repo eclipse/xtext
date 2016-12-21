@@ -82,8 +82,7 @@ public class CodeConfig implements IGuiceAwareGeneratorComponent {
   @Override
   public void initialize(final Injector injector) {
     injector.injectMembers(this);
-    XtextVersion _current = XtextVersion.getCurrent();
-    this.xtextVersion = _current;
+    this.xtextVersion = XtextVersion.getCurrent();
     if ((this.lineDelimiter == null)) {
       this.lineDelimiter = "\n";
     }
@@ -94,38 +93,32 @@ public class CodeConfig implements IGuiceAwareGeneratorComponent {
         final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
         Date _date = new Date();
         final String time = dateFormat.format(_date);
-        String _replace = fileHeader.replace(CodeConfig.FILE_HEADER_VAR_TIME, time);
-        fileHeader = _replace;
+        fileHeader = fileHeader.replace(CodeConfig.FILE_HEADER_VAR_TIME, time);
       }
       boolean _contains_1 = fileHeader.contains(CodeConfig.FILE_HEADER_VAR_DATE);
       if (_contains_1) {
         final SimpleDateFormat dateFormat_1 = new SimpleDateFormat("MMM d, yyyy");
         Date _date_1 = new Date();
         final String date = dateFormat_1.format(_date_1);
-        String _replace_1 = fileHeader.replace(CodeConfig.FILE_HEADER_VAR_DATE, date);
-        fileHeader = _replace_1;
+        fileHeader = fileHeader.replace(CodeConfig.FILE_HEADER_VAR_DATE, date);
       }
       boolean _contains_2 = fileHeader.contains(CodeConfig.FILE_HEADER_VAR_YEAR);
       if (_contains_2) {
         final SimpleDateFormat dateFormat_2 = new SimpleDateFormat("yyyy");
         Date _date_2 = new Date();
         final String year = dateFormat_2.format(_date_2);
-        String _replace_2 = fileHeader.replace(CodeConfig.FILE_HEADER_VAR_YEAR, year);
-        fileHeader = _replace_2;
+        fileHeader = fileHeader.replace(CodeConfig.FILE_HEADER_VAR_YEAR, year);
       }
       boolean _contains_3 = fileHeader.contains(CodeConfig.FILE_HEADER_VAR_USER);
       if (_contains_3) {
         final String user = System.getProperty("user.name");
         if ((user != null)) {
-          String _replace_3 = fileHeader.replace(CodeConfig.FILE_HEADER_VAR_USER, user);
-          fileHeader = _replace_3;
+          fileHeader = fileHeader.replace(CodeConfig.FILE_HEADER_VAR_USER, user);
         }
       }
       boolean _contains_4 = fileHeader.contains(CodeConfig.FILE_HEADER_VAR_VERSION);
       if (_contains_4) {
-        String _string = this.xtextVersion.toString();
-        String _replace_4 = fileHeader.replace(CodeConfig.FILE_HEADER_VAR_VERSION, _string);
-        fileHeader = _replace_4;
+        fileHeader = fileHeader.replace(CodeConfig.FILE_HEADER_VAR_VERSION, this.xtextVersion.toString());
       }
     }
     this.fileHeader = fileHeader;

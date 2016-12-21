@@ -33,8 +33,7 @@ public class ReducedXtextResourceValidatorTest extends AbstractXtextTests {
     super.setUp();
     XtextStandaloneSetup _xtextStandaloneSetup = new XtextStandaloneSetup();
     this.with(_xtextStandaloneSetup);
-    ReducedXtextResourceValidator _get = this.<ReducedXtextResourceValidator>get(ReducedXtextResourceValidator.class);
-    this.resourceValidator = _get;
+    this.resourceValidator = this.<ReducedXtextResourceValidator>get(ReducedXtextResourceValidator.class);
   }
   
   private ReducedXtextResourceValidator resourceValidator;
@@ -51,9 +50,7 @@ public class ReducedXtextResourceValidatorTest extends AbstractXtextTests {
     final String grammarAsString = _builder.toString();
     XtextResource _erroneousResource = this.getErroneousResource(grammarAsString);
     final List<Issue> issues = this.resourceValidator.validate(_erroneousResource, CheckMode.NORMAL_AND_FAST, CancelIndicator.NullImpl);
-    String _string = issues.toString();
-    int _size = issues.size();
-    Assert.assertEquals(_string, 0, _size);
+    Assert.assertEquals(issues.toString(), 0, issues.size());
   }
   
   @Test
@@ -68,14 +65,8 @@ public class ReducedXtextResourceValidatorTest extends AbstractXtextTests {
     final String grammarAsString = _builder.toString();
     XtextResource _erroneousResource = this.getErroneousResource(grammarAsString);
     final List<Issue> issues = this.resourceValidator.validate(_erroneousResource, CheckMode.NORMAL_AND_FAST, CancelIndicator.NullImpl);
-    String _string = issues.toString();
-    int _size = issues.size();
-    Assert.assertEquals(_string, 1, _size);
-    String _string_1 = issues.toString();
-    Issue _head = IterableExtensions.<Issue>head(issues);
-    String _message = _head.getMessage();
-    boolean _contains = _message.contains("extraneous input \';\'");
-    Assert.assertTrue(_string_1, _contains);
+    Assert.assertEquals(issues.toString(), 1, issues.size());
+    Assert.assertTrue(issues.toString(), IterableExtensions.<Issue>head(issues).getMessage().contains("extraneous input \';\'"));
   }
   
   @Test
@@ -90,14 +81,8 @@ public class ReducedXtextResourceValidatorTest extends AbstractXtextTests {
     final String grammarAsString = _builder.toString();
     XtextResource _erroneousResource = this.getErroneousResource(grammarAsString);
     final List<Issue> issues = this.resourceValidator.validate(_erroneousResource, CheckMode.NORMAL_AND_FAST, CancelIndicator.NullImpl);
-    String _string = issues.toString();
-    int _size = issues.size();
-    Assert.assertEquals(_string, 1, _size);
-    String _string_1 = issues.toString();
-    Issue _head = IterableExtensions.<Issue>head(issues);
-    String _message = _head.getMessage();
-    boolean _contains = _message.contains("IDS");
-    Assert.assertTrue(_string_1, _contains);
+    Assert.assertEquals(issues.toString(), 1, issues.size());
+    Assert.assertTrue(issues.toString(), IterableExtensions.<Issue>head(issues).getMessage().contains("IDS"));
   }
   
   @Test
@@ -112,14 +97,8 @@ public class ReducedXtextResourceValidatorTest extends AbstractXtextTests {
     final String grammarAsString = _builder.toString();
     XtextResource _erroneousResource = this.getErroneousResource(grammarAsString);
     final List<Issue> issues = this.resourceValidator.validate(_erroneousResource, CheckMode.NORMAL_AND_FAST, CancelIndicator.NullImpl);
-    String _string = issues.toString();
-    int _size = issues.size();
-    Assert.assertEquals(_string, 1, _size);
-    String _string_1 = issues.toString();
-    Issue _head = IterableExtensions.<Issue>head(issues);
-    String _message = _head.getMessage();
-    boolean _contains = _message.contains("Trminals");
-    Assert.assertTrue(_string_1, _contains);
+    Assert.assertEquals(issues.toString(), 1, issues.size());
+    Assert.assertTrue(issues.toString(), IterableExtensions.<Issue>head(issues).getMessage().contains("Trminals"));
   }
   
   public XtextResource getErroneousResource(final CharSequence seq) {

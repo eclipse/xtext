@@ -34,8 +34,7 @@ public class IdeContentProposalCreator {
    * Returns an entry with the given proposal and the prefix from the context, or null if the proposal is not valid.
    */
   public ContentAssistEntry createProposal(final String proposal, final ContentAssistContext context) {
-    String _prefix = context.getPrefix();
-    return this.createProposal(proposal, _prefix, context, ContentAssistEntry.KIND_UNKNOWN, null);
+    return this.createProposal(proposal, context.getPrefix(), context, ContentAssistEntry.KIND_UNKNOWN, null);
   }
   
   /**
@@ -43,8 +42,7 @@ public class IdeContentProposalCreator {
    * If it is valid, the initializer function is applied to it.
    */
   public ContentAssistEntry createProposal(final String proposal, final ContentAssistContext context, final Procedure1<? super ContentAssistEntry> init) {
-    String _prefix = context.getPrefix();
-    return this.createProposal(proposal, _prefix, context, ContentAssistEntry.KIND_UNKNOWN, init);
+    return this.createProposal(proposal, context.getPrefix(), context, ContentAssistEntry.KIND_UNKNOWN, init);
   }
   
   /**
@@ -52,8 +50,7 @@ public class IdeContentProposalCreator {
    * If it is valid, the initializer function is applied to it.
    */
   public ContentAssistEntry createProposal(final String proposal, final ContentAssistContext context, final String kind, final Procedure1<? super ContentAssistEntry> init) {
-    String _prefix = context.getPrefix();
-    return this.createProposal(proposal, _prefix, context, kind, init);
+    return this.createProposal(proposal, context.getPrefix(), context, kind, init);
   }
   
   /**

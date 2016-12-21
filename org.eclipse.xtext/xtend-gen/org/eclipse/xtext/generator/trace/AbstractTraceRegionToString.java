@@ -304,19 +304,17 @@ public abstract class AbstractTraceRegionToString {
     }
     List<AbstractTraceRegion> _nestedRegions = reg.getNestedRegions();
     for (final AbstractTraceRegion child : _nestedRegions) {
-      int _collect = this.collect(child, i, lFile, rFiles, childResult);
-      i = _collect;
+      i = this.collect(child, i, lFile, rFiles, childResult);
     }
     return i;
   }
   
   protected String render(final AbstractTraceRegionToString.Insert it, final int width) {
-    String _string = Integer.toString(it.region.id, this.radix);
-    final String first = Strings.padStart(_string, width, '0');
+    final String first = Strings.padStart(Integer.toString(it.region.id, this.radix), width, '0');
     String _xifexpression = null;
     if (((it.location != null) && (it.location.id >= 0))) {
-      String _string_1 = Integer.toString(it.location.id, this.radix);
-      _xifexpression = ((first + "_") + _string_1);
+      String _string = Integer.toString(it.location.id, this.radix);
+      _xifexpression = ((first + "_") + _string);
     } else {
       _xifexpression = first;
     }
@@ -470,8 +468,7 @@ public abstract class AbstractTraceRegionToString {
   }
   
   protected <T extends Object> Set<T> collect(final T start, final Function1<? super T, ? extends Iterable<T>> reachable) {
-    LinkedHashSet<T> _newLinkedHashSet = CollectionLiterals.<T>newLinkedHashSet();
-    return this.<LinkedHashSet<T>, T>collect(start, reachable, _newLinkedHashSet);
+    return this.<LinkedHashSet<T>, T>collect(start, reachable, CollectionLiterals.<T>newLinkedHashSet());
   }
   
   protected <R extends Collection<? super T>, T extends Object> R collect(final T start, final Function1<? super T, ? extends Iterable<T>> reachable, final R collector) {
@@ -550,8 +547,7 @@ public abstract class AbstractTraceRegionToString {
       for (final AbstractTraceRegionToString.RegionHandle child : region.children) {
         this.render(child, idW, offsetW, lengthW, (indent + 2), result);
       }
-      int _length = loc.length();
-      String _repeat = Strings.repeat(" ", _length);
+      String _repeat = Strings.repeat(" ", loc.length());
       String _plus = ((id + ": ") + _repeat);
       String _plus_1 = (_plus + "}");
       result.add(_plus_1);

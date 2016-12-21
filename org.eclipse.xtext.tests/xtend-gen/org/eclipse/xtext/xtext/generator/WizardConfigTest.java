@@ -27,9 +27,7 @@ public class WizardConfigTest {
   
   @Before
   public void createInjector() {
-    DefaultGeneratorModule _defaultGeneratorModule = new DefaultGeneratorModule();
-    Injector _createInjector = Guice.createInjector(_defaultGeneratorModule);
-    this.injector = _createInjector;
+    this.injector = Guice.createInjector(new DefaultGeneratorModule());
   }
   
   @Test

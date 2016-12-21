@@ -35,8 +35,7 @@ public class ReferenceTest extends AbstractTestLangLanguageServerTest {
       _builder.append("}");
       _builder.newLine();
       it.setModel(_builder.toString());
-      int _length = "type F".length();
-      it.setColumn(_length);
+      it.setColumn("type F".length());
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("MyModel.testlang [[2, 1] .. [2, 4]]");
       _builder_1.newLine();
@@ -59,8 +58,7 @@ public class ReferenceTest extends AbstractTestLangLanguageServerTest {
       _builder.append("}");
       _builder.newLine();
       it.setModel(_builder.toString());
-      int _length = "type F".length();
-      it.setColumn(_length);
+      it.setColumn("type F".length());
       it.setIncludeDeclaration(true);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("MyModel.testlang [[0, 5] .. [0, 8]]");

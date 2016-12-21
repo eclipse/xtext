@@ -242,9 +242,7 @@ public class XtextGrammarSerializationTest extends AbstractXtextTests {
   
   private void doTestSerialization(final String model, final String expectedModel) throws Exception {
     final XtextResource resource = this.getResourceFromString(model);
-    EList<Resource.Diagnostic> _errors = resource.getErrors();
-    boolean _isEmpty = _errors.isEmpty();
-    Assert.assertTrue(_isEmpty);
+    Assert.assertTrue(resource.getErrors().isEmpty());
     IParseResult _parseResult = resource.getParseResult();
     EObject _rootASTElement = _parseResult.getRootASTElement();
     final Grammar g = ((Grammar) _rootASTElement);
@@ -256,8 +254,7 @@ public class XtextGrammarSerializationTest extends AbstractXtextTests {
     Map<Object, Object> _optionsMap = _options.toOptionsMap();
     resource.save(outputStream, _optionsMap);
     final String serializedModel = outputStream.toString();
-    String _platform = LineDelimiters.toPlatform(expectedModel);
-    Assert.assertEquals(_platform, serializedModel);
+    Assert.assertEquals(LineDelimiters.toPlatform(expectedModel), serializedModel);
   }
   
   @Test

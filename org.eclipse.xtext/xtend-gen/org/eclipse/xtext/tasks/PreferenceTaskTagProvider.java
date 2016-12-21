@@ -59,16 +59,15 @@ public class PreferenceTaskTagProvider implements ITaskTagProvider {
     for (final Integer i : _doubleDotLessThan) {
       TaskTag _taskTag = new TaskTag();
       final Procedure1<TaskTag> _function = (TaskTag it) -> {
-        String _get = tags.get((i).intValue());
-        it.setName(_get);
+        it.setName(tags.get((i).intValue()));
         Priority _xifexpression = null;
         int _size_1 = prios.size();
         boolean _greaterEqualsThan = (_size_1 >= (i).intValue());
         if (_greaterEqualsThan) {
           Priority _xtrycatchfinallyexpression = null;
           try {
-            String _get_1 = prios.get((i).intValue());
-            _xtrycatchfinallyexpression = Priority.valueOf(_get_1);
+            String _get = prios.get((i).intValue());
+            _xtrycatchfinallyexpression = Priority.valueOf(_get);
           } catch (final Throwable _t) {
             if (_t instanceof IllegalArgumentException) {
               final IllegalArgumentException e = (IllegalArgumentException)_t;
@@ -118,9 +117,7 @@ public class PreferenceTaskTagProvider implements ITaskTagProvider {
       final String priorities = prefs.getPreference(PreferenceTaskTagProvider.PRIORITIES_KEY);
       TaskTags _taskTags = new TaskTags();
       final Procedure1<TaskTags> _function = (TaskTags it) -> {
-        String _preference = prefs.getPreference(PreferenceTaskTagProvider.CASE_SENSITIVE_KEY);
-        Boolean _valueOf = Boolean.valueOf(_preference);
-        it.setCaseSensitive((_valueOf).booleanValue());
+        it.setCaseSensitive((Boolean.valueOf(prefs.getPreference(PreferenceTaskTagProvider.CASE_SENSITIVE_KEY))).booleanValue());
         List<TaskTag> _taskTags_1 = it.getTaskTags();
         List<TaskTag> _parseTags = PreferenceTaskTagProvider.parseTags(names, priorities);
         Iterables.<TaskTag>addAll(_taskTags_1, _parseTags);

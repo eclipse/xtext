@@ -46,8 +46,7 @@ public class SignatureHelpTest extends AbstractTestLangLanguageServerTest {
     _builder.append("foo()");
     final String testMe = _builder.toString();
     final Procedure1<SignatureHelpConfiguration> _function = (SignatureHelpConfiguration it) -> {
-      String _model = this.getModel(testMe);
-      it.setModel(_model);
+      it.setModel(this.getModel(testMe));
       it.setLine(SignatureHelpTest.LINE_NUMBER);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("foo(");
@@ -64,8 +63,7 @@ public class SignatureHelpTest extends AbstractTestLangLanguageServerTest {
     _builder.append("foo(1)");
     final String testMe = _builder.toString();
     final Procedure1<SignatureHelpConfiguration> _function = (SignatureHelpConfiguration it) -> {
-      String _model = this.getModel(testMe);
-      it.setModel(_model);
+      it.setModel(this.getModel(testMe));
       it.setLine(SignatureHelpTest.LINE_NUMBER);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("foo(1");
@@ -82,8 +80,7 @@ public class SignatureHelpTest extends AbstractTestLangLanguageServerTest {
     _builder.append("foo(1, 2)");
     final String testMe = _builder.toString();
     final Procedure1<SignatureHelpConfiguration> _function = (SignatureHelpConfiguration it) -> {
-      String _model = this.getModel(testMe);
-      it.setModel(_model);
+      it.setModel(this.getModel(testMe));
       it.setLine(SignatureHelpTest.LINE_NUMBER);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("foo(1, 2");
@@ -100,8 +97,7 @@ public class SignatureHelpTest extends AbstractTestLangLanguageServerTest {
     _builder.append("foo(1, 2, 3)");
     final String testMe = _builder.toString();
     final Procedure1<SignatureHelpConfiguration> _function = (SignatureHelpConfiguration it) -> {
-      String _model = this.getModel(testMe);
-      it.setModel(_model);
+      it.setModel(this.getModel(testMe));
       it.setLine(SignatureHelpTest.LINE_NUMBER);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("foo(1, 2, 3");
@@ -118,8 +114,7 @@ public class SignatureHelpTest extends AbstractTestLangLanguageServerTest {
     _builder.append("foo(     1)");
     final String testMe = _builder.toString();
     final Procedure1<SignatureHelpConfiguration> _function = (SignatureHelpConfiguration it) -> {
-      String _model = this.getModel(testMe);
-      it.setModel(_model);
+      it.setModel(this.getModel(testMe));
       it.setLine(SignatureHelpTest.LINE_NUMBER);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("foo(     1");
@@ -136,8 +131,7 @@ public class SignatureHelpTest extends AbstractTestLangLanguageServerTest {
     _builder.append("foo(1    )");
     final String testMe = _builder.toString();
     final Procedure1<SignatureHelpConfiguration> _function = (SignatureHelpConfiguration it) -> {
-      String _model = this.getModel(testMe);
-      it.setModel(_model);
+      it.setModel(this.getModel(testMe));
       it.setLine(SignatureHelpTest.LINE_NUMBER);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("foo(1    ");
@@ -154,8 +148,7 @@ public class SignatureHelpTest extends AbstractTestLangLanguageServerTest {
     _builder.append("foo(    1, 2)");
     final String testMe = _builder.toString();
     final Procedure1<SignatureHelpConfiguration> _function = (SignatureHelpConfiguration it) -> {
-      String _model = this.getModel(testMe);
-      it.setModel(_model);
+      it.setModel(this.getModel(testMe));
       it.setLine(SignatureHelpTest.LINE_NUMBER);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("foo(    1");
@@ -172,8 +165,7 @@ public class SignatureHelpTest extends AbstractTestLangLanguageServerTest {
     _builder.append("foo(    1   , 2)");
     final String testMe = _builder.toString();
     final Procedure1<SignatureHelpConfiguration> _function = (SignatureHelpConfiguration it) -> {
-      String _model = this.getModel(testMe);
-      it.setModel(_model);
+      it.setModel(this.getModel(testMe));
       it.setLine(SignatureHelpTest.LINE_NUMBER);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("foo(    1   ");
@@ -190,8 +182,7 @@ public class SignatureHelpTest extends AbstractTestLangLanguageServerTest {
     _builder.append("foo(    1   , 2)");
     final String testMe = _builder.toString();
     final Procedure1<SignatureHelpConfiguration> _function = (SignatureHelpConfiguration it) -> {
-      String _model = this.getModel(testMe);
-      it.setModel(_model);
+      it.setModel(this.getModel(testMe));
       it.setLine(SignatureHelpTest.LINE_NUMBER);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("foo(    1   ,");
@@ -208,8 +199,7 @@ public class SignatureHelpTest extends AbstractTestLangLanguageServerTest {
     _builder.append("foo(1, 2, 3)");
     final String testMe = _builder.toString();
     final Procedure1<SignatureHelpConfiguration> _function = (SignatureHelpConfiguration it) -> {
-      String _model = this.getModel(testMe);
-      it.setModel(_model);
+      it.setModel(this.getModel(testMe));
       it.setLine(SignatureHelpTest.LINE_NUMBER);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("foo(1, 2,");
@@ -226,8 +216,7 @@ public class SignatureHelpTest extends AbstractTestLangLanguageServerTest {
     _builder.append("foo(1, 2,)");
     final String testMe = _builder.toString();
     final Procedure1<SignatureHelpConfiguration> _function = (SignatureHelpConfiguration it) -> {
-      String _model = this.getModel(testMe);
-      it.setModel(_model);
+      it.setModel(this.getModel(testMe));
       it.setLine(SignatureHelpTest.LINE_NUMBER);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("foo(1, 2,");
@@ -244,8 +233,7 @@ public class SignatureHelpTest extends AbstractTestLangLanguageServerTest {
     _builder.append("foo(1, /*,*/ 2,)");
     final String testMe = _builder.toString();
     final Procedure1<SignatureHelpConfiguration> _function = (SignatureHelpConfiguration it) -> {
-      String _model = this.getModel(testMe);
-      it.setModel(_model);
+      it.setModel(this.getModel(testMe));
       it.setLine(SignatureHelpTest.LINE_NUMBER);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("foo(1, /*,*/ 2,");
@@ -262,8 +250,7 @@ public class SignatureHelpTest extends AbstractTestLangLanguageServerTest {
     _builder.append("foo(1, 2)");
     final String testMe = _builder.toString();
     final Procedure1<SignatureHelpConfiguration> _function = (SignatureHelpConfiguration it) -> {
-      String _model = this.getModel(testMe);
-      it.setModel(_model);
+      it.setModel(this.getModel(testMe));
       it.setLine(SignatureHelpTest.LINE_NUMBER);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("foo");
@@ -280,8 +267,7 @@ public class SignatureHelpTest extends AbstractTestLangLanguageServerTest {
     _builder.append("foo(1, 2)");
     final String testMe = _builder.toString();
     final Procedure1<SignatureHelpConfiguration> _function = (SignatureHelpConfiguration it) -> {
-      String _model = this.getModel(testMe);
-      it.setModel(_model);
+      it.setModel(this.getModel(testMe));
       it.setLine(SignatureHelpTest.LINE_NUMBER);
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("foo(1, 2)");
