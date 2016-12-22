@@ -126,16 +126,9 @@ public class JavaSourceLanguageTest {
     final Function1<Resource, Boolean> _function = (Resource it) -> {
       URI _uRI = it.getURI();
       String _string = _uRI.toString();
-      return Boolean.valueOf(_string.endsWith("MySuperClass.java"));
-    };
-    final Resource superResource = IterableExtensions.<Resource>findFirst(_resources, _function);
-    EList<Resource> _resources_1 = rs.getResources();
-    final Function1<Resource, Boolean> _function_1 = (Resource it) -> {
-      URI _uRI = it.getURI();
-      String _string = _uRI.toString();
       return Boolean.valueOf(_string.endsWith("MySubClass.java"));
     };
-    final Resource resource = IterableExtensions.<Resource>findFirst(_resources_1, _function_1);
+    final Resource resource = IterableExtensions.<Resource>findFirst(_resources, _function);
     EList<EObject> _contents = resource.getContents();
     EObject _head = IterableExtensions.<EObject>head(_contents);
     final JvmGenericType clazz = ((JvmGenericType) _head);

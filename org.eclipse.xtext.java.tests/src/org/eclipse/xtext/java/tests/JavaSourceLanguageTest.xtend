@@ -53,7 +53,6 @@ class JavaSourceLanguageTest {
                 public java.util.List<? extends String> getThem();
             }
         ''')
-        val superResource = rs.resources.findFirst[URI.toString.endsWith('MySuperClass.java')]
         val resource = rs.resources.findFirst[URI.toString.endsWith('MySubClass.java')]
         val clazz = resource.contents.head as JvmGenericType
         val referenced = clazz.declaredOperations.head.returnType
