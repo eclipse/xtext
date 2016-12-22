@@ -1,8 +1,7 @@
 node {
 	try {
 		properties([
-			[$class: 'BuildDiscarderProperty', strategy: [$class: 'LogRotator', numToKeepStr: '15']],
-			pipelineTriggers([$class: 'SCMTrigger', scmpoll_spec: 'H 2 * * *'])
+			[$class: 'BuildDiscarderProperty', strategy: [$class: 'LogRotator', numToKeepStr: '15']]
 		])
 		
 		stage 'Checkout'
