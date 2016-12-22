@@ -69,6 +69,7 @@ import com.ibm.icu.text.MessageFormat;
  * @author Michael Clay
  * @author Heiko Behrens
  * @author Sebastian Zarnekow - Resetting unchanged flag on undo / redo, support for IURIEditorInput
+ * @author Karsten Thoms - Bug#449340
  * @since 2.4
  */
 public class XtextDocumentProvider extends FileDocumentProvider {
@@ -171,32 +172,30 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 	protected boolean setDocumentContent(IDocument document, IEditorInput editorInput, String encoding)
 			throws CoreException {
 		boolean result;
-		if (isWorkspaceExternalEditorInput(editorInput)) {
-			java.net.URI uri= ((IURIEditorInput) editorInput).getURI();
-			try {
-				InputStream contentStream = null;
-				try {
-					contentStream = uri.toURL().openStream();
+		try {
+			if (isWorkspaceExternalEditorInput(editorInput)) {
+				java.net.URI uri= ((IURIEditorInput) editorInput).getURI();
+				try (InputStream contentStream = uri.toURL().openStream()) {
 					setDocumentContent(document, contentStream, encoding);
-				} finally {
-					try {
-						if (contentStream != null)
-							contentStream.close();
-					} catch (IOException e1) {
-					}
+					result = true;
 				}
-			} catch (IOException ex) {
-				String message= (ex.getMessage() != null ? ex.getMessage() : ""); //$NON-NLS-1$
-				IStatus s= new Status(IStatus.ERROR, PlatformUI.PLUGIN_ID, IStatus.OK, message, ex);
-				throw new CoreException(s);
-			} 
-			result = true;
-		} else {
-			result = super.setDocumentContent(document, editorInput, encoding);
+			} else {
+				result = super.setDocumentContent(document, editorInput, encoding);
+			}
+			if (result) 
+				setDocumentResource((XtextDocument) document, editorInput, encoding);
+			return result;
+		} catch (IOException ex) {
+			String message= (ex.getMessage() != null ? ex.getMessage() : ""); //$NON-NLS-1$
+			IStatus s= new Status(IStatus.ERROR, PlatformUI.PLUGIN_ID, IStatus.OK, message, ex);
+			throw new CoreException(s);
+		} catch (CoreException ex) {
+			if (ex.getStatus().getCode()==IResourceStatus.RESOURCE_NOT_FOUND) {
+				return false;
+			} else {
+				throw ex;
+			}
 		}
-		if (result) 
-			setDocumentResource((XtextDocument) document, editorInput, encoding);
-		return result;
 	}
 
 	/**
