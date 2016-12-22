@@ -24,6 +24,8 @@ import org.junit.Test;
 
 @SuppressWarnings("all")
 public class XtendCompilerTest extends AbstractXtendCompilerTest {
+  private static String RS = "\'\'\'";
+  
   @Inject
   protected IFilePostProcessor postProcessor;
   
@@ -9361,10 +9363,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder.append("_builder.append(\"SomeString\");");
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("String _string = _builder.toString();");
-    _builder.newLine();
-    _builder.append("    ");
-    _builder.append("return _string;");
+    _builder.append("return _builder.toString();");
     _builder.newLine();
     _builder.append("  ");
     _builder.append("}");
@@ -9504,6 +9503,141 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder.newLine();
     this.assertCompilesTo(
       "class Foo { def test(){ System::out.println(println(\'\'\'SomeString\'\'\')) } }", _builder);
+  }
+  
+  @Test
+  public void testRichStringMemberFeatureCall_01() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void bar () {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("x = ");
+    _builder.append(XtendCompilerTest.RS, "\t\t");
+    _builder.append("Hello World");
+    _builder.append(XtendCompilerTest.RS, "\t\t");
+    _builder.append(".toString");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void setX (String s) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import org.eclipse.xtend2.lib.StringConcatenation;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public void bar() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("StringConcatenation _builder = new StringConcatenation();");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("_builder.append(\"Hello World\");");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("this.setX(_builder.toString());");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public void setX(final String s) {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testRichStringMemberFeatureCall_02() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void bar () {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("x = ");
+    _builder.append(XtendCompilerTest.RS, "\t\t");
+    _builder.append("Hello World");
+    _builder.append(XtendCompilerTest.RS, "\t\t");
+    _builder.append(".toString.trim");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void setX (String s) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import org.eclipse.xtend2.lib.StringConcatenation;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public void bar() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("StringConcatenation _builder = new StringConcatenation();");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("_builder.append(\"Hello World\");");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("String _string = _builder.toString();");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("this.setX(_string.trim());");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public void setX(final String s) {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
   }
   
   @Test
