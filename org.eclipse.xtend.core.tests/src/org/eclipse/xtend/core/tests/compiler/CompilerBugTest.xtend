@@ -133,8 +133,6 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 				}
 			}
 		''','''
-			import java.util.Iterator;
-			
 			@SuppressWarnings("all")
 			public class Bug {
 			  public <T extends Object> void m(final T t) {
@@ -144,9 +142,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  }
 			  
 			  public void n(final Iterable<String> it) {
-			    Iterator<String> _iterator = it.iterator();
-			    String _next = _iterator.next();
-			    this.m(_next);
+			    this.m(it.iterator().next());
 			  }
 			}
 		''')
@@ -173,8 +169,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  }
 			  
 			  public void n(final Iterable<String> it) {
-			    String _head = IterableExtensions.<String>head(it);
-			    this.m(_head);
+			    this.m(IterableExtensions.<String>head(it));
 			  }
 			}
 		''')
@@ -352,8 +347,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  public void m() {
 			    A a = null;
 			    if ((a instanceof B)) {
-			      A _get = ((B)a).get();
-			      a = _get;
+			      a = ((B)a).get();
 			    }
 			  }
 			}
@@ -384,8 +378,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  public void m() {
 			    A a = null;
 			    while ((a instanceof B)) {
-			      A _get = ((B)a).get();
-			      a = _get;
+			      a = ((B)a).get();
 			    }
 			  }
 			}
@@ -1055,7 +1048,6 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			    }
 			}
 		''', '''
-			import java.util.Collection;
 			import java.util.List;
 			import java.util.Map;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -1066,9 +1058,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  private List<String> list = CollectionLiterals.<String>newArrayList();
 			  
 			  public List<String> doSomething(final Map<String, String> mapping) {
-			    Collection<String> _values = mapping.values();
-			    List<String> _sort = IterableExtensions.<String>sort(_values);
-			    return this.list = _sort;
+			    return this.list = IterableExtensions.<String>sort(mapping.values());
 			  }
 			}
 		''')
@@ -3011,8 +3001,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  public void test() {
 			    final Object header = this.unboundedMockHeaderAccess.getHeader();
 			    final IExpectationSetters<Object> exp1 = Y.<Object>expect(header);
-			    Object _header = this.unboundedMockHeaderAccess.getHeader();
-			    final IExpectationSetters<Object> exp2 = Y.<Object>expect(_header);
+			    final IExpectationSetters<Object> exp2 = Y.<Object>expect(this.unboundedMockHeaderAccess.getHeader());
 			  }
 			}
 		''')

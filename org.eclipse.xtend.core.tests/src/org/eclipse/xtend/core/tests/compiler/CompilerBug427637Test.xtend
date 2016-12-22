@@ -1239,11 +1239,9 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 			        }
 			        final int newLines2 = (int) _elvis;
 			        if (((Objects.equal(it.space, null) && Objects.equal(it.newLines, null)) || ((leafs.getNewLinesInComments() == 0) && ((newLines2 == 0) || Objects.equal(it.space, ""))))) {
-			          boolean _isDebugConflicts = doc.isDebugConflicts();
-			          return FormattingDataFactory.this.newWhitespaceData(leafs, it.space, it.increaseIndentationChange, it.decreaseIndentationChange, _isDebugConflicts);
+			          return FormattingDataFactory.this.newWhitespaceData(leafs, it.space, it.increaseIndentationChange, it.decreaseIndentationChange, doc.isDebugConflicts());
 			        } else {
-			          boolean _isDebugConflicts_1 = doc.isDebugConflicts();
-			          return FormattingDataFactory.this.newNewLineData(leafs, newLines2, newLines2, it.increaseIndentationChange, it.decreaseIndentationChange, _isDebugConflicts_1);
+			          return FormattingDataFactory.this.newNewLineData(leafs, newLines2, newLines2, it.increaseIndentationChange, it.decreaseIndentationChange, doc.isDebugConflicts());
 			        }
 			      }
 			    };
@@ -1261,8 +1259,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 			          final int preserve = _cfg_1.get(XbaseFormatterPreferenceKeys.preserveBlankLines);
 			          final int min = (blankline + 1);
 			          final int max = Math.max((preserve + 1), min);
-			          boolean _isDebugConflicts = doc.isDebugConflicts();
-			          _xblockexpression = FormattingDataFactory.this.newNewLineData(leafs, min, max, it.increaseIndentationChange, it.decreaseIndentationChange, _isDebugConflicts);
+			          _xblockexpression = FormattingDataFactory.this.newNewLineData(leafs, min, max, it.increaseIndentationChange, it.decreaseIndentationChange, doc.isDebugConflicts());
 			        }
 			        return _xblockexpression;
 			      }
@@ -1291,8 +1288,8 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 			          } else {
 			            _xifexpression_1 = 0;
 			          }
-			          boolean _isDebugConflicts = doc.isDebugConflicts();
-			          _xblockexpression = FormattingDataFactory.this.newNewLineData(leafs, _xifexpression, _xifexpression_1, it.increaseIndentationChange, it.decreaseIndentationChange, _isDebugConflicts);
+			          _xblockexpression = FormattingDataFactory.this.newNewLineData(leafs, _xifexpression, _xifexpression_1, it.increaseIndentationChange, it.decreaseIndentationChange, 
+			            doc.isDebugConflicts());
 			        }
 			        return _xblockexpression;
 			      }
@@ -1314,8 +1311,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 			            _xifexpression = 0;
 			          }
 			          final int minmax = _xifexpression;
-			          boolean _isDebugConflicts = doc.isDebugConflicts();
-			          _xblockexpression = FormattingDataFactory.this.newNewLineData(leafs, minmax, minmax, it.increaseIndentationChange, it.decreaseIndentationChange, _isDebugConflicts);
+			          _xblockexpression = FormattingDataFactory.this.newNewLineData(leafs, minmax, minmax, it.increaseIndentationChange, it.decreaseIndentationChange, doc.isDebugConflicts());
 			        }
 			        return _xblockexpression;
 			      }
@@ -1342,8 +1338,7 @@ class CompilerBug427637Test extends AbstractXtendCompilerTest {
 			          } else {
 			            _xifexpression = "";
 			          }
-			          boolean _isDebugConflicts = doc.isDebugConflicts();
-			          _xblockexpression = FormattingDataFactory.this.newWhitespaceData(leafs, _xifexpression, it.increaseIndentationChange, it.decreaseIndentationChange, _isDebugConflicts);
+			          _xblockexpression = FormattingDataFactory.this.newWhitespaceData(leafs, _xifexpression, it.increaseIndentationChange, it.decreaseIndentationChange, doc.isDebugConflicts());
 			        }
 			        return _xblockexpression;
 			      }

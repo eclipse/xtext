@@ -1071,8 +1071,6 @@ public class CompilerBug435473Test extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("import org.hamcrest.CoreMatchers;");
     _builder_1.newLine();
-    _builder_1.append("import org.hamcrest.Matcher;");
-    _builder_1.newLine();
     _builder_1.append("import org.junit.Assert;");
     _builder_1.newLine();
     _builder_1.newLine();
@@ -1084,10 +1082,7 @@ public class CompilerBug435473Test extends AbstractXtendCompilerTest {
     _builder_1.append("public void m() {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("Matcher<Iterable<? super Integer>> _hasItem = CoreMatchers.<Integer>hasItem(Integer.valueOf(5));");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("Assert.<List<Number>>assertThat(Collections.<Number>unmodifiableList(CollectionLiterals.<Number>newArrayList(Integer.valueOf(1), Double.valueOf(2.0), Integer.valueOf(3))), _hasItem);");
+    _builder_1.append("Assert.<List<Number>>assertThat(Collections.<Number>unmodifiableList(CollectionLiterals.<Number>newArrayList(Integer.valueOf(1), Double.valueOf(2.0), Integer.valueOf(3))), CoreMatchers.<Integer>hasItem(Integer.valueOf(5)));");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -1126,8 +1121,6 @@ public class CompilerBug435473Test extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("import org.hamcrest.CoreMatchers;");
     _builder_1.newLine();
-    _builder_1.append("import org.hamcrest.Matcher;");
-    _builder_1.newLine();
     _builder_1.append("import org.junit.Assert;");
     _builder_1.newLine();
     _builder_1.newLine();
@@ -1139,10 +1132,7 @@ public class CompilerBug435473Test extends AbstractXtendCompilerTest {
     _builder_1.append("public void m() {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("Matcher<Iterable<? super Integer>> _hasItem = CoreMatchers.<Integer>hasItem(Integer.valueOf(5));");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("Assert.<Set<Number>>assertThat(Collections.<Number>unmodifiableSet(CollectionLiterals.<Number>newHashSet(Integer.valueOf(1), Double.valueOf(2.0), Integer.valueOf(3))), _hasItem);");
+    _builder_1.append("Assert.<Set<Number>>assertThat(Collections.<Number>unmodifiableSet(CollectionLiterals.<Number>newHashSet(Integer.valueOf(1), Double.valueOf(2.0), Integer.valueOf(3))), CoreMatchers.<Integer>hasItem(Integer.valueOf(5)));");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");

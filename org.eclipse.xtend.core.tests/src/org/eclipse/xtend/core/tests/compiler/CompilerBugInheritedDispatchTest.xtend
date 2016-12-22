@@ -100,8 +100,7 @@ class CompilerBugInheritedDispatchTest extends AbstractXtendCompilerTest {
 			  }
 			  
 			  protected T _test(final Fallunterscheidung a) {
-			    Ausdruck _dann = a.getDann();
-			    return this.test(_dann);
+			    return this.test(a.getDann());
 			  }
 			  
 			  public T test(final Ausdruck a) {

@@ -1193,11 +1193,9 @@ class CompilerBug427637Test extends org.eclipse.xtend.core.tests.compiler.Compil
 		      }
 		      final int newLines2 = (int) _elvis;
 		      if (((Objects.equal(it.space, null) && Objects.equal(it.newLines, null)) || ((leafs.getNewLinesInComments() == 0) && ((newLines2 == 0) || Objects.equal(it.space, ""))))) {
-		        boolean _isDebugConflicts = doc.isDebugConflicts();
-		        return this.newWhitespaceData(leafs, it.space, it.increaseIndentationChange, it.decreaseIndentationChange, _isDebugConflicts);
+		        return this.newWhitespaceData(leafs, it.space, it.increaseIndentationChange, it.decreaseIndentationChange, doc.isDebugConflicts());
 		      } else {
-		        boolean _isDebugConflicts_1 = doc.isDebugConflicts();
-		        return this.newNewLineData(leafs, newLines2, newLines2, it.increaseIndentationChange, it.decreaseIndentationChange, _isDebugConflicts_1);
+		        return this.newNewLineData(leafs, newLines2, newLines2, it.increaseIndentationChange, it.decreaseIndentationChange, doc.isDebugConflicts());
 		      }
 		    };
 		    return _function;
@@ -1213,8 +1211,7 @@ class CompilerBug427637Test extends org.eclipse.xtend.core.tests.compiler.Compil
 		        final int preserve = _cfg_1.get(XbaseFormatterPreferenceKeys.preserveBlankLines);
 		        final int min = (blankline + 1);
 		        final int max = Math.max((preserve + 1), min);
-		        boolean _isDebugConflicts = doc.isDebugConflicts();
-		        _xblockexpression = this.newNewLineData(leafs, min, max, it.increaseIndentationChange, it.decreaseIndentationChange, _isDebugConflicts);
+		        _xblockexpression = this.newNewLineData(leafs, min, max, it.increaseIndentationChange, it.decreaseIndentationChange, doc.isDebugConflicts());
 		      }
 		      return _xblockexpression;
 		    };
@@ -1241,8 +1238,8 @@ class CompilerBug427637Test extends org.eclipse.xtend.core.tests.compiler.Compil
 		        } else {
 		          _xifexpression_1 = 0;
 		        }
-		        boolean _isDebugConflicts = doc.isDebugConflicts();
-		        _xblockexpression = this.newNewLineData(leafs, _xifexpression, _xifexpression_1, it.increaseIndentationChange, it.decreaseIndentationChange, _isDebugConflicts);
+		        _xblockexpression = this.newNewLineData(leafs, _xifexpression, _xifexpression_1, it.increaseIndentationChange, it.decreaseIndentationChange, 
+		          doc.isDebugConflicts());
 		      }
 		      return _xblockexpression;
 		    };
@@ -1262,8 +1259,7 @@ class CompilerBug427637Test extends org.eclipse.xtend.core.tests.compiler.Compil
 		          _xifexpression = 0;
 		        }
 		        final int minmax = _xifexpression;
-		        boolean _isDebugConflicts = doc.isDebugConflicts();
-		        _xblockexpression = this.newNewLineData(leafs, minmax, minmax, it.increaseIndentationChange, it.decreaseIndentationChange, _isDebugConflicts);
+		        _xblockexpression = this.newNewLineData(leafs, minmax, minmax, it.increaseIndentationChange, it.decreaseIndentationChange, doc.isDebugConflicts());
 		      }
 		      return _xblockexpression;
 		    };
@@ -1288,8 +1284,7 @@ class CompilerBug427637Test extends org.eclipse.xtend.core.tests.compiler.Compil
 		        } else {
 		          _xifexpression = "";
 		        }
-		        boolean _isDebugConflicts = doc.isDebugConflicts();
-		        _xblockexpression = this.newWhitespaceData(leafs, _xifexpression, it.increaseIndentationChange, it.decreaseIndentationChange, _isDebugConflicts);
+		        _xblockexpression = this.newWhitespaceData(leafs, _xifexpression, it.increaseIndentationChange, it.decreaseIndentationChange, doc.isDebugConflicts());
 		      }
 		      return _xblockexpression;
 		    };
