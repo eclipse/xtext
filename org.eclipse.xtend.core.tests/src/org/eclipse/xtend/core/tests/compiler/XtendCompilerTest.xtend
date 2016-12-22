@@ -13,7 +13,7 @@ import org.eclipse.xtext.generator.IFilePostProcessor
 import org.junit.Test
 
 class XtendCompilerTest extends AbstractXtendCompilerTest {
-
+	static String RS = "'''";
 	@Inject protected IFilePostProcessor postProcessor
 
 	@Test
@@ -4202,8 +4202,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 				  public String test() {
 				    StringConcatenation _builder = new StringConcatenation();
 				    _builder.append("SomeString");
-				    String _string = _builder.toString();
-				    return _string;
+				    return _builder.toString();
 				  }
 				}
 			''')
@@ -4282,6 +4281,65 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 				  }
 				}
 			''')
+	}
+	
+	@Test
+	def testRichStringMemberFeatureCall_01 () {
+		'''
+			class Foo {
+				def void bar () {
+					x = «RS»Hello World«RS».toString
+				}
+				
+				def void setX (String s) {
+					
+				}
+			}
+		'''.assertCompilesTo('''
+			import org.eclipse.xtend2.lib.StringConcatenation;
+			
+			@SuppressWarnings("all")
+			public class Foo {
+			  public void bar() {
+			    StringConcatenation _builder = new StringConcatenation();
+			    _builder.append("Hello World");
+			    this.setX(_builder.toString());
+			  }
+			  
+			  public void setX(final String s) {
+			  }
+			}
+		''')
+	}
+
+	@Test
+	def testRichStringMemberFeatureCall_02 () {
+		'''
+			class Foo {
+				def void bar () {
+					x = «RS»Hello World«RS».toString.trim
+				}
+				
+				def void setX (String s) {
+					
+				}
+			}
+		'''.assertCompilesTo('''
+			import org.eclipse.xtend2.lib.StringConcatenation;
+			
+			@SuppressWarnings("all")
+			public class Foo {
+			  public void bar() {
+			    StringConcatenation _builder = new StringConcatenation();
+			    _builder.append("Hello World");
+			    String _string = _builder.toString();
+			    this.setX(_string.trim());
+			  }
+			  
+			  public void setX(final String s) {
+			  }
+			}
+		''')
 	}
 
 	@Test
