@@ -1,6 +1,10 @@
 // Tell Jenkins how to build projects from this repository
 node {
 	try {
+		properties([
+			[$class: 'BuildDiscarderProperty', strategy: [$class: 'LogRotator', numToKeepStr: '15']]
+		])
+		
 		stage 'Checkout'
 		checkout scm
 		
@@ -24,7 +28,5 @@ node {
 	} catch (e) {
 		slackSend color: 'danger', message: "Build Failed - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
 		throw e
-	} finally {
-		properties [[$class: 'BuildDiscarderProperty', strategy: [$class: 'LogRotator', numToKeepStr: '15']]]
 	}
 }
