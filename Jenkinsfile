@@ -8,7 +8,7 @@ node {
 		try {
 			sh "./gradlew clean build createLocalMavenRepo --refresh-dependencies --continue"
 		} finally {
-			junit '**/build/test-results/test/*.xml'
+			step([$class: 'JUnitResultArchiver', testResults: '**/build/test-results/test/*.xml'])
 		}
 		
 		stage 'Maven Build'
