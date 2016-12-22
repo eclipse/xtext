@@ -19,7 +19,6 @@ import com.google.inject.Inject;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@Ignore("This test is incredibly slow; >10min")
 public class RichStringWithCommentCompilerTest extends RichStringCompilerTest {
 
 	@Inject
